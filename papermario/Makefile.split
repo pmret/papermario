@@ -1,0 +1,16 @@
+TARGET = PAPERMARIO
+LD_SCRIPT = $(TARGET).ld
+MIO0_DIR = bin
+TEXTURE_DIR = textures
+GEO_DIR = geo
+LEVEL_DIR = levels
+
+MUSIC_DIR = music
+
+
+
+MIO0_FILES =
+
+LEVEL_FILES =
+
+MUSIC_FILES =

@@ -1,0 +1,21 @@
+# ROM splitter configuration file
+name: "Paper Mario (U) [!]"
+# Graphics uCodeCRC: "21F91834"
+# checksums from ROM header offsets 0x10 and 0x14
+# used for auto configuration detection
+checksum1: 0x3ae5ee65
+checksum2: 0x3c737ded
+# base filename used for outputs - (please, no spaces)
+basename: "PAPERMARIO"
+ranges:
+  # start,  end,      type,     label
+  - [0x000000, 0x000040, "header", "header"]
+  - [0x000040, 0x000B70, "asm",    "boot"]
+  - [0x000B70, 0x001000, "bin",    "bootcode_font"]
+  - [0x1000, 0x101004, "asm",   "___1000_len_100004", 0x00025C00] # frame:0x00000000 header:  0x3c000000 trace:0x0-> Tbl mapped:e012066c
+  
+# Labels for functions or data memory addresses
+# All label addresses are RAM addresses
+# Order does not matter
+labels:
+   - [0x80125c00, "EntryPoint"]

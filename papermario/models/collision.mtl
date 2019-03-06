@@ -1,0 +1,110 @@
+# collision model materials
+#
+# Ka: ambient reflectivity
+# Kd: diffuse reflectivity
+# illum: illuminaiton model
+#   * 1: Color on and Ambient on
+#   * 2: Highlight on
+#   * 3: Reflection on and Ray trace on
+#   * 4: Transparency: Glass on
+#        Reflection: Ray trace on
+#   * 5: Reflection: Fresnel on and Ray trace on
+#   * 6: Transparency: Refraction on
+#        Reflection: Fresnel off and Ray trace on
+#   * 7: Transparency: Refraction on
+#        Reflection: Fresnel on and Ray trace on
+#   * 8: Reflection on and Ray trace off
+#   * 9: Transparency: Glass on
+#        Reflection: Ray trace off
+#   * 10: Casts shadows onto invisible surfaces
+
+newmtl 0D
+Ka 1 0.6 0.78
+Kd 1 0.6 0.78
+illum 1
+
+newmtl climbable
+Ka 0.75 0.5 0
+Kd 0.75 0.5 0
+illum 1
+
+newmtl deathfloor
+Ka 0 0 0
+Kd 0 0 0
+illum 1
+
+newmtl fence
+Ka 0.2 0.2 0.2
+Kd 0.2 0.2 0.2
+illum 1
+
+newmtl flat
+Ka 0 0.5 0.5
+Kd 0 0.5 0.5
+illum 1
+
+newmtl grass
+Ka 0 0.9 0
+Kd 0 0.9 0
+illum 1
+
+newmtl hang
+Ka 0.9 0 0
+Kd 0.9 0 0
+illum 1
+
+newmtl icy
+Ka 0.2 0.2 0.9
+Kd 0.2 0.2 0.9
+illum 1
+
+newmtl lethal_lava
+Ka 1 0 0
+Kd 1 0 0
+illum 1
+
+newmtl normal
+Ka 0.98 0.98 0
+Kd 0.98 0.98 0
+illum 1
+
+newmtl pool_warp
+Ka 0.1 0.1 0.1
+Kd 0.1 0.1 0.1
+illum 1
+
+newmtl slippery
+Ka 0.1 0.1 1.0
+Kd 0.1 0.1 1.0
+illum 1
+
+newmtl snowy
+Ka 0.9 0.9 0.9
+Kd 0.9 0.9 0.9
+illum 1
+
+newmtl snowy2
+Ka 1 1 1
+Kd 1 1 1
+illum 1
+
+newmtl unclimbable
+Ka 1.0 1.0 1.0
+Kd 1.0 1.0 1.0
+illum 1
+
+newmtl very_slippery
+Ka 0 0 1.0
+Kd 0 0 1.0
+illum 1
+
+newmtl wall
+Ka 0.5 0.5 0.5
+Kd 0.5 0.5 0.5
+illum 1
+
+newmtl water_currents
+Ka 0.5 0.5 1.0
+Kd 0.5 0.5 1.0
+illum 1
+
