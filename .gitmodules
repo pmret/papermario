@@ -1,0 +1,3 @@
+[submodule "n64splitter"]
+	path = n64splitter
+	url = https://github.com/RetroReversing/sm64tools.git
