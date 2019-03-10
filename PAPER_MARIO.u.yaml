@@ -585,10 +585,10 @@ ranges:
   - [0xf9af90, 0xf9b830, "bin",   "_V__f9af90_len_8a0"] # (DRAM:0x001DC070) (frame:0x00001EC9)  header: V 0x56000000 trace:
   - [0xfa08a0, 0xfa28a0, "bin",   "_BGM__fa08a0_len_2000"] # (DRAM:0x001DA070) (frame:0x000002D8)  header: BGM 0x42000000 trace:
   - [0xfa28a0, 0xfa3c60, "bin",   "___fa28a0_len_13c0"] # (DRAM:0x001DC070) (frame:0x000002D8)  header:  0x0 trace:
-  - [0xfae860, 0xfb0860, "bin",   "_SEF__fae860_len_2000"] # (DRAM:0x001E2B10) (frame:0x00000001)  header: SEF 0x53000000 trace:
+  - [0xfae860, 0xfb0860, "SEF",   "_SEF__fae860_len_2000"] # (DRAM:0x001E2B10) (frame:0x00000001)  header: SEF 0x53000000 trace:
   - [0xfb0860, 0xfb2860, "bin",   "___fb0860_len_2000"] # (DRAM:0x001E4B10) (frame:0x00000001)  header:  0xe000000 trace:
   - [0xfb2860, 0xfb38a0, "bin",   "___fb2860_len_1040"] # (DRAM:0x001E6B10) (frame:0x00000001)  header:  0x15000000 trace:
-  - [0xfb38a0, 0xfb38e0, "bin",   "_BK__fb38a0_len_40"] # (DRAM:0x000B82E0) (frame:0x00000001)  header: BK 0x42000000 trace:
+  - [0xfb38a0, 0xfb38e0, "BK",   "_BK__fb38a0_len_40"] # (DRAM:0x000B82E0) (frame:0x00000001)  header: BK 0x42000000 trace:
   - [0xfb3db0, 0x13d088c, "bin",   "audio_1"] 
       
   
