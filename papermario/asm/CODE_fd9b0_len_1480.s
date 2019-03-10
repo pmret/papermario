@@ -875,58 +875,46 @@ func_002D9A7C:
 /* 0FE644 002D9C94 00000000 */  nop   
 /* 0FE648 002D9C98 00000000 */  nop   
 /* 0FE64C 002D9C9C 00000000 */  nop   
-/* 0FE650 002D9CA0 00000001 */  movf  $zero, $zero, $fcc0
-/* 0FE654 002D9CA4 00000000 */  nop   
-/* 0FE658 002D9CA8 3F800000 */  .byte 0x3f, 0x80, 0x00, 0x00
-/* 0FE65C 002D9CAC 00000000 */  nop   
-/* 0FE660 002D9CB0 0000004D */  break 0, 1
-/* 0FE664 002D9CB4 00000001 */  movf  $zero, $zero, $fcc0
-/* 0FE668 002D9CB8 00000000 */  nop   
-/* 0FE66C 002D9CBC 00000043 */  sra   $zero, $zero, 1
-/* 0FE670 002D9CC0 00000005 */  lsa   $zero, $zero, $zero, 1
-/* 0FE674 002D9CC4 802CB2A8 */  lb    $t4, -0x4d58($at)
-/* 0FE678 002D9CC8 FE363C80 */  sd    $s6, 0x3c80($s1)
+/* 0FE650 002D9CA0 00000001 */  .byte 0x00,0x00,0x00,0x01 /* Because of invalid n64 opcode movf */
+/* 0FE654 002D9CA4 00000000 */  /* 0FE658 002D9CA8 3F800000 */  .byte 0x3f, 0x80, 0x00, 0x00
+/* 0FE65C 002D9CAC 00000000 */  /* 0FE660 002D9CB0 0000004D */  break 0, 1
+/* 0FE664 002D9CB4 00000001 */  .byte 0x00,0x00,0x00,0x01 /* Because of invalid n64 opcode movf */
+/* 0FE668 002D9CB8 00000000 */  /* 0FE66C 002D9CBC 00000043 */  sra   $zero, $zero, 1
+/* 0FE670 002D9CC0 00000005 */  .byte 0x00,0x00,0x00,0x05 /* Because of invalid n64 opcode lsa */
+/* 0FE674 002D9CC4 802CB2A8 */  /* 0FE678 002D9CC8 FE363C80 */  sd    $s6, 0x3c80($s1)
 /* 0FE67C 002D9CCC FE363C81 */  sd    $s6, 0x3c81($s1)
 /* 0FE680 002D9CD0 FE363C82 */  sd    $s6, 0x3c82($s1)
 /* 0FE684 002D9CD4 F24A7E80 */  scd   $t2, 0x7e80($s2)
 /* 0FE688 002D9CD8 00000002 */  srl   $zero, $zero, 0
 /* 0FE68C 002D9CDC 00000000 */  nop   
-/* 0FE690 002D9CE0 00000001 */  movf  $zero, $zero, $fcc0
-/* 0FE694 002D9CE4 00000000 */  nop   
-/* 0FE698 002D9CE8 0000004D */  break 0, 1
-/* 0FE69C 002D9CEC 00000001 */  movf  $zero, $zero, $fcc0
-/* 0FE6A0 002D9CF0 00000000 */  nop   
-/* 0FE6A4 002D9CF4 00000043 */  sra   $zero, $zero, 1
-/* 0FE6A8 002D9CF8 00000005 */  lsa   $zero, $zero, $zero, 1
-/* 0FE6AC 002D9CFC 802CB2A8 */  lb    $t4, -0x4d58($at)
-/* 0FE6B0 002D9D00 FE363C80 */  sd    $s6, 0x3c80($s1)
+/* 0FE690 002D9CE0 00000001 */  .byte 0x00,0x00,0x00,0x01 /* Because of invalid n64 opcode movf */
+/* 0FE694 002D9CE4 00000000 */  /* 0FE698 002D9CE8 0000004D */  break 0, 1
+/* 0FE69C 002D9CEC 00000001 */  .byte 0x00,0x00,0x00,0x01 /* Because of invalid n64 opcode movf */
+/* 0FE6A0 002D9CF0 00000000 */  /* 0FE6A4 002D9CF4 00000043 */  sra   $zero, $zero, 1
+/* 0FE6A8 002D9CF8 00000005 */  .byte 0x00,0x00,0x00,0x05 /* Because of invalid n64 opcode lsa */
+/* 0FE6AC 002D9CFC 802CB2A8 */  /* 0FE6B0 002D9D00 FE363C80 */  sd    $s6, 0x3c80($s1)
 /* 0FE6B4 002D9D04 FE363C81 */  sd    $s6, 0x3c81($s1)
 /* 0FE6B8 002D9D08 FE363C82 */  sd    $s6, 0x3c82($s1)
 /* 0FE6BC 002D9D0C FE363C83 */  sd    $s6, 0x3c83($s1)
 /* 0FE6C0 002D9D10 00000002 */  srl   $zero, $zero, 0
 /* 0FE6C4 002D9D14 00000000 */  nop   
-/* 0FE6C8 002D9D18 00000001 */  movf  $zero, $zero, $fcc0
-/* 0FE6CC 002D9D1C 00000000 */  nop   
-/* 0FE6D0 002D9D20 802DB270 */  lb    $t5, -0x4d90($at)
+/* 0FE6C8 002D9D18 00000001 */  .byte 0x00,0x00,0x00,0x01 /* Because of invalid n64 opcode movf */
+/* 0FE6CC 002D9D1C 00000000 */  /* 0FE6D0 002D9D20 802DB270 */  lb    $t5, -0x4d90($at)
 /* 0FE6D4 002D9D24 00000000 */  nop   
 /* 0FE6D8 002D9D28 00000000 */  nop   
 /* 0FE6DC 002D9D2C 00000000 */  nop   
 /* 0FE6E0 002D9D30 00000000 */  nop   
 /* 0FE6E4 002D9D34 00000043 */  sra   $zero, $zero, 1
-/* 0FE6E8 002D9D38 00000001 */  movf  $zero, $zero, $fcc0
-/* 0FE6EC 002D9D3C 802D5B10 */  lb    $t5, 0x5b10($at)
-/* 0FE6F0 002D9D40 00000002 */  srl   $zero, $zero, 0
+/* 0FE6E8 002D9D38 00000001 */  .byte 0x00,0x00,0x00,0x01 /* Because of invalid n64 opcode movf */
+/* 0FE6EC 002D9D3C 802D5B10 */  /* 0FE6F0 002D9D40 00000002 */  srl   $zero, $zero, 0
 /* 0FE6F4 002D9D44 00000000 */  nop   
-/* 0FE6F8 002D9D48 00000001 */  movf  $zero, $zero, $fcc0
-/* 0FE6FC 002D9D4C 00000000 */  nop   
-/* 0FE700 002D9D50 00000043 */  sra   $zero, $zero, 1
-/* 0FE704 002D9D54 00000001 */  movf  $zero, $zero, $fcc0
-/* 0FE708 002D9D58 802D7BA4 */  lb    $t5, 0x7ba4($at)
-/* 0FE70C 002D9D5C 00000002 */  srl   $zero, $zero, 0
+/* 0FE6F8 002D9D48 00000001 */  .byte 0x00,0x00,0x00,0x01 /* Because of invalid n64 opcode movf */
+/* 0FE6FC 002D9D4C 00000000 */  /* 0FE700 002D9D50 00000043 */  sra   $zero, $zero, 1
+/* 0FE704 002D9D54 00000001 */  .byte 0x00,0x00,0x00,0x01 /* Because of invalid n64 opcode movf */
+/* 0FE708 002D9D58 802D7BA4 */  /* 0FE70C 002D9D5C 00000002 */  srl   $zero, $zero, 0
 /* 0FE710 002D9D60 00000000 */  nop   
-/* 0FE714 002D9D64 00000001 */  movf  $zero, $zero, $fcc0
-/* 0FE718 002D9D68 00000000 */  nop   
-/* 0FE71C 002D9D6C 00000000 */  nop   
+/* 0FE714 002D9D64 00000001 */  .byte 0x00,0x00,0x00,0x01 /* Because of invalid n64 opcode movf */
+/* 0FE718 002D9D68 00000000 */  /* 0FE71C 002D9D6C 00000000 */  nop   
 /* 0FE720 002D9D70 FEFE00FF */  sd    $fp, 0xff($s7)
 /* 0FE724 002D9D74 00000000 */  nop   
 /* 0FE728 002D9D78 00000000 */  nop   
@@ -938,12 +926,10 @@ func_002D9A7C:
 /* 0FE740 002D9D90 802C33D4 */  lb    $t4, 0x33d4($at)
 /* 0FE744 002D9D94 00000000 */  nop   
 /* 0FE748 002D9D98 41444452 */  .byte 0x41, 0x44, 0x44, 0x52
-/* 0FE74C 002D9D9C 20202020 */  addi  $zero, $at, 0x2020
-/* 0FE750 002D9DA0 205B2530 */  addi  $k1, $v0, 0x2530
+/* 0FE74C 002D9D9C 20202020 */  /* 0FE750 002D9DA0 205B2530 */  addi  $k1, $v0, 0x2530
 /* 0FE754 002D9DA4 38585D00 */  xori  $t8, $v0, 0x5d00
 /* 0FE758 002D9DA8 464C4F41 */  .byte 0x46, 0x4c, 0x4f, 0x41
-/* 0FE75C 002D9DAC 54202020 */  bnel  $at, $zero, .L002E1E30
-/* 0FE760 002D9DB0 205B2534 */   addi  $k1, $v0, 0x2534
+/* 0FE75C 002D9DAC 54202020 */  /* 0FE760 002D9DB0 205B2534 */  addi  $k1, $v0, 0x2534
 /* 0FE764 002D9DB4 2E32665D */  sltiu $s2, $s1, 0x665d
 /* 0FE768 002D9DB8 00000000 */  nop   
 /* 0FE76C 002D9DBC 55462825 */  bnel  $t2, $a2, .L002E3E54
@@ -965,81 +951,65 @@ func_002D9A7C:
 /* 0FE7A8 002D9DF8 205B2564 */  addi  $k1, $v0, 0x2564
 /* 0FE7AC 002D9DFC 5D000000 */  bgtzl $t0, .L002D9E00
 .L002D9E00:
-/* 0FE7B0 002D9E00 47535728 */   bz.w  $w19, .L002EFAA4
-/* 0FE7B4 002D9E04 25336429 */   addiu $s3, $t1, 0x6429
-/* 0FE7B8 002D9E08 205B2530 */  addi  $k1, $v0, 0x2530
+/* 0FE7B0 002D9E00 47535728 */   .byte 0x47,0x53,0x57,0x28 /* Because of invalid n64 opcode bz.w */
+/* 0FE7B4 002D9E04 25336429 */  /* 0FE7B8 002D9E08 205B2530 */  addi  $k1, $v0, 0x2530
 /* 0FE7BC 002D9E0C 38585D00 */  xori  $t8, $v0, 0x5d00
-/* 0FE7C0 002D9E10 47535728 */  bz.w  $w19, .L002EFAB4
-/* 0FE7C4 002D9E14 25336429 */   addiu $s3, $t1, 0x6429
-/* 0FE7C8 002D9E18 205B2534 */  addi  $k1, $v0, 0x2534
+/* 0FE7C0 002D9E10 47535728 */  .byte 0x47,0x53,0x57,0x28 /* Because of invalid n64 opcode bz.w */
+/* 0FE7C4 002D9E14 25336429 */  /* 0FE7C8 002D9E18 205B2534 */  addi  $k1, $v0, 0x2534
 /* 0FE7CC 002D9E1C 2E32665D */  sltiu $s2, $s1, 0x665d
 /* 0FE7D0 002D9E20 00000000 */  nop   
-/* 0FE7D4 002D9E24 47535728 */  bz.w  $w19, .L002EFAC8
-/* 0FE7D8 002D9E28 25336429 */   addiu $s3, $t1, 0x6429
-/* 0FE7DC 002D9E2C 205B2564 */  addi  $k1, $v0, 0x2564
+/* 0FE7D4 002D9E24 47535728 */  .byte 0x47,0x53,0x57,0x28 /* Because of invalid n64 opcode bz.w */
+/* 0FE7D8 002D9E28 25336429 */  /* 0FE7DC 002D9E2C 205B2564 */  addi  $k1, $v0, 0x2564
 /* 0FE7E0 002D9E30 5D000000 */  bgtzl $t0, .L002D9E34
 .L002D9E34:
-/* 0FE7E4 002D9E34 4C535728 */   msub.s $f28, $f2, $f10, $f19
-/* 0FE7E8 002D9E38 25336429 */  addiu $s3, $t1, 0x6429
-/* 0FE7EC 002D9E3C 205B2530 */  addi  $k1, $v0, 0x2530
+/* 0FE7E4 002D9E34 4C535728 */   .byte 0x4C,0x53,0x57,0x28 /* Because of invalid n64 opcode msub.s */
+/* 0FE7E8 002D9E38 25336429 */  /* 0FE7EC 002D9E3C 205B2530 */  addi  $k1, $v0, 0x2530
 /* 0FE7F0 002D9E40 38585D00 */  xori  $t8, $v0, 0x5d00
-/* 0FE7F4 002D9E44 4C535728 */  msub.s $f28, $f2, $f10, $f19
-/* 0FE7F8 002D9E48 25336429 */  addiu $s3, $t1, 0x6429
-/* 0FE7FC 002D9E4C 20205B25 */  addi  $zero, $at, 0x5b25
+/* 0FE7F4 002D9E44 4C535728 */  .byte 0x4C,0x53,0x57,0x28 /* Because of invalid n64 opcode msub.s */
+/* 0FE7F8 002D9E48 25336429 */  /* 0FE7FC 002D9E4C 20205B25 */  addi  $zero, $at, 0x5b25
 /* 0FE800 002D9E50 342E3266 */  ori   $t6, $at, 0x3266
 /* 0FE804 002D9E54 5D000000 */  bgtzl $t0, .L002D9E58
 .L002D9E58:
-/* 0FE808 002D9E58 4C535728 */   msub.s $f28, $f2, $f10, $f19
-/* 0FE80C 002D9E5C 25336429 */  addiu $s3, $t1, 0x6429
-/* 0FE810 002D9E60 205B2564 */  addi  $k1, $v0, 0x2564
+/* 0FE808 002D9E58 4C535728 */   .byte 0x4C,0x53,0x57,0x28 /* Because of invalid n64 opcode msub.s */
+/* 0FE80C 002D9E5C 25336429 */  /* 0FE810 002D9E60 205B2564 */  addi  $k1, $v0, 0x2564
 /* 0FE814 002D9E64 5D000000 */  bgtzl $t0, .L002D9E68
 .L002D9E68:
-/* 0FE818 002D9E68 47535746 */   bz.w  $w19, .L002EFB84
-/* 0FE81C 002D9E6C 28253364 */   slti  $a1, $at, 0x3364
-/* 0FE820 002D9E70 295B2564 */  slti  $k1, $t2, 0x2564
+/* 0FE818 002D9E68 47535746 */   .byte 0x47,0x53,0x57,0x46 /* Because of invalid n64 opcode bz.w */
+/* 0FE81C 002D9E6C 28253364 */  /* 0FE820 002D9E70 295B2564 */  slti  $k1, $t2, 0x2564
 /* 0FE824 002D9E74 5D000000 */  bgtzl $t0, .L002D9E78
 .L002D9E78:
 /* 0FE828 002D9E78 4C535746 */   .byte 0x4c, 0x53, 0x57, 0x46
-/* 0FE82C 002D9E7C 28253364 */  slti  $a1, $at, 0x3364
-/* 0FE830 002D9E80 295B2564 */  slti  $k1, $t2, 0x2564
+/* 0FE82C 002D9E7C 28253364 */  /* 0FE830 002D9E80 295B2564 */  slti  $k1, $t2, 0x2564
 /* 0FE834 002D9E84 5D000000 */  bgtzl $t0, .L002D9E88
 .L002D9E88:
-/* 0FE838 002D9E88 47462825 */   bz.w  $w6, .L002E3F20
-/* 0FE83C 002D9E8C 33642920 */   andi  $a0, $k1, 0x2920
-/* 0FE840 002D9E90 205B2564 */  addi  $k1, $v0, 0x2564
+/* 0FE838 002D9E88 47462825 */   .byte 0x47,0x46,0x28,0x25 /* Because of invalid n64 opcode bz.w */
+/* 0FE83C 002D9E8C 33642920 */  /* 0FE840 002D9E90 205B2564 */  addi  $k1, $v0, 0x2564
 /* 0FE844 002D9E94 5D000000 */  bgtzl $t0, .L002D9E98
 .L002D9E98:
 /* 0FE848 002D9E98 4C462825 */   .byte 0x4c, 0x46, 0x28, 0x25
-/* 0FE84C 002D9E9C 33642920 */  andi  $a0, $k1, 0x2920
-/* 0FE850 002D9EA0 205B2564 */  addi  $k1, $v0, 0x2564
+/* 0FE84C 002D9E9C 33642920 */  /* 0FE850 002D9EA0 205B2564 */  addi  $k1, $v0, 0x2564
 /* 0FE854 002D9EA4 5D000000 */  bgtzl $t0, .L002D9EA8
 .L002D9EA8:
-/* 0FE858 002D9EA8 47572825 */   bz.w  $w23, .L002E3F40
-/* 0FE85C 002D9EAC 33642920 */   andi  $a0, $k1, 0x2920
-/* 0FE860 002D9EB0 205B2530 */  addi  $k1, $v0, 0x2530
+/* 0FE858 002D9EA8 47572825 */   .byte 0x47,0x57,0x28,0x25 /* Because of invalid n64 opcode bz.w */
+/* 0FE85C 002D9EAC 33642920 */  /* 0FE860 002D9EB0 205B2530 */  addi  $k1, $v0, 0x2530
 /* 0FE864 002D9EB4 38585D00 */  xori  $t8, $v0, 0x5d00
-/* 0FE868 002D9EB8 47572825 */  bz.w  $w23, .L002E3F50
-/* 0FE86C 002D9EBC 33642920 */   andi  $a0, $k1, 0x2920
-/* 0FE870 002D9EC0 205B2534 */  addi  $k1, $v0, 0x2534
+/* 0FE868 002D9EB8 47572825 */  .byte 0x47,0x57,0x28,0x25 /* Because of invalid n64 opcode bz.w */
+/* 0FE86C 002D9EBC 33642920 */  /* 0FE870 002D9EC0 205B2534 */  addi  $k1, $v0, 0x2534
 /* 0FE874 002D9EC4 2E32665D */  sltiu $s2, $s1, 0x665d
 /* 0FE878 002D9EC8 00000000 */  nop   
-/* 0FE87C 002D9ECC 47572825 */  bz.w  $w23, .L002E3F64
-/* 0FE880 002D9ED0 33642920 */   andi  $a0, $k1, 0x2920
-/* 0FE884 002D9ED4 205B2564 */  addi  $k1, $v0, 0x2564
+/* 0FE87C 002D9ECC 47572825 */  .byte 0x47,0x57,0x28,0x25 /* Because of invalid n64 opcode bz.w */
+/* 0FE880 002D9ED0 33642920 */  /* 0FE884 002D9ED4 205B2564 */  addi  $k1, $v0, 0x2564
 /* 0FE888 002D9ED8 5D000000 */  bgtzl $t0, .L002D9EDC
 .L002D9EDC:
 /* 0FE88C 002D9EDC 4C572825 */   .byte 0x4c, 0x57, 0x28, 0x25
-/* 0FE890 002D9EE0 33642920 */  andi  $a0, $k1, 0x2920
-/* 0FE894 002D9EE4 205B2530 */  addi  $k1, $v0, 0x2530
+/* 0FE890 002D9EE0 33642920 */  /* 0FE894 002D9EE4 205B2530 */  addi  $k1, $v0, 0x2530
 /* 0FE898 002D9EE8 38585D00 */  xori  $t8, $v0, 0x5d00
 /* 0FE89C 002D9EEC 4C572825 */  .byte 0x4c, 0x57, 0x28, 0x25
-/* 0FE8A0 002D9EF0 33642920 */  andi  $a0, $k1, 0x2920
-/* 0FE8A4 002D9EF4 205B2534 */  addi  $k1, $v0, 0x2534
+/* 0FE8A0 002D9EF0 33642920 */  /* 0FE8A4 002D9EF4 205B2534 */  addi  $k1, $v0, 0x2534
 /* 0FE8A8 002D9EF8 2E32665D */  sltiu $s2, $s1, 0x665d
 /* 0FE8AC 002D9EFC 00000000 */  nop   
 /* 0FE8B0 002D9F00 4C572825 */  .byte 0x4c, 0x57, 0x28, 0x25
-/* 0FE8B4 002D9F04 33642920 */  andi  $a0, $k1, 0x2920
-/* 0FE8B8 002D9F08 205B2564 */  addi  $k1, $v0, 0x2564
+/* 0FE8B4 002D9F04 33642920 */  /* 0FE8B8 002D9F08 205B2564 */  addi  $k1, $v0, 0x2564
 /* 0FE8BC 002D9F0C 5D000000 */  bgtzl $t0, .L002D9F10
 .L002D9F10:
 /* 0FE8C0 002D9F10 20202020 */   addi  $zero, $at, 0x2020
@@ -1224,8 +1194,7 @@ func_002D9A7C:
 /* 0FEB88 002DA1D8 00000000 */  nop   
 /* 0FEB8C 002DA1DC 00000000 */  nop   
 /* 0FEB90 002DA1E0 40668000 */  .byte 0x40, 0x66, 0x80, 0x00
-/* 0FEB94 002DA1E4 00000000 */  nop   
-/* 0FEB98 002DA1E8 00000000 */  nop   
+/* 0FEB94 002DA1E4 00000000 */  /* 0FEB98 002DA1E8 00000000 */  nop   
 /* 0FEB9C 002DA1EC 00000000 */  nop   
 /* 0FEBA0 002DA1F0 802D0668 */  lb    $t5, 0x668($at)
 /* 0FEBA4 002DA1F4 802D0674 */  lb    $t5, 0x674($at)

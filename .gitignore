@@ -1,5 +1,8 @@
 *.z64
 n64split
 *.bin
-papermario/BK
-papermario/SEF
+papermario/COMPRESSED.*
+papermario/SOUND.*
+papermario/bin
+papermario/audio
+.vscode/

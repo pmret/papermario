@@ -581,7 +581,6 @@ func_00131ED0:
 /* 0C85E4 00131EE4 03E00008 */  jr    $ra
 /* 0C85E8 00131EE8 27BD0028 */   addiu $sp, $sp, 0x28
 
-func_00131EEC:
 /* 0C85EC 00131EEC 3C02800A */  lui   $v0, %hi(D_8009A650) # $v0, 0x800a
 /* 0C85F0 00131EF0 8C42A650 */  lw    $v0, %lo(D_8009A650)($v0)
 /* 0C85F4 00131EF4 27BDFFC0 */  addiu $sp, $sp, -0x40
@@ -1625,7 +1624,6 @@ func_00132E38:
 /* 0C954C 00132E4C 03E00008 */  jr    $ra
 /* 0C9550 00132E50 27BD0020 */   addiu $sp, $sp, 0x20
 
-func_00132E54:
 /* 0C9554 00132E54 27BDFEB0 */  addiu $sp, $sp, -0x150
 /* 0C9558 00132E58 AFB60138 */  sw    $s6, 0x138($sp)
 /* 0C955C 00132E5C 0000B02D */  move  $s6, $zero

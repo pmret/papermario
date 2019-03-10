@@ -1,0 +1,250 @@
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+
+.header         0x0000000000000000       0x40
+ *(.header)
+ .header        0x0000000000000000       0x40 build/PAPERMARIO.o
+ *(.boot)
+
+.rodata         0x0000000000800000       0x20
+ FILL mask 0x01
+ *(.mio0)
+ .mio0          0x0000000000800000        0x0 build/PAPERMARIO.o
+ *(.rodata)
+ *(.data)
+ .data          0x0000000000800000        0x0 build/PAPERMARIO.o
+ *(.MIPS.abiflags)
+ .MIPS.abiflags
+                0x0000000000800000       0x18 build/PAPERMARIO.o
+                0x0000000000800020                . = ALIGN (0x10)
+ *fill*         0x0000000000800018        0x8 01
+
+.behavior       0x0000000013000000   0x3fffe0 load address 0x0000000000800020
+ FILL mask 0x01
+ *(.behavior)
+                0x0000000000000000                behavior_length = (. - 0x13000000)
+                0x00000000003fffe0                . = (0x400000 - SIZEOF (.rodata))
+ *fill*         0x0000000013000000   0x3fffe0 01
+                0x0000000000800020                __load_behavior_data = LOADADDR (.behavior)
+                0x0000000000800020                __load_behavior_data_end = (LOADADDR (.behavior) + behavior_length)
+
+.text00000000   0x0000000000000000    0xbbd90 load address 0x0000000000000040
+ *(.text00000000)
+ .text00000000  0x0000000000000000    0xbbd90 build/PAPERMARIO.o
+
+.text001256D0   0x00000000001256d0     0x1fe4 load address 0x00000000000bbdd0
+ *(.text001256D0)
+ .text001256D0  0x00000000001256d0     0x1fe4 build/PAPERMARIO.o
+
+.text001276D0   0x00000000001276d0     0x1ff4 load address 0x00000000000bddd0
+ *(.text001276D0)
+ .text001276D0  0x00000000001276d0     0x1ff4 build/PAPERMARIO.o
+
+.text001296D0   0x00000000001296d0     0x1ff0 load address 0x00000000000bfdd0
+ *(.text001296D0)
+ .text001296D0  0x00000000001296d0     0x1ff0 build/PAPERMARIO.o
+
+.text0012B6D0   0x000000000012b6d0     0x1fd8 load address 0x00000000000c1dd0
+ *(.text0012B6D0)
+ .text0012B6D0  0x000000000012b6d0     0x1fd8 build/PAPERMARIO.o
+
+.text0012D6D0   0x000000000012d6d0     0x1ff4 load address 0x00000000000c3dd0
+ *(.text0012D6D0)
+ .text0012D6D0  0x000000000012d6d0     0x1ff4 build/PAPERMARIO.o
+
+.text0012F6D0   0x000000000012f6d0     0x1fec load address 0x00000000000c5dd0
+ *(.text0012F6D0)
+ .text0012F6D0  0x000000000012f6d0     0x1fec build/PAPERMARIO.o
+
+.text001316D0   0x00000000001316d0     0x2000 load address 0x00000000000c7dd0
+ *(.text001316D0)
+ .text001316D0  0x00000000001316d0     0x2000 build/PAPERMARIO.o
+
+.text001336D0   0x00000000001336d0     0x1fa8 load address 0x00000000000c9dd0
+ *(.text001336D0)
+ .text001336D0  0x00000000001336d0     0x1fa8 build/PAPERMARIO.o
+
+.text001356D0   0x00000000001356d0     0x1fec load address 0x00000000000cbdd0
+ *(.text001356D0)
+ .text001356D0  0x00000000001356d0     0x1fec build/PAPERMARIO.o
+
+.text001376D0   0x00000000001376d0     0x1fe4 load address 0x00000000000cddd0
+ *(.text001376D0)
+ .text001376D0  0x00000000001376d0     0x1fe4 build/PAPERMARIO.o
+
+.text001396D0   0x00000000001396d0     0x1fb8 load address 0x00000000000cfdd0
+ *(.text001396D0)
+ .text001396D0  0x00000000001396d0     0x1fb8 build/PAPERMARIO.o
+
+.text0013B6D0   0x000000000013b6d0     0x1ff8 load address 0x00000000000d1dd0
+ *(.text0013B6D0)
+ .text0013B6D0  0x000000000013b6d0     0x1ff8 build/PAPERMARIO.o
+
+.text0013D6D0   0x000000000013d6d0     0x1fe4 load address 0x00000000000d3dd0
+ *(.text0013D6D0)
+ .text0013D6D0  0x000000000013d6d0     0x1fe4 build/PAPERMARIO.o
+
+.text0013F6D0   0x000000000013f6d0     0x2000 load address 0x00000000000d5dd0
+ *(.text0013F6D0)
+ .text0013F6D0  0x000000000013f6d0     0x2000 build/PAPERMARIO.o
+
+.text001416D0   0x00000000001416d0     0x1ff8 load address 0x00000000000d7dd0
+ *(.text001416D0)
+ .text001416D0  0x00000000001416d0     0x1ff8 build/PAPERMARIO.o
+
+.text001436D0   0x00000000001436d0     0x1ff8 load address 0x00000000000d9dd0
+ *(.text001436D0)
+ .text001436D0  0x00000000001436d0     0x1ff8 build/PAPERMARIO.o
+
+.text001456D0   0x00000000001456d0     0x1ff0 load address 0x00000000000dbdd0
+ *(.text001456D0)
+ .text001456D0  0x00000000001456d0     0x1ff0 build/PAPERMARIO.o
+
+.text001476D0   0x00000000001476d0     0x1f6c load address 0x00000000000dddd0
+ *(.text001476D0)
+ .text001476D0  0x00000000001476d0     0x1f6c build/PAPERMARIO.o
+
+.text001496D0   0x00000000001496d0     0x7af8 load address 0x00000000000dfdd0
+ *(.text001496D0)
+ .text001496D0  0x00000000001496d0     0x7af8 build/PAPERMARIO.o
+
+.text002C3000   0x00000000002c3000     0x1ffc load address 0x00000000000e79b0
+ *(.text002C3000)
+ .text002C3000  0x00000000002c3000     0x1ffc build/PAPERMARIO.o
+
+.text002C5000   0x00000000002c5000     0x2000 load address 0x00000000000e99b0
+ *(.text002C5000)
+ .text002C5000  0x00000000002c5000     0x2000 build/PAPERMARIO.o
+
+.text002C7000   0x00000000002c7000     0x1ff8 load address 0x00000000000eb9b0
+ *(.text002C7000)
+ .text002C7000  0x00000000002c7000     0x1ff8 build/PAPERMARIO.o
+
+.text002C9000   0x00000000002c9000     0x1ffc load address 0x00000000000ed9b0
+ *(.text002C9000)
+ .text002C9000  0x00000000002c9000     0x1ffc build/PAPERMARIO.o
+
+.text002CB000   0x00000000002cb000     0x1fe8 load address 0x00000000000ef9b0
+ *(.text002CB000)
+ .text002CB000  0x00000000002cb000     0x1fe8 build/PAPERMARIO.o
+
+.text002CD000   0x00000000002cd000     0x1fd0 load address 0x00000000000f19b0
+ *(.text002CD000)
+ .text002CD000  0x00000000002cd000     0x1fd0 build/PAPERMARIO.o
+
+.text002CF000   0x00000000002cf000     0x1ff0 load address 0x00000000000f39b0
+ *(.text002CF000)
+ .text002CF000  0x00000000002cf000     0x1ff0 build/PAPERMARIO.o
+
+.text002D1000   0x00000000002d1000     0x1fcc load address 0x00000000000f59b0
+ *(.text002D1000)
+ .text002D1000  0x00000000002d1000     0x1fcc build/PAPERMARIO.o
+
+.text002D3000   0x00000000002d3000     0x1fdc load address 0x00000000000f79b0
+ *(.text002D3000)
+ .text002D3000  0x00000000002d3000     0x1fdc build/PAPERMARIO.o
+
+.text002D5000   0x00000000002d5000     0x1ffc load address 0x00000000000f99b0
+ *(.text002D5000)
+ .text002D5000  0x00000000002d5000     0x1ffc build/PAPERMARIO.o
+
+.text002D7000   0x00000000002d7000     0x2000 load address 0x00000000000fb9b0
+ *(.text002D7000)
+ .text002D7000  0x00000000002d7000     0x2000 build/PAPERMARIO.o
+
+.text002D9000   0x00000000002d9000     0x1404 load address 0x00000000000fd9b0
+ *(.text002D9000)
+ .text002D9000  0x00000000002d9000     0x1404 build/PAPERMARIO.o
+
+.text002DBD40   0x00000000002dbd40     0x1fdc load address 0x00000000000fee30
+ *(.text002DBD40)
+ .text002DBD40  0x00000000002dbd40     0x1fdc build/PAPERMARIO.o
+
+.text002DDD40   0x00000000002ddd40     0x1784 load address 0x0000000000100e30
+ *(.text002DDD40)
+ .text002DDD40  0x00000000002ddd40     0x1784 build/PAPERMARIO.o
+
+.text002E0D90   0x00000000002e0d90     0x1f78 load address 0x0000000000102610
+ *(.text002E0D90)
+ .text002E0D90  0x00000000002e0d90     0x1f78 build/PAPERMARIO.o
+
+.text002E2D90   0x00000000002e2d90     0x1fd0 load address 0x0000000000104610
+ *(.text002E2D90)
+ .text002E2D90  0x00000000002e2d90     0x1fd0 build/PAPERMARIO.o
+
+.text002E4D90   0x00000000002e4d90     0x1f8c load address 0x0000000000106610
+ *(.text002E4D90)
+ .text002E4D90  0x00000000002e4d90     0x1f8c build/PAPERMARIO.o
+
+.text002E6D90   0x00000000002e6d90    0x2cce0 load address 0x0000000000108610
+ *(.text002E6D90)
+ .text002E6D90  0x00000000002e6d90    0x2cce0 build/PAPERMARIO.o
+
+.text00242000   0x0000000000242000    0x2e068 load address 0x0000000000135340
+ *(.text00242000)
+ .text00242000  0x0000000000242000    0x2e068 build/PAPERMARIO.o
+
+.text00242BA0   0x0000000000242ba0     0x4000 load address 0x0000000000163400
+ *(.text00242BA0)
+ .text00242BA0  0x0000000000242ba0     0x4000 build/PAPERMARIO.o
+
+.text00246BA0   0x0000000000246ba0    0xe1f44 load address 0x0000000000167400
+ *(.text00246BA0)
+ .text00246BA0  0x0000000000246ba0    0xe1f44 build/PAPERMARIO.o
+
+.text002ADBE0   0x00000000002adbe0    0xcd2dc load address 0x00000000002495f0
+ *(.text002ADBE0)
+ .text002ADBE0  0x00000000002adbe0    0xcd2dc build/PAPERMARIO.o
+
+.text00200000   0x0000000000200000       0x80 load address 0x00000000003169f0
+ *(.text00200000)
+ .text00200000  0x0000000000200000       0x80 build/PAPERMARIO.o
+
+.text00200080   0x0000000000200080      0x4c0 load address 0x0000000000316a70
+ *(.text00200080)
+ .text00200080  0x0000000000200080      0x4c0 build/PAPERMARIO.o
+
+.text002B2000   0x00000000002b2000   0x4c9f50 load address 0x0000000000316f30
+ *(.text002B2000)
+ .text002B2000  0x00000000002b2000   0x4c9f50 build/PAPERMARIO.o
+
+.text00280000   0x0000000000280000     0x1ff8 load address 0x00000000007e0e80
+ *(.text00280000)
+ .text00280000  0x0000000000280000     0x1ff8 build/PAPERMARIO.o
+
+.text00282000   0x0000000000282000   0x63dfe4 load address 0x00000000007e2e80
+ *(.text00282000)
+ .text00282000  0x0000000000282000   0x63dfe4 build/PAPERMARIO.o
+
+.text002B7000   0x00000000002b7000     0x2318 load address 0x0000000000e20eb0
+ *(.text002B7000)
+ .text002B7000  0x00000000002b7000     0x2318 build/PAPERMARIO.o
+
+.text002B6000   0x00000000002b6000  0x19c3f06 load address 0x0000000000e23260
+ *(.text002B6000)
+ .text002B6000  0x00000000002b6000  0x19c3f06 build/PAPERMARIO.o
+LOAD build/PAPERMARIO.o
+OUTPUT(build/PAPERMARIO.elf elf32-bigmips)
+
+.text           0x0000000001c79f08        0x0 load address 0x00000000027e7168
+ .text          0x0000000001c79f08        0x0 build/PAPERMARIO.o
+
+.bss            0x0000000001c79f06        0x0 load address 0x00000000027e7166
+ .bss           0x0000000001c79f06        0x0 build/PAPERMARIO.o
+
+.reginfo        0x0000000000000000       0x18
+ .reginfo       0x0000000000000000       0x18 build/PAPERMARIO.o
+
+.pdr            0x0000000000000000        0x0
+ .pdr           0x0000000000000000        0x0 build/PAPERMARIO.o
+
+.gnu.attributes
+                0x0000000000000000       0x10
+ .gnu.attributes
+                0x0000000000000000       0x10 build/PAPERMARIO.o

@@ -412,9 +412,8 @@
 /* 1359A0 00242660 80240440 */  lb    $a0, 0x440($at)
 /* 1359A4 00242664 80240560 */  lb    $a0, 0x560($at)
 /* 1359A8 00242668 00000002 */  srl   $zero, $zero, 0
-/* 1359AC 0024266C 00000005 */  lsa   $zero, $zero, $zero, 1
-/* 1359B0 00242670 80240580 */  lb    $a0, 0x580($at)
-/* 1359B4 00242674 802406A0 */  lb    $a0, 0x6a0($at)
+/* 1359AC 0024266C 00000005 */  .byte 0x00,0x00,0x00,0x05 /* Because of invalid n64 opcode lsa */
+/* 1359B0 00242670 80240580 */  /* 1359B4 00242674 802406A0 */  lb    $a0, 0x6a0($at)
 /* 1359B8 00242678 00000002 */  srl   $zero, $zero, 0
 /* 1359BC 0024267C 00000010 */  mfhi  $zero
 /* 1359C0 00242680 802406C0 */  lb    $a0, 0x6c0($at)
@@ -509,14 +508,12 @@
 /* 135B24 002427E4 00000004 */  sllv  $zero, $zero, $zero
 /* 135B28 002427E8 00000019 */  multu $zero, $zero
 /* 135B2C 002427EC 00200000 */  .byte 0x00, 0x20, 0x00, 0x00
-/* 135B30 002427F0 00000002 */  srl   $zero, $zero, 0
-/* 135B34 002427F4 00000009 */  jr    $zero
+/* 135B30 002427F0 00000002 */  /* 135B34 002427F4 00000009 */  jr    $zero
 /* 135B38 002427F8 80240D40 */  lb    $a0, 0xd40($at)
 /* 135B3C 002427FC 80240DC0 */  lb    $a0, 0xdc0($at)
 /* 135B40 00242800 00000018 */  mult  $zero, $zero
 /* 135B44 00242804 00200000 */  .byte 0x00, 0x20, 0x00, 0x00
-/* 135B48 00242808 00000002 */  srl   $zero, $zero, 0
-/* 135B4C 0024280C 00000006 */  srlv  $zero, $zero, $zero
+/* 135B48 00242808 00000002 */  /* 135B4C 0024280C 00000006 */  srlv  $zero, $zero, $zero
 /* 135B50 00242810 80240D40 */  lb    $a0, 0xd40($at)
 /* 135B54 00242814 80240DC0 */  lb    $a0, 0xdc0($at)
 /* 135B58 00242818 00000003 */  sra   $zero, $zero, 0
@@ -524,138 +521,123 @@
 /* 135B60 00242820 00000008 */  jr    $zero
 /* 135B64 00242824 00000013 */   mtlo  $zero
 /* 135B68 00242828 00000010 */  mfhi  $zero
-func_0024282C:
 /* 135B6C 0024282C 00000010 */  mfhi  $zero
 /* 135B70 00242830 00000004 */  sllv  $zero, $zero, $zero
 /* 135B74 00242834 00000019 */  multu $zero, $zero
 /* 135B78 00242838 00200000 */  .byte 0x00, 0x20, 0x00, 0x00
-/* 135B7C 0024283C 00000002 */  srl   $zero, $zero, 0
-/* 135B80 00242840 00000009 */  jr    $zero
+/* 135B7C 0024283C 00000002 */  /* 135B80 00242840 00000009 */  jr    $zero
 /* 135B84 00242844 80240DE0 */  lb    $a0, 0xde0($at)
 /* 135B88 00242848 80240E60 */  lb    $a0, 0xe60($at)
 /* 135B8C 0024284C 00000018 */  mult  $zero, $zero
 /* 135B90 00242850 00200000 */  .byte 0x00, 0x20, 0x00, 0x00
-/* 135B94 00242854 00000002 */  srl   $zero, $zero, 0
-/* 135B98 00242858 00000006 */  srlv  $zero, $zero, $zero
+/* 135B94 00242854 00000002 */  /* 135B98 00242858 00000006 */  srlv  $zero, $zero, $zero
 /* 135B9C 0024285C 80240DE0 */  lb    $a0, 0xde0($at)
 /* 135BA0 00242860 80240E60 */  lb    $a0, 0xe60($at)
 /* 135BA4 00242864 00000003 */  sra   $zero, $zero, 0
 /* 135BA8 00242868 00000000 */  nop   
 /* 135BAC 0024286C 00000008 */  jr    $zero
-/* 135BB0 00242870 00000005 */   lsa   $zero, $zero, $zero, 1
-/* 135BB4 00242874 00000001 */  movf  $zero, $zero, $fcc0
-/* 135BB8 00242878 00000004 */  sllv  $zero, $zero, $zero
-/* 135BBC 0024287C 00000002 */  srl   $zero, $zero, 0
+/* 135BB0 00242870 00000005 */   .byte 0x00,0x00,0x00,0x05 /* Because of invalid n64 opcode lsa */
+/* 135BB4 00242874 00000001 */  .byte 0x00,0x00,0x00,0x01 /* Because of invalid n64 opcode movf */
+/* 135BB8 00242878 00000004 */  /* 135BBC 0024287C 00000002 */  srl   $zero, $zero, 0
 /* 135BC0 00242880 0000003C */  dsll32 $zero, $zero, 0
 /* 135BC4 00242884 80241680 */  lb    $a0, 0x1680($at)
 /* 135BC8 00242888 80241700 */  lb    $a0, 0x1700($at)
 /* 135BCC 0024288C 00000003 */  sra   $zero, $zero, 0
 /* 135BD0 00242890 00000000 */  nop   
 /* 135BD4 00242894 00000008 */  jr    $zero
-/* 135BD8 00242898 00000005 */   lsa   $zero, $zero, $zero, 1
-/* 135BDC 0024289C 00000001 */  movf  $zero, $zero, $fcc0
-/* 135BE0 002428A0 00000004 */  sllv  $zero, $zero, $zero
-/* 135BE4 002428A4 00000002 */  srl   $zero, $zero, 0
+/* 135BD8 00242898 00000005 */   .byte 0x00,0x00,0x00,0x05 /* Because of invalid n64 opcode lsa */
+/* 135BDC 0024289C 00000001 */  .byte 0x00,0x00,0x00,0x01 /* Because of invalid n64 opcode movf */
+/* 135BE0 002428A0 00000004 */  /* 135BE4 002428A4 00000002 */  srl   $zero, $zero, 0
 /* 135BE8 002428A8 0000003C */  dsll32 $zero, $zero, 0
 /* 135BEC 002428AC 80241720 */  lb    $a0, 0x1720($at)
 /* 135BF0 002428B0 802417A0 */  lb    $a0, 0x17a0($at)
 /* 135BF4 002428B4 00000003 */  sra   $zero, $zero, 0
 /* 135BF8 002428B8 00000000 */  nop   
 /* 135BFC 002428BC 00000008 */  jr    $zero
-/* 135C00 002428C0 00000005 */   lsa   $zero, $zero, $zero, 1
-/* 135C04 002428C4 00000001 */  movf  $zero, $zero, $fcc0
-/* 135C08 002428C8 00000004 */  sllv  $zero, $zero, $zero
-/* 135C0C 002428CC 00000002 */  srl   $zero, $zero, 0
+/* 135C00 002428C0 00000005 */   .byte 0x00,0x00,0x00,0x05 /* Because of invalid n64 opcode lsa */
+/* 135C04 002428C4 00000001 */  .byte 0x00,0x00,0x00,0x01 /* Because of invalid n64 opcode movf */
+/* 135C08 002428C8 00000004 */  /* 135C0C 002428CC 00000002 */  srl   $zero, $zero, 0
 /* 135C10 002428D0 0000003C */  dsll32 $zero, $zero, 0
 /* 135C14 002428D4 802417C0 */  lb    $a0, 0x17c0($at)
 /* 135C18 002428D8 80241840 */  lb    $a0, 0x1840($at)
 /* 135C1C 002428DC 00000003 */  sra   $zero, $zero, 0
 /* 135C20 002428E0 00000000 */  nop   
 /* 135C24 002428E4 00000008 */  jr    $zero
-/* 135C28 002428E8 00000005 */   lsa   $zero, $zero, $zero, 1
-/* 135C2C 002428EC 00000001 */  movf  $zero, $zero, $fcc0
-/* 135C30 002428F0 00000004 */  sllv  $zero, $zero, $zero
-/* 135C34 002428F4 00000002 */  srl   $zero, $zero, 0
+/* 135C28 002428E8 00000005 */   .byte 0x00,0x00,0x00,0x05 /* Because of invalid n64 opcode lsa */
+/* 135C2C 002428EC 00000001 */  .byte 0x00,0x00,0x00,0x01 /* Because of invalid n64 opcode movf */
+/* 135C30 002428F0 00000004 */  /* 135C34 002428F4 00000002 */  srl   $zero, $zero, 0
 /* 135C38 002428F8 0000003C */  dsll32 $zero, $zero, 0
 /* 135C3C 002428FC 80241860 */  lb    $a0, 0x1860($at)
 /* 135C40 00242900 802418E0 */  lb    $a0, 0x18e0($at)
 /* 135C44 00242904 00000003 */  sra   $zero, $zero, 0
 /* 135C48 00242908 00000000 */  nop   
 /* 135C4C 0024290C 00000008 */  jr    $zero
-/* 135C50 00242910 00000005 */   lsa   $zero, $zero, $zero, 1
-/* 135C54 00242914 00000001 */  movf  $zero, $zero, $fcc0
-/* 135C58 00242918 00000004 */  sllv  $zero, $zero, $zero
-/* 135C5C 0024291C 00000002 */  srl   $zero, $zero, 0
+/* 135C50 00242910 00000005 */   .byte 0x00,0x00,0x00,0x05 /* Because of invalid n64 opcode lsa */
+/* 135C54 00242914 00000001 */  .byte 0x00,0x00,0x00,0x01 /* Because of invalid n64 opcode movf */
+/* 135C58 00242918 00000004 */  /* 135C5C 0024291C 00000002 */  srl   $zero, $zero, 0
 /* 135C60 00242920 0000003C */  dsll32 $zero, $zero, 0
 /* 135C64 00242924 80241900 */  lb    $a0, 0x1900($at)
 /* 135C68 00242928 80241980 */  lb    $a0, 0x1980($at)
 /* 135C6C 0024292C 00000003 */  sra   $zero, $zero, 0
 /* 135C70 00242930 00000000 */  nop   
 /* 135C74 00242934 00000008 */  jr    $zero
-/* 135C78 00242938 00000005 */   lsa   $zero, $zero, $zero, 1
-/* 135C7C 0024293C 00000001 */  movf  $zero, $zero, $fcc0
-/* 135C80 00242940 00000004 */  sllv  $zero, $zero, $zero
-/* 135C84 00242944 00000002 */  srl   $zero, $zero, 0
+/* 135C78 00242938 00000005 */   .byte 0x00,0x00,0x00,0x05 /* Because of invalid n64 opcode lsa */
+/* 135C7C 0024293C 00000001 */  .byte 0x00,0x00,0x00,0x01 /* Because of invalid n64 opcode movf */
+/* 135C80 00242940 00000004 */  /* 135C84 00242944 00000002 */  srl   $zero, $zero, 0
 /* 135C88 00242948 0000003C */  dsll32 $zero, $zero, 0
 /* 135C8C 0024294C 802419A0 */  lb    $a0, 0x19a0($at)
 /* 135C90 00242950 80241A20 */  lb    $a0, 0x1a20($at)
 /* 135C94 00242954 00000003 */  sra   $zero, $zero, 0
 /* 135C98 00242958 00000000 */  nop   
 /* 135C9C 0024295C 00000008 */  jr    $zero
-/* 135CA0 00242960 00000005 */   lsa   $zero, $zero, $zero, 1
-/* 135CA4 00242964 00000001 */  movf  $zero, $zero, $fcc0
-/* 135CA8 00242968 00000004 */  sllv  $zero, $zero, $zero
-/* 135CAC 0024296C 00000002 */  srl   $zero, $zero, 0
+/* 135CA0 00242960 00000005 */   .byte 0x00,0x00,0x00,0x05 /* Because of invalid n64 opcode lsa */
+/* 135CA4 00242964 00000001 */  .byte 0x00,0x00,0x00,0x01 /* Because of invalid n64 opcode movf */
+/* 135CA8 00242968 00000004 */  /* 135CAC 0024296C 00000002 */  srl   $zero, $zero, 0
 /* 135CB0 00242970 0000003C */  dsll32 $zero, $zero, 0
 /* 135CB4 00242974 80241A40 */  lb    $a0, 0x1a40($at)
 /* 135CB8 00242978 80241AC0 */  lb    $a0, 0x1ac0($at)
 /* 135CBC 0024297C 00000003 */  sra   $zero, $zero, 0
 /* 135CC0 00242980 00000000 */  nop   
 /* 135CC4 00242984 00000008 */  jr    $zero
-/* 135CC8 00242988 00000005 */   lsa   $zero, $zero, $zero, 1
-/* 135CCC 0024298C 00000001 */  movf  $zero, $zero, $fcc0
-/* 135CD0 00242990 00000004 */  sllv  $zero, $zero, $zero
-/* 135CD4 00242994 00000002 */  srl   $zero, $zero, 0
+/* 135CC8 00242988 00000005 */   .byte 0x00,0x00,0x00,0x05 /* Because of invalid n64 opcode lsa */
+/* 135CCC 0024298C 00000001 */  .byte 0x00,0x00,0x00,0x01 /* Because of invalid n64 opcode movf */
+/* 135CD0 00242990 00000004 */  /* 135CD4 00242994 00000002 */  srl   $zero, $zero, 0
 /* 135CD8 00242998 0000003C */  dsll32 $zero, $zero, 0
 /* 135CDC 0024299C 80241AE0 */  lb    $a0, 0x1ae0($at)
 /* 135CE0 002429A0 80241B60 */  lb    $a0, 0x1b60($at)
 /* 135CE4 002429A4 00000003 */  sra   $zero, $zero, 0
 /* 135CE8 002429A8 00000000 */  nop   
 /* 135CEC 002429AC 00000008 */  jr    $zero
-/* 135CF0 002429B0 00000005 */   lsa   $zero, $zero, $zero, 1
-/* 135CF4 002429B4 00000001 */  movf  $zero, $zero, $fcc0
-/* 135CF8 002429B8 00000004 */  sllv  $zero, $zero, $zero
-/* 135CFC 002429BC 00000002 */  srl   $zero, $zero, 0
+/* 135CF0 002429B0 00000005 */   .byte 0x00,0x00,0x00,0x05 /* Because of invalid n64 opcode lsa */
+/* 135CF4 002429B4 00000001 */  .byte 0x00,0x00,0x00,0x01 /* Because of invalid n64 opcode movf */
+/* 135CF8 002429B8 00000004 */  /* 135CFC 002429BC 00000002 */  srl   $zero, $zero, 0
 /* 135D00 002429C0 0000003C */  dsll32 $zero, $zero, 0
 /* 135D04 002429C4 802411E0 */  lb    $a0, 0x11e0($at)
 /* 135D08 002429C8 80241260 */  lb    $a0, 0x1260($at)
 /* 135D0C 002429CC 00000003 */  sra   $zero, $zero, 0
 /* 135D10 002429D0 00000000 */  nop   
 /* 135D14 002429D4 00000008 */  jr    $zero
-/* 135D18 002429D8 00000005 */   lsa   $zero, $zero, $zero, 1
-/* 135D1C 002429DC 00000001 */  movf  $zero, $zero, $fcc0
-/* 135D20 002429E0 00000004 */  sllv  $zero, $zero, $zero
-/* 135D24 002429E4 00000002 */  srl   $zero, $zero, 0
+/* 135D18 002429D8 00000005 */   .byte 0x00,0x00,0x00,0x05 /* Because of invalid n64 opcode lsa */
+/* 135D1C 002429DC 00000001 */  .byte 0x00,0x00,0x00,0x01 /* Because of invalid n64 opcode movf */
+/* 135D20 002429E0 00000004 */  /* 135D24 002429E4 00000002 */  srl   $zero, $zero, 0
 /* 135D28 002429E8 0000003C */  dsll32 $zero, $zero, 0
 /* 135D2C 002429EC 80241280 */  lb    $a0, 0x1280($at)
 /* 135D30 002429F0 80241300 */  lb    $a0, 0x1300($at)
 /* 135D34 002429F4 00000003 */  sra   $zero, $zero, 0
 /* 135D38 002429F8 00000000 */  nop   
 /* 135D3C 002429FC 00000008 */  jr    $zero
-/* 135D40 00242A00 00000005 */   lsa   $zero, $zero, $zero, 1
-/* 135D44 00242A04 00000001 */  movf  $zero, $zero, $fcc0
-/* 135D48 00242A08 00000004 */  sllv  $zero, $zero, $zero
-/* 135D4C 00242A0C 00000002 */  srl   $zero, $zero, 0
+/* 135D40 00242A00 00000005 */   .byte 0x00,0x00,0x00,0x05 /* Because of invalid n64 opcode lsa */
+/* 135D44 00242A04 00000001 */  .byte 0x00,0x00,0x00,0x01 /* Because of invalid n64 opcode movf */
+/* 135D48 00242A08 00000004 */  /* 135D4C 00242A0C 00000002 */  srl   $zero, $zero, 0
 /* 135D50 00242A10 0000003C */  dsll32 $zero, $zero, 0
 /* 135D54 00242A14 80241320 */  lb    $a0, 0x1320($at)
 /* 135D58 00242A18 802413A0 */  lb    $a0, 0x13a0($at)
 /* 135D5C 00242A1C 00000003 */  sra   $zero, $zero, 0
 /* 135D60 00242A20 00000000 */  nop   
 /* 135D64 00242A24 00000008 */  jr    $zero
-/* 135D68 00242A28 00000005 */   lsa   $zero, $zero, $zero, 1
-/* 135D6C 00242A2C 00000001 */  movf  $zero, $zero, $fcc0
-/* 135D70 00242A30 00000004 */  sllv  $zero, $zero, $zero
-/* 135D74 00242A34 00000002 */  srl   $zero, $zero, 0
+/* 135D68 00242A28 00000005 */   .byte 0x00,0x00,0x00,0x05 /* Because of invalid n64 opcode lsa */
+/* 135D6C 00242A2C 00000001 */  .byte 0x00,0x00,0x00,0x01 /* Because of invalid n64 opcode movf */
+/* 135D70 00242A30 00000004 */  /* 135D74 00242A34 00000002 */  srl   $zero, $zero, 0
 /* 135D78 00242A38 0000000C */  syscall 
 /* 135D7C 00242A3C 802413C0 */  lb    $a0, 0x13c0($at)
 /* 135D80 00242A40 80241440 */  lb    $a0, 0x1440($at)
@@ -674,10 +656,9 @@ func_0024282C:
 /* 135DB4 00242A74 00000003 */  sra   $zero, $zero, 0
 /* 135DB8 00242A78 00000000 */  nop   
 /* 135DBC 00242A7C 00000008 */  jr    $zero
-/* 135DC0 00242A80 00000005 */   lsa   $zero, $zero, $zero, 1
-/* 135DC4 00242A84 00000001 */  movf  $zero, $zero, $fcc0
-/* 135DC8 00242A88 00000004 */  sllv  $zero, $zero, $zero
-/* 135DCC 00242A8C 00000002 */  srl   $zero, $zero, 0
+/* 135DC0 00242A80 00000005 */   .byte 0x00,0x00,0x00,0x05 /* Because of invalid n64 opcode lsa */
+/* 135DC4 00242A84 00000001 */  .byte 0x00,0x00,0x00,0x01 /* Because of invalid n64 opcode movf */
+/* 135DC8 00242A88 00000004 */  /* 135DCC 00242A8C 00000002 */  srl   $zero, $zero, 0
 /* 135DD0 00242A90 0000000C */  syscall 
 /* 135DD4 00242A94 802413C0 */  lb    $a0, 0x13c0($at)
 /* 135DD8 00242A98 80241440 */  lb    $a0, 0x1440($at)
@@ -696,29 +677,26 @@ func_0024282C:
 /* 135E0C 00242ACC 00000003 */  sra   $zero, $zero, 0
 /* 135E10 00242AD0 00000000 */  nop   
 /* 135E14 00242AD4 00000008 */  jr    $zero
-/* 135E18 00242AD8 00000005 */   lsa   $zero, $zero, $zero, 1
-/* 135E1C 00242ADC 00000001 */  movf  $zero, $zero, $fcc0
-/* 135E20 00242AE0 00000004 */  sllv  $zero, $zero, $zero
-/* 135E24 00242AE4 00000002 */  srl   $zero, $zero, 0
+/* 135E18 00242AD8 00000005 */   .byte 0x00,0x00,0x00,0x05 /* Because of invalid n64 opcode lsa */
+/* 135E1C 00242ADC 00000001 */  .byte 0x00,0x00,0x00,0x01 /* Because of invalid n64 opcode movf */
+/* 135E20 00242AE0 00000004 */  /* 135E24 00242AE4 00000002 */  srl   $zero, $zero, 0
 /* 135E28 00242AE8 0000003C */  dsll32 $zero, $zero, 0
 /* 135E2C 00242AEC 802415A0 */  lb    $a0, 0x15a0($at)
 /* 135E30 00242AF0 80241620 */  lb    $a0, 0x1620($at)
 /* 135E34 00242AF4 00000003 */  sra   $zero, $zero, 0
 /* 135E38 00242AF8 00000000 */  nop   
 /* 135E3C 00242AFC 00000008 */  jr    $zero
-/* 135E40 00242B00 00000005 */   lsa   $zero, $zero, $zero, 1
-/* 135E44 00242B04 00000001 */  movf  $zero, $zero, $fcc0
-/* 135E48 00242B08 00000004 */  sllv  $zero, $zero, $zero
-/* 135E4C 00242B0C 00000002 */  srl   $zero, $zero, 0
+/* 135E40 00242B00 00000005 */   .byte 0x00,0x00,0x00,0x05 /* Because of invalid n64 opcode lsa */
+/* 135E44 00242B04 00000001 */  .byte 0x00,0x00,0x00,0x01 /* Because of invalid n64 opcode movf */
+/* 135E48 00242B08 00000004 */  /* 135E4C 00242B0C 00000002 */  srl   $zero, $zero, 0
 /* 135E50 00242B10 0000003C */  dsll32 $zero, $zero, 0
 /* 135E54 00242B14 802415A0 */  lb    $a0, 0x15a0($at)
 /* 135E58 00242B18 80241620 */  lb    $a0, 0x1620($at)
 /* 135E5C 00242B1C 00000003 */  sra   $zero, $zero, 0
 /* 135E60 00242B20 00000000 */  nop   
 /* 135E64 00242B24 00000008 */  jr    $zero
-/* 135E68 00242B28 00000005 */   lsa   $zero, $zero, $zero, 1
-/* 135E6C 00242B2C 00000000 */  nop   
-/* 135E70 00242B30 00000004 */  sllv  $zero, $zero, $zero
+/* 135E68 00242B28 00000005 */   .byte 0x00,0x00,0x00,0x05 /* Because of invalid n64 opcode lsa */
+/* 135E6C 00242B2C 00000000 */  /* 135E70 00242B30 00000004 */  sllv  $zero, $zero, $zero
 /* 135E74 00242B34 00000002 */  srl   $zero, $zero, 0
 /* 135E78 00242B38 0000003C */  dsll32 $zero, $zero, 0
 /* 135E7C 00242B3C 80241640 */  lb    $a0, 0x1640($at)
@@ -726,10 +704,9 @@ func_0024282C:
 /* 135E84 00242B44 00000003 */  sra   $zero, $zero, 0
 /* 135E88 00242B48 00000000 */  nop   
 /* 135E8C 00242B4C 00000008 */  jr    $zero
-/* 135E90 00242B50 00000005 */   lsa   $zero, $zero, $zero, 1
-/* 135E94 00242B54 00000001 */  movf  $zero, $zero, $fcc0
-/* 135E98 00242B58 00000004 */  sllv  $zero, $zero, $zero
-/* 135E9C 00242B5C 00000002 */  srl   $zero, $zero, 0
+/* 135E90 00242B50 00000005 */   .byte 0x00,0x00,0x00,0x05 /* Because of invalid n64 opcode lsa */
+/* 135E94 00242B54 00000001 */  .byte 0x00,0x00,0x00,0x01 /* Because of invalid n64 opcode movf */
+/* 135E98 00242B58 00000004 */  /* 135E9C 00242B5C 00000002 */  srl   $zero, $zero, 0
 /* 135EA0 00242B60 0000003C */  dsll32 $zero, $zero, 0
 /* 135EA4 00242B64 80241B80 */  lb    $a0, 0x1b80($at)
 /* 135EA8 00242B68 80241C00 */  lb    $a0, 0x1c00($at)

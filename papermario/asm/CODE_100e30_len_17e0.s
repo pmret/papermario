@@ -114,7 +114,6 @@ func_002DDE94:
 /* 100FAC 002DDEBC 03E00008 */  jr    $ra
 /* 100FB0 002DDEC0 27BD0050 */   addiu $sp, $sp, 0x50
 
-func_002DDEC4:
 /* 100FB4 002DDEC4 00041040 */  sll   $v0, $a0, 1
 /* 100FB8 002DDEC8 00441021 */  addu  $v0, $v0, $a0
 /* 100FBC 002DDECC 00021080 */  sll   $v0, $v0, 2
@@ -270,7 +269,6 @@ func_002DDFF8:
 /* 1011D4 002DE0E4 03E00008 */  jr    $ra
 /* 1011D8 002DE0E8 0000102D */   move  $v0, $zero
 
-func_002DE0EC:
 /* 1011DC 002DE0EC 27BDFFD0 */  addiu $sp, $sp, -0x30
 /* 1011E0 002DE0F0 AFB50024 */  sw    $s5, 0x24($sp)
 /* 1011E4 002DE0F4 00A0A82D */  move  $s5, $a1
@@ -396,7 +394,6 @@ func_002DE288:
 /* 101394 002DE2A4 03E00008 */  jr    $ra
 /* 101398 002DE2A8 27BD0030 */   addiu $sp, $sp, 0x30
 
-func_002DE2AC:
 /* 10139C 002DE2AC 27BDFFC0 */  addiu $sp, $sp, -0x40
 /* 1013A0 002DE2B0 AFB5002C */  sw    $s5, 0x2c($sp)
 /* 1013A4 002DE2B4 0080A82D */  move  $s5, $a0
@@ -476,7 +473,6 @@ func_002DE2AC:
 /* 1014C0 002DE3D0 03E00008 */  jr    $ra
 /* 1014C4 002DE3D4 27BD0040 */   addiu $sp, $sp, 0x40
 
-func_002DE3D8:
 /* 1014C8 002DE3D8 27BDFFB8 */  addiu $sp, $sp, -0x48
 /* 1014CC 002DE3DC 308900FF */  andi  $t1, $a0, 0xff
 /* 1014D0 002DE3E0 3C02802E */  lui   $v0, %hi(D_802DFA48) # $v0, 0x802e
@@ -617,7 +613,6 @@ func_002DE59C:
 /* 1016B0 002DE5C0 03E00008 */  jr    $ra
 /* 1016B4 002DE5C4 27BD0048 */   addiu $sp, $sp, 0x48
 
-func_002DE5C8:
 /* 1016B8 002DE5C8 00041080 */  sll   $v0, $a0, 2
 /* 1016BC 002DE5CC 00441021 */  addu  $v0, $v0, $a0
 /* 1016C0 002DE5D0 00021080 */  sll   $v0, $v0, 2
@@ -627,7 +622,6 @@ func_002DE5C8:
 /* 1016D0 002DE5E0 03E00008 */  jr    $ra
 /* 1016D4 002DE5E4 00000000 */   nop   
 
-func_002DE5E8:
 /* 1016D8 002DE5E8 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 1016DC 002DE5EC AFB20018 */  sw    $s2, 0x18($sp)
 /* 1016E0 002DE5F0 0080902D */  move  $s2, $a0
@@ -820,7 +814,6 @@ func_002DE850:
 /* 10197C 002DE88C 03E00008 */  jr    $ra
 /* 101980 002DE890 27BD0048 */   addiu $sp, $sp, 0x48
 
-func_002DE894:
 /* 101984 002DE894 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 101988 002DE898 00A0402D */  move  $t0, $a1
 /* 10198C 002DE89C 00C0482D */  move  $t1, $a2
@@ -939,7 +932,6 @@ func_002DE9D8:
 /* 101B28 002DEA38 03E00008 */  jr    $ra
 /* 101B2C 002DEA3C ACE30004 */   sw    $v1, 4($a3)
 
-func_002DEA40:
 /* 101B30 002DEA40 00042080 */  sll   $a0, $a0, 2
 /* 101B34 002DEA44 3C02802E */  lui   $v0, 0x802e
 /* 101B38 002DEA48 00441021 */  addu  $v0, $v0, $a0
@@ -954,7 +946,6 @@ func_002DEA40:
 /* 101B54 002DEA64 03E00008 */  jr    $ra
 /* 101B58 002DEA68 00000000 */   nop   
 
-func_002DEA6C:
 /* 101B5C 002DEA6C 00042080 */  sll   $a0, $a0, 2
 /* 101B60 002DEA70 3C02802E */  lui   $v0, 0x802e
 /* 101B64 002DEA74 00441021 */  addu  $v0, $v0, $a0
@@ -1637,90 +1628,67 @@ func_002DF2D8:
 /* 102498 002DF3A8 04000000 */  bltz  $zero, .L002DF3AC
 .L002DF3AC:
 /* 10249C 002DF3AC 787878FF */   .byte 0x78, 0x78, 0x78, 0xff
-/* 1024A0 002DF3B0 00100000 */  sll   $zero, $s0, 0
-/* 1024A4 002DF3B4 00000000 */  nop   
+/* 1024A0 002DF3B0 00100000 */  /* 1024A4 002DF3B4 00000000 */  nop   
 /* 1024A8 002DF3B8 04000700 */  bltz  $zero, .L002E0FBC
 /* 1024AC 002DF3BC 000000FF */   dsra32 $zero, $zero, 3
 /* 1024B0 002DF3C0 FFF00000 */  sd    $s0, ($ra)
 /* 1024B4 002DF3C4 00000000 */  nop   
 /* 1024B8 002DF3C8 00000700 */  sll   $zero, $zero, 0x1c
 /* 1024BC 002DF3CC 787878FF */  .byte 0x78, 0x78, 0x78, 0xff
-/* 1024C0 002DF3D0 028001E0 */  .byte 0x02, 0x80, 0x01, 0xe0
-/* 1024C4 002DF3D4 01FF0000 */  .byte 0x01, 0xff, 0x00, 0x00
-/* 1024C8 002DF3D8 028001E0 */  .byte 0x02, 0x80, 0x01, 0xe0
-/* 1024CC 002DF3DC 01FF0000 */  .byte 0x01, 0xff, 0x00, 0x00
-/* 1024D0 002DF3E0 028001E0 */  .byte 0x02, 0x80, 0x01, 0xe0
-/* 1024D4 002DF3E4 01FF0000 */  .byte 0x01, 0xff, 0x00, 0x00
-/* 1024D8 002DF3E8 028001E0 */  .byte 0x02, 0x80, 0x01, 0xe0
-/* 1024DC 002DF3EC 02000000 */  .byte 0x02, 0x00, 0x00, 0x00
-/* 1024E0 002DF3F0 D9FDF9FF */  bbit032 $t7, .L0000001D, .L002DDBF0
-/* 1024E4 002DF3F4 00000000 */   nop   
-/* 1024E8 002DF3F8 FCFFFFFF */  sd    $ra, -1($a3)
+/* 1024C0 002DF3D0 028001E0 */  /* 1024C4 002DF3D4 01FF0000 */  /* 1024C8 002DF3D8 028001E0 */  /* 1024CC 002DF3DC 01FF0000 */  /* 1024D0 002DF3E0 028001E0 */  /* 1024D4 002DF3E4 01FF0000 */  /* 1024D8 002DF3E8 028001E0 */  /* 1024DC 002DF3EC 02000000 */  /* 1024E0 002DF3F0 D9FDF9FF */  .byte 0xD9,0xFD,0xF9,0xFF /* Because of invalid n64 opcode bbit032 */
+/* 1024E4 002DF3F4 00000000 */  /* 1024E8 002DF3F8 FCFFFFFF */  sd    $ra, -1($a3)
 /* 1024EC 002DF3FC FFFCF279 */  sd    $gp, -0xd87($ra)
 /* 1024F0 002DF400 D7000002 */  ldc1  $f0, 2($t8)
 /* 1024F4 002DF404 FFFFFFFF */  sd    $ra, -1($ra)
 .L002DF408:
-/* 1024F8 002DF408 D9FFFFFF */  bbit032 $t7, .L0000001F, .L002DF408
-/* 1024FC 002DF40C 00200005 */   lsa   $zero, $at, $zero, 1
-/* 102500 002DF410 E200001C */  sc    $zero, 0x1c($s0)
-/* 102504 002DF414 00551238 */  .byte 0x00, 0x55, 0x12, 0x38
-/* 102508 002DF418 E3000A11 */  sc    $zero, 0xa11($t8)
-/* 10250C 002DF41C 0008ACF0 */  tge   $zero, $t0, 0x2b3
+/* 1024F8 002DF408 D9FFFFFF */  .byte 0xD9,0xFF,0xFF,0xFF /* Because of invalid n64 opcode bbit032 */
+/* 1024FC 002DF40C 00200005 */  .byte 0x00,0x20,0x00,0x05 /* Because of invalid n64 opcode lsa */
+/* 102500 002DF410 E200001C */  /* 102504 002DF414 00551238 */  .byte 0x00, 0x55, 0x12, 0x38
+/* 102508 002DF418 E3000A11 */  /* 10250C 002DF41C 0008ACF0 */  tge   $zero, $t0, 0x2b3
 /* 102510 002DF420 DF000000 */  ld    $zero, ($t8)
 /* 102514 002DF424 00000000 */  nop   
-/* 102518 002DF428 D9FDF9FF */  bbit032 $t7, .L0000001D, .L002DDC28
-/* 10251C 002DF42C 00000000 */   nop   
-/* 102520 002DF430 FCFF97FF */  sd    $ra, -0x6801($a3)
+/* 102518 002DF428 D9FDF9FF */  .byte 0xD9,0xFD,0xF9,0xFF /* Because of invalid n64 opcode bbit032 */
+/* 10251C 002DF42C 00000000 */  /* 102520 002DF430 FCFF97FF */  sd    $ra, -0x6801($a3)
 /* 102524 002DF434 FF2CFE7F */  sd    $t4, -0x181($t9)
 /* 102528 002DF438 D7000002 */  ldc1  $f0, 2($t8)
 /* 10252C 002DF43C FFFFFFFF */  sd    $ra, -1($ra)
 .L002DF440:
-/* 102530 002DF440 D9FFFFFF */  bbit032 $t7, .L0000001F, .L002DF440
-/* 102534 002DF444 00200005 */   lsa   $zero, $at, $zero, 1
-/* 102538 002DF448 E200001C */  sc    $zero, 0x1c($s0)
-/* 10253C 002DF44C 00504B50 */  .byte 0x00, 0x50, 0x4b, 0x50
-/* 102540 002DF450 E3000A11 */  sc    $zero, 0xa11($t8)
-/* 102544 002DF454 0008ACF0 */  tge   $zero, $t0, 0x2b3
+/* 102530 002DF440 D9FFFFFF */  .byte 0xD9,0xFF,0xFF,0xFF /* Because of invalid n64 opcode bbit032 */
+/* 102534 002DF444 00200005 */  .byte 0x00,0x20,0x00,0x05 /* Because of invalid n64 opcode lsa */
+/* 102538 002DF448 E200001C */  /* 10253C 002DF44C 00504B50 */  .byte 0x00, 0x50, 0x4b, 0x50
+/* 102540 002DF450 E3000A11 */  /* 102544 002DF454 0008ACF0 */  tge   $zero, $t0, 0x2b3
 /* 102548 002DF458 DF000000 */  ld    $zero, ($t8)
 /* 10254C 002DF45C 00000000 */  nop   
-/* 102550 002DF460 D9FDF9FF */  bbit032 $t7, .L0000001D, .L002DDC60
-/* 102554 002DF464 00000000 */   nop   
-/* 102558 002DF468 D7000002 */  ldc1  $f0, 2($t8)
+/* 102550 002DF460 D9FDF9FF */  .byte 0xD9,0xFD,0xF9,0xFF /* Because of invalid n64 opcode bbit032 */
+/* 102554 002DF464 00000000 */  /* 102558 002DF468 D7000002 */  ldc1  $f0, 2($t8)
 /* 10255C 002DF46C FFFFFFFF */  sd    $ra, -1($ra)
 .L002DF470:
-/* 102560 002DF470 D9FFFFFF */  bbit032 $t7, .L0000001F, .L002DF470
-/* 102564 002DF474 00200005 */   lsa   $zero, $at, $zero, 1
-/* 102568 002DF478 E200001C */  sc    $zero, 0x1c($s0)
-/* 10256C 002DF47C 0C191238 */  jal   func_006448E0
+/* 102560 002DF470 D9FFFFFF */  .byte 0xD9,0xFF,0xFF,0xFF /* Because of invalid n64 opcode bbit032 */
+/* 102564 002DF474 00200005 */  .byte 0x00,0x20,0x00,0x05 /* Because of invalid n64 opcode lsa */
+/* 102568 002DF478 E200001C */  /* 10256C 002DF47C 0C191238 */  jal   func_006448E0
 /* 102570 002DF480 E3000A11 */   sc    $zero, 0xa11($t8)
 /* 102574 002DF484 0018ACF0 */  tge   $zero, $t8, 0x2b3
 /* 102578 002DF488 DF000000 */  ld    $zero, ($t8)
 /* 10257C 002DF48C 00000000 */  nop   
-/* 102580 002DF490 D9FDF9FF */  bbit032 $t7, .L0000001D, .L002DDC90
-/* 102584 002DF494 00000000 */   nop   
-/* 102588 002DF498 D7000002 */  ldc1  $f0, 2($t8)
+/* 102580 002DF490 D9FDF9FF */  .byte 0xD9,0xFD,0xF9,0xFF /* Because of invalid n64 opcode bbit032 */
+/* 102584 002DF494 00000000 */  /* 102588 002DF498 D7000002 */  ldc1  $f0, 2($t8)
 /* 10258C 002DF49C FFFFFFFF */  sd    $ra, -1($ra)
 .L002DF4A0:
-/* 102590 002DF4A0 D9FFFFFF */  bbit032 $t7, .L0000001F, .L002DF4A0
-/* 102594 002DF4A4 00200005 */   lsa   $zero, $at, $zero, 1
-/* 102598 002DF4A8 E200001C */  sc    $zero, 0x1c($s0)
-/* 10259C 002DF4AC 0C184B50 */  jal   func_00612D40
+/* 102590 002DF4A0 D9FFFFFF */  .byte 0xD9,0xFF,0xFF,0xFF /* Because of invalid n64 opcode bbit032 */
+/* 102594 002DF4A4 00200005 */  .byte 0x00,0x20,0x00,0x05 /* Because of invalid n64 opcode lsa */
+/* 102598 002DF4A8 E200001C */  /* 10259C 002DF4AC 0C184B50 */  jal   func_00612D40
 /* 1025A0 002DF4B0 E3000A11 */   sc    $zero, 0xa11($t8)
 /* 1025A4 002DF4B4 0018ACF0 */  tge   $zero, $t8, 0x2b3
 /* 1025A8 002DF4B8 DF000000 */  ld    $zero, ($t8)
 /* 1025AC 002DF4BC 00000000 */  nop   
 /* 1025B0 002DF4C0 3F800000 */  .byte 0x3f, 0x80, 0x00, 0x00
-/* 1025B4 002DF4C4 00000006 */  srlv  $zero, $zero, $zero
-/* 1025B8 002DF4C8 00000700 */  sll   $zero, $zero, 0x1c
+/* 1025B4 002DF4C4 00000006 */  /* 1025B8 002DF4C8 00000700 */  sll   $zero, $zero, 0x1c
 /* 1025BC 002DF4CC 000003C6 */  .byte 0x00, 0x00, 0x03, 0xc6
-/* 1025C0 002DF4D0 00000012 */  mflo  $zero
-/* 1025C4 002DF4D4 00000700 */  sll   $zero, $zero, 0x1c
+/* 1025C0 002DF4D0 00000012 */  /* 1025C4 002DF4D4 00000700 */  sll   $zero, $zero, 0x1c
 /* 1025C8 002DF4D8 000003C6 */  .byte 0x00, 0x00, 0x03, 0xc6
-/* 1025CC 002DF4DC 0000000A */  movz  $zero, $zero, $zero
-/* 1025D0 002DF4E0 00000900 */  sll   $at, $zero, 4
-/* 1025D4 002DF4E4 00003FC6 */  .byte 0x00, 0x00, 0x3f, 0xc6
-/* 1025D8 002DF4E8 00000003 */  sra   $zero, $zero, 0
-/* 1025DC 002DF4EC 00000700 */  sll   $zero, $zero, 0x1c
+/* 1025CC 002DF4DC 0000000A */  .byte 0x00,0x00,0x00,0x0A /* Because of invalid n64 opcode movz */
+/* 1025D0 002DF4E0 00000900 */  /* 1025D4 002DF4E4 00003FC6 */  .byte 0x00, 0x00, 0x3f, 0xc6
+/* 1025D8 002DF4E8 00000003 */  /* 1025DC 002DF4EC 00000700 */  sll   $zero, $zero, 0x1c
 /* 1025E0 002DF4F0 00000006 */  srlv  $zero, $zero, $zero
 /* 1025E4 002DF4F4 00000006 */  srlv  $zero, $zero, $zero
 /* 1025E8 002DF4F8 00000900 */  sll   $at, $zero, 4

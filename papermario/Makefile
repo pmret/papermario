@@ -6,14 +6,14 @@
 BUILD_DIR = build
 
 ##################### Compiler Options #######################
-CROSS = mips64-elf-
+CROSS = mipsel-elf-
 AS = $(CROSS)as
 CC = $(CROSS)gcc
 LD = $(CROSS)ld
 OBJDUMP = $(CROSS)objdump
 OBJCOPY = $(CROSS)objcopy
 
-ASFLAGS = -mtune=vr4300 -march=vr4300
+ASFLAGS = -EB -mtune=vr4300 -march=vr4300
 CFLAGS  = -Wall -O2 -mtune=vr4300 -march=vr4300 -G 0 -c
 LDFLAGS = -T $(LD_SCRIPT) -Map $(BUILD_DIR)/sm64.map
 

@@ -137,7 +137,6 @@ func_002C31CC:
 /* 0E7B84 002C31D4 03E00008 */  jr    $ra
 /* 0E7B88 002C31D8 00000000 */   nop   
 
-func_002C31DC:
 /* 0E7B8C 002C31DC 3C028007 */  lui   $v0, %hi(D_8007419C) # $v0, 0x8007
 /* 0E7B90 002C31E0 8C42419C */  lw    $v0, %lo(D_8007419C)($v0)
 /* 0E7B94 002C31E4 27BDFFE8 */  addiu $sp, $sp, -0x18
@@ -213,7 +212,6 @@ func_002C3250:
 /* 0E7C94 002C32E4 03E00008 */  jr    $ra
 /* 0E7C98 002C32E8 27BD0018 */   addiu $sp, $sp, 0x18
 
-func_002C32EC:
 /* 0E7C9C 002C32EC 3C028007 */  lui   $v0, %hi(D_8007419C) # $v0, 0x8007
 /* 0E7CA0 002C32F0 8C42419C */  lw    $v0, %lo(D_8007419C)($v0)
 /* 0E7CA4 002C32F4 27BDFFE8 */  addiu $sp, $sp, -0x18
@@ -959,7 +957,6 @@ func_002C3D04:
 /* 0E871C 002C3D6C 03E00008 */  jr    $ra
 /* 0E8720 002C3D70 27BD0018 */   addiu $sp, $sp, 0x18
 
-func_002C3D74:
 /* 0E8724 002C3D74 3C028007 */  lui   $v0, %hi(D_8007419C) # $v0, 0x8007
 /* 0E8728 002C3D78 8C42419C */  lw    $v0, %lo(D_8007419C)($v0)
 /* 0E872C 002C3D7C 27BDFFC8 */  addiu $sp, $sp, -0x38
@@ -1021,9 +1018,8 @@ func_002C3D74:
 /* 0E8804 002C3E54 46000021 */  cvt.d.s $f0, $f0
 /* 0E8808 002C3E58 4634003C */  c.lt.d $f0, $f20
 /* 0E880C 002C3E5C 00000000 */  nop   
-/* 0E8810 002C3E60 4501000B */  bc1t  .L002C3E90
-/* 0E8814 002C3E64 0200202D */   move  $a0, $s0
-/* 0E8818 002C3E68 46340001 */  sub.d $f0, $f0, $f20
+/* 0E8810 002C3E60 4501000B */  .byte 0x45,0x01,0x00,0x0B /* Because of invalid n64 opcode bc1t */
+/* 0E8814 002C3E64 0200202D */  /* 0E8818 002C3E68 46340001 */  sub.d $f0, $f0, $f20
 /* 0E881C 002C3E6C 46200020 */  cvt.s.d $f0, $f0
 /* 0E8820 002C3E70 0C0B1D01 */  jal   func_002C7404
 /* 0E8824 002C3E74 E6000154 */   swc1  $f0, 0x154($s0)
@@ -1062,7 +1058,6 @@ func_002C3E90:
 /* 0E888C 002C3EDC 03E00008 */  jr    $ra
 /* 0E8890 002C3EE0 27BD0038 */   addiu $sp, $sp, 0x38
 
-func_002C3EE4:
 /* 0E8894 002C3EE4 3C02802E */  lui   $v0, %hi(D_802DAC98) # $v0, 0x802e
 /* 0E8898 002C3EE8 8C42AC98 */  lw    $v0, %lo(D_802DAC98)($v0)
 /* 0E889C 002C3EEC 18400011 */  blez  $v0, .L002C3F34
@@ -1345,6 +1340,7 @@ func_002C4220:
 /* 0E8C50 002C42A0 03E00008 */  jr    $ra
 /* 0E8C54 002C42A4 27BD0048 */   addiu $sp, $sp, 0x48
 
+func_002C42A8:
 /* 0E8C58 002C42A8 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 0E8C5C 002C42AC 8FA20038 */  lw    $v0, 0x38($sp)
 /* 0E8C60 002C42B0 8FA8003C */  lw    $t0, 0x3c($sp)
@@ -1710,7 +1706,6 @@ func_002C4790:
 /* 0E9150 002C47A0 03E00008 */  jr    $ra
 /* 0E9154 002C47A4 8C820000 */   lw    $v0, ($a0)
 
-func_002C47A8:
 /* 0E9158 002C47A8 0000302D */  move  $a2, $zero
 /* 0E915C 002C47AC 3C05802E */  lui   $a1, %hi(D_802DA890) # $a1, 0x802e
 /* 0E9160 002C47B0 8CA5A890 */  lw    $a1, %lo(D_802DA890)($a1)

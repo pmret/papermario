@@ -1435,9 +1435,8 @@ func_00136A80:
 /* 0CD208 00136B08 8C63A674 */  lw    $v1, %lo(D_8009A674)($v1)
 /* 0CD20C 00136B0C 4600C032 */  c.eq.s $f24, $f0
 /* 0CD210 00136B10 00000000 */  nop   
-/* 0CD214 00136B14 4501048B */  bc1t  .L00137D44
-/* 0CD218 00136B18 0065F021 */   addu  $fp, $v1, $a1
-/* 0CD21C 00136B1C 10C0000A */  beqz  $a2, .L00136B48
+/* 0CD214 00136B14 4501048B */  .byte 0x45,0x01,0x04,0x8B /* Because of invalid n64 opcode bc1t */
+/* 0CD218 00136B18 0065F021 */  /* 0CD21C 00136B1C 10C0000A */  beqz  $a2, .L00136B48
 /* 0CD220 00136B20 0000A82D */   move  $s5, $zero
 /* 0CD224 00136B24 90D30000 */  lbu   $s3, ($a2)
 /* 0CD228 00136B28 90D40001 */  lbu   $s4, 1($a2)
@@ -1496,9 +1495,8 @@ func_00136B64:
 /* 0CD2E8 00136BE8 ACE0000C */  sw    $zero, 0xc($a3)
 /* 0CD2EC 00136BEC AD020000 */  sw    $v0, ($t0)
 /* 0CD2F0 00136BF0 ACE60010 */  sw    $a2, 0x10($a3)
-/* 0CD2F4 00136BF4 45000006 */  bc1f  .L00136C10
-/* 0CD2F8 00136BF8 ACE00014 */   sw    $zero, 0x14($a3)
-/* 0CD2FC 00136BFC 3C04E200 */  lui   $a0, (0xE200001C >> 16) # lui $a0, 0xe200
+/* 0CD2F4 00136BF4 45000006 */  .byte 0x45,0x00,0x00,0x06 /* Because of invalid n64 opcode bc1f */
+/* 0CD2F8 00136BF8 ACE00014 */  /* 0CD2FC 00136BFC 3C04E200 */  lui   $a0, (0xE200001C >> 16) # lui $a0, 0xe200
 /* 0CD300 00136C00 3484001C */  ori   $a0, (0xE200001C & 0xFFFF) # ori $a0, $a0, 0x1c
 /* 0CD304 00136C04 3C030F0A */  lui   $v1, (0x0F0A4300 >> 16) # lui $v1, 0xf0a
 /* 0CD308 00136C08 0804DB08 */  j     func_00136C20
@@ -1539,9 +1537,8 @@ func_00136C20:
 /* 0CD388 00136C88 00151A00 */  sll   $v1, $s5, 8
 /* 0CD38C 00136C8C 4618003E */  c.le.s $f0, $f24
 /* 0CD390 00136C90 00000000 */  nop   
-/* 0CD394 00136C94 45010005 */  bc1t  .L00136CAC
-/* 0CD398 00136C98 00434825 */   or    $t1, $v0, $v1
-/* 0CD39C 00136C9C 4600C20D */  trunc.w.s $f8, $f24
+/* 0CD394 00136C94 45010005 */  .byte 0x45,0x01,0x00,0x05 /* Because of invalid n64 opcode bc1t */
+/* 0CD398 00136C98 00434825 */  /* 0CD39C 00136C9C 4600C20D */  trunc.w.s $f8, $f24
 /* 0CD3A0 00136CA0 44054000 */  mfc1  $a1, $f8
 /* 0CD3A4 00136CA4 0804DB32 */  j     func_00136CC8
 /* 0CD3A8 00136CA8 3C060050 */   lui   $a2, 0x50
@@ -1612,9 +1609,8 @@ func_00136CC8:
 /* 0CD498 00136D98 ACE0000C */  sw    $zero, 0xc($a3)
 /* 0CD49C 00136D9C AD020000 */  sw    $v0, ($t0)
 /* 0CD4A0 00136DA0 ACE60010 */  sw    $a2, 0x10($a3)
-/* 0CD4A4 00136DA4 45000006 */  bc1f  .L00136DC0
-/* 0CD4A8 00136DA8 ACE00014 */   sw    $zero, 0x14($a3)
-/* 0CD4AC 00136DAC 3C04E200 */  lui   $a0, (0xE200001C >> 16) # lui $a0, 0xe200
+/* 0CD4A4 00136DA4 45000006 */  .byte 0x45,0x00,0x00,0x06 /* Because of invalid n64 opcode bc1f */
+/* 0CD4A8 00136DA8 ACE00014 */  /* 0CD4AC 00136DAC 3C04E200 */  lui   $a0, (0xE200001C >> 16) # lui $a0, 0xe200
 /* 0CD4B0 00136DB0 3484001C */  ori   $a0, (0xE200001C & 0xFFFF) # ori $a0, $a0, 0x1c
 /* 0CD4B4 00136DB4 3C030F0A */  lui   $v1, (0x0F0A4300 >> 16) # lui $v1, 0xf0a
 /* 0CD4B8 00136DB8 0804DB74 */  j     func_00136DD0
@@ -1655,9 +1651,8 @@ func_00136DD0:
 /* 0CD538 00136E38 00151A00 */  sll   $v1, $s5, 8
 /* 0CD53C 00136E3C 4618003E */  c.le.s $f0, $f24
 /* 0CD540 00136E40 00000000 */  nop   
-/* 0CD544 00136E44 45010005 */  bc1t  .L00136E5C
-/* 0CD548 00136E48 00431825 */   or    $v1, $v0, $v1
-/* 0CD54C 00136E4C 4600C20D */  trunc.w.s $f8, $f24
+/* 0CD544 00136E44 45010005 */  .byte 0x45,0x01,0x00,0x05 /* Because of invalid n64 opcode bc1t */
+/* 0CD548 00136E48 00431825 */  /* 0CD54C 00136E4C 4600C20D */  trunc.w.s $f8, $f24
 /* 0CD550 00136E50 44104000 */  mfc1  $s0, $f8
 /* 0CD554 00136E54 0804DB9E */  j     func_00136E78
 /* 0CD558 00136E58 3C040050 */   lui   $a0, 0x50

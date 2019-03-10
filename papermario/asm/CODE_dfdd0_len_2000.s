@@ -31,7 +31,6 @@ func_0014971C:
 /* 0DFE2C 0014972C 03E00008 */  jr    $ra
 /* 0DFE30 00149730 27BD0020 */   addiu $sp, $sp, 0x20
 
-func_00149734:
 /* 0DFE34 00149734 27BDFFC8 */  addiu $sp, $sp, -0x38
 /* 0DFE38 00149738 AFB10024 */  sw    $s1, 0x24($sp)
 /* 0DFE3C 0014973C 3C118016 */  lui   $s1, %hi(D_80159AD0) # $s1, 0x8016
@@ -99,13 +98,11 @@ func_001497FC:
 /* 0DFF20 00149820 03E00008 */  jr    $ra
 /* 0DFF24 00149824 27BD0018 */   addiu $sp, $sp, 0x18
 
-func_00149828:
 /* 0DFF28 00149828 3C028016 */  lui   $v0, %hi(D_80159AD4) # $v0, 0x8016
 /* 0DFF2C 0014982C 8C429AD4 */  lw    $v0, %lo(D_80159AD4)($v0)
 /* 0DFF30 00149830 03E00008 */  jr    $ra
 /* 0DFF34 00149834 00000000 */   nop   
 
-func_00149838:
 /* 0DFF38 00149838 3C028007 */  lui   $v0, %hi(D_8007419C) # $v0, 0x8007
 /* 0DFF3C 0014983C 8C42419C */  lw    $v0, %lo(D_8007419C)($v0)
 /* 0DFF40 00149840 27BDFFE0 */  addiu $sp, $sp, -0x20
@@ -920,9 +917,8 @@ func_0014A1B4:
 /* 0E0A3C 0014A33C 46000005 */  abs.s $f0, $f0
 /* 0E0A40 0014A340 4600103C */  c.lt.s $f2, $f0
 /* 0E0A44 0014A344 00000000 */  nop   
-/* 0E0A48 0014A348 45030001 */  bc1tl .L0014A350
-/* 0E0A4C 0014A34C 46001006 */   mov.s $f0, $f2
-.L0014A350:
+/* 0E0A48 0014A348 45030001 */  .byte 0x45,0x03,0x00,0x01 /* Because of invalid n64 opcode bc1tl */
+/* 0E0A4C 0014A34C 46001006 */  .L0014A350:
 /* 0E0A50 0014A350 3C0144BB */  li    $at, 0x44BB0000 # 1496.000000
 /* 0E0A54 0014A354 34218000 */  ori   $at, (0x44BB8000 & 0xFFFF) # ori $at, $at, 0x8000
 /* 0E0A58 0014A358 44811000 */  mtc1  $at, $f2
@@ -1014,7 +1010,6 @@ func_0014A430:
 /* 0E0B90 0014A490 03E00008 */  jr    $ra
 /* 0E0B94 0014A494 2402FFFF */   li    $v0, -1
 
-func_0014A498:
 /* 0E0B98 0014A498 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0E0B9C 0014A49C AFBF0010 */  sw    $ra, 0x10($sp)
 /* 0E0BA0 0014A4A0 0000282D */  move  $a1, $zero
@@ -1055,7 +1050,6 @@ func_0014A498:
 /* 0E0C24 0014A524 03E00008 */  jr    $ra
 /* 0E0C28 0014A528 27BD0018 */   addiu $sp, $sp, 0x18
 
-func_0014A52C:
 /* 0E0C2C 0014A52C 24020008 */  li    $v0, 8
 /* 0E0C30 0014A530 3C018016 */  lui   $at, %hi(D_80159AE2) # $at, 0x8016
 /* 0E0C34 0014A534 A4229AE2 */  sh    $v0, %lo(D_80159AE2)($at)
@@ -1064,7 +1058,6 @@ func_0014A52C:
 /* 0E0C40 0014A540 03E00008 */  jr    $ra
 /* 0E0C44 0014A544 00000000 */   nop   
 
-func_0014A548:
 /* 0E0C48 0014A548 27BDFFC8 */  addiu $sp, $sp, -0x38
 /* 0E0C4C 0014A54C AFB1001C */  sw    $s1, 0x1c($sp)
 /* 0E0C50 0014A550 3C118016 */  lui   $s1, %hi(D_80159AF0) # $s1, 0x8016
@@ -1577,7 +1570,6 @@ func_0014ABFC:
 /* 0E1300 0014AC00 03E00008 */  jr    $ra
 /* 0E1304 0014AC04 27BD0018 */   addiu $sp, $sp, 0x18
 
-func_0014AC08:
 /* 0E1308 0014AC08 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0E130C 0014AC0C 0000202D */  move  $a0, $zero
 /* 0E1310 0014AC10 2405FFFF */  li    $a1, -1
@@ -1600,14 +1592,12 @@ func_0014AC08:
 /* 0E1354 0014AC54 03E00008 */  jr    $ra
 /* 0E1358 0014AC58 27BD0020 */   addiu $sp, $sp, 0x20
 
-func_0014AC5C:
 /* 0E135C 0014AC5C 24020004 */  li    $v0, 4
 /* 0E1360 0014AC60 3C018016 */  lui   $at, %hi(D_80159AE4) # $at, 0x8016
 /* 0E1364 0014AC64 A4229AE4 */  sh    $v0, %lo(D_80159AE4)($at)
 /* 0E1368 0014AC68 03E00008 */  jr    $ra
 /* 0E136C 0014AC6C 00000000 */   nop   
 
-func_0014AC70:
 /* 0E1370 0014AC70 24020008 */  li    $v0, 8
 /* 0E1374 0014AC74 3C018016 */  lui   $at, %hi(D_80159AE4) # $at, 0x8016
 /* 0E1378 0014AC78 A4229AE4 */  sh    $v0, %lo(D_80159AE4)($at)
@@ -1937,16 +1927,11 @@ func_0014AF8C:
 /* 0E1804 0014B104 FFFFFF78 */  sd    $ra, -0x88($ra)
 /* 0E1808 0014B108 FC147E28 */  sd    $s4, 0x7e28($zero)
 /* 0E180C 0014B10C 44FE793C */  .byte 0x44, 0xfe, 0x79, 0x3c
-/* 0E1810 0014B110 FC147FFF */  sd    $s4, 0x7fff($zero)
-/* 0E1814 0014B114 4FFE7838 */  nmsub.s $f0, $f31, $f15, $f30
-/* 0E1818 0014B118 FC147FFF */  sd    $s4, 0x7fff($zero)
-/* 0E181C 0014B11C 4FFE7838 */  nmsub.s $f0, $f31, $f15, $f30
-/* 0E1820 0014B120 FC147E0A */  sd    $s4, 0x7e0a($zero)
-/* 0E1824 0014B124 4FFE72F8 */  nmsub.s $f11, $f31, $f14, $f30
-/* 0E1828 0014B128 FC147E03 */  sd    $s4, 0x7e03($zero)
-/* 0E182C 0014B12C 4FFE7978 */  nmsub.s $f5, $f31, $f15, $f30
-/* 0E1830 0014B130 FCFFFFFF */  sd    $ra, -1($a3)
-/* 0E1834 0014B134 FFFCF279 */  sd    $gp, -0xd87($ra)
+/* 0E1810 0014B110 FC147FFF */  /* 0E1814 0014B114 4FFE7838 */  .byte 0x4F,0xFE,0x78,0x38 /* Because of invalid n64 opcode nmsub.s */
+/* 0E1818 0014B118 FC147FFF */  /* 0E181C 0014B11C 4FFE7838 */  .byte 0x4F,0xFE,0x78,0x38 /* Because of invalid n64 opcode nmsub.s */
+/* 0E1820 0014B120 FC147E0A */  /* 0E1824 0014B124 4FFE72F8 */  .byte 0x4F,0xFE,0x72,0xF8 /* Because of invalid n64 opcode nmsub.s */
+/* 0E1828 0014B128 FC147E03 */  /* 0E182C 0014B12C 4FFE7978 */  .byte 0x4F,0xFE,0x79,0x78 /* Because of invalid n64 opcode nmsub.s */
+/* 0E1830 0014B130 FCFFFFFF */  /* 0E1834 0014B134 FFFCF279 */  sd    $gp, -0xd87($ra)
 /* 0E1838 0014B138 FCFFFFFF */  sd    $ra, -1($a3)
 /* 0E183C 0014B13C FFFCF238 */  sd    $gp, -0xdc8($ra)
 /* 0E1840 0014B140 FCFFFFFF */  sd    $ra, -1($a3)
@@ -1957,36 +1942,21 @@ func_0014AF8C:
 /* 0E1854 0014B154 FFFCF378 */  sd    $gp, -0xc88($ra)
 /* 0E1858 0014B158 FC26A004 */  sd    $a2, -0x5ffc($at)
 /* 0E185C 0014B15C 1F1093FF */  .byte 0x1f, 0x10, 0x93, 0xff
-/* 0E1860 0014B160 FC26A004 */  sd    $a2, -0x5ffc($at)
-/* 0E1864 0014B164 1FFC93F8 */  .byte 0x1f, 0xfc, 0x93, 0xf8
-/* 0E1868 0014B168 FC26A004 */  sd    $a2, -0x5ffc($at)
-/* 0E186C 0014B16C 1F1093FF */  .byte 0x1f, 0x10, 0x93, 0xff
-/* 0E1870 0014B170 FC26A004 */  sd    $a2, -0x5ffc($at)
-/* 0E1874 0014B174 1FFC92F8 */  .byte 0x1f, 0xfc, 0x92, 0xf8
-/* 0E1878 0014B178 FC26A003 */  sd    $a2, -0x5ffd($at)
-/* 0E187C 0014B17C 1FFC9378 */  .byte 0x1f, 0xfc, 0x93, 0x78
-/* 0E1880 0014B180 FC26A004 */  sd    $a2, -0x5ffc($at)
-/* 0E1884 0014B184 1F1093FF */  .byte 0x1f, 0x10, 0x93, 0xff
-/* 0E1888 0014B188 FC26A004 */  sd    $a2, -0x5ffc($at)
-/* 0E188C 0014B18C 1FFC93F8 */  .byte 0x1f, 0xfc, 0x93, 0xf8
-/* 0E1890 0014B190 FC26A004 */  sd    $a2, -0x5ffc($at)
-/* 0E1894 0014B194 1F1093FF */  .byte 0x1f, 0x10, 0x93, 0xff
-/* 0E1898 0014B198 FC26A004 */  sd    $a2, -0x5ffc($at)
-/* 0E189C 0014B19C 1FFC92F8 */  .byte 0x1f, 0xfc, 0x92, 0xf8
-/* 0E18A0 0014B1A0 FC26A003 */  sd    $a2, -0x5ffd($at)
-/* 0E18A4 0014B1A4 1FFC9378 */  .byte 0x1f, 0xfc, 0x93, 0x78
-/* 0E18A8 0014B1A8 FC26A004 */  sd    $a2, -0x5ffc($at)
-/* 0E18AC 0014B1AC 1F1093FF */  .byte 0x1f, 0x10, 0x93, 0xff
-/* 0E18B0 0014B1B0 FC26A004 */  sd    $a2, -0x5ffc($at)
-/* 0E18B4 0014B1B4 1FFC93F8 */  .byte 0x1f, 0xfc, 0x93, 0xf8
-/* 0E18B8 0014B1B8 FC26A004 */  sd    $a2, -0x5ffc($at)
-/* 0E18BC 0014B1BC 1F1093FF */  .byte 0x1f, 0x10, 0x93, 0xff
-/* 0E18C0 0014B1C0 FC26A004 */  sd    $a2, -0x5ffc($at)
-/* 0E18C4 0014B1C4 1FFC92F8 */  .byte 0x1f, 0xfc, 0x92, 0xf8
-/* 0E18C8 0014B1C8 FC26A003 */  sd    $a2, -0x5ffd($at)
-/* 0E18CC 0014B1CC 1FFC9378 */  .byte 0x1f, 0xfc, 0x93, 0x78
-/* 0E18D0 0014B1D0 FC20A204 */  sd    $zero, -0x5dfc($at)
-/* 0E18D4 0014B1D4 FF13FFFF */  sd    $s3, -1($t8)
+/* 0E1860 0014B160 FC26A004 */  /* 0E1864 0014B164 1FFC93F8 */  .byte 0x1f, 0xfc, 0x93, 0xf8
+/* 0E1868 0014B168 FC26A004 */  /* 0E186C 0014B16C 1F1093FF */  .byte 0x1f, 0x10, 0x93, 0xff
+/* 0E1870 0014B170 FC26A004 */  /* 0E1874 0014B174 1FFC92F8 */  .byte 0x1f, 0xfc, 0x92, 0xf8
+/* 0E1878 0014B178 FC26A003 */  /* 0E187C 0014B17C 1FFC9378 */  .byte 0x1f, 0xfc, 0x93, 0x78
+/* 0E1880 0014B180 FC26A004 */  /* 0E1884 0014B184 1F1093FF */  .byte 0x1f, 0x10, 0x93, 0xff
+/* 0E1888 0014B188 FC26A004 */  /* 0E188C 0014B18C 1FFC93F8 */  .byte 0x1f, 0xfc, 0x93, 0xf8
+/* 0E1890 0014B190 FC26A004 */  /* 0E1894 0014B194 1F1093FF */  .byte 0x1f, 0x10, 0x93, 0xff
+/* 0E1898 0014B198 FC26A004 */  /* 0E189C 0014B19C 1FFC92F8 */  .byte 0x1f, 0xfc, 0x92, 0xf8
+/* 0E18A0 0014B1A0 FC26A003 */  /* 0E18A4 0014B1A4 1FFC9378 */  .byte 0x1f, 0xfc, 0x93, 0x78
+/* 0E18A8 0014B1A8 FC26A004 */  /* 0E18AC 0014B1AC 1F1093FF */  .byte 0x1f, 0x10, 0x93, 0xff
+/* 0E18B0 0014B1B0 FC26A004 */  /* 0E18B4 0014B1B4 1FFC93F8 */  .byte 0x1f, 0xfc, 0x93, 0xf8
+/* 0E18B8 0014B1B8 FC26A004 */  /* 0E18BC 0014B1BC 1F1093FF */  .byte 0x1f, 0x10, 0x93, 0xff
+/* 0E18C0 0014B1C0 FC26A004 */  /* 0E18C4 0014B1C4 1FFC92F8 */  .byte 0x1f, 0xfc, 0x92, 0xf8
+/* 0E18C8 0014B1C8 FC26A003 */  /* 0E18CC 0014B1CC 1FFC9378 */  .byte 0x1f, 0xfc, 0x93, 0x78
+/* 0E18D0 0014B1D0 FC20A204 */  /* 0E18D4 0014B1D4 FF13FFFF */  sd    $s3, -1($t8)
 /* 0E18D8 0014B1D8 FC111404 */  sd    $s1, 0x1404($zero)
 /* 0E18DC 0014B1DC FFFFFFF8 */  sd    $ra, -8($ra)
 /* 0E18E0 0014B1E0 FC20A204 */  sd    $zero, -0x5dfc($at)
@@ -2079,24 +2049,15 @@ func_0014AF8C:
 /* 0E1A3C 0014B33C 11FCF279 */  beq   $t7, $gp, .L00147D24
 /* 0E1A40 0014B340 FC61FFFF */   sd    $at, -1($v1)
 /* 0E1A44 0014B344 1FFCF238 */  .byte 0x1f, 0xfc, 0xf2, 0x38
-/* 0E1A48 0014B348 FC61FFFF */  sd    $at, -1($v1)
-/* 0E1A4C 0014B34C 1FFCF238 */  .byte 0x1f, 0xfc, 0xf2, 0x38
-/* 0E1A50 0014B350 FC61FFFF */  sd    $at, -1($v1)
-/* 0E1A54 0014B354 1FFCF238 */  .byte 0x1f, 0xfc, 0xf2, 0x38
-/* 0E1A58 0014B358 FC61FE03 */  sd    $at, -0x1fd($v1)
-/* 0E1A5C 0014B35C 1FFCF378 */  .byte 0x1f, 0xfc, 0xf3, 0x78
-/* 0E1A60 0014B360 FC10E228 */  sd    $s0, -0x1dd8($zero)
-/* 0E1A64 0014B364 40C8A449 */  .byte 0x40, 0xc8, 0xa4, 0x49
-/* 0E1A68 0014B368 FC10E228 */  sd    $s0, -0x1dd8($zero)
-/* 0E1A6C 0014B36C 40C8A449 */  .byte 0x40, 0xc8, 0xa4, 0x49
-/* 0E1A70 0014B370 FC10E228 */  sd    $s0, -0x1dd8($zero)
-/* 0E1A74 0014B374 40C8A449 */  .byte 0x40, 0xc8, 0xa4, 0x49
-/* 0E1A78 0014B378 FC10E228 */  sd    $s0, -0x1dd8($zero)
-/* 0E1A7C 0014B37C 40C8A449 */  .byte 0x40, 0xc8, 0xa4, 0x49
-/* 0E1A80 0014B380 FC10E228 */  sd    $s0, -0x1dd8($zero)
-/* 0E1A84 0014B384 40C8A449 */  .byte 0x40, 0xc8, 0xa4, 0x49
-/* 0E1A88 0014B388 FC75FEEB */  sd    $s5, -0x115($v1)
-/* 0E1A8C 0014B38C FFFFFDFE */  sd    $ra, -0x202($ra)
+/* 0E1A48 0014B348 FC61FFFF */  /* 0E1A4C 0014B34C 1FFCF238 */  .byte 0x1f, 0xfc, 0xf2, 0x38
+/* 0E1A50 0014B350 FC61FFFF */  /* 0E1A54 0014B354 1FFCF238 */  .byte 0x1f, 0xfc, 0xf2, 0x38
+/* 0E1A58 0014B358 FC61FE03 */  /* 0E1A5C 0014B35C 1FFCF378 */  .byte 0x1f, 0xfc, 0xf3, 0x78
+/* 0E1A60 0014B360 FC10E228 */  /* 0E1A64 0014B364 40C8A449 */  .byte 0x40, 0xc8, 0xa4, 0x49
+/* 0E1A68 0014B368 FC10E228 */  /* 0E1A6C 0014B36C 40C8A449 */  .byte 0x40, 0xc8, 0xa4, 0x49
+/* 0E1A70 0014B370 FC10E228 */  /* 0E1A74 0014B374 40C8A449 */  .byte 0x40, 0xc8, 0xa4, 0x49
+/* 0E1A78 0014B378 FC10E228 */  /* 0E1A7C 0014B37C 40C8A449 */  .byte 0x40, 0xc8, 0xa4, 0x49
+/* 0E1A80 0014B380 FC10E228 */  /* 0E1A84 0014B384 40C8A449 */  .byte 0x40, 0xc8, 0xa4, 0x49
+/* 0E1A88 0014B388 FC75FEEB */  /* 0E1A8C 0014B38C FFFFFDFE */  sd    $ra, -0x202($ra)
 /* 0E1A90 0014B390 FC75FEEB */  sd    $s5, -0x115($v1)
 /* 0E1A94 0014B394 FFFFFDFE */  sd    $ra, -0x202($ra)
 /* 0E1A98 0014B398 FC75FEEB */  sd    $s5, -0x115($v1)
@@ -2147,16 +2108,11 @@ func_0014AF8C:
 /* 0E1B4C 0014B44C FFFFF378 */  sd    $ra, -0xc88($ra)
 /* 0E1B50 0014B450 FC147E28 */  sd    $s4, 0x7e28($zero)
 /* 0E1B54 0014B454 44FE793C */  .byte 0x44, 0xfe, 0x79, 0x3c
-/* 0E1B58 0014B458 FC147FFF */  sd    $s4, 0x7fff($zero)
-/* 0E1B5C 0014B45C 4FFE7838 */  nmsub.s $f0, $f31, $f15, $f30
-/* 0E1B60 0014B460 FC147FFF */  sd    $s4, 0x7fff($zero)
-/* 0E1B64 0014B464 4FFE7838 */  nmsub.s $f0, $f31, $f15, $f30
-/* 0E1B68 0014B468 FC147E0A */  sd    $s4, 0x7e0a($zero)
-/* 0E1B6C 0014B46C 4FFE72F8 */  nmsub.s $f11, $f31, $f14, $f30
-/* 0E1B70 0014B470 FC147E03 */  sd    $s4, 0x7e03($zero)
-/* 0E1B74 0014B474 4FFE7978 */  nmsub.s $f5, $f31, $f15, $f30
-/* 0E1B78 0014B478 FCFFFFFF */  sd    $ra, -1($a3)
-/* 0E1B7C 0014B47C FFFCF279 */  sd    $gp, -0xd87($ra)
+/* 0E1B58 0014B458 FC147FFF */  /* 0E1B5C 0014B45C 4FFE7838 */  .byte 0x4F,0xFE,0x78,0x38 /* Because of invalid n64 opcode nmsub.s */
+/* 0E1B60 0014B460 FC147FFF */  /* 0E1B64 0014B464 4FFE7838 */  .byte 0x4F,0xFE,0x78,0x38 /* Because of invalid n64 opcode nmsub.s */
+/* 0E1B68 0014B468 FC147E0A */  /* 0E1B6C 0014B46C 4FFE72F8 */  .byte 0x4F,0xFE,0x72,0xF8 /* Because of invalid n64 opcode nmsub.s */
+/* 0E1B70 0014B470 FC147E03 */  /* 0E1B74 0014B474 4FFE7978 */  .byte 0x4F,0xFE,0x79,0x78 /* Because of invalid n64 opcode nmsub.s */
+/* 0E1B78 0014B478 FCFFFFFF */  /* 0E1B7C 0014B47C FFFCF279 */  sd    $gp, -0xd87($ra)
 /* 0E1B80 0014B480 FCFFFFFF */  sd    $ra, -1($a3)
 /* 0E1B84 0014B484 FFFCF238 */  sd    $gp, -0xdc8($ra)
 /* 0E1B88 0014B488 FCFFFFFF */  sd    $ra, -1($a3)
@@ -2167,36 +2123,21 @@ func_0014AF8C:
 /* 0E1B9C 0014B49C FFFCF378 */  sd    $gp, -0xc88($ra)
 /* 0E1BA0 0014B4A0 FC26A004 */  sd    $a2, -0x5ffc($at)
 /* 0E1BA4 0014B4A4 1FFC93FC */  .byte 0x1f, 0xfc, 0x93, 0xfc
-/* 0E1BA8 0014B4A8 FC26A004 */  sd    $a2, -0x5ffc($at)
-/* 0E1BAC 0014B4AC 1FFC93F8 */  .byte 0x1f, 0xfc, 0x93, 0xf8
-/* 0E1BB0 0014B4B0 FC26A004 */  sd    $a2, -0x5ffc($at)
-/* 0E1BB4 0014B4B4 1FFC93FC */  .byte 0x1f, 0xfc, 0x93, 0xfc
-/* 0E1BB8 0014B4B8 FC26A004 */  sd    $a2, -0x5ffc($at)
-/* 0E1BBC 0014B4BC 1FFC92F8 */  .byte 0x1f, 0xfc, 0x92, 0xf8
-/* 0E1BC0 0014B4C0 FC26A003 */  sd    $a2, -0x5ffd($at)
-/* 0E1BC4 0014B4C4 1FFC9378 */  .byte 0x1f, 0xfc, 0x93, 0x78
-/* 0E1BC8 0014B4C8 FC26A004 */  sd    $a2, -0x5ffc($at)
-/* 0E1BCC 0014B4CC 1F1093FF */  .byte 0x1f, 0x10, 0x93, 0xff
-/* 0E1BD0 0014B4D0 FC26A004 */  sd    $a2, -0x5ffc($at)
-/* 0E1BD4 0014B4D4 1FFC93F8 */  .byte 0x1f, 0xfc, 0x93, 0xf8
-/* 0E1BD8 0014B4D8 FC26A004 */  sd    $a2, -0x5ffc($at)
-/* 0E1BDC 0014B4DC 1F1093FF */  .byte 0x1f, 0x10, 0x93, 0xff
-/* 0E1BE0 0014B4E0 FC26A004 */  sd    $a2, -0x5ffc($at)
-/* 0E1BE4 0014B4E4 1FFC92F8 */  .byte 0x1f, 0xfc, 0x92, 0xf8
-/* 0E1BE8 0014B4E8 FC26A003 */  sd    $a2, -0x5ffd($at)
-/* 0E1BEC 0014B4EC 1FFC9378 */  .byte 0x1f, 0xfc, 0x93, 0x78
-/* 0E1BF0 0014B4F0 FC26A004 */  sd    $a2, -0x5ffc($at)
-/* 0E1BF4 0014B4F4 1F1093FF */  .byte 0x1f, 0x10, 0x93, 0xff
-/* 0E1BF8 0014B4F8 FC26A004 */  sd    $a2, -0x5ffc($at)
-/* 0E1BFC 0014B4FC 1FFC93F8 */  .byte 0x1f, 0xfc, 0x93, 0xf8
-/* 0E1C00 0014B500 FC26A004 */  sd    $a2, -0x5ffc($at)
-/* 0E1C04 0014B504 1F1093FF */  .byte 0x1f, 0x10, 0x93, 0xff
-/* 0E1C08 0014B508 FC26A004 */  sd    $a2, -0x5ffc($at)
-/* 0E1C0C 0014B50C 1FFC92F8 */  .byte 0x1f, 0xfc, 0x92, 0xf8
-/* 0E1C10 0014B510 FC26A003 */  sd    $a2, -0x5ffd($at)
-/* 0E1C14 0014B514 1FFC9378 */  .byte 0x1f, 0xfc, 0x93, 0x78
-/* 0E1C18 0014B518 FC20A204 */  sd    $zero, -0x5dfc($at)
-/* 0E1C1C 0014B51C FFFFFFF8 */  sd    $ra, -8($ra)
+/* 0E1BA8 0014B4A8 FC26A004 */  /* 0E1BAC 0014B4AC 1FFC93F8 */  .byte 0x1f, 0xfc, 0x93, 0xf8
+/* 0E1BB0 0014B4B0 FC26A004 */  /* 0E1BB4 0014B4B4 1FFC93FC */  .byte 0x1f, 0xfc, 0x93, 0xfc
+/* 0E1BB8 0014B4B8 FC26A004 */  /* 0E1BBC 0014B4BC 1FFC92F8 */  .byte 0x1f, 0xfc, 0x92, 0xf8
+/* 0E1BC0 0014B4C0 FC26A003 */  /* 0E1BC4 0014B4C4 1FFC9378 */  .byte 0x1f, 0xfc, 0x93, 0x78
+/* 0E1BC8 0014B4C8 FC26A004 */  /* 0E1BCC 0014B4CC 1F1093FF */  .byte 0x1f, 0x10, 0x93, 0xff
+/* 0E1BD0 0014B4D0 FC26A004 */  /* 0E1BD4 0014B4D4 1FFC93F8 */  .byte 0x1f, 0xfc, 0x93, 0xf8
+/* 0E1BD8 0014B4D8 FC26A004 */  /* 0E1BDC 0014B4DC 1F1093FF */  .byte 0x1f, 0x10, 0x93, 0xff
+/* 0E1BE0 0014B4E0 FC26A004 */  /* 0E1BE4 0014B4E4 1FFC92F8 */  .byte 0x1f, 0xfc, 0x92, 0xf8
+/* 0E1BE8 0014B4E8 FC26A003 */  /* 0E1BEC 0014B4EC 1FFC9378 */  .byte 0x1f, 0xfc, 0x93, 0x78
+/* 0E1BF0 0014B4F0 FC26A004 */  /* 0E1BF4 0014B4F4 1F1093FF */  .byte 0x1f, 0x10, 0x93, 0xff
+/* 0E1BF8 0014B4F8 FC26A004 */  /* 0E1BFC 0014B4FC 1FFC93F8 */  .byte 0x1f, 0xfc, 0x93, 0xf8
+/* 0E1C00 0014B500 FC26A004 */  /* 0E1C04 0014B504 1F1093FF */  .byte 0x1f, 0x10, 0x93, 0xff
+/* 0E1C08 0014B508 FC26A004 */  /* 0E1C0C 0014B50C 1FFC92F8 */  .byte 0x1f, 0xfc, 0x92, 0xf8
+/* 0E1C10 0014B510 FC26A003 */  /* 0E1C14 0014B514 1FFC9378 */  .byte 0x1f, 0xfc, 0x93, 0x78
+/* 0E1C18 0014B518 FC20A204 */  /* 0E1C1C 0014B51C FFFFFFF8 */  sd    $ra, -8($ra)
 /* 0E1C20 0014B520 FC111404 */  sd    $s1, 0x1404($zero)
 /* 0E1C24 0014B524 FFFFFFF8 */  sd    $ra, -8($ra)
 /* 0E1C28 0014B528 FC20A204 */  sd    $zero, -0x5dfc($at)
@@ -2289,19 +2230,11 @@ func_0014AF8C:
 /* 0E1D84 0014B684 11FCF279 */  beq   $t7, $gp, .L0014806C
 /* 0E1D88 0014B688 FC61FFFF */   sd    $at, -1($v1)
 /* 0E1D8C 0014B68C 1FFCF238 */  .byte 0x1f, 0xfc, 0xf2, 0x38
-/* 0E1D90 0014B690 FC61FFFF */  sd    $at, -1($v1)
-/* 0E1D94 0014B694 1FFCF238 */  .byte 0x1f, 0xfc, 0xf2, 0x38
-/* 0E1D98 0014B698 FC61FFFF */  sd    $at, -1($v1)
-/* 0E1D9C 0014B69C 1FFCF238 */  .byte 0x1f, 0xfc, 0xf2, 0x38
-/* 0E1DA0 0014B6A0 FC61FE03 */  sd    $at, -0x1fd($v1)
-/* 0E1DA4 0014B6A4 1FFCF378 */  .byte 0x1f, 0xfc, 0xf3, 0x78
-/* 0E1DA8 0014B6A8 FC10E228 */  sd    $s0, -0x1dd8($zero)
-/* 0E1DAC 0014B6AC 40C8A449 */  .byte 0x40, 0xc8, 0xa4, 0x49
-/* 0E1DB0 0014B6B0 FC10E228 */  sd    $s0, -0x1dd8($zero)
-/* 0E1DB4 0014B6B4 40C8A449 */  .byte 0x40, 0xc8, 0xa4, 0x49
-/* 0E1DB8 0014B6B8 FC10E228 */  sd    $s0, -0x1dd8($zero)
-/* 0E1DBC 0014B6BC 40C8A449 */  .byte 0x40, 0xc8, 0xa4, 0x49
-/* 0E1DC0 0014B6C0 FC10E228 */  sd    $s0, -0x1dd8($zero)
-/* 0E1DC4 0014B6C4 40C8A449 */  .byte 0x40, 0xc8, 0xa4, 0x49
-/* 0E1DC8 0014B6C8 FC10E228 */  sd    $s0, -0x1dd8($zero)
-/* 0E1DCC 0014B6CC 40C8A449 */  .byte 0x40, 0xc8, 0xa4, 0x49
+/* 0E1D90 0014B690 FC61FFFF */  /* 0E1D94 0014B694 1FFCF238 */  .byte 0x1f, 0xfc, 0xf2, 0x38
+/* 0E1D98 0014B698 FC61FFFF */  /* 0E1D9C 0014B69C 1FFCF238 */  .byte 0x1f, 0xfc, 0xf2, 0x38
+/* 0E1DA0 0014B6A0 FC61FE03 */  /* 0E1DA4 0014B6A4 1FFCF378 */  .byte 0x1f, 0xfc, 0xf3, 0x78
+/* 0E1DA8 0014B6A8 FC10E228 */  /* 0E1DAC 0014B6AC 40C8A449 */  .byte 0x40, 0xc8, 0xa4, 0x49
+/* 0E1DB0 0014B6B0 FC10E228 */  /* 0E1DB4 0014B6B4 40C8A449 */  .byte 0x40, 0xc8, 0xa4, 0x49
+/* 0E1DB8 0014B6B8 FC10E228 */  /* 0E1DBC 0014B6BC 40C8A449 */  .byte 0x40, 0xc8, 0xa4, 0x49
+/* 0E1DC0 0014B6C0 FC10E228 */  /* 0E1DC4 0014B6C4 40C8A449 */  .byte 0x40, 0xc8, 0xa4, 0x49
+/* 0E1DC8 0014B6C8 FC10E228 */  /* 0E1DCC 0014B6CC 40C8A449 */  .byte 0x40, 0xc8, 0xa4, 0x49
