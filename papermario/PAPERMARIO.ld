@@ -39,14 +39,9 @@ SECTIONS
       * (.text001256D0);
    }
 
-   /* 0x001276D0 0BDDD0-0BFDD0 [2000] */
+   /* 0x001276D0 0BDDD0-0C1DD0 [4000] */
    .text001276D0 0x001276D0 : AT(0x0BDDD0) {
       * (.text001276D0);
-   }
-
-   /* 0x001296D0 0BFDD0-0C1DD0 [2000] */
-   .text001296D0 0x001296D0 : AT(0x0BFDD0) {
-      * (.text001296D0);
    }
 
    /* 0x0012B6D0 0C1DD0-0C3DD0 [2000] */

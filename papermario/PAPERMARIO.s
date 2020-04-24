@@ -139,8 +139,7 @@ ___b9dd0_len_2000:
 .incbin "bin/PAPERMARIO.0B9DD0.___b9dd0_len_2000.bin"
 ___b9dd0_len_2000_end:
 .include "asm/CODE_bbdd0_len_2000.s" 
-.include "asm/CODE_bddd0_len_2000.s" 
-.include "asm/CODE_bfdd0_len_2000.s" 
+.include "asm/CODE_bddd0_len_4000.s" 
 .include "asm/CODE_c1dd0_len_2000.s" 
 .include "asm/CODE_c3dd0_len_2000.s" 
 .include "asm/CODE_c5dd0_len_2000.s" 
@@ -223,9 +222,15 @@ ___1144b0_len_500_end:
 ___11a240_len_200:
 .incbin "bin/PAPERMARIO.11A240.___11a240_len_200.bin"
 ___11a240_len_200_end:
-# Unknown region 11A440-135340 [1AF00]
+# Unknown region 11A440-131340 [16F00]
 .incbin "bin/PAPERMARIO.11A440.bin"
 
+CODE_131340_len_2000:
+.incbin "bin/PAPERMARIO.131340.CODE_131340_len_2000.bin"
+CODE_131340_len_2000_end:
+CODE_133340_len_2000:
+.incbin "bin/PAPERMARIO.133340.CODE_133340_len_2000.bin"
+CODE_133340_len_2000_end:
 ___135340_len_ba0:
 .incbin "bin/PAPERMARIO.135340.___135340_len_ba0.bin"
 ___135340_len_ba0_end:
