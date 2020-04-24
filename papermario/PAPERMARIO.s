@@ -910,7 +910,7 @@ ___40bba0_len_a00_end:
 .include "asm/CODE_7e0e80_len_2000.s" 
 .include "asm/CODE_7e2e80_len_2000.s" 
 ___7e4e80_len_2000:
-.incbin "bin/PAPERMARIO.7E4E80.___7e4e80_len_2000.bin"
+.incbin "bin/PAPERMARIO.7E4D00.___7e4e80_len_2000.bin"
 ___7e4e80_len_2000_end:
 ___7e6e80_len_520:
 .incbin "bin/PAPERMARIO.7E6E80.___7e6e80_len_520.bin"

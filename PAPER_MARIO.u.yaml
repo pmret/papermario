@@ -307,8 +307,8 @@ ranges:
   - [0x40b3f0, 0x40bba0, "bin",   "___40b3f0_len_7b0"] # (DRAM:0x00197000) (frame:0x00002B54)  header:  0x27000000 trace:
   - [0x40bba0, 0x40c5a0, "bin",   "___40bba0_len_a00"] # (DRAM:0x00315610) (frame:0x00002B54)  header:  0x0 trace:
   - [0x7e0e80, 0x7e2e80, "asm",   "CODE_7e0e80_len_2000", 0x00280000] # frame:0x0000027D header:  0x3c000000 trace: Tbl mapped:80281df4
-  - [0x7e2e80, 0x7e4e80, "asm",   "CODE_7e2e80_len_2000", 0x00282000] # frame:0x0000027D header:  0xc7000000 trace: Tbl mapped:80282274
-  - [0x7e4e80, 0x7e6e80, "bin",   "___7e4e80_len_2000"] # (DRAM:0x00284000) (frame:0x0000027D)  header:  0x0 trace:
+  - [0x7e2e80, 0x7e4d00, "asm",   "CODE_7e2e80_len_2000", 0x00282000] # frame:0x0000027D header:  0xc7000000 trace: Tbl mapped:80282274
+  - [0x7e4d00, 0x7e6e80, "bin",   "___7e4e80_len_2000"] # (DRAM:0x00284000) (frame:0x0000027D)  header:  0x0 trace:
   - [0x7e6e80, 0x7e73a0, "bin",   "___7e6e80_len_520"] # (DRAM:0x00286000) (frame:0x0000027D)  header:  0x0 trace:
   - [0x7ead10, 0x7ecd10, "bin",   "___7ead10_len_2000"] # (DRAM:0x00240000) (frame:0x00003019)  header:  0x3c000000 trace:
   - [0x7ecd10, 0x7eed10, "bin",   "___7ecd10_len_2000"] # (DRAM:0x00242000) (frame:0x00003019)  header:  0x0 trace:
