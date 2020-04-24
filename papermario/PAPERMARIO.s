@@ -132,19 +132,7 @@ ___b3dd0_len_2000_end:
 ___b5dd0_len_2000:
 .incbin "bin/PAPERMARIO.0B5DD0.___b5dd0_len_2000.bin"
 ___b5dd0_len_2000_end:
-___b7dd0_len_2000:
-.incbin "bin/PAPERMARIO.0B7DD0.___b7dd0_len_2000.bin"
-___b7dd0_len_2000_end:
-___b9dd0_len_2000:
-.incbin "bin/PAPERMARIO.0B9DD0.___b9dd0_len_2000.bin"
-___b9dd0_len_2000_end:
-.include "asm/CODE_bbdd0_len_2000.s" 
-.include "asm/CODE_bddd0_len_4000.s" 
-.include "asm/CODE_c1dd0_len_2000.s" 
-.include "asm/CODE_c3dd0_len_2000.s" 
-.include "asm/CODE_c5dd0_len_2000.s" 
-.include "asm/CODE_c7dd0_len_2000.s" 
-.include "asm/CODE_c9dd0_len_2000.s" 
+.include "asm/___b7dd0_len_2000.s" 
 .include "asm/CODE_cbdd0_len_2000.s" 
 .include "asm/CODE_cddd0_len_2000.s" 
 .include "asm/CODE_cfdd0_len_2000.s" 
