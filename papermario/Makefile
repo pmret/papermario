@@ -6,7 +6,7 @@
 BUILD_DIR = build
 
 ##################### Compiler Options #######################
-CROSS = mipsel-elf-
+CROSS = mips-linux-gnu-
 AS = $(CROSS)as
 CC = $(CROSS)gcc
 LD = $(CROSS)ld

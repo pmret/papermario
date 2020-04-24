@@ -67,8 +67,8 @@ ranges:
   - [0xd9dd0, 0xdbdd0, "asm",   "CODE_d9dd0_len_2000", 0x001436D0] # frame:0x00000001 header:  0x24000000 trace: Tbl mapped:801456cc
   - [0xdbdd0, 0xdddd0, "asm",   "CODE_dbdd0_len_2000", 0x001456D0] # frame:0x00000001 header:  0x24000000 trace: Tbl mapped:80147698
   - [0xdddd0, 0xdfdd0, "asm",   "CODE_dddd0_len_2000", 0x001476D0] # frame:0x00000001 header:  0x0 trace: Tbl mapped:801496b0
-  - [0xdfdd0, 0xe1dd0, "asm",   "CODE_dfdd0_len_2000", 0x001496D0] # frame:0x00000001 header:  0x8e000000 trace: Tbl mapped:8014ad34
-  - [0xe1dd0, 0xe3dd0, "bin",   "___e1dd0_len_2000"] # (DRAM:0x0014B6D0) (frame:0x00000001)  header:  0xfc000000 trace:
+  - [0xdfdd0, 0xe16b0, "asm",   "CODE_dfdd0_len_2000", 0x001496D0] # frame:0x00000001 header:  0x8e000000 trace: Tbl mapped:8014ad34
+  - [0xe16b0, 0xe3dd0, "bin",   "___e1dd0_len_2000"] # (DRAM:0x0014B6D0) (frame:0x00000001)  header:  0xfc000000 trace:
   - [0xe3dd0, 0xe5dd0, "bin",   "___e3dd0_len_2000"] # (DRAM:0x0014D6D0) (frame:0x00000001)  header:  0xff000000 trace:
   - [0xe5dd0, 0xe79b0, "bin",   "___e5dd0_len_1be0"] # (DRAM:0x0014F6D0) (frame:0x00000001)  header:  0x0 trace:
   - [0xe79b0, 0xe99b0, "asm",   "CODE_e79b0_len_2000", 0x002C3000] # frame:0x00000001 header:  0x27000000 trace: Tbl mapped:802c4fbc
@@ -104,8 +104,8 @@ ranges:
   # - [0x133340, 0x135340, "asm",   "CODE_133340_len_2000", 0x00240000] # frame:0x00001FB3 header:  0x0 trace: Tbl mapped:80241fb4
   - [0x135340, 0x135ee0, "asm",   "CODE_135340_len_ba0", 0x00242000] # frame:0x00001FB3 header:  0x0 trace: Tbl mapped:80242ba0
   - [0x163400, 0x167400, "asm",   "CODE_163400_len_4000", 0x00242BA0] # frame:0x00001FB3 header:  0x28000000 trace: Tbl mapped:80243758
-  - [0x167400, 0x16b400, "asm",   "CODE_167400_len_4000", 0x00246BA0] # frame:0x00001FB3 header:  0xac000000 trace: Tbl mapped:80249b38
-  - [0x16b400, 0x16c8e0, "bin",   "___16b400_len_14e0"] # (DRAM:0x0024ABA0) (frame:0x00001FB3)  header:  0x0 trace:
+  - [0x167400, 0x16a3e0, "asm",   "CODE_167400_len_4000", 0x00246BA0] # frame:0x00001FB3 header:  0xac000000 trace: Tbl mapped:80249b38
+  - [0x16a3e0, 0x16c8e0, "bin",   "___16b400_len_14e0"] # (DRAM:0x0024ABA0) (frame:0x00001FB3)  header:  0x0 trace:
   - [0x1e0350, 0x1e0550, "bin",   "___1e0350_len_200"] # (DRAM:0x002FE090) (frame:0x0000301F)  header:  0x0 trace:
   - [0x1e0550, 0x1e0570, "bin",   "_I__1e0550_len_20"] # (DRAM:0x002FE290) (frame:0x0000301F)  header: I 0x49000000 trace:
   - [0x1e1310, 0x1e1510, "bin",   "___1e1310_len_200"] # (DRAM:0x002FDE70) (frame:0x00003290)  header:  0x0 trace:
@@ -205,7 +205,7 @@ ranges:
   - [0x2435f0, 0x2455f0, "bin",   "___2435f0_len_2000"] # (DRAM:0x002A7BE0) (frame:0x00000286)  header:  0xf0000000 trace:
   - [0x2455f0, 0x2475f0, "bin",   "___2455f0_len_2000"] # (DRAM:0x002A9BE0) (frame:0x00000286)  header:  0xf0000000 trace:
   - [0x2475f0, 0x2495f0, "bin",   "___2475f0_len_2000"] # (DRAM:0x002ABBE0) (frame:0x00000286)  header:  0x0 trace:
-  - [0x2495f0, 0x24b5f0, "asm",   "CODE_2495f0_len_2000", 0x002ADBE0] # frame:0x00000286 header:  0x0 trace: Tbl mapped:802ae15c
+  - [0x2495f0, 0x24b5f0, "bin",   "___2495f0_len_2000"] # frame:0x00000286 header:  0x0 trace: Tbl mapped:802ae15c
   - [0x24b5f0, 0x24b7f0, "bin",   "___24b5f0_len_200"] # (DRAM:0x002AFBE0) (frame:0x00000286)  header:  0x94000000 trace:
   - [0x263a00, 0x263ad8, "bin",   "___263a00_len_d8"] # (DRAM:0x00319750) (frame:0x00002F57)  header:  0xff000000 trace:
   - [0x263ad8, 0x263bb0, "bin",   "___263ad8_len_d8"] # (DRAM:0x00319750) (frame:0x00002F59)  header:  0xff000000 trace:
@@ -366,9 +366,9 @@ ranges:
   - [0xabf290, 0xac1290, "bin",   "___abf290_len_2000"] # (DRAM:0x00244000) (frame:0x00003508)  header:  0x0 trace:
   - [0xac1290, 0xac3290, "bin",   "___ac1290_len_2000"] # (DRAM:0x00246000) (frame:0x00003508)  header:  0x0 trace:
   - [0xac3290, 0xac5170, "bin",   "___ac3290_len_1ee0"] # (DRAM:0x00248000) (frame:0x00003508)  header:  0x0 trace:
-  - [0xe20eb0, 0xe21870, "asm",   "CODE_e20eb0_len_9c0", 0x002B7000] # frame:0x00003767 header:  0x3c000000 trace: Tbl mapped:802b76f8
-  - [0xe23260, 0xe236e0, "asm",   "CODE_e23260_len_480", 0x002B6000] # frame:0x0000027E header:  0x27000000 trace: Tbl mapped:802b6478
-  # - [0xe236e0, 0xe24040, "asm",   "CODE_e236e0_len_960", 0x002B6000] # frame:0x00002948 header:  0x27000000 trace: Tbl mapped:802b6750
+  - [0xe20eb0, 0xe215c0, "asm",   "CODE_e20eb0_len_9c0", 0x002B7000] # frame:0x00003767 header:  0x3c000000 trace: Tbl mapped:802b76f8
+  - [0xe215c0, 0xe236e0, "bin",   "CODE_e23260_len_480", 0x002B6000] # frame:0x0000027E header:  0x27000000 trace: Tbl mapped:802b6478
+  - [0xe236e0, 0xe24040, "bin",   "CODE_e236e0_len_960", 0x002B6000] # frame:0x00002948 header:  0x27000000 trace: Tbl mapped:802b6750
   - [0xe24040, 0xe245d0, "bin",   "___e24040_len_590"] # (DRAM:0x002B6000) (frame:0x00001B20)  header:  0x27000000 trace:
   - [0xe24920, 0xe24ed0, "bin",   "___e24920_len_5b0"] # (DRAM:0x002B6000) (frame:0x00002F44)  header:  0x27000000 trace:
   - [0xe28a30, 0xe291a0, "bin",   "___e28a30_len_770"] # (DRAM:0x002B6000) (frame:0x000037ED)  header:  0x27000000 trace:

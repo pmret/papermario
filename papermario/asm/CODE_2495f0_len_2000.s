@@ -221,8 +221,9 @@
 /* 24997C 002ADF6C 00000000 */  nop   
 /* 249980 002ADF70 00000000 */  nop   
 /* 249984 002ADF74 C7C5C8C9 */  lwc1  $f5, -0x3737($fp)
-/* 249988 002ADF78 CA202020 */  .byte 0xCA,0x20,0x20,0x20 /* Because of invalid n64 opcode bbit0 */
-/* 24998C 002ADF7C 20202020 */  /* 249990 002ADF80 20202020 */  addi  $zero, $at, 0x2020
+/* 249988 002ADF78 CA202020 */  lwc2  $0, 0x2020($s1)
+/* 24998C 002ADF7C 20202020 */  addi  $zero, $at, 0x2020
+/* 249990 002ADF80 20202020 */  addi  $zero, $at, 0x2020
 /* 249994 002ADF84 20202020 */  addi  $zero, $at, 0x2020
 /* 249998 002ADF88 20202020 */  addi  $zero, $at, 0x2020
 /* 24999C 002ADF8C 20202020 */  addi  $zero, $at, 0x2020
@@ -251,8 +252,8 @@
 /* 2499FC 002ADFEC 00000000 */  nop   
 /* 249A00 002ADFF0 00000000 */  nop   
 /* 249A04 002ADFF4 008883CB */  .byte 0x00, 0x88, 0x83, 0xcb
-/* 249A08 002ADFF8 CA202020 */  .byte 0xCA,0x20,0x20,0x20 /* Because of invalid n64 opcode bbit0 */
-/* 249A0C 002ADFFC 20202020 */  func_002AE000:
+/* 249A08 002ADFF8 CA202020 */  /* 249A0C 002ADFFC 20202020 */  addi  $zero, $at, 0x2020
+func_002AE000:
 /* 249A10 002AE000 20202020 */  addi  $zero, $at, 0x2020
 /* 249A14 002AE004 20202020 */  addi  $zero, $at, 0x2020
 /* 249A18 002AE008 20202020 */  addi  $zero, $at, 0x2020
@@ -1029,8 +1030,9 @@
 /* 24A67C 002AEC6C 00000000 */  nop   
 /* 24A680 002AEC70 00000000 */  nop   
 /* 24A684 002AEC74 0000D3CD */  break 0, 0x34f
-/* 24A688 002AEC78 D9202020 */  .byte 0xD9,0x20,0x20,0x20 /* Because of invalid n64 opcode bbit032 */
-/* 24A68C 002AEC7C 20202020 */  /* 24A690 002AEC80 20202020 */  addi  $zero, $at, 0x2020
+/* 24A688 002AEC78 D9202020 */  ldc2  $0, 0x2020($t1)
+/* 24A68C 002AEC7C 20202020 */  addi  $zero, $at, 0x2020
+/* 24A690 002AEC80 20202020 */  addi  $zero, $at, 0x2020
 /* 24A694 002AEC84 20202020 */  addi  $zero, $at, 0x2020
 /* 24A698 002AEC88 20202020 */  addi  $zero, $at, 0x2020
 /* 24A69C 002AEC8C 20202020 */  addi  $zero, $at, 0x2020
@@ -1060,8 +1062,8 @@
 /* 24A6FC 002AECEC 00000000 */  nop   
 /* 24A700 002AECF0 00000000 */  nop   
 /* 24A704 002AECF4 000000D7 */  .byte 0x00, 0x00, 0x00, 0xd7
-/* 24A708 002AECF8 DBD52020 */  .byte 0xDB,0xD5,0x20,0x20 /* Because of invalid n64 opcode bbit032 */
-/* 24A70C 002AECFC 20202020 */  /* 24A710 002AED00 20202020 */  addi  $zero, $at, 0x2020
+/* 24A708 002AECF8 DBD52020 */  /* 24A70C 002AECFC 20202020 */  addi  $zero, $at, 0x2020
+/* 24A710 002AED00 20202020 */  addi  $zero, $at, 0x2020
 /* 24A714 002AED04 20202020 */  addi  $zero, $at, 0x2020
 /* 24A718 002AED08 20202020 */  addi  $zero, $at, 0x2020
 /* 24A71C 002AED0C 20202020 */  addi  $zero, $at, 0x2020
@@ -1109,8 +1111,9 @@
 /* 24A7C8 002AEDB8 20202020 */  addi  $zero, $at, 0x2020
 /* 24A7CC 002AEDBC 20202020 */  addi  $zero, $at, 0x2020
 /* 24A7D0 002AEDC0 20202020 */  addi  $zero, $at, 0x2020
-/* 24A7D4 002AEDC4 D9DBDB00 */  .byte 0xD9,0xDB,0xDB,0x00 /* Because of invalid n64 opcode bbit032 */
-/* 24A7D8 002AEDC8 00000000 */  /* 24A7DC 002AEDCC 00000000 */  nop   
+/* 24A7D4 002AEDC4 D9DBDB00 */  ldc2  $27, -0x2500($t6)
+/* 24A7D8 002AEDC8 00000000 */  nop   
+/* 24A7DC 002AEDCC 00000000 */  nop   
 /* 24A7E0 002AEDD0 00000000 */  nop   
 /* 24A7E4 002AEDD4 00000000 */  nop   
 /* 24A7E8 002AEDD8 00000000 */  nop   
@@ -1172,9 +1175,9 @@
 /* 24A8C8 002AEEB8 20202020 */  addi  $zero, $at, 0x2020
 /* 24A8CC 002AEEBC 20202020 */  addi  $zero, $at, 0x2020
 /* 24A8D0 002AEEC0 2020B3D8 */  addi  $zero, $at, -0x4c28
-/* 24A8D4 002AEEC4 DBD30000 */  .byte 0xDB,0xD3,0x00,0x00 /* Because of invalid n64 opcode bbit032 */
-.L002AEEC8:
-/* 24A8D8 002AEEC8 00000000 */  /* 24A8DC 002AEECC 00000000 */  nop   
+/* 24A8D4 002AEEC4 DBD30000 */  ldc2  $19, ($fp)
+/* 24A8D8 002AEEC8 00000000 */  nop   
+/* 24A8DC 002AEECC 00000000 */  nop   
 /* 24A8E0 002AEED0 00000000 */  nop   
 /* 24A8E4 002AEED4 00000000 */  nop   
 /* 24A8E8 002AEED8 00000000 */  nop   
@@ -1216,8 +1219,9 @@
 /* 24A980 002AEF70 00000000 */  nop   
 /* 24A984 002AEF74 00000000 */  nop   
 /* 24A988 002AEF78 0000D3CD */  break 0, 0x34f
-/* 24A98C 002AEF7C D9202020 */  .byte 0xD9,0x20,0x20,0x20 /* Because of invalid n64 opcode bbit032 */
-/* 24A990 002AEF80 20202020 */  /* 24A994 002AEF84 20202020 */  addi  $zero, $at, 0x2020
+/* 24A98C 002AEF7C D9202020 */  ldc2  $0, 0x2020($t1)
+/* 24A990 002AEF80 20202020 */  addi  $zero, $at, 0x2020
+/* 24A994 002AEF84 20202020 */  addi  $zero, $at, 0x2020
 /* 24A998 002AEF88 20202020 */  addi  $zero, $at, 0x2020
 /* 24A99C 002AEF8C 20202020 */  addi  $zero, $at, 0x2020
 /* 24A9A0 002AEF90 20202020 */  addi  $zero, $at, 0x2020
@@ -1247,8 +1251,8 @@
 /* 24AA00 002AEFF0 00000000 */  nop   
 /* 24AA04 002AEFF4 00000000 */  nop   
 /* 24AA08 002AEFF8 000000D3 */  .byte 0x00, 0x00, 0x00, 0xd3
-/* 24AA0C 002AEFFC DBD42020 */  .byte 0xDB,0xD4,0x20,0x20 /* Because of invalid n64 opcode bbit032 */
-/* 24AA10 002AF000 20202020 */  /* 24AA14 002AF004 20202020 */  addi  $zero, $at, 0x2020
+/* 24AA0C 002AEFFC DBD42020 */  /* 24AA10 002AF000 20202020 */  addi  $zero, $at, 0x2020
+/* 24AA14 002AF004 20202020 */  addi  $zero, $at, 0x2020
 /* 24AA18 002AF008 20202020 */  addi  $zero, $at, 0x2020
 /* 24AA1C 002AF00C 20202020 */  addi  $zero, $at, 0x2020
 /* 24AA20 002AF010 20202020 */  addi  $zero, $at, 0x2020
@@ -1529,8 +1533,8 @@
 /* 24AE8C 002AF47C 00000000 */  nop   
 /* 24AE90 002AF480 00000000 */  nop   
 /* 24AE94 002AF484 0000DEDF */  .byte 0x00, 0x00, 0xde, 0xdf
-/* 24AE98 002AF488 DBD42020 */  .byte 0xDB,0xD4,0x20,0x20 /* Because of invalid n64 opcode bbit032 */
-/* 24AE9C 002AF48C 20202020 */  /* 24AEA0 002AF490 20202020 */  addi  $zero, $at, 0x2020
+/* 24AE98 002AF488 DBD42020 */  /* 24AE9C 002AF48C 20202020 */  addi  $zero, $at, 0x2020
+/* 24AEA0 002AF490 20202020 */  addi  $zero, $at, 0x2020
 /* 24AEA4 002AF494 20202020 */  addi  $zero, $at, 0x2020
 /* 24AEA8 002AF498 20202020 */  addi  $zero, $at, 0x2020
 /* 24AEAC 002AF49C 20202020 */  addi  $zero, $at, 0x2020
@@ -1591,7 +1595,7 @@
 /* 24AF8C 002AF57C 00000000 */  nop   
 /* 24AF90 002AF580 00000000 */  nop   
 /* 24AF94 002AF584 A0BEE776 */  sb    $fp, -0x188a($a1)
-/* 24AF98 002AF588 5420D5D0 */  bnel  $at, $zero, .L002A4CCC
+/* 24AF98 002AF588 5420D5D0 */  bnezl $at, .L002A4CCC
 /* 24AF9C 002AF58C DCD52020 */   ld    $s5, 0x2020($a2)
 /* 24AFA0 002AF590 20202020 */  addi  $zero, $at, 0x2020
 /* 24AFA4 002AF594 20202020 */  addi  $zero, $at, 0x2020
@@ -1785,7 +1789,7 @@
 /* 24B2B4 002AF8A4 62625420 */  daddi $v0, $s3, 0x5420
 /* 24B2B8 002AF8A8 20202020 */  addi  $zero, $at, 0x2020
 /* 24B2BC 002AF8AC 20202020 */  addi  $zero, $at, 0x2020
-/* 24B2C0 002AF8B0 5460705F */  bnel  $v1, $zero, .L002CBA30
+/* 24B2C0 002AF8B0 5460705F */  bnezl $v1, .L002CBA30
 /* 24B2C4 002AF8B4 75758800 */   jalx  0x5d62000
 /* 24B2C8 002AF8B8 00000000 */  nop   
 /* 24B2CC 002AF8BC 00000000 */  nop   
@@ -1807,8 +1811,9 @@
 /* 24B30C 002AF8FC 00000000 */  nop   
 /* 24B310 002AF900 00000000 */  nop   
 /* 24B314 002AF904 00000000 */  nop   
-/* 24B318 002AF908 EAC5AC7F */  .byte 0xEA,0xC5,0xAC,0x7F /* Because of invalid n64 opcode bbit1 */
-/* 24B31C 002AF90C 7F7A7A7A */  /* 24B320 002AF910 E7E77A7A */  /* 24B324 002AF914 7F797FE7 */  .byte 0x7f, 0x79, 0x7f, 0xe7
+/* 24B318 002AF908 EAC5AC7F */  swc2  $5, -0x5381($s6)
+/* 24B31C 002AF90C 7F7A7A7A */  .byte 0x7f, 0x7a, 0x7a, 0x7a
+/* 24B320 002AF910 E7E77A7A */  /* 24B324 002AF914 7F797FE7 */  .byte 0x7f, 0x79, 0x7f, 0xe7
 /* 24B328 002AF918 60202020 */  /* 24B32C 002AF91C 20202020 */  addi  $zero, $at, 0x2020
 /* 24B330 002AF920 20202070 */  addi  $zero, $at, 0x2070
 /* 24B334 002AF924 75755F5E */  jalx  0x5d57d78

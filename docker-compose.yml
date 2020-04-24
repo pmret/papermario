@@ -1,0 +1,11 @@
+version: "3"
+services:
+  pm:
+    volumes:
+      - pm-sync:/pm:nocopy
+    image: "pm:latest"
+    tty: true
+
+volumes:
+  pm-sync:
+    external: true

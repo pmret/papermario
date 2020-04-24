@@ -884,7 +884,7 @@ func_002D9A7C:
 /* 0FE674 002D9CC4 802CB2A8 */  /* 0FE678 002D9CC8 FE363C80 */  sd    $s6, 0x3c80($s1)
 /* 0FE67C 002D9CCC FE363C81 */  sd    $s6, 0x3c81($s1)
 /* 0FE680 002D9CD0 FE363C82 */  sd    $s6, 0x3c82($s1)
-/* 0FE684 002D9CD4 F24A7E80 */  scd   $t2, 0x7e80($s2)
+/* 0FE684 002D9CD4 F24A7E80 */  scd   $s2, (0x7e80)
 /* 0FE688 002D9CD8 00000002 */  srl   $zero, $zero, 0
 /* 0FE68C 002D9CDC 00000000 */  nop   
 /* 0FE690 002D9CE0 00000001 */  .byte 0x00,0x00,0x00,0x01 /* Because of invalid n64 opcode movf */

@@ -466,7 +466,7 @@ func_002C965C:
 /* 0EE058 002C96A8 8FB1001C */  lw    $s1, 0x1c($sp)
 /* 0EE05C 002C96AC 0250102A */  slt   $v0, $s2, $s0
 /* 0EE060 002C96B0 8E330000 */  lw    $s3, ($s1)
-/* 0EE064 002C96B4 54400011 */  bnel  $v0, $zero, .L002C96FC
+/* 0EE064 002C96B4 54400011 */  bnezl $v0, .L002C96FC
 /* 0EE068 002C96B8 AE330000 */   sw    $s3, ($s1)
 /* 0EE06C 002C96BC 27A40010 */  addiu $a0, $sp, 0x10
 .L002C96C0:
