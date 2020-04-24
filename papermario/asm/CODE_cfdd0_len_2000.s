@@ -131,8 +131,8 @@
 /* 0CFFD0 001398D0 55A20005 */  bnel  $t5, $v0, .L001398E8
 /* 0CFFD4 001398D4 3C04FCFF */   lui   $a0, 0xfcff
 .L001398D8:
-/* 0CFFD8 001398D8 3C04FC61 */  lui   $a0, %hi(D_FC610004) # $a0, 0xfc61
-/* 0CFFDC 001398DC 34849AC3 */  ori   $a0, (0xFC619AC3 & 0xFFFF) # ori $a0, $a0, 0x9ac3
+/* 0CFFD8 001398D8 3C04FC61 */  lui   $a0, %hi(D_FC619AC3) # $a0, 0xfc61
+/* 0CFFDC 001398DC 34849AC3 */  ori   $a0, (D_FC619AC3) # ori $a0, $a0, 0x9ac3
 /* 0CFFE0 001398E0 0804E63C */  j     func_001398F0
 /* 0CFFE4 001398E4 3C031137 */   lui   $v1, 0x1137
 
