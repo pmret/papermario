@@ -42,7 +42,7 @@ include $(MAKEFILE_SPLIT)
 all: $(TARGET).z64
 
 clean:
-	del /Q $(call FixPath,$(BUILD_DIR)/$(TARGET).elf $(BUILD_DIR)/$(TARGET).o $(BUILD_DIR)/$(TARGET).bin $(BUILD_DIR)/$(TARGET).map $(TARGET).z64)
+	rm -rf build
 
 $(MIO0_DIR)/%.mio0: $(MIO0_DIR)/%.bin
 	$(MIO0TOOL) $< $@
