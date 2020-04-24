@@ -8,27 +8,6 @@ SECTIONS
       * (.boot);
    }
 
-   /* load MIO0 and level data at 0x800000 */
-   .rodata 0x800000 : {
-      FILL (0x01) /* fill unused with 0x01 */
-      * (.mio0);
-      * (.rodata);
-      * (.data);
-      * (.MIPS.abiflags);
-      . = ALIGN(0x10);
-   }
-
-   /* use segmented addressing for behaviors */
-   .behavior 0x13000000 : AT( LOADADDR(.rodata) + SIZEOF(.rodata) ) {
-      FILL (0x01) /* fill unused with 0x01 */
-      * (.behavior);
-      behavior_length = . - 0x13000000;
-      /* default 4MB data (12MB ROM) */
-      . = 0x400000 - SIZEOF(.rodata);
-   }
-   __load_behavior_data = LOADADDR(.behavior);
-   __load_behavior_data_end = LOADADDR(.behavior) + behavior_length;
-
    /* 0x00000000 000040-000B70 [B30] */
    .text00000000 0x00000000 : AT(0x000040) {
       * (.text00000000);
@@ -263,5 +242,11 @@ SECTIONS
    .text002B7000 0x002B7000 : AT(0xE20EB0) {
       * (.text002B7000);
    }
+
+   /* Discard everything not specifically mentioned above. */
+      /DISCARD/ :
+      {
+         *(*);
+      }
 
 }

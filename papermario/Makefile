@@ -20,7 +20,7 @@ LDFLAGS = -T undefined_syms.txt -T $(LD_SCRIPT) -Map $(BUILD_DIR)/sm64.map
 ####################### Other Tools #########################
 
 # N64 tools
-TOOLS_DIR = ../tools
+TOOLS_DIR = ../n64splitter/bin
 MIO0TOOL = $(TOOLS_DIR)/mio0
 N64CKSUM = $(TOOLS_DIR)/n64cksum
 N64GRAPHICS = $(TOOLS_DIR)/n64graphics
