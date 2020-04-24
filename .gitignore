@@ -8,3 +8,4 @@ papermario/audio
 papermario/build/
 .vscode/
 .idea/
+.DS_Store
