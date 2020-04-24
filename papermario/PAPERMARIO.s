@@ -132,8 +132,8 @@ ___b3dd0_len_2000_end:
 ___b5dd0_len_2000:
 .incbin "bin/PAPERMARIO.0B5DD0.___b5dd0_len_2000.bin"
 ___b5dd0_len_2000_end:
-.include "asm/___b7dd0_len_2000.s" 
-.include "asm/CODE_cbdd0_len_2000.s" 
+.include "asm/___b72b0_len_2000.s" 
+.include "asm/CODE_cd180_len_2000.s" 
 .include "asm/CODE_cddd0_len_2000.s" 
 .include "asm/CODE_cfdd0_len_2000.s" 
 .include "asm/CODE_d1dd0_len_2000.s" 
