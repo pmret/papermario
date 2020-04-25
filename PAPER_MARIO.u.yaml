@@ -228,8 +228,8 @@ ranges:
   - [0x105700, 0x107830, "asm", "code_105700_len_2130", 0x802e2610]
   - [0x107830, 0x1086a0, "asm", "code_107830_len_e70", 0x802e4740]
   - [0x1086a0, 0x109660, "asm", "code_1086a0_len_fc0", 0x802e55b0]
-  - [0x109660, 0x10a8d0, "asm", "code_109660_len_1270", 0x802e6570]
-  - [0x10a8d0, 0x10c610, "bin",   "_D__10a610"] # (DRAM:0x002E8D90) (frame:0x00000001)  header: D 0x44000000 trace:
+  - [0x109660, 0x10A9F0, "asm", "code_109660_len_1270", 0x802e6570]
+  - [0x10A9F0, 0x10c610, "bin",   "_D__10a610"] # (DRAM:0x002E8D90) (frame:0x00000001)  header: D 0x44000000 trace:
   - [0x10c610, 0x10cc10, "bin",   "___10c610"] # (DRAM:0x002EAD90) (frame:0x00000001)  header:  0x80000000 trace:
   - [0x10cc10, 0x10ec10, "bin",   "___10cc10"] # (DRAM:0x002EB3D0) (frame:0x00000001)  header:  0xb000000 trace:
   - [0x10ec10, 0x10f1b0, "bin",   "___10ec10"] # (DRAM:0x002ED3D0) (frame:0x00000001)  header:  0x33000000 trace:

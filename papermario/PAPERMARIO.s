@@ -149,7 +149,7 @@ ___e5dd0_end:
 .include "asm/code_1086a0_len_fc0.s" 
 .include "asm/code_109660_len_1270.s" 
 _D__10a610:
-.incbin "bin/PAPERMARIO.10A8D0._D__10a610.bin"
+.incbin "bin/PAPERMARIO.10A9F0._D__10a610.bin"
 _D__10a610_end:
 ___10c610:
 .incbin "bin/PAPERMARIO.10C610.___10c610.bin"
