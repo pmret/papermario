@@ -39,7 +39,7 @@ default: all
 MAKEFILE_SPLIT = Makefile.split
 include $(MAKEFILE_SPLIT)
 
-all: $(TARGET).z64
+all: fix_asm $(TARGET).z64
 
 clean:
 	rm -rf build
@@ -65,6 +65,9 @@ $(BUILD_DIR)/$(TARGET).bin: $(BUILD_DIR)/$(TARGET).elf
 # final z64 updates checksum
 $(TARGET).z64: $(BUILD_DIR)/$(TARGET).bin
 	$(N64CKSUM) $< $@
+
+fix_asm:
+	./fix_asm.py
 
 $(BUILD_DIR)/$(TARGET).hex: $(TARGET).z64
 	xxd $< > $@
