@@ -7,13 +7,13 @@ BUILD_DIR = build
 
 ##################### Compiler Options #######################
 CROSS = mips-linux-gnu-
-AS = ../oldbinutils/bin/mips-nintendo-nu64-as
+AS = mips-linux-gnu-as
 CC = $(CROSS)gcc
-LD = ../oldbinutils/bin/mips-ld
+LD = mips-linux-gnu-ld
 OBJDUMP = ../oldbinutils/bin/mips-objdump
 OBJCOPY = ../oldbinutils/bin/mips-objcopy
 
-ASFLAGS = -EB -mcpu=vr4300
+ASFLAGS = -EB -march=vr4300 -mtune=vr4300
 CFLAGS  = -Wall -O2 -mtune=vr4300 -march=vr4300 -G 0 -c
 LDFLAGS = -T undefined_syms.txt -T $(LD_SCRIPT) -Map $(BUILD_DIR)/sm64.map
 

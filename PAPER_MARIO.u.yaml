@@ -5590,6 +5590,7 @@ ranges:
   - [0x27e276c, 0x27e476c, "bin",   "_t__27e276c"] # (DRAM:0x0030A940) (frame:0x00001EA7)  header: t 0x74000000 trace:
   - [0x27e476c, 0x27e676c, "bin",   "___27e476c"] # (DRAM:0x0030C940) (frame:0x00001EA7)  header:  0xff000000 trace:
   - [0x27e676c, 0x27e7192, "bin",   "___27e676c"] # (DRAM:0x0030E940) (frame:0x00001EA7)  header:  0x2c000000 trace:
+  - [0x27e7192, 0x2800000, "bin",   "___27e7192"]
 # Labels for functions or data memory addresses
 # All label addresses are RAM addresses
 # Order does not matter

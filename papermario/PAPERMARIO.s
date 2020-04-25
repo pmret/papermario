@@ -18366,5 +18366,8 @@ ___27e476c_end:
 ___27e676c:
 .incbin "bin/PAPERMARIO.27E676C.___27e676c.bin"
 ___27e676c_end:
+___27e7192:
+.incbin "bin/PAPERMARIO.27E7192.___27e7192.bin"
+___27e7192_end:
 
 .section .mio0
