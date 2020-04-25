@@ -105,33 +105,7 @@ ___a39b0_len_2000_end:
 ___a59b0_len_420:
 .incbin "bin/PAPERMARIO.0A59B0.___a59b0_len_420.bin"
 ___a59b0_len_420_end:
-___a5dd0_len_2000:
-.incbin "bin/PAPERMARIO.0A5DD0.___a5dd0_len_2000.bin"
-___a5dd0_len_2000_end:
-___a7dd0_len_2000:
-.incbin "bin/PAPERMARIO.0A7DD0.___a7dd0_len_2000.bin"
-___a7dd0_len_2000_end:
-___a9dd0_len_2000:
-.incbin "bin/PAPERMARIO.0A9DD0.___a9dd0_len_2000.bin"
-___a9dd0_len_2000_end:
-___abdd0_len_2000:
-.incbin "bin/PAPERMARIO.0ABDD0.___abdd0_len_2000.bin"
-___abdd0_len_2000_end:
-_E__addd0_len_2000:
-.incbin "bin/PAPERMARIO.0ADDD0._E__addd0_len_2000.bin"
-_E__addd0_len_2000_end:
-___afdd0_len_2000:
-.incbin "bin/PAPERMARIO.0AFDD0.___afdd0_len_2000.bin"
-___afdd0_len_2000_end:
-___b1dd0_len_2000:
-.incbin "bin/PAPERMARIO.0B1DD0.___b1dd0_len_2000.bin"
-___b1dd0_len_2000_end:
-___b3dd0_len_2000:
-.incbin "bin/PAPERMARIO.0B3DD0.___b3dd0_len_2000.bin"
-___b3dd0_len_2000_end:
-___b5dd0_len_2000:
-.incbin "bin/PAPERMARIO.0B5DD0.___b5dd0_len_2000.bin"
-___b5dd0_len_2000_end:
+.include "asm/___a5dd0_len_2000.s" 
 .include "asm/CODE_b72b0_len_2000.s" 
 .include "asm/CODE_cd180_len_2000.s" 
 .include "asm/CODE_cddd0_len_2000.s" 

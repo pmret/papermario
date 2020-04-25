@@ -34,6 +34,11 @@ SECTIONS
       * (.text00000000);
    }
 
+   /* 0x0010D6D0 0A5DD0-0B72B0 [114E0] */
+   .text0010D6D0 0x0010D6D0 : AT(0x0A5DD0) {
+      * (.text0010D6D0);
+   }
+
    /* 0x00120BB0 0B72B0-0CD180 [15ED0] */
    .text00120BB0 0x00120BB0 : AT(0x0B72B0) {
       * (.text00120BB0);
@@ -59,14 +64,14 @@ SECTIONS
       * (.text0013A370);
    }
 
-   /* 0x0013D6D0 0D5A50-0D5DD0 [380] */
-   .text0013D6D0 0x0013D6D0 : AT(0x0D5A50) {
-      * (.text0013D6D0);
+   /* 0x0013F350 0D5A50-0D5DD0 [380] */
+   .text0013F350 0x0013F350 : AT(0x0D5A50) {
+      * (.text0013F350);
    }
 
-   /* 0x0013F350 0D5DD0-0D7DD0 [2000] */
-   .text0013F350 0x0013F350 : AT(0x0D5DD0) {
-      * (.text0013F350);
+   /* 0x0013F6D0 0D5DD0-0D7DD0 [2000] */
+   .text0013F6D0 0x0013F6D0 : AT(0x0D5DD0) {
+      * (.text0013F6D0);
    }
 
    /* 0x001416D0 0D7DD0-0D9DD0 [2000] */
