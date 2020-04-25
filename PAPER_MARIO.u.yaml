@@ -12,7 +12,167 @@ ranges:
   - [0x000000, 0x000040, "header", "header"]
   - [0x000040, 0x000B70, "asm",    "boot"]
   - [0x000B70, 0x001000, "bin",    "bootcode_font"]
-  # - [0x1000, 0x759b0, "asm",   "CODE_1000", 0x00025C00] # frame:0x00000000 header:  0x3c000000 trace:0x0-> Tbl mapped:e012066c
+#  - [0x1000, 0x1060, "asm", "code_1000_len_60"]
+#  - [0x1060, 0x1370, "asm", "code_1060_len_310"]
+#  - [0x1370, 0x1b40, "asm", "code_1370_len_7d0"]
+#  - [0x1b40, 0x3bf0, "asm", "code_1b40_len_20b0"]
+#  - [0x3bf0, 0x42e0, "asm", "code_3bf0_len_6f0"]
+#  - [0x42e0, 0x5870, "asm", "code_42e0_len_1590"]
+#  - [0x6000, 0x6240, "asm", "code_6000_len_240"]
+#  - [0x6240, 0x6e40, "asm", "code_6240_len_c00"]
+#  - [0x6e40, 0x7340, "asm", "code_6e40_len_500"]
+#  - [0x7340, 0x7e40, "asm", "code_7340_len_b00"]
+#  - [0x7e40, 0x8230, "asm", "code_7e40_len_3f0"]
+#  - [0x8230, 0x9d10, "asm", "code_8230_len_1ae0"]
+#  - [0x9d10, 0xad90, "asm", "code_9d10_len_1080"]
+#  - [0xad90, 0xd610, "asm", "code_ad90_len_2880"]
+#  - [0xd610, 0xe940, "asm", "code_d610_len_1330"]
+#  - [0xe940, 0xebd0, "asm", "code_e940_len_290"]
+#  - [0xebd0, 0xf270, "asm", "code_ebd0_len_6a0"]
+#  - [0xf270, 0x10400, "asm", "code_f270_len_1190"]
+#  - [0x10400, 0x11130, "asm", "code_10400_len_d30"]
+#  - [0x11130, 0x111f0, "asm", "code_11130_len_c0"]
+#  - [0x111f0, 0x11a50, "asm", "code_111f0_len_860"]
+#  - [0x11a50, 0x121f0, "asm", "code_11a50_len_7a0"]
+#  - [0x121f0, 0x13480, "asm", "code_121f0_len_1290"]
+#  - [0x13480, 0x13870, "asm", "code_13480_len_3f0"]
+#  - [0x13870, 0x1a1f0, "asm", "code_13870_len_6980"]
+#  - [0x1a1f0, 0x1f580, "asm", "code_1a1f0_len_5390"]
+#  - [0x1f580, 0x20ec0, "asm", "code_1f580_len_1940"]
+#  - [0x20ec0, 0x25f00, "asm", "code_20ec0_len_5040"]
+#  - [0x25f00, 0x26840, "asm", "code_25f00_len_940"]
+#  - [0x26840, 0x28910, "asm", "code_26840_len_20d0"]
+#  - [0x28910, 0x2d9a0, "asm", "code_28910_len_5090"]
+#  - [0x2d9a0, 0x2e230, "asm", "code_2d9a0_len_890"]
+#  - [0x2e230, 0x303c0, "asm", "code_2e230_len_2190"]
+#  - [0x303c0, 0x341d0, "asm", "code_303c0_len_3e10"]
+#  - [0x341d0, 0x362a0, "asm", "code_341d0_len_20d0"]
+#  - [0x362a0, 0x39210, "asm", "code_362a0_len_2f70"]
+#  - [0x39210, 0x39cb0, "asm", "code_39210_len_aa0"]
+#  - [0x39cb0, 0x39db0, "asm", "code_39cb0_len_100"]
+#  - [0x39db0, 0x3a650, "asm", "code_39db0_len_8a0"]
+#  - [0x3a650, 0x3a690, "asm", "code_3a650_len_40"]
+#  - [0x3a690, 0x3a6d0, "asm", "code_3a690_len_40"]
+#  - [0x3a6d0, 0x3a6f0, "asm", "code_3a6d0_len_20"]
+#  - [0x3a6f0, 0x3a800, "asm", "code_3a6f0_len_110"]
+#  - [0x3a800, 0x3a830, "asm", "code_3a800_len_30"]
+#  - [0x3a830, 0x3a850, "asm", "code_3a830_len_20"]
+#  - [0x3a850, 0x3b290, "asm", "code_3a850_len_a40"]
+#  - [0x3b290, 0x3b390, "asm", "code_3b290_len_100"]
+#  - [0x3b390, 0x3b3f0, "asm", "code_3b390_len_60"]
+#  - [0x3b390, 0x3b4a0, "asm", "code_3b390_len_110"]
+#  - [0x3b4a0, 0x3b710, "asm", "code_3b4a0_len_270"]
+#  - [0x3b710, 0x3b750, "asm", "code_3b710_len_40"]
+#  - [0x3b750, 0x3b770, "asm", "code_3b750_len_20"]
+#  - [0x3b770, 0x3b7f0, "asm", "code_3b770_len_80"]
+#  - [0x3b7f0, 0x3b910, "asm", "code_3b7f0_len_120"]
+#  - [0x3b910, 0x3c1c0, "asm", "code_3b910_len_8b0"]
+#  - [0x3c1c0, 0x3c220, "asm", "code_3c1c0_len_60"]
+#  - [0x3c220, 0x3c2c0, "asm", "code_3c220_len_a0"]
+#  - [0x3c2c0, 0x3c310, "asm", "code_3c2c0_len_50"]
+#  - [0x3c310, 0x3c490, "asm", "code_3c310_len_180"]
+#  - [0x3c490, 0x3c850, "asm", "code_3c490_len_3c0"]
+#  - [0x3c850, 0x3c940, "asm", "code_3c850_len_f0"]
+#  - [0x3c940, 0x3ca80, "asm", "code_3c940_len_140"]
+#  - [0x3ca80, 0x3cb20, "asm", "code_3ca80_len_a0"]
+#  - [0x3cb20, 0x3cc50, "asm", "code_3cb20_len_130"]
+#  - [0x3cc50, 0x3ccd0, "asm", "code_3cc50_len_80"]
+#  - [0x3ccd0, 0x3cd00, "asm", "code_3ccd0_len_30"]
+#  - [0x3cd00, 0x3d2f0, "asm", "code_3cd00_len_5f0"]
+#  - [0x3d2f0, 0x3d300, "asm", "code_3d2f0_len_10"]
+#  - [0x3d300, 0x3d330, "asm", "code_3d300_len_30"]
+#  - [0x3d330, 0x3dcc0, "asm", "code_3d330_len_990"]
+#  - [0x3dcc0, 0x3e720, "asm", "code_3dcc0_len_a60"]
+#  - [0x3e720, 0x3ed10, "asm", "code_3e720_len_5f0"]
+#  - [0x3ed10, 0x3f310, "asm", "code_3ed10_len_600"]
+#  - [0x3f310, 0x3f6d0, "asm", "code_3f310_len_3c0"]
+#  - [0x3f6d0, 0x3f9f0, "asm", "code_3f6d0_len_320"]
+#  - [0x3f9f0, 0x3fa50, "asm", "code_3f9f0_len_60"]
+#  - [0x3fa50, 0x409b0, "asm", "code_3fa50_len_f60"]
+#  - [0x409b0, 0x40af0, "asm", "code_409b0_len_140"]
+#  - [0x40af0, 0x40c20, "asm", "code_40af0_len_130"]
+#  - [0x40c20, 0x40e10, "asm", "code_40c20_len_1f0"]
+#  - [0x40e10, 0x41050, "asm", "code_40e10_len_240"]
+#  - [0x41050, 0x41170, "asm", "code_41050_len_120"]
+#  - [0x41170, 0x41260, "asm", "code_41170_len_f0"]
+#  - [0x41260, 0x41350, "asm", "code_41260_len_f0"]
+#  - [0x41350, 0x41420, "asm", "code_41350_len_d0"]
+#  - [0x41420, 0x41540, "asm", "code_41420_len_120"]
+#  - [0x41540, 0x41600, "asm", "code_41540_len_c0"]
+#  - [0x41600, 0x41640, "asm", "code_41600_len_40"]
+#  - [0x41640, 0x41690, "asm", "code_41640_len_50"]
+#  - [0x41690, 0x416a0, "asm", "code_41690_len_10"]
+#  - [0x416a0, 0x41730, "asm", "code_416a0_len_90"]
+#  - [0x41730, 0x41750, "asm", "code_41730_len_20"]
+#  - [0x41750, 0x41ba0, "asm", "code_41750_len_450"]
+#  - [0x41ba0, 0x41c60, "asm", "code_41ba0_len_c0"]
+#  - [0x41c60, 0x41d20, "asm", "code_41c60_len_c0"]
+#  - [0x41d20, 0x41d60, "asm", "code_41d20_len_40"]
+#  - [0x41d60, 0x41db0, "asm", "code_41d60_len_50"]
+#  - [0x41db0, 0x41df0, "asm", "code_41db0_len_40"]
+#  - [0x41df0, 0x41e30, "asm", "code_41df0_len_40"]
+#  - [0x41e30, 0x41e70, "asm", "code_41e30_len_40"]
+#  - [0x41e70, 0x421b0, "asm", "code_41e70_len_340"]
+#  - [0x421b0, 0x42210, "asm", "code_421b0_len_60"]
+#  - [0x42210, 0x42260, "asm", "code_42210_len_50"]
+#  - [0x42260, 0x423d0, "asm", "code_42260_len_170"]
+#  - [0x423d0, 0x42420, "asm", "code_423d0_len_50"]
+#  - [0x42420, 0x42470, "asm", "code_42420_len_50"]
+#  - [0x42470, 0x42780, "asm", "code_42470_len_310"]
+#  - [0x42780, 0x428a0, "asm", "code_42780_len_120"]
+#  - [0x428a0, 0x42900, "asm", "code_428a0_len_60"]
+#  - [0x42900, 0x42980, "asm", "code_42900_len_80"]
+#  - [0x42980, 0x42a00, "asm", "code_42980_len_80"]
+#  - [0x42a00, 0x42b00, "asm", "code_42a00_len_100"]
+#  - [0x42b00, 0x42bc0, "asm", "code_42b00_len_c0"]
+#  - [0x42bc0, 0x42c20, "asm", "code_42bc0_len_60"]
+#  - [0x42c20, 0x42d00, "asm", "code_42c20_len_e0"]
+#  - [0x42d00, 0x42d60, "asm", "code_42d00_len_60"]
+#  - [0x42d60, 0x42de0, "asm", "code_42d60_len_80"]
+#  - [0x42de0, 0x42e70, "asm", "code_42de0_len_90"]
+#  - [0x42e70, 0x43200, "asm", "code_42e70_len_390"]
+#  - [0x43200, 0x439c0, "asm", "code_43200_len_7c0"]
+#  - [0x439c0, 0x43be0, "asm", "code_439c0_len_220"]
+#  - [0x43be0, 0x441c0, "asm", "code_43be0_len_5e0"]
+#  - [0x441c0, 0x44380, "asm", "code_441c0_len_1c0"]
+#  - [0x44380, 0x44860, "asm", "code_44380_len_4e0"]
+#  - [0x44860, 0x448c0, "asm", "code_44860_len_60"]
+#  - [0x448c0, 0x44ad0, "asm", "code_448c0_len_210"]
+#  - [0x44ad0, 0x44b40, "asm", "code_44ad0_len_70"]
+#  - [0x44b40, 0x455d0, "asm", "code_44b40_len_a90"]
+#  - [0x455d0, 0x457c0, "asm", "code_455d0_len_1f0"]
+#  - [0x457c0, 0x45a30, "asm", "code_457c0_len_270"]
+#  - [0x45a30, 0x45a50, "asm", "code_45a30_len_20"]
+#  - [0x45a50, 0x45df0, "asm", "code_45a50_len_3a0"]
+#  - [0x45df0, 0x46760, "asm", "code_45df0_len_970"]
+#  - [0x46760, 0x467f0, "asm", "code_46760_len_90"]
+#  - [0x467f0, 0x46880, "asm", "code_467f0_len_90"]
+#  - [0x46880, 0x46ae0, "asm", "code_46880_len_260"]
+#  - [0x46ae0, 0x46c50, "asm", "code_46ae0_len_170"]
+#  - [0x46c50, 0x46c70, "asm", "code_46c50_len_20"]
+#  - [0x46c70, 0x47a70, "asm", "code_46c70_len_e00"]
+#  - [0x47a70, 0x47a80, "asm", "code_47a70_len_10"]
+#  - [0x47a80, 0x47a90, "asm", "code_47a80_len_10"]
+#  - [0x47a90, 0x47ae0, "asm", "code_47a90_len_50"]
+#  - [0x47ae0, 0x47bc0, "asm", "code_47ae0_len_e0"]
+#  - [0x47bc0, 0x47c10, "asm", "code_47bc0_len_50"]
+#  - [0x47c10, 0x47c60, "asm", "code_47c10_len_50"]
+#  - [0x47c60, 0x47d50, "asm", "code_47c60_len_f0"]
+#  - [0x47d50, 0x47e30, "asm", "code_47d50_len_e0"]
+#  - [0x47e30, 0x47e90, "asm", "code_47e30_len_60"]
+#  - [0x47e90, 0x47fa0, "asm", "code_47e90_len_110"]
+#  - [0x47fa0, 0x47fc0, "asm", "code_47fa0_len_20"]
+#  - [0x47fc0, 0x48020, "asm", "code_47fc0_len_60"]
+#  - [0x48020, 0x48a20, "asm", "code_48020_len_a00"]
+#  - [0x48a20, 0x48be0, "asm", "code_48a20_len_1c0"]
+#  - [0x48be0, 0x48c00, "asm", "code_48be0_len_20"]
+#  - [0x48c00, 0x491c0, "asm", "code_48c00_len_5c0"]
+#  - [0x491c0, 0x49980, "asm", "code_491c0_len_7c0"]
+#  - [0x49980, 0x49c70, "asm", "code_49980_len_2f0"]
+#  - [0x49c70, 0x4a1b0, "asm", "code_49c70_len_540"]
+#  - [0x4a1b0, 0x4a1f0, "asm", "code_4a1b0_len_40"]
+#  - [0x4a1f0, 0x4ac90, "asm", "code_4a1f0_len_aa0"]
+#  - [0x4ac90, 0x4e5a0, "asm", "code_4ac90_len_3910"]
   - [0x759b0, 0x779b0, "bin",   "___759b0"] # (DRAM:0x000DC500) (frame:0x00000001)  header:  0x27000000 trace:
   - [0x779b0, 0x799b0, "bin",   "___779b0"] # (DRAM:0x000DE500) (frame:0x00000001)  header:  0xaf000000 trace:
   - [0x799b0, 0x7b9b0, "bin",   "___799b0"] # (DRAM:0x000E0500) (frame:0x00000001)  header:  0xc000000 trace:
@@ -38,37 +198,37 @@ ranges:
   - [0xa19b0, 0xa39b0, "bin",   "___a19b0"] # (DRAM:0x00108500) (frame:0x00000001)  header:  0x0 trace:
   - [0xa39b0, 0xa59b0, "bin",   "___a39b0"] # (DRAM:0x0010A500) (frame:0x00000001)  header:  0x8f000000 trace:
   - [0xa59b0, 0xa5dd0, "bin",   "___a59b0"] # (DRAM:0x0010C500) (frame:0x00000001)  header:  0x80000000 trace:
-  - [0xa5dd0, 0xb72b0, "asm", "code_a5dd0_len_114e0", 0x10f6d0]
-  - [0xb72b0, 0xcd180, "asm", "code_b72b0_len_15ed0", 0x120bb0]
-  - [0xcd180, 0xd0a70, "asm", "code_cd180_len_38f0", 0x136a80]
-  - [0xd0a70, 0xd5a50, "asm", "code_d0a70_len_4fe0", 0x13a370]
-  - [0xd5a50, 0xdba20, "asm", "code_d5a50_len_5fd0", 0x13f350]
-  - [0xdba20, 0xdbd70, "asm", "code_dba20_len_350", 0x145320]
-  - [0xdbd70, 0xdc470, "asm", "code_dbd70_len_700", 0x145670]
-  - [0xdc470, 0xdd930, "asm", "code_dc470_len_14c0", 0x145d70]
-  - [0xdd930, 0xddaf0, "asm", "code_dd930_len_1c0", 0x147230]
-  - [0xddaf0, 0xde740, "asm", "code_ddaf0_len_c50", 0x1473f0]
-  - [0xde740, 0xe0b30, "asm", "code_de740_len_23f0", 0x148040]
-  - [0xe0b30, 0xe16b0, "asm", "code_e0b30_len_b80", 0x14a430]
+  - [0xa5dd0, 0xb72b0, "asm", "code_a5dd0_len_114e0", 0x8010f6d0]
+  - [0xb72b0, 0xcd180, "asm", "code_b72b0_len_15ed0", 0x80120bb0]
+  - [0xcd180, 0xd0a70, "asm", "code_cd180_len_38f0", 0x80136a80]
+  - [0xd0a70, 0xd5a50, "asm", "code_d0a70_len_4fe0", 0x8013a370]
+  - [0xd5a50, 0xdba20, "asm", "code_d5a50_len_5fd0", 0x8013f350]
+  - [0xdba20, 0xdbd70, "asm", "code_dba20_len_350", 0x80145320]
+  - [0xdbd70, 0xdc470, "asm", "code_dbd70_len_700", 0x80145670]
+  - [0xdc470, 0xdd930, "asm", "code_dc470_len_14c0", 0x80145d70]
+  - [0xdd930, 0xddaf0, "asm", "code_dd930_len_1c0", 0x80147230]
+  - [0xddaf0, 0xde740, "asm", "code_ddaf0_len_c50", 0x801473f0]
+  - [0xde740, 0xe0b30, "asm", "code_de740_len_23f0", 0x80148040]
+  - [0xe0b30, 0xe16b0, "asm", "code_e0b30_len_b80", 0x8014a430]
   - [0xe16b0, 0xe3dd0, "bin",   "___e1dd0"] # (DRAM:0x0014B6D0) (frame:0x00000001)  header:  0xfc000000 trace:
   - [0xe3dd0, 0xe5dd0, "bin",   "___e3dd0"] # (DRAM:0x0014D6D0) (frame:0x00000001)  header:  0xff000000 trace:
   - [0xe5dd0, 0xe79b0, "bin",   "___e5dd0"] # (DRAM:0x0014F6D0) (frame:0x00000001)  header:  0x0 trace:
-  - [0xe79b0, 0xe92d0, "asm", "code_e79b0_len_1920", 0x2c3000]
-  - [0xe92d0, 0xef070, "asm", "code_e92d0_len_5da0", 0x2c4920]
-  - [0xef070, 0xf2470, "asm", "code_ef070_len_3400", 0x2ca6c0]
-  - [0xf2470, 0xf4c60, "asm", "code_f2470_len_27f0", 0x2cdac0]
-  - [0xf4c60, 0xf8f60, "asm", "code_f4c60_len_4300", 0x2d02b0]
-  - [0xf8f60, 0xfa4c0, "asm", "code_f8f60_len_1560", 0x2d45b0]
-  - [0xfa4c0, 0xfe0b0, "asm", "code_fa4c0_len_3bf0", 0x2d5b10]
-  - [0xfe0b0, 0xfe650, "asm", "code_fe0b0_len_5a0", 0x2d9700]
-  - [0xfee30, 0x101b90, "asm", "code_fee30_len_2d60", 0x2dbd40]
-  - [0x101b90, 0x102480, "asm", "code_101b90_len_8f0", 0x2deaa0]
-  - [0x102610, 0x104940, "asm", "code_102610_len_2330", 0x2df520]
-  - [0x104940, 0x105700, "asm", "code_104940_len_dc0", 0x2e1850]
-  - [0x105700, 0x107830, "asm", "code_105700_len_2130", 0x2e2610]
-  - [0x107830, 0x1086a0, "asm", "code_107830_len_e70", 0x2e4740]
-  - [0x1086a0, 0x109660, "asm", "code_1086a0_len_fc0", 0x2e55b0]
-  - [0x109660, 0x10a8d0, "asm", "code_109660_len_1270", 0x2e6570]
+  - [0xe79b0, 0xe92d0, "asm", "code_e79b0_len_1920", 0x802c3000]
+  - [0xe92d0, 0xef070, "asm", "code_e92d0_len_5da0", 0x802c4920]
+  - [0xef070, 0xf2470, "asm", "code_ef070_len_3400", 0x802ca6c0]
+  - [0xf2470, 0xf4c60, "asm", "code_f2470_len_27f0", 0x802cdac0]
+  - [0xf4c60, 0xf8f60, "asm", "code_f4c60_len_4300", 0x802d02b0]
+  - [0xf8f60, 0xfa4c0, "asm", "code_f8f60_len_1560", 0x802d45b0]
+  - [0xfa4c0, 0xfe0b0, "asm", "code_fa4c0_len_3bf0", 0x802d5b10]
+  - [0xfe0b0, 0xfe650, "asm", "code_fe0b0_len_5a0", 0x802d9700]
+  - [0xfee30, 0x101b90, "asm", "code_fee30_len_2d60", 0x802dbd40]
+  - [0x101b90, 0x102480, "asm", "code_101b90_len_8f0", 0x802deaa0]
+  - [0x102610, 0x104940, "asm", "code_102610_len_2330", 0x802df520]
+  - [0x104940, 0x105700, "asm", "code_104940_len_dc0", 0x802e1850]
+  - [0x105700, 0x107830, "asm", "code_105700_len_2130", 0x802e2610]
+  - [0x107830, 0x1086a0, "asm", "code_107830_len_e70", 0x802e4740]
+  - [0x1086a0, 0x109660, "asm", "code_1086a0_len_fc0", 0x802e55b0]
+  - [0x109660, 0x10a8d0, "asm", "code_109660_len_1270", 0x802e6570]
   - [0x10a8d0, 0x10c610, "bin",   "_D__10a610"] # (DRAM:0x002E8D90) (frame:0x00000001)  header: D 0x44000000 trace:
   - [0x10c610, 0x10cc10, "bin",   "___10c610"] # (DRAM:0x002EAD90) (frame:0x00000001)  header:  0x80000000 trace:
   - [0x10cc10, 0x10ec10, "bin",   "___10cc10"] # (DRAM:0x002EB3D0) (frame:0x00000001)  header:  0xb000000 trace:
@@ -81,10 +241,10 @@ ranges:
   # - [0x1184b8, 0x11a23e, "asm",   "CODE_1184b8", 0x002457C0] # frame:0x00002B5A header:  0xcb000000 trace: Tbl mapped:8024734c
   - [0x11a240, 0x11a440, "bin",   "___11a240"] # (DRAM:0x00247548) (frame:0x00002B5A)  header:  0xef000000 trace:
   # - [0x11a440, 0x131340, "asm",   "___11a440"]
-  - [0x131340, 0x133340, "bin",   "CODE_131340", 0x0023E000] # frame:0x00001FB3 header:  0x0 trace: Tbl mapped:80240000
-  - [0x133340, 0x135340, "bin",   "CODE_133340", 0x00240000] # frame:0x00001FB3 header:  0x0 trace: Tbl mapped:80241fb4
-  - [0x135340, 0x135ee0, "bin",   "___135340", 0x00242000] # frame:0x00001FB3 header:  0x0 trace: Tbl mapped:80242ba0
-  - [0x163400, 0x16a3e0, "asm",   "CODE_163400", 0x00242BA0] # frame:0x00001FB3 header:  0x28000000 trace: Tbl mapped:80243758
+  - [0x131340, 0x133340, "bin",   "CODE_131340", 0x8023E000] # frame:0x00001FB3 header:  0x0 trace: Tbl mapped:80240000
+  - [0x133340, 0x135340, "bin",   "CODE_133340", 0x80240000] # frame:0x00001FB3 header:  0x0 trace: Tbl mapped:80241fb4
+  - [0x135340, 0x135ee0, "bin",   "___135340", 0x80242000] # frame:0x00001FB3 header:  0x0 trace: Tbl mapped:80242ba0
+  - [0x163400, 0x16a3e0, "asm",   "CODE_163400", 0x80242BA0] # frame:0x00001FB3 header:  0x28000000 trace: Tbl mapped:80243758
   - [0x16a3e0, 0x16c8e0, "bin",   "___16b400"] # (DRAM:0x0024ABA0) (frame:0x00001FB3)  header:  0x0 trace:
   - [0x1e0350, 0x1e0550, "bin",   "___1e0350"] # (DRAM:0x002FE090) (frame:0x0000301F)  header:  0x0 trace:
   - [0x1e0550, 0x1e0570, "bin",   "___1e0550"] # (DRAM:0x002FE290) (frame:0x0000301F)  header: I 0x49000000 trace:
@@ -243,10 +403,10 @@ ranges:
   - [0x284338, 0x284380, "bin",   "___284338"] # (DRAM:0x0031B310) (frame:0x00001705)  header:  0xfd000000 trace:
   - [0x2849f8, 0x284a18, "bin",   "___2849f8"] # (DRAM:0x0031B400) (frame:0x000016F9)  header:  0x1000000 trace:
   - [0x284a18, 0x284a28, "bin",   "___284a18"] # (DRAM:0x00156BA0) (frame:0x000016F9)  header:  0x0 trace:
-  - [0x3169f0, 0x316a70, "asm",   "CODE_3169f0", 0x00200000] # frame:0x00000001 header:  0x27000000 trace: Tbl mapped:e0200050
-  - [0x316a70, 0x316c00, "asm",   "CODE_316a70", 0x00200080] # frame:0x00000001 header:  0x27000000 trace: Tbl mapped:e02000a0
+  - [0x3169f0, 0x316a70, "asm",   "CODE_3169f0", 0x80200000] # frame:0x00000001 header:  0x27000000 trace: Tbl mapped:e0200050
+  - [0x316a70, 0x316c00, "asm",   "CODE_316a70", 0x80200080] # frame:0x00000001 header:  0x27000000 trace: Tbl mapped:e02000a0
   - [0x316c00, 0x316d90, "bin",   "___316c00"] # (DRAM:0x002AE000) (frame:0x0000027D)  header:  0x27000000 trace:
-  - [0x316f30, 0x317020, "asm",   "CODE_316f30", 0x002B2000] # frame:0x00000001 header:  0x27000000 trace: Tbl mapped:802b20a8
+  - [0x316f30, 0x317020, "asm",   "CODE_316f30", 0x802B2000] # frame:0x00000001 header:  0x27000000 trace: Tbl mapped:802b20a8
   - [0x325ad0, 0x326410, "bin",   "___325ad0"] # (DRAM:0x001A6000) (frame:0x00000001)  header:  0x3c000000 trace:
   - [0x328110, 0x328ea0, "bin",   "___328110"] # (DRAM:0x00197000) (frame:0x00002FBC)  header:  0xc4000000 trace:
   - [0x328ea0, 0x32aea0, "bin",   "___328ea0"] # (DRAM:0x00319760) (frame:0x0000268A)  header:  0x0 trace:
@@ -286,7 +446,7 @@ ranges:
   - [0x402640, 0x403400, "bin",   "___402640"] # (DRAM:0x00198000) (frame:0x00001706)  header:  0x27000000 trace:
   - [0x40b3f0, 0x40bba0, "bin",   "___40b3f0"] # (DRAM:0x00197000) (frame:0x00002B54)  header:  0x27000000 trace:
   - [0x40bba0, 0x40c5a0, "bin",   "___40bba0"] # (DRAM:0x00315610) (frame:0x00002B54)  header:  0x0 trace:
-  - [0x7e0e80, 0x7e4d00, "asm",   "CODE_7e0e80", 0x00280000] # frame:0x0000027D header:  0x3c000000 trace: Tbl mapped:80281df4
+  - [0x7e0e80, 0x7e4d00, "asm",   "CODE_7e0e80", 0x80280000] # frame:0x0000027D header:  0x3c000000 trace: Tbl mapped:80281df4
   - [0x7e4d00, 0x7e6e80, "bin",   "___7e4e80"] # (DRAM:0x00284000) (frame:0x0000027D)  header:  0x0 trace:
   - [0x7e6e80, 0x7e73a0, "bin",   "___7e6e80"] # (DRAM:0x00286000) (frame:0x0000027D)  header:  0x0 trace:
   - [0x7ead10, 0x7ecd10, "bin",   "___7ead10"] # (DRAM:0x00240000) (frame:0x00003019)  header:  0x3c000000 trace:
@@ -345,9 +505,9 @@ ranges:
   - [0xabf290, 0xac1290, "bin",   "___abf290"] # (DRAM:0x00244000) (frame:0x00003508)  header:  0x0 trace:
   - [0xac1290, 0xac3290, "bin",   "___ac1290"] # (DRAM:0x00246000) (frame:0x00003508)  header:  0x0 trace:
   - [0xac3290, 0xac5170, "bin",   "___ac3290"] # (DRAM:0x00248000) (frame:0x00003508)  header:  0x0 trace:
-  - [0xe20eb0, 0xe215c0, "asm",   "CODE_e20eb0", 0x002B7000] # frame:0x00003767 header:  0x3c000000 trace: Tbl mapped:802b76f8
-  - [0xe215c0, 0xe236e0, "bin",   "CODE_e23260", 0x002B6000] # frame:0x0000027E header:  0x27000000 trace: Tbl mapped:802b6478
-  - [0xe236e0, 0xe24040, "bin",   "CODE_e236e0", 0x002B6000] # frame:0x00002948 header:  0x27000000 trace: Tbl mapped:802b6750
+  - [0xe20eb0, 0xe215c0, "asm",   "CODE_e20eb0", 0x802B7000] # frame:0x00003767 header:  0x3c000000 trace: Tbl mapped:802b76f8
+  - [0xe215c0, 0xe236e0, "bin",   "CODE_e23260", 0x802B6000] # frame:0x0000027E header:  0x27000000 trace: Tbl mapped:802b6478
+  - [0xe236e0, 0xe24040, "bin",   "CODE_e236e0", 0x802B6000] # frame:0x00002948 header:  0x27000000 trace: Tbl mapped:802b6750
   - [0xe24040, 0xe245d0, "bin",   "___e24040"] # (DRAM:0x002B6000) (frame:0x00001B20)  header:  0x27000000 trace:
   - [0xe24920, 0xe24ed0, "bin",   "___e24920"] # (DRAM:0x002B6000) (frame:0x00002F44)  header:  0x27000000 trace:
   - [0xe28a30, 0xe291a0, "bin",   "___e28a30"] # (DRAM:0x002B6000) (frame:0x000037ED)  header:  0x27000000 trace:
