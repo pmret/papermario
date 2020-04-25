@@ -7,11 +7,11 @@ BUILD_DIR = build
 
 ##################### Compiler Options #######################
 CROSS = mips-linux-gnu-
-AS = mips-linux-gnu-as
+AS = $(CROSS)as
 CC = $(CROSS)gcc
-LD = mips-linux-gnu-ld
-OBJDUMP = ../oldbinutils/bin/mips-objdump
-OBJCOPY = ../oldbinutils/bin/mips-objcopy
+LD = $(CROSS)ld
+OBJDUMP = $(CROSS)objdump
+OBJCOPY = $(CROSS)objcopy
 
 ASFLAGS = -EB -march=vr4300 -mtune=vr4300
 CFLAGS  = -Wall -O2 -mtune=vr4300 -march=vr4300 -G 0 -c
