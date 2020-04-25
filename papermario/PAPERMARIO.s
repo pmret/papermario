@@ -30,1116 +30,1111 @@ bootcode_font_end:
 # Unknown region 001000-0759B0 [749B0]
 .incbin "bin/PAPERMARIO.001000.bin"
 
-___759b0_len_2000:
-.incbin "bin/PAPERMARIO.0759B0.___759b0_len_2000.bin"
-___759b0_len_2000_end:
-___779b0_len_2000:
-.incbin "bin/PAPERMARIO.0779B0.___779b0_len_2000.bin"
-___779b0_len_2000_end:
-___799b0_len_2000:
-.incbin "bin/PAPERMARIO.0799B0.___799b0_len_2000.bin"
-___799b0_len_2000_end:
-___7b9b0_len_2000:
-.incbin "bin/PAPERMARIO.07B9B0.___7b9b0_len_2000.bin"
-___7b9b0_len_2000_end:
-___7d9b0_len_2000:
-.incbin "bin/PAPERMARIO.07D9B0.___7d9b0_len_2000.bin"
-___7d9b0_len_2000_end:
-___7f9b0_len_2000:
-.incbin "bin/PAPERMARIO.07F9B0.___7f9b0_len_2000.bin"
-___7f9b0_len_2000_end:
-___819b0_len_2000:
-.incbin "bin/PAPERMARIO.0819B0.___819b0_len_2000.bin"
-___819b0_len_2000_end:
-___839b0_len_2000:
-.incbin "bin/PAPERMARIO.0839B0.___839b0_len_2000.bin"
-___839b0_len_2000_end:
-___859b0_len_2000:
-.incbin "bin/PAPERMARIO.0859B0.___859b0_len_2000.bin"
-___859b0_len_2000_end:
-_F__879b0_len_2000:
-.incbin "bin/PAPERMARIO.0879B0._F__879b0_len_2000.bin"
-_F__879b0_len_2000_end:
-___899b0_len_2000:
-.incbin "bin/PAPERMARIO.0899B0.___899b0_len_2000.bin"
-___899b0_len_2000_end:
-___8b9b0_len_2000:
-.incbin "bin/PAPERMARIO.08B9B0.___8b9b0_len_2000.bin"
-___8b9b0_len_2000_end:
-___8d9b0_len_2000:
-.incbin "bin/PAPERMARIO.08D9B0.___8d9b0_len_2000.bin"
-___8d9b0_len_2000_end:
-___8f9b0_len_2000:
-.incbin "bin/PAPERMARIO.08F9B0.___8f9b0_len_2000.bin"
-___8f9b0_len_2000_end:
-___919b0_len_2000:
-.incbin "bin/PAPERMARIO.0919B0.___919b0_len_2000.bin"
-___919b0_len_2000_end:
-___939b0_len_2000:
-.incbin "bin/PAPERMARIO.0939B0.___939b0_len_2000.bin"
-___939b0_len_2000_end:
-___959b0_len_2000:
-.incbin "bin/PAPERMARIO.0959B0.___959b0_len_2000.bin"
-___959b0_len_2000_end:
-___979b0_len_2000:
-.incbin "bin/PAPERMARIO.0979B0.___979b0_len_2000.bin"
-___979b0_len_2000_end:
-___999b0_len_2000:
-.incbin "bin/PAPERMARIO.0999B0.___999b0_len_2000.bin"
-___999b0_len_2000_end:
-___9b9b0_len_2000:
-.incbin "bin/PAPERMARIO.09B9B0.___9b9b0_len_2000.bin"
-___9b9b0_len_2000_end:
-_g__9d9b0_len_2000:
-.incbin "bin/PAPERMARIO.09D9B0._g__9d9b0_len_2000.bin"
-_g__9d9b0_len_2000_end:
-___9f9b0_len_2000:
-.incbin "bin/PAPERMARIO.09F9B0.___9f9b0_len_2000.bin"
-___9f9b0_len_2000_end:
-___a19b0_len_2000:
-.incbin "bin/PAPERMARIO.0A19B0.___a19b0_len_2000.bin"
-___a19b0_len_2000_end:
-___a39b0_len_2000:
-.incbin "bin/PAPERMARIO.0A39B0.___a39b0_len_2000.bin"
-___a39b0_len_2000_end:
-___a59b0_len_420:
-.incbin "bin/PAPERMARIO.0A59B0.___a59b0_len_420.bin"
-___a59b0_len_420_end:
-.include "asm/___a5dd0_len_2000.s" 
-.include "asm/CODE_b72b0_len_2000.s" 
-.include "asm/CODE_cd180_len_2000.s" 
-.include "asm/CODE_cddd0_len_2000.s" 
-.include "asm/CODE_cfdd0_len_2000.s" 
-.include "asm/CODE_d0a70_len_2000.s" 
-.include "asm/CODE_d3dd0_len_2000.s" 
-.include "asm/CODE_d5dd0_len_2000.s" 
-.include "asm/CODE_d7dd0_len_2000.s" 
-.include "asm/CODE_d9dd0_len_2000.s" 
-.include "asm/CODE_dbdd0_len_2000.s" 
-.include "asm/CODE_dddd0_len_2000.s" 
-.include "asm/CODE_dfdd0_len_2000.s" 
-___e1dd0_len_2000:
-.incbin "bin/PAPERMARIO.0E16B0.___e1dd0_len_2000.bin"
-___e1dd0_len_2000_end:
-___e3dd0_len_2000:
-.incbin "bin/PAPERMARIO.0E3DD0.___e3dd0_len_2000.bin"
-___e3dd0_len_2000_end:
-___e5dd0_len_1be0:
-.incbin "bin/PAPERMARIO.0E5DD0.___e5dd0_len_1be0.bin"
-___e5dd0_len_1be0_end:
-.include "asm/CODE_e79b0_len_2000.s" 
-.include "asm/CODE_e99b0_len_2000.s" 
-.include "asm/CODE_eb9b0_len_2000.s" 
-.include "asm/CODE_ed9b0_len_2000.s" 
-.include "asm/CODE_ef9b0_len_2000.s" 
-.include "asm/CODE_f19b0_len_2000.s" 
-.include "asm/CODE_f39b0_len_2000.s" 
-.include "asm/CODE_f59b0_len_2000.s" 
-.include "asm/CODE_f79b0_len_2000.s" 
-.include "asm/CODE_f99b0_len_2000.s" 
-.include "asm/CODE_fb9b0_len_2000.s" 
-.include "asm/CODE_fd9b0_len_1480.s" 
+___759b0:
+.incbin "bin/PAPERMARIO.0759B0.___759b0.bin"
+___759b0_end:
+___779b0:
+.incbin "bin/PAPERMARIO.0779B0.___779b0.bin"
+___779b0_end:
+___799b0:
+.incbin "bin/PAPERMARIO.0799B0.___799b0.bin"
+___799b0_end:
+___7b9b0:
+.incbin "bin/PAPERMARIO.07B9B0.___7b9b0.bin"
+___7b9b0_end:
+___7d9b0:
+.incbin "bin/PAPERMARIO.07D9B0.___7d9b0.bin"
+___7d9b0_end:
+___7f9b0:
+.incbin "bin/PAPERMARIO.07F9B0.___7f9b0.bin"
+___7f9b0_end:
+___819b0:
+.incbin "bin/PAPERMARIO.0819B0.___819b0.bin"
+___819b0_end:
+___839b0:
+.incbin "bin/PAPERMARIO.0839B0.___839b0.bin"
+___839b0_end:
+___859b0:
+.incbin "bin/PAPERMARIO.0859B0.___859b0.bin"
+___859b0_end:
+_F__879b0:
+.incbin "bin/PAPERMARIO.0879B0._F__879b0.bin"
+_F__879b0_end:
+___899b0:
+.incbin "bin/PAPERMARIO.0899B0.___899b0.bin"
+___899b0_end:
+___8b9b0:
+.incbin "bin/PAPERMARIO.08B9B0.___8b9b0.bin"
+___8b9b0_end:
+___8d9b0:
+.incbin "bin/PAPERMARIO.08D9B0.___8d9b0.bin"
+___8d9b0_end:
+___8f9b0:
+.incbin "bin/PAPERMARIO.08F9B0.___8f9b0.bin"
+___8f9b0_end:
+___919b0:
+.incbin "bin/PAPERMARIO.0919B0.___919b0.bin"
+___919b0_end:
+___939b0:
+.incbin "bin/PAPERMARIO.0939B0.___939b0.bin"
+___939b0_end:
+___959b0:
+.incbin "bin/PAPERMARIO.0959B0.___959b0.bin"
+___959b0_end:
+___979b0:
+.incbin "bin/PAPERMARIO.0979B0.___979b0.bin"
+___979b0_end:
+___999b0:
+.incbin "bin/PAPERMARIO.0999B0.___999b0.bin"
+___999b0_end:
+___9b9b0:
+.incbin "bin/PAPERMARIO.09B9B0.___9b9b0.bin"
+___9b9b0_end:
+_g__9d9b0:
+.incbin "bin/PAPERMARIO.09D9B0._g__9d9b0.bin"
+_g__9d9b0_end:
+___9f9b0:
+.incbin "bin/PAPERMARIO.09F9B0.___9f9b0.bin"
+___9f9b0_end:
+___a19b0:
+.incbin "bin/PAPERMARIO.0A19B0.___a19b0.bin"
+___a19b0_end:
+___a39b0:
+.incbin "bin/PAPERMARIO.0A39B0.___a39b0.bin"
+___a39b0_end:
+___a59b0:
+.incbin "bin/PAPERMARIO.0A59B0.___a59b0.bin"
+___a59b0_end:
+.include "asm/code_a5dd0_len_114e0.s" 
+.include "asm/code_b72b0_len_15ed0.s" 
+.include "asm/code_cd180_len_38f0.s" 
+.include "asm/code_d0a70_len_4fe0.s" 
+.include "asm/code_d5a50_len_5fd0.s" 
+.include "asm/code_dba20_len_350.s" 
+.include "asm/code_dbd70_len_700.s" 
+.include "asm/code_dc470_len_14c0.s" 
+.include "asm/code_dd930_len_1c0.s" 
+.include "asm/code_ddaf0_len_c50.s" 
+.include "asm/code_de740_len_23f0.s" 
+.include "asm/code_e0b30_len_b80.s" 
+___e1dd0:
+.incbin "bin/PAPERMARIO.0E16B0.___e1dd0.bin"
+___e1dd0_end:
+___e3dd0:
+.incbin "bin/PAPERMARIO.0E3DD0.___e3dd0.bin"
+___e3dd0_end:
+___e5dd0:
+.incbin "bin/PAPERMARIO.0E5DD0.___e5dd0.bin"
+___e5dd0_end:
+.include "asm/code_e79b0_len_1920.s" 
+.include "asm/code_e92d0_len_5da0.s" 
+.include "asm/code_ef070_len_3400.s" 
+.include "asm/code_f2470_len_27f0.s" 
+.include "asm/code_f4c60_len_4300.s" 
+.include "asm/code_f8f60_len_1560.s" 
+.include "asm/code_fa4c0_len_3bf0.s" 
+.include "asm/code_fe0b0_len_5a0.s" 
 # Unknown region 0FE650-0FEE30 [7E0]
 .incbin "bin/PAPERMARIO.0FE650.bin"
 
-.include "asm/CODE_fee30_len_2000.s" 
-.include "asm/CODE_100e30_len_17e0.s" 
+.include "asm/code_fee30_len_2d60.s" 
+.include "asm/code_101b90_len_8f0.s" 
 # Unknown region 102480-102610 [190]
 .incbin "bin/PAPERMARIO.102480.bin"
 
-.include "asm/CODE_102610_len_2000.s" 
-.include "asm/CODE_104610_len_2000.s" 
-.include "asm/CODE_106610_len_2000.s" 
-.include "asm/CODE_108610_len_2000.s" 
-_D__10a610_len_2000:
-.incbin "bin/PAPERMARIO.10A610._D__10a610_len_2000.bin"
-_D__10a610_len_2000_end:
-___10c610_len_600:
-.incbin "bin/PAPERMARIO.10C610.___10c610_len_600.bin"
-___10c610_len_600_end:
-___10cc10_len_2000:
-.incbin "bin/PAPERMARIO.10CC10.___10cc10_len_2000.bin"
-___10cc10_len_2000_end:
-___10ec10_len_5a0:
-.incbin "bin/PAPERMARIO.10EC10.___10ec10_len_5a0.bin"
-___10ec10_len_5a0_end:
-___10f1b0_len_2000:
-.incbin "bin/PAPERMARIO.10F1B0.___10f1b0_len_2000.bin"
-___10f1b0_len_2000_end:
-___1111b0_len_2000:
-.incbin "bin/PAPERMARIO.1111B0.___1111b0_len_2000.bin"
-___1111b0_len_2000_end:
-___1131b0_len_1100:
-.incbin "bin/PAPERMARIO.1131B0.___1131b0_len_1100.bin"
-___1131b0_len_1100_end:
+.include "asm/code_102610_len_2330.s" 
+.include "asm/code_104940_len_dc0.s" 
+.include "asm/code_105700_len_2130.s" 
+.include "asm/code_107830_len_e70.s" 
+.include "asm/code_1086a0_len_fc0.s" 
+.include "asm/code_109660_len_1270.s" 
+_D__10a610:
+.incbin "bin/PAPERMARIO.10A8D0._D__10a610.bin"
+_D__10a610_end:
+___10c610:
+.incbin "bin/PAPERMARIO.10C610.___10c610.bin"
+___10c610_end:
+___10cc10:
+.incbin "bin/PAPERMARIO.10CC10.___10cc10.bin"
+___10cc10_end:
+___10ec10:
+.incbin "bin/PAPERMARIO.10EC10.___10ec10.bin"
+___10ec10_end:
+___10f1b0:
+.incbin "bin/PAPERMARIO.10F1B0.___10f1b0.bin"
+___10f1b0_end:
+___1111b0:
+.incbin "bin/PAPERMARIO.1111B0.___1111b0.bin"
+___1111b0_end:
+___1131b0:
+.incbin "bin/PAPERMARIO.1131B0.___1131b0.bin"
+___1131b0_end:
 # Unknown region 1142B0-1144B0 [200]
 .incbin "bin/PAPERMARIO.1142B0.bin"
 
-___1144b0_len_500:
-.incbin "bin/PAPERMARIO.1144B0.___1144b0_len_500.bin"
-___1144b0_len_500_end:
+___1144b0:
+.incbin "bin/PAPERMARIO.1144B0.___1144b0.bin"
+___1144b0_end:
 # Unknown region 1149B0-11A240 [5890]
 .incbin "bin/PAPERMARIO.1149B0.bin"
 
-___11a240_len_200:
-.incbin "bin/PAPERMARIO.11A240.___11a240_len_200.bin"
-___11a240_len_200_end:
+___11a240:
+.incbin "bin/PAPERMARIO.11A240.___11a240.bin"
+___11a240_end:
 # Unknown region 11A440-131340 [16F00]
 .incbin "bin/PAPERMARIO.11A440.bin"
 
-CODE_131340_len_2000:
-.incbin "bin/PAPERMARIO.131340.CODE_131340_len_2000.bin"
-CODE_131340_len_2000_end:
-CODE_133340_len_2000:
-.incbin "bin/PAPERMARIO.133340.CODE_133340_len_2000.bin"
-CODE_133340_len_2000_end:
-___135340_len_ba0:
-.incbin "bin/PAPERMARIO.135340.___135340_len_ba0.bin"
-___135340_len_ba0_end:
+CODE_131340:
+.incbin "bin/PAPERMARIO.131340.CODE_131340.bin"
+CODE_131340_end:
+CODE_133340:
+.incbin "bin/PAPERMARIO.133340.CODE_133340.bin"
+CODE_133340_end:
+___135340:
+.incbin "bin/PAPERMARIO.135340.___135340.bin"
+___135340_end:
 # Unknown region 135EE0-163400 [2D520]
 .incbin "bin/PAPERMARIO.135EE0.bin"
 
-.include "asm/CODE_163400_len_4000.s" 
-.include "asm/CODE_167400_len_4000.s" 
-___16b400_len_14e0:
-.incbin "bin/PAPERMARIO.16A3E0.___16b400_len_14e0.bin"
-___16b400_len_14e0_end:
+.include "asm/CODE_163400.s" 
+___16b400:
+.incbin "bin/PAPERMARIO.16A3E0.___16b400.bin"
+___16b400_end:
 # Unknown region 16C8E0-1E0350 [73A70]
 .incbin "bin/PAPERMARIO.16C8E0.bin"
 
-___1e0350_len_200:
-.incbin "bin/PAPERMARIO.1E0350.___1e0350_len_200.bin"
-___1e0350_len_200_end:
-___1e0550_len_20:
-.incbin "bin/PAPERMARIO.1E0550.___1e0550_len_20.bin"
-___1e0550_len_20_end:
+___1e0350:
+.incbin "bin/PAPERMARIO.1E0350.___1e0350.bin"
+___1e0350_end:
+___1e0550:
+.incbin "bin/PAPERMARIO.1E0550.___1e0550.bin"
+___1e0550_end:
 # Unknown region 1E0570-1E1310 [DA0]
 .incbin "bin/PAPERMARIO.1E0570.bin"
 
-___1e1310_len_200:
-.incbin "bin/PAPERMARIO.1E1310.___1e1310_len_200.bin"
-___1e1310_len_200_end:
-___1e1510_len_20:
-.incbin "bin/PAPERMARIO.1E1510.___1e1510_len_20.bin"
-___1e1510_len_20_end:
+___1e1310:
+.incbin "bin/PAPERMARIO.1E1310.___1e1310.bin"
+___1e1310_end:
+___1e1510:
+.incbin "bin/PAPERMARIO.1E1510.___1e1510.bin"
+___1e1510_end:
 # Unknown region 1E1530-1E3DD0 [28A0]
 .incbin "bin/PAPERMARIO.1E1530.bin"
 
-___1e3dd0_len_200:
-.incbin "bin/PAPERMARIO.1E3DD0.___1e3dd0_len_200.bin"
-___1e3dd0_len_200_end:
-___1e3fd0_len_20:
-.incbin "bin/PAPERMARIO.1E3FD0.___1e3fd0_len_20.bin"
-___1e3fd0_len_20_end:
+___1e3dd0:
+.incbin "bin/PAPERMARIO.1E3DD0.___1e3dd0.bin"
+___1e3dd0_end:
+___1e3fd0:
+.incbin "bin/PAPERMARIO.1E3FD0.___1e3fd0.bin"
+___1e3fd0_end:
 # Unknown region 1E3FF0-1E9C50 [5C60]
 .incbin "bin/PAPERMARIO.1E3FF0.bin"
 
-___1e9c50_len_200:
-.incbin "bin/PAPERMARIO.1E9C50.___1e9c50_len_200.bin"
-___1e9c50_len_200_end:
-___1e9e50_len_20:
-.incbin "bin/PAPERMARIO.1E9E50.___1e9e50_len_20.bin"
-___1e9e50_len_20_end:
+___1e9c50:
+.incbin "bin/PAPERMARIO.1E9C50.___1e9c50.bin"
+___1e9c50_end:
+___1e9e50:
+.incbin "bin/PAPERMARIO.1E9E50.___1e9e50.bin"
+___1e9e50_end:
 # Unknown region 1E9E70-1EFAD0 [5C60]
 .incbin "bin/PAPERMARIO.1E9E70.bin"
 
-___1efad0_len_200:
-.incbin "bin/PAPERMARIO.1EFAD0.___1efad0_len_200.bin"
-___1efad0_len_200_end:
-___1efcd0_len_20:
-.incbin "bin/PAPERMARIO.1EFCD0.___1efcd0_len_20.bin"
-___1efcd0_len_20_end:
+___1efad0:
+.incbin "bin/PAPERMARIO.1EFAD0.___1efad0.bin"
+___1efad0_end:
+___1efcd0:
+.incbin "bin/PAPERMARIO.1EFCD0.___1efcd0.bin"
+___1efcd0_end:
 # Unknown region 1EFCF0-1F30D0 [33E0]
 .incbin "bin/PAPERMARIO.1EFCF0.bin"
 
-___1f30d0_len_200:
-.incbin "bin/PAPERMARIO.1F30D0.___1f30d0_len_200.bin"
-___1f30d0_len_200_end:
-___1f32d0_len_20:
-.incbin "bin/PAPERMARIO.1F32D0.___1f32d0_len_20.bin"
-___1f32d0_len_20_end:
+___1f30d0:
+.incbin "bin/PAPERMARIO.1F30D0.___1f30d0.bin"
+___1f30d0_end:
+___1f32d0:
+.incbin "bin/PAPERMARIO.1F32D0.___1f32d0.bin"
+___1f32d0_end:
 # Unknown region 1F32F0-1F54D0 [21E0]
 .incbin "bin/PAPERMARIO.1F32F0.bin"
 
-___1f54d0_len_200:
-.incbin "bin/PAPERMARIO.1F54D0.___1f54d0_len_200.bin"
-___1f54d0_len_200_end:
-___1f56d0_len_20:
-.incbin "bin/PAPERMARIO.1F56D0.___1f56d0_len_20.bin"
-___1f56d0_len_20_end:
+___1f54d0:
+.incbin "bin/PAPERMARIO.1F54D0.___1f54d0.bin"
+___1f54d0_end:
+___1f56d0:
+.incbin "bin/PAPERMARIO.1F56D0.___1f56d0.bin"
+___1f56d0_end:
 # Unknown region 1F56F0-1F5950 [260]
 .incbin "bin/PAPERMARIO.1F56F0.bin"
 
-___1f5950_len_200:
-.incbin "bin/PAPERMARIO.1F5950.___1f5950_len_200.bin"
-___1f5950_len_200_end:
-___1f5b50_len_20:
-.incbin "bin/PAPERMARIO.1F5B50.___1f5b50_len_20.bin"
-___1f5b50_len_20_end:
+___1f5950:
+.incbin "bin/PAPERMARIO.1F5950.___1f5950.bin"
+___1f5950_end:
+___1f5b50:
+.incbin "bin/PAPERMARIO.1F5B50.___1f5b50.bin"
+___1f5b50_end:
 # Unknown region 1F5B70-1F66D0 [B60]
 .incbin "bin/PAPERMARIO.1F5B70.bin"
 
-___1f66d0_len_200:
-.incbin "bin/PAPERMARIO.1F66D0.___1f66d0_len_200.bin"
-___1f66d0_len_200_end:
-___1f68d0_len_20:
-.incbin "bin/PAPERMARIO.1F68D0.___1f68d0_len_20.bin"
-___1f68d0_len_20_end:
+___1f66d0:
+.incbin "bin/PAPERMARIO.1F66D0.___1f66d0.bin"
+___1f66d0_end:
+___1f68d0:
+.incbin "bin/PAPERMARIO.1F68D0.___1f68d0.bin"
+___1f68d0_end:
 # Unknown region 1F68F0-1FB8D0 [4FE0]
 .incbin "bin/PAPERMARIO.1F68F0.bin"
 
-___1fb8d0_len_120:
-.incbin "bin/PAPERMARIO.1FB8D0.___1fb8d0_len_120.bin"
-___1fb8d0_len_120_end:
-___1fb9f0_len_20:
-.incbin "bin/PAPERMARIO.1FB9F0.___1fb9f0_len_20.bin"
-___1fb9f0_len_20_end:
-___1fba10_len_120:
-.incbin "bin/PAPERMARIO.1FBA10.___1fba10_len_120.bin"
-___1fba10_len_120_end:
-___1fbb30_len_20:
-.incbin "bin/PAPERMARIO.1FBB30.___1fbb30_len_20.bin"
-___1fbb30_len_20_end:
-___1fbb50_len_120:
-.incbin "bin/PAPERMARIO.1FBB50.___1fbb50_len_120.bin"
-___1fbb50_len_120_end:
-___1fbc70_len_20:
-.incbin "bin/PAPERMARIO.1FBC70.___1fbc70_len_20.bin"
-___1fbc70_len_20_end:
-___1fbc90_len_120:
-.incbin "bin/PAPERMARIO.1FBC90.___1fbc90_len_120.bin"
-___1fbc90_len_120_end:
-___1fbdb0_len_20:
-.incbin "bin/PAPERMARIO.1FBDB0.___1fbdb0_len_20.bin"
-___1fbdb0_len_20_end:
-___1fbdd0_len_120:
-.incbin "bin/PAPERMARIO.1FBDD0.___1fbdd0_len_120.bin"
-___1fbdd0_len_120_end:
-___1fbef0_len_20:
-.incbin "bin/PAPERMARIO.1FBEF0.___1fbef0_len_20.bin"
-___1fbef0_len_20_end:
-___1fbf10_len_120:
-.incbin "bin/PAPERMARIO.1FBF10.___1fbf10_len_120.bin"
-___1fbf10_len_120_end:
-___1fc030_len_20:
-.incbin "bin/PAPERMARIO.1FC030.___1fc030_len_20.bin"
-___1fc030_len_20_end:
-___1fc050_len_120:
-.incbin "bin/PAPERMARIO.1FC050.___1fc050_len_120.bin"
-___1fc050_len_120_end:
-___1fc170_len_20:
-.incbin "bin/PAPERMARIO.1FC170.___1fc170_len_20.bin"
-___1fc170_len_20_end:
-___1fc190_len_120:
-.incbin "bin/PAPERMARIO.1FC190.___1fc190_len_120.bin"
-___1fc190_len_120_end:
-___1fc2b0_len_20:
-.incbin "bin/PAPERMARIO.1FC2B0.___1fc2b0_len_20.bin"
-___1fc2b0_len_20_end:
-___1fc2d0_len_120:
-.incbin "bin/PAPERMARIO.1FC2D0.___1fc2d0_len_120.bin"
-___1fc2d0_len_120_end:
-___1fc3f0_len_20:
-.incbin "bin/PAPERMARIO.1FC3F0.___1fc3f0_len_20.bin"
-___1fc3f0_len_20_end:
-___1fc410_len_120:
-.incbin "bin/PAPERMARIO.1FC410.___1fc410_len_120.bin"
-___1fc410_len_120_end:
-___1fc530_len_20:
-.incbin "bin/PAPERMARIO.1FC530.___1fc530_len_20.bin"
-___1fc530_len_20_end:
-___1fc550_len_20:
-.incbin "bin/PAPERMARIO.1FC550.___1fc550_len_20.bin"
-___1fc550_len_20_end:
-_c__1fc570_len_20:
-.incbin "bin/PAPERMARIO.1FC570._c__1fc570_len_20.bin"
-_c__1fc570_len_20_end:
-___1fc590_len_20:
-.incbin "bin/PAPERMARIO.1FC590.___1fc590_len_20.bin"
-___1fc590_len_20_end:
-_c__1fc5b0_len_20:
-.incbin "bin/PAPERMARIO.1FC5B0._c__1fc5b0_len_20.bin"
-_c__1fc5b0_len_20_end:
-___1fc5d0_len_20:
-.incbin "bin/PAPERMARIO.1FC5D0.___1fc5d0_len_20.bin"
-___1fc5d0_len_20_end:
-_c__1fc5f0_len_20:
-.incbin "bin/PAPERMARIO.1FC5F0._c__1fc5f0_len_20.bin"
-_c__1fc5f0_len_20_end:
-___1fc610_len_20:
-.incbin "bin/PAPERMARIO.1FC610.___1fc610_len_20.bin"
-___1fc610_len_20_end:
-_c__1fc630_len_20:
-.incbin "bin/PAPERMARIO.1FC630._c__1fc630_len_20.bin"
-_c__1fc630_len_20_end:
-___1fc650_len_20:
-.incbin "bin/PAPERMARIO.1FC650.___1fc650_len_20.bin"
-___1fc650_len_20_end:
-_c__1fc670_len_20:
-.incbin "bin/PAPERMARIO.1FC670._c__1fc670_len_20.bin"
-_c__1fc670_len_20_end:
-___1fc690_len_20:
-.incbin "bin/PAPERMARIO.1FC690.___1fc690_len_20.bin"
-___1fc690_len_20_end:
-_c__1fc6b0_len_20:
-.incbin "bin/PAPERMARIO.1FC6B0._c__1fc6b0_len_20.bin"
-_c__1fc6b0_len_20_end:
-___1fc6d0_len_20:
-.incbin "bin/PAPERMARIO.1FC6D0.___1fc6d0_len_20.bin"
-___1fc6d0_len_20_end:
-_c__1fc6f0_len_20:
-.incbin "bin/PAPERMARIO.1FC6F0._c__1fc6f0_len_20.bin"
-_c__1fc6f0_len_20_end:
-___1fc710_len_200:
-.incbin "bin/PAPERMARIO.1FC710.___1fc710_len_200.bin"
-___1fc710_len_200_end:
-___1fc910_len_20:
-.incbin "bin/PAPERMARIO.1FC910.___1fc910_len_20.bin"
-___1fc910_len_20_end:
-___1fc930_len_200:
-.incbin "bin/PAPERMARIO.1FC930.___1fc930_len_200.bin"
-___1fc930_len_200_end:
-___1fcb30_len_20:
-.incbin "bin/PAPERMARIO.1FCB30.___1fcb30_len_20.bin"
-___1fcb30_len_20_end:
-___1fcb50_len_200:
-.incbin "bin/PAPERMARIO.1FCB50.___1fcb50_len_200.bin"
-___1fcb50_len_200_end:
-___1fcd50_len_20:
-.incbin "bin/PAPERMARIO.1FCD50.___1fcd50_len_20.bin"
-___1fcd50_len_20_end:
+___1fb8d0:
+.incbin "bin/PAPERMARIO.1FB8D0.___1fb8d0.bin"
+___1fb8d0_end:
+___1fb9f0:
+.incbin "bin/PAPERMARIO.1FB9F0.___1fb9f0.bin"
+___1fb9f0_end:
+___1fba10:
+.incbin "bin/PAPERMARIO.1FBA10.___1fba10.bin"
+___1fba10_end:
+___1fbb30:
+.incbin "bin/PAPERMARIO.1FBB30.___1fbb30.bin"
+___1fbb30_end:
+___1fbb50:
+.incbin "bin/PAPERMARIO.1FBB50.___1fbb50.bin"
+___1fbb50_end:
+___1fbc70:
+.incbin "bin/PAPERMARIO.1FBC70.___1fbc70.bin"
+___1fbc70_end:
+___1fbc90:
+.incbin "bin/PAPERMARIO.1FBC90.___1fbc90.bin"
+___1fbc90_end:
+___1fbdb0:
+.incbin "bin/PAPERMARIO.1FBDB0.___1fbdb0.bin"
+___1fbdb0_end:
+___1fbdd0:
+.incbin "bin/PAPERMARIO.1FBDD0.___1fbdd0.bin"
+___1fbdd0_end:
+___1fbef0:
+.incbin "bin/PAPERMARIO.1FBEF0.___1fbef0.bin"
+___1fbef0_end:
+___1fbf10:
+.incbin "bin/PAPERMARIO.1FBF10.___1fbf10.bin"
+___1fbf10_end:
+___1fc030:
+.incbin "bin/PAPERMARIO.1FC030.___1fc030.bin"
+___1fc030_end:
+___1fc050:
+.incbin "bin/PAPERMARIO.1FC050.___1fc050.bin"
+___1fc050_end:
+___1fc170:
+.incbin "bin/PAPERMARIO.1FC170.___1fc170.bin"
+___1fc170_end:
+___1fc190:
+.incbin "bin/PAPERMARIO.1FC190.___1fc190.bin"
+___1fc190_end:
+___1fc2b0:
+.incbin "bin/PAPERMARIO.1FC2B0.___1fc2b0.bin"
+___1fc2b0_end:
+___1fc2d0:
+.incbin "bin/PAPERMARIO.1FC2D0.___1fc2d0.bin"
+___1fc2d0_end:
+___1fc3f0:
+.incbin "bin/PAPERMARIO.1FC3F0.___1fc3f0.bin"
+___1fc3f0_end:
+___1fc410:
+.incbin "bin/PAPERMARIO.1FC410.___1fc410.bin"
+___1fc410_end:
+___1fc530:
+.incbin "bin/PAPERMARIO.1FC530.___1fc530.bin"
+___1fc530_end:
+___1fc550:
+.incbin "bin/PAPERMARIO.1FC550.___1fc550.bin"
+___1fc550_end:
+_c__1fc570:
+.incbin "bin/PAPERMARIO.1FC570._c__1fc570.bin"
+_c__1fc570_end:
+___1fc590:
+.incbin "bin/PAPERMARIO.1FC590.___1fc590.bin"
+___1fc590_end:
+_c__1fc5b0:
+.incbin "bin/PAPERMARIO.1FC5B0._c__1fc5b0.bin"
+_c__1fc5b0_end:
+___1fc5d0:
+.incbin "bin/PAPERMARIO.1FC5D0.___1fc5d0.bin"
+___1fc5d0_end:
+_c__1fc5f0:
+.incbin "bin/PAPERMARIO.1FC5F0._c__1fc5f0.bin"
+_c__1fc5f0_end:
+___1fc610:
+.incbin "bin/PAPERMARIO.1FC610.___1fc610.bin"
+___1fc610_end:
+_c__1fc630:
+.incbin "bin/PAPERMARIO.1FC630._c__1fc630.bin"
+_c__1fc630_end:
+___1fc650:
+.incbin "bin/PAPERMARIO.1FC650.___1fc650.bin"
+___1fc650_end:
+_c__1fc670:
+.incbin "bin/PAPERMARIO.1FC670._c__1fc670.bin"
+_c__1fc670_end:
+___1fc690:
+.incbin "bin/PAPERMARIO.1FC690.___1fc690.bin"
+___1fc690_end:
+_c__1fc6b0:
+.incbin "bin/PAPERMARIO.1FC6B0._c__1fc6b0.bin"
+_c__1fc6b0_end:
+___1fc6d0:
+.incbin "bin/PAPERMARIO.1FC6D0.___1fc6d0.bin"
+___1fc6d0_end:
+_c__1fc6f0:
+.incbin "bin/PAPERMARIO.1FC6F0._c__1fc6f0.bin"
+_c__1fc6f0_end:
+___1fc710:
+.incbin "bin/PAPERMARIO.1FC710.___1fc710.bin"
+___1fc710_end:
+___1fc910:
+.incbin "bin/PAPERMARIO.1FC910.___1fc910.bin"
+___1fc910_end:
+___1fc930:
+.incbin "bin/PAPERMARIO.1FC930.___1fc930.bin"
+___1fc930_end:
+___1fcb30:
+.incbin "bin/PAPERMARIO.1FCB30.___1fcb30.bin"
+___1fcb30_end:
+___1fcb50:
+.incbin "bin/PAPERMARIO.1FCB50.___1fcb50.bin"
+___1fcb50_end:
+___1fcd50:
+.incbin "bin/PAPERMARIO.1FCD50.___1fcd50.bin"
+___1fcd50_end:
 # Unknown region 1FCD70-1FE1B0 [1440]
 .incbin "bin/PAPERMARIO.1FCD70.bin"
 
-___1fe1b0_len_2000:
-.incbin "bin/PAPERMARIO.1FE1B0.___1fe1b0_len_2000.bin"
-___1fe1b0_len_2000_end:
-___2001b0_len_2000:
-.incbin "bin/PAPERMARIO.2001B0.___2001b0_len_2000.bin"
-___2001b0_len_2000_end:
-___2021b0_len_2000:
-.incbin "bin/PAPERMARIO.2021B0.___2021b0_len_2000.bin"
-___2021b0_len_2000_end:
-___2041b0_len_2000:
-.incbin "bin/PAPERMARIO.2041B0.___2041b0_len_2000.bin"
-___2041b0_len_2000_end:
-___2061b0_len_2000:
-.incbin "bin/PAPERMARIO.2061B0.___2061b0_len_2000.bin"
-___2061b0_len_2000_end:
-___2081b0_len_2000:
-.incbin "bin/PAPERMARIO.2081B0.___2081b0_len_2000.bin"
-___2081b0_len_2000_end:
-___20a1b0_len_2000:
-.incbin "bin/PAPERMARIO.20A1B0.___20a1b0_len_2000.bin"
-___20a1b0_len_2000_end:
-___20c1b0_len_2000:
-.incbin "bin/PAPERMARIO.20C1B0.___20c1b0_len_2000.bin"
-___20c1b0_len_2000_end:
-___20e1b0_len_2000:
-.incbin "bin/PAPERMARIO.20E1B0.___20e1b0_len_2000.bin"
-___20e1b0_len_2000_end:
-___2101b0_len_2000:
-.incbin "bin/PAPERMARIO.2101B0.___2101b0_len_2000.bin"
-___2101b0_len_2000_end:
-___2121b0_len_2000:
-.incbin "bin/PAPERMARIO.2121B0.___2121b0_len_2000.bin"
-___2121b0_len_2000_end:
-___2141b0_len_2000:
-.incbin "bin/PAPERMARIO.2141B0.___2141b0_len_2000.bin"
-___2141b0_len_2000_end:
-___2161b0_len_2000:
-.incbin "bin/PAPERMARIO.2161B0.___2161b0_len_2000.bin"
-___2161b0_len_2000_end:
-___2181b0_len_1000:
-.incbin "bin/PAPERMARIO.2181B0.___2181b0_len_1000.bin"
-___2181b0_len_1000_end:
-___2191b0_len_2000:
-.incbin "bin/PAPERMARIO.2191B0.___2191b0_len_2000.bin"
-___2191b0_len_2000_end:
-___21b1b0_len_2000:
-.incbin "bin/PAPERMARIO.21B1B0.___21b1b0_len_2000.bin"
-___21b1b0_len_2000_end:
-___21d1b0_len_2000:
-.incbin "bin/PAPERMARIO.21D1B0.___21d1b0_len_2000.bin"
-___21d1b0_len_2000_end:
-___21f1b0_len_2000:
-.incbin "bin/PAPERMARIO.21F1B0.___21f1b0_len_2000.bin"
-___21f1b0_len_2000_end:
-_CCCC__2211b0_len_2000:
-.incbin "bin/PAPERMARIO.2211B0._CCCC__2211b0_len_2000.bin"
-_CCCC__2211b0_len_2000_end:
-___2231b0_len_910:
-.incbin "bin/PAPERMARIO.2231B0.___2231b0_len_910.bin"
-___2231b0_len_910_end:
-___223ac0_len_2000:
-.incbin "bin/PAPERMARIO.223AC0.___223ac0_len_2000.bin"
-___223ac0_len_2000_end:
-___225ac0_len_2000:
-.incbin "bin/PAPERMARIO.225AC0.___225ac0_len_2000.bin"
-___225ac0_len_2000_end:
-_ZZ__227ac0_len_2000:
-.incbin "bin/PAPERMARIO.227AC0._ZZ__227ac0_len_2000.bin"
-_ZZ__227ac0_len_2000_end:
-___229ac0_len_2000:
-.incbin "bin/PAPERMARIO.229AC0.___229ac0_len_2000.bin"
-___229ac0_len_2000_end:
-___22bac0_len_2000:
-.incbin "bin/PAPERMARIO.22BAC0.___22bac0_len_2000.bin"
-___22bac0_len_2000_end:
-_nsCx__22dac0_len_910:
-.incbin "bin/PAPERMARIO.22DAC0._nsCx__22dac0_len_910.bin"
-_nsCx__22dac0_len_910_end:
-___22e3d0_len_2000:
-.incbin "bin/PAPERMARIO.22E3D0.___22e3d0_len_2000.bin"
-___22e3d0_len_2000_end:
-___2303d0_len_2000:
-.incbin "bin/PAPERMARIO.2303D0.___2303d0_len_2000.bin"
-___2303d0_len_2000_end:
-_dh__2323d0_len_2000:
-.incbin "bin/PAPERMARIO.2323D0._dh__2323d0_len_2000.bin"
-_dh__2323d0_len_2000_end:
-___2343d0_len_2000:
-.incbin "bin/PAPERMARIO.2343D0.___2343d0_len_2000.bin"
-___2343d0_len_2000_end:
-___2363d0_len_2000:
-.incbin "bin/PAPERMARIO.2363D0.___2363d0_len_2000.bin"
-___2363d0_len_2000_end:
-_x__2383d0_len_910:
-.incbin "bin/PAPERMARIO.2383D0._x__2383d0_len_910.bin"
-_x__2383d0_len_910_end:
-___238ce0_len_2000:
-.incbin "bin/PAPERMARIO.238CE0.___238ce0_len_2000.bin"
-___238ce0_len_2000_end:
-___23ace0_len_2000:
-.incbin "bin/PAPERMARIO.23ACE0.___23ace0_len_2000.bin"
-___23ace0_len_2000_end:
-___23cce0_len_2000:
-.incbin "bin/PAPERMARIO.23CCE0.___23cce0_len_2000.bin"
-___23cce0_len_2000_end:
-___23ece0_len_2000:
-.incbin "bin/PAPERMARIO.23ECE0.___23ece0_len_2000.bin"
-___23ece0_len_2000_end:
-___240ce0_len_2000:
-.incbin "bin/PAPERMARIO.240CE0.___240ce0_len_2000.bin"
-___240ce0_len_2000_end:
-___242ce0_len_910:
-.incbin "bin/PAPERMARIO.242CE0.___242ce0_len_910.bin"
-___242ce0_len_910_end:
-___2435f0_len_2000:
-.incbin "bin/PAPERMARIO.2435F0.___2435f0_len_2000.bin"
-___2435f0_len_2000_end:
-___2455f0_len_2000:
-.incbin "bin/PAPERMARIO.2455F0.___2455f0_len_2000.bin"
-___2455f0_len_2000_end:
-___2475f0_len_2000:
-.incbin "bin/PAPERMARIO.2475F0.___2475f0_len_2000.bin"
-___2475f0_len_2000_end:
-___2495f0_len_2000:
-.incbin "bin/PAPERMARIO.2495F0.___2495f0_len_2000.bin"
-___2495f0_len_2000_end:
-___24b5f0_len_200:
-.incbin "bin/PAPERMARIO.24B5F0.___24b5f0_len_200.bin"
-___24b5f0_len_200_end:
+___1fe1b0:
+.incbin "bin/PAPERMARIO.1FE1B0.___1fe1b0.bin"
+___1fe1b0_end:
+___2001b0:
+.incbin "bin/PAPERMARIO.2001B0.___2001b0.bin"
+___2001b0_end:
+___2021b0:
+.incbin "bin/PAPERMARIO.2021B0.___2021b0.bin"
+___2021b0_end:
+___2041b0:
+.incbin "bin/PAPERMARIO.2041B0.___2041b0.bin"
+___2041b0_end:
+___2061b0:
+.incbin "bin/PAPERMARIO.2061B0.___2061b0.bin"
+___2061b0_end:
+___2081b0:
+.incbin "bin/PAPERMARIO.2081B0.___2081b0.bin"
+___2081b0_end:
+___20a1b0:
+.incbin "bin/PAPERMARIO.20A1B0.___20a1b0.bin"
+___20a1b0_end:
+___20c1b0:
+.incbin "bin/PAPERMARIO.20C1B0.___20c1b0.bin"
+___20c1b0_end:
+___20e1b0:
+.incbin "bin/PAPERMARIO.20E1B0.___20e1b0.bin"
+___20e1b0_end:
+___2101b0:
+.incbin "bin/PAPERMARIO.2101B0.___2101b0.bin"
+___2101b0_end:
+___2121b0:
+.incbin "bin/PAPERMARIO.2121B0.___2121b0.bin"
+___2121b0_end:
+___2141b0:
+.incbin "bin/PAPERMARIO.2141B0.___2141b0.bin"
+___2141b0_end:
+___2161b0:
+.incbin "bin/PAPERMARIO.2161B0.___2161b0.bin"
+___2161b0_end:
+___2181b0:
+.incbin "bin/PAPERMARIO.2181B0.___2181b0.bin"
+___2181b0_end:
+___2191b0:
+.incbin "bin/PAPERMARIO.2191B0.___2191b0.bin"
+___2191b0_end:
+___21b1b0:
+.incbin "bin/PAPERMARIO.21B1B0.___21b1b0.bin"
+___21b1b0_end:
+___21d1b0:
+.incbin "bin/PAPERMARIO.21D1B0.___21d1b0.bin"
+___21d1b0_end:
+___21f1b0:
+.incbin "bin/PAPERMARIO.21F1B0.___21f1b0.bin"
+___21f1b0_end:
+_CCCC__2211b0:
+.incbin "bin/PAPERMARIO.2211B0._CCCC__2211b0.bin"
+_CCCC__2211b0_end:
+___2231b0:
+.incbin "bin/PAPERMARIO.2231B0.___2231b0.bin"
+___2231b0_end:
+___223ac0:
+.incbin "bin/PAPERMARIO.223AC0.___223ac0.bin"
+___223ac0_end:
+___225ac0:
+.incbin "bin/PAPERMARIO.225AC0.___225ac0.bin"
+___225ac0_end:
+_ZZ__227ac0:
+.incbin "bin/PAPERMARIO.227AC0._ZZ__227ac0.bin"
+_ZZ__227ac0_end:
+___229ac0:
+.incbin "bin/PAPERMARIO.229AC0.___229ac0.bin"
+___229ac0_end:
+___22bac0:
+.incbin "bin/PAPERMARIO.22BAC0.___22bac0.bin"
+___22bac0_end:
+_nsCx__22dac0:
+.incbin "bin/PAPERMARIO.22DAC0._nsCx__22dac0.bin"
+_nsCx__22dac0_end:
+___22e3d0:
+.incbin "bin/PAPERMARIO.22E3D0.___22e3d0.bin"
+___22e3d0_end:
+___2303d0:
+.incbin "bin/PAPERMARIO.2303D0.___2303d0.bin"
+___2303d0_end:
+_dh__2323d0:
+.incbin "bin/PAPERMARIO.2323D0._dh__2323d0.bin"
+_dh__2323d0_end:
+___2343d0:
+.incbin "bin/PAPERMARIO.2343D0.___2343d0.bin"
+___2343d0_end:
+___2363d0:
+.incbin "bin/PAPERMARIO.2363D0.___2363d0.bin"
+___2363d0_end:
+_x__2383d0:
+.incbin "bin/PAPERMARIO.2383D0._x__2383d0.bin"
+_x__2383d0_end:
+___238ce0:
+.incbin "bin/PAPERMARIO.238CE0.___238ce0.bin"
+___238ce0_end:
+___23ace0:
+.incbin "bin/PAPERMARIO.23ACE0.___23ace0.bin"
+___23ace0_end:
+___23cce0:
+.incbin "bin/PAPERMARIO.23CCE0.___23cce0.bin"
+___23cce0_end:
+___23ece0:
+.incbin "bin/PAPERMARIO.23ECE0.___23ece0.bin"
+___23ece0_end:
+___240ce0:
+.incbin "bin/PAPERMARIO.240CE0.___240ce0.bin"
+___240ce0_end:
+___242ce0:
+.incbin "bin/PAPERMARIO.242CE0.___242ce0.bin"
+___242ce0_end:
+___2435f0:
+.incbin "bin/PAPERMARIO.2435F0.___2435f0.bin"
+___2435f0_end:
+___2455f0:
+.incbin "bin/PAPERMARIO.2455F0.___2455f0.bin"
+___2455f0_end:
+___2475f0:
+.incbin "bin/PAPERMARIO.2475F0.___2475f0.bin"
+___2475f0_end:
+___2495f0:
+.incbin "bin/PAPERMARIO.2495F0.___2495f0.bin"
+___2495f0_end:
+___24b5f0:
+.incbin "bin/PAPERMARIO.24B5F0.___24b5f0.bin"
+___24b5f0_end:
 # Unknown region 24B7F0-263A00 [18210]
 .incbin "bin/PAPERMARIO.24B7F0.bin"
 
-___263a00_len_d8:
-.incbin "bin/PAPERMARIO.263A00.___263a00_len_d8.bin"
-___263a00_len_d8_end:
-___263ad8_len_d8:
-.incbin "bin/PAPERMARIO.263AD8.___263ad8_len_d8.bin"
-___263ad8_len_d8_end:
-___263bb0_len_d8:
-.incbin "bin/PAPERMARIO.263BB0.___263bb0_len_d8.bin"
-___263bb0_len_d8_end:
-___263c88_len_d8:
-.incbin "bin/PAPERMARIO.263C88.___263c88_len_d8.bin"
-___263c88_len_d8_end:
-___263d60_len_d8:
-.incbin "bin/PAPERMARIO.263D60.___263d60_len_d8.bin"
-___263d60_len_d8_end:
-___263e38_len_d8:
-.incbin "bin/PAPERMARIO.263E38.___263e38_len_d8.bin"
-___263e38_len_d8_end:
-___263f10_len_d8:
-.incbin "bin/PAPERMARIO.263F10.___263f10_len_d8.bin"
-___263f10_len_d8_end:
-___263fe8_len_d8:
-.incbin "bin/PAPERMARIO.263FE8.___263fe8_len_d8.bin"
-___263fe8_len_d8_end:
-___2640c0_len_d8:
-.incbin "bin/PAPERMARIO.2640C0.___2640c0_len_d8.bin"
-___2640c0_len_d8_end:
-___264198_len_d8:
-.incbin "bin/PAPERMARIO.264198.___264198_len_d8.bin"
-___264198_len_d8_end:
-___264270_len_d8:
-.incbin "bin/PAPERMARIO.264270.___264270_len_d8.bin"
-___264270_len_d8_end:
-___264348_len_d8:
-.incbin "bin/PAPERMARIO.264348.___264348_len_d8.bin"
-___264348_len_d8_end:
-___264420_len_d8:
-.incbin "bin/PAPERMARIO.264420.___264420_len_d8.bin"
-___264420_len_d8_end:
-___2644f8_len_d8:
-.incbin "bin/PAPERMARIO.2644F8.___2644f8_len_d8.bin"
-___2644f8_len_d8_end:
-___2645d0_len_d8:
-.incbin "bin/PAPERMARIO.2645D0.___2645d0_len_d8.bin"
-___2645d0_len_d8_end:
-___2646a8_len_d8:
-.incbin "bin/PAPERMARIO.2646A8.___2646a8_len_d8.bin"
-___2646a8_len_d8_end:
-___264780_len_d8:
-.incbin "bin/PAPERMARIO.264780.___264780_len_d8.bin"
-___264780_len_d8_end:
-___264858_len_d8:
-.incbin "bin/PAPERMARIO.264858.___264858_len_d8.bin"
-___264858_len_d8_end:
-___264930_len_d8:
-.incbin "bin/PAPERMARIO.264930.___264930_len_d8.bin"
-___264930_len_d8_end:
-___264a08_len_d8:
-.incbin "bin/PAPERMARIO.264A08.___264a08_len_d8.bin"
-___264a08_len_d8_end:
-___264ae0_len_d8:
-.incbin "bin/PAPERMARIO.264AE0.___264ae0_len_d8.bin"
-___264ae0_len_d8_end:
-___264bb8_len_d8:
-.incbin "bin/PAPERMARIO.264BB8.___264bb8_len_d8.bin"
-___264bb8_len_d8_end:
-___264c90_len_d8:
-.incbin "bin/PAPERMARIO.264C90.___264c90_len_d8.bin"
-___264c90_len_d8_end:
-___264d68_len_d8:
-.incbin "bin/PAPERMARIO.264D68.___264d68_len_d8.bin"
-___264d68_len_d8_end:
-___264e40_len_d8:
-.incbin "bin/PAPERMARIO.264E40.___264e40_len_d8.bin"
-___264e40_len_d8_end:
-___264f18_len_d8:
-.incbin "bin/PAPERMARIO.264F18.___264f18_len_d8.bin"
-___264f18_len_d8_end:
-___264ff0_len_d8:
-.incbin "bin/PAPERMARIO.264FF0.___264ff0_len_d8.bin"
-___264ff0_len_d8_end:
-___2650c8_len_d8:
-.incbin "bin/PAPERMARIO.2650C8.___2650c8_len_d8.bin"
-___2650c8_len_d8_end:
-___2651a0_len_d8:
-.incbin "bin/PAPERMARIO.2651A0.___2651a0_len_d8.bin"
-___2651a0_len_d8_end:
-___265278_len_d8:
-.incbin "bin/PAPERMARIO.265278.___265278_len_d8.bin"
-___265278_len_d8_end:
-___265350_len_d8:
-.incbin "bin/PAPERMARIO.265350.___265350_len_d8.bin"
-___265350_len_d8_end:
-___265428_len_d8:
-.incbin "bin/PAPERMARIO.265428.___265428_len_d8.bin"
-___265428_len_d8_end:
-___265500_len_d8:
-.incbin "bin/PAPERMARIO.265500.___265500_len_d8.bin"
-___265500_len_d8_end:
-___2655d8_len_d8:
-.incbin "bin/PAPERMARIO.2655D8.___2655d8_len_d8.bin"
-___2655d8_len_d8_end:
-___2656b0_len_d8:
-.incbin "bin/PAPERMARIO.2656B0.___2656b0_len_d8.bin"
-___2656b0_len_d8_end:
-___265788_len_d8:
-.incbin "bin/PAPERMARIO.265788.___265788_len_d8.bin"
-___265788_len_d8_end:
-___265860_len_d8:
-.incbin "bin/PAPERMARIO.265860.___265860_len_d8.bin"
-___265860_len_d8_end:
-___265938_len_d8:
-.incbin "bin/PAPERMARIO.265938.___265938_len_d8.bin"
-___265938_len_d8_end:
-___265a10_len_d8:
-.incbin "bin/PAPERMARIO.265A10.___265a10_len_d8.bin"
-___265a10_len_d8_end:
-___265ae8_len_d8:
-.incbin "bin/PAPERMARIO.265AE8.___265ae8_len_d8.bin"
-___265ae8_len_d8_end:
-___265bc0_len_d8:
-.incbin "bin/PAPERMARIO.265BC0.___265bc0_len_d8.bin"
-___265bc0_len_d8_end:
-___265c98_len_d8:
-.incbin "bin/PAPERMARIO.265C98.___265c98_len_d8.bin"
-___265c98_len_d8_end:
-___265d70_len_d8:
-.incbin "bin/PAPERMARIO.265D70.___265d70_len_d8.bin"
-___265d70_len_d8_end:
-___265e48_len_d8:
-.incbin "bin/PAPERMARIO.265E48.___265e48_len_d8.bin"
-___265e48_len_d8_end:
-___265f20_len_d8:
-.incbin "bin/PAPERMARIO.265F20.___265f20_len_d8.bin"
-___265f20_len_d8_end:
-___265ff8_len_50:
-.incbin "bin/PAPERMARIO.265FF8.___265ff8_len_50.bin"
-___265ff8_len_50_end:
-___266048_len_10:
-.incbin "bin/PAPERMARIO.266048.___266048_len_10.bin"
-___266048_len_10_end:
+___263a00:
+.incbin "bin/PAPERMARIO.263A00.___263a00.bin"
+___263a00_end:
+___263ad8:
+.incbin "bin/PAPERMARIO.263AD8.___263ad8.bin"
+___263ad8_end:
+___263bb0:
+.incbin "bin/PAPERMARIO.263BB0.___263bb0.bin"
+___263bb0_end:
+___263c88:
+.incbin "bin/PAPERMARIO.263C88.___263c88.bin"
+___263c88_end:
+___263d60:
+.incbin "bin/PAPERMARIO.263D60.___263d60.bin"
+___263d60_end:
+___263e38:
+.incbin "bin/PAPERMARIO.263E38.___263e38.bin"
+___263e38_end:
+___263f10:
+.incbin "bin/PAPERMARIO.263F10.___263f10.bin"
+___263f10_end:
+___263fe8:
+.incbin "bin/PAPERMARIO.263FE8.___263fe8.bin"
+___263fe8_end:
+___2640c0:
+.incbin "bin/PAPERMARIO.2640C0.___2640c0.bin"
+___2640c0_end:
+___264198:
+.incbin "bin/PAPERMARIO.264198.___264198.bin"
+___264198_end:
+___264270:
+.incbin "bin/PAPERMARIO.264270.___264270.bin"
+___264270_end:
+___264348:
+.incbin "bin/PAPERMARIO.264348.___264348.bin"
+___264348_end:
+___264420:
+.incbin "bin/PAPERMARIO.264420.___264420.bin"
+___264420_end:
+___2644f8:
+.incbin "bin/PAPERMARIO.2644F8.___2644f8.bin"
+___2644f8_end:
+___2645d0:
+.incbin "bin/PAPERMARIO.2645D0.___2645d0.bin"
+___2645d0_end:
+___2646a8:
+.incbin "bin/PAPERMARIO.2646A8.___2646a8.bin"
+___2646a8_end:
+___264780:
+.incbin "bin/PAPERMARIO.264780.___264780.bin"
+___264780_end:
+___264858:
+.incbin "bin/PAPERMARIO.264858.___264858.bin"
+___264858_end:
+___264930:
+.incbin "bin/PAPERMARIO.264930.___264930.bin"
+___264930_end:
+___264a08:
+.incbin "bin/PAPERMARIO.264A08.___264a08.bin"
+___264a08_end:
+___264ae0:
+.incbin "bin/PAPERMARIO.264AE0.___264ae0.bin"
+___264ae0_end:
+___264bb8:
+.incbin "bin/PAPERMARIO.264BB8.___264bb8.bin"
+___264bb8_end:
+___264c90:
+.incbin "bin/PAPERMARIO.264C90.___264c90.bin"
+___264c90_end:
+___264d68:
+.incbin "bin/PAPERMARIO.264D68.___264d68.bin"
+___264d68_end:
+___264e40:
+.incbin "bin/PAPERMARIO.264E40.___264e40.bin"
+___264e40_end:
+___264f18:
+.incbin "bin/PAPERMARIO.264F18.___264f18.bin"
+___264f18_end:
+___264ff0:
+.incbin "bin/PAPERMARIO.264FF0.___264ff0.bin"
+___264ff0_end:
+___2650c8:
+.incbin "bin/PAPERMARIO.2650C8.___2650c8.bin"
+___2650c8_end:
+___2651a0:
+.incbin "bin/PAPERMARIO.2651A0.___2651a0.bin"
+___2651a0_end:
+___265278:
+.incbin "bin/PAPERMARIO.265278.___265278.bin"
+___265278_end:
+___265350:
+.incbin "bin/PAPERMARIO.265350.___265350.bin"
+___265350_end:
+___265428:
+.incbin "bin/PAPERMARIO.265428.___265428.bin"
+___265428_end:
+___265500:
+.incbin "bin/PAPERMARIO.265500.___265500.bin"
+___265500_end:
+___2655d8:
+.incbin "bin/PAPERMARIO.2655D8.___2655d8.bin"
+___2655d8_end:
+___2656b0:
+.incbin "bin/PAPERMARIO.2656B0.___2656b0.bin"
+___2656b0_end:
+___265788:
+.incbin "bin/PAPERMARIO.265788.___265788.bin"
+___265788_end:
+___265860:
+.incbin "bin/PAPERMARIO.265860.___265860.bin"
+___265860_end:
+___265938:
+.incbin "bin/PAPERMARIO.265938.___265938.bin"
+___265938_end:
+___265a10:
+.incbin "bin/PAPERMARIO.265A10.___265a10.bin"
+___265a10_end:
+___265ae8:
+.incbin "bin/PAPERMARIO.265AE8.___265ae8.bin"
+___265ae8_end:
+___265bc0:
+.incbin "bin/PAPERMARIO.265BC0.___265bc0.bin"
+___265bc0_end:
+___265c98:
+.incbin "bin/PAPERMARIO.265C98.___265c98.bin"
+___265c98_end:
+___265d70:
+.incbin "bin/PAPERMARIO.265D70.___265d70.bin"
+___265d70_end:
+___265e48:
+.incbin "bin/PAPERMARIO.265E48.___265e48.bin"
+___265e48_end:
+___265f20:
+.incbin "bin/PAPERMARIO.265F20.___265f20.bin"
+___265f20_end:
+___265ff8:
+.incbin "bin/PAPERMARIO.265FF8.___265ff8.bin"
+___265ff8_end:
+___266048:
+.incbin "bin/PAPERMARIO.266048.___266048.bin"
+___266048_end:
 # Unknown region 266058-284188 [1E130]
 .incbin "bin/PAPERMARIO.266058.bin"
 
-___284188_len_48:
-.incbin "bin/PAPERMARIO.284188.___284188_len_48.bin"
-___284188_len_48_end:
-___2841d0_len_48:
-.incbin "bin/PAPERMARIO.2841D0.___2841d0_len_48.bin"
-___2841d0_len_48_end:
-___284218_len_48:
-.incbin "bin/PAPERMARIO.284218.___284218_len_48.bin"
-___284218_len_48_end:
-___284260_len_48:
-.incbin "bin/PAPERMARIO.284260.___284260_len_48.bin"
-___284260_len_48_end:
-___2842a8_len_48:
-.incbin "bin/PAPERMARIO.2842A8.___2842a8_len_48.bin"
-___2842a8_len_48_end:
-___2842f0_len_48:
-.incbin "bin/PAPERMARIO.2842F0.___2842f0_len_48.bin"
-___2842f0_len_48_end:
-___284338_len_48:
-.incbin "bin/PAPERMARIO.284338.___284338_len_48.bin"
-___284338_len_48_end:
+___284188:
+.incbin "bin/PAPERMARIO.284188.___284188.bin"
+___284188_end:
+___2841d0:
+.incbin "bin/PAPERMARIO.2841D0.___2841d0.bin"
+___2841d0_end:
+___284218:
+.incbin "bin/PAPERMARIO.284218.___284218.bin"
+___284218_end:
+___284260:
+.incbin "bin/PAPERMARIO.284260.___284260.bin"
+___284260_end:
+___2842a8:
+.incbin "bin/PAPERMARIO.2842A8.___2842a8.bin"
+___2842a8_end:
+___2842f0:
+.incbin "bin/PAPERMARIO.2842F0.___2842f0.bin"
+___2842f0_end:
+___284338:
+.incbin "bin/PAPERMARIO.284338.___284338.bin"
+___284338_end:
 # Unknown region 284380-2849F8 [678]
 .incbin "bin/PAPERMARIO.284380.bin"
 
-___2849f8_len_20:
-.incbin "bin/PAPERMARIO.2849F8.___2849f8_len_20.bin"
-___2849f8_len_20_end:
-___284a18_len_10:
-.incbin "bin/PAPERMARIO.284A18.___284a18_len_10.bin"
-___284a18_len_10_end:
+___2849f8:
+.incbin "bin/PAPERMARIO.2849F8.___2849f8.bin"
+___2849f8_end:
+___284a18:
+.incbin "bin/PAPERMARIO.284A18.___284a18.bin"
+___284a18_end:
 # Unknown region 284A28-3169F0 [91FC8]
 .incbin "bin/PAPERMARIO.284A28.bin"
 
-.include "asm/CODE_3169f0_len_80.s" 
-.include "asm/CODE_316a70_len_190.s" 
-___316c00_len_190:
-.incbin "bin/PAPERMARIO.316C00.___316c00_len_190.bin"
-___316c00_len_190_end:
+.include "asm/CODE_3169f0.s" 
+.include "asm/CODE_316a70.s" 
+___316c00:
+.incbin "bin/PAPERMARIO.316C00.___316c00.bin"
+___316c00_end:
 # Unknown region 316D90-316F30 [1A0]
 .incbin "bin/PAPERMARIO.316D90.bin"
 
-.include "asm/CODE_316f30_len_f0.s" 
+.include "asm/CODE_316f30.s" 
 # Unknown region 317020-325AD0 [EAB0]
 .incbin "bin/PAPERMARIO.317020.bin"
 
-___325ad0_len_940:
-.incbin "bin/PAPERMARIO.325AD0.___325ad0_len_940.bin"
-___325ad0_len_940_end:
+___325ad0:
+.incbin "bin/PAPERMARIO.325AD0.___325ad0.bin"
+___325ad0_end:
 # Unknown region 326410-328110 [1D00]
 .incbin "bin/PAPERMARIO.326410.bin"
 
-___328110_len_d90:
-.incbin "bin/PAPERMARIO.328110.___328110_len_d90.bin"
-___328110_len_d90_end:
-___328ea0_len_2000:
-.incbin "bin/PAPERMARIO.328EA0.___328ea0_len_2000.bin"
-___328ea0_len_2000_end:
-___32aea0_len_1270:
-.incbin "bin/PAPERMARIO.32AEA0.___32aea0_len_1270.bin"
-___32aea0_len_1270_end:
-___32c110_len_690:
-.incbin "bin/PAPERMARIO.32C110.___32c110_len_690.bin"
-___32c110_len_690_end:
+___328110:
+.incbin "bin/PAPERMARIO.328110.___328110.bin"
+___328110_end:
+___328ea0:
+.incbin "bin/PAPERMARIO.328EA0.___328ea0.bin"
+___328ea0_end:
+___32aea0:
+.incbin "bin/PAPERMARIO.32AEA0.___32aea0.bin"
+___32aea0_end:
+___32c110:
+.incbin "bin/PAPERMARIO.32C110.___32c110.bin"
+___32c110_end:
 # Unknown region 32C7A0-337FC0 [B820]
 .incbin "bin/PAPERMARIO.32C7A0.bin"
 
-___337fc0_len_1290:
-.incbin "bin/PAPERMARIO.337FC0.___337fc0_len_1290.bin"
-___337fc0_len_1290_end:
+___337fc0:
+.incbin "bin/PAPERMARIO.337FC0.___337fc0.bin"
+___337fc0_end:
 # Unknown region 339250-356980 [1D730]
 .incbin "bin/PAPERMARIO.339250.bin"
 
-___356980_len_a20:
-.incbin "bin/PAPERMARIO.356980.___356980_len_a20.bin"
-___356980_len_a20_end:
-___3573a0_len_1120:
-.incbin "bin/PAPERMARIO.3573A0.___3573a0_len_1120.bin"
-___3573a0_len_1120_end:
+___356980:
+.incbin "bin/PAPERMARIO.356980.___356980.bin"
+___356980_end:
+___3573a0:
+.incbin "bin/PAPERMARIO.3573A0.___3573a0.bin"
+___3573a0_end:
 # Unknown region 3584C0-36A8D0 [12410]
 .incbin "bin/PAPERMARIO.3584C0.bin"
 
-___36a8d0_len_610:
-.incbin "bin/PAPERMARIO.36A8D0.___36a8d0_len_610.bin"
-___36a8d0_len_610_end:
-___36aee0_len_2000:
-.incbin "bin/PAPERMARIO.36AEE0.___36aee0_len_2000.bin"
-___36aee0_len_2000_end:
-___36cee0_len_140:
-.incbin "bin/PAPERMARIO.36CEE0.___36cee0_len_140.bin"
-___36cee0_len_140_end:
-___36d020_len_f70:
-.incbin "bin/PAPERMARIO.36D020.___36d020_len_f70.bin"
-___36d020_len_f70_end:
-___36df90_len_240:
-.incbin "bin/PAPERMARIO.36DF90.___36df90_len_240.bin"
-___36df90_len_240_end:
-___36e1d0_len_b90:
-.incbin "bin/PAPERMARIO.36E1D0.___36e1d0_len_b90.bin"
-___36e1d0_len_b90_end:
-___36ed60_len_2000:
-.incbin "bin/PAPERMARIO.36ED60.___36ed60_len_2000.bin"
-___36ed60_len_2000_end:
-___370d60_len_1a30:
-.incbin "bin/PAPERMARIO.370D60.___370d60_len_1a30.bin"
-___370d60_len_1a30_end:
-___372790_len_c50:
-.incbin "bin/PAPERMARIO.372790.___372790_len_c50.bin"
-___372790_len_c50_end:
-___3733e0_len_cd0:
-.incbin "bin/PAPERMARIO.3733E0.___3733e0_len_cd0.bin"
-___3733e0_len_cd0_end:
-___3740b0_len_da0:
-.incbin "bin/PAPERMARIO.3740B0.___3740b0_len_da0.bin"
-___3740b0_len_da0_end:
-___374e50_len_6c0:
-.incbin "bin/PAPERMARIO.374E50.___374e50_len_6c0.bin"
-___374e50_len_6c0_end:
-___375510_len_f50:
-.incbin "bin/PAPERMARIO.375510.___375510_len_f50.bin"
-___375510_len_f50_end:
-___376460_len_c10:
-.incbin "bin/PAPERMARIO.376460.___376460_len_c10.bin"
-___376460_len_c10_end:
-___377070_len_f10:
-.incbin "bin/PAPERMARIO.377070.___377070_len_f10.bin"
-___377070_len_f10_end:
-___377f80_len_2000:
-.incbin "bin/PAPERMARIO.377F80.___377f80_len_2000.bin"
-___377f80_len_2000_end:
-___379f80_len_470:
-.incbin "bin/PAPERMARIO.379F80.___379f80_len_470.bin"
-___379f80_len_470_end:
-___37a3f0_len_9e0:
-.incbin "bin/PAPERMARIO.37A3F0.___37a3f0_len_9e0.bin"
-___37a3f0_len_9e0_end:
-___37add0_len_1770:
-.incbin "bin/PAPERMARIO.37ADD0.___37add0_len_1770.bin"
-___37add0_len_1770_end:
+___36a8d0:
+.incbin "bin/PAPERMARIO.36A8D0.___36a8d0.bin"
+___36a8d0_end:
+___36aee0:
+.incbin "bin/PAPERMARIO.36AEE0.___36aee0.bin"
+___36aee0_end:
+___36cee0:
+.incbin "bin/PAPERMARIO.36CEE0.___36cee0.bin"
+___36cee0_end:
+___36d020:
+.incbin "bin/PAPERMARIO.36D020.___36d020.bin"
+___36d020_end:
+___36df90:
+.incbin "bin/PAPERMARIO.36DF90.___36df90.bin"
+___36df90_end:
+___36e1d0:
+.incbin "bin/PAPERMARIO.36E1D0.___36e1d0.bin"
+___36e1d0_end:
+___36ed60:
+.incbin "bin/PAPERMARIO.36ED60.___36ed60.bin"
+___36ed60_end:
+___370d60:
+.incbin "bin/PAPERMARIO.370D60.___370d60.bin"
+___370d60_end:
+___372790:
+.incbin "bin/PAPERMARIO.372790.___372790.bin"
+___372790_end:
+___3733e0:
+.incbin "bin/PAPERMARIO.3733E0.___3733e0.bin"
+___3733e0_end:
+___3740b0:
+.incbin "bin/PAPERMARIO.3740B0.___3740b0.bin"
+___3740b0_end:
+___374e50:
+.incbin "bin/PAPERMARIO.374E50.___374e50.bin"
+___374e50_end:
+___375510:
+.incbin "bin/PAPERMARIO.375510.___375510.bin"
+___375510_end:
+___376460:
+.incbin "bin/PAPERMARIO.376460.___376460.bin"
+___376460_end:
+___377070:
+.incbin "bin/PAPERMARIO.377070.___377070.bin"
+___377070_end:
+___377f80:
+.incbin "bin/PAPERMARIO.377F80.___377f80.bin"
+___377f80_end:
+___379f80:
+.incbin "bin/PAPERMARIO.379F80.___379f80.bin"
+___379f80_end:
+___37a3f0:
+.incbin "bin/PAPERMARIO.37A3F0.___37a3f0.bin"
+___37a3f0_end:
+___37add0:
+.incbin "bin/PAPERMARIO.37ADD0.___37add0.bin"
+___37add0_end:
 # Unknown region 37C540-38EE60 [12920]
 .incbin "bin/PAPERMARIO.37C540.bin"
 
-___38ee60_len_8b0:
-.incbin "bin/PAPERMARIO.38EE60.___38ee60_len_8b0.bin"
-___38ee60_len_8b0_end:
-___38f710_len_1f0:
-.incbin "bin/PAPERMARIO.38F710.___38f710_len_1f0.bin"
-___38f710_len_1f0_end:
+___38ee60:
+.incbin "bin/PAPERMARIO.38EE60.___38ee60.bin"
+___38ee60_end:
+___38f710:
+.incbin "bin/PAPERMARIO.38F710.___38f710.bin"
+___38f710_end:
 # Unknown region 38F900-3B2350 [22A50]
 .incbin "bin/PAPERMARIO.38F900.bin"
 
-___3b2350_len_a40:
-.incbin "bin/PAPERMARIO.3B2350.___3b2350_len_a40.bin"
-___3b2350_len_a40_end:
-___3b2d90_len_1120:
-.incbin "bin/PAPERMARIO.3B2D90.___3b2d90_len_1120.bin"
-___3b2d90_len_1120_end:
+___3b2350:
+.incbin "bin/PAPERMARIO.3B2350.___3b2350.bin"
+___3b2350_end:
+___3b2d90:
+.incbin "bin/PAPERMARIO.3B2D90.___3b2d90.bin"
+___3b2d90_end:
 # Unknown region 3B3EB0-3DE000 [2A150]
 .incbin "bin/PAPERMARIO.3B3EB0.bin"
 
-___3de000_len_e60:
-.incbin "bin/PAPERMARIO.3DE000.___3de000_len_e60.bin"
-___3de000_len_e60_end:
-___3dee60_len_1ad0:
-.incbin "bin/PAPERMARIO.3DEE60.___3dee60_len_1ad0.bin"
-___3dee60_len_1ad0_end:
+___3de000:
+.incbin "bin/PAPERMARIO.3DE000.___3de000.bin"
+___3de000_end:
+___3dee60:
+.incbin "bin/PAPERMARIO.3DEE60.___3dee60.bin"
+___3dee60_end:
 # Unknown region 3E0930-3FA4B0 [19B80]
 .incbin "bin/PAPERMARIO.3E0930.bin"
 
-___3fa4b0_len_2000:
-.incbin "bin/PAPERMARIO.3FA4B0.___3fa4b0_len_2000.bin"
-___3fa4b0_len_2000_end:
-___3fc4b0_len_2000:
-.incbin "bin/PAPERMARIO.3FC4B0.___3fc4b0_len_2000.bin"
-___3fc4b0_len_2000_end:
-___3fe4b0_len_630:
-.incbin "bin/PAPERMARIO.3FE4B0.___3fe4b0_len_630.bin"
-___3fe4b0_len_630_end:
+___3fa4b0:
+.incbin "bin/PAPERMARIO.3FA4B0.___3fa4b0.bin"
+___3fa4b0_end:
+___3fc4b0:
+.incbin "bin/PAPERMARIO.3FC4B0.___3fc4b0.bin"
+___3fc4b0_end:
+___3fe4b0:
+.incbin "bin/PAPERMARIO.3FE4B0.___3fe4b0.bin"
+___3fe4b0_end:
 # Unknown region 3FEAE0-402640 [3B60]
 .incbin "bin/PAPERMARIO.3FEAE0.bin"
 
-___402640_len_dc0:
-.incbin "bin/PAPERMARIO.402640.___402640_len_dc0.bin"
-___402640_len_dc0_end:
+___402640:
+.incbin "bin/PAPERMARIO.402640.___402640.bin"
+___402640_end:
 # Unknown region 403400-40B3F0 [7FF0]
 .incbin "bin/PAPERMARIO.403400.bin"
 
-___40b3f0_len_7b0:
-.incbin "bin/PAPERMARIO.40B3F0.___40b3f0_len_7b0.bin"
-___40b3f0_len_7b0_end:
-___40bba0_len_a00:
-.incbin "bin/PAPERMARIO.40BBA0.___40bba0_len_a00.bin"
-___40bba0_len_a00_end:
+___40b3f0:
+.incbin "bin/PAPERMARIO.40B3F0.___40b3f0.bin"
+___40b3f0_end:
+___40bba0:
+.incbin "bin/PAPERMARIO.40BBA0.___40bba0.bin"
+___40bba0_end:
 # Unknown region 40C5A0-7E0E80 [3D48E0]
 .incbin "bin/PAPERMARIO.40C5A0.bin"
 
-.include "asm/CODE_7e0e80_len_2000.s" 
-.include "asm/CODE_7e2e80_len_2000.s" 
-___7e4e80_len_2000:
-.incbin "bin/PAPERMARIO.7E4D00.___7e4e80_len_2000.bin"
-___7e4e80_len_2000_end:
-___7e6e80_len_520:
-.incbin "bin/PAPERMARIO.7E6E80.___7e6e80_len_520.bin"
-___7e6e80_len_520_end:
+.include "asm/CODE_7e0e80.s" 
+___7e4e80:
+.incbin "bin/PAPERMARIO.7E4D00.___7e4e80.bin"
+___7e4e80_end:
+___7e6e80:
+.incbin "bin/PAPERMARIO.7E6E80.___7e6e80.bin"
+___7e6e80_end:
 # Unknown region 7E73A0-7EAD10 [3970]
 .incbin "bin/PAPERMARIO.7E73A0.bin"
 
-___7ead10_len_2000:
-.incbin "bin/PAPERMARIO.7EAD10.___7ead10_len_2000.bin"
-___7ead10_len_2000_end:
-___7ecd10_len_2000:
-.incbin "bin/PAPERMARIO.7ECD10.___7ecd10_len_2000.bin"
-___7ecd10_len_2000_end:
-___7eed10_len_2000:
-.incbin "bin/PAPERMARIO.7EED10.___7eed10_len_2000.bin"
-___7eed10_len_2000_end:
-___7f0d10_len_2000:
-.incbin "bin/PAPERMARIO.7F0D10.___7f0d10_len_2000.bin"
-___7f0d10_len_2000_end:
-___7f2d10_len_2000:
-.incbin "bin/PAPERMARIO.7F2D10.___7f2d10_len_2000.bin"
-___7f2d10_len_2000_end:
-___7f4d10_len_2000:
-.incbin "bin/PAPERMARIO.7F4D10.___7f4d10_len_2000.bin"
-___7f4d10_len_2000_end:
-___7f6d10_len_2000:
-.incbin "bin/PAPERMARIO.7F6D10.___7f6d10_len_2000.bin"
-___7f6d10_len_2000_end:
-___7f8d10_len_2000:
-.incbin "bin/PAPERMARIO.7F8D10.___7f8d10_len_2000.bin"
-___7f8d10_len_2000_end:
-___7fad10_len_2000:
-.incbin "bin/PAPERMARIO.7FAD10.___7fad10_len_2000.bin"
-___7fad10_len_2000_end:
-___7fcd10_len_2000:
-.incbin "bin/PAPERMARIO.7FCD10.___7fcd10_len_2000.bin"
-___7fcd10_len_2000_end:
-___7fed10_len_1b70:
-.incbin "bin/PAPERMARIO.7FED10.___7fed10_len_1b70.bin"
-___7fed10_len_1b70_end:
-___800880_len_2000:
-.incbin "bin/PAPERMARIO.800880.___800880_len_2000.bin"
-___800880_len_2000_end:
-___802880_len_2000:
-.incbin "bin/PAPERMARIO.802880.___802880_len_2000.bin"
-___802880_len_2000_end:
-___804880_len_2000:
-.incbin "bin/PAPERMARIO.804880.___804880_len_2000.bin"
-___804880_len_2000_end:
-___806880_len_2000:
-.incbin "bin/PAPERMARIO.806880.___806880_len_2000.bin"
-___806880_len_2000_end:
-___808880_len_2000:
-.incbin "bin/PAPERMARIO.808880.___808880_len_2000.bin"
-___808880_len_2000_end:
-___80a880_len_2000:
-.incbin "bin/PAPERMARIO.80A880.___80a880_len_2000.bin"
-___80a880_len_2000_end:
-___80c880_len_2000:
-.incbin "bin/PAPERMARIO.80C880.___80c880_len_2000.bin"
-___80c880_len_2000_end:
-___80e880_len_2000:
-.incbin "bin/PAPERMARIO.80E880.___80e880_len_2000.bin"
-___80e880_len_2000_end:
-___810880_len_2000:
-.incbin "bin/PAPERMARIO.810880.___810880_len_2000.bin"
-___810880_len_2000_end:
-___812880_len_2000:
-.incbin "bin/PAPERMARIO.812880.___812880_len_2000.bin"
-___812880_len_2000_end:
-___814880_len_2000:
-.incbin "bin/PAPERMARIO.814880.___814880_len_2000.bin"
-___814880_len_2000_end:
-___816880_len_2000:
-.incbin "bin/PAPERMARIO.816880.___816880_len_2000.bin"
-___816880_len_2000_end:
-___818880_len_2000:
-.incbin "bin/PAPERMARIO.818880.___818880_len_2000.bin"
-___818880_len_2000_end:
-___81a880_len_2000:
-.incbin "bin/PAPERMARIO.81A880.___81a880_len_2000.bin"
-___81a880_len_2000_end:
-___81c880_len_2000:
-.incbin "bin/PAPERMARIO.81C880.___81c880_len_2000.bin"
-___81c880_len_2000_end:
-___81e880_len_2000:
-.incbin "bin/PAPERMARIO.81E880.___81e880_len_2000.bin"
-___81e880_len_2000_end:
-___820880_len_2000:
-.incbin "bin/PAPERMARIO.820880.___820880_len_2000.bin"
-___820880_len_2000_end:
-___822880_len_a40:
-.incbin "bin/PAPERMARIO.822880.___822880_len_a40.bin"
-___822880_len_a40_end:
+___7ead10:
+.incbin "bin/PAPERMARIO.7EAD10.___7ead10.bin"
+___7ead10_end:
+___7ecd10:
+.incbin "bin/PAPERMARIO.7ECD10.___7ecd10.bin"
+___7ecd10_end:
+___7eed10:
+.incbin "bin/PAPERMARIO.7EED10.___7eed10.bin"
+___7eed10_end:
+___7f0d10:
+.incbin "bin/PAPERMARIO.7F0D10.___7f0d10.bin"
+___7f0d10_end:
+___7f2d10:
+.incbin "bin/PAPERMARIO.7F2D10.___7f2d10.bin"
+___7f2d10_end:
+___7f4d10:
+.incbin "bin/PAPERMARIO.7F4D10.___7f4d10.bin"
+___7f4d10_end:
+___7f6d10:
+.incbin "bin/PAPERMARIO.7F6D10.___7f6d10.bin"
+___7f6d10_end:
+___7f8d10:
+.incbin "bin/PAPERMARIO.7F8D10.___7f8d10.bin"
+___7f8d10_end:
+___7fad10:
+.incbin "bin/PAPERMARIO.7FAD10.___7fad10.bin"
+___7fad10_end:
+___7fcd10:
+.incbin "bin/PAPERMARIO.7FCD10.___7fcd10.bin"
+___7fcd10_end:
+___7fed10:
+.incbin "bin/PAPERMARIO.7FED10.___7fed10.bin"
+___7fed10_end:
+___800880:
+.incbin "bin/PAPERMARIO.800880.___800880.bin"
+___800880_end:
+___802880:
+.incbin "bin/PAPERMARIO.802880.___802880.bin"
+___802880_end:
+___804880:
+.incbin "bin/PAPERMARIO.804880.___804880.bin"
+___804880_end:
+___806880:
+.incbin "bin/PAPERMARIO.806880.___806880.bin"
+___806880_end:
+___808880:
+.incbin "bin/PAPERMARIO.808880.___808880.bin"
+___808880_end:
+___80a880:
+.incbin "bin/PAPERMARIO.80A880.___80a880.bin"
+___80a880_end:
+___80c880:
+.incbin "bin/PAPERMARIO.80C880.___80c880.bin"
+___80c880_end:
+___80e880:
+.incbin "bin/PAPERMARIO.80E880.___80e880.bin"
+___80e880_end:
+___810880:
+.incbin "bin/PAPERMARIO.810880.___810880.bin"
+___810880_end:
+___812880:
+.incbin "bin/PAPERMARIO.812880.___812880.bin"
+___812880_end:
+___814880:
+.incbin "bin/PAPERMARIO.814880.___814880.bin"
+___814880_end:
+___816880:
+.incbin "bin/PAPERMARIO.816880.___816880.bin"
+___816880_end:
+___818880:
+.incbin "bin/PAPERMARIO.818880.___818880.bin"
+___818880_end:
+___81a880:
+.incbin "bin/PAPERMARIO.81A880.___81a880.bin"
+___81a880_end:
+___81c880:
+.incbin "bin/PAPERMARIO.81C880.___81c880.bin"
+___81c880_end:
+___81e880:
+.incbin "bin/PAPERMARIO.81E880.___81e880.bin"
+___81e880_end:
+___820880:
+.incbin "bin/PAPERMARIO.820880.___820880.bin"
+___820880_end:
+___822880:
+.incbin "bin/PAPERMARIO.822880.___822880.bin"
+___822880_end:
 # Unknown region 8232C0-8EBE20 [C8B60]
 .incbin "bin/PAPERMARIO.8232C0.bin"
 
-___8ebe20_len_2000:
-.incbin "bin/PAPERMARIO.8EBE20.___8ebe20_len_2000.bin"
-___8ebe20_len_2000_end:
-___8ede20_len_2000:
-.incbin "bin/PAPERMARIO.8EDE20.___8ede20_len_2000.bin"
-___8ede20_len_2000_end:
-___8efe20_len_2000:
-.incbin "bin/PAPERMARIO.8EFE20.___8efe20_len_2000.bin"
-___8efe20_len_2000_end:
-___8f1e20_len_2000:
-.incbin "bin/PAPERMARIO.8F1E20.___8f1e20_len_2000.bin"
-___8f1e20_len_2000_end:
-___8f3e20_len_2000:
-.incbin "bin/PAPERMARIO.8F3E20.___8f3e20_len_2000.bin"
-___8f3e20_len_2000_end:
-___8f5e20_len_2000:
-.incbin "bin/PAPERMARIO.8F5E20.___8f5e20_len_2000.bin"
-___8f5e20_len_2000_end:
-___8f7e20_len_2000:
-.incbin "bin/PAPERMARIO.8F7E20.___8f7e20_len_2000.bin"
-___8f7e20_len_2000_end:
-___8f9e20_len_2000:
-.incbin "bin/PAPERMARIO.8F9E20.___8f9e20_len_2000.bin"
-___8f9e20_len_2000_end:
-___8fbe20_len_2000:
-.incbin "bin/PAPERMARIO.8FBE20.___8fbe20_len_2000.bin"
-___8fbe20_len_2000_end:
-___8fde20_len_1060:
-.incbin "bin/PAPERMARIO.8FDE20.___8fde20_len_1060.bin"
-___8fde20_len_1060_end:
+___8ebe20:
+.incbin "bin/PAPERMARIO.8EBE20.___8ebe20.bin"
+___8ebe20_end:
+___8ede20:
+.incbin "bin/PAPERMARIO.8EDE20.___8ede20.bin"
+___8ede20_end:
+___8efe20:
+.incbin "bin/PAPERMARIO.8EFE20.___8efe20.bin"
+___8efe20_end:
+___8f1e20:
+.incbin "bin/PAPERMARIO.8F1E20.___8f1e20.bin"
+___8f1e20_end:
+___8f3e20:
+.incbin "bin/PAPERMARIO.8F3E20.___8f3e20.bin"
+___8f3e20_end:
+___8f5e20:
+.incbin "bin/PAPERMARIO.8F5E20.___8f5e20.bin"
+___8f5e20_end:
+___8f7e20:
+.incbin "bin/PAPERMARIO.8F7E20.___8f7e20.bin"
+___8f7e20_end:
+___8f9e20:
+.incbin "bin/PAPERMARIO.8F9E20.___8f9e20.bin"
+___8f9e20_end:
+___8fbe20:
+.incbin "bin/PAPERMARIO.8FBE20.___8fbe20.bin"
+___8fbe20_end:
+___8fde20:
+.incbin "bin/PAPERMARIO.8FDE20.___8fde20.bin"
+___8fde20_end:
 # Unknown region 8FEE80-A26ED0 [128050]
 .incbin "bin/PAPERMARIO.8FEE80.bin"
 
-___a26ed0_len_2000:
-.incbin "bin/PAPERMARIO.A26ED0.___a26ed0_len_2000.bin"
-___a26ed0_len_2000_end:
-___a28ed0_len_1370:
-.incbin "bin/PAPERMARIO.A28ED0.___a28ed0_len_1370.bin"
-___a28ed0_len_1370_end:
-___a2a240_len_2000:
-.incbin "bin/PAPERMARIO.A2A240.___a2a240_len_2000.bin"
-___a2a240_len_2000_end:
-___a2c240_len_2000:
-.incbin "bin/PAPERMARIO.A2C240.___a2c240_len_2000.bin"
-___a2c240_len_2000_end:
-___a2e240_len_2000:
-.incbin "bin/PAPERMARIO.A2E240.___a2e240_len_2000.bin"
-___a2e240_len_2000_end:
-___a30240_len_2000:
-.incbin "bin/PAPERMARIO.A30240.___a30240_len_2000.bin"
-___a30240_len_2000_end:
-___a32240_len_2000:
-.incbin "bin/PAPERMARIO.A32240.___a32240_len_2000.bin"
-___a32240_len_2000_end:
-___a34240_len_2000:
-.incbin "bin/PAPERMARIO.A34240.___a34240_len_2000.bin"
-___a34240_len_2000_end:
-___a36240_len_2000:
-.incbin "bin/PAPERMARIO.A36240.___a36240_len_2000.bin"
-___a36240_len_2000_end:
-___a38240_len_12a0:
-.incbin "bin/PAPERMARIO.A38240.___a38240_len_12a0.bin"
-___a38240_len_12a0_end:
+___a26ed0:
+.incbin "bin/PAPERMARIO.A26ED0.___a26ed0.bin"
+___a26ed0_end:
+___a28ed0:
+.incbin "bin/PAPERMARIO.A28ED0.___a28ed0.bin"
+___a28ed0_end:
+___a2a240:
+.incbin "bin/PAPERMARIO.A2A240.___a2a240.bin"
+___a2a240_end:
+___a2c240:
+.incbin "bin/PAPERMARIO.A2C240.___a2c240.bin"
+___a2c240_end:
+___a2e240:
+.incbin "bin/PAPERMARIO.A2E240.___a2e240.bin"
+___a2e240_end:
+___a30240:
+.incbin "bin/PAPERMARIO.A30240.___a30240.bin"
+___a30240_end:
+___a32240:
+.incbin "bin/PAPERMARIO.A32240.___a32240.bin"
+___a32240_end:
+___a34240:
+.incbin "bin/PAPERMARIO.A34240.___a34240.bin"
+___a34240_end:
+___a36240:
+.incbin "bin/PAPERMARIO.A36240.___a36240.bin"
+___a36240_end:
+___a38240:
+.incbin "bin/PAPERMARIO.A38240.___a38240.bin"
+___a38240_end:
 # Unknown region A394E0-AAC830 [73350]
 .incbin "bin/PAPERMARIO.A394E0.bin"
 
-___aac830_len_2000:
-.incbin "bin/PAPERMARIO.AAC830.___aac830_len_2000.bin"
-___aac830_len_2000_end:
-___aae830_len_17c0:
-.incbin "bin/PAPERMARIO.AAE830.___aae830_len_17c0.bin"
-___aae830_len_17c0_end:
+___aac830:
+.incbin "bin/PAPERMARIO.AAC830.___aac830.bin"
+___aac830_end:
+___aae830:
+.incbin "bin/PAPERMARIO.AAE830.___aae830.bin"
+___aae830_end:
 # Unknown region AAFFF0-ABB290 [B2A0]
 .incbin "bin/PAPERMARIO.AAFFF0.bin"
 
-___abb290_len_2000:
-.incbin "bin/PAPERMARIO.ABB290.___abb290_len_2000.bin"
-___abb290_len_2000_end:
-___abd290_len_2000:
-.incbin "bin/PAPERMARIO.ABD290.___abd290_len_2000.bin"
-___abd290_len_2000_end:
-___abf290_len_2000:
-.incbin "bin/PAPERMARIO.ABF290.___abf290_len_2000.bin"
-___abf290_len_2000_end:
-___ac1290_len_2000:
-.incbin "bin/PAPERMARIO.AC1290.___ac1290_len_2000.bin"
-___ac1290_len_2000_end:
-___ac3290_len_1ee0:
-.incbin "bin/PAPERMARIO.AC3290.___ac3290_len_1ee0.bin"
-___ac3290_len_1ee0_end:
+___abb290:
+.incbin "bin/PAPERMARIO.ABB290.___abb290.bin"
+___abb290_end:
+___abd290:
+.incbin "bin/PAPERMARIO.ABD290.___abd290.bin"
+___abd290_end:
+___abf290:
+.incbin "bin/PAPERMARIO.ABF290.___abf290.bin"
+___abf290_end:
+___ac1290:
+.incbin "bin/PAPERMARIO.AC1290.___ac1290.bin"
+___ac1290_end:
+___ac3290:
+.incbin "bin/PAPERMARIO.AC3290.___ac3290.bin"
+___ac3290_end:
 # Unknown region AC5170-E20EB0 [35BD40]
 .incbin "bin/PAPERMARIO.AC5170.bin"
 
-.include "asm/CODE_e20eb0_len_9c0.s" 
-CODE_e23260_len_480:
-.incbin "bin/PAPERMARIO.E215C0.CODE_e23260_len_480.bin"
-CODE_e23260_len_480_end:
-CODE_e236e0_len_960:
-.incbin "bin/PAPERMARIO.E236E0.CODE_e236e0_len_960.bin"
-CODE_e236e0_len_960_end:
-___e24040_len_590:
-.incbin "bin/PAPERMARIO.E24040.___e24040_len_590.bin"
-___e24040_len_590_end:
+.include "asm/CODE_e20eb0.s" 
+CODE_e23260:
+.incbin "bin/PAPERMARIO.E215C0.CODE_e23260.bin"
+CODE_e23260_end:
+CODE_e236e0:
+.incbin "bin/PAPERMARIO.E236E0.CODE_e236e0.bin"
+CODE_e236e0_end:
+___e24040:
+.incbin "bin/PAPERMARIO.E24040.___e24040.bin"
+___e24040_end:
 # Unknown region E245D0-E24920 [350]
 .incbin "bin/PAPERMARIO.E245D0.bin"
 
-___e24920_len_5b0:
-.incbin "bin/PAPERMARIO.E24920.___e24920_len_5b0.bin"
-___e24920_len_5b0_end:
+___e24920:
+.incbin "bin/PAPERMARIO.E24920.___e24920.bin"
+___e24920_end:
 # Unknown region E24ED0-E28A30 [3B60]
 .incbin "bin/PAPERMARIO.E24ED0.bin"
 
-___e28a30_len_770:
-.incbin "bin/PAPERMARIO.E28A30.___e28a30_len_770.bin"
-___e28a30_len_770_end:
+___e28a30:
+.incbin "bin/PAPERMARIO.E28A30.___e28a30.bin"
+___e28a30_end:
 # Unknown region E291A0-E2B530 [2390]
 .incbin "bin/PAPERMARIO.E291A0.bin"
 
-___e2b530_len_2000:
-.incbin "bin/PAPERMARIO.E2B530.___e2b530_len_2000.bin"
-___e2b530_len_2000_end:
-___e2d530_len_200:
-.incbin "bin/PAPERMARIO.E2D530.___e2d530_len_200.bin"
-___e2d530_len_200_end:
+___e2b530:
+.incbin "bin/PAPERMARIO.E2B530.___e2b530.bin"
+___e2b530_end:
+___e2d530:
+.incbin "bin/PAPERMARIO.E2D530.___e2d530.bin"
+___e2d530_end:
 # Unknown region E2D730-E4B2E0 [1DBB0]
 .incbin "bin/PAPERMARIO.E2D730.bin"
 
-___e4b2e0_len_2000:
-.incbin "bin/PAPERMARIO.E4B2E0.___e4b2e0_len_2000.bin"
-___e4b2e0_len_2000_end:
-___e4d2e0_len_1510:
-.incbin "bin/PAPERMARIO.E4D2E0.___e4d2e0_len_1510.bin"
-___e4d2e0_len_1510_end:
+___e4b2e0:
+.incbin "bin/PAPERMARIO.E4B2E0.___e4b2e0.bin"
+___e4b2e0_end:
+___e4d2e0:
+.incbin "bin/PAPERMARIO.E4D2E0.___e4d2e0.bin"
+___e4d2e0_end:
 # Unknown region E4E7F0-E56BA0 [83B0]
 .incbin "bin/PAPERMARIO.E4E7F0.bin"
 
-___e56ba0_len_2c0:
-.incbin "bin/PAPERMARIO.E56BA0.___e56ba0_len_2c0.bin"
-___e56ba0_len_2c0_end:
+___e56ba0:
+.incbin "bin/PAPERMARIO.E56BA0.___e56ba0.bin"
+___e56ba0_end:
 # Unknown region E56E60-E657A0 [E940]
 .incbin "bin/PAPERMARIO.E56E60.bin"
 
-___e657a0_len_1980:
-.incbin "bin/PAPERMARIO.E657A0.___e657a0_len_1980.bin"
-___e657a0_len_1980_end:
-___e67120_len_1460:
-.incbin "bin/PAPERMARIO.E67120.___e67120_len_1460.bin"
-___e67120_len_1460_end:
+___e657a0:
+.incbin "bin/PAPERMARIO.E657A0.___e657a0.bin"
+___e657a0_end:
+___e67120:
+.incbin "bin/PAPERMARIO.E67120.___e67120.bin"
+___e67120_end:
 # Unknown region E68580-F00000 [97A80]
 .incbin "bin/PAPERMARIO.E68580.bin"
 
-_SBN__f00000_len_40:
-.incbin "bin/PAPERMARIO.F00000._SBN__f00000_len_40.bin"
-_SBN__f00000_len_40_end:
-___f00040_len_760:
-.incbin "bin/PAPERMARIO.F00040.___f00040_len_760.bin"
-___f00040_len_760_end:
+_SBN__f00000:
+.incbin "bin/PAPERMARIO.F00000._SBN__f00000.bin"
+_SBN__f00000_end:
+___f00040:
+.incbin "bin/PAPERMARIO.F00040.___f00040.bin"
+___f00040_end:
 # Unknown region F007A0-F33AA0 [33300]
 .incbin "bin/PAPERMARIO.F007A0.bin"
 
@@ -1164,30 +1159,30 @@ LF98520_end:
 LF98F90:
 .incbin "SOUND.BGM/PAPERMARIO.F98F90.SOUND.BGM"
 LF98F90_end:
-_V__f9af90_len_8a0:
-.incbin "bin/PAPERMARIO.F9AF90._V__f9af90_len_8a0.bin"
-_V__f9af90_len_8a0_end:
+_V__f9af90:
+.incbin "bin/PAPERMARIO.F9AF90._V__f9af90.bin"
+_V__f9af90_end:
 # Unknown region F9B830-FA08A0 [5070]
 .incbin "bin/PAPERMARIO.F9B830.bin"
 
 LFA08A0:
 .incbin "SOUND.BGM/PAPERMARIO.FA08A0.SOUND.BGM"
 LFA08A0_end:
-___fa28a0_len_13c0:
-.incbin "bin/PAPERMARIO.FA28A0.___fa28a0_len_13c0.bin"
-___fa28a0_len_13c0_end:
+___fa28a0:
+.incbin "bin/PAPERMARIO.FA28A0.___fa28a0.bin"
+___fa28a0_end:
 # Unknown region FA3C60-FAE860 [AC00]
 .incbin "bin/PAPERMARIO.FA3C60.bin"
 
 LFAE860:
 .incbin "SOUND.SEF/PAPERMARIO.FAE860.SOUND.SEF"
 LFAE860_end:
-___fb0860_len_2000:
-.incbin "bin/PAPERMARIO.FB0860.___fb0860_len_2000.bin"
-___fb0860_len_2000_end:
-___fb2860_len_1040:
-.incbin "bin/PAPERMARIO.FB2860.___fb2860_len_1040.bin"
-___fb2860_len_1040_end:
+___fb0860:
+.incbin "bin/PAPERMARIO.FB0860.___fb0860.bin"
+___fb0860_end:
+___fb2860:
+.incbin "bin/PAPERMARIO.FB2860.___fb2860.bin"
+___fb2860_end:
 LFB38A0:
 .incbin "SOUND.BK/PAPERMARIO.FB38A0.SOUND.BK"
 LFB38A0_end:
@@ -14577,15 +14572,15 @@ L18F67D4_end:
 L19375B0:
 .incbin "SOUND.PER/PAPERMARIO.19375B0.SOUND.PER"
 L19375B0_end:
-___19375c0_len_360:
-.incbin "bin/PAPERMARIO.19375C0.___19375c0_len_360.bin"
-___19375c0_len_360_end:
+___19375c0:
+.incbin "bin/PAPERMARIO.19375C0.___19375c0.bin"
+___19375c0_end:
 L1937920:
 .incbin "SOUND.PRG/PAPERMARIO.1937920.SOUND.PRG"
 L1937920_end:
-___1937930_len_38:
-.incbin "bin/PAPERMARIO.1937930.___1937930_len_38.bin"
-___1937930_len_38_end:
+___1937930:
+.incbin "bin/PAPERMARIO.1937930.___1937930.bin"
+___1937930_end:
 # Unknown region 1937968-193FC80 [8318]
 .incbin "bin/PAPERMARIO.1937968.bin"
 
@@ -14595,138 +14590,138 @@ L193FC80_end:
 # Unknown region 1940100-19425C0 [24C0]
 .incbin "bin/PAPERMARIO.1940100.bin"
 
-_INIT__19425c0_len_20:
-.incbin "bin/PAPERMARIO.19425C0._INIT__19425c0_len_20.bin"
-_INIT__19425c0_len_20_end:
-___19425e0_len_110:
-.incbin "bin/PAPERMARIO.19425E0.___19425e0_len_110.bin"
-___19425e0_len_110_end:
-___19426f0_len_510:
-.incbin "bin/PAPERMARIO.19426F0.___19426f0_len_510.bin"
-___19426f0_len_510_end:
-___1942c00_len_40:
-.incbin "bin/PAPERMARIO.1942C00.___1942c00_len_40.bin"
-___1942c00_len_40_end:
+_INIT__19425c0:
+.incbin "bin/PAPERMARIO.19425C0._INIT__19425c0.bin"
+_INIT__19425c0_end:
+___19425e0:
+.incbin "bin/PAPERMARIO.19425E0.___19425e0.bin"
+___19425e0_end:
+___19426f0:
+.incbin "bin/PAPERMARIO.19426F0.___19426f0.bin"
+___19426f0_end:
+___1942c00:
+.incbin "bin/PAPERMARIO.1942C00.___1942c00.bin"
+___1942c00_end:
 # Unknown region 1942C40-1943010 [3D0]
 .incbin "bin/PAPERMARIO.1942C40.bin"
 
-___1943010_len_c:
-.incbin "bin/PAPERMARIO.1943010.___1943010_len_c.bin"
-___1943010_len_c_end:
+___1943010:
+.incbin "bin/PAPERMARIO.1943010.___1943010.bin"
+___1943010_end:
 # Unknown region 194301C-1943020 [4]
 .byte 0x00, 0x23, 0xF1, 0xF8
 
-___1943020_len_c:
-.incbin "bin/PAPERMARIO.1943020.___1943020_len_c.bin"
-___1943020_len_c_end:
+___1943020:
+.incbin "bin/PAPERMARIO.1943020.___1943020.bin"
+___1943020_end:
 # Unknown region 194302C-1943030 [4]
 .byte 0x00, 0x00, 0x00, 0x00
 
-___1943030_len_38:
-.incbin "bin/PAPERMARIO.1943030.___1943030_len_38.bin"
-___1943030_len_38_end:
-___1943068_len_194:
-.incbin "bin/PAPERMARIO.1943068.___1943068_len_194.bin"
-___1943068_len_194_end:
-___19431c4_len_194:
-.incbin "bin/PAPERMARIO.19431FC.___19431c4_len_194.bin"
-___19431c4_len_194_end:
+___1943030:
+.incbin "bin/PAPERMARIO.1943030.___1943030.bin"
+___1943030_end:
+___1943068:
+.incbin "bin/PAPERMARIO.1943068.___1943068.bin"
+___1943068_end:
+___19431c4:
+.incbin "bin/PAPERMARIO.19431FC.___19431c4.bin"
+___19431c4_end:
 # Unknown region 1943358-1943518 [1C0]
 .incbin "bin/PAPERMARIO.1943358.bin"
 
-___1943518_len_194:
-.incbin "bin/PAPERMARIO.1943518.___1943518_len_194.bin"
-___1943518_len_194_end:
-___19435fc_len_194:
-.incbin "bin/PAPERMARIO.19436AC.___19435fc_len_194.bin"
-___19435fc_len_194_end:
-___19436e0_len_194:
-.incbin "bin/PAPERMARIO.1943790.___19436e0_len_194.bin"
-___19436e0_len_194_end:
-___19437e0_len_194:
-.incbin "bin/PAPERMARIO.1943874.___19437e0_len_194.bin"
-___19437e0_len_194_end:
+___1943518:
+.incbin "bin/PAPERMARIO.1943518.___1943518.bin"
+___1943518_end:
+___19435fc:
+.incbin "bin/PAPERMARIO.19436AC.___19435fc.bin"
+___19435fc_end:
+___19436e0:
+.incbin "bin/PAPERMARIO.1943790.___19436e0.bin"
+___19436e0_end:
+___19437e0:
+.incbin "bin/PAPERMARIO.1943874.___19437e0.bin"
+___19437e0_end:
 # Unknown region 1943974-1943BA0 [22C]
 .incbin "bin/PAPERMARIO.1943974.bin"
 
-___1943ba0_len_380:
-.incbin "bin/PAPERMARIO.1943BA0.___1943ba0_len_380.bin"
-___1943ba0_len_380_end:
-___1943f20_len_540:
-.incbin "bin/PAPERMARIO.1943F20.___1943f20_len_540.bin"
-___1943f20_len_540_end:
-___1944460_len_380:
-.incbin "bin/PAPERMARIO.1944460.___1944460_len_380.bin"
-___1944460_len_380_end:
-___19447e0_len_380:
-.incbin "bin/PAPERMARIO.19447E0.___19447e0_len_380.bin"
-___19447e0_len_380_end:
+___1943ba0:
+.incbin "bin/PAPERMARIO.1943BA0.___1943ba0.bin"
+___1943ba0_end:
+___1943f20:
+.incbin "bin/PAPERMARIO.1943F20.___1943f20.bin"
+___1943f20_end:
+___1944460:
+.incbin "bin/PAPERMARIO.1944460.___1944460.bin"
+___1944460_end:
+___19447e0:
+.incbin "bin/PAPERMARIO.19447E0.___19447e0.bin"
+___19447e0_end:
 # Unknown region 1944B60-1944E60 [300]
 .incbin "bin/PAPERMARIO.1944B60.bin"
 
-___1944e60_len_540:
-.incbin "bin/PAPERMARIO.1944E60.___1944e60_len_540.bin"
-___1944e60_len_540_end:
-___19453a0_len_540:
-.incbin "bin/PAPERMARIO.19453A0.___19453a0_len_540.bin"
-___19453a0_len_540_end:
-___19458e0_len_540:
-.incbin "bin/PAPERMARIO.19458E0.___19458e0_len_540.bin"
-___19458e0_len_540_end:
-___1945e20_len_380:
-.incbin "bin/PAPERMARIO.1945E20.___1945e20_len_380.bin"
-___1945e20_len_380_end:
+___1944e60:
+.incbin "bin/PAPERMARIO.1944E60.___1944e60.bin"
+___1944e60_end:
+___19453a0:
+.incbin "bin/PAPERMARIO.19453A0.___19453a0.bin"
+___19453a0_end:
+___19458e0:
+.incbin "bin/PAPERMARIO.19458E0.___19458e0.bin"
+___19458e0_end:
+___1945e20:
+.incbin "bin/PAPERMARIO.1945E20.___1945e20.bin"
+___1945e20_end:
 # Unknown region 19461A0-1947520 [1380]
 .incbin "bin/PAPERMARIO.19461A0.bin"
 
-___1947520_len_540:
-.incbin "bin/PAPERMARIO.1947520.___1947520_len_540.bin"
-___1947520_len_540_end:
+___1947520:
+.incbin "bin/PAPERMARIO.1947520.___1947520.bin"
+___1947520_end:
 # Unknown region 1947A60-195DAA0 [16040]
 .incbin "bin/PAPERMARIO.1947A60.bin"
 
-___195daa0_len_380:
-.incbin "bin/PAPERMARIO.195DAA0.___195daa0_len_380.bin"
-___195daa0_len_380_end:
-___195de20_len_540:
-.incbin "bin/PAPERMARIO.195DE20.___195de20_len_540.bin"
-___195de20_len_540_end:
-___195e360_len_380:
-.incbin "bin/PAPERMARIO.195E360.___195e360_len_380.bin"
-___195e360_len_380_end:
-___195e6e0_len_380:
-.incbin "bin/PAPERMARIO.195E6E0.___195e6e0_len_380.bin"
-___195e6e0_len_380_end:
+___195daa0:
+.incbin "bin/PAPERMARIO.195DAA0.___195daa0.bin"
+___195daa0_end:
+___195de20:
+.incbin "bin/PAPERMARIO.195DE20.___195de20.bin"
+___195de20_end:
+___195e360:
+.incbin "bin/PAPERMARIO.195E360.___195e360.bin"
+___195e360_end:
+___195e6e0:
+.incbin "bin/PAPERMARIO.195E6E0.___195e6e0.bin"
+___195e6e0_end:
 # Unknown region 195EA60-198B7F0 [2CD90]
 .incbin "bin/PAPERMARIO.195EA60.bin"
 
-___198b7f0_len_540:
-.incbin "bin/PAPERMARIO.198B7F0.___198b7f0_len_540.bin"
-___198b7f0_len_540_end:
+___198b7f0:
+.incbin "bin/PAPERMARIO.198B7F0.___198b7f0.bin"
+___198b7f0_end:
 # Unknown region 198BD30-19E0970 [54C40]
 .incbin "bin/PAPERMARIO.198BD30.bin"
 
-___19e0970_len_8:
-.incbin "bin/PAPERMARIO.19E0970.___19e0970_len_8.bin"
-___19e0970_len_8_end:
-___19e0974_len_8:
-.incbin "bin/PAPERMARIO.19E0978.___19e0974_len_8.bin"
-___19e0974_len_8_end:
+___19e0970:
+.incbin "bin/PAPERMARIO.19E0970.___19e0970.bin"
+___19e0970_end:
+___19e0974:
+.incbin "bin/PAPERMARIO.19E0978.___19e0974.bin"
+___19e0974_end:
 # Unknown region 19E097C-19E0984 [8]
 .byte 0x00, 0x00, 0x19, 0xC0, 0x00, 0x00, 0x24, 0x70
 
-___19e0984_len_8:
-.incbin "bin/PAPERMARIO.19E0984.___19e0984_len_8.bin"
-___19e0984_len_8_end:
-___19e0988_len_8:
-.incbin "bin/PAPERMARIO.19E098C.___19e0988_len_8.bin"
-___19e0988_len_8_end:
-___19e098c_len_8:
-.incbin "bin/PAPERMARIO.19E0990.___19e098c_len_8.bin"
-___19e098c_len_8_end:
-___19e0990_len_8:
-.incbin "bin/PAPERMARIO.19E0994.___19e0990_len_8.bin"
-___19e0990_len_8_end:
+___19e0984:
+.incbin "bin/PAPERMARIO.19E0984.___19e0984.bin"
+___19e0984_end:
+___19e0988:
+.incbin "bin/PAPERMARIO.19E098C.___19e0988.bin"
+___19e0988_end:
+___19e098c:
+.incbin "bin/PAPERMARIO.19E0990.___19e098c.bin"
+___19e098c_end:
+___19e0990:
+.incbin "bin/PAPERMARIO.19E0994.___19e0990.bin"
+___19e0990_end:
 # Unknown region 19E0998-19E09A8 [10]
 .byte 0x00, 0x00, 0x4D, 0xE8, 0x00, 0x00, 0x4F, 0xE0, 0x00, 0x00, 0x59, 0x30, 0x00, 0x00, 0x5E, 0x48
 
@@ -14754,48 +14749,48 @@ L19E4828_end:
 # Unknown region 19E4BE0-19E67C4 [1BE4]
 .incbin "bin/PAPERMARIO.19E4BE0.bin"
 
-___19e67c4_len_8:
-.incbin "bin/PAPERMARIO.19E67C4.___19e67c4_len_8.bin"
-___19e67c4_len_8_end:
+___19e67c4:
+.incbin "bin/PAPERMARIO.19E67C4.___19e67c4.bin"
+___19e67c4_end:
 # Unknown region 19E67CC-19E67FC [30]
 .byte 0x00, 0x00, 0x75, 0x78, 0x00, 0x00, 0x83, 0x60, 0x00, 0x00, 0x98, 0xB8, 0x00, 0x00, 0xAD, 0xE8
 .byte 0x00, 0x00, 0xBF, 0x20, 0x00, 0x00, 0xEB, 0xD8, 0x00, 0x01, 0x0B, 0xE0, 0x00, 0x01, 0x39, 0x70
 .byte 0x00, 0x01, 0x63, 0x30, 0x00, 0x01, 0x85, 0xB8, 0x00, 0x01, 0xA1, 0xA0, 0x00, 0x01, 0xC5, 0x48
 
-___19e67fc_len_8:
-.incbin "bin/PAPERMARIO.19E67FC.___19e67fc_len_8.bin"
-___19e67fc_len_8_end:
-___19e6800_len_8:
-.incbin "bin/PAPERMARIO.19E6804.___19e6800_len_8.bin"
-___19e6800_len_8_end:
-___19e6804_len_8:
-.incbin "bin/PAPERMARIO.19E6808.___19e6804_len_8.bin"
-___19e6804_len_8_end:
-___19e6808_len_8:
-.incbin "bin/PAPERMARIO.19E680C.___19e6808_len_8.bin"
-___19e6808_len_8_end:
-___19e680c_len_8:
-.incbin "bin/PAPERMARIO.19E6810.___19e680c_len_8.bin"
-___19e680c_len_8_end:
-___19e6810_len_8:
-.incbin "bin/PAPERMARIO.19E6814.___19e6810_len_8.bin"
-___19e6810_len_8_end:
-___19e6814_len_8:
-.incbin "bin/PAPERMARIO.19E6818.___19e6814_len_8.bin"
-___19e6814_len_8_end:
+___19e67fc:
+.incbin "bin/PAPERMARIO.19E67FC.___19e67fc.bin"
+___19e67fc_end:
+___19e6800:
+.incbin "bin/PAPERMARIO.19E6804.___19e6800.bin"
+___19e6800_end:
+___19e6804:
+.incbin "bin/PAPERMARIO.19E6808.___19e6804.bin"
+___19e6804_end:
+___19e6808:
+.incbin "bin/PAPERMARIO.19E680C.___19e6808.bin"
+___19e6808_end:
+___19e680c:
+.incbin "bin/PAPERMARIO.19E6810.___19e680c.bin"
+___19e680c_end:
+___19e6810:
+.incbin "bin/PAPERMARIO.19E6814.___19e6810.bin"
+___19e6810_end:
+___19e6814:
+.incbin "bin/PAPERMARIO.19E6818.___19e6814.bin"
+___19e6814_end:
 # Unknown region 19E681C-19E6834 [18]
 .byte 0x00, 0x02, 0x54, 0x28, 0x00, 0x02, 0x58, 0x48, 0x00, 0x02, 0x5C, 0x80, 0x00, 0x02, 0x60, 0xA8
 .byte 0x00, 0x02, 0x6A, 0x30, 0x00, 0x02, 0x6D, 0xF8
 
-___19e6834_len_8:
-.incbin "bin/PAPERMARIO.19E6834.___19e6834_len_8.bin"
-___19e6834_len_8_end:
+___19e6834:
+.incbin "bin/PAPERMARIO.19E6834.___19e6834.bin"
+___19e6834_end:
 # Unknown region 19E683C-19E6934 [F8]
 .incbin "bin/PAPERMARIO.19E683C.bin"
 
-___19e6934_len_8:
-.incbin "bin/PAPERMARIO.19E6934.___19e6934_len_8.bin"
-___19e6934_len_8_end:
+___19e6934:
+.incbin "bin/PAPERMARIO.19E6934.___19e6934.bin"
+___19e6934_end:
 # Unknown region 19E693C-19E69B4 [78]
 .byte 0x00, 0x0B, 0x52, 0xC8, 0x00, 0x0B, 0x73, 0xB0, 0x00, 0x0B, 0x98, 0x90, 0x00, 0x0B, 0x9E, 0xE0
 .byte 0x00, 0x0B, 0xA8, 0x50, 0x00, 0x0C, 0x05, 0xA0, 0x00, 0x0C, 0x6E, 0x48, 0x00, 0x0C, 0xB4, 0x38
@@ -14806,24 +14801,24 @@ ___19e6934_len_8_end:
 .byte 0x00, 0x0F, 0x35, 0x98, 0x00, 0x0F, 0x3C, 0xE0, 0x00, 0x0F, 0x68, 0x08, 0x00, 0x0F, 0xB9, 0xB0
 .byte 0x00, 0x0F, 0xC6, 0xE8, 0x00, 0x10, 0x02, 0xA0
 
-___19e69b4_len_8:
-.incbin "bin/PAPERMARIO.19E69B4.___19e69b4_len_8.bin"
-___19e69b4_len_8_end:
-___19e69bc_len_8:
-.incbin "bin/PAPERMARIO.19E69BC.___19e69bc_len_8.bin"
-___19e69bc_len_8_end:
-___19e69c0_len_8:
-.incbin "bin/PAPERMARIO.19E69C4.___19e69c0_len_8.bin"
-___19e69c0_len_8_end:
-___19e69c4_len_8:
-.incbin "bin/PAPERMARIO.19E69C8.___19e69c4_len_8.bin"
-___19e69c4_len_8_end:
+___19e69b4:
+.incbin "bin/PAPERMARIO.19E69B4.___19e69b4.bin"
+___19e69b4_end:
+___19e69bc:
+.incbin "bin/PAPERMARIO.19E69BC.___19e69bc.bin"
+___19e69bc_end:
+___19e69c0:
+.incbin "bin/PAPERMARIO.19E69C4.___19e69c0.bin"
+___19e69c0_end:
+___19e69c4:
+.incbin "bin/PAPERMARIO.19E69C8.___19e69c4.bin"
+___19e69c4_end:
 # Unknown region 19E69CC-19E69D0 [4]
 .byte 0x00, 0x11, 0xB4, 0x50
 
-___19e69d0_len_8:
-.incbin "bin/PAPERMARIO.19E69D0.___19e69d0_len_8.bin"
-___19e69d0_len_8_end:
+___19e69d0:
+.incbin "bin/PAPERMARIO.19E69D0.___19e69d0.bin"
+___19e69d0_end:
 # Unknown region 19E69D8-19E6A1C [44]
 .byte 0x00, 0x11, 0xC9, 0x60, 0x00, 0x11, 0xD4, 0x60, 0x00, 0x11, 0xDE, 0x30, 0x00, 0x11, 0xE8, 0x08
 .byte 0x00, 0x11, 0xF1, 0xE0, 0x00, 0x12, 0x04, 0xD0, 0x00, 0x12, 0x14, 0x90, 0x00, 0x12, 0x2C, 0x88
@@ -14831,34 +14826,34 @@ ___19e69d0_len_8_end:
 .byte 0x00, 0x12, 0x69, 0x78, 0x00, 0x12, 0x83, 0xC8, 0x00, 0x12, 0xA5, 0x08, 0x00, 0x12, 0xC1, 0xE8
 .byte 0x00, 0x12, 0xCD, 0x90
 
-___19e6a1c_len_8:
-.incbin "bin/PAPERMARIO.19E6A1C.___19e6a1c_len_8.bin"
-___19e6a1c_len_8_end:
-___19e6a20_len_8:
-.incbin "bin/PAPERMARIO.19E6A24.___19e6a20_len_8.bin"
-___19e6a20_len_8_end:
+___19e6a1c:
+.incbin "bin/PAPERMARIO.19E6A1C.___19e6a1c.bin"
+___19e6a1c_end:
+___19e6a20:
+.incbin "bin/PAPERMARIO.19E6A24.___19e6a20.bin"
+___19e6a20_end:
 # Unknown region 19E6A28-19E6A40 [18]
 .byte 0x00, 0x13, 0x2B, 0x60, 0x00, 0x13, 0x38, 0x78, 0x00, 0x13, 0x51, 0x10, 0x00, 0x13, 0x54, 0xD0
 .byte 0x00, 0x13, 0x5F, 0xE8, 0x00, 0x13, 0x65, 0x70
 
-___19e6a40_len_8:
-.incbin "bin/PAPERMARIO.19E6A40.___19e6a40_len_8.bin"
-___19e6a40_len_8_end:
-___19e6a44_len_8:
-.incbin "bin/PAPERMARIO.19E6A48.___19e6a44_len_8.bin"
-___19e6a44_len_8_end:
+___19e6a40:
+.incbin "bin/PAPERMARIO.19E6A40.___19e6a40.bin"
+___19e6a40_end:
+___19e6a44:
+.incbin "bin/PAPERMARIO.19E6A48.___19e6a44.bin"
+___19e6a44_end:
 # Unknown region 19E6A4C-19E6A58 [C]
 .byte 0x00, 0x13, 0xFE, 0xA8, 0x00, 0x14, 0x1C, 0x40, 0x00, 0x14, 0x34, 0xA8
 
-___19e6a58_len_8:
-.incbin "bin/PAPERMARIO.19E6A58.___19e6a58_len_8.bin"
-___19e6a58_len_8_end:
+___19e6a58:
+.incbin "bin/PAPERMARIO.19E6A58.___19e6a58.bin"
+___19e6a58_end:
 # Unknown region 19E6A60-19E6B00 [A0]
 .incbin "bin/PAPERMARIO.19E6A60.bin"
 
-___19e6b00_len_8:
-.incbin "bin/PAPERMARIO.19E6B00.___19e6b00_len_8.bin"
-___19e6b00_len_8_end:
+___19e6b00:
+.incbin "bin/PAPERMARIO.19E6B00.___19e6b00.bin"
+___19e6b00_end:
 # Unknown region 19E6B08-19EAF38 [4430]
 .incbin "bin/PAPERMARIO.19E6B08.bin"
 
@@ -14901,21 +14896,21 @@ L1A0D970_end:
 L1A94C58:
 .incbin "COMPRESSED.YAY/PAPERMARIO.1A94C58.COMPRESSED.YAY"
 L1A94C58_end:
-_w__1a98c58_len_140:
-.incbin "bin/PAPERMARIO.1A98C58._w__1a98c58_len_140.bin"
-_w__1a98c58_len_140_end:
+_w__1a98c58:
+.incbin "bin/PAPERMARIO.1A98C58._w__1a98c58.bin"
+_w__1a98c58_end:
 # Unknown region 1A98D98-1AEB778 [529E0]
 .incbin "bin/PAPERMARIO.1A98D98.bin"
 
 L1AEB778:
 .incbin "COMPRESSED.YAY/PAPERMARIO.1AEB778.COMPRESSED.YAY"
 L1AEB778_end:
-___1aef778_len_4000:
-.incbin "bin/PAPERMARIO.1AEF778.___1aef778_len_4000.bin"
-___1aef778_len_4000_end:
-___1af3778_len_11e0:
-.incbin "bin/PAPERMARIO.1AF3778.___1af3778_len_11e0.bin"
-___1af3778_len_11e0_end:
+___1aef778:
+.incbin "bin/PAPERMARIO.1AEF778.___1aef778.bin"
+___1aef778_end:
+___1af3778:
+.incbin "bin/PAPERMARIO.1AF3778.___1af3778.bin"
+___1af3778_end:
 # Unknown region 1AF4958-1AFCB18 [81C0]
 .incbin "bin/PAPERMARIO.1AF4958.bin"
 
@@ -14967,693 +14962,693 @@ L1B657E0_end:
 # Unknown region 1B65A08-1B83000 [1D5F8]
 .incbin "bin/PAPERMARIO.1B65A08.bin"
 
-___1b83000_len_4:
-.incbin "bin/PAPERMARIO.1B83000.___1b83000_len_4.bin"
-___1b83000_len_4_end:
+___1b83000:
+.incbin "bin/PAPERMARIO.1B83000.___1b83000.bin"
+___1b83000_end:
 # Unknown region 1B83004-1B830C4 [C0]
 .incbin "bin/PAPERMARIO.1B83004.bin"
 
-___1b830c4_len_c:
-.incbin "bin/PAPERMARIO.1B830C4.___1b830c4_len_c.bin"
-___1b830c4_len_c_end:
-___1b830d0_len_44:
-.incbin "bin/PAPERMARIO.1B830D0.___1b830d0_len_44.bin"
-___1b830d0_len_44_end:
-___1b83114_len_24:
-.incbin "bin/PAPERMARIO.1B83114.___1b83114_len_24.bin"
-___1b83114_len_24_end:
-___1b83138_len_1c:
-.incbin "bin/PAPERMARIO.1B83138.___1b83138_len_1c.bin"
-___1b83138_len_1c_end:
-___1b83154_len_40:
-.incbin "bin/PAPERMARIO.1B83154.___1b83154_len_40.bin"
-___1b83154_len_40_end:
-___1b83194_len_24:
-.incbin "bin/PAPERMARIO.1B83194.___1b83194_len_24.bin"
-___1b83194_len_24_end:
-___1b831b8_len_38:
-.incbin "bin/PAPERMARIO.1B831B8.___1b831b8_len_38.bin"
-___1b831b8_len_38_end:
-___1b831f0_len_2c:
-.incbin "bin/PAPERMARIO.1B831F0.___1b831f0_len_2c.bin"
-___1b831f0_len_2c_end:
-___1b8321c_len_40:
-.incbin "bin/PAPERMARIO.1B8321C.___1b8321c_len_40.bin"
-___1b8321c_len_40_end:
-___1b8325c_len_24:
-.incbin "bin/PAPERMARIO.1B8325C.___1b8325c_len_24.bin"
-___1b8325c_len_24_end:
-___1b83280_len_20:
-.incbin "bin/PAPERMARIO.1B83280.___1b83280_len_20.bin"
-___1b83280_len_20_end:
-___1b832a0_len_10:
-.incbin "bin/PAPERMARIO.1B832A0.___1b832a0_len_10.bin"
-___1b832a0_len_10_end:
-___1b832b0_len_1c:
-.incbin "bin/PAPERMARIO.1B832B0.___1b832b0_len_1c.bin"
-___1b832b0_len_1c_end:
-___1b832cc_len_30:
-.incbin "bin/PAPERMARIO.1B832CC.___1b832cc_len_30.bin"
-___1b832cc_len_30_end:
-___1b832fc_len_1c:
-.incbin "bin/PAPERMARIO.1B832FC.___1b832fc_len_1c.bin"
-___1b832fc_len_1c_end:
-___1b83318_len_28:
-.incbin "bin/PAPERMARIO.1B83318.___1b83318_len_28.bin"
-___1b83318_len_28_end:
-___1b83340_len_38:
-.incbin "bin/PAPERMARIO.1B83340.___1b83340_len_38.bin"
-___1b83340_len_38_end:
-___1b83378_len_1c:
-.incbin "bin/PAPERMARIO.1B83378.___1b83378_len_1c.bin"
-___1b83378_len_1c_end:
-___1b83394_len_18:
-.incbin "bin/PAPERMARIO.1B83394.___1b83394_len_18.bin"
-___1b83394_len_18_end:
-___1b833ac_len_4:
-.incbin "bin/PAPERMARIO.1B833AC.___1b833ac_len_4.bin"
-___1b833ac_len_4_end:
-___1b833b0_len_20:
-.incbin "bin/PAPERMARIO.1B833B0.___1b833b0_len_20.bin"
-___1b833b0_len_20_end:
-___1b833d0_len_24:
-.incbin "bin/PAPERMARIO.1B833D0.___1b833d0_len_24.bin"
-___1b833d0_len_24_end:
-___1b833f4_len_24:
-.incbin "bin/PAPERMARIO.1B833F4.___1b833f4_len_24.bin"
-___1b833f4_len_24_end:
-___1b83418_len_20:
-.incbin "bin/PAPERMARIO.1B83418.___1b83418_len_20.bin"
-___1b83418_len_20_end:
-___1b83438_len_24:
-.incbin "bin/PAPERMARIO.1B83438.___1b83438_len_24.bin"
-___1b83438_len_24_end:
-___1b8345c_len_2c:
-.incbin "bin/PAPERMARIO.1B8345C.___1b8345c_len_2c.bin"
-___1b8345c_len_2c_end:
-___1b83488_len_48:
-.incbin "bin/PAPERMARIO.1B83488.___1b83488_len_48.bin"
-___1b83488_len_48_end:
-___1b834d0_len_2c:
-.incbin "bin/PAPERMARIO.1B834D0.___1b834d0_len_2c.bin"
-___1b834d0_len_2c_end:
-___1b834fc_len_1c:
-.incbin "bin/PAPERMARIO.1B834FC.___1b834fc_len_1c.bin"
-___1b834fc_len_1c_end:
-___1b83518_len_10:
-.incbin "bin/PAPERMARIO.1B83518.___1b83518_len_10.bin"
-___1b83518_len_10_end:
-___1b83528_len_38:
-.incbin "bin/PAPERMARIO.1B83528.___1b83528_len_38.bin"
-___1b83528_len_38_end:
-___1b83560_len_1c:
-.incbin "bin/PAPERMARIO.1B83560.___1b83560_len_1c.bin"
-___1b83560_len_1c_end:
-___1b8357c_len_1c:
-.incbin "bin/PAPERMARIO.1B8357C.___1b8357c_len_1c.bin"
-___1b8357c_len_1c_end:
-___1b83598_len_c:
-.incbin "bin/PAPERMARIO.1B83598.___1b83598_len_c.bin"
-___1b83598_len_c_end:
-___1b835a4_len_128:
-.incbin "bin/PAPERMARIO.1B835A4.___1b835a4_len_128.bin"
-___1b835a4_len_128_end:
-___1b836cc_len_70:
-.incbin "bin/PAPERMARIO.1B836CC.___1b836cc_len_70.bin"
-___1b836cc_len_70_end:
+___1b830c4:
+.incbin "bin/PAPERMARIO.1B830C4.___1b830c4.bin"
+___1b830c4_end:
+___1b830d0:
+.incbin "bin/PAPERMARIO.1B830D0.___1b830d0.bin"
+___1b830d0_end:
+___1b83114:
+.incbin "bin/PAPERMARIO.1B83114.___1b83114.bin"
+___1b83114_end:
+___1b83138:
+.incbin "bin/PAPERMARIO.1B83138.___1b83138.bin"
+___1b83138_end:
+___1b83154:
+.incbin "bin/PAPERMARIO.1B83154.___1b83154.bin"
+___1b83154_end:
+___1b83194:
+.incbin "bin/PAPERMARIO.1B83194.___1b83194.bin"
+___1b83194_end:
+___1b831b8:
+.incbin "bin/PAPERMARIO.1B831B8.___1b831b8.bin"
+___1b831b8_end:
+___1b831f0:
+.incbin "bin/PAPERMARIO.1B831F0.___1b831f0.bin"
+___1b831f0_end:
+___1b8321c:
+.incbin "bin/PAPERMARIO.1B8321C.___1b8321c.bin"
+___1b8321c_end:
+___1b8325c:
+.incbin "bin/PAPERMARIO.1B8325C.___1b8325c.bin"
+___1b8325c_end:
+___1b83280:
+.incbin "bin/PAPERMARIO.1B83280.___1b83280.bin"
+___1b83280_end:
+___1b832a0:
+.incbin "bin/PAPERMARIO.1B832A0.___1b832a0.bin"
+___1b832a0_end:
+___1b832b0:
+.incbin "bin/PAPERMARIO.1B832B0.___1b832b0.bin"
+___1b832b0_end:
+___1b832cc:
+.incbin "bin/PAPERMARIO.1B832CC.___1b832cc.bin"
+___1b832cc_end:
+___1b832fc:
+.incbin "bin/PAPERMARIO.1B832FC.___1b832fc.bin"
+___1b832fc_end:
+___1b83318:
+.incbin "bin/PAPERMARIO.1B83318.___1b83318.bin"
+___1b83318_end:
+___1b83340:
+.incbin "bin/PAPERMARIO.1B83340.___1b83340.bin"
+___1b83340_end:
+___1b83378:
+.incbin "bin/PAPERMARIO.1B83378.___1b83378.bin"
+___1b83378_end:
+___1b83394:
+.incbin "bin/PAPERMARIO.1B83394.___1b83394.bin"
+___1b83394_end:
+___1b833ac:
+.incbin "bin/PAPERMARIO.1B833AC.___1b833ac.bin"
+___1b833ac_end:
+___1b833b0:
+.incbin "bin/PAPERMARIO.1B833B0.___1b833b0.bin"
+___1b833b0_end:
+___1b833d0:
+.incbin "bin/PAPERMARIO.1B833D0.___1b833d0.bin"
+___1b833d0_end:
+___1b833f4:
+.incbin "bin/PAPERMARIO.1B833F4.___1b833f4.bin"
+___1b833f4_end:
+___1b83418:
+.incbin "bin/PAPERMARIO.1B83418.___1b83418.bin"
+___1b83418_end:
+___1b83438:
+.incbin "bin/PAPERMARIO.1B83438.___1b83438.bin"
+___1b83438_end:
+___1b8345c:
+.incbin "bin/PAPERMARIO.1B8345C.___1b8345c.bin"
+___1b8345c_end:
+___1b83488:
+.incbin "bin/PAPERMARIO.1B83488.___1b83488.bin"
+___1b83488_end:
+___1b834d0:
+.incbin "bin/PAPERMARIO.1B834D0.___1b834d0.bin"
+___1b834d0_end:
+___1b834fc:
+.incbin "bin/PAPERMARIO.1B834FC.___1b834fc.bin"
+___1b834fc_end:
+___1b83518:
+.incbin "bin/PAPERMARIO.1B83518.___1b83518.bin"
+___1b83518_end:
+___1b83528:
+.incbin "bin/PAPERMARIO.1B83528.___1b83528.bin"
+___1b83528_end:
+___1b83560:
+.incbin "bin/PAPERMARIO.1B83560.___1b83560.bin"
+___1b83560_end:
+___1b8357c:
+.incbin "bin/PAPERMARIO.1B8357C.___1b8357c.bin"
+___1b8357c_end:
+___1b83598:
+.incbin "bin/PAPERMARIO.1B83598.___1b83598.bin"
+___1b83598_end:
+___1b835a4:
+.incbin "bin/PAPERMARIO.1B835A4.___1b835a4.bin"
+___1b835a4_end:
+___1b836cc:
+.incbin "bin/PAPERMARIO.1B836CC.___1b836cc.bin"
+___1b836cc_end:
 # Unknown region 1B8373C-1B83988 [24C]
 .incbin "bin/PAPERMARIO.1B8373C.bin"
 
-___1b83988_len_40:
-.incbin "bin/PAPERMARIO.1B83988.___1b83988_len_40.bin"
-___1b83988_len_40_end:
+___1b83988:
+.incbin "bin/PAPERMARIO.1B83988.___1b83988.bin"
+___1b83988_end:
 # Unknown region 1B839C8-1B83C70 [2A8]
 .incbin "bin/PAPERMARIO.1B839C8.bin"
 
-___1b83c70_len_20:
-.incbin "bin/PAPERMARIO.1B83C70.___1b83c70_len_20.bin"
-___1b83c70_len_20_end:
+___1b83c70:
+.incbin "bin/PAPERMARIO.1B83C70.___1b83c70.bin"
+___1b83c70_end:
 # Unknown region 1B83C90-1B85564 [18D4]
 .incbin "bin/PAPERMARIO.1B83C90.bin"
 
-___1b85564_len_8:
-.incbin "bin/PAPERMARIO.1B85564.___1b85564_len_8.bin"
-___1b85564_len_8_end:
-___1b85568_len_8:
-.incbin "bin/PAPERMARIO.1B8556C.___1b85568_len_8.bin"
-___1b85568_len_8_end:
-___1b8556c_len_8:
-.incbin "bin/PAPERMARIO.1B85570.___1b8556c_len_8.bin"
-___1b8556c_len_8_end:
-___1b85570_len_8:
-.incbin "bin/PAPERMARIO.1B85574.___1b85570_len_8.bin"
-___1b85570_len_8_end:
-___1b85574_len_8:
-.incbin "bin/PAPERMARIO.1B85578.___1b85574_len_8.bin"
-___1b85574_len_8_end:
-___1b85578_len_8:
-.incbin "bin/PAPERMARIO.1B8557C.___1b85578_len_8.bin"
-___1b85578_len_8_end:
-___1b8557c_len_8:
-.incbin "bin/PAPERMARIO.1B85580.___1b8557c_len_8.bin"
-___1b8557c_len_8_end:
-___1b85580_len_8:
-.incbin "bin/PAPERMARIO.1B85584.___1b85580_len_8.bin"
-___1b85580_len_8_end:
-___1b85584_len_8:
-.incbin "bin/PAPERMARIO.1B85588.___1b85584_len_8.bin"
-___1b85584_len_8_end:
-___1b85588_len_8:
-.incbin "bin/PAPERMARIO.1B8558C.___1b85588_len_8.bin"
-___1b85588_len_8_end:
-___1b8558c_len_8:
-.incbin "bin/PAPERMARIO.1B85590.___1b8558c_len_8.bin"
-___1b8558c_len_8_end:
-___1b85590_len_8:
-.incbin "bin/PAPERMARIO.1B85594.___1b85590_len_8.bin"
-___1b85590_len_8_end:
-___1b85594_len_8:
-.incbin "bin/PAPERMARIO.1B85598.___1b85594_len_8.bin"
-___1b85594_len_8_end:
-___1b85598_len_8:
-.incbin "bin/PAPERMARIO.1B8559C.___1b85598_len_8.bin"
-___1b85598_len_8_end:
-___1b8559c_len_8:
-.incbin "bin/PAPERMARIO.1B855A0.___1b8559c_len_8.bin"
-___1b8559c_len_8_end:
-___1b855a0_len_8:
-.incbin "bin/PAPERMARIO.1B855A4.___1b855a0_len_8.bin"
-___1b855a0_len_8_end:
-___1b855a4_len_8:
-.incbin "bin/PAPERMARIO.1B855A8.___1b855a4_len_8.bin"
-___1b855a4_len_8_end:
-___1b855a8_len_8:
-.incbin "bin/PAPERMARIO.1B855AC.___1b855a8_len_8.bin"
-___1b855a8_len_8_end:
-___1b855ac_len_8:
-.incbin "bin/PAPERMARIO.1B855B0.___1b855ac_len_8.bin"
-___1b855ac_len_8_end:
-___1b855b0_len_8:
-.incbin "bin/PAPERMARIO.1B855B4.___1b855b0_len_8.bin"
-___1b855b0_len_8_end:
-___1b855b4_len_8:
-.incbin "bin/PAPERMARIO.1B855B8.___1b855b4_len_8.bin"
-___1b855b4_len_8_end:
-___1b855b8_len_8:
-.incbin "bin/PAPERMARIO.1B855BC.___1b855b8_len_8.bin"
-___1b855b8_len_8_end:
-___1b855bc_len_8:
-.incbin "bin/PAPERMARIO.1B855C0.___1b855bc_len_8.bin"
-___1b855bc_len_8_end:
-___1b855c0_len_8:
-.incbin "bin/PAPERMARIO.1B855C4.___1b855c0_len_8.bin"
-___1b855c0_len_8_end:
-___1b855c4_len_8:
-.incbin "bin/PAPERMARIO.1B855C8.___1b855c4_len_8.bin"
-___1b855c4_len_8_end:
-___1b855c8_len_8:
-.incbin "bin/PAPERMARIO.1B855CC.___1b855c8_len_8.bin"
-___1b855c8_len_8_end:
-___1b855cc_len_8:
-.incbin "bin/PAPERMARIO.1B855D0.___1b855cc_len_8.bin"
-___1b855cc_len_8_end:
-___1b855d0_len_8:
-.incbin "bin/PAPERMARIO.1B855D4.___1b855d0_len_8.bin"
-___1b855d0_len_8_end:
-___1b855d4_len_8:
-.incbin "bin/PAPERMARIO.1B855D8.___1b855d4_len_8.bin"
-___1b855d4_len_8_end:
-___1b855d8_len_8:
-.incbin "bin/PAPERMARIO.1B855DC.___1b855d8_len_8.bin"
-___1b855d8_len_8_end:
-___1b855dc_len_8:
-.incbin "bin/PAPERMARIO.1B855E0.___1b855dc_len_8.bin"
-___1b855dc_len_8_end:
-___1b855e0_len_8:
-.incbin "bin/PAPERMARIO.1B855E4.___1b855e0_len_8.bin"
-___1b855e0_len_8_end:
-___1b855e4_len_8:
-.incbin "bin/PAPERMARIO.1B855E8.___1b855e4_len_8.bin"
-___1b855e4_len_8_end:
-___1b855e8_len_8:
-.incbin "bin/PAPERMARIO.1B855EC.___1b855e8_len_8.bin"
-___1b855e8_len_8_end:
-___1b855ec_len_8:
-.incbin "bin/PAPERMARIO.1B855F0.___1b855ec_len_8.bin"
-___1b855ec_len_8_end:
-___1b855f0_len_8:
-.incbin "bin/PAPERMARIO.1B855F4.___1b855f0_len_8.bin"
-___1b855f0_len_8_end:
+___1b85564:
+.incbin "bin/PAPERMARIO.1B85564.___1b85564.bin"
+___1b85564_end:
+___1b85568:
+.incbin "bin/PAPERMARIO.1B8556C.___1b85568.bin"
+___1b85568_end:
+___1b8556c:
+.incbin "bin/PAPERMARIO.1B85570.___1b8556c.bin"
+___1b8556c_end:
+___1b85570:
+.incbin "bin/PAPERMARIO.1B85574.___1b85570.bin"
+___1b85570_end:
+___1b85574:
+.incbin "bin/PAPERMARIO.1B85578.___1b85574.bin"
+___1b85574_end:
+___1b85578:
+.incbin "bin/PAPERMARIO.1B8557C.___1b85578.bin"
+___1b85578_end:
+___1b8557c:
+.incbin "bin/PAPERMARIO.1B85580.___1b8557c.bin"
+___1b8557c_end:
+___1b85580:
+.incbin "bin/PAPERMARIO.1B85584.___1b85580.bin"
+___1b85580_end:
+___1b85584:
+.incbin "bin/PAPERMARIO.1B85588.___1b85584.bin"
+___1b85584_end:
+___1b85588:
+.incbin "bin/PAPERMARIO.1B8558C.___1b85588.bin"
+___1b85588_end:
+___1b8558c:
+.incbin "bin/PAPERMARIO.1B85590.___1b8558c.bin"
+___1b8558c_end:
+___1b85590:
+.incbin "bin/PAPERMARIO.1B85594.___1b85590.bin"
+___1b85590_end:
+___1b85594:
+.incbin "bin/PAPERMARIO.1B85598.___1b85594.bin"
+___1b85594_end:
+___1b85598:
+.incbin "bin/PAPERMARIO.1B8559C.___1b85598.bin"
+___1b85598_end:
+___1b8559c:
+.incbin "bin/PAPERMARIO.1B855A0.___1b8559c.bin"
+___1b8559c_end:
+___1b855a0:
+.incbin "bin/PAPERMARIO.1B855A4.___1b855a0.bin"
+___1b855a0_end:
+___1b855a4:
+.incbin "bin/PAPERMARIO.1B855A8.___1b855a4.bin"
+___1b855a4_end:
+___1b855a8:
+.incbin "bin/PAPERMARIO.1B855AC.___1b855a8.bin"
+___1b855a8_end:
+___1b855ac:
+.incbin "bin/PAPERMARIO.1B855B0.___1b855ac.bin"
+___1b855ac_end:
+___1b855b0:
+.incbin "bin/PAPERMARIO.1B855B4.___1b855b0.bin"
+___1b855b0_end:
+___1b855b4:
+.incbin "bin/PAPERMARIO.1B855B8.___1b855b4.bin"
+___1b855b4_end:
+___1b855b8:
+.incbin "bin/PAPERMARIO.1B855BC.___1b855b8.bin"
+___1b855b8_end:
+___1b855bc:
+.incbin "bin/PAPERMARIO.1B855C0.___1b855bc.bin"
+___1b855bc_end:
+___1b855c0:
+.incbin "bin/PAPERMARIO.1B855C4.___1b855c0.bin"
+___1b855c0_end:
+___1b855c4:
+.incbin "bin/PAPERMARIO.1B855C8.___1b855c4.bin"
+___1b855c4_end:
+___1b855c8:
+.incbin "bin/PAPERMARIO.1B855CC.___1b855c8.bin"
+___1b855c8_end:
+___1b855cc:
+.incbin "bin/PAPERMARIO.1B855D0.___1b855cc.bin"
+___1b855cc_end:
+___1b855d0:
+.incbin "bin/PAPERMARIO.1B855D4.___1b855d0.bin"
+___1b855d0_end:
+___1b855d4:
+.incbin "bin/PAPERMARIO.1B855D8.___1b855d4.bin"
+___1b855d4_end:
+___1b855d8:
+.incbin "bin/PAPERMARIO.1B855DC.___1b855d8.bin"
+___1b855d8_end:
+___1b855dc:
+.incbin "bin/PAPERMARIO.1B855E0.___1b855dc.bin"
+___1b855dc_end:
+___1b855e0:
+.incbin "bin/PAPERMARIO.1B855E4.___1b855e0.bin"
+___1b855e0_end:
+___1b855e4:
+.incbin "bin/PAPERMARIO.1B855E8.___1b855e4.bin"
+___1b855e4_end:
+___1b855e8:
+.incbin "bin/PAPERMARIO.1B855EC.___1b855e8.bin"
+___1b855e8_end:
+___1b855ec:
+.incbin "bin/PAPERMARIO.1B855F0.___1b855ec.bin"
+___1b855ec_end:
+___1b855f0:
+.incbin "bin/PAPERMARIO.1B855F4.___1b855f0.bin"
+___1b855f0_end:
 # Unknown region 1B855F8-1B85604 [C]
 .byte 0x00, 0x00, 0x07, 0xEC, 0x00, 0x00, 0x08, 0x4C, 0x00, 0x00, 0x08, 0xDC
 
-___1b85604_len_8:
-.incbin "bin/PAPERMARIO.1B85604.___1b85604_len_8.bin"
-___1b85604_len_8_end:
+___1b85604:
+.incbin "bin/PAPERMARIO.1B85604.___1b85604.bin"
+___1b85604_end:
 # Unknown region 1B8560C-1B85618 [C]
 .byte 0x00, 0x00, 0x0A, 0x70, 0x00, 0x00, 0x0B, 0x60, 0x00, 0x00, 0x0B, 0xF4
 
-___1b85618_len_8:
-.incbin "bin/PAPERMARIO.1B85618.___1b85618_len_8.bin"
-___1b85618_len_8_end:
+___1b85618:
+.incbin "bin/PAPERMARIO.1B85618.___1b85618.bin"
+___1b85618_end:
 # Unknown region 1B85620-1E40020 [2BAA00]
 .incbin "bin/PAPERMARIO.1B85620.bin"
 
-_dro__1e40020_len_1c:
-.incbin "bin/PAPERMARIO.1E40020._dro__1e40020_len_1c.bin"
-_dro__1e40020_len_1c_end:
+_dro__1e40020:
+.incbin "bin/PAPERMARIO.1E40020._dro__1e40020.bin"
+_dro__1e40020_end:
 # Unknown region 1E4003C-1E42020 [1FE4]
 .incbin "bin/PAPERMARIO.1E4003C.bin"
 
-___1e42020_len_2000:
-.incbin "bin/PAPERMARIO.1E42020.___1e42020_len_2000.bin"
-___1e42020_len_2000_end:
-___1e44020_len_2000:
-.incbin "bin/PAPERMARIO.1E44020.___1e44020_len_2000.bin"
-___1e44020_len_2000_end:
-___1e46020_len_1118:
-.incbin "bin/PAPERMARIO.1E46020.___1e46020_len_1118.bin"
-___1e46020_len_1118_end:
+___1e42020:
+.incbin "bin/PAPERMARIO.1E42020.___1e42020.bin"
+___1e42020_end:
+___1e44020:
+.incbin "bin/PAPERMARIO.1E44020.___1e44020.bin"
+___1e44020_end:
+___1e46020:
+.incbin "bin/PAPERMARIO.1E46020.___1e46020.bin"
+___1e46020_end:
 # Unknown region 1E47138-1E7B43E [34306]
 .incbin "bin/PAPERMARIO.1E47138.bin"
 
-___1e7b43e_len_2000:
-.incbin "bin/PAPERMARIO.1E7B43E.___1e7b43e_len_2000.bin"
-___1e7b43e_len_2000_end:
-_Pop__1e7d43e_len_2000:
-.incbin "bin/PAPERMARIO.1E7D43E._Pop__1e7d43e_len_2000.bin"
-_Pop__1e7d43e_len_2000_end:
-_S__1e7f43e_len_2000:
-.incbin "bin/PAPERMARIO.1E7F43E._S__1e7f43e_len_2000.bin"
-_S__1e7f43e_len_2000_end:
-___1e8143e_len_2000:
-.incbin "bin/PAPERMARIO.1E8143E.___1e8143e_len_2000.bin"
-___1e8143e_len_2000_end:
-___1e8343e_len_322:
-.incbin "bin/PAPERMARIO.1E8343E.___1e8343e_len_322.bin"
-___1e8343e_len_322_end:
+___1e7b43e:
+.incbin "bin/PAPERMARIO.1E7B43E.___1e7b43e.bin"
+___1e7b43e_end:
+_Pop__1e7d43e:
+.incbin "bin/PAPERMARIO.1E7D43E._Pop__1e7d43e.bin"
+_Pop__1e7d43e_end:
+_S__1e7f43e:
+.incbin "bin/PAPERMARIO.1E7F43E._S__1e7f43e.bin"
+_S__1e7f43e_end:
+___1e8143e:
+.incbin "bin/PAPERMARIO.1E8143E.___1e8143e.bin"
+___1e8143e_end:
+___1e8343e:
+.incbin "bin/PAPERMARIO.1E8343E.___1e8343e.bin"
+___1e8343e_end:
 L1E83760:
 .incbin "COMPRESSED.YAY/PAPERMARIO.1E83760.COMPRESSED.YAY"
 L1E83760_end:
-___1e83d3e_len_2000:
-.incbin "bin/PAPERMARIO.1E83D3E.___1e83d3e_len_2000.bin"
-___1e83d3e_len_2000_end:
-_B__1e85d3e_len_2000:
-.incbin "bin/PAPERMARIO.1E85D3E._B__1e85d3e_len_2000.bin"
-_B__1e85d3e_len_2000_end:
-___1e87d3e_len_2000:
-.incbin "bin/PAPERMARIO.1E87D3E.___1e87d3e_len_2000.bin"
-___1e87d3e_len_2000_end:
-_A__1e89d3e_len_2000:
-.incbin "bin/PAPERMARIO.1E89D3E._A__1e89d3e_len_2000.bin"
-_A__1e89d3e_len_2000_end:
-___1e8bd3e_len_e5e:
-.incbin "bin/PAPERMARIO.1E8BD3E.___1e8bd3e_len_e5e.bin"
-___1e8bd3e_len_e5e_end:
+___1e83d3e:
+.incbin "bin/PAPERMARIO.1E83D3E.___1e83d3e.bin"
+___1e83d3e_end:
+_B__1e85d3e:
+.incbin "bin/PAPERMARIO.1E85D3E._B__1e85d3e.bin"
+_B__1e85d3e_end:
+___1e87d3e:
+.incbin "bin/PAPERMARIO.1E87D3E.___1e87d3e.bin"
+___1e87d3e_end:
+_A__1e89d3e:
+.incbin "bin/PAPERMARIO.1E89D3E._A__1e89d3e.bin"
+_A__1e89d3e_end:
+___1e8bd3e:
+.incbin "bin/PAPERMARIO.1E8BD3E.___1e8bd3e.bin"
+___1e8bd3e_end:
 L1E8CB9C:
 .incbin "COMPRESSED.YAY/PAPERMARIO.1E8CB9C.COMPRESSED.YAY"
 L1E8CB9C_end:
 # Unknown region 1E8D41E-1F0C272 [7EE54]
 .incbin "bin/PAPERMARIO.1E8D41E.bin"
 
-___1f0c272_len_2000:
-.incbin "bin/PAPERMARIO.1F0C272.___1f0c272_len_2000.bin"
-___1f0c272_len_2000_end:
-___1f0e272_len_2000:
-.incbin "bin/PAPERMARIO.1F0E272.___1f0e272_len_2000.bin"
-___1f0e272_len_2000_end:
-___1f10272_len_163e:
-.incbin "bin/PAPERMARIO.1F10272.___1f10272_len_163e.bin"
-___1f10272_len_163e_end:
+___1f0c272:
+.incbin "bin/PAPERMARIO.1F0C272.___1f0c272.bin"
+___1f0c272_end:
+___1f0e272:
+.incbin "bin/PAPERMARIO.1F0E272.___1f0e272.bin"
+___1f0e272_end:
+___1f10272:
+.incbin "bin/PAPERMARIO.1F10272.___1f10272.bin"
+___1f10272_end:
 L1F118B0:
 .incbin "COMPRESSED.YAY/PAPERMARIO.1F118B0.COMPRESSED.YAY"
 L1F118B0_end:
 # Unknown region 1F11FA4-1F26486 [144E2]
 .incbin "bin/PAPERMARIO.1F11FA4.bin"
 
-___1f26486_len_2000:
-.incbin "bin/PAPERMARIO.1F26486.___1f26486_len_2000.bin"
-___1f26486_len_2000_end:
-___1f28486_len_2000:
-.incbin "bin/PAPERMARIO.1F28486.___1f28486_len_2000.bin"
-___1f28486_len_2000_end:
-___1f2a486_len_1152:
-.incbin "bin/PAPERMARIO.1F2A486.___1f2a486_len_1152.bin"
-___1f2a486_len_1152_end:
+___1f26486:
+.incbin "bin/PAPERMARIO.1F26486.___1f26486.bin"
+___1f26486_end:
+___1f28486:
+.incbin "bin/PAPERMARIO.1F28486.___1f28486.bin"
+___1f28486_end:
+___1f2a486:
+.incbin "bin/PAPERMARIO.1F2A486.___1f2a486.bin"
+___1f2a486_end:
 L1F2B5D8:
 .incbin "COMPRESSED.YAY/PAPERMARIO.1F2B5D8.COMPRESSED.YAY"
 L1F2B5D8_end:
 # Unknown region 1F2D1B8-1FDAC16 [ADA5E]
 .incbin "bin/PAPERMARIO.1F2D1B8.bin"
 
-___1fdac16_len_2000:
-.incbin "bin/PAPERMARIO.1FDAC16.___1fdac16_len_2000.bin"
-___1fdac16_len_2000_end:
-_z__1fdcc16_len_2000:
-.incbin "bin/PAPERMARIO.1FDCC16._z__1fdcc16_len_2000.bin"
-_z__1fdcc16_len_2000_end:
-___1fdec16_len_2000:
-.incbin "bin/PAPERMARIO.1FDEC16.___1fdec16_len_2000.bin"
-___1fdec16_len_2000_end:
-_P__1fe0c16_len_2000:
-.incbin "bin/PAPERMARIO.1FE0C16._P__1fe0c16_len_2000.bin"
-_P__1fe0c16_len_2000_end:
-___1fe2c16_len_2000:
-.incbin "bin/PAPERMARIO.1FE2C16.___1fe2c16_len_2000.bin"
-___1fe2c16_len_2000_end:
-___1fe4c16_len_2000:
-.incbin "bin/PAPERMARIO.1FE4C16.___1fe4c16_len_2000.bin"
-___1fe4c16_len_2000_end:
-___1fe6c16_len_178c:
-.incbin "bin/PAPERMARIO.1FE6C16.___1fe6c16_len_178c.bin"
-___1fe6c16_len_178c_end:
-___1fe83a2_len_124a:
-.incbin "bin/PAPERMARIO.1FE83A2.___1fe83a2_len_124a.bin"
-___1fe83a2_len_124a_end:
+___1fdac16:
+.incbin "bin/PAPERMARIO.1FDAC16.___1fdac16.bin"
+___1fdac16_end:
+_z__1fdcc16:
+.incbin "bin/PAPERMARIO.1FDCC16._z__1fdcc16.bin"
+_z__1fdcc16_end:
+___1fdec16:
+.incbin "bin/PAPERMARIO.1FDEC16.___1fdec16.bin"
+___1fdec16_end:
+_P__1fe0c16:
+.incbin "bin/PAPERMARIO.1FE0C16._P__1fe0c16.bin"
+_P__1fe0c16_end:
+___1fe2c16:
+.incbin "bin/PAPERMARIO.1FE2C16.___1fe2c16.bin"
+___1fe2c16_end:
+___1fe4c16:
+.incbin "bin/PAPERMARIO.1FE4C16.___1fe4c16.bin"
+___1fe4c16_end:
+___1fe6c16:
+.incbin "bin/PAPERMARIO.1FE6C16.___1fe6c16.bin"
+___1fe6c16_end:
+___1fe83a2:
+.incbin "bin/PAPERMARIO.1FE83A2.___1fe83a2.bin"
+___1fe83a2_end:
 # Unknown region 1FE95EC-20C76E6 [DE0FA]
 .incbin "bin/PAPERMARIO.1FE95EC.bin"
 
-___20c76e6_len_2000:
-.incbin "bin/PAPERMARIO.20C76E6.___20c76e6_len_2000.bin"
-___20c76e6_len_2000_end:
-___20c96e6_len_2000:
-.incbin "bin/PAPERMARIO.20C96E6.___20c96e6_len_2000.bin"
-___20c96e6_len_2000_end:
-___20cb6e6_len_2000:
-.incbin "bin/PAPERMARIO.20CB6E6.___20cb6e6_len_2000.bin"
-___20cb6e6_len_2000_end:
-___20cd6e6_len_2000:
-.incbin "bin/PAPERMARIO.20CD6E6.___20cd6e6_len_2000.bin"
-___20cd6e6_len_2000_end:
-___20cf6e6_len_2000:
-.incbin "bin/PAPERMARIO.20CF6E6.___20cf6e6_len_2000.bin"
-___20cf6e6_len_2000_end:
-___20d16e6_len_bc:
-.incbin "bin/PAPERMARIO.20D16E6.___20d16e6_len_bc.bin"
-___20d16e6_len_bc_end:
-___20d17a2_len_2000:
-.incbin "bin/PAPERMARIO.20D17A2.___20d17a2_len_2000.bin"
-___20d17a2_len_2000_end:
-___20d37a2_len_af8:
-.incbin "bin/PAPERMARIO.20D37A2.___20d37a2_len_af8.bin"
-___20d37a2_len_af8_end:
-___20d429a_len_2000:
-.incbin "bin/PAPERMARIO.20D429A.___20d429a_len_2000.bin"
-___20d429a_len_2000_end:
-___20d629a_len_2000:
-.incbin "bin/PAPERMARIO.20D629A.___20d629a_len_2000.bin"
-___20d629a_len_2000_end:
-___20d829a_len_2000:
-.incbin "bin/PAPERMARIO.20D829A.___20d829a_len_2000.bin"
-___20d829a_len_2000_end:
-___20da29a_len_2000:
-.incbin "bin/PAPERMARIO.20DA29A.___20da29a_len_2000.bin"
-___20da29a_len_2000_end:
-___20dc29a_len_1e48:
-.incbin "bin/PAPERMARIO.20DC29A.___20dc29a_len_1e48.bin"
-___20dc29a_len_1e48_end:
-___20de0e2_len_2000:
-.incbin "bin/PAPERMARIO.20DE0E2.___20de0e2_len_2000.bin"
-___20de0e2_len_2000_end:
-___20e00e2_len_15a:
-.incbin "bin/PAPERMARIO.20E00E2.___20e00e2_len_15a.bin"
-___20e00e2_len_15a_end:
+___20c76e6:
+.incbin "bin/PAPERMARIO.20C76E6.___20c76e6.bin"
+___20c76e6_end:
+___20c96e6:
+.incbin "bin/PAPERMARIO.20C96E6.___20c96e6.bin"
+___20c96e6_end:
+___20cb6e6:
+.incbin "bin/PAPERMARIO.20CB6E6.___20cb6e6.bin"
+___20cb6e6_end:
+___20cd6e6:
+.incbin "bin/PAPERMARIO.20CD6E6.___20cd6e6.bin"
+___20cd6e6_end:
+___20cf6e6:
+.incbin "bin/PAPERMARIO.20CF6E6.___20cf6e6.bin"
+___20cf6e6_end:
+___20d16e6:
+.incbin "bin/PAPERMARIO.20D16E6.___20d16e6.bin"
+___20d16e6_end:
+___20d17a2:
+.incbin "bin/PAPERMARIO.20D17A2.___20d17a2.bin"
+___20d17a2_end:
+___20d37a2:
+.incbin "bin/PAPERMARIO.20D37A2.___20d37a2.bin"
+___20d37a2_end:
+___20d429a:
+.incbin "bin/PAPERMARIO.20D429A.___20d429a.bin"
+___20d429a_end:
+___20d629a:
+.incbin "bin/PAPERMARIO.20D629A.___20d629a.bin"
+___20d629a_end:
+___20d829a:
+.incbin "bin/PAPERMARIO.20D829A.___20d829a.bin"
+___20d829a_end:
+___20da29a:
+.incbin "bin/PAPERMARIO.20DA29A.___20da29a.bin"
+___20da29a_end:
+___20dc29a:
+.incbin "bin/PAPERMARIO.20DC29A.___20dc29a.bin"
+___20dc29a_end:
+___20de0e2:
+.incbin "bin/PAPERMARIO.20DE0E2.___20de0e2.bin"
+___20de0e2_end:
+___20e00e2:
+.incbin "bin/PAPERMARIO.20E00E2.___20e00e2.bin"
+___20e00e2_end:
 # Unknown region 20E023C-257775E [497522]
 .incbin "bin/PAPERMARIO.20E023C.bin"
 
-_ahp__257775e_len_30:
-.incbin "bin/PAPERMARIO.257775E._ahp__257775e_len_30.bin"
-_ahp__257775e_len_30_end:
+_ahp__257775e:
+.incbin "bin/PAPERMARIO.257775E._ahp__257775e.bin"
+_ahp__257775e_end:
 # Unknown region 257778E-25779AE [220]
 .incbin "bin/PAPERMARIO.257778E.bin"
 
-_be__25779ae_len_30:
-.incbin "bin/PAPERMARIO.25779AE._be__25779ae_len_30.bin"
-_be__25779ae_len_30_end:
-___25779de_len_a0:
-.incbin "bin/PAPERMARIO.25779DE.___25779de_len_a0.bin"
-___25779de_len_a0_end:
-_bo__2577a7e_len_30:
-.incbin "bin/PAPERMARIO.2577A7E._bo__2577a7e_len_30.bin"
-_bo__2577a7e_len_30_end:
+_be__25779ae:
+.incbin "bin/PAPERMARIO.25779AE._be__25779ae.bin"
+_be__25779ae_end:
+___25779de:
+.incbin "bin/PAPERMARIO.25779DE.___25779de.bin"
+___25779de_end:
+_bo__2577a7e:
+.incbin "bin/PAPERMARIO.2577A7E._bo__2577a7e.bin"
+_bo__2577a7e_end:
 # Unknown region 2577AAE-2577BCE [120]
 .incbin "bin/PAPERMARIO.2577AAE.bin"
 
-_bo__2577bce_len_30:
-.incbin "bin/PAPERMARIO.2577BCE._bo__2577bce_len_30.bin"
-_bo__2577bce_len_30_end:
+_bo__2577bce:
+.incbin "bin/PAPERMARIO.2577BCE._bo__2577bce.bin"
+_bo__2577bce_end:
 # Unknown region 2577BFE-2578BFE [1000]
 .incbin "bin/PAPERMARIO.2577BFE.bin"
 
-_cl__2578bfe_len_30:
-.incbin "bin/PAPERMARIO.2578BFE._cl__2578bfe_len_30.bin"
-_cl__2578bfe_len_30_end:
+_cl__2578bfe:
+.incbin "bin/PAPERMARIO.2578BFE._cl__2578bfe.bin"
+_cl__2578bfe_end:
 # Unknown region 2578C2E-257916E [540]
 .incbin "bin/PAPERMARIO.2578C2E.bin"
 
-_cu__257916e_len_30:
-.incbin "bin/PAPERMARIO.257916E._cu__257916e_len_30.bin"
-_cu__257916e_len_30_end:
+_cu__257916e:
+.incbin "bin/PAPERMARIO.257916E._cu__257916e.bin"
+_cu__257916e_end:
 # Unknown region 257919E-25792BE [120]
 .incbin "bin/PAPERMARIO.257919E.bin"
 
-_de__25792be_len_30:
-.incbin "bin/PAPERMARIO.25792BE._de__25792be_len_30.bin"
-_de__25792be_len_30_end:
-___25792ee_len_420:
-.incbin "bin/PAPERMARIO.25792EE.___25792ee_len_420.bin"
-___25792ee_len_420_end:
-_de__257970e_len_30:
-.incbin "bin/PAPERMARIO.257970E._de__257970e_len_30.bin"
-_de__257970e_len_30_end:
+_de__25792be:
+.incbin "bin/PAPERMARIO.25792BE._de__25792be.bin"
+_de__25792be_end:
+___25792ee:
+.incbin "bin/PAPERMARIO.25792EE.___25792ee.bin"
+___25792ee_end:
+_de__257970e:
+.incbin "bin/PAPERMARIO.257970E._de__257970e.bin"
+_de__257970e_end:
 # Unknown region 257973E-257993E [200]
 .incbin "bin/PAPERMARIO.257973E.bin"
 
-_dr__257993e_len_30:
-.incbin "bin/PAPERMARIO.257993E._dr__257993e_len_30.bin"
-_dr__257993e_len_30_end:
-___257996e_len_200:
-.incbin "bin/PAPERMARIO.257996E.___257996e_len_200.bin"
-___257996e_len_200_end:
-_dr__2579b6e_len_30:
-.incbin "bin/PAPERMARIO.2579B6E._dr__2579b6e_len_30.bin"
-_dr__2579b6e_len_30_end:
-_yD__2579b9e_len_a0:
-.incbin "bin/PAPERMARIO.2579B9E._yD__2579b9e_len_a0.bin"
-_yD__2579b9e_len_a0_end:
-_fl__2579c3e_len_30:
-.incbin "bin/PAPERMARIO.2579C3E._fl__2579c3e_len_30.bin"
-_fl__2579c3e_len_30_end:
-___2579c6e_len_a0:
-.incbin "bin/PAPERMARIO.2579C6E.___2579c6e_len_a0.bin"
-___2579c6e_len_a0_end:
-_fl__2579d0e_len_30:
-.incbin "bin/PAPERMARIO.2579D0E._fl__2579d0e_len_30.bin"
-_fl__2579d0e_len_30_end:
-___2579d3e_len_a0:
-.incbin "bin/PAPERMARIO.2579D3E.___2579d3e_len_a0.bin"
-___2579d3e_len_a0_end:
-___2579dde_len_220:
-.incbin "bin/PAPERMARIO.2579DDE.___2579dde_len_220.bin"
-___2579dde_len_220_end:
-_fl__2579ffe_len_30:
-.incbin "bin/PAPERMARIO.2579FFE._fl__2579ffe_len_30.bin"
-_fl__2579ffe_len_30_end:
-___257a02e_len_400:
-.incbin "bin/PAPERMARIO.257A02E.___257a02e_len_400.bin"
-___257a02e_len_400_end:
-_fl__257a42e_len_30:
-.incbin "bin/PAPERMARIO.257A42E._fl__257a42e_len_30.bin"
-_fl__257a42e_len_30_end:
+_dr__257993e:
+.incbin "bin/PAPERMARIO.257993E._dr__257993e.bin"
+_dr__257993e_end:
+___257996e:
+.incbin "bin/PAPERMARIO.257996E.___257996e.bin"
+___257996e_end:
+_dr__2579b6e:
+.incbin "bin/PAPERMARIO.2579B6E._dr__2579b6e.bin"
+_dr__2579b6e_end:
+_yD__2579b9e:
+.incbin "bin/PAPERMARIO.2579B9E._yD__2579b9e.bin"
+_yD__2579b9e_end:
+_fl__2579c3e:
+.incbin "bin/PAPERMARIO.2579C3E._fl__2579c3e.bin"
+_fl__2579c3e_end:
+___2579c6e:
+.incbin "bin/PAPERMARIO.2579C6E.___2579c6e.bin"
+___2579c6e_end:
+_fl__2579d0e:
+.incbin "bin/PAPERMARIO.2579D0E._fl__2579d0e.bin"
+_fl__2579d0e_end:
+___2579d3e:
+.incbin "bin/PAPERMARIO.2579D3E.___2579d3e.bin"
+___2579d3e_end:
+___2579dde:
+.incbin "bin/PAPERMARIO.2579DDE.___2579dde.bin"
+___2579dde_end:
+_fl__2579ffe:
+.incbin "bin/PAPERMARIO.2579FFE._fl__2579ffe.bin"
+_fl__2579ffe_end:
+___257a02e:
+.incbin "bin/PAPERMARIO.257A02E.___257a02e.bin"
+___257a02e_end:
+_fl__257a42e:
+.incbin "bin/PAPERMARIO.257A42E._fl__257a42e.bin"
+_fl__257a42e_end:
 # Unknown region 257A45E-257A57E [120]
 .incbin "bin/PAPERMARIO.257A45E.bin"
 
-_frc__257a57e_len_30:
-.incbin "bin/PAPERMARIO.257A57E._frc__257a57e_len_30.bin"
-_frc__257a57e_len_30_end:
-___257a5ae_len_820:
-.incbin "bin/PAPERMARIO.257A5AE.___257a5ae_len_820.bin"
-___257a5ae_len_820_end:
-_fx__257adce_len_30:
-.incbin "bin/PAPERMARIO.257ADCE._fx__257adce_len_30.bin"
-_fx__257adce_len_30_end:
-___257adfe_len_200:
-.incbin "bin/PAPERMARIO.257ADFE.___257adfe_len_200.bin"
-___257adfe_len_200_end:
-___257affe_len_400:
-.incbin "bin/PAPERMARIO.257AFFE.___257affe_len_400.bin"
-___257affe_len_400_end:
-_gr__257b3fe_len_30:
-.incbin "bin/PAPERMARIO.257B3FE._gr__257b3fe_len_30.bin"
-_gr__257b3fe_len_30_end:
-___257b42e_len_2a0:
-.incbin "bin/PAPERMARIO.257B42E.___257b42e_len_2a0.bin"
-___257b42e_len_2a0_end:
-_ha__257b6ce_len_30:
-.incbin "bin/PAPERMARIO.257B6CE._ha__257b6ce_len_30.bin"
-_ha__257b6ce_len_30_end:
-___257b6fe_len_420:
-.incbin "bin/PAPERMARIO.257B6FE.___257b6fe_len_420.bin"
-___257b6fe_len_420_end:
-_ho__257bb1e_len_30:
-.incbin "bin/PAPERMARIO.257BB1E._ho__257bb1e_len_30.bin"
-_ho__257bb1e_len_30_end:
-___257bb4e_len_420:
-.incbin "bin/PAPERMARIO.257BB4E.___257bb4e_len_420.bin"
-___257bb4e_len_420_end:
-_ho__257bf6e_len_30:
-.incbin "bin/PAPERMARIO.257BF6E._ho__257bf6e_len_30.bin"
-_ho__257bf6e_len_30_end:
+_frc__257a57e:
+.incbin "bin/PAPERMARIO.257A57E._frc__257a57e.bin"
+_frc__257a57e_end:
+___257a5ae:
+.incbin "bin/PAPERMARIO.257A5AE.___257a5ae.bin"
+___257a5ae_end:
+_fx__257adce:
+.incbin "bin/PAPERMARIO.257ADCE._fx__257adce.bin"
+_fx__257adce_end:
+___257adfe:
+.incbin "bin/PAPERMARIO.257ADFE.___257adfe.bin"
+___257adfe_end:
+___257affe:
+.incbin "bin/PAPERMARIO.257AFFE.___257affe.bin"
+___257affe_end:
+_gr__257b3fe:
+.incbin "bin/PAPERMARIO.257B3FE._gr__257b3fe.bin"
+_gr__257b3fe_end:
+___257b42e:
+.incbin "bin/PAPERMARIO.257B42E.___257b42e.bin"
+___257b42e_end:
+_ha__257b6ce:
+.incbin "bin/PAPERMARIO.257B6CE._ha__257b6ce.bin"
+_ha__257b6ce_end:
+___257b6fe:
+.incbin "bin/PAPERMARIO.257B6FE.___257b6fe.bin"
+___257b6fe_end:
+_ho__257bb1e:
+.incbin "bin/PAPERMARIO.257BB1E._ho__257bb1e.bin"
+_ho__257bb1e_end:
+___257bb4e:
+.incbin "bin/PAPERMARIO.257BB4E.___257bb4e.bin"
+___257bb4e_end:
+_ho__257bf6e:
+.incbin "bin/PAPERMARIO.257BF6E._ho__257bf6e.bin"
+_ho__257bf6e_end:
 # Unknown region 257BF9E-257C19E [200]
 .incbin "bin/PAPERMARIO.257BF9E.bin"
 
-_ka__257c19e_len_30:
-.incbin "bin/PAPERMARIO.257C19E._ka__257c19e_len_30.bin"
-_ka__257c19e_len_30_end:
+_ka__257c19e:
+.incbin "bin/PAPERMARIO.257C19E._ka__257c19e.bin"
+_ka__257c19e_end:
 # Unknown region 257C1CE-257C5EE [420]
 .incbin "bin/PAPERMARIO.257C1CE.bin"
 
-_ki__257c5ee_len_30:
-.incbin "bin/PAPERMARIO.257C5EE._ki__257c5ee_len_30.bin"
-_ki__257c5ee_len_30_end:
-___257c61e_len_820:
-.incbin "bin/PAPERMARIO.257C61E.___257c61e_len_820.bin"
-___257c61e_len_820_end:
-_ki__257ce3e_len_30:
-.incbin "bin/PAPERMARIO.257CE3E._ki__257ce3e_len_30.bin"
-_ki__257ce3e_len_30_end:
-___257ce6e_len_a00:
-.incbin "bin/PAPERMARIO.257CE6E.___257ce6e_len_a00.bin"
-___257ce6e_len_a00_end:
-_ki__257d86e_len_30:
-.incbin "bin/PAPERMARIO.257D86E._ki__257d86e_len_30.bin"
-_ki__257d86e_len_30_end:
-___257d89e_len_420:
-.incbin "bin/PAPERMARIO.257D89E.___257d89e_len_420.bin"
-___257d89e_len_420_end:
-_ki__257dcbe_len_30:
-.incbin "bin/PAPERMARIO.257DCBE._ki__257dcbe_len_30.bin"
-_ki__257dcbe_len_30_end:
-___257dcee_len_120:
-.incbin "bin/PAPERMARIO.257DCEE.___257dcee_len_120.bin"
-___257dcee_len_120_end:
-_ki__257de0e_len_30:
-.incbin "bin/PAPERMARIO.257DE0E._ki__257de0e_len_30.bin"
-_ki__257de0e_len_30_end:
+_ki__257c5ee:
+.incbin "bin/PAPERMARIO.257C5EE._ki__257c5ee.bin"
+_ki__257c5ee_end:
+___257c61e:
+.incbin "bin/PAPERMARIO.257C61E.___257c61e.bin"
+___257c61e_end:
+_ki__257ce3e:
+.incbin "bin/PAPERMARIO.257CE3E._ki__257ce3e.bin"
+_ki__257ce3e_end:
+___257ce6e:
+.incbin "bin/PAPERMARIO.257CE6E.___257ce6e.bin"
+___257ce6e_end:
+_ki__257d86e:
+.incbin "bin/PAPERMARIO.257D86E._ki__257d86e.bin"
+_ki__257d86e_end:
+___257d89e:
+.incbin "bin/PAPERMARIO.257D89E.___257d89e.bin"
+___257d89e_end:
+_ki__257dcbe:
+.incbin "bin/PAPERMARIO.257DCBE._ki__257dcbe.bin"
+_ki__257dcbe_end:
+___257dcee:
+.incbin "bin/PAPERMARIO.257DCEE.___257dcee.bin"
+___257dcee_end:
+_ki__257de0e:
+.incbin "bin/PAPERMARIO.257DE0E._ki__257de0e.bin"
+_ki__257de0e_end:
 # Unknown region 257DE3E-257E05E [220]
 .incbin "bin/PAPERMARIO.257DE3E.bin"
 
-_kk__257e05e_len_30:
-.incbin "bin/PAPERMARIO.257E05E._kk__257e05e_len_30.bin"
-_kk__257e05e_len_30_end:
-_ff__257e08e_len_420:
-.incbin "bin/PAPERMARIO.257E08E._ff__257e08e_len_420.bin"
-_ff__257e08e_len_420_end:
-_koRA__257e4ae_len_30:
-.incbin "bin/PAPERMARIO.257E4AE._koRA__257e4ae_len_30.bin"
-_koRA__257e4ae_len_30_end:
-___257e4de_len_420:
-.incbin "bin/PAPERMARIO.257E4DE.___257e4de_len_420.bin"
-___257e4de_len_420_end:
-_ku__257e8fe_len_30:
-.incbin "bin/PAPERMARIO.257E8FE._ku__257e8fe_len_30.bin"
-_ku__257e8fe_len_30_end:
+_kk__257e05e:
+.incbin "bin/PAPERMARIO.257E05E._kk__257e05e.bin"
+_kk__257e05e_end:
+_ff__257e08e:
+.incbin "bin/PAPERMARIO.257E08E._ff__257e08e.bin"
+_ff__257e08e_end:
+_koRA__257e4ae:
+.incbin "bin/PAPERMARIO.257E4AE._koRA__257e4ae.bin"
+_koRA__257e4ae_end:
+___257e4de:
+.incbin "bin/PAPERMARIO.257E4DE.___257e4de.bin"
+___257e4de_end:
+_ku__257e8fe:
+.incbin "bin/PAPERMARIO.257E8FE._ku__257e8fe.bin"
+_ku__257e8fe_end:
 # Unknown region 257E92E-257EA4E [120]
 .incbin "bin/PAPERMARIO.257E92E.bin"
 
-_ku__257ea4e_len_30:
-.incbin "bin/PAPERMARIO.257EA4E._ku__257ea4e_len_30.bin"
-_ku__257ea4e_len_30_end:
-___257ea7e_len_220:
-.incbin "bin/PAPERMARIO.257EA7E.___257ea7e_len_220.bin"
-___257ea7e_len_220_end:
-_l__257ec9e_len_30:
-.incbin "bin/PAPERMARIO.257EC9E._l__257ec9e_len_30.bin"
-_l__257ec9e_len_30_end:
+_ku__257ea4e:
+.incbin "bin/PAPERMARIO.257EA4E._ku__257ea4e.bin"
+_ku__257ea4e_end:
+___257ea7e:
+.incbin "bin/PAPERMARIO.257EA7E.___257ea7e.bin"
+___257ea7e_end:
+_l__257ec9e:
+.incbin "bin/PAPERMARIO.257EC9E._l__257ec9e.bin"
+_l__257ec9e_end:
 # Unknown region 257ECCE-257ED6E [A0]
 .incbin "bin/PAPERMARIO.257ECCE.bin"
 
-_l__257ed6e_len_30:
-.incbin "bin/PAPERMARIO.257ED6E._l__257ed6e_len_30.bin"
-_l__257ed6e_len_30_end:
+_l__257ed6e:
+.incbin "bin/PAPERMARIO.257ED6E._l__257ed6e.bin"
+_l__257ed6e_end:
 # Unknown region 257ED9E-257EF9E [200]
 .incbin "bin/PAPERMARIO.257ED9E.bin"
 
-_l__257ef9e_len_30:
-.incbin "bin/PAPERMARIO.257EF9E._l__257ef9e_len_30.bin"
-_l__257ef9e_len_30_end:
+_l__257ef9e:
+.incbin "bin/PAPERMARIO.257EF9E._l__257ef9e.bin"
+_l__257ef9e_end:
 # Unknown region 257EFCE-257F1CE [200]
 .incbin "bin/PAPERMARIO.257EFCE.bin"
 
-_l__257f1ce_len_30:
-.incbin "bin/PAPERMARIO.257F1CE._l__257f1ce_len_30.bin"
-_l__257f1ce_len_30_end:
+_l__257f1ce:
+.incbin "bin/PAPERMARIO.257F1CE._l__257f1ce.bin"
+_l__257f1ce_end:
 # Unknown region 257F1FE-257F3FE [200]
 .incbin "bin/PAPERMARIO.257F1FE.bin"
 
-_l__257f3fe_len_30:
-.incbin "bin/PAPERMARIO.257F3FE._l__257f3fe_len_30.bin"
-_l__257f3fe_len_30_end:
+_l__257f3fe:
+.incbin "bin/PAPERMARIO.257F3FE._l__257f3fe.bin"
+_l__257f3fe_end:
 # Unknown region 257F42E-257F62E [200]
 .incbin "bin/PAPERMARIO.257F42E.bin"
 
-_l__257f62e_len_30:
-.incbin "bin/PAPERMARIO.257F62E._l__257f62e_len_30.bin"
-_l__257f62e_len_30_end:
+_l__257f62e:
+.incbin "bin/PAPERMARIO.257F62E._l__257f62e.bin"
+_l__257f62e_end:
 # Unknown region 257F65E-257F85E [200]
 .incbin "bin/PAPERMARIO.257F65E.bin"
 
-_l__257f85e_len_30:
-.incbin "bin/PAPERMARIO.257F85E._l__257f85e_len_30.bin"
-_l__257f85e_len_30_end:
+_l__257f85e:
+.incbin "bin/PAPERMARIO.257F85E._l__257f85e.bin"
+_l__257f85e_end:
 # Unknown region 257F88E-257FA8E [200]
 .incbin "bin/PAPERMARIO.257F88E.bin"
 
-_l__257fa8e_len_30:
-.incbin "bin/PAPERMARIO.257FA8E._l__257fa8e_len_30.bin"
-_l__257fa8e_len_30_end:
+_l__257fa8e:
+.incbin "bin/PAPERMARIO.257FA8E._l__257fa8e.bin"
+_l__257fa8e_end:
 # Unknown region 257FABE-257FCBE [200]
 .incbin "bin/PAPERMARIO.257FABE.bin"
 
-_ma__257fcbe_len_30:
-.incbin "bin/PAPERMARIO.257FCBE._ma__257fcbe_len_30.bin"
-_ma__257fcbe_len_30_end:
-___257fcee_len_820:
-.incbin "bin/PAPERMARIO.257FCEE.___257fcee_len_820.bin"
-___257fcee_len_820_end:
-_ma__258050e_len_30:
-.incbin "bin/PAPERMARIO.258050E._ma__258050e_len_30.bin"
-_ma__258050e_len_30_end:
-___258053e_len_420:
-.incbin "bin/PAPERMARIO.258053E.___258053e_len_420.bin"
-___258053e_len_420_end:
-_max__258095e_len_30:
-.incbin "bin/PAPERMARIO.258095E._max__258095e_len_30.bin"
-_max__258095e_len_30_end:
+_ma__257fcbe:
+.incbin "bin/PAPERMARIO.257FCBE._ma__257fcbe.bin"
+_ma__257fcbe_end:
+___257fcee:
+.incbin "bin/PAPERMARIO.257FCEE.___257fcee.bin"
+___257fcee_end:
+_ma__258050e:
+.incbin "bin/PAPERMARIO.258050E._ma__258050e.bin"
+_ma__258050e_end:
+___258053e:
+.incbin "bin/PAPERMARIO.258053E.___258053e.bin"
+___258053e_end:
+_max__258095e:
+.incbin "bin/PAPERMARIO.258095E._max__258095e.bin"
+_max__258095e_end:
 # Unknown region 258098E-2580A2E [A0]
 .incbin "bin/PAPERMARIO.258098E.bin"
 
-_ma__2580a2e_len_30:
-.incbin "bin/PAPERMARIO.2580A2E._ma__2580a2e_len_30.bin"
-_ma__2580a2e_len_30_end:
-___2580a5e_len_420:
-.incbin "bin/PAPERMARIO.2580A5E.___2580a5e_len_420.bin"
-___2580a5e_len_420_end:
-_ma__2580e7e_len_30:
-.incbin "bin/PAPERMARIO.2580E7E._ma__2580e7e_len_30.bin"
-_ma__2580e7e_len_30_end:
-___2580eae_len_a0:
-.incbin "bin/PAPERMARIO.2580EAE.___2580eae_len_a0.bin"
-___2580eae_len_a0_end:
-_mal__2580f4e_len_30:
-.incbin "bin/PAPERMARIO.2580F4E._mal__2580f4e_len_30.bin"
-_mal__2580f4e_len_30_end:
-___2580f7e_len_220:
-.incbin "bin/PAPERMARIO.2580F7E.___2580f7e_len_220.bin"
-___2580f7e_len_220_end:
-_ma__258119e_len_30:
-.incbin "bin/PAPERMARIO.258119E._ma__258119e_len_30.bin"
-_ma__258119e_len_30_end:
+_ma__2580a2e:
+.incbin "bin/PAPERMARIO.2580A2E._ma__2580a2e.bin"
+_ma__2580a2e_end:
+___2580a5e:
+.incbin "bin/PAPERMARIO.2580A5E.___2580a5e.bin"
+___2580a5e_end:
+_ma__2580e7e:
+.incbin "bin/PAPERMARIO.2580E7E._ma__2580e7e.bin"
+_ma__2580e7e_end:
+___2580eae:
+.incbin "bin/PAPERMARIO.2580EAE.___2580eae.bin"
+___2580eae_end:
+_mal__2580f4e:
+.incbin "bin/PAPERMARIO.2580F4E._mal__2580f4e.bin"
+_mal__2580f4e_end:
+___2580f7e:
+.incbin "bin/PAPERMARIO.2580F7E.___2580f7e.bin"
+___2580f7e_end:
+_ma__258119e:
+.incbin "bin/PAPERMARIO.258119E._ma__258119e.bin"
+_ma__258119e_end:
 # Unknown region 25811CE-258124E [80]
 .byte 0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0xBB, 0xBB, 0xBB, 0xBB, 0xBB, 0xBB, 0xBB, 0xB9
 .byte 0xDD, 0xDD, 0xDD, 0xDD, 0xDD, 0xDD, 0xDD, 0xB9, 0xDD, 0xDD, 0xDD, 0xDD, 0xDD, 0xDD, 0xDD, 0xB9
@@ -15664,903 +15659,903 @@ _ma__258119e_len_30_end:
 .byte 0xDD, 0xDD, 0xDD, 0xDD, 0x22, 0x22, 0x22, 0x22, 0xDD, 0xDD, 0xDD, 0xDD, 0x22, 0x22, 0x22, 0x22
 .byte 0xCC, 0xCC, 0xCC, 0xCC, 0x11, 0x11, 0x11, 0x11, 0xCC, 0xCC, 0xCC, 0xCC, 0x11, 0x11, 0x11, 0x11
 
-_ma__258124e_len_30:
-.incbin "bin/PAPERMARIO.258124E._ma__258124e_len_30.bin"
-_ma__258124e_len_30_end:
-_B__258127e_len_120:
-.incbin "bin/PAPERMARIO.258127E._B__258127e_len_120.bin"
-_B__258127e_len_120_end:
-_ma__258139e_len_30:
-.incbin "bin/PAPERMARIO.258139E._ma__258139e_len_30.bin"
-_ma__258139e_len_30_end:
-___25813ce_len_120:
-.incbin "bin/PAPERMARIO.25813CE.___25813ce_len_120.bin"
-___25813ce_len_120_end:
-_ma__25814ee_len_30:
-.incbin "bin/PAPERMARIO.25814EE._ma__25814ee_len_30.bin"
-_ma__25814ee_len_30_end:
-___258151e_len_560:
-.incbin "bin/PAPERMARIO.258151E.___258151e_len_560.bin"
-___258151e_len_560_end:
-_ma__2581a7e_len_30:
-.incbin "bin/PAPERMARIO.2581A7E._ma__2581a7e_len_30.bin"
-_ma__2581a7e_len_30_end:
-___2581aae_len_400:
-.incbin "bin/PAPERMARIO.2581AAE.___2581aae_len_400.bin"
-___2581aae_len_400_end:
-_ma__2581eae_len_30:
-.incbin "bin/PAPERMARIO.2581EAE._ma__2581eae_len_30.bin"
-_ma__2581eae_len_30_end:
-_UU__2581ede_len_420:
-.incbin "bin/PAPERMARIO.2581EDE._UU__2581ede_len_420.bin"
-_UU__2581ede_len_420_end:
-_ma__25822fe_len_30:
-.incbin "bin/PAPERMARIO.25822FE._ma__25822fe_len_30.bin"
-_ma__25822fe_len_30_end:
-___258232e_len_120:
-.incbin "bin/PAPERMARIO.258232E.___258232e_len_120.bin"
-___258232e_len_120_end:
-_ma__258244e_len_30:
-.incbin "bin/PAPERMARIO.258244E._ma__258244e_len_30.bin"
-_ma__258244e_len_30_end:
-___258247e_len_220:
-.incbin "bin/PAPERMARIO.258247E.___258247e_len_220.bin"
-___258247e_len_220_end:
-_ma__258269e_len_30:
-.incbin "bin/PAPERMARIO.258269E._ma__258269e_len_30.bin"
-_ma__258269e_len_30_end:
-___25826ce_len_220:
-.incbin "bin/PAPERMARIO.25826CE.___25826ce_len_220.bin"
-___25826ce_len_220_end:
-_ma__25828ee_len_30:
-.incbin "bin/PAPERMARIO.25828EE._ma__25828ee_len_30.bin"
-_ma__25828ee_len_30_end:
-___258291e_len_220:
-.incbin "bin/PAPERMARIO.258291E.___258291e_len_220.bin"
-___258291e_len_220_end:
-_ma__2582b3e_len_30:
-.incbin "bin/PAPERMARIO.2582B3E._ma__2582b3e_len_30.bin"
-_ma__2582b3e_len_30_end:
-___2582b6e_len_220:
-.incbin "bin/PAPERMARIO.2582B6E.___2582b6e_len_220.bin"
-___2582b6e_len_220_end:
-_ma__2582d8e_len_30:
-.incbin "bin/PAPERMARIO.2582D8E._ma__2582d8e_len_30.bin"
-_ma__2582d8e_len_30_end:
-___2582dbe_len_220:
-.incbin "bin/PAPERMARIO.2582DBE.___2582dbe_len_220.bin"
-___2582dbe_len_220_end:
-_ma__2582fde_len_30:
-.incbin "bin/PAPERMARIO.2582FDE._ma__2582fde_len_30.bin"
-_ma__2582fde_len_30_end:
-___258300e_len_220:
-.incbin "bin/PAPERMARIO.258300E.___258300e_len_220.bin"
-___258300e_len_220_end:
-_ma__258322e_len_30:
-.incbin "bin/PAPERMARIO.258322E._ma__258322e_len_30.bin"
-_ma__258322e_len_30_end:
-_AD__258325e_len_120:
-.incbin "bin/PAPERMARIO.258325E._AD__258325e_len_120.bin"
-_AD__258325e_len_120_end:
-_ma__258337e_len_30:
-.incbin "bin/PAPERMARIO.258337E._ma__258337e_len_30.bin"
-_ma__258337e_len_30_end:
+_ma__258124e:
+.incbin "bin/PAPERMARIO.258124E._ma__258124e.bin"
+_ma__258124e_end:
+_B__258127e:
+.incbin "bin/PAPERMARIO.258127E._B__258127e.bin"
+_B__258127e_end:
+_ma__258139e:
+.incbin "bin/PAPERMARIO.258139E._ma__258139e.bin"
+_ma__258139e_end:
+___25813ce:
+.incbin "bin/PAPERMARIO.25813CE.___25813ce.bin"
+___25813ce_end:
+_ma__25814ee:
+.incbin "bin/PAPERMARIO.25814EE._ma__25814ee.bin"
+_ma__25814ee_end:
+___258151e:
+.incbin "bin/PAPERMARIO.258151E.___258151e.bin"
+___258151e_end:
+_ma__2581a7e:
+.incbin "bin/PAPERMARIO.2581A7E._ma__2581a7e.bin"
+_ma__2581a7e_end:
+___2581aae:
+.incbin "bin/PAPERMARIO.2581AAE.___2581aae.bin"
+___2581aae_end:
+_ma__2581eae:
+.incbin "bin/PAPERMARIO.2581EAE._ma__2581eae.bin"
+_ma__2581eae_end:
+_UU__2581ede:
+.incbin "bin/PAPERMARIO.2581EDE._UU__2581ede.bin"
+_UU__2581ede_end:
+_ma__25822fe:
+.incbin "bin/PAPERMARIO.25822FE._ma__25822fe.bin"
+_ma__25822fe_end:
+___258232e:
+.incbin "bin/PAPERMARIO.258232E.___258232e.bin"
+___258232e_end:
+_ma__258244e:
+.incbin "bin/PAPERMARIO.258244E._ma__258244e.bin"
+_ma__258244e_end:
+___258247e:
+.incbin "bin/PAPERMARIO.258247E.___258247e.bin"
+___258247e_end:
+_ma__258269e:
+.incbin "bin/PAPERMARIO.258269E._ma__258269e.bin"
+_ma__258269e_end:
+___25826ce:
+.incbin "bin/PAPERMARIO.25826CE.___25826ce.bin"
+___25826ce_end:
+_ma__25828ee:
+.incbin "bin/PAPERMARIO.25828EE._ma__25828ee.bin"
+_ma__25828ee_end:
+___258291e:
+.incbin "bin/PAPERMARIO.258291E.___258291e.bin"
+___258291e_end:
+_ma__2582b3e:
+.incbin "bin/PAPERMARIO.2582B3E._ma__2582b3e.bin"
+_ma__2582b3e_end:
+___2582b6e:
+.incbin "bin/PAPERMARIO.2582B6E.___2582b6e.bin"
+___2582b6e_end:
+_ma__2582d8e:
+.incbin "bin/PAPERMARIO.2582D8E._ma__2582d8e.bin"
+_ma__2582d8e_end:
+___2582dbe:
+.incbin "bin/PAPERMARIO.2582DBE.___2582dbe.bin"
+___2582dbe_end:
+_ma__2582fde:
+.incbin "bin/PAPERMARIO.2582FDE._ma__2582fde.bin"
+_ma__2582fde_end:
+___258300e:
+.incbin "bin/PAPERMARIO.258300E.___258300e.bin"
+___258300e_end:
+_ma__258322e:
+.incbin "bin/PAPERMARIO.258322E._ma__258322e.bin"
+_ma__258322e_end:
+_AD__258325e:
+.incbin "bin/PAPERMARIO.258325E._AD__258325e.bin"
+_AD__258325e_end:
+_ma__258337e:
+.incbin "bin/PAPERMARIO.258337E._ma__258337e.bin"
+_ma__258337e_end:
 # Unknown region 25833AE-25835AE [200]
 .incbin "bin/PAPERMARIO.25833AE.bin"
 
-_ma__25835ae_len_30:
-.incbin "bin/PAPERMARIO.25835AE._ma__25835ae_len_30.bin"
-_ma__25835ae_len_30_end:
+_ma__25835ae:
+.incbin "bin/PAPERMARIO.25835AE._ma__25835ae.bin"
+_ma__25835ae_end:
 # Unknown region 25835DE-258367E [A0]
 .incbin "bin/PAPERMARIO.25835DE.bin"
 
-_ma__258367e_len_30:
-.incbin "bin/PAPERMARIO.258367E._ma__258367e_len_30.bin"
-_ma__258367e_len_30_end:
+_ma__258367e:
+.incbin "bin/PAPERMARIO.258367E._ma__258367e.bin"
+_ma__258367e_end:
 # Unknown region 25836AE-25837CE [120]
 .incbin "bin/PAPERMARIO.25836AE.bin"
 
-_ma__25837ce_len_30:
-.incbin "bin/PAPERMARIO.25837CE._ma__25837ce_len_30.bin"
-_ma__25837ce_len_30_end:
+_ma__25837ce:
+.incbin "bin/PAPERMARIO.25837CE._ma__25837ce.bin"
+_ma__25837ce_end:
 # Unknown region 25837FE-258389E [A0]
 .incbin "bin/PAPERMARIO.25837FE.bin"
 
-_ma__258389e_len_30:
-.incbin "bin/PAPERMARIO.258389E._ma__258389e_len_30.bin"
-_ma__258389e_len_30_end:
-___25838ce_len_220:
-.incbin "bin/PAPERMARIO.25838CE.___25838ce_len_220.bin"
-___25838ce_len_220_end:
-_ma__2583aee_len_30:
-.incbin "bin/PAPERMARIO.2583AEE._ma__2583aee_len_30.bin"
-_ma__2583aee_len_30_end:
-___2583b1e_len_220:
-.incbin "bin/PAPERMARIO.2583B1E.___2583b1e_len_220.bin"
-___2583b1e_len_220_end:
-_ma__2583d3e_len_30:
-.incbin "bin/PAPERMARIO.2583D3E._ma__2583d3e_len_30.bin"
-_ma__2583d3e_len_30_end:
-___2583d6e_len_a0:
-.incbin "bin/PAPERMARIO.2583D6E.___2583d6e_len_a0.bin"
-___2583d6e_len_a0_end:
-_ma__2583e0e_len_30:
-.incbin "bin/PAPERMARIO.2583E0E._ma__2583e0e_len_30.bin"
-_ma__2583e0e_len_30_end:
-___2583e3e_len_220:
-.incbin "bin/PAPERMARIO.2583E3E.___2583e3e_len_220.bin"
-___2583e3e_len_220_end:
-_ma__258405e_len_30:
-.incbin "bin/PAPERMARIO.258405E._ma__258405e_len_30.bin"
-_ma__258405e_len_30_end:
+_ma__258389e:
+.incbin "bin/PAPERMARIO.258389E._ma__258389e.bin"
+_ma__258389e_end:
+___25838ce:
+.incbin "bin/PAPERMARIO.25838CE.___25838ce.bin"
+___25838ce_end:
+_ma__2583aee:
+.incbin "bin/PAPERMARIO.2583AEE._ma__2583aee.bin"
+_ma__2583aee_end:
+___2583b1e:
+.incbin "bin/PAPERMARIO.2583B1E.___2583b1e.bin"
+___2583b1e_end:
+_ma__2583d3e:
+.incbin "bin/PAPERMARIO.2583D3E._ma__2583d3e.bin"
+_ma__2583d3e_end:
+___2583d6e:
+.incbin "bin/PAPERMARIO.2583D6E.___2583d6e.bin"
+___2583d6e_end:
+_ma__2583e0e:
+.incbin "bin/PAPERMARIO.2583E0E._ma__2583e0e.bin"
+_ma__2583e0e_end:
+___2583e3e:
+.incbin "bin/PAPERMARIO.2583E3E.___2583e3e.bin"
+___2583e3e_end:
+_ma__258405e:
+.incbin "bin/PAPERMARIO.258405E._ma__258405e.bin"
+_ma__258405e_end:
 # Unknown region 258408E-25841AE [120]
 .incbin "bin/PAPERMARIO.258408E.bin"
 
-_ma__25841ae_len_30:
-.incbin "bin/PAPERMARIO.25841AE._ma__25841ae_len_30.bin"
-_ma__25841ae_len_30_end:
-___25841de_len_a0:
-.incbin "bin/PAPERMARIO.25841DE.___25841de_len_a0.bin"
-___25841de_len_a0_end:
-_ma__258427e_len_30:
-.incbin "bin/PAPERMARIO.258427E._ma__258427e_len_30.bin"
-_ma__258427e_len_30_end:
+_ma__25841ae:
+.incbin "bin/PAPERMARIO.25841AE._ma__25841ae.bin"
+_ma__25841ae_end:
+___25841de:
+.incbin "bin/PAPERMARIO.25841DE.___25841de.bin"
+___25841de_end:
+_ma__258427e:
+.incbin "bin/PAPERMARIO.258427E._ma__258427e.bin"
+_ma__258427e_end:
 # Unknown region 25842AE-258434E [A0]
 .incbin "bin/PAPERMARIO.25842AE.bin"
 
-_ma__258434e_len_30:
-.incbin "bin/PAPERMARIO.258434E._ma__258434e_len_30.bin"
-_ma__258434e_len_30_end:
+_ma__258434e:
+.incbin "bin/PAPERMARIO.258434E._ma__258434e.bin"
+_ma__258434e_end:
 # Unknown region 258437E-258479E [420]
 .incbin "bin/PAPERMARIO.258437E.bin"
 
-_ma__258479e_len_30:
-.incbin "bin/PAPERMARIO.258479E._ma__258479e_len_30.bin"
-_ma__258479e_len_30_end:
+_ma__258479e:
+.incbin "bin/PAPERMARIO.258479E._ma__258479e.bin"
+_ma__258479e_end:
 # Unknown region 25847CE-25849EE [220]
 .incbin "bin/PAPERMARIO.25847CE.bin"
 
-_maq__25849ee_len_30:
-.incbin "bin/PAPERMARIO.25849EE._maq__25849ee_len_30.bin"
-_maq__25849ee_len_30_end:
+_maq__25849ee:
+.incbin "bin/PAPERMARIO.25849EE._maq__25849ee.bin"
+_maq__25849ee_end:
 # Unknown region 2584A1E-2584C3E [220]
 .incbin "bin/PAPERMARIO.2584A1E.bin"
 
-_maE__2584c3e_len_30:
-.incbin "bin/PAPERMARIO.2584C3E._maE__2584c3e_len_30.bin"
-_maE__2584c3e_len_30_end:
+_maE__2584c3e:
+.incbin "bin/PAPERMARIO.2584C3E._maE__2584c3e.bin"
+_maE__2584c3e_end:
 # Unknown region 2584C6E-258548E [820]
 .incbin "bin/PAPERMARIO.2584C6E.bin"
 
-_ma__258548e_len_30:
-.incbin "bin/PAPERMARIO.258548E._ma__258548e_len_30.bin"
-_ma__258548e_len_30_end:
-_f__25854be_len_420:
-.incbin "bin/PAPERMARIO.25854BE._f__25854be_len_420.bin"
-_f__25854be_len_420_end:
-_maM__25858de_len_30:
-.incbin "bin/PAPERMARIO.25858DE._maM__25858de_len_30.bin"
-_maM__25858de_len_30_end:
-_ff__258590e_len_420:
-.incbin "bin/PAPERMARIO.258590E._ff__258590e_len_420.bin"
-_ff__258590e_len_420_end:
-_ma__2585d2e_len_30:
-.incbin "bin/PAPERMARIO.2585D2E._ma__2585d2e_len_30.bin"
-_ma__2585d2e_len_30_end:
-___2585d5e_len_420:
-.incbin "bin/PAPERMARIO.2585D5E.___2585d5e_len_420.bin"
-___2585d5e_len_420_end:
-_ma__258617e_len_30:
-.incbin "bin/PAPERMARIO.258617E._ma__258617e_len_30.bin"
-_ma__258617e_len_30_end:
-___25861ae_len_420:
-.incbin "bin/PAPERMARIO.25861AE.___25861ae_len_420.bin"
-___25861ae_len_420_end:
-_ma__25865ce_len_30:
-.incbin "bin/PAPERMARIO.25865CE._ma__25865ce_len_30.bin"
-_ma__25865ce_len_30_end:
-___25865fe_len_560:
-.incbin "bin/PAPERMARIO.25865FE.___25865fe_len_560.bin"
-___25865fe_len_560_end:
-_ma__2586b5e_len_30:
-.incbin "bin/PAPERMARIO.2586B5E._ma__2586b5e_len_30.bin"
-_ma__2586b5e_len_30_end:
-___2586b8e_len_a0:
-.incbin "bin/PAPERMARIO.2586B8E.___2586b8e_len_a0.bin"
-___2586b8e_len_a0_end:
-_max__2586c2e_len_30:
-.incbin "bin/PAPERMARIO.2586C2E._max__2586c2e_len_30.bin"
-_max__2586c2e_len_30_end:
-___2586c5e_len_a0:
-.incbin "bin/PAPERMARIO.2586C5E.___2586c5e_len_a0.bin"
-___2586c5e_len_a0_end:
-_ma__2586cfe_len_30:
-.incbin "bin/PAPERMARIO.2586CFE._ma__2586cfe_len_30.bin"
-_ma__2586cfe_len_30_end:
-___2586d2e_len_420:
-.incbin "bin/PAPERMARIO.2586D2E.___2586d2e_len_420.bin"
-___2586d2e_len_420_end:
-_miIE__258714e_len_30:
-.incbin "bin/PAPERMARIO.258714E._miIE__258714e_len_30.bin"
-_miIE__258714e_len_30_end:
-___258717e_len_1000:
-.incbin "bin/PAPERMARIO.258717E.___258717e_len_1000.bin"
-___258717e_len_1000_end:
-_mi__258817e_len_30:
-.incbin "bin/PAPERMARIO.258817E._mi__258817e_len_30.bin"
-_mi__258817e_len_30_end:
-___25881ae_len_220:
-.incbin "bin/PAPERMARIO.25881AE.___25881ae_len_220.bin"
-___25881ae_len_220_end:
-___25883ce_len_220:
-.incbin "bin/PAPERMARIO.25883CE.___25883ce_len_220.bin"
-___25883ce_len_220_end:
-_ne__25885ee_len_30:
-.incbin "bin/PAPERMARIO.25885EE._ne__25885ee_len_30.bin"
-_ne__25885ee_len_30_end:
-___258861e_len_200:
-.incbin "bin/PAPERMARIO.258861E.___258861e_len_200.bin"
-___258861e_len_200_end:
-_pa__258881e_len_30:
-.incbin "bin/PAPERMARIO.258881E._pa__258881e_len_30.bin"
-_pa__258881e_len_30_end:
-___258884e_len_220:
-.incbin "bin/PAPERMARIO.258884E.___258884e_len_220.bin"
-___258884e_len_220_end:
-_po__2588a6e_len_30:
-.incbin "bin/PAPERMARIO.2588A6E._po__2588a6e_len_30.bin"
-_po__2588a6e_len_30_end:
+_ma__258548e:
+.incbin "bin/PAPERMARIO.258548E._ma__258548e.bin"
+_ma__258548e_end:
+_f__25854be:
+.incbin "bin/PAPERMARIO.25854BE._f__25854be.bin"
+_f__25854be_end:
+_maM__25858de:
+.incbin "bin/PAPERMARIO.25858DE._maM__25858de.bin"
+_maM__25858de_end:
+_ff__258590e:
+.incbin "bin/PAPERMARIO.258590E._ff__258590e.bin"
+_ff__258590e_end:
+_ma__2585d2e:
+.incbin "bin/PAPERMARIO.2585D2E._ma__2585d2e.bin"
+_ma__2585d2e_end:
+___2585d5e:
+.incbin "bin/PAPERMARIO.2585D5E.___2585d5e.bin"
+___2585d5e_end:
+_ma__258617e:
+.incbin "bin/PAPERMARIO.258617E._ma__258617e.bin"
+_ma__258617e_end:
+___25861ae:
+.incbin "bin/PAPERMARIO.25861AE.___25861ae.bin"
+___25861ae_end:
+_ma__25865ce:
+.incbin "bin/PAPERMARIO.25865CE._ma__25865ce.bin"
+_ma__25865ce_end:
+___25865fe:
+.incbin "bin/PAPERMARIO.25865FE.___25865fe.bin"
+___25865fe_end:
+_ma__2586b5e:
+.incbin "bin/PAPERMARIO.2586B5E._ma__2586b5e.bin"
+_ma__2586b5e_end:
+___2586b8e:
+.incbin "bin/PAPERMARIO.2586B8E.___2586b8e.bin"
+___2586b8e_end:
+_max__2586c2e:
+.incbin "bin/PAPERMARIO.2586C2E._max__2586c2e.bin"
+_max__2586c2e_end:
+___2586c5e:
+.incbin "bin/PAPERMARIO.2586C5E.___2586c5e.bin"
+___2586c5e_end:
+_ma__2586cfe:
+.incbin "bin/PAPERMARIO.2586CFE._ma__2586cfe.bin"
+_ma__2586cfe_end:
+___2586d2e:
+.incbin "bin/PAPERMARIO.2586D2E.___2586d2e.bin"
+___2586d2e_end:
+_miIE__258714e:
+.incbin "bin/PAPERMARIO.258714E._miIE__258714e.bin"
+_miIE__258714e_end:
+___258717e:
+.incbin "bin/PAPERMARIO.258717E.___258717e.bin"
+___258717e_end:
+_mi__258817e:
+.incbin "bin/PAPERMARIO.258817E._mi__258817e.bin"
+_mi__258817e_end:
+___25881ae:
+.incbin "bin/PAPERMARIO.25881AE.___25881ae.bin"
+___25881ae_end:
+___25883ce:
+.incbin "bin/PAPERMARIO.25883CE.___25883ce.bin"
+___25883ce_end:
+_ne__25885ee:
+.incbin "bin/PAPERMARIO.25885EE._ne__25885ee.bin"
+_ne__25885ee_end:
+___258861e:
+.incbin "bin/PAPERMARIO.258861E.___258861e.bin"
+___258861e_end:
+_pa__258881e:
+.incbin "bin/PAPERMARIO.258881E._pa__258881e.bin"
+_pa__258881e_end:
+___258884e:
+.incbin "bin/PAPERMARIO.258884E.___258884e.bin"
+___258884e_end:
+_po__2588a6e:
+.incbin "bin/PAPERMARIO.2588A6E._po__2588a6e.bin"
+_po__2588a6e_end:
 # Unknown region 2588A9E-2588B3E [A0]
 .incbin "bin/PAPERMARIO.2588A9E.bin"
 
-_po__2588b3e_len_30:
-.incbin "bin/PAPERMARIO.2588B3E._po__2588b3e_len_30.bin"
-_po__2588b3e_len_30_end:
+_po__2588b3e:
+.incbin "bin/PAPERMARIO.2588B3E._po__2588b3e.bin"
+_po__2588b3e_end:
 # Unknown region 2588B6E-2588C0E [A0]
 .incbin "bin/PAPERMARIO.2588B6E.bin"
 
-_po__2588c0e_len_30:
-.incbin "bin/PAPERMARIO.2588C0E._po__2588c0e_len_30.bin"
-_po__2588c0e_len_30_end:
-___2588c3e_len_420:
-.incbin "bin/PAPERMARIO.2588C3E.___2588c3e_len_420.bin"
-___2588c3e_len_420_end:
-_ra__258905e_len_30:
-.incbin "bin/PAPERMARIO.258905E._ra__258905e_len_30.bin"
-_ra__258905e_len_30_end:
+_po__2588c0e:
+.incbin "bin/PAPERMARIO.2588C0E._po__2588c0e.bin"
+_po__2588c0e_end:
+___2588c3e:
+.incbin "bin/PAPERMARIO.2588C3E.___2588c3e.bin"
+___2588c3e_end:
+_ra__258905e:
+.incbin "bin/PAPERMARIO.258905E._ra__258905e.bin"
+_ra__258905e_end:
 # Unknown region 258908E-258928E [200]
 .incbin "bin/PAPERMARIO.258908E.bin"
 
-_re__258928e_len_30:
-.incbin "bin/PAPERMARIO.258928E._re__258928e_len_30.bin"
-_re__258928e_len_30_end:
-___25892be_len_420:
-.incbin "bin/PAPERMARIO.25892BE.___25892be_len_420.bin"
-___25892be_len_420_end:
-_ro__25896de_len_30:
-.incbin "bin/PAPERMARIO.25896DE._ro__25896de_len_30.bin"
-_ro__25896de_len_30_end:
-___258970e_len_120:
-.incbin "bin/PAPERMARIO.258970E.___258970e_len_120.bin"
-___258970e_len_120_end:
-_roD__258982e_len_30:
-.incbin "bin/PAPERMARIO.258982E._roD__258982e_len_30.bin"
-_roD__258982e_len_30_end:
+_re__258928e:
+.incbin "bin/PAPERMARIO.258928E._re__258928e.bin"
+_re__258928e_end:
+___25892be:
+.incbin "bin/PAPERMARIO.25892BE.___25892be.bin"
+___25892be_end:
+_ro__25896de:
+.incbin "bin/PAPERMARIO.25896DE._ro__25896de.bin"
+_ro__25896de_end:
+___258970e:
+.incbin "bin/PAPERMARIO.258970E.___258970e.bin"
+___258970e_end:
+_roD__258982e:
+.incbin "bin/PAPERMARIO.258982E._roD__258982e.bin"
+_roD__258982e_end:
 # Unknown region 258985E-2589A7E [220]
 .incbin "bin/PAPERMARIO.258985E.bin"
 
-_s__2589a7e_len_30:
-.incbin "bin/PAPERMARIO.2589A7E._s__2589a7e_len_30.bin"
-_s__2589a7e_len_30_end:
+_s__2589a7e:
+.incbin "bin/PAPERMARIO.2589A7E._s__2589a7e.bin"
+_s__2589a7e_end:
 # Unknown region 2589AAE-2589CCE [220]
 .incbin "bin/PAPERMARIO.2589AAE.bin"
 
-_st__2589cce_len_30:
-.incbin "bin/PAPERMARIO.2589CCE._st__2589cce_len_30.bin"
-_st__2589cce_len_30_end:
-_UU__2589cfe_len_a0:
-.incbin "bin/PAPERMARIO.2589CFE._UU__2589cfe_len_a0.bin"
-_UU__2589cfe_len_a0_end:
-_sy__2589d9e_len_30:
-.incbin "bin/PAPERMARIO.2589D9E._sy__2589d9e_len_30.bin"
-_sy__2589d9e_len_30_end:
+_st__2589cce:
+.incbin "bin/PAPERMARIO.2589CCE._st__2589cce.bin"
+_st__2589cce_end:
+_UU__2589cfe:
+.incbin "bin/PAPERMARIO.2589CFE._UU__2589cfe.bin"
+_UU__2589cfe_end:
+_sy__2589d9e:
+.incbin "bin/PAPERMARIO.2589D9E._sy__2589d9e.bin"
+_sy__2589d9e_end:
 # Unknown region 2589DCE-2589FEE [220]
 .incbin "bin/PAPERMARIO.2589DCE.bin"
 
-_t__2589fee_len_30:
-.incbin "bin/PAPERMARIO.2589FEE._t__2589fee_len_30.bin"
-_t__2589fee_len_30_end:
-___258a01e_len_120:
-.incbin "bin/PAPERMARIO.258A01E.___258a01e_len_120.bin"
-___258a01e_len_120_end:
-_ta__258a13e_len_30:
-.incbin "bin/PAPERMARIO.258A13E._ta__258a13e_len_30.bin"
-_ta__258a13e_len_30_end:
+_t__2589fee:
+.incbin "bin/PAPERMARIO.2589FEE._t__2589fee.bin"
+_t__2589fee_end:
+___258a01e:
+.incbin "bin/PAPERMARIO.258A01E.___258a01e.bin"
+___258a01e_end:
+_ta__258a13e:
+.incbin "bin/PAPERMARIO.258A13E._ta__258a13e.bin"
+_ta__258a13e_end:
 # Unknown region 258A16E-258A20E [A0]
 .incbin "bin/PAPERMARIO.258A16E.bin"
 
-_ta__258a20e_len_30:
-.incbin "bin/PAPERMARIO.258A20E._ta__258a20e_len_30.bin"
-_ta__258a20e_len_30_end:
-___258a23e_len_220:
-.incbin "bin/PAPERMARIO.258A23E.___258a23e_len_220.bin"
-___258a23e_len_220_end:
-_to__258a45e_len_30:
-.incbin "bin/PAPERMARIO.258A45E._to__258a45e_len_30.bin"
-_to__258a45e_len_30_end:
-___258a48e_len_220:
-.incbin "bin/PAPERMARIO.258A48E.___258a48e_len_220.bin"
-___258a48e_len_220_end:
-_to__258a6ae_len_30:
-.incbin "bin/PAPERMARIO.258A6AE._to__258a6ae_len_30.bin"
-_to__258a6ae_len_30_end:
+_ta__258a20e:
+.incbin "bin/PAPERMARIO.258A20E._ta__258a20e.bin"
+_ta__258a20e_end:
+___258a23e:
+.incbin "bin/PAPERMARIO.258A23E.___258a23e.bin"
+___258a23e_end:
+_to__258a45e:
+.incbin "bin/PAPERMARIO.258A45E._to__258a45e.bin"
+_to__258a45e_end:
+___258a48e:
+.incbin "bin/PAPERMARIO.258A48E.___258a48e.bin"
+___258a48e_end:
+_to__258a6ae:
+.incbin "bin/PAPERMARIO.258A6AE._to__258a6ae.bin"
+_to__258a6ae_end:
 # Unknown region 258A6DE-258A8FE [220]
 .incbin "bin/PAPERMARIO.258A6DE.bin"
 
-_um__258a8fe_len_30:
-.incbin "bin/PAPERMARIO.258A8FE._um__258a8fe_len_30.bin"
-_um__258a8fe_len_30_end:
+_um__258a8fe:
+.incbin "bin/PAPERMARIO.258A8FE._um__258a8fe.bin"
+_um__258a8fe_end:
 # Unknown region 258A92E-258AB4E [220]
 .incbin "bin/PAPERMARIO.258A92E.bin"
 
-_um__258ab4e_len_30:
-.incbin "bin/PAPERMARIO.258AB4E._um__258ab4e_len_30.bin"
-_um__258ab4e_len_30_end:
+_um__258ab4e:
+.incbin "bin/PAPERMARIO.258AB4E._um__258ab4e.bin"
+_um__258ab4e_end:
 # Unknown region 258AB7E-258AFBE [440]
 .incbin "bin/PAPERMARIO.258AB7E.bin"
 
-_wa__258afbe_len_30:
-.incbin "bin/PAPERMARIO.258AFBE._wa__258afbe_len_30.bin"
-_wa__258afbe_len_30_end:
-_ff__258afee_len_420:
-.incbin "bin/PAPERMARIO.258AFEE._ff__258afee_len_420.bin"
-_ff__258afee_len_420_end:
-_wo__258b40e_len_30:
-.incbin "bin/PAPERMARIO.258B40E._wo__258b40e_len_30.bin"
-_wo__258b40e_len_30_end:
-___258b43e_len_820:
-.incbin "bin/PAPERMARIO.258B43E.___258b43e_len_820.bin"
-___258b43e_len_820_end:
+_wa__258afbe:
+.incbin "bin/PAPERMARIO.258AFBE._wa__258afbe.bin"
+_wa__258afbe_end:
+_ff__258afee:
+.incbin "bin/PAPERMARIO.258AFEE._ff__258afee.bin"
+_ff__258afee_end:
+_wo__258b40e:
+.incbin "bin/PAPERMARIO.258B40E._wo__258b40e.bin"
+_wo__258b40e_end:
+___258b43e:
+.incbin "bin/PAPERMARIO.258B43E.___258b43e.bin"
+___258b43e_end:
 # Unknown region 258BC5E-259BCFE [100A0]
 .incbin "bin/PAPERMARIO.258BC5E.bin"
 
-___259bcfe_len_30:
-.incbin "bin/PAPERMARIO.259BCFE.___259bcfe_len_30.bin"
-___259bcfe_len_30_end:
+___259bcfe:
+.incbin "bin/PAPERMARIO.259BCFE.___259bcfe.bin"
+___259bcfe_end:
 # Unknown region 259BD2E-259BF4E [220]
 .incbin "bin/PAPERMARIO.259BD2E.bin"
 
-___259bf4e_len_30:
-.incbin "bin/PAPERMARIO.259BF4E.___259bf4e_len_30.bin"
-___259bf4e_len_30_end:
+___259bf4e:
+.incbin "bin/PAPERMARIO.259BF4E.___259bf4e.bin"
+___259bf4e_end:
 # Unknown region 259BF7E-259CF7E [1000]
 .incbin "bin/PAPERMARIO.259BF7E.bin"
 
-___259cf7e_len_30:
-.incbin "bin/PAPERMARIO.259CF7E.___259cf7e_len_30.bin"
-___259cf7e_len_30_end:
+___259cf7e:
+.incbin "bin/PAPERMARIO.259CF7E.___259cf7e.bin"
+___259cf7e_end:
 # Unknown region 259CFAE-259DFAE [1000]
 .incbin "bin/PAPERMARIO.259CFAE.bin"
 
-___259dfae_len_30:
-.incbin "bin/PAPERMARIO.259DFAE.___259dfae_len_30.bin"
-___259dfae_len_30_end:
+___259dfae:
+.incbin "bin/PAPERMARIO.259DFAE.___259dfae.bin"
+___259dfae_end:
 # Unknown region 259DFDE-259EFDE [1000]
 .incbin "bin/PAPERMARIO.259DFDE.bin"
 
-___259efde_len_30:
-.incbin "bin/PAPERMARIO.259EFDE.___259efde_len_30.bin"
-___259efde_len_30_end:
+___259efde:
+.incbin "bin/PAPERMARIO.259EFDE.___259efde.bin"
+___259efde_end:
 # Unknown region 259F00E-25A000E [1000]
 .incbin "bin/PAPERMARIO.259F00E.bin"
 
-_beDD__25a000e_len_30:
-.incbin "bin/PAPERMARIO.25A000E._beDD__25a000e_len_30.bin"
-_beDD__25a000e_len_30_end:
+_beDD__25a000e:
+.incbin "bin/PAPERMARIO.25A000E._beDD__25a000e.bin"
+_beDD__25a000e_end:
 # Unknown region 25A003E-25A025E [220]
 .incbin "bin/PAPERMARIO.25A003E.bin"
 
-_be__25a025e_len_30:
-.incbin "bin/PAPERMARIO.25A025E._be__25a025e_len_30.bin"
-_be__25a025e_len_30_end:
+_be__25a025e:
+.incbin "bin/PAPERMARIO.25A025E._be__25a025e.bin"
+_be__25a025e_end:
 # Unknown region 25A028E-25A032E [A0]
 .incbin "bin/PAPERMARIO.25A028E.bin"
 
-_bi__25a032e_len_30:
-.incbin "bin/PAPERMARIO.25A032E._bi__25a032e_len_30.bin"
-_bi__25a032e_len_30_end:
+_bi__25a032e:
+.incbin "bin/PAPERMARIO.25A032E._bi__25a032e.bin"
+_bi__25a032e_end:
 # Unknown region 25A035E-25A045E [100]
 .incbin "bin/PAPERMARIO.25A035E.bin"
 
-_bl__25a045e_len_30:
-.incbin "bin/PAPERMARIO.25A045E._bl__25a045e_len_30.bin"
-_bl__25a045e_len_30_end:
+_bl__25a045e:
+.incbin "bin/PAPERMARIO.25A045E._bl__25a045e.bin"
+_bl__25a045e_end:
 # Unknown region 25A048E-25A052E [A0]
 .incbin "bin/PAPERMARIO.25A048E.bin"
 
-_ca__25a052e_len_30:
-.incbin "bin/PAPERMARIO.25A052E._ca__25a052e_len_30.bin"
-_ca__25a052e_len_30_end:
+_ca__25a052e:
+.incbin "bin/PAPERMARIO.25A052E._ca__25a052e.bin"
+_ca__25a052e_end:
 # Unknown region 25A055E-25A067E [120]
 .incbin "bin/PAPERMARIO.25A055E.bin"
 
-_ch__25a067e_len_30:
-.incbin "bin/PAPERMARIO.25A067E._ch__25a067e_len_30.bin"
-_ch__25a067e_len_30_end:
-___25a06ae_len_220:
-.incbin "bin/PAPERMARIO.25A06AE.___25a06ae_len_220.bin"
-___25a06ae_len_220_end:
-_de__25a08ce_len_30:
-.incbin "bin/PAPERMARIO.25A08CE._de__25a08ce_len_30.bin"
-_de__25a08ce_len_30_end:
+_ch__25a067e:
+.incbin "bin/PAPERMARIO.25A067E._ch__25a067e.bin"
+_ch__25a067e_end:
+___25a06ae:
+.incbin "bin/PAPERMARIO.25A06AE.___25a06ae.bin"
+___25a06ae_end:
+_de__25a08ce:
+.incbin "bin/PAPERMARIO.25A08CE._de__25a08ce.bin"
+_de__25a08ce_end:
 # Unknown region 25A08FE-25A0D1E [420]
 .incbin "bin/PAPERMARIO.25A08FE.bin"
 
-_do__25a0d1e_len_30:
-.incbin "bin/PAPERMARIO.25A0D1E._do__25a0d1e_len_30.bin"
-_do__25a0d1e_len_30_end:
-___25a0d4e_len_120:
-.incbin "bin/PAPERMARIO.25A0D4E.___25a0d4e_len_120.bin"
-___25a0d4e_len_120_end:
-_do__25a0e6e_len_30:
-.incbin "bin/PAPERMARIO.25A0E6E._do__25a0e6e_len_30.bin"
-_do__25a0e6e_len_30_end:
+_do__25a0d1e:
+.incbin "bin/PAPERMARIO.25A0D1E._do__25a0d1e.bin"
+_do__25a0d1e_end:
+___25a0d4e:
+.incbin "bin/PAPERMARIO.25A0D4E.___25a0d4e.bin"
+___25a0d4e_end:
+_do__25a0e6e:
+.incbin "bin/PAPERMARIO.25A0E6E._do__25a0e6e.bin"
+_do__25a0e6e_end:
 # Unknown region 25A0E9E-25A12BE [420]
 .incbin "bin/PAPERMARIO.25A0E9E.bin"
 
-_dt__25a12be_len_30:
-.incbin "bin/PAPERMARIO.25A12BE._dt__25a12be_len_30.bin"
-_dt__25a12be_len_30_end:
+_dt__25a12be:
+.incbin "bin/PAPERMARIO.25A12BE._dt__25a12be.bin"
+_dt__25a12be_end:
 # Unknown region 25A12EE-25A16EE [400]
 .incbin "bin/PAPERMARIO.25A12EE.bin"
 
-_et__25a16ee_len_30:
-.incbin "bin/PAPERMARIO.25A16EE._et__25a16ee_len_30.bin"
-_et__25a16ee_len_30_end:
+_et__25a16ee:
+.incbin "bin/PAPERMARIO.25A16EE._et__25a16ee.bin"
+_et__25a16ee_end:
 # Unknown region 25A171E-25A1B1E [400]
 .incbin "bin/PAPERMARIO.25A171E.bin"
 
-_fe__25a1b1e_len_30:
-.incbin "bin/PAPERMARIO.25A1B1E._fe__25a1b1e_len_30.bin"
-_fe__25a1b1e_len_30_end:
-___25a1b4e_len_420:
-.incbin "bin/PAPERMARIO.25A1B4E.___25a1b4e_len_420.bin"
-___25a1b4e_len_420_end:
-_fl__25a1f6e_len_30:
-.incbin "bin/PAPERMARIO.25A1F6E._fl__25a1f6e_len_30.bin"
-_fl__25a1f6e_len_30_end:
-___25a1f9e_len_220:
-.incbin "bin/PAPERMARIO.25A1F9E.___25a1f9e_len_220.bin"
-___25a1f9e_len_220_end:
-_fr__25a21be_len_30:
-.incbin "bin/PAPERMARIO.25A21BE._fr__25a21be_len_30.bin"
-_fr__25a21be_len_30_end:
-___25a21ee_len_820:
-.incbin "bin/PAPERMARIO.25A21EE.___25a21ee_len_820.bin"
-___25a21ee_len_820_end:
-_gr__25a2a0e_len_30:
-.incbin "bin/PAPERMARIO.25A2A0E._gr__25a2a0e_len_30.bin"
-_gr__25a2a0e_len_30_end:
-_DF__25a2a3e_len_220:
-.incbin "bin/PAPERMARIO.25A2A3E._DF__25a2a3e_len_220.bin"
-_DF__25a2a3e_len_220_end:
-_gr__25a2c5e_len_30:
-.incbin "bin/PAPERMARIO.25A2C5E._gr__25a2c5e_len_30.bin"
-_gr__25a2c5e_len_30_end:
+_fe__25a1b1e:
+.incbin "bin/PAPERMARIO.25A1B1E._fe__25a1b1e.bin"
+_fe__25a1b1e_end:
+___25a1b4e:
+.incbin "bin/PAPERMARIO.25A1B4E.___25a1b4e.bin"
+___25a1b4e_end:
+_fl__25a1f6e:
+.incbin "bin/PAPERMARIO.25A1F6E._fl__25a1f6e.bin"
+_fl__25a1f6e_end:
+___25a1f9e:
+.incbin "bin/PAPERMARIO.25A1F9E.___25a1f9e.bin"
+___25a1f9e_end:
+_fr__25a21be:
+.incbin "bin/PAPERMARIO.25A21BE._fr__25a21be.bin"
+_fr__25a21be_end:
+___25a21ee:
+.incbin "bin/PAPERMARIO.25A21EE.___25a21ee.bin"
+___25a21ee_end:
+_gr__25a2a0e:
+.incbin "bin/PAPERMARIO.25A2A0E._gr__25a2a0e.bin"
+_gr__25a2a0e_end:
+_DF__25a2a3e:
+.incbin "bin/PAPERMARIO.25A2A3E._DF__25a2a3e.bin"
+_DF__25a2a3e_end:
+_gr__25a2c5e:
+.incbin "bin/PAPERMARIO.25A2C5E._gr__25a2c5e.bin"
+_gr__25a2c5e_end:
 # Unknown region 25A2C8E-25A2EAE [220]
 .incbin "bin/PAPERMARIO.25A2C8E.bin"
 
-_gr__25a2eae_len_30:
-.incbin "bin/PAPERMARIO.25A2EAE._gr__25a2eae_len_30.bin"
-_gr__25a2eae_len_30_end:
+_gr__25a2eae:
+.incbin "bin/PAPERMARIO.25A2EAE._gr__25a2eae.bin"
+_gr__25a2eae_end:
 # Unknown region 25A2EDE-25A30FE [220]
 .incbin "bin/PAPERMARIO.25A2EDE.bin"
 
-_gr__25a30fe_len_30:
-.incbin "bin/PAPERMARIO.25A30FE._gr__25a30fe_len_30.bin"
-_gr__25a30fe_len_30_end:
+_gr__25a30fe:
+.incbin "bin/PAPERMARIO.25A30FE._gr__25a30fe.bin"
+_gr__25a30fe_end:
 # Unknown region 25A312E-25A334E [220]
 .incbin "bin/PAPERMARIO.25A312E.bin"
 
-_gr__25a334e_len_30:
-.incbin "bin/PAPERMARIO.25A334E._gr__25a334e_len_30.bin"
-_gr__25a334e_len_30_end:
+_gr__25a334e:
+.incbin "bin/PAPERMARIO.25A334E._gr__25a334e.bin"
+_gr__25a334e_end:
 # Unknown region 25A337E-25A359E [220]
 .incbin "bin/PAPERMARIO.25A337E.bin"
 
-_gry__25a359e_len_30:
-.incbin "bin/PAPERMARIO.25A359E._gry__25a359e_len_30.bin"
-_gry__25a359e_len_30_end:
-___25a35ce_len_220:
-.incbin "bin/PAPERMARIO.25A35CE.___25a35ce_len_220.bin"
-___25a35ce_len_220_end:
-_gr__25a37ee_len_30:
-.incbin "bin/PAPERMARIO.25A37EE._gr__25a37ee_len_30.bin"
-_gr__25a37ee_len_30_end:
-___25a381e_len_2a0:
-.incbin "bin/PAPERMARIO.25A381E.___25a381e_len_2a0.bin"
-___25a381e_len_2a0_end:
-_gr__25a3abe_len_30:
-.incbin "bin/PAPERMARIO.25A3ABE._gr__25a3abe_len_30.bin"
-_gr__25a3abe_len_30_end:
+_gry__25a359e:
+.incbin "bin/PAPERMARIO.25A359E._gry__25a359e.bin"
+_gry__25a359e_end:
+___25a35ce:
+.incbin "bin/PAPERMARIO.25A35CE.___25a35ce.bin"
+___25a35ce_end:
+_gr__25a37ee:
+.incbin "bin/PAPERMARIO.25A37EE._gr__25a37ee.bin"
+_gr__25a37ee_end:
+___25a381e:
+.incbin "bin/PAPERMARIO.25A381E.___25a381e.bin"
+___25a381e_end:
+_gr__25a3abe:
+.incbin "bin/PAPERMARIO.25A3ABE._gr__25a3abe.bin"
+_gr__25a3abe_end:
 # Unknown region 25A3AEE-25A3F0E [420]
 .incbin "bin/PAPERMARIO.25A3AEE.bin"
 
-_ha__25a3f0e_len_30:
-.incbin "bin/PAPERMARIO.25A3F0E._ha__25a3f0e_len_30.bin"
-_ha__25a3f0e_len_30_end:
+_ha__25a3f0e:
+.incbin "bin/PAPERMARIO.25A3F0E._ha__25a3f0e.bin"
+_ha__25a3f0e_end:
 # Unknown region 25A3F3E-25A415E [220]
 .incbin "bin/PAPERMARIO.25A3F3E.bin"
 
-_haP__25a415e_len_30:
-.incbin "bin/PAPERMARIO.25A415E._haP__25a415e_len_30.bin"
-_haP__25a415e_len_30_end:
-___25a418e_len_420:
-.incbin "bin/PAPERMARIO.25A418E.___25a418e_len_420.bin"
-___25a418e_len_420_end:
-_he__25a45ae_len_30:
-.incbin "bin/PAPERMARIO.25A45AE._he__25a45ae_len_30.bin"
-_he__25a45ae_len_30_end:
+_haP__25a415e:
+.incbin "bin/PAPERMARIO.25A415E._haP__25a415e.bin"
+_haP__25a415e_end:
+___25a418e:
+.incbin "bin/PAPERMARIO.25A418E.___25a418e.bin"
+___25a418e_end:
+_he__25a45ae:
+.incbin "bin/PAPERMARIO.25A45AE._he__25a45ae.bin"
+_he__25a45ae_end:
 # Unknown region 25A45DE-25A47FE [220]
 .incbin "bin/PAPERMARIO.25A45DE.bin"
 
-_ht__25a47fe_len_30:
-.incbin "bin/PAPERMARIO.25A47FE._ht__25a47fe_len_30.bin"
-_ht__25a47fe_len_30_end:
+_ht__25a47fe:
+.incbin "bin/PAPERMARIO.25A47FE._ht__25a47fe.bin"
+_ht__25a47fe_end:
 # Unknown region 25A482E-25A4C2E [400]
 .incbin "bin/PAPERMARIO.25A482E.bin"
 
-_in__25a4c2e_len_30:
-.incbin "bin/PAPERMARIO.25A4C2E._in__25a4c2e_len_30.bin"
-_in__25a4c2e_len_30_end:
+_in__25a4c2e:
+.incbin "bin/PAPERMARIO.25A4C2E._in__25a4c2e.bin"
+_in__25a4c2e_end:
 # Unknown region 25A4C5E-25A4E7E [220]
 .incbin "bin/PAPERMARIO.25A4C5E.bin"
 
-_iw__25a4e7e_len_30:
-.incbin "bin/PAPERMARIO.25A4E7E._iw__25a4e7e_len_30.bin"
-_iw__25a4e7e_len_30_end:
+_iw__25a4e7e:
+.incbin "bin/PAPERMARIO.25A4E7E._iw__25a4e7e.bin"
+_iw__25a4e7e_end:
 # Unknown region 25A4EAE-25A52CE [420]
 .incbin "bin/PAPERMARIO.25A4EAE.bin"
 
-_iw__25a52ce_len_30:
-.incbin "bin/PAPERMARIO.25A52CE._iw__25a52ce_len_30.bin"
-_iw__25a52ce_len_30_end:
+_iw__25a52ce:
+.incbin "bin/PAPERMARIO.25A52CE._iw__25a52ce.bin"
+_iw__25a52ce_end:
 # Unknown region 25A52FE-25A5B1E [820]
 .incbin "bin/PAPERMARIO.25A52FE.bin"
 
-_iw__25a5b1e_len_30:
-.incbin "bin/PAPERMARIO.25A5B1E._iw__25a5b1e_len_30.bin"
-_iw__25a5b1e_len_30_end:
+_iw__25a5b1e:
+.incbin "bin/PAPERMARIO.25A5B1E._iw__25a5b1e.bin"
+_iw__25a5b1e_end:
 # Unknown region 25A5B4E-25A5D6E [220]
 .incbin "bin/PAPERMARIO.25A5B4E.bin"
 
-_iw__25a5d6e_len_30:
-.incbin "bin/PAPERMARIO.25A5D6E._iw__25a5d6e_len_30.bin"
-_iw__25a5d6e_len_30_end:
+_iw__25a5d6e:
+.incbin "bin/PAPERMARIO.25A5D6E._iw__25a5d6e.bin"
+_iw__25a5d6e_end:
 # Unknown region 25A5D9E-25A5FBE [220]
 .incbin "bin/PAPERMARIO.25A5D9E.bin"
 
-_ka__25a5fbe_len_30:
-.incbin "bin/PAPERMARIO.25A5FBE._ka__25a5fbe_len_30.bin"
-_ka__25a5fbe_len_30_end:
+_ka__25a5fbe:
+.incbin "bin/PAPERMARIO.25A5FBE._ka__25a5fbe.bin"
+_ka__25a5fbe_end:
 # Unknown region 25A5FEE-25A680E [820]
 .incbin "bin/PAPERMARIO.25A5FEE.bin"
 
-_ke__25a680e_len_30:
-.incbin "bin/PAPERMARIO.25A680E._ke__25a680e_len_30.bin"
-_ke__25a680e_len_30_end:
+_ke__25a680e:
+.incbin "bin/PAPERMARIO.25A680E._ke__25a680e.bin"
+_ke__25a680e_end:
 # Unknown region 25A683E-25A705E [820]
 .incbin "bin/PAPERMARIO.25A683E.bin"
 
-_ki__25a705e_len_30:
-.incbin "bin/PAPERMARIO.25A705E._ki__25a705e_len_30.bin"
-_ki__25a705e_len_30_end:
+_ki__25a705e:
+.incbin "bin/PAPERMARIO.25A705E._ki__25a705e.bin"
+_ki__25a705e_end:
 # Unknown region 25A708E-25A808E [1000]
 .incbin "bin/PAPERMARIO.25A708E.bin"
 
-_kiDD__25a808e_len_30:
-.incbin "bin/PAPERMARIO.25A808E._kiDD__25a808e_len_30.bin"
-_kiDD__25a808e_len_30_end:
+_kiDD__25a808e:
+.incbin "bin/PAPERMARIO.25A808E._kiDD__25a808e.bin"
+_kiDD__25a808e_end:
 # Unknown region 25A80BE-25A81DE [120]
 .incbin "bin/PAPERMARIO.25A80BE.bin"
 
-_kk__25a81de_len_30:
-.incbin "bin/PAPERMARIO.25A81DE._kk__25a81de_len_30.bin"
-_kk__25a81de_len_30_end:
+_kk__25a81de:
+.incbin "bin/PAPERMARIO.25A81DE._kk__25a81de.bin"
+_kk__25a81de_end:
 # Unknown region 25A820E-25A832E [120]
 .incbin "bin/PAPERMARIO.25A820E.bin"
 
-_kk__25a832e_len_30:
-.incbin "bin/PAPERMARIO.25A832E._kk__25a832e_len_30.bin"
-_kk__25a832e_len_30_end:
+_kk__25a832e:
+.incbin "bin/PAPERMARIO.25A832E._kk__25a832e.bin"
+_kk__25a832e_end:
 # Unknown region 25A835E-25A847E [120]
 .incbin "bin/PAPERMARIO.25A835E.bin"
 
-_kk__25a847e_len_30:
-.incbin "bin/PAPERMARIO.25A847E._kk__25a847e_len_30.bin"
-_kk__25a847e_len_30_end:
+_kk__25a847e:
+.incbin "bin/PAPERMARIO.25A847E._kk__25a847e.bin"
+_kk__25a847e_end:
 # Unknown region 25A84AE-25A88CE [420]
 .incbin "bin/PAPERMARIO.25A84AE.bin"
 
-_kk__25a88ce_len_30:
-.incbin "bin/PAPERMARIO.25A88CE._kk__25a88ce_len_30.bin"
-_kk__25a88ce_len_30_end:
+_kk__25a88ce:
+.incbin "bin/PAPERMARIO.25A88CE._kk__25a88ce.bin"
+_kk__25a88ce_end:
 # Unknown region 25A88FE-25A8B1E [220]
 .incbin "bin/PAPERMARIO.25A88FE.bin"
 
-_kk__25a8b1e_len_30:
-.incbin "bin/PAPERMARIO.25A8B1E._kk__25a8b1e_len_30.bin"
-_kk__25a8b1e_len_30_end:
+_kk__25a8b1e:
+.incbin "bin/PAPERMARIO.25A8B1E._kk__25a8b1e.bin"
+_kk__25a8b1e_end:
 # Unknown region 25A8B4E-25A8C6E [120]
 .incbin "bin/PAPERMARIO.25A8B4E.bin"
 
-_kk__25a8c6e_len_30:
-.incbin "bin/PAPERMARIO.25A8C6E._kk__25a8c6e_len_30.bin"
-_kk__25a8c6e_len_30_end:
+_kk__25a8c6e:
+.incbin "bin/PAPERMARIO.25A8C6E._kk__25a8c6e.bin"
+_kk__25a8c6e_end:
 # Unknown region 25A8C9E-25A8EDE [240]
 .incbin "bin/PAPERMARIO.25A8C9E.bin"
 
-_km__25a8ede_len_30:
-.incbin "bin/PAPERMARIO.25A8EDE._km__25a8ede_len_30.bin"
-_km__25a8ede_len_30_end:
+_km__25a8ede:
+.incbin "bin/PAPERMARIO.25A8EDE._km__25a8ede.bin"
+_km__25a8ede_end:
 # Unknown region 25A8F0E-25A912E [220]
 .incbin "bin/PAPERMARIO.25A8F0E.bin"
 
-_km__25a912e_len_30:
-.incbin "bin/PAPERMARIO.25A912E._km__25a912e_len_30.bin"
-_km__25a912e_len_30_end:
+_km__25a912e:
+.incbin "bin/PAPERMARIO.25A912E._km__25a912e.bin"
+_km__25a912e_end:
 # Unknown region 25A915E-25A997E [820]
 .incbin "bin/PAPERMARIO.25A915E.bin"
 
-_km__25a997e_len_30:
-.incbin "bin/PAPERMARIO.25A997E._km__25a997e_len_30.bin"
-_km__25a997e_len_30_end:
+_km__25a997e:
+.incbin "bin/PAPERMARIO.25A997E._km__25a997e.bin"
+_km__25a997e_end:
 # Unknown region 25A99AE-25AA1CE [820]
 .incbin "bin/PAPERMARIO.25A99AE.bin"
 
-_km__25aa1ce_len_30:
-.incbin "bin/PAPERMARIO.25AA1CE._km__25aa1ce_len_30.bin"
-_km__25aa1ce_len_30_end:
+_km__25aa1ce:
+.incbin "bin/PAPERMARIO.25AA1CE._km__25aa1ce.bin"
+_km__25aa1ce_end:
 # Unknown region 25AA1FE-25AA31E [120]
 .incbin "bin/PAPERMARIO.25AA1FE.bin"
 
-_km__25aa31e_len_30:
-.incbin "bin/PAPERMARIO.25AA31E._km__25aa31e_len_30.bin"
-_km__25aa31e_len_30_end:
+_km__25aa31e:
+.incbin "bin/PAPERMARIO.25AA31E._km__25aa31e.bin"
+_km__25aa31e_end:
 # Unknown region 25AA34E-25AAB4E [800]
 .incbin "bin/PAPERMARIO.25AA34E.bin"
 
-_kr__25aab4e_len_30:
-.incbin "bin/PAPERMARIO.25AAB4E._kr__25aab4e_len_30.bin"
-_kr__25aab4e_len_30_end:
+_kr__25aab4e:
+.incbin "bin/PAPERMARIO.25AAB4E._kr__25aab4e.bin"
+_kr__25aab4e_end:
 # Unknown region 25AAB7E-25AB3BE [840]
 .incbin "bin/PAPERMARIO.25AAB7E.bin"
 
-_kuh__25ab3be_len_30:
-.incbin "bin/PAPERMARIO.25AB3BE._kuh__25ab3be_len_30.bin"
-_kuh__25ab3be_len_30_end:
+_kuh__25ab3be:
+.incbin "bin/PAPERMARIO.25AB3BE._kuh__25ab3be.bin"
+_kuh__25ab3be_end:
 # Unknown region 25AB3EE-25AB66E [280]
 .incbin "bin/PAPERMARIO.25AB3EE.bin"
 
-_la__25ab66e_len_30:
-.incbin "bin/PAPERMARIO.25AB66E._la__25ab66e_len_30.bin"
-_la__25ab66e_len_30_end:
+_la__25ab66e:
+.incbin "bin/PAPERMARIO.25AB66E._la__25ab66e.bin"
+_la__25ab66e_end:
 # Unknown region 25AB69E-25ABEDE [840]
 .incbin "bin/PAPERMARIO.25AB69E.bin"
 
-_la__25abede_len_30:
-.incbin "bin/PAPERMARIO.25ABEDE._la__25abede_len_30.bin"
-_la__25abede_len_30_end:
+_la__25abede:
+.incbin "bin/PAPERMARIO.25ABEDE._la__25abede.bin"
+_la__25abede_end:
 # Unknown region 25ABF0E-25AC32E [420]
 .incbin "bin/PAPERMARIO.25ABF0E.bin"
 
-_m__25ac32e_len_30:
-.incbin "bin/PAPERMARIO.25AC32E._m__25ac32e_len_30.bin"
-_m__25ac32e_len_30_end:
-___25ac35e_len_1000:
-.incbin "bin/PAPERMARIO.25AC35E.___25ac35e_len_1000.bin"
-___25ac35e_len_1000_end:
-_m__25ad35e_len_30:
-.incbin "bin/PAPERMARIO.25AD35E._m__25ad35e_len_30.bin"
-_m__25ad35e_len_30_end:
-___25ad38e_len_a0:
-.incbin "bin/PAPERMARIO.25AD38E.___25ad38e_len_a0.bin"
-___25ad38e_len_a0_end:
-_m__25ad42e_len_30:
-.incbin "bin/PAPERMARIO.25AD42E._m__25ad42e_len_30.bin"
-_m__25ad42e_len_30_end:
-_DG__25ad45e_len_80:
-.incbin "bin/PAPERMARIO.25AD45E._DG__25ad45e_len_80.bin"
-_DG__25ad45e_len_80_end:
-_m__25ad4de_len_30:
-.incbin "bin/PAPERMARIO.25AD4DE._m__25ad4de_len_30.bin"
-_m__25ad4de_len_30_end:
-_UU__25ad50e_len_120:
-.incbin "bin/PAPERMARIO.25AD50E._UU__25ad50e_len_120.bin"
-_UU__25ad50e_len_120_end:
-_m__25ad62e_len_30:
-.incbin "bin/PAPERMARIO.25AD62E._m__25ad62e_len_30.bin"
-_m__25ad62e_len_30_end:
+_m__25ac32e:
+.incbin "bin/PAPERMARIO.25AC32E._m__25ac32e.bin"
+_m__25ac32e_end:
+___25ac35e:
+.incbin "bin/PAPERMARIO.25AC35E.___25ac35e.bin"
+___25ac35e_end:
+_m__25ad35e:
+.incbin "bin/PAPERMARIO.25AD35E._m__25ad35e.bin"
+_m__25ad35e_end:
+___25ad38e:
+.incbin "bin/PAPERMARIO.25AD38E.___25ad38e.bin"
+___25ad38e_end:
+_m__25ad42e:
+.incbin "bin/PAPERMARIO.25AD42E._m__25ad42e.bin"
+_m__25ad42e_end:
+_DG__25ad45e:
+.incbin "bin/PAPERMARIO.25AD45E._DG__25ad45e.bin"
+_DG__25ad45e_end:
+_m__25ad4de:
+.incbin "bin/PAPERMARIO.25AD4DE._m__25ad4de.bin"
+_m__25ad4de_end:
+_UU__25ad50e:
+.incbin "bin/PAPERMARIO.25AD50E._UU__25ad50e.bin"
+_UU__25ad50e_end:
+_m__25ad62e:
+.incbin "bin/PAPERMARIO.25AD62E._m__25ad62e.bin"
+_m__25ad62e_end:
 # Unknown region 25AD65E-25ADE5E [800]
 .incbin "bin/PAPERMARIO.25AD65E.bin"
 
-_m__25ade5e_len_30:
-.incbin "bin/PAPERMARIO.25ADE5E._m__25ade5e_len_30.bin"
-_m__25ade5e_len_30_end:
-___25ade8e_len_800:
-.incbin "bin/PAPERMARIO.25ADE8E.___25ade8e_len_800.bin"
-___25ade8e_len_800_end:
-_m__25ae68e_len_30:
-.incbin "bin/PAPERMARIO.25AE68E._m__25ae68e_len_30.bin"
-_m__25ae68e_len_30_end:
-___25ae6be_len_420:
-.incbin "bin/PAPERMARIO.25AE6BE.___25ae6be_len_420.bin"
-___25ae6be_len_420_end:
-_m__25aeade_len_30:
-.incbin "bin/PAPERMARIO.25AEADE._m__25aeade_len_30.bin"
-_m__25aeade_len_30_end:
-___25aeb0e_len_420:
-.incbin "bin/PAPERMARIO.25AEB0E.___25aeb0e_len_420.bin"
-___25aeb0e_len_420_end:
-_m__25aef2e_len_30:
-.incbin "bin/PAPERMARIO.25AEF2E._m__25aef2e_len_30.bin"
-_m__25aef2e_len_30_end:
-_P__25aef5e_len_220:
-.incbin "bin/PAPERMARIO.25AEF5E._P__25aef5e_len_220.bin"
-_P__25aef5e_len_220_end:
-_m__25af17e_len_30:
-.incbin "bin/PAPERMARIO.25AF17E._m__25af17e_len_30.bin"
-_m__25af17e_len_30_end:
-___25af1ae_len_220:
-.incbin "bin/PAPERMARIO.25AF1AE.___25af1ae_len_220.bin"
-___25af1ae_len_220_end:
-_m__25af3ce_len_30:
-.incbin "bin/PAPERMARIO.25AF3CE._m__25af3ce_len_30.bin"
-_m__25af3ce_len_30_end:
-___25af3fe_len_200:
-.incbin "bin/PAPERMARIO.25AF3FE.___25af3fe_len_200.bin"
-___25af3fe_len_200_end:
-_maDD__25af5fe_len_30:
-.incbin "bin/PAPERMARIO.25AF5FE._maDD__25af5fe_len_30.bin"
-_maDD__25af5fe_len_30_end:
+_m__25ade5e:
+.incbin "bin/PAPERMARIO.25ADE5E._m__25ade5e.bin"
+_m__25ade5e_end:
+___25ade8e:
+.incbin "bin/PAPERMARIO.25ADE8E.___25ade8e.bin"
+___25ade8e_end:
+_m__25ae68e:
+.incbin "bin/PAPERMARIO.25AE68E._m__25ae68e.bin"
+_m__25ae68e_end:
+___25ae6be:
+.incbin "bin/PAPERMARIO.25AE6BE.___25ae6be.bin"
+___25ae6be_end:
+_m__25aeade:
+.incbin "bin/PAPERMARIO.25AEADE._m__25aeade.bin"
+_m__25aeade_end:
+___25aeb0e:
+.incbin "bin/PAPERMARIO.25AEB0E.___25aeb0e.bin"
+___25aeb0e_end:
+_m__25aef2e:
+.incbin "bin/PAPERMARIO.25AEF2E._m__25aef2e.bin"
+_m__25aef2e_end:
+_P__25aef5e:
+.incbin "bin/PAPERMARIO.25AEF5E._P__25aef5e.bin"
+_P__25aef5e_end:
+_m__25af17e:
+.incbin "bin/PAPERMARIO.25AF17E._m__25af17e.bin"
+_m__25af17e_end:
+___25af1ae:
+.incbin "bin/PAPERMARIO.25AF1AE.___25af1ae.bin"
+___25af1ae_end:
+_m__25af3ce:
+.incbin "bin/PAPERMARIO.25AF3CE._m__25af3ce.bin"
+_m__25af3ce_end:
+___25af3fe:
+.incbin "bin/PAPERMARIO.25AF3FE.___25af3fe.bin"
+___25af3fe_end:
+_maDD__25af5fe:
+.incbin "bin/PAPERMARIO.25AF5FE._maDD__25af5fe.bin"
+_maDD__25af5fe_end:
 # Unknown region 25AF62E-25AF6CE [A0]
 .incbin "bin/PAPERMARIO.25AF62E.bin"
 
-_may__25af6ce_len_30:
-.incbin "bin/PAPERMARIO.25AF6CE._may__25af6ce_len_30.bin"
-_may__25af6ce_len_30_end:
+_may__25af6ce:
+.incbin "bin/PAPERMARIO.25AF6CE._may__25af6ce.bin"
+_may__25af6ce_end:
 # Unknown region 25AF6FE-25AF91E [220]
 .incbin "bin/PAPERMARIO.25AF6FE.bin"
 
-_ma__25af91e_len_30:
-.incbin "bin/PAPERMARIO.25AF91E._ma__25af91e_len_30.bin"
-_ma__25af91e_len_30_end:
+_ma__25af91e:
+.incbin "bin/PAPERMARIO.25AF91E._ma__25af91e.bin"
+_ma__25af91e_end:
 # Unknown region 25AF94E-25AFEAE [560]
 .incbin "bin/PAPERMARIO.25AF94E.bin"
 
-_ma__25afeae_len_30:
-.incbin "bin/PAPERMARIO.25AFEAE._ma__25afeae_len_30.bin"
-_ma__25afeae_len_30_end:
-___25afede_len_400:
-.incbin "bin/PAPERMARIO.25AFEDE.___25afede_len_400.bin"
-___25afede_len_400_end:
-_ma__25b02de_len_30:
-.incbin "bin/PAPERMARIO.25B02DE._ma__25b02de_len_30.bin"
-_ma__25b02de_len_30_end:
+_ma__25afeae:
+.incbin "bin/PAPERMARIO.25AFEAE._ma__25afeae.bin"
+_ma__25afeae_end:
+___25afede:
+.incbin "bin/PAPERMARIO.25AFEDE.___25afede.bin"
+___25afede_end:
+_ma__25b02de:
+.incbin "bin/PAPERMARIO.25B02DE._ma__25b02de.bin"
+_ma__25b02de_end:
 # Unknown region 25B030E-25B052E [220]
 .incbin "bin/PAPERMARIO.25B030E.bin"
 
-_ma__25b052e_len_30:
-.incbin "bin/PAPERMARIO.25B052E._ma__25b052e_len_30.bin"
-_ma__25b052e_len_30_end:
-___25b055e_len_220:
-.incbin "bin/PAPERMARIO.25B055E.___25b055e_len_220.bin"
-___25b055e_len_220_end:
-_ma__25b077e_len_30:
-.incbin "bin/PAPERMARIO.25B077E._ma__25b077e_len_30.bin"
-_ma__25b077e_len_30_end:
+_ma__25b052e:
+.incbin "bin/PAPERMARIO.25B052E._ma__25b052e.bin"
+_ma__25b052e_end:
+___25b055e:
+.incbin "bin/PAPERMARIO.25B055E.___25b055e.bin"
+___25b055e_end:
+_ma__25b077e:
+.incbin "bin/PAPERMARIO.25B077E._ma__25b077e.bin"
+_ma__25b077e_end:
 # Unknown region 25B07AE-25B084E [A0]
 .incbin "bin/PAPERMARIO.25B07AE.bin"
 
-_nam__25b084e_len_30:
-.incbin "bin/PAPERMARIO.25B084E._nam__25b084e_len_30.bin"
-_nam__25b084e_len_30_end:
+_nam__25b084e:
+.incbin "bin/PAPERMARIO.25B084E._nam__25b084e.bin"
+_nam__25b084e_end:
 # Unknown region 25B087E-25B0A9E [220]
 .incbin "bin/PAPERMARIO.25B087E.bin"
 
-_ne__25b0a9e_len_30:
-.incbin "bin/PAPERMARIO.25B0A9E._ne__25b0a9e_len_30.bin"
-_ne__25b0a9e_len_30_end:
+_ne__25b0a9e:
+.incbin "bin/PAPERMARIO.25B0A9E._ne__25b0a9e.bin"
+_ne__25b0a9e_end:
 # Unknown region 25B0ACE-25B0CEE [220]
 .incbin "bin/PAPERMARIO.25B0ACE.bin"
 
-_nt__25b0cee_len_30:
-.incbin "bin/PAPERMARIO.25B0CEE._nt__25b0cee_len_30.bin"
-_nt__25b0cee_len_30_end:
+_nt__25b0cee:
+.incbin "bin/PAPERMARIO.25B0CEE._nt__25b0cee.bin"
+_nt__25b0cee_end:
 # Unknown region 25B0D1E-25B111E [400]
 .incbin "bin/PAPERMARIO.25B0D1E.bin"
 
-_re__25b111e_len_30:
-.incbin "bin/PAPERMARIO.25B111E._re__25b111e_len_30.bin"
-_re__25b111e_len_30_end:
+_re__25b111e:
+.incbin "bin/PAPERMARIO.25B111E._re__25b111e.bin"
+_re__25b111e_end:
 # Unknown region 25B114E-25B214E [1000]
 .incbin "bin/PAPERMARIO.25B114E.bin"
 
-_re__25b214e_len_30:
-.incbin "bin/PAPERMARIO.25B214E._re__25b214e_len_30.bin"
-_re__25b214e_len_30_end:
+_re__25b214e:
+.incbin "bin/PAPERMARIO.25B214E._re__25b214e.bin"
+_re__25b214e_end:
 # Unknown region 25B217E-25B299E [820]
 .incbin "bin/PAPERMARIO.25B217E.bin"
 
-_re__25b299e_len_30:
-.incbin "bin/PAPERMARIO.25B299E._re__25b299e_len_30.bin"
-_re__25b299e_len_30_end:
-___25b29ce_len_820:
-.incbin "bin/PAPERMARIO.25B29CE.___25b29ce_len_820.bin"
-___25b29ce_len_820_end:
-_re__25b31ee_len_30:
-.incbin "bin/PAPERMARIO.25B31EE._re__25b31ee_len_30.bin"
-_re__25b31ee_len_30_end:
+_re__25b299e:
+.incbin "bin/PAPERMARIO.25B299E._re__25b299e.bin"
+_re__25b299e_end:
+___25b29ce:
+.incbin "bin/PAPERMARIO.25B29CE.___25b29ce.bin"
+___25b29ce_end:
+_re__25b31ee:
+.incbin "bin/PAPERMARIO.25B31EE._re__25b31ee.bin"
+_re__25b31ee_end:
 # Unknown region 25B321E-25B343E [220]
 .incbin "bin/PAPERMARIO.25B321E.bin"
 
-_re__25b343e_len_30:
-.incbin "bin/PAPERMARIO.25B343E._re__25b343e_len_30.bin"
-_re__25b343e_len_30_end:
-___25b346e_len_220:
-.incbin "bin/PAPERMARIO.25B346E.___25b346e_len_220.bin"
-___25b346e_len_220_end:
-_re__25b368e_len_30:
-.incbin "bin/PAPERMARIO.25B368E._re__25b368e_len_30.bin"
-_re__25b368e_len_30_end:
+_re__25b343e:
+.incbin "bin/PAPERMARIO.25B343E._re__25b343e.bin"
+_re__25b343e_end:
+___25b346e:
+.incbin "bin/PAPERMARIO.25B346E.___25b346e.bin"
+___25b346e_end:
+_re__25b368e:
+.incbin "bin/PAPERMARIO.25B368E._re__25b368e.bin"
+_re__25b368e_end:
 # Unknown region 25B36BE-25B38DE [220]
 .incbin "bin/PAPERMARIO.25B36BE.bin"
 
-_re__25b38de_len_30:
-.incbin "bin/PAPERMARIO.25B38DE._re__25b38de_len_30.bin"
-_re__25b38de_len_30_end:
-___25b390e_len_420:
-.incbin "bin/PAPERMARIO.25B390E.___25b390e_len_420.bin"
-___25b390e_len_420_end:
-_re__25b3d2e_len_30:
-.incbin "bin/PAPERMARIO.25B3D2E._re__25b3d2e_len_30.bin"
-_re__25b3d2e_len_30_end:
+_re__25b38de:
+.incbin "bin/PAPERMARIO.25B38DE._re__25b38de.bin"
+_re__25b38de_end:
+___25b390e:
+.incbin "bin/PAPERMARIO.25B390E.___25b390e.bin"
+___25b390e_end:
+_re__25b3d2e:
+.incbin "bin/PAPERMARIO.25B3D2E._re__25b3d2e.bin"
+_re__25b3d2e_end:
 # Unknown region 25B3D5E-25B417E [420]
 .incbin "bin/PAPERMARIO.25B3D5E.bin"
 
-_re__25b417e_len_30:
-.incbin "bin/PAPERMARIO.25B417E._re__25b417e_len_30.bin"
-_re__25b417e_len_30_end:
+_re__25b417e:
+.incbin "bin/PAPERMARIO.25B417E._re__25b417e.bin"
+_re__25b417e_end:
 # Unknown region 25B41AE-25B49CE [820]
 .incbin "bin/PAPERMARIO.25B41AE.bin"
 
-_re__25b49ce_len_30:
-.incbin "bin/PAPERMARIO.25B49CE._re__25b49ce_len_30.bin"
-_re__25b49ce_len_30_end:
-___25b49fe_len_820:
-.incbin "bin/PAPERMARIO.25B49FE.___25b49fe_len_820.bin"
-___25b49fe_len_820_end:
-_s__25b521e_len_30:
-.incbin "bin/PAPERMARIO.25B521E._s__25b521e_len_30.bin"
-_s__25b521e_len_30_end:
-___25b524e_len_220:
-.incbin "bin/PAPERMARIO.25B524E.___25b524e_len_220.bin"
-___25b524e_len_220_end:
-_s__25b546e_len_30:
-.incbin "bin/PAPERMARIO.25B546E._s__25b546e_len_30.bin"
-_s__25b546e_len_30_end:
-___25b549e_len_220:
-.incbin "bin/PAPERMARIO.25B549E.___25b549e_len_220.bin"
-___25b549e_len_220_end:
-_sk__25b56be_len_30:
-.incbin "bin/PAPERMARIO.25B56BE._sk__25b56be_len_30.bin"
-_sk__25b56be_len_30_end:
+_re__25b49ce:
+.incbin "bin/PAPERMARIO.25B49CE._re__25b49ce.bin"
+_re__25b49ce_end:
+___25b49fe:
+.incbin "bin/PAPERMARIO.25B49FE.___25b49fe.bin"
+___25b49fe_end:
+_s__25b521e:
+.incbin "bin/PAPERMARIO.25B521E._s__25b521e.bin"
+_s__25b521e_end:
+___25b524e:
+.incbin "bin/PAPERMARIO.25B524E.___25b524e.bin"
+___25b524e_end:
+_s__25b546e:
+.incbin "bin/PAPERMARIO.25B546E._s__25b546e.bin"
+_s__25b546e_end:
+___25b549e:
+.incbin "bin/PAPERMARIO.25B549E.___25b549e.bin"
+___25b549e_end:
+_sk__25b56be:
+.incbin "bin/PAPERMARIO.25B56BE._sk__25b56be.bin"
+_sk__25b56be_end:
 # Unknown region 25B56EE-25B66EE [1000]
 .incbin "bin/PAPERMARIO.25B56EE.bin"
 
-_st__25b66ee_len_30:
-.incbin "bin/PAPERMARIO.25B66EE._st__25b66ee_len_30.bin"
-_st__25b66ee_len_30_end:
+_st__25b66ee:
+.incbin "bin/PAPERMARIO.25B66EE._st__25b66ee.bin"
+_st__25b66ee_end:
 # Unknown region 25B671E-25B679E [80]
 .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00, 0x00
 .byte 0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00
@@ -16571,594 +16566,594 @@ _st__25b66ee_len_30_end:
 .byte 0x00, 0x00, 0x00, 0x1B, 0x10, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00
 .byte 0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 
-_t__25b679e_len_30:
-.incbin "bin/PAPERMARIO.25B679E._t__25b679e_len_30.bin"
-_t__25b679e_len_30_end:
-___25b67ce_len_120:
-.incbin "bin/PAPERMARIO.25B67CE.___25b67ce_len_120.bin"
-___25b67ce_len_120_end:
-_t__25b68ee_len_30:
-.incbin "bin/PAPERMARIO.25B68EE._t__25b68ee_len_30.bin"
-_t__25b68ee_len_30_end:
+_t__25b679e:
+.incbin "bin/PAPERMARIO.25B679E._t__25b679e.bin"
+_t__25b679e_end:
+___25b67ce:
+.incbin "bin/PAPERMARIO.25B67CE.___25b67ce.bin"
+___25b67ce_end:
+_t__25b68ee:
+.incbin "bin/PAPERMARIO.25B68EE._t__25b68ee.bin"
+_t__25b68ee_end:
 # Unknown region 25B691E-25B713E [820]
 .incbin "bin/PAPERMARIO.25B691E.bin"
 
-_t__25b713e_len_30:
-.incbin "bin/PAPERMARIO.25B713E._t__25b713e_len_30.bin"
-_t__25b713e_len_30_end:
+_t__25b713e:
+.incbin "bin/PAPERMARIO.25B713E._t__25b713e.bin"
+_t__25b713e_end:
 # Unknown region 25B716E-25B798E [820]
 .incbin "bin/PAPERMARIO.25B716E.bin"
 
-_t__25b798e_len_30:
-.incbin "bin/PAPERMARIO.25B798E._t__25b798e_len_30.bin"
-_t__25b798e_len_30_end:
+_t__25b798e:
+.incbin "bin/PAPERMARIO.25B798E._t__25b798e.bin"
+_t__25b798e_end:
 # Unknown region 25B79BE-25B7DDE [420]
 .incbin "bin/PAPERMARIO.25B79BE.bin"
 
-_t__25b7dde_len_30:
-.incbin "bin/PAPERMARIO.25B7DDE._t__25b7dde_len_30.bin"
-_t__25b7dde_len_30_end:
+_t__25b7dde:
+.incbin "bin/PAPERMARIO.25B7DDE._t__25b7dde.bin"
+_t__25b7dde_end:
 # Unknown region 25B7E0E-25B822E [420]
 .incbin "bin/PAPERMARIO.25B7E0E.bin"
 
-_ta__25b822e_len_30:
-.incbin "bin/PAPERMARIO.25B822E._ta__25b822e_len_30.bin"
-_ta__25b822e_len_30_end:
+_ta__25b822e:
+.incbin "bin/PAPERMARIO.25B822E._ta__25b822e.bin"
+_ta__25b822e_end:
 # Unknown region 25B825E-25B8A5E [800]
 .incbin "bin/PAPERMARIO.25B825E.bin"
 
-_te__25b8a5e_len_30:
-.incbin "bin/PAPERMARIO.25B8A5E._te__25b8a5e_len_30.bin"
-_te__25b8a5e_len_30_end:
+_te__25b8a5e:
+.incbin "bin/PAPERMARIO.25B8A5E._te__25b8a5e.bin"
+_te__25b8a5e_end:
 # Unknown region 25B8A8E-25B8B2E [A0]
 .incbin "bin/PAPERMARIO.25B8A8E.bin"
 
-_to__25b8b2e_len_30:
-.incbin "bin/PAPERMARIO.25B8B2E._to__25b8b2e_len_30.bin"
-_to__25b8b2e_len_30_end:
+_to__25b8b2e:
+.incbin "bin/PAPERMARIO.25B8B2E._to__25b8b2e.bin"
+_to__25b8b2e_end:
 # Unknown region 25B8B5E-25B9B5E [1000]
 .incbin "bin/PAPERMARIO.25B8B5E.bin"
 
-_tt__25b9b5e_len_30:
-.incbin "bin/PAPERMARIO.25B9B5E._tt__25b9b5e_len_30.bin"
-_tt__25b9b5e_len_30_end:
+_tt__25b9b5e:
+.incbin "bin/PAPERMARIO.25B9B5E._tt__25b9b5e.bin"
+_tt__25b9b5e_end:
 # Unknown region 25B9B8E-25B9F8E [400]
 .incbin "bin/PAPERMARIO.25B9B8E.bin"
 
-_us__25b9f8e_len_30:
-.incbin "bin/PAPERMARIO.25B9F8E._us__25b9f8e_len_30.bin"
-_us__25b9f8e_len_30_end:
+_us__25b9f8e:
+.incbin "bin/PAPERMARIO.25B9F8E._us__25b9f8e.bin"
+_us__25b9f8e_end:
 # Unknown region 25B9FBE-25BA0DE [120]
 .incbin "bin/PAPERMARIO.25B9FBE.bin"
 
-_wi__25ba0de_len_30:
-.incbin "bin/PAPERMARIO.25BA0DE._wi__25ba0de_len_30.bin"
-_wi__25ba0de_len_30_end:
+_wi__25ba0de:
+.incbin "bin/PAPERMARIO.25BA0DE._wi__25ba0de.bin"
+_wi__25ba0de_end:
 # Unknown region 25BA10E-25BA50E [400]
 .incbin "bin/PAPERMARIO.25BA10E.bin"
 
-_wo__25ba50e_len_30:
-.incbin "bin/PAPERMARIO.25BA50E._wo__25ba50e_len_30.bin"
-_wo__25ba50e_len_30_end:
-___25ba53e_len_420:
-.incbin "bin/PAPERMARIO.25BA53E.___25ba53e_len_420.bin"
-___25ba53e_len_420_end:
-_wo__25ba95e_len_30:
-.incbin "bin/PAPERMARIO.25BA95E._wo__25ba95e_len_30.bin"
-_wo__25ba95e_len_30_end:
+_wo__25ba50e:
+.incbin "bin/PAPERMARIO.25BA50E._wo__25ba50e.bin"
+_wo__25ba50e_end:
+___25ba53e:
+.incbin "bin/PAPERMARIO.25BA53E.___25ba53e.bin"
+___25ba53e_end:
+_wo__25ba95e:
+.incbin "bin/PAPERMARIO.25BA95E._wo__25ba95e.bin"
+_wo__25ba95e_end:
 # Unknown region 25BA98E-25BABAE [220]
 .incbin "bin/PAPERMARIO.25BA98E.bin"
 
-_wo__25babae_len_30:
-.incbin "bin/PAPERMARIO.25BABAE._wo__25babae_len_30.bin"
-_wo__25babae_len_30_end:
-_S__25babde_len_220:
-.incbin "bin/PAPERMARIO.25BABDE._S__25babde_len_220.bin"
-_S__25babde_len_220_end:
-_wo__25badfe_len_30:
-.incbin "bin/PAPERMARIO.25BADFE._wo__25badfe_len_30.bin"
-_wo__25badfe_len_30_end:
-___25bae2e_len_220:
-.incbin "bin/PAPERMARIO.25BAE2E.___25bae2e_len_220.bin"
-___25bae2e_len_220_end:
-_yo__25bb04e_len_30:
-.incbin "bin/PAPERMARIO.25BB04E._yo__25bb04e_len_30.bin"
-_yo__25bb04e_len_30_end:
+_wo__25babae:
+.incbin "bin/PAPERMARIO.25BABAE._wo__25babae.bin"
+_wo__25babae_end:
+_S__25babde:
+.incbin "bin/PAPERMARIO.25BABDE._S__25babde.bin"
+_S__25babde_end:
+_wo__25badfe:
+.incbin "bin/PAPERMARIO.25BADFE._wo__25badfe.bin"
+_wo__25badfe_end:
+___25bae2e:
+.incbin "bin/PAPERMARIO.25BAE2E.___25bae2e.bin"
+___25bae2e_end:
+_yo__25bb04e:
+.incbin "bin/PAPERMARIO.25BB04E._yo__25bb04e.bin"
+_yo__25bb04e_end:
 # Unknown region 25BB07E-25BC07E [1000]
 .incbin "bin/PAPERMARIO.25BB07E.bin"
 
-_yu__25bc07e_len_30:
-.incbin "bin/PAPERMARIO.25BC07E._yu__25bc07e_len_30.bin"
-_yu__25bc07e_len_30_end:
-___25bc0ae_len_120:
-.incbin "bin/PAPERMARIO.25BC0AE.___25bc0ae_len_120.bin"
-___25bc0ae_len_120_end:
+_yu__25bc07e:
+.incbin "bin/PAPERMARIO.25BC07E._yu__25bc07e.bin"
+_yu__25bc07e_end:
+___25bc0ae:
+.incbin "bin/PAPERMARIO.25BC0AE.___25bc0ae.bin"
+___25bc0ae_end:
 # Unknown region 25BC1CE-2609E2E [4DC60]
 .incbin "bin/PAPERMARIO.25BC1CE.bin"
 
-_ak__2609e2e_len_30:
-.incbin "bin/PAPERMARIO.2609E2E._ak__2609e2e_len_30.bin"
-_ak__2609e2e_len_30_end:
+_ak__2609e2e:
+.incbin "bin/PAPERMARIO.2609E2E._ak__2609e2e.bin"
+_ak__2609e2e_end:
 # Unknown region 2609E5E-260A05E [200]
 .incbin "bin/PAPERMARIO.2609E5E.bin"
 
-_be__260a05e_len_30:
-.incbin "bin/PAPERMARIO.260A05E._be__260a05e_len_30.bin"
-_be__260a05e_len_30_end:
-___260a08e_len_a0:
-.incbin "bin/PAPERMARIO.260A08E.___260a08e_len_a0.bin"
-___260a08e_len_a0_end:
-_de__260a12e_len_30:
-.incbin "bin/PAPERMARIO.260A12E._de__260a12e_len_30.bin"
-_de__260a12e_len_30_end:
+_be__260a05e:
+.incbin "bin/PAPERMARIO.260A05E._be__260a05e.bin"
+_be__260a05e_end:
+___260a08e:
+.incbin "bin/PAPERMARIO.260A08E.___260a08e.bin"
+___260a08e_end:
+_de__260a12e:
+.incbin "bin/PAPERMARIO.260A12E._de__260a12e.bin"
+_de__260a12e_end:
 # Unknown region 260A15E-260A61E [4C0]
 .incbin "bin/PAPERMARIO.260A15E.bin"
 
-_de__260a61e_len_30:
-.incbin "bin/PAPERMARIO.260A61E._de__260a61e_len_30.bin"
-_de__260a61e_len_30_end:
+_de__260a61e:
+.incbin "bin/PAPERMARIO.260A61E._de__260a61e.bin"
+_de__260a61e_end:
 # Unknown region 260A64E-260A84E [200]
 .incbin "bin/PAPERMARIO.260A64E.bin"
 
-_fl__260a84e_len_30:
-.incbin "bin/PAPERMARIO.260A84E._fl__260a84e_len_30.bin"
-_fl__260a84e_len_30_end:
+_fl__260a84e:
+.incbin "bin/PAPERMARIO.260A84E._fl__260a84e.bin"
+_fl__260a84e_end:
 # Unknown region 260A87E-260AC7E [400]
 .incbin "bin/PAPERMARIO.260A87E.bin"
 
-_fr__260ac7e_len_30:
-.incbin "bin/PAPERMARIO.260AC7E._fr__260ac7e_len_30.bin"
-_fr__260ac7e_len_30_end:
+_fr__260ac7e:
+.incbin "bin/PAPERMARIO.260AC7E._fr__260ac7e.bin"
+_fr__260ac7e_end:
 # Unknown region 260ACAE-260B4CE [820]
 .incbin "bin/PAPERMARIO.260ACAE.bin"
 
-_fx__260b4ce_len_30:
-.incbin "bin/PAPERMARIO.260B4CE._fx__260b4ce_len_30.bin"
-_fx__260b4ce_len_30_end:
+_fx__260b4ce:
+.incbin "bin/PAPERMARIO.260B4CE._fx__260b4ce.bin"
+_fx__260b4ce_end:
 # Unknown region 260B4FE-260BAFE [600]
 .incbin "bin/PAPERMARIO.260B4FE.bin"
 
-_gr__260bafe_len_30:
-.incbin "bin/PAPERMARIO.260BAFE._gr__260bafe_len_30.bin"
-_gr__260bafe_len_30_end:
-___260bb2e_len_800:
-.incbin "bin/PAPERMARIO.260BB2E.___260bb2e_len_800.bin"
-___260bb2e_len_800_end:
-_h__260c32e_len_30:
-.incbin "bin/PAPERMARIO.260C32E._h__260c32e_len_30.bin"
-_h__260c32e_len_30_end:
+_gr__260bafe:
+.incbin "bin/PAPERMARIO.260BAFE._gr__260bafe.bin"
+_gr__260bafe_end:
+___260bb2e:
+.incbin "bin/PAPERMARIO.260BB2E.___260bb2e.bin"
+___260bb2e_end:
+_h__260c32e:
+.incbin "bin/PAPERMARIO.260C32E._h__260c32e.bin"
+_h__260c32e_end:
 # Unknown region 260C35E-260CB5E [800]
 .incbin "bin/PAPERMARIO.260C35E.bin"
 
-_h__260cb5e_len_30:
-.incbin "bin/PAPERMARIO.260CB5E._h__260cb5e_len_30.bin"
-_h__260cb5e_len_30_end:
+_h__260cb5e:
+.incbin "bin/PAPERMARIO.260CB5E._h__260cb5e.bin"
+_h__260cb5e_end:
 # Unknown region 260CB8E-260CFAE [420]
 .incbin "bin/PAPERMARIO.260CB8E.bin"
 
-_h__260cfae_len_30:
-.incbin "bin/PAPERMARIO.260CFAE._h__260cfae_len_30.bin"
-_h__260cfae_len_30_end:
+_h__260cfae:
+.incbin "bin/PAPERMARIO.260CFAE._h__260cfae.bin"
+_h__260cfae_end:
 # Unknown region 260CFDE-260D3FE [420]
 .incbin "bin/PAPERMARIO.260CFDE.bin"
 
-_h__260d3fe_len_30:
-.incbin "bin/PAPERMARIO.260D3FE._h__260d3fe_len_30.bin"
-_h__260d3fe_len_30_end:
+_h__260d3fe:
+.incbin "bin/PAPERMARIO.260D3FE._h__260d3fe.bin"
+_h__260d3fe_end:
 # Unknown region 260D42E-260D4CE [A0]
 .incbin "bin/PAPERMARIO.260D42E.bin"
 
-_h__260d4ce_len_30:
-.incbin "bin/PAPERMARIO.260D4CE._h__260d4ce_len_30.bin"
-_h__260d4ce_len_30_end:
+_h__260d4ce:
+.incbin "bin/PAPERMARIO.260D4CE._h__260d4ce.bin"
+_h__260d4ce_end:
 # Unknown region 260D4FE-260D61E [120]
 .incbin "bin/PAPERMARIO.260D4FE.bin"
 
-_h__260d61e_len_30:
-.incbin "bin/PAPERMARIO.260D61E._h__260d61e_len_30.bin"
-_h__260d61e_len_30_end:
+_h__260d61e:
+.incbin "bin/PAPERMARIO.260D61E._h__260d61e.bin"
+_h__260d61e_end:
 # Unknown region 260D64E-260D76E [120]
 .incbin "bin/PAPERMARIO.260D64E.bin"
 
-_h__260d76e_len_30:
-.incbin "bin/PAPERMARIO.260D76E._h__260d76e_len_30.bin"
-_h__260d76e_len_30_end:
+_h__260d76e:
+.incbin "bin/PAPERMARIO.260D76E._h__260d76e.bin"
+_h__260d76e_end:
 # Unknown region 260D79E-260D8BE [120]
 .incbin "bin/PAPERMARIO.260D79E.bin"
 
-_h__260d8be_len_30:
-.incbin "bin/PAPERMARIO.260D8BE._h__260d8be_len_30.bin"
-_h__260d8be_len_30_end:
-___260d8ee_len_aa0:
-.incbin "bin/PAPERMARIO.260D8EE.___260d8ee_len_aa0.bin"
-___260d8ee_len_aa0_end:
-_h__260e38e_len_30:
-.incbin "bin/PAPERMARIO.260E38E._h__260e38e_len_30.bin"
-_h__260e38e_len_30_end:
-_Ye__260e3be_len_1000:
-.incbin "bin/PAPERMARIO.260E3BE._Ye__260e3be_len_1000.bin"
-_Ye__260e3be_len_1000_end:
-_h__260f3be_len_30:
-.incbin "bin/PAPERMARIO.260F3BE._h__260f3be_len_30.bin"
-_h__260f3be_len_30_end:
+_h__260d8be:
+.incbin "bin/PAPERMARIO.260D8BE._h__260d8be.bin"
+_h__260d8be_end:
+___260d8ee:
+.incbin "bin/PAPERMARIO.260D8EE.___260d8ee.bin"
+___260d8ee_end:
+_h__260e38e:
+.incbin "bin/PAPERMARIO.260E38E._h__260e38e.bin"
+_h__260e38e_end:
+_Ye__260e3be:
+.incbin "bin/PAPERMARIO.260E3BE._Ye__260e3be.bin"
+_Ye__260e3be_end:
+_h__260f3be:
+.incbin "bin/PAPERMARIO.260F3BE._h__260f3be.bin"
+_h__260f3be_end:
 # Unknown region 260F3EE-26103EE [1000]
 .incbin "bin/PAPERMARIO.260F3EE.bin"
 
-_h__26103ee_len_30:
-.incbin "bin/PAPERMARIO.26103EE._h__26103ee_len_30.bin"
-_h__26103ee_len_30_end:
+_h__26103ee:
+.incbin "bin/PAPERMARIO.26103EE._h__26103ee.bin"
+_h__26103ee_end:
 # Unknown region 261041E-261063E [220]
 .incbin "bin/PAPERMARIO.261041E.bin"
 
-_h__261063e_len_30:
-.incbin "bin/PAPERMARIO.261063E._h__261063e_len_30.bin"
-_h__261063e_len_30_end:
+_h__261063e:
+.incbin "bin/PAPERMARIO.261063E._h__261063e.bin"
+_h__261063e_end:
 # Unknown region 261066E-261078E [120]
 .incbin "bin/PAPERMARIO.261066E.bin"
 
-_h__261078e_len_30:
-.incbin "bin/PAPERMARIO.261078E._h__261078e_len_30.bin"
-_h__261078e_len_30_end:
+_h__261078e:
+.incbin "bin/PAPERMARIO.261078E._h__261078e.bin"
+_h__261078e_end:
 # Unknown region 26107BE-261085E [A0]
 .incbin "bin/PAPERMARIO.26107BE.bin"
 
-_h__261085e_len_30:
-.incbin "bin/PAPERMARIO.261085E._h__261085e_len_30.bin"
-_h__261085e_len_30_end:
+_h__261085e:
+.incbin "bin/PAPERMARIO.261085E._h__261085e.bin"
+_h__261085e_end:
 # Unknown region 261088E-2610CAE [420]
 .incbin "bin/PAPERMARIO.261088E.bin"
 
-_h__2610cae_len_30:
-.incbin "bin/PAPERMARIO.2610CAE._h__2610cae_len_30.bin"
-_h__2610cae_len_30_end:
+_h__2610cae:
+.incbin "bin/PAPERMARIO.2610CAE._h__2610cae.bin"
+_h__2610cae_end:
 # Unknown region 2610CDE-26110FE [420]
 .incbin "bin/PAPERMARIO.2610CDE.bin"
 
-_h__26110fe_len_30:
-.incbin "bin/PAPERMARIO.26110FE._h__26110fe_len_30.bin"
-_h__26110fe_len_30_end:
+_h__26110fe:
+.incbin "bin/PAPERMARIO.26110FE._h__26110fe.bin"
+_h__26110fe_end:
 # Unknown region 261112E-261134E [220]
 .incbin "bin/PAPERMARIO.261112E.bin"
 
-_h__261134e_len_30:
-.incbin "bin/PAPERMARIO.261134E._h__261134e_len_30.bin"
-_h__261134e_len_30_end:
+_h__261134e:
+.incbin "bin/PAPERMARIO.261134E._h__261134e.bin"
+_h__261134e_end:
 # Unknown region 261137E-261149E [120]
 .incbin "bin/PAPERMARIO.261137E.bin"
 
-_h__261149e_len_30:
-.incbin "bin/PAPERMARIO.261149E._h__261149e_len_30.bin"
-_h__261149e_len_30_end:
+_h__261149e:
+.incbin "bin/PAPERMARIO.261149E._h__261149e.bin"
+_h__261149e_end:
 # Unknown region 26114CE-26116EE [220]
 .incbin "bin/PAPERMARIO.26114CE.bin"
 
-_h__26116ee_len_30:
-.incbin "bin/PAPERMARIO.26116EE._h__26116ee_len_30.bin"
-_h__26116ee_len_30_end:
+_h__26116ee:
+.incbin "bin/PAPERMARIO.26116EE._h__26116ee.bin"
+_h__26116ee_end:
 # Unknown region 261171E-261181E [100]
 .incbin "bin/PAPERMARIO.261171E.bin"
 
-_h__261181e_len_30:
-.incbin "bin/PAPERMARIO.261181E._h__261181e_len_30.bin"
-_h__261181e_len_30_end:
-___261184e_len_1000:
-.incbin "bin/PAPERMARIO.261184E.___261184e_len_1000.bin"
-___261184e_len_1000_end:
-_h__261284e_len_30:
-.incbin "bin/PAPERMARIO.261284E._h__261284e_len_30.bin"
-_h__261284e_len_30_end:
-_h__261287e_len_a0:
-.incbin "bin/PAPERMARIO.261287E._h__261287e_len_a0.bin"
-_h__261287e_len_a0_end:
-_h__261291e_len_30:
-.incbin "bin/PAPERMARIO.261291E._h__261291e_len_30.bin"
-_h__261291e_len_30_end:
+_h__261181e:
+.incbin "bin/PAPERMARIO.261181E._h__261181e.bin"
+_h__261181e_end:
+___261184e:
+.incbin "bin/PAPERMARIO.261184E.___261184e.bin"
+___261184e_end:
+_h__261284e:
+.incbin "bin/PAPERMARIO.261284E._h__261284e.bin"
+_h__261284e_end:
+_h__261287e:
+.incbin "bin/PAPERMARIO.261287E._h__261287e.bin"
+_h__261287e_end:
+_h__261291e:
+.incbin "bin/PAPERMARIO.261291E._h__261291e.bin"
+_h__261291e_end:
 # Unknown region 261294E-261314E [800]
 .incbin "bin/PAPERMARIO.261294E.bin"
 
-_h__261314e_len_30:
-.incbin "bin/PAPERMARIO.261314E._h__261314e_len_30.bin"
-_h__261314e_len_30_end:
-___261317e_len_420:
-.incbin "bin/PAPERMARIO.261317E.___261317e_len_420.bin"
-___261317e_len_420_end:
-_h__261359e_len_30:
-.incbin "bin/PAPERMARIO.261359E._h__261359e_len_30.bin"
-_h__261359e_len_30_end:
+_h__261314e:
+.incbin "bin/PAPERMARIO.261314E._h__261314e.bin"
+_h__261314e_end:
+___261317e:
+.incbin "bin/PAPERMARIO.261317E.___261317e.bin"
+___261317e_end:
+_h__261359e:
+.incbin "bin/PAPERMARIO.261359E._h__261359e.bin"
+_h__261359e_end:
 # Unknown region 26135CE-26139CE [400]
 .incbin "bin/PAPERMARIO.26135CE.bin"
 
-_h__26139ce_len_30:
-.incbin "bin/PAPERMARIO.26139CE._h__26139ce_len_30.bin"
-_h__26139ce_len_30_end:
+_h__26139ce:
+.incbin "bin/PAPERMARIO.26139CE._h__26139ce.bin"
+_h__26139ce_end:
 # Unknown region 26139FE-2613E1E [420]
 .incbin "bin/PAPERMARIO.26139FE.bin"
 
-_h__2613e1e_len_30:
-.incbin "bin/PAPERMARIO.2613E1E._h__2613e1e_len_30.bin"
-_h__2613e1e_len_30_end:
+_h__2613e1e:
+.incbin "bin/PAPERMARIO.2613E1E._h__2613e1e.bin"
+_h__2613e1e_end:
 # Unknown region 2613E4E-2613F6E [120]
 .incbin "bin/PAPERMARIO.2613E4E.bin"
 
-_ha__2613f6e_len_30:
-.incbin "bin/PAPERMARIO.2613F6E._ha__2613f6e_len_30.bin"
-_ha__2613f6e_len_30_end:
-___2613f9e_len_80:
-.incbin "bin/PAPERMARIO.2613F9E.___2613f9e_len_80.bin"
-___2613f9e_len_80_end:
-_hi__261401e_len_30:
-.incbin "bin/PAPERMARIO.261401E._hi__261401e_len_30.bin"
-_hi__261401e_len_30_end:
-___261404e_len_400:
-.incbin "bin/PAPERMARIO.261404E.___261404e_len_400.bin"
-___261404e_len_400_end:
-_ho__261444e_len_30:
-.incbin "bin/PAPERMARIO.261444E._ho__261444e_len_30.bin"
-_ho__261444e_len_30_end:
+_ha__2613f6e:
+.incbin "bin/PAPERMARIO.2613F6E._ha__2613f6e.bin"
+_ha__2613f6e_end:
+___2613f9e:
+.incbin "bin/PAPERMARIO.2613F9E.___2613f9e.bin"
+___2613f9e_end:
+_hi__261401e:
+.incbin "bin/PAPERMARIO.261401E._hi__261401e.bin"
+_hi__261401e_end:
+___261404e:
+.incbin "bin/PAPERMARIO.261404E.___261404e.bin"
+___261404e_end:
+_ho__261444e:
+.incbin "bin/PAPERMARIO.261444E._ho__261444e.bin"
+_ho__261444e_end:
 # Unknown region 261447E-2614CBE [840]
 .incbin "bin/PAPERMARIO.261447E.bin"
 
-_ho__2614cbe_len_30:
-.incbin "bin/PAPERMARIO.2614CBE._ho__2614cbe_len_30.bin"
-_ho__2614cbe_len_30_end:
+_ho__2614cbe:
+.incbin "bin/PAPERMARIO.2614CBE._ho__2614cbe.bin"
+_ho__2614cbe_end:
 # Unknown region 2614CEE-261510E [420]
 .incbin "bin/PAPERMARIO.2614CEE.bin"
 
-_ho__261510e_len_30:
-.incbin "bin/PAPERMARIO.261510E._ho__261510e_len_30.bin"
-_ho__261510e_len_30_end:
+_ho__261510e:
+.incbin "bin/PAPERMARIO.261510E._ho__261510e.bin"
+_ho__261510e_end:
 # Unknown region 261513E-26151DE [A0]
 .incbin "bin/PAPERMARIO.261513E.bin"
 
-_hu__26151de_len_30:
-.incbin "bin/PAPERMARIO.26151DE._hu__26151de_len_30.bin"
-_hu__26151de_len_30_end:
+_hu__26151de:
+.incbin "bin/PAPERMARIO.26151DE._hu__26151de.bin"
+_hu__26151de_end:
 # Unknown region 261520E-261542E [220]
 .incbin "bin/PAPERMARIO.261520E.bin"
 
-_iw__261542e_len_30:
-.incbin "bin/PAPERMARIO.261542E._iw__261542e_len_30.bin"
-_iw__261542e_len_30_end:
+_iw__261542e:
+.incbin "bin/PAPERMARIO.261542E._iw__261542e.bin"
+_iw__261542e_end:
 # Unknown region 261545E-261587E [420]
 .incbin "bin/PAPERMARIO.261545E.bin"
 
-_jiY__261587e_len_30:
-.incbin "bin/PAPERMARIO.261587E._jiY__261587e_len_30.bin"
-_jiY__261587e_len_30_end:
+_jiY__261587e:
+.incbin "bin/PAPERMARIO.261587E._jiY__261587e.bin"
+_jiY__261587e_end:
 # Unknown region 26158AE-26168AE [1000]
 .incbin "bin/PAPERMARIO.26158AE.bin"
 
-_jiJ__26168ae_len_30:
-.incbin "bin/PAPERMARIO.26168AE._jiJ__26168ae_len_30.bin"
-_jiJ__26168ae_len_30_end:
+_jiJ__26168ae:
+.incbin "bin/PAPERMARIO.26168AE._jiJ__26168ae.bin"
+_jiJ__26168ae_end:
 # Unknown region 26168DE-26170FE [820]
 .incbin "bin/PAPERMARIO.26168DE.bin"
 
-_ka__26170fe_len_30:
-.incbin "bin/PAPERMARIO.26170FE._ka__26170fe_len_30.bin"
-_ka__26170fe_len_30_end:
+_ka__26170fe:
+.incbin "bin/PAPERMARIO.26170FE._ka__26170fe.bin"
+_ka__26170fe_end:
 # Unknown region 261712E-261722E [100]
 .incbin "bin/PAPERMARIO.261712E.bin"
 
-_ka__261722e_len_30:
-.incbin "bin/PAPERMARIO.261722E._ka__261722e_len_30.bin"
-_ka__261722e_len_30_end:
-___261725e_len_220:
-.incbin "bin/PAPERMARIO.261725E.___261725e_len_220.bin"
-___261725e_len_220_end:
-_kat__261747e_len_30:
-.incbin "bin/PAPERMARIO.261747E._kat__261747e_len_30.bin"
-_kat__261747e_len_30_end:
-___26174ae_len_220:
-.incbin "bin/PAPERMARIO.26174AE.___26174ae_len_220.bin"
-___26174ae_len_220_end:
-_ka__26176ce_len_30:
-.incbin "bin/PAPERMARIO.26176CE._ka__26176ce_len_30.bin"
-_ka__26176ce_len_30_end:
+_ka__261722e:
+.incbin "bin/PAPERMARIO.261722E._ka__261722e.bin"
+_ka__261722e_end:
+___261725e:
+.incbin "bin/PAPERMARIO.261725E.___261725e.bin"
+___261725e_end:
+_kat__261747e:
+.incbin "bin/PAPERMARIO.261747E._kat__261747e.bin"
+_kat__261747e_end:
+___26174ae:
+.incbin "bin/PAPERMARIO.26174AE.___26174ae.bin"
+___26174ae_end:
+_ka__26176ce:
+.incbin "bin/PAPERMARIO.26176CE._ka__26176ce.bin"
+_ka__26176ce_end:
 # Unknown region 26176FE-261791E [220]
 .incbin "bin/PAPERMARIO.26176FE.bin"
 
-_ki__261791e_len_30:
-.incbin "bin/PAPERMARIO.261791E._ki__261791e_len_30.bin"
-_ki__261791e_len_30_end:
+_ki__261791e:
+.incbin "bin/PAPERMARIO.261791E._ki__261791e.bin"
+_ki__261791e_end:
 # Unknown region 261794E-2617A6E [120]
 .incbin "bin/PAPERMARIO.261794E.bin"
 
-_ki__2617a6e_len_30:
-.incbin "bin/PAPERMARIO.2617A6E._ki__2617a6e_len_30.bin"
-_ki__2617a6e_len_30_end:
-___2617a9e_len_800:
-.incbin "bin/PAPERMARIO.2617A9E.___2617a9e_len_800.bin"
-___2617a9e_len_800_end:
-_ko__261829e_len_30:
-.incbin "bin/PAPERMARIO.261829E._ko__261829e_len_30.bin"
-_ko__261829e_len_30_end:
+_ki__2617a6e:
+.incbin "bin/PAPERMARIO.2617A6E._ki__2617a6e.bin"
+_ki__2617a6e_end:
+___2617a9e:
+.incbin "bin/PAPERMARIO.2617A9E.___2617a9e.bin"
+___2617a9e_end:
+_ko__261829e:
+.incbin "bin/PAPERMARIO.261829E._ko__261829e.bin"
+_ko__261829e_end:
 # Unknown region 26182CE-26192CE [1000]
 .incbin "bin/PAPERMARIO.26182CE.bin"
 
-_ku__26192ce_len_30:
-.incbin "bin/PAPERMARIO.26192CE._ku__26192ce_len_30.bin"
-_ku__26192ce_len_30_end:
+_ku__26192ce:
+.incbin "bin/PAPERMARIO.26192CE._ku__26192ce.bin"
+_ku__26192ce_end:
 # Unknown region 26192FE-2619AFE [800]
 .incbin "bin/PAPERMARIO.26192FE.bin"
 
-_ku__2619afe_len_30:
-.incbin "bin/PAPERMARIO.2619AFE._ku__2619afe_len_30.bin"
-_ku__2619afe_len_30_end:
+_ku__2619afe:
+.incbin "bin/PAPERMARIO.2619AFE._ku__2619afe.bin"
+_ku__2619afe_end:
 # Unknown region 2619B2E-261A32E [800]
 .incbin "bin/PAPERMARIO.2619B2E.bin"
 
-_ku__261a32e_len_30:
-.incbin "bin/PAPERMARIO.261A32E._ku__261a32e_len_30.bin"
-_ku__261a32e_len_30_end:
+_ku__261a32e:
+.incbin "bin/PAPERMARIO.261A32E._ku__261a32e.bin"
+_ku__261a32e_end:
 # Unknown region 261A35E-261AB5E [800]
 .incbin "bin/PAPERMARIO.261A35E.bin"
 
-_ku__261ab5e_len_30:
-.incbin "bin/PAPERMARIO.261AB5E._ku__261ab5e_len_30.bin"
-_ku__261ab5e_len_30_end:
+_ku__261ab5e:
+.incbin "bin/PAPERMARIO.261AB5E._ku__261ab5e.bin"
+_ku__261ab5e_end:
 # Unknown region 261AB8E-261BB8E [1000]
 .incbin "bin/PAPERMARIO.261AB8E.bin"
 
-_ku__261bb8e_len_30:
-.incbin "bin/PAPERMARIO.261BB8E._ku__261bb8e_len_30.bin"
-_ku__261bb8e_len_30_end:
+_ku__261bb8e:
+.incbin "bin/PAPERMARIO.261BB8E._ku__261bb8e.bin"
+_ku__261bb8e_end:
 # Unknown region 261BBBE-261CBBE [1000]
 .incbin "bin/PAPERMARIO.261BBBE.bin"
 
-_ku__261cbbe_len_30:
-.incbin "bin/PAPERMARIO.261CBBE._ku__261cbbe_len_30.bin"
-_ku__261cbbe_len_30_end:
+_ku__261cbbe:
+.incbin "bin/PAPERMARIO.261CBBE._ku__261cbbe.bin"
+_ku__261cbbe_end:
 # Unknown region 261CBEE-261D3EE [800]
 .incbin "bin/PAPERMARIO.261CBEE.bin"
 
-_ku__261d3ee_len_30:
-.incbin "bin/PAPERMARIO.261D3EE._ku__261d3ee_len_30.bin"
-_ku__261d3ee_len_30_end:
+_ku__261d3ee:
+.incbin "bin/PAPERMARIO.261D3EE._ku__261d3ee.bin"
+_ku__261d3ee_end:
 # Unknown region 261D41E-261DEBE [AA0]
 .incbin "bin/PAPERMARIO.261D41E.bin"
 
-_ku__261debe_len_30:
-.incbin "bin/PAPERMARIO.261DEBE._ku__261debe_len_30.bin"
-_ku__261debe_len_30_end:
+_ku__261debe:
+.incbin "bin/PAPERMARIO.261DEBE._ku__261debe.bin"
+_ku__261debe_end:
 # Unknown region 261DEEE-261DFEE [100]
 .incbin "bin/PAPERMARIO.261DEEE.bin"
 
-_li__261dfee_len_30:
-.incbin "bin/PAPERMARIO.261DFEE._li__261dfee_len_30.bin"
-_li__261dfee_len_30_end:
+_li__261dfee:
+.incbin "bin/PAPERMARIO.261DFEE._li__261dfee.bin"
+_li__261dfee_end:
 # Unknown region 261E01E-261E41E [400]
 .incbin "bin/PAPERMARIO.261E01E.bin"
 
-_ma__261e41e_len_30:
-.incbin "bin/PAPERMARIO.261E41E._ma__261e41e_len_30.bin"
-_ma__261e41e_len_30_end:
+_ma__261e41e:
+.incbin "bin/PAPERMARIO.261E41E._ma__261e41e.bin"
+_ma__261e41e_end:
 # Unknown region 261E44E-261E4EE [A0]
 .incbin "bin/PAPERMARIO.261E44E.bin"
 
-_mo__261e4ee_len_30:
-.incbin "bin/PAPERMARIO.261E4EE._mo__261e4ee_len_30.bin"
-_mo__261e4ee_len_30_end:
+_mo__261e4ee:
+.incbin "bin/PAPERMARIO.261E4EE._mo__261e4ee.bin"
+_mo__261e4ee_end:
 # Unknown region 261E51E-261E93E [420]
 .incbin "bin/PAPERMARIO.261E51E.bin"
 
-_mo__261e93e_len_30:
-.incbin "bin/PAPERMARIO.261E93E._mo__261e93e_len_30.bin"
-_mo__261e93e_len_30_end:
+_mo__261e93e:
+.incbin "bin/PAPERMARIO.261E93E._mo__261e93e.bin"
+_mo__261e93e_end:
 # Unknown region 261E96E-261F18E [820]
 .incbin "bin/PAPERMARIO.261E96E.bin"
 
-_mo__261f18e_len_30:
-.incbin "bin/PAPERMARIO.261F18E._mo__261f18e_len_30.bin"
-_mo__261f18e_len_30_end:
-___261f1be_len_220:
-.incbin "bin/PAPERMARIO.261F1BE.___261f1be_len_220.bin"
-___261f1be_len_220_end:
-_mo__261f3de_len_30:
-.incbin "bin/PAPERMARIO.261F3DE._mo__261f3de_len_30.bin"
-_mo__261f3de_len_30_end:
+_mo__261f18e:
+.incbin "bin/PAPERMARIO.261F18E._mo__261f18e.bin"
+_mo__261f18e_end:
+___261f1be:
+.incbin "bin/PAPERMARIO.261F1BE.___261f1be.bin"
+___261f1be_end:
+_mo__261f3de:
+.incbin "bin/PAPERMARIO.261F3DE._mo__261f3de.bin"
+_mo__261f3de_end:
 # Unknown region 261F40E-261F80E [400]
 .incbin "bin/PAPERMARIO.261F40E.bin"
 
-_mt__261f80e_len_30:
-.incbin "bin/PAPERMARIO.261F80E._mt__261f80e_len_30.bin"
-_mt__261f80e_len_30_end:
+_mt__261f80e:
+.incbin "bin/PAPERMARIO.261F80E._mt__261f80e.bin"
+_mt__261f80e_end:
 # Unknown region 261F83E-261F8DE [A0]
 .incbin "bin/PAPERMARIO.261F83E.bin"
 
-_na__261f8de_len_30:
-.incbin "bin/PAPERMARIO.261F8DE._na__261f8de_len_30.bin"
-_na__261f8de_len_30_end:
-___261f90e_len_1000:
-.incbin "bin/PAPERMARIO.261F90E.___261f90e_len_1000.bin"
-___261f90e_len_1000_end:
-_oc__262090e_len_30:
-.incbin "bin/PAPERMARIO.262090E._oc__262090e_len_30.bin"
-_oc__262090e_len_30_end:
+_na__261f8de:
+.incbin "bin/PAPERMARIO.261F8DE._na__261f8de.bin"
+_na__261f8de_end:
+___261f90e:
+.incbin "bin/PAPERMARIO.261F90E.___261f90e.bin"
+___261f90e_end:
+_oc__262090e:
+.incbin "bin/PAPERMARIO.262090E._oc__262090e.bin"
+_oc__262090e_end:
 # Unknown region 262093E-262115E [820]
 .incbin "bin/PAPERMARIO.262093E.bin"
 
-_piZ__262115e_len_30:
-.incbin "bin/PAPERMARIO.262115E._piZ__262115e_len_30.bin"
-_piZ__262115e_len_30_end:
+_piZ__262115e:
+.incbin "bin/PAPERMARIO.262115E._piZ__262115e.bin"
+_piZ__262115e_end:
 # Unknown region 262118E-262138E [200]
 .incbin "bin/PAPERMARIO.262118E.bin"
 
-_ra__262138e_len_30:
-.incbin "bin/PAPERMARIO.262138E._ra__262138e_len_30.bin"
-_ra__262138e_len_30_end:
+_ra__262138e:
+.incbin "bin/PAPERMARIO.262138E._ra__262138e.bin"
+_ra__262138e_end:
 # Unknown region 26213BE-262145E [A0]
 .incbin "bin/PAPERMARIO.26213BE.bin"
 
-_ra__262145e_len_30:
-.incbin "bin/PAPERMARIO.262145E._ra__262145e_len_30.bin"
-_ra__262145e_len_30_end:
+_ra__262145e:
+.incbin "bin/PAPERMARIO.262145E._ra__262145e.bin"
+_ra__262145e_end:
 # Unknown region 262148E-262152E [A0]
 .incbin "bin/PAPERMARIO.262148E.bin"
 
-_re__262152e_len_30:
-.incbin "bin/PAPERMARIO.262152E._re__262152e_len_30.bin"
-_re__262152e_len_30_end:
+_re__262152e:
+.incbin "bin/PAPERMARIO.262152E._re__262152e.bin"
+_re__262152e_end:
 # Unknown region 262155E-2621D5E [800]
 .incbin "bin/PAPERMARIO.262155E.bin"
 
-_re__2621d5e_len_30:
-.incbin "bin/PAPERMARIO.2621D5E._re__2621d5e_len_30.bin"
-_re__2621d5e_len_30_end:
+_re__2621d5e:
+.incbin "bin/PAPERMARIO.2621D5E._re__2621d5e.bin"
+_re__2621d5e_end:
 # Unknown region 2621D8E-2621FAE [220]
 .incbin "bin/PAPERMARIO.2621D8E.bin"
 
-_re__2621fae_len_30:
-.incbin "bin/PAPERMARIO.2621FAE._re__2621fae_len_30.bin"
-_re__2621fae_len_30_end:
-___2621fde_len_80:
-.incbin "bin/PAPERMARIO.2621FDE.___2621fde_len_80.bin"
-___2621fde_len_80_end:
-_ry__262205e_len_30:
-.incbin "bin/PAPERMARIO.262205E._ry__262205e_len_30.bin"
-_ry__262205e_len_30_end:
-___262208e_len_220:
-.incbin "bin/PAPERMARIO.262208E.___262208e_len_220.bin"
-___262208e_len_220_end:
-_ry__26222ae_len_30:
-.incbin "bin/PAPERMARIO.26222AE._ry__26222ae_len_30.bin"
-_ry__26222ae_len_30_end:
-___26222de_len_220:
-.incbin "bin/PAPERMARIO.26222DE.___26222de_len_220.bin"
-___26222de_len_220_end:
-_ryz__26224fe_len_30:
-.incbin "bin/PAPERMARIO.26224FE._ryz__26224fe_len_30.bin"
-_ryz__26224fe_len_30_end:
+_re__2621fae:
+.incbin "bin/PAPERMARIO.2621FAE._re__2621fae.bin"
+_re__2621fae_end:
+___2621fde:
+.incbin "bin/PAPERMARIO.2621FDE.___2621fde.bin"
+___2621fde_end:
+_ry__262205e:
+.incbin "bin/PAPERMARIO.262205E._ry__262205e.bin"
+_ry__262205e_end:
+___262208e:
+.incbin "bin/PAPERMARIO.262208E.___262208e.bin"
+___262208e_end:
+_ry__26222ae:
+.incbin "bin/PAPERMARIO.26222AE._ry__26222ae.bin"
+_ry__26222ae_end:
+___26222de:
+.incbin "bin/PAPERMARIO.26222DE.___26222de.bin"
+___26222de_end:
+_ryz__26224fe:
+.incbin "bin/PAPERMARIO.26224FE._ryz__26224fe.bin"
+_ryz__26224fe_end:
 # Unknown region 262252E-2622D2E [800]
 .incbin "bin/PAPERMARIO.262252E.bin"
 
-_sh__2622d2e_len_30:
-.incbin "bin/PAPERMARIO.2622D2E._sh__2622d2e_len_30.bin"
-_sh__2622d2e_len_30_end:
+_sh__2622d2e:
+.incbin "bin/PAPERMARIO.2622D2E._sh__2622d2e.bin"
+_sh__2622d2e_end:
 # Unknown region 2622D5E-2622F5E [200]
 .incbin "bin/PAPERMARIO.2622D5E.bin"
 
-_sh__2622f5e_len_30:
-.incbin "bin/PAPERMARIO.2622F5E._sh__2622f5e_len_30.bin"
-_sh__2622f5e_len_30_end:
+_sh__2622f5e:
+.incbin "bin/PAPERMARIO.2622F5E._sh__2622f5e.bin"
+_sh__2622f5e_end:
 # Unknown region 2622F8E-26230AE [120]
 .incbin "bin/PAPERMARIO.2622F8E.bin"
 
-_si__26230ae_len_30:
-.incbin "bin/PAPERMARIO.26230AE._si__26230ae_len_30.bin"
-_si__26230ae_len_30_end:
+_si__26230ae:
+.incbin "bin/PAPERMARIO.26230AE._si__26230ae.bin"
+_si__26230ae_end:
 # Unknown region 26230DE-26232DE [200]
 .incbin "bin/PAPERMARIO.26230DE.bin"
 
-_st__26232de_len_30:
-.incbin "bin/PAPERMARIO.26232DE._st__26232de_len_30.bin"
-_st__26232de_len_30_end:
+_st__26232de:
+.incbin "bin/PAPERMARIO.26232DE._st__26232de.bin"
+_st__26232de_end:
 # Unknown region 262330E-262342E [120]
 .incbin "bin/PAPERMARIO.262330E.bin"
 
-_stI__262342e_len_30:
-.incbin "bin/PAPERMARIO.262342E._stI__262342e_len_30.bin"
-_stI__262342e_len_30_end:
+_stI__262342e:
+.incbin "bin/PAPERMARIO.262342E._stI__262342e.bin"
+_stI__262342e_end:
 # Unknown region 262345E-26234DE [80]
 .byte 0x00, 0x01, 0x22, 0x10, 0x01, 0x22, 0x10, 0x00, 0x00, 0x12, 0x34, 0x32, 0x23, 0x43, 0x21, 0x00
 .byte 0x00, 0x13, 0x78, 0x65, 0x56, 0x87, 0x31, 0x00, 0x00, 0x13, 0x9E, 0xD9, 0x9D, 0xE9, 0x31, 0x00
@@ -17169,105 +17164,105 @@ _stI__262342e_len_30_end:
 .byte 0x00, 0x00, 0x02, 0x4A, 0xA4, 0x20, 0x00, 0x00, 0x00, 0x00, 0x01, 0x25, 0x52, 0x10, 0x00, 0x00
 .byte 0x00, 0x00, 0x00, 0x12, 0x21, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x10, 0x00, 0x00, 0x00
 
-_st__26234de_len_30:
-.incbin "bin/PAPERMARIO.26234DE._st__26234de_len_30.bin"
-_st__26234de_len_30_end:
+_st__26234de:
+.incbin "bin/PAPERMARIO.26234DE._st__26234de.bin"
+_st__26234de_end:
 # Unknown region 262350E-262390E [400]
 .incbin "bin/PAPERMARIO.262350E.bin"
 
-_st__262390e_len_30:
-.incbin "bin/PAPERMARIO.262390E._st__262390e_len_30.bin"
-_st__262390e_len_30_end:
+_st__262390e:
+.incbin "bin/PAPERMARIO.262390E._st__262390e.bin"
+_st__262390e_end:
 # Unknown region 262393E-262493E [1000]
 .incbin "bin/PAPERMARIO.262393E.bin"
 
-_stf__262493e_len_30:
-.incbin "bin/PAPERMARIO.262493E._stf__262493e_len_30.bin"
-_stf__262493e_len_30_end:
+_stf__262493e:
+.incbin "bin/PAPERMARIO.262493E._stf__262493e.bin"
+_stf__262493e_end:
 # Unknown region 262496E-262596E [1000]
 .incbin "bin/PAPERMARIO.262496E.bin"
 
-_t__262596e_len_30:
-.incbin "bin/PAPERMARIO.262596E._t__262596e_len_30.bin"
-_t__262596e_len_30_end:
+_t__262596e:
+.incbin "bin/PAPERMARIO.262596E._t__262596e.bin"
+_t__262596e_end:
 # Unknown region 262599E-26261BE [820]
 .incbin "bin/PAPERMARIO.262599E.bin"
 
-_t__26261be_len_30:
-.incbin "bin/PAPERMARIO.26261BE._t__26261be_len_30.bin"
-_t__26261be_len_30_end:
+_t__26261be:
+.incbin "bin/PAPERMARIO.26261BE._t__26261be.bin"
+_t__26261be_end:
 # Unknown region 26261EE-262640E [220]
 .incbin "bin/PAPERMARIO.26261EE.bin"
 
-_t__262640e_len_30:
-.incbin "bin/PAPERMARIO.262640E._t__262640e_len_30.bin"
-_t__262640e_len_30_end:
+_t__262640e:
+.incbin "bin/PAPERMARIO.262640E._t__262640e.bin"
+_t__262640e_end:
 # Unknown region 262643E-262665E [220]
 .incbin "bin/PAPERMARIO.262643E.bin"
 
-_t__262665e_len_30:
-.incbin "bin/PAPERMARIO.262665E._t__262665e_len_30.bin"
-_t__262665e_len_30_end:
+_t__262665e:
+.incbin "bin/PAPERMARIO.262665E._t__262665e.bin"
+_t__262665e_end:
 # Unknown region 262668E-2626AAE [420]
 .incbin "bin/PAPERMARIO.262668E.bin"
 
-_tu__2626aae_len_30:
-.incbin "bin/PAPERMARIO.2626AAE._tu__2626aae_len_30.bin"
-_tu__2626aae_len_30_end:
+_tu__2626aae:
+.incbin "bin/PAPERMARIO.2626AAE._tu__2626aae.bin"
+_tu__2626aae_end:
 # Unknown region 2626ADE-2626BFE [120]
 .incbin "bin/PAPERMARIO.2626ADE.bin"
 
-_wa__2626bfe_len_30:
-.incbin "bin/PAPERMARIO.2626BFE._wa__2626bfe_len_30.bin"
-_wa__2626bfe_len_30_end:
-___2626c2e_len_220:
-.incbin "bin/PAPERMARIO.2626C2E.___2626c2e_len_220.bin"
-___2626c2e_len_220_end:
-_wa__2626e4e_len_30:
-.incbin "bin/PAPERMARIO.2626E4E._wa__2626e4e_len_30.bin"
-_wa__2626e4e_len_30_end:
+_wa__2626bfe:
+.incbin "bin/PAPERMARIO.2626BFE._wa__2626bfe.bin"
+_wa__2626bfe_end:
+___2626c2e:
+.incbin "bin/PAPERMARIO.2626C2E.___2626c2e.bin"
+___2626c2e_end:
+_wa__2626e4e:
+.incbin "bin/PAPERMARIO.2626E4E._wa__2626e4e.bin"
+_wa__2626e4e_end:
 # Unknown region 2626E7E-2627E7E [1000]
 .incbin "bin/PAPERMARIO.2626E7E.bin"
 
-_wa__2627e7e_len_30:
-.incbin "bin/PAPERMARIO.2627E7E._wa__2627e7e_len_30.bin"
-_wa__2627e7e_len_30_end:
-___2627eae_len_800:
-.incbin "bin/PAPERMARIO.2627EAE.___2627eae_len_800.bin"
-___2627eae_len_800_end:
-_ye__26286ae_len_30:
-.incbin "bin/PAPERMARIO.26286AE._ye__26286ae_len_30.bin"
-_ye__26286ae_len_30_end:
+_wa__2627e7e:
+.incbin "bin/PAPERMARIO.2627E7E._wa__2627e7e.bin"
+_wa__2627e7e_end:
+___2627eae:
+.incbin "bin/PAPERMARIO.2627EAE.___2627eae.bin"
+___2627eae_end:
+_ye__26286ae:
+.incbin "bin/PAPERMARIO.26286AE._ye__26286ae.bin"
+_ye__26286ae_end:
 # Unknown region 26286DE-26287FE [120]
 .incbin "bin/PAPERMARIO.26286DE.bin"
 
-_yu__26287fe_len_30:
-.incbin "bin/PAPERMARIO.26287FE._yu__26287fe_len_30.bin"
-_yu__26287fe_len_30_end:
-___262882e_len_120:
-.incbin "bin/PAPERMARIO.262882E.___262882e_len_120.bin"
-___262882e_len_120_end:
-_yu__262894e_len_30:
-.incbin "bin/PAPERMARIO.262894E._yu__262894e_len_30.bin"
-_yu__262894e_len_30_end:
+_yu__26287fe:
+.incbin "bin/PAPERMARIO.26287FE._yu__26287fe.bin"
+_yu__26287fe_end:
+___262882e:
+.incbin "bin/PAPERMARIO.262882E.___262882e.bin"
+___262882e_end:
+_yu__262894e:
+.incbin "bin/PAPERMARIO.262894E._yu__262894e.bin"
+_yu__262894e_end:
 # Unknown region 262897E-264D1DE [24860]
 .incbin "bin/PAPERMARIO.262897E.bin"
 
-_be__264d1de_len_30:
-.incbin "bin/PAPERMARIO.264D1DE._be__264d1de_len_30.bin"
-_be__264d1de_len_30_end:
-___264d20e_len_a0:
-.incbin "bin/PAPERMARIO.264D20E.___264d20e_len_a0.bin"
-___264d20e_len_a0_end:
-_bl__264d2ae_len_30:
-.incbin "bin/PAPERMARIO.264D2AE._bl__264d2ae_len_30.bin"
-_bl__264d2ae_len_30_end:
+_be__264d1de:
+.incbin "bin/PAPERMARIO.264D1DE._be__264d1de.bin"
+_be__264d1de_end:
+___264d20e:
+.incbin "bin/PAPERMARIO.264D20E.___264d20e.bin"
+___264d20e_end:
+_bl__264d2ae:
+.incbin "bin/PAPERMARIO.264D2AE._bl__264d2ae.bin"
+_bl__264d2ae_end:
 # Unknown region 264D2DE-264D4DE [200]
 .incbin "bin/PAPERMARIO.264D2DE.bin"
 
-_br__264d4de_len_30:
-.incbin "bin/PAPERMARIO.264D4DE._br__264d4de_len_30.bin"
-_br__264d4de_len_30_end:
+_br__264d4de:
+.incbin "bin/PAPERMARIO.264D4DE._br__264d4de.bin"
+_br__264d4de_end:
 # Unknown region 264D50E-264D58E [80]
 .byte 0x21, 0x21, 0x12, 0x11, 0x22, 0x12, 0x13, 0x22, 0x22, 0x33, 0x33, 0x33, 0x23, 0x21, 0x32, 0x31
 .byte 0x13, 0x34, 0x43, 0x44, 0x44, 0x33, 0x44, 0x22, 0x15, 0x78, 0x78, 0x77, 0x67, 0x65, 0x34, 0x42
@@ -17278,426 +17273,426 @@ _br__264d4de_len_30_end:
 .byte 0x1B, 0xBB, 0xBA, 0xAA, 0x99, 0xAA, 0x9A, 0x83, 0x1C, 0xBB, 0xA9, 0xBA, 0xBB, 0xBB, 0xBC, 0x94
 .byte 0x2D, 0xCD, 0xCC, 0xCC, 0xCD, 0xDD, 0xDD, 0xA4, 0x22, 0x22, 0x22, 0x11, 0x12, 0x23, 0x32, 0x21
 
-_ch__264d58e_len_30:
-.incbin "bin/PAPERMARIO.264D58E._ch__264d58e_len_30.bin"
-_ch__264d58e_len_30_end:
-___264d5be_len_2a0:
-.incbin "bin/PAPERMARIO.264D5BE.___264d5be_len_2a0.bin"
-___264d5be_len_2a0_end:
-_de__264d85e_len_30:
-.incbin "bin/PAPERMARIO.264D85E._de__264d85e_len_30.bin"
-_de__264d85e_len_30_end:
-___264d88e_len_420:
-.incbin "bin/PAPERMARIO.264D88E.___264d88e_len_420.bin"
-___264d88e_len_420_end:
-_do__264dcae_len_30:
-.incbin "bin/PAPERMARIO.264DCAE._do__264dcae_len_30.bin"
-_do__264dcae_len_30_end:
+_ch__264d58e:
+.incbin "bin/PAPERMARIO.264D58E._ch__264d58e.bin"
+_ch__264d58e_end:
+___264d5be:
+.incbin "bin/PAPERMARIO.264D5BE.___264d5be.bin"
+___264d5be_end:
+_de__264d85e:
+.incbin "bin/PAPERMARIO.264D85E._de__264d85e.bin"
+_de__264d85e_end:
+___264d88e:
+.incbin "bin/PAPERMARIO.264D88E.___264d88e.bin"
+___264d88e_end:
+_do__264dcae:
+.incbin "bin/PAPERMARIO.264DCAE._do__264dcae.bin"
+_do__264dcae_end:
 # Unknown region 264DCDE-264E0FE [420]
 .incbin "bin/PAPERMARIO.264DCDE.bin"
 
-_flz__264e0fe_len_30:
-.incbin "bin/PAPERMARIO.264E0FE._flz__264e0fe_len_30.bin"
-_flz__264e0fe_len_30_end:
-___264e12e_len_a0:
-.incbin "bin/PAPERMARIO.264E12E.___264e12e_len_a0.bin"
-___264e12e_len_a0_end:
-_fl__264e1ce_len_30:
-.incbin "bin/PAPERMARIO.264E1CE._fl__264e1ce_len_30.bin"
-_fl__264e1ce_len_30_end:
+_flz__264e0fe:
+.incbin "bin/PAPERMARIO.264E0FE._flz__264e0fe.bin"
+_flz__264e0fe_end:
+___264e12e:
+.incbin "bin/PAPERMARIO.264E12E.___264e12e.bin"
+___264e12e_end:
+_fl__264e1ce:
+.incbin "bin/PAPERMARIO.264E1CE._fl__264e1ce.bin"
+_fl__264e1ce_end:
 # Unknown region 264E1FE-264E3FE [200]
 .incbin "bin/PAPERMARIO.264E1FE.bin"
 
-_fr__264e3fe_len_30:
-.incbin "bin/PAPERMARIO.264E3FE._fr__264e3fe_len_30.bin"
-_fr__264e3fe_len_30_end:
-___264e42e_len_820:
-.incbin "bin/PAPERMARIO.264E42E.___264e42e_len_820.bin"
-___264e42e_len_820_end:
-_fu__264ec4e_len_30:
-.incbin "bin/PAPERMARIO.264EC4E._fu__264ec4e_len_30.bin"
-_fu__264ec4e_len_30_end:
-___264ec7e_len_200:
-.incbin "bin/PAPERMARIO.264EC7E.___264ec7e_len_200.bin"
-___264ec7e_len_200_end:
-___264ee7e_len_80:
-.incbin "bin/PAPERMARIO.264EE7E.___264ee7e_len_80.bin"
-___264ee7e_len_80_end:
-_ga__264eefe_len_30:
-.incbin "bin/PAPERMARIO.264EEFE._ga__264eefe_len_30.bin"
-_ga__264eefe_len_30_end:
+_fr__264e3fe:
+.incbin "bin/PAPERMARIO.264E3FE._fr__264e3fe.bin"
+_fr__264e3fe_end:
+___264e42e:
+.incbin "bin/PAPERMARIO.264E42E.___264e42e.bin"
+___264e42e_end:
+_fu__264ec4e:
+.incbin "bin/PAPERMARIO.264EC4E._fu__264ec4e.bin"
+_fu__264ec4e_end:
+___264ec7e:
+.incbin "bin/PAPERMARIO.264EC7E.___264ec7e.bin"
+___264ec7e_end:
+___264ee7e:
+.incbin "bin/PAPERMARIO.264EE7E.___264ee7e.bin"
+___264ee7e_end:
+_ga__264eefe:
+.incbin "bin/PAPERMARIO.264EEFE._ga__264eefe.bin"
+_ga__264eefe_end:
 # Unknown region 264EF2E-264F74E [820]
 .incbin "bin/PAPERMARIO.264EF2E.bin"
 
-_ga__264f74e_len_30:
-.incbin "bin/PAPERMARIO.264F74E._ga__264f74e_len_30.bin"
-_ga__264f74e_len_30_end:
+_ga__264f74e:
+.incbin "bin/PAPERMARIO.264F74E._ga__264f74e.bin"
+_ga__264f74e_end:
 # Unknown region 264F77E-265077E [1000]
 .incbin "bin/PAPERMARIO.264F77E.bin"
 
-_grkg__265077e_len_30:
-.incbin "bin/PAPERMARIO.265077E._grkg__265077e_len_30.bin"
-_grkg__265077e_len_30_end:
+_grkg__265077e:
+.incbin "bin/PAPERMARIO.265077E._grkg__265077e.bin"
+_grkg__265077e_end:
 # Unknown region 26507AE-2650FAE [800]
 .incbin "bin/PAPERMARIO.26507AE.bin"
 
-_gr__2650fae_len_30:
-.incbin "bin/PAPERMARIO.2650FAE._gr__2650fae_len_30.bin"
-_gr__2650fae_len_30_end:
-___2650fde_len_2a0:
-.incbin "bin/PAPERMARIO.2650FDE.___2650fde_len_2a0.bin"
-___2650fde_len_2a0_end:
-_ha__265127e_len_30:
-.incbin "bin/PAPERMARIO.265127E._ha__265127e_len_30.bin"
-_ha__265127e_len_30_end:
-___26512ae_len_420:
-.incbin "bin/PAPERMARIO.26512AE.___26512ae_len_420.bin"
-___26512ae_len_420_end:
-_ho__26516ce_len_30:
-.incbin "bin/PAPERMARIO.26516CE._ho__26516ce_len_30.bin"
-_ho__26516ce_len_30_end:
+_gr__2650fae:
+.incbin "bin/PAPERMARIO.2650FAE._gr__2650fae.bin"
+_gr__2650fae_end:
+___2650fde:
+.incbin "bin/PAPERMARIO.2650FDE.___2650fde.bin"
+___2650fde_end:
+_ha__265127e:
+.incbin "bin/PAPERMARIO.265127E._ha__265127e.bin"
+_ha__265127e_end:
+___26512ae:
+.incbin "bin/PAPERMARIO.26512AE.___26512ae.bin"
+___26512ae_end:
+_ho__26516ce:
+.incbin "bin/PAPERMARIO.26516CE._ho__26516ce.bin"
+_ho__26516ce_end:
 # Unknown region 26516FE-26518FE [200]
 .incbin "bin/PAPERMARIO.26516FE.bin"
 
-_i__26518fe_len_30:
-.incbin "bin/PAPERMARIO.26518FE._i__26518fe_len_30.bin"
-_i__26518fe_len_30_end:
+_i__26518fe:
+.incbin "bin/PAPERMARIO.26518FE._i__26518fe.bin"
+_i__26518fe_end:
 # Unknown region 265192E-2651B2E [200]
 .incbin "bin/PAPERMARIO.265192E.bin"
 
-_iw__2651b2e_len_30:
-.incbin "bin/PAPERMARIO.2651B2E._iw__2651b2e_len_30.bin"
-_iw__2651b2e_len_30_end:
+_iw__2651b2e:
+.incbin "bin/PAPERMARIO.2651B2E._iw__2651b2e.bin"
+_iw__2651b2e_end:
 # Unknown region 2651B5E-2652B5E [1000]
 .incbin "bin/PAPERMARIO.2651B5E.bin"
 
-_iwc__2652b5e_len_30:
-.incbin "bin/PAPERMARIO.2652B5E._iwc__2652b5e_len_30.bin"
-_iwc__2652b5e_len_30_end:
+_iwc__2652b5e:
+.incbin "bin/PAPERMARIO.2652B5E._iwc__2652b5e.bin"
+_iwc__2652b5e_end:
 # Unknown region 2652B8E-2653B8E [1000]
 .incbin "bin/PAPERMARIO.2652B8E.bin"
 
-_jiaR__2653b8e_len_30:
-.incbin "bin/PAPERMARIO.2653B8E._jiaR__2653b8e_len_30.bin"
-_jiaR__2653b8e_len_30_end:
+_jiaR__2653b8e:
+.incbin "bin/PAPERMARIO.2653B8E._jiaR__2653b8e.bin"
+_jiaR__2653b8e_end:
 # Unknown region 2653BBE-2654BBE [1000]
 .incbin "bin/PAPERMARIO.2653BBE.bin"
 
-_ji__2654bbe_len_30:
-.incbin "bin/PAPERMARIO.2654BBE._ji__2654bbe_len_30.bin"
-_ji__2654bbe_len_30_end:
+_ji__2654bbe:
+.incbin "bin/PAPERMARIO.2654BBE._ji__2654bbe.bin"
+_ji__2654bbe_end:
 # Unknown region 2654BEE-265542E [840]
 .incbin "bin/PAPERMARIO.2654BEE.bin"
 
-_ji__265542e_len_30:
-.incbin "bin/PAPERMARIO.265542E._ji__265542e_len_30.bin"
-_ji__265542e_len_30_end:
+_ji__265542e:
+.incbin "bin/PAPERMARIO.265542E._ji__265542e.bin"
+_ji__265542e_end:
 # Unknown region 265545E-2655C7E [820]
 .incbin "bin/PAPERMARIO.265545E.bin"
 
-_k__2655c7e_len_30:
-.incbin "bin/PAPERMARIO.2655C7E._k__2655c7e_len_30.bin"
-_k__2655c7e_len_30_end:
-_A__2655cae_len_1000:
-.incbin "bin/PAPERMARIO.2655CAE._A__2655cae_len_1000.bin"
-_A__2655cae_len_1000_end:
-_k__2656cae_len_30:
-.incbin "bin/PAPERMARIO.2656CAE._k__2656cae_len_30.bin"
-_k__2656cae_len_30_end:
-_UU__2656cde_len_420:
-.incbin "bin/PAPERMARIO.2656CDE._UU__2656cde_len_420.bin"
-_UU__2656cde_len_420_end:
-_ka__26570fe_len_30:
-.incbin "bin/PAPERMARIO.26570FE._ka__26570fe_len_30.bin"
-_ka__26570fe_len_30_end:
-___265712e_len_100:
-.incbin "bin/PAPERMARIO.265712E.___265712e_len_100.bin"
-___265712e_len_100_end:
-_ka__265722e_len_30:
-.incbin "bin/PAPERMARIO.265722E._ka__265722e_len_30.bin"
-_ka__265722e_len_30_end:
-___265725e_len_100:
-.incbin "bin/PAPERMARIO.265725E.___265725e_len_100.bin"
-___265725e_len_100_end:
-_ke__265735e_len_30:
-.incbin "bin/PAPERMARIO.265735E._ke__265735e_len_30.bin"
-_ke__265735e_len_30_end:
+_k__2655c7e:
+.incbin "bin/PAPERMARIO.2655C7E._k__2655c7e.bin"
+_k__2655c7e_end:
+_A__2655cae:
+.incbin "bin/PAPERMARIO.2655CAE._A__2655cae.bin"
+_A__2655cae_end:
+_k__2656cae:
+.incbin "bin/PAPERMARIO.2656CAE._k__2656cae.bin"
+_k__2656cae_end:
+_UU__2656cde:
+.incbin "bin/PAPERMARIO.2656CDE._UU__2656cde.bin"
+_UU__2656cde_end:
+_ka__26570fe:
+.incbin "bin/PAPERMARIO.26570FE._ka__26570fe.bin"
+_ka__26570fe_end:
+___265712e:
+.incbin "bin/PAPERMARIO.265712E.___265712e.bin"
+___265712e_end:
+_ka__265722e:
+.incbin "bin/PAPERMARIO.265722E._ka__265722e.bin"
+_ka__265722e_end:
+___265725e:
+.incbin "bin/PAPERMARIO.265725E.___265725e.bin"
+___265725e_end:
+_ke__265735e:
+.incbin "bin/PAPERMARIO.265735E._ke__265735e.bin"
+_ke__265735e_end:
 # Unknown region 265738E-265838E [1000]
 .incbin "bin/PAPERMARIO.265738E.bin"
 
-_ki__265838e_len_30:
-.incbin "bin/PAPERMARIO.265838E._ki__265838e_len_30.bin"
-_ki__265838e_len_30_end:
-___26583be_len_420:
-.incbin "bin/PAPERMARIO.26583BE.___26583be_len_420.bin"
-___26583be_len_420_end:
-_ku__26587de_len_30:
-.incbin "bin/PAPERMARIO.26587DE._ku__26587de_len_30.bin"
-_ku__26587de_len_30_end:
+_ki__265838e:
+.incbin "bin/PAPERMARIO.265838E._ki__265838e.bin"
+_ki__265838e_end:
+___26583be:
+.incbin "bin/PAPERMARIO.26583BE.___26583be.bin"
+___26583be_end:
+_ku__26587de:
+.incbin "bin/PAPERMARIO.26587DE._ku__26587de.bin"
+_ku__26587de_end:
 # Unknown region 265880E-265980E [1000]
 .incbin "bin/PAPERMARIO.265880E.bin"
 
-_ku__265980e_len_30:
-.incbin "bin/PAPERMARIO.265980E._ku__265980e_len_30.bin"
-_ku__265980e_len_30_end:
+_ku__265980e:
+.incbin "bin/PAPERMARIO.265980E._ku__265980e.bin"
+_ku__265980e_end:
 # Unknown region 265983E-265A03E [800]
 .incbin "bin/PAPERMARIO.265983E.bin"
 
-_ku__265a03e_len_30:
-.incbin "bin/PAPERMARIO.265A03E._ku__265a03e_len_30.bin"
-_ku__265a03e_len_30_end:
+_ku__265a03e:
+.incbin "bin/PAPERMARIO.265A03E._ku__265a03e.bin"
+_ku__265a03e_end:
 # Unknown region 265A06E-265A10E [A0]
 .incbin "bin/PAPERMARIO.265A06E.bin"
 
-_ku__265a10e_len_30:
-.incbin "bin/PAPERMARIO.265A10E._ku__265a10e_len_30.bin"
-_ku__265a10e_len_30_end:
+_ku__265a10e:
+.incbin "bin/PAPERMARIO.265A10E._ku__265a10e.bin"
+_ku__265a10e_end:
 # Unknown region 265A13E-265A25E [120]
 .incbin "bin/PAPERMARIO.265A13E.bin"
 
-_ma__265a25e_len_30:
-.incbin "bin/PAPERMARIO.265A25E._ma__265a25e_len_30.bin"
-_ma__265a25e_len_30_end:
-___265a28e_len_820:
-.incbin "bin/PAPERMARIO.265A28E.___265a28e_len_820.bin"
-___265a28e_len_820_end:
-_ma__265aaae_len_30:
-.incbin "bin/PAPERMARIO.265AAAE._ma__265aaae_len_30.bin"
-_ma__265aaae_len_30_end:
-___265aade_len_420:
-.incbin "bin/PAPERMARIO.265AADE.___265aade_len_420.bin"
-___265aade_len_420_end:
-_ma__265aefe_len_30:
-.incbin "bin/PAPERMARIO.265AEFE._ma__265aefe_len_30.bin"
-_ma__265aefe_len_30_end:
-___265af2e_len_a0:
-.incbin "bin/PAPERMARIO.265AF2E.___265af2e_len_a0.bin"
-___265af2e_len_a0_end:
-_ma__265afce_len_30:
-.incbin "bin/PAPERMARIO.265AFCE._ma__265afce_len_30.bin"
-_ma__265afce_len_30_end:
+_ma__265a25e:
+.incbin "bin/PAPERMARIO.265A25E._ma__265a25e.bin"
+_ma__265a25e_end:
+___265a28e:
+.incbin "bin/PAPERMARIO.265A28E.___265a28e.bin"
+___265a28e_end:
+_ma__265aaae:
+.incbin "bin/PAPERMARIO.265AAAE._ma__265aaae.bin"
+_ma__265aaae_end:
+___265aade:
+.incbin "bin/PAPERMARIO.265AADE.___265aade.bin"
+___265aade_end:
+_ma__265aefe:
+.incbin "bin/PAPERMARIO.265AEFE._ma__265aefe.bin"
+_ma__265aefe_end:
+___265af2e:
+.incbin "bin/PAPERMARIO.265AF2E.___265af2e.bin"
+___265af2e_end:
+_ma__265afce:
+.incbin "bin/PAPERMARIO.265AFCE._ma__265afce.bin"
+_ma__265afce_end:
 # Unknown region 265AFFE-265B81E [820]
 .incbin "bin/PAPERMARIO.265AFFE.bin"
 
-_ma__265b81e_len_30:
-.incbin "bin/PAPERMARIO.265B81E._ma__265b81e_len_30.bin"
-_ma__265b81e_len_30_end:
+_ma__265b81e:
+.incbin "bin/PAPERMARIO.265B81E._ma__265b81e.bin"
+_ma__265b81e_end:
 # Unknown region 265B84E-265C06E [820]
 .incbin "bin/PAPERMARIO.265B84E.bin"
 
-_ma__265c06e_len_30:
-.incbin "bin/PAPERMARIO.265C06E._ma__265c06e_len_30.bin"
-_ma__265c06e_len_30_end:
-___265c09e_len_220:
-.incbin "bin/PAPERMARIO.265C09E.___265c09e_len_220.bin"
-___265c09e_len_220_end:
-_ma__265c2be_len_30:
-.incbin "bin/PAPERMARIO.265C2BE._ma__265c2be_len_30.bin"
-_ma__265c2be_len_30_end:
+_ma__265c06e:
+.incbin "bin/PAPERMARIO.265C06E._ma__265c06e.bin"
+_ma__265c06e_end:
+___265c09e:
+.incbin "bin/PAPERMARIO.265C09E.___265c09e.bin"
+___265c09e_end:
+_ma__265c2be:
+.incbin "bin/PAPERMARIO.265C2BE._ma__265c2be.bin"
+_ma__265c2be_end:
 # Unknown region 265C2EE-265C50E [220]
 .incbin "bin/PAPERMARIO.265C2EE.bin"
 
-_ma__265c50e_len_30:
-.incbin "bin/PAPERMARIO.265C50E._ma__265c50e_len_30.bin"
-_ma__265c50e_len_30_end:
-___265c53e_len_220:
-.incbin "bin/PAPERMARIO.265C53E.___265c53e_len_220.bin"
-___265c53e_len_220_end:
-_ma__265c75e_len_30:
-.incbin "bin/PAPERMARIO.265C75E._ma__265c75e_len_30.bin"
-_ma__265c75e_len_30_end:
-___265c78e_len_220:
-.incbin "bin/PAPERMARIO.265C78E.___265c78e_len_220.bin"
-___265c78e_len_220_end:
-_ma__265c9ae_len_30:
-.incbin "bin/PAPERMARIO.265C9AE._ma__265c9ae_len_30.bin"
-_ma__265c9ae_len_30_end:
-___265c9de_len_220:
-.incbin "bin/PAPERMARIO.265C9DE.___265c9de_len_220.bin"
-___265c9de_len_220_end:
-_ma__265cbfe_len_30:
-.incbin "bin/PAPERMARIO.265CBFE._ma__265cbfe_len_30.bin"
-_ma__265cbfe_len_30_end:
-_UU__265cc2e_len_120:
-.incbin "bin/PAPERMARIO.265CC2E._UU__265cc2e_len_120.bin"
-_UU__265cc2e_len_120_end:
-_me__265cd4e_len_30:
-.incbin "bin/PAPERMARIO.265CD4E._me__265cd4e_len_30.bin"
-_me__265cd4e_len_30_end:
+_ma__265c50e:
+.incbin "bin/PAPERMARIO.265C50E._ma__265c50e.bin"
+_ma__265c50e_end:
+___265c53e:
+.incbin "bin/PAPERMARIO.265C53E.___265c53e.bin"
+___265c53e_end:
+_ma__265c75e:
+.incbin "bin/PAPERMARIO.265C75E._ma__265c75e.bin"
+_ma__265c75e_end:
+___265c78e:
+.incbin "bin/PAPERMARIO.265C78E.___265c78e.bin"
+___265c78e_end:
+_ma__265c9ae:
+.incbin "bin/PAPERMARIO.265C9AE._ma__265c9ae.bin"
+_ma__265c9ae_end:
+___265c9de:
+.incbin "bin/PAPERMARIO.265C9DE.___265c9de.bin"
+___265c9de_end:
+_ma__265cbfe:
+.incbin "bin/PAPERMARIO.265CBFE._ma__265cbfe.bin"
+_ma__265cbfe_end:
+_UU__265cc2e:
+.incbin "bin/PAPERMARIO.265CC2E._UU__265cc2e.bin"
+_UU__265cc2e_end:
+_me__265cd4e:
+.incbin "bin/PAPERMARIO.265CD4E._me__265cd4e.bin"
+_me__265cd4e_end:
 # Unknown region 265CD7E-265DD7E [1000]
 .incbin "bin/PAPERMARIO.265CD7E.bin"
 
-_mi__265dd7e_len_30:
-.incbin "bin/PAPERMARIO.265DD7E._mi__265dd7e_len_30.bin"
-_mi__265dd7e_len_30_end:
-___265ddae_len_220:
-.incbin "bin/PAPERMARIO.265DDAE.___265ddae_len_220.bin"
-___265ddae_len_220_end:
-_mt__265dfce_len_30:
-.incbin "bin/PAPERMARIO.265DFCE._mt__265dfce_len_30.bin"
-_mt__265dfce_len_30_end:
+_mi__265dd7e:
+.incbin "bin/PAPERMARIO.265DD7E._mi__265dd7e.bin"
+_mi__265dd7e_end:
+___265ddae:
+.incbin "bin/PAPERMARIO.265DDAE.___265ddae.bin"
+___265ddae_end:
+_mt__265dfce:
+.incbin "bin/PAPERMARIO.265DFCE._mt__265dfce.bin"
+_mt__265dfce_end:
 # Unknown region 265DFFE-265E09E [A0]
 .incbin "bin/PAPERMARIO.265DFFE.bin"
 
-_osIj__265e09e_len_30:
-.incbin "bin/PAPERMARIO.265E09E._osIj__265e09e_len_30.bin"
-_osIj__265e09e_len_30_end:
+_osIj__265e09e:
+.incbin "bin/PAPERMARIO.265E09E._osIj__265e09e.bin"
+_osIj__265e09e_end:
 # Unknown region 265E0CE-265E2EE [220]
 .incbin "bin/PAPERMARIO.265E0CE.bin"
 
-_os__265e2ee_len_30:
-.incbin "bin/PAPERMARIO.265E2EE._os__265e2ee_len_30.bin"
-_os__265e2ee_len_30_end:
+_os__265e2ee:
+.incbin "bin/PAPERMARIO.265E2EE._os__265e2ee.bin"
+_os__265e2ee_end:
 # Unknown region 265E31E-265E53E [220]
 .incbin "bin/PAPERMARIO.265E31E.bin"
 
-_os__265e53e_len_30:
-.incbin "bin/PAPERMARIO.265E53E._os__265e53e_len_30.bin"
-_os__265e53e_len_30_end:
+_os__265e53e:
+.incbin "bin/PAPERMARIO.265E53E._os__265e53e.bin"
+_os__265e53e_end:
 # Unknown region 265E56E-265ED6E [800]
 .incbin "bin/PAPERMARIO.265E56E.bin"
 
-_pl__265ed6e_len_30:
-.incbin "bin/PAPERMARIO.265ED6E._pl__265ed6e_len_30.bin"
-_pl__265ed6e_len_30_end:
+_pl__265ed6e:
+.incbin "bin/PAPERMARIO.265ED6E._pl__265ed6e.bin"
+_pl__265ed6e_end:
 # Unknown region 265ED9E-265F5BE [820]
 .incbin "bin/PAPERMARIO.265ED9E.bin"
 
-_re__265f5be_len_30:
-.incbin "bin/PAPERMARIO.265F5BE._re__265f5be_len_30.bin"
-_re__265f5be_len_30_end:
+_re__265f5be:
+.incbin "bin/PAPERMARIO.265F5BE._re__265f5be.bin"
+_re__265f5be_end:
 # Unknown region 265F5EE-26605EE [1000]
 .incbin "bin/PAPERMARIO.265F5EE.bin"
 
-_ry__26605ee_len_30:
-.incbin "bin/PAPERMARIO.26605EE._ry__26605ee_len_30.bin"
-_ry__26605ee_len_30_end:
+_ry__26605ee:
+.incbin "bin/PAPERMARIO.26605EE._ry__26605ee.bin"
+_ry__26605ee_end:
 # Unknown region 266061E-266083E [220]
 .incbin "bin/PAPERMARIO.266061E.bin"
 
-_ry__266083e_len_30:
-.incbin "bin/PAPERMARIO.266083E._ry__266083e_len_30.bin"
-_ry__266083e_len_30_end:
+_ry__266083e:
+.incbin "bin/PAPERMARIO.266083E._ry__266083e.bin"
+_ry__266083e_end:
 # Unknown region 266086E-2660A8E [220]
 .incbin "bin/PAPERMARIO.266086E.bin"
 
-_saz__2660a8e_len_30:
-.incbin "bin/PAPERMARIO.2660A8E._saz__2660a8e_len_30.bin"
-_saz__2660a8e_len_30_end:
-___2660abe_len_a0:
-.incbin "bin/PAPERMARIO.2660ABE.___2660abe_len_a0.bin"
-___2660abe_len_a0_end:
-_sh__2660b5e_len_30:
-.incbin "bin/PAPERMARIO.2660B5E._sh__2660b5e_len_30.bin"
-_sh__2660b5e_len_30_end:
-___2660b8e_len_200:
-.incbin "bin/PAPERMARIO.2660B8E.___2660b8e_len_200.bin"
-___2660b8e_len_200_end:
-_sh__2660d8e_len_30:
-.incbin "bin/PAPERMARIO.2660D8E._sh__2660d8e_len_30.bin"
-_sh__2660d8e_len_30_end:
-___2660dbe_len_120:
-.incbin "bin/PAPERMARIO.2660DBE.___2660dbe_len_120.bin"
-___2660dbe_len_120_end:
-_t__2660ede_len_30:
-.incbin "bin/PAPERMARIO.2660EDE._t__2660ede_len_30.bin"
-_t__2660ede_len_30_end:
+_saz__2660a8e:
+.incbin "bin/PAPERMARIO.2660A8E._saz__2660a8e.bin"
+_saz__2660a8e_end:
+___2660abe:
+.incbin "bin/PAPERMARIO.2660ABE.___2660abe.bin"
+___2660abe_end:
+_sh__2660b5e:
+.incbin "bin/PAPERMARIO.2660B5E._sh__2660b5e.bin"
+_sh__2660b5e_end:
+___2660b8e:
+.incbin "bin/PAPERMARIO.2660B8E.___2660b8e.bin"
+___2660b8e_end:
+_sh__2660d8e:
+.incbin "bin/PAPERMARIO.2660D8E._sh__2660d8e.bin"
+_sh__2660d8e_end:
+___2660dbe:
+.incbin "bin/PAPERMARIO.2660DBE.___2660dbe.bin"
+___2660dbe_end:
+_t__2660ede:
+.incbin "bin/PAPERMARIO.2660EDE._t__2660ede.bin"
+_t__2660ede_end:
 # Unknown region 2660F0E-266172E [820]
 .incbin "bin/PAPERMARIO.2660F0E.bin"
 
-_t__266172e_len_30:
-.incbin "bin/PAPERMARIO.266172E._t__266172e_len_30.bin"
-_t__266172e_len_30_end:
+_t__266172e:
+.incbin "bin/PAPERMARIO.266172E._t__266172e.bin"
+_t__266172e_end:
 # Unknown region 266175E-2661F7E [820]
 .incbin "bin/PAPERMARIO.266175E.bin"
 
-_t__2661f7e_len_30:
-.incbin "bin/PAPERMARIO.2661F7E._t__2661f7e_len_30.bin"
-_t__2661f7e_len_30_end:
+_t__2661f7e:
+.incbin "bin/PAPERMARIO.2661F7E._t__2661f7e.bin"
+_t__2661f7e_end:
 # Unknown region 2661FAE-26621CE [220]
 .incbin "bin/PAPERMARIO.2661FAE.bin"
 
-_t__26621ce_len_30:
-.incbin "bin/PAPERMARIO.26621CE._t__26621ce_len_30.bin"
-_t__26621ce_len_30_end:
+_t__26621ce:
+.incbin "bin/PAPERMARIO.26621CE._t__26621ce.bin"
+_t__26621ce_end:
 # Unknown region 26621FE-266241E [220]
 .incbin "bin/PAPERMARIO.26621FE.bin"
 
-_t__266241e_len_30:
-.incbin "bin/PAPERMARIO.266241E._t__266241e_len_30.bin"
-_t__266241e_len_30_end:
+_t__266241e:
+.incbin "bin/PAPERMARIO.266241E._t__266241e.bin"
+_t__266241e_end:
 # Unknown region 266244E-266286E [420]
 .incbin "bin/PAPERMARIO.266244E.bin"
 
-_t__266286e_len_30:
-.incbin "bin/PAPERMARIO.266286E._t__266286e_len_30.bin"
-_t__266286e_len_30_end:
+_t__266286e:
+.incbin "bin/PAPERMARIO.266286E._t__266286e.bin"
+_t__266286e_end:
 # Unknown region 266289E-2662ABE [220]
 .incbin "bin/PAPERMARIO.266289E.bin"
 
-_to__2662abe_len_30:
-.incbin "bin/PAPERMARIO.2662ABE._to__2662abe_len_30.bin"
-_to__2662abe_len_30_end:
+_to__2662abe:
+.incbin "bin/PAPERMARIO.2662ABE._to__2662abe.bin"
+_to__2662abe_end:
 # Unknown region 2662AEE-2662BEE [100]
 .incbin "bin/PAPERMARIO.2662AEE.bin"
 
-_to__2662bee_len_30:
-.incbin "bin/PAPERMARIO.2662BEE._to__2662bee_len_30.bin"
-_to__2662bee_len_30_end:
+_to__2662bee:
+.incbin "bin/PAPERMARIO.2662BEE._to__2662bee.bin"
+_to__2662bee_end:
 # Unknown region 2662C1E-2662E1E [200]
 .incbin "bin/PAPERMARIO.2662C1E.bin"
 
-_toff__2662e1e_len_30:
-.incbin "bin/PAPERMARIO.2662E1E._toff__2662e1e_len_30.bin"
-_toff__2662e1e_len_30_end:
+_toff__2662e1e:
+.incbin "bin/PAPERMARIO.2662E1E._toff__2662e1e.bin"
+_toff__2662e1e_end:
 # Unknown region 2662E4E-266306E [220]
 .incbin "bin/PAPERMARIO.2662E4E.bin"
 
-_wa__266306e_len_30:
-.incbin "bin/PAPERMARIO.266306E._wa__266306e_len_30.bin"
-_wa__266306e_len_30_end:
+_wa__266306e:
+.incbin "bin/PAPERMARIO.266306E._wa__266306e.bin"
+_wa__266306e_end:
 # Unknown region 266309E-266349E [400]
 .incbin "bin/PAPERMARIO.266309E.bin"
 
-_wa__266349e_len_30:
-.incbin "bin/PAPERMARIO.266349E._wa__266349e_len_30.bin"
-_wa__266349e_len_30_end:
+_wa__266349e:
+.incbin "bin/PAPERMARIO.266349E._wa__266349e.bin"
+_wa__266349e_end:
 # Unknown region 26634CE-26638CE [400]
 .incbin "bin/PAPERMARIO.26634CE.bin"
 
-_wa__26638ce_len_30:
-.incbin "bin/PAPERMARIO.26638CE._wa__26638ce_len_30.bin"
-_wa__26638ce_len_30_end:
+_wa__26638ce:
+.incbin "bin/PAPERMARIO.26638CE._wa__26638ce.bin"
+_wa__26638ce_end:
 # Unknown region 26638FE-2663D1E [420]
 .incbin "bin/PAPERMARIO.26638FE.bin"
 
-_ye__2663d1e_len_30:
-.incbin "bin/PAPERMARIO.2663D1E._ye__2663d1e_len_30.bin"
-_ye__2663d1e_len_30_end:
-___2663d4e_len_120:
-.incbin "bin/PAPERMARIO.2663D4E.___2663d4e_len_120.bin"
-___2663d4e_len_120_end:
-_ak__2663e6e_len_30:
-.incbin "bin/PAPERMARIO.2663E6E._ak__2663e6e_len_30.bin"
-_ak__2663e6e_len_30_end:
+_ye__2663d1e:
+.incbin "bin/PAPERMARIO.2663D1E._ye__2663d1e.bin"
+_ye__2663d1e_end:
+___2663d4e:
+.incbin "bin/PAPERMARIO.2663D4E.___2663d4e.bin"
+___2663d4e_end:
+_ak__2663e6e:
+.incbin "bin/PAPERMARIO.2663E6E._ak__2663e6e.bin"
+_ak__2663e6e_end:
 # Unknown region 2663E9E-266409E [200]
 .incbin "bin/PAPERMARIO.2663E9E.bin"
 
-_be__266409e_len_30:
-.incbin "bin/PAPERMARIO.266409E._be__266409e_len_30.bin"
-_be__266409e_len_30_end:
+_be__266409e:
+.incbin "bin/PAPERMARIO.266409E._be__266409e.bin"
+_be__266409e_end:
 # Unknown region 26640CE-266416E [A0]
 .incbin "bin/PAPERMARIO.26640CE.bin"
 
-_bo__266416e_len_30:
-.incbin "bin/PAPERMARIO.266416E._bo__266416e_len_30.bin"
-_bo__266416e_len_30_end:
+_bo__266416e:
+.incbin "bin/PAPERMARIO.266416E._bo__266416e.bin"
+_bo__266416e_end:
 # Unknown region 266419E-26645BE [420]
 .incbin "bin/PAPERMARIO.266419E.bin"
 
-_br__26645be_len_30:
-.incbin "bin/PAPERMARIO.26645BE._br__26645be_len_30.bin"
-_br__26645be_len_30_end:
+_br__26645be:
+.incbin "bin/PAPERMARIO.26645BE._br__26645be.bin"
+_br__26645be_end:
 # Unknown region 26645EE-266466E [80]
 .byte 0x21, 0x21, 0x12, 0x11, 0x22, 0x12, 0x13, 0x22, 0x22, 0x33, 0x33, 0x33, 0x23, 0x21, 0x32, 0x31
 .byte 0x13, 0x34, 0x43, 0x44, 0x44, 0x33, 0x44, 0x22, 0x15, 0x78, 0x78, 0x77, 0x67, 0x65, 0x34, 0x42
@@ -17708,153 +17703,153 @@ _br__26645be_len_30_end:
 .byte 0x1B, 0xBB, 0xBA, 0xAA, 0x99, 0xAA, 0x9A, 0x83, 0x1C, 0xBB, 0xA9, 0xBA, 0xBB, 0xBB, 0xBC, 0x94
 .byte 0x2D, 0xCD, 0xCC, 0xCC, 0xCD, 0xDD, 0xDD, 0xA4, 0x22, 0x22, 0x22, 0x11, 0x12, 0x23, 0x32, 0x21
 
-_ch__266466e_len_30:
-.incbin "bin/PAPERMARIO.266466E._ch__266466e_len_30.bin"
-_ch__266466e_len_30_end:
-___266469e_len_2a0:
-.incbin "bin/PAPERMARIO.266469E.___266469e_len_2a0.bin"
-___266469e_len_2a0_end:
-_d__266493e_len_30:
-.incbin "bin/PAPERMARIO.266493E._d__266493e_len_30.bin"
-_d__266493e_len_30_end:
+_ch__266466e:
+.incbin "bin/PAPERMARIO.266466E._ch__266466e.bin"
+_ch__266466e_end:
+___266469e:
+.incbin "bin/PAPERMARIO.266469E.___266469e.bin"
+___266469e_end:
+_d__266493e:
+.incbin "bin/PAPERMARIO.266493E._d__266493e.bin"
+_d__266493e_end:
 # Unknown region 266496E-2664A0E [A0]
 .incbin "bin/PAPERMARIO.266496E.bin"
 
-_d__2664a0e_len_30:
-.incbin "bin/PAPERMARIO.2664A0E._d__2664a0e_len_30.bin"
-_d__2664a0e_len_30_end:
+_d__2664a0e:
+.incbin "bin/PAPERMARIO.2664A0E._d__2664a0e.bin"
+_d__2664a0e_end:
 # Unknown region 2664A3E-2664C7E [240]
 .incbin "bin/PAPERMARIO.2664A3E.bin"
 
-_de__2664c7e_len_30:
-.incbin "bin/PAPERMARIO.2664C7E._de__2664c7e_len_30.bin"
-_de__2664c7e_len_30_end:
+_de__2664c7e:
+.incbin "bin/PAPERMARIO.2664C7E._de__2664c7e.bin"
+_de__2664c7e_end:
 # Unknown region 2664CAE-26650CE [420]
 .incbin "bin/PAPERMARIO.2664CAE.bin"
 
-_do__26650ce_len_30:
-.incbin "bin/PAPERMARIO.26650CE._do__26650ce_len_30.bin"
-_do__26650ce_len_30_end:
+_do__26650ce:
+.incbin "bin/PAPERMARIO.26650CE._do__26650ce.bin"
+_do__26650ce_end:
 # Unknown region 26650FE-266591E [820]
 .incbin "bin/PAPERMARIO.26650FE.bin"
 
-_doQ__266591e_len_30:
-.incbin "bin/PAPERMARIO.266591E._doQ__266591e_len_30.bin"
-_doQ__266591e_len_30_end:
+_doQ__266591e:
+.incbin "bin/PAPERMARIO.266591E._doQ__266591e.bin"
+_doQ__266591e_end:
 # Unknown region 266594E-2665A6E [120]
 .incbin "bin/PAPERMARIO.266594E.bin"
 
-_et__2665a6e_len_30:
-.incbin "bin/PAPERMARIO.2665A6E._et__2665a6e_len_30.bin"
-_et__2665a6e_len_30_end:
+_et__2665a6e:
+.incbin "bin/PAPERMARIO.2665A6E._et__2665a6e.bin"
+_et__2665a6e_end:
 # Unknown region 2665A9E-2666A9E [1000]
 .incbin "bin/PAPERMARIO.2665A9E.bin"
 
-_fl__2666a9e_len_30:
-.incbin "bin/PAPERMARIO.2666A9E._fl__2666a9e_len_30.bin"
-_fl__2666a9e_len_30_end:
-___2666ace_len_220:
-.incbin "bin/PAPERMARIO.2666ACE.___2666ace_len_220.bin"
-___2666ace_len_220_end:
-_go__2666cee_len_30:
-.incbin "bin/PAPERMARIO.2666CEE._go__2666cee_len_30.bin"
-_go__2666cee_len_30_end:
+_fl__2666a9e:
+.incbin "bin/PAPERMARIO.2666A9E._fl__2666a9e.bin"
+_fl__2666a9e_end:
+___2666ace:
+.incbin "bin/PAPERMARIO.2666ACE.___2666ace.bin"
+___2666ace_end:
+_go__2666cee:
+.incbin "bin/PAPERMARIO.2666CEE._go__2666cee.bin"
+_go__2666cee_end:
 # Unknown region 2666D1E-2666DBE [A0]
 .incbin "bin/PAPERMARIO.2666D1E.bin"
 
-_gr__2666dbe_len_30:
-.incbin "bin/PAPERMARIO.2666DBE._gr__2666dbe_len_30.bin"
-_gr__2666dbe_len_30_end:
+_gr__2666dbe:
+.incbin "bin/PAPERMARIO.2666DBE._gr__2666dbe.bin"
+_gr__2666dbe_end:
 # Unknown region 2666DEE-26675EE [800]
 .incbin "bin/PAPERMARIO.2666DEE.bin"
 
-_ha__26675ee_len_30:
-.incbin "bin/PAPERMARIO.26675EE._ha__26675ee_len_30.bin"
-_ha__26675ee_len_30_end:
+_ha__26675ee:
+.incbin "bin/PAPERMARIO.26675EE._ha__26675ee.bin"
+_ha__26675ee_end:
 # Unknown region 266761E-26676BE [A0]
 .incbin "bin/PAPERMARIO.266761E.bin"
 
-_ha__26676be_len_30:
-.incbin "bin/PAPERMARIO.26676BE._ha__26676be_len_30.bin"
-_ha__26676be_len_30_end:
+_ha__26676be:
+.incbin "bin/PAPERMARIO.26676BE._ha__26676be.bin"
+_ha__26676be_end:
 # Unknown region 26676EE-2667B0E [420]
 .incbin "bin/PAPERMARIO.26676EE.bin"
 
-_hi__2667b0e_len_30:
-.incbin "bin/PAPERMARIO.2667B0E._hi__2667b0e_len_30.bin"
-_hi__2667b0e_len_30_end:
+_hi__2667b0e:
+.incbin "bin/PAPERMARIO.2667B0E._hi__2667b0e.bin"
+_hi__2667b0e_end:
 # Unknown region 2667B3E-2667F3E [400]
 .incbin "bin/PAPERMARIO.2667B3E.bin"
 
-_hi__2667f3e_len_30:
-.incbin "bin/PAPERMARIO.2667F3E._hi__2667f3e_len_30.bin"
-_hi__2667f3e_len_30_end:
+_hi__2667f3e:
+.incbin "bin/PAPERMARIO.2667F3E._hi__2667f3e.bin"
+_hi__2667f3e_end:
 # Unknown region 2667F6E-266818E [220]
 .incbin "bin/PAPERMARIO.2667F6E.bin"
 
-_ho__266818e_len_30:
-.incbin "bin/PAPERMARIO.266818E._ho__266818e_len_30.bin"
-_ho__266818e_len_30_end:
+_ho__266818e:
+.incbin "bin/PAPERMARIO.266818E._ho__266818e.bin"
+_ho__266818e_end:
 # Unknown region 26681BE-26682DE [120]
 .incbin "bin/PAPERMARIO.26681BE.bin"
 
-_ho__26682de_len_30:
-.incbin "bin/PAPERMARIO.26682DE._ho__26682de_len_30.bin"
-_ho__26682de_len_30_end:
+_ho__26682de:
+.incbin "bin/PAPERMARIO.26682DE._ho__26682de.bin"
+_ho__26682de_end:
 # Unknown region 266830E-266842E [120]
 .incbin "bin/PAPERMARIO.266830E.bin"
 
-_ho__266842e_len_30:
-.incbin "bin/PAPERMARIO.266842E._ho__266842e_len_30.bin"
-_ho__266842e_len_30_end:
+_ho__266842e:
+.incbin "bin/PAPERMARIO.266842E._ho__266842e.bin"
+_ho__266842e_end:
 # Unknown region 266845E-266857E [120]
 .incbin "bin/PAPERMARIO.266845E.bin"
 
-_ho__266857e_len_30:
-.incbin "bin/PAPERMARIO.266857E._ho__266857e_len_30.bin"
-_ho__266857e_len_30_end:
+_ho__266857e:
+.incbin "bin/PAPERMARIO.266857E._ho__266857e.bin"
+_ho__266857e_end:
 # Unknown region 26685AE-26686CE [120]
 .incbin "bin/PAPERMARIO.26685AE.bin"
 
-_hu__26686ce_len_30:
-.incbin "bin/PAPERMARIO.26686CE._hu__26686ce_len_30.bin"
-_hu__26686ce_len_30_end:
+_hu__26686ce:
+.incbin "bin/PAPERMARIO.26686CE._hu__26686ce.bin"
+_hu__26686ce_end:
 # Unknown region 26686FE-2668B1E [420]
 .incbin "bin/PAPERMARIO.26686FE.bin"
 
-_i__2668b1e_len_30:
-.incbin "bin/PAPERMARIO.2668B1E._i__2668b1e_len_30.bin"
-_i__2668b1e_len_30_end:
+_i__2668b1e:
+.incbin "bin/PAPERMARIO.2668B1E._i__2668b1e.bin"
+_i__2668b1e_end:
 # Unknown region 2668B4E-2668D4E [200]
 .incbin "bin/PAPERMARIO.2668B4E.bin"
 
-_iw__2668d4e_len_30:
-.incbin "bin/PAPERMARIO.2668D4E._iw__2668d4e_len_30.bin"
-_iw__2668d4e_len_30_end:
+_iw__2668d4e:
+.incbin "bin/PAPERMARIO.2668D4E._iw__2668d4e.bin"
+_iw__2668d4e_end:
 # Unknown region 2668D7E-2669D7E [1000]
 .incbin "bin/PAPERMARIO.2668D7E.bin"
 
-_jy__2669d7e_len_30:
-.incbin "bin/PAPERMARIO.2669D7E._jy__2669d7e_len_30.bin"
-_jy__2669d7e_len_30_end:
+_jy__2669d7e:
+.incbin "bin/PAPERMARIO.2669D7E._jy__2669d7e.bin"
+_jy__2669d7e_end:
 # Unknown region 2669DAE-2669ECE [120]
 .incbin "bin/PAPERMARIO.2669DAE.bin"
 
-_k__2669ece_len_30:
-.incbin "bin/PAPERMARIO.2669ECE._k__2669ece_len_30.bin"
-_k__2669ece_len_30_end:
+_k__2669ece:
+.incbin "bin/PAPERMARIO.2669ECE._k__2669ece.bin"
+_k__2669ece_end:
 # Unknown region 2669EFE-2669FFE [100]
 .incbin "bin/PAPERMARIO.2669EFE.bin"
 
-_k__2669ffe_len_30:
-.incbin "bin/PAPERMARIO.2669FFE._k__2669ffe_len_30.bin"
-_k__2669ffe_len_30_end:
+_k__2669ffe:
+.incbin "bin/PAPERMARIO.2669FFE._k__2669ffe.bin"
+_k__2669ffe_end:
 # Unknown region 266A02E-266A24E [220]
 .incbin "bin/PAPERMARIO.266A02E.bin"
 
-_k__266a24e_len_30:
-.incbin "bin/PAPERMARIO.266A24E._k__266a24e_len_30.bin"
-_k__266a24e_len_30_end:
+_k__266a24e:
+.incbin "bin/PAPERMARIO.266A24E._k__266a24e.bin"
+_k__266a24e_end:
 # Unknown region 266A27E-266A2FE [80]
 .byte 0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x9B, 0xBD, 0xDD, 0xDD, 0xDD, 0xDD, 0xDD, 0xDD
 .byte 0xBB, 0xDD, 0xDD, 0xDD, 0xDD, 0xDD, 0xDD, 0xDD, 0xBD, 0xDD, 0xDD, 0xDD, 0xDD, 0xDD, 0xDD, 0xDD
@@ -17865,9 +17860,9 @@ _k__266a24e_len_30_end:
 .byte 0xBD, 0xDD, 0xDD, 0xDD, 0xDD, 0xDD, 0xDD, 0xDD, 0xBB, 0xDD, 0xDD, 0xDD, 0xDD, 0xDD, 0xDD, 0xDD
 .byte 0x9B, 0xBD, 0xDD, 0xDD, 0xDD, 0xDD, 0xDD, 0xDD, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99
 
-_k__266a2fe_len_30:
-.incbin "bin/PAPERMARIO.266A2FE._k__266a2fe_len_30.bin"
-_k__266a2fe_len_30_end:
+_k__266a2fe:
+.incbin "bin/PAPERMARIO.266A2FE._k__266a2fe.bin"
+_k__266a2fe_end:
 # Unknown region 266A32E-266A3AE [80]
 .byte 0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x57, 0x77, 0x77, 0x77, 0x77, 0x77, 0x77, 0x77
 .byte 0x77, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x79, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99
@@ -17878,345 +17873,345 @@ _k__266a2fe_len_30_end:
 .byte 0x79, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x77, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99
 .byte 0x57, 0x77, 0x77, 0x77, 0x77, 0x77, 0x77, 0x77, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55
 
-_k__266a3ae_len_30:
-.incbin "bin/PAPERMARIO.266A3AE._k__266a3ae_len_30.bin"
-_k__266a3ae_len_30_end:
+_k__266a3ae:
+.incbin "bin/PAPERMARIO.266A3AE._k__266a3ae.bin"
+_k__266a3ae_end:
 # Unknown region 266A3DE-266A47E [A0]
 .incbin "bin/PAPERMARIO.266A3DE.bin"
 
-_k__266a47e_len_30:
-.incbin "bin/PAPERMARIO.266A47E._k__266a47e_len_30.bin"
-_k__266a47e_len_30_end:
+_k__266a47e:
+.incbin "bin/PAPERMARIO.266A47E._k__266a47e.bin"
+_k__266a47e_end:
 # Unknown region 266A4AE-266A6AE [200]
 .incbin "bin/PAPERMARIO.266A4AE.bin"
 
-_k__266a6ae_len_30:
-.incbin "bin/PAPERMARIO.266A6AE._k__266a6ae_len_30.bin"
-_k__266a6ae_len_30_end:
-___266a6de_len_820:
-.incbin "bin/PAPERMARIO.266A6DE.___266a6de_len_820.bin"
-___266a6de_len_820_end:
-_k__266aefe_len_30:
-.incbin "bin/PAPERMARIO.266AEFE._k__266aefe_len_30.bin"
-_k__266aefe_len_30_end:
+_k__266a6ae:
+.incbin "bin/PAPERMARIO.266A6AE._k__266a6ae.bin"
+_k__266a6ae_end:
+___266a6de:
+.incbin "bin/PAPERMARIO.266A6DE.___266a6de.bin"
+___266a6de_end:
+_k__266aefe:
+.incbin "bin/PAPERMARIO.266AEFE._k__266aefe.bin"
+_k__266aefe_end:
 # Unknown region 266AF2E-266B04E [120]
 .incbin "bin/PAPERMARIO.266AF2E.bin"
 
-_k__266b04e_len_30:
-.incbin "bin/PAPERMARIO.266B04E._k__266b04e_len_30.bin"
-_k__266b04e_len_30_end:
+_k__266b04e:
+.incbin "bin/PAPERMARIO.266B04E._k__266b04e.bin"
+_k__266b04e_end:
 # Unknown region 266B07E-266B27E [200]
 .incbin "bin/PAPERMARIO.266B07E.bin"
 
-_k__266b27e_len_30:
-.incbin "bin/PAPERMARIO.266B27E._k__266b27e_len_30.bin"
-_k__266b27e_len_30_end:
+_k__266b27e:
+.incbin "bin/PAPERMARIO.266B27E._k__266b27e.bin"
+_k__266b27e_end:
 # Unknown region 266B2AE-266B3CE [120]
 .incbin "bin/PAPERMARIO.266B2AE.bin"
 
-_k__266b3ce_len_30:
-.incbin "bin/PAPERMARIO.266B3CE._k__266b3ce_len_30.bin"
-_k__266b3ce_len_30_end:
+_k__266b3ce:
+.incbin "bin/PAPERMARIO.266B3CE._k__266b3ce.bin"
+_k__266b3ce_end:
 # Unknown region 266B3FE-266B51E [120]
 .incbin "bin/PAPERMARIO.266B3FE.bin"
 
-_k__266b51e_len_30:
-.incbin "bin/PAPERMARIO.266B51E._k__266b51e_len_30.bin"
-_k__266b51e_len_30_end:
+_k__266b51e:
+.incbin "bin/PAPERMARIO.266B51E._k__266b51e.bin"
+_k__266b51e_end:
 # Unknown region 266B54E-266B66E [120]
 .incbin "bin/PAPERMARIO.266B54E.bin"
 
-_k__266b66e_len_30:
-.incbin "bin/PAPERMARIO.266B66E._k__266b66e_len_30.bin"
-_k__266b66e_len_30_end:
-___266b69e_len_120:
-.incbin "bin/PAPERMARIO.266B69E.___266b69e_len_120.bin"
-___266b69e_len_120_end:
-_k__266b7be_len_30:
-.incbin "bin/PAPERMARIO.266B7BE._k__266b7be_len_30.bin"
-_k__266b7be_len_30_end:
+_k__266b66e:
+.incbin "bin/PAPERMARIO.266B66E._k__266b66e.bin"
+_k__266b66e_end:
+___266b69e:
+.incbin "bin/PAPERMARIO.266B69E.___266b69e.bin"
+___266b69e_end:
+_k__266b7be:
+.incbin "bin/PAPERMARIO.266B7BE._k__266b7be.bin"
+_k__266b7be_end:
 # Unknown region 266B7EE-266BFEE [800]
 .incbin "bin/PAPERMARIO.266B7EE.bin"
 
-_k__266bfee_len_30:
-.incbin "bin/PAPERMARIO.266BFEE._k__266bfee_len_30.bin"
-_k__266bfee_len_30_end:
+_k__266bfee:
+.incbin "bin/PAPERMARIO.266BFEE._k__266bfee.bin"
+_k__266bfee_end:
 # Unknown region 266C01E-266C21E [200]
 .incbin "bin/PAPERMARIO.266C01E.bin"
 
-_k__266c21e_len_30:
-.incbin "bin/PAPERMARIO.266C21E._k__266c21e_len_30.bin"
-_k__266c21e_len_30_end:
+_k__266c21e:
+.incbin "bin/PAPERMARIO.266C21E._k__266c21e.bin"
+_k__266c21e_end:
 # Unknown region 266C24E-266D24E [1000]
 .incbin "bin/PAPERMARIO.266C24E.bin"
 
-_k__266d24e_len_30:
-.incbin "bin/PAPERMARIO.266D24E._k__266d24e_len_30.bin"
-_k__266d24e_len_30_end:
+_k__266d24e:
+.incbin "bin/PAPERMARIO.266D24E._k__266d24e.bin"
+_k__266d24e_end:
 # Unknown region 266D27E-266D37E [100]
 .incbin "bin/PAPERMARIO.266D27E.bin"
 
-_k__266d37e_len_30:
-.incbin "bin/PAPERMARIO.266D37E._k__266d37e_len_30.bin"
-_k__266d37e_len_30_end:
+_k__266d37e:
+.incbin "bin/PAPERMARIO.266D37E._k__266d37e.bin"
+_k__266d37e_end:
 # Unknown region 266D3AE-266E3AE [1000]
 .incbin "bin/PAPERMARIO.266D3AE.bin"
 
-_k__266e3ae_len_30:
-.incbin "bin/PAPERMARIO.266E3AE._k__266e3ae_len_30.bin"
-_k__266e3ae_len_30_end:
+_k__266e3ae:
+.incbin "bin/PAPERMARIO.266E3AE._k__266e3ae.bin"
+_k__266e3ae_end:
 # Unknown region 266E3DE-266E4FE [120]
 .incbin "bin/PAPERMARIO.266E3DE.bin"
 
-_k__266e4fe_len_30:
-.incbin "bin/PAPERMARIO.266E4FE._k__266e4fe_len_30.bin"
-_k__266e4fe_len_30_end:
+_k__266e4fe:
+.incbin "bin/PAPERMARIO.266E4FE._k__266e4fe.bin"
+_k__266e4fe_end:
 # Unknown region 266E52E-266F52E [1000]
 .incbin "bin/PAPERMARIO.266E52E.bin"
 
-_k__266f52e_len_30:
-.incbin "bin/PAPERMARIO.266F52E._k__266f52e_len_30.bin"
-_k__266f52e_len_30_end:
+_k__266f52e:
+.incbin "bin/PAPERMARIO.266F52E._k__266f52e.bin"
+_k__266f52e_end:
 # Unknown region 266F55E-267055E [1000]
 .incbin "bin/PAPERMARIO.266F55E.bin"
 
-_k__267055e_len_30:
-.incbin "bin/PAPERMARIO.267055E._k__267055e_len_30.bin"
-_k__267055e_len_30_end:
+_k__267055e:
+.incbin "bin/PAPERMARIO.267055E._k__267055e.bin"
+_k__267055e_end:
 # Unknown region 267058E-2670D8E [800]
 .incbin "bin/PAPERMARIO.267058E.bin"
 
-_k__2670d8e_len_30:
-.incbin "bin/PAPERMARIO.2670D8E._k__2670d8e_len_30.bin"
-_k__2670d8e_len_30_end:
-___2670dbe_len_120:
-.incbin "bin/PAPERMARIO.2670DBE.___2670dbe_len_120.bin"
-___2670dbe_len_120_end:
-_k__2670ede_len_30:
-.incbin "bin/PAPERMARIO.2670EDE._k__2670ede_len_30.bin"
-_k__2670ede_len_30_end:
+_k__2670d8e:
+.incbin "bin/PAPERMARIO.2670D8E._k__2670d8e.bin"
+_k__2670d8e_end:
+___2670dbe:
+.incbin "bin/PAPERMARIO.2670DBE.___2670dbe.bin"
+___2670dbe_end:
+_k__2670ede:
+.incbin "bin/PAPERMARIO.2670EDE._k__2670ede.bin"
+_k__2670ede_end:
 # Unknown region 2670F0E-267102E [120]
 .incbin "bin/PAPERMARIO.2670F0E.bin"
 
-_k__267102e_len_30:
-.incbin "bin/PAPERMARIO.267102E._k__267102e_len_30.bin"
-_k__267102e_len_30_end:
-_A__267105e_len_1000:
-.incbin "bin/PAPERMARIO.267105E._A__267105e_len_1000.bin"
-_A__267105e_len_1000_end:
-_k__267205e_len_30:
-.incbin "bin/PAPERMARIO.267205E._k__267205e_len_30.bin"
-_k__267205e_len_30_end:
+_k__267102e:
+.incbin "bin/PAPERMARIO.267102E._k__267102e.bin"
+_k__267102e_end:
+_A__267105e:
+.incbin "bin/PAPERMARIO.267105E._A__267105e.bin"
+_A__267105e_end:
+_k__267205e:
+.incbin "bin/PAPERMARIO.267205E._k__267205e.bin"
+_k__267205e_end:
 # Unknown region 267208E-267228E [200]
 .incbin "bin/PAPERMARIO.267208E.bin"
 
-_k__267228e_len_30:
-.incbin "bin/PAPERMARIO.267228E._k__267228e_len_30.bin"
-_k__267228e_len_30_end:
+_k__267228e:
+.incbin "bin/PAPERMARIO.267228E._k__267228e.bin"
+_k__267228e_end:
 # Unknown region 26722BE-26723BE [100]
 .incbin "bin/PAPERMARIO.26722BE.bin"
 
-_k__26723be_len_30:
-.incbin "bin/PAPERMARIO.26723BE._k__26723be_len_30.bin"
-_k__26723be_len_30_end:
-_UU__26723ee_len_420:
-.incbin "bin/PAPERMARIO.26723EE._UU__26723ee_len_420.bin"
-_UU__26723ee_len_420_end:
-_k__267280e_len_30:
-.incbin "bin/PAPERMARIO.267280E._k__267280e_len_30.bin"
-_k__267280e_len_30_end:
+_k__26723be:
+.incbin "bin/PAPERMARIO.26723BE._k__26723be.bin"
+_k__26723be_end:
+_UU__26723ee:
+.incbin "bin/PAPERMARIO.26723EE._UU__26723ee.bin"
+_UU__26723ee_end:
+_k__267280e:
+.incbin "bin/PAPERMARIO.267280E._k__267280e.bin"
+_k__267280e_end:
 # Unknown region 267283E-2672C3E [400]
 .incbin "bin/PAPERMARIO.267283E.bin"
 
-_k__2672c3e_len_30:
-.incbin "bin/PAPERMARIO.2672C3E._k__2672c3e_len_30.bin"
-_k__2672c3e_len_30_end:
+_k__2672c3e:
+.incbin "bin/PAPERMARIO.2672C3E._k__2672c3e.bin"
+_k__2672c3e_end:
 # Unknown region 2672C6E-2673C6E [1000]
 .incbin "bin/PAPERMARIO.2672C6E.bin"
 
-_ka__2673c6e_len_30:
-.incbin "bin/PAPERMARIO.2673C6E._ka__2673c6e_len_30.bin"
-_ka__2673c6e_len_30_end:
+_ka__2673c6e:
+.incbin "bin/PAPERMARIO.2673C6E._ka__2673c6e.bin"
+_ka__2673c6e_end:
 # Unknown region 2673C9E-2673D9E [100]
 .incbin "bin/PAPERMARIO.2673C9E.bin"
 
-_ka__2673d9e_len_30:
-.incbin "bin/PAPERMARIO.2673D9E._ka__2673d9e_len_30.bin"
-_ka__2673d9e_len_30_end:
+_ka__2673d9e:
+.incbin "bin/PAPERMARIO.2673D9E._ka__2673d9e.bin"
+_ka__2673d9e_end:
 # Unknown region 2673DCE-2673ECE [100]
 .incbin "bin/PAPERMARIO.2673DCE.bin"
 
-_ka__2673ece_len_30:
-.incbin "bin/PAPERMARIO.2673ECE._ka__2673ece_len_30.bin"
-_ka__2673ece_len_30_end:
+_ka__2673ece:
+.incbin "bin/PAPERMARIO.2673ECE._ka__2673ece.bin"
+_ka__2673ece_end:
 # Unknown region 2673EFE-267411E [220]
 .incbin "bin/PAPERMARIO.2673EFE.bin"
 
-_ka__267411e_len_30:
-.incbin "bin/PAPERMARIO.267411E._ka__267411e_len_30.bin"
-_ka__267411e_len_30_end:
+_ka__267411e:
+.incbin "bin/PAPERMARIO.267411E._ka__267411e.bin"
+_ka__267411e_end:
 # Unknown region 267414E-267424E [100]
 .incbin "bin/PAPERMARIO.267414E.bin"
 
-_ka__267424e_len_30:
-.incbin "bin/PAPERMARIO.267424E._ka__267424e_len_30.bin"
-_ka__267424e_len_30_end:
+_ka__267424e:
+.incbin "bin/PAPERMARIO.267424E._ka__267424e.bin"
+_ka__267424e_end:
 # Unknown region 267427E-267469E [420]
 .incbin "bin/PAPERMARIO.267427E.bin"
 
-_kaK__267469e_len_30:
-.incbin "bin/PAPERMARIO.267469E._kaK__267469e_len_30.bin"
-_kaK__267469e_len_30_end:
+_kaK__267469e:
+.incbin "bin/PAPERMARIO.267469E._kaK__267469e.bin"
+_kaK__267469e_end:
 # Unknown region 26746CE-26756CE [1000]
 .incbin "bin/PAPERMARIO.26746CE.bin"
 
-_ka__26756ce_len_30:
-.incbin "bin/PAPERMARIO.26756CE._ka__26756ce_len_30.bin"
-_ka__26756ce_len_30_end:
+_ka__26756ce:
+.incbin "bin/PAPERMARIO.26756CE._ka__26756ce.bin"
+_ka__26756ce_end:
 # Unknown region 26756FE-267579E [A0]
 .incbin "bin/PAPERMARIO.26756FE.bin"
 
-_ka__267579e_len_30:
-.incbin "bin/PAPERMARIO.267579E._ka__267579e_len_30.bin"
-_ka__267579e_len_30_end:
+_ka__267579e:
+.incbin "bin/PAPERMARIO.267579E._ka__267579e.bin"
+_ka__267579e_end:
 # Unknown region 26757CE-267586E [A0]
 .incbin "bin/PAPERMARIO.26757CE.bin"
 
-_ki__267586e_len_30:
-.incbin "bin/PAPERMARIO.267586E._ki__267586e_len_30.bin"
-_ki__267586e_len_30_end:
+_ki__267586e:
+.incbin "bin/PAPERMARIO.267586E._ki__267586e.bin"
+_ki__267586e_end:
 # Unknown region 267589E-2675CBE [420]
 .incbin "bin/PAPERMARIO.267589E.bin"
 
-_ki__2675cbe_len_30:
-.incbin "bin/PAPERMARIO.2675CBE._ki__2675cbe_len_30.bin"
-_ki__2675cbe_len_30_end:
-___2675cee_len_420:
-.incbin "bin/PAPERMARIO.2675CEE.___2675cee_len_420.bin"
-___2675cee_len_420_end:
-_kk__267610e_len_30:
-.incbin "bin/PAPERMARIO.267610E._kk__267610e_len_30.bin"
-_kk__267610e_len_30_end:
-___267613e_len_420:
-.incbin "bin/PAPERMARIO.267613E.___267613e_len_420.bin"
-___267613e_len_420_end:
-_kk__267655e_len_30:
-.incbin "bin/PAPERMARIO.267655E._kk__267655e_len_30.bin"
-_kk__267655e_len_30_end:
-___267658e_len_420:
-.incbin "bin/PAPERMARIO.267658E.___267658e_len_420.bin"
-___267658e_len_420_end:
-_kk__26769ae_len_30:
-.incbin "bin/PAPERMARIO.26769AE._kk__26769ae_len_30.bin"
-_kk__26769ae_len_30_end:
-___26769de_len_820:
-.incbin "bin/PAPERMARIO.26769DE.___26769de_len_820.bin"
-___26769de_len_820_end:
-_kk__26771fe_len_30:
-.incbin "bin/PAPERMARIO.26771FE._kk__26771fe_len_30.bin"
-_kk__26771fe_len_30_end:
-___267722e_len_420:
-.incbin "bin/PAPERMARIO.267722E.___267722e_len_420.bin"
-___267722e_len_420_end:
-_kk__267764e_len_30:
-.incbin "bin/PAPERMARIO.267764E._kk__267764e_len_30.bin"
-_kk__267764e_len_30_end:
-___267767e_len_420:
-.incbin "bin/PAPERMARIO.267767E.___267767e_len_420.bin"
-___267767e_len_420_end:
-_kk__2677a9e_len_30:
-.incbin "bin/PAPERMARIO.2677A9E._kk__2677a9e_len_30.bin"
-_kk__2677a9e_len_30_end:
-___2677ace_len_420:
-.incbin "bin/PAPERMARIO.2677ACE.___2677ace_len_420.bin"
-___2677ace_len_420_end:
-_kk__2677eee_len_30:
-.incbin "bin/PAPERMARIO.2677EEE._kk__2677eee_len_30.bin"
-_kk__2677eee_len_30_end:
+_ki__2675cbe:
+.incbin "bin/PAPERMARIO.2675CBE._ki__2675cbe.bin"
+_ki__2675cbe_end:
+___2675cee:
+.incbin "bin/PAPERMARIO.2675CEE.___2675cee.bin"
+___2675cee_end:
+_kk__267610e:
+.incbin "bin/PAPERMARIO.267610E._kk__267610e.bin"
+_kk__267610e_end:
+___267613e:
+.incbin "bin/PAPERMARIO.267613E.___267613e.bin"
+___267613e_end:
+_kk__267655e:
+.incbin "bin/PAPERMARIO.267655E._kk__267655e.bin"
+_kk__267655e_end:
+___267658e:
+.incbin "bin/PAPERMARIO.267658E.___267658e.bin"
+___267658e_end:
+_kk__26769ae:
+.incbin "bin/PAPERMARIO.26769AE._kk__26769ae.bin"
+_kk__26769ae_end:
+___26769de:
+.incbin "bin/PAPERMARIO.26769DE.___26769de.bin"
+___26769de_end:
+_kk__26771fe:
+.incbin "bin/PAPERMARIO.26771FE._kk__26771fe.bin"
+_kk__26771fe_end:
+___267722e:
+.incbin "bin/PAPERMARIO.267722E.___267722e.bin"
+___267722e_end:
+_kk__267764e:
+.incbin "bin/PAPERMARIO.267764E._kk__267764e.bin"
+_kk__267764e_end:
+___267767e:
+.incbin "bin/PAPERMARIO.267767E.___267767e.bin"
+___267767e_end:
+_kk__2677a9e:
+.incbin "bin/PAPERMARIO.2677A9E._kk__2677a9e.bin"
+_kk__2677a9e_end:
+___2677ace:
+.incbin "bin/PAPERMARIO.2677ACE.___2677ace.bin"
+___2677ace_end:
+_kk__2677eee:
+.incbin "bin/PAPERMARIO.2677EEE._kk__2677eee.bin"
+_kk__2677eee_end:
 # Unknown region 2677F1E-267833E [420]
 .incbin "bin/PAPERMARIO.2677F1E.bin"
 
-_kk__267833e_len_30:
-.incbin "bin/PAPERMARIO.267833E._kk__267833e_len_30.bin"
-_kk__267833e_len_30_end:
+_kk__267833e:
+.incbin "bin/PAPERMARIO.267833E._kk__267833e.bin"
+_kk__267833e_end:
 # Unknown region 267836E-2678B8E [820]
 .incbin "bin/PAPERMARIO.267836E.bin"
 
-_ku__2678b8e_len_30:
-.incbin "bin/PAPERMARIO.2678B8E._ku__2678b8e_len_30.bin"
-_ku__2678b8e_len_30_end:
+_ku__2678b8e:
+.incbin "bin/PAPERMARIO.2678B8E._ku__2678b8e.bin"
+_ku__2678b8e_end:
 # Unknown region 2678BBE-2678CBE [100]
 .incbin "bin/PAPERMARIO.2678BBE.bin"
 
-_lo__2678cbe_len_30:
-.incbin "bin/PAPERMARIO.2678CBE._lo__2678cbe_len_30.bin"
-_lo__2678cbe_len_30_end:
-___2678cee_len_820:
-.incbin "bin/PAPERMARIO.2678CEE.___2678cee_len_820.bin"
-___2678cee_len_820_end:
-_ma__267950e_len_30:
-.incbin "bin/PAPERMARIO.267950E._ma__267950e_len_30.bin"
-_ma__267950e_len_30_end:
+_lo__2678cbe:
+.incbin "bin/PAPERMARIO.2678CBE._lo__2678cbe.bin"
+_lo__2678cbe_end:
+___2678cee:
+.incbin "bin/PAPERMARIO.2678CEE.___2678cee.bin"
+___2678cee_end:
+_ma__267950e:
+.incbin "bin/PAPERMARIO.267950E._ma__267950e.bin"
+_ma__267950e_end:
 # Unknown region 267953E-267975E [220]
 .incbin "bin/PAPERMARIO.267953E.bin"
 
-_ma__267975e_len_30:
-.incbin "bin/PAPERMARIO.267975E._ma__267975e_len_30.bin"
-_ma__267975e_len_30_end:
+_ma__267975e:
+.incbin "bin/PAPERMARIO.267975E._ma__267975e.bin"
+_ma__267975e_end:
 # Unknown region 267978E-26799AE [220]
 .incbin "bin/PAPERMARIO.267978E.bin"
 
-_ma__26799ae_len_30:
-.incbin "bin/PAPERMARIO.26799AE._ma__26799ae_len_30.bin"
-_ma__26799ae_len_30_end:
+_ma__26799ae:
+.incbin "bin/PAPERMARIO.26799AE._ma__26799ae.bin"
+_ma__26799ae_end:
 # Unknown region 26799DE-2679BFE [220]
 .incbin "bin/PAPERMARIO.26799DE.bin"
 
-_ma__2679bfe_len_30:
-.incbin "bin/PAPERMARIO.2679BFE._ma__2679bfe_len_30.bin"
-_ma__2679bfe_len_30_end:
-___2679c2e_len_200:
-.incbin "bin/PAPERMARIO.2679C2E.___2679c2e_len_200.bin"
-___2679c2e_len_200_end:
-_ma__2679e2e_len_30:
-.incbin "bin/PAPERMARIO.2679E2E._ma__2679e2e_len_30.bin"
-_ma__2679e2e_len_30_end:
+_ma__2679bfe:
+.incbin "bin/PAPERMARIO.2679BFE._ma__2679bfe.bin"
+_ma__2679bfe_end:
+___2679c2e:
+.incbin "bin/PAPERMARIO.2679C2E.___2679c2e.bin"
+___2679c2e_end:
+_ma__2679e2e:
+.incbin "bin/PAPERMARIO.2679E2E._ma__2679e2e.bin"
+_ma__2679e2e_end:
 # Unknown region 2679E5E-2679F5E [100]
 .incbin "bin/PAPERMARIO.2679E5E.bin"
 
-_me__2679f5e_len_30:
-.incbin "bin/PAPERMARIO.2679F5E._me__2679f5e_len_30.bin"
-_me__2679f5e_len_30_end:
+_me__2679f5e:
+.incbin "bin/PAPERMARIO.2679F5E._me__2679f5e.bin"
+_me__2679f5e_end:
 # Unknown region 2679F8E-267A7AE [820]
 .incbin "bin/PAPERMARIO.2679F8E.bin"
 
-_nu__267a7ae_len_30:
-.incbin "bin/PAPERMARIO.267A7AE._nu__267a7ae_len_30.bin"
-_nu__267a7ae_len_30_end:
+_nu__267a7ae:
+.incbin "bin/PAPERMARIO.267A7AE._nu__267a7ae.bin"
+_nu__267a7ae_end:
 # Unknown region 267A7DE-267A8FE [120]
 .incbin "bin/PAPERMARIO.267A7DE.bin"
 
-_puyP__267a8fe_len_30:
-.incbin "bin/PAPERMARIO.267A8FE._puyP__267a8fe_len_30.bin"
-_puyP__267a8fe_len_30_end:
+_puyP__267a8fe:
+.incbin "bin/PAPERMARIO.267A8FE._puyP__267a8fe.bin"
+_puyP__267a8fe_end:
 # Unknown region 267A92E-267AD2E [400]
 .incbin "bin/PAPERMARIO.267A92E.bin"
 
-_re__267ad2e_len_30:
-.incbin "bin/PAPERMARIO.267AD2E._re__267ad2e_len_30.bin"
-_re__267ad2e_len_30_end:
-___267ad5e_len_2a0:
-.incbin "bin/PAPERMARIO.267AD5E.___267ad5e_len_2a0.bin"
-___267ad5e_len_2a0_end:
-_re__267affe_len_30:
-.incbin "bin/PAPERMARIO.267AFFE._re__267affe_len_30.bin"
-_re__267affe_len_30_end:
+_re__267ad2e:
+.incbin "bin/PAPERMARIO.267AD2E._re__267ad2e.bin"
+_re__267ad2e_end:
+___267ad5e:
+.incbin "bin/PAPERMARIO.267AD5E.___267ad5e.bin"
+___267ad5e_end:
+_re__267affe:
+.incbin "bin/PAPERMARIO.267AFFE._re__267affe.bin"
+_re__267affe_end:
 # Unknown region 267B02E-267B44E [420]
 .incbin "bin/PAPERMARIO.267B02E.bin"
 
-_roL__267b44e_len_30:
-.incbin "bin/PAPERMARIO.267B44E._roL__267b44e_len_30.bin"
-_roL__267b44e_len_30_end:
+_roL__267b44e:
+.incbin "bin/PAPERMARIO.267B44E._roL__267b44e.bin"
+_roL__267b44e_end:
 # Unknown region 267B47E-267B4FE [80]
 .byte 0x47, 0xBF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFB, 0x84, 0x43, 0xBF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFB, 0x84
 .byte 0x47, 0x4C, 0xFF, 0xFF, 0xFF, 0xFF, 0xFB, 0x84, 0x48, 0xB3, 0xCF, 0xFF, 0xFF, 0xFF, 0xFB, 0x84
@@ -18227,149 +18222,149 @@ _roL__267b44e_len_30_end:
 .byte 0x48, 0xBF, 0xFF, 0xFF, 0xFF, 0xFE, 0x3C, 0x84, 0x48, 0xBF, 0xFF, 0xFF, 0xFF, 0xFF, 0xD4, 0x74
 .byte 0x48, 0xBF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFB, 0x34, 0x48, 0xBF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFB, 0x74
 
-_ro__267b4fe_len_30:
-.incbin "bin/PAPERMARIO.267B4FE._ro__267b4fe_len_30.bin"
-_ro__267b4fe_len_30_end:
+_ro__267b4fe:
+.incbin "bin/PAPERMARIO.267B4FE._ro__267b4fe.bin"
+_ro__267b4fe_end:
 # Unknown region 267B52E-267BD2E [800]
 .incbin "bin/PAPERMARIO.267B52E.bin"
 
-_roh__267bd2e_len_30:
-.incbin "bin/PAPERMARIO.267BD2E._roh__267bd2e_len_30.bin"
-_roh__267bd2e_len_30_end:
+_roh__267bd2e:
+.incbin "bin/PAPERMARIO.267BD2E._roh__267bd2e.bin"
+_roh__267bd2e_end:
 # Unknown region 267BD5E-267BE7E [120]
 .incbin "bin/PAPERMARIO.267BD5E.bin"
 
-_sa__267be7e_len_30:
-.incbin "bin/PAPERMARIO.267BE7E._sa__267be7e_len_30.bin"
-_sa__267be7e_len_30_end:
+_sa__267be7e:
+.incbin "bin/PAPERMARIO.267BE7E._sa__267be7e.bin"
+_sa__267be7e_end:
 # Unknown region 267BEAE-267BFAE [100]
 .incbin "bin/PAPERMARIO.267BEAE.bin"
 
-_sa__267bfae_len_30:
-.incbin "bin/PAPERMARIO.267BFAE._sa__267bfae_len_30.bin"
-_sa__267bfae_len_30_end:
+_sa__267bfae:
+.incbin "bin/PAPERMARIO.267BFAE._sa__267bfae.bin"
+_sa__267bfae_end:
 # Unknown region 267BFDE-267C0FE [120]
 .incbin "bin/PAPERMARIO.267BFDE.bin"
 
-_sh__267c0fe_len_30:
-.incbin "bin/PAPERMARIO.267C0FE._sh__267c0fe_len_30.bin"
-_sh__267c0fe_len_30_end:
+_sh__267c0fe:
+.incbin "bin/PAPERMARIO.267C0FE._sh__267c0fe.bin"
+_sh__267c0fe_end:
 # Unknown region 267C12E-267C32E [200]
 .incbin "bin/PAPERMARIO.267C12E.bin"
 
-_sh__267c32e_len_30:
-.incbin "bin/PAPERMARIO.267C32E._sh__267c32e_len_30.bin"
-_sh__267c32e_len_30_end:
+_sh__267c32e:
+.incbin "bin/PAPERMARIO.267C32E._sh__267c32e.bin"
+_sh__267c32e_end:
 # Unknown region 267C35E-267C47E [120]
 .incbin "bin/PAPERMARIO.267C35E.bin"
 
-_st__267c47e_len_30:
-.incbin "bin/PAPERMARIO.267C47E._st__267c47e_len_30.bin"
-_st__267c47e_len_30_end:
+_st__267c47e:
+.incbin "bin/PAPERMARIO.267C47E._st__267c47e.bin"
+_st__267c47e_end:
 # Unknown region 267C4AE-267C8CE [420]
 .incbin "bin/PAPERMARIO.267C4AE.bin"
 
-_su__267c8ce_len_30:
-.incbin "bin/PAPERMARIO.267C8CE._su__267c8ce_len_30.bin"
-_su__267c8ce_len_30_end:
+_su__267c8ce:
+.incbin "bin/PAPERMARIO.267C8CE._su__267c8ce.bin"
+_su__267c8ce_end:
 # Unknown region 267C8FE-267D8FE [1000]
 .incbin "bin/PAPERMARIO.267C8FE.bin"
 
-_te__267d8fe_len_30:
-.incbin "bin/PAPERMARIO.267D8FE._te__267d8fe_len_30.bin"
-_te__267d8fe_len_30_end:
-___267d92e_len_a0:
-.incbin "bin/PAPERMARIO.267D92E.___267d92e_len_a0.bin"
-___267d92e_len_a0_end:
-_to__267d9ce_len_30:
-.incbin "bin/PAPERMARIO.267D9CE._to__267d9ce_len_30.bin"
-_to__267d9ce_len_30_end:
+_te__267d8fe:
+.incbin "bin/PAPERMARIO.267D8FE._te__267d8fe.bin"
+_te__267d8fe_end:
+___267d92e:
+.incbin "bin/PAPERMARIO.267D92E.___267d92e.bin"
+___267d92e_end:
+_to__267d9ce:
+.incbin "bin/PAPERMARIO.267D9CE._to__267d9ce.bin"
+_to__267d9ce_end:
 # Unknown region 267D9FE-275C05E [DE660]
 .incbin "bin/PAPERMARIO.267D9FE.bin"
 
-___275c05e_len_2000:
-.incbin "bin/PAPERMARIO.275C05E.___275c05e_len_2000.bin"
-___275c05e_len_2000_end:
-___275e05e_len_2000:
-.incbin "bin/PAPERMARIO.275E05E.___275e05e_len_2000.bin"
-___275e05e_len_2000_end:
-___276005e_len_2000:
-.incbin "bin/PAPERMARIO.276005E.___276005e_len_2000.bin"
-___276005e_len_2000_end:
-___276205e_len_2000:
-.incbin "bin/PAPERMARIO.276205E.___276205e_len_2000.bin"
-___276205e_len_2000_end:
-___276405e_len_2000:
-.incbin "bin/PAPERMARIO.276405E.___276405e_len_2000.bin"
-___276405e_len_2000_end:
-___276605e_len_5c2:
-.incbin "bin/PAPERMARIO.276605E.___276605e_len_5c2.bin"
-___276605e_len_5c2_end:
+___275c05e:
+.incbin "bin/PAPERMARIO.275C05E.___275c05e.bin"
+___275c05e_end:
+___275e05e:
+.incbin "bin/PAPERMARIO.275E05E.___275e05e.bin"
+___275e05e_end:
+___276005e:
+.incbin "bin/PAPERMARIO.276005E.___276005e.bin"
+___276005e_end:
+___276205e:
+.incbin "bin/PAPERMARIO.276205E.___276205e.bin"
+___276205e_end:
+___276405e:
+.incbin "bin/PAPERMARIO.276405E.___276405e.bin"
+___276405e_end:
+___276605e:
+.incbin "bin/PAPERMARIO.276605E.___276605e.bin"
+___276605e_end:
 L2766620:
 .incbin "COMPRESSED.YAY/PAPERMARIO.2766620.COMPRESSED.YAY"
 L2766620_end:
-___2768620_len_2000:
-.incbin "bin/PAPERMARIO.2768620.___2768620_len_2000.bin"
-___2768620_len_2000_end:
-_C__276a620_len_19e6:
-.incbin "bin/PAPERMARIO.276A620._C__276a620_len_19e6.bin"
-_C__276a620_len_19e6_end:
+___2768620:
+.incbin "bin/PAPERMARIO.2768620.___2768620.bin"
+___2768620_end:
+_C__276a620:
+.incbin "bin/PAPERMARIO.276A620._C__276a620.bin"
+_C__276a620_end:
 # Unknown region 276C006-277BEDE [FED8]
 .incbin "bin/PAPERMARIO.276C006.bin"
 
-___277bede_len_2000:
-.incbin "bin/PAPERMARIO.277BEDE.___277bede_len_2000.bin"
-___277bede_len_2000_end:
-___277dede_len_2000:
-.incbin "bin/PAPERMARIO.277DEDE.___277dede_len_2000.bin"
-___277dede_len_2000_end:
-___277fede_len_2000:
-.incbin "bin/PAPERMARIO.277FEDE.___277fede_len_2000.bin"
-___277fede_len_2000_end:
-___2781ede_len_2000:
-.incbin "bin/PAPERMARIO.2781EDE.___2781ede_len_2000.bin"
-___2781ede_len_2000_end:
-___2783ede_len_2000:
-.incbin "bin/PAPERMARIO.2783EDE.___2783ede_len_2000.bin"
-___2783ede_len_2000_end:
-_XehF__2785ede_len_30c:
-.incbin "bin/PAPERMARIO.2785EDE._XehF__2785ede_len_30c.bin"
-_XehF__2785ede_len_30c_end:
+___277bede:
+.incbin "bin/PAPERMARIO.277BEDE.___277bede.bin"
+___277bede_end:
+___277dede:
+.incbin "bin/PAPERMARIO.277DEDE.___277dede.bin"
+___277dede_end:
+___277fede:
+.incbin "bin/PAPERMARIO.277FEDE.___277fede.bin"
+___277fede_end:
+___2781ede:
+.incbin "bin/PAPERMARIO.2781EDE.___2781ede.bin"
+___2781ede_end:
+___2783ede:
+.incbin "bin/PAPERMARIO.2783EDE.___2783ede.bin"
+___2783ede_end:
+_XehF__2785ede:
+.incbin "bin/PAPERMARIO.2785EDE._XehF__2785ede.bin"
+_XehF__2785ede_end:
 # Unknown region 27861EA-27D2FFA [4CE10]
 .incbin "bin/PAPERMARIO.27861EA.bin"
 
-___27d2ffa_len_2000:
-.incbin "bin/PAPERMARIO.27D2FFA.___27d2ffa_len_2000.bin"
-___27d2ffa_len_2000_end:
-___27d4ffa_len_2000:
-.incbin "bin/PAPERMARIO.27D4FFA.___27d4ffa_len_2000.bin"
-___27d4ffa_len_2000_end:
-___27d6ffa_len_2000:
-.incbin "bin/PAPERMARIO.27D6FFA.___27d6ffa_len_2000.bin"
-___27d6ffa_len_2000_end:
-___27d8ffa_len_1772:
-.incbin "bin/PAPERMARIO.27D8FFA.___27d8ffa_len_1772.bin"
-___27d8ffa_len_1772_end:
+___27d2ffa:
+.incbin "bin/PAPERMARIO.27D2FFA.___27d2ffa.bin"
+___27d2ffa_end:
+___27d4ffa:
+.incbin "bin/PAPERMARIO.27D4FFA.___27d4ffa.bin"
+___27d4ffa_end:
+___27d6ffa:
+.incbin "bin/PAPERMARIO.27D6FFA.___27d6ffa.bin"
+___27d6ffa_end:
+___27d8ffa:
+.incbin "bin/PAPERMARIO.27D8FFA.___27d8ffa.bin"
+___27d8ffa_end:
 L27DA76C:
 .incbin "COMPRESSED.YAY/PAPERMARIO.27DA76C.COMPRESSED.YAY"
 L27DA76C_end:
-___27dc76c_len_2000:
-.incbin "bin/PAPERMARIO.27DC76C.___27dc76c_len_2000.bin"
-___27dc76c_len_2000_end:
-___27de76c_len_2000:
-.incbin "bin/PAPERMARIO.27DE76C.___27de76c_len_2000.bin"
-___27de76c_len_2000_end:
-___27e076c_len_2000:
-.incbin "bin/PAPERMARIO.27E076C.___27e076c_len_2000.bin"
-___27e076c_len_2000_end:
-_t__27e276c_len_2000:
-.incbin "bin/PAPERMARIO.27E276C._t__27e276c_len_2000.bin"
-_t__27e276c_len_2000_end:
-___27e476c_len_2000:
-.incbin "bin/PAPERMARIO.27E476C.___27e476c_len_2000.bin"
-___27e476c_len_2000_end:
-___27e676c_len_a26:
-.incbin "bin/PAPERMARIO.27E676C.___27e676c_len_a26.bin"
-___27e676c_len_a26_end:
+___27dc76c:
+.incbin "bin/PAPERMARIO.27DC76C.___27dc76c.bin"
+___27dc76c_end:
+___27de76c:
+.incbin "bin/PAPERMARIO.27DE76C.___27de76c.bin"
+___27de76c_end:
+___27e076c:
+.incbin "bin/PAPERMARIO.27E076C.___27e076c.bin"
+___27e076c_end:
+_t__27e276c:
+.incbin "bin/PAPERMARIO.27E276C._t__27e276c.bin"
+_t__27e276c_end:
+___27e476c:
+.incbin "bin/PAPERMARIO.27E476C.___27e476c.bin"
+___27e476c_end:
+___27e676c:
+.incbin "bin/PAPERMARIO.27E676C.___27e676c.bin"
+___27e676c_end:
 
 .section .mio0
