@@ -818,6 +818,11 @@ SECTIONS
       * (.text8006F890);
    }
 
+   /* 0x800DC500 0759B0-090FE0 [1B630] */
+   .text800DC500 0x800DC500 : AT(0x0759B0) {
+      * (.text800DC500);
+   }
+
    /* 0x8010F6D0 0A5DD0-0B72B0 [114E0] */
    .text8010F6D0 0x8010F6D0 : AT(0x0A5DD0) {
       * (.text8010F6D0);

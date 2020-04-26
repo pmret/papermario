@@ -2966,6 +2966,7 @@ func_80123550:
 /* 0B9CB8 801235B8 03E00008 */  jr    $ra
 /* 0B9CBC 801235BC 27BD0018 */   addiu $sp, $sp, 0x18
 
+func_801235C0:
 /* 0B9CC0 801235C0 3C028007 */  lui   $v0, 0x8007
 /* 0B9CC4 801235C4 8C42419C */  lw    $v0, 0x419c($v0)
 /* 0B9CC8 801235C8 27BDFFE0 */  addiu $sp, $sp, -0x20

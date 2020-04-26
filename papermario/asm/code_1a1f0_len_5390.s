@@ -4809,6 +4809,7 @@ func_800431D4:
 /* 01E5D4 800431D4 03E00008 */  jr    $ra
 /* 01E5D8 800431D8 00000000 */   nop   
 
+func_800431DC:
 /* 01E5DC 800431DC 27BDFF58 */  addiu $sp, $sp, -0xa8
 /* 01E5E0 800431E0 3C03FDFF */  lui   $v1, 0xfdff
 /* 01E5E4 800431E4 AFB40060 */  sw    $s4, 0x60($sp)

@@ -173,31 +173,33 @@ ranges:
   - [0x4a1f0, 0x4a360, "asm", "code_4a1f0_len_170", 0x8006edf0]
   - [0x4a360, 0x4ac90, "asm", "code_4a360_len_930", 0x8006ef60]
   - [0x4ac90, 0x4e5a0, "asm", "code_4ac90_len_3910", 0x8006f890]
-  - [0x759b0, 0x779b0, "bin",   "___759b0"] # (DRAM:0x000DC500) (frame:0x00000001)  header:  0x27000000 trace:
-  - [0x779b0, 0x799b0, "bin",   "___779b0"] # (DRAM:0x000DE500) (frame:0x00000001)  header:  0xaf000000 trace:
-  - [0x799b0, 0x7b9b0, "bin",   "___799b0"] # (DRAM:0x000E0500) (frame:0x00000001)  header:  0xc000000 trace:
-  - [0x7b9b0, 0x7d9b0, "bin",   "___7b9b0"] # (DRAM:0x000E2500) (frame:0x00000001)  header:  0x3c000000 trace:
-  - [0x7d9b0, 0x7f9b0, "bin",   "___7d9b0"] # (DRAM:0x000E4500) (frame:0x00000001)  header:  0x3000000 trace:
-  - [0x7f9b0, 0x819b0, "bin",   "___7f9b0"] # (DRAM:0x000E6500) (frame:0x00000001)  header:  0x3c000000 trace:
-  - [0x819b0, 0x839b0, "bin",   "___819b0"] # (DRAM:0x000E8500) (frame:0x00000001)  header:  0xa6000000 trace:
-  - [0x839b0, 0x859b0, "bin",   "___839b0"] # (DRAM:0x000EA500) (frame:0x00000001)  header:  0x24000000 trace:
-  - [0x859b0, 0x879b0, "bin",   "___859b0"] # (DRAM:0x000EC500) (frame:0x00000001)  header:  0xae000000 trace:
-  - [0x879b0, 0x899b0, "bin",   "_F__879b0"] # (DRAM:0x000EE500) (frame:0x00000001)  header: F 0x46000000 trace:
-  - [0x899b0, 0x8b9b0, "bin",   "___899b0"] # (DRAM:0x000F0500) (frame:0x00000001)  header:  0x10000000 trace:
-  - [0x8b9b0, 0x8d9b0, "bin",   "___8b9b0"] # (DRAM:0x000F2500) (frame:0x00000001)  header:  0x90000000 trace:
-  - [0x8d9b0, 0x8f9b0, "bin",   "___8d9b0"] # (DRAM:0x000F4500) (frame:0x00000001)  header:  0x8000000 trace:
-  - [0x8f9b0, 0x919b0, "bin",   "___8f9b0"] # (DRAM:0x000F6500) (frame:0x00000001)  header:  0x8000000 trace:
-  - [0x919b0, 0x939b0, "bin",   "___919b0"] # (DRAM:0x000F8500) (frame:0x00000001)  header:  0x0 trace:
-  - [0x939b0, 0x959b0, "bin",   "___939b0"] # (DRAM:0x000FA500) (frame:0x00000001)  header:  0x88000000 trace:
-  - [0x959b0, 0x979b0, "bin",   "___959b0"] # (DRAM:0x000FC500) (frame:0x00000001)  header:  0xff000000 trace:
-  - [0x979b0, 0x999b0, "bin",   "___979b0"] # (DRAM:0x000FE500) (frame:0x00000001)  header:  0x0 trace:
-  - [0x999b0, 0x9b9b0, "bin",   "___999b0"] # (DRAM:0x00100500) (frame:0x00000001)  header:  0xb5000000 trace:
-  - [0x9b9b0, 0x9d9b0, "bin",   "___9b9b0"] # (DRAM:0x00102500) (frame:0x00000001)  header:  0xf1000000 trace:
-  - [0x9d9b0, 0x9f9b0, "bin",   "_g__9d9b0"] # (DRAM:0x00104500) (frame:0x00000001)  header: g 0x67000000 trace:
-  - [0x9f9b0, 0xa19b0, "bin",   "___9f9b0"] # (DRAM:0x00106500) (frame:0x00000001)  header:  0x0 trace:
-  - [0xa19b0, 0xa39b0, "bin",   "___a19b0"] # (DRAM:0x00108500) (frame:0x00000001)  header:  0x0 trace:
-  - [0xa39b0, 0xa59b0, "bin",   "___a39b0"] # (DRAM:0x0010A500) (frame:0x00000001)  header:  0x8f000000 trace:
-  - [0xa59b0, 0xa5dd0, "bin",   "___a59b0"] # (DRAM:0x0010C500) (frame:0x00000001)  header:  0x80000000 trace:
+#  - [0x759b0, 0x779b0, "bin",   "___759b0"] # (DRAM:0x000DC500) (frame:0x00000001)  header:  0x27000000 trace:
+#  - [0x779b0, 0x799b0, "bin",   "___779b0"] # (DRAM:0x000DE500) (frame:0x00000001)  header:  0xaf000000 trace:
+#  - [0x799b0, 0x7b9b0, "bin",   "___799b0"] # (DRAM:0x000E0500) (frame:0x00000001)  header:  0xc000000 trace:
+#  - [0x7b9b0, 0x7d9b0, "bin",   "___7b9b0"] # (DRAM:0x000E2500) (frame:0x00000001)  header:  0x3c000000 trace:
+#  - [0x7d9b0, 0x7f9b0, "bin",   "___7d9b0"] # (DRAM:0x000E4500) (frame:0x00000001)  header:  0x3000000 trace:
+#  - [0x7f9b0, 0x819b0, "bin",   "___7f9b0"] # (DRAM:0x000E6500) (frame:0x00000001)  header:  0x3c000000 trace:
+#  - [0x819b0, 0x839b0, "bin",   "___819b0"] # (DRAM:0x000E8500) (frame:0x00000001)  header:  0xa6000000 trace:
+#  - [0x839b0, 0x859b0, "bin",   "___839b0"] # (DRAM:0x000EA500) (frame:0x00000001)  header:  0x24000000 trace:
+#  - [0x859b0, 0x879b0, "bin",   "___859b0"] # (DRAM:0x000EC500) (frame:0x00000001)  header:  0xae000000 trace:
+#  - [0x879b0, 0x899b0, "bin",   "_F__879b0"] # (DRAM:0x000EE500) (frame:0x00000001)  header: F 0x46000000 trace:
+#  - [0x899b0, 0x8b9b0, "bin",   "___899b0"] # (DRAM:0x000F0500) (frame:0x00000001)  header:  0x10000000 trace:
+#  - [0x8b9b0, 0x8d9b0, "bin",   "___8b9b0"] # (DRAM:0x000F2500) (frame:0x00000001)  header:  0x90000000 trace:
+#  - [0x8d9b0, 0x8f9b0, "bin",   "___8d9b0"] # (DRAM:0x000F4500) (frame:0x00000001)  header:  0x8000000 trace:
+#  - [0x8f9b0, 0x919b0, "bin",   "___8f9b0"] # (DRAM:0x000F6500) (frame:0x00000001)  header:  0x8000000 trace:
+#  - [0x919b0, 0x939b0, "bin",   "___919b0"] # (DRAM:0x000F8500) (frame:0x00000001)  header:  0x0 trace:
+#  - [0x939b0, 0x959b0, "bin",   "___939b0"] # (DRAM:0x000FA500) (frame:0x00000001)  header:  0x88000000 trace:
+#  - [0x959b0, 0x979b0, "bin",   "___959b0"] # (DRAM:0x000FC500) (frame:0x00000001)  header:  0xff000000 trace:
+#  - [0x979b0, 0x999b0, "bin",   "___979b0"] # (DRAM:0x000FE500) (frame:0x00000001)  header:  0x0 trace:
+#  - [0x999b0, 0x9b9b0, "bin",   "___999b0"] # (DRAM:0x00100500) (frame:0x00000001)  header:  0xb5000000 trace:
+#  - [0x9b9b0, 0x9d9b0, "bin",   "___9b9b0"] # (DRAM:0x00102500) (frame:0x00000001)  header:  0xf1000000 trace:
+#  - [0x9d9b0, 0x9f9b0, "bin",   "_g__9d9b0"] # (DRAM:0x00104500) (frame:0x00000001)  header: g 0x67000000 trace:
+#  - [0x9f9b0, 0xa19b0, "bin",   "___9f9b0"] # (DRAM:0x00106500) (frame:0x00000001)  header:  0x0 trace:
+#  - [0xa19b0, 0xa39b0, "bin",   "___a19b0"] # (DRAM:0x00108500) (frame:0x00000001)  header:  0x0 trace:
+#  - [0xa39b0, 0xa59b0, "bin",   "___a39b0"] # (DRAM:0x0010A500) (frame:0x00000001)  header:  0x8f000000 trace:
+#  - [0xa59b0, 0xa5dd0, "bin",   "___a59b0"] # (DRAM:0x0010C500) (frame:0x00000001)  header:  0x80000000 trace:
+  - [0x759b0, 0x90FE0, "asm", "giantchunk", 0x800DC500]
+  - [0x90FE0, 0xa5dd0, "bin", "giantchunk_bin", 0x800F7B30]
   - [0xa5dd0, 0xb72b0, "asm", "code_a5dd0_len_114e0", 0x8010f6d0]
   - [0xb72b0, 0xcd180, "asm", "code_b72b0_len_15ed0", 0x80120bb0]
   - [0xcd180, 0xd0a70, "asm", "code_cd180_len_38f0", 0x80136a80]

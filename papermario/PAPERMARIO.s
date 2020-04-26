@@ -192,81 +192,10 @@ bootcode_font_end:
 # Unknown region 04E5A0-0759B0 [27410]
 .incbin "bin/PAPERMARIO.04E5A0.bin"
 
-___759b0:
-.incbin "bin/PAPERMARIO.0759B0.___759b0.bin"
-___759b0_end:
-___779b0:
-.incbin "bin/PAPERMARIO.0779B0.___779b0.bin"
-___779b0_end:
-___799b0:
-.incbin "bin/PAPERMARIO.0799B0.___799b0.bin"
-___799b0_end:
-___7b9b0:
-.incbin "bin/PAPERMARIO.07B9B0.___7b9b0.bin"
-___7b9b0_end:
-___7d9b0:
-.incbin "bin/PAPERMARIO.07D9B0.___7d9b0.bin"
-___7d9b0_end:
-___7f9b0:
-.incbin "bin/PAPERMARIO.07F9B0.___7f9b0.bin"
-___7f9b0_end:
-___819b0:
-.incbin "bin/PAPERMARIO.0819B0.___819b0.bin"
-___819b0_end:
-___839b0:
-.incbin "bin/PAPERMARIO.0839B0.___839b0.bin"
-___839b0_end:
-___859b0:
-.incbin "bin/PAPERMARIO.0859B0.___859b0.bin"
-___859b0_end:
-_F__879b0:
-.incbin "bin/PAPERMARIO.0879B0._F__879b0.bin"
-_F__879b0_end:
-___899b0:
-.incbin "bin/PAPERMARIO.0899B0.___899b0.bin"
-___899b0_end:
-___8b9b0:
-.incbin "bin/PAPERMARIO.08B9B0.___8b9b0.bin"
-___8b9b0_end:
-___8d9b0:
-.incbin "bin/PAPERMARIO.08D9B0.___8d9b0.bin"
-___8d9b0_end:
-___8f9b0:
-.incbin "bin/PAPERMARIO.08F9B0.___8f9b0.bin"
-___8f9b0_end:
-___919b0:
-.incbin "bin/PAPERMARIO.0919B0.___919b0.bin"
-___919b0_end:
-___939b0:
-.incbin "bin/PAPERMARIO.0939B0.___939b0.bin"
-___939b0_end:
-___959b0:
-.incbin "bin/PAPERMARIO.0959B0.___959b0.bin"
-___959b0_end:
-___979b0:
-.incbin "bin/PAPERMARIO.0979B0.___979b0.bin"
-___979b0_end:
-___999b0:
-.incbin "bin/PAPERMARIO.0999B0.___999b0.bin"
-___999b0_end:
-___9b9b0:
-.incbin "bin/PAPERMARIO.09B9B0.___9b9b0.bin"
-___9b9b0_end:
-_g__9d9b0:
-.incbin "bin/PAPERMARIO.09D9B0._g__9d9b0.bin"
-_g__9d9b0_end:
-___9f9b0:
-.incbin "bin/PAPERMARIO.09F9B0.___9f9b0.bin"
-___9f9b0_end:
-___a19b0:
-.incbin "bin/PAPERMARIO.0A19B0.___a19b0.bin"
-___a19b0_end:
-___a39b0:
-.incbin "bin/PAPERMARIO.0A39B0.___a39b0.bin"
-___a39b0_end:
-___a59b0:
-.incbin "bin/PAPERMARIO.0A59B0.___a59b0.bin"
-___a59b0_end:
+.include "asm/giantchunk.s" 
+giantchunk_bin:
+.incbin "bin/PAPERMARIO.090FE0.giantchunk_bin.bin"
+giantchunk_bin_end:
 .include "asm/code_a5dd0_len_114e0.s" 
 .include "asm/code_b72b0_len_15ed0.s" 
 .include "asm/code_cd180_len_38f0.s" 

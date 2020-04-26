@@ -125,14 +125,17 @@ func_802B70AC:
 /* E21070 802B71C0 03E00008 */  jr    $ra
 /* E21074 802B71C4 27BD0018 */   addiu $sp, $sp, 0x18
 
+func_802B71C8:
 /* E21078 802B71C8 3C028011 */  lui   $v0, 0x8011
 /* E2107C 802B71CC 8C42EFCC */  lw    $v0, -0x1034($v0)
 /* E21080 802B71D0 27BDFF28 */  addiu $sp, $sp, -0xd8
+func_802B71D4:
 /* E21084 802B71D4 AFBF00D0 */  sw    $ra, 0xd0($sp)
 /* E21088 802B71D8 AFB500CC */  sw    $s5, 0xcc($sp)
 /* E2108C 802B71DC AFB400C8 */  sw    $s4, 0xc8($sp)
 /* E21090 802B71E0 AFB300C4 */  sw    $s3, 0xc4($sp)
 /* E21094 802B71E4 AFB200C0 */  sw    $s2, 0xc0($sp)
+func_802B71E8:
 /* E21098 802B71E8 AFB100BC */  sw    $s1, 0xbc($sp)
 /* E2109C 802B71EC 30420020 */  andi  $v0, $v0, 0x20
 /* E210A0 802B71F0 10400085 */  beqz  $v0, .L802B7408

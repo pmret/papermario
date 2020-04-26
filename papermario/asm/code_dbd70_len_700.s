@@ -474,6 +474,7 @@ func_80145C6C:
 /* 0DC3E0 80145CE0 03E00008 */  jr    $ra
 /* 0DC3E4 80145CE4 8C820000 */   lw    $v0, ($a0)
 
+func_80145CE8:
 /* 0DC3E8 80145CE8 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0DC3EC 80145CEC AFB00010 */  sw    $s0, 0x10($sp)
 /* 0DC3F0 80145CF0 AFBF0014 */  sw    $ra, 0x14($sp)
