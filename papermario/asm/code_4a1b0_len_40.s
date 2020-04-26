@@ -1,9 +1,10 @@
 
 .section .text8006EDB0, "ax"
 
+memset:
 /* 04A1B0 8006EDB0 27BDFFF8 */  addiu $sp, $sp, -8
-/* 04A1B4 8006EDB4 00801021 */  move  $v0, $a0
-/* 04A1B8 8006EDB8 00403821 */  move  $a3, $v0
+/* 04A1B4 8006EDB4 00801021 */  addu  $v0, $a0, $zero
+/* 04A1B8 8006EDB8 00403821 */  addu  $a3, $v0, $zero
 /* 04A1BC 8006EDBC 10C00006 */  beqz  $a2, .L8006EDD8
 /* 04A1C0 8006EDC0 24C3FFFF */   addiu $v1, $a2, -1
 /* 04A1C4 8006EDC4 2406FFFF */  addiu $a2, $zero, -1

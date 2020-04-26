@@ -141,12 +141,12 @@ func_802B70AC:
 /* E210AC 802B71FC 3C14802B */  lui   $s4, 0x802b
 /* E210B0 802B7200 269479A8 */  addiu $s4, $s4, 0x79a8
 /* E210B4 802B7204 8E820000 */  lw    $v0, ($s4)
-/* E210B8 802B7208 0200202D */  move  $a0, $s0
+/* E210B8 802B7208 0200202D */  daddu $a0, $s0, $zero
 /* E210BC 802B720C 8C450014 */  lw    $a1, 0x14($v0)
 /* E210C0 802B7210 3C150001 */  lui   $s5, 1
-/* E210C4 802B7214 00A0302D */  move  $a2, $a1
-/* E210C8 802B7218 0C019DF0 */  jal   func_800677C0
-/* E210CC 802B721C 00A0382D */   move  $a3, $a1
+/* E210C4 802B7214 00A0302D */  daddu $a2, $a1, $zero
+/* E210C8 802B7218 0C019DF0 */  jal   guScaleF
+/* E210CC 802B721C 00A0382D */   daddu $a3, $a1, $zero
 /* E210D0 802B7220 3C038007 */  lui   $v1, 0x8007
 /* E210D4 802B7224 8C637410 */  lw    $v1, 0x7410($v1)
 /* E210D8 802B7228 27B10078 */  addiu $s1, $sp, 0x78
@@ -167,25 +167,25 @@ func_802B70AC:
 /* E21114 802B7264 3C073F80 */  lui   $a3, 0x3f80
 /* E21118 802B7268 44060000 */  mfc1  $a2, $f0
 /* E2111C 802B726C 44052000 */  mfc1  $a1, $f4
-/* E21120 802B7270 0220202D */  move  $a0, $s1
-/* E21124 802B7274 0C019EC8 */  jal   func_80067B20
+/* E21120 802B7270 0220202D */  daddu $a0, $s1, $zero
+/* E21124 802B7274 0C019EC8 */  jal   guRotateF
 /* E21128 802B7278 AFA60010 */   sw    $a2, 0x10($sp)
-/* E2112C 802B727C 0200202D */  move  $a0, $s0
-/* E21130 802B7280 0220282D */  move  $a1, $s1
-/* E21134 802B7284 0C019D80 */  jal   func_80067600
-/* E21138 802B7288 0200302D */   move  $a2, $s0
+/* E2112C 802B727C 0200202D */  daddu $a0, $s0, $zero
+/* E21130 802B7280 0220282D */  daddu $a1, $s1, $zero
+/* E21134 802B7284 0C019D80 */  jal   guMtxCatF
+/* E21138 802B7288 0200302D */   daddu $a2, $s0, $zero
 /* E2113C 802B728C 8E820000 */  lw    $v0, ($s4)
 /* E21140 802B7290 36B51630 */  ori   $s5, $s5, 0x1630
 /* E21144 802B7294 8C450004 */  lw    $a1, 4($v0)
 /* E21148 802B7298 8C460008 */  lw    $a2, 8($v0)
 /* E2114C 802B729C 8C47000C */  lw    $a3, 0xc($v0)
-/* E21150 802B72A0 0C019E40 */  jal   func_80067900
-/* E21154 802B72A4 0220202D */   move  $a0, $s1
-/* E21158 802B72A8 0200202D */  move  $a0, $s0
-/* E2115C 802B72AC 0220282D */  move  $a1, $s1
-/* E21160 802B72B0 0C019D80 */  jal   func_80067600
-/* E21164 802B72B4 0220302D */   move  $a2, $s1
-/* E21168 802B72B8 0220202D */  move  $a0, $s1
+/* E21150 802B72A0 0C019E40 */  jal   guTranslateF
+/* E21154 802B72A4 0220202D */   daddu $a0, $s1, $zero
+/* E21158 802B72A8 0200202D */  daddu $a0, $s0, $zero
+/* E2115C 802B72AC 0220282D */  daddu $a1, $s1, $zero
+/* E21160 802B72B0 0C019D80 */  jal   guMtxCatF
+/* E21164 802B72B4 0220302D */   daddu $a2, $s1, $zero
+/* E21168 802B72B8 0220202D */  daddu $a0, $s1, $zero
 /* E2116C 802B72BC 3C108007 */  lui   $s0, 0x8007
 /* E21170 802B72C0 261041F0 */  addiu $s0, $s0, 0x41f0
 /* E21174 802B72C4 3C13800A */  lui   $s3, 0x800a
@@ -194,19 +194,19 @@ func_802B70AC:
 /* E21180 802B72D0 8E620000 */  lw    $v0, ($s3)
 /* E21184 802B72D4 00052980 */  sll   $a1, $a1, 6
 /* E21188 802B72D8 00B52821 */  addu  $a1, $a1, $s5
-/* E2118C 802B72DC 0C019D40 */  jal   func_80067500
+/* E2118C 802B72DC 0C019D40 */  jal   guMtxF2L
 /* E21190 802B72E0 00452821 */   addu  $a1, $v0, $a1
 /* E21194 802B72E4 3C03DA38 */  lui   $v1, 0xda38
 /* E21198 802B72E8 34630002 */  ori   $v1, $v1, 2
-/* E2119C 802B72EC 0000202D */  move  $a0, $zero
-/* E211A0 802B72F0 0080282D */  move  $a1, $a0
-/* E211A4 802B72F4 0080302D */  move  $a2, $a0
+/* E2119C 802B72EC 0000202D */  daddu $a0, $zero, $zero
+/* E211A0 802B72F0 0080282D */  daddu $a1, $a0, $zero
+/* E211A4 802B72F4 0080302D */  daddu $a2, $a0, $zero
 /* E211A8 802B72F8 3C12800A */  lui   $s2, 0x800a
 /* E211AC 802B72FC 2652A66C */  addiu $s2, $s2, -0x5994
-/* E211B0 802B7300 0080382D */  move  $a3, $a0
+/* E211B0 802B7300 0080382D */  daddu $a3, $a0, $zero
 /* E211B4 802B7304 8E480000 */  lw    $t0, ($s2)
 /* E211B8 802B7308 96020000 */  lhu   $v0, ($s0)
-/* E211BC 802B730C 0100482D */  move  $t1, $t0
+/* E211BC 802B730C 0100482D */  daddu $t1, $t0, $zero
 /* E211C0 802B7310 25080008 */  addiu $t0, $t0, 8
 /* E211C4 802B7314 AE480000 */  sw    $t0, ($s2)
 /* E211C8 802B7318 AD230000 */  sw    $v1, ($t1)
@@ -245,25 +245,25 @@ func_802B70AC:
 /* E2124C 802B739C AFA00014 */  sw    $zero, 0x14($sp)
 /* E21250 802B73A0 0C04EAA7 */  jal   func_8013AA9C
 /* E21254 802B73A4 AFB00018 */   sw    $s0, 0x18($sp)
-/* E21258 802B73A8 0000202D */  move  $a0, $zero
+/* E21258 802B73A8 0000202D */  daddu $a0, $zero, $zero
 /* E2125C 802B73AC 8E820000 */  lw    $v0, ($s4)
 /* E21260 802B73B0 24050006 */  addiu $a1, $zero, 6
 /* E21264 802B73B4 9046002B */  lbu   $a2, 0x2b($v0)
 /* E21268 802B73B8 240200FF */  addiu $v0, $zero, 0xff
 /* E2126C 802B73BC AFA20014 */  sw    $v0, 0x14($sp)
 /* E21270 802B73C0 AFB00018 */  sw    $s0, 0x18($sp)
-/* E21274 802B73C4 00C0382D */  move  $a3, $a2
+/* E21274 802B73C4 00C0382D */  daddu $a3, $a2, $zero
 /* E21278 802B73C8 0C04EAA7 */  jal   func_8013AA9C
 /* E2127C 802B73CC AFA60010 */   sw    $a2, 0x10($sp)
-/* E21280 802B73D0 0000202D */  move  $a0, $zero
+/* E21280 802B73D0 0000202D */  daddu $a0, $zero, $zero
 /* E21284 802B73D4 27A50020 */  addiu $a1, $sp, 0x20
 /* E21288 802B73D8 24060040 */  addiu $a2, $zero, 0x40
 /* E2128C 802B73DC 0C04EBDC */  jal   func_8013AF70
-/* E21290 802B73E0 0220382D */   move  $a3, $s1
+/* E21290 802B73E0 0220382D */   daddu $a3, $s1, $zero
 /* E21294 802B73E4 3C04D838 */  lui   $a0, 0xd838
 /* E21298 802B73E8 8E420000 */  lw    $v0, ($s2)
 /* E2129C 802B73EC 34840002 */  ori   $a0, $a0, 2
-/* E212A0 802B73F0 0040182D */  move  $v1, $v0
+/* E212A0 802B73F0 0040182D */  daddu $v1, $v0, $zero
 /* E212A4 802B73F4 24420008 */  addiu $v0, $v0, 8
 /* E212A8 802B73F8 AE420000 */  sw    $v0, ($s2)
 /* E212AC 802B73FC 24020040 */  addiu $v0, $zero, 0x40
@@ -447,7 +447,7 @@ func_802B7674:
 .L802B7674:
 /* E21524 802B7674 0C0ADC00 */  jal   func_802B7000
 /* E21528 802B7678 00000000 */   nop   
-/* E2152C 802B767C 0040302D */  move  $a2, $v0
+/* E2152C 802B767C 0040302D */  daddu $a2, $v0, $zero
 func_802B7680:
 .L802B7680:
 /* E21530 802B7680 3C04802B */  lui   $a0, 0x802b

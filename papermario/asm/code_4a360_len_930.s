@@ -1,115 +1,10 @@
 
-.section .text8006EDF0, "ax"
-
-func_8006EDF0:
-/* 04A1F0 8006EDF0 8C980004 */  lw    $t8, 4($a0)
-/* 04A1F4 8006EDF4 8C870008 */  lw    $a3, 8($a0)
-/* 04A1F8 8006EDF8 8C99000C */  lw    $t9, 0xc($a0)
-/* 04A1FC 8006EDFC 0000302D */  move  $a2, $zero
-/* 04A200 8006EE00 0305C020 */  add   $t8, $t8, $a1
-/* 04A204 8006EE04 00E43820 */  add   $a3, $a3, $a0
-/* 04A208 8006EE08 0324C820 */  add   $t9, $t9, $a0
-/* 04A20C 8006EE0C 20840010 */  addi  $a0, $a0, 0x10
-.L8006EE10:
-/* 04A210 8006EE10 14C00004 */  bnez  $a2, .L8006EE24
-/* 04A214 8006EE14 00000000 */   nop   
-/* 04A218 8006EE18 8C880000 */  lw    $t0, ($a0)
-/* 04A21C 8006EE1C 24060020 */  addiu $a2, $zero, 0x20
-/* 04A220 8006EE20 20840004 */  addi  $a0, $a0, 4
-.L8006EE24:
-/* 04A224 8006EE24 0100482A */  slt   $t1, $t0, $zero
-/* 04A228 8006EE28 11200006 */  beqz  $t1, .L8006EE44
-/* 04A22C 8006EE2C 00000000 */   nop   
-/* 04A230 8006EE30 832A0000 */  lb    $t2, ($t9)
-/* 04A234 8006EE34 23390001 */  addi  $t9, $t9, 1
-/* 04A238 8006EE38 A0AA0000 */  sb    $t2, ($a1)
-/* 04A23C 8006EE3C 1000000E */  b     .L8006EE78
-/* 04A240 8006EE40 20A50001 */   addi  $a1, $a1, 1
-.L8006EE44:
-/* 04A244 8006EE44 94EA0000 */  lhu   $t2, ($a3)
-/* 04A248 8006EE48 20E70002 */  addi  $a3, $a3, 2
-/* 04A24C 8006EE4C 000A5B02 */  srl   $t3, $t2, 0xc
-/* 04A250 8006EE50 314A0FFF */  andi  $t2, $t2, 0xfff
-/* 04A254 8006EE54 1160000D */  beqz  $t3, .L8006EE8C
-/* 04A258 8006EE58 00AA4822 */   sub   $t1, $a1, $t2
-/* 04A25C 8006EE5C 216B0002 */  addi  $t3, $t3, 2
-.L8006EE60:
-/* 04A260 8006EE60 812AFFFF */  lb    $t2, -1($t1)
-/* 04A264 8006EE64 216BFFFF */  addi  $t3, $t3, -1
-/* 04A268 8006EE68 21290001 */  addi  $t1, $t1, 1
-/* 04A26C 8006EE6C A0AA0000 */  sb    $t2, ($a1)
-/* 04A270 8006EE70 1560FFFB */  bnez  $t3, .L8006EE60
-/* 04A274 8006EE74 20A50001 */   addi  $a1, $a1, 1
-.L8006EE78:
-/* 04A278 8006EE78 00084040 */  sll   $t0, $t0, 1
-/* 04A27C 8006EE7C 14B8FFE4 */  bne   $a1, $t8, .L8006EE10
-/* 04A280 8006EE80 20C6FFFF */   addi  $a2, $a2, -1
-/* 04A284 8006EE84 03E00008 */  jr    $ra
-/* 04A288 8006EE88 00000000 */   nop   
-
-.L8006EE8C:
-/* 04A28C 8006EE8C 932B0000 */  lbu   $t3, ($t9)
-/* 04A290 8006EE90 23390001 */  addi  $t9, $t9, 1
-/* 04A294 8006EE94 1000FFF2 */  b     .L8006EE60
-/* 04A298 8006EE98 216B0012 */   addi  $t3, $t3, 0x12
-/* 04A29C 8006EE9C 00000000 */  nop   
-/* 04A2A0 8006EEA0 308400FF */  andi  $a0, $a0, 0xff
-/* 04A2A4 8006EEA4 30A500FF */  andi  $a1, $a1, 0xff
-/* 04A2A8 8006EEA8 30C600FF */  andi  $a2, $a2, 0xff
-/* 04A2AC 8006EEAC 30E700FF */  andi  $a3, $a3, 0xff
-/* 04A2B0 8006EEB0 8FAE0010 */  lw    $t6, 0x10($sp)
-/* 04A2B4 8006EEB4 3C01A000 */  lui   $at, 0xa000
-/* 04A2B8 8006EEB8 01C17825 */  or    $t7, $t6, $at
-/* 04A2BC 8006EEBC 3C01800B */  lui   $at, 0x800b
-/* 04A2C0 8006EEC0 AC2F0C7C */  sw    $t7, 0xc7c($at)
-/* 04A2C4 8006EEC4 3C18800B */  lui   $t8, 0x800b
-/* 04A2C8 8006EEC8 93180C74 */  lbu   $t8, 0xc74($t8)
-/* 04A2CC 8006EECC 00000000 */  nop   
-/* 04A2D0 8006EED0 27190001 */  addiu $t9, $t8, 1
-/* 04A2D4 8006EED4 3C01800B */  lui   $at, 0x800b
-/* 04A2D8 8006EED8 A0390C74 */  sb    $t9, 0xc74($at)
-/* 04A2DC 8006EEDC 3C01800B */  lui   $at, 0x800b
-/* 04A2E0 8006EEE0 A0240C75 */  sb    $a0, 0xc75($at)
-/* 04A2E4 8006EEE4 3C01800B */  lui   $at, 0x800b
-/* 04A2E8 8006EEE8 A0250C78 */  sb    $a1, 0xc78($at)
-/* 04A2EC 8006EEEC 3C01800B */  lui   $at, 0x800b
-/* 04A2F0 8006EEF0 A0260C76 */  sb    $a2, 0xc76($at)
-/* 04A2F4 8006EEF4 3C01800B */  lui   $at, 0x800b
-/* 04A2F8 8006EEF8 A0270C77 */  sb    $a3, 0xc77($at)
-/* 04A2FC 8006EEFC 24080001 */  addiu $t0, $zero, 1
-/* 04A300 8006EF00 3C01800B */  lui   $at, 0x800b
-/* 04A304 8006EF04 A0280C79 */  sb    $t0, 0xc79($at)
-/* 04A308 8006EF08 3C02800B */  lui   $v0, 0x800b
-/* 04A30C 8006EF0C 24420C70 */  addiu $v0, $v0, 0xc70
-/* 04A310 8006EF10 03E00008 */  jr    $ra
-/* 04A314 8006EF14 00000000 */   nop   
-
-/* 04A318 8006EF18 03E00008 */  jr    $ra
-/* 04A31C 8006EF1C 00000000 */   nop   
-
-/* 04A320 8006EF20 03E00008 */  jr    $ra
-/* 04A324 8006EF24 00000000 */   nop   
-
-/* 04A328 8006EF28 00047440 */  sll   $t6, $a0, 0x11
-/* 04A32C 8006EF2C 3C010800 */  lui   $at, 0x800
-/* 04A330 8006EF30 01C17821 */  addu  $t7, $t6, $at
-/* 04A334 8006EF34 3C01A000 */  lui   $at, 0xa000
-/* 04A338 8006EF38 01E1C025 */  or    $t8, $t7, $at
-/* 04A33C 8006EF3C 3C01800B */  lui   $at, 0x800b
-/* 04A340 8006EF40 AC380C7C */  sw    $t8, 0xc7c($at)
-/* 04A344 8006EF44 24990008 */  addiu $t9, $a0, 8
-/* 04A348 8006EF48 3C01800B */  lui   $at, 0x800b
-/* 04A34C 8006EF4C A0390C74 */  sb    $t9, 0xc74($at)
-/* 04A350 8006EF50 03E00008 */  jr    $ra
-/* 04A354 8006EF54 00000000 */   nop   
-
-/* 04A358 8006EF58 03E00008 */  jr    $ra
-/* 04A35C 8006EF5C 00000000 */   nop   
+.section .text8006EF60, "ax"
 
 /* 04A360 8006EF60 03E00008 */  jr    $ra
 /* 04A364 8006EF64 00000000 */   nop   
 
-func_8006EF68:
+osFlashInit:
 /* 04A368 8006EF68 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 04A36C 8006EF6C AFBF0014 */  sw    $ra, 0x14($sp)
 /* 04A370 8006EF70 3C04800B */  lui   $a0, 0x800b
@@ -117,7 +12,7 @@ func_8006EF68:
 /* 04A378 8006EF78 3C05800B */  lui   $a1, 0x800b
 /* 04A37C 8006EF7C 24A50CE4 */  addiu $a1, $a1, 0xce4
 /* 04A380 8006EF80 24060001 */  addiu $a2, $zero, 1
-/* 04A384 8006EF84 0C019560 */  jal   func_80065580
+/* 04A384 8006EF84 0C019560 */  jal   osCreateMesgQueue
 /* 04A388 8006EF88 00000000 */   nop   
 /* 04A38C 8006EF8C 3C0E800B */  lui   $t6, 0x800b
 /* 04A390 8006EF90 8DCE0C7C */  lw    $t6, 0xc7c($t6)
@@ -156,15 +51,15 @@ func_8006EF68:
 /* 04A410 8006F010 24840C70 */  addiu $a0, $a0, 0xc70
 /* 04A414 8006F014 24840014 */  addiu $a0, $a0, 0x14
 /* 04A418 8006F018 24050060 */  addiu $a1, $zero, 0x60
-/* 04A41C 8006F01C 0C01925C */  jal   func_80064970
+/* 04A41C 8006F01C 0C01925C */  jal   bzero
 /* 04A420 8006F020 00000000 */   nop   
 /* 04A424 8006F024 3C04800B */  lui   $a0, 0x800b
 /* 04A428 8006F028 24840C70 */  addiu $a0, $a0, 0xc70
-/* 04A42C 8006F02C 0C0183B0 */  jal   func_80060EC0
+/* 04A42C 8006F02C 0C0183B0 */  jal   osEPiLinkHandle
 /* 04A430 8006F030 00000000 */   nop   
 /* 04A434 8006F034 27A4001C */  addiu $a0, $sp, 0x1c
 /* 04A438 8006F038 27A50018 */  addiu $a1, $sp, 0x18
-/* 04A43C 8006F03C 0C01BC61 */  jal   func_8006F184
+/* 04A43C 8006F03C 0C01BC61 */  jal   osFlashReadId
 /* 04A440 8006F040 00000000 */   nop   
 /* 04A444 8006F044 8FAC0018 */  lw    $t4, 0x18($sp)
 /* 04A448 8006F048 3C0100C2 */  lui   $at, 0xc2
@@ -200,7 +95,7 @@ func_8006EF68:
 /* 04A4B0 8006F0B0 03E00008 */  jr    $ra
 /* 04A4B4 8006F0B4 00000000 */   nop   
 
-func_8006F0B8:
+osFlashReadStatus:
 /* 04A4B8 8006F0B8 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 04A4BC 8006F0BC AFBF0014 */  sw    $ra, 0x14($sp)
 /* 04A4C0 8006F0C0 AFA40020 */  sw    $a0, 0x20($sp)
@@ -210,16 +105,16 @@ func_8006F0B8:
 /* 04A4D0 8006F0D0 8CA50C7C */  lw    $a1, 0xc7c($a1)
 /* 04A4D4 8006F0D4 3C010001 */  lui   $at, 1
 /* 04A4D8 8006F0D8 00A17025 */  or    $t6, $a1, $at
-/* 04A4DC 8006F0DC 01C02825 */  move  $a1, $t6
+/* 04A4DC 8006F0DC 01C02825 */  or    $a1, $t6, $zero
 /* 04A4E0 8006F0E0 3C06D200 */  lui   $a2, 0xd200
-/* 04A4E4 8006F0E4 0C018358 */  jal   func_80060D60
+/* 04A4E4 8006F0E4 0C018358 */  jal   osEPiWriteIo
 /* 04A4E8 8006F0E8 00000000 */   nop   
 /* 04A4EC 8006F0EC 3C04800B */  lui   $a0, 0x800b
 /* 04A4F0 8006F0F0 24840C70 */  addiu $a0, $a0, 0xc70
 /* 04A4F4 8006F0F4 3C05800B */  lui   $a1, 0x800b
 /* 04A4F8 8006F0F8 8CA50C7C */  lw    $a1, 0xc7c($a1)
 /* 04A4FC 8006F0FC 27A6001C */  addiu $a2, $sp, 0x1c
-/* 04A500 8006F100 0C018370 */  jal   func_80060DC0
+/* 04A500 8006F100 0C018370 */  jal   osEPiReadIo
 /* 04A504 8006F104 00000000 */   nop   
 /* 04A508 8006F108 3C04800B */  lui   $a0, 0x800b
 /* 04A50C 8006F10C 24840C70 */  addiu $a0, $a0, 0xc70
@@ -227,16 +122,16 @@ func_8006F0B8:
 /* 04A514 8006F114 8CA50C7C */  lw    $a1, 0xc7c($a1)
 /* 04A518 8006F118 3C010001 */  lui   $at, 1
 /* 04A51C 8006F11C 00A17825 */  or    $t7, $a1, $at
-/* 04A520 8006F120 01E02825 */  move  $a1, $t7
+/* 04A520 8006F120 01E02825 */  or    $a1, $t7, $zero
 /* 04A524 8006F124 3C06D200 */  lui   $a2, 0xd200
-/* 04A528 8006F128 0C018358 */  jal   func_80060D60
+/* 04A528 8006F128 0C018358 */  jal   osEPiWriteIo
 /* 04A52C 8006F12C 00000000 */   nop   
 /* 04A530 8006F130 3C04800B */  lui   $a0, 0x800b
 /* 04A534 8006F134 24840C70 */  addiu $a0, $a0, 0xc70
 /* 04A538 8006F138 3C05800B */  lui   $a1, 0x800b
 /* 04A53C 8006F13C 8CA50C7C */  lw    $a1, 0xc7c($a1)
 /* 04A540 8006F140 27A6001C */  addiu $a2, $sp, 0x1c
-/* 04A544 8006F144 0C018370 */  jal   func_80060DC0
+/* 04A544 8006F144 0C018370 */  jal   osEPiReadIo
 /* 04A548 8006F148 00000000 */   nop   
 /* 04A54C 8006F14C 8FB8001C */  lw    $t8, 0x1c($sp)
 /* 04A550 8006F150 00000000 */  nop   
@@ -254,13 +149,13 @@ func_8006F0B8:
 /* 04A57C 8006F17C 03E00008 */  jr    $ra
 /* 04A580 8006F180 00000000 */   nop   
 
-func_8006F184:
+osFlashReadId:
 /* 04A584 8006F184 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 04A588 8006F188 AFBF0014 */  sw    $ra, 0x14($sp)
 /* 04A58C 8006F18C AFA40020 */  sw    $a0, 0x20($sp)
 /* 04A590 8006F190 AFA50024 */  sw    $a1, 0x24($sp)
 /* 04A594 8006F194 27A4001F */  addiu $a0, $sp, 0x1f
-/* 04A598 8006F198 0C01BC2E */  jal   func_8006F0B8
+/* 04A598 8006F198 0C01BC2E */  jal   osFlashReadStatus
 /* 04A59C 8006F19C 00000000 */   nop   
 /* 04A5A0 8006F1A0 3C04800B */  lui   $a0, 0x800b
 /* 04A5A4 8006F1A4 24840C70 */  addiu $a0, $a0, 0xc70
@@ -268,9 +163,9 @@ func_8006F184:
 /* 04A5AC 8006F1AC 8CA50C7C */  lw    $a1, 0xc7c($a1)
 /* 04A5B0 8006F1B0 3C010001 */  lui   $at, 1
 /* 04A5B4 8006F1B4 00A17025 */  or    $t6, $a1, $at
-/* 04A5B8 8006F1B8 01C02825 */  move  $a1, $t6
+/* 04A5B8 8006F1B8 01C02825 */  or    $a1, $t6, $zero
 /* 04A5BC 8006F1BC 3C06E100 */  lui   $a2, 0xe100
-/* 04A5C0 8006F1C0 0C018358 */  jal   func_80060D60
+/* 04A5C0 8006F1C0 0C018358 */  jal   osEPiWriteIo
 /* 04A5C4 8006F1C4 00000000 */   nop   
 /* 04A5C8 8006F1C8 3C01800B */  lui   $at, 0x800b
 /* 04A5CC 8006F1CC A0200C42 */  sb    $zero, 0xc42($at)
@@ -290,20 +185,20 @@ func_8006F184:
 /* 04A604 8006F204 3C04800B */  lui   $a0, 0x800b
 /* 04A608 8006F208 24840C30 */  addiu $a0, $a0, 0xc30
 /* 04A60C 8006F20C 24050010 */  addiu $a1, $zero, 0x10
-/* 04A610 8006F210 0C018614 */  jal   func_80061850
+/* 04A610 8006F210 0C018614 */  jal   osWritebackDCache
 /* 04A614 8006F214 00000000 */   nop   
 /* 04A618 8006F218 3C04800B */  lui   $a0, 0x800b
 /* 04A61C 8006F21C 24840C70 */  addiu $a0, $a0, 0xc70
 /* 04A620 8006F220 3C05800B */  lui   $a1, 0x800b
 /* 04A624 8006F224 24A50C40 */  addiu $a1, $a1, 0xc40
-/* 04A628 8006F228 00003025 */  move  $a2, $zero
-/* 04A62C 8006F22C 0C018388 */  jal   func_80060E20
+/* 04A628 8006F228 00003025 */  or    $a2, $zero, $zero
+/* 04A62C 8006F22C 0C018388 */  jal   osEPiStartDma
 /* 04A630 8006F230 00000000 */   nop   
 /* 04A634 8006F234 3C04800B */  lui   $a0, 0x800b
 /* 04A638 8006F238 24840C58 */  addiu $a0, $a0, 0xc58
-/* 04A63C 8006F23C 00002825 */  move  $a1, $zero
+/* 04A63C 8006F23C 00002825 */  or    $a1, $zero, $zero
 /* 04A640 8006F240 24060001 */  addiu $a2, $zero, 1
-/* 04A644 8006F244 0C0195BC */  jal   func_800656F0
+/* 04A644 8006F244 0C0195BC */  jal   osRecvMesg
 /* 04A648 8006F248 00000000 */   nop   
 /* 04A64C 8006F24C 3C08800B */  lui   $t0, 0x800b
 /* 04A650 8006F250 25080C30 */  addiu $t0, $t0, 0xc30
@@ -327,7 +222,7 @@ func_8006F184:
 /* 04A694 8006F294 03E00008 */  jr    $ra
 /* 04A698 8006F298 00000000 */   nop   
 
-func_8006F29C:
+osFlashClearStatus:
 /* 04A69C 8006F29C 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 04A6A0 8006F2A0 AFBF0014 */  sw    $ra, 0x14($sp)
 /* 04A6A4 8006F2A4 3C04800B */  lui   $a0, 0x800b
@@ -336,16 +231,16 @@ func_8006F29C:
 /* 04A6B0 8006F2B0 8CA50C7C */  lw    $a1, 0xc7c($a1)
 /* 04A6B4 8006F2B4 3C010001 */  lui   $at, 1
 /* 04A6B8 8006F2B8 00A17025 */  or    $t6, $a1, $at
-/* 04A6BC 8006F2BC 01C02825 */  move  $a1, $t6
+/* 04A6BC 8006F2BC 01C02825 */  or    $a1, $t6, $zero
 /* 04A6C0 8006F2C0 3C06D200 */  lui   $a2, 0xd200
-/* 04A6C4 8006F2C4 0C018358 */  jal   func_80060D60
+/* 04A6C4 8006F2C4 0C018358 */  jal   osEPiWriteIo
 /* 04A6C8 8006F2C8 00000000 */   nop   
 /* 04A6CC 8006F2CC 3C04800B */  lui   $a0, 0x800b
 /* 04A6D0 8006F2D0 24840C70 */  addiu $a0, $a0, 0xc70
 /* 04A6D4 8006F2D4 3C05800B */  lui   $a1, 0x800b
 /* 04A6D8 8006F2D8 8CA50C7C */  lw    $a1, 0xc7c($a1)
-/* 04A6DC 8006F2DC 00003025 */  move  $a2, $zero
-/* 04A6E0 8006F2E0 0C018358 */  jal   func_80060D60
+/* 04A6DC 8006F2DC 00003025 */  or    $a2, $zero, $zero
+/* 04A6E0 8006F2E0 0C018358 */  jal   osEPiWriteIo
 /* 04A6E4 8006F2E4 00000000 */   nop   
 /* 04A6E8 8006F2E8 10000003 */  b     .L8006F2F8
 /* 04A6EC 8006F2EC 00000000 */   nop   
@@ -357,6 +252,7 @@ func_8006F29C:
 /* 04A700 8006F300 03E00008 */  jr    $ra
 /* 04A704 8006F304 00000000 */   nop   
 
+osFlashAllErase:
 /* 04A708 8006F308 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 04A70C 8006F30C AFBF0014 */  sw    $ra, 0x14($sp)
 /* 04A710 8006F310 3C04800B */  lui   $a0, 0x800b
@@ -365,9 +261,9 @@ func_8006F29C:
 /* 04A71C 8006F31C 8CA50C7C */  lw    $a1, 0xc7c($a1)
 /* 04A720 8006F320 3C010001 */  lui   $at, 1
 /* 04A724 8006F324 00A17025 */  or    $t6, $a1, $at
-/* 04A728 8006F328 01C02825 */  move  $a1, $t6
+/* 04A728 8006F328 01C02825 */  or    $a1, $t6, $zero
 /* 04A72C 8006F32C 3C063C00 */  lui   $a2, 0x3c00
-/* 04A730 8006F330 0C018358 */  jal   func_80060D60
+/* 04A730 8006F330 0C018358 */  jal   osEPiWriteIo
 /* 04A734 8006F334 00000000 */   nop   
 /* 04A738 8006F338 3C04800B */  lui   $a0, 0x800b
 /* 04A73C 8006F33C 24840C70 */  addiu $a0, $a0, 0xc70
@@ -375,9 +271,9 @@ func_8006F29C:
 /* 04A744 8006F344 8CA50C7C */  lw    $a1, 0xc7c($a1)
 /* 04A748 8006F348 3C010001 */  lui   $at, 1
 /* 04A74C 8006F34C 00A17825 */  or    $t7, $a1, $at
-/* 04A750 8006F350 01E02825 */  move  $a1, $t7
+/* 04A750 8006F350 01E02825 */  or    $a1, $t7, $zero
 /* 04A754 8006F354 3C067800 */  lui   $a2, 0x7800
-/* 04A758 8006F358 0C018358 */  jal   func_80060D60
+/* 04A758 8006F358 0C018358 */  jal   osEPiWriteIo
 /* 04A75C 8006F35C 00000000 */   nop   
 .L8006F360:
 /* 04A760 8006F360 3C04800B */  lui   $a0, 0x800b
@@ -385,7 +281,7 @@ func_8006F29C:
 /* 04A768 8006F368 3C05800B */  lui   $a1, 0x800b
 /* 04A76C 8006F36C 8CA50C7C */  lw    $a1, 0xc7c($a1)
 /* 04A770 8006F370 27A6001C */  addiu $a2, $sp, 0x1c
-/* 04A774 8006F374 0C018370 */  jal   func_80060DC0
+/* 04A774 8006F374 0C018370 */  jal   osEPiReadIo
 /* 04A778 8006F378 00000000 */   nop   
 /* 04A77C 8006F37C 8FB8001C */  lw    $t8, 0x1c($sp)
 /* 04A780 8006F380 00000000 */  nop   
@@ -398,9 +294,9 @@ func_8006F29C:
 /* 04A79C 8006F39C 3C05800B */  lui   $a1, 0x800b
 /* 04A7A0 8006F3A0 8CA50C7C */  lw    $a1, 0xc7c($a1)
 /* 04A7A4 8006F3A4 27A6001C */  addiu $a2, $sp, 0x1c
-/* 04A7A8 8006F3A8 0C018370 */  jal   func_80060DC0
+/* 04A7A8 8006F3A8 0C018370 */  jal   osEPiReadIo
 /* 04A7AC 8006F3AC 00000000 */   nop   
-/* 04A7B0 8006F3B0 0C01BCA7 */  jal   func_8006F29C
+/* 04A7B0 8006F3B0 0C01BCA7 */  jal   osFlashClearStatus
 /* 04A7B4 8006F3B4 00000000 */   nop   
 /* 04A7B8 8006F3B8 8FA8001C */  lw    $t0, 0x1c($sp)
 /* 04A7BC 8006F3BC 00000000 */  nop   
@@ -416,7 +312,7 @@ func_8006F29C:
 /* 04A7E4 8006F3E4 15410006 */  bne   $t2, $at, .L8006F400
 /* 04A7E8 8006F3E8 00000000 */   nop   
 .L8006F3EC:
-/* 04A7EC 8006F3EC 00001025 */  move  $v0, $zero
+/* 04A7EC 8006F3EC 00001025 */  or    $v0, $zero, $zero
 /* 04A7F0 8006F3F0 10000008 */  b     .L8006F414
 /* 04A7F4 8006F3F4 00000000 */   nop   
 /* 04A7F8 8006F3F8 10000004 */  b     .L8006F40C
@@ -434,7 +330,7 @@ func_8006F29C:
 /* 04A81C 8006F41C 03E00008 */  jr    $ra
 /* 04A820 8006F420 00000000 */   nop   
 
-func_8006F424:
+osFlashSectorErase:
 /* 04A824 8006F424 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 04A828 8006F428 AFBF0014 */  sw    $ra, 0x14($sp)
 /* 04A82C 8006F42C AFA40020 */  sw    $a0, 0x20($sp)
@@ -444,12 +340,12 @@ func_8006F424:
 /* 04A83C 8006F43C 8CA50C7C */  lw    $a1, 0xc7c($a1)
 /* 04A840 8006F440 3C010001 */  lui   $at, 1
 /* 04A844 8006F444 00A17025 */  or    $t6, $a1, $at
-/* 04A848 8006F448 01C02825 */  move  $a1, $t6
+/* 04A848 8006F448 01C02825 */  or    $a1, $t6, $zero
 /* 04A84C 8006F44C 8FA60020 */  lw    $a2, 0x20($sp)
 /* 04A850 8006F450 3C014B00 */  lui   $at, 0x4b00
 /* 04A854 8006F454 00C17825 */  or    $t7, $a2, $at
-/* 04A858 8006F458 01E03025 */  move  $a2, $t7
-/* 04A85C 8006F45C 0C018358 */  jal   func_80060D60
+/* 04A858 8006F458 01E03025 */  or    $a2, $t7, $zero
+/* 04A85C 8006F45C 0C018358 */  jal   osEPiWriteIo
 /* 04A860 8006F460 00000000 */   nop   
 /* 04A864 8006F464 3C04800B */  lui   $a0, 0x800b
 /* 04A868 8006F468 24840C70 */  addiu $a0, $a0, 0xc70
@@ -457,9 +353,9 @@ func_8006F424:
 /* 04A870 8006F470 8CA50C7C */  lw    $a1, 0xc7c($a1)
 /* 04A874 8006F474 3C010001 */  lui   $at, 1
 /* 04A878 8006F478 00A1C025 */  or    $t8, $a1, $at
-/* 04A87C 8006F47C 03002825 */  move  $a1, $t8
+/* 04A87C 8006F47C 03002825 */  or    $a1, $t8, $zero
 /* 04A880 8006F480 3C067800 */  lui   $a2, 0x7800
-/* 04A884 8006F484 0C018358 */  jal   func_80060D60
+/* 04A884 8006F484 0C018358 */  jal   osEPiWriteIo
 /* 04A888 8006F488 00000000 */   nop   
 .L8006F48C:
 /* 04A88C 8006F48C 3C04800B */  lui   $a0, 0x800b
@@ -467,7 +363,7 @@ func_8006F424:
 /* 04A894 8006F494 3C05800B */  lui   $a1, 0x800b
 /* 04A898 8006F498 8CA50C7C */  lw    $a1, 0xc7c($a1)
 /* 04A89C 8006F49C 27A6001C */  addiu $a2, $sp, 0x1c
-/* 04A8A0 8006F4A0 0C018370 */  jal   func_80060DC0
+/* 04A8A0 8006F4A0 0C018370 */  jal   osEPiReadIo
 /* 04A8A4 8006F4A4 00000000 */   nop   
 /* 04A8A8 8006F4A8 8FB9001C */  lw    $t9, 0x1c($sp)
 /* 04A8AC 8006F4AC 00000000 */  nop   
@@ -480,9 +376,9 @@ func_8006F424:
 /* 04A8C8 8006F4C8 3C05800B */  lui   $a1, 0x800b
 /* 04A8CC 8006F4CC 8CA50C7C */  lw    $a1, 0xc7c($a1)
 /* 04A8D0 8006F4D0 27A6001C */  addiu $a2, $sp, 0x1c
-/* 04A8D4 8006F4D4 0C018370 */  jal   func_80060DC0
+/* 04A8D4 8006F4D4 0C018370 */  jal   osEPiReadIo
 /* 04A8D8 8006F4D8 00000000 */   nop   
-/* 04A8DC 8006F4DC 0C01BCA7 */  jal   func_8006F29C
+/* 04A8DC 8006F4DC 0C01BCA7 */  jal   osFlashClearStatus
 /* 04A8E0 8006F4E0 00000000 */   nop   
 /* 04A8E4 8006F4E4 8FA9001C */  lw    $t1, 0x1c($sp)
 /* 04A8E8 8006F4E8 00000000 */  nop   
@@ -498,7 +394,7 @@ func_8006F424:
 /* 04A910 8006F510 15610006 */  bne   $t3, $at, .L8006F52C
 /* 04A914 8006F514 00000000 */   nop   
 .L8006F518:
-/* 04A918 8006F518 00001025 */  move  $v0, $zero
+/* 04A918 8006F518 00001025 */  or    $v0, $zero, $zero
 /* 04A91C 8006F51C 10000008 */  b     .L8006F540
 /* 04A920 8006F520 00000000 */   nop   
 /* 04A924 8006F524 10000004 */  b     .L8006F538
@@ -516,7 +412,7 @@ func_8006F424:
 /* 04A948 8006F548 03E00008 */  jr    $ra
 /* 04A94C 8006F54C 00000000 */   nop   
 
-func_8006F550:
+osFlashWriteBuffer:
 /* 04A950 8006F550 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 04A954 8006F554 AFBF0014 */  sw    $ra, 0x14($sp)
 /* 04A958 8006F558 AFA40020 */  sw    $a0, 0x20($sp)
@@ -529,9 +425,9 @@ func_8006F550:
 /* 04A974 8006F574 8CA50C7C */  lw    $a1, 0xc7c($a1)
 /* 04A978 8006F578 3C010001 */  lui   $at, 1
 /* 04A97C 8006F57C 00A17025 */  or    $t6, $a1, $at
-/* 04A980 8006F580 01C02825 */  move  $a1, $t6
+/* 04A980 8006F580 01C02825 */  or    $a1, $t6, $zero
 /* 04A984 8006F584 3C06B400 */  lui   $a2, 0xb400
-/* 04A988 8006F588 0C018358 */  jal   func_80060D60
+/* 04A988 8006F588 0C018358 */  jal   osEPiWriteIo
 /* 04A98C 8006F58C 00000000 */   nop   
 /* 04A990 8006F590 8FAF0024 */  lw    $t7, 0x24($sp)
 /* 04A994 8006F594 8FB80020 */  lw    $t8, 0x20($sp)
@@ -556,7 +452,7 @@ func_8006F550:
 /* 04A9E0 8006F5E0 24840C70 */  addiu $a0, $a0, 0xc70
 /* 04A9E4 8006F5E4 8FA50020 */  lw    $a1, 0x20($sp)
 /* 04A9E8 8006F5E8 24060001 */  addiu $a2, $zero, 1
-/* 04A9EC 8006F5EC 0C018388 */  jal   func_80060E20
+/* 04A9EC 8006F5EC 0C018388 */  jal   osEPiStartDma
 /* 04A9F0 8006F5F0 00000000 */   nop   
 /* 04A9F4 8006F5F4 AFA2001C */  sw    $v0, 0x1c($sp)
 /* 04A9F8 8006F5F8 8FA2001C */  lw    $v0, 0x1c($sp)
@@ -570,7 +466,7 @@ func_8006F550:
 /* 04AA14 8006F614 03E00008 */  jr    $ra
 /* 04AA18 8006F618 00000000 */   nop   
 
-func_8006F61C:
+osFlashWriteArray:
 /* 04AA1C 8006F61C 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 04AA20 8006F620 AFBF0014 */  sw    $ra, 0x14($sp)
 /* 04AA24 8006F624 AFA40020 */  sw    $a0, 0x20($sp)
@@ -585,9 +481,9 @@ func_8006F61C:
 /* 04AA48 8006F648 8CA50C7C */  lw    $a1, 0xc7c($a1)
 /* 04AA4C 8006F64C 3C010001 */  lui   $at, 1
 /* 04AA50 8006F650 00A17825 */  or    $t7, $a1, $at
-/* 04AA54 8006F654 01E02825 */  move  $a1, $t7
+/* 04AA54 8006F654 01E02825 */  or    $a1, $t7, $zero
 /* 04AA58 8006F658 3C06B400 */  lui   $a2, 0xb400
-/* 04AA5C 8006F65C 0C018358 */  jal   func_80060D60
+/* 04AA5C 8006F65C 0C018358 */  jal   osEPiWriteIo
 /* 04AA60 8006F660 00000000 */   nop   
 .L8006F664:
 /* 04AA64 8006F664 3C04800B */  lui   $a0, 0x800b
@@ -596,12 +492,12 @@ func_8006F61C:
 /* 04AA70 8006F670 8CA50C7C */  lw    $a1, 0xc7c($a1)
 /* 04AA74 8006F674 3C010001 */  lui   $at, 1
 /* 04AA78 8006F678 00A1C025 */  or    $t8, $a1, $at
-/* 04AA7C 8006F67C 03002825 */  move  $a1, $t8
+/* 04AA7C 8006F67C 03002825 */  or    $a1, $t8, $zero
 /* 04AA80 8006F680 8FA60020 */  lw    $a2, 0x20($sp)
 /* 04AA84 8006F684 3C01A500 */  lui   $at, 0xa500
 /* 04AA88 8006F688 00C1C825 */  or    $t9, $a2, $at
-/* 04AA8C 8006F68C 03203025 */  move  $a2, $t9
-/* 04AA90 8006F690 0C018358 */  jal   func_80060D60
+/* 04AA8C 8006F68C 03203025 */  or    $a2, $t9, $zero
+/* 04AA90 8006F690 0C018358 */  jal   osEPiWriteIo
 /* 04AA94 8006F694 00000000 */   nop   
 .L8006F698:
 /* 04AA98 8006F698 3C04800B */  lui   $a0, 0x800b
@@ -609,7 +505,7 @@ func_8006F61C:
 /* 04AAA0 8006F6A0 3C05800B */  lui   $a1, 0x800b
 /* 04AAA4 8006F6A4 8CA50C7C */  lw    $a1, 0xc7c($a1)
 /* 04AAA8 8006F6A8 27A6001C */  addiu $a2, $sp, 0x1c
-/* 04AAAC 8006F6AC 0C018370 */  jal   func_80060DC0
+/* 04AAAC 8006F6AC 0C018370 */  jal   osEPiReadIo
 /* 04AAB0 8006F6B0 00000000 */   nop   
 /* 04AAB4 8006F6B4 8FA8001C */  lw    $t0, 0x1c($sp)
 /* 04AAB8 8006F6B8 00000000 */  nop   
@@ -622,9 +518,9 @@ func_8006F61C:
 /* 04AAD4 8006F6D4 3C05800B */  lui   $a1, 0x800b
 /* 04AAD8 8006F6D8 8CA50C7C */  lw    $a1, 0xc7c($a1)
 /* 04AADC 8006F6DC 27A6001C */  addiu $a2, $sp, 0x1c
-/* 04AAE0 8006F6E0 0C018370 */  jal   func_80060DC0
+/* 04AAE0 8006F6E0 0C018370 */  jal   osEPiReadIo
 /* 04AAE4 8006F6E4 00000000 */   nop   
-/* 04AAE8 8006F6E8 0C01BCA7 */  jal   func_8006F29C
+/* 04AAE8 8006F6E8 0C01BCA7 */  jal   osFlashClearStatus
 /* 04AAEC 8006F6EC 00000000 */   nop   
 /* 04AAF0 8006F6F0 8FAA001C */  lw    $t2, 0x1c($sp)
 /* 04AAF4 8006F6F4 00000000 */  nop   
@@ -640,7 +536,7 @@ func_8006F61C:
 /* 04AB1C 8006F71C 15810006 */  bne   $t4, $at, .L8006F738
 /* 04AB20 8006F720 00000000 */   nop   
 .L8006F724:
-/* 04AB24 8006F724 00001025 */  move  $v0, $zero
+/* 04AB24 8006F724 00001025 */  or    $v0, $zero, $zero
 /* 04AB28 8006F728 10000008 */  b     .L8006F74C
 /* 04AB2C 8006F72C 00000000 */   nop   
 /* 04AB30 8006F730 10000004 */  b     .L8006F744
@@ -658,7 +554,7 @@ func_8006F61C:
 /* 04AB54 8006F754 03E00008 */  jr    $ra
 /* 04AB58 8006F758 00000000 */   nop   
 
-func_8006F75C:
+osFlashReadArray:
 /* 04AB5C 8006F75C 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 04AB60 8006F760 AFBF0014 */  sw    $ra, 0x14($sp)
 /* 04AB64 8006F764 AFA40020 */  sw    $a0, 0x20($sp)
@@ -671,16 +567,16 @@ func_8006F75C:
 /* 04AB80 8006F780 8CA50C7C */  lw    $a1, 0xc7c($a1)
 /* 04AB84 8006F784 3C010001 */  lui   $at, 1
 /* 04AB88 8006F788 00A17025 */  or    $t6, $a1, $at
-/* 04AB8C 8006F78C 01C02825 */  move  $a1, $t6
+/* 04AB8C 8006F78C 01C02825 */  or    $a1, $t6, $zero
 /* 04AB90 8006F790 3C06F000 */  lui   $a2, 0xf000
-/* 04AB94 8006F794 0C018358 */  jal   func_80060D60
+/* 04AB94 8006F794 0C018358 */  jal   osEPiWriteIo
 /* 04AB98 8006F798 00000000 */   nop   
 /* 04AB9C 8006F79C 3C04800B */  lui   $a0, 0x800b
 /* 04ABA0 8006F7A0 24840C70 */  addiu $a0, $a0, 0xc70
 /* 04ABA4 8006F7A4 3C05800B */  lui   $a1, 0x800b
 /* 04ABA8 8006F7A8 8CA50C7C */  lw    $a1, 0xc7c($a1)
 /* 04ABAC 8006F7AC 27A60018 */  addiu $a2, $sp, 0x18
-/* 04ABB0 8006F7B0 0C018370 */  jal   func_80060DC0
+/* 04ABB0 8006F7B0 0C018370 */  jal   osEPiReadIo
 /* 04ABB4 8006F7B4 00000000 */   nop   
 /* 04ABB8 8006F7B8 8FAF0024 */  lw    $t7, 0x24($sp)
 /* 04ABBC 8006F7BC 8FB80020 */  lw    $t8, 0x20($sp)
@@ -724,8 +620,8 @@ func_8006F75C:
 /* 04AC4C 8006F84C 3C04800B */  lui   $a0, 0x800b
 /* 04AC50 8006F850 24840C70 */  addiu $a0, $a0, 0xc70
 /* 04AC54 8006F854 8FA50020 */  lw    $a1, 0x20($sp)
-/* 04AC58 8006F858 00003025 */  move  $a2, $zero
-/* 04AC5C 8006F85C 0C018388 */  jal   func_80060E20
+/* 04AC58 8006F858 00003025 */  or    $a2, $zero, $zero
+/* 04AC5C 8006F85C 0C018388 */  jal   osEPiStartDma
 /* 04AC60 8006F860 00000000 */   nop   
 /* 04AC64 8006F864 AFA2001C */  sw    $v0, 0x1c($sp)
 /* 04AC68 8006F868 8FA2001C */  lw    $v0, 0x1c($sp)

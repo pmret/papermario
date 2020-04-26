@@ -1,7 +1,7 @@
 
 .section .text800677C0, "ax"
 
-func_800677C0:
+guScaleF:
 /* 042BC0 800677C0 AC850000 */  sw    $a1, ($a0)
 /* 042BC4 800677C4 AC800004 */  sw    $zero, 4($a0)
 /* 042BC8 800677C8 AC800008 */  sw    $zero, 8($a0)

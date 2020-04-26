@@ -1,7 +1,7 @@
 
 .section .text8006CBC0, "ax"
 
-func_8006CBC0:
+guNormalize:
 /* 047FC0 8006CBC0 C4840000 */  lwc1  $f4, ($a0)
 /* 047FC4 8006CBC4 C4A60000 */  lwc1  $f6, ($a1)
 /* 047FC8 8006CBC8 C4C80000 */  lwc1  $f8, ($a2)

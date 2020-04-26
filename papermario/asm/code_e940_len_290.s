@@ -58,7 +58,7 @@
 /* 00EA0C 8003360C 0C00B7BD */  jal   func_8002DEF4
 /* 00EA10 80033610 00000000 */   nop   
 /* 00EA14 80033614 0C0B763E */  jal   func_802DD8F8
-/* 00EA18 80033618 0000202D */   move  $a0, $zero
+/* 00EA18 80033618 0000202D */   daddu $a0, $zero, $zero
 /* 00EA1C 8003361C 0C0482EC */  jal   func_80120BB0
 /* 00EA20 80033620 00000000 */   nop   
 /* 00EA24 80033624 0C047889 */  jal   func_8011E224
@@ -69,9 +69,9 @@
 /* 00EA38 80033638 00000000 */   nop   
 /* 00EA3C 8003363C 0C05177E */  jal   func_80145DF8
 /* 00EA40 80033640 00000000 */   nop   
-/* 00EA44 80033644 0000202D */  move  $a0, $zero
+/* 00EA44 80033644 0000202D */  daddu $a0, $zero, $zero
 /* 00EA48 80033648 0C0514BA */  jal   func_801452E8
-/* 00EA4C 8003364C 0080282D */   move  $a1, $a0
+/* 00EA4C 8003364C 0080282D */   daddu $a1, $a0, $zero
 /* 00EA50 80033650 0C050440 */  jal   func_80141100
 /* 00EA54 80033654 00000000 */   nop   
 /* 00EA58 80033658 0C0515A0 */  jal   func_80145680
@@ -79,7 +79,7 @@
 /* 00EA60 80033660 0C048D9D */  jal   func_80123674
 /* 00EA64 80033664 00000000 */   nop   
 /* 00EA68 80033668 0C04432E */  jal   func_80110CB8
-/* 00EA6C 8003366C 0000202D */   move  $a0, $zero
+/* 00EA6C 8003366C 0000202D */   daddu $a0, $zero, $zero
 /* 00EA70 80033670 0C04E042 */  jal   func_80138108
 /* 00EA74 80033674 00000000 */   nop   
 /* 00EA78 80033678 0C037F14 */  jal   func_800DFC50
@@ -112,7 +112,7 @@
 /* 00EAE4 800336E4 00000000 */   nop   
 /* 00EAE8 800336E8 0C00AE90 */  jal   func_8002BA40
 /* 00EAEC 800336EC 00000000 */   nop   
-/* 00EAF0 800336F0 0000202D */  move  $a0, $zero
+/* 00EAF0 800336F0 0000202D */  daddu $a0, $zero, $zero
 /* 00EAF4 800336F4 24060004 */  addiu $a2, $zero, 4
 /* 00EAF8 800336F8 2405000F */  addiu $a1, $zero, 0xf
 /* 00EAFC 800336FC 8E030000 */  lw    $v1, ($s0)
@@ -158,8 +158,8 @@ func_80033778:
 
 /* 00EB88 80033788 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 00EB8C 8003378C 240200FF */  addiu $v0, $zero, 0xff
-/* 00EB90 80033790 0000202D */  move  $a0, $zero
-/* 00EB94 80033794 0080282D */  move  $a1, $a0
+/* 00EB90 80033790 0000202D */  daddu $a0, $zero, $zero
+/* 00EB94 80033794 0080282D */  daddu $a1, $a0, $zero
 /* 00EB98 80033798 2406013F */  addiu $a2, $zero, 0x13f
 /* 00EB9C 8003379C 240700EF */  addiu $a3, $zero, 0xef
 /* 00EBA0 800337A0 AFBF0020 */  sw    $ra, 0x20($sp)

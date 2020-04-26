@@ -5,6 +5,7 @@
 /* 045DF4 8006A9F4 275AAA00 */  addiu $k0, $k0, -0x5600
 /* 045DF8 8006A9F8 03400008 */  jr    $k0
 /* 045DFC 8006A9FC 00000000 */   nop   
+osExceptionPreamble:
 /* 045E00 8006AA00 3C1A800B */  lui   $k0, 0x800b
 /* 045E04 8006AA04 275A0D08 */  addiu $k0, $k0, 0xd08
 /* 045E08 8006AA08 FF410020 */  sd    $at, 0x20($k0)
@@ -18,7 +19,8 @@
 /* 045E28 8006AA28 FF4A0068 */  sd    $t2, 0x68($k0)
 /* 045E2C 8006AA2C AF400018 */  sw    $zero, 0x18($k0)
 /* 045E30 8006AA30 40086800 */  mfc0  $t0, $13
-/* 045E34 8006AA34 03404021 */  move  $t0, $k0
+savecontext:
+/* 045E34 8006AA34 03404021 */  addu  $t0, $k0, $zero
 /* 045E38 8006AA38 3C1A8009 */  lui   $k0, 0x8009
 /* 045E3C 8006AA3C 8F5A4660 */  lw    $k0, 0x4660($k0)
 /* 045E40 8006AA40 DD090020 */  ld    $t1, 0x20($t0)
@@ -82,6 +84,7 @@
 /* 045F28 8006AB28 342100FF */  ori   $at, $at, 0xff
 /* 045F2C 8006AB2C 0361D824 */  and   $k1, $k1, $at
 /* 045F30 8006AB30 0369D825 */  or    $k1, $k1, $t1
+savercp:
 .L8006AB34:
 /* 045F34 8006AB34 3C09A430 */  lui   $t1, 0xa430
 /* 045F38 8006AB38 8D29000C */  lw    $t1, 0xc($t1)
@@ -97,6 +100,7 @@
 /* 045F60 8006AB60 8F4C0128 */  lw    $t4, 0x128($k0)
 /* 045F64 8006AB64 010C4024 */  and   $t0, $t0, $t4
 /* 045F68 8006AB68 01284825 */  or    $t1, $t1, $t0
+endrcp:
 .L8006AB6C:
 /* 045F6C 8006AB6C AF490128 */  sw    $t1, 0x128($k0)
 /* 045F70 8006AB70 40087000 */  mfc0  $t0, $14
@@ -138,7 +142,9 @@
 /* 045FFC 8006ABFC 240A0000 */  addiu $t2, $zero, 0
 /* 046000 8006AC00 152A00D2 */  bne   $t1, $t2, .L8006AF4C
 /* 046004 8006AC04 00000000 */   nop   
+handle_interrupt:
 /* 046008 8006AC08 03688024 */  and   $s0, $k1, $t0
+next_interrupt:
 .L8006AC0C:
 /* 04600C 8006AC0C 3209FF00 */  andi  $t1, $s0, 0xff00
 /* 046010 8006AC10 00095302 */  srl   $t2, $t1, 0xc
@@ -155,21 +161,25 @@
 /* 046038 8006AC38 8C2A9DA0 */  lw    $t2, -0x6260($at)
 /* 04603C 8006AC3C 01400008 */  jr    $t2
 /* 046040 8006AC40 00000000 */   nop   
+IP6_Hdlr:
 /* 046044 8006AC44 2401DFFF */  addiu $at, $zero, -0x2001
 /* 046048 8006AC48 1000FFF0 */  b     .L8006AC0C
 /* 04604C 8006AC4C 02018024 */   and   $s0, $s0, $at
+IP7_Hdlr:
 /* 046050 8006AC50 2401BFFF */  addiu $at, $zero, -0x4001
 /* 046054 8006AC54 1000FFED */  b     .L8006AC0C
 /* 046058 8006AC58 02018024 */   and   $s0, $s0, $at
+counter:
 /* 04605C 8006AC5C 40095800 */  mfc0  $t1, $11
 /* 046060 8006AC60 40895800 */  mtc0  $t1, $11
 /* 046064 8006AC64 24040018 */  addiu $a0, $zero, 0x18
-/* 046068 8006AC68 0C01ABDF */  jal   func_8006AF7C
+/* 046068 8006AC68 0C01ABDF */  jal   send_mesg
 /* 04606C 8006AC6C 00000000 */   nop   
 /* 046070 8006AC70 3C01FFFF */  lui   $at, 0xffff
 /* 046074 8006AC74 34217FFF */  ori   $at, $at, 0x7fff
 /* 046078 8006AC78 1000FFE4 */  b     .L8006AC0C
 /* 04607C 8006AC7C 02018024 */   and   $s0, $s0, $at
+cart:
 /* 046080 8006AC80 2401F7FF */  addiu $at, $zero, -0x801
 /* 046084 8006AC84 02018024 */  and   $s0, $s0, $at
 /* 046088 8006AC88 3C098009 */  lui   $t1, 0x8009
@@ -185,10 +195,11 @@
 /* 0460B0 8006ACB0 10000093 */  b     .L8006AF00
 /* 0460B4 8006ACB4 00000000 */   nop   
 .L8006ACB8:
-/* 0460B8 8006ACB8 0C01ABDF */  jal   func_8006AF7C
+/* 0460B8 8006ACB8 0C01ABDF */  jal   send_mesg
 /* 0460BC 8006ACBC 24040010 */   addiu $a0, $zero, 0x10
 /* 0460C0 8006ACC0 1000FFD2 */  b     .L8006AC0C
 /* 0460C4 8006ACC4 00000000 */   nop   
+rcp:
 /* 0460C8 8006ACC8 3C11A430 */  lui   $s1, 0xa430
 /* 0460CC 8006ACCC 8E310008 */  lw    $s1, 8($s1)
 /* 0460D0 8006ACD0 3C088009 */  lui   $t0, 0x8009
@@ -208,17 +219,19 @@
 /* 046108 8006AD08 318C0300 */  andi  $t4, $t4, 0x300
 /* 04610C 8006AD0C 11800007 */  beqz  $t4, .L8006AD2C
 /* 046110 8006AD10 00000000 */   nop   
-/* 046114 8006AD14 0C01ABDF */  jal   func_8006AF7C
+/* 046114 8006AD14 0C01ABDF */  jal   send_mesg
 /* 046118 8006AD18 24040020 */   addiu $a0, $zero, 0x20
 /* 04611C 8006AD1C 12200044 */  beqz  $s1, .L8006AE30
 /* 046120 8006AD20 00000000 */   nop   
 /* 046124 8006AD24 10000005 */  b     .L8006AD3C
 /* 046128 8006AD28 00000000 */   nop   
+sp_other_break:
 .L8006AD2C:
-/* 04612C 8006AD2C 0C01ABDF */  jal   func_8006AF7C
+/* 04612C 8006AD2C 0C01ABDF */  jal   send_mesg
 /* 046130 8006AD30 24040058 */   addiu $a0, $zero, 0x58
 /* 046134 8006AD34 1220003E */  beqz  $s1, .L8006AE30
 /* 046138 8006AD38 00000000 */   nop   
+vi:
 .L8006AD3C:
 /* 04613C 8006AD3C 32290008 */  andi  $t1, $s1, 8
 /* 046140 8006AD40 11200008 */  beqz  $t1, .L8006AD64
@@ -226,10 +239,11 @@
 /* 046148 8006AD48 32310037 */  andi  $s1, $s1, 0x37
 /* 04614C 8006AD4C 3C01A440 */  lui   $at, 0xa440
 /* 046150 8006AD50 AC200010 */  sw    $zero, 0x10($at)
-/* 046154 8006AD54 0C01ABDF */  jal   func_8006AF7C
+/* 046154 8006AD54 0C01ABDF */  jal   send_mesg
 /* 046158 8006AD58 24040038 */   addiu $a0, $zero, 0x38
 /* 04615C 8006AD5C 12200034 */  beqz  $s1, .L8006AE30
 /* 046160 8006AD60 00000000 */   nop   
+ai:
 .L8006AD64:
 /* 046164 8006AD64 32290004 */  andi  $t1, $s1, 4
 /* 046168 8006AD68 11200009 */  beqz  $t1, .L8006AD90
@@ -238,10 +252,11 @@
 /* 046174 8006AD74 24090001 */  addiu $t1, $zero, 1
 /* 046178 8006AD78 3C01A450 */  lui   $at, 0xa450
 /* 04617C 8006AD7C AC29000C */  sw    $t1, 0xc($at)
-/* 046180 8006AD80 0C01ABDF */  jal   func_8006AF7C
+/* 046180 8006AD80 0C01ABDF */  jal   send_mesg
 /* 046184 8006AD84 24040030 */   addiu $a0, $zero, 0x30
 /* 046188 8006AD88 12200029 */  beqz  $s1, .L8006AE30
 /* 04618C 8006AD8C 00000000 */   nop   
+si:
 .L8006AD90:
 /* 046190 8006AD90 32290002 */  andi  $t1, $s1, 2
 /* 046194 8006AD94 11200008 */  beqz  $t1, .L8006ADB8
@@ -249,10 +264,11 @@
 /* 04619C 8006AD9C 3231003D */  andi  $s1, $s1, 0x3d
 /* 0461A0 8006ADA0 3C01A480 */  lui   $at, 0xa480
 /* 0461A4 8006ADA4 AC200018 */  sw    $zero, 0x18($at)
-/* 0461A8 8006ADA8 0C01ABDF */  jal   func_8006AF7C
+/* 0461A8 8006ADA8 0C01ABDF */  jal   send_mesg
 /* 0461AC 8006ADAC 24040028 */   addiu $a0, $zero, 0x28
 /* 0461B0 8006ADB0 1220001F */  beqz  $s1, .L8006AE30
 /* 0461B4 8006ADB4 00000000 */   nop   
+pi:
 .L8006ADB8:
 /* 0461B8 8006ADB8 32290010 */  andi  $t1, $s1, 0x10
 /* 0461BC 8006ADBC 11200013 */  beqz  $t1, .L8006AE0C
@@ -268,15 +284,16 @@
 /* 0461E4 8006ADE4 00000000 */   nop   
 /* 0461E8 8006ADE8 8D3D0004 */  lw    $sp, 4($t1)
 /* 0461EC 8006ADEC 0140F809 */  jalr  $t2
-/* 0461F0 8006ADF0 00402021 */  move  $a0, $v0
+/* 0461F0 8006ADF0 00402021 */  addu  $a0, $v0, $zero
 /* 0461F4 8006ADF4 14400003 */  bnez  $v0, .L8006AE04
 /* 0461F8 8006ADF8 00000000 */   nop   
 .L8006ADFC:
-/* 0461FC 8006ADFC 0C01ABDF */  jal   func_8006AF7C
+/* 0461FC 8006ADFC 0C01ABDF */  jal   send_mesg
 /* 046200 8006AE00 24040040 */   addiu $a0, $zero, 0x40
 .L8006AE04:
 /* 046204 8006AE04 1220000A */  beqz  $s1, .L8006AE30
 /* 046208 8006AE08 00000000 */   nop   
+dp:
 .L8006AE0C:
 /* 04620C 8006AE0C 32290020 */  andi  $t1, $s1, 0x20
 /* 046210 8006AE10 11200007 */  beqz  $t1, .L8006AE30
@@ -285,12 +302,14 @@
 /* 04621C 8006AE1C 24090800 */  addiu $t1, $zero, 0x800
 /* 046220 8006AE20 3C01A430 */  lui   $at, 0xa430
 /* 046224 8006AE24 AC290000 */  sw    $t1, ($at)
-/* 046228 8006AE28 0C01ABDF */  jal   func_8006AF7C
+/* 046228 8006AE28 0C01ABDF */  jal   send_mesg
 /* 04622C 8006AE2C 24040048 */   addiu $a0, $zero, 0x48
+NoMoreRcpInts:
 .L8006AE30:
 /* 046230 8006AE30 2401FBFF */  addiu $at, $zero, -0x401
 /* 046234 8006AE34 1000FF75 */  b     .L8006AC0C
 /* 046238 8006AE38 02018024 */   and   $s0, $s0, $at
+prenmi:
 /* 04623C 8006AE3C 8F5B0118 */  lw    $k1, 0x118($k0)
 /* 046240 8006AE40 2401EFFF */  addiu $at, $zero, -0x1001
 /* 046244 8006AE44 0361D824 */  and   $k1, $k1, $at
@@ -303,10 +322,11 @@
 /* 046260 8006AE60 2401EFFF */  addiu $at, $zero, -0x1001
 /* 046264 8006AE64 10000026 */  b     .L8006AF00
 /* 046268 8006AE68 02018024 */   and   $s0, $s0, $at
+firstnmi:
 .L8006AE6C:
 /* 04626C 8006AE6C 240A0001 */  addiu $t2, $zero, 1
 /* 046270 8006AE70 AD2A0000 */  sw    $t2, ($t1)
-/* 046274 8006AE74 0C01ABDF */  jal   func_8006AF7C
+/* 046274 8006AE74 0C01ABDF */  jal   send_mesg
 /* 046278 8006AE78 24040070 */   addiu $a0, $zero, 0x70
 /* 04627C 8006AE7C 2401EFFF */  addiu $at, $zero, -0x1001
 /* 046280 8006AE80 02018024 */  and   $s0, $s0, $at
@@ -317,31 +337,35 @@
 /* 046294 8006AE94 0361D824 */  and   $k1, $k1, $at
 /* 046298 8006AE98 10000019 */  b     .L8006AF00
 /* 04629C 8006AE9C AD5B0118 */   sw    $k1, 0x118($t2)
+sw2:
 /* 0462A0 8006AEA0 2401FDFF */  addiu $at, $zero, -0x201
 /* 0462A4 8006AEA4 01014024 */  and   $t0, $t0, $at
 /* 0462A8 8006AEA8 40886800 */  mtc0  $t0, $13
 /* 0462AC 8006AEAC 24040008 */  addiu $a0, $zero, 8
-/* 0462B0 8006AEB0 0C01ABDF */  jal   func_8006AF7C
+/* 0462B0 8006AEB0 0C01ABDF */  jal   send_mesg
 /* 0462B4 8006AEB4 00000000 */   nop   
 /* 0462B8 8006AEB8 2401FDFF */  addiu $at, $zero, -0x201
 /* 0462BC 8006AEBC 1000FF53 */  b     .L8006AC0C
 /* 0462C0 8006AEC0 02018024 */   and   $s0, $s0, $at
+sw1:
 /* 0462C4 8006AEC4 2401FEFF */  addiu $at, $zero, -0x101
 /* 0462C8 8006AEC8 01014024 */  and   $t0, $t0, $at
 /* 0462CC 8006AECC 40886800 */  mtc0  $t0, $13
 /* 0462D0 8006AED0 24040000 */  addiu $a0, $zero, 0
-/* 0462D4 8006AED4 0C01ABDF */  jal   func_8006AF7C
+/* 0462D4 8006AED4 0C01ABDF */  jal   send_mesg
 /* 0462D8 8006AED8 00000000 */   nop   
 /* 0462DC 8006AEDC 2401FEFF */  addiu $at, $zero, -0x101
 /* 0462E0 8006AEE0 1000FF4A */  b     .L8006AC0C
 /* 0462E4 8006AEE4 02018024 */   and   $s0, $s0, $at
+handle_break:
 .L8006AEE8:
 /* 0462E8 8006AEE8 24090001 */  addiu $t1, $zero, 1
 /* 0462EC 8006AEEC A7490012 */  sh    $t1, 0x12($k0)
-/* 0462F0 8006AEF0 0C01ABDF */  jal   func_8006AF7C
+/* 0462F0 8006AEF0 0C01ABDF */  jal   send_mesg
 /* 0462F4 8006AEF4 24040050 */   addiu $a0, $zero, 0x50
 /* 0462F8 8006AEF8 10000001 */  b     .L8006AF00
 /* 0462FC 8006AEFC 00000000 */   nop   
+redispatch:
 .L8006AF00:
 /* 046300 8006AF00 8F490004 */  lw    $t1, 4($k0)
 /* 046304 8006AF04 3C0A8009 */  lui   $t2, 0x8009
@@ -350,21 +374,23 @@
 /* 046310 8006AF10 012B082A */  slt   $at, $t1, $t3
 /* 046314 8006AF14 10200007 */  beqz  $at, .L8006AF34
 /* 046318 8006AF18 00000000 */   nop   
-/* 04631C 8006AF1C 03402821 */  move  $a1, $k0
+/* 04631C 8006AF1C 03402821 */  addu  $a1, $k0, $zero
 /* 046320 8006AF20 3C048009 */  lui   $a0, 0x8009
-/* 046324 8006AF24 0C01AC5D */  jal   func_8006B174
+/* 046324 8006AF24 0C01AC5D */  jal   osEnqueueThread
 /* 046328 8006AF28 24844658 */   addiu $a0, $a0, 0x4658
-/* 04632C 8006AF2C 0801AC75 */  j     func_8006B1D4
+/* 04632C 8006AF2C 0801AC75 */  j     osDispatchThread
 /* 046330 8006AF30 00000000 */   nop   
 
+enqueueRunning:
 .L8006AF34:
 /* 046334 8006AF34 3C098009 */  lui   $t1, 0x8009
 /* 046338 8006AF38 25294658 */  addiu $t1, $t1, 0x4658
 /* 04633C 8006AF3C 8D2A0000 */  lw    $t2, ($t1)
 /* 046340 8006AF40 AF4A0000 */  sw    $t2, ($k0)
-/* 046344 8006AF44 0801AC75 */  j     func_8006B1D4
+/* 046344 8006AF44 0801AC75 */  j     osDispatchThread
 /* 046348 8006AF48 AD3A0000 */   sw    $k0, ($t1)
 
+panic:
 .L8006AF4C:
 /* 04634C 8006AF4C 3C018009 */  lui   $at, 0x8009
 /* 046350 8006AF50 AC3A4664 */  sw    $k0, 0x4664($at)
@@ -374,13 +400,13 @@
 /* 046360 8006AF60 A7490012 */  sh    $t1, 0x12($k0)
 /* 046364 8006AF64 400A4000 */  mfc0  $t2, $8
 /* 046368 8006AF68 AF4A0124 */  sw    $t2, 0x124($k0)
-/* 04636C 8006AF6C 0C01ABDF */  jal   func_8006AF7C
+/* 04636C 8006AF6C 0C01ABDF */  jal   send_mesg
 /* 046370 8006AF70 24040060 */   addiu $a0, $zero, 0x60
-/* 046374 8006AF74 0801AC75 */  j     func_8006B1D4
+/* 046374 8006AF74 0801AC75 */  j     osDispatchThread
 /* 046378 8006AF78 00000000 */   nop   
 
-func_8006AF7C:
-/* 04637C 8006AF7C 03E09021 */  move  $s2, $ra
+send_mesg:
+/* 04637C 8006AF7C 03E09021 */  addu  $s2, $ra, $zero
 /* 046380 8006AF80 3C0A800E */  lui   $t2, 0x800e
 /* 046384 8006AF84 254A9F80 */  addiu $t2, $t2, -0x6080
 /* 046388 8006AF88 01445021 */  addu  $t2, $t2, $a0
@@ -398,6 +424,7 @@ func_8006AF7C:
 /* 0463B8 8006AFB8 15800002 */  bnez  $t4, .L8006AFC4
 /* 0463BC 8006AFBC 00000000 */   nop   
 /* 0463C0 8006AFC0 0007000D */  break 7
+send_done:
 .L8006AFC4:
 /* 0463C4 8006AFC4 2401FFFF */  addiu $at, $zero, -1
 /* 0463C8 8006AFC8 15810004 */  bne   $t4, $at, .L8006AFDC
@@ -420,16 +447,17 @@ func_8006AF7C:
 /* 046408 8006B008 8D4B0000 */  lw    $t3, ($t2)
 /* 04640C 8006B00C 11600008 */  beqz  $t3, .L8006B030
 /* 046410 8006B010 00000000 */   nop   
-/* 046414 8006B014 0C01AC6F */  jal   func_8006B1BC
-/* 046418 8006B018 01202021 */   move  $a0, $t1
-/* 04641C 8006B01C 00405021 */  move  $t2, $v0
-/* 046420 8006B020 01402821 */  move  $a1, $t2
+/* 046414 8006B014 0C01AC6F */  jal   osPopThread
+/* 046418 8006B018 01202021 */   addu  $a0, $t1, $zero
+/* 04641C 8006B01C 00405021 */  addu  $t2, $v0, $zero
+/* 046420 8006B020 01402821 */  addu  $a1, $t2, $zero
 /* 046424 8006B024 3C048009 */  lui   $a0, 0x8009
-/* 046428 8006B028 0C01AC5D */  jal   func_8006B174
+/* 046428 8006B028 0C01AC5D */  jal   osEnqueueThread
 /* 04642C 8006B02C 24844658 */   addiu $a0, $a0, 0x4658
 .L8006B030:
 /* 046430 8006B030 02400008 */  jr    $s2
 /* 046434 8006B034 00000000 */   nop   
+handle_CPU:
 .L8006B038:
 /* 046438 8006B038 3C013000 */  lui   $at, 0x3000
 /* 04643C 8006B03C 01014824 */  and   $t1, $t0, $at
@@ -444,7 +472,7 @@ func_8006AF7C:
 /* 046460 8006B060 0361D825 */  or    $k1, $k1, $at
 /* 046464 8006B064 1000FFB3 */  b     .L8006AF34
 /* 046468 8006B068 AF5B0118 */   sw    $k1, 0x118($k0)
-func_8006B06C:
+osEnqueueAndYield:
 /* 04646C 8006B06C 3C058009 */  lui   $a1, 0x8009
 /* 046470 8006B070 8CA54660 */  lw    $a1, 0x4660($a1)
 /* 046474 8006B074 40086000 */  mfc0  $t0, $12
@@ -510,14 +538,15 @@ func_8006B06C:
 .L8006B15C:
 /* 04655C 8006B15C 10800003 */  beqz  $a0, .L8006B16C
 /* 046560 8006B160 ACBB0128 */   sw    $k1, 0x128($a1)
-/* 046564 8006B164 0C01AC5D */  jal   func_8006B174
+/* 046564 8006B164 0C01AC5D */  jal   osEnqueueThread
 /* 046568 8006B168 00000000 */   nop   
+noEnqueue:
 .L8006B16C:
-/* 04656C 8006B16C 0801AC75 */  j     func_8006B1D4
+/* 04656C 8006B16C 0801AC75 */  j     osDispatchThread
 /* 046570 8006B170 00000000 */   nop   
 
-func_8006B174:
-/* 046574 8006B174 0080C821 */  move  $t9, $a0
+osEnqueueThread:
+/* 046574 8006B174 0080C821 */  addu  $t9, $a0, $zero
 /* 046578 8006B178 8C980000 */  lw    $t8, ($a0)
 /* 04657C 8006B17C 8CAF0004 */  lw    $t7, 4($a1)
 /* 046580 8006B180 8F0E0004 */  lw    $t6, 4($t8)
@@ -525,7 +554,7 @@ func_8006B174:
 /* 046588 8006B188 14200007 */  bnez  $at, .L8006B1A8
 /* 04658C 8006B18C 00000000 */   nop   
 .L8006B190:
-/* 046590 8006B190 0300C821 */  move  $t9, $t8
+/* 046590 8006B190 0300C821 */  addu  $t9, $t8, $zero
 /* 046594 8006B194 8F180000 */  lw    $t8, ($t8)
 /* 046598 8006B198 8F0E0004 */  lw    $t6, 4($t8)
 /* 04659C 8006B19C 01CF082A */  slt   $at, $t6, $t7
@@ -538,24 +567,26 @@ func_8006B174:
 /* 0465B4 8006B1B4 03E00008 */  jr    $ra
 /* 0465B8 8006B1B8 ACA40008 */   sw    $a0, 8($a1)
 
-func_8006B1BC:
+osPopThread:
 /* 0465BC 8006B1BC 8C820000 */  lw    $v0, ($a0)
 /* 0465C0 8006B1C0 8C590000 */  lw    $t9, ($v0)
 /* 0465C4 8006B1C4 03E00008 */  jr    $ra
 /* 0465C8 8006B1C8 AC990000 */   sw    $t9, ($a0)
 
+osNop:
 /* 0465CC 8006B1CC 03E00008 */  jr    $ra
 /* 0465D0 8006B1D0 00000000 */   nop   
 
-func_8006B1D4:
+osDispatchThread:
 /* 0465D4 8006B1D4 3C048009 */  lui   $a0, 0x8009
-/* 0465D8 8006B1D8 0C01AC6F */  jal   func_8006B1BC
+/* 0465D8 8006B1D8 0C01AC6F */  jal   osPopThread
 /* 0465DC 8006B1DC 24844658 */   addiu $a0, $a0, 0x4658
 /* 0465E0 8006B1E0 3C018009 */  lui   $at, 0x8009
 /* 0465E4 8006B1E4 AC224660 */  sw    $v0, 0x4660($at)
 /* 0465E8 8006B1E8 24080004 */  addiu $t0, $zero, 4
 /* 0465EC 8006B1EC A4480010 */  sh    $t0, 0x10($v0)
-/* 0465F0 8006B1F0 0040D021 */  move  $k0, $v0
+/* 0465F0 8006B1F0 0040D021 */  addu  $k0, $v0, $zero
+osDispatchThreadSave:
 /* 0465F4 8006B1F4 8F5B0118 */  lw    $k1, 0x118($k0)
 /* 0465F8 8006B1F8 3C088009 */  lui   $t0, 0x8009
 /* 0465FC 8006B1FC 25085900 */  addiu $t0, $t0, 0x5900
@@ -644,7 +675,8 @@ func_8006B1D4:
 /* 046744 8006B344 00000000 */  nop   
 /* 046748 8006B348 00000000 */  nop   
 /* 04674C 8006B34C 42000018 */  eret  
-/* 046750 8006B350 00002021 */  move  $a0, $zero
-/* 046754 8006B354 0C01B254 */  jal   func_8006C950
+osCleanupThread:
+/* 046750 8006B350 00002021 */  addu  $a0, $zero, $zero
+/* 046754 8006B354 0C01B254 */  jal   osDestroyThread
 /* 046758 8006B358 00000000 */   nop   
 /* 04675C 8006B35C 00000000 */  nop   

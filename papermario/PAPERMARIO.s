@@ -4,6 +4,7 @@
 # assembler directives
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
+.set gp=64     # allow use of 64-bit general purpose registers
 
 .include "globals.inc"
 
@@ -80,7 +81,9 @@ bootcode_font_end:
 .include "asm/code_3b750_len_20.s" 
 .include "asm/code_3b770_len_80.s" 
 .include "asm/code_3b7f0_len_120.s" 
-.include "asm/code_3b910_len_8b0.s" 
+.include "asm/code_3b910_len_410.s" 
+.include "asm/code_3bd20_len_c0.s" 
+.include "asm/code_3bde0_len_3e0.s" 
 .include "asm/code_3c1c0_len_60.s" 
 .include "asm/code_3c220_len_a0.s" 
 .include "asm/code_3c2c0_len_50.s" 
@@ -183,9 +186,11 @@ bootcode_font_end:
 .include "asm/code_48c00_len_5c0.s" 
 .include "asm/code_491c0_len_7c0.s" 
 .include "asm/code_49980_len_2f0.s" 
-.include "asm/code_49c70_len_540.s" 
+.include "asm/code_49c70_len_4d0.s" 
+.include "asm/code_4a140_len_70.s" 
 .include "asm/code_4a1b0_len_40.s" 
-.include "asm/code_4a1f0_len_aa0.s" 
+.include "asm/code_4a1f0_len_170.s" 
+.include "asm/code_4a360_len_930.s" 
 .include "asm/code_4ac90_len_3910.s" 
 # Unknown region 04E5A0-0759B0 [27410]
 .incbin "bin/PAPERMARIO.04E5A0.bin"

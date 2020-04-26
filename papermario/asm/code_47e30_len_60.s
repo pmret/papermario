@@ -1,7 +1,7 @@
 
 .section .text8006CA30, "ax"
 
-func_8006CA30:
+osMapTLBRdb:
 /* 047E30 8006CA30 40085000 */  mfc0  $t0, $10
 /* 047E34 8006CA34 2409001F */  addiu $t1, $zero, 0x1f
 /* 047E38 8006CA38 40890000 */  mtc0  $t1, $0

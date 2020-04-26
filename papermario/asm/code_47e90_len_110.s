@@ -1,14 +1,14 @@
 
 .section .text8006CA90, "ax"
 
-func_8006CA90:
+osViInit:
 /* 047E90 8006CA90 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 047E94 8006CA94 AFB00010 */  sw    $s0, 0x10($sp)
 /* 047E98 8006CA98 3C108009 */  lui   $s0, 0x8009
 /* 047E9C 8006CA9C 26105970 */  addiu $s0, $s0, 0x5970
-/* 047EA0 8006CAA0 02002021 */  move  $a0, $s0
+/* 047EA0 8006CAA0 02002021 */  addu  $a0, $s0, $zero
 /* 047EA4 8006CAA4 AFBF0014 */  sw    $ra, 0x14($sp)
-/* 047EA8 8006CAA8 0C01925C */  jal   func_80064970
+/* 047EA8 8006CAA8 0C01925C */  jal   bzero
 /* 047EAC 8006CAAC 24050060 */   addiu $a1, $zero, 0x60
 /* 047EB0 8006CAB0 3C038000 */  lui   $v1, 0x8000
 /* 047EB4 8006CAB4 8C630300 */  lw    $v1, 0x300($v1)
@@ -68,7 +68,7 @@ func_8006CB24:
 /* 047F74 8006CB74 3C02A440 */   lui   $v0, 0xa440
 .L8006CB78:
 /* 047F78 8006CB78 AC400000 */  sw    $zero, ($v0)
-/* 047F7C 8006CB7C 0C019C1C */  jal   func_80067070
+/* 047F7C 8006CB7C 0C019C1C */  jal   osViSwapContext
 /* 047F80 8006CB80 00000000 */   nop   
 /* 047F84 8006CB84 8FBF0014 */  lw    $ra, 0x14($sp)
 /* 047F88 8006CB88 8FB00010 */  lw    $s0, 0x10($sp)

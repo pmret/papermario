@@ -1,7 +1,7 @@
 
 .section .text80066860, "ax"
 
-func_80066860:
+osProbeTLB:
 /* 041C60 80066860 40085000 */  mfc0  $t0, $10
 /* 041C64 80066864 310900FF */  andi  $t1, $t0, 0xff
 /* 041C68 80066868 2401E000 */  addiu $at, $zero, -0x2000

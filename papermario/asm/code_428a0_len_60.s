@@ -1,7 +1,7 @@
 
 .section .text800674A0, "ax"
 
-func_800674A0:
+guMtxIdentF:
 /* 0428A0 800674A0 3C083F80 */  lui   $t0, 0x3f80
 /* 0428A4 800674A4 AC880000 */  sw    $t0, ($a0)
 /* 0428A8 800674A8 AC800004 */  sw    $zero, 4($a0)

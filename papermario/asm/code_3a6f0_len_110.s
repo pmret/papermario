@@ -1,10 +1,10 @@
 
 .section .text8005F2F0, "ax"
 
-func_8005F2F0:
+nuGfxSetCfb:
 /* 03A6F0 8005F2F0 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 03A6F4 8005F2F4 AFB10014 */  sw    $s1, 0x14($sp)
-/* 03A6F8 8005F2F8 00A0882D */  move  $s1, $a1
+/* 03A6F8 8005F2F8 00A0882D */  daddu $s1, $a1, $zero
 /* 03A6FC 8005F2FC AFBF0018 */  sw    $ra, 0x18($sp)
 /* 03A700 8005F300 AFB00010 */  sw    $s0, 0x10($sp)
 /* 03A704 8005F304 3C01800A */  lui   $at, 0x800a
@@ -16,15 +16,15 @@ func_8005F2F0:
 /* 03A71C 8005F31C 8C820000 */  lw    $v0, ($a0)
 /* 03A720 8005F320 3C01800A */  lui   $at, 0x800a
 /* 03A724 8005F324 AC22A64C */  sw    $v0, -0x59b4($at)
-/* 03A728 8005F328 0C0180DC */  jal   func_80060370
+/* 03A728 8005F328 0C0180DC */  jal   nuGfxRetraceWait
 /* 03A72C 8005F32C 24040001 */   addiu $a0, $zero, 1
-/* 03A730 8005F330 0C017BE4 */  jal   func_8005EF90
+/* 03A730 8005F330 0C017BE4 */  jal   nuScSetFrameBufferNum
 /* 03A734 8005F334 322400FF */   andi  $a0, $s1, 0xff
 /* 03A738 8005F338 2E220002 */  sltiu $v0, $s1, 2
 /* 03A73C 8005F33C 1440002A */  bnez  $v0, .L8005F3E8
 /* 03A740 8005F340 2625FFFF */   addiu $a1, $s1, -1
 /* 03A744 8005F344 10A0000B */  beqz  $a1, .L8005F374
-/* 03A748 8005F348 0000802D */   move  $s0, $zero
+/* 03A748 8005F348 0000802D */   daddu $s0, $zero, $zero
 /* 03A74C 8005F34C 3C04800A */  lui   $a0, 0x800a
 /* 03A750 8005F350 8C84A658 */  lw    $a0, -0x59a8($a0)
 .L8005F354:
@@ -41,7 +41,7 @@ func_8005F2F0:
 .L8005F378:
 /* 03A778 8005F378 1602000C */  bne   $s0, $v0, .L8005F3AC
 /* 03A77C 8005F37C 00000000 */   nop   
-/* 03A780 8005F380 0C017BE4 */  jal   func_8005EF90
+/* 03A780 8005F380 0C017BE4 */  jal   nuScSetFrameBufferNum
 /* 03A784 8005F384 24040001 */   addiu $a0, $zero, 1
 /* 03A788 8005F388 08017CFA */  j     func_8005F3E8
 /* 03A78C 8005F38C 00000000 */   nop   
@@ -57,9 +57,9 @@ func_8005F2F0:
 
 .L8005F3AC:
 /* 03A7AC 8005F3AC 1220000E */  beqz  $s1, .L8005F3E8
-/* 03A7B0 8005F3B0 0000802D */   move  $s0, $zero
+/* 03A7B0 8005F3B0 0000802D */   daddu $s0, $zero, $zero
 .L8005F3B4:
-/* 03A7B4 8005F3B4 0C019A6C */  jal   func_800669B0
+/* 03A7B4 8005F3B4 0C019A6C */  jal   osViGetCurrentFramebuffer
 /* 03A7B8 8005F3B8 00000000 */   nop   
 /* 03A7BC 8005F3BC 3C03800A */  lui   $v1, 0x800a
 /* 03A7C0 8005F3C0 8C63A658 */  lw    $v1, -0x59a8($v1)

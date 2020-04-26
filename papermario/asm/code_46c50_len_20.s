@@ -1,7 +1,7 @@
 
 .section .text8006B850, "ax"
 
-func_8006B850:
+osAiDeviceBusy:
 /* 046C50 8006B850 3C02A450 */  lui   $v0, 0xa450
 /* 046C54 8006B854 3442000C */  ori   $v0, $v0, 0xc
 /* 046C58 8006B858 8C420000 */  lw    $v0, ($v0)

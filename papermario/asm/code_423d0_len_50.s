@@ -1,11 +1,11 @@
 
 .section .text80066FD0, "ax"
 
-func_80066FD0:
+osViSetYScale:
 /* 0423D0 80066FD0 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0423D4 80066FD4 F7B40018 */  sdc1  $f20, 0x18($sp)
 /* 0423D8 80066FD8 AFBF0010 */  sw    $ra, 0x10($sp)
-/* 0423DC 80066FDC 0C01ACD8 */  jal   func_8006B360
+/* 0423DC 80066FDC 0C01ACD8 */  jal   osDisableInt
 /* 0423E0 80066FE0 46006506 */   mov.s $f20, $f12
 /* 0423E4 80066FE4 3C048009 */  lui   $a0, 0x8009
 /* 0423E8 80066FE8 8C8459D4 */  lw    $a0, 0x59d4($a0)
@@ -13,8 +13,8 @@ func_80066FD0:
 /* 0423F0 80066FF0 E4940024 */  swc1  $f20, 0x24($a0)
 /* 0423F4 80066FF4 34630004 */  ori   $v1, $v1, 4
 /* 0423F8 80066FF8 A4830000 */  sh    $v1, ($a0)
-/* 0423FC 80066FFC 0C01ACF4 */  jal   func_8006B3D0
-/* 042400 80067000 00402021 */   move  $a0, $v0
+/* 0423FC 80066FFC 0C01ACF4 */  jal   osRestoreInt
+/* 042400 80067000 00402021 */   addu  $a0, $v0, $zero
 /* 042404 80067004 8FBF0010 */  lw    $ra, 0x10($sp)
 /* 042408 80067008 D7B40018 */  ldc1  $f20, 0x18($sp)
 /* 04240C 8006700C 03E00008 */  jr    $ra

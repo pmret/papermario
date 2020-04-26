@@ -1,12 +1,12 @@
 
 .section .text80060E20, "ax"
 
-func_80060E20:
+osEPiStartDma:
 /* 03C220 80060E20 3C028009 */  lui   $v0, 0x8009
 /* 03C224 80060E24 8C423D50 */  lw    $v0, 0x3d50($v0)
 /* 03C228 80060E28 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 03C22C 80060E2C AFB00010 */  sw    $s0, 0x10($sp)
-/* 03C230 80060E30 00A08021 */  move  $s0, $a1
+/* 03C230 80060E30 00A08021 */  addu  $s0, $a1, $zero
 /* 03C234 80060E34 14400003 */  bnez  $v0, .L80060E44
 /* 03C238 80060E38 AFBF0014 */   sw    $ra, 0x14($sp)
 /* 03C23C 80060E3C 080183A9 */  j     func_80060EA4
@@ -26,22 +26,22 @@ func_80060E58:
 /* 03C260 80060E60 24020001 */  addiu $v0, $zero, 1
 /* 03C264 80060E64 14620009 */  bne   $v1, $v0, .L80060E8C
 /* 03C268 80060E68 00000000 */   nop   
-/* 03C26C 80060E6C 0C01AD54 */  jal   func_8006B550
+/* 03C26C 80060E6C 0C01AD54 */  jal   osPiGetCmdQueue
 /* 03C270 80060E70 00000000 */   nop   
-/* 03C274 80060E74 00402021 */  move  $a0, $v0
-/* 03C278 80060E78 02002821 */  move  $a1, $s0
-/* 03C27C 80060E7C 0C01956C */  jal   func_800655B0
-/* 03C280 80060E80 00003021 */   move  $a2, $zero
+/* 03C274 80060E74 00402021 */  addu  $a0, $v0, $zero
+/* 03C278 80060E78 02002821 */  addu  $a1, $s0, $zero
+/* 03C27C 80060E7C 0C01956C */  jal   osJamMesg
+/* 03C280 80060E80 00003021 */   addu  $a2, $zero, $zero
 /* 03C284 80060E84 080183A9 */  j     func_80060EA4
 /* 03C288 80060E88 00000000 */   nop   
 
 .L80060E8C:
-/* 03C28C 80060E8C 0C01AD54 */  jal   func_8006B550
+/* 03C28C 80060E8C 0C01AD54 */  jal   osPiGetCmdQueue
 /* 03C290 80060E90 00000000 */   nop   
-/* 03C294 80060E94 00402021 */  move  $a0, $v0
-/* 03C298 80060E98 02002821 */  move  $a1, $s0
-/* 03C29C 80060E9C 0C019608 */  jal   func_80065820
-/* 03C2A0 80060EA0 00003021 */   move  $a2, $zero
+/* 03C294 80060E94 00402021 */  addu  $a0, $v0, $zero
+/* 03C298 80060E98 02002821 */  addu  $a1, $s0, $zero
+/* 03C29C 80060E9C 0C019608 */  jal   osSendMesg
+/* 03C2A0 80060EA0 00003021 */   addu  $a2, $zero, $zero
 func_80060EA4:
 /* 03C2A4 80060EA4 8FBF0014 */  lw    $ra, 0x14($sp)
 /* 03C2A8 80060EA8 8FB00010 */  lw    $s0, 0x10($sp)

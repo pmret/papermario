@@ -1,12 +1,12 @@
 
 .section .text800696D0, "ax"
 
-func_800696D0:
+osPfsSelectBank:
 /* 044AD0 800696D0 27BDFFB8 */  addiu $sp, $sp, -0x48
 /* 044AD4 800696D4 AFB00038 */  sw    $s0, 0x38($sp)
-/* 044AD8 800696D8 00808021 */  move  $s0, $a0
+/* 044AD8 800696D8 00808021 */  addu  $s0, $a0, $zero
 /* 044ADC 800696DC AFB1003C */  sw    $s1, 0x3c($sp)
-/* 044AE0 800696E0 00A08821 */  move  $s1, $a1
+/* 044AE0 800696E0 00A08821 */  addu  $s1, $a1, $zero
 /* 044AE4 800696E4 2403001F */  addiu $v1, $zero, 0x1f
 /* 044AE8 800696E8 27A20037 */  addiu $v0, $sp, 0x37
 /* 044AEC 800696EC AFBF0040 */  sw    $ra, 0x40($sp)
@@ -19,7 +19,7 @@ func_800696D0:
 /* 044B04 80069704 8E040004 */  lw    $a0, 4($s0)
 /* 044B08 80069708 8E050008 */  lw    $a1, 8($s0)
 /* 044B0C 8006970C 24060400 */  addiu $a2, $zero, 0x400
-/* 044B10 80069710 0C01A8F0 */  jal   func_8006A3C0
+/* 044B10 80069710 0C01A8F0 */  jal   osContRamWrite
 /* 044B14 80069714 27A70018 */   addiu $a3, $sp, 0x18
 /* 044B18 80069718 50400001 */  beql  $v0, $zero, .L80069720
 /* 044B1C 8006971C A2110065 */   sb    $s1, 0x65($s0)

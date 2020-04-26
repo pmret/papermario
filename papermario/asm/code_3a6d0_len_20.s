@@ -1,7 +1,7 @@
 
 .section .text8005F2D0, "ax"
 
-func_8005F2D0:
+nuGfxTaskAllEndWait:
 .L8005F2D0:
 /* 03A6D0 8005F2D0 3C02800A */  lui   $v0, 0x800a
 /* 03A6D4 8005F2D4 8C42A618 */  lw    $v0, -0x59e8($v0)

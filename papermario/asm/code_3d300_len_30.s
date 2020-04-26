@@ -1,11 +1,11 @@
 
 .section .text80061F00, "ax"
 
-func_80061F00:
+coss:
 /* 03D300 80061F00 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 03D304 80061F04 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 03D308 80061F08 24844000 */  addiu $a0, $a0, 0x4000
-/* 03D30C 80061F0C 0C01917C */  jal   func_800645F0
+/* 03D30C 80061F0C 0C01917C */  jal   sins
 /* 03D310 80061F10 3084FFFF */   andi  $a0, $a0, 0xffff
 /* 03D314 80061F14 00021400 */  sll   $v0, $v0, 0x10
 /* 03D318 80061F18 8FBF0010 */  lw    $ra, 0x10($sp)

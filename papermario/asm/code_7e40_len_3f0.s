@@ -11,7 +11,7 @@
 /* 007E5C 8002CA5C AFB30024 */  sw    $s3, 0x24($sp)
 /* 007E60 8002CA60 AFB20020 */  sw    $s2, 0x20($sp)
 /* 007E64 8002CA64 AFB1001C */  sw    $s1, 0x1c($sp)
-/* 007E68 8002CA68 0C019560 */  jal   func_80065580
+/* 007E68 8002CA68 0C019560 */  jal   osCreateMesgQueue
 /* 007E6C 8002CA6C AFB00018 */   sw    $s0, 0x18($sp)
 /* 007E70 8002CA70 24130004 */  addiu $s3, $zero, 4
 /* 007E74 8002CA74 24120008 */  addiu $s2, $zero, 8
@@ -23,7 +23,7 @@ func_8002CA88:
 /* 007E88 8002CA88 3C04800E */  lui   $a0, 0x800e
 /* 007E8C 8002CA8C 2484AC90 */  addiu $a0, $a0, -0x5370
 /* 007E90 8002CA90 27A50010 */  addiu $a1, $sp, 0x10
-/* 007E94 8002CA94 0C0195BC */  jal   func_800656F0
+/* 007E94 8002CA94 0C0195BC */  jal   osRecvMesg
 /* 007E98 8002CA98 24060001 */   addiu $a2, $zero, 1
 /* 007E9C 8002CA9C 8FA40010 */  lw    $a0, 0x10($sp)
 /* 007EA0 8002CAA0 8C820054 */  lw    $v0, 0x54($a0)
@@ -47,8 +47,8 @@ func_8002CA88:
 /* 007EDC 8002CADC 30420080 */  andi  $v0, $v0, 0x80
 /* 007EE0 8002CAE0 1040000C */  beqz  $v0, .L8002CB14
 /* 007EE4 8002CAE4 00000000 */   nop   
-/* 007EE8 8002CAE8 0C019CE0 */  jal   func_80067380
-/* 007EEC 8002CAEC 0000202D */   move  $a0, $zero
+/* 007EE8 8002CAE8 0C019CE0 */  jal   osViBlack
+/* 007EEC 8002CAEC 0000202D */   daddu $a0, $zero, $zero
 /* 007EF0 8002CAF0 24020001 */  addiu $v0, $zero, 1
 /* 007EF4 8002CAF4 0800B2C5 */  j     func_8002CB14
 /* 007EF8 8002CAF8 AE220000 */   sw    $v0, ($s1)
@@ -62,12 +62,12 @@ func_8002CA88:
 /* 007F10 8002CB10 00000000 */  nop   
 func_8002CB14:
 .L8002CB14:
-/* 007F14 8002CB14 0C018250 */  jal   func_80060940
+/* 007F14 8002CB14 0C018250 */  jal   osSetIntMask
 /* 007F18 8002CB18 24040001 */   addiu $a0, $zero, 1
 /* 007F1C 8002CB1C 8E030000 */  lw    $v1, ($s0)
-/* 007F20 8002CB20 0040202D */  move  $a0, $v0
+/* 007F20 8002CB20 0040202D */  daddu $a0, $v0, $zero
 /* 007F24 8002CB24 2463FFFF */  addiu $v1, $v1, -1
-/* 007F28 8002CB28 0C018250 */  jal   func_80060940
+/* 007F28 8002CB28 0C018250 */  jal   osSetIntMask
 /* 007F2C 8002CB2C AE030000 */   sw    $v1, ($s0)
 /* 007F30 8002CB30 0800B2A2 */  j     func_8002CA88
 /* 007F34 8002CB34 00000000 */   nop   
@@ -92,11 +92,11 @@ func_8002CB38:
 /* 007F78 8002CB78 AFB1001C */  sw    $s1, 0x1c($sp)
 /* 007F7C 8002CB7C AFB00018 */  sw    $s0, 0x18($sp)
 /* 007F80 8002CB80 AC400000 */  sw    $zero, ($v0)
-/* 007F84 8002CB84 0C017D00 */  jal   func_8005F400
-/* 007F88 8002CB88 0000902D */   move  $s2, $zero
+/* 007F84 8002CB84 0C017D00 */  jal   nuGfxDisplayOff
+/* 007F88 8002CB88 0000902D */   daddu $s2, $zero, $zero
 /* 007F8C 8002CB8C 3C10800A */  lui   $s0, 0x800a
 /* 007F90 8002CB90 2610C518 */  addiu $s0, $s0, -0x3ae8
-/* 007F94 8002CB94 0200202D */  move  $a0, $s0
+/* 007F94 8002CB94 0200202D */  daddu $a0, $s0, $zero
 /* 007F98 8002CB98 24050005 */  addiu $a1, $zero, 5
 /* 007F9C 8002CB9C 3C068003 */  lui   $a2, 0x8003
 /* 007FA0 8002CBA0 24C6CA40 */  addiu $a2, $a2, -0x35c0
@@ -104,11 +104,11 @@ func_8002CB38:
 /* 007FA8 8002CBA8 2442E6D0 */  addiu $v0, $v0, -0x1930
 /* 007FAC 8002CBAC AFA20010 */  sw    $v0, 0x10($sp)
 /* 007FB0 8002CBB0 2402003C */  addiu $v0, $zero, 0x3c
-/* 007FB4 8002CBB4 0000382D */  move  $a3, $zero
-/* 007FB8 8002CBB8 0C019798 */  jal   func_80065E60
+/* 007FB4 8002CBB4 0000382D */  daddu $a3, $zero, $zero
+/* 007FB8 8002CBB8 0C019798 */  jal   osCreateThread
 /* 007FBC 8002CBBC AFA20014 */   sw    $v0, 0x14($sp)
-/* 007FC0 8002CBC0 0C019808 */  jal   func_80066020
-/* 007FC4 8002CBC4 0200202D */   move  $a0, $s0
+/* 007FC0 8002CBC0 0C019808 */  jal   osStartThread
+/* 007FC4 8002CBC4 0200202D */   daddu $a0, $s0, $zero
 /* 007FC8 8002CBC8 3C17800E */  lui   $s7, 0x800e
 /* 007FCC 8002CBCC 26F7AC90 */  addiu $s7, $s7, -0x5370
 /* 007FD0 8002CBD0 24160001 */  addiu $s6, $zero, 1
@@ -118,14 +118,14 @@ func_8002CB38:
 /* 007FE0 8002CBE0 24141000 */  addiu $s4, $zero, 0x1000
 /* 007FE4 8002CBE4 3C02800E */  lui   $v0, 0x800e
 /* 007FE8 8002CBE8 24429278 */  addiu $v0, $v0, -0x6d88
-/* 007FEC 8002CBEC 0040802D */  move  $s0, $v0
+/* 007FEC 8002CBEC 0040802D */  daddu $s0, $v0, $zero
 /* 007FF0 8002CBF0 26110058 */  addiu $s1, $s0, 0x58
 .L8002CBF4:
 /* 007FF4 8002CBF4 3C04B000 */  lui   $a0, 0xb000
 /* 007FF8 8002CBF8 34840B70 */  ori   $a0, $a0, 0xb70
 /* 007FFC 8002CBFC 3C05B000 */  lui   $a1, 0xb000
 /* 008000 8002CC00 34A50C70 */  ori   $a1, $a1, 0xc70
-/* 008004 8002CC04 0260302D */  move  $a2, $s3
+/* 008004 8002CC04 0260302D */  daddu $a2, $s3, $zero
 /* 008008 8002CC08 AE110000 */  sw    $s1, ($s0)
 /* 00800C 8002CC0C AE170050 */  sw    $s7, 0x50($s0)
 /* 008010 8002CC10 AE160010 */  sw    $s6, 0x10($s0)
@@ -243,23 +243,23 @@ func_8002CCC4:
 /* 0081B8 8002CDB8 2442C514 */  addiu $v0, $v0, -0x3aec
 /* 0081BC 8002CDBC AC620054 */  sw    $v0, 0x54($v1)
 func_8002CDC0:
-/* 0081C0 8002CDC0 0C018250 */  jal   func_80060940
+/* 0081C0 8002CDC0 0C018250 */  jal   osSetIntMask
 /* 0081C4 8002CDC4 24040001 */   addiu $a0, $zero, 1
 /* 0081C8 8002CDC8 3C05800A */  lui   $a1, 0x800a
 /* 0081CC 8002CDCC 24A5A618 */  addiu $a1, $a1, -0x59e8
 /* 0081D0 8002CDD0 8CA30000 */  lw    $v1, ($a1)
-/* 0081D4 8002CDD4 0040202D */  move  $a0, $v0
+/* 0081D4 8002CDD4 0040202D */  daddu $a0, $v0, $zero
 /* 0081D8 8002CDD8 24630001 */  addiu $v1, $v1, 1
-/* 0081DC 8002CDDC 0C018250 */  jal   func_80060940
+/* 0081DC 8002CDDC 0C018250 */  jal   osSetIntMask
 /* 0081E0 8002CDE0 ACA30000 */   sw    $v1, ($a1)
-/* 0081E4 8002CDE4 0C018634 */  jal   func_800618D0
+/* 0081E4 8002CDE4 0C018634 */  jal   osWritebackDCacheAll
 /* 0081E8 8002CDE8 00000000 */   nop   
 /* 0081EC 8002CDEC 3C04800E */  lui   $a0, 0x800e
 /* 0081F0 8002CDF0 2484A47C */  addiu $a0, $a0, -0x5b84
 /* 0081F4 8002CDF4 3C10800A */  lui   $s0, 0x800a
 /* 0081F8 8002CDF8 2610C510 */  addiu $s0, $s0, -0x3af0
 /* 0081FC 8002CDFC 8E050000 */  lw    $a1, ($s0)
-/* 008200 8002CE00 0C019608 */  jal   func_80065820
+/* 008200 8002CE00 0C019608 */  jal   osSendMesg
 /* 008204 8002CE04 24060001 */   addiu $a2, $zero, 1
 /* 008208 8002CE08 8E020000 */  lw    $v0, ($s0)
 /* 00820C 8002CE0C 8C420000 */  lw    $v0, ($v0)
