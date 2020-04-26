@@ -3,6 +3,7 @@
 
 func_80280000:
 /* 7E0E80 80280000 3C028007 */  lui   $v0, 0x8007
+PartnerAfflictEnemy:
 /* 7E0E84 80280004 8C42419C */  lw    $v0, 0x419c($v0)
 /* 7E0E88 80280008 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 7E0E8C 8028000C AFBF0018 */  sw    $ra, 0x18($sp)
@@ -169,6 +170,7 @@ func_80280208:
 .L80280268:
 /* 7E10E8 80280268 0C0496CF */  jal   set_message_string
 /* 7E10EC 8028026C 24050001 */   addiu $a1, $zero, 1
+PartnerPowerBounceEnemy:
 /* 7E10F0 80280270 3C048028 */  lui   $a0, 0x8028
 /* 7E10F4 80280274 24843EB0 */  addiu $a0, $a0, 0x3eb0
 /* 7E10F8 80280278 24050001 */  addiu $a1, $zero, 1
@@ -330,6 +332,7 @@ func_8028035C:
 /* 7E1344 802804C4 3C018028 */  lui   $at, 0x8028
 /* 7E1348 802804C8 AC256524 */  sw    $a1, 0x6524($at)
 /* 7E134C 802804CC 080A0141 */  j     func_80280504
+PartnerTestEnemy:
 /* 7E1350 802804D0 A6040000 */   sh    $a0, ($s0)
 
 .L802804D4:
@@ -529,13 +532,13 @@ func_80280504:
 /* 7E160C 8028078C 34A55CF0 */  ori   $a1, $a1, 0x5cf0
 /* 7E1610 80280790 0C0B2026 */  jal   set_variable
 /* 7E1614 80280794 24060001 */   addiu $a2, $zero, 1
-/* 7E1618 80280798 080A01EA */  j     func_802807A8
+/* 7E1618 80280798 080A01EA */  j     DeletePartner
 /* 7E161C 8028079C 00000000 */   nop   
 
 .L802807A0:
 /* 7E1620 802807A0 0C039D5D */  jal   add_item
 /* 7E1624 802807A4 00000000 */   nop   
-func_802807A8:
+DeletePartner:
 /* 7E1628 802807A8 0C0A005F */  jal   func_8028017C
 /* 7E162C 802807AC 24040003 */   addiu $a0, $zero, 3
 /* 7E1630 802807B0 AE620074 */  sw    $v0, 0x74($s3)
@@ -582,6 +585,7 @@ func_802807A8:
 /* 7E16B4 80280834 1440003D */  bnez  $v0, .L8028092C
 /* 7E16B8 80280838 0000102D */   daddu $v0, $zero, $zero
 /* 7E16BC 8028083C 8E430000 */  lw    $v1, ($s2)
+GetDamageIntensity:
 /* 7E16C0 80280840 24020001 */  addiu $v0, $zero, 1
 /* 7E16C4 80280844 3C018028 */  lui   $at, 0x8028
 /* 7E16C8 80280848 AC226534 */  sw    $v0, 0x6534($at)
@@ -601,6 +605,7 @@ func_80280850:
 /* 7E16F4 80280874 0000102D */   daddu $v0, $zero, $zero
 /* 7E16F8 80280878 8E430000 */  lw    $v1, ($s2)
 /* 7E16FC 8028087C 24020003 */  addiu $v0, $zero, 3
+ActorAddMovePos:
 /* 7E1700 80280880 3C018028 */  lui   $at, 0x8028
 /* 7E1704 80280884 AC226534 */  sw    $v0, 0x6534($at)
 /* 7E1708 80280888 AE700070 */  sw    $s0, 0x70($s3)
@@ -663,6 +668,7 @@ func_8028092C:
 /* 7E17C4 80280944 8FB10014 */  lw    $s1, 0x14($sp)
 /* 7E17C8 80280948 8FB00010 */  lw    $s0, 0x10($sp)
 /* 7E17CC 8028094C 03E00008 */  jr    $ra
+LoadStarPowerScript:
 /* 7E17D0 80280950 27BD0030 */   addiu $sp, $sp, 0x30
 
 func_80280954:
@@ -731,6 +737,7 @@ func_80280A04:
 /* 7E18A8 80280A28 24050001 */  addiu $a1, $zero, 1
 /* 7E18AC 80280A2C AE120108 */  sw    $s2, 0x108($s0)
 /* 7E18B0 80280A30 AE05018C */  sw    $a1, 0x18c($s0)
+BtlPutPartnerAway:
 /* 7E18B4 80280A34 AE020000 */  sw    $v0, ($s0)
 /* 7E18B8 80280A38 8C620000 */  lw    $v0, ($v1)
 /* 7E18BC 80280A3C AE020084 */  sw    $v0, 0x84($s0)
@@ -821,6 +828,7 @@ func_80280B44:
 /* 7E19E0 80280B60 00000000 */   nop   
 /* 7E19E4 80280B64 0C03A5EE */  jal   func_800E97B8
 /* 7E19E8 80280B68 00000000 */   nop   
+BtlBringPartnerOut:
 /* 7E19EC 80280B6C 8FBF0010 */  lw    $ra, 0x10($sp)
 /* 7E19F0 80280B70 03E00008 */  jr    $ra
 /* 7E19F4 80280B74 27BD0018 */   addiu $sp, $sp, 0x18
@@ -932,6 +940,7 @@ func_80280B78:
 /* 7E1B5C 80280CDC 10620117 */  beq   $v1, $v0, .L8028113C
 /* 7E1B60 80280CE0 28620034 */   slti  $v0, $v1, 0x34
 /* 7E1B64 80280CE4 10400007 */  beqz  $v0, .L80280D04
+CamPreset_B:
 /* 7E1B68 80280CE8 24020029 */   addiu $v0, $zero, 0x29
 /* 7E1B6C 80280CEC 10620027 */  beq   $v1, $v0, .L80280D8C
 /* 7E1B70 80280CF0 2402002A */   addiu $v0, $zero, 0x2a
@@ -940,6 +949,7 @@ func_80280B78:
 /* 7E1B7C 80280CFC 080A0506 */  j     func_80281418
 /* 7E1B80 80280D00 00000000 */   nop   
 
+CamPreset_F:
 .L80280D04:
 /* 7E1B84 80280D04 24020034 */  addiu $v0, $zero, 0x34
 /* 7E1B88 80280D08 10620133 */  beq   $v1, $v0, .L802811D8
@@ -949,6 +959,7 @@ func_80280B78:
 /* 7E1B98 80280D18 080A0506 */  j     func_80281418
 /* 7E1B9C 80280D1C 00000000 */   nop   
 
+CamPreset_M:
 .L80280D20:
 /* 7E1BA0 80280D20 240200C9 */  addiu $v0, $zero, 0xc9
 /* 7E1BA4 80280D24 10620072 */  beq   $v1, $v0, .L80280EF0
@@ -957,6 +968,7 @@ func_80280B78:
 /* 7E1BB0 80280D30 24020048 */   addiu $v0, $zero, 0x48
 /* 7E1BB4 80280D34 1062017E */  beq   $v1, $v0, .L80281330
 /* 7E1BB8 80280D38 24020049 */   addiu $v0, $zero, 0x49
+CamPreset_G:
 /* 7E1BBC 80280D3C 1062018C */  beq   $v1, $v0, .L80281370
 /* 7E1BC0 80280D40 0000102D */   daddu $v0, $zero, $zero
 /* 7E1BC4 80280D44 080A0506 */  j     func_80281418
@@ -966,6 +978,7 @@ func_80280B78:
 /* 7E1BCC 80280D4C 240201F5 */  addiu $v0, $zero, 0x1f5
 /* 7E1BD0 80280D50 106200EA */  beq   $v1, $v0, .L802810FC
 /* 7E1BD4 80280D54 240202BD */   addiu $v0, $zero, 0x2bd
+CamPreset_I:
 /* 7E1BD8 80280D58 10620138 */  beq   $v1, $v0, .L8028123C
 /* 7E1BDC 80280D5C 0000102D */   daddu $v0, $zero, $zero
 /* 7E1BE0 80280D60 080A0506 */  j     func_80281418
@@ -975,6 +988,7 @@ func_80280B78:
 /* 7E1BE8 80280D68 0C0B1059 */  jal   does_script_exist
 /* 7E1BEC 80280D6C 8E240074 */   lw    $a0, 0x74($s1)
 /* 7E1BF0 80280D70 144001A9 */  bnez  $v0, .L80281418
+CamPreset_H:
 /* 7E1BF4 80280D74 0000102D */   daddu $v0, $zero, $zero
 /* 7E1BF8 80280D78 3C04001E */  lui   $a0, 0x1e
 /* 7E1BFC 80280D7C 34840003 */  ori   $a0, $a0, 3
@@ -984,6 +998,7 @@ func_80280B78:
 
 .L80280D8C:
 /* 7E1C0C 80280D8C 8E240078 */  lw    $a0, 0x78($s1)
+CamPreset_N:
 /* 7E1C10 80280D90 24020001 */  addiu $v0, $zero, 1
 /* 7E1C14 80280D94 148201A0 */  bne   $a0, $v0, .L80281418
 /* 7E1C18 80280D98 0000102D */   daddu $v0, $zero, $zero
@@ -991,6 +1006,7 @@ func_80280B78:
 /* 7E1C20 80280DA0 8C426538 */  lw    $v0, 0x6538($v0)
 /* 7E1C24 80280DA4 904304E8 */  lbu   $v1, 0x4e8($v0)
 /* 7E1C28 80280DA8 10640012 */  beq   $v1, $a0, .L80280DF4
+CamPreset_C:
 /* 7E1C2C 80280DAC 28620002 */   slti  $v0, $v1, 2
 /* 7E1C30 80280DB0 10400005 */  beqz  $v0, .L80280DC8
 /* 7E1C34 80280DB4 24020002 */   addiu $v0, $zero, 2
@@ -999,6 +1015,7 @@ func_80280B78:
 /* 7E1C40 80280DC0 080A03B6 */  j     func_80280ED8
 /* 7E1C44 80280DC4 00000000 */   nop   
 
+CamPreset_D:
 .L80280DC8:
 /* 7E1C48 80280DC8 10620018 */  beq   $v1, $v0, .L80280E2C
 /* 7E1C4C 80280DCC 24020003 */   addiu $v0, $zero, 3
@@ -1009,6 +1026,7 @@ func_80280B78:
 
 .L80280DE0:
 /* 7E1C60 80280DE0 0C0A005F */  jal   func_8028017C
+CamPreset_E:
 /* 7E1C64 80280DE4 24040005 */   addiu $a0, $zero, 5
 /* 7E1C68 80280DE8 AE220074 */  sw    $v0, 0x74($s1)
 /* 7E1C6C 80280DEC 080A0505 */  j     func_80281414
@@ -1018,6 +1036,7 @@ func_80280B78:
 /* 7E1C74 80280DF4 0C039D7B */  jal   get_item_count
 /* 7E1C78 80280DF8 00000000 */   nop   
 /* 7E1C7C 80280DFC 14400005 */  bnez  $v0, .L80280E14
+CamPreset_J:
 /* 7E1C80 80280E00 00000000 */   nop   
 /* 7E1C84 80280E04 0C0A005F */  jal   func_8028017C
 /* 7E1C88 80280E08 24040006 */   addiu $a0, $zero, 6
@@ -1027,6 +1046,7 @@ func_80280B78:
 .L80280E14:
 /* 7E1C94 80280E14 0C0A005F */  jal   func_8028017C
 /* 7E1C98 80280E18 24040007 */   addiu $a0, $zero, 7
+CamPreset_K:
 /* 7E1C9C 80280E1C AE220074 */  sw    $v0, 0x74($s1)
 /* 7E1CA0 80280E20 240200C9 */  addiu $v0, $zero, 0xc9
 /* 7E1CA4 80280E24 080A0505 */  j     func_80281414
@@ -1036,6 +1056,7 @@ func_80280B78:
 /* 7E1CAC 80280E2C 0C039D7B */  jal   get_item_count
 /* 7E1CB0 80280E30 00000000 */   nop   
 /* 7E1CB4 80280E34 14400005 */  bnez  $v0, .L80280E4C
+CamPreset_L:
 /* 7E1CB8 80280E38 00000000 */   nop   
 /* 7E1CBC 80280E3C 0C0A005F */  jal   func_8028017C
 /* 7E1CC0 80280E40 2404000C */   addiu $a0, $zero, 0xc
@@ -1045,6 +1066,7 @@ func_80280B78:
 .L80280E4C:
 /* 7E1CCC 80280E4C 0C039E12 */  jal   get_stored_empty_count
 /* 7E1CD0 80280E50 00000000 */   nop   
+CamPreset_A:
 /* 7E1CD4 80280E54 14400005 */  bnez  $v0, .L80280E6C
 /* 7E1CD8 80280E58 00000000 */   nop   
 /* 7E1CDC 80280E5C 0C0A005F */  jal   func_8028017C

@@ -204,7 +204,7 @@ step_battle:
 /* 00EE90 80033A90 24C6E000 */  addiu $a2, $a2, -0x2000
 /* 00EE94 80033A94 0C00A5CF */  jal   dma_copy
 /* 00EE98 80033A98 00000000 */   nop   
-/* 00EE9C 80033A9C 0C08F84C */  jal   func_8023E130
+/* 00EE9C 80033A9C 0C08F84C */  jal   initialize_battle
 /* 00EEA0 80033AA0 00000000 */   nop   
 /* 00EEA4 80033AA4 0C09027D */  jal   func_802409F4
 /* 00EEA8 80033AA8 00000000 */   nop   
@@ -235,7 +235,7 @@ step_battle:
 .L80033B0C:
 /* 00EF0C 80033B0C 0C00F949 */  jal   func_8003E524
 /* 00EF10 80033B10 00000000 */   nop   
-/* 00EF14 80033B14 0C08F90E */  jal   func_8023E438
+/* 00EF14 80033B14 0C08F90E */  jal   update_battle_state
 /* 00EF18 80033B18 00000000 */   nop   
 /* 00EF1C 80033B1C 0C00E64C */  jal   func_80039930
 /* 00EF20 80033B20 00000000 */   nop   
@@ -262,7 +262,7 @@ func_80033B44:
 /* 00EF68 80033B68 80420900 */  lb    $v0, 0x900($v0)
 /* 00EF6C 80033B6C 04410003 */  bgez  $v0, .L80033B7C
 /* 00EF70 80033B70 00000000 */   nop   
-/* 00EF74 80033B74 0C08FA9F */  jal   func_8023EA7C
+/* 00EF74 80033B74 0C08FA9F */  jal   draw_main_battle_ui
 /* 00EF78 80033B78 00000000 */   nop   
 .L80033B7C:
 /* 00EF7C 80033B7C 8FBF0010 */  lw    $ra, 0x10($sp)
