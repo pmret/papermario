@@ -5176,6 +5176,7 @@ func_8004A3E8:
 /* 025874 8004A474 03E00008 */  jr    $ra
 /* 025878 8004A478 27BD0020 */   addiu $sp, $sp, 0x20
 
+DoBasicAI:
 /* 02587C 8004A47C 27BDFFB0 */  addiu $sp, $sp, -0x50
 /* 025880 8004A480 AFB20038 */  sw    $s2, 0x38($sp)
 /* 025884 8004A484 0080902D */  daddu $s2, $a0, $zero

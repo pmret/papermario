@@ -1613,4 +1613,22 @@
 .global save_game_at_player_position
 .global player_enter_blue_pipe
 .global push_entity_matrix
+.global DoBasicAI
+.global draw_shop_items
+.global MakeShop
+.global MakeShopOwner
+.global MakeDoorAdvanced
+.global CheckActionState
+.global CreatePushBlockGrid
+.global SetPushBlock
+.global GetPushBlock
+.global GetGridIndexFromPos
+.global SetPushBlockFallEffect
+.global EnterWalk
+.global EnterSavePoint
+.global ExitWalk
+.global ExitSingleDoor
+.global EnterSingleDoor
+.global ExitDoubleDoor
+.global EnterDoubleDoor
 

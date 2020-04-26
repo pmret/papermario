@@ -1590,6 +1590,7 @@ func_80281418:
 /* 7E239C 8028151C 03E00008 */  jr    $ra
 /* 7E23A0 80281520 27BD0020 */   addiu $sp, $sp, 0x20
 
+draw_shop_items:
 /* 7E23A4 80281524 3C028007 */  lui   $v0, 0x8007
 /* 7E23A8 80281528 8C42419C */  lw    $v0, 0x419c($v0)
 /* 7E23AC 8028152C 27BDFF90 */  addiu $sp, $sp, -0x70
@@ -1810,6 +1811,7 @@ func_80281828:
 /* 7E26D8 80281858 03E00008 */  jr    $ra
 /* 7E26DC 8028185C 27BD0070 */   addiu $sp, $sp, 0x70
 
+MakeShop:
 /* 7E26E0 80281860 27BDFF98 */  addiu $sp, $sp, -0x68
 /* 7E26E4 80281864 AFB10044 */  sw    $s1, 0x44($sp)
 /* 7E26E8 80281868 0080882D */  daddu $s1, $a0, $zero
@@ -2040,6 +2042,7 @@ func_80281828:
 /* 7E2A50 80281BD0 03E00008 */  jr    $ra
 /* 7E2A54 80281BD4 27BD0068 */   addiu $sp, $sp, 0x68
 
+MakeShopOwner:
 /* 7E2A58 80281BD8 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 7E2A5C 80281BDC AFBF0014 */  sw    $ra, 0x14($sp)
 /* 7E2A60 80281BE0 AFB00010 */  sw    $s0, 0x10($sp)
@@ -2096,6 +2099,7 @@ func_80281828:
 /* 7E2B24 80281CA4 03E00008 */  jr    $ra
 /* 7E2B28 80281CA8 27BD0018 */   addiu $sp, $sp, 0x18
 
+MakeDoorAdvanced:
 /* 7E2B2C 80281CAC 27BDFFA8 */  addiu $sp, $sp, -0x58
 /* 7E2B30 80281CB0 AFB10034 */  sw    $s1, 0x34($sp)
 /* 7E2B34 80281CB4 0080882D */  daddu $s1, $a0, $zero
@@ -3538,6 +3542,7 @@ func_8028306C:
 /* 7E4054 802831D4 03E00008 */  jr    $ra
 /* 7E4058 802831D8 00000000 */   nop   
 
+CheckActionState:
 /* 7E405C 802831DC 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 7E4060 802831E0 AFB00010 */  sw    $s0, 0x10($sp)
 /* 7E4064 802831E4 0080802D */  daddu $s0, $a0, $zero
@@ -3610,6 +3615,7 @@ func_802832AC:
 /* 7E4158 802832D8 03E00008 */  jr    $ra
 /* 7E415C 802832DC 27BD0028 */   addiu $sp, $sp, 0x28
 
+CreatePushBlockGrid:
 /* 7E4160 802832E0 27BDFFC8 */  addiu $sp, $sp, -0x38
 /* 7E4164 802832E4 AFB10014 */  sw    $s1, 0x14($sp)
 /* 7E4168 802832E8 0080882D */  daddu $s1, $a0, $zero
@@ -3720,6 +3726,7 @@ func_80283434:
 /* 7E42F4 80283474 03E00008 */  jr    $ra
 /* 7E42F8 80283478 27BD0038 */   addiu $sp, $sp, 0x38
 
+SetPushBlock:
 /* 7E42FC 8028347C 27BDFFC0 */  addiu $sp, $sp, -0x40
 /* 7E4300 80283480 AFB30034 */  sw    $s3, 0x34($sp)
 /* 7E4304 80283484 0080982D */  daddu $s3, $a0, $zero
@@ -3803,6 +3810,7 @@ func_80283434:
 /* 7E4438 802835B8 03E00008 */  jr    $ra
 /* 7E443C 802835BC 27BD0040 */   addiu $sp, $sp, 0x40
 
+GetPushBlock:
 /* 7E4440 802835C0 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 7E4444 802835C4 AFB40020 */  sw    $s4, 0x20($sp)
 /* 7E4448 802835C8 0080A02D */  daddu $s4, $a0, $zero
@@ -3870,6 +3878,7 @@ func_80283434:
 /* 7E4530 802836B0 03E00008 */  jr    $ra
 /* 7E4534 802836B4 27BD0028 */   addiu $sp, $sp, 0x28
 
+GetGridIndexFromPos:
 /* 7E4538 802836B8 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 7E453C 802836BC AFB3001C */  sw    $s3, 0x1c($sp)
 /* 7E4540 802836C0 0080982D */  daddu $s3, $a0, $zero
@@ -3932,6 +3941,7 @@ func_80283434:
 /* 7E4624 802837A4 03E00008 */  jr    $ra
 /* 7E4628 802837A8 27BD0028 */   addiu $sp, $sp, 0x28
 
+SetPushBlockFallEffect:
 /* 7E462C 802837AC 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 7E4630 802837B0 AFB10014 */  sw    $s1, 0x14($sp)
 /* 7E4634 802837B4 0080882D */  daddu $s1, $a0, $zero
