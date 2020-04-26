@@ -1,6 +1,7 @@
 
 .section .text802B2000, "ax"
 
+func_802B2000:
 /* 316F30 802B2000 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 316F34 802B2004 3C040031 */  lui   $a0, 0x31
 /* 316F38 802B2008 248469F0 */  addiu $a0, $a0, 0x69f0
@@ -17,6 +18,7 @@
 /* 316F64 802B2034 03E00008 */  jr    $ra
 /* 316F68 802B2038 27BD0018 */   addiu $sp, $sp, 0x18
 
+func_802B203C:
 /* 316F6C 802B203C 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 316F70 802B2040 3C040031 */  lui   $a0, 0x31
 /* 316F74 802B2044 24846A70 */  addiu $a0, $a0, 0x6a70
@@ -33,6 +35,7 @@
 /* 316FA0 802B2070 03E00008 */  jr    $ra
 /* 316FA4 802B2074 27BD0018 */   addiu $sp, $sp, 0x18
 
+func_802B2078:
 /* 316FA8 802B2078 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 316FAC 802B207C 3C040031 */  lui   $a0, 0x31
 /* 316FB0 802B2080 24846C00 */  addiu $a0, $a0, 0x6c00
@@ -49,6 +52,7 @@
 /* 316FDC 802B20AC 03E00008 */  jr    $ra
 /* 316FE0 802B20B0 27BD0018 */   addiu $sp, $sp, 0x18
 
+func_802B20B4:
 /* 316FE4 802B20B4 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 316FE8 802B20B8 3C040031 */  lui   $a0, 0x31
 /* 316FEC 802B20BC 24846D90 */  addiu $a0, $a0, 0x6d90
