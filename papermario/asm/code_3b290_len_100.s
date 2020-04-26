@@ -20,7 +20,7 @@ nuContRmbStart:
 /* 03B2CC 8005FECC A7A50010 */  sh    $a1, 0x10($sp)
 /* 03B2D0 8005FED0 27A50020 */  addiu $a1, $sp, 0x20
 /* 03B2D4 8005FED4 A7A60012 */  sh    $a2, 0x12($sp)
-/* 03B2D8 8005FED8 0C00B3CA */  jal   func_8002CF28
+/* 03B2D8 8005FED8 0C00B3CA */  jal   nuSiSendMesg
 /* 03B2DC 8005FEDC AFA20028 */   sw    $v0, 0x28($sp)
 .L8005FEE0:
 /* 03B2E0 8005FEE0 8FBF0030 */  lw    $ra, 0x30($sp)
@@ -36,7 +36,7 @@ nuContRmbCheck:
 /* 03B300 8005FF00 27A50010 */  addiu $a1, $sp, 0x10
 /* 03B304 8005FF04 AFBF0028 */  sw    $ra, 0x28($sp)
 /* 03B308 8005FF08 AFB10024 */  sw    $s1, 0x24($sp)
-/* 03B30C 8005FF0C 0C00B3CA */  jal   func_8002CF28
+/* 03B30C 8005FF0C 0C00B3CA */  jal   nuSiSendMesg
 /* 03B310 8005FF10 A3B00010 */   sb    $s0, 0x10($sp)
 /* 03B314 8005FF14 24040001 */  addiu $a0, $zero, 1
 /* 03B318 8005FF18 0C018250 */  jal   osSetIntMask

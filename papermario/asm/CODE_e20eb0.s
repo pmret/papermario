@@ -61,7 +61,7 @@ func_802B70AC:
 /* E20F70 802B70C0 261079A8 */  addiu $s0, $s0, 0x79a8
 /* E20F74 802B70C4 AFBF0014 */  sw    $ra, 0x14($sp)
 /* E20F78 802B70C8 8E040000 */  lw    $a0, ($s0)
-/* E20F7C 802B70CC 0C00A580 */  jal   func_80029600
+/* E20F7C 802B70CC 0C00A580 */  jal   mem_clear
 /* E20F80 802B70D0 2405002C */   addiu $a1, $zero, 0x2c
 /* E20F84 802B70D4 3C058011 */  lui   $a1, 0x8011
 /* E20F88 802B70D8 24A5EFC8 */  addiu $a1, $a1, -0x1038

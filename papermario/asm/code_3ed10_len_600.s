@@ -196,10 +196,10 @@ guPerspectiveF:
 /* 03EFEC 80063BEC 4481A000 */  mtc1  $at, $f20
 /* 03EFF0 80063BF0 46200620 */  cvt.s.d $f24, $f0
 /* 03EFF4 80063BF4 4614C503 */  div.s $f20, $f24, $f20
-/* 03EFF8 80063BF8 0C00A874 */  jal   func_8002A1D0
+/* 03EFF8 80063BF8 0C00A874 */  jal   cos_rad
 /* 03EFFC 80063BFC 4600A306 */   mov.s $f12, $f20
 /* 03F000 80063C00 4600A306 */  mov.s $f12, $f20
-/* 03F004 80063C04 0C00A85B */  jal   func_8002A16C
+/* 03F004 80063C04 0C00A85B */  jal   sin_rad
 /* 03F008 80063C08 46000506 */   mov.s $f20, $f0
 /* 03F00C 80063C0C 4600A503 */  div.s $f20, $f20, $f0
 /* 03F010 80063C10 461CD100 */  add.s $f4, $f26, $f28
@@ -315,10 +315,10 @@ guPerspective:
 /* 03F1A4 80063DA4 44810000 */  mtc1  $at, $f0
 /* 03F1A8 80063DA8 4620A520 */  cvt.s.d $f20, $f20
 /* 03F1AC 80063DAC 4600A503 */  div.s $f20, $f20, $f0
-/* 03F1B0 80063DB0 0C00A874 */  jal   func_8002A1D0
+/* 03F1B0 80063DB0 0C00A874 */  jal   cos_rad
 /* 03F1B4 80063DB4 4600A306 */   mov.s $f12, $f20
 /* 03F1B8 80063DB8 4600A306 */  mov.s $f12, $f20
-/* 03F1BC 80063DBC 0C00A85B */  jal   func_8002A16C
+/* 03F1BC 80063DBC 0C00A85B */  jal   sin_rad
 /* 03F1C0 80063DC0 46000506 */   mov.s $f20, $f0
 /* 03F1C4 80063DC4 4600A503 */  div.s $f20, $f20, $f0
 /* 03F1C8 80063DC8 461AC100 */  add.s $f4, $f24, $f26

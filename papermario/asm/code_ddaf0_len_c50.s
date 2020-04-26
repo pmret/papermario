@@ -426,7 +426,7 @@ func_80147878:
 /* 0DE10C 80147A0C AFA80044 */  sw    $t0, 0x44($sp)
 /* 0DE110 80147A10 AFA30048 */  sw    $v1, 0x48($sp)
 /* 0DE114 80147A14 AFB0004C */  sw    $s0, 0x4c($sp)
-/* 0DE118 80147A18 0C03D4B8 */  jal   func_800F52E0
+/* 0DE118 80147A18 0C03D4B8 */  jal   draw_box
 /* 0DE11C 80147A1C E7A00034 */   swc1  $f0, 0x34($sp)
 /* 0DE120 80147A20 54400018 */  bnezl $v0, .L80147A84
 /* 0DE124 80147A24 26D60001 */   addiu $s6, $s6, 1

@@ -6,7 +6,7 @@ func_802DBD40:
 /* 0FEE34 802DBD44 3C048035 */  lui   $a0, 0x8035
 /* 0FEE38 802DBD48 2484F800 */  addiu $a0, $a0, -0x800
 /* 0FEE3C 802DBD4C AFBF0010 */  sw    $ra, 0x10($sp)
-/* 0FEE40 802DBD50 0C00A41B */  jal   func_8002906C
+/* 0FEE40 802DBD50 0C00A41B */  jal   _heap_malloc
 /* 0FEE44 802DBD54 24050580 */   addiu $a1, $zero, 0x580
 /* 0FEE48 802DBD58 2404FFFF */  addiu $a0, $zero, -1
 /* 0FEE4C 802DBD5C 24030015 */  addiu $v1, $zero, 0x15
@@ -813,7 +813,7 @@ func_802DC87C:
 /* 0FF9DC 802DC8EC 03E00008 */  jr    $ra
 /* 0FF9E0 802DC8F0 27BD0038 */   addiu $sp, $sp, 0x38
 
-func_802DC8F4:
+spr_appendMDL_component:
 /* 0FF9E4 802DC8F4 27BDFEF0 */  addiu $sp, $sp, -0x110
 /* 0FF9E8 802DC8F8 F7B800F0 */  sdc1  $f24, 0xf0($sp)
 /* 0FF9EC 802DC8FC C7B80120 */  lwc1  $f24, 0x120($sp)
@@ -1091,7 +1091,7 @@ func_802DCC98:
 /* 0FFDE8 802DCCF8 03E00008 */  jr    $ra
 /* 0FFDEC 802DCCFC 27BD0110 */   addiu $sp, $sp, 0x110
 
-func_802DCD00:
+spr_transform_point:
 /* 0FFDF0 802DCD00 27BDFF20 */  addiu $sp, $sp, -0xe0
 /* 0FFDF4 802DCD04 F7B800C8 */  sdc1  $f24, 0xc8($sp)
 /* 0FFDF8 802DCD08 4487C000 */  mtc1  $a3, $f24
@@ -1215,7 +1215,7 @@ func_802DCEA4:
 /* 0FFFC4 802DCED4 03E00008 */  jr    $ra
 /* 0FFFC8 802DCED8 27BD00E0 */   addiu $sp, $sp, 0xe0
 
-func_802DCEDC:
+spr_draw_component:
 /* 0FFFCC 802DCEDC 27BDFF88 */  addiu $sp, $sp, -0x78
 /* 0FFFD0 802DCEE0 AFB30054 */  sw    $s3, 0x54($sp)
 /* 0FFFD4 802DCEE4 0080982D */  daddu $s3, $a0, $zero
@@ -1278,7 +1278,7 @@ func_802DCEDC:
 /* 1000B8 802DCFC8 27A20040 */  addiu $v0, $sp, 0x40
 /* 1000BC 802DCFCC AFA20020 */  sw    $v0, 0x20($sp)
 /* 1000C0 802DCFD0 E7A20010 */  swc1  $f2, 0x10($sp)
-/* 1000C4 802DCFD4 0C0B7340 */  jal   func_802DCD00
+/* 1000C4 802DCFD4 0C0B7340 */  jal   spr_transform_point
 /* 1000C8 802DCFD8 E7A40014 */   swc1  $f4, 0x14($sp)
 /* 1000CC 802DCFDC 3C030800 */  lui   $v1, 0x800
 /* 1000D0 802DCFE0 8E240014 */  lw    $a0, 0x14($s1)
@@ -1331,7 +1331,7 @@ func_802DCEDC:
 /* 100188 802DD098 AFB30028 */  sw    $s3, 0x28($sp)
 /* 10018C 802DD09C AFA3002C */  sw    $v1, 0x2c($sp)
 /* 100190 802DD0A0 AFA20030 */  sw    $v0, 0x30($sp)
-/* 100194 802DD0A4 0C0B723D */  jal   func_802DC8F4
+/* 100194 802DD0A4 0C0B723D */  jal   spr_appendMDL_component
 /* 100198 802DD0A8 E7A00024 */   swc1  $f0, 0x24($sp)
 /* 10019C 802DD0AC 8E020000 */  lw    $v0, ($s0)
 /* 1001A0 802DD0B0 AE22004C */  sw    $v0, 0x4c($s1)
@@ -1347,7 +1347,7 @@ func_802DCEDC:
 /* 1001C4 802DD0D4 03E00008 */  jr    $ra
 /* 1001C8 802DD0D8 27BD0078 */   addiu $sp, $sp, 0x78
 
-func_802DD0DC:
+_spr_sign_extend_12bit:
 /* 1001CC 802DD0DC 30840FFF */  andi  $a0, $a0, 0xfff
 /* 1001D0 802DD0E0 30820800 */  andi  $v0, $a0, 0x800
 /* 1001D4 802DD0E4 14400003 */  bnez  $v0, .L802DD0F4
@@ -1359,7 +1359,7 @@ func_802DD0DC:
 /* 1001E4 802DD0F4 03E00008 */  jr    $ra
 /* 1001E8 802DD0F8 00821025 */   or    $v0, $a0, $v0
 
-func_802DD0FC:
+_spr_sign_extend_16bit:
 /* 1001EC 802DD0FC 3084FFFF */  andi  $a0, $a0, 0xffff
 /* 1001F0 802DD100 30828000 */  andi  $v0, $a0, 0x8000
 /* 1001F4 802DD104 14400003 */  bnez  $v0, .L802DD114
@@ -1371,7 +1371,7 @@ func_802DD0FC:
 /* 100204 802DD114 03E00008 */  jr    $ra
 /* 100208 802DD118 00821025 */   or    $v0, $a0, $v0
 
-func_802DD11C:
+update_component:
 /* 10020C 802DD11C 27BDFF88 */  addiu $sp, $sp, -0x78
 /* 100210 802DD120 AFB1002C */  sw    $s1, 0x2c($sp)
 /* 100214 802DD124 0080882D */  daddu $s1, $a0, $zero
@@ -1499,7 +1499,7 @@ func_802DD11C:
 
 .L802DD2DC:
 /* 1003CC 802DD2DC 96040000 */  lhu   $a0, ($s0)
-/* 1003D0 802DD2E0 0C0B7437 */  jal   func_802DD0DC
+/* 1003D0 802DD2E0 0C0B7437 */  jal   _spr_sign_extend_12bit
 /* 1003D4 802DD2E4 00000000 */   nop   
 /* 1003D8 802DD2E8 8E630000 */  lw    $v1, ($s3)
 /* 1003DC 802DD2EC 00021040 */  sll   $v0, $v0, 1
@@ -1575,21 +1575,21 @@ func_802DD344:
 /* 1004B0 802DD3C0 00000000 */   nop   
 /* 1004B4 802DD3C4 96040000 */  lhu   $a0, ($s0)
 /* 1004B8 802DD3C8 26100002 */  addiu $s0, $s0, 2
-/* 1004BC 802DD3CC 0C0B743F */  jal   func_802DD0FC
+/* 1004BC 802DD3CC 0C0B743F */  jal   _spr_sign_extend_16bit
 /* 1004C0 802DD3D0 36520001 */   ori   $s2, $s2, 1
 /* 1004C4 802DD3D4 96040000 */  lhu   $a0, ($s0)
 /* 1004C8 802DD3D8 26100002 */  addiu $s0, $s0, 2
 /* 1004CC 802DD3DC 44822000 */  mtc1  $v0, $f4
 /* 1004D0 802DD3E0 00000000 */  nop   
 /* 1004D4 802DD3E4 46802120 */  cvt.s.w $f4, $f4
-/* 1004D8 802DD3E8 0C0B743F */  jal   func_802DD0FC
+/* 1004D8 802DD3E8 0C0B743F */  jal   _spr_sign_extend_16bit
 /* 1004DC 802DD3EC E7A40010 */   swc1  $f4, 0x10($sp)
 /* 1004E0 802DD3F0 96040000 */  lhu   $a0, ($s0)
 /* 1004E4 802DD3F4 26100002 */  addiu $s0, $s0, 2
 /* 1004E8 802DD3F8 44822000 */  mtc1  $v0, $f4
 /* 1004EC 802DD3FC 00000000 */  nop   
 /* 1004F0 802DD400 46802120 */  cvt.s.w $f4, $f4
-/* 1004F4 802DD404 0C0B743F */  jal   func_802DD0FC
+/* 1004F4 802DD404 0C0B743F */  jal   _spr_sign_extend_16bit
 /* 1004F8 802DD408 E7A40014 */   swc1  $f4, 0x14($sp)
 /* 1004FC 802DD40C 44822000 */  mtc1  $v0, $f4
 /* 100500 802DD410 00000000 */  nop   
@@ -1600,21 +1600,21 @@ func_802DD344:
 .L802DD420:
 /* 100510 802DD420 96040000 */  lhu   $a0, ($s0)
 /* 100514 802DD424 26100002 */  addiu $s0, $s0, 2
-/* 100518 802DD428 0C0B7437 */  jal   func_802DD0DC
+/* 100518 802DD428 0C0B7437 */  jal   _spr_sign_extend_12bit
 /* 10051C 802DD42C 36520002 */   ori   $s2, $s2, 2
 /* 100520 802DD430 96040000 */  lhu   $a0, ($s0)
 /* 100524 802DD434 26100002 */  addiu $s0, $s0, 2
 /* 100528 802DD438 44822000 */  mtc1  $v0, $f4
 /* 10052C 802DD43C 00000000 */  nop   
 /* 100530 802DD440 46802120 */  cvt.s.w $f4, $f4
-/* 100534 802DD444 0C0B743F */  jal   func_802DD0FC
+/* 100534 802DD444 0C0B743F */  jal   _spr_sign_extend_16bit
 /* 100538 802DD448 E7A4001C */   swc1  $f4, 0x1c($sp)
 /* 10053C 802DD44C 96040000 */  lhu   $a0, ($s0)
 /* 100540 802DD450 26100002 */  addiu $s0, $s0, 2
 /* 100544 802DD454 44822000 */  mtc1  $v0, $f4
 /* 100548 802DD458 00000000 */  nop   
 /* 10054C 802DD45C 46802120 */  cvt.s.w $f4, $f4
-/* 100550 802DD460 0C0B743F */  jal   func_802DD0FC
+/* 100550 802DD460 0C0B743F */  jal   _spr_sign_extend_16bit
 /* 100554 802DD464 E7A40020 */   swc1  $f4, 0x20($sp)
 /* 100558 802DD468 44822000 */  mtc1  $v0, $f4
 /* 10055C 802DD46C 00000000 */  nop   
@@ -1695,7 +1695,7 @@ func_802DD530:
 /* 100644 802DD554 96020002 */  lhu   $v0, 2($s0)
 /* 100648 802DD558 AE220010 */  sw    $v0, 0x10($s1)
 .L802DD55C:
-/* 10064C 802DD55C 0C0B7437 */  jal   func_802DD0DC
+/* 10064C 802DD55C 0C0B7437 */  jal   _spr_sign_extend_12bit
 /* 100650 802DD560 96040000 */   lhu   $a0, ($s0)
 /* 100654 802DD564 8E630000 */  lw    $v1, ($s3)
 /* 100658 802DD568 00021040 */  sll   $v0, $v0, 1
@@ -1828,7 +1828,7 @@ func_802DD6DC:
 .L802DD728:
 /* 100818 802DD728 8E040000 */  lw    $a0, ($s0)
 /* 10081C 802DD72C 8E250000 */  lw    $a1, ($s1)
-/* 100820 802DD730 0C0B7447 */  jal   func_802DD11C
+/* 100820 802DD730 0C0B7447 */  jal   update_component
 /* 100824 802DD734 26100004 */   addiu $s0, $s0, 4
 /* 100828 802DD738 8E220000 */  lw    $v0, ($s1)
 /* 10082C 802DD73C 54520001 */  bnel  $v0, $s2, .L802DD744
@@ -1942,7 +1942,7 @@ func_802DD89C:
 /* 100998 802DD8A8 0200202D */  daddu $a0, $s0, $zero
 /* 10099C 802DD8AC 24050001 */  addiu $a1, $zero, 1
 /* 1009A0 802DD8B0 AFBF0014 */  sw    $ra, 0x14($sp)
-/* 1009A4 802DD8B4 0C0B7AC3 */  jal   func_802DEB0C
+/* 1009A4 802DD8B4 0C0B7AC3 */  jal   load_sprite
 /* 1009A8 802DD8B8 0000302D */   daddu $a2, $zero, $zero
 /* 1009AC 802DD8BC 00108080 */  sll   $s0, $s0, 2
 /* 1009B0 802DD8C0 3C04802E */  lui   $a0, 0x802e
@@ -1971,7 +1971,7 @@ func_802DD8F8:
 /* 100A00 802DD910 AFB00010 */  sw    $s0, 0x10($sp)
 /* 100A04 802DD914 3C01802E */  lui   $at, 0x802e
 /* 100A08 802DD918 AC20F524 */  sw    $zero, -0xadc($at)
-/* 100A0C 802DD91C 0C00A40C */  jal   func_80029030
+/* 100A0C 802DD91C 0C00A40C */  jal   _heap_create
 /* 100A10 802DD920 3C050004 */   lui   $a1, 4
 /* 100A14 802DD924 0C04E8DF */  jal   func_8013A37C
 /* 100A18 802DD928 2410000C */   addiu $s0, $zero, 0xc
@@ -2191,7 +2191,7 @@ func_802DDA8C:
 /* 100D28 802DDC38 03E00008 */  jr    $ra
 /* 100D2C 802DDC3C 27BD0048 */   addiu $sp, $sp, 0x48
 
-func_802DDC40:
+render_sprite:
 /* 100D30 802DDC40 27BDFFB0 */  addiu $sp, $sp, -0x50
 /* 100D34 802DDC44 308A00FF */  andi  $t2, $a0, 0xff
 /* 100D38 802DDC48 000A1040 */  sll   $v0, $t2, 1
@@ -2351,7 +2351,7 @@ func_802DDDD4:
 /* 100F50 802DDE60 E7B40014 */  swc1  $f20, 0x14($sp)
 /* 100F54 802DDE64 AFB70018 */  sw    $s7, 0x18($sp)
 /* 100F58 802DDE68 8E460000 */  lw    $a2, ($s2)
-/* 100F5C 802DDE6C 0C0B73B7 */  jal   func_802DCEDC
+/* 100F5C 802DDE6C 0C0B73B7 */  jal   spr_draw_component
 /* 100F60 802DDE70 0280382D */   daddu $a3, $s4, $zero
 /* 100F64 802DDE74 8E420000 */  lw    $v0, ($s2)
 /* 100F68 802DDE78 10510002 */  beq   $v0, $s1, .L802DDE84
@@ -2600,7 +2600,7 @@ func_802DE0EC:
 /* 1012B8 802DE1C8 3C01802E */  lui   $at, 0x802e
 /* 1012BC 802DE1CC 00340821 */  addu  $at, $at, $s4
 /* 1012C0 802DE1D0 A022F958 */  sb    $v0, -0x6a8($at)
-/* 1012C4 802DE1D4 0C0B7AC3 */  jal   func_802DEB0C
+/* 1012C4 802DE1D4 0C0B7AC3 */  jal   load_sprite
 /* 1012C8 802DE1D8 0000282D */   daddu $a1, $zero, $zero
 /* 1012CC 802DE1DC 0040802D */  daddu $s0, $v0, $zero
 /* 1012D0 802DE1E0 00121080 */  sll   $v0, $s2, 2
@@ -2855,7 +2855,7 @@ func_802DE50C:
 /* 101658 802DE568 E7B40014 */  swc1  $f20, 0x14($sp)
 /* 10165C 802DE56C AFB60018 */  sw    $s6, 0x18($sp)
 /* 101660 802DE570 8E260000 */  lw    $a2, ($s1)
-/* 101664 802DE574 0C0B73B7 */  jal   func_802DCEDC
+/* 101664 802DE574 0C0B73B7 */  jal   spr_draw_component
 /* 101668 802DE578 02A0382D */   daddu $a3, $s5, $zero
 /* 10166C 802DE57C 8E220000 */  lw    $v0, ($s1)
 /* 101670 802DE580 10520002 */  beq   $v0, $s2, .L802DE58C
@@ -2953,7 +2953,7 @@ func_802DE5E8:
 /* 1017AC 802DE6BC AC20F5B0 */  sw    $zero, -0xa50($at)
 /* 1017B0 802DE6C0 3C048035 */  lui   $a0, 0x8035
 /* 1017B4 802DE6C4 2484F800 */  addiu $a0, $a0, -0x800
-/* 1017B8 802DE6C8 0C00A487 */  jal   func_8002921C
+/* 1017B8 802DE6C8 0C00A487 */  jal   _heap_free
 /* 1017BC 802DE6CC 0280282D */   daddu $a1, $s4, $zero
 .L802DE6D0:
 /* 1017C0 802DE6D0 3C02802E */  lui   $v0, 0x802e
@@ -2965,7 +2965,7 @@ func_802DE5E8:
 /* 1017D8 802DE6E8 3C048030 */  lui   $a0, 0x8030
 /* 1017DC 802DE6EC 2484B800 */  addiu $a0, $a0, -0x4800
 .L802DE6F0:
-/* 1017E0 802DE6F0 0C00A487 */  jal   func_8002921C
+/* 1017E0 802DE6F0 0C00A487 */  jal   _heap_free
 /* 1017E4 802DE6F4 0200282D */   daddu $a1, $s0, $zero
 /* 1017E8 802DE6F8 0000102D */  daddu $v0, $zero, $zero
 /* 1017EC 802DE6FC 3C03802E */  lui   $v1, 0x802e

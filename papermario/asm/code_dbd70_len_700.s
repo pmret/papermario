@@ -1,12 +1,13 @@
 
 .section .text80145670, "ax"
 
+default_trigger_function_handler:
 /* 0DBD70 80145670 8C820000 */  lw    $v0, ($a0)
 /* 0DBD74 80145674 34420002 */  ori   $v0, $v0, 2
 /* 0DBD78 80145678 03E00008 */  jr    $ra
 /* 0DBD7C 8014567C AC820000 */   sw    $v0, ($a0)
 
-func_80145680:
+clear_trigger_data:
 /* 0DBD80 80145680 3C028007 */  lui   $v0, 0x8007
 /* 0DBD84 80145684 8C42419C */  lw    $v0, 0x419c($v0)
 /* 0DBD88 80145688 80420070 */  lb    $v0, 0x70($v0)
@@ -54,7 +55,7 @@ func_801456B4:
 /* 0DBE20 80145720 03E00008 */  jr    $ra
 /* 0DBE24 80145724 AC800024 */   sw    $zero, 0x24($a0)
 
-func_80145728:
+init_trigger_list:
 /* 0DBE28 80145728 3C028007 */  lui   $v0, 0x8007
 /* 0DBE2C 8014572C 8C42419C */  lw    $v0, 0x419c($v0)
 /* 0DBE30 80145730 80420070 */  lb    $v0, 0x70($v0)
@@ -76,7 +77,7 @@ func_80145754:
 /* 0DBE64 80145764 03E00008 */  jr    $ra
 /* 0DBE68 80145768 00000000 */   nop   
 
-func_8014576C:
+create_trigger:
 /* 0DBE6C 8014576C 3C038016 */  lui   $v1, 0x8016
 /* 0DBE70 80145770 8C639390 */  lw    $v1, -0x6c70($v1)
 /* 0DBE74 80145774 27BDFFE0 */  addiu $sp, $sp, -0x20
@@ -102,7 +103,7 @@ func_801457B4:
 /* 0DBEB8 801457B8 00000000 */   nop   
 
 .L801457BC:
-/* 0DBEBC 801457BC 0C00AB39 */  jal   func_8002ACE4
+/* 0DBEBC 801457BC 0C00AB39 */  jal   heap_malloc
 /* 0DBEC0 801457C0 24040038 */   addiu $a0, $zero, 0x38
 /* 0DBEC4 801457C4 00102080 */  sll   $a0, $s0, 2
 /* 0DBEC8 801457C8 3C038016 */  lui   $v1, 0x8016
@@ -148,7 +149,7 @@ func_801457F4:
 /* 0DBF58 80145858 03E00008 */  jr    $ra
 /* 0DBF5C 8014585C 27BD0020 */   addiu $sp, $sp, 0x20
 
-func_80145860:
+update_triggers:
 /* 0DBF60 80145860 27BDFFD0 */  addiu $sp, $sp, -0x30
 /* 0DBF64 80145864 AFB20020 */  sw    $s2, 0x20($sp)
 /* 0DBF68 80145868 3C128016 */  lui   $s2, 0x8016
@@ -319,7 +320,7 @@ func_80145860:
 /* 0DC1C0 80145AC0 C60C0000 */  lwc1  $f12, ($s0)
 /* 0DC1C4 80145AC4 C60E0004 */  lwc1  $f14, 4($s0)
 /* 0DC1C8 80145AC8 8E060008 */  lw    $a2, 8($s0)
-/* 0DC1CC 80145ACC 0C00A7CB */  jal   func_80029F2C
+/* 0DC1CC 80145ACC 0C00A7CB */  jal   dist3D
 /* 0DC1D0 80145AD0 8E47001C */   lw    $a3, 0x1c($s2)
 /* 0DC1D4 80145AD4 C604000C */  lwc1  $f4, 0xc($s0)
 /* 0DC1D8 80145AD8 3C013F00 */  lui   $at, 0x3f00
@@ -341,7 +342,7 @@ func_80145860:
 /* 0DC214 80145B14 00431024 */  and   $v0, $v0, $v1
 /* 0DC218 80145B18 10400005 */  beqz  $v0, .L80145B30
 /* 0DC21C 80145B1C 00000000 */   nop   
-/* 0DC220 80145B20 0C05152F */  jal   func_801454BC
+/* 0DC220 80145B20 0C05152F */  jal   get_global_flag
 /* 0DC224 80145B24 8E240004 */   lw    $a0, 4($s1)
 /* 0DC228 80145B28 5040000E */  beql  $v0, $zero, .L80145B64
 /* 0DC22C 80145B2C 26730001 */   addiu $s3, $s3, 1
@@ -351,7 +352,7 @@ func_80145860:
 /* 0DC238 80145B38 00431024 */  and   $v0, $v0, $v1
 /* 0DC23C 80145B3C 10400005 */  beqz  $v0, .L80145B54
 /* 0DC240 80145B40 00000000 */   nop   
-/* 0DC244 80145B44 0C05157C */  jal   func_801455F0
+/* 0DC244 80145B44 0C05157C */  jal   get_area_flag
 /* 0DC248 80145B48 8E240004 */   lw    $a0, 4($s1)
 /* 0DC24C 80145B4C 50400005 */  beql  $v0, $zero, .L80145B64
 /* 0DC250 80145B50 26730001 */   addiu $s3, $s3, 1
@@ -401,7 +402,7 @@ func_80145860:
 /* 0DC2EC 80145BEC 03E00008 */  jr    $ra
 /* 0DC2F0 80145BF0 27BD0030 */   addiu $sp, $sp, 0x30
 
-func_80145BF4:
+delete_trigger:
 /* 0DC2F4 80145BF4 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0DC2F8 80145BF8 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0DC2FC 80145BFC 3C118016 */  lui   $s1, 0x8016
@@ -424,7 +425,7 @@ func_80145BF4:
 /* 0DC338 80145C38 10400007 */  beqz  $v0, .L80145C58
 /* 0DC33C 80145C3C 00108080 */   sll   $s0, $s0, 2
 /* 0DC340 80145C40 02051021 */  addu  $v0, $s0, $a1
-/* 0DC344 80145C44 0C00AB4B */  jal   func_8002AD2C
+/* 0DC344 80145C44 0C00AB4B */  jal   heap_free
 /* 0DC348 80145C48 8C440000 */   lw    $a0, ($v0)
 /* 0DC34C 80145C4C 8E220000 */  lw    $v0, ($s1)
 /* 0DC350 80145C50 02028021 */  addu  $s0, $s0, $v0
@@ -436,7 +437,7 @@ func_80145BF4:
 /* 0DC364 80145C64 03E00008 */  jr    $ra
 /* 0DC368 80145C68 27BD0020 */   addiu $sp, $sp, 0x20
 
-func_80145C6C:
+is_trigger_bound:
 /* 0DC36C 80145C6C 0000402D */  daddu $t0, $zero, $zero
 /* 0DC370 80145C70 3C078016 */  lui   $a3, 0x8016
 /* 0DC374 80145C74 8CE79390 */  lw    $a3, -0x6c70($a3)
@@ -467,6 +468,7 @@ func_80145C6C:
 /* 0DC3C8 80145CC8 03E00008 */  jr    $ra
 /* 0DC3CC 80145CCC 0000102D */   daddu $v0, $zero, $zero
 
+get_trigger_by_id:
 /* 0DC3D0 80145CD0 3C028016 */  lui   $v0, 0x8016
 /* 0DC3D4 80145CD4 8C429390 */  lw    $v0, -0x6c70($v0)
 /* 0DC3D8 80145CD8 00042080 */  sll   $a0, $a0, 2

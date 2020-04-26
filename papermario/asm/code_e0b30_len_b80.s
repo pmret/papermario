@@ -1,7 +1,7 @@
 
 .section .text8014A430, "ax"
 
-func_8014A430:
+get_default_variation_for_song:
 /* 0E0B30 8014A430 0000302D */  daddu $a2, $zero, $zero
 /* 0E0B34 8014A434 3C078009 */  lui   $a3, 0x8009
 /* 0E0B38 8014A438 24E734F0 */  addiu $a3, $a3, 0x34f0
@@ -279,7 +279,7 @@ func_8014A7A4:
 /* 0E0ED8 8014A7D8 03E00008 */  jr    $ra
 /* 0E0EDC 8014A7DC 27BD0038 */   addiu $sp, $sp, 0x38
 
-func_8014A7E0:
+_set_music_track:
 /* 0E0EE0 8014A7E0 27BDFFD0 */  addiu $sp, $sp, -0x30
 /* 0E0EE4 8014A7E4 AFB20018 */  sw    $s2, 0x18($sp)
 /* 0E0EE8 8014A7E8 00A0902D */  daddu $s2, $a1, $zero
@@ -318,7 +318,7 @@ func_8014A7E0:
 /* 0E0F64 8014A864 3063FFFE */   andi  $v1, $v1, 0xfffe
 
 .L8014A868:
-/* 0E0F68 8014A868 0C05290C */  jal   func_8014A430
+/* 0E0F68 8014A868 0C05290C */  jal   get_default_variation_for_song
 /* 0E0F6C 8014A86C 0240202D */   daddu $a0, $s2, $zero
 /* 0E0F70 8014A870 04430001 */  bgezl $v0, .L8014A878
 /* 0E0F74 8014A874 0040882D */   daddu $s1, $v0, $zero
@@ -369,7 +369,7 @@ func_8014A8F4:
 /* 0E1010 8014A910 03E00008 */  jr    $ra
 /* 0E1014 8014A914 27BD0030 */   addiu $sp, $sp, 0x30
 
-func_8014A918:
+set_music_track:
 /* 0E1018 8014A918 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0E101C 8014A91C 3C038016 */  lui   $v1, 0x8016
 /* 0E1020 8014A920 24639AF0 */  addiu $v1, $v1, -0x6510
@@ -384,7 +384,7 @@ func_8014A918:
 /* 0E1044 8014A944 00084400 */  sll   $t0, $t0, 0x10
 /* 0E1048 8014A948 00084403 */  sra   $t0, $t0, 0x10
 /* 0E104C 8014A94C A4430000 */  sh    $v1, ($v0)
-/* 0E1050 8014A950 0C0529F8 */  jal   func_8014A7E0
+/* 0E1050 8014A950 0C0529F8 */  jal   _set_music_track
 /* 0E1054 8014A954 AFA80010 */   sw    $t0, 0x10($sp)
 /* 0E1058 8014A958 8FBF0018 */  lw    $ra, 0x18($sp)
 /* 0E105C 8014A95C 03E00008 */  jr    $ra
@@ -429,7 +429,7 @@ func_8014A964:
 /* 0E10E8 8014A9E8 3063FFFE */   andi  $v1, $v1, 0xfffe
 
 .L8014A9EC:
-/* 0E10EC 8014A9EC 0C05290C */  jal   func_8014A430
+/* 0E10EC 8014A9EC 0C05290C */  jal   get_default_variation_for_song
 /* 0E10F0 8014A9F0 0280202D */   daddu $a0, $s4, $zero
 /* 0E10F4 8014A9F4 04430001 */  bgezl $v0, .L8014A9FC
 /* 0E10F8 8014A9F8 0040882D */   daddu $s1, $v0, $zero
@@ -604,13 +604,13 @@ func_8014AC08:
 /* 0E131C 8014AC1C AFB00018 */  sw    $s0, 0x18($sp)
 /* 0E1320 8014AC20 24100008 */  addiu $s0, $zero, 8
 /* 0E1324 8014AC24 AFBF001C */  sw    $ra, 0x1c($sp)
-/* 0E1328 8014AC28 0C052A46 */  jal   func_8014A918
+/* 0E1328 8014AC28 0C052A46 */  jal   set_music_track
 /* 0E132C 8014AC2C AFB00010 */   sw    $s0, 0x10($sp)
 /* 0E1330 8014AC30 24040001 */  addiu $a0, $zero, 1
 /* 0E1334 8014AC34 2405FFFF */  addiu $a1, $zero, -1
 /* 0E1338 8014AC38 0000302D */  daddu $a2, $zero, $zero
 /* 0E133C 8014AC3C 240700FA */  addiu $a3, $zero, 0xfa
-/* 0E1340 8014AC40 0C052A46 */  jal   func_8014A918
+/* 0E1340 8014AC40 0C052A46 */  jal   set_music_track
 /* 0E1344 8014AC44 AFB00010 */   sw    $s0, 0x10($sp)
 /* 0E1348 8014AC48 8FBF001C */  lw    $ra, 0x1c($sp)
 /* 0E134C 8014AC4C 8FB00018 */  lw    $s0, 0x18($sp)
@@ -735,7 +735,7 @@ func_8014ADA4:
 /* 0E14D8 8014ADD8 00431025 */  or    $v0, $v0, $v1
 /* 0E14DC 8014ADDC A4C20000 */  sh    $v0, ($a2)
 /* 0E14E0 8014ADE0 8CC60028 */  lw    $a2, 0x28($a2)
-/* 0E14E4 8014ADE4 0C0529F8 */  jal   func_8014A7E0
+/* 0E14E4 8014ADE4 0C0529F8 */  jal   _set_music_track
 /* 0E14E8 8014ADE8 0080382D */   daddu $a3, $a0, $zero
 .L8014ADEC:
 /* 0E14EC 8014ADEC 8FBF0018 */  lw    $ra, 0x18($sp)
@@ -767,7 +767,7 @@ func_8014ADF8:
 /* 0E154C 8014AE4C ACE6002C */  sw    $a2, 0x2c($a3)
 /* 0E1550 8014AE50 0120302D */  daddu $a2, $t1, $zero
 /* 0E1554 8014AE54 A4E30000 */  sh    $v1, ($a3)
-/* 0E1558 8014AE58 0C052A46 */  jal   func_8014A918
+/* 0E1558 8014AE58 0C052A46 */  jal   set_music_track
 /* 0E155C 8014AE5C 240701F4 */   addiu $a3, $zero, 0x1f4
 .L8014AE60:
 /* 0E1560 8014AE60 8FBF0018 */  lw    $ra, 0x18($sp)
@@ -804,7 +804,7 @@ func_8014AE6C:
 /* 0E15CC 8014AECC 00431025 */  or    $v0, $v0, $v1
 /* 0E15D0 8014AED0 A4C20000 */  sh    $v0, ($a2)
 /* 0E15D4 8014AED4 8CC60028 */  lw    $a2, 0x28($a2)
-/* 0E15D8 8014AED8 0C0529F8 */  jal   func_8014A7E0
+/* 0E15D8 8014AED8 0C0529F8 */  jal   _set_music_track
 /* 0E15DC 8014AEDC 0080382D */   daddu $a3, $a0, $zero
 /* 0E15E0 8014AEE0 0000202D */  daddu $a0, $zero, $zero
 /* 0E15E4 8014AEE4 0C015564 */  jal   func_80055590
@@ -847,7 +847,7 @@ func_8014AEF8:
 /* 0E1668 8014AF68 AE070028 */  sw    $a3, 0x28($s0)
 /* 0E166C 8014AF6C 240701F4 */  addiu $a3, $zero, 0x1f4
 /* 0E1670 8014AF70 AE08002C */  sw    $t0, 0x2c($s0)
-/* 0E1674 8014AF74 0C052A46 */  jal   func_8014A918
+/* 0E1674 8014AF74 0C052A46 */  jal   set_music_track
 /* 0E1678 8014AF78 A6030000 */   sh    $v1, ($s0)
 .L8014AF7C:
 /* 0E167C 8014AF7C 8FBF001C */  lw    $ra, 0x1c($sp)

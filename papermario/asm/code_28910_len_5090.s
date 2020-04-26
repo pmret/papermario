@@ -654,7 +654,7 @@ func_8004DCB8:
 /* 0291A8 8004DDA8 00451021 */  addu  $v0, $v0, $a1
 /* 0291AC 8004DDAC 0100282D */  daddu $a1, $t0, $zero
 /* 0291B0 8004DDB0 A0430070 */  sb    $v1, 0x70($v0)
-/* 0291B4 8004DDB4 0C0153DD */  jal   func_80054F74
+/* 0291B4 8004DDB4 0C0153DD */  jal   al_CopyWords
 /* 0291B8 8004DDB8 AE000020 */   sw    $zero, 0x20($s0)
 /* 0291BC 8004DDBC 16A00012 */  bnez  $s5, .L8004DE08
 /* 0291C0 8004DDC0 0260102D */   daddu $v0, $s3, $zero
@@ -832,7 +832,7 @@ func_8004DFD4:
 /* 0293F4 8004DFF4 AFB00010 */  sw    $s0, 0x10($sp)
 /* 0293F8 8004DFF8 8E710074 */  lw    $s1, 0x74($s3)
 /* 0293FC 8004DFFC 8E640078 */  lw    $a0, 0x78($s3)
-/* 029400 8004E000 0C0153DD */  jal   func_80054F74
+/* 029400 8004E000 0C0153DD */  jal   al_CopyWords
 /* 029404 8004E004 0220282D */   daddu $a1, $s1, $zero
 /* 029408 8004E008 8E63007C */  lw    $v1, 0x7c($s3)
 /* 02940C 8004E00C 8E22001C */  lw    $v0, 0x1c($s1)

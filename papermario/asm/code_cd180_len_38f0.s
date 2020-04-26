@@ -1412,7 +1412,7 @@ func_80137E4C:
 /* 0CE668 80137F68 44076000 */  mfc1  $a3, $f12
 /* 0CE66C 80137F6C 260400D4 */  addiu $a0, $s0, 0xd4
 /* 0CE670 80137F70 AFA20020 */  sw    $v0, 0x20($sp)
-/* 0CE674 80137F74 0C00A588 */  jal   func_80029620
+/* 0CE674 80137F74 0C00A588 */  jal   transform_point
 /* 0CE678 80137F78 E7B40010 */   swc1  $f20, 0x10($sp)
 /* 0CE67C 80137F7C C7A00034 */  lwc1  $f0, 0x34($sp)
 /* 0CE680 80137F80 C7AA0028 */  lwc1  $f10, 0x28($sp)
@@ -1638,7 +1638,7 @@ func_80138220:
 /* 0CE998 80138298 03E00008 */  jr    $ra
 /* 0CE99C 8013829C 27BD0018 */   addiu $sp, $sp, 0x18
 
-func_801382A0:
+set_map_transition_effect:
 /* 0CE9A0 801382A0 3C018015 */  lui   $at, 0x8015
 /* 0CE9A4 801382A4 03E00008 */  jr    $ra
 /* 0CE9A8 801382A8 AC24C6F0 */   sw    $a0, -0x3910($at)
@@ -2741,7 +2741,7 @@ func_80139000:
 /* 0CF99C 8013929C 94420134 */  lhu   $v0, 0x134($v0)
 /* 0CF9A0 801392A0 44826000 */  mtc1  $v0, $f12
 /* 0CF9A4 801392A4 00000000 */  nop   
-/* 0CF9A8 801392A8 0C00A8BB */  jal   func_8002A2EC
+/* 0CF9A8 801392A8 0C00A8BB */  jal   sin_deg
 /* 0CF9AC 801392AC 46806320 */   cvt.s.w $f12, $f12
 /* 0CF9B0 801392B0 3C018015 */  lui   $at, 0x8015
 /* 0CF9B4 801392B4 D4220F90 */  ldc1  $f2, 0xf90($at)
@@ -2756,7 +2756,7 @@ func_80139000:
 /* 0CF9D0 801392D0 00571021 */  addu  $v0, $v0, $s7
 /* 0CF9D4 801392D4 44826000 */  mtc1  $v0, $f12
 /* 0CF9D8 801392D8 00000000 */  nop   
-/* 0CF9DC 801392DC 0C00A8BB */  jal   func_8002A2EC
+/* 0CF9DC 801392DC 0C00A8BB */  jal   sin_deg
 /* 0CF9E0 801392E0 46806320 */   cvt.s.w $f12, $f12
 /* 0CF9E4 801392E4 3C018015 */  lui   $at, 0x8015
 /* 0CF9E8 801392E8 D4220F98 */  ldc1  $f2, 0xf98($at)

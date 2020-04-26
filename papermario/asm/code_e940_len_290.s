@@ -47,15 +47,15 @@
 /* 00E9E0 800335E0 8E020000 */  lw    $v0, ($s0)
 /* 00E9E4 800335E4 A04300A9 */  sb    $v1, 0xa9($v0)
 /* 00E9E8 800335E8 8E020000 */  lw    $v0, ($s0)
-/* 00E9EC 800335EC 0C00AB00 */  jal   func_8002AC00
+/* 00E9EC 800335EC 0C00AB00 */  jal   general_heap_create
 /* 00E9F0 800335F0 A0400071 */   sb    $zero, 0x71($v0)
 /* 00E9F4 800335F4 0C047624 */  jal   func_8011D890
 /* 00E9F8 800335F8 00000000 */   nop   
 /* 00E9FC 800335FC 0C048C2E */  jal   func_801230B8
 /* 00EA00 80033600 00000000 */   nop   
-/* 00EA04 80033604 0C0B0C77 */  jal   func_802C31DC
+/* 00EA04 80033604 0C0B0C77 */  jal   clear_script_list
 /* 00EA08 80033608 00000000 */   nop   
-/* 00EA0C 8003360C 0C00B7BD */  jal   func_8002DEF4
+/* 00EA0C 8003360C 0C00B7BD */  jal   create_cameras_a
 /* 00EA10 80033610 00000000 */   nop   
 /* 00EA14 80033614 0C0B763E */  jal   func_802DD8F8
 /* 00EA18 80033618 0000202D */   daddu $a0, $zero, $zero
@@ -63,7 +63,7 @@
 /* 00EA20 80033620 00000000 */   nop   
 /* 00EA24 80033624 0C047889 */  jal   func_8011E224
 /* 00EA28 80033628 00000000 */   nop   
-/* 00EA2C 8003362C 0C045751 */  jal   func_80115D44
+/* 00EA2C 8003362C 0C045751 */  jal   clear_model_data
 /* 00EA30 80033630 00000000 */   nop   
 /* 00EA34 80033634 0C052010 */  jal   func_80148040
 /* 00EA38 80033638 00000000 */   nop   
@@ -74,19 +74,19 @@
 /* 00EA4C 8003364C 0080282D */   daddu $a1, $a0, $zero
 /* 00EA50 80033650 0C050440 */  jal   func_80141100
 /* 00EA54 80033654 00000000 */   nop   
-/* 00EA58 80033658 0C0515A0 */  jal   func_80145680
+/* 00EA58 80033658 0C0515A0 */  jal   clear_trigger_data
 /* 00EA5C 8003365C 00000000 */   nop   
-/* 00EA60 80033660 0C048D9D */  jal   func_80123674
+/* 00EA60 80033660 0C048D9D */  jal   clear_printers
 /* 00EA64 80033664 00000000 */   nop   
 /* 00EA68 80033668 0C04432E */  jal   func_80110CB8
 /* 00EA6C 8003366C 0000202D */   daddu $a0, $zero, $zero
 /* 00EA70 80033670 0C04E042 */  jal   func_80138108
 /* 00EA74 80033674 00000000 */   nop   
-/* 00EA78 80033678 0C037F14 */  jal   func_800DFC50
+/* 00EA78 80033678 0C037F14 */  jal   clear_player_status
 /* 00EA7C 8003367C 00000000 */   nop   
 /* 00EA80 80033680 0C00E12F */  jal   func_800384BC
 /* 00EA84 80033684 00000000 */   nop   
-/* 00EA88 80033688 0C039CE8 */  jal   func_800E73A0
+/* 00EA88 80033688 0C039CE8 */  jal   clear_player_data
 /* 00EA8C 8003368C 00000000 */   nop   
 /* 00EA90 80033690 0C01CACC */  jal   func_80072B30
 /* 00EA94 80033694 00000000 */   nop   
@@ -94,11 +94,11 @@
 /* 00EA9C 8003369C 00000000 */   nop   
 /* 00EAA0 800336A0 0C016727 */  jal   func_80059C9C
 /* 00EAA4 800336A4 00000000 */   nop   
-/* 00EAA8 800336A8 0C04C3FC */  jal   func_80130FF0
+/* 00EAA8 800336A8 0C04C3FC */  jal   clear_item_entity_data
 /* 00EAAC 800336AC 00000000 */   nop   
-/* 00EAB0 800336B0 0C0514C8 */  jal   func_80145320
+/* 00EAB0 800336B0 0C0514C8 */  jal   clear_saved_variables
 /* 00EAB4 800336B4 00000000 */   nop   
-/* 00EAB8 800336B8 0C016BE5 */  jal   func_8005AF94
+/* 00EAB8 800336B8 0C016BE5 */  jal   initialize_collision
 /* 00EABC 800336BC 00000000 */   nop   
 /* 00EAC0 800336C0 0C052B02 */  jal   func_8014AC08
 /* 00EAC4 800336C4 00000000 */   nop   
@@ -123,7 +123,7 @@
 /* 00EB0C 8003370C 28820004 */  slti  $v0, $a0, 4
 /* 00EB10 80033710 1440FFFB */  bnez  $v0, .L80033700
 /* 00EB14 80033714 24630002 */   addiu $v1, $v1, 2
-/* 00EB18 80033718 0C00ABF6 */  jal   func_8002AFD8
+/* 00EB18 80033718 0C00ABF6 */  jal   fio_has_valid_backup
 /* 00EB1C 8003371C 00000000 */   nop   
 /* 00EB20 80033720 3C02800E */  lui   $v0, 0x800e
 /* 00EB24 80033724 8C429620 */  lw    $v0, -0x69e0($v0)
@@ -148,7 +148,7 @@ func_8003375C:
 /* 00EB64 80033764 8C430000 */  lw    $v1, ($v0)
 /* 00EB68 80033768 2405FFF7 */  addiu $a1, $zero, -9
 /* 00EB6C 8003376C 00651824 */  and   $v1, $v1, $a1
-/* 00EB70 80033770 0C00CD3C */  jal   func_800334F0
+/* 00EB70 80033770 0C00CD3C */  jal   set_game_mode
 /* 00EB74 80033774 AC430000 */   sw    $v1, ($v0)
 func_80033778:
 /* 00EB78 80033778 8FBF0014 */  lw    $ra, 0x14($sp)

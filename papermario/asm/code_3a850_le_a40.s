@@ -97,7 +97,7 @@ nuGfxInit:
 /* 03A9A4 8005F5A4 24423BA0 */  addiu $v0, $v0, 0x3ba0
 /* 03A9A8 8005F5A8 3C01800A */  lui   $at, 0x800a
 /* 03A9AC 8005F5AC AC22A610 */  sw    $v0, -0x59f0($at)
-/* 03A9B0 8005F5B0 0C00B2CE */  jal   func_8002CB38
+/* 03A9B0 8005F5B0 0C00B2CE */  jal   nuGfxTaskMgrInit
 /* 03A9B4 8005F5B4 00000000 */   nop   
 /* 03A9B8 8005F5B8 27A40010 */  addiu $a0, $sp, 0x10
 /* 03A9BC 8005F5BC 27A50028 */  addiu $a1, $sp, 0x28
@@ -114,7 +114,7 @@ nuGfxInit:
 /* 03A9E8 8005F5E8 00C0382D */  daddu $a3, $a2, $zero
 /* 03A9EC 8005F5EC AFA0001C */  sw    $zero, 0x1c($sp)
 /* 03A9F0 8005F5F0 AFA20020 */  sw    $v0, 0x20($sp)
-/* 03A9F4 8005F5F4 0C00B331 */  jal   func_8002CCC4
+/* 03A9F4 8005F5F4 0C00B331 */  jal   nuGfxTaskStart
 /* 03A9F8 8005F5F8 AFA00024 */   sw    $zero, 0x24($sp)
 /* 03A9FC 8005F5FC 0C017CB4 */  jal   nuGfxTaskAllEndWait
 /* 03AA00 8005F600 00000000 */   nop   
@@ -125,7 +125,7 @@ nuGfxInit:
 nuContInit:
 /* 03AA10 8005F610 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 03AA14 8005F614 AFBF0014 */  sw    $ra, 0x14($sp)
-/* 03AA18 8005F618 0C00B38C */  jal   func_8002CE30
+/* 03AA18 8005F618 0C00B38C */  jal   nuSiMgrInit
 /* 03AA1C 8005F61C AFB00010 */   sw    $s0, 0x10($sp)
 /* 03AA20 8005F620 0C018144 */  jal   nuContMgrInit
 /* 03AA24 8005F624 0040802D */   daddu $s0, $v0, $zero

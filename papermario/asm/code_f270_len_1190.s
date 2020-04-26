@@ -6,7 +6,7 @@
 /* 00F278 80033E78 AFB20020 */  sw    $s2, 0x20($sp)
 /* 00F27C 80033E7C AFB1001C */  sw    $s1, 0x1c($sp)
 /* 00F280 80033E80 AFB00018 */  sw    $s0, 0x18($sp)
-/* 00F284 80033E84 0C00AB00 */  jal   func_8002AC00
+/* 00F284 80033E84 0C00AB00 */  jal   general_heap_create
 /* 00F288 80033E88 F7B40028 */   sdc1  $f20, 0x28($sp)
 /* 00F28C 80033E8C 3C128007 */  lui   $s2, 0x8007
 /* 00F290 80033E90 2652419C */  addiu $s2, $s2, 0x419c
@@ -24,14 +24,14 @@
 /* 00F2C0 80033EC0 263191B0 */  addiu $s1, $s1, -0x6e50
 /* 00F2C4 80033EC4 3C100020 */  lui   $s0, 0x20
 /* 00F2C8 80033EC8 2610E1B0 */  addiu $s0, $s0, -0x1e50
-/* 00F2CC 80033ECC 0C00AB39 */  jal   func_8002ACE4
+/* 00F2CC 80033ECC 0C00AB39 */  jal   heap_malloc
 /* 00F2D0 80033ED0 02302023 */   subu  $a0, $s1, $s0
 /* 00F2D4 80033ED4 0200202D */  daddu $a0, $s0, $zero
 /* 00F2D8 80033ED8 0220282D */  daddu $a1, $s1, $zero
 /* 00F2DC 80033EDC 0040302D */  daddu $a2, $v0, $zero
 /* 00F2E0 80033EE0 3C10800A */  lui   $s0, 0x800a
 /* 00F2E4 80033EE4 26100910 */  addiu $s0, $s0, 0x910
-/* 00F2E8 80033EE8 0C00A5CF */  jal   func_8002973C
+/* 00F2E8 80033EE8 0C00A5CF */  jal   dma_copy
 /* 00F2EC 80033EEC AE060000 */   sw    $a2, ($s0)
 /* 00F2F0 80033EF0 3C040001 */  lui   $a0, 1
 /* 00F2F4 80033EF4 8E020000 */  lw    $v0, ($s0)
@@ -46,7 +46,7 @@
 /* 00F318 80033F18 AC22091C */  sw    $v0, 0x91c($at)
 /* 00F31C 80033F1C 0C018028 */  jal   nuContRmbForceStop
 /* 00F320 80033F20 00000000 */   nop   
-/* 00F324 80033F24 0C00B7BD */  jal   func_8002DEF4
+/* 00F324 80033F24 0C00B7BD */  jal   create_cameras_a
 /* 00F328 80033F28 00000000 */   nop   
 /* 00F32C 80033F2C 0000202D */  daddu $a0, $zero, $zero
 /* 00F330 80033F30 2405000C */  addiu $a1, $zero, 0xc
@@ -80,7 +80,7 @@
 /* 00F3A0 80033FA0 34420002 */  ori   $v0, $v0, 2
 /* 00F3A4 80033FA4 34630002 */  ori   $v1, $v1, 2
 /* 00F3A8 80033FA8 A6020AB0 */  sh    $v0, 0xab0($s0)
-/* 00F3AC 80033FAC 0C00B8C5 */  jal   func_8002E314
+/* 00F3AC 80033FAC 0C00B8C5 */  jal   set_cam_viewport
 /* 00F3B0 80033FB0 A6031008 */   sh    $v1, 0x1008($s0)
 /* 00F3B4 80033FB4 3C0143FA */  lui   $at, 0x43fa
 /* 00F3B8 80033FB8 44810000 */  mtc1  $at, $f0
@@ -105,7 +105,7 @@
 /* 00F404 80034004 E600003C */  swc1  $f0, 0x3c($s0)
 /* 00F408 80034008 E6020040 */  swc1  $f2, 0x40($s0)
 /* 00F40C 8003400C E6040044 */  swc1  $f4, 0x44($s0)
-/* 00F410 80034010 0C0B0C77 */  jal   func_802C31DC
+/* 00F410 80034010 0C0B0C77 */  jal   clear_script_list
 /* 00F414 80034014 E606005C */   swc1  $f6, 0x5c($s0)
 /* 00F418 80034018 0C048C2E */  jal   func_801230B8
 /* 00F41C 8003401C 00000000 */   nop   
@@ -327,7 +327,7 @@ func_80034314:
 
 /* 00F72C 8003432C 3C10800A */  lui   $s0, 0x800a
 /* 00F730 80034330 26100910 */  addiu $s0, $s0, 0x910
-/* 00F734 80034334 0C00AB4B */  jal   func_8002AD2C
+/* 00F734 80034334 0C00AB4B */  jal   heap_free
 /* 00F738 80034338 8E040000 */   lw    $a0, ($s0)
 /* 00F73C 8003433C 240400FF */  addiu $a0, $zero, 0xff
 /* 00F740 80034340 0C00CDF4 */  jal   func_800337D0
@@ -337,13 +337,13 @@ func_80034314:
 /* 00F750 80034350 24040010 */  addiu $a0, $zero, 0x10
 /* 00F754 80034354 A04000A8 */  sb    $zero, 0xa8($v0)
 func_80034358:
-/* 00F758 80034358 0C00CD3C */  jal   func_800334F0
+/* 00F758 80034358 0C00CD3C */  jal   set_game_mode
 /* 00F75C 8003435C 00000000 */   nop   
 func_80034360:
 .L80034360:
 /* 00F760 80034360 0C00E64C */  jal   func_80039930
 /* 00F764 80034364 00000000 */   nop   
-/* 00F768 80034368 0C00B500 */  jal   func_8002D400
+/* 00F768 80034368 0C00B500 */  jal   update_cameras
 /* 00F76C 8003436C 00000000 */   nop   
 /* 00F770 80034370 0C00CE1D */  jal   func_80033874
 /* 00F774 80034374 00000000 */   nop   
@@ -744,6 +744,7 @@ func_80034920:
 /* 00FD74 80034974 03E00008 */  jr    $ra
 /* 00FD78 80034978 27BD0018 */   addiu $sp, $sp, 0x18
 
+step_pause_menu:
 /* 00FD7C 8003497C 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 00FD80 80034980 AFB00010 */  sw    $s0, 0x10($sp)
 /* 00FD84 80034984 3C10800A */  lui   $s0, 0x800a
@@ -819,9 +820,9 @@ func_80034920:
 /* 00FE88 80034A88 0C00EC6A */  jal   func_8003B1A8
 /* 00FE8C 80034A8C 00000000 */   nop   
 /* 00FE90 80034A90 8E020000 */  lw    $v0, ($s0)
-/* 00FE94 80034A94 0C016BA8 */  jal   func_8005AEA0
+/* 00FE94 80034A94 0C016BA8 */  jal   allocate_hit_tables
 /* 00FE98 80034A98 A0510070 */   sb    $s1, 0x70($v0)
-/* 00FE9C 80034A9C 0C00AB28 */  jal   func_8002ACA0
+/* 00FE9C 80034A9C 0C00AB28 */  jal   battle_heap_create
 /* 00FEA0 80034AA0 00000000 */   nop   
 /* 00FEA4 80034AA4 0C018028 */  jal   nuContRmbForceStop
 /* 00FEA8 80034AA8 00000000 */   nop   
@@ -829,7 +830,7 @@ func_80034920:
 /* 00FEB0 80034AB0 0000202D */   daddu $a0, $zero, $zero
 /* 00FEB4 80034AB4 0C0B763E */  jal   func_802DD8F8
 /* 00FEB8 80034AB8 0000202D */   daddu $a0, $zero, $zero
-/* 00FEBC 80034ABC 0C045751 */  jal   func_80115D44
+/* 00FEBC 80034ABC 0C045751 */  jal   clear_model_data
 /* 00FEC0 80034AC0 00000000 */   nop   
 /* 00FEC4 80034AC4 0C052010 */  jal   func_80148040
 /* 00FEC8 80034AC8 00000000 */   nop   
@@ -848,17 +849,17 @@ func_80034920:
 /* 00FEFC 80034AFC 34A58000 */   ori   $a1, $a1, 0x8000
 /* 00FF00 80034B00 0C050440 */  jal   func_80141100
 /* 00FF04 80034B04 00000000 */   nop   
-/* 00FF08 80034B08 0C03A6EC */  jal   func_800E9BB0
+/* 00FF08 80034B08 0C03A6EC */  jal   reset_status_menu
 /* 00FF0C 80034B0C 00000000 */   nop   
-/* 00FF10 80034B10 0C04C3FC */  jal   func_80130FF0
+/* 00FF10 80034B10 0C04C3FC */  jal   clear_item_entity_data
 /* 00FF14 80034B14 00000000 */   nop   
-/* 00FF18 80034B18 0C0B0C77 */  jal   func_802C31DC
+/* 00FF18 80034B18 0C0B0C77 */  jal   clear_script_list
 /* 00FF1C 80034B1C 00000000 */   nop   
 /* 00FF20 80034B20 0C00E12F */  jal   func_800384BC
 /* 00FF24 80034B24 00000000 */   nop   
 /* 00FF28 80034B28 0C04432E */  jal   func_80110CB8
 /* 00FF2C 80034B2C 0000202D */   daddu $a0, $zero, $zero
-/* 00FF30 80034B30 0C0515A0 */  jal   func_80145680
+/* 00FF30 80034B30 0C0515A0 */  jal   clear_trigger_data
 /* 00FF34 80034B34 00000000 */   nop   
 /* 00FF38 80034B38 0C05260A */  jal   func_80149828
 /* 00FF3C 80034B3C 00000000 */   nop   
@@ -996,7 +997,7 @@ func_80034C2C:
 /* 010108 80034D08 8C820000 */  lw    $v0, ($a0)
 /* 01010C 80034D0C 2403FFF7 */  addiu $v1, $zero, -9
 /* 010110 80034D10 00431024 */  and   $v0, $v0, $v1
-/* 010114 80034D14 0C016AFA */  jal   func_8005ABE8
+/* 010114 80034D14 0C016AFA */  jal   get_current_map_header
 /* 010118 80034D18 AC820000 */   sw    $v0, ($a0)
 /* 01011C 80034D1C 3C108007 */  lui   $s0, 0x8007
 /* 010120 80034D20 2610419C */  addiu $s0, $s0, 0x419c
@@ -1025,7 +1026,7 @@ func_80034C2C:
 /* 01017C 80034D7C 8E020000 */  lw    $v0, ($s0)
 /* 010180 80034D80 0C0B763E */  jal   func_802DD8F8
 /* 010184 80034D84 80440084 */   lb    $a0, 0x84($v0)
-/* 010188 80034D88 0C0457FA */  jal   func_80115FE8
+/* 010188 80034D88 0C0457FA */  jal   init_model_data
 /* 01018C 80034D8C 00000000 */   nop   
 /* 010190 80034D90 0C05203C */  jal   func_801480F0
 /* 010194 80034D94 00000000 */   nop   
@@ -1038,17 +1039,17 @@ func_80034C2C:
 /* 0101B0 80034DB0 0000202D */  daddu $a0, $zero, $zero
 /* 0101B4 80034DB4 0C0514BA */  jal   func_801452E8
 /* 0101B8 80034DB8 0080282D */   daddu $a1, $a0, $zero
-/* 0101BC 80034DBC 0C0504C0 */  jal   func_80141300
+/* 0101BC 80034DBC 0C0504C0 */  jal   init_menu_icon_list
 /* 0101C0 80034DC0 00000000 */   nop   
-/* 0101C4 80034DC4 0C04C433 */  jal   func_801310CC
+/* 0101C4 80034DC4 0C04C433 */  jal   init_item_entity_list
 /* 0101C8 80034DC8 00000000 */   nop   
-/* 0101CC 80034DCC 0C0B0CBB */  jal   func_802C32EC
+/* 0101CC 80034DCC 0C0B0CBB */  jal   init_script_list
 /* 0101D0 80034DD0 00000000 */   nop   
-/* 0101D4 80034DD4 0C00E14B */  jal   func_8003852C
+/* 0101D4 80034DD4 0C00E14B */  jal   init_npc_list
 /* 0101D8 80034DD8 00000000 */   nop   
 /* 0101DC 80034DDC 0C044396 */  jal   func_80110E58
 /* 0101E0 80034DE0 00000000 */   nop   
-/* 0101E4 80034DE4 0C0515CA */  jal   func_80145728
+/* 0101E4 80034DE4 0C0515CA */  jal   init_trigger_list
 /* 0101E8 80034DE8 00000000 */   nop   
 /* 0101EC 80034DEC 3C04800A */  lui   $a0, 0x800a
 /* 0101F0 80034DF0 8C840924 */  lw    $a0, 0x924($a0)
@@ -1056,36 +1057,36 @@ func_80034C2C:
 /* 0101F8 80034DF8 00000000 */   nop   
 /* 0101FC 80034DFC 0C052B1C */  jal   func_8014AC70
 /* 010200 80034E00 00000000 */   nop   
-/* 010204 80034E04 0C0169B0 */  jal   func_8005A6C0
+/* 010204 80034E04 0C0169B0 */  jal   load_map_script_lib
 /* 010208 80034E08 00000000 */   nop   
 /* 01020C 80034E0C 3C04800E */  lui   $a0, 0x800e
 /* 010210 80034E10 24849230 */  addiu $a0, $a0, -0x6dd0
-/* 010214 80034E14 0C016B3A */  jal   func_8005ACE8
+/* 010214 80034E14 0C016B3A */  jal   load_asset_by_name
 /* 010218 80034E18 27A50010 */   addiu $a1, $sp, 0x10
 /* 01021C 80034E1C 0040802D */  daddu $s0, $v0, $zero
 /* 010220 80034E20 3C058021 */  lui   $a1, 0x8021
 /* 010224 80034E24 24A50000 */  addiu $a1, $a1, 0
 /* 010228 80034E28 0C01BB7C */  jal   decode_yay0
 /* 01022C 80034E2C 0200202D */   daddu $a0, $s0, $zero
-/* 010230 80034E30 0C00AB1E */  jal   func_8002AC78
+/* 010230 80034E30 0C00AB1E */  jal   general_heap_free
 /* 010234 80034E34 0200202D */   daddu $a0, $s0, $zero
-/* 010238 80034E38 0C016BE5 */  jal   func_8005AF94
+/* 010238 80034E38 0C016BE5 */  jal   initialize_collision
 /* 01023C 80034E3C 00000000 */   nop   
-/* 010240 80034E40 0C016C16 */  jal   func_8005B058
+/* 010240 80034E40 0C016C16 */  jal   load_collision
 /* 010244 80034E44 00000000 */   nop   
 /* 010248 80034E48 8E240008 */  lw    $a0, 8($s1)
 /* 01024C 80034E4C 10800004 */  beqz  $a0, .L80034E60
 /* 010250 80034E50 00000000 */   nop   
 /* 010254 80034E54 8E25000C */  lw    $a1, 0xc($s1)
-/* 010258 80034E58 0C00A5CF */  jal   func_8002973C
+/* 010258 80034E58 0C00A5CF */  jal   dma_copy
 /* 01025C 80034E5C 8E260010 */   lw    $a2, 0x10($s1)
 .L80034E60:
-/* 010260 80034E60 0C05175C */  jal   func_80145D70
+/* 010260 80034E60 0C05175C */  jal   load_map_bg
 /* 010264 80034E64 8E240014 */   lw    $a0, 0x14($s1)
 /* 010268 80034E68 8E440038 */  lw    $a0, 0x38($s2)
 /* 01026C 80034E6C 50800005 */  beql  $a0, $zero, .L80034E84
 /* 010270 80034E70 24040128 */   addiu $a0, $zero, 0x128
-/* 010274 80034E74 0C05178A */  jal   func_80145E28
+/* 010274 80034E74 0C05178A */  jal   read_background_size
 /* 010278 80034E78 00000000 */   nop   
 /* 01027C 80034E7C 0800D3A5 */  j     func_80034E94
 /* 010280 80034E80 00000000 */   nop   
@@ -1093,13 +1094,13 @@ func_80034C2C:
 .L80034E84:
 /* 010284 80034E84 240500C8 */  addiu $a1, $zero, 0xc8
 /* 010288 80034E88 2406000C */  addiu $a2, $zero, 0xc
-/* 01028C 80034E8C 0C05179C */  jal   func_80145E70
+/* 01028C 80034E8C 0C05179C */  jal   set_background_size
 /* 010290 80034E90 24070014 */   addiu $a3, $zero, 0x14
 func_80034E94:
 /* 010294 80034E94 3C038007 */  lui   $v1, 0x8007
 /* 010298 80034E98 8C63419C */  lw    $v1, 0x419c($v1)
 /* 01029C 80034E9C 9462015E */  lhu   $v0, 0x15e($v1)
-/* 0102A0 80034EA0 0C04584B */  jal   func_8011612C
+/* 0102A0 80034EA0 0C04584B */  jal   calculate_model_sizes
 /* 0102A4 80034EA4 A462015C */   sh    $v0, 0x15c($v1)
 /* 0102A8 80034EA8 0C00EC6C */  jal   func_8003B1B0
 /* 0102AC 80034EAC 00000000 */   nop   
@@ -1181,7 +1182,7 @@ func_80034E94:
 /* 0103C4 80034FC4 00000000 */   nop   
 /* 0103C8 80034FC8 0C038069 */  jal   func_800E01A4
 /* 0103CC 80034FCC 00000000 */   nop   
-/* 0103D0 80034FD0 0C00CD3C */  jal   func_800334F0
+/* 0103D0 80034FD0 0C00CD3C */  jal   set_game_mode
 /* 0103D4 80034FD4 24040004 */   addiu $a0, $zero, 4
 func_80034FD8:
 .L80034FD8:

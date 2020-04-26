@@ -36,7 +36,7 @@ func_802DEAD0:
 /* 101BF4 802DEB04 03E00008 */  jr    $ra
 /* 101BF8 802DEB08 00000000 */   nop   
 
-func_802DEB0C:
+load_sprite:
 /* 101BFC 802DEB0C 27BDFFD0 */  addiu $sp, $sp, -0x30
 /* 101C00 802DEB10 AFB50024 */  sw    $s5, 0x24($sp)
 /* 101C04 802DEB14 0080A82D */  daddu $s5, $a0, $zero
@@ -72,7 +72,7 @@ func_802DEB5C:
 /* 101C70 802DEB80 26100007 */  addiu $s0, $s0, 7
 /* 101C74 802DEB84 2402FFF8 */  addiu $v0, $zero, -8
 /* 101C78 802DEB88 02028024 */  and   $s0, $s0, $v0
-/* 101C7C 802DEB8C 0C00AB0A */  jal   func_8002AC28
+/* 101C7C 802DEB8C 0C00AB0A */  jal   general_heap_malloc
 /* 101C80 802DEB90 0200202D */   daddu $a0, $s0, $zero
 /* 101C84 802DEB94 0040902D */  daddu $s2, $v0, $zero
 /* 101C88 802DEB98 0240282D */  daddu $a1, $s2, $zero
@@ -85,7 +85,7 @@ func_802DEB5C:
 /* 101CA4 802DEBB4 8CA50000 */  lw    $a1, ($a1)
 /* 101CA8 802DEBB8 3C048035 */  lui   $a0, 0x8035
 /* 101CAC 802DEBBC 2484F800 */  addiu $a0, $a0, -0x800
-/* 101CB0 802DEBC0 0C00A459 */  jal   func_80029164
+/* 101CB0 802DEBC0 0C00A459 */  jal   _heap_malloc_tail
 /* 101CB4 802DEBC4 00000000 */   nop   
 /* 101CB8 802DEBC8 080B7AFA */  j     func_802DEBE8
 /* 101CBC 802DEBCC 0040882D */   daddu $s1, $v0, $zero
@@ -94,14 +94,14 @@ func_802DEB5C:
 /* 101CC0 802DEBD0 8CA50000 */  lw    $a1, ($a1)
 /* 101CC4 802DEBD4 3C048035 */  lui   $a0, 0x8035
 /* 101CC8 802DEBD8 2484F800 */  addiu $a0, $a0, -0x800
-/* 101CCC 802DEBDC 0C00A41B */  jal   func_8002906C
+/* 101CCC 802DEBDC 0C00A41B */  jal   _heap_malloc
 /* 101CD0 802DEBE0 00000000 */   nop   
 /* 101CD4 802DEBE4 0040882D */  daddu $s1, $v0, $zero
 func_802DEBE8:
 /* 101CD8 802DEBE8 0240202D */  daddu $a0, $s2, $zero
 /* 101CDC 802DEBEC 0C01BB7C */  jal   decode_yay0
 /* 101CE0 802DEBF0 0220282D */   daddu $a1, $s1, $zero
-/* 101CE4 802DEBF4 0C00AB1E */  jal   func_8002AC78
+/* 101CE4 802DEBF4 0C00AB1E */  jal   general_heap_free
 /* 101CE8 802DEBF8 0240202D */   daddu $a0, $s2, $zero
 /* 101CEC 802DEBFC 2404FFFF */  addiu $a0, $zero, -1
 /* 101CF0 802DEC00 00111082 */  srl   $v0, $s1, 2
@@ -236,7 +236,7 @@ func_802DED60:
 /* 101EC8 802DEDD8 AE030008 */  sw    $v1, 8($s0)
 /* 101ECC 802DEDDC 00461021 */  addu  $v0, $v0, $a2
 /* 101ED0 802DEDE0 00002812 */  mflo  $a1
-/* 101ED4 802DEDE4 0C00A41B */  jal   func_8002906C
+/* 101ED4 802DEDE4 0C00A41B */  jal   _heap_malloc
 /* 101ED8 802DEDE8 AE020004 */   sw    $v0, 4($s0)
 /* 101EDC 802DEDEC 0040282D */  daddu $a1, $v0, $zero
 /* 101EE0 802DEDF0 0000202D */  daddu $a0, $zero, $zero
@@ -592,7 +592,7 @@ func_802DF24C:
 /* 102388 802DF298 3C048035 */  lui   $a0, 0x8035
 /* 10238C 802DF29C 2484F800 */  addiu $a0, $a0, -0x800
 /* 102390 802DF2A0 02C0282D */  daddu $a1, $s6, $zero
-/* 102394 802DF2A4 0C00A4B1 */  jal   func_800292C4
+/* 102394 802DF2A4 0C00A4B1 */  jal   _heap_realloc
 /* 102398 802DF2A8 00C53023 */   subu  $a2, $a2, $a1
 /* 10239C 802DF2AC 8FBF01C8 */  lw    $ra, 0x1c8($sp)
 /* 1023A0 802DF2B0 8FB701C4 */  lw    $s7, 0x1c4($sp)
@@ -626,7 +626,7 @@ func_802DF2D8:
 /* 102408 802DF318 3C048030 */  lui   $a0, 0x8030
 /* 10240C 802DF31C 2484B800 */  addiu $a0, $a0, -0x4800
 .L802DF320:
-/* 102410 802DF320 0C00A41B */  jal   func_8002906C
+/* 102410 802DF320 0C00A41B */  jal   _heap_malloc
 /* 102414 802DF324 00000000 */   nop   
 /* 102418 802DF328 0040302D */  daddu $a2, $v0, $zero
 /* 10241C 802DF32C 00C0282D */  daddu $a1, $a2, $zero

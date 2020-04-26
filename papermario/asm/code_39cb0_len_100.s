@@ -1,6 +1,7 @@
 
 .section .text8005E8B0, "ax"
 
+nuBoot:
 /* 039CB0 8005E8B0 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 039CB4 8005E8B4 AFBF001C */  sw    $ra, 0x1c($sp)
 /* 039CB8 8005E8B8 0C01A9C2 */  jal   osInitialize
@@ -25,6 +26,7 @@
 /* 039D04 8005E904 03E00008 */  jr    $ra
 /* 039D08 8005E908 27BD0020 */   addiu $sp, $sp, 0x20
 
+boot_idle:
 /* 039D0C 8005E90C 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 039D10 8005E910 AFBF001C */  sw    $ra, 0x1c($sp)
 /* 039D14 8005E914 AFB00018 */  sw    $s0, 0x18($sp)

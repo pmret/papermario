@@ -16,7 +16,7 @@ func_80147230:
 /* 0DD95C 8014725C 03E00008 */  jr    $ra
 /* 0DD960 80147260 AC83000C */   sw    $v1, 0xc($a0)
 
-func_80147264:
+UpdateMusicPlayers:
 /* 0DD964 80147264 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0DD968 80147268 AFB00010 */  sw    $s0, 0x10($sp)
 /* 0DD96C 8014726C 3C108016 */  lui   $s0, 0x8016
@@ -96,7 +96,7 @@ func_80147358:
 /* 0DDA60 80147360 03E00008 */  jr    $ra
 /* 0DDA64 80147364 27BD0018 */   addiu $sp, $sp, 0x18
 
-func_80147368:
+play_ambient_sounds:
 /* 0DDA68 80147368 3C028007 */  lui   $v0, 0x8007
 /* 0DDA6C 8014736C 8C42419C */  lw    $v0, 0x419c($v0)
 /* 0DDA70 80147370 27BDFFE8 */  addiu $sp, $sp, -0x18

@@ -1,7 +1,7 @@
 
 .section .text80025C60, "ax"
 
-PAPERMARIO_func_80025C60:
+func_80025C60:
 /* 001060 80025C60 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 001064 80025C64 3C05B3FF */  lui   $a1, 0xb3ff
 /* 001068 80025C68 34A50014 */  ori   $a1, $a1, 0x14

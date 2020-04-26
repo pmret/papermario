@@ -1,6 +1,7 @@
 
 .section .text8002CA40, "ax"
 
+nuGfxTaskMgr:
 /* 007E40 8002CA40 27BDFFD0 */  addiu $sp, $sp, -0x30
 /* 007E44 8002CA44 3C04800E */  lui   $a0, 0x800e
 /* 007E48 8002CA48 2484AC90 */  addiu $a0, $a0, -0x5370
@@ -72,7 +73,7 @@ func_8002CB14:
 /* 007F30 8002CB30 0800B2A2 */  j     func_8002CA88
 /* 007F34 8002CB34 00000000 */   nop   
 
-func_8002CB38:
+nuGfxTaskMgrInit:
 /* 007F38 8002CB38 27BDFFC0 */  addiu $sp, $sp, -0x40
 /* 007F3C 8002CB3C 24020008 */  addiu $v0, $zero, 8
 /* 007F40 8002CB40 3C01800A */  lui   $at, 0x800a
@@ -129,7 +130,7 @@ func_8002CB38:
 /* 008008 8002CC08 AE110000 */  sw    $s1, ($s0)
 /* 00800C 8002CC0C AE170050 */  sw    $s7, 0x50($s0)
 /* 008010 8002CC10 AE160010 */  sw    $s6, 0x10($s0)
-/* 008014 8002CC14 0C00A5CF */  jal   func_8002973C
+/* 008014 8002CC14 0C00A5CF */  jal   dma_copy
 /* 008018 8002CC18 AE000014 */   sw    $zero, 0x14($s0)
 /* 00801C 8002CC1C 24020800 */  addiu $v0, $zero, 0x800
 /* 008020 8002CC20 AE02002C */  sw    $v0, 0x2c($s0)
@@ -174,7 +175,7 @@ func_8002CB38:
 /* 0080BC 8002CCBC 03E00008 */  jr    $ra
 /* 0080C0 8002CCC0 27BD0040 */   addiu $sp, $sp, 0x40
 
-func_8002CCC4:
+nuGfxTaskStart:
 /* 0080C4 8002CCC4 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0080C8 8002CCC8 3C0A800A */  lui   $t2, 0x800a
 /* 0080CC 8002CCCC 254AC510 */  addiu $t2, $t2, -0x3af0

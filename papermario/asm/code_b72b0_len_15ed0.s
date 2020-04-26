@@ -114,7 +114,7 @@ func_80120D28:
 /* 0B742C 80120D2C 00000000 */   nop   
 
 .L80120D30:
-/* 0B7430 80120D30 0C00AB39 */  jal   func_8002ACE4
+/* 0B7430 80120D30 0C00AB39 */  jal   heap_malloc
 /* 0B7434 80120D34 24040068 */   addiu $a0, $zero, 0x68
 /* 0B7438 80120D38 00102080 */  sll   $a0, $s0, 2
 /* 0B743C 80120D3C 3C038015 */  lui   $v1, 0x8015
@@ -192,7 +192,7 @@ func_80120E30:
 /* 0B7534 80120E34 00000000 */   nop   
 
 .L80120E38:
-/* 0B7538 80120E38 0C00AB39 */  jal   func_8002ACE4
+/* 0B7538 80120E38 0C00AB39 */  jal   heap_malloc
 /* 0B753C 80120E3C 24040068 */   addiu $a0, $zero, 0x68
 /* 0B7540 80120E40 00112080 */  sll   $a0, $s1, 2
 /* 0B7544 80120E44 3C038015 */  lui   $v1, 0x8015
@@ -211,7 +211,7 @@ func_80120E70:
 /* 0B7574 80120E74 00000000 */   nop   
 
 .L80120E78:
-/* 0B7578 80120E78 0C00AB39 */  jal   func_8002ACE4
+/* 0B7578 80120E78 0C00AB39 */  jal   heap_malloc
 /* 0B757C 80120E7C 24040010 */   addiu $a0, $zero, 0x10
 /* 0B7580 80120E80 14400003 */  bnez  $v0, .L80120E90
 /* 0B7584 80120E84 AE020014 */   sw    $v0, 0x14($s0)
@@ -1295,7 +1295,7 @@ func_80121CE8:
 /* 0B8524 80121E24 4407A000 */  mfc1  $a3, $f20
 /* 0B8528 80121E28 27A20084 */  addiu $v0, $sp, 0x84
 /* 0B852C 80121E2C AFA20020 */  sw    $v0, 0x20($sp)
-/* 0B8530 80121E30 0C00A588 */  jal   func_80029620
+/* 0B8530 80121E30 0C00A588 */  jal   transform_point
 /* 0B8534 80121E34 E7A00010 */   swc1  $f0, 0x10($sp)
 /* 0B8538 80121E38 82030004 */  lb    $v1, 4($s0)
 /* 0B853C 80121E3C 3C028012 */  lui   $v0, 0x8012
@@ -1321,7 +1321,7 @@ func_80121CE8:
 /* 0B8588 80121E88 46140000 */  add.s $f0, $f0, $f20
 /* 0B858C 80121E8C 0220202D */  daddu $a0, $s1, $zero
 /* 0B8590 80121E90 4600010D */  trunc.w.s $f4, $f0
-/* 0B8594 80121E94 0C047644 */  jal   func_8011D910
+/* 0B8594 80121E94 0C047644 */  jal   queue_render_task
 /* 0B8598 80121E98 E4840004 */   swc1  $f4, 4($a0)
 .L80121E9C:
 /* 0B859C 80121E9C 8FBF0094 */  lw    $ra, 0x94($sp)
@@ -1417,7 +1417,7 @@ func_80121EB8:
 /* 0B86F4 80121FF4 4407A000 */  mfc1  $a3, $f20
 /* 0B86F8 80121FF8 27A20084 */  addiu $v0, $sp, 0x84
 /* 0B86FC 80121FFC AFA20020 */  sw    $v0, 0x20($sp)
-/* 0B8700 80122000 0C00A588 */  jal   func_80029620
+/* 0B8700 80122000 0C00A588 */  jal   transform_point
 /* 0B8704 80122004 E7A00010 */   swc1  $f0, 0x10($sp)
 /* 0B8708 80122008 82030004 */  lb    $v1, 4($s0)
 /* 0B870C 8012200C 3C028012 */  lui   $v0, 0x8012
@@ -1443,7 +1443,7 @@ func_80121EB8:
 /* 0B8758 80122058 46140000 */  add.s $f0, $f0, $f20
 /* 0B875C 8012205C 0220202D */  daddu $a0, $s1, $zero
 /* 0B8760 80122060 4600010D */  trunc.w.s $f4, $f0
-/* 0B8764 80122064 0C047644 */  jal   func_8011D910
+/* 0B8764 80122064 0C047644 */  jal   queue_render_task
 /* 0B8768 80122068 E4840004 */   swc1  $f4, 4($a0)
 .L8012206C:
 /* 0B876C 8012206C 8FBF0094 */  lw    $ra, 0x94($sp)
@@ -1515,7 +1515,7 @@ func_80121EB8:
 /* 0B8868 80122168 0100202D */  daddu $a0, $t0, $zero
 /* 0B886C 8012216C 3042F000 */  andi  $v0, $v0, 0xf000
 /* 0B8870 80122170 00021202 */  srl   $v0, $v0, 8
-/* 0B8874 80122174 0C047644 */  jal   func_8011D910
+/* 0B8874 80122174 0C047644 */  jal   queue_render_task
 /* 0B8878 80122178 AD020004 */   sw    $v0, 4($t0)
 .L8012217C:
 /* 0B887C 8012217C 8FBF0020 */  lw    $ra, 0x20($sp)
@@ -1583,7 +1583,7 @@ func_80121EB8:
 /* 0B8968 80122268 0140202D */  daddu $a0, $t2, $zero
 /* 0B896C 8012226C 3042F000 */  andi  $v0, $v0, 0xf000
 /* 0B8970 80122270 00021202 */  srl   $v0, $v0, 8
-/* 0B8974 80122274 0C047644 */  jal   func_8011D910
+/* 0B8974 80122274 0C047644 */  jal   queue_render_task
 /* 0B8978 80122278 AD420004 */   sw    $v0, 4($t2)
 .L8012227C:
 /* 0B897C 8012227C 8FBF0020 */  lw    $ra, 0x20($sp)
@@ -2397,12 +2397,12 @@ func_80122DFC:
 /* 0B953C 80122E3C 30420400 */   andi  $v0, $v0, 0x400
 /* 0B9540 80122E40 10400003 */  beqz  $v0, .L80122E50
 /* 0B9544 80122E44 00000000 */   nop   
-/* 0B9548 80122E48 0C00AB4B */  jal   func_8002AD2C
+/* 0B9548 80122E48 0C00AB4B */  jal   heap_free
 /* 0B954C 80122E4C 8C640014 */   lw    $a0, 0x14($v1)
 .L80122E50:
 /* 0B9550 80122E50 8E220000 */  lw    $v0, ($s1)
 /* 0B9554 80122E54 02021021 */  addu  $v0, $s0, $v0
-/* 0B9558 80122E58 0C00AB4B */  jal   func_8002AD2C
+/* 0B9558 80122E58 0C00AB4B */  jal   heap_free
 /* 0B955C 80122E5C 8C440000 */   lw    $a0, ($v0)
 /* 0B9560 80122E60 3C048015 */  lui   $a0, 0x8015
 /* 0B9564 80122E64 24841318 */  addiu $a0, $a0, 0x1318
@@ -2576,6 +2576,7 @@ func_80122F64:
 /* 0B97A8 801230A8 03E00008 */  jr    $ra
 /* 0B97AC 801230AC ACE20000 */   sw    $v0, ($a3)
 
+stub_item_entity_nodraw:
 /* 0B97B0 801230B0 03E00008 */  jr    $ra
 /* 0B97B4 801230B4 00000000 */   nop   
 
@@ -2657,7 +2658,7 @@ func_801231A8:
 /* 0B98AC 801231AC 00000000 */   nop   
 
 .L801231B0:
-/* 0B98B0 801231B0 0C00AB39 */  jal   func_8002ACE4
+/* 0B98B0 801231B0 0C00AB39 */  jal   heap_malloc
 /* 0B98B4 801231B4 2404000C */   addiu $a0, $zero, 0xc
 /* 0B98B8 801231B8 3C048015 */  lui   $a0, 0x8015
 /* 0B98BC 801231BC 8C844420 */  lw    $a0, 0x4420($a0)
@@ -2727,7 +2728,7 @@ func_8012328C:
 /* 0B9990 80123290 00000000 */   nop   
 
 .L80123294:
-/* 0B9994 80123294 0C00AB39 */  jal   func_8002ACE4
+/* 0B9994 80123294 0C00AB39 */  jal   heap_malloc
 /* 0B9998 80123298 2404000C */   addiu $a0, $zero, 0xc
 /* 0B999C 8012329C 3C048015 */  lui   $a0, 0x8015
 /* 0B99A0 801232A0 8C844420 */  lw    $a0, 0x4420($a0)
@@ -2797,7 +2798,7 @@ func_80123370:
 /* 0B9A74 80123374 00000000 */   nop   
 
 .L80123378:
-/* 0B9A78 80123378 0C00AB39 */  jal   func_8002ACE4
+/* 0B9A78 80123378 0C00AB39 */  jal   heap_malloc
 /* 0B9A7C 8012337C 2404000C */   addiu $a0, $zero, 0xc
 /* 0B9A80 80123380 3C048015 */  lui   $a0, 0x8015
 /* 0B9A84 80123384 8C844420 */  lw    $a0, 0x4420($a0)
@@ -2989,7 +2990,7 @@ func_801235C0:
 /* 0B9D08 80123608 8C440000 */  lw    $a0, ($v0)
 /* 0B9D0C 8012360C 10800006 */  beqz  $a0, .L80123628
 /* 0B9D10 80123610 00000000 */   nop   
-/* 0B9D14 80123614 0C00AB4B */  jal   func_8002AD2C
+/* 0B9D14 80123614 0C00AB4B */  jal   heap_free
 /* 0B9D18 80123618 00000000 */   nop   
 /* 0B9D1C 8012361C 8E220000 */  lw    $v0, ($s1)
 /* 0B9D20 80123620 02021021 */  addu  $v0, $s0, $v0
@@ -3012,14 +3013,14 @@ func_8012363C:
 /* 0B9D58 80123658 8C820000 */   lw    $v0, ($a0)
 
 /* 0B9D5C 8012365C 00000000 */  nop   
-func_80123660:
+clear_character_set:
 /* 0B9D60 80123660 2402FFFF */  addiu $v0, $zero, -1
 /* 0B9D64 80123664 3C018015 */  lui   $at, 0x8015
 /* 0B9D68 80123668 A4225C98 */  sh    $v0, 0x5c98($at)
 /* 0B9D6C 8012366C 03E00008 */  jr    $ra
 /* 0B9D70 80123670 00000000 */   nop   
 
-func_80123674:
+clear_printers:
 /* 0B9D74 80123674 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0B9D78 80123678 AFB00010 */  sw    $s0, 0x10($sp)
 /* 0B9D7C 8012367C 0000802D */  daddu $s0, $zero, $zero
@@ -3030,7 +3031,7 @@ func_80123674:
 .L80123690:
 /* 0B9D90 80123690 0220202D */  daddu $a0, $s1, $zero
 /* 0B9D94 80123694 0000282D */  daddu $a1, $zero, $zero
-/* 0B9D98 80123698 0C0495A9 */  jal   func_801256A4
+/* 0B9D98 80123698 0C0495A9 */  jal   initialize_printer
 /* 0B9D9C 8012369C 00A0302D */   daddu $a2, $a1, $zero
 /* 0B9DA0 801236A0 26100001 */  addiu $s0, $s0, 1
 /* 0B9DA4 801236A4 2A020003 */  slti  $v0, $s0, 3
@@ -3052,7 +3053,7 @@ func_80123674:
 /* 0B9DE0 801236E0 AC201338 */  sw    $zero, 0x1338($at)
 /* 0B9DE4 801236E4 3C018015 */  lui   $at, 0x8015
 /* 0B9DE8 801236E8 A42012E4 */  sh    $zero, 0x12e4($at)
-/* 0B9DEC 801236EC 0C048DCD */  jal   func_80123734
+/* 0B9DEC 801236EC 0C048DCD */  jal   load_font
 /* 0B9DF0 801236F0 0000202D */   daddu $a0, $zero, $zero
 /* 0B9DF4 801236F4 8FBF0018 */  lw    $ra, 0x18($sp)
 /* 0B9DF8 801236F8 8FB10014 */  lw    $s1, 0x14($sp)
@@ -3060,20 +3061,20 @@ func_80123674:
 /* 0B9E00 80123700 03E00008 */  jr    $ra
 /* 0B9E04 80123704 27BD0020 */   addiu $sp, $sp, 0x20
 
-func_80123708:
+load_font_data:
 /* 0B9E08 80123708 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0B9E0C 8012370C 3C020011 */  lui   $v0, 0x11
 /* 0B9E10 80123710 2442F1B0 */  addiu $v0, $v0, -0xe50
 /* 0B9E14 80123714 00822021 */  addu  $a0, $a0, $v0
 /* 0B9E18 80123718 30A5FFFF */  andi  $a1, $a1, 0xffff
 /* 0B9E1C 8012371C AFBF0010 */  sw    $ra, 0x10($sp)
-/* 0B9E20 80123720 0C00A5CF */  jal   func_8002973C
+/* 0B9E20 80123720 0C00A5CF */  jal   dma_copy
 /* 0B9E24 80123724 00852821 */   addu  $a1, $a0, $a1
 /* 0B9E28 80123728 8FBF0010 */  lw    $ra, 0x10($sp)
 /* 0B9E2C 8012372C 03E00008 */  jr    $ra
 /* 0B9E30 80123730 27BD0018 */   addiu $sp, $sp, 0x18
 
-func_80123734:
+load_font:
 /* 0B9E34 80123734 3C028015 */  lui   $v0, 0x8015
 /* 0B9E38 80123738 84425C98 */  lh    $v0, 0x5c98($v0)
 /* 0B9E3C 8012373C 27BDFFE8 */  addiu $sp, $sp, -0x18
@@ -3085,7 +3086,7 @@ func_80123734:
 /* 0B9E54 80123754 24840000 */  addiu $a0, $a0, 0
 /* 0B9E58 80123758 3C06802F */  lui   $a2, 0x802f
 /* 0B9E5C 8012375C 24C6E8D0 */  addiu $a2, $a2, -0x1730
-/* 0B9E60 80123760 0C048DC2 */  jal   func_80123708
+/* 0B9E60 80123760 0C048DC2 */  jal   load_font_data
 /* 0B9E64 80123764 24055100 */   addiu $a1, $zero, 0x5100
 /* 0B9E68 80123768 3C040000 */  lui   $a0, 0
 /* 0B9E6C 8012376C 24845300 */  addiu $a0, $a0, 0x5300
@@ -3099,13 +3100,13 @@ func_80123734:
 /* 0B9E84 80123784 24845800 */  addiu $a0, $a0, 0x5800
 /* 0B9E88 80123788 3C06802F */  lui   $a2, 0x802f
 /* 0B9E8C 8012378C 24C6D970 */  addiu $a2, $a2, -0x2690
-/* 0B9E90 80123790 0C048DC2 */  jal   func_80123708
+/* 0B9E90 80123790 0C048DC2 */  jal   load_font_data
 /* 0B9E94 80123794 24050F60 */   addiu $a1, $zero, 0xf60
 /* 0B9E98 80123798 3C040000 */  lui   $a0, 0
 /* 0B9E9C 8012379C 24846760 */  addiu $a0, $a0, 0x6760
 /* 0B9EA0 801237A0 3C06802F */  lui   $a2, 0x802f
 /* 0B9EA4 801237A4 24C639D0 */  addiu $a2, $a2, 0x39d0
-/* 0B9EA8 801237A8 0C048DC2 */  jal   func_80123708
+/* 0B9EA8 801237A8 0C048DC2 */  jal   load_font_data
 /* 0B9EAC 801237AC 24050B88 */   addiu $a1, $zero, 0xb88
 /* 0B9EB0 801237B0 3C040000 */  lui   $a0, 0
 /* 0B9EB4 801237B4 248472E8 */  addiu $a0, $a0, 0x72e8
@@ -3113,14 +3114,14 @@ func_80123734:
 func_801237BC:
 /* 0B9EBC 801237BC 3C06802F */  lui   $a2, 0x802f
 /* 0B9EC0 801237C0 24C64560 */  addiu $a2, $a2, 0x4560
-/* 0B9EC4 801237C4 0C048DC2 */  jal   func_80123708
+/* 0B9EC4 801237C4 0C048DC2 */  jal   load_font_data
 /* 0B9EC8 801237C8 00000000 */   nop   
 .L801237CC:
 /* 0B9ECC 801237CC 8FBF0010 */  lw    $ra, 0x10($sp)
 /* 0B9ED0 801237D0 03E00008 */  jr    $ra
 /* 0B9ED4 801237D4 27BD0018 */   addiu $sp, $sp, 0x18
 
-func_801237D8:
+update_messages:
 /* 0B9ED8 801237D8 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0B9EDC 801237DC 3C038015 */  lui   $v1, 0x8015
 /* 0B9EE0 801237E0 246312E4 */  addiu $v1, $v1, 0x12e4
@@ -3143,7 +3144,7 @@ func_801237D8:
 /* 0B9F1C 8012381C 30420002 */  andi  $v0, $v0, 2
 /* 0B9F20 80123820 50400004 */  beql  $v0, $zero, .L80123834
 /* 0B9F24 80123824 26310001 */   addiu $s1, $s1, 1
-/* 0B9F28 80123828 0C048E26 */  jal   func_80123898
+/* 0B9F28 80123828 0C048E26 */  jal   _update_message
 /* 0B9F2C 8012382C 0200202D */   daddu $a0, $s0, $zero
 /* 0B9F30 80123830 26310001 */  addiu $s1, $s1, 1
 .L80123834:
@@ -3175,7 +3176,7 @@ func_801237D8:
 /* 0B9F90 80123890 03E00008 */  jr    $ra
 /* 0B9F94 80123894 27BD0020 */   addiu $sp, $sp, 0x20
 
-func_80123898:
+_update_message:
 /* 0B9F98 80123898 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0B9F9C 8012389C AFB00010 */  sw    $s0, 0x10($sp)
 /* 0B9FA0 801238A0 0080802D */  daddu $s0, $a0, $zero
@@ -3346,7 +3347,7 @@ func_80123AE0:
 .L80123AE0:
 /* 0BA1E0 80123AE0 0000282D */  daddu $a1, $zero, $zero
 /* 0BA1E4 80123AE4 00A0302D */  daddu $a2, $a1, $zero
-/* 0BA1E8 80123AE8 0C0526AE */  jal   func_80149AB8
+/* 0BA1E8 80123AE8 0C0526AE */  jal   _play_sound
 /* 0BA1EC 80123AEC 00A0382D */   daddu $a3, $a1, $zero
 /* 0BA1F0 80123AF0 08048F72 */  j     func_80123DC8
 /* 0BA1F4 80123AF4 00000000 */   nop   
@@ -3422,7 +3423,7 @@ func_80123BC8:
 /* 0BA2E8 80123BE8 04420001 */  bltzl $v0, .L80123BF0
 /* 0BA2EC 80123BEC 00021023 */   negu  $v0, $v0
 .L80123BF0:
-/* 0BA2F0 80123BF0 0C0526AE */  jal   func_80149AB8
+/* 0BA2F0 80123BF0 0C0526AE */  jal   _play_sound
 /* 0BA2F4 80123BF4 A60204C8 */   sh    $v0, 0x4c8($s0)
 /* 0BA2F8 80123BF8 08048F72 */  j     func_80123DC8
 /* 0BA2FC 80123BFC 00000000 */   nop   
@@ -3517,7 +3518,7 @@ func_80123D2C:
 /* 0BA438 80123D38 24020001 */  addiu $v0, $zero, 1
 /* 0BA43C 80123D3C A20204ED */  sb    $v0, 0x4ed($s0)
 func_80123D40:
-/* 0BA440 80123D40 0C0526AE */  jal   func_80149AB8
+/* 0BA440 80123D40 0C0526AE */  jal   _play_sound
 /* 0BA444 80123D44 00000000 */   nop   
 .L80123D48:
 /* 0BA448 80123D48 920304F8 */  lbu   $v1, 0x4f8($s0)
@@ -3841,25 +3842,25 @@ func_80124174:
 /* 0BA888 80124188 A20004F8 */  sb    $zero, 0x4f8($s0)
 /* 0BA88C 8012418C 10800003 */  beqz  $a0, .L8012419C
 /* 0BA890 80124190 AE0004FC */   sw    $zero, 0x4fc($s0)
-/* 0BA894 80124194 0C00AB1E */  jal   func_8002AC78
+/* 0BA894 80124194 0C00AB1E */  jal   general_heap_free
 /* 0BA898 80124198 00000000 */   nop   
 .L8012419C:
 /* 0BA89C 8012419C 8E040548 */  lw    $a0, 0x548($s0)
 /* 0BA8A0 801241A0 10800003 */  beqz  $a0, .L801241B0
 /* 0BA8A4 801241A4 00000000 */   nop   
-/* 0BA8A8 801241A8 0C00AB1E */  jal   func_8002AC78
+/* 0BA8A8 801241A8 0C00AB1E */  jal   general_heap_free
 /* 0BA8AC 801241AC 00000000 */   nop   
 .L801241B0:
 /* 0BA8B0 801241B0 8E04054C */  lw    $a0, 0x54c($s0)
 /* 0BA8B4 801241B4 10800003 */  beqz  $a0, .L801241C4
 /* 0BA8B8 801241B8 00000000 */   nop   
-/* 0BA8BC 801241BC 0C00AB1E */  jal   func_8002AC78
+/* 0BA8BC 801241BC 0C00AB1E */  jal   general_heap_free
 /* 0BA8C0 801241C0 00000000 */   nop   
 .L801241C4:
 /* 0BA8C4 801241C4 8E040550 */  lw    $a0, 0x550($s0)
 /* 0BA8C8 801241C8 10800003 */  beqz  $a0, .L801241D8
 /* 0BA8CC 801241CC 00000000 */   nop   
-/* 0BA8D0 801241D0 0C00AB1E */  jal   func_8002AC78
+/* 0BA8D0 801241D0 0C00AB1E */  jal   general_heap_free
 /* 0BA8D4 801241D4 00000000 */   nop   
 .L801241D8:
 /* 0BA8D8 801241D8 8E030504 */  lw    $v1, 0x504($s0)
@@ -3875,7 +3876,7 @@ func_80124174:
 /* 0BA8FC 801241FC 03E00008 */  jr    $ra
 /* 0BA900 80124200 27BD0020 */   addiu $sp, $sp, 0x20
 
-func_80124204:
+render_messages:
 /* 0BA904 80124204 27BDFFD0 */  addiu $sp, $sp, -0x30
 /* 0BA908 80124208 AFB10024 */  sw    $s1, 0x24($sp)
 /* 0BA90C 8012420C 0000882D */  daddu $s1, $zero, $zero
@@ -4074,7 +4075,7 @@ func_80124434:
 /* 0BABD8 801244D8 9602051C */  lhu   $v0, 0x51c($s0)
 /* 0BABDC 801244DC 00031840 */  sll   $v1, $v1, 1
 /* 0BABE0 801244E0 2442FF9C */  addiu $v0, $v0, -0x64
-/* 0BABE4 801244E4 0C00A67F */  jal   func_800299FC
+/* 0BABE4 801244E4 0C00A67F */  jal   rand_int
 /* 0BABE8 801244E8 00629021 */   addu  $s2, $v1, $v0
 /* 0BABEC 801244EC 2442004E */  addiu $v0, $v0, 0x4e
 /* 0BABF0 801244F0 44820000 */  mtc1  $v0, $f0
@@ -4104,7 +4105,7 @@ func_80124434:
 /* 0BAC44 80124544 8E040524 */  lw    $a0, 0x524($s0)
 func_80124548:
 /* 0BAC48 80124548 9206051A */  lbu   $a2, 0x51a($s0)
-/* 0BAC4C 8012454C 0C0526AE */  jal   func_80149AB8
+/* 0BAC4C 8012454C 0C0526AE */  jal   _play_sound
 /* 0BAC50 80124550 00073C03 */   sra   $a3, $a3, 0x10
 .L80124554:
 /* 0BAC54 80124554 8FBF001C */  lw    $ra, 0x1c($sp)
@@ -4202,7 +4203,7 @@ func_80124650:
 /* 0BADA8 801246A8 240400CB */   addiu $a0, $zero, 0xcb
 /* 0BADAC 801246AC 0000282D */  daddu $a1, $zero, $zero
 /* 0BADB0 801246B0 00A0302D */  daddu $a2, $a1, $zero
-/* 0BADB4 801246B4 0C0526AE */  jal   func_80149AB8
+/* 0BADB4 801246B4 0C0526AE */  jal   _play_sound
 /* 0BADB8 801246B8 00A0382D */   daddu $a3, $a1, $zero
 /* 0BADBC 801246BC 08049580 */  j     func_80125600
 /* 0BADC0 801246C0 00000000 */   nop   
@@ -4365,7 +4366,7 @@ func_80124650:
 /* 0BB004 80124904 2404021C */  addiu $a0, $zero, 0x21c
 /* 0BB008 80124908 0000282D */  daddu $a1, $zero, $zero
 /* 0BB00C 8012490C 00A0302D */  daddu $a2, $a1, $zero
-/* 0BB010 80124910 0C0526AE */  jal   func_80149AB8
+/* 0BB010 80124910 0C0526AE */  jal   _play_sound
 /* 0BB014 80124914 00A0382D */   daddu $a3, $a1, $zero
 /* 0BB018 80124918 080492BC */  j     func_80124AF0
 /* 0BB01C 8012491C 00000000 */   nop   
@@ -4384,7 +4385,7 @@ func_80124650:
 /* 0BB04C 8012494C A6820514 */  sh    $v0, 0x514($s4)
 /* 0BB050 80124950 92620000 */  lbu   $v0, ($s3)
 /* 0BB054 80124954 00A0382D */  daddu $a3, $a1, $zero
-/* 0BB058 80124958 0C0526AE */  jal   func_80149AB8
+/* 0BB058 80124958 0C0526AE */  jal   _play_sound
 /* 0BB05C 8012495C A6820516 */   sh    $v0, 0x516($s4)
 /* 0BB060 80124960 96820500 */  lhu   $v0, 0x500($s4)
 /* 0BB064 80124964 8E8304FC */  lw    $v1, 0x4fc($s4)
@@ -4419,7 +4420,7 @@ func_80124650:
 /* 0BB0D0 801249D0 34420800 */  ori   $v0, $v0, 0x800
 /* 0BB0D4 801249D4 34630001 */  ori   $v1, $v1, 1
 /* 0BB0D8 801249D8 AE8204FC */  sw    $v0, 0x4fc($s4)
-/* 0BB0DC 801249DC 0C00AB39 */  jal   func_8002ACE4
+/* 0BB0DC 801249DC 0C00AB39 */  jal   heap_malloc
 /* 0BB0E0 801249E0 A6830500 */   sh    $v1, 0x500($s4)
 /* 0BB0E4 801249E4 3C030001 */  lui   $v1, 1
 /* 0BB0E8 801249E8 2463B290 */  addiu $v1, $v1, -0x4d70
@@ -4428,9 +4429,9 @@ func_80124650:
 /* 0BB0F4 801249F4 01032021 */  addu  $a0, $t0, $v1
 /* 0BB0F8 801249F8 24851EC3 */  addiu $a1, $a0, 0x1ec3
 /* 0BB0FC 801249FC 0040302D */  daddu $a2, $v0, $zero
-/* 0BB100 80124A00 0C00A5CF */  jal   func_8002973C
+/* 0BB100 80124A00 0C00A5CF */  jal   dma_copy
 /* 0BB104 80124A04 AE860544 */   sw    $a2, 0x544($s4)
-/* 0BB108 80124A08 0C00AB39 */  jal   func_8002ACE4
+/* 0BB108 80124A08 0C00AB39 */  jal   heap_malloc
 /* 0BB10C 80124A0C 24040020 */   addiu $a0, $zero, 0x20
 /* 0BB110 80124A10 3C030001 */  lui   $v1, 1
 /* 0BB114 80124A14 2463D158 */  addiu $v1, $v1, -0x2ea8
@@ -4439,9 +4440,9 @@ func_80124650:
 /* 0BB120 80124A20 01032021 */  addu  $a0, $t0, $v1
 /* 0BB124 80124A24 24850020 */  addiu $a1, $a0, 0x20
 /* 0BB128 80124A28 0040302D */  daddu $a2, $v0, $zero
-/* 0BB12C 80124A2C 0C00A5CF */  jal   func_8002973C
+/* 0BB12C 80124A2C 0C00A5CF */  jal   dma_copy
 /* 0BB130 80124A30 AE860548 */   sw    $a2, 0x548($s4)
-/* 0BB134 80124A34 0C00AB39 */  jal   func_8002ACE4
+/* 0BB134 80124A34 0C00AB39 */  jal   heap_malloc
 /* 0BB138 80124A38 240419FA */   addiu $a0, $zero, 0x19fa
 /* 0BB13C 80124A3C 321000FF */  andi  $s0, $s0, 0xff
 /* 0BB140 80124A40 00108080 */  sll   $s0, $s0, 2
@@ -4453,9 +4454,9 @@ func_80124650:
 /* 0BB158 80124A58 3C080011 */  lui   $t0, 0x11
 /* 0BB15C 80124A5C 2508F1B0 */  addiu $t0, $t0, -0xe50
 /* 0BB160 80124A60 00682021 */  addu  $a0, $v1, $t0
-/* 0BB164 80124A64 0C00A5CF */  jal   func_8002973C
+/* 0BB164 80124A64 0C00A5CF */  jal   dma_copy
 /* 0BB168 80124A68 248519FA */   addiu $a1, $a0, 0x19fa
-/* 0BB16C 80124A6C 0C00AB39 */  jal   func_8002ACE4
+/* 0BB16C 80124A6C 0C00AB39 */  jal   heap_malloc
 /* 0BB170 80124A70 24040200 */   addiu $a0, $zero, 0x200
 /* 0BB174 80124A74 0040302D */  daddu $a2, $v0, $zero
 /* 0BB178 80124A78 AE820550 */  sw    $v0, 0x550($s4)
@@ -4465,7 +4466,7 @@ func_80124650:
 /* 0BB188 80124A88 3C080011 */  lui   $t0, 0x11
 /* 0BB18C 80124A8C 2508F1B0 */  addiu $t0, $t0, -0xe50
 /* 0BB190 80124A90 00682021 */  addu  $a0, $v1, $t0
-/* 0BB194 80124A94 0C00A5CF */  jal   func_8002973C
+/* 0BB194 80124A94 0C00A5CF */  jal   dma_copy
 /* 0BB198 80124A98 24850200 */   addiu $a1, $a0, 0x200
 /* 0BB19C 80124A9C 080492BC */  j     func_80124AF0
 /* 0BB1A0 80124AA0 00000000 */   nop   
@@ -4771,7 +4772,7 @@ func_80124D6C:
 /* 0BB5D0 80124ED0 8C42E3D8 */  lw    $v0, -0x1c28($v0)
 /* 0BB5D4 80124ED4 26250200 */  addiu $a1, $s1, 0x200
 /* 0BB5D8 80124ED8 00512021 */  addu  $a0, $v0, $s1
-/* 0BB5DC 80124EDC 0C00A5CF */  jal   func_8002973C
+/* 0BB5DC 80124EDC 0C00A5CF */  jal   dma_copy
 /* 0BB5E0 80124EE0 00452821 */   addu  $a1, $v0, $a1
 /* 0BB5E4 80124EE4 3C058009 */  lui   $a1, 0x8009
 /* 0BB5E8 80124EE8 00B02821 */  addu  $a1, $a1, $s0
@@ -4780,7 +4781,7 @@ func_80124D6C:
 /* 0BB5F4 80124EF4 24C6C7E0 */  addiu $a2, $a2, -0x3820
 /* 0BB5F8 80124EF8 00B12021 */  addu  $a0, $a1, $s1
 /* 0BB5FC 80124EFC 26310020 */  addiu $s1, $s1, 0x20
-/* 0BB600 80124F00 0C00A5CF */  jal   func_8002973C
+/* 0BB600 80124F00 0C00A5CF */  jal   dma_copy
 /* 0BB604 80124F04 00B12821 */   addu  $a1, $a1, $s1
 /* 0BB608 80124F08 9282045E */  lbu   $v0, 0x45e($s4)
 /* 0BB60C 80124F0C 26B5FFFF */  addiu $s5, $s5, -1
@@ -4914,7 +4915,7 @@ func_80125078:
 /* 0BB7D4 801250D4 24040009 */  addiu $a0, $zero, 9
 /* 0BB7D8 801250D8 0000282D */  daddu $a1, $zero, $zero
 /* 0BB7DC 801250DC 00A0302D */  daddu $a2, $a1, $zero
-/* 0BB7E0 801250E0 0C0526AE */  jal   func_80149AB8
+/* 0BB7E0 801250E0 0C0526AE */  jal   _play_sound
 /* 0BB7E4 801250E4 00A0382D */   daddu $a3, $a1, $zero
 /* 0BB7E8 801250E8 92640000 */  lbu   $a0, ($s3)
 /* 0BB7EC 801250EC 26730001 */  addiu $s3, $s3, 1
@@ -5346,7 +5347,7 @@ func_80125600:
 /* 0BBD9C 8012569C 03E00008 */  jr    $ra
 /* 0BBDA0 801256A0 27BD0048 */   addiu $sp, $sp, 0x48
 
-func_801256A4:
+initialize_printer:
 /* 0BBDA4 801256A4 0000182D */  daddu $v1, $zero, $zero
 /* 0BBDA8 801256A8 2406FFFF */  addiu $a2, $zero, -1
 /* 0BBDAC 801256AC 0080282D */  daddu $a1, $a0, $zero
@@ -5437,7 +5438,7 @@ func_801256A4:
 /* 0BBEFC 801257FC 03E00008 */  jr    $ra
 /* 0BBF00 80125800 E4800540 */   swc1  $f0, 0x540($a0)
 
-func_80125804:
+dma_load_string:
 /* 0BBF04 80125804 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 0BBF08 80125808 AFB00018 */  sw    $s0, 0x18($sp)
 /* 0BBF0C 8012580C 0080802D */  daddu $s0, $a0, $zero
@@ -5450,7 +5451,7 @@ func_80125804:
 /* 0BBF28 80125828 00512021 */  addu  $a0, $v0, $s1
 /* 0BBF2C 8012582C 24850004 */  addiu $a1, $a0, 4
 /* 0BBF30 80125830 AFBF0024 */  sw    $ra, 0x24($sp)
-/* 0BBF34 80125834 0C00A5CF */  jal   func_8002973C
+/* 0BBF34 80125834 0C00A5CF */  jal   dma_copy
 /* 0BBF38 80125838 27A60010 */   addiu $a2, $sp, 0x10
 /* 0BBF3C 8012583C 27A60010 */  addiu $a2, $sp, 0x10
 /* 0BBF40 80125840 3210FFFF */  andi  $s0, $s0, 0xffff
@@ -5458,13 +5459,13 @@ func_80125804:
 /* 0BBF48 80125848 8FA20010 */  lw    $v0, 0x10($sp)
 /* 0BBF4C 8012584C 02118021 */  addu  $s0, $s0, $s1
 /* 0BBF50 80125850 00502021 */  addu  $a0, $v0, $s0
-/* 0BBF54 80125854 0C00A5CF */  jal   func_8002973C
+/* 0BBF54 80125854 0C00A5CF */  jal   dma_copy
 /* 0BBF58 80125858 24850008 */   addiu $a1, $a0, 8
 /* 0BBF5C 8012585C 0240302D */  daddu $a2, $s2, $zero
 /* 0BBF60 80125860 8FA40010 */  lw    $a0, 0x10($sp)
 /* 0BBF64 80125864 8FA50014 */  lw    $a1, 0x14($sp)
 /* 0BBF68 80125868 00912021 */  addu  $a0, $a0, $s1
-/* 0BBF6C 8012586C 0C00A5CF */  jal   func_8002973C
+/* 0BBF6C 8012586C 0C00A5CF */  jal   dma_copy
 /* 0BBF70 80125870 00B12821 */   addu  $a1, $a1, $s1
 /* 0BBF74 80125874 8FBF0024 */  lw    $ra, 0x24($sp)
 /* 0BBF78 80125878 8FB20020 */  lw    $s2, 0x20($sp)
@@ -5473,7 +5474,7 @@ func_80125804:
 /* 0BBF84 80125884 03E00008 */  jr    $ra
 /* 0BBF88 80125888 27BD0028 */   addiu $sp, $sp, 0x28
 
-func_8012588C:
+load_message_to_buffer:
 /* 0BBF8C 8012588C 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0BBF90 80125890 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0BBF94 80125894 3C118015 */  lui   $s1, 0x8015
@@ -5484,7 +5485,7 @@ func_8012588C:
 /* 0BBFA8 801258A8 3C108015 */  lui   $s0, 0x8015
 /* 0BBFAC 801258AC 26104430 */  addiu $s0, $s0, 0x4430
 /* 0BBFB0 801258B0 00052A80 */  sll   $a1, $a1, 0xa
-/* 0BBFB4 801258B4 0C049601 */  jal   func_80125804
+/* 0BBFB4 801258B4 0C049601 */  jal   dma_load_string
 /* 0BBFB8 801258B8 00B02821 */   addu  $a1, $a1, $s0
 /* 0BBFBC 801258BC 96220000 */  lhu   $v0, ($s1)
 /* 0BBFC0 801258C0 86230000 */  lh    $v1, ($s1)
@@ -5505,16 +5506,16 @@ func_8012588C:
 /* 0BBFF8 801258F8 03E00008 */  jr    $ra
 /* 0BBFFC 801258FC 27BD0020 */   addiu $sp, $sp, 0x20
 
-func_80125900:
+load_string:
 /* 0BC000 80125900 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0BC004 80125904 AFBF0010 */  sw    $ra, 0x10($sp)
-/* 0BC008 80125908 0C049647 */  jal   func_8012591C
+/* 0BC008 80125908 0C049647 */  jal   _load_string
 /* 0BC00C 8012590C 0000302D */   daddu $a2, $zero, $zero
 /* 0BC010 80125910 8FBF0010 */  lw    $ra, 0x10($sp)
 /* 0BC014 80125914 03E00008 */  jr    $ra
 /* 0BC018 80125918 27BD0018 */   addiu $sp, $sp, 0x18
 
-func_8012591C:
+_load_string:
 /* 0BC01C 8012591C 27BDFFA0 */  addiu $sp, $sp, -0x60
 /* 0BC020 80125920 AFB70054 */  sw    $s7, 0x54($sp)
 /* 0BC024 80125924 0080B82D */  daddu $s7, $a0, $zero
@@ -5532,7 +5533,7 @@ func_8012591C:
 /* 0BC054 80125954 AFA60068 */   sw    $a2, 0x68($sp)
 /* 0BC058 80125958 06E00004 */  bltz  $s7, .L8012596C
 /* 0BC05C 8012595C 02E0982D */   daddu $s3, $s7, $zero
-/* 0BC060 80125960 0C049623 */  jal   func_8012588C
+/* 0BC060 80125960 0C049623 */  jal   load_message_to_buffer
 /* 0BC064 80125964 02E0202D */   daddu $a0, $s7, $zero
 /* 0BC068 80125968 0040982D */  daddu $s3, $v0, $zero
 .L8012596C:
@@ -5551,7 +5552,7 @@ func_8012591C:
 /* 0BC098 80125998 24630001 */   addiu $v1, $v1, 1
 /* 0BC09C 8012599C 0200202D */  daddu $a0, $s0, $zero
 /* 0BC0A0 801259A0 8FA60068 */  lw    $a2, 0x68($sp)
-/* 0BC0A4 801259A4 0C0495A9 */  jal   func_801256A4
+/* 0BC0A4 801259A4 0C0495A9 */  jal   initialize_printer
 /* 0BC0A8 801259A8 24050001 */   addiu $a1, $zero, 1
 /* 0BC0AC 801259AC 02E0202D */  daddu $a0, $s7, $zero
 /* 0BC0B0 801259B0 0220282D */  daddu $a1, $s1, $zero
@@ -5567,7 +5568,7 @@ func_8012591C:
 /* 0BC0D8 801259D8 AFB50010 */  sw    $s5, 0x10($sp)
 /* 0BC0DC 801259DC AFB60014 */  sw    $s6, 0x14($sp)
 /* 0BC0E0 801259E0 AFA00018 */  sw    $zero, 0x18($sp)
-/* 0BC0E4 801259E4 0C0497DA */  jal   func_80125F68
+/* 0BC0E4 801259E4 0C0497DA */  jal   get_string_properties
 /* 0BC0E8 801259E8 AFA0001C */   sw    $zero, 0x1c($sp)
 /* 0BC0EC 801259EC 96220002 */  lhu   $v0, 2($s1)
 /* 0BC0F0 801259F0 A6020536 */  sh    $v0, 0x536($s0)
@@ -5606,14 +5607,14 @@ func_80125A38:
 /* 0BC160 80125A60 03E00008 */  jr    $ra
 /* 0BC164 80125A64 27BD0060 */   addiu $sp, $sp, 0x60
 
-func_80125A68:
+load_message_to_printer:
 /* 0BC168 80125A68 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0BC16C 80125A6C 0080102D */  daddu $v0, $a0, $zero
 /* 0BC170 80125A70 AFB00010 */  sw    $s0, 0x10($sp)
 /* 0BC174 80125A74 00A0802D */  daddu $s0, $a1, $zero
 /* 0BC178 80125A78 04400003 */  bltz  $v0, .L80125A88
 /* 0BC17C 80125A7C AFBF0014 */   sw    $ra, 0x14($sp)
-/* 0BC180 80125A80 0C049623 */  jal   func_8012588C
+/* 0BC180 80125A80 0C049623 */  jal   load_message_to_buffer
 /* 0BC184 80125A84 00000000 */   nop   
 .L80125A88:
 /* 0BC188 80125A88 0040202D */  daddu $a0, $v0, $zero
@@ -5629,7 +5630,7 @@ func_80125A68:
 /* 0BC1B0 80125AB0 03E00008 */  jr    $ra
 /* 0BC1B4 80125AB4 27BD0018 */   addiu $sp, $sp, 0x18
 
-func_80125AB8:
+clamp_printer_coords:
 /* 0BC1B8 80125AB8 A485050A */  sh    $a1, 0x50a($a0)
 /* 0BC1BC 80125ABC 8482050A */  lh    $v0, 0x50a($a0)
 /* 0BC1C0 80125AC0 04410002 */  bgez  $v0, .L80125ACC
@@ -5655,7 +5656,7 @@ func_80125AB8:
 /* 0BC200 80125B00 03E00008 */  jr    $ra
 /* 0BC204 80125B04 00000000 */   nop   
 
-func_80125B08:
+cancel_message:
 /* 0BC208 80125B08 8C8304FC */  lw    $v1, 0x4fc($a0)
 /* 0BC20C 80125B0C 30620002 */  andi  $v0, $v1, 2
 /* 0BC210 80125B10 10400004 */  beqz  $v0, .L80125B24
@@ -5668,13 +5669,13 @@ func_80125B08:
 /* 0BC224 80125B24 03E00008 */  jr    $ra
 /* 0BC228 80125B28 0000102D */   daddu $v0, $zero, $zero
 
-func_80125B2C:
+set_message_images:
 /* 0BC22C 80125B2C 3C018015 */  lui   $at, 0x8015
 /* 0BC230 80125B30 AC2412F4 */  sw    $a0, 0x12f4($at)
 /* 0BC234 80125B34 03E00008 */  jr    $ra
 /* 0BC238 80125B38 00000000 */   nop   
 
-func_80125B3C:
+set_message_string:
 /* 0BC23C 80125B3C 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0BC240 80125B40 AFB00010 */  sw    $s0, 0x10($sp)
 /* 0BC244 80125B44 0080802D */  daddu $s0, $a0, $zero
@@ -5684,11 +5685,11 @@ func_80125B3C:
 /* 0BC254 80125B54 0000882D */  daddu $s1, $zero, $zero
 /* 0BC258 80125B58 06000008 */  bltz  $s0, .L80125B7C
 /* 0BC25C 80125B5C AFBF001C */   sw    $ra, 0x1c($sp)
-/* 0BC260 80125B60 0C00AB0A */  jal   func_8002AC28
+/* 0BC260 80125B60 0C00AB0A */  jal   general_heap_malloc
 /* 0BC264 80125B64 24040400 */   addiu $a0, $zero, 0x400
 /* 0BC268 80125B68 0040882D */  daddu $s1, $v0, $zero
 /* 0BC26C 80125B6C 0200202D */  daddu $a0, $s0, $zero
-/* 0BC270 80125B70 0C049601 */  jal   func_80125804
+/* 0BC270 80125B70 0C049601 */  jal   dma_load_string
 /* 0BC274 80125B74 0220282D */   daddu $a1, $s1, $zero
 /* 0BC278 80125B78 0220802D */  daddu $s0, $s1, $zero
 .L80125B7C:
@@ -5713,7 +5714,7 @@ func_80125B3C:
 .L80125BC0:
 /* 0BC2C0 80125BC0 12200003 */  beqz  $s1, .L80125BD0
 /* 0BC2C4 80125BC4 00000000 */   nop   
-/* 0BC2C8 80125BC8 0C00AB1E */  jal   func_8002AC78
+/* 0BC2C8 80125BC8 0C00AB1E */  jal   general_heap_free
 /* 0BC2CC 80125BCC 0220202D */   daddu $a0, $s1, $zero
 .L80125BD0:
 /* 0BC2D0 80125BD0 8FBF001C */  lw    $ra, 0x1c($sp)
@@ -5723,14 +5724,13 @@ func_80125B3C:
 /* 0BC2E0 80125BE0 03E00008 */  jr    $ra
 /* 0BC2E4 80125BE4 27BD0020 */   addiu $sp, $sp, 0x20
 
-func_80125BE8:
+set_message_value:
 /* 0BC2E8 80125BE8 27BDFFC8 */  addiu $sp, $sp, -0x38
 /* 0BC2EC 80125BEC AFB00030 */  sw    $s0, 0x30($sp)
 /* 0BC2F0 80125BF0 00A0802D */  daddu $s0, $a1, $zero
 /* 0BC2F4 80125BF4 27A50010 */  addiu $a1, $sp, 0x10
 /* 0BC2F8 80125BF8 AFBF0034 */  sw    $ra, 0x34($sp)
-/* 0BC2FC 80125BFC 0C00A531 */  jal   func_800294C4
-EntryPoint:
+/* 0BC2FC 80125BFC 0C00A531 */  jal   int_to_string
 /* 0BC300 80125C00 2406000A */   addiu $a2, $zero, 0xa
 /* 0BC304 80125C04 0000282D */  daddu $a1, $zero, $zero
 /* 0BC308 80125C08 27A70010 */  addiu $a3, $sp, 0x10
@@ -5762,7 +5762,7 @@ EntryPoint:
 /* 0BC368 80125C68 03E00008 */  jr    $ra
 /* 0BC36C 80125C6C 27BD0038 */   addiu $sp, $sp, 0x38
 
-func_80125C70:
+close_message:
 /* 0BC370 80125C70 8C8204FC */  lw    $v0, 0x4fc($a0)
 /* 0BC374 80125C74 2403FFBF */  addiu $v1, $zero, -0x41
 /* 0BC378 80125C78 00431024 */  and   $v0, $v0, $v1
@@ -5880,7 +5880,7 @@ func_80125D6C:
 /* 0BC4EC 80125DEC 03E00008 */  jr    $ra
 /* 0BC4F0 80125DF0 0000102D */   daddu $v0, $zero, $zero
 
-func_80125DF4:
+get_char_width:
 /* 0BC4F4 80125DF4 288200F0 */  slti  $v0, $a0, 0xf0
 /* 0BC4F8 80125DF8 44871000 */  mtc1  $a3, $f2
 /* 0BC4FC 80125DFC 8FA70010 */  lw    $a3, 0x10($sp)
@@ -5992,7 +5992,7 @@ func_80125EE0:
 /* 0BC660 80125F60 03E00008 */  jr    $ra
 /* 0BC664 80125F64 0000102D */   daddu $v0, $zero, $zero
 
-func_80125F68:
+get_string_properties:
 /* 0BC668 80125F68 27BDFEB0 */  addiu $sp, $sp, -0x150
 /* 0BC66C 80125F6C F7B40148 */  sdc1  $f20, 0x148($sp)
 /* 0BC670 80125F70 3C013F80 */  lui   $at, 0x3f80
@@ -6024,11 +6024,11 @@ func_80125F68:
 /* 0BC6D8 80125FD8 A7A00116 */   sh    $zero, 0x116($sp)
 /* 0BC6DC 80125FDC 0600000A */  bltz  $s0, .L80126008
 /* 0BC6E0 80125FE0 0200882D */   daddu $s1, $s0, $zero
-/* 0BC6E4 80125FE4 0C00AB0A */  jal   func_8002AC28
+/* 0BC6E4 80125FE4 0C00AB0A */  jal   general_heap_malloc
 /* 0BC6E8 80125FE8 24040400 */   addiu $a0, $zero, 0x400
 /* 0BC6EC 80125FEC 0200202D */  daddu $a0, $s0, $zero
 /* 0BC6F0 80125FF0 AFA200F0 */  sw    $v0, 0xf0($sp)
-/* 0BC6F4 80125FF4 0C049601 */  jal   func_80125804
+/* 0BC6F4 80125FF4 0C049601 */  jal   dma_load_string
 /* 0BC6F8 80125FF8 0040282D */   daddu $a1, $v0, $zero
 /* 0BC6FC 80125FFC 8FB100F0 */  lw    $s1, 0xf0($sp)
 /* 0BC700 80126000 08049803 */  j     func_8012600C
@@ -6214,7 +6214,7 @@ func_80126260:
 /* 0BC978 80126278 3C098015 */  lui   $t1, 0x8015
 /* 0BC97C 8012627C 25295C38 */  addiu $t1, $t1, 0x5c38
 /* 0BC980 80126280 00042140 */  sll   $a0, $a0, 5
-/* 0BC984 80126284 0C04991D */  jal   func_80126474
+/* 0BC984 80126284 0C04991D */  jal   get_string_width
 /* 0BC988 80126288 00892021 */   addu  $a0, $a0, $t1
 /* 0BC98C 8012628C 080498BA */  j     func_801262E8
 /* 0BC990 80126290 02629821 */   addu  $s3, $s3, $v0
@@ -6252,7 +6252,7 @@ func_801262EC:
 /* 0BC9F4 801262F4 8FA900F0 */  lw    $t1, 0xf0($sp)
 /* 0BC9F8 801262F8 11200004 */  beqz  $t1, .L8012630C
 /* 0BC9FC 801262FC 3242FFFF */   andi  $v0, $s2, 0xffff
-/* 0BCA00 80126300 0C00AB1E */  jal   func_8002AC78
+/* 0BCA00 80126300 0C00AB1E */  jal   general_heap_free
 /* 0BCA04 80126304 0120202D */   daddu $a0, $t1, $zero
 /* 0BCA08 80126308 3242FFFF */  andi  $v0, $s2, 0xffff
 .L8012630C:
@@ -6363,7 +6363,7 @@ func_801263A4:
 /* 0BCB6C 8012646C 03E00008 */  jr    $ra
 /* 0BCB70 80126470 27BD0150 */   addiu $sp, $sp, 0x150
 
-func_80126474:
+get_string_width:
 /* 0BCB74 80126474 27BDFFD0 */  addiu $sp, $sp, -0x30
 /* 0BCB78 80126478 30A5FFFF */  andi  $a1, $a1, 0xffff
 /* 0BCB7C 8012647C AFA5001C */  sw    $a1, 0x1c($sp)
@@ -6373,7 +6373,7 @@ func_80126474:
 /* 0BCB8C 8012648C AFBF0028 */  sw    $ra, 0x28($sp)
 /* 0BCB90 80126490 AFA00010 */  sw    $zero, 0x10($sp)
 /* 0BCB94 80126494 AFA00014 */  sw    $zero, 0x14($sp)
-/* 0BCB98 80126498 0C0497DA */  jal   func_80125F68
+/* 0BCB98 80126498 0C0497DA */  jal   get_string_properties
 /* 0BCB9C 8012649C AFA00018 */   sw    $zero, 0x18($sp)
 /* 0BCBA0 801264A0 8FA20020 */  lw    $v0, 0x20($sp)
 /* 0BCBA4 801264A4 8FBF0028 */  lw    $ra, 0x28($sp)
@@ -6390,14 +6390,14 @@ func_801264B0:
 /* 0BCBC8 801264C8 AFA20010 */  sw    $v0, 0x10($sp)
 /* 0BCBCC 801264CC AFA00014 */  sw    $zero, 0x14($sp)
 /* 0BCBD0 801264D0 AFA00018 */  sw    $zero, 0x18($sp)
-/* 0BCBD4 801264D4 0C0497DA */  jal   func_80125F68
+/* 0BCBD4 801264D4 0C0497DA */  jal   get_string_properties
 /* 0BCBD8 801264D8 AFA0001C */   sw    $zero, 0x1c($sp)
 /* 0BCBDC 801264DC 8FA20020 */  lw    $v0, 0x20($sp)
 /* 0BCBE0 801264E0 8FBF0028 */  lw    $ra, 0x28($sp)
 /* 0BCBE4 801264E4 03E00008 */  jr    $ra
 /* 0BCBE8 801264E8 27BD0030 */   addiu $sp, $sp, 0x30
 
-func_801264EC:
+draw_string:
 /* 0BCBEC 801264EC 27BDFA58 */  addiu $sp, $sp, -0x5a8
 /* 0BCBF0 801264F0 8FA205BC */  lw    $v0, 0x5bc($sp)
 /* 0BCBF4 801264F4 AFB7059C */  sw    $s7, 0x59c($sp)
@@ -6433,7 +6433,7 @@ func_801264EC:
 /* 0BCC64 80126564 27B10020 */  addiu $s1, $sp, 0x20
 /* 0BCC68 80126568 0220202D */  daddu $a0, $s1, $zero
 /* 0BCC6C 8012656C 24050001 */  addiu $a1, $zero, 1
-/* 0BCC70 80126570 0C0495A9 */  jal   func_801256A4
+/* 0BCC70 80126570 0C0495A9 */  jal   initialize_printer
 /* 0BCC74 80126574 0000302D */   daddu $a2, $zero, $zero
 /* 0BCC78 80126578 06010003 */  bgez  $s0, .L80126588
 /* 0BCC7C 8012657C 00000000 */   nop   
@@ -6441,11 +6441,11 @@ func_801264EC:
 /* 0BCC84 80126584 AFB00020 */   sw    $s0, 0x20($sp)
 
 .L80126588:
-/* 0BCC88 80126588 0C00AB0A */  jal   func_8002AC28
+/* 0BCC88 80126588 0C00AB0A */  jal   general_heap_malloc
 /* 0BCC8C 8012658C 24040400 */   addiu $a0, $zero, 0x400
 /* 0BCC90 80126590 0040A02D */  daddu $s4, $v0, $zero
 /* 0BCC94 80126594 0200202D */  daddu $a0, $s0, $zero
-/* 0BCC98 80126598 0C049601 */  jal   func_80125804
+/* 0BCC98 80126598 0C049601 */  jal   dma_load_string
 /* 0BCC9C 8012659C 0280282D */   daddu $a1, $s4, $zero
 /* 0BCCA0 801265A0 0000282D */  daddu $a1, $zero, $zero
 /* 0BCCA4 801265A4 27B00578 */  addiu $s0, $sp, 0x578
@@ -6456,7 +6456,7 @@ func_801264EC:
 /* 0BCCB8 801265B8 AFA00018 */  sw    $zero, 0x18($sp)
 /* 0BCCBC 801265BC AFB3001C */  sw    $s3, 0x1c($sp)
 /* 0BCCC0 801265C0 0280202D */  daddu $a0, $s4, $zero
-/* 0BCCC4 801265C4 0C0497DA */  jal   func_80125F68
+/* 0BCCC4 801265C4 0C0497DA */  jal   get_string_properties
 /* 0BCCC8 801265C8 00A0382D */   daddu $a3, $a1, $zero
 /* 0BCCCC 801265CC 96020002 */  lhu   $v0, 2($s0)
 /* 0BCCD0 801265D0 A7A20558 */  sh    $v0, 0x558($sp)
@@ -6562,7 +6562,7 @@ func_801265D4:
 /* 0BCE4C 8012674C 00063403 */   sra   $a2, $a2, 0x10
 /* 0BCE50 80126750 12800003 */  beqz  $s4, .L80126760
 /* 0BCE54 80126754 00000000 */   nop   
-/* 0BCE58 80126758 0C00AB1E */  jal   func_8002AC78
+/* 0BCE58 80126758 0C00AB1E */  jal   general_heap_free
 /* 0BCE5C 8012675C 0280202D */   daddu $a0, $s4, $zero
 .L80126760:
 /* 0BCE60 80126760 8FBF05A4 */  lw    $ra, 0x5a4($sp)
@@ -6682,21 +6682,21 @@ func_80126790:
 /* 0BD018 80126918 4405A000 */  mfc1  $a1, $f20
 /* 0BD01C 8012691C 4406B000 */  mfc1  $a2, $f22
 /* 0BD020 80126920 2410000F */  addiu $s0, $zero, 0xf
-/* 0BD024 80126924 0C00A8ED */  jal   func_8002A3B4
+/* 0BD024 80126924 0C00A8ED */  jal   update_lerp
 /* 0BD028 80126928 AFB00010 */   sw    $s0, 0x10($sp)
 /* 0BD02C 8012692C 46000606 */  mov.s $f24, $f0
 /* 0BD030 80126930 4405A000 */  mfc1  $a1, $f20
 /* 0BD034 80126934 4406B000 */  mfc1  $a2, $f22
 /* 0BD038 80126938 8627047E */  lh    $a3, 0x47e($s1)
 /* 0BD03C 8012693C 0000202D */  daddu $a0, $zero, $zero
-/* 0BD040 80126940 0C00A8ED */  jal   func_8002A3B4
+/* 0BD040 80126940 0C00A8ED */  jal   update_lerp
 /* 0BD044 80126944 AFB00010 */   sw    $s0, 0x10($sp)
 /* 0BD048 80126948 46000586 */  mov.s $f22, $f0
 /* 0BD04C 8012694C 4405A000 */  mfc1  $a1, $f20
 /* 0BD050 80126950 3C064350 */  lui   $a2, 0x4350
 /* 0BD054 80126954 8627047E */  lh    $a3, 0x47e($s1)
 /* 0BD058 80126958 0000202D */  daddu $a0, $zero, $zero
-/* 0BD05C 8012695C 0C00A8ED */  jal   func_8002A3B4
+/* 0BD05C 8012695C 0C00A8ED */  jal   update_lerp
 /* 0BD060 80126960 AFB00010 */   sw    $s0, 0x10($sp)
 /* 0BD064 80126964 9622047E */  lhu   $v0, 0x47e($s1)
 /* 0BD068 80126968 24420001 */  addiu $v0, $v0, 1
@@ -6718,21 +6718,21 @@ func_80126790:
 /* 0BD0A4 801269A4 4405B000 */  mfc1  $a1, $f22
 /* 0BD0A8 801269A8 4406A000 */  mfc1  $a2, $f20
 /* 0BD0AC 801269AC 2410000F */  addiu $s0, $zero, 0xf
-/* 0BD0B0 801269B0 0C00A8ED */  jal   func_8002A3B4
+/* 0BD0B0 801269B0 0C00A8ED */  jal   update_lerp
 /* 0BD0B4 801269B4 AFB00010 */   sw    $s0, 0x10($sp)
 /* 0BD0B8 801269B8 46000606 */  mov.s $f24, $f0
 /* 0BD0BC 801269BC 4405B000 */  mfc1  $a1, $f22
 /* 0BD0C0 801269C0 4406A000 */  mfc1  $a2, $f20
 /* 0BD0C4 801269C4 8627047E */  lh    $a3, 0x47e($s1)
 /* 0BD0C8 801269C8 0000202D */  daddu $a0, $zero, $zero
-/* 0BD0CC 801269CC 0C00A8ED */  jal   func_8002A3B4
+/* 0BD0CC 801269CC 0C00A8ED */  jal   update_lerp
 /* 0BD0D0 801269D0 AFB00010 */   sw    $s0, 0x10($sp)
 /* 0BD0D4 801269D4 46000586 */  mov.s $f22, $f0
 /* 0BD0D8 801269D8 3C054350 */  lui   $a1, 0x4350
 /* 0BD0DC 801269DC 4406A000 */  mfc1  $a2, $f20
 /* 0BD0E0 801269E0 8627047E */  lh    $a3, 0x47e($s1)
 /* 0BD0E4 801269E4 0000202D */  daddu $a0, $zero, $zero
-/* 0BD0E8 801269E8 0C00A8ED */  jal   func_8002A3B4
+/* 0BD0E8 801269E8 0C00A8ED */  jal   update_lerp
 /* 0BD0EC 801269EC AFB00010 */   sw    $s0, 0x10($sp)
 /* 0BD0F0 801269F0 9622047E */  lhu   $v0, 0x47e($s1)
 /* 0BD0F4 801269F4 46000106 */  mov.s $f4, $f0
@@ -6826,7 +6826,7 @@ func_80126B08:
 /* 0BD220 80126B20 2C420003 */  sltiu $v0, $v0, 3
 /* 0BD224 80126B24 10400010 */  beqz  $v0, .L80126B68
 /* 0BD228 80126B28 00000000 */   nop   
-/* 0BD22C 80126B2C 0C00A4F5 */  jal   func_800293D4
+/* 0BD22C 80126B2C 0C00A4F5 */  jal   cosine
 /* 0BD230 80126B30 86240480 */   lh    $a0, 0x480($s1)
 /* 0BD234 80126B34 96230480 */  lhu   $v1, 0x480($s1)
 /* 0BD238 80126B38 3C0141F0 */  lui   $at, 0x41f0
@@ -7231,7 +7231,7 @@ func_80127130:
 /* 0BD840 80127140 00042040 */  sll   $a0, $a0, 1
 /* 0BD844 80127144 2484010E */  addiu $a0, $a0, 0x10e
 /* 0BD848 80127148 00042400 */  sll   $a0, $a0, 0x10
-/* 0BD84C 8012714C 0C00A4F5 */  jal   func_800293D4
+/* 0BD84C 8012714C 0C00A4F5 */  jal   cosine
 /* 0BD850 80127150 00042403 */   sra   $a0, $a0, 0x10
 /* 0BD854 80127154 3C013FF0 */  lui   $at, 0x3ff0
 /* 0BD858 80127158 44811800 */  mtc1  $at, $f3
@@ -7581,7 +7581,7 @@ func_801274C0:
 /* 0BDD94 80127694 03E00008 */  jr    $ra
 /* 0BDD98 80127698 AD050044 */   sw    $a1, 0x44($t0)
 
-func_8012769C:
+draw_number:
 /* 0BDD9C 8012769C 27BDFF38 */  addiu $sp, $sp, -0xc8
 /* 0BDDA0 801276A0 AFB200A8 */  sw    $s2, 0xa8($sp)
 /* 0BDDA4 801276A4 AFB500B4 */  sw    $s5, 0xb4($sp)
@@ -7608,7 +7608,7 @@ func_8012769C:
 /* 0BDDF8 801276F8 10400111 */  beqz  $v0, .L80127B40
 /* 0BDDFC 801276FC 00A0902D */   daddu $s2, $a1, $zero
 /* 0BDE00 80127700 27A50010 */  addiu $a1, $sp, 0x10
-/* 0BDE04 80127704 0C00A531 */  jal   func_800294C4
+/* 0BDE04 80127704 0C00A531 */  jal   int_to_string
 /* 0BDE08 80127708 2406000A */   addiu $a2, $zero, 0xa
 /* 0BDE0C 8012770C 0000802D */  daddu $s0, $zero, $zero
 /* 0BDE10 80127710 27A50010 */  addiu $a1, $sp, 0x10
@@ -8044,7 +8044,7 @@ func_80127CAC:
 /* 0BE440 80127D40 AFA00040 */  sw    $zero, 0x40($sp)
 /* 0BE444 80127D44 AFA20048 */  sw    $v0, 0x48($sp)
 /* 0BE448 80127D48 AFA0004C */  sw    $zero, 0x4c($sp)
-/* 0BE44C 80127D4C 0C03D4B8 */  jal   func_800F52E0
+/* 0BE44C 80127D4C 0C03D4B8 */  jal   draw_box
 /* 0BE450 80127D50 AFA30018 */   sw    $v1, 0x18($sp)
 /* 0BE454 80127D54 08049F61 */  j     func_80127D84
 /* 0BE458 80127D58 00000000 */   nop   
@@ -8497,7 +8497,7 @@ func_8012837C:
 /* 0BEABC 801283BC 3C063F80 */  lui   $a2, 0x3f80
 /* 0BEAC0 801283C0 93C70509 */  lbu   $a3, 0x509($fp)
 /* 0BEAC4 801283C4 24190007 */  addiu $t9, $zero, 7
-/* 0BEAC8 801283C8 0C00A8ED */  jal   func_8002A3B4
+/* 0BEAC8 801283C8 0C00A8ED */  jal   update_lerp
 /* 0BEACC 801283CC AFB90010 */   sw    $t9, 0x10($sp)
 /* 0BEAD0 801283D0 3C053E99 */  lui   $a1, 0x3e99
 /* 0BEAD4 801283D4 34A5999A */  ori   $a1, $a1, 0x999a
@@ -8506,7 +8506,7 @@ func_8012837C:
 /* 0BEAE0 801283E0 E7A000BC */  swc1  $f0, 0xbc($sp)
 /* 0BEAE4 801283E4 93C70509 */  lbu   $a3, 0x509($fp)
 /* 0BEAE8 801283E8 24180007 */  addiu $t8, $zero, 7
-/* 0BEAEC 801283EC 0C00A8ED */  jal   func_8002A3B4
+/* 0BEAEC 801283EC 0C00A8ED */  jal   update_lerp
 /* 0BEAF0 801283F0 AFB80010 */   sw    $t8, 0x10($sp)
 /* 0BEAF4 801283F4 46000786 */  mov.s $f30, $f0
 /* 0BEAF8 801283F8 0000202D */  daddu $a0, $zero, $zero
@@ -8514,7 +8514,7 @@ func_8012837C:
 /* 0BEB00 80128400 3C064348 */  lui   $a2, 0x4348
 /* 0BEB04 80128404 93C70509 */  lbu   $a3, 0x509($fp)
 /* 0BEB08 80128408 24190007 */  addiu $t9, $zero, 7
-/* 0BEB0C 8012840C 0C00A8ED */  jal   func_8002A3B4
+/* 0BEB0C 8012840C 0C00A8ED */  jal   update_lerp
 /* 0BEB10 80128410 AFB90010 */   sw    $t9, 0x10($sp)
 /* 0BEB14 80128414 46000706 */  mov.s $f28, $f0
 /* 0BEB18 80128418 2404000B */  addiu $a0, $zero, 0xb
@@ -8532,7 +8532,7 @@ func_8012837C:
 /* 0BEB48 80128448 93C70509 */  lbu   $a3, 0x509($fp)
 /* 0BEB4C 8012844C 44066000 */  mfc1  $a2, $f12
 /* 0BEB50 80128450 24180007 */  addiu $t8, $zero, 7
-/* 0BEB54 80128454 0C00A8ED */  jal   func_8002A3B4
+/* 0BEB54 80128454 0C00A8ED */  jal   update_lerp
 /* 0BEB58 80128458 AFB80010 */   sw    $t8, 0x10($sp)
 /* 0BEB5C 8012845C 46000506 */  mov.s $f20, $f0
 /* 0BEB60 80128460 2404000B */  addiu $a0, $zero, 0xb
@@ -8550,7 +8550,7 @@ func_8012837C:
 /* 0BEB90 80128490 93C70509 */  lbu   $a3, 0x509($fp)
 /* 0BEB94 80128494 44066000 */  mfc1  $a2, $f12
 /* 0BEB98 80128498 24180007 */  addiu $t8, $zero, 7
-/* 0BEB9C 8012849C 0C00A8ED */  jal   func_8002A3B4
+/* 0BEB9C 8012849C 0C00A8ED */  jal   update_lerp
 /* 0BEBA0 801284A0 AFB80010 */   sw    $t8, 0x10($sp)
 /* 0BEBA4 801284A4 97C20514 */  lhu   $v0, 0x514($fp)
 /* 0BEBA8 801284A8 C7AC00BC */  lwc1  $f12, 0xbc($sp)
@@ -8620,7 +8620,7 @@ func_8012859C:
 /* 0BEC9C 8012859C 306200FF */  andi  $v0, $v1, 0xff
 /* 0BECA0 801285A0 24190001 */  addiu $t9, $zero, 1
 /* 0BECA4 801285A4 AFA20020 */  sw    $v0, 0x20($sp)
-/* 0BECA8 801285A8 0C04B302 */  jal   func_8012CC08
+/* 0BECA8 801285A8 0C04B302 */  jal   _draw_message_box
 /* 0BECAC 801285AC AFB90024 */   sw    $t9, 0x24($sp)
 /* 0BECB0 801285B0 93C20509 */  lbu   $v0, 0x509($fp)
 /* 0BECB4 801285B4 24180007 */  addiu $t8, $zero, 7
@@ -8644,7 +8644,7 @@ func_8012859C:
 /* 0BECF4 801285F4 A3C20512 */  sb    $v0, 0x512($fp)
 /* 0BECF8 801285F8 304700FF */  andi  $a3, $v0, 0xff
 /* 0BECFC 801285FC 24180005 */  addiu $t8, $zero, 5
-/* 0BED00 80128600 0C00A8ED */  jal   func_8002A3B4
+/* 0BED00 80128600 0C00A8ED */  jal   update_lerp
 /* 0BED04 80128604 AFB80010 */   sw    $t8, 0x10($sp)
 /* 0BED08 80128608 3C053F80 */  lui   $a1, 0x3f80
 /* 0BED0C 8012860C 3C063F4C */  lui   $a2, 0x3f4c
@@ -8653,7 +8653,7 @@ func_8012859C:
 /* 0BED18 80128618 E7A000BC */  swc1  $f0, 0xbc($sp)
 /* 0BED1C 8012861C 93C70512 */  lbu   $a3, 0x512($fp)
 /* 0BED20 80128620 24190005 */  addiu $t9, $zero, 5
-/* 0BED24 80128624 0C00A8ED */  jal   func_8002A3B4
+/* 0BED24 80128624 0C00A8ED */  jal   update_lerp
 /* 0BED28 80128628 AFB90010 */   sw    $t9, 0x10($sp)
 /* 0BED2C 8012862C 97C20514 */  lhu   $v0, 0x514($fp)
 /* 0BED30 80128630 C7AC00BC */  lwc1  $f12, 0xbc($sp)
@@ -8707,7 +8707,7 @@ func_8012859C:
 /* 0BEDF0 801286F0 46203620 */  cvt.s.d $f24, $f6
 /* 0BEDF4 801286F4 4620B5A0 */  cvt.s.d $f22, $f22
 /* 0BEDF8 801286F8 462026A0 */  cvt.s.d $f26, $f4
-/* 0BEDFC 801286FC 0C00A8ED */  jal   func_8002A3B4
+/* 0BEDFC 801286FC 0C00A8ED */  jal   update_lerp
 /* 0BEE00 80128700 4620A520 */   cvt.s.d $f20, $f20
 /* 0BEE04 80128704 46000706 */  mov.s $f28, $f0
 /* 0BEE08 80128708 3C018015 */  lui   $at, 0x8015
@@ -8789,7 +8789,7 @@ func_80128828:
 /* 0BEF2C 8012882C 306200FF */  andi  $v0, $v1, 0xff
 /* 0BEF30 80128830 24190001 */  addiu $t9, $zero, 1
 /* 0BEF34 80128834 AFA20020 */  sw    $v0, 0x20($sp)
-/* 0BEF38 80128838 0C04B302 */  jal   func_8012CC08
+/* 0BEF38 80128838 0C04B302 */  jal   _draw_message_box
 /* 0BEF3C 8012883C AFB90024 */   sw    $t9, 0x24($sp)
 /* 0BEF40 80128840 93C20512 */  lbu   $v0, 0x512($fp)
 /* 0BEF44 80128844 2C420005 */  sltiu $v0, $v0, 5
@@ -8838,7 +8838,7 @@ func_80128828:
 /* 0BEFE8 801288E8 44066000 */  mfc1  $a2, $f12
 /* 0BEFEC 801288EC 00000000 */  nop   
 /* 0BEFF0 801288F0 00063400 */  sll   $a2, $a2, 0x10
-/* 0BEFF4 801288F4 0C04B302 */  jal   func_8012CC08
+/* 0BEFF4 801288F4 0C04B302 */  jal   _draw_message_box
 /* 0BEFF8 801288F8 00063403 */   sra   $a2, $a2, 0x10
 /* 0BEFFC 801288FC 97C2050E */  lhu   $v0, 0x50e($fp)
 /* 0BF000 80128900 2442FFEC */  addiu $v0, $v0, -0x14
@@ -9980,7 +9980,7 @@ func_8012985C:
 /* 0C0124 80129A24 AFA00040 */  sw    $zero, 0x40($sp)
 /* 0C0128 80129A28 AFA20048 */  sw    $v0, 0x48($sp)
 /* 0C012C 80129A2C AFA0004C */  sw    $zero, 0x4c($sp)
-/* 0C0130 80129A30 0C03D4B8 */  jal   func_800F52E0
+/* 0C0130 80129A30 0C03D4B8 */  jal   draw_box
 /* 0C0134 80129A34 AFA30018 */   sw    $v1, 0x18($sp)
 /* 0C0138 80129A38 0804A6B3 */  j     func_80129ACC
 /* 0C013C 80129A3C 00000000 */   nop   
@@ -11395,7 +11395,7 @@ func_8012AE38:
 /* 0C1544 8012AE44 30420001 */  andi  $v0, $v0, 1
 /* 0C1548 8012AE48 10400011 */  beqz  $v0, .L8012AE90
 /* 0C154C 8012AE4C 00000000 */   nop   
-/* 0C1550 8012AE50 0C00A67F */  jal   func_800299FC
+/* 0C1550 8012AE50 0C00A67F */  jal   rand_int
 /* 0C1554 8012AE54 24042710 */   addiu $a0, $zero, 0x2710
 /* 0C1558 8012AE58 00021FC2 */  srl   $v1, $v0, 0x1f
 /* 0C155C 8012AE5C 00431821 */  addu  $v1, $v0, $v1
@@ -11403,7 +11403,7 @@ func_8012AE38:
 /* 0C1564 8012AE64 00031840 */  sll   $v1, $v1, 1
 /* 0C1568 8012AE68 00431023 */  subu  $v0, $v0, $v1
 /* 0C156C 8012AE6C 02228821 */  addu  $s1, $s1, $v0
-/* 0C1570 8012AE70 0C00A67F */  jal   func_800299FC
+/* 0C1570 8012AE70 0C00A67F */  jal   rand_int
 /* 0C1574 8012AE74 24042710 */   addiu $a0, $zero, 0x2710
 /* 0C1578 8012AE78 00021FC2 */  srl   $v1, $v0, 0x1f
 /* 0C157C 8012AE7C 00431821 */  addu  $v1, $v0, $v1
@@ -11458,7 +11458,7 @@ func_8012AE38:
 /* 0C163C 8012AF3C 00001812 */  mflo  $v1
 /* 0C1640 8012AF40 00A38023 */  subu  $s0, $a1, $v1
 /* 0C1644 8012AF44 00102400 */  sll   $a0, $s0, 0x10
-/* 0C1648 8012AF48 0C00A4F5 */  jal   func_800293D4
+/* 0C1648 8012AF48 0C00A4F5 */  jal   cosine
 /* 0C164C 8012AF4C 00042403 */   sra   $a0, $a0, 0x10
 /* 0C1650 8012AF50 3C028015 */  lui   $v0, 0x8015
 /* 0C1654 8012AF54 8C425D74 */  lw    $v0, 0x5d74($v0)
@@ -11494,7 +11494,7 @@ func_8012AE38:
 /* 0C16CC 8012AFCC 00042400 */  sll   $a0, $a0, 0x10
 /* 0C16D0 8012AFD0 4620230D */  trunc.w.d $f12, $f4
 /* 0C16D4 8012AFD4 44116000 */  mfc1  $s1, $f12
-/* 0C16D8 8012AFD8 0C00A4F5 */  jal   func_800293D4
+/* 0C16D8 8012AFD8 0C00A4F5 */  jal   cosine
 /* 0C16DC 8012AFDC 00042403 */   sra   $a0, $a0, 0x10
 /* 0C16E0 8012AFE0 3C028015 */  lui   $v0, 0x8015
 /* 0C16E4 8012AFE4 8C425D74 */  lw    $v0, 0x5d74($v0)
@@ -11554,7 +11554,7 @@ func_8012AE38:
 /* 0C17B8 8012B0B8 0000C012 */  mflo  $t8
 /* 0C17BC 8012B0BC 03108023 */  subu  $s0, $t8, $s0
 /* 0C17C0 8012B0C0 00102400 */  sll   $a0, $s0, 0x10
-/* 0C17C4 8012B0C4 0C00A4F5 */  jal   func_800293D4
+/* 0C17C4 8012B0C4 0C00A4F5 */  jal   cosine
 /* 0C17C8 8012B0C8 00042403 */   sra   $a0, $a0, 0x10
 /* 0C17CC 8012B0CC 3C028015 */  lui   $v0, 0x8015
 /* 0C17D0 8012B0D0 8C425D74 */  lw    $v0, 0x5d74($v0)
@@ -11590,7 +11590,7 @@ func_8012AE38:
 /* 0C1848 8012B148 00042400 */  sll   $a0, $a0, 0x10
 /* 0C184C 8012B14C 4620230D */  trunc.w.d $f12, $f4
 /* 0C1850 8012B150 44116000 */  mfc1  $s1, $f12
-/* 0C1854 8012B154 0C00A4F5 */  jal   func_800293D4
+/* 0C1854 8012B154 0C00A4F5 */  jal   cosine
 /* 0C1858 8012B158 00042403 */   sra   $a0, $a0, 0x10
 /* 0C185C 8012B15C 3C028015 */  lui   $v0, 0x8015
 /* 0C1860 8012B160 8C425D74 */  lw    $v0, 0x5d74($v0)
@@ -12096,7 +12096,7 @@ func_8012B714:
 .L8012B8B4:
 /* 0C1FB4 8012B8B4 10400052 */  beqz  $v0, .L8012BA00
 /* 0C1FB8 8012B8B8 30624000 */   andi  $v0, $v1, 0x4000
-/* 0C1FBC 8012B8BC 0C00A67F */  jal   func_800299FC
+/* 0C1FBC 8012B8BC 0C00A67F */  jal   rand_int
 /* 0C1FC0 8012B8C0 24042710 */   addiu $a0, $zero, 0x2710
 /* 0C1FC4 8012B8C4 3C03288D */  lui   $v1, 0x288d
 /* 0C1FC8 8012B8C8 3463F0CB */  ori   $v1, $v1, 0xf0cb
@@ -12200,7 +12200,7 @@ func_8012B714:
 /* 0C2148 8012BA48 000210C0 */  sll   $v0, $v0, 3
 /* 0C214C 8012BA4C 00821023 */  subu  $v0, $a0, $v0
 /* 0C2150 8012BA50 00022400 */  sll   $a0, $v0, 0x10
-/* 0C2154 8012BA54 0C00A4F5 */  jal   func_800293D4
+/* 0C2154 8012BA54 0C00A4F5 */  jal   cosine
 /* 0C2158 8012BA58 00042403 */   sra   $a0, $a0, 0x10
 /* 0C215C 8012BA5C 3C013FD0 */  lui   $at, 0x3fd0
 /* 0C2160 8012BA60 44811800 */  mtc1  $at, $f3
@@ -12452,7 +12452,7 @@ func_8012BC6C:
 /* 0C24F4 8012BDF4 24180002 */  addiu $t8, $zero, 2
 /* 0C24F8 8012BDF8 1298000C */  beq   $s4, $t8, .L8012BE2C
 /* 0C24FC 8012BDFC 00158C03 */   sra   $s1, $s5, 0x10
-/* 0C2500 8012BE00 0C00A67F */  jal   func_800299FC
+/* 0C2500 8012BE00 0C00A67F */  jal   rand_int
 /* 0C2504 8012BE04 24042710 */   addiu $a0, $zero, 0x2710
 /* 0C2508 8012BE08 00530018 */  mult  $v0, $s3
 /* 0C250C 8012BE0C 2605FFFF */  addiu $a1, $s0, -1
@@ -12467,7 +12467,7 @@ func_8012BC6C:
 /* 0C252C 8012BE2C 24190001 */  addiu $t9, $zero, 1
 /* 0C2530 8012BE30 1299000D */  beq   $s4, $t9, .L8012BE68
 /* 0C2534 8012BE34 03C0202D */   daddu $a0, $fp, $zero
-/* 0C2538 8012BE38 0C00A67F */  jal   func_800299FC
+/* 0C2538 8012BE38 0C00A67F */  jal   rand_int
 /* 0C253C 8012BE3C 24042710 */   addiu $a0, $zero, 0x2710
 /* 0C2540 8012BE40 00530018 */  mult  $v0, $s3
 /* 0C2544 8012BE44 2625FFFF */  addiu $a1, $s1, -1
@@ -12542,7 +12542,7 @@ func_8012BEEC:
 /* 0C2640 8012BF40 AFA20014 */  sw    $v0, 0x14($sp)
 /* 0C2644 8012BF44 8C670010 */  lw    $a3, 0x10($v1)
 func_8012BF48:
-/* 0C2648 8012BF48 0C04977D */  jal   func_80125DF4
+/* 0C2648 8012BF48 0C04977D */  jal   get_char_width
 /* 0C264C 8012BF4C 00000000 */   nop   
 /* 0C2650 8012BF50 3C058015 */  lui   $a1, 0x8015
 /* 0C2654 8012BF54 8CA55D74 */  lw    $a1, 0x5d74($a1)
@@ -12745,7 +12745,7 @@ func_8012C190:
 /* 0C2904 8012C204 AFA20048 */  sw    $v0, 0x48($sp)
 /* 0C2908 8012C208 AFA0004C */  sw    $zero, 0x4c($sp)
 /* 0C290C 8012C20C 2463000E */  addiu $v1, $v1, 0xe
-/* 0C2910 8012C210 0C03D4B8 */  jal   func_800F52E0
+/* 0C2910 8012C210 0C03D4B8 */  jal   draw_box
 /* 0C2914 8012C214 AFA30018 */   sw    $v1, 0x18($sp)
 .L8012C218:
 /* 0C2918 8012C218 8E220010 */  lw    $v0, 0x10($s1)
@@ -13427,7 +13427,7 @@ func_8012CBDC:
 /* 0C3300 8012CC00 03E00008 */  jr    $ra
 /* 0C3304 8012CC04 AC650004 */   sw    $a1, 4($v1)
 
-func_8012CC08:
+_draw_message_box:
 /* 0C3308 8012CC08 27BDFF28 */  addiu $sp, $sp, -0xd8
 /* 0C330C 8012CC0C AFB600B8 */  sw    $s6, 0xb8($sp)
 /* 0C3310 8012CC10 0080B02D */  daddu $s6, $a0, $zero
@@ -14071,7 +14071,7 @@ func_8012D54C:
 /* 0C3CB0 8012D5B0 44062000 */  mfc1  $a2, $f4
 /* 0C3CB4 8012D5B4 44837000 */  mtc1  $v1, $f14
 /* 0C3CB8 8012D5B8 00000000 */  nop   
-/* 0C3CBC 8012D5BC 0C00A720 */  jal   func_80029C80
+/* 0C3CBC 8012D5BC 0C00A720 */  jal   atan2
 /* 0C3CC0 8012D5C0 468073A0 */   cvt.s.w $f14, $f14
 /* 0C3CC4 8012D5C4 4600010D */  trunc.w.s $f4, $f0
 /* 0C3CC8 8012D5C8 44102000 */  mfc1  $s0, $f4
@@ -14160,7 +14160,7 @@ func_8012D54C:
 /* 0C3E04 8012D704 44062000 */  mfc1  $a2, $f4
 /* 0C3E08 8012D708 44837000 */  mtc1  $v1, $f14
 /* 0C3E0C 8012D70C 00000000 */  nop   
-/* 0C3E10 8012D710 0C00A720 */  jal   func_80029C80
+/* 0C3E10 8012D710 0C00A720 */  jal   atan2
 /* 0C3E14 8012D714 468073A0 */   cvt.s.w $f14, $f14
 /* 0C3E18 8012D718 4600010D */  trunc.w.s $f4, $f0
 /* 0C3E1C 8012D71C 44102000 */  mfc1  $s0, $f4
@@ -14203,7 +14203,7 @@ func_8012D54C:
 /* 0C3EA0 8012D7A0 44837000 */  mtc1  $v1, $f14
 /* 0C3EA4 8012D7A4 00000000 */  nop   
 /* 0C3EA8 8012D7A8 468073A0 */  cvt.s.w $f14, $f14
-/* 0C3EAC 8012D7AC 0C00A7B5 */  jal   func_80029ED4
+/* 0C3EAC 8012D7AC 0C00A7B5 */  jal   dist2D
 /* 0C3EB0 8012D7B0 2655FFF7 */   addiu $s5, $s2, -9
 /* 0C3EB4 8012D7B4 4600010D */  trunc.w.s $f4, $f0
 /* 0C3EB8 8012D7B8 44172000 */  mfc1  $s7, $f4
@@ -14234,7 +14234,7 @@ func_8012D54C:
 /* 0C3F14 8012D814 00000000 */  nop   
 /* 0C3F18 8012D818 46802120 */  cvt.s.w $f4, $f4
 /* 0C3F1C 8012D81C 44072000 */  mfc1  $a3, $f4
-/* 0C3F20 8012D820 0C00A720 */  jal   func_80029C80
+/* 0C3F20 8012D820 0C00A720 */  jal   atan2
 /* 0C3F24 8012D824 4600B386 */   mov.s $f14, $f22
 /* 0C3F28 8012D828 4600010D */  trunc.w.s $f4, $f0
 /* 0C3F2C 8012D82C 44102000 */  mfc1  $s0, $f4
@@ -14247,12 +14247,12 @@ func_8012D54C:
 /* 0C3F44 8012D844 2842004B */  slti  $v0, $v0, 0x4b
 /* 0C3F48 8012D848 104000B3 */  beqz  $v0, .L8012DB18
 /* 0C3F4C 8012D84C 00102400 */   sll   $a0, $s0, 0x10
-/* 0C3F50 8012D850 0C00A4F5 */  jal   func_800293D4
+/* 0C3F50 8012D850 0C00A4F5 */  jal   cosine
 /* 0C3F54 8012D854 00042403 */   sra   $a0, $a0, 0x10
 /* 0C3F58 8012D858 2604005A */  addiu $a0, $s0, 0x5a
 /* 0C3F5C 8012D85C 00042400 */  sll   $a0, $a0, 0x10
 /* 0C3F60 8012D860 00042403 */  sra   $a0, $a0, 0x10
-/* 0C3F64 8012D864 0C00A4F5 */  jal   func_800293D4
+/* 0C3F64 8012D864 0C00A4F5 */  jal   cosine
 /* 0C3F68 8012D868 46000506 */   mov.s $f20, $f0
 /* 0C3F6C 8012D86C 3C13E200 */  lui   $s3, 0xe200
 /* 0C3F70 8012D870 3673001C */  ori   $s3, $s3, 0x1c
@@ -15444,7 +15444,7 @@ func_8012E828:
 /* 0C506C 8012E96C 0140282D */  daddu $a1, $t2, $zero
 /* 0C5070 8012E970 A2020009 */  sb    $v0, 9($s0)
 /* 0C5074 8012E974 AFA00010 */  sw    $zero, 0x10($sp)
-/* 0C5078 8012E978 0C04977D */  jal   func_80125DF4
+/* 0C5078 8012E978 0C04977D */  jal   get_char_width
 /* 0C507C 8012E97C AFA00014 */   sw    $zero, 0x14($sp)
 /* 0C5080 8012E980 92030009 */  lbu   $v1, 9($s0)
 /* 0C5084 8012E984 A202000A */  sb    $v0, 0xa($s0)
@@ -17743,7 +17743,7 @@ func_80130ACC:
 /* 0C7204 80130B04 03E00008 */  jr    $ra
 /* 0C7208 80130B08 27BD0018 */   addiu $sp, $sp, 0x18
 
-func_80130B0C:
+draw_coin_sparkles:
 /* 0C720C 80130B0C 27BDFE78 */  addiu $sp, $sp, -0x188
 /* 0C7210 80130B10 AFB20150 */  sw    $s2, 0x150($sp)
 /* 0C7214 80130B14 0080902D */  daddu $s2, $a0, $zero
@@ -17790,7 +17790,7 @@ func_80130B0C:
 /* 0C72B8 80130BB8 4483B000 */  mtc1  $v1, $f22
 /* 0C72BC 80130BBC 00000000 */  nop   
 /* 0C72C0 80130BC0 4680B5A0 */  cvt.s.w $f22, $f22
-/* 0C72C4 80130BC4 0C00A6C9 */  jal   func_80029B24
+/* 0C72C4 80130BC4 0C00A6C9 */  jal   clamp_angle
 /* 0C72C8 80130BC8 46006301 */   sub.s $f12, $f12, $f0
 /* 0C72CC 80130BCC 27A40018 */  addiu $a0, $sp, 0x18
 /* 0C72D0 80130BD0 4405C000 */  mfc1  $a1, $f24
@@ -18020,7 +18020,7 @@ func_80130B0C:
 /* 0C7650 80130F50 03E00008 */  jr    $ra
 /* 0C7654 80130F54 27BD0188 */   addiu $sp, $sp, 0x188
 
-func_80130F58:
+get_item_entity:
 /* 0C7658 80130F58 3C028015 */  lui   $v0, 0x8015
 /* 0C765C 80130F5C 8C4265A0 */  lw    $v0, 0x65a0($v0)
 /* 0C7660 80130F60 00042080 */  sll   $a0, $a0, 2
@@ -18036,7 +18036,7 @@ func_80130F70:
 /* 0C7680 80130F80 34420040 */  ori   $v0, $v0, 0x40
 /* 0C7684 80130F84 04600006 */  bltz  $v1, .L80130FA0
 /* 0C7688 80130F88 AC820000 */   sw    $v0, ($a0)
-/* 0C768C 80130F8C 0C044181 */  jal   func_80110604
+/* 0C768C 80130F8C 0C044181 */  jal   get_shadow_by_index
 /* 0C7690 80130F90 0060202D */   daddu $a0, $v1, $zero
 /* 0C7694 80130F94 8C430000 */  lw    $v1, ($v0)
 /* 0C7698 80130F98 34630001 */  ori   $v1, $v1, 1
@@ -18055,7 +18055,7 @@ func_80130FAC:
 /* 0C76C0 80130FC0 00431024 */  and   $v0, $v0, $v1
 /* 0C76C4 80130FC4 04A00007 */  bltz  $a1, .L80130FE4
 /* 0C76C8 80130FC8 AC820000 */   sw    $v0, ($a0)
-/* 0C76CC 80130FCC 0C044181 */  jal   func_80110604
+/* 0C76CC 80130FCC 0C044181 */  jal   get_shadow_by_index
 /* 0C76D0 80130FD0 00A0202D */   daddu $a0, $a1, $zero
 /* 0C76D4 80130FD4 8C430000 */  lw    $v1, ($v0)
 /* 0C76D8 80130FD8 2404FFFE */  addiu $a0, $zero, -2
@@ -18066,7 +18066,7 @@ func_80130FAC:
 /* 0C76E8 80130FE8 03E00008 */  jr    $ra
 /* 0C76EC 80130FEC 27BD0018 */   addiu $sp, $sp, 0x18
 
-func_80130FF0:
+clear_item_entity_data:
 /* 0C76F0 80130FF0 3C028007 */  lui   $v0, 0x8007
 /* 0C76F4 80130FF4 8C42419C */  lw    $v0, 0x419c($v0)
 /* 0C76F8 80130FF8 27BDFFE8 */  addiu $sp, $sp, -0x18
@@ -18128,7 +18128,7 @@ func_80131024:
 /* 0C77C4 801310C4 03E00008 */  jr    $ra
 /* 0C77C8 801310C8 27BD0018 */   addiu $sp, $sp, 0x18
 
-func_801310CC:
+init_item_entity_list:
 /* 0C77CC 801310CC 3C028007 */  lui   $v0, 0x8007
 /* 0C77D0 801310D0 8C42419C */  lw    $v0, 0x419c($v0)
 /* 0C77D4 801310D4 80420070 */  lb    $v0, 0x70($v0)
@@ -18373,7 +18373,7 @@ func_801313A0:
 /* 0C7AEC 801313EC 03E00008 */  jr    $ra
 /* 0C7AF0 801313F0 27BD0038 */   addiu $sp, $sp, 0x38
 
-func_801313F4:
+make_item_entity:
 /* 0C7AF4 801313F4 27BDFFC8 */  addiu $sp, $sp, -0x38
 /* 0C7AF8 801313F8 AFB20028 */  sw    $s2, 0x28($sp)
 /* 0C7AFC 801313FC 0080902D */  daddu $s2, $a0, $zero
@@ -18404,7 +18404,7 @@ func_801313F4:
 /* 0C7B5C 8013145C 8C220A98 */  lw    $v0, 0xa98($at)
 /* 0C7B60 80131460 00400008 */  jr    $v0
 /* 0C7B64 80131464 00000000 */   nop   
-/* 0C7B68 80131468 0C05152F */  jal   func_801454BC
+/* 0C7B68 80131468 0C05152F */  jal   get_global_flag
 /* 0C7B6C 8013146C 0220202D */   daddu $a0, $s1, $zero
 /* 0C7B70 80131470 14400180 */  bnez  $v0, .L80131A74
 /* 0C7B74 80131474 2402FFFF */   addiu $v0, $zero, -1
@@ -18429,7 +18429,7 @@ func_801314AC:
 /* 0C7BB0 801314B0 00000000 */   nop   
 
 .L801314B4:
-/* 0C7BB4 801314B4 0C00AB39 */  jal   func_8002ACE4
+/* 0C7BB4 801314B4 0C00AB39 */  jal   heap_malloc
 /* 0C7BB8 801314B8 0060A02D */   daddu $s4, $v1, $zero
 /* 0C7BBC 801314BC 00142080 */  sll   $a0, $s4, 2
 /* 0C7BC0 801314C0 3C038015 */  lui   $v1, 0x8015
@@ -18758,11 +18758,11 @@ func_80131908:
 /* 0C802C 8013192C 8E050008 */  lw    $a1, 8($s0)
 /* 0C8030 80131930 8E06000C */  lw    $a2, 0xc($s0)
 /* 0C8034 80131934 8E070010 */  lw    $a3, 0x10($s0)
-/* 0C8038 80131938 0C044898 */  jal   func_80112260
+/* 0C8038 80131938 0C044898 */  jal   create_shadow_type
 /* 0C803C 8013193C 0000202D */   daddu $a0, $zero, $zero
 /* 0C8040 80131940 00022400 */  sll   $a0, $v0, 0x10
 /* 0C8044 80131944 00042403 */  sra   $a0, $a0, 0x10
-/* 0C8048 80131948 0C044181 */  jal   func_80110604
+/* 0C8048 80131948 0C044181 */  jal   get_shadow_by_index
 /* 0C804C 8013194C A6020020 */   sh    $v0, 0x20($s0)
 /* 0C8050 80131950 0040882D */  daddu $s1, $v0, $zero
 /* 0C8054 80131954 8203001B */  lb    $v1, 0x1b($s0)
@@ -18810,7 +18810,7 @@ func_80131908:
 /* 0C80F8 801319F8 C4400124 */  lwc1  $f0, 0x124($v0)
 /* 0C80FC 801319FC 44051000 */  mfc1  $a1, $f2
 /* 0C8100 80131A00 0220202D */  daddu $a0, $s1, $zero
-/* 0C8104 80131A04 0C044A17 */  jal   func_8011285C
+/* 0C8104 80131A04 0C044A17 */  jal   set_standard_shadow_scale
 /* 0C8108 80131A08 E4800030 */   swc1  $f0, 0x30($a0)
 .L80131A0C:
 /* 0C810C 80131A0C 9202001C */  lbu   $v0, 0x1c($s0)
@@ -18851,7 +18851,7 @@ func_80131908:
 /* 0C818C 80131A8C 03E00008 */  jr    $ra
 /* 0C8190 80131A90 27BD0038 */   addiu $sp, $sp, 0x38
 
-func_80131A94:
+make_item_entity_nodelay:
 /* 0C8194 80131A94 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 0C8198 80131A98 8FA20038 */  lw    $v0, 0x38($sp)
 /* 0C819C 80131A9C 8FA8003C */  lw    $t0, 0x3c($sp)
@@ -18860,13 +18860,13 @@ func_80131A94:
 /* 0C81A8 80131AA8 AFA00014 */  sw    $zero, 0x14($sp)
 /* 0C81AC 80131AAC AFA30018 */  sw    $v1, 0x18($sp)
 /* 0C81B0 80131AB0 AFA20010 */  sw    $v0, 0x10($sp)
-/* 0C81B4 80131AB4 0C04C4FD */  jal   func_801313F4
+/* 0C81B4 80131AB4 0C04C4FD */  jal   make_item_entity
 /* 0C81B8 80131AB8 AFA8001C */   sw    $t0, 0x1c($sp)
 /* 0C81BC 80131ABC 8FBF0020 */  lw    $ra, 0x20($sp)
 /* 0C81C0 80131AC0 03E00008 */  jr    $ra
 /* 0C81C4 80131AC4 27BD0028 */   addiu $sp, $sp, 0x28
 
-func_80131AC8:
+make_item_entity_delayed:
 /* 0C81C8 80131AC8 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 0C81CC 80131ACC 8FA30038 */  lw    $v1, 0x38($sp)
 /* 0C81D0 80131AD0 8FA8003C */  lw    $t0, 0x3c($sp)
@@ -18876,13 +18876,13 @@ func_80131AC8:
 /* 0C81E0 80131AE0 AFA20018 */  sw    $v0, 0x18($sp)
 /* 0C81E4 80131AE4 AFA30010 */  sw    $v1, 0x10($sp)
 /* 0C81E8 80131AE8 AFA80014 */  sw    $t0, 0x14($sp)
-/* 0C81EC 80131AEC 0C04C4FD */  jal   func_801313F4
+/* 0C81EC 80131AEC 0C04C4FD */  jal   make_item_entity
 /* 0C81F0 80131AF0 AFA9001C */   sw    $t1, 0x1c($sp)
 /* 0C81F4 80131AF4 8FBF0020 */  lw    $ra, 0x20($sp)
 /* 0C81F8 80131AF8 03E00008 */  jr    $ra
 /* 0C81FC 80131AFC 27BD0028 */   addiu $sp, $sp, 0x28
 
-func_80131B00:
+init_got_item:
 /* 0C8200 80131B00 27BDFFB8 */  addiu $sp, $sp, -0x48
 /* 0C8204 80131B04 AFB00028 */  sw    $s0, 0x28($sp)
 /* 0C8208 80131B08 0080802D */  daddu $s0, $a0, $zero
@@ -18916,7 +18916,7 @@ func_80131B68:
 /* 0C826C 80131B6C 00000000 */   nop   
 
 .L80131B70:
-/* 0C8270 80131B70 0C00AB39 */  jal   func_8002ACE4
+/* 0C8270 80131B70 0C00AB39 */  jal   heap_malloc
 /* 0C8274 80131B74 0060A82D */   daddu $s5, $v1, $zero
 /* 0C8278 80131B78 00152080 */  sll   $a0, $s5, 2
 /* 0C827C 80131B7C 3C038015 */  lui   $v1, 0x8015
@@ -19003,11 +19003,11 @@ func_80131BA8:
 /* 0C83A8 80131CA8 8D030000 */  lw    $v1, ($t0)
 /* 0C83AC 80131CAC 8E270010 */  lw    $a3, 0x10($s1)
 /* 0C83B0 80131CB0 00431023 */  subu  $v0, $v0, $v1
-/* 0C83B4 80131CB4 0C044898 */  jal   func_80112260
+/* 0C83B4 80131CB4 0C044898 */  jal   create_shadow_type
 /* 0C83B8 80131CB8 AD020000 */   sw    $v0, ($t0)
 /* 0C83BC 80131CBC 00022400 */  sll   $a0, $v0, 0x10
 /* 0C83C0 80131CC0 00042403 */  sra   $a0, $a0, 0x10
-/* 0C83C4 80131CC4 0C044181 */  jal   func_80110604
+/* 0C83C4 80131CC4 0C044181 */  jal   get_shadow_by_index
 /* 0C83C8 80131CC8 A6220020 */   sh    $v0, 0x20($s1)
 /* 0C83CC 80131CCC 3C040002 */  lui   $a0, 2
 /* 0C83D0 80131CD0 27A50018 */  addiu $a1, $sp, 0x18
@@ -19051,7 +19051,7 @@ func_80131BA8:
 /* 0C8468 80131D68 C4400124 */  lwc1  $f0, 0x124($v0)
 /* 0C846C 80131D6C 44051000 */  mfc1  $a1, $f2
 /* 0C8470 80131D70 0200202D */  daddu $a0, $s0, $zero
-/* 0C8474 80131D74 0C044A17 */  jal   func_8011285C
+/* 0C8474 80131D74 0C044A17 */  jal   set_standard_shadow_scale
 /* 0C8478 80131D78 E4800030 */   swc1  $f0, 0x30($a0)
 /* 0C847C 80131D7C 0C04C44A */  jal   func_80131128
 /* 0C8480 80131D80 0220202D */   daddu $a0, $s1, $zero
@@ -19141,7 +19141,7 @@ func_80131E8C:
 /* 0C85A4 80131EA4 8E240000 */  lw    $a0, ($s1)
 /* 0C85A8 80131EA8 26310004 */  addiu $s1, $s1, 4
 /* 0C85AC 80131EAC 8E300000 */  lw    $s0, ($s1)
-/* 0C85B0 80131EB0 0C00A67F */  jal   func_800299FC
+/* 0C85B0 80131EB0 0C00A67F */  jal   rand_int
 /* 0C85B4 80131EB4 26310004 */   addiu $s1, $s1, 4
 /* 0C85B8 80131EB8 0050102A */  slt   $v0, $v0, $s0
 /* 0C85BC 80131EBC 5040FFD4 */  beql  $v0, $zero, .L80131E10
@@ -19160,7 +19160,7 @@ func_80131ED0:
 /* 0C85E4 80131EE4 03E00008 */  jr    $ra
 /* 0C85E8 80131EE8 27BD0028 */   addiu $sp, $sp, 0x28
 
-func_80131EEC:
+update_item_entities:
 /* 0C85EC 80131EEC 3C02800A */  lui   $v0, 0x800a
 /* 0C85F0 80131EF0 8C42A650 */  lw    $v0, -0x59b0($v0)
 /* 0C85F4 80131EF4 27BDFFC0 */  addiu $sp, $sp, -0x40
@@ -19186,7 +19186,7 @@ func_80131EEC:
 /* 0C8640 80131F40 86230018 */  lh    $v1, 0x18($s1)
 /* 0C8644 80131F44 14620019 */  bne   $v1, $v0, .L80131FAC
 /* 0C8648 80131F48 00000000 */   nop   
-/* 0C864C 80131F4C 0C00A67F */  jal   func_800299FC
+/* 0C864C 80131F4C 0C00A67F */  jal   rand_int
 /* 0C8650 80131F50 24040064 */   addiu $a0, $zero, 0x64
 /* 0C8654 80131F54 2842005B */  slti  $v0, $v0, 0x5b
 /* 0C8658 80131F58 14400012 */  bnez  $v0, .L80131FA4
@@ -19195,12 +19195,12 @@ func_80131EEC:
 /* 0C8664 80131F64 24A54AC0 */  addiu $a1, $a1, 0x4ac0
 /* 0C8668 80131F68 0C04C27C */  jal   func_801309F0
 /* 0C866C 80131F6C 0220202D */   daddu $a0, $s1, $zero
-/* 0C8670 80131F70 0C00A67F */  jal   func_800299FC
+/* 0C8670 80131F70 0C00A67F */  jal   rand_int
 /* 0C8674 80131F74 24040010 */   addiu $a0, $zero, 0x10
 /* 0C8678 80131F78 2442FFF8 */  addiu $v0, $v0, -8
 /* 0C867C 80131F7C 3C018015 */  lui   $at, 0x8015
 /* 0C8680 80131F80 A4225D8C */  sh    $v0, 0x5d8c($at)
-/* 0C8684 80131F84 0C00A67F */  jal   func_800299FC
+/* 0C8684 80131F84 0C00A67F */  jal   rand_int
 /* 0C8688 80131F88 24040010 */   addiu $a0, $zero, 0x10
 /* 0C868C 80131F8C 2442FFF8 */  addiu $v0, $v0, -8
 /* 0C8690 80131F90 3C018015 */  lui   $at, 0x8015
@@ -19223,7 +19223,7 @@ func_80131EEC:
 /* 0C86CC 80131FCC 8C220BD8 */  lw    $v0, 0xbd8($at)
 /* 0C86D0 80131FD0 00400008 */  jr    $v0
 /* 0C86D4 80131FD4 00000000 */   nop   
-/* 0C86D8 80131FD8 0C04D596 */  jal   func_80135658
+/* 0C86D8 80131FD8 0C04D596 */  jal   update_item_entity_static
 /* 0C86DC 80131FDC 0220202D */   daddu $a0, $s1, $zero
 /* 0C86E0 80131FE0 0804C804 */  j     func_80132010
 /* 0C86E4 80131FE4 00000000 */   nop   
@@ -19233,12 +19233,12 @@ func_80131EEC:
 /* 0C86F0 80131FF0 0804C804 */  j     func_80132010
 /* 0C86F4 80131FF4 00000000 */   nop   
 
-/* 0C86F8 80131FF8 0C04D094 */  jal   func_80134250
+/* 0C86F8 80131FF8 0C04D094 */  jal   update_item_entity_collectable
 /* 0C86FC 80131FFC 0220202D */   daddu $a0, $s1, $zero
 /* 0C8700 80132000 0804C804 */  j     func_80132010
 /* 0C8704 80132004 00000000 */   nop   
 
-/* 0C8708 80132008 0C04D5B7 */  jal   func_801356DC
+/* 0C8708 80132008 0C04D5B7 */  jal   update_item_entity_temp
 /* 0C870C 8013200C 0220202D */   daddu $a0, $s1, $zero
 func_80132010:
 .L80132010:
@@ -19276,7 +19276,7 @@ func_80132010:
 /* 0C878C 8013208C 1082002C */  beq   $a0, $v0, .L80132140
 /* 0C8790 80132090 00000000 */   nop   
 .L80132094:
-/* 0C8794 80132094 0C044181 */  jal   func_80110604
+/* 0C8794 80132094 0C044181 */  jal   get_shadow_by_index
 /* 0C8798 80132098 86240020 */   lh    $a0, 0x20($s1)
 /* 0C879C 8013209C 3C040002 */  lui   $a0, 2
 /* 0C87A0 801320A0 27A50018 */  addiu $a1, $sp, 0x18
@@ -19317,7 +19317,7 @@ func_80132010:
 /* 0C882C 8013212C C4400124 */  lwc1  $f0, 0x124($v0)
 /* 0C8830 80132130 44051000 */  mfc1  $a1, $f2
 /* 0C8834 80132134 0200202D */  daddu $a0, $s0, $zero
-/* 0C8838 80132138 0C044A17 */  jal   func_8011285C
+/* 0C8838 80132138 0C044A17 */  jal   set_standard_shadow_scale
 /* 0C883C 8013213C E4800030 */   swc1  $f0, 0x30($a0)
 .L80132140:
 /* 0C8840 80132140 C6200008 */  lwc1  $f0, 8($s1)
@@ -19349,6 +19349,7 @@ func_80132010:
 /* 0C889C 8013219C 03E00008 */  jr    $ra
 /* 0C88A0 801321A0 27BD0040 */   addiu $sp, $sp, 0x40
 
+draw_item_entity:
 /* 0C88A4 801321A4 27BDFEB8 */  addiu $sp, $sp, -0x148
 /* 0C88A8 801321A8 AFB3012C */  sw    $s3, 0x12c($sp)
 /* 0C88AC 801321AC 0080982D */  daddu $s3, $a0, $zero
@@ -19438,7 +19439,7 @@ func_80132010:
 /* 0C89E8 801322E8 3C01800B */  lui   $at, 0x800b
 /* 0C89EC 801322EC 00220821 */  addu  $at, $at, $v0
 /* 0C89F0 801322F0 C4201DEC */  lwc1  $f0, 0x1dec($at)
-/* 0C89F4 801322F4 0C00A6C9 */  jal   func_80029B24
+/* 0C89F4 801322F4 0C00A6C9 */  jal   clamp_angle
 /* 0C89F8 801322F8 46006301 */   sub.s $f12, $f12, $f0
 /* 0C89FC 801322FC 27B20058 */  addiu $s2, $sp, 0x58
 /* 0C8A00 80132300 0240202D */  daddu $a0, $s2, $zero
@@ -20058,7 +20059,7 @@ func_80132BFC:
 /* 0C9340 80132C40 24020157 */  addiu $v0, $zero, 0x157
 /* 0C9344 80132C44 14620003 */  bne   $v1, $v0, .L80132C54
 /* 0C9348 80132C48 00000000 */   nop   
-/* 0C934C 80132C4C 0C04C2C3 */  jal   func_80130B0C
+/* 0C934C 80132C4C 0C04C2C3 */  jal   draw_coin_sparkles
 /* 0C9350 80132C50 0260202D */   daddu $a0, $s3, $zero
 .L80132C54:
 /* 0C9354 80132C54 8FBF013C */  lw    $ra, 0x13c($sp)
@@ -20073,6 +20074,7 @@ func_80132BFC:
 /* 0C9378 80132C78 03E00008 */  jr    $ra
 /* 0C937C 80132C7C 27BD0148 */   addiu $sp, $sp, 0x148
 
+draw_item_entities:
 /* 0C9380 80132C80 27BDFFC0 */  addiu $sp, $sp, -0x40
 /* 0C9384 80132C84 AFB00020 */  sw    $s0, 0x20($sp)
 /* 0C9388 80132C88 27B00010 */  addiu $s0, $sp, 0x10
@@ -20127,7 +20129,7 @@ func_80132BFC:
 /* 0C9440 80132D40 0200202D */  daddu $a0, $s0, $zero
 /* 0C9444 80132D44 AE050008 */  sw    $a1, 8($s0)
 /* 0C9448 80132D48 AE02000C */  sw    $v0, 0xc($s0)
-/* 0C944C 80132D4C 0C047644 */  jal   func_8011D910
+/* 0C944C 80132D4C 0C047644 */  jal   queue_render_task
 /* 0C9450 80132D50 AE000004 */   sw    $zero, 4($s0)
 /* 0C9454 80132D54 8C430000 */  lw    $v1, ($v0)
 /* 0C9458 80132D58 34630002 */  ori   $v1, $v1, 2
@@ -20277,7 +20279,7 @@ func_80132E54:
 /* 0C9658 80132F58 000210C0 */  sll   $v0, $v0, 3
 /* 0C965C 80132F5C 004E1021 */  addu  $v0, $v0, $t6
 /* 0C9660 80132F60 C440006C */  lwc1  $f0, 0x6c($v0)
-/* 0C9664 80132F64 0C00A6C9 */  jal   func_80029B24
+/* 0C9664 80132F64 0C00A6C9 */  jal   clamp_angle
 /* 0C9668 80132F68 46006301 */   sub.s $f12, $f12, $f0
 /* 0C966C 80132F6C 0280202D */  daddu $a0, $s4, $zero
 /* 0C9670 80132F70 C642000C */  lwc1  $f2, 0xc($s2)
@@ -20931,7 +20933,7 @@ func_801338B4:
 /* 0CA028 80133928 03E00008 */  jr    $ra
 /* 0CA02C 8013392C 27BD0150 */   addiu $sp, $sp, 0x150
 
-func_80133930:
+remove_item_entity_by_reference:
 /* 0CA030 80133930 3C038015 */  lui   $v1, 0x8015
 /* 0CA034 80133934 8C6365A0 */  lw    $v1, 0x65a0($v1)
 /* 0CA038 80133938 27BDFFE0 */  addiu $sp, $sp, -0x20
@@ -20955,7 +20957,7 @@ func_80133930:
 /* 0CA078 80133978 8E240014 */  lw    $a0, 0x14($s1)
 /* 0CA07C 8013397C 10800003 */  beqz  $a0, .L8013398C
 /* 0CA080 80133980 00000000 */   nop   
-/* 0CA084 80133984 0C00AB4B */  jal   func_8002AD2C
+/* 0CA084 80133984 0C00AB4B */  jal   heap_free
 /* 0CA088 80133988 00000000 */   nop   
 .L8013398C:
 /* 0CA08C 8013398C 8223001B */  lb    $v1, 0x1b($s1)
@@ -20975,7 +20977,7 @@ func_80133930:
 /* 0CA0C0 801339C0 8E220000 */  lw    $v0, ($s1)
 /* 0CA0C4 801339C4 00108080 */  sll   $s0, $s0, 2
 /* 0CA0C8 801339C8 02021021 */  addu  $v0, $s0, $v0
-/* 0CA0CC 801339CC 0C00AB4B */  jal   func_8002AD2C
+/* 0CA0CC 801339CC 0C00AB4B */  jal   heap_free
 /* 0CA0D0 801339D0 8C440000 */   lw    $a0, ($v0)
 /* 0CA0D4 801339D4 8E220000 */  lw    $v0, ($s1)
 /* 0CA0D8 801339D8 3C018015 */  lui   $at, 0x8015
@@ -20989,7 +20991,7 @@ func_80133930:
 /* 0CA0F4 801339F4 03E00008 */  jr    $ra
 /* 0CA0F8 801339F8 27BD0020 */   addiu $sp, $sp, 0x20
 
-func_801339FC:
+remove_item_entity_by_index:
 /* 0CA0FC 801339FC 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0CA100 80133A00 AFB00010 */  sw    $s0, 0x10($sp)
 /* 0CA104 80133A04 0080802D */  daddu $s0, $a0, $zero
@@ -21017,7 +21019,7 @@ func_801339FC:
 /* 0CA158 80133A58 8E220000 */  lw    $v0, ($s1)
 /* 0CA15C 80133A5C 00108080 */  sll   $s0, $s0, 2
 /* 0CA160 80133A60 02021021 */  addu  $v0, $s0, $v0
-/* 0CA164 80133A64 0C00AB4B */  jal   func_8002AD2C
+/* 0CA164 80133A64 0C00AB4B */  jal   heap_free
 /* 0CA168 80133A68 8C440000 */   lw    $a0, ($v0)
 /* 0CA16C 80133A6C 8E220000 */  lw    $v0, ($s1)
 /* 0CA170 80133A70 02028021 */  addu  $s0, $s0, $v0
@@ -21062,7 +21064,7 @@ func_801339FC:
 /* 0CA204 80133B04 03E00008 */  jr    $ra
 /* 0CA208 80133B08 27BD0018 */   addiu $sp, $sp, 0x18
 
-func_80133B0C:
+test_item_player_collision:
 /* 0CA20C 80133B0C 27BDFF90 */  addiu $sp, $sp, -0x70
 /* 0CA210 80133B10 AFB30034 */  sw    $s3, 0x34($sp)
 /* 0CA214 80133B14 0080982D */  daddu $s3, $a0, $zero
@@ -21195,13 +21197,13 @@ func_80133B0C:
 /* 0CA3F0 80133CF0 00000000 */  nop   
 /* 0CA3F4 80133CF4 460C0300 */  add.s $f12, $f0, $f12
 func_80133CF8:
-/* 0CA3F8 80133CF8 0C00A6C9 */  jal   func_80029B24
+/* 0CA3F8 80133CF8 0C00A6C9 */  jal   clamp_angle
 /* 0CA3FC 80133CFC 00000000 */   nop   
 /* 0CA400 80133D00 46000386 */  mov.s $f14, $f0
 /* 0CA404 80133D04 C60C006C */  lwc1  $f12, 0x6c($s0)
 /* 0CA408 80133D08 C7A80018 */  lwc1  $f8, 0x18($sp)
 /* 0CA40C 80133D0C E7BE0010 */  swc1  $f30, 0x10($sp)
-/* 0CA410 80133D10 0C00A70A */  jal   func_80029C28
+/* 0CA410 80133D10 0C00A70A */  jal   get_clamped_angle_diff
 /* 0CA414 80133D14 E7A80014 */   swc1  $f8, 0x14($sp)
 /* 0CA418 80133D18 44801000 */  mtc1  $zero, $f2
 /* 0CA41C 80133D1C 00000000 */  nop   
@@ -21212,7 +21214,7 @@ func_80133CF8:
 /* 0CA430 80133D30 C600006C */  lwc1  $f0, 0x6c($s0)
 /* 0CA434 80133D34 3C0142B4 */  lui   $at, 0x42b4
 /* 0CA438 80133D38 44816000 */  mtc1  $at, $f12
-/* 0CA43C 80133D3C 0C00A6C9 */  jal   func_80029B24
+/* 0CA43C 80133D3C 0C00A6C9 */  jal   clamp_angle
 /* 0CA440 80133D40 460C0301 */   sub.s $f12, $f0, $f12
 /* 0CA444 80133D44 8E2200A4 */  lw    $v0, 0xa4($s1)
 /* 0CA448 80133D48 3C030100 */  lui   $v1, 0x100
@@ -21228,7 +21230,7 @@ func_80133CF8:
 /* 0CA468 80133D68 C600006C */  lwc1  $f0, 0x6c($s0)
 /* 0CA46C 80133D6C 3C0142B4 */  lui   $at, 0x42b4
 /* 0CA470 80133D70 44816000 */  mtc1  $at, $f12
-/* 0CA474 80133D74 0C00A6C9 */  jal   func_80029B24
+/* 0CA474 80133D74 0C00A6C9 */  jal   clamp_angle
 /* 0CA478 80133D78 460C0300 */   add.s $f12, $f0, $f12
 /* 0CA47C 80133D7C 8E2200A4 */  lw    $v0, 0xa4($s1)
 /* 0CA480 80133D80 3C030100 */  lui   $v1, 0x100
@@ -21240,13 +21242,13 @@ func_80133CF8:
 /* 0CA498 80133D98 00000000 */  nop   
 /* 0CA49C 80133D9C 460C0301 */  sub.s $f12, $f0, $f12
 func_80133DA0:
-/* 0CA4A0 80133DA0 0C00A6C9 */  jal   func_80029B24
+/* 0CA4A0 80133DA0 0C00A6C9 */  jal   clamp_angle
 /* 0CA4A4 80133DA4 00000000 */   nop   
 /* 0CA4A8 80133DA8 27A40010 */  addiu $a0, $sp, 0x10
 .L80133DAC:
 /* 0CA4AC 80133DAC 3C0641C0 */  lui   $a2, 0x41c0
 /* 0CA4B0 80133DB0 44070000 */  mfc1  $a3, $f0
-/* 0CA4B4 80133DB4 0C00A7E7 */  jal   func_80029F9C
+/* 0CA4B4 80133DB4 0C00A7E7 */  jal   add_vec2D_polar
 /* 0CA4B8 80133DB8 27A50014 */   addiu $a1, $sp, 0x14
 /* 0CA4BC 80133DBC C6760008 */  lwc1  $f22, 8($s3)
 /* 0CA4C0 80133DC0 C674000C */  lwc1  $f20, 0xc($s3)
@@ -21494,7 +21496,7 @@ func_80133F90:
 /* 0CA840 80134140 03E00008 */  jr    $ra
 /* 0CA844 80134144 27BD0048 */   addiu $sp, $sp, 0x48
 
-func_80134148:
+set_item_entity_flags:
 /* 0CA848 80134148 3C028015 */  lui   $v0, 0x8015
 /* 0CA84C 8013414C 8C4265A0 */  lw    $v0, 0x65a0($v0)
 /* 0CA850 80134150 00042080 */  sll   $a0, $a0, 2
@@ -21513,6 +21515,7 @@ func_80134148:
 /* 0CA880 80134180 03E00008 */  jr    $ra
 /* 0CA884 80134184 00000000 */   nop   
 
+clear_item_entity_flags:
 /* 0CA888 80134188 3C028015 */  lui   $v0, 0x8015
 /* 0CA88C 8013418C 8C4265A0 */  lw    $v0, 0x65a0($v0)
 /* 0CA890 80134190 00042080 */  sll   $a0, $a0, 2
@@ -21551,7 +21554,7 @@ func_801341E8:
 /* 0CA904 80134204 03E00008 */  jr    $ra
 /* 0CA908 80134208 00000000 */   nop   
 
-func_8013420C:
+set_item_entity_position:
 /* 0CA90C 8013420C 3C028015 */  lui   $v0, 0x8015
 /* 0CA910 80134210 8C4265A0 */  lw    $v0, 0x65a0($v0)
 /* 0CA914 80134214 00042080 */  sll   $a0, $a0, 2
@@ -21574,7 +21577,7 @@ func_80134240:
 /* 0CA948 80134248 03E00008 */  jr    $ra
 /* 0CA94C 8013424C 00000000 */   nop   
 
-func_80134250:
+update_item_entity_collectable:
 /* 0CA950 80134250 3C028015 */  lui   $v0, 0x8015
 /* 0CA954 80134254 844265A4 */  lh    $v0, 0x65a4($v0)
 /* 0CA958 80134258 27BDFFA0 */  addiu $sp, $sp, -0x60
@@ -21615,7 +21618,7 @@ func_80134250:
 .L801342D8:
 /* 0CA9D8 801342D8 0C04C3EB */  jal   func_80130FAC
 /* 0CA9DC 801342DC 0240202D */   daddu $a0, $s2, $zero
-/* 0CA9E0 801342E0 0C00AB39 */  jal   func_8002ACE4
+/* 0CA9E0 801342E0 0C00AB39 */  jal   heap_malloc
 /* 0CA9E4 801342E4 24040024 */   addiu $a0, $zero, 0x24
 /* 0CA9E8 801342E8 0040882D */  daddu $s1, $v0, $zero
 /* 0CA9EC 801342EC 16200003 */  bnez  $s1, .L801342FC
@@ -21665,12 +21668,12 @@ func_80134344:
 /* 0CAA7C 8013437C 2C4200CB */  sltiu $v0, $v0, 0xcb
 /* 0CAA80 80134380 10400036 */  beqz  $v0, .L8013445C
 /* 0CAA84 80134384 00031400 */   sll   $v0, $v1, 0x10
-/* 0CAA88 80134388 0C00A67F */  jal   func_800299FC
+/* 0CAA88 80134388 0C00A67F */  jal   rand_int
 /* 0CAA8C 8013438C 24042710 */   addiu $a0, $zero, 0x2710
 /* 0CAA90 80134390 28421388 */  slti  $v0, $v0, 0x1388
 /* 0CAA94 80134394 10400011 */  beqz  $v0, .L801343DC
 /* 0CAA98 80134398 00000000 */   nop   
-/* 0CAA9C 8013439C 0C00A67F */  jal   func_800299FC
+/* 0CAA9C 8013439C 0C00A67F */  jal   rand_int
 /* 0CAAA0 801343A0 2404001E */   addiu $a0, $zero, 0x1e
 /* 0CAAA4 801343A4 00101880 */  sll   $v1, $s0, 2
 /* 0CAAA8 801343A8 00701821 */  addu  $v1, $v1, $s0
@@ -21688,7 +21691,7 @@ func_80134344:
 /* 0CAAD8 801343D8 46006300 */   add.s $f12, $f12, $f0
 
 .L801343DC:
-/* 0CAADC 801343DC 0C00A67F */  jal   func_800299FC
+/* 0CAADC 801343DC 0C00A67F */  jal   rand_int
 /* 0CAAE0 801343E0 2404001E */   addiu $a0, $zero, 0x1e
 /* 0CAAE4 801343E4 00101880 */  sll   $v1, $s0, 2
 /* 0CAAE8 801343E8 00701821 */  addu  $v1, $v1, $s0
@@ -21711,7 +21714,7 @@ func_8013441C:
 /* 0CAB28 80134428 46006300 */  add.s $f12, $f12, $f0
 /* 0CAB2C 8013442C 3C014170 */  lui   $at, 0x4170
 /* 0CAB30 80134430 44810000 */  mtc1  $at, $f0
-/* 0CAB34 80134434 0C00A6C9 */  jal   func_80029B24
+/* 0CAB34 80134434 0C00A6C9 */  jal   clamp_angle
 /* 0CAB38 80134438 46006301 */   sub.s $f12, $f12, $f0
 /* 0CAB3C 8013443C E6200018 */  swc1  $f0, 0x18($s1)
 /* 0CAB40 80134440 C6200000 */  lwc1  $f0, ($s1)
@@ -21753,7 +21756,7 @@ func_8013441C:
 /* 0CABC0 801344C0 AE200018 */   sw    $zero, 0x18($s1)
 
 .L801344C4:
-/* 0CABC4 801344C4 0C00A67F */  jal   func_800299FC
+/* 0CABC4 801344C4 0C00A67F */  jal   rand_int
 /* 0CABC8 801344C8 24040078 */   addiu $a0, $zero, 0x78
 /* 0CABCC 801344CC 00101880 */  sll   $v1, $s0, 2
 /* 0CABD0 801344D0 00701821 */  addu  $v1, $v1, $s0
@@ -21779,12 +21782,12 @@ func_8013441C:
 /* 0CAC20 80134520 46006300 */   add.s $f12, $f12, $f0
 
 .L80134524:
-/* 0CAC24 80134524 0C00A67F */  jal   func_800299FC
+/* 0CAC24 80134524 0C00A67F */  jal   rand_int
 /* 0CAC28 80134528 24042710 */   addiu $a0, $zero, 0x2710
 /* 0CAC2C 8013452C 28421388 */  slti  $v0, $v0, 0x1388
 /* 0CAC30 80134530 144000A3 */  bnez  $v0, .L801347C0
 /* 0CAC34 80134534 00000000 */   nop   
-/* 0CAC38 80134538 0C00A67F */  jal   func_800299FC
+/* 0CAC38 80134538 0C00A67F */  jal   rand_int
 /* 0CAC3C 8013453C 24040078 */   addiu $a0, $zero, 0x78
 /* 0CAC40 80134540 00101880 */  sll   $v1, $s0, 2
 /* 0CAC44 80134544 00701821 */  addu  $v1, $v1, $s0
@@ -21802,12 +21805,12 @@ func_8013441C:
 /* 0CAC74 80134574 46006301 */   sub.s $f12, $f12, $f0
 
 .L80134578:
-/* 0CAC78 80134578 0C00A67F */  jal   func_800299FC
+/* 0CAC78 80134578 0C00A67F */  jal   rand_int
 /* 0CAC7C 8013457C 24042710 */   addiu $a0, $zero, 0x2710
 /* 0CAC80 80134580 28421388 */  slti  $v0, $v0, 0x1388
 /* 0CAC84 80134584 1440008E */  bnez  $v0, .L801347C0
 /* 0CAC88 80134588 00000000 */   nop   
-/* 0CAC8C 8013458C 0C00A67F */  jal   func_800299FC
+/* 0CAC8C 8013458C 0C00A67F */  jal   rand_int
 /* 0CAC90 80134590 24040078 */   addiu $a0, $zero, 0x78
 /* 0CAC94 80134594 00101880 */  sll   $v1, $s0, 2
 /* 0CAC98 80134598 00701821 */  addu  $v1, $v1, $s0
@@ -21828,7 +21831,7 @@ func_8013441C:
 /* 0CACCC 801345CC 8243001B */  lb    $v1, 0x1b($s2)
 /* 0CACD0 801345D0 10620011 */  beq   $v1, $v0, .L80134618
 /* 0CACD4 801345D4 00000000 */   nop   
-/* 0CACD8 801345D8 0C00A67F */  jal   func_800299FC
+/* 0CACD8 801345D8 0C00A67F */  jal   rand_int
 /* 0CACDC 801345DC 24040078 */   addiu $a0, $zero, 0x78
 /* 0CACE0 801345E0 00101880 */  sll   $v1, $s0, 2
 /* 0CACE4 801345E4 00701821 */  addu  $v1, $v1, $s0
@@ -21846,12 +21849,12 @@ func_8013441C:
 /* 0CAD14 80134614 46006301 */   sub.s $f12, $f12, $f0
 
 .L80134618:
-/* 0CAD18 80134618 0C00A67F */  jal   func_800299FC
+/* 0CAD18 80134618 0C00A67F */  jal   rand_int
 /* 0CAD1C 8013461C 24042710 */   addiu $a0, $zero, 0x2710
 /* 0CAD20 80134620 28421388 */  slti  $v0, $v0, 0x1388
 /* 0CAD24 80134624 10400019 */  beqz  $v0, .L8013468C
 /* 0CAD28 80134628 00000000 */   nop   
-/* 0CAD2C 8013462C 0C00A67F */  jal   func_800299FC
+/* 0CAD2C 8013462C 0C00A67F */  jal   rand_int
 /* 0CAD30 80134630 2404003C */   addiu $a0, $zero, 0x3c
 /* 0CAD34 80134634 00101880 */  sll   $v1, $s0, 2
 /* 0CAD38 80134638 00701821 */  addu  $v1, $v1, $s0
@@ -21877,7 +21880,7 @@ func_8013441C:
 /* 0CAD88 80134688 46006301 */   sub.s $f12, $f12, $f0
 
 .L8013468C:
-/* 0CAD8C 8013468C 0C00A67F */  jal   func_800299FC
+/* 0CAD8C 8013468C 0C00A67F */  jal   rand_int
 /* 0CAD90 80134690 2404003C */   addiu $a0, $zero, 0x3c
 /* 0CAD94 80134694 00101880 */  sll   $v1, $s0, 2
 /* 0CAD98 80134698 00701821 */  addu  $v1, $v1, $s0
@@ -21903,12 +21906,12 @@ func_8013441C:
 /* 0CADE8 801346E8 46006301 */   sub.s $f12, $f12, $f0
 
 .L801346EC:
-/* 0CADEC 801346EC 0C00A67F */  jal   func_800299FC
+/* 0CADEC 801346EC 0C00A67F */  jal   rand_int
 /* 0CADF0 801346F0 24042710 */   addiu $a0, $zero, 0x2710
 /* 0CADF4 801346F4 28421388 */  slti  $v0, $v0, 0x1388
 /* 0CADF8 801346F8 10400019 */  beqz  $v0, .L80134760
 /* 0CADFC 801346FC 00000000 */   nop   
-/* 0CAE00 80134700 0C00A67F */  jal   func_800299FC
+/* 0CAE00 80134700 0C00A67F */  jal   rand_int
 /* 0CAE04 80134704 2404003C */   addiu $a0, $zero, 0x3c
 /* 0CAE08 80134708 00101880 */  sll   $v1, $s0, 2
 /* 0CAE0C 8013470C 00701821 */  addu  $v1, $v1, $s0
@@ -21934,7 +21937,7 @@ func_8013441C:
 /* 0CAE5C 8013475C 46006301 */   sub.s $f12, $f12, $f0
 
 .L80134760:
-/* 0CAE60 80134760 0C00A67F */  jal   func_800299FC
+/* 0CAE60 80134760 0C00A67F */  jal   rand_int
 /* 0CAE64 80134764 2404003C */   addiu $a0, $zero, 0x3c
 /* 0CAE68 80134768 00101880 */  sll   $v1, $s0, 2
 /* 0CAE6C 8013476C 00701821 */  addu  $v1, $v1, $s0
@@ -21960,7 +21963,7 @@ func_8013441C:
 /* 0CAEBC 801347BC 46006301 */   sub.s $f12, $f12, $f0
 
 .L801347C0:
-/* 0CAEC0 801347C0 0C00A67F */  jal   func_800299FC
+/* 0CAEC0 801347C0 0C00A67F */  jal   rand_int
 /* 0CAEC4 801347C4 24040078 */   addiu $a0, $zero, 0x78
 /* 0CAEC8 801347C8 00101880 */  sll   $v1, $s0, 2
 /* 0CAECC 801347CC 00701821 */  addu  $v1, $v1, $s0
@@ -21986,7 +21989,7 @@ func_80134800:
 /* 0CAF18 80134818 00000000 */  nop   
 /* 0CAF1C 8013481C 46006301 */  sub.s $f12, $f12, $f0
 func_80134820:
-/* 0CAF20 80134820 0C00A6C9 */  jal   func_80029B24
+/* 0CAF20 80134820 0C00A6C9 */  jal   clamp_angle
 /* 0CAF24 80134824 00000000 */   nop   
 /* 0CAF28 80134828 E6200018 */  swc1  $f0, 0x18($s1)
 func_8013482C:
@@ -21995,7 +21998,7 @@ func_8013482C:
 /* 0CAF34 80134834 00431024 */  and   $v0, $v0, $v1
 /* 0CAF38 80134838 14400019 */  bnez  $v0, .L801348A0
 /* 0CAF3C 8013483C 00000000 */   nop   
-/* 0CAF40 80134840 0C00A67F */  jal   func_800299FC
+/* 0CAF40 80134840 0C00A67F */  jal   rand_int
 /* 0CAF44 80134844 240407D0 */   addiu $a0, $zero, 0x7d0
 /* 0CAF48 80134848 C6240018 */  lwc1  $f4, 0x18($s1)
 /* 0CAF4C 8013484C 3C0140C9 */  lui   $at, 0x40c9
@@ -22021,7 +22024,7 @@ func_8013482C:
 /* 0CAF9C 8013489C 46022503 */   div.s $f20, $f4, $f2
 
 .L801348A0:
-/* 0CAFA0 801348A0 0C00A67F */  jal   func_800299FC
+/* 0CAFA0 801348A0 0C00A67F */  jal   rand_int
 /* 0CAFA4 801348A4 240407D0 */   addiu $a0, $zero, 0x7d0
 /* 0CAFA8 801348A8 C6240018 */  lwc1  $f4, 0x18($s1)
 /* 0CAFAC 801348AC 3C0140C9 */  lui   $at, 0x40c9
@@ -22049,7 +22052,7 @@ func_8013482C:
 .L80134900:
 /* 0CB000 80134900 44826000 */  mtc1  $v0, $f12
 /* 0CB004 80134904 00000000 */  nop   
-/* 0CB008 80134908 0C00A6C9 */  jal   func_80029B24
+/* 0CB008 80134908 0C00A6C9 */  jal   clamp_angle
 /* 0CB00C 8013490C 46806320 */   cvt.s.w $f12, $f12
 /* 0CB010 80134910 E6200018 */  swc1  $f0, 0x18($s1)
 /* 0CB014 80134914 8E420000 */  lw    $v0, ($s2)
@@ -22101,10 +22104,10 @@ func_8013499C:
 /* 0CB0C0 801349C0 00000000 */  nop   
 /* 0CB0C4 801349C4 46020503 */  div.s $f20, $f0, $f2
 func_801349C8:
-/* 0CB0C8 801349C8 0C00A85B */  jal   func_8002A16C
+/* 0CB0C8 801349C8 0C00A85B */  jal   sin_rad
 /* 0CB0CC 801349CC 4600A306 */   mov.s $f12, $f20
 /* 0CB0D0 801349D0 46000586 */  mov.s $f22, $f0
-/* 0CB0D4 801349D4 0C00A874 */  jal   func_8002A1D0
+/* 0CB0D4 801349D4 0C00A874 */  jal   cos_rad
 /* 0CB0D8 801349D8 4600A306 */   mov.s $f12, $f20
 /* 0CB0DC 801349DC 4616C102 */  mul.s $f4, $f24, $f22
 /* 0CB0E0 801349E0 00000000 */  nop   
@@ -22172,7 +22175,7 @@ func_80134A50:
 /* 0CB1BC 80134ABC 1040019C */  beqz  $v0, .L80135130
 /* 0CB1C0 80134AC0 24020001 */   addiu $v0, $zero, 1
 /* 0CB1C4 80134AC4 86440004 */  lh    $a0, 4($s2)
-/* 0CB1C8 80134AC8 0C051514 */  jal   func_80145450
+/* 0CB1C8 80134AC8 0C051514 */  jal   set_global_flag
 /* 0CB1CC 80134ACC 00000000 */   nop   
 /* 0CB1D0 80134AD0 0804D44C */  j     func_80135130
 /* 0CB1D4 80134AD4 24020001 */   addiu $v0, $zero, 1
@@ -22186,7 +22189,7 @@ func_80134A50:
 /* 0CB1EC 80134AEC 8E220020 */  lw    $v0, 0x20($s1)
 /* 0CB1F0 80134AF0 10400005 */  beqz  $v0, .L80134B08
 /* 0CB1F4 80134AF4 00000000 */   nop   
-/* 0CB1F8 80134AF8 0C04CEC3 */  jal   func_80133B0C
+/* 0CB1F8 80134AF8 0C04CEC3 */  jal   test_item_player_collision
 /* 0CB1FC 80134AFC 0240202D */   daddu $a0, $s2, $zero
 /* 0CB200 80134B00 1440018B */  bnez  $v0, .L80135130
 /* 0CB204 80134B04 24020003 */   addiu $v0, $zero, 3
@@ -22373,7 +22376,7 @@ func_80134D90:
 /* 0CB4B0 80134DB0 E642000C */  swc1  $f2, 0xc($s2)
 /* 0CB4B4 80134DB4 E6440010 */  swc1  $f4, 0x10($s2)
 /* 0CB4B8 80134DB8 C6200018 */  lwc1  $f0, 0x18($s1)
-/* 0CB4BC 80134DBC 0C00A6C9 */  jal   func_80029B24
+/* 0CB4BC 80134DBC 0C00A6C9 */  jal   clamp_angle
 /* 0CB4C0 80134DC0 460C0300 */   add.s $f12, $f0, $f12
 /* 0CB4C4 80134DC4 3C0140C9 */  lui   $at, 0x40c9
 /* 0CB4C8 80134DC8 34210FD0 */  ori   $at, $at, 0xfd0
@@ -22385,10 +22388,10 @@ func_80134D90:
 /* 0CB4E0 80134DE0 44812000 */  mtc1  $at, $f4
 /* 0CB4E4 80134DE4 E6200018 */  swc1  $f0, 0x18($s1)
 /* 0CB4E8 80134DE8 46041503 */  div.s $f20, $f2, $f4
-/* 0CB4EC 80134DEC 0C00A85B */  jal   func_8002A16C
+/* 0CB4EC 80134DEC 0C00A85B */  jal   sin_rad
 /* 0CB4F0 80134DF0 4600A306 */   mov.s $f12, $f20
 /* 0CB4F4 80134DF4 46000586 */  mov.s $f22, $f0
-/* 0CB4F8 80134DF8 0C00A874 */  jal   func_8002A1D0
+/* 0CB4F8 80134DF8 0C00A874 */  jal   cos_rad
 /* 0CB4FC 80134DFC 4600A306 */   mov.s $f12, $f20
 /* 0CB500 80134E00 3C01C000 */  lui   $at, 0xc000
 /* 0CB504 80134E04 44811800 */  mtc1  $at, $f3
@@ -22617,7 +22620,7 @@ func_801350F8:
 func_801350FC:
 /* 0CB7FC 801350FC 8E460008 */  lw    $a2, 8($s2)
 /* 0CB800 80135100 8E47000C */  lw    $a3, 0xc($s2)
-/* 0CB804 80135104 0C052757 */  jal   func_80149D5C
+/* 0CB804 80135104 0C052757 */  jal   play_sound_at_position
 /* 0CB808 80135108 0000282D */   daddu $a1, $zero, $zero
 func_8013510C:
 .L8013510C:
@@ -22640,7 +22643,7 @@ func_80135134:
 /* 0CB838 80135138 24020002 */  addiu $v0, $zero, 2
 /* 0CB83C 8013513C 14620005 */  bne   $v1, $v0, .L80135154
 /* 0CB840 80135140 24020003 */   addiu $v0, $zero, 3
-/* 0CB844 80135144 0C04CE4C */  jal   func_80133930
+/* 0CB844 80135144 0C04CE4C */  jal   remove_item_entity_by_reference
 /* 0CB848 80135148 0240202D */   daddu $a0, $s2, $zero
 /* 0CB84C 8013514C 8243001A */  lb    $v1, 0x1a($s2)
 /* 0CB850 80135150 24020003 */  addiu $v0, $zero, 3
@@ -22651,7 +22654,7 @@ func_80135134:
 /* 0CB860 80135160 30420400 */  andi  $v0, $v0, 0x400
 /* 0CB864 80135164 10400003 */  beqz  $v0, .L80135174
 /* 0CB868 80135168 00000000 */   nop   
-/* 0CB86C 8013516C 0C051514 */  jal   func_80145450
+/* 0CB86C 8013516C 0C051514 */  jal   set_global_flag
 /* 0CB870 80135170 86440004 */   lh    $a0, 4($s2)
 .L80135174:
 /* 0CB874 80135174 C644000C */  lwc1  $f4, 0xc($s2)
@@ -22750,7 +22753,7 @@ func_80135134:
 /* 0CB9C0 801352C0 E7A00010 */  swc1  $f0, 0x10($sp)
 /* 0CB9C4 801352C4 8E460008 */  lw    $a2, 8($s2)
 /* 0CB9C8 801352C8 8E47000C */  lw    $a3, 0xc($s2)
-/* 0CB9CC 801352CC 0C052757 */  jal   func_80149D5C
+/* 0CB9CC 801352CC 0C052757 */  jal   play_sound_at_position
 /* 0CB9D0 801352D0 0000282D */   daddu $a1, $zero, $zero
 .L801352D4:
 /* 0CB9D4 801352D4 92620002 */  lbu   $v0, 2($s3)
@@ -22791,7 +22794,7 @@ func_80135134:
 /* 0CBA54 80135354 E7A00010 */  swc1  $f0, 0x10($sp)
 /* 0CBA58 80135358 8E460008 */  lw    $a2, 8($s2)
 /* 0CBA5C 8013535C 8E47000C */  lw    $a3, 0xc($s2)
-/* 0CBA60 80135360 0C052757 */  jal   func_80149D5C
+/* 0CBA60 80135360 0C052757 */  jal   play_sound_at_position
 /* 0CBA64 80135364 0000282D */   daddu $a1, $zero, $zero
 .L80135368:
 /* 0CBA68 80135368 92620005 */  lbu   $v0, 5($s3)
@@ -22811,7 +22814,7 @@ func_80135398:
 /* 0CBA98 80135398 E7A00010 */  swc1  $f0, 0x10($sp)
 /* 0CBA9C 8013539C 8E460008 */  lw    $a2, 8($s2)
 /* 0CBAA0 801353A0 8E47000C */  lw    $a3, 0xc($s2)
-/* 0CBAA4 801353A4 0C052757 */  jal   func_80149D5C
+/* 0CBAA4 801353A4 0C052757 */  jal   play_sound_at_position
 /* 0CBAA8 801353A8 0000282D */   daddu $a1, $zero, $zero
 /* 0CBAAC 801353AC 8E850028 */  lw    $a1, 0x28($s4)
 /* 0CBAB0 801353B0 868200B0 */  lh    $v0, 0xb0($s4)
@@ -22846,7 +22849,7 @@ func_80135398:
 /* 0CBB18 80135418 E7A00010 */  swc1  $f0, 0x10($sp)
 /* 0CBB1C 8013541C 8E460008 */  lw    $a2, 8($s2)
 /* 0CBB20 80135420 8E47000C */  lw    $a3, 0xc($s2)
-/* 0CBB24 80135424 0C052757 */  jal   func_80149D5C
+/* 0CBB24 80135424 0C052757 */  jal   play_sound_at_position
 /* 0CBB28 80135428 0000282D */   daddu $a1, $zero, $zero
 /* 0CBB2C 8013542C 3C030001 */  lui   $v1, 1
 /* 0CBB30 80135430 8E6202B4 */  lw    $v0, 0x2b4($s3)
@@ -22893,7 +22896,7 @@ func_801354B4:
 /* 0CBBB4 801354B4 E7A00010 */  swc1  $f0, 0x10($sp)
 /* 0CBBB8 801354B8 8E460008 */  lw    $a2, 8($s2)
 /* 0CBBBC 801354BC 8E47000C */  lw    $a3, 0xc($s2)
-/* 0CBBC0 801354C0 0C052757 */  jal   func_80149D5C
+/* 0CBBC0 801354C0 0C052757 */  jal   play_sound_at_position
 /* 0CBBC4 801354C4 0000282D */   daddu $a1, $zero, $zero
 .L801354C8:
 /* 0CBBC8 801354C8 0240202D */  daddu $a0, $s2, $zero
@@ -22905,7 +22908,7 @@ func_801354CC:
 /* 0CBBDC 801354DC 8C430000 */  lw    $v1, ($v0)
 /* 0CBBE0 801354E0 2405FFBF */  addiu $a1, $zero, -0x41
 /* 0CBBE4 801354E4 00651824 */  and   $v1, $v1, $a1
-/* 0CBBE8 801354E8 0C04CE4C */  jal   func_80133930
+/* 0CBBE8 801354E8 0C04CE4C */  jal   remove_item_entity_by_reference
 /* 0CBBEC 801354EC AC430000 */   sw    $v1, ($v0)
 func_801354F0:
 .L801354F0:
@@ -22915,15 +22918,15 @@ func_801354F0:
 /* 0CBBFC 801354FC 2402000A */   addiu $v0, $zero, 0xa
 /* 0CBC00 80135500 3C048015 */  lui   $a0, 0x8015
 /* 0CBC04 80135504 8C845D80 */  lw    $a0, 0x5d80($a0)
-/* 0CBC08 80135508 0C0B1059 */  jal   func_802C4164
+/* 0CBC08 80135508 0C0B1059 */  jal   does_script_exist
 /* 0CBC0C 8013550C 00000000 */   nop   
 /* 0CBC10 80135510 14400007 */  bnez  $v0, .L80135530
 /* 0CBC14 80135514 00000000 */   nop   
 /* 0CBC18 80135518 3C018015 */  lui   $at, 0x8015
 /* 0CBC1C 8013551C A42065A8 */  sh    $zero, 0x65a8($at)
-/* 0CBC20 80135520 0C04CE4C */  jal   func_80133930
+/* 0CBC20 80135520 0C04CE4C */  jal   remove_item_entity_by_reference
 /* 0CBC24 80135524 0240202D */   daddu $a0, $s2, $zero
-/* 0CBC28 80135528 0C0B1192 */  jal   func_802C4648
+/* 0CBC28 80135528 0C0B1192 */  jal   resume_all_group
 /* 0CBC2C 8013552C 24040002 */   addiu $a0, $zero, 2
 .L80135530:
 /* 0CBC30 80135530 8243001A */  lb    $v1, 0x1a($s2)
@@ -23012,7 +23015,7 @@ func_8013559C:
 /* 0CBD50 80135650 03E00008 */  jr    $ra
 /* 0CBD54 80135654 00000000 */   nop   
 
-func_80135658:
+update_item_entity_static:
 /* 0CBD58 80135658 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0CBD5C 8013565C AFB00010 */  sw    $s0, 0x10($sp)
 /* 0CBD60 80135660 0080802D */  daddu $s0, $a0, $zero
@@ -23020,7 +23023,7 @@ func_80135658:
 /* 0CBD68 80135668 8202001A */  lb    $v0, 0x1a($s0)
 /* 0CBD6C 8013566C 14400011 */  bnez  $v0, .L801356B4
 /* 0CBD70 80135670 00000000 */   nop   
-/* 0CBD74 80135674 0C04CEC3 */  jal   func_80133B0C
+/* 0CBD74 80135674 0C04CEC3 */  jal   test_item_player_collision
 /* 0CBD78 80135678 00000000 */   nop   
 /* 0CBD7C 8013567C 1040000D */  beqz  $v0, .L801356B4
 /* 0CBD80 80135680 24020001 */   addiu $v0, $zero, 1
@@ -23054,7 +23057,7 @@ func_801356D4:
 /* 0CBDD4 801356D4 03E00008 */  jr    $ra
 /* 0CBDD8 801356D8 00000000 */   nop   
 
-func_801356DC:
+update_item_entity_temp:
 /* 0CBDDC 801356DC 27BDFFC0 */  addiu $sp, $sp, -0x40
 /* 0CBDE0 801356E0 AFB10024 */  sw    $s1, 0x24($sp)
 /* 0CBDE4 801356E4 0080882D */  daddu $s1, $a0, $zero
@@ -23173,14 +23176,14 @@ func_801356DC:
 /* 0CBF84 80135884 E7A00010 */  swc1  $f0, 0x10($sp)
 /* 0CBF88 80135888 8E260008 */  lw    $a2, 8($s1)
 /* 0CBF8C 8013588C 8E27000C */  lw    $a3, 0xc($s1)
-/* 0CBF90 80135890 0C052757 */  jal   func_80149D5C
+/* 0CBF90 80135890 0C052757 */  jal   play_sound_at_position
 /* 0CBF94 80135894 0000282D */   daddu $a1, $zero, $zero
 /* 0CBF98 80135898 0804D62A */  j     func_801358A8
 /* 0CBF9C 8013589C 00000000 */   nop   
 
 func_801358A0:
 .L801358A0:
-/* 0CBFA0 801358A0 0C05272D */  jal   func_80149CB4
+/* 0CBFA0 801358A0 0C05272D */  jal   play_sound
 /* 0CBFA4 801358A4 00000000 */   nop   
 func_801358A8:
 .L801358A8:
@@ -23193,17 +23196,17 @@ func_801358A8:
 /* 0CBFC0 801358C0 3C048009 */  lui   $a0, 0x8009
 /* 0CBFC4 801358C4 00822021 */  addu  $a0, $a0, $v0
 /* 0CBFC8 801358C8 8C84A680 */  lw    $a0, -0x5980($a0)
-/* 0CBFCC 801358CC 0C050529 */  jal   func_801414A4
+/* 0CBFCC 801358CC 0C050529 */  jal   create_icon
 /* 0CBFD0 801358D0 00000000 */   nop   
 /* 0CBFD4 801358D4 0040202D */  daddu $a0, $v0, $zero
 /* 0CBFD8 801358D8 24050080 */  addiu $a1, $zero, 0x80
 /* 0CBFDC 801358DC 3C108015 */  lui   $s0, 0x8015
 /* 0CBFE0 801358E0 261068E0 */  addiu $s0, $s0, 0x68e0
-/* 0CBFE4 801358E4 0C051280 */  jal   func_80144A00
+/* 0CBFE4 801358E4 0C051280 */  jal   set_icon_flags
 /* 0CBFE8 801358E8 AE040000 */   sw    $a0, ($s0)
 /* 0CBFEC 801358EC 2405FF9C */  addiu $a1, $zero, -0x64
 /* 0CBFF0 801358F0 8E040000 */  lw    $a0, ($s0)
-/* 0CBFF4 801358F4 0C051261 */  jal   func_80144984
+/* 0CBFF4 801358F4 0C051261 */  jal   set_icon_render_pos
 /* 0CBFF8 801358F8 00A0302D */   daddu $a2, $a1, $zero
 /* 0CBFFC 801358FC 24020002 */  addiu $v0, $zero, 2
 /* 0CC000 80135900 3C108008 */  lui   $s0, 0x8008
@@ -23336,7 +23339,7 @@ func_80135AB4:
 /* 0CC1B4 80135AB4 8E220000 */  lw    $v0, ($s1)
 /* 0CC1B8 80135AB8 04410003 */  bgez  $v0, .L80135AC8
 /* 0CC1BC 80135ABC 00000000 */   nop   
-/* 0CC1C0 80135AC0 0C051514 */  jal   func_80145450
+/* 0CC1C0 80135AC0 0C051514 */  jal   set_global_flag
 /* 0CC1C4 80135AC4 86240004 */   lh    $a0, 4($s1)
 .L80135AC8:
 /* 0CC1C8 80135AC8 8222001A */  lb    $v0, 0x1a($s1)
@@ -23357,7 +23360,7 @@ func_80135AB4:
 /* 0CC204 80135B04 0C051F9F */  jal   func_80147E7C
 /* 0CC208 80135B08 0200282D */   daddu $a1, $s0, $zero
 .L80135B0C:
-/* 0CC20C 80135B0C 0C03A6D5 */  jal   func_800E9B54
+/* 0CC20C 80135B0C 0C03A6D5 */  jal   increment_status_menu_disabled
 /* 0CC210 80135B10 00000000 */   nop   
 /* 0CC214 80135B14 3C018015 */  lui   $at, 0x8015
 /* 0CC218 80135B18 AC3268E4 */  sw    $s2, 0x68e4($at)
@@ -23552,7 +23555,7 @@ func_80135AB4:
 /* 0CC4D8 80135DD8 00431024 */  and   $v0, $v0, $v1
 /* 0CC4DC 80135DDC 14400003 */  bnez  $v0, .L80135DEC
 /* 0CC4E0 80135DE0 00000000 */   nop   
-/* 0CC4E4 80135DE4 0C039769 */  jal   func_800E5DA4
+/* 0CC4E4 80135DE4 0C039769 */  jal   set_action_state
 /* 0CC4E8 80135DE8 0000202D */   daddu $a0, $zero, $zero
 .L80135DEC:
 /* 0CC4EC 80135DEC 86220018 */  lh    $v0, 0x18($s1)
@@ -23602,7 +23605,7 @@ func_80135AB4:
 /* 0CC590 80135E90 10400009 */  beqz  $v0, .L80135EB8
 /* 0CC594 80135E94 0000202D */   daddu $a0, $zero, $zero
 /* 0CC598 80135E98 3C05F840 */  lui   $a1, 0xf840
-/* 0CC59C 80135E9C 0C0B1EAF */  jal   func_802C7ABC
+/* 0CC59C 80135E9C 0C0B1EAF */  jal   get_variable
 /* 0CC5A0 80135EA0 34A55BE1 */   ori   $a1, $a1, 0x5be1
 /* 0CC5A4 80135EA4 14400004 */  bnez  $v0, .L80135EB8
 /* 0CC5A8 80135EA8 0000202D */   daddu $a0, $zero, $zero
@@ -23617,7 +23620,7 @@ func_80135AB4:
 /* 0CC5C4 80135EC4 24020009 */   addiu $v0, $zero, 9
 /* 0CC5C8 80135EC8 0000202D */  daddu $a0, $zero, $zero
 /* 0CC5CC 80135ECC 3C05F840 */  lui   $a1, 0xf840
-/* 0CC5D0 80135ED0 0C0B1EAF */  jal   func_802C7ABC
+/* 0CC5D0 80135ED0 0C0B1EAF */  jal   get_variable
 /* 0CC5D4 80135ED4 34A55BE5 */   ori   $a1, $a1, 0x5be5
 /* 0CC5D8 80135ED8 14400009 */  bnez  $v0, .L80135F00
 /* 0CC5DC 80135EDC 24020009 */   addiu $v0, $zero, 9
@@ -23625,7 +23628,7 @@ func_80135AB4:
 /* 0CC5E4 80135EE4 3C05F840 */  lui   $a1, 0xf840
 /* 0CC5E8 80135EE8 34A55BE5 */  ori   $a1, $a1, 0x5be5
 func_80135EEC:
-/* 0CC5EC 80135EEC 0C0B2026 */  jal   func_802C8098
+/* 0CC5EC 80135EEC 0C0B2026 */  jal   set_variable
 /* 0CC5F0 80135EF0 24060001 */   addiu $a2, $zero, 1
 /* 0CC5F4 80135EF4 24020005 */  addiu $v0, $zero, 5
 /* 0CC5F8 80135EF8 0804D8DF */  j     func_8013637C
@@ -23654,13 +23657,13 @@ func_80135EEC:
 .L80135F44:
 /* 0CC644 80135F44 3C058015 */  lui   $a1, 0x8015
 /* 0CC648 80135F48 24A568F8 */  addiu $a1, $a1, 0x68f8
-/* 0CC64C 80135F4C 0C049640 */  jal   func_80125900
+/* 0CC64C 80135F4C 0C049640 */  jal   load_string
 /* 0CC650 80135F50 00000000 */   nop   
 /* 0CC654 80135F54 0040202D */  daddu $a0, $v0, $zero
 /* 0CC658 80135F58 0000282D */  daddu $a1, $zero, $zero
 /* 0CC65C 80135F5C 3C018015 */  lui   $at, 0x8015
 /* 0CC660 80135F60 AC2468F4 */  sw    $a0, 0x68f4($at)
-/* 0CC664 80135F64 0C0496AE */  jal   func_80125AB8
+/* 0CC664 80135F64 0C0496AE */  jal   clamp_printer_coords
 /* 0CC668 80135F68 00A0302D */   daddu $a2, $a1, $zero
 /* 0CC66C 80135F6C 24020006 */  addiu $v0, $zero, 6
 /* 0CC670 80135F70 0804D8DF */  j     func_8013637C
@@ -23828,7 +23831,7 @@ func_80135EEC:
 /* 0CC8D4 801361D4 8C420108 */  lw    $v0, 0x108($v0)
 /* 0CC8D8 801361D8 3C108015 */  lui   $s0, 0x8015
 /* 0CC8DC 801361DC 261068EC */  addiu $s0, $s0, 0x68ec
-/* 0CC8E0 801361E0 0C0511FF */  jal   func_801447FC
+/* 0CC8E0 801361E0 0C0511FF */  jal   set_menu_icon_script
 /* 0CC8E4 801361E4 AE020000 */   sw    $v0, ($s0)
 /* 0CC8E8 801361E8 8E040000 */  lw    $a0, ($s0)
 /* 0CC8EC 801361EC 8E650028 */  lw    $a1, 0x28($s3)
@@ -23843,9 +23846,9 @@ func_80135EEC:
 /* 0CC910 80136210 46001080 */  add.s $f2, $f2, $f0
 /* 0CC914 80136214 44061000 */  mfc1  $a2, $f2
 /* 0CC918 80136218 AFA00014 */  sw    $zero, 0x14($sp)
-/* 0CC91C 8013621C 0C04C6B2 */  jal   func_80131AC8
+/* 0CC91C 8013621C 0C04C6B2 */  jal   make_item_entity_delayed
 /* 0CC920 80136220 AFA00018 */   sw    $zero, 0x18($sp)
-/* 0CC924 80136224 0C04C3D6 */  jal   func_80130F58
+/* 0CC924 80136224 0C04C3D6 */  jal   get_item_entity
 /* 0CC928 80136228 0040202D */   daddu $a0, $v0, $zero
 /* 0CC92C 8013622C 2403FFFF */  addiu $v1, $zero, -1
 /* 0CC930 80136230 A043001D */  sb    $v1, 0x1d($v0)
@@ -23856,10 +23859,10 @@ func_80135EEC:
 /* 0CC944 80136244 2462FFFE */  addiu $v0, $v1, -2
 /* 0CC948 80136248 00021040 */  sll   $v0, $v0, 1
 /* 0CC94C 8013624C 02821021 */  addu  $v0, $s4, $v0
-/* 0CC950 80136250 0C039DB3 */  jal   func_800E76CC
+/* 0CC950 80136250 0C039DB3 */  jal   sort_items
 /* 0CC954 80136254 A44001B4 */   sh    $zero, 0x1b4($v0)
 /* 0CC958 80136258 86240018 */  lh    $a0, 0x18($s1)
-/* 0CC95C 8013625C 0C039D5D */  jal   func_800E7574
+/* 0CC95C 8013625C 0C039D5D */  jal   add_item
 /* 0CC960 80136260 00000000 */   nop   
 /* 0CC964 80136264 3C040006 */  lui   $a0, 6
 .L80136268:
@@ -23926,13 +23929,13 @@ func_80135EEC:
 /* 0CCA4C 8013634C 00651824 */  and   $v1, $v1, $a1
 /* 0CCA50 80136350 AC430000 */  sw    $v1, ($v0)
 func_80136354:
-/* 0CCA54 80136354 0C05123D */  jal   func_801448F4
+/* 0CCA54 80136354 0C05123D */  jal   free_icon
 /* 0CCA58 80136358 00000000 */   nop   
-/* 0CCA5C 8013635C 0C04CE4C */  jal   func_80133930
+/* 0CCA5C 8013635C 0C04CE4C */  jal   remove_item_entity_by_reference
 /* 0CCA60 80136360 0220202D */   daddu $a0, $s1, $zero
-/* 0CCA64 80136364 0C039DB3 */  jal   func_800E76CC
+/* 0CCA64 80136364 0C039DB3 */  jal   sort_items
 /* 0CCA68 80136368 00000000 */   nop   
-/* 0CCA6C 8013636C 0C03A6CC */  jal   func_800E9B30
+/* 0CCA6C 8013636C 0C03A6CC */  jal   decrement_status_menu_disabled
 /* 0CCA70 80136370 00000000 */   nop   
 /* 0CCA74 80136374 3C018015 */  lui   $at, 0x8015
 /* 0CCA78 80136378 A42065A4 */  sh    $zero, 0x65a4($at)
@@ -24014,7 +24017,7 @@ func_801363A0:
 /* 0CCB78 80136478 3652005C */  ori   $s2, $s2, 0x5c
 .L8013647C:
 /* 0CCB7C 8013647C 8C840000 */  lw    $a0, ($a0)
-/* 0CCB80 80136480 0C0496CF */  jal   func_80125B3C
+/* 0CCB80 80136480 0C0496CF */  jal   set_message_string
 /* 0CCB84 80136484 0000282D */   daddu $a1, $zero, $zero
 /* 0CCB88 80136488 86840018 */  lh    $a0, 0x18($s4)
 /* 0CCB8C 8013648C 00041140 */  sll   $v0, $a0, 5
@@ -24033,7 +24036,7 @@ func_801363A0:
 /* 0CCBC0 801364C0 30420030 */  andi  $v0, $v0, 0x30
 /* 0CCBC4 801364C4 14400006 */  bnez  $v0, .L801364E0
 /* 0CCBC8 801364C8 00000000 */   nop   
-/* 0CCBCC 801364CC 0C04991D */  jal   func_80126474
+/* 0CCBCC 801364CC 0C04991D */  jal   get_string_width
 /* 0CCBD0 801364D0 0000282D */   daddu $a1, $zero, $zero
 /* 0CCBD4 801364D4 0804D93B */  j     func_801364EC
 /* 0CCBD8 801364D8 24500036 */   addiu $s0, $v0, 0x36
@@ -24041,7 +24044,7 @@ func_801363A0:
 .L801364DC:
 /* 0CCBDC 801364DC 0240202D */  daddu $a0, $s2, $zero
 .L801364E0:
-/* 0CCBE0 801364E0 0C04991D */  jal   func_80126474
+/* 0CCBE0 801364E0 0C04991D */  jal   get_string_width
 /* 0CCBE4 801364E4 0000282D */   daddu $a1, $zero, $zero
 /* 0CCBE8 801364E8 2450001E */  addiu $s0, $v0, 0x1e
 func_801364EC:
@@ -24084,10 +24087,10 @@ func_801364EC:
 .L80136564:
 /* 0CCC64 80136564 8C840000 */  lw    $a0, ($a0)
 /* 0CCC68 80136568 0000282D */  daddu $a1, $zero, $zero
-/* 0CCC6C 8013656C 0C0496CF */  jal   func_80125B3C
+/* 0CCC6C 8013656C 0C0496CF */  jal   set_message_string
 /* 0CCC70 80136570 2413004C */   addiu $s3, $zero, 0x4c
 /* 0CCC74 80136574 0240202D */  daddu $a0, $s2, $zero
-/* 0CCC78 80136578 0C04991D */  jal   func_80126474
+/* 0CCC78 80136578 0C04991D */  jal   get_string_width
 /* 0CCC7C 8013657C 0000282D */   daddu $a1, $zero, $zero
 /* 0CCC80 80136580 2450001E */  addiu $s0, $v0, 0x1e
 /* 0CCC84 80136584 001017C2 */  srl   $v0, $s0, 0x1f
@@ -24153,7 +24156,7 @@ func_80136598:
 /* 0CCD68 80136668 1062002C */  beq   $v1, $v0, .L8013671C
 /* 0CCD6C 8013666C 3C04001D */   lui   $a0, 0x1d
 /* 0CCD70 80136670 34840060 */  ori   $a0, $a0, 0x60
-/* 0CCD74 80136674 0C04991D */  jal   func_80126474
+/* 0CCD74 80136674 0C04991D */  jal   get_string_width
 /* 0CCD78 80136678 0000282D */   daddu $a1, $zero, $zero
 /* 0CCD7C 8013667C 24500018 */  addiu $s0, $v0, 0x18
 /* 0CCD80 80136680 24040011 */  addiu $a0, $zero, 0x11
@@ -24172,11 +24175,11 @@ func_80136598:
 
 .L801366B4:
 /* 0CCDB4 801366B4 8C840000 */  lw    $a0, ($a0)
-/* 0CCDB8 801366B8 0C0496CF */  jal   func_80125B3C
+/* 0CCDB8 801366B8 0C0496CF */  jal   set_message_string
 /* 0CCDBC 801366BC 0000282D */   daddu $a1, $zero, $zero
 /* 0CCDC0 801366C0 3C04001D */  lui   $a0, 0x1d
 /* 0CCDC4 801366C4 3484005F */  ori   $a0, $a0, 0x5f
-/* 0CCDC8 801366C8 0C04991D */  jal   func_80126474
+/* 0CCDC8 801366C8 0C04991D */  jal   get_string_width
 /* 0CCDCC 801366CC 0000282D */   daddu $a1, $zero, $zero
 /* 0CCDD0 801366D0 24500036 */  addiu $s0, $v0, 0x36
 /* 0CCDD4 801366D4 2404000C */  addiu $a0, $zero, 0xc
@@ -24251,7 +24254,7 @@ func_8013671C:
 /* 0CCED4 801367D4 36100058 */  ori   $s0, $s0, 0x58
 .L801367D8:
 /* 0CCED8 801367D8 8C840000 */  lw    $a0, ($a0)
-/* 0CCEDC 801367DC 0C0496CF */  jal   func_80125B3C
+/* 0CCEDC 801367DC 0C0496CF */  jal   set_message_string
 /* 0CCEE0 801367E0 0000282D */   daddu $a1, $zero, $zero
 /* 0CCEE4 801367E4 96230006 */  lhu   $v1, 6($s1)
 /* 0CCEE8 801367E8 30620010 */  andi  $v0, $v1, 0x10
@@ -24301,7 +24304,7 @@ func_8013671C:
 /* 0CCF78 80136878 3610005C */  ori   $s0, $s0, 0x5c
 .L8013687C:
 /* 0CCF7C 8013687C 8C840000 */  lw    $a0, ($a0)
-/* 0CCF80 80136880 0C0496CF */  jal   func_80125B3C
+/* 0CCF80 80136880 0C0496CF */  jal   set_message_string
 /* 0CCF84 80136884 0000282D */   daddu $a1, $zero, $zero
 func_80136888:
 .L80136888:
@@ -24340,7 +24343,7 @@ func_80136888:
 /* 0CD000 80136900 240700FF */  addiu $a3, $zero, 0xff
 /* 0CD004 80136904 2402002F */  addiu $v0, $zero, 0x2f
 /* 0CD008 80136908 AFA20010 */  sw    $v0, 0x10($sp)
-/* 0CD00C 8013690C 0C04993B */  jal   func_801264EC
+/* 0CD00C 8013690C 0C04993B */  jal   draw_string
 /* 0CD010 80136910 AFA00014 */   sw    $zero, 0x14($sp)
 /* 0CD014 80136914 0804DA6D */  j     func_801369B4
 /* 0CD018 80136918 00000000 */   nop   
@@ -24350,7 +24353,7 @@ func_80136888:
 /* 0CD020 80136920 240700FF */  addiu $a3, $zero, 0xff
 /* 0CD024 80136924 2402002F */  addiu $v0, $zero, 0x2f
 /* 0CD028 80136928 AFA20010 */  sw    $v0, 0x10($sp)
-/* 0CD02C 8013692C 0C04993B */  jal   func_801264EC
+/* 0CD02C 8013692C 0C04993B */  jal   draw_string
 /* 0CD030 80136930 AFA00014 */   sw    $zero, 0x14($sp)
 /* 0CD034 80136934 96220006 */  lhu   $v0, 6($s1)
 /* 0CD038 80136938 30420030 */  andi  $v0, $v0, 0x30
@@ -24365,7 +24368,7 @@ func_80136888:
 /* 0CD058 80136958 3C048008 */  lui   $a0, 0x8008
 /* 0CD05C 8013695C 00822021 */  addu  $a0, $a0, $v0
 /* 0CD060 80136960 8C8478E0 */  lw    $a0, 0x78e0($a0)
-/* 0CD064 80136964 0C0496CF */  jal   func_80125B3C
+/* 0CD064 80136964 0C0496CF */  jal   set_message_string
 /* 0CD068 80136968 0000282D */   daddu $a1, $zero, $zero
 /* 0CD06C 8013696C 3C04001D */  lui   $a0, 0x1d
 /* 0CD070 80136970 3484005F */  ori   $a0, $a0, 0x5f
@@ -24374,17 +24377,17 @@ func_80136888:
 /* 0CD07C 8013697C 240700FF */  addiu $a3, $zero, 0xff
 /* 0CD080 80136980 2402002F */  addiu $v0, $zero, 0x2f
 /* 0CD084 80136984 AFA20010 */  sw    $v0, 0x10($sp)
-/* 0CD088 80136988 0C04993B */  jal   func_801264EC
+/* 0CD088 80136988 0C04993B */  jal   draw_string
 /* 0CD08C 8013698C AFA00014 */   sw    $zero, 0x14($sp)
 /* 0CD090 80136990 26450014 */  addiu $a1, $s2, 0x14
 func_80136994:
 /* 0CD094 80136994 3C108015 */  lui   $s0, 0x8015
 /* 0CD098 80136998 261068E0 */  addiu $s0, $s0, 0x68e0
 /* 0CD09C 8013699C 8E040000 */  lw    $a0, ($s0)
-/* 0CD0A0 801369A0 0C051261 */  jal   func_80144984
+/* 0CD0A0 801369A0 0C051261 */  jal   set_icon_render_pos
 /* 0CD0A4 801369A4 26660014 */   addiu $a2, $s3, 0x14
 /* 0CD0A8 801369A8 8E040000 */  lw    $a0, ($s0)
-/* 0CD0AC 801369AC 0C0511F1 */  jal   func_801447C4
+/* 0CD0AC 801369AC 0C0511F1 */  jal   draw_icon_1
 /* 0CD0B0 801369B0 00000000 */   nop   
 func_801369B4:
 .L801369B4:
@@ -24405,7 +24408,7 @@ func_801369B4:
 /* 0CD0E8 801369E8 240700FF */  addiu $a3, $zero, 0xff
 /* 0CD0EC 801369EC AFBF0018 */  sw    $ra, 0x18($sp)
 /* 0CD0F0 801369F0 AFA20010 */  sw    $v0, 0x10($sp)
-/* 0CD0F4 801369F4 0C04993B */  jal   func_801264EC
+/* 0CD0F4 801369F4 0C04993B */  jal   draw_string
 /* 0CD0F8 801369F8 AFA00014 */   sw    $zero, 0x14($sp)
 /* 0CD0FC 801369FC 8FBF0018 */  lw    $ra, 0x18($sp)
 /* 0CD100 80136A00 03E00008 */  jr    $ra
@@ -24434,7 +24437,7 @@ func_801369B4:
 /* 0CD154 80136A54 8C640014 */  lw    $a0, 0x14($v1)
 /* 0CD158 80136A58 240700FF */  addiu $a3, $zero, 0xff
 /* 0CD15C 80136A5C AFA20010 */  sw    $v0, 0x10($sp)
-/* 0CD160 80136A60 0C04993B */  jal   func_801264EC
+/* 0CD160 80136A60 0C04993B */  jal   draw_string
 /* 0CD164 80136A64 AFA00014 */   sw    $zero, 0x14($sp)
 .L80136A68:
 /* 0CD168 80136A68 8FBF0018 */  lw    $ra, 0x18($sp)

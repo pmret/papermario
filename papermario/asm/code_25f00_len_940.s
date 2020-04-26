@@ -64,7 +64,7 @@
 /* 025FEC 8004ABEC 24050001 */  addiu $a1, $zero, 1
 /* 025FF0 8004ABF0 24064000 */  addiu $a2, $zero, 0x4000
 /* 025FF4 8004ABF4 8FA4002C */  lw    $a0, 0x2c($sp)
-/* 025FF8 8004ABF8 0C015FE4 */  jal   func_80057F90
+/* 025FF8 8004ABF8 0C015FE4 */  jal   alHeapAlloc
 /* 025FFC 8004ABFC 02258821 */   addu  $s1, $s1, $a1
 /* 026000 8004AC00 AE420000 */  sw    $v0, ($s2)
 /* 026004 8004AC04 2E220003 */  sltiu $v0, $s1, 3
@@ -110,7 +110,7 @@
 /* 02609C 8004AC9C 3C06800A */  lui   $a2, 0x800a
 /* 0260A0 8004ACA0 8CC63634 */  lw    $a2, 0x3634($a2)
 /* 0260A4 8004ACA4 8FA4002C */  lw    $a0, 0x2c($sp)
-/* 0260A8 8004ACA8 0C015FE4 */  jal   func_80057F90
+/* 0260A8 8004ACA8 0C015FE4 */  jal   alHeapAlloc
 /* 0260AC 8004ACAC 00063080 */   sll   $a2, $a2, 2
 /* 0260B0 8004ACB0 AE020000 */  sw    $v0, ($s0)
 /* 0260B4 8004ACB4 2E220003 */  sltiu $v0, $s1, 3
@@ -125,13 +125,13 @@
 /* 0260D8 8004ACD8 AE000000 */  sw    $zero, ($s0)
 .L8004ACDC:
 /* 0260DC 8004ACDC 0240202D */  daddu $a0, $s2, $zero
-/* 0260E0 8004ACE0 0C012CFB */  jal   func_8004B3EC
+/* 0260E0 8004ACE0 0C012CFB */  jal   alLink
 /* 0260E4 8004ACE4 0200282D */   daddu $a1, $s0, $zero
 /* 0260E8 8004ACE8 24050001 */  addiu $a1, $zero, 1
 /* 0260EC 8004ACEC 24060500 */  addiu $a2, $zero, 0x500
 /* 0260F0 8004ACF0 26520014 */  addiu $s2, $s2, 0x14
 /* 0260F4 8004ACF4 8FA4002C */  lw    $a0, 0x2c($sp)
-/* 0260F8 8004ACF8 0C015FE4 */  jal   func_80057F90
+/* 0260F8 8004ACF8 0C015FE4 */  jal   alHeapAlloc
 /* 0260FC 8004ACFC 02258821 */   addu  $s1, $s1, $a1
 /* 026100 8004AD00 AE020010 */  sw    $v0, 0x10($s0)
 /* 026104 8004AD04 2E220031 */  sltiu $v0, $s1, 0x31
@@ -139,7 +139,7 @@
 /* 02610C 8004AD0C 26100014 */   addiu $s0, $s0, 0x14
 /* 026110 8004AD10 24050001 */  addiu $a1, $zero, 1
 /* 026114 8004AD14 8FA4002C */  lw    $a0, 0x2c($sp)
-/* 026118 8004AD18 0C015FE4 */  jal   func_80057F90
+/* 026118 8004AD18 0C015FE4 */  jal   alHeapAlloc
 /* 02611C 8004AD1C 24060500 */   addiu $a2, $zero, 0x500
 /* 026120 8004AD20 3C04800A */  lui   $a0, 0x800a
 /* 026124 8004AD24 24843640 */  addiu $a0, $a0, 0x3640
@@ -277,7 +277,7 @@ func_8004AEA8:
 /* 026314 8004AF14 000210C0 */  sll   $v0, $v0, 3
 /* 026318 8004AF18 0C019608 */  jal   osSendMesg
 /* 02631C 8004AF1C AE220044 */   sw    $v0, 0x44($s1)
-/* 026320 8004AF20 0C012C9A */  jal   func_8004B268
+/* 026320 8004AF20 0C012C9A */  jal   nuAuCleanDMABuffers
 /* 026324 8004AF24 26730001 */   addiu $s3, $s3, 1
 /* 026328 8004AF28 0000282D */  daddu $a1, $zero, $zero
 /* 02632C 8004AF2C 8FA40080 */  lw    $a0, 0x80($sp)
@@ -346,7 +346,7 @@ func_8004AFF8:
 /* 026400 8004B000 0280202D */  daddu $a0, $s4, $zero
 /* 026404 8004B004 27A50078 */  addiu $a1, $sp, 0x78
 /* 026408 8004B008 0040302D */  daddu $a2, $v0, $zero
-/* 02640C 8004B00C 0C015970 */  jal   func_800565C0
+/* 02640C 8004B00C 0C015970 */  jal   alAudioFrame
 /* 026410 8004B010 02A0382D */   daddu $a3, $s5, $zero
 /* 026414 8004B014 3C038008 */  lui   $v1, 0x8008
 /* 026418 8004B018 8C638174 */  lw    $v1, -0x7e8c($v1)
@@ -377,6 +377,7 @@ func_8004B064:
 /* 02646C 8004B06C 08012BA8 */  j     func_8004AEA0
 /* 026470 8004B070 A2E20000 */   sb    $v0, ($s7)
 
+nuAuDmaCallBack:
 /* 026474 8004B074 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 026478 8004B078 AFB3001C */  sw    $s3, 0x1c($sp)
 /* 02647C 8004B07C 0080982D */  daddu $s3, $a0, $zero
@@ -422,11 +423,11 @@ func_8004B064:
 
 .L8004B10C:
 /* 02650C 8004B10C 8E220000 */  lw    $v0, ($s1)
-/* 026510 8004B110 0C012D03 */  jal   func_8004B40C
+/* 026510 8004B110 0C012D03 */  jal   alUnlink
 /* 026514 8004B114 AE420008 */   sw    $v0, 8($s2)
 /* 026518 8004B118 12000005 */  beqz  $s0, .L8004B130
 /* 02651C 8004B11C 0220202D */   daddu $a0, $s1, $zero
-/* 026520 8004B120 0C012CFB */  jal   func_8004B3EC
+/* 026520 8004B120 0C012CFB */  jal   alLink
 /* 026524 8004B124 0200282D */   daddu $a1, $s0, $zero
 /* 026528 8004B128 08012C61 */  j     func_8004B184
 /* 02652C 8004B12C 00000000 */   nop   
@@ -500,6 +501,7 @@ func_8004B208:
 /* 02661C 8004B21C 03E00008 */  jr    $ra
 /* 026620 8004B220 27BD0028 */   addiu $sp, $sp, 0x28
 
+nuAuDmaNew:
 /* 026624 8004B224 3C03800A */  lui   $v1, 0x800a
 /* 026628 8004B228 24633BD0 */  addiu $v1, $v1, 0x3bd0
 /* 02662C 8004B22C 90620000 */  lbu   $v0, ($v1)
@@ -519,7 +521,7 @@ func_8004B208:
 /* 026660 8004B260 03E00008 */  jr    $ra
 /* 026664 8004B264 AC830000 */   sw    $v1, ($a0)
 
-func_8004B268:
+nuAuCleanDMABuffers:
 /* 026668 8004B268 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 02666C 8004B26C 3C02800A */  lui   $v0, 0x800a
 /* 026670 8004B270 24423BD0 */  addiu $v0, $v0, 0x3bd0
@@ -543,12 +545,12 @@ func_8004B268:
 /* 0266B4 8004B2B4 50500001 */  beql  $v0, $s0, .L8004B2BC
 /* 0266B8 8004B2B8 AE510004 */   sw    $s1, 4($s2)
 .L8004B2BC:
-/* 0266BC 8004B2BC 0C012D03 */  jal   func_8004B40C
+/* 0266BC 8004B2BC 0C012D03 */  jal   alUnlink
 /* 0266C0 8004B2C0 0200202D */   daddu $a0, $s0, $zero
 /* 0266C4 8004B2C4 8E450008 */  lw    $a1, 8($s2)
 /* 0266C8 8004B2C8 50A00005 */  beql  $a1, $zero, .L8004B2E0
 /* 0266CC 8004B2CC AE500008 */   sw    $s0, 8($s2)
-/* 0266D0 8004B2D0 0C012CFB */  jal   func_8004B3EC
+/* 0266D0 8004B2D0 0C012CFB */  jal   alLink
 /* 0266D4 8004B2D4 0200202D */   daddu $a0, $s0, $zero
 /* 0266D8 8004B2D8 08012CBB */  j     func_8004B2EC
 /* 0266DC 8004B2DC 0220802D */   daddu $s0, $s1, $zero
@@ -631,7 +633,7 @@ func_8004B3DC:
 /* 0267E4 8004B3E4 03E00008 */  jr    $ra
 /* 0267E8 8004B3E8 27BD0018 */   addiu $sp, $sp, 0x18
 
-func_8004B3EC:
+alLink:
 /* 0267EC 8004B3EC 8CA20000 */  lw    $v0, ($a1)
 /* 0267F0 8004B3F0 AC850004 */  sw    $a1, 4($a0)
 /* 0267F4 8004B3F4 AC820000 */  sw    $v0, ($a0)
@@ -642,7 +644,7 @@ func_8004B3EC:
 /* 026804 8004B404 03E00008 */  jr    $ra
 /* 026808 8004B408 ACA40000 */   sw    $a0, ($a1)
 
-func_8004B40C:
+alUnlink:
 /* 02680C 8004B40C 8C830000 */  lw    $v1, ($a0)
 /* 026810 8004B410 10600003 */  beqz  $v1, .L8004B420
 /* 026814 8004B414 00000000 */   nop   
