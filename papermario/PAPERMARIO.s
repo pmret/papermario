@@ -812,9 +812,7 @@ ___284a18_end:
 ___316c00:
 .incbin "bin/PAPERMARIO.316C00.___316c00.bin"
 ___316c00_end:
-# Unknown region 316D90-316F30 [1A0]
-.incbin "bin/PAPERMARIO.316D90.bin"
-
+.include "asm/CODE_316d90.s" 
 .include "asm/CODE_316f30.s" 
 # Unknown region 317020-325AD0 [EAB0]
 .incbin "bin/PAPERMARIO.317020.bin"

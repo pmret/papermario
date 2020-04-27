@@ -408,6 +408,7 @@ ranges:
   - [0x3169f0, 0x316a70, "asm",   "CODE_3169f0", 0x80200000] # frame:0x00000001 header:  0x27000000 trace: Tbl mapped:e0200050
   - [0x316a70, 0x316c00, "asm",   "CODE_316a70", 0x80200080] # frame:0x00000001 header:  0x27000000 trace: Tbl mapped:e02000a0
   - [0x316c00, 0x316d90, "bin",   "___316c00"] # (DRAM:0x002AE000) (frame:0x0000027D)  header:  0x27000000 trace:
+  - [0x316d90, 0x316f30, "asm",   "CODE_316d90", 0x802AE000]
   - [0x316f30, 0x317020, "asm",   "CODE_316f30", 0x802B2000] # frame:0x00000001 header:  0x27000000 trace: Tbl mapped:802b20a8
   - [0x325ad0, 0x326410, "bin",   "___325ad0"] # (DRAM:0x001A6000) (frame:0x00000001)  header:  0x3c000000 trace:
   - [0x328110, 0x328ea0, "bin",   "___328110"] # (DRAM:0x00197000) (frame:0x00002FBC)  header:  0xc4000000 trace:
