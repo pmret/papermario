@@ -13,7 +13,8 @@ RUN apt-get update && \
 	nano \
 	libcapstone-dev \
 	libyaml-dev \
-	zlib1g-dev
+	zlib1g-dev \
+	vbindiff
 
 RUN wget \
         https://github.com/n64decomp/qemu-irix/releases/download/v2.11-deb/qemu-irix-2.11.0-2169-g32ab296eef_amd64.deb \
