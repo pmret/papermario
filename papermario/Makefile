@@ -5,6 +5,26 @@
 # BUILD_DIR is location where all build artifacts are placed
 BUILD_DIR = build
 
+SRC_DIRS := src
+ASM_DIRS := asm
+DATA_DIRS := bin
+COMPRESSED_DIRS := COMPRESSED.YAY
+MAP_DIRS := Map_Assets.FS
+
+# Source code files
+C_FILES := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))
+S_FILES := $(foreach dir,$(ASM_DIRS),$(wildcard $(dir)/*.s))
+DATA_FILES := $(foreach dir,$(DATA_DIRS),$(wildcard $(dir)/*.bin))
+COMPRESSED_FILES := $(foreach dir,$(COMPRESSED_DIRS),$(wildcard $(dir)/*.YAY)) 
+MAP_FILES := $(foreach dir,$(MAP_DIRS),$(wildcard $(dir)/*.FS)) 
+
+# Object files
+O_FILES := $(foreach file,$(C_FILES),$(BUILD_DIR)/$(file:.c=.o)) \
+           $(foreach file,$(S_FILES),$(BUILD_DIR)/$(file:.s=.o)) \
+           $(foreach file,$(DATA_FILES),$(BUILD_DIR)/$(file:.bin=.o)) \
+           $(foreach file,$(COMPRESSED_FILES),$(BUILD_DIR)/$(file:.YAY=.YAY.o)) \
+           $(foreach file,$(MAP_FILES),$(BUILD_DIR)/$(file:.FS=.FS.o)) \
+
 ##################### Compiler Options #######################
 CROSS = mips-linux-gnu-
 AS = $(CROSS)as
@@ -32,6 +52,7 @@ LOADER_FLAGS = -vwf
 FixPath = $(subst /,\,$1)
 
 ######################## Targets #############################
+$(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(DATA_DIRS) $(COMPRESSED_DIRS) $(MAP_DIRS),$(shell mkdir -p build/$(dir)))
 
 default: all
 
@@ -44,20 +65,28 @@ all: fix_asm $(TARGET).z64 verify
 clean:
 	rm -rf build
 
-$(MIO0_DIR)/%.mio0: $(MIO0_DIR)/%.bin
-	$(MIO0TOOL) $< $@
+print-% : ; $(info $* is a $(flavor $*) variable set to [$($*)]) @true
 
 $(BUILD_DIR):
 	mkdir $(BUILD_DIR)
 
-$(BUILD_DIR)/$(TARGET).o: $(TARGET).s Makefile $(MAKEFILE_SPLIT) $(MIO0_FILES) $(LEVEL_FILES) $(MUSIC_FILES) | $(BUILD_DIR)
+$(BUILD_DIR)/$(TARGET).elf: $(O_FILES) $(LD_SCRIPT) $(BUILD_DIR)
+	$(LD) $(LDFLAGS) -o $@ $(O_FILES)
+
+$(BUILD_DIR)/%.o: %.s $(BUILD_DIR)
 	$(AS) $(ASFLAGS) -o $@ $<
 
-$(BUILD_DIR)/%.o: %.c Makefile.as | $(BUILD_DIR)
+$(BUILD_DIR)/%.o: %.c $(BUILD_DIR)
 	$(CC) $(CFLAGS) -o $@ $<
 
-$(BUILD_DIR)/$(TARGET).elf: $(BUILD_DIR)/$(TARGET).o $(LD_SCRIPT)
-	$(LD) $(LDFLAGS) -o $@ $< $(LIBS)
+$(BUILD_DIR)/%.o: %.bin $(BUILD_DIR)
+	$(LD) -r -b binary -o $@ $<
+
+$(BUILD_DIR)/%.YAY.o: %.YAY $(BUILD_DIR)
+	$(LD) -r -b binary -o $@ $<
+
+$(BUILD_DIR)/%.FS.o: %.FS $(BUILD_DIR)
+	$(LD) -r -b binary -o $@ $<
 
 $(BUILD_DIR)/$(TARGET).bin: $(BUILD_DIR)/$(TARGET).elf
 	$(OBJCOPY) $< $@ -O binary
@@ -68,18 +97,6 @@ $(TARGET).z64: $(BUILD_DIR)/$(TARGET).bin
 
 fix_asm:
 	./fix_asm.py
-
-$(BUILD_DIR)/$(TARGET).hex: $(TARGET).z64
-	xxd $< > $@
-
-$(BUILD_DIR)/$(TARGET).objdump: $(BUILD_DIR)/$(TARGET).elf
-	$(OBJDUMP) -D $< > $@
-
-test: $(TARGET).z64
-	$(EMULATOR) $(EMU_FLAGS) $<
-
-load: $(TARGET).z64
-	$(LOADER) $(LOADER_FLAGS) $<
 
 verify: $(TARGET).z64
 	md5sum -c checksum.md5
