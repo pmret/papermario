@@ -8,15 +8,8 @@ BUILD_DIR = build
 SRC_DIRS := src
 ASM_DIRS := asm
 DATA_DIRS := bin
-AUDIO_DIRS := audio
 COMPRESSED_DIRS := COMPRESSED.YAY
 MAP_DIRS := Map_Assets.FS
-BGM_DIRS := SOUND.BGM
-BK_DIRS := SOUND.BK
-MSEQ_DIRS := SOUND.MSEQ
-PER_DIRS := SOUND.PER
-PRG_DIRS := SOUND.PRG
-SEF_DIRS := SOUND.SEF
 
 # Source code files
 C_FILES := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))
@@ -59,6 +52,7 @@ LOADER_FLAGS = -vwf
 FixPath = $(subst /,\,$1)
 
 ######################## Targets #############################
+$(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(DATA_DIRS) $(COMPRESSED_DIRS) $(MAP_DIRS),$(shell mkdir -p build/$(dir)))
 
 default: all
 
