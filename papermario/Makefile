@@ -8,22 +8,25 @@ BUILD_DIR = build
 SRC_DIRS := src
 ASM_DIRS := asm
 DATA_DIRS := bin
-COMPRESSED_DIRS := COMPRESSED.YAY
+COMPRESSED_DIRS := yay0
 MAP_DIRS := Map_Assets.FS
+BGM_DIRS := bgm
 
 # Source code files
 C_FILES := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))
 S_FILES := $(foreach dir,$(ASM_DIRS),$(wildcard $(dir)/*.s))
 DATA_FILES := $(foreach dir,$(DATA_DIRS),$(wildcard $(dir)/*.bin))
-COMPRESSED_FILES := $(foreach dir,$(COMPRESSED_DIRS),$(wildcard $(dir)/*.YAY)) 
+COMPRESSED_FILES := $(foreach dir,$(COMPRESSED_DIRS),$(wildcard $(dir)/*.yay0)) 
 MAP_FILES := $(foreach dir,$(MAP_DIRS),$(wildcard $(dir)/*.FS)) 
+BGM_FILES := $(foreach dir,$(BGM_DIRS),$(wildcard $(dir)/*.bgm))
 
 # Object files
 O_FILES := $(foreach file,$(C_FILES),$(BUILD_DIR)/$(file:.c=.o)) \
            $(foreach file,$(S_FILES),$(BUILD_DIR)/$(file:.s=.o)) \
            $(foreach file,$(DATA_FILES),$(BUILD_DIR)/$(file:.bin=.o)) \
-           $(foreach file,$(COMPRESSED_FILES),$(BUILD_DIR)/$(file:.YAY=.YAY.o)) \
+           $(foreach file,$(COMPRESSED_FILES),$(BUILD_DIR)/$(file:.yay0=.yay0.o)) \
            $(foreach file,$(MAP_FILES),$(BUILD_DIR)/$(file:.FS=.FS.o)) \
+           $(foreach file,$(BGM_FILES),$(BUILD_DIR)/$(file:.bgm=.bgm.o))
 
 ##################### Compiler Options #######################
 CROSS = mips-linux-gnu-
@@ -35,14 +38,14 @@ OBJCOPY = $(CROSS)objcopy
 
 ASFLAGS = -EB -march=vr4300 -mtune=vr4300
 CFLAGS  = -Wall -O2 -mtune=vr4300 -march=vr4300 -G 0 -c
-LDFLAGS = -T undefined_syms.txt -T $(LD_SCRIPT) -Map $(BUILD_DIR)/sm64.map
+LDFLAGS = -T undefined_syms.txt -T $(LD_SCRIPT) -Map $(BUILD_DIR)/papermario.map
 
 ####################### Other Tools #########################
 
 # N64 tools
-TOOLS_DIR = ../n64splitter/bin
+TOOLS_DIR = tools
 MIO0TOOL = $(TOOLS_DIR)/mio0
-N64CKSUM = $(TOOLS_DIR)/n64cksum
+N64CKSUM = $(TOOLS_DIR)/n64crc
 N64GRAPHICS = $(TOOLS_DIR)/n64graphics
 EMULATOR = mupen64plus
 EMU_FLAGS = --noosd
@@ -52,7 +55,8 @@ LOADER_FLAGS = -vwf
 FixPath = $(subst /,\,$1)
 
 ######################## Targets #############################
-$(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(DATA_DIRS) $(COMPRESSED_DIRS) $(MAP_DIRS),$(shell mkdir -p build/$(dir)))
+
+$(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(DATA_DIRS) $(COMPRESSED_DIRS) $(MAP_DIRS) $(BGM_DIRS),$(shell mkdir -p build/$(dir)))
 
 default: all
 
@@ -71,34 +75,38 @@ $(BUILD_DIR):
 	mkdir $(BUILD_DIR)
 
 $(BUILD_DIR)/$(TARGET).elf: $(O_FILES) $(LD_SCRIPT) $(BUILD_DIR)
-	$(LD) $(LDFLAGS) -o $@ $(O_FILES)
+	@$(LD) $(LDFLAGS) -o $@ $(O_FILES)
 
 $(BUILD_DIR)/%.o: %.s $(BUILD_DIR)
-	$(AS) $(ASFLAGS) -o $@ $<
+	@$(AS) $(ASFLAGS) -o $@ $<
 
 $(BUILD_DIR)/%.o: %.c $(BUILD_DIR)
-	$(CC) $(CFLAGS) -o $@ $<
+	@$(CC) $(CFLAGS) -o $@ $<
 
 $(BUILD_DIR)/%.o: %.bin $(BUILD_DIR)
-	$(LD) -r -b binary -o $@ $<
+	@$(LD) -r -b binary -o $@ $<
 
-$(BUILD_DIR)/%.YAY.o: %.YAY $(BUILD_DIR)
-	$(LD) -r -b binary -o $@ $<
+$(BUILD_DIR)/%.yay0.o: %.yay0 $(BUILD_DIR)
+	@$(LD) -r -b binary -o $@ $<
 
 $(BUILD_DIR)/%.FS.o: %.FS $(BUILD_DIR)
-	$(LD) -r -b binary -o $@ $<
+	@$(LD) -r -b binary -o $@ $<
+
+$(BUILD_DIR)/%.bgm.o: %.bgm $(BUILD_DIR)
+	@$(LD) -r -b binary -o $@ $<
 
 $(BUILD_DIR)/$(TARGET).bin: $(BUILD_DIR)/$(TARGET).elf
 	$(OBJCOPY) $< $@ -O binary
 
 # final z64 updates checksum
 $(TARGET).z64: $(BUILD_DIR)/$(TARGET).bin
-	cp $< $@
+	@cp $< $@
+	$(N64CKSUM) $@
 
 fix_asm:
-	./fix_asm.py
+	@./fix_asm.py
 
 verify: $(TARGET).z64
-	md5sum -c checksum.md5
+	sha1sum -c checksum.sha1
 
 .PHONY: all clean default diff test
