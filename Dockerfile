@@ -25,5 +25,11 @@ RUN wget \
 
 RUN python3 -m pip install --user colorama ansiwrap attrs watchdog python-Levenshtein
 
+RUN git clone https://github.com/aquynh/capstone.git && \
+    cd capstone && \
+    git checkout tags/4.0 && \
+    ./make.sh && \
+    ./make.sh install
+
 RUN mkdir /pm
 WORKDIR /pm
