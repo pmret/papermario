@@ -5,6 +5,47 @@
 # BUILD_DIR is location where all build artifacts are placed
 BUILD_DIR = build
 
+SRC_DIRS := src
+ASM_DIRS := asm
+DATA_DIRS := bin
+AUDIO_DIRS := audio
+COMPRESSED_DIRS := COMPRESSED.YAY
+MAP_DIRS := Map_Assets.FS
+BGM_DIRS := SOUND.BGM
+BK_DIRS := SOUND.BK
+MSEQ_DIRS := SOUND.MSEQ
+PER_DIRS := SOUND.PER
+PRG_DIRS := SOUND.PRG
+SEF_DIRS := SOUND.SEF
+
+# Source code files
+C_FILES := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))
+S_FILES := $(foreach dir,$(ASM_DIRS),$(wildcard $(dir)/*.s))
+DATA_FILES := $(foreach dir,$(DATA_DIRS),$(wildcard $(dir)/*.bin))
+AUDIO_FILES := $(foreach dir,$(AUDIO_DIRS),$(wildcard $(dir)/*.audio)) 
+COMPRESSED_FILES := $(foreach dir,$(COMPRESSED_DIRS),$(wildcard $(dir)/*.YAY)) 
+MAP_FILES := $(foreach dir,$(MAP_DIRS),$(wildcard $(dir)/*.FS)) 
+BGM_FILES := $(foreach dir,$(BGM_DIRS),$(wildcard $(dir)/*.BGM))
+BK_FILES := $(foreach dir,$(BK_DIRS),$(wildcard $(dir)/*.BK)) 
+MSEQ_FILES := $(foreach dir,$(MSEQ_DIRS),$(wildcard $(dir)/*.MSEQ))
+PER_FILES := $(foreach dir,$(PER_DIRS),$(wildcard $(dir)/*.PER))
+PRG_FILES := $(foreach dir,$(PRG_DIRS),$(wildcard $(dir)/*.PRG))
+SEF_FILES := $(foreach dir,$(SEF_DIRS),$(wildcard $(dir)/*.SEF))
+
+# Object files
+O_FILES := $(foreach file,$(C_FILES),$(BUILD_DIR)/$(file:.c=.o)) \
+           $(foreach file,$(S_FILES),$(BUILD_DIR)/$(file:.s=.o)) \
+           $(foreach file,$(DATA_FILES),$(BUILD_DIR)/$(file:.bin=.o)) \
+           $(foreach file,$(AUDIO_FILES),$(BUILD_DIR)/$(file:.audio=.audio.o)) \
+           $(foreach file,$(COMPRESSED_FILES),$(BUILD_DIR)/$(file:.YAY=.YAY.o)) \
+           $(foreach file,$(MAP_FILES),$(BUILD_DIR)/$(file:.FS=.FS.o)) \
+           $(foreach file,$(BGM_FILES),$(BUILD_DIR)/$(file:.BGM=.BGM.o)) \
+           $(foreach file,$(BK_FILES),$(BUILD_DIR)/$(file:.BK=.BK.o)) \
+           $(foreach file,$(MSEQ_FILES),$(BUILD_DIR)/$(file:.MSEQ=.MSEQ.o)) \
+           $(foreach file,$(PER_FILES),$(BUILD_DIR)/$(file:.PER=.PER.o)) \
+           $(foreach file,$(PRG_FILES),$(BUILD_DIR)/$(file:.PRG=.PRG.o)) \
+           $(foreach file,$(SEF_FILES),$(BUILD_DIR)/$(file:.SEF=.SEF.o))
+
 ##################### Compiler Options #######################
 CROSS = mips-linux-gnu-
 AS = $(CROSS)as
@@ -44,20 +85,49 @@ all: fix_asm $(TARGET).z64 verify
 clean:
 	rm -rf build
 
-$(MIO0_DIR)/%.mio0: $(MIO0_DIR)/%.bin
-	$(MIO0TOOL) $< $@
+print-% : ; $(info $* is a $(flavor $*) variable set to [$($*)]) @true
 
 $(BUILD_DIR):
 	mkdir $(BUILD_DIR)
 
-$(BUILD_DIR)/$(TARGET).o: $(TARGET).s Makefile $(MAKEFILE_SPLIT) $(MIO0_FILES) $(LEVEL_FILES) $(MUSIC_FILES) | $(BUILD_DIR)
+$(BUILD_DIR)/%.o: %.s
 	$(AS) $(ASFLAGS) -o $@ $<
 
-$(BUILD_DIR)/%.o: %.c Makefile.as | $(BUILD_DIR)
+$(BUILD_DIR)/$(TARGET).elf: $(O_FILES) $(LD_SCRIPT)
+	$(LD) $(LDFLAGS) -o $@ $< $(O_FILES)
+
+$(BUILD_DIR)/%.o: %.c
 	$(CC) $(CFLAGS) -o $@ $<
 
-$(BUILD_DIR)/$(TARGET).elf: $(BUILD_DIR)/$(TARGET).o $(LD_SCRIPT)
-	$(LD) $(LDFLAGS) -o $@ $< $(LIBS)
+$(BUILD_DIR)/%.o: %.bin
+	$(LD) -r -b binary -o $@ $<
+
+$(BUILD_DIR)/%.audio.o: %.audio
+	$(LD) -r -b binary -o $@ $<
+
+$(BUILD_DIR)/%.YAY.o: %.YAY
+	$(LD) -r -b binary -o $@ $<
+
+$(BUILD_DIR)/%.FS.o: %.FS
+	$(LD) -r -b binary -o $@ $<
+
+$(BUILD_DIR)/%.BGM.o: %.BGM
+	$(LD) -r -b binary -o $@ $<
+
+$(BUILD_DIR)/%.BK.o: %.BK
+	$(LD) -r -b binary -o $@ $<
+
+$(BUILD_DIR)/%.MSEQ.o: %.MSEQ
+	$(LD) -r -b binary -o $@ $<
+
+$(BUILD_DIR)/%.PER.o: %.PER
+	$(LD) -r -b binary -o $@ $<
+
+$(BUILD_DIR)/%.PRG.o: %.PRG
+	$(LD) -r -b binary -o $@ $<
+
+$(BUILD_DIR)/%.SEF.o: %.SEF
+	$(LD) -r -b binary -o $@ $<
 
 $(BUILD_DIR)/$(TARGET).bin: $(BUILD_DIR)/$(TARGET).elf
 	$(OBJCOPY) $< $@ -O binary
@@ -68,18 +138,6 @@ $(TARGET).z64: $(BUILD_DIR)/$(TARGET).bin
 
 fix_asm:
 	./fix_asm.py
-
-$(BUILD_DIR)/$(TARGET).hex: $(TARGET).z64
-	xxd $< > $@
-
-$(BUILD_DIR)/$(TARGET).objdump: $(BUILD_DIR)/$(TARGET).elf
-	$(OBJDUMP) -D $< > $@
-
-test: $(TARGET).z64
-	$(EMULATOR) $(EMU_FLAGS) $<
-
-load: $(TARGET).z64
-	$(LOADER) $(LOADER_FLAGS) $<
 
 verify: $(TARGET).z64
 	md5sum -c checksum.md5
