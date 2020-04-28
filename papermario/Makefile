@@ -71,7 +71,7 @@ $(BUILD_DIR):
 	mkdir $(BUILD_DIR)
 
 $(BUILD_DIR)/$(TARGET).elf: $(O_FILES) $(LD_SCRIPT) $(BUILD_DIR)
-	$(LD) $(LDFLAGS) -o $@ $< $(O_FILES)
+	$(LD) $(LDFLAGS) -o $@ $<
 
 $(BUILD_DIR)/%.o: %.s $(BUILD_DIR)
 	$(AS) $(ASFLAGS) -o $@ $<
