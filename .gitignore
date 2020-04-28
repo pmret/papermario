@@ -1,10 +1,12 @@
 *.z64
 n64split
 *.bin
-papermario/COMPRESSED.*
-papermario/SOUND.*
+*.FS
+*.bgm
+papermario/PAPERMARIO.s
+papermario/Map_Assets.FS
+papermario/bgm
 papermario/bin
-papermario/audio
 papermario/build/
 .vscode/
 .idea/
