@@ -22,29 +22,15 @@ SEF_DIRS := SOUND.SEF
 C_FILES := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))
 S_FILES := $(foreach dir,$(ASM_DIRS),$(wildcard $(dir)/*.s))
 DATA_FILES := $(foreach dir,$(DATA_DIRS),$(wildcard $(dir)/*.bin))
-AUDIO_FILES := $(foreach dir,$(AUDIO_DIRS),$(wildcard $(dir)/*.audio)) 
 COMPRESSED_FILES := $(foreach dir,$(COMPRESSED_DIRS),$(wildcard $(dir)/*.YAY)) 
 MAP_FILES := $(foreach dir,$(MAP_DIRS),$(wildcard $(dir)/*.FS)) 
-BGM_FILES := $(foreach dir,$(BGM_DIRS),$(wildcard $(dir)/*.BGM))
-BK_FILES := $(foreach dir,$(BK_DIRS),$(wildcard $(dir)/*.BK)) 
-MSEQ_FILES := $(foreach dir,$(MSEQ_DIRS),$(wildcard $(dir)/*.MSEQ))
-PER_FILES := $(foreach dir,$(PER_DIRS),$(wildcard $(dir)/*.PER))
-PRG_FILES := $(foreach dir,$(PRG_DIRS),$(wildcard $(dir)/*.PRG))
-SEF_FILES := $(foreach dir,$(SEF_DIRS),$(wildcard $(dir)/*.SEF))
 
 # Object files
 O_FILES := $(foreach file,$(C_FILES),$(BUILD_DIR)/$(file:.c=.o)) \
            $(foreach file,$(S_FILES),$(BUILD_DIR)/$(file:.s=.o)) \
            $(foreach file,$(DATA_FILES),$(BUILD_DIR)/$(file:.bin=.o)) \
-           $(foreach file,$(AUDIO_FILES),$(BUILD_DIR)/$(file:.audio=.audio.o)) \
            $(foreach file,$(COMPRESSED_FILES),$(BUILD_DIR)/$(file:.YAY=.YAY.o)) \
            $(foreach file,$(MAP_FILES),$(BUILD_DIR)/$(file:.FS=.FS.o)) \
-           $(foreach file,$(BGM_FILES),$(BUILD_DIR)/$(file:.BGM=.BGM.o)) \
-           $(foreach file,$(BK_FILES),$(BUILD_DIR)/$(file:.BK=.BK.o)) \
-           $(foreach file,$(MSEQ_FILES),$(BUILD_DIR)/$(file:.MSEQ=.MSEQ.o)) \
-           $(foreach file,$(PER_FILES),$(BUILD_DIR)/$(file:.PER=.PER.o)) \
-           $(foreach file,$(PRG_FILES),$(BUILD_DIR)/$(file:.PRG=.PRG.o)) \
-           $(foreach file,$(SEF_FILES),$(BUILD_DIR)/$(file:.SEF=.SEF.o))
 
 ##################### Compiler Options #######################
 CROSS = mips-linux-gnu-
@@ -90,43 +76,22 @@ print-% : ; $(info $* is a $(flavor $*) variable set to [$($*)]) @true
 $(BUILD_DIR):
 	mkdir $(BUILD_DIR)
 
-$(BUILD_DIR)/%.o: %.s
-	$(AS) $(ASFLAGS) -o $@ $<
-
-$(BUILD_DIR)/$(TARGET).elf: $(O_FILES) $(LD_SCRIPT)
+$(BUILD_DIR)/$(TARGET).elf: $(O_FILES) $(LD_SCRIPT) $(BUILD_DIR)
 	$(LD) $(LDFLAGS) -o $@ $< $(O_FILES)
 
-$(BUILD_DIR)/%.o: %.c
+$(BUILD_DIR)/%.o: %.s $(BUILD_DIR)
+	$(AS) $(ASFLAGS) -o $@ $<
+
+$(BUILD_DIR)/%.o: %.c $(BUILD_DIR)
 	$(CC) $(CFLAGS) -o $@ $<
 
-$(BUILD_DIR)/%.o: %.bin
+$(BUILD_DIR)/%.o: %.bin $(BUILD_DIR)
 	$(LD) -r -b binary -o $@ $<
 
-$(BUILD_DIR)/%.audio.o: %.audio
+$(BUILD_DIR)/%.YAY.o: %.YAY $(BUILD_DIR)
 	$(LD) -r -b binary -o $@ $<
 
-$(BUILD_DIR)/%.YAY.o: %.YAY
-	$(LD) -r -b binary -o $@ $<
-
-$(BUILD_DIR)/%.FS.o: %.FS
-	$(LD) -r -b binary -o $@ $<
-
-$(BUILD_DIR)/%.BGM.o: %.BGM
-	$(LD) -r -b binary -o $@ $<
-
-$(BUILD_DIR)/%.BK.o: %.BK
-	$(LD) -r -b binary -o $@ $<
-
-$(BUILD_DIR)/%.MSEQ.o: %.MSEQ
-	$(LD) -r -b binary -o $@ $<
-
-$(BUILD_DIR)/%.PER.o: %.PER
-	$(LD) -r -b binary -o $@ $<
-
-$(BUILD_DIR)/%.PRG.o: %.PRG
-	$(LD) -r -b binary -o $@ $<
-
-$(BUILD_DIR)/%.SEF.o: %.SEF
+$(BUILD_DIR)/%.FS.o: %.FS $(BUILD_DIR)
 	$(LD) -r -b binary -o $@ $<
 
 $(BUILD_DIR)/$(TARGET).bin: $(BUILD_DIR)/$(TARGET).elf
