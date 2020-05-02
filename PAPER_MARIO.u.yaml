@@ -1215,7 +1215,7 @@ labels:
   - [0x800E9920, "status_menu_start_blinking_hp"]
   - [0x800E9964, "status_menu_stop_blinking_hp"]
   - [0x800E998C, "status_menu_start_blinking_fp"]
-  - [0x800E99F0, "status_menu_stop_blinking_fp"]
+  - [0x800E99D0, "status_menu_stop_blinking_fp"]
   - [0x800E99F4, "status_menu_start_blinking_coins"]
   - [0x800E9A38, "status_menu_stop_blinking_coins"]
   - [0x800E9A60, "status_menu_start_blinking_sp"]
