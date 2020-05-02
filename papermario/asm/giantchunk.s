@@ -13643,7 +13643,7 @@ func_800E8620:
 /* 081CB0 800E8800 00021600 */  sll   $v0, $v0, 0x18
 /* 081CB4 800E8804 14400003 */  bnez  $v0, .L800E8814
 /* 081CB8 800E8808 00000000 */   nop   
-/* 081CBC 800E880C 0C03A674 */  jal   func_800E99D0
+/* 081CBC 800E880C 0C03A674 */  jal   status_menu_stop_blinking_fp
 /* 081CC0 800E8810 00000000 */   nop   
 .L800E8814:
 /* 081CC4 800E8814 8262004D */  lb    $v0, 0x4d($s3)
@@ -14910,7 +14910,7 @@ status_menu_start_blinking_fp:
 /* 082E78 800E99C8 03E00008 */  jr    $ra
 /* 082E7C 800E99CC 00000000 */   nop   
 
-func_800E99D0:
+status_menu_stop_blinking_fp:
 /* 082E80 800E99D0 3C038011 */  lui   $v1, 0x8011
 /* 082E84 800E99D4 2463EF58 */  addiu $v1, $v1, -0x10a8
 /* 082E88 800E99D8 8062004D */  lb    $v0, 0x4d($v1)
@@ -14920,7 +14920,6 @@ func_800E99D0:
 /* 082E98 800E99E8 A060004E */  sb    $zero, 0x4e($v1)
 .L800E99EC:
 /* 082E9C 800E99EC 03E00008 */  jr    $ra
-status_menu_stop_blinking_fp:
 /* 082EA0 800E99F0 00000000 */   nop   
 
 status_menu_start_blinking_coins:
