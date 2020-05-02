@@ -234,7 +234,7 @@ EnableSpriteShading:
 /* 0FE408 802D9A58 3C038015 */  lui   $v1, 0x8015
 /* 0FE40C 802D9A5C 8C631328 */  lw    $v1, 0x1328($v1)
 /* 0FE410 802D9A60 94620000 */  lhu   $v0, ($v1)
-/* 0FE414 802D9A64 080B669F */  j     func_802D9A7C
+/* 0FE414 802D9A64 080B669F */  j     .L802D9A7C
 /* 0FE418 802D9A68 34420001 */   ori   $v0, $v0, 1
 
 .L802D9A6C:
@@ -242,7 +242,7 @@ EnableSpriteShading:
 /* 0FE420 802D9A70 8C631328 */  lw    $v1, 0x1328($v1)
 /* 0FE424 802D9A74 94620000 */  lhu   $v0, ($v1)
 /* 0FE428 802D9A78 3042FFFE */  andi  $v0, $v0, 0xfffe
-func_802D9A7C:
+.L802D9A7C:
 /* 0FE42C 802D9A7C A4620000 */  sh    $v0, ($v1)
 /* 0FE430 802D9A80 8FBF0010 */  lw    $ra, 0x10($sp)
 /* 0FE434 802D9A84 24020002 */  addiu $v0, $zero, 2

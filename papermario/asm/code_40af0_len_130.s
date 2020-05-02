@@ -32,7 +32,7 @@ osRecvMesg:
 /* 040B30 80065730 02002021 */   addu  $a0, $s0, $zero
 /* 040B34 80065734 0C01ACF4 */  jal   osRestoreInt
 /* 040B38 80065738 02402021 */   addu  $a0, $s2, $zero
-/* 040B3C 8006573C 080195FD */  j     func_800657F4
+/* 040B3C 8006573C 080195FD */  j     .L800657F4
 /* 040B40 80065740 2402FFFF */   addiu $v0, $zero, -1
 
 .L80065744:
@@ -85,7 +85,7 @@ osRecvMesg:
 /* 040BE8 800657E8 0C01ACF4 */  jal   osRestoreInt
 /* 040BEC 800657EC 02402021 */   addu  $a0, $s2, $zero
 /* 040BF0 800657F0 00001021 */  addu  $v0, $zero, $zero
-func_800657F4:
+.L800657F4:
 /* 040BF4 800657F4 8FBF0024 */  lw    $ra, 0x24($sp)
 /* 040BF8 800657F8 8FB40020 */  lw    $s4, 0x20($sp)
 /* 040BFC 800657FC 8FB3001C */  lw    $s3, 0x1c($sp)

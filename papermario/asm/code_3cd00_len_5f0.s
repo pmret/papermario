@@ -205,7 +205,7 @@ osContInit:
 /* 03CFB0 80061BB0 AFB10064 */  sw    $s1, 0x64($sp)
 /* 03CFB4 80061BB4 10400003 */  beqz  $v0, .L80061BC4
 /* 03CFB8 80061BB8 AFB00060 */   sw    $s0, 0x60($sp)
-/* 03CFBC 80061BBC 0801873D */  j     func_80061CF4
+/* 03CFBC 80061BBC 0801873D */  j     .L80061CF4
 /* 03CFC0 80061BC0 00001021 */   addu  $v0, $zero, $zero
 
 .L80061BC4:
@@ -287,7 +287,7 @@ osContInit:
 /* 03D0E8 80061CE8 0C019560 */  jal   osCreateMesgQueue
 /* 03D0EC 80061CEC 24060001 */   addiu $a2, $zero, 1
 /* 03D0F0 80061CF0 02001021 */  addu  $v0, $s0, $zero
-func_80061CF4:
+.L80061CF4:
 /* 03D0F4 80061CF4 8FBF007C */  lw    $ra, 0x7c($sp)
 /* 03D0F8 80061CF8 8FB60078 */  lw    $s6, 0x78($sp)
 /* 03D0FC 80061CFC 8FB50074 */  lw    $s5, 0x74($sp)
@@ -418,12 +418,11 @@ osVirtualToPhysical:
 /* 03D2C0 80061EC0 00831024 */   and   $v0, $a0, $v1
 /* 03D2C4 80061EC4 0C019A18 */  jal   osProbeTLB
 /* 03D2C8 80061EC8 00000000 */   nop   
-/* 03D2CC 80061ECC 080187B6 */  j     func_80061ED8
+/* 03D2CC 80061ECC 080187B6 */  j     .L80061ED8
 /* 03D2D0 80061ED0 00000000 */   nop   
 
 .L80061ED4:
 /* 03D2D4 80061ED4 00831024 */  and   $v0, $a0, $v1
-func_80061ED8:
 .L80061ED8:
 /* 03D2D8 80061ED8 8FBF0010 */  lw    $ra, 0x10($sp)
 /* 03D2DC 80061EDC 03E00008 */  jr    $ra

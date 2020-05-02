@@ -60,7 +60,7 @@ nuContRmbCheck:
 /* 03B338 8005FF38 3C01800B */  lui   $at, 0x800b
 /* 03B33C 8005FF3C 00220821 */  addu  $at, $at, $v0
 /* 03B340 8005FF40 A0231D49 */  sb    $v1, 0x1d49($at)
-/* 03B344 8005FF44 08017FD9 */  j     func_8005FF64
+/* 03B344 8005FF44 08017FD9 */  j     .L8005FF64
 /* 03B348 8005FF48 00000000 */   nop   
 
 .L8005FF4C:
@@ -70,7 +70,7 @@ nuContRmbCheck:
 /* 03B358 8005FF58 3C01800B */  lui   $at, 0x800b
 /* 03B35C 8005FF5C 00220821 */  addu  $at, $at, $v0
 /* 03B360 8005FF60 A0201D49 */  sb    $zero, 0x1d49($at)
-func_8005FF64:
+.L8005FF64:
 /* 03B364 8005FF64 0C018250 */  jal   osSetIntMask
 /* 03B368 8005FF68 00000000 */   nop   
 /* 03B36C 8005FF6C 0220102D */  daddu $v0, $s1, $zero

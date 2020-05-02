@@ -128,7 +128,7 @@ step_battle:
 /* 00ED48 80033948 92020000 */   lbu   $v0, ($s0)
 /* 00ED4C 8003394C 18600003 */  blez  $v1, .L8003395C
 /* 00ED50 80033950 2442FFFF */   addiu $v0, $v0, -1
-/* 00ED54 80033954 0800CED1 */  j     func_80033B44
+/* 00ED54 80033954 0800CED1 */  j     .L80033B44
 /* 00ED58 80033958 A2020000 */   sb    $v0, ($s0)
 
 .L8003395C:
@@ -257,7 +257,6 @@ step_battle:
 /* 00EF38 80033B38 00000000 */   nop   
 /* 00EF3C 80033B3C 0C00B500 */  jal   update_cameras
 /* 00EF40 80033B40 00000000 */   nop   
-func_80033B44:
 .L80033B44:
 /* 00EF44 80033B44 8FBF0014 */  lw    $ra, 0x14($sp)
 /* 00EF48 80033B48 8FB00010 */  lw    $s0, 0x10($sp)
@@ -391,7 +390,7 @@ func_80033B44:
 /* 00F138 80033D38 3C02800A */  lui   $v0, 0x800a
 /* 00F13C 80033D3C 8C420904 */  lw    $v0, 0x904($v0)
 /* 00F140 80033D40 24040011 */  addiu $a0, $zero, 0x11
-/* 00F144 80033D44 0800CF90 */  j     func_80033E40
+/* 00F144 80033D44 0800CF90 */  j     .L80033E40
 /* 00F148 80033D48 AE620004 */   sw    $v0, 4($s3)
 
 .L80033D4C:
@@ -430,7 +429,7 @@ func_80033B44:
 /* 00F1C8 80033DC8 24040128 */   addiu $a0, $zero, 0x128
 /* 00F1CC 80033DCC 0C05178A */  jal   read_background_size
 /* 00F1D0 80033DD0 00000000 */   nop   
-/* 00F1D4 80033DD4 0800CF7B */  j     func_80033DEC
+/* 00F1D4 80033DD4 0800CF7B */  j     .L80033DEC
 /* 00F1D8 80033DD8 00000000 */   nop   
 
 .L80033DDC:
@@ -438,7 +437,7 @@ func_80033B44:
 /* 00F1E0 80033DE0 2406000C */  addiu $a2, $zero, 0xc
 /* 00F1E4 80033DE4 0C05179C */  jal   set_background_size
 /* 00F1E8 80033DE8 24070014 */   addiu $a3, $zero, 0x14
-func_80033DEC:
+.L80033DEC:
 /* 00F1EC 80033DEC 3C04800B */  lui   $a0, 0x800b
 /* 00F1F0 80033DF0 24840CF0 */  addiu $a0, $a0, 0xcf0
 /* 00F1F4 80033DF4 0C016B74 */  jal   get_asset_offset
@@ -461,7 +460,7 @@ func_80033DEC:
 /* 00F238 80033E38 00000000 */   nop   
 .L80033E3C:
 /* 00F23C 80033E3C 24040004 */  addiu $a0, $zero, 4
-func_80033E40:
+.L80033E40:
 /* 00F240 80033E40 0C00CD3C */  jal   set_game_mode
 /* 00F244 80033E44 00000000 */   nop   
 .L80033E48:

@@ -267,7 +267,7 @@ guPerspectiveF:
 /* 03F0D8 80063CD8 4620100D */  trunc.w.d $f0, $f2
 /* 03F0DC 80063CDC 44030000 */  mfc1  $v1, $f0
 /* 03F0E0 80063CE0 00000000 */  nop   
-/* 03F0E4 80063CE4 08018F40 */  j     func_80063D00
+/* 03F0E4 80063CE4 08018F40 */  j     .L80063D00
 /* 03F0E8 80063CE8 00601021 */   addu  $v0, $v1, $zero
 
 .L80063CEC:
@@ -276,7 +276,7 @@ guPerspectiveF:
 /* 03F0F4 80063CF4 3C028000 */  lui   $v0, 0x8000
 /* 03F0F8 80063CF8 00621825 */  or    $v1, $v1, $v0
 /* 03F0FC 80063CFC 00601021 */  addu  $v0, $v1, $zero
-func_80063D00:
+.L80063D00:
 /* 03F100 80063D00 A6220000 */  sh    $v0, ($s1)
 /* 03F104 80063D04 3042FFFF */  andi  $v0, $v0, 0xffff
 /* 03F108 80063D08 14400002 */  bnez  $v0, .L80063D14
@@ -386,7 +386,7 @@ guPerspective:
 /* 03F290 80063E90 4620100D */  trunc.w.d $f0, $f2
 /* 03F294 80063E94 44030000 */  mfc1  $v1, $f0
 /* 03F298 80063E98 00000000 */  nop   
-/* 03F29C 80063E9C 08018FAE */  j     func_80063EB8
+/* 03F29C 80063E9C 08018FAE */  j     .L80063EB8
 /* 03F2A0 80063EA0 00601021 */   addu  $v0, $v1, $zero
 
 .L80063EA4:
@@ -395,7 +395,7 @@ guPerspective:
 /* 03F2AC 80063EAC 3C028000 */  lui   $v0, 0x8000
 /* 03F2B0 80063EB0 00621825 */  or    $v1, $v1, $v0
 /* 03F2B4 80063EB4 00601021 */  addu  $v0, $v1, $zero
-func_80063EB8:
+.L80063EB8:
 /* 03F2B8 80063EB8 A6220000 */  sh    $v0, ($s1)
 /* 03F2BC 80063EBC 3042FFFF */  andi  $v0, $v0, 0xffff
 /* 03F2C0 80063EC0 14400004 */  bnez  $v0, .L80063ED4

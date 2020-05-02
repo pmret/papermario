@@ -36,7 +36,7 @@ osJamMesg:
 /* 040A00 80065600 26040004 */   addiu $a0, $s0, 4
 /* 040A04 80065604 0C01ACF4 */  jal   osRestoreInt
 /* 040A08 80065608 02202021 */   addu  $a0, $s1, $zero
-/* 040A0C 8006560C 080195B0 */  j     func_800656C0
+/* 040A0C 8006560C 080195B0 */  j     .L800656C0
 /* 040A10 80065610 2402FFFF */   addiu $v0, $zero, -1
 
 .L80065614:
@@ -87,7 +87,7 @@ osJamMesg:
 /* 040AB4 800656B4 0C01ACF4 */  jal   osRestoreInt
 /* 040AB8 800656B8 02202021 */   addu  $a0, $s1, $zero
 /* 040ABC 800656BC 00001021 */  addu  $v0, $zero, $zero
-func_800656C0:
+.L800656C0:
 /* 040AC0 800656C0 8FBF0028 */  lw    $ra, 0x28($sp)
 /* 040AC4 800656C4 8FB50024 */  lw    $s5, 0x24($sp)
 /* 040AC8 800656C8 8FB40020 */  lw    $s4, 0x20($sp)

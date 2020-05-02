@@ -81,13 +81,12 @@ nuSiCallBackRemove:
 /* 03B8D8 800604D8 ACA30000 */  sw    $v1, ($a1)
 /* 03B8DC 800604DC 0C018250 */  jal   osSetIntMask
 /* 03B8E0 800604E0 AE000000 */   sw    $zero, ($s0)
-/* 03B8E4 800604E4 0801813D */  j     func_800604F4
+/* 03B8E4 800604E4 0801813D */  j     .L800604F4
 /* 03B8E8 800604E8 00000000 */   nop   
 
 .L800604EC:
 /* 03B8EC 800604EC 1600FFF1 */  bnez  $s0, .L800604B4
 /* 03B8F0 800604F0 0040882D */   daddu $s1, $v0, $zero
-func_800604F4:
 .L800604F4:
 /* 03B8F4 800604F4 8FBF0018 */  lw    $ra, 0x18($sp)
 /* 03B8F8 800604F8 8FB10014 */  lw    $s1, 0x14($sp)

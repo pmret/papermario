@@ -33,7 +33,7 @@ def scan_file(path):
         if re.findall(r'\sjal\s+.*', line):
             target = line.split()[-1]
             jals.add(target)
-        if re.findall(r'\sb\s+.*', line):
+        if re.findall(r'\sb.*', line):
             target = line.split()[-1]
             bs.add(target)
         if re.findall(r'\sbal\s+.*', line):
@@ -41,52 +41,54 @@ def scan_file(path):
             bals.add(target)
 
 
+def get_linked_flags(label):
+    return (label in js or label in bs), (label in jals or label in bals)
+
+
 def process_file(path):
     print("Processing " + path)
-    with open(path) as f:
-        file_lines = f.readlines()
+    with open(path) as fi:
+        file_lines = fi.readlines()
 
-    cur_fun = None
+    skip_next = False
     to_delete = []
     for i, line in enumerate(file_lines):
+        if skip_next:
+            skip_next = False
+            continue
         line = line.strip()
-        if cur_fun is None:
-            if line.endswith(":") and not line.startswith(".L"):
-                cur_fun = line[:-1]
-                continue
-        else:
-            if re.findall(r'jr\s+\$..', line):
-                cur_fun = None
-                continue
-            if line.endswith(":") and not line.startswith(".L"):
-                linked_to = False
-                linked_al_to = False
-                func_preamble = line.startswith("func_")
-                bogus_label = line[:-1]
-                # print("Found dubious func: " + bogus_label)
-                if bogus_label in jals or bogus_label in bals:
-                    linked_al_to = True
-                    dprint("\t in jal/bal instruction - eek!")
-                if bogus_label in js or bogus_label in bs:
-                    linked_to = True
-                    dprint("\t in j/b instruction - change to label")
-                if not linked_to:
-                    dprint(" not referenced anywhere")
+        if "A4000658" in line:
+            dog = 5
 
-                if func_preamble:
-                    # func_12345689
-                    if linked_al_to:
-                        # Seems to be legit. Do nothing for now
-                        dog = 5
-                    elif linked_to:
-                        # j / b 'd to, rename as label
-                        renames.append((bogus_label, ".L" + bogus_label[5:]))
-                    else:
-                        # Not referenced by anything. Delete
-                        to_delete.append(i)
+        if line.endswith(":") and not line.startswith(".L"):
+            func_preamble = line.startswith("func_")
+            label = line[:-1]
+            linked_to, linked_al_to = get_linked_flags(label)
+
+            if func_preamble:
+                # func_12345689
+
+                # Delete redundant label below
+                if file_lines[i + 1].strip() == ".L" + label[5:13] + ":":
+                    to_delete.append(i + 1)
+                    skip_next = True
+
+                if linked_al_to:
+                    # Seems to be legit. Do nothing for now
+                    continue
+                elif linked_to:
+                    # j / b 'd to, rename as label
+                    renames.append((label, ".L" + label[5:]))
+                else:
+                    # Not referenced by anything. Delete
+                    to_delete.append(i)
 
     if len(to_delete) > 0:
-        dog = 5
+        print("\tDeleting " + str(len(to_delete)) + " lines...")
+        for i in reversed(to_delete):
+            del file_lines[i]
+        with open(path, "w") as fo:
+            fo.writelines(file_lines)
 
 
 # Collect all branches and jumps
@@ -100,14 +102,14 @@ print("Scanned all files")
 # Process files
 for root, dirs, files in os.walk(asm_dir):
     for file in files:
-        if file.endswith(".s"):
+        if file.endswith(".s") and "boot" not in file:
             process_file(os.path.join(root, file))
 
 if len(renames) > 0:
     print("Renaming " + str(len(renames)) + " labels...")
     for root, dirs, files in os.walk(asm_dir):
         for file in files:
-            if file.endswith(".s") and "giant" not in file:
+            if file.endswith(".s"):
                 file_path = os.path.join(root, file)
                 with open(file_path) as f:
                     orig_file_text = f.read()

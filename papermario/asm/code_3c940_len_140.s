@@ -53,7 +53,7 @@ osAiSetFrequency:
 /* 03C9C4 800615C4 4600100D */  trunc.w.s $f0, $f2
 /* 03C9C8 800615C8 44050000 */  mfc1  $a1, $f0
 /* 03C9CC 800615CC 00000000 */  nop   
-/* 03C9D0 800615D0 0801857B */  j     func_800615EC
+/* 03C9D0 800615D0 0801857B */  j     .L800615EC
 /* 03C9D4 800615D4 2CA20084 */   sltiu $v0, $a1, 0x84
 
 .L800615D8:
@@ -62,7 +62,7 @@ osAiSetFrequency:
 /* 03C9E0 800615E0 3C028000 */  lui   $v0, 0x8000
 /* 03C9E4 800615E4 00A22825 */  or    $a1, $a1, $v0
 /* 03C9E8 800615E8 2CA20084 */  sltiu $v0, $a1, 0x84
-func_800615EC:
+.L800615EC:
 /* 03C9EC 800615EC 14400020 */  bnez  $v0, .L80061670
 /* 03C9F0 800615F0 2402FFFF */   addiu $v0, $zero, -1
 /* 03C9F4 800615F4 3C023E0F */  lui   $v0, 0x3e0f
