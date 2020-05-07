@@ -43,6 +43,10 @@ for root, dirs, files in os.walk(asm_dir):
             dumb_split = file.split("_")
             if len(dumb_split) > 2:
                 file_num = dumb_split[1]
+                try:
+                    test = int(file_num, 16)
+                except ValueError:
+                    file_num = ""
             else:
                 file_num = ""
             with open(os.path.join(root, file)) as f:
