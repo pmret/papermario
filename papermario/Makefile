@@ -1,5 +1,7 @@
 # Makefile to rebuild SM64 split image
 
+SHELL=/bin/bash -o pipefail
+
 ################ Target Executable and Sources ###############
 
 # BUILD_DIR is location where all build artifacts are placed
