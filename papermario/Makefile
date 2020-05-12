@@ -28,18 +28,6 @@ O_FILES := $(foreach file,$(C_FILES),$(BUILD_DIR)/$(file:.c=.o)) \
            $(foreach file,$(MAP_FILES),$(BUILD_DIR)/$(file:.FS=.FS.o)) \
            $(foreach file,$(BGM_FILES),$(BUILD_DIR)/$(file:.bgm=.bgm.o))
 
-##################### Compiler Options #######################
-CROSS = mips-linux-gnu-
-AS = $(CROSS)as
-CC = $(CROSS)gcc
-LD = $(CROSS)ld
-OBJDUMP = $(CROSS)objdump
-OBJCOPY = $(CROSS)objcopy
-
-ASFLAGS = -EB -march=vr4300 -mtune=vr4300
-CFLAGS  = -Wall -O2 -mtune=vr4300 -march=vr4300 -G 0 -c
-LDFLAGS = -T undefined_syms.txt -T $(LD_SCRIPT) -Map $(BUILD_DIR)/papermario.map
-
 ####################### Other Tools #########################
 
 # N64 tools
@@ -54,6 +42,20 @@ LOADER_FLAGS = -vwf
 
 FixPath = $(subst /,\,$1)
 
+##################### Compiler Options #######################
+CROSS = mips-linux-gnu-
+CROSS_IRIX = mips-sgi-irix5-
+AS = $(CROSS)as
+OLD_AS = $(TOOLS_DIR)/mips-nintendo-nu64-as
+CC = $(TOOLS_DIR)/cc1
+LD = $(CROSS_IRIX)ld
+OBJDUMP = $(CROSS)objdump
+OBJCOPY = $(CROSS)objcopy
+
+ASFLAGS = -EB -march=vr4300 -mtune=vr4300
+CFLAGS  = -O2 -quiet
+LDFLAGS = -T undefined_syms.txt -T $(LD_SCRIPT) -Map $(BUILD_DIR)/papermario.map
+
 ######################## Targets #############################
 
 $(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(DATA_DIRS) $(COMPRESSED_DIRS) $(MAP_DIRS) $(BGM_DIRS),$(shell mkdir -p build/$(dir)))
@@ -64,7 +66,7 @@ default: all
 MAKEFILE_SPLIT = Makefile.split
 include $(MAKEFILE_SPLIT)
 
-all: fix_asm $(TARGET).z64 verify
+all: fix_asm $(BUILD_DIR) $(TARGET).z64 verify
 
 clean:
 	rm -rf build
@@ -74,26 +76,26 @@ print-% : ; $(info $* is a $(flavor $*) variable set to [$($*)]) @true
 $(BUILD_DIR):
 	mkdir $(BUILD_DIR)
 
-$(BUILD_DIR)/$(TARGET).elf: $(O_FILES) $(LD_SCRIPT) $(BUILD_DIR)
+$(BUILD_DIR)/$(TARGET).elf: $(O_FILES) $(LD_SCRIPT)
 	@$(LD) $(LDFLAGS) -o $@ $(O_FILES)
 
-$(BUILD_DIR)/%.o: %.s $(BUILD_DIR)
-	@$(AS) $(ASFLAGS) -o $@ $<
+$(BUILD_DIR)/%.o: %.s
+	$(AS) $(ASFLAGS) -o $@ $<
 
-$(BUILD_DIR)/%.o: %.c $(BUILD_DIR)
-	@$(CC) $(CFLAGS) -o $@ $<
+$(BUILD_DIR)/%.o: %.c
+	$(CC) $(CFLAGS) -o - $< | $(OLD_AS) - -o $@
 
-$(BUILD_DIR)/%.o: %.bin $(BUILD_DIR)
-	@$(LD) -r -b binary -o $@ $<
+$(BUILD_DIR)/%.o: %.bin
+	$(LD) -r -b binary -o $@ $<
 
-$(BUILD_DIR)/%.yay0.o: %.yay0 $(BUILD_DIR)
-	@$(LD) -r -b binary -o $@ $<
+$(BUILD_DIR)/%.yay0.o: %.yay0
+	$(LD) -r -b binary -o $@ $<
 
-$(BUILD_DIR)/%.FS.o: %.FS $(BUILD_DIR)
-	@$(LD) -r -b binary -o $@ $<
+$(BUILD_DIR)/%.FS.o: %.FS
+	$(LD) -r -b binary -o $@ $<
 
-$(BUILD_DIR)/%.bgm.o: %.bgm $(BUILD_DIR)
-	@$(LD) -r -b binary -o $@ $<
+$(BUILD_DIR)/%.bgm.o: %.bgm
+	$(LD) -r -b binary -o $@ $<
 
 $(BUILD_DIR)/$(TARGET).bin: $(BUILD_DIR)/$(TARGET).elf
 	$(OBJCOPY) $< $@ -O binary

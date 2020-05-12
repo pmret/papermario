@@ -879,7 +879,7 @@ SECTIONS
 
    /* 0x80147230 0DD930-0DDAF0 [1C0] */
    .text80147230 0x80147230 : AT(0x0DD930) {
-      build/asm/code_dd930_len_1c0.o(.text80147230);
+      build/src/code_dd930_len_1c0.o(.text);
    }
 
    /* 0x801473F0 0DDAF0-0DE740 [C50] */
