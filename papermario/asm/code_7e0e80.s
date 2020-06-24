@@ -13,7 +13,6 @@
 
 func_80280000:
 /* 7E0E80 80280000 3C028007 */  lui   $v0, 0x8007
-PartnerAfflictEnemy:
 /* 7E0E84 80280004 8C42419C */  lw    $v0, 0x419c($v0)
 /* 7E0E88 80280008 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 7E0E8C 8028000C AFBF0018 */  sw    $ra, 0x18($sp)
@@ -180,7 +179,6 @@ func_80280208:
 .L80280268:
 /* 7E10E8 80280268 0C0496CF */  jal   set_message_string
 /* 7E10EC 8028026C 24050001 */   addiu $a1, $zero, 1
-PartnerPowerBounceEnemy:
 /* 7E10F0 80280270 3C048028 */  lui   $a0, 0x8028
 /* 7E10F4 80280274 24843EB0 */  addiu $a0, $a0, 0x3eb0
 /* 7E10F8 80280278 24050001 */  addiu $a1, $zero, 1
@@ -342,7 +340,6 @@ func_8028035C:
 /* 7E1344 802804C4 3C018028 */  lui   $at, 0x8028
 /* 7E1348 802804C8 AC256524 */  sw    $a1, 0x6524($at)
 /* 7E134C 802804CC 080A0141 */  j     .L80280504
-PartnerTestEnemy:
 /* 7E1350 802804D0 A6040000 */   sh    $a0, ($s0)
 
 .L802804D4:
@@ -546,8 +543,7 @@ PartnerTestEnemy:
 
 .L802807A0:
 /* 7E1620 802807A0 0C039D5D */  jal   add_item
-/* 7E1624 802807A4 00000000 */   nop   
-DeletePartner:
+/* 7E1624 802807A4 00000000 */   nop
 /* 7E1628 802807A8 0C0A005F */  jal   func_8028017C
 /* 7E162C 802807AC 24040003 */   addiu $a0, $zero, 3
 /* 7E1630 802807B0 AE620074 */  sw    $v0, 0x74($s3)
@@ -594,7 +590,6 @@ DeletePartner:
 /* 7E16B4 80280834 1440003D */  bnez  $v0, .L8028092C
 /* 7E16B8 80280838 0000102D */   daddu $v0, $zero, $zero
 /* 7E16BC 8028083C 8E430000 */  lw    $v1, ($s2)
-GetDamageIntensity:
 /* 7E16C0 80280840 24020001 */  addiu $v0, $zero, 1
 /* 7E16C4 80280844 3C018028 */  lui   $at, 0x8028
 /* 7E16C8 80280848 AC226534 */  sw    $v0, 0x6534($at)
@@ -614,7 +609,6 @@ GetDamageIntensity:
 /* 7E16F4 80280874 0000102D */   daddu $v0, $zero, $zero
 /* 7E16F8 80280878 8E430000 */  lw    $v1, ($s2)
 /* 7E16FC 8028087C 24020003 */  addiu $v0, $zero, 3
-ActorAddMovePos:
 /* 7E1700 80280880 3C018028 */  lui   $at, 0x8028
 /* 7E1704 80280884 AC226534 */  sw    $v0, 0x6534($at)
 /* 7E1708 80280888 AE700070 */  sw    $s0, 0x70($s3)
@@ -676,7 +670,6 @@ ActorAddMovePos:
 /* 7E17C4 80280944 8FB10014 */  lw    $s1, 0x14($sp)
 /* 7E17C8 80280948 8FB00010 */  lw    $s0, 0x10($sp)
 /* 7E17CC 8028094C 03E00008 */  jr    $ra
-LoadStarPowerScript:
 /* 7E17D0 80280950 27BD0030 */   addiu $sp, $sp, 0x30
 
 func_80280954:
@@ -745,7 +738,6 @@ func_80280954:
 /* 7E18A8 80280A28 24050001 */  addiu $a1, $zero, 1
 /* 7E18AC 80280A2C AE120108 */  sw    $s2, 0x108($s0)
 /* 7E18B0 80280A30 AE05018C */  sw    $a1, 0x18c($s0)
-BtlPutPartnerAway:
 /* 7E18B4 80280A34 AE020000 */  sw    $v0, ($s0)
 /* 7E18B8 80280A38 8C620000 */  lw    $v0, ($v1)
 /* 7E18BC 80280A3C AE020084 */  sw    $v0, 0x84($s0)

@@ -1002,9 +1002,19 @@ SECTIONS
       build/asm/code_163400.o(.text80242BA0);
    }
 
-   /* 0x00000000 16A3E0-3169F0 [1AC610] */
+   /* 0x00000000 16A3E0-16C8E0 [??] */
    .data0016A3E0 0x0016A3E0 : AT(0x16A3E0) {
       build/bin/PAPERMARIO.16A3E0.bin_16a3e0.o(.data);
+   }
+
+   /* 0x8023E000 16C8E0-1AF2C0 [??] */
+   .text8023E000 0x8023E000 : AT(0x16C8E0) {
+      build/asm/code_16c8e0.o(.text8023E000);
+   }
+
+   /* 0x00000000 1AF2C0-3169F0 [??] */
+   .data001AF2C0 0x001AF2C0 : AT(0x1AF2C0) {
+      build/bin/PAPERMARIO.1AF2C0.bin_1AF2C0.o(.data);
    }
 
    /* 0x80200000 3169F0-316A70 [80] */
