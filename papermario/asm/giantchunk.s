@@ -23649,6 +23649,7 @@ func_800F1538:
 /* 08AB74 800F16C4 03E00008 */  jr    $ra
 /* 08AB78 800F16C8 27BD0020 */   addiu $sp, $sp, 0x20
 
+func_800F16CC:
 /* 08AB7C 800F16CC 3C028011 */  lui   $v0, 0x8011
 /* 08AB80 800F16D0 8042D68E */  lb    $v0, -0x2972($v0)
 /* 08AB84 800F16D4 27BDFFE0 */  addiu $sp, $sp, -0x20
@@ -27727,6 +27728,7 @@ func_800F4FC4:
 /* 08E5E4 800F5134 03E00008 */  jr    $ra
 /* 08E5E8 800F5138 27BD0018 */   addiu $sp, $sp, 0x18
 
+func_800F513C:
 /* 08E5EC 800F513C 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 08E5F0 800F5140 AFB00010 */  sw    $s0, 0x10($sp)
 /* 08E5F4 800F5144 3C108011 */  lui   $s0, 0x8011
@@ -27829,6 +27831,7 @@ func_800F4FC4:
 /* 08E764 800F52B4 03E00008 */  jr    $ra
 /* 08E768 800F52B8 27BD0018 */   addiu $sp, $sp, 0x18
 
+func_800F52BC:
 /* 08E76C 800F52BC 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 08E770 800F52C0 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 08E774 800F52C4 0C03C684 */  jal   func_800F1A10

@@ -1042,9 +1042,19 @@ SECTIONS
       build/asm/code_316f30.o(.text802B2000);
    }
 
-   /* 0x00000000 317020-7E0E80 [4C9E60] */
+   /* 0x00000000 317020-415D90 ?? */
    .data00317020 0x00317020 : AT(0x317020) {
       build/bin/PAPERMARIO.317020.bin_317020.o(.data);
+   }
+
+   /* 0x802A1000 415D90-4200C0 ?? */
+   .text802A1000 0x802A1000 : AT(0x415D90) {
+      build/asm/code_415D90.o(.text802A1000);
+   }
+
+   /* 0x00000000 4200C0-7E0E80 ?? */
+   .data004200C0 0x004200C0 : AT(0x4200C0) {
+      build/bin/PAPERMARIO.4200C0.bin_4200C0.o(.data);
    }
 
    /* 0x80280000 7E0E80-7E4D00 [3E80] */
