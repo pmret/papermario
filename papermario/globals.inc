@@ -1639,6 +1639,7 @@
 .global func_80028838
 .global func_80028F8C
 .global func_80029934
+.global func_8002AAC4
 .global func_8002AB5C
 .global func_8002ACDC
 .global func_8002BA40
@@ -1677,6 +1678,7 @@
 .global func_8003D624
 .global func_8003D660
 .global func_8003E338
+.global func_8003E514
 .global func_8003E524
 .global func_8003E5B0
 .global func_8003E63C
@@ -1696,6 +1698,16 @@
 .global func_80045C28
 .global func_80045D00
 .global func_80045FA4
+.global func_80047608
+.global func_800476F4
+.global func_8004778C
+.global func_800477F4
+.global func_80047820
+.global func_80047898
+.global func_800478F8
+.global func_80047928
+.global func_800479A0
+.global func_80047AA8
 .global func_800494C0
 .global func_8004B440
 .global func_8004B62C
@@ -2126,6 +2138,7 @@
 .global func_80142210
 .global func_8014271C
 .global func_801447E0
+.global func_801449DC
 .global func_80144C20
 .global func_80144EB0
 .global func_80144EFC
@@ -2171,6 +2184,9 @@
 .global func_8014AF8C
 .global func_80200000
 .global func_80200080
+.global func_802409F4
+.global func_80240AA8
+.global func_80241190
 .global func_802431A0
 .global func_80244060
 .global func_80244424
@@ -2200,6 +2216,7 @@
 .global func_802DDEC4
 .global func_802DDEE4
 .global func_802DDFF8
+.global func_802DE0C0
 .global func_802DE0EC
 .global func_802DE2AC
 .global func_802DE3D8
@@ -2218,3 +2235,26 @@
 .global func_802E3650
 .global func_802E36E4
 
+.global func_80047A00
+.global func_80047A30
+.global func_80047B08
+.global func_80047B38
+.global func_80047B84
+.global func_80047BE4
+.global func_80047C14
+.global func_80047CA4
+.global func_80047D00
+.global func_80047D30
+.global func_80047DC0
+.global func_80047E1C
+.global func_80048064
+.global func_800480F4
+.global func_80048170
+.global func_80048200
+.global func_800E9810
+.global func_80144218
+.global func_80144238
+.global func_80144FD8
+.global func_801451D4
+.global func_80145224
+.global func_80145274

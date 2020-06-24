@@ -2010,6 +2010,7 @@ func_8002A904:
 /* 005EBC 8002AABC 03E00008 */  jr    $ra
 /* 005EC0 8002AAC0 27BD0008 */   addiu $sp, $sp, 8
 
+func_8002AAC4:
 /* 005EC4 8002AAC4 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 005EC8 8002AAC8 0080402D */  daddu $t0, $a0, $zero
 /* 005ECC 8002AACC 00A0482D */  daddu $t1, $a1, $zero

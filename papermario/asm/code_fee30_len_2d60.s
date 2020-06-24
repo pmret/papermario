@@ -2524,6 +2524,7 @@ func_802DDFF8:
 /* 1011A8 802DE0B8 03E00008 */  jr    $ra
 /* 1011AC 802DE0BC 27BD0018 */   addiu $sp, $sp, 0x18
 
+func_802DE0C0:
 /* 1011B0 802DE0C0 2484FFFF */  addiu $a0, $a0, -1
 /* 1011B4 802DE0C4 00042080 */  sll   $a0, $a0, 2
 /* 1011B8 802DE0C8 3C02802E */  lui   $v0, 0x802e
