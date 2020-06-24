@@ -1002,6 +1002,10 @@ SECTIONS
       build/asm/code_163400.o(.text80242BA0);
    }
 
+   .text8023E000 0x8023E000 : AT(0x16c8e0) {
+      build/asm/code_16c8e0.o(.text8023E000);
+   }
+
    /* 0x00000000 16A3E0-3169F0 [1AC610] */
    .data0016A3E0 0x0016A3E0 : AT(0x16A3E0) {
       build/bin/PAPERMARIO.16A3E0.bin_16a3e0.o(.data);

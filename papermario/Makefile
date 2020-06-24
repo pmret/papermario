@@ -56,7 +56,7 @@ OBJCOPY = $(CROSS)objcopy
 
 ASFLAGS = -EB -march=vr4300 -mtune=vr4300
 CFLAGS  = -O2 -quiet
-LDFLAGS = -T undefined_syms.txt -T $(LD_SCRIPT) -Map $(BUILD_DIR)/papermario.map
+LDFLAGS = -T undefined_syms.txt -T $(LD_SCRIPT) -Map $(BUILD_DIR)/papermario.map --no-check-sections
 
 ######################## Targets #############################
 
