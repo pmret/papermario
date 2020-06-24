@@ -2258,3 +2258,6 @@
 .global func_801451D4
 .global func_80145224
 .global func_80145274
+.global func_802D4164
+.global func_802D7460
+.global func_802D74C0
