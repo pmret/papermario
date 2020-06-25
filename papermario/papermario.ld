@@ -264,7 +264,7 @@ SECTIONS
 
    /* 0x80060350 03B750-03B770 [20] */
    .text80060350 0x80060350 : AT(0x03B750) {
-      build/asm/code_3b750_len_20.o(.text80060350);
+      build/src/code_3b750_len_20.o(.text);
    }
 
    /* 0x80060370 03B770-03B7F0 [80] */

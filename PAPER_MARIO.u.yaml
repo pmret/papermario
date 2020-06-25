@@ -6,7 +6,7 @@ name: "Paper Mario (U) [!]"
 checksum1: 0x3ae5ee65
 checksum2: 0x3c737ded
 # base filename used for outputs - (please, no spaces)
-basename: "PAPERMARIO"
+basename: "papermario"
 ranges:
   # start,  end,      type,     label
   - [0x000000, 0x000040, "header", "header"]

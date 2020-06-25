@@ -3,7 +3,6 @@ n64split
 *.bin
 *.FS
 *.bgm
-papermario/PAPERMARIO.s
 papermario/Map_Assets.FS
 papermario/bgm
 papermario/bin
@@ -13,3 +12,4 @@ papermario/yay0
 .idea/
 .DS_Store
 venv/
+__pycache__/
