@@ -64,6 +64,7 @@ all: fix_asm $(BUILD_DIR) $(TARGET).z64 verify
 
 clean:
 	rm -rf build
+	rm -f papermario.z64
 
 print-% : ; $(info $* is a $(flavor $*) variable set to [$($*)]) @true
 
