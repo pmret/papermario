@@ -14,7 +14,7 @@ SECTIONS
 
    /* 0x00000000 000B70-001000 [490] */
    .data00000B70 0x00000B70 : AT(0x000B70) {
-      build/bin/PAPERMARIO.000B70.bootcode_font.o(.data);
+      build/bin/papermario.000B70.bootcode_font.o(.data);
    }
 
    /* 0x80025C00 001000-001060 [60] */
@@ -109,7 +109,7 @@ SECTIONS
 
    /* 0x80035D30 011130-0111F0 [C0] */
    .text80035D30 0x80035D30 : AT(0x011130) {
-      build/asm/code_11130_len_c0.o(.text80035D30);
+      build/src/code_11130_len_c0.o(.text);
    }
 
    /* 0x80035DF0 0111F0-011A50 [860] */
@@ -824,7 +824,7 @@ SECTIONS
 
    /* 0x00000000 04E5A0-0759B0 [27410] */
    .data0004E5A0 0x0004E5A0 : AT(0x04E5A0) {
-      build/bin/PAPERMARIO.04E5A0.bin_759b0_len_27410.o(.data);
+      build/bin/papermario.04E5A0.bin_759b0_len_27410.o(.data);
    }
 
    /* 0x800DC500 0759B0-090FE0 [1B630] */
@@ -834,7 +834,7 @@ SECTIONS
 
    /* 0x00000000 090FE0-0A5DD0 [14DF0] */
    .data00090FE0 0x00090FE0 : AT(0x090FE0) {
-      build/bin/PAPERMARIO.090FE0.giantchunk_bin.o(.data);
+      build/bin/papermario.090FE0.giantchunk_bin.o(.data);
    }
 
    /* 0x8010F6D0 0A5DD0-0B72B0 [114E0] */
@@ -899,7 +899,7 @@ SECTIONS
 
    /* 0x00000000 0E16B0-0E79B0 [6300] */
    .data000E16B0 0x000E16B0 : AT(0x0E16B0) {
-      build/bin/PAPERMARIO.0E16B0.bin_e5dd0.o(.data);
+      build/bin/papermario.0E16B0.bin_e5dd0.o(.data);
    }
 
    /* 0x802C3000 0E79B0-0E92D0 [1920] */
@@ -944,7 +944,7 @@ SECTIONS
 
    /* 0x00000000 0FE650-0FEE30 [7E0] */
    .data000FE650 0x000FE650 : AT(0x0FE650) {
-      build/bin/PAPERMARIO.0FE650.bin_fee30_len_7e0.o(.data);
+      build/bin/papermario.0FE650.bin_fee30_len_7e0.o(.data);
    }
 
    /* 0x802DBD40 0FEE30-101B90 [2D60] */
@@ -959,7 +959,7 @@ SECTIONS
 
    /* 0x00000000 102480-102610 [190] */
    .data00102480 0x00102480 : AT(0x102480) {
-      build/bin/PAPERMARIO.102480.bin_102610_len_190.o(.data);
+      build/bin/papermario.102480.bin_102610_len_190.o(.data);
    }
 
    /* 0x802E0D90 102610-104940 [2330] */
@@ -994,7 +994,7 @@ SECTIONS
 
    /* 0x00000000 10A9F0-163400 [58A10] */
    .data0010A9F0 0x0010A9F0 : AT(0x10A9F0) {
-      build/bin/PAPERMARIO.10A9F0.bin_10A9F0.o(.data);
+      build/bin/papermario.10A9F0.bin_10A9F0.o(.data);
    }
 
    /* 0x80242BA0 163400-16A3E0 [6FE0] */
@@ -1004,7 +1004,7 @@ SECTIONS
 
    /* 0x00000000 16A3E0-16C8E0 [??] */
    .data0016A3E0 0x0016A3E0 : AT(0x16A3E0) {
-      build/bin/PAPERMARIO.16A3E0.bin_16a3e0.o(.data);
+      build/bin/papermario.16A3E0.bin_16a3e0.o(.data);
    }
 
    /* 0x8023E000 16C8E0-1AF2C0 [??] */
@@ -1014,7 +1014,7 @@ SECTIONS
 
    /* 0x00000000 1AF2C0-3169F0 [??] */
    .data001AF2C0 0x001AF2C0 : AT(0x1AF2C0) {
-      build/bin/PAPERMARIO.1AF2C0.bin_1AF2C0.o(.data);
+      build/bin/papermario.1AF2C0.bin_1AF2C0.o(.data);
    }
 
    /* 0x80200000 3169F0-316A70 [80] */
@@ -1029,7 +1029,7 @@ SECTIONS
 
    /* 0x00000000 316C00-316D90 [190] */
    .data00316C00 0x00316C00 : AT(0x316C00) {
-      build/bin/PAPERMARIO.316C00.bin_316c00.o(.data);
+      build/bin/papermario.316C00.bin_316c00.o(.data);
    }
 
    /* 0x802AE000 316D90-316F30 [1A0] */
@@ -1044,7 +1044,7 @@ SECTIONS
 
    /* 0x00000000 317020-415D90 ?? */
    .data00317020 0x00317020 : AT(0x317020) {
-      build/bin/PAPERMARIO.317020.bin_317020.o(.data);
+      build/bin/papermario.317020.bin_317020.o(.data);
    }
 
    /* 0x802A1000 415D90-4200C0 ?? */
@@ -1054,7 +1054,7 @@ SECTIONS
 
    /* 0x00000000 4200C0-7E0E80 ?? */
    .data004200C0 0x004200C0 : AT(0x4200C0) {
-      build/bin/PAPERMARIO.4200C0.bin_4200C0.o(.data);
+      build/bin/papermario.4200C0.bin_4200C0.o(.data);
    }
 
    /* 0x80280000 7E0E80-7E4D00 [3E80] */
@@ -1064,7 +1064,7 @@ SECTIONS
 
    /* 0x00000000 7E4D00-E20EB0 [63C1B0] */
    .data007E4D00 0x007E4D00 : AT(0x7E4D00) {
-      build/bin/PAPERMARIO.7E4D00.bin_7e4d00.o(.data);
+      build/bin/papermario.7E4D00.bin_7e4d00.o(.data);
    }
 
    /* 0x802B7000 E20EB0-E215C0 [710] */
@@ -1074,1977 +1074,1977 @@ SECTIONS
 
    /* 0x00000000 E215C0-F007C0 [DF200] */
    .data00E215C0 0x00E215C0 : AT(0xE215C0) {
-      build/bin/PAPERMARIO.E215C0.bin_19e09a8.o(.data);
+      build/bin/papermario.E215C0.bin_19e09a8.o(.data);
    }
 
    /* 0x00000000 F007C0-F02160 [19A0] */
    .data00F007C0 0x00F007C0 : AT(0xF007C0) {
-      build/bgm/PAPERMARIO.F007C0.bgm.o(.data);
+      build/bgm/papermario.F007C0.bgm.o(.data);
    }
 
    /* 0x00000000 F02160-F03740 [15E0] */
    .data00F02160 0x00F02160 : AT(0xF02160) {
-      build/bgm/PAPERMARIO.F02160.bgm.o(.data);
+      build/bgm/papermario.F02160.bgm.o(.data);
    }
 
    /* 0x00000000 F03740-F043F0 [CB0] */
    .data00F03740 0x00F03740 : AT(0xF03740) {
-      build/bgm/PAPERMARIO.F03740.bgm.o(.data);
+      build/bgm/papermario.F03740.bgm.o(.data);
    }
 
    /* 0x00000000 F043F0-F073C0 [2FD0] */
    .data00F043F0 0x00F043F0 : AT(0xF043F0) {
-      build/bgm/PAPERMARIO.F043F0.bgm.o(.data);
+      build/bgm/papermario.F043F0.bgm.o(.data);
    }
 
    /* 0x00000000 F073C0-F08D40 [1980] */
    .data00F073C0 0x00F073C0 : AT(0xF073C0) {
-      build/bgm/PAPERMARIO.F073C0.bgm.o(.data);
+      build/bgm/papermario.F073C0.bgm.o(.data);
    }
 
    /* 0x00000000 F08D40-F09600 [8C0] */
    .data00F08D40 0x00F08D40 : AT(0xF08D40) {
-      build/bgm/PAPERMARIO.F08D40.bgm.o(.data);
+      build/bgm/papermario.F08D40.bgm.o(.data);
    }
 
    /* 0x00000000 F09600-F0A550 [F50] */
    .data00F09600 0x00F09600 : AT(0xF09600) {
-      build/bgm/PAPERMARIO.F09600.bgm.o(.data);
+      build/bgm/papermario.F09600.bgm.o(.data);
    }
 
    /* 0x00000000 F0A550-F0BAE0 [1590] */
    .data00F0A550 0x00F0A550 : AT(0xF0A550) {
-      build/bgm/PAPERMARIO.F0A550.bgm.o(.data);
+      build/bgm/papermario.F0A550.bgm.o(.data);
    }
 
    /* 0x00000000 F0BAE0-F0DEC0 [23E0] */
    .data00F0BAE0 0x00F0BAE0 : AT(0xF0BAE0) {
-      build/bgm/PAPERMARIO.F0BAE0.bgm.o(.data);
+      build/bgm/papermario.F0BAE0.bgm.o(.data);
    }
 
    /* 0x00000000 F0DEC0-F0FD20 [1E60] */
    .data00F0DEC0 0x00F0DEC0 : AT(0xF0DEC0) {
-      build/bgm/PAPERMARIO.F0DEC0.bgm.o(.data);
+      build/bgm/papermario.F0DEC0.bgm.o(.data);
    }
 
    /* 0x00000000 F0FD20-F110D0 [13B0] */
    .data00F0FD20 0x00F0FD20 : AT(0xF0FD20) {
-      build/bgm/PAPERMARIO.F0FD20.bgm.o(.data);
+      build/bgm/papermario.F0FD20.bgm.o(.data);
    }
 
    /* 0x00000000 F110D0-F116C0 [5F0] */
    .data00F110D0 0x00F110D0 : AT(0xF110D0) {
-      build/bgm/PAPERMARIO.F110D0.bgm.o(.data);
+      build/bgm/papermario.F110D0.bgm.o(.data);
    }
 
    /* 0x00000000 F116C0-F12320 [C60] */
    .data00F116C0 0x00F116C0 : AT(0xF116C0) {
-      build/bgm/PAPERMARIO.F116C0.bgm.o(.data);
+      build/bgm/papermario.F116C0.bgm.o(.data);
    }
 
    /* 0x00000000 F12320-F13C20 [1900] */
    .data00F12320 0x00F12320 : AT(0xF12320) {
-      build/bgm/PAPERMARIO.F12320.bgm.o(.data);
+      build/bgm/papermario.F12320.bgm.o(.data);
    }
 
    /* 0x00000000 F13C20-F15F40 [2320] */
    .data00F13C20 0x00F13C20 : AT(0xF13C20) {
-      build/bgm/PAPERMARIO.F13C20.bgm.o(.data);
+      build/bgm/papermario.F13C20.bgm.o(.data);
    }
 
    /* 0x00000000 F15F40-F16F80 [1040] */
    .data00F15F40 0x00F15F40 : AT(0xF15F40) {
-      build/bgm/PAPERMARIO.F15F40.bgm.o(.data);
+      build/bgm/papermario.F15F40.bgm.o(.data);
    }
 
    /* 0x00000000 F16F80-F171D0 [250] */
    .data00F16F80 0x00F16F80 : AT(0xF16F80) {
-      build/bgm/PAPERMARIO.F16F80.bgm.o(.data);
+      build/bgm/papermario.F16F80.bgm.o(.data);
    }
 
    /* 0x00000000 F171D0-F17370 [1A0] */
    .data00F171D0 0x00F171D0 : AT(0xF171D0) {
-      build/bgm/PAPERMARIO.F171D0.bgm.o(.data);
+      build/bgm/papermario.F171D0.bgm.o(.data);
    }
 
    /* 0x00000000 F17370-F17570 [200] */
    .data00F17370 0x00F17370 : AT(0xF17370) {
-      build/bgm/PAPERMARIO.F17370.bgm.o(.data);
+      build/bgm/papermario.F17370.bgm.o(.data);
    }
 
    /* 0x00000000 F17570-F18940 [13D0] */
    .data00F17570 0x00F17570 : AT(0xF17570) {
-      build/bgm/PAPERMARIO.F17570.bgm.o(.data);
+      build/bgm/papermario.F17570.bgm.o(.data);
    }
 
    /* 0x00000000 F18940-F193D0 [A90] */
    .data00F18940 0x00F18940 : AT(0xF18940) {
-      build/bgm/PAPERMARIO.F18940.bgm.o(.data);
+      build/bgm/papermario.F18940.bgm.o(.data);
    }
 
    /* 0x00000000 F193D0-F19BC0 [7F0] */
    .data00F193D0 0x00F193D0 : AT(0xF193D0) {
-      build/bgm/PAPERMARIO.F193D0.bgm.o(.data);
+      build/bgm/papermario.F193D0.bgm.o(.data);
    }
 
    /* 0x00000000 F19BC0-F1A6F0 [B30] */
    .data00F19BC0 0x00F19BC0 : AT(0xF19BC0) {
-      build/bgm/PAPERMARIO.F19BC0.bgm.o(.data);
+      build/bgm/papermario.F19BC0.bgm.o(.data);
    }
 
    /* 0x00000000 F1A6F0-F1ABD0 [4E0] */
    .data00F1A6F0 0x00F1A6F0 : AT(0xF1A6F0) {
-      build/bgm/PAPERMARIO.F1A6F0.bgm.o(.data);
+      build/bgm/papermario.F1A6F0.bgm.o(.data);
    }
 
    /* 0x00000000 F1ABD0-F1C810 [1C40] */
    .data00F1ABD0 0x00F1ABD0 : AT(0xF1ABD0) {
-      build/bgm/PAPERMARIO.F1ABD0.bgm.o(.data);
+      build/bgm/papermario.F1ABD0.bgm.o(.data);
    }
 
    /* 0x00000000 F1C810-F1DBF0 [13E0] */
    .data00F1C810 0x00F1C810 : AT(0xF1C810) {
-      build/bgm/PAPERMARIO.F1C810.bgm.o(.data);
+      build/bgm/papermario.F1C810.bgm.o(.data);
    }
 
    /* 0x00000000 F1DBF0-F1F2E0 [16F0] */
    .data00F1DBF0 0x00F1DBF0 : AT(0xF1DBF0) {
-      build/bgm/PAPERMARIO.F1DBF0.bgm.o(.data);
+      build/bgm/papermario.F1DBF0.bgm.o(.data);
    }
 
    /* 0x00000000 F1F2E0-F20FF0 [1D10] */
    .data00F1F2E0 0x00F1F2E0 : AT(0xF1F2E0) {
-      build/bgm/PAPERMARIO.F1F2E0.bgm.o(.data);
+      build/bgm/papermario.F1F2E0.bgm.o(.data);
    }
 
    /* 0x00000000 F20FF0-F21780 [790] */
    .data00F20FF0 0x00F20FF0 : AT(0xF20FF0) {
-      build/bgm/PAPERMARIO.F20FF0.bgm.o(.data);
+      build/bgm/papermario.F20FF0.bgm.o(.data);
    }
 
    /* 0x00000000 F21780-F22A00 [1280] */
    .data00F21780 0x00F21780 : AT(0xF21780) {
-      build/bgm/PAPERMARIO.F21780.bgm.o(.data);
+      build/bgm/papermario.F21780.bgm.o(.data);
    }
 
    /* 0x00000000 F22A00-F23A00 [1000] */
    .data00F22A00 0x00F22A00 : AT(0xF22A00) {
-      build/bgm/PAPERMARIO.F22A00.bgm.o(.data);
+      build/bgm/papermario.F22A00.bgm.o(.data);
    }
 
    /* 0x00000000 F23A00-F24810 [E10] */
    .data00F23A00 0x00F23A00 : AT(0xF23A00) {
-      build/bgm/PAPERMARIO.F23A00.bgm.o(.data);
+      build/bgm/papermario.F23A00.bgm.o(.data);
    }
 
    /* 0x00000000 F24810-F25240 [A30] */
    .data00F24810 0x00F24810 : AT(0xF24810) {
-      build/bgm/PAPERMARIO.F24810.bgm.o(.data);
+      build/bgm/papermario.F24810.bgm.o(.data);
    }
 
    /* 0x00000000 F25240-F26260 [1020] */
    .data00F25240 0x00F25240 : AT(0xF25240) {
-      build/bgm/PAPERMARIO.F25240.bgm.o(.data);
+      build/bgm/papermario.F25240.bgm.o(.data);
    }
 
    /* 0x00000000 F26260-F27840 [15E0] */
    .data00F26260 0x00F26260 : AT(0xF26260) {
-      build/bgm/PAPERMARIO.F26260.bgm.o(.data);
+      build/bgm/papermario.F26260.bgm.o(.data);
    }
 
    /* 0x00000000 F27840-F27E20 [5E0] */
    .data00F27840 0x00F27840 : AT(0xF27840) {
-      build/bgm/PAPERMARIO.F27840.bgm.o(.data);
+      build/bgm/papermario.F27840.bgm.o(.data);
    }
 
    /* 0x00000000 F27E20-F28E20 [1000] */
    .data00F27E20 0x00F27E20 : AT(0xF27E20) {
-      build/bgm/PAPERMARIO.F27E20.bgm.o(.data);
+      build/bgm/papermario.F27E20.bgm.o(.data);
    }
 
    /* 0x00000000 F28E20-F29AC0 [CA0] */
    .data00F28E20 0x00F28E20 : AT(0xF28E20) {
-      build/bgm/PAPERMARIO.F28E20.bgm.o(.data);
+      build/bgm/papermario.F28E20.bgm.o(.data);
    }
 
    /* 0x00000000 F29AC0-F2E130 [4670] */
    .data00F29AC0 0x00F29AC0 : AT(0xF29AC0) {
-      build/bgm/PAPERMARIO.F29AC0.bgm.o(.data);
+      build/bgm/papermario.F29AC0.bgm.o(.data);
    }
 
    /* 0x00000000 F2E130-F2EF90 [E60] */
    .data00F2E130 0x00F2E130 : AT(0xF2E130) {
-      build/bgm/PAPERMARIO.F2E130.bgm.o(.data);
+      build/bgm/papermario.F2E130.bgm.o(.data);
    }
 
    /* 0x00000000 F2EF90-F30590 [1600] */
    .data00F2EF90 0x00F2EF90 : AT(0xF2EF90) {
-      build/bgm/PAPERMARIO.F2EF90.bgm.o(.data);
+      build/bgm/papermario.F2EF90.bgm.o(.data);
    }
 
    /* 0x00000000 F30590-F318B0 [1320] */
    .data00F30590 0x00F30590 : AT(0xF30590) {
-      build/bgm/PAPERMARIO.F30590.bgm.o(.data);
+      build/bgm/papermario.F30590.bgm.o(.data);
    }
 
    /* 0x00000000 F318B0-F32220 [970] */
    .data00F318B0 0x00F318B0 : AT(0xF318B0) {
-      build/bgm/PAPERMARIO.F318B0.bgm.o(.data);
+      build/bgm/papermario.F318B0.bgm.o(.data);
    }
 
    /* 0x00000000 F32220-F33060 [E40] */
    .data00F32220 0x00F32220 : AT(0xF32220) {
-      build/bgm/PAPERMARIO.F32220.bgm.o(.data);
+      build/bgm/papermario.F32220.bgm.o(.data);
    }
 
    /* 0x00000000 F33060-F33AA0 [A40] */
    .data00F33060 0x00F33060 : AT(0xF33060) {
-      build/bgm/PAPERMARIO.F33060.bgm.o(.data);
+      build/bgm/papermario.F33060.bgm.o(.data);
    }
 
    /* 0x00000000 F33AA0-F33F10 [470] */
    .data00F33AA0 0x00F33AA0 : AT(0xF33AA0) {
-      build/bgm/PAPERMARIO.F33AA0.bgm.o(.data);
+      build/bgm/papermario.F33AA0.bgm.o(.data);
    }
 
    /* 0x00000000 F33F10-F354E0 [15D0] */
    .data00F33F10 0x00F33F10 : AT(0xF33F10) {
-      build/bgm/PAPERMARIO.F33F10.bgm.o(.data);
+      build/bgm/papermario.F33F10.bgm.o(.data);
    }
 
    /* 0x00000000 F354E0-F35ED0 [9F0] */
    .data00F354E0 0x00F354E0 : AT(0xF354E0) {
-      build/bgm/PAPERMARIO.F354E0.bgm.o(.data);
+      build/bgm/papermario.F354E0.bgm.o(.data);
    }
 
    /* 0x00000000 F35ED0-F36690 [7C0] */
    .data00F35ED0 0x00F35ED0 : AT(0xF35ED0) {
-      build/bgm/PAPERMARIO.F35ED0.bgm.o(.data);
+      build/bgm/papermario.F35ED0.bgm.o(.data);
    }
 
    /* 0x00000000 F36690-F379E0 [1350] */
    .data00F36690 0x00F36690 : AT(0xF36690) {
-      build/bgm/PAPERMARIO.F36690.bgm.o(.data);
+      build/bgm/papermario.F36690.bgm.o(.data);
    }
 
    /* 0x00000000 F379E0-F38570 [B90] */
    .data00F379E0 0x00F379E0 : AT(0xF379E0) {
-      build/bgm/PAPERMARIO.F379E0.bgm.o(.data);
+      build/bgm/papermario.F379E0.bgm.o(.data);
    }
 
    /* 0x00000000 F38570-F39160 [BF0] */
    .data00F38570 0x00F38570 : AT(0xF38570) {
-      build/bgm/PAPERMARIO.F38570.bgm.o(.data);
+      build/bgm/papermario.F38570.bgm.o(.data);
    }
 
    /* 0x00000000 F39160-F3A0D0 [F70] */
    .data00F39160 0x00F39160 : AT(0xF39160) {
-      build/bgm/PAPERMARIO.F39160.bgm.o(.data);
+      build/bgm/papermario.F39160.bgm.o(.data);
    }
 
    /* 0x00000000 F3A0D0-F3A450 [380] */
    .data00F3A0D0 0x00F3A0D0 : AT(0xF3A0D0) {
-      build/bgm/PAPERMARIO.F3A0D0.bgm.o(.data);
+      build/bgm/papermario.F3A0D0.bgm.o(.data);
    }
 
    /* 0x00000000 F3A450-F3AF20 [AD0] */
    .data00F3A450 0x00F3A450 : AT(0xF3A450) {
-      build/bgm/PAPERMARIO.F3A450.bgm.o(.data);
+      build/bgm/papermario.F3A450.bgm.o(.data);
    }
 
    /* 0x00000000 F3AF20-F3C130 [1210] */
    .data00F3AF20 0x00F3AF20 : AT(0xF3AF20) {
-      build/bgm/PAPERMARIO.F3AF20.bgm.o(.data);
+      build/bgm/papermario.F3AF20.bgm.o(.data);
    }
 
    /* 0x00000000 F3C130-F3CCC0 [B90] */
    .data00F3C130 0x00F3C130 : AT(0xF3C130) {
-      build/bgm/PAPERMARIO.F3C130.bgm.o(.data);
+      build/bgm/papermario.F3C130.bgm.o(.data);
    }
 
    /* 0x00000000 F3CCC0-F3E130 [1470] */
    .data00F3CCC0 0x00F3CCC0 : AT(0xF3CCC0) {
-      build/bgm/PAPERMARIO.F3CCC0.bgm.o(.data);
+      build/bgm/papermario.F3CCC0.bgm.o(.data);
    }
 
    /* 0x00000000 F3E130-F3F3E0 [12B0] */
    .data00F3E130 0x00F3E130 : AT(0xF3E130) {
-      build/bgm/PAPERMARIO.F3E130.bgm.o(.data);
+      build/bgm/papermario.F3E130.bgm.o(.data);
    }
 
    /* 0x00000000 F3F3E0-F40F00 [1B20] */
    .data00F3F3E0 0x00F3F3E0 : AT(0xF3F3E0) {
-      build/bgm/PAPERMARIO.F3F3E0.bgm.o(.data);
+      build/bgm/papermario.F3F3E0.bgm.o(.data);
    }
 
    /* 0x00000000 F40F00-F42F30 [2030] */
    .data00F40F00 0x00F40F00 : AT(0xF40F00) {
-      build/bgm/PAPERMARIO.F40F00.bgm.o(.data);
+      build/bgm/papermario.F40F00.bgm.o(.data);
    }
 
    /* 0x00000000 F42F30-F45500 [25D0] */
    .data00F42F30 0x00F42F30 : AT(0xF42F30) {
-      build/bgm/PAPERMARIO.F42F30.bgm.o(.data);
+      build/bgm/papermario.F42F30.bgm.o(.data);
    }
 
    /* 0x00000000 F45500-F465E0 [10E0] */
    .data00F45500 0x00F45500 : AT(0xF45500) {
-      build/bgm/PAPERMARIO.F45500.bgm.o(.data);
+      build/bgm/papermario.F45500.bgm.o(.data);
    }
 
    /* 0x00000000 F465E0-F474A0 [EC0] */
    .data00F465E0 0x00F465E0 : AT(0xF465E0) {
-      build/bgm/PAPERMARIO.F465E0.bgm.o(.data);
+      build/bgm/papermario.F465E0.bgm.o(.data);
    }
 
    /* 0x00000000 F474A0-F47E10 [970] */
    .data00F474A0 0x00F474A0 : AT(0xF474A0) {
-      build/bgm/PAPERMARIO.F474A0.bgm.o(.data);
+      build/bgm/papermario.F474A0.bgm.o(.data);
    }
 
    /* 0x00000000 F47E10-F48410 [600] */
    .data00F47E10 0x00F47E10 : AT(0xF47E10) {
-      build/bgm/PAPERMARIO.F47E10.bgm.o(.data);
+      build/bgm/papermario.F47E10.bgm.o(.data);
    }
 
    /* 0x00000000 F48410-F4A880 [2470] */
    .data00F48410 0x00F48410 : AT(0xF48410) {
-      build/bgm/PAPERMARIO.F48410.bgm.o(.data);
+      build/bgm/papermario.F48410.bgm.o(.data);
    }
 
    /* 0x00000000 F4A880-F4BC00 [1380] */
    .data00F4A880 0x00F4A880 : AT(0xF4A880) {
-      build/bgm/PAPERMARIO.F4A880.bgm.o(.data);
+      build/bgm/papermario.F4A880.bgm.o(.data);
    }
 
    /* 0x00000000 F4BC00-F4E690 [2A90] */
    .data00F4BC00 0x00F4BC00 : AT(0xF4BC00) {
-      build/bgm/PAPERMARIO.F4BC00.bgm.o(.data);
+      build/bgm/papermario.F4BC00.bgm.o(.data);
    }
 
    /* 0x00000000 F4E690-F50A00 [2370] */
    .data00F4E690 0x00F4E690 : AT(0xF4E690) {
-      build/bgm/PAPERMARIO.F4E690.bgm.o(.data);
+      build/bgm/papermario.F4E690.bgm.o(.data);
    }
 
    /* 0x00000000 F50A00-F52520 [1B20] */
    .data00F50A00 0x00F50A00 : AT(0xF50A00) {
-      build/bgm/PAPERMARIO.F50A00.bgm.o(.data);
+      build/bgm/papermario.F50A00.bgm.o(.data);
    }
 
    /* 0x00000000 F52520-F55C80 [3760] */
    .data00F52520 0x00F52520 : AT(0xF52520) {
-      build/bgm/PAPERMARIO.F52520.bgm.o(.data);
+      build/bgm/papermario.F52520.bgm.o(.data);
    }
 
    /* 0x00000000 F55C80-F58ED0 [3250] */
    .data00F55C80 0x00F55C80 : AT(0xF55C80) {
-      build/bgm/PAPERMARIO.F55C80.bgm.o(.data);
+      build/bgm/papermario.F55C80.bgm.o(.data);
    }
 
    /* 0x00000000 F58ED0-F592B0 [3E0] */
    .data00F58ED0 0x00F58ED0 : AT(0xF58ED0) {
-      build/bgm/PAPERMARIO.F58ED0.bgm.o(.data);
+      build/bgm/papermario.F58ED0.bgm.o(.data);
    }
 
    /* 0x00000000 F592B0-F5AFF0 [1D40] */
    .data00F592B0 0x00F592B0 : AT(0xF592B0) {
-      build/bgm/PAPERMARIO.F592B0.bgm.o(.data);
+      build/bgm/papermario.F592B0.bgm.o(.data);
    }
 
    /* 0x00000000 F5AFF0-F5C8D0 [18E0] */
    .data00F5AFF0 0x00F5AFF0 : AT(0xF5AFF0) {
-      build/bgm/PAPERMARIO.F5AFF0.bgm.o(.data);
+      build/bgm/papermario.F5AFF0.bgm.o(.data);
    }
 
    /* 0x00000000 F5C8D0-F5DF40 [1670] */
    .data00F5C8D0 0x00F5C8D0 : AT(0xF5C8D0) {
-      build/bgm/PAPERMARIO.F5C8D0.bgm.o(.data);
+      build/bgm/papermario.F5C8D0.bgm.o(.data);
    }
 
    /* 0x00000000 F5DF40-F5F500 [15C0] */
    .data00F5DF40 0x00F5DF40 : AT(0xF5DF40) {
-      build/bgm/PAPERMARIO.F5DF40.bgm.o(.data);
+      build/bgm/papermario.F5DF40.bgm.o(.data);
    }
 
    /* 0x00000000 F5F500-F61700 [2200] */
    .data00F5F500 0x00F5F500 : AT(0xF5F500) {
-      build/bgm/PAPERMARIO.F5F500.bgm.o(.data);
+      build/bgm/papermario.F5F500.bgm.o(.data);
    }
 
    /* 0x00000000 F61700-F62E50 [1750] */
    .data00F61700 0x00F61700 : AT(0xF61700) {
-      build/bgm/PAPERMARIO.F61700.bgm.o(.data);
+      build/bgm/papermario.F61700.bgm.o(.data);
    }
 
    /* 0x00000000 F62E50-F64220 [13D0] */
    .data00F62E50 0x00F62E50 : AT(0xF62E50) {
-      build/bgm/PAPERMARIO.F62E50.bgm.o(.data);
+      build/bgm/papermario.F62E50.bgm.o(.data);
    }
 
    /* 0x00000000 F64220-F64CB0 [A90] */
    .data00F64220 0x00F64220 : AT(0xF64220) {
-      build/bgm/PAPERMARIO.F64220.bgm.o(.data);
+      build/bgm/papermario.F64220.bgm.o(.data);
    }
 
    /* 0x00000000 F64CB0-F65B30 [E80] */
    .data00F64CB0 0x00F64CB0 : AT(0xF64CB0) {
-      build/bgm/PAPERMARIO.F64CB0.bgm.o(.data);
+      build/bgm/papermario.F64CB0.bgm.o(.data);
    }
 
    /* 0x00000000 F65B30-F66690 [B60] */
    .data00F65B30 0x00F65B30 : AT(0xF65B30) {
-      build/bgm/PAPERMARIO.F65B30.bgm.o(.data);
+      build/bgm/papermario.F65B30.bgm.o(.data);
    }
 
    /* 0x00000000 F66690-F66B70 [4E0] */
    .data00F66690 0x00F66690 : AT(0xF66690) {
-      build/bgm/PAPERMARIO.F66690.bgm.o(.data);
+      build/bgm/papermario.F66690.bgm.o(.data);
    }
 
    /* 0x00000000 F66B70-F67F80 [1410] */
    .data00F66B70 0x00F66B70 : AT(0xF66B70) {
-      build/bgm/PAPERMARIO.F66B70.bgm.o(.data);
+      build/bgm/papermario.F66B70.bgm.o(.data);
    }
 
    /* 0x00000000 F67F80-F69640 [16C0] */
    .data00F67F80 0x00F67F80 : AT(0xF67F80) {
-      build/bgm/PAPERMARIO.F67F80.bgm.o(.data);
+      build/bgm/papermario.F67F80.bgm.o(.data);
    }
 
    /* 0x00000000 F69640-F6A050 [A10] */
    .data00F69640 0x00F69640 : AT(0xF69640) {
-      build/bgm/PAPERMARIO.F69640.bgm.o(.data);
+      build/bgm/papermario.F69640.bgm.o(.data);
    }
 
    /* 0x00000000 F6A050-F6C270 [2220] */
    .data00F6A050 0x00F6A050 : AT(0xF6A050) {
-      build/bgm/PAPERMARIO.F6A050.bgm.o(.data);
+      build/bgm/papermario.F6A050.bgm.o(.data);
    }
 
    /* 0x00000000 F6C270-F6CED0 [C60] */
    .data00F6C270 0x00F6C270 : AT(0xF6C270) {
-      build/bgm/PAPERMARIO.F6C270.bgm.o(.data);
+      build/bgm/papermario.F6C270.bgm.o(.data);
    }
 
    /* 0x00000000 F6CED0-F6EE40 [1F70] */
    .data00F6CED0 0x00F6CED0 : AT(0xF6CED0) {
-      build/bgm/PAPERMARIO.F6CED0.bgm.o(.data);
+      build/bgm/papermario.F6CED0.bgm.o(.data);
    }
 
    /* 0x00000000 F6EE40-F73390 [4550] */
    .data00F6EE40 0x00F6EE40 : AT(0xF6EE40) {
-      build/bgm/PAPERMARIO.F6EE40.bgm.o(.data);
+      build/bgm/papermario.F6EE40.bgm.o(.data);
    }
 
    /* 0x00000000 F73390-F751F0 [1E60] */
    .data00F73390 0x00F73390 : AT(0xF73390) {
-      build/bgm/PAPERMARIO.F73390.bgm.o(.data);
+      build/bgm/papermario.F73390.bgm.o(.data);
    }
 
    /* 0x00000000 F751F0-F759C0 [7D0] */
    .data00F751F0 0x00F751F0 : AT(0xF751F0) {
-      build/bgm/PAPERMARIO.F751F0.bgm.o(.data);
+      build/bgm/papermario.F751F0.bgm.o(.data);
    }
 
    /* 0x00000000 F759C0-F77200 [1840] */
    .data00F759C0 0x00F759C0 : AT(0xF759C0) {
-      build/bgm/PAPERMARIO.F759C0.bgm.o(.data);
+      build/bgm/papermario.F759C0.bgm.o(.data);
    }
 
    /* 0x00000000 F77200-F77680 [480] */
    .data00F77200 0x00F77200 : AT(0xF77200) {
-      build/bgm/PAPERMARIO.F77200.bgm.o(.data);
+      build/bgm/papermario.F77200.bgm.o(.data);
    }
 
    /* 0x00000000 F77680-F78600 [F80] */
    .data00F77680 0x00F77680 : AT(0xF77680) {
-      build/bgm/PAPERMARIO.F77680.bgm.o(.data);
+      build/bgm/papermario.F77680.bgm.o(.data);
    }
 
    /* 0x00000000 F78600-F79070 [A70] */
    .data00F78600 0x00F78600 : AT(0xF78600) {
-      build/bgm/PAPERMARIO.F78600.bgm.o(.data);
+      build/bgm/papermario.F78600.bgm.o(.data);
    }
 
    /* 0x00000000 F79070-F7A0C0 [1050] */
    .data00F79070 0x00F79070 : AT(0xF79070) {
-      build/bgm/PAPERMARIO.F79070.bgm.o(.data);
+      build/bgm/papermario.F79070.bgm.o(.data);
    }
 
    /* 0x00000000 F7A0C0-F7AA40 [980] */
    .data00F7A0C0 0x00F7A0C0 : AT(0xF7A0C0) {
-      build/bgm/PAPERMARIO.F7A0C0.bgm.o(.data);
+      build/bgm/papermario.F7A0C0.bgm.o(.data);
    }
 
    /* 0x00000000 F7AA40-F7AD90 [350] */
    .data00F7AA40 0x00F7AA40 : AT(0xF7AA40) {
-      build/bgm/PAPERMARIO.F7AA40.bgm.o(.data);
+      build/bgm/papermario.F7AA40.bgm.o(.data);
    }
 
    /* 0x00000000 F7AD90-F7BEA0 [1110] */
    .data00F7AD90 0x00F7AD90 : AT(0xF7AD90) {
-      build/bgm/PAPERMARIO.F7AD90.bgm.o(.data);
+      build/bgm/papermario.F7AD90.bgm.o(.data);
    }
 
    /* 0x00000000 F7BEA0-F7C780 [8E0] */
    .data00F7BEA0 0x00F7BEA0 : AT(0xF7BEA0) {
-      build/bgm/PAPERMARIO.F7BEA0.bgm.o(.data);
+      build/bgm/papermario.F7BEA0.bgm.o(.data);
    }
 
    /* 0x00000000 F7C780-F7DC00 [1480] */
    .data00F7C780 0x00F7C780 : AT(0xF7C780) {
-      build/bgm/PAPERMARIO.F7C780.bgm.o(.data);
+      build/bgm/papermario.F7C780.bgm.o(.data);
    }
 
    /* 0x00000000 F7DC00-F7E190 [590] */
    .data00F7DC00 0x00F7DC00 : AT(0xF7DC00) {
-      build/bgm/PAPERMARIO.F7DC00.bgm.o(.data);
+      build/bgm/papermario.F7DC00.bgm.o(.data);
    }
 
    /* 0x00000000 F7E190-F7EE20 [C90] */
    .data00F7E190 0x00F7E190 : AT(0xF7E190) {
-      build/bgm/PAPERMARIO.F7E190.bgm.o(.data);
+      build/bgm/papermario.F7E190.bgm.o(.data);
    }
 
    /* 0x00000000 F7EE20-F80230 [1410] */
    .data00F7EE20 0x00F7EE20 : AT(0xF7EE20) {
-      build/bgm/PAPERMARIO.F7EE20.bgm.o(.data);
+      build/bgm/papermario.F7EE20.bgm.o(.data);
    }
 
    /* 0x00000000 F80230-F81260 [1030] */
    .data00F80230 0x00F80230 : AT(0xF80230) {
-      build/bgm/PAPERMARIO.F80230.bgm.o(.data);
+      build/bgm/papermario.F80230.bgm.o(.data);
    }
 
    /* 0x00000000 F81260-F82460 [1200] */
    .data00F81260 0x00F81260 : AT(0xF81260) {
-      build/bgm/PAPERMARIO.F81260.bgm.o(.data);
+      build/bgm/papermario.F81260.bgm.o(.data);
    }
 
    /* 0x00000000 F82460-F82D00 [8A0] */
    .data00F82460 0x00F82460 : AT(0xF82460) {
-      build/bgm/PAPERMARIO.F82460.bgm.o(.data);
+      build/bgm/papermario.F82460.bgm.o(.data);
    }
 
    /* 0x00000000 F82D00-F83DC0 [10C0] */
    .data00F82D00 0x00F82D00 : AT(0xF82D00) {
-      build/bgm/PAPERMARIO.F82D00.bgm.o(.data);
+      build/bgm/papermario.F82D00.bgm.o(.data);
    }
 
    /* 0x00000000 F83DC0-F85590 [17D0] */
    .data00F83DC0 0x00F83DC0 : AT(0xF83DC0) {
-      build/bgm/PAPERMARIO.F83DC0.bgm.o(.data);
+      build/bgm/papermario.F83DC0.bgm.o(.data);
    }
 
    /* 0x00000000 F85590-F860E0 [B50] */
    .data00F85590 0x00F85590 : AT(0xF85590) {
-      build/bgm/PAPERMARIO.F85590.bgm.o(.data);
+      build/bgm/papermario.F85590.bgm.o(.data);
    }
 
    /* 0x00000000 F860E0-F87000 [F20] */
    .data00F860E0 0x00F860E0 : AT(0xF860E0) {
-      build/bgm/PAPERMARIO.F860E0.bgm.o(.data);
+      build/bgm/papermario.F860E0.bgm.o(.data);
    }
 
    /* 0x00000000 F87000-F87610 [610] */
    .data00F87000 0x00F87000 : AT(0xF87000) {
-      build/bgm/PAPERMARIO.F87000.bgm.o(.data);
+      build/bgm/papermario.F87000.bgm.o(.data);
    }
 
    /* 0x00000000 F87610-F88B30 [1520] */
    .data00F87610 0x00F87610 : AT(0xF87610) {
-      build/bgm/PAPERMARIO.F87610.bgm.o(.data);
+      build/bgm/papermario.F87610.bgm.o(.data);
    }
 
    /* 0x00000000 F88B30-F89570 [A40] */
    .data00F88B30 0x00F88B30 : AT(0xF88B30) {
-      build/bgm/PAPERMARIO.F88B30.bgm.o(.data);
+      build/bgm/papermario.F88B30.bgm.o(.data);
    }
 
    /* 0x00000000 F89570-F8AAF0 [1580] */
    .data00F89570 0x00F89570 : AT(0xF89570) {
-      build/bgm/PAPERMARIO.F89570.bgm.o(.data);
+      build/bgm/papermario.F89570.bgm.o(.data);
    }
 
    /* 0x00000000 F8AAF0-F8B820 [D30] */
    .data00F8AAF0 0x00F8AAF0 : AT(0xF8AAF0) {
-      build/bgm/PAPERMARIO.F8AAF0.bgm.o(.data);
+      build/bgm/papermario.F8AAF0.bgm.o(.data);
    }
 
    /* 0x00000000 F8B820-F8BD90 [570] */
    .data00F8B820 0x00F8B820 : AT(0xF8B820) {
-      build/bgm/PAPERMARIO.F8B820.bgm.o(.data);
+      build/bgm/papermario.F8B820.bgm.o(.data);
    }
 
    /* 0x00000000 F8BD90-F8C360 [5D0] */
    .data00F8BD90 0x00F8BD90 : AT(0xF8BD90) {
-      build/bgm/PAPERMARIO.F8BD90.bgm.o(.data);
+      build/bgm/papermario.F8BD90.bgm.o(.data);
    }
 
    /* 0x00000000 F8C360-F8D110 [DB0] */
    .data00F8C360 0x00F8C360 : AT(0xF8C360) {
-      build/bgm/PAPERMARIO.F8C360.bgm.o(.data);
+      build/bgm/papermario.F8C360.bgm.o(.data);
    }
 
    /* 0x00000000 F8D110-F8D3E0 [2D0] */
    .data00F8D110 0x00F8D110 : AT(0xF8D110) {
-      build/bgm/PAPERMARIO.F8D110.bgm.o(.data);
+      build/bgm/papermario.F8D110.bgm.o(.data);
    }
 
    /* 0x00000000 F8D3E0-F90880 [34A0] */
    .data00F8D3E0 0x00F8D3E0 : AT(0xF8D3E0) {
-      build/bgm/PAPERMARIO.F8D3E0.bgm.o(.data);
+      build/bgm/papermario.F8D3E0.bgm.o(.data);
    }
 
    /* 0x00000000 F90880-F92A50 [21D0] */
    .data00F90880 0x00F90880 : AT(0xF90880) {
-      build/bgm/PAPERMARIO.F90880.bgm.o(.data);
+      build/bgm/papermario.F90880.bgm.o(.data);
    }
 
    /* 0x00000000 F92A50-F95510 [2AC0] */
    .data00F92A50 0x00F92A50 : AT(0xF92A50) {
-      build/bgm/PAPERMARIO.F92A50.bgm.o(.data);
+      build/bgm/papermario.F92A50.bgm.o(.data);
    }
 
    /* 0x00000000 F95510-F96280 [D70] */
    .data00F95510 0x00F95510 : AT(0xF95510) {
-      build/bgm/PAPERMARIO.F95510.bgm.o(.data);
+      build/bgm/papermario.F95510.bgm.o(.data);
    }
 
    /* 0x00000000 F96280-F98520 [22A0] */
    .data00F96280 0x00F96280 : AT(0xF96280) {
-      build/bgm/PAPERMARIO.F96280.bgm.o(.data);
+      build/bgm/papermario.F96280.bgm.o(.data);
    }
 
    /* 0x00000000 F98520-F98F90 [A70] */
    .data00F98520 0x00F98520 : AT(0xF98520) {
-      build/bgm/PAPERMARIO.F98520.bgm.o(.data);
+      build/bgm/papermario.F98520.bgm.o(.data);
    }
 
    /* 0x00000000 F98F90-F9B830 [28A0] */
    .data00F98F90 0x00F98F90 : AT(0xF98F90) {
-      build/bgm/PAPERMARIO.F98F90.bgm.o(.data);
+      build/bgm/papermario.F98F90.bgm.o(.data);
    }
 
    /* 0x00000000 F9B830-F9D3B0 [1B80] */
    .data00F9B830 0x00F9B830 : AT(0xF9B830) {
-      build/bgm/PAPERMARIO.F9B830.bgm.o(.data);
+      build/bgm/papermario.F9B830.bgm.o(.data);
    }
 
    /* 0x00000000 F9D3B0-F9D690 [2E0] */
    .data00F9D3B0 0x00F9D3B0 : AT(0xF9D3B0) {
-      build/bgm/PAPERMARIO.F9D3B0.bgm.o(.data);
+      build/bgm/papermario.F9D3B0.bgm.o(.data);
    }
 
    /* 0x00000000 F9D690-F9EF30 [18A0] */
    .data00F9D690 0x00F9D690 : AT(0xF9D690) {
-      build/bgm/PAPERMARIO.F9D690.bgm.o(.data);
+      build/bgm/papermario.F9D690.bgm.o(.data);
    }
 
    /* 0x00000000 F9EF30-F9FA30 [B00] */
    .data00F9EF30 0x00F9EF30 : AT(0xF9EF30) {
-      build/bgm/PAPERMARIO.F9EF30.bgm.o(.data);
+      build/bgm/papermario.F9EF30.bgm.o(.data);
    }
 
    /* 0x00000000 F9FA30-FA08A0 [E70] */
    .data00F9FA30 0x00F9FA30 : AT(0xF9FA30) {
-      build/bgm/PAPERMARIO.F9FA30.bgm.o(.data);
+      build/bgm/papermario.F9FA30.bgm.o(.data);
    }
 
    /* 0x00000000 FA08A0-FA3C60 [33C0] */
    .data00FA08A0 0x00FA08A0 : AT(0xFA08A0) {
-      build/bgm/PAPERMARIO.FA08A0.bgm.o(.data);
+      build/bgm/papermario.FA08A0.bgm.o(.data);
    }
 
    /* 0x00000000 FA3C60-FA85F0 [4990] */
    .data00FA3C60 0x00FA3C60 : AT(0xFA3C60) {
-      build/bgm/PAPERMARIO.FA3C60.bgm.o(.data);
+      build/bgm/papermario.FA3C60.bgm.o(.data);
    }
 
    /* 0x00000000 FA85F0-FABE90 [38A0] */
    .data00FA85F0 0x00FA85F0 : AT(0xFA85F0) {
-      build/bgm/PAPERMARIO.FA85F0.bgm.o(.data);
+      build/bgm/papermario.FA85F0.bgm.o(.data);
    }
 
    /* 0x00000000 FABE90-FACC80 [DF0] */
    .data00FABE90 0x00FABE90 : AT(0xFABE90) {
-      build/bgm/PAPERMARIO.FABE90.bgm.o(.data);
+      build/bgm/papermario.FABE90.bgm.o(.data);
    }
 
    /* 0x00000000 FACC80-FAD210 [590] */
    .data00FACC80 0x00FACC80 : AT(0xFACC80) {
-      build/bgm/PAPERMARIO.FACC80.bgm.o(.data);
+      build/bgm/papermario.FACC80.bgm.o(.data);
    }
 
    /* 0x00000000 FAD210-FAD8F0 [6E0] */
    .data00FAD210 0x00FAD210 : AT(0xFAD210) {
-      build/bgm/PAPERMARIO.FAD210.bgm.o(.data);
+      build/bgm/papermario.FAD210.bgm.o(.data);
    }
 
    /* 0x00000000 FAD8F0-FADE70 [580] */
    .data00FAD8F0 0x00FAD8F0 : AT(0xFAD8F0) {
-      build/bgm/PAPERMARIO.FAD8F0.bgm.o(.data);
+      build/bgm/papermario.FAD8F0.bgm.o(.data);
    }
 
    /* 0x00000000 FADE70-FAE860 [9F0] */
    .data00FADE70 0x00FADE70 : AT(0xFADE70) {
-      build/bgm/PAPERMARIO.FADE70.bgm.o(.data);
+      build/bgm/papermario.FADE70.bgm.o(.data);
    }
 
    /* 0x00000000 FAE860-19E09A8 [A32148] */
    .data00FAE860 0x00FAE860 : AT(0xFAE860) {
-      build/bin/PAPERMARIO.FAE860.bin_fae860.o(.data);
+      build/bin/papermario.FAE860.bin_fae860.o(.data);
    }
 
    /* 0x00000000 19E09A8-19E1390 [9E8] */
    .data019E09A8 0x019E09A8 : AT(0x19E09A8) {
-      build/yay0/PAPERMARIO.19E09A8.yay0.o(.data);
+      build/yay0/papermario.19E09A8.yay0.o(.data);
    }
 
    /* 0x00000000 19E1390-19E1890 [500] */
    .data019E1390 0x019E1390 : AT(0x19E1390) {
-      build/yay0/PAPERMARIO.19E1390.yay0.o(.data);
+      build/yay0/papermario.19E1390.yay0.o(.data);
    }
 
    /* 0x00000000 19E1890-19E2330 [AA0] */
    .data019E1890 0x019E1890 : AT(0x19E1890) {
-      build/yay0/PAPERMARIO.19E1890.yay0.o(.data);
+      build/yay0/papermario.19E1890.yay0.o(.data);
    }
 
    /* 0x00000000 19E2330-19E2DE0 [AB0] */
    .data019E2330 0x019E2330 : AT(0x19E2330) {
-      build/yay0/PAPERMARIO.19E2330.yay0.o(.data);
+      build/yay0/papermario.19E2330.yay0.o(.data);
    }
 
    /* 0x00000000 19E2DE0-19E3208 [428] */
    .data019E2DE0 0x019E2DE0 : AT(0x19E2DE0) {
-      build/yay0/PAPERMARIO.19E2DE0.yay0.o(.data);
+      build/yay0/papermario.19E2DE0.yay0.o(.data);
    }
 
    /* 0x00000000 19E3208-19E3BA8 [9A0] */
    .data019E3208 0x019E3208 : AT(0x19E3208) {
-      build/yay0/PAPERMARIO.19E3208.yay0.o(.data);
+      build/yay0/papermario.19E3208.yay0.o(.data);
    }
 
    /* 0x00000000 19E3BA8-19E3FD8 [430] */
    .data019E3BA8 0x019E3BA8 : AT(0x19E3BA8) {
-      build/yay0/PAPERMARIO.19E3BA8.yay0.o(.data);
+      build/yay0/papermario.19E3BA8.yay0.o(.data);
    }
 
    /* 0x00000000 19E3FD8-19E4828 [850] */
    .data019E3FD8 0x019E3FD8 : AT(0x19E3FD8) {
-      build/yay0/PAPERMARIO.19E3FD8.yay0.o(.data);
+      build/yay0/papermario.19E3FD8.yay0.o(.data);
    }
 
    /* 0x00000000 19E4828-19E4BE0 [3B8] */
    .data019E4828 0x019E4828 : AT(0x19E4828) {
-      build/yay0/PAPERMARIO.19E4828.yay0.o(.data);
+      build/yay0/papermario.19E4828.yay0.o(.data);
    }
 
    /* 0x00000000 19E4BE0-19E5758 [B78] */
    .data019E4BE0 0x019E4BE0 : AT(0x19E4BE0) {
-      build/yay0/PAPERMARIO.19E4BE0.yay0.o(.data);
+      build/yay0/papermario.19E4BE0.yay0.o(.data);
    }
 
    /* 0x00000000 19E5758-19E5950 [1F8] */
    .data019E5758 0x019E5758 : AT(0x19E5758) {
-      build/yay0/PAPERMARIO.19E5758.yay0.o(.data);
+      build/yay0/papermario.19E5758.yay0.o(.data);
    }
 
    /* 0x00000000 19E5950-19E62A0 [950] */
    .data019E5950 0x019E5950 : AT(0x19E5950) {
-      build/yay0/PAPERMARIO.19E5950.yay0.o(.data);
+      build/yay0/papermario.19E5950.yay0.o(.data);
    }
 
    /* 0x00000000 19E62A0-19E67B2 [512] */
    .data019E62A0 0x019E62A0 : AT(0x19E62A0) {
-      build/yay0/PAPERMARIO.19E62A0.yay0.o(.data);
+      build/yay0/papermario.19E62A0.yay0.o(.data);
    }
 
    /* 0x00000000 19E67B2-19E6B60 [3AE] */
    .data019E67B2 0x019E67B2 : AT(0x19E67B2) {
-      build/bin/PAPERMARIO.19E67B2.bin_19e6b60.o(.data);
+      build/bin/papermario.19E67B2.bin_19e6b60.o(.data);
    }
 
    /* 0x00000000 19E6B60-19E7528 [9C8] */
    .data019E6B60 0x019E6B60 : AT(0x19E6B60) {
-      build/yay0/PAPERMARIO.19E6B60.yay0.o(.data);
+      build/yay0/papermario.19E6B60.yay0.o(.data);
    }
 
    /* 0x00000000 19E7528-19E9778 [2250] */
    .data019E7528 0x019E7528 : AT(0x19E7528) {
-      build/yay0/PAPERMARIO.19E7528.yay0.o(.data);
+      build/yay0/papermario.19E7528.yay0.o(.data);
    }
 
    /* 0x00000000 19E9778-19EAF38 [17C0] */
    .data019E9778 0x019E9778 : AT(0x19E9778) {
-      build/yay0/PAPERMARIO.19E9778.yay0.o(.data);
+      build/yay0/papermario.19E9778.yay0.o(.data);
    }
 
    /* 0x00000000 19EAF38-19EC4E0 [15A8] */
    .data019EAF38 0x019EAF38 : AT(0x19EAF38) {
-      build/yay0/PAPERMARIO.19EAF38.yay0.o(.data);
+      build/yay0/papermario.19EAF38.yay0.o(.data);
    }
 
    /* 0x00000000 19EC4E0-19EDD30 [1850] */
    .data019EC4E0 0x019EC4E0 : AT(0x19EC4E0) {
-      build/yay0/PAPERMARIO.19EC4E0.yay0.o(.data);
+      build/yay0/papermario.19EC4E0.yay0.o(.data);
    }
 
    /* 0x00000000 19EDD30-19EEB18 [DE8] */
    .data019EDD30 0x019EDD30 : AT(0x19EDD30) {
-      build/yay0/PAPERMARIO.19EDD30.yay0.o(.data);
+      build/yay0/papermario.19EDD30.yay0.o(.data);
    }
 
    /* 0x00000000 19EEB18-19F0070 [1558] */
    .data019EEB18 0x019EEB18 : AT(0x19EEB18) {
-      build/yay0/PAPERMARIO.19EEB18.yay0.o(.data);
+      build/yay0/papermario.19EEB18.yay0.o(.data);
    }
 
    /* 0x00000000 19F0070-19F15A0 [1530] */
    .data019F0070 0x019F0070 : AT(0x19F0070) {
-      build/yay0/PAPERMARIO.19F0070.yay0.o(.data);
+      build/yay0/papermario.19F0070.yay0.o(.data);
    }
 
    /* 0x00000000 19F15A0-19F26D8 [1138] */
    .data019F15A0 0x019F15A0 : AT(0x19F15A0) {
-      build/yay0/PAPERMARIO.19F15A0.yay0.o(.data);
+      build/yay0/papermario.19F15A0.yay0.o(.data);
    }
 
    /* 0x00000000 19F26D8-19F5390 [2CB8] */
    .data019F26D8 0x019F26D8 : AT(0x19F26D8) {
-      build/yay0/PAPERMARIO.19F26D8.yay0.o(.data);
+      build/yay0/papermario.19F26D8.yay0.o(.data);
    }
 
    /* 0x00000000 19F5390-19F7398 [2008] */
    .data019F5390 0x019F5390 : AT(0x19F5390) {
-      build/yay0/PAPERMARIO.19F5390.yay0.o(.data);
+      build/yay0/papermario.19F5390.yay0.o(.data);
    }
 
    /* 0x00000000 19F7398-19FA128 [2D90] */
    .data019F7398 0x019F7398 : AT(0x19F7398) {
-      build/yay0/PAPERMARIO.19F7398.yay0.o(.data);
+      build/yay0/papermario.19F7398.yay0.o(.data);
    }
 
    /* 0x00000000 19FA128-19FCAE8 [29C0] */
    .data019FA128 0x019FA128 : AT(0x19FA128) {
-      build/yay0/PAPERMARIO.19FA128.yay0.o(.data);
+      build/yay0/papermario.19FA128.yay0.o(.data);
    }
 
    /* 0x00000000 19FCAE8-19FED70 [2288] */
    .data019FCAE8 0x019FCAE8 : AT(0x19FCAE8) {
-      build/yay0/PAPERMARIO.19FCAE8.yay0.o(.data);
+      build/yay0/papermario.19FCAE8.yay0.o(.data);
    }
 
    /* 0x00000000 19FED70-1A00958 [1BE8] */
    .data019FED70 0x019FED70 : AT(0x19FED70) {
-      build/yay0/PAPERMARIO.19FED70.yay0.o(.data);
+      build/yay0/papermario.19FED70.yay0.o(.data);
    }
 
    /* 0x00000000 1A00958-1A02D00 [23A8] */
    .data01A00958 0x01A00958 : AT(0x1A00958) {
-      build/yay0/PAPERMARIO.1A00958.yay0.o(.data);
+      build/yay0/papermario.1A00958.yay0.o(.data);
    }
 
    /* 0x00000000 1A02D00-1A04400 [1700] */
    .data01A02D00 0x01A02D00 : AT(0x1A02D00) {
-      build/yay0/PAPERMARIO.1A02D00.yay0.o(.data);
+      build/yay0/papermario.1A02D00.yay0.o(.data);
    }
 
    /* 0x00000000 1A04400-1A05550 [1150] */
    .data01A04400 0x01A04400 : AT(0x1A04400) {
-      build/yay0/PAPERMARIO.1A04400.yay0.o(.data);
+      build/yay0/papermario.1A04400.yay0.o(.data);
    }
 
    /* 0x00000000 1A05550-1A06390 [E40] */
    .data01A05550 0x01A05550 : AT(0x1A05550) {
-      build/yay0/PAPERMARIO.1A05550.yay0.o(.data);
+      build/yay0/papermario.1A05550.yay0.o(.data);
    }
 
    /* 0x00000000 1A06390-1A06F98 [C08] */
    .data01A06390 0x01A06390 : AT(0x1A06390) {
-      build/yay0/PAPERMARIO.1A06390.yay0.o(.data);
+      build/yay0/papermario.1A06390.yay0.o(.data);
    }
 
    /* 0x00000000 1A06F98-1A07B68 [BD0] */
    .data01A06F98 0x01A06F98 : AT(0x1A06F98) {
-      build/yay0/PAPERMARIO.1A06F98.yay0.o(.data);
+      build/yay0/papermario.1A06F98.yay0.o(.data);
    }
 
    /* 0x00000000 1A07B68-1A0A0A0 [2538] */
    .data01A07B68 0x01A07B68 : AT(0x1A07B68) {
-      build/yay0/PAPERMARIO.1A07B68.yay0.o(.data);
+      build/yay0/papermario.1A07B68.yay0.o(.data);
    }
 
    /* 0x00000000 1A0A0A0-1A0ACC8 [C28] */
    .data01A0A0A0 0x01A0A0A0 : AT(0x1A0A0A0) {
-      build/yay0/PAPERMARIO.1A0A0A0.yay0.o(.data);
+      build/yay0/papermario.1A0A0A0.yay0.o(.data);
    }
 
    /* 0x00000000 1A0ACC8-1A0B780 [AB8] */
    .data01A0ACC8 0x01A0ACC8 : AT(0x1A0ACC8) {
-      build/yay0/PAPERMARIO.1A0ACC8.yay0.o(.data);
+      build/yay0/papermario.1A0ACC8.yay0.o(.data);
    }
 
    /* 0x00000000 1A0B780-1A0BBE0 [460] */
    .data01A0B780 0x01A0B780 : AT(0x1A0B780) {
-      build/yay0/PAPERMARIO.1A0B780.yay0.o(.data);
+      build/yay0/papermario.1A0B780.yay0.o(.data);
    }
 
    /* 0x00000000 1A0BBE0-1A0C000 [420] */
    .data01A0BBE0 0x01A0BBE0 : AT(0x1A0BBE0) {
-      build/yay0/PAPERMARIO.1A0BBE0.yay0.o(.data);
+      build/yay0/papermario.1A0BBE0.yay0.o(.data);
    }
 
    /* 0x00000000 1A0C000-1A0C438 [438] */
    .data01A0C000 0x01A0C000 : AT(0x1A0C000) {
-      build/yay0/PAPERMARIO.1A0C000.yay0.o(.data);
+      build/yay0/papermario.1A0C000.yay0.o(.data);
    }
 
    /* 0x00000000 1A0C438-1A0C860 [428] */
    .data01A0C438 0x01A0C438 : AT(0x1A0C438) {
-      build/yay0/PAPERMARIO.1A0C438.yay0.o(.data);
+      build/yay0/papermario.1A0C438.yay0.o(.data);
    }
 
    /* 0x00000000 1A0C860-1A0D1E8 [988] */
    .data01A0C860 0x01A0C860 : AT(0x1A0C860) {
-      build/yay0/PAPERMARIO.1A0C860.yay0.o(.data);
+      build/yay0/papermario.1A0C860.yay0.o(.data);
    }
 
    /* 0x00000000 1A0D1E8-1A0D5B0 [3C8] */
    .data01A0D1E8 0x01A0D1E8 : AT(0x1A0D1E8) {
-      build/yay0/PAPERMARIO.1A0D1E8.yay0.o(.data);
+      build/yay0/papermario.1A0D1E8.yay0.o(.data);
    }
 
    /* 0x00000000 1A0D5B0-1A0D970 [3C0] */
    .data01A0D5B0 0x01A0D5B0 : AT(0x1A0D5B0) {
-      build/yay0/PAPERMARIO.1A0D5B0.yay0.o(.data);
+      build/yay0/papermario.1A0D5B0.yay0.o(.data);
    }
 
    /* 0x00000000 1A0D970-1A0EF00 [1590] */
    .data01A0D970 0x01A0D970 : AT(0x1A0D970) {
-      build/yay0/PAPERMARIO.1A0D970.yay0.o(.data);
+      build/yay0/papermario.1A0D970.yay0.o(.data);
    }
 
    /* 0x00000000 1A0EF00-1A13920 [4A20] */
    .data01A0EF00 0x01A0EF00 : AT(0x1A0EF00) {
-      build/yay0/PAPERMARIO.1A0EF00.yay0.o(.data);
+      build/yay0/papermario.1A0EF00.yay0.o(.data);
    }
 
    /* 0x00000000 1A13920-1A15850 [1F30] */
    .data01A13920 0x01A13920 : AT(0x1A13920) {
-      build/yay0/PAPERMARIO.1A13920.yay0.o(.data);
+      build/yay0/papermario.1A13920.yay0.o(.data);
    }
 
    /* 0x00000000 1A15850-1A183F8 [2BA8] */
    .data01A15850 0x01A15850 : AT(0x1A15850) {
-      build/yay0/PAPERMARIO.1A15850.yay0.o(.data);
+      build/yay0/papermario.1A15850.yay0.o(.data);
    }
 
    /* 0x00000000 1A183F8-1A1A608 [2210] */
    .data01A183F8 0x01A183F8 : AT(0x1A183F8) {
-      build/yay0/PAPERMARIO.1A183F8.yay0.o(.data);
+      build/yay0/papermario.1A183F8.yay0.o(.data);
    }
 
    /* 0x00000000 1A1A608-1A1C5E8 [1FE0] */
    .data01A1A608 0x01A1A608 : AT(0x1A1A608) {
-      build/yay0/PAPERMARIO.1A1A608.yay0.o(.data);
+      build/yay0/papermario.1A1A608.yay0.o(.data);
    }
 
    /* 0x00000000 1A1C5E8-1A1D6D0 [10E8] */
    .data01A1C5E8 0x01A1C5E8 : AT(0x1A1C5E8) {
-      build/yay0/PAPERMARIO.1A1C5E8.yay0.o(.data);
+      build/yay0/papermario.1A1C5E8.yay0.o(.data);
    }
 
    /* 0x00000000 1A1D6D0-1A1E478 [DA8] */
    .data01A1D6D0 0x01A1D6D0 : AT(0x1A1D6D0) {
-      build/yay0/PAPERMARIO.1A1D6D0.yay0.o(.data);
+      build/yay0/papermario.1A1D6D0.yay0.o(.data);
    }
 
    /* 0x00000000 1A1E478-1A1F370 [EF8] */
    .data01A1E478 0x01A1E478 : AT(0x1A1E478) {
-      build/yay0/PAPERMARIO.1A1E478.yay0.o(.data);
+      build/yay0/papermario.1A1E478.yay0.o(.data);
    }
 
    /* 0x00000000 1A1F370-1A226B0 [3340] */
    .data01A1F370 0x01A1F370 : AT(0x1A1F370) {
-      build/yay0/PAPERMARIO.1A1F370.yay0.o(.data);
+      build/yay0/papermario.1A1F370.yay0.o(.data);
    }
 
    /* 0x00000000 1A226B0-1A249B8 [2308] */
    .data01A226B0 0x01A226B0 : AT(0x1A226B0) {
-      build/yay0/PAPERMARIO.1A226B0.yay0.o(.data);
+      build/yay0/papermario.1A226B0.yay0.o(.data);
    }
 
    /* 0x00000000 1A249B8-1A25E78 [14C0] */
    .data01A249B8 0x01A249B8 : AT(0x1A249B8) {
-      build/yay0/PAPERMARIO.1A249B8.yay0.o(.data);
+      build/yay0/papermario.1A249B8.yay0.o(.data);
    }
 
    /* 0x00000000 1A25E78-1A27FF0 [2178] */
    .data01A25E78 0x01A25E78 : AT(0x1A25E78) {
-      build/yay0/PAPERMARIO.1A25E78.yay0.o(.data);
+      build/yay0/papermario.1A25E78.yay0.o(.data);
    }
 
    /* 0x00000000 1A27FF0-1A28BE0 [BF0] */
    .data01A27FF0 0x01A27FF0 : AT(0x1A27FF0) {
-      build/yay0/PAPERMARIO.1A27FF0.yay0.o(.data);
+      build/yay0/papermario.1A27FF0.yay0.o(.data);
    }
 
    /* 0x00000000 1A28BE0-1A29680 [AA0] */
    .data01A28BE0 0x01A28BE0 : AT(0x1A28BE0) {
-      build/yay0/PAPERMARIO.1A28BE0.yay0.o(.data);
+      build/yay0/papermario.1A28BE0.yay0.o(.data);
    }
 
    /* 0x00000000 1A29680-1A2BC68 [25E8] */
    .data01A29680 0x01A29680 : AT(0x1A29680) {
-      build/yay0/PAPERMARIO.1A29680.yay0.o(.data);
+      build/yay0/papermario.1A29680.yay0.o(.data);
    }
 
    /* 0x00000000 1A2BC68-1A2E120 [24B8] */
    .data01A2BC68 0x01A2BC68 : AT(0x1A2BC68) {
-      build/yay0/PAPERMARIO.1A2BC68.yay0.o(.data);
+      build/yay0/papermario.1A2BC68.yay0.o(.data);
    }
 
    /* 0x00000000 1A2E120-1A2F3F8 [12D8] */
    .data01A2E120 0x01A2E120 : AT(0x1A2E120) {
-      build/yay0/PAPERMARIO.1A2E120.yay0.o(.data);
+      build/yay0/papermario.1A2E120.yay0.o(.data);
    }
 
    /* 0x00000000 1A2F3F8-1A31D18 [2920] */
    .data01A2F3F8 0x01A2F3F8 : AT(0x1A2F3F8) {
-      build/yay0/PAPERMARIO.1A2F3F8.yay0.o(.data);
+      build/yay0/papermario.1A2F3F8.yay0.o(.data);
    }
 
    /* 0x00000000 1A31D18-1A33AB0 [1D98] */
    .data01A31D18 0x01A31D18 : AT(0x1A31D18) {
-      build/yay0/PAPERMARIO.1A31D18.yay0.o(.data);
+      build/yay0/papermario.1A31D18.yay0.o(.data);
    }
 
    /* 0x00000000 1A33AB0-1A35BB8 [2108] */
    .data01A33AB0 0x01A33AB0 : AT(0x1A33AB0) {
-      build/yay0/PAPERMARIO.1A33AB0.yay0.o(.data);
+      build/yay0/papermario.1A33AB0.yay0.o(.data);
    }
 
    /* 0x00000000 1A35BB8-1A369A8 [DF0] */
    .data01A35BB8 0x01A35BB8 : AT(0x1A35BB8) {
-      build/yay0/PAPERMARIO.1A35BB8.yay0.o(.data);
+      build/yay0/papermario.1A35BB8.yay0.o(.data);
    }
 
    /* 0x00000000 1A369A8-1A39600 [2C58] */
    .data01A369A8 0x01A369A8 : AT(0x1A369A8) {
-      build/yay0/PAPERMARIO.1A369A8.yay0.o(.data);
+      build/yay0/papermario.1A369A8.yay0.o(.data);
    }
 
    /* 0x00000000 1A39600-1A3B018 [1A18] */
    .data01A39600 0x01A39600 : AT(0x1A39600) {
-      build/yay0/PAPERMARIO.1A39600.yay0.o(.data);
+      build/yay0/papermario.1A39600.yay0.o(.data);
    }
 
    /* 0x00000000 1A3B018-1A3C310 [12F8] */
    .data01A3B018 0x01A3B018 : AT(0x1A3B018) {
-      build/yay0/PAPERMARIO.1A3B018.yay0.o(.data);
+      build/yay0/papermario.1A3B018.yay0.o(.data);
    }
 
    /* 0x00000000 1A3C310-1A3FCC8 [39B8] */
    .data01A3C310 0x01A3C310 : AT(0x1A3C310) {
-      build/yay0/PAPERMARIO.1A3C310.yay0.o(.data);
+      build/yay0/papermario.1A3C310.yay0.o(.data);
    }
 
    /* 0x00000000 1A3FCC8-1A423D8 [2710] */
    .data01A3FCC8 0x01A3FCC8 : AT(0x1A3FCC8) {
-      build/yay0/PAPERMARIO.1A3FCC8.yay0.o(.data);
+      build/yay0/papermario.1A3FCC8.yay0.o(.data);
    }
 
    /* 0x00000000 1A423D8-1A449C0 [25E8] */
    .data01A423D8 0x01A423D8 : AT(0x1A423D8) {
-      build/yay0/PAPERMARIO.1A423D8.yay0.o(.data);
+      build/yay0/papermario.1A423D8.yay0.o(.data);
    }
 
    /* 0x00000000 1A449C0-1A46568 [1BA8] */
    .data01A449C0 0x01A449C0 : AT(0x1A449C0) {
-      build/yay0/PAPERMARIO.1A449C0.yay0.o(.data);
+      build/yay0/papermario.1A449C0.yay0.o(.data);
    }
 
    /* 0x00000000 1A46568-1A49340 [2DD8] */
    .data01A46568 0x01A46568 : AT(0x1A46568) {
-      build/yay0/PAPERMARIO.1A46568.yay0.o(.data);
+      build/yay0/papermario.1A46568.yay0.o(.data);
    }
 
    /* 0x00000000 1A49340-1A4AC88 [1948] */
    .data01A49340 0x01A49340 : AT(0x1A49340) {
-      build/yay0/PAPERMARIO.1A49340.yay0.o(.data);
+      build/yay0/papermario.1A49340.yay0.o(.data);
    }
 
    /* 0x00000000 1A4AC88-1A4D7E8 [2B60] */
    .data01A4AC88 0x01A4AC88 : AT(0x1A4AC88) {
-      build/yay0/PAPERMARIO.1A4AC88.yay0.o(.data);
+      build/yay0/papermario.1A4AC88.yay0.o(.data);
    }
 
    /* 0x00000000 1A4D7E8-1A4E028 [840] */
    .data01A4D7E8 0x01A4D7E8 : AT(0x1A4D7E8) {
-      build/yay0/PAPERMARIO.1A4D7E8.yay0.o(.data);
+      build/yay0/papermario.1A4D7E8.yay0.o(.data);
    }
 
    /* 0x00000000 1A4E028-1A4FA60 [1A38] */
    .data01A4E028 0x01A4E028 : AT(0x1A4E028) {
-      build/yay0/PAPERMARIO.1A4E028.yay0.o(.data);
+      build/yay0/papermario.1A4E028.yay0.o(.data);
    }
 
    /* 0x00000000 1A4FA60-1A531D0 [3770] */
    .data01A4FA60 0x01A4FA60 : AT(0x1A4FA60) {
-      build/yay0/PAPERMARIO.1A4FA60.yay0.o(.data);
+      build/yay0/papermario.1A4FA60.yay0.o(.data);
    }
 
    /* 0x00000000 1A531D0-1A53D48 [B78] */
    .data01A531D0 0x01A531D0 : AT(0x1A531D0) {
-      build/yay0/PAPERMARIO.1A531D0.yay0.o(.data);
+      build/yay0/papermario.1A531D0.yay0.o(.data);
    }
 
    /* 0x00000000 1A53D48-1A56C80 [2F38] */
    .data01A53D48 0x01A53D48 : AT(0x1A53D48) {
-      build/yay0/PAPERMARIO.1A53D48.yay0.o(.data);
+      build/yay0/papermario.1A53D48.yay0.o(.data);
    }
 
    /* 0x00000000 1A56C80-1A58F58 [22D8] */
    .data01A56C80 0x01A56C80 : AT(0x1A56C80) {
-      build/yay0/PAPERMARIO.1A56C80.yay0.o(.data);
+      build/yay0/papermario.1A56C80.yay0.o(.data);
    }
 
    /* 0x00000000 1A58F58-1A5A5A8 [1650] */
    .data01A58F58 0x01A58F58 : AT(0x1A58F58) {
-      build/yay0/PAPERMARIO.1A58F58.yay0.o(.data);
+      build/yay0/papermario.1A58F58.yay0.o(.data);
    }
 
    /* 0x00000000 1A5A5A8-1A62B40 [8598] */
    .data01A5A5A8 0x01A5A5A8 : AT(0x1A5A5A8) {
-      build/yay0/PAPERMARIO.1A5A5A8.yay0.o(.data);
+      build/yay0/papermario.1A5A5A8.yay0.o(.data);
    }
 
    /* 0x00000000 1A62B40-1A641F8 [16B8] */
    .data01A62B40 0x01A62B40 : AT(0x1A62B40) {
-      build/yay0/PAPERMARIO.1A62B40.yay0.o(.data);
+      build/yay0/papermario.1A62B40.yay0.o(.data);
    }
 
    /* 0x00000000 1A641F8-1A666F0 [24F8] */
    .data01A641F8 0x01A641F8 : AT(0x1A641F8) {
-      build/yay0/PAPERMARIO.1A641F8.yay0.o(.data);
+      build/yay0/papermario.1A641F8.yay0.o(.data);
    }
 
    /* 0x00000000 1A666F0-1A68870 [2180] */
    .data01A666F0 0x01A666F0 : AT(0x1A666F0) {
-      build/yay0/PAPERMARIO.1A666F0.yay0.o(.data);
+      build/yay0/papermario.1A666F0.yay0.o(.data);
    }
 
    /* 0x00000000 1A68870-1A6C630 [3DC0] */
    .data01A68870 0x01A68870 : AT(0x1A68870) {
-      build/yay0/PAPERMARIO.1A68870.yay0.o(.data);
+      build/yay0/papermario.1A68870.yay0.o(.data);
    }
 
    /* 0x00000000 1A6C630-1A6D5A0 [F70] */
    .data01A6C630 0x01A6C630 : AT(0x1A6C630) {
-      build/yay0/PAPERMARIO.1A6C630.yay0.o(.data);
+      build/yay0/papermario.1A6C630.yay0.o(.data);
    }
 
    /* 0x00000000 1A6D5A0-1A6EF50 [19B0] */
    .data01A6D5A0 0x01A6D5A0 : AT(0x1A6D5A0) {
-      build/yay0/PAPERMARIO.1A6D5A0.yay0.o(.data);
+      build/yay0/papermario.1A6D5A0.yay0.o(.data);
    }
 
    /* 0x00000000 1A6EF50-1A70FF0 [20A0] */
    .data01A6EF50 0x01A6EF50 : AT(0x1A6EF50) {
-      build/yay0/PAPERMARIO.1A6EF50.yay0.o(.data);
+      build/yay0/papermario.1A6EF50.yay0.o(.data);
    }
 
    /* 0x00000000 1A70FF0-1A74FC0 [3FD0] */
    .data01A70FF0 0x01A70FF0 : AT(0x1A70FF0) {
-      build/yay0/PAPERMARIO.1A70FF0.yay0.o(.data);
+      build/yay0/papermario.1A70FF0.yay0.o(.data);
    }
 
    /* 0x00000000 1A74FC0-1A78A40 [3A80] */
    .data01A74FC0 0x01A74FC0 : AT(0x1A74FC0) {
-      build/yay0/PAPERMARIO.1A74FC0.yay0.o(.data);
+      build/yay0/papermario.1A74FC0.yay0.o(.data);
    }
 
    /* 0x00000000 1A78A40-1A79900 [EC0] */
    .data01A78A40 0x01A78A40 : AT(0x1A78A40) {
-      build/yay0/PAPERMARIO.1A78A40.yay0.o(.data);
+      build/yay0/papermario.1A78A40.yay0.o(.data);
    }
 
    /* 0x00000000 1A79900-1A7D798 [3E98] */
    .data01A79900 0x01A79900 : AT(0x1A79900) {
-      build/yay0/PAPERMARIO.1A79900.yay0.o(.data);
+      build/yay0/papermario.1A79900.yay0.o(.data);
    }
 
    /* 0x00000000 1A7D798-1A7EEA0 [1708] */
    .data01A7D798 0x01A7D798 : AT(0x1A7D798) {
-      build/yay0/PAPERMARIO.1A7D798.yay0.o(.data);
+      build/yay0/papermario.1A7D798.yay0.o(.data);
    }
 
    /* 0x00000000 1A7EEA0-1A7EFD8 [138] */
    .data01A7EEA0 0x01A7EEA0 : AT(0x1A7EEA0) {
-      build/yay0/PAPERMARIO.1A7EEA0.yay0.o(.data);
+      build/yay0/papermario.1A7EEA0.yay0.o(.data);
    }
 
    /* 0x00000000 1A7EFD8-1A83450 [4478] */
    .data01A7EFD8 0x01A7EFD8 : AT(0x1A7EFD8) {
-      build/yay0/PAPERMARIO.1A7EFD8.yay0.o(.data);
+      build/yay0/papermario.1A7EFD8.yay0.o(.data);
    }
 
    /* 0x00000000 1A83450-1A85668 [2218] */
    .data01A83450 0x01A83450 : AT(0x1A83450) {
-      build/yay0/PAPERMARIO.1A83450.yay0.o(.data);
+      build/yay0/papermario.1A83450.yay0.o(.data);
    }
 
    /* 0x00000000 1A85668-1A87958 [22F0] */
    .data01A85668 0x01A85668 : AT(0x1A85668) {
-      build/yay0/PAPERMARIO.1A85668.yay0.o(.data);
+      build/yay0/papermario.1A85668.yay0.o(.data);
    }
 
    /* 0x00000000 1A87958-1A8BF98 [4640] */
    .data01A87958 0x01A87958 : AT(0x1A87958) {
-      build/yay0/PAPERMARIO.1A87958.yay0.o(.data);
+      build/yay0/papermario.1A87958.yay0.o(.data);
    }
 
    /* 0x00000000 1A8BF98-1A8FE28 [3E90] */
    .data01A8BF98 0x01A8BF98 : AT(0x1A8BF98) {
-      build/yay0/PAPERMARIO.1A8BF98.yay0.o(.data);
+      build/yay0/papermario.1A8BF98.yay0.o(.data);
    }
 
    /* 0x00000000 1A8FE28-1A93EA0 [4078] */
    .data01A8FE28 0x01A8FE28 : AT(0x1A8FE28) {
-      build/yay0/PAPERMARIO.1A8FE28.yay0.o(.data);
+      build/yay0/papermario.1A8FE28.yay0.o(.data);
    }
 
    /* 0x00000000 1A93EA0-1A94188 [2E8] */
    .data01A93EA0 0x01A93EA0 : AT(0x1A93EA0) {
-      build/yay0/PAPERMARIO.1A93EA0.yay0.o(.data);
+      build/yay0/papermario.1A93EA0.yay0.o(.data);
    }
 
    /* 0x00000000 1A94188-1A94480 [2F8] */
    .data01A94188 0x01A94188 : AT(0x1A94188) {
-      build/yay0/PAPERMARIO.1A94188.yay0.o(.data);
+      build/yay0/papermario.1A94188.yay0.o(.data);
    }
 
    /* 0x00000000 1A94480-1A946A8 [228] */
    .data01A94480 0x01A94480 : AT(0x1A94480) {
-      build/yay0/PAPERMARIO.1A94480.yay0.o(.data);
+      build/yay0/papermario.1A94480.yay0.o(.data);
    }
 
    /* 0x00000000 1A946A8-1A94A00 [358] */
    .data01A946A8 0x01A946A8 : AT(0x1A946A8) {
-      build/yay0/PAPERMARIO.1A946A8.yay0.o(.data);
+      build/yay0/papermario.1A946A8.yay0.o(.data);
    }
 
    /* 0x00000000 1A94A00-1A94C58 [258] */
    .data01A94A00 0x01A94A00 : AT(0x1A94A00) {
-      build/yay0/PAPERMARIO.1A94A00.yay0.o(.data);
+      build/yay0/papermario.1A94A00.yay0.o(.data);
    }
 
    /* 0x00000000 1A94C58-1A98D98 [4140] */
    .data01A94C58 0x01A94C58 : AT(0x1A94C58) {
-      build/yay0/PAPERMARIO.1A94C58.yay0.o(.data);
+      build/yay0/papermario.1A94C58.yay0.o(.data);
    }
 
    /* 0x00000000 1A98D98-1A9BA80 [2CE8] */
    .data01A98D98 0x01A98D98 : AT(0x1A98D98) {
-      build/yay0/PAPERMARIO.1A98D98.yay0.o(.data);
+      build/yay0/papermario.1A98D98.yay0.o(.data);
    }
 
    /* 0x00000000 1A9BA80-1A9DB68 [20E8] */
    .data01A9BA80 0x01A9BA80 : AT(0x1A9BA80) {
-      build/yay0/PAPERMARIO.1A9BA80.yay0.o(.data);
+      build/yay0/papermario.1A9BA80.yay0.o(.data);
    }
 
    /* 0x00000000 1A9DB68-1AA0048 [24E0] */
    .data01A9DB68 0x01A9DB68 : AT(0x1A9DB68) {
-      build/yay0/PAPERMARIO.1A9DB68.yay0.o(.data);
+      build/yay0/papermario.1A9DB68.yay0.o(.data);
    }
 
    /* 0x00000000 1AA0048-1AA0698 [650] */
    .data01AA0048 0x01AA0048 : AT(0x1AA0048) {
-      build/yay0/PAPERMARIO.1AA0048.yay0.o(.data);
+      build/yay0/papermario.1AA0048.yay0.o(.data);
    }
 
    /* 0x00000000 1AA0698-1AA1008 [970] */
    .data01AA0698 0x01AA0698 : AT(0x1AA0698) {
-      build/yay0/PAPERMARIO.1AA0698.yay0.o(.data);
+      build/yay0/papermario.1AA0698.yay0.o(.data);
    }
 
    /* 0x00000000 1AA1008-1AA6D58 [5D50] */
    .data01AA1008 0x01AA1008 : AT(0x1AA1008) {
-      build/yay0/PAPERMARIO.1AA1008.yay0.o(.data);
+      build/yay0/papermario.1AA1008.yay0.o(.data);
    }
 
    /* 0x00000000 1AA6D58-1AAD600 [68A8] */
    .data01AA6D58 0x01AA6D58 : AT(0x1AA6D58) {
-      build/yay0/PAPERMARIO.1AA6D58.yay0.o(.data);
+      build/yay0/papermario.1AA6D58.yay0.o(.data);
    }
 
    /* 0x00000000 1AAD600-1AB1BF0 [45F0] */
    .data01AAD600 0x01AAD600 : AT(0x1AAD600) {
-      build/yay0/PAPERMARIO.1AAD600.yay0.o(.data);
+      build/yay0/papermario.1AAD600.yay0.o(.data);
    }
 
    /* 0x00000000 1AB1BF0-1AB2368 [778] */
    .data01AB1BF0 0x01AB1BF0 : AT(0x1AB1BF0) {
-      build/yay0/PAPERMARIO.1AB1BF0.yay0.o(.data);
+      build/yay0/papermario.1AB1BF0.yay0.o(.data);
    }
 
    /* 0x00000000 1AB2368-1ABA290 [7F28] */
    .data01AB2368 0x01AB2368 : AT(0x1AB2368) {
-      build/yay0/PAPERMARIO.1AB2368.yay0.o(.data);
+      build/yay0/papermario.1AB2368.yay0.o(.data);
    }
 
    /* 0x00000000 1ABA290-1AC14A8 [7218] */
    .data01ABA290 0x01ABA290 : AT(0x1ABA290) {
-      build/yay0/PAPERMARIO.1ABA290.yay0.o(.data);
+      build/yay0/papermario.1ABA290.yay0.o(.data);
    }
 
    /* 0x00000000 1AC14A8-1AC3910 [2468] */
    .data01AC14A8 0x01AC14A8 : AT(0x1AC14A8) {
-      build/yay0/PAPERMARIO.1AC14A8.yay0.o(.data);
+      build/yay0/papermario.1AC14A8.yay0.o(.data);
    }
 
    /* 0x00000000 1AC3910-1ACBC98 [8388] */
    .data01AC3910 0x01AC3910 : AT(0x1AC3910) {
-      build/yay0/PAPERMARIO.1AC3910.yay0.o(.data);
+      build/yay0/papermario.1AC3910.yay0.o(.data);
    }
 
    /* 0x00000000 1ACBC98-1ACE058 [23C0] */
    .data01ACBC98 0x01ACBC98 : AT(0x1ACBC98) {
-      build/yay0/PAPERMARIO.1ACBC98.yay0.o(.data);
+      build/yay0/papermario.1ACBC98.yay0.o(.data);
    }
 
    /* 0x00000000 1ACE058-1ACF910 [18B8] */
    .data01ACE058 0x01ACE058 : AT(0x1ACE058) {
-      build/yay0/PAPERMARIO.1ACE058.yay0.o(.data);
+      build/yay0/papermario.1ACE058.yay0.o(.data);
    }
 
    /* 0x00000000 1ACF910-1AD06D8 [DC8] */
    .data01ACF910 0x01ACF910 : AT(0x1ACF910) {
-      build/yay0/PAPERMARIO.1ACF910.yay0.o(.data);
+      build/yay0/papermario.1ACF910.yay0.o(.data);
    }
 
    /* 0x00000000 1AD06D8-1AD0B98 [4C0] */
    .data01AD06D8 0x01AD06D8 : AT(0x1AD06D8) {
-      build/yay0/PAPERMARIO.1AD06D8.yay0.o(.data);
+      build/yay0/papermario.1AD06D8.yay0.o(.data);
    }
 
    /* 0x00000000 1AD0B98-1AD1E90 [12F8] */
    .data01AD0B98 0x01AD0B98 : AT(0x1AD0B98) {
-      build/yay0/PAPERMARIO.1AD0B98.yay0.o(.data);
+      build/yay0/papermario.1AD0B98.yay0.o(.data);
    }
 
    /* 0x00000000 1AD1E90-1AD2348 [4B8] */
    .data01AD1E90 0x01AD1E90 : AT(0x1AD1E90) {
-      build/yay0/PAPERMARIO.1AD1E90.yay0.o(.data);
+      build/yay0/papermario.1AD1E90.yay0.o(.data);
    }
 
    /* 0x00000000 1AD2348-1AD27F8 [4B0] */
    .data01AD2348 0x01AD2348 : AT(0x1AD2348) {
-      build/yay0/PAPERMARIO.1AD2348.yay0.o(.data);
+      build/yay0/papermario.1AD2348.yay0.o(.data);
    }
 
    /* 0x00000000 1AD27F8-1AD28A8 [B0] */
    .data01AD27F8 0x01AD27F8 : AT(0x1AD27F8) {
-      build/yay0/PAPERMARIO.1AD27F8.yay0.o(.data);
+      build/yay0/papermario.1AD27F8.yay0.o(.data);
    }
 
    /* 0x00000000 1AD28A8-1AD44F0 [1C48] */
    .data01AD28A8 0x01AD28A8 : AT(0x1AD28A8) {
-      build/yay0/PAPERMARIO.1AD28A8.yay0.o(.data);
+      build/yay0/papermario.1AD28A8.yay0.o(.data);
    }
 
    /* 0x00000000 1AD44F0-1AD4758 [268] */
    .data01AD44F0 0x01AD44F0 : AT(0x1AD44F0) {
-      build/yay0/PAPERMARIO.1AD44F0.yay0.o(.data);
+      build/yay0/papermario.1AD44F0.yay0.o(.data);
    }
 
    /* 0x00000000 1AD4758-1AD57C0 [1068] */
    .data01AD4758 0x01AD4758 : AT(0x1AD4758) {
-      build/yay0/PAPERMARIO.1AD4758.yay0.o(.data);
+      build/yay0/papermario.1AD4758.yay0.o(.data);
    }
 
    /* 0x00000000 1AD57C0-1AD9D50 [4590] */
    .data01AD57C0 0x01AD57C0 : AT(0x1AD57C0) {
-      build/yay0/PAPERMARIO.1AD57C0.yay0.o(.data);
+      build/yay0/papermario.1AD57C0.yay0.o(.data);
    }
 
    /* 0x00000000 1AD9D50-1ADA498 [748] */
    .data01AD9D50 0x01AD9D50 : AT(0x1AD9D50) {
-      build/yay0/PAPERMARIO.1AD9D50.yay0.o(.data);
+      build/yay0/papermario.1AD9D50.yay0.o(.data);
    }
 
    /* 0x00000000 1ADA498-1ADCFC0 [2B28] */
    .data01ADA498 0x01ADA498 : AT(0x1ADA498) {
-      build/yay0/PAPERMARIO.1ADA498.yay0.o(.data);
+      build/yay0/papermario.1ADA498.yay0.o(.data);
    }
 
    /* 0x00000000 1ADCFC0-1AE2168 [51A8] */
    .data01ADCFC0 0x01ADCFC0 : AT(0x1ADCFC0) {
-      build/yay0/PAPERMARIO.1ADCFC0.yay0.o(.data);
+      build/yay0/papermario.1ADCFC0.yay0.o(.data);
    }
 
    /* 0x00000000 1AE2168-1AE2EA0 [D38] */
    .data01AE2168 0x01AE2168 : AT(0x1AE2168) {
-      build/yay0/PAPERMARIO.1AE2168.yay0.o(.data);
+      build/yay0/papermario.1AE2168.yay0.o(.data);
    }
 
    /* 0x00000000 1AE2EA0-1AE6A58 [3BB8] */
    .data01AE2EA0 0x01AE2EA0 : AT(0x1AE2EA0) {
-      build/yay0/PAPERMARIO.1AE2EA0.yay0.o(.data);
+      build/yay0/papermario.1AE2EA0.yay0.o(.data);
    }
 
    /* 0x00000000 1AE6A58-1AEB778 [4D20] */
    .data01AE6A58 0x01AE6A58 : AT(0x1AE6A58) {
-      build/yay0/PAPERMARIO.1AE6A58.yay0.o(.data);
+      build/yay0/papermario.1AE6A58.yay0.o(.data);
    }
 
    /* 0x00000000 1AEB778-1AF4958 [91E0] */
    .data01AEB778 0x01AEB778 : AT(0x1AEB778) {
-      build/yay0/PAPERMARIO.1AEB778.yay0.o(.data);
+      build/yay0/papermario.1AEB778.yay0.o(.data);
    }
 
    /* 0x00000000 1AF4958-1AFCB18 [81C0] */
    .data01AF4958 0x01AF4958 : AT(0x1AF4958) {
-      build/yay0/PAPERMARIO.1AF4958.yay0.o(.data);
+      build/yay0/papermario.1AF4958.yay0.o(.data);
    }
 
    /* 0x00000000 1AFCB18-1AFF748 [2C30] */
    .data01AFCB18 0x01AFCB18 : AT(0x1AFCB18) {
-      build/yay0/PAPERMARIO.1AFCB18.yay0.o(.data);
+      build/yay0/papermario.1AFCB18.yay0.o(.data);
    }
 
    /* 0x00000000 1AFF748-1B00640 [EF8] */
    .data01AFF748 0x01AFF748 : AT(0x1AFF748) {
-      build/yay0/PAPERMARIO.1AFF748.yay0.o(.data);
+      build/yay0/papermario.1AFF748.yay0.o(.data);
    }
 
    /* 0x00000000 1B00640-1B01390 [D50] */
    .data01B00640 0x01B00640 : AT(0x1B00640) {
-      build/yay0/PAPERMARIO.1B00640.yay0.o(.data);
+      build/yay0/papermario.1B00640.yay0.o(.data);
    }
 
    /* 0x00000000 1B01390-1B01C08 [878] */
    .data01B01390 0x01B01390 : AT(0x1B01390) {
-      build/yay0/PAPERMARIO.1B01390.yay0.o(.data);
+      build/yay0/papermario.1B01390.yay0.o(.data);
    }
 
    /* 0x00000000 1B01C08-1B02128 [520] */
    .data01B01C08 0x01B01C08 : AT(0x1B01C08) {
-      build/yay0/PAPERMARIO.1B01C08.yay0.o(.data);
+      build/yay0/papermario.1B01C08.yay0.o(.data);
    }
 
    /* 0x00000000 1B02128-1B02970 [848] */
    .data01B02128 0x01B02128 : AT(0x1B02128) {
-      build/yay0/PAPERMARIO.1B02128.yay0.o(.data);
+      build/yay0/papermario.1B02128.yay0.o(.data);
    }
 
    /* 0x00000000 1B02970-1B03118 [7A8] */
    .data01B02970 0x01B02970 : AT(0x1B02970) {
-      build/yay0/PAPERMARIO.1B02970.yay0.o(.data);
+      build/yay0/papermario.1B02970.yay0.o(.data);
    }
 
    /* 0x00000000 1B03118-1B03C18 [B00] */
    .data01B03118 0x01B03118 : AT(0x1B03118) {
-      build/yay0/PAPERMARIO.1B03118.yay0.o(.data);
+      build/yay0/papermario.1B03118.yay0.o(.data);
    }
 
    /* 0x00000000 1B03C18-1B045E8 [9D0] */
    .data01B03C18 0x01B03C18 : AT(0x1B03C18) {
-      build/yay0/PAPERMARIO.1B03C18.yay0.o(.data);
+      build/yay0/papermario.1B03C18.yay0.o(.data);
    }
 
    /* 0x00000000 1B045E8-1B04FC0 [9D8] */
    .data01B045E8 0x01B045E8 : AT(0x1B045E8) {
-      build/yay0/PAPERMARIO.1B045E8.yay0.o(.data);
+      build/yay0/papermario.1B045E8.yay0.o(.data);
    }
 
    /* 0x00000000 1B04FC0-1B05998 [9D8] */
    .data01B04FC0 0x01B04FC0 : AT(0x1B04FC0) {
-      build/yay0/PAPERMARIO.1B04FC0.yay0.o(.data);
+      build/yay0/papermario.1B04FC0.yay0.o(.data);
    }
 
    /* 0x00000000 1B05998-1B06C88 [12F0] */
    .data01B05998 0x01B05998 : AT(0x1B05998) {
-      build/yay0/PAPERMARIO.1B05998.yay0.o(.data);
+      build/yay0/papermario.1B05998.yay0.o(.data);
    }
 
    /* 0x00000000 1B06C88-1B07C48 [FC0] */
    .data01B06C88 0x01B06C88 : AT(0x1B06C88) {
-      build/yay0/PAPERMARIO.1B06C88.yay0.o(.data);
+      build/yay0/papermario.1B06C88.yay0.o(.data);
    }
 
    /* 0x00000000 1B07C48-1B09440 [17F8] */
    .data01B07C48 0x01B07C48 : AT(0x1B07C48) {
-      build/yay0/PAPERMARIO.1B07C48.yay0.o(.data);
+      build/yay0/papermario.1B07C48.yay0.o(.data);
    }
 
    /* 0x00000000 1B09440-1B0B290 [1E50] */
    .data01B09440 0x01B09440 : AT(0x1B09440) {
-      build/yay0/PAPERMARIO.1B09440.yay0.o(.data);
+      build/yay0/papermario.1B09440.yay0.o(.data);
    }
 
    /* 0x00000000 1B0B290-1B0B9A0 [710] */
    .data01B0B290 0x01B0B290 : AT(0x1B0B290) {
-      build/yay0/PAPERMARIO.1B0B290.yay0.o(.data);
+      build/yay0/papermario.1B0B290.yay0.o(.data);
    }
 
    /* 0x00000000 1B0B9A0-1B0C548 [BA8] */
    .data01B0B9A0 0x01B0B9A0 : AT(0x1B0B9A0) {
-      build/yay0/PAPERMARIO.1B0B9A0.yay0.o(.data);
+      build/yay0/papermario.1B0B9A0.yay0.o(.data);
    }
 
    /* 0x00000000 1B0C548-1B0CAC0 [578] */
    .data01B0C548 0x01B0C548 : AT(0x1B0C548) {
-      build/yay0/PAPERMARIO.1B0C548.yay0.o(.data);
+      build/yay0/papermario.1B0C548.yay0.o(.data);
    }
 
    /* 0x00000000 1B0CAC0-1B0D130 [670] */
    .data01B0CAC0 0x01B0CAC0 : AT(0x1B0CAC0) {
-      build/yay0/PAPERMARIO.1B0CAC0.yay0.o(.data);
+      build/yay0/papermario.1B0CAC0.yay0.o(.data);
    }
 
    /* 0x00000000 1B0D130-1B0EB80 [1A50] */
    .data01B0D130 0x01B0D130 : AT(0x1B0D130) {
-      build/yay0/PAPERMARIO.1B0D130.yay0.o(.data);
+      build/yay0/papermario.1B0D130.yay0.o(.data);
    }
 
    /* 0x00000000 1B0EB80-1B10CC0 [2140] */
    .data01B0EB80 0x01B0EB80 : AT(0x1B0EB80) {
-      build/yay0/PAPERMARIO.1B0EB80.yay0.o(.data);
+      build/yay0/papermario.1B0EB80.yay0.o(.data);
    }
 
    /* 0x00000000 1B10CC0-1B129A0 [1CE0] */
    .data01B10CC0 0x01B10CC0 : AT(0x1B10CC0) {
-      build/yay0/PAPERMARIO.1B10CC0.yay0.o(.data);
+      build/yay0/papermario.1B10CC0.yay0.o(.data);
    }
 
    /* 0x00000000 1B129A0-1B13548 [BA8] */
    .data01B129A0 0x01B129A0 : AT(0x1B129A0) {
-      build/yay0/PAPERMARIO.1B129A0.yay0.o(.data);
+      build/yay0/papermario.1B129A0.yay0.o(.data);
    }
 
    /* 0x00000000 1B13548-1B16420 [2ED8] */
    .data01B13548 0x01B13548 : AT(0x1B13548) {
-      build/yay0/PAPERMARIO.1B13548.yay0.o(.data);
+      build/yay0/papermario.1B13548.yay0.o(.data);
    }
 
    /* 0x00000000 1B16420-1B17128 [D08] */
    .data01B16420 0x01B16420 : AT(0x1B16420) {
-      build/yay0/PAPERMARIO.1B16420.yay0.o(.data);
+      build/yay0/papermario.1B16420.yay0.o(.data);
    }
 
    /* 0x00000000 1B17128-1B17840 [718] */
    .data01B17128 0x01B17128 : AT(0x1B17128) {
-      build/yay0/PAPERMARIO.1B17128.yay0.o(.data);
+      build/yay0/papermario.1B17128.yay0.o(.data);
    }
 
    /* 0x00000000 1B17840-1B19318 [1AD8] */
    .data01B17840 0x01B17840 : AT(0x1B17840) {
-      build/yay0/PAPERMARIO.1B17840.yay0.o(.data);
+      build/yay0/papermario.1B17840.yay0.o(.data);
    }
 
    /* 0x00000000 1B19318-1B1A030 [D18] */
    .data01B19318 0x01B19318 : AT(0x1B19318) {
-      build/yay0/PAPERMARIO.1B19318.yay0.o(.data);
+      build/yay0/papermario.1B19318.yay0.o(.data);
    }
 
    /* 0x00000000 1B1A030-1B1B8C8 [1898] */
    .data01B1A030 0x01B1A030 : AT(0x1B1A030) {
-      build/yay0/PAPERMARIO.1B1A030.yay0.o(.data);
+      build/yay0/papermario.1B1A030.yay0.o(.data);
    }
 
    /* 0x00000000 1B1B8C8-1B1BC88 [3C0] */
    .data01B1B8C8 0x01B1B8C8 : AT(0x1B1B8C8) {
-      build/yay0/PAPERMARIO.1B1B8C8.yay0.o(.data);
+      build/yay0/papermario.1B1B8C8.yay0.o(.data);
    }
 
    /* 0x00000000 1B1BC88-1B1C7A0 [B18] */
    .data01B1BC88 0x01B1BC88 : AT(0x1B1BC88) {
-      build/yay0/PAPERMARIO.1B1BC88.yay0.o(.data);
+      build/yay0/papermario.1B1BC88.yay0.o(.data);
    }
 
    /* 0x00000000 1B1C7A0-1B1CD28 [588] */
    .data01B1C7A0 0x01B1C7A0 : AT(0x1B1C7A0) {
-      build/yay0/PAPERMARIO.1B1C7A0.yay0.o(.data);
+      build/yay0/papermario.1B1C7A0.yay0.o(.data);
    }
 
    /* 0x00000000 1B1CD28-1B21C48 [4F20] */
    .data01B1CD28 0x01B1CD28 : AT(0x1B1CD28) {
-      build/yay0/PAPERMARIO.1B1CD28.yay0.o(.data);
+      build/yay0/papermario.1B1CD28.yay0.o(.data);
    }
 
    /* 0x00000000 1B21C48-1B23290 [1648] */
    .data01B21C48 0x01B21C48 : AT(0x1B21C48) {
-      build/yay0/PAPERMARIO.1B21C48.yay0.o(.data);
+      build/yay0/papermario.1B21C48.yay0.o(.data);
    }
 
    /* 0x00000000 1B23290-1B253E0 [2150] */
    .data01B23290 0x01B23290 : AT(0x1B23290) {
-      build/yay0/PAPERMARIO.1B23290.yay0.o(.data);
+      build/yay0/papermario.1B23290.yay0.o(.data);
    }
 
    /* 0x00000000 1B253E0-1B26660 [1280] */
    .data01B253E0 0x01B253E0 : AT(0x1B253E0) {
-      build/yay0/PAPERMARIO.1B253E0.yay0.o(.data);
+      build/yay0/papermario.1B253E0.yay0.o(.data);
    }
 
    /* 0x00000000 1B26660-1B283F8 [1D98] */
    .data01B26660 0x01B26660 : AT(0x1B26660) {
-      build/yay0/PAPERMARIO.1B26660.yay0.o(.data);
+      build/yay0/papermario.1B26660.yay0.o(.data);
    }
 
    /* 0x00000000 1B283F8-1B29C60 [1868] */
    .data01B283F8 0x01B283F8 : AT(0x1B283F8) {
-      build/yay0/PAPERMARIO.1B283F8.yay0.o(.data);
+      build/yay0/papermario.1B283F8.yay0.o(.data);
    }
 
    /* 0x00000000 1B29C60-1B2A688 [A28] */
    .data01B29C60 0x01B29C60 : AT(0x1B29C60) {
-      build/yay0/PAPERMARIO.1B29C60.yay0.o(.data);
+      build/yay0/papermario.1B29C60.yay0.o(.data);
    }
 
    /* 0x00000000 1B2A688-1B2B3E8 [D60] */
    .data01B2A688 0x01B2A688 : AT(0x1B2A688) {
-      build/yay0/PAPERMARIO.1B2A688.yay0.o(.data);
+      build/yay0/papermario.1B2A688.yay0.o(.data);
    }
 
    /* 0x00000000 1B2B3E8-1B2C8D8 [14F0] */
    .data01B2B3E8 0x01B2B3E8 : AT(0x1B2B3E8) {
-      build/yay0/PAPERMARIO.1B2B3E8.yay0.o(.data);
+      build/yay0/papermario.1B2B3E8.yay0.o(.data);
    }
 
    /* 0x00000000 1B2C8D8-1B2D7B0 [ED8] */
    .data01B2C8D8 0x01B2C8D8 : AT(0x1B2C8D8) {
-      build/yay0/PAPERMARIO.1B2C8D8.yay0.o(.data);
+      build/yay0/papermario.1B2C8D8.yay0.o(.data);
    }
 
    /* 0x00000000 1B2D7B0-1B2E328 [B78] */
    .data01B2D7B0 0x01B2D7B0 : AT(0x1B2D7B0) {
-      build/yay0/PAPERMARIO.1B2D7B0.yay0.o(.data);
+      build/yay0/papermario.1B2D7B0.yay0.o(.data);
    }
 
    /* 0x00000000 1B2E328-1B2ED60 [A38] */
    .data01B2E328 0x01B2E328 : AT(0x1B2E328) {
-      build/yay0/PAPERMARIO.1B2E328.yay0.o(.data);
+      build/yay0/papermario.1B2E328.yay0.o(.data);
    }
 
    /* 0x00000000 1B2ED60-1B2FA18 [CB8] */
    .data01B2ED60 0x01B2ED60 : AT(0x1B2ED60) {
-      build/yay0/PAPERMARIO.1B2ED60.yay0.o(.data);
+      build/yay0/papermario.1B2ED60.yay0.o(.data);
    }
 
    /* 0x00000000 1B2FA18-1B31A18 [2000] */
    .data01B2FA18 0x01B2FA18 : AT(0x1B2FA18) {
-      build/yay0/PAPERMARIO.1B2FA18.yay0.o(.data);
+      build/yay0/papermario.1B2FA18.yay0.o(.data);
    }
 
    /* 0x00000000 1B31A18-1B33000 [15E8] */
    .data01B31A18 0x01B31A18 : AT(0x1B31A18) {
-      build/yay0/PAPERMARIO.1B31A18.yay0.o(.data);
+      build/yay0/papermario.1B31A18.yay0.o(.data);
    }
 
    /* 0x00000000 1B33000-1B34098 [1098] */
    .data01B33000 0x01B33000 : AT(0x1B33000) {
-      build/yay0/PAPERMARIO.1B33000.yay0.o(.data);
+      build/yay0/papermario.1B33000.yay0.o(.data);
    }
 
    /* 0x00000000 1B34098-1B34928 [890] */
    .data01B34098 0x01B34098 : AT(0x1B34098) {
-      build/yay0/PAPERMARIO.1B34098.yay0.o(.data);
+      build/yay0/papermario.1B34098.yay0.o(.data);
    }
 
    /* 0x00000000 1B34928-1B34C00 [2D8] */
    .data01B34928 0x01B34928 : AT(0x1B34928) {
-      build/yay0/PAPERMARIO.1B34928.yay0.o(.data);
+      build/yay0/papermario.1B34928.yay0.o(.data);
    }
 
    /* 0x00000000 1B34C00-1B35480 [880] */
    .data01B34C00 0x01B34C00 : AT(0x1B34C00) {
-      build/yay0/PAPERMARIO.1B34C00.yay0.o(.data);
+      build/yay0/papermario.1B34C00.yay0.o(.data);
    }
 
    /* 0x00000000 1B35480-1B36440 [FC0] */
    .data01B35480 0x01B35480 : AT(0x1B35480) {
-      build/yay0/PAPERMARIO.1B35480.yay0.o(.data);
+      build/yay0/papermario.1B35480.yay0.o(.data);
    }
 
    /* 0x00000000 1B36440-1B38748 [2308] */
    .data01B36440 0x01B36440 : AT(0x1B36440) {
-      build/yay0/PAPERMARIO.1B36440.yay0.o(.data);
+      build/yay0/papermario.1B36440.yay0.o(.data);
    }
 
    /* 0x00000000 1B38748-1B39A98 [1350] */
    .data01B38748 0x01B38748 : AT(0x1B38748) {
-      build/yay0/PAPERMARIO.1B38748.yay0.o(.data);
+      build/yay0/papermario.1B38748.yay0.o(.data);
    }
 
    /* 0x00000000 1B39A98-1B3A2E8 [850] */
    .data01B39A98 0x01B39A98 : AT(0x1B39A98) {
-      build/yay0/PAPERMARIO.1B39A98.yay0.o(.data);
+      build/yay0/papermario.1B39A98.yay0.o(.data);
    }
 
    /* 0x00000000 1B3A2E8-1B3A818 [530] */
    .data01B3A2E8 0x01B3A2E8 : AT(0x1B3A2E8) {
-      build/yay0/PAPERMARIO.1B3A2E8.yay0.o(.data);
+      build/yay0/papermario.1B3A2E8.yay0.o(.data);
    }
 
    /* 0x00000000 1B3A818-1B3C488 [1C70] */
    .data01B3A818 0x01B3A818 : AT(0x1B3A818) {
-      build/yay0/PAPERMARIO.1B3A818.yay0.o(.data);
+      build/yay0/papermario.1B3A818.yay0.o(.data);
    }
 
    /* 0x00000000 1B3C488-1B3CAC8 [640] */
    .data01B3C488 0x01B3C488 : AT(0x1B3C488) {
-      build/yay0/PAPERMARIO.1B3C488.yay0.o(.data);
+      build/yay0/papermario.1B3C488.yay0.o(.data);
    }
 
    /* 0x00000000 1B3CAC8-1B3D0A0 [5D8] */
    .data01B3CAC8 0x01B3CAC8 : AT(0x1B3CAC8) {
-      build/yay0/PAPERMARIO.1B3CAC8.yay0.o(.data);
+      build/yay0/papermario.1B3CAC8.yay0.o(.data);
    }
 
    /* 0x00000000 1B3D0A0-1B3D920 [880] */
    .data01B3D0A0 0x01B3D0A0 : AT(0x1B3D0A0) {
-      build/yay0/PAPERMARIO.1B3D0A0.yay0.o(.data);
+      build/yay0/papermario.1B3D0A0.yay0.o(.data);
    }
 
    /* 0x00000000 1B3D920-1B3F060 [1740] */
    .data01B3D920 0x01B3D920 : AT(0x1B3D920) {
-      build/yay0/PAPERMARIO.1B3D920.yay0.o(.data);
+      build/yay0/papermario.1B3D920.yay0.o(.data);
    }
 
    /* 0x00000000 1B3F060-1B40048 [FE8] */
    .data01B3F060 0x01B3F060 : AT(0x1B3F060) {
-      build/yay0/PAPERMARIO.1B3F060.yay0.o(.data);
+      build/yay0/papermario.1B3F060.yay0.o(.data);
    }
 
    /* 0x00000000 1B40048-1B40720 [6D8] */
    .data01B40048 0x01B40048 : AT(0x1B40048) {
-      build/yay0/PAPERMARIO.1B40048.yay0.o(.data);
+      build/yay0/papermario.1B40048.yay0.o(.data);
    }
 
    /* 0x00000000 1B40720-1B49570 [8E50] */
    .data01B40720 0x01B40720 : AT(0x1B40720) {
-      build/yay0/PAPERMARIO.1B40720.yay0.o(.data);
+      build/yay0/papermario.1B40720.yay0.o(.data);
    }
 
    /* 0x00000000 1B49570-1B4C3E8 [2E78] */
    .data01B49570 0x01B49570 : AT(0x1B49570) {
-      build/yay0/PAPERMARIO.1B49570.yay0.o(.data);
+      build/yay0/papermario.1B49570.yay0.o(.data);
    }
 
    /* 0x00000000 1B4C3E8-1B4DEA0 [1AB8] */
    .data01B4C3E8 0x01B4C3E8 : AT(0x1B4C3E8) {
-      build/yay0/PAPERMARIO.1B4C3E8.yay0.o(.data);
+      build/yay0/papermario.1B4C3E8.yay0.o(.data);
    }
 
    /* 0x00000000 1B4DEA0-1B4FD98 [1EF8] */
    .data01B4DEA0 0x01B4DEA0 : AT(0x1B4DEA0) {
-      build/yay0/PAPERMARIO.1B4DEA0.yay0.o(.data);
+      build/yay0/papermario.1B4DEA0.yay0.o(.data);
    }
 
    /* 0x00000000 1B4FD98-1B50CD8 [F40] */
    .data01B4FD98 0x01B4FD98 : AT(0x1B4FD98) {
-      build/yay0/PAPERMARIO.1B4FD98.yay0.o(.data);
+      build/yay0/papermario.1B4FD98.yay0.o(.data);
    }
 
    /* 0x00000000 1B50CD8-1B51B08 [E30] */
    .data01B50CD8 0x01B50CD8 : AT(0x1B50CD8) {
-      build/yay0/PAPERMARIO.1B50CD8.yay0.o(.data);
+      build/yay0/papermario.1B50CD8.yay0.o(.data);
    }
 
    /* 0x00000000 1B51B08-1B54258 [2750] */
    .data01B51B08 0x01B51B08 : AT(0x1B51B08) {
-      build/yay0/PAPERMARIO.1B51B08.yay0.o(.data);
+      build/yay0/papermario.1B51B08.yay0.o(.data);
    }
 
    /* 0x00000000 1B54258-1B580A0 [3E48] */
    .data01B54258 0x01B54258 : AT(0x1B54258) {
-      build/yay0/PAPERMARIO.1B54258.yay0.o(.data);
+      build/yay0/papermario.1B54258.yay0.o(.data);
    }
 
    /* 0x00000000 1B580A0-1B5A248 [21A8] */
    .data01B580A0 0x01B580A0 : AT(0x1B580A0) {
-      build/yay0/PAPERMARIO.1B580A0.yay0.o(.data);
+      build/yay0/papermario.1B580A0.yay0.o(.data);
    }
 
    /* 0x00000000 1B5A248-1B5BB88 [1940] */
    .data01B5A248 0x01B5A248 : AT(0x1B5A248) {
-      build/yay0/PAPERMARIO.1B5A248.yay0.o(.data);
+      build/yay0/papermario.1B5A248.yay0.o(.data);
    }
 
    /* 0x00000000 1B5BB88-1B5CC90 [1108] */
    .data01B5BB88 0x01B5BB88 : AT(0x1B5BB88) {
-      build/yay0/PAPERMARIO.1B5BB88.yay0.o(.data);
+      build/yay0/papermario.1B5BB88.yay0.o(.data);
    }
 
    /* 0x00000000 1B5CC90-1B5E968 [1CD8] */
    .data01B5CC90 0x01B5CC90 : AT(0x1B5CC90) {
-      build/yay0/PAPERMARIO.1B5CC90.yay0.o(.data);
+      build/yay0/papermario.1B5CC90.yay0.o(.data);
    }
 
    /* 0x00000000 1B5E968-1B5ED88 [420] */
    .data01B5E968 0x01B5E968 : AT(0x1B5E968) {
-      build/yay0/PAPERMARIO.1B5E968.yay0.o(.data);
+      build/yay0/papermario.1B5E968.yay0.o(.data);
    }
 
    /* 0x00000000 1B5ED88-1B608C0 [1B38] */
    .data01B5ED88 0x01B5ED88 : AT(0x1B5ED88) {
-      build/yay0/PAPERMARIO.1B5ED88.yay0.o(.data);
+      build/yay0/papermario.1B5ED88.yay0.o(.data);
    }
 
    /* 0x00000000 1B608C0-1B625F8 [1D38] */
    .data01B608C0 0x01B608C0 : AT(0x1B608C0) {
-      build/yay0/PAPERMARIO.1B608C0.yay0.o(.data);
+      build/yay0/papermario.1B608C0.yay0.o(.data);
    }
 
    /* 0x00000000 1B625F8-1B633D0 [DD8] */
    .data01B625F8 0x01B625F8 : AT(0x1B625F8) {
-      build/yay0/PAPERMARIO.1B625F8.yay0.o(.data);
+      build/yay0/papermario.1B625F8.yay0.o(.data);
    }
 
    /* 0x00000000 1B633D0-1B64878 [14A8] */
    .data01B633D0 0x01B633D0 : AT(0x1B633D0) {
-      build/yay0/PAPERMARIO.1B633D0.yay0.o(.data);
+      build/yay0/papermario.1B633D0.yay0.o(.data);
    }
 
    /* 0x00000000 1B64878-1B657E0 [F68] */
    .data01B64878 0x01B64878 : AT(0x1B64878) {
-      build/yay0/PAPERMARIO.1B64878.yay0.o(.data);
+      build/yay0/papermario.1B64878.yay0.o(.data);
    }
 
    /* 0x00000000 1B657E0-1B65A08 [228] */
    .data01B657E0 0x01B657E0 : AT(0x1B657E0) {
-      build/yay0/PAPERMARIO.1B657E0.yay0.o(.data);
+      build/yay0/papermario.1B657E0.yay0.o(.data);
    }
 
    /* 0x00000000 1B65A08-1B65E50 [448] */
    .data01B65A08 0x01B65A08 : AT(0x1B65A08) {
-      build/yay0/PAPERMARIO.1B65A08.yay0.o(.data);
+      build/yay0/papermario.1B65A08.yay0.o(.data);
    }
 
    /* 0x00000000 1B65E50-1B66238 [3E8] */
    .data01B65E50 0x01B65E50 : AT(0x1B65E50) {
-      build/yay0/PAPERMARIO.1B65E50.yay0.o(.data);
+      build/yay0/papermario.1B65E50.yay0.o(.data);
    }
 
    /* 0x00000000 1B66238-1B69580 [3348] */
    .data01B66238 0x01B66238 : AT(0x1B66238) {
-      build/yay0/PAPERMARIO.1B66238.yay0.o(.data);
+      build/yay0/papermario.1B66238.yay0.o(.data);
    }
 
    /* 0x00000000 1B69580-1B6C318 [2D98] */
    .data01B69580 0x01B69580 : AT(0x1B69580) {
-      build/yay0/PAPERMARIO.1B69580.yay0.o(.data);
+      build/yay0/papermario.1B69580.yay0.o(.data);
    }
 
    /* 0x00000000 1B6C318-1B6DD98 [1A80] */
    .data01B6C318 0x01B6C318 : AT(0x1B6C318) {
-      build/yay0/PAPERMARIO.1B6C318.yay0.o(.data);
+      build/yay0/papermario.1B6C318.yay0.o(.data);
    }
 
    /* 0x00000000 1B6DD98-1B6F150 [13B8] */
    .data01B6DD98 0x01B6DD98 : AT(0x1B6DD98) {
-      build/yay0/PAPERMARIO.1B6DD98.yay0.o(.data);
+      build/yay0/papermario.1B6DD98.yay0.o(.data);
    }
 
    /* 0x00000000 1B6F150-1B71618 [24C8] */
    .data01B6F150 0x01B6F150 : AT(0x1B6F150) {
-      build/yay0/PAPERMARIO.1B6F150.yay0.o(.data);
+      build/yay0/papermario.1B6F150.yay0.o(.data);
    }
 
    /* 0x00000000 1B71618-1B72890 [1278] */
    .data01B71618 0x01B71618 : AT(0x1B71618) {
-      build/yay0/PAPERMARIO.1B71618.yay0.o(.data);
+      build/yay0/papermario.1B71618.yay0.o(.data);
    }
 
    /* 0x00000000 1B72890-1B73B08 [1278] */
    .data01B72890 0x01B72890 : AT(0x1B72890) {
-      build/yay0/PAPERMARIO.1B72890.yay0.o(.data);
+      build/yay0/papermario.1B72890.yay0.o(.data);
    }
 
    /* 0x00000000 1B73B08-1B747B8 [CB0] */
    .data01B73B08 0x01B73B08 : AT(0x1B73B08) {
-      build/yay0/PAPERMARIO.1B73B08.yay0.o(.data);
+      build/yay0/papermario.1B73B08.yay0.o(.data);
    }
 
    /* 0x00000000 1B747B8-1B76E30 [2678] */
    .data01B747B8 0x01B747B8 : AT(0x1B747B8) {
-      build/yay0/PAPERMARIO.1B747B8.yay0.o(.data);
+      build/yay0/papermario.1B747B8.yay0.o(.data);
    }
 
    /* 0x00000000 1B76E30-1B78EC0 [2090] */
    .data01B76E30 0x01B76E30 : AT(0x1B76E30) {
-      build/yay0/PAPERMARIO.1B76E30.yay0.o(.data);
+      build/yay0/papermario.1B76E30.yay0.o(.data);
    }
 
    /* 0x00000000 1B78EC0-1B79A20 [B60] */
    .data01B78EC0 0x01B78EC0 : AT(0x1B78EC0) {
-      build/yay0/PAPERMARIO.1B78EC0.yay0.o(.data);
+      build/yay0/papermario.1B78EC0.yay0.o(.data);
    }
 
    /* 0x00000000 1B79A20-1B79F08 [4E8] */
    .data01B79A20 0x01B79A20 : AT(0x1B79A20) {
-      build/yay0/PAPERMARIO.1B79A20.yay0.o(.data);
+      build/yay0/papermario.1B79A20.yay0.o(.data);
    }
 
    /* 0x00000000 1B79F08-1B7AA08 [B00] */
    .data01B79F08 0x01B79F08 : AT(0x1B79F08) {
-      build/yay0/PAPERMARIO.1B79F08.yay0.o(.data);
+      build/yay0/papermario.1B79F08.yay0.o(.data);
    }
 
    /* 0x00000000 1B7AA08-1B7B008 [600] */
    .data01B7AA08 0x01B7AA08 : AT(0x1B7AA08) {
-      build/yay0/PAPERMARIO.1B7AA08.yay0.o(.data);
+      build/yay0/papermario.1B7AA08.yay0.o(.data);
    }
 
    /* 0x00000000 1B7B008-1B7BB50 [B48] */
    .data01B7B008 0x01B7B008 : AT(0x1B7B008) {
-      build/yay0/PAPERMARIO.1B7B008.yay0.o(.data);
+      build/yay0/papermario.1B7B008.yay0.o(.data);
    }
 
    /* 0x00000000 1B7BB50-1B7EC68 [3118] */
    .data01B7BB50 0x01B7BB50 : AT(0x1B7BB50) {
-      build/yay0/PAPERMARIO.1B7BB50.yay0.o(.data);
+      build/yay0/papermario.1B7BB50.yay0.o(.data);
    }
 
    /* 0x00000000 1B7EC68-1B7FF48 [12E0] */
    .data01B7EC68 0x01B7EC68 : AT(0x1B7EC68) {
-      build/yay0/PAPERMARIO.1B7EC68.yay0.o(.data);
+      build/yay0/papermario.1B7EC68.yay0.o(.data);
    }
 
    /* 0x00000000 1B7FF48-1B81E88 [1F40] */
    .data01B7FF48 0x01B7FF48 : AT(0x1B7FF48) {
-      build/yay0/PAPERMARIO.1B7FF48.yay0.o(.data);
+      build/yay0/papermario.1B7FF48.yay0.o(.data);
    }
 
    /* 0x00000000 1B81E88-1B82058 [1D0] */
    .data01B81E88 0x01B81E88 : AT(0x1B81E88) {
-      build/yay0/PAPERMARIO.1B81E88.yay0.o(.data);
+      build/yay0/papermario.1B81E88.yay0.o(.data);
    }
 
    /* 0x00000000 1B82058-1B82202 [1AA] */
    .data01B82058 0x01B82058 : AT(0x1B82058) {
-      build/yay0/PAPERMARIO.1B82058.yay0.o(.data);
+      build/yay0/papermario.1B82058.yay0.o(.data);
    }
 
    /* 0x00000000 1B82202-1E40000 [2BDDFE] */
    .data01B82202 0x01B82202 : AT(0x1B82202) {
-      build/bin/PAPERMARIO.1B82202.bin_1b82202.o(.data);
+      build/bin/papermario.1B82202.bin_1b82202.o(.data);
    }
 
    /* 0x00000000 1E40000-27FEE22 [9BEE22] */
    .data01E40000 0x01E40000 : AT(0x1E40000) {
-      build/Map_Assets.FS/PAPERMARIO.1E40000.Map_Assets.FS.o(.data);
+      build/Map_Assets.FS/papermario.1E40000.Map_Assets.FS.o(.data);
    }
 
    /* 0x00000000 27FEE22-2800000 [11DE] */
    .data027FEE22 0x027FEE22 : AT(0x27FEE22) {
-      build/bin/PAPERMARIO.27FEE22.bin_27fee22.o(.data);
+      build/bin/papermario.27FEE22.bin_27fee22.o(.data);
    }
 
    /* Discard everything not specifically mentioned above. */
