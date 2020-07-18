@@ -1,8 +1,10 @@
+#include "common.h"
+
 typedef struct {
-    int unk0;
-    int unk4;
-    int unk8;
-    int unkC;
+    s32 unk0;
+    s32 unk4;
+    s32 unk8;
+    s32 unkC;
 } struct_80147230;
 
 extern struct_80147230 D_8014F140;

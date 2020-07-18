@@ -1039,7 +1039,7 @@ SECTIONS
 
    /* 0x802B2000 316F30-317020 [F0] */
    .text802B2000 0x802B2000 : AT(0x316F30) {
-      build/asm/code_316f30.o(.text802B2000);
+      build/src/code_316f30.o(.text);
    }
 
    /* 0x00000000 317020-415D90 ?? */

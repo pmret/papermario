@@ -1,6 +1,8 @@
+#include "common.h"
+
 typedef struct {
     char unk_0[0xC];
-    int unk_C;
+    s32 unk_C;
 } NUScTask;
 
 void nuGfxSwapCfb(NUScTask* task) {
