@@ -939,7 +939,7 @@ SECTIONS
 
    /* 0x802D9700 0FE0B0-0FE650 [5A0] */
    .text802D9700 0x802D9700 : AT(0x0FE0B0) {
-      build/asm/code_fe0b0_len_5a0.o(.text802D9700);
+      build/src/code_fe0b0_len_5a0.o(.text);
    }
 
    /* 0x00000000 0FE650-0FEE30 [7E0] */

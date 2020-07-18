@@ -8,6 +8,7 @@ papermario/bgm
 papermario/bin
 papermario/build/
 papermario/yay0
+papermario/expected
 .vscode/
 .idea/
 .DS_Store
