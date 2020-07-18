@@ -40,7 +40,7 @@ void __attribute__((naked)) DemoJoystickRadial(void) {
     ".include \"asm/code_fe0b0_len_5a0/DemoJoystickRadial.s\"\n"
     );
 }
-/*s32 DemoJoysticRadial(ScriptContext* script) {
+/*s32 DemoJoystickRadial(ScriptContext* script) {
     float a;
     float b;
     s32* nextPos = script->ptrReadPos + 1;
@@ -48,8 +48,8 @@ void __attribute__((naked)) DemoJoystickRadial(void) {
     a = get_float_variable(script, *script->ptrReadPos);
     b = get_float_variable(script, nextPos);
 
-    gGameStatus->demoStickX = a * sin_deg(b);
-    gGameStatus->demoStickY = a * cos_deg(b);
+    gGameStatus->demoStickX = (s32)(a * sin_deg(b));
+    gGameStatus->demoStickY = (s32)(a * cos_deg(b));
     
     return 2;
 }*/
