@@ -49,3 +49,5 @@ guMtxXFML:
 /* 042E68 80067A68 27BD0088 */   addiu $sp, $sp, 0x88
 
 /* 042E6C 80067A6C 00000000 */  nop   
+
+.set reorder

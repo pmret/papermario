@@ -61,3 +61,5 @@ osEPiStartDma:
 /* 03C2B4 80060EB4 00000000 */  nop   
 /* 03C2B8 80060EB8 00000000 */  nop   
 /* 03C2BC 80060EBC 00000000 */  nop   
+
+.set reorder

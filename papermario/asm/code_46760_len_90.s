@@ -52,3 +52,5 @@ osRestoreInt:
 /* 0467E8 8006B3E8 00000000 */   nop   
 
 /* 0467EC 8006B3EC 00000000 */  nop   
+
+.set reorder

@@ -3238,3 +3238,5 @@ func_802DEA6C:
 
 /* 101B88 802DEA98 00000000 */  nop   
 /* 101B8C 802DEA9C 00000000 */  nop   
+
+.set reorder

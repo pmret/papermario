@@ -101,3 +101,5 @@ osJamMesg:
 /* 040AE4 800656E4 00000000 */  nop   
 /* 040AE8 800656E8 00000000 */  nop   
 /* 040AEC 800656EC 00000000 */  nop   
+
+.set reorder

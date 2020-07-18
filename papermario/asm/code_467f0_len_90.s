@@ -51,3 +51,5 @@ osResetGlobalIntMask:
 
 /* 046878 8006B478 00000000 */  nop   
 /* 04687C 8006B47C 00000000 */  nop   
+
+.set reorder

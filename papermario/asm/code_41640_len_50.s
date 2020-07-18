@@ -33,3 +33,5 @@ osYieldThread:
 
 /* 041688 80066288 00000000 */  nop   
 /* 04168C 8006628C 00000000 */  nop   
+
+.set reorder

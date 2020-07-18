@@ -29,3 +29,5 @@ osViGetCurrentMode:
 /* 041E68 80066A68 27BD0018 */   addiu $sp, $sp, 0x18
 
 /* 041E6C 80066A6C 00000000 */  nop   
+
+.set reorder

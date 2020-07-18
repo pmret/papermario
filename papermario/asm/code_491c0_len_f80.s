@@ -1148,3 +1148,5 @@ func_8006E870:
 /* 04A138 8006ED38 27BD0008 */   addiu $sp, $sp, 8
 
 /* 04A13C 8006ED3C 00000000 */  nop   
+
+.set reorder

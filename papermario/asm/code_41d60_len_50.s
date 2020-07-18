@@ -34,3 +34,5 @@ osUnmapTLBAll:
 /* 041DA4 800669A4 00000000 */  nop   
 /* 041DA8 800669A8 00000000 */  nop   
 /* 041DAC 800669AC 00000000 */  nop   
+
+.set reorder

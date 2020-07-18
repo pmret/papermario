@@ -34,3 +34,5 @@ osSiRawReadIo:
 /* 047C08 8006C808 27BD0020 */   addiu $sp, $sp, 0x20
 
 /* 047C0C 8006C80C 00000000 */  nop   
+
+.set reorder

@@ -37,3 +37,5 @@ DemoJoystickXY:
 /* 0FE638 802D9C88 24020002 */  addiu $v0, $zero, 2
 /* 0FE63C 802D9C8C 03E00008 */  jr    $ra
 /* 0FE640 802D9C90 27BD0028 */   addiu $sp, $sp, 0x28
+
+.set reorder

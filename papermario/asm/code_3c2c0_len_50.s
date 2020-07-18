@@ -33,3 +33,5 @@ osEPiLinkHandle:
 /* 03C304 80060F04 00000000 */  nop   
 /* 03C308 80060F08 00000000 */  nop   
 /* 03C30C 80060F0C 00000000 */  nop   
+
+.set reorder

@@ -39,3 +39,5 @@ osPfsRepairId:
 
 /* 0448B8 800694B8 00000000 */  nop   
 /* 0448BC 800694BC 00000000 */  nop   
+
+.set reorder

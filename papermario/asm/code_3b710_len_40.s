@@ -29,3 +29,5 @@ nuGfxSwapCfbFuncSet:
 
 /* 03B748 80060348 00000000 */  nop   
 /* 03B74C 8006034C 00000000 */  nop   
+
+.set reorder

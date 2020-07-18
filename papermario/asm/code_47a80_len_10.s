@@ -17,3 +17,5 @@ osSetCompare:
 /* 047A88 8006C688 00000000 */   nop   
 
 /* 047A8C 8006C68C 00000000 */  nop   
+
+.set reorder

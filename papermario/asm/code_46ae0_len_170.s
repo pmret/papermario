@@ -118,3 +118,5 @@ osEPiRawWriteIo:
 /* 046C44 8006B844 00000000 */  nop   
 /* 046C48 8006B848 00000000 */  nop   
 /* 046C4C 8006B84C 00000000 */  nop   
+
+.set reorder

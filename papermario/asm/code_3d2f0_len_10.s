@@ -17,3 +17,5 @@ sqrtf:
 
 /* 03D2F8 80061EF8 00000000 */  nop   
 /* 03D2FC 80061EFC 00000000 */  nop   
+
+.set reorder

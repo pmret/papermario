@@ -29,3 +29,5 @@ osViGetNextFramebuffer:
 
 /* 041E28 80066A28 00000000 */  nop   
 /* 041E2C 80066A2C 00000000 */  nop   
+
+.set reorder

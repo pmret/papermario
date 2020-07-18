@@ -1203,3 +1203,5 @@ step_pause_menu:
 
 /* 0103F8 80034FF8 00000000 */  nop   
 /* 0103FC 80034FFC 00000000 */  nop   
+
+.set reorder

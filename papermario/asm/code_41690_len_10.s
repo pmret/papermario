@@ -17,3 +17,5 @@ osGetActiveQueue:
 /* 041698 80066298 8C42465C */   lw    $v0, 0x465c($v0)
 
 /* 04169C 8006629C 00000000 */  nop   
+
+.set reorder

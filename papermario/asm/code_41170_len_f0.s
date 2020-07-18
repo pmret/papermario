@@ -78,3 +78,5 @@ osSiRelAccess:
 
 /* 041258 80065E58 00000000 */  nop   
 /* 04125C 80065E5C 00000000 */  nop   
+
+.set reorder

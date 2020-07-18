@@ -37,3 +37,5 @@ osEPiReadIo:
 
 /* 03C218 80060E18 00000000 */  nop   
 /* 03C21C 80060E1C 00000000 */  nop   
+
+.set reorder

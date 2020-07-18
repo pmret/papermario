@@ -421,3 +421,5 @@ guPerspective:
 
 /* 03F308 80063F08 00000000 */  nop   
 /* 03F30C 80063F0C 00000000 */  nop   
+
+.set reorder

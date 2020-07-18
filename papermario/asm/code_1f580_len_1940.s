@@ -1819,3 +1819,5 @@ GetSelfAnimationFromTable:
 /* 020EB4 80045AB4 00000000 */  nop   
 /* 020EB8 80045AB8 00000000 */  nop   
 /* 020EBC 80045ABC 00000000 */  nop   
+
+.set reorder

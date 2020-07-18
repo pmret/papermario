@@ -476,3 +476,5 @@ step_battle:
 /* 00F268 80033E68 00000000 */   nop   
 
 /* 00F26C 80033E6C 00000000 */  nop   
+
+.set reorder

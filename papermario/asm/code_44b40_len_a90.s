@@ -767,3 +767,5 @@ osPfsRWInode:
 /* 0455C4 8006A1C4 00000000 */  nop   
 /* 0455C8 8006A1C8 00000000 */  nop   
 /* 0455CC 8006A1CC 00000000 */  nop   
+
+.set reorder

@@ -21,3 +21,5 @@ osViGetCurrentContext:
 /* 047FB4 8006CBB4 00000000 */  nop   
 /* 047FB8 8006CBB8 00000000 */  nop   
 /* 047FBC 8006CBBC 00000000 */  nop   
+
+.set reorder

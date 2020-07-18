@@ -61,3 +61,5 @@ guScale:
 
 /* 042BB8 800677B8 00000000 */  nop   
 /* 042BBC 800677BC 00000000 */  nop   
+
+.set reorder

@@ -301,3 +301,5 @@ nuContDataUnLock:
 /* 03BD18 80060918 27BD0018 */   addiu $sp, $sp, 0x18
 
 /* 03BD1C 8006091C 00000000 */  nop   
+
+.set reorder

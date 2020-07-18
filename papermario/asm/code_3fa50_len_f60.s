@@ -1139,3 +1139,5 @@ osCreateMesgQueue:
 /* 0409A4 800655A4 00000000 */  nop   
 /* 0409A8 800655A8 00000000 */  nop   
 /* 0409AC 800655AC 00000000 */  nop   
+
+.set reorder

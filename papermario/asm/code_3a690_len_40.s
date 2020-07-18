@@ -29,3 +29,5 @@ nuGfxPreNMIFuncSet:
 
 /* 03A6C8 8005F2C8 00000000 */  nop   
 /* 03A6CC 8005F2CC 00000000 */  nop   
+
+.set reorder

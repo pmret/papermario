@@ -708,3 +708,5 @@ guLookAtHilite:
 
 /* 03E718 80063318 00000000 */  nop   
 /* 03E71C 8006331C 00000000 */  nop   
+
+.set reorder

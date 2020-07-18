@@ -58,3 +58,5 @@ osAiSetNextBuffer:
 /* 03CB14 80061714 00000000 */  nop   
 /* 03CB18 80061718 00000000 */  nop   
 /* 03CB1C 8006171C 00000000 */  nop   
+
+.set reorder

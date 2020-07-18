@@ -81,3 +81,5 @@ UpdateMusicPlayers:
 /* 0DDA5C 8014735C 8FB00010 */  lw    $s0, 0x10($sp)
 /* 0DDA60 80147360 03E00008 */  jr    $ra
 /* 0DDA64 80147364 27BD0018 */   addiu $sp, $sp, 0x18
+
+.set reorder

@@ -63,3 +63,5 @@ osSetIntMask:
 /* 03BDD4 800609D4 00000000 */  nop   
 /* 03BDD8 800609D8 03E00008 */  jr    $ra
 /* 03BDDC 800609DC 00000000 */   nop   
+
+.set reorder

@@ -90,3 +90,5 @@ nuGfxSetCfb:
 /* 03A7F8 8005F3F8 27BD0020 */   addiu $sp, $sp, 0x20
 
 /* 03A7FC 8005F3FC 00000000 */  nop   
+
+.set reorder

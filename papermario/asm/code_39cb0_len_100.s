@@ -81,3 +81,5 @@ boot_idle:
 /* 039DA4 8005E9A4 00000000 */  nop   
 /* 039DA8 8005E9A8 00000000 */  nop   
 /* 039DAC 8005E9AC 00000000 */  nop   
+
+.set reorder

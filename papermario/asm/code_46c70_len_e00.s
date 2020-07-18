@@ -1027,3 +1027,5 @@ osGetCause:
 /* 047A68 8006C668 00000000 */   nop   
 
 /* 047A6C 8006C66C 00000000 */  nop   
+
+.set reorder

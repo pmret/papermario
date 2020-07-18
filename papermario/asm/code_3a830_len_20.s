@@ -21,3 +21,5 @@ nuGfxDisplayOn:
 /* 03A844 8005F444 00000000 */  nop   
 /* 03A848 8005F448 00000000 */  nop   
 /* 03A84C 8005F44C 00000000 */  nop   
+
+.set reorder

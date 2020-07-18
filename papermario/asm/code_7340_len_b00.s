@@ -776,3 +776,5 @@ crash_create_monitor:
 /* 007E34 8002CA34 00000000 */  nop   
 /* 007E38 8002CA38 00000000 */  nop   
 /* 007E3C 8002CA3C 00000000 */  nop   
+
+.set reorder

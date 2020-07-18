@@ -215,3 +215,5 @@ guRotateAngles:
 /* 03F9E4 800645E4 00000000 */  nop   
 /* 03F9E8 800645E8 00000000 */  nop   
 /* 03F9EC 800645EC 00000000 */  nop   
+
+.set reorder

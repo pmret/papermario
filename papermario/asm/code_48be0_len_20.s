@@ -21,3 +21,5 @@ osSiDeviceBusy:
 
 /* 048BF8 8006D7F8 00000000 */  nop   
 /* 048BFC 8006D7FC 00000000 */  nop   
+
+.set reorder

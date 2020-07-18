@@ -30614,3 +30614,5 @@ draw_box:
 
 /* 090FD8 800F7B28 00000000 */  nop   
 /* 090FDC 800F7B2C 00000000 */  nop   
+
+.set reorder

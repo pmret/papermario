@@ -69,3 +69,5 @@ osStopThread:
 /* 0415F4 800661F4 00000000 */  nop   
 /* 0415F8 800661F8 00000000 */  nop   
 /* 0415FC 800661FC 00000000 */  nop   
+
+.set reorder

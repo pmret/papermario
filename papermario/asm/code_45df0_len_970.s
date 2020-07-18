@@ -690,3 +690,5 @@ osCleanupThread:
 /* 046754 8006B354 0C01B254 */  jal   osDestroyThread
 /* 046758 8006B358 00000000 */   nop   
 /* 04675C 8006B35C 00000000 */  nop   
+
+.set reorder

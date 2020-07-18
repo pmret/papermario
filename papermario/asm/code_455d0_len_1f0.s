@@ -148,3 +148,5 @@ osContRamRead:
 
 /* 0457B8 8006A3B8 00000000 */  nop   
 /* 0457BC 8006A3BC 00000000 */  nop   
+
+.set reorder

@@ -11543,3 +11543,5 @@ func_802AB2EC:
 /* 4200B4 802AB324 D7B40090 */  ldc1  $f20, 0x90($sp)
 /* 4200B8 802AB328 03E00008 */  jr    $ra
 /* 4200BC 802AB32C 27BD00A8 */   addiu $sp, $sp, 0xa8
+
+.set reorder
