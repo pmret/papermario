@@ -49,4 +49,3 @@ DemoJoystickRadial:
 /* 0FE5BC 802D9C0C 27BD0030 */   addiu $sp, $sp, 0x30
 
 .set reorder
-
