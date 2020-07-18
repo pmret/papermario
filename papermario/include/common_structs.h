@@ -6,8 +6,8 @@
 typedef struct {
     /* 0x00 */ char unk_00[0x68];
     /* 0x68 */ u16 demoButtonInput;
-    /* 0x6A */ u8 demoStickX;
-    /* 0x6B */ u8 demoStickY;
+    /* 0x6A */ s8 demoStickX;
+    /* 0x6B */ s8 demoStickY;
     /* 0x6C */ char unk_6C[0x5];
     /* 0x71 */ s8 demoState;
 } game_status;
