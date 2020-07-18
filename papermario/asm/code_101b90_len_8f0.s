@@ -665,3 +665,5 @@ func_802DF2D8:
 /* 102478 802DF388 27BD0020 */   addiu $sp, $sp, 0x20
 
 /* 10247C 802DF38C 00000000 */  nop   
+
+.set reorder

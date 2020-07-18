@@ -83,3 +83,5 @@ nuContRmbCheck:
 /* 03B384 8005FF84 00000000 */  nop   
 /* 03B388 8005FF88 00000000 */  nop   
 /* 03B38C 8005FF8C 00000000 */  nop   
+
+.set reorder

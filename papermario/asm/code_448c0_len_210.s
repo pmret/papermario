@@ -158,3 +158,5 @@ osPfsGetOneChannelData:
 /* 044AC4 800696C4 00000000 */  nop   
 /* 044AC8 800696C8 00000000 */  nop   
 /* 044ACC 800696CC 00000000 */  nop   
+
+.set reorder

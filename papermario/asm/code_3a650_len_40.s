@@ -29,3 +29,5 @@ nuGfxFuncSet:
 /* 03A688 8005F288 27BD0018 */   addiu $sp, $sp, 0x18
 
 /* 03A68C 8005F28C 00000000 */  nop   
+
+.set reorder

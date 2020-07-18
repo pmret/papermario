@@ -320,3 +320,5 @@ osInsertTimer:
 
 /* 041B98 80066798 00000000 */  nop   
 /* 041B9C 8006679C 00000000 */  nop   
+
+.set reorder

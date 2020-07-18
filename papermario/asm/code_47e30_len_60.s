@@ -37,3 +37,5 @@ osMapTLBRdb:
 
 /* 047E88 8006CA88 00000000 */  nop   
 /* 047E8C 8006CA8C 00000000 */  nop   
+
+.set reorder

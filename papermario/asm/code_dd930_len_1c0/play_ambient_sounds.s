@@ -40,3 +40,5 @@ play_ambient_sounds:
 /* 0DDAD8 801473D8 8FB00010 */  lw    $s0, 0x10($sp)
 /* 0DDADC 801473DC 03E00008 */  jr    $ra
 /* 0DDAE0 801473E0 27BD0018 */   addiu $sp, $sp, 0x18
+
+.set reorder

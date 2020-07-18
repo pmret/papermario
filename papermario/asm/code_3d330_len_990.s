@@ -641,3 +641,5 @@ guLookAt:
 /* 03DCB4 800628B4 00000000 */  nop   
 /* 03DCB8 800628B8 00000000 */  nop   
 /* 03DCBC 800628BC 00000000 */  nop   
+
+.set reorder

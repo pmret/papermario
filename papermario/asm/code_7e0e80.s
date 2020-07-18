@@ -4404,3 +4404,5 @@ SetPushBlockFallEffect:
 
 /* 7E4CF8 80283E78 00000000 */  nop   
 /* 7E4CFC 80283E7C 00000000 */  nop   
+
+.set reorder

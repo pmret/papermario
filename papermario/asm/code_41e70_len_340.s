@@ -235,3 +235,5 @@ viMgrMain:
 
 /* 0421A8 80066DA8 00000000 */  nop   
 /* 0421AC 80066DAC 00000000 */  nop   
+
+.set reorder

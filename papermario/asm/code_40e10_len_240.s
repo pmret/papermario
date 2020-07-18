@@ -172,3 +172,5 @@ osSpTaskStartGo:
 
 /* 041048 80065C48 00000000 */  nop   
 /* 04104C 80065C4C 00000000 */  nop   
+
+.set reorder

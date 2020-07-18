@@ -65,3 +65,5 @@ osProbeTLB:
 
 /* 041D18 80066918 00000000 */  nop   
 /* 041D1C 8006691C 00000000 */  nop   
+
+.set reorder

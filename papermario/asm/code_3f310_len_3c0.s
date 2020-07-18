@@ -255,3 +255,5 @@ guPosition:
 
 /* 03F6C8 800642C8 00000000 */  nop   
 /* 03F6CC 800642CC 00000000 */  nop   
+
+.set reorder

@@ -33,3 +33,5 @@ osViSetMode:
 /* 042258 80066E58 27BD0018 */   addiu $sp, $sp, 0x18
 
 /* 04225C 80066E5C 00000000 */  nop   
+
+.set reorder

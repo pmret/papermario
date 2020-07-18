@@ -29,3 +29,5 @@ osUnmapTLB:
 /* 041D58 80066958 00000000 */   nop   
 
 /* 041D5C 8006695C 00000000 */  nop   
+
+.set reorder

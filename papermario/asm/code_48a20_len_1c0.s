@@ -132,3 +132,5 @@ lldiv:
 
 /* 048BD8 8006D7D8 00000000 */  nop   
 /* 048BDC 8006D7DC 00000000 */  nop   
+
+.set reorder

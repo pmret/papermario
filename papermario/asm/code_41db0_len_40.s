@@ -29,3 +29,5 @@ osViGetCurrentFramebuffer:
 
 /* 041DE8 800669E8 00000000 */  nop   
 /* 041DEC 800669EC 00000000 */  nop   
+
+.set reorder

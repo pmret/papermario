@@ -517,3 +517,5 @@ update_input:
 /* 0042D4 80028ED4 00000000 */  nop   
 /* 0042D8 80028ED8 00000000 */  nop   
 /* 0042DC 80028EDC 00000000 */  nop   
+
+.set reorder

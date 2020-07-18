@@ -102,3 +102,5 @@ osInvalICache:
 /* 03CC44 80061844 00000000 */  nop   
 /* 03CC48 80061848 00000000 */  nop   
 /* 03CC4C 8006184C 00000000 */  nop   
+
+.set reorder

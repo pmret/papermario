@@ -872,3 +872,5 @@ func_8014AF8C:
 
 /* 0E16A8 8014AFA8 00000000 */  nop   
 /* 0E16AC 8014AFAC 00000000 */  nop   
+
+.set reorder

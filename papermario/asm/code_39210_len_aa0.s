@@ -750,3 +750,5 @@ get_npc_pos:
 
 /* 039CA8 8005E8A8 00000000 */  nop   
 /* 039CAC 8005E8AC 00000000 */  nop   
+
+.set reorder

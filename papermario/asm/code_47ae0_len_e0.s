@@ -82,3 +82,5 @@ osSpRawStartDma:
 /* 047BB8 8006C7B8 27BD0028 */   addiu $sp, $sp, 0x28
 
 /* 047BBC 8006C7BC 00000000 */  nop   
+
+.set reorder

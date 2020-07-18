@@ -178,3 +178,5 @@ osContRamWrite:
 /* 045A24 8006A624 00000000 */  nop   
 /* 045A28 8006A628 00000000 */  nop   
 /* 045A2C 8006A62C 00000000 */  nop   
+
+.set reorder

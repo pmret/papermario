@@ -88,3 +88,5 @@ osViInit:
 /* 047F94 8006CB94 00000000 */  nop   
 /* 047F98 8006CB98 00000000 */  nop   
 /* 047F9C 8006CB9C 00000000 */  nop   
+
+.set reorder

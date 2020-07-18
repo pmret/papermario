@@ -151,3 +151,5 @@ osGetCount:
 /* 040E08 80065A08 00000000 */   nop   
 
 /* 040E0C 80065A0C 00000000 */  nop   
+
+.set reorder

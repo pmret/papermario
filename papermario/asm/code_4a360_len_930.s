@@ -646,3 +646,5 @@ osFlashReadArray:
 /* 04AC88 8006F888 00000000 */   nop   
 
 /* 04AC8C 8006F88C 00000000 */  nop   
+
+.set reorder

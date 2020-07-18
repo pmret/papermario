@@ -258,3 +258,5 @@ osInitialize:
 
 /* 045DE8 8006A9E8 00000000 */  nop   
 /* 045DEC 8006A9EC 00000000 */  nop   
+
+.set reorder

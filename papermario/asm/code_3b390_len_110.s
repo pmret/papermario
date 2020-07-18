@@ -91,3 +91,5 @@ nuContRmbModeSet:
 /* 03B494 80060094 00000000 */  nop   
 /* 03B498 80060098 00000000 */  nop   
 /* 03B49C 8006009C 00000000 */  nop   
+
+.set reorder

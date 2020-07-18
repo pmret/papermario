@@ -79,3 +79,5 @@ guMtxCatF:
 /* 042AF4 800676F4 00000000 */  nop   
 /* 042AF8 800676F8 00000000 */  nop   
 /* 042AFC 800676FC 00000000 */  nop   
+
+.set reorder

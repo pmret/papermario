@@ -755,3 +755,5 @@ contRmbStartMesg:
 /* 03B284 8005FE84 00000000 */  nop   
 /* 03B288 8005FE88 00000000 */  nop   
 /* 03B28C 8005FE8C 00000000 */  nop   
+
+.set reorder

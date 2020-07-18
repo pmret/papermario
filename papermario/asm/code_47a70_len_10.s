@@ -17,3 +17,5 @@ osGetSR:
 /* 047A78 8006C678 00000000 */   nop   
 
 /* 047A7C 8006C67C 00000000 */  nop   
+
+.set reorder

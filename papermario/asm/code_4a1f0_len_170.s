@@ -115,3 +115,5 @@ decode_yay0:
 
 /* 04A358 8006EF58 03E00008 */  jr    $ra
 /* 04A35C 8006EF5C 00000000 */   nop   
+
+.set reorder

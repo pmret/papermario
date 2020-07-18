@@ -1349,3 +1349,5 @@ push_entity_matrix:
 /* 10A9E8 802E9168 27BD0028 */   addiu $sp, $sp, 0x28
 
 /* 10A9EC 802E916C 00000000 */  nop   
+
+.set reorder

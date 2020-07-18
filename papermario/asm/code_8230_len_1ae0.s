@@ -1850,3 +1850,5 @@ get_screen_coords:
 
 /* 009D08 8002E908 00000000 */  nop   
 /* 009D0C 8002E90C 00000000 */  nop   
+
+.set reorder

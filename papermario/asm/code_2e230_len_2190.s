@@ -2441,3 +2441,5 @@ al_CopyWords:
 /* 0303B8 80054FB8 00000000 */   nop   
 
 /* 0303BC 80054FBC 00000000 */  nop   
+
+.set reorder

@@ -222,3 +222,5 @@ osViSwapContext:
 
 /* 042778 80067378 00000000 */  nop   
 /* 04277C 8006737C 00000000 */  nop   
+
+.set reorder

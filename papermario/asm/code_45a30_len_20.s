@@ -21,3 +21,5 @@ osAfterPreNMI:
 /* 045A48 8006A648 27BD0018 */   addiu $sp, $sp, 0x18
 
 /* 045A4C 8006A64C 00000000 */  nop   
+
+.set reorder

@@ -112,3 +112,5 @@ osCartRomInit:
 
 /* 03C488 80061088 00000000 */  nop   
 /* 03C48C 8006108C 00000000 */  nop   
+
+.set reorder

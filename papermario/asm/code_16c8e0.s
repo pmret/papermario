@@ -75570,3 +75570,5 @@ func_802809C4:
 /* 1AF2B4 802809D4 8FB00010 */  lw    $s0, 0x10($sp)
 /* 1AF2B8 802809D8 24020002 */  addiu $v0, $zero, 2
 /* 1AF2BC 802809DC 03E00008 */  jr    $ra
+
+.set reorder

@@ -632,3 +632,5 @@ nuScWaitTaskReady:
 
 /* 03A648 8005F248 00000000 */  nop   
 /* 03A64C 8005F24C 00000000 */  nop   
+
+.set reorder

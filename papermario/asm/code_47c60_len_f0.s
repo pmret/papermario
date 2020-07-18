@@ -88,3 +88,5 @@ osContDataCrc:
 
 /* 047D48 8006C948 00000000 */  nop   
 /* 047D4C 8006C94C 00000000 */  nop   
+
+.set reorder
