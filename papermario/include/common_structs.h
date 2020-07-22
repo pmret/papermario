@@ -10,6 +10,8 @@ typedef struct {
     /* 0x6B */ s8 demoStickY;
     /* 0x6C */ char unk_6C[0x5];
     /* 0x71 */ s8 demoState;
+    /* 0x72 */ char unk_72[8];
+    /* 0x7A */ s8 audio_unk;
 } game_status;
 
 typedef struct {

@@ -506,7 +506,7 @@ def process_reloc(row, prev):
     if imm != "0":
         if before.strip() == "jal" and not imm.startswith("0x"):
             imm = "0x" + imm
-        repl += "+" + imm if int(imm, 0) > 0 else imm
+        repl += "+" + imm if int(imm, 16) > 0 else imm
     if "R_MIPS_LO16" in row:
         repl = f"%lo({repl})"
     elif "R_MIPS_HI16" in row:
