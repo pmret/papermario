@@ -824,17 +824,57 @@ SECTIONS
 
    /* 0x00000000 04E5A0-0759B0 [27410] */
    .data0004E5A0 0x0004E5A0 : AT(0x04E5A0) {
-      build/bin/papermario.04E5A0.bin_759b0_len_27410.o(.data);
+      build/bin/papermario.04E5A0.bin_4e5a0_len_27410.o(.data);
    }
 
-   /* 0x800DC500 0759B0-090FE0 [1B630] */
+   /* 0x800DC500 0759B0-07BB60 [61B0] */
    .text800DC500 0x800DC500 : AT(0x0759B0) {
-      build/asm/giantchunk.o(.text800DC500);
+      build/asm/code_759b0_len_61b0.o(.text800DC500);
+   }
+
+   /* 0x800E26B0 07BB60-07FD10 [41B0] */
+   .text800E26B0 0x800E26B0 : AT(0x07BB60) {
+      build/asm/code_7bb60_len_41b0.o(.text800E26B0);
+   }
+
+   /* 0x800E6860 07FD10-080850 [B40] */
+   .text800E6860 0x800E6860 : AT(0x07FD10) {
+      build/asm/code_7fd10_len_b40.o(.text800E6860);
+   }
+
+   /* 0x800E73A0 080850-0838B0 [3060] */
+   .text800E73A0 0x800E73A0 : AT(0x080850) {
+      build/asm/code_80850_len_3060.o(.text800E73A0);
+   }
+
+   /* 0x800EA400 0838B0-0891B0 [5900] */
+   .text800EA400 0x800EA400 : AT(0x0838B0) {
+      build/asm/code_838b0_len_5900.o(.text800EA400);
+   }
+
+   /* 0x800EFD00 0891B0-08A160 [FB0] */
+   .text800EFD00 0x800EFD00 : AT(0x0891B0) {
+      build/asm/code_891b0_len_fb0.o(.text800EFD00);
+   }
+
+   /* 0x800F0CB0 08A160-08A860 [700] */
+   .text800F0CB0 0x800F0CB0 : AT(0x08A160) {
+      build/asm/code_8a160_len_700.o(.text800F0CB0);
+   }
+
+   /* 0x800F13B0 08A860-08E790 [3F30] */
+   .text800F13B0 0x800F13B0 : AT(0x08A860) {
+      build/asm/code_8a860_len_3f30.o(.text800F13B0);
+   }
+
+   /* 0x800F52E0 08E790-090FE0 [2850] */
+   .text800F52E0 0x800F52E0 : AT(0x08E790) {
+      build/asm/code_8e790_len_2850.o(.text800F52E0);
    }
 
    /* 0x00000000 090FE0-0A5DD0 [14DF0] */
    .data00090FE0 0x00090FE0 : AT(0x090FE0) {
-      build/bin/papermario.090FE0.giantchunk_bin.o(.data);
+      build/bin/papermario.090FE0.bin_90fe0_len_14df0.o(.data);
    }
 
    /* 0x8010F6D0 0A5DD0-0B72B0 [114E0] */
@@ -899,7 +939,7 @@ SECTIONS
 
    /* 0x00000000 0E16B0-0E79B0 [6300] */
    .data000E16B0 0x000E16B0 : AT(0x0E16B0) {
-      build/bin/papermario.0E16B0.bin_e5dd0.o(.data);
+      build/bin/papermario.0E16B0.bin_e5dd0_len_6300.o(.data);
    }
 
    /* 0x802C3000 0E79B0-0E92D0 [1920] */
@@ -1002,17 +1042,17 @@ SECTIONS
       build/asm/code_163400.o(.text80242BA0);
    }
 
-   /* 0x00000000 16A3E0-16C8E0 [??] */
+   /* 0x00000000 16A3E0-16C8E0 [2500] */
    .data0016A3E0 0x0016A3E0 : AT(0x16A3E0) {
       build/bin/papermario.16A3E0.bin_16a3e0.o(.data);
    }
 
-   /* 0x8023E000 16C8E0-1AF2C0 [??] */
+   /* 0x8023E000 16C8E0-1AF2C0 [429E0] */
    .text8023E000 0x8023E000 : AT(0x16C8E0) {
       build/asm/code_16c8e0.o(.text8023E000);
    }
 
-   /* 0x00000000 1AF2C0-3169F0 [??] */
+   /* 0x00000000 1AF2C0-3169F0 [167730] */
    .data001AF2C0 0x001AF2C0 : AT(0x1AF2C0) {
       build/bin/papermario.1AF2C0.bin_1AF2C0.o(.data);
    }
@@ -1042,17 +1082,17 @@ SECTIONS
       build/src/code_316f30.o(.text);
    }
 
-   /* 0x00000000 317020-415D90 ?? */
+   /* 0x00000000 317020-415D90 [FED70] */
    .data00317020 0x00317020 : AT(0x317020) {
       build/bin/papermario.317020.bin_317020.o(.data);
    }
 
-   /* 0x802A1000 415D90-4200C0 ?? */
+   /* 0x802A1000 415D90-4200C0 [A330] */
    .text802A1000 0x802A1000 : AT(0x415D90) {
       build/asm/code_415D90.o(.text802A1000);
    }
 
-   /* 0x00000000 4200C0-7E0E80 ?? */
+   /* 0x00000000 4200C0-7E0E80 [3C0DC0] */
    .data004200C0 0x004200C0 : AT(0x4200C0) {
       build/bin/papermario.4200C0.bin_4200C0.o(.data);
    }
