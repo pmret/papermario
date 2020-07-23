@@ -57,8 +57,6 @@ def process_file(path):
             skip_next = False
             continue
         line = line.strip()
-        if "A4000658" in line:
-            dog = 5
 
         if line.endswith(":") and not line.startswith(".L"):
             func_preamble = line.startswith("func_")
@@ -69,9 +67,9 @@ def process_file(path):
                 # func_12345689
 
                 # Delete redundant label below
-                if file_lines[i + 1].strip() == ".L" + label[5:13] + ":":
-                    to_delete.append(i + 1)
-                    skip_next = True
+                # if file_lines[i + 1].strip() == ".L" + label[5:13] + ":":
+                #     to_delete.append(i + 1)
+                #     skip_next = True
 
                 if linked_al_to:
                     # Seems to be legit. Do nothing for now
