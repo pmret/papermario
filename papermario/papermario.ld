@@ -42,9 +42,14 @@ SECTIONS
       build/asm/code_3bf0_len_6f0.o(.text800287F0);
    }
 
-   /* 0x80028EE0 0042E0-006240 [1F60] */
+   /* 0x80028EE0 0042E0-006000 [1D20] */
    .text80028EE0 0x80028EE0 : AT(0x0042E0) {
       build/asm/code_42e0_len_1f60.o(.text80028EE0);
+   }
+
+   /* 0x8002AC00 006000-006240 [240] */
+   .text8002AC00 0x8002AC00 : AT(0x006000) {
+      build/asm/code_6000.o(.text8002AC00);
    }
 
    /* 0x8002AE40 006240-006E40 [C00] */
@@ -792,9 +797,14 @@ SECTIONS
       build/asm/code_48c00_len_5c0.o(.text8006D800);
    }
 
-   /* 0x8006DDC0 0491C0-04A140 [F80] */
+   /* 0x8006DDC0 0491C0-049C70 [AB0] */
    .text8006DDC0 0x8006DDC0 : AT(0x0491C0) {
       build/asm/code_491c0_len_f80.o(.text8006DDC0);
+   }
+
+   /* 0x8006E870 049C70-04A140 [4D0] */
+   .text8006E870 0x8006E870 : AT(0x049C70) {
+      build/asm/code_49C70.o(.text8006E870);
    }
 
    /* 0x8006ED40 04A140-04A1B0 [70] */
@@ -1037,9 +1047,24 @@ SECTIONS
       build/bin/papermario.10A9F0.bin_10A9F0.o(.data);
    }
 
-   /* 0x80242BA0 163400-16A3E0 [6FE0] */
+   /* 0x80242BA0 163400-167570 [4170] */
    .text80242BA0 0x80242BA0 : AT(0x163400) {
       build/asm/code_163400.o(.text80242BA0);
+   }
+
+   /* 0x80246D10 167570-168590 [1020] */
+   .text80246D10 0x80246D10 : AT(0x167570) {
+      build/asm/code_167570.o(.text80246D10);
+   }
+
+   /* 0x80247D30 168590-169BE0 [1650] */
+   .text80247D30 0x80247D30 : AT(0x168590) {
+      build/asm/code_168590.o(.text80247D30);
+   }
+
+   /* 0x80249380 169BE0-16A3E0 [800] */
+   .text80249380 0x80249380 : AT(0x169BE0) {
+      build/asm/code_169BE0.o(.text80249380);
    }
 
    /* 0x00000000 16A3E0-16C8E0 [2500] */
@@ -1097,9 +1122,19 @@ SECTIONS
       build/bin/papermario.4200C0.bin_4200C0.o(.data);
    }
 
-   /* 0x80280000 7E0E80-7E4D00 [3E80] */
+   /* 0x80280000 7E0E80-7E2AA0 [1C20] */
    .text80280000 0x80280000 : AT(0x7E0E80) {
       build/asm/code_7e0e80.o(.text80280000);
+   }
+
+   /* 0x80281C20 7E2AA0-7E3700 [C60] */
+   .text80281C20 0x80281C20 : AT(0x7E2AA0) {
+      build/asm/code_7E2AA0.o(.text80281C20);
+   }
+
+   /* 0x80282880 7E3700-7E4D00 [1600] */
+   .text80282880 0x80282880 : AT(0x7E3700) {
+      build/asm/code_7E3700.o(.text80282880);
    }
 
    /* 0x00000000 7E4D00-E20EB0 [63C1B0] */

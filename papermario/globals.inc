@@ -2246,6 +2246,10 @@
 .global func_802409F4
 .global func_80240AA8
 .global func_80241190
+.global func_80242D94
+.global func_80242BA0
+.global func_80242DEC
+.global func_80242E00
 .global func_802431A0
 .global func_80244060
 .global func_80244424
@@ -2253,6 +2257,9 @@
 .global func_802448E0
 .global func_80244B00
 .global func_80244BC4
+.global func_8024997C
+.global func_80249AA4
+.global func_80249AB8
 .global func_8024E40C
 .global func_80263268
 .global func_80263300
