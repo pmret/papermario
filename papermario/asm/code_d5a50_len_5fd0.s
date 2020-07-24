@@ -5545,6 +5545,7 @@ func_80144238:
 /* 0DA950 80144250 03E00008 */  jr    $ra
 /* 0DA954 80144254 27BD0018 */   addiu $sp, $sp, 0x18
 
+func_80144258:
 /* 0DA958 80144258 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0DA95C 8014425C 24050001 */  addiu $a1, $zero, 1
 /* 0DA960 80144260 AFBF0010 */  sw    $ra, 0x10($sp)
@@ -5554,6 +5555,7 @@ func_80144238:
 /* 0DA970 80144270 03E00008 */  jr    $ra
 /* 0DA974 80144274 27BD0018 */   addiu $sp, $sp, 0x18
 
+func_80144278:
 /* 0DA978 80144278 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0DA97C 8014427C 0000282D */  daddu $a1, $zero, $zero
 /* 0DA980 80144280 AFBF0010 */  sw    $ra, 0x10($sp)
