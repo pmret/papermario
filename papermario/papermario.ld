@@ -569,7 +569,7 @@ SECTIONS
 
    /* 0x800674A0 0428A0-042900 [60] */
    .text800674A0 0x800674A0 : AT(0x0428A0) {
-      build/asm/code_428a0_len_60.o(.text800674A0);
+      build/asm/guMtxIdentF.o(.text800674A0);
    }
 
    /* 0x80067500 042900-042980 [80] */
