@@ -384,7 +384,7 @@ SECTIONS
 
    /* 0x80063910 03ED10-03EF90 [600] */
    .text80063910 0x80063910 : AT(0x03ED10) {
-      build/asm/code_3ed10_len_600.o(.text80063910);
+      build/src/guOrtho.o(.text);
    }
 
    /* 0x80063B90 03EF90-03F310 [600] */
@@ -3125,11 +3125,5 @@ SECTIONS
    /* 0x00000000 27FEE22-2800000 [11DE] */
    .data027FEE22 0x027FEE22 : AT(0x27FEE22) {
       build/bin/papermario.27FEE22.bin_27fee22.o(.data);
-   }
-
-   /* Discard everything not specifically mentioned above. */
-   /DISCARD/ :
-   {
-      *(*);
    }
 }
