@@ -382,9 +382,14 @@ SECTIONS
       build/asm/code_3e720_len_5f0.o(.text80063320);
    }
 
-   /* 0x80063910 03ED10-03F310 [600] */
+   /* 0x80063910 03ED10-03EF90 [600] */
    .text80063910 0x80063910 : AT(0x03ED10) {
       build/asm/code_3ed10_len_600.o(.text80063910);
+   }
+
+   /* 0x80063B90 03EF90-03F310 [600] */
+   .text80063B90 0x80063B90 : AT(0x03EF90) {
+      build/asm/code_3ef90_len_600.o(.text80063B90);
    }
 
    /* 0x80063F10 03F310-03F6D0 [3C0] */
