@@ -69,7 +69,7 @@ osCreateViManager:
 /* 041F48 80066B48 0C0197D4 */  jal   osSetThreadPri
 /* 041F4C 80066B4C 02202821 */   addu  $a1, $s1, $zero
 .L80066B50:
-/* 041F50 80066B50 0C01ACD8 */  jal   osDisableInt
+/* 041F50 80066B50 0C01ACD8 */  jal   __osDisableInt
 /* 041F54 80066B54 00000000 */   nop   
 /* 041F58 80066B58 3C10800B */  lui   $s0, 0x800b
 /* 041F5C 80066B5C 2610F918 */  addiu $s0, $s0, -0x6e8
@@ -102,7 +102,7 @@ osCreateViManager:
 /* 041FC8 80066BC8 00000000 */   nop   
 /* 041FCC 80066BCC 0C019808 */  jal   osStartThread
 /* 041FD0 80066BD0 02002021 */   addu  $a0, $s0, $zero
-/* 041FD4 80066BD4 0C01ACF4 */  jal   osRestoreInt
+/* 041FD4 80066BD4 0C01ACF4 */  jal   __osRestoreInt
 /* 041FD8 80066BD8 02202021 */   addu  $a0, $s1, $zero
 /* 041FDC 80066BDC 2402FFFF */  addiu $v0, $zero, -1
 /* 041FE0 80066BE0 12420003 */  beq   $s2, $v0, .L80066BF0

@@ -18,7 +18,7 @@ osGetTime:
 /* 0416AC 800662AC AFB3001C */  sw    $s3, 0x1c($sp)
 /* 0416B0 800662B0 AFB20018 */  sw    $s2, 0x18($sp)
 /* 0416B4 800662B4 AFB10014 */  sw    $s1, 0x14($sp)
-/* 0416B8 800662B8 0C01ACD8 */  jal   osDisableInt
+/* 0416B8 800662B8 0C01ACD8 */  jal   __osDisableInt
 /* 0416BC 800662BC AFB00010 */   sw    $s0, 0x10($sp)
 /* 0416C0 800662C0 0C019680 */  jal   osGetCount
 /* 0416C4 800662C4 0040A021 */   addu  $s4, $v0, $zero
@@ -29,7 +29,7 @@ osGetTime:
 /* 0416D8 800662D8 3C13800A */  lui   $s3, 0x800a
 /* 0416DC 800662DC 8E73A60C */  lw    $s3, -0x59f4($s3)
 /* 0416E0 800662E0 02802021 */  addu  $a0, $s4, $zero
-/* 0416E4 800662E4 0C01ACF4 */  jal   osRestoreInt
+/* 0416E4 800662E4 0C01ACF4 */  jal   __osRestoreInt
 /* 0416E8 800662E8 00438023 */   subu  $s0, $v0, $v1
 /* 0416EC 800662EC 02008821 */  addu  $s1, $s0, $zero
 /* 0416F0 800662F0 00008021 */  addu  $s0, $zero, $zero

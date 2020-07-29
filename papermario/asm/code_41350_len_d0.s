@@ -18,7 +18,7 @@ osSetThreadPri:
 /* 04135C 80065F5C AFB10014 */  sw    $s1, 0x14($sp)
 /* 041360 80065F60 00A08821 */  addu  $s1, $a1, $zero
 /* 041364 80065F64 AFBF001C */  sw    $ra, 0x1c($sp)
-/* 041368 80065F68 0C01ACD8 */  jal   osDisableInt
+/* 041368 80065F68 0C01ACD8 */  jal   __osDisableInt
 /* 04136C 80065F6C AFB20018 */   sw    $s2, 0x18($sp)
 /* 041370 80065F70 16000003 */  bnez  $s0, .L80065F80
 /* 041374 80065F74 00409021 */   addu  $s2, $v0, $zero
@@ -57,7 +57,7 @@ osSetThreadPri:
 /* 0413F0 80065FF0 0C01AC1B */  jal   osEnqueueAndYield
 /* 0413F4 80065FF4 24844658 */   addiu $a0, $a0, 0x4658
 .L80065FF8:
-/* 0413F8 80065FF8 0C01ACF4 */  jal   osRestoreInt
+/* 0413F8 80065FF8 0C01ACF4 */  jal   __osRestoreInt
 /* 0413FC 80065FFC 02402021 */   addu  $a0, $s2, $zero
 /* 041400 80066000 8FBF001C */  lw    $ra, 0x1c($sp)
 /* 041404 80066004 8FB20018 */  lw    $s2, 0x18($sp)

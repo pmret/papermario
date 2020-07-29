@@ -22,7 +22,7 @@ osJamMesg:
 /* 0409CC 800655CC AFBF0028 */  sw    $ra, 0x28($sp)
 /* 0409D0 800655D0 AFB40020 */  sw    $s4, 0x20($sp)
 /* 0409D4 800655D4 AFB3001C */  sw    $s3, 0x1c($sp)
-/* 0409D8 800655D8 0C01ACD8 */  jal   osDisableInt
+/* 0409D8 800655D8 0C01ACD8 */  jal   __osDisableInt
 /* 0409DC 800655DC AFB10014 */   sw    $s1, 0x14($sp)
 /* 0409E0 800655E0 8E030008 */  lw    $v1, 8($s0)
 /* 0409E4 800655E4 8E040010 */  lw    $a0, 0x10($s0)
@@ -34,7 +34,7 @@ osJamMesg:
 .L800655FC:
 /* 0409FC 800655FC 12540005 */  beq   $s2, $s4, .L80065614
 /* 040A00 80065600 26040004 */   addiu $a0, $s0, 4
-/* 040A04 80065604 0C01ACF4 */  jal   osRestoreInt
+/* 040A04 80065604 0C01ACF4 */  jal   __osRestoreInt
 /* 040A08 80065608 02202021 */   addu  $a0, $s1, $zero
 /* 040A0C 8006560C 080195B0 */  j     .L800656C0
 /* 040A10 80065610 2402FFFF */   addiu $v0, $zero, -1
@@ -84,7 +84,7 @@ osJamMesg:
 /* 040AAC 800656AC 0C019808 */  jal   osStartThread
 /* 040AB0 800656B0 00402021 */   addu  $a0, $v0, $zero
 .L800656B4:
-/* 040AB4 800656B4 0C01ACF4 */  jal   osRestoreInt
+/* 040AB4 800656B4 0C01ACF4 */  jal   __osRestoreInt
 /* 040AB8 800656B8 02202021 */   addu  $a0, $s1, $zero
 /* 040ABC 800656BC 00001021 */  addu  $v0, $zero, $zero
 .L800656C0:

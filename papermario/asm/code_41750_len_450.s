@@ -36,7 +36,7 @@ osSetTimer:
 /* 0417A4 800663A4 AE030014 */  sw    $v1, 0x14($s0)
 /* 0417A8 800663A8 AE040018 */  sw    $a0, 0x18($s0)
 .L800663AC:
-/* 0417AC 800663AC 0C01ACD8 */  jal   osDisableInt
+/* 0417AC 800663AC 0C01ACD8 */  jal   __osDisableInt
 /* 0417B0 800663B0 AE05001C */   sw    $a1, 0x1c($s0)
 /* 0417B4 800663B4 3C038009 */  lui   $v1, 0x8009
 /* 0417B8 800663B8 8C634670 */  lw    $v1, 0x4670($v1)
@@ -84,7 +84,7 @@ osSetTimer:
 /* 04184C 8006644C 8C440010 */  lw    $a0, 0x10($v0)
 /* 041850 80066450 0C019984 */  jal   osSetTimerIntr
 /* 041854 80066454 8C450014 */   lw    $a1, 0x14($v0)
-/* 041858 80066458 0C01ACF4 */  jal   osRestoreInt
+/* 041858 80066458 0C01ACF4 */  jal   __osRestoreInt
 /* 04185C 8006645C 02402021 */   addu  $a0, $s2, $zero
 /* 041860 80066460 00001021 */  addu  $v0, $zero, $zero
 /* 041864 80066464 8FBF001C */  lw    $ra, 0x1c($sp)
@@ -226,7 +226,7 @@ osSetTimerIntr:
 /* 041A40 80066640 24120000 */  addiu $s2, $zero, 0
 /* 041A44 80066644 241301D4 */  addiu $s3, $zero, 0x1d4
 .L80066648:
-/* 041A48 80066648 0C01ACD8 */  jal   osDisableInt
+/* 041A48 80066648 0C01ACD8 */  jal   __osDisableInt
 /* 041A4C 8006664C 00000000 */   nop   
 /* 041A50 80066650 0C019680 */  jal   osGetCount
 /* 041A54 80066654 00408021 */   addu  $s0, $v0, $zero
@@ -236,7 +236,7 @@ osSetTimerIntr:
 /* 041A64 80066664 00002021 */  addu  $a0, $zero, $zero
 /* 041A68 80066668 0C01B1A0 */  jal   osSetCompare
 /* 041A6C 8006666C 02652021 */   addu  $a0, $s3, $a1
-/* 041A70 80066670 0C01ACF4 */  jal   osRestoreInt
+/* 041A70 80066670 0C01ACF4 */  jal   __osRestoreInt
 /* 041A74 80066674 02002021 */   addu  $a0, $s0, $zero
 /* 041A78 80066678 8FBF0024 */  lw    $ra, 0x24($sp)
 /* 041A7C 8006667C 8FB30020 */  lw    $s3, 0x20($sp)
@@ -251,7 +251,7 @@ osInsertTimer:
 /* 041A98 80066698 00809021 */  addu  $s2, $a0, $zero
 /* 041A9C 8006669C AFBF001C */  sw    $ra, 0x1c($sp)
 /* 041AA0 800666A0 AFB10014 */  sw    $s1, 0x14($sp)
-/* 041AA4 800666A4 0C01ACD8 */  jal   osDisableInt
+/* 041AA4 800666A4 0C01ACD8 */  jal   __osDisableInt
 /* 041AA8 800666A8 AFB00010 */   sw    $s0, 0x10($sp)
 /* 041AAC 800666AC 3C038009 */  lui   $v1, 0x8009
 /* 041AB0 800666B0 8C634670 */  lw    $v1, 0x4670($v1)
@@ -307,7 +307,7 @@ osInsertTimer:
 /* 041B64 80066764 8CC20004 */  lw    $v0, 4($a2)
 /* 041B68 80066768 00E02021 */  addu  $a0, $a3, $zero
 /* 041B6C 8006676C AC520000 */  sw    $s2, ($v0)
-/* 041B70 80066770 0C01ACF4 */  jal   osRestoreInt
+/* 041B70 80066770 0C01ACF4 */  jal   __osRestoreInt
 /* 041B74 80066774 ACD20004 */   sw    $s2, 4($a2)
 /* 041B78 80066778 02001021 */  addu  $v0, $s0, $zero
 /* 041B7C 8006677C 02201821 */  addu  $v1, $s1, $zero

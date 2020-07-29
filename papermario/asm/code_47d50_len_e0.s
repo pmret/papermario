@@ -16,7 +16,7 @@ osDestroyThread:
 /* 047D54 8006C954 AFB00010 */  sw    $s0, 0x10($sp)
 /* 047D58 8006C958 00808021 */  addu  $s0, $a0, $zero
 /* 047D5C 8006C95C AFBF0018 */  sw    $ra, 0x18($sp)
-/* 047D60 8006C960 0C01ACD8 */  jal   osDisableInt
+/* 047D60 8006C960 0C01ACD8 */  jal   __osDisableInt
 /* 047D64 8006C964 AFB10014 */   sw    $s1, 0x14($sp)
 /* 047D68 8006C968 16000004 */  bnez  $s0, .L8006C97C
 /* 047D6C 8006C96C 00408821 */   addu  $s1, $v0, $zero
@@ -69,7 +69,7 @@ osDestroyThread:
 /* 047E04 8006CA04 0C01AC75 */  jal   osDispatchThread
 /* 047E08 8006CA08 00000000 */   nop   
 .L8006CA0C:
-/* 047E0C 8006CA0C 0C01ACF4 */  jal   osRestoreInt
+/* 047E0C 8006CA0C 0C01ACF4 */  jal   __osRestoreInt
 /* 047E10 8006CA10 02202021 */   addu  $a0, $s1, $zero
 /* 047E14 8006CA14 8FBF0018 */  lw    $ra, 0x18($sp)
 /* 047E18 8006CA18 8FB10014 */  lw    $s1, 0x14($sp)

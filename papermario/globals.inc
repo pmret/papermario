@@ -480,8 +480,8 @@
 .global osDispatchThread
 .global osDispatchThreadSave
 .global osCleanupThread
-.global osDisableInt
-.global osRestoreInt
+.global __osDisableInt
+.global __osRestoreInt
 .global osSetGlobalIntMask
 .global osResetGlobalIntMask
 .global osPiRawStartDma

@@ -16,7 +16,7 @@ osStopThread:
 /* 041544 80066144 AFB00010 */  sw    $s0, 0x10($sp)
 /* 041548 80066148 00808021 */  addu  $s0, $a0, $zero
 /* 04154C 8006614C AFBF0018 */  sw    $ra, 0x18($sp)
-/* 041550 80066150 0C01ACD8 */  jal   osDisableInt
+/* 041550 80066150 0C01ACD8 */  jal   __osDisableInt
 /* 041554 80066154 AFB10014 */   sw    $s1, 0x14($sp)
 /* 041558 80066158 24030004 */  addiu $v1, $zero, 4
 /* 04155C 8006615C 12000002 */  beqz  $s0, .L80066168
@@ -58,7 +58,7 @@ osStopThread:
 /* 0415D0 800661D0 0C019880 */  jal   osDequeueThread
 /* 0415D4 800661D4 A6020010 */   sh    $v0, 0x10($s0)
 .L800661D8:
-/* 0415D8 800661D8 0C01ACF4 */  jal   osRestoreInt
+/* 0415D8 800661D8 0C01ACF4 */  jal   __osRestoreInt
 /* 0415DC 800661DC 02202021 */   addu  $a0, $s1, $zero
 /* 0415E0 800661E0 8FBF0018 */  lw    $ra, 0x18($sp)
 /* 0415E4 800661E4 8FB10014 */  lw    $s1, 0x14($sp)

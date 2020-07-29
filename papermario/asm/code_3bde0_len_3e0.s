@@ -61,7 +61,7 @@ osCreatePiManager:
 /* 03BE94 80060A94 0C0197D4 */  jal   osSetThreadPri
 /* 03BE98 80060A98 02002821 */   addu  $a1, $s0, $zero
 .L80060A9C:
-/* 03BE9C 80060A9C 0C01ACD8 */  jal   osDisableInt
+/* 03BE9C 80060A9C 0C01ACD8 */  jal   __osDisableInt
 /* 03BEA0 80060AA0 00000000 */   nop   
 /* 03BEA4 80060AA4 3C11800B */  lui   $s1, 0x800b
 /* 03BEA8 80060AA8 2631E6E0 */  addiu $s1, $s1, -0x1920
@@ -98,7 +98,7 @@ osCreatePiManager:
 /* 03BF24 80060B24 AFA30010 */   sw    $v1, 0x10($sp)
 /* 03BF28 80060B28 0C019808 */  jal   osStartThread
 /* 03BF2C 80060B2C 02202021 */   addu  $a0, $s1, $zero
-/* 03BF30 80060B30 0C01ACF4 */  jal   osRestoreInt
+/* 03BF30 80060B30 0C01ACF4 */  jal   __osRestoreInt
 /* 03BF34 80060B34 02002021 */   addu  $a0, $s0, $zero
 /* 03BF38 80060B38 2402FFFF */  addiu $v0, $zero, -1
 /* 03BF3C 80060B3C 12420003 */  beq   $s2, $v0, .L80060B4C

@@ -15,7 +15,7 @@ osViSetMode:
 /* 042210 80066E10 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 042214 80066E14 AFB00010 */  sw    $s0, 0x10($sp)
 /* 042218 80066E18 AFBF0014 */  sw    $ra, 0x14($sp)
-/* 04221C 80066E1C 0C01ACD8 */  jal   osDisableInt
+/* 04221C 80066E1C 0C01ACD8 */  jal   __osDisableInt
 /* 042220 80066E20 00808021 */   addu  $s0, $a0, $zero
 /* 042224 80066E24 3C048009 */  lui   $a0, 0x8009
 /* 042228 80066E28 8C8459D4 */  lw    $a0, 0x59d4($a0)
@@ -25,7 +25,7 @@ osViSetMode:
 /* 042238 80066E38 A4830000 */  sh    $v1, ($a0)
 /* 04223C 80066E3C 8CA30004 */  lw    $v1, 4($a1)
 /* 042240 80066E40 AC83000C */  sw    $v1, 0xc($a0)
-/* 042244 80066E44 0C01ACF4 */  jal   osRestoreInt
+/* 042244 80066E44 0C01ACF4 */  jal   __osRestoreInt
 /* 042248 80066E48 00402021 */   addu  $a0, $v0, $zero
 /* 04224C 80066E4C 8FBF0014 */  lw    $ra, 0x14($sp)
 /* 042250 80066E50 8FB00010 */  lw    $s0, 0x10($sp)

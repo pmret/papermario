@@ -15,7 +15,7 @@ osViBlack:
 /* 042780 80067380 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 042784 80067384 AFB00010 */  sw    $s0, 0x10($sp)
 /* 042788 80067388 AFBF0014 */  sw    $ra, 0x14($sp)
-/* 04278C 8006738C 0C01ACD8 */  jal   osDisableInt
+/* 04278C 8006738C 0C01ACD8 */  jal   __osDisableInt
 /* 042790 80067390 00808021 */   addu  $s0, $a0, $zero
 /* 042794 80067394 321000FF */  andi  $s0, $s0, 0xff
 /* 042798 80067398 12000006 */  beqz  $s0, .L800673B4
@@ -32,7 +32,7 @@ osViBlack:
 /* 0427BC 800673BC 94620000 */  lhu   $v0, ($v1)
 /* 0427C0 800673C0 3042FFDF */  andi  $v0, $v0, 0xffdf
 .L800673C4:
-/* 0427C4 800673C4 0C01ACF4 */  jal   osRestoreInt
+/* 0427C4 800673C4 0C01ACF4 */  jal   __osRestoreInt
 /* 0427C8 800673C8 A4620000 */   sh    $v0, ($v1)
 /* 0427CC 800673CC 8FBF0014 */  lw    $ra, 0x14($sp)
 /* 0427D0 800673D0 8FB00010 */  lw    $s0, 0x10($sp)
@@ -44,7 +44,7 @@ osViRepeatLine:
 /* 0427E0 800673E0 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0427E4 800673E4 AFB00010 */  sw    $s0, 0x10($sp)
 /* 0427E8 800673E8 AFBF0014 */  sw    $ra, 0x14($sp)
-/* 0427EC 800673EC 0C01ACD8 */  jal   osDisableInt
+/* 0427EC 800673EC 0C01ACD8 */  jal   __osDisableInt
 /* 0427F0 800673F0 00808021 */   addu  $s0, $a0, $zero
 /* 0427F4 800673F4 321000FF */  andi  $s0, $s0, 0xff
 /* 0427F8 800673F8 12000006 */  beqz  $s0, .L80067414
@@ -61,7 +61,7 @@ osViRepeatLine:
 /* 04281C 8006741C 94620000 */  lhu   $v0, ($v1)
 /* 042820 80067420 3042FFBF */  andi  $v0, $v0, 0xffbf
 .L80067424:
-/* 042824 80067424 0C01ACF4 */  jal   osRestoreInt
+/* 042824 80067424 0C01ACF4 */  jal   __osRestoreInt
 /* 042828 80067428 A4620000 */   sh    $v0, ($v1)
 /* 04282C 8006742C 8FBF0014 */  lw    $ra, 0x14($sp)
 /* 042830 80067430 8FB00010 */  lw    $s0, 0x10($sp)

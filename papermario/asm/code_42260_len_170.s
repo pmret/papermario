@@ -15,7 +15,7 @@ osViSetSpecialFeatures:
 /* 042260 80066E60 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 042264 80066E64 AFB00010 */  sw    $s0, 0x10($sp)
 /* 042268 80066E68 AFBF0014 */  sw    $ra, 0x14($sp)
-/* 04226C 80066E6C 0C01ACD8 */  jal   osDisableInt
+/* 04226C 80066E6C 0C01ACD8 */  jal   __osDisableInt
 /* 042270 80066E70 00808021 */   addu  $s0, $a0, $zero
 /* 042274 80066E74 00403021 */  addu  $a2, $v0, $zero
 /* 042278 80066E78 32020001 */  andi  $v0, $s0, 1
@@ -103,7 +103,7 @@ osViSetSpecialFeatures:
 /* 0423A0 80066FA0 94620000 */  lhu   $v0, ($v1)
 /* 0423A4 80066FA4 00C02021 */  addu  $a0, $a2, $zero
 /* 0423A8 80066FA8 34420008 */  ori   $v0, $v0, 8
-/* 0423AC 80066FAC 0C01ACF4 */  jal   osRestoreInt
+/* 0423AC 80066FAC 0C01ACF4 */  jal   __osRestoreInt
 /* 0423B0 80066FB0 A4620000 */   sh    $v0, ($v1)
 /* 0423B4 80066FB4 8FBF0014 */  lw    $ra, 0x14($sp)
 /* 0423B8 80066FB8 8FB00010 */  lw    $s0, 0x10($sp)

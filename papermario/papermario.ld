@@ -444,7 +444,12 @@ SECTIONS
 
    /* 0x80065E60 041260-041350 [F0] */
    .text80065E60 0x80065E60 : AT(0x041260) {
-      build/asm/code_41260_len_f0.o(.text80065E60);
+      build/asm/osCreateThread.o(.text80065E60);
+   }
+
+   /* 0x80065F30 041330-041350 [F0] */
+   .text80065F30 0x80065F30 : AT(0x041330) {
+      build/asm/osGetThreadPri.o(.text80065F30);
    }
 
    /* 0x80065F50 041350-041420 [D0] */

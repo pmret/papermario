@@ -8,7 +8,6 @@
 
 .include "globals.inc"
 
-
 .section .text80065E60, "ax"
 
 osCreateThread:
@@ -51,30 +50,18 @@ osCreateThread:
 /* 0412F0 80065EF0 254AFFFF */  addiu $t2, $t2, -1
 /* 0412F4 80065EF4 01425021 */  addu  $t2, $t2, $v0
 /* 0412F8 80065EF8 AE0A00F0 */  sw    $t2, 0xf0($s0)
-/* 0412FC 80065EFC 0C01ACD8 */  jal   osDisableInt
+/* 0412FC 80065EFC 0C01ACD8 */  jal   __osDisableInt
 /* 041300 80065F00 AE0B00F4 */   sw    $t3, 0xf4($s0)
 /* 041304 80065F04 3C038009 */  lui   $v1, 0x8009
 /* 041308 80065F08 8C63465C */  lw    $v1, 0x465c($v1)
 /* 04130C 80065F0C 00402021 */  addu  $a0, $v0, $zero
 /* 041310 80065F10 3C018009 */  lui   $at, 0x8009
 /* 041314 80065F14 AC30465C */  sw    $s0, 0x465c($at)
-/* 041318 80065F18 0C01ACF4 */  jal   osRestoreInt
+/* 041318 80065F18 0C01ACF4 */  jal   __osRestoreInt
 /* 04131C 80065F1C AE03000C */   sw    $v1, 0xc($s0)
 /* 041320 80065F20 8FBF0014 */  lw    $ra, 0x14($sp)
 /* 041324 80065F24 8FB00010 */  lw    $s0, 0x10($sp)
 /* 041328 80065F28 03E00008 */  jr    $ra
 /* 04132C 80065F2C 27BD0018 */   addiu $sp, $sp, 0x18
-
-osGetThreadPri:
-/* 041330 80065F30 14800003 */  bnez  $a0, .L80065F40
-/* 041334 80065F34 00000000 */   nop   
-/* 041338 80065F38 3C048009 */  lui   $a0, 0x8009
-/* 04133C 80065F3C 8C844660 */  lw    $a0, 0x4660($a0)
-.L80065F40:
-/* 041340 80065F40 03E00008 */  jr    $ra
-/* 041344 80065F44 8C820004 */   lw    $v0, 4($a0)
-
-/* 041348 80065F48 00000000 */  nop   
-/* 04134C 80065F4C 00000000 */  nop   
 
 .set reorder

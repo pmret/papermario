@@ -22,7 +22,7 @@ osSendMesg:
 /* 040C3C 8006583C AFBF0028 */  sw    $ra, 0x28($sp)
 /* 040C40 80065840 AFB40020 */  sw    $s4, 0x20($sp)
 /* 040C44 80065844 AFB3001C */  sw    $s3, 0x1c($sp)
-/* 040C48 80065848 0C01ACD8 */  jal   osDisableInt
+/* 040C48 80065848 0C01ACD8 */  jal   __osDisableInt
 /* 040C4C 8006584C AFB10014 */   sw    $s1, 0x14($sp)
 /* 040C50 80065850 8E030008 */  lw    $v1, 8($s0)
 /* 040C54 80065854 8E040010 */  lw    $a0, 0x10($s0)
@@ -34,7 +34,7 @@ osSendMesg:
 .L8006586C:
 /* 040C6C 8006586C 12540005 */  beq   $s2, $s4, .L80065884
 /* 040C70 80065870 26040004 */   addiu $a0, $s0, 4
-/* 040C74 80065874 0C01ACF4 */  jal   osRestoreInt
+/* 040C74 80065874 0C01ACF4 */  jal   __osRestoreInt
 /* 040C78 80065878 02202021 */   addu  $a0, $s1, $zero
 /* 040C7C 8006587C 0801964B */  j     .L8006592C
 /* 040C80 80065880 2402FFFF */   addiu $v0, $zero, -1
@@ -83,7 +83,7 @@ osSendMesg:
 /* 040D18 80065918 0C019808 */  jal   osStartThread
 /* 040D1C 8006591C 00402021 */   addu  $a0, $v0, $zero
 .L80065920:
-/* 040D20 80065920 0C01ACF4 */  jal   osRestoreInt
+/* 040D20 80065920 0C01ACF4 */  jal   __osRestoreInt
 /* 040D24 80065924 02202021 */   addu  $a0, $s1, $zero
 /* 040D28 80065928 00001021 */  addu  $v0, $zero, $zero
 .L8006592C:
@@ -106,7 +106,7 @@ osSetEventMesg:
 /* 040D64 80065964 AFB20018 */  sw    $s2, 0x18($sp)
 /* 040D68 80065968 00C09021 */  addu  $s2, $a2, $zero
 /* 040D6C 8006596C AFBF0020 */  sw    $ra, 0x20($sp)
-/* 040D70 80065970 0C01ACD8 */  jal   osDisableInt
+/* 040D70 80065970 0C01ACD8 */  jal   __osDisableInt
 /* 040D74 80065974 AFB3001C */   sw    $s3, 0x1c($sp)
 /* 040D78 80065978 001018C0 */  sll   $v1, $s0, 3
 /* 040D7C 8006597C 3C04800E */  lui   $a0, 0x800e
@@ -134,7 +134,7 @@ osSetEventMesg:
 /* 040DD0 800659D0 3C018009 */  lui   $at, 0x8009
 /* 040DD4 800659D4 AC224630 */  sw    $v0, 0x4630($at)
 .L800659D8:
-/* 040DD8 800659D8 0C01ACF4 */  jal   osRestoreInt
+/* 040DD8 800659D8 0C01ACF4 */  jal   __osRestoreInt
 /* 040DDC 800659DC 02602021 */   addu  $a0, $s3, $zero
 /* 040DE0 800659E0 8FBF0020 */  lw    $ra, 0x20($sp)
 /* 040DE4 800659E4 8FB3001C */  lw    $s3, 0x1c($sp)

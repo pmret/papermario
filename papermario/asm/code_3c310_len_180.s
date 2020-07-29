@@ -90,14 +90,14 @@ osCartRomInit:
 /* 03C434 80061034 A022430F */  sb    $v0, 0x430f($at)
 /* 03C438 80061038 3C01800B */  lui   $at, 0x800b
 /* 03C43C 8006103C A0234310 */  sb    $v1, 0x4310($at)
-/* 03C440 80061040 0C01ACD8 */  jal   osDisableInt
+/* 03C440 80061040 0C01ACD8 */  jal   __osDisableInt
 /* 03C444 80061044 2630FFF4 */   addiu $s0, $s1, -0xc
 /* 03C448 80061048 3C038009 */  lui   $v1, 0x8009
 /* 03C44C 8006104C 8C633D6C */  lw    $v1, 0x3d6c($v1)
 /* 03C450 80061050 00402021 */  addu  $a0, $v0, $zero
 /* 03C454 80061054 3C018009 */  lui   $at, 0x8009
 /* 03C458 80061058 AC303D6C */  sw    $s0, 0x3d6c($at)
-/* 03C45C 8006105C 0C01ACF4 */  jal   osRestoreInt
+/* 03C45C 8006105C 0C01ACF4 */  jal   __osRestoreInt
 /* 03C460 80061060 AE23FFF4 */   sw    $v1, -0xc($s1)
 .L80061064:
 /* 03C464 80061064 0C018544 */  jal   osPiRelAccess
