@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text800694C0, "ax"
 
-osPfsGetStatus:
+glabel osPfsGetStatus
 /* 0448C0 800694C0 27BDFFC8 */  addiu $sp, $sp, -0x38
 /* 0448C4 800694C4 AFB20028 */  sw    $s2, 0x28($sp)
 /* 0448C8 800694C8 00809021 */  addu  $s2, $a0, $zero
@@ -77,7 +77,7 @@ osPfsGetStatus:
 /* 0449A8 800695A8 03E00008 */  jr    $ra
 /* 0449AC 800695AC 27BD0038 */   addiu $sp, $sp, 0x38
 
-osPfsRequestOneChannel:
+glabel osPfsRequestOneChannel
 /* 0449B0 800695B0 27BDFFF0 */  addiu $sp, $sp, -0x10
 /* 0449B4 800695B4 3C03800E */  lui   $v1, 0x800e
 /* 0449B8 800695B8 2463A03C */  addiu $v1, $v1, -0x5fc4
@@ -118,7 +118,7 @@ osPfsRequestOneChannel:
 /* 044A3C 8006963C 03E00008 */  jr    $ra
 /* 044A40 80069640 27BD0010 */   addiu $sp, $sp, 0x10
 
-osPfsGetOneChannelData:
+glabel osPfsGetOneChannelData
 /* 044A44 80069644 27BDFFF0 */  addiu $sp, $sp, -0x10
 /* 044A48 80069648 00A03821 */  addu  $a3, $a1, $zero
 /* 044A4C 8006964C 3C06800E */  lui   $a2, 0x800e

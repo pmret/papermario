@@ -1,9 +1,9 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "globals.inc"
+.include "include/macro.inc"
 
-load_engine_data:
+glabel load_engine_data
 /* 0021DC 80026DDC 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0021E0 80026DE0 3C040010 */  lui   $a0, 0x10
 /* 0021E4 80026DE4 2484EE30 */  addiu $a0, $a0, -0x11d0

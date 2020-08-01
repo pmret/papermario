@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text8006E870, "ax"
 
-func_8006E870:
+glabel func_8006E870
 /* 049C70 8006E870 27BDFFF8 */  addiu $sp, $sp, -8
 /* 049C74 8006E874 00E0402D */  daddu $t0, $a3, $zero
 /* 049C78 8006E878 00C0482D */  daddu $t1, $a2, $zero

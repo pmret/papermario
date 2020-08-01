@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80061720, "ax"
 
-osInvalDCache:
+glabel osInvalDCache
 /* 03CB20 80061720 18A00020 */  blez  $a1, .L800617A4
 /* 03CB24 80061724 00000000 */   nop   
 /* 03CB28 80061728 240B2000 */  addiu $t3, $zero, 0x2000
@@ -63,7 +63,7 @@ osInvalDCache:
 /* 03CBC8 800617C8 03E00008 */  jr    $ra
 /* 03CBCC 800617CC 00000000 */   nop   
 
-osInvalICache:
+glabel osInvalICache
 /* 03CBD0 800617D0 18A00011 */  blez  $a1, .L80061818
 /* 03CBD4 800617D4 00000000 */   nop   
 /* 03CBD8 800617D8 240B4000 */  addiu $t3, $zero, 0x4000

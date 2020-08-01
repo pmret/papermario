@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text800656F0, "ax"
 
-osRecvMesg:
+glabel osRecvMesg
 /* 040AF0 800656F0 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 040AF4 800656F4 AFB00010 */  sw    $s0, 0x10($sp)
 /* 040AF8 800656F8 00808021 */  addu  $s0, $a0, $zero

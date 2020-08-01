@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text8002BA40, "ax"
 
-func_8002BA40:
+glabel func_8002BA40
 /* 006E40 8002BA40 3C014000 */  lui   $at, 0x4000
 /* 006E44 8002BA44 44810000 */  mtc1  $at, $f0
 /* 006E48 8002BA48 3C01800A */  lui   $at, 0x800a
@@ -27,11 +27,11 @@ func_8002BA40:
 /* 006E70 8002BA70 03E00008 */  jr    $ra
 /* 006E74 8002BA74 00000000 */   nop   
 
-func_8002BA78:
+glabel func_8002BA78
 /* 006E78 8002BA78 03E00008 */  jr    $ra
 /* 006E7C 8002BA7C 00000000 */   nop   
 
-func_8002BA80:
+glabel func_8002BA80
 /* 006E80 8002BA80 3C01800A */  lui   $at, 0x800a
 /* 006E84 8002BA84 C420BA94 */  lwc1  $f0, -0x456c($at)
 /* 006E88 8002BA88 27BDFF78 */  addiu $sp, $sp, -0x88
@@ -320,13 +320,13 @@ func_8002BA80:
 /* 0072D4 8002BED4 03E00008 */  jr    $ra
 /* 0072D8 8002BED8 27BD0088 */   addiu $sp, $sp, 0x88
 
-func_8002BEDC:
+glabel func_8002BEDC
 /* 0072DC 8002BEDC 3C01800A */  lui   $at, 0x800a
 /* 0072E0 8002BEE0 E42CBA94 */  swc1  $f12, -0x456c($at)
 /* 0072E4 8002BEE4 03E00008 */  jr    $ra
 /* 0072E8 8002BEE8 00000000 */   nop   
 
-func_8002BEEC:
+glabel func_8002BEEC
 /* 0072EC 8002BEEC 3C01800A */  lui   $at, 0x800a
 /* 0072F0 8002BEF0 E42CBA94 */  swc1  $f12, -0x456c($at)
 /* 0072F4 8002BEF4 3C01800A */  lui   $at, 0x800a
@@ -334,19 +334,19 @@ func_8002BEEC:
 /* 0072FC 8002BEFC 03E00008 */  jr    $ra
 /* 007300 8002BF00 00000000 */   nop   
 
-func_8002BF04:
+glabel func_8002BF04
 /* 007304 8002BF04 3C01800A */  lui   $at, 0x800a
 /* 007308 8002BF08 AC24BAA0 */  sw    $a0, -0x4560($at)
 /* 00730C 8002BF0C 03E00008 */  jr    $ra
 /* 007310 8002BF10 00000000 */   nop   
 
-func_8002BF14:
+glabel func_8002BF14
 /* 007314 8002BF14 3C01800A */  lui   $at, 0x800a
 /* 007318 8002BF18 E42CBA9C */  swc1  $f12, -0x4564($at)
 /* 00731C 8002BF1C 03E00008 */  jr    $ra
 /* 007320 8002BF20 00000000 */   nop   
 
-func_8002BF24:
+glabel func_8002BF24
 /* 007324 8002BF24 3C01800A */  lui   $at, 0x800a
 /* 007328 8002BF28 E42CBA9C */  swc1  $f12, -0x4564($at)
 /* 00732C 8002BF2C 3C01800A */  lui   $at, 0x800a

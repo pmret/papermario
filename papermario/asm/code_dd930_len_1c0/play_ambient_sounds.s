@@ -1,9 +1,9 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "globals.inc"
+.include "include/macro.inc"
 
-play_ambient_sounds:
+glabel play_ambient_sounds
 /* 0DDA68 80147368 3C028007 */  lui   $v0, 0x8007
 /* 0DDA6C 8014736C 8C42419C */  lw    $v0, 0x419c($v0)
 /* 0DDA70 80147370 27BDFFE8 */  addiu $sp, $sp, -0x18

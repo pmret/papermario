@@ -6,7 +6,7 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text802E0D90, "ax"
@@ -20,7 +20,7 @@
 /* 102628 802E0DA8 03E00008 */  jr    $ra
 /* 10262C 802E0DAC E4800024 */   swc1  $f0, 0x24($a0)
 
-func_802E0DB0:
+glabel func_802E0DB0
 /* 102630 802E0DB0 90820006 */  lbu   $v0, 6($a0)
 /* 102634 802E0DB4 30420004 */  andi  $v0, $v0, 4
 /* 102638 802E0DB8 10400007 */  beqz  $v0, .L802E0DD8
@@ -279,7 +279,7 @@ func_802E0DB0:
 /* 102A18 802E1198 03E00008 */  jr    $ra
 /* 102A1C 802E119C 27BD0018 */   addiu $sp, $sp, 0x18
 
-save_game_at_player_position:
+glabel save_game_at_player_position
 /* 102A20 802E11A0 3C04800F */  lui   $a0, 0x800f
 /* 102A24 802E11A4 8C847B30 */  lw    $a0, 0x7b30($a0)
 /* 102A28 802E11A8 27BDFFE8 */  addiu $sp, $sp, -0x18
@@ -539,7 +539,7 @@ save_game_at_player_position:
 /* 102DB4 802E1534 03E00008 */  jr    $ra
 /* 102DB8 802E1538 27BD0018 */   addiu $sp, $sp, 0x18
 
-func_802E153C:
+glabel func_802E153C
 /* 102DBC 802E153C 27BDFFC0 */  addiu $sp, $sp, -0x40
 /* 102DC0 802E1540 AFB00030 */  sw    $s0, 0x30($sp)
 /* 102DC4 802E1544 0080802D */  daddu $s0, $a0, $zero
@@ -1508,7 +1508,7 @@ func_802E153C:
 /* 103BC4 802E2344 03E00008 */  jr    $ra
 /* 103BC8 802E2348 27BD0028 */   addiu $sp, $sp, 0x28
 
-func_802E234C:
+glabel func_802E234C
 /* 103BCC 802E234C 3C058011 */  lui   $a1, 0x8011
 /* 103BD0 802E2350 24A5EFC8 */  addiu $a1, $a1, -0x1038
 /* 103BD4 802E2354 3C060100 */  lui   $a2, 0x100
@@ -1590,7 +1590,7 @@ func_802E234C:
 /* 103CE4 802E2464 03E00008 */  jr    $ra
 /* 103CE8 802E2468 27BD0018 */   addiu $sp, $sp, 0x18
 
-func_802E246C:
+glabel func_802E246C
 /* 103CEC 802E246C 27BDFF40 */  addiu $sp, $sp, -0xc0
 /* 103CF0 802E2470 AFB500A4 */  sw    $s5, 0xa4($sp)
 /* 103CF4 802E2474 0080A82D */  daddu $s5, $a0, $zero

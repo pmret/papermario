@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80065D70, "ax"
 
-osSiCreateAccessQueue:
+glabel osSiCreateAccessQueue
 /* 041170 80065D70 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 041174 80065D74 24020001 */  addiu $v0, $zero, 1
 /* 041178 80065D78 AFB00010 */  sw    $s0, 0x10($sp)
@@ -34,7 +34,7 @@ osSiCreateAccessQueue:
 /* 0411BC 80065DBC 03E00008 */  jr    $ra
 /* 0411C0 80065DC0 27BD0018 */   addiu $sp, $sp, 0x18
 
-osSiGetAccess:
+glabel osSiGetAccess
 /* 0411C4 80065DC4 3C028009 */  lui   $v0, 0x8009
 /* 0411C8 80065DC8 8C424640 */  lw    $v0, 0x4640($v0)
 /* 0411CC 80065DCC 27BDFFE0 */  addiu $sp, $sp, -0x20
@@ -64,7 +64,7 @@ osSiGetAccess:
 /* 041228 80065E28 03E00008 */  jr    $ra
 /* 04122C 80065E2C 27BD0020 */   addiu $sp, $sp, 0x20
 
-osSiRelAccess:
+glabel osSiRelAccess
 /* 041230 80065E30 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 041234 80065E34 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 041238 80065E38 3C04800E */  lui   $a0, 0x800e

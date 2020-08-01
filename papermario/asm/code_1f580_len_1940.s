@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80044180, "ax"
 
-SetEncounterStatusFlags:
+glabel SetEncounterStatusFlags
 /* 01F580 80044180 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 01F584 80044184 AFB10014 */  sw    $s1, 0x14($sp)
 /* 01F588 80044188 3C11800B */  lui   $s1, 0x800b
@@ -75,7 +75,7 @@ SetEncounterStatusFlags:
 /* 01F65C 8004425C 03E00008 */  jr    $ra
 /* 01F660 80044260 27BD0018 */   addiu $sp, $sp, 0x18
 
-LoadDemoBattle:
+glabel LoadDemoBattle
 /* 01F664 80044264 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 01F668 80044268 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 01F66C 8004426C 8C82000C */  lw    $v0, 0xc($a0)
@@ -91,7 +91,7 @@ LoadDemoBattle:
 /* 01F690 80044290 03E00008 */  jr    $ra
 /* 01F694 80044294 24020002 */   addiu $v0, $zero, 2
 
-MakeNpcs:
+glabel MakeNpcs
 /* 01F698 80044298 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 01F69C 8004429C AFB10014 */  sw    $s1, 0x14($sp)
 /* 01F6A0 800442A0 0080882D */  daddu $s1, $a0, $zero
@@ -142,7 +142,7 @@ MakeNpcs:
 /* 01F738 80044338 03E00008 */  jr    $ra
 /* 01F73C 8004433C 27BD0020 */   addiu $sp, $sp, 0x20
 
-RemoveNpc:
+glabel RemoveNpc
 /* 01F740 80044340 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 01F744 80044344 AFB20018 */  sw    $s2, 0x18($sp)
 /* 01F748 80044348 0080902D */  daddu $s2, $a0, $zero
@@ -239,7 +239,7 @@ RemoveNpc:
 /* 01F870 80044470 03E00008 */  jr    $ra
 /* 01F874 80044474 27BD0028 */   addiu $sp, $sp, 0x28
 
-RemoveEncounter:
+glabel RemoveEncounter
 /* 01F878 80044478 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 01F87C 8004447C AFBF0020 */  sw    $ra, 0x20($sp)
 /* 01F880 80044480 AFB3001C */  sw    $s3, 0x1c($sp)
@@ -319,7 +319,7 @@ RemoveEncounter:
 /* 01F974 80044574 03E00008 */  jr    $ra
 /* 01F978 80044578 27BD0028 */   addiu $sp, $sp, 0x28
 
-GetBattleOutcome:
+glabel GetBattleOutcome
 /* 01F97C 8004457C 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 01F980 80044580 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 01F984 80044584 8C82000C */  lw    $v0, 0xc($a0)
@@ -356,7 +356,7 @@ GetBattleOutcome:
 /* 01F9F8 800445F8 03E00008 */  jr    $ra
 /* 01F9FC 800445FC 27BD0018 */   addiu $sp, $sp, 0x18
 
-GetOwnerEncountered:
+glabel GetOwnerEncountered
 /* 01FA00 80044600 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 01FA04 80044604 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 01FA08 80044608 8C82000C */  lw    $v0, 0xc($a0)
@@ -369,7 +369,7 @@ GetOwnerEncountered:
 /* 01FA24 80044624 03E00008 */  jr    $ra
 /* 01FA28 80044628 27BD0018 */   addiu $sp, $sp, 0x18
 
-DoNpcDefeat:
+glabel DoNpcDefeat
 /* 01FA2C 8004462C 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 01FA30 80044630 AFB10014 */  sw    $s1, 0x14($sp)
 /* 01FA34 80044634 0080882D */  daddu $s1, $a0, $zero
@@ -405,7 +405,7 @@ DoNpcDefeat:
 /* 01FAAC 800446AC 03E00008 */  jr    $ra
 /* 01FAB0 800446B0 27BD0020 */   addiu $sp, $sp, 0x20
 
-start_battle:
+glabel start_battle
 /* 01FAB4 800446B4 27BDFFD0 */  addiu $sp, $sp, -0x30
 /* 01FAB8 800446B8 AFB00010 */  sw    $s0, 0x10($sp)
 /* 01FABC 800446BC 00A0802D */  daddu $s0, $a1, $zero
@@ -512,7 +512,7 @@ start_battle:
 /* 01FC38 80044838 03E00008 */  jr    $ra
 /* 01FC3C 8004483C 27BD0030 */   addiu $sp, $sp, 0x30
 
-StartBattle:
+glabel StartBattle
 /* 01FC40 80044840 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 01FC44 80044844 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 01FC48 80044848 0C0111AD */  jal   start_battle
@@ -522,7 +522,7 @@ StartBattle:
 /* 01FC58 80044858 03E00008 */  jr    $ra
 /* 01FC5C 8004485C 27BD0018 */   addiu $sp, $sp, 0x18
 
-StartBattleWith:
+glabel StartBattleWith
 /* 01FC60 80044860 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 01FC64 80044864 AFB00010 */  sw    $s0, 0x10($sp)
 /* 01FC68 80044868 0080802D */  daddu $s0, $a0, $zero
@@ -539,7 +539,7 @@ StartBattleWith:
 /* 01FC94 80044894 03E00008 */  jr    $ra
 /* 01FC98 80044898 27BD0018 */   addiu $sp, $sp, 0x18
 
-StartBossBattle:
+glabel StartBossBattle
 /* 01FC9C 8004489C 27BDFFD0 */  addiu $sp, $sp, -0x30
 /* 01FCA0 800448A0 AFBF0028 */  sw    $ra, 0x28($sp)
 /* 01FCA4 800448A4 AFB50024 */  sw    $s5, 0x24($sp)
@@ -650,7 +650,7 @@ StartBossBattle:
 /* 01FE30 80044A30 03E00008 */  jr    $ra
 /* 01FE34 80044A34 27BD0030 */   addiu $sp, $sp, 0x30
 
-SetBattleMusic:
+glabel SetBattleMusic
 /* 01FE38 80044A38 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 01FE3C 80044A3C AFBF0010 */  sw    $ra, 0x10($sp)
 /* 01FE40 80044A40 8C82000C */  lw    $v0, 0xc($a0)
@@ -668,7 +668,7 @@ SetBattleMusic:
 /* 01FE70 80044A70 03E00008 */  jr    $ra
 /* 01FE74 80044A74 27BD0018 */   addiu $sp, $sp, 0x18
 
-BindNpcAI:
+glabel BindNpcAI
 /* 01FE78 80044A78 27BDFFD0 */  addiu $sp, $sp, -0x30
 /* 01FE7C 80044A7C AFB00010 */  sw    $s0, 0x10($sp)
 /* 01FE80 80044A80 0080802D */  daddu $s0, $a0, $zero
@@ -756,7 +756,7 @@ BindNpcAI:
 /* 01FFA4 80044BA4 03E00008 */  jr    $ra
 /* 01FFA8 80044BA8 27BD0030 */   addiu $sp, $sp, 0x30
 
-BindNpcIdle:
+glabel BindNpcIdle
 /* 01FFAC 80044BAC 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 01FFB0 80044BB0 AFB10014 */  sw    $s1, 0x14($sp)
 /* 01FFB4 80044BB4 0080882D */  daddu $s1, $a0, $zero
@@ -791,7 +791,7 @@ BindNpcIdle:
 /* 020024 80044C24 03E00008 */  jr    $ra
 /* 020028 80044C28 27BD0028 */   addiu $sp, $sp, 0x28
 
-RestartNpcAI:
+glabel RestartNpcAI
 /* 02002C 80044C2C 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 020030 80044C30 AFB10014 */  sw    $s1, 0x14($sp)
 /* 020034 80044C34 0080882D */  daddu $s1, $a0, $zero
@@ -845,7 +845,7 @@ RestartNpcAI:
 /* 0200E8 80044CE8 03E00008 */  jr    $ra
 /* 0200EC 80044CEC 27BD0020 */   addiu $sp, $sp, 0x20
 
-EnableNpcAI:
+glabel EnableNpcAI
 /* 0200F0 80044CF0 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 0200F4 80044CF4 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0200F8 80044CF8 0080882D */  daddu $s1, $a0, $zero
@@ -896,7 +896,7 @@ EnableNpcAI:
 /* 02019C 80044D9C 03E00008 */  jr    $ra
 /* 0201A0 80044DA0 27BD0028 */   addiu $sp, $sp, 0x28
 
-SetNpcAux:
+glabel SetNpcAux
 /* 0201A4 80044DA4 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 0201A8 80044DA8 AFB3001C */  sw    $s3, 0x1c($sp)
 /* 0201AC 80044DAC 0080982D */  daddu $s3, $a0, $zero
@@ -976,7 +976,7 @@ SetNpcAux:
 /* 0202B0 80044EB0 03E00008 */  jr    $ra
 /* 0202B4 80044EB4 27BD0028 */   addiu $sp, $sp, 0x28
 
-BindNpcAux:
+glabel BindNpcAux
 /* 0202B8 80044EB8 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 0202BC 80044EBC AFB10014 */  sw    $s1, 0x14($sp)
 /* 0202C0 80044EC0 0080882D */  daddu $s1, $a0, $zero
@@ -1011,7 +1011,7 @@ BindNpcAux:
 /* 020330 80044F30 03E00008 */  jr    $ra
 /* 020334 80044F34 27BD0028 */   addiu $sp, $sp, 0x28
 
-RestartNpcAux:
+glabel RestartNpcAux
 /* 020338 80044F38 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 02033C 80044F3C AFBF001C */  sw    $ra, 0x1c($sp)
 /* 020340 80044F40 AFB20018 */  sw    $s2, 0x18($sp)
@@ -1062,7 +1062,7 @@ RestartNpcAux:
 /* 0203E8 80044FE8 03E00008 */  jr    $ra
 /* 0203EC 80044FEC 27BD0020 */   addiu $sp, $sp, 0x20
 
-EnableNpcAux:
+glabel EnableNpcAux
 /* 0203F0 80044FF0 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 0203F4 80044FF4 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0203F8 80044FF8 0080882D */  daddu $s1, $a0, $zero
@@ -1113,7 +1113,7 @@ EnableNpcAux:
 /* 02049C 8004509C 03E00008 */  jr    $ra
 /* 0204A0 800450A0 27BD0028 */   addiu $sp, $sp, 0x28
 
-BindNpcInteract:
+glabel BindNpcInteract
 /* 0204A4 800450A4 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 0204A8 800450A8 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0204AC 800450AC 0080882D */  daddu $s1, $a0, $zero
@@ -1156,7 +1156,7 @@ BindNpcInteract:
 /* 020538 80045138 03E00008 */  jr    $ra
 /* 02053C 8004513C 27BD0028 */   addiu $sp, $sp, 0x28
 
-BindNpcHit:
+glabel BindNpcHit
 /* 020540 80045140 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 020544 80045144 AFB10014 */  sw    $s1, 0x14($sp)
 /* 020548 80045148 0080882D */  daddu $s1, $a0, $zero
@@ -1199,7 +1199,7 @@ BindNpcHit:
 /* 0205D4 800451D4 03E00008 */  jr    $ra
 /* 0205D8 800451D8 27BD0028 */   addiu $sp, $sp, 0x28
 
-BindNpcDefeat:
+glabel BindNpcDefeat
 /* 0205DC 800451DC 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 0205E0 800451E0 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0205E4 800451E4 0080882D */  daddu $s1, $a0, $zero
@@ -1234,7 +1234,7 @@ BindNpcDefeat:
 /* 020654 80045254 03E00008 */  jr    $ra
 /* 020658 80045258 27BD0028 */   addiu $sp, $sp, 0x28
 
-SetSelfVar:
+glabel SetSelfVar
 /* 02065C 8004525C 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 020660 80045260 AFB00010 */  sw    $s0, 0x10($sp)
 /* 020664 80045264 0080802D */  daddu $s0, $a0, $zero
@@ -1261,7 +1261,7 @@ SetSelfVar:
 /* 0206B8 800452B8 03E00008 */  jr    $ra
 /* 0206BC 800452BC 27BD0020 */   addiu $sp, $sp, 0x20
 
-GetSelfVar:
+glabel GetSelfVar
 /* 0206C0 800452C0 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0206C4 800452C4 AFB20018 */  sw    $s2, 0x18($sp)
 /* 0206C8 800452C8 0080902D */  daddu $s2, $a0, $zero
@@ -1287,7 +1287,7 @@ GetSelfVar:
 /* 020718 80045318 03E00008 */  jr    $ra
 /* 02071C 8004531C 27BD0020 */   addiu $sp, $sp, 0x20
 
-SetNpcVar:
+glabel SetNpcVar
 /* 020720 80045320 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 020724 80045324 AFB10014 */  sw    $s1, 0x14($sp)
 /* 020728 80045328 0080882D */  daddu $s1, $a0, $zero
@@ -1329,7 +1329,7 @@ SetNpcVar:
 /* 0207B4 800453B4 03E00008 */  jr    $ra
 /* 0207B8 800453B8 27BD0028 */   addiu $sp, $sp, 0x28
 
-GetNpcVar:
+glabel GetNpcVar
 /* 0207BC 800453BC 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 0207C0 800453C0 AFB3001C */  sw    $s3, 0x1c($sp)
 /* 0207C4 800453C4 0080982D */  daddu $s3, $a0, $zero
@@ -1372,7 +1372,7 @@ GetNpcVar:
 /* 020854 80045454 03E00008 */  jr    $ra
 /* 020858 80045458 27BD0028 */   addiu $sp, $sp, 0x28
 
-SetSelfRotation:
+glabel SetSelfRotation
 /* 02085C 8004545C 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 020860 80045460 AFB10014 */  sw    $s1, 0x14($sp)
 /* 020864 80045464 0080882D */  daddu $s1, $a0, $zero
@@ -1418,7 +1418,7 @@ SetSelfRotation:
 /* 020904 80045504 03E00008 */  jr    $ra
 /* 020908 80045508 27BD0028 */   addiu $sp, $sp, 0x28
 
-SetSelfEnemyFlags:
+glabel SetSelfEnemyFlags
 /* 02090C 8004550C 8C82000C */  lw    $v0, 0xc($a0)
 /* 020910 80045510 8C830148 */  lw    $v1, 0x148($a0)
 /* 020914 80045514 8C420000 */  lw    $v0, ($v0)
@@ -1426,7 +1426,7 @@ SetSelfEnemyFlags:
 /* 02091C 8004551C 03E00008 */  jr    $ra
 /* 020920 80045520 24020002 */   addiu $v0, $zero, 2
 
-SetSelfEnemyFlagBits:
+glabel SetSelfEnemyFlagBits
 /* 020924 80045524 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 020928 80045528 AFBF0018 */  sw    $ra, 0x18($sp)
 /* 02092C 8004552C AFB10014 */  sw    $s1, 0x14($sp)
@@ -1492,7 +1492,7 @@ SetSelfEnemyFlagBits:
 /* 020A0C 8004560C 03E00008 */  jr    $ra
 /* 020A10 80045610 27BD0020 */   addiu $sp, $sp, 0x20
 
-GetSelfNpcID:
+glabel GetSelfNpcID
 /* 020A14 80045614 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 020A18 80045618 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 020A1C 8004561C 8C82000C */  lw    $v0, 0xc($a0)
@@ -1505,7 +1505,7 @@ GetSelfNpcID:
 /* 020A38 80045638 03E00008 */  jr    $ra
 /* 020A3C 8004563C 27BD0018 */   addiu $sp, $sp, 0x18
 
-ClearDefeatedEnemies:
+glabel ClearDefeatedEnemies
 /* 020A40 80045640 3C07800B */  lui   $a3, 0x800b
 /* 020A44 80045644 24E70F10 */  addiu $a3, $a3, 0xf10
 /* 020A48 80045648 0000302D */  daddu $a2, $zero, $zero
@@ -1527,7 +1527,7 @@ ClearDefeatedEnemies:
 /* 020A80 80045680 03E00008 */  jr    $ra
 /* 020A84 80045684 24020002 */   addiu $v0, $zero, 2
 
-SetEnemyFlagBits:
+glabel SetEnemyFlagBits
 /* 020A88 80045688 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 020A8C 8004568C AFB10014 */  sw    $s1, 0x14($sp)
 /* 020A90 80045690 0080882D */  daddu $s1, $a0, $zero
@@ -1577,7 +1577,7 @@ SetEnemyFlagBits:
 /* 020B2C 8004572C 03E00008 */  jr    $ra
 /* 020B30 80045730 24020002 */   addiu $v0, $zero, 2
 
-GetSelfAnimationFromTable:
+glabel GetSelfAnimationFromTable
 /* 020B34 80045734 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 020B38 80045738 AFB10014 */  sw    $s1, 0x14($sp)
 /* 020B3C 8004573C 0080882D */  daddu $s1, $a0, $zero

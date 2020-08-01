@@ -1,9 +1,9 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "globals.inc"
+.include "include/macro.inc"
 
-collision_heap_free:
+glabel collision_heap_free
 /* 0061F4 8002ADF4 3C028007 */  lui   $v0, 0x8007
 /* 0061F8 8002ADF8 8C42419C */  lw    $v0, 0x419c($v0)
 /* 0061FC 8002ADFC 27BDFFE8 */  addiu $sp, $sp, -0x18

@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80060E20, "ax"
 
-osEPiStartDma:
+glabel osEPiStartDma
 /* 03C220 80060E20 3C028009 */  lui   $v0, 0x8009
 /* 03C224 80060E24 8C423D50 */  lw    $v0, 0x3d50($v0)
 /* 03C228 80060E28 27BDFFE8 */  addiu $sp, $sp, -0x18

@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80061850, "ax"
 
-osWritebackDCache:
+glabel osWritebackDCache
 /* 03CC50 80061850 18A00011 */  blez  $a1, .L80061898
 /* 03CC54 80061854 00000000 */   nop   
 /* 03CC58 80061858 240B2000 */  addiu $t3, $zero, 0x2000

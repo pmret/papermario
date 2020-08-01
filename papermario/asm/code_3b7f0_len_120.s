@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text800603F0, "ax"
 
-nuSiCallBackAdd:
+glabel nuSiCallBackAdd
 /* 03B7F0 800603F0 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 03B7F4 800603F4 AFB00010 */  sw    $s0, 0x10($sp)
 /* 03B7F8 800603F8 3C108007 */  lui   $s0, 0x8007
@@ -58,7 +58,7 @@ nuSiCallBackAdd:
 /* 03B888 80060488 03E00008 */  jr    $ra
 /* 03B88C 8006048C 27BD0020 */   addiu $sp, $sp, 0x20
 
-nuSiCallBackRemove:
+glabel nuSiCallBackRemove
 /* 03B890 80060490 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 03B894 80060494 AFB10014 */  sw    $s1, 0x14($sp)
 /* 03B898 80060498 3C118007 */  lui   $s1, 0x8007

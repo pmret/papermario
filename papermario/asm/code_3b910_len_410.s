@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80060510, "ax"
 
-nuContMgrInit:
+glabel nuContMgrInit
 /* 03B910 80060510 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 03B914 80060514 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 03B918 80060518 0C01823C */  jal   nuContDataUnLock
@@ -70,7 +70,7 @@ nuContMgrInit:
 /* 03B9E0 800605E0 03E00008 */  jr    $ra
 /* 03B9E4 800605E4 27BD0018 */   addiu $sp, $sp, 0x18
 
-nuContMgrRemove:
+glabel nuContMgrRemove
 /* 03B9E8 800605E8 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 03B9EC 800605EC 3C048009 */  lui   $a0, 0x8009
 /* 03B9F0 800605F0 24843D38 */  addiu $a0, $a0, 0x3d38
@@ -81,7 +81,7 @@ nuContMgrRemove:
 /* 03BA04 80060604 03E00008 */  jr    $ra
 /* 03BA08 80060608 27BD0018 */   addiu $sp, $sp, 0x18
 
-nuContDataClose:
+glabel nuContDataClose
 /* 03BA0C 8006060C 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 03BA10 80060610 3C04800E */  lui   $a0, 0x800e
 /* 03BA14 80060614 2484C040 */  addiu $a0, $a0, -0x3fc0
@@ -93,7 +93,7 @@ nuContDataClose:
 /* 03BA2C 8006062C 03E00008 */  jr    $ra
 /* 03BA30 80060630 27BD0018 */   addiu $sp, $sp, 0x18
 
-nuContDataOpen:
+glabel nuContDataOpen
 /* 03BA34 80060634 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 03BA38 80060638 3C04800E */  lui   $a0, 0x800e
 /* 03BA3C 8006063C 2484C040 */  addiu $a0, $a0, -0x3fc0
@@ -105,7 +105,7 @@ nuContDataOpen:
 /* 03BA54 80060654 03E00008 */  jr    $ra
 /* 03BA58 80060658 27BD0018 */   addiu $sp, $sp, 0x18
 
-contRetrace:
+glabel contRetrace
 /* 03BA5C 8006065C 3C02800A */  lui   $v0, 0x800a
 /* 03BA60 80060660 8C42A5E0 */  lw    $v0, -0x5a20($v0)
 /* 03BA64 80060664 27BDFFE8 */  addiu $sp, $sp, -0x18
@@ -165,7 +165,7 @@ contRetrace:
 /* 03BB30 80060730 03E00008 */  jr    $ra
 /* 03BB34 80060734 27BD0018 */   addiu $sp, $sp, 0x18
 
-contReadData:
+glabel contReadData
 /* 03BB38 80060738 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 03BB3C 8006073C AFBF0014 */  sw    $ra, 0x14($sp)
 /* 03BB40 80060740 AFB00010 */  sw    $s0, 0x10($sp)
@@ -199,7 +199,7 @@ contReadData:
 /* 03BBAC 800607AC 03E00008 */  jr    $ra
 /* 03BBB0 800607B0 27BD0018 */   addiu $sp, $sp, 0x18
 
-contReadNW:
+glabel contReadNW
 /* 03BBB4 800607B4 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 03BBB8 800607B8 AFB00010 */  sw    $s0, 0x10($sp)
 /* 03BBBC 800607BC 0080802D */  daddu $s0, $a0, $zero
@@ -250,7 +250,7 @@ contReadNW:
 /* 03BC68 80060868 03E00008 */  jr    $ra
 /* 03BC6C 8006086C 27BD0018 */   addiu $sp, $sp, 0x18
 
-contQuery:
+glabel contQuery
 /* 03BC70 80060870 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 03BC74 80060874 AFB00010 */  sw    $s0, 0x10($sp)
 /* 03BC78 80060878 3C10800E */  lui   $s0, 0x800e
@@ -273,7 +273,7 @@ contQuery:
 /* 03BCB8 800608B8 03E00008 */  jr    $ra
 /* 03BCBC 800608BC 27BD0018 */   addiu $sp, $sp, 0x18
 
-nuContDataLock:
+glabel nuContDataLock
 /* 03BCC0 800608C0 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 03BCC4 800608C4 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 03BCC8 800608C8 0C018250 */  jal   osSetIntMask
@@ -287,7 +287,7 @@ nuContDataLock:
 /* 03BCE8 800608E8 03E00008 */  jr    $ra
 /* 03BCEC 800608EC 27BD0018 */   addiu $sp, $sp, 0x18
 
-nuContDataUnLock:
+glabel nuContDataUnLock
 /* 03BCF0 800608F0 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 03BCF4 800608F4 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 03BCF8 800608F8 0C018250 */  jal   osSetIntMask

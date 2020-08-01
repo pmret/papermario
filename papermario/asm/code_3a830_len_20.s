@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text8005F430, "ax"
 
-nuGfxDisplayOn:
+glabel nuGfxDisplayOn
 /* 03A830 8005F430 24020080 */  addiu $v0, $zero, 0x80
 /* 03A834 8005F434 3C01800A */  lui   $at, 0x800a
 /* 03A838 8005F438 AC22A5F8 */  sw    $v0, -0x5a08($at)

@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text800696D0, "ax"
 
-osPfsSelectBank:
+glabel osPfsSelectBank
 /* 044AD0 800696D0 27BDFFB8 */  addiu $sp, $sp, -0x48
 /* 044AD4 800696D4 AFB00038 */  sw    $s0, 0x38($sp)
 /* 044AD8 800696D8 00808021 */  addu  $s0, $a0, $zero

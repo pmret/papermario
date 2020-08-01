@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text8006B3F0, "ax"
 
-osSetGlobalIntMask:
+glabel osSetGlobalIntMask
 /* 0467F0 8006B3F0 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0467F4 8006B3F4 AFB00010 */  sw    $s0, 0x10($sp)
 /* 0467F8 8006B3F8 AFBF0014 */  sw    $ra, 0x14($sp)
@@ -29,7 +29,7 @@ osSetGlobalIntMask:
 /* 046828 8006B428 03E00008 */  jr    $ra
 /* 04682C 8006B42C 27BD0018 */   addiu $sp, $sp, 0x18
 
-osResetGlobalIntMask:
+glabel osResetGlobalIntMask
 /* 046830 8006B430 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 046834 8006B434 AFB00010 */  sw    $s0, 0x10($sp)
 /* 046838 8006B438 AFBF0014 */  sw    $ra, 0x14($sp)

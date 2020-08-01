@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80067380, "ax"
 
-osViBlack:
+glabel osViBlack
 /* 042780 80067380 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 042784 80067384 AFB00010 */  sw    $s0, 0x10($sp)
 /* 042788 80067388 AFBF0014 */  sw    $ra, 0x14($sp)
@@ -40,7 +40,7 @@ osViBlack:
 /* 0427D8 800673D8 27BD0018 */   addiu $sp, $sp, 0x18
 
 /* 0427DC 800673DC 00000000 */  nop   
-osViRepeatLine:
+glabel osViRepeatLine
 /* 0427E0 800673E0 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0427E4 800673E4 AFB00010 */  sw    $s0, 0x10($sp)
 /* 0427E8 800673E8 AFBF0014 */  sw    $ra, 0x14($sp)
@@ -69,7 +69,7 @@ osViRepeatLine:
 /* 042838 80067438 27BD0018 */   addiu $sp, $sp, 0x18
 
 /* 04283C 8006743C 00000000 */  nop   
-guMtxIdent:
+glabel guMtxIdent
 /* 042840 80067440 20080001 */  addi  $t0, $zero, 1
 /* 042844 80067444 00084C00 */  sll   $t1, $t0, 0x10
 /* 042848 80067448 AC890000 */  sw    $t1, ($a0)

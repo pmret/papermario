@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80066FD0, "ax"
 
-osViSetYScale:
+glabel osViSetYScale
 /* 0423D0 80066FD0 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0423D4 80066FD4 F7B40018 */  sdc1  $f20, 0x18($sp)
 /* 0423D8 80066FD8 AFBF0010 */  sw    $ra, 0x10($sp)

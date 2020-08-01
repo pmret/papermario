@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text802D45B0, "ax"
 
-MakeLerp:
+glabel MakeLerp
 /* 0F8F60 802D45B0 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0F8F64 802D45B4 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0F8F68 802D45B8 0080882D */  daddu $s1, $a0, $zero
@@ -44,7 +44,7 @@ MakeLerp:
 /* 0F8FD4 802D4624 03E00008 */  jr    $ra
 /* 0F8FD8 802D4628 27BD0020 */   addiu $sp, $sp, 0x20
 
-UpdateLerp:
+glabel UpdateLerp
 /* 0F8FDC 802D462C 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0F8FE0 802D4630 AFB00018 */  sw    $s0, 0x18($sp)
 /* 0F8FE4 802D4634 0080802D */  daddu $s0, $a0, $zero
@@ -82,7 +82,7 @@ UpdateLerp:
 /* 0F9058 802D46A8 03E00008 */  jr    $ra
 /* 0F905C 802D46AC 27BD0020 */   addiu $sp, $sp, 0x20
 
-RandInt:
+glabel RandInt
 /* 0F9060 802D46B0 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0F9064 802D46B4 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0F9068 802D46B8 0080882D */  daddu $s1, $a0, $zero
@@ -106,7 +106,7 @@ RandInt:
 /* 0F90B0 802D4700 03E00008 */  jr    $ra
 /* 0F90B4 802D4704 27BD0020 */   addiu $sp, $sp, 0x20
 
-GetAngleBetweenNPCs:
+glabel GetAngleBetweenNPCs
 /* 0F90B8 802D4708 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 0F90BC 802D470C AFB20018 */  sw    $s2, 0x18($sp)
 /* 0F90C0 802D4710 0080902D */  daddu $s2, $a0, $zero
@@ -151,7 +151,7 @@ GetAngleBetweenNPCs:
 /* 0F915C 802D47AC 03E00008 */  jr    $ra
 /* 0F9160 802D47B0 27BD0028 */   addiu $sp, $sp, 0x28
 
-GetAngleToNPC:
+glabel GetAngleToNPC
 /* 0F9164 802D47B4 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0F9168 802D47B8 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0F916C 802D47BC 0080882D */  daddu $s1, $a0, $zero
@@ -184,7 +184,7 @@ GetAngleToNPC:
 /* 0F91D8 802D4828 03E00008 */  jr    $ra
 /* 0F91DC 802D482C 27BD0020 */   addiu $sp, $sp, 0x20
 
-GetAngleToPlayer:
+glabel GetAngleToPlayer
 /* 0F91E0 802D4830 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0F91E4 802D4834 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0F91E8 802D4838 0080882D */  daddu $s1, $a0, $zero
@@ -217,7 +217,7 @@ GetAngleToPlayer:
 /* 0F9254 802D48A4 03E00008 */  jr    $ra
 /* 0F9258 802D48A8 27BD0020 */   addiu $sp, $sp, 0x20
 
-AwaitPlayerApproach:
+glabel AwaitPlayerApproach
 /* 0F925C 802D48AC 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0F9260 802D48B0 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0F9264 802D48B4 0080882D */  daddu $s1, $a0, $zero
@@ -267,7 +267,7 @@ AwaitPlayerApproach:
 /* 0F930C 802D495C 03E00008 */  jr    $ra
 /* 0F9310 802D4960 27BD0020 */   addiu $sp, $sp, 0x20
 
-IsPlayerWithin:
+glabel IsPlayerWithin
 /* 0F9314 802D4964 27BDFFD0 */  addiu $sp, $sp, -0x30
 /* 0F9318 802D4968 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0F931C 802D496C 0080882D */  daddu $s1, $a0, $zero
@@ -333,7 +333,7 @@ IsPlayerWithin:
 /* 0F9404 802D4A54 03E00008 */  jr    $ra
 /* 0F9408 802D4A58 27BD0030 */   addiu $sp, $sp, 0x30
 
-AwaitPlayerLeave:
+glabel AwaitPlayerLeave
 /* 0F940C 802D4A5C 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0F9410 802D4A60 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0F9414 802D4A64 0080882D */  daddu $s1, $a0, $zero
@@ -383,7 +383,7 @@ AwaitPlayerLeave:
 /* 0F94BC 802D4B0C 03E00008 */  jr    $ra
 /* 0F94C0 802D4B10 27BD0020 */   addiu $sp, $sp, 0x20
 
-AddVectorPolar:
+glabel AddVectorPolar
 /* 0F94C4 802D4B14 27BDFFC8 */  addiu $sp, $sp, -0x38
 /* 0F94C8 802D4B18 AFB1001C */  sw    $s1, 0x1c($sp)
 /* 0F94CC 802D4B1C 0080882D */  daddu $s1, $a0, $zero
@@ -569,7 +569,7 @@ AddVectorPolar:
 /* 0F9754 802D4DA4 03E00008 */  jr    $ra
 /* 0F9758 802D4DA8 27BD0018 */   addiu $sp, $sp, 0x18
 
-setup_path_data:
+glabel setup_path_data
 /* 0F975C 802D4DAC 27BDFFC8 */  addiu $sp, $sp, -0x38
 /* 0F9760 802D4DB0 AFB3001C */  sw    $s3, 0x1c($sp)
 /* 0F9764 802D4DB4 0080982D */  daddu $s3, $a0, $zero
@@ -887,7 +887,7 @@ setup_path_data:
 /* 0F9C18 802D5268 03E00008 */  jr    $ra
 /* 0F9C1C 802D526C 27BD0038 */   addiu $sp, $sp, 0x38
 
-func_802D5270:
+glabel func_802D5270
 /* 0F9C20 802D5270 24C6FFFF */  addiu $a2, $a2, -1
 /* 0F9C24 802D5274 18C00010 */  blez  $a2, .L802D52B8
 /* 0F9C28 802D5278 0000202D */   daddu $a0, $zero, $zero
@@ -1005,7 +1005,7 @@ func_802D5270:
 /* 0F9DD8 802D5428 03E00008 */  jr    $ra
 /* 0F9DDC 802D542C E4A20008 */   swc1  $f2, 8($a1)
 
-LoadPath:
+glabel LoadPath
 /* 0F9DE0 802D5430 27BDFFD0 */  addiu $sp, $sp, -0x30
 /* 0F9DE4 802D5434 AFB20018 */  sw    $s2, 0x18($sp)
 /* 0F9DE8 802D5438 0080902D */  daddu $s2, $a0, $zero
@@ -1068,7 +1068,7 @@ LoadPath:
 /* 0F9ECC 802D551C 03E00008 */  jr    $ra
 /* 0F9ED0 802D5520 27BD0030 */   addiu $sp, $sp, 0x30
 
-GetNextPathPos:
+glabel GetNextPathPos
 /* 0F9ED4 802D5524 27BDFFC8 */  addiu $sp, $sp, -0x38
 /* 0F9ED8 802D5528 AFB1002C */  sw    $s1, 0x2c($sp)
 /* 0F9EDC 802D552C 0080882D */  daddu $s1, $a0, $zero
@@ -1233,7 +1233,7 @@ GetNextPathPos:
 /* 0FA118 802D5768 03E00008 */  jr    $ra
 /* 0FA11C 802D576C 27BD0038 */   addiu $sp, $sp, 0x38
 
-GetDist2D:
+glabel GetDist2D
 /* 0FA120 802D5770 27BDFFC8 */  addiu $sp, $sp, -0x38
 /* 0FA124 802D5774 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0FA128 802D5778 0080882D */  daddu $s1, $a0, $zero
@@ -1332,7 +1332,7 @@ GetDist2D:
 /* 0FA288 802D58D8 03E00008 */  jr    $ra
 /* 0FA28C 802D58DC 27BD0020 */   addiu $sp, $sp, 0x20
 
-SetValueByRef:
+glabel SetValueByRef
 /* 0FA290 802D58E0 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0FA294 802D58E4 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0FA298 802D58E8 0080882D */  daddu $s1, $a0, $zero
@@ -1357,7 +1357,7 @@ SetValueByRef:
 /* 0FA2E4 802D5934 03E00008 */  jr    $ra
 /* 0FA2E8 802D5938 27BD0020 */   addiu $sp, $sp, 0x20
 
-GetValueByRef:
+glabel GetValueByRef
 /* 0FA2EC 802D593C 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0FA2F0 802D5940 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0FA2F4 802D5944 0080882D */  daddu $s1, $a0, $zero
@@ -1382,7 +1382,7 @@ GetValueByRef:
 /* 0FA340 802D5990 03E00008 */  jr    $ra
 /* 0FA344 802D5994 27BD0020 */   addiu $sp, $sp, 0x20
 
-EnableStatusMenu:
+glabel EnableStatusMenu
 /* 0FA348 802D5998 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0FA34C 802D599C AFBF0010 */  sw    $ra, 0x10($sp)
 /* 0FA350 802D59A0 8C82000C */  lw    $v0, 0xc($a0)
@@ -1404,7 +1404,7 @@ EnableStatusMenu:
 /* 0FA384 802D59D4 03E00008 */  jr    $ra
 /* 0FA388 802D59D8 27BD0018 */   addiu $sp, $sp, 0x18
 
-ShowStatusMenu:
+glabel ShowStatusMenu
 /* 0FA38C 802D59DC 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0FA390 802D59E0 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 0FA394 802D59E4 8C82000C */  lw    $v0, 0xc($a0)
@@ -1428,7 +1428,7 @@ ShowStatusMenu:
 /* 0FA3D0 802D5A20 03E00008 */  jr    $ra
 /* 0FA3D4 802D5A24 27BD0018 */   addiu $sp, $sp, 0x18
 
-SetGameMode:
+glabel SetGameMode
 /* 0FA3D8 802D5A28 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0FA3DC 802D5A2C AFBF0010 */  sw    $ra, 0x10($sp)
 /* 0FA3E0 802D5A30 8C82000C */  lw    $v0, 0xc($a0)
@@ -1442,7 +1442,7 @@ SetGameMode:
 /* 0FA400 802D5A50 03E00008 */  jr    $ra
 /* 0FA404 802D5A54 27BD0018 */   addiu $sp, $sp, 0x18
 
-ClampAngleInt:
+glabel ClampAngleInt
 /* 0FA408 802D5A58 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0FA40C 802D5A5C AFB00010 */  sw    $s0, 0x10($sp)
 /* 0FA410 802D5A60 0080802D */  daddu $s0, $a0, $zero
@@ -1467,7 +1467,7 @@ ClampAngleInt:
 /* 0FA45C 802D5AAC 03E00008 */  jr    $ra
 /* 0FA460 802D5AB0 27BD0020 */   addiu $sp, $sp, 0x20
 
-ClampAngleFloat:
+glabel ClampAngleFloat
 /* 0FA464 802D5AB4 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0FA468 802D5AB8 AFB00010 */  sw    $s0, 0x10($sp)
 /* 0FA46C 802D5ABC 0080802D */  daddu $s0, $a0, $zero

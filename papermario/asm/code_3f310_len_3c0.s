@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80063F10, "ax"
 
-guPositionF:
+glabel guPositionF
 /* 03F310 80063F10 3C018009 */  lui   $at, 0x8009
 /* 03F314 80063F14 C4203DC0 */  lwc1  $f0, 0x3dc0($at)
 /* 03F318 80063F18 44859000 */  mtc1  $a1, $f18
@@ -131,7 +131,7 @@ guPositionF:
 /* 03F4E0 800640E0 03E00008 */  jr    $ra
 /* 03F4E4 800640E4 27BD0050 */   addiu $sp, $sp, 0x50
 
-guPosition:
+glabel guPosition
 /* 03F4E8 800640E8 3C018009 */  lui   $at, 0x8009
 /* 03F4EC 800640EC C4203DC0 */  lwc1  $f0, 0x3dc0($at)
 /* 03F4F0 800640F0 44859000 */  mtc1  $a1, $f18

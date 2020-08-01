@@ -6,7 +6,7 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text8006A650, "ax"
@@ -58,7 +58,7 @@
 /* 045B00 8006A700 03E00008 */  jr    $ra
 /* 045B04 8006A704 A02A1B0F */   sb    $t2, 0x1b0f($at)
 
-osInitialize:
+glabel osInitialize
 /* 045B08 8006A708 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 045B0C 8006A70C 24020001 */  addiu $v0, $zero, 1
 /* 045B10 8006A710 AFBF0018 */  sw    $ra, 0x18($sp)

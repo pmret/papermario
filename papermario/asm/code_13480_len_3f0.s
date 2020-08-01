@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80038080, "ax"
 
-init_demo_data:
+glabel init_demo_data
 /* 013480 80038080 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 013484 80038084 3C048007 */  lui   $a0, 0x8007
 /* 013488 80038088 2484419C */  addiu $a0, $a0, 0x419c
@@ -43,7 +43,7 @@ init_demo_data:
 /* 0134EC 800380EC 03E00008 */  jr    $ra
 /* 0134F0 800380F0 27BD0018 */   addiu $sp, $sp, 0x18
 
-next_demo_scene:
+glabel next_demo_scene
 /* 0134F4 800380F4 27BDFFD0 */  addiu $sp, $sp, -0x30
 /* 0134F8 800380F8 3C058007 */  lui   $a1, 0x8007
 /* 0134FC 800380FC 8CA5419C */  lw    $a1, 0x419c($a1)

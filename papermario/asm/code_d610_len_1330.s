@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80032210, "ax"
 
-func_80032210:
+glabel func_80032210
 /* 00D610 80032210 27BDFFA0 */  addiu $sp, $sp, -0x60
 /* 00D614 80032214 AFB00058 */  sw    $s0, 0x58($sp)
 /* 00D618 80032218 00E0802D */  daddu $s0, $a3, $zero
@@ -66,7 +66,7 @@ func_80032210:
 /* 00D6D4 800322D4 03E00008 */  jr    $ra
 /* 00D6D8 800322D8 27BD0060 */   addiu $sp, $sp, 0x60
 
-func_800322DC:
+glabel func_800322DC
 /* 00D6DC 800322DC 27BDFFC0 */  addiu $sp, $sp, -0x40
 /* 00D6E0 800322E0 F7BC0030 */  sdc1  $f28, 0x30($sp)
 /* 00D6E4 800322E4 AFA60048 */  sw    $a2, 0x48($sp)
@@ -272,7 +272,7 @@ func_800322DC:
 /* 00D9DC 800325DC 03E00008 */  jr    $ra
 /* 00D9E0 800325E0 27BD0040 */   addiu $sp, $sp, 0x40
 
-func_800325E4:
+glabel func_800325E4
 /* 00D9E4 800325E4 27BDFFC0 */  addiu $sp, $sp, -0x40
 /* 00D9E8 800325E8 F7BC0030 */  sdc1  $f28, 0x30($sp)
 /* 00D9EC 800325EC 4486E000 */  mtc1  $a2, $f28
@@ -460,7 +460,7 @@ func_800325E4:
 /* 00DC9C 8003289C 03E00008 */  jr    $ra
 /* 00DCA0 800328A0 27BD0040 */   addiu $sp, $sp, 0x40
 
-func_800328A4:
+glabel func_800328A4
 /* 00DCA4 800328A4 44857000 */  mtc1  $a1, $f14
 /* 00DCA8 800328A8 44868000 */  mtc1  $a2, $f16
 /* 00DCAC 800328AC 14800003 */  bnez  $a0, .L800328BC
@@ -518,7 +518,7 @@ func_800328A4:
 /* 00DD68 80032968 03E00008 */  jr    $ra
 /* 00DD6C 8003296C 00000000 */   nop   
 
-func_80032970:
+glabel func_80032970
 /* 00DD70 80032970 44853000 */  mtc1  $a1, $f6
 /* 00DD74 80032974 94820000 */  lhu   $v0, ($a0)
 /* 00DD78 80032978 8C830448 */  lw    $v1, 0x448($a0)
@@ -740,7 +740,7 @@ func_80032970:
 /* 00E05C 80032C5C 03E00008 */  jr    $ra
 /* 00E060 80032C60 E4800514 */   swc1  $f0, 0x514($a0)
 
-func_80032C64:
+glabel func_80032C64
 /* 00E064 80032C64 27BDFF68 */  addiu $sp, $sp, -0x98
 /* 00E068 80032C68 AFB10054 */  sw    $s1, 0x54($sp)
 /* 00E06C 80032C6C 0080882D */  daddu $s1, $a0, $zero
@@ -1231,7 +1231,7 @@ func_80032C64:
 /* 00E78C 8003338C 03E00008 */  jr    $ra
 /* 00E790 80033390 27BD0098 */   addiu $sp, $sp, 0x98
 
-func_80033394:
+glabel func_80033394
 /* 00E794 80033394 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 00E798 80033398 AFB00010 */  sw    $s0, 0x10($sp)
 /* 00E79C 8003339C 0080802D */  daddu $s0, $a0, $zero
@@ -1322,7 +1322,7 @@ func_80033394:
 /* 00E8E8 800334E8 03E00008 */  jr    $ra
 /* 00E8EC 800334EC 00000000 */   nop   
 
-set_game_mode:
+glabel set_game_mode
 /* 00E8F0 800334F0 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 00E8F4 800334F4 3C01800A */  lui   $at, 0x800a
 /* 00E8F8 800334F8 A42408F0 */  sh    $a0, 0x8f0($at)
@@ -1338,7 +1338,7 @@ set_game_mode:
 /* 00E920 80033520 03E00008 */  jr    $ra
 /* 00E924 80033524 27BD0018 */   addiu $sp, $sp, 0x18
 
-get_game_mode:
+glabel get_game_mode
 /* 00E928 80033528 3C02800A */  lui   $v0, 0x800a
 /* 00E92C 8003352C 844208F0 */  lh    $v0, 0x8f0($v0)
 /* 00E930 80033530 03E00008 */  jr    $ra

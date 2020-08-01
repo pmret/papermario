@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80060EC0, "ax"
 
-osEPiLinkHandle:
+glabel osEPiLinkHandle
 /* 03C2C0 80060EC0 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 03C2C4 80060EC4 AFB00010 */  sw    $s0, 0x10($sp)
 /* 03C2C8 80060EC8 AFBF0014 */  sw    $ra, 0x14($sp)

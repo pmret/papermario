@@ -6,7 +6,7 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80282880, "ax"
@@ -643,7 +643,7 @@
 /* 7E4054 802831D4 03E00008 */  jr    $ra
 /* 7E4058 802831D8 00000000 */   nop   
 
-CheckActionState:
+glabel CheckActionState
 /* 7E405C 802831DC 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 7E4060 802831E0 AFB00010 */  sw    $s0, 0x10($sp)
 /* 7E4064 802831E4 0080802D */  daddu $s0, $a0, $zero
@@ -716,7 +716,7 @@ CheckActionState:
 /* 7E4158 802832D8 03E00008 */  jr    $ra
 /* 7E415C 802832DC 27BD0028 */   addiu $sp, $sp, 0x28
 
-CreatePushBlockGrid:
+glabel CreatePushBlockGrid
 /* 7E4160 802832E0 27BDFFC8 */  addiu $sp, $sp, -0x38
 /* 7E4164 802832E4 AFB10014 */  sw    $s1, 0x14($sp)
 /* 7E4168 802832E8 0080882D */  daddu $s1, $a0, $zero
@@ -827,7 +827,7 @@ CreatePushBlockGrid:
 /* 7E42F4 80283474 03E00008 */  jr    $ra
 /* 7E42F8 80283478 27BD0038 */   addiu $sp, $sp, 0x38
 
-SetPushBlock:
+glabel SetPushBlock
 /* 7E42FC 8028347C 27BDFFC0 */  addiu $sp, $sp, -0x40
 /* 7E4300 80283480 AFB30034 */  sw    $s3, 0x34($sp)
 /* 7E4304 80283484 0080982D */  daddu $s3, $a0, $zero
@@ -911,7 +911,7 @@ SetPushBlock:
 /* 7E4438 802835B8 03E00008 */  jr    $ra
 /* 7E443C 802835BC 27BD0040 */   addiu $sp, $sp, 0x40
 
-GetPushBlock:
+glabel GetPushBlock
 /* 7E4440 802835C0 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 7E4444 802835C4 AFB40020 */  sw    $s4, 0x20($sp)
 /* 7E4448 802835C8 0080A02D */  daddu $s4, $a0, $zero
@@ -979,7 +979,7 @@ GetPushBlock:
 /* 7E4530 802836B0 03E00008 */  jr    $ra
 /* 7E4534 802836B4 27BD0028 */   addiu $sp, $sp, 0x28
 
-GetGridIndexFromPos:
+glabel GetGridIndexFromPos
 /* 7E4538 802836B8 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 7E453C 802836BC AFB3001C */  sw    $s3, 0x1c($sp)
 /* 7E4540 802836C0 0080982D */  daddu $s3, $a0, $zero
@@ -1042,7 +1042,7 @@ GetGridIndexFromPos:
 /* 7E4624 802837A4 03E00008 */  jr    $ra
 /* 7E4628 802837A8 27BD0028 */   addiu $sp, $sp, 0x28
 
-SetPushBlockFallEffect:
+glabel SetPushBlockFallEffect
 /* 7E462C 802837AC 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 7E4630 802837B0 AFB10014 */  sw    $s1, 0x14($sp)
 /* 7E4634 802837B4 0080882D */  daddu $s1, $a0, $zero

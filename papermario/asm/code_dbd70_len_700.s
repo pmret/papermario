@@ -6,18 +6,18 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80145670, "ax"
 
-default_trigger_function_handler:
+glabel default_trigger_function_handler
 /* 0DBD70 80145670 8C820000 */  lw    $v0, ($a0)
 /* 0DBD74 80145674 34420002 */  ori   $v0, $v0, 2
 /* 0DBD78 80145678 03E00008 */  jr    $ra
 /* 0DBD7C 8014567C AC820000 */   sw    $v0, ($a0)
 
-clear_trigger_data:
+glabel clear_trigger_data
 /* 0DBD80 80145680 3C028007 */  lui   $v0, 0x8007
 /* 0DBD84 80145684 8C42419C */  lw    $v0, 0x419c($v0)
 /* 0DBD88 80145688 80420070 */  lb    $v0, 0x70($v0)
@@ -65,7 +65,7 @@ clear_trigger_data:
 /* 0DBE20 80145720 03E00008 */  jr    $ra
 /* 0DBE24 80145724 AC800024 */   sw    $zero, 0x24($a0)
 
-init_trigger_list:
+glabel init_trigger_list
 /* 0DBE28 80145728 3C028007 */  lui   $v0, 0x8007
 /* 0DBE2C 8014572C 8C42419C */  lw    $v0, 0x419c($v0)
 /* 0DBE30 80145730 80420070 */  lb    $v0, 0x70($v0)
@@ -87,7 +87,7 @@ init_trigger_list:
 /* 0DBE64 80145764 03E00008 */  jr    $ra
 /* 0DBE68 80145768 00000000 */   nop   
 
-create_trigger:
+glabel create_trigger
 /* 0DBE6C 8014576C 3C038016 */  lui   $v1, 0x8016
 /* 0DBE70 80145770 8C639390 */  lw    $v1, -0x6c70($v1)
 /* 0DBE74 80145774 27BDFFE0 */  addiu $sp, $sp, -0x20
@@ -159,7 +159,7 @@ create_trigger:
 /* 0DBF58 80145858 03E00008 */  jr    $ra
 /* 0DBF5C 8014585C 27BD0020 */   addiu $sp, $sp, 0x20
 
-update_triggers:
+glabel update_triggers
 /* 0DBF60 80145860 27BDFFD0 */  addiu $sp, $sp, -0x30
 /* 0DBF64 80145864 AFB20020 */  sw    $s2, 0x20($sp)
 /* 0DBF68 80145868 3C128016 */  lui   $s2, 0x8016
@@ -412,7 +412,7 @@ update_triggers:
 /* 0DC2EC 80145BEC 03E00008 */  jr    $ra
 /* 0DC2F0 80145BF0 27BD0030 */   addiu $sp, $sp, 0x30
 
-delete_trigger:
+glabel delete_trigger
 /* 0DC2F4 80145BF4 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0DC2F8 80145BF8 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0DC2FC 80145BFC 3C118016 */  lui   $s1, 0x8016
@@ -447,7 +447,7 @@ delete_trigger:
 /* 0DC364 80145C64 03E00008 */  jr    $ra
 /* 0DC368 80145C68 27BD0020 */   addiu $sp, $sp, 0x20
 
-is_trigger_bound:
+glabel is_trigger_bound
 /* 0DC36C 80145C6C 0000402D */  daddu $t0, $zero, $zero
 /* 0DC370 80145C70 3C078016 */  lui   $a3, 0x8016
 /* 0DC374 80145C74 8CE79390 */  lw    $a3, -0x6c70($a3)
@@ -478,7 +478,7 @@ is_trigger_bound:
 /* 0DC3C8 80145CC8 03E00008 */  jr    $ra
 /* 0DC3CC 80145CCC 0000102D */   daddu $v0, $zero, $zero
 
-get_trigger_by_id:
+glabel get_trigger_by_id
 /* 0DC3D0 80145CD0 3C028016 */  lui   $v0, 0x8016
 /* 0DC3D4 80145CD4 8C429390 */  lw    $v0, -0x6c70($v0)
 /* 0DC3D8 80145CD8 00042080 */  sll   $a0, $a0, 2
@@ -486,7 +486,7 @@ get_trigger_by_id:
 /* 0DC3E0 80145CE0 03E00008 */  jr    $ra
 /* 0DC3E4 80145CE4 8C820000 */   lw    $v0, ($a0)
 
-func_80145CE8:
+glabel func_80145CE8
 /* 0DC3E8 80145CE8 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0DC3EC 80145CEC AFB00010 */  sw    $s0, 0x10($sp)
 /* 0DC3F0 80145CF0 AFBF0014 */  sw    $ra, 0x14($sp)

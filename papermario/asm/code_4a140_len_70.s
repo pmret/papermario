@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text8006ED40, "ax"
 
-strcpy:
+glabel strcpy
 /* 04A140 8006ED40 90A20000 */  lbu   $v0, ($a1)
 /* 04A144 8006ED44 10400007 */  beqz  $v0, .L8006ED64
 /* 04A148 8006ED48 00801821 */   addu  $v1, $a0, $zero
@@ -27,7 +27,7 @@ strcpy:
 /* 04A168 8006ED68 03E00008 */  jr    $ra
 /* 04A16C 8006ED6C 00801021 */   addu  $v0, $a0, $zero
 
-strcmp:
+glabel strcmp
 .L8006ED70:
 /* 04A170 8006ED70 90860000 */  lbu   $a2, ($a0)
 /* 04A174 8006ED74 24840001 */  addiu $a0, $a0, 1

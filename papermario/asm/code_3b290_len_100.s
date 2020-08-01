@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text8005FE90, "ax"
 
-nuContRmbStart:
+glabel nuContRmbStart
 /* 03B290 8005FE90 00041080 */  sll   $v0, $a0, 2
 /* 03B294 8005FE94 00441021 */  addu  $v0, $v0, $a0
 /* 03B298 8005FE98 00021040 */  sll   $v0, $v0, 1
@@ -38,7 +38,7 @@ nuContRmbStart:
 /* 03B2E8 8005FEE8 27BD0038 */   addiu $sp, $sp, 0x38
 
 /* 03B2EC 8005FEEC 00000000 */  nop   
-nuContRmbCheck:
+glabel nuContRmbCheck
 /* 03B2F0 8005FEF0 27BDFFD0 */  addiu $sp, $sp, -0x30
 /* 03B2F4 8005FEF4 AFB00020 */  sw    $s0, 0x20($sp)
 /* 03B2F8 8005FEF8 0080802D */  daddu $s0, $a0, $zero

@@ -6,7 +6,7 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text8006EF60, "ax"
@@ -14,7 +14,7 @@
 /* 04A360 8006EF60 03E00008 */  jr    $ra
 /* 04A364 8006EF64 00000000 */   nop   
 
-osFlashInit:
+glabel osFlashInit
 /* 04A368 8006EF68 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 04A36C 8006EF6C AFBF0014 */  sw    $ra, 0x14($sp)
 /* 04A370 8006EF70 3C04800B */  lui   $a0, 0x800b
@@ -105,7 +105,7 @@ osFlashInit:
 /* 04A4B0 8006F0B0 03E00008 */  jr    $ra
 /* 04A4B4 8006F0B4 00000000 */   nop   
 
-osFlashReadStatus:
+glabel osFlashReadStatus
 /* 04A4B8 8006F0B8 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 04A4BC 8006F0BC AFBF0014 */  sw    $ra, 0x14($sp)
 /* 04A4C0 8006F0C0 AFA40020 */  sw    $a0, 0x20($sp)
@@ -159,7 +159,7 @@ osFlashReadStatus:
 /* 04A57C 8006F17C 03E00008 */  jr    $ra
 /* 04A580 8006F180 00000000 */   nop   
 
-osFlashReadId:
+glabel osFlashReadId
 /* 04A584 8006F184 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 04A588 8006F188 AFBF0014 */  sw    $ra, 0x14($sp)
 /* 04A58C 8006F18C AFA40020 */  sw    $a0, 0x20($sp)
@@ -232,7 +232,7 @@ osFlashReadId:
 /* 04A694 8006F294 03E00008 */  jr    $ra
 /* 04A698 8006F298 00000000 */   nop   
 
-osFlashClearStatus:
+glabel osFlashClearStatus
 /* 04A69C 8006F29C 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 04A6A0 8006F2A0 AFBF0014 */  sw    $ra, 0x14($sp)
 /* 04A6A4 8006F2A4 3C04800B */  lui   $a0, 0x800b
@@ -262,7 +262,7 @@ osFlashClearStatus:
 /* 04A700 8006F300 03E00008 */  jr    $ra
 /* 04A704 8006F304 00000000 */   nop   
 
-osFlashAllErase:
+glabel osFlashAllErase
 /* 04A708 8006F308 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 04A70C 8006F30C AFBF0014 */  sw    $ra, 0x14($sp)
 /* 04A710 8006F310 3C04800B */  lui   $a0, 0x800b
@@ -340,7 +340,7 @@ osFlashAllErase:
 /* 04A81C 8006F41C 03E00008 */  jr    $ra
 /* 04A820 8006F420 00000000 */   nop   
 
-osFlashSectorErase:
+glabel osFlashSectorErase
 /* 04A824 8006F424 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 04A828 8006F428 AFBF0014 */  sw    $ra, 0x14($sp)
 /* 04A82C 8006F42C AFA40020 */  sw    $a0, 0x20($sp)
@@ -422,7 +422,7 @@ osFlashSectorErase:
 /* 04A948 8006F548 03E00008 */  jr    $ra
 /* 04A94C 8006F54C 00000000 */   nop   
 
-osFlashWriteBuffer:
+glabel osFlashWriteBuffer
 /* 04A950 8006F550 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 04A954 8006F554 AFBF0014 */  sw    $ra, 0x14($sp)
 /* 04A958 8006F558 AFA40020 */  sw    $a0, 0x20($sp)
@@ -476,7 +476,7 @@ osFlashWriteBuffer:
 /* 04AA14 8006F614 03E00008 */  jr    $ra
 /* 04AA18 8006F618 00000000 */   nop   
 
-osFlashWriteArray:
+glabel osFlashWriteArray
 /* 04AA1C 8006F61C 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 04AA20 8006F620 AFBF0014 */  sw    $ra, 0x14($sp)
 /* 04AA24 8006F624 AFA40020 */  sw    $a0, 0x20($sp)
@@ -564,7 +564,7 @@ osFlashWriteArray:
 /* 04AB54 8006F754 03E00008 */  jr    $ra
 /* 04AB58 8006F758 00000000 */   nop   
 
-osFlashReadArray:
+glabel osFlashReadArray
 /* 04AB5C 8006F75C 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 04AB60 8006F760 AFBF0014 */  sw    $ra, 0x14($sp)
 /* 04AB64 8006F764 AFA40020 */  sw    $a0, 0x20($sp)

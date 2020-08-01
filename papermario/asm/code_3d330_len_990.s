@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80061F30, "ax"
 
-guFrustumF:
+glabel guFrustumF
 /* 03D330 80061F30 27BDFFB0 */  addiu $sp, $sp, -0x50
 /* 03D334 80061F34 F7BA0038 */  sdc1  $f26, 0x38($sp)
 /* 03D338 80061F38 C7BA0060 */  lwc1  $f26, 0x60($sp)
@@ -91,7 +91,7 @@ guFrustumF:
 /* 03D458 80062058 03E00008 */  jr    $ra
 /* 03D45C 8006205C 27BD0050 */   addiu $sp, $sp, 0x50
 
-guFrustum:
+glabel guFrustum
 /* 03D460 80062060 27BDFF70 */  addiu $sp, $sp, -0x90
 /* 03D464 80062064 F7B80070 */  sdc1  $f24, 0x70($sp)
 /* 03D468 80062068 C7B800A0 */  lwc1  $f24, 0xa0($sp)
@@ -179,7 +179,7 @@ guFrustum:
 /* 03D5A8 800621A8 27BD0090 */   addiu $sp, $sp, 0x90
 
 /* 03D5AC 800621AC 00000000 */  nop   
-guLookAtF:
+glabel guLookAtF
 /* 03D5B0 800621B0 27BDFF90 */  addiu $sp, $sp, -0x70
 /* 03D5B4 800621B4 AFB30024 */  sw    $s3, 0x24($sp)
 /* 03D5B8 800621B8 8FB3008C */  lw    $s3, 0x8c($sp)
@@ -408,7 +408,7 @@ guLookAtF:
 /* 03D928 80062528 03E00008 */  jr    $ra
 /* 03D92C 8006252C 27BD0070 */   addiu $sp, $sp, 0x70
 
-guLookAt:
+glabel guLookAt
 /* 03D930 80062530 27BDFF48 */  addiu $sp, $sp, -0xb8
 /* 03D934 80062534 AFB20068 */  sw    $s2, 0x68($sp)
 /* 03D938 80062538 8FB200D4 */  lw    $s2, 0xd4($sp)

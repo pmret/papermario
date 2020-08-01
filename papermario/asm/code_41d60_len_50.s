@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80066960, "ax"
 
-osUnmapTLBAll:
+glabel osUnmapTLBAll
 /* 041D60 80066960 40085000 */  mfc0  $t0, $10
 /* 041D64 80066964 2409001E */  addiu $t1, $zero, 0x1e
 /* 041D68 80066968 3C0A8000 */  lui   $t2, 0x8000

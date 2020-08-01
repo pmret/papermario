@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text8002CA40, "ax"
 
-nuGfxTaskMgr:
+glabel nuGfxTaskMgr
 /* 007E40 8002CA40 27BDFFD0 */  addiu $sp, $sp, -0x30
 /* 007E44 8002CA44 3C04800E */  lui   $a0, 0x800e
 /* 007E48 8002CA48 2484AC90 */  addiu $a0, $a0, -0x5370
@@ -82,7 +82,7 @@ nuGfxTaskMgr:
 /* 007F30 8002CB30 0800B2A2 */  j     .L8002CA88
 /* 007F34 8002CB34 00000000 */   nop   
 
-nuGfxTaskMgrInit:
+glabel nuGfxTaskMgrInit
 /* 007F38 8002CB38 27BDFFC0 */  addiu $sp, $sp, -0x40
 /* 007F3C 8002CB3C 24020008 */  addiu $v0, $zero, 8
 /* 007F40 8002CB40 3C01800A */  lui   $at, 0x800a
@@ -184,7 +184,7 @@ nuGfxTaskMgrInit:
 /* 0080BC 8002CCBC 03E00008 */  jr    $ra
 /* 0080C0 8002CCC0 27BD0040 */   addiu $sp, $sp, 0x40
 
-nuGfxTaskStart:
+glabel nuGfxTaskStart
 /* 0080C4 8002CCC4 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0080C8 8002CCC8 3C0A800A */  lui   $t2, 0x800a
 /* 0080CC 8002CCCC 254AC510 */  addiu $t2, $t2, -0x3af0

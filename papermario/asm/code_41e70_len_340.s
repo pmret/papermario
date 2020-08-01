@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80066A70, "ax"
 
-osCreateViManager:
+glabel osCreateViManager
 /* 041E70 80066A70 27BDFFD0 */  addiu $sp, $sp, -0x30
 /* 041E74 80066A74 AFB40028 */  sw    $s4, 0x28($sp)
 /* 041E78 80066A78 3C148009 */  lui   $s4, 0x8009
@@ -119,7 +119,7 @@ osCreateViManager:
 /* 042008 80066C08 03E00008 */  jr    $ra
 /* 04200C 80066C0C 27BD0030 */   addiu $sp, $sp, 0x30
 
-viMgrMain:
+glabel viMgrMain
 /* 042010 80066C10 27BDFFD0 */  addiu $sp, $sp, -0x30
 /* 042014 80066C14 AFB00018 */  sw    $s0, 0x18($sp)
 /* 042018 80066C18 00808021 */  addu  $s0, $a0, $zero

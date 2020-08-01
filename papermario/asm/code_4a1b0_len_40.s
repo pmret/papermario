@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text8006EDB0, "ax"
 
-memset:
+glabel memset
 /* 04A1B0 8006EDB0 27BDFFF8 */  addiu $sp, $sp, -8
 /* 04A1B4 8006EDB4 00801021 */  addu  $v0, $a0, $zero
 /* 04A1B8 8006EDB8 00403821 */  addu  $a3, $v0, $zero

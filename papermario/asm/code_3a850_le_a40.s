@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text8005F450, "ax"
 
-nuPiInit:
+glabel nuPiInit
 /* 03A850 8005F450 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 03A854 8005F454 24040096 */  addiu $a0, $zero, 0x96
 /* 03A858 8005F458 3C05800B */  lui   $a1, 0x800b
@@ -29,7 +29,7 @@ nuPiInit:
 /* 03A888 8005F488 03E00008 */  jr    $ra
 /* 03A88C 8005F48C 27BD0018 */   addiu $sp, $sp, 0x18
 
-nuPiReadRom:
+glabel nuPiReadRom
 /* 03A890 8005F490 27BDFFA0 */  addiu $sp, $sp, -0x60
 /* 03A894 8005F494 AFB30054 */  sw    $s3, 0x54($sp)
 /* 03A898 8005F498 0080982D */  daddu $s3, $a0, $zero
@@ -86,7 +86,7 @@ nuPiReadRom:
 /* 03A958 8005F558 27BD0060 */   addiu $sp, $sp, 0x60
 
 /* 03A95C 8005F55C 00000000 */  nop   
-nuGfxInit:
+glabel nuGfxInit
 /* 03A960 8005F560 27BDF7E8 */  addiu $sp, $sp, -0x818
 /* 03A964 8005F564 AFBF0810 */  sw    $ra, 0x810($sp)
 /* 03A968 8005F568 0C01807C */  jal   nuGfxThreadStart
@@ -132,7 +132,7 @@ nuGfxInit:
 /* 03AA08 8005F608 03E00008 */  jr    $ra
 /* 03AA0C 8005F60C 27BD0818 */   addiu $sp, $sp, 0x818
 
-nuContInit:
+glabel nuContInit
 /* 03AA10 8005F610 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 03AA14 8005F614 AFBF0014 */  sw    $ra, 0x14($sp)
 /* 03AA18 8005F618 0C00B38C */  jal   nuSiMgrInit
@@ -150,7 +150,7 @@ nuContInit:
 /* 03AA48 8005F648 27BD0018 */   addiu $sp, $sp, 0x18
 
 /* 03AA4C 8005F64C 00000000 */  nop   
-nuContDataGet:
+glabel nuContDataGet
 /* 03AA50 8005F650 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 03AA54 8005F654 AFB10014 */  sw    $s1, 0x14($sp)
 /* 03AA58 8005F658 0080882D */  daddu $s1, $a0, $zero
@@ -176,7 +176,7 @@ nuContDataGet:
 /* 03AAA8 8005F6A8 27BD0020 */   addiu $sp, $sp, 0x20
 
 /* 03AAAC 8005F6AC 00000000 */  nop   
-nuContPakMgrInit:
+glabel nuContPakMgrInit
 /* 03AAB0 8005F6B0 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 03AAB4 8005F6B4 3C048009 */  lui   $a0, 0x8009
 /* 03AAB8 8005F6B8 24843CD0 */  addiu $a0, $a0, 0x3cd0
@@ -187,7 +187,7 @@ nuContPakMgrInit:
 /* 03AACC 8005F6CC 03E00008 */  jr    $ra
 /* 03AAD0 8005F6D0 27BD0018 */   addiu $sp, $sp, 0x18
 
-nuContPakMgrRemove:
+glabel nuContPakMgrRemove
 /* 03AAD4 8005F6D4 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 03AAD8 8005F6D8 3C048009 */  lui   $a0, 0x8009
 /* 03AADC 8005F6DC 24843CD0 */  addiu $a0, $a0, 0x3cd0
@@ -198,7 +198,7 @@ nuContPakMgrRemove:
 /* 03AAF0 8005F6F0 03E00008 */  jr    $ra
 /* 03AAF4 8005F6F4 27BD0018 */   addiu $sp, $sp, 0x18
 
-contPakOpen:
+glabel contPakOpen
 /* 03AAF8 8005F6F8 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 03AAFC 8005F6FC AFBF0014 */  sw    $ra, 0x14($sp)
 /* 03AB00 8005F700 AFB00010 */  sw    $s0, 0x10($sp)
@@ -221,7 +221,7 @@ contPakOpen:
 /* 03AB40 8005F740 03E00008 */  jr    $ra
 /* 03AB44 8005F744 27BD0018 */   addiu $sp, $sp, 0x18
 
-contPakFree:
+glabel contPakFree
 /* 03AB48 8005F748 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 03AB4C 8005F74C AFBF0010 */  sw    $ra, 0x10($sp)
 /* 03AB50 8005F750 8C85000C */  lw    $a1, 0xc($a0)
@@ -233,7 +233,7 @@ contPakFree:
 /* 03AB68 8005F768 03E00008 */  jr    $ra
 /* 03AB6C 8005F76C 27BD0018 */   addiu $sp, $sp, 0x18
 
-contPakFileReadWrite:
+glabel contPakFileReadWrite
 /* 03AB70 8005F770 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 03AB74 8005F774 AFBF0018 */  sw    $ra, 0x18($sp)
 /* 03AB78 8005F778 8C83000C */  lw    $v1, 0xc($a0)
@@ -251,7 +251,7 @@ contPakFileReadWrite:
 /* 03ABA8 8005F7A8 03E00008 */  jr    $ra
 /* 03ABAC 8005F7AC 27BD0020 */   addiu $sp, $sp, 0x20
 
-contPakFileOpen:
+glabel contPakFileOpen
 /* 03ABB0 8005F7B0 27BDFFD0 */  addiu $sp, $sp, -0x30
 /* 03ABB4 8005F7B4 AFBF002C */  sw    $ra, 0x2c($sp)
 /* 03ABB8 8005F7B8 AFB20028 */  sw    $s2, 0x28($sp)
@@ -299,7 +299,7 @@ contPakFileOpen:
 /* 03AC5C 8005F85C 03E00008 */  jr    $ra
 /* 03AC60 8005F860 27BD0030 */   addiu $sp, $sp, 0x30
 
-contPakFileDelete:
+glabel contPakFileDelete
 /* 03AC64 8005F864 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 03AC68 8005F868 AFBF0018 */  sw    $ra, 0x18($sp)
 /* 03AC6C 8005F86C 8C82000C */  lw    $v0, 0xc($a0)
@@ -317,7 +317,7 @@ contPakFileDelete:
 /* 03AC9C 8005F89C 03E00008 */  jr    $ra
 /* 03ACA0 8005F8A0 27BD0020 */   addiu $sp, $sp, 0x20
 
-contPakFileState:
+glabel contPakFileState
 /* 03ACA4 8005F8A4 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 03ACA8 8005F8A8 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 03ACAC 8005F8AC 8C83000C */  lw    $v1, 0xc($a0)
@@ -330,7 +330,7 @@ contPakFileState:
 /* 03ACC8 8005F8C8 03E00008 */  jr    $ra
 /* 03ACCC 8005F8CC 27BD0018 */   addiu $sp, $sp, 0x18
 
-contPakFileNum:
+glabel contPakFileNum
 /* 03ACD0 8005F8D0 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 03ACD4 8005F8D4 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 03ACD8 8005F8D8 8C82000C */  lw    $v0, 0xc($a0)
@@ -343,7 +343,7 @@ contPakFileNum:
 /* 03ACF4 8005F8F4 03E00008 */  jr    $ra
 /* 03ACF8 8005F8F8 27BD0018 */   addiu $sp, $sp, 0x18
 
-contPakRepairId:
+glabel contPakRepairId
 /* 03ACFC 8005F8FC 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 03AD00 8005F900 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 03AD04 8005F904 8C82000C */  lw    $v0, 0xc($a0)
@@ -354,7 +354,7 @@ contPakRepairId:
 /* 03AD18 8005F918 27BD0018 */   addiu $sp, $sp, 0x18
 
 /* 03AD1C 8005F91C 00000000 */  nop   
-osMotorStop:
+glabel osMotorStop
 /* 03AD20 8005F920 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 03AD24 8005F924 AFB20018 */  sw    $s2, 0x18($sp)
 /* 03AD28 8005F928 0080902D */  daddu $s2, $a0, $zero
@@ -500,7 +500,7 @@ osMotorStop:
 /* 03AF08 8005FB08 03E00008 */  jr    $ra
 /* 03AF0C 8005FB0C 27BD0028 */   addiu $sp, $sp, 0x28
 
-contRmbControl:
+glabel contRmbControl
 /* 03AF10 8005FB10 27BDFFD0 */  addiu $sp, $sp, -0x30
 /* 03AF14 8005FB14 AFB10014 */  sw    $s1, 0x14($sp)
 /* 03AF18 8005FB18 0000882D */  daddu $s1, $zero, $zero
@@ -612,7 +612,7 @@ contRmbControl:
 /* 03B084 8005FC84 03E00008 */  jr    $ra
 /* 03B088 8005FC88 27BD0030 */   addiu $sp, $sp, 0x30
 
-nuContRmbMgrInit:
+glabel nuContRmbMgrInit
 /* 03B08C 8005FC8C 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 03B090 8005FC90 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 03B094 8005FC94 0000202D */  daddu $a0, $zero, $zero
@@ -639,7 +639,7 @@ nuContRmbMgrInit:
 /* 03B0E4 8005FCE4 03E00008 */  jr    $ra
 /* 03B0E8 8005FCE8 27BD0018 */   addiu $sp, $sp, 0x18
 
-nuContRmbMgrRemove:
+glabel nuContRmbMgrRemove
 /* 03B0EC 8005FCEC 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 03B0F0 8005FCF0 3C048009 */  lui   $a0, 0x8009
 /* 03B0F4 8005FCF4 24843D00 */  addiu $a0, $a0, 0x3d00
@@ -650,7 +650,7 @@ nuContRmbMgrRemove:
 /* 03B108 8005FD08 03E00008 */  jr    $ra
 /* 03B10C 8005FD0C 27BD0018 */   addiu $sp, $sp, 0x18
 
-contRmbCheckMesg:
+glabel contRmbCheckMesg
 /* 03B110 8005FD10 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 03B114 8005FD14 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 03B118 8005FD18 8C82000C */  lw    $v0, 0xc($a0)
@@ -670,7 +670,7 @@ contRmbCheckMesg:
 /* 03B150 8005FD50 03E00008 */  jr    $ra
 /* 03B154 8005FD54 27BD0018 */   addiu $sp, $sp, 0x18
 
-contRmbStartMesg:
+glabel contRmbStartMesg
 /* 03B158 8005FD58 8C84000C */  lw    $a0, 0xc($a0)
 /* 03B15C 8005FD5C 90830000 */  lbu   $v1, ($a0)
 /* 03B160 8005FD60 8C850008 */  lw    $a1, 8($a0)

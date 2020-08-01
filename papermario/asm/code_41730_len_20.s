@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80066330, "ax"
 
-osSetTime:
+glabel osSetTime
 /* 041730 80066330 3C01800A */  lui   $at, 0x800a
 /* 041734 80066334 AC24A608 */  sw    $a0, -0x59f8($at)
 /* 041738 80066338 3C01800A */  lui   $at, 0x800a

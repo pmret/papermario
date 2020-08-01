@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80069460, "ax"
 
-osPfsRepairId:
+glabel osPfsRepairId
 /* 044860 80069460 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 044864 80069464 AFB00010 */  sw    $s0, 0x10($sp)
 /* 044868 80069468 00808021 */  addu  $s0, $a0, $zero

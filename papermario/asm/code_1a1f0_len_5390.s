@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text8003EDF0, "ax"
 
-get_defeated:
+glabel get_defeated
 /* 01A1F0 8003EDF0 0080302D */  daddu $a2, $a0, $zero
 /* 01A1F4 8003EDF4 04A10002 */  bgez  $a1, .L8003EE00
 /* 01A1F8 8003EDF8 00A0182D */   daddu $v1, $a1, $zero
@@ -34,7 +34,7 @@ get_defeated:
 /* 01A238 8003EE38 03E00008 */  jr    $ra
 /* 01A23C 8003EE3C 00621024 */   and   $v0, $v1, $v0
 
-set_defeated:
+glabel set_defeated
 /* 01A240 8003EE40 0080182D */  daddu $v1, $a0, $zero
 /* 01A244 8003EE44 00A0102D */  daddu $v0, $a1, $zero
 /* 01A248 8003EE48 04410002 */  bgez  $v0, .L8003EE54
@@ -405,7 +405,7 @@ set_defeated:
 /* 01A790 8003F390 03E00008 */  jr    $ra
 /* 01A794 8003F394 24020002 */   addiu $v0, $zero, 2
 
-GetCamLookAtObjVector:
+glabel GetCamLookAtObjVector
 /* 01A798 8003F398 3C038007 */  lui   $v1, 0x8007
 /* 01A79C 8003F39C 8C637410 */  lw    $v1, 0x7410($v1)
 /* 01A7A0 8003F3A0 3C05800B */  lui   $a1, 0x800b
@@ -430,7 +430,7 @@ GetCamLookAtObjVector:
 /* 01A7EC 8003F3EC 03E00008 */  jr    $ra
 /* 01A7F0 8003F3F0 24020002 */   addiu $v0, $zero, 2
 
-HasMerleeCasts:
+glabel HasMerleeCasts
 /* 01A7F4 8003F3F4 AC800084 */  sw    $zero, 0x84($a0)
 /* 01A7F8 8003F3F8 3C028011 */  lui   $v0, 0x8011
 /* 01A7FC 8003F3FC 8042F51A */  lb    $v0, -0xae6($v0)
@@ -534,7 +534,7 @@ HasMerleeCasts:
 /* 01A978 8003F578 03E00008 */  jr    $ra
 /* 01A97C 8003F57C 27BD0028 */   addiu $sp, $sp, 0x28
 
-OnDefeatEnemy:
+glabel OnDefeatEnemy
 /* 01A980 8003F580 27BDFFC8 */  addiu $sp, $sp, -0x38
 /* 01A984 8003F584 AFB20028 */  sw    $s2, 0x28($sp)
 /* 01A988 8003F588 0080902D */  daddu $s2, $a0, $zero
@@ -636,7 +636,7 @@ OnDefeatEnemy:
 /* 01AAE0 8003F6E0 03E00008 */  jr    $ra
 /* 01AAE4 8003F6E4 27BD0038 */   addiu $sp, $sp, 0x38
 
-OnFleeBattleDrops:
+glabel OnFleeBattleDrops
 /* 01AAE8 8003F6E8 27BDFFD0 */  addiu $sp, $sp, -0x30
 /* 01AAEC 8003F6EC AFB00020 */  sw    $s0, 0x20($sp)
 /* 01AAF0 8003F6F0 0080802D */  daddu $s0, $a0, $zero
@@ -698,7 +698,7 @@ OnFleeBattleDrops:
 /* 01ABC4 8003F7C4 03E00008 */  jr    $ra
 /* 01ABC8 8003F7C8 27BD0030 */   addiu $sp, $sp, 0x30
 
-func_8003F7CC:
+glabel func_8003F7CC
 /* 01ABCC 8003F7CC 27BDFF40 */  addiu $sp, $sp, -0xc0
 /* 01ABD0 8003F7D0 AFB30074 */  sw    $s3, 0x74($sp)
 /* 01ABD4 8003F7D4 3C13800B */  lui   $s3, 0x800b
@@ -2594,11 +2594,11 @@ func_8003F7CC:
 /* 01C754 80041354 03E00008 */  jr    $ra
 /* 01C758 80041358 27BD00C0 */   addiu $sp, $sp, 0xc0
 
-func_8004135C:
+glabel func_8004135C
 /* 01C75C 8004135C 03E00008 */  jr    $ra
 /* 01C760 80041360 00000000 */   nop   
 
-func_80041364:
+glabel func_80041364
 /* 01C764 80041364 27BDFFC8 */  addiu $sp, $sp, -0x38
 /* 01C768 80041368 AFB50024 */  sw    $s5, 0x24($sp)
 /* 01C76C 8004136C 3C15800B */  lui   $s5, 0x800b
@@ -3033,7 +3033,7 @@ func_80041364:
 /* 01CD5C 8004195C 03E00008 */  jr    $ra
 /* 01CD60 80041960 27BD0038 */   addiu $sp, $sp, 0x38
 
-func_80041964:
+glabel func_80041964
 /* 01CD64 80041964 27BDFF88 */  addiu $sp, $sp, -0x78
 /* 01CD68 80041968 AFB00038 */  sw    $s0, 0x38($sp)
 /* 01CD6C 8004196C 3C10800B */  lui   $s0, 0x800b
@@ -3232,7 +3232,7 @@ func_80041964:
 /* 01D054 80041C54 03E00008 */  jr    $ra
 /* 01D058 80041C58 27BD0078 */   addiu $sp, $sp, 0x78
 
-show_first_strike_message:
+glabel show_first_strike_message
 /* 01D05C 80041C5C 27BDFFA8 */  addiu $sp, $sp, -0x58
 /* 01D060 80041C60 3C05800B */  lui   $a1, 0x800b
 /* 01D064 80041C64 24A50F10 */  addiu $a1, $a1, 0xf10
@@ -3423,7 +3423,7 @@ show_first_strike_message:
 /* 01D308 80041F08 03E00008 */  jr    $ra
 /* 01D30C 80041F0C 27BD0058 */   addiu $sp, $sp, 0x58
 
-func_80041F10:
+glabel func_80041F10
 /* 01D310 80041F10 27BDFFC8 */  addiu $sp, $sp, -0x38
 /* 01D314 80041F14 AFB60028 */  sw    $s6, 0x28($sp)
 /* 01D318 80041F18 3C16800B */  lui   $s6, 0x800b
@@ -4687,7 +4687,7 @@ func_80041F10:
 /* 01E444 80043044 03E00008 */  jr    $ra
 /* 01E448 80043048 27BD0038 */   addiu $sp, $sp, 0x38
 
-func_8004304C:
+glabel func_8004304C
 /* 01E44C 8004304C 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 01E450 80043050 3C03800B */  lui   $v1, 0x800b
 /* 01E454 80043054 24630F10 */  addiu $v1, $v1, 0xf10
@@ -4710,7 +4710,7 @@ func_8004304C:
 /* 01E494 80043094 03E00008 */  jr    $ra
 /* 01E498 80043098 27BD0018 */   addiu $sp, $sp, 0x18
 
-func_8004309C:
+glabel func_8004309C
 /* 01E49C 8004309C 3C03800A */  lui   $v1, 0x800a
 /* 01E4A0 800430A0 8C63A5D0 */  lw    $v1, -0x5a30($v1)
 /* 01E4A4 800430A4 27BDFFE0 */  addiu $sp, $sp, -0x20
@@ -4799,11 +4799,11 @@ func_8004309C:
 /* 01E5CC 800431CC 03E00008 */  jr    $ra
 /* 01E5D0 800431D0 27BD0020 */   addiu $sp, $sp, 0x20
 
-func_800431D4:
+glabel func_800431D4
 /* 01E5D4 800431D4 03E00008 */  jr    $ra
 /* 01E5D8 800431D8 00000000 */   nop   
 
-func_800431DC:
+glabel func_800431DC
 /* 01E5DC 800431DC 27BDFF58 */  addiu $sp, $sp, -0xa8
 /* 01E5E0 800431E0 3C03FDFF */  lui   $v1, 0xfdff
 /* 01E5E4 800431E4 AFB40060 */  sw    $s4, 0x60($sp)
@@ -5128,7 +5128,7 @@ func_800431DC:
 /* 01EAA8 800436A8 03E00008 */  jr    $ra
 /* 01EAAC 800436AC 27BD00A8 */   addiu $sp, $sp, 0xa8
 
-create_npcs:
+glabel create_npcs
 /* 01EAB0 800436B0 27BDFFA0 */  addiu $sp, $sp, -0x60
 /* 01EAB4 800436B4 AFBE0058 */  sw    $fp, 0x58($sp)
 /* 01EAB8 800436B8 27BE0010 */  addiu $fp, $sp, 0x10
@@ -5886,11 +5886,11 @@ create_npcs:
 /* 01F538 80044138 03E00008 */  jr    $ra
 /* 01F53C 8004413C 27BD0060 */   addiu $sp, $sp, 0x60
 
-func_80044140:
+glabel func_80044140
 /* 01F540 80044140 03E00008 */  jr    $ra
 /* 01F544 80044144 00000000 */   nop   
 
-func_80044148:
+glabel func_80044148
 /* 01F548 80044148 3C02800A */  lui   $v0, 0x800a
 /* 01F54C 8004414C 8C42A600 */  lw    $v0, -0x5a00($v0)
 /* 01F550 80044150 3C03800B */  lui   $v1, 0x800b

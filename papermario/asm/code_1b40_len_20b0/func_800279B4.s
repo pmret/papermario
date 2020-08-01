@@ -1,9 +1,9 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "globals.inc"
+.include "include/macro.inc"
 
-func_800279B4:
+glabel func_800279B4
 /* 002DB4 800279B4 27BDFF98 */  addiu $sp, $sp, -0x68
 /* 002DB8 800279B8 AFB50054 */  sw    $s5, 0x54($sp)
 /* 002DBC 800279BC 0080A82D */  daddu $s5, $a0, $zero

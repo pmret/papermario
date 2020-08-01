@@ -6,7 +6,7 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text800525A0, "ax"
@@ -43,7 +43,7 @@
 /* 02DA0C 8005260C 03E00008 */  jr    $ra
 /* 02DA10 80052610 27BD0028 */   addiu $sp, $sp, 0x28
 
-func_80052614:
+glabel func_80052614
 /* 02DA14 80052614 0000282D */  daddu $a1, $zero, $zero
 /* 02DA18 80052618 24060080 */  addiu $a2, $zero, 0x80
 /* 02DA1C 8005261C 24031320 */  addiu $v1, $zero, 0x1320
@@ -65,7 +65,7 @@ func_80052614:
 /* 02DA58 80052658 03E00008 */  jr    $ra
 /* 02DA5C 8005265C 00000000 */   nop   
 
-func_80052660:
+glabel func_80052660
 /* 02DA60 80052660 27BDFFD0 */  addiu $sp, $sp, -0x30
 /* 02DA64 80052664 AFB60028 */  sw    $s6, 0x28($sp)
 /* 02DA68 80052668 0080B02D */  daddu $s6, $a0, $zero
@@ -419,7 +419,7 @@ func_80052660:
 /* 02DF3C 80052B3C 03E00008 */  jr    $ra
 /* 02DF40 80052B40 27BD0030 */   addiu $sp, $sp, 0x30
 
-func_80052B44:
+glabel func_80052B44
 /* 02DF44 80052B44 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 02DF48 80052B48 AFB00010 */  sw    $s0, 0x10($sp)
 /* 02DF4C 80052B4C 0080802D */  daddu $s0, $a0, $zero
@@ -452,7 +452,7 @@ func_80052B44:
 /* 02DFB8 80052BB8 03E00008 */  jr    $ra
 /* 02DFBC 80052BBC 27BD0018 */   addiu $sp, $sp, 0x18
 
-func_80052BC0:
+glabel func_80052BC0
 /* 02DFC0 80052BC0 3C02B65C */  lui   $v0, 0xb65c
 /* 02DFC4 80052BC4 34426D59 */  ori   $v0, $v0, 0x6d59
 /* 02DFC8 80052BC8 00820018 */  mult  $a0, $v0
@@ -468,7 +468,7 @@ func_80052BC0:
 /* 02DFF0 80052BF0 03E00008 */  jr    $ra
 /* 02DFF4 80052BF4 000210C0 */   sll   $v0, $v0, 3
 
-func_80052BF8:
+glabel func_80052BF8
 /* 02DFF8 80052BF8 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 02DFFC 80052BFC AFB00010 */  sw    $s0, 0x10($sp)
 /* 02E000 80052C00 0080802D */  daddu $s0, $a0, $zero
@@ -538,7 +538,7 @@ func_80052BF8:
 /* 02E0F4 80052CF4 03E00008 */  jr    $ra
 /* 02E0F8 80052CF8 27BD0018 */   addiu $sp, $sp, 0x18
 
-func_80052CFC:
+glabel func_80052CFC
 /* 02E0FC 80052CFC 240A00FC */  addiu $t2, $zero, 0xfc
 /* 02E100 80052D00 240900FB */  addiu $t1, $zero, 0xfb
 /* 02E104 80052D04 240800FD */  addiu $t0, $zero, 0xfd

@@ -6,18 +6,18 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text800337D0, "ax"
 
-func_800337D0:
+glabel func_800337D0
 /* 00EBD0 800337D0 3C028007 */  lui   $v0, 0x8007
 /* 00EBD4 800337D4 8C42419C */  lw    $v0, 0x419c($v0)
 /* 00EBD8 800337D8 03E00008 */  jr    $ra
 /* 00EBDC 800337DC A44400B6 */   sh    $a0, 0xb6($v0)
 
-func_800337E0:
+glabel func_800337E0
 /* 00EBE0 800337E0 3C028007 */  lui   $v0, 0x8007
 /* 00EBE4 800337E4 8C42419C */  lw    $v0, 0x419c($v0)
 /* 00EBE8 800337E8 A44400BC */  sh    $a0, 0xbc($v0)
@@ -25,7 +25,7 @@ func_800337E0:
 /* 00EBF0 800337F0 03E00008 */  jr    $ra
 /* 00EBF4 800337F4 A44400B8 */   sh    $a0, 0xb8($v0)
 
-func_800337F8:
+glabel func_800337F8
 /* 00EBF8 800337F8 3C058007 */  lui   $a1, 0x8007
 /* 00EBFC 800337FC 8CA5419C */  lw    $a1, 0x419c($a1)
 /* 00EC00 80033800 84A200B6 */  lh    $v0, 0xb6($a1)
@@ -44,7 +44,7 @@ func_800337F8:
 /* 00EC28 80033828 03E00008 */  jr    $ra
 /* 00EC2C 8003382C 0000102D */   daddu $v0, $zero, $zero
 
-func_80033830:
+glabel func_80033830
 /* 00EC30 80033830 3C058007 */  lui   $a1, 0x8007
 /* 00EC34 80033834 8CA5419C */  lw    $a1, 0x419c($a1)
 /* 00EC38 80033838 240600FF */  addiu $a2, $zero, 0xff
@@ -66,7 +66,7 @@ func_80033830:
 /* 00EC6C 8003386C 03E00008 */  jr    $ra
 /* 00EC70 80033870 0000102D */   daddu $v0, $zero, $zero
 
-func_80033874:
+glabel func_80033874
 /* 00EC74 80033874 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 00EC78 80033878 AFB00010 */  sw    $s0, 0x10($sp)
 /* 00EC7C 8003387C 3C108007 */  lui   $s0, 0x8007
@@ -91,14 +91,14 @@ func_80033874:
 /* 00ECC8 800338C8 03E00008 */  jr    $ra
 /* 00ECCC 800338CC 27BD0018 */   addiu $sp, $sp, 0x18
 
-start_battle_countdown:
+glabel start_battle_countdown
 /* 00ECD0 800338D0 24020005 */  addiu $v0, $zero, 5
 /* 00ECD4 800338D4 3C01800A */  lui   $at, 0x800a
 /* 00ECD8 800338D8 A0220900 */  sb    $v0, 0x900($at)
 /* 00ECDC 800338DC 03E00008 */  jr    $ra
 /* 00ECE0 800338E0 00000000 */   nop   
 
-step_battle:
+glabel step_battle
 /* 00ECE4 800338E4 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 00ECE8 800338E8 AFB00010 */  sw    $s0, 0x10($sp)
 /* 00ECEC 800338EC 3C10800A */  lui   $s0, 0x800a

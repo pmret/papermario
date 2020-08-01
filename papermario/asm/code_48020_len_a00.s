@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text8006CC20, "ax"
 
-osPfsChecker:
+glabel osPfsChecker
 /* 048020 8006CC20 27BDFB60 */  addiu $sp, $sp, -0x4a0
 /* 048024 8006CC24 AFB1047C */  sw    $s1, 0x47c($sp)
 /* 048028 8006CC28 00808821 */  addu  $s1, $a0, $zero
@@ -332,7 +332,7 @@ osPfsChecker:
 /* 048478 8006D078 03E00008 */  jr    $ra
 /* 04847C 8006D07C 27BD04A0 */   addiu $sp, $sp, 0x4a0
 
-corrupted_init:
+glabel corrupted_init
 /* 048480 8006D080 27BDFED0 */  addiu $sp, $sp, -0x130
 /* 048484 8006D084 AFB20118 */  sw    $s2, 0x118($sp)
 /* 048488 8006D088 00809021 */  addu  $s2, $a0, $zero
@@ -428,7 +428,7 @@ corrupted_init:
 /* 0485D0 8006D1D0 03E00008 */  jr    $ra
 /* 0485D4 8006D1D4 27BD0130 */   addiu $sp, $sp, 0x130
 
-corrupted:
+glabel corrupted
 /* 0485D8 8006D1D8 00052C03 */  sra   $a1, $a1, 0x10
 /* 0485DC 8006D1DC 27BDFFC0 */  addiu $sp, $sp, -0x40
 /* 0485E0 8006D1E0 AFB40028 */  sw    $s4, 0x28($sp)
@@ -529,7 +529,7 @@ corrupted:
 /* 048738 8006D338 03E00008 */  jr    $ra
 /* 04873C 8006D33C 27BD0040 */   addiu $sp, $sp, 0x40
 
-osPfsIsPlug:
+glabel osPfsIsPlug
 /* 048740 8006D340 27BDFFA0 */  addiu $sp, $sp, -0x60
 /* 048744 8006D344 AFB20040 */  sw    $s2, 0x40($sp)
 /* 048748 8006D348 00809021 */  addu  $s2, $a0, $zero
@@ -634,7 +634,7 @@ osPfsIsPlug:
 /* 0488B4 8006D4B4 03E00008 */  jr    $ra
 /* 0488B8 8006D4B8 27BD0060 */   addiu $sp, $sp, 0x60
 
-osPfsRequestData:
+glabel osPfsRequestData
 /* 0488BC 8006D4BC 27BDFFF0 */  addiu $sp, $sp, -0x10
 /* 0488C0 8006D4C0 3C05800A */  lui   $a1, 0x800a
 /* 0488C4 8006D4C4 90A5A606 */  lbu   $a1, -0x59fa($a1)
@@ -679,7 +679,7 @@ osPfsRequestData:
 /* 048958 8006D558 03E00008 */  jr    $ra
 /* 04895C 8006D55C 27BD0010 */   addiu $sp, $sp, 0x10
 
-osPfsGetInitData:
+glabel osPfsGetInitData
 /* 048960 8006D560 27BDFFF0 */  addiu $sp, $sp, -0x10
 /* 048964 8006D564 00805821 */  addu  $t3, $a0, $zero
 /* 048968 8006D568 00A04821 */  addu  $t1, $a1, $zero

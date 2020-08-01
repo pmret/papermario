@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80060920, "ax"
 
-nuContQueryRead:
+glabel nuContQueryRead
 /* 03BD20 80060920 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 03BD24 80060924 24040103 */  addiu $a0, $zero, 0x103
 /* 03BD28 80060928 AFBF0010 */  sw    $ra, 0x10($sp)
@@ -21,7 +21,7 @@ nuContQueryRead:
 /* 03BD38 80060938 03E00008 */  jr    $ra
 /* 03BD3C 8006093C 27BD0018 */   addiu $sp, $sp, 0x18
 
-osSetIntMask:
+glabel osSetIntMask
 /* 03BD40 80060940 400C6000 */  mfc0  $t4, $12
 /* 03BD44 80060944 3182FF01 */  andi  $v0, $t4, 0xff01
 /* 03BD48 80060948 3C088009 */  lui   $t0, 0x8009

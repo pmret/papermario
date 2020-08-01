@@ -6,24 +6,24 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text8006C6E0, "ax"
 
-osSpGetStatus:
+glabel osSpGetStatus
 /* 047AE0 8006C6E0 3C02A404 */  lui   $v0, 0xa404
 /* 047AE4 8006C6E4 34420010 */  ori   $v0, $v0, 0x10
 /* 047AE8 8006C6E8 03E00008 */  jr    $ra
 /* 047AEC 8006C6EC 8C420000 */   lw    $v0, ($v0)
 
-osSpSetStatus:
+glabel osSpSetStatus
 /* 047AF0 8006C6F0 3C02A404 */  lui   $v0, 0xa404
 /* 047AF4 8006C6F4 34420010 */  ori   $v0, $v0, 0x10
 /* 047AF8 8006C6F8 03E00008 */  jr    $ra
 /* 047AFC 8006C6FC AC440000 */   sw    $a0, ($v0)
 
-osSpSetPc:
+glabel osSpSetPc
 /* 047B00 8006C700 3C02A404 */  lui   $v0, 0xa404
 /* 047B04 8006C704 34420010 */  ori   $v0, $v0, 0x10
 /* 047B08 8006C708 8C420000 */  lw    $v0, ($v0)
@@ -40,7 +40,7 @@ osSpSetPc:
 /* 047B28 8006C728 03E00008 */  jr    $ra
 /* 047B2C 8006C72C 00000000 */   nop   
 
-osSpRawStartDma:
+glabel osSpRawStartDma
 /* 047B30 8006C730 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 047B34 8006C734 AFB20018 */  sw    $s2, 0x18($sp)
 /* 047B38 8006C738 00809021 */  addu  $s2, $a0, $zero

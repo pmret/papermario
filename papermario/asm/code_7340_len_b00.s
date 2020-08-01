@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text8002BF40, "ax"
 
-crash_delay_msec:
+glabel crash_delay_msec
 /* 007340 8002BF40 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 007344 8002BF44 3402B71B */  ori   $v0, $zero, 0xb71b
 /* 007348 8002BF48 00820018 */  mult  $a0, $v0
@@ -43,7 +43,7 @@ crash_delay_msec:
 /* 0073A8 8002BFA8 03E00008 */  jr    $ra
 /* 0073AC 8002BFAC 27BD0020 */   addiu $sp, $sp, 0x20
 
-func_8002BFB0:
+glabel func_8002BFB0
 /* 0073B0 8002BFB0 3C08800A */  lui   $t0, 0x800a
 /* 0073B4 8002BFB4 2508BB30 */  addiu $t0, $t0, -0x44d0
 /* 0073B8 8002BFB8 950309D0 */  lhu   $v1, 0x9d0($t0)
@@ -91,7 +91,7 @@ func_8002BFB0:
 /* 00744C 8002C04C 03E00008 */  jr    $ra
 /* 007450 8002C050 00000000 */   nop   
 
-func_8002C054:
+glabel func_8002C054
 /* 007454 8002C054 3C026666 */  lui   $v0, 0x6666
 /* 007458 8002C058 34426667 */  ori   $v0, $v0, 0x6667
 /* 00745C 8002C05C 00C20018 */  mult  $a2, $v0
@@ -212,7 +212,7 @@ func_8002C054:
 /* 007600 8002C200 03E00008 */  jr    $ra
 /* 007604 8002C204 27BD0020 */   addiu $sp, $sp, 0x20
 
-crash_printf_string:
+glabel crash_printf_string
 /* 007608 8002C208 AFA60008 */  sw    $a2, 8($sp)
 /* 00760C 8002C20C AFA7000C */  sw    $a3, 0xc($sp)
 /* 007610 8002C210 27BDFED0 */  addiu $sp, $sp, -0x130
@@ -261,7 +261,7 @@ crash_printf_string:
 /* 0076B0 8002C2B0 03E00008 */  jr    $ra
 /* 0076B4 8002C2B4 27BD0130 */   addiu $sp, $sp, 0x130
 
-crash_print_fpr:
+glabel crash_print_fpr
 /* 0076B8 8002C2B8 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0076BC 8002C2BC AFBF0018 */  sw    $ra, 0x18($sp)
 /* 0076C0 8002C2C0 8CE30000 */  lw    $v1, ($a3)
@@ -294,7 +294,7 @@ crash_print_fpr:
 /* 00771C 8002C31C 03E00008 */  jr    $ra
 /* 007720 8002C320 27BD0020 */   addiu $sp, $sp, 0x20
 
-func_8002C324:
+glabel func_8002C324
 /* 007724 8002C324 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 007728 8002C328 AFB10014 */  sw    $s1, 0x14($sp)
 /* 00772C 8002C32C 0080882D */  daddu $s1, $a0, $zero
@@ -335,7 +335,7 @@ func_8002C324:
 /* 0077A8 8002C3A8 03E00008 */  jr    $ra
 /* 0077AC 8002C3AC 27BD0020 */   addiu $sp, $sp, 0x20
 
-crash_show_handler:
+glabel crash_show_handler
 /* 0077B0 8002C3B0 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 0077B4 8002C3B4 AFB1001C */  sw    $s1, 0x1c($sp)
 /* 0077B8 8002C3B8 0080882D */  daddu $s1, $a0, $zero
@@ -595,7 +595,7 @@ crash_show_handler:
 /* 007BA8 8002C7A8 03E00008 */  jr    $ra
 /* 007BAC 8002C7AC 27BD0028 */   addiu $sp, $sp, 0x28
 
-func_8002C7B0:
+glabel func_8002C7B0
 /* 007BB0 8002C7B0 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 007BB4 8002C7B4 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 007BB8 8002C7B8 0C0198A4 */  jal   osGetActiveQueue
@@ -627,7 +627,7 @@ func_8002C7B0:
 /* 007C14 8002C814 03E00008 */  jr    $ra
 /* 007C18 8002C818 27BD0018 */   addiu $sp, $sp, 0x18
 
-crash_monitor_thread:
+glabel crash_monitor_thread
 /* 007C1C 8002C81C 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 007C20 8002C820 2404000A */  addiu $a0, $zero, 0xa
 /* 007C24 8002C824 AFB00018 */  sw    $s0, 0x18($sp)
@@ -660,7 +660,7 @@ crash_monitor_thread:
 /* 007C88 8002C888 0800B222 */  j     .L8002C888
 /* 007C8C 8002C88C 00000000 */   nop   
 
-func_8002C890:
+glabel func_8002C890
 /* 007C90 8002C890 3C02800A */  lui   $v0, 0x800a
 /* 007C94 8002C894 2442BB30 */  addiu $v0, $v0, -0x44d0
 /* 007C98 8002C898 3C03A000 */  lui   $v1, 0xa000
@@ -670,7 +670,7 @@ func_8002C890:
 /* 007CA8 8002C8A8 03E00008 */  jr    $ra
 /* 007CAC 8002C8AC A44609D2 */   sh    $a2, 0x9d2($v0)
 
-crash_create_monitor:
+glabel crash_create_monitor
 /* 007CB0 8002C8B0 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 007CB4 8002C8B4 3C07FFFD */  lui   $a3, 0xfffd
 /* 007CB8 8002C8B8 34E7A800 */  ori   $a3, $a3, 0xa800

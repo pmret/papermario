@@ -6,7 +6,7 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80246D10, "ax"
@@ -355,10 +355,8 @@
 /* 167A68 80247208 AFB10014 */  sw    $s1, 0x14($sp)
 /* 167A6C 8024720C AFB00010 */  sw    $s0, 0x10($sp)
 /* 167A70 80247210 92450003 */  lbu   $a1, 3($s2)
-func_80247214:
 /* 167A74 80247214 00431024 */  and   $v0, $v0, $v1
 /* 167A78 80247218 10400007 */  beqz  $v0, .L80247238
-func_8024721C:
 /* 167A7C 8024721C 00000000 */   nop   
 /* 167A80 80247220 92420002 */  lbu   $v0, 2($s2)
 /* 167A84 80247224 2442FFFF */  addiu $v0, $v0, -1
@@ -978,10 +976,8 @@ func_8024721C:
 /* 168354 80247AF4 24040032 */   addiu $a0, $zero, 0x32
 
 /* 168358 80247AF8 2404002D */  addiu $a0, $zero, 0x2d
-func_80247AFC:
 /* 16835C 80247AFC 3C108024 */  lui   $s0, 0x8024
 /* 168360 80247B00 2610381C */  addiu $s0, $s0, 0x381c
-func_80247B04:
 /* 168364 80247B04 3C028025 */  lui   $v0, 0x8025
 /* 168368 80247B08 8C429B84 */  lw    $v0, -0x647c($v0)
 /* 16836C 80247B0C 3C018025 */  lui   $at, 0x8025

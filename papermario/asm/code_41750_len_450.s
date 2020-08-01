@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80066350, "ax"
 
-osSetTimer:
+glabel osSetTimer
 /* 041750 80066350 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 041754 80066354 8FA20030 */  lw    $v0, 0x30($sp)
 /* 041758 80066358 8FA30034 */  lw    $v1, 0x34($sp)
@@ -95,7 +95,7 @@ osSetTimer:
 /* 041878 80066478 27BD0020 */   addiu $sp, $sp, 0x20
 
 /* 04187C 8006647C 00000000 */  nop   
-osTimerServicesInit:
+glabel osTimerServicesInit
 /* 041880 80066480 3C028009 */  lui   $v0, 0x8009
 /* 041884 80066484 8C424670 */  lw    $v0, 0x4670($v0)
 /* 041888 80066488 00002021 */  addu  $a0, $zero, $zero
@@ -118,7 +118,7 @@ osTimerServicesInit:
 /* 0418CC 800664CC 03E00008 */  jr    $ra
 /* 0418D0 800664D0 AC40001C */   sw    $zero, 0x1c($v0)
 
-osTimerInterrupt:
+glabel osTimerInterrupt
 /* 0418D4 800664D4 3C038009 */  lui   $v1, 0x8009
 /* 0418D8 800664D8 8C634670 */  lw    $v1, 0x4670($v1)
 /* 0418DC 800664DC 27BDFFE8 */  addiu $sp, $sp, -0x18
@@ -209,7 +209,7 @@ osTimerInterrupt:
 /* 041A08 80066608 03E00008 */  jr    $ra
 /* 041A0C 8006660C 27BD0018 */   addiu $sp, $sp, 0x18
 
-osSetTimerIntr:
+glabel osSetTimerIntr
 /* 041A10 80066610 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 041A14 80066614 AFB30020 */  sw    $s3, 0x20($sp)
 /* 041A18 80066618 AFB2001C */  sw    $s2, 0x1c($sp)
@@ -245,7 +245,7 @@ osSetTimerIntr:
 /* 041A88 80066688 03E00008 */  jr    $ra
 /* 041A8C 8006668C 27BD0028 */   addiu $sp, $sp, 0x28
 
-osInsertTimer:
+glabel osInsertTimer
 /* 041A90 80066690 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 041A94 80066694 AFB20018 */  sw    $s2, 0x18($sp)
 /* 041A98 80066698 00809021 */  addu  $s2, $a0, $zero

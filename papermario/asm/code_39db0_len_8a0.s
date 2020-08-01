@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text8005E9B0, "ax"
 
-nuScCreateScheduler:
+glabel nuScCreateScheduler
 /* 039DB0 8005E9B0 27BDFFD0 */  addiu $sp, $sp, -0x30
 /* 039DB4 8005E9B4 AFB40028 */  sw    $s4, 0x28($sp)
 /* 039DB8 8005E9B8 0080A02D */  daddu $s4, $a0, $zero
@@ -156,7 +156,7 @@ nuScCreateScheduler:
 /* 039FD8 8005EBD8 03E00008 */  jr    $ra
 /* 039FDC 8005EBDC 27BD0030 */   addiu $sp, $sp, 0x30
 
-nuScExecuteAudio:
+glabel nuScExecuteAudio
 /* 039FE0 8005EBE0 27BDFFC8 */  addiu $sp, $sp, -0x38
 /* 039FE4 8005EBE4 AFB40028 */  sw    $s4, 0x28($sp)
 /* 039FE8 8005EBE8 3C14800E */  lui   $s4, 0x800e
@@ -241,7 +241,7 @@ nuScExecuteAudio:
 /* 03A10C 8005ED0C 08017B06 */  j     .L8005EC18
 /* 03A110 8005ED10 0280202D */   daddu $a0, $s4, $zero
 
-nuScExecuteGraphics:
+glabel nuScExecuteGraphics
 /* 03A114 8005ED14 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 03A118 8005ED18 AFB00018 */  sw    $s0, 0x18($sp)
 /* 03A11C 8005ED1C 3C10800E */  lui   $s0, 0x800e
@@ -317,7 +317,7 @@ nuScExecuteGraphics:
 /* 03A228 8005EE28 08017B4D */  j     .L8005ED34
 /* 03A22C 8005EE2C 0200202D */   daddu $a0, $s0, $zero
 
-nuScAddClient:
+glabel nuScAddClient
 /* 03A230 8005EE30 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 03A234 8005EE34 AFB00010 */  sw    $s0, 0x10($sp)
 /* 03A238 8005EE38 0080802D */  daddu $s0, $a0, $zero
@@ -355,7 +355,7 @@ nuScAddClient:
 /* 03A2B4 8005EEB4 03E00008 */  jr    $ra
 /* 03A2B8 8005EEB8 27BD0020 */   addiu $sp, $sp, 0x20
 
-nuScRemoveClient:
+glabel nuScRemoveClient
 /* 03A2BC 8005EEBC 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 03A2C0 8005EEC0 AFB00010 */  sw    $s0, 0x10($sp)
 /* 03A2C4 8005EEC4 0080802D */  daddu $s0, $a0, $zero
@@ -394,7 +394,7 @@ nuScRemoveClient:
 /* 03A330 8005EF30 03E00008 */  jr    $ra
 /* 03A334 8005EF34 27BD0018 */   addiu $sp, $sp, 0x18
 
-nuScResetClientMesgType:
+glabel nuScResetClientMesgType
 /* 03A338 8005EF38 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 03A33C 8005EF3C AFB10014 */  sw    $s1, 0x14($sp)
 /* 03A340 8005EF40 0080882D */  daddu $s1, $a0, $zero
@@ -412,27 +412,27 @@ nuScResetClientMesgType:
 /* 03A370 8005EF70 03E00008 */  jr    $ra
 /* 03A374 8005EF74 27BD0020 */   addiu $sp, $sp, 0x20
 
-nuScGetGfxMQ:
+glabel nuScGetGfxMQ
 /* 03A378 8005EF78 3C02800E */  lui   $v0, 0x800e
 /* 03A37C 8005EF7C 03E00008 */  jr    $ra
 /* 03A380 8005EF80 2442A47C */   addiu $v0, $v0, -0x5b84
 
-nuScGetAudioMQ:
+glabel nuScGetAudioMQ
 /* 03A384 8005EF84 3C02800E */  lui   $v0, 0x800e
 /* 03A388 8005EF88 03E00008 */  jr    $ra
 /* 03A38C 8005EF8C 2442A444 */   addiu $v0, $v0, -0x5bbc
 
-nuScSetFrameBufferNum:
+glabel nuScSetFrameBufferNum
 /* 03A390 8005EF90 3C01800E */  lui   $at, 0x800e
 /* 03A394 8005EF94 03E00008 */  jr    $ra
 /* 03A398 8005EF98 A024AABD */   sb    $a0, -0x5543($at)
 
-nuScGetFrameRate:
+glabel nuScGetFrameRate
 /* 03A39C 8005EF9C 3C02800E */  lui   $v0, 0x800e
 /* 03A3A0 8005EFA0 03E00008 */  jr    $ra
 /* 03A3A4 8005EFA4 9042AABC */   lbu   $v0, -0x5544($v0)
 
-nuScEventHandler:
+glabel nuScEventHandler
 /* 03A3A8 8005EFA8 27BDFFD0 */  addiu $sp, $sp, -0x30
 /* 03A3AC 8005EFAC AFB1001C */  sw    $s1, 0x1c($sp)
 /* 03A3B0 8005EFB0 3C11800E */  lui   $s1, 0x800e
@@ -515,7 +515,7 @@ nuScEventHandler:
 /* 03A4B8 8005F0B8 08017BF8 */  j     .L8005EFE0
 /* 03A4BC 8005F0BC 2450FFFD */   addiu $s0, $v0, -3
 
-nuScEventBroadcast:
+glabel nuScEventBroadcast
 /* 03A4C0 8005F0C0 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 03A4C4 8005F0C4 AFB00010 */  sw    $s0, 0x10($sp)
 /* 03A4C8 8005F0C8 3C10800E */  lui   $s0, 0x800e
@@ -544,7 +544,7 @@ nuScEventBroadcast:
 /* 03A518 8005F118 03E00008 */  jr    $ra
 /* 03A51C 8005F11C 27BD0020 */   addiu $sp, $sp, 0x20
 
-nuScWaitTaskReady:
+glabel nuScWaitTaskReady
 /* 03A520 8005F120 27BDFFC8 */  addiu $sp, $sp, -0x38
 /* 03A524 8005F124 3C05800E */  lui   $a1, 0x800e
 /* 03A528 8005F128 24A5AABD */  addiu $a1, $a1, -0x5543

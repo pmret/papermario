@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80061090, "ax"
 
-osDevMgrMain:
+glabel osDevMgrMain
 /* 03C490 80061090 27BDFFB8 */  addiu $sp, $sp, -0x48
 /* 03C494 80061094 AFB20030 */  sw    $s2, 0x30($sp)
 /* 03C498 80061098 00809021 */  addu  $s2, $a0, $zero

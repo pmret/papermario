@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text800609E0, "ax"
 
-osCreatePiManager:
+glabel osCreatePiManager
 /* 03BDE0 800609E0 27BDFFC8 */  addiu $sp, $sp, -0x38
 /* 03BDE4 800609E4 AFB00018 */  sw    $s0, 0x18($sp)
 /* 03BDE8 800609E8 00808021 */  addu  $s0, $a0, $zero
@@ -116,7 +116,7 @@ osCreatePiManager:
 /* 03BF68 80060B68 03E00008 */  jr    $ra
 /* 03BF6C 80060B6C 27BD0038 */   addiu $sp, $sp, 0x38
 
-osEPiRawStartDma:
+glabel osEPiRawStartDma
 /* 03BF70 80060B70 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 03BF74 80060B74 AFB00010 */  sw    $s0, 0x10($sp)
 /* 03BF78 80060B78 00808021 */  addu  $s0, $a0, $zero
@@ -261,7 +261,7 @@ osEPiRawStartDma:
 /* 03C158 80060D58 27BD0028 */   addiu $sp, $sp, 0x28
 
 /* 03C15C 80060D5C 00000000 */  nop   
-osEPiWriteIo:
+glabel osEPiWriteIo
 /* 03C160 80060D60 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 03C164 80060D64 AFB00010 */  sw    $s0, 0x10($sp)
 /* 03C168 80060D68 00808021 */  addu  $s0, $a0, $zero

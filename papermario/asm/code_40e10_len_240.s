@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80065A10, "ax"
 
-osSpTaskLoad:
+glabel osSpTaskLoad
 /* 040E10 80065A10 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 040E14 80065A14 AFB00010 */  sw    $s0, 0x10($sp)
 /* 040E18 80065A18 00808021 */  addu  $s0, $a0, $zero
@@ -156,7 +156,7 @@ osSpTaskLoad:
 /* 041014 80065C14 03E00008 */  jr    $ra
 /* 041018 80065C18 27BD0020 */   addiu $sp, $sp, 0x20
 
-osSpTaskStartGo:
+glabel osSpTaskStartGo
 /* 04101C 80065C1C 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 041020 80065C20 AFBF0010 */  sw    $ra, 0x10($sp)
 .L80065C24:

@@ -6,7 +6,7 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text802E30C0, "ax"
@@ -196,7 +196,7 @@
 /* 104BE8 802E3368 03E00008 */  jr    $ra
 /* 104BEC 802E336C 27BD0018 */   addiu $sp, $sp, 0x18
 
-func_802E3370:
+glabel func_802E3370
 /* 104BF0 802E3370 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 104BF4 802E3374 AFB00010 */  sw    $s0, 0x10($sp)
 /* 104BF8 802E3378 0080802D */  daddu $s0, $a0, $zero
@@ -403,7 +403,7 @@ func_802E3370:
 /* 104EC8 802E3648 03E00008 */  jr    $ra
 /* 104ECC 802E364C 27BD0020 */   addiu $sp, $sp, 0x20
 
-func_802E3650:
+glabel func_802E3650
 /* 104ED0 802E3650 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 104ED4 802E3654 AFB00010 */  sw    $s0, 0x10($sp)
 /* 104ED8 802E3658 0080802D */  daddu $s0, $a0, $zero
@@ -444,7 +444,7 @@ func_802E3650:
 /* 104F5C 802E36DC 03E00008 */  jr    $ra
 /* 104F60 802E36E0 27BD0020 */   addiu $sp, $sp, 0x20
 
-func_802E36E4:
+glabel func_802E36E4
 /* 104F64 802E36E4 8C820040 */  lw    $v0, 0x40($a0)
 /* 104F68 802E36E8 2403FFFF */  addiu $v1, $zero, -1
 /* 104F6C 802E36EC A4430010 */  sh    $v1, 0x10($v0)
@@ -658,7 +658,7 @@ func_802E36E4:
 /* 105278 802E39F8 03E00008 */  jr    $ra
 /* 10527C 802E39FC 27BD0028 */   addiu $sp, $sp, 0x28
 
-func_802E3A00:
+glabel func_802E3A00
 /* 105280 802E3A00 2403000E */  addiu $v1, $zero, 0xe
 /* 105284 802E3A04 9082000A */  lbu   $v0, 0xa($a0)
 /* 105288 802E3A08 8C840040 */  lw    $a0, 0x40($a0)

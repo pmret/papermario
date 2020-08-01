@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80068F80, "ax"
 
-osPfsFreeBlocks:
+glabel osPfsFreeBlocks
 /* 044380 80068F80 27BDFED0 */  addiu $sp, $sp, -0x130
 /* 044384 80068F84 AFB20118 */  sw    $s2, 0x118($sp)
 /* 044388 80068F88 00809021 */  addu  $s2, $a0, $zero
@@ -89,7 +89,7 @@ osPfsFreeBlocks:
 /* 044488 80069088 27BD0130 */   addiu $sp, $sp, 0x130
 
 /* 04448C 8006908C 00000000 */  nop   
-osPfsNumFiles:
+glabel osPfsNumFiles
 /* 044490 80069090 27BDFFB0 */  addiu $sp, $sp, -0x50
 /* 044494 80069094 AFB00038 */  sw    $s0, 0x38($sp)
 /* 044498 80069098 00808021 */  addu  $s0, $a0, $zero
@@ -162,7 +162,7 @@ osPfsNumFiles:
 /* 044588 80069188 03E00008 */  jr    $ra
 /* 04458C 8006918C 27BD0050 */   addiu $sp, $sp, 0x50
 
-osPfsInitPak:
+glabel osPfsInitPak
 /* 044590 80069190 27BDFF90 */  addiu $sp, $sp, -0x70
 /* 044594 80069194 AFB20060 */  sw    $s2, 0x60($sp)
 /* 044598 80069198 00809021 */  addu  $s2, $a0, $zero
@@ -300,7 +300,7 @@ osPfsInitPak:
 /* 044780 80069380 03E00008 */  jr    $ra
 /* 044784 80069384 27BD0070 */   addiu $sp, $sp, 0x70
 
-osPfsCheckRamArea:
+glabel osPfsCheckRamArea
 /* 044788 80069388 27BDFF78 */  addiu $sp, $sp, -0x88
 /* 04478C 8006938C AFB00078 */  sw    $s0, 0x78($sp)
 /* 044790 80069390 00808021 */  addu  $s0, $a0, $zero

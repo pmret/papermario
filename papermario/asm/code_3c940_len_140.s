@@ -6,24 +6,24 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80061540, "ax"
 
-osAiGetLength:
+glabel osAiGetLength
 /* 03C940 80061540 3C02A450 */  lui   $v0, 0xa450
 /* 03C944 80061544 34420004 */  ori   $v0, $v0, 4
 /* 03C948 80061548 03E00008 */  jr    $ra
 /* 03C94C 8006154C 8C420000 */   lw    $v0, ($v0)
 
-osAiGetStatus:
+glabel osAiGetStatus
 /* 03C950 80061550 3C02A450 */  lui   $v0, 0xa450
 /* 03C954 80061554 3442000C */  ori   $v0, $v0, 0xc
 /* 03C958 80061558 03E00008 */  jr    $ra
 /* 03C95C 8006155C 8C420000 */   lw    $v0, ($v0)
 
-osAiSetFrequency:
+glabel osAiSetFrequency
 /* 03C960 80061560 44841000 */  mtc1  $a0, $f2
 /* 03C964 80061564 00000000 */  nop   
 /* 03C968 80061568 468010A1 */  cvt.d.w $f2, $f2

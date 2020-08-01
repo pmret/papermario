@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80060370, "ax"
 
-nuGfxRetraceWait:
+glabel nuGfxRetraceWait
 /* 03B770 80060370 27BDFFB0 */  addiu $sp, $sp, -0x50
 /* 03B774 80060374 AFB10044 */  sw    $s1, 0x44($sp)
 /* 03B778 80060378 0080882D */  daddu $s1, $a0, $zero

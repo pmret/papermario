@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text8006EDF0, "ax"
 
-decode_yay0:
+glabel decode_yay0
 /* 04A1F0 8006EDF0 8C980004 */  lw    $t8, 4($a0)
 /* 04A1F4 8006EDF4 8C870008 */  lw    $a3, 8($a0)
 /* 04A1F8 8006EDF8 8C99000C */  lw    $t9, 0xc($a0)

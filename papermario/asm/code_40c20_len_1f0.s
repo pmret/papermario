@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80065820, "ax"
 
-osSendMesg:
+glabel osSendMesg
 /* 040C20 80065820 27BDFFD0 */  addiu $sp, $sp, -0x30
 /* 040C24 80065824 AFB00010 */  sw    $s0, 0x10($sp)
 /* 040C28 80065828 00808021 */  addu  $s0, $a0, $zero
@@ -97,7 +97,7 @@ osSendMesg:
 /* 040D48 80065948 03E00008 */  jr    $ra
 /* 040D4C 8006594C 27BD0030 */   addiu $sp, $sp, 0x30
 
-osSetEventMesg:
+glabel osSetEventMesg
 /* 040D50 80065950 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 040D54 80065954 AFB00010 */  sw    $s0, 0x10($sp)
 /* 040D58 80065958 00808021 */  addu  $s0, $a0, $zero
@@ -145,7 +145,7 @@ osSetEventMesg:
 /* 040DF8 800659F8 27BD0028 */   addiu $sp, $sp, 0x28
 
 /* 040DFC 800659FC 00000000 */  nop   
-osGetCount:
+glabel osGetCount
 /* 040E00 80065A00 40024800 */  mfc0  $v0, $9
 /* 040E04 80065A04 03E00008 */  jr    $ra
 /* 040E08 80065A08 00000000 */   nop   

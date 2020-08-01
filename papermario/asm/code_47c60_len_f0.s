@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text8006C860, "ax"
 
-osContAddressCrc:
+glabel osContAddressCrc
 /* 047C60 8006C860 00001821 */  addu  $v1, $zero, $zero
 /* 047C64 8006C864 24050400 */  addiu $a1, $zero, 0x400
 /* 047C68 8006C868 3084FFFF */  andi  $a0, $a0, 0xffff
@@ -46,7 +46,7 @@ osContAddressCrc:
 /* 047CC4 8006C8C4 03E00008 */  jr    $ra
 /* 047CC8 8006C8C8 3062001F */   andi  $v0, $v1, 0x1f
 
-osContDataCrc:
+glabel osContDataCrc
 /* 047CCC 8006C8CC 00001821 */  addu  $v1, $zero, $zero
 /* 047CD0 8006C8D0 24060020 */  addiu $a2, $zero, 0x20
 .L8006C8D4:

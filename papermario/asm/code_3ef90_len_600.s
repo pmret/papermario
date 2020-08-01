@@ -6,11 +6,11 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 .section .text80063B90, "ax"
 
-guPerspectiveF:
+glabel guPerspectiveF
 /* 03EF90 80063B90 27BDFFB0 */  addiu $sp, $sp, -0x50
 /* 03EF94 80063B94 F7BA0038 */  sdc1  $f26, 0x38($sp)
 /* 03EF98 80063B98 C7BA0060 */  lwc1  $f26, 0x60($sp)
@@ -127,7 +127,7 @@ guPerspectiveF:
 /* 03F138 80063D38 03E00008 */  jr    $ra
 /* 03F13C 80063D3C 27BD0050 */   addiu $sp, $sp, 0x50
 
-guPerspective:
+glabel guPerspective
 /* 03F140 80063D40 27BDFF78 */  addiu $sp, $sp, -0x88
 /* 03F144 80063D44 F7B80070 */  sdc1  $f24, 0x70($sp)
 /* 03F148 80063D48 C7B80098 */  lwc1  $f24, 0x98($sp)

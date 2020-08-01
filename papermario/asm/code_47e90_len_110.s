@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text8006CA90, "ax"
 
-osViInit:
+glabel osViInit
 /* 047E90 8006CA90 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 047E94 8006CA94 AFB00010 */  sw    $s0, 0x10($sp)
 /* 047E98 8006CA98 3C108009 */  lui   $s0, 0x8009

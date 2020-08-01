@@ -1,9 +1,9 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "globals.inc"
+.include "include/macro.inc"
 
-battle_heap_create:
+glabel battle_heap_create
 /* 0060A0 8002ACA0 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0060A4 8002ACA4 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 0060A8 8002ACA8 3C050002 */  lui   $a1, 2

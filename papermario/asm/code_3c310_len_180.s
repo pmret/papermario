@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80060F10, "ax"
 
-osCartRomInit:
+glabel osCartRomInit
 /* 03C310 80060F10 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 03C314 80060F14 AFBF0018 */  sw    $ra, 0x18($sp)
 /* 03C318 80060F18 AFB10014 */  sw    $s1, 0x14($sp)

@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80067960, "ax"
 
-guMtxCat:
+glabel guMtxCat
 /* 042D60 80067960 27BDFF20 */  addiu $sp, $sp, -0xe0
 /* 042D64 80067964 00801021 */  addu  $v0, $a0, $zero
 /* 042D68 80067968 AFB100D4 */  sw    $s1, 0xd4($sp)

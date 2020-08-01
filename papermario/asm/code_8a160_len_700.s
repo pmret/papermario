@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text800F0CB0, "ax"
 
-func_800F0CB0:
+glabel func_800F0CB0
 /* 08A160 800F0CB0 3C038011 */  lui   $v1, 0x8011
 /* 08A164 800F0CB4 2463D000 */  addiu $v1, $v1, -0x3000
 /* 08A168 800F0CB8 00041040 */  sll   $v0, $a0, 1
@@ -58,7 +58,7 @@ func_800F0CB0:
 /* 08A204 800F0D54 03E00008 */  jr    $ra
 /* 08A208 800F0D58 00000000 */   nop   
 
-func_800F0D5C:
+glabel func_800F0D5C
 /* 08A20C 800F0D5C 0000182D */  daddu $v1, $zero, $zero
 /* 08A210 800F0D60 3C028011 */  lui   $v0, 0x8011
 /* 08A214 800F0D64 2442D000 */  addiu $v0, $v0, -0x3000
@@ -70,7 +70,7 @@ func_800F0D5C:
 /* 08A228 800F0D78 03E00008 */  jr    $ra
 /* 08A22C 800F0D7C 00000000 */   nop   
 
-func_800F0D80:
+glabel func_800F0D80
 /* 08A230 800F0D80 27BDFFA8 */  addiu $sp, $sp, -0x58
 /* 08A234 800F0D84 F7B60040 */  sdc1  $f22, 0x40($sp)
 /* 08A238 800F0D88 3C018011 */  lui   $at, 0x8011
@@ -254,7 +254,7 @@ func_800F0D80:
 /* 08A4D4 800F1024 03E00008 */  jr    $ra
 /* 08A4D8 800F1028 27BD0058 */   addiu $sp, $sp, 0x58
 
-func_800F102C:
+glabel func_800F102C
 /* 08A4DC 800F102C 27BDFF28 */  addiu $sp, $sp, -0xd8
 /* 08A4E0 800F1030 3C090050 */  lui   $t1, 0x50
 /* 08A4E4 800F1034 352903C0 */  ori   $t1, $t1, 0x3c0

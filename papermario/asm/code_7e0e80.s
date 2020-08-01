@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80280000, "ax"
 
-func_80280000:
+glabel func_80280000
 /* 7E0E80 80280000 3C028007 */  lui   $v0, 0x8007
 /* 7E0E84 80280004 8C42419C */  lw    $v0, 0x419c($v0)
 /* 7E0E88 80280008 27BDFFE0 */  addiu $sp, $sp, -0x20
@@ -47,7 +47,7 @@ func_80280000:
 /* 7E0F00 80280080 03E00008 */  jr    $ra
 /* 7E0F04 80280084 27BD0020 */   addiu $sp, $sp, 0x20
 
-func_80280088:
+glabel func_80280088
 /* 7E0F08 80280088 3C028007 */  lui   $v0, 0x8007
 /* 7E0F0C 8028008C 8C42419C */  lw    $v0, 0x419c($v0)
 /* 7E0F10 80280090 27BDFFD8 */  addiu $sp, $sp, -0x28
@@ -114,7 +114,7 @@ func_80280088:
 /* 7E0FF4 80280174 03E00008 */  jr    $ra
 /* 7E0FF8 80280178 27BD0028 */   addiu $sp, $sp, 0x28
 
-func_8028017C:
+glabel func_8028017C
 /* 7E0FFC 8028017C 3C028007 */  lui   $v0, 0x8007
 /* 7E1000 80280180 8C42419C */  lw    $v0, 0x419c($v0)
 /* 7E1004 80280184 27BDFFE0 */  addiu $sp, $sp, -0x20
@@ -151,7 +151,7 @@ func_8028017C:
 /* 7E1080 80280200 03E00008 */  jr    $ra
 /* 7E1084 80280204 27BD0020 */   addiu $sp, $sp, 0x20
 
-func_80280208:
+glabel func_80280208
 /* 7E1088 80280208 3C028007 */  lui   $v0, 0x8007
 /* 7E108C 8028020C 8C42419C */  lw    $v0, 0x419c($v0)
 /* 7E1090 80280210 27BDFFE0 */  addiu $sp, $sp, -0x20
@@ -204,7 +204,7 @@ func_80280208:
 /* 7E1148 802802C8 03E00008 */  jr    $ra
 /* 7E114C 802802CC 27BD0020 */   addiu $sp, $sp, 0x20
 
-func_802802D0:
+glabel func_802802D0
 /* 7E1150 802802D0 3C028007 */  lui   $v0, 0x8007
 /* 7E1154 802802D4 8C42419C */  lw    $v0, 0x419c($v0)
 /* 7E1158 802802D8 27BDFFE0 */  addiu $sp, $sp, -0x20
@@ -241,7 +241,7 @@ func_802802D0:
 /* 7E11D4 80280354 03E00008 */  jr    $ra
 /* 7E11D8 80280358 27BD0020 */   addiu $sp, $sp, 0x20
 
-func_8028035C:
+glabel func_8028035C
 /* 7E11DC 8028035C 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 7E11E0 80280360 3C048028 */  lui   $a0, 0x8028
 /* 7E11E4 80280364 24843F2C */  addiu $a0, $a0, 0x3f2c
@@ -672,7 +672,7 @@ func_8028035C:
 /* 7E17CC 8028094C 03E00008 */  jr    $ra
 /* 7E17D0 80280950 27BD0030 */   addiu $sp, $sp, 0x30
 
-func_80280954:
+glabel func_80280954
 /* 7E17D4 80280954 3C028007 */  lui   $v0, 0x8007
 /* 7E17D8 80280958 8C42419C */  lw    $v0, 0x419c($v0)
 /* 7E17DC 8028095C 27BDFFC0 */  addiu $sp, $sp, -0x40
@@ -777,7 +777,7 @@ func_80280954:
 /* 7E193C 80280ABC 03E00008 */  jr    $ra
 /* 7E1940 80280AC0 27BD0040 */   addiu $sp, $sp, 0x40
 
-func_80280AC4:
+glabel func_80280AC4
 /* 7E1944 80280AC4 3C028007 */  lui   $v0, 0x8007
 /* 7E1948 80280AC8 8C42419C */  lw    $v0, 0x419c($v0)
 /* 7E194C 80280ACC 27BDFFE0 */  addiu $sp, $sp, -0x20
@@ -817,7 +817,7 @@ func_80280AC4:
 /* 7E19BC 80280B3C 03E00008 */  jr    $ra
 /* 7E19C0 80280B40 27BD0020 */   addiu $sp, $sp, 0x20
 
-func_80280B44:
+glabel func_80280B44
 /* 7E19C4 80280B44 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 7E19C8 80280B48 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 7E19CC 80280B4C 0C03C54E */  jal   func_800F1538
@@ -828,12 +828,12 @@ func_80280B44:
 /* 7E19E0 80280B60 00000000 */   nop   
 /* 7E19E4 80280B64 0C03A5EE */  jal   func_800E97B8
 /* 7E19E8 80280B68 00000000 */   nop   
-BtlBringPartnerOut:
+glabel BtlBringPartnerOut
 /* 7E19EC 80280B6C 8FBF0010 */  lw    $ra, 0x10($sp)
 /* 7E19F0 80280B70 03E00008 */  jr    $ra
 /* 7E19F4 80280B74 27BD0018 */   addiu $sp, $sp, 0x18
 
-func_80280B78:
+glabel func_80280B78
 /* 7E19F8 80280B78 3C028007 */  lui   $v0, 0x8007
 /* 7E19FC 80280B7C 8C42419C */  lw    $v0, 0x419c($v0)
 /* 7E1A00 80280B80 8C420144 */  lw    $v0, 0x144($v0)
@@ -940,7 +940,7 @@ func_80280B78:
 /* 7E1B5C 80280CDC 10620117 */  beq   $v1, $v0, .L8028113C
 /* 7E1B60 80280CE0 28620034 */   slti  $v0, $v1, 0x34
 /* 7E1B64 80280CE4 10400007 */  beqz  $v0, .L80280D04
-CamPreset_B:
+glabel CamPreset_B
 /* 7E1B68 80280CE8 24020029 */   addiu $v0, $zero, 0x29
 /* 7E1B6C 80280CEC 10620027 */  beq   $v1, $v0, .L80280D8C
 /* 7E1B70 80280CF0 2402002A */   addiu $v0, $zero, 0x2a
@@ -949,7 +949,7 @@ CamPreset_B:
 /* 7E1B7C 80280CFC 080A0506 */  j     .L80281418
 /* 7E1B80 80280D00 00000000 */   nop   
 
-CamPreset_F:
+glabel CamPreset_F
 .L80280D04:
 /* 7E1B84 80280D04 24020034 */  addiu $v0, $zero, 0x34
 /* 7E1B88 80280D08 10620133 */  beq   $v1, $v0, .L802811D8
@@ -959,7 +959,7 @@ CamPreset_F:
 /* 7E1B98 80280D18 080A0506 */  j     .L80281418
 /* 7E1B9C 80280D1C 00000000 */   nop   
 
-CamPreset_M:
+glabel CamPreset_M
 .L80280D20:
 /* 7E1BA0 80280D20 240200C9 */  addiu $v0, $zero, 0xc9
 /* 7E1BA4 80280D24 10620072 */  beq   $v1, $v0, .L80280EF0
@@ -968,7 +968,7 @@ CamPreset_M:
 /* 7E1BB0 80280D30 24020048 */   addiu $v0, $zero, 0x48
 /* 7E1BB4 80280D34 1062017E */  beq   $v1, $v0, .L80281330
 /* 7E1BB8 80280D38 24020049 */   addiu $v0, $zero, 0x49
-CamPreset_G:
+glabel CamPreset_G
 /* 7E1BBC 80280D3C 1062018C */  beq   $v1, $v0, .L80281370
 /* 7E1BC0 80280D40 0000102D */   daddu $v0, $zero, $zero
 /* 7E1BC4 80280D44 080A0506 */  j     .L80281418
@@ -978,7 +978,7 @@ CamPreset_G:
 /* 7E1BCC 80280D4C 240201F5 */  addiu $v0, $zero, 0x1f5
 /* 7E1BD0 80280D50 106200EA */  beq   $v1, $v0, .L802810FC
 /* 7E1BD4 80280D54 240202BD */   addiu $v0, $zero, 0x2bd
-CamPreset_I:
+glabel CamPreset_I
 /* 7E1BD8 80280D58 10620138 */  beq   $v1, $v0, .L8028123C
 /* 7E1BDC 80280D5C 0000102D */   daddu $v0, $zero, $zero
 /* 7E1BE0 80280D60 080A0506 */  j     .L80281418
@@ -988,7 +988,7 @@ CamPreset_I:
 /* 7E1BE8 80280D68 0C0B1059 */  jal   does_script_exist
 /* 7E1BEC 80280D6C 8E240074 */   lw    $a0, 0x74($s1)
 /* 7E1BF0 80280D70 144001A9 */  bnez  $v0, .L80281418
-CamPreset_H:
+glabel CamPreset_H
 /* 7E1BF4 80280D74 0000102D */   daddu $v0, $zero, $zero
 /* 7E1BF8 80280D78 3C04001E */  lui   $a0, 0x1e
 /* 7E1BFC 80280D7C 34840003 */  ori   $a0, $a0, 3
@@ -998,7 +998,7 @@ CamPreset_H:
 
 .L80280D8C:
 /* 7E1C0C 80280D8C 8E240078 */  lw    $a0, 0x78($s1)
-CamPreset_N:
+glabel CamPreset_N
 /* 7E1C10 80280D90 24020001 */  addiu $v0, $zero, 1
 /* 7E1C14 80280D94 148201A0 */  bne   $a0, $v0, .L80281418
 /* 7E1C18 80280D98 0000102D */   daddu $v0, $zero, $zero
@@ -1006,7 +1006,7 @@ CamPreset_N:
 /* 7E1C20 80280DA0 8C426538 */  lw    $v0, 0x6538($v0)
 /* 7E1C24 80280DA4 904304E8 */  lbu   $v1, 0x4e8($v0)
 /* 7E1C28 80280DA8 10640012 */  beq   $v1, $a0, .L80280DF4
-CamPreset_C:
+glabel CamPreset_C
 /* 7E1C2C 80280DAC 28620002 */   slti  $v0, $v1, 2
 /* 7E1C30 80280DB0 10400005 */  beqz  $v0, .L80280DC8
 /* 7E1C34 80280DB4 24020002 */   addiu $v0, $zero, 2
@@ -1015,7 +1015,7 @@ CamPreset_C:
 /* 7E1C40 80280DC0 080A03B6 */  j     .L80280ED8
 /* 7E1C44 80280DC4 00000000 */   nop   
 
-CamPreset_D:
+glabel CamPreset_D
 .L80280DC8:
 /* 7E1C48 80280DC8 10620018 */  beq   $v1, $v0, .L80280E2C
 /* 7E1C4C 80280DCC 24020003 */   addiu $v0, $zero, 3
@@ -1026,7 +1026,7 @@ CamPreset_D:
 
 .L80280DE0:
 /* 7E1C60 80280DE0 0C0A005F */  jal   func_8028017C
-CamPreset_E:
+glabel CamPreset_E
 /* 7E1C64 80280DE4 24040005 */   addiu $a0, $zero, 5
 /* 7E1C68 80280DE8 AE220074 */  sw    $v0, 0x74($s1)
 /* 7E1C6C 80280DEC 080A0505 */  j     .L80281414
@@ -1036,7 +1036,7 @@ CamPreset_E:
 /* 7E1C74 80280DF4 0C039D7B */  jal   get_item_count
 /* 7E1C78 80280DF8 00000000 */   nop   
 /* 7E1C7C 80280DFC 14400005 */  bnez  $v0, .L80280E14
-CamPreset_J:
+glabel CamPreset_J
 /* 7E1C80 80280E00 00000000 */   nop   
 /* 7E1C84 80280E04 0C0A005F */  jal   func_8028017C
 /* 7E1C88 80280E08 24040006 */   addiu $a0, $zero, 6
@@ -1046,7 +1046,7 @@ CamPreset_J:
 .L80280E14:
 /* 7E1C94 80280E14 0C0A005F */  jal   func_8028017C
 /* 7E1C98 80280E18 24040007 */   addiu $a0, $zero, 7
-CamPreset_K:
+glabel CamPreset_K
 /* 7E1C9C 80280E1C AE220074 */  sw    $v0, 0x74($s1)
 /* 7E1CA0 80280E20 240200C9 */  addiu $v0, $zero, 0xc9
 /* 7E1CA4 80280E24 080A0505 */  j     .L80281414
@@ -1056,7 +1056,7 @@ CamPreset_K:
 /* 7E1CAC 80280E2C 0C039D7B */  jal   get_item_count
 /* 7E1CB0 80280E30 00000000 */   nop   
 /* 7E1CB4 80280E34 14400005 */  bnez  $v0, .L80280E4C
-CamPreset_L:
+glabel CamPreset_L
 /* 7E1CB8 80280E38 00000000 */   nop   
 /* 7E1CBC 80280E3C 0C0A005F */  jal   func_8028017C
 /* 7E1CC0 80280E40 2404000C */   addiu $a0, $zero, 0xc
@@ -1066,7 +1066,7 @@ CamPreset_L:
 .L80280E4C:
 /* 7E1CCC 80280E4C 0C039E12 */  jal   get_stored_empty_count
 /* 7E1CD0 80280E50 00000000 */   nop   
-CamPreset_A:
+glabel CamPreset_A
 /* 7E1CD4 80280E54 14400005 */  bnez  $v0, .L80280E6C
 /* 7E1CD8 80280E58 00000000 */   nop   
 /* 7E1CDC 80280E5C 0C0A005F */  jal   func_8028017C
@@ -1588,7 +1588,7 @@ CamPreset_A:
 /* 7E239C 8028151C 03E00008 */  jr    $ra
 /* 7E23A0 80281520 27BD0020 */   addiu $sp, $sp, 0x20
 
-draw_shop_items:
+glabel draw_shop_items
 /* 7E23A4 80281524 3C028007 */  lui   $v0, 0x8007
 /* 7E23A8 80281528 8C42419C */  lw    $v0, 0x419c($v0)
 /* 7E23AC 8028152C 27BDFF90 */  addiu $sp, $sp, -0x70
@@ -1809,7 +1809,7 @@ draw_shop_items:
 /* 7E26D8 80281858 03E00008 */  jr    $ra
 /* 7E26DC 8028185C 27BD0070 */   addiu $sp, $sp, 0x70
 
-MakeShop:
+glabel MakeShop
 /* 7E26E0 80281860 27BDFF98 */  addiu $sp, $sp, -0x68
 /* 7E26E4 80281864 AFB10044 */  sw    $s1, 0x44($sp)
 /* 7E26E8 80281868 0080882D */  daddu $s1, $a0, $zero
@@ -2040,7 +2040,7 @@ MakeShop:
 /* 7E2A50 80281BD0 03E00008 */  jr    $ra
 /* 7E2A54 80281BD4 27BD0068 */   addiu $sp, $sp, 0x68
 
-MakeShopOwner:
+glabel MakeShopOwner
 /* 7E2A58 80281BD8 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 7E2A5C 80281BDC AFBF0014 */  sw    $ra, 0x14($sp)
 /* 7E2A60 80281BE0 AFB00010 */  sw    $s0, 0x10($sp)

@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80242BA0, "ax"
 
-func_80242BA0:
+glabel func_80242BA0
 /* 163400 80242BA0 2882F581 */  slti  $v0, $a0, -0xa7f
 /* 163404 80242BA4 8FA90014 */  lw    $t1, 0x14($sp)
 /* 163408 80242BA8 8FAA0018 */  lw    $t2, 0x18($sp)
@@ -157,7 +157,7 @@ func_80242BA0:
 /* 1635EC 80242D8C 03E00008 */  jr    $ra
 /* 1635F0 80242D90 00000000 */   nop   
 
-func_80242D94:
+glabel func_80242D94
 /* 1635F4 80242D94 80820004 */  lb    $v0, 4($a0)
 /* 1635F8 80242D98 80830005 */  lb    $v1, 5($a0)
 /* 1635FC 80242D9C 00430018 */  mult  $v0, $v1
@@ -181,14 +181,14 @@ func_80242D94:
 /* 163644 80242DE4 03E00008 */  jr    $ra
 /* 163648 80242DE8 A0820003 */   sb    $v0, 3($a0)
 
-func_80242DEC:
+glabel func_80242DEC
 /* 16364C 80242DEC 3C018025 */  lui   $at, 0x8025
 /* 163650 80242DF0 AC249BA8 */  sw    $a0, -0x6458($at)
 /* 163654 80242DF4 3C018025 */  lui   $at, 0x8025
 /* 163658 80242DF8 03E00008 */  jr    $ra
 /* 16365C 80242DFC AC249BAC */   sw    $a0, -0x6454($at)
 
-func_80242E00:
+glabel func_80242E00
 /* 163660 80242E00 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 163664 80242E04 AFB20018 */  sw    $s2, 0x18($sp)
 /* 163668 80242E08 00A0902D */  daddu $s2, $a1, $zero
@@ -291,7 +291,7 @@ func_80242E00:
 /* 1637C0 80242F60 03E00008 */  jr    $ra
 /* 1637C4 80242F64 27BD0028 */   addiu $sp, $sp, 0x28
 
-func_80242F68:
+glabel func_80242F68
 /* 1637C8 80242F68 3C0A8025 */  lui   $t2, 0x8025
 /* 1637CC 80242F6C 254A9B94 */  addiu $t2, $t2, -0x646c
 /* 1637D0 80242F70 3C058025 */  lui   $a1, 0x8025
@@ -452,7 +452,7 @@ func_80242F68:
 /* 1639F8 80243198 03E00008 */  jr    $ra
 /* 1639FC 8024319C AC229BAC */   sw    $v0, -0x6454($at)
 
-func_802431A0:
+glabel func_802431A0
 /* 163A00 802431A0 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 163A04 802431A4 AFB00010 */  sw    $s0, 0x10($sp)
 /* 163A08 802431A8 2410002C */  addiu $s0, $zero, 0x2c
@@ -1475,7 +1475,6 @@ func_802431A0:
 /* 1648B4 80244054 8CA59B9C */  lw    $a1, -0x6464($a1)
 /* 1648B8 80244058 18A00012 */  blez  $a1, .L802440A4
 /* 1648BC 8024405C 28A20100 */   slti  $v0, $a1, 0x100
-func_80244060:
 /* 1648C0 80244060 50400001 */  beql  $v0, $zero, .L80244068
 /* 1648C4 80244064 240500FF */   addiu $a1, $zero, 0xff
 .L80244068:
@@ -1744,7 +1743,7 @@ func_80244060:
 /* 164C78 80244418 4406A000 */  mfc1  $a2, $f20
 /* 164C7C 8024441C 4407A000 */  mfc1  $a3, $f20
 /* 164C80 80244420 0200202D */  daddu $a0, $s0, $zero
-func_80244424:
+glabel func_80244424
 /* 164C84 80244424 0C019EC8 */  jal   guRotateF
 /* 164C88 80244428 E7BA0010 */   swc1  $f26, 0x10($sp)
 /* 164C8C 8024442C 0200202D */  daddu $a0, $s0, $zero
@@ -2054,7 +2053,7 @@ func_80244424:
 /* 165138 802448D8 03E00008 */  jr    $ra
 /* 16513C 802448DC 27BD00F8 */   addiu $sp, $sp, 0xf8
 
-func_802448E0:
+glabel func_802448E0
 /* 165140 802448E0 27BDFFD0 */  addiu $sp, $sp, -0x30
 /* 165144 802448E4 AFB40020 */  sw    $s4, 0x20($sp)
 /* 165148 802448E8 0080A02D */  daddu $s4, $a0, $zero
@@ -2205,7 +2204,7 @@ func_802448E0:
 /* 165358 80244AF8 03E00008 */  jr    $ra
 /* 16535C 80244AFC 27BD0030 */   addiu $sp, $sp, 0x30
 
-func_80244B00:
+glabel func_80244B00
 /* 165360 80244B00 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 165364 80244B04 AFB00010 */  sw    $s0, 0x10($sp)
 /* 165368 80244B08 0000802D */  daddu $s0, $zero, $zero
@@ -2260,7 +2259,7 @@ func_80244B00:
 /* 16541C 80244BBC 03E00008 */  jr    $ra
 /* 165420 80244BC0 27BD0020 */   addiu $sp, $sp, 0x20
 
-func_80244BC4:
+glabel func_80244BC4
 /* 165424 80244BC4 3C048025 */  lui   $a0, 0x8025
 /* 165428 80244BC8 24849B84 */  addiu $a0, $a0, -0x647c
 /* 16542C 80244BCC 8C820000 */  lw    $v0, ($a0)
@@ -2550,7 +2549,7 @@ func_80244BC4:
 /* 16582C 80244FCC 03E00008 */  jr    $ra
 /* 165830 80244FD0 27BD0028 */   addiu $sp, $sp, 0x28
 
-func_80244FD4:
+glabel func_80244FD4
 /* 165834 80244FD4 27BDFFB0 */  addiu $sp, $sp, -0x50
 /* 165838 80244FD8 AFBF004C */  sw    $ra, 0x4c($sp)
 /* 16583C 80244FDC AFBE0048 */  sw    $fp, 0x48($sp)
@@ -2852,7 +2851,7 @@ func_80244FD4:
 /* 165CA4 80245444 03E00008 */  jr    $ra
 /* 165CA8 80245448 27BD0050 */   addiu $sp, $sp, 0x50
 
-func_8024544C:
+glabel func_8024544C
 /* 165CAC 8024544C 3C028025 */  lui   $v0, 0x8025
 /* 165CB0 80245450 8042C098 */  lb    $v0, -0x3f68($v0)
 /* 165CB4 80245454 27BDFFC8 */  addiu $sp, $sp, -0x38

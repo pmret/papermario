@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80067E00, "ax"
 
-osMotorAccess:
+glabel osMotorAccess
 /* 043200 80067E00 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 043204 80067E04 AFB10014 */  sw    $s1, 0x14($sp)
 /* 043208 80067E08 00808821 */  addu  $s1, $a0, $zero
@@ -101,7 +101,7 @@ osMotorAccess:
 /* 04333C 80067F3C 03E00008 */  jr    $ra
 /* 043340 80067F40 27BD0028 */   addiu $sp, $sp, 0x28
 
-osMotorInit:
+glabel osMotorInit
 /* 043344 80067F44 27BDFF88 */  addiu $sp, $sp, -0x78
 /* 043348 80067F48 AFB00060 */  sw    $s0, 0x60($sp)
 /* 04334C 80067F4C 00808021 */  addu  $s0, $a0, $zero
@@ -266,7 +266,7 @@ osMotorInit:
 /* 043588 80068188 27BD0078 */   addiu $sp, $sp, 0x78
 
 /* 04358C 8006818C 00000000 */  nop   
-osPfsAllocateFile:
+glabel osPfsAllocateFile
 /* 043590 80068190 27BDFD68 */  addiu $sp, $sp, -0x298
 /* 043594 80068194 AFB00270 */  sw    $s0, 0x270($sp)
 /* 043598 80068198 8FB002AC */  lw    $s0, 0x2ac($sp)
@@ -482,7 +482,7 @@ osPfsAllocateFile:
 /* 043894 80068494 03E00008 */  jr    $ra
 /* 043898 80068498 27BD0298 */   addiu $sp, $sp, 0x298
 
-osPfsDeclearPage:
+glabel osPfsDeclearPage
 /* 04389C 8006849C 24020001 */  addiu $v0, $zero, 1
 /* 0438A0 800684A0 8FAA0014 */  lw    $t2, 0x14($sp)
 /* 0438A4 800684A4 93AB0013 */  lbu   $t3, 0x13($sp)

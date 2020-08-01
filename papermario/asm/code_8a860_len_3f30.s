@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text800F13B0, "ax"
 
-func_800F13B0:
+glabel func_800F13B0
 /* 08A860 800F13B0 3C028011 */  lui   $v0, 0x8011
 /* 08A864 800F13B4 8042D68E */  lb    $v0, -0x2972($v0)
 /* 08A868 800F13B8 27BDFFE0 */  addiu $sp, $sp, -0x20
@@ -122,7 +122,7 @@ func_800F13B0:
 /* 08A9E0 800F1530 03E00008 */  jr    $ra
 /* 08A9E4 800F1534 27BD0020 */   addiu $sp, $sp, 0x20
 
-func_800F1538:
+glabel func_800F1538
 /* 08A9E8 800F1538 3C048011 */  lui   $a0, 0x8011
 /* 08A9EC 800F153C 8C84D65C */  lw    $a0, -0x29a4($a0)
 /* 08A9F0 800F1540 27BDFFE0 */  addiu $sp, $sp, -0x20
@@ -233,7 +233,7 @@ func_800F1538:
 /* 08AB74 800F16C4 03E00008 */  jr    $ra
 /* 08AB78 800F16C8 27BD0020 */   addiu $sp, $sp, 0x20
 
-func_800F16CC:
+glabel func_800F16CC
 /* 08AB7C 800F16CC 3C028011 */  lui   $v0, 0x8011
 /* 08AB80 800F16D0 8042D68E */  lb    $v0, -0x2972($v0)
 /* 08AB84 800F16D4 27BDFFE0 */  addiu $sp, $sp, -0x20
@@ -464,7 +464,7 @@ func_800F16CC:
 /* 08AEB8 800F1A08 03E00008 */  jr    $ra
 /* 08AEBC 800F1A0C 27BD0020 */   addiu $sp, $sp, 0x20
 
-func_800F1A10:
+glabel func_800F1A10
 /* 08AEC0 800F1A10 3C028011 */  lui   $v0, 0x8011
 /* 08AEC4 800F1A14 8C42D640 */  lw    $v0, -0x29c0($v0)
 /* 08AEC8 800F1A18 27BDFFC0 */  addiu $sp, $sp, -0x40
@@ -3542,7 +3542,7 @@ func_800F1A10:
 /* 08DAF0 800F4640 03E00008 */  jr    $ra
 /* 08DAF4 800F4644 27BD0058 */   addiu $sp, $sp, 0x58
 
-draw_submenu_title:
+glabel draw_submenu_title
 /* 08DAF8 800F4648 3C028011 */  lui   $v0, 0x8011
 /* 08DAFC 800F464C 8C42D69C */  lw    $v0, -0x2964($v0)
 /* 08DB00 800F4650 27BDFFC8 */  addiu $sp, $sp, -0x38
@@ -4107,7 +4107,7 @@ draw_submenu_title:
 /* 08E2E8 800F4E38 03E00008 */  jr    $ra
 /* 08E2EC 800F4E3C 27BD0038 */   addiu $sp, $sp, 0x38
 
-func_800F4E40:
+glabel func_800F4E40
 /* 08E2F0 800F4E40 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 08E2F4 800F4E44 AFB00010 */  sw    $s0, 0x10($sp)
 /* 08E2F8 800F4E48 AFBF0014 */  sw    $ra, 0x14($sp)
@@ -4211,7 +4211,7 @@ func_800F4E40:
 /* 08E46C 800F4FBC 03E00008 */  jr    $ra
 /* 08E470 800F4FC0 27BD0018 */   addiu $sp, $sp, 0x18
 
-func_800F4FC4:
+glabel func_800F4FC4
 /* 08E474 800F4FC4 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 08E478 800F4FC8 AFB00010 */  sw    $s0, 0x10($sp)
 /* 08E47C 800F4FCC 3C108011 */  lui   $s0, 0x8011
@@ -4312,7 +4312,7 @@ func_800F4FC4:
 /* 08E5E4 800F5134 03E00008 */  jr    $ra
 /* 08E5E8 800F5138 27BD0018 */   addiu $sp, $sp, 0x18
 
-func_800F513C:
+glabel func_800F513C
 /* 08E5EC 800F513C 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 08E5F0 800F5140 AFB00010 */  sw    $s0, 0x10($sp)
 /* 08E5F4 800F5144 3C108011 */  lui   $s0, 0x8011
@@ -4415,7 +4415,7 @@ func_800F513C:
 /* 08E764 800F52B4 03E00008 */  jr    $ra
 /* 08E768 800F52B8 27BD0018 */   addiu $sp, $sp, 0x18
 
-func_800F52BC:
+glabel func_800F52BC
 /* 08E76C 800F52BC 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 08E770 800F52C0 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 08E774 800F52C4 0C03C684 */  jal   func_800F1A10

@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80067700, "ax"
 
-guScale:
+glabel guScale
 /* 042B00 80067700 3C014780 */  lui   $at, 0x4780
 /* 042B04 80067704 44812000 */  mtc1  $at, $f4
 /* 042B08 80067708 44853000 */  mtc1  $a1, $f6

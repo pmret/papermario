@@ -6,7 +6,7 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80033E70, "ax"
@@ -368,7 +368,7 @@
 /* 00F79C 8003439C 03E00008 */  jr    $ra
 /* 00F7A0 800343A0 27BD0018 */   addiu $sp, $sp, 0x18
 
-func_800343A4:
+glabel func_800343A4
 /* 00F7A4 800343A4 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 00F7A8 800343A8 3C05E200 */  lui   $a1, 0xe200
 /* 00F7AC 800343AC 34A5001C */  ori   $a1, $a1, 0x1c
@@ -751,7 +751,7 @@ func_800343A4:
 /* 00FD74 80034974 03E00008 */  jr    $ra
 /* 00FD78 80034978 27BD0018 */   addiu $sp, $sp, 0x18
 
-step_pause_menu:
+glabel step_pause_menu
 /* 00FD7C 8003497C 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 00FD80 80034980 AFB00010 */  sw    $s0, 0x10($sp)
 /* 00FD84 80034984 3C10800A */  lui   $s0, 0x800a

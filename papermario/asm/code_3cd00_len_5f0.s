@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80061900, "ax"
 
-osContStartQuery:
+glabel osContStartQuery
 /* 03CD00 80061900 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 03CD04 80061904 AFB00010 */  sw    $s0, 0x10($sp)
 /* 03CD08 80061908 AFBF0014 */  sw    $ra, 0x14($sp)
@@ -46,7 +46,7 @@ osContStartQuery:
 /* 03CD78 80061978 03E00008 */  jr    $ra
 /* 03CD7C 8006197C 27BD0018 */   addiu $sp, $sp, 0x18
 
-osContGetQuery:
+glabel osContGetQuery
 /* 03CD80 80061980 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 03CD84 80061984 AFBF0018 */  sw    $ra, 0x18($sp)
 /* 03CD88 80061988 00802821 */  addu  $a1, $a0, $zero
@@ -56,7 +56,7 @@ osContGetQuery:
 /* 03CD98 80061998 03E00008 */  jr    $ra
 /* 03CD9C 8006199C 27BD0020 */   addiu $sp, $sp, 0x20
 
-osContStartReadData:
+glabel osContStartReadData
 /* 03CDA0 800619A0 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 03CDA4 800619A4 AFB00010 */  sw    $s0, 0x10($sp)
 /* 03CDA8 800619A8 AFBF0014 */  sw    $ra, 0x14($sp)
@@ -93,7 +93,7 @@ osContStartReadData:
 /* 03CE20 80061A20 03E00008 */  jr    $ra
 /* 03CE24 80061A24 27BD0018 */   addiu $sp, $sp, 0x18
 
-osContGetReadData:
+glabel osContGetReadData
 /* 03CE28 80061A28 27BDFFF0 */  addiu $sp, $sp, -0x10
 /* 03CE2C 80061A2C 00804821 */  addu  $t1, $a0, $zero
 /* 03CE30 80061A30 3C02800A */  lui   $v0, 0x800a
@@ -137,7 +137,7 @@ osContGetReadData:
 /* 03CEBC 80061ABC 03E00008 */  jr    $ra
 /* 03CEC0 80061AC0 00000000 */   nop   
 
-osPackReadData:
+glabel osPackReadData
 /* 03CEC4 80061AC4 27BDFFF0 */  addiu $sp, $sp, -0x10
 /* 03CEC8 80061AC8 3C07800B */  lui   $a3, 0x800b
 /* 03CECC 80061ACC 24E70ED0 */  addiu $a3, $a3, 0xed0
@@ -189,7 +189,7 @@ osPackReadData:
 /* 03CF78 80061B78 27BD0010 */   addiu $sp, $sp, 0x10
 
 /* 03CF7C 80061B7C 00000000 */  nop   
-osContInit:
+glabel osContInit
 /* 03CF80 80061B80 3C028009 */  lui   $v0, 0x8009
 /* 03CF84 80061B84 8C423DB0 */  lw    $v0, 0x3db0($v0)
 /* 03CF88 80061B88 27BDFF80 */  addiu $sp, $sp, -0x80
@@ -299,7 +299,7 @@ osContInit:
 /* 03D114 80061D14 03E00008 */  jr    $ra
 /* 03D118 80061D18 27BD0080 */   addiu $sp, $sp, 0x80
 
-osContGetInitData:
+glabel osContGetInitData
 /* 03D11C 80061D1C 27BDFFF0 */  addiu $sp, $sp, -0x10
 /* 03D120 80061D20 00805821 */  addu  $t3, $a0, $zero
 /* 03D124 80061D24 00A04821 */  addu  $t1, $a1, $zero
@@ -349,7 +349,7 @@ osContGetInitData:
 /* 03D1C8 80061DC8 03E00008 */  jr    $ra
 /* 03D1CC 80061DCC 27BD0010 */   addiu $sp, $sp, 0x10
 
-osPackRequestData:
+glabel osPackRequestData
 /* 03D1D0 80061DD0 27BDFFF0 */  addiu $sp, $sp, -0x10
 /* 03D1D4 80061DD4 00802821 */  addu  $a1, $a0, $zero
 /* 03D1D8 80061DD8 2406000E */  addiu $a2, $zero, 0xe
@@ -402,7 +402,7 @@ osPackRequestData:
 /* 03D288 80061E88 27BD0010 */   addiu $sp, $sp, 0x10
 
 /* 03D28C 80061E8C 00000000 */  nop   
-osVirtualToPhysical:
+glabel osVirtualToPhysical
 /* 03D290 80061E90 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 03D294 80061E94 3C031FFF */  lui   $v1, 0x1fff
 /* 03D298 80061E98 3463FFFF */  ori   $v1, $v1, 0xffff

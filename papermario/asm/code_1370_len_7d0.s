@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80025F70, "ax"
 
-boot_main:
+glabel boot_main
 /* 001370 80025F70 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 001374 80025F74 3C038000 */  lui   $v1, 0x8000
 /* 001378 80025F78 8C630300 */  lw    $v1, 0x300($v1)
@@ -80,7 +80,7 @@ boot_main:
 /* 001454 80026054 08009815 */  j     .L80026054
 /* 001458 80026058 00000000 */   nop   
 
-gfxRetrace_Callback:
+glabel gfxRetrace_Callback
 /* 00145C 8002605C 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 001460 80026060 AFB10014 */  sw    $s1, 0x14($sp)
 /* 001464 80026064 3C118007 */  lui   $s1, 0x8007
@@ -152,7 +152,7 @@ gfxRetrace_Callback:
 /* 00155C 8002615C 03E00008 */  jr    $ra
 /* 001560 80026160 27BD0020 */   addiu $sp, $sp, 0x20
 
-func_80026164:
+glabel func_80026164
 /* 001564 80026164 27BDFFC0 */  addiu $sp, $sp, -0x40
 /* 001568 80026168 3C048007 */  lui   $a0, 0x8007
 /* 00156C 8002616C 8C8441F4 */  lw    $a0, 0x41f4($a0)
@@ -520,7 +520,7 @@ func_80026164:
 /* 001B04 80026704 03E00008 */  jr    $ra
 /* 001B08 80026708 27BD0040 */   addiu $sp, $sp, 0x40
 
-gfxPreNMI_Callback:
+glabel gfxPreNMI_Callback
 /* 001B0C 8002670C 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 001B10 80026710 24020001 */  addiu $v0, $zero, 1
 /* 001B14 80026714 AFBF0010 */  sw    $ra, 0x10($sp)

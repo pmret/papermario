@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80068DC0, "ax"
 
-osPfsFindFile:
+glabel osPfsFindFile
 /* 0441C0 80068DC0 27BDFFA0 */  addiu $sp, $sp, -0x60
 /* 0441C4 80068DC4 AFB30044 */  sw    $s3, 0x44($sp)
 /* 0441C8 80068DC8 8FB30070 */  lw    $s3, 0x70($sp)

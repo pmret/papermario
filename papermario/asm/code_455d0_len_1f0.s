@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text8006A1D0, "ax"
 
-osContRamRead:
+glabel osContRamRead
 /* 0455D0 8006A1D0 27BDFFB0 */  addiu $sp, $sp, -0x50
 /* 0455D4 8006A1D4 AFB40038 */  sw    $s4, 0x38($sp)
 /* 0455D8 8006A1D8 0080A021 */  addu  $s4, $a0, $zero

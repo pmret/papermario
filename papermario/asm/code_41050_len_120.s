@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80065C50, "ax"
 
-osSpTaskYield:
+glabel osSpTaskYield
 /* 041050 80065C50 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 041054 80065C54 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 041058 80065C58 0C01B1BC */  jal   osSpSetStatus
@@ -21,7 +21,7 @@ osSpTaskYield:
 /* 041068 80065C68 27BD0018 */   addiu $sp, $sp, 0x18
 
 /* 04106C 80065C6C 00000000 */  nop   
-osSpTaskYielded:
+glabel osSpTaskYielded
 /* 041070 80065C70 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 041074 80065C74 AFB00010 */  sw    $s0, 0x10($sp)
 /* 041078 80065C78 AFBF0014 */  sw    $ra, 0x14($sp)
@@ -44,7 +44,7 @@ osSpTaskYielded:
 /* 0410B8 80065CB8 27BD0018 */   addiu $sp, $sp, 0x18
 
 /* 0410BC 80065CBC 00000000 */  nop   
-osSiRawStartDma:
+glabel osSiRawStartDma
 /* 0410C0 80065CC0 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0410C4 80065CC4 3C02A480 */  lui   $v0, 0xa480
 /* 0410C8 80065CC8 34420018 */  ori   $v0, $v0, 0x18

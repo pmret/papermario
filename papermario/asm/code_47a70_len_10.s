@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text8006C670, "ax"
 
-osGetSR:
+glabel osGetSR
 /* 047A70 8006C670 40026000 */  mfc0  $v0, $12
 /* 047A74 8006C674 03E00008 */  jr    $ra
 /* 047A78 8006C678 00000000 */   nop   

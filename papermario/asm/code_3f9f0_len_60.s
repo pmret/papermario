@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text800645F0, "ax"
 
-sins:
+glabel sins
 /* 03F9F0 800645F0 3084FFFF */  andi  $a0, $a0, 0xffff
 /* 03F9F4 800645F4 00042102 */  srl   $a0, $a0, 4
 /* 03F9F8 800645F8 30820400 */  andi  $v0, $a0, 0x400

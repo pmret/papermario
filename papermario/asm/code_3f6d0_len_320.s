@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text800642D0, "ax"
 
-guRotateAnglesF:
+glabel guRotateAnglesF
 /* 03F6D0 800642D0 3C018009 */  lui   $at, 0x8009
 /* 03F6D4 800642D4 C4203DD0 */  lwc1  $f0, 0x3dd0($at)
 /* 03F6D8 800642D8 44854000 */  mtc1  $a1, $f8
@@ -111,7 +111,7 @@ guRotateAnglesF:
 /* 03F850 80064450 03E00008 */  jr    $ra
 /* 03F854 80064454 27BD0058 */   addiu $sp, $sp, 0x58
 
-guRotateAngles:
+glabel guRotateAngles
 /* 03F858 80064458 3C018009 */  lui   $at, 0x8009
 /* 03F85C 8006445C C4203DD0 */  lwc1  $f0, 0x3dd0($at)
 /* 03F860 80064460 44854000 */  mtc1  $a1, $f8

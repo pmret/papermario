@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text8006DDC0, "ax"
 
-func_8006DDC0:
+glabel func_8006DDC0
 /* 0491C0 8006DDC0 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0491C4 8006DDC4 AFB20010 */  sw    $s2, 0x10($sp)
 /* 0491C8 8006DDC8 0000902D */  daddu $s2, $zero, $zero
@@ -400,7 +400,7 @@ func_8006DDC0:
 /* 049708 8006E308 03E00008 */  jr    $ra
 /* 04970C 8006E30C 27BD0018 */   addiu $sp, $sp, 0x18
 
-func_8006E310:
+glabel func_8006E310
 /* 049710 8006E310 00E0482D */  daddu $t1, $a3, $zero
 /* 049714 8006E314 00C0402D */  daddu $t0, $a2, $zero
 /* 049718 8006E318 150000DF */  bnez  $t0, .L8006E698

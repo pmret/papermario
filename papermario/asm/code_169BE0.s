@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80249380, "ax"
 
-func_80249380:
+glabel func_80249380
 /* 169BE0 80249380 27BDFFB8 */  addiu $sp, $sp, -0x48
 /* 169BE4 80249384 0080482D */  daddu $t1, $a0, $zero
 /* 169BE8 80249388 AFB5003C */  sw    $s5, 0x3c($sp)
@@ -430,7 +430,7 @@ func_80249380:
 /* 16A1D4 80249974 03E00008 */  jr    $ra
 /* 16A1D8 80249978 27BD0048 */   addiu $sp, $sp, 0x48
 
-func_8024997C:
+glabel func_8024997C
 /* 16A1DC 8024997C 27BDFFC8 */  addiu $sp, $sp, -0x38
 /* 16A1E0 80249980 8FA2004C */  lw    $v0, 0x4c($sp)
 /* 16A1E4 80249984 AFB5002C */  sw    $s5, 0x2c($sp)
@@ -513,14 +513,14 @@ func_8024997C:
 /* 16A2FC 80249A9C 03E00008 */  jr    $ra
 /* 16A300 80249AA0 27BD0038 */   addiu $sp, $sp, 0x38
 
-func_80249AA4:
+glabel func_80249AA4
 /* 16A304 80249AA4 00042080 */  sll   $a0, $a0, 2
 /* 16A308 80249AA8 3C028025 */  lui   $v0, 0x8025
 /* 16A30C 80249AAC 00441021 */  addu  $v0, $v0, $a0
 /* 16A310 80249AB0 03E00008 */  jr    $ra
 /* 16A314 80249AB4 8C42B9D0 */   lw    $v0, -0x4630($v0)
 
-func_80249AB8:
+glabel func_80249AB8
 /* 16A318 80249AB8 27BDFFC0 */  addiu $sp, $sp, -0x40
 /* 16A31C 80249ABC AFB70034 */  sw    $s7, 0x34($sp)
 /* 16A320 80249AC0 8FB70050 */  lw    $s7, 0x50($sp)

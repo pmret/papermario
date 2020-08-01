@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80066290, "ax"
 
-osGetActiveQueue:
+glabel osGetActiveQueue
 /* 041690 80066290 3C028009 */  lui   $v0, 0x8009
 /* 041694 80066294 03E00008 */  jr    $ra
 /* 041698 80066298 8C42465C */   lw    $v0, 0x465c($v0)

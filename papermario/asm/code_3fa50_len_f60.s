@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80064650, "ax"
 
-bcopy:
+glabel bcopy
 /* 03FA50 80064650 10C0001B */  beqz  $a2, .L800646C0
 /* 03FA54 80064654 00A03821 */   addu  $a3, $a1, $zero
 /* 03FA58 80064658 10850019 */  beq   $a0, $a1, .L800646C0
@@ -233,7 +233,7 @@ bcopy:
 /* 03FD64 80064964 1000FFF8 */  b     .L80064948
 /* 03FD68 80064968 24C6FFFC */   addiu $a2, $a2, -4
 /* 03FD6C 8006496C 00000000 */  nop   
-bzero:
+glabel bzero
 /* 03FD70 80064970 00041823 */  negu  $v1, $a0
 /* 03FD74 80064974 28A1000C */  slti  $at, $a1, 0xc
 /* 03FD78 80064978 1420001D */  bnez  $at, .L800649F0
@@ -282,7 +282,7 @@ bzero:
 /* 03FE08 80064A08 03E00008 */  jr    $ra
 /* 03FE0C 80064A0C 00000000 */   nop   
 
-strchr:
+glabel strchr
 /* 03FE10 80064A10 90830000 */  lbu   $v1, ($a0)
 /* 03FE14 80064A14 80820000 */  lb    $v0, ($a0)
 /* 03FE18 80064A18 00052E00 */  sll   $a1, $a1, 0x18
@@ -305,7 +305,7 @@ strchr:
 /* 03FE48 80064A48 03E00008 */  jr    $ra
 /* 03FE4C 80064A4C 27BD0010 */   addiu $sp, $sp, 0x10
 
-strlen:
+glabel strlen
 /* 03FE50 80064A50 80820000 */  lb    $v0, ($a0)
 /* 03FE54 80064A54 10400005 */  beqz  $v0, .L80064A6C
 /* 03FE58 80064A58 00801821 */   addu  $v1, $a0, $zero
@@ -318,7 +318,7 @@ strlen:
 /* 03FE6C 80064A6C 03E00008 */  jr    $ra
 /* 03FE70 80064A70 00641023 */   subu  $v0, $v1, $a0
 
-memcpy:
+glabel memcpy
 /* 03FE74 80064A74 10C00007 */  beqz  $a2, .L80064A94
 /* 03FE78 80064A78 00801821 */   addu  $v1, $a0, $zero
 .L80064A7C:
@@ -333,7 +333,7 @@ memcpy:
 /* 03FE98 80064A98 00801021 */   addu  $v0, $a0, $zero
 
 /* 03FE9C 80064A9C 00000000 */  nop   
-_Printf:
+glabel _Printf
 /* 03FEA0 80064AA0 27BDFF50 */  addiu $sp, $sp, -0xb0
 /* 03FEA4 80064AA4 AFB400A0 */  sw    $s4, 0xa0($sp)
 /* 03FEA8 80064AA8 0080A021 */  addu  $s4, $a0, $zero
@@ -736,7 +736,7 @@ _Printf:
 /* 040418 80065018 03E00008 */  jr    $ra
 /* 04041C 8006501C 27BD00B0 */   addiu $sp, $sp, 0xb0
 
-_Putfld:
+glabel _Putfld
 /* 040420 80065020 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 040424 80065024 AFB00010 */  sw    $s0, 0x10($sp)
 /* 040428 80065028 00808021 */  addu  $s0, $a0, $zero
@@ -1084,7 +1084,7 @@ _Putfld:
 /* 0408E8 800654E8 03E00008 */  jr    $ra
 /* 0408EC 800654EC 27BD0018 */   addiu $sp, $sp, 0x18
 
-sprintf:
+glabel sprintf
 /* 0408F0 800654F0 AFA50004 */  sw    $a1, 4($sp)
 /* 0408F4 800654F4 AFA60008 */  sw    $a2, 8($sp)
 /* 0408F8 800654F8 AFA7000C */  sw    $a3, 0xc($sp)
@@ -1109,7 +1109,7 @@ sprintf:
 /* 040940 80065540 03E00008 */  jr    $ra
 /* 040944 80065544 27BD0018 */   addiu $sp, $sp, 0x18
 
-proutSprintf:
+glabel proutSprintf
 /* 040948 80065548 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 04094C 8006554C AFB10014 */  sw    $s1, 0x14($sp)
 /* 040950 80065550 00808821 */  addu  $s1, $a0, $zero
@@ -1125,7 +1125,7 @@ proutSprintf:
 /* 040978 80065578 27BD0020 */   addiu $sp, $sp, 0x20
 
 /* 04097C 8006557C 00000000 */  nop   
-osCreateMesgQueue:
+glabel osCreateMesgQueue
 /* 040980 80065580 3C028009 */  lui   $v0, 0x8009
 /* 040984 80065584 24424650 */  addiu $v0, $v0, 0x4650
 /* 040988 80065588 AC820000 */  sw    $v0, ($a0)

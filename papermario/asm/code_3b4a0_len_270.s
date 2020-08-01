@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text800600A0, "ax"
 
-nuContRmbForceStop:
+glabel nuContRmbForceStop
 /* 03B4A0 800600A0 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 03B4A4 800600A4 24040304 */  addiu $a0, $zero, 0x304
 /* 03B4A8 800600A8 AFBF0010 */  sw    $ra, 0x10($sp)
@@ -21,7 +21,7 @@ nuContRmbForceStop:
 /* 03B4B8 800600B8 03E00008 */  jr    $ra
 /* 03B4BC 800600BC 27BD0018 */   addiu $sp, $sp, 0x18
 
-nuContRmbForceStopEnd:
+glabel nuContRmbForceStopEnd
 /* 03B4C0 800600C0 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 03B4C4 800600C4 24040305 */  addiu $a0, $zero, 0x305
 /* 03B4C8 800600C8 AFBF0010 */  sw    $ra, 0x10($sp)
@@ -31,7 +31,7 @@ nuContRmbForceStopEnd:
 /* 03B4D8 800600D8 03E00008 */  jr    $ra
 /* 03B4DC 800600DC 27BD0018 */   addiu $sp, $sp, 0x18
 
-nuPiReadRomOverlay:
+glabel nuPiReadRomOverlay
 /* 03B4E0 800600E0 27BDFF98 */  addiu $sp, $sp, -0x68
 /* 03B4E4 800600E4 AFB40058 */  sw    $s4, 0x58($sp)
 /* 03B4E8 800600E8 0080A02D */  daddu $s4, $a0, $zero
@@ -105,7 +105,7 @@ nuPiReadRomOverlay:
 /* 03B5E8 800601E8 27BD0068 */   addiu $sp, $sp, 0x68
 
 /* 03B5EC 800601EC 00000000 */  nop   
-nuGfxThreadStart:
+glabel nuGfxThreadStart
 /* 03B5F0 800601F0 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 03B5F4 800601F4 AFB00018 */  sw    $s0, 0x18($sp)
 /* 03B5F8 800601F8 3C10800B */  lui   $s0, 0x800b
@@ -129,7 +129,7 @@ nuGfxThreadStart:
 /* 03B640 80060240 03E00008 */  jr    $ra
 /* 03B644 80060244 27BD0020 */   addiu $sp, $sp, 0x20
 
-nuGfxThread:
+glabel nuGfxThread
 /* 03B648 80060248 27BDFFC8 */  addiu $sp, $sp, -0x38
 /* 03B64C 8006024C AFB00028 */  sw    $s0, 0x28($sp)
 /* 03B650 80060250 3C10800B */  lui   $s0, 0x800b

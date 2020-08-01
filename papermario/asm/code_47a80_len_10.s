@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text8006C680, "ax"
 
-osSetCompare:
+glabel osSetCompare
 /* 047A80 8006C680 40845800 */  mtc0  $a0, $11
 /* 047A84 8006C684 03E00008 */  jr    $ra
 /* 047A88 8006C688 00000000 */   nop   

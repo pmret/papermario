@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text802E7DE0, "ax"
 
-func_802E7DE0:
+glabel func_802E7DE0
 /* 109660 802E7DE0 27BDFF48 */  addiu $sp, $sp, -0xb8
 /* 109664 802E7DE4 AFB3009C */  sw    $s3, 0x9c($sp)
 /* 109668 802E7DE8 0080982D */  daddu $s3, $a0, $zero
@@ -115,7 +115,7 @@ func_802E7DE0:
 /* 1097E4 802E7F64 03E00008 */  jr    $ra
 /* 1097E8 802E7F68 AC640000 */   sw    $a0, ($v1)
 
-func_802E7F6C:
+glabel func_802E7F6C
 /* 1097EC 802E7F6C 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 1097F0 802E7F70 3C050A00 */  lui   $a1, 0xa00
 /* 1097F4 802E7F74 24A54350 */  addiu $a1, $a1, 0x4350
@@ -1038,7 +1038,7 @@ func_802E7F6C:
 /* 10A544 802E8CC4 03E00008 */  jr    $ra
 /* 10A548 802E8CC8 27BD0018 */   addiu $sp, $sp, 0x18
 
-player_enter_blue_pipe:
+glabel player_enter_blue_pipe
 /* 10A54C 802E8CCC 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 10A550 802E8CD0 AFBF0020 */  sw    $ra, 0x20($sp)
 /* 10A554 802E8CD4 8C850040 */  lw    $a1, 0x40($a0)
@@ -1139,7 +1139,7 @@ player_enter_blue_pipe:
 /* 10A6C4 802E8E44 03E00008 */  jr    $ra
 /* 10A6C8 802E8E48 27BD0018 */   addiu $sp, $sp, 0x18
 
-push_entity_matrix:
+glabel push_entity_matrix
 /* 10A6CC 802E8E4C 27BDFF58 */  addiu $sp, $sp, -0xa8
 /* 10A6D0 802E8E50 AFB3009C */  sw    $s3, 0x9c($sp)
 /* 10A6D4 802E8E54 3C13800A */  lui   $s3, 0x800a

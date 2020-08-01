@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80060310, "ax"
 
-nuGfxSwapCfbFuncSet:
+glabel nuGfxSwapCfbFuncSet
 /* 03B710 80060310 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 03B714 80060314 AFB00010 */  sw    $s0, 0x10($sp)
 /* 03B718 80060318 0080802D */  daddu $s0, $a0, $zero

@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text800E73A0, "ax"
 
-clear_player_data:
+glabel clear_player_data
 /* 080850 800E73A0 0000182D */  daddu $v1, $zero, $zero
 /* 080854 800E73A4 3C048011 */  lui   $a0, 0x8011
 /* 080858 800E73A8 2484F290 */  addiu $a0, $a0, -0xd70
@@ -133,13 +133,13 @@ clear_player_data:
 /* 080A0C 800E755C 03E00008 */  jr    $ra
 /* 080A10 800E7560 A480033C */   sh    $zero, 0x33c($a0)
 
-get_player_data:
+glabel get_player_data
 /* 080A14 800E7564 3C028011 */  lui   $v0, 0x8011
 /* 080A18 800E7568 2442F290 */  addiu $v0, $v0, -0xd70
 /* 080A1C 800E756C 03E00008 */  jr    $ra
 /* 080A20 800E7570 00000000 */   nop   
 
-add_item:
+glabel add_item
 /* 080A24 800E7574 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 080A28 800E7578 AFB10014 */  sw    $s1, 0x14($sp)
 /* 080A2C 800E757C 0080882D */  daddu $s1, $a0, $zero
@@ -176,7 +176,7 @@ add_item:
 /* 080A94 800E75E4 03E00008 */  jr    $ra
 /* 080A98 800E75E8 27BD0020 */   addiu $sp, $sp, 0x20
 
-get_item_count:
+glabel get_item_count
 /* 080A9C 800E75EC 0000202D */  daddu $a0, $zero, $zero
 /* 080AA0 800E75F0 0080282D */  daddu $a1, $a0, $zero
 /* 080AA4 800E75F4 3C038011 */  lui   $v1, 0x8011
@@ -193,7 +193,7 @@ get_item_count:
 /* 080AC8 800E7618 03E00008 */  jr    $ra
 /* 080ACC 800E761C 00A0102D */   daddu $v0, $a1, $zero
 
-get_item_empty_count:
+glabel get_item_empty_count
 /* 080AD0 800E7620 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 080AD4 800E7624 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 080AD8 800E7628 0C039D7B */  jal   get_item_count
@@ -204,7 +204,7 @@ get_item_empty_count:
 /* 080AEC 800E763C 03E00008 */  jr    $ra
 /* 080AF0 800E7640 27BD0018 */   addiu $sp, $sp, 0x18
 
-find_item:
+glabel find_item
 /* 080AF4 800E7644 00041140 */  sll   $v0, $a0, 5
 /* 080AF8 800E7648 3C018008 */  lui   $at, 0x8008
 /* 080AFC 800E764C 00220821 */  addu  $at, $at, $v0
@@ -246,7 +246,7 @@ find_item:
 /* 080B74 800E76C4 03E00008 */  jr    $ra
 /* 080B78 800E76C8 00000000 */   nop   
 
-sort_items:
+glabel sort_items
 /* 080B7C 800E76CC 24060008 */  addiu $a2, $zero, 8
 /* 080B80 800E76D0 3C088011 */  lui   $t0, 0x8011
 /* 080B84 800E76D4 2508F290 */  addiu $t0, $t0, -0xd70
@@ -282,7 +282,7 @@ sort_items:
 /* 080BE4 800E7734 03E00008 */  jr    $ra
 /* 080BE8 800E7738 00000000 */   nop   
 
-add_badge:
+glabel add_badge
 /* 080BEC 800E773C 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 080BF0 800E7740 00041140 */  sll   $v0, $a0, 5
 /* 080BF4 800E7744 AFBF0010 */  sw    $ra, 0x10($sp)
@@ -325,7 +325,7 @@ add_badge:
 /* 080C6C 800E77BC 03E00008 */  jr    $ra
 /* 080C70 800E77C0 27BD0018 */   addiu $sp, $sp, 0x18
 
-store_item:
+glabel store_item
 /* 080C74 800E77C4 0000182D */  daddu $v1, $zero, $zero
 /* 080C78 800E77C8 3C068011 */  lui   $a2, 0x8011
 /* 080C7C 800E77CC 24C6F290 */  addiu $a2, $a2, -0xd70
@@ -351,7 +351,7 @@ store_item:
 /* 080CBC 800E780C 03E00008 */  jr    $ra
 /* 080CC0 800E7810 2402FFFF */   addiu $v0, $zero, -1
 
-get_stored_count:
+glabel get_stored_count
 /* 080CC4 800E7814 0000202D */  daddu $a0, $zero, $zero
 /* 080CC8 800E7818 0080282D */  daddu $a1, $a0, $zero
 /* 080CCC 800E781C 3C038011 */  lui   $v1, 0x8011
@@ -368,7 +368,7 @@ get_stored_count:
 /* 080CF0 800E7840 03E00008 */  jr    $ra
 /* 080CF4 800E7844 00A0102D */   daddu $v0, $a1, $zero
 
-get_stored_empty_count:
+glabel get_stored_empty_count
 /* 080CF8 800E7848 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 080CFC 800E784C AFBF0010 */  sw    $ra, 0x10($sp)
 /* 080D00 800E7850 0C039E05 */  jal   get_stored_count
@@ -379,7 +379,7 @@ get_stored_empty_count:
 /* 080D14 800E7864 03E00008 */  jr    $ra
 /* 080D18 800E7868 27BD0018 */   addiu $sp, $sp, 0x18
 
-enforce_hpfp_limits:
+glabel enforce_hpfp_limits
 /* 080D1C 800E786C 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 080D20 800E7870 24040004 */  addiu $a0, $zero, 4
 /* 080D24 800E7874 AFBF0018 */  sw    $ra, 0x18($sp)
@@ -435,7 +435,7 @@ enforce_hpfp_limits:
 /* 080DDC 800E792C 03E00008 */  jr    $ra
 /* 080DE0 800E7930 27BD0020 */   addiu $sp, $sp, 0x20
 
-initialize_status_menu:
+glabel initialize_status_menu
 /* 080DE4 800E7934 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 080DE8 800E7938 AFB10014 */  sw    $s1, 0x14($sp)
 /* 080DEC 800E793C 3C118011 */  lui   $s1, 0x8011
@@ -657,7 +657,7 @@ initialize_status_menu:
 /* 08114C 800E7C9C 03E00008 */  jr    $ra
 /* 081150 800E7CA0 27BD0020 */   addiu $sp, $sp, 0x20
 
-status_menu_draw_number:
+glabel status_menu_draw_number
 /* 081154 800E7CA4 27BDFFC0 */  addiu $sp, $sp, -0x40
 /* 081158 800E7CA8 AFB1001C */  sw    $s1, 0x1c($sp)
 /* 08115C 800E7CAC 00A0882D */  daddu $s1, $a1, $zero
@@ -765,7 +765,7 @@ status_menu_draw_number:
 /* 0812DC 800E7E2C 03E00008 */  jr    $ra
 /* 0812E0 800E7E30 27BD0040 */   addiu $sp, $sp, 0x40
 
-status_menu_draw_stat:
+glabel status_menu_draw_stat
 /* 0812E4 800E7E34 27BDFFB8 */  addiu $sp, $sp, -0x48
 /* 0812E8 800E7E38 AFB40030 */  sw    $s4, 0x30($sp)
 /* 0812EC 800E7E3C 0080A02D */  daddu $s4, $a0, $zero
@@ -938,7 +938,7 @@ status_menu_draw_stat:
 /* 08155C 800E80AC 03E00008 */  jr    $ra
 /* 081560 800E80B0 27BD0048 */   addiu $sp, $sp, 0x48
 
-update_status_menu:
+glabel update_status_menu
 /* 081564 800E80B4 27BDFF70 */  addiu $sp, $sp, -0x90
 /* 081568 800E80B8 AFB00068 */  sw    $s0, 0x68($sp)
 /* 08156C 800E80BC 3C108007 */  lui   $s0, 0x8007
@@ -2202,7 +2202,7 @@ update_status_menu:
 /* 082780 800E92D0 03E00008 */  jr    $ra
 /* 082784 800E92D4 27BD0090 */   addiu $sp, $sp, 0x90
 
-coin_counter_draw_content:
+glabel coin_counter_draw_content
 /* 082788 800E92D8 3C038011 */  lui   $v1, 0x8011
 /* 08278C 800E92DC 8463F29C */  lh    $v1, -0xd64($v1)
 /* 082790 800E92E0 27BDFFC8 */  addiu $sp, $sp, -0x38
@@ -2271,7 +2271,7 @@ coin_counter_draw_content:
 /* 082884 800E93D4 03E00008 */  jr    $ra
 /* 082888 800E93D8 27BD0038 */   addiu $sp, $sp, 0x38
 
-update_coin_counter:
+glabel update_coin_counter
 /* 08288C 800E93DC 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 082890 800E93E0 AFB00010 */  sw    $s0, 0x10($sp)
 /* 082894 800E93E4 3C108011 */  lui   $s0, 0x8011
@@ -2358,7 +2358,7 @@ update_coin_counter:
 /* 0829C0 800E9510 03E00008 */  jr    $ra
 /* 0829C4 800E9514 27BD0020 */   addiu $sp, $sp, 0x20
 
-show_coin_counter:
+glabel show_coin_counter
 /* 0829C8 800E9518 27BDFFC8 */  addiu $sp, $sp, -0x38
 /* 0829CC 800E951C AFB00028 */  sw    $s0, 0x28($sp)
 /* 0829D0 800E9520 3C108011 */  lui   $s0, 0x8011
@@ -2461,7 +2461,7 @@ show_coin_counter:
 /* 082B40 800E9690 03E00008 */  jr    $ra
 /* 082B44 800E9694 27BD0038 */   addiu $sp, $sp, 0x38
 
-hide_coin_counter:
+glabel hide_coin_counter
 /* 082B48 800E9698 3C028011 */  lui   $v0, 0x8011
 /* 082B4C 800E969C 8442CD10 */  lh    $v0, -0x32f0($v0)
 /* 082B50 800E96A0 3C038011 */  lui   $v1, 0x8011
@@ -2476,7 +2476,7 @@ hide_coin_counter:
 /* 082B70 800E96C0 03E00008 */  jr    $ra
 /* 082B74 800E96C4 00000000 */   nop   
 
-func_800E96C8:
+glabel func_800E96C8
 /* 082B78 800E96C8 3C028011 */  lui   $v0, 0x8011
 /* 082B7C 800E96CC 8442CD10 */  lh    $v0, -0x32f0($v0)
 /* 082B80 800E96D0 3C038011 */  lui   $v1, 0x8011
@@ -2491,7 +2491,7 @@ func_800E96C8:
 /* 082BA0 800E96F0 03E00008 */  jr    $ra
 /* 082BA4 800E96F4 00000000 */   nop   
 
-ShowCoinCounter:
+glabel ShowCoinCounter
 /* 082BA8 800E96F8 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 082BAC 800E96FC AFBF0010 */  sw    $ra, 0x10($sp)
 /* 082BB0 800E9700 8C82000C */  lw    $v0, 0xc($a0)
@@ -2513,7 +2513,7 @@ ShowCoinCounter:
 /* 082BE4 800E9734 03E00008 */  jr    $ra
 /* 082BE8 800E9738 27BD0018 */   addiu $sp, $sp, 0x18
 
-func_800E973C:
+glabel func_800E973C
 /* 082BEC 800E973C 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 082BF0 800E9740 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 082BF4 800E9744 0C03A02D */  jal   update_status_menu
@@ -2524,7 +2524,7 @@ func_800E973C:
 /* 082C08 800E9758 03E00008 */  jr    $ra
 /* 082C0C 800E975C 27BD0018 */   addiu $sp, $sp, 0x18
 
-open_status_menu_long:
+glabel open_status_menu_long
 /* 082C10 800E9760 3C038011 */  lui   $v1, 0x8011
 /* 082C14 800E9764 2463EF58 */  addiu $v1, $v1, -0x10a8
 /* 082C18 800E9768 8062003A */  lb    $v0, 0x3a($v1)
@@ -2538,7 +2538,7 @@ open_status_menu_long:
 /* 082C34 800E9784 03E00008 */  jr    $ra
 /* 082C38 800E9788 00000000 */   nop   
 
-open_status_menu_short:
+glabel open_status_menu_short
 /* 082C3C 800E978C 3C038011 */  lui   $v1, 0x8011
 /* 082C40 800E9790 2463EF58 */  addiu $v1, $v1, -0x10a8
 /* 082C44 800E9794 8062003A */  lb    $v0, 0x3a($v1)
@@ -2552,7 +2552,7 @@ open_status_menu_short:
 /* 082C60 800E97B0 03E00008 */  jr    $ra
 /* 082C64 800E97B4 00000000 */   nop   
 
-func_800E97B8:
+glabel func_800E97B8
 /* 082C68 800E97B8 3C048011 */  lui   $a0, 0x8011
 /* 082C6C 800E97BC 2484EF58 */  addiu $a0, $a0, -0x10a8
 /* 082C70 800E97C0 8082003A */  lb    $v0, 0x3a($a0)
@@ -2566,7 +2566,7 @@ func_800E97B8:
 /* 082C8C 800E97DC 03E00008 */  jr    $ra
 /* 082C90 800E97E0 00000000 */   nop   
 
-func_800E97E4:
+glabel func_800E97E4
 /* 082C94 800E97E4 3C028011 */  lui   $v0, 0x8011
 /* 082C98 800E97E8 2442EF58 */  addiu $v0, $v0, -0x10a8
 /* 082C9C 800E97EC 2403FF9C */  addiu $v1, $zero, -0x64
@@ -2579,7 +2579,7 @@ func_800E97E4:
 /* 082CB8 800E9808 03E00008 */  jr    $ra
 /* 082CBC 800E980C A040003C */   sb    $zero, 0x3c($v0)
 
-func_800E9810:
+glabel func_800E9810
 /* 082CC0 800E9810 3C028011 */  lui   $v0, 0x8011
 /* 082CC4 800E9814 2442EF58 */  addiu $v0, $v0, -0x10a8
 /* 082CC8 800E9818 240300D2 */  addiu $v1, $zero, 0xd2
@@ -2592,20 +2592,20 @@ func_800E9810:
 /* 082CE4 800E9834 03E00008 */  jr    $ra
 /* 082CE8 800E9838 A040003C */   sb    $zero, 0x3c($v0)
 
-func_800E983C:
+glabel func_800E983C
 /* 082CEC 800E983C 3C018011 */  lui   $at, 0x8011
 /* 082CF0 800E9840 A020EF9D */  sb    $zero, -0x1063($at)
 /* 082CF4 800E9844 03E00008 */  jr    $ra
 /* 082CF8 800E9848 00000000 */   nop   
 
-func_800E984C:
+glabel func_800E984C
 /* 082CFC 800E984C 24020001 */  addiu $v0, $zero, 1
 /* 082D00 800E9850 3C018011 */  lui   $at, 0x8011
 /* 082D04 800E9854 A022EF9D */  sb    $v0, -0x1063($at)
 /* 082D08 800E9858 03E00008 */  jr    $ra
 /* 082D0C 800E985C 00000000 */   nop   
 
-func_800E9860:
+glabel func_800E9860
 /* 082D10 800E9860 3C038011 */  lui   $v1, 0x8011
 /* 082D14 800E9864 2463EF58 */  addiu $v1, $v1, -0x10a8
 /* 082D18 800E9868 80640045 */  lb    $a0, 0x45($v1)
@@ -2622,7 +2622,7 @@ func_800E9860:
 /* 082D3C 800E988C 03E00008 */  jr    $ra
 /* 082D40 800E9890 0080102D */   daddu $v0, $a0, $zero
 
-func_800E9894:
+glabel func_800E9894
 /* 082D44 800E9894 24020001 */  addiu $v0, $zero, 1
 /* 082D48 800E9898 3C018011 */  lui   $at, 0x8011
 /* 082D4C 800E989C A022EF9C */  sb    $v0, -0x1064($at)
@@ -2637,13 +2637,13 @@ func_800E9894:
 /* 082D6C 800E98BC 03E00008 */  jr    $ra
 /* 082D70 800E98C0 A4430036 */   sh    $v1, 0x36($v0)
 
-func_800E98C4:
+glabel func_800E98C4
 /* 082D74 800E98C4 3C018011 */  lui   $at, 0x8011
 /* 082D78 800E98C8 A020EF9C */  sb    $zero, -0x1064($at)
 /* 082D7C 800E98CC 03E00008 */  jr    $ra
 /* 082D80 800E98D0 00000000 */   nop   
 
-func_800E98D4:
+glabel func_800E98D4
 /* 082D84 800E98D4 3C028011 */  lui   $v0, 0x8011
 /* 082D88 800E98D8 2442EF58 */  addiu $v0, $v0, -0x10a8
 /* 082D8C 800E98DC 80430046 */  lb    $v1, 0x46($v0)
@@ -2651,26 +2651,26 @@ func_800E98D4:
 /* 082D94 800E98E4 03E00008 */  jr    $ra
 /* 082D98 800E98E8 00621021 */   addu  $v0, $v1, $v0
 
-func_800E98EC:
+glabel func_800E98EC
 /* 082D9C 800E98EC 24020001 */  addiu $v0, $zero, 1
 /* 082DA0 800E98F0 3C018011 */  lui   $at, 0x8011
 /* 082DA4 800E98F4 A022EF9E */  sb    $v0, -0x1062($at)
 /* 082DA8 800E98F8 03E00008 */  jr    $ra
 /* 082DAC 800E98FC 00000000 */   nop   
 
-func_800E9900:
+glabel func_800E9900
 /* 082DB0 800E9900 3C018011 */  lui   $at, 0x8011
 /* 082DB4 800E9904 A020EF9E */  sb    $zero, -0x1062($at)
 /* 082DB8 800E9908 03E00008 */  jr    $ra
 /* 082DBC 800E990C 00000000 */   nop   
 
-is_status_menu_visible:
+glabel is_status_menu_visible
 /* 082DC0 800E9910 3C028011 */  lui   $v0, 0x8011
 /* 082DC4 800E9914 8042EF92 */  lb    $v0, -0x106e($v0)
 /* 082DC8 800E9918 03E00008 */  jr    $ra
 /* 082DCC 800E991C 2C420001 */   sltiu $v0, $v0, 1
 
-status_menu_start_blinking_hp:
+glabel status_menu_start_blinking_hp
 /* 082DD0 800E9920 3C028007 */  lui   $v0, 0x8007
 /* 082DD4 800E9924 8C42419C */  lw    $v0, 0x419c($v0)
 /* 082DD8 800E9928 3C038011 */  lui   $v1, 0x8011
@@ -2691,7 +2691,7 @@ status_menu_start_blinking_hp:
 /* 082E0C 800E995C 03E00008 */  jr    $ra
 /* 082E10 800E9960 00000000 */   nop   
 
-status_menu_stop_blinking_hp:
+glabel status_menu_stop_blinking_hp
 /* 082E14 800E9964 3C038011 */  lui   $v1, 0x8011
 /* 082E18 800E9968 2463EF58 */  addiu $v1, $v1, -0x10a8
 /* 082E1C 800E996C 8062004A */  lb    $v0, 0x4a($v1)
@@ -2704,7 +2704,7 @@ status_menu_stop_blinking_hp:
 /* 082E34 800E9984 03E00008 */  jr    $ra
 /* 082E38 800E9988 00000000 */   nop   
 
-status_menu_start_blinking_fp:
+glabel status_menu_start_blinking_fp
 /* 082E3C 800E998C 3C028007 */  lui   $v0, 0x8007
 /* 082E40 800E9990 8C42419C */  lw    $v0, 0x419c($v0)
 /* 082E44 800E9994 3C038011 */  lui   $v1, 0x8011
@@ -2725,7 +2725,7 @@ status_menu_start_blinking_fp:
 /* 082E78 800E99C8 03E00008 */  jr    $ra
 /* 082E7C 800E99CC 00000000 */   nop   
 
-status_menu_stop_blinking_fp:
+glabel status_menu_stop_blinking_fp
 /* 082E80 800E99D0 3C038011 */  lui   $v1, 0x8011
 /* 082E84 800E99D4 2463EF58 */  addiu $v1, $v1, -0x10a8
 /* 082E88 800E99D8 8062004D */  lb    $v0, 0x4d($v1)
@@ -2737,7 +2737,7 @@ status_menu_stop_blinking_fp:
 /* 082E9C 800E99EC 03E00008 */  jr    $ra
 /* 082EA0 800E99F0 00000000 */   nop   
 
-status_menu_start_blinking_coins:
+glabel status_menu_start_blinking_coins
 /* 082EA4 800E99F4 3C028007 */  lui   $v0, 0x8007
 /* 082EA8 800E99F8 8C42419C */  lw    $v0, 0x419c($v0)
 /* 082EAC 800E99FC 3C038011 */  lui   $v1, 0x8011
@@ -2758,7 +2758,7 @@ status_menu_start_blinking_coins:
 /* 082EE0 800E9A30 03E00008 */  jr    $ra
 /* 082EE4 800E9A34 00000000 */   nop   
 
-status_menu_stop_blinking_coins:
+glabel status_menu_stop_blinking_coins
 /* 082EE8 800E9A38 3C038011 */  lui   $v1, 0x8011
 /* 082EEC 800E9A3C 2463EF58 */  addiu $v1, $v1, -0x10a8
 /* 082EF0 800E9A40 80620054 */  lb    $v0, 0x54($v1)
@@ -2771,7 +2771,7 @@ status_menu_stop_blinking_coins:
 /* 082F08 800E9A58 03E00008 */  jr    $ra
 /* 082F0C 800E9A5C 00000000 */   nop   
 
-status_menu_start_blinking_sp:
+glabel status_menu_start_blinking_sp
 /* 082F10 800E9A60 3C028011 */  lui   $v0, 0x8011
 /* 082F14 800E9A64 9042F51E */  lbu   $v0, -0xae2($v0)
 /* 082F18 800E9A68 3C038011 */  lui   $v1, 0x8011
@@ -2787,7 +2787,7 @@ status_menu_start_blinking_sp:
 /* 082F3C 800E9A8C 03E00008 */  jr    $ra
 /* 082F40 800E9A90 00000000 */   nop   
 
-status_menu_stop_blinking_sp:
+glabel status_menu_stop_blinking_sp
 /* 082F44 800E9A94 3C038011 */  lui   $v1, 0x8011
 /* 082F48 800E9A98 2463EF58 */  addiu $v1, $v1, -0x10a8
 /* 082F4C 800E9A9C 80620050 */  lb    $v0, 0x50($v1)
@@ -2799,7 +2799,7 @@ status_menu_stop_blinking_sp:
 /* 082F60 800E9AB0 03E00008 */  jr    $ra
 /* 082F64 800E9AB4 00000000 */   nop   
 
-status_menu_start_blinking_sp_bars:
+glabel status_menu_start_blinking_sp_bars
 /* 082F68 800E9AB8 3C038011 */  lui   $v1, 0x8011
 /* 082F6C 800E9ABC 2463EF58 */  addiu $v1, $v1, -0x10a8
 /* 082F70 800E9AC0 80620050 */  lb    $v0, 0x50($v1)
@@ -2813,7 +2813,7 @@ status_menu_start_blinking_sp_bars:
 /* 082F8C 800E9ADC 03E00008 */  jr    $ra
 /* 082F90 800E9AE0 00000000 */   nop   
 
-status_menu_start_blinking_starpoints:
+glabel status_menu_start_blinking_starpoints
 /* 082F94 800E9AE4 3C038011 */  lui   $v1, 0x8011
 /* 082F98 800E9AE8 2463EF58 */  addiu $v1, $v1, -0x10a8
 /* 082F9C 800E9AEC 80620052 */  lb    $v0, 0x52($v1)
@@ -2826,7 +2826,7 @@ status_menu_start_blinking_starpoints:
 /* 082FB4 800E9B04 03E00008 */  jr    $ra
 /* 082FB8 800E9B08 00000000 */   nop   
 
-status_menu_stop_blinking_starpoints:
+glabel status_menu_stop_blinking_starpoints
 /* 082FBC 800E9B0C 3C038011 */  lui   $v1, 0x8011
 /* 082FC0 800E9B10 2463EF58 */  addiu $v1, $v1, -0x10a8
 /* 082FC4 800E9B14 80620052 */  lb    $v0, 0x52($v1)
@@ -2838,7 +2838,7 @@ status_menu_stop_blinking_starpoints:
 /* 082FD8 800E9B28 03E00008 */  jr    $ra
 /* 082FDC 800E9B2C 00000000 */   nop   
 
-decrement_status_menu_disabled:
+glabel decrement_status_menu_disabled
 /* 082FE0 800E9B30 3C048011 */  lui   $a0, 0x8011
 /* 082FE4 800E9B34 2484EF58 */  addiu $a0, $a0, -0x10a8
 /* 082FE8 800E9B38 80820047 */  lb    $v0, 0x47($a0)
@@ -2850,7 +2850,7 @@ decrement_status_menu_disabled:
 /* 082FFC 800E9B4C 03E00008 */  jr    $ra
 /* 083000 800E9B50 00000000 */   nop   
 
-increment_status_menu_disabled:
+glabel increment_status_menu_disabled
 /* 083004 800E9B54 3C038011 */  lui   $v1, 0x8011
 /* 083008 800E9B58 2463EF58 */  addiu $v1, $v1, -0x10a8
 /* 08300C 800E9B5C 90620047 */  lbu   $v0, 0x47($v1)
@@ -2858,7 +2858,7 @@ increment_status_menu_disabled:
 /* 083014 800E9B64 03E00008 */  jr    $ra
 /* 083018 800E9B68 A0620047 */   sb    $v0, 0x47($v1)
 
-sync_status_menu:
+glabel sync_status_menu
 /* 08301C 800E9B6C 3C028011 */  lui   $v0, 0x8011
 /* 083020 800E9B70 2442F290 */  addiu $v0, $v0, -0xd70
 /* 083024 800E9B74 90430010 */  lbu   $v1, 0x10($v0)
@@ -2877,7 +2877,7 @@ sync_status_menu:
 /* 083058 800E9BA8 03E00008 */  jr    $ra
 /* 08305C 800E9BAC A4430042 */   sh    $v1, 0x42($v0)
 
-reset_status_menu:
+glabel reset_status_menu
 /* 083060 800E9BB0 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 083064 800E9BB4 AFB20018 */  sw    $s2, 0x18($sp)
 /* 083068 800E9BB8 0000902D */  daddu $s2, $zero, $zero
@@ -2983,7 +2983,7 @@ reset_status_menu:
 /* 0831F0 800E9D40 03E00008 */  jr    $ra
 /* 0831F4 800E9D44 27BD0020 */   addiu $sp, $sp, 0x20
 
-is_ability_active:
+glabel is_ability_active
 /* 0831F8 800E9D48 27BDFFD0 */  addiu $sp, $sp, -0x30
 /* 0831FC 800E9D4C AFBF0028 */  sw    $ra, 0x28($sp)
 /* 083200 800E9D50 0080482D */  daddu $t1, $a0, $zero
@@ -3272,11 +3272,11 @@ is_ability_active:
 /* 083560 800EA0B0 03E00008 */  jr    $ra
 /* 083564 800EA0B4 27BD0030 */   addiu $sp, $sp, 0x30
 
-is_partner_ability_active:
+glabel is_partner_ability_active
 /* 083568 800EA0B8 03E00008 */  jr    $ra
 /* 08356C 800EA0BC 0000102D */   daddu $v0, $zero, $zero
 
-add_coins:
+glabel add_coins
 /* 083570 800EA0C0 3C038011 */  lui   $v1, 0x8011
 /* 083574 800EA0C4 2463F290 */  addiu $v1, $v1, -0xd70
 /* 083578 800EA0C8 9462000C */  lhu   $v0, 0xc($v1)
@@ -3307,7 +3307,7 @@ add_coins:
 /* 0835D0 800EA120 03E00008 */  jr    $ra
 /* 0835D4 800EA124 00000000 */   nop   
 
-add_star_points:
+glabel add_star_points
 /* 0835D8 800EA128 3C038011 */  lui   $v1, 0x8011
 /* 0835DC 800EA12C 2463F290 */  addiu $v1, $v1, -0xd70
 /* 0835E0 800EA130 90620010 */  lbu   $v0, 0x10($v1)
@@ -3329,7 +3329,7 @@ add_star_points:
 /* 083618 800EA168 03E00008 */  jr    $ra
 /* 08361C 800EA16C 00000000 */   nop   
 
-add_star_pieces:
+glabel add_star_pieces
 /* 083620 800EA170 3C058011 */  lui   $a1, 0x8011
 /* 083624 800EA174 24A5F290 */  addiu $a1, $a1, -0xd70
 /* 083628 800EA178 90A3000F */  lbu   $v1, 0xf($a1)
@@ -3351,7 +3351,7 @@ add_star_pieces:
 /* 08365C 800EA1AC 03E00008 */  jr    $ra
 /* 083660 800EA1B0 90C2000F */   lbu   $v0, 0xf($a2)
 
-increment_max_SP:
+glabel increment_max_SP
 /* 083664 800EA1B4 3C038011 */  lui   $v1, 0x8011
 /* 083668 800EA1B8 2463F290 */  addiu $v1, $v1, -0xd70
 /* 08366C 800EA1BC 9062028E */  lbu   $v0, 0x28e($v1)
@@ -3362,7 +3362,7 @@ increment_max_SP:
 /* 083680 800EA1D0 03E00008 */  jr    $ra
 /* 083684 800EA1D4 A4620290 */   sh    $v0, 0x290($v1)
 
-set_max_SP:
+glabel set_max_SP
 /* 083688 800EA1D8 3C028011 */  lui   $v0, 0x8011
 /* 08368C 800EA1DC 2442F290 */  addiu $v0, $v0, -0xd70
 /* 083690 800EA1E0 A044028E */  sb    $a0, 0x28e($v0)
@@ -3371,7 +3371,7 @@ set_max_SP:
 /* 08369C 800EA1EC 03E00008 */  jr    $ra
 /* 0836A0 800EA1F0 A4440290 */   sh    $a0, 0x290($v0)
 
-add_SP:
+glabel add_SP
 /* 0836A4 800EA1F4 3C078011 */  lui   $a3, 0x8011
 /* 0836A8 800EA1F8 24E7F290 */  addiu $a3, $a3, -0xd70
 /* 0836AC 800EA1FC 3C068011 */  lui   $a2, 0x8011
@@ -3403,7 +3403,7 @@ add_SP:
 /* 08370C 800EA25C 03E00008 */  jr    $ra
 /* 083710 800EA260 A5220048 */   sh    $v0, 0x48($t1)
 
-recover_fp:
+glabel recover_fp
 /* 083714 800EA264 3C058011 */  lui   $a1, 0x8011
 /* 083718 800EA268 24A5F290 */  addiu $a1, $a1, -0xd70
 /* 08371C 800EA26C 80A30005 */  lb    $v1, 5($a1)
@@ -3436,7 +3436,7 @@ recover_fp:
 /* 083774 800EA2C4 03E00008 */  jr    $ra
 /* 083778 800EA2C8 0060102D */   daddu $v0, $v1, $zero
 
-recover_hp:
+glabel recover_hp
 /* 08377C 800EA2CC 3C058011 */  lui   $a1, 0x8011
 /* 083780 800EA2D0 24A5F290 */  addiu $a1, $a1, -0xd70
 /* 083784 800EA2D4 80A30002 */  lb    $v1, 2($a1)
@@ -3469,7 +3469,7 @@ recover_hp:
 /* 0837DC 800EA32C 03E00008 */  jr    $ra
 /* 0837E0 800EA330 0060102D */   daddu $v0, $v1, $zero
 
-subtract_hp:
+glabel subtract_hp
 /* 0837E4 800EA334 3C038011 */  lui   $v1, 0x8011
 /* 0837E8 800EA338 2463F290 */  addiu $v1, $v1, -0xd70
 /* 0837EC 800EA33C 80620002 */  lb    $v0, 2($v1)
@@ -3484,7 +3484,7 @@ subtract_hp:
 /* 083808 800EA358 03E00008 */  jr    $ra
 /* 08380C 800EA35C A0620002 */   sb    $v0, 2($v1)
 
-has_full_hp:
+glabel has_full_hp
 /* 083810 800EA360 3C038011 */  lui   $v1, 0x8011
 /* 083814 800EA364 2463F290 */  addiu $v1, $v1, -0xd70
 /* 083818 800EA368 80620003 */  lb    $v0, 3($v1)
@@ -3493,7 +3493,7 @@ has_full_hp:
 /* 083824 800EA374 03E00008 */  jr    $ra
 /* 083828 800EA378 2C420001 */   sltiu $v0, $v0, 1
 
-has_full_fp:
+glabel has_full_fp
 /* 08382C 800EA37C 3C038011 */  lui   $v1, 0x8011
 /* 083830 800EA380 2463F290 */  addiu $v1, $v1, -0xd70
 /* 083834 800EA384 80620006 */  lb    $v0, 6($v1)
@@ -3502,7 +3502,7 @@ has_full_fp:
 /* 083840 800EA390 03E00008 */  jr    $ra
 /* 083844 800EA394 2C420001 */   sltiu $v0, $v0, 1
 
-add_fortress_keys:
+glabel add_fortress_keys
 /* 083848 800EA398 3C038011 */  lui   $v1, 0x8011
 /* 08384C 800EA39C 2463F290 */  addiu $v1, $v1, -0xd70
 /* 083850 800EA3A0 9062000E */  lbu   $v0, 0xe($v1)
@@ -3512,7 +3512,7 @@ add_fortress_keys:
 /* 083860 800EA3B0 03E00008 */  jr    $ra
 /* 083864 800EA3B4 00021603 */   sra   $v0, $v0, 0x18
 
-subtract_fortress_keys:
+glabel subtract_fortress_keys
 /* 083868 800EA3B8 3C038011 */  lui   $v1, 0x8011
 /* 08386C 800EA3BC 2463F290 */  addiu $v1, $v1, -0xd70
 /* 083870 800EA3C0 9062000E */  lbu   $v0, 0xe($v1)
@@ -3526,7 +3526,7 @@ subtract_fortress_keys:
 /* 08388C 800EA3DC 03E00008 */  jr    $ra
 /* 083890 800EA3E0 8082000E */   lb    $v0, 0xe($a0)
 
-get_fortress_key_count:
+glabel get_fortress_key_count
 /* 083894 800EA3E4 3C028011 */  lui   $v0, 0x8011
 /* 083898 800EA3E8 8042F29E */  lb    $v0, -0xd62($v0)
 /* 08389C 800EA3EC 03E00008 */  jr    $ra

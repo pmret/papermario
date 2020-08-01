@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80066240, "ax"
 
-osYieldThread:
+glabel osYieldThread
 /* 041640 80066240 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 041644 80066244 AFBF0014 */  sw    $ra, 0x14($sp)
 /* 041648 80066248 0C01ACD8 */  jal   __osDisableInt

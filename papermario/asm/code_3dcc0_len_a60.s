@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text800628C0, "ax"
 
-guLookAtHiliteF:
+glabel guLookAtHiliteF
 /* 03DCC0 800628C0 27BDFF88 */  addiu $sp, $sp, -0x78
 /* 03DCC4 800628C4 F7BE0070 */  sdc1  $f30, 0x70($sp)
 /* 03DCC8 800628C8 C7BE009C */  lwc1  $f30, 0x9c($sp)
@@ -651,7 +651,7 @@ guLookAtHiliteF:
 /* 03E63C 8006323C 03E00008 */  jr    $ra
 /* 03E640 80063240 27BD0078 */   addiu $sp, $sp, 0x78
 
-guLookAtHilite:
+glabel guLookAtHilite
 /* 03E644 80063244 27BDFF48 */  addiu $sp, $sp, -0xb8
 /* 03E648 80063248 C7A000C8 */  lwc1  $f0, 0xc8($sp)
 /* 03E64C 8006324C C7A200CC */  lwc1  $f2, 0xcc($sp)

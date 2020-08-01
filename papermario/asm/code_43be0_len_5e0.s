@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text800687E0, "ax"
 
-osPfsReadWriteFile:
+glabel osPfsReadWriteFile
 /* 043BE0 800687E0 27BDFEA0 */  addiu $sp, $sp, -0x160
 /* 043BE4 800687E4 AFB60158 */  sw    $s6, 0x158($sp)
 /* 043BE8 800687E8 8FB60170 */  lw    $s6, 0x170($sp)
@@ -315,7 +315,7 @@ osPfsReadWriteFile:
 /* 044018 80068C18 03E00008 */  jr    $ra
 /* 04401C 80068C1C 27BD0160 */   addiu $sp, $sp, 0x160
 
-osPfsFileState:
+glabel osPfsFileState
 /* 044020 80068C20 27BDFEB0 */  addiu $sp, $sp, -0x150
 /* 044024 80068C24 AFB10134 */  sw    $s1, 0x134($sp)
 /* 044028 80068C28 00808821 */  addu  $s1, $a0, $zero

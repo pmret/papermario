@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80061450, "ax"
 
-osPiCreateAccessQueue:
+glabel osPiCreateAccessQueue
 /* 03C850 80061450 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 03C854 80061454 24020001 */  addiu $v0, $zero, 1
 /* 03C858 80061458 AFB00010 */  sw    $s0, 0x10($sp)
@@ -34,7 +34,7 @@ osPiCreateAccessQueue:
 /* 03C89C 8006149C 03E00008 */  jr    $ra
 /* 03C8A0 800614A0 27BD0018 */   addiu $sp, $sp, 0x18
 
-osPiGetAccess:
+glabel osPiGetAccess
 /* 03C8A4 800614A4 3C028009 */  lui   $v0, 0x8009
 /* 03C8A8 800614A8 8C423D90 */  lw    $v0, 0x3d90($v0)
 /* 03C8AC 800614AC 27BDFFE0 */  addiu $sp, $sp, -0x20
@@ -64,7 +64,7 @@ osPiGetAccess:
 /* 03C908 80061508 03E00008 */  jr    $ra
 /* 03C90C 8006150C 27BD0020 */   addiu $sp, $sp, 0x20
 
-osPiRelAccess:
+glabel osPiRelAccess
 /* 03C910 80061510 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 03C914 80061514 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 03C918 80061518 3C04800B */  lui   $a0, 0x800b

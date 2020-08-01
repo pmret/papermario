@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text8006B480, "ax"
 
-osPiRawStartDma:
+glabel osPiRawStartDma
 /* 046880 8006B480 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 046884 8006B484 AFB00010 */  sw    $s0, 0x10($sp)
 /* 046888 8006B488 00808021 */  addu  $s0, $a0, $zero
@@ -73,7 +73,7 @@ osPiRawStartDma:
 /* 046948 8006B548 03E00008 */  jr    $ra
 /* 04694C 8006B54C 27BD0020 */   addiu $sp, $sp, 0x20
 
-osPiGetCmdQueue:
+glabel osPiGetCmdQueue
 /* 046950 8006B550 3C038009 */  lui   $v1, 0x8009
 /* 046954 8006B554 8C633D50 */  lw    $v1, 0x3d50($v1)
 /* 046958 8006B558 10600003 */  beqz  $v1, .L8006B568
@@ -84,7 +84,7 @@ osPiGetCmdQueue:
 /* 046968 8006B568 03E00008 */  jr    $ra
 /* 04696C 8006B56C 00000000 */   nop   
 
-osEPiRawReadIo:
+glabel osEPiRawReadIo
 /* 046970 8006B570 3C02A460 */  lui   $v0, 0xa460
 /* 046974 8006B574 34420010 */  ori   $v0, $v0, 0x10
 /* 046978 8006B578 8C420000 */  lw    $v0, ($v0)

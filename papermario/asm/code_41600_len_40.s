@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80066200, "ax"
 
-osDequeueThread:
+glabel osDequeueThread
 /* 041600 80066200 8C820000 */  lw    $v0, ($a0)
 /* 041604 80066204 10400009 */  beqz  $v0, .L8006622C
 /* 041608 80066208 00000000 */   nop   

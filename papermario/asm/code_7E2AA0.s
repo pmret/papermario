@@ -6,7 +6,7 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80281C20, "ax"
@@ -48,7 +48,7 @@
 /* 7E2B24 80281CA4 03E00008 */  jr    $ra
 /* 7E2B28 80281CA8 27BD0018 */   addiu $sp, $sp, 0x18
 
-MakeDoorAdvanced:
+glabel MakeDoorAdvanced
 /* 7E2B2C 80281CAC 27BDFFA8 */  addiu $sp, $sp, -0x58
 /* 7E2B30 80281CB0 AFB10034 */  sw    $s1, 0x34($sp)
 /* 7E2B34 80281CB4 0080882D */  daddu $s1, $a0, $zero

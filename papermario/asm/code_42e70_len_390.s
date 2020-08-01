@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80067A70, "ax"
 
-guMtxXFMF:
+glabel guMtxXFMF
 /* 042E70 80067A70 C4820000 */  lwc1  $f2, ($a0)
 /* 042E74 80067A74 44853000 */  mtc1  $a1, $f6
 /* 042E78 80067A78 00000000 */  nop   
@@ -57,7 +57,7 @@ guMtxXFMF:
 /* 042F18 80067B18 E4A00000 */   swc1  $f0, ($a1)
 
 /* 042F1C 80067B1C 00000000 */  nop   
-guRotateF:
+glabel guRotateF
 /* 042F20 80067B20 27BDFFB8 */  addiu $sp, $sp, -0x48
 /* 042F24 80067B24 AFB00010 */  sw    $s0, 0x10($sp)
 /* 042F28 80067B28 00808021 */  addu  $s0, $a0, $zero
@@ -147,7 +147,7 @@ guRotateF:
 /* 043078 80067C78 03E00008 */  jr    $ra
 /* 04307C 80067C7C 27BD0048 */   addiu $sp, $sp, 0x48
 
-guRotate:
+glabel guRotate
 /* 043080 80067C80 27BDFF58 */  addiu $sp, $sp, -0xa8
 /* 043084 80067C84 C7A000B8 */  lwc1  $f0, 0xb8($sp)
 /* 043088 80067C88 AFB1006C */  sw    $s1, 0x6c($sp)

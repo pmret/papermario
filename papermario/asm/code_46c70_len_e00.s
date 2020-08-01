@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text8006B870, "ax"
 
-bcmp:
+glabel bcmp
 /* 046C70 8006B870 00851026 */  xor   $v0, $a0, $a1
 /* 046C74 8006B874 28C10010 */  slti  $at, $a2, 0x10
 /* 046C78 8006B878 14200034 */  bnez  $at, .L8006B94C
@@ -92,7 +92,7 @@ bcmp:
 /* 046D78 8006B978 03E00008 */  jr    $ra
 /* 046D7C 8006B97C 24020001 */   addiu $v0, $zero, 1
 
-_Litob:
+glabel _Litob
 /* 046D80 8006B980 27BDFFA0 */  addiu $sp, $sp, -0x60
 /* 046D84 8006B984 AFB10044 */  sw    $s1, 0x44($sp)
 /* 046D88 8006B988 00808821 */  addu  $s1, $a0, $zero
@@ -256,7 +256,7 @@ _Litob:
 /* 046FC8 8006BBC8 03E00008 */  jr    $ra
 /* 046FCC 8006BBCC 27BD0060 */   addiu $sp, $sp, 0x60
 
-_Ldtob:
+glabel _Ldtob
 /* 046FD0 8006BBD0 27BDFF80 */  addiu $sp, $sp, -0x80
 /* 046FD4 8006BBD4 AFB30054 */  sw    $s3, 0x54($sp)
 /* 046FD8 8006BBD8 00809821 */  addu  $s3, $a0, $zero
@@ -576,7 +576,7 @@ _Ldtob:
 /* 047414 8006C014 03E00008 */  jr    $ra
 /* 047418 8006C018 27BD0080 */   addiu $sp, $sp, 0x80
 
-_Ldunscale:
+glabel _Ldunscale
 /* 04741C 8006C01C 94A30000 */  lhu   $v1, ($a1)
 /* 047420 8006C020 30627FF0 */  andi  $v0, $v1, 0x7ff0
 /* 047424 8006C024 00023902 */  srl   $a3, $v0, 4
@@ -623,7 +623,7 @@ _Ldunscale:
 /* 0474AC 8006C0AC 03E00008 */  jr    $ra
 /* 0474B0 8006C0B0 00000000 */   nop   
 
-_Genld:
+glabel _Genld
 /* 0474B4 8006C0B4 27BDFFD0 */  addiu $sp, $sp, -0x30
 /* 0474B8 8006C0B8 AFB20018 */  sw    $s2, 0x18($sp)
 /* 0474BC 8006C0BC 00C09021 */  addu  $s2, $a2, $zero
@@ -1021,7 +1021,7 @@ _Genld:
 /* 047A58 8006C658 27BD0030 */   addiu $sp, $sp, 0x30
 
 /* 047A5C 8006C65C 00000000 */  nop   
-osGetCause:
+glabel osGetCause
 /* 047A60 8006C660 40026800 */  mfc0  $v0, $13
 /* 047A64 8006C664 03E00008 */  jr    $ra
 /* 047A68 8006C668 00000000 */   nop   

@@ -6,11 +6,11 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 .section .text80065F30, "ax"
 
-osGetThreadPri:
+glabel osGetThreadPri
 /* 041330 80065F30 14800003 */  bnez  $a0, .L80065F40
 /* 041334 80065F34 00000000 */   nop
 /* 041338 80065F38 3C048009 */  lui   $a0, 0x8009

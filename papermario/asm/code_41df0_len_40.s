@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text800669F0, "ax"
 
-osViGetNextFramebuffer:
+glabel osViGetNextFramebuffer
 /* 041DF0 800669F0 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 041DF4 800669F4 AFBF0014 */  sw    $ra, 0x14($sp)
 /* 041DF8 800669F8 0C01ACD8 */  jal   __osDisableInt

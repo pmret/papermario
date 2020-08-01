@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80067070, "ax"
 
-osViSwapContext:
+glabel osViSwapContext
 /* 042470 80067070 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 042474 80067074 AFB00010 */  sw    $s0, 0x10($sp)
 /* 042478 80067078 3C108009 */  lui   $s0, 0x8009

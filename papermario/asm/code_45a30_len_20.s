@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text8006A630, "ax"
 
-osAfterPreNMI:
+glabel osAfterPreNMI
 /* 045A30 8006A630 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 045A34 8006A634 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 045A38 8006A638 0C01B1C0 */  jal   osSpSetPc

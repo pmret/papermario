@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text8006B6E0, "ax"
 
-osEPiRawWriteIo:
+glabel osEPiRawWriteIo
 /* 046AE0 8006B6E0 3C02A460 */  lui   $v0, 0xa460
 /* 046AE4 8006B6E4 34420010 */  ori   $v0, $v0, 0x10
 /* 046AE8 8006B6E8 8C420000 */  lw    $v0, ($v0)

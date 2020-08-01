@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80069740, "ax"
 
-osSumcalc:
+glabel osSumcalc
 /* 044B40 80069740 27BDFFF8 */  addiu $sp, $sp, -8
 /* 044B44 80069744 00001821 */  addu  $v1, $zero, $zero
 /* 044B48 80069748 18A00007 */  blez  $a1, .L80069768
@@ -28,7 +28,7 @@ osSumcalc:
 /* 044B6C 8006976C 03E00008 */  jr    $ra
 /* 044B70 80069770 27BD0008 */   addiu $sp, $sp, 8
 
-osIdCheckSum:
+glabel osIdCheckSum
 /* 044B74 80069774 2487001C */  addiu $a3, $a0, 0x1c
 /* 044B78 80069778 A4C00000 */  sh    $zero, ($a2)
 /* 044B7C 8006977C A4A00000 */  sh    $zero, ($a1)
@@ -48,7 +48,7 @@ osIdCheckSum:
 /* 044BB0 800697B0 03E00008 */  jr    $ra
 /* 044BB4 800697B4 00001021 */   addu  $v0, $zero, $zero
 
-osRepairPackId:
+glabel osRepairPackId
 /* 044BB8 800697B8 27BDFF80 */  addiu $sp, $sp, -0x80
 /* 044BBC 800697BC AFB10064 */  sw    $s1, 0x64($sp)
 /* 044BC0 800697C0 00808821 */  addu  $s1, $a0, $zero
@@ -253,7 +253,7 @@ osRepairPackId:
 /* 044E9C 80069A9C 03E00008 */  jr    $ra
 /* 044EA0 80069AA0 27BD0080 */   addiu $sp, $sp, 0x80
 
-osCheckPackId:
+glabel osCheckPackId
 /* 044EA4 80069AA4 27BDFFB8 */  addiu $sp, $sp, -0x48
 /* 044EA8 80069AA8 AFB40038 */  sw    $s4, 0x38($sp)
 /* 044EAC 80069AAC 0080A021 */  addu  $s4, $a0, $zero
@@ -354,7 +354,7 @@ osCheckPackId:
 /* 045000 80069C00 03E00008 */  jr    $ra
 /* 045004 80069C04 27BD0048 */   addiu $sp, $sp, 0x48
 
-osGetId:
+glabel osGetId
 /* 045008 80069C08 27BDFF98 */  addiu $sp, $sp, -0x68
 /* 04500C 80069C0C AFB00058 */  sw    $s0, 0x58($sp)
 /* 045010 80069C10 00808021 */  addu  $s0, $a0, $zero
@@ -480,7 +480,7 @@ osGetId:
 /* 0451CC 80069DCC 03E00008 */  jr    $ra
 /* 0451D0 80069DD0 27BD0068 */   addiu $sp, $sp, 0x68
 
-osCheckId:
+glabel osCheckId
 /* 0451D4 80069DD4 27BDFFC8 */  addiu $sp, $sp, -0x38
 /* 0451D8 80069DD8 AFB00030 */  sw    $s0, 0x30($sp)
 /* 0451DC 80069DDC 00808021 */  addu  $s0, $a0, $zero
@@ -532,7 +532,7 @@ osCheckId:
 /* 045284 80069E84 03E00008 */  jr    $ra
 /* 045288 80069E88 27BD0038 */   addiu $sp, $sp, 0x38
 
-osPfsRWInode:
+glabel osPfsRWInode
 /* 04528C 80069E8C 27BDFFB0 */  addiu $sp, $sp, -0x50
 /* 045290 80069E90 AFB20030 */  sw    $s2, 0x30($sp)
 /* 045294 80069E94 00809021 */  addu  $s2, $a0, $zero

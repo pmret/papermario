@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text8006D7E0, "ax"
 
-osSiDeviceBusy:
+glabel osSiDeviceBusy
 /* 048BE0 8006D7E0 3C02A480 */  lui   $v0, 0xa480
 /* 048BE4 8006D7E4 34420018 */  ori   $v0, $v0, 0x18
 /* 048BE8 8006D7E8 8C420000 */  lw    $v0, ($v0)

@@ -1,9 +1,9 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "globals.inc"
+.include "include/macro.inc"
 
-guOrtho:
+glabel guOrtho
 /* 03EE40 80063A40 27BDFF70 */  addiu $sp, $sp, -0x90
 /* 03EE44 80063A44 F7B60068 */  sdc1  $f22, 0x68($sp)
 /* 03EE48 80063A48 C7B600A0 */  lwc1  $f22, 0xa0($sp)

@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text8006D620, "ax"
 
-ldiv:
+glabel ldiv
 /* 048A20 8006D620 00A6001A */  div   $zero, $a1, $a2
 /* 048A24 8006D624 14C00002 */  bnez  $a2, .L8006D630
 /* 048A28 8006D628 00000000 */   nop   
@@ -49,7 +49,7 @@ ldiv:
 /* 048A9C 8006D69C 03E00008 */  jr    $ra
 /* 048AA0 8006D6A0 27BD0008 */   addiu $sp, $sp, 8
 
-lldiv:
+glabel lldiv
 /* 048AA4 8006D6A4 27BDFFC8 */  addiu $sp, $sp, -0x38
 /* 048AA8 8006D6A8 AFB3002C */  sw    $s3, 0x2c($sp)
 /* 048AAC 8006D6AC AFB20028 */  sw    $s2, 0x28($sp)

@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text800685C0, "ax"
 
-osPfsDeleteFile:
+glabel osPfsDeleteFile
 /* 0439C0 800685C0 27BDFEA0 */  addiu $sp, $sp, -0x160
 /* 0439C4 800685C4 AFB10144 */  sw    $s1, 0x144($sp)
 /* 0439C8 800685C8 00808821 */  addu  $s1, $a0, $zero
@@ -128,7 +128,7 @@ osPfsDeleteFile:
 /* 043B64 80068764 03E00008 */  jr    $ra
 /* 043B68 80068768 27BD0160 */   addiu $sp, $sp, 0x160
 
-osPfsReleasePages:
+glabel osPfsReleasePages
 /* 043B6C 8006876C 8FA90010 */  lw    $t1, 0x10($sp)
 /* 043B70 80068770 00071200 */  sll   $v0, $a3, 8
 /* 043B74 80068774 30C600FF */  andi  $a2, $a2, 0xff
