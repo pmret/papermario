@@ -8,7 +8,7 @@ def replace_func(match):
         return match
     return "glabel " + match[:-1]
 
-for root, dirs, files in os.walk("papermario/asm"):
+for root, dirs, files in os.walk("asm"):
     for file in files:
         for file in files:
             if file.endswith(".s"):

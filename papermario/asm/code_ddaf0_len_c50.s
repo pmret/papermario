@@ -723,6 +723,7 @@ glabel func_80147D70
 /* 0DE540 80147E40 03E00008 */  jr    $ra
 /* 0DE544 80147E44 27BD0108 */   addiu $sp, $sp, 0x108
 
+glabel func_80147E48
 /* 0DE548 80147E48 3C028016 */  lui   $v0, 0x8016
 /* 0DE54C 80147E4C 24429D50 */  addiu $v0, $v0, -0x62b0
 /* 0DE550 80147E50 00042140 */  sll   $a0, $a0, 5

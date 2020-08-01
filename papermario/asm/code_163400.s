@@ -1743,7 +1743,6 @@ glabel func_802431A0
 /* 164C78 80244418 4406A000 */  mfc1  $a2, $f20
 /* 164C7C 8024441C 4407A000 */  mfc1  $a3, $f20
 /* 164C80 80244420 0200202D */  daddu $a0, $s0, $zero
-glabel func_80244424
 /* 164C84 80244424 0C019EC8 */  jal   guRotateF
 /* 164C88 80244428 E7BA0010 */   swc1  $f26, 0x10($sp)
 /* 164C8C 8024442C 0200202D */  daddu $a0, $s0, $zero

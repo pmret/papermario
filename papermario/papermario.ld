@@ -1052,9 +1052,24 @@ SECTIONS
       build/asm/code_109660_len_1270.o(.text802E7DE0);
    }
 
-   /* 0x00000000 10A9F0-163400 [58A10] */
+   /* 0x00000000 10A9F0-131340 [???] */
    .data0010A9F0 0x0010A9F0 : AT(0x10A9F0) {
       build/bin/papermario.10A9F0.bin_10A9F0.o(.data);
+   }
+
+   /* 0x00000000 131340-135EE0 [???] */
+   .data00131340 0x00131340 : AT(0x131340) {
+      build/bin/papermario.131340.bin_131340.o(.data);
+   }
+
+   /* 0x80242BA0 135EE0-1422A0 [???] */
+   .text80242BA0_2 0x80242BA0 : AT(0x135EE0) {
+      build/asm/code_135EE0.o(.text80242BA0_2);
+   }
+
+   /* 0x00000000 1422A0-163400 [???] */
+   .data001422A0 0x001422A0 : AT(0x1422A0) {
+      build/bin/papermario.1422A0.bin_1422A0.o(.data);
    }
 
    /* 0x80242BA0 163400-167570 [4170] */
