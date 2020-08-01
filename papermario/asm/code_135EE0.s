@@ -13726,3 +13726,5 @@ glabel func_8024EE94
 /* 142298 8024EF58 27BD0030 */   addiu $sp, $sp, 0x30
 
 /* 14229C 8024EF5C 00000000 */  nop   
+
+.set reorder
