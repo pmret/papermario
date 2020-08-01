@@ -9323,14 +9323,12 @@ glabel update_partner_menu
 /* 41E2C8 802A9538 2484D640 */  addiu $a0, $a0, -0x29c0
 /* 41E2CC 802A953C 1C40000A */  bgtz  $v0, .L802A9568
 /* 41E2D0 802A9540 AC830000 */   sw    $v1, ($a0)
-glabel func_802A9544
 /* 41E2D4 802A9544 82E20012 */  lb    $v0, 0x12($s7)
 /* 41E2D8 802A9548 00021080 */  sll   $v0, $v0, 2
 /* 41E2DC 802A954C 3C01802B */  lui   $at, 0x802b
 /* 41E2E0 802A9550 00220821 */  addu  $at, $at, $v0
 /* 41E2E4 802A9554 8C22B438 */  lw    $v0, -0x4bc8($at)
 /* 41E2E8 802A9558 ACC00000 */  sw    $zero, ($a2)
-glabel func_802A955C
 /* 41E2EC 802A955C 3C01802B */  lui   $at, 0x802b
 /* 41E2F0 802A9560 AC20D6A8 */  sw    $zero, -0x2958($at)
 /* 41E2F4 802A9564 AC820000 */  sw    $v0, ($a0)
@@ -9346,11 +9344,9 @@ glabel func_802A955C
 /* 41E314 802A9584 00230821 */  addu  $at, $at, $v1
 /* 41E318 802A9588 AC22D678 */  sw    $v0, -0x2988($at)
 /* 41E31C 802A958C 24020001 */  addiu $v0, $zero, 1
-glabel func_802A9590
 /* 41E320 802A9590 3C01802B */  lui   $at, 0x802b
 /* 41E324 802A9594 00230821 */  addu  $at, $at, $v1
 /* 41E328 802A9598 AC22D690 */  sw    $v0, -0x2970($at)
-glabel func_802A959C
 /* 41E32C 802A959C 3C01802B */  lui   $at, 0x802b
 /* 41E330 802A95A0 00230821 */  addu  $at, $at, $v1
 /* 41E334 802A95A4 AC24D640 */  sw    $a0, -0x29c0($at)
@@ -9391,10 +9387,8 @@ glabel func_802A959C
 /* 41E3B8 802A9628 3C01802B */  lui   $at, 0x802b
 /* 41E3BC 802A962C AC22CC60 */  sw    $v0, -0x33a0($at)
 /* 41E3C0 802A9630 24020004 */  addiu $v0, $zero, 4
-glabel func_802A9634
 /* 41E3C4 802A9634 3C01802B */  lui   $at, 0x802b
 /* 41E3C8 802A9638 AC22CC6C */  sw    $v0, -0x3394($at)
-glabel func_802A963C
 /* 41E3CC 802A963C 080AA641 */  j     .L802A9904
 /* 41E3D0 802A9640 24020002 */   addiu $v0, $zero, 2
 
@@ -9407,7 +9401,6 @@ glabel func_802A963C
 /* 41E3E8 802A9658 A282004A */  sb    $v0, 0x4a($s4)
 /* 41E3EC 802A965C 8283004A */  lb    $v1, 0x4a($s4)
 /* 41E3F0 802A9660 24020005 */  addiu $v0, $zero, 5
-glabel func_802A9664
 /* 41E3F4 802A9664 106200A7 */  beq   $v1, $v0, .L802A9904
 /* 41E3F8 802A9668 2402001E */   addiu $v0, $zero, 0x1e
 /* 41E3FC 802A966C 0C0A91C6 */  jal   func_802A4718
@@ -9430,7 +9423,6 @@ glabel func_802A9664
 /* 41E43C 802A96AC 0C0A8426 */  jal   func_802A1098
 /* 41E440 802A96B0 00000000 */   nop   
 /* 41E444 802A96B4 080AA6A9 */  j     .L802A9AA4
-glabel func_802A96B8
 /* 41E448 802A96B8 240200CB */   addiu $v0, $zero, 0xcb
 
 .L802A96BC:
@@ -9442,15 +9434,12 @@ glabel func_802A96B8
 /* 41E460 802A96D0 A682006C */  sh    $v0, 0x6c($s4)
 /* 41E464 802A96D4 240200CD */  addiu $v0, $zero, 0xcd
 /* 41E468 802A96D8 A682006E */  sh    $v0, 0x6e($s4)
-glabel func_802A96DC
 /* 41E46C 802A96DC 24020009 */  addiu $v0, $zero, 9
 /* 41E470 802A96E0 1202000C */  beq   $s0, $v0, .L802A9714
 /* 41E474 802A96E4 2A02000A */   slti  $v0, $s0, 0xa
 /* 41E478 802A96E8 10400005 */  beqz  $v0, .L802A9700
-glabel func_802A96EC
 /* 41E47C 802A96EC 24020003 */   addiu $v0, $zero, 3
 /* 41E480 802A96F0 12020011 */  beq   $s0, $v0, .L802A9738
-glabel func_802A96F4
 /* 41E484 802A96F4 240200CD */   addiu $v0, $zero, 0xcd
 /* 41E488 802A96F8 080AA6AB */  j     .L802A9AAC
 /* 41E48C 802A96FC 00000000 */   nop   
@@ -9458,17 +9447,14 @@ glabel func_802A96F4
 .L802A9700:
 /* 41E490 802A9700 2402000A */  addiu $v0, $zero, 0xa
 /* 41E494 802A9704 12020017 */  beq   $s0, $v0, .L802A9764
-glabel func_802A9708
 /* 41E498 802A9708 240200CD */   addiu $v0, $zero, 0xcd
 /* 41E49C 802A970C 080AA6AB */  j     .L802A9AAC
 /* 41E4A0 802A9710 00000000 */   nop   
 
 .L802A9714:
 /* 41E4A4 802A9714 240200CD */  addiu $v0, $zero, 0xcd
-glabel func_802A9718
 /* 41E4A8 802A9718 3C01800E */  lui   $at, 0x800e
 /* 41E4AC 802A971C AC22C4DC */  sw    $v0, -0x3b24($at)
-glabel func_802A9720
 /* 41E4B0 802A9720 0C0AA072 */  jal   update_partner_menu
 /* 41E4B4 802A9724 00000000 */   nop   
 /* 41E4B8 802A9728 0C090464 */  jal   func_80241190
@@ -9478,10 +9464,8 @@ glabel func_802A9720
 
 .L802A9738:
 /* 41E4C8 802A9738 3C01800E */  lui   $at, 0x800e
-glabel func_802A973C
 /* 41E4CC 802A973C AC22C4DC */  sw    $v0, -0x3b24($at)
 /* 41E4D0 802A9740 0C0AA072 */  jal   update_partner_menu
-glabel func_802A9744
 /* 41E4D4 802A9744 00000000 */   nop   
 /* 41E4D8 802A9748 24040018 */  addiu $a0, $zero, 0x18
 /* 41E4DC 802A974C 24020039 */  addiu $v0, $zero, 0x39
