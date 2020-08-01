@@ -49,7 +49,7 @@ SECTIONS
 
    /* 0x8002AC00 006000-006240 [240] */
    .text8002AC00 0x8002AC00 : AT(0x006000) {
-      build/asm/code_6000.o(.text8002AC00);
+      build/src/code_6000.o(.text);
    }
 
    /* 0x8002AE40 006240-006E40 [C00] */

@@ -395,7 +395,7 @@ def dump_objfile():
     if not os.path.isfile(refobjfile):
         fail(f'Please ensure an OK .o file exists at "{refobjfile}".')
 
-    objdump_flags = ["-drz"]
+    objdump_flags = ["-drz", "-m" "mips:4300"]
     return (
         objfile,
         (objdump_flags, refobjfile, args.start),
