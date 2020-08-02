@@ -70,6 +70,7 @@ glabel func_80025CFC
 /* 001130 80025D30 03E00008 */  jr    $ra
 /* 001134 80025D34 27BD0018 */   addiu $sp, $sp, 0x18
 
+glabel func_80025D38
 /* 001138 80025D38 AFA40000 */  sw    $a0, ($sp)
 /* 00113C 80025D3C AFA50004 */  sw    $a1, 4($sp)
 /* 001140 80025D40 AFA60008 */  sw    $a2, 8($sp)
@@ -86,6 +87,7 @@ glabel func_80025CFC
 /* 00116C 80025D6C 03E00008 */  jr    $ra
 /* 001170 80025D70 27BD0018 */   addiu $sp, $sp, 0x18
 
+glabel func_80025D74
 /* 001174 80025D74 27BDFFC0 */  addiu $sp, $sp, -0x40
 /* 001178 80025D78 AFB30024 */  sw    $s3, 0x24($sp)
 /* 00117C 80025D7C 00A0982D */  daddu $s3, $a1, $zero
@@ -210,6 +212,7 @@ glabel func_80025CFC
 /* 00133C 80025F3C 03E00008 */  jr    $ra
 /* 001340 80025F40 27BD0040 */   addiu $sp, $sp, 0x40
 
+glabel func_80025F44
 /* 001344 80025F44 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 001348 80025F48 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 00134C 80025F4C 0080382D */  daddu $a3, $a0, $zero

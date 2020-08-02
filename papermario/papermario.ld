@@ -69,7 +69,7 @@ SECTIONS
 
    /* 0x8002CA40 007E40-008230 [3F0] */
    .text8002CA40 0x8002CA40 : AT(0x007E40) {
-      build/asm/code_7e40_len_3f0.o(.text8002CA40);
+      build/asm/os/code_7e40_len_3f0.o(.text8002CA40);
    }
 
    /* 0x8002CE30 008230-009D10 [1AE0] */
