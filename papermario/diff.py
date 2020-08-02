@@ -290,7 +290,7 @@ def maybe_get_objdump_source_flags():
 def run_objdump(cmd):
     flags, target, restrict = cmd
     out = subprocess.check_output(
-        [objdump_executable] + flags + [target], universal_newlines=True
+        [objdump_executable] + arch_flags + flags + [target], universal_newlines=True
     )
     if restrict is not None:
         return restrict_to_function(out, restrict)
@@ -319,6 +319,7 @@ def search_map_file(fn_name):
         last_line = ""
         for line in lines:
             if line.startswith(" .text"):
+                print(line)
                 cur_objfile = line.split()[3]
             if "load address" in line:
                 tokens = last_line.split() + line.split()
@@ -395,7 +396,7 @@ def dump_objfile():
     if not os.path.isfile(refobjfile):
         fail(f'Please ensure an OK .o file exists at "{refobjfile}".')
 
-    objdump_flags = ["-drz", "-m" "mips:4300"]
+    objdump_flags = ["-drz"]
     return (
         objfile,
         (objdump_flags, refobjfile, args.start),
@@ -447,6 +448,7 @@ if arch == "mips":
     re_large_imm = re.compile(r"-?[1-9][0-9]{2,}|-?0x[0-9a-f]{3,}")
     re_imm = re.compile(r"(\b|-)([0-9]+|0x[0-9a-fA-F]+)\b(?!\(sp)|%(lo|hi)\([^)]*\)")
     forbidden = set(string.ascii_letters + "_")
+    arch_flags = ["-m", "mips:4300", "-Mno-aliases"]
     branch_likely_instructions = {
         "beql",
         "bnel",
@@ -472,6 +474,7 @@ elif arch == "aarch64":
     re_sprel = re.compile(r"sp, #-?(0x[0-9a-fA-F]+|[0-9]+)\b")
     re_large_imm = re.compile(r"-?[1-9][0-9]{2,}|-?0x[0-9a-f]{3,}")
     re_imm = re.compile(r"(?<!sp, )#-?(0x[0-9a-fA-F]+|[0-9]+)\b")
+    arch_flags = []
     forbidden = set(string.ascii_letters + "_")
     branch_likely_instructions = set()
     branch_instructions = {"bl", "b", "b.eq", "b.ne", "b.cs", "b.hs", "b.cc", "b.lo", "b.mi", "b.pl", "b.vs", "b.vc", "b.hi", "b.ls", "b.ge", "b.lt", "b.gt", "b.le", "cbz", "cbnz", "tbz", "tbnz"}

@@ -204,67 +204,67 @@ SECTIONS
 
    /* 0x8005E8B0 039CB0-039DB0 [100] */
    .text8005E8B0 0x8005E8B0 : AT(0x039CB0) {
-      build/asm/code_39cb0_len_100.o(.text8005E8B0);
+      build/asm/os/code_39cb0_len_100.o(.text8005E8B0);
    }
 
    /* 0x8005E9B0 039DB0-03A650 [8A0] */
    .text8005E9B0 0x8005E9B0 : AT(0x039DB0) {
-      build/asm/code_39db0_len_8a0.o(.text8005E9B0);
+      build/asm/os/code_39db0_len_8a0.o(.text8005E9B0);
    }
 
    /* 0x8005F250 03A650-03A690 [40] */
    .text8005F250 0x8005F250 : AT(0x03A650) {
-      build/asm/code_3a650_len_40.o(.text8005F250);
+      build/asm/os/code_3a650_len_40.o(.text8005F250);
    }
 
    /* 0x8005F290 03A690-03A6D0 [40] */
    .text8005F290 0x8005F290 : AT(0x03A690) {
-      build/asm/code_3a690_len_40.o(.text8005F290);
+      build/asm/os/code_3a690_len_40.o(.text8005F290);
    }
 
    /* 0x8005F2D0 03A6D0-03A6F0 [20] */
    .text8005F2D0 0x8005F2D0 : AT(0x03A6D0) {
-      build/asm/code_3a6d0_len_20.o(.text8005F2D0);
+      build/asm/os/code_3a6d0_len_20.o(.text8005F2D0);
    }
 
    /* 0x8005F2F0 03A6F0-03A800 [110] */
    .text8005F2F0 0x8005F2F0 : AT(0x03A6F0) {
-      build/asm/code_3a6f0_len_110.o(.text8005F2F0);
+      build/asm/os/code_3a6f0_len_110.o(.text8005F2F0);
    }
 
    /* 0x8005F400 03A800-03A830 [30] */
    .text8005F400 0x8005F400 : AT(0x03A800) {
-      build/asm/code_3a800_len_30.o(.text8005F400);
+      build/asm/os/code_3a800_len_30.o(.text8005F400);
    }
 
    /* 0x8005F430 03A830-03A850 [20] */
    .text8005F430 0x8005F430 : AT(0x03A830) {
-      build/asm/code_3a830_len_20.o(.text8005F430);
+      build/asm/os/code_3a830_len_20.o(.text8005F430);
    }
 
    /* 0x8005F450 03A850-03B290 [A40] */
    .text8005F450 0x8005F450 : AT(0x03A850) {
-      build/asm/code_3a850_le_a40.o(.text8005F450);
+      build/asm/os/code_3a850_le_a40.o(.text8005F450);
    }
 
    /* 0x8005FE90 03B290-03B390 [100] */
    .text8005FE90 0x8005FE90 : AT(0x03B290) {
-      build/asm/code_3b290_len_100.o(.text8005FE90);
+      build/asm/os/code_3b290_len_100.o(.text8005FE90);
    }
 
    /* 0x8005FF90 03B390-03B4A0 [110] */
    .text8005FF90 0x8005FF90 : AT(0x03B390) {
-      build/asm/code_3b390_len_110.o(.text8005FF90);
+      build/asm/os/code_3b390_len_110.o(.text8005FF90);
    }
 
    /* 0x800600A0 03B4A0-03B710 [270] */
    .text800600A0 0x800600A0 : AT(0x03B4A0) {
-      build/asm/code_3b4a0_len_270.o(.text800600A0);
+      build/asm/os/code_3b4a0_len_270.o(.text800600A0);
    }
 
    /* 0x80060310 03B710-03B750 [40] */
    .text80060310 0x80060310 : AT(0x03B710) {
-      build/asm/code_3b710_len_40.o(.text80060310);
+      build/asm/os/code_3b710_len_40.o(.text80060310);
    }
 
    /* 0x80060350 03B750-03B770 [20] */
@@ -274,112 +274,112 @@ SECTIONS
 
    /* 0x80060370 03B770-03B7F0 [80] */
    .text80060370 0x80060370 : AT(0x03B770) {
-      build/asm/code_3b770_len_80.o(.text80060370);
+      build/asm/os/code_3b770_len_80.o(.text80060370);
    }
 
    /* 0x800603F0 03B7F0-03B910 [120] */
    .text800603F0 0x800603F0 : AT(0x03B7F0) {
-      build/asm/code_3b7f0_len_120.o(.text800603F0);
+      build/asm/os/code_3b7f0_len_120.o(.text800603F0);
    }
 
    /* 0x80060510 03B910-03BD20 [410] */
    .text80060510 0x80060510 : AT(0x03B910) {
-      build/asm/code_3b910_len_410.o(.text80060510);
+      build/asm/os/code_3b910_len_410.o(.text80060510);
    }
 
    /* 0x80060920 03BD20-03BDE0 [C0] */
    .text80060920 0x80060920 : AT(0x03BD20) {
-      build/asm/code_3bd20_len_c0.o(.text80060920);
+      build/asm/os/code_3bd20_len_c0.o(.text80060920);
    }
 
    /* 0x800609E0 03BDE0-03C1C0 [3E0] */
    .text800609E0 0x800609E0 : AT(0x03BDE0) {
-      build/asm/code_3bde0_len_3e0.o(.text800609E0);
+      build/asm/os/code_3bde0_len_3e0.o(.text800609E0);
    }
 
    /* 0x80060DC0 03C1C0-03C220 [60] */
    .text80060DC0 0x80060DC0 : AT(0x03C1C0) {
-      build/asm/code_3c1c0_len_60.o(.text80060DC0);
+      build/asm/os/code_3c1c0_len_60.o(.text80060DC0);
    }
 
    /* 0x80060E20 03C220-03C2C0 [A0] */
    .text80060E20 0x80060E20 : AT(0x03C220) {
-      build/asm/code_3c220_len_a0.o(.text80060E20);
+      build/asm/os/code_3c220_len_a0.o(.text80060E20);
    }
 
    /* 0x80060EC0 03C2C0-03C310 [50] */
    .text80060EC0 0x80060EC0 : AT(0x03C2C0) {
-      build/asm/code_3c2c0_len_50.o(.text80060EC0);
+      build/asm/os/code_3c2c0_len_50.o(.text80060EC0);
    }
 
    /* 0x80060F10 03C310-03C490 [180] */
    .text80060F10 0x80060F10 : AT(0x03C310) {
-      build/asm/code_3c310_len_180.o(.text80060F10);
+      build/asm/os/code_3c310_len_180.o(.text80060F10);
    }
 
    /* 0x80061090 03C490-03C850 [3C0] */
    .text80061090 0x80061090 : AT(0x03C490) {
-      build/asm/code_3c490_len_3c0.o(.text80061090);
+      build/asm/os/code_3c490_len_3c0.o(.text80061090);
    }
 
    /* 0x80061450 03C850-03C940 [F0] */
    .text80061450 0x80061450 : AT(0x03C850) {
-      build/asm/code_3c850_len_f0.o(.text80061450);
+      build/asm/os/code_3c850_len_f0.o(.text80061450);
    }
 
    /* 0x80061540 03C940-03CA80 [140] */
    .text80061540 0x80061540 : AT(0x03C940) {
-      build/asm/code_3c940_len_140.o(.text80061540);
+      build/asm/os/code_3c940_len_140.o(.text80061540);
    }
 
    /* 0x80061680 03CA80-03CB20 [A0] */
    .text80061680 0x80061680 : AT(0x03CA80) {
-      build/asm/code_3ca80_len_a0.o(.text80061680);
+      build/asm/os/code_3ca80_len_a0.o(.text80061680);
    }
 
    /* 0x80061720 03CB20-03CC50 [130] */
    .text80061720 0x80061720 : AT(0x03CB20) {
-      build/asm/code_3cb20_len_130.o(.text80061720);
+      build/asm/os/code_3cb20_len_130.o(.text80061720);
    }
 
    /* 0x80061850 03CC50-03CCD0 [80] */
    .text80061850 0x80061850 : AT(0x03CC50) {
-      build/asm/code_3cc50_len_80.o(.text80061850);
+      build/asm/os/code_3cc50_len_80.o(.text80061850);
    }
 
    /* 0x800618D0 03CCD0-03CD00 [30] */
    .text800618D0 0x800618D0 : AT(0x03CCD0) {
-      build/asm/code_3ccd0_len_30.o(.text800618D0);
+      build/asm/os/code_3ccd0_len_30.o(.text800618D0);
    }
 
    /* 0x80061900 03CD00-03D2F0 [5F0] */
    .text80061900 0x80061900 : AT(0x03CD00) {
-      build/asm/code_3cd00_len_5f0.o(.text80061900);
+      build/asm/os/code_3cd00_len_5f0.o(.text80061900);
    }
 
    /* 0x80061EF0 03D2F0-03D300 [10] */
    .text80061EF0 0x80061EF0 : AT(0x03D2F0) {
-      build/asm/code_3d2f0_len_10.o(.text80061EF0);
+      build/asm/os/code_3d2f0_len_10.o(.text80061EF0);
    }
 
    /* 0x80061F00 03D300-03D330 [30] */
    .text80061F00 0x80061F00 : AT(0x03D300) {
-      build/asm/code_3d300_len_30.o(.text80061F00);
+      build/asm/os/code_3d300_len_30.o(.text80061F00);
    }
 
    /* 0x80061F30 03D330-03DCC0 [990] */
    .text80061F30 0x80061F30 : AT(0x03D330) {
-      build/asm/code_3d330_len_990.o(.text80061F30);
+      build/asm/os/code_3d330_len_990.o(.text80061F30);
    }
 
    /* 0x800628C0 03DCC0-03E720 [A60] */
    .text800628C0 0x800628C0 : AT(0x03DCC0) {
-      build/asm/code_3dcc0_len_a60.o(.text800628C0);
+      build/asm/os/code_3dcc0_len_a60.o(.text800628C0);
    }
 
    /* 0x80063320 03E720-03ED10 [5F0] */
    .text80063320 0x80063320 : AT(0x03E720) {
-      build/asm/code_3e720_len_5f0.o(.text80063320);
+      build/asm/os/code_3e720_len_5f0.o(.text80063320);
    }
 
    /* 0x80063910 03ED10-03EF90 [600] */
@@ -389,457 +389,457 @@ SECTIONS
 
    /* 0x80063B90 03EF90-03F310 [600] */
    .text80063B90 0x80063B90 : AT(0x03EF90) {
-      build/asm/code_3ef90_len_600.o(.text80063B90);
+      build/asm/os/code_3ef90_len_600.o(.text80063B90);
    }
 
    /* 0x80063F10 03F310-03F6D0 [3C0] */
    .text80063F10 0x80063F10 : AT(0x03F310) {
-      build/asm/code_3f310_len_3c0.o(.text80063F10);
+      build/asm/os/code_3f310_len_3c0.o(.text80063F10);
    }
 
    /* 0x800642D0 03F6D0-03F9F0 [320] */
    .text800642D0 0x800642D0 : AT(0x03F6D0) {
-      build/asm/code_3f6d0_len_320.o(.text800642D0);
+      build/asm/os/code_3f6d0_len_320.o(.text800642D0);
    }
 
    /* 0x800645F0 03F9F0-03FA50 [60] */
    .text800645F0 0x800645F0 : AT(0x03F9F0) {
-      build/asm/code_3f9f0_len_60.o(.text800645F0);
+      build/asm/os/code_3f9f0_len_60.o(.text800645F0);
    }
 
    /* 0x80064650 03FA50-0409B0 [F60] */
    .text80064650 0x80064650 : AT(0x03FA50) {
-      build/asm/code_3fa50_len_f60.o(.text80064650);
+      build/asm/os/code_3fa50_len_f60.o(.text80064650);
    }
 
    /* 0x800655B0 0409B0-040AF0 [140] */
    .text800655B0 0x800655B0 : AT(0x0409B0) {
-      build/asm/code_409b0_len_140.o(.text800655B0);
+      build/asm/os/code_409b0_len_140.o(.text800655B0);
    }
 
    /* 0x800656F0 040AF0-040C20 [130] */
    .text800656F0 0x800656F0 : AT(0x040AF0) {
-      build/asm/code_40af0_len_130.o(.text800656F0);
+      build/asm/os/code_40af0_len_130.o(.text800656F0);
    }
 
    /* 0x80065820 040C20-040E10 [1F0] */
    .text80065820 0x80065820 : AT(0x040C20) {
-      build/asm/code_40c20_len_1f0.o(.text80065820);
+      build/asm/os/code_40c20_len_1f0.o(.text80065820);
    }
 
    /* 0x80065A10 040E10-041050 [240] */
    .text80065A10 0x80065A10 : AT(0x040E10) {
-      build/asm/code_40e10_len_240.o(.text80065A10);
+      build/asm/os/code_40e10_len_240.o(.text80065A10);
    }
 
    /* 0x80065C50 041050-041170 [120] */
    .text80065C50 0x80065C50 : AT(0x041050) {
-      build/asm/code_41050_len_120.o(.text80065C50);
+      build/asm/os/code_41050_len_120.o(.text80065C50);
    }
 
    /* 0x80065D70 041170-041260 [F0] */
    .text80065D70 0x80065D70 : AT(0x041170) {
-      build/asm/code_41170_len_f0.o(.text80065D70);
+      build/asm/os/code_41170_len_f0.o(.text80065D70);
    }
 
    /* 0x80065E60 041260-041350 [F0] */
    .text80065E60 0x80065E60 : AT(0x041260) {
-      build/asm/osCreateThread.o(.text80065E60);
+      build/asm/os/osCreateThread.o(.text80065E60);
    }
 
    /* 0x80065F30 041330-041350 [F0] */
    .text80065F30 0x80065F30 : AT(0x041330) {
-      build/asm/osGetThreadPri.o(.text80065F30);
+      build/asm/os/osGetThreadPri.o(.text80065F30);
    }
 
    /* 0x80065F50 041350-041420 [D0] */
    .text80065F50 0x80065F50 : AT(0x041350) {
-      build/asm/code_41350_len_d0.o(.text80065F50);
+      build/asm/os/code_41350_len_d0.o(.text80065F50);
    }
 
    /* 0x80066020 041420-041540 [120] */
    .text80066020 0x80066020 : AT(0x041420) {
-      build/asm/code_41420_len_120.o(.text80066020);
+      build/asm/os/code_41420_len_120.o(.text80066020);
    }
 
    /* 0x80066140 041540-041600 [C0] */
    .text80066140 0x80066140 : AT(0x041540) {
-      build/asm/code_41540_len_c0.o(.text80066140);
+      build/asm/os/code_41540_len_c0.o(.text80066140);
    }
 
    /* 0x80066200 041600-041640 [40] */
    .text80066200 0x80066200 : AT(0x041600) {
-      build/asm/code_41600_len_40.o(.text80066200);
+      build/asm/os/code_41600_len_40.o(.text80066200);
    }
 
    /* 0x80066240 041640-041690 [50] */
    .text80066240 0x80066240 : AT(0x041640) {
-      build/asm/code_41640_len_50.o(.text80066240);
+      build/asm/os/code_41640_len_50.o(.text80066240);
    }
 
    /* 0x80066290 041690-0416A0 [10] */
    .text80066290 0x80066290 : AT(0x041690) {
-      build/asm/code_41690_len_10.o(.text80066290);
+      build/asm/os/code_41690_len_10.o(.text80066290);
    }
 
    /* 0x800662A0 0416A0-041730 [90] */
    .text800662A0 0x800662A0 : AT(0x0416A0) {
-      build/asm/code_416a0_len_90.o(.text800662A0);
+      build/asm/os/code_416a0_len_90.o(.text800662A0);
    }
 
    /* 0x80066330 041730-041750 [20] */
    .text80066330 0x80066330 : AT(0x041730) {
-      build/asm/code_41730_len_20.o(.text80066330);
+      build/asm/os/code_41730_len_20.o(.text80066330);
    }
 
    /* 0x80066350 041750-041BA0 [450] */
    .text80066350 0x80066350 : AT(0x041750) {
-      build/asm/code_41750_len_450.o(.text80066350);
+      build/asm/os/code_41750_len_450.o(.text80066350);
    }
 
    /* 0x800667A0 041BA0-041C60 [C0] */
    .text800667A0 0x800667A0 : AT(0x041BA0) {
-      build/asm/code_41ba0_len_c0.o(.text800667A0);
+      build/asm/os/code_41ba0_len_c0.o(.text800667A0);
    }
 
    /* 0x80066860 041C60-041D20 [C0] */
    .text80066860 0x80066860 : AT(0x041C60) {
-      build/asm/code_41c60_len_c0.o(.text80066860);
+      build/asm/os/code_41c60_len_c0.o(.text80066860);
    }
 
    /* 0x80066920 041D20-041D60 [40] */
    .text80066920 0x80066920 : AT(0x041D20) {
-      build/asm/code_41d20_len_40.o(.text80066920);
+      build/asm/os/code_41d20_len_40.o(.text80066920);
    }
 
    /* 0x80066960 041D60-041DB0 [50] */
    .text80066960 0x80066960 : AT(0x041D60) {
-      build/asm/code_41d60_len_50.o(.text80066960);
+      build/asm/os/code_41d60_len_50.o(.text80066960);
    }
 
    /* 0x800669B0 041DB0-041DF0 [40] */
    .text800669B0 0x800669B0 : AT(0x041DB0) {
-      build/asm/code_41db0_len_40.o(.text800669B0);
+      build/asm/os/code_41db0_len_40.o(.text800669B0);
    }
 
    /* 0x800669F0 041DF0-041E30 [40] */
    .text800669F0 0x800669F0 : AT(0x041DF0) {
-      build/asm/code_41df0_len_40.o(.text800669F0);
+      build/asm/os/code_41df0_len_40.o(.text800669F0);
    }
 
    /* 0x80066A30 041E30-041E70 [40] */
    .text80066A30 0x80066A30 : AT(0x041E30) {
-      build/asm/code_41e30_len_40.o(.text80066A30);
+      build/asm/os/code_41e30_len_40.o(.text80066A30);
    }
 
    /* 0x80066A70 041E70-0421B0 [340] */
    .text80066A70 0x80066A70 : AT(0x041E70) {
-      build/asm/code_41e70_len_340.o(.text80066A70);
+      build/asm/os/code_41e70_len_340.o(.text80066A70);
    }
 
    /* 0x80066DB0 0421B0-042210 [60] */
    .text80066DB0 0x80066DB0 : AT(0x0421B0) {
-      build/asm/code_421b0_len_60.o(.text80066DB0);
+      build/asm/os/code_421b0_len_60.o(.text80066DB0);
    }
 
    /* 0x80066E10 042210-042260 [50] */
    .text80066E10 0x80066E10 : AT(0x042210) {
-      build/asm/code_42210_len_50.o(.text80066E10);
+      build/asm/os/code_42210_len_50.o(.text80066E10);
    }
 
    /* 0x80066E60 042260-0423D0 [170] */
    .text80066E60 0x80066E60 : AT(0x042260) {
-      build/asm/code_42260_len_170.o(.text80066E60);
+      build/asm/os/code_42260_len_170.o(.text80066E60);
    }
 
    /* 0x80066FD0 0423D0-042420 [50] */
    .text80066FD0 0x80066FD0 : AT(0x0423D0) {
-      build/asm/code_423d0_len_50.o(.text80066FD0);
+      build/asm/os/code_423d0_len_50.o(.text80066FD0);
    }
 
    /* 0x80067020 042420-042470 [50] */
    .text80067020 0x80067020 : AT(0x042420) {
-      build/asm/code_42420_len_50.o(.text80067020);
+      build/asm/os/code_42420_len_50.o(.text80067020);
    }
 
    /* 0x80067070 042470-042780 [310] */
    .text80067070 0x80067070 : AT(0x042470) {
-      build/asm/code_42470_len_310.o(.text80067070);
+      build/asm/os/code_42470_len_310.o(.text80067070);
    }
 
    /* 0x80067380 042780-0428A0 [120] */
    .text80067380 0x80067380 : AT(0x042780) {
-      build/asm/code_42780_len_120.o(.text80067380);
+      build/asm/os/code_42780_len_120.o(.text80067380);
    }
 
    /* 0x800674A0 0428A0-042900 [60] */
    .text800674A0 0x800674A0 : AT(0x0428A0) {
-      build/asm/guMtxIdentF.o(.text800674A0);
+      build/asm/os/guMtxIdentF.o(.text800674A0);
    }
 
    /* 0x80067500 042900-042980 [80] */
    .text80067500 0x80067500 : AT(0x042900) {
-      build/asm/code_42900_len_80.o(.text80067500);
+      build/asm/os/code_42900_len_80.o(.text80067500);
    }
 
    /* 0x80067580 042980-042A00 [80] */
    .text80067580 0x80067580 : AT(0x042980) {
-      build/asm/code_42980_len_80.o(.text80067580);
+      build/asm/os/code_42980_len_80.o(.text80067580);
    }
 
    /* 0x80067600 042A00-042B00 [100] */
    .text80067600 0x80067600 : AT(0x042A00) {
-      build/asm/code_42a00_len_100.o(.text80067600);
+      build/asm/os/code_42a00_len_100.o(.text80067600);
    }
 
    /* 0x80067700 042B00-042BC0 [C0] */
    .text80067700 0x80067700 : AT(0x042B00) {
-      build/asm/code_42b00_len_c0.o(.text80067700);
+      build/asm/os/code_42b00_len_c0.o(.text80067700);
    }
 
    /* 0x800677C0 042BC0-042C20 [60] */
    .text800677C0 0x800677C0 : AT(0x042BC0) {
-      build/asm/code_42bc0_len_60.o(.text800677C0);
+      build/asm/os/code_42bc0_len_60.o(.text800677C0);
    }
 
    /* 0x80067820 042C20-042D00 [E0] */
    .text80067820 0x80067820 : AT(0x042C20) {
-      build/asm/code_42c20_len_e0.o(.text80067820);
+      build/asm/os/code_42c20_len_e0.o(.text80067820);
    }
 
    /* 0x80067900 042D00-042D60 [60] */
    .text80067900 0x80067900 : AT(0x042D00) {
-      build/asm/code_42d00_len_60.o(.text80067900);
+      build/asm/os/code_42d00_len_60.o(.text80067900);
    }
 
    /* 0x80067960 042D60-042DE0 [80] */
    .text80067960 0x80067960 : AT(0x042D60) {
-      build/asm/code_42d60_len_80.o(.text80067960);
+      build/asm/os/code_42d60_len_80.o(.text80067960);
    }
 
    /* 0x800679E0 042DE0-042E70 [90] */
    .text800679E0 0x800679E0 : AT(0x042DE0) {
-      build/asm/code_42de0_len_90.o(.text800679E0);
+      build/asm/os/code_42de0_len_90.o(.text800679E0);
    }
 
    /* 0x80067A70 042E70-043200 [390] */
    .text80067A70 0x80067A70 : AT(0x042E70) {
-      build/asm/code_42e70_len_390.o(.text80067A70);
+      build/asm/os/code_42e70_len_390.o(.text80067A70);
    }
 
    /* 0x80067E00 043200-0439C0 [7C0] */
    .text80067E00 0x80067E00 : AT(0x043200) {
-      build/asm/code_43200_len_7c0.o(.text80067E00);
+      build/asm/os/code_43200_len_7c0.o(.text80067E00);
    }
 
    /* 0x800685C0 0439C0-043BE0 [220] */
    .text800685C0 0x800685C0 : AT(0x0439C0) {
-      build/asm/code_439c0_len_220.o(.text800685C0);
+      build/asm/os/code_439c0_len_220.o(.text800685C0);
    }
 
    /* 0x800687E0 043BE0-0441C0 [5E0] */
    .text800687E0 0x800687E0 : AT(0x043BE0) {
-      build/asm/code_43be0_len_5e0.o(.text800687E0);
+      build/asm/os/code_43be0_len_5e0.o(.text800687E0);
    }
 
    /* 0x80068DC0 0441C0-044380 [1C0] */
    .text80068DC0 0x80068DC0 : AT(0x0441C0) {
-      build/asm/code_441c0_len_1c0.o(.text80068DC0);
+      build/asm/os/code_441c0_len_1c0.o(.text80068DC0);
    }
 
    /* 0x80068F80 044380-044860 [4E0] */
    .text80068F80 0x80068F80 : AT(0x044380) {
-      build/asm/code_44380_len_4e0.o(.text80068F80);
+      build/asm/os/code_44380_len_4e0.o(.text80068F80);
    }
 
    /* 0x80069460 044860-0448C0 [60] */
    .text80069460 0x80069460 : AT(0x044860) {
-      build/asm/code_44860_len_60.o(.text80069460);
+      build/asm/os/code_44860_len_60.o(.text80069460);
    }
 
    /* 0x800694C0 0448C0-044AD0 [210] */
    .text800694C0 0x800694C0 : AT(0x0448C0) {
-      build/asm/code_448c0_len_210.o(.text800694C0);
+      build/asm/os/code_448c0_len_210.o(.text800694C0);
    }
 
    /* 0x800696D0 044AD0-044B40 [70] */
    .text800696D0 0x800696D0 : AT(0x044AD0) {
-      build/asm/code_44ad0_len_70.o(.text800696D0);
+      build/asm/os/code_44ad0_len_70.o(.text800696D0);
    }
 
    /* 0x80069740 044B40-0455D0 [A90] */
    .text80069740 0x80069740 : AT(0x044B40) {
-      build/asm/code_44b40_len_a90.o(.text80069740);
+      build/asm/os/code_44b40_len_a90.o(.text80069740);
    }
 
    /* 0x8006A1D0 0455D0-0457C0 [1F0] */
    .text8006A1D0 0x8006A1D0 : AT(0x0455D0) {
-      build/asm/code_455d0_len_1f0.o(.text8006A1D0);
+      build/asm/os/code_455d0_len_1f0.o(.text8006A1D0);
    }
 
    /* 0x8006A3C0 0457C0-045A30 [270] */
    .text8006A3C0 0x8006A3C0 : AT(0x0457C0) {
-      build/asm/code_457c0_len_270.o(.text8006A3C0);
+      build/asm/os/code_457c0_len_270.o(.text8006A3C0);
    }
 
    /* 0x8006A630 045A30-045A50 [20] */
    .text8006A630 0x8006A630 : AT(0x045A30) {
-      build/asm/code_45a30_len_20.o(.text8006A630);
+      build/asm/os/code_45a30_len_20.o(.text8006A630);
    }
 
    /* 0x8006A650 045A50-045DF0 [3A0] */
    .text8006A650 0x8006A650 : AT(0x045A50) {
-      build/asm/code_45a50_len_3a0.o(.text8006A650);
+      build/asm/os/code_45a50_len_3a0.o(.text8006A650);
    }
 
    /* 0x8006A9F0 045DF0-046760 [970] */
    .text8006A9F0 0x8006A9F0 : AT(0x045DF0) {
-      build/asm/code_45df0_len_970.o(.text8006A9F0);
+      build/asm/os/code_45df0_len_970.o(.text8006A9F0);
    }
 
    /* 0x8006B360 046760-0467F0 [90] */
    .text8006B360 0x8006B360 : AT(0x046760) {
-      build/asm/code_46760_len_90.o(.text8006B360);
+      build/asm/os/code_46760_len_90.o(.text8006B360);
    }
 
    /* 0x8006B3F0 0467F0-046880 [90] */
    .text8006B3F0 0x8006B3F0 : AT(0x0467F0) {
-      build/asm/code_467f0_len_90.o(.text8006B3F0);
+      build/asm/os/code_467f0_len_90.o(.text8006B3F0);
    }
 
    /* 0x8006B480 046880-046AE0 [260] */
    .text8006B480 0x8006B480 : AT(0x046880) {
-      build/asm/code_46880_len_260.o(.text8006B480);
+      build/asm/os/code_46880_len_260.o(.text8006B480);
    }
 
    /* 0x8006B6E0 046AE0-046C50 [170] */
    .text8006B6E0 0x8006B6E0 : AT(0x046AE0) {
-      build/asm/code_46ae0_len_170.o(.text8006B6E0);
+      build/asm/os/code_46ae0_len_170.o(.text8006B6E0);
    }
 
    /* 0x8006B850 046C50-046C70 [20] */
    .text8006B850 0x8006B850 : AT(0x046C50) {
-      build/asm/code_46c50_len_20.o(.text8006B850);
+      build/asm/os/code_46c50_len_20.o(.text8006B850);
    }
 
    /* 0x8006B870 046C70-047A70 [E00] */
    .text8006B870 0x8006B870 : AT(0x046C70) {
-      build/asm/code_46c70_len_e00.o(.text8006B870);
+      build/asm/os/code_46c70_len_e00.o(.text8006B870);
    }
 
    /* 0x8006C670 047A70-047A80 [10] */
    .text8006C670 0x8006C670 : AT(0x047A70) {
-      build/asm/code_47a70_len_10.o(.text8006C670);
+      build/asm/os/code_47a70_len_10.o(.text8006C670);
    }
 
    /* 0x8006C680 047A80-047A90 [10] */
    .text8006C680 0x8006C680 : AT(0x047A80) {
-      build/asm/code_47a80_len_10.o(.text8006C680);
+      build/asm/os/code_47a80_len_10.o(.text8006C680);
    }
 
    /* 0x8006C690 047A90-047AE0 [50] */
    .text8006C690 0x8006C690 : AT(0x047A90) {
-      build/asm/code_47a90_len_50.o(.text8006C690);
+      build/asm/os/code_47a90_len_50.o(.text8006C690);
    }
 
    /* 0x8006C6E0 047AE0-047BC0 [E0] */
    .text8006C6E0 0x8006C6E0 : AT(0x047AE0) {
-      build/asm/code_47ae0_len_e0.o(.text8006C6E0);
+      build/asm/os/code_47ae0_len_e0.o(.text8006C6E0);
    }
 
    /* 0x8006C7C0 047BC0-047C10 [50] */
    .text8006C7C0 0x8006C7C0 : AT(0x047BC0) {
-      build/asm/code_47bc0_len_50.o(.text8006C7C0);
+      build/asm/os/code_47bc0_len_50.o(.text8006C7C0);
    }
 
    /* 0x8006C810 047C10-047C60 [50] */
    .text8006C810 0x8006C810 : AT(0x047C10) {
-      build/asm/code_47c10_len_50.o(.text8006C810);
+      build/asm/os/code_47c10_len_50.o(.text8006C810);
    }
 
    /* 0x8006C860 047C60-047D50 [F0] */
    .text8006C860 0x8006C860 : AT(0x047C60) {
-      build/asm/code_47c60_len_f0.o(.text8006C860);
+      build/asm/os/code_47c60_len_f0.o(.text8006C860);
    }
 
    /* 0x8006C950 047D50-047E30 [E0] */
    .text8006C950 0x8006C950 : AT(0x047D50) {
-      build/asm/code_47d50_len_e0.o(.text8006C950);
+      build/asm/os/code_47d50_len_e0.o(.text8006C950);
    }
 
    /* 0x8006CA30 047E30-047E90 [60] */
    .text8006CA30 0x8006CA30 : AT(0x047E30) {
-      build/asm/code_47e30_len_60.o(.text8006CA30);
+      build/asm/os/code_47e30_len_60.o(.text8006CA30);
    }
 
    /* 0x8006CA90 047E90-047FA0 [110] */
    .text8006CA90 0x8006CA90 : AT(0x047E90) {
-      build/asm/code_47e90_len_110.o(.text8006CA90);
+      build/asm/os/code_47e90_len_110.o(.text8006CA90);
    }
 
    /* 0x8006CBA0 047FA0-047FC0 [20] */
    .text8006CBA0 0x8006CBA0 : AT(0x047FA0) {
-      build/asm/code_47fa0_len_20.o(.text8006CBA0);
+      build/asm/os/code_47fa0_len_20.o(.text8006CBA0);
    }
 
    /* 0x8006CBC0 047FC0-048020 [60] */
    .text8006CBC0 0x8006CBC0 : AT(0x047FC0) {
-      build/asm/code_47fc0_len_60.o(.text8006CBC0);
+      build/asm/os/code_47fc0_len_60.o(.text8006CBC0);
    }
 
    /* 0x8006CC20 048020-048A20 [A00] */
    .text8006CC20 0x8006CC20 : AT(0x048020) {
-      build/asm/code_48020_len_a00.o(.text8006CC20);
+      build/asm/os/code_48020_len_a00.o(.text8006CC20);
    }
 
    /* 0x8006D620 048A20-048BE0 [1C0] */
    .text8006D620 0x8006D620 : AT(0x048A20) {
-      build/asm/code_48a20_len_1c0.o(.text8006D620);
+      build/asm/os/code_48a20_len_1c0.o(.text8006D620);
    }
 
    /* 0x8006D7E0 048BE0-048C00 [20] */
    .text8006D7E0 0x8006D7E0 : AT(0x048BE0) {
-      build/asm/code_48be0_len_20.o(.text8006D7E0);
+      build/asm/os/code_48be0_len_20.o(.text8006D7E0);
    }
 
    /* 0x8006D800 048C00-0491C0 [5C0] */
    .text8006D800 0x8006D800 : AT(0x048C00) {
-      build/asm/code_48c00_len_5c0.o(.text8006D800);
+      build/asm/os/code_48c00_len_5c0.o(.text8006D800);
    }
 
    /* 0x8006DDC0 0491C0-049C70 [AB0] */
    .text8006DDC0 0x8006DDC0 : AT(0x0491C0) {
-      build/asm/code_491c0_len_f80.o(.text8006DDC0);
+      build/asm/os/code_491c0_len_f80.o(.text8006DDC0);
    }
 
    /* 0x8006E870 049C70-04A140 [4D0] */
    .text8006E870 0x8006E870 : AT(0x049C70) {
-      build/asm/code_49C70.o(.text8006E870);
+      build/asm/os/code_49C70.o(.text8006E870);
    }
 
    /* 0x8006ED40 04A140-04A1B0 [70] */
    .text8006ED40 0x8006ED40 : AT(0x04A140) {
-      build/asm/code_4a140_len_70.o(.text8006ED40);
+      build/asm/os/code_4a140_len_70.o(.text8006ED40);
    }
 
    /* 0x8006EDB0 04A1B0-04A1F0 [40] */
    .text8006EDB0 0x8006EDB0 : AT(0x04A1B0) {
-      build/asm/code_4a1b0_len_40.o(.text8006EDB0);
+      build/asm/os/code_4a1b0_len_40.o(.text8006EDB0);
    }
 
    /* 0x8006EDF0 04A1F0-04A360 [170] */
    .text8006EDF0 0x8006EDF0 : AT(0x04A1F0) {
-      build/asm/code_4a1f0_len_170.o(.text8006EDF0);
+      build/asm/os/code_4a1f0_len_170.o(.text8006EDF0);
    }
 
    /* 0x8006EF60 04A360-04AC90 [930] */
    .text8006EF60 0x8006EF60 : AT(0x04A360) {
-      build/asm/code_4a360_len_930.o(.text8006EF60);
+      build/asm/os/code_4a360_len_930.o(.text8006EF60);
    }
 
    /* 0x8006F890 04AC90-04E5A0 [3910] */
    .text8006F890 0x8006F890 : AT(0x04AC90) {
-      build/asm/code_4ac90_len_3910.o(.text8006F890);
+      build/asm/os/code_4ac90_len_3910.o(.text8006F890);
    }
 
    /* 0x00000000 04E5A0-0759B0 [27410] */
@@ -1063,8 +1063,8 @@ SECTIONS
    }
 
    /* 0x80242BA0 135EE0-1422A0 [???] */
-   .text80242BA0_2 0x80242BA0 : AT(0x135EE0) {
-      build/asm/code_135EE0.o(.text80242BA0_2);
+   .tex280242BA0 0x80242BA0 : AT(0x135EE0) {
+      build/asm/code_135EE0.o(.tex280242BA0);
    }
 
    /* 0x00000000 1422A0-163400 [???] */

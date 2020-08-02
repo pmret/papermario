@@ -8,7 +8,7 @@ SHELL=/bin/bash -o pipefail
 BUILD_DIR = build
 
 SRC_DIRS := src
-ASM_DIRS := asm
+ASM_DIRS := asm asm/os
 DATA_DIRS := bin
 COMPRESSED_DIRS := yay0
 MAP_DIRS := Map_Assets.FS
@@ -49,6 +49,7 @@ OBJCOPY = $(CROSS)objcopy
 
 CPPFLAGS = -Iinclude -D _LANGUAGE_C -ffreestanding
 ASFLAGS = -EB -march=vr4300 -mtune=vr4300 -Iinclude
+OLDASFLAGS= -EB -Iinclude
 CFLAGS  = -O2 -quiet -G 0 -mcpu=vr4300 -mfix4300
 LDFLAGS = -T undefined_syms.txt -T $(LD_SCRIPT) -Map $(BUILD_DIR)/papermario.map --no-check-sections
 
@@ -79,7 +80,7 @@ $(BUILD_DIR)/%.o: %.s
 	$(AS) $(ASFLAGS) -o $@ $<
 
 $(BUILD_DIR)/%.o: %.c
-	cpp $(CPPFLAGS) $< | $(CC) $(CFLAGS) -o - | $(OLD_AS) - -o $@
+	cpp $(CPPFLAGS) $< | $(CC) $(CFLAGS) -o - | $(OLD_AS) $(OLDASFLAGS) - -o $@
 
 $(BUILD_DIR)/%.o: %.bin
 	$(LD) -r -b binary -o $@ $<

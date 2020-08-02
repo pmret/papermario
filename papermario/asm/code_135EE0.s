@@ -9,7 +9,7 @@
 .include "macro.inc"
 
 
-.section .text80242BA0_2, "ax"
+.section .tex280242BA0, "ax"
 
 /* 135EE0 80242BA0 3C018025 */  lui   $at, 0x8025
 /* 135EE4 80242BA4 03E00008 */  jr    $ra
