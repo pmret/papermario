@@ -34,7 +34,7 @@ SECTIONS
 
    /* 0x80026740 001B40-003BF0 [20B0] */
    .text80026740 0x80026740 : AT(0x001B40) {
-      build/asm/code_1b40_len_20b0.o(.text80026740);
+      build/src/code_1b40_len_20b0.o(.text);
    }
 
    /* 0x800287F0 003BF0-0042E0 [6F0] */
@@ -859,7 +859,7 @@ SECTIONS
 
    /* 0x800F0CB0 08A160-08A860 [700] */
    .text800F0CB0 0x800F0CB0 : AT(0x08A160) {
-      build/asm/code_8a160_len_700.o(.text800F0CB0);
+      build/src/code_8a160_len_700.o(.text);
    }
 
    /* 0x800F13B0 08A860-08E790 [3F30] */

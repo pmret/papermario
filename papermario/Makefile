@@ -47,7 +47,7 @@ LD = $(CROSS_IRIX)ld
 OBJDUMP = $(CROSS)objdump
 OBJCOPY = $(CROSS)objcopy
 
-CPPFLAGS = -Iinclude -D _LANGUAGE_C
+CPPFLAGS = -Iinclude -D _LANGUAGE_C -DF3DEX_GBI_2
 ASFLAGS = -EB -march=vr4300 -mtune=vr4300
 CFLAGS  = -O2 -quiet -G 0 -mcpu=vr4300 -mfix4300
 LDFLAGS = -T undefined_syms.txt -T $(LD_SCRIPT) -Map $(BUILD_DIR)/papermario.map --no-check-sections

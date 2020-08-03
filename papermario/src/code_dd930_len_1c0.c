@@ -25,7 +25,7 @@ INCLUDE_ASM(code_dd930_len_1c0, play_ambient_sounds);
   struct_80147230 *temp2 = &D_8015C7C0;
   struct_80147230 **temp3 = &temp2;
 
-  if ((*gGameStatusPtr)->audio_unk == 0)
+  if ((*gGameStatusPtr)->musicEnabled == 0)
   {
     func_800554A4(temp2->unk8);
     temp2->unk0 &= ~1;
