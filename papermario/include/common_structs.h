@@ -13,7 +13,8 @@ typedef struct {
     /* 0x068 */ u16 demoButtonInput;
     /* 0x06A */ s8 demoStickX;
     /* 0x06B */ s8 demoStickY;
-    /* 0x06C */ char unk_6C[0x5];
+    /* 0x06C */ char unk_6C[0x4];
+    /* 0x070 */ s8 unk_70;
     /* 0x071 */ s8 demoState;
     /* 0x072 */ char unk_72[3];
     /* 0x075 */ s8 unk_75;

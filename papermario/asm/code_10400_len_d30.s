@@ -6,7 +6,7 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80035000, "ax"

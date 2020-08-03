@@ -6,7 +6,7 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .textA4000040, "ax"
@@ -427,11 +427,11 @@
 /* 00064C A400064C 00000000 */   nop   
 /* 000650 A4000650 04110003 */  bal   func_A4000660
 /* 000654 A4000654 00000000 */   nop   
-func_A4000658:
+glabel func_A4000658
 .LA4000658:
 /* 000658 A4000658 0411FFFF */  bal   func_A4000658
 /* 00065C A400065C 00000000 */   nop   
-func_A4000660:
+glabel func_A4000660
 /* 000660 A4000660 3C09A408 */  lui   $t1, 0xa408
 /* 000664 A4000664 8D290000 */  lw    $t1, ($t1)
 /* 000668 A4000668 8FB00014 */  lw    $s0, 0x14($sp)
@@ -504,7 +504,7 @@ func_A4000660:
 /* 000760 A4000760 01200008 */  jr    $t1
 /* 000764 A4000764 00000000 */   nop   
 /* 000768 A4000768 00000000 */  nop   
-func_A400076C:
+glabel func_A400076C
 /* 00076C A400076C 27BDFF60 */  addiu $sp, $sp, -0xa0
 /* 000770 A4000770 AFB00040 */  sw    $s0, 0x40($sp)
 /* 000774 A4000774 AFB10044 */  sw    $s1, 0x44($sp)
@@ -573,7 +573,7 @@ func_A400076C:
 /* 00086C A400086C 03E00008 */  jr    $ra
 /* 000870 A4000870 27BD00A0 */   addiu $sp, $sp, 0xa0
 
-func_A4000874:
+glabel func_A4000874
 /* 000874 A4000874 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 000878 A4000878 AFBF001C */  sw    $ra, 0x1c($sp)
 /* 00087C A400087C 00004825 */  or    $t1, $zero, $zero
@@ -614,7 +614,7 @@ func_A4000874:
 /* 0008F8 A40008F8 03E00008 */  jr    $ra
 /* 0008FC A40008FC 00000000 */   nop   
 
-func_A4000900:
+glabel func_A4000900
 /* 000900 A4000900 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 000904 A4000904 AFBF001C */  sw    $ra, 0x1c($sp)
 /* 000908 A4000908 00001025 */  or    $v0, $zero, $zero
@@ -648,7 +648,7 @@ func_A4000900:
 /* 00096C A400096C 03E00008 */  jr    $ra
 /* 000970 A4000970 00000000 */   nop   
 
-func_A4000974:
+glabel func_A4000974
 /* 000974 A4000974 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 000978 A4000978 AFBF001C */  sw    $ra, 0x1c($sp)
 /* 00097C A400097C AFA40020 */  sw    $a0, 0x20($sp)
@@ -704,7 +704,7 @@ func_A4000974:
 /* 000A2C A4000A2C 03E00008 */  jr    $ra
 /* 000A30 A4000A30 00000000 */   nop   
 
-func_A4000A34:
+glabel func_A4000A34
 /* 000A34 A4000A34 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 000A38 A4000A38 308400FF */  andi  $a0, $a0, 0xff
 /* 000A3C A4000A3C 241B0001 */  addiu $k1, $zero, 1
@@ -744,7 +744,7 @@ func_A4000A34:
 /* 000ABC A4000ABC 03E00008 */  jr    $ra
 /* 000AC0 A4000AC0 00000000 */   nop   
 
-func_A4000AC4:
+glabel func_A4000AC4
 /* 000AC4 A4000AC4 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 000AC8 A4000AC8 AFBF001C */  sw    $ra, 0x1c($sp)
 /* 000ACC A4000ACC 241A2000 */  addiu $k0, $zero, 0x2000

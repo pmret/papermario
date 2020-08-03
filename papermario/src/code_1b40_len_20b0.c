@@ -31,7 +31,8 @@ extern int D_802EB3D0[];
 
 extern u8 D_80074021;
 extern s32 D_8009A5D8;
-extern s32 D_8009A650[];
+
+extern s32 D_8009A650[1];
 
 void dma_copy(void *, void*, void*);
 
@@ -114,7 +115,9 @@ INCLUDE_ASM(code_1b40_len_20b0, load_engine_data);
 
 INCLUDE_ASM(code_1b40_len_20b0, func_80027088);
 
-INCLUDE_ASM(code_1b40_len_20b0, func_80027190);
+s32 func_80027190(void) {
+    return D_8009A5D8;
+}
 
 INCLUDE_ASM(code_1b40_len_20b0, func_800271A0);
 /*void func_800271A0(void) {

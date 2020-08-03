@@ -1,9 +1,9 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "globals.inc"
+.include "include/macro.inc"
 
-UpdateMusicPlayers:
+glabel UpdateMusicPlayers
 /* 0DD964 80147264 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0DD968 80147268 AFB00010 */  sw    $s0, 0x10($sp)
 /* 0DD96C 8014726C 3C108016 */  lui   $s0, 0x8016

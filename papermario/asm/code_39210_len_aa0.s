@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text8005DE10, "ax"
 
-get_npc_pos:
+glabel get_npc_pos
 /* 039210 8005DE10 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 039214 8005DE14 AFB00010 */  sw    $s0, 0x10($sp)
 /* 039218 8005DE18 00A0802D */  daddu $s0, $a1, $zero

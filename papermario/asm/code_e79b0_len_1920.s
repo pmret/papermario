@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text802C3000, "ax"
 
-sort_scripts:
+glabel sort_scripts
 /* 0E79B0 802C3000 27BDFFF8 */  addiu $sp, $sp, -8
 /* 0E79B4 802C3004 0000682D */  daddu $t5, $zero, $zero
 /* 0E79B8 802C3008 01A0482D */  daddu $t1, $t5, $zero
@@ -102,7 +102,7 @@ sort_scripts:
 /* 0E7AF0 802C3140 03E00008 */  jr    $ra
 /* 0E7AF4 802C3144 27BD0008 */   addiu $sp, $sp, 8
 
-find_script_labels:
+glabel find_script_labels
 /* 0E7AF8 802C3148 0000182D */  daddu $v1, $zero, $zero
 /* 0E7AFC 802C314C 2406FFFF */  addiu $a2, $zero, -1
 /* 0E7B00 802C3150 0080282D */  daddu $a1, $a0, $zero
@@ -147,7 +147,7 @@ find_script_labels:
 /* 0E7B84 802C31D4 03E00008 */  jr    $ra
 /* 0E7B88 802C31D8 00000000 */   nop   
 
-clear_script_list:
+glabel clear_script_list
 /* 0E7B8C 802C31DC 3C028007 */  lui   $v0, 0x8007
 /* 0E7B90 802C31E0 8C42419C */  lw    $v0, 0x419c($v0)
 /* 0E7B94 802C31E4 27BDFFE8 */  addiu $sp, $sp, -0x18
@@ -223,7 +223,7 @@ clear_script_list:
 /* 0E7C94 802C32E4 03E00008 */  jr    $ra
 /* 0E7C98 802C32E8 27BD0018 */   addiu $sp, $sp, 0x18
 
-init_script_list:
+glabel init_script_list
 /* 0E7C9C 802C32EC 3C028007 */  lui   $v0, 0x8007
 /* 0E7CA0 802C32F0 8C42419C */  lw    $v0, 0x419c($v0)
 /* 0E7CA4 802C32F4 27BDFFE8 */  addiu $sp, $sp, -0x18
@@ -269,7 +269,7 @@ init_script_list:
 /* 0E7D38 802C3388 03E00008 */  jr    $ra
 /* 0E7D3C 802C338C 27BD0018 */   addiu $sp, $sp, 0x18
 
-func_802C3390:
+glabel func_802C3390
 /* 0E7D40 802C3390 3C03800A */  lui   $v1, 0x800a
 /* 0E7D44 802C3394 8C63A5D8 */  lw    $v1, -0x5a28($v1)
 /* 0E7D48 802C3398 27BDFFE8 */  addiu $sp, $sp, -0x18
@@ -294,7 +294,7 @@ func_802C3390:
 /* 0E7D88 802C33D8 03E00008 */  jr    $ra
 /* 0E7D8C 802C33DC 27BD0018 */   addiu $sp, $sp, 0x18
 
-start_script:
+glabel start_script
 /* 0E7D90 802C33E0 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 0E7D94 802C33E4 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0E7D98 802C33E8 0080882D */  daddu $s1, $a0, $zero
@@ -432,7 +432,7 @@ start_script:
 /* 0E7F78 802C35C8 03E00008 */  jr    $ra
 /* 0E7F7C 802C35CC 27BD0028 */   addiu $sp, $sp, 0x28
 
-start_script_in_group:
+glabel start_script_in_group
 /* 0E7F80 802C35D0 27BDFFD0 */  addiu $sp, $sp, -0x30
 /* 0E7F84 802C35D4 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0E7F88 802C35D8 0080882D */  daddu $s1, $a0, $zero
@@ -572,7 +572,7 @@ start_script_in_group:
 /* 0E8170 802C37C0 03E00008 */  jr    $ra
 /* 0E8174 802C37C4 27BD0030 */   addiu $sp, $sp, 0x30
 
-start_child_script:
+glabel start_child_script
 /* 0E8178 802C37C8 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 0E817C 802C37CC AFB10014 */  sw    $s1, 0x14($sp)
 /* 0E8180 802C37D0 0080882D */  daddu $s1, $a0, $zero
@@ -726,7 +726,7 @@ start_child_script:
 /* 0E83A0 802C39F0 03E00008 */  jr    $ra
 /* 0E83A4 802C39F4 27BD0028 */   addiu $sp, $sp, 0x28
 
-func_802C39F8:
+glabel func_802C39F8
 /* 0E83A8 802C39F8 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 0E83AC 802C39FC AFB10014 */  sw    $s1, 0x14($sp)
 /* 0E83B0 802C3A00 0080882D */  daddu $s1, $a0, $zero
@@ -939,7 +939,7 @@ func_802C39F8:
 /* 0E86AC 802C3CFC 03E00008 */  jr    $ra
 /* 0E86B0 802C3D00 27BD0020 */   addiu $sp, $sp, 0x20
 
-restart_script:
+glabel restart_script
 /* 0E86B4 802C3D04 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0E86B8 802C3D08 AFB00010 */  sw    $s0, 0x10($sp)
 /* 0E86BC 802C3D0C 0080802D */  daddu $s0, $a0, $zero
@@ -969,7 +969,7 @@ restart_script:
 /* 0E871C 802C3D6C 03E00008 */  jr    $ra
 /* 0E8720 802C3D70 27BD0018 */   addiu $sp, $sp, 0x18
 
-update_scripts:
+glabel update_scripts
 /* 0E8724 802C3D74 3C028007 */  lui   $v0, 0x8007
 /* 0E8728 802C3D78 8C42419C */  lw    $v0, 0x419c($v0)
 /* 0E872C 802C3D7C 27BDFFC8 */  addiu $sp, $sp, -0x38
@@ -1071,7 +1071,7 @@ update_scripts:
 /* 0E888C 802C3EDC 03E00008 */  jr    $ra
 /* 0E8890 802C3EE0 27BD0038 */   addiu $sp, $sp, 0x38
 
-func_802C3EE4:
+glabel func_802C3EE4
 /* 0E8894 802C3EE4 3C02802E */  lui   $v0, 0x802e
 /* 0E8898 802C3EE8 8C42AC98 */  lw    $v0, -0x5368($v0)
 /* 0E889C 802C3EEC 18400011 */  blez  $v0, .L802C3F34
@@ -1097,7 +1097,7 @@ func_802C3EE4:
 /* 0E88E4 802C3F34 03E00008 */  jr    $ra
 /* 0E88E8 802C3F38 00000000 */   nop   
 
-kill_script:
+glabel kill_script
 /* 0E88EC 802C3F3C 3C03802E */  lui   $v1, 0x802e
 /* 0E88F0 802C3F40 8C63A890 */  lw    $v1, -0x5770($v1)
 /* 0E88F4 802C3F44 27BDFFE0 */  addiu $sp, $sp, -0x20
@@ -1200,7 +1200,7 @@ kill_script:
 /* 0E8A54 802C40A4 03E00008 */  jr    $ra
 /* 0E8A58 802C40A8 27BD0020 */   addiu $sp, $sp, 0x20
 
-kill_script_by_ID:
+glabel kill_script_by_ID
 /* 0E8A5C 802C40AC 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0E8A60 802C40B0 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0E8A64 802C40B4 0080882D */  daddu $s1, $a0, $zero
@@ -1230,7 +1230,7 @@ kill_script_by_ID:
 /* 0E8ABC 802C410C 03E00008 */  jr    $ra
 /* 0E8AC0 802C4110 27BD0020 */   addiu $sp, $sp, 0x20
 
-kill_all_scripts:
+glabel kill_all_scripts
 /* 0E8AC4 802C4114 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0E8AC8 802C4118 AFB00010 */  sw    $s0, 0x10($sp)
 /* 0E8ACC 802C411C 0000802D */  daddu $s0, $zero, $zero
@@ -1254,7 +1254,7 @@ kill_all_scripts:
 /* 0E8B0C 802C415C 03E00008 */  jr    $ra
 /* 0E8B10 802C4160 27BD0018 */   addiu $sp, $sp, 0x18
 
-does_script_exist:
+glabel does_script_exist
 /* 0E8B14 802C4164 0000282D */  daddu $a1, $zero, $zero
 /* 0E8B18 802C4168 3C03802E */  lui   $v1, 0x802e
 /* 0E8B1C 802C416C 8C63A890 */  lw    $v1, -0x5770($v1)
@@ -1276,7 +1276,7 @@ does_script_exist:
 /* 0E8B4C 802C419C 03E00008 */  jr    $ra
 /* 0E8B50 802C41A0 0000102D */   daddu $v0, $zero, $zero
 
-does_script_exist_by_ref:
+glabel does_script_exist_by_ref
 /* 0E8B54 802C41A4 0000282D */  daddu $a1, $zero, $zero
 /* 0E8B58 802C41A8 3C03802E */  lui   $v1, 0x802e
 /* 0E8B5C 802C41AC 8C63A890 */  lw    $v1, -0x5770($v1)
@@ -1294,11 +1294,11 @@ does_script_exist_by_ref:
 /* 0E8B80 802C41D0 03E00008 */  jr    $ra
 /* 0E8B84 802C41D4 0000102D */   daddu $v0, $zero, $zero
 
-set_script_priority:
+glabel set_script_priority
 /* 0E8B88 802C41D8 03E00008 */  jr    $ra
 /* 0E8B8C 802C41DC A0850003 */   sb    $a1, 3($a0)
 
-set_script_timescale:
+glabel set_script_timescale
 /* 0E8B90 802C41E0 3C01802E */  lui   $at, 0x802e
 /* 0E8B94 802C41E4 C4209CA8 */  lwc1  $f0, -0x6358($at)
 /* 0E8B98 802C41E8 44851000 */  mtc1  $a1, $f2
@@ -1308,21 +1308,21 @@ set_script_timescale:
 /* 0E8BA8 802C41F8 03E00008 */  jr    $ra
 /* 0E8BAC 802C41FC E4800150 */   swc1  $f0, 0x150($a0)
 
-set_global_timespace:
+glabel set_global_timespace
 /* 0E8BB0 802C4200 3C01802E */  lui   $at, 0x802e
 /* 0E8BB4 802C4204 03E00008 */  jr    $ra
 /* 0E8BB8 802C4208 E42C9CA8 */   swc1  $f12, -0x6358($at)
 
-get_global_timespace:
+glabel get_global_timespace
 /* 0E8BBC 802C420C 3C01802E */  lui   $at, 0x802e
 /* 0E8BC0 802C4210 03E00008 */  jr    $ra
 /* 0E8BC4 802C4214 C4209CA8 */   lwc1  $f0, -0x6358($at)
 
-set_script_group:
+glabel set_script_group
 /* 0E8BC8 802C4218 03E00008 */  jr    $ra
 /* 0E8BCC 802C421C A0850004 */   sb    $a1, 4($a0)
 
-bind_trigger:
+glabel bind_trigger
 /* 0E8BD0 802C4220 27BDFFB8 */  addiu $sp, $sp, -0x48
 /* 0E8BD4 802C4224 AFB20038 */  sw    $s2, 0x38($sp)
 /* 0E8BD8 802C4228 0080902D */  daddu $s2, $a0, $zero
@@ -1358,7 +1358,7 @@ bind_trigger:
 /* 0E8C50 802C42A0 03E00008 */  jr    $ra
 /* 0E8C54 802C42A4 27BD0048 */   addiu $sp, $sp, 0x48
 
-bind_trigger_1:
+glabel bind_trigger_1
 /* 0E8C58 802C42A8 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 0E8C5C 802C42AC 8FA20038 */  lw    $v0, 0x38($sp)
 /* 0E8C60 802C42B0 8FA8003C */  lw    $t0, 0x3c($sp)
@@ -1372,7 +1372,7 @@ bind_trigger_1:
 /* 0E8C80 802C42D0 03E00008 */  jr    $ra
 /* 0E8C84 802C42D4 27BD0028 */   addiu $sp, $sp, 0x28
 
-suspend_group_script:
+glabel suspend_group_script
 /* 0E8C88 802C42D8 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0E8C8C 802C42DC AFB10014 */  sw    $s1, 0x14($sp)
 /* 0E8C90 802C42E0 0080882D */  daddu $s1, $a0, $zero
@@ -1419,7 +1419,7 @@ suspend_group_script:
 /* 0E8D24 802C4374 03E00008 */  jr    $ra
 /* 0E8D28 802C4378 27BD0020 */   addiu $sp, $sp, 0x20
 
-resume_group_script:
+glabel resume_group_script
 /* 0E8D2C 802C437C 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0E8D30 802C4380 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0E8D34 802C4384 0080882D */  daddu $s1, $a0, $zero
@@ -1466,7 +1466,7 @@ resume_group_script:
 /* 0E8DC8 802C4418 03E00008 */  jr    $ra
 /* 0E8DCC 802C441C 27BD0020 */   addiu $sp, $sp, 0x20
 
-suspend_all_script:
+glabel suspend_all_script
 /* 0E8DD0 802C4420 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0E8DD4 802C4424 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0E8DD8 802C4428 0080882D */  daddu $s1, $a0, $zero
@@ -1497,7 +1497,7 @@ suspend_all_script:
 /* 0E8E34 802C4484 03E00008 */  jr    $ra
 /* 0E8E38 802C4488 27BD0020 */   addiu $sp, $sp, 0x20
 
-resume_all_script:
+glabel resume_all_script
 /* 0E8E3C 802C448C 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0E8E40 802C4490 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0E8E44 802C4494 0080882D */  daddu $s1, $a0, $zero
@@ -1528,7 +1528,7 @@ resume_all_script:
 /* 0E8EA0 802C44F0 03E00008 */  jr    $ra
 /* 0E8EA4 802C44F4 27BD0020 */   addiu $sp, $sp, 0x20
 
-suspend_group_script_index:
+glabel suspend_group_script_index
 /* 0E8EA8 802C44F8 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0E8EAC 802C44FC AFB10014 */  sw    $s1, 0x14($sp)
 /* 0E8EB0 802C4500 0080882D */  daddu $s1, $a0, $zero
@@ -1562,7 +1562,7 @@ suspend_group_script_index:
 /* 0E8F18 802C4568 03E00008 */  jr    $ra
 /* 0E8F1C 802C456C 27BD0020 */   addiu $sp, $sp, 0x20
 
-resume_group_script_index:
+glabel resume_group_script_index
 /* 0E8F20 802C4570 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0E8F24 802C4574 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0E8F28 802C4578 0080882D */  daddu $s1, $a0, $zero
@@ -1596,7 +1596,7 @@ resume_group_script_index:
 /* 0E8F90 802C45E0 03E00008 */  jr    $ra
 /* 0E8F94 802C45E4 27BD0020 */   addiu $sp, $sp, 0x20
 
-suspend_all_group:
+glabel suspend_all_group
 /* 0E8F98 802C45E8 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0E8F9C 802C45EC AFB10014 */  sw    $s1, 0x14($sp)
 /* 0E8FA0 802C45F0 0080882D */  daddu $s1, $a0, $zero
@@ -1624,7 +1624,7 @@ suspend_all_group:
 /* 0E8FF0 802C4640 03E00008 */  jr    $ra
 /* 0E8FF4 802C4644 27BD0020 */   addiu $sp, $sp, 0x20
 
-resume_all_group:
+glabel resume_all_group
 /* 0E8FF8 802C4648 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0E8FFC 802C464C AFB10014 */  sw    $s1, 0x14($sp)
 /* 0E9000 802C4650 0080882D */  daddu $s1, $a0, $zero
@@ -1652,7 +1652,7 @@ resume_all_group:
 /* 0E9050 802C46A0 03E00008 */  jr    $ra
 /* 0E9054 802C46A4 27BD0020 */   addiu $sp, $sp, 0x20
 
-suspend_group_others:
+glabel suspend_group_others
 /* 0E9058 802C46A8 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0E905C 802C46AC AFB10014 */  sw    $s1, 0x14($sp)
 /* 0E9060 802C46B0 0080882D */  daddu $s1, $a0, $zero
@@ -1685,7 +1685,7 @@ suspend_group_others:
 /* 0E90C4 802C4714 03E00008 */  jr    $ra
 /* 0E90C8 802C4718 27BD0020 */   addiu $sp, $sp, 0x20
 
-resume_group_others:
+glabel resume_group_others
 /* 0E90CC 802C471C 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0E90D0 802C4720 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0E90D4 802C4724 0080882D */  daddu $s1, $a0, $zero
@@ -1718,7 +1718,7 @@ resume_group_others:
 /* 0E9138 802C4788 03E00008 */  jr    $ra
 /* 0E913C 802C478C 27BD0020 */   addiu $sp, $sp, 0x20
 
-get_script_by_index:
+glabel get_script_by_index
 /* 0E9140 802C4790 3C02802E */  lui   $v0, 0x802e
 /* 0E9144 802C4794 8C42A890 */  lw    $v0, -0x5770($v0)
 /* 0E9148 802C4798 00042080 */  sll   $a0, $a0, 2
@@ -1726,7 +1726,7 @@ get_script_by_index:
 /* 0E9150 802C47A0 03E00008 */  jr    $ra
 /* 0E9154 802C47A4 8C820000 */   lw    $v0, ($a0)
 
-get_script_by_id:
+glabel get_script_by_id
 /* 0E9158 802C47A8 0000302D */  daddu $a2, $zero, $zero
 /* 0E915C 802C47AC 3C05802E */  lui   $a1, 0x802e
 /* 0E9160 802C47B0 8CA5A890 */  lw    $a1, -0x5770($a1)
@@ -1748,7 +1748,7 @@ get_script_by_id:
 /* 0E9190 802C47E0 03E00008 */  jr    $ra
 /* 0E9194 802C47E4 0000102D */   daddu $v0, $zero, $zero
 
-set_script_flags:
+glabel set_script_flags
 /* 0E9198 802C47E8 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0E919C 802C47EC AFB10014 */  sw    $s1, 0x14($sp)
 /* 0E91A0 802C47F0 0080882D */  daddu $s1, $a0, $zero
@@ -1791,7 +1791,7 @@ set_script_flags:
 /* 0E9228 802C4878 03E00008 */  jr    $ra
 /* 0E922C 802C487C 27BD0020 */   addiu $sp, $sp, 0x20
 
-clear_script_flags:
+glabel clear_script_flags
 /* 0E9230 802C4880 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0E9234 802C4884 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0E9238 802C4888 0080882D */  daddu $s1, $a0, $zero

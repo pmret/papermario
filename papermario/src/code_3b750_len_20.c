@@ -2,7 +2,7 @@
 
 typedef struct {
     char unk_0[0xC];
-    s32 unk_C;
+    void* unk_C;
 } NUScTask;
 
 void nuGfxSwapCfb(NUScTask* task) {

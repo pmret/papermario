@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text8002AE40, "ax"
 
-get_spirits_rescued:
+glabel get_spirits_rescued
 /* 006240 8002AE40 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 006244 8002AE44 0000202D */  daddu $a0, $zero, $zero
 /* 006248 8002AE48 3C05F5DE */  lui   $a1, 0xf5de
@@ -90,7 +90,7 @@ get_spirits_rescued:
 /* 006338 8002AF38 03E00008 */  jr    $ra
 /* 00633C 8002AF3C 27BD0020 */   addiu $sp, $sp, 0x20
 
-fio_calc_header_checksum:
+glabel fio_calc_header_checksum
 /* 006340 8002AF40 0000282D */  daddu $a1, $zero, $zero
 /* 006344 8002AF44 3C04800E */  lui   $a0, 0x800e
 /* 006348 8002AF48 248495E8 */  addiu $a0, $a0, -0x6a18
@@ -105,7 +105,7 @@ fio_calc_header_checksum:
 /* 006368 8002AF68 03E00008 */  jr    $ra
 /* 00636C 8002AF6C 00A0102D */   daddu $v0, $a1, $zero
 
-fio_validate_header_checksums:
+glabel fio_validate_header_checksums
 /* 006370 8002AF70 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 006374 8002AF74 3C02800E */  lui   $v0, 0x800e
 /* 006378 8002AF78 244295E8 */  addiu $v0, $v0, -0x6a18
@@ -134,7 +134,7 @@ fio_validate_header_checksums:
 /* 0063D0 8002AFD0 03E00008 */  jr    $ra
 /* 0063D4 8002AFD4 27BD0018 */   addiu $sp, $sp, 0x18
 
-fio_has_valid_backup:
+glabel fio_has_valid_backup
 /* 0063D8 8002AFD8 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0063DC 8002AFDC 24040006 */  addiu $a0, $zero, 6
 /* 0063E0 8002AFE0 AFB00010 */  sw    $s0, 0x10($sp)
@@ -166,7 +166,7 @@ fio_has_valid_backup:
 /* 006444 8002B044 03E00008 */  jr    $ra
 /* 006448 8002B048 27BD0018 */   addiu $sp, $sp, 0x18
 
-fio_flush_backups:
+glabel fio_flush_backups
 /* 00644C 8002B04C 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 006450 8002B050 AFB00010 */  sw    $s0, 0x10($sp)
 /* 006454 8002B054 3C10800E */  lui   $s0, 0x800e
@@ -201,7 +201,7 @@ fio_flush_backups:
 /* 0064C8 8002B0C8 03E00008 */  jr    $ra
 /* 0064CC 8002B0CC 27BD0018 */   addiu $sp, $sp, 0x18
 
-fio_calc_file_checksum:
+glabel fio_calc_file_checksum
 /* 0064D0 8002B0D0 0000282D */  daddu $a1, $zero, $zero
 /* 0064D4 8002B0D4 00A0182D */  daddu $v1, $a1, $zero
 .L8002B0D8:
@@ -214,7 +214,7 @@ fio_calc_file_checksum:
 /* 0064F0 8002B0F0 03E00008 */  jr    $ra
 /* 0064F4 8002B0F4 00A0102D */   daddu $v0, $a1, $zero
 
-fio_validate_file_checksum:
+glabel fio_validate_file_checksum
 /* 0064F8 8002B0F8 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0064FC 8002B0FC AFB00010 */  sw    $s0, 0x10($sp)
 /* 006500 8002B100 3C058007 */  lui   $a1, 0x8007
@@ -240,7 +240,7 @@ fio_validate_file_checksum:
 /* 00654C 8002B14C 03E00008 */  jr    $ra
 /* 006550 8002B150 27BD0018 */   addiu $sp, $sp, 0x18
 
-fio_fetch_saved_file_info:
+glabel fio_fetch_saved_file_info
 /* 006554 8002B154 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 006558 8002B158 AFB20018 */  sw    $s2, 0x18($sp)
 /* 00655C 8002B15C 3C12800A */  lui   $s2, 0x800a
@@ -344,7 +344,7 @@ fio_fetch_saved_file_info:
 /* 0066C8 8002B2C8 03E00008 */  jr    $ra
 /* 0066CC 8002B2CC 27BD0028 */   addiu $sp, $sp, 0x28
 
-fio_load_game:
+glabel fio_load_game
 /* 0066D0 8002B2D0 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0066D4 8002B2D4 AFB20018 */  sw    $s2, 0x18($sp)
 /* 0066D8 8002B2D8 3C128007 */  lui   $s2, 0x8007
@@ -389,7 +389,7 @@ fio_load_game:
 /* 00676C 8002B36C 03E00008 */  jr    $ra
 /* 006770 8002B370 27BD0020 */   addiu $sp, $sp, 0x20
 
-fio_save_game:
+glabel fio_save_game
 /* 006774 8002B374 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 006778 8002B378 AFB20018 */  sw    $s2, 0x18($sp)
 /* 00677C 8002B37C 0080902D */  daddu $s2, $a0, $zero
@@ -437,7 +437,7 @@ fio_save_game:
 /* 006824 8002B424 03E00008 */  jr    $ra
 /* 006828 8002B428 27BD0020 */   addiu $sp, $sp, 0x20
 
-fio_erase_game:
+glabel fio_erase_game
 /* 00682C 8002B42C 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 006830 8002B430 AFB20018 */  sw    $s2, 0x18($sp)
 /* 006834 8002B434 0080902D */  daddu $s2, $a0, $zero
@@ -466,7 +466,7 @@ fio_erase_game:
 /* 006888 8002B488 03E00008 */  jr    $ra
 /* 00688C 8002B48C 27BD0020 */   addiu $sp, $sp, 0x20
 
-fio_deserialize_state:
+glabel fio_deserialize_state
 /* 006890 8002B490 3C038011 */  lui   $v1, 0x8011
 /* 006894 8002B494 2463F290 */  addiu $v1, $v1, -0xd70
 /* 006898 8002B498 3C07800E */  lui   $a3, 0x800e
@@ -576,7 +576,7 @@ fio_deserialize_state:
 /* 006A28 8002B628 03E00008 */  jr    $ra
 /* 006A2C 8002B62C 27BD0018 */   addiu $sp, $sp, 0x18
 
-fio_serialize_state:
+glabel fio_serialize_state
 /* 006A30 8002B630 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 006A34 8002B634 AFB20018 */  sw    $s2, 0x18($sp)
 /* 006A38 8002B638 3C12800E */  lui   $s2, 0x800e
@@ -716,7 +716,7 @@ fio_serialize_state:
 /* 006C44 8002B844 03E00008 */  jr    $ra
 /* 006C48 8002B848 27BD0020 */   addiu $sp, $sp, 0x20
 
-fio_init_flash:
+glabel fio_init_flash
 /* 006C4C 8002B84C 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 006C50 8002B850 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 006C54 8002B854 0C01BBDA */  jal   osFlashInit
@@ -725,7 +725,7 @@ fio_init_flash:
 /* 006C60 8002B860 03E00008 */  jr    $ra
 /* 006C64 8002B864 27BD0018 */   addiu $sp, $sp, 0x18
 
-fio_read_flash:
+glabel fio_read_flash
 /* 006C68 8002B868 27BDFF90 */  addiu $sp, $sp, -0x70
 /* 006C6C 8002B86C AFB40060 */  sw    $s4, 0x60($sp)
 /* 006C70 8002B870 0080A02D */  daddu $s4, $a0, $zero
@@ -786,7 +786,7 @@ fio_read_flash:
 /* 006D40 8002B940 03E00008 */  jr    $ra
 /* 006D44 8002B944 27BD0070 */   addiu $sp, $sp, 0x70
 
-fio_write_flash:
+glabel fio_write_flash
 /* 006D48 8002B948 27BDFF98 */  addiu $sp, $sp, -0x68
 /* 006D4C 8002B94C AFB5005C */  sw    $s5, 0x5c($sp)
 /* 006D50 8002B950 0080A82D */  daddu $s5, $a0, $zero
@@ -844,7 +844,7 @@ fio_write_flash:
 /* 006E14 8002BA14 03E00008 */  jr    $ra
 /* 006E18 8002BA18 27BD0068 */   addiu $sp, $sp, 0x68
 
-fio_erase_flash:
+glabel fio_erase_flash
 /* 006E1C 8002BA1C 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 006E20 8002BA20 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 006E24 8002BA24 0C01BD09 */  jal   osFlashSectorErase

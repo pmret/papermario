@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80025C00, "ax"
 
-entry_point:
+glabel entry_point
 /* 001000 80025C00 3C08800A */  lui   $t0, 0x800a
 /* 001004 80025C04 2508A5B0 */  addiu $t0, $t0, -0x5a50
 /* 001008 80025C08 3C090004 */  lui   $t1, 4

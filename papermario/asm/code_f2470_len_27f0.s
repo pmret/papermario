@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text802CDAC0, "ax"
 
-func_802CDAC0:
+glabel func_802CDAC0
 /* 0F2470 802CDAC0 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0F2474 802CDAC4 0080182D */  daddu $v1, $a0, $zero
 /* 0F2478 802CDAC8 00A0202D */  daddu $a0, $a1, $zero
@@ -36,7 +36,7 @@ func_802CDAC0:
 /* 0F24B4 802CDB04 03E00008 */  jr    $ra
 /* 0F24B8 802CDB08 27BD0018 */   addiu $sp, $sp, 0x18
 
-set_npc_animation:
+glabel set_npc_animation
 /* 0F24BC 802CDB0C 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0F24C0 802CDB10 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0F24C4 802CDB14 0080882D */  daddu $s1, $a0, $zero
@@ -110,7 +110,7 @@ set_npc_animation:
 /* 0F25C4 802CDC14 03E00008 */  jr    $ra
 /* 0F25C8 802CDC18 27BD0030 */   addiu $sp, $sp, 0x30
 
-DeleteNpc:
+glabel DeleteNpc
 /* 0F25CC 802CDC1C 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0F25D0 802CDC20 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 0F25D4 802CDC24 8C82000C */  lw    $v0, 0xc($a0)
@@ -128,7 +128,7 @@ DeleteNpc:
 /* 0F2600 802CDC50 03E00008 */  jr    $ra
 /* 0F2604 802CDC54 27BD0018 */   addiu $sp, $sp, 0x18
 
-GetNpcPointer:
+glabel GetNpcPointer
 /* 0F2608 802CDC58 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0F260C 802CDC5C AFB10014 */  sw    $s1, 0x14($sp)
 /* 0F2610 802CDC60 0080882D */  daddu $s1, $a0, $zero
@@ -152,7 +152,7 @@ GetNpcPointer:
 /* 0F2658 802CDCA8 03E00008 */  jr    $ra
 /* 0F265C 802CDCAC 27BD0020 */   addiu $sp, $sp, 0x20
 
-SetNpcPos:
+glabel SetNpcPos
 /* 0F2660 802CDCB0 27BDFFC8 */  addiu $sp, $sp, -0x38
 /* 0F2664 802CDCB4 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0F2668 802CDCB8 0080882D */  daddu $s1, $a0, $zero
@@ -221,7 +221,7 @@ SetNpcPos:
 /* 0F2758 802CDDA8 03E00008 */  jr    $ra
 /* 0F275C 802CDDAC 27BD0038 */   addiu $sp, $sp, 0x38
 
-SetNpcRotation:
+glabel SetNpcRotation
 /* 0F2760 802CDDB0 27BDFFC8 */  addiu $sp, $sp, -0x38
 /* 0F2764 802CDDB4 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0F2768 802CDDB8 0080882D */  daddu $s1, $a0, $zero
@@ -299,7 +299,7 @@ SetNpcRotation:
 /* 0F287C 802CDECC 03E00008 */  jr    $ra
 /* 0F2880 802CDED0 27BD0028 */   addiu $sp, $sp, 0x28
 
-SetNpcScale:
+glabel SetNpcScale
 /* 0F2884 802CDED4 27BDFFC8 */  addiu $sp, $sp, -0x38
 /* 0F2888 802CDED8 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0F288C 802CDEDC 0080882D */  daddu $s1, $a0, $zero
@@ -348,7 +348,7 @@ SetNpcScale:
 /* 0F2934 802CDF84 03E00008 */  jr    $ra
 /* 0F2938 802CDF88 27BD0038 */   addiu $sp, $sp, 0x38
 
-SetNpcCollisionSize:
+glabel SetNpcCollisionSize
 /* 0F293C 802CDF8C 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 0F2940 802CDF90 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0F2944 802CDF94 0080882D */  daddu $s1, $a0, $zero
@@ -387,7 +387,7 @@ SetNpcCollisionSize:
 /* 0F29C4 802CE014 03E00008 */  jr    $ra
 /* 0F29C8 802CE018 27BD0028 */   addiu $sp, $sp, 0x28
 
-SetNpcSpeed:
+glabel SetNpcSpeed
 /* 0F29CC 802CE01C 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 0F29D0 802CE020 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0F29D4 802CE024 0080882D */  daddu $s1, $a0, $zero
@@ -417,7 +417,7 @@ SetNpcSpeed:
 /* 0F2A30 802CE080 03E00008 */  jr    $ra
 /* 0F2A34 802CE084 27BD0028 */   addiu $sp, $sp, 0x28
 
-SetNpcJumpscale:
+glabel SetNpcJumpscale
 /* 0F2A38 802CE088 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 0F2A3C 802CE08C AFB10014 */  sw    $s1, 0x14($sp)
 /* 0F2A40 802CE090 0080882D */  daddu $s1, $a0, $zero
@@ -447,7 +447,7 @@ SetNpcJumpscale:
 /* 0F2A9C 802CE0EC 03E00008 */  jr    $ra
 /* 0F2AA0 802CE0F0 27BD0028 */   addiu $sp, $sp, 0x28
 
-SetNpcAnimation:
+glabel SetNpcAnimation
 /* 0F2AA4 802CE0F4 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0F2AA8 802CE0F8 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0F2AAC 802CE0FC 0080882D */  daddu $s1, $a0, $zero
@@ -477,7 +477,7 @@ SetNpcAnimation:
 /* 0F2B08 802CE158 03E00008 */  jr    $ra
 /* 0F2B0C 802CE15C 27BD0020 */   addiu $sp, $sp, 0x20
 
-GetNpcAnimation:
+glabel GetNpcAnimation
 /* 0F2B10 802CE160 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0F2B14 802CE164 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0F2B18 802CE168 0080882D */  daddu $s1, $a0, $zero
@@ -533,7 +533,7 @@ GetNpcAnimation:
 /* 0F2BD4 802CE224 03E00008 */  jr    $ra
 /* 0F2BD8 802CE228 27BD0028 */   addiu $sp, $sp, 0x28
 
-NpcMoveTo:
+glabel NpcMoveTo
 /* 0F2BDC 802CE22C 27BDFFD0 */  addiu $sp, $sp, -0x30
 /* 0F2BE0 802CE230 AFB20018 */  sw    $s2, 0x18($sp)
 /* 0F2BE4 802CE234 0080902D */  daddu $s2, $a0, $zero
@@ -678,7 +678,7 @@ NpcMoveTo:
 /* 0F2DDC 802CE42C 03E00008 */  jr    $ra
 /* 0F2DE0 802CE430 27BD0030 */   addiu $sp, $sp, 0x30
 
-_npc_jump_to:
+glabel _npc_jump_to
 /* 0F2DE4 802CE434 27BDFFC0 */  addiu $sp, $sp, -0x40
 /* 0F2DE8 802CE438 AFB20018 */  sw    $s2, 0x18($sp)
 /* 0F2DEC 802CE43C 0080902D */  daddu $s2, $a0, $zero
@@ -855,7 +855,7 @@ _npc_jump_to:
 /* 0F306C 802CE6BC 03E00008 */  jr    $ra
 /* 0F3070 802CE6C0 27BD0040 */   addiu $sp, $sp, 0x40
 
-NpcJump0:
+glabel NpcJump0
 /* 0F3074 802CE6C4 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0F3078 802CE6C8 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 0F307C 802CE6CC 0C0B390D */  jal   _npc_jump_to
@@ -864,7 +864,7 @@ NpcJump0:
 /* 0F3088 802CE6D8 03E00008 */  jr    $ra
 /* 0F308C 802CE6DC 27BD0018 */   addiu $sp, $sp, 0x18
 
-NpcJump1:
+glabel NpcJump1
 /* 0F3090 802CE6E0 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0F3094 802CE6E4 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 0F3098 802CE6E8 0C0B390D */  jal   _npc_jump_to
@@ -873,7 +873,7 @@ NpcJump1:
 /* 0F30A4 802CE6F4 03E00008 */  jr    $ra
 /* 0F30A8 802CE6F8 27BD0018 */   addiu $sp, $sp, 0x18
 
-NpcFlyTo:
+glabel NpcFlyTo
 /* 0F30AC 802CE6FC 27BDFFC0 */  addiu $sp, $sp, -0x40
 /* 0F30B0 802CE700 AFB20020 */  sw    $s2, 0x20($sp)
 /* 0F30B4 802CE704 0080902D */  daddu $s2, $a0, $zero
@@ -1085,7 +1085,7 @@ NpcFlyTo:
 /* 0F33B8 802CEA08 03E00008 */  jr    $ra
 /* 0F33BC 802CEA0C 27BD0040 */   addiu $sp, $sp, 0x40
 
-GetNpcYaw:
+glabel GetNpcYaw
 /* 0F33C0 802CEA10 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0F33C4 802CEA14 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0F33C8 802CEA18 0080882D */  daddu $s1, $a0, $zero
@@ -1117,7 +1117,7 @@ GetNpcYaw:
 /* 0F342C 802CEA7C 03E00008 */  jr    $ra
 /* 0F3430 802CEA80 27BD0020 */   addiu $sp, $sp, 0x20
 
-SetNpcYaw:
+glabel SetNpcYaw
 /* 0F3434 802CEA84 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0F3438 802CEA88 AFB20018 */  sw    $s2, 0x18($sp)
 /* 0F343C 802CEA8C 0080902D */  daddu $s2, $a0, $zero
@@ -1152,7 +1152,7 @@ SetNpcYaw:
 /* 0F34AC 802CEAFC 03E00008 */  jr    $ra
 /* 0F34B0 802CEB00 27BD0020 */   addiu $sp, $sp, 0x20
 
-InterpNpcYaw:
+glabel InterpNpcYaw
 /* 0F34B4 802CEB04 27BDFFD0 */  addiu $sp, $sp, -0x30
 /* 0F34B8 802CEB08 AFB20018 */  sw    $s2, 0x18($sp)
 /* 0F34BC 802CEB0C 0080902D */  daddu $s2, $a0, $zero
@@ -1275,7 +1275,7 @@ InterpNpcYaw:
 /* 0F3670 802CECC0 03E00008 */  jr    $ra
 /* 0F3674 802CECC4 27BD0030 */   addiu $sp, $sp, 0x30
 
-NpcFacePlayer:
+glabel NpcFacePlayer
 /* 0F3678 802CECC8 27BDFFD0 */  addiu $sp, $sp, -0x30
 /* 0F367C 802CECCC AFB10014 */  sw    $s1, 0x14($sp)
 /* 0F3680 802CECD0 0080882D */  daddu $s1, $a0, $zero
@@ -1392,7 +1392,7 @@ NpcFacePlayer:
 /* 0F3828 802CEE78 03E00008 */  jr    $ra
 /* 0F382C 802CEE7C 27BD0030 */   addiu $sp, $sp, 0x30
 
-NpcFaceNpc:
+glabel NpcFaceNpc
 /* 0F3830 802CEE80 27BDFFD0 */  addiu $sp, $sp, -0x30
 /* 0F3834 802CEE84 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0F3838 802CEE88 0080882D */  daddu $s1, $a0, $zero
@@ -1522,7 +1522,7 @@ NpcFaceNpc:
 /* 0F3A08 802CF058 03E00008 */  jr    $ra
 /* 0F3A0C 802CF05C 27BD0030 */   addiu $sp, $sp, 0x30
 
-SetNpcFlagBits:
+glabel SetNpcFlagBits
 /* 0F3A10 802CF060 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0F3A14 802CF064 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0F3A18 802CF068 0080882D */  daddu $s1, $a0, $zero
@@ -1565,7 +1565,7 @@ SetNpcFlagBits:
 /* 0F3A9C 802CF0EC 03E00008 */  jr    $ra
 /* 0F3AA0 802CF0F0 27BD0020 */   addiu $sp, $sp, 0x20
 
-GetNpcPos:
+glabel GetNpcPos
 /* 0F3AA4 802CF0F4 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 0F3AA8 802CF0F8 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0F3AAC 802CF0FC 0080882D */  daddu $s1, $a0, $zero
@@ -1665,7 +1665,7 @@ GetNpcPos:
 /* 0F3C10 802CF260 03E00008 */  jr    $ra
 /* 0F3C14 802CF264 27BD0020 */   addiu $sp, $sp, 0x20
 
-EnableNpcShadow:
+glabel EnableNpcShadow
 /* 0F3C18 802CF268 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0F3C1C 802CF26C AFB10014 */  sw    $s1, 0x14($sp)
 /* 0F3C20 802CF270 0080882D */  daddu $s1, $a0, $zero
@@ -1703,7 +1703,7 @@ EnableNpcShadow:
 /* 0F3C94 802CF2E4 03E00008 */  jr    $ra
 /* 0F3C98 802CF2E8 27BD0020 */   addiu $sp, $sp, 0x20
 
-EnableNpcBlur:
+glabel EnableNpcBlur
 /* 0F3C9C 802CF2EC 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0F3CA0 802CF2F0 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0F3CA4 802CF2F4 0080882D */  daddu $s1, $a0, $zero
@@ -1741,7 +1741,7 @@ EnableNpcBlur:
 /* 0F3D18 802CF368 03E00008 */  jr    $ra
 /* 0F3D1C 802CF36C 27BD0020 */   addiu $sp, $sp, 0x20
 
-ClearPartnerMoveHistory:
+glabel ClearPartnerMoveHistory
 /* 0F3D20 802CF370 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0F3D24 802CF374 AFB00010 */  sw    $s0, 0x10($sp)
 /* 0F3D28 802CF378 0080802D */  daddu $s0, $a0, $zero
@@ -1763,7 +1763,7 @@ ClearPartnerMoveHistory:
 /* 0F3D64 802CF3B4 03E00008 */  jr    $ra
 /* 0F3D68 802CF3B8 27BD0018 */   addiu $sp, $sp, 0x18
 
-NpcSetHomePosToCurrent:
+glabel NpcSetHomePosToCurrent
 /* 0F3D6C 802CF3BC 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0F3D70 802CF3C0 AFB00010 */  sw    $s0, 0x10($sp)
 /* 0F3D74 802CF3C4 0080802D */  daddu $s0, $a0, $zero
@@ -1797,7 +1797,7 @@ NpcSetHomePosToCurrent:
 /* 0F3DE0 802CF430 03E00008 */  jr    $ra
 /* 0F3DE4 802CF434 27BD0018 */   addiu $sp, $sp, 0x18
 
-GetPartnerPos:
+glabel GetPartnerPos
 /* 0F3DE8 802CF438 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 0F3DEC 802CF43C AFB10014 */  sw    $s1, 0x14($sp)
 /* 0F3DF0 802CF440 0080882D */  daddu $s1, $a0, $zero
@@ -1844,7 +1844,7 @@ GetPartnerPos:
 /* 0F3E90 802CF4E0 03E00008 */  jr    $ra
 /* 0F3E94 802CF4E4 27BD0028 */   addiu $sp, $sp, 0x28
 
-DisablePartnerAI:
+glabel DisablePartnerAI
 /* 0F3E98 802CF4E8 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0F3E9C 802CF4EC AFBF0010 */  sw    $ra, 0x10($sp)
 /* 0F3EA0 802CF4F0 8C82000C */  lw    $v0, 0xc($a0)
@@ -1866,7 +1866,7 @@ DisablePartnerAI:
 /* 0F3ED4 802CF524 03E00008 */  jr    $ra
 /* 0F3ED8 802CF528 27BD0018 */   addiu $sp, $sp, 0x18
 
-EnablePartnerAI:
+glabel EnablePartnerAI
 /* 0F3EDC 802CF52C 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0F3EE0 802CF530 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 0F3EE4 802CF534 0C03BCCA */  jal   enable_partner_ai
@@ -1908,7 +1908,7 @@ EnablePartnerAI:
 /* 0F3F60 802CF5B0 03E00008 */  jr    $ra
 /* 0F3F64 802CF5B4 27BD0018 */   addiu $sp, $sp, 0x18
 
-BringPartnerOut:
+glabel BringPartnerOut
 /* 0F3F68 802CF5B8 27BDFF98 */  addiu $sp, $sp, -0x68
 /* 0F3F6C 802CF5BC AFB10024 */  sw    $s1, 0x24($sp)
 /* 0F3F70 802CF5C0 AFB20028 */  sw    $s2, 0x28($sp)
@@ -2164,7 +2164,7 @@ BringPartnerOut:
 /* 0F4330 802CF980 03E00008 */  jr    $ra
 /* 0F4334 802CF984 27BD0068 */   addiu $sp, $sp, 0x68
 
-PutPartnerAway:
+glabel PutPartnerAway
 /* 0F4338 802CF988 27BDFFB0 */  addiu $sp, $sp, -0x50
 /* 0F433C 802CF98C AFB00010 */  sw    $s0, 0x10($sp)
 /* 0F4340 802CF990 00A0802D */  daddu $s0, $a1, $zero
@@ -2360,7 +2360,7 @@ PutPartnerAway:
 /* 0F461C 802CFC6C 03E00008 */  jr    $ra
 /* 0F4620 802CFC70 27BD0050 */   addiu $sp, $sp, 0x50
 
-GetCurrentPartnerID:
+glabel GetCurrentPartnerID
 /* 0F4624 802CFC74 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0F4628 802CFC78 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 0F462C 802CFC7C 8C82000C */  lw    $v0, 0xc($a0)
@@ -2671,7 +2671,7 @@ GetCurrentPartnerID:
 /* 0F4AC0 802D0110 03E00008 */  jr    $ra
 /* 0F4AC4 802D0114 27BD0048 */   addiu $sp, $sp, 0x48
 
-SetNpcEffect:
+glabel SetNpcEffect
 /* 0F4AC8 802D0118 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 0F4ACC 802D011C AFB10014 */  sw    $s1, 0x14($sp)
 /* 0F4AD0 802D0120 0080882D */  daddu $s1, $a0, $zero
@@ -2711,7 +2711,7 @@ SetNpcEffect:
 /* 0F4B54 802D01A4 03E00008 */  jr    $ra
 /* 0F4B58 802D01A8 27BD0028 */   addiu $sp, $sp, 0x28
 
-PlaySoundAtNpc:
+glabel PlaySoundAtNpc
 /* 0F4B5C 802D01AC 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 0F4B60 802D01B0 AFB1001C */  sw    $s1, 0x1c($sp)
 /* 0F4B64 802D01B4 0080882D */  daddu $s1, $a0, $zero

@@ -6,7 +6,7 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text802D5B10, "ax"
@@ -136,7 +136,7 @@
 /* 0FA688 802D5CD8 03E00008 */  jr    $ra
 /* 0FA68C 802D5CDC 27BD0018 */   addiu $sp, $sp, 0x18
 
-FadeOutMusic:
+glabel FadeOutMusic
 /* 0FA690 802D5CE0 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 0FA694 802D5CE4 AFB1001C */  sw    $s1, 0x1c($sp)
 /* 0FA698 802D5CE8 0080882D */  daddu $s1, $a0, $zero
@@ -165,7 +165,7 @@ FadeOutMusic:
 /* 0FA6F4 802D5D44 03E00008 */  jr    $ra
 /* 0FA6F8 802D5D48 27BD0028 */   addiu $sp, $sp, 0x28
 
-SetMusicTrack:
+glabel SetMusicTrack
 /* 0FA6FC 802D5D4C 27BDFFD0 */  addiu $sp, $sp, -0x30
 /* 0FA700 802D5D50 AFB1001C */  sw    $s1, 0x1c($sp)
 /* 0FA704 802D5D54 0080882D */  daddu $s1, $a0, $zero
@@ -209,7 +209,7 @@ SetMusicTrack:
 /* 0FA79C 802D5DEC 03E00008 */  jr    $ra
 /* 0FA7A0 802D5DF0 27BD0030 */   addiu $sp, $sp, 0x30
 
-FadeInMusic:
+glabel FadeInMusic
 /* 0FA7A4 802D5DF4 27BDFFC8 */  addiu $sp, $sp, -0x38
 /* 0FA7A8 802D5DF8 AFB1001C */  sw    $s1, 0x1c($sp)
 /* 0FA7AC 802D5DFC 0080882D */  daddu $s1, $a0, $zero
@@ -422,7 +422,7 @@ FadeInMusic:
 /* 0FAAC4 802D6114 03E00008 */  jr    $ra
 /* 0FAAC8 802D6118 27BD0018 */   addiu $sp, $sp, 0x18
 
-PlayAmbientSounds:
+glabel PlayAmbientSounds
 /* 0FAACC 802D611C 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0FAAD0 802D6120 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 0FAAD4 802D6124 8C82000C */  lw    $v0, 0xc($a0)
@@ -437,7 +437,7 @@ PlayAmbientSounds:
 /* 0FAAF8 802D6148 03E00008 */  jr    $ra
 /* 0FAAFC 802D614C 27BD0018 */   addiu $sp, $sp, 0x18
 
-PlaySound:
+glabel PlaySound
 /* 0FAB00 802D6150 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0FAB04 802D6154 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 0FAB08 802D6158 8C82000C */  lw    $v0, 0xc($a0)
@@ -475,7 +475,7 @@ PlaySound:
 /* 0FAB84 802D61D4 03E00008 */  jr    $ra
 /* 0FAB88 802D61D8 27BD0020 */   addiu $sp, $sp, 0x20
 
-PlaySoundAt:
+glabel PlaySoundAt
 /* 0FAB8C 802D61DC 27BDFFD0 */  addiu $sp, $sp, -0x30
 /* 0FAB90 802D61E0 AFB1001C */  sw    $s1, 0x1c($sp)
 /* 0FAB94 802D61E4 0080882D */  daddu $s1, $a0, $zero
@@ -532,7 +532,7 @@ PlaySoundAt:
 /* 0FAC60 802D62B0 03E00008 */  jr    $ra
 /* 0FAC64 802D62B4 27BD0030 */   addiu $sp, $sp, 0x30
 
-StopSound:
+glabel StopSound
 /* 0FAC68 802D62B8 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0FAC6C 802D62BC AFBF0010 */  sw    $ra, 0x10($sp)
 /* 0FAC70 802D62C0 8C82000C */  lw    $v0, 0xc($a0)
@@ -558,7 +558,7 @@ StopSound:
 /* 0FACBC 802D630C 03E00008 */  jr    $ra
 /* 0FACC0 802D6310 27BD0018 */   addiu $sp, $sp, 0x18
 
-UseDoorSounds:
+glabel UseDoorSounds
 /* 0FACC4 802D6314 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0FACC8 802D6318 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 0FACCC 802D631C 8C82000C */  lw    $v0, 0xc($a0)
@@ -583,7 +583,7 @@ UseDoorSounds:
 /* 0FAD14 802D6364 03E00008 */  jr    $ra
 /* 0FAD18 802D6368 27BD0018 */   addiu $sp, $sp, 0x18
 
-PlaySoundAtF:
+glabel PlaySoundAtF
 /* 0FAD1C 802D636C 27BDFFC0 */  addiu $sp, $sp, -0x40
 /* 0FAD20 802D6370 AFB1001C */  sw    $s1, 0x1c($sp)
 /* 0FAD24 802D6374 0080882D */  daddu $s1, $a0, $zero
@@ -940,7 +940,7 @@ PlaySoundAtF:
 /* 0FB200 802D6850 03E00008 */  jr    $ra
 /* 0FB204 802D6854 27BD0028 */   addiu $sp, $sp, 0x28
 
-RemoveKeyItemAt:
+glabel RemoveKeyItemAt
 /* 0FB208 802D6858 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0FB20C 802D685C AFBF0010 */  sw    $ra, 0x10($sp)
 /* 0FB210 802D6860 8C82000C */  lw    $v0, 0xc($a0)
@@ -955,7 +955,7 @@ RemoveKeyItemAt:
 /* 0FB234 802D6884 03E00008 */  jr    $ra
 /* 0FB238 802D6888 27BD0018 */   addiu $sp, $sp, 0x18
 
-RemoveItemAt:
+glabel RemoveItemAt
 /* 0FB23C 802D688C 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0FB240 802D6890 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 0FB244 802D6894 8C82000C */  lw    $v0, 0xc($a0)
@@ -972,7 +972,7 @@ RemoveItemAt:
 /* 0FB270 802D68C0 03E00008 */  jr    $ra
 /* 0FB274 802D68C4 27BD0018 */   addiu $sp, $sp, 0x18
 
-AddKeyItem:
+glabel AddKeyItem
 /* 0FB278 802D68C8 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0FB27C 802D68CC AFBF0014 */  sw    $ra, 0x14($sp)
 /* 0FB280 802D68D0 AFB00010 */  sw    $s0, 0x10($sp)
@@ -1034,7 +1034,7 @@ AddKeyItem:
 /* 0FB344 802D6994 03E00008 */  jr    $ra
 /* 0FB348 802D6998 27BD0018 */   addiu $sp, $sp, 0x18
 
-HasKeyItem:
+glabel HasKeyItem
 /* 0FB34C 802D699C 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0FB350 802D69A0 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0FB354 802D69A4 0080882D */  daddu $s1, $a0, $zero
@@ -1068,7 +1068,7 @@ HasKeyItem:
 /* 0FB3BC 802D6A0C 03E00008 */  jr    $ra
 /* 0FB3C0 802D6A10 27BD0020 */   addiu $sp, $sp, 0x20
 
-FindKeyItem:
+glabel FindKeyItem
 /* 0FB3C4 802D6A14 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0FB3C8 802D6A18 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0FB3CC 802D6A1C 0080882D */  daddu $s1, $a0, $zero
@@ -1106,7 +1106,7 @@ FindKeyItem:
 /* 0FB440 802D6A90 03E00008 */  jr    $ra
 /* 0FB444 802D6A94 27BD0020 */   addiu $sp, $sp, 0x20
 
-AddItem:
+glabel AddItem
 /* 0FB448 802D6A98 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0FB44C 802D6A9C AFB10014 */  sw    $s1, 0x14($sp)
 /* 0FB450 802D6AA0 0080882D */  daddu $s1, $a0, $zero
@@ -1141,7 +1141,7 @@ AddItem:
 /* 0FB4C0 802D6B10 03E00008 */  jr    $ra
 /* 0FB4C4 802D6B14 27BD0018 */   addiu $sp, $sp, 0x18
 
-FindItem:
+glabel FindItem
 /* 0FB4C8 802D6B18 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0FB4CC 802D6B1C AFB10014 */  sw    $s1, 0x14($sp)
 /* 0FB4D0 802D6B20 0080882D */  daddu $s1, $a0, $zero
@@ -1179,7 +1179,7 @@ FindItem:
 /* 0FB544 802D6B94 03E00008 */  jr    $ra
 /* 0FB548 802D6B98 27BD0020 */   addiu $sp, $sp, 0x20
 
-RemoveItem:
+glabel RemoveItem
 /* 0FB54C 802D6B9C 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0FB550 802D6BA0 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0FB554 802D6BA4 0080882D */  daddu $s1, $a0, $zero
@@ -1229,7 +1229,7 @@ RemoveItem:
 /* 0FB5F4 802D6C44 03E00008 */  jr    $ra
 /* 0FB5F8 802D6C48 27BD0020 */   addiu $sp, $sp, 0x20
 
-CountFortessKeys:
+glabel CountFortessKeys
 /* 0FB5FC 802D6C4C 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0FB600 802D6C50 AFB00010 */  sw    $s0, 0x10($sp)
 /* 0FB604 802D6C54 0080802D */  daddu $s0, $a0, $zero
@@ -1249,7 +1249,7 @@ CountFortessKeys:
 /* 0FB63C 802D6C8C 03E00008 */  jr    $ra
 /* 0FB640 802D6C90 27BD0020 */   addiu $sp, $sp, 0x20
 
-RemoveFortressKeys:
+glabel RemoveFortressKeys
 /* 0FB644 802D6C94 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0FB648 802D6C98 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 0FB64C 802D6C9C 8C82000C */  lw    $v0, 0xc($a0)
@@ -1262,7 +1262,7 @@ RemoveFortressKeys:
 /* 0FB668 802D6CB8 03E00008 */  jr    $ra
 /* 0FB66C 802D6CBC 27BD0018 */   addiu $sp, $sp, 0x18
 
-MakeItemEntity:
+glabel MakeItemEntity
 /* 0FB670 802D6CC0 27BDFFC8 */  addiu $sp, $sp, -0x38
 /* 0FB674 802D6CC4 AFB1001C */  sw    $s1, 0x1c($sp)
 /* 0FB678 802D6CC8 0080882D */  daddu $s1, $a0, $zero
@@ -1328,7 +1328,7 @@ MakeItemEntity:
 /* 0FB768 802D6DB8 03E00008 */  jr    $ra
 /* 0FB76C 802D6DBC 27BD0038 */   addiu $sp, $sp, 0x38
 
-DropItemEntity:
+glabel DropItemEntity
 /* 0FB770 802D6DC0 27BDFFC8 */  addiu $sp, $sp, -0x38
 /* 0FB774 802D6DC4 AFB1001C */  sw    $s1, 0x1c($sp)
 /* 0FB778 802D6DC8 0080882D */  daddu $s1, $a0, $zero
@@ -1394,7 +1394,7 @@ DropItemEntity:
 /* 0FB868 802D6EB8 03E00008 */  jr    $ra
 /* 0FB86C 802D6EBC 27BD0038 */   addiu $sp, $sp, 0x38
 
-DropItemEntityB:
+glabel DropItemEntityB
 /* 0FB870 802D6EC0 27BDFFC8 */  addiu $sp, $sp, -0x38
 /* 0FB874 802D6EC4 AFB1001C */  sw    $s1, 0x1c($sp)
 /* 0FB878 802D6EC8 0080882D */  daddu $s1, $a0, $zero
@@ -1463,7 +1463,7 @@ DropItemEntityB:
 /* 0FB974 802D6FC4 03E00008 */  jr    $ra
 /* 0FB978 802D6FC8 27BD0038 */   addiu $sp, $sp, 0x38
 
-RemoveItemEntity:
+glabel RemoveItemEntity
 /* 0FB97C 802D6FCC 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0FB980 802D6FD0 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 0FB984 802D6FD4 8C82000C */  lw    $v0, 0xc($a0)
@@ -1476,7 +1476,7 @@ RemoveItemEntity:
 /* 0FB9A0 802D6FF0 03E00008 */  jr    $ra
 /* 0FB9A4 802D6FF4 27BD0018 */   addiu $sp, $sp, 0x18
 
-AddBadge:
+glabel AddBadge
 /* 0FB9A8 802D6FF8 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0FB9AC 802D6FFC AFB10014 */  sw    $s1, 0x14($sp)
 /* 0FB9B0 802D7000 0080882D */  daddu $s1, $a0, $zero
@@ -1500,7 +1500,7 @@ AddBadge:
 /* 0FB9F8 802D7048 03E00008 */  jr    $ra
 /* 0FB9FC 802D704C 27BD0020 */   addiu $sp, $sp, 0x20
 
-RemoveBadge:
+glabel RemoveBadge
 /* 0FBA00 802D7050 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0FBA04 802D7054 AFBF0014 */  sw    $ra, 0x14($sp)
 /* 0FBA08 802D7058 AFB00010 */  sw    $s0, 0x10($sp)
@@ -1538,7 +1538,7 @@ RemoveBadge:
 /* 0FBA78 802D70C8 03E00008 */  jr    $ra
 /* 0FBA7C 802D70CC 27BD0018 */   addiu $sp, $sp, 0x18
 
-SetItemPos:
+glabel SetItemPos
 /* 0FBA80 802D70D0 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 0FBA84 802D70D4 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0FBA88 802D70D8 0080882D */  daddu $s1, $a0, $zero
@@ -1589,7 +1589,7 @@ SetItemPos:
 /* 0FBB3C 802D718C 03E00008 */  jr    $ra
 /* 0FBB40 802D7190 27BD0028 */   addiu $sp, $sp, 0x28
 
-SetItemFlags:
+glabel SetItemFlags
 /* 0FBB44 802D7194 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0FBB48 802D7198 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0FBB4C 802D719C 0080882D */  daddu $s1, $a0, $zero
@@ -1652,7 +1652,7 @@ SetItemFlags:
 /* 0FBC20 802D7270 03E00008 */  jr    $ra
 /* 0FBC24 802D7274 27BD0020 */   addiu $sp, $sp, 0x20
 
-AddCoin:
+glabel AddCoin
 /* 0FBC28 802D7278 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0FBC2C 802D727C AFB00010 */  sw    $s0, 0x10($sp)
 /* 0FBC30 802D7280 0080802D */  daddu $s0, $a0, $zero
@@ -1669,7 +1669,7 @@ AddCoin:
 /* 0FBC5C 802D72AC 03E00008 */  jr    $ra
 /* 0FBC60 802D72B0 27BD0018 */   addiu $sp, $sp, 0x18
 
-AddStarPoints:
+glabel AddStarPoints
 /* 0FBC64 802D72B4 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0FBC68 802D72B8 AFB00010 */  sw    $s0, 0x10($sp)
 /* 0FBC6C 802D72BC 0080802D */  daddu $s0, $a0, $zero
@@ -1686,7 +1686,7 @@ AddStarPoints:
 /* 0FBC98 802D72E8 03E00008 */  jr    $ra
 /* 0FBC9C 802D72EC 27BD0018 */   addiu $sp, $sp, 0x18
 
-AddStarPieces:
+glabel AddStarPieces
 /* 0FBCA0 802D72F0 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0FBCA4 802D72F4 AFB00010 */  sw    $s0, 0x10($sp)
 /* 0FBCA8 802D72F8 0080802D */  daddu $s0, $a0, $zero
@@ -1703,7 +1703,7 @@ AddStarPieces:
 /* 0FBCD4 802D7324 03E00008 */  jr    $ra
 /* 0FBCD8 802D7328 27BD0018 */   addiu $sp, $sp, 0x18
 
-GetItemPower:
+glabel GetItemPower
 /* 0FBCDC 802D732C 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0FBCE0 802D7330 AFB20018 */  sw    $s2, 0x18($sp)
 /* 0FBCE4 802D7334 0080902D */  daddu $s2, $a0, $zero
@@ -1735,7 +1735,7 @@ GetItemPower:
 /* 0FBD4C 802D739C 03E00008 */  jr    $ra
 /* 0FBD50 802D73A0 27BD0020 */   addiu $sp, $sp, 0x20
 
-ShowGotItem:
+glabel ShowGotItem
 /* 0FBD54 802D73A4 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0FBD58 802D73A8 AFB20018 */  sw    $s2, 0x18($sp)
 /* 0FBD5C 802D73AC 0080902D */  daddu $s2, $a0, $zero
@@ -1791,7 +1791,7 @@ ShowGotItem:
 /* 0FBE08 802D7458 27BD0020 */   addiu $sp, $sp, 0x20
 
 /* 0FBE0C 802D745C 00000000 */  nop   
-func_802D7460:
+glabel func_802D7460
 /* 0FBE10 802D7460 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 0FBE14 802D7464 24E2001E */  addiu $v0, $a3, 0x1e
 /* 0FBE18 802D7468 44820000 */  mtc1  $v0, $f0
@@ -1817,7 +1817,7 @@ func_802D7460:
 /* 0FBE68 802D74B8 03E00008 */  jr    $ra
 /* 0FBE6C 802D74BC 27BD0028 */   addiu $sp, $sp, 0x28
 
-func_802D74C0:
+glabel func_802D74C0
 /* 0FBE70 802D74C0 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 0FBE74 802D74C4 24E2001E */  addiu $v0, $a3, 0x1e
 /* 0FBE78 802D74C8 44820000 */  mtc1  $v0, $f0
@@ -2071,7 +2071,7 @@ func_802D74C0:
 /* 0FC248 802D7898 03E00008 */  jr    $ra
 /* 0FC24C 802D789C 27BD0058 */   addiu $sp, $sp, 0x58
 
-ShowEmote:
+glabel ShowEmote
 /* 0FC250 802D78A0 27BDFF90 */  addiu $sp, $sp, -0x70
 /* 0FC254 802D78A4 AFB10034 */  sw    $s1, 0x34($sp)
 /* 0FC258 802D78A8 0080882D */  daddu $s1, $a0, $zero
@@ -2227,7 +2227,7 @@ ShowEmote:
 /* 0FC48C 802D7ADC 03E00008 */  jr    $ra
 /* 0FC490 802D7AE0 27BD0070 */   addiu $sp, $sp, 0x70
 
-RemoveEffect:
+glabel RemoveEffect
 /* 0FC494 802D7AE4 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0FC498 802D7AE8 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 0FC49C 802D7AEC 8C82000C */  lw    $v0, 0xc($a0)
@@ -2587,7 +2587,7 @@ RemoveEffect:
 /* 0FC9D0 802D8020 03E00008 */  jr    $ra
 /* 0FC9D4 802D8024 27BD0060 */   addiu $sp, $sp, 0x60
 
-ShowSleepBubble:
+glabel ShowSleepBubble
 /* 0FC9D8 802D8028 27BDFFA0 */  addiu $sp, $sp, -0x60
 /* 0FC9DC 802D802C AFB1002C */  sw    $s1, 0x2c($sp)
 /* 0FC9E0 802D8030 0080882D */  daddu $s1, $a0, $zero
@@ -2756,7 +2756,7 @@ ShowSleepBubble:
 /* 0FCC44 802D8294 03E00008 */  jr    $ra
 /* 0FCC48 802D8298 27BD0020 */   addiu $sp, $sp, 0x20
 
-PlayEffect:
+glabel PlayEffect
 /* 0FCC4C 802D829C 27BDFF38 */  addiu $sp, $sp, -0xc8
 /* 0FCC50 802D82A0 AFBF0094 */  sw    $ra, 0x94($sp)
 /* 0FCC54 802D82A4 AFBE0090 */  sw    $fp, 0x90($sp)

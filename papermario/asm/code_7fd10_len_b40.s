@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text800E6860, "ax"
 
-func_800E6860:
+glabel func_800E6860
 /* 07FD10 800E6860 27BDFFD0 */  addiu $sp, $sp, -0x30
 /* 07FD14 800E6864 3C038011 */  lui   $v1, 0x8011
 /* 07FD18 800E6868 2463EBB0 */  addiu $v1, $v1, -0x1450
@@ -55,7 +55,7 @@ func_800E6860:
 /* 07FDAC 800E68FC 03E00008 */  jr    $ra
 /* 07FDB0 800E6900 27BD0030 */   addiu $sp, $sp, 0x30
 
-func_800E6904:
+glabel func_800E6904
 /* 07FDB4 800E6904 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 07FDB8 800E6908 AFB10014 */  sw    $s1, 0x14($sp)
 /* 07FDBC 800E690C 3C118011 */  lui   $s1, 0x8011
@@ -118,7 +118,7 @@ func_800E6904:
 /* 07FE84 800E69D4 03E00008 */  jr    $ra
 /* 07FE88 800E69D8 27BD0020 */   addiu $sp, $sp, 0x20
 
-func_800E69DC:
+glabel func_800E69DC
 /* 07FE8C 800E69DC 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 07FE90 800E69E0 AFB20018 */  sw    $s2, 0x18($sp)
 /* 07FE94 800E69E4 3C128011 */  lui   $s2, 0x8011
@@ -231,13 +231,13 @@ func_800E69DC:
 /* 080010 800E6B60 03E00008 */  jr    $ra
 /* 080014 800E6B64 27BD0020 */   addiu $sp, $sp, 0x20
 
-func_800E6B68:
+glabel func_800E6B68
 /* 080018 800E6B68 3C018011 */  lui   $at, 0x8011
 /* 08001C 800E6B6C A420CD00 */  sh    $zero, -0x3300($at)
 /* 080020 800E6B70 03E00008 */  jr    $ra
 /* 080024 800E6B74 00000000 */   nop   
 
-func_800E6B78:
+glabel func_800E6B78
 /* 080028 800E6B78 3C0B8011 */  lui   $t3, 0x8011
 /* 08002C 800E6B7C 256BF290 */  addiu $t3, $t3, -0xd70
 /* 080030 800E6B80 0000502D */  daddu $t2, $zero, $zero
@@ -293,7 +293,7 @@ func_800E6B78:
 /* 0800EC 800E6C3C 03E00008 */  jr    $ra
 /* 0800F0 800E6C40 0140102D */   daddu $v0, $t2, $zero
 
-func_800E6C44:
+glabel func_800E6C44
 /* 0800F4 800E6C44 0000402D */  daddu $t0, $zero, $zero
 /* 0800F8 800E6C48 0100302D */  daddu $a2, $t0, $zero
 /* 0800FC 800E6C4C 3C0B8008 */  lui   $t3, 0x8008
@@ -340,7 +340,7 @@ func_800E6C44:
 /* 08018C 800E6CDC 03E00008 */  jr    $ra
 /* 080190 800E6CE0 0100102D */   daddu $v0, $t0, $zero
 
-func_800E6CE4:
+glabel func_800E6CE4
 /* 080194 800E6CE4 3C038007 */  lui   $v1, 0x8007
 /* 080198 800E6CE8 8C63419C */  lw    $v1, 0x419c($v1)
 /* 08019C 800E6CEC 27BDFFD8 */  addiu $sp, $sp, -0x28
@@ -745,7 +745,7 @@ func_800E6CE4:
 /* 080734 800E7284 03E00008 */  jr    $ra
 /* 080738 800E7288 27BD0028 */   addiu $sp, $sp, 0x28
 
-check_input_status_menu:
+glabel check_input_status_menu
 /* 08073C 800E728C 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 080740 800E7290 0000202D */  daddu $a0, $zero, $zero
 /* 080744 800E7294 3C05F5DE */  lui   $a1, 0xf5de

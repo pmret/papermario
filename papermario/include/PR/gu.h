@@ -95,10 +95,10 @@ extern void 	guDPLoadTextureTile (Gfx *glistp, void *timg,
  */
 extern void guMtxIdent(Mtx *m);
 extern void guMtxIdentF(float mf[4][4]);
-extern void guOrtho(Mtx *m, float l, float r, float b, float t, 
+/*extern void guOrtho(Mtx *m, float l, float r, float b, float t, 
 		    float n, float f, float scale);
 extern void guOrthoF(float mf[4][4], float l, float r, float b, float t, 
-		     float n, float f, float scale);
+		     float n, float f, float scale);*/
 extern void guFrustum(Mtx *m, float l, float r, float b, float t, 
 		      float n, float f, float scale);
 extern void guFrustumF(float mf[4][4], float l, float r, float b, float t, 

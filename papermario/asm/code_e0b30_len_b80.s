@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text8014A430, "ax"
 
-get_default_variation_for_song:
+glabel get_default_variation_for_song
 /* 0E0B30 8014A430 0000302D */  daddu $a2, $zero, $zero
 /* 0E0B34 8014A434 3C078009 */  lui   $a3, 0x8009
 /* 0E0B38 8014A438 24E734F0 */  addiu $a3, $a3, 0x34f0
@@ -42,7 +42,7 @@ get_default_variation_for_song:
 /* 0E0B90 8014A490 03E00008 */  jr    $ra
 /* 0E0B94 8014A494 2402FFFF */   addiu $v0, $zero, -1
 
-func_8014A498:
+glabel func_8014A498
 /* 0E0B98 8014A498 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0E0B9C 8014A49C AFBF0010 */  sw    $ra, 0x10($sp)
 /* 0E0BA0 8014A4A0 0000282D */  daddu $a1, $zero, $zero
@@ -83,7 +83,7 @@ func_8014A498:
 /* 0E0C24 8014A524 03E00008 */  jr    $ra
 /* 0E0C28 8014A528 27BD0018 */   addiu $sp, $sp, 0x18
 
-func_8014A52C:
+glabel func_8014A52C
 /* 0E0C2C 8014A52C 24020008 */  addiu $v0, $zero, 8
 /* 0E0C30 8014A530 3C018016 */  lui   $at, 0x8016
 /* 0E0C34 8014A534 A4229AE2 */  sh    $v0, -0x651e($at)
@@ -92,7 +92,7 @@ func_8014A52C:
 /* 0E0C40 8014A540 03E00008 */  jr    $ra
 /* 0E0C44 8014A544 00000000 */   nop   
 
-func_8014A548:
+glabel func_8014A548
 /* 0E0C48 8014A548 27BDFFC8 */  addiu $sp, $sp, -0x38
 /* 0E0C4C 8014A54C AFB1001C */  sw    $s1, 0x1c($sp)
 /* 0E0C50 8014A550 3C118016 */  lui   $s1, 0x8016
@@ -287,7 +287,7 @@ func_8014A548:
 /* 0E0ED8 8014A7D8 03E00008 */  jr    $ra
 /* 0E0EDC 8014A7DC 27BD0038 */   addiu $sp, $sp, 0x38
 
-_set_music_track:
+glabel _set_music_track
 /* 0E0EE0 8014A7E0 27BDFFD0 */  addiu $sp, $sp, -0x30
 /* 0E0EE4 8014A7E4 AFB20018 */  sw    $s2, 0x18($sp)
 /* 0E0EE8 8014A7E8 00A0902D */  daddu $s2, $a1, $zero
@@ -376,7 +376,7 @@ _set_music_track:
 /* 0E1010 8014A910 03E00008 */  jr    $ra
 /* 0E1014 8014A914 27BD0030 */   addiu $sp, $sp, 0x30
 
-set_music_track:
+glabel set_music_track
 /* 0E1018 8014A918 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0E101C 8014A91C 3C038016 */  lui   $v1, 0x8016
 /* 0E1020 8014A920 24639AF0 */  addiu $v1, $v1, -0x6510
@@ -397,7 +397,7 @@ set_music_track:
 /* 0E105C 8014A95C 03E00008 */  jr    $ra
 /* 0E1060 8014A960 27BD0020 */   addiu $sp, $sp, 0x20
 
-func_8014A964:
+glabel func_8014A964
 /* 0E1064 8014A964 27BDFFD0 */  addiu $sp, $sp, -0x30
 /* 0E1068 8014A968 AFB40020 */  sw    $s4, 0x20($sp)
 /* 0E106C 8014A96C 00A0A02D */  daddu $s4, $a1, $zero
@@ -466,7 +466,7 @@ func_8014A964:
 /* 0E114C 8014AA4C 03E00008 */  jr    $ra
 /* 0E1150 8014AA50 27BD0030 */   addiu $sp, $sp, 0x30
 
-func_8014AA54:
+glabel func_8014AA54
 /* 0E1154 8014AA54 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0E1158 8014AA58 3C028016 */  lui   $v0, 0x8016
 /* 0E115C 8014AA5C 24429AF0 */  addiu $v0, $v0, -0x6510
@@ -526,7 +526,7 @@ func_8014AA54:
 /* 0E1204 8014AB04 03E00008 */  jr    $ra
 /* 0E1208 8014AB08 27BD0018 */   addiu $sp, $sp, 0x18
 
-func_8014AB0C:
+glabel func_8014AB0C
 /* 0E120C 8014AB0C 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0E1210 8014AB10 3C028016 */  lui   $v0, 0x8016
 /* 0E1214 8014AB14 24429AF0 */  addiu $v0, $v0, -0x6510
@@ -602,7 +602,7 @@ func_8014AB0C:
 /* 0E1300 8014AC00 03E00008 */  jr    $ra
 /* 0E1304 8014AC04 27BD0018 */   addiu $sp, $sp, 0x18
 
-func_8014AC08:
+glabel func_8014AC08
 /* 0E1308 8014AC08 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0E130C 8014AC0C 0000202D */  daddu $a0, $zero, $zero
 /* 0E1310 8014AC10 2405FFFF */  addiu $a1, $zero, -1
@@ -625,27 +625,27 @@ func_8014AC08:
 /* 0E1354 8014AC54 03E00008 */  jr    $ra
 /* 0E1358 8014AC58 27BD0020 */   addiu $sp, $sp, 0x20
 
-func_8014AC5C:
+glabel func_8014AC5C
 /* 0E135C 8014AC5C 24020004 */  addiu $v0, $zero, 4
 /* 0E1360 8014AC60 3C018016 */  lui   $at, 0x8016
 /* 0E1364 8014AC64 A4229AE4 */  sh    $v0, -0x651c($at)
 /* 0E1368 8014AC68 03E00008 */  jr    $ra
 /* 0E136C 8014AC6C 00000000 */   nop   
 
-func_8014AC70:
+glabel func_8014AC70
 /* 0E1370 8014AC70 24020008 */  addiu $v0, $zero, 8
 /* 0E1374 8014AC74 3C018016 */  lui   $at, 0x8016
 /* 0E1378 8014AC78 A4229AE4 */  sh    $v0, -0x651c($at)
 /* 0E137C 8014AC7C 03E00008 */  jr    $ra
 /* 0E1380 8014AC80 00000000 */   nop   
 
-func_8014AC84:
+glabel func_8014AC84
 /* 0E1384 8014AC84 3C018016 */  lui   $at, 0x8016
 /* 0E1388 8014AC88 A4249AE2 */  sh    $a0, -0x651e($at)
 /* 0E138C 8014AC8C 03E00008 */  jr    $ra
 /* 0E1390 8014AC90 00000000 */   nop   
 
-func_8014AC94:
+glabel func_8014AC94
 /* 0E1394 8014AC94 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0E1398 8014AC98 3C048015 */  lui   $a0, 0x8015
 /* 0E139C 8014AC9C 2484F738 */  addiu $a0, $a0, -0x8c8
@@ -724,7 +724,7 @@ func_8014AC94:
 /* 0E149C 8014AD9C 03E00008 */  jr    $ra
 /* 0E14A0 8014ADA0 27BD0020 */   addiu $sp, $sp, 0x20
 
-func_8014ADA4:
+glabel func_8014ADA4
 /* 0E14A4 8014ADA4 3C028007 */  lui   $v0, 0x8007
 /* 0E14A8 8014ADA8 8C42419C */  lw    $v0, 0x419c($v0)
 /* 0E14AC 8014ADAC 27BDFFE0 */  addiu $sp, $sp, -0x20
@@ -748,7 +748,7 @@ func_8014ADA4:
 /* 0E14F0 8014ADF0 03E00008 */  jr    $ra
 /* 0E14F4 8014ADF4 27BD0020 */   addiu $sp, $sp, 0x20
 
-func_8014ADF8:
+glabel func_8014ADF8
 /* 0E14F8 8014ADF8 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0E14FC 8014ADFC 0080402D */  daddu $t0, $a0, $zero
 /* 0E1500 8014AE00 3C028007 */  lui   $v0, 0x8007
@@ -780,7 +780,7 @@ func_8014ADF8:
 /* 0E1564 8014AE64 03E00008 */  jr    $ra
 /* 0E1568 8014AE68 27BD0020 */   addiu $sp, $sp, 0x20
 
-func_8014AE6C:
+glabel func_8014AE6C
 /* 0E156C 8014AE6C 3C028007 */  lui   $v0, 0x8007
 /* 0E1570 8014AE70 8C42419C */  lw    $v0, 0x419c($v0)
 /* 0E1574 8014AE74 27BDFFE0 */  addiu $sp, $sp, -0x20
@@ -820,7 +820,7 @@ func_8014AE6C:
 /* 0E15F0 8014AEF0 03E00008 */  jr    $ra
 /* 0E15F4 8014AEF4 27BD0020 */   addiu $sp, $sp, 0x20
 
-func_8014AEF8:
+glabel func_8014AEF8
 /* 0E15F8 8014AEF8 3C028007 */  lui   $v0, 0x8007
 /* 0E15FC 8014AEFC 8C42419C */  lw    $v0, 0x419c($v0)
 /* 0E1600 8014AF00 27BDFFE0 */  addiu $sp, $sp, -0x20
@@ -860,7 +860,7 @@ func_8014AEF8:
 /* 0E1684 8014AF84 03E00008 */  jr    $ra
 /* 0E1688 8014AF88 27BD0020 */   addiu $sp, $sp, 0x20
 
-func_8014AF8C:
+glabel func_8014AF8C
 /* 0E168C 8014AF8C 3C028016 */  lui   $v0, 0x8016
 /* 0E1690 8014AF90 24429AF0 */  addiu $v0, $v0, -0x6510
 /* 0E1694 8014AF94 AC44001C */  sw    $a0, 0x1c($v0)

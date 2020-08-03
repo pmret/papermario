@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text801473F0, "ax"
 
-func_801473F0:
+glabel func_801473F0
 /* 0DDAF0 801473F0 3C038016 */  lui   $v1, 0x8016
 /* 0DDAF4 801473F4 24639D50 */  addiu $v1, $v1, -0x62b0
 /* 0DDAF8 801473F8 2402003F */  addiu $v0, $zero, 0x3f
@@ -23,7 +23,7 @@ func_801473F0:
 /* 0DDB0C 8014740C 03E00008 */  jr    $ra
 /* 0DDB10 80147410 00000000 */   nop   
 
-func_80147414:
+glabel func_80147414
 /* 0DDB14 80147414 0000302D */  daddu $a2, $zero, $zero
 /* 0DDB18 80147418 3C058016 */  lui   $a1, 0x8016
 /* 0DDB1C 8014741C 24A59D50 */  addiu $a1, $a1, -0x62b0
@@ -198,7 +198,7 @@ func_80147414:
 /* 0DDD90 80147690 03E00008 */  jr    $ra
 /* 0DDD94 80147694 A0820000 */   sb    $v0, ($a0)
 
-func_80147698:
+glabel func_80147698
 /* 0DDD98 80147698 27BDFF10 */  addiu $sp, $sp, -0xf0
 /* 0DDD9C 8014769C AFB700DC */  sw    $s7, 0xdc($sp)
 /* 0DDDA0 801476A0 00A0B82D */  daddu $s7, $a1, $zero
@@ -481,7 +481,7 @@ func_80147698:
 /* 0DE1BC 80147ABC 03E00008 */  jr    $ra
 /* 0DE1C0 80147AC0 27BD00F0 */   addiu $sp, $sp, 0xf0
 
-func_80147AC4:
+glabel func_80147AC4
 /* 0DE1C4 80147AC4 27BDFED0 */  addiu $sp, $sp, -0x130
 /* 0DE1C8 80147AC8 27A20020 */  addiu $v0, $sp, 0x20
 /* 0DE1CC 80147ACC 2404FFFF */  addiu $a0, $zero, -1
@@ -615,7 +615,7 @@ func_80147AC4:
 /* 0DE3C0 80147CC0 03E00008 */  jr    $ra
 /* 0DE3C4 80147CC4 27BD0130 */   addiu $sp, $sp, 0x130
 
-func_80147CC8:
+glabel func_80147CC8
 /* 0DE3C8 80147CC8 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0DE3CC 80147CCC 0080582D */  daddu $t3, $a0, $zero
 /* 0DE3D0 80147CD0 3C0A8016 */  lui   $t2, 0x8016
@@ -660,7 +660,7 @@ func_80147CC8:
 /* 0DE468 80147D68 03E00008 */  jr    $ra
 /* 0DE46C 80147D6C 27BD0020 */   addiu $sp, $sp, 0x20
 
-func_80147D70:
+glabel func_80147D70
 /* 0DE470 80147D70 30A200FF */  andi  $v0, $a1, 0xff
 /* 0DE474 80147D74 2C420041 */  sltiu $v0, $v0, 0x41
 /* 0DE478 80147D78 14400002 */  bnez  $v0, .L80147D84
@@ -723,6 +723,7 @@ func_80147D70:
 /* 0DE540 80147E40 03E00008 */  jr    $ra
 /* 0DE544 80147E44 27BD0108 */   addiu $sp, $sp, 0x108
 
+glabel func_80147E48
 /* 0DE548 80147E48 3C028016 */  lui   $v0, 0x8016
 /* 0DE54C 80147E4C 24429D50 */  addiu $v0, $v0, -0x62b0
 /* 0DE550 80147E50 00042140 */  sll   $a0, $a0, 5
@@ -738,7 +739,7 @@ func_80147D70:
 /* 0DE574 80147E74 03E00008 */  jr    $ra
 /* 0DE578 80147E78 00000000 */   nop   
 
-func_80147E7C:
+glabel func_80147E7C
 /* 0DE57C 80147E7C 3C028016 */  lui   $v0, 0x8016
 /* 0DE580 80147E80 24429D50 */  addiu $v0, $v0, -0x62b0
 /* 0DE584 80147E84 00042140 */  sll   $a0, $a0, 5
@@ -761,7 +762,7 @@ func_80147E7C:
 /* 0DE5BC 80147EBC 03E00008 */  jr    $ra
 /* 0DE5C0 80147EC0 00000000 */   nop   
 
-func_80147EC4:
+glabel func_80147EC4
 /* 0DE5C4 80147EC4 3C068016 */  lui   $a2, 0x8016
 /* 0DE5C8 80147EC8 24C69D50 */  addiu $a2, $a2, -0x62b0
 /* 0DE5CC 80147ECC 0000282D */  daddu $a1, $zero, $zero
@@ -793,7 +794,7 @@ func_80147EC4:
 /* 0DE628 80147F28 03E00008 */  jr    $ra
 /* 0DE62C 80147F2C 00000000 */   nop   
 
-func_80147F30:
+glabel func_80147F30
 /* 0DE630 80147F30 27BDFFB8 */  addiu $sp, $sp, -0x48
 /* 0DE634 80147F34 AFB1002C */  sw    $s1, 0x2c($sp)
 /* 0DE638 80147F38 0080882D */  daddu $s1, $a0, $zero

@@ -6,7 +6,7 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text802E3E80, "ax"
@@ -561,7 +561,7 @@
 /* 105EC4 802E4644 03E00008 */  jr    $ra
 /* 105EC8 802E4648 27BD0018 */   addiu $sp, $sp, 0x18
 
-func_802E464C:
+glabel func_802E464C
 /* 105ECC 802E464C 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 105ED0 802E4650 AFB00010 */  sw    $s0, 0x10($sp)
 /* 105ED4 802E4654 AFBF0014 */  sw    $ra, 0x14($sp)
@@ -614,7 +614,7 @@ func_802E464C:
 /* 105F88 802E4708 27BD0018 */   addiu $sp, $sp, 0x18
 
 /* 105F8C 802E470C 00000000 */  nop   
-func_802E4710:
+glabel func_802E4710
 /* 105F90 802E4710 94820024 */  lhu   $v0, 0x24($a0)
 /* 105F94 802E4714 00451023 */  subu  $v0, $v0, $a1
 /* 105F98 802E4718 04420001 */  bltzl $v0, .L802E4720
@@ -625,7 +625,7 @@ func_802E4710:
 /* 105FA8 802E4728 03E00008 */  jr    $ra
 /* 105FAC 802E472C C4400028 */   lwc1  $f0, 0x28($v0)
 
-func_802E4730:
+glabel func_802E4730
 /* 105FB0 802E4730 27BDFF78 */  addiu $sp, $sp, -0x88
 /* 105FB4 802E4734 AFB00060 */  sw    $s0, 0x60($sp)
 /* 105FB8 802E4738 00A0802D */  daddu $s0, $a1, $zero
@@ -880,7 +880,7 @@ func_802E4730:
 /* 106388 802E4B08 03E00008 */  jr    $ra
 /* 10638C 802E4B0C 27BD0018 */   addiu $sp, $sp, 0x18
 
-func_802E4B10:
+glabel func_802E4B10
 /* 106390 802E4B10 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 106394 802E4B14 AFB00010 */  sw    $s0, 0x10($sp)
 /* 106398 802E4B18 0080802D */  daddu $s0, $a0, $zero
@@ -902,7 +902,7 @@ func_802E4B10:
 /* 1063D8 802E4B58 03E00008 */  jr    $ra
 /* 1063DC 802E4B5C 27BD0018 */   addiu $sp, $sp, 0x18
 
-func_802E4B60:
+glabel func_802E4B60
 /* 1063E0 802E4B60 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 1063E4 802E4B64 AFB10014 */  sw    $s1, 0x14($sp)
 /* 1063E8 802E4B68 0080882D */  daddu $s1, $a0, $zero
@@ -951,7 +951,7 @@ func_802E4B60:
 /* 106488 802E4C08 03E00008 */  jr    $ra
 /* 10648C 802E4C0C 27BD0020 */   addiu $sp, $sp, 0x20
 
-func_802E4C10:
+glabel func_802E4C10
 /* 106490 802E4C10 27BDFFD0 */  addiu $sp, $sp, -0x30
 /* 106494 802E4C14 AFB10024 */  sw    $s1, 0x24($sp)
 /* 106498 802E4C18 0080882D */  daddu $s1, $a0, $zero
@@ -1091,7 +1091,7 @@ func_802E4C10:
 /* 10667C 802E4DFC 03E00008 */  jr    $ra
 /* 106680 802E4E00 AC800068 */   sw    $zero, 0x68($a0)
 
-func_802E4E04:
+glabel func_802E4E04
 /* 106684 802E4E04 27BDFFC8 */  addiu $sp, $sp, -0x38
 /* 106688 802E4E08 AFB1001C */  sw    $s1, 0x1c($sp)
 /* 10668C 802E4E0C 0080882D */  daddu $s1, $a0, $zero
@@ -1436,7 +1436,7 @@ func_802E4E04:
 /* 106B9C 802E531C 03E00008 */  jr    $ra
 /* 106BA0 802E5320 27BD0018 */   addiu $sp, $sp, 0x18
 
-func_802E5324:
+glabel func_802E5324
 /* 106BA4 802E5324 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 106BA8 802E5328 AFB10014 */  sw    $s1, 0x14($sp)
 /* 106BAC 802E532C 0080882D */  daddu $s1, $a0, $zero
@@ -1620,7 +1620,7 @@ func_802E5324:
 /* 106E20 802E55A0 03E00008 */  jr    $ra
 /* 106E24 802E55A4 27BD0018 */   addiu $sp, $sp, 0x18
 
-func_802E55A8:
+glabel func_802E55A8
 /* 106E28 802E55A8 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 106E2C 802E55AC AFB00018 */  sw    $s0, 0x18($sp)
 /* 106E30 802E55B0 0080802D */  daddu $s0, $a0, $zero
@@ -1676,7 +1676,7 @@ func_802E55A8:
 /* 106EE8 802E5668 27BD0018 */   addiu $sp, $sp, 0x18
 
 /* 106EEC 802E566C 00000000 */  nop   
-func_802E5670:
+glabel func_802E5670
 /* 106EF0 802E5670 948200D0 */  lhu   $v0, 0xd0($a0)
 /* 106EF4 802E5674 00451023 */  subu  $v0, $v0, $a1
 /* 106EF8 802E5678 04420001 */  bltzl $v0, .L802E5680
@@ -1755,7 +1755,7 @@ func_802E5670:
 /* 107004 802E5784 03E00008 */  jr    $ra
 /* 107008 802E5788 27BD0028 */   addiu $sp, $sp, 0x28
 
-func_802E578C:
+glabel func_802E578C
 /* 10700C 802E578C 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 107010 802E5790 AFB00010 */  sw    $s0, 0x10($sp)
 /* 107014 802E5794 0080802D */  daddu $s0, $a0, $zero
@@ -1795,7 +1795,7 @@ func_802E578C:
 /* 107094 802E5814 03E00008 */  jr    $ra
 /* 107098 802E5818 27BD0018 */   addiu $sp, $sp, 0x18
 
-func_802E581C:
+glabel func_802E581C
 /* 10709C 802E581C 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 1070A0 802E5820 AFB00010 */  sw    $s0, 0x10($sp)
 /* 1070A4 802E5824 0080802D */  daddu $s0, $a0, $zero

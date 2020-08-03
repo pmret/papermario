@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text800F52E0, "ax"
 
-draw_box:
+glabel draw_box
 /* 08E790 800F52E0 27BDFE10 */  addiu $sp, $sp, -0x1f0
 /* 08E794 800F52E4 0000482D */  daddu $t1, $zero, $zero
 /* 08E798 800F52E8 93AE020F */  lbu   $t6, 0x20f($sp)

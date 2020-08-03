@@ -1,9 +1,9 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "globals.inc"
+.include "include/macro.inc"
 
-SetSpriteShading:
+glabel SetSpriteShading
 /* 0FE0B0 802D9700 27BDFF98 */  addiu $sp, $sp, -0x68
 /* 0FE0B4 802D9704 AFBF0064 */  sw    $ra, 0x64($sp)
 /* 0FE0B8 802D9708 AFBE0060 */  sw    $fp, 0x60($sp)

@@ -1,9 +1,9 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "globals.inc"
+.include "include/macro.inc"
 
-gfx_draw_frame:
+glabel gfx_draw_frame
 /* 001F08 80026B08 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 001F0C 80026B0C 3C04800A */  lui   $a0, 0x800a
 /* 001F10 80026B10 8C84A674 */  lw    $a0, -0x598c($a0)
@@ -199,3 +199,5 @@ gfx_draw_frame:
 /* 0021D0 80026DD0 8FB00010 */  lw    $s0, 0x10($sp)
 /* 0021D4 80026DD4 03E00008 */  jr    $ra
 /* 0021D8 80026DD8 27BD0020 */   addiu $sp, $sp, 0x20
+
+.set reorder

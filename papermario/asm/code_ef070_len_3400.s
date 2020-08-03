@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text802CA6C0, "ax"
 
-SetCamEnabled:
+glabel SetCamEnabled
 /* 0EF070 802CA6C0 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0EF074 802CA6C4 AFB00010 */  sw    $s0, 0x10($sp)
 /* 0EF078 802CA6C8 0080802D */  daddu $s0, $a0, $zero
@@ -61,7 +61,7 @@ SetCamEnabled:
 /* 0EF11C 802CA76C 03E00008 */  jr    $ra
 /* 0EF120 802CA770 27BD0020 */   addiu $sp, $sp, 0x20
 
-SetCamFlag80:
+glabel SetCamFlag80
 /* 0EF124 802CA774 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0EF128 802CA778 AFB00010 */  sw    $s0, 0x10($sp)
 /* 0EF12C 802CA77C 0080802D */  daddu $s0, $a0, $zero
@@ -111,7 +111,7 @@ SetCamFlag80:
 /* 0EF1D0 802CA820 03E00008 */  jr    $ra
 /* 0EF1D4 802CA824 27BD0020 */   addiu $sp, $sp, 0x20
 
-SetCamPerspective:
+glabel SetCamPerspective
 /* 0EF1D8 802CA828 27BDFFD0 */  addiu $sp, $sp, -0x30
 /* 0EF1DC 802CA82C AFB10014 */  sw    $s1, 0x14($sp)
 /* 0EF1E0 802CA830 0080882D */  daddu $s1, $a0, $zero
@@ -304,7 +304,7 @@ SetCamPerspective:
 /* 0EF4C0 802CAB10 03E00008 */  jr    $ra
 /* 0EF4C4 802CAB14 27BD0030 */   addiu $sp, $sp, 0x30
 
-SetCamViewport:
+glabel SetCamViewport
 /* 0EF4C8 802CAB18 27BDFFD0 */  addiu $sp, $sp, -0x30
 /* 0EF4CC 802CAB1C AFB1001C */  sw    $s1, 0x1c($sp)
 /* 0EF4D0 802CAB20 0080882D */  daddu $s1, $a0, $zero
@@ -468,7 +468,7 @@ SetCamViewport:
 /* 0EF740 802CAD90 03E00008 */  jr    $ra
 /* 0EF744 802CAD94 27BD0028 */   addiu $sp, $sp, 0x28
 
-SetCamBGColor:
+glabel SetCamBGColor
 /* 0EF748 802CAD98 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 0EF74C 802CAD9C AFB10014 */  sw    $s1, 0x14($sp)
 /* 0EF750 802CADA0 0080882D */  daddu $s1, $a0, $zero
@@ -572,7 +572,7 @@ SetCamBGColor:
 /* 0EF8D4 802CAF24 03E00008 */  jr    $ra
 /* 0EF8D8 802CAF28 27BD0028 */   addiu $sp, $sp, 0x28
 
-SetCamTarget:
+glabel SetCamTarget
 /* 0EF8DC 802CAF2C 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 0EF8E0 802CAF30 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0EF8E4 802CAF34 0080882D */  daddu $s1, $a0, $zero
@@ -812,7 +812,7 @@ SetCamTarget:
 /* 0EFC50 802CB2A0 03E00008 */  jr    $ra
 /* 0EFC54 802CB2A4 27BD0030 */   addiu $sp, $sp, 0x30
 
-ShakeCam:
+glabel ShakeCam
 /* 0EFC58 802CB2A8 27BDFFC0 */  addiu $sp, $sp, -0x40
 /* 0EFC5C 802CB2AC AFB5002C */  sw    $s5, 0x2c($sp)
 /* 0EFC60 802CB2B0 0080A82D */  daddu $s5, $a0, $zero
@@ -1011,7 +1011,7 @@ ShakeCam:
 /* 0EFF14 802CB564 03E00008 */  jr    $ra
 /* 0EFF18 802CB568 27BD0040 */   addiu $sp, $sp, 0x40
 
-exec_ShakeCam1:
+glabel exec_ShakeCam1
 /* 0EFF1C 802CB56C 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0EFF20 802CB570 AFB00010 */  sw    $s0, 0x10($sp)
 /* 0EFF24 802CB574 0080802D */  daddu $s0, $a0, $zero
@@ -1036,7 +1036,7 @@ exec_ShakeCam1:
 /* 0EFF70 802CB5C0 03E00008 */  jr    $ra
 /* 0EFF74 802CB5C4 27BD0020 */   addiu $sp, $sp, 0x20
 
-exec_ShakeCamX:
+glabel exec_ShakeCamX
 /* 0EFF78 802CB5C8 27BDFFD0 */  addiu $sp, $sp, -0x30
 /* 0EFF7C 802CB5CC AFB10014 */  sw    $s1, 0x14($sp)
 /* 0EFF80 802CB5D0 0080882D */  daddu $s1, $a0, $zero
@@ -1084,7 +1084,7 @@ exec_ShakeCamX:
 /* 0F0028 802CB678 03E00008 */  jr    $ra
 /* 0F002C 802CB67C 27BD0030 */   addiu $sp, $sp, 0x30
 
-SetCamLeadPlayer:
+glabel SetCamLeadPlayer
 /* 0F0030 802CB680 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0F0034 802CB684 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0F0038 802CB688 0080882D */  daddu $s1, $a0, $zero
@@ -1161,7 +1161,7 @@ SetCamLeadPlayer:
 /* 0F0144 802CB794 03E00008 */  jr    $ra
 /* 0F0148 802CB798 27BD0020 */   addiu $sp, $sp, 0x20
 
-PanToTarget:
+glabel PanToTarget
 /* 0F014C 802CB79C 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 0F0150 802CB7A0 AFB20018 */  sw    $s2, 0x18($sp)
 /* 0F0154 802CB7A4 0080902D */  daddu $s2, $a0, $zero
@@ -1215,7 +1215,7 @@ PanToTarget:
 /* 0F0208 802CB858 03E00008 */  jr    $ra
 /* 0F020C 802CB85C 27BD0028 */   addiu $sp, $sp, 0x28
 
-UseSettingsFrom:
+glabel UseSettingsFrom
 /* 0F0210 802CB860 27BDFF88 */  addiu $sp, $sp, -0x78
 /* 0F0214 802CB864 AFB1005C */  sw    $s1, 0x5c($sp)
 /* 0F0218 802CB868 0080882D */  daddu $s1, $a0, $zero
@@ -1321,7 +1321,7 @@ UseSettingsFrom:
 /* 0F03A0 802CB9F0 03E00008 */  jr    $ra
 /* 0F03A4 802CB9F4 27BD0078 */   addiu $sp, $sp, 0x78
 
-LoadSettings:
+glabel LoadSettings
 /* 0F03A8 802CB9F8 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0F03AC 802CB9FC AFB10014 */  sw    $s1, 0x14($sp)
 /* 0F03B0 802CBA00 0080882D */  daddu $s1, $a0, $zero
@@ -1371,7 +1371,7 @@ LoadSettings:
 /* 0F045C 802CBAAC 03E00008 */  jr    $ra
 /* 0F0460 802CBAB0 27BD0020 */   addiu $sp, $sp, 0x20
 
-SetCamType:
+glabel SetCamType
 /* 0F0464 802CBAB4 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0F0468 802CBAB8 AFB20018 */  sw    $s2, 0x18($sp)
 /* 0F046C 802CBABC 0080902D */  daddu $s2, $a0, $zero
@@ -1410,7 +1410,7 @@ SetCamType:
 /* 0F04F0 802CBB40 03E00008 */  jr    $ra
 /* 0F04F4 802CBB44 27BD0020 */   addiu $sp, $sp, 0x20
 
-SetCamPitch:
+glabel SetCamPitch
 /* 0F04F8 802CBB48 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 0F04FC 802CBB4C AFB20018 */  sw    $s2, 0x18($sp)
 /* 0F0500 802CBB50 0080902D */  daddu $s2, $a0, $zero
@@ -1451,7 +1451,7 @@ SetCamPitch:
 /* 0F058C 802CBBDC 03E00008 */  jr    $ra
 /* 0F0590 802CBBE0 27BD0028 */   addiu $sp, $sp, 0x28
 
-SetCamDistance:
+glabel SetCamDistance
 /* 0F0594 802CBBE4 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0F0598 802CBBE8 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0F059C 802CBBEC 0080882D */  daddu $s1, $a0, $zero
@@ -1482,7 +1482,7 @@ SetCamDistance:
 /* 0F0600 802CBC50 03E00008 */  jr    $ra
 /* 0F0604 802CBC54 27BD0020 */   addiu $sp, $sp, 0x20
 
-SetCamPosA:
+glabel SetCamPosA
 /* 0F0608 802CBC58 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 0F060C 802CBC5C AFB20018 */  sw    $s2, 0x18($sp)
 /* 0F0610 802CBC60 0080902D */  daddu $s2, $a0, $zero
@@ -1523,7 +1523,7 @@ SetCamPosA:
 /* 0F069C 802CBCEC 03E00008 */  jr    $ra
 /* 0F06A0 802CBCF0 27BD0028 */   addiu $sp, $sp, 0x28
 
-SetCamPosB:
+glabel SetCamPosB
 /* 0F06A4 802CBCF4 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 0F06A8 802CBCF8 AFB20018 */  sw    $s2, 0x18($sp)
 /* 0F06AC 802CBCFC 0080902D */  daddu $s2, $a0, $zero
@@ -1564,7 +1564,7 @@ SetCamPosB:
 /* 0F0738 802CBD88 03E00008 */  jr    $ra
 /* 0F073C 802CBD8C 27BD0028 */   addiu $sp, $sp, 0x28
 
-SetCamPosC:
+glabel SetCamPosC
 /* 0F0740 802CBD90 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 0F0744 802CBD94 AFB20018 */  sw    $s2, 0x18($sp)
 /* 0F0748 802CBD98 0080902D */  daddu $s2, $a0, $zero
@@ -1605,7 +1605,7 @@ SetCamPosC:
 /* 0F07D4 802CBE24 03E00008 */  jr    $ra
 /* 0F07D8 802CBE28 27BD0028 */   addiu $sp, $sp, 0x28
 
-SetPanTarget:
+glabel SetPanTarget
 /* 0F07DC 802CBE2C 27BDFFD0 */  addiu $sp, $sp, -0x30
 /* 0F07E0 802CBE30 AFB20018 */  sw    $s2, 0x18($sp)
 /* 0F07E4 802CBE34 0080902D */  daddu $s2, $a0, $zero
@@ -1656,7 +1656,7 @@ SetPanTarget:
 /* 0F0898 802CBEE8 03E00008 */  jr    $ra
 /* 0F089C 802CBEEC 27BD0030 */   addiu $sp, $sp, 0x30
 
-SetCamSpeed:
+glabel SetCamSpeed
 /* 0F08A0 802CBEF0 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0F08A4 802CBEF4 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0F08A8 802CBEF8 0080882D */  daddu $s1, $a0, $zero
@@ -1687,7 +1687,7 @@ SetCamSpeed:
 /* 0F090C 802CBF5C 03E00008 */  jr    $ra
 /* 0F0910 802CBF60 27BD0020 */   addiu $sp, $sp, 0x20
 
-GetCamType:
+glabel GetCamType
 /* 0F0914 802CBF64 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0F0918 802CBF68 AFB20018 */  sw    $s2, 0x18($sp)
 /* 0F091C 802CBF6C 0080902D */  daddu $s2, $a0, $zero
@@ -1725,7 +1725,7 @@ GetCamType:
 /* 0F099C 802CBFEC 03E00008 */  jr    $ra
 /* 0F09A0 802CBFF0 27BD0020 */   addiu $sp, $sp, 0x20
 
-GetCamPitch:
+glabel GetCamPitch
 /* 0F09A4 802CBFF4 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0F09A8 802CBFF8 AFB20018 */  sw    $s2, 0x18($sp)
 /* 0F09AC 802CBFFC 0080902D */  daddu $s2, $a0, $zero
@@ -1763,7 +1763,7 @@ GetCamPitch:
 /* 0F0A2C 802CC07C 03E00008 */  jr    $ra
 /* 0F0A30 802CC080 27BD0020 */   addiu $sp, $sp, 0x20
 
-GetCamDistance:
+glabel GetCamDistance
 /* 0F0A34 802CC084 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0F0A38 802CC088 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0F0A3C 802CC08C 0080882D */  daddu $s1, $a0, $zero
@@ -1793,7 +1793,7 @@ GetCamDistance:
 /* 0F0A9C 802CC0EC 03E00008 */  jr    $ra
 /* 0F0AA0 802CC0F0 27BD0020 */   addiu $sp, $sp, 0x20
 
-GetCamPosA:
+glabel GetCamPosA
 /* 0F0AA4 802CC0F4 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0F0AA8 802CC0F8 AFB20018 */  sw    $s2, 0x18($sp)
 /* 0F0AAC 802CC0FC 0080902D */  daddu $s2, $a0, $zero
@@ -1831,7 +1831,7 @@ GetCamPosA:
 /* 0F0B2C 802CC17C 03E00008 */  jr    $ra
 /* 0F0B30 802CC180 27BD0020 */   addiu $sp, $sp, 0x20
 
-GetCamPosB:
+glabel GetCamPosB
 /* 0F0B34 802CC184 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0F0B38 802CC188 AFB20018 */  sw    $s2, 0x18($sp)
 /* 0F0B3C 802CC18C 0080902D */  daddu $s2, $a0, $zero
@@ -1869,7 +1869,7 @@ GetCamPosB:
 /* 0F0BBC 802CC20C 03E00008 */  jr    $ra
 /* 0F0BC0 802CC210 27BD0020 */   addiu $sp, $sp, 0x20
 
-GetCamPosC:
+glabel GetCamPosC
 /* 0F0BC4 802CC214 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0F0BC8 802CC218 AFB20018 */  sw    $s2, 0x18($sp)
 /* 0F0BCC 802CC21C 0080902D */  daddu $s2, $a0, $zero
@@ -1907,7 +1907,7 @@ GetCamPosC:
 /* 0F0C4C 802CC29C 03E00008 */  jr    $ra
 /* 0F0C50 802CC2A0 27BD0020 */   addiu $sp, $sp, 0x20
 
-GetCamPosition:
+glabel GetCamPosition
 /* 0F0C54 802CC2A4 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 0F0C58 802CC2A8 AFB20018 */  sw    $s2, 0x18($sp)
 /* 0F0C5C 802CC2AC 0080902D */  daddu $s2, $a0, $zero
@@ -1953,7 +1953,7 @@ GetCamPosition:
 /* 0F0CFC 802CC34C 03E00008 */  jr    $ra
 /* 0F0D00 802CC350 27BD0028 */   addiu $sp, $sp, 0x28
 
-WaitForCam:
+glabel WaitForCam
 /* 0F0D04 802CC354 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0F0D08 802CC358 AFB00010 */  sw    $s0, 0x10($sp)
 /* 0F0D0C 802CC35C 0080802D */  daddu $s0, $a0, $zero
@@ -1995,7 +1995,7 @@ WaitForCam:
 /* 0F0D94 802CC3E4 03E00008 */  jr    $ra
 /* 0F0D98 802CC3E8 27BD0020 */   addiu $sp, $sp, 0x20
 
-SetCamProperties:
+glabel SetCamProperties
 /* 0F0D9C 802CC3EC 27BDFF60 */  addiu $sp, $sp, -0xa0
 /* 0F0DA0 802CC3F0 AFB1005C */  sw    $s1, 0x5c($sp)
 /* 0F0DA4 802CC3F4 0080882D */  daddu $s1, $a0, $zero
@@ -2159,7 +2159,7 @@ SetCamProperties:
 /* 0F1008 802CC658 03E00008 */  jr    $ra
 /* 0F100C 802CC65C 27BD00A0 */   addiu $sp, $sp, 0xa0
 
-AdjustCam:
+glabel AdjustCam
 /* 0F1010 802CC660 27BDFF58 */  addiu $sp, $sp, -0xa8
 /* 0F1014 802CC664 AFB10064 */  sw    $s1, 0x64($sp)
 /* 0F1018 802CC668 0080882D */  daddu $s1, $a0, $zero
@@ -2320,7 +2320,7 @@ AdjustCam:
 /* 0F1270 802CC8C0 03E00008 */  jr    $ra
 /* 0F1274 802CC8C4 27BD00A8 */   addiu $sp, $sp, 0xa8
 
-ResetCam:
+glabel ResetCam
 /* 0F1278 802CC8C8 27BDFF78 */  addiu $sp, $sp, -0x88
 /* 0F127C 802CC8CC AFB1005C */  sw    $s1, 0x5c($sp)
 /* 0F1280 802CC8D0 0080882D */  daddu $s1, $a0, $zero
@@ -2479,7 +2479,7 @@ ResetCam:
 /* 0F14C0 802CCB10 03E00008 */  jr    $ra
 /* 0F14C4 802CCB14 27BD0018 */   addiu $sp, $sp, 0x18
 
-draw_anim_models:
+glabel draw_anim_models
 /* 0F14C8 802CCB18 27BDFDA8 */  addiu $sp, $sp, -0x258
 /* 0F14CC 802CCB1C F7B60250 */  sdc1  $f22, 0x250($sp)
 /* 0F14D0 802CCB20 3C013F80 */  lui   $at, 0x3f80
@@ -2604,7 +2604,7 @@ draw_anim_models:
 /* 0F1694 802CCCE4 03E00008 */  jr    $ra
 /* 0F1698 802CCCE8 24020002 */   addiu $v0, $zero, 2
 
-LoadModelAnimation:
+glabel LoadModelAnimation
 /* 0F169C 802CCCEC 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0F16A0 802CCCF0 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0F16A4 802CCCF4 0080882D */  daddu $s1, $a0, $zero
@@ -2703,7 +2703,7 @@ LoadModelAnimation:
 /* 0F1814 802CCE64 03E00008 */  jr    $ra
 /* 0F1818 802CCE68 27BD0020 */   addiu $sp, $sp, 0x20
 
-PlayModelAnimation:
+glabel PlayModelAnimation
 /* 0F181C 802CCE6C 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0F1820 802CCE70 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0F1824 802CCE74 0080882D */  daddu $s1, $a0, $zero
@@ -2770,7 +2770,7 @@ PlayModelAnimation:
 /* 0F1914 802CCF64 03E00008 */  jr    $ra
 /* 0F1918 802CCF68 27BD0020 */   addiu $sp, $sp, 0x20
 
-ChangeModelAnimation:
+glabel ChangeModelAnimation
 /* 0F191C 802CCF6C 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0F1920 802CCF70 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0F1924 802CCF74 0080882D */  daddu $s1, $a0, $zero
@@ -2803,7 +2803,7 @@ ChangeModelAnimation:
 /* 0F198C 802CCFDC 03E00008 */  jr    $ra
 /* 0F1990 802CCFE0 27BD0020 */   addiu $sp, $sp, 0x20
 
-SetAnimModelPosition:
+glabel SetAnimModelPosition
 /* 0F1994 802CCFE4 27BDFFD0 */  addiu $sp, $sp, -0x30
 /* 0F1998 802CCFE8 AFB20018 */  sw    $s2, 0x18($sp)
 /* 0F199C 802CCFEC 0080902D */  daddu $s2, $a0, $zero
@@ -2848,7 +2848,7 @@ SetAnimModelPosition:
 /* 0F1A38 802CD088 03E00008 */  jr    $ra
 /* 0F1A3C 802CD08C 27BD0030 */   addiu $sp, $sp, 0x30
 
-GetAnimModelPosition:
+glabel GetAnimModelPosition
 /* 0F1A40 802CD090 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 0F1A44 802CD094 AFB20018 */  sw    $s2, 0x18($sp)
 /* 0F1A48 802CD098 0080902D */  daddu $s2, $a0, $zero
@@ -2889,7 +2889,7 @@ GetAnimModelPosition:
 /* 0F1AD4 802CD124 03E00008 */  jr    $ra
 /* 0F1AD8 802CD128 27BD0028 */   addiu $sp, $sp, 0x28
 
-AddAnimModelPosition:
+glabel AddAnimModelPosition
 /* 0F1ADC 802CD12C 27BDFFD0 */  addiu $sp, $sp, -0x30
 /* 0F1AE0 802CD130 AFB20018 */  sw    $s2, 0x18($sp)
 /* 0F1AE4 802CD134 0080902D */  daddu $s2, $a0, $zero
@@ -2940,7 +2940,7 @@ AddAnimModelPosition:
 /* 0F1B98 802CD1E8 03E00008 */  jr    $ra
 /* 0F1B9C 802CD1EC 27BD0030 */   addiu $sp, $sp, 0x30
 
-SetAnimModelRotation:
+glabel SetAnimModelRotation
 /* 0F1BA0 802CD1F0 27BDFFD0 */  addiu $sp, $sp, -0x30
 /* 0F1BA4 802CD1F4 AFB20018 */  sw    $s2, 0x18($sp)
 /* 0F1BA8 802CD1F8 0080902D */  daddu $s2, $a0, $zero
@@ -2985,7 +2985,7 @@ SetAnimModelRotation:
 /* 0F1C44 802CD294 03E00008 */  jr    $ra
 /* 0F1C48 802CD298 27BD0030 */   addiu $sp, $sp, 0x30
 
-SetAnimModelScale:
+glabel SetAnimModelScale
 /* 0F1C4C 802CD29C 27BDFFD0 */  addiu $sp, $sp, -0x30
 /* 0F1C50 802CD2A0 AFB20018 */  sw    $s2, 0x18($sp)
 /* 0F1C54 802CD2A4 0080902D */  daddu $s2, $a0, $zero
@@ -3127,7 +3127,7 @@ SetAnimModelScale:
 /* 0F1E5C 802CD4AC 03E00008 */  jr    $ra
 /* 0F1E60 802CD4B0 27BD0020 */   addiu $sp, $sp, 0x20
 
-func_802CD4B4:
+glabel func_802CD4B4
 /* 0F1E64 802CD4B4 3C028007 */  lui   $v0, 0x8007
 /* 0F1E68 802CD4B8 8C42419C */  lw    $v0, 0x419c($v0)
 /* 0F1E6C 802CD4BC 27BDFFE0 */  addiu $sp, $sp, -0x20
@@ -3186,7 +3186,7 @@ func_802CD4B4:
 /* 0F1F24 802CD574 03E00008 */  jr    $ra
 /* 0F1F28 802CD578 27BD0020 */   addiu $sp, $sp, 0x20
 
-func_802CD57C:
+glabel func_802CD57C
 /* 0F1F2C 802CD57C 3C028007 */  lui   $v0, 0x8007
 /* 0F1F30 802CD580 8C42419C */  lw    $v0, 0x419c($v0)
 /* 0F1F34 802CD584 80420070 */  lb    $v0, 0x70($v0)

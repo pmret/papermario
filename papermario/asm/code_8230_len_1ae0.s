@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text8002CE30, "ax"
 
-nuSiMgrInit:
+glabel nuSiMgrInit
 /* 008230 8002CE30 27BDFFC8 */  addiu $sp, $sp, -0x38
 /* 008234 8002CE34 AFB00030 */  sw    $s0, 0x30($sp)
 /* 008238 8002CE38 3C10800E */  lui   $s0, 0x800e
@@ -77,7 +77,7 @@ nuSiMgrInit:
 /* 008320 8002CF20 03E00008 */  jr    $ra
 /* 008324 8002CF24 27BD0038 */   addiu $sp, $sp, 0x38
 
-nuSiSendMesg:
+glabel nuSiSendMesg
 /* 008328 8002CF28 27BDFFB8 */  addiu $sp, $sp, -0x48
 /* 00832C 8002CF2C AFB00040 */  sw    $s0, 0x40($sp)
 /* 008330 8002CF30 27B00010 */  addiu $s0, $sp, 0x10
@@ -104,7 +104,7 @@ nuSiSendMesg:
 /* 008384 8002CF84 03E00008 */  jr    $ra
 /* 008388 8002CF88 27BD0048 */   addiu $sp, $sp, 0x48
 
-nuSiMgrStop:
+glabel nuSiMgrStop
 /* 00838C 8002CF8C 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 008390 8002CF90 24047F00 */  addiu $a0, $zero, 0x7f00
 /* 008394 8002CF94 AFBF0010 */  sw    $ra, 0x10($sp)
@@ -114,7 +114,7 @@ nuSiMgrStop:
 /* 0083A4 8002CFA4 03E00008 */  jr    $ra
 /* 0083A8 8002CFA8 27BD0018 */   addiu $sp, $sp, 0x18
 
-nuSiMgrRestart:
+glabel nuSiMgrRestart
 /* 0083AC 8002CFAC 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0083B0 8002CFB0 3C04800A */  lui   $a0, 0x800a
 /* 0083B4 8002CFB4 2484E710 */  addiu $a0, $a0, -0x18f0
@@ -125,7 +125,7 @@ nuSiMgrRestart:
 /* 0083C8 8002CFC8 03E00008 */  jr    $ra
 /* 0083CC 8002CFCC 27BD0018 */   addiu $sp, $sp, 0x18
 
-nuSiMgrThread:
+glabel nuSiMgrThread
 /* 0083D0 8002CFD0 27BDFFA8 */  addiu $sp, $sp, -0x58
 /* 0083D4 8002CFD4 AFB00048 */  sw    $s0, 0x48($sp)
 /* 0083D8 8002CFD8 3C10800E */  lui   $s0, 0x800e
@@ -240,7 +240,7 @@ nuSiMgrThread:
 /* 008558 8002D158 0800B402 */  j     .L8002D008
 /* 00855C 8002D15C 00000000 */   nop   
 
-func_8002D160:
+glabel func_8002D160
 /* 008560 8002D160 27BDFFC0 */  addiu $sp, $sp, -0x40
 /* 008564 8002D164 AFB60030 */  sw    $s6, 0x30($sp)
 /* 008568 8002D168 3C16759A */  lui   $s6, 0x759a
@@ -420,7 +420,7 @@ func_8002D160:
 /* 0087F8 8002D3F8 27BD0040 */   addiu $sp, $sp, 0x40
 
 /* 0087FC 8002D3FC 00000000 */  nop   
-update_cameras:
+glabel update_cameras
 /* 008800 8002D400 27BDFF90 */  addiu $sp, $sp, -0x70
 /* 008804 8002D404 F7B60068 */  sdc1  $f22, 0x68($sp)
 /* 008808 8002D408 3C013F80 */  lui   $at, 0x3f80
@@ -646,7 +646,7 @@ update_cameras:
 /* 008B34 8002D734 03E00008 */  jr    $ra
 /* 008B38 8002D738 27BD0070 */   addiu $sp, $sp, 0x70
 
-render_frame:
+glabel render_frame
 /* 008B3C 8002D73C 27BDFF90 */  addiu $sp, $sp, -0x70
 /* 008B40 8002D740 AFBF0054 */  sw    $ra, 0x54($sp)
 /* 008B44 8002D744 AFBE0050 */  sw    $fp, 0x50($sp)
@@ -1167,7 +1167,7 @@ render_frame:
 /* 0092EC 8002DEEC 03E00008 */  jr    $ra
 /* 0092F0 8002DEF0 27BD0070 */   addiu $sp, $sp, 0x70
 
-create_cameras_a:
+glabel create_cameras_a
 /* 0092F4 8002DEF4 27BDFFB8 */  addiu $sp, $sp, -0x48
 /* 0092F8 8002DEF8 AFB60040 */  sw    $s6, 0x40($sp)
 /* 0092FC 8002DEFC 27B60010 */  addiu $s6, $sp, 0x10
@@ -1251,7 +1251,7 @@ create_cameras_a:
 /* 009430 8002E030 03E00008 */  jr    $ra
 /* 009434 8002E034 27BD0048 */   addiu $sp, $sp, 0x48
 
-create_cameras_b:
+glabel create_cameras_b
 /* 009438 8002E038 27BDFFB8 */  addiu $sp, $sp, -0x48
 /* 00943C 8002E03C AFB60040 */  sw    $s6, 0x40($sp)
 /* 009440 8002E040 27B60010 */  addiu $s6, $sp, 0x10
@@ -1331,7 +1331,7 @@ create_cameras_b:
 /* 009564 8002E164 03E00008 */  jr    $ra
 /* 009568 8002E168 27BD0048 */   addiu $sp, $sp, 0x48
 
-initialize_next_camera:
+glabel initialize_next_camera
 /* 00956C 8002E16C 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 009570 8002E170 0080382D */  daddu $a3, $a0, $zero
 /* 009574 8002E174 0000202D */  daddu $a0, $zero, $zero
@@ -1444,7 +1444,7 @@ initialize_next_camera:
 /* 00970C 8002E30C 03E00008 */  jr    $ra
 /* 009710 8002E310 27BD0020 */   addiu $sp, $sp, 0x20
 
-set_cam_viewport:
+glabel set_cam_viewport
 /* 009714 8002E314 3C08800B */  lui   $t0, 0x800b
 /* 009718 8002E318 25081D80 */  addiu $t0, $t0, 0x1d80
 /* 00971C 8002E31C 00042400 */  sll   $a0, $a0, 0x10
@@ -1563,7 +1563,7 @@ set_cam_viewport:
 /* 0098E0 8002E4E0 03E00008 */  jr    $ra
 /* 0098E4 8002E4E4 A46000BE */   sh    $zero, 0xbe($v1)
 
-get_cam_viewport:
+glabel get_cam_viewport
 /* 0098E8 8002E4E8 3C08800B */  lui   $t0, 0x800b
 /* 0098EC 8002E4EC 25081D80 */  addiu $t0, $t0, 0x1d80
 /* 0098F0 8002E4F0 00041080 */  sll   $v0, $a0, 2
@@ -1585,7 +1585,7 @@ get_cam_viewport:
 /* 009930 8002E530 03E00008 */  jr    $ra
 /* 009934 8002E534 A4C20000 */   sh    $v0, ($a2)
 
-get_screen_coords:
+glabel get_screen_coords
 /* 009938 8002E538 27BDFFB0 */  addiu $sp, $sp, -0x50
 /* 00993C 8002E53C AFB20040 */  sw    $s2, 0x40($sp)
 /* 009940 8002E540 8FB20060 */  lw    $s2, 0x60($sp)

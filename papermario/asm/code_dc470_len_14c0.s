@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text80145D70, "ax"
 
-load_map_bg:
+glabel load_map_bg
 /* 0DC470 80145D70 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0DC474 80145D74 AFBF001C */  sw    $ra, 0x1c($sp)
 /* 0DC478 80145D78 1080001B */  beqz  $a0, .L80145DE8
@@ -49,7 +49,7 @@ load_map_bg:
 /* 0DC4F0 80145DF0 03E00008 */  jr    $ra
 /* 0DC4F4 80145DF4 27BD0020 */   addiu $sp, $sp, 0x20
 
-func_80145DF8:
+glabel func_80145DF8
 /* 0DC4F8 80145DF8 3C028007 */  lui   $v0, 0x8007
 /* 0DC4FC 80145DFC 8C42419C */  lw    $v0, 0x419c($v0)
 /* 0DC500 80145E00 94430148 */  lhu   $v1, 0x148($v0)
@@ -63,7 +63,7 @@ func_80145DF8:
 /* 0DC520 80145E20 03E00008 */  jr    $ra
 /* 0DC524 80145E24 A4430148 */   sh    $v1, 0x148($v0)
 
-read_background_size:
+glabel read_background_size
 /* 0DC528 80145E28 3C038007 */  lui   $v1, 0x8007
 /* 0DC52C 80145E2C 8C63419C */  lw    $v1, 0x419c($v1)
 /* 0DC530 80145E30 9482000C */  lhu   $v0, 0xc($a0)
@@ -83,7 +83,7 @@ read_background_size:
 /* 0DC568 80145E68 03E00008 */  jr    $ra
 /* 0DC56C 80145E6C AC640158 */   sw    $a0, 0x158($v1)
 
-set_background_size:
+glabel set_background_size
 /* 0DC570 80145E70 3C028007 */  lui   $v0, 0x8007
 /* 0DC574 80145E74 8C42419C */  lw    $v0, 0x419c($v0)
 /* 0DC578 80145E78 94430148 */  lhu   $v1, 0x148($v0)
@@ -95,7 +95,7 @@ set_background_size:
 /* 0DC590 80145E90 03E00008 */  jr    $ra
 /* 0DC594 80145E94 A4430148 */   sh    $v1, 0x148($v0)
 
-func_80145E98:
+glabel func_80145E98
 /* 0DC598 80145E98 3082FFFF */  andi  $v0, $a0, 0xffff
 /* 0DC59C 80145E9C 00A22823 */  subu  $a1, $a1, $v0
 /* 0DC5A0 80145EA0 00A60018 */  mult  $a1, $a2
@@ -108,7 +108,7 @@ func_80145E98:
 /* 0DC5B8 80145EB8 03E00008 */  jr    $ra
 /* 0DC5BC 80145EBC 3042FFFF */   andi  $v0, $v0, 0xffff
 
-func_80145EC0:
+glabel func_80145EC0
 /* 0DC5C0 80145EC0 27BDFF48 */  addiu $sp, $sp, -0xb8
 /* 0DC5C4 80145EC4 AFB00080 */  sw    $s0, 0x80($sp)
 /* 0DC5C8 80145EC8 0000802D */  daddu $s0, $zero, $zero

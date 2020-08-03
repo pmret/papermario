@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text802DEAA0, "ax"
 
-func_802DEAA0:
+glabel func_802DEAA0
 /* 101B90 802DEAA0 00C0102D */  daddu $v0, $a2, $zero
 /* 101B94 802DEAA4 24C60010 */  addiu $a2, $a2, 0x10
 /* 101B98 802DEAA8 2408FFFF */  addiu $t0, $zero, -1
@@ -46,7 +46,7 @@ func_802DEAA0:
 /* 101BF4 802DEB04 03E00008 */  jr    $ra
 /* 101BF8 802DEB08 00000000 */   nop   
 
-load_sprite:
+glabel load_sprite
 /* 101BFC 802DEB0C 27BDFFD0 */  addiu $sp, $sp, -0x30
 /* 101C00 802DEB10 AFB50024 */  sw    $s5, 0x24($sp)
 /* 101C04 802DEB14 0080A82D */  daddu $s5, $a0, $zero
@@ -211,7 +211,7 @@ load_sprite:
 /* 101E48 802DED58 03E00008 */  jr    $ra
 /* 101E4C 802DED5C 27BD0030 */   addiu $sp, $sp, 0x30
 
-func_802DED60:
+glabel func_802DED60
 /* 101E50 802DED60 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 101E54 802DED64 AFB10014 */  sw    $s1, 0x14($sp)
 /* 101E58 802DED68 0080882D */  daddu $s1, $a0, $zero
@@ -295,7 +295,7 @@ func_802DED60:
 /* 101F88 802DEE98 03E00008 */  jr    $ra
 /* 101F8C 802DEE9C 27BD0020 */   addiu $sp, $sp, 0x20
 
-func_802DEEA0:
+glabel func_802DEEA0
 /* 101F90 802DEEA0 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 101F94 802DEEA4 0080382D */  daddu $a3, $a0, $zero
 /* 101F98 802DEEA8 AFB00010 */  sw    $s0, 0x10($sp)
@@ -376,7 +376,7 @@ func_802DEEA0:
 /* 10209C 802DEFAC 03E00008 */  jr    $ra
 /* 1020A0 802DEFB0 27BD0018 */   addiu $sp, $sp, 0x18
 
-func_802DEFB4:
+glabel func_802DEFB4
 /* 1020A4 802DEFB4 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 1020A8 802DEFB8 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 1020AC 802DEFBC 0C04E934 */  jal   func_8013A4D0
@@ -403,7 +403,7 @@ func_802DEFB4:
 /* 1020F4 802DF004 03E00008 */  jr    $ra
 /* 1020F8 802DF008 27BD0018 */   addiu $sp, $sp, 0x18
 
-func_802DF00C:
+glabel func_802DF00C
 /* 1020FC 802DF00C 27BDFE30 */  addiu $sp, $sp, -0x1d0
 /* 102100 802DF010 AFB601C0 */  sw    $s6, 0x1c0($sp)
 /* 102104 802DF014 0080B02D */  daddu $s6, $a0, $zero
@@ -613,7 +613,7 @@ func_802DF00C:
 /* 1023C0 802DF2D0 03E00008 */  jr    $ra
 /* 1023C4 802DF2D4 27BD01D0 */   addiu $sp, $sp, 0x1d0
 
-func_802DF2D8:
+glabel func_802DF2D8
 /* 1023C8 802DF2D8 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 1023CC 802DF2DC AFB00010 */  sw    $s0, 0x10($sp)
 /* 1023D0 802DF2E0 0080802D */  daddu $s0, $a0, $zero

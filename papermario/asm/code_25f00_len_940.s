@@ -6,7 +6,7 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text8004AB00, "ax"
@@ -385,7 +385,7 @@
 /* 02646C 8004B06C 08012BA8 */  j     .L8004AEA0
 /* 026470 8004B070 A2E20000 */   sb    $v0, ($s7)
 
-nuAuDmaCallBack:
+glabel nuAuDmaCallBack
 /* 026474 8004B074 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 026478 8004B078 AFB3001C */  sw    $s3, 0x1c($sp)
 /* 02647C 8004B07C 0080982D */  daddu $s3, $a0, $zero
@@ -509,7 +509,7 @@ nuAuDmaCallBack:
 /* 02661C 8004B21C 03E00008 */  jr    $ra
 /* 026620 8004B220 27BD0028 */   addiu $sp, $sp, 0x28
 
-nuAuDmaNew:
+glabel nuAuDmaNew
 /* 026624 8004B224 3C03800A */  lui   $v1, 0x800a
 /* 026628 8004B228 24633BD0 */  addiu $v1, $v1, 0x3bd0
 /* 02662C 8004B22C 90620000 */  lbu   $v0, ($v1)
@@ -529,7 +529,7 @@ nuAuDmaNew:
 /* 026660 8004B260 03E00008 */  jr    $ra
 /* 026664 8004B264 AC830000 */   sw    $v1, ($a0)
 
-nuAuCleanDMABuffers:
+glabel nuAuCleanDMABuffers
 /* 026668 8004B268 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 02666C 8004B26C 3C02800A */  lui   $v0, 0x800a
 /* 026670 8004B270 24423BD0 */  addiu $v0, $v0, 0x3bd0
@@ -639,7 +639,7 @@ nuAuCleanDMABuffers:
 /* 0267E4 8004B3E4 03E00008 */  jr    $ra
 /* 0267E8 8004B3E8 27BD0018 */   addiu $sp, $sp, 0x18
 
-alLink:
+glabel alLink
 /* 0267EC 8004B3EC 8CA20000 */  lw    $v0, ($a1)
 /* 0267F0 8004B3F0 AC850004 */  sw    $a1, 4($a0)
 /* 0267F4 8004B3F4 AC820000 */  sw    $v0, ($a0)
@@ -650,7 +650,7 @@ alLink:
 /* 026804 8004B404 03E00008 */  jr    $ra
 /* 026808 8004B408 ACA40000 */   sw    $a0, ($a1)
 
-alUnlink:
+glabel alUnlink
 /* 02680C 8004B40C 8C830000 */  lw    $v1, ($a0)
 /* 026810 8004B410 10600003 */  beqz  $v1, .L8004B420
 /* 026814 8004B414 00000000 */   nop   

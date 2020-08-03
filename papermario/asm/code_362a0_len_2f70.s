@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text8005AEA0, "ax"
 
-allocate_hit_tables:
+glabel allocate_hit_tables
 /* 0362A0 8005AEA0 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0362A4 8005AEA4 AFB00010 */  sw    $s0, 0x10($sp)
 /* 0362A8 8005AEA8 3C10800B */  lui   $s0, 0x800b
@@ -74,14 +74,14 @@ allocate_hit_tables:
 /* 03637C 8005AF7C 03E00008 */  jr    $ra
 /* 036380 8005AF80 27BD0018 */   addiu $sp, $sp, 0x18
 
-func_8005AF84:
+glabel func_8005AF84
 /* 036384 8005AF84 03E00008 */  jr    $ra
 /* 036388 8005AF88 00000000 */   nop   
 
 /* 03638C 8005AF8C 03E00008 */  jr    $ra
 /* 036390 8005AF90 00000000 */   nop   
 
-initialize_collision:
+glabel initialize_collision
 /* 036394 8005AF94 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 036398 8005AF98 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 03639C 8005AF9C 3C01800B */  lui   $at, 0x800b
@@ -94,7 +94,7 @@ initialize_collision:
 /* 0363B8 8005AFB8 03E00008 */  jr    $ra
 /* 0363BC 8005AFBC 27BD0018 */   addiu $sp, $sp, 0x18
 
-load_hit_asset:
+glabel load_hit_asset
 /* 0363C0 8005AFC0 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 0363C4 8005AFC4 AFBF0024 */  sw    $ra, 0x24($sp)
 /* 0363C8 8005AFC8 AFB20020 */  sw    $s2, 0x20($sp)
@@ -134,7 +134,7 @@ load_hit_asset:
 /* 036450 8005B050 03E00008 */  jr    $ra
 /* 036454 8005B054 27BD0028 */   addiu $sp, $sp, 0x28
 
-load_collision:
+glabel load_collision
 /* 036458 8005B058 27BDFFD0 */  addiu $sp, $sp, -0x30
 /* 03645C 8005B05C AFBF002C */  sw    $ra, 0x2c($sp)
 /* 036460 8005B060 AFB60028 */  sw    $s6, 0x28($sp)
@@ -223,7 +223,7 @@ load_collision:
 /* 036598 8005B198 03E00008 */  jr    $ra
 /* 03659C 8005B19C 27BD0030 */   addiu $sp, $sp, 0x30
 
-load_stage_collision:
+glabel load_stage_collision
 /* 0365A0 8005B1A0 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 0365A4 8005B1A4 AFB00018 */  sw    $s0, 0x18($sp)
 /* 0365A8 8005B1A8 0080802D */  daddu $s0, $a0, $zero
@@ -267,7 +267,7 @@ load_stage_collision:
 /* 036634 8005B234 03E00008 */  jr    $ra
 /* 036638 8005B238 27BD0028 */   addiu $sp, $sp, 0x28
 
-load_hit_data:
+glabel load_hit_data
 /* 03663C 8005B23C 27BDFF90 */  addiu $sp, $sp, -0x70
 /* 036640 8005B240 AFB60038 */  sw    $s6, 0x38($sp)
 /* 036644 8005B244 0000B02D */  daddu $s6, $zero, $zero
@@ -628,7 +628,7 @@ load_hit_data:
 /* 036B78 8005B778 03E00008 */  jr    $ra
 /* 036B7C 8005B77C 27BD0070 */   addiu $sp, $sp, 0x70
 
-parent_collider_to_model:
+glabel parent_collider_to_model
 /* 036B80 8005B780 27BDFFC8 */  addiu $sp, $sp, -0x38
 /* 036B84 8005B784 00042400 */  sll   $a0, $a0, 0x10
 /* 036B88 8005B788 00042403 */  sra   $a0, $a0, 0x10
@@ -772,7 +772,7 @@ parent_collider_to_model:
 /* 036D98 8005B998 03E00008 */  jr    $ra
 /* 036D9C 8005B99C 27BD0038 */   addiu $sp, $sp, 0x38
 
-_add_hit_vert_to_buffer:
+glabel _add_hit_vert_to_buffer
 /* 036DA0 8005B9A0 8CC80000 */  lw    $t0, ($a2)
 /* 036DA4 8005B9A4 19000009 */  blez  $t0, .L8005B9CC
 /* 036DA8 8005B9A8 0000182D */   daddu $v1, $zero, $zero
@@ -798,7 +798,7 @@ _add_hit_vert_to_buffer:
 /* 036DEC 8005B9EC 03E00008 */  jr    $ra
 /* 036DF0 8005B9F0 00000000 */   nop   
 
-_get_hit_vert_index_from_buffer:
+glabel _get_hit_vert_index_from_buffer
 /* 036DF4 8005B9F4 8CC60000 */  lw    $a2, ($a2)
 /* 036DF8 8005B9F8 18C00008 */  blez  $a2, .L8005BA1C
 /* 036DFC 8005B9FC 0000182D */   daddu $v1, $zero, $zero
@@ -814,7 +814,7 @@ _get_hit_vert_index_from_buffer:
 /* 036E1C 8005BA1C 03E00008 */  jr    $ra
 /* 036E20 8005BA20 0060102D */   daddu $v0, $v1, $zero
 
-update_collider_transform:
+glabel update_collider_transform
 /* 036E24 8005BA24 27BDFF58 */  addiu $sp, $sp, -0xa8
 /* 036E28 8005BA28 00042400 */  sll   $a0, $a0, 0x10
 /* 036E2C 8005BA2C 00042403 */  sra   $a0, $a0, 0x10
@@ -1058,7 +1058,7 @@ update_collider_transform:
 /* 0371A0 8005BDA0 03E00008 */  jr    $ra
 /* 0371A4 8005BDA4 27BD00A8 */   addiu $sp, $sp, 0xa8
 
-get_collider_type_by_id:
+glabel get_collider_type_by_id
 /* 0371A8 8005BDA8 30824000 */  andi  $v0, $a0, 0x4000
 /* 0371AC 8005BDAC 14400008 */  bnez  $v0, .L8005BDD0
 /* 0371B0 8005BDB0 000410C0 */   sll   $v0, $a0, 3
@@ -1074,7 +1074,7 @@ get_collider_type_by_id:
 /* 0371D0 8005BDD0 03E00008 */  jr    $ra
 /* 0371D4 8005BDD4 0000102D */   daddu $v0, $zero, $zero
 
-func_8005BDD8:
+glabel func_8005BDD8
 /* 0371D8 8005BDD8 000410C0 */  sll   $v0, $a0, 3
 /* 0371DC 8005BDDC 00441023 */  subu  $v0, $v0, $a0
 /* 0371E0 8005BDE0 3C03800B */  lui   $v1, 0x800b
@@ -1090,7 +1090,7 @@ func_8005BDD8:
 /* 037208 8005BE08 03E00008 */  jr    $ra
 /* 03720C 8005BE0C E4E00000 */   swc1  $f0, ($a3)
 
-get_collider_center:
+glabel get_collider_center
 /* 037210 8005BE10 000410C0 */  sll   $v0, $a0, 3
 /* 037214 8005BE14 00441023 */  subu  $v0, $v0, $a0
 /* 037218 8005BE18 3C03800B */  lui   $v1, 0x800b
@@ -1121,7 +1121,7 @@ get_collider_center:
 /* 03727C 8005BE7C 03E00008 */  jr    $ra
 /* 037280 8005BE80 E4E00000 */   swc1  $f0, ($a3)
 
-test_ray_triangle_general:
+glabel test_ray_triangle_general
 /* 037284 8005BE84 27BDFFC0 */  addiu $sp, $sp, -0x40
 /* 037288 8005BE88 F7BE0038 */  sdc1  $f30, 0x38($sp)
 /* 03728C 8005BE8C F7BC0030 */  sdc1  $f28, 0x30($sp)
@@ -1519,7 +1519,7 @@ test_ray_triangle_general:
 /* 037894 8005C494 03E00008 */  jr    $ra
 /* 037898 8005C498 27BD0040 */   addiu $sp, $sp, 0x40
 
-test_down_ray_triangle:
+glabel test_down_ray_triangle
 /* 03789C 8005C49C C4800030 */  lwc1  $f0, 0x30($a0)
 /* 0378A0 8005C4A0 44801000 */  mtc1  $zero, $f2
 /* 0378A4 8005C4A4 00000000 */  nop   
@@ -1723,7 +1723,7 @@ test_down_ray_triangle:
 /* 037B9C 8005C79C 03E00008 */  jr    $ra
 /* 037BA0 8005C7A0 24020001 */   addiu $v0, $zero, 1
 
-test_up_ray_triangle:
+glabel test_up_ray_triangle
 /* 037BA4 8005C7A4 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 037BA8 8005C7A8 F7BC0020 */  sdc1  $f28, 0x20($sp)
 /* 037BAC 8005C7AC F7BA0018 */  sdc1  $f26, 0x18($sp)
@@ -2062,7 +2062,7 @@ test_up_ray_triangle:
 /* 0380C8 8005CCC8 03E00008 */  jr    $ra
 /* 0380CC 8005CCCC 27BD0028 */   addiu $sp, $sp, 0x28
 
-test_ray_colliders:
+glabel test_ray_colliders
 /* 0380D0 8005CCD0 27BDFF98 */  addiu $sp, $sp, -0x68
 /* 0380D4 8005CCD4 44854000 */  mtc1  $a1, $f8
 /* 0380D8 8005CCD8 44866000 */  mtc1  $a2, $f12
@@ -2366,7 +2366,7 @@ test_ray_colliders:
 /* 03851C 8005D11C 03E00008 */  jr    $ra
 /* 038520 8005D120 27BD0068 */   addiu $sp, $sp, 0x68
 
-test_ray_zones:
+glabel test_ray_zones
 /* 038524 8005D124 27BDFFC8 */  addiu $sp, $sp, -0x38
 /* 038528 8005D128 C7A00048 */  lwc1  $f0, 0x48($sp)
 /* 03852C 8005D12C C7A2004C */  lwc1  $f2, 0x4c($sp)
@@ -2484,7 +2484,7 @@ test_ray_zones:
 /* 0386D4 8005D2D4 03E00008 */  jr    $ra
 /* 0386D8 8005D2D8 27BD0038 */   addiu $sp, $sp, 0x38
 
-test_up_ray_collider:
+glabel test_up_ray_collider
 /* 0386DC 8005D2DC 27BDFFA8 */  addiu $sp, $sp, -0x58
 /* 0386E0 8005D2E0 F7B80040 */  sdc1  $f24, 0x40($sp)
 /* 0386E4 8005D2E4 4486C000 */  mtc1  $a2, $f24
@@ -2580,7 +2580,7 @@ test_up_ray_collider:
 /* 038840 8005D440 03E00008 */  jr    $ra
 /* 038844 8005D444 27BD0058 */   addiu $sp, $sp, 0x58
 
-test_ray_entities:
+glabel test_ray_entities
 /* 038848 8005D448 27BDFE60 */  addiu $sp, $sp, -0x1a0
 /* 03884C 8005D44C 44800000 */  mtc1  $zero, $f0
 /* 038850 8005D450 2409FFFF */  addiu $t1, $zero, -1

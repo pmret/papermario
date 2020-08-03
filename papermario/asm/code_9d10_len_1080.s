@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text8002E910, "ax"
 
-do_camera_type_4:
+glabel do_camera_type_4
 /* 009D10 8002E910 27BDFFB8 */  addiu $sp, $sp, -0x48
 /* 009D14 8002E914 AFB00010 */  sw    $s0, 0x10($sp)
 /* 009D18 8002E918 0080802D */  daddu $s0, $a0, $zero
@@ -269,7 +269,7 @@ do_camera_type_4:
 /* 00A0F0 8002ECF0 03E00008 */  jr    $ra
 /* 00A0F4 8002ECF4 27BD0048 */   addiu $sp, $sp, 0x48
 
-do_camera_type_2:
+glabel do_camera_type_2
 /* 00A0F8 8002ECF8 27BDFFB8 */  addiu $sp, $sp, -0x48
 /* 00A0FC 8002ECFC AFB00010 */  sw    $s0, 0x10($sp)
 /* 00A100 8002ED00 0080802D */  daddu $s0, $a0, $zero
@@ -639,7 +639,7 @@ do_camera_type_2:
 /* 00A688 8002F288 03E00008 */  jr    $ra
 /* 00A68C 8002F28C 27BD0048 */   addiu $sp, $sp, 0x48
 
-do_camera_type_1:
+glabel do_camera_type_1
 /* 00A690 8002F290 27BDFF90 */  addiu $sp, $sp, -0x70
 /* 00A694 8002F294 AFB10034 */  sw    $s1, 0x34($sp)
 /* 00A698 8002F298 0080882D */  daddu $s1, $a0, $zero
@@ -1015,7 +1015,7 @@ do_camera_type_1:
 /* 00AC48 8002F848 03E00008 */  jr    $ra
 /* 00AC4C 8002F84C 27BD0070 */   addiu $sp, $sp, 0x70
 
-do_camera_type_0:
+glabel do_camera_type_0
 /* 00AC50 8002F850 27BDFFC8 */  addiu $sp, $sp, -0x38
 /* 00AC54 8002F854 AFB00010 */  sw    $s0, 0x10($sp)
 /* 00AC58 8002F858 0080802D */  daddu $s0, $a0, $zero

@@ -6,12 +6,12 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
-.include "globals.inc"
+.include "macro.inc"
 
 
 .section .text8002F990, "ax"
 
-do_camera_type_6:
+glabel do_camera_type_6
 /* 00AD90 8002F990 27BDFFB8 */  addiu $sp, $sp, -0x48
 /* 00AD94 8002F994 AFB00010 */  sw    $s0, 0x10($sp)
 /* 00AD98 8002F998 0080802D */  daddu $s0, $a0, $zero
@@ -232,7 +232,7 @@ do_camera_type_6:
 /* 00B0D8 8002FCD8 27BD0048 */   addiu $sp, $sp, 0x48
 
 /* 00B0DC 8002FCDC 00000000 */  nop   
-do_camera_type_unused:
+glabel do_camera_type_unused
 /* 00B0E0 8002FCE0 27BDFFB8 */  addiu $sp, $sp, -0x48
 /* 00B0E4 8002FCE4 AFB00010 */  sw    $s0, 0x10($sp)
 /* 00B0E8 8002FCE8 0080802D */  daddu $s0, $a0, $zero
@@ -442,7 +442,7 @@ do_camera_type_unused:
 /* 00B3F8 8002FFF8 03E00008 */  jr    $ra
 /* 00B3FC 8002FFFC 27BD0048 */   addiu $sp, $sp, 0x48
 
-do_camera_type_5:
+glabel do_camera_type_5
 /* 00B400 80030000 3C014190 */  lui   $at, 0x4190
 /* 00B404 80030004 44810000 */  mtc1  $at, $f0
 /* 00B408 80030008 3C01442C */  lui   $at, 0x442c
@@ -582,7 +582,7 @@ do_camera_type_5:
 /* 00B608 80030208 03E00008 */  jr    $ra
 /* 00B60C 8003020C 27BD0038 */   addiu $sp, $sp, 0x38
 
-func_80030210:
+glabel func_80030210
 /* 00B610 80030210 27BDFFD0 */  addiu $sp, $sp, -0x30
 /* 00B614 80030214 AFB00010 */  sw    $s0, 0x10($sp)
 /* 00B618 80030218 0080802D */  daddu $s0, $a0, $zero
@@ -666,7 +666,7 @@ func_80030210:
 /* 00B744 80030344 03E00008 */  jr    $ra
 /* 00B748 80030348 27BD0030 */   addiu $sp, $sp, 0x30
 
-func_8003034C:
+glabel func_8003034C
 /* 00B74C 8003034C 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 00B750 80030350 AFB00010 */  sw    $s0, 0x10($sp)
 /* 00B754 80030354 0080802D */  daddu $s0, $a0, $zero
@@ -742,11 +742,11 @@ func_8003034C:
 /* 00B848 80030448 03E00008 */  jr    $ra
 /* 00B84C 8003044C 27BD0028 */   addiu $sp, $sp, 0x28
 
-func_80030450:
+glabel func_80030450
 /* 00B850 80030450 03E00008 */  jr    $ra
 /* 00B854 80030454 00000000 */   nop   
 
-test_ray_zone_aabb:
+glabel test_ray_zone_aabb
 /* 00B858 80030458 27BDFFA0 */  addiu $sp, $sp, -0x60
 /* 00B85C 8003045C 3C0146FF */  lui   $at, 0x46ff
 /* 00B860 80030460 3421FE00 */  ori   $at, $at, 0xfe00
@@ -792,7 +792,7 @@ test_ray_zone_aabb:
 /* 00B8F4 800304F4 03E00008 */  jr    $ra
 /* 00B8F8 800304F8 27BD0060 */   addiu $sp, $sp, 0x60
 
-func_800304FC:
+glabel func_800304FC
 /* 00B8FC 800304FC 27BDFF80 */  addiu $sp, $sp, -0x80
 /* 00B900 80030500 AFB20030 */  sw    $s2, 0x30($sp)
 /* 00B904 80030504 00A0902D */  daddu $s2, $a1, $zero
@@ -1862,7 +1862,7 @@ func_800304FC:
 /* 00C88C 8003148C 03E00008 */  jr    $ra
 /* 00C890 80031490 27BD0080 */   addiu $sp, $sp, 0x80
 
-do_camera_type_3:
+glabel do_camera_type_3
 /* 00C894 80031494 27BDFF80 */  addiu $sp, $sp, -0x80
 /* 00C898 80031498 AFB10044 */  sw    $s1, 0x44($sp)
 /* 00C89C 8003149C 0080882D */  daddu $s1, $a0, $zero
