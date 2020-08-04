@@ -7,7 +7,7 @@ SHELL=/bin/bash -o pipefail
 # BUILD_DIR is location where all build artifacts are placed
 BUILD_DIR = build
 
-SRC_DIRS := src
+SRC_DIRS := src src/os
 ASM_DIRS := asm asm/os
 DATA_DIRS := bin
 COMPRESSED_DIRS := yay0

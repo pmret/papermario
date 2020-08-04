@@ -1,0 +1,90 @@
+.set noat # allow manual use of $at
+.set noreorder # don't insert nops after branches
+
+.include "include/macro.inc"
+
+glabel func_800EFD08
+/* 0891B8 800EFD08 27BDFFE0 */  addiu $sp, $sp, -0x20
+/* 0891BC 800EFD0C AFB00010 */  sw    $s0, 0x10($sp)
+/* 0891C0 800EFD10 AFB10014 */  sw    $s1, 0x14($sp)
+/* 0891C4 800EFD14 3C118011 */  lui   $s1, 0x8011
+/* 0891C8 800EFD18 2631EFC8 */  addiu $s1, $s1, -0x1038
+/* 0891CC 800EFD1C AFBF001C */  sw    $ra, 0x1c($sp)
+/* 0891D0 800EFD20 AFB20018 */  sw    $s2, 0x18($sp)
+/* 0891D4 800EFD24 822200B4 */  lb    $v0, 0xb4($s1)
+/* 0891D8 800EFD28 24120003 */  addiu $s2, $zero, 3
+/* 0891DC 800EFD2C 14520003 */  bne   $v0, $s2, .L800EFD3C
+/* 0891E0 800EFD30 0000802D */   daddu $s0, $zero, $zero
+/* 0891E4 800EFD34 3C108011 */  lui   $s0, 0x8011
+/* 0891E8 800EFD38 8E109480 */  lw    $s0, -0x6b80($s0)
+.L800EFD3C:
+/* 0891EC 800EFD3C 3C048016 */  lui   $a0, 0x8016
+/* 0891F0 800EFD40 9484A552 */  lhu   $a0, -0x5aae($a0)
+/* 0891F4 800EFD44 0C016F6A */  jal   get_collider_type_by_id
+/* 0891F8 800EFD48 00000000 */   nop   
+/* 0891FC 800EFD4C 822300B4 */  lb    $v1, 0xb4($s1)
+/* 089200 800EFD50 304200FF */  andi  $v0, $v0, 0xff
+/* 089204 800EFD54 3C018011 */  lui   $at, 0x8011
+/* 089208 800EFD58 AC229480 */  sw    $v0, -0x6b80($at)
+/* 08920C 800EFD5C 54720001 */  bnel  $v1, $s2, .L800EFD64
+/* 089210 800EFD60 0040802D */   daddu $s0, $v0, $zero
+.L800EFD64:
+/* 089214 800EFD64 2402000A */  addiu $v0, $zero, 0xa
+/* 089218 800EFD68 14620008 */  bne   $v1, $v0, .L800EFD8C
+/* 08921C 800EFD6C 00000000 */   nop   
+/* 089220 800EFD70 8E220000 */  lw    $v0, ($s1)
+/* 089224 800EFD74 04410005 */  bgez  $v0, .L800EFD8C
+/* 089228 800EFD78 00000000 */   nop   
+/* 08922C 800EFD7C 3C028011 */  lui   $v0, 0x8011
+/* 089230 800EFD80 8C42CFF0 */  lw    $v0, -0x3010($v0)
+/* 089234 800EFD84 3C018011 */  lui   $at, 0x8011
+/* 089238 800EFD88 AC22CFF4 */  sw    $v0, -0x300c($at)
+.L800EFD8C:
+/* 08923C 800EFD8C 862200C0 */  lh    $v0, 0xc0($s1)
+/* 089240 800EFD90 2603FFFF */  addiu $v1, $s0, -1
+/* 089244 800EFD94 3C018011 */  lui   $at, 0x8011
+/* 089248 800EFD98 AC22CFF0 */  sw    $v0, -0x3010($at)
+/* 08924C 800EFD9C 2C620009 */  sltiu $v0, $v1, 9
+/* 089250 800EFDA0 1040001A */  beqz  $v0, .L800EFE0C
+/* 089254 800EFDA4 00031080 */   sll   $v0, $v1, 2
+/* 089258 800EFDA8 3C018011 */  lui   $at, 0x8011
+/* 08925C 800EFDAC 00220821 */  addu  $at, $at, $v0
+/* 089260 800EFDB0 8C22C2E8 */  lw    $v0, -0x3d18($at)
+/* 089264 800EFDB4 00400008 */  jr    $v0
+/* 089268 800EFDB8 00000000 */   nop   
+/* 08926C 800EFDBC 0C03C092 */  jal   func_800F0248
+/* 089270 800EFDC0 00000000 */   nop   
+/* 089274 800EFDC4 0803BF85 */  j     .L800EFE14
+/* 089278 800EFDC8 00000000 */   nop   
+
+/* 08927C 800EFDCC 0C03C124 */  jal   func_800F0490
+/* 089280 800EFDD0 00000000 */   nop   
+/* 089284 800EFDD4 0803BF85 */  j     .L800EFE14
+/* 089288 800EFDD8 00000000 */   nop   
+
+/* 08928C 800EFDDC 0C03C219 */  jal   func_800F0864
+/* 089290 800EFDE0 00000000 */   nop   
+/* 089294 800EFDE4 0803BF85 */  j     .L800EFE14
+/* 089298 800EFDE8 00000000 */   nop   
+
+/* 08929C 800EFDEC 0C03C27B */  jal   func_800F09EC
+/* 0892A0 800EFDF0 00000000 */   nop   
+/* 0892A4 800EFDF4 0803BF85 */  j     .L800EFE14
+/* 0892A8 800EFDF8 00000000 */   nop   
+
+/* 0892AC 800EFDFC 0C03C2CF */  jal   func_800F0B3C
+/* 0892B0 800EFE00 00000000 */   nop   
+/* 0892B4 800EFE04 0803BF85 */  j     .L800EFE14
+/* 0892B8 800EFE08 00000000 */   nop   
+
+.L800EFE0C:
+/* 0892BC 800EFE0C 0C03BF8B */  jal   func_800EFE2C
+/* 0892C0 800EFE10 00000000 */   nop   
+.L800EFE14:
+/* 0892C4 800EFE14 8FBF001C */  lw    $ra, 0x1c($sp)
+/* 0892C8 800EFE18 8FB20018 */  lw    $s2, 0x18($sp)
+/* 0892CC 800EFE1C 8FB10014 */  lw    $s1, 0x14($sp)
+/* 0892D0 800EFE20 8FB00010 */  lw    $s0, 0x10($sp)
+/* 0892D4 800EFE24 03E00008 */  jr    $ra
+/* 0892D8 800EFE28 27BD0020 */   addiu $sp, $sp, 0x20
+
