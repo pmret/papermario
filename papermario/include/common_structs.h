@@ -40,7 +40,7 @@ typedef struct {
 } game_status;
 
 typedef struct {
-    /* 0x0C */ char unk_00[0xC];
+    /* 0x00 */ char unk_00[0xC];
     /* 0x0C */ s32* ptrReadPos;
 } ScriptContext;
 

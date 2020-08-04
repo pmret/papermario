@@ -1,0 +1,118 @@
+.set noat # allow manual use of $at
+.set noreorder # don't insert nops after branches
+
+.include "include/macro.inc"
+
+glabel func_800E69DC
+/* 07FE8C 800E69DC 27BDFFE0 */  addiu $sp, $sp, -0x20
+/* 07FE90 800E69E0 AFB20018 */  sw    $s2, 0x18($sp)
+/* 07FE94 800E69E4 3C128011 */  lui   $s2, 0x8011
+/* 07FE98 800E69E8 2652EBB0 */  addiu $s2, $s2, -0x1450
+/* 07FE9C 800E69EC AFB10014 */  sw    $s1, 0x14($sp)
+/* 07FEA0 800E69F0 3C118011 */  lui   $s1, 0x8011
+/* 07FEA4 800E69F4 2631EFC8 */  addiu $s1, $s1, -0x1038
+/* 07FEA8 800E69F8 3C030010 */  lui   $v1, 0x10
+/* 07FEAC 800E69FC AFBF001C */  sw    $ra, 0x1c($sp)
+/* 07FEB0 800E6A00 AFB00010 */  sw    $s0, 0x10($sp)
+/* 07FEB4 800E6A04 8E220004 */  lw    $v0, 4($s1)
+/* 07FEB8 800E6A08 823000B4 */  lb    $s0, 0xb4($s1)
+/* 07FEBC 800E6A0C 00431024 */  and   $v0, $v0, $v1
+/* 07FEC0 800E6A10 1440004F */  bnez  $v0, .L800E6B50
+/* 07FEC4 800E6A14 0000102D */   daddu $v0, $zero, $zero
+/* 07FEC8 800E6A18 8E220000 */  lw    $v0, ($s1)
+/* 07FECC 800E6A1C 30420100 */  andi  $v0, $v0, 0x100
+/* 07FED0 800E6A20 1440004B */  bnez  $v0, .L800E6B50
+/* 07FED4 800E6A24 0000102D */   daddu $v0, $zero, $zero
+/* 07FED8 800E6A28 30822010 */  andi  $v0, $a0, 0x2010
+/* 07FEDC 800E6A2C 14400048 */  bnez  $v0, .L800E6B50
+/* 07FEE0 800E6A30 0000102D */   daddu $v0, $zero, $zero
+/* 07FEE4 800E6A34 30A21003 */  andi  $v0, $a1, 0x1003
+/* 07FEE8 800E6A38 10400045 */  beqz  $v0, .L800E6B50
+/* 07FEEC 800E6A3C 0000102D */   daddu $v0, $zero, $zero
+/* 07FEF0 800E6A40 3C028007 */  lui   $v0, 0x8007
+/* 07FEF4 800E6A44 8C42419C */  lw    $v0, 0x419c($v0)
+/* 07FEF8 800E6A48 8C420144 */  lw    $v0, 0x144($v0)
+/* 07FEFC 800E6A4C 10400005 */  beqz  $v0, .L800E6A64
+/* 07FF00 800E6A50 00000000 */   nop   
+/* 07FF04 800E6A54 94420000 */  lhu   $v0, ($v0)
+/* 07FF08 800E6A58 30420001 */  andi  $v0, $v0, 1
+/* 07FF0C 800E6A5C 1440003C */  bnez  $v0, .L800E6B50
+/* 07FF10 800E6A60 0000102D */   daddu $v0, $zero, $zero
+.L800E6A64:
+/* 07FF14 800E6A64 3C02800A */  lui   $v0, 0x800a
+/* 07FF18 800E6A68 8C42A650 */  lw    $v0, -0x59b0($v0)
+/* 07FF1C 800E6A6C 3C030004 */  lui   $v1, 4
+/* 07FF20 800E6A70 00431024 */  and   $v0, $v0, $v1
+/* 07FF24 800E6A74 14400036 */  bnez  $v0, .L800E6B50
+/* 07FF28 800E6A78 0000102D */   daddu $v0, $zero, $zero
+/* 07FF2C 800E6A7C 0C04D07A */  jal   func_801341E8
+/* 07FF30 800E6A80 00000000 */   nop   
+/* 07FF34 800E6A84 14400032 */  bnez  $v0, .L800E6B50
+/* 07FF38 800E6A88 0000102D */   daddu $v0, $zero, $zero
+/* 07FF3C 800E6A8C 8E220004 */  lw    $v0, 4($s1)
+/* 07FF40 800E6A90 30424000 */  andi  $v0, $v0, 0x4000
+/* 07FF44 800E6A94 1440002B */  bnez  $v0, .L800E6B44
+/* 07FF48 800E6A98 00000000 */   nop   
+/* 07FF4C 800E6A9C 82420000 */  lb    $v0, ($s2)
+/* 07FF50 800E6AA0 1440000A */  bnez  $v0, .L800E6ACC
+/* 07FF54 800E6AA4 00000000 */   nop   
+/* 07FF58 800E6AA8 8E220000 */  lw    $v0, ($s1)
+/* 07FF5C 800E6AAC 30421000 */  andi  $v0, $v0, 0x1000
+/* 07FF60 800E6AB0 14400027 */  bnez  $v0, .L800E6B50
+/* 07FF64 800E6AB4 0000102D */   daddu $v0, $zero, $zero
+/* 07FF68 800E6AB8 2E020003 */  sltiu $v0, $s0, 3
+/* 07FF6C 800E6ABC 10400023 */  beqz  $v0, .L800E6B4C
+/* 07FF70 800E6AC0 24020001 */   addiu $v0, $zero, 1
+/* 07FF74 800E6AC4 08039AD4 */  j     .L800E6B50
+/* 07FF78 800E6AC8 00000000 */   nop   
+
+.L800E6ACC:
+/* 07FF7C 800E6ACC 0C03ACF8 */  jal   func_800EB3E0
+/* 07FF80 800E6AD0 00000000 */   nop   
+/* 07FF84 800E6AD4 1040001D */  beqz  $v0, .L800E6B4C
+/* 07FF88 800E6AD8 24020006 */   addiu $v0, $zero, 6
+/* 07FF8C 800E6ADC 82430003 */  lb    $v1, 3($s2)
+/* 07FF90 800E6AE0 14620003 */  bne   $v1, $v0, .L800E6AF0
+/* 07FF94 800E6AE4 24020009 */   addiu $v0, $zero, 9
+/* 07FF98 800E6AE8 08039AD4 */  j     .L800E6B50
+/* 07FF9C 800E6AEC 2E020003 */   sltiu $v0, $s0, 3
+
+.L800E6AF0:
+/* 07FFA0 800E6AF0 14620007 */  bne   $v1, $v0, .L800E6B10
+/* 07FFA4 800E6AF4 24020008 */   addiu $v0, $zero, 8
+/* 07FFA8 800E6AF8 24020021 */  addiu $v0, $zero, 0x21
+/* 07FFAC 800E6AFC 16020014 */  bne   $s0, $v0, .L800E6B50
+/* 07FFB0 800E6B00 0000102D */   daddu $v0, $zero, $zero
+/* 07FFB4 800E6B04 A220000F */  sb    $zero, 0xf($s1)
+/* 07FFB8 800E6B08 08039AD4 */  j     .L800E6B50
+/* 07FFBC 800E6B0C 24020001 */   addiu $v0, $zero, 1
+
+.L800E6B10:
+/* 07FFC0 800E6B10 1462000A */  bne   $v1, $v0, .L800E6B3C
+/* 07FFC4 800E6B14 24020007 */   addiu $v0, $zero, 7
+/* 07FFC8 800E6B18 24020021 */  addiu $v0, $zero, 0x21
+/* 07FFCC 800E6B1C 1602000C */  bne   $s0, $v0, .L800E6B50
+/* 07FFD0 800E6B20 0000102D */   daddu $v0, $zero, $zero
+/* 07FFD4 800E6B24 0C0AF5F7 */  jal   func_802BD7DC
+/* 07FFD8 800E6B28 00000000 */   nop   
+/* 07FFDC 800E6B2C 14400008 */  bnez  $v0, .L800E6B50
+/* 07FFE0 800E6B30 24020001 */   addiu $v0, $zero, 1
+/* 07FFE4 800E6B34 08039AD1 */  j     .L800E6B44
+/* 07FFE8 800E6B38 00000000 */   nop   
+
+.L800E6B3C:
+/* 07FFEC 800E6B3C 14620004 */  bne   $v1, $v0, .L800E6B50
+/* 07FFF0 800E6B40 0000102D */   daddu $v0, $zero, $zero
+.L800E6B44:
+/* 07FFF4 800E6B44 0C05272D */  jal   play_sound
+/* 07FFF8 800E6B48 2404021D */   addiu $a0, $zero, 0x21d
+.L800E6B4C:
+/* 07FFFC 800E6B4C 0000102D */  daddu $v0, $zero, $zero
+.L800E6B50:
+/* 080000 800E6B50 8FBF001C */  lw    $ra, 0x1c($sp)
+/* 080004 800E6B54 8FB20018 */  lw    $s2, 0x18($sp)
+/* 080008 800E6B58 8FB10014 */  lw    $s1, 0x14($sp)
+/* 08000C 800E6B5C 8FB00010 */  lw    $s0, 0x10($sp)
+/* 080010 800E6B60 03E00008 */  jr    $ra
+/* 080014 800E6B64 27BD0020 */   addiu $sp, $sp, 0x20
+

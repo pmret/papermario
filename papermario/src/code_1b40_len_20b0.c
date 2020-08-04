@@ -1,5 +1,3 @@
-#define F3DEX_GBI_2
-
 #include "common.h"
 
 extern Gfx D_00074210[];
@@ -33,6 +31,7 @@ extern int D_802EB3D0[];
 
 extern u8 D_80074021;
 extern s32 D_8009A5D8;
+
 extern s32 D_8009A650[1];
 
 void dma_copy(void *, void*, void*);
@@ -54,15 +53,12 @@ INCLUDE_ASM(code_1b40_len_20b0, load_engine_data);
     dma_copy(D_00102610, D_00102610_end, D_802E0D90);
     dma_copy(D_000A5DD0, D_000A5DD0_end, D_8010F6D0);
     dma_copy(D_0010CC10, D_0010CC10_end, D_802EB3D0);
-   
-    (*gGameStatusPtr)->unk_79 = D_8009A650[0] = 0; 
-    //do {
+    D_8009A650[0] = 0;
     phi_s0 = *gGameStatusPtr;
-    phi_s0->musicEnabled = 1;
-    (*gGameStatusPtr)->unk_148 = 0;
-    //} while (0);
-    phi_s0->unk_7C = 1;
-    
+    (*gGameStatusPtr)->unk_79 = 0;
+    (*gGameStatusPtr)->musicEnabled = 1;
+    phi_s0->unk_148 = 0;
+    (*gGameStatusPtr)->unk_7C = 1;
     (*gGameStatusPtr)->unk_A8 = -1;
     (*gGameStatusPtr)->unk_AA = 0;
     (*gGameStatusPtr)->unk_81 = 0;

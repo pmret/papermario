@@ -7,7 +7,7 @@ SHELL=/bin/bash -o pipefail
 # BUILD_DIR is location where all build artifacts are placed
 BUILD_DIR = build
 
-SRC_DIRS := src
+SRC_DIRS := src src/os
 ASM_DIRS := asm asm/os
 DATA_DIRS := bin
 COMPRESSED_DIRS := yay0
@@ -47,7 +47,7 @@ LD = $(CROSS_IRIX)ld
 OBJDUMP = $(CROSS)objdump
 OBJCOPY = $(CROSS)objcopy
 
-CPPFLAGS = -Iinclude -D _LANGUAGE_C -ffreestanding
+CPPFLAGS = -Iinclude -D _LANGUAGE_C -ffreestanding -DF3DEX_GBI_2
 ASFLAGS = -EB -march=vr4300 -mtune=vr4300 -Iinclude
 OLDASFLAGS= -EB -Iinclude
 CFLAGS  = -O2 -quiet -G 0 -mcpu=vr4300 -mfix4300
