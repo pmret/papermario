@@ -106,7 +106,9 @@ INCLUDE_ASM(code_80850_len_3060, reset_status_menu);
 
 INCLUDE_ASM(code_80850_len_3060, is_ability_active);
 
-INCLUDE_ASM(code_80850_len_3060, is_partner_ability_active);
+s32 is_partner_ability_active(void) {
+    return 0;
+}
 
 INCLUDE_ASM(code_80850_len_3060, add_coins);
 
@@ -126,13 +128,38 @@ INCLUDE_ASM(code_80850_len_3060, recover_hp);
 
 INCLUDE_ASM(code_80850_len_3060, subtract_hp);
 
-INCLUDE_ASM(code_80850_len_3060, has_full_hp);
+s8 has_full_hp(void) {
+    player_data* playerData = &gPlayerData;
 
-INCLUDE_ASM(code_80850_len_3060, has_full_fp);
+    return playerData->curMaxHP == playerData->curHP;
+}
 
-INCLUDE_ASM(code_80850_len_3060, add_fortress_keys);
+s8 has_full_fp(void) {
+    player_data* playerData = &gPlayerData;
+
+    return playerData->curMaxFP == playerData->curFP;
+}
+
+s8 add_fortress_keys(s32 amt) {
+    player_data* playerData = &gPlayerData;
+    
+    playerData->fortressKeyCount += amt;
+    return playerData->fortressKeyCount;
+}
+
+/*
+s8 subtract_fortress_keys(s32 amt) {
+    player_data* playerData = &gPlayerData;
+    //player_data* new_var = playerData;
+    
+    playerData->fortressKeyCount -= amt;
+    if (playerData->fortressKeyCount < 0) {
+        playerData->fortressKeyCount = 0;
+    }
+    return playerData->fortressKeyCount;
+}
+*/
 
 INCLUDE_ASM(code_80850_len_3060, subtract_fortress_keys);
 
 INCLUDE_ASM(code_80850_len_3060, get_fortress_key_count);
-

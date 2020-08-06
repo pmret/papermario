@@ -40,6 +40,27 @@ typedef struct {
 } game_status;
 
 typedef struct {
+    /* 0x000 */ s8 bootsLevel;
+    /* 0x001 */ s8 hammerLevel;
+    /* 0x002 */ s8 curHP;
+    /* 0x003 */ s8 curMaxHP;
+    /* 0x004 */ s8 hardMaxHP;
+    /* 0x005 */ s8 curFP;
+    /* 0x006 */ s8 curMaxFP;
+    /* 0x007 */ s8 hardMaxFP;
+    /* 0x008 */ s8 maxBP;
+    /* 0x009 */ s8 level;
+    /* 0x00A */ s8 hasActionCommands;
+    /* 0x00B */ char unk_0B[0x1];
+    /* 0x00C */ s16 coins;
+    /* 0x00E */ s8 fortressKeyCount;
+    /* 0x00F */ s8 starPieces;
+    /* 0x010 */ s8 starPoints;
+    /* 0x011 */ char unk_11[0x1];
+    /* 0x012 */ s8 currentPartner;
+} player_data;
+
+typedef struct {
     /* 0x00 */ char unk_00[0xC];
     /* 0x0C */ s32* ptrReadPos;
 } ScriptContext;
