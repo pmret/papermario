@@ -2,7 +2,9 @@
 
 INCLUDE_ASM(code_80850_len_3060, clear_player_data);
 
-INCLUDE_ASM(code_80850_len_3060, get_player_data);
+player_data* get_player_data(void) {
+    return &gPlayerData;
+}
 
 INCLUDE_ASM(code_80850_len_3060, add_item);
 
@@ -20,7 +22,9 @@ INCLUDE_ASM(code_80850_len_3060, store_item);
 
 INCLUDE_ASM(code_80850_len_3060, get_stored_count);
 
-INCLUDE_ASM(code_80850_len_3060, get_stored_empty_count);
+s32 get_stored_empty_count(void) {
+    return 32 - get_stored_count();
+}
 
 INCLUDE_ASM(code_80850_len_3060, enforce_hpfp_limits);
 
@@ -147,19 +151,19 @@ s8 add_fortress_keys(s32 amt) {
     return playerData->fortressKeyCount;
 }
 
-/*
-s8 subtract_fortress_keys(s32 amt) {
+s8 subtract_fortress_keys(s8 amt) {
     player_data* playerData = &gPlayerData;
-    //player_data* new_var = playerData;
+    player_data* playerData2 = &gPlayerData; // required to match
     
     playerData->fortressKeyCount -= amt;
     if (playerData->fortressKeyCount < 0) {
         playerData->fortressKeyCount = 0;
     }
-    return playerData->fortressKeyCount;
+    
+    return playerData2->fortressKeyCount; // required to use playerData2 here to match
 }
-*/
 
-INCLUDE_ASM(code_80850_len_3060, subtract_fortress_keys);
+s8 get_fortress_key_count(void) {
+    return gPlayerData.fortressKeyCount;
+}
 
-INCLUDE_ASM(code_80850_len_3060, get_fortress_key_count);

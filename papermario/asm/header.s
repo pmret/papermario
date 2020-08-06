@@ -14,5 +14,3 @@
 .ascii "E"        # country
 .byte  0x00       # version
 
-
-

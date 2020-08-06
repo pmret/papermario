@@ -448,7 +448,7 @@ if arch == "mips":
     re_large_imm = re.compile(r"-?[1-9][0-9]{2,}|-?0x[0-9a-f]{3,}")
     re_imm = re.compile(r"(\b|-)([0-9]+|0x[0-9a-fA-F]+)\b(?!\(sp)|%(lo|hi)\([^)]*\)")
     forbidden = set(string.ascii_letters + "_")
-    arch_flags = ["-m", "mips:4300", "-Mno-aliases"]
+    arch_flags = ["-m", "mips:4300"]
     branch_likely_instructions = {
         "beql",
         "bnel",
