@@ -39,4 +39,4 @@ glabel guMtxL2F
 /* 0429F8 800675F8 00000000 */  nop   
 /* 0429FC 800675FC 00000000 */  nop   
 
-.set reorder
+

@@ -88,4 +88,4 @@ glabel osStartThread
 /* 041538 80066138 00000000 */  nop   
 /* 04153C 8006613C 00000000 */  nop   
 
-.set reorder
+

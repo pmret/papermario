@@ -14,4 +14,4 @@ glabel osAiDeviceBusy
 /* 046C68 8006B868 00000000 */  nop   
 /* 046C6C 8006B86C 00000000 */  nop   
 
-.set reorder
+

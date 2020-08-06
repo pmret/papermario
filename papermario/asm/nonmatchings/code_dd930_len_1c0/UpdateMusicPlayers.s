@@ -82,4 +82,4 @@ glabel UpdateMusicPlayers
 /* 0DDA60 80147360 03E00008 */  jr    $ra
 /* 0DDA64 80147364 27BD0018 */   addiu $sp, $sp, 0x18
 
-.set reorder
+

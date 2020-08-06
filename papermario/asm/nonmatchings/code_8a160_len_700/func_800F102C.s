@@ -231,4 +231,4 @@ glabel func_800F102C
 /* 08A84C 800F139C 03E00008 */  jr    $ra
 /* 08A850 800F13A0 27BD00D8 */   addiu $sp, $sp, 0xd8
 
-.set reorder
+

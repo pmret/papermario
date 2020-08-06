@@ -61,4 +61,4 @@ glabel get_asset_offset
 /* 036298 8005AE98 00000000 */  nop   
 /* 03629C 8005AE9C 00000000 */  nop   
 
-.set reorder
+

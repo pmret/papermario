@@ -15,4 +15,4 @@ glabel nuGfxTaskAllEndWait
 /* 03A6E8 8005F2E8 00000000 */  nop   
 /* 03A6EC 8005F2EC 00000000 */  nop   
 
-.set reorder
+

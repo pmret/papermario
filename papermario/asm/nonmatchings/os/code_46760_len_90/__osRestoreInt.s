@@ -14,4 +14,4 @@ glabel __osRestoreInt
 
 /* 0467EC 8006B3EC 00000000 */  nop   
 
-.set reorder
+

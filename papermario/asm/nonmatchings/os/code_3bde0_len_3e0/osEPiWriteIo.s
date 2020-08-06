@@ -30,4 +30,4 @@ glabel osEPiWriteIo
 /* 03C1B8 80060DB8 00000000 */  nop   
 /* 03C1BC 80060DBC 00000000 */  nop   
 
-.set reorder
+

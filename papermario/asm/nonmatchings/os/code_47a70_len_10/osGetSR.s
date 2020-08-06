@@ -10,4 +10,4 @@ glabel osGetSR
 
 /* 047A7C 8006C67C 00000000 */  nop   
 
-.set reorder
+

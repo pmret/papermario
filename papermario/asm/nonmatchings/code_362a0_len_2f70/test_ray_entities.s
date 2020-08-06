@@ -681,4 +681,4 @@ glabel test_ray_entities
 /* 039208 8005DE08 00000000 */  nop   
 /* 03920C 8005DE0C 00000000 */  nop   
 
-.set reorder
+

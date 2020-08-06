@@ -1444,4 +1444,4 @@ glabel PlayEffect
 /* 0FE0A8 802D96F8 00000000 */  nop   
 /* 0FE0AC 802D96FC 00000000 */  nop   
 
-.set reorder
+

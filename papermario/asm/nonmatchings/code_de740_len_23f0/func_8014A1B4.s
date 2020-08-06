@@ -175,4 +175,4 @@ glabel func_8014A1B4
 /* 0E0B28 8014A428 00000000 */  nop   
 /* 0E0B2C 8014A42C 00000000 */  nop   
 
-.set reorder
+

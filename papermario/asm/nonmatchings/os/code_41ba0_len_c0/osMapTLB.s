@@ -60,4 +60,4 @@ glabel osMapTLB
 /* 041C58 80066858 00000000 */  nop   
 /* 041C5C 8006685C 00000000 */  nop   
 
-.set reorder
+

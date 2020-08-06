@@ -192,4 +192,4 @@ glabel step_game_loop
 /* 001DE4 800269E4 03E00008 */  jr    $ra
 /* 001DE8 800269E8 27BD0020 */   addiu $sp, $sp, 0x20
 
-.set reorder
+

@@ -455,4 +455,4 @@ glabel func_802AACD8
 /* 4200B8 802AB328 03E00008 */  jr    $ra
 /* 4200BC 802AB32C 27BD00A8 */   addiu $sp, $sp, 0xa8
 
-.set reorder
+

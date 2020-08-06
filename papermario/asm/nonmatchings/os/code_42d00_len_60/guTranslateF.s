@@ -30,4 +30,4 @@ glabel guTranslateF
 /* 042D58 80067958 00000000 */  nop   
 /* 042D5C 8006795C 00000000 */  nop   
 
-.set reorder
+

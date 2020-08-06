@@ -10,4 +10,4 @@ glabel osGetCause
 
 /* 047A6C 8006C66C 00000000 */  nop   
 
-.set reorder
+

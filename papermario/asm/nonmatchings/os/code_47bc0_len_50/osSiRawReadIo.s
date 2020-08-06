@@ -27,4 +27,4 @@ glabel osSiRawReadIo
 
 /* 047C0C 8006C80C 00000000 */  nop   
 
-.set reorder
+

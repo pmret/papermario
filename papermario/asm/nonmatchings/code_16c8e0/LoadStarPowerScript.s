@@ -41,4 +41,4 @@ glabel LoadStarPowerScript
 /* 1AF2B8 802809D8 24020002 */  addiu $v0, $zero, 2
 /* 1AF2BC 802809DC 03E00008 */  jr    $ra
 
-.set reorder
+

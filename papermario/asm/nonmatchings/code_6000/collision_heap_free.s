@@ -26,4 +26,4 @@ glabel collision_heap_free
 /* 006238 8002AE38 00000000 */  nop   
 /* 00623C 8002AE3C 00000000 */  nop   
 
-.set reorder
+

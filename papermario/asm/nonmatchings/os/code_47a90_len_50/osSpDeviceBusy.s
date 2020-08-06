@@ -14,4 +14,4 @@ glabel osSpDeviceBusy
 /* 047AD8 8006C6D8 00000000 */  nop   
 /* 047ADC 8006C6DC 00000000 */  nop   
 
-.set reorder
+

@@ -19,4 +19,4 @@ glabel osWritebackDCacheAll
 /* 03CCF8 800618F8 00000000 */  nop   
 /* 03CCFC 800618FC 00000000 */  nop   
 
-.set reorder
+

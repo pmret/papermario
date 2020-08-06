@@ -382,4 +382,4 @@ glabel step_battle
 
 /* 00F26C 80033E6C 00000000 */  nop   
 
-.set reorder
+

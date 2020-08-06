@@ -49,4 +49,4 @@ glabel boot_idle
 /* 039DA8 8005E9A8 00000000 */  nop   
 /* 039DAC 8005E9AC 00000000 */  nop   
 
-.set reorder
+

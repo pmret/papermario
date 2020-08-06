@@ -928,4 +928,4 @@ glabel do_camera_type_3
 /* 00D608 80032208 00000000 */  nop   
 /* 00D60C 8003220C 00000000 */  nop   
 
-.set reorder
+

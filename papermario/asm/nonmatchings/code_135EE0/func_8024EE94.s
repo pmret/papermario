@@ -62,4 +62,4 @@ glabel func_8024EE94
 
 /* 14229C 8024EF5C 00000000 */  nop   
 
-.set reorder
+

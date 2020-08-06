@@ -73,4 +73,4 @@ glabel PlaySoundAtNpc
 /* 0F4C58 802D02A8 00000000 */  nop   
 /* 0F4C5C 802D02AC 00000000 */  nop   
 
-.set reorder
+

@@ -56,4 +56,4 @@ glabel func_802DF2D8
 
 /* 10247C 802DF38C 00000000 */  nop   
 
-.set reorder
+

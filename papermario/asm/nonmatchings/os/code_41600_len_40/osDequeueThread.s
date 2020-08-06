@@ -26,4 +26,4 @@ glabel osDequeueThread
 /* 041638 80066238 00000000 */  nop   
 /* 04163C 8006623C 00000000 */  nop   
 
-.set reorder
+

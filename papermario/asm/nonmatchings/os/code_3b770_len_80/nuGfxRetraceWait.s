@@ -40,4 +40,4 @@ glabel nuGfxRetraceWait
 /* 03B7E8 800603E8 00000000 */  nop   
 /* 03B7EC 800603EC 00000000 */  nop   
 
-.set reorder
+

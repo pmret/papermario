@@ -57,4 +57,4 @@ glabel osCreateThread
 /* 041328 80065F28 03E00008 */  jr    $ra
 /* 04132C 80065F2C 27BD0018 */   addiu $sp, $sp, 0x18
 
-.set reorder
+

@@ -133,4 +133,4 @@ glabel osPfsFindFile
 /* 044378 80068F78 00000000 */  nop   
 /* 04437C 80068F7C 00000000 */  nop   
 
-.set reorder
+

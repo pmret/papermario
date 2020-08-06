@@ -21,4 +21,4 @@ glabel collision_heap_create
 /* 0061A8 8002ADA8 03E00008 */  jr    $ra
 /* 0061AC 8002ADAC 27BD0018 */   addiu $sp, $sp, 0x18
 
-.set reorder
+

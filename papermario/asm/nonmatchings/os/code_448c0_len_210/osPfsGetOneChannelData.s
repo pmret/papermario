@@ -44,4 +44,4 @@ glabel osPfsGetOneChannelData
 /* 044AC8 800696C8 00000000 */  nop   
 /* 044ACC 800696CC 00000000 */  nop   
 
-.set reorder
+

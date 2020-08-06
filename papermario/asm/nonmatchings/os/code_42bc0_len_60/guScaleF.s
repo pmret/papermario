@@ -30,4 +30,4 @@ glabel guScaleF
 /* 042C18 80067818 00000000 */  nop   
 /* 042C1C 8006781C 00000000 */  nop   
 
-.set reorder
+

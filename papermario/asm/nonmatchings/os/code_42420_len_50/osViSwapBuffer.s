@@ -26,4 +26,4 @@ glabel osViSwapBuffer
 /* 042468 80067068 00000000 */  nop   
 /* 04246C 8006706C 00000000 */  nop   
 
-.set reorder
+

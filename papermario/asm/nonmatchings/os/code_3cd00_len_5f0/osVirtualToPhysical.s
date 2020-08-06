@@ -33,4 +33,4 @@ glabel osVirtualToPhysical
 /* 03D2E8 80061EE8 00000000 */  nop   
 /* 03D2EC 80061EEC 00000000 */  nop   
 
-.set reorder
+

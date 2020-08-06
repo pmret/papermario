@@ -159,4 +159,4 @@ glabel func_80027BAC
 /* 003208 80027E08 03E00008 */  jr    $ra
 /* 00320C 80027E0C 27BD0030 */   addiu $sp, $sp, 0x30
 
-.set reorder
+

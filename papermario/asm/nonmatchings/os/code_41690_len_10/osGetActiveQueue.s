@@ -10,4 +10,4 @@ glabel osGetActiveQueue
 
 /* 04169C 8006629C 00000000 */  nop   
 
-.set reorder
+

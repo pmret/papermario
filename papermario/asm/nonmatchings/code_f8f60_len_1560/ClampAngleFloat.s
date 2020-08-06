@@ -29,4 +29,4 @@ glabel ClampAngleFloat
 /* 0FA4B8 802D5B08 00000000 */  nop   
 /* 0FA4BC 802D5B0C 00000000 */  nop   
 
-.set reorder
+

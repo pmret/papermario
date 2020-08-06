@@ -13,4 +13,4 @@ glabel func_8002BF24
 
 /* 00733C 8002BF3C 00000000 */  nop   
 
-.set reorder
+

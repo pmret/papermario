@@ -263,4 +263,4 @@ glabel osDevMgrMain
 /* 03C848 80061448 00000000 */  nop   
 /* 03C84C 8006144C 00000000 */  nop   
 
-.set reorder
+

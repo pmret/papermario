@@ -22,4 +22,4 @@ glabel osViGetCurrentMode
 
 /* 041E6C 80066A6C 00000000 */  nop   
 
-.set reorder
+

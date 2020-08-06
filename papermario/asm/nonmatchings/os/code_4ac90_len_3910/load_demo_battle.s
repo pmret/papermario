@@ -247,4 +247,4 @@ glabel load_demo_battle
 
 /* 04E59C 8007319C 00000000 */  nop   
 
-.set reorder
+

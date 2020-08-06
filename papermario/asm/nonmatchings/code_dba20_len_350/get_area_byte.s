@@ -14,4 +14,4 @@ glabel get_area_byte
 /* 0DBD68 80145668 00000000 */  nop   
 /* 0DBD6C 8014566C 00000000 */  nop   
 
-.set reorder
+

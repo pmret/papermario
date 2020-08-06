@@ -86,4 +86,4 @@ glabel osAiSetFrequency
 /* 03CA78 80061678 00000000 */  nop   
 /* 03CA7C 8006167C 00000000 */  nop   
 
-.set reorder
+

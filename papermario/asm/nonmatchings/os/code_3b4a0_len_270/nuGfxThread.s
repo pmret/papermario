@@ -61,4 +61,4 @@ glabel nuGfxThread
 /* 03B708 80060308 00000000 */  nop   
 /* 03B70C 8006030C 00000000 */  nop   
 
-.set reorder
+

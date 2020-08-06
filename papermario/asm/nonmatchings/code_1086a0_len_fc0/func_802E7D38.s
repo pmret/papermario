@@ -50,4 +50,4 @@ glabel func_802E7D38
 /* 109658 802E7DD8 00000000 */  nop   
 /* 10965C 802E7DDC 00000000 */  nop   
 
-.set reorder
+

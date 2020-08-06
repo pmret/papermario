@@ -23,4 +23,4 @@ glabel collision_heap_malloc
 /* 0061EC 8002ADEC 03E00008 */  jr    $ra
 /* 0061F0 8002ADF0 27BD0018 */   addiu $sp, $sp, 0x18
 
-.set reorder
+

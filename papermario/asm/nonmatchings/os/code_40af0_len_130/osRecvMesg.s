@@ -91,4 +91,4 @@ glabel osRecvMesg
 /* 040C18 80065818 00000000 */  nop   
 /* 040C1C 8006581C 00000000 */  nop   
 
-.set reorder
+

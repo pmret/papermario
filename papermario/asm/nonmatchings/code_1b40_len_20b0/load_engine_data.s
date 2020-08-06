@@ -177,4 +177,4 @@ glabel load_engine_data
 /* 002480 80027080 03E00008 */  jr    $ra
 /* 002484 80027084 27BD0018 */   addiu $sp, $sp, 0x18
 
-.set reorder
+

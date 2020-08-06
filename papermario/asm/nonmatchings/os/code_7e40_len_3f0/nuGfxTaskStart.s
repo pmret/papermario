@@ -102,4 +102,4 @@ glabel nuGfxTaskStart
 /* 008228 8002CE28 00000000 */  nop   
 /* 00822C 8002CE2C 00000000 */  nop   
 
-.set reorder
+

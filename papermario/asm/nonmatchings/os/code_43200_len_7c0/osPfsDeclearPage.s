@@ -92,4 +92,4 @@ glabel osPfsDeclearPage
 /* 0439B8 800685B8 00000000 */  nop   
 /* 0439BC 800685BC 00000000 */  nop   
 
-.set reorder
+

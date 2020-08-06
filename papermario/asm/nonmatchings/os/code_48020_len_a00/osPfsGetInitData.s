@@ -57,4 +57,4 @@ glabel osPfsGetInitData
 /* 048A18 8006D618 00000000 */  nop   
 /* 048A1C 8006D61C 00000000 */  nop   
 
-.set reorder
+

@@ -171,4 +171,4 @@ glabel osContRamWrite
 /* 045A28 8006A628 00000000 */  nop   
 /* 045A2C 8006A62C 00000000 */  nop   
 
-.set reorder
+

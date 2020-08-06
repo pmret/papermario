@@ -18,4 +18,4 @@ glabel nuGfxDisplayOff
 /* 03A828 8005F428 00000000 */  nop   
 /* 03A82C 8005F42C 00000000 */  nop   
 
-.set reorder
+

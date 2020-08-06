@@ -30,4 +30,4 @@ glabel osViSetEvent
 /* 042208 80066E08 00000000 */  nop   
 /* 04220C 80066E0C 00000000 */  nop   
 
-.set reorder
+

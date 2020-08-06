@@ -83,4 +83,4 @@ glabel guOrthoF
 /* 03EE38 80063A38 03E00008 */  jr    $ra
 /* 03EE3C 80063A3C 27BD0050 */   addiu $sp, $sp, 0x50
 
-.set reorder
+

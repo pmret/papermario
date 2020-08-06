@@ -102,4 +102,4 @@ glabel guRotate
 /* 0431F8 80067DF8 00000000 */  nop   
 /* 0431FC 80067DFC 00000000 */  nop   
 
-.set reorder
+

@@ -14,4 +14,4 @@ glabel osViGetCurrentContext
 /* 047FB8 8006CBB8 00000000 */  nop   
 /* 047FBC 8006CBBC 00000000 */  nop   
 
-.set reorder
+

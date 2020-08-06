@@ -36,4 +36,4 @@ glabel sins
 /* 03FA48 80064648 00000000 */  nop   
 /* 03FA4C 8006464C 00000000 */  nop   
 
-.set reorder
+

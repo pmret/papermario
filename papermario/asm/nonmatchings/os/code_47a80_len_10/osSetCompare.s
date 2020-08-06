@@ -10,4 +10,4 @@ glabel osSetCompare
 
 /* 047A8C 8006C68C 00000000 */  nop   
 
-.set reorder
+

@@ -88,4 +88,4 @@ glabel do_camera_type_0
 /* 00AD88 8002F988 00000000 */  nop   
 /* 00AD8C 8002F98C 00000000 */  nop   
 
-.set reorder
+

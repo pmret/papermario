@@ -27,4 +27,4 @@ glabel osSiRawWriteIo
 /* 047C58 8006C858 00000000 */  nop   
 /* 047C5C 8006C85C 00000000 */  nop   
 
-.set reorder
+

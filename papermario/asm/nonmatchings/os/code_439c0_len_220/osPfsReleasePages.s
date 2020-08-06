@@ -37,4 +37,4 @@ glabel osPfsReleasePages
 /* 043BD8 800687D8 00000000 */  nop   
 /* 043BDC 800687DC 00000000 */  nop   
 
-.set reorder
+

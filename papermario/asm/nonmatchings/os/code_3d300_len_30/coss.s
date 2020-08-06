@@ -18,4 +18,4 @@ glabel coss
 /* 03D328 80061F28 00000000 */  nop   
 /* 03D32C 80061F2C 00000000 */  nop   
 
-.set reorder
+

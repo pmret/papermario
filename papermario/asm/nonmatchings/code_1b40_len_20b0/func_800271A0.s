@@ -28,4 +28,4 @@ glabel func_800271A0
 /* 0025F4 800271F4 03E00008 */  jr    $ra
 /* 0025F8 800271F8 AC62000C */   sw    $v0, 0xc($v1)
 
-.set reorder
+

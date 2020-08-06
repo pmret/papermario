@@ -106,4 +106,4 @@ glabel osViSetSpecialFeatures
 /* 0423C8 80066FC8 00000000 */  nop   
 /* 0423CC 80066FCC 00000000 */  nop   
 
-.set reorder
+

@@ -19,4 +19,4 @@ glabel gfxPreNMI_Callback
 /* 001B38 80026738 00000000 */  nop   
 /* 001B3C 8002673C 00000000 */  nop   
 
-.set reorder
+

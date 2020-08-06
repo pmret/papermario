@@ -200,4 +200,4 @@ glabel gfx_draw_frame
 /* 0021D4 80026DD4 03E00008 */  jr    $ra
 /* 0021D8 80026DD8 27BD0020 */   addiu $sp, $sp, 0x20
 
-.set reorder
+

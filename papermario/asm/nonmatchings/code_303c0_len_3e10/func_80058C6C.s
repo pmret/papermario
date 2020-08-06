@@ -104,4 +104,4 @@ glabel func_80058C6C
 /* 0341C8 80058DC8 00000000 */  nop   
 /* 0341CC 80058DCC 00000000 */  nop   
 
-.set reorder
+

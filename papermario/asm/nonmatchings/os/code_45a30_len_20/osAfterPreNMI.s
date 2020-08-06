@@ -14,4 +14,4 @@ glabel osAfterPreNMI
 
 /* 045A4C 8006A64C 00000000 */  nop   
 
-.set reorder
+

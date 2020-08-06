@@ -185,4 +185,4 @@ glabel func_802E6B6C
 /* 108698 802E6E18 00000000 */  nop   
 /* 10869C 802E6E1C 00000000 */  nop   
 
-.set reorder
+

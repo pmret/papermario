@@ -10,4 +10,4 @@ glabel osGetCount
 
 /* 040E0C 80065A0C 00000000 */  nop   
 
-.set reorder
+

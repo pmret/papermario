@@ -26,4 +26,4 @@ glabel osViSetMode
 
 /* 04225C 80066E5C 00000000 */  nop   
 
-.set reorder
+

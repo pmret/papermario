@@ -46,4 +46,4 @@ glabel osSpRawStartDma
 
 /* 047BBC 8006C7BC 00000000 */  nop   
 
-.set reorder
+

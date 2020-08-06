@@ -9,4 +9,4 @@ glabel osCleanupThread
 /* 046758 8006B358 00000000 */   nop   
 /* 04675C 8006B35C 00000000 */  nop   
 
-.set reorder
+

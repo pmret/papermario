@@ -26,4 +26,4 @@ glabel strcmp
 /* 04A1A8 8006EDA8 00000000 */  nop   
 /* 04A1AC 8006EDAC 00000000 */  nop   
 
-.set reorder
+

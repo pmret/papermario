@@ -57,4 +57,4 @@ glabel osSiRawStartDma
 /* 041168 80065D68 00000000 */  nop   
 /* 04116C 80065D6C 00000000 */  nop   
 
-.set reorder
+

@@ -528,4 +528,4 @@ glabel func_80036650
 /* 0121E8 80036DE8 00000000 */  nop   
 /* 0121EC 80036DEC 00000000 */  nop   
 
-.set reorder
+

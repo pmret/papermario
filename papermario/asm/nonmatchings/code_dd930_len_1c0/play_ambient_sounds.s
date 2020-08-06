@@ -41,4 +41,4 @@ glabel play_ambient_sounds
 /* 0DDADC 801473DC 03E00008 */  jr    $ra
 /* 0DDAE0 801473E0 27BD0018 */   addiu $sp, $sp, 0x18
 
-.set reorder
+

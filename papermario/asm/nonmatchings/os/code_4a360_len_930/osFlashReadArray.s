@@ -86,4 +86,4 @@ glabel osFlashReadArray
 
 /* 04AC8C 8006F88C 00000000 */  nop   
 
-.set reorder
+

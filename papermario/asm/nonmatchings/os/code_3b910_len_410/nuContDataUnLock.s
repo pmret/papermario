@@ -18,4 +18,4 @@ glabel nuContDataUnLock
 
 /* 03BD1C 8006091C 00000000 */  nop   
 
-.set reorder
+

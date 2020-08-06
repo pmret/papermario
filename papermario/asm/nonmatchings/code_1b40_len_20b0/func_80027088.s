@@ -77,4 +77,4 @@ glabel func_80027088
 /* 002588 80027188 03E00008 */  jr    $ra
 /* 00258C 8002718C 27BD0018 */   addiu $sp, $sp, 0x18
 
-.set reorder
+

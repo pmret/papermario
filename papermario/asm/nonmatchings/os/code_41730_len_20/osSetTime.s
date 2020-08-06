@@ -14,4 +14,4 @@ glabel osSetTime
 /* 041748 80066348 00000000 */  nop   
 /* 04174C 8006634C 00000000 */  nop   
 
-.set reorder
+

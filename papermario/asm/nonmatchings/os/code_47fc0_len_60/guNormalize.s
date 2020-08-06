@@ -30,4 +30,4 @@ glabel guNormalize
 /* 048018 8006CC18 00000000 */  nop   
 /* 04801C 8006CC1C 00000000 */  nop   
 
-.set reorder
+

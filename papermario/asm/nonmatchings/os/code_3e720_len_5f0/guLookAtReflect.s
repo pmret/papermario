@@ -36,4 +36,4 @@ glabel guLookAtReflect
 /* 03ED08 80063908 00000000 */  nop   
 /* 03ED0C 8006390C 00000000 */  nop   
 
-.set reorder
+

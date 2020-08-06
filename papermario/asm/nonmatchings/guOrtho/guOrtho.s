@@ -92,4 +92,4 @@ glabel guOrtho
 
 /* 03EF8C 80063B8C 00000000 */  nop   
 
-.set reorder
+

@@ -18,4 +18,4 @@ glabel osPiRelAccess
 /* 03C938 80061538 00000000 */  nop   
 /* 03C93C 8006153C 00000000 */  nop   
 
-.set reorder
+

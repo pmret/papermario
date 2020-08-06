@@ -30,4 +30,4 @@ glabel guMtxIdent
 /* 042898 80067498 00000000 */  nop   
 /* 04289C 8006749C 00000000 */  nop   
 
-.set reorder
+

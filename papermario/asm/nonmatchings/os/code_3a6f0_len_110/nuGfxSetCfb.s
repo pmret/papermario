@@ -83,4 +83,4 @@ glabel nuGfxSetCfb
 
 /* 03A7FC 8005F3FC 00000000 */  nop   
 
-.set reorder
+

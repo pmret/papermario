@@ -15,4 +15,4 @@ glabel osGetThreadPri
 /* 041348 80065F48 00000000 */  nop
 /* 04134C 80065F4C 00000000 */  nop
 
-.set reorder
+

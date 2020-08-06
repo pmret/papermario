@@ -21,4 +21,4 @@ glabel battle_heap_create
 /* 0060D4 8002ACD4 03E00008 */  jr    $ra
 /* 0060D8 8002ACD8 27BD0018 */   addiu $sp, $sp, 0x18
 
-.set reorder
+

@@ -28,4 +28,4 @@ glabel al_CopyWords
 
 /* 0303BC 80054FBC 00000000 */  nop   
 
-.set reorder
+

@@ -36,4 +36,4 @@ glabel osPfsSelectBank
 /* 044B38 80069738 00000000 */  nop   
 /* 044B3C 8006973C 00000000 */  nop   
 
-.set reorder
+

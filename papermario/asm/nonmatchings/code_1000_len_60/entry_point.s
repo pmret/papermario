@@ -30,4 +30,4 @@ glabel entry_point
 /* 001058 80025C58 00000000 */  nop   
 /* 00105C 80025C5C 00000000 */  nop   
 
-.set reorder
+

@@ -45,4 +45,4 @@ glabel func_80145CE8
 /* 0DC468 80145D68 00000000 */  nop   
 /* 0DC46C 80145D6C 00000000 */  nop   
 
-.set reorder
+

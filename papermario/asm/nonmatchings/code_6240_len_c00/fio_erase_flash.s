@@ -15,4 +15,4 @@ glabel fio_erase_flash
 /* 006E38 8002BA38 00000000 */  nop   
 /* 006E3C 8002BA3C 00000000 */  nop   
 
-.set reorder
+

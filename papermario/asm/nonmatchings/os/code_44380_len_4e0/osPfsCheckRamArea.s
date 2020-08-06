@@ -62,4 +62,4 @@ glabel osPfsCheckRamArea
 /* 044858 80069458 00000000 */  nop   
 /* 04485C 8006945C 00000000 */  nop   
 
-.set reorder
+

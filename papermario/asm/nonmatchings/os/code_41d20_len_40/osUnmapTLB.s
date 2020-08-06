@@ -22,4 +22,4 @@ glabel osUnmapTLB
 
 /* 041D5C 8006695C 00000000 */  nop   
 
-.set reorder
+

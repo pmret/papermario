@@ -72,4 +72,4 @@ glabel osDestroyThread
 /* 047E28 8006CA28 00000000 */  nop   
 /* 047E2C 8006CA2C 00000000 */  nop   
 
-.set reorder
+

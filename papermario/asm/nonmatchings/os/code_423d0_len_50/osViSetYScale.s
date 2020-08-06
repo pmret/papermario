@@ -26,4 +26,4 @@ glabel osViSetYScale
 /* 042418 80067018 00000000 */  nop   
 /* 04241C 8006701C 00000000 */  nop   
 
-.set reorder
+

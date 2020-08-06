@@ -24,4 +24,4 @@ glabel memset
 /* 04A1E8 8006EDE8 00000000 */  nop   
 /* 04A1EC 8006EDEC 00000000 */  nop   
 
-.set reorder
+

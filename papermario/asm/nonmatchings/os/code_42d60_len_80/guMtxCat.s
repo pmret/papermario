@@ -38,4 +38,4 @@ glabel guMtxCat
 /* 042DD8 800679D8 00000000 */  nop   
 /* 042DDC 800679DC 00000000 */  nop   
 
-.set reorder
+

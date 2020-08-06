@@ -49,4 +49,4 @@ glabel PlaySoundAtCollider
 /* 0EF068 802CA6B8 00000000 */  nop   
 /* 0EF06C 802CA6BC 00000000 */  nop   
 
-.set reorder
+

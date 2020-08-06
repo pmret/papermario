@@ -215,4 +215,4 @@ glabel SetSpriteShading
 /* 0FE3E4 802D9A34 03E00008 */  jr    $ra
 /* 0FE3E8 802D9A38 27BD0068 */   addiu $sp, $sp, 0x68
 
-.set reorder
+

@@ -12,4 +12,4 @@ glabel get_game_mode
 /* 00E938 80033538 00000000 */  nop   
 /* 00E93C 8003353C 00000000 */  nop   
 
-.set reorder
+

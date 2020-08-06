@@ -48,4 +48,4 @@ glabel get_enemy_safe
 /* 01A1E8 8003EDE8 00000000 */  nop   
 /* 01A1EC 8003EDEC 00000000 */  nop   
 
-.set reorder
+

@@ -42,4 +42,4 @@ glabel osGetTime
 /* 041728 80066328 00000000 */  nop   
 /* 04172C 8006632C 00000000 */  nop   
 
-.set reorder
+

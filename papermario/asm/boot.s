@@ -790,4 +790,4 @@ glabel func_A4000AC4
 /* 000B68 A4000B68 00000000 */  nop   
 /* 000B6C A4000B6C 00000000 */  nop   
 
-.set reorder
+

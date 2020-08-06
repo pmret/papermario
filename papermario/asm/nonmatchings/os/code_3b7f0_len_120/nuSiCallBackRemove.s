@@ -42,4 +42,4 @@ glabel nuSiCallBackRemove
 /* 03B908 80060508 00000000 */  nop   
 /* 03B90C 8006050C 00000000 */  nop   
 
-.set reorder
+

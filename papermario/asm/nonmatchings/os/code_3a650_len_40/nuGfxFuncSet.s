@@ -22,4 +22,4 @@ glabel nuGfxFuncSet
 
 /* 03A68C 8005F28C 00000000 */  nop   
 
-.set reorder
+

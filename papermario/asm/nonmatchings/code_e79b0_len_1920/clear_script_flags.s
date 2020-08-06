@@ -49,4 +49,4 @@ glabel clear_script_flags
 /* 0E92C8 802C4918 00000000 */  nop   
 /* 0E92CC 802C491C 00000000 */  nop   
 
-.set reorder
+

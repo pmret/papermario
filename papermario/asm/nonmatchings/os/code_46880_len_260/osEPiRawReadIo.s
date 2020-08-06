@@ -111,4 +111,4 @@ glabel osEPiRawReadIo
 /* 046AD8 8006B6D8 00000000 */  nop   
 /* 046ADC 8006B6DC 00000000 */  nop   
 
-.set reorder
+

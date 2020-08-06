@@ -206,4 +206,4 @@ glabel func_802B742C
 /* E215B8 802B7708 00000000 */  nop   
 /* E215BC 802B770C 00000000 */  nop   
 
-.set reorder
+
