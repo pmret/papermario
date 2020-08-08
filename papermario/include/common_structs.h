@@ -63,7 +63,7 @@ typedef struct {
     /* 0x00C */ s16 coins;
     /* 0x00E */ s8 fortressKeyCount;
     /* 0x00F */ u8 starPieces;
-    /* 0x010 */ s8 starPoints;
+    /* 0x010 */ u8 starPoints;
     /* 0x011 */ char unk_11;
     /* 0x012 */ s8 currentPartner;
     /* 0x013 */ char unk_13;

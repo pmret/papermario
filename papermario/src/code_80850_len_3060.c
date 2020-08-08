@@ -7,6 +7,26 @@ player_data* get_player_data(void) {
 }
 
 INCLUDE_ASM(code_80850_len_3060, add_item);
+//Mostly matches. Just regalloc left.
+/*s32 add_item(s16 item) {
+    player_data* playerData = &gPlayerData;
+    s32 i;
+
+    sort_items();
+
+    for(i = 0; i < 10; i++) {
+        if (playerData->invItems[i] == 0) {
+            break;
+        }
+    }
+
+    if (i == 10) {
+        return -1;
+    }
+    
+    playerData->invItems[i] = item;
+    return i;
+}*/
 
 INCLUDE_ASM(code_80850_len_3060, get_item_count);
 
@@ -108,15 +128,56 @@ INCLUDE_ASM(code_80850_len_3060, sync_status_menu);
 
 INCLUDE_ASM(code_80850_len_3060, reset_status_menu);
 
+// uses a jumptable, which we need .rodata support for.
 INCLUDE_ASM(code_80850_len_3060, is_ability_active);
 
 s32 is_partner_ability_active(void) {
     return 0;
 }
 
-INCLUDE_ASM(code_80850_len_3060, add_coins);
+s16 add_coins(s32 amt) {
+    player_data *playerData = &gPlayerData;
+    s16 temp_v0;
 
-INCLUDE_ASM(code_80850_len_3060, add_star_points);
+    temp_v0 = playerData->coins + amt;
+    playerData->coins = temp_v0;
+    if (temp_v0 >= 1000) {
+        playerData->coins = 999;
+    }
+    if (playerData->coins < 0) {
+        playerData->coins = 0;
+    }
+
+    if (amt > 0) {
+        u32 temp_v0_2 = playerData->totalCoinsEarned + amt;
+        playerData->totalCoinsEarned = temp_v0_2;
+        if (temp_v0_2 > 99999) {
+            playerData->totalCoinsEarned = 99999;
+        }
+    }
+    return playerData->coins;
+}
+
+s8 add_star_points(s32 amt) {
+    player_data *playerData = &gPlayerData;
+    player_data *playerData2 = &gPlayerData;
+    s8 temp_v0;
+
+    temp_v0 = playerData->starPoints + amt;
+
+    //TODO: probably a macro!
+    playerData2->starPoints = temp_v0;
+    if (temp_v0 >= 0x65) {
+       playerData2->starPoints = 0x64;
+    }
+
+    //TODO: probably a macro!
+    temp_v0 = playerData2->starPoints;
+    if (temp_v0 < 0) {
+       playerData2->starPoints = 0;
+    }
+    return gPlayerData.starPoints;
+}
 
 u8 add_star_pieces(s32 amt) {
     player_data *playerData = &gPlayerData;
