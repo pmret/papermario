@@ -6,9 +6,7 @@ player_data* get_player_data(void) {
     return &gPlayerData;
 }
 
-INCLUDE_ASM(code_80850_len_3060, add_item);
-//Mostly matches. Just regalloc left.
-/*s32 add_item(s16 item) {
+s32 add_item(s32 itemID) {
     player_data* playerData = &gPlayerData;
     s32 i;
 
@@ -24,9 +22,9 @@ INCLUDE_ASM(code_80850_len_3060, add_item);
         return -1;
     }
     
-    playerData->invItems[i] = item;
+    playerData->invItems[i] = itemID;
     return i;
-}*/
+}
 
 INCLUDE_ASM(code_80850_len_3060, get_item_count);
 
@@ -137,11 +135,10 @@ s32 is_partner_ability_active(void) {
 
 s16 add_coins(s32 amt) {
     player_data *playerData = &gPlayerData;
-    s16 temp_v0;
+    s16 newCoins = playerData->coins + amt;
 
-    temp_v0 = playerData->coins + amt;
-    playerData->coins = temp_v0;
-    if (temp_v0 >= 1000) {
+    playerData->coins = newCoins;
+    if (newCoins > 999) {
         playerData->coins = 999;
     }
     if (playerData->coins < 0) {
@@ -149,9 +146,8 @@ s16 add_coins(s32 amt) {
     }
 
     if (amt > 0) {
-        u32 temp_v0_2 = playerData->totalCoinsEarned + amt;
-        playerData->totalCoinsEarned = temp_v0_2;
-        if (temp_v0_2 > 99999) {
+        playerData->totalCoinsEarned += amt;
+        if (playerData->totalCoinsEarned > 99999) {
             playerData->totalCoinsEarned = 99999;
         }
     }
@@ -161,19 +157,17 @@ s16 add_coins(s32 amt) {
 s8 add_star_points(s32 amt) {
     player_data *playerData = &gPlayerData;
     player_data *playerData2 = &gPlayerData;
-    s8 temp_v0;
-
-    temp_v0 = playerData->starPoints + amt;
+    s8 newSP = playerData->starPoints + amt;
 
     //TODO: probably a macro!
-    playerData2->starPoints = temp_v0;
-    if (temp_v0 >= 0x65) {
-       playerData2->starPoints = 0x64;
+    playerData2->starPoints = newSP;
+    if (newSP > 100) {
+       playerData2->starPoints = 100;
     }
 
     //TODO: probably a macro!
-    temp_v0 = playerData2->starPoints;
-    if (temp_v0 < 0) {
+    newSP = playerData2->starPoints;
+    if (newSP < 0) {
        playerData2->starPoints = 0;
     }
     return gPlayerData.starPoints;

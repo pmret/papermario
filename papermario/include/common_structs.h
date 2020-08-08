@@ -97,7 +97,7 @@ typedef struct {
     /* 0x2AA */ s16 unk_2AA;
     /* 0x2AC */ s32 unk_2AC;
     /* 0x2B0 */ s32 unk_2B0;
-    /* 0x2B4 */ s32 totalCoinsEarned;
+    /* 0x2B4 */ u32 totalCoinsEarned;
     /* 0x2B8 */ s16 idleFrameCounter; /* frames with no inputs, overflows ever ~36 minutes of idling */
     /* 0x2BA */ char unk_2BA[0x2];
     /* 0x2BC */ s32 frameCounter; /* increases by 2 per frame */
