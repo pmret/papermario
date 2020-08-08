@@ -130,7 +130,18 @@ INCLUDE_ASM(code_80850_len_3060, recover_fp);
 
 INCLUDE_ASM(code_80850_len_3060, recover_hp);
 
-INCLUDE_ASM(code_80850_len_3060, subtract_hp);
+void subtract_hp(s32 amt) {
+    player_data* playerData = &gPlayerData;
+    s32 newHP = gPlayerData.curHP;
+    
+    if (amt > 0) {
+        newHP -= amt;
+    }
+    if (amt < 0 || newHP < 1) {
+        newHP = 1;
+    }
+    playerData->curHP = newHP;
+}
 
 s8 has_full_hp(void) {
     player_data* playerData = &gPlayerData;
@@ -166,4 +177,3 @@ s8 subtract_fortress_keys(s8 amt) {
 s8 get_fortress_key_count(void) {
     return gPlayerData.fortressKeyCount;
 }
-

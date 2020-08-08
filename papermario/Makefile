@@ -50,7 +50,7 @@ OBJCOPY = $(CROSS)objcopy
 CPPFLAGS = -Iinclude -D _LANGUAGE_C -ffreestanding -DF3DEX_GBI_2
 ASFLAGS = -EB -march=vr4300 -mtune=vr4300 -Iinclude
 OLDASFLAGS= -EB -Iinclude
-CFLAGS  = -O2 -quiet -G 0 -mcpu=vr4300 -mfix4300
+CFLAGS  = -O2 -quiet -G 0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32
 LDFLAGS = -T undefined_syms.txt -T $(LD_SCRIPT) -Map $(BUILD_DIR)/papermario.map --no-check-sections
 
 ######################## Targets #############################
