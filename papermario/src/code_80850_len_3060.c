@@ -118,26 +118,26 @@ INCLUDE_ASM(code_80850_len_3060, add_coins);
 
 INCLUDE_ASM(code_80850_len_3060, add_star_points);
 
-INCLUDE_ASM(code_80850_len_3060, add_star_pieces);
+u8 add_star_pieces(s32 amt) {
+    player_data *playerData = &gPlayerData;
+    player_data *playerData2 = &gPlayerData;
+    s32 newSP = playerData->starPieces;
 
-/*u8 add_star_pieces(s32 amt) {
-    player_data* playerData = &gPlayerData;
-    s32 newStarPieces = playerData->starPieces + amt;
-
-    if (newStarPieces > 222) {
-        newStarPieces = 222;
-    } 
-    if (newStarPieces < 0) {
-        newStarPieces = 0;
+    newSP += amt;
+    if (newSP > 222) {
+        newSP = 222;
     }
-    playerData->starPieces = newStarPieces;
+    if (newSP < 0) {
+        newSP = 0;
+    }
+    playerData->starPieces = newSP;
 
     if (amt > 0) {
         playerData->starPiecesCollected += amt;
     }
 
-    return playerData->starPieces;
-}*/
+    return playerData2->starPieces;
+}
 
 void increment_max_SP() {
     player_data* playerData = &gPlayerData;
@@ -228,7 +228,7 @@ s32 recover_hp(s32 amt) {
 void subtract_hp(s32 amt) {
     player_data* playerData = &gPlayerData;
     s32 newHP = playerData->curHP;
-    
+
     if (amt > 0) {
         newHP -= amt;
     }
@@ -252,7 +252,7 @@ s8 has_full_fp(void) {
 
 s8 add_fortress_keys(s32 amt) {
     player_data* playerData = &gPlayerData;
-    
+
     playerData->fortressKeyCount += amt;
     return playerData->fortressKeyCount;
 }
@@ -260,12 +260,12 @@ s8 add_fortress_keys(s32 amt) {
 s8 subtract_fortress_keys(s8 amt) {
     player_data* playerData = &gPlayerData;
     player_data* playerData2 = &gPlayerData; // required to match
-    
+
     playerData->fortressKeyCount -= amt;
     if (playerData->fortressKeyCount < 0) {
         playerData->fortressKeyCount = 0;
     }
-    
+
     return playerData2->fortressKeyCount; // required to use playerData2 here to match
 }
 
