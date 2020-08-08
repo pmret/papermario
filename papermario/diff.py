@@ -319,7 +319,6 @@ def search_map_file(fn_name):
         last_line = ""
         for line in lines:
             if line.startswith(" .text"):
-                print(line)
                 cur_objfile = line.split()[3]
             if "load address" in line:
                 tokens = last_line.split() + line.split()

@@ -120,19 +120,114 @@ INCLUDE_ASM(code_80850_len_3060, add_star_points);
 
 INCLUDE_ASM(code_80850_len_3060, add_star_pieces);
 
-INCLUDE_ASM(code_80850_len_3060, increment_max_SP);
+/*u8 add_star_pieces(s32 amt) {
+    player_data* playerData = &gPlayerData;
+    s32 newStarPieces = playerData->starPieces + amt;
 
-INCLUDE_ASM(code_80850_len_3060, set_max_SP);
+    if (newStarPieces > 222) {
+        newStarPieces = 222;
+    } 
+    if (newStarPieces < 0) {
+        newStarPieces = 0;
+    }
+    playerData->starPieces = newStarPieces;
+
+    if (amt > 0) {
+        playerData->starPiecesCollected += amt;
+    }
+
+    return playerData->starPieces;
+}*/
+
+void increment_max_SP() {
+    player_data* playerData = &gPlayerData;
+
+    playerData->maxStarPower++;
+    playerData->specialBarsFilled = playerData->maxStarPower * 256;
+}
+
+void set_max_SP(s8 newMaxSP) {
+    player_data* playerData = &gPlayerData;
+
+    playerData->maxStarPower = newMaxSP;
+    playerData->specialBarsFilled = newMaxSP * 256;
+}
 
 INCLUDE_ASM(code_80850_len_3060, add_SP);
 
-INCLUDE_ASM(code_80850_len_3060, recover_fp);
+/*u16 add_SP(s32 arg0) {
+    player_data* playerData = &gPlayerData;
+    s16 temp_v0_2;
+    s8 temp_v1;
+    u16 temp_v0;
+    s32 phi_v1;
 
-INCLUDE_ASM(code_80850_len_3060, recover_hp);
+    (void *)0x8010EF58->unk57 = (u8)1;
+    (void *)0x8010EF58->unk58 = (u8)0x3C;
+    phi_v1 = playerData->specialBarsFilled;
+    if (playerData->specialBarsFilled < 0) {
+        phi_v1 = playerData->specialBarsFilled + 31;
+    }
+    (void *)0x8010EF58->unk59 = (s8) (phi_v1 >> 5);
+    playerData->specialBarsFilled += arg0;
+
+    temp_v1 = playerData->maxStarPower;
+    playerData->specialBarsFilled = temp_v1;
+    if (temp_v1 >= arg0) {
+
+    }
+    temp_v0 = playerData->specialBarsFilled;
+    (void *)0x8010EF58->unk48 = temp_v0;
+    return temp_v0;
+}*/
+
+s32 recover_fp(s32 amt) {
+    player_data* playerData = &gPlayerData;
+    s32 newFP = playerData->curFP;
+    s32 ret;
+
+    if (amt == -2) {
+        playerData->curMaxFP += 1;
+        playerData->curFP = playerData->curMaxFP;
+        return playerData->curMaxFP;
+    }
+
+    if (amt > 0) {
+        newFP += amt;
+    }
+    if ((amt == -1) || (ret = newFP, (playerData->curMaxFP < newFP))) {
+        ret = playerData->curMaxFP;
+    }
+
+    playerData->curFP = ret;
+    return ret;
+}
+
+s32 recover_hp(s32 amt) {
+    player_data* playerData = &gPlayerData;
+    s32 newHP = playerData->curHP;
+    s32 ret;
+
+    if (amt == -2) {
+        playerData->curMaxHP += 1;
+        playerData->curHP = playerData->curMaxHP;
+        return playerData->curMaxHP;
+    }
+
+    if (amt > 0) {
+        newHP += amt;
+    }
+    if ((amt == -1) || (ret = newHP, (playerData->curMaxHP < newHP))) {
+        ret = playerData->curMaxHP;
+    }
+
+    playerData->curHP = ret;
+    return ret;
+}
 
 void subtract_hp(s32 amt) {
     player_data* playerData = &gPlayerData;
-    s32 newHP = gPlayerData.curHP;
+    s32 newHP = playerData->curHP;
     
     if (amt > 0) {
         newHP -= amt;
