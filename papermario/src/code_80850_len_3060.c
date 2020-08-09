@@ -139,7 +139,20 @@ INCLUDE_ASM(code_80850_len_3060, func_800E9900);
 
 INCLUDE_ASM(code_80850_len_3060, is_status_menu_visible);
 
-INCLUDE_ASM(code_80850_len_3060, status_menu_start_blinking_hp);
+void status_menu_start_blinking_hp(void) {
+    game_status* gameStatus = (*gGameStatusPtr);
+    ui_status* uiStatus = &gUIStatus;
+    ui_status* uiStatus2 = &gUIStatus;
+
+    if (gameStatus->unk_70 == 0) {
+        uiStatus->hpBlinkTimer = 120;
+    }
+
+    if (uiStatus2->hpBlinking != 1) {
+        uiStatus2->hpBlinking = 1;
+        uiStatus2->hpBlinkCounter = 0;
+    }
+}
 
 void status_menu_stop_blinking_hp(void) {
     ui_status* uiStatus = &gUIStatus;
@@ -151,7 +164,20 @@ void status_menu_stop_blinking_hp(void) {
     }
 }
 
-INCLUDE_ASM(code_80850_len_3060, status_menu_start_blinking_fp);
+void status_menu_start_blinking_fp(void) {
+    game_status* gameStatus = (*gGameStatusPtr);
+    ui_status* uiStatus = &gUIStatus;
+    ui_status* uiStatus2 = &gUIStatus;
+
+    if (gameStatus->unk_70 == 0) {
+        uiStatus->fpBlinkTimer = 120;
+    }
+
+    if (uiStatus2->fpBlinking != 1) {
+        uiStatus2->fpBlinking = 1;
+        uiStatus2->fpBlinkCounter = 0;
+    }
+}
 
 void status_menu_stop_blinking_fp(void) {
     ui_status* uiStatus = &gUIStatus;
@@ -162,7 +188,20 @@ void status_menu_stop_blinking_fp(void) {
     }
 }
 
-INCLUDE_ASM(code_80850_len_3060, status_menu_start_blinking_coins);
+void status_menu_start_blinking_coins(void) {
+    game_status* gameStatus = (*gGameStatusPtr);
+    ui_status* uiStatus = &gUIStatus;
+    ui_status* uiStatus2 = &gUIStatus;
+
+    if (gameStatus->unk_70 == 0) {
+        uiStatus->coinsBlinkTimer = 120;
+    }
+
+    if (uiStatus2->coinsBlinking != 1) {
+        uiStatus2->coinsBlinking = 1;
+        uiStatus2->coinsBlinkCounter = 0;
+    }
+}
 
 void status_menu_stop_blinking_coins(void) {
     ui_status* uiStatus = &gUIStatus;
@@ -174,7 +213,16 @@ void status_menu_stop_blinking_coins(void) {
     }
 }
 
-INCLUDE_ASM(code_80850_len_3060, status_menu_start_blinking_sp);
+void status_menu_start_blinking_sp(void) {
+    player_data *playerData = &gPlayerData;
+    ui_status* uiStatus = &gUIStatus;
+
+    uiStatus->spBarsToBlink = playerData->maxStarPower;
+    if (uiStatus->spBlinking != 1) {
+        uiStatus->spBlinking = 1;
+        uiStatus->spBlinkCounter = 0;
+    }
+}
 
 void status_menu_stop_blinking_sp(void) {
     ui_status* uiStatus = &gUIStatus;
@@ -185,9 +233,24 @@ void status_menu_stop_blinking_sp(void) {
     }
 }
 
-INCLUDE_ASM(code_80850_len_3060, status_menu_start_blinking_sp_bars);
+void status_menu_start_blinking_sp_bars(s8 numBarsToBlink) {
+    ui_status* uiStatus = &gUIStatus;
 
-INCLUDE_ASM(code_80850_len_3060, status_menu_start_blinking_starpoints);
+    uiStatus->spBarsToBlink = numBarsToBlink;
+    if (uiStatus->spBlinking != 1) {
+        uiStatus->spBlinking = 1;
+        uiStatus->spBlinkCounter = 0;
+    }
+}
+
+void status_menu_start_blinking_starpoints(void) {
+    ui_status* uiStatus = &gUIStatus;
+
+    if (uiStatus->starpointsBlinking != 1) {
+        uiStatus->starpointsBlinking = 1;
+        uiStatus->starpointsBlinkCounter = 0;
+    }
+}
 
 void status_menu_stop_blinking_starpoints(void) {
     ui_status* uiStatus = &gUIStatus;
