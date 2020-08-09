@@ -107,13 +107,38 @@ INCLUDE_ASM(code_80850_len_3060, hide_coin_counter);
 
 INCLUDE_ASM(code_80850_len_3060, func_800E96C8);
 
-INCLUDE_ASM(code_80850_len_3060, ShowCoinCounter);
+s32 ShowCoinCounter(ScriptContext* script) {
+    if (get_variable(script, *script->ptrReadPos)) {
+        show_coin_counter();
+    } else {
+        hide_coin_counter();
+    }
+    return 2;
+}
+
 
 INCLUDE_ASM(code_80850_len_3060, func_800E973C);
 
-INCLUDE_ASM(code_80850_len_3060, open_status_menu_long);
+void open_status_menu_long(void) {
+    ui_status* uiStatus = &gUIStatus;
 
-INCLUDE_ASM(code_80850_len_3060, open_status_menu_short);
+    if (uiStatus->hidden) {
+        uiStatus->showTimer = 210;
+        uiStatus->hidden = 0;
+        uiStatus->unk_3B = 1;
+    }
+}
+
+
+void open_status_menu_short(void) {
+    ui_status* uiStatus = &gUIStatus;
+
+    if (uiStatus->hidden) {
+        uiStatus->showTimer = 105;
+        uiStatus->hidden = 0;
+        uiStatus->unk_3B = 1;
+    }
+}
 
 INCLUDE_ASM(code_80850_len_3060, func_800E97B8);
 
