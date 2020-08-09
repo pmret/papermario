@@ -103,9 +103,9 @@ typedef struct {
     /* 0x2BC */ s32 frameCounter; /* increases by 2 per frame */
     /* 0x2C0 */ s16 quizzesAnswered;
     /* 0x2C2 */ s16 quizzesCorrect;
-    /* 0x2C4 */ s32 unk_2C4;
-    /* 0x2C8 */ s32 unk_2C8[12];
-    /* 0x2F8 */ char unk_2F8[0x30];
+    /* 0x2C4 */ s32 unk_2C4[12];
+    /* 0x2F4 */ s32 unk_2F4[12];
+    /* 0x2F8 */ char unk_324[4];
     /* 0x328 */ s32 unk_328;
     /* 0x32C */ s16 starPiecesCollected;
     /* 0x32E */ s16 jumpGamePlays;
