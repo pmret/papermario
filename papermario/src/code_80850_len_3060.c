@@ -1,6 +1,100 @@
 #include "common.h"
 
-INCLUDE_ASM(code_80850_len_3060, clear_player_data);
+void clear_player_data(void) {
+    player_data* playerData = &gPlayerData;
+    s32 i;
+
+    D_8010CD10 = 0;
+    D_8010CD12 = 0;
+
+    playerData->hammerLevel = -1;
+    playerData->curHP = 10;
+    playerData->curMaxHP = 10;
+    playerData->hardMaxHP = 10;
+    playerData->curFP = 5;
+    playerData->curMaxFP = 5;
+    playerData->hardMaxFP = 5;
+    playerData->maxBP = 3;
+    playerData->level = 1;
+    playerData->bootsLevel = 0;
+    playerData->hasActionCommands = 0;
+    playerData->coins = 0;
+    playerData->fortressKeyCount = 0;
+    playerData->starPieces = 0;
+    playerData->starPoints = 0;
+    playerData->unk_11 = 0;
+    playerData->unk_288 = 0;
+    playerData->merleeSpellType = 0;
+    playerData->merleeCastsLeft = 0;
+    playerData->merleeTurnCount = -1;
+    playerData->maxStarPower = 0;
+    playerData->specialBarsFilled = 0;
+    playerData->unk_292 = 0;
+    playerData->currentPartner = 0;
+
+    for(i = 0; i < ARRAY_COUNT(playerData->partners); i++)
+    {
+        playerData->partners[i].enabled = 0;
+        playerData->partners[i].level = 0;
+        playerData->partners[i].unk_2 = 0;
+        playerData->partners[i].unk_4 = 0;
+        playerData->partners[i].unk_6 = 0;
+    }
+
+    for(i = ARRAY_COUNT(playerData->keyItems) - 1; i >= 0; i--){
+        playerData->keyItems[i] = 0;
+    }
+
+    for(i = ARRAY_COUNT(playerData->badges) - 1; i >= 0; i--) {
+        playerData->badges[i] = 0;
+    }
+
+    for(i = ARRAY_COUNT(playerData->invItems) - 1; i >= 0; i--) {
+        playerData->invItems[i] = 0;
+    }
+
+    for(i = ARRAY_COUNT(playerData->equippedBadges) - 1; i >= 0; i--) {
+        playerData->equippedBadges[i] = 0;
+    }
+
+    for(i = ARRAY_COUNT(playerData->storedItems) - 1; i >= 0; i--) {
+        playerData->storedItems[i] = 0;
+    }
+
+    playerData->otherHitsTaken = 0;
+    playerData->unk_296 = 0;
+    playerData->hitsTaken = 0;
+    playerData->hitsBlocked = 0;
+    playerData->playerFirstStrikes = 0;
+    playerData->enemyFirstStrikes = 0;
+    playerData->powerBounces = 0;
+    playerData->battlesCount = 0;
+    playerData->unk_2A4 = 0;
+    playerData->unk_2A6 = 0;
+    playerData->unk_2A8 = 0;
+    playerData->unk_2AA = 0;
+    playerData->unk_2AC = 0;
+    playerData->unk_2B0 = 0;
+    playerData->idleFrameCounter = 0;
+    playerData->totalCoinsEarned = 0;
+    playerData->frameCounter = 0;
+    playerData->quizzesAnswered = 0;
+    playerData->quizzesCorrect = 0;
+
+    for(i = 0; i < ARRAY_COUNT(playerData->unk_2C4); i++) {
+        playerData->unk_2C4[i] = 0;
+        playerData->unk_2F4[i] = 0;
+    }
+
+    playerData->unk_328 = 0;
+    playerData->starPiecesCollected = 0;
+    playerData->jumpGamePlays = 0;
+    playerData->jumpGameTotal = 0;
+    playerData->jumpGameRecord = 0;
+    playerData->smashGamePlays = 0;
+    playerData->smashGameTotal = 0;
+    playerData->smashGameRecord = 0;
+}
 
 player_data* get_player_data(void) {
     return &gPlayerData;
