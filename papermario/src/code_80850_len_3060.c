@@ -1,5 +1,7 @@
 #include "common.h"
 
+void sort_items(void);
+
 void clear_player_data(void) {
     player_data* playerData = &gPlayerData;
     s32 i;
@@ -169,7 +171,25 @@ s32 find_item(s32 itemID) {
     return i;
 }
 
-INCLUDE_ASM(code_80850_len_3060, sort_items);
+void sort_items(void)
+{
+    player_data* playerData = &gPlayerData;
+    int j;
+    int i;
+
+    for (i = ARRAY_COUNT(playerData->invItems) - 2; i >= 0; i--) {
+        if (playerData->invItems[i] != 0) {
+            for (j = ARRAY_COUNT(playerData->invItems) - 1; i < j; j--) {
+                if (playerData->invItems[j] == 0) {
+                    playerData->invItems[j] = playerData->invItems[i];
+                    playerData->invItems[i] = 0;
+                    break;
+                }
+            }
+        }
+    }
+    return;
+}
 
 s32 add_badge(s32 itemID) {
     player_data* playerData = &gPlayerData;
