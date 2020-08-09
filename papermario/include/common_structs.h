@@ -118,6 +118,64 @@ typedef struct {
 } player_data; // size = 0x340
 
 typedef struct {
+    /* 0x00 */ s32 hpIconIndex;
+    /* 0x04 */ s32 heartIconIndex;
+    /* 0x08 */ s32 fpIconIndex;
+    /* 0x0C */ s32 flowerIconIndex;
+    /* 0x10 */ s32 coinIconIndex;
+    /* 0x14 */ s32 coinIconIndex2;
+    /* 0x18 */ s32 starpointsIconIndex;
+    /* 0x1C */ s32 starpointsIconIndex2;
+    /* 0x20 */ s32 iconIndex8;
+    /* 0x24 */ s32 iconIndex9;
+    /* 0x28 */ s32 iconIndexA;
+    /* 0x2C */ s32 iconIndexB;
+    /* 0x30 */ s32 iconIndexC;
+    /* 0x34 */ s16 drawPosX; /* overall x-offset for whole UI */
+    /* 0x36 */ s16 drawPosY; /* modulated as it appears, goes away */
+    /* 0x38 */ s16 showTimer;
+    /* 0x3A */ s8 hidden;
+    /* 0x3B */ s8 unk_3B;
+    /* 0x3C */ s8 unk_3C;
+    /* 0x3D */ s8 displayHP;
+    /* 0x3E */ s8 displayFP;
+    /* 0x3F */ char unk_3F;
+    /* 0x40 */ s16 displayCounts;
+    /* 0x42 */ s16 displayStarpoints;
+    /* 0x44 */ s8 igonreChanges; /* set != 0 to prevent automatic opening from HP/FP changes */
+    /* 0x45 */ s8 unk_45;
+    /* 0x46 */ s8 unk_46;
+    /* 0x47 */ s8 disabled; /* set != 0 for menu to be disabled completely */
+    /* 0x48 */ s16 displaySP;
+    /* 0x4A */ s8 hpBlinking;
+    /* 0x4B */ s8 hpBlinkCounter;
+    /* 0x4C */ s8 hpBlinkTimer;
+    /* 0x4D */ s8 fpBlinking;
+    /* 0x4E */ s8 fpBlinkCounter;
+    /* 0x4F */ s8 fpBlinkTimer;
+    /* 0x50 */ s8 spBlinking;
+    /* 0x51 */ s8 spBlinkCounter;
+    /* 0x52 */ s8 starpointsBlinking;
+    /* 0x53 */ s8 starpointsBlinkCounter;
+    /* 0x54 */ s8 coinsBlinking;
+    /* 0x55 */ s8 coinsBlinkCounter;
+    /* 0x56 */ s8 coinsBlinkTimer;
+    /* 0x57 */ s8 unk_57;
+    /* 0x58 */ s8 unk_58;
+    /* 0x59 */ s8 unk_59;
+    /* 0x5A */ s8 spBarsToBlink; /* how many sp bars to blink */
+    /* 0x5B */ char unk_5B;
+    /* 0x5C */ s32 iconIndex10;
+    /* 0x60 */ s32 iconIndex11;
+    /* 0x64 */ s32 iconIndex12;
+    /* 0x68 */ s32 iconIndex13;
+    /* 0x6C */ s8 unk_6C;
+    /* 0x6D */ s8 unk_6D;
+    /* 0x6E */ s8 unk_6E;
+    /* 0x6F */ char unk_6F;
+} ui_status; // size = 0x70
+
+typedef struct {
     /* 0x00 */ char unk_00[0xC];
     /* 0x0C */ s32* ptrReadPos;
 } ScriptContext;

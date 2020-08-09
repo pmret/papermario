@@ -12,13 +12,13 @@ s32 add_item(s32 itemID) {
 
     sort_items();
 
-    for(i = 0; i < 10; i++) {
+    for(i = 0; i < ARRAY_COUNT(gPlayerData.invItems); i++) {
         if (playerData->invItems[i] == 0) {
             break;
         }
     }
 
-    if (i == 10) {
+    if (i == ARRAY_COUNT(gPlayerData.invItems)) {
         return -1;
     }
     
@@ -26,9 +26,23 @@ s32 add_item(s32 itemID) {
     return i;
 }
 
-INCLUDE_ASM(code_80850_len_3060, get_item_count);
+s32 get_item_count(void) {
+    player_data *playerData = &gPlayerData;
+    s32 i = 0;
+    s32 sum = 0;
 
-INCLUDE_ASM(code_80850_len_3060, get_item_empty_count);
+    for (i; i < ARRAY_COUNT(gPlayerData.invItems); i++) {
+        if (playerData->invItems[i] != 0) {
+            sum++;
+        }
+    }
+    
+    return sum;
+}
+
+s32 get_item_empty_count(void) {
+    return ARRAY_COUNT(gPlayerData.invItems) - get_item_count();
+}
 
 INCLUDE_ASM(code_80850_len_3060, find_item);
 
@@ -36,12 +50,41 @@ INCLUDE_ASM(code_80850_len_3060, sort_items);
 
 INCLUDE_ASM(code_80850_len_3060, add_badge);
 
-INCLUDE_ASM(code_80850_len_3060, store_item);
+s32 store_item(s32 itemID) {
+    player_data *playerData = &gPlayerData;
+    s32 i;
 
-INCLUDE_ASM(code_80850_len_3060, get_stored_count);
+    for (i = 0; i < ARRAY_COUNT(gPlayerData.storedItems); i++) {
+        if (playerData->storedItems[i] == 0) {
+            break;
+        }
+    }
+
+    if (i == ARRAY_COUNT(gPlayerData.storedItems)) {
+        return -1;
+    } else {
+        playerData->storedItems[i] = itemID;
+    }
+    
+    return i;
+}
+
+s32 get_stored_count(void) {
+    player_data *playerData = &gPlayerData;
+    s32 i = 0;
+    s32 sum = 0;
+
+    for (i; i < ARRAY_COUNT(gPlayerData.storedItems); i++) {
+        if (playerData->storedItems[i] != 0) {
+            sum++;
+        }
+    }
+    
+    return sum;
+}
 
 s32 get_stored_empty_count(void) {
-    return 32 - get_stored_count();
+    return ARRAY_COUNT(gPlayerData.storedItems) - get_stored_count();
 }
 
 INCLUDE_ASM(code_80850_len_3060, enforce_hpfp_limits);
@@ -209,32 +252,6 @@ void set_max_SP(s8 newMaxSP) {
 }
 
 INCLUDE_ASM(code_80850_len_3060, add_SP);
-
-/*u16 add_SP(s32 arg0) {
-    player_data* playerData = &gPlayerData;
-    s16 temp_v0_2;
-    s8 temp_v1;
-    u16 temp_v0;
-    s32 phi_v1;
-
-    (void *)0x8010EF58->unk57 = (u8)1;
-    (void *)0x8010EF58->unk58 = (u8)0x3C;
-    phi_v1 = playerData->specialBarsFilled;
-    if (playerData->specialBarsFilled < 0) {
-        phi_v1 = playerData->specialBarsFilled + 31;
-    }
-    (void *)0x8010EF58->unk59 = (s8) (phi_v1 >> 5);
-    playerData->specialBarsFilled += arg0;
-
-    temp_v1 = playerData->maxStarPower;
-    playerData->specialBarsFilled = temp_v1;
-    if (temp_v1 >= arg0) {
-
-    }
-    temp_v0 = playerData->specialBarsFilled;
-    (void *)0x8010EF58->unk48 = temp_v0;
-    return temp_v0;
-}*/
 
 s32 recover_fp(s32 amt) {
     player_data* playerData = &gPlayerData;
