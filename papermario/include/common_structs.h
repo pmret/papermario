@@ -133,10 +133,8 @@ typedef struct {
 } player_data; // size = 0x340
 
 typedef struct {
-    /* 0x00 */ s32 hpIconIndex;
-    /* 0x04 */ s32 heartIconIndex;
-    /* 0x08 */ s32 fpIconIndex;
-    /* 0x0C */ s32 flowerIconIndex;
+    /* 0x00 */ s32 hpIconIndexes[2]; /* hpIconIndex, heartIconIndex */
+    /* 0x08 */ s32 fpIconIndexes[2]; /* fpIconIndex, flowerIconIndex */
     /* 0x10 */ s32 coinIconIndex;
     /* 0x14 */ s32 coinIconIndex2;
     /* 0x18 */ s32 starpointsIconIndex;

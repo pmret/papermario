@@ -460,7 +460,7 @@ void status_menu_stop_blinking_coins(void) {
 }
 
 void status_menu_start_blinking_sp(void) {
-    player_data *playerData = &gPlayerData;
+    player_data* playerData = &gPlayerData;
     ui_status* uiStatus = &gUIStatus;
 
     uiStatus->spBarsToBlink = playerData->maxStarPower;
@@ -522,7 +522,7 @@ void increment_status_menu_disabled(void) {
 }
 
 void sync_status_menu(void) {
-    player_data *playerData = &gPlayerData;
+    player_data* playerData = &gPlayerData;
     ui_status* uiStatus = &gUIStatus;
 
     uiStatus->displayHP = playerData->curHP;
@@ -532,7 +532,59 @@ void sync_status_menu(void) {
     uiStatus->displayStarpoints = playerData->starPoints;
 }
 
-INCLUDE_ASM(code_80850_len_3060, reset_status_menu);
+void reset_status_menu(void) {
+    player_data* playerData = &gPlayerData;
+    ui_status* uiStatus = &gUIStatus;
+    s32 i;
+
+    uiStatus->drawPosX = 12;
+    uiStatus->drawPosY = -100;
+    uiStatus->hidden = 0;
+    uiStatus->showTimer = 210;
+    uiStatus->unk_3B = 0;
+    uiStatus->ignoreChanges = 0;
+    uiStatus->unk_45 = 0;
+    uiStatus->unk_46 = 0;
+    uiStatus->hpBlinking = 0;
+    uiStatus->hpBlinkCounter = 0;
+    uiStatus->hpBlinkTimer = 0;
+    uiStatus->fpBlinking = 0;
+    uiStatus->fpBlinkCounter = 0;
+    uiStatus->fpBlinkTimer = 0;
+    uiStatus->coinsBlinking = 0;
+    uiStatus->coinsBlinkCounter = 0;
+    uiStatus->coinsBlinkTimer = 0;
+    uiStatus->spBlinking = 0;
+    uiStatus->spBlinkCounter = 0;
+    uiStatus->disabled = 0;
+    uiStatus->starpointsBlinking = 0;
+    uiStatus->starpointsBlinkCounter = 0;
+    uiStatus->unk_6E = -1;
+    uiStatus->displayHP = playerData->curHP;
+    uiStatus->displayFP = playerData->curFP;
+    uiStatus->displayCoins = playerData->coins;
+    uiStatus->displayStarpoints = playerData->starPoints;
+    uiStatus->displaySP = playerData->specialBarsFilled;
+    uiStatus->unk_3C = 0;
+
+    for (i = 0; i < 2; i++) {
+        func_801452B4(uiStatus->hpIconIndexes[i], uiStatus->hpIconIndexes[i]);
+    }
+
+    for (i = 0; i < 2; i++) {
+        func_801452B4(uiStatus->fpIconIndexes[i], uiStatus->fpIconIndexes[i]);
+    }
+
+    func_801452B4(uiStatus->coinIconIndex, uiStatus->coinIconIndex);
+    func_801452B4(uiStatus->coinIconIndex2, uiStatus->coinIconIndex2);
+    func_801452B4(uiStatus->starpointsIconIndex, uiStatus->starpointsIconIndex);
+    func_801452B4(uiStatus->starpointsIconIndex2, uiStatus->starpointsIconIndex2);
+    func_801452B4(uiStatus->iconIndex8, uiStatus->iconIndex8);
+    func_801452B4(uiStatus->iconIndex9, uiStatus->iconIndex9);
+    func_801452B4(uiStatus->iconIndexA, uiStatus->iconIndexA);
+    func_801452B4(uiStatus->iconIndexB, uiStatus->iconIndexB);
+    func_801452B4(uiStatus->iconIndexC, uiStatus->iconIndexC);
+}
 
 // uses a jumptable, which we need .rodata support for.
 INCLUDE_ASM(code_80850_len_3060, is_ability_active);
