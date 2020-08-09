@@ -156,13 +156,23 @@ INCLUDE_ASM(code_80850_len_3060, func_800E9894);
 
 INCLUDE_ASM(code_80850_len_3060, func_800E98C4);
 
-INCLUDE_ASM(code_80850_len_3060, func_800E98D4);
+s32 func_800E98D4(void) {
+    ui_status* uiStatus = &gUIStatus;
+
+    return uiStatus->unk_46 + uiStatus->ignoreChanges;
+}
+
 
 INCLUDE_ASM(code_80850_len_3060, func_800E98EC);
 
-INCLUDE_ASM(code_80850_len_3060, func_800E9900);
+void func_800E9900(void) {
+    gUIStatus.unk_46 = 0;
+}
 
-INCLUDE_ASM(code_80850_len_3060, is_status_menu_visible);
+
+s32 is_status_menu_visible(void) {
+    return !gUIStatus.hidden;
+}
 
 void status_menu_start_blinking_hp(void) {
     game_status* gameStatus = (*gGameStatusPtr);
