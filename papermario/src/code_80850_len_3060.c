@@ -32,7 +32,7 @@ void clear_player_data(void) {
     playerData->unk_292 = 0;
     playerData->currentPartner = 0;
 
-    for(i = 0; i < ARRAY_COUNT(playerData->partners); i++) {
+    for (i = 0; i < ARRAY_COUNT(playerData->partners); i++) {
         playerData->partners[i].enabled = 0;
         playerData->partners[i].level = 0;
         playerData->partners[i].unk_2 = 0;
@@ -40,23 +40,23 @@ void clear_player_data(void) {
         playerData->partners[i].unk_6 = 0;
     }
 
-    for(i = ARRAY_COUNT(playerData->keyItems) - 1; i >= 0; i--){
+    for (i = ARRAY_COUNT(playerData->keyItems) - 1; i >= 0; i--) {
         playerData->keyItems[i] = 0;
     }
 
-    for(i = ARRAY_COUNT(playerData->badges) - 1; i >= 0; i--) {
+    for (i = ARRAY_COUNT(playerData->badges) - 1; i >= 0; i--) {
         playerData->badges[i] = 0;
     }
 
-    for(i = ARRAY_COUNT(playerData->invItems) - 1; i >= 0; i--) {
+    for (i = ARRAY_COUNT(playerData->invItems) - 1; i >= 0; i--) {
         playerData->invItems[i] = 0;
     }
 
-    for(i = ARRAY_COUNT(playerData->equippedBadges) - 1; i >= 0; i--) {
+    for (i = ARRAY_COUNT(playerData->equippedBadges) - 1; i >= 0; i--) {
         playerData->equippedBadges[i] = 0;
     }
 
-    for(i = ARRAY_COUNT(playerData->storedItems) - 1; i >= 0; i--) {
+    for (i = ARRAY_COUNT(playerData->storedItems) - 1; i >= 0; i--) {
         playerData->storedItems[i] = 0;
     }
 
@@ -80,7 +80,7 @@ void clear_player_data(void) {
     playerData->quizzesAnswered = 0;
     playerData->quizzesCorrect = 0;
 
-    for(i = 0; i < ARRAY_COUNT(playerData->unk_2C4); i++) {
+    for (i = 0; i < ARRAY_COUNT(playerData->unk_2C4); i++) {
         playerData->unk_2C4[i] = 0;
         playerData->unk_2F4[i] = 0;
     }
@@ -105,7 +105,7 @@ s32 add_item(s32 itemID) {
 
     sort_items();
 
-    for(i = 0; i < ARRAY_COUNT(gPlayerData.invItems); i++) {
+    for (i = 0; i < ARRAY_COUNT(gPlayerData.invItems); i++) {
         if (playerData->invItems[i] == 0) {
             break;
         }
@@ -114,7 +114,7 @@ s32 add_item(s32 itemID) {
     if (i == ARRAY_COUNT(gPlayerData.invItems)) {
         return -1;
     }
-    
+
     playerData->invItems[i] = itemID;
     return i;
 }
@@ -129,7 +129,7 @@ s32 get_item_count(void) {
             sum++;
         }
     }
-    
+
     return sum;
 }
 
@@ -141,8 +141,8 @@ s32 find_item(s32 itemID) {
     player_data *playerData = &gPlayerData;
     s32 i;
 
-    if((gItemTable[itemID].typeFlags & 8) != 0) {
-        for(i = 0; i < ARRAY_COUNT(playerData->keyItems); i++) {
+    if ((gItemTable[itemID].typeFlags & 8) != 0) {
+        for (i = 0; i < ARRAY_COUNT(playerData->keyItems); i++) {
             if (playerData->keyItems[i] == itemID) {
                 break;
             }
@@ -151,19 +151,20 @@ s32 find_item(s32 itemID) {
         if (i >= ARRAY_COUNT(playerData->keyItems)) {
             return -1;
         }
-        
+
         return i;
     }
 
-    for(i = 0; i < ARRAY_COUNT(playerData->invItems); i++) {
-        if (playerData->invItems[i] == itemID)
+    for (i = 0; i < ARRAY_COUNT(playerData->invItems); i++) {
+        if (playerData->invItems[i] == itemID) {
             break;
+        }
     }
-    
+
     if (i == ARRAY_COUNT(playerData->invItems)) {
         return -1;
     }
-    
+
     return i;
 }
 
@@ -186,7 +187,7 @@ s32 store_item(s32 itemID) {
     } else {
         playerData->storedItems[i] = itemID;
     }
-    
+
     return i;
 }
 
@@ -200,7 +201,7 @@ s32 get_stored_count(void) {
             sum++;
         }
     }
-    
+
     return sum;
 }
 
@@ -547,13 +548,13 @@ s8 add_star_points(s32 amt) {
     //TODO: probably a macro!
     playerData2->starPoints = newSP;
     if (newSP > 100) {
-       playerData2->starPoints = 100;
+        playerData2->starPoints = 100;
     }
 
     //TODO: probably a macro!
     newSP = playerData2->starPoints;
     if (newSP < 0) {
-       playerData2->starPoints = 0;
+        playerData2->starPoints = 0;
     }
     return gPlayerData.starPoints;
 }
@@ -611,7 +612,7 @@ void add_SP(s32 amt) {
     uiStatus->unk_59 = phi_v1 >> 5;
 
     playerData->specialBarsFilled += amt;
-    
+
     blah = playerData->maxStarPower << 8;
     if (playerData->specialBarsFilled > blah) {
         playerData->specialBarsFilled = blah;
