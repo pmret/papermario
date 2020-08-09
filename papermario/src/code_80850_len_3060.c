@@ -153,18 +153,18 @@ s32 find_item(s32 itemID) {
         }
         
         return i;
-    } else {
-        for(i = 0; i < ARRAY_COUNT(playerData->invItems); i++) {
-            if (playerData->invItems[i] == itemID)
-                break;
-        }
+    }
 
-        if (i == ARRAY_COUNT(playerData->invItems)) {
-            return -1;
-        }
-
-        return i;
-  }
+    for(i = 0; i < ARRAY_COUNT(playerData->invItems); i++) {
+        if (playerData->invItems[i] == itemID)
+            break;
+    }
+    
+    if (i == ARRAY_COUNT(playerData->invItems)) {
+        return -1;
+    }
+    
+    return i;
 }
 
 INCLUDE_ASM(code_80850_len_3060, sort_items);
@@ -285,17 +285,16 @@ void func_800E97B8(void) {
     }
 }
 
-INCLUDE_ASM(code_80850_len_3060, func_800E97E4);
-/*void func_800E97E4(void) {
+void func_800E97E4(void) {
     ui_status* uiStatus = &gUIStatus;
 
-    uiStatus->showTimer = -100;
+    uiStatus->drawPosY = -100;
     uiStatus->ignoreChanges = 0;
-    uiStatus->drawPosY = 0;
+    uiStatus->showTimer = 0;
     uiStatus->hidden = 1;
     uiStatus->unk_3B = 0;
     uiStatus->unk_3C = 0;
-}*/
+}
 
 void func_800E9810(void) {
     ui_status* uiStatus = &gUIStatus;
