@@ -40,6 +40,21 @@ typedef struct {
 } game_status;
 
 typedef struct {
+    /* 0x00 */ s32 nameString;
+    /* 0x04 */ s16 iconID;
+    /* 0x06 */ s16 badgeSortPriority;
+    /* 0x08 */ s32 targetFlags;
+    /* 0x0C */ s16 sellValue;
+    /* 0x10 */ s32 menuString;
+    /* 0x14 */ s32 itemString;
+    /* 0x18 */ s16 typeFlags;
+    /* 0x1A */ s8 moveID;
+    /* 0x1B */ s8 potencyA;
+    /* 0x1C */ s8 potencyB;
+    /* 0x1D */ char unk_1D[3];
+} item_table_entry;
+
+typedef struct {
     /* 0x0 */ s8 enabled;
     /* 0x1 */ s8 level;
     /* 0x2 */ s16 unk_2;

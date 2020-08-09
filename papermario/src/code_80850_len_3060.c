@@ -137,7 +137,35 @@ s32 get_item_empty_count(void) {
     return ARRAY_COUNT(gPlayerData.invItems) - get_item_count();
 }
 
-INCLUDE_ASM(code_80850_len_3060, find_item);
+s32 find_item(s32 itemID) {
+    player_data *playerData = &gPlayerData;
+    s32 i;
+
+    if((gItemTable[itemID].typeFlags & 8) != 0) {
+        for(i = 0; i < ARRAY_COUNT(playerData->keyItems); i++) {
+            if (playerData->keyItems[i] == itemID) {
+                break;
+            }
+        }
+
+        if (i >= ARRAY_COUNT(playerData->keyItems)) {
+            return -1;
+        }
+        
+        return i;
+    } else {
+        for(i = 0; i < ARRAY_COUNT(playerData->invItems); i++) {
+            if (playerData->invItems[i] == itemID)
+                break;
+        }
+
+        if (i == ARRAY_COUNT(playerData->invItems)) {
+            return -1;
+        }
+
+        return i;
+  }
+}
 
 INCLUDE_ASM(code_80850_len_3060, sort_items);
 
