@@ -288,7 +288,19 @@ void func_800E984C(void) {
     gUIStatus.unk_45 = 1;
 }
 
-INCLUDE_ASM(code_80850_len_3060, func_800E9860);
+s32 func_800E9860(void) {
+    ui_status* uiStatus = &gUIStatus;
+    ui_status* uiStatus2 = &gUIStatus;
+    s32 ret = 1 - uiStatus->unk_45;
+
+    if (uiStatus->unk_46 != 0) {
+        ret = 0;
+    }
+    if (uiStatus2->ignoreChanges) {
+        ret = 0;
+    }
+    return ret;
+}
 
 void status_menu_enable_ignore_changes(void) {
     gUIStatus.ignoreChanges = 1;
@@ -554,7 +566,32 @@ void set_max_SP(s8 newMaxSP) {
     playerData->specialBarsFilled = newMaxSP * 256;
 }
 
-INCLUDE_ASM(code_80850_len_3060, add_SP);
+void add_SP(s32 amt) {
+    player_data* playerData = &gPlayerData;
+    player_data* playerData2 = &gPlayerData;
+    ui_status* uiStatus = &gUIStatus;
+    ui_status* uiStatus2 = &gUIStatus;
+    s32 phi_v1;
+    s32 blah;
+
+    uiStatus->unk_57 = 1;
+    uiStatus->unk_58 = 60;
+
+    phi_v1 = playerData->specialBarsFilled;
+    if (phi_v1 < 0) {
+        phi_v1 = playerData->specialBarsFilled + 31;
+    }
+    uiStatus->unk_59 = phi_v1 >> 5;
+
+    playerData->specialBarsFilled += amt;
+    
+    blah = playerData->maxStarPower << 8;
+    if (playerData->specialBarsFilled > blah) {
+        playerData->specialBarsFilled = blah;
+    }
+
+    uiStatus2->displaySP = playerData2->specialBarsFilled;
+}
 
 s32 recover_fp(s32 amt) {
     player_data* playerData = &gPlayerData;
