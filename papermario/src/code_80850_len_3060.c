@@ -196,9 +196,21 @@ INCLUDE_ASM(code_80850_len_3060, update_coin_counter);
 
 INCLUDE_ASM(code_80850_len_3060, show_coin_counter);
 
-INCLUDE_ASM(code_80850_len_3060, hide_coin_counter);
+void hide_coin_counter(void) {
+    ui_status* uiStatus = &gUIStatus;
 
-INCLUDE_ASM(code_80850_len_3060, func_800E96C8);
+    if ((D_8010CD10 != 0) && (uiStatus->unk_6C == 0)) {
+        uiStatus->unk_6C = 60;
+    }
+}
+
+void func_800E96C8(void) {
+    ui_status* uiStatus = &gUIStatus;
+
+    if ((D_8010CD10 != 0) && (uiStatus->unk_6C == 0)) {
+        uiStatus->unk_6C = 1;
+    }
+}
 
 s32 ShowCoinCounter(ScriptContext* script) {
     if (get_variable(script, *script->ptrReadPos)) {
