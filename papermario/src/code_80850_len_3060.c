@@ -32,8 +32,7 @@ void clear_player_data(void) {
     playerData->unk_292 = 0;
     playerData->currentPartner = 0;
 
-    for(i = 0; i < ARRAY_COUNT(playerData->partners); i++)
-    {
+    for(i = 0; i < ARRAY_COUNT(playerData->partners); i++) {
         playerData->partners[i].enabled = 0;
         playerData->partners[i].level = 0;
         playerData->partners[i].unk_2 = 0;
