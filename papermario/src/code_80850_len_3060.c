@@ -141,31 +141,87 @@ INCLUDE_ASM(code_80850_len_3060, is_status_menu_visible);
 
 INCLUDE_ASM(code_80850_len_3060, status_menu_start_blinking_hp);
 
-INCLUDE_ASM(code_80850_len_3060, status_menu_stop_blinking_hp);
+void status_menu_stop_blinking_hp(void) {
+    ui_status* uiStatus = &gUIStatus;
+
+    if (uiStatus->hpBlinking != 0) {
+        uiStatus->hpBlinking = 0;
+        uiStatus->hpBlinkCounter = 0;
+        uiStatus->hpBlinkTimer = 0;
+    }
+}
 
 INCLUDE_ASM(code_80850_len_3060, status_menu_start_blinking_fp);
 
-INCLUDE_ASM(code_80850_len_3060, status_menu_stop_blinking_fp);
+void status_menu_stop_blinking_fp(void) {
+    ui_status* uiStatus = &gUIStatus;
+
+    if (uiStatus->fpBlinking != 0) {
+        uiStatus->fpBlinking = 0;
+        uiStatus->fpBlinkCounter = 0;
+    }
+}
 
 INCLUDE_ASM(code_80850_len_3060, status_menu_start_blinking_coins);
 
-INCLUDE_ASM(code_80850_len_3060, status_menu_stop_blinking_coins);
+void status_menu_stop_blinking_coins(void) {
+    ui_status* uiStatus = &gUIStatus;
+
+    if (uiStatus->coinsBlinking != 0) {
+        uiStatus->coinsBlinking = 0;
+        uiStatus->coinsBlinkCounter = 0;
+        uiStatus->coinsBlinkTimer = 0;
+    }
+}
 
 INCLUDE_ASM(code_80850_len_3060, status_menu_start_blinking_sp);
 
-INCLUDE_ASM(code_80850_len_3060, status_menu_stop_blinking_sp);
+void status_menu_stop_blinking_sp(void) {
+    ui_status* uiStatus = &gUIStatus;
+
+    if (uiStatus->spBlinking != 0) {
+        uiStatus->spBlinking = 0;
+        uiStatus->spBlinkCounter = 0;
+    }
+}
 
 INCLUDE_ASM(code_80850_len_3060, status_menu_start_blinking_sp_bars);
 
 INCLUDE_ASM(code_80850_len_3060, status_menu_start_blinking_starpoints);
 
-INCLUDE_ASM(code_80850_len_3060, status_menu_stop_blinking_starpoints);
+void status_menu_stop_blinking_starpoints(void) {
+    ui_status* uiStatus = &gUIStatus;
 
-INCLUDE_ASM(code_80850_len_3060, decrement_status_menu_disabled);
+    if (uiStatus->starpointsBlinking != 0) {
+        uiStatus->starpointsBlinking = 0;
+        uiStatus->starpointsBlinkCounter = 0;
+    }
+}
 
-INCLUDE_ASM(code_80850_len_3060, increment_status_menu_disabled);
+void decrement_status_menu_disabled(void) {
+    ui_status* uiStatus = &gUIStatus;
 
-INCLUDE_ASM(code_80850_len_3060, sync_status_menu);
+    if (uiStatus->disabled > 0) {
+        uiStatus->disabled--;
+    }
+}
+
+void increment_status_menu_disabled(void) {
+    ui_status* uiStatus = &gUIStatus;
+
+    uiStatus->disabled++;
+}
+
+void sync_status_menu(void) {
+    player_data *playerData = &gPlayerData;
+    ui_status* uiStatus = &gUIStatus;
+
+    uiStatus->displayHP = playerData->curHP;
+    uiStatus->displayFP = playerData->curFP;
+    uiStatus->displaySP = playerData->specialBarsFilled;
+    uiStatus->displayCoins = playerData->coins;
+    uiStatus->displayStarpoints = playerData->starPoints;
+}
 
 INCLUDE_ASM(code_80850_len_3060, reset_status_menu);
 

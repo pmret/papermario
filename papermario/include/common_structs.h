@@ -63,7 +63,7 @@ typedef struct {
     /* 0x00C */ s16 coins;
     /* 0x00E */ s8 fortressKeyCount;
     /* 0x00F */ u8 starPieces;
-    /* 0x010 */ u8 starPoints;
+    /* 0x010 */ s8 starPoints;
     /* 0x011 */ char unk_11;
     /* 0x012 */ s8 currentPartner;
     /* 0x013 */ char unk_13;
@@ -140,7 +140,7 @@ typedef struct {
     /* 0x3D */ s8 displayHP;
     /* 0x3E */ s8 displayFP;
     /* 0x3F */ char unk_3F;
-    /* 0x40 */ s16 displayCounts;
+    /* 0x40 */ s16 displayCoins;
     /* 0x42 */ s16 displayStarpoints;
     /* 0x44 */ s8 igonreChanges; /* set != 0 to prevent automatic opening from HP/FP changes */
     /* 0x45 */ s8 unk_45;
