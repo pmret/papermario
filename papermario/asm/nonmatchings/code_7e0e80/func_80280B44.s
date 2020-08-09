@@ -10,7 +10,7 @@ glabel func_80280B44
 /* 7E19D0 80280B50 00000000 */   nop   
 /* 7E19D4 80280B54 0C03A640 */  jal   func_800E9900
 /* 7E19D8 80280B58 00000000 */   nop   
-/* 7E19DC 80280B5C 0C03A631 */  jal   func_800E98C4
+/* 7E19DC 80280B5C 0C03A631 */  jal   status_menu_disable_ignore_changes
 /* 7E19E0 80280B60 00000000 */   nop   
 /* 7E19E4 80280B64 0C03A5EE */  jal   func_800E97B8
 /* 7E19E8 80280B68 00000000 */   nop   

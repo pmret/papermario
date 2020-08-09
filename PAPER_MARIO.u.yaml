@@ -2632,7 +2632,7 @@ labels:
   - [0x800E97E4, "func_800E97E4"]
   - [0x800E983C, "func_800E983C"]
   - [0x800E984C, "func_800E984C"]
-  - [0x800E9894, "func_800E9894"]
+  - [0x800E9894, "status_menu_enable_ignore_changes"]
   - [0x800E98C4, "func_800E98C4"]
   - [0x800E98EC, "func_800E98EC"]
   - [0x800E9900, "func_800E9900"]

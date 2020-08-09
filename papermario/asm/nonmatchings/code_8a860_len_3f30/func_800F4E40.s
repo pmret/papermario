@@ -11,7 +11,7 @@ glabel func_800F4E40
 /* 08E300 800F4E50 0080802D */   daddu $s0, $a0, $zero
 /* 08E304 800F4E54 3C018011 */  lui   $at, 0x8011
 /* 08E308 800F4E58 A022D69A */  sb    $v0, -0x2966($at)
-/* 08E30C 800F4E5C 0C03A625 */  jal   func_800E9894
+/* 08E30C 800F4E5C 0C03A625 */  jal   status_menu_enable_ignore_changes
 /* 08E310 800F4E60 00000000 */   nop   
 /* 08E314 800F4E64 0C03A5E3 */  jal   open_status_menu_short
 /* 08E318 800F4E68 00000000 */   nop   

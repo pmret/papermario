@@ -116,8 +116,10 @@ s32 ShowCoinCounter(ScriptContext* script) {
     return 2;
 }
 
-
-INCLUDE_ASM(code_80850_len_3060, func_800E973C);
+void func_800E973C(void) {
+    update_status_menu();
+    update_coin_counter();
+}
 
 void open_status_menu_long(void) {
     ui_status* uiStatus = &gUIStatus;
@@ -140,21 +142,63 @@ void open_status_menu_short(void) {
     }
 }
 
-INCLUDE_ASM(code_80850_len_3060, func_800E97B8);
+void func_800E97B8(void) {
+    ui_status* uiStatus = &gUIStatus;
+
+    if (uiStatus->hidden != 1) {
+        uiStatus->hidden = 1;
+        uiStatus->showTimer = 0;
+        uiStatus->unk_3B = 1;
+    }
+}
 
 INCLUDE_ASM(code_80850_len_3060, func_800E97E4);
+/*void func_800E97E4(void) {
+    ui_status* uiStatus = &gUIStatus;
 
-INCLUDE_ASM(code_80850_len_3060, func_800E9810);
+    uiStatus->showTimer = -100;
+    uiStatus->ignoreChanges = 0;
+    uiStatus->drawPosY = 0;
+    uiStatus->hidden = 1;
+    uiStatus->unk_3B = 0;
+    uiStatus->unk_3C = 0;
+}*/
 
-INCLUDE_ASM(code_80850_len_3060, func_800E983C);
+void func_800E9810(void) {
+    ui_status* uiStatus = &gUIStatus;
 
-INCLUDE_ASM(code_80850_len_3060, func_800E984C);
+    uiStatus->showTimer = 210;
+    uiStatus->drawPosY = 0;
+    uiStatus->ignoreChanges = 0;
+    uiStatus->hidden = 0;
+    uiStatus->unk_3B = 1;
+    uiStatus->unk_3C = 0;
+}
+
+void func_800E983C(void) {
+    gUIStatus.unk_45 = 0;
+}
+
+void func_800E984C(void) {
+    gUIStatus.unk_45 = 1;
+}
 
 INCLUDE_ASM(code_80850_len_3060, func_800E9860);
 
-INCLUDE_ASM(code_80850_len_3060, func_800E9894);
+void status_menu_enable_ignore_changes(void) {
+    gUIStatus.ignoreChanges = 1;
+}
 
-INCLUDE_ASM(code_80850_len_3060, func_800E98C4);
+void func_800E98A8(void) {
+    ui_status* uiStatus = &gUIStatus;
+
+    uiStatus->ignoreChanges = 1;
+    uiStatus->drawPosY = 18;
+}
+
+void status_menu_disable_ignore_changes(void) {
+    gUIStatus.ignoreChanges = 0;
+}
 
 s32 func_800E98D4(void) {
     ui_status* uiStatus = &gUIStatus;
@@ -162,13 +206,13 @@ s32 func_800E98D4(void) {
     return uiStatus->unk_46 + uiStatus->ignoreChanges;
 }
 
-
-INCLUDE_ASM(code_80850_len_3060, func_800E98EC);
+void func_800E98EC(void) {
+    gUIStatus.unk_46 = 1;
+}
 
 void func_800E9900(void) {
     gUIStatus.unk_46 = 0;
 }
-
 
 s32 is_status_menu_visible(void) {
     return !gUIStatus.hidden;

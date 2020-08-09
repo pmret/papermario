@@ -3,7 +3,7 @@
 
 .include "include/macro.inc"
 
-glabel func_800E9894
+glabel status_menu_enable_ignore_changes
 /* 082D44 800E9894 24020001 */  addiu $v0, $zero, 1
 /* 082D48 800E9898 3C018011 */  lui   $at, 0x8011
 /* 082D4C 800E989C A022EF9C */  sb    $v0, -0x1064($at)
