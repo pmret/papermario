@@ -139,9 +139,10 @@ s32 get_item_empty_count(void) {
 
 s32 find_item(s32 itemID) {
     player_data *playerData = &gPlayerData;
+    item_table_entry* item = &gItemTable[itemID];
     s32 i;
 
-    if ((gItemTable[itemID].typeFlags & 8) != 0) {
+    if ((item->typeFlags & 8) != 0) {
         for (i = 0; i < ARRAY_COUNT(playerData->keyItems); i++) {
             if (playerData->keyItems[i] == itemID) {
                 break;
@@ -170,7 +171,28 @@ s32 find_item(s32 itemID) {
 
 INCLUDE_ASM(code_80850_len_3060, sort_items);
 
-INCLUDE_ASM(code_80850_len_3060, add_badge);
+s32 add_badge(s32 itemID) {
+    player_data* playerData = &gPlayerData;
+    item_table_entry* item = &gItemTable[itemID];
+    s32 i;
+
+    if ((item->typeFlags & 0x40) == 0) {
+        return add_item(itemID);
+    }
+
+    for (i = 0; i < ARRAY_COUNT(playerData->badges); i++) {
+        if (playerData->badges[i] == 0) {
+            break;
+        }
+    }
+
+    if (i >= ARRAY_COUNT(playerData->badges)) {
+        return 0;
+    }
+    
+    playerData->badges[i] = itemID;
+    return i;
+}
 
 s32 store_item(s32 itemID) {
     player_data *playerData = &gPlayerData;
