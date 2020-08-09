@@ -171,7 +171,7 @@ glabel func_80034C3C
 /* 0102AC 80034EAC 00000000 */   nop   
 /* 0102B0 80034EB0 0C051FB1 */  jal   func_80147EC4
 /* 0102B4 80034EB4 0000202D */   daddu $a0, $zero, $zero
-/* 0102B8 80034EB8 0C03A631 */  jal   func_800E98C4
+/* 0102B8 80034EB8 0C03A631 */  jal   status_menu_disable_ignore_changes
 /* 0102BC 80034EBC 00000000 */   nop   
 /* 0102C0 80034EC0 0C009C22 */  jal   func_80027088
 /* 0102C4 80034EC4 24040001 */   addiu $a0, $zero, 1

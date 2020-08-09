@@ -99,7 +99,7 @@ glabel func_800F1538
 /* 08AB40 800F1690 8042D69A */  lb    $v0, -0x2966($v0)
 /* 08AB44 800F1694 14400003 */  bnez  $v0, .L800F16A4
 /* 08AB48 800F1698 00000000 */   nop   
-/* 08AB4C 800F169C 0C03A631 */  jal   func_800E98C4
+/* 08AB4C 800F169C 0C03A631 */  jal   status_menu_disable_ignore_changes
 /* 08AB50 800F16A0 00000000 */   nop   
 .L800F16A4:
 /* 08AB54 800F16A4 0C03A5EE */  jal   func_800E97B8

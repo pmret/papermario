@@ -11,7 +11,7 @@ glabel ShowStatusMenu
 /* 0FA39C 802D59EC 8C450000 */   lw    $a1, ($v0)
 /* 0FA3A0 802D59F0 10400007 */  beqz  $v0, .L802D5A10
 /* 0FA3A4 802D59F4 00000000 */   nop   
-/* 0FA3A8 802D59F8 0C03A625 */  jal   func_800E9894
+/* 0FA3A8 802D59F8 0C03A625 */  jal   status_menu_enable_ignore_changes
 /* 0FA3AC 802D59FC 00000000 */   nop   
 /* 0FA3B0 802D5A00 0C03A5EE */  jal   func_800E97B8
 /* 0FA3B4 802D5A04 00000000 */   nop   
@@ -19,7 +19,7 @@ glabel ShowStatusMenu
 /* 0FA3BC 802D5A0C 00000000 */   nop   
 
 .L802D5A10:
-/* 0FA3C0 802D5A10 0C03A631 */  jal   func_800E98C4
+/* 0FA3C0 802D5A10 0C03A631 */  jal   status_menu_disable_ignore_changes
 /* 0FA3C4 802D5A14 00000000 */   nop   
 .L802D5A18:
 /* 0FA3C8 802D5A18 8FBF0010 */  lw    $ra, 0x10($sp)

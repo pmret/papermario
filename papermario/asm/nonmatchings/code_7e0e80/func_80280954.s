@@ -89,7 +89,7 @@ glabel func_80280954
 /* 7E18F0 80280A70 AC930324 */  sw    $s3, 0x324($a0)
 /* 7E18F4 80280A74 0C03D3F1 */  jal   func_800F4FC4
 /* 7E18F8 80280A78 AC800328 */   sw    $zero, 0x328($a0)
-/* 7E18FC 80280A7C 0C03A625 */  jal   func_800E9894
+/* 7E18FC 80280A7C 0C03A625 */  jal   status_menu_enable_ignore_changes
 /* 7E1900 80280A80 00000000 */   nop   
 /* 7E1904 80280A84 0C03A63B */  jal   func_800E98EC
 /* 7E1908 80280A88 00000000 */   nop   

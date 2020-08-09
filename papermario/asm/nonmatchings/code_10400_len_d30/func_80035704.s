@@ -200,7 +200,7 @@ glabel func_80035704
 /* 010DDC 800359DC 00000000 */   nop   
 /* 010DE0 800359E0 0C00EC6C */  jal   func_8003B1B0
 /* 010DE4 800359E4 00000000 */   nop   
-/* 010DE8 800359E8 0C03A631 */  jal   func_800E98C4
+/* 010DE8 800359E8 0C03A631 */  jal   status_menu_disable_ignore_changes
 /* 010DEC 800359EC 00000000 */   nop   
 /* 010DF0 800359F0 0C009C22 */  jal   func_80027088
 /* 010DF4 800359F4 24040001 */   addiu $a0, $zero, 1
