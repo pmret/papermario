@@ -2,7 +2,15 @@
 
 INCLUDE_ASM(code_1f580_len_1940, SetEncounterStatusFlags);
 
-INCLUDE_ASM(code_1f580_len_1940, LoadDemoBattle);
+s32 LoadDemoBattle(script_context* script) {
+    load_demo_battle(get_variable(script, *script->ptrReadPos));
+    return 2;
+}
+
+// ???
+s32 func_80044290(script_context* script) {
+    return 2;
+}
 
 INCLUDE_ASM(code_1f580_len_1940, MakeNpcs);
 
@@ -12,15 +20,24 @@ INCLUDE_ASM(code_1f580_len_1940, RemoveEncounter);
 
 INCLUDE_ASM(code_1f580_len_1940, GetBattleOutcome);
 
-INCLUDE_ASM(code_1f580_len_1940, GetOwnerEncountered);
+s32 GetOwnerEncountered(script_context* script) {
+    set_variable(script, *script->ptrReadPos, script->ownerActorID->encountered);
+    return 2;
+}
 
 INCLUDE_ASM(code_1f580_len_1940, DoNpcDefeat);
 
 INCLUDE_ASM(code_1f580_len_1940, start_battle);
 
-INCLUDE_ASM(code_1f580_len_1940, StartBattle);
+s32 StartBattle(script_context* script) {
+    start_battle(script, -1);
+    return 1;
+}
 
-INCLUDE_ASM(code_1f580_len_1940, StartBattleWith);
+s32 StartBattleWith(script_context* script) {
+    start_battle(script, get_variable(script, *script->ptrReadPos));
+    return 1;
+}
 
 INCLUDE_ASM(code_1f580_len_1940, StartBossBattle);
 
@@ -58,11 +75,17 @@ INCLUDE_ASM(code_1f580_len_1940, GetNpcVar);
 
 INCLUDE_ASM(code_1f580_len_1940, SetSelfRotation);
 
-INCLUDE_ASM(code_1f580_len_1940, SetSelfEnemyFlags);
+s32 SetSelfEnemyFlags(script_context* script) {
+    script->ownerActorID->flags = *script->ptrReadPos;
+    return 2;
+}
 
 INCLUDE_ASM(code_1f580_len_1940, SetSelfEnemyFlagBits);
 
-INCLUDE_ASM(code_1f580_len_1940, GetSelfNpcID);
+s32 GetSelfNpcID(script_context* script) {
+    set_variable(script, *script->ptrReadPos, script->ownerActorID->npcID);
+    return 2;
+}
 
 INCLUDE_ASM(code_1f580_len_1940, ClearDefeatedEnemies);
 

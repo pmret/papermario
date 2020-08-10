@@ -16,5 +16,6 @@ INCLUDE_ASM(code_8a860_len_3f30, func_800F4FC4);
 
 INCLUDE_ASM(code_8a860_len_3f30, func_800F513C);
 
-INCLUDE_ASM(code_8a860_len_3f30, func_800F52BC);
-
+void func_800F52BC(void) {
+    func_800F1A10();
+}

@@ -189,8 +189,118 @@ typedef struct {
 } ui_status; // size = 0x70
 
 typedef struct {
-    /* 0x00 */ char unk_00[0xC];
-    /* 0x0C */ s32* ptrReadPos;
-} ScriptContext;
+    /* 0x00 */ char unk_00[0x4];
+    /* 0x04 */ s16 height;
+    /* 0x06 */ s16 radius;
+    /* 0x08 */ void* otherAI; //?
+    /* 0x0C */ s32* interactScript;
+    /* 0x10 */ s32* aiScript;
+    /* 0x14 */ s32* hitScript;
+    /* 0x18 */ s32* auxScript;
+    /* 0x1C */ s32* defeatScript;
+    /* 0x20 */ s32 flags;
+    /* 0x24 */ char unk_24[0x4];
+    /* 0x28 */ s16 level;
+    /* 0x2A */ s16 unkFlags;
+} StaticNpcSettings; // size = 0x2C
+
+typedef enum {
+    Hammer=4,
+    Jump=2,
+    Normal=1,
+    Partner=6,
+    Spin=3,
+} eEncounterTrigger;
+
+typedef struct {
+    /* 0x00 */ s32 flags;
+    /* 0x04 */ s8 encounterIndex;
+    /* 0x05 */ s8 encountered; // eEncounterTrigger
+    /* 0x06 */ s8 scriptGroup; /* scripts launched for this npc controller will be assigned this group */
+    /* 0x07 */ s8 unk_07;
+    /* 0x08 */ s16 npcID;
+    /* 0x0A */ s16 spawnPos[3];
+    /* 0x10 */ s16 unk_10[3];
+    /* 0x16 */ char unk_16[0x2];
+    /* 0x18 */ struct StaticNpcSettings* npcSettings;
+    /* 0x1C */ s32* initBytecode;
+    /* 0x20 */ s32* interactBytecode;
+    /* 0x24 */ s32* aiBytecode;
+    /* 0x28 */ s32* hitBytecode;
+    /* 0x2C */ s32* auxBytecode;
+    /* 0x30 */ s32* defeatBytecode;
+    /* 0x34 */ struct script_context* initScript;
+    /* 0x38 */ struct script_context* interactScript;
+    /* 0x3C */ struct script_context* aiScript;
+    /* 0x40 */ struct script_context* hitScript;
+    /* 0x44 */ struct script_context* auxScript;
+    /* 0x48 */ struct script_context* defeatScript;
+    /* 0x4C */ s32 initScriptID;
+    /* 0x50 */ s32 interactScriptID;
+    /* 0x54 */ s32 aiScriptID;
+    /* 0x58 */ s32 hitScriptID;
+    /* 0x5C */ s32 auxScriptID;
+    /* 0x60 */ s32 defeatScriptID;
+    /* 0x64 */ void* unk_64;
+    /* 0x68 */ char unk_68[0x4];
+    /* 0x6C */ s32 varTable[16];
+    /* 0xAC */ s8 unk_AC;
+    /* 0xAD */ char unk_AD[0x3];
+    /* 0xB0 */ s32* unk_B0; /* might be flags of some sort */
+    /* 0xB4 */ s8 unk_B4;
+    /* 0xB5 */ s8 unk_B5;
+    /* 0xB6 */ char unk_B6[0x2];
+    /* 0xB8 */ s32 unkSettings24;
+    /* 0xBC */ s32 unk_BC;
+    /* 0xC0 */ s32 unk_C0;
+    /* 0xC4 */ s32 unk_C4;
+    /* 0xC8 */ char unk_C8[0x4];
+    /* 0xCC */ s32* animList;
+    /* 0xD0 */ s32* territoryData;
+    /* 0xD4 */ s32* dropTables;
+    /* 0xD8 */ u32 tattleString;
+    /* 0xDC */ s32 unk_DC;
+    /* 0xE0 */ s16 unk_E0;
+    /* 0xE2 */ char unk_E2[0xE];
+} enemy; // size = 0xF0
+
+typedef struct {
+    /* 0x000 */ s8 state;
+    /* 0x001 */ s8 currentArgc;
+    /* 0x002 */ s8 currentOpcode;
+    /* 0x003 */ s8 priority;
+    /* 0x004 */ s8 groupFlags;
+    /* 0x005 */ s8 blocked; /* 1 = blocking */
+    /* 0x006 */ s8 loopDepth; /* how many nested loops we are in, >= 8 hangs forever */
+    /* 0x007 */ s8 switchDepth; /* how many nested switches we are in, max = 8 */
+    /* 0x008 */ s32* ptrNextLine;
+    /* 0x00C */ s32* ptrReadPos;
+    /* 0x010 */ s8 labelIndices[16];
+    /* 0x020 */ s32* labelPositions[16];
+    /* 0x060 */ s32 deleted; /* set to zero in KillScript when malloc'd */
+    /* 0x064 */ struct script_context* blockingParent; /* parent? */
+    /* 0x068 */ struct script_context* childScript;
+    /* 0x06C */ struct script_context* parentScript; /* brother? */
+    /* 0x070 */ s32 functionTemp[4];
+    /* 0x080 */ void* callFunction;
+    /* 0x084 */ u32 varTable[16];
+    /* 0x0C4 */ s32 varFlags[3];
+    /* 0x0D0 */ s32 loopStartTable[8];
+    /* 0x0F0 */ s32 loopCounterTable[8];
+    /* 0x110 */ s8 switchBlockState[8];
+    /* 0x118 */ s32 switchBlockValue[8];
+    /* 0x138 */ void* buffer;
+    /* 0x13C */ void* array;
+    /* 0x140 */ void* flagArray;
+    /* 0x144 */ s32 uniqueID;
+    /* 0x148 */ enemy* ownerActorID; /* controller*, battle ID, trigger* */
+    /* 0x14C */ u32 ownerID; /* can be an npcID, a triggerID, a trigger ptr */
+    /* 0x150 */ f32 timeScale;
+    /* 0x154 */ f32 frameCounter;
+    /* 0x158 */ s32 unk_158;
+    /* 0x15C */ s32* ptrFirstLine;
+    /* 0x160 */ s32* ptrSavedPosition;
+    /* 0x164 */ s32* ptrCurrentLine;
+} script_context; // size = 0x168;
 
 #endif

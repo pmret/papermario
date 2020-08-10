@@ -198,7 +198,7 @@ INCLUDE_ASM(code_e92d0_len_5da0, si_execute_next_command);
 
 INCLUDE_ASM(code_e92d0_len_5da0, si_handle_end);
 
-s32 INCLUDE_ASM(code_e92d0_len_5da0, get_variable, ScriptContext* script, s32 pos);
+s32 INCLUDE_ASM(code_e92d0_len_5da0, get_variable, script_context* script, s32 pos);
 
 INCLUDE_ASM(code_e92d0_len_5da0, get_variable_index);
 
@@ -206,7 +206,7 @@ INCLUDE_ASM(code_e92d0_len_5da0, get_variable_index_alt);
 
 INCLUDE_ASM(code_e92d0_len_5da0, set_variable);
 
-f32 INCLUDE_ASM(code_e92d0_len_5da0, get_float_variable, ScriptContext* script, s32 pos);
+f32 INCLUDE_ASM(code_e92d0_len_5da0, get_float_variable, script_context* script, s32 pos);
 
 INCLUDE_ASM(code_e92d0_len_5da0, set_float_variable);
 
@@ -274,11 +274,20 @@ INCLUDE_ASM(code_e92d0_len_5da0, func_802CA1B8);
 
 INCLUDE_ASM(code_e92d0_len_5da0, goto_map);
 
-INCLUDE_ASM(code_e92d0_len_5da0, GotoMap);
+s32 GotoMap(script_context* script) {
+    goto_map(script, 0);
+    return 1;
+}
 
-INCLUDE_ASM(code_e92d0_len_5da0, GotoMapSpecial);
+s32 GotoMapSpecial(script_context* script) {
+    goto_map(script, 1);
+    return 1;
+}
 
-INCLUDE_ASM(code_e92d0_len_5da0, GotoMapByID);
+s32 GotoMapByID(script_context* script) {
+    goto_map(script, 2);
+    return 1;
+}
 
 INCLUDE_ASM(code_e92d0_len_5da0, GetEntryID);
 
