@@ -27,7 +27,9 @@ typedef struct {
     /* 0x081 */ s8 unk_81;
     /* 0x082 */ s8 unk_82;
     /* 0x083 */ s8 unk_83;
-    /* 0x084 */ char unk_84[0x24];
+    /* 0x084 */ char unk_84[0x8];
+    /* 0x08C */ s16 mapID;
+    /* 0x08E */ char unk_8E[0x1A];
     /* 0x0A8 */ s8 unk_A8;
     /* 0x0A9 */ char unk_A9;
     /* 0x0AA */ s8 unk_AA;

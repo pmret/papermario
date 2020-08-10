@@ -20,7 +20,7 @@ INCLUDE_ASM(code_362a0_len_2f70, _add_hit_vert_to_buffer);
 
 INCLUDE_ASM(code_362a0_len_2f70, _get_hit_vert_index_from_buffer);
 
-INCLUDE_ASM(code_362a0_len_2f70, update_collider_transform);
+void INCLUDE_ASM(code_362a0_len_2f70, update_collider_transform, s16 colliderID);
 
 INCLUDE_ASM(code_362a0_len_2f70, get_collider_type_by_id);
 

@@ -230,7 +230,14 @@ INCLUDE_ASM(code_e92d0_len_5da0, ScaleModel);
 
 INCLUDE_ASM(code_e92d0_len_5da0, GetModelIndex);
 
-INCLUDE_ASM(code_e92d0_len_5da0, CloneModel);
+s32 CloneModel(script_context* script) {
+    s32* thisPos = script->ptrReadPos;
+    s32 srcModelID = get_variable(script, *thisPos++);
+    s32 newModelID = get_variable(script, *thisPos++);
+
+    clone_model(srcModelID, newModelID);
+    return 2;
+}
 
 INCLUDE_ASM(code_e92d0_len_5da0, GetModelCenter);
 
@@ -268,7 +275,10 @@ INCLUDE_ASM(code_e92d0_len_5da0, GetColliderCenter);
 
 INCLUDE_ASM(code_e92d0_len_5da0, ParentColliderToModel);
 
-INCLUDE_ASM(code_e92d0_len_5da0, UpdateColliderTransform);
+s32 UpdateColliderTransform(script_context* script) {
+    update_collider_transform(get_variable(script, *script->ptrReadPos));
+    return 2;
+}
 
 INCLUDE_ASM(code_e92d0_len_5da0, func_802CA1B8);
 
@@ -291,7 +301,12 @@ s32 GotoMapByID(script_context* script) {
 
 INCLUDE_ASM(code_e92d0_len_5da0, GetEntryID);
 
-INCLUDE_ASM(code_e92d0_len_5da0, GetMapID);
+s32 GetMapID(script_context* script) {
+    game_status* gameStatus = *gGameStatusPtr;
+
+    set_variable(script, *script->ptrReadPos, gameStatus->mapID);
+    return 2;
+}
 
 INCLUDE_ASM(code_e92d0_len_5da0, GetLoadType);
 

@@ -251,7 +251,26 @@ s32 get_stored_empty_count(void) {
     return ARRAY_COUNT(gPlayerData.storedItems) - get_stored_count();
 }
 
-INCLUDE_ASM(code_80850_len_3060, enforce_hpfp_limits);
+void enforce_hpfp_limits(void) {
+    player_data* playerData = &gPlayerData;
+    player_data* playerData2 = &gPlayerData;
+
+    playerData->curMaxHP = playerData->hardMaxHP + (is_ability_active(4) * 5);
+    if (playerData->curMaxHP > 75) {
+        playerData->curMaxHP = 75;
+    }
+    if (playerData->curHP > playerData->curMaxHP) {
+        playerData->curHP = playerData->curMaxHP;
+    }
+
+    playerData2->curMaxFP = playerData2->hardMaxFP + (is_ability_active(12) * 5);
+    if (playerData2->curMaxFP > 75) {
+        playerData2->curMaxFP = 75;
+    }
+    if (playerData2->curFP > playerData2->curMaxFP) {
+        playerData2->curFP = playerData2->curMaxFP;
+    }
+}
 
 INCLUDE_ASM(code_80850_len_3060, initialize_status_menu);
 

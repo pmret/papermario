@@ -6,6 +6,8 @@
 
 void osCleanupThread(void);
 
+void clone_model(u16 srcModelID, u16 newModelID);
+void update_collider_transform(s16 colliderID);
 s32 get_variable(script_context* script, s32 pos);
 f32 get_float_variable(script_context* script, s32 pos);
 f32 sin_deg(f32 x);
