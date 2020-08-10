@@ -284,7 +284,46 @@ INCLUDE_ASM(code_80850_len_3060, coin_counter_draw_content);
 
 INCLUDE_ASM(code_80850_len_3060, update_coin_counter);
 
-INCLUDE_ASM(code_80850_len_3060, show_coin_counter);
+void show_coin_counter(void) {
+    ui_status* uiStatus = &gUIStatus;
+    s16 *coinCounterUnk = &D_8010CD10;
+    s32 index;
+
+    if ((*coinCounterUnk != 0) || (D_8010CD12 != 0)) {
+        func_80147E7C(0x14, 2);
+        if (uiStatus->iconIndex12 > -1) {
+            free_icon(uiStatus->iconIndex10);
+            free_icon(uiStatus->iconIndex11);
+            uiStatus->iconIndex12 = -1;
+        }
+        uiStatus->unk_6C = 0;
+        uiStatus->unk_6D = 0;
+        *coinCounterUnk = 0;
+        D_8010CD12 = 0;
+    }
+
+  if (uiStatus->unk_6C == 0) {
+    func_80147CC8(0x14, 0x20, 0xa4, 0x40, 0x14, 0x15, &D_800E92D8, 0, -1);
+    func_80147E7C(0x14, &D_80147474);
+    index = create_icon(&D_80109270);
+    uiStatus->iconIndex10 = index;
+    set_icon_flags(index, 0x80);
+    func_80144EFC(index, 0xff, 0xff, 0xff);
+    index = create_icon(&D_80108558);
+    uiStatus->iconIndex11 = index;
+    set_icon_flags(index, 0x80);
+    func_80144EFC(index, 0xff, 0xff, 0xff);
+    uiStatus->unk_6C = 0;
+
+    if (uiStatus->unk_6E < 0) {
+      uiStatus->unk_6E = uiStatus->ignoreChanges;
+    }
+
+    uiStatus->ignoreChanges = 1;
+    D_8010CD10 = 1;
+  }
+  return;
+}
 
 void hide_coin_counter(void) {
     ui_status* uiStatus = &gUIStatus;
