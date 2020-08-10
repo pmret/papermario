@@ -43,7 +43,7 @@ CROSS_IRIX = mips-sgi-irix5-
 AS = $(CROSS)as
 OLD_AS = $(TOOLS_DIR)/mips-nintendo-nu64-as
 CC = $(TOOLS_DIR)/cc1
-LD = $(CROSS_IRIX)ld
+LD = $(CROSS)ld
 OBJDUMP = $(CROSS)objdump
 OBJCOPY = $(CROSS)objcopy
 
