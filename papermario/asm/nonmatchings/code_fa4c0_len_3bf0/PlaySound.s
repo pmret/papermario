@@ -16,6 +16,7 @@ glabel PlaySound
 /* 0FAB24 802D6174 03E00008 */  jr    $ra
 /* 0FAB28 802D6178 27BD0018 */   addiu $sp, $sp, 0x18
 
+glabel func_802D617C
 /* 0FAB2C 802D617C 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0FAB30 802D6180 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0FAB34 802D6184 0080882D */  daddu $s1, $a0, $zero

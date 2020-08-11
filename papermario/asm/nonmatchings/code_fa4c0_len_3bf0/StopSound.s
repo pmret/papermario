@@ -16,6 +16,7 @@ glabel StopSound
 /* 0FAC8C 802D62DC 03E00008 */  jr    $ra
 /* 0FAC90 802D62E0 27BD0018 */   addiu $sp, $sp, 0x18
 
+glabel func_802D62E4
 /* 0FAC94 802D62E4 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0FAC98 802D62E8 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 0FAC9C 802D62EC 8C82000C */  lw    $v0, 0xc($a0)

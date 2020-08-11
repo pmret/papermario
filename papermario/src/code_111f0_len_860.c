@@ -25,7 +25,7 @@ void func_800360FC(void) {
 void func_80036130(void) {
     game_status* gameStatus = *gGameStatusPtr;
 
-    D_800A0940 = 0x00;
+    mapTransitionAlpha = 0x00;
     D_800A0942 = 0x14;
     D_800A0944 = 0x00;
 
@@ -52,7 +52,7 @@ s32 func_800363FC(void) {
 s32 func_80036430(void) {
     player_status* pPlayerStatus = &gPlayerStatus;
 
-    D_800A0940 = 0xFF;
+    mapTransitionAlpha = 0xFF;
     D_800A0942 = 0x14;
     D_800A0944 = 0x01;
     
