@@ -3,6 +3,7 @@ n64split
 *.bin
 *.FS
 *.bgm
+papermario/ctx.c
 papermario/Map_Assets.FS
 papermario/bgm
 papermario/bin

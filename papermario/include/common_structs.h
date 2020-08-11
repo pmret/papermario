@@ -38,7 +38,9 @@ typedef struct {
     /* 0x0AA */ s8 unk_AA;
     /* 0x0AB */ char unk_AB[1];
     /* 0x0AC */ s8 unk_AC;
-    /* 0x0AD */ char unk_AD[0x8F];
+    /* 0x0AD */ char unk_AD[0x87];
+    /* 0x134 */ u16 unk_134;
+    /* 0x136 */ char unk_136[0x6];
     /* 0x13C */ s16 unk_13C;
     /* 0x13E */ char unk_13E[0xA];
     /* 0x148 */ s16 unk_148;
