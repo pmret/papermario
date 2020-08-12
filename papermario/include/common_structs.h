@@ -27,13 +27,20 @@ typedef struct {
     /* 0x081 */ s8 unk_81;
     /* 0x082 */ s8 unk_82;
     /* 0x083 */ s8 unk_83;
-    /* 0x084 */ char unk_84[0x8];
+    /* 0x084 */ char unk_84[2];
+    /* 0x086 */ s16 unk_86;
+    /* 0x088 */ s16 unk_88;
+    /* 0x08A */ s16 unk_8A;
     /* 0x08C */ s16 mapID;
     /* 0x08E */ char unk_8E[0x1A];
     /* 0x0A8 */ s8 unk_A8;
     /* 0x0A9 */ char unk_A9;
     /* 0x0AA */ s8 unk_AA;
-    /* 0x0AB */ char unk_AB[0x91];
+    /* 0x0AB */ char unk_AB[1];
+    /* 0x0AC */ s8 unk_AC;
+    /* 0x0AD */ char unk_AD[0x87];
+    /* 0x134 */ u16 unk_134;
+    /* 0x136 */ char unk_136[0x6];
     /* 0x13C */ s16 unk_13C;
     /* 0x13E */ char unk_13E[0xA];
     /* 0x148 */ s16 unk_148;
@@ -133,6 +140,105 @@ typedef struct {
     /* 0x33C */ s16 smashGameRecord;
     /* 0x33E */ char unk_33E[0x2];
 } player_data; // size = 0x340
+
+typedef enum eActionState {
+    actionBounce=4,
+    actionConversation=12,
+    actionEnemyFirstStrike=27,
+    actionFalling=8,
+    actionGroundPound=14,
+    actionHammer=18,
+    actionIdle=0,
+    actionJump=3,
+    actionLand=10,
+    actionLaunch=6,
+    actionRide=33,
+    actionRun=2,
+    actionSpin=26,
+    actionSpinJump=13,
+    actionSpinningFlower=29,
+    actionStepDown=9,
+    actionStepUp=34,
+    actionUltraJump=15,
+    actionUltraPound=16,
+    actionUseSpring=38,
+    actionWalk=1
+} eActionState;
+
+typedef enum eFallState {
+    Falling=1,
+    Rising=0
+} eFallState;
+
+typedef struct {
+    /* 0x000 */ s32 flags;
+    /* 0x004 */ u32 animFlags;
+    /* 0x008 */ s16 framesOnGround; /* Number of frames since last jump landed */
+    /* 0x00A */ char unk_0A[2];
+    /* 0x00C */ s8 peachDisguise;
+    /* 0x00D */ char unk_0D[3];
+    /* 0x010 */ s16 unk_10;
+    /* 0x012 */ s16 moveFrames;
+    /* 0x014 */ s8 enableCollisionOverlapsCheck;
+    /* 0x015 */ s8 statusMenuCounter; /* whether the C-up menu can appear */
+    /* 0x016 */ s16 lastGoodPosition[3]; // TODO: Vec3s?
+    /* 0x01C */ f32 extraVelocity[3]; // TODO: Vec3f?
+    /* 0x028 */ f32 position[3]; //TODO: Vec3f?
+    /* 0x034 */ f32 unk_34;
+    /* 0x038 */ f32 unk_38;
+    /* 0x03C */ char unk_3C[8];
+    /* 0x044 */ f32 decorationPos[2];
+    /* 0x04C */ char unk_4C[4];
+    /* 0x050 */ f32 jumpApexHeight;
+    /* 0x054 */ s32 currentSpeed;
+    /* 0x058 */ f32 walkSpeed;
+    /* 0x05C */ f32 runSpeed;
+    /* 0x060 */ char unk_60[4];
+    /* 0x064 */ s32 unk_64;
+    /* 0x068 */ f32 normalPitch;
+    /* 0x06C */ f32 unk_6C;
+    /* 0x070 */ f32 gravityIntegrator[4];
+    /* 0x080 */ f32 targetYaw;
+    /* 0x084 */ f32 currentYaw;
+    /* 0x088 */ s32 unk_88;
+    /* 0x08C */ char unk_8C[4];
+    /* 0x090 */ s32 unk_90;
+    /* 0x094 */ s32 unk_94;
+    /* 0x098 */ s32 unk_98;
+    /* 0x09C */ s32 unk_9C;
+    /* 0x0A0 */ f32 heading;
+    /* 0x0A4 */ char unk_A4[4];
+    /* 0x0A8 */ f32 spriteFacingAngle; /* angle of sprite, relative to camera, from 0 to 180 */
+    /* 0x0AC */ char unk_AC[4];
+    /* 0x0B0 */ s16 colliderHeight;
+    /* 0x0B2 */ s16 colliderDiameter;
+    /* 0x0B4 */ eActionState actionState;
+    /* 0x0B5 */ eActionState prevActionState;
+    /* 0x0B6 */ eFallState fallState;
+    /* 0x0B7 */ char unk_B7;
+    /* 0x0B8 */ s32 anim;
+    /* 0x0BC */ char unk_BC[2];
+    /* 0x0BE */ s8 renderMode;
+    /* 0x0BF */ s8 unk_BF;
+    /* 0x0C0 */ u32* decorationList;
+    /* 0x0C4 */ char unk_C4;
+    /* 0x0C5 */ s8 unk_C5;
+    /* 0x0C6 */ char unk_C6[6];
+    /* 0x0CC */ s32 shadowID;
+    /* 0x0D0 */ char unk_D0[8];
+    /* 0x0D8 */ s32 unk_D8;
+    /* 0x0DC */ s32 currentButtons;
+    /* 0x0E0 */ s32 pressedButtons;
+    /* 0x0E4 */ s32 heldButtons;
+    /* 0x0E8 */ f32 stickAxis[2];
+    /* 0x0F0 */ s32 currentButtonsBuffer[10];
+    /* 0x118 */ s32 pressedButtonsBuffer[10];
+    /* 0x140 */ s32 heldButtonsBuffer[10];
+    /* 0x168 */ f32 stickXBuffer[10];
+    /* 0x190 */ f32 stickYBuffer[10];
+    /* 0x1B8 */ s32 inputBufPos;
+    /* 0x1BC */ char unk_1BC[0xCC];
+} player_status; // size = 0x288
 
 typedef struct {
     /* 0x00 */ s32 hpIconIndexes[2]; /* hpIconIndex, heartIconIndex */

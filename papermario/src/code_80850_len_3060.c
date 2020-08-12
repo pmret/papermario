@@ -280,7 +280,24 @@ INCLUDE_ASM(code_80850_len_3060, status_menu_draw_stat);
 
 INCLUDE_ASM(code_80850_len_3060, update_status_menu);
 
-INCLUDE_ASM(code_80850_len_3060, coin_counter_draw_content);
+void coin_counter_draw_content(UNK_TYPE arg0, s32 posX, s32 posY) {
+    ui_status *uiStatus = &gUIStatus;
+    s32 iconIndex;
+
+    if ((gPlayerData.coins != uiStatus->displayCoins) && (((*gGameStatusPtr)->unk_134 % 3) == 0)) {
+        play_sound(0x211);
+    }
+
+    iconIndex = uiStatus->iconIndex10;
+    set_icon_render_pos(iconIndex, posX + 27, posY + 11);
+    draw_icon_0(iconIndex);
+
+    iconIndex = uiStatus->iconIndex11;
+    set_icon_render_pos(iconIndex, posX + 15, posY + 11);
+    draw_icon_0(iconIndex);
+
+    draw_number(uiStatus->displayCoins, posX + 58, posY + 4, 1, 10, 255, 3);
+}
 
 INCLUDE_ASM(code_80850_len_3060, update_coin_counter);
 
