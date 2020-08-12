@@ -99,6 +99,7 @@ glabel func_802D5B10
 /* 0FA618 802D5C68 03E00008 */  jr    $ra
 /* 0FA61C 802D5C6C 27BD0040 */   addiu $sp, $sp, 0x40
 
+glabel func_802D5C70
 /* 0FA620 802D5C70 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0FA624 802D5C74 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 0FA628 802D5C78 8C82000C */  lw    $v0, 0xc($a0)

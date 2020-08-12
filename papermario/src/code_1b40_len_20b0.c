@@ -32,7 +32,7 @@ extern int D_802EB3D0[];
 extern u8 D_80074021;
 extern s32 D_8009A5D8;
 
-extern s32 D_8009A650[1];
+//extern s32 D_8009A650[1]; Declared in variables.h
 
 void dma_copy(void*, void*, void*);
 

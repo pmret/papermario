@@ -102,7 +102,7 @@ typedef struct {
     /* 0x54 */ char unk_54[2];
     /* 0x56 */ s16 unk_56;
     /* 0x58 */ char unk_58[2];
-    /* 0x5A */ s16 unk_5a;
+    /* 0x5A */ s16 unk_5A;
 } item_entity;
 
 typedef struct {
@@ -370,11 +370,11 @@ typedef struct {
 } StaticNpcSettings; // size = 0x2C
 
 typedef enum {
-    Hammer=4,
-    Jump=2,
-    Normal=1,
-    Partner=6,
-    Spin=3,
+    triggerHammer=4,
+    triggerJump=2,
+    triggerNormal=1,
+    triggerPartner=6,
+    triggerSpin=3,
 } eEncounterTrigger;
 
 typedef struct {

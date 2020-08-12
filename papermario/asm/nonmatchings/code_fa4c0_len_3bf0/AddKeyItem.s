@@ -46,6 +46,7 @@ glabel AddKeyItem
 /* 0FB2FC 802D694C 03E00008 */  jr    $ra
 /* 0FB300 802D6950 27BD0018 */   addiu $sp, $sp, 0x18
 
+glabel func_802D6954
 /* 0FB304 802D6954 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0FB308 802D6958 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 0FB30C 802D695C 0C038069 */  jal   func_800E01A4
