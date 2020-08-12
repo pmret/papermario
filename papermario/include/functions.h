@@ -12,6 +12,11 @@ s32 get_variable(script_context* script, s32 pos);
 f32 get_float_variable(script_context* script, s32 pos);
 f32 sin_deg(f32 x);
 f32 cos_deg(f32 x);
+s32 func_80055448(s32);
+s32 func_80055464(s32, s32);
+s32 func_800554A4(s32, s32);
+s32 func_800554E8(s32, s32);
+s32 func_800555E4(s32);
 
 s32 play_sound_at_position(s32 soundID, s32 value2, f32 posX, f32 posY, f32 posZ);
 
