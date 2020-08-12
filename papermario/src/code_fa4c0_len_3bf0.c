@@ -15,9 +15,9 @@ s32 SetMusicTrack(script_context* script, s32 initialCall) {
     s32 musicPlayer = get_variable(script, *ptrReadPos++);
     s32 songID = get_variable(script, *ptrReadPos++);
     s32 variation = get_variable(script, *ptrReadPos++);
-    s32 volume = get_variable(script, *ptrReadPos++);
+    s16 volume = get_variable(script, *ptrReadPos++);
 
-    return (set_music_track(musicPlayer, songID, variation, 0x1F4, (volume << 0x10) >> 0x10) != 0) * 2;
+    return (set_music_track(musicPlayer, songID, variation, 0x1F4, volume) != 0) * 2;
 }
 
 INCLUDE_ASM(code_fa4c0_len_3bf0, FadeInMusic);

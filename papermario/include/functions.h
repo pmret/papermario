@@ -19,5 +19,5 @@ s32 func_800554E8(s32, s32);
 s32 func_800555E4(s32);
 
 s32 play_sound_at_position(s32 soundID, s32 value2, f32 posX, f32 posY, f32 posZ);
-
+s32 set_music_track(s32 musicPlayer, s32 songID, s32 variation, s32 unk, s32 volume);
 #endif
