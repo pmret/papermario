@@ -38,7 +38,7 @@ u16 read_background_size(bg_header *bg) {
     gameStatus->unk_14C = bg->startY;
     gameStatus->unk_154 = bg->palette;
     gameStatus->unk_158 = bg->raster;
-    gameStatus->unk_148 = gameStatus->unk_148 | 1;
+    gameStatus->unk_148 |= 1;
     return;
 }
 
@@ -59,8 +59,8 @@ u16 func_80145E98(s32 arg0, s32 arg1, s32 arg2) {
     if (temp_lo < 0) {
         temp_lo = temp_lo + 0xFF;
     }
-    temp_lo = arg0 + (temp_lo >> 0x08);
-    return temp_lo & 0xFFFF;
+    temp_lo = arg0 + (temp_lo >> 8);
+    return temp_lo;
 }
 
 INCLUDE_ASM(code_dc470_len_14c0, func_80145EC0);

@@ -17,7 +17,7 @@ s16 func_800337F8(subtract_val) {
     game_status* gameStatus = *gGameStatusPtr;
     if (gameStatus->boot_alpha != 0) {
         gameStatus->boot_alpha -= subtract_val;
-        if (gameStatus->boot_alpha << 0x10 < 0) {
+        if (gameStatus->boot_alpha << 16 < 0) {
             gameStatus->boot_alpha = 0;
         }
     } else {
