@@ -54,7 +54,7 @@ s32 PlaySoundAt(script_context* script, s32 initialCall) {
     s32 y = get_variable(script, *ptrReadPos++);
     s32 z = get_variable(script, *ptrReadPos++);
 
-    play_sound_at_position(soundID, value2, (f32) x, (f32) y, (f32) z);
+    play_sound_at_position(soundID, value2, x, y, z);
     return 2;
 }
 
@@ -92,6 +92,7 @@ s32 RemoveKeyItemAt(script_context* script, s32 initialCall) {
     s32* ptrReadPos = script->ptrReadPos;
     s32 index = get_variable(script, *ptrReadPos++);
     s16* ptrTemp = D_8010F304;
+
     ptrTemp[index] = 0;
 
     return 2;
@@ -101,6 +102,7 @@ s32 RemoveItemAt(script_context* script, s32 initialCall) {
     s32* ptrReadPos = script->ptrReadPos;
     s32 index = get_variable(script, *ptrReadPos++);
     s16* ptrTemp = D_8010F444;
+    
     ptrTemp[index] = 0;
 
     sort_items();
@@ -166,9 +168,9 @@ s32 SetItemPos(script_context* script, s32 initialCall) {
     z = get_variable(script, *ptrReadPos++);
 
     ptrItemEntity = get_item_entity(itemEntityIndex);
-    ptrItemEntity->position[0] = (f32) x;
-    ptrItemEntity->position[1] = (f32) y;
-    ptrItemEntity->position[2] = (f32) z;
+    ptrItemEntity->position[0] = x;
+    ptrItemEntity->position[1] = y;
+    ptrItemEntity->position[2] = z;
 
     return 2;
 }
