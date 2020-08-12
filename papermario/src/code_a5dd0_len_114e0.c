@@ -313,4 +313,3 @@ INCLUDE_ASM(code_a5dd0_len_114e0, func_80120530);
 INCLUDE_ASM(code_a5dd0_len_114e0, func_80120678);
 
 INCLUDE_ASM(code_a5dd0_len_114e0, func_801206F8);
-

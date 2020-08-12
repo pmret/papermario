@@ -217,4 +217,3 @@ INCLUDE_ASM(code_b72b0_len_15ed0, func_801356D4);
 INCLUDE_ASM(code_b72b0_len_15ed0, update_item_entity_temp);
 
 INCLUDE_ASM(code_b72b0_len_15ed0, func_801363A0);
-

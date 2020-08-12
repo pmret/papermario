@@ -181,4 +181,3 @@ INCLUDE_ASM(code_13870_len_6980, bind_npc_interact);
 INCLUDE_ASM(code_13870_len_6980, get_enemy);
 
 INCLUDE_ASM(code_13870_len_6980, get_enemy_safe);
-

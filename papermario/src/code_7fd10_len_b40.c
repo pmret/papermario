@@ -15,4 +15,3 @@ INCLUDE_ASM(code_7fd10_len_b40, func_800E6C44);
 INCLUDE_ASM(code_7fd10_len_b40, func_800E6CE4);
 
 INCLUDE_ASM(code_7fd10_len_b40, check_input_status_menu);
-

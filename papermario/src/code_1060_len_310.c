@@ -9,4 +9,3 @@ INCLUDE_ASM(code_1060_len_310, func_80025D38);
 INCLUDE_ASM(code_1060_len_310, func_80025D74);
 
 INCLUDE_ASM(code_1060_len_310, func_80025F44);
-

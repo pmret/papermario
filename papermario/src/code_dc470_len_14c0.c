@@ -11,4 +11,3 @@ INCLUDE_ASM(code_dc470_len_14c0, set_background_size);
 INCLUDE_ASM(code_dc470_len_14c0, func_80145E98);
 
 INCLUDE_ASM(code_dc470_len_14c0, func_80145EC0);
-

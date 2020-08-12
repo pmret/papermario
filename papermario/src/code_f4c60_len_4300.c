@@ -121,4 +121,3 @@ INCLUDE_ASM(code_f4c60_len_4300, func_802D43F4);
 INCLUDE_ASM(code_f4c60_len_4300, func_802D4488);
 
 INCLUDE_ASM(code_f4c60_len_4300, func_802D4560);
-

@@ -75,4 +75,3 @@ INCLUDE_ASM(os/code_45df0_len_970, osDispatchThread);
 INCLUDE_ASM(os/code_45df0_len_970, osDispatchThreadSave);
 
 void INCLUDE_ASM(os/code_45df0_len_970, osCleanupThread, void);
-

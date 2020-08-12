@@ -33,4 +33,3 @@ INCLUDE_ASM(code_6240_len_c00, fio_read_flash);
 INCLUDE_ASM(code_6240_len_c00, fio_write_flash);
 
 INCLUDE_ASM(code_6240_len_c00, fio_erase_flash);
-

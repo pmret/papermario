@@ -79,4 +79,3 @@ INCLUDE_ASM(code_2e230_len_2190, al_DmaCopy);
 INCLUDE_ASM(code_2e230_len_2190, func_80054E90);
 
 INCLUDE_ASM(code_2e230_len_2190, al_CopyWords);
-

@@ -25,4 +25,3 @@ INCLUDE_ASM(os/code_39db0_len_8a0, nuScEventHandler);
 INCLUDE_ASM(os/code_39db0_len_8a0, nuScEventBroadcast);
 
 INCLUDE_ASM(os/code_39db0_len_8a0, nuScWaitTaskReady);
-

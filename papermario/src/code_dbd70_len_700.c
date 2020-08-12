@@ -17,4 +17,3 @@ INCLUDE_ASM(code_dbd70_len_700, is_trigger_bound);
 INCLUDE_ASM(code_dbd70_len_700, get_trigger_by_id);
 
 INCLUDE_ASM(code_dbd70_len_700, func_80145CE8);
-

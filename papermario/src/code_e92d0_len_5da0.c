@@ -315,4 +315,3 @@ INCLUDE_ASM(code_e92d0_len_5da0, SetRenderMode);
 INCLUDE_ASM(code_e92d0_len_5da0, PlaySoundAtModel);
 
 INCLUDE_ASM(code_e92d0_len_5da0, PlaySoundAtCollider);
-

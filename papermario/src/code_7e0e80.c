@@ -55,4 +55,3 @@ INCLUDE_ASM(code_7e0e80, draw_shop_items);
 INCLUDE_ASM(code_7e0e80, MakeShop);
 
 INCLUDE_ASM(code_7e0e80, MakeShopOwner);
-

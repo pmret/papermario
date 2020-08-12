@@ -13,4 +13,3 @@ INCLUDE_ASM(code_ebd0_len_6a0, func_80033874);
 INCLUDE_ASM(code_ebd0_len_6a0, start_battle_countdown);
 
 INCLUDE_ASM(code_ebd0_len_6a0, step_battle);
-

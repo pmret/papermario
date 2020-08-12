@@ -17,4 +17,3 @@ INCLUDE_ASM(code_ad90_len_2880, test_ray_zone_aabb);
 INCLUDE_ASM(code_ad90_len_2880, func_800304FC);
 
 INCLUDE_ASM(code_ad90_len_2880, do_camera_type_3);
-

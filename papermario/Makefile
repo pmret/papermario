@@ -62,7 +62,7 @@ default: all
 TARGET = papermario
 LD_SCRIPT = $(TARGET).ld
 
-all: fix_asm $(BUILD_DIR) $(TARGET).z64 verify
+all: $(BUILD_DIR) $(TARGET).z64 verify
 
 clean:
 	rm -rf build
@@ -101,9 +101,6 @@ $(BUILD_DIR)/$(TARGET).bin: $(BUILD_DIR)/$(TARGET).elf
 $(TARGET).z64: $(BUILD_DIR)/$(TARGET).bin
 	@cp $< $@
 	$(N64CKSUM) $@
-
-fix_asm:
-	@./fix_asm.py
 
 verify: $(TARGET).z64
 	sha1sum -c checksum.sha1

@@ -41,7 +41,7 @@ s32 DemoJoystickRadial(script_context* script) {
 
     (*gGameStatusPtr)->demoStickX = a * sin_deg(b);
     (*gGameStatusPtr)->demoStickY = a * cos_deg(b);
-    
+
     return 2;
 }
 

@@ -71,4 +71,3 @@ INCLUDE_ASM(code_fee30_len_2d60, func_802DE9D8);
 INCLUDE_ASM(code_fee30_len_2d60, func_802DEA40);
 
 INCLUDE_ASM(code_fee30_len_2d60, func_802DEA6C);
-

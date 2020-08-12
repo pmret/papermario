@@ -13,4 +13,3 @@ INCLUDE_ASM(os/code_44b40_len_a90, osGetId);
 INCLUDE_ASM(os/code_44b40_len_a90, osCheckId);
 
 INCLUDE_ASM(os/code_44b40_len_a90, osPfsRWInode);
-

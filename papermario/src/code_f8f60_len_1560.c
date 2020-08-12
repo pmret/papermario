@@ -43,4 +43,3 @@ INCLUDE_ASM(code_f8f60_len_1560, SetGameMode);
 INCLUDE_ASM(code_f8f60_len_1560, ClampAngleInt);
 
 INCLUDE_ASM(code_f8f60_len_1560, ClampAngleFloat);
-

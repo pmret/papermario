@@ -17,4 +17,3 @@ INCLUDE_ASM(code_d610_len_1330, func_80033394);
 INCLUDE_ASM(code_d610_len_1330, set_game_mode);
 
 INCLUDE_ASM(code_d610_len_1330, get_game_mode);
-

@@ -1,6 +1,5 @@
 #include "common.h"
 
-
 void func_80035DF0(s16 arg0) {
     s16* tempPtr = &D_800A0942;
     *tempPtr = arg0;
@@ -32,8 +31,7 @@ void func_80036130(void) {
     if (gameStatus->unk_88 != gameStatus->unk_86) {
         gameStatus->unk_8A = 0x01;
         gameStatus->unk_88 = gameStatus->unk_86;
-    }
-    else {
+    } else {
         gameStatus->unk_8A = 0;
     }
 }
@@ -55,7 +53,7 @@ s32 func_80036430(void) {
     D_800A0940 = 0xFF;
     D_800A0942 = 0x14;
     D_800A0944 = 0x01;
-    
+
     pPlayerStatus->flags |= 0x1000;
 
     return pPlayerStatus->flags;
@@ -65,4 +63,3 @@ INCLUDE_ASM(code_111f0_len_860, func_8003646C);
 
 void func_80036640(void) {
 }
-

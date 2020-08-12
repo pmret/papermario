@@ -85,4 +85,3 @@ INCLUDE_ASM(code_ef070_len_3400, SetAnimModelScale);
 INCLUDE_ASM(code_ef070_len_3400, func_802CD4B4);
 
 INCLUDE_ASM(code_ef070_len_3400, func_802CD57C);
-

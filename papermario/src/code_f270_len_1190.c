@@ -15,4 +15,3 @@ INCLUDE_ASM(code_f270_len_1190, func_80034BFC);
 INCLUDE_ASM(code_f270_len_1190, func_80034C3C);
 
 INCLUDE_ASM(code_f270_len_1190, func_80034FF0);
-

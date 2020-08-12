@@ -37,4 +37,3 @@ INCLUDE_ASM(code_1a1f0_len_5390, create_npcs);
 INCLUDE_ASM(code_1a1f0_len_5390, func_80044140);
 
 INCLUDE_ASM(code_1a1f0_len_5390, func_80044148);
-

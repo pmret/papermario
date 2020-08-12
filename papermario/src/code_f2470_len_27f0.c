@@ -71,4 +71,3 @@ INCLUDE_ASM(code_f2470_len_27f0, GetCurrentPartnerID);
 INCLUDE_ASM(code_f2470_len_27f0, SetNpcEffect);
 
 INCLUDE_ASM(code_f2470_len_27f0, PlaySoundAtNpc);
-

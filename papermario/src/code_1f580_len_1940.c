@@ -92,4 +92,3 @@ INCLUDE_ASM(code_1f580_len_1940, ClearDefeatedEnemies);
 INCLUDE_ASM(code_1f580_len_1940, SetEnemyFlagBits);
 
 INCLUDE_ASM(code_1f580_len_1940, GetSelfAnimationFromTable);
-

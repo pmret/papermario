@@ -85,4 +85,3 @@ INCLUDE_ASM(code_42e0_len_1f60, func_8002A904);
 INCLUDE_ASM(code_42e0_len_1f60, func_8002AAC4);
 
 INCLUDE_ASM(code_42e0_len_1f60, func_8002AB5C);
-

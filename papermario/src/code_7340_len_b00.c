@@ -21,4 +21,3 @@ INCLUDE_ASM(code_7340_len_b00, crash_monitor_thread);
 INCLUDE_ASM(code_7340_len_b00, func_8002C890);
 
 INCLUDE_ASM(code_7340_len_b00, crash_create_monitor);
-

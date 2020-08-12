@@ -117,4 +117,3 @@ INCLUDE_ASM(code_20ec0_len_5040, DoBasicAI);
 INCLUDE_ASM(code_20ec0_len_5040, func_8004A73C);
 
 INCLUDE_ASM(code_20ec0_len_5040, func_8004A784);
-

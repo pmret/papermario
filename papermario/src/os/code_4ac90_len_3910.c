@@ -269,4 +269,3 @@ INCLUDE_ASM(os/code_4ac90_len_3910, func_80072CEC);
 INCLUDE_ASM(os/code_4ac90_len_3910, setup_demo_player);
 
 INCLUDE_ASM(os/code_4ac90_len_3910, load_demo_battle);
-

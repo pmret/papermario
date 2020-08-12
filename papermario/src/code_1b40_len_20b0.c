@@ -2,25 +2,25 @@
 
 extern Gfx D_00074210[];
 extern Gfx D_00074230[];
-extern Gfx *D_8009A66C[1];
+extern Gfx* D_8009A66C[1];
 
 extern int D_000759B0[];
-extern int D_000759B0_end[]; //A55D0
+extern int D_000759B0_end[]; // A55D0
 
 extern int D_000A5DD0[];
-extern int D_000A5DD0_end[]; //E79B0
+extern int D_000A5DD0_end[]; // E79B0
 
 extern int D_000E79B0[];
-extern int D_000E79B0_end[]; //FEE30
+extern int D_000E79B0_end[]; // FEE30
 
 extern int D_000FEE30[];
-extern int D_000FEE30_end[]; //102610
+extern int D_000FEE30_end[]; // 102610
 
 extern int D_00102610[];
-extern int D_00102610_end[]; //10CC10
+extern int D_00102610_end[]; // 10CC10
 
 extern int D_0010CC10[];
-extern int D_0010CC10_end[]; //10F1B0
+extern int D_0010CC10_end[]; // 10F1B0
 
 extern int D_802DBD40[];
 extern int D_800DC500[];
@@ -34,7 +34,7 @@ extern s32 D_8009A5D8;
 
 extern s32 D_8009A650[1];
 
-void dma_copy(void *, void*, void*);
+void dma_copy(void*, void*, void*);
 
 INCLUDE_ASM(code_1b40_len_20b0, step_game_loop);
 

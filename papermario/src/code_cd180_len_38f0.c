@@ -37,4 +37,3 @@ INCLUDE_ASM(code_cd180_len_38f0, func_80138D88);
 INCLUDE_ASM(code_cd180_len_38f0, func_80138E54);
 
 INCLUDE_ASM(code_cd180_len_38f0, func_80139F10);
-

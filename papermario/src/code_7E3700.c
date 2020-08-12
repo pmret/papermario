@@ -13,4 +13,3 @@ INCLUDE_ASM(code_7E3700, GetPushBlock);
 INCLUDE_ASM(code_7E3700, GetGridIndexFromPos);
 
 INCLUDE_ASM(code_7E3700, SetPushBlockFallEffect);
-

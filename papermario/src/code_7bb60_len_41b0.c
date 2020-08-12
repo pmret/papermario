@@ -93,4 +93,3 @@ INCLUDE_ASM(code_7bb60_len_41b0, func_800E6428);
 INCLUDE_ASM(code_7bb60_len_41b0, func_800E6500);
 
 INCLUDE_ASM(code_7bb60_len_41b0, func_800E657C);
-

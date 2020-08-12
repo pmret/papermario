@@ -77,4 +77,3 @@ INCLUDE_ASM(code_838b0_len_5900, func_800EF628);
 INCLUDE_ASM(code_838b0_len_5900, func_800EF640);
 
 INCLUDE_ASM(code_838b0_len_5900, func_800EF82C);
-

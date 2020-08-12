@@ -77,4 +77,3 @@ INCLUDE_ASM(code_fa4c0_len_3bf0, RemoveEffect);
 INCLUDE_ASM(code_fa4c0_len_3bf0, ShowSleepBubble);
 
 INCLUDE_ASM(code_fa4c0_len_3bf0, PlayEffect);
-

@@ -11,4 +11,3 @@ INCLUDE_ASM(code_25f00_len_940, nuAuCleanDMABuffers);
 INCLUDE_ASM(code_25f00_len_940, alRename1);
 
 INCLUDE_ASM(code_25f00_len_940, alRename2);
-

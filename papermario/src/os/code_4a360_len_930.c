@@ -19,4 +19,3 @@ INCLUDE_ASM(os/code_4a360_len_930, osFlashWriteBuffer);
 INCLUDE_ASM(os/code_4a360_len_930, osFlashWriteArray);
 
 INCLUDE_ASM(os/code_4a360_len_930, osFlashReadArray);
-

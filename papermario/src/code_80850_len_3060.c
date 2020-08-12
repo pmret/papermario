@@ -122,7 +122,7 @@ s32 add_item(s32 itemID) {
 }
 
 s32 get_item_count(void) {
-    player_data *playerData = &gPlayerData;
+    player_data* playerData = &gPlayerData;
     s32 i = 0;
     s32 sum = 0;
 
@@ -140,7 +140,7 @@ s32 get_item_empty_count(void) {
 }
 
 s32 find_item(s32 itemID) {
-    player_data *playerData = &gPlayerData;
+    player_data* playerData = &gPlayerData;
     item_table_entry* item = &gItemTable[itemID];
     s32 i;
 
@@ -171,8 +171,7 @@ s32 find_item(s32 itemID) {
     return i;
 }
 
-void sort_items(void)
-{
+void sort_items(void) {
     player_data* playerData = &gPlayerData;
     int j;
     int i;
@@ -209,13 +208,13 @@ s32 add_badge(s32 itemID) {
     if (i >= ARRAY_COUNT(playerData->badges)) {
         return 0;
     }
-    
+
     playerData->badges[i] = itemID;
     return i;
 }
 
 s32 store_item(s32 itemID) {
-    player_data *playerData = &gPlayerData;
+    player_data* playerData = &gPlayerData;
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(gPlayerData.storedItems); i++) {
@@ -234,7 +233,7 @@ s32 store_item(s32 itemID) {
 }
 
 s32 get_stored_count(void) {
-    player_data *playerData = &gPlayerData;
+    player_data* playerData = &gPlayerData;
     s32 i = 0;
     s32 sum = 0;
 
@@ -281,7 +280,7 @@ INCLUDE_ASM(code_80850_len_3060, status_menu_draw_stat);
 INCLUDE_ASM(code_80850_len_3060, update_status_menu);
 
 void coin_counter_draw_content(UNK_TYPE arg0, s32 posX, s32 posY) {
-    ui_status *uiStatus = &gUIStatus;
+    ui_status* uiStatus = &gUIStatus;
     s32 iconIndex;
 
     if ((gPlayerData.coins != uiStatus->displayCoins) && (((*gGameStatusPtr)->unk_134 % 3) == 0)) {
@@ -299,60 +298,50 @@ void coin_counter_draw_content(UNK_TYPE arg0, s32 posX, s32 posY) {
     draw_number(uiStatus->displayCoins, posX + 58, posY + 4, 1, 10, 255, 3);
 }
 
-INCLUDE_ASM(code_80850_len_3060, update_coin_counter);
-// very close to matching, but probably not right.
-/*
+// INCLUDE_ASM(code_80850_len_3060, update_coin_counter);
 void update_coin_counter(void) {
     ui_status* uiStatus = &gUIStatus;
     player_data* playerData = &gPlayerData;
 
+    do {} while(0); // Needed to match
+
     if (uiStatus->unk_6D != 0) {
         uiStatus->unk_6D -= 1;
-        if ((uiStatus->unk_6D << 24) == 0) {
-            if (uiStatus->iconIndex12 >= 0) {
-                free_icon(uiStatus->iconIndex12);
-                free_icon(uiStatus->iconIndex13);
-                uiStatus->iconIndex12 = -1;
-            }
+        if (((uiStatus->unk_6D << 24) == 0) && (uiStatus->iconIndex12 >= 0)) {
+            free_icon(uiStatus->iconIndex12);
+            free_icon(uiStatus->iconIndex13);
+            uiStatus->iconIndex12 = -1;
         }
         D_8010CD12 = 0;
     }
 
     if (uiStatus->unk_6C != 0) {
-        if (uiStatus->displayCoins == playerData->coins) {
-            if (uiStatus->unk_6C > 30) {
-                uiStatus->unk_6C = 30;
-            }
-            if (uiStatus->displayCoins == playerData->coins) {
-                goto tail;
-            }
+        if ((uiStatus->displayCoins == playerData->coins) && (uiStatus->unk_6C > 30)) {
+            uiStatus->unk_6C = 30;
         }
 
-        if (uiStatus->unk_6C > 0x1E) {
-            return;
-        }
-
-tail:
-        uiStatus->unk_6C -= 1;
-        if (uiStatus->unk_6C == 0) {
-            func_80147E7C(20, &D_80147574);
-            uiStatus->unk_6D = 15;
-            D_8010CD10 = 0;
-            D_8010CD12 = 1;
-            uiStatus->iconIndex12 = uiStatus->iconIndex10;
-            uiStatus->iconIndex13 = uiStatus->iconIndex11;
-            uiStatus->displayCoins = playerData->coins;
-            if (uiStatus->unk_6E > -1) {
-                uiStatus->ignoreChanges = uiStatus->unk_6E;
-                uiStatus->unk_6E = -1;
+        if ((uiStatus->displayCoins == playerData->coins) || (uiStatus->unk_6C <= 30)) {
+            uiStatus->unk_6C -= 1;
+            if (uiStatus->unk_6C == 0) {
+                func_80147E7C(20, &D_80147574);
+                uiStatus->unk_6D = 15;
+                D_8010CD10 = 0;
+                D_8010CD12 = 1;
+                uiStatus->iconIndex12 = uiStatus->iconIndex10;
+                uiStatus->iconIndex13 = uiStatus->iconIndex11;
+                uiStatus->displayCoins = playerData->coins;
+                if (uiStatus->unk_6E > -1) {
+                    uiStatus->ignoreChanges = uiStatus->unk_6E;
+                    uiStatus->unk_6E = -1;
+                }
             }
         }
     }
-}*/
+}
 
 void show_coin_counter(void) {
     ui_status* uiStatus = &gUIStatus;
-    s16 *coinCounterUnk = &D_8010CD10;
+    s16* coinCounterUnk = &D_8010CD10;
     s32 index;
 
     if ((*coinCounterUnk != 0) || (D_8010CD12 != 0)) {
@@ -368,27 +357,27 @@ void show_coin_counter(void) {
         D_8010CD12 = 0;
     }
 
-  if (uiStatus->unk_6C == 0) {
-    func_80147CC8(0x14, 0x20, 0xa4, 0x40, 0x14, 0x15, &D_800E92D8, 0, -1);
-    func_80147E7C(0x14, &D_80147474);
-    index = create_icon(&D_80109270);
-    uiStatus->iconIndex10 = index;
-    set_icon_flags(index, 0x80);
-    func_80144EFC(index, 0xff, 0xff, 0xff);
-    index = create_icon(&D_80108558);
-    uiStatus->iconIndex11 = index;
-    set_icon_flags(index, 0x80);
-    func_80144EFC(index, 0xff, 0xff, 0xff);
-    uiStatus->unk_6C = 0;
+    if (uiStatus->unk_6C == 0) {
+        func_80147CC8(0x14, 0x20, 0xa4, 0x40, 0x14, 0x15, &D_800E92D8, 0, -1);
+        func_80147E7C(0x14, &D_80147474);
+        index = create_icon(&D_80109270);
+        uiStatus->iconIndex10 = index;
+        set_icon_flags(index, 0x80);
+        func_80144EFC(index, 0xff, 0xff, 0xff);
+        index = create_icon(&D_80108558);
+        uiStatus->iconIndex11 = index;
+        set_icon_flags(index, 0x80);
+        func_80144EFC(index, 0xff, 0xff, 0xff);
+        uiStatus->unk_6C = 0;
 
-    if (uiStatus->unk_6E < 0) {
-      uiStatus->unk_6E = uiStatus->ignoreChanges;
+        if (uiStatus->unk_6E < 0) {
+            uiStatus->unk_6E = uiStatus->ignoreChanges;
+        }
+
+        uiStatus->ignoreChanges = 1;
+        D_8010CD10 = 1;
     }
-
-    uiStatus->ignoreChanges = 1;
-    D_8010CD10 = 1;
-  }
-  return;
+    return;
 }
 
 void hide_coin_counter(void) {
@@ -430,7 +419,6 @@ void open_status_menu_long(void) {
         uiStatus->unk_3B = 1;
     }
 }
-
 
 void open_status_menu_short(void) {
     ui_status* uiStatus = &gUIStatus;
@@ -738,7 +726,7 @@ s32 is_partner_ability_active(void) {
 }
 
 s16 add_coins(s32 amt) {
-    player_data *playerData = &gPlayerData;
+    player_data* playerData = &gPlayerData;
     s16 newCoins = playerData->coins + amt;
 
     playerData->coins = newCoins;
@@ -759,17 +747,17 @@ s16 add_coins(s32 amt) {
 }
 
 s8 add_star_points(s32 amt) {
-    player_data *playerData = &gPlayerData;
-    player_data *playerData2 = &gPlayerData;
+    player_data* playerData = &gPlayerData;
+    player_data* playerData2 = &gPlayerData;
     s8 newSP = playerData->starPoints + amt;
 
-    //TODO: probably a macro!
+    // TODO: probably a macro!
     playerData2->starPoints = newSP;
     if (newSP > 100) {
         playerData2->starPoints = 100;
     }
 
-    //TODO: probably a macro!
+    // TODO: probably a macro!
     newSP = playerData2->starPoints;
     if (newSP < 0) {
         playerData2->starPoints = 0;
@@ -778,8 +766,8 @@ s8 add_star_points(s32 amt) {
 }
 
 u8 add_star_pieces(s32 amt) {
-    player_data *playerData = &gPlayerData;
-    player_data *playerData2 = &gPlayerData;
+    player_data* playerData = &gPlayerData;
+    player_data* playerData2 = &gPlayerData;
     s32 newSP = playerData->starPieces;
 
     newSP += amt;

@@ -31,7 +31,7 @@ INCLUDE_ASM(os/code_3a850_le_a40, contPakFileNum);
 INCLUDE_ASM(os/code_3a850_le_a40, contPakRepairId);
 
 #undef osMotorStop
-s32 INCLUDE_ASM(os/code_3a850_le_a40, osMotorStop, OSPfs *unk);
+s32 INCLUDE_ASM(os/code_3a850_le_a40, osMotorStop, OSPfs* unk);
 
 INCLUDE_ASM(os/code_3a850_le_a40, contRmbControl);
 
@@ -42,4 +42,3 @@ INCLUDE_ASM(os/code_3a850_le_a40, nuContRmbMgrRemove);
 INCLUDE_ASM(os/code_3a850_le_a40, contRmbCheckMesg);
 
 INCLUDE_ASM(os/code_3a850_le_a40, contRmbStartMesg);
-

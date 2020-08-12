@@ -1099,4 +1099,3 @@ INCLUDE_ASM(code_16c8e0, GetDamageIntensity);
 INCLUDE_ASM(code_16c8e0, ActorAddMovePos);
 
 INCLUDE_ASM(code_16c8e0, LoadStarPowerScript);
-

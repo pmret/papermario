@@ -23,4 +23,3 @@ INCLUDE_ASM(code_dba20_len_350, get_area_flag);
 INCLUDE_ASM(code_dba20_len_350, set_area_byte);
 
 INCLUDE_ASM(code_dba20_len_350, get_area_byte);
-

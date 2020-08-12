@@ -9,4 +9,3 @@ INCLUDE_ASM(os/code_3b4a0_len_270, nuPiReadRomOverlay);
 INCLUDE_ASM(os/code_3b4a0_len_270, nuGfxThreadStart);
 
 INCLUDE_ASM(os/code_3b4a0_len_270, nuGfxThread);
-

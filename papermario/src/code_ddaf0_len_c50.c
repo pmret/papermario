@@ -19,4 +19,3 @@ INCLUDE_ASM(code_ddaf0_len_c50, func_80147E7C);
 INCLUDE_ASM(code_ddaf0_len_c50, func_80147EC4);
 
 INCLUDE_ASM(code_ddaf0_len_c50, func_80147F30);
-

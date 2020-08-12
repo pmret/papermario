@@ -15,4 +15,3 @@ INCLUDE_ASM(code_6e40_len_500, func_8002BF04);
 INCLUDE_ASM(code_6e40_len_500, func_8002BF14);
 
 INCLUDE_ASM(code_6e40_len_500, func_8002BF24);
-

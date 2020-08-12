@@ -109,4 +109,3 @@ INCLUDE_ASM(code_415D90, func_802AA640);
 INCLUDE_ASM(code_415D90, update_targeting_enemies);
 
 INCLUDE_ASM(code_415D90, func_802AACD8);
-

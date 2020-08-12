@@ -75,4 +75,3 @@ INCLUDE_ASM(code_e79b0_len_1920, get_script_by_id);
 INCLUDE_ASM(code_e79b0_len_1920, set_script_flags);
 
 INCLUDE_ASM(code_e79b0_len_1920, clear_script_flags);
-

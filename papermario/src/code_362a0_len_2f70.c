@@ -41,4 +41,3 @@ INCLUDE_ASM(code_362a0_len_2f70, test_ray_zones);
 INCLUDE_ASM(code_362a0_len_2f70, test_up_ray_collider);
 
 INCLUDE_ASM(code_362a0_len_2f70, test_ray_entities);
-

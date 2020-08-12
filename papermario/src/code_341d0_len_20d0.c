@@ -43,4 +43,3 @@ INCLUDE_ASM(code_341d0_len_20d0, get_map_IDs_by_name);
 INCLUDE_ASM(code_341d0_len_20d0, load_asset_by_name);
 
 INCLUDE_ASM(code_341d0_len_20d0, get_asset_offset);
-
