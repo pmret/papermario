@@ -119,13 +119,13 @@ s32 AddKeyItem(script_context* script, s32 initialCall) {
         return 2;
     }
 
-    for(i=0; i < ARRAY_COUNT(playerData->keyItems); i++) {
+    for (i=0; i < ARRAY_COUNT(playerData->keyItems); i++) {
         if (playerData->keyItems[i] == 0) {
             break;
         }
     }
 
-    if (i < 32) {
+    if (i < ARRAY_COUNT(playerData->keyItems)) {
         playerData->keyItems[i] = itemID;
     }
     return 2;
@@ -135,7 +135,7 @@ s32 func_802D6954(void) {
     func_800E01A4();
     disable_player_physics();
     func_800EF600();
-    D_8009A650[0] &= -0x41;
+    D_8009A650[0] &= ~0x40;
     return 2;
 }
 

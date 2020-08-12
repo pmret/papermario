@@ -1,8 +1,0 @@
-Cam		% namespace
-camID	% library name
-false	% reversed
-
-0 = Default
-1 = Battle	% only used with ShakeCam
-2 = Tattle
-3 = Cam3

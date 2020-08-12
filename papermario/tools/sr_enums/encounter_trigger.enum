@@ -1,9 +1,0 @@
-EncounterTrigger	% namespace
-encounterTrigger	% library name
-false				% reversed
-
-1 = None	% neutral/enemy first strike
-2 = Jump
-3 = Spin	% spin/dizzy attack
-4 = Hammer
-6 = Partner % kooper/bombette
