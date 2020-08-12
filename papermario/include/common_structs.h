@@ -59,50 +59,50 @@ typedef enum eItemEntityState {
 typedef struct {
     /* 0x00 */ f32 verticalVelocity;
     /* 0x04 */ f32 gravity; /* 2 = normal, 1 = low gravity, higher values never 'settle' */
-    /* 0x08 */ f32 field_0x8;
+    /* 0x08 */ f32 unk_8;
     /* 0x0C */ f32 constVelocity; /* ? */
     /* 0x10 */ f32 velx;
     /* 0x14 */ f32 velz;
     /* 0x18 */ f32 moveAngle;
-    /* 0x1C */ f32 field_0x1c;
-    /* 0x20 */ f32 field_0x20;
+    /* 0x1C */ f32 unk_1C;
+    /* 0x20 */ f32 unk_20;
 } item_entity_physics_data;
 
 typedef struct {
     /* 0x00 */ s32 flags;
     /* 0x04 */ s16 boundVar; /* see make_item_entity */
-    /* 0x06 */ s16 field_0x6;
+    /* 0x06 */ s16 unk_6;
     /* 0x08 */ f32 position[3];
     /* 0x14 */ struct item_entity_physics_data* physicsData;
     /* 0x24 */ s16 itemID; /* into item table, also worldIconID */
     /* 0x1A */ eItemEntityState state;
     /* 0x1B */ s8 type;
     /* 0x1C */ s8 pickupDelay; /* num frames before item can be picked up */
-    /* 0x1D */ s8 field_0x1d;
+    /* 0x1D */ s8 unk_1D;
     /* 0x1E */ s16 wsFaceAngle; /* < 0 means none */
     /* 0x20 */ s16 shadowIndex;
     /* 0x22 */ char unk_22[2];
     /* 0x24 */ u32* readPos;
     /* 0x28 */ u32 savedReadPos;
-    /* 0x2C */ s8 field_0x2c;
-    /* 0x2D */ s8 field_0x2d;
+    /* 0x2C */ s8 unk_2C;
+    /* 0x2D */ s8 unk_2D;
     /* 0x2E */ s8 unkCounter;
-    /* 0x2F */ s8 field_0x2f;
+    /* 0x2F */ s8 unk_2F;
     /* 0x30 */ f32 scale;
-    /* 0x34 */ s16 field_0x34;
-    /* 0x36 */ s16 field_0x36;
-    /* 0x38 */ s16 field_0x38;
-    /* 0x3A */ char unk_3a[2];
-    /* 0x3C */ s32 field_0x3c; /* coin related? timer? state? */
-    /* 0x40 */ s32 field_0x40; /* coin sound related? */
+    /* 0x34 */ s16 unk_34;
+    /* 0x36 */ s16 unk_36;
+    /* 0x38 */ s16 unk_38;
+    /* 0x3A */ char unk_3A[2];
+    /* 0x3C */ s32 unk_3C; /* coin related? timer? state? */
+    /* 0x40 */ s32 unk_40; /* coin sound related? */
     /* 0x44 */ char unk_44[4];
-    /* 0x48 */ s32 field_0x48; /* coin sound related? */
-    /* 0x4C */ s32 field_0x4c;
-    /* 0x50 */ s32 field_0x50;
+    /* 0x48 */ s32 unk_48; /* coin sound related? */
+    /* 0x4C */ s32 unk_4C;
+    /* 0x50 */ s32 unk_50;
     /* 0x54 */ char unk_54[2];
-    /* 0x56 */ s16 field_0x56;
+    /* 0x56 */ s16 unk_56;
     /* 0x58 */ char unk_58[2];
-    /* 0x5A */ s16 field_0x5a;
+    /* 0x5A */ s16 unk_5a;
 } item_entity;
 
 typedef struct {
