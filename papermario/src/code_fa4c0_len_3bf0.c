@@ -46,8 +46,6 @@ s32 func_802D617C(script_context* script, s32 initialCall) {
     return 2;
 }
 
-INCLUDE_ASM(code_fa4c0_len_3bf0, PlaySoundAt);
-/*
 s32 PlaySoundAt(script_context* script, s32 initialCall) {
     s32* ptrReadPos = script->ptrReadPos;
     s32 soundID = get_variable(script, *ptrReadPos++);
@@ -56,10 +54,9 @@ s32 PlaySoundAt(script_context* script, s32 initialCall) {
     s32 y = get_variable(script, *ptrReadPos++);
     s32 z = get_variable(script, *ptrReadPos++);
 
-    play_sound_at_position(soundID, value2, x, y, z);
+    play_sound_at_position(soundID, value2, (f32) x, (f32) y, (f32) z);
     return 2;
 }
-*/
 
 s32 StopSound(script_context* script, s32 initialCall) {
     s32* ptrReadPos = script->ptrReadPos;
@@ -91,9 +88,24 @@ s32 func_802D6340(script_context* script, s32 initialCall) {
 
 INCLUDE_ASM(code_fa4c0_len_3bf0, PlaySoundAtF);
 
-INCLUDE_ASM(code_fa4c0_len_3bf0, RemoveKeyItemAt);
+s32 RemoveKeyItemAt(script_context* script, s32 initialCall) {
+    s32* ptrReadPos = script->ptrReadPos;
+    s32 index = get_variable(script, *ptrReadPos++);
+    s16* ptrTemp = D_8010F304;
+    ptrTemp[index] = 0;
 
-INCLUDE_ASM(code_fa4c0_len_3bf0, RemoveItemAt);
+    return 2;
+}
+
+s32 RemoveItemAt(script_context* script, s32 initialCall) {
+    s32* ptrReadPos = script->ptrReadPos;
+    s32 index = get_variable(script, *ptrReadPos++);
+    s16* ptrTemp = D_8010F444;
+    ptrTemp[index] = 0;
+
+    sort_items();
+    return 2;
+}
 
 INCLUDE_ASM(code_fa4c0_len_3bf0, AddKeyItem);
 
@@ -142,25 +154,24 @@ s32 AddBadge(script_context* script, s32 initialCall) {
 
 INCLUDE_ASM(code_fa4c0_len_3bf0, RemoveBadge);
 
-INCLUDE_ASM(code_fa4c0_len_3bf0, SetItemPos);
-/*
 s32 SetItemPos(script_context* script, s32 initialCall) {
     s32* ptrReadPos = script->ptrReadPos;
-    s32 itemEntityIndex, value2, value3, value4;
-    s32* ptrItemEntity;
+    item_entity* ptrItemEntity;
+    s32 itemEntityIndex;
+    s32 x, y, z;
 
     itemEntityIndex = get_variable(script, *ptrReadPos++);
-    value2 = get_variable(script, *ptrReadPos++);
-    value3 = get_variable(script, *ptrReadPos++);
-    value4 = get_variable(script, *ptrReadPos++);
+    x = get_variable(script, *ptrReadPos++);
+    y = get_variable(script, *ptrReadPos++);
+    z = get_variable(script, *ptrReadPos++);
 
     ptrItemEntity = get_item_entity(itemEntityIndex);
-    *(ptrItemEntity + 0x08) = (f64) value2;
-    *(ptrItemEntity + 0x0C) = (f64) value3;
-    *(ptrItemEntity + 0x10) = (f64) value4;
+    ptrItemEntity->position[0] = (f32) x;
+    ptrItemEntity->position[1] = (f32) y;
+    ptrItemEntity->position[2] = (f32) z;
+
     return 2;
 }
-*/
 
 INCLUDE_ASM(code_fa4c0_len_3bf0, SetItemFlags);
 

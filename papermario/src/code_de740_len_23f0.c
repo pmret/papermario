@@ -44,7 +44,7 @@ INCLUDE_ASM(code_de740_len_23f0, play_sound_at_player);
 
 INCLUDE_ASM(code_de740_len_23f0, play_sound_at_npc);
 
-INCLUDE_ASM(code_de740_len_23f0, play_sound_at_position);
+s32 INCLUDE_ASM(code_de740_len_23f0, play_sound_at_position, s32 soundID, s32 value2, f32 posX, f32 posY, f32 posZ);
 
 INCLUDE_ASM(code_de740_len_23f0, func_80149E04);
 
