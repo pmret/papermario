@@ -298,7 +298,6 @@ void coin_counter_draw_content(UNK_TYPE arg0, s32 posX, s32 posY) {
     draw_number(uiStatus->displayCoins, posX + 58, posY + 4, 1, 10, 255, 3);
 }
 
-// INCLUDE_ASM(code_80850_len_3060, update_coin_counter);
 void update_coin_counter(void) {
     ui_status* uiStatus = &gUIStatus;
     player_data* playerData = &gPlayerData;
