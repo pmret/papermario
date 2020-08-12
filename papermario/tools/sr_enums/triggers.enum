@@ -1,0 +1,24 @@
+Trigger	% namespace
+trigger	% library name
+false	% reversed
+
+00000080 = FloorTouch
+00080000 = FloorAbove
+00000800 = FloorPressA
+00000200 = FloorJump
+
+00000400 = WallTouch
+00000040 = WallPush
+00000100 = WallPressA
+00001000 = WallHammer
+
+00040000 = CeilingTouch
+
+% 00002000	???
+% 00004000	???
+% 00008000	???
+	
+00100000 = PointBomb
+
+00010000 = GameFlagSet
+00020000 = AreaFlagSet

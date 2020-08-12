@@ -1,0 +1,8 @@
+Outcome	% namespace
+outcome	% library name
+false	% reversed
+
+00 = PlayerWon
+01 = PlayerLost
+02 = PlayerFled
+03 = EnemyFled

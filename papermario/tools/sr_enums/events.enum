@@ -1,0 +1,63 @@
+Event	% namespace
+event	% library name
+false	% reversed
+
+19 = Immune
+
+09 = HitCombo		% Used during a multiple-hit attack (Bow's Smack, successful Jump) for every hit except the last, ie: 09-09-09-09-0A (Bow's Smack).
+0A = Hit
+
+20 = Death
+
+0C = FallTrigger	% Activated by flag 00004000, fired when Mario jumps on an enemy. Used for flying enemies that fall down.
+0D = FlipTrigger	% Activated by flag 00001000, fired when Mario jumps on an enemy or uses a quake attack.
+
+22 = ExplodeTrigger	% Activated by flag 00000200, fired by Bombette's bomb attacks or fire-based attacks. Used only by Bobomb.
+
+% 17 = UnknownTrigger, probably activated by flag 00000100 (used only by Monstar) -- no, found in Embers as well (Area HOS).
+
+0B = SpinSmashHit		% Fired when hit by Spin Smash (used by Chain Chomp)
+21 = SpinSmashDeath		% Fired when killed by Spin Smash (used by Chain Chomp)
+
+11 = SpinSmashLaunchHit		% Fired when hit by something launched by a Spin Smash (used by Pokey)
+15 = SpinSmashLaunchDeath	% Fired when killed by something launched by Spin Smash (used by Pokey)
+
+15 = PowerBounceHit		% Activated by flag 00100000, fired when hit by Power Bounce
+28 = PowerBounceDeath	% Activated by flag 00100000, fired when killed by Power Bounce
+
+0E = BurnHit			% Fired by explosions and fiery attacks
+24 = BurnDeath			% Fired by explosions and fiery attacks, and when the player dies from jumping on a fiery enemy
+
+2F = ShockHit			% Fired by hitting electrified actor (not from electric attacks)
+26 = ShockDeath			% Only fired by hitting electrified player
+
+3A = BeginAirLift		% Fired when Airlift begins
+1F = AirLiftFailed		% Fired after Airlift fails
+16 = BlowAway			% Fired by Airlift and Hurricane
+
+39 = ScareAway			% Fired by Fright Jar and Spook
+
+3D = UpAndAway
+13 = StarBeam
+
+31 = RecoverStatus	% Fired after recovering from a status effect
+3F = SwapPartner	% Fired to the new partner, has broader unknown applications (see Tubba Blubba rematch at end of turn)
+
+1A = Block			% Fired to the player on a successful block
+
+% The following events are fired when the player jumps on a spiky enemy
+2A = SpikeContact	% Fired to the player
+27 = SpikeDeath		% Fired to the player
+1B = SpikeTaunt		% Fired to the enemy
+
+2C = BurnContact	% Fired to the player
+% 24 = FireDeath	% Fired to the player
+1C = BurnTaunt		% Fired to the enemy
+
+38 = BeginFirstStrike	% Fired just before the screen fades in following a player first strike
+35 = EndFirstStrike		% Fired after the player's first strike move is finished
+
+40 = LifeShroomProc
+41 = Revive
+
+37 = Lucky

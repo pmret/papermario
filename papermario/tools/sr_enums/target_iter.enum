@@ -1,0 +1,11 @@
+Iter	% namespace
+iter	% library name
+false	% reversed
+
+% Used by enemy target iterators to select targets from a target list
+
+FFFFFFFF = First
+0000000A = Last
+00000000 = Next
+00000001 = Prev
+% any other value actually

@@ -1,0 +1,31 @@
+Phase		% namespace
+battlePhase	% library name
+false		% reversed
+
+00 = ExecuteAction	% do whatever the player/partner has selected
+01 = FirstStrike
+
+03 = RunAwayStart
+04 = RunAwayReset
+07 = RunAwayFail
+06 = UseDefend
+
+08 = UseLifeShroom
+
+0A = PlayerBegin
+0D = PlayerEnd
+0C = EnemyBegin
+0B = EnemyEnd
+
+14 = MerleeAttackBonus
+15 = MerleeDefenseBonus
+16 = MerleeExpBonus
+
+1E = PlayerHappy
+
+/%
+03 = ? (used by player/partners)
+05 = ? (used by player/partners)
+
+16 = ? (used by player)
+%/

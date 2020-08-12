@@ -1,0 +1,10 @@
+ActorSound	% namespace
+actorSound	% library name
+false	% reversed
+
+0 = Walk
+1 = Fly
+2 = Jump
+3 = Hurt
+4 = WalkIncrement
+5 = FlyIncrement

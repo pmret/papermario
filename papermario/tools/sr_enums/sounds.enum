@@ -1,0 +1,89 @@
+Sound	% namespace
+soundID	% library name
+false	% reversed
+
+% 043 = RunningWater
+
+045 = JrTroopaSplash
+046 = JrTroopaSwim
+047 = BooSpook
+
+0C1 = BooVanish
+0C3 = BooAppear
+
+0C5 = MenuOpen
+0C6 = MenuClose
+0C7 = MenuChangeSelection
+0C8 = MenuChangeTab
+0C9 = MenuNext
+0CA = MenuBack
+
+141 = Step1
+142 = Step2
+
+147 = TornadoJump
+148 = SoftLand
+
+14B = Land
+14E = HitBlock
+
+153 = SearchBush
+
+1C1 = BasicDoorOpen
+1C2 = BasicDoorClose
+1C3 = MetalDoorOpen
+1C4 = MetalDoorClose
+1C5 = LargeDoorOpen
+1C6 = LargeDoorClose
+1C7 = CreakyDoorOpen
+1C8 = CreakyDoorClose
+1C9 = MetalGateOpen
+1CA = MetalGateClose
+
+291 = BowSpook
+
+% 2C1 = high jump?
+2CD = SmokeBurst
+
+2D7 = DayzeeSong
+2D8 = PowerUp
+
+
+
+30C = ShyGuyScreams1
+30D = ShyGuyScreams2
+30E = ShyGuyScreams3
+30F = ToyTankMove1
+310 = ToyTankMove2
+395 = GeneralWhistle
+
+321 = MoleSurface
+322 = MoleDig
+323 = MolePop
+
+3E2 = Jump
+3E3 = MissJump	% or tripping
+
+3E5 = Death
+3E6 = BigPowerUp
+
+3E8 = MoleThrow
+
+2FF = CloseShell
+3D4 = OpenShell
+
+200E = BowVanish
+200F = BowAppear
+
+2016 = Cannon1
+2017 = Cannon2
+2018 = Cannon3
+
+2081 = Jump
+2076 = BombBlast
+
+20D4 = SpellCast1 % buff
+20D5 = SpellCast2 % shapes
+20D6 = SpellCast3
+20D7 = SpellCast4 % spooky
+20D8 = SpellCast5 % declining

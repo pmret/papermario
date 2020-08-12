@@ -1,0 +1,13 @@
+Decoration	% namespace
+decoration	% library name
+false		% reversed
+
+1 = GoldenFlames
+2 = Sweat
+3 = SeeingStars
+4 = RedFlames
+5 = GreySmokeTrail
+6 = FireSmokeTrail % really cool
+7 = Whirlwind
+8 = SteamEmitter
+B = RadialStarEmitter

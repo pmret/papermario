@@ -1,0 +1,18 @@
+Element	% namespace
+element	% library name
+true	% reversed
+
+Normal   = 1
+Fire     = 2
+Water    = 3
+Ice      = 4
+Mystery  = 5
+Magic    = 7
+Hammer   = 8
+Jump     = 9
+Cosmic   = A
+Blast    = B
+Shock    = C
+Quake    = D
+Throw    = F
+End      = 0

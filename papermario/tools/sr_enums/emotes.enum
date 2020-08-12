@@ -1,0 +1,10 @@
+Emote	% namespace
+emote	% library name
+false	% reversed
+
+0 = Exclamation
+1 = Shock
+2 = Question
+3 = Frustration
+4 = Ellipsis
+5 = Invalid

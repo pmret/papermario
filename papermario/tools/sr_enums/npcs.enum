@@ -1,0 +1,7 @@
+Npc		% namespace
+npcID	% library name
+false	% reversed
+
+FFFFFFFF = Self
+FFFFFFFE = Player
+FFFFFFFC = Partner

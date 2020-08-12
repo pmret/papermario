@@ -1,0 +1,6 @@
+DoorSwing	% namespace
+doorSwing 	% library name
+false		% reversed
+
+ 1 = In
+-1 = Out

@@ -1,0 +1,42 @@
+ActionState		% namespace
+actionStateID 	% library name
+false			% reversed
+
+% Current player action state, stored at 8010F07C
+
+00 = Idle
+01 = Walk
+02 = Run
+03 = Jump
+04 = Bounce			% used with kooper
+05 = AbortedJump	% aka Hop; released A before apex of jump
+06 = Launch			% Jack-in-the-boxes in the Toybox
+
+08 = Falling
+09 = StepDown
+0A = Land
+0B = StepDownLand
+0C = Conversation	% Reading signs doesn't count
+0D = SpinJump
+0E = GroundPound
+
+0F = UltraJump
+10 = UltraPound
+11 = Sliding
+12 = Hammer
+
+15 = HitHazard
+% 16 = TouchLava / 17 = ReactLava?
+17 = HitLava
+
+1A = Spin
+1B = EnemyFirstStrike
+
+1D = SpinningFlower
+
+1F = UseTweester
+
+21 = Ride			% Parakarry, Sushie, Lakilester, Bow
+22 = StepUp
+
+26 = UseSpring

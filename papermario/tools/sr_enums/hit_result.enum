@@ -1,0 +1,12 @@
+HitResult	% namespace
+hitResult	% library name
+false		% reversed
+
+00 = Hit
+% 02 = ???
+04 = LandedOnSpike
+05 = Lucky
+06 = Miss
+07 = HitStatic
+08 = Immune
+-1 = TriggeredExplode

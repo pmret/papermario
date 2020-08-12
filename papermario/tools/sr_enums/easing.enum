@@ -1,0 +1,22 @@
+Easing	% namespace
+easing	% library name
+false	% reversed
+
+% Notes from MoveSpriteTo (func_8027BF38)
+% (0-D used as an index to jump table by func_8027B0DC)	=> script[7C]
+% t = current frame (S1), d = duration (S0)
+% also have A (F24), B (F26), and L = B - A
+
+0 = Linear 				% (no easing)
+1 = QuadraticIn
+2 = CubicIn
+3 = QuarticIn
+4 = QuadraticOut		% A + L * (1-((d-t)/d)^2)
+5 = CubicOut
+6 = QuarticOut
+7 = CosSlowOvershoot	% B - L * ((d-t)/d)^2 * cos(4*pi*(t/d))
+8 = CosFastOvershoot	% B - L * ((d-t)/d)^2 * cos(4*pi*(t^2/15*d))
+9 = CosBounce			% B - L * abs((d-t)/d)^2 * cos(4*pi*(t^2/40*d))
+A = CosInOut			% A + (L/2) * (1 - cos(pi*(t/d)))
+B = SinOut				% A + L * sin((pi/2)*(t/d))
+C = CosIn				% A + L * (1 - cos((pi/2)*(t/d)))

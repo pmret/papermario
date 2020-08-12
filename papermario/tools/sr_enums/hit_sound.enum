@@ -1,0 +1,10 @@
+HitSound	% namespace
+hitSound	% library name
+false		% reversed
+
+00 = Miss
+01 = Bones
+02 = Normal
+03 = Fire
+04 = Ice
+05 = Shock
