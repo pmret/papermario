@@ -2,6 +2,7 @@
 #define _COMMON_STRUCTS_H_
 
 #include "ultra64.h"
+#include "types.h"
 
 typedef struct {
     /* 0x000 */ s16 unk_00;
