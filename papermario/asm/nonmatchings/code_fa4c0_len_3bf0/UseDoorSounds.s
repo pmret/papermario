@@ -16,6 +16,7 @@ glabel UseDoorSounds
 /* 0FACE8 802D6338 03E00008 */  jr    $ra
 /* 0FACEC 802D633C 27BD0018 */   addiu $sp, $sp, 0x18
 
+glabel func_802D6340
 /* 0FACF0 802D6340 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0FACF4 802D6344 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 0FACF8 802D6348 8C82000C */  lw    $v0, 0xc($a0)

@@ -2,27 +2,112 @@
 
 INCLUDE_ASM(code_fa4c0_len_3bf0, func_802D5B10);
 
-INCLUDE_ASM(code_fa4c0_len_3bf0, FadeOutMusic);
+s32 FadeOutMusic(script_context* script, s32 initialCall) {
+    s32* ptrReadPos = script->ptrReadPos;
+    s32 itemID = get_variable(script, *ptrReadPos++);
+    s32* ptrNextPos = ptrReadPos++;
 
-INCLUDE_ASM(code_fa4c0_len_3bf0, SetMusicTrack);
+    return (set_music_track(itemID, -1, 0, get_variable(script, *ptrNextPos++), 8) != 0) * 2;
+}
+
+s32 SetMusicTrack(script_context* script, s32 initialCall) {
+    s32* ptrReadPos = script->ptrReadPos;
+    s32 musicPlayer = get_variable(script, *ptrReadPos++);
+    s32 songID = get_variable(script, *ptrReadPos++);
+    s32 variation = get_variable(script, *ptrReadPos++);
+    s16 volume = get_variable(script, *ptrReadPos++);
+
+    return (set_music_track(musicPlayer, songID, variation, 0x1F4, volume) != 0) * 2;
+}
 
 INCLUDE_ASM(code_fa4c0_len_3bf0, FadeInMusic);
 
-INCLUDE_ASM(code_fa4c0_len_3bf0, PlayAmbientSounds);
+s32 PlayAmbientSounds(script_context* script, s32 initialCall) {
+    s32* ptrReadPos = script->ptrReadPos;
+    s32 soundID = get_variable(script, *ptrReadPos++);
 
-INCLUDE_ASM(code_fa4c0_len_3bf0, PlaySound);
+    return (play_ambient_sounds(soundID, 0xFA) != 0) * 2;
+}
 
-INCLUDE_ASM(code_fa4c0_len_3bf0, PlaySoundAt);
+s32 PlaySound(script_context* script, s32 initialCall) {
+    s32* ptrReadPos = script->ptrReadPos;
+    s32 soundID = get_variable(script, *ptrReadPos++);
 
-INCLUDE_ASM(code_fa4c0_len_3bf0, StopSound);
+    play_sound(soundID);
+    return 2;
+}
 
-INCLUDE_ASM(code_fa4c0_len_3bf0, UseDoorSounds);
+s32 func_802D617C(script_context* script, s32 initialCall) {
+    s32* ptrReadPos = script->ptrReadPos;
+    s32 soundID = get_variable(script, *ptrReadPos++);
+    s32 value2 = get_variable(script, *ptrReadPos++);
+
+    _play_sound(soundID, value2 & 0xFF, 0, 0);
+    return 2;
+}
+
+s32 PlaySoundAt(script_context* script, s32 initialCall) {
+    s32* ptrReadPos = script->ptrReadPos;
+    s32 soundID = get_variable(script, *ptrReadPos++);
+    s32 value2 = get_variable(script, *ptrReadPos++);
+    s32 x = get_variable(script, *ptrReadPos++);
+    s32 y = get_variable(script, *ptrReadPos++);
+    s32 z = get_variable(script, *ptrReadPos++);
+
+    play_sound_at_position(soundID, value2, x, y, z);
+    return 2;
+}
+
+s32 StopSound(script_context* script, s32 initialCall) {
+    s32* ptrReadPos = script->ptrReadPos;
+
+    stop_sound(get_variable(script, *ptrReadPos++));
+    return 2;
+}
+
+s32 func_802D62E4(script_context* script, s32 initialCall) {
+    s32* ptrReadPos = script->ptrReadPos;
+
+    func_80149A6C(get_variable(script, *ptrReadPos++), 1);
+    return 2;
+}
+
+s32 UseDoorSounds(script_context* script, s32 initialCall) {
+    s32* ptrReadPos = script->ptrReadPos;
+
+    gCurrentDoorSoundsSet = get_variable(script, *ptrReadPos++);
+    return 2;
+}
+
+s32 func_802D6340(script_context* script, s32 initialCall) {
+    s32* ptrReadPos = script->ptrReadPos;
+
+    D_80151308 = get_variable(script, *ptrReadPos++);
+    return 2;
+}
 
 INCLUDE_ASM(code_fa4c0_len_3bf0, PlaySoundAtF);
 
-INCLUDE_ASM(code_fa4c0_len_3bf0, RemoveKeyItemAt);
+s32 RemoveKeyItemAt(script_context* script, s32 initialCall) {
+    s32* ptrReadPos = script->ptrReadPos;
+    s32 index = get_variable(script, *ptrReadPos++);
+    s16* ptrTemp = D_8010F304;
 
-INCLUDE_ASM(code_fa4c0_len_3bf0, RemoveItemAt);
+    ptrTemp[index] = 0;
+
+    return 2;
+}
+
+s32 RemoveItemAt(script_context* script, s32 initialCall) {
+    s32* ptrReadPos = script->ptrReadPos;
+    s32 index = get_variable(script, *ptrReadPos++);
+    s16* ptrTemp = D_8010F444;
+    
+    ptrTemp[index] = 0;
+
+    sort_items();
+    return 2;
+}
 
 INCLUDE_ASM(code_fa4c0_len_3bf0, AddKeyItem);
 
@@ -30,7 +115,19 @@ INCLUDE_ASM(code_fa4c0_len_3bf0, HasKeyItem);
 
 INCLUDE_ASM(code_fa4c0_len_3bf0, FindKeyItem);
 
-INCLUDE_ASM(code_fa4c0_len_3bf0, AddItem);
+s32 AddItem(script_context* script, s32 initialCall) {
+    s32* ptrReadPos = script->ptrReadPos;
+    s32 itemID = get_variable(script, *ptrReadPos++);
+    s32* ptrNextPos = *ptrReadPos++;
+
+    set_variable(script, ptrNextPos, add_item(itemID));
+    return 2;
+}
+
+s32 func_802D6AF0(script_context* script, s32 initialCall) {
+    set_variable(script, *script->ptrReadPos, 0);
+    return 2;
+}
 
 INCLUDE_ASM(code_fa4c0_len_3bf0, FindItem);
 
@@ -48,19 +145,52 @@ INCLUDE_ASM(code_fa4c0_len_3bf0, DropItemEntityB);
 
 INCLUDE_ASM(code_fa4c0_len_3bf0, RemoveItemEntity);
 
-INCLUDE_ASM(code_fa4c0_len_3bf0, AddBadge);
+s32 AddBadge(script_context* script, s32 initialCall) {
+  s32* ptrReadPos = script->ptrReadPos;
+  s32 itemID = get_variable(script, *ptrReadPos++);
+  s32* ptrNextPos = *ptrReadPos++;
+
+  set_variable(script, ptrNextPos, add_badge(itemID));
+  return 2;
+}
 
 INCLUDE_ASM(code_fa4c0_len_3bf0, RemoveBadge);
 
-INCLUDE_ASM(code_fa4c0_len_3bf0, SetItemPos);
+s32 SetItemPos(script_context* script, s32 initialCall) {
+    s32* ptrReadPos = script->ptrReadPos;
+    item_entity* ptrItemEntity;
+    s32 itemEntityIndex;
+    s32 x, y, z;
+
+    itemEntityIndex = get_variable(script, *ptrReadPos++);
+    x = get_variable(script, *ptrReadPos++);
+    y = get_variable(script, *ptrReadPos++);
+    z = get_variable(script, *ptrReadPos++);
+
+    ptrItemEntity = get_item_entity(itemEntityIndex);
+    ptrItemEntity->position[0] = x;
+    ptrItemEntity->position[1] = y;
+    ptrItemEntity->position[2] = z;
+
+    return 2;
+}
 
 INCLUDE_ASM(code_fa4c0_len_3bf0, SetItemFlags);
 
-INCLUDE_ASM(code_fa4c0_len_3bf0, AddCoin);
+s32 AddCoin(script_context* script, s32 initialCall) {
+    script->varTable[0] = add_coins(get_variable(script, *script->ptrReadPos));
+    return 2;
+}
 
-INCLUDE_ASM(code_fa4c0_len_3bf0, AddStarPoints);
+s32 AddStarPoints(script_context* script, s32 initialCall) {
+    script->varTable[0] = add_star_points(get_variable(script, *script->ptrReadPos));
+    return 2;
+}
 
-INCLUDE_ASM(code_fa4c0_len_3bf0, AddStarPieces);
+s32 AddStarPieces(script_context* script, s32 initialCall) {
+    script->varTable[0] = add_star_pieces(get_variable(script, *script->ptrReadPos));
+    return 2;
+}
 
 INCLUDE_ASM(code_fa4c0_len_3bf0, GetItemPower);
 
@@ -73,6 +203,35 @@ INCLUDE_ASM(code_fa4c0_len_3bf0, func_802D74C0);
 INCLUDE_ASM(code_fa4c0_len_3bf0, ShowEmote);
 
 INCLUDE_ASM(code_fa4c0_len_3bf0, RemoveEffect);
+/*
+s32 RemoveEffect(script_context* script, s32 initialCall) {
+    s32* ptrReadPos = script->ptrReadPos;
+
+    remove_effect(get_variable(script, *ptrReadPos++));
+    return 2;
+}
+
+s32 func_802D7B10(script_context* script, s32 initialCall) {
+    s32* ptrReadPos = script->ptrReadPos;
+    s32 ptrValue = get_variable(script, *ptrReadPos++);
+    *ptrValue = (*ptrValue | 0x10);
+    return 2;
+}
+
+s32 func_802D7B44(script_context* script, s32 initialCall) {
+    s32* ptrReadPos = script->ptrReadPos;
+    s32 ptrValue = get_variable(script, *ptrReadPos++);
+    *((ptrValue + 0xC) + 0x14) = 10;
+    return 2;
+}
+
+s32 func_802D7B74(script_context* script, s32 initialCall) {
+    s32* ptrReadPos = script->ptrReadPos;
+    s32 ptrValue = get_variable(script, *ptrReadPos++);
+    *((ptrValue + 0xC) + 0x30) = 5;
+    return 2;
+}
+*/
 
 INCLUDE_ASM(code_fa4c0_len_3bf0, ShowSleepBubble);
 

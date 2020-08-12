@@ -27,6 +27,7 @@ glabel AddItem
 /* 0FB498 802D6AE8 03E00008 */  jr    $ra
 /* 0FB49C 802D6AEC 27BD0020 */   addiu $sp, $sp, 0x20
 
+glabel func_802D6AF0
 /* 0FB4A0 802D6AF0 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0FB4A4 802D6AF4 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 0FB4A8 802D6AF8 8C82000C */  lw    $v0, 0xc($a0)

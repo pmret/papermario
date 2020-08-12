@@ -10,7 +10,7 @@ INCLUDE_ASM(code_e0b30_len_b80, func_8014A548);
 
 INCLUDE_ASM(code_e0b30_len_b80, _set_music_track);
 
-INCLUDE_ASM(code_e0b30_len_b80, set_music_track);
+s32 INCLUDE_ASM(code_e0b30_len_b80, set_music_track, s32 musicPlayer, s32 songID, s32 variation, s32 unk, s32 volume);
 
 INCLUDE_ASM(code_e0b30_len_b80, func_8014A964);
 
