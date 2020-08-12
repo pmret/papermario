@@ -39,13 +39,27 @@ typedef struct {
     /* 0x0AA */ s8 unk_AA;
     /* 0x0AB */ char unk_AB[1];
     /* 0x0AC */ s8 unk_AC;
-    /* 0x0AD */ char unk_AD[0x87];
+    /* 0x0AD */ char unk_AD[0x09];
+
+    /* 0x0B6 */ s16 fade_status;
+    /* 0x0B8 */ s16 boot_logos_unk1;
+    /* 0x0BA */ s16 boot_logos_unk2;
+    /* 0x0BC */ s16 boot_logos_unk3;
+    /* 0x0BE */ char unk_BE[0x76];
     /* 0x134 */ u16 unk_134;
     /* 0x136 */ char unk_136[0x6];
     /* 0x13C */ s16 unk_13C;
     /* 0x13E */ char unk_13E[0xA];
     /* 0x148 */ s16 unk_148;
-    /* 0x14A */ char unk_14A[0x1E];
+    /* 0x14A */ s16 unk_14A;
+    /* 0x14C */ s16 unk_14C;
+    /* 0x14E */ s16 unk_14E;
+    /* 0x150 */ s16 unk_150;
+    /* 0x152 */ char unk_152[2];
+    /* 0x154 */ s32 unk_154;
+    /* 0x158 */ s32 unk_158;
+    /* 0x15C */ s16 unk_15C;
+    /* 0x15E */ char unk_15E[0xA];
     /* 0x168 */ s32 unk_168;
 } game_status;
 
@@ -467,5 +481,14 @@ typedef struct {
     /* 0x160 */ s32* ptrSavedPosition;
     /* 0x164 */ s32* ptrCurrentLine;
 } script_context; // size = 0x168;
+
+typedef struct {
+    /* 0x00 */ u32 palette;
+    /* 0x04 */ u32 raster;
+    /* 0x08 */ u16 startX;
+    /* 0x0A */ u16 startY;
+    /* 0x0C */ u16 width;
+    /* 0x0E */ u16 height;
+} bg_header; // size = 0x10
 
 #endif
