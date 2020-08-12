@@ -49,7 +49,7 @@ u16 read_background_size(bg_header *bg) {
 
 u16 set_background_size(s16 startX, s16 startY, s16 sizeX, s16 sizeY) {
     game_status* gameStatus = *gGameStatusPtr;
-    gameStatus->unk_148 = gameStatus->unk_148 & 0xFFFE;
+    gameStatus->unk_148 &= ~1;
     gameStatus->unk_14E = startX;
     gameStatus->unk_150 = startY;
     gameStatus->unk_14A = sizeX;
@@ -60,7 +60,7 @@ u16 set_background_size(s16 startX, s16 startY, s16 sizeX, s16 sizeY) {
 s32 func_80145E98(s32 arg0, s32 arg1, s32 arg2) {
     s32 temp_lo;
 
-    temp_lo = (arg1 - (arg0 & 0xFFFF)) * arg2;
+    temp_lo = (arg1 - (u16)(arg0)) * arg2;
     if (temp_lo < 0) {
         temp_lo = temp_lo + 0xFF;
     }

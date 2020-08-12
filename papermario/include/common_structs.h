@@ -17,7 +17,8 @@ typedef struct {
     /* 0x06C */ char unk_6C[0x4];
     /* 0x070 */ s8 unk_70;
     /* 0x071 */ s8 demoState;
-    /* 0x072 */ char unk_72[3];
+    /* 0x072 */ s8 unk_72;
+    /* 0x073 */ char unk_73[2];
     /* 0x075 */ s8 unk_75;
     /* 0x076 */ char unk_76[3];
     /* 0x079 */ s8 unk_79;
@@ -40,11 +41,10 @@ typedef struct {
     /* 0x0AB */ char unk_AB[1];
     /* 0x0AC */ s8 unk_AC;
     /* 0x0AD */ char unk_AD[0x09];
-
-    /* 0x0B6 */ s16 fade_status;
-    /* 0x0B8 */ s16 boot_logos_unk1;
-    /* 0x0BA */ s16 boot_logos_unk2;
-    /* 0x0BC */ s16 boot_logos_unk3;
+    /* 0x0B6 */ s16 boot_alpha;
+    /* 0x0B8 */ s16 boot_blue;
+    /* 0x0BA */ s16 boot_green;
+    /* 0x0BC */ s16 boot_red;
     /* 0x0BE */ char unk_BE[0x76];
     /* 0x134 */ u16 unk_134;
     /* 0x136 */ char unk_136[0x6];

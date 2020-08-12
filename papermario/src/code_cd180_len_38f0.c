@@ -2,13 +2,13 @@
 
 INCLUDE_ASM(code_cd180_len_38f0, func_80136A80);
 
-INCLUDE_ASM(code_cd180_len_38f0, func_80137D88);
+void INCLUDE_ASM(code_cd180_len_38f0, func_80137D88, s32 arg0, f32 arg1);
 
 INCLUDE_ASM(code_cd180_len_38f0, func_80137DA4);
 
 INCLUDE_ASM(code_cd180_len_38f0, func_80137DC0);
 
-INCLUDE_ASM(code_cd180_len_38f0, func_80137E10);
+void INCLUDE_ASM(code_cd180_len_38f0, func_80137E10, s32 arg0, u8 arg1, u8 arg2, u8 arg3);
 
 INCLUDE_ASM(code_cd180_len_38f0, func_80137E4C);
 
