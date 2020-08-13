@@ -91,18 +91,18 @@ INCLUDE_ASM(code_fa4c0_len_3bf0, PlaySoundAtF);
 s32 RemoveKeyItemAt(script_context* script, s32 initialCall) {
     s32* ptrReadPos = script->ptrReadPos;
     s32 index = get_variable(script, *ptrReadPos++);
-    s16* ptrTemp = D_8010F304;
+    s16* ptrKeyItems = &gPlayerData.keyItems;
 
-    ptrTemp[index] = 0;
+    ptrKeyItems[index] = 0;
     return 2;
 }
 
 s32 RemoveItemAt(script_context* script, s32 initialCall) {
     s32* ptrReadPos = script->ptrReadPos;
     s32 index = get_variable(script, *ptrReadPos++);
-    s16* ptrTemp = D_8010F444;
+    s16* ptrInvItems = &gPlayerData.invItems;
     
-    ptrTemp[index] = 0;
+    ptrInvItems[index] = 0;
     sort_items();
     return 2;
 }
@@ -255,6 +255,28 @@ s32 AddStarPieces(script_context* script, s32 initialCall) {
 }
 
 INCLUDE_ASM(code_fa4c0_len_3bf0, GetItemPower);
+/*
+s32 GetItemPower(script_context* script, s32 initialCall) {
+    s32* ptrReadPos = script->ptrReadPos;
+    s32* ptrNextPos = *ptrReadPos++;
+
+    s32 temp_a1;
+    s32 temp_s0_2;
+    s32 temp_s1;
+    void *temp_s0;
+
+    temp_s0 = arg0->unkC;
+    temp_a1 = *temp_s0;
+    temp_s0 = temp_s0 + 4;
+    temp_s1 = (get_variable(temp_a1) << 5) + 0x800878E0;
+    temp_s0_2 = temp_s0->unk4;
+    set_variable(arg0, temp_s0->unk0, temp_s1->unk1B);
+    set_variable(arg0, temp_s0_2, temp_s1->unk1C);
+    return 2;
+
+}
+*/
+
 
 INCLUDE_ASM(code_fa4c0_len_3bf0, ShowGotItem);
 
@@ -263,6 +285,7 @@ INCLUDE_ASM(code_fa4c0_len_3bf0, func_802D7460);
 INCLUDE_ASM(code_fa4c0_len_3bf0, func_802D74C0);
 
 INCLUDE_ASM(code_fa4c0_len_3bf0, ShowEmote);
+
 
 INCLUDE_ASM(code_fa4c0_len_3bf0, RemoveEffect);
 /*
@@ -275,25 +298,33 @@ s32 RemoveEffect(script_context* script, s32 initialCall) {
 
 s32 func_802D7B10(script_context* script, s32 initialCall) {
     s32* ptrReadPos = script->ptrReadPos;
-    s32 ptrValue = get_variable(script, *ptrReadPos++);
-    *ptrValue = (*ptrValue | 0x10);
+    s32* ptrValue = get_variable(script, *ptrReadPos++);
+
+    *ptrValue |= 0x10;
     return 2;
 }
 
 s32 func_802D7B44(script_context* script, s32 initialCall) {
     s32* ptrReadPos = script->ptrReadPos;
-    s32 ptrValue = get_variable(script, *ptrReadPos++);
-    *((ptrValue + 0xC) + 0x14) = 10;
+    s32* ptrValue = get_variable(script, *ptrReadPos++);
+    s32* ptrTemp = ptrValue[3];
+
+    ptrTemp[5] = 10;
     return 2;
 }
 
 s32 func_802D7B74(script_context* script, s32 initialCall) {
     s32* ptrReadPos = script->ptrReadPos;
-    s32 ptrValue = get_variable(script, *ptrReadPos++);
-    *((ptrValue + 0xC) + 0x30) = 5;
+    s32* ptrValue = get_variable(script, *ptrReadPos++);
+    s32* ptrTemp = ptrValue[3];
+
+    ptrTemp[11] = 5;
     return 2;
 }
+
+// More functions still in RemoveEffect.s but the ones above are matching properly
 */
+
 
 INCLUDE_ASM(code_fa4c0_len_3bf0, ShowSleepBubble);
 

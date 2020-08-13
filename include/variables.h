@@ -23,9 +23,6 @@ extern s16 D_800A0944;
 
 extern s16 D_80151308;
 
-extern s16 D_8010F304[]; // Key Items
-extern s16 D_8010F444[]; // Items
-
 extern s32 D_8009A650[1];
 
 extern s16 gCurrentDoorSoundsSet;
