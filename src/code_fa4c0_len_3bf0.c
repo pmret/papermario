@@ -205,8 +205,30 @@ INCLUDE_ASM(code_fa4c0_len_3bf0, MakeItemEntity);
 INCLUDE_ASM(code_fa4c0_len_3bf0, DropItemEntity);
 
 INCLUDE_ASM(code_fa4c0_len_3bf0, DropItemEntityB);
+/*
+// Close to working
+s32 DropItemEntityB(script_context* script, s32 initialCall) {
+    s32* ptrReadPos = script->ptrReadPos;
+    s32 itemID = get_variable(script, *ptrReadPos++);
+    s32 x = get_variable(script, *ptrReadPos++);
+    s32 y = get_variable(script, *ptrReadPos++);
+    s32 z = get_variable(script, *ptrReadPos++);
+    s32 itemSpawnMode = get_variable(script, *ptrReadPos++);
+    s32 pickupFlag = get_variable(script, *ptrReadPos++);
 
-INCLUDE_ASM(code_fa4c0_len_3bf0, RemoveItemEntity);
+    script->varTable[0] = make_item_entity_nodelay(itemID, x, y, z);
+    set_item_entity_flags(script, 0x4000);
+    return 2;
+}
+*/
+
+s32 RemoveItemEntity(script_context* script, s32 initialCall) {
+  s32* ptrReadPos = script->ptrReadPos;
+  s32 itemEntityIndex = get_variable(script, *ptrReadPos++);
+
+  remove_item_entity_by_index(itemEntityIndex);
+  return 2;
+}
 
 s32 AddBadge(script_context* script, s32 initialCall) {
   s32* ptrReadPos = script->ptrReadPos;
@@ -256,27 +278,19 @@ s32 AddStarPieces(script_context* script, s32 initialCall) {
 
 INCLUDE_ASM(code_fa4c0_len_3bf0, GetItemPower);
 /*
+// Close to working
 s32 GetItemPower(script_context* script, s32 initialCall) {
     s32* ptrReadPos = script->ptrReadPos;
-    s32* ptrNextPos = *ptrReadPos++;
-
-    s32 temp_a1;
-    s32 temp_s0_2;
-    s32 temp_s1;
-    void *temp_s0;
-
-    temp_s0 = arg0->unkC;
-    temp_a1 = *temp_s0;
-    temp_s0 = temp_s0 + 4;
-    temp_s1 = (get_variable(temp_a1) << 5) + 0x800878E0;
-    temp_s0_2 = temp_s0->unk4;
-    set_variable(arg0, temp_s0->unk0, temp_s1->unk1B);
-    set_variable(arg0, temp_s0_2, temp_s1->unk1C);
+    s32 itemID = get_variable(script, *ptrReadPos++);
+    s32* ptrNextPos = ptrReadPos++;
+    item_table_entry* item = &gItemTable[itemID];
+    
+    
+    set_variable(script, ptrNextPos++, item->potencyA);
+    set_variable(script, ptrNextPos++, item->potencyB);
     return 2;
-
 }
 */
-
 
 INCLUDE_ASM(code_fa4c0_len_3bf0, ShowGotItem);
 
@@ -286,9 +300,9 @@ INCLUDE_ASM(code_fa4c0_len_3bf0, func_802D74C0);
 
 INCLUDE_ASM(code_fa4c0_len_3bf0, ShowEmote);
 
-
 INCLUDE_ASM(code_fa4c0_len_3bf0, RemoveEffect);
 /*
+// Works
 s32 RemoveEffect(script_context* script, s32 initialCall) {
     s32* ptrReadPos = script->ptrReadPos;
 
@@ -296,6 +310,7 @@ s32 RemoveEffect(script_context* script, s32 initialCall) {
     return 2;
 }
 
+// Works
 s32 func_802D7B10(script_context* script, s32 initialCall) {
     s32* ptrReadPos = script->ptrReadPos;
     s32* ptrValue = get_variable(script, *ptrReadPos++);
@@ -304,6 +319,7 @@ s32 func_802D7B10(script_context* script, s32 initialCall) {
     return 2;
 }
 
+// Works
 s32 func_802D7B44(script_context* script, s32 initialCall) {
     s32* ptrReadPos = script->ptrReadPos;
     s32* ptrValue = get_variable(script, *ptrReadPos++);
@@ -313,6 +329,7 @@ s32 func_802D7B44(script_context* script, s32 initialCall) {
     return 2;
 }
 
+// Works
 s32 func_802D7B74(script_context* script, s32 initialCall) {
     s32* ptrReadPos = script->ptrReadPos;
     s32* ptrValue = get_variable(script, *ptrReadPos++);
@@ -324,7 +341,6 @@ s32 func_802D7B74(script_context* script, s32 initialCall) {
 
 // More functions still in RemoveEffect.s but the ones above are matching properly
 */
-
 
 INCLUDE_ASM(code_fa4c0_len_3bf0, ShowSleepBubble);
 
