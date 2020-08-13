@@ -72,10 +72,13 @@ clean:
 submodules:
 	git submodule update --init --recursive
 
+n64split:
+	make -C tools/n64splitter
+
 split:
 	rm -rf $(DATA_DIRS) $(BGM_DIRS) && ./tools/n64splitter/bin/n64split -b -v -o . -c tools/n64split.yaml baserom.z64
 
-setup: clean submodules split
+setup: clean submodules n64split split
 
 print-% : ; $(info $* is a $(flavor $*) variable set to [$($*)]) @true
 
