@@ -91,7 +91,7 @@ INCLUDE_ASM(code_fa4c0_len_3bf0, PlaySoundAtF);
 s32 RemoveKeyItemAt(script_context* script, s32 initialCall) {
     s32* ptrReadPos = script->ptrReadPos;
     s32 index = get_variable(script, *ptrReadPos++);
-    s16* ptrKeyItems = &gPlayerData.keyItems;
+    s16* ptrKeyItems = (s16 *) &gPlayerData.keyItems;
 
     ptrKeyItems[index] = 0;
     return 2;
@@ -100,7 +100,7 @@ s32 RemoveKeyItemAt(script_context* script, s32 initialCall) {
 s32 RemoveItemAt(script_context* script, s32 initialCall) {
     s32* ptrReadPos = script->ptrReadPos;
     s32 index = get_variable(script, *ptrReadPos++);
-    s16* ptrInvItems = &gPlayerData.invItems;
+    s16* ptrInvItems = (s16 *) &gPlayerData.invItems;
     
     ptrInvItems[index] = 0;
     sort_items();
@@ -181,7 +181,7 @@ s32 FindKeyItem(script_context* script, s32 initialCall) {
 s32 AddItem(script_context* script, s32 initialCall) {
     s32* ptrReadPos = script->ptrReadPos;
     s32 itemID = get_variable(script, *ptrReadPos++);
-    s32* ptrNextPos = *ptrReadPos++;
+    s32* ptrNextPos = (s32 *) *ptrReadPos++;
 
     set_variable(script, ptrNextPos, add_item(itemID));
     return 2;
@@ -211,7 +211,7 @@ INCLUDE_ASM(code_fa4c0_len_3bf0, RemoveItemEntity);
 s32 AddBadge(script_context* script, s32 initialCall) {
   s32* ptrReadPos = script->ptrReadPos;
   s32 itemID = get_variable(script, *ptrReadPos++);
-  s32* ptrNextPos = *ptrReadPos++;
+  s32* ptrNextPos = (s32 *) *ptrReadPos++;
 
   set_variable(script, ptrNextPos, add_badge(itemID));
   return 2;
@@ -230,7 +230,7 @@ s32 SetItemPos(script_context* script, s32 initialCall) {
     y = get_variable(script, *ptrReadPos++);
     z = get_variable(script, *ptrReadPos++);
 
-    ptrItemEntity = get_item_entity(itemEntityIndex);
+    ptrItemEntity = (item_entity *) get_item_entity(itemEntityIndex);
     ptrItemEntity->position[0] = x;
     ptrItemEntity->position[1] = y;
     ptrItemEntity->position[2] = z;
