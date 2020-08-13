@@ -30,6 +30,7 @@ O_FILES := $(foreach file,$(C_FILES),$(BUILD_DIR)/$(file:.c=.o)) \
            $(foreach file,$(MAP_FILES),$(BUILD_DIR)/$(file:.FS=.FS.o)) \
            $(foreach file,$(BGM_FILES),$(BUILD_DIR)/$(file:.bgm=.bgm.o))
 
+
 ####################### Other Tools #########################
 
 # N64 tools
@@ -47,6 +48,8 @@ LD = $(CROSS)ld
 OBJDUMP = $(CROSS)objdump
 OBJCOPY = $(CROSS)objcopy
 
+TARGET = papermario
+
 CPPFLAGS = -Iinclude -D _LANGUAGE_C -ffreestanding -DF3DEX_GBI_2
 ASFLAGS = -EB -march=vr4300 -mtune=vr4300 -Iinclude
 OLDASFLAGS= -EB -Iinclude
@@ -59,14 +62,20 @@ $(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(DATA_DIRS) $(COMPRESSED_DIRS) $(MAP_DIRS
 
 default: all
 
-TARGET = papermario
 LD_SCRIPT = $(TARGET).ld
 
 all: $(BUILD_DIR) $(TARGET).z64 verify
 
 clean:
-	rm -rf build
-	rm -f papermario.z64
+	rm -rf build $(TARGET).z64
+
+submodules:
+	git submodule update --init --recursive
+
+split:
+	rm -rf $(DATA_DIRS) $(BGM_DIRS) && ./tools/n64splitter/bin/n64split -b -v -o . -c tools/n64split.yaml baserom.z64
+
+setup: clean submodules split
 
 print-% : ; $(info $* is a $(flavor $*) variable set to [$($*)]) @true
 
