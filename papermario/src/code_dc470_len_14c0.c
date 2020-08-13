@@ -25,13 +25,14 @@ void func_80145DF8(void) {
     game_status* gameStatus = *gGameStatusPtr;
     D_801595A0 = 0;
     D_8014F12F = 0;
+    
     gameStatus->unk_15C = 0xB4;
     gameStatus->unk_148 &= 0xF0;
-    return;
 }
 
-u16 read_background_size(bg_header *bg) {
+void read_background_size(bg_header *bg) {
     game_status* gameStatus = *gGameStatusPtr;
+
     gameStatus->unk_14E = bg->width;
     gameStatus->unk_150 = bg->height;
     gameStatus->unk_14A = bg->startX;
@@ -39,17 +40,16 @@ u16 read_background_size(bg_header *bg) {
     gameStatus->unk_154 = bg->palette;
     gameStatus->unk_158 = bg->raster;
     gameStatus->unk_148 |= 1;
-    return;
 }
 
-u16 set_background_size(s16 startX, s16 startY, s16 sizeX, s16 sizeY) {
+void set_background_size(s16 startX, s16 startY, s16 sizeX, s16 sizeY) {
     game_status* gameStatus = *gGameStatusPtr;
+
     gameStatus->unk_148 &= ~1;
     gameStatus->unk_14E = startX;
     gameStatus->unk_150 = startY;
     gameStatus->unk_14A = sizeX;
     gameStatus->unk_14C = sizeY;
-    return;
 }
 
 u16 func_80145E98(s32 arg0, s32 arg1, s32 arg2) {
