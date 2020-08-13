@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel CancelablePlayerRunToGoal
 /* 1A27DC 80273EFC 27BDFFB0 */  addiu $sp, $sp, -0x50

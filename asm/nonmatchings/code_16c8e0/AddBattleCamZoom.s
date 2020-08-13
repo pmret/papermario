@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel AddBattleCamZoom
 /* 17D58C 8024ECAC 3C028028 */  lui   $v0, 0x8028

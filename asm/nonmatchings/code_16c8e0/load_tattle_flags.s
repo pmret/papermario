@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel load_tattle_flags
 /* 182758 80253E78 27BDFFD0 */  addiu $sp, $sp, -0x30

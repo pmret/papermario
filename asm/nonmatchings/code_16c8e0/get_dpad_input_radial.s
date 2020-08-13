@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel get_dpad_input_radial
 /* 16C8E0 8023E000 27BDFFB8 */  addiu $sp, $sp, -0x48

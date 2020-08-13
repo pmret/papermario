@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel update_item_entity_temp
 /* 0CBDDC 801356DC 27BDFFC0 */  addiu $sp, $sp, -0x40

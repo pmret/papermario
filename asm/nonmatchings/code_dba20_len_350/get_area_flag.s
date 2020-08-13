@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel get_area_flag
 /* 0DBCF0 801455F0 0080102D */  daddu $v0, $a0, $zero

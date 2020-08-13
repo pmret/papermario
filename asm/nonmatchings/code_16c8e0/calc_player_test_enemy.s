@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel calc_player_test_enemy
 /* 1A0034 80271754 27BDFFD0 */  addiu $sp, $sp, -0x30

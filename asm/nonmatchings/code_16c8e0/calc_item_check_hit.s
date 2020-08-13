@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel calc_item_check_hit
 /* 17FEB0 802515D0 27BDFFD0 */  addiu $sp, $sp, -0x30

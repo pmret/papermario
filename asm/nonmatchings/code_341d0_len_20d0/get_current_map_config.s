@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel get_current_map_config
 /* 035FD8 8005ABD8 3C02800A */  lui   $v0, 0x800a

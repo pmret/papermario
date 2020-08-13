@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel RemovePlayerBuffs
 /* 19DD2C 8026F44C 27BDFFE8 */  addiu $sp, $sp, -0x18

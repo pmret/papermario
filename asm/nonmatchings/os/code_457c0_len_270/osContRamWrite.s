@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel osContRamWrite
 /* 0457C0 8006A3C0 27BDFFB8 */  addiu $sp, $sp, -0x48

@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel bind_enemy_ai
 /* 019D4C 8003E94C 27BDFFE0 */  addiu $sp, $sp, -0x20

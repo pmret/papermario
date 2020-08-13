@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel GetActorRotation
 /* 19AE4C 8026C56C 27BDFFD8 */  addiu $sp, $sp, -0x28

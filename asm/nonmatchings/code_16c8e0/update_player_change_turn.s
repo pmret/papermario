@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel update_player_change_turn
 /* 174D30 80246450 27BDFFB0 */  addiu $sp, $sp, -0x50

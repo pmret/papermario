@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel osGetCount
 /* 040E00 80065A00 40024800 */  mfc0  $v0, $9

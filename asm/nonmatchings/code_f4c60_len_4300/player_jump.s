@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel player_jump
 /* 0F5E90 802D14E0 27BDFFB8 */  addiu $sp, $sp, -0x48

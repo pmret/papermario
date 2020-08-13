@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel set_npc_yaw
 /* 016740 8003B340 44857000 */  mtc1  $a1, $f14

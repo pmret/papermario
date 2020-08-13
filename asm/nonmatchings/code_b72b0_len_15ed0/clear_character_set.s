@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel clear_character_set
 /* 0B9D60 80123660 2402FFFF */  addiu $v0, $zero, -1

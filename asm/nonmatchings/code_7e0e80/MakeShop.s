@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel MakeShop
 /* 7E26E0 80281860 27BDFF98 */  addiu $sp, $sp, -0x68

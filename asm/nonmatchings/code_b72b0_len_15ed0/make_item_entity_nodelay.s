@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel make_item_entity_nodelay
 /* 0C8194 80131A94 27BDFFD8 */  addiu $sp, $sp, -0x28

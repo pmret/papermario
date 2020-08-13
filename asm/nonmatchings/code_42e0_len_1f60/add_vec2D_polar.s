@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel add_vec2D_polar
 /* 00539C 80029F9C 27BDFFD0 */  addiu $sp, $sp, -0x30

@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel GetPartTargetFlags
 /* 19BB8C 8026D2AC 27BDFFE0 */  addiu $sp, $sp, -0x20

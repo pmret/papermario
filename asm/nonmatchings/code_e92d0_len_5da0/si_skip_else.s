@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel si_skip_else
 /* 0ED328 802C8978 0000282D */  daddu $a1, $zero, $zero

@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel play_hit_sound
 /* 1A58E4 80277004 44850000 */  mtc1  $a1, $f0

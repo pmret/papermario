@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel get_npc_safe
 /* 015F48 8003AB48 0000182D */  daddu $v1, $zero, $zero

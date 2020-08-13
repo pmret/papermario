@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel end_battle
 /* 173330 80244A50 3C03800E */  lui   $v1, 0x800e

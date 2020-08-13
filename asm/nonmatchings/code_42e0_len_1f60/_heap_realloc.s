@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel _heap_realloc
 /* 0046C4 800292C4 27BDFFD8 */  addiu $sp, $sp, -0x28

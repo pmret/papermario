@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel nuGfxDisplayOn
 /* 03A830 8005F430 24020080 */  addiu $v0, $zero, 0x80

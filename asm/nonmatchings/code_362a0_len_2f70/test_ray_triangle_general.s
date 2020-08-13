@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel test_ray_triangle_general
 /* 037284 8005BE84 27BDFFC0 */  addiu $sp, $sp, -0x40

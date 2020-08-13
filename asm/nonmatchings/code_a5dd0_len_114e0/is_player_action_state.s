@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel is_player_action_state
 /* 0A72B0 80110BB0 00041600 */  sll   $v0, $a0, 0x18

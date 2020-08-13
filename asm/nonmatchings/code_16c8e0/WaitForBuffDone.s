@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel WaitForBuffDone
 /* 19FA2C 8027114C 3C02802A */  lui   $v0, 0x802a

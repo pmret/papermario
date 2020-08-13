@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel cart
 /* 046080 8006AC80 2401F7FF */  addiu $at, $zero, -0x801

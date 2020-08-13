@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel FallPartTo
 /* 1A9134 8027A854 27BDFFA0 */  addiu $sp, $sp, -0x60

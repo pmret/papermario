@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel create_shadow_from_data
 /* 0A82D8 80111BD8 27BDFFC8 */  addiu $sp, $sp, -0x38

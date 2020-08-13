@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel _spr_sign_extend_12bit
 /* 1001CC 802DD0DC 30840FFF */  andi  $a0, $a0, 0xfff

@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel osUnmapTLBAll
 /* 041D60 80066960 40085000 */  mfc0  $t0, $10

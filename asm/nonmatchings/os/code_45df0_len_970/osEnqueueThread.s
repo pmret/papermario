@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel osEnqueueThread
 /* 046574 8006B174 0080C821 */  addu  $t9, $a0, $zero

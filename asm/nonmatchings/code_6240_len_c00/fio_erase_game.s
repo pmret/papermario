@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel fio_erase_game
 /* 00682C 8002B42C 27BDFFE0 */  addiu $sp, $sp, -0x20

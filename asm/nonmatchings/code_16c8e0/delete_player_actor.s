@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel delete_player_actor
 /* 16F648 80240D68 27BDFFD8 */  addiu $sp, $sp, -0x28

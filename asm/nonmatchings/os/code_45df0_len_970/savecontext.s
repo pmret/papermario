@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel savecontext
 /* 045E34 8006AA34 03404021 */  addu  $t0, $k0, $zero

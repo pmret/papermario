@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel resume_group_script_index
 /* 0E8F20 802C4570 27BDFFE0 */  addiu $sp, $sp, -0x20

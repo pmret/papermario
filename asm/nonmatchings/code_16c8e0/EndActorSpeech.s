@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel EndActorSpeech
 /* 181BB0 802532D0 27BDFFB8 */  addiu $sp, $sp, -0x48

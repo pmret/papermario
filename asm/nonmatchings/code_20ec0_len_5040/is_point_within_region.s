@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel is_point_within_region
 /* 0243D4 80048FD4 44856000 */  mtc1  $a1, $f12

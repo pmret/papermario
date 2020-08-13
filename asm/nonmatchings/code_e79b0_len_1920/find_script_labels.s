@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel find_script_labels
 /* 0E7AF8 802C3148 0000182D */  daddu $v1, $zero, $zero

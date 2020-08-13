@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel update_npc_blur
 /* 0161F8 8003ADF8 8C850020 */  lw    $a1, 0x20($a0)

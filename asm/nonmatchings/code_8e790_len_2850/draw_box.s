@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel draw_box
 /* 08E790 800F52E0 27BDFE10 */  addiu $sp, $sp, -0x1f0

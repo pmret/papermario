@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel JumpObj
 /* 0F8608 802D3C58 27BDFFB8 */  addiu $sp, $sp, -0x48

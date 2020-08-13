@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel alLink
 /* 0267EC 8004B3EC 8CA20000 */  lw    $v0, ($a1)

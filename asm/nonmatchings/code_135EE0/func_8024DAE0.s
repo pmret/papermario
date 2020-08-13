@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel func_8024DAE0
 /* 140E20 8024DAE0 00683021 */  addu  $a2, $v1, $t0

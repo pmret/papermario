@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel get_collider_type_by_id
 /* 0371A8 8005BDA8 30824000 */  andi  $v0, $a0, 0x4000

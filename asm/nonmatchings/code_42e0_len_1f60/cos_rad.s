@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel cos_rad
 /* 0055D0 8002A1D0 3C014622 */  lui   $at, 0x4622

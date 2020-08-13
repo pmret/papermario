@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel _wrap_trig_lookup_value
 /* 005434 8002A034 3C014980 */  lui   $at, 0x4980

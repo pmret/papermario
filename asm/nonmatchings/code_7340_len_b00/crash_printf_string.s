@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel crash_printf_string
 /* 007608 8002C208 AFA60008 */  sw    $a2, 8($sp)

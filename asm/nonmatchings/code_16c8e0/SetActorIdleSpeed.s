@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel SetActorIdleSpeed
 /* 199FB0 8026B6D0 27BDFFD8 */  addiu $sp, $sp, -0x28

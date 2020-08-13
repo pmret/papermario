@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel draw_coin_sparkles
 /* 0C720C 80130B0C 27BDFE78 */  addiu $sp, $sp, -0x188

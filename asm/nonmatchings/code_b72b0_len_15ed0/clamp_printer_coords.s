@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel clamp_printer_coords
 /* 0BC1B8 80125AB8 A485050A */  sh    $a1, 0x50a($a0)

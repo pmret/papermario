@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel get_model_property
 /* 0AC20C 80115B0C 8C870008 */  lw    $a3, 8($a0)

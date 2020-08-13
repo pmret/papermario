@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel osPiGetCmdQueue
 /* 046950 8006B550 3C038009 */  lui   $v1, 0x8009

@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel dist3D
 /* 00532C 80029F2C 44872000 */  mtc1  $a3, $f4

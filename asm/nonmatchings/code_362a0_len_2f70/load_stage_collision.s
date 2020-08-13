@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel load_stage_collision
 /* 0365A0 8005B1A0 27BDFFD8 */  addiu $sp, $sp, -0x28

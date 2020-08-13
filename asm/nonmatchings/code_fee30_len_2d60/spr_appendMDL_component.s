@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel spr_appendMDL_component
 /* 0FF9E4 802DC8F4 27BDFEF0 */  addiu $sp, $sp, -0x110

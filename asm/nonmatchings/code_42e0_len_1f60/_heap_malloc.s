@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel _heap_malloc
 /* 00446C 8002906C 24A5000F */  addiu $a1, $a1, 0xf

@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel get_defeated
 /* 01A1F0 8003EDF0 0080302D */  daddu $a2, $a0, $zero

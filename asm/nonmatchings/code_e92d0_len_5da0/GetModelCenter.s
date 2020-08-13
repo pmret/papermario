@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel GetModelCenter
 /* 0ED930 802C8F80 27BDFFC0 */  addiu $sp, $sp, -0x40

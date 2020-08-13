@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel PutPartnerAway
 /* 0F4338 802CF988 27BDFFB0 */  addiu $sp, $sp, -0x50

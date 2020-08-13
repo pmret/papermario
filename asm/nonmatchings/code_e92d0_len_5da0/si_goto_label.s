@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel si_goto_label
 /* 0ED240 802C8890 8C86000C */  lw    $a2, 0xc($a0)

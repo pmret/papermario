@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel LoadItemScript
 /* 1967B0 80267ED0 27BDFFD8 */  addiu $sp, $sp, -0x28

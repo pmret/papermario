@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel guScaleF
 /* 042BC0 800677C0 AC850000 */  sw    $a1, ($a0)

@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel osAiDeviceBusy
 /* 046C50 8006B850 3C02A450 */  lui   $v0, 0xa450

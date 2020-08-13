@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel clear_global_flag
 /* 0DBAE0 801453E0 3C02F8D8 */  lui   $v0, 0xf8d8

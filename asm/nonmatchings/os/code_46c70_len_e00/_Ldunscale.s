@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel _Ldunscale
 /* 04741C 8006C01C 94A30000 */  lhu   $v1, ($a1)

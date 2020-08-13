@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel set_cam_target_pos
 /* 17CE00 8024E520 3C028028 */  lui   $v0, 0x8028

@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel FullyRestoreSP
 /* 0F6890 802D1EE0 3C038011 */  lui   $v1, 0x8011

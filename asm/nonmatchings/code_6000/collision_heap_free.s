@@ -1,7 +1,6 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel collision_heap_free
 /* 0061F4 8002ADF4 3C028007 */  lui   $v0, 0x8007

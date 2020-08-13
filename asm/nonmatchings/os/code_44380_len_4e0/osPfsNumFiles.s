@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel osPfsNumFiles
 /* 044490 80069090 27BDFFB0 */  addiu $sp, $sp, -0x50

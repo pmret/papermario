@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel load_hit_data
 /* 03663C 8005B23C 27BDFF90 */  addiu $sp, $sp, -0x70

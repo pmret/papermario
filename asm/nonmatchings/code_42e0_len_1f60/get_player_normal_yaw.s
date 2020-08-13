@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel get_player_normal_yaw
 /* 005220 80029E20 44806000 */  mtc1  $zero, $f12

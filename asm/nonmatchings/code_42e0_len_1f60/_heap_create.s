@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel _heap_create
 /* 004430 80029030 2CA20020 */  sltiu $v0, $a1, 0x20

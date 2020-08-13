@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel get_menu_icon_script
 /* 0DAFB0 801448B0 2402F7FF */  addiu $v0, $zero, -0x801

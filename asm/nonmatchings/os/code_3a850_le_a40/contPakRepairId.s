@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel contPakRepairId
 /* 03ACFC 8005F8FC 27BDFFE8 */  addiu $sp, $sp, -0x18

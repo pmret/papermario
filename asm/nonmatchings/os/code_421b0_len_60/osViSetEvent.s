@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel osViSetEvent
 /* 0421B0 80066DB0 27BDFFE0 */  addiu $sp, $sp, -0x20

@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel _Litob
 /* 046D80 8006B980 27BDFFA0 */  addiu $sp, $sp, -0x60

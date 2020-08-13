@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel prenmi
 /* 04623C 8006AE3C 8F5B0118 */  lw    $k1, 0x118($k0)

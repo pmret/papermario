@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel set_cam_viewport
 /* 009714 8002E314 3C08800B */  lui   $t0, 0x800b

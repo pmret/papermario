@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel dispatch_damage_event_partner
 /* 1AE2AC 8027F9CC 27BDFFD0 */  addiu $sp, $sp, -0x30

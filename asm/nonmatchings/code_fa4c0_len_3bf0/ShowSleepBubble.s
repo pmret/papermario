@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel ShowSleepBubble
 /* 0FC9D8 802D8028 27BDFFA0 */  addiu $sp, $sp, -0x60

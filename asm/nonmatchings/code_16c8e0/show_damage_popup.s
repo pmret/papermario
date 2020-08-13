@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel show_damage_popup
 /* 194E8C 802665AC 27BDFFD8 */  addiu $sp, $sp, -0x28

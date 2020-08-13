@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel init_script_list
 /* 0E7C9C 802C32EC 3C028007 */  lui   $v0, 0x8007

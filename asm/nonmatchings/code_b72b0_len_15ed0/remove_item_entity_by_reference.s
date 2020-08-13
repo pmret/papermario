@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel remove_item_entity_by_reference
 /* 0CA030 80133930 3C038015 */  lui   $v1, 0x8015

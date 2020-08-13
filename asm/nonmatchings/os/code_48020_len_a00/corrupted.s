@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel corrupted
 /* 0485D8 8006D1D8 00052C03 */  sra   $a1, $a1, 0x10

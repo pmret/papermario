@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel load_tile_header
 /* 0AB46C 80114D6C 27BDFFB0 */  addiu $sp, $sp, -0x50

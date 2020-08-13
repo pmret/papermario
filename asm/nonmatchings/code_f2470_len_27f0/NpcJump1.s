@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel NpcJump1
 /* 0F3090 802CE6E0 27BDFFE8 */  addiu $sp, $sp, -0x18

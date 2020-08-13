@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel disable_npc_blur
 /* 0161AC 8003ADAC 27BDFFE8 */  addiu $sp, $sp, -0x18

@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel osCleanupThread
 /* 046750 8006B350 00002021 */  addu  $a0, $zero, $zero

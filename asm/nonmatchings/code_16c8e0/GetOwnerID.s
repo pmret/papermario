@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel GetOwnerID
 /* 19C6E0 8026DE00 27BDFFE8 */  addiu $sp, $sp, -0x18

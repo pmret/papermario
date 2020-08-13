@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel RotateModel
 /* 0ED614 802C8C64 27BDFF78 */  addiu $sp, $sp, -0x88

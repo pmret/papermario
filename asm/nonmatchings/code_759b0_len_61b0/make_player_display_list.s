@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel make_player_display_list
 /* 07A7A4 800E12F4 3C03800A */  lui   $v1, 0x800a

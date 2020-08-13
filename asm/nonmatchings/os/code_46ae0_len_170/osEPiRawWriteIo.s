@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel osEPiRawWriteIo
 /* 046AE0 8006B6E0 3C02A460 */  lui   $v0, 0xa460

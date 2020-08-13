@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel can_switch_to_player
 /* 41A5A8 802A5818 3C06800E */  lui   $a2, 0x800e

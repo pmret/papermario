@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel _get_hit_vert_index_from_buffer
 /* 036DF4 8005B9F4 8CC60000 */  lw    $a2, ($a2)

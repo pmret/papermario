@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel fx_sweat
 /* 04BB90 80070790 27BDFFD0 */  addiu $sp, $sp, -0x30

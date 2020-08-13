@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel osDispatchThread
 /* 0465D4 8006B1D4 3C048009 */  lui   $a0, 0x8009

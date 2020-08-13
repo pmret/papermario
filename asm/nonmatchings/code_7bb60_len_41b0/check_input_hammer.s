@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel check_input_hammer
 /* 07F590 800E60E0 27BDFFE8 */  addiu $sp, $sp, -0x18

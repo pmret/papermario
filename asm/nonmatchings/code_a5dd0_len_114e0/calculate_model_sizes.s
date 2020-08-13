@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel calculate_model_sizes
 /* 0AC82C 8011612C 27BDFFD8 */  addiu $sp, $sp, -0x28

@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel start_bounce_a
 /* 07F4E4 800E6034 27BDFFE8 */  addiu $sp, $sp, -0x18

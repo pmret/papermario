@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel guPosition
 /* 03F4E8 800640E8 3C018009 */  lui   $at, 0x8009

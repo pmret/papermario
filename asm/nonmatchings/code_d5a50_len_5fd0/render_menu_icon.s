@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel render_menu_icon
 /* 0D92FC 80142BFC 27BDFCF8 */  addiu $sp, $sp, -0x308

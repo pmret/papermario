@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel GetNpcPos
 /* 0F3AA4 802CF0F4 27BDFFD8 */  addiu $sp, $sp, -0x28

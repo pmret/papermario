@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel al_CopyFileTableEntry
 /* 02F87C 8005447C 27BDFFF8 */  addiu $sp, $sp, -8

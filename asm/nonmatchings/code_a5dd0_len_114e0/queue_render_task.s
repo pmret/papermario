@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel queue_render_task
 /* 0B4010 8011D910 3C028015 */  lui   $v0, 0x8015

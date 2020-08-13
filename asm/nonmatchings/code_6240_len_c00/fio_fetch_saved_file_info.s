@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel fio_fetch_saved_file_info
 /* 006554 8002B154 27BDFFD8 */  addiu $sp, $sp, -0x28

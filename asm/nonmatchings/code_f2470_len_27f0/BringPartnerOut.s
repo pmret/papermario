@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel BringPartnerOut
 /* 0F3F68 802CF5B8 27BDFF98 */  addiu $sp, $sp, -0x68

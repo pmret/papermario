@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel _set_music_track
 /* 0E0EE0 8014A7E0 27BDFFD0 */  addiu $sp, $sp, -0x30

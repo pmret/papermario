@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel set_message_images
 /* 0BC22C 80125B2C 3C018015 */  lui   $at, 0x8015

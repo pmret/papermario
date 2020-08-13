@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel GetBattleVar
 /* 19DF74 8026F694 27BDFFE0 */  addiu $sp, $sp, -0x20

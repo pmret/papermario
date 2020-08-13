@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel osAiGetLength
 /* 03C940 80061540 3C02A450 */  lui   $v0, 0xa450

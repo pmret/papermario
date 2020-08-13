@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel poll_rumble
 /* 0042E0 80028EE0 27BDFFE8 */  addiu $sp, $sp, -0x18

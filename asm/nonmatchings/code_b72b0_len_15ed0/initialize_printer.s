@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel initialize_printer
 /* 0BBDA4 801256A4 0000182D */  daddu $v1, $zero, $zero

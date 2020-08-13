@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel SetIdleAnimations
 /* 1AB45C 8027CB7C 27BDFFE0 */  addiu $sp, $sp, -0x20

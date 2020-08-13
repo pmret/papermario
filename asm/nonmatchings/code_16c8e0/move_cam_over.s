@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel move_cam_over
 /* 17CDB8 8024E4D8 27BDFFE8 */  addiu $sp, $sp, -0x18

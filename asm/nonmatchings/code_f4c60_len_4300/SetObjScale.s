@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel SetObjScale
 /* 0F829C 802D38EC 27BDFFD0 */  addiu $sp, $sp, -0x30

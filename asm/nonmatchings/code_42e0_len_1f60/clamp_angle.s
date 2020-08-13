@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel clamp_angle
 /* 004F24 80029B24 3C014561 */  lui   $at, 0x4561

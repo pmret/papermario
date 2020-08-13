@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel nuScGetAudioMQ
 /* 03A384 8005EF84 3C02800E */  lui   $v0, 0x800e

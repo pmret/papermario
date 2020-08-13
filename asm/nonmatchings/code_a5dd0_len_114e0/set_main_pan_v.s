@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel set_main_pan_v
 /* 0B2334 8011BC34 00042080 */  sll   $a0, $a0, 2

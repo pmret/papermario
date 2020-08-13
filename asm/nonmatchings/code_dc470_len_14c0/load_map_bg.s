@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel load_map_bg
 /* 0DC470 80145D70 27BDFFE0 */  addiu $sp, $sp, -0x20
