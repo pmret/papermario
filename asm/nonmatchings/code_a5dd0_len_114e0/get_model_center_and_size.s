@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel get_model_center_and_size
 /* 0B17EC 8011B0EC 27BDFFD0 */  addiu $sp, $sp, -0x30

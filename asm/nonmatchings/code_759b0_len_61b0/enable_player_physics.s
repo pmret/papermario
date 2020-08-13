@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel enable_player_physics
 /* 0795C4 800E0114 3C038011 */  lui   $v1, 0x8011

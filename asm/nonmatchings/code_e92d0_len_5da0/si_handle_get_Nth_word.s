@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel si_handle_get_Nth_word
 /* 0EA80C 802C5E5C 27BDFFE0 */  addiu $sp, $sp, -0x20

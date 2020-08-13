@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel SetObjRotation
 /* 0F81F0 802D3840 27BDFFD0 */  addiu $sp, $sp, -0x30

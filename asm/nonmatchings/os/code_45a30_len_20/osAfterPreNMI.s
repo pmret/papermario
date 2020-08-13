@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel osAfterPreNMI
 /* 045A30 8006A630 27BDFFE8 */  addiu $sp, $sp, -0x18

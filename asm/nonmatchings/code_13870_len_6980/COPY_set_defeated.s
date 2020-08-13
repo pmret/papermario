@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel COPY_set_defeated
 /* 0196E0 8003E2E0 0080182D */  daddu $v1, $a0, $zero

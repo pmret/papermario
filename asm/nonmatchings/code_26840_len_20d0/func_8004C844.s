@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel func_8004C844
 /* 027C44 8004C844 948300B8 */  lhu   $v1, 0xb8($a0)

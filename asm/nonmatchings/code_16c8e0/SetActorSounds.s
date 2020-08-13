@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel SetActorSounds
 /* 19E020 8026F740 27BDFFD8 */  addiu $sp, $sp, -0x28

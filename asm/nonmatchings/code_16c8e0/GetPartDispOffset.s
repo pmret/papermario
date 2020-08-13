@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel GetPartDispOffset
 /* 19A3C8 8026BAE8 27BDFFC8 */  addiu $sp, $sp, -0x38

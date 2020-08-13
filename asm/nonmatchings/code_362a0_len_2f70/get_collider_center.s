@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel get_collider_center
 /* 037210 8005BE10 000410C0 */  sll   $v0, $a0, 3

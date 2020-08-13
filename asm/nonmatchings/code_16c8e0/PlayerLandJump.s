@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel PlayerLandJump
 /* 1A23E4 80273B04 27BDFFD8 */  addiu $sp, $sp, -0x28

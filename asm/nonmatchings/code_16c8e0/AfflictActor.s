@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel AfflictActor
 /* 1ABF5C 8027D67C 27BDFFD8 */  addiu $sp, $sp, -0x28

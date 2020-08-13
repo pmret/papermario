@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel fio_calc_header_checksum
 /* 006340 8002AF40 0000282D */  daddu $a1, $zero, $zero

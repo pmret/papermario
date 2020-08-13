@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel SetPartGoalToTarget
 /* 198CE4 8026A404 27BDFFD8 */  addiu $sp, $sp, -0x28

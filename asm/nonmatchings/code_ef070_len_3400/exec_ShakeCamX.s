@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel exec_ShakeCamX
 /* 0EFF78 802CB5C8 27BDFFD0 */  addiu $sp, $sp, -0x30

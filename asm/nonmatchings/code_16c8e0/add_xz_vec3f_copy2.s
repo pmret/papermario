@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel add_xz_vec3f_copy2
 /* 192B38 80264258 27BDFFD8 */  addiu $sp, $sp, -0x28

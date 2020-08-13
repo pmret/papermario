@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel si_handle_Loop
 /* 0E93B0 802C4A00 8C83000C */  lw    $v1, 0xc($a0)

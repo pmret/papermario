@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel make_spinning_player_display_list
 /* 07ABB4 800E1704 27BDFE80 */  addiu $sp, $sp, -0x180

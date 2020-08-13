@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel update_starpoints_display
 /* 16EC9C 802403BC 27BDFF70 */  addiu $sp, $sp, -0x90

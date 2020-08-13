@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel play_sound_at_npc
 /* 0E0408 80149D08 27BDFFD8 */  addiu $sp, $sp, -0x28

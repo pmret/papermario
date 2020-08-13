@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel update_enemy_action
 /* 175E50 80247570 3C03800E */  lui   $v1, 0x800e

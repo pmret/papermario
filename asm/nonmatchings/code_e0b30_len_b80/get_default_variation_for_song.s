@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel get_default_variation_for_song
 /* 0E0B30 8014A430 0000302D */  daddu $a2, $zero, $zero

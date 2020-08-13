@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel save_game_at_player_position
 /* 102A20 802E11A0 3C04800F */  lui   $a0, 0x800f

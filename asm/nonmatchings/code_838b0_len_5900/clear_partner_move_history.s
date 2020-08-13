@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel clear_partner_move_history
 /* 08890C 800EF45C 3C058011 */  lui   $a1, 0x8011

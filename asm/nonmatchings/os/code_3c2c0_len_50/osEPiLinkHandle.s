@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel osEPiLinkHandle
 /* 03C2C0 80060EC0 27BDFFE8 */  addiu $sp, $sp, -0x18

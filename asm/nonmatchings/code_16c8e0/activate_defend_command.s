@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel activate_defend_command
 /* 18F3E4 80260B04 27BDFFE0 */  addiu $sp, $sp, -0x20

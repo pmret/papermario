@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel osEnqueueAndYield
 /* 04646C 8006B06C 3C058009 */  lui   $a1, 0x8009

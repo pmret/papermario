@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel modify_collider_family_flags
 /* 0EE698 802C9CE8 27BDFFE0 */  addiu $sp, $sp, -0x20

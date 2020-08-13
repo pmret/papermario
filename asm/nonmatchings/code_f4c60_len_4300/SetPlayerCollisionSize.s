@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel SetPlayerCollisionSize
 /* 0F5960 802D0FB0 27BDFFE0 */  addiu $sp, $sp, -0x20

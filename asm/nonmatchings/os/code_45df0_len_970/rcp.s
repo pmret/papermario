@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel rcp
 /* 0460C8 8006ACC8 3C11A430 */  lui   $s1, 0xa430

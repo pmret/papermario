@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel fx_emote
 /* 04B290 8006FE90 27BDFFD0 */  addiu $sp, $sp, -0x30

@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel nuContRmbStart
 /* 03B290 8005FE90 00041080 */  sll   $v0, $a0, 2

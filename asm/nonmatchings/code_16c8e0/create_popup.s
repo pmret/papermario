@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel create_popup
 /* 17D848 8024EF68 0000202D */  daddu $a0, $zero, $zero

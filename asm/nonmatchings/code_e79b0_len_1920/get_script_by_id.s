@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel get_script_by_id
 /* 0E9158 802C47A8 0000302D */  daddu $a2, $zero, $zero

@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel fio_write_flash
 /* 006D48 8002B948 27BDFF98 */  addiu $sp, $sp, -0x68

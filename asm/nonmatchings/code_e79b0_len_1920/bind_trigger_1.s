@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel bind_trigger_1
 /* 0E8C58 802C42A8 27BDFFD8 */  addiu $sp, $sp, -0x28

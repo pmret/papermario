@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel osPfsReleasePages
 /* 043B6C 8006876C 8FA90010 */  lw    $t1, 0x10($sp)

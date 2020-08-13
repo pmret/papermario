@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel bcmp
 /* 046C70 8006B870 00851026 */  xor   $v0, $a0, $a1

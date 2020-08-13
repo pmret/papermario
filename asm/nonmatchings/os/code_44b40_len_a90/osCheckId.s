@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel osCheckId
 /* 0451D4 80069DD4 27BDFFC8 */  addiu $sp, $sp, -0x38

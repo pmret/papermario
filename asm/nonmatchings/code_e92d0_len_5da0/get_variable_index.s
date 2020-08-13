@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel get_variable_index
 /* 0EC758 802C7DA8 3C02EFE8 */  lui   $v0, 0xefe8

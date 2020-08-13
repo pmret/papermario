@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel contPakFree
 /* 03AB48 8005F748 27BDFFE8 */  addiu $sp, $sp, -0x18

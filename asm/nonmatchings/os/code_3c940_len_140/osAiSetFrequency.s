@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel osAiSetFrequency
 /* 03C960 80061560 44841000 */  mtc1  $a0, $f2

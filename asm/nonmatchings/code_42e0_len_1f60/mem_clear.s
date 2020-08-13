@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel mem_clear
 /* 004A00 80029600 18A00005 */  blez  $a1, .L80029618

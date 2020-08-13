@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel get_coin_drop_amount
 /* 024150 80048D50 27BDFFE0 */  addiu $sp, $sp, -0x20

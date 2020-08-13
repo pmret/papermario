@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel set_actor_home_position
 /* 198600 80269D20 27BDFFD0 */  addiu $sp, $sp, -0x30

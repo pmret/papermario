@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel is_trigger_bound
 /* 0DC36C 80145C6C 0000402D */  daddu $t0, $zero, $zero

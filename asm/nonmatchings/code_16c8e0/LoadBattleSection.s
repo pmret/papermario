@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel LoadBattleSection
 /* 1986C4 80269DE4 27BDFFE8 */  addiu $sp, $sp, -0x18

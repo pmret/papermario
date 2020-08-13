@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel step_current_game_mode
 /* 0A9578 80112E78 27BDFFE0 */  addiu $sp, $sp, -0x20

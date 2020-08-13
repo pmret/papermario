@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel remove_player_buffs
 /* 195D34 80267454 27BDFFB8 */  addiu $sp, $sp, -0x48

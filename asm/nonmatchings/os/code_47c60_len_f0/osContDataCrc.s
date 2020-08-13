@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel osContDataCrc
 /* 047CCC 8006C8CC 00001821 */  addu  $v1, $zero, $zero

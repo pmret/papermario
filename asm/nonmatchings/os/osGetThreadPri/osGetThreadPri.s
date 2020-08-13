@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel osGetThreadPri
 /* 041330 80065F30 14800003 */  bnez  $a0, .L80065F40

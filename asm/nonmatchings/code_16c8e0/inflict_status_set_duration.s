@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel inflict_status_set_duration
 /* 1955D0 80266CF0 27BDFFD8 */  addiu $sp, $sp, -0x28

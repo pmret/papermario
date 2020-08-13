@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel osSetTimerIntr
 /* 041A10 80066610 27BDFFD8 */  addiu $sp, $sp, -0x28

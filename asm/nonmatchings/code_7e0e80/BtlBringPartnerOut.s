@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel BtlBringPartnerOut
 /* 7E19EC 80280B6C 8FBF0010 */  lw    $ra, 0x10($sp)

@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel fio_flush_backups
 /* 00644C 8002B04C 27BDFFE8 */  addiu $sp, $sp, -0x18

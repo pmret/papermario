@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel get_area_byte
 /* 0DBD50 80145650 3C02800E */  lui   $v0, 0x800e

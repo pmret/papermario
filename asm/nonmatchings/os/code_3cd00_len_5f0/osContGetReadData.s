@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel osContGetReadData
 /* 03CE28 80061A28 27BDFFF0 */  addiu $sp, $sp, -0x10

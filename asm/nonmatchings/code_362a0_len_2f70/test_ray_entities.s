@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel test_ray_entities
 /* 038848 8005D448 27BDFE60 */  addiu $sp, $sp, -0x1a0

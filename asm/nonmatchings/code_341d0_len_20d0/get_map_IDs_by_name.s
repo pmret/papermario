@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel get_map_IDs_by_name
 /* 035FF8 8005ABF8 27BDFFC8 */  addiu $sp, $sp, -0x38

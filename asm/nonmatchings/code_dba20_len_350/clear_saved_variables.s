@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel clear_saved_variables
 /* 0DBA20 80145320 2402003F */  addiu $v0, $zero, 0x3f

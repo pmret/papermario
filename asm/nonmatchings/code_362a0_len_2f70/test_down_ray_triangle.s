@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel test_down_ray_triangle
 /* 03789C 8005C49C C4800030 */  lwc1  $f0, 0x30($a0)

@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel update_lerp
 /* 0057B4 8002A3B4 27BDFFC8 */  addiu $sp, $sp, -0x38

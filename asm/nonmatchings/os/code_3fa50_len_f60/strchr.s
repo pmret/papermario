@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel strchr
 /* 03FE10 80064A10 90830000 */  lbu   $v1, ($a0)

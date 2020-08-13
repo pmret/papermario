@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel stub_item_entity_nodraw
 /* 0B97B0 801230B0 03E00008 */  jr    $ra

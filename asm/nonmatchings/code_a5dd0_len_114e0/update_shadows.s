@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel update_shadows
 /* 0A6198 8010FA98 27BDFFD8 */  addiu $sp, $sp, -0x28

@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel si_handle_subtractF
 /* 0EA49C 802C5AEC 27BDFFD8 */  addiu $sp, $sp, -0x28

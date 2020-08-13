@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel AssignBlockFlag
 /* 0A876C 8011206C 27BDFFE8 */  addiu $sp, $sp, -0x18

@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel copy_matrix
 /* 004B20 80029720 27BDFFE8 */  addiu $sp, $sp, -0x18

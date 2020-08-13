@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel SetCamTarget
 /* 0EF8DC 802CAF2C 27BDFFD8 */  addiu $sp, $sp, -0x28

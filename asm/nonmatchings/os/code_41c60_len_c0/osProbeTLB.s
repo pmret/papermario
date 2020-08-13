@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel osProbeTLB
 /* 041C60 80066860 40085000 */  mfc0  $t0, $10

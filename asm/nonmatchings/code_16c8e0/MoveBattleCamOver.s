@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel MoveBattleCamOver
 /* 17D4E8 8024EC08 3C028028 */  lui   $v0, 0x8028

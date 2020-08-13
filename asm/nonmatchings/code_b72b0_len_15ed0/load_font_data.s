@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel load_font_data
 /* 0B9E08 80123708 27BDFFE8 */  addiu $sp, $sp, -0x18

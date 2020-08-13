@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel get_nearest_home_index
 /* 197F78 80269698 3C014220 */  lui   $at, 0x4220

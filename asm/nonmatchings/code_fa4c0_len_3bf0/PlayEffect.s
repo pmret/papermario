@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel PlayEffect
 /* 0FCC4C 802D829C 27BDFF38 */  addiu $sp, $sp, -0xc8

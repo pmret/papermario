@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel set_popup_duration
 /* 17E3A4 8024FAC4 3C02802A */  lui   $v0, 0x802a

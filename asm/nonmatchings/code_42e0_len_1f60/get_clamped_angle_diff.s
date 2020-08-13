@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel get_clamped_angle_diff
 /* 005028 80029C28 460C7001 */  sub.s $f0, $f14, $f12

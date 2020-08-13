@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel Disable8bitMario
 /* 0F7538 802D2B88 27BDFFE0 */  addiu $sp, $sp, -0x20

@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel dispatch_event_player_continue_turn
 /* 19FFC4 802716E4 27BDFFE0 */  addiu $sp, $sp, -0x20

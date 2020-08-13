@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel HasMerleeCasts
 /* 01A7F4 8003F3F4 AC800084 */  sw    $zero, 0x84($a0)

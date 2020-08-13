@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel GetPartYaw
 /* 199DA0 8026B4C0 27BDFFE0 */  addiu $sp, $sp, -0x20

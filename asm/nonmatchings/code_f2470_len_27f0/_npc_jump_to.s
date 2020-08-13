@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel _npc_jump_to
 /* 0F2DE4 802CE434 27BDFFC0 */  addiu $sp, $sp, -0x40

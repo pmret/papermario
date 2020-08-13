@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel get_entity_by_index
 /* 0A6CE8 801105E8 30840FFF */  andi  $a0, $a0, 0xfff

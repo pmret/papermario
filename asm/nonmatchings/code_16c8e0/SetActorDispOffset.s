@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel SetActorDispOffset
 /* 19A2E4 8026BA04 27BDFFC8 */  addiu $sp, $sp, -0x38

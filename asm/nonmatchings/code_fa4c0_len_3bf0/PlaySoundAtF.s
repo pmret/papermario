@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel PlaySoundAtF
 /* 0FAD1C 802D636C 27BDFFC0 */  addiu $sp, $sp, -0x40

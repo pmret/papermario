@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel heroes_is_ability_active
 /* 195B8C 802672AC 27BDFFE8 */  addiu $sp, $sp, -0x18

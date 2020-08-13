@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel draw_main_battle_ui
 /* 16D35C 8023EA7C 27BDFFE0 */  addiu $sp, $sp, -0x20

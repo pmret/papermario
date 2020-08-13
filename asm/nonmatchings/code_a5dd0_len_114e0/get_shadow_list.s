@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel get_shadow_list
 /* 0A6D4C 8011064C 3C028007 */  lui   $v0, 0x8007

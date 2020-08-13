@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel osGetSR
 /* 047A70 8006C670 40026000 */  mfc0  $v0, $12

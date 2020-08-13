@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel draw_submenu_title
 /* 08DAF8 800F4648 3C028011 */  lui   $v0, 0x8011

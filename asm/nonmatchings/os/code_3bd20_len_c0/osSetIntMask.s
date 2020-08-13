@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel osSetIntMask
 /* 03BD40 80060940 400C6000 */  mfc0  $t4, $12

@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel dispatch_event_general
 /* 1A586C 80276F8C 27BDFFE8 */  addiu $sp, $sp, -0x18

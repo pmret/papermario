@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel al_LoadINIT
 /* 02F6BC 800542BC 27BDFF70 */  addiu $sp, $sp, -0x90

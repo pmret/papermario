@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel enable_partner_blur
 /* 182F24 80254644 3C04800E */  lui   $a0, 0x800e

@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel GetPlayerActionState
 /* 0F6780 802D1DD0 27BDFFE8 */  addiu $sp, $sp, -0x18

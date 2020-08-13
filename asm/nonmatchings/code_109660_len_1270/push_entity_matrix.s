@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel push_entity_matrix
 /* 10A6CC 802E8E4C 27BDFF58 */  addiu $sp, $sp, -0xa8

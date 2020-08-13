@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel start_rumble_type
 /* 1966D4 80267DF4 27BDFFE8 */  addiu $sp, $sp, -0x18

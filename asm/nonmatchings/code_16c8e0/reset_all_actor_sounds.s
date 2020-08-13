@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel reset_all_actor_sounds
 /* 19637C 80267A9C 90830136 */  lbu   $v1, 0x136($a0)

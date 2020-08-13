@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel set_script_timescale
 /* 0E8B90 802C41E0 3C01802E */  lui   $at, 0x802e

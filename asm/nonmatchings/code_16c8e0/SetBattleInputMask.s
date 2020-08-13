@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel SetBattleInputMask
 /* 19C930 8026E050 8C82000C */  lw    $v0, 0xc($a0)

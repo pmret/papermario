@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel ForceCloseMessageBox
 /* 17FCD0 802513F0 3C028028 */  lui   $v0, 0x8028

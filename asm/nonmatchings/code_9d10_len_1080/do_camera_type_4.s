@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel do_camera_type_4
 /* 009D10 8002E910 27BDFFB8 */  addiu $sp, $sp, -0x48

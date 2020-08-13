@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel _advance_rng
 /* 004D00 80029900 3C035D58 */  lui   $v1, 0x5d58

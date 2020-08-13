@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel disable_player_blur
 /* 1831F4 80254914 3C02800E */  lui   $v0, 0x800e

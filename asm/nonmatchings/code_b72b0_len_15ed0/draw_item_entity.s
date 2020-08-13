@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel draw_item_entity
 /* 0C88A4 801321A4 27BDFEB8 */  addiu $sp, $sp, -0x148

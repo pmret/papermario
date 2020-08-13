@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel set_map_transition_effect
 /* 0CE9A0 801382A0 3C018015 */  lui   $at, 0x8015

@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel osWritebackDCache
 /* 03CC50 80061850 18A00011 */  blez  $a1, .L80061898

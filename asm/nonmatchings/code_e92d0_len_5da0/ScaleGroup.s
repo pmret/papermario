@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel ScaleGroup
 /* 0EE3CC 802C9A1C 27BDFF88 */  addiu $sp, $sp, -0x78

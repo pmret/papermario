@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel test_item_player_collision
 /* 0CA20C 80133B0C 27BDFF90 */  addiu $sp, $sp, -0x70

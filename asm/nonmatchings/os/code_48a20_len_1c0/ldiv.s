@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel ldiv
 /* 048A20 8006D620 00A6001A */  div   $zero, $a1, $a2

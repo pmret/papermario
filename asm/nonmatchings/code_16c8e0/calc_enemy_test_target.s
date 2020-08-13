@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel calc_enemy_test_target
 /* 1A5AD8 802771F8 27BDFFD8 */  addiu $sp, $sp, -0x28

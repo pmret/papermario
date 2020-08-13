@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel cancel_message
 /* 0BC208 80125B08 8C8304FC */  lw    $v1, 0x4fc($a0)

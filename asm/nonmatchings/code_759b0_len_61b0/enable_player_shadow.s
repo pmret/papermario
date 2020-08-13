@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel enable_player_shadow
 /* 079560 800E00B0 3C048011 */  lui   $a0, 0x8011

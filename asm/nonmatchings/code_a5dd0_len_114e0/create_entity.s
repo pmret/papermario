@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel create_entity
 /* 0A7FC4 801118C4 AFA40000 */  sw    $a0, ($sp)

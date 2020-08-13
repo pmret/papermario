@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel IP7_Hdlr
 /* 046050 8006AC50 2401BFFF */  addiu $at, $zero, -0x4001

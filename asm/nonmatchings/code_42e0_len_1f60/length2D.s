@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel length2D
 /* 0043F0 80028FF0 460C6302 */  mul.s $f12, $f12, $f12

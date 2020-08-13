@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel does_script_exist
 /* 0E8B14 802C4164 0000282D */  daddu $a1, $zero, $zero

@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel memcpy
 /* 03FE74 80064A74 10C00007 */  beqz  $a2, .L80064A94

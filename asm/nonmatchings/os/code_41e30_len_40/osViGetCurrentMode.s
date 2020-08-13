@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel osViGetCurrentMode
 /* 041E30 80066A30 27BDFFE8 */  addiu $sp, $sp, -0x18

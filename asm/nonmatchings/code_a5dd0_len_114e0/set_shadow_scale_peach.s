@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel set_shadow_scale_peach
 /* 0A90D4 801129D4 3C028007 */  lui   $v0, 0x8007

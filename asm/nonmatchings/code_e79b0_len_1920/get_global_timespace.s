@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel get_global_timespace
 /* 0E8BBC 802C420C 3C01802E */  lui   $at, 0x802e

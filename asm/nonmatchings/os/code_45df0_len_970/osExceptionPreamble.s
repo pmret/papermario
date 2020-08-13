@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel osExceptionPreamble
 /* 045E00 8006AA00 3C1A800B */  lui   $k0, 0x800b

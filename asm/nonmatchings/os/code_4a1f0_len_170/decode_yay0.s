@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel decode_yay0
 /* 04A1F0 8006EDF0 8C980004 */  lw    $t8, 4($a0)

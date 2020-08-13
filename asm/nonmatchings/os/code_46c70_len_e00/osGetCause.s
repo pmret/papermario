@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel osGetCause
 /* 047A60 8006C660 40026800 */  mfc0  $v0, $13

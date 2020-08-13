@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel _bound_script_trigger_handler
 /* 0EB02C 802C667C 27BDFFE0 */  addiu $sp, $sp, -0x20

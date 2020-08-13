@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel CamPreset_J
 /* 7E1C80 80280E00 00000000 */   nop   

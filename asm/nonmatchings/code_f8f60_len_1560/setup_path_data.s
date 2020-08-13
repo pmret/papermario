@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel setup_path_data
 /* 0F975C 802D4DAC 27BDFFC8 */  addiu $sp, $sp, -0x38

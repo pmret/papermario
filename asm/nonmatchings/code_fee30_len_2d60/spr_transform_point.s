@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel spr_transform_point
 /* 0FFDF0 802DCD00 27BDFF20 */  addiu $sp, $sp, -0xe0

@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel bzero
 /* 03FD70 80064970 00041823 */  negu  $v1, $a0

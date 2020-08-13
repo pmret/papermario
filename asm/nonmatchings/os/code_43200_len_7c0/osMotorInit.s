@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel osMotorInit
 /* 043344 80067F44 27BDFF88 */  addiu $sp, $sp, -0x78

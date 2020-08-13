@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel __osDisableInt
 /* 046760 8006B360 3C0A8009 */  lui   $t2, 0x8009

@@ -1,7 +1,6 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-.include "include/macro.inc"
 
 glabel set_fog_color
 /* 0B2288 8011BB88 3C028015 */  lui   $v0, 0x8015
