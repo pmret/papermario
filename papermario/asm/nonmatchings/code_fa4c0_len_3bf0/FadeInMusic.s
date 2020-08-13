@@ -64,6 +64,7 @@ glabel FadeInMusic
 /* 0FA888 802D5ED8 03E00008 */  jr    $ra
 /* 0FA88C 802D5EDC 27BD0038 */   addiu $sp, $sp, 0x38
 
+glabel func_802D5EE0
 /* 0FA890 802D5EE0 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0FA894 802D5EE4 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 0FA898 802D5EE8 8C82000C */  lw    $v0, 0xc($a0)
@@ -83,6 +84,7 @@ glabel FadeInMusic
 /* 0FA8D0 802D5F20 03E00008 */  jr    $ra
 /* 0FA8D4 802D5F24 27BD0018 */   addiu $sp, $sp, 0x18
 
+glabel func_802D5F28
 /* 0FA8D8 802D5F28 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0FA8DC 802D5F2C AFB10014 */  sw    $s1, 0x14($sp)
 /* 0FA8E0 802D5F30 0080882D */  daddu $s1, $a0, $zero
@@ -115,6 +117,7 @@ glabel FadeInMusic
 /* 0FA94C 802D5F9C 03E00008 */  jr    $ra
 /* 0FA950 802D5FA0 27BD0020 */   addiu $sp, $sp, 0x20
 
+glabel func_802D5FA4
 /* 0FA954 802D5FA4 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0FA958 802D5FA8 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 0FA95C 802D5FAC 8C82000C */  lw    $v0, 0xc($a0)
@@ -129,6 +132,7 @@ glabel FadeInMusic
 /* 0FA980 802D5FD0 03E00008 */  jr    $ra
 /* 0FA984 802D5FD4 27BD0018 */   addiu $sp, $sp, 0x18
 
+glabel func_802D5FD8
 /* 0FA988 802D5FD8 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0FA98C 802D5FDC AFBF0010 */  sw    $ra, 0x10($sp)
 /* 0FA990 802D5FE0 0C052B69 */  jal   func_8014ADA4
@@ -138,6 +142,7 @@ glabel FadeInMusic
 /* 0FA9A0 802D5FF0 03E00008 */  jr    $ra
 /* 0FA9A4 802D5FF4 27BD0018 */   addiu $sp, $sp, 0x18
 
+glabel func_802D5FF8
 /* 0FA9A8 802D5FF8 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0FA9AC 802D5FFC AFB10014 */  sw    $s1, 0x14($sp)
 /* 0FA9B0 802D6000 0080882D */  daddu $s1, $a0, $zero
@@ -161,6 +166,7 @@ glabel FadeInMusic
 /* 0FA9F8 802D6048 03E00008 */  jr    $ra
 /* 0FA9FC 802D604C 27BD0020 */   addiu $sp, $sp, 0x20
 
+glabel func_802D6050
 /* 0FAA00 802D6050 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0FAA04 802D6054 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 0FAA08 802D6058 0C052B9B */  jal   func_8014AE6C
@@ -170,6 +176,7 @@ glabel FadeInMusic
 /* 0FAA18 802D6068 03E00008 */  jr    $ra
 /* 0FAA1C 802D606C 27BD0018 */   addiu $sp, $sp, 0x18
 
+glabel func_802D6070
 /* 0FAA20 802D6070 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0FAA24 802D6074 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 0FAA28 802D6078 0C052BBE */  jal   func_8014AEF8
@@ -179,6 +186,7 @@ glabel FadeInMusic
 /* 0FAA38 802D6088 03E00008 */  jr    $ra
 /* 0FAA3C 802D608C 27BD0018 */   addiu $sp, $sp, 0x18
 
+glabel func_802D6090
 /* 0FAA40 802D6090 27BDFFE0 */  addiu $sp, $sp, -0x20
 /* 0FAA44 802D6094 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0FAA48 802D6098 0080882D */  daddu $s1, $a0, $zero
@@ -202,6 +210,7 @@ glabel FadeInMusic
 /* 0FAA90 802D60E0 03E00008 */  jr    $ra
 /* 0FAA94 802D60E4 27BD0020 */   addiu $sp, $sp, 0x20
 
+glabel func_802D60E8
 /* 0FAA98 802D60E8 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0FAA9C 802D60EC AFBF0010 */  sw    $ra, 0x10($sp)
 /* 0FAAA0 802D60F0 8C82000C */  lw    $v0, 0xc($a0)

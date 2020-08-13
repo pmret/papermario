@@ -94,7 +94,6 @@ s32 RemoveKeyItemAt(script_context* script, s32 initialCall) {
     s16* ptrTemp = D_8010F304;
 
     ptrTemp[index] = 0;
-
     return 2;
 }
 
@@ -104,16 +103,80 @@ s32 RemoveItemAt(script_context* script, s32 initialCall) {
     s16* ptrTemp = D_8010F444;
     
     ptrTemp[index] = 0;
-
     sort_items();
     return 2;
 }
 
-INCLUDE_ASM(code_fa4c0_len_3bf0, AddKeyItem);
+s32 AddKeyItem(script_context* script, s32 initialCall) {
+    s32* ptrReadPos = script->ptrReadPos;
+    s32 value = *ptrReadPos++;
+    player_data* playerData = &gPlayerData;
+    s32 itemID = get_variable(script, value);
+    s32 i;
 
-INCLUDE_ASM(code_fa4c0_len_3bf0, HasKeyItem);
+    if (itemID == FORTRESS_KEY) {
+        playerData->fortressKeyCount++;
+        return 2;
+    }
 
-INCLUDE_ASM(code_fa4c0_len_3bf0, FindKeyItem);
+    for (i=0; i < ARRAY_COUNT(playerData->keyItems); i++) {
+        if (playerData->keyItems[i] == 0) {
+            break;
+        }
+    }
+
+    if (i < ARRAY_COUNT(playerData->keyItems)) {
+        playerData->keyItems[i] = itemID;
+    }
+    return 2;
+}
+
+s32 func_802D6954(void) {
+    func_800E01A4();
+    disable_player_physics();
+    func_800EF600();
+    D_8009A650[0] &= ~0x40;
+    return 2;
+}
+
+s32 HasKeyItem(script_context* script, s32 initialCall) {
+    s32* ptrReadPos = script->ptrReadPos;
+    s32 itemID = get_variable(script, *ptrReadPos++);
+    s32 value = *ptrReadPos++;
+    player_data* playerData = &gPlayerData;
+    s32 i;
+    
+    for(i=0; i < ARRAY_COUNT(playerData->keyItems); i++) {
+        if (playerData->keyItems[i] == itemID) {
+            break;
+        }
+    }
+    set_variable(script, value, i < ARRAY_COUNT(playerData->keyItems));
+    return 2;
+}
+
+s32 FindKeyItem(script_context* script, s32 initialCall) {
+    s32* ptrReadPos = script->ptrReadPos;
+    s32 itemID = get_variable(script, *ptrReadPos++);
+    s32 value = *ptrReadPos++;
+    player_data* playerData = &gPlayerData;
+    s32 i;
+    s32 itemIndex;
+
+    for(i=0; i < ARRAY_COUNT(playerData->keyItems); i++) {
+        if (playerData->keyItems[i] == itemID) {
+            break;
+        }
+    }
+
+    itemIndex = -1;
+    if (i != ARRAY_COUNT(playerData->keyItems)) {
+        itemIndex = i;
+    }
+
+    set_variable(script, value, itemIndex);
+    return 2;
+}
 
 s32 AddItem(script_context* script, s32 initialCall) {
     s32* ptrReadPos = script->ptrReadPos;
@@ -171,7 +234,6 @@ s32 SetItemPos(script_context* script, s32 initialCall) {
     ptrItemEntity->position[0] = x;
     ptrItemEntity->position[1] = y;
     ptrItemEntity->position[2] = z;
-
     return 2;
 }
 

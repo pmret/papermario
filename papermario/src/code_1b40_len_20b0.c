@@ -32,8 +32,6 @@ extern int D_802EB3D0[];
 extern u8 D_80074021;
 extern s32 D_8009A5D8;
 
-extern s32 D_8009A650[1];
-
 void dma_copy(void*, void*, void*);
 
 INCLUDE_ASM(code_1b40_len_20b0, step_game_loop);
