@@ -30,3 +30,21 @@ run `make setup` to set up tools and extract the rom
 
 ### Make
 run `make` to rebuild the rom. Get `OK`? If so, you're all set! Otherwise, please feel free to reach out to us in the discord.
+
+## FAQ
+* `make setup` failed with this error? One of the packages from the _Ubuntu and co (easy mode)_ script did not install correctly. Try to run as sudo `sudo su`, run the script again and append `--fix-missing` to it.
+```
+/bin/bash: mips-linux-gnu-as: command not found
+Makefile:92: recipe for target 'build/asm/boot.o' failed
+make: *** [build/asm/boot.o] Error 127
+```
+
+* `make` failed with this error? This is a Windows line ending issue run `git checkout checksum.sha1` to fix it.
+```
+sha1sum -c checksum.sha1
+sha1sum: 'papermario.z64'$'\r': No such file or directory
+: FAILED open or read
+sha1sum: WARNING: 1 listed file could not be read
+Makefile:118: recipe for target 'verify' failed
+make: *** [verify] Error 1
+```
