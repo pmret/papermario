@@ -15,7 +15,7 @@ void func_80147230(void) {
     D_8015C7C0 = D_8014F140;
 }
 
-void UpdateMusicPlayers(void) {
+void update_music_players(void) {
     struct_80147230* temp = &D_8015C7C0;
 
     switch (temp->unk2) {

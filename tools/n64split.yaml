@@ -1411,7 +1411,7 @@ labels:
   - [0x80145D70, "load_map_bg"]
   - [0x80145E28, "read_background_size"]
   - [0x80145E70, "set_background_size"]
-  - [0x80147264, "UpdateMusicPlayers"]
+  - [0x80147264, "update_music_players"]
   - [0x80149AB8, "_play_sound"]
   - [0x80149C6C, "stop_sound"]
   - [0x80149CB4, "play_sound"]

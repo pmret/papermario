@@ -119,7 +119,7 @@ s32 AddKeyItem(script_context* script, s32 initialCall) {
         return 2;
     }
 
-    for (i=0; i < ARRAY_COUNT(playerData->keyItems); i++) {
+    for (i = 0; i < ARRAY_COUNT(playerData->keyItems); i++) {
         if (playerData->keyItems[i] == 0) {
             break;
         }
@@ -146,7 +146,7 @@ s32 HasKeyItem(script_context* script, s32 initialCall) {
     player_data* playerData = &gPlayerData;
     s32 i;
     
-    for(i=0; i < ARRAY_COUNT(playerData->keyItems); i++) {
+    for(i = 0; i < ARRAY_COUNT(playerData->keyItems); i++) {
         if (playerData->keyItems[i] == itemID) {
             break;
         }
@@ -163,7 +163,7 @@ s32 FindKeyItem(script_context* script, s32 initialCall) {
     s32 i;
     s32 itemIndex;
 
-    for(i=0; i < ARRAY_COUNT(playerData->keyItems); i++) {
+    for(i = 0; i < ARRAY_COUNT(playerData->keyItems); i++) {
         if (playerData->keyItems[i] == itemID) {
             break;
         }

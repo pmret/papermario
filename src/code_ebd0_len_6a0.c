@@ -33,7 +33,7 @@ s16 func_80033830(add_val) {
 
     if (gameStatus->boot_alpha != 0xFF) {
         gameStatus->boot_alpha += add_val;
-        if ((gameStatus->boot_alpha >= 0x100)) {
+        if ((gameStatus->boot_alpha > 0xFF)) {
             gameStatus->boot_alpha = 0xFF;
         }
     } else {
@@ -44,15 +44,13 @@ s16 func_80033830(add_val) {
 
 
 void func_80033874(void) {
-    
     func_80137D88(0, (*gGameStatusPtr)->boot_alpha);
     func_80137E10(0, (*gGameStatusPtr)->boot_blue, (*gGameStatusPtr)->boot_green, (*gGameStatusPtr)->boot_red);
 }
 
-s8 start_battle_countdown(void) {
+void start_battle_countdown(void) {
     D_800A0900 = 5;
 }
-
 
 INCLUDE_ASM(code_ebd0_len_6a0, step_battle);
 INCLUDE_ASM(code_ebd0_len_6a0, func_80033B54);

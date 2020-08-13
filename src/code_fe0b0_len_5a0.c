@@ -46,15 +46,15 @@ s32 DemoJoystickRadial(script_context* script) {
 }
 
 s32 DemoJoystickXY(script_context* script) {
-    f32 a;
-    f32 b;
+    f32 x;
+    f32 y;
     s32* thisPos = script->ptrReadPos;
 
-    a = get_float_variable(script, *thisPos++);
-    b = get_float_variable(script, *thisPos++);
+    x = get_float_variable(script, *thisPos++);
+    y = get_float_variable(script, *thisPos++);
 
-    (*gGameStatusPtr)->demoStickX = a;
-    (*gGameStatusPtr)->demoStickY = b;
+    (*gGameStatusPtr)->demoStickX = x;
+    (*gGameStatusPtr)->demoStickY = y;
 
     return 2;
 }
