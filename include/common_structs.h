@@ -491,4 +491,22 @@ typedef struct {
     /* 0x0E */ u16 height;
 } bg_header; // size = 0x10
 
+typedef struct {
+    /* 0x00 */ s16 genericFlagIndex;
+    /* 0x02 */ s16 field_0x2;
+    /* 0x04 */ s16 crateFlagIndex;
+    /* 0x06 */ s16 panelFlagIndex;
+    /* 0x08 */ s32 colliderID;
+    /* 0x0C */ UNK_FUN_PTR(functionHandler);
+    /* 0x10 */ UNK_PTR scriptStart;
+    /* 0x14 */ script_context* runningScript;
+    /* 0x18 */ s32 priority;
+    /* 0x1C */ s32 scriptVars[3];
+    /* 0x28 */ s32 unk_28;
+    /* 0x2C */ s32 unk_2C;
+    /* 0x30 */ s8 unk_30;
+    /* 0x31 */ char unk_31[3];
+    /* 0x34 */ s32 runningScriptID;
+} trigger; // size = 0x38
+
 #endif

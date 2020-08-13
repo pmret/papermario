@@ -62,7 +62,7 @@ glabel step_game_loop
 /* 001C18 80026818 00000000 */   nop   
 /* 001C1C 8002681C 0C052952 */  jal   func_8014A548
 /* 001C20 80026820 00000000 */   nop   
-/* 001C24 80026824 0C051C99 */  jal   UpdateMusicPlayers
+/* 001C24 80026824 0C051C99 */  jal   update_music_players
 /* 001C28 80026828 00000000 */   nop   
 /* 001C2C 8002682C 0C0525CD */  jal   func_80149734
 /* 001C30 80026830 00000000 */   nop   

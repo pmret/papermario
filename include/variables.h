@@ -17,6 +17,12 @@ extern s16 D_8010CD12;
 extern s32 D_801595A0;
 extern s8 D_8014F12F;
 
+// Triggers
+/* 0x80151334 */ extern s16 gTriggerCount;
+/* 0x80159190 */ extern trigger gTriggerList1[64];
+/* 0x80159290 */ extern trigger gTriggerList2[64];
+/* 0x80159390 */ extern trigger** gCurrentTriggerListPtr[64];
+
 extern u16 gMapTransitionAlpha;
 extern u16 D_800A0942;
 extern s16 D_800A0944;
@@ -26,8 +32,6 @@ extern s16 D_80151308;
 extern s32 D_8009A650[1];
 
 extern s16 gCurrentDoorSoundsSet;
-
-
 
 extern UNK_TYPE D_800E92D8;
 extern UNK_TYPE D_80147474;
