@@ -43,6 +43,8 @@ make: *** [build/asm/boot.o] Error 127
 > One of the packages from the _Ubuntu and co (easy mode)_ script did not install correctly. Elevate your user permissions using `sudo su`, run the script again and append `--fix-missing` to it.
 > 
 
+<br />
+<br />
 
 * If you received the following error when running  `make`:
 ```
