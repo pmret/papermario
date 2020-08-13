@@ -91,18 +91,18 @@ INCLUDE_ASM(code_fa4c0_len_3bf0, PlaySoundAtF);
 s32 RemoveKeyItemAt(script_context* script, s32 initialCall) {
     s32* ptrReadPos = script->ptrReadPos;
     s32 index = get_variable(script, *ptrReadPos++);
-    s16* ptrTemp = D_8010F304;
+    s16* ptrKeyItems = (s16 *) &gPlayerData.keyItems;
 
-    ptrTemp[index] = 0;
+    ptrKeyItems[index] = 0;
     return 2;
 }
 
 s32 RemoveItemAt(script_context* script, s32 initialCall) {
     s32* ptrReadPos = script->ptrReadPos;
     s32 index = get_variable(script, *ptrReadPos++);
-    s16* ptrTemp = D_8010F444;
+    s16* ptrInvItems = (s16 *) &gPlayerData.invItems;
     
-    ptrTemp[index] = 0;
+    ptrInvItems[index] = 0;
     sort_items();
     return 2;
 }
@@ -181,7 +181,7 @@ s32 FindKeyItem(script_context* script, s32 initialCall) {
 s32 AddItem(script_context* script, s32 initialCall) {
     s32* ptrReadPos = script->ptrReadPos;
     s32 itemID = get_variable(script, *ptrReadPos++);
-    s32* ptrNextPos = *ptrReadPos++;
+    s32* ptrNextPos = (s32 *) *ptrReadPos++;
 
     set_variable(script, ptrNextPos, add_item(itemID));
     return 2;
@@ -205,13 +205,35 @@ INCLUDE_ASM(code_fa4c0_len_3bf0, MakeItemEntity);
 INCLUDE_ASM(code_fa4c0_len_3bf0, DropItemEntity);
 
 INCLUDE_ASM(code_fa4c0_len_3bf0, DropItemEntityB);
+/*
+// Close to working
+s32 DropItemEntityB(script_context* script, s32 initialCall) {
+    s32* ptrReadPos = script->ptrReadPos;
+    s32 itemID = get_variable(script, *ptrReadPos++);
+    s32 x = get_variable(script, *ptrReadPos++);
+    s32 y = get_variable(script, *ptrReadPos++);
+    s32 z = get_variable(script, *ptrReadPos++);
+    s32 itemSpawnMode = get_variable(script, *ptrReadPos++);
+    s32 pickupFlag = get_variable(script, *ptrReadPos++);
 
-INCLUDE_ASM(code_fa4c0_len_3bf0, RemoveItemEntity);
+    script->varTable[0] = make_item_entity_nodelay(itemID, x, y, z);
+    set_item_entity_flags(script, 0x4000);
+    return 2;
+}
+*/
+
+s32 RemoveItemEntity(script_context* script, s32 initialCall) {
+  s32* ptrReadPos = script->ptrReadPos;
+  s32 itemEntityIndex = get_variable(script, *ptrReadPos++);
+
+  remove_item_entity_by_index(itemEntityIndex);
+  return 2;
+}
 
 s32 AddBadge(script_context* script, s32 initialCall) {
   s32* ptrReadPos = script->ptrReadPos;
   s32 itemID = get_variable(script, *ptrReadPos++);
-  s32* ptrNextPos = *ptrReadPos++;
+  s32* ptrNextPos = (s32 *) *ptrReadPos++;
 
   set_variable(script, ptrNextPos, add_badge(itemID));
   return 2;
@@ -230,7 +252,7 @@ s32 SetItemPos(script_context* script, s32 initialCall) {
     y = get_variable(script, *ptrReadPos++);
     z = get_variable(script, *ptrReadPos++);
 
-    ptrItemEntity = get_item_entity(itemEntityIndex);
+    ptrItemEntity = (item_entity *) get_item_entity(itemEntityIndex);
     ptrItemEntity->position[0] = x;
     ptrItemEntity->position[1] = y;
     ptrItemEntity->position[2] = z;
@@ -255,6 +277,20 @@ s32 AddStarPieces(script_context* script, s32 initialCall) {
 }
 
 INCLUDE_ASM(code_fa4c0_len_3bf0, GetItemPower);
+/*
+// Close to working
+s32 GetItemPower(script_context* script, s32 initialCall) {
+    s32* ptrReadPos = script->ptrReadPos;
+    s32 itemID = get_variable(script, *ptrReadPos++);
+    s32* ptrNextPos = ptrReadPos++;
+    item_table_entry* item = &gItemTable[itemID];
+    
+    
+    set_variable(script, ptrNextPos++, item->potencyA);
+    set_variable(script, ptrNextPos++, item->potencyB);
+    return 2;
+}
+*/
 
 INCLUDE_ASM(code_fa4c0_len_3bf0, ShowGotItem);
 
@@ -266,6 +302,7 @@ INCLUDE_ASM(code_fa4c0_len_3bf0, ShowEmote);
 
 INCLUDE_ASM(code_fa4c0_len_3bf0, RemoveEffect);
 /*
+// Works
 s32 RemoveEffect(script_context* script, s32 initialCall) {
     s32* ptrReadPos = script->ptrReadPos;
 
@@ -273,26 +310,36 @@ s32 RemoveEffect(script_context* script, s32 initialCall) {
     return 2;
 }
 
+// Works
 s32 func_802D7B10(script_context* script, s32 initialCall) {
     s32* ptrReadPos = script->ptrReadPos;
-    s32 ptrValue = get_variable(script, *ptrReadPos++);
-    *ptrValue = (*ptrValue | 0x10);
+    s32* ptrValue = get_variable(script, *ptrReadPos++);
+
+    *ptrValue |= 0x10;
     return 2;
 }
 
+// Works
 s32 func_802D7B44(script_context* script, s32 initialCall) {
     s32* ptrReadPos = script->ptrReadPos;
-    s32 ptrValue = get_variable(script, *ptrReadPos++);
-    *((ptrValue + 0xC) + 0x14) = 10;
+    s32* ptrValue = get_variable(script, *ptrReadPos++);
+    s32* ptrTemp = ptrValue[3];
+
+    ptrTemp[5] = 10;
     return 2;
 }
 
+// Works
 s32 func_802D7B74(script_context* script, s32 initialCall) {
     s32* ptrReadPos = script->ptrReadPos;
-    s32 ptrValue = get_variable(script, *ptrReadPos++);
-    *((ptrValue + 0xC) + 0x30) = 5;
+    s32* ptrValue = get_variable(script, *ptrReadPos++);
+    s32* ptrTemp = ptrValue[3];
+
+    ptrTemp[11] = 5;
     return 2;
 }
+
+// More functions still in RemoveEffect.s but the ones above are matching properly
 */
 
 INCLUDE_ASM(code_fa4c0_len_3bf0, ShowSleepBubble);
