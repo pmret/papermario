@@ -16,7 +16,7 @@ INCLUDE_ASM(code_111f0_len_860, func_80035EEC);
 void func_800360FC(void) {
     game_status* gameStatus = *gGameStatusPtr;
 
-    if (gameStatus->unk_AC == 2) {
+    if (gameStatus->loadMenuState == 2) {
         func_800E973C();
     }
 }
@@ -28,11 +28,11 @@ void func_80036130(void) {
     D_800A0942 = 0x14;
     D_800A0944 = 0x00;
 
-    if (gameStatus->unk_88 != gameStatus->unk_86) {
-        gameStatus->unk_8A = 0x01;
-        gameStatus->unk_88 = gameStatus->unk_86;
+    if (gameStatus->prevArea != gameStatus->areaID) {
+        gameStatus->changedArea = 1;
+        gameStatus->prevArea = gameStatus->areaID;
     } else {
-        gameStatus->unk_8A = 0;
+        gameStatus->changedArea = 0;
     }
 }
 

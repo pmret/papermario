@@ -5,63 +5,91 @@
 #include "types.h"
 
 typedef struct {
-    /* 0x000 */ s16 unk_00;
-    /* 0x002 */ s16 unk_02;
-    /* 0x004 */ char unk_04[0x44];
+    /* 0x000 */ u32 currentButtons;
+    /* 0x004 */ u32 altCurrentButtons; /* used for battle when flag 80000 set */
+    /* 0x008 */ char unk_08[0x8];
+    /* 0x010 */ u32 pressedButtons; /* 1 for the frame button begins to be held */
+    /* 0x014 */ u32 altPressedButtons; /* used for battle when flag 80000 set */
+    /* 0x018 */ char unk_18[0x8];
+    /* 0x020 */ u32 heldButtons; /* 1 every 4th frame during hold */
+    /* 0x024 */ u32 altHeldButtons; /* used for battle when flag 80000 set */
+    /* 0x028 */ char unk_28[0x8];
+    /* 0x030 */ u32 prevButtons; /* from previous frame */
+    /* 0x034 */ char unk_34[0xC];
+    /* 0x040 */ u8 stickX; /* with deadzone */
+    /* 0x041 */ u8 altStickX; /* used for battle when flag 80000 set */
+    /* 0x042 */ char unk_42[0x2];
+    /* 0x044 */ u8 stickY; /* with deadzone */
+    /* 0x045 */ u8 altStickY; /* used for battle when flag 80000 set */
+    /* 0x046 */ char unk_46[0x2];
     /* 0x048 */ u16 unk_48[4];
     /* 0x050 */ u16 unk_50[4];
     /* 0x058 */ char unk_58[0x10];
     /* 0x068 */ u16 demoButtonInput;
     /* 0x06A */ s8 demoStickX;
     /* 0x06B */ s8 demoStickY;
-    /* 0x06C */ char unk_6C[0x4];
-    /* 0x070 */ s8 unk_70;
-    /* 0x071 */ s8 demoState;
-    /* 0x072 */ s8 unk_72;
-    /* 0x073 */ char unk_73[2];
+    /* 0x06C */ u32* mainScriptID;
+    /* 0x070 */ s8 isBattle;
+    /* 0x071 */ u8 demoState; /* 0 = not demo, 1 = map demo, 2 = demo transition */
+    /* 0x072 */ u8 nextDemoScene;
+    /* 0x073 */ char unk_73[0x2];
     /* 0x075 */ s8 unk_75;
-    /* 0x076 */ char unk_76[3];
+    /* 0x076 */ char unk_76[0x3];
     /* 0x079 */ s8 unk_79;
     /* 0x07A */ s8 musicEnabled;
     /* 0x07B */ char unk_7B;
     /* 0x07C */ s8 unk_7C;
-    /* 0x07D */ char unk_7D[4];
+    /* 0x07D */ char unk_7D;
+    /* 0x07E */ u8 peachFlags; /* 1 = peach, 2 = transformed, 4 = has umbrella */
+    /* 0x07F */ u8 peachDisguise; /* 1 = koopatrol, 2 = hammer bros, 3 = clubba */
+    /* 0x080 */ char unk_80;
     /* 0x081 */ s8 unk_81;
     /* 0x082 */ s8 unk_82;
     /* 0x083 */ s8 unk_83;
-    /* 0x084 */ char unk_84[2];
-    /* 0x086 */ s16 unk_86;
-    /* 0x088 */ s16 unk_88;
-    /* 0x08A */ s16 unk_8A;
+    /* 0x084 */ char unk_84[0x2];
+    /* 0x086 */ s16 areaID;
+    /* 0x088 */ s16 prevArea;
+    /* 0x08A */ s16 changedArea;
     /* 0x08C */ s16 mapID;
-    /* 0x08E */ char unk_8E[0x1A];
+    /* 0x08E */ s16 entryID;
+    /* 0x090 */ char unk_90[0x3];
+    /* 0x094 */ f32 exitAngle;
+    /* 0x098 */ f32 playerPos[3];
+    /* 0x0A4 */ f32 playerYaw;
     /* 0x0A8 */ s8 unk_A8;
     /* 0x0A9 */ char unk_A9;
     /* 0x0AA */ s8 unk_AA;
-    /* 0x0AB */ char unk_AB[1];
-    /* 0x0AC */ s8 unk_AC;
-    /* 0x0AD */ char unk_AD[0x09];
+    /* 0x0AB */ char unk_AB[0x1];
+    /* 0x0AC */ s8 loadMenuState;
+    /* 0x0AD */ u8 menuCounter;
+    /* 0x0AE */ char unk_AE[0x08];
     /* 0x0B6 */ s16 boot_alpha;
     /* 0x0B8 */ s16 boot_blue;
     /* 0x0BA */ s16 boot_green;
     /* 0x0BC */ s16 boot_red;
-    /* 0x0BE */ char unk_BE[0x76];
-    /* 0x134 */ u16 unk_134;
-    /* 0x136 */ char unk_136[0x6];
-    /* 0x13C */ s16 unk_13C;
-    /* 0x13E */ char unk_13E[0xA];
-    /* 0x148 */ s16 unk_148;
-    /* 0x14A */ s16 unk_14A;
-    /* 0x14C */ s16 unk_14C;
-    /* 0x14E */ s16 unk_14E;
-    /* 0x150 */ s16 unk_150;
-    /* 0x152 */ char unk_152[2];
-    /* 0x154 */ s32 unk_154;
-    /* 0x158 */ s32 unk_158;
+    /* 0x0BE */ char unk_BE[0x6A];
+    /* 0x128 */ f32 playerTraceNormal[3];
+    /* 0x134 */ u16 frameCounter;
+    /* 0x138 */ s32 nextRNG;
+    /* 0x13A */ char unk_13A[0x4];
+    /* 0x140 */ UNK_PTR shopItemData;
+    /* 0x144 */ UNK_PTR mapShop;
+    /* 0x148 */ s16 backgroundFlags;
+    /* 0x14A */ s16 backgroundMinW;
+    /* 0x14C */ s16 backgroundMinH;
+    /* 0x14E */ s16 backgroundMaxW;
+    /* 0x150 */ s16 backgroundMaxH;
+    /* 0x152 */ u16 backgroundXOffset;
+    /* 0x154 */ UNK_PTR backgroundRaster;
+    /* 0x158 */ UNK_PTR backgroundPalette;
     /* 0x15C */ s16 unk_15C;
-    /* 0x15E */ char unk_15E[0xA];
-    /* 0x168 */ s32 unk_168;
-} game_status;
+    /* 0x15E */ char unk_15E[0x2];
+    /* 0x160 */ s16 savedPos[3];
+    /* 0x166 */ s8 saveSlot;
+    /* 0x167 */ u8 loadType; /* 0 = from map, 1 = from main menu */
+    /* 0x168 */ s32 saveCount;
+    /* 0x16C */ char unk_16C[0x10];
+} game_status; // size = 0x178
 
 typedef enum eItemEntityState {
     CollisionWithPlayer=3,
@@ -483,8 +511,8 @@ typedef struct {
 } script_context; // size = 0x168;
 
 typedef struct {
-    /* 0x00 */ u32 palette;
-    /* 0x04 */ u32 raster;
+    /* 0x00 */ u32 raster;
+    /* 0x04 */ u32 palette;
     /* 0x08 */ u16 startX;
     /* 0x0A */ u16 startY;
     /* 0x0C */ u16 width;

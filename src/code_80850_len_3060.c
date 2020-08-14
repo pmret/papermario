@@ -283,7 +283,7 @@ void coin_counter_draw_content(UNK_TYPE arg0, s32 posX, s32 posY) {
     ui_status* uiStatus = &gUIStatus;
     s32 iconIndex;
 
-    if ((gPlayerData.coins != uiStatus->displayCoins) && (((*gGameStatusPtr)->unk_134 % 3) == 0)) {
+    if ((gPlayerData.coins != uiStatus->displayCoins) && (((*gGameStatusPtr)->frameCounter % 3) == 0)) {
         play_sound(0x211);
     }
 
@@ -521,7 +521,7 @@ void status_menu_start_blinking_hp(void) {
     ui_status* uiStatus = &gUIStatus;
     ui_status* uiStatus2 = &gUIStatus;
 
-    if (gameStatus->unk_70 == 0) {
+    if (gameStatus->isBattle == 0) {
         uiStatus->hpBlinkTimer = 120;
     }
 
@@ -546,7 +546,7 @@ void status_menu_start_blinking_fp(void) {
     ui_status* uiStatus = &gUIStatus;
     ui_status* uiStatus2 = &gUIStatus;
 
-    if (gameStatus->unk_70 == 0) {
+    if (gameStatus->isBattle == 0) {
         uiStatus->fpBlinkTimer = 120;
     }
 
@@ -570,7 +570,7 @@ void status_menu_start_blinking_coins(void) {
     ui_status* uiStatus = &gUIStatus;
     ui_status* uiStatus2 = &gUIStatus;
 
-    if (gameStatus->unk_70 == 0) {
+    if (gameStatus->isBattle == 0) {
         uiStatus->coinsBlinkTimer = 120;
     }
 
