@@ -9,7 +9,7 @@ INCLUDE_ASM(code_dbd70_len_700, clear_trigger_data);
 
 //INCLUDE_ASM(code_dbd70_len_700, init_trigger_list);
 void init_trigger_list(void) {
-    if ((*gGameStatusPtr)->unk_70 == 0) {
+    if ((*gGameStatusPtr)->isBattle == 0) {
         *gCurrentTriggerListPtr = gTriggerList1;
     } else {
         *gCurrentTriggerListPtr = gTriggerList2;

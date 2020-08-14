@@ -3,24 +3,24 @@
 void func_800337D0(s16 new_alpha) {
     game_status* gameStatus = *gGameStatusPtr;
 
-    gameStatus->boot_alpha = new_alpha;
+    gameStatus->bootAlpha = new_alpha;
 }
 
 void func_800337E0(s16 arg0) {
     game_status* gameStatus = *gGameStatusPtr;
 
-    gameStatus->boot_red = arg0;
-    gameStatus->boot_green = arg0;
-    gameStatus->boot_blue = arg0;
+    gameStatus->bootRed = arg0;
+    gameStatus->bootGreen = arg0;
+    gameStatus->bootBlue = arg0;
 }
 
 s16 func_800337F8(subtract_val) {
     game_status* gameStatus = *gGameStatusPtr;
 
-    if (gameStatus->boot_alpha != 0) {
-        gameStatus->boot_alpha -= subtract_val;
-        if (gameStatus->boot_alpha << 16 < 0) {
-            gameStatus->boot_alpha = 0;
+    if (gameStatus->bootAlpha != 0) {
+        gameStatus->bootAlpha -= subtract_val;
+        if (gameStatus->bootAlpha << 16 < 0) {
+            gameStatus->bootAlpha = 0;
         }
     } else {
         return 1;
@@ -31,10 +31,10 @@ s16 func_800337F8(subtract_val) {
 s16 func_80033830(add_val) {
     game_status* gameStatus = *gGameStatusPtr;
 
-    if (gameStatus->boot_alpha != 0xFF) {
-        gameStatus->boot_alpha += add_val;
-        if ((gameStatus->boot_alpha > 0xFF)) {
-            gameStatus->boot_alpha = 0xFF;
+    if (gameStatus->bootAlpha != 0xFF) {
+        gameStatus->bootAlpha += add_val;
+        if ((gameStatus->bootAlpha > 0xFF)) {
+            gameStatus->bootAlpha = 0xFF;
         }
     } else {
         return 1;
@@ -44,8 +44,8 @@ s16 func_80033830(add_val) {
 
 
 void func_80033874(void) {
-    func_80137D88(0, (*gGameStatusPtr)->boot_alpha);
-    func_80137E10(0, (*gGameStatusPtr)->boot_blue, (*gGameStatusPtr)->boot_green, (*gGameStatusPtr)->boot_red);
+    func_80137D88(0, (*gGameStatusPtr)->bootAlpha);
+    func_80137E10(0, (*gGameStatusPtr)->bootBlue, (*gGameStatusPtr)->bootGreen, (*gGameStatusPtr)->bootRed);
 }
 
 void start_battle_countdown(void) {

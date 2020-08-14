@@ -9,18 +9,22 @@ BUILD_DIR = build
 
 SRC_DIRS := src src/os
 ASM_DIRS := asm asm/os
+INCLUDE_DIRS := include include/PR
 DATA_DIRS := bin
 COMPRESSED_DIRS := yay0
 MAP_DIRS := Map_Assets.FS
 BGM_DIRS := bgm
+STAR_ROD_STRUCT_DIRS := tools/star-rod/database/structs/ram tools/star-rod/database/structs/rom tools/star-rod/database/structs/wip
 
 # Source code files
 C_FILES := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))
 S_FILES := $(foreach dir,$(ASM_DIRS),$(wildcard $(dir)/*.s))
+H_FILES := $(foreach dir,$(INCLUDE_DIRS),$(wildcard $(dir)/*.h))
 DATA_FILES := $(foreach dir,$(DATA_DIRS),$(wildcard $(dir)/*.bin))
 COMPRESSED_FILES := $(foreach dir,$(COMPRESSED_DIRS),$(wildcard $(dir)/*.yay0)) 
 MAP_FILES := $(foreach dir,$(MAP_DIRS),$(wildcard $(dir)/*.FS)) 
 BGM_FILES := $(foreach dir,$(BGM_DIRS),$(wildcard $(dir)/*.bgm))
+STAR_ROD_STRUCT_FILES := $(foreach dir,$(STAR_ROD_STRUCT_DIRS),$(wildcard $(dir)/*.struct))
 
 # Object files
 O_FILES := $(foreach file,$(C_FILES),$(BUILD_DIR)/$(file:.c=.o)) \
@@ -82,6 +86,9 @@ setup: clean submodules n64split split
 
 print-% : ; $(info $* is a $(flavor $*) variable set to [$($*)]) @true
 
+include/common_structs.h: tools/starrod_structs_to_h.py $(STAR_ROD_STRUCT_FILES)
+	python3 tools/starrod_structs_to_h.py
+
 $(BUILD_DIR):
 	mkdir $(BUILD_DIR)
 
@@ -91,7 +98,7 @@ $(BUILD_DIR)/$(TARGET).elf: $(O_FILES) $(LD_SCRIPT)
 $(BUILD_DIR)/%.o: %.s
 	$(AS) $(ASFLAGS) -o $@ $<
 
-$(BUILD_DIR)/%.o: %.c
+$(BUILD_DIR)/%.o: %.c $(H_FILES)
 	cpp $(CPPFLAGS) $< | $(CC) $(CFLAGS) -o - | $(OLD_AS) $(OLDASFLAGS) - -o $@
 
 $(BUILD_DIR)/%.o: %.bin

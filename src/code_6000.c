@@ -35,7 +35,7 @@ s32 func_8002ACDC(void) {
 }
 
 s32 heap_malloc(s32 size) {
-    if ((*gGameStatusPtr)->unk_70 == 0) {
+    if ((*gGameStatusPtr)->isBattle == 0) {
         return general_heap_malloc(size);
     } else {
         return _heap_malloc(&D_803DA800, size);
@@ -43,7 +43,7 @@ s32 heap_malloc(s32 size) {
 }
 
 s32 heap_free(s32 size) {
-    if ((*gGameStatusPtr)->unk_70 != 0) {
+    if ((*gGameStatusPtr)->isBattle != 0) {
         return _heap_free(&D_803DA800, size);
     } else {
         return general_heap_free(size);
@@ -56,7 +56,7 @@ INCLUDE_ASM(code_6000, collision_heap_malloc);
 
 INCLUDE_ASM(code_6000, collision_heap_free);
 /*s32 collision_heap_free(s32 size) {
-    s32 unk_70 = (*gGameStatusPtr)->unk_70;
+    s32 isBattle = (*gGameStatusPtr)->isBattle;
 
-    return _heap_free((unk_70 == 0) ? (&D_80268000) : (&D_803DA800), size);
+    return _heap_free((isBattle == 0) ? (&D_80268000) : (&D_803DA800), size);
 }*/
