@@ -1,25 +1,26 @@
 #include "common.h"
 
-INCLUDE_ASM(code_dc470_len_14c0, load_map_bg);
-/* close match
-void load_map_bg (s32 arg0) {
-    s32 tempvar0 = arg0;
-    s32 flowerfields_bg1 = 0x80140EE0;
-    s32 tempvar3 = get_variable(0, 0xF5DE0180);
-    if (tempvar0 == 0) {
-        return;
-    }else{
-        if (tempvar3 > 0x0034) {
-            if (strcmp(tempvar0, 0x8014F120) == 0) {
-                tempvar0 = flowerfields_bg1;
-            }
-            load_asset_by_name (tempvar0, 0);
+void load_map_bg(u8* optAssetName) {
+    UNK_PTR compressedData;
+    u32 assetSize;
+    u8* assetName;
+
+    if (!optAssetName) return;
+    assetName = optAssetName;
+
+    // StoryProgress check
+    if (get_variable(0, 0xF5DE0180) >= 0x35) {
+        // Use sunny Flower Fields bg rather than cloudy
+        // TODO: these globals should be string literals
+        if (!strcmp(assetName, &gCloudyFlowerFieldsBg)) {
+            assetName = &gSunnyFlowerFieldsBg;
         }
     }
-        decode_yay0(tempvar0, 0x80200000);
-        general_heap_free(tempvar0);
+
+    compressedData = load_asset_by_name(assetName, &assetSize);
+    decode_yay0(compressedData, &gBackgroundImage);
+    general_heap_free(compressedData);
 }
-*/
 
 void func_80145DF8(void) {
     game_status* gameStatus = *gGameStatusPtr;
