@@ -1241,6 +1241,15 @@ typedef struct tile_descriptor {
     /* 0x2F */ u8 filtering;
 } tile_descriptor; // size = 0x30
 
+typedef struct {
+    /* 0x00 */ u32 palette;
+    /* 0x04 */ u32 raster;
+    /* 0x08 */ u16 startX;
+    /* 0x0A */ u16 startY;
+    /* 0x0C */ u16 width;
+    /* 0x0E */ u16 height;
+} bg_header; // size = 0x10
+
 typedef struct model_group_data {
     /* 0x00 */ UNK_PTR transformMatrix;
     /* 0x04 */ UNK_PTR lightingGroup;

@@ -37,8 +37,8 @@ void read_background_size(bg_header *bg) {
     gameStatus->backgroundMaxH = bg->height;
     gameStatus->backgroundMinW = bg->startX;
     gameStatus->backgroundMinH = bg->startY;
-    gameStatus->backgroundRaster = bg->palette; // wtf?
-    gameStatus->backgroundPalette = bg->raster;
+    gameStatus->backgroundRaster = bg->raster;
+    gameStatus->backgroundPalette = bg->palette;
     gameStatus->enableBackground |= 1;
 }
 
