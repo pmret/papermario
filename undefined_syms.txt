@@ -3,7 +3,9 @@ gUIStatus = 0x8010EF58;
 gPlayerData = 0x8010F290;
 gPlayerStatus = 0x8010EFC8;
 gItemTable = 0x800878E0;
-gCurrentScriptList = 0x802DA890;
+gWorldScriptList = 0x802DA490;
+gBattleScriptList = 0x802DA690;
+gCurrentScriptListPtr = 0x802DA890;
 D_80147574 = 0x80147574;
 
 gMapTransitionAlpha = 0x800A0940;
