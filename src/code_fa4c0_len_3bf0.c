@@ -192,7 +192,28 @@ s32 func_802D6AF0(script_context* script, s32 initialCall) {
     return 2;
 }
 
-INCLUDE_ASM(code_fa4c0_len_3bf0, FindItem);
+s32 FindItem(script_context* script) {
+    s32* ptrReadPos = script->ptrReadPos;
+    s32 itemID = get_variable(script, *ptrReadPos++);
+    s32 value = *ptrReadPos++;
+    player_data* playerData = &gPlayerData;
+    s32 i;
+    s32 itemIndex;
+
+    for (i = 0; i < ARRAY_COUNT(playerData->invItems); i++) {
+        if (playerData->invItems[i] == itemID) {
+            break;
+        }
+    }
+
+    itemIndex = -1;
+    if (i != ARRAY_COUNT(playerData->invItems)) {
+        itemIndex = i;
+    }
+
+    set_variable(script, value, itemIndex);
+    return 2;
+}
 
 INCLUDE_ASM(code_fa4c0_len_3bf0, RemoveItem);
 
