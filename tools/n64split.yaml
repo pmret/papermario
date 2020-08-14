@@ -2215,7 +2215,7 @@ labels:
   - [0x802D6A98, "AddItem"]
   - [0x802D6B18, "FindItem"]
   - [0x802D6B9C, "RemoveItem"]
-  - [0x802D6C4C, "CountFortessKeys"]
+  - [0x802D6C4C, "CountFortressKeys"]
   - [0x802D6C94, "RemoveFortressKeys"]
   - [0x802D6CC0, "MakeItemEntity"]
   - [0x802D6DC0, "DropItemEntity"]
