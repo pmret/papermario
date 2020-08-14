@@ -215,7 +215,34 @@ s32 FindItem(script_context* script) {
     return 2;
 }
 
-INCLUDE_ASM(code_fa4c0_len_3bf0, RemoveItem);
+s32 RemoveItem(script_context* script) {
+    s32* ptrReadPos = script->ptrReadPos;
+    s32 itemID = get_variable(script, *ptrReadPos++);
+    s32 value = *ptrReadPos++;
+    player_data* playerData = &gPlayerData;
+    s32 i;
+    s32 itemIndex;
+
+    for (i = 0; i < ARRAY_COUNT(playerData->invItems); i++) {
+        if (playerData->invItems[i] == itemID) {
+            break;
+        }
+    }
+
+    itemIndex = -1;
+    if (i != ARRAY_COUNT(playerData->invItems)) {
+        itemIndex = i;
+    }
+
+    if (itemIndex >= 0) {
+        // Item was found, remove it
+        playerData->invItems[i] = 0; // FIXME: addu operand order
+    }
+    sort_items();
+
+    set_variable(script, value, itemIndex);
+    return 2;
+}
 
 INCLUDE_ASM(code_fa4c0_len_3bf0, CountFortessKeys);
 
