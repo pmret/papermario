@@ -10,11 +10,19 @@ extern player_data gPlayerData;
 extern player_status gPlayerStatus;
 extern game_status* gGameStatusPtr[1];
 extern item_table_entry gItemTable[364];
+
+extern script_context* gWorldScriptList[128];
+extern script_context* gBattleScriptList[128];
+extern script_context** gCurrentScriptListPtr[128];
+
 extern s8 D_800A0900;
 extern s16* D_80151328;
 extern s16 D_8010CD10;
 extern s16 D_8010CD12;
 extern s32 D_801595A0;
+extern char gCloudyFlowerFieldsBg[]; // "fla_bg"
+extern char gSunnyFlowerFieldsBg[]; // "flb_bg"
+extern bg_header gBackgroundImage;
 extern s8 D_8014F12F;
 
 // Triggers

@@ -29,7 +29,7 @@ void func_80036130(void) {
     D_800A0944 = 0x00;
 
     if (gameStatus->prevArea != gameStatus->areaID) {
-        gameStatus->changedArea = 0x01;
+        gameStatus->changedArea = 1;
         gameStatus->prevArea = gameStatus->areaID;
     } else {
         gameStatus->changedArea = 0;
