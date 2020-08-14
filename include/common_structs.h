@@ -448,7 +448,7 @@ typedef struct {
     /* 0x001 */ s8 currentArgc;
     /* 0x002 */ s8 currentOpcode;
     /* 0x003 */ s8 priority;
-    /* 0x004 */ s8 groupFlags;
+    /* 0x004 */ u8 groupFlags;
     /* 0x005 */ s8 blocked; /* 1 = blocking */
     /* 0x006 */ s8 loopDepth; /* how many nested loops we are in, >= 8 hangs forever */
     /* 0x007 */ s8 switchDepth; /* how many nested switches we are in, max = 8 */
@@ -476,7 +476,7 @@ typedef struct {
     /* 0x14C */ u32 ownerID; /* can be an npcID, a triggerID, a trigger ptr */
     /* 0x150 */ f32 timeScale;
     /* 0x154 */ f32 frameCounter;
-    /* 0x158 */ s32 unk_158;
+    /* 0x158 */ f32 unk_158;
     /* 0x15C */ s32* ptrFirstLine;
     /* 0x160 */ s32* ptrSavedPosition;
     /* 0x164 */ s32* ptrCurrentLine;

@@ -52,7 +52,7 @@ void* kill_script_by_ID(s32 id) {
     s32 i;
     script_context* scriptContextPtr;
 
-    for (i=0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
+    for (i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
         if (scriptContextPtr != NULL && scriptContextPtr->uniqueID == id) {
             kill_script(scriptContextPtr);
@@ -64,7 +64,7 @@ s32 kill_all_scripts(void) {
     s32 i;
     script_context* scriptContextPtr;
 
-    for(i=0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
+    for(i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
         if (scriptContextPtr != NULL) {
             kill_script(scriptContextPtr);
@@ -77,7 +77,7 @@ s32 does_script_exist(s32 id) {
     s32 i;
     script_context* scriptContextPtr;
 
-    for(i=0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
+    for(i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
         if (scriptContextPtr != NULL && scriptContextPtr->uniqueID == id) {
             return 1;
@@ -89,7 +89,7 @@ s32 does_script_exist(s32 id) {
 s32 does_script_exist_by_ref(script_context* script) {
     s32 i;
 
-    for(i=0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
+    for(i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
         if(script == (*gCurrentScriptListPtr)[i]) {
             return 1;
         }
@@ -145,7 +145,7 @@ void suspend_group_script(script_context* script, s32 groupFlags) {
         suspend_group_script(childScript, groupFlags);
     }
 
-    for(i=0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
+    for(i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
         if (scriptContextPtr != NULL && scriptContextPtr->parentScript == script) {
             suspend_group_script(scriptContextPtr, groupFlags);
@@ -166,7 +166,7 @@ void resume_group_script(script_context* script, s32 groupFlags) {
         resume_group_script(childScript, groupFlags);
     }
 
-    for(i=0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
+    for(i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
         if (scriptContextPtr != NULL && scriptContextPtr->parentScript == script) {
             suspend_group_script(scriptContextPtr, groupFlags);
@@ -182,7 +182,7 @@ s32 suspend_all_script(s32 id) {
     s32 i;
     script_context* scriptContextPtr;
 
-    for (i=0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
+    for (i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
         if (scriptContextPtr != NULL && scriptContextPtr->uniqueID == id) {
             suspend_group_script(scriptContextPtr, 0xEF);
@@ -194,7 +194,7 @@ s32 resume_all_script(s32 id) {
     s32 i;
     script_context* scriptContextPtr;
 
-    for (i=0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
+    for (i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
         if (scriptContextPtr != NULL && scriptContextPtr->uniqueID == id) {
             resume_group_script(scriptContextPtr, 0xEF);
@@ -206,7 +206,7 @@ void suspend_group_script_index(s32 id, s32 groupFlags) {
     s32 i;
     script_context* scriptContextPtr;
 
-    for (i=0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
+    for (i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
         if (scriptContextPtr != NULL && scriptContextPtr->uniqueID == id) {
             suspend_group_script(scriptContextPtr, groupFlags);
@@ -218,7 +218,7 @@ void resume_group_script_index(s32 id, s32 groupFlags) {
     s32 i;
     script_context* scriptContextPtr;
 
-    for (i=0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
+    for (i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
         if (scriptContextPtr != NULL && scriptContextPtr->uniqueID == id) {
             resume_group_script(scriptContextPtr, groupFlags);
@@ -230,7 +230,7 @@ s32 suspend_all_group(s32 groupFlags) {
     s32 i;
     script_context* scriptContextPtr;
 
-    for (i=0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
+    for (i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
         if (scriptContextPtr != NULL) {
             suspend_group_script(scriptContextPtr, groupFlags);
@@ -242,7 +242,7 @@ s32 resume_all_group(s32 groupFlags) {
     s32 i;
     script_context* scriptContextPtr;
 
-    for (i=0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
+    for (i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
         if (scriptContextPtr != NULL) {
             resume_group_script(scriptContextPtr, groupFlags);
@@ -255,7 +255,7 @@ void suspend_group_others(s32 script, s32 groupFlags) {
     s32 i;
     script_context* scriptContextPtr;
 
-    for (i=0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
+    for (i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
         if (scriptContextPtr != NULL && scriptContextPtr != script) {
             suspend_group_script(scriptContextPtr, groupFlags);
@@ -267,7 +267,7 @@ void resume_group_others(s32 script, s32 groupFlags) {
     s32 i;
     script_context* scriptContextPtr;
 
-    for (i=0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
+    for (i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
         if (scriptContextPtr != NULL && scriptContextPtr != script) {
             resume_group_script(scriptContextPtr, groupFlags);
@@ -283,7 +283,7 @@ script_context* get_script_by_id(s32 id) {
     s32 i;
     script_context* scriptContextPtr;
 
-    for (i=0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
+    for (i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
         if ((*gCurrentScriptListPtr)[i] != NULL) {
             scriptContextPtr = (*gCurrentScriptListPtr)[i];
             if (scriptContextPtr->uniqueID == id) {
@@ -325,7 +325,7 @@ void clear_script_flags(script_context* script, s32 flags) {
         clear_script_flags(childScript, flags);
     }
 
-    for(i=0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
+    for(i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
         if (scriptContextPtr != NULL && scriptContextPtr->parentScript == script) {
             clear_script_flags(script->parentScript, flags);
