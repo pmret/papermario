@@ -235,8 +235,9 @@ s32 RemoveItem(script_context* script) {
     }
 
     if (itemIndex >= 0) {
-        // Item was found, remove it
-        playerData->invItems[i] = 0; // FIXME: addu operand order
+        // This is `playerData->invItems[i]`, but we have to do weird
+        // pointer math to get the output asm to exactly match :/
+        *(playerData->invItems + i) = 0;
     }
     sort_items();
 
