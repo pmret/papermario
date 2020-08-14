@@ -10,6 +10,7 @@ extern player_data gPlayerData;
 extern player_status gPlayerStatus;
 extern game_status* gGameStatusPtr[1];
 extern item_table_entry gItemTable[364];
+extern s32* gCurrentScriptList;
 extern s8 D_800A0900;
 extern s16* D_80151328;
 extern s16 D_8010CD10;
