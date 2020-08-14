@@ -7,15 +7,15 @@
 typedef struct {
     /* 0x000 */ u32 currentButtons;
     /* 0x004 */ u32 altCurrentButtons; /* used for battle when flag 80000 set */
-    /* 0x008 */ char unk_08[4];
+    /* 0x008 */ char unk_08[8];
     /* 0x010 */ u32 pressedButtons; /* 1 for the frame button begins to be held */
     /* 0x014 */ u32 altPressedButtons; /* used for battle when flag 80000 set */
-    /* 0x018 */ char unk_18[4];
+    /* 0x018 */ char unk_18[8];
     /* 0x020 */ u32 heldButtons; /* 1 every 4th frame during hold */
     /* 0x024 */ u32 altHeldButtons; /* used for battle when flag 80000 set */
-    /* 0x028 */ char unk_28[4];
+    /* 0x028 */ char unk_28[8];
     /* 0x030 */ u32 prevButtons; /* from previous frame */
-    /* 0x034 */ char unk_34[8];
+    /* 0x034 */ char unk_34[12];
     /* 0x040 */ u8 stickX; /* with deadzone */
     /* 0x041 */ u8 altStickX; /* used for battle when flag 80000 set */
     /* 0x042 */ char unk_42[2];
