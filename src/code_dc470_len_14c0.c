@@ -1,9 +1,9 @@
 #include "common.h"
 
-void load_map_bg(u8* optAssetName) {
+void load_map_bg(char* optAssetName) {
     UNK_PTR compressedData;
     u32 assetSize;
-    u8* assetName;
+    char* assetName;
 
     if (optAssetName == NULL) return;
     assetName = optAssetName;
@@ -12,8 +12,8 @@ void load_map_bg(u8* optAssetName) {
     if (get_variable(0, 0xF5DE0180) >= 0x35) {
         // Use sunny Flower Fields bg rather than cloudy
         // TODO: these globals should be string literals
-        if (!strcmp(assetName, &gCloudyFlowerFieldsBg)) {
-            assetName = &gSunnyFlowerFieldsBg;
+        if (!strcmp(assetName, gCloudyFlowerFieldsBg)) {
+            assetName = gSunnyFlowerFieldsBg;
         }
     }
 

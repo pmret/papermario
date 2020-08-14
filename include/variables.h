@@ -15,8 +15,8 @@ extern s16* D_80151328;
 extern s16 D_8010CD10;
 extern s16 D_8010CD12;
 extern s32 D_801595A0;
-extern u8 gCloudyFlowerFieldsBg; // "fla_bg"
-extern u8 gSunnyFlowerFieldsBg; // "flb_bg"
+extern char gCloudyFlowerFieldsBg[]; // "fla_bg"
+extern char gSunnyFlowerFieldsBg[]; // "flb_bg"
 extern bg_header gBackgroundImage;
 extern s8 D_8014F12F;
 
