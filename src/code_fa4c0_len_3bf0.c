@@ -245,7 +245,12 @@ s32 RemoveItem(script_context* script, s32 initialCall) {
     return 2;
 }
 
-INCLUDE_ASM(code_fa4c0_len_3bf0, CountFortessKeys);
+s32 CountFortressKeys(script_context* script, s32 initialCall) {
+    s32 outVar = *script->ptrReadPos;
+
+    set_variable(script, outVar, get_fortress_key_count());
+    return 2;
+}
 
 INCLUDE_ASM(code_fa4c0_len_3bf0, RemoveFortressKeys);
 
