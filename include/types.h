@@ -8,7 +8,7 @@
 #define UNK_FUN_PTR(name) void(*name)(void)
 #define UNK_ARGS
 
-typedef s32 bytecode[];
+typedef s32* bytecode;
 
 typedef struct {
     /* 0x00 */ u32 raster;  // swap these?

@@ -38,8 +38,8 @@ void clear_player_data(void) {
         playerData->partners[i].enabled = 0;
         playerData->partners[i].level = 0;
         playerData->partners[i].unk_02[0] = 0;
+        playerData->partners[i].unk_02[1] = 0;
         playerData->partners[i].unk_02[2] = 0;
-        playerData->partners[i].unk_02[4] = 0;
     }
 
     for (i = ARRAY_COUNT(playerData->keyItems) - 1; i >= 0; i--) {
@@ -63,19 +63,19 @@ void clear_player_data(void) {
     }
 
     playerData->otherHitsTaken = 0;
-    playerData->unk_296[0] = 0;
+    playerData->unk_296 = 0;
     playerData->hitsTaken = 0;
     playerData->hitsBlocked = 0;
     playerData->playerFirstStrikes = 0;
     playerData->enemyFirstStrikes = 0;
     playerData->powerBounces = 0;
     playerData->battlesCount = 0;
-    playerData->unk_2A4[0x0] = 0;
-    playerData->unk_2A4[0x2] = 0;
-    playerData->unk_2A4[0x4] = 0;
-    playerData->unk_2A4[0x8] = 0;
-    playerData->unk_2A4[0xA] = 0;
-    playerData->unk_2A4[0xC] = 0;
+    playerData->unk_2A4[0] = 0;
+    playerData->unk_2A4[1] = 0;
+    playerData->unk_2A4[2] = 0;
+    playerData->unk_2A4[3] = 0;
+    playerData->unk_2AC = 0;
+    playerData->unk_2B0 = 0;
     playerData->idleFrameCounter = 0;
     playerData->totalCoinsEarned = 0;
     playerData->frameCounter = 0;
@@ -84,10 +84,10 @@ void clear_player_data(void) {
 
     for (i = 0; i < ARRAY_COUNT(playerData->unk_2C4); i++) {
         playerData->unk_2C4[i] = 0;
-        playerData->unk_2C4[i + 0xB0] = 0;
+        playerData->unk_2F4[i] = 0;
     }
 
-    playerData->unk_2C4[0x64] = 0;
+    playerData->unk_328 = 0;
     playerData->starPiecesCollected = 0;
     playerData->jumpGamePlays = 0;
     playerData->jumpGameTotal = 0;
@@ -521,7 +521,7 @@ void status_menu_start_blinking_hp(void) {
     ui_status* uiStatus = &gUIStatus;
     ui_status* uiStatus2 = &gUIStatus;
 
-    if (gameStatus->mainScriptID == 0) {
+    if (gameStatus->isBattle == 0) {
         uiStatus->hpBlinkTimer = 120;
     }
 
@@ -546,7 +546,7 @@ void status_menu_start_blinking_fp(void) {
     ui_status* uiStatus = &gUIStatus;
     ui_status* uiStatus2 = &gUIStatus;
 
-    if (gameStatus->mainScriptID == 0) {
+    if (gameStatus->isBattle == 0) {
         uiStatus->fpBlinkTimer = 120;
     }
 
@@ -570,7 +570,7 @@ void status_menu_start_blinking_coins(void) {
     ui_status* uiStatus = &gUIStatus;
     ui_status* uiStatus2 = &gUIStatus;
 
-    if (gameStatus->mainScriptID == 0) {
+    if (gameStatus->isBattle == 0) {
         uiStatus->coinsBlinkTimer = 120;
     }
 
@@ -666,6 +666,7 @@ void sync_status_menu(void) {
 void reset_status_menu(void) {
     player_data* playerData = &gPlayerData;
     ui_status* uiStatus = &gUIStatus;
+    s32 i;
 
     uiStatus->drawPosX = 12;
     uiStatus->drawPosY = -100;
@@ -697,10 +698,14 @@ void reset_status_menu(void) {
     uiStatus->displaySP = playerData->specialBarsFilled;
     uiStatus->unk_3B[1] = 0;
 
-    func_801452B4(uiStatus->hpIconIndex, uiStatus->hpIconIndex);
-    func_801452B4(uiStatus->heartIconIndex, uiStatus->heartIconIndex);
-    func_801452B4(uiStatus->fpIconIndex, uiStatus->fpIconIndex);
-    func_801452B4(uiStatus->flowerIconIndex, uiStatus->flowerIconIndex);
+    for (i = 0; i < 2; i++) {
+        func_801452B4(uiStatus->hpIconIndexes[i], uiStatus->hpIconIndexes[i]);
+    }
+
+    for (i = 0; i < 2; i++) {
+        func_801452B4(uiStatus->fpIconIndexes[i], uiStatus->fpIconIndexes[i]);
+    }
+    
     func_801452B4(uiStatus->coinIconIndex, uiStatus->coinIconIndex);
     func_801452B4(uiStatus->coinIconIndex2, uiStatus->coinIconIndex2);
     func_801452B4(uiStatus->starpointsIconIndex, uiStatus->starpointsIconIndex);

@@ -24,7 +24,7 @@ typedef struct cam_pos_settings {
 typedef struct partner_data {
     /* 0x00 */ u8 enabled;
     /* 0x01 */ u8 level;
-    /* 0x02 */ char unk_02[6];
+    /* 0x02 */ s16 unk_02[3];
 } partner_data; // size = 0x08
 
 typedef struct heap_node {
@@ -37,21 +37,21 @@ typedef struct heap_node {
 
 typedef struct player_data {
     /* 0x000 */ u8 bootsLevel;
-    /* 0x001 */ u8 hammerLevel;
-    /* 0x002 */ u8 curHP;
-    /* 0x003 */ u8 curMaxHP;
+    /* 0x001 */ s8 hammerLevel;
+    /* 0x002 */ s8 curHP;
+    /* 0x003 */ s8 curMaxHP;
     /* 0x004 */ u8 hardMaxHP;
-    /* 0x005 */ u8 curFP;
-    /* 0x006 */ u8 curMaxFP;
+    /* 0x005 */ s8 curFP;
+    /* 0x006 */ s8 curMaxFP;
     /* 0x007 */ u8 hardMaxFP;
     /* 0x008 */ u8 maxBP;
     /* 0x009 */ u8 level;
     /* 0x00A */ u8 hasActionCommands;
     /* 0x00B */ char unk_0B;
     /* 0x00C */ s16 coins;
-    /* 0x00E */ u8 fortressKeyCount;
+    /* 0x00E */ s8 fortressKeyCount;
     /* 0x00F */ u8 starPieces;
-    /* 0x010 */ u8 starPoints;
+    /* 0x010 */ s8 starPoints;
     /* 0x011 */ char unk_11;
     /* 0x012 */ u8 currentPartner;
     /* 0x013 */ char unk_13;
@@ -66,26 +66,31 @@ typedef struct player_data {
     /* 0x28A */ u8 merleeCastsLeft;
     /* 0x28B */ char unk_28B;
     /* 0x28C */ s16 merleeTurnCount;
-    /* 0x28E */ u8 maxStarPower;
+    /* 0x28E */ s8 maxStarPower;
     /* 0x28F */ char unk_28F;
     /* 0x290 */ s16 specialBarsFilled;
     /* 0x292 */ char unk_292[2];
     /* 0x294 */ s16 otherHitsTaken;
-    /* 0x296 */ char unk_296[2];
+    /* 0x296 */ s16 unk_296;
     /* 0x298 */ s16 hitsTaken;
     /* 0x29A */ s16 hitsBlocked;
     /* 0x29C */ s16 playerFirstStrikes;
     /* 0x29E */ s16 enemyFirstStrikes;
     /* 0x2A0 */ s16 powerBounces;
     /* 0x2A2 */ s16 battlesCount;
-    /* 0x2A4 */ char unk_2A4[16];
-    /* 0x2B4 */ s32 totalCoinsEarned;
+    /* 0x2A4 */ s16 unk_2A4[4];
+    /* 0x2AC */ s32 unk_2AC;
+    /* 0x2B0 */ s32 unk_2B0;
+    /* 0x2B4 */ u32 totalCoinsEarned;
     /* 0x2B8 */ s16 idleFrameCounter; /* frames with no inputs, overflows ever ~36 minutes of idling */
     /* 0x2BA */ char unk_2BA[2];
     /* 0x2BC */ s32 frameCounter; /* increases by 2 per frame */
     /* 0x2C0 */ s16 quizzesAnswered;
     /* 0x2C2 */ s16 quizzesCorrect;
-    /* 0x2C4 */ char unk_2C4[104];
+    /* 0x2C4 */ s32 unk_2C4[12];
+    /* 0x2F4 */ s32 unk_2F4[12];
+    /* 0x324 */ char unk_324;
+    /* 0x328 */ s32 unk_328;
     /* 0x32C */ s16 starPiecesCollected;
     /* 0x32E */ s16 jumpGamePlays;
     /* 0x330 */ s32 jumpGameTotal; /* all-time winnings, max = 99999 */
@@ -114,7 +119,7 @@ typedef struct trigger {
 typedef struct enemy {
     /* 0x00 */ s32 flags;
     /* 0x04 */ u8 encounterIndex;
-    /* 0x05 */ u8 encountered;
+    /* 0x05 */ s8 encountered;
     /* 0x06 */ u8 scriptGroup; /* scripts launched for this npc controller will be assigned this group */
     /* 0x07 */ char unk_07;
     /* 0x08 */ s16 npcID;
@@ -297,10 +302,8 @@ typedef struct MenuIcon {
 } MenuIcon; // size = 0x54
 
 typedef struct ui_status {
-    /* 0x00 */ s32 hpIconIndex;
-    /* 0x04 */ s32 heartIconIndex;
-    /* 0x08 */ s32 fpIconIndex;
-    /* 0x0C */ s32 flowerIconIndex;
+    /* 0x00 */ s32 hpIconIndexes[2];
+    /* 0x08 */ s32 fpIconIndexes[2];
     /* 0x10 */ s32 coinIconIndex;
     /* 0x14 */ s32 coinIconIndex2; /* purpose? */
     /* 0x18 */ s32 starpointsIconIndex;
@@ -313,28 +316,28 @@ typedef struct ui_status {
     /* 0x34 */ s16 drawPosX; /* overall x-offset for whole UI */
     /* 0x36 */ s16 drawPosY; /* modulated as it appears, goes away */
     /* 0x38 */ s16 showTimer;
-    /* 0x3A */ u8 hidden;
-    /* 0x3B */ char unk_3B[2];
+    /* 0x3A */ s8 hidden;
+    /* 0x3B */ s8 unk_3B[2];
     /* 0x3D */ u8 displayHP;
     /* 0x3E */ u8 displayFP;
     /* 0x3F */ char unk_3F;
     /* 0x40 */ s16 displayCoins;
     /* 0x42 */ s16 displayStarpoints;
-    /* 0x44 */ u8 ignoreChanges; /* set != 0 to prevent automatic opening from HP/FP changes */
-    /* 0x45 */ char unk_45[2];
-    /* 0x47 */ u8 disabled; /* set != 0 for menu to be disabled completely */
+    /* 0x44 */ s8 ignoreChanges; /* set != 0 to prevent automatic opening from HP/FP changes */
+    /* 0x45 */ s8 unk_45[2];
+    /* 0x47 */ s8 disabled; /* set != 0 for menu to be disabled completely */
     /* 0x48 */ s16 displaySP;
-    /* 0x4A */ u8 hpBlinking; /* bool */
+    /* 0x4A */ s8 hpBlinking; /* bool */
     /* 0x4B */ u8 hpBlinkCounter;
     /* 0x4C */ u8 hpBlinkTimer; /* until stop */
-    /* 0x4D */ u8 fpBlinking; /* bool */
+    /* 0x4D */ s8 fpBlinking; /* bool */
     /* 0x4E */ u8 fpBlinkCounter;
     /* 0x4F */ u8 fpBlinkTimer; /* until stop */
-    /* 0x50 */ u8 spBlinking;
+    /* 0x50 */ s8 spBlinking;
     /* 0x51 */ u8 spBlinkCounter;
-    /* 0x52 */ u8 starpointsBlinking; /* bool */
+    /* 0x52 */ s8 starpointsBlinking; /* bool */
     /* 0x53 */ u8 starpointsBlinkCounter;
-    /* 0x54 */ u8 coinsBlinking; /* bool */
+    /* 0x54 */ s8 coinsBlinking; /* bool */
     /* 0x55 */ u8 coinsBlinkCounter;
     /* 0x56 */ u8 coinsBlinkTimer; /* until stop */
     /* 0x57 */ char unk_57[3];
@@ -344,7 +347,7 @@ typedef struct ui_status {
     /* 0x60 */ s32 iconIndex11;
     /* 0x64 */ s32 iconIndex12;
     /* 0x68 */ s32 iconIndex13;
-    /* 0x6C */ char unk_6C[4];
+    /* 0x6C */ s8 unk_6C[4];
 } ui_status; // size = 0x70
 
 typedef struct collider {
@@ -795,11 +798,11 @@ typedef struct game_status {
     /* 0x045 */ u8 altStickY; /* input used for batte when flag 80000 set */
     /* 0x046 */ char unk_46[34];
     /* 0x068 */ s16 demoButtonInput;
-    /* 0x06A */ u8 demoStickX;
-    /* 0x06B */ u8 demoStickY;
+    /* 0x06A */ s8 demoStickX;
+    /* 0x06B */ s8 demoStickY;
     /* 0x06C */ s32 mainScriptID;
-    /* 0x070 */ u8 isBattle;
-    /* 0x071 */ u8 demoState; /* (0 = not demo, 1 = map demo, 2 = demo map changing) */
+    /* 0x070 */ s8 isBattle;
+    /* 0x071 */ s8 demoState; /* (0 = not demo, 1 = map demo, 2 = demo map changing) */
     /* 0x072 */ u8 nextDemoScene; /* which part of the demo to play next */
     /* 0x073 */ u8 contBitPattern;
     /* 0x074 */ char unk_74[4];
@@ -812,8 +815,7 @@ typedef struct game_status {
     /* 0x080 */ char unk_80[6];
     /* 0x086 */ s16 areaID; /* Created by retype action */
     /* 0x088 */ s16 prevArea;
-    /* 0x08A */ u8 changedArea; /* (1 = yes) */
-    /* 0x08B */ char unk_8B;
+    /* 0x08A */ s16 changedArea; /* (1 = yes) */
     /* 0x08C */ s16 mapID;
     /* 0x08E */ s16 entryID;
     /* 0x090 */ char unk_90[4];
@@ -821,7 +823,7 @@ typedef struct game_status {
     /* 0x098 */ f32 playerPos[3];
     /* 0x0A4 */ f32 playerYaw;
     /* 0x0A8 */ char unk_A8[4];
-    /* 0x0AC */ u8 loadMenuState;
+    /* 0x0AC */ s8 loadMenuState;
     /* 0x0AD */ u8 menuCounter;
     /* 0x0AE */ char unk_AE[8];
     /* 0x0B6 */ s16 bootAlpha;
@@ -830,7 +832,7 @@ typedef struct game_status {
     /* 0x0BC */ s16 bootRed;
     /* 0x0BE */ char unk_BE[106];
     /* 0x128 */ f32 playerTraceNormal[3];
-    /* 0x134 */ s16 frameCounter;
+    /* 0x134 */ u16 frameCounter;
     /* 0x136 */ char unk_136[2];
     /* 0x138 */ s32 nextRNG;
     /* 0x13C */ char unk_13C[4];
@@ -844,7 +846,8 @@ typedef struct game_status {
     /* 0x152 */ s16 backgroundXOffset; /* (used for parallax scroll) */
     /* 0x154 */ UNK_PTR backgroundRaster;
     /* 0x158 */ UNK_PTR backgroundPalette;
-    /* 0x15C */ char unk_15C[4];
+    /* 0x15C */ s16 unk_15C;
+    /* 0x15E */ char unk_15E[0x2];
     /* 0x160 */ s16 savedPos[3];
     /* 0x166 */ s8 saveSlot;
     /* 0x167 */ u8 loadType; /* (0 = from map, 1 = from main menu) */
