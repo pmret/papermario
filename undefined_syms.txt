@@ -1,4 +1,3 @@
-
 gGameStatusPtr = 0x8007419C;
 gUIStatus = 0x8010EF58;
 gPlayerData = 0x8010F290;
