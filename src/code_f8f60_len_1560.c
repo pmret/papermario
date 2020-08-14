@@ -1,6 +1,22 @@
 #include "common.h"
 
-INCLUDE_ASM(code_f8f60_len_1560, MakeLerp);
+s32 MakeLerp(script_context* script, s32 initialCall) {
+    s32* ptrReadPos = script->ptrReadPos;
+    s32* ptrNextPos = *ptrReadPos++;
+    s32* ptrNextPos2;
+    s32* ptrNextPos3;
+    s32* ptrNextPos4;
+
+    script->varTable[12] = get_variable(script, ptrNextPos);
+    ptrNextPos2 = *ptrReadPos++;
+    script->varTable[13] = get_variable(script, ptrNextPos2);
+    ptrNextPos3 = *ptrReadPos++;
+    script->varTable[15] = get_variable(script, ptrNextPos3);
+    ptrNextPos4 = *ptrReadPos++;
+    script->varTable[11] = get_variable(script, ptrNextPos4);
+    script->varTable[14] = 0;
+    return 2;
+}
 
 INCLUDE_ASM(code_f8f60_len_1560, UpdateLerp);
 
