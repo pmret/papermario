@@ -5,7 +5,7 @@ void load_map_bg(u8* optAssetName) {
     u32 assetSize;
     u8* assetName;
 
-    if (!optAssetName) return;
+    if (optAssetName == NULL) return;
     assetName = optAssetName;
 
     // StoryProgress check
