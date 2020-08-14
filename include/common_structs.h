@@ -25,7 +25,9 @@ typedef struct {
     /* 0x07A */ s8 musicEnabled;
     /* 0x07B */ char unk_7B;
     /* 0x07C */ s8 unk_7C;
-    /* 0x07D */ char unk_7D[4];
+    /* 0x07D */ char unk_7D;
+    /* 0x07E */ s8 unk_7E;
+    /* 0x07F */ char unk_7F[2];
     /* 0x081 */ s8 unk_81;
     /* 0x082 */ s8 unk_82;
     /* 0x083 */ s8 unk_83;

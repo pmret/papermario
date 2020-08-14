@@ -1,6 +1,7 @@
 #include "common.h"
 
 void sort_items(void);
+s32 is_ability_active(s32 arg0);
 
 void clear_player_data(void) {
     player_data* playerData = &gPlayerData;
@@ -719,6 +720,254 @@ void reset_status_menu(void) {
 
 // uses a jumptable, which we need .rodata support for.
 INCLUDE_ASM(code_80850_len_3060, is_ability_active);
+// Somewhat close. Needs work.
+/*s32 is_ability_active(s32 arg0) {
+    s32 iVar2;
+    u32 uVar3;
+    s32 iVar5;
+    s32 piVar6;
+    s32 i;
+    s32 local_20[6];
+    s32 badge;
+    player_data* playerData = &gPlayerData;
+    s32 iVar7 = 0;
+    u32 uVar4;
+
+    iVar5 = 0;
+    //iVar7 = 0;
+
+    for(i = 5; i >= 0; i--) {
+      local_20[i] = 0;
+    }
+
+    if (((*gGameStatusPtr)->unk_7E & 1) == 0) {
+        iVar2 = 0;
+        iVar7 = 0;
+        piVar6 = 0;
+        for (i = 0; i < ARRAY_COUNT(playerData->equippedBadges); i++) {
+            s32 index = i;
+            badge = playerData->equippedBadges[index];
+            if (playerData->equippedBadges[index] != 0) {
+              uVar4 = gItemTable[badge].moveID;
+            }
+            switch (arg0) {
+                case 0:
+                    uVar3 = 0x4c;
+                    break;
+                default:
+                    continue;
+                case 2:
+                    uVar3 = 0x40;
+                    break;
+                case 3:
+                    uVar3 = 0x4d;
+                    break;
+                case 4:
+                    uVar3 = 0x52;
+                    break;
+                case 5:
+                    uVar3 = 0x35;
+                    break;
+                case 6:
+                    if (uVar4 == 0x53) {
+                      iVar7++;
+                    }
+                    if (playerData->hasActionCommands != 0) {
+                      iVar7++;
+                    }
+                    continue;
+                case 7:
+                    uVar3 = 0x41;
+                    break;
+                case 8:
+                    uVar3 = 0x42;
+                    break;
+                case 9:
+                    uVar3 = 0x5a;
+                    break;
+                case 10:
+                    uVar3 = 0x3c;
+                    break;
+                case 0xb:
+                    uVar3 = 0x4e;
+                    break;
+                case 0xc:
+                    uVar3 = 0x5b;
+                    break;
+                case 0xd:
+                    uVar3 = 0x3d;
+                    break;
+                case 0xe:
+                    uVar3 = 0x43;
+                    break;
+                case 0xf:
+                    if (uVar4 == 0x54) {
+                      local_20[piVar6] = 1;
+                      piVar6++;
+                      iVar5++;
+                      iVar7 = -1;
+                    }
+                    if (uVar4 == 0x55) {
+                      local_20[piVar6] = 2;
+                      piVar6++;
+                      iVar5++;
+                      iVar7 = -1;
+                    }
+                    if (uVar4 == 0x56) {
+                      local_20[piVar6] = 3;
+                      piVar6++;
+                      iVar5++;
+                      iVar7 = -1;
+                    }
+                    if (uVar4 == 0x57) {
+                      local_20[piVar6] = 4;
+                      piVar6++;
+                      iVar5++;
+                      iVar7 = -1;
+                    }
+                    if (uVar4 == 0x58) {
+                      local_20[piVar6] = 5;
+                      piVar6++;
+                      iVar5++;
+                      iVar7 = -1;
+                    }
+                    if (uVar4 == 0x59) {
+                      local_20[piVar6] = 6;
+                      piVar6++;
+                      iVar5++;
+                      iVar7 = -1;
+                    }
+                    continue;
+                case 0x10:
+                    uVar3 = 0x5c;
+                    break;
+                case 0x11:
+                    uVar3 = 0x5d;
+                    break;
+                case 0x12:
+                    uVar3 = 0x5e;
+                    break;
+                case 0x13:
+                    uVar3 = 0x44;
+                    break;
+                case 0x14:
+                    uVar3 = 0x5f;
+                    break;
+                case 0x15:
+                    uVar3 = 0x60;
+                    break;
+                case 0x16:
+                    uVar3 = 0x4f;
+                    break;
+                case 0x17:
+                    uVar3 = 0x61;
+                    break;
+                case 0x18:
+                    uVar3 = 0x62;
+                    break;
+                case 0x19:
+                    uVar3 = 99;
+                    break;
+                case 0x1b:
+                    uVar3 = 0x45;
+                    break;
+                case 0x1c:
+                    uVar3 = 0x3b;
+                    break;
+                case 0x1d:
+                    uVar3 = 0x6e;
+                    break;
+                case 0x1e:
+                    uVar3 = 100;
+                    break;
+                case 0x1f:
+                    uVar3 = 0x65;
+                    break;
+                case 0x20:
+                    uVar3 = 0x46;
+                    break;
+                case 0x21:
+                    uVar3 = 0x47;
+                    break;
+                case 0x22:
+                    uVar3 = 0x3e;
+                    break;
+                case 0x23:
+                    uVar3 = 0x48;
+                    break;
+                case 0x24:
+                    uVar3 = 0x66;
+                    break;
+                case 0x25:
+                    uVar3 = 0x49;
+                    break;
+                case 0x26:
+                    uVar3 = 0x67;
+                    break;
+                case 0x27:
+                    uVar3 = 0x6d;
+                    break;
+                case 0x28:
+                    uVar3 = 0x6a;
+                    break;
+                case 0x29:
+                    uVar3 = 0x6c;
+                    break;
+                case 0x2a:
+                    uVar3 = 0x50;
+                    break;
+                case 0x1a:
+                    uVar3 = 0x38;
+                    break;
+                case 0x2b:
+                    uVar3 = 0x68;
+                    break;
+                case 0x2c:
+                    uVar3 = 0x69;
+                    break;
+                case 0x2d:
+                    uVar3 = 0x6b;
+                    break;
+                case 0x2e:
+                    uVar3 = 0x6f;
+                    break;
+                case 0x2f:
+                    uVar3 = 0x70;
+                    break;
+                case 0x30:
+                    uVar3 = 0x71;
+                    break;
+                case 0x31:
+                    uVar3 = 0x72;
+                    break;
+                case 0x32:
+                    uVar3 = 0x73;
+                    break;
+                case 0x33:
+                    uVar3 = 0x33;
+                    break;
+                case 0x34:
+                    uVar3 = 0x74;
+                    break;
+                case 0x35:
+                    uVar3 = 0x75;
+                    break;
+                case 0x36:
+                    uVar3 = 0x76;
+                    break;
+                case 0x37:
+                    uVar3 = 0x4a;
+            }
+            if (uVar4 == uVar3) {
+              iVar7++;
+            }
+        }
+        if (iVar7 < 0) {
+            iVar7 = local_20[rand_int(iVar5 - 1)];
+        }
+        return iVar7;
+    }
+}*/
 
 s32 is_partner_ability_active(void) {
     return 0;

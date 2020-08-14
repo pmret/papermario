@@ -843,7 +843,7 @@ SECTIONS
    }
 
    /* 0x00000000 04E5A0-0759B0 [27410] */
-   .data0004E5A0 0x0004E5A0 : AT(0x04E5A0) {
+   .data0004E5A0 0x800731A0 : AT(0x04E5A0) {
       build/bin/papermario.04E5A0.bin_4e5a0_len_27410.o(.data);
    }
 
@@ -893,9 +893,18 @@ SECTIONS
    }
 
    /* 0x00000000 090FE0-0A5DD0 [14DF0] */
-   .data00090FE0 0x00090FE0 : AT(0x090FE0) {
+   .data00090FE0 0x800F7B30 : AT(0x090FE0) {
       build/bin/papermario.090FE0.bin_90fe0_len_14df0.o(.data);
    }
+
+   // uncomment once rodata for is_ability_active is needed.
+   /*.rodata8010BF60 0x8010BF60 : AT(0xA5410) {
+      build/src/code_80850_len_3060.o(.rodata)
+   }
+
+   .data000A54F0 0x8010C040 : AT(0xA54F0) {
+      build/bin/papermario.0A54F0.bin_0a54f0_len_8e0.o(.data);
+   }*/
 
    /* 0x8010F6D0 0A5DD0-0B72B0 [114E0] */
    .text8010F6D0 0x8010F6D0 : AT(0x0A5DD0) {
@@ -958,7 +967,7 @@ SECTIONS
    }
 
    /* 0x00000000 0E16B0-0E79B0 [6300] */
-   .data000E16B0 0x000E16B0 : AT(0x0E16B0) {
+   .data000E16B0 0x8014AFB0 : AT(0x0E16B0) {
       build/bin/papermario.0E16B0.bin_e5dd0_len_6300.o(.data);
    }
 
@@ -1003,7 +1012,7 @@ SECTIONS
    }
 
    /* 0x00000000 0FE650-0FEE30 [7E0] */
-   .data000FE650 0x000FE650 : AT(0x0FE650) {
+   .data000FE650 0x802D9CA0 : AT(0x0FE650) {
       build/bin/papermario.0FE650.bin_fee30_len_7e0.o(.data);
    }
 
@@ -1018,7 +1027,7 @@ SECTIONS
    }
 
    /* 0x00000000 102480-102610 [190] */
-   .data00102480 0x00102480 : AT(0x102480) {
+   .data00102480 0x802DF390 : AT(0x102480) {
       build/bin/papermario.102480.bin_102610_len_190.o(.data);
    }
 
