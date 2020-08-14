@@ -5,17 +5,15 @@
 #include "common_structs.h"
 #include "types.h"
 
-#define MAX_SCRIPT_LIST_LENGTH 128
-
 extern ui_status gUIStatus;
 extern player_data gPlayerData;
 extern player_status gPlayerStatus;
 extern game_status* gGameStatusPtr[1];
 extern item_table_entry gItemTable[364];
 
-extern script_context* gWorldScriptList[MAX_SCRIPT_LIST_LENGTH];
-extern script_context* gBattleScriptList[MAX_SCRIPT_LIST_LENGTH];
-extern script_context** gCurrentScriptListPtr;
+extern script_context* gWorldScriptList[128];
+extern script_context* gBattleScriptList[128];
+extern script_context** gCurrentScriptListPtr[128];
 
 extern s8 D_800A0900;
 extern s16* D_80151328;

@@ -30,8 +30,8 @@ void* kill_script_by_ID(s32 id) {
     s32 i;
     script_context* scriptContextPtr;
 
-    for (i=0; i < MAX_SCRIPT_LIST_LENGTH; i++) {
-        scriptContextPtr = gCurrentScriptListPtr[i];
+    for (i=0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
+        scriptContextPtr = (*gCurrentScriptListPtr)[i];
         if (scriptContextPtr != NULL && scriptContextPtr->uniqueID == id) {
             kill_script(scriptContextPtr);
         }
@@ -42,8 +42,8 @@ s32 kill_all_scripts(void) {
     s32 i;
     script_context* scriptContextPtr;
 
-    for(i=0; i < MAX_SCRIPT_LIST_LENGTH; i++) {
-        scriptContextPtr = gCurrentScriptListPtr[i];
+    for(i=0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
+        scriptContextPtr = (*gCurrentScriptListPtr)[i];
         if (scriptContextPtr != NULL) {
             kill_script(scriptContextPtr);
         }
@@ -55,8 +55,8 @@ s32 does_script_exist(s32 id) {
     s32 i;
     script_context* scriptContextPtr;
 
-    for(i=0; i < MAX_SCRIPT_LIST_LENGTH; i++) {
-        scriptContextPtr = gCurrentScriptListPtr[i];
+    for(i=0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
+        scriptContextPtr = (*gCurrentScriptListPtr)[i];
         if (scriptContextPtr != NULL && scriptContextPtr->uniqueID == id) {
             return 1;
         }
@@ -101,16 +101,16 @@ INCLUDE_ASM(code_e79b0_len_1920, suspend_group_others);
 INCLUDE_ASM(code_e79b0_len_1920, resume_group_others);
 
 script_context* get_script_by_index(s32 index) {
-    return gCurrentScriptListPtr[index];
+    return (*gCurrentScriptListPtr)[index];
 }
 
 script_context* get_script_by_id(s32 id) {
     s32 i;
     script_context* scriptContextPtr;
 
-    for (i=0; i < MAX_SCRIPT_LIST_LENGTH; i++) {
-        if (gCurrentScriptListPtr[i] != NULL) {
-            scriptContextPtr = gCurrentScriptListPtr[i];
+    for (i=0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
+        if ((*gCurrentScriptListPtr)[i] != NULL) {
+            scriptContextPtr = (*gCurrentScriptListPtr)[i];
             if (scriptContextPtr->uniqueID == id) {
                 return scriptContextPtr;
             }
