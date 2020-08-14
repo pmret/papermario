@@ -476,7 +476,7 @@ typedef struct {
     /* 0x14C */ u32 ownerID; /* can be an npcID, a triggerID, a trigger ptr */
     /* 0x150 */ f32 timeScale;
     /* 0x154 */ f32 frameCounter;
-    /* 0x158 */ f32 unk_158;
+    /* 0x158 */ s32 unk_158;
     /* 0x15C */ s32* ptrFirstLine;
     /* 0x160 */ s32* ptrSavedPosition;
     /* 0x164 */ s32* ptrCurrentLine;
