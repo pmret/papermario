@@ -31,18 +31,38 @@ void* kill_script_by_ID(s32 id) {
     script_context* scriptContextPtr;
 
     for (i=0; i < 128; i++) {
-        if (gCurrentScriptList[i] != 0) {
-            scriptContextPtr = (script_context*) gCurrentScriptList[i];
-            if (scriptContextPtr->uniqueID == id) {
-                kill_script(scriptContextPtr);
-            }
+        scriptContextPtr = (script_context*) gCurrentScriptList[i];
+        if (scriptContextPtr != NULL && scriptContextPtr->uniqueID == id) {
+            kill_script(scriptContextPtr);
         }
     }
 }
 
-INCLUDE_ASM(code_e79b0_len_1920, kill_all_scripts);
+s32 kill_all_scripts(void) {
+    s32 i;
+    script_context* scriptContextPtr;
 
-INCLUDE_ASM(code_e79b0_len_1920, does_script_exist);
+    for(i=0; i < 128; i++) {
+        scriptContextPtr = (script_context*) gCurrentScriptList[i];
+        if (scriptContextPtr != NULL) {
+            kill_script(scriptContextPtr);
+        }
+    }
+    return;
+}
+
+s32 does_script_exist(s32 id) {
+    s32 i;
+    script_context* scriptContextPtr;
+
+    for(i=0; i < 128; i++) {
+        scriptContextPtr = (script_context*) gCurrentScriptList[i];
+        if (scriptContextPtr != NULL && scriptContextPtr->uniqueID == id) {
+            return 1;
+        }
+    }
+    return 0;
+}
 
 INCLUDE_ASM(code_e79b0_len_1920, does_script_exist_by_ref);
 
@@ -80,11 +100,11 @@ INCLUDE_ASM(code_e79b0_len_1920, suspend_group_others);
 
 INCLUDE_ASM(code_e79b0_len_1920, resume_group_others);
 
-s32 get_script_by_index(s32 index) {
+script_context* get_script_by_index(s32 index) {
     return gCurrentScriptList[index];
 }
 
-void* get_script_by_id(s32 id) {
+script_context* get_script_by_id(s32 id) {
     s32 i;
     script_context* scriptContextPtr;
 
@@ -98,6 +118,7 @@ void* get_script_by_id(s32 id) {
     }
     return 0;
 }
+
 
 INCLUDE_ASM(code_e79b0_len_1920, set_script_flags);
 
