@@ -22,14 +22,13 @@ s32 general_heap_free(s32 size) {
     return _heap_free(&D_802FB800, size);
 }
 
-INCLUDE_ASM(code_6000, battle_heap_create);
-/*s32 battle_heap_create(void) {
-    if (_heap_create(&D_803DA800, 0x25800) != -1) {
+s32 battle_heap_create(void) {
+    if (_heap_create(&D_803DA800, 0x25800) == -1) {
         return -1;
     } else {
         return 0;
     }
-}*/
+}
 
 s32 func_8002ACDC(void) {
     return 0;
