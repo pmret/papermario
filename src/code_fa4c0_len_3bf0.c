@@ -192,7 +192,7 @@ s32 func_802D6AF0(script_context* script, s32 initialCall) {
     return 2;
 }
 
-s32 FindItem(script_context* script) {
+s32 FindItem(script_context* script, s32 initialCall) {
     s32* ptrReadPos = script->ptrReadPos;
     s32 itemID = get_variable(script, *ptrReadPos++);
     s32 value = *ptrReadPos++;
@@ -215,7 +215,7 @@ s32 FindItem(script_context* script) {
     return 2;
 }
 
-s32 RemoveItem(script_context* script) {
+s32 RemoveItem(script_context* script, s32 initialCall) {
     s32* ptrReadPos = script->ptrReadPos;
     s32 itemID = get_variable(script, *ptrReadPos++);
     s32 value = *ptrReadPos++;
