@@ -30,7 +30,7 @@ typedef struct {
     /* 0x06B */ s8 demoStickY;
     /* 0x06C */ u32* mainScriptID;
     /* 0x070 */ s8 isBattle;
-    /* 0x071 */ u8 demoState; /* 0 = not demo, 1 = map demo, 2 = demo transition */
+    /* 0x071 */ s8 demoState; /* 0 = not demo, 1 = map demo, 2 = demo transition */
     /* 0x072 */ u8 nextDemoScene;
     /* 0x073 */ char unk_73[0x2];
     /* 0x075 */ s8 unk_75;
