@@ -37,8 +37,8 @@ void read_background_size(bg_header *bg) {
     gameStatus->backgroundMaxH = bg->height;
     gameStatus->backgroundMinW = bg->startX;
     gameStatus->backgroundMinH = bg->startY;
-    gameStatus->backgroundPalette = bg->palette;
     gameStatus->backgroundRaster = bg->raster;
+    gameStatus->backgroundPalette = bg->palette;
     gameStatus->backgroundFlags |= 1;
 }
 
@@ -46,10 +46,10 @@ void set_background_size(s16 startX, s16 startY, s16 sizeX, s16 sizeY) {
     game_status* gameStatus = *gGameStatusPtr;
 
     gameStatus->backgroundFlags &= ~1;
-    gameStatus->backgroundMinW = startX;
-    gameStatus->backgroundMinH = startY;
-    gameStatus->backgroundMaxW = sizeX;
-    gameStatus->backgroundMaxH = sizeY;
+    gameStatus->backgroundMaxW = startX;
+    gameStatus->backgroundMaxH = startY;
+    gameStatus->backgroundMinW = sizeX;
+    gameStatus->backgroundMinH = sizeY;
 }
 
 u16 func_80145E98(s32 arg0, s32 arg1, s32 arg2) {
