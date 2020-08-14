@@ -26,7 +26,7 @@ void func_80145DF8(void) {
     D_801595A0 = 0;
     D_8014F12F = 0;
     
-    gameStatus->unk_15C[0] = 0xB4;
+    gameStatus->unk_15C = 0xB4;
     gameStatus->enableBackground &= 0xF0;
 }
 
