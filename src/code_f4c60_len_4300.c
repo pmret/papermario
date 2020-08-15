@@ -28,11 +28,20 @@ INCLUDE_ASM(code_f4c60_len_4300, SwitchMessage);
 
 INCLUDE_ASM(code_f4c60_len_4300, ShowChoice);
 
-INCLUDE_ASM(code_f4c60_len_4300, CloseChoice);
+s32 CloseChoice(script_context* script, s32 initialCall) {
+    close_message(D_802DB268);
+    return 1;
+}
 
-INCLUDE_ASM(code_f4c60_len_4300, CancelMessage);
+s32 CancelMessage(script_context* script, s32 initialCall) {
+    cancel_message(gCurrentPrintContext);
+    return 2;
+}
 
-INCLUDE_ASM(code_f4c60_len_4300, CancelMessageAndBlock);
+s32 CancelMessageAndBlock(script_context* script, s32 initialCall) {
+    cancel_message(gCurrentPrintContext);
+    return 0;
+}
 
 s32 SetMessageImages(script_context* script, s32 initialCall) {
     set_message_images(*script->ptrReadPos);
