@@ -170,7 +170,87 @@ s32 AwaitPlayerLeave(script_context* script, s32 initialCall) {
     }
 }
 
-INCLUDE_ASM(code_f8f60_len_1560, AddVectorPolar);
+s32 AddVectorPolar(script_context* script, s32 initialCall) {
+    bytecode* ptrReadPos = script->ptrReadPos;
+
+    bytecode xVar = *ptrReadPos++;
+    f32 x = get_float_variable(script, xVar);
+
+    bytecode yVar = *ptrReadPos++;
+    f32 y = get_float_variable(script, yVar);
+
+    f32 r = get_float_variable(script, *ptrReadPos++);
+
+    add_vec2D_polar(&x, &y, r, get_float_variable(script, *ptrReadPos++));
+
+    set_float_variable(script, xVar, x);
+    set_float_variable(script, yVar, y);
+
+    return 2;
+}
+
+INCLUDE_ASM(code_f8f60_len_1560, func_802D4BDC);
+/*
+s32 func_802D4BDC(script_context* script, s32 initialCall) {
+    s32* t0 = &script->functionTemp[0];
+    s32* t1 = &script->functionTemp[1];
+    s32 t1v;
+
+    if (initialCall) {
+        *t0 = 0;
+        *t1 = 0;
+    }
+
+    if (*t0 == 0) {
+        t1v = *t1;
+        if (t1v != 0xFF) {
+            t1v += 0xA;
+            *t1 = t1v;
+            if (t1v < 0x100) {
+                // Void, debug stuff was probably here
+            }
+            t1v = 0xFF;
+            func_80137DA4(0xA, (f32) *t1);
+        } else {
+            return 2;
+        }
+    }
+
+    return 0;
+}
+*/
+
+// Very similar to func_802D4BDC
+INCLUDE_ASM(code_f8f60_len_1560, func_802D4C4C);
+
+INCLUDE_ASM(code_f8f60_len_1560, func_802D4CC4);
+/*
+s32 func_802D4CC4(script_context* script, s32 initialCall) {
+    s32 value = get_variable(script, *script->ptrReadPos);
+    if (value < 0) {
+        func_80137DA4(0xFF, D_BF800000);
+    } else {
+        func_80137DA4(0xA, value);
+    }
+
+    return 2;
+}
+*/
+
+s32 func_802D4D18(script_context* script, s32 initialCall) {
+    s32 value = get_float_variable(script, *script->ptrReadPos);
+
+    func_80137E4C(0, 0, 0xC, 0x14);
+    func_80137E4C(0, 1, 0x134, 0xDC);
+    func_80137D88(0xC, value);
+
+    return 2;
+}
+
+s32 func_802D4D88(script_context* script, s32 initialCall) {
+    func_80137D88(0xC, 0);
+    return 2;
+}
 
 INCLUDE_ASM(code_f8f60_len_1560, setup_path_data);
 
@@ -194,13 +274,47 @@ s32 GetDist2D(script_context* script, s32 initialCall) {
     return 2;
 }
 
-INCLUDE_ASM(code_f8f60_len_1560, func_802D5830);
+s32 func_802D5830(script_context* script, s32 initialCall) {
+    func_80027088(get_variable(script, *script->ptrReadPos));
+    return 2;
+}
 
-INCLUDE_ASM(code_f8f60_len_1560, func_802D585C);
+s32 func_802D585C(script_context* script, s32 initialCall) {
+    bytecode* ptrReadPos = script->ptrReadPos;
+    s32 setMode = get_variable(script,  *ptrReadPos++);
+    s32 flags = get_variable(script, *ptrReadPos++);
 
-INCLUDE_ASM(code_f8f60_len_1560, SetValueByRef);
+    if (setMode) {
+        // Set flag
+        D_8009A650[0] |= flags;
+    } else {
+        // Unset flag
+        D_8009A650[0] &= ~flags;
+    }
 
-INCLUDE_ASM(code_f8f60_len_1560, GetValueByRef);
+    return 2;
+}
+
+s32 SetValueByRef(script_context* script, s32 initialCall) {
+    bytecode* ptrReadPos = script->ptrReadPos;
+
+    s32 dest = get_variable(script, *ptrReadPos++); /* Reference */
+    s32 src = get_variable(script, *ptrReadPos++);
+    set_variable(script, dest, src);
+
+    return 2;
+}
+
+s32 GetValueByRef(script_context* script, s32 initialCall) {
+    bytecode* ptrReadPos = script->ptrReadPos;
+
+    s32 src = get_variable(script, *ptrReadPos++); /* Reference */
+    bytecode dest = *ptrReadPos++;
+
+    set_variable(script, dest, get_variable(script, src));
+
+    return 2;
+}
 
 s32 EnableStatusMenu(script_context* script, s32 initialCall) {
     if (get_variable(script, *script->ptrReadPos) != 0) {
@@ -223,8 +337,26 @@ s32 ShowStatusMenu(script_context* script, s32 initialCall) {
     return 2;
 }
 
-INCLUDE_ASM(code_f8f60_len_1560, SetGameMode);
+s32 SetGameMode(script_context* script, s32 initialCall) {
+    set_game_mode(
+        // Clear upper half
+        (get_variable(script, *script->ptrReadPos) << 0x10) >> 0x10
+    );
+    return 2;
+}
 
-INCLUDE_ASM(code_f8f60_len_1560, ClampAngleInt);
+s32 ClampAngleInt(script_context* script, s32 initialCall) {
+    bytecode* ptrReadPos = script->ptrReadPos;
 
-INCLUDE_ASM(code_f8f60_len_1560, ClampAngleFloat);
+    set_variable(script, *ptrReadPos, clamp_angle(get_variable(script, *ptrReadPos)));
+
+    return 2;
+}
+
+s32 ClampAngleFloat(script_context* script, s32 initialCall) {
+    bytecode* ptrReadPos = script->ptrReadPos;
+
+    set_float_variable(script, *ptrReadPos, clamp_angle(get_float_variable(script, *ptrReadPos)));
+
+    return 2;
+}

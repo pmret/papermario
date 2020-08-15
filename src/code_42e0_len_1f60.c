@@ -48,7 +48,7 @@ INCLUDE_ASM(code_42e0_len_1f60, signF);
 
 INCLUDE_ASM(code_42e0_len_1f60, round);
 
-INCLUDE_ASM(code_42e0_len_1f60, clamp_angle);
+f32 INCLUDE_ASM(code_42e0_len_1f60, clamp_angle, f32 theta);
 
 INCLUDE_ASM(code_42e0_len_1f60, get_clamped_angle_diff);
 
@@ -62,7 +62,7 @@ f32 INCLUDE_ASM(code_42e0_len_1f60, dist2D, f32 ax, f32 ay, f32 bx, f32 by);
 
 f32 INCLUDE_ASM(code_42e0_len_1f60, dist3D, f32 ax, f32 ay, f32 az, f32 bx, f32 by, f32 bz);
 
-INCLUDE_ASM(code_42e0_len_1f60, add_vec2D_polar);
+void INCLUDE_ASM(code_42e0_len_1f60, add_vec2D_polar, f32* x, f32* y, f32 r, f32 theta);
 
 INCLUDE_ASM(code_42e0_len_1f60, _wrap_trig_lookup_value);
 
