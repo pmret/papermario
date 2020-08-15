@@ -71,7 +71,7 @@ LD_SCRIPT = $(TARGET).ld
 all: $(BUILD_DIR) $(TARGET).z64 verify
 
 clean:
-	rm -rf build $(TARGET).z64
+	rm -rf $(BUILD_DIR) $(TARGET).z64
 
 submodules:
 	git submodule update --init --recursive
@@ -87,7 +87,7 @@ setup: clean submodules n64split split
 print-% : ; $(info $* is a $(flavor $*) variable set to [$($*)]) @true
 
 $(BUILD_DIR):
-	mkdir $(BUILD_DIR)
+	mkdir -p $(BUILD_DIR)
 
 $(BUILD_DIR)/$(TARGET).elf: $(O_FILES) $(LD_SCRIPT)
 	@$(LD) $(LDFLAGS) -o $@ $(O_FILES)

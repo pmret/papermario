@@ -46,3 +46,22 @@ trigger* get_trigger_by_id(s32 triggerID) {
 }
 
 INCLUDE_ASM(code_dbd70_len_700, func_80145CE8);
+/*s32 func_80145CE8(s32 arg0) {
+    s32 i;
+    s32 ret;
+
+    if (func_800E52F8() == 0) {
+        return 0;
+    }
+
+    for (i = 0; i < ARRAY_COUNT(gCurrentTriggerListPtr); i++) {
+        if (((*gCurrentTriggerListPtr)[i] == NULL) || 
+            ((*gCurrentTriggerListPtr)[i]->unk_30 == 0) ||
+            ((*gCurrentTriggerListPtr)[i]->colliderID != arg0) ||
+            ((*gCurrentTriggerListPtr)[i]->genericFlagIndex & 0x100) == 0) {
+            ret = 1;
+        }
+    }
+
+    return ret;
+}*/

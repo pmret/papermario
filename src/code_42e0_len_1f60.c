@@ -42,7 +42,7 @@ INCLUDE_ASM(code_42e0_len_1f60, func_80029934);
 
 INCLUDE_ASM(code_42e0_len_1f60, func_80029994);
 
-INCLUDE_ASM(code_42e0_len_1f60, rand_int);
+s32 INCLUDE_ASM(code_42e0_len_1f60, rand_int, s32 arg0);
 
 INCLUDE_ASM(code_42e0_len_1f60, signF);
 

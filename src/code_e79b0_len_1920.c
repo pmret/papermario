@@ -68,7 +68,7 @@ INCLUDE_ASM(code_e79b0_len_1920, does_script_exist_by_ref);
 
 INCLUDE_ASM(code_e79b0_len_1920, set_script_priority);
 
-INCLUDE_ASM(code_e79b0_len_1920, set_script_timescale);
+void INCLUDE_ASM(code_e79b0_len_1920, set_script_timescale, script_context* script, f32 timescale);
 
 INCLUDE_ASM(code_e79b0_len_1920, set_global_timespace);
 
