@@ -1,0 +1,6 @@
+{
+    "editor.detectIndentation": false,
+    "editor.insertSpaces": true,
+    "files.eol": "\n",
+    "files.insertFinalNewline": true,
+}

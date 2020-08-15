@@ -1,0 +1,81 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "make",
+            "type": "shell",
+            "command": "PM_HEADER_REBUILD=1 make all",
+            "problemMatcher": [
+                {
+                    "fileLocation": ["relative", "${workspaceFolder}"],
+                    "pattern": {
+                        "regexp": "^(src\\/.*):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                        "file": 1,
+                        "line": 2,
+                        "severity": 3,
+                        "message": 4,
+                    },
+                },
+                {
+                    "fileLocation": ["relative", "${workspaceFolder}"],
+                    "severity": "error",
+                    "pattern": {
+                        "regexp": "^(src\\/.*):(\\d+):\\s+(?!warning|\\()(.*)$",
+                        "file": 1,
+                        "line": 2,
+                        "message": 3,
+                    },
+                },
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true,
+            },
+        },
+        {
+            "label": "diff",
+            "type": "shell",
+            "command": "PM_HEADER_REBUILD=1 ./diff.py -mwo ${input:funcName}",
+            "isBackground": true,
+            "problemMatcher": [
+                {
+                    "fileLocation": ["relative", "${workspaceFolder}"],
+                    "background": {
+                        "activeOnStart": true,
+                    },
+                    "pattern": {
+                        "regexp": "^(src\\/.*):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                        "file": 1,
+                        "line": 2,
+                        "severity": 3,
+                        "message": 4,
+                    },
+                },
+                {
+                    "fileLocation": ["relative", "${workspaceFolder}"],
+                    "background": {
+                        "activeOnStart": true,
+                    },
+                    "severity": "error",
+                    "pattern": {
+                        "regexp": "^(src\\/.*):(\\d+):\\s+(?!warning|\\()(.*)$",
+                        "file": 1,
+                        "line": 2,
+                        "message": 3,
+                    },
+                },
+            ],
+            "group": {
+                "kind": "test",
+                "isDefault": true,
+            },
+        },
+    ],
+    "inputs": [
+        {
+            "id": "funcName",
+            "description": "Function name",
+            "type": "promptString",
+        }
+    ],
+}
