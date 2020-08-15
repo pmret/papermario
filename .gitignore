@@ -10,7 +10,6 @@ bin/
 build/
 yay0/
 expected/
-.vscode/
 .idea/
 .DS_Store
 venv/

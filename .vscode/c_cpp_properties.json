@@ -1,0 +1,18 @@
+{
+    "version": 4,
+    "configurations": [
+        {
+            "name": "papermario",
+            "includePath": [
+                "${workspaceFolder}/include"
+            ],
+            "defines": [
+                "F3DEX_GBI_2",
+                "_LANGUAGE_C"
+            ],
+            "cStandard": "c89",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "gcc-x86"
+        }
+    ]
+}
