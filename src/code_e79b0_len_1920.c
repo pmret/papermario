@@ -52,7 +52,7 @@ void* kill_script_by_ID(s32 id) {
     s32 i;
     script_context* scriptContextPtr;
 
-    for (i = 1; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
+    for (i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
         if (scriptContextPtr != NULL && scriptContextPtr->uniqueID == id) {
             kill_script(scriptContextPtr);
