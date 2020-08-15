@@ -4,11 +4,17 @@ void SpeakToPlayer(script_context* script, s32 initialCall) {
     _show_message(script, initialCall, 0);
 }
 
-INCLUDE_ASM(code_f4c60_len_4300, EndSpeech);
+void EndSpeech(script_context* script, s32 initialCall) {
+    _show_message(script, initialCall, 1);
+}
 
-INCLUDE_ASM(code_f4c60_len_4300, ContinueSpeech);
+void ContinueSpeech(script_context* script, s32 initialCall) {
+    _show_message(script, initialCall, 2);
+}
 
-INCLUDE_ASM(code_f4c60_len_4300, SpeakToNpc);
+void SpeakToNpc(script_context* script, s32 initialCall) {
+    _show_message(script, initialCall, 3);
+}
 
 INCLUDE_ASM(code_f4c60_len_4300, _show_message);
 
@@ -28,11 +34,41 @@ INCLUDE_ASM(code_f4c60_len_4300, CancelMessage);
 
 INCLUDE_ASM(code_f4c60_len_4300, CancelMessageAndBlock);
 
-INCLUDE_ASM(code_f4c60_len_4300, SetMessageImages);
+s32 SetMessageImages(script_context* script, s32 initialCall) {
+    set_message_images(*script->ptrReadPos);
+    return 2;
+}
 
-INCLUDE_ASM(code_f4c60_len_4300, SetMessageString);
+s32 func_802D0C94(script_context* script, s32 initialCall) {
+    if (get_variable(script, *script->ptrReadPos) == 0) {
+        D_8009A650[0] |= 0x10;
+    } else {
+        D_8009A650[0] &= ~0x10;
+    }
+    return 2;
+}
+
+s32 SetMessageString(script_context* script, s32 initialCall) {
+    bytecode* ptrReadPos = script->ptrReadPos;
+    bytecode string = get_variable(script, *ptrReadPos++);
+    bytecode index = get_variable(script, *ptrReadPos);
+
+    set_message_string(string, index);
+    return 2;
+}
 
 INCLUDE_ASM(code_f4c60_len_4300, SetMessageValue);
+// TODO: Figure out why there's an extra NOP after this function
+/*
+s32 SetMessageValue(script_context* script, s32 initialCall) {
+    bytecode* ptrReadPos = script->ptrReadPos;
+    bytecode value = get_variable(script, *ptrReadPos++);
+    bytecode index = get_variable(script, *ptrReadPos);
+
+    set_message_value(value, index);
+    return 2;
+}
+*/
 
 INCLUDE_ASM(code_f4c60_len_4300, HidePlayerShadow);
 
