@@ -15,8 +15,8 @@ s32 MakeLerp(script_context* script, s32 initialCall) {
 s32 UpdateLerp(script_context* script, s32 initialCall) {
     script->varTable[0x0] = (s32) update_lerp(
         script->varTable[0xB],
-        (s32) script->varTable[0xC],
-        (s32) script->varTable[0xD],
+        script->varTable[0xC],
+        script->varTable[0xD],
         script->varTable[0xE],
         script->varTable[0xF]
     );
