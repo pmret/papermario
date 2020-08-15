@@ -4,7 +4,16 @@ INCLUDE_ASM(code_f2470_len_27f0, func_802CDAC0);
 
 INCLUDE_ASM(code_f2470_len_27f0, set_npc_animation);
 
-INCLUDE_ASM(code_f2470_len_27f0, DeleteNpc);
+s32 DeleteNpc(script_context* script, s32 initialCall) {
+    bytecode* ptrReadPos = script->ptrReadPos;
+    npc* npcPtr = get_npc_unsafe(get_variable(script, *ptrReadPos));
+
+    if (npcPtr) {
+        free_npc(npcPtr);
+        return 2;
+    }
+    return 2;
+}
 
 INCLUDE_ASM(code_f2470_len_27f0, GetNpcPointer);
 

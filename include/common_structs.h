@@ -4,6 +4,12 @@
 #include "ultra64.h"
 #include "types.h"
 
+typedef struct vec3f {
+    /* 0x00 */ f32 x;
+    /* 0x04 */ f32 y;
+    /* 0x08 */ f32 z;
+} vec3f; // size = 0x0C
+
 typedef struct matrix4f {
     /* 0x00 */ f32 mtx[4][4];
 } matrix4f; // size = 0x40
@@ -670,6 +676,42 @@ typedef struct npc_blur_data {
     /* 0x54 */ f32 ypos[20];
     /* 0xA4 */ f32 zpos[20];
 } npc_blur_data; // size = 0xF4
+
+typedef struct npc {
+    /* 0x000 */ s32 flags;
+    /* 0x004 */ UNK_PTR onUpdate; /* run before anything else for this npc in the npc update step */
+    /* 0x008 */ UNK_PTR onRender; /* run after the display list for this npc is built */
+    /* 0x00C */ f32 yaw;
+    /* 0x010 */ f32 planarFlyDist; /* also used for speech, temp0? */
+    /* 0x014 */ f32 jumpScale; /* also used for speech, temp1? */
+    /* 0x018 */ f32 moveSpeed;
+    /* 0x01C */ f32 jumpVelocity;
+    /* 0x020 */ struct npc_blur_data* blurData; /* related to movement somehow... */
+    /* 0x024 */ char unk_24[4];
+    /* 0x028 */ u32 currentAnim;
+    /* 0x02C */ char unk_2C[12];
+    /* 0x038 */ struct vec3f pos;
+    /* 0x044 */ struct vec3f rotation;
+    /* 0x050 */ char unk_50[4];
+    /* 0x054 */ struct vec3f scale;
+    /* 0x060 */ struct vec3f moveToPos;
+    /* 0x06C */ struct vec3f colliderPos; /* used during collision with player */
+    /* 0x078 */ s32 shadowIndex;
+    /* 0x07C */ f32 shadowScale;
+    /* 0x080 */ char unk_80[8];
+    /* 0x088 */ s16 isFacingAway;
+    /* 0x08A */ s16 yawCamOffset;
+    /* 0x08C */ char unk_8C[2];
+    /* 0x08E */ s16 duration; /* formerly interp_counter */
+    /* 0x090 */ s16 homePos[3];
+    /* 0x096 */ char unk_96[14];
+    /* 0x0A4 */ u8 npcID;
+    /* 0x0A5 */ char unk_A5;
+    /* 0x0A6 */ s16 collisionRadius;
+    /* 0x0A8 */ s16 collisionHeight;
+    /* 0x0AA */ u8 renderMode;
+    /* 0x0AB */ char unk_AB[661];
+} npc; // size = 0x340
 
 typedef struct collider_aabb {
     /* 0x00 */ f32 min[3];
