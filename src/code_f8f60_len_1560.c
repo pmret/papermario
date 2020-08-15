@@ -202,9 +202,26 @@ INCLUDE_ASM(code_f8f60_len_1560, SetValueByRef);
 
 INCLUDE_ASM(code_f8f60_len_1560, GetValueByRef);
 
-INCLUDE_ASM(code_f8f60_len_1560, EnableStatusMenu);
+s32 EnableStatusMenu(script_context* script, s32 initialCall) {
+    if (get_variable(script, *script->ptrReadPos) != 0) {
+        decrement_status_menu_disabled();
+    } else {
+        increment_status_menu_disabled();
+    }
 
-INCLUDE_ASM(code_f8f60_len_1560, ShowStatusMenu);
+    return 2;
+}
+
+s32 ShowStatusMenu(script_context* script, s32 initialCall) {
+    if (get_variable(script, *script->ptrReadPos) != 0) {
+        status_menu_enable_ignore_changes();
+        func_800E97B8();
+    } else {
+        status_menu_disable_ignore_changes();
+    }
+
+    return 2;
+}
 
 INCLUDE_ASM(code_f8f60_len_1560, SetGameMode);
 
