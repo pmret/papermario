@@ -42,7 +42,7 @@ INCLUDE_ASM(code_42e0_len_1f60, func_80029934);
 
 INCLUDE_ASM(code_42e0_len_1f60, func_80029994);
 
-INCLUDE_ASM(code_42e0_len_1f60, rand_int);
+s32 INCLUDE_ASM(code_42e0_len_1f60, rand_int, s32 arg0);
 
 INCLUDE_ASM(code_42e0_len_1f60, signF);
 
@@ -78,7 +78,7 @@ f32 INCLUDE_ASM(code_42e0_len_1f60, sin_deg, f32 x);
 
 f32 INCLUDE_ASM(code_42e0_len_1f60, cos_deg, f32 x);
 
-INCLUDE_ASM(code_42e0_len_1f60, update_lerp);
+f32 INCLUDE_ASM(code_42e0_len_1f60, update_lerp, EASING easing, f32 start, f32 end, s32 elapsed, s32 duration);
 
 INCLUDE_ASM(code_42e0_len_1f60, func_8002A904);
 

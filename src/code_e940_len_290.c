@@ -2,7 +2,7 @@
 
 void func_80033540(void) {
     D_8009A650[0] |= 8;
-    (*gGameStatusPtr)->unk_AC = 3;
+    (*gGameStatusPtr)->loadMenuState = 3;
 }
 
 INCLUDE_ASM(code_e940_len_290, func_80033568);
