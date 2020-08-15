@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Setup') {
             steps {
-                sh 'cp /usr/local/etc/roms/baserom_pm.z64 baserom_original.z64'
+                sh 'cp /usr/local/etc/roms/baserom_pm.z64 baserom.z64'
                 sh 'make setup'
             }
         }
