@@ -56,7 +56,7 @@ INCLUDE_ASM(code_6000, collision_heap_malloc);
 
 INCLUDE_ASM(code_6000, collision_heap_free);
 /*s32 collision_heap_free(s32 size) {
-    s32 unk_70 = (*gGameStatusPtr)->unk_70;
+    s32 isBattle = (*gGameStatusPtr)->isBattle;
 
-    return _heap_free((unk_70 == 0) ? (&D_80268000) : (&D_803DA800), size);
+    return _heap_free((isBattle == 0) ? (&D_80268000) : (&D_803DA800), size);
 }*/
