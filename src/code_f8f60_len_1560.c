@@ -31,7 +31,16 @@ s32 UpdateLerp(script_context* script, s32 initialCall) {
     return 2;
 }
 
-INCLUDE_ASM(code_f8f60_len_1560, RandInt);
+s32 RandInt(script_context* script, s32 initialCall) {
+    bytecode* ptrReadPos = script->ptrReadPos;
+
+    s32 maxVar = get_variable(script, *ptrReadPos++);
+    bytecode outVar = *ptrReadPos++;
+
+    set_variable(script, outVar, rand_int(maxVar));
+
+    return 2;
+}
 
 INCLUDE_ASM(code_f8f60_len_1560, GetAngleBetweenNPCs);
 
