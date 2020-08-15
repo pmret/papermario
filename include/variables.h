@@ -15,6 +15,8 @@ extern script_context* gWorldScriptList[128];
 extern script_context* gBattleScriptList[128];
 extern script_context** gCurrentScriptListPtr[128];
 
+extern f32 gGlobalTimeSpace;
+
 extern s8 D_800A0900;
 extern s16* D_80151328;
 extern s16 D_8010CD10;
