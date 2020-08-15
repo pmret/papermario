@@ -18,8 +18,9 @@ INCLUDE_ASM(code_e79b0_len_1920, start_child_script);
 
 INCLUDE_ASM(code_e79b0_len_1920, func_802C39F8);
 
-//INCLUDE_ASM(code_e79b0_len_1920, restart_script);
+INCLUDE_ASM(code_e79b0_len_1920, restart_script);
 // TODO: Find out why things break when script->timeScale = 1 goes after the previous lines
+/*
 script_context* restart_script(script_context* script) {
     script->loopDepth = -1;
     script->switchDepth = -1;
@@ -39,6 +40,7 @@ script_context* restart_script(script_context* script) {
     func_802C3390(script);
     return script;
 }
+*/
 
 INCLUDE_ASM(code_e79b0_len_1920, update_scripts);
 
