@@ -114,15 +114,14 @@ s32 IsPlayerWithin(script_context* script, s32 initialCall) {
     bytecode* ptrReadPos = script->ptrReadPos;
     player_status* playerStatus = &gPlayerStatus;
 
-    /* Function temporaries are redundant, stack should be used instead */
     s32* targetX = &script->functionTemp[0];
     s32* targetZ = &script->functionTemp[1];
     s32* distanceRequired = &script->functionTemp[2];
 
     f32 distance;
-    bytecode outVar = SI_VAR_0; /* Redundant */
+    bytecode outVar = SI_VAR_0;
 
-    if (initialCall) { /* Redundant condition, function always returns DONE */
+    if (initialCall) {
         *targetX = get_variable(script, *ptrReadPos++);
         *targetZ = get_variable(script, *ptrReadPos++);
         *distanceRequired = get_variable(script, *ptrReadPos++);
