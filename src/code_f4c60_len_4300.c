@@ -1,19 +1,19 @@
 #include "common.h"
 
-void SpeakToPlayer(script_context* script, s32 initialCall) {
-    _show_message(script, initialCall, 0);
+s32 SpeakToPlayer(script_context* script, s32 initialCall) {
+    return _show_message(script, initialCall, 0);
 }
 
-void EndSpeech(script_context* script, s32 initialCall) {
-    _show_message(script, initialCall, 1);
+s32 EndSpeech(script_context* script, s32 initialCall) {
+    return _show_message(script, initialCall, 1);
 }
 
-void ContinueSpeech(script_context* script, s32 initialCall) {
-    _show_message(script, initialCall, 2);
+s32 ContinueSpeech(script_context* script, s32 initialCall) {
+    return _show_message(script, initialCall, 2);
 }
 
-void SpeakToNpc(script_context* script, s32 initialCall) {
-    _show_message(script, initialCall, 3);
+s32 SpeakToNpc(script_context* script, s32 initialCall) {
+    return _show_message(script, initialCall, 3);
 }
 
 INCLUDE_ASM(code_f4c60_len_4300, _show_message);
@@ -60,7 +60,7 @@ s32 func_802D0C94(script_context* script, s32 initialCall) {
 s32 SetMessageString(script_context* script, s32 initialCall) {
     bytecode* ptrReadPos = script->ptrReadPos;
     bytecode string = get_variable(script, *ptrReadPos++);
-    bytecode index = get_variable(script, *ptrReadPos);
+    bytecode index = get_variable(script, *ptrReadPos++);
 
     set_message_string(string, index);
     return 2;

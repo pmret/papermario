@@ -6,7 +6,7 @@ INCLUDE_ASM(code_f2470_len_27f0, set_npc_animation);
 
 s32 DeleteNpc(script_context* script, s32 initialCall) {
     bytecode* ptrReadPos = script->ptrReadPos;
-    npc* npcPtr = get_npc_unsafe(get_variable(script, *ptrReadPos));
+    npc* npcPtr = get_npc_unsafe(get_variable(script, *ptrReadPos++));
 
     if (npcPtr) {
         free_npc(npcPtr);
@@ -18,7 +18,7 @@ s32 DeleteNpc(script_context* script, s32 initialCall) {
 s32 GetNpcPointer(script_context* script, s32 initialCall) {
     bytecode* ptrReadPos = script->ptrReadPos;
     bytecode npcID = get_variable(script, *ptrReadPos++);
-    bytecode varNPC = *ptrReadPos;
+    bytecode varNPC = *ptrReadPos++;
 
     set_variable(script, varNPC, get_npc_safe(npcID));
     return 2;
