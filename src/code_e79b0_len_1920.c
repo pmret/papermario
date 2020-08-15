@@ -18,8 +18,7 @@ INCLUDE_ASM(code_e79b0_len_1920, start_child_script);
 
 INCLUDE_ASM(code_e79b0_len_1920, func_802C39F8);
 
-INCLUDE_ASM(code_e79b0_len_1920, restart_script);
-/*
+//INCLUDE_ASM(code_e79b0_len_1920, restart_script);
 // TODO: Find out why things break when script->timeScale = 1 goes after the previous lines
 script_context* restart_script(script_context* script) {
     script->loopDepth = -1;
@@ -40,7 +39,6 @@ script_context* restart_script(script_context* script) {
     func_802C3390(script);
     return script;
 }
-*/
 
 INCLUDE_ASM(code_e79b0_len_1920, update_scripts);
 
@@ -52,7 +50,7 @@ void* kill_script_by_ID(s32 id) {
     s32 i;
     script_context* scriptContextPtr;
 
-    for (i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
+    for (i = 1; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
         if (scriptContextPtr != NULL && scriptContextPtr->uniqueID == id) {
             kill_script(scriptContextPtr);
@@ -110,9 +108,6 @@ INCLUDE_ASM(code_e79b0_len_1920, set_global_timespace);
 // TODO: figure out why compiler/assembler isn't putting SWC1 in delay slot
 void set_global_timespace(f32 timeScale) {
     //gGlobalTimeSpace = timeScale;
-    __asm__("LUI $at,0x802e;"
-        "SWC1 $f12,-0x6358($at);"
-    );
 }
 */
 
@@ -122,9 +117,6 @@ INCLUDE_ASM(code_e79b0_len_1920, get_global_timespace);
 // TODO: figure out why compiler/assembler isn't putting LWC1 in delay slot
 f32 get_global_timespace(void) {
     //return gGlobalTimeSpace;
-    __asm__("LUI $at,0x802e;"
-        "LWC1 $f0,-0x6358($at);"
-    );
 }
 */
 
@@ -304,7 +296,7 @@ void set_script_flags(script_context* script, s32 flags) {
         set_script_flags(childScript, flags);
     }
 
-    for(i=0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
+    for(i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
         if (scriptContextPtr != NULL && scriptContextPtr->parentScript == script) {
             set_script_flags(script->parentScript, flags);
