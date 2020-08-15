@@ -34,10 +34,10 @@ s32 UpdateLerp(script_context* script, s32 initialCall) {
 s32 RandInt(script_context* script, s32 initialCall) {
     bytecode* ptrReadPos = script->ptrReadPos;
 
-    s32 maxVar = get_variable(script, *ptrReadPos++);
+    s32 max = get_variable(script, *ptrReadPos++);
     bytecode outVar = *ptrReadPos++;
 
-    set_variable(script, outVar, rand_int(maxVar));
+    set_variable(script, outVar, rand_int(max));
 
     return 2;
 }
@@ -56,9 +56,31 @@ s32 GetAngleBetweenNPCs(script_context* script, s32 initialCall) {
     return 2;
 }
 
-INCLUDE_ASM(code_f8f60_len_1560, GetAngleToNPC);
+s32 GetAngleToNPC(script_context* script, s32 initialCall) {
+    player_status* playerStatus = &gPlayerStatus;
+    bytecode* ptrReadPos = script->ptrReadPos;
 
-INCLUDE_ASM(code_f8f60_len_1560, GetAngleToPlayer);
+    NPC npcID = get_variable(script, *ptrReadPos++);
+    bytecode outVar = *ptrReadPos++;
+
+    npc* npc = resolve_npc(script, npcID);
+    set_variable(script, outVar, atan2(playerStatus->position.x, playerStatus->position.z, npc->pos.x, npc->pos.z));
+
+    return 2;
+}
+
+s32 GetAngleToPlayer(script_context* script, s32 initialCall) {
+    player_status* playerStatus = &gPlayerStatus;
+    bytecode* ptrReadPos = script->ptrReadPos;
+
+    NPC npcID = get_variable(script, *ptrReadPos++);
+    bytecode outVar = *ptrReadPos++;
+
+    npc* npc = resolve_npc(script, npcID);
+    set_variable(script, outVar, atan2(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z));
+
+    return 2;
+}
 
 INCLUDE_ASM(code_f8f60_len_1560, AwaitPlayerApproach);
 

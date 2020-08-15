@@ -6,7 +6,7 @@ npc* resolve_npc(script_context* script, NPC npcID) {
     } else if (npcID >= -270000000) {
         return get_npc_safe(npcID);
     } else {
-        return npcID;
+        return (npc*) npcID;
     }
 }
 
