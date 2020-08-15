@@ -33,6 +33,9 @@ npc* get_npc_safe(NPC npcID);
 npc* get_npc_unsafe(NPC npcID);
 npc* resolve_npc(script_context* script, NPC npcID);
 
+f32 dist2D(f32 ax, f32 ay, f32 bx, f32 by);
+f32 dist3D(f32 ax, f32 ay, f32 az, f32 bx, f32 by, f32 bz);
+
 s32 play_sound_at_position(s32 soundID, s32 value2, f32 posX, f32 posY, f32 posZ);
 s32 set_music_track(s32 musicPlayer, s32 songID, s32 variation, s32 unk, s32 volume);
 #endif

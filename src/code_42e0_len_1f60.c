@@ -58,9 +58,9 @@ INCLUDE_ASM(code_42e0_len_1f60, get_player_normal_yaw);
 
 INCLUDE_ASM(code_42e0_len_1f60, get_player_normal_pitch);
 
-INCLUDE_ASM(code_42e0_len_1f60, dist2D);
+f32 INCLUDE_ASM(code_42e0_len_1f60, dist2D, f32 ax, f32 ay, f32 bx, f32 by);
 
-INCLUDE_ASM(code_42e0_len_1f60, dist3D);
+f32 INCLUDE_ASM(code_42e0_len_1f60, dist3D, f32 ax, f32 ay, f32 az, f32 bx, f32 by, f32 bz);
 
 INCLUDE_ASM(code_42e0_len_1f60, add_vec2D_polar);
 

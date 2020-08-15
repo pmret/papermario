@@ -82,11 +82,93 @@ s32 GetAngleToPlayer(script_context* script, s32 initialCall) {
     return 2;
 }
 
-INCLUDE_ASM(code_f8f60_len_1560, AwaitPlayerApproach);
+s32 AwaitPlayerApproach(script_context* script, s32 initialCall) {
+    bytecode* ptrReadPos = script->ptrReadPos;
+    player_status* playerStatus = &gPlayerStatus;
 
-INCLUDE_ASM(code_f8f60_len_1560, IsPlayerWithin);
+    s32* targetX = &script->functionTemp[0];
+    s32* targetZ = &script->functionTemp[1];
+    s32* distanceRequired = &script->functionTemp[2];
 
-INCLUDE_ASM(code_f8f60_len_1560, AwaitPlayerLeave);
+    f32 distance;
+
+    if (initialCall) {
+        *targetX = get_variable(script, *ptrReadPos++);
+        *targetZ = get_variable(script, *ptrReadPos++);
+        *distanceRequired = get_variable(script, *ptrReadPos++);
+    }
+
+    distance = dist2D(
+        playerStatus->position.x, playerStatus->position.z,
+        *targetX, *targetZ
+    );
+
+    if (distance < *distanceRequired) {
+        return 2;
+    } else {
+        return 0;
+    }
+}
+
+s32 IsPlayerWithin(script_context* script, s32 initialCall) {
+    bytecode* ptrReadPos = script->ptrReadPos;
+    player_status* playerStatus = &gPlayerStatus;
+
+    /* Function temporaries are redundant, stack should be used instead */
+    s32* targetX = &script->functionTemp[0];
+    s32* targetZ = &script->functionTemp[1];
+    s32* distanceRequired = &script->functionTemp[2];
+
+    f32 distance;
+    bytecode outVar = SI_VAR_0; /* Redundant */
+
+    if (initialCall) { /* Redundant condition, function always returns DONE */
+        *targetX = get_variable(script, *ptrReadPos++);
+        *targetZ = get_variable(script, *ptrReadPos++);
+        *distanceRequired = get_variable(script, *ptrReadPos++);
+        outVar = *ptrReadPos++;
+    }
+
+    distance = dist2D(
+        playerStatus->position.x, playerStatus->position.z,
+        *targetX, *targetZ
+    );
+
+    set_variable(script, outVar, 0);
+    if (distance < *distanceRequired) {
+        set_variable(script, outVar, 1);
+    }
+
+    return 2;
+}
+
+s32 AwaitPlayerLeave(script_context* script, s32 initialCall) {
+    bytecode* ptrReadPos = script->ptrReadPos;
+    player_status* playerStatus = &gPlayerStatus;
+
+    s32* targetX = &script->functionTemp[0];
+    s32* targetZ = &script->functionTemp[1];
+    s32* distanceRequired = &script->functionTemp[2];
+
+    f32 distance;
+
+    if (initialCall) {
+        *targetX = get_variable(script, *ptrReadPos++);
+        *targetZ = get_variable(script, *ptrReadPos++);
+        *distanceRequired = get_variable(script, *ptrReadPos++);
+    }
+
+    distance = dist2D(
+        playerStatus->position.x, playerStatus->position.z,
+        *targetX, *targetZ
+    );
+
+    if (distance > *distanceRequired) {
+        return 2;
+    } else {
+        return 0;
+    }
+}
 
 INCLUDE_ASM(code_f8f60_len_1560, AddVectorPolar);
 
@@ -98,7 +180,23 @@ INCLUDE_ASM(code_f8f60_len_1560, LoadPath);
 
 INCLUDE_ASM(code_f8f60_len_1560, GetNextPathPos);
 
-INCLUDE_ASM(code_f8f60_len_1560, GetDist2D);
+s32 GetDist2D(script_context* script, s32 initialCall) {
+    bytecode* ptrReadPos = script->ptrReadPos;
+
+    bytecode outVar = *ptrReadPos++;
+    set_float_variable(script, outVar, dist2D(
+        get_float_variable(script, *ptrReadPos++),
+        get_float_variable(script, *ptrReadPos++),
+        get_float_variable(script, *ptrReadPos++),
+        get_float_variable(script, *ptrReadPos++)
+    ));
+
+    return 2;
+}
+
+INCLUDE_ASM(code_f8f60_len_1560, func_802D5830);
+
+INCLUDE_ASM(code_f8f60_len_1560, func_802D585C);
 
 INCLUDE_ASM(code_f8f60_len_1560, SetValueByRef);
 
