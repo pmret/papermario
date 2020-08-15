@@ -191,7 +191,7 @@ typedef struct script_context {
     /* 0x06C */ struct script_context* parentScript; /* brother? */
     /* 0x070 */ s32 functionTemp[4];
     /* 0x080 */ UNK_PTR callFunction;
-    /* 0x084 */ u32 varTable[16];
+    /* 0x084 */ s32 varTable[16];
     /* 0x0C4 */ s32 varFlags[3];
     /* 0x0D0 */ s32 loopStartTable[8];
     /* 0x0F0 */ s32 loopCounterTable[8];

@@ -7,12 +7,29 @@ s32 MakeLerp(script_context* script, s32 initialCall) {
     script->varTable[0xD] = get_variable(script, *ptrReadPos++); // end
     script->varTable[0xF] = get_variable(script, *ptrReadPos++); // duration
     script->varTable[0xB] = get_variable(script, *ptrReadPos++); // easing type
-    script->varTable[0xE] = 0;
+    script->varTable[0xE] = 0; // elapsed
 
     return 2;
 }
 
-INCLUDE_ASM(code_f8f60_len_1560, UpdateLerp);
+s32 UpdateLerp(script_context* script, s32 initialCall) {
+    script->varTable[0x0] = (s32) update_lerp(
+        script->varTable[0xB],
+        (s32) script->varTable[0xC],
+        (s32) script->varTable[0xD],
+        script->varTable[0xE],
+        script->varTable[0xF]
+    );
+
+    if (script->varTable[0xE] >= script->varTable[0xF]) {
+        script->varTable[0x1] = 0; // finished
+    } else {
+        script->varTable[0x1] = 1; // lerping
+    }
+    script->varTable[0xE]++;
+
+    return 2;
+}
 
 INCLUDE_ASM(code_f8f60_len_1560, RandInt);
 
