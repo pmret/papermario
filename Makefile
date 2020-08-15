@@ -71,7 +71,7 @@ LD_SCRIPT = $(TARGET).ld
 all: $(BUILD_DIR) $(TARGET).z64 verify
 
 clean:
-	rm -rf build $(TARGET).z64
+	rm -rf $(BUILD_DIR) $(TARGET).z64
 
 submodules:
 	git submodule update --init --recursive

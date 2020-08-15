@@ -10,6 +10,8 @@ void clone_model(u16 srcModelID, u16 newModelID);
 void update_collider_transform(s16 colliderID);
 s32 get_variable(script_context* script, s32 pos);
 f32 get_float_variable(script_context* script, s32 pos);
+f32 set_float_variable(script_context* script, s32 dest, f32 value);
+void set_script_timescale(script_context* script, f32 timescale);
 f32 sin_deg(f32 x);
 f32 cos_deg(f32 x);
 s32 func_80055448(s32);
