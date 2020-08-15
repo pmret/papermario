@@ -50,6 +50,4 @@ extern u16 D_800A0940;
 extern u16 D_800A0942;
 extern s16 D_800A0944;
 
-extern f32 D_BF800000;
-
 #endif

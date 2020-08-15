@@ -228,7 +228,7 @@ INCLUDE_ASM(code_f8f60_len_1560, func_802D4CC4);
 s32 func_802D4CC4(script_context* script, s32 initialCall) {
     s32 value = get_variable(script, *script->ptrReadPos);
     if (value < 0) {
-        func_80137DA4(0xFF, D_BF800000);
+        func_80137DA4(0xFF, -1.0f);
     } else {
         func_80137DA4(0xA, value);
     }
