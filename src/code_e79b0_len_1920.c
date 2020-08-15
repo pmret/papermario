@@ -26,11 +26,43 @@ INCLUDE_ASM(code_e79b0_len_1920, func_802C3EE4);
 
 INCLUDE_ASM(code_e79b0_len_1920, kill_script);
 
-INCLUDE_ASM(code_e79b0_len_1920, kill_script_by_ID);
+void* kill_script_by_ID(s32 id) {
+    s32 i;
+    script_context* scriptContextPtr;
 
-INCLUDE_ASM(code_e79b0_len_1920, kill_all_scripts);
+    for (i=0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
+        scriptContextPtr = (*gCurrentScriptListPtr)[i];
+        if (scriptContextPtr != NULL && scriptContextPtr->uniqueID == id) {
+            kill_script(scriptContextPtr);
+        }
+    }
+}
 
-INCLUDE_ASM(code_e79b0_len_1920, does_script_exist);
+s32 kill_all_scripts(void) {
+    s32 i;
+    script_context* scriptContextPtr;
+
+    for(i=0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
+        scriptContextPtr = (*gCurrentScriptListPtr)[i];
+        if (scriptContextPtr != NULL) {
+            kill_script(scriptContextPtr);
+        }
+    }
+    return;
+}
+
+s32 does_script_exist(s32 id) {
+    s32 i;
+    script_context* scriptContextPtr;
+
+    for(i=0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
+        scriptContextPtr = (*gCurrentScriptListPtr)[i];
+        if (scriptContextPtr != NULL && scriptContextPtr->uniqueID == id) {
+            return 1;
+        }
+    }
+    return 0;
+}
 
 INCLUDE_ASM(code_e79b0_len_1920, does_script_exist_by_ref);
 
@@ -68,9 +100,25 @@ INCLUDE_ASM(code_e79b0_len_1920, suspend_group_others);
 
 INCLUDE_ASM(code_e79b0_len_1920, resume_group_others);
 
-INCLUDE_ASM(code_e79b0_len_1920, get_script_by_index);
+script_context* get_script_by_index(s32 index) {
+    return (*gCurrentScriptListPtr)[index];
+}
 
-INCLUDE_ASM(code_e79b0_len_1920, get_script_by_id);
+script_context* get_script_by_id(s32 id) {
+    s32 i;
+    script_context* scriptContextPtr;
+
+    for (i=0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
+        if ((*gCurrentScriptListPtr)[i] != NULL) {
+            scriptContextPtr = (*gCurrentScriptListPtr)[i];
+            if (scriptContextPtr->uniqueID == id) {
+                return scriptContextPtr;
+            }
+        }
+    }
+    return 0;
+}
+
 
 INCLUDE_ASM(code_e79b0_len_1920, set_script_flags);
 
