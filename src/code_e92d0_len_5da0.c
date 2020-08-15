@@ -278,6 +278,26 @@ s32 si_handle_OR_const(script_context* script) {
 }
 
 INCLUDE_ASM(code_e92d0_len_5da0, si_handle_call);
+/*
+s32 si_handle_call(script_context* script) {
+    s32 (*blockingFn)(script_context*, u8);
+    s32 (*callFn)(script_context*, u8);
+    bytecode* ptrReadPos = script->ptrReadPos;
+
+    if (!script->blocked) {
+        // Call function.
+        script->callFunction = callFn = get_variable(script, *ptrReadPos++);
+        script->ptrReadPos = ptrReadPos;
+        script->blocked = 1;
+        script->currentArgc--;
+        return callFn(script, 1);
+    } else {
+        // Keep calling function, as it's blocking.
+        blockingFn = script->callFunction;
+        return blockingFn(script, 0);
+    }
+}
+*/
 
 INCLUDE_ASM(code_e92d0_len_5da0, si_handle_exec1);
 
