@@ -415,7 +415,7 @@ s32 func_802C73B0(script_context* script) {
 s32 func_802C73B8(script_context* script) {
     s32 i;
 
-    for (i = 0; i < 0x80; i++) { // TODO figure out what this represents
+    for (i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
         if (script == get_script_by_index(i)) {
             break;
         }
