@@ -30,6 +30,7 @@ run `make setup` to set up tools and extract the rom
 
 ### Make
 run `make` to rebuild the rom. Get `OK`? If so, you're all set! Otherwise, please feel free to reach out to us in the discord.
+Use `PM_HEADER_REBUILD=1 make` to rebuild C sources when any header files change.
 
 ## FAQ
 * If you received the following error when running `make setup`: 

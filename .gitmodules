@@ -1,3 +1,6 @@
 [submodule "n64splitter"]
 	path = tools/n64splitter
 	url = https://github.com/ethteck/sm64tools.git
+[submodule "tools/star-rod"]
+	path = tools/star-rod
+	url = https://github.com/nanaian/star-rod.git

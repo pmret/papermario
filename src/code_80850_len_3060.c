@@ -31,15 +31,15 @@ void clear_player_data(void) {
     playerData->merleeTurnCount = -1;
     playerData->maxStarPower = 0;
     playerData->specialBarsFilled = 0;
-    playerData->unk_292 = 0;
+    playerData->unk_292[0] = 0;
     playerData->currentPartner = 0;
 
     for (i = 0; i < ARRAY_COUNT(playerData->partners); i++) {
         playerData->partners[i].enabled = 0;
         playerData->partners[i].level = 0;
-        playerData->partners[i].unk_2 = 0;
-        playerData->partners[i].unk_4 = 0;
-        playerData->partners[i].unk_6 = 0;
+        playerData->partners[i].unk_02[0] = 0;
+        playerData->partners[i].unk_02[1] = 0;
+        playerData->partners[i].unk_02[2] = 0;
     }
 
     for (i = ARRAY_COUNT(playerData->keyItems) - 1; i >= 0; i--) {
@@ -70,10 +70,10 @@ void clear_player_data(void) {
     playerData->enemyFirstStrikes = 0;
     playerData->powerBounces = 0;
     playerData->battlesCount = 0;
-    playerData->unk_2A4 = 0;
-    playerData->unk_2A6 = 0;
-    playerData->unk_2A8 = 0;
-    playerData->unk_2AA = 0;
+    playerData->unk_2A4[0] = 0;
+    playerData->unk_2A4[1] = 0;
+    playerData->unk_2A4[2] = 0;
+    playerData->unk_2A4[3] = 0;
     playerData->unk_2AC = 0;
     playerData->unk_2B0 = 0;
     playerData->idleFrameCounter = 0;
@@ -304,9 +304,9 @@ void update_coin_counter(void) {
 
     do {} while(0); // Needed to match
 
-    if (uiStatus->unk_6D != 0) {
-        uiStatus->unk_6D -= 1;
-        if (((uiStatus->unk_6D << 24) == 0) && (uiStatus->iconIndex12 >= 0)) {
+    if (uiStatus->unk_6C[1] != 0) {
+        uiStatus->unk_6C[1] -= 1;
+        if (((uiStatus->unk_6C[1] << 24) == 0) && (uiStatus->iconIndex12 >= 0)) {
             free_icon(uiStatus->iconIndex12);
             free_icon(uiStatus->iconIndex13);
             uiStatus->iconIndex12 = -1;
@@ -314,24 +314,24 @@ void update_coin_counter(void) {
         D_8010CD12 = 0;
     }
 
-    if (uiStatus->unk_6C != 0) {
-        if ((uiStatus->displayCoins == playerData->coins) && (uiStatus->unk_6C > 30)) {
-            uiStatus->unk_6C = 30;
+    if (uiStatus->unk_6C[0] != 0) {
+        if ((uiStatus->displayCoins == playerData->coins) && (uiStatus->unk_6C[0] > 30)) {
+            uiStatus->unk_6C[0] = 30;
         }
 
-        if ((uiStatus->displayCoins == playerData->coins) || (uiStatus->unk_6C <= 30)) {
-            uiStatus->unk_6C -= 1;
-            if (uiStatus->unk_6C == 0) {
+        if ((uiStatus->displayCoins == playerData->coins) || (uiStatus->unk_6C[0] <= 30)) {
+            uiStatus->unk_6C[0] -= 1;
+            if (uiStatus->unk_6C[0] == 0) {
                 func_80147E7C(20, &D_80147574);
-                uiStatus->unk_6D = 15;
+                uiStatus->unk_6C[1] = 15;
                 D_8010CD10 = 0;
                 D_8010CD12 = 1;
                 uiStatus->iconIndex12 = uiStatus->iconIndex10;
                 uiStatus->iconIndex13 = uiStatus->iconIndex11;
                 uiStatus->displayCoins = playerData->coins;
-                if (uiStatus->unk_6E > -1) {
-                    uiStatus->ignoreChanges = uiStatus->unk_6E;
-                    uiStatus->unk_6E = -1;
+                if (uiStatus->unk_6C[2] > -1) {
+                    uiStatus->ignoreChanges = uiStatus->unk_6C[2];
+                    uiStatus->unk_6C[2] = -1;
                 }
             }
         }
@@ -350,13 +350,13 @@ void show_coin_counter(void) {
             free_icon(uiStatus->iconIndex11);
             uiStatus->iconIndex12 = -1;
         }
-        uiStatus->unk_6C = 0;
-        uiStatus->unk_6D = 0;
+        uiStatus->unk_6C[0] = 0;
+        uiStatus->unk_6C[1] = 0;
         *coinCounterUnk = 0;
         D_8010CD12 = 0;
     }
 
-    if (uiStatus->unk_6C == 0) {
+    if (uiStatus->unk_6C[0]== 0) {
         func_80147CC8(0x14, 0x20, 0xa4, 0x40, 0x14, 0x15, &D_800E92D8, 0, -1);
         func_80147E7C(0x14, &D_80147474);
         index = create_icon(&D_80109270);
@@ -367,10 +367,10 @@ void show_coin_counter(void) {
         uiStatus->iconIndex11 = index;
         set_icon_flags(index, 0x80);
         func_80144EFC(index, 0xff, 0xff, 0xff);
-        uiStatus->unk_6C = 0;
+        uiStatus->unk_6C[0] = 0;
 
-        if (uiStatus->unk_6E < 0) {
-            uiStatus->unk_6E = uiStatus->ignoreChanges;
+        if (uiStatus->unk_6C[2] < 0) {
+            uiStatus->unk_6C[2] = uiStatus->ignoreChanges;
         }
 
         uiStatus->ignoreChanges = 1;
@@ -382,16 +382,16 @@ void show_coin_counter(void) {
 void hide_coin_counter(void) {
     ui_status* uiStatus = &gUIStatus;
 
-    if ((D_8010CD10 != 0) && (uiStatus->unk_6C == 0)) {
-        uiStatus->unk_6C = 60;
+    if ((D_8010CD10 != 0) && (uiStatus->unk_6C[0]== 0)) {
+        uiStatus->unk_6C[0] = 60;
     }
 }
 
 void func_800E96C8(void) {
     ui_status* uiStatus = &gUIStatus;
 
-    if ((D_8010CD10 != 0) && (uiStatus->unk_6C == 0)) {
-        uiStatus->unk_6C = 1;
+    if ((D_8010CD10 != 0) && (uiStatus->unk_6C[0]== 0)) {
+        uiStatus->unk_6C[0]= 1;
     }
 }
 
@@ -415,7 +415,7 @@ void open_status_menu_long(void) {
     if (uiStatus->hidden) {
         uiStatus->showTimer = 210;
         uiStatus->hidden = 0;
-        uiStatus->unk_3B = 1;
+        uiStatus->unk_3B[0] = 1;
     }
 }
 
@@ -425,7 +425,7 @@ void open_status_menu_short(void) {
     if (uiStatus->hidden) {
         uiStatus->showTimer = 105;
         uiStatus->hidden = 0;
-        uiStatus->unk_3B = 1;
+        uiStatus->unk_3B[0] = 1;
     }
 }
 
@@ -435,7 +435,7 @@ void func_800E97B8(void) {
     if (uiStatus->hidden != 1) {
         uiStatus->hidden = 1;
         uiStatus->showTimer = 0;
-        uiStatus->unk_3B = 1;
+        uiStatus->unk_3B[0] = 1;
     }
 }
 
@@ -446,8 +446,8 @@ void func_800E97E4(void) {
     uiStatus->ignoreChanges = 0;
     uiStatus->showTimer = 0;
     uiStatus->hidden = 1;
-    uiStatus->unk_3B = 0;
-    uiStatus->unk_3C = 0;
+    uiStatus->unk_3B[0] = 0;
+    uiStatus->unk_3B[1] = 0;
 }
 
 void func_800E9810(void) {
@@ -457,24 +457,24 @@ void func_800E9810(void) {
     uiStatus->drawPosY = 0;
     uiStatus->ignoreChanges = 0;
     uiStatus->hidden = 0;
-    uiStatus->unk_3B = 1;
-    uiStatus->unk_3C = 0;
+    uiStatus->unk_3B[0] = 1;
+    uiStatus->unk_3B[1] = 0;
 }
 
 void func_800E983C(void) {
-    gUIStatus.unk_45 = 0;
+    gUIStatus.unk_45[0] = 0;
 }
 
 void func_800E984C(void) {
-    gUIStatus.unk_45 = 1;
+    gUIStatus.unk_45[0] = 1;
 }
 
 s32 func_800E9860(void) {
     ui_status* uiStatus = &gUIStatus;
     ui_status* uiStatus2 = &gUIStatus;
-    s32 ret = 1 - uiStatus->unk_45;
+    s32 ret = 1 - uiStatus->unk_45[0];
 
-    if (uiStatus->unk_46 != 0) {
+    if (uiStatus->unk_45[1] != 0) {
         ret = 0;
     }
     if (uiStatus2->ignoreChanges) {
@@ -501,15 +501,15 @@ void status_menu_disable_ignore_changes(void) {
 s32 func_800E98D4(void) {
     ui_status* uiStatus = &gUIStatus;
 
-    return uiStatus->unk_46 + uiStatus->ignoreChanges;
+    return uiStatus->unk_45[1] + uiStatus->ignoreChanges;
 }
 
 void func_800E98EC(void) {
-    gUIStatus.unk_46 = 1;
+    gUIStatus.unk_45[1] = 1;
 }
 
 void func_800E9900(void) {
-    gUIStatus.unk_46 = 0;
+    gUIStatus.unk_45[1] = 0;
 }
 
 s32 is_status_menu_visible(void) {
@@ -672,10 +672,10 @@ void reset_status_menu(void) {
     uiStatus->drawPosY = -100;
     uiStatus->hidden = 0;
     uiStatus->showTimer = 210;
-    uiStatus->unk_3B = 0;
+    uiStatus->unk_3B[0] = 0;
     uiStatus->ignoreChanges = 0;
-    uiStatus->unk_45 = 0;
-    uiStatus->unk_46 = 0;
+    uiStatus->unk_45[0] = 0;
+    uiStatus->unk_45[1] = 0;
     uiStatus->hpBlinking = 0;
     uiStatus->hpBlinkCounter = 0;
     uiStatus->hpBlinkTimer = 0;
@@ -690,13 +690,13 @@ void reset_status_menu(void) {
     uiStatus->disabled = 0;
     uiStatus->starpointsBlinking = 0;
     uiStatus->starpointsBlinkCounter = 0;
-    uiStatus->unk_6E = -1;
+    uiStatus->unk_6C[2] = -1;
     uiStatus->displayHP = playerData->curHP;
     uiStatus->displayFP = playerData->curFP;
     uiStatus->displayCoins = playerData->coins;
     uiStatus->displayStarpoints = playerData->starPoints;
     uiStatus->displaySP = playerData->specialBarsFilled;
-    uiStatus->unk_3C = 0;
+    uiStatus->unk_3B[1] = 0;
 
     for (i = 0; i < 2; i++) {
         func_801452B4(uiStatus->hpIconIndexes[i], uiStatus->hpIconIndexes[i]);
@@ -705,7 +705,7 @@ void reset_status_menu(void) {
     for (i = 0; i < 2; i++) {
         func_801452B4(uiStatus->fpIconIndexes[i], uiStatus->fpIconIndexes[i]);
     }
-
+    
     func_801452B4(uiStatus->coinIconIndex, uiStatus->coinIconIndex);
     func_801452B4(uiStatus->coinIconIndex2, uiStatus->coinIconIndex2);
     func_801452B4(uiStatus->starpointsIconIndex, uiStatus->starpointsIconIndex);
@@ -807,14 +807,14 @@ void add_SP(s32 amt) {
     s32 phi_v1;
     s32 blah;
 
-    uiStatus->unk_57 = 1;
-    uiStatus->unk_58 = 60;
+    uiStatus->unk_57[0] = 1;
+    uiStatus->unk_57[1] = 60;
 
     phi_v1 = playerData->specialBarsFilled;
     if (phi_v1 < 0) {
         phi_v1 = playerData->specialBarsFilled + 31;
     }
-    uiStatus->unk_59 = phi_v1 >> 5;
+    uiStatus->unk_57[2] = phi_v1 >> 5;
 
     playerData->specialBarsFilled += amt;
 

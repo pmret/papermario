@@ -9,6 +9,7 @@ BUILD_DIR = build
 
 SRC_DIRS := src src/os
 ASM_DIRS := asm asm/os
+INCLUDE_DIRS := include include/PR
 DATA_DIRS := bin
 COMPRESSED_DIRS := yay0
 MAP_DIRS := Map_Assets.FS
@@ -17,6 +18,9 @@ BGM_DIRS := bgm
 # Source code files
 C_FILES := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))
 S_FILES := $(foreach dir,$(ASM_DIRS),$(wildcard $(dir)/*.s))
+ifdef PM_HEADER_REBUILD
+	H_FILES := $(foreach dir,$(INCLUDE_DIRS),$(wildcard $(dir)/*.h))
+endif
 DATA_FILES := $(foreach dir,$(DATA_DIRS),$(wildcard $(dir)/*.bin))
 COMPRESSED_FILES := $(foreach dir,$(COMPRESSED_DIRS),$(wildcard $(dir)/*.yay0)) 
 MAP_FILES := $(foreach dir,$(MAP_DIRS),$(wildcard $(dir)/*.FS)) 
@@ -91,7 +95,7 @@ $(BUILD_DIR)/$(TARGET).elf: $(O_FILES) $(LD_SCRIPT)
 $(BUILD_DIR)/%.o: %.s
 	$(AS) $(ASFLAGS) -o $@ $<
 
-$(BUILD_DIR)/%.o: %.c
+$(BUILD_DIR)/%.o: %.c $(H_FILES)
 	cpp $(CPPFLAGS) $< | $(CC) $(CFLAGS) -o - | $(OLD_AS) $(OLDASFLAGS) - -o $@
 
 $(BUILD_DIR)/%.o: %.bin
