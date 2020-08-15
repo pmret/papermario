@@ -1,6 +1,8 @@
 #include "common.h"
 
-INCLUDE_ASM(code_f4c60_len_4300, SpeakToPlayer);
+void SpeakToPlayer(script_context* script, s32 initialCall) {
+    _show_message(script, initialCall, 0);
+}
 
 INCLUDE_ASM(code_f4c60_len_4300, EndSpeech);
 
