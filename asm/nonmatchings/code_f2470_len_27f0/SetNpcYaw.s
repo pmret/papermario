@@ -14,7 +14,7 @@ glabel SetNpcYaw
 /* 0F3454 802CEAA4 0C0B1EAF */  jal   get_variable
 /* 0F3458 802CEAA8 26100004 */   addiu $s0, $s0, 4
 /* 0F345C 802CEAAC 0240202D */  daddu $a0, $s2, $zero
-/* 0F3460 802CEAB0 0C0B36B0 */  jal   func_802CDAC0
+/* 0F3460 802CEAB0 0C0B36B0 */  jal   resolve_npc
 /* 0F3464 802CEAB4 0040282D */   daddu $a1, $v0, $zero
 /* 0F3468 802CEAB8 0040882D */  daddu $s1, $v0, $zero
 /* 0F346C 802CEABC 1220000B */  beqz  $s1, .L802CEAEC

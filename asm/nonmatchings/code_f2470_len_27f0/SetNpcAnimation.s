@@ -18,7 +18,7 @@ glabel SetNpcAnimation
 /* 0F2AD4 802CE124 0040802D */   daddu $s0, $v0, $zero
 /* 0F2AD8 802CE128 0220202D */  daddu $a0, $s1, $zero
 /* 0F2ADC 802CE12C 0200282D */  daddu $a1, $s0, $zero
-/* 0F2AE0 802CE130 0C0B36B0 */  jal   func_802CDAC0
+/* 0F2AE0 802CE130 0C0B36B0 */  jal   resolve_npc
 /* 0F2AE4 802CE134 0040802D */   daddu $s0, $v0, $zero
 /* 0F2AE8 802CE138 10400003 */  beqz  $v0, .L802CE148
 /* 0F2AEC 802CE13C 0040202D */   daddu $a0, $v0, $zero

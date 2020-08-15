@@ -14,7 +14,7 @@ glabel GetAngleToNPC
 /* 0F9184 802D47D4 26100004 */   addiu $s0, $s0, 4
 /* 0F9188 802D47D8 0220202D */  daddu $a0, $s1, $zero
 /* 0F918C 802D47DC 8E100000 */  lw    $s0, ($s0)
-/* 0F9190 802D47E0 0C0B36B0 */  jal   func_802CDAC0
+/* 0F9190 802D47E0 0C0B36B0 */  jal   resolve_npc
 /* 0F9194 802D47E4 0040282D */   daddu $a1, $v0, $zero
 /* 0F9198 802D47E8 3C038011 */  lui   $v1, 0x8011
 /* 0F919C 802D47EC 2463EFC8 */  addiu $v1, $v1, -0x1038

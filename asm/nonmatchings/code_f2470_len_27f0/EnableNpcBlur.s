@@ -18,7 +18,7 @@ glabel EnableNpcBlur
 /* 0F3CCC 802CF31C 0040802D */   daddu $s0, $v0, $zero
 /* 0F3CD0 802CF320 0220202D */  daddu $a0, $s1, $zero
 /* 0F3CD4 802CF324 0200282D */  daddu $a1, $s0, $zero
-/* 0F3CD8 802CF328 0C0B36B0 */  jal   func_802CDAC0
+/* 0F3CD8 802CF328 0C0B36B0 */  jal   resolve_npc
 /* 0F3CDC 802CF32C 0040802D */   daddu $s0, $v0, $zero
 /* 0F3CE0 802CF330 5040000A */  beql  $v0, $zero, .L802CF35C
 /* 0F3CE4 802CF334 24020002 */   addiu $v0, $zero, 2

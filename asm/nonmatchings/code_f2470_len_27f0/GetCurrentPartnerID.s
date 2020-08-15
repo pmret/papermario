@@ -93,7 +93,7 @@ glabel GetCurrentPartnerID
 /* 0F4774 802CFDC4 0040982D */   daddu $s3, $v0, $zero
 /* 0F4778 802CFDC8 0220202D */  daddu $a0, $s1, $zero
 /* 0F477C 802CFDCC 0240282D */  daddu $a1, $s2, $zero
-/* 0F4780 802CFDD0 0C0B36B0 */  jal   func_802CDAC0
+/* 0F4780 802CFDD0 0C0B36B0 */  jal   resolve_npc
 /* 0F4784 802CFDD4 0040802D */   daddu $s0, $v0, $zero
 /* 0F4788 802CFDD8 10400009 */  beqz  $v0, .L802CFE00
 /* 0F478C 802CFDDC 0040202D */   daddu $a0, $v0, $zero
@@ -129,7 +129,7 @@ glabel GetCurrentPartnerID
 /* 0F47FC 802CFE4C 26310004 */   addiu $s1, $s1, 4
 /* 0F4800 802CFE50 0200202D */  daddu $a0, $s0, $zero
 /* 0F4804 802CFE54 8E310000 */  lw    $s1, ($s1)
-/* 0F4808 802CFE58 0C0B36B0 */  jal   func_802CDAC0
+/* 0F4808 802CFE58 0C0B36B0 */  jal   resolve_npc
 /* 0F480C 802CFE5C 0040282D */   daddu $a1, $v0, $zero
 /* 0F4810 802CFE60 54400001 */  bnel  $v0, $zero, .L802CFE68
 /* 0F4814 802CFE64 A45100A2 */   sh    $s1, 0xa2($v0)
@@ -156,7 +156,7 @@ glabel GetCurrentPartnerID
 /* 0F4860 802CFEB0 0040802D */   daddu $s0, $v0, $zero
 /* 0F4864 802CFEB4 0220202D */  daddu $a0, $s1, $zero
 /* 0F4868 802CFEB8 0200282D */  daddu $a1, $s0, $zero
-/* 0F486C 802CFEBC 0C0B36B0 */  jal   func_802CDAC0
+/* 0F486C 802CFEBC 0C0B36B0 */  jal   resolve_npc
 /* 0F4870 802CFEC0 0040802D */   daddu $s0, $v0, $zero
 /* 0F4874 802CFEC4 10400003 */  beqz  $v0, .L802CFED4
 /* 0F4878 802CFEC8 0040202D */   daddu $a0, $v0, $zero
@@ -204,7 +204,7 @@ glabel GetCurrentPartnerID
 /* 0F4918 802CFF68 0040982D */   daddu $s3, $v0, $zero
 /* 0F491C 802CFF6C 0220202D */  daddu $a0, $s1, $zero
 /* 0F4920 802CFF70 0240282D */  daddu $a1, $s2, $zero
-/* 0F4924 802CFF74 0C0B36B0 */  jal   func_802CDAC0
+/* 0F4924 802CFF74 0C0B36B0 */  jal   resolve_npc
 /* 0F4928 802CFF78 0040802D */   daddu $s0, $v0, $zero
 /* 0F492C 802CFF7C 10400006 */  beqz  $v0, .L802CFF98
 /* 0F4930 802CFF80 0040202D */   daddu $a0, $v0, $zero
@@ -282,7 +282,7 @@ glabel GetCurrentPartnerID
 /* 0F4A48 802D0098 0040982D */   daddu $s3, $v0, $zero
 /* 0F4A4C 802D009C 0220202D */  daddu $a0, $s1, $zero
 /* 0F4A50 802D00A0 0240282D */  daddu $a1, $s2, $zero
-/* 0F4A54 802D00A4 0C0B36B0 */  jal   func_802CDAC0
+/* 0F4A54 802D00A4 0C0B36B0 */  jal   resolve_npc
 /* 0F4A58 802D00A8 0040882D */   daddu $s1, $v0, $zero
 /* 0F4A5C 802D00AC 0040802D */  daddu $s0, $v0, $zero
 /* 0F4A60 802D00B0 1200000C */  beqz  $s0, .L802D00E4

@@ -21,7 +21,7 @@ glabel InterpNpcYaw
 /* 0F34F0 802CEB40 0C0B1EAF */  jal   get_variable
 /* 0F34F4 802CEB44 26310004 */   addiu $s1, $s1, 4
 /* 0F34F8 802CEB48 0240202D */  daddu $a0, $s2, $zero
-/* 0F34FC 802CEB4C 0C0B36B0 */  jal   func_802CDAC0
+/* 0F34FC 802CEB4C 0C0B36B0 */  jal   resolve_npc
 /* 0F3500 802CEB50 0040282D */   daddu $a1, $v0, $zero
 /* 0F3504 802CEB54 0040802D */  daddu $s0, $v0, $zero
 /* 0F3508 802CEB58 12000052 */  beqz  $s0, .L802CECA4

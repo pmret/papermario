@@ -95,7 +95,7 @@ glabel GetSelfAnimationFromTable
 /* 020C84 80045884 0040982D */   daddu $s3, $v0, $zero
 /* 020C88 80045888 0220202D */  daddu $a0, $s1, $zero
 /* 020C8C 8004588C 0240282D */  daddu $a1, $s2, $zero
-/* 020C90 80045890 0C0B36B0 */  jal   func_802CDAC0
+/* 020C90 80045890 0C0B36B0 */  jal   resolve_npc
 /* 020C94 80045894 0040802D */   daddu $s0, $v0, $zero
 /* 020C98 80045898 10400004 */  beqz  $v0, .L800458AC
 /* 020C9C 8004589C 0040202D */   daddu $a0, $v0, $zero

@@ -32,7 +32,7 @@ glabel SetNpcScale
 /* 0F28EC 802CDF3C 46000586 */   mov.s $f22, $f0
 /* 0F28F0 802CDF40 0220202D */  daddu $a0, $s1, $zero
 /* 0F28F4 802CDF44 0240282D */  daddu $a1, $s2, $zero
-/* 0F28F8 802CDF48 0C0B36B0 */  jal   func_802CDAC0
+/* 0F28F8 802CDF48 0C0B36B0 */  jal   resolve_npc
 /* 0F28FC 802CDF4C 46000506 */   mov.s $f20, $f0
 /* 0F2900 802CDF50 0040182D */  daddu $v1, $v0, $zero
 /* 0F2904 802CDF54 10600004 */  beqz  $v1, .L802CDF68

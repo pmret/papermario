@@ -19,7 +19,7 @@ glabel SetNpcJumpscale
 /* 0F2A6C 802CE0BC 0040802D */   daddu $s0, $v0, $zero
 /* 0F2A70 802CE0C0 0220202D */  daddu $a0, $s1, $zero
 /* 0F2A74 802CE0C4 0200282D */  daddu $a1, $s0, $zero
-/* 0F2A78 802CE0C8 0C0B36B0 */  jal   func_802CDAC0
+/* 0F2A78 802CE0C8 0C0B36B0 */  jal   resolve_npc
 /* 0F2A7C 802CE0CC 46000506 */   mov.s $f20, $f0
 /* 0F2A80 802CE0D0 54400001 */  bnel  $v0, $zero, .L802CE0D8
 /* 0F2A84 802CE0D4 E4540014 */   swc1  $f20, 0x14($v0)

@@ -18,7 +18,7 @@ glabel EnableNpcShadow
 /* 0F3C48 802CF298 0040802D */   daddu $s0, $v0, $zero
 /* 0F3C4C 802CF29C 0220202D */  daddu $a0, $s1, $zero
 /* 0F3C50 802CF2A0 0200282D */  daddu $a1, $s0, $zero
-/* 0F3C54 802CF2A4 0C0B36B0 */  jal   func_802CDAC0
+/* 0F3C54 802CF2A4 0C0B36B0 */  jal   resolve_npc
 /* 0F3C58 802CF2A8 0040802D */   daddu $s0, $v0, $zero
 /* 0F3C5C 802CF2AC 5040000A */  beql  $v0, $zero, .L802CF2D8
 /* 0F3C60 802CF2B0 24020002 */   addiu $v0, $zero, 2

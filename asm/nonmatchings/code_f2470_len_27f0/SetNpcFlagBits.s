@@ -20,7 +20,7 @@ glabel SetNpcFlagBits
 /* 0F3A48 802CF098 0040902D */   daddu $s2, $v0, $zero
 /* 0F3A4C 802CF09C 0220202D */  daddu $a0, $s1, $zero
 /* 0F3A50 802CF0A0 0240282D */  daddu $a1, $s2, $zero
-/* 0F3A54 802CF0A4 0C0B36B0 */  jal   func_802CDAC0
+/* 0F3A54 802CF0A4 0C0B36B0 */  jal   resolve_npc
 /* 0F3A58 802CF0A8 0040882D */   daddu $s1, $v0, $zero
 /* 0F3A5C 802CF0AC 0040202D */  daddu $a0, $v0, $zero
 /* 0F3A60 802CF0B0 5080000A */  beql  $a0, $zero, .L802CF0DC

@@ -19,7 +19,7 @@ glabel SetNpcSpeed
 /* 0F2A00 802CE050 0040802D */   daddu $s0, $v0, $zero
 /* 0F2A04 802CE054 0220202D */  daddu $a0, $s1, $zero
 /* 0F2A08 802CE058 0200282D */  daddu $a1, $s0, $zero
-/* 0F2A0C 802CE05C 0C0B36B0 */  jal   func_802CDAC0
+/* 0F2A0C 802CE05C 0C0B36B0 */  jal   resolve_npc
 /* 0F2A10 802CE060 46000506 */   mov.s $f20, $f0
 /* 0F2A14 802CE064 54400001 */  bnel  $v0, $zero, .L802CE06C
 /* 0F2A18 802CE068 E4540018 */   swc1  $f20, 0x18($v0)

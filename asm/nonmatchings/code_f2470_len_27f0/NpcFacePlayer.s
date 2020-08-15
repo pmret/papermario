@@ -24,7 +24,7 @@ glabel NpcFacePlayer
 /* 0F36C0 802CED10 0C0B1EAF */  jal   get_variable
 /* 0F36C4 802CED14 26520004 */   addiu $s2, $s2, 4
 /* 0F36C8 802CED18 0220202D */  daddu $a0, $s1, $zero
-/* 0F36CC 802CED1C 0C0B36B0 */  jal   func_802CDAC0
+/* 0F36CC 802CED1C 0C0B36B0 */  jal   resolve_npc
 /* 0F36D0 802CED20 0040282D */   daddu $a1, $v0, $zero
 /* 0F36D4 802CED24 0040802D */  daddu $s0, $v0, $zero
 /* 0F36D8 802CED28 1200004B */  beqz  $s0, .L802CEE58

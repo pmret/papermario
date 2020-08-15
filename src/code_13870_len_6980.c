@@ -42,9 +42,9 @@ INCLUDE_ASM(code_13870_len_6980, render_npcs);
 
 INCLUDE_ASM(code_13870_len_6980, npc_move_heading);
 
-INCLUDE_ASM(code_13870_len_6980, get_npc_unsafe);
+npc* INCLUDE_ASM(code_13870_len_6980, get_npc_unsafe, NPC npcID);
 
-INCLUDE_ASM(code_13870_len_6980, get_npc_safe);
+npc* INCLUDE_ASM(code_13870_len_6980, get_npc_safe, NPC npcID);
 
 INCLUDE_ASM(code_13870_len_6980, enable_npc_shadow);
 

@@ -22,11 +22,11 @@ glabel GetAngleBetweenNPCs
 /* 0F90F8 802D4748 0240202D */  daddu $a0, $s2, $zero
 /* 0F90FC 802D474C 0220282D */  daddu $a1, $s1, $zero
 /* 0F9100 802D4750 8E130000 */  lw    $s3, ($s0)
-/* 0F9104 802D4754 0C0B36B0 */  jal   func_802CDAC0
+/* 0F9104 802D4754 0C0B36B0 */  jal   resolve_npc
 /* 0F9108 802D4758 0040882D */   daddu $s1, $v0, $zero
 /* 0F910C 802D475C 0240202D */  daddu $a0, $s2, $zero
 /* 0F9110 802D4760 0220282D */  daddu $a1, $s1, $zero
-/* 0F9114 802D4764 0C0B36B0 */  jal   func_802CDAC0
+/* 0F9114 802D4764 0C0B36B0 */  jal   resolve_npc
 /* 0F9118 802D4768 0040802D */   daddu $s0, $v0, $zero
 /* 0F911C 802D476C 8C460038 */  lw    $a2, 0x38($v0)
 /* 0F9120 802D4770 C60C0038 */  lwc1  $f12, 0x38($s0)

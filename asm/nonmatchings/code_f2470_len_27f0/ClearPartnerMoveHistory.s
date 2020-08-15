@@ -11,7 +11,7 @@ glabel ClearPartnerMoveHistory
 /* 0F3D34 802CF384 0C0B1EAF */  jal   get_variable
 /* 0F3D38 802CF388 8C450000 */   lw    $a1, ($v0)
 /* 0F3D3C 802CF38C 0200202D */  daddu $a0, $s0, $zero
-/* 0F3D40 802CF390 0C0B36B0 */  jal   func_802CDAC0
+/* 0F3D40 802CF390 0C0B36B0 */  jal   resolve_npc
 /* 0F3D44 802CF394 0040282D */   daddu $a1, $v0, $zero
 /* 0F3D48 802CF398 50400004 */  beql  $v0, $zero, .L802CF3AC
 /* 0F3D4C 802CF39C 24020002 */   addiu $v0, $zero, 2

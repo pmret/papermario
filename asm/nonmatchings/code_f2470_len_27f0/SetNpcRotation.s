@@ -32,7 +32,7 @@ glabel SetNpcRotation
 /* 0F27C8 802CDE18 46000586 */   mov.s $f22, $f0
 /* 0F27CC 802CDE1C 0220202D */  daddu $a0, $s1, $zero
 /* 0F27D0 802CDE20 0240282D */  daddu $a1, $s2, $zero
-/* 0F27D4 802CDE24 0C0B36B0 */  jal   func_802CDAC0
+/* 0F27D4 802CDE24 0C0B36B0 */  jal   resolve_npc
 /* 0F27D8 802CDE28 46000506 */   mov.s $f20, $f0
 /* 0F27DC 802CDE2C 0040182D */  daddu $v1, $v0, $zero
 /* 0F27E0 802CDE30 10600004 */  beqz  $v1, .L802CDE44
@@ -67,7 +67,7 @@ glabel SetNpcRotation
 /* 0F284C 802CDE9C 0040802D */   daddu $s0, $v0, $zero
 /* 0F2850 802CDEA0 0220202D */  daddu $a0, $s1, $zero
 /* 0F2854 802CDEA4 0200282D */  daddu $a1, $s0, $zero
-/* 0F2858 802CDEA8 0C0B36B0 */  jal   func_802CDAC0
+/* 0F2858 802CDEA8 0C0B36B0 */  jal   resolve_npc
 /* 0F285C 802CDEAC 46000506 */   mov.s $f20, $f0
 /* 0F2860 802CDEB0 54400001 */  bnel  $v0, $zero, .L802CDEB8
 /* 0F2864 802CDEB4 E4540050 */   swc1  $f20, 0x50($v0)

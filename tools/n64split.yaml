@@ -2833,7 +2833,7 @@ labels:
   - [0x802C3EE4, "func_802C3EE4"]
   - [0x802CD4B4, "func_802CD4B4"]
   - [0x802CD57C, "func_802CD57C"]
-  - [0x802CDAC0, "func_802CDAC0"]
+  - [0x802CDAC0, "resolve_npc"]
   - [0x802D4488, "func_802D4488"]
   - [0x802D4560, "func_802D4560"]
   - [0x802DD8F8, "func_802DD8F8"]

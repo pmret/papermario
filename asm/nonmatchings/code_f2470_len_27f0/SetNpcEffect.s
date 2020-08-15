@@ -25,7 +25,7 @@ glabel SetNpcEffect
 /* 0F4B14 802D0164 0040982D */   daddu $s3, $v0, $zero
 /* 0F4B18 802D0168 0220202D */  daddu $a0, $s1, $zero
 /* 0F4B1C 802D016C 0240282D */  daddu $a1, $s2, $zero
-/* 0F4B20 802D0170 0C0B36B0 */  jal   func_802CDAC0
+/* 0F4B20 802D0170 0C0B36B0 */  jal   resolve_npc
 /* 0F4B24 802D0174 0040802D */   daddu $s0, $v0, $zero
 /* 0F4B28 802D0178 10400004 */  beqz  $v0, .L802D018C
 /* 0F4B2C 802D017C 0040202D */   daddu $a0, $v0, $zero

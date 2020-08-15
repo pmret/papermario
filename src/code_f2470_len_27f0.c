@@ -1,6 +1,14 @@
 #include "common.h"
 
-INCLUDE_ASM(code_f2470_len_27f0, func_802CDAC0);
+npc* resolve_npc(script_context* script, NPC npcID) {
+    if (npcID == NPC_SELF) {
+        return get_npc_safe(script->ownerID);
+    } else if (npcID >= -270000000) {
+        return get_npc_safe(npcID);
+    } else {
+        return npcID;
+    }
+}
 
 INCLUDE_ASM(code_f2470_len_27f0, set_npc_animation);
 

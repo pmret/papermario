@@ -14,7 +14,7 @@ glabel GetAngleToPlayer
 /* 0F9200 802D4850 26100004 */   addiu $s0, $s0, 4
 /* 0F9204 802D4854 0220202D */  daddu $a0, $s1, $zero
 /* 0F9208 802D4858 8E100000 */  lw    $s0, ($s0)
-/* 0F920C 802D485C 0C0B36B0 */  jal   func_802CDAC0
+/* 0F920C 802D485C 0C0B36B0 */  jal   resolve_npc
 /* 0F9210 802D4860 0040282D */   daddu $a1, $v0, $zero
 /* 0F9214 802D4864 3C038011 */  lui   $v1, 0x8011
 /* 0F9218 802D4868 2463EFC8 */  addiu $v1, $v1, -0x1038
