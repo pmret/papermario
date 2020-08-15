@@ -28,7 +28,7 @@ void func_80145DF8(void) {
     D_8014F12F = 0;
     
     gameStatus->unk_15C = 0xB4;
-    gameStatus->backgroundFlags &= 0xF0;
+    gameStatus->enableBackground &= 0xF0;
 }
 
 void read_background_size(bg_header *bg) {
@@ -40,13 +40,13 @@ void read_background_size(bg_header *bg) {
     gameStatus->backgroundMinH = bg->startY;
     gameStatus->backgroundRaster = bg->raster;
     gameStatus->backgroundPalette = bg->palette;
-    gameStatus->backgroundFlags |= 1;
+    gameStatus->enableBackground |= 1;
 }
 
 void set_background_size(s16 startX, s16 startY, s16 sizeX, s16 sizeY) {
     game_status* gameStatus = *gGameStatusPtr;
 
-    gameStatus->backgroundFlags &= ~1;
+    gameStatus->enableBackground &= ~1;
     gameStatus->backgroundMaxW = startX;
     gameStatus->backgroundMaxH = startY;
     gameStatus->backgroundMinW = sizeX;
