@@ -312,9 +312,9 @@ s32 SetItemPos(script_context* script, s32 initialCall) {
     z = get_variable(script, *ptrReadPos++);
 
     ptrItemEntity = (item_entity *) get_item_entity(itemEntityIndex);
-    ptrItemEntity->position[0] = x;
-    ptrItemEntity->position[1] = y;
-    ptrItemEntity->position[2] = z;
+    ptrItemEntity->position.x = x;
+    ptrItemEntity->position.y = y;
+    ptrItemEntity->position.z = z;
     return 2;
 }
 

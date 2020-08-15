@@ -52,7 +52,7 @@ INCLUDE_ASM(code_42e0_len_1f60, clamp_angle);
 
 INCLUDE_ASM(code_42e0_len_1f60, get_clamped_angle_diff);
 
-INCLUDE_ASM(code_42e0_len_1f60, atan2);
+f32 INCLUDE_ASM(code_42e0_len_1f60, atan2, f32 startX, f32 startZ, f32 endX, f32 endZ);
 
 INCLUDE_ASM(code_42e0_len_1f60, get_player_normal_yaw);
 

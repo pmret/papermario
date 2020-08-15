@@ -42,7 +42,19 @@ s32 RandInt(script_context* script, s32 initialCall) {
     return 2;
 }
 
-INCLUDE_ASM(code_f8f60_len_1560, GetAngleBetweenNPCs);
+s32 GetAngleBetweenNPCs(script_context* script, s32 initialCall) {
+    bytecode* ptrReadPos = script->ptrReadPos;
+
+    NPC aID = get_variable(script, *ptrReadPos++);
+    NPC bID = get_variable(script, *ptrReadPos++);
+    bytecode outVar = *ptrReadPos++;
+
+    npc* a = resolve_npc(script, aID);
+    npc* b = resolve_npc(script, bID);
+    set_variable(script, outVar, atan2(a->pos.x, a->pos.z, b->pos.x, b->pos.z));
+
+    return 2;
+}
 
 INCLUDE_ASM(code_f8f60_len_1560, GetAngleToNPC);
 
