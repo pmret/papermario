@@ -1,8 +1,5 @@
 #include "common.h"
 
-void sort_items(void);
-s32 is_ability_active(s32 arg0);
-
 void clear_player_data(void) {
     player_data* playerData = &gPlayerData;
     s32 i;
@@ -719,7 +716,7 @@ void reset_status_menu(void) {
 }
 
 // uses a jumptable, which we need .rodata support for.
-INCLUDE_ASM(code_80850_len_3060, is_ability_active);
+s32 INCLUDE_ASM(code_80850_len_3060, is_ability_active, s32 arg0);
 // Somewhat close. Needs work.
 /*s32 is_ability_active(s32 arg0) {
     s32 iVar2;

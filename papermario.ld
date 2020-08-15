@@ -897,7 +897,7 @@ SECTIONS
       build/bin/papermario.090FE0.bin_90fe0_len_14df0.o(.data);
    }
 
-   // uncomment once rodata for is_ability_active is needed.
+   /* uncomment once rodata for is_ability_active is needed. */
    /*.rodata8010BF60 0x8010BF60 : AT(0xA5410) {
       build/src/code_80850_len_3060.o(.rodata)
    }
