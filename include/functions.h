@@ -9,10 +9,10 @@ void osCleanupThread(void);
 
 void clone_model(u16 srcModelID, u16 newModelID);
 void update_collider_transform(s16 colliderID);
-s32 get_variable(script_context* script, s32 var);
-s32 set_variable(script_context* script, s32 var, s32 value);
-f32 get_float_variable(script_context* script, s32 var);
-f32 set_float_variable(script_context* script, s32 var, f32 value);
+s32 get_variable(script_context* script, bytecode var);
+s32 set_variable(script_context* script, bytecode var, s32 value);
+f32 get_float_variable(script_context* script, bytecode var);
+f32 set_float_variable(script_context* script, bytecode var, f32 value);
 void set_script_timescale(script_context* script, f32 timescale);
 f32 sin_deg(f32 x);
 f32 cos_deg(f32 x);
@@ -32,8 +32,8 @@ void sort_items(void);
 s32 is_ability_active(s32 arg0);
 f32 update_lerp(EASING easing, f32 start, f32 end, s32 elapsed, s32 duration);
 
-npc* get_npc_safe(NPC npcID);
-npc* get_npc_unsafe(NPC npcID);
+npc* get_npc_safe(s32 npcID);
+npc* get_npc_unsafe(s32 npcID);
 npc* resolve_npc(script_context* script, NPC npcID);
 
 f32 dist2D(f32 ax, f32 ay, f32 bx, f32 by);
