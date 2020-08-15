@@ -317,7 +317,7 @@ typedef struct ui_status {
     /* 0x36 */ s16 drawPosY; /* modulated as it appears, goes away */
     /* 0x38 */ s16 showTimer;
     /* 0x3A */ s8 hidden;
-    /* 0x3B */ s8 unk_3B[
+    /* 0x3B */ s8 unk_3B[2];
     /* 0x3D */ u8 displayHP;
     /* 0x3E */ u8 displayFP;
     /* 0x3F */ char unk_3F;
