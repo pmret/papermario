@@ -2,7 +2,7 @@
 
 INCLUDE_ASM(code_fa4c0_len_3bf0, func_802D5B10);
 
-s32 FadeOutMusic(Script* script, s32 initialCall) {
+s32 FadeOutMusic(ScriptInstance* script, s32 initialCall) {
     s32* ptrReadPos = script->ptrReadPos;
     s32 itemID = get_variable(script, *ptrReadPos++);
     s32* ptrNextPos = ptrReadPos++;
@@ -10,7 +10,7 @@ s32 FadeOutMusic(Script* script, s32 initialCall) {
     return (set_music_track(itemID, -1, 0, get_variable(script, *ptrNextPos++), 8) != 0) * 2;
 }
 
-s32 SetMusicTrack(Script* script, s32 initialCall) {
+s32 SetMusicTrack(ScriptInstance* script, s32 initialCall) {
     s32* ptrReadPos = script->ptrReadPos;
     s32 musicPlayer = get_variable(script, *ptrReadPos++);
     s32 songID = get_variable(script, *ptrReadPos++);
@@ -22,14 +22,14 @@ s32 SetMusicTrack(Script* script, s32 initialCall) {
 
 INCLUDE_ASM(code_fa4c0_len_3bf0, FadeInMusic);
 
-s32 PlayAmbientSounds(Script* script, s32 initialCall) {
+s32 PlayAmbientSounds(ScriptInstance* script, s32 initialCall) {
     s32* ptrReadPos = script->ptrReadPos;
     s32 soundID = get_variable(script, *ptrReadPos++);
 
     return (play_ambient_sounds(soundID, 0xFA) != 0) * 2;
 }
 
-s32 PlaySound(Script* script, s32 initialCall) {
+s32 PlaySound(ScriptInstance* script, s32 initialCall) {
     s32* ptrReadPos = script->ptrReadPos;
     s32 soundID = get_variable(script, *ptrReadPos++);
 
@@ -37,7 +37,7 @@ s32 PlaySound(Script* script, s32 initialCall) {
     return 2;
 }
 
-s32 func_802D617C(Script* script, s32 initialCall) {
+s32 func_802D617C(ScriptInstance* script, s32 initialCall) {
     s32* ptrReadPos = script->ptrReadPos;
     s32 soundID = get_variable(script, *ptrReadPos++);
     s32 value2 = get_variable(script, *ptrReadPos++);
@@ -46,7 +46,7 @@ s32 func_802D617C(Script* script, s32 initialCall) {
     return 2;
 }
 
-s32 PlaySoundAt(Script* script, s32 initialCall) {
+s32 PlaySoundAt(ScriptInstance* script, s32 initialCall) {
     s32* ptrReadPos = script->ptrReadPos;
     s32 soundID = get_variable(script, *ptrReadPos++);
     s32 value2 = get_variable(script, *ptrReadPos++);
@@ -58,28 +58,28 @@ s32 PlaySoundAt(Script* script, s32 initialCall) {
     return 2;
 }
 
-s32 StopSound(Script* script, s32 initialCall) {
+s32 StopSound(ScriptInstance* script, s32 initialCall) {
     s32* ptrReadPos = script->ptrReadPos;
 
     stop_sound(get_variable(script, *ptrReadPos++));
     return 2;
 }
 
-s32 func_802D62E4(Script* script, s32 initialCall) {
+s32 func_802D62E4(ScriptInstance* script, s32 initialCall) {
     s32* ptrReadPos = script->ptrReadPos;
 
     func_80149A6C(get_variable(script, *ptrReadPos++), 1);
     return 2;
 }
 
-s32 UseDoorSounds(Script* script, s32 initialCall) {
+s32 UseDoorSounds(ScriptInstance* script, s32 initialCall) {
     s32* ptrReadPos = script->ptrReadPos;
 
     gCurrentDoorSoundsSet = get_variable(script, *ptrReadPos++);
     return 2;
 }
 
-s32 func_802D6340(Script* script, s32 initialCall) {
+s32 func_802D6340(ScriptInstance* script, s32 initialCall) {
     s32* ptrReadPos = script->ptrReadPos;
 
     D_80151308 = get_variable(script, *ptrReadPos++);
@@ -88,7 +88,7 @@ s32 func_802D6340(Script* script, s32 initialCall) {
 
 INCLUDE_ASM(code_fa4c0_len_3bf0, PlaySoundAtF);
 
-s32 RemoveKeyItemAt(Script* script, s32 initialCall) {
+s32 RemoveKeyItemAt(ScriptInstance* script, s32 initialCall) {
     s32* ptrReadPos = script->ptrReadPos;
     s32 index = get_variable(script, *ptrReadPos++);
     s16* ptrKeyItems = (s16 *) &gPlayerData.keyItems;
@@ -97,7 +97,7 @@ s32 RemoveKeyItemAt(Script* script, s32 initialCall) {
     return 2;
 }
 
-s32 RemoveItemAt(Script* script, s32 initialCall) {
+s32 RemoveItemAt(ScriptInstance* script, s32 initialCall) {
     s32* ptrReadPos = script->ptrReadPos;
     s32 index = get_variable(script, *ptrReadPos++);
     s16* ptrInvItems = (s16 *) &gPlayerData.invItems;
@@ -107,7 +107,7 @@ s32 RemoveItemAt(Script* script, s32 initialCall) {
     return 2;
 }
 
-s32 AddKeyItem(Script* script, s32 initialCall) {
+s32 AddKeyItem(ScriptInstance* script, s32 initialCall) {
     s32* ptrReadPos = script->ptrReadPos;
     s32 value = *ptrReadPos++;
     PlayerData* playerData = &gPlayerData;
@@ -139,7 +139,7 @@ s32 func_802D6954(void) {
     return 2;
 }
 
-s32 HasKeyItem(Script* script, s32 initialCall) {
+s32 HasKeyItem(ScriptInstance* script, s32 initialCall) {
     s32* ptrReadPos = script->ptrReadPos;
     s32 itemID = get_variable(script, *ptrReadPos++);
     s32 value = *ptrReadPos++;
@@ -155,7 +155,7 @@ s32 HasKeyItem(Script* script, s32 initialCall) {
     return 2;
 }
 
-s32 FindKeyItem(Script* script, s32 initialCall) {
+s32 FindKeyItem(ScriptInstance* script, s32 initialCall) {
     s32* ptrReadPos = script->ptrReadPos;
     s32 itemID = get_variable(script, *ptrReadPos++);
     s32 value = *ptrReadPos++;
@@ -178,7 +178,7 @@ s32 FindKeyItem(Script* script, s32 initialCall) {
     return 2;
 }
 
-s32 AddItem(Script* script, s32 initialCall) {
+s32 AddItem(ScriptInstance* script, s32 initialCall) {
     s32* ptrReadPos = script->ptrReadPos;
     s32 itemID = get_variable(script, *ptrReadPos++);
     s32* ptrNextPos = (s32 *) *ptrReadPos++;
@@ -187,12 +187,12 @@ s32 AddItem(Script* script, s32 initialCall) {
     return 2;
 }
 
-s32 func_802D6AF0(Script* script, s32 initialCall) {
+s32 func_802D6AF0(ScriptInstance* script, s32 initialCall) {
     set_variable(script, *script->ptrReadPos, 0);
     return 2;
 }
 
-s32 FindItem(Script* script, s32 initialCall) {
+s32 FindItem(ScriptInstance* script, s32 initialCall) {
     s32* ptrReadPos = script->ptrReadPos;
     s32 itemID = get_variable(script, *ptrReadPos++);
     s32 value = *ptrReadPos++;
@@ -215,7 +215,7 @@ s32 FindItem(Script* script, s32 initialCall) {
     return 2;
 }
 
-s32 RemoveItem(Script* script, s32 initialCall) {
+s32 RemoveItem(ScriptInstance* script, s32 initialCall) {
     s32* ptrReadPos = script->ptrReadPos;
     s32 itemID = get_variable(script, *ptrReadPos++);
     s32 value = *ptrReadPos++;
@@ -245,14 +245,14 @@ s32 RemoveItem(Script* script, s32 initialCall) {
     return 2;
 }
 
-s32 CountFortressKeys(Script* script, s32 initialCall) {
+s32 CountFortressKeys(ScriptInstance* script, s32 initialCall) {
     s32 outVar = *script->ptrReadPos;
 
     set_variable(script, outVar, get_fortress_key_count());
     return 2;
 }
 
-s32 RemoveFortressKeys(Script* script, s32 initialCall) {
+s32 RemoveFortressKeys(ScriptInstance* script, s32 initialCall) {
     s32 num = get_variable(script, *script->ptrReadPos);
 
     subtract_fortress_keys(num);
@@ -281,7 +281,7 @@ s32 DropItemEntityB(script_context* script, s32 initialCall) {
 }
 */
 
-s32 RemoveItemEntity(Script* script, s32 initialCall) {
+s32 RemoveItemEntity(ScriptInstance* script, s32 initialCall) {
   s32* ptrReadPos = script->ptrReadPos;
   s32 itemEntityIndex = get_variable(script, *ptrReadPos++);
 
@@ -289,7 +289,7 @@ s32 RemoveItemEntity(Script* script, s32 initialCall) {
   return 2;
 }
 
-s32 AddBadge(Script* script, s32 initialCall) {
+s32 AddBadge(ScriptInstance* script, s32 initialCall) {
   s32* ptrReadPos = script->ptrReadPos;
   s32 itemID = get_variable(script, *ptrReadPos++);
   s32* ptrNextPos = (s32 *) *ptrReadPos++;
@@ -300,7 +300,7 @@ s32 AddBadge(Script* script, s32 initialCall) {
 
 INCLUDE_ASM(code_fa4c0_len_3bf0, RemoveBadge);
 
-s32 SetItemPos(Script* script, s32 initialCall) {
+s32 SetItemPos(ScriptInstance* script, s32 initialCall) {
     s32* ptrReadPos = script->ptrReadPos;
     ItemEntity* ptrItemEntity;
     s32 itemEntityIndex;
@@ -320,17 +320,17 @@ s32 SetItemPos(Script* script, s32 initialCall) {
 
 INCLUDE_ASM(code_fa4c0_len_3bf0, SetItemFlags);
 
-s32 AddCoin(Script* script, s32 initialCall) {
+s32 AddCoin(ScriptInstance* script, s32 initialCall) {
     script->varTable[0] = add_coins(get_variable(script, *script->ptrReadPos));
     return 2;
 }
 
-s32 AddStarPoints(Script* script, s32 initialCall) {
+s32 AddStarPoints(ScriptInstance* script, s32 initialCall) {
     script->varTable[0] = add_star_points(get_variable(script, *script->ptrReadPos));
     return 2;
 }
 
-s32 AddStarPieces(Script* script, s32 initialCall) {
+s32 AddStarPieces(ScriptInstance* script, s32 initialCall) {
     script->varTable[0] = add_star_pieces(get_variable(script, *script->ptrReadPos));
     return 2;
 }

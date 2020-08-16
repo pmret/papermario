@@ -11,9 +11,9 @@ extern PlayerStatus gPlayerStatus;
 extern GameStatus* gGameStatusPtr[1];
 extern Item gItemTable[364];
 
-extern Script* gWorldScriptList[128];
-extern Script* gBattleScriptList[128];
-extern Script** gCurrentScriptListPtr[128];
+extern ScriptInstance* gWorldScriptList[128];
+extern ScriptInstance* gBattleScriptList[128];
+extern ScriptInstance** gCurrentScriptListPtr[128];
 
 extern f32 gGlobalTimeSpace;
 

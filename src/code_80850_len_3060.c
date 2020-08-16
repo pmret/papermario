@@ -393,7 +393,7 @@ void func_800E96C8(void) {
     }
 }
 
-s32 ShowCoinCounter(Script* script) {
+s32 ShowCoinCounter(ScriptInstance* script) {
     if (get_variable(script, *script->ptrReadPos)) {
         show_coin_counter();
     } else {

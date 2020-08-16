@@ -13,16 +13,16 @@ INCLUDE_ASM(code_e92d0_len_5da0, float_to_fixed_var);
     return (s32)(arg0 * (f32)1024.0f) + -230000000;
 }*/
 
-s32 si_handle_return(Script* script) {
+s32 si_handle_return(ScriptInstance* script) {
     kill_script(script);
     return 255;
 }
 
-s32 si_handle_label(Script* script) {
+s32 si_handle_label(ScriptInstance* script) {
     return 2;
 }
 
-s32 si_handle_goto(Script* script) {
+s32 si_handle_goto(ScriptInstance* script) {
     script->ptrNextLine = si_goto_label(script, get_variable(script, *script->ptrReadPos));
     return 2;
 }
@@ -31,7 +31,7 @@ INCLUDE_ASM(code_e92d0_len_5da0, si_handle_Loop);
 
 INCLUDE_ASM(code_e92d0_len_5da0, si_handle_end_loop);
 
-s32 si_handle_break_loop(Script* script) {
+s32 si_handle_break_loop(ScriptInstance* script) {
     if (script->loopDepth < 0) {
         while (1) {}; // todo INF_LOOP
     }
@@ -56,7 +56,7 @@ INCLUDE_ASM(code_e92d0_len_5da0, si_handle_if_less_equal);
 
 INCLUDE_ASM(code_e92d0_len_5da0, si_handle_if_greater_equal);
 
-s32 si_handle_if_AND(Script* script) {
+s32 si_handle_if_AND(ScriptInstance* script) {
     s32 var1;
     s32 *ptrReadPos = script->ptrReadPos;
 
@@ -71,7 +71,7 @@ s32 si_handle_if_AND(Script* script) {
 }
 
 //INCLUDE_ASM(code_e92d0_len_5da0, si_handle_if_not_AND);
-s32 si_handle_if_not_AND(Script* script) {
+s32 si_handle_if_not_AND(ScriptInstance* script) {
     s32 var1;
     s32 *ptrReadPos = script->ptrReadPos;
 
@@ -85,12 +85,12 @@ s32 si_handle_if_not_AND(Script* script) {
     return 2;
 }
 
-s32 si_handle_else(Script* script) {
+s32 si_handle_else(ScriptInstance* script) {
     script->ptrNextLine = si_skip_else(script);
     return 2;
 }
 
-s32 si_handle_end_if(Script* script) {
+s32 si_handle_end_if(ScriptInstance* script) {
     return 2;
 }
 
@@ -133,7 +133,7 @@ INCLUDE_ASM(code_e92d0_len_5da0, si_handle_case_equal_AND);
 
 INCLUDE_ASM(code_e92d0_len_5da0, si_handle_end_case_group);
 
-s32 si_handle_break_case(Script* script) {
+s32 si_handle_break_case(ScriptInstance* script) {
     if (script->switchDepth < 0) {
         while (1) {}; //todo INF_LOOP
     }
@@ -141,7 +141,7 @@ s32 si_handle_break_case(Script* script) {
     return 2;
 }
 
-s32 si_handle_end_switch(Script* script) {
+s32 si_handle_end_switch(ScriptInstance* script) {
     s32 switchDepth = script->switchDepth;
 
     if (switchDepth < 0) {
@@ -154,7 +154,7 @@ s32 si_handle_end_switch(Script* script) {
 
 }
 
-s32 si_handle_set_var(Script* script) {
+s32 si_handle_set_var(ScriptInstance* script) {
     s32* ptrReadPos = script->ptrReadPos;
     s32 curPtrReadPos = ptrReadPos[0];
 
@@ -162,12 +162,12 @@ s32 si_handle_set_var(Script* script) {
     return 2;
 }
 
-s32 si_handle_set_const(Script* script) {
+s32 si_handle_set_const(ScriptInstance* script) {
     set_variable(script, *script->ptrReadPos, script->ptrReadPos[1]);
     return 2;
 }
 
-s32 si_handle_set_float(Script* script) {
+s32 si_handle_set_float(ScriptInstance* script) {
     s32* ptrReadPos = script->ptrReadPos;
     s32 curPtrReadPos = ptrReadPos[0];
 
@@ -193,17 +193,17 @@ INCLUDE_ASM(code_e92d0_len_5da0, si_handle_multiplyF);
 
 INCLUDE_ASM(code_e92d0_len_5da0, si_handle_divideF);
 
-s32 si_handle_set_int_buffer_ptr(Script* script) {
+s32 si_handle_set_int_buffer_ptr(ScriptInstance* script) {
     script->buffer = get_variable(script, *script->ptrReadPos);
     return 2;
 }
 
-s32 si_handle_set_float_buffer_ptr(Script* script) {
+s32 si_handle_set_float_buffer_ptr(ScriptInstance* script) {
     script->buffer = get_variable(script, *script->ptrReadPos);
     return 2;
 }
 
-s32 si_handle_get_1_word(Script* script) {
+s32 si_handle_get_1_word(ScriptInstance* script) {
     s32 ptrReadPos = *script->ptrReadPos;
     s32 buffer = *script->buffer++;
 
@@ -217,7 +217,7 @@ INCLUDE_ASM(code_e92d0_len_5da0, si_handle_get_3_word);
 
 INCLUDE_ASM(code_e92d0_len_5da0, si_handle_get_4_word);
 
-s32 si_handle_get_Nth_word(Script* script) {
+s32 si_handle_get_Nth_word(ScriptInstance* script) {
     s32* ptrReadPos = script->ptrReadPos;
     s32 curPtrReadPos = ptrReadPos[0];
 
@@ -235,12 +235,12 @@ INCLUDE_ASM(code_e92d0_len_5da0, si_handle_get_4_float);
 
 INCLUDE_ASM(code_e92d0_len_5da0, si_handle_get_Nth_float);
 
-s32 si_handle_set_array(Script* script) {
+s32 si_handle_set_array(ScriptInstance* script) {
     script->array = get_variable(script, *script->ptrReadPos);
     return 2;
 }
 
-s32 si_handle_set_flag_array(Script* script) {
+s32 si_handle_set_flag_array(ScriptInstance* script) {
     script->flagArray = get_variable(script, *script->ptrReadPos);
     return 2;
 }
@@ -250,7 +250,7 @@ INCLUDE_ASM(code_e92d0_len_5da0, si_handle_allocate_array);
 INCLUDE_ASM(code_e92d0_len_5da0, si_handle_AND);
 
 //INCLUDE_ASM(code_e92d0_len_5da0, si_handle_AND_const);
-s32 si_handle_AND_const(Script* script) {
+s32 si_handle_AND_const(ScriptInstance* script) {
     s32* ptrReadPos = script->ptrReadPos;
     // todo ???
     s32 temp_s0 = ptrReadPos[0];
@@ -265,7 +265,7 @@ s32 si_handle_AND_const(Script* script) {
 INCLUDE_ASM(code_e92d0_len_5da0, si_handle_OR);
 
 //INCLUDE_ASM(code_e92d0_len_5da0, si_handle_OR_const);
-s32 si_handle_OR_const(Script* script) {
+s32 si_handle_OR_const(ScriptInstance* script) {
     s32* ptrReadPos = script->ptrReadPos;
     // todo ???
     s32 temp_s0 = ptrReadPos[0];
@@ -283,13 +283,13 @@ INCLUDE_ASM(code_e92d0_len_5da0, si_handle_exec1);
 
 INCLUDE_ASM(code_e92d0_len_5da0, si_handle_exec2);
 
-s32 si_handle_exec_wait(Script* script) {
+s32 si_handle_exec_wait(ScriptInstance* script) {
     start_child_script(script, get_variable(script, *script->ptrReadPos), 0);
     script->currentOpcode = 0;
     return 0xFF;
 }
 
-s32 si_handle_jump(Script* script) {
+s32 si_handle_jump(ScriptInstance* script) {
     script->ptrFirstLine = get_variable(script, *script->ptrReadPos);
     restart_script(script);
     return 2;
@@ -299,62 +299,62 @@ INCLUDE_ASM(code_e92d0_len_5da0, _bound_script_trigger_handler);
 
 INCLUDE_ASM(code_e92d0_len_5da0, si_handle_bind);
 
-s32 DeleteTrigger(Script* script) {
+s32 DeleteTrigger(ScriptInstance* script) {
     delete_trigger(get_variable(script, *script->ptrReadPos));
     return 2;
 }
 
-s32 si_handle_unbind(Script* script) {
+s32 si_handle_unbind(ScriptInstance* script) {
     delete_trigger(script->ownerID);
     return 2;
 }
 
-s32 si_handle_kill(Script* script) {
+s32 si_handle_kill(ScriptInstance* script) {
     kill_script_by_ID(get_variable(script, *script->ptrReadPos));
     return 2;
 }
 
-s32 si_handle_set_priority(Script* script) {
+s32 si_handle_set_priority(ScriptInstance* script) {
     set_script_priority(script, get_variable(script, *script->ptrReadPos));
     return 2;
 }
 
-s32 si_handle_set_timescale(Script* script) {
+s32 si_handle_set_timescale(ScriptInstance* script) {
     set_script_timescale(script, get_float_variable(script, *script->ptrReadPos));
     return 2;
 }
 
-s32 si_handle_set_group(Script* script) {
+s32 si_handle_set_group(ScriptInstance* script) {
     set_script_group(script, get_variable(script, *script->ptrReadPos));
     return 2;
 }
 
-s32 si_handle_suspend_all(Script* script) {
+s32 si_handle_suspend_all(ScriptInstance* script) {
     suspend_all_group(get_variable(script, *script->ptrReadPos));
     return 2;
 }
 
-s32 si_handle_resume_all(Script* script) {
+s32 si_handle_resume_all(ScriptInstance* script) {
     resume_all_group(get_variable(script, *script->ptrReadPos));
     return 2;
 }
 
-s32 si_handle_suspend_others(Script* script) {
+s32 si_handle_suspend_others(ScriptInstance* script) {
     suspend_group_others(script, get_variable(script, *script->ptrReadPos));
     return 2;
 }
 
-s32 si_handle_resume_others(Script* script) {
+s32 si_handle_resume_others(ScriptInstance* script) {
     resume_group_others(script, get_variable(script, *script->ptrReadPos));
     return 2;
 }
 
-s32 si_handle_suspend(Script* script) {
+s32 si_handle_suspend(ScriptInstance* script) {
     suspend_all_script(get_variable(script, *script->ptrReadPos));
     return 2;
 }
 
-s32 si_handle_resume(Script* script) {
+s32 si_handle_resume(ScriptInstance* script) {
     resume_all_script(get_variable(script, *script->ptrReadPos));
     return 2;
 }
@@ -365,34 +365,34 @@ INCLUDE_ASM(code_e92d0_len_5da0, si_handle_bind_lock);
 
 INCLUDE_ASM(code_e92d0_len_5da0, si_handle_thread);
 
-s32 si_handle_end_thread(Script* script) {
+s32 si_handle_end_thread(ScriptInstance* script) {
     kill_script(script);
     return 255;
 }
 
 INCLUDE_ASM(code_e92d0_len_5da0, si_handle_child_thread);
 
-s32 si_handle_end_child_thread(Script* script) {
+s32 si_handle_end_child_thread(ScriptInstance* script) {
     kill_script(script);
     return 0;
 }
 
-s32 func_802C6E14(Script* script) {
+s32 func_802C6E14(ScriptInstance* script) {
     return 2;
 }
 
 INCLUDE_ASM(code_e92d0_len_5da0, si_handle_print_debug_var);
 
-s32 func_802C739C(Script* script) {
+s32 func_802C739C(ScriptInstance* script) {
     script->ptrSavedPosition = *script->ptrReadPos;
     return 2;
 }
 
-s32 func_802C73B0(Script* script) {
+s32 func_802C73B0(ScriptInstance* script) {
     return 2;
 }
 
-s32 func_802C73B8(Script* script) {
+s32 func_802C73B8(ScriptInstance* script) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
@@ -407,17 +407,17 @@ INCLUDE_ASM(code_e92d0_len_5da0, si_execute_next_command);
 
 INCLUDE_ASM(code_e92d0_len_5da0, si_handle_end);
 
-s32 INCLUDE_ASM(code_e92d0_len_5da0, get_variable, Script* script, Bytecode var);
+s32 INCLUDE_ASM(code_e92d0_len_5da0, get_variable, ScriptInstance* script, Bytecode var);
 
 INCLUDE_ASM(code_e92d0_len_5da0, get_variable_index);
 
 INCLUDE_ASM(code_e92d0_len_5da0, get_variable_index_alt);
 
-s32 INCLUDE_ASM(code_e92d0_len_5da0, set_variable, Script* script, Bytecode var, s32 value);
+s32 INCLUDE_ASM(code_e92d0_len_5da0, set_variable, ScriptInstance* script, Bytecode var, s32 value);
 
-f32 INCLUDE_ASM(code_e92d0_len_5da0, get_float_variable, Script* script, Bytecode var);
+f32 INCLUDE_ASM(code_e92d0_len_5da0, get_float_variable, ScriptInstance* script, Bytecode var);
 
-f32 INCLUDE_ASM(code_e92d0_len_5da0, set_float_variable, Script* script, Bytecode var, f32 value);
+f32 INCLUDE_ASM(code_e92d0_len_5da0, set_float_variable, ScriptInstance* script, Bytecode var, f32 value);
 
 INCLUDE_ASM(code_e92d0_len_5da0, si_goto_label);
 
@@ -439,7 +439,7 @@ INCLUDE_ASM(code_e92d0_len_5da0, ScaleModel);
 
 INCLUDE_ASM(code_e92d0_len_5da0, GetModelIndex);
 
-s32 CloneModel(Script* script) {
+s32 CloneModel(ScriptInstance* script) {
     s32* thisPos = script->ptrReadPos;
     s32 srcModelID = get_variable(script, *thisPos++);
     s32 newModelID = get_variable(script, *thisPos++);
@@ -484,7 +484,7 @@ INCLUDE_ASM(code_e92d0_len_5da0, GetColliderCenter);
 
 INCLUDE_ASM(code_e92d0_len_5da0, ParentColliderToModel);
 
-s32 UpdateColliderTransform(Script* script) {
+s32 UpdateColliderTransform(ScriptInstance* script) {
     update_collider_transform(get_variable(script, *script->ptrReadPos));
     return 2;
 }
@@ -493,32 +493,32 @@ INCLUDE_ASM(code_e92d0_len_5da0, func_802CA1B8);
 
 INCLUDE_ASM(code_e92d0_len_5da0, goto_map);
 
-s32 GotoMap(Script* script) {
+s32 GotoMap(ScriptInstance* script) {
     goto_map(script, 0);
     return 1;
 }
 
-s32 GotoMapSpecial(Script* script) {
+s32 GotoMapSpecial(ScriptInstance* script) {
     goto_map(script, 1);
     return 1;
 }
 
-s32 GotoMapByID(Script* script) {
+s32 GotoMapByID(ScriptInstance* script) {
     goto_map(script, 2);
     return 1;
 }
 
-s32 GetEntryID(Script* script) {
+s32 GetEntryID(ScriptInstance* script) {
     set_variable(script, *script->ptrReadPos, (*gGameStatusPtr)->entryID);
     return 2;
 }
 
-s32 GetMapID(Script* script, s32 initialCall) {
+s32 GetMapID(ScriptInstance* script, s32 initialCall) {
     set_variable(script, *script->ptrReadPos, (*gGameStatusPtr)->mapID);
     return 2;
 }
 
-s32 GetLoadType(Script* script, s32 initialCall) {
+s32 GetLoadType(ScriptInstance* script, s32 initialCall) {
     set_variable(script, *script->ptrReadPos, (*gGameStatusPtr)->loadType != 0);
     return 2;
 }

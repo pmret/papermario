@@ -158,7 +158,7 @@ typedef struct Trigger {
     /* 0x08 */ s32 colliderID;
     /* 0x0C */ UNK_FUN_PTR(functionHandler);
     /* 0x10 */ Bytecode* scriptStart;
-    /* 0x14 */ struct Script* runningScript;
+    /* 0x14 */ struct ScriptInstance* runningScript;
     /* 0x18 */ s32 priority;
     /* 0x1C */ s32 scriptVars[3];
     /* 0x28 */ char unk_28[12];
@@ -181,12 +181,12 @@ typedef struct Enemy {
     /* 0x28 */ Bytecode* hitBytecode;
     /* 0x2C */ Bytecode* auxBytecode;
     /* 0x30 */ Bytecode* defeatBytecode;
-    /* 0x34 */ struct Script* initScript;
-    /* 0x38 */ struct Script* interactScript;
-    /* 0x3C */ struct Script* aiScript;
-    /* 0x40 */ struct Script* hitScript;
-    /* 0x44 */ struct Script* auxScript;
-    /* 0x48 */ struct Script* defeatScript;
+    /* 0x34 */ struct ScriptInstance* initScript;
+    /* 0x38 */ struct ScriptInstance* interactScript;
+    /* 0x3C */ struct ScriptInstance* aiScript;
+    /* 0x40 */ struct ScriptInstance* hitScript;
+    /* 0x44 */ struct ScriptInstance* auxScript;
+    /* 0x48 */ struct ScriptInstance* defeatScript;
     /* 0x4C */ s32 initScriptID;
     /* 0x50 */ s32 interactScriptID;
     /* 0x54 */ s32 aiScriptID;
@@ -221,7 +221,7 @@ typedef struct StaticNpcSettings {
     /* 0x2A */ s16 unkFlags;
 } StaticNpcSettings; // size = 0x2C
 
-typedef struct Script {
+typedef struct ScriptInstance {
     /* 0x000 */ u8 state;
     /* 0x001 */ u8 currentArgc;
     /* 0x002 */ u8 currentOpcode;
@@ -235,9 +235,9 @@ typedef struct Script {
     /* 0x010 */ u8 labelIndices[16];
     /* 0x020 */ UNK_PTR labelPositions[16];
     /* 0x060 */ s32 deleted; /* set to zero in KillScript when malloc'd */
-    /* 0x064 */ struct Script* blockingParent; /* parent? */
-    /* 0x068 */ struct Script* childScript;
-    /* 0x06C */ struct Script* parentScript; /* brother? */
+    /* 0x064 */ struct ScriptInstance* blockingParent; /* parent? */
+    /* 0x068 */ struct ScriptInstance* childScript;
+    /* 0x06C */ struct ScriptInstance* parentScript; /* brother? */
     /* 0x070 */ s32 functionTemp[4];
     /* 0x080 */ UNK_PTR callFunction;
     /* 0x084 */ s32 varTable[16];
@@ -258,7 +258,7 @@ typedef struct Script {
     /* 0x15C */ Bytecode* ptrFirstLine;
     /* 0x160 */ Bytecode* ptrSavedPosition;
     /* 0x164 */ Bytecode* ptrCurrentLine;
-} Script; // size = 0x168
+} ScriptInstance; // size = 0x168
 
 typedef struct Entity {
     /* 0x00 */ s32 flags;
@@ -521,9 +521,9 @@ typedef struct BattleStatus {
     /* 0x0B1 */ char unk_B1[3];
     /* 0x0B4 */ UNK_FUN_PTR(preUpdateCallback);
     /* 0x0B8 */ char unk_B8[4];
-    /* 0x0BC */ struct Script* controlScript; /* control handed over to this when changing partners, maybe general? */
+    /* 0x0BC */ struct ScriptInstance* controlScript; /* control handed over to this when changing partners, maybe general? */
     /* 0x0C0 */ s32 controlScriptID;
-    /* 0x0C4 */ struct Script* camMovementScript;
+    /* 0x0C4 */ struct ScriptInstance* camMovementScript;
     /* 0x0C8 */ s32 camMovementScriptID;
     /* 0x0CC */ char unk_CC[12];
     /* 0x0D8 */ struct Actor* playerActor;
@@ -1182,10 +1182,10 @@ typedef struct Actor {
     /* 0x1C4 */ Bytecode* takeTurnCode;
     /* 0x1C8 */ Bytecode* onHitCode;
     /* 0x1CC */ Bytecode* onTurnChangeCode;
-    /* 0x1D0 */ struct Script* idleScript;
-    /* 0x1D4 */ struct Script* takeTurnScript;
-    /* 0x1D8 */ struct Script* onHitScript;
-    /* 0x1DC */ struct Script* onTurnChangeScript;
+    /* 0x1D0 */ struct ScriptInstance* idleScript;
+    /* 0x1D4 */ struct ScriptInstance* takeTurnScript;
+    /* 0x1D8 */ struct ScriptInstance* onHitScript;
+    /* 0x1DC */ struct ScriptInstance* onTurnChangeScript;
     /* 0x1E0 */ s32 idleScriptID;
     /* 0x1E4 */ s32 takeTurnID;
     /* 0x1E8 */ s32 onHitID;
