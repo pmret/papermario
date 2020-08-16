@@ -68,6 +68,7 @@ s32 SetMessageString(script_context* script, s32 initialCall) {
 
 INCLUDE_ASM(code_f4c60_len_4300, SetMessageValue);
 // TODO: Figure out why there's an extra NOP after this function
+// It's probably because of a file split issue
 /*
 s32 SetMessageValue(script_context* script, s32 initialCall) {
     bytecode* ptrReadPos = script->ptrReadPos;
