@@ -393,13 +393,14 @@ void func_800E96C8(void) {
     }
 }
 
-s32 ShowCoinCounter(ScriptInstance* script) {
+ApiStatus ShowCoinCounter(ScriptInstance* script, s32 isInitialCall) {
     if (get_variable(script, *script->ptrReadPos)) {
         show_coin_counter();
     } else {
         hide_coin_counter();
     }
-    return 2;
+
+    return ApiStatus_DONE2;
 }
 
 void func_800E973C(void) {

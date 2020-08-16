@@ -21,7 +21,7 @@ INCLUDE_ASM(code_e79b0_len_1920, func_802C39F8);
 INCLUDE_ASM(code_e79b0_len_1920, restart_script);
 // TODO: Find out why things break when script->timeScale = 1 goes after the previous lines
 /*
-script_context* restart_script(script_context* script) {
+ScriptInstance* restart_script(ScriptInstance* script) {
     script->loopDepth = -1;
     script->switchDepth = -1;
     script->currentOpcode = 0;
@@ -309,10 +309,10 @@ void set_script_flags(ScriptInstance* script, s32 flags) {
 INCLUDE_ASM(code_e79b0_len_1920, clear_script_flags);
 /*
 // TODO: Really close but some weirdness is going on
-void clear_script_flags(script_context* script, s32 flags) {
+void clear_script_flags(ScriptInstance* script, s32 flags) {
     int i;
-    script_context* scriptContextPtr;
-    script_context* childScript = script->childScript;
+    ScriptInstance* scriptContextPtr;
+    ScriptInstance* childScript = script->childScript;
 
     script->state &= ~flags;
     if (childScript != NULL) {

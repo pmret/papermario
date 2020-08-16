@@ -3,6 +3,7 @@
 
 #include "ultra64.h"
 #include "types.h"
+#include "si.h"
 
 typedef struct Vec3f {
     /* 0x00 */ f32 x;
@@ -239,7 +240,7 @@ typedef struct ScriptInstance {
     /* 0x068 */ struct ScriptInstance* childScript;
     /* 0x06C */ struct ScriptInstance* parentScript; /* brother? */
     /* 0x070 */ s32 functionTemp[4];
-    /* 0x080 */ UNK_PTR callFunction;
+    /* 0x080 */ API_FUN(callFunction);
     /* 0x084 */ s32 varTable[16];
     /* 0x0C4 */ s32 varFlags[3];
     /* 0x0D0 */ s32 loopStartTable[8];
