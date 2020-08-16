@@ -407,17 +407,17 @@ INCLUDE_ASM(code_e92d0_len_5da0, si_execute_next_command);
 
 INCLUDE_ASM(code_e92d0_len_5da0, si_handle_end);
 
-s32 INCLUDE_ASM(code_e92d0_len_5da0, get_variable, Script* script, bytecode var);
+s32 INCLUDE_ASM(code_e92d0_len_5da0, get_variable, Script* script, Bytecode var);
 
 INCLUDE_ASM(code_e92d0_len_5da0, get_variable_index);
 
 INCLUDE_ASM(code_e92d0_len_5da0, get_variable_index_alt);
 
-s32 INCLUDE_ASM(code_e92d0_len_5da0, set_variable, Script* script, bytecode var, s32 value);
+s32 INCLUDE_ASM(code_e92d0_len_5da0, set_variable, Script* script, Bytecode var, s32 value);
 
-f32 INCLUDE_ASM(code_e92d0_len_5da0, get_float_variable, Script* script, bytecode var);
+f32 INCLUDE_ASM(code_e92d0_len_5da0, get_float_variable, Script* script, Bytecode var);
 
-f32 INCLUDE_ASM(code_e92d0_len_5da0, set_float_variable, Script* script, bytecode var, f32 value);
+f32 INCLUDE_ASM(code_e92d0_len_5da0, set_float_variable, Script* script, Bytecode var, f32 value);
 
 INCLUDE_ASM(code_e92d0_len_5da0, si_goto_label);
 

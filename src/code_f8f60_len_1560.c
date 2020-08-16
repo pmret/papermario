@@ -32,10 +32,10 @@ s32 UpdateLerp(Script* script, s32 initialCall) {
 }
 
 s32 RandInt(Script* script, s32 initialCall) {
-    bytecode* ptrReadPos = script->ptrReadPos;
+    Bytecode* ptrReadPos = script->ptrReadPos;
 
     s32 max = get_variable(script, *ptrReadPos++);
-    bytecode outVar = *ptrReadPos++;
+    Bytecode outVar = *ptrReadPos++;
 
     set_variable(script, outVar, rand_int(max));
 
@@ -43,11 +43,11 @@ s32 RandInt(Script* script, s32 initialCall) {
 }
 
 s32 GetAngleBetweenNPCs(Script* script, s32 initialCall) {
-    bytecode* ptrReadPos = script->ptrReadPos;
+    Bytecode* ptrReadPos = script->ptrReadPos;
 
     NPC aID = get_variable(script, *ptrReadPos++);
     NPC bID = get_variable(script, *ptrReadPos++);
-    bytecode outVar = *ptrReadPos++;
+    Bytecode outVar = *ptrReadPos++;
 
     Npc* a = resolve_npc(script, aID);
     Npc* b = resolve_npc(script, bID);
@@ -58,10 +58,10 @@ s32 GetAngleBetweenNPCs(Script* script, s32 initialCall) {
 
 s32 GetAngleToNPC(Script* script, s32 initialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    bytecode* ptrReadPos = script->ptrReadPos;
+    Bytecode* ptrReadPos = script->ptrReadPos;
 
     NPC npcID = get_variable(script, *ptrReadPos++);
-    bytecode outVar = *ptrReadPos++;
+    Bytecode outVar = *ptrReadPos++;
 
     Npc* npc = resolve_npc(script, npcID);
     set_variable(script, outVar, atan2(playerStatus->position.x, playerStatus->position.z, npc->pos.x, npc->pos.z));
@@ -71,10 +71,10 @@ s32 GetAngleToNPC(Script* script, s32 initialCall) {
 
 s32 GetAngleToPlayer(Script* script, s32 initialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    bytecode* ptrReadPos = script->ptrReadPos;
+    Bytecode* ptrReadPos = script->ptrReadPos;
 
     NPC npcID = get_variable(script, *ptrReadPos++);
-    bytecode outVar = *ptrReadPos++;
+    Bytecode outVar = *ptrReadPos++;
 
     Npc* npc = resolve_npc(script, npcID);
     set_variable(script, outVar, atan2(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z));
@@ -83,7 +83,7 @@ s32 GetAngleToPlayer(Script* script, s32 initialCall) {
 }
 
 s32 AwaitPlayerApproach(Script* script, s32 initialCall) {
-    bytecode* ptrReadPos = script->ptrReadPos;
+    Bytecode* ptrReadPos = script->ptrReadPos;
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     s32* targetX = &script->functionTemp[0];
@@ -111,7 +111,7 @@ s32 AwaitPlayerApproach(Script* script, s32 initialCall) {
 }
 
 s32 IsPlayerWithin(Script* script, s32 initialCall) {
-    bytecode* ptrReadPos = script->ptrReadPos;
+    Bytecode* ptrReadPos = script->ptrReadPos;
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     s32* targetX = &script->functionTemp[0];
@@ -119,7 +119,7 @@ s32 IsPlayerWithin(Script* script, s32 initialCall) {
     s32* distanceRequired = &script->functionTemp[2];
 
     f32 distance;
-    bytecode outVar = SI_VAR_0;
+    Bytecode outVar = SI_VAR_0;
 
     if (initialCall) {
         *targetX = get_variable(script, *ptrReadPos++);
@@ -142,7 +142,7 @@ s32 IsPlayerWithin(Script* script, s32 initialCall) {
 }
 
 s32 AwaitPlayerLeave(Script* script, s32 initialCall) {
-    bytecode* ptrReadPos = script->ptrReadPos;
+    Bytecode* ptrReadPos = script->ptrReadPos;
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     s32* targetX = &script->functionTemp[0];
@@ -170,12 +170,12 @@ s32 AwaitPlayerLeave(Script* script, s32 initialCall) {
 }
 
 s32 AddVectorPolar(Script* script, s32 initialCall) {
-    bytecode* ptrReadPos = script->ptrReadPos;
+    Bytecode* ptrReadPos = script->ptrReadPos;
 
-    bytecode xVar = *ptrReadPos++;
+    Bytecode xVar = *ptrReadPos++;
     f32 x = get_float_variable(script, xVar);
 
-    bytecode yVar = *ptrReadPos++;
+    Bytecode yVar = *ptrReadPos++;
     f32 y = get_float_variable(script, yVar);
 
     f32 r = get_float_variable(script, *ptrReadPos++);
@@ -260,9 +260,9 @@ INCLUDE_ASM(code_f8f60_len_1560, LoadPath);
 INCLUDE_ASM(code_f8f60_len_1560, GetNextPathPos);
 
 s32 GetDist2D(Script* script, s32 initialCall) {
-    bytecode* ptrReadPos = script->ptrReadPos;
+    Bytecode* ptrReadPos = script->ptrReadPos;
 
-    bytecode outVar = *ptrReadPos++;
+    Bytecode outVar = *ptrReadPos++;
     set_float_variable(script, outVar, dist2D(
         get_float_variable(script, *ptrReadPos++),
         get_float_variable(script, *ptrReadPos++),
@@ -279,7 +279,7 @@ s32 func_802D5830(Script* script, s32 initialCall) {
 }
 
 s32 func_802D585C(Script* script, s32 initialCall) {
-    bytecode* ptrReadPos = script->ptrReadPos;
+    Bytecode* ptrReadPos = script->ptrReadPos;
     s32 setMode = get_variable(script,  *ptrReadPos++);
     s32 flags = get_variable(script, *ptrReadPos++);
 
@@ -295,7 +295,7 @@ s32 func_802D585C(Script* script, s32 initialCall) {
 }
 
 s32 SetValueByRef(Script* script, s32 initialCall) {
-    bytecode* ptrReadPos = script->ptrReadPos;
+    Bytecode* ptrReadPos = script->ptrReadPos;
 
     s32 dest = get_variable(script, *ptrReadPos++); /* Reference */
     s32 src = get_variable(script, *ptrReadPos++);
@@ -305,10 +305,10 @@ s32 SetValueByRef(Script* script, s32 initialCall) {
 }
 
 s32 GetValueByRef(Script* script, s32 initialCall) {
-    bytecode* ptrReadPos = script->ptrReadPos;
+    Bytecode* ptrReadPos = script->ptrReadPos;
 
     s32 src = get_variable(script, *ptrReadPos++); /* Reference */
-    bytecode dest = *ptrReadPos++;
+    Bytecode dest = *ptrReadPos++;
 
     set_variable(script, dest, get_variable(script, src));
 
@@ -345,7 +345,7 @@ s32 SetGameMode(Script* script, s32 initialCall) {
 }
 
 s32 ClampAngleInt(Script* script, s32 initialCall) {
-    bytecode* ptrReadPos = script->ptrReadPos;
+    Bytecode* ptrReadPos = script->ptrReadPos;
 
     set_variable(script, *ptrReadPos, clamp_angle(get_variable(script, *ptrReadPos)));
 
@@ -353,7 +353,7 @@ s32 ClampAngleInt(Script* script, s32 initialCall) {
 }
 
 s32 ClampAngleFloat(Script* script, s32 initialCall) {
-    bytecode* ptrReadPos = script->ptrReadPos;
+    Bytecode* ptrReadPos = script->ptrReadPos;
 
     set_float_variable(script, *ptrReadPos, clamp_angle(get_float_variable(script, *ptrReadPos)));
 

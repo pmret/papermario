@@ -9,10 +9,10 @@ void osCleanupThread(void);
 
 void clone_model(u16 srcModelID, u16 newModelID);
 void update_collider_transform(s16 colliderID);
-s32 get_variable(Script* script, bytecode var);
-s32 set_variable(Script* script, bytecode var, s32 value);
-f32 get_float_variable(Script* script, bytecode var);
-f32 set_float_variable(Script* script, bytecode var, f32 value);
+s32 get_variable(Script* script, Bytecode var);
+s32 set_variable(Script* script, Bytecode var, s32 value);
+f32 get_float_variable(Script* script, Bytecode var);
+f32 set_float_variable(Script* script, Bytecode var, f32 value);
 void set_script_timescale(Script* script, f32 timescale);
 f32 sin_deg(f32 x);
 f32 cos_deg(f32 x);

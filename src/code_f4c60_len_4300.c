@@ -58,9 +58,9 @@ s32 func_802D0C94(Script* script, s32 initialCall) {
 }
 
 s32 SetMessageString(Script* script, s32 initialCall) {
-    bytecode* ptrReadPos = script->ptrReadPos;
-    bytecode string = get_variable(script, *ptrReadPos++);
-    bytecode index = get_variable(script, *ptrReadPos++);
+    Bytecode* ptrReadPos = script->ptrReadPos;
+    Bytecode string = get_variable(script, *ptrReadPos++);
+    Bytecode index = get_variable(script, *ptrReadPos++);
 
     set_message_string(string, index);
     return 2;

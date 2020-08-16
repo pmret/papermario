@@ -157,7 +157,7 @@ typedef struct Trigger {
     /* 0x06 */ s16 panelFlagIndex;
     /* 0x08 */ s32 colliderID;
     /* 0x0C */ UNK_FUN_PTR(functionHandler);
-    /* 0x10 */ bytecode* scriptStart;
+    /* 0x10 */ Bytecode* scriptStart;
     /* 0x14 */ struct Script* runningScript;
     /* 0x18 */ s32 priority;
     /* 0x1C */ s32 scriptVars[3];
@@ -175,12 +175,12 @@ typedef struct Enemy {
     /* 0x0A */ s16 spawnPos[3];
     /* 0x10 */ char unk_10[8];
     /* 0x18 */ struct StaticNpcSettings* npcSettings;
-    /* 0x1C */ bytecode* initBytecode;
-    /* 0x20 */ bytecode* interactBytecode;
-    /* 0x24 */ bytecode* aiBytecode;
-    /* 0x28 */ bytecode* hitBytecode;
-    /* 0x2C */ bytecode* auxBytecode;
-    /* 0x30 */ bytecode* defeatBytecode;
+    /* 0x1C */ Bytecode* initBytecode;
+    /* 0x20 */ Bytecode* interactBytecode;
+    /* 0x24 */ Bytecode* aiBytecode;
+    /* 0x28 */ Bytecode* hitBytecode;
+    /* 0x2C */ Bytecode* auxBytecode;
+    /* 0x30 */ Bytecode* defeatBytecode;
     /* 0x34 */ struct Script* initScript;
     /* 0x38 */ struct Script* interactScript;
     /* 0x3C */ struct Script* aiScript;
@@ -210,11 +210,11 @@ typedef struct StaticNpcSettings {
     /* 0x04 */ s16 height;
     /* 0x06 */ s16 radius;
     /* 0x08 */ UNK_PTR otherAI;
-    /* 0x0C */ bytecode* interactScript;
-    /* 0x10 */ bytecode* aiScript;
-    /* 0x14 */ bytecode* hitScript;
-    /* 0x18 */ bytecode* auxScript;
-    /* 0x1C */ bytecode* defeatScript;
+    /* 0x0C */ Bytecode* interactScript;
+    /* 0x10 */ Bytecode* aiScript;
+    /* 0x14 */ Bytecode* hitScript;
+    /* 0x18 */ Bytecode* auxScript;
+    /* 0x1C */ Bytecode* defeatScript;
     /* 0x20 */ s32 flags;
     /* 0x24 */ char unk_24[4];
     /* 0x28 */ s16 level;
@@ -230,8 +230,8 @@ typedef struct Script {
     /* 0x005 */ u8 blocked; /* 1 = blocking */
     /* 0x006 */ s8 loopDepth; /* how many nested loops we are in, >= 8 hangs forever */
     /* 0x007 */ s8 switchDepth; /* how many nested switches we are in, max = 8 */
-    /* 0x008 */ bytecode* ptrNextLine;
-    /* 0x00C */ bytecode* ptrReadPos;
+    /* 0x008 */ Bytecode* ptrNextLine;
+    /* 0x00C */ Bytecode* ptrReadPos;
     /* 0x010 */ u8 labelIndices[16];
     /* 0x020 */ UNK_PTR labelPositions[16];
     /* 0x060 */ s32 deleted; /* set to zero in KillScript when malloc'd */
@@ -255,9 +255,9 @@ typedef struct Script {
     /* 0x150 */ f32 timeScale;
     /* 0x154 */ f32 frameCounter;
     /* 0x158 */ char unk_158[4];
-    /* 0x15C */ bytecode* ptrFirstLine;
-    /* 0x160 */ bytecode* ptrSavedPosition;
-    /* 0x164 */ bytecode* ptrCurrentLine;
+    /* 0x15C */ Bytecode* ptrFirstLine;
+    /* 0x160 */ Bytecode* ptrSavedPosition;
+    /* 0x164 */ Bytecode* ptrCurrentLine;
 } Script; // size = 0x168
 
 typedef struct Entity {
@@ -268,7 +268,7 @@ typedef struct Entity {
     /* 0x12 */ char unk_12[4];
     /* 0x16 */ s16 shadowIndex;
     /* 0x18 */ char unk_18[16];
-    /* 0x28 */ bytecode* boundScript;
+    /* 0x28 */ Bytecode* boundScript;
     /* 0x2C */ char unk_2C[12];
     /* 0x38 */ struct StaticEntityData* static_data;
     /* 0x3C */ char unk_3C[4];
@@ -312,7 +312,7 @@ typedef struct StaticNpc {
     /* 0x004 */ struct StaticNpcSettings* npcSettings;
     /* 0x008 */ s32 spawnPos[3];
     /* 0x014 */ s32 flags;
-    /* 0x018 */ bytecode* initScript;
+    /* 0x018 */ Bytecode* initScript;
     /* 0x01C */ char unk_1C[8];
     /* 0x024 */ s32 spawnYaw;
     /* 0x028 */ s16 itemDrops[25];
@@ -998,17 +998,17 @@ typedef struct Partner {
     /* 0x08 */ s32 dmaDest;
     /* 0x0C */ s32 isFlying;
     /* 0x10 */ UNK_FUN_PTR(fpInit);
-    /* 0x14 */ bytecode* spScriptA;
-    /* 0x18 */ bytecode* spScriptB;
-    /* 0x1C */ bytecode* spScriptC;
-    /* 0x20 */ bytecode* spScriptD;
+    /* 0x14 */ Bytecode* spScriptA;
+    /* 0x18 */ Bytecode* spScriptB;
+    /* 0x1C */ Bytecode* spScriptC;
+    /* 0x20 */ Bytecode* spScriptD;
     /* 0x24 */ s32 idleAnim;
     /* 0x28 */ UNK_FUN_PTR(fpFuncA);
     /* 0x2C */ UNK_FUN_PTR(fpFuncB);
     /* 0x30 */ UNK_FUN_PTR(fpFuncC);
     /* 0x34 */ UNK_FUN_PTR(fpFuncD);
     /* 0x38 */ UNK_FUN_PTR(fpFuncE);
-    /* 0x3C */ bytecode* spScriptX;
+    /* 0x3C */ Bytecode* spScriptX;
 } Partner; // size = 0x40
 
 typedef struct FontRasterSet {
@@ -1178,10 +1178,10 @@ typedef struct Actor {
     /* 0x1BA */ char unk_1BA[2];
     /* 0x1BC */ u8 hpFraction; /* used to render HP bar */
     /* 0x1BD */ char unk_1BD[3];
-    /* 0x1C0 */ bytecode* idleCode;
-    /* 0x1C4 */ bytecode* takeTurnCode;
-    /* 0x1C8 */ bytecode* onHitCode;
-    /* 0x1CC */ bytecode* onTurnChangeCode;
+    /* 0x1C0 */ Bytecode* idleCode;
+    /* 0x1C4 */ Bytecode* takeTurnCode;
+    /* 0x1C8 */ Bytecode* onHitCode;
+    /* 0x1CC */ Bytecode* onTurnChangeCode;
     /* 0x1D0 */ struct Script* idleScript;
     /* 0x1D4 */ struct Script* takeTurnScript;
     /* 0x1D8 */ struct Script* onHitScript;
