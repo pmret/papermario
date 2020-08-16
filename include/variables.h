@@ -27,6 +27,9 @@ extern char gSunnyFlowerFieldsBg[]; // "flb_bg"
 extern bg_header gBackgroundImage;
 extern s8 D_8014F12F;
 
+extern print_context* gCurrentPrintContext;
+extern print_context* D_802DB268;
+
 // Triggers
 /* 0x80151334 */ extern s16 gTriggerCount;
 /* 0x80159190 */ extern trigger gTriggerList1[64];
