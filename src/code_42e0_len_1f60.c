@@ -78,7 +78,7 @@ f32 INCLUDE_ASM(code_42e0_len_1f60, sin_deg, f32 x);
 
 f32 INCLUDE_ASM(code_42e0_len_1f60, cos_deg, f32 x);
 
-f32 INCLUDE_ASM(code_42e0_len_1f60, update_lerp, EASING easing, f32 start, f32 end, s32 elapsed, s32 duration);
+f32 INCLUDE_ASM(code_42e0_len_1f60, update_lerp, Easing easing, f32 start, f32 end, s32 elapsed, s32 duration);
 
 INCLUDE_ASM(code_42e0_len_1f60, func_8002A904);
 

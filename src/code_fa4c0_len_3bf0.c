@@ -114,7 +114,7 @@ s32 AddKeyItem(Script* script, s32 initialCall) {
     s32 itemID = get_variable(script, value);
     s32 i;
 
-    if (itemID == ITEM_FORTRESS_KEY) {
+    if (itemID == ItemId_FORTRESS_KEY) {
         playerData->fortressKeyCount++;
         return 2;
     }

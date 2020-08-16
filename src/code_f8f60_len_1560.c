@@ -45,8 +45,8 @@ s32 RandInt(Script* script, s32 initialCall) {
 s32 GetAngleBetweenNPCs(Script* script, s32 initialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
 
-    NPC aID = get_variable(script, *ptrReadPos++);
-    NPC bID = get_variable(script, *ptrReadPos++);
+    NpcId aID = get_variable(script, *ptrReadPos++);
+    NpcId bID = get_variable(script, *ptrReadPos++);
     Bytecode outVar = *ptrReadPos++;
 
     Npc* a = resolve_npc(script, aID);
@@ -60,7 +60,7 @@ s32 GetAngleToNPC(Script* script, s32 initialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Bytecode* ptrReadPos = script->ptrReadPos;
 
-    NPC npcID = get_variable(script, *ptrReadPos++);
+    NpcId npcID = get_variable(script, *ptrReadPos++);
     Bytecode outVar = *ptrReadPos++;
 
     Npc* npc = resolve_npc(script, npcID);
@@ -73,7 +73,7 @@ s32 GetAngleToPlayer(Script* script, s32 initialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Bytecode* ptrReadPos = script->ptrReadPos;
 
-    NPC npcID = get_variable(script, *ptrReadPos++);
+    NpcId npcID = get_variable(script, *ptrReadPos++);
     Bytecode outVar = *ptrReadPos++;
 
     Npc* npc = resolve_npc(script, npcID);

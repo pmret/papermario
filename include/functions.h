@@ -30,11 +30,11 @@ void func_80137E4C(s32, s32, s32, s32);
 s32 rand_int(s32);
 void sort_items(void);
 s32 is_ability_active(s32 arg0);
-f32 update_lerp(EASING easing, f32 start, f32 end, s32 elapsed, s32 duration);
+f32 update_lerp(Easing easing, f32 start, f32 end, s32 elapsed, s32 duration);
 
-Npc* get_npc_safe(s32 npcID);
-Npc* get_npc_unsafe(s32 npcID);
-Npc* resolve_npc(Script* script, NPC npcID);
+Npc* get_npc_safe(NpcId npcId);
+Npc* get_npc_unsafe(NpcId npcId);
+Npc* resolve_npc(Script* script, NpcId npcIdOrPtr);
 
 f32 dist2D(f32 ax, f32 ay, f32 bx, f32 by);
 f32 dist3D(f32 ax, f32 ay, f32 az, f32 bx, f32 by, f32 bz);
