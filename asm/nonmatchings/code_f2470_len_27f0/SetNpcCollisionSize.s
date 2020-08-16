@@ -25,7 +25,7 @@ glabel SetNpcCollisionSize
 /* 0F2988 802CDFD8 0040982D */   daddu $s3, $v0, $zero
 /* 0F298C 802CDFDC 0220202D */  daddu $a0, $s1, $zero
 /* 0F2990 802CDFE0 0240282D */  daddu $a1, $s2, $zero
-/* 0F2994 802CDFE4 0C0B36B0 */  jal   func_802CDAC0
+/* 0F2994 802CDFE4 0C0B36B0 */  jal   resolve_npc
 /* 0F2998 802CDFE8 0040802D */   daddu $s0, $v0, $zero
 /* 0F299C 802CDFEC 0040182D */  daddu $v1, $v0, $zero
 /* 0F29A0 802CDFF0 10600003 */  beqz  $v1, .L802CE000

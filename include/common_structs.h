@@ -24,7 +24,7 @@ typedef struct cam_pos_settings {
     /* 0x04 */ f32 boomLength;
     /* 0x08 */ f32 boomPitch;
     /* 0x0C */ f32 viewPitch;
-    /* 0x10 */ f32 position[3];
+    /* 0x10 */ struct vec3f position;
 } cam_pos_settings; // size = 0x1C
 
 typedef struct partner_data {
@@ -40,6 +40,49 @@ typedef struct heap_node {
     /* 0x0A */ s16 entryID;
     /* 0x0C */ s32 capacity;
 } heap_node; // size = 0x10
+
+typedef struct npc_blur_data {
+    /* 0x00 */ char unk_00[4];
+    /* 0x04 */ f32 xpos[20];
+    /* 0x54 */ f32 ypos[20];
+    /* 0xA4 */ f32 zpos[20];
+} npc_blur_data; // size = 0xF4
+
+typedef struct npc {
+    /* 0x000 */ s32 flags;
+    /* 0x004 */ UNK_PTR onUpdate; /* run before anything else for this npc in the npc update step */
+    /* 0x008 */ UNK_PTR onRender; /* run after the display list for this npc is built */
+    /* 0x00C */ f32 yaw;
+    /* 0x010 */ f32 planarFlyDist; /* also used for speech, temp0? */
+    /* 0x014 */ f32 jumpScale; /* also used for speech, temp1? */
+    /* 0x018 */ f32 moveSpeed;
+    /* 0x01C */ f32 jumpVelocity;
+    /* 0x020 */ struct npc_blur_data* blurData; /* related to movement somehow... */
+    /* 0x024 */ char unk_24[4];
+    /* 0x028 */ u32 currentAnim;
+    /* 0x02C */ char unk_2C[12];
+    /* 0x038 */ struct vec3f pos;
+    /* 0x044 */ struct vec3f rotation;
+    /* 0x050 */ char unk_50[4];
+    /* 0x054 */ struct vec3f scale;
+    /* 0x060 */ struct vec3f moveToPos;
+    /* 0x06C */ struct vec3f colliderPos; /* used during collision with player */
+    /* 0x078 */ s32 shadowIndex;
+    /* 0x07C */ f32 shadowScale;
+    /* 0x080 */ char unk_80[8];
+    /* 0x088 */ s16 isFacingAway;
+    /* 0x08A */ s16 yawCamOffset;
+    /* 0x08C */ char unk_8C[2];
+    /* 0x08E */ s16 duration; /* formerly interp_counter */
+    /* 0x090 */ s16 homePos[3];
+    /* 0x096 */ char unk_96[14];
+    /* 0x0A4 */ u8 npcID;
+    /* 0x0A5 */ char unk_A5;
+    /* 0x0A6 */ s16 collisionRadius;
+    /* 0x0A8 */ s16 collisionHeight;
+    /* 0x0AA */ u8 renderMode;
+    /* 0x0AB */ char unk_AB[661];
+} npc; // size = 0x340
 
 typedef struct player_data {
     /* 0x000 */ u8 bootsLevel;
@@ -390,7 +433,7 @@ typedef struct camera {
     /* 0x03C */ f32 lookAt_eye[3];
     /* 0x048 */ f32 lookAt_obj[3];
     /* 0x054 */ char unk_54[12];
-    /* 0x060 */ f32 targetPos[3];
+    /* 0x060 */ struct vec3f targetPos;
     /* 0x06C */ f32 currentYaw;
     /* 0x070 */ char unk_70[4];
     /* 0x074 */ f32 currentBoomYaw;
@@ -417,13 +460,13 @@ typedef struct camera {
     /* 0x48C */ f32 linearInterpScale; /* 3.0? */
     /* 0x490 */ f32 moveSpeed;
     /* 0x494 */ char unk_494[28];
-    /* 0x4B0 */ f32 movePos[3];
+    /* 0x4B0 */ struct vec3f movePos;
     /* 0x4BC */ char unk_4BC[28];
     /* 0x4D8 */ s32 controllerType;
     /* 0x4DC */ f32 controllerBoomLen;
     /* 0x4E0 */ f32 controllerBoomPitch;
-    /* 0x4E4 */ f32 posA[3];
-    /* 0x4F0 */ f32 posB[3];
+    /* 0x4E4 */ struct vec3f posA;
+    /* 0x4F0 */ struct vec3f posB;
     /* 0x4FC */ f32 controllerViewPitch;
     /* 0x500 */ char unk_500[4];
     /* 0x504 */ s16 boolTargetPlayer;
@@ -670,49 +713,6 @@ typedef struct other_print {
     /* 0x44 */ char unk_44[16];
 } other_print; // size = 0x54
 
-typedef struct npc_blur_data {
-    /* 0x00 */ char unk_00[4];
-    /* 0x04 */ f32 xpos[20];
-    /* 0x54 */ f32 ypos[20];
-    /* 0xA4 */ f32 zpos[20];
-} npc_blur_data; // size = 0xF4
-
-typedef struct npc {
-    /* 0x000 */ s32 flags;
-    /* 0x004 */ UNK_PTR onUpdate; /* run before anything else for this npc in the npc update step */
-    /* 0x008 */ UNK_PTR onRender; /* run after the display list for this npc is built */
-    /* 0x00C */ f32 yaw;
-    /* 0x010 */ f32 planarFlyDist; /* also used for speech, temp0? */
-    /* 0x014 */ f32 jumpScale; /* also used for speech, temp1? */
-    /* 0x018 */ f32 moveSpeed;
-    /* 0x01C */ f32 jumpVelocity;
-    /* 0x020 */ struct npc_blur_data* blurData; /* related to movement somehow... */
-    /* 0x024 */ char unk_24[4];
-    /* 0x028 */ u32 currentAnim;
-    /* 0x02C */ char unk_2C[12];
-    /* 0x038 */ struct vec3f pos;
-    /* 0x044 */ struct vec3f rotation;
-    /* 0x050 */ char unk_50[4];
-    /* 0x054 */ struct vec3f scale;
-    /* 0x060 */ struct vec3f moveToPos;
-    /* 0x06C */ struct vec3f colliderPos; /* used during collision with player */
-    /* 0x078 */ s32 shadowIndex;
-    /* 0x07C */ f32 shadowScale;
-    /* 0x080 */ char unk_80[8];
-    /* 0x088 */ s16 isFacingAway;
-    /* 0x08A */ s16 yawCamOffset;
-    /* 0x08C */ char unk_8C[2];
-    /* 0x08E */ s16 duration; /* formerly interp_counter */
-    /* 0x090 */ s16 homePos[3];
-    /* 0x096 */ char unk_96[14];
-    /* 0x0A4 */ u8 npcID;
-    /* 0x0A5 */ char unk_A5;
-    /* 0x0A6 */ s16 collisionRadius;
-    /* 0x0A8 */ s16 collisionHeight;
-    /* 0x0AA */ u8 renderMode;
-    /* 0x0AB */ char unk_AB[661];
-} npc; // size = 0x340
-
 typedef struct collider_aabb {
     /* 0x00 */ f32 min[3];
     /* 0x0C */ f32 max[3];
@@ -743,7 +743,7 @@ typedef struct item_entity {
     /* 0x00 */ s32 flags;
     /* 0x04 */ s16 boundVar; /* see make_item_entity */
     /* 0x06 */ char unk_06[2];
-    /* 0x08 */ f32 position[3];
+    /* 0x08 */ struct vec3f position;
     /* 0x14 */ struct item_entity_physics_data* physicsData;
     /* 0x18 */ s16 itemID; /* into item table, also worldIconID */
     /* 0x1A */ u8 state;
@@ -782,10 +782,10 @@ typedef struct sprite_component {
     /* 0x10 */ s32 loopCounter;
     /* 0x14 */ s32 currentRaster;
     /* 0x18 */ s32 currentPalette;
-    /* 0x1C */ f32 posOffset[3];
-    /* 0x28 */ f32 compPos[3];
-    /* 0x34 */ f32 rotation[3];
-    /* 0x40 */ f32 scale[3];
+    /* 0x1C */ struct vec3f posOffset;
+    /* 0x28 */ struct vec3f compPos;
+    /* 0x34 */ struct vec3f rotation;
+    /* 0x40 */ struct vec3f scale;
     /* 0x4C */ char unk_4C[4];
 } sprite_component; // size = 0x50
 
@@ -862,7 +862,7 @@ typedef struct game_status {
     /* 0x08E */ s16 entryID;
     /* 0x090 */ char unk_90[4];
     /* 0x094 */ f32 exitAngle;
-    /* 0x098 */ f32 playerPos[3];
+    /* 0x098 */ struct vec3f playerPos;
     /* 0x0A4 */ f32 playerYaw;
     /* 0x0A8 */ char unk_A8[4];
     /* 0x0AC */ s8 loadMenuState;
@@ -904,8 +904,8 @@ typedef struct partner_anim_set {
 typedef struct shadow {
     /* 0x00 */ s32 flags;
     /* 0x04 */ char unk_04[12];
-    /* 0x10 */ f32 position[3];
-    /* 0x1C */ f32 scale[3];
+    /* 0x10 */ struct vec3f position;
+    /* 0x1C */ struct vec3f scale;
     /* 0x28 */ char unk_28[80];
 } shadow; // size = 0x78
 
@@ -965,13 +965,13 @@ typedef struct ActorPart {
     /* 0x10 */ struct actor_part_movement* movement;
     /* 0x14 */ s16 partOffset[3];
     /* 0x1A */ s16 visualOffset[3];
-    /* 0x20 */ f32 partOffsetFloat[3];
-    /* 0x2C */ f32 absolutePosition[3];
-    /* 0x38 */ f32 rotation[3];
+    /* 0x20 */ struct vec3f partOffsetFloat;
+    /* 0x2C */ struct vec3f absolutePosition;
+    /* 0x38 */ struct vec3f rotation;
     /* 0x44 */ s16 rotationPivotOffset[3];
     /* 0x4A */ char unk_4A[2];
     /* 0x4C */ f32 scale[3];
-    /* 0x58 */ f32 currentPos[3];
+    /* 0x58 */ struct vec3f currentPos;
     /* 0x64 */ f32 yaw;
     /* 0x68 */ s16 unkOffset[2];
     /* 0x6C */ s16 targetOffset[2];
@@ -1100,14 +1100,14 @@ typedef struct encounter {
 
 typedef struct player_path_element {
     /* 0x00 */ char unk_00[4];
-    /* 0x04 */ f32 pos[3];
+    /* 0x04 */ struct vec3f pos;
 } player_path_element; // size = 0x10
 
 typedef struct animated_model {
     /* 0x00 */ s32 animModelID;
-    /* 0x04 */ f32 pos[3]; /* Created by retype action */
-    /* 0x10 */ f32 rot[3];
-    /* 0x1C */ f32 scale[3];
+    /* 0x04 */ struct vec3f pos; /* Created by retype action */
+    /* 0x10 */ struct vec3f rot;
+    /* 0x1C */ struct vec3f scale;
     /* 0x28 */ struct matrix4s* mtx;
     /* 0x2C */ char unk_2C[60];
     /* 0x68 */ u32 currentAnimData;
@@ -1140,9 +1140,9 @@ typedef struct Actor {
     /* 0x000 */ s32 flags;
     /* 0x004 */ char unk_04[4];
     /* 0x008 */ struct StaticActorData* staticActorData;
-    /* 0x00C */ f32 moveCurrentPos[3];
-    /* 0x018 */ f32 moveGoalPos[3];
-    /* 0x024 */ f32 moveEndPos[3]; /* where other actors should target this one at. saved before partner switching */
+    /* 0x00C */ struct vec3f moveCurrentPos;
+    /* 0x018 */ struct vec3f moveGoalPos;
+    /* 0x024 */ struct vec3f moveEndPos; /* where other actors should target this one at. saved before partner switching */
     /* 0x030 */ char unk_30[24];
     /* 0x048 */ f32 jumpAccel;
     /* 0x04C */ f32 moveSpeed;
@@ -1160,9 +1160,9 @@ typedef struct Actor {
     /* 0x077 */ u8 jumpPartIndex;
     /* 0x078 */ char unk_78[16];
     /* 0x088 */ s32 varTable[16];
-    /* 0x0C8 */ f32 flyCurrentPos[3];
-    /* 0x0D4 */ f32 flyGoalPos[3];
-    /* 0x0E0 */ f32 flyTempPos[3]; /* used for start in fly functions, end in flyrun functions */
+    /* 0x0C8 */ struct vec3f flyCurrentPos;
+    /* 0x0D4 */ struct vec3f flyGoalPos;
+    /* 0x0E0 */ struct vec3f flyTempPos; /* used for start in fly functions, end in flyrun functions */
     /* 0x0EC */ char unk_EC[24];
     /* 0x104 */ f32 flyJumpAccel;
     /* 0x108 */ f32 flySpeed;
@@ -1177,8 +1177,8 @@ typedef struct Actor {
     /* 0x135 */ u8 footStepCounter;
     /* 0x136 */ u8 actorType;
     /* 0x137 */ char unk_137;
-    /* 0x138 */ f32 homePos[3];
-    /* 0x144 */ f32 currentPos[3];
+    /* 0x138 */ struct vec3f homePos;
+    /* 0x144 */ struct vec3f currentPos;
     /* 0x150 */ s16 otherPosheadOffset[3];
     /* 0x156 */ s16 healthBarPosition[3];
     /* 0x15C */ f32 rotation[3];
@@ -1339,8 +1339,8 @@ typedef struct player_status {
     /* 0x014 */ u8 enableCollisionOverlapsCheck;
     /* 0x015 */ u8 statusMenuCounterinputEnabledCounter; /* whether the C-up menu can appear */
     /* 0x016 */ s16 lastGoodPosition[3];
-    /* 0x01C */ f32 extraVelocity[3];
-    /* 0x028 */ f32 position[3];
+    /* 0x01C */ struct vec3f extraVelocity;
+    /* 0x028 */ struct vec3f position;
     /* 0x034 */ char unk_34[16];
     /* 0x044 */ f32 decorationPos[2];
     /* 0x04C */ char unk_4C[4];

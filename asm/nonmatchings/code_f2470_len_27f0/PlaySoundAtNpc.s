@@ -24,7 +24,7 @@ glabel PlaySoundAtNpc
 /* 0F4BA4 802D01F4 0040802D */   daddu $s0, $v0, $zero
 /* 0F4BA8 802D01F8 0220202D */  daddu $a0, $s1, $zero
 /* 0F4BAC 802D01FC 0240282D */  daddu $a1, $s2, $zero
-/* 0F4BB0 802D0200 0C0B36B0 */  jal   func_802CDAC0
+/* 0F4BB0 802D0200 0C0B36B0 */  jal   resolve_npc
 /* 0F4BB4 802D0204 0040882D */   daddu $s1, $v0, $zero
 /* 0F4BB8 802D0208 10400007 */  beqz  $v0, .L802D0228
 /* 0F4BBC 802D020C 0200202D */   daddu $a0, $s0, $zero
@@ -58,7 +58,7 @@ glabel PlaySoundAtNpc
 /* 0F4C24 802D0274 0040802D */   daddu $s0, $v0, $zero
 /* 0F4C28 802D0278 0220202D */  daddu $a0, $s1, $zero
 /* 0F4C2C 802D027C 0200282D */  daddu $a1, $s0, $zero
-/* 0F4C30 802D0280 0C0B36B0 */  jal   func_802CDAC0
+/* 0F4C30 802D0280 0C0B36B0 */  jal   resolve_npc
 /* 0F4C34 802D0284 0040802D */   daddu $s0, $v0, $zero
 /* 0F4C38 802D0288 A05000AA */  sb    $s0, 0xaa($v0)
 /* 0F4C3C 802D028C 8FBF0018 */  lw    $ra, 0x18($sp)

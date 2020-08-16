@@ -2,7 +2,7 @@
 .set noreorder # don't insert nops after branches
 
 
-glabel func_802CDAC0
+glabel resolve_npc
 /* 0F2470 802CDAC0 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0F2474 802CDAC4 0080182D */  daddu $v1, $a0, $zero
 /* 0F2478 802CDAC8 00A0202D */  daddu $a0, $a1, $zero

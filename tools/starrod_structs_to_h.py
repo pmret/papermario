@@ -18,6 +18,7 @@ STRUCT_FILES = (
     glob(path.join(SR_DATABASE, f"structs/**/matrix4s.struct")) +
     glob(path.join(SR_DATABASE, f"structs/**/cam_pos_settings.struct")) +
     glob(path.join(SR_DATABASE, f"structs/**/partner_data.struct")) +
+    glob(path.join(SR_DATABASE, f"structs/**/npc_blur_data.struct")) +
 
     # other structs
     glob(path.join(SR_DATABASE, f"structs/**/*.struct"))

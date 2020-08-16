@@ -27,12 +27,12 @@ glabel NpcFaceNpc
 /* 0F3884 802CEED4 0C0B1EAF */  jal   get_variable
 /* 0F3888 802CEED8 0040802D */   daddu $s0, $v0, $zero
 /* 0F388C 802CEEDC 0220202D */  daddu $a0, $s1, $zero
-/* 0F3890 802CEEE0 0C0B36B0 */  jal   func_802CDAC0
+/* 0F3890 802CEEE0 0C0B36B0 */  jal   resolve_npc
 /* 0F3894 802CEEE4 0040282D */   daddu $a1, $v0, $zero
 /* 0F3898 802CEEE8 0040982D */  daddu $s3, $v0, $zero
 /* 0F389C 802CEEEC 12600006 */  beqz  $s3, .L802CEF08
 /* 0F38A0 802CEEF0 0220202D */   daddu $a0, $s1, $zero
-/* 0F38A4 802CEEF4 0C0B36B0 */  jal   func_802CDAC0
+/* 0F38A4 802CEEF4 0C0B36B0 */  jal   resolve_npc
 /* 0F38A8 802CEEF8 0200282D */   daddu $a1, $s0, $zero
 /* 0F38AC 802CEEFC 0040802D */  daddu $s0, $v0, $zero
 /* 0F38B0 802CEF00 16000003 */  bnez  $s0, .L802CEF10

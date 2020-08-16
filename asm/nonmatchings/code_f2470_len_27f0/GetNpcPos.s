@@ -20,7 +20,7 @@ glabel GetNpcPos
 /* 0F3ADC 802CF12C 0220202D */  daddu $a0, $s1, $zero
 /* 0F3AE0 802CF130 8E130000 */  lw    $s3, ($s0)
 /* 0F3AE4 802CF134 8E140004 */  lw    $s4, 4($s0)
-/* 0F3AE8 802CF138 0C0B36B0 */  jal   func_802CDAC0
+/* 0F3AE8 802CF138 0C0B36B0 */  jal   resolve_npc
 /* 0F3AEC 802CF13C 0040282D */   daddu $a1, $v0, $zero
 /* 0F3AF0 802CF140 0040802D */  daddu $s0, $v0, $zero
 /* 0F3AF4 802CF144 12000012 */  beqz  $s0, .L802CF190
@@ -64,7 +64,7 @@ glabel GetNpcPos
 /* 0F3B84 802CF1D4 26310004 */   addiu $s1, $s1, 4
 /* 0F3B88 802CF1D8 0200202D */  daddu $a0, $s0, $zero
 /* 0F3B8C 802CF1DC 8E310000 */  lw    $s1, ($s1)
-/* 0F3B90 802CF1E0 0C0B36B0 */  jal   func_802CDAC0
+/* 0F3B90 802CF1E0 0C0B36B0 */  jal   resolve_npc
 /* 0F3B94 802CF1E4 0040282D */   daddu $a1, $v0, $zero
 /* 0F3B98 802CF1E8 54400001 */  bnel  $v0, $zero, .L802CF1F0
 /* 0F3B9C 802CF1EC AC510080 */   sw    $s1, 0x80($v0)
@@ -87,7 +87,7 @@ glabel GetNpcPos
 /* 0F3BD8 802CF228 26310004 */   addiu $s1, $s1, 4
 /* 0F3BDC 802CF22C 0200202D */  daddu $a0, $s0, $zero
 /* 0F3BE0 802CF230 8E310000 */  lw    $s1, ($s1)
-/* 0F3BE4 802CF234 0C0B36B0 */  jal   func_802CDAC0
+/* 0F3BE4 802CF234 0C0B36B0 */  jal   resolve_npc
 /* 0F3BE8 802CF238 0040282D */   daddu $a1, $v0, $zero
 /* 0F3BEC 802CF23C 10400004 */  beqz  $v0, .L802CF250
 /* 0F3BF0 802CF240 0040202D */   daddu $a0, $v0, $zero

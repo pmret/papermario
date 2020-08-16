@@ -14,7 +14,7 @@ glabel GetNpcAnimation
 /* 0F2B30 802CE180 26100004 */   addiu $s0, $s0, 4
 /* 0F2B34 802CE184 0220202D */  daddu $a0, $s1, $zero
 /* 0F2B38 802CE188 8E100000 */  lw    $s0, ($s0)
-/* 0F2B3C 802CE18C 0C0B36B0 */  jal   func_802CDAC0
+/* 0F2B3C 802CE18C 0C0B36B0 */  jal   resolve_npc
 /* 0F2B40 802CE190 0040282D */   daddu $a1, $v0, $zero
 /* 0F2B44 802CE194 10400004 */  beqz  $v0, .L802CE1A8
 /* 0F2B48 802CE198 0220202D */   daddu $a0, $s1, $zero
@@ -45,7 +45,7 @@ glabel GetNpcAnimation
 /* 0F2BA4 802CE1F4 0040802D */   daddu $s0, $v0, $zero
 /* 0F2BA8 802CE1F8 0220202D */  daddu $a0, $s1, $zero
 /* 0F2BAC 802CE1FC 0200282D */  daddu $a1, $s0, $zero
-/* 0F2BB0 802CE200 0C0B36B0 */  jal   func_802CDAC0
+/* 0F2BB0 802CE200 0C0B36B0 */  jal   resolve_npc
 /* 0F2BB4 802CE204 46000506 */   mov.s $f20, $f0
 /* 0F2BB8 802CE208 54400001 */  bnel  $v0, $zero, .L802CE210
 /* 0F2BBC 802CE20C E4540030 */   swc1  $f20, 0x30($v0)

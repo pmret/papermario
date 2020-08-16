@@ -22,7 +22,7 @@ glabel NpcFlyTo
 /* 0F30EC 802CE73C 0C0B1EAF */  jal   get_variable
 /* 0F30F0 802CE740 26100004 */   addiu $s0, $s0, 4
 /* 0F30F4 802CE744 0240202D */  daddu $a0, $s2, $zero
-/* 0F30F8 802CE748 0C0B36B0 */  jal   func_802CDAC0
+/* 0F30F8 802CE748 0C0B36B0 */  jal   resolve_npc
 /* 0F30FC 802CE74C 0040282D */   daddu $a1, $v0, $zero
 /* 0F3100 802CE750 0040882D */  daddu $s1, $v0, $zero
 /* 0F3104 802CE754 56200003 */  bnel  $s1, $zero, .L802CE764

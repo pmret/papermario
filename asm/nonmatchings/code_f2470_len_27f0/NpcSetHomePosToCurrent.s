@@ -11,7 +11,7 @@ glabel NpcSetHomePosToCurrent
 /* 0F3D80 802CF3D0 0C0B1EAF */  jal   get_variable
 /* 0F3D84 802CF3D4 8C450000 */   lw    $a1, ($v0)
 /* 0F3D88 802CF3D8 0200202D */  daddu $a0, $s0, $zero
-/* 0F3D8C 802CF3DC 0C0B36B0 */  jal   func_802CDAC0
+/* 0F3D8C 802CF3DC 0C0B36B0 */  jal   resolve_npc
 /* 0F3D90 802CF3E0 0040282D */   daddu $a1, $v0, $zero
 /* 0F3D94 802CF3E4 0040202D */  daddu $a0, $v0, $zero
 /* 0F3D98 802CF3E8 1080000F */  beqz  $a0, .L802CF428

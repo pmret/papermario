@@ -48,21 +48,21 @@ INCLUDE_ASM(code_42e0_len_1f60, signF);
 
 INCLUDE_ASM(code_42e0_len_1f60, round);
 
-INCLUDE_ASM(code_42e0_len_1f60, clamp_angle);
+f32 INCLUDE_ASM(code_42e0_len_1f60, clamp_angle, f32 theta);
 
 INCLUDE_ASM(code_42e0_len_1f60, get_clamped_angle_diff);
 
-INCLUDE_ASM(code_42e0_len_1f60, atan2);
+f32 INCLUDE_ASM(code_42e0_len_1f60, atan2, f32 startX, f32 startZ, f32 endX, f32 endZ);
 
 INCLUDE_ASM(code_42e0_len_1f60, get_player_normal_yaw);
 
 INCLUDE_ASM(code_42e0_len_1f60, get_player_normal_pitch);
 
-INCLUDE_ASM(code_42e0_len_1f60, dist2D);
+f32 INCLUDE_ASM(code_42e0_len_1f60, dist2D, f32 ax, f32 ay, f32 bx, f32 by);
 
-INCLUDE_ASM(code_42e0_len_1f60, dist3D);
+f32 INCLUDE_ASM(code_42e0_len_1f60, dist3D, f32 ax, f32 ay, f32 az, f32 bx, f32 by, f32 bz);
 
-INCLUDE_ASM(code_42e0_len_1f60, add_vec2D_polar);
+void INCLUDE_ASM(code_42e0_len_1f60, add_vec2D_polar, f32* x, f32* y, f32 r, f32 theta);
 
 INCLUDE_ASM(code_42e0_len_1f60, _wrap_trig_lookup_value);
 

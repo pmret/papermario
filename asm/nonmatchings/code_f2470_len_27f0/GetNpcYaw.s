@@ -14,7 +14,7 @@ glabel GetNpcYaw
 /* 0F33E0 802CEA30 26100004 */   addiu $s0, $s0, 4
 /* 0F33E4 802CEA34 0220202D */  daddu $a0, $s1, $zero
 /* 0F33E8 802CEA38 8E100000 */  lw    $s0, ($s0)
-/* 0F33EC 802CEA3C 0C0B36B0 */  jal   func_802CDAC0
+/* 0F33EC 802CEA3C 0C0B36B0 */  jal   resolve_npc
 /* 0F33F0 802CEA40 0040282D */   daddu $a1, $v0, $zero
 /* 0F33F4 802CEA44 5040000A */  beql  $v0, $zero, .L802CEA70
 /* 0F33F8 802CEA48 24020002 */   addiu $v0, $zero, 2
