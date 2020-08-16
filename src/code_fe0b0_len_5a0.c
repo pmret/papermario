@@ -2,7 +2,7 @@
 
 INCLUDE_ASM(code_fe0b0_len_5a0, SetSpriteShading);
 
-s32 EnableSpriteShading(script_context* script) {
+s32 EnableSpriteShading(Script* script) {
     if (get_variable(script, *script->ptrReadPos) != 0) {
         *D_80151328 |= 1;
     } else {
@@ -11,27 +11,27 @@ s32 EnableSpriteShading(script_context* script) {
     return 2;
 }
 
-s32 getDemoState(script_context* script) {
+s32 getDemoState(Script* script) {
     set_variable(script, *script->ptrReadPos, (*gGameStatusPtr)->demoState);
     return 2;
 }
 
-s32 DemoPressButton(script_context* script) {
+s32 DemoPressButton(Script* script) {
     (*gGameStatusPtr)->demoButtonInput |= get_variable(script, *script->ptrReadPos);
     return 2;
 }
 
-s32 DemoReleaseButton(script_context* script) {
+s32 DemoReleaseButton(Script* script) {
     (*gGameStatusPtr)->demoButtonInput &= ~get_variable(script, *script->ptrReadPos);
     return 2;
 }
 
-s32 DemoSetButtons(script_context* script) {
+s32 DemoSetButtons(Script* script) {
     (*gGameStatusPtr)->demoButtonInput = get_variable(script, *script->ptrReadPos);
     return 2;
 }
 
-s32 DemoJoystickRadial(script_context* script) {
+s32 DemoJoystickRadial(Script* script) {
     f32 a;
     f32 b;
     s32* thisPos = script->ptrReadPos;
@@ -45,7 +45,7 @@ s32 DemoJoystickRadial(script_context* script) {
     return 2;
 }
 
-s32 DemoJoystickXY(script_context* script) {
+s32 DemoJoystickXY(Script* script) {
     f32 x;
     f32 y;
     s32* thisPos = script->ptrReadPos;

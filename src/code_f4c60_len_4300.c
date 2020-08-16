@@ -1,18 +1,18 @@
 #include "common.h"
 
-s32 SpeakToPlayer(script_context* script, s32 initialCall) {
+s32 SpeakToPlayer(Script* script, s32 initialCall) {
     return _show_message(script, initialCall, 0);
 }
 
-s32 EndSpeech(script_context* script, s32 initialCall) {
+s32 EndSpeech(Script* script, s32 initialCall) {
     return _show_message(script, initialCall, 1);
 }
 
-s32 ContinueSpeech(script_context* script, s32 initialCall) {
+s32 ContinueSpeech(Script* script, s32 initialCall) {
     return _show_message(script, initialCall, 2);
 }
 
-s32 SpeakToNpc(script_context* script, s32 initialCall) {
+s32 SpeakToNpc(Script* script, s32 initialCall) {
     return _show_message(script, initialCall, 3);
 }
 
@@ -28,27 +28,27 @@ INCLUDE_ASM(code_f4c60_len_4300, SwitchMessage);
 
 INCLUDE_ASM(code_f4c60_len_4300, ShowChoice);
 
-s32 CloseChoice(script_context* script, s32 initialCall) {
+s32 CloseChoice(Script* script, s32 initialCall) {
     close_message(D_802DB268);
     return 1;
 }
 
-s32 CancelMessage(script_context* script, s32 initialCall) {
+s32 CancelMessage(Script* script, s32 initialCall) {
     cancel_message(gCurrentPrintContext);
     return 2;
 }
 
-s32 CancelMessageAndBlock(script_context* script, s32 initialCall) {
+s32 CancelMessageAndBlock(Script* script, s32 initialCall) {
     cancel_message(gCurrentPrintContext);
     return 0;
 }
 
-s32 SetMessageImages(script_context* script, s32 initialCall) {
+s32 SetMessageImages(Script* script, s32 initialCall) {
     set_message_images(*script->ptrReadPos);
     return 2;
 }
 
-s32 func_802D0C94(script_context* script, s32 initialCall) {
+s32 func_802D0C94(Script* script, s32 initialCall) {
     if (get_variable(script, *script->ptrReadPos) == 0) {
         D_8009A650[0] |= 0x10;
     } else {
@@ -57,7 +57,7 @@ s32 func_802D0C94(script_context* script, s32 initialCall) {
     return 2;
 }
 
-s32 SetMessageString(script_context* script, s32 initialCall) {
+s32 SetMessageString(Script* script, s32 initialCall) {
     bytecode* ptrReadPos = script->ptrReadPos;
     bytecode string = get_variable(script, *ptrReadPos++);
     bytecode index = get_variable(script, *ptrReadPos++);

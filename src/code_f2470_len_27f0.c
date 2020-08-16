@@ -1,20 +1,20 @@
 #include "common.h"
 
-npc* resolve_npc(script_context* script, NPC npcID) {
+Npc* resolve_npc(Script* script, NPC npcID) {
     if (npcID == NPC_SELF) {
         return get_npc_safe(script->ownerID);
     } else if (npcID >= -270000000) {
         return get_npc_safe(npcID);
     } else {
-        return (npc*) npcID;
+        return (Npc*) npcID;
     }
 }
 
 INCLUDE_ASM(code_f2470_len_27f0, set_npc_animation);
 
-s32 DeleteNpc(script_context* script, s32 initialCall) {
+s32 DeleteNpc(Script* script, s32 initialCall) {
     bytecode* ptrReadPos = script->ptrReadPos;
-    npc* npcPtr = get_npc_unsafe(get_variable(script, *ptrReadPos++));
+    Npc* npcPtr = get_npc_unsafe(get_variable(script, *ptrReadPos++));
 
     if (npcPtr) {
         free_npc(npcPtr);
@@ -23,7 +23,7 @@ s32 DeleteNpc(script_context* script, s32 initialCall) {
     return 2;
 }
 
-s32 GetNpcPointer(script_context* script, s32 initialCall) {
+s32 GetNpcPointer(Script* script, s32 initialCall) {
     bytecode* ptrReadPos = script->ptrReadPos;
     bytecode npcID = get_variable(script, *ptrReadPos++);
     bytecode varNPC = *ptrReadPos++;

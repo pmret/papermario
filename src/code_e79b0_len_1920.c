@@ -50,7 +50,7 @@ INCLUDE_ASM(code_e79b0_len_1920, kill_script);
 
 void* kill_script_by_ID(s32 id) {
     s32 i;
-    script_context* scriptContextPtr;
+    Script* scriptContextPtr;
 
     for (i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
@@ -62,7 +62,7 @@ void* kill_script_by_ID(s32 id) {
 
 s32 kill_all_scripts(void) {
     s32 i;
-    script_context* scriptContextPtr;
+    Script* scriptContextPtr;
 
     for(i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
@@ -75,7 +75,7 @@ s32 kill_all_scripts(void) {
 
 s32 does_script_exist(s32 id) {
     s32 i;
-    script_context* scriptContextPtr;
+    Script* scriptContextPtr;
 
     for(i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
@@ -86,7 +86,7 @@ s32 does_script_exist(s32 id) {
     return 0;
 }
 
-s32 does_script_exist_by_ref(script_context* script) {
+s32 does_script_exist_by_ref(Script* script) {
     s32 i;
 
     for(i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
@@ -97,11 +97,11 @@ s32 does_script_exist_by_ref(script_context* script) {
     return 0;
 }
 
-void set_script_priority(script_context* script, s8 priority) {
+void set_script_priority(Script* script, s8 priority) {
     script->priority = priority;
 }
 
-void set_script_timescale(script_context* script, f32 timeScale) {
+void set_script_timescale(Script* script, f32 timeScale) {
     script->timeScale = timeScale * gGlobalTimeSpace;
 }
 
@@ -122,7 +122,7 @@ f32 get_global_timespace(void) {
 }
 */
 
-void set_script_group(script_context* script, s8 groupFlags) {
+void set_script_group(Script* script, s8 groupFlags) {
     script->groupFlags = groupFlags;
 }
 
@@ -130,10 +130,10 @@ INCLUDE_ASM(code_e79b0_len_1920, bind_trigger);
 
 INCLUDE_ASM(code_e79b0_len_1920, bind_trigger_1);
 
-void suspend_group_script(script_context* script, s32 groupFlags) {
+void suspend_group_script(Script* script, s32 groupFlags) {
     int i;
-    script_context* scriptContextPtr;
-    script_context* childScript = script->childScript;
+    Script* scriptContextPtr;
+    Script* childScript = script->childScript;
 
     if (childScript != NULL) {
         suspend_group_script(childScript, groupFlags);
@@ -151,10 +151,10 @@ void suspend_group_script(script_context* script, s32 groupFlags) {
     }
 }
 
-void resume_group_script(script_context* script, s32 groupFlags) {
+void resume_group_script(Script* script, s32 groupFlags) {
     int i;
-    script_context* scriptContextPtr;
-    script_context* childScript = script->childScript;
+    Script* scriptContextPtr;
+    Script* childScript = script->childScript;
 
     if (childScript != NULL) {
         resume_group_script(childScript, groupFlags);
@@ -174,7 +174,7 @@ void resume_group_script(script_context* script, s32 groupFlags) {
 
 s32 suspend_all_script(s32 id) {
     s32 i;
-    script_context* scriptContextPtr;
+    Script* scriptContextPtr;
 
     for (i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
@@ -186,7 +186,7 @@ s32 suspend_all_script(s32 id) {
 
 s32 resume_all_script(s32 id) {
     s32 i;
-    script_context* scriptContextPtr;
+    Script* scriptContextPtr;
 
     for (i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
@@ -198,7 +198,7 @@ s32 resume_all_script(s32 id) {
 
 void suspend_group_script_index(s32 id, s32 groupFlags) {
     s32 i;
-    script_context* scriptContextPtr;
+    Script* scriptContextPtr;
 
     for (i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
@@ -210,7 +210,7 @@ void suspend_group_script_index(s32 id, s32 groupFlags) {
 
 void resume_group_script_index(s32 id, s32 groupFlags) {
     s32 i;
-    script_context* scriptContextPtr;
+    Script* scriptContextPtr;
 
     for (i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
@@ -222,7 +222,7 @@ void resume_group_script_index(s32 id, s32 groupFlags) {
 
 s32 suspend_all_group(s32 groupFlags) {
     s32 i;
-    script_context* scriptContextPtr;
+    Script* scriptContextPtr;
 
     for (i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
@@ -234,7 +234,7 @@ s32 suspend_all_group(s32 groupFlags) {
 
 s32 resume_all_group(s32 groupFlags) {
     s32 i;
-    script_context* scriptContextPtr;
+    Script* scriptContextPtr;
 
     for (i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
@@ -247,7 +247,7 @@ s32 resume_all_group(s32 groupFlags) {
 
 void suspend_group_others(s32 script, s32 groupFlags) {
     s32 i;
-    script_context* scriptContextPtr;
+    Script* scriptContextPtr;
 
     for (i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
@@ -259,7 +259,7 @@ void suspend_group_others(s32 script, s32 groupFlags) {
 
 void resume_group_others(s32 script, s32 groupFlags) {
     s32 i;
-    script_context* scriptContextPtr;
+    Script* scriptContextPtr;
 
     for (i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
@@ -269,13 +269,13 @@ void resume_group_others(s32 script, s32 groupFlags) {
     }
 }
 
-script_context* get_script_by_index(s32 index) {
+Script* get_script_by_index(s32 index) {
     return (*gCurrentScriptListPtr)[index];
 }
 
-script_context* get_script_by_id(s32 id) {
+Script* get_script_by_id(s32 id) {
     s32 i;
-    script_context* scriptContextPtr;
+    Script* scriptContextPtr;
 
     for (i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
         if ((*gCurrentScriptListPtr)[i] != NULL) {
@@ -288,10 +288,10 @@ script_context* get_script_by_id(s32 id) {
     return 0;
 }
 
-void set_script_flags(script_context* script, s32 flags) {
+void set_script_flags(Script* script, s32 flags) {
     int i;
-    script_context* scriptContextPtr;
-    script_context* childScript = script->childScript;
+    Script* scriptContextPtr;
+    Script* childScript = script->childScript;
 
     script->state |= flags;
     if (childScript != NULL) {

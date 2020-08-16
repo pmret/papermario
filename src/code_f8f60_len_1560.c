@@ -1,6 +1,6 @@
 #include "common.h"
 
-s32 MakeLerp(script_context* script, s32 initialCall) {
+s32 MakeLerp(Script* script, s32 initialCall) {
     s32* ptrReadPos = script->ptrReadPos;
 
     script->varTable[0xC] = get_variable(script, *ptrReadPos++); // start
@@ -12,7 +12,7 @@ s32 MakeLerp(script_context* script, s32 initialCall) {
     return 2;
 }
 
-s32 UpdateLerp(script_context* script, s32 initialCall) {
+s32 UpdateLerp(Script* script, s32 initialCall) {
     script->varTable[0x0] = (s32) update_lerp(
         script->varTable[0xB],
         script->varTable[0xC],
@@ -31,7 +31,7 @@ s32 UpdateLerp(script_context* script, s32 initialCall) {
     return 2;
 }
 
-s32 RandInt(script_context* script, s32 initialCall) {
+s32 RandInt(Script* script, s32 initialCall) {
     bytecode* ptrReadPos = script->ptrReadPos;
 
     s32 max = get_variable(script, *ptrReadPos++);
@@ -42,49 +42,49 @@ s32 RandInt(script_context* script, s32 initialCall) {
     return 2;
 }
 
-s32 GetAngleBetweenNPCs(script_context* script, s32 initialCall) {
+s32 GetAngleBetweenNPCs(Script* script, s32 initialCall) {
     bytecode* ptrReadPos = script->ptrReadPos;
 
     NPC aID = get_variable(script, *ptrReadPos++);
     NPC bID = get_variable(script, *ptrReadPos++);
     bytecode outVar = *ptrReadPos++;
 
-    npc* a = resolve_npc(script, aID);
-    npc* b = resolve_npc(script, bID);
+    Npc* a = resolve_npc(script, aID);
+    Npc* b = resolve_npc(script, bID);
     set_variable(script, outVar, atan2(a->pos.x, a->pos.z, b->pos.x, b->pos.z));
 
     return 2;
 }
 
-s32 GetAngleToNPC(script_context* script, s32 initialCall) {
-    player_status* playerStatus = &gPlayerStatus;
+s32 GetAngleToNPC(Script* script, s32 initialCall) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
     bytecode* ptrReadPos = script->ptrReadPos;
 
     NPC npcID = get_variable(script, *ptrReadPos++);
     bytecode outVar = *ptrReadPos++;
 
-    npc* npc = resolve_npc(script, npcID);
+    Npc* npc = resolve_npc(script, npcID);
     set_variable(script, outVar, atan2(playerStatus->position.x, playerStatus->position.z, npc->pos.x, npc->pos.z));
 
     return 2;
 }
 
-s32 GetAngleToPlayer(script_context* script, s32 initialCall) {
-    player_status* playerStatus = &gPlayerStatus;
+s32 GetAngleToPlayer(Script* script, s32 initialCall) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
     bytecode* ptrReadPos = script->ptrReadPos;
 
     NPC npcID = get_variable(script, *ptrReadPos++);
     bytecode outVar = *ptrReadPos++;
 
-    npc* npc = resolve_npc(script, npcID);
+    Npc* npc = resolve_npc(script, npcID);
     set_variable(script, outVar, atan2(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z));
 
     return 2;
 }
 
-s32 AwaitPlayerApproach(script_context* script, s32 initialCall) {
+s32 AwaitPlayerApproach(Script* script, s32 initialCall) {
     bytecode* ptrReadPos = script->ptrReadPos;
-    player_status* playerStatus = &gPlayerStatus;
+    PlayerStatus* playerStatus = &gPlayerStatus;
 
     s32* targetX = &script->functionTemp[0];
     s32* targetZ = &script->functionTemp[1];
@@ -110,9 +110,9 @@ s32 AwaitPlayerApproach(script_context* script, s32 initialCall) {
     }
 }
 
-s32 IsPlayerWithin(script_context* script, s32 initialCall) {
+s32 IsPlayerWithin(Script* script, s32 initialCall) {
     bytecode* ptrReadPos = script->ptrReadPos;
-    player_status* playerStatus = &gPlayerStatus;
+    PlayerStatus* playerStatus = &gPlayerStatus;
 
     s32* targetX = &script->functionTemp[0];
     s32* targetZ = &script->functionTemp[1];
@@ -141,9 +141,9 @@ s32 IsPlayerWithin(script_context* script, s32 initialCall) {
     return 2;
 }
 
-s32 AwaitPlayerLeave(script_context* script, s32 initialCall) {
+s32 AwaitPlayerLeave(Script* script, s32 initialCall) {
     bytecode* ptrReadPos = script->ptrReadPos;
-    player_status* playerStatus = &gPlayerStatus;
+    PlayerStatus* playerStatus = &gPlayerStatus;
 
     s32* targetX = &script->functionTemp[0];
     s32* targetZ = &script->functionTemp[1];
@@ -169,7 +169,7 @@ s32 AwaitPlayerLeave(script_context* script, s32 initialCall) {
     }
 }
 
-s32 AddVectorPolar(script_context* script, s32 initialCall) {
+s32 AddVectorPolar(Script* script, s32 initialCall) {
     bytecode* ptrReadPos = script->ptrReadPos;
 
     bytecode xVar = *ptrReadPos++;
@@ -236,7 +236,7 @@ s32 func_802D4CC4(script_context* script, s32 initialCall) {
 }
 */
 
-s32 func_802D4D18(script_context* script, s32 initialCall) {
+s32 func_802D4D18(Script* script, s32 initialCall) {
     s32 value = get_float_variable(script, *script->ptrReadPos);
 
     func_80137E4C(0, 0, 0xC, 0x14);
@@ -246,7 +246,7 @@ s32 func_802D4D18(script_context* script, s32 initialCall) {
     return 2;
 }
 
-s32 func_802D4D88(script_context* script, s32 initialCall) {
+s32 func_802D4D88(Script* script, s32 initialCall) {
     func_80137D88(0xC, 0);
     return 2;
 }
@@ -259,7 +259,7 @@ INCLUDE_ASM(code_f8f60_len_1560, LoadPath);
 
 INCLUDE_ASM(code_f8f60_len_1560, GetNextPathPos);
 
-s32 GetDist2D(script_context* script, s32 initialCall) {
+s32 GetDist2D(Script* script, s32 initialCall) {
     bytecode* ptrReadPos = script->ptrReadPos;
 
     bytecode outVar = *ptrReadPos++;
@@ -273,12 +273,12 @@ s32 GetDist2D(script_context* script, s32 initialCall) {
     return 2;
 }
 
-s32 func_802D5830(script_context* script, s32 initialCall) {
+s32 func_802D5830(Script* script, s32 initialCall) {
     func_80027088(get_variable(script, *script->ptrReadPos));
     return 2;
 }
 
-s32 func_802D585C(script_context* script, s32 initialCall) {
+s32 func_802D585C(Script* script, s32 initialCall) {
     bytecode* ptrReadPos = script->ptrReadPos;
     s32 setMode = get_variable(script,  *ptrReadPos++);
     s32 flags = get_variable(script, *ptrReadPos++);
@@ -294,7 +294,7 @@ s32 func_802D585C(script_context* script, s32 initialCall) {
     return 2;
 }
 
-s32 SetValueByRef(script_context* script, s32 initialCall) {
+s32 SetValueByRef(Script* script, s32 initialCall) {
     bytecode* ptrReadPos = script->ptrReadPos;
 
     s32 dest = get_variable(script, *ptrReadPos++); /* Reference */
@@ -304,7 +304,7 @@ s32 SetValueByRef(script_context* script, s32 initialCall) {
     return 2;
 }
 
-s32 GetValueByRef(script_context* script, s32 initialCall) {
+s32 GetValueByRef(Script* script, s32 initialCall) {
     bytecode* ptrReadPos = script->ptrReadPos;
 
     s32 src = get_variable(script, *ptrReadPos++); /* Reference */
@@ -315,7 +315,7 @@ s32 GetValueByRef(script_context* script, s32 initialCall) {
     return 2;
 }
 
-s32 EnableStatusMenu(script_context* script, s32 initialCall) {
+s32 EnableStatusMenu(Script* script, s32 initialCall) {
     if (get_variable(script, *script->ptrReadPos) != 0) {
         decrement_status_menu_disabled();
     } else {
@@ -325,7 +325,7 @@ s32 EnableStatusMenu(script_context* script, s32 initialCall) {
     return 2;
 }
 
-s32 ShowStatusMenu(script_context* script, s32 initialCall) {
+s32 ShowStatusMenu(Script* script, s32 initialCall) {
     if (get_variable(script, *script->ptrReadPos) != 0) {
         status_menu_enable_ignore_changes();
         func_800E97B8();
@@ -336,7 +336,7 @@ s32 ShowStatusMenu(script_context* script, s32 initialCall) {
     return 2;
 }
 
-s32 SetGameMode(script_context* script, s32 initialCall) {
+s32 SetGameMode(Script* script, s32 initialCall) {
     set_game_mode(
         // Clear upper half
         (get_variable(script, *script->ptrReadPos) << 0x10) >> 0x10
@@ -344,7 +344,7 @@ s32 SetGameMode(script_context* script, s32 initialCall) {
     return 2;
 }
 
-s32 ClampAngleInt(script_context* script, s32 initialCall) {
+s32 ClampAngleInt(Script* script, s32 initialCall) {
     bytecode* ptrReadPos = script->ptrReadPos;
 
     set_variable(script, *ptrReadPos, clamp_angle(get_variable(script, *ptrReadPos)));
@@ -352,7 +352,7 @@ s32 ClampAngleInt(script_context* script, s32 initialCall) {
     return 2;
 }
 
-s32 ClampAngleFloat(script_context* script, s32 initialCall) {
+s32 ClampAngleFloat(Script* script, s32 initialCall) {
     bytecode* ptrReadPos = script->ptrReadPos;
 
     set_float_variable(script, *ptrReadPos, clamp_angle(get_float_variable(script, *ptrReadPos)));
