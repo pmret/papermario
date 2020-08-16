@@ -1,12 +1,20 @@
 #include "common.h"
 
-INCLUDE_ASM(code_f4c60_len_4300, SpeakToPlayer);
+s32 SpeakToPlayer(script_context* script, s32 initialCall) {
+    return _show_message(script, initialCall, 0);
+}
 
-INCLUDE_ASM(code_f4c60_len_4300, EndSpeech);
+s32 EndSpeech(script_context* script, s32 initialCall) {
+    return _show_message(script, initialCall, 1);
+}
 
-INCLUDE_ASM(code_f4c60_len_4300, ContinueSpeech);
+s32 ContinueSpeech(script_context* script, s32 initialCall) {
+    return _show_message(script, initialCall, 2);
+}
 
-INCLUDE_ASM(code_f4c60_len_4300, SpeakToNpc);
+s32 SpeakToNpc(script_context* script, s32 initialCall) {
+    return _show_message(script, initialCall, 3);
+}
 
 INCLUDE_ASM(code_f4c60_len_4300, _show_message);
 
@@ -20,17 +28,56 @@ INCLUDE_ASM(code_f4c60_len_4300, SwitchMessage);
 
 INCLUDE_ASM(code_f4c60_len_4300, ShowChoice);
 
-INCLUDE_ASM(code_f4c60_len_4300, CloseChoice);
+s32 CloseChoice(script_context* script, s32 initialCall) {
+    close_message(D_802DB268);
+    return 1;
+}
 
-INCLUDE_ASM(code_f4c60_len_4300, CancelMessage);
+s32 CancelMessage(script_context* script, s32 initialCall) {
+    cancel_message(gCurrentPrintContext);
+    return 2;
+}
 
-INCLUDE_ASM(code_f4c60_len_4300, CancelMessageAndBlock);
+s32 CancelMessageAndBlock(script_context* script, s32 initialCall) {
+    cancel_message(gCurrentPrintContext);
+    return 0;
+}
 
-INCLUDE_ASM(code_f4c60_len_4300, SetMessageImages);
+s32 SetMessageImages(script_context* script, s32 initialCall) {
+    set_message_images(*script->ptrReadPos);
+    return 2;
+}
 
-INCLUDE_ASM(code_f4c60_len_4300, SetMessageString);
+s32 func_802D0C94(script_context* script, s32 initialCall) {
+    if (get_variable(script, *script->ptrReadPos) == 0) {
+        D_8009A650[0] |= 0x10;
+    } else {
+        D_8009A650[0] &= ~0x10;
+    }
+    return 2;
+}
+
+s32 SetMessageString(script_context* script, s32 initialCall) {
+    bytecode* ptrReadPos = script->ptrReadPos;
+    bytecode string = get_variable(script, *ptrReadPos++);
+    bytecode index = get_variable(script, *ptrReadPos++);
+
+    set_message_string(string, index);
+    return 2;
+}
 
 INCLUDE_ASM(code_f4c60_len_4300, SetMessageValue);
+// TODO: Figure out why there's an extra NOP after this function
+/*
+s32 SetMessageValue(script_context* script, s32 initialCall) {
+    bytecode* ptrReadPos = script->ptrReadPos;
+    bytecode value = get_variable(script, *ptrReadPos++);
+    bytecode index = get_variable(script, *ptrReadPos);
+
+    set_message_value(value, index);
+    return 2;
+}
+*/
 
 INCLUDE_ASM(code_f4c60_len_4300, HidePlayerShadow);
 

@@ -15,6 +15,8 @@ extern script_context* gWorldScriptList[128];
 extern script_context* gBattleScriptList[128];
 extern script_context** gCurrentScriptListPtr[128];
 
+extern f32 gGlobalTimeSpace;
+
 extern s8 D_800A0900;
 extern s16* D_80151328;
 extern s16 D_8010CD10;
@@ -24,6 +26,9 @@ extern char gCloudyFlowerFieldsBg[]; // "fla_bg"
 extern char gSunnyFlowerFieldsBg[]; // "flb_bg"
 extern bg_header gBackgroundImage;
 extern s8 D_8014F12F;
+
+extern print_context* gCurrentPrintContext;
+extern print_context* D_802DB268;
 
 // Triggers
 /* 0x80151334 */ extern s16 gTriggerCount;

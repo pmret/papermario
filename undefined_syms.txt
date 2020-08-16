@@ -6,6 +6,7 @@ gItemTable = 0x800878E0;
 gWorldScriptList = 0x802DA490;
 gBattleScriptList = 0x802DA690;
 gCurrentScriptListPtr = 0x802DA890;
+gGlobalTimeSpace = 0x802D9CA8;
 D_80147574 = 0x80147574;
 
 gMapTransitionAlpha = 0x800A0940;
@@ -42,6 +43,8 @@ D_8010F6D0 = 0x8010F6D0;
 gBackgroundImage = 0x80200000;
 D_802C3000 = 0x802C3000;
 D_802DBD40 = 0x802DBD40;
+gCurrentPrintContext = 0x802DB260;
+D_802DB268 = 0x802DB268;
 D_802E0D90 = 0x802E0D90;
 D_802EB3D0 = 0x802EB3D0;
 

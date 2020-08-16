@@ -12,9 +12,25 @@ npc* resolve_npc(script_context* script, NPC npcID) {
 
 INCLUDE_ASM(code_f2470_len_27f0, set_npc_animation);
 
-INCLUDE_ASM(code_f2470_len_27f0, DeleteNpc);
+s32 DeleteNpc(script_context* script, s32 initialCall) {
+    bytecode* ptrReadPos = script->ptrReadPos;
+    npc* npcPtr = get_npc_unsafe(get_variable(script, *ptrReadPos++));
 
-INCLUDE_ASM(code_f2470_len_27f0, GetNpcPointer);
+    if (npcPtr) {
+        free_npc(npcPtr);
+        return 2;
+    }
+    return 2;
+}
+
+s32 GetNpcPointer(script_context* script, s32 initialCall) {
+    bytecode* ptrReadPos = script->ptrReadPos;
+    bytecode npcID = get_variable(script, *ptrReadPos++);
+    bytecode varNPC = *ptrReadPos++;
+
+    set_variable(script, varNPC, get_npc_safe(npcID));
+    return 2;
+}
 
 INCLUDE_ASM(code_f2470_len_27f0, SetNpcPos);
 
@@ -25,6 +41,20 @@ INCLUDE_ASM(code_f2470_len_27f0, SetNpcScale);
 INCLUDE_ASM(code_f2470_len_27f0, SetNpcCollisionSize);
 
 INCLUDE_ASM(code_f2470_len_27f0, SetNpcSpeed);
+// TODO: Fix issue with BNEZL vs BNEZ
+/*
+s32 SetNpcSpeed(script_context* script, s32 initialCall) {
+    bytecode* ptrReadPos = script->ptrReadPos;
+    bytecode npcID = get_variable(script, *ptrReadPos++);
+    f32 speed = get_float_variable(script, *ptrReadPos);
+    npc* npcPtr = resolve_npc(script, npcID);
+
+    npcPtr->moveSpeed = speed;
+    if(npcPtr != NULL) {
+        return 2;
+    }
+}
+*/
 
 INCLUDE_ASM(code_f2470_len_27f0, SetNpcJumpscale);
 
