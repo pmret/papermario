@@ -630,7 +630,7 @@ typedef struct StaticActorData {
     /* 0x26 */ u8 statusMessageOffset[2];
 } StaticActorData; // size = 0x28
 
-typedef struct Move {
+typedef struct StaticMove {
     /* 0x00 */ s32 moveNameID;
     /* 0x04 */ s32 flags;
     /* 0x08 */ s32 worldDescID;
@@ -639,7 +639,7 @@ typedef struct Move {
     /* 0x11 */ u8 costFP;
     /* 0x12 */ u8 costBP;
     /* 0x13 */ u8 actionCommandID;
-} Move; // size = 0x14
+} StaticMove; // size = 0x14
 
 typedef struct CollisionData {
     /* 0x00 */ f32* vertices[3];
@@ -704,7 +704,7 @@ typedef struct ColliderBoundingBox {
     /* 0x18 */ s32 flagsForCollider;
 } ColliderBoundingBox; // size = 0x1C
 
-typedef struct Item {
+typedef struct StaticItem {
     /* 0x00 */ s32 nameString;
     /* 0x04 */ s16 iconID;
     /* 0x06 */ s16 badgeSortPriority;
@@ -718,7 +718,7 @@ typedef struct Item {
     /* 0x1B */ u8 potencyA;
     /* 0x1C */ u8 potencyB;
     /* 0x1D */ char unk_1D[3];
-} Item; // size = 0x20
+} StaticItem; // size = 0x20
 
 typedef struct Effect {
     /* 0x00 */ char unk_00[32];
@@ -993,7 +993,7 @@ typedef struct ColliderTriangle {
     /* 0x3E */ char unk_3E[2];
 } ColliderTriangle; // size = 0x40
 
-typedef struct Partner {
+typedef struct StaticPartner {
     /* 0x00 */ s32 dmaStart;
     /* 0x04 */ s32 dmaEnd;
     /* 0x08 */ s32 dmaDest;
@@ -1010,7 +1010,7 @@ typedef struct Partner {
     /* 0x34 */ UNK_FUN_PTR(fpFuncD);
     /* 0x38 */ UNK_FUN_PTR(fpFuncE);
     /* 0x3C */ Bytecode* spScriptX;
-} Partner; // size = 0x40
+} StaticPartner; // size = 0x40
 
 typedef struct FontRasterSet {
     /* 0x00 */ u8 sizeX;

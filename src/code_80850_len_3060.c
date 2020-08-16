@@ -139,7 +139,7 @@ s32 get_item_empty_count(void) {
 
 s32 find_item(s32 itemID) {
     PlayerData* playerData = &gPlayerData;
-    Item* item = &gItemTable[itemID];
+    StaticItem* item = &gItemTable[itemID];
     s32 i;
 
     if ((item->typeFlags & 8) != 0) {
@@ -190,7 +190,7 @@ void sort_items(void) {
 
 s32 add_badge(s32 itemID) {
     PlayerData* playerData = &gPlayerData;
-    Item* item = &gItemTable[itemID];
+    StaticItem* item = &gItemTable[itemID];
     s32 i;
 
     if ((item->typeFlags & 0x40) == 0) {

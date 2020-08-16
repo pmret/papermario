@@ -9,7 +9,7 @@ extern UiStatus gUIStatus;
 extern PlayerData gPlayerData;
 extern PlayerStatus gPlayerStatus;
 extern GameStatus* gGameStatusPtr[1];
-extern Item gItemTable[364];
+extern StaticItem gItemTable[364];
 
 extern ScriptInstance* gWorldScriptList[128];
 extern ScriptInstance* gBattleScriptList[128];
