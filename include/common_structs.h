@@ -648,22 +648,6 @@ typedef struct CollisionData {
     /* 0x0E */ char unk_0E[2];
 } CollisionData; // size = 0x10
 
-typedef struct StaticNpcSettings {
-    /* 0x00 */ char unk_00[4];
-    /* 0x04 */ s16 height;
-    /* 0x06 */ s16 radius;
-    /* 0x08 */ UNK_PTR otherAI;
-    /* 0x0C */ bytecode* interactScript;
-    /* 0x10 */ bytecode* aiScript;
-    /* 0x14 */ bytecode* hitScript;
-    /* 0x18 */ bytecode* auxScript;
-    /* 0x1C */ bytecode* defeatScript;
-    /* 0x20 */ s32 flags;
-    /* 0x24 */ char unk_24[4];
-    /* 0x28 */ s16 level;
-    /* 0x2A */ s16 unkFlags;
-} StaticNpcSettings; // size = 0x2C
-
 typedef struct Model {
     /* 0x00 */ s16 flags;
     /* 0x02 */ s16 modelID;
