@@ -1,0 +1,40 @@
+#!/usr/bin/env python3
+
+from os import path
+import re
+from glob import glob
+
+DIR = path.dirname(__file__)
+C_FILES = glob(path.join(DIR, "../src/*.c"))
+ASM_FILES = glob(path.join(DIR, "../asm/nonmatchings/**/*.s"))
+
+def strip_c_comments(text):
+    def replacer(match):
+        s = match.group(0)
+        if s.startswith('/'):
+            return " "
+        else:
+            return s
+    pattern = re.compile(
+        r'//.*?$|/\*.*?\*/|\'(?:\\.|[^\\\'])*\'|"(?:\\.|[^\\"])*"',
+        re.DOTALL | re.MULTILINE
+    )
+    return re.sub(pattern, replacer, text)
+
+c_func_pattern = re.compile(
+    r"^[^\s]+\s+([^\s(]+)\(([^\n)]*)\)\s+{",
+    re.MULTILINE
+)
+def funcs_in_c(text):
+    text = strip_c_comments(text)
+    return [match.group(1) for match in c_func_pattern.finditer(text)]
+
+matched = []
+for filename in C_FILES:
+    with open(filename, "r") as file:
+        matched += funcs_in_c(file.read())
+
+non_matched = [path.splitext(path.basename(filename))[0] for filename in ASM_FILES]
+
+total = len(matched) + len(non_matched)
+print(f"{len(matched)}/{total} ({(len(matched) / total) * 100:.2f}%)")
