@@ -32,9 +32,7 @@ INCLUDE_ASM(code_e92d0_len_5da0, si_handle_Loop);
 INCLUDE_ASM(code_e92d0_len_5da0, si_handle_end_loop);
 
 ApiStatus si_handle_break_loop(ScriptInstance* script) {
-    if (script->loopDepth < 0) {
-        while (1) {}; // todo INF_LOOP
-    }
+    ASSERT(script->loopDepth >= 0);
     script->ptrNextLine = si_goto_end_loop(script);
     script->loopDepth -= 1;
     return ApiStatus_DONE2;
@@ -94,20 +92,29 @@ ApiStatus si_handle_end_if(ScriptInstance* script) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(code_e92d0_len_5da0, si_handle_switch);
+ApiStatus si_handle_switch(ScriptInstance* script) {
+    Bytecode value = get_variable(script, *script->ptrReadPos);
+    s32 switchDepth = ++script->switchDepth;
 
-INCLUDE_ASM(code_e92d0_len_5da0, si_handle_switch_const);
-/*ApiStatus si_handle_switch_const(ScriptInstance* script) {
-    s32 ptrReadPos = *script->ptrReadPos;
-    s8 switchDepth = script->switchDepth + 1;
+    ASSERT(switchDepth < 8);
 
-    if (switchDepth >= 8) {
-        inf_loop: goto inf_loop; //todo
-    }
-    script->switchBlockValue[script->switchDepth + 1] = ptrReadPos;
-    script->switchBlockState[script->switchDepth + 1] = 1;
+    script->switchBlockValue[switchDepth] = value;
+    script->switchBlockState[switchDepth] = 1;
+
     return ApiStatus_DONE2;
-}*/
+}
+
+ApiStatus si_handle_switch_const(ScriptInstance* script) {
+    s32 value = *script->ptrReadPos;
+    s32 switchDepth = ++script->switchDepth;
+
+    ASSERT(switchDepth < 8);
+
+    script->switchBlockValue[switchDepth] = value;
+    script->switchBlockState[switchDepth] = 1;
+
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(code_e92d0_len_5da0, si_handle_case_equal);
 
@@ -134,9 +141,7 @@ INCLUDE_ASM(code_e92d0_len_5da0, si_handle_case_equal_AND);
 INCLUDE_ASM(code_e92d0_len_5da0, si_handle_end_case_group);
 
 ApiStatus si_handle_break_case(ScriptInstance* script) {
-    if (script->switchDepth < 0) {
-        while (1) {}; //todo INF_LOOP
-    }
+    ASSERT(script->switchDepth >= 0);
     script->ptrNextLine = si_goto_end_case(script);
     return ApiStatus_DONE2;
 }
@@ -144,14 +149,12 @@ ApiStatus si_handle_break_case(ScriptInstance* script) {
 ApiStatus si_handle_end_switch(ScriptInstance* script) {
     s32 switchDepth = script->switchDepth;
 
-    if (switchDepth < 0) {
-        inf_loop: goto inf_loop; // todo macro? how to do without label
-    }
+    ASSERT(switchDepth >= 0);
 
-    script->switchBlockState[script->switchDepth] = 0;
+    script->switchBlockState[switchDepth] = 0;
     script->switchDepth -= 1;
-    return ApiStatus_DONE2;
 
+    return ApiStatus_DONE2;
 }
 
 ApiStatus si_handle_set_var(ScriptInstance* script) {
