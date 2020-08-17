@@ -32,9 +32,7 @@ INCLUDE_ASM(code_e92d0_len_5da0, si_handle_Loop);
 INCLUDE_ASM(code_e92d0_len_5da0, si_handle_end_loop);
 
 s32 si_handle_break_loop(script_context* script) {
-    if (script->loopDepth < 0) {
-        while (1) {}; // todo INF_LOOP
-    }
+    ASSERT(script->loopDepth >= 0);
     script->ptrNextLine = si_goto_end_loop(script);
     script->loopDepth -= 1;
     return 2;
@@ -98,9 +96,7 @@ s32 si_handle_switch(script_context* script) {
     bytecode value = get_variable(script, *script->ptrReadPos);
     s32 switchDepth = ++script->switchDepth;
 
-    if (switchDepth >= 8) {
-        while (1) {}
-    }
+    ASSERT(switchDepth < 8);
 
     script->switchBlockValue[switchDepth] = value;
     script->switchBlockState[switchDepth] = 1;
@@ -111,9 +107,7 @@ s32 si_handle_switch_const(script_context* script) {
     bytecode value = *script->ptrReadPos;
     s32 switchDepth = ++script->switchDepth;
 
-    if (switchDepth >= 8) {
-        while (1) {}
-    }
+    ASSERT(switchDepth < 8);
 
     script->switchBlockValue[switchDepth] = value;
     script->switchBlockState[switchDepth] = 1;
@@ -145,24 +139,19 @@ INCLUDE_ASM(code_e92d0_len_5da0, si_handle_case_equal_AND);
 INCLUDE_ASM(code_e92d0_len_5da0, si_handle_end_case_group);
 
 s32 si_handle_break_case(script_context* script) {
-    if (script->switchDepth < 0) {
-        while (1) {}; //todo INF_LOOP
-    }
+    ASSERT(script->switchDepth >= 0);
     script->ptrNextLine = si_goto_end_case(script);
     return 2;
 }
 
 s32 si_handle_end_switch(script_context* script) {
     s32 switchDepth = script->switchDepth;
-    
-    if (switchDepth < 0) {
-        inf_loop: goto inf_loop; // todo macro? how to do without label
-    }
 
-    script->switchBlockState[script->switchDepth] = 0;
+    ASSERT(switchDepth >= 0);
+
+    script->switchBlockState[switchDepth] = 0; // here
     script->switchDepth -= 1;
     return 2;
-
 }
 
 s32 si_handle_set_var(script_context* script) {
