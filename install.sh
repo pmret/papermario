@@ -40,7 +40,7 @@ if command -v pacman &> /dev/null; then
 
             git clone "https://aur.archlinux.org/$PKG.git" || exit 1
             cd $PKG
-            sudo makepkg -si || exit 1
+            makepkg -si || exit 1
             cd ..
             rm -rf $PKG
         fi
