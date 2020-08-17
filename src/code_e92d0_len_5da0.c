@@ -151,7 +151,7 @@ ApiStatus si_handle_end_switch(ScriptInstance* script) {
 
     ASSERT(switchDepth >= 0);
 
-    script->switchBlockState[switchDepth] = 0; // here
+    script->switchBlockState[switchDepth] = 0;
     script->switchDepth -= 1;
 
     return ApiStatus_DONE2;
