@@ -23,7 +23,7 @@ INCLUDE_ASM(code_dbd70_len_700, create_trigger);
 INCLUDE_ASM(code_dbd70_len_700, update_triggers);
 
 
-void delete_trigger(trigger* toDelete) {
+void delete_trigger(Trigger* toDelete) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(gCurrentTriggerListPtr); i++) {
@@ -41,7 +41,7 @@ void delete_trigger(trigger* toDelete) {
 INCLUDE_ASM(code_dbd70_len_700, is_trigger_bound);
 
 //INCLUDE_ASM(code_dbd70_len_700, get_trigger_by_id);
-trigger* get_trigger_by_id(s32 triggerID) {
+Trigger* get_trigger_by_id(s32 triggerID) {
     return (*gCurrentTriggerListPtr)[triggerID];
 }
 
@@ -55,7 +55,7 @@ INCLUDE_ASM(code_dbd70_len_700, func_80145CE8);
     }
 
     for (i = 0; i < ARRAY_COUNT(gCurrentTriggerListPtr); i++) {
-        if (((*gCurrentTriggerListPtr)[i] == NULL) || 
+        if (((*gCurrentTriggerListPtr)[i] == NULL) ||
             ((*gCurrentTriggerListPtr)[i]->unk_30 == 0) ||
             ((*gCurrentTriggerListPtr)[i]->colliderID != arg0) ||
             ((*gCurrentTriggerListPtr)[i]->genericFlagIndex & 0x100) == 0) {

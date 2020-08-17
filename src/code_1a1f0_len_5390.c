@@ -4,13 +4,13 @@ INCLUDE_ASM(code_1a1f0_len_5390, get_defeated);
 
 INCLUDE_ASM(code_1a1f0_len_5390, set_defeated);
 
-INCLUDE_ASM(code_1a1f0_len_5390, GetCamLookAtObjVector);
+INCLUDE_API_ASM(code_1a1f0_len_5390, GetCamLookAtObjVector);
 
-INCLUDE_ASM(code_1a1f0_len_5390, HasMerleeCasts);
+INCLUDE_API_ASM(code_1a1f0_len_5390, HasMerleeCasts);
 
-INCLUDE_ASM(code_1a1f0_len_5390, OnDefeatEnemy);
+INCLUDE_API_ASM(code_1a1f0_len_5390, OnDefeatEnemy);
 
-INCLUDE_ASM(code_1a1f0_len_5390, OnFleeBattleDrops);
+INCLUDE_API_ASM(code_1a1f0_len_5390, OnFleeBattleDrops);
 
 INCLUDE_ASM(code_1a1f0_len_5390, func_8003F7CC);
 

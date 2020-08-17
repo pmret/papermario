@@ -1,166 +1,166 @@
 #include "common.h"
 
-s32 SpeakToPlayer(script_context* script, s32 initialCall) {
-    return _show_message(script, initialCall, 0);
+ApiStatus SpeakToPlayer(ScriptInstance* script, s32 isInitialCall) {
+    return _show_message(script, isInitialCall, 0);
 }
 
-s32 EndSpeech(script_context* script, s32 initialCall) {
-    return _show_message(script, initialCall, 1);
+ApiStatus EndSpeech(ScriptInstance* script, s32 isInitialCall) {
+    return _show_message(script, isInitialCall, 1);
 }
 
-s32 ContinueSpeech(script_context* script, s32 initialCall) {
-    return _show_message(script, initialCall, 2);
+ApiStatus ContinueSpeech(ScriptInstance* script, s32 isInitialCall) {
+    return _show_message(script, isInitialCall, 2);
 }
 
-s32 SpeakToNpc(script_context* script, s32 initialCall) {
-    return _show_message(script, initialCall, 3);
+ApiStatus SpeakToNpc(ScriptInstance* script, s32 isInitialCall) {
+    return _show_message(script, isInitialCall, 3);
 }
 
 INCLUDE_ASM(code_f4c60_len_4300, _show_message);
 
-INCLUDE_ASM(code_f4c60_len_4300, ShowMessageAtScreenPos);
+INCLUDE_API_ASM(code_f4c60_len_4300, ShowMessageAtScreenPos);
 
-INCLUDE_ASM(code_f4c60_len_4300, ShowMessageAtWorldPos);
+INCLUDE_API_ASM(code_f4c60_len_4300, ShowMessageAtWorldPos);
 
-INCLUDE_ASM(code_f4c60_len_4300, CloseMessage);
+INCLUDE_API_ASM(code_f4c60_len_4300, CloseMessage);
 
-INCLUDE_ASM(code_f4c60_len_4300, SwitchMessage);
+INCLUDE_API_ASM(code_f4c60_len_4300, SwitchMessage);
 
-INCLUDE_ASM(code_f4c60_len_4300, ShowChoice);
+INCLUDE_API_ASM(code_f4c60_len_4300, ShowChoice);
 
-s32 CloseChoice(script_context* script, s32 initialCall) {
+ApiStatus CloseChoice(ScriptInstance* script, s32 isInitialCall) {
     close_message(D_802DB268);
-    return 1;
+    return ApiStatus_DONE1;
 }
 
-s32 CancelMessage(script_context* script, s32 initialCall) {
+ApiStatus CancelMessage(ScriptInstance* script, s32 isInitialCall) {
     cancel_message(gCurrentPrintContext);
-    return 2;
+    return ApiStatus_DONE2;
 }
 
-s32 CancelMessageAndBlock(script_context* script, s32 initialCall) {
+ApiStatus CancelMessageAndBlock(ScriptInstance* script, s32 isInitialCall) {
     cancel_message(gCurrentPrintContext);
-    return 0;
+    return ApiStatus_BLOCK;
 }
 
-s32 SetMessageImages(script_context* script, s32 initialCall) {
+ApiStatus SetMessageImages(ScriptInstance* script, s32 isInitialCall) {
     set_message_images(*script->ptrReadPos);
-    return 2;
+    return ApiStatus_DONE2;
 }
 
-s32 func_802D0C94(script_context* script, s32 initialCall) {
+ApiStatus func_802D0C94(ScriptInstance* script, s32 initialCall) {
     if (get_variable(script, *script->ptrReadPos) == 0) {
         D_8009A650[0] |= 0x10;
     } else {
         D_8009A650[0] &= ~0x10;
     }
-    return 2;
+    return ApiStatus_DONE2;
 }
 
-s32 SetMessageString(script_context* script, s32 initialCall) {
-    bytecode* ptrReadPos = script->ptrReadPos;
-    bytecode string = get_variable(script, *ptrReadPos++);
-    bytecode index = get_variable(script, *ptrReadPos++);
+ApiStatus SetMessageString(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* ptrReadPos = script->ptrReadPos;
+    Bytecode string = get_variable(script, *ptrReadPos++);
+    Bytecode index = get_variable(script, *ptrReadPos++);
 
     set_message_string(string, index);
-    return 2;
+    return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(code_f4c60_len_4300, SetMessageValue);
+INCLUDE_API_ASM(code_f4c60_len_4300, SetMessageValue);
 // TODO: Figure out why there's an extra NOP after this function
 // It's probably because of a file split issue
 /*
-s32 SetMessageValue(script_context* script, s32 initialCall) {
-    bytecode* ptrReadPos = script->ptrReadPos;
-    bytecode value = get_variable(script, *ptrReadPos++);
-    bytecode index = get_variable(script, *ptrReadPos);
+ApiStatus SetMessageValue(ScriptInstance* script, s32 initialCall) {
+    Bytecode* ptrReadPos = script->ptrReadPos;
+    Bytecode value = get_variable(script, *ptrReadPos++);
+    Bytecode index = get_variable(script, *ptrReadPos);
 
     set_message_value(value, index);
-    return 2;
+    return ApiStatus_DONE2;
 }
 */
 
-INCLUDE_ASM(code_f4c60_len_4300, HidePlayerShadow);
+INCLUDE_API_ASM(code_f4c60_len_4300, HidePlayerShadow);
 
-INCLUDE_ASM(code_f4c60_len_4300, DisablePlayerPhysics);
+INCLUDE_API_ASM(code_f4c60_len_4300, DisablePlayerPhysics);
 
-INCLUDE_ASM(code_f4c60_len_4300, DisablePlayerInput);
+INCLUDE_API_ASM(code_f4c60_len_4300, DisablePlayerInput);
 
-INCLUDE_ASM(code_f4c60_len_4300, SetPlayerPos);
+INCLUDE_API_ASM(code_f4c60_len_4300, SetPlayerPos);
 
-INCLUDE_ASM(code_f4c60_len_4300, SetPlayerCollisionSize);
+INCLUDE_API_ASM(code_f4c60_len_4300, SetPlayerCollisionSize);
 
-INCLUDE_ASM(code_f4c60_len_4300, SetPlayerSpeed);
+INCLUDE_API_ASM(code_f4c60_len_4300, SetPlayerSpeed);
 
-INCLUDE_ASM(code_f4c60_len_4300, SetPlayerJumpscale);
+INCLUDE_API_ASM(code_f4c60_len_4300, SetPlayerJumpscale);
 
-INCLUDE_ASM(code_f4c60_len_4300, SetPlayerAnimation);
+INCLUDE_API_ASM(code_f4c60_len_4300, SetPlayerAnimation);
 
-INCLUDE_ASM(code_f4c60_len_4300, SetPlayerActionState);
+INCLUDE_API_ASM(code_f4c60_len_4300, SetPlayerActionState);
 
-INCLUDE_ASM(code_f4c60_len_4300, MovePlayerTo);
+INCLUDE_API_ASM(code_f4c60_len_4300, MovePlayerTo);
 
 INCLUDE_ASM(code_f4c60_len_4300, player_jump);
 
-INCLUDE_ASM(code_f4c60_len_4300, PlayerJump);
+INCLUDE_API_ASM(code_f4c60_len_4300, PlayerJump);
 
-INCLUDE_ASM(code_f4c60_len_4300, PlayerJump1);
+INCLUDE_API_ASM(code_f4c60_len_4300, PlayerJump1);
 
-INCLUDE_ASM(code_f4c60_len_4300, PlayerJump2);
+INCLUDE_API_ASM(code_f4c60_len_4300, PlayerJump2);
 
-INCLUDE_ASM(code_f4c60_len_4300, InterpPlayerYaw);
+INCLUDE_API_ASM(code_f4c60_len_4300, InterpPlayerYaw);
 
-INCLUDE_ASM(code_f4c60_len_4300, PlayerFaceNpc);
+INCLUDE_API_ASM(code_f4c60_len_4300, PlayerFaceNpc);
 
-INCLUDE_ASM(code_f4c60_len_4300, GetPlayerTargetYaw);
+INCLUDE_API_ASM(code_f4c60_len_4300, GetPlayerTargetYaw);
 
-INCLUDE_ASM(code_f4c60_len_4300, SetPlayerFlagBits);
+INCLUDE_API_ASM(code_f4c60_len_4300, SetPlayerFlagBits);
 
-INCLUDE_ASM(code_f4c60_len_4300, GetPlayerActionState);
+INCLUDE_API_ASM(code_f4c60_len_4300, GetPlayerActionState);
 
-INCLUDE_ASM(code_f4c60_len_4300, GetPlayerPos);
+INCLUDE_API_ASM(code_f4c60_len_4300, GetPlayerPos);
 
-INCLUDE_ASM(code_f4c60_len_4300, GetPlayerAnimation);
+INCLUDE_API_ASM(code_f4c60_len_4300, GetPlayerAnimation);
 
-INCLUDE_ASM(code_f4c60_len_4300, FullyRestoreHPandFP);
+INCLUDE_API_ASM(code_f4c60_len_4300, FullyRestoreHPandFP);
 
-INCLUDE_ASM(code_f4c60_len_4300, FullyRestoreSP);
+INCLUDE_API_ASM(code_f4c60_len_4300, FullyRestoreSP);
 
-INCLUDE_ASM(code_f4c60_len_4300, EnablePartner);
+INCLUDE_API_ASM(code_f4c60_len_4300, EnablePartner);
 
-INCLUDE_ASM(code_f4c60_len_4300, DisablePartner);
+INCLUDE_API_ASM(code_f4c60_len_4300, DisablePartner);
 
-INCLUDE_ASM(code_f4c60_len_4300, ForceExitHeading);
+INCLUDE_API_ASM(code_f4c60_len_4300, ForceExitHeading);
 
-INCLUDE_ASM(code_f4c60_len_4300, UseExitHeading);
+INCLUDE_API_ASM(code_f4c60_len_4300, UseExitHeading);
 
 INCLUDE_ASM(code_f4c60_len_4300, func_802D23F8);
 
-INCLUDE_ASM(code_f4c60_len_4300, DisablePulseStone);
+INCLUDE_API_ASM(code_f4c60_len_4300, DisablePulseStone);
 
-INCLUDE_ASM(code_f4c60_len_4300, GetCurrentPartner);
+INCLUDE_API_ASM(code_f4c60_len_4300, GetCurrentPartner);
 
-INCLUDE_ASM(code_f4c60_len_4300, Disable8bitMario);
+INCLUDE_API_ASM(code_f4c60_len_4300, Disable8bitMario);
 
-INCLUDE_ASM(code_f4c60_len_4300, PlaySoundAtPlayer);
+INCLUDE_API_ASM(code_f4c60_len_4300, PlaySoundAtPlayer);
 
 INCLUDE_ASM(code_f4c60_len_4300, func_802D2D30);
 
 INCLUDE_ASM(code_f4c60_len_4300, func_802D2F34);
 
-INCLUDE_ASM(code_f4c60_len_4300, CreateImageObj);
+INCLUDE_API_ASM(code_f4c60_len_4300, CreateImageObj);
 
-INCLUDE_ASM(code_f4c60_len_4300, RemoveImageObj);
+INCLUDE_API_ASM(code_f4c60_len_4300, RemoveImageObj);
 
-INCLUDE_ASM(code_f4c60_len_4300, SetObjPosition);
+INCLUDE_API_ASM(code_f4c60_len_4300, SetObjPosition);
 
-INCLUDE_ASM(code_f4c60_len_4300, SetObjRotation);
+INCLUDE_API_ASM(code_f4c60_len_4300, SetObjRotation);
 
-INCLUDE_ASM(code_f4c60_len_4300, SetObjScale);
+INCLUDE_API_ASM(code_f4c60_len_4300, SetObjScale);
 
-INCLUDE_ASM(code_f4c60_len_4300, SetObjJumpScale);
+INCLUDE_API_ASM(code_f4c60_len_4300, SetObjJumpScale);
 
-INCLUDE_ASM(code_f4c60_len_4300, JumpObj);
+INCLUDE_API_ASM(code_f4c60_len_4300, JumpObj);
 
 INCLUDE_ASM(code_f4c60_len_4300, func_802D4164);
 

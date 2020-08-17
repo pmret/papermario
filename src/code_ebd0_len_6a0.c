@@ -1,13 +1,13 @@
 #include "common.h"
 
 void func_800337D0(s16 new_alpha) {
-    game_status* gameStatus = *gGameStatusPtr;
+    GameStatus* gameStatus = *gGameStatusPtr;
 
     gameStatus->bootAlpha = new_alpha;
 }
 
 void func_800337E0(s16 arg0) {
-    game_status* gameStatus = *gGameStatusPtr;
+    GameStatus* gameStatus = *gGameStatusPtr;
 
     gameStatus->bootRed = arg0;
     gameStatus->bootGreen = arg0;
@@ -15,7 +15,7 @@ void func_800337E0(s16 arg0) {
 }
 
 s16 func_800337F8(subtract_val) {
-    game_status* gameStatus = *gGameStatusPtr;
+    GameStatus* gameStatus = *gGameStatusPtr;
 
     if (gameStatus->bootAlpha != 0) {
         gameStatus->bootAlpha -= subtract_val;
@@ -29,7 +29,7 @@ s16 func_800337F8(subtract_val) {
 }
 
 s16 func_80033830(add_val) {
-    game_status* gameStatus = *gGameStatusPtr;
+    GameStatus* gameStatus = *gGameStatusPtr;
 
     if (gameStatus->bootAlpha != 0xFF) {
         gameStatus->bootAlpha += add_val;
