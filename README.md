@@ -86,7 +86,7 @@ Open up the relevant `.c` file and replace the function's `INCLUDE_ASM` macro wi
 
 Fix any errors and rerun `diff.py`. This will involve typing the function signature correctly, which you will probably find in [Star Rod's library database](https://github.com/nanaian/star-rod/blob/master/database/common_func_library.lib). See also [common_structs.h](include/common_structs.h).
 
-Once a successful build is made, `difflpy` will show you the difference between the original game's assembly (on the left) and what your C code generated (on the right).
+Once a successful build is made, `diff.py` will show you the difference between the original game's assembly (on the left) and what your C code generated (on the right).
 
 #### Matching the function
 
