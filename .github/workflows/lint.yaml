@@ -23,7 +23,6 @@ jobs:
         uses: trilom/file-changes-action@v1.2.4
         with:
           output: ' '
-        continue-on-error: true # see jitterbit/get-changed-files#7
       - run: ./format.sh ${{ steps.files.outputs.files}}
 
       # fail if any files were changed by ./format.sh
@@ -34,6 +33,4 @@ jobs:
 
       - name: Fail if any files reformatted
         if: steps.files_formatted.outputs.files_changed == 'true'
-        run: |
-          git diff
-          exit 1
+        run: exit 1
