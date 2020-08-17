@@ -1,26 +1,34 @@
-FORMAT_OPTS="-i -style=file"
-TIDY_OPTS="-p . --fix --fix-errors"
-COMPILER_OPTS="-fno-builtin -std=gnu90 -Iinclude -Isrc -D_LANGUAGE_C -DNON_MATCHING"
+COMPILER_OPTS="-fno-builtin -std=gnu89 -Iinclude -Isrc -D_LANGUAGE_C"
 
 shopt -s globstar
 
+FILES="src/**/*.c include/*.h"
 if (( $# > 0 )); then
-    echo "Formatting file(s) $*"
-    echo "Running clang-format..."
-    clang-format ${FORMAT_OPTS} "$@"
-    echo "Running clang-tidy..."
-    clang-tidy ${TIDY_OPTS} "$@" -- ${COMPILER_OPTS} &> /dev/null
-    echo "Adding missing final new lines..."
-    sed -i -e '$a\' "$@"
-    echo "Done formatting file(s) $*"
+    # only process .c and .h files
+    FILES=$(echo "$@" | sed 's/ /\n/g' | grep '.[ch]$')
+fi
+
+if [[ -z $FILES ]]; then
+    echo "no .c or .h files specified"
     exit
 fi
 
-echo "Formatting C files. This will take a bit"
-echo "Running clang-format..."
-clang-format ${FORMAT_OPTS} src/**/*.c
-echo "Running clang-tidy..."
-clang-tidy ${TIDY_OPTS} src/**/*.c -- ${COMPILER_OPTS} &> /dev/null
-echo "Adding missing final new lines..."
-find src/ -type f -name "*.c" -exec sed -i -e '$a\' {} \;
-echo "Done formatting all files."
+# format
+astyle ${FILES} \
+    --formatted --suffix=none \
+    --lineend=linux \
+    --convert-tabs \
+    --max-code-length=120 \
+    --min-conditional-indent=1 \
+    --style=attach \
+    --align-pointer=type --align-reference=name \
+    --indent-switches \
+    --indent-labels \
+    --pad-oper --pad-comma --pad-header --unpad-paren \
+    --attach-return-type \
+
+# add newline at eof
+find ${FILES} -exec sed -i -e '$a\' {} \;
+
+# lint
+clang-tidy -p . ${FILES} -- ${COMPILER_OPTS}

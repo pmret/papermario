@@ -1,0 +1,39 @@
+name: Lint
+on:
+  push:
+    paths:
+      - 'src/*'
+      - 'include/*'
+  pull_request:
+    paths:
+      - 'src/*'
+      - 'include/*'
+
+jobs:
+  build:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - run: ./install.sh
+
+      # lint files changed by the push/pr
+      - id: files
+        uses: trilom/file-changes-action@v1.2.4
+        with:
+          output: ' '
+        continue-on-error: true # see jitterbit/get-changed-files#7
+      - run: ./format.sh ${{ steps.files.outputs.files}}
+
+      # fail if any files were changed by ./format.sh
+      - id: files_formatted
+        uses: jackton1/find-changed-files@v1.1
+        with:
+          files: src, include
+
+      - name: Fail if any files reformatted
+        if: steps.files_formatted.outputs.files_changed == 'true'
+        run: |
+          git diff
+          exit 1

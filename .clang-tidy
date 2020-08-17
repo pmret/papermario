@@ -1,5 +1,2 @@
-Checks: '-*,readability-braces-around-statements'
-WarningsAsErrors: ''
-HeaderFilterRegex: '(src|include)\/.*\.h$'
-FormatStyle: 'file'
-CheckOptions:
+Checks: '-*,clang-analyzer-core.*,clang-analyzer-deadcode.*,readability-*,-readability-magic-numbers,-readability-else-after-return,-readability-named-parameter,-readability-braces-around-statements,-clang-diagnostic-error'
+HeaderFilterRegex: '(src|include)\/.*\.h'

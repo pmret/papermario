@@ -3,4 +3,5 @@
     "editor.insertSpaces": true,
     "files.eol": "\n",
     "files.insertFinalNewline": true,
+    "editor.rulers": [120],
 }
