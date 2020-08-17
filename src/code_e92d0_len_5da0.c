@@ -94,20 +94,31 @@ s32 si_handle_end_if(script_context* script) {
     return 2;
 }
 
-INCLUDE_ASM(code_e92d0_len_5da0, si_handle_switch);
+s32 si_handle_switch(script_context* script) {
+    bytecode value = get_variable(script, *script->ptrReadPos);
+    s32 switchDepth = ++script->switchDepth;
 
-INCLUDE_ASM(code_e92d0_len_5da0, si_handle_switch_const);
-/*s32 si_handle_switch_const(script_context* script) {
-    s32 ptrReadPos = *script->ptrReadPos;
-    s8 switchDepth = script->switchDepth + 1;
-    
     if (switchDepth >= 8) {
-        inf_loop: goto inf_loop; //todo
+        while (1) {}
     }
-    script->switchBlockValue[script->switchDepth + 1] = ptrReadPos;
-    script->switchBlockState[script->switchDepth + 1] = 1;
+
+    script->switchBlockValue[switchDepth] = value;
+    script->switchBlockState[switchDepth] = 1;
     return 2;
-}*/
+}
+
+s32 si_handle_switch_const(script_context* script) {
+    bytecode value = *script->ptrReadPos;
+    s32 switchDepth = ++script->switchDepth;
+
+    if (switchDepth >= 8) {
+        while (1) {}
+    }
+
+    script->switchBlockValue[switchDepth] = value;
+    script->switchBlockState[switchDepth] = 1;
+    return 2;
+}
 
 INCLUDE_ASM(code_e92d0_len_5da0, si_handle_case_equal);
 
