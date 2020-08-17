@@ -269,13 +269,13 @@ void enforce_hpfp_limits(void) {
     }
 }
 
-INCLUDE_ASM(code_80850_len_3060, initialize_status_menu);
+INCLUDE_ASM("code_80850_len_3060", initialize_status_menu);
 
-INCLUDE_ASM(code_80850_len_3060, status_menu_draw_number);
+INCLUDE_ASM("code_80850_len_3060", status_menu_draw_number);
 
-INCLUDE_ASM(code_80850_len_3060, status_menu_draw_stat);
+INCLUDE_ASM("code_80850_len_3060", status_menu_draw_stat);
 
-INCLUDE_ASM(code_80850_len_3060, update_status_menu);
+INCLUDE_ASM("code_80850_len_3060", update_status_menu);
 
 void coin_counter_draw_content(UNK_TYPE arg0, s32 posX, s32 posY) {
     UiStatus* uiStatus = &gUIStatus;
@@ -717,7 +717,7 @@ void reset_status_menu(void) {
 }
 
 // uses a jumptable, which we need .rodata support for.
-s32 INCLUDE_ASM(code_80850_len_3060, is_ability_active, s32 arg0);
+s32 INCLUDE_ASM("code_80850_len_3060", is_ability_active, s32 arg0);
 // Somewhat close. Needs work.
 /*s32 is_ability_active(s32 arg0) {
     s32 iVar2;

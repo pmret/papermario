@@ -52,8 +52,8 @@ void start_battle_countdown(void) {
     D_800A0900 = 5;
 }
 
-INCLUDE_ASM(code_ebd0_len_6a0, step_battle);
-INCLUDE_ASM(code_ebd0_len_6a0, func_80033B54);
-INCLUDE_ASM(code_ebd0_len_6a0, func_80033B88);
-INCLUDE_ASM(code_ebd0_len_6a0, func_80033BC0);
-INCLUDE_ASM(code_ebd0_len_6a0, func_80033E64);
+INCLUDE_ASM("code_ebd0_len_6a0", step_battle);
+INCLUDE_ASM("code_ebd0_len_6a0", func_80033B54);
+INCLUDE_ASM("code_ebd0_len_6a0", func_80033B88);
+INCLUDE_ASM("code_ebd0_len_6a0", func_80033BC0);
+INCLUDE_ASM("code_ebd0_len_6a0", func_80033E64);

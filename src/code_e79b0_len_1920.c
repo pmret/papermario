@@ -1,24 +1,24 @@
 #include "common.h"
 
-INCLUDE_ASM(code_e79b0_len_1920, sort_scripts);
+INCLUDE_ASM("code_e79b0_len_1920", sort_scripts);
 
-INCLUDE_ASM(code_e79b0_len_1920, find_script_labels);
+INCLUDE_ASM("code_e79b0_len_1920", find_script_labels);
 
-INCLUDE_ASM(code_e79b0_len_1920, clear_script_list);
+INCLUDE_ASM("code_e79b0_len_1920", clear_script_list);
 
-INCLUDE_ASM(code_e79b0_len_1920, init_script_list);
+INCLUDE_ASM("code_e79b0_len_1920", init_script_list);
 
-INCLUDE_ASM(code_e79b0_len_1920, func_802C3390);
+INCLUDE_ASM("code_e79b0_len_1920", func_802C3390);
 
-INCLUDE_ASM(code_e79b0_len_1920, start_script);
+INCLUDE_ASM("code_e79b0_len_1920", start_script);
 
-INCLUDE_ASM(code_e79b0_len_1920, start_script_in_group);
+INCLUDE_ASM("code_e79b0_len_1920", start_script_in_group);
 
-INCLUDE_ASM(code_e79b0_len_1920, start_child_script);
+INCLUDE_ASM("code_e79b0_len_1920", start_child_script);
 
-INCLUDE_ASM(code_e79b0_len_1920, func_802C39F8);
+INCLUDE_ASM("code_e79b0_len_1920", func_802C39F8);
 
-INCLUDE_ASM(code_e79b0_len_1920, restart_script);
+INCLUDE_ASM("code_e79b0_len_1920", restart_script);
 // TODO: Find out why things break when script->timeScale = 1 goes after the previous lines
 /*
 ScriptInstance* restart_script(ScriptInstance* script) {
@@ -42,11 +42,11 @@ ScriptInstance* restart_script(ScriptInstance* script) {
 }
 */
 
-INCLUDE_ASM(code_e79b0_len_1920, update_scripts);
+INCLUDE_ASM("code_e79b0_len_1920", update_scripts);
 
-INCLUDE_ASM(code_e79b0_len_1920, func_802C3EE4);
+INCLUDE_ASM("code_e79b0_len_1920", func_802C3EE4);
 
-INCLUDE_ASM(code_e79b0_len_1920, kill_script);
+INCLUDE_ASM("code_e79b0_len_1920", kill_script);
 
 void* kill_script_by_ID(s32 id) {
     s32 i;
@@ -105,7 +105,7 @@ void set_script_timescale(ScriptInstance* script, f32 timeScale) {
     script->timeScale = timeScale * gGlobalTimeSpace;
 }
 
-INCLUDE_ASM(code_e79b0_len_1920, set_global_timespace);
+INCLUDE_ASM("code_e79b0_len_1920", set_global_timespace);
 /*
 // TODO: figure out why compiler/assembler isn't putting SWC1 in delay slot
 void set_global_timespace(f32 timeScale) {
@@ -114,7 +114,7 @@ void set_global_timespace(f32 timeScale) {
 */
 
 
-INCLUDE_ASM(code_e79b0_len_1920, get_global_timespace);
+INCLUDE_ASM("code_e79b0_len_1920", get_global_timespace);
 /*
 // TODO: figure out why compiler/assembler isn't putting LWC1 in delay slot
 f32 get_global_timespace(void) {
@@ -126,9 +126,9 @@ void set_script_group(ScriptInstance* script, s8 groupFlags) {
     script->groupFlags = groupFlags;
 }
 
-INCLUDE_ASM(code_e79b0_len_1920, bind_trigger);
+INCLUDE_ASM("code_e79b0_len_1920", bind_trigger);
 
-INCLUDE_ASM(code_e79b0_len_1920, bind_trigger_1);
+INCLUDE_ASM("code_e79b0_len_1920", bind_trigger_1);
 
 void suspend_group_script(ScriptInstance* script, s32 groupFlags) {
     int i;
@@ -306,7 +306,7 @@ void set_script_flags(ScriptInstance* script, s32 flags) {
     }
 }
 
-INCLUDE_ASM(code_e79b0_len_1920, clear_script_flags);
+INCLUDE_ASM("code_e79b0_len_1920", clear_script_flags);
 /*
 // TODO: Really close but some weirdness is going on
 void clear_script_flags(ScriptInstance* script, s32 flags) {

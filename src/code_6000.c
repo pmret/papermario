@@ -50,11 +50,11 @@ s32 heap_free(s32 size) {
     }
 }
 
-INCLUDE_ASM(code_6000, collision_heap_create);
+INCLUDE_ASM("code_6000", collision_heap_create);
 
-INCLUDE_ASM(code_6000, collision_heap_malloc);
+INCLUDE_ASM("code_6000", collision_heap_malloc);
 
-INCLUDE_ASM(code_6000, collision_heap_free);
+INCLUDE_ASM("code_6000", collision_heap_free);
 /*s32 collision_heap_free(s32 size) {
     s32 isBattle = (*gGameStatusPtr)->isBattle;
 

@@ -188,7 +188,7 @@ ApiStatus AddVectorPolar(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_API_ASM(code_f8f60_len_1560, func_802D4BDC);
+INCLUDE_API_ASM("code_f8f60_len_1560", func_802D4BDC);
 /*
 ApiStatus func_802D4BDC(ScriptInstance* script, s32 initialCall) {
     s32* t0 = &script->functionTemp[0];
@@ -220,9 +220,9 @@ ApiStatus func_802D4BDC(ScriptInstance* script, s32 initialCall) {
 */
 
 // Very similar to func_802D4BDC
-INCLUDE_API_ASM(code_f8f60_len_1560, func_802D4C4C);
+INCLUDE_API_ASM("code_f8f60_len_1560", func_802D4C4C);
 
-INCLUDE_API_ASM(code_f8f60_len_1560, func_802D4CC4);
+INCLUDE_API_ASM("code_f8f60_len_1560", func_802D4CC4);
 /*
 ApiStatus func_802D4CC4(ScriptInstance* script, s32 initialCall) {
     s32 value = get_variable(script, *script->ptrReadPos);
@@ -251,13 +251,13 @@ ApiStatus func_802D4D88(ScriptInstance* script, s32 initialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(code_f8f60_len_1560, setup_path_data);
+INCLUDE_ASM("code_f8f60_len_1560", setup_path_data);
 
-INCLUDE_ASM(code_f8f60_len_1560, func_802D5270);
+INCLUDE_ASM("code_f8f60_len_1560", func_802D5270);
 
-INCLUDE_API_ASM(code_f8f60_len_1560, LoadPath);
+INCLUDE_API_ASM("code_f8f60_len_1560", LoadPath);
 
-INCLUDE_API_ASM(code_f8f60_len_1560, GetNextPathPos);
+INCLUDE_API_ASM("code_f8f60_len_1560", GetNextPathPos);
 
 ApiStatus GetDist2D(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
