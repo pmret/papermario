@@ -14,7 +14,7 @@ INCLUDE_ASM(code_111f0_len_860, func_80035E54);
 INCLUDE_ASM(code_111f0_len_860, func_80035EEC);
 
 void func_800360FC(void) {
-    game_status* gameStatus = *gGameStatusPtr;
+    GameStatus* gameStatus = *gGameStatusPtr;
 
     if (gameStatus->loadMenuState == 2) {
         func_800E973C();
@@ -22,7 +22,7 @@ void func_800360FC(void) {
 }
 
 void func_80036130(void) {
-    game_status* gameStatus = *gGameStatusPtr;
+    GameStatus* gameStatus = *gGameStatusPtr;
 
     gMapTransitionAlpha = 0x00;
     D_800A0942 = 0x14;
@@ -48,7 +48,7 @@ s32 func_800363FC(void) {
 }
 
 s32 func_80036430(void) {
-    player_status* pPlayerStatus = &gPlayerStatus;
+    PlayerStatus* pPlayerStatus = &gPlayerStatus;
 
     gMapTransitionAlpha = 0xFF;
     D_800A0942 = 0x14;

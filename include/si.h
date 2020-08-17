@@ -1,8 +1,22 @@
 #ifndef _SI_H_
-#define _SI_H
+#define _SI_H_
 
 #define SI_VAR_0 0xFE363C80
 
-// TODO
+/* Return type of si_execute_next_command */
+#define SI_CONTINUE 0   /* Continue to next command */
+#define SI_ABORT    1   /* Quit execution */
+#define SI_FINISH   255 /* Return from script */
+
+/* Return type of script API functions */
+typedef s32 ApiStatus;
+#define ApiStatus_BLOCK  0   /* Call again next frame */
+#define ApiStatus_DONE1  1   /* Unconditional. Probably only exists to return a bool from functions */
+#define ApiStatus_DONE2  2   /* Conditional on ScriptInstance->disableScripts */
+#define ApiStatus_REPEAT 3   /* Call again immediately */
+#define ApiStatus_FINISH 255 /* Corresponds to SI_FINISH */
+
+#define API_FUN(NAME) ApiStatus (*NAME)(struct ScriptInstance* script, s32 isInitialCall)
+#define INCLUDE_API_ASM(FOLDER, NAME) ApiStatus INCLUDE_ASM(FOLDER, NAME, struct ScriptInstance* script, s32 isInitialCall)
 
 #endif

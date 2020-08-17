@@ -1,7 +1,7 @@
 #include "common.h"
 
 void clear_player_data(void) {
-    player_data* playerData = &gPlayerData;
+    PlayerData* playerData = &gPlayerData;
     s32 i;
 
     D_8010CD10 = 0;
@@ -95,12 +95,12 @@ void clear_player_data(void) {
     playerData->smashGameRecord = 0;
 }
 
-player_data* get_player_data(void) {
+PlayerData* get_player_data(void) {
     return &gPlayerData;
 }
 
 s32 add_item(s32 itemID) {
-    player_data* playerData = &gPlayerData;
+    PlayerData* playerData = &gPlayerData;
     s32 i;
 
     sort_items();
@@ -120,7 +120,7 @@ s32 add_item(s32 itemID) {
 }
 
 s32 get_item_count(void) {
-    player_data* playerData = &gPlayerData;
+    PlayerData* playerData = &gPlayerData;
     s32 i = 0;
     s32 sum = 0;
 
@@ -138,8 +138,8 @@ s32 get_item_empty_count(void) {
 }
 
 s32 find_item(s32 itemID) {
-    player_data* playerData = &gPlayerData;
-    item_table_entry* item = &gItemTable[itemID];
+    PlayerData* playerData = &gPlayerData;
+    StaticItem* item = &gItemTable[itemID];
     s32 i;
 
     if ((item->typeFlags & 8) != 0) {
@@ -170,7 +170,7 @@ s32 find_item(s32 itemID) {
 }
 
 void sort_items(void) {
-    player_data* playerData = &gPlayerData;
+    PlayerData* playerData = &gPlayerData;
     int j;
     int i;
 
@@ -189,8 +189,8 @@ void sort_items(void) {
 }
 
 s32 add_badge(s32 itemID) {
-    player_data* playerData = &gPlayerData;
-    item_table_entry* item = &gItemTable[itemID];
+    PlayerData* playerData = &gPlayerData;
+    StaticItem* item = &gItemTable[itemID];
     s32 i;
 
     if ((item->typeFlags & 0x40) == 0) {
@@ -212,7 +212,7 @@ s32 add_badge(s32 itemID) {
 }
 
 s32 store_item(s32 itemID) {
-    player_data* playerData = &gPlayerData;
+    PlayerData* playerData = &gPlayerData;
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(gPlayerData.storedItems); i++) {
@@ -231,7 +231,7 @@ s32 store_item(s32 itemID) {
 }
 
 s32 get_stored_count(void) {
-    player_data* playerData = &gPlayerData;
+    PlayerData* playerData = &gPlayerData;
     s32 i = 0;
     s32 sum = 0;
 
@@ -249,8 +249,8 @@ s32 get_stored_empty_count(void) {
 }
 
 void enforce_hpfp_limits(void) {
-    player_data* playerData = &gPlayerData;
-    player_data* playerData2 = &gPlayerData;
+    PlayerData* playerData = &gPlayerData;
+    PlayerData* playerData2 = &gPlayerData;
 
     playerData->curMaxHP = playerData->hardMaxHP + (is_ability_active(4) * 5);
     if (playerData->curMaxHP > 75) {
@@ -278,7 +278,7 @@ INCLUDE_ASM(code_80850_len_3060, status_menu_draw_stat);
 INCLUDE_ASM(code_80850_len_3060, update_status_menu);
 
 void coin_counter_draw_content(UNK_TYPE arg0, s32 posX, s32 posY) {
-    ui_status* uiStatus = &gUIStatus;
+    UiStatus* uiStatus = &gUIStatus;
     s32 iconIndex;
 
     if ((gPlayerData.coins != uiStatus->displayCoins) && (((*gGameStatusPtr)->frameCounter % 3) == 0)) {
@@ -297,8 +297,8 @@ void coin_counter_draw_content(UNK_TYPE arg0, s32 posX, s32 posY) {
 }
 
 void update_coin_counter(void) {
-    ui_status* uiStatus = &gUIStatus;
-    player_data* playerData = &gPlayerData;
+    UiStatus* uiStatus = &gUIStatus;
+    PlayerData* playerData = &gPlayerData;
 
     do {} while(0); // Needed to match
 
@@ -337,7 +337,7 @@ void update_coin_counter(void) {
 }
 
 void show_coin_counter(void) {
-    ui_status* uiStatus = &gUIStatus;
+    UiStatus* uiStatus = &gUIStatus;
     s16* coinCounterUnk = &D_8010CD10;
     s32 index;
 
@@ -378,7 +378,7 @@ void show_coin_counter(void) {
 }
 
 void hide_coin_counter(void) {
-    ui_status* uiStatus = &gUIStatus;
+    UiStatus* uiStatus = &gUIStatus;
 
     if ((D_8010CD10 != 0) && (uiStatus->unk_6C[0]== 0)) {
         uiStatus->unk_6C[0] = 60;
@@ -386,20 +386,21 @@ void hide_coin_counter(void) {
 }
 
 void func_800E96C8(void) {
-    ui_status* uiStatus = &gUIStatus;
+    UiStatus* uiStatus = &gUIStatus;
 
     if ((D_8010CD10 != 0) && (uiStatus->unk_6C[0]== 0)) {
         uiStatus->unk_6C[0]= 1;
     }
 }
 
-s32 ShowCoinCounter(script_context* script) {
+ApiStatus ShowCoinCounter(ScriptInstance* script, s32 isInitialCall) {
     if (get_variable(script, *script->ptrReadPos)) {
         show_coin_counter();
     } else {
         hide_coin_counter();
     }
-    return 2;
+
+    return ApiStatus_DONE2;
 }
 
 void func_800E973C(void) {
@@ -408,7 +409,7 @@ void func_800E973C(void) {
 }
 
 void open_status_menu_long(void) {
-    ui_status* uiStatus = &gUIStatus;
+    UiStatus* uiStatus = &gUIStatus;
 
     if (uiStatus->hidden) {
         uiStatus->showTimer = 210;
@@ -418,7 +419,7 @@ void open_status_menu_long(void) {
 }
 
 void open_status_menu_short(void) {
-    ui_status* uiStatus = &gUIStatus;
+    UiStatus* uiStatus = &gUIStatus;
 
     if (uiStatus->hidden) {
         uiStatus->showTimer = 105;
@@ -428,7 +429,7 @@ void open_status_menu_short(void) {
 }
 
 void func_800E97B8(void) {
-    ui_status* uiStatus = &gUIStatus;
+    UiStatus* uiStatus = &gUIStatus;
 
     if (uiStatus->hidden != 1) {
         uiStatus->hidden = 1;
@@ -438,7 +439,7 @@ void func_800E97B8(void) {
 }
 
 void func_800E97E4(void) {
-    ui_status* uiStatus = &gUIStatus;
+    UiStatus* uiStatus = &gUIStatus;
 
     uiStatus->drawPosY = -100;
     uiStatus->ignoreChanges = 0;
@@ -449,7 +450,7 @@ void func_800E97E4(void) {
 }
 
 void func_800E9810(void) {
-    ui_status* uiStatus = &gUIStatus;
+    UiStatus* uiStatus = &gUIStatus;
 
     uiStatus->showTimer = 210;
     uiStatus->drawPosY = 0;
@@ -468,8 +469,8 @@ void func_800E984C(void) {
 }
 
 s32 func_800E9860(void) {
-    ui_status* uiStatus = &gUIStatus;
-    ui_status* uiStatus2 = &gUIStatus;
+    UiStatus* uiStatus = &gUIStatus;
+    UiStatus* uiStatus2 = &gUIStatus;
     s32 ret = 1 - uiStatus->unk_45[0];
 
     if (uiStatus->unk_45[1] != 0) {
@@ -486,7 +487,7 @@ void status_menu_enable_ignore_changes(void) {
 }
 
 void func_800E98A8(void) {
-    ui_status* uiStatus = &gUIStatus;
+    UiStatus* uiStatus = &gUIStatus;
 
     uiStatus->ignoreChanges = 1;
     uiStatus->drawPosY = 18;
@@ -497,7 +498,7 @@ void status_menu_disable_ignore_changes(void) {
 }
 
 s32 func_800E98D4(void) {
-    ui_status* uiStatus = &gUIStatus;
+    UiStatus* uiStatus = &gUIStatus;
 
     return uiStatus->unk_45[1] + uiStatus->ignoreChanges;
 }
@@ -515,9 +516,9 @@ s32 is_status_menu_visible(void) {
 }
 
 void status_menu_start_blinking_hp(void) {
-    game_status* gameStatus = (*gGameStatusPtr);
-    ui_status* uiStatus = &gUIStatus;
-    ui_status* uiStatus2 = &gUIStatus;
+    GameStatus* gameStatus = (*gGameStatusPtr);
+    UiStatus* uiStatus = &gUIStatus;
+    UiStatus* uiStatus2 = &gUIStatus;
 
     if (gameStatus->isBattle == 0) {
         uiStatus->hpBlinkTimer = 120;
@@ -530,7 +531,7 @@ void status_menu_start_blinking_hp(void) {
 }
 
 void status_menu_stop_blinking_hp(void) {
-    ui_status* uiStatus = &gUIStatus;
+    UiStatus* uiStatus = &gUIStatus;
 
     if (uiStatus->hpBlinking != 0) {
         uiStatus->hpBlinking = 0;
@@ -540,9 +541,9 @@ void status_menu_stop_blinking_hp(void) {
 }
 
 void status_menu_start_blinking_fp(void) {
-    game_status* gameStatus = (*gGameStatusPtr);
-    ui_status* uiStatus = &gUIStatus;
-    ui_status* uiStatus2 = &gUIStatus;
+    GameStatus* gameStatus = (*gGameStatusPtr);
+    UiStatus* uiStatus = &gUIStatus;
+    UiStatus* uiStatus2 = &gUIStatus;
 
     if (gameStatus->isBattle == 0) {
         uiStatus->fpBlinkTimer = 120;
@@ -555,7 +556,7 @@ void status_menu_start_blinking_fp(void) {
 }
 
 void status_menu_stop_blinking_fp(void) {
-    ui_status* uiStatus = &gUIStatus;
+    UiStatus* uiStatus = &gUIStatus;
 
     if (uiStatus->fpBlinking != 0) {
         uiStatus->fpBlinking = 0;
@@ -564,9 +565,9 @@ void status_menu_stop_blinking_fp(void) {
 }
 
 void status_menu_start_blinking_coins(void) {
-    game_status* gameStatus = (*gGameStatusPtr);
-    ui_status* uiStatus = &gUIStatus;
-    ui_status* uiStatus2 = &gUIStatus;
+    GameStatus* gameStatus = (*gGameStatusPtr);
+    UiStatus* uiStatus = &gUIStatus;
+    UiStatus* uiStatus2 = &gUIStatus;
 
     if (gameStatus->isBattle == 0) {
         uiStatus->coinsBlinkTimer = 120;
@@ -579,7 +580,7 @@ void status_menu_start_blinking_coins(void) {
 }
 
 void status_menu_stop_blinking_coins(void) {
-    ui_status* uiStatus = &gUIStatus;
+    UiStatus* uiStatus = &gUIStatus;
 
     if (uiStatus->coinsBlinking != 0) {
         uiStatus->coinsBlinking = 0;
@@ -589,8 +590,8 @@ void status_menu_stop_blinking_coins(void) {
 }
 
 void status_menu_start_blinking_sp(void) {
-    player_data* playerData = &gPlayerData;
-    ui_status* uiStatus = &gUIStatus;
+    PlayerData* playerData = &gPlayerData;
+    UiStatus* uiStatus = &gUIStatus;
 
     uiStatus->spBarsToBlink = playerData->maxStarPower;
     if (uiStatus->spBlinking != 1) {
@@ -600,7 +601,7 @@ void status_menu_start_blinking_sp(void) {
 }
 
 void status_menu_stop_blinking_sp(void) {
-    ui_status* uiStatus = &gUIStatus;
+    UiStatus* uiStatus = &gUIStatus;
 
     if (uiStatus->spBlinking != 0) {
         uiStatus->spBlinking = 0;
@@ -609,7 +610,7 @@ void status_menu_stop_blinking_sp(void) {
 }
 
 void status_menu_start_blinking_sp_bars(s8 numBarsToBlink) {
-    ui_status* uiStatus = &gUIStatus;
+    UiStatus* uiStatus = &gUIStatus;
 
     uiStatus->spBarsToBlink = numBarsToBlink;
     if (uiStatus->spBlinking != 1) {
@@ -619,7 +620,7 @@ void status_menu_start_blinking_sp_bars(s8 numBarsToBlink) {
 }
 
 void status_menu_start_blinking_starpoints(void) {
-    ui_status* uiStatus = &gUIStatus;
+    UiStatus* uiStatus = &gUIStatus;
 
     if (uiStatus->starpointsBlinking != 1) {
         uiStatus->starpointsBlinking = 1;
@@ -628,7 +629,7 @@ void status_menu_start_blinking_starpoints(void) {
 }
 
 void status_menu_stop_blinking_starpoints(void) {
-    ui_status* uiStatus = &gUIStatus;
+    UiStatus* uiStatus = &gUIStatus;
 
     if (uiStatus->starpointsBlinking != 0) {
         uiStatus->starpointsBlinking = 0;
@@ -637,7 +638,7 @@ void status_menu_stop_blinking_starpoints(void) {
 }
 
 void decrement_status_menu_disabled(void) {
-    ui_status* uiStatus = &gUIStatus;
+    UiStatus* uiStatus = &gUIStatus;
 
     if (uiStatus->disabled > 0) {
         uiStatus->disabled--;
@@ -645,14 +646,14 @@ void decrement_status_menu_disabled(void) {
 }
 
 void increment_status_menu_disabled(void) {
-    ui_status* uiStatus = &gUIStatus;
+    UiStatus* uiStatus = &gUIStatus;
 
     uiStatus->disabled++;
 }
 
 void sync_status_menu(void) {
-    player_data* playerData = &gPlayerData;
-    ui_status* uiStatus = &gUIStatus;
+    PlayerData* playerData = &gPlayerData;
+    UiStatus* uiStatus = &gUIStatus;
 
     uiStatus->displayHP = playerData->curHP;
     uiStatus->displayFP = playerData->curFP;
@@ -662,8 +663,8 @@ void sync_status_menu(void) {
 }
 
 void reset_status_menu(void) {
-    player_data* playerData = &gPlayerData;
-    ui_status* uiStatus = &gUIStatus;
+    PlayerData* playerData = &gPlayerData;
+    UiStatus* uiStatus = &gUIStatus;
     s32 i;
 
     uiStatus->drawPosX = 12;
@@ -703,7 +704,7 @@ void reset_status_menu(void) {
     for (i = 0; i < 2; i++) {
         func_801452B4(uiStatus->fpIconIndexes[i], uiStatus->fpIconIndexes[i]);
     }
-    
+
     func_801452B4(uiStatus->coinIconIndex, uiStatus->coinIconIndex);
     func_801452B4(uiStatus->coinIconIndex2, uiStatus->coinIconIndex2);
     func_801452B4(uiStatus->starpointsIconIndex, uiStatus->starpointsIconIndex);
@@ -971,7 +972,7 @@ s32 is_partner_ability_active(void) {
 }
 
 s16 add_coins(s32 amt) {
-    player_data* playerData = &gPlayerData;
+    PlayerData* playerData = &gPlayerData;
     s16 newCoins = playerData->coins + amt;
 
     playerData->coins = newCoins;
@@ -992,8 +993,8 @@ s16 add_coins(s32 amt) {
 }
 
 s8 add_star_points(s32 amt) {
-    player_data* playerData = &gPlayerData;
-    player_data* playerData2 = &gPlayerData;
+    PlayerData* playerData = &gPlayerData;
+    PlayerData* playerData2 = &gPlayerData;
     s8 newSP = playerData->starPoints + amt;
 
     // TODO: probably a macro!
@@ -1011,8 +1012,8 @@ s8 add_star_points(s32 amt) {
 }
 
 u8 add_star_pieces(s32 amt) {
-    player_data* playerData = &gPlayerData;
-    player_data* playerData2 = &gPlayerData;
+    PlayerData* playerData = &gPlayerData;
+    PlayerData* playerData2 = &gPlayerData;
     s32 newSP = playerData->starPieces;
 
     newSP += amt;
@@ -1032,24 +1033,24 @@ u8 add_star_pieces(s32 amt) {
 }
 
 void increment_max_SP() {
-    player_data* playerData = &gPlayerData;
+    PlayerData* playerData = &gPlayerData;
 
     playerData->maxStarPower++;
     playerData->specialBarsFilled = playerData->maxStarPower * 256;
 }
 
 void set_max_SP(s8 newMaxSP) {
-    player_data* playerData = &gPlayerData;
+    PlayerData* playerData = &gPlayerData;
 
     playerData->maxStarPower = newMaxSP;
     playerData->specialBarsFilled = newMaxSP * 256;
 }
 
 void add_SP(s32 amt) {
-    player_data* playerData = &gPlayerData;
-    player_data* playerData2 = &gPlayerData;
-    ui_status* uiStatus = &gUIStatus;
-    ui_status* uiStatus2 = &gUIStatus;
+    PlayerData* playerData = &gPlayerData;
+    PlayerData* playerData2 = &gPlayerData;
+    UiStatus* uiStatus = &gUIStatus;
+    UiStatus* uiStatus2 = &gUIStatus;
     s32 phi_v1;
     s32 blah;
 
@@ -1073,7 +1074,7 @@ void add_SP(s32 amt) {
 }
 
 s32 recover_fp(s32 amt) {
-    player_data* playerData = &gPlayerData;
+    PlayerData* playerData = &gPlayerData;
     s32 newFP = playerData->curFP;
     s32 ret;
 
@@ -1095,7 +1096,7 @@ s32 recover_fp(s32 amt) {
 }
 
 s32 recover_hp(s32 amt) {
-    player_data* playerData = &gPlayerData;
+    PlayerData* playerData = &gPlayerData;
     s32 newHP = playerData->curHP;
     s32 ret;
 
@@ -1117,7 +1118,7 @@ s32 recover_hp(s32 amt) {
 }
 
 void subtract_hp(s32 amt) {
-    player_data* playerData = &gPlayerData;
+    PlayerData* playerData = &gPlayerData;
     s32 newHP = playerData->curHP;
 
     if (amt > 0) {
@@ -1130,27 +1131,27 @@ void subtract_hp(s32 amt) {
 }
 
 s8 has_full_hp(void) {
-    player_data* playerData = &gPlayerData;
+    PlayerData* playerData = &gPlayerData;
 
     return playerData->curMaxHP == playerData->curHP;
 }
 
 s8 has_full_fp(void) {
-    player_data* playerData = &gPlayerData;
+    PlayerData* playerData = &gPlayerData;
 
     return playerData->curMaxFP == playerData->curFP;
 }
 
 s8 add_fortress_keys(s32 amt) {
-    player_data* playerData = &gPlayerData;
+    PlayerData* playerData = &gPlayerData;
 
     playerData->fortressKeyCount += amt;
     return playerData->fortressKeyCount;
 }
 
 s8 subtract_fortress_keys(s8 amt) {
-    player_data* playerData = &gPlayerData;
-    player_data* playerData2 = &gPlayerData; // required to match
+    PlayerData* playerData = &gPlayerData;
+    PlayerData* playerData2 = &gPlayerData; // required to match
 
     playerData->fortressKeyCount -= amt;
     if (playerData->fortressKeyCount < 0) {

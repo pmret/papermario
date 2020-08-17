@@ -10,4 +10,4 @@ INCLUDE_ASM(os/code_46c70_len_e00, _Ldunscale);
 
 INCLUDE_ASM(os/code_46c70_len_e00, _Genld);
 
-INCLUDE_ASM(os/code_46c70_len_e00, osGetCause);
+INCLUDE_API_ASM(os/code_46c70_len_e00, osGetCause);

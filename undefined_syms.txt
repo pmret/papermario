@@ -10,10 +10,10 @@ gGlobalTimeSpace = 0x802D9CA8;
 D_80147574 = 0x80147574;
 
 gMapTransitionAlpha = 0x800A0940;
-D_800E92D8 = 0x800E92D8; 
-D_80147474 = 0x80147474; 
-D_80109270 = 0x80109270; 
-D_80108558 = 0x80108558; 
+D_800E92D8 = 0x800E92D8;
+D_80147474 = 0x80147474;
+D_80109270 = 0x80109270;
+D_80108558 = 0x80108558;
 D_800A0940 = 0x800A0940;
 D_800A0942 = 0x800A0942;
 D_800A0944 = 0x800A0944;
@@ -75,6 +75,32 @@ gCurrentTriggerListPtr = 0x80159390;
 
 D_801595A0 = 0x801595A0;
 D_8015C7C0 = 0x8015C7C0;
+
+gWorldModelList = 0x80151770;
+gBattleModelList = 0x80151B70;
+gCurrentModelListPtr = 0x801512CC;
+
+gWorldModelSpecialDls = 0x8015F90;
+gBattleModelSpecialDls = 0x80152010;
+gCurrentModelSpecialDlsPtr = 0x801512E8;
+
+gWorldEntityList = 0x80151380;
+gWorldBattleEntityList = 0x801513F8;
+gCurrentEntityListPtr = 0x80151470;
+
+gWorldShadowList = 0x80151478;
+gBattleShadowList = 0x80151568;
+gCurrentShadowListPtr = 0x80151658;
+
+gMainGameState = 0x80151700;
+gCurrentUpdateFunction = 0x8015170C;
+
+gWorldDynamicEntityList = 0x801543A0;
+gBattleDynamicEntityList = 0x801543E0;
+gCurrentDynamicEntityListPtr = 0x80154420;
+
+gScriptIdList = 0x802D1898;
+gScriptIndexList = 0x802DAA98;
 
 func_802A91F8 = 0x802A91F8;
 func_802A9208 = 0x802A9208;
