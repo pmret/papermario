@@ -10,10 +10,35 @@ extern PlayerData gPlayerData;
 extern PlayerStatus gPlayerStatus;
 extern GameStatus* gGameStatusPtr[1];
 extern StaticItem gItemTable[364];
+extern s16 gMainGameState; /* 0 = battle, 1 = pause, 2 = world */
+extern UNK_FUN_PTR(gCurrentUpdateFunction);
 
 extern ScriptInstance* gWorldScriptList[128];
 extern ScriptInstance* gBattleScriptList[128];
 extern ScriptInstance** gCurrentScriptListPtr[128];
+
+extern s32 gScriptIdList[128];
+extern s32 gScriptIndexList[128];
+
+extern Model* gWorldModelList[256];
+extern Model* gBattleModelList[256];
+extern Model** gCurrentModelListPtr[256];
+
+extern u32* gWorldModelSpecialDls[32];
+extern u32* gBattleModelSpecialDls[32];
+extern u32** gCurrentModelSpecialDlsPtr[32];
+
+extern Entity* gWorldEntityList[30];
+extern Entity* gBattleEntityList[30];
+extern Entity** gCurrentEntityListPtr[30];
+
+extern UNK_TYPE* gWorldDynamicEntityList[16];
+extern UNK_TYPE* gBattleDynamicEntityList[16];
+extern UNK_TYPE** gCurrentDynamicEntityListPtr[16];
+
+extern Shadow* gWorldShadowList[60];
+extern Shadow* gBattleShadowList[60];
+extern Shadow** gCurrentShadowListPtr[60];
 
 extern f32 gGlobalTimeSpace;
 
