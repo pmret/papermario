@@ -40,21 +40,18 @@ INCLUDE_API_ASM(code_f2470_len_27f0, SetNpcScale);
 
 INCLUDE_API_ASM(code_f2470_len_27f0, SetNpcCollisionSize);
 
-INCLUDE_API_ASM(code_f2470_len_27f0, SetNpcSpeed);
-// TODO: Fix issue with BNEZL vs BNEZ
-/*
 ApiStatus SetNpcSpeed(ScriptInstance* script, s32 isInitialCall) {
-    Vytecode* ptrReadPos = script->ptrReadPos;
+    Bytecode* ptrReadPos = script->ptrReadPos;
     NpcId npcID = get_variable(script, *ptrReadPos++);
     f32 speed = get_float_variable(script, *ptrReadPos);
     Npc* npcPtr = resolve_npc(script, npcID);
 
-    npcPtr->moveSpeed = speed;
     if(npcPtr != NULL) {
+        npcPtr->moveSpeed = speed;
         return ApiStatus_DONE2;
     }
+    return ApiStatus_DONE2;
 }
-*/
 
 INCLUDE_API_ASM(code_f2470_len_27f0, SetNpcJumpscale);
 
