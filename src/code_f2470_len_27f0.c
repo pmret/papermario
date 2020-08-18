@@ -126,7 +126,6 @@ ApiStatus GetNpcAnimation(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-// TODO: Figure out meaning of float value in Npc struct that this function is setting
 ApiStatus SetNpcAnimationSpeed(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
     NpcId npcID = get_variable(script, *ptrReadPos++);
