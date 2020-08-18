@@ -222,8 +222,6 @@ ApiStatus func_802D4BDC(ScriptInstance* script, s32 initialCall) {
 // Very similar to func_802D4BDC
 INCLUDE_API_ASM(code_f8f60_len_1560, func_802D4C4C);
 
-INCLUDE_API_ASM(code_f8f60_len_1560, func_802D4CC4);
-/*
 ApiStatus func_802D4CC4(ScriptInstance* script, s32 initialCall) {
     s32 value = get_variable(script, *script->ptrReadPos);
     if (value < 0) {
@@ -234,7 +232,7 @@ ApiStatus func_802D4CC4(ScriptInstance* script, s32 initialCall) {
 
     return ApiStatus_DONE2;
 }
-*/
+
 
 ApiStatus func_802D4D18(ScriptInstance* script, s32 initialCall) {
     s32 value = get_float_variable(script, *script->ptrReadPos);

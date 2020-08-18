@@ -1,17 +1,15 @@
 #include "common.h"
 
-INCLUDE_ASM(code_e92d0_len_5da0, fixed_var_to_float);
-/*f32 fixed_var_to_float(s32 scriptVar) {
+f32 fixed_var_to_float(s32 scriptVar) {
     if (scriptVar <= -220000000) {
         return (scriptVar + 230000000) * (1 / 1024.f);
     }
     return scriptVar;
-}*/
+}
 
-INCLUDE_ASM(code_e92d0_len_5da0, float_to_fixed_var);
-/*s32 float_to_fixed_var(f32 arg0) {
-    return (s32)(arg0 * (f32)1024.0f) + -230000000;
-}*/
+s32 float_to_fixed_var(f32 value) {
+    return (s32)(value * 1024.0f) - 230000000;
+}
 
 ApiStatus si_handle_return(ScriptInstance* script) {
     kill_script(script);
