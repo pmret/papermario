@@ -2,7 +2,7 @@
 
 f32 fixed_var_to_float(s32 scriptVar) {
     if (scriptVar <= -220000000) {
-        return (scriptVar + 230000000) * (1 / 1024.f);
+        return (scriptVar + 230000000) * (1 / 1024.0f);
     }
     return scriptVar;
 }
