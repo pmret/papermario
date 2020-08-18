@@ -44,9 +44,9 @@ ApiStatus SetNpcCollisionSize(ScriptInstance* script, s32 isInitialCall) {
     s32 height = get_variable(script, *ptrReadPos++);
     s32 radius = get_variable(script, *ptrReadPos++);
     Npc* npcPtr = resolve_npc(script, npcID);
-    s32 todo = 1; // TODO: Figure out why this variable and subsequent if block is required for matching
 
     if (npcPtr != NULL) {
+        s32 todo = 1;
         if (todo) {
             npcPtr->collisionHeight = height;
             npcPtr->collisionRadius = radius;
