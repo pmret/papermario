@@ -38,7 +38,23 @@ INCLUDE_API_ASM(code_f2470_len_27f0, SetNpcRotation);
 
 INCLUDE_API_ASM(code_f2470_len_27f0, SetNpcScale);
 
-INCLUDE_API_ASM(code_f2470_len_27f0, SetNpcCollisionSize);
+ApiStatus SetNpcCollisionSize(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* ptrReadPos = script->ptrReadPos;
+    NpcId npcID = get_variable(script, *ptrReadPos++);
+    s32 height = get_variable(script, *ptrReadPos++);
+    s32 radius = get_variable(script, *ptrReadPos++);
+    Npc* npcPtr = resolve_npc(script, npcID);
+    s32 todo = 1; // TODO: Figure out why this variable and subsequent if block is required for matching
+
+    if (npcPtr != NULL) {
+        if (todo) {
+            npcPtr->collisionHeight = height;
+            npcPtr->collisionRadius = radius;
+        }
+        return ApiStatus_DONE2; // Doesn't match if omitted
+    }
+    return ApiStatus_DONE2;
+}
 
 ApiStatus SetNpcSpeed(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
