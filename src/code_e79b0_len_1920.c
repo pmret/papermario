@@ -19,25 +19,24 @@ INCLUDE_ASM(code_e79b0_len_1920, start_child_script);
 INCLUDE_ASM(code_e79b0_len_1920, func_802C39F8);
 
 INCLUDE_ASM(code_e79b0_len_1920, restart_script);
-// TODO: Find out why things break when script->timeScale = 1 goes after the previous lines
 /*
 ScriptInstance* restart_script(ScriptInstance* script) {
     script->loopDepth = -1;
     script->switchDepth = -1;
     script->currentOpcode = 0;
-    script->frameCounter = 0;
+    script->frameCounter = 0; // TODO: force compiler to not optimise away this
     script->frameCounter = 0;
     script->unk_158 = 0;
 
-    //script->timeScale = 1;
     script->ptrNextLine = script->ptrFirstLine;
     script->ptrCurrentLine = script->ptrFirstLine;
+
     script->timeScale = 1.0f;
-
-
     script->timeScale = gGlobalTimeSpace;
+
     find_script_labels();
     func_802C3390(script);
+
     return script;
 }
 */
