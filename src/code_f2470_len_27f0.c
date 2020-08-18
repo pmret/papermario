@@ -127,14 +127,14 @@ ApiStatus GetNpcAnimation(ScriptInstance* script, s32 isInitialCall) {
 }
 
 // TODO: Figure out meaning of float value in Npc struct that this function is setting
-ApiStatus func_802CE1C0(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetNpcAnimationSpeed(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
     NpcId npcID = get_variable(script, *ptrReadPos++);
-    f32 value1 = get_float_variable(script, *ptrReadPos++);
+    f32 animationSpeed = get_float_variable(script, *ptrReadPos++);
     Npc* npcPtr = resolve_npc(script, npcID);
 
     if (npcPtr != NULL) {
-        npcPtr->unk_30 = value1;
+        npcPtr->animationSpeed = animationSpeed;
         return ApiStatus_DONE2; // Doesn't match if omitted
     }
     return ApiStatus_DONE2;

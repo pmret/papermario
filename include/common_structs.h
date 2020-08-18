@@ -62,7 +62,7 @@ typedef struct Npc {
     /* 0x024 */ char unk_24[4];
     /* 0x028 */ u32 currentAnim;
     /* 0x02C */ char unk_2C[4];
-    /* 0x030 */ f32 unk_30;
+    /* 0x030 */ f32 animationSpeed;
     /* 0x034 */ char unk_34[4];
     /* 0x038 */ struct Vec3f pos;
     /* 0x044 */ struct Vec3f rotation;
