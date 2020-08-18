@@ -100,9 +100,45 @@ ApiStatus SetNpcJumpscale(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_API_ASM(code_f2470_len_27f0, SetNpcAnimation);
+ApiStatus SetNpcAnimation(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* ptrReadPos = script->ptrReadPos;
+    NpcId npcID = get_variable(script, *ptrReadPos++);
+    s32 animation = get_variable(script, *ptrReadPos);
+    Npc* npcPtr = resolve_npc(script, npcID);
 
-INCLUDE_API_ASM(code_f2470_len_27f0, GetNpcAnimation);
+    if (npcPtr != NULL) {
+        set_npc_animation(npcPtr, animation);
+        return ApiStatus_DONE2; // Doesn't match if omitted
+    }
+    return ApiStatus_DONE2;
+}
+
+ApiStatus GetNpcAnimation(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* ptrReadPos = script->ptrReadPos;
+    NpcId npcID = get_variable(script, *ptrReadPos++);
+    Bytecode outVar = *ptrReadPos++;
+    Npc* npcPtr = resolve_npc(script, npcID);
+
+    if (npcPtr != NULL) {
+        set_variable(script, outVar, npcPtr->currentAnim);
+        return ApiStatus_DONE2; // Doesn't match if omitted
+    }
+    return ApiStatus_DONE2;
+}
+
+// TODO: Figure out meaning of float value in Npc struct that this function is setting
+ApiStatus func_802CE1C0(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* ptrReadPos = script->ptrReadPos;
+    NpcId npcID = get_variable(script, *ptrReadPos++);
+    f32 value1 = get_float_variable(script, *ptrReadPos++);
+    Npc* npcPtr = resolve_npc(script, npcID);
+
+    if (npcPtr != NULL) {
+        npcPtr->unk_30 = value1;
+        return ApiStatus_DONE2; // Doesn't match if omitted
+    }
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_API_ASM(code_f2470_len_27f0, NpcMoveTo);
 
