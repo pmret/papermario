@@ -36,7 +36,25 @@ INCLUDE_API_ASM(code_f2470_len_27f0, SetNpcPos);
 
 INCLUDE_API_ASM(code_f2470_len_27f0, SetNpcRotation);
 
-INCLUDE_API_ASM(code_f2470_len_27f0, SetNpcScale);
+ApiStatus SetNpcScale(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* ptrReadPos = script->ptrReadPos;
+    NpcId npcID = get_variable(script, *ptrReadPos++);
+    f32 sizeX = get_float_variable(script, *ptrReadPos++);
+    f32 sizeY = get_float_variable(script, *ptrReadPos++);
+    f32 sizeZ = get_float_variable(script, *ptrReadPos++);
+    Npc* npcPtr = resolve_npc(script, npcID);
+
+    if (npcPtr != NULL) {
+        s32 todo = 1; // TODO: Figure out why this variable and subsequent if block is required for matching
+        if (todo) {
+            npcPtr->scale.x = sizeX;
+            npcPtr->scale.y = sizeY;
+            npcPtr->scale.z = sizeZ;
+        }
+        return ApiStatus_DONE2; // Doesn't match if omitted
+    }
+    return ApiStatus_DONE2;
+}
 
 ApiStatus SetNpcCollisionSize(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
@@ -64,12 +82,23 @@ ApiStatus SetNpcSpeed(ScriptInstance* script, s32 isInitialCall) {
 
     if(npcPtr != NULL) {
         npcPtr->moveSpeed = speed;
-        return ApiStatus_DONE2;
+        return ApiStatus_DONE2; // Doesn't match if omitted
     }
     return ApiStatus_DONE2;
 }
 
-INCLUDE_API_ASM(code_f2470_len_27f0, SetNpcJumpscale);
+ApiStatus SetNpcJumpscale(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* ptrReadPos = script->ptrReadPos;
+    NpcId npcID = get_variable(script, *ptrReadPos++);
+    f32 jumpScale = get_float_variable(script, *ptrReadPos);
+    Npc* npcPtr = resolve_npc(script, npcID);
+
+    if(npcPtr != NULL) {
+        npcPtr->jumpScale = jumpScale;
+        return ApiStatus_DONE2; // Doesn't match if omitted
+    }
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_API_ASM(code_f2470_len_27f0, SetNpcAnimation);
 
