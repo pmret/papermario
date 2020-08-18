@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 from os import path
+from os import remove
 import re
 from glob import glob
 
@@ -38,3 +39,11 @@ non_matched = [path.splitext(path.basename(filename))[0] for filename in ASM_FIL
 
 total = len(matched) + len(non_matched)
 print(f"{len(matched)}/{total} ({(len(matched) / total) * 100:.2f}%)")
+
+matched_but_undeleted_asm = [f for f in matched if f in non_matched]
+if len(matched_but_undeleted_asm) > 0:
+    print(f"The following functions have been matched but still exist in asm/nonmatchings/: {' '.join(matched_but_undeleted_asm)}")
+    if input("Delete them [y/N]? ").upper() == "Y":
+        for func in matched_but_undeleted_asm:
+            file = glob(path.join(DIR, f"../asm/nonmatchings/*/{func}.s"))[0]
+            remove(file)
