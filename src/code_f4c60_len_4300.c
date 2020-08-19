@@ -66,10 +66,9 @@ ApiStatus SetMessageString(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_API_ASM(code_f4c60_len_4300, SetMessageValue);
+#ifdef NON_MATCHING
 // TODO: Figure out why there's an extra NOP after this function
 // It's probably because of a file split issue
-/*
 ApiStatus SetMessageValue(ScriptInstance* script, s32 initialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
     Bytecode value = get_variable(script, *ptrReadPos++);
@@ -78,7 +77,9 @@ ApiStatus SetMessageValue(ScriptInstance* script, s32 initialCall) {
     set_message_value(value, index);
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_API_ASM(code_f4c60_len_4300, SetMessageValue);
+#endif
 
 INCLUDE_API_ASM(code_f4c60_len_4300, HidePlayerShadow);
 

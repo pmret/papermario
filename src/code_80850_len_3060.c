@@ -716,10 +716,10 @@ void reset_status_menu(void) {
     func_801452B4(uiStatus->iconIndexC, uiStatus->iconIndexC);
 }
 
+#ifdef NON_MATCHING
 // uses a jumptable, which we need .rodata support for.
-s32 INCLUDE_ASM(code_80850_len_3060, is_ability_active, s32 arg0);
 // Somewhat close. Needs work.
-/*s32 is_ability_active(s32 arg0) {
+s32 is_ability_active(s32 arg0) {
     s32 iVar2;
     u32 uVar3;
     s32 iVar5;
@@ -965,7 +965,10 @@ s32 INCLUDE_ASM(code_80850_len_3060, is_ability_active, s32 arg0);
         }
         return iVar7;
     }
-}*/
+}
+#else
+s32 INCLUDE_ASM(code_80850_len_3060, is_ability_active, s32 arg0);
+#endif
 
 s32 is_partner_ability_active(void) {
     return 0;

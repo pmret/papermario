@@ -18,8 +18,7 @@ INCLUDE_ASM(code_e79b0_len_1920, start_child_script);
 
 INCLUDE_ASM(code_e79b0_len_1920, func_802C39F8);
 
-INCLUDE_ASM(code_e79b0_len_1920, restart_script);
-/*
+#ifdef NON_MATCHING
 ScriptInstance* restart_script(ScriptInstance* script) {
     script->loopDepth = -1;
     script->switchDepth = -1;
@@ -39,7 +38,9 @@ ScriptInstance* restart_script(ScriptInstance* script) {
 
     return script;
 }
-*/
+#else
+INCLUDE_ASM(code_e79b0_len_1920, restart_script);
+#endif
 
 INCLUDE_ASM(code_e79b0_len_1920, update_scripts);
 
@@ -104,22 +105,23 @@ void set_script_timescale(ScriptInstance* script, f32 timeScale) {
     script->timeScale = timeScale * gGlobalTimeSpace;
 }
 
-INCLUDE_ASM(code_e79b0_len_1920, set_global_timespace);
-/*
+#ifdef NON_MATCHING
 // TODO: figure out why compiler/assembler isn't putting SWC1 in delay slot
 void set_global_timespace(f32 timeScale) {
     //gGlobalTimeSpace = timeScale;
 }
-*/
+#else
+INCLUDE_ASM(code_e79b0_len_1920, set_global_timespace);
+#endif
 
-
-INCLUDE_ASM(code_e79b0_len_1920, get_global_timespace);
-/*
+#ifdef NON_MATCHING
 // TODO: figure out why compiler/assembler isn't putting LWC1 in delay slot
 f32 get_global_timespace(void) {
     //return gGlobalTimeSpace;
 }
-*/
+#else
+INCLUDE_ASM(code_e79b0_len_1920, get_global_timespace);
+#endif
 
 void set_script_group(ScriptInstance* script, s8 groupFlags) {
     script->groupFlags = groupFlags;
@@ -305,8 +307,7 @@ void set_script_flags(ScriptInstance* script, s32 flags) {
     }
 }
 
-INCLUDE_ASM(code_e79b0_len_1920, clear_script_flags);
-/*
+#ifdef NON_MATCHING
 // TODO: Really close but some weirdness is going on
 void clear_script_flags(ScriptInstance* script, s32 flags) {
     int i;
@@ -325,4 +326,6 @@ void clear_script_flags(ScriptInstance* script, s32 flags) {
         }
     }
 }
-*/
+#else
+INCLUDE_ASM(code_e79b0_len_1920, clear_script_flags);
+#endif
