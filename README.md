@@ -102,7 +102,7 @@ Once your function is matching, you'll want to make a pull request. Before you d
 $ ./format.sh
 ```
 
-If `format.sh` displays any errors, go and fix them. If you can't fix them without breaking the function from matching, append `// NOLINT` to the offending line.
+If `format.sh` has any problems with your code, go and fix the issues. If you can't fix a warning without making the function not match anymore, append `// NOLINT` to the offending line.
 
 ## FAQ
 
