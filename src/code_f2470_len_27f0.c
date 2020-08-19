@@ -51,7 +51,7 @@ ApiStatus SetNpcScale(ScriptInstance* script, s32 isInitialCall) {
             npcPtr->scale.y = sizeY;
             npcPtr->scale.z = sizeZ;
         }
-        return ApiStatus_DONE2; // Doesn't match if omitted
+        return ApiStatus_DONE2;
     }
     return ApiStatus_DONE2;
 }
@@ -69,7 +69,7 @@ ApiStatus SetNpcCollisionSize(ScriptInstance* script, s32 isInitialCall) {
             npcPtr->collisionHeight = height;
             npcPtr->collisionRadius = radius;
         }
-        return ApiStatus_DONE2; // Doesn't match if omitted
+        return ApiStatus_DONE2;
     }
     return ApiStatus_DONE2;
 }
@@ -82,7 +82,7 @@ ApiStatus SetNpcSpeed(ScriptInstance* script, s32 isInitialCall) {
 
     if(npcPtr != NULL) {
         npcPtr->moveSpeed = speed;
-        return ApiStatus_DONE2; // Doesn't match if omitted
+        return ApiStatus_DONE2;
     }
     return ApiStatus_DONE2;
 }
@@ -95,7 +95,7 @@ ApiStatus SetNpcJumpscale(ScriptInstance* script, s32 isInitialCall) {
 
     if(npcPtr != NULL) {
         npcPtr->jumpScale = jumpScale;
-        return ApiStatus_DONE2; // Doesn't match if omitted
+        return ApiStatus_DONE2;
     }
     return ApiStatus_DONE2;
 }
@@ -108,7 +108,7 @@ ApiStatus SetNpcAnimation(ScriptInstance* script, s32 isInitialCall) {
 
     if (npcPtr != NULL) {
         set_npc_animation(npcPtr, animation);
-        return ApiStatus_DONE2; // Doesn't match if omitted
+        return ApiStatus_DONE2;
     }
     return ApiStatus_DONE2;
 }
@@ -121,7 +121,7 @@ ApiStatus GetNpcAnimation(ScriptInstance* script, s32 isInitialCall) {
 
     if (npcPtr != NULL) {
         set_variable(script, outVar, npcPtr->currentAnim);
-        return ApiStatus_DONE2; // Doesn't match if omitted
+        return ApiStatus_DONE2;
     }
     return ApiStatus_DONE2;
 }
@@ -134,7 +134,7 @@ ApiStatus SetNpcAnimationSpeed(ScriptInstance* script, s32 isInitialCall) {
 
     if (npcPtr != NULL) {
         npcPtr->animationSpeed = animationSpeed;
-        return ApiStatus_DONE2; // Doesn't match if omitted
+        return ApiStatus_DONE2;
     }
     return ApiStatus_DONE2;
 }
@@ -164,7 +164,7 @@ ApiStatus GetNpcYaw(ScriptInstance* script, s32 isInitialCall) {
         if (todo) {
             set_variable(script, outVar, clamp_angle(npcPtr->yaw));
         }
-        return ApiStatus_DONE2; // Doesn't match if omitted
+        return ApiStatus_DONE2;
     }
     return ApiStatus_DONE2;
 }
@@ -176,7 +176,7 @@ ApiStatus SetNpcYaw(ScriptInstance* script, s32 isInitialCall) {
     
     if (npcPtr != NULL) {
         set_npc_yaw(npcPtr, get_variable(script, *ptrReadPos++));
-        return ApiStatus_DONE2; // Doesn't match if omitted
+        return ApiStatus_DONE2;
     }
     return ApiStatus_DONE2;
 }
