@@ -4,7 +4,7 @@
 if command -v apt-install &> /dev/null; then
     echo "Installing packages for Ubuntu"
 
-    sudo apt install -y git build-essential binutils-mips-linux-gnu zlib1g-dev libcapstone-dev libyaml-dev || exit 1
+    sudo apt install -y git build-essential binutils-mips-linux-gnu zlib1g-dev libcapstone-dev libyaml-dev gcc-multilib || exit 1
 
     if [[ $1 == "--extra" ]]; then
         echo "Installing extra"
@@ -24,7 +24,7 @@ if command -v pacman &> /dev/null; then
     sudo pacman -Syu || exit 1
 
     # Install dependencies
-    sudo pacman -S --noconfirm --needed git base-devel zlib capstone libyaml || exit 1
+    sudo pacman -S --noconfirm --needed git base-devel zlib capstone libyaml lib32-glibc || exit 1
 
     # Install binutils if required
     if ! command -v mips-linux-gnu-ar &> /dev/null; then

@@ -52,7 +52,21 @@ void start_battle_countdown(void) {
 }
 
 INCLUDE_ASM("code_ebd0_len_6a0", step_battle);
-INCLUDE_ASM("code_ebd0_len_6a0", func_80033B54);
-INCLUDE_ASM("code_ebd0_len_6a0", func_80033B88);
+
+void func_80033B54(void) {
+    func_8003E5B0();
+    if (D_800A0900 < 0) {
+        draw_main_battle_ui();
+    }
+}
+
+void func_80033B88(void) {
+    D_8009A650[0] |= 0x08;
+    nuContRmbForceStop();
+    D_800A0900 = 5;
+}
+
 INCLUDE_ASM("code_ebd0_len_6a0", func_80033BC0);
-INCLUDE_ASM("code_ebd0_len_6a0", func_80033E64);
+
+void func_80033E64(void) {
+}
