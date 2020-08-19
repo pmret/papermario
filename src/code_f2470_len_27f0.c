@@ -191,19 +191,107 @@ INCLUDE_API_ASM(code_f2470_len_27f0, SetNpcFlagBits);
 
 INCLUDE_API_ASM(code_f2470_len_27f0, GetNpcPos);
 
-INCLUDE_API_ASM(code_f2470_len_27f0, EnableNpcShadow);
+ApiStatus EnableNpcShadow(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* ptrReadPos = script->ptrReadPos;
+    NpcId npcID = get_variable(script, *ptrReadPos++);
+    s32 enableShadow = get_variable(script, *ptrReadPos++);
+    Npc* npcPtr = resolve_npc(script, npcID);
 
-INCLUDE_API_ASM(code_f2470_len_27f0, EnableNpcBlur);
+    if (npcPtr != NULL) {
+        if (enableShadow) {
+            enable_npc_shadow(npcPtr);
+            return ApiStatus_DONE2;
+        }
+        else {
+            disable_npc_shadow(npcPtr);
+        }
+    }
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_API_ASM(code_f2470_len_27f0, ClearPartnerMoveHistory);
+ApiStatus EnableNpcBlur(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* ptrReadPos = script->ptrReadPos;
+    NpcId npcID = get_variable(script, *ptrReadPos++);
+    s32 enableBlur = get_variable(script, *ptrReadPos++);
+    Npc* npcPtr = resolve_npc(script, npcID);
+
+    if (npcPtr != NULL) {
+        if (enableBlur) {
+            enable_npc_blur(npcPtr);
+            return ApiStatus_DONE2;
+        }
+        else {
+            disable_npc_blur(npcPtr);
+        }
+    }
+    return ApiStatus_DONE2;
+}
+
+ApiStatus ClearPartnerMoveHistory(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* ptrReadPos = script->ptrReadPos;
+    NpcId npcID = get_variable(script, *ptrReadPos++);
+    Npc* npcPtr = resolve_npc(script, npcID);
+
+    if (npcPtr != NULL) {
+        clear_partner_move_history(npcPtr);
+        return ApiStatus_DONE2;
+    }
+    return ApiStatus_DONE2;
+}
+
 
 INCLUDE_API_ASM(code_f2470_len_27f0, NpcSetHomePosToCurrent);
 
-INCLUDE_API_ASM(code_f2470_len_27f0, GetPartnerPos);
+ApiStatus GetPartnerPos(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* ptrReadPos = script->ptrReadPos;
+    Bytecode posX = *ptrReadPos++;
+    Bytecode posY = *ptrReadPos++;
+    Bytecode posZ = *ptrReadPos++;
+    Npc* npcPtr = get_npc_unsafe(-4);
 
-INCLUDE_API_ASM(code_f2470_len_27f0, DisablePartnerAI);
+    if (npcPtr != NULL) {
+        set_variable(script, posX, npcPtr->pos.x);
+        set_variable(script, posY, npcPtr->pos.y);
+        set_variable(script, posZ, npcPtr->pos.z);
+        return ApiStatus_DONE2;
+    }
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_API_ASM(code_f2470_len_27f0, EnablePartnerAI);
+ApiStatus DisablePartnerAI(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* ptrReadPos = script->ptrReadPos;
+
+    if (get_variable(script, *ptrReadPos++) == 0) {
+        func_800EF314();
+    } else {
+        func_800EF300();
+    }
+    return ApiStatus_DONE2;
+}
+
+ApiStatus EnablePartnerAI(ScriptInstance* script, s32 isInitialCall) {
+    enable_partner_ai();
+    return ApiStatus_DONE2;
+}
+
+// TODO: Figure out what this function does
+ApiStatus func_802CF54C(ScriptInstance* script, s32 isInitialCall) {
+    func_800EF43C();
+    return ApiStatus_DONE2;
+}
+
+// TODO: Figure out what this function does
+ApiStatus func_802CF56C(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* ptrReadPos = script->ptrReadPos;
+    s32 value = get_variable(script, *ptrReadPos++); 
+
+    if(value == 2) {
+        func_800EF3E4();
+    } else {
+        func_800EF3D4(value);
+    }
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_API_ASM(code_f2470_len_27f0, BringPartnerOut);
 

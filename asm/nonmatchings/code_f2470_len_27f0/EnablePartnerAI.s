@@ -12,6 +12,7 @@ glabel EnablePartnerAI
 /* 0F3EF4 802CF544 03E00008 */  jr    $ra
 /* 0F3EF8 802CF548 27BD0018 */   addiu $sp, $sp, 0x18
 
+glabel func_802CF54C
 /* 0F3EFC 802CF54C 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0F3F00 802CF550 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 0F3F04 802CF554 0C03BD0F */  jal   func_800EF43C
@@ -21,6 +22,7 @@ glabel EnablePartnerAI
 /* 0F3F14 802CF564 03E00008 */  jr    $ra
 /* 0F3F18 802CF568 27BD0018 */   addiu $sp, $sp, 0x18
 
+glabel func_802CF56C
 /* 0F3F1C 802CF56C 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 0F3F20 802CF570 AFBF0010 */  sw    $ra, 0x10($sp)
 /* 0F3F24 802CF574 8C82000C */  lw    $v0, 0xc($a0)
