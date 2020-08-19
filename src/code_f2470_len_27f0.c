@@ -28,7 +28,7 @@ ApiStatus GetNpcPointer(ScriptInstance* script, s32 isInitialCall) {
     NpcId npcID = get_variable(script, *ptrReadPos++);
     Bytecode varNPC = *ptrReadPos++;
 
-    set_variable(script, varNPC, get_npc_safe(npcID));
+    set_variable(script, varNPC, (s32)get_npc_safe(npcID));
     return ApiStatus_DONE2;
 }
 

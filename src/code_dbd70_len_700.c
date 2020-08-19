@@ -7,7 +7,6 @@ void default_trigger_function_handler(s32* arg0) {
 
 INCLUDE_ASM("code_dbd70_len_700", clear_trigger_data);
 
-//INCLUDE_ASM("code_dbd70_len_700", init_trigger_list);
 void init_trigger_list(void) {
     if ((*gGameStatusPtr)->isBattle == 0) {
         *gCurrentTriggerListPtr = gTriggerList1;
@@ -40,7 +39,6 @@ void delete_trigger(Trigger* toDelete) {
 
 INCLUDE_ASM("code_dbd70_len_700", is_trigger_bound);
 
-//INCLUDE_ASM("code_dbd70_len_700", get_trigger_by_id);
 Trigger* get_trigger_by_id(s32 triggerID) {
     return (*gCurrentTriggerListPtr)[triggerID];
 }

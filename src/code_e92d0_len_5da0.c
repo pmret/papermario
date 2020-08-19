@@ -68,7 +68,6 @@ ApiStatus si_handle_if_AND(ScriptInstance* script) {
     return ApiStatus_DONE2;
 }
 
-//INCLUDE_ASM("code_e92d0_len_5da0", si_handle_if_not_AND);
 ApiStatus si_handle_if_not_AND(ScriptInstance* script) {
     s32 var1;
     s32* ptrReadPos = script->ptrReadPos;
@@ -197,20 +196,19 @@ INCLUDE_ASM("code_e92d0_len_5da0", si_handle_multiplyF);
 INCLUDE_ASM("code_e92d0_len_5da0", si_handle_divideF);
 
 ApiStatus si_handle_set_int_buffer_ptr(ScriptInstance* script) {
-    script->buffer = get_variable(script, *script->ptrReadPos);
+    script->buffer = (ScriptBufferValue*)get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
 ApiStatus si_handle_set_float_buffer_ptr(ScriptInstance* script) {
-    script->buffer = get_variable(script, *script->ptrReadPos);
+    script->buffer = (ScriptBufferValue*)get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
 ApiStatus si_handle_get_1_word(ScriptInstance* script) {
-    s32 ptrReadPos = *script->ptrReadPos;
-    s32 buffer = *script->buffer++;
+    s32 out = *script->ptrReadPos;
 
-    set_variable(script, ptrReadPos, buffer);
+    set_variable(script, out, (*script->buffer++).s);
     return ApiStatus_DONE2;
 }
 
@@ -222,9 +220,10 @@ INCLUDE_ASM("code_e92d0_len_5da0", si_handle_get_4_word);
 
 ApiStatus si_handle_get_Nth_word(ScriptInstance* script) {
     Bytecode* ptrReadPos = script->ptrReadPos;
-    s32 curPtrReadPos = ptrReadPos[0];
+    s32 out = ptrReadPos[0];
+    s32 n = get_variable(script, ptrReadPos[1]);
 
-    set_variable(script, curPtrReadPos, script->buffer[get_variable(script, ptrReadPos[1])]);
+    set_variable(script, out, script->buffer[n].s);
     return ApiStatus_DONE2;
 }
 
@@ -239,12 +238,12 @@ INCLUDE_ASM("code_e92d0_len_5da0", si_handle_get_4_float);
 INCLUDE_ASM("code_e92d0_len_5da0", si_handle_get_Nth_float);
 
 ApiStatus si_handle_set_array(ScriptInstance* script) {
-    script->array = get_variable(script, *script->ptrReadPos);
+    script->array = (s32*)get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
 ApiStatus si_handle_set_flag_array(ScriptInstance* script) {
-    script->flagArray = get_variable(script, *script->ptrReadPos);
+    script->flagArray = (s32*)get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
@@ -293,7 +292,7 @@ ApiStatus si_handle_exec_wait(ScriptInstance* script) {
 }
 
 ApiStatus si_handle_jump(ScriptInstance* script) {
-    script->ptrFirstLine = get_variable(script, *script->ptrReadPos);
+    script->ptrFirstLine = (Bytecode*)get_variable(script, *script->ptrReadPos);
     restart_script(script);
     return ApiStatus_DONE2;
 }
@@ -387,7 +386,7 @@ ApiStatus func_802C6E14(ScriptInstance* script) {
 ApiStatus INCLUDE_ASM("code_e92d0_len_5da0", si_handle_print_debug_var);
 
 ApiStatus func_802C739C(ScriptInstance* script) {
-    script->ptrSavedPosition = *script->ptrReadPos;
+    script->ptrSavedPosition = (Bytecode*)*script->ptrReadPos;
     return ApiStatus_DONE2;
 }
 

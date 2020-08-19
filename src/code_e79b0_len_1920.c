@@ -243,8 +243,7 @@ s32 resume_all_group(s32 groupFlags) {
     }
 }
 
-
-void suspend_group_others(s32 script, s32 groupFlags) {
+void suspend_group_others(ScriptInstance* script, s32 groupFlags) {
     s32 i;
     ScriptInstance* scriptContextPtr;
 
@@ -256,7 +255,7 @@ void suspend_group_others(s32 script, s32 groupFlags) {
     }
 }
 
-void resume_group_others(s32 script, s32 groupFlags) {
+void resume_group_others(ScriptInstance* script, s32 groupFlags) {
     s32 i;
     ScriptInstance* scriptContextPtr;
 

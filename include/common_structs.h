@@ -222,6 +222,11 @@ typedef struct StaticNpcSettings {
     /* 0x2A */ s16 unkFlags;
 } StaticNpcSettings; // size = 0x2C
 
+typedef union ScriptBufferValue {
+    f32 f;
+    s32 s;
+} ScriptBufferValue;
+
 typedef struct ScriptInstance {
     /* 0x000 */ u8 state;
     /* 0x001 */ u8 currentArgc;
@@ -247,9 +252,9 @@ typedef struct ScriptInstance {
     /* 0x0F0 */ s32 loopCounterTable[8];
     /* 0x110 */ u8 switchBlockState[8];
     /* 0x118 */ s32 switchBlockValue[8];
-    /* 0x138 */ s32* buffer;
-    /* 0x13C */ UNK_PTR array;
-    /* 0x140 */ UNK_PTR flagArray;
+    /* 0x138 */ ScriptBufferValue* buffer;
+    /* 0x13C */ s32* array;
+    /* 0x140 */ s32* flagArray;
     /* 0x144 */ s32 uniqueID;
     /* 0x148 */ struct Enemy* ownerActorID; /* controller*, battle ID, trigger* */
     /* 0x14C */ u32 ownerID; /* can be an npcID, a triggerID, a trigger ptr */
@@ -1268,8 +1273,8 @@ typedef struct TileDescriptor {
 } TileDescriptor; // size = 0x30
 
 typedef struct BackgroundHeader {
-    /* 0x00 */ u32 raster;
-    /* 0x04 */ u32 palette;
+    /* 0x00 */ UNK_PTR raster;
+    /* 0x04 */ UNK_PTR palette;
     /* 0x08 */ u16 startX;
     /* 0x0A */ u16 startY;
     /* 0x0C */ u16 width;

@@ -181,9 +181,9 @@ ApiStatus FindKeyItem(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus AddItem(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
     s32 itemID = get_variable(script, *ptrReadPos++);
-    s32* ptrNextPos = (s32*) *ptrReadPos++;
+    Bytecode outItemIdx = *ptrReadPos++;
 
-    set_variable(script, ptrNextPos, add_item(itemID));
+    set_variable(script, outItemIdx, add_item(itemID));
     return ApiStatus_DONE2;
 }
 
@@ -291,10 +291,10 @@ ApiStatus RemoveItemEntity(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus AddBadge(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
-    s32 itemID = get_variable(script, *ptrReadPos++);
-    s32* ptrNextPos = (s32*) *ptrReadPos++;
+    s32 badgeID = get_variable(script, *ptrReadPos++);
+    Bytecode outBadgeIdx = *ptrReadPos++;
 
-    set_variable(script, ptrNextPos, add_badge(itemID));
+    set_variable(script, outBadgeIdx, add_badge(badgeID));
     return ApiStatus_DONE2;
 }
 

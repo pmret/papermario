@@ -373,7 +373,6 @@ void show_coin_counter(void) {
         uiStatus->ignoreChanges = 1;
         D_8010CD10 = 1;
     }
-    return;
 }
 
 void hide_coin_counter(void) {
