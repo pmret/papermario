@@ -61,7 +61,9 @@ typedef struct Npc {
     /* 0x020 */ struct NpcBlurData* blurData; /* related to movement somehow... */
     /* 0x024 */ char unk_24[4];
     /* 0x028 */ u32 currentAnim;
-    /* 0x02C */ char unk_2C[12];
+    /* 0x02C */ char unk_2C[4];
+    /* 0x030 */ f32 animationSpeed;
+    /* 0x034 */ char unk_34[4];
     /* 0x038 */ struct Vec3f pos;
     /* 0x044 */ struct Vec3f rotation;
     /* 0x050 */ char unk_50[4];
@@ -222,11 +224,6 @@ typedef struct StaticNpcSettings {
     /* 0x2A */ s16 unkFlags;
 } StaticNpcSettings; // size = 0x2C
 
-typedef union ScriptBufferValue {
-    f32 f;
-    s32 s;
-} ScriptBufferValue;
-
 typedef struct ScriptInstance {
     /* 0x000 */ u8 state;
     /* 0x001 */ u8 currentArgc;
@@ -252,7 +249,7 @@ typedef struct ScriptInstance {
     /* 0x0F0 */ s32 loopCounterTable[8];
     /* 0x110 */ u8 switchBlockState[8];
     /* 0x118 */ s32 switchBlockValue[8];
-    /* 0x138 */ ScriptBufferValue* buffer;
+    /* 0x138 */ s32* buffer;
     /* 0x13C */ s32* array;
     /* 0x140 */ s32* flagArray;
     /* 0x144 */ s32 uniqueID;
