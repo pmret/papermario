@@ -255,13 +255,13 @@ INCLUDE_ASM("code_e92d0_len_5da0", si_handle_AND);
 //INCLUDE_ASM("code_e92d0_len_5da0", si_handle_AND_const);
 ApiStatus si_handle_AND_const(ScriptInstance* script) {
     Bytecode* ptrReadPos = script->ptrReadPos;
-    // todo ???
-    s32 temp_s0 = ptrReadPos[0];
-    s32 temp_s2 = ptrReadPos[0];
 
-    temp_s0 = ptrReadPos[1];
-    // end todo
-    set_variable(script, temp_s2, temp_s0 & get_variable(script, temp_s2));
+    s32 constant = ptrReadPos[0]; // NOLINT
+    s32 var = ptrReadPos[0];
+
+    constant = ptrReadPos[1];
+
+    set_variable(script, var, constant & get_variable(script, var));
     return ApiStatus_DONE2;
 }
 
@@ -270,13 +270,13 @@ INCLUDE_ASM("code_e92d0_len_5da0", si_handle_OR);
 //INCLUDE_ASM("code_e92d0_len_5da0", si_handle_OR_const);
 ApiStatus si_handle_OR_const(ScriptInstance* script) {
     Bytecode* ptrReadPos = script->ptrReadPos;
-    // todo ???
-    s32 temp_s0 = ptrReadPos[0];
-    s32 temp_s2 = ptrReadPos[0];
 
-    temp_s0 = ptrReadPos[1];
-    // end todo
-    set_variable(script, temp_s2, temp_s0 | get_variable(script, temp_s2));
+    s32 constant = ptrReadPos[0]; // NOLINT
+    s32 var = ptrReadPos[0];
+
+    constant = ptrReadPos[1];
+
+    set_variable(script, var, constant | get_variable(script, var));
     return ApiStatus_DONE2;
 }
 

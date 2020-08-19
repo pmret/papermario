@@ -42,7 +42,6 @@ s16 func_80033830(add_val) {
     return 0;
 }
 
-
 void func_80033874(void) {
     func_80137D88(0, (*gGameStatusPtr)->bootAlpha);
     func_80137E10(0, (*gGameStatusPtr)->bootBlue, (*gGameStatusPtr)->bootGreen, (*gGameStatusPtr)->bootRed);

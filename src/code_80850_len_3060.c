@@ -185,7 +185,6 @@ void sort_items(void) {
             }
         }
     }
-    return;
 }
 
 s32 add_badge(s32 itemID) {

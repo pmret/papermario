@@ -48,7 +48,7 @@ INCLUDE_ASM("code_e79b0_len_1920", func_802C3EE4);
 
 INCLUDE_ASM("code_e79b0_len_1920", kill_script);
 
-void* kill_script_by_ID(s32 id) {
+void kill_script_by_ID(s32 id) {
     s32 i;
     ScriptInstance* scriptContextPtr;
 
@@ -60,7 +60,7 @@ void* kill_script_by_ID(s32 id) {
     }
 }
 
-s32 kill_all_scripts(void) {
+void kill_all_scripts(void) {
     s32 i;
     ScriptInstance* scriptContextPtr;
 
@@ -70,7 +70,6 @@ s32 kill_all_scripts(void) {
             kill_script(scriptContextPtr);
         }
     }
-    return;
 }
 
 s32 does_script_exist(s32 id) {
