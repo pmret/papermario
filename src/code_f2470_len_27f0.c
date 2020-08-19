@@ -299,6 +299,42 @@ INCLUDE_API_ASM(code_f2470_len_27f0, PutPartnerAway);
 
 INCLUDE_API_ASM(code_f2470_len_27f0, GetCurrentPartnerID);
 
-INCLUDE_API_ASM(code_f2470_len_27f0, SetNpcEffect);
+// TODO: Figure out what this function does
+ApiStatus SetNpcEffect(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* ptrReadPos = script->ptrReadPos;
+    NpcId npcID = get_variable(script, *ptrReadPos++);
+    s32 value1 = get_variable(script, *ptrReadPos++);
+    s32 value2 = get_variable(script, *ptrReadPos++);
+    Npc* npcPtr = resolve_npc(script, npcID);
 
-INCLUDE_API_ASM(code_f2470_len_27f0, PlaySoundAtNpc);
+    if (npcPtr != NULL) {
+        func_8003C3D8(npcPtr, value1, value2);
+        return ApiStatus_DONE2;
+    }
+    return ApiStatus_DONE2;
+}
+
+ApiStatus PlaySoundAtNpc(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* ptrReadPos = script->ptrReadPos;
+    NpcId npcID = get_variable(script, *ptrReadPos++);
+    SoundId soundID = get_variable(script, *ptrReadPos++);
+    s32 value2 = get_variable(script, *ptrReadPos++);
+    Npc* npcPtr = resolve_npc(script, npcID);
+
+    if (npcPtr != NULL) {
+        play_sound_at_position(soundID, value2, npcPtr->pos.x, npcPtr->pos.y, npcPtr->pos.z);
+        return ApiStatus_DONE2;
+    }
+    return ApiStatus_DONE2;
+}
+
+ApiStatus SetNpcRenderMode(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* ptrReadPos = script->ptrReadPos;
+    NpcId npcID = get_variable(script, *ptrReadPos++);
+    u8 renderMode = get_variable(script, *ptrReadPos++);
+    Npc* npcPtr = resolve_npc(script, npcID);
+
+    npcPtr->renderMode = renderMode;
+    return ApiStatus_DONE2;
+}
+
