@@ -1,17 +1,15 @@
 #include "common.h"
 
-INCLUDE_ASM(code_e92d0_len_5da0, fixed_var_to_float);
-/*f32 fixed_var_to_float(s32 scriptVar) {
+f32 fixed_var_to_float(s32 scriptVar) {
     if (scriptVar <= -220000000) {
-        return (scriptVar + 230000000) * (1 / 1024.f);
+        return (scriptVar + 230000000) * (1 / 1024.0f);
     }
     return scriptVar;
-}*/
+}
 
-INCLUDE_ASM(code_e92d0_len_5da0, float_to_fixed_var);
-/*s32 float_to_fixed_var(f32 arg0) {
-    return (s32)(arg0 * (f32)1024.0f) + -230000000;
-}*/
+s32 float_to_fixed_var(f32 value) {
+    return (s32)(value * 1024.0f) - 230000000;
+}
 
 ApiStatus si_handle_return(ScriptInstance* script) {
     kill_script(script);
@@ -27,7 +25,18 @@ ApiStatus si_handle_goto(ScriptInstance* script) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(code_e92d0_len_5da0, si_handle_Loop);
+ApiStatus si_handle_Loop(ScriptInstance* script) {
+    Bytecode* thisPos = script->ptrReadPos;
+    Bytecode var = *thisPos++;
+    s32 loopDepth = ++script->loopDepth;
+
+    ASSERT(loopDepth < 8);
+
+    script->loopStartTable[loopDepth] = thisPos;
+    script->loopCounterTable[loopDepth] = var;
+
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(code_e92d0_len_5da0, si_handle_end_loop);
 
@@ -55,28 +64,21 @@ INCLUDE_ASM(code_e92d0_len_5da0, si_handle_if_less_equal);
 INCLUDE_ASM(code_e92d0_len_5da0, si_handle_if_greater_equal);
 
 ApiStatus si_handle_if_AND(ScriptInstance* script) {
-    s32 var1;
-    s32 *ptrReadPos = script->ptrReadPos;
+    Bytecode* thisPos = script->ptrReadPos;
+    Bytecode var = *thisPos++;
 
-    var1 = ptrReadPos[0];
-    ptrReadPos++;
-
-    if ((get_variable(script, var1) & *ptrReadPos) == 0) {
+    if ((get_variable(script, var) & *thisPos) == 0) {
         script->ptrNextLine = si_skip_if(script);
         return ApiStatus_DONE2;
     }
     return ApiStatus_DONE2;
 }
 
-//INCLUDE_ASM(code_e92d0_len_5da0, si_handle_if_not_AND);
 ApiStatus si_handle_if_not_AND(ScriptInstance* script) {
-    s32 var1;
-    s32 *ptrReadPos = script->ptrReadPos;
+    Bytecode* thisPos = script->ptrReadPos;
+    Bytecode var = *thisPos++;
 
-    var1 = ptrReadPos[0];
-    ptrReadPos++;
-
-    if ((get_variable(script, var1) & *ptrReadPos) != 0) {
+    if ((get_variable(script, var) & *thisPos) != 0) {
         script->ptrNextLine = si_skip_if(script);
         return ApiStatus_DONE2;
     }
@@ -105,12 +107,12 @@ ApiStatus si_handle_switch(ScriptInstance* script) {
 }
 
 ApiStatus si_handle_switch_const(ScriptInstance* script) {
-    s32 value = *script->ptrReadPos;
+    Bytecode* thisPos = *script->ptrReadPos;
     s32 switchDepth = ++script->switchDepth;
 
     ASSERT(switchDepth < 8);
 
-    script->switchBlockValue[switchDepth] = value;
+    script->switchBlockValue[switchDepth] = thisPos;
     script->switchBlockState[switchDepth] = 1;
 
     return ApiStatus_DONE2;
@@ -158,10 +160,10 @@ ApiStatus si_handle_end_switch(ScriptInstance* script) {
 }
 
 ApiStatus si_handle_set_var(ScriptInstance* script) {
-    Bytecode* ptrReadPos = script->ptrReadPos;
-    s32 curPtrReadPos = ptrReadPos[0];
+    Bytecode* thisPos = script->ptrReadPos;
+    s32 curPtrReadPos = thisPos[0];
 
-    set_variable(script, curPtrReadPos, get_variable(script, ptrReadPos[1]));
+    set_variable(script, curPtrReadPos, get_variable(script, thisPos[1]));
     return ApiStatus_DONE2;
 }
 
@@ -171,10 +173,10 @@ ApiStatus si_handle_set_const(ScriptInstance* script) {
 }
 
 ApiStatus si_handle_set_float(ScriptInstance* script) {
-    Bytecode* ptrReadPos = script->ptrReadPos;
-    s32 curPtrReadPos = ptrReadPos[0];
+    Bytecode* thisPos = script->ptrReadPos;
+    Bytecode var = *thisPos++;
 
-    set_float_variable(script, curPtrReadPos, get_float_variable(script, ptrReadPos[1]));
+    set_float_variable(script, var, get_float_variable(script, *thisPos));
     return ApiStatus_DONE2;
 }
 
@@ -207,36 +209,152 @@ ApiStatus si_handle_set_float_buffer_ptr(ScriptInstance* script) {
 }
 
 ApiStatus si_handle_get_1_word(ScriptInstance* script) {
-    s32 ptrReadPos = *script->ptrReadPos;
-    s32 buffer = *script->buffer++;
+    Bytecode* thisPos = script->ptrReadPos;
+    Bytecode var;
 
-    set_variable(script, ptrReadPos, buffer);
+    var = *thisPos++;
+    set_variable(script, var, *script->buffer++);
+
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(code_e92d0_len_5da0, si_handle_get_2_word);
+ApiStatus si_handle_get_2_word(ScriptInstance* script) {
+    Bytecode* thisPos = script->ptrReadPos;
+    Bytecode var;
+    Bytecode var2;
 
-INCLUDE_ASM(code_e92d0_len_5da0, si_handle_get_3_word);
+    var = *thisPos++;
+    set_variable(script, var, *script->buffer++);
 
-INCLUDE_ASM(code_e92d0_len_5da0, si_handle_get_4_word);
+    var2 = *thisPos++;
+    set_variable(script, var2, *script->buffer++);
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus si_handle_get_3_word(ScriptInstance* script) {
+    Bytecode* thisPos = script->ptrReadPos;
+    Bytecode var;
+    Bytecode var2;
+    Bytecode var3;
+
+    var = *thisPos++;
+    set_variable(script, var, *script->buffer++);
+
+    var2 = *thisPos++;
+    set_variable(script, var2, *script->buffer++);
+
+    var3 = *thisPos++;
+    set_variable(script, var3, *script->buffer++);
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus si_handle_get_4_word(ScriptInstance* script) {
+    Bytecode* thisPos = script->ptrReadPos;
+    Bytecode var;
+    Bytecode var2;
+    Bytecode var3;
+    Bytecode var4;
+
+    var = *thisPos++;
+    set_variable(script, var, *script->buffer++);
+
+    var2 = *thisPos++;
+    set_variable(script, var2, *script->buffer++);
+
+    var3 = *thisPos++;
+    set_variable(script, var3, *script->buffer++);
+
+    var4 = *thisPos++;
+    set_variable(script, var4, *script->buffer++);
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus si_handle_get_Nth_word(ScriptInstance* script) {
-    Bytecode* ptrReadPos = script->ptrReadPos;
-    s32 curPtrReadPos = ptrReadPos[0];
+    Bytecode* thisPos = script->ptrReadPos;
+    Bytecode var;
 
-    set_variable(script, curPtrReadPos, script->buffer[get_variable(script, ptrReadPos[1])]);
+    var = *thisPos++;
+    set_variable(script, var, script->buffer[get_variable(script, *thisPos)]);
+    
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(code_e92d0_len_5da0, si_handle_get_1_float);
+ApiStatus si_handle_get_1_float(ScriptInstance* script) {
+    Bytecode* thisPos = script->ptrReadPos;
+    Bytecode var;
 
-INCLUDE_ASM(code_e92d0_len_5da0, si_handle_get_2_float);
+    var = *thisPos++;
+    set_float_variable(script, var, get_float_variable(script, *script->buffer++));
 
-INCLUDE_ASM(code_e92d0_len_5da0, si_handle_get_3_float);
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(code_e92d0_len_5da0, si_handle_get_4_float);
+ApiStatus si_handle_get_2_float(ScriptInstance* script) {
+    Bytecode* thisPos = script->ptrReadPos;
+    Bytecode var;
+    Bytecode var2;
 
-INCLUDE_ASM(code_e92d0_len_5da0, si_handle_get_Nth_float);
+    var = *thisPos++;
+    set_float_variable(script, var, get_float_variable(script, *script->buffer++));
+
+    var2 = *thisPos++;
+    set_float_variable(script, var2, get_float_variable(script, *script->buffer++));
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus si_handle_get_3_float(ScriptInstance* script) {
+    Bytecode* thisPos = script->ptrReadPos;
+    Bytecode var;
+    Bytecode var2;
+    Bytecode var3;
+
+    var = *thisPos++;
+    set_float_variable(script, var, get_float_variable(script, *script->buffer++));
+
+    var2 = *thisPos++;
+    set_float_variable(script, var2, get_float_variable(script, *script->buffer++));
+
+    var3 = *thisPos++;
+    set_float_variable(script, var3, get_float_variable(script, *script->buffer++));
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus si_handle_get_4_float(ScriptInstance* script) {
+    Bytecode* thisPos = script->ptrReadPos;
+    Bytecode var;
+    Bytecode var2;
+    Bytecode var3;
+    Bytecode var4;
+
+    var = *thisPos++;
+    set_float_variable(script, var, get_float_variable(script, *script->buffer++));
+
+    var2 = *thisPos++;
+    set_float_variable(script, var2, get_float_variable(script, *script->buffer++));
+
+    var3 = *thisPos++;
+    set_float_variable(script, var3, get_float_variable(script, *script->buffer++));
+
+    var4 = *thisPos++;
+    set_float_variable(script, var4, get_float_variable(script, *script->buffer++));
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus si_handle_get_Nth_float(ScriptInstance* script) {
+    Bytecode* thisPos = script->ptrReadPos;
+    Bytecode var;
+
+    var = *thisPos++;
+    set_float_variable(script, var, script->buffer[get_variable(script, *thisPos)]);
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus si_handle_set_array(ScriptInstance* script) {
     script->array = get_variable(script, *script->ptrReadPos);
@@ -403,6 +521,7 @@ s32 func_802C73B8(ScriptInstance* script) {
             break;
         }
     }
+
     return 1;
 }
 
