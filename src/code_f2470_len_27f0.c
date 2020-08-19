@@ -36,45 +36,150 @@ INCLUDE_API_ASM(code_f2470_len_27f0, SetNpcPos);
 
 INCLUDE_API_ASM(code_f2470_len_27f0, SetNpcRotation);
 
-INCLUDE_API_ASM(code_f2470_len_27f0, SetNpcScale);
+ApiStatus SetNpcScale(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* ptrReadPos = script->ptrReadPos;
+    NpcId npcID = get_variable(script, *ptrReadPos++);
+    f32 sizeX = get_float_variable(script, *ptrReadPos++);
+    f32 sizeY = get_float_variable(script, *ptrReadPos++);
+    f32 sizeZ = get_float_variable(script, *ptrReadPos++);
+    Npc* npcPtr = resolve_npc(script, npcID);
 
-INCLUDE_API_ASM(code_f2470_len_27f0, SetNpcCollisionSize);
+    if (npcPtr != NULL) {
+        s32 todo = 1; // TODO: Figure out why this variable and subsequent if block is required for matching
+        if (todo) {
+            npcPtr->scale.x = sizeX;
+            npcPtr->scale.y = sizeY;
+            npcPtr->scale.z = sizeZ;
+        }
+        return ApiStatus_DONE2;
+    }
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_API_ASM(code_f2470_len_27f0, SetNpcSpeed);
-// TODO: Fix issue with BNEZL vs BNEZ
-/*
+ApiStatus SetNpcCollisionSize(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* ptrReadPos = script->ptrReadPos;
+    NpcId npcID = get_variable(script, *ptrReadPos++);
+    s32 height = get_variable(script, *ptrReadPos++);
+    s32 radius = get_variable(script, *ptrReadPos++);
+    Npc* npcPtr = resolve_npc(script, npcID);
+
+    if (npcPtr != NULL) {
+        s32 todo = 1; // TODO: Figure out why this variable and subsequent if block is required for matching
+        if (todo) {
+            npcPtr->collisionHeight = height;
+            npcPtr->collisionRadius = radius;
+        }
+        return ApiStatus_DONE2;
+    }
+    return ApiStatus_DONE2;
+}
+
 ApiStatus SetNpcSpeed(ScriptInstance* script, s32 isInitialCall) {
-    Vytecode* ptrReadPos = script->ptrReadPos;
+    Bytecode* ptrReadPos = script->ptrReadPos;
     NpcId npcID = get_variable(script, *ptrReadPos++);
     f32 speed = get_float_variable(script, *ptrReadPos);
     Npc* npcPtr = resolve_npc(script, npcID);
 
-    npcPtr->moveSpeed = speed;
     if(npcPtr != NULL) {
+        npcPtr->moveSpeed = speed;
         return ApiStatus_DONE2;
     }
+    return ApiStatus_DONE2;
 }
-*/
 
-INCLUDE_API_ASM(code_f2470_len_27f0, SetNpcJumpscale);
+ApiStatus SetNpcJumpscale(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* ptrReadPos = script->ptrReadPos;
+    NpcId npcID = get_variable(script, *ptrReadPos++);
+    f32 jumpScale = get_float_variable(script, *ptrReadPos);
+    Npc* npcPtr = resolve_npc(script, npcID);
 
-INCLUDE_API_ASM(code_f2470_len_27f0, SetNpcAnimation);
+    if(npcPtr != NULL) {
+        npcPtr->jumpScale = jumpScale;
+        return ApiStatus_DONE2;
+    }
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_API_ASM(code_f2470_len_27f0, GetNpcAnimation);
+ApiStatus SetNpcAnimation(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* ptrReadPos = script->ptrReadPos;
+    NpcId npcID = get_variable(script, *ptrReadPos++);
+    s32 animation = get_variable(script, *ptrReadPos);
+    Npc* npcPtr = resolve_npc(script, npcID);
+
+    if (npcPtr != NULL) {
+        set_npc_animation(npcPtr, animation);
+        return ApiStatus_DONE2;
+    }
+    return ApiStatus_DONE2;
+}
+
+ApiStatus GetNpcAnimation(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* ptrReadPos = script->ptrReadPos;
+    NpcId npcID = get_variable(script, *ptrReadPos++);
+    Bytecode outVar = *ptrReadPos++;
+    Npc* npcPtr = resolve_npc(script, npcID);
+
+    if (npcPtr != NULL) {
+        set_variable(script, outVar, npcPtr->currentAnim);
+        return ApiStatus_DONE2;
+    }
+    return ApiStatus_DONE2;
+}
+
+ApiStatus SetNpcAnimationSpeed(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* ptrReadPos = script->ptrReadPos;
+    NpcId npcID = get_variable(script, *ptrReadPos++);
+    f32 animationSpeed = get_float_variable(script, *ptrReadPos++);
+    Npc* npcPtr = resolve_npc(script, npcID);
+
+    if (npcPtr != NULL) {
+        npcPtr->animationSpeed = animationSpeed;
+        return ApiStatus_DONE2;
+    }
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_API_ASM(code_f2470_len_27f0, NpcMoveTo);
 
 INCLUDE_ASM(code_f2470_len_27f0, _npc_jump_to);
 
-INCLUDE_API_ASM(code_f2470_len_27f0, NpcJump0);
+void NpcJump0(ScriptInstance* script, s32 isInitialCall) {
+    _npc_jump_to(script, isInitialCall, 0);
+}
 
-INCLUDE_API_ASM(code_f2470_len_27f0, NpcJump1);
+void NpcJump1(ScriptInstance* script, s32 isInitialCall) {
+    _npc_jump_to(script, isInitialCall, 1);
+}
 
 INCLUDE_API_ASM(code_f2470_len_27f0, NpcFlyTo);
 
-INCLUDE_API_ASM(code_f2470_len_27f0, GetNpcYaw);
+ApiStatus GetNpcYaw(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* ptrReadPos = script->ptrReadPos;
+    NpcId npcID = get_variable(script, *ptrReadPos++);
+    Bytecode outVar = *ptrReadPos++;
+    Npc* npcPtr = resolve_npc(script, npcID);
 
-INCLUDE_API_ASM(code_f2470_len_27f0, SetNpcYaw);
+    if (npcPtr != NULL) {
+        s32 todo = 1; // TODO: Figure out why this variable and subsequent if block is required for matching
+        if (todo) {
+            set_variable(script, outVar, clamp_angle(npcPtr->yaw));
+        }
+        return ApiStatus_DONE2;
+    }
+    return ApiStatus_DONE2;
+}
+
+ApiStatus SetNpcYaw(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* ptrReadPos = script->ptrReadPos;
+    NpcId npcID = get_variable(script, *ptrReadPos++);
+    Npc* npcPtr = resolve_npc(script, npcID);
+    
+    if (npcPtr != NULL) {
+        set_npc_yaw(npcPtr, get_variable(script, *ptrReadPos++));
+        return ApiStatus_DONE2;
+    }
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_API_ASM(code_f2470_len_27f0, InterpNpcYaw);
 
