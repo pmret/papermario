@@ -64,12 +64,10 @@ if __name__ == "__main__":
         print(f"The following functions have been matched but still exist in asm/nonmatchings/: {' '.join(matched_but_undeleted_asm)}")
 
         if "--fail-matched-undeleted" in argv:
-            print(f"The following functions have been matched but still exist in asm/nonmatchings/: {' '.join(matched_but_undeleted_asm)}")
             exit(1)
-        else:
-            if "--delete-matched" in argv or input("Delete them [y/N]? ").upper() == "Y":
-                for func in matched_but_undeleted_asm:
-                    file = glob(path.join(DIR, f"../asm/nonmatchings/*/{func}.s"))[0]
-                    remove(file)
+        elif "--delete-matched" in argv or input("Delete them [y/N]? ").upper() == "Y":
+            for func in matched_but_undeleted_asm:
+                file = glob(path.join(DIR, f"../asm/nonmatchings/*/{func}.s"))[0]
+                remove(file)
     elif len(asm) != len(non_matched):
         print(f"warning: number of INCLUDE_ASM macros ({len(asm)}) != number of asm files ({len(non_matched)})")
