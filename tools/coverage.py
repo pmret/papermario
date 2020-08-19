@@ -2,6 +2,7 @@
 
 from os import path
 from os import remove
+from sys import argv
 import re
 from glob import glob
 
@@ -36,14 +37,25 @@ for filename in C_FILES:
         matched += funcs_in_c(file.read())
 
 non_matched = [path.splitext(path.basename(filename))[0] for filename in ASM_FILES]
-
-total = len(matched) + len(non_matched)
-print(f"{len(matched)}/{total} ({(len(matched) / total) * 100:.2f}%)")
-
 matched_but_undeleted_asm = [f for f in matched if f in non_matched]
-if len(matched_but_undeleted_asm) > 0:
-    print(f"The following functions have been matched but still exist in asm/nonmatchings/: {' '.join(matched_but_undeleted_asm)}")
-    if input("Delete them [y/N]? ").upper() == "Y":
-        for func in matched_but_undeleted_asm:
-            file = glob(path.join(DIR, f"../asm/nonmatchings/*/{func}.s"))[0]
-            remove(file)
+
+if __name__ == "__main__":
+    if "--help" in argv:
+        print("--fail-matched-undeleted    exit with error code 1 if matched function(s) exist in asm/nonmatchings/")
+        print("--delete-matched            delete matched function(s) from asm/nonmatchings/ without asking")
+        exit()
+
+    total = len(matched) + len(non_matched)
+    print(f"{len(matched)}/{total} ({(len(matched) / total) * 100:.2f}%)")
+
+    if len(matched_but_undeleted_asm) > 0:
+        print(f"The following functions have been matched but still exist in asm/nonmatchings/: {' '.join(matched_but_undeleted_asm)}")
+
+        if "--fail-matched-undeleted" in argv:
+            print(f"The following functions have been matched but still exist in asm/nonmatchings/: {' '.join(matched_but_undeleted_asm)}")
+            exit(1)
+        else:
+            if "--delete-matched" in argv or input("Delete them [y/N]? ").upper() == "Y":
+                for func in matched_but_undeleted_asm:
+                    file = glob(path.join(DIR, f"../asm/nonmatchings/*/{func}.s"))[0]
+                    remove(file)
