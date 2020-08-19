@@ -35,6 +35,7 @@ f32 update_lerp(Easing easing, f32 start, f32 end, s32 elapsed, s32 duration);
 Npc* get_npc_safe(NpcId npcId);
 Npc* get_npc_unsafe(NpcId npcId);
 Npc* resolve_npc(ScriptInstance* script, NpcId npcIdOrPtr);
+void set_npc_yaw(Npc* npcPtr, f32 angle);
 
 f32 dist2D(f32 ax, f32 ay, f32 bx, f32 by);
 f32 dist3D(f32 ax, f32 ay, f32 az, f32 bx, f32 by, f32 bz);

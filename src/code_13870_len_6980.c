@@ -64,7 +64,7 @@ INCLUDE_ASM(code_13870_len_6980, func_8003B1A8);
 
 INCLUDE_ASM(code_13870_len_6980, func_8003B1B0);
 
-INCLUDE_ASM(code_13870_len_6980, set_npc_yaw);
+void INCLUDE_ASM(code_13870_len_6980, set_npc_yaw, Npc* npcPtr, f32 angle);
 
 INCLUDE_ASM(code_13870_len_6980, func_8003B3D0);
 

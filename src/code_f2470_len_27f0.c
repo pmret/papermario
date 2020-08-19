@@ -143,15 +143,43 @@ INCLUDE_API_ASM(code_f2470_len_27f0, NpcMoveTo);
 
 INCLUDE_ASM(code_f2470_len_27f0, _npc_jump_to);
 
-INCLUDE_API_ASM(code_f2470_len_27f0, NpcJump0);
+void NpcJump0(ScriptInstance* script, s32 isInitialCall) {
+    _npc_jump_to(script, isInitialCall, 0);
+}
 
-INCLUDE_API_ASM(code_f2470_len_27f0, NpcJump1);
+void NpcJump1(ScriptInstance* script, s32 isInitialCall) {
+    _npc_jump_to(script, isInitialCall, 1);
+}
 
 INCLUDE_API_ASM(code_f2470_len_27f0, NpcFlyTo);
 
-INCLUDE_API_ASM(code_f2470_len_27f0, GetNpcYaw);
+ApiStatus GetNpcYaw(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* ptrReadPos = script->ptrReadPos;
+    NpcId npcID = get_variable(script, *ptrReadPos++);
+    Bytecode outVar = *ptrReadPos++;
+    Npc* npcPtr = resolve_npc(script, npcID);
 
-INCLUDE_API_ASM(code_f2470_len_27f0, SetNpcYaw);
+    if (npcPtr != NULL) {
+        s32 todo = 1; // TODO: Figure out why this variable and subsequent if block is required for matching
+        if (todo) {
+            set_variable(script, outVar, clamp_angle(npcPtr->yaw));
+        }
+        return ApiStatus_DONE2; // Doesn't match if omitted
+    }
+    return ApiStatus_DONE2;
+}
+
+ApiStatus SetNpcYaw(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* ptrReadPos = script->ptrReadPos;
+    NpcId npcID = get_variable(script, *ptrReadPos++);
+    Npc* npcPtr = resolve_npc(script, npcID);
+    
+    if (npcPtr != NULL) {
+        set_npc_yaw(npcPtr, get_variable(script, *ptrReadPos++));
+        return ApiStatus_DONE2; // Doesn't match if omitted
+    }
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_API_ASM(code_f2470_len_27f0, InterpNpcYaw);
 
