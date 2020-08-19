@@ -70,7 +70,6 @@ s32 si_handle_if_AND(script_context* script) {
     return 2;
 }
 
-//INCLUDE_ASM(code_e92d0_len_5da0, si_handle_if_not_AND);
 s32 si_handle_if_not_AND(script_context* script) {
     s32 var1;
     s32 *ptrReadPos = script->ptrReadPos;
@@ -100,7 +99,7 @@ INCLUDE_ASM(code_e92d0_len_5da0, si_handle_switch_const);
 /*s32 si_handle_switch_const(script_context* script) {
     s32 ptrReadPos = *script->ptrReadPos;
     s8 switchDepth = script->switchDepth + 1;
-    
+
     if (switchDepth >= 8) {
         inf_loop: goto inf_loop; //todo
     }
@@ -143,7 +142,7 @@ s32 si_handle_break_case(script_context* script) {
 
 s32 si_handle_end_switch(script_context* script) {
     s32 switchDepth = script->switchDepth;
-    
+
     if (switchDepth < 0) {
         inf_loop: goto inf_loop; // todo macro? how to do without label
     }
@@ -249,7 +248,6 @@ INCLUDE_ASM(code_e92d0_len_5da0, si_handle_allocate_array);
 
 INCLUDE_ASM(code_e92d0_len_5da0, si_handle_AND);
 
-//INCLUDE_ASM(code_e92d0_len_5da0, si_handle_AND_const);
 s32 si_handle_AND_const(script_context* script) {
     s32* ptrReadPos = script->ptrReadPos;
     // todo ???
@@ -264,7 +262,6 @@ s32 si_handle_AND_const(script_context* script) {
 
 INCLUDE_ASM(code_e92d0_len_5da0, si_handle_OR);
 
-//INCLUDE_ASM(code_e92d0_len_5da0, si_handle_OR_const);
 s32 si_handle_OR_const(script_context* script) {
     s32* ptrReadPos = script->ptrReadPos;
     // todo ???
