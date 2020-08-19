@@ -72,19 +72,19 @@ INCLUDE_ASM(code_a5dd0_len_114e0, create_entity);
 
 INCLUDE_ASM(code_a5dd0_len_114e0, create_shadow_from_data);
 
-INCLUDE_ASM(code_a5dd0_len_114e0, MakeEntity);
+INCLUDE_API_ASM(code_a5dd0_len_114e0, MakeEntity);
 
-INCLUDE_ASM(code_a5dd0_len_114e0, AssignScript);
+INCLUDE_API_ASM(code_a5dd0_len_114e0, AssignScript);
 
-INCLUDE_ASM(code_a5dd0_len_114e0, AssignAreaFlag);
+INCLUDE_API_ASM(code_a5dd0_len_114e0, AssignAreaFlag);
 
-INCLUDE_ASM(code_a5dd0_len_114e0, AssignBlockFlag);
+INCLUDE_API_ASM(code_a5dd0_len_114e0, AssignBlockFlag);
 
-INCLUDE_ASM(code_a5dd0_len_114e0, AssignFlag);
+INCLUDE_API_ASM(code_a5dd0_len_114e0, AssignFlag);
 
-INCLUDE_ASM(code_a5dd0_len_114e0, AssignPanelFlag);
+INCLUDE_API_ASM(code_a5dd0_len_114e0, AssignPanelFlag);
 
-INCLUDE_ASM(code_a5dd0_len_114e0, AssignCrateFlag);
+INCLUDE_API_ASM(code_a5dd0_len_114e0, AssignCrateFlag);
 
 INCLUDE_ASM(code_a5dd0_len_114e0, create_entity_shadow);
 

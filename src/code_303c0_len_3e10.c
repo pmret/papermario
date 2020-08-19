@@ -92,7 +92,7 @@ INCLUDE_ASM(code_303c0_len_3e10, func_80056228);
 
 INCLUDE_ASM(code_303c0_len_3e10, func_80056250);
 
-INCLUDE_ASM(code_303c0_len_3e10, alRename4);
+INCLUDE_API_ASM(code_303c0_len_3e10, alRename4);
 
 INCLUDE_ASM(code_303c0_len_3e10, func_80056D34);
 
@@ -136,7 +136,7 @@ INCLUDE_ASM(code_303c0_len_3e10, func_80057ED0);
 
 INCLUDE_ASM(code_303c0_len_3e10, func_80057F20);
 
-INCLUDE_ASM(code_303c0_len_3e10, alRename3);
+INCLUDE_API_ASM(code_303c0_len_3e10, alRename3);
 
 INCLUDE_ASM(code_303c0_len_3e10, func_80057FD8);
 

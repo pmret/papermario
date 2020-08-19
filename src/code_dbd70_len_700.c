@@ -20,7 +20,7 @@ INCLUDE_ASM(code_dbd70_len_700, create_trigger);
 
 INCLUDE_ASM(code_dbd70_len_700, update_triggers);
 
-void delete_trigger(trigger* toDelete) {
+void delete_trigger(Trigger* toDelete) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(gCurrentTriggerListPtr); i++) {
@@ -37,7 +37,7 @@ void delete_trigger(trigger* toDelete) {
 
 INCLUDE_ASM(code_dbd70_len_700, is_trigger_bound);
 
-trigger* get_trigger_by_id(s32 triggerID) {
+Trigger* get_trigger_by_id(s32 triggerID) {
     return (*gCurrentTriggerListPtr)[triggerID];
 }
 

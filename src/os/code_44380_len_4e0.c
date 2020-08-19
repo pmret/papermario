@@ -6,4 +6,4 @@ s32 INCLUDE_ASM(os/code_44380_len_4e0, osPfsNumFiles, OSPfs* pfs, s32* unk1, s32
 
 s32 INCLUDE_ASM(os/code_44380_len_4e0, osPfsInitPak, OSMesgQueue* queue, OSPfs* pfs, int unk1);
 
-INCLUDE_ASM(os/code_44380_len_4e0, osPfsCheckRamArea);
+INCLUDE_API_ASM(os/code_44380_len_4e0, osPfsCheckRamArea);
