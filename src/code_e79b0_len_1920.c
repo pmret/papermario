@@ -64,7 +64,7 @@ s32 kill_all_scripts(void) {
     s32 i;
     ScriptInstance* scriptContextPtr;
 
-    for(i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
+    for (i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
         if (scriptContextPtr != NULL) {
             kill_script(scriptContextPtr);
@@ -77,7 +77,7 @@ s32 does_script_exist(s32 id) {
     s32 i;
     ScriptInstance* scriptContextPtr;
 
-    for(i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
+    for (i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
         if (scriptContextPtr != NULL && scriptContextPtr->uniqueID == id) {
             return 1;
@@ -89,8 +89,8 @@ s32 does_script_exist(s32 id) {
 s32 does_script_exist_by_ref(ScriptInstance* script) {
     s32 i;
 
-    for(i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
-        if(script == (*gCurrentScriptListPtr)[i]) {
+    for (i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
+        if (script == (*gCurrentScriptListPtr)[i]) {
             return 1;
         }
     }
@@ -139,7 +139,7 @@ void suspend_group_script(ScriptInstance* script, s32 groupFlags) {
         suspend_group_script(childScript, groupFlags);
     }
 
-    for(i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
+    for (i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
         if (scriptContextPtr != NULL && scriptContextPtr->parentScript == script) {
             suspend_group_script(scriptContextPtr, groupFlags);
@@ -160,7 +160,7 @@ void resume_group_script(ScriptInstance* script, s32 groupFlags) {
         resume_group_script(childScript, groupFlags);
     }
 
-    for(i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
+    for (i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
         if (scriptContextPtr != NULL && scriptContextPtr->parentScript == script) {
             suspend_group_script(scriptContextPtr, groupFlags);
@@ -298,7 +298,7 @@ void set_script_flags(ScriptInstance* script, s32 flags) {
         set_script_flags(childScript, flags);
     }
 
-    for(i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
+    for (i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
         if (scriptContextPtr != NULL && scriptContextPtr->parentScript == script) {
             set_script_flags(script->parentScript, flags);

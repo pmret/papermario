@@ -56,7 +56,7 @@ INCLUDE_ASM("code_e92d0_len_5da0", si_handle_if_greater_equal);
 
 ApiStatus si_handle_if_AND(ScriptInstance* script) {
     s32 var1;
-    s32 *ptrReadPos = script->ptrReadPos;
+    s32* ptrReadPos = script->ptrReadPos;
 
     var1 = ptrReadPos[0];
     ptrReadPos++;
@@ -71,7 +71,7 @@ ApiStatus si_handle_if_AND(ScriptInstance* script) {
 //INCLUDE_ASM("code_e92d0_len_5da0", si_handle_if_not_AND);
 ApiStatus si_handle_if_not_AND(ScriptInstance* script) {
     s32 var1;
-    s32 *ptrReadPos = script->ptrReadPos;
+    s32* ptrReadPos = script->ptrReadPos;
 
     var1 = ptrReadPos[0];
     ptrReadPos++;

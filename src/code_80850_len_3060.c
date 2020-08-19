@@ -300,7 +300,7 @@ void update_coin_counter(void) {
     UiStatus* uiStatus = &gUIStatus;
     PlayerData* playerData = &gPlayerData;
 
-    do {} while(0); // Needed to match
+    do {} while (0); // Needed to match
 
     if (uiStatus->unk_6C[1] != 0) {
         uiStatus->unk_6C[1] -= 1;
@@ -354,7 +354,7 @@ void show_coin_counter(void) {
         D_8010CD12 = 0;
     }
 
-    if (uiStatus->unk_6C[0]== 0) {
+    if (uiStatus->unk_6C[0] == 0) {
         func_80147CC8(0x14, 0x20, 0xa4, 0x40, 0x14, 0x15, &D_800E92D8, 0, -1);
         func_80147E7C(0x14, &D_80147474);
         index = create_icon(&D_80109270);
@@ -380,7 +380,7 @@ void show_coin_counter(void) {
 void hide_coin_counter(void) {
     UiStatus* uiStatus = &gUIStatus;
 
-    if ((D_8010CD10 != 0) && (uiStatus->unk_6C[0]== 0)) {
+    if ((D_8010CD10 != 0) && (uiStatus->unk_6C[0] == 0)) {
         uiStatus->unk_6C[0] = 60;
     }
 }
@@ -388,8 +388,8 @@ void hide_coin_counter(void) {
 void func_800E96C8(void) {
     UiStatus* uiStatus = &gUIStatus;
 
-    if ((D_8010CD10 != 0) && (uiStatus->unk_6C[0]== 0)) {
-        uiStatus->unk_6C[0]= 1;
+    if ((D_8010CD10 != 0) && (uiStatus->unk_6C[0] == 0)) {
+        uiStatus->unk_6C[0] = 1;
     }
 }
 

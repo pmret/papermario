@@ -522,7 +522,7 @@ typedef struct BattleStatus {
     /* 0x0B1 */ char unk_B1[3];
     /* 0x0B4 */ UNK_FUN_PTR(preUpdateCallback);
     /* 0x0B8 */ char unk_B8[4];
-    /* 0x0BC */ struct ScriptInstance* controlScript; /* control handed over to this when changing partners, maybe general? */
+    /* 0x0BC */ struct ScriptInstance* controlScript; /* control handed over to this when changing partners */
     /* 0x0C0 */ s32 controlScriptID;
     /* 0x0C4 */ struct ScriptInstance* camMovementScript;
     /* 0x0C8 */ s32 camMovementScriptID;

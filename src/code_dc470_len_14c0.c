@@ -31,7 +31,7 @@ void func_80145DF8(void) {
     gameStatus->enableBackground &= 0xF0;
 }
 
-void read_background_size(BackgroundHeader *bg) {
+void read_background_size(BackgroundHeader* bg) {
     GameStatus* gameStatus = *gGameStatusPtr;
 
     gameStatus->backgroundMaxW = bg->width;

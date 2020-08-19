@@ -14,12 +14,12 @@ ApiStatus MakeLerp(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus UpdateLerp(ScriptInstance* script, s32 isInitialCall) {
     script->varTable[0x0] = (s32) update_lerp(
-        script->varTable[0xB],
-        script->varTable[0xC],
-        script->varTable[0xD],
-        script->varTable[0xE],
-        script->varTable[0xF]
-    );
+                                script->varTable[0xB],
+                                script->varTable[0xC],
+                                script->varTable[0xD],
+                                script->varTable[0xE],
+                                script->varTable[0xF]
+                            );
 
     if (script->varTable[0xE] >= script->varTable[0xF]) {
         script->varTable[0x1] = 0; // finished
@@ -99,9 +99,9 @@ ApiStatus AwaitPlayerApproach(ScriptInstance* script, s32 isInitialCall) {
     }
 
     distance = dist2D(
-        playerStatus->position.x, playerStatus->position.z,
-        *targetX, *targetZ
-    );
+                   playerStatus->position.x, playerStatus->position.z,
+                   *targetX, *targetZ
+               );
 
     if (distance < *distanceRequired) {
         return ApiStatus_DONE2;
@@ -129,9 +129,9 @@ ApiStatus IsPlayerWithin(ScriptInstance* script, s32 isInitialCall) {
     }
 
     distance = dist2D(
-        playerStatus->position.x, playerStatus->position.z,
-        *targetX, *targetZ
-    );
+                   playerStatus->position.x, playerStatus->position.z,
+                   *targetX, *targetZ
+               );
 
     set_variable(script, outVar, 0);
     if (distance < *distanceRequired) {
@@ -158,9 +158,9 @@ ApiStatus AwaitPlayerLeave(ScriptInstance* script, s32 isInitialCall) {
     }
 
     distance = dist2D(
-        playerStatus->position.x, playerStatus->position.z,
-        *targetX, *targetZ
-    );
+                   playerStatus->position.x, playerStatus->position.z,
+                   *targetX, *targetZ
+               );
 
     if (distance > *distanceRequired) {
         return ApiStatus_DONE2;
@@ -264,11 +264,11 @@ ApiStatus GetDist2D(ScriptInstance* script, s32 isInitialCall) {
 
     Bytecode outVar = *ptrReadPos++;
     set_float_variable(script, outVar, dist2D(
-        get_float_variable(script, *ptrReadPos++),
-        get_float_variable(script, *ptrReadPos++),
-        get_float_variable(script, *ptrReadPos++),
-        get_float_variable(script, *ptrReadPos++)
-    ));
+                           get_float_variable(script, *ptrReadPos++),
+                           get_float_variable(script, *ptrReadPos++),
+                           get_float_variable(script, *ptrReadPos++),
+                           get_float_variable(script, *ptrReadPos++)
+                       ));
 
     return ApiStatus_DONE2;
 }
