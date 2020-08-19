@@ -272,13 +272,11 @@ ApiStatus EnablePartnerAI(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-// TODO: Figure out what this function does
 ApiStatus func_802CF54C(ScriptInstance* script, s32 isInitialCall) {
     func_800EF43C();
     return ApiStatus_DONE2;
 }
 
-// TODO: Figure out what this function does
 ApiStatus func_802CF56C(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
     s32 value = get_variable(script, *ptrReadPos++); 
@@ -297,7 +295,6 @@ INCLUDE_API_ASM(code_f2470_len_27f0, PutPartnerAway);
 
 INCLUDE_API_ASM(code_f2470_len_27f0, GetCurrentPartnerID);
 
-// TODO: Figure out what this function does
 ApiStatus SetNpcEffect(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
     NpcId npcID = get_variable(script, *ptrReadPos++);
