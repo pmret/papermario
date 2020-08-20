@@ -732,8 +732,8 @@ s32 is_ability_active(s32 arg0) {
     iVar5 = 0;
     //iVar7 = 0;
 
-    for(i = 5; i >= 0; i--) {
-      local_20[i] = 0;
+    for (i = 5; i >= 0; i--) {
+        local_20[i] = 0;
     }
 
     if (((*gGameStatusPtr)->unk_7E & 1) == 0) {
@@ -744,7 +744,7 @@ s32 is_ability_active(s32 arg0) {
             s32 index = i;
             badge = playerData->equippedBadges[index];
             if (playerData->equippedBadges[index] != 0) {
-              uVar4 = gItemTable[badge].moveID;
+                uVar4 = gItemTable[badge].moveID;
             }
             switch (arg0) {
                 case 0:
@@ -766,10 +766,10 @@ s32 is_ability_active(s32 arg0) {
                     break;
                 case 6:
                     if (uVar4 == 0x53) {
-                      iVar7++;
+                        iVar7++;
                     }
                     if (playerData->hasActionCommands != 0) {
-                      iVar7++;
+                        iVar7++;
                     }
                     continue;
                 case 7:
@@ -798,40 +798,40 @@ s32 is_ability_active(s32 arg0) {
                     break;
                 case 0xf:
                     if (uVar4 == 0x54) {
-                      local_20[piVar6] = 1;
-                      piVar6++;
-                      iVar5++;
-                      iVar7 = -1;
+                        local_20[piVar6] = 1;
+                        piVar6++;
+                        iVar5++;
+                        iVar7 = -1;
                     }
                     if (uVar4 == 0x55) {
-                      local_20[piVar6] = 2;
-                      piVar6++;
-                      iVar5++;
-                      iVar7 = -1;
+                        local_20[piVar6] = 2;
+                        piVar6++;
+                        iVar5++;
+                        iVar7 = -1;
                     }
                     if (uVar4 == 0x56) {
-                      local_20[piVar6] = 3;
-                      piVar6++;
-                      iVar5++;
-                      iVar7 = -1;
+                        local_20[piVar6] = 3;
+                        piVar6++;
+                        iVar5++;
+                        iVar7 = -1;
                     }
                     if (uVar4 == 0x57) {
-                      local_20[piVar6] = 4;
-                      piVar6++;
-                      iVar5++;
-                      iVar7 = -1;
+                        local_20[piVar6] = 4;
+                        piVar6++;
+                        iVar5++;
+                        iVar7 = -1;
                     }
                     if (uVar4 == 0x58) {
-                      local_20[piVar6] = 5;
-                      piVar6++;
-                      iVar5++;
-                      iVar7 = -1;
+                        local_20[piVar6] = 5;
+                        piVar6++;
+                        iVar5++;
+                        iVar7 = -1;
                     }
                     if (uVar4 == 0x59) {
-                      local_20[piVar6] = 6;
-                      piVar6++;
-                      iVar5++;
-                      iVar7 = -1;
+                        local_20[piVar6] = 6;
+                        piVar6++;
+                        iVar5++;
+                        iVar7 = -1;
                     }
                     continue;
                 case 0x10:
@@ -955,7 +955,7 @@ s32 is_ability_active(s32 arg0) {
                     uVar3 = 0x4a;
             }
             if (uVar4 == uVar3) {
-              iVar7++;
+                iVar7++;
             }
         }
         if (iVar7 < 0) {

@@ -317,7 +317,7 @@ void clear_script_flags(ScriptInstance* script, s32 flags) {
         clear_script_flags(childScript, flags);
     }
 
-    for(i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
+    for (i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
         if (scriptContextPtr != NULL && scriptContextPtr->parentScript == script) {
             clear_script_flags(script->parentScript, flags);
