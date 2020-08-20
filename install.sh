@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Ubuntu
 if command -v apt-install &> /dev/null; then
@@ -8,8 +8,8 @@ if command -v apt-install &> /dev/null; then
 
     if [[ $1 == "--extra" ]]; then
         echo "Installing extra"
-        sudo apt install -y python3 python3-pip clang-tidy clang-format
-        python3 -m pip install stringcase
+        sudo apt install -y python3 python3-pip clang-tidy astyle || exit 1
+        python3 -m pip install stringcase || exit 1
     fi
 
     echo "Done"
@@ -48,7 +48,7 @@ if command -v pacman &> /dev/null; then
 
     if [[ $1 == "--extra" ]]; then
         echo "Installing extra"
-        sudo pacman -S --noconfirm --needed python python-pip clang || exit 1
+        sudo pacman -S --noconfirm --needed python python-pip clang astyle || exit 1
         python3 -m pip install stringcase || exit 1
     fi
 

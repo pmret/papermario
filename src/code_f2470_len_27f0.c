@@ -10,7 +10,7 @@ Npc* resolve_npc(ScriptInstance* script, NpcId npcIdOrPtr) {
     }
 }
 
-INCLUDE_ASM(code_f2470_len_27f0, set_npc_animation);
+INCLUDE_ASM("code_f2470_len_27f0", set_npc_animation);
 
 ApiStatus DeleteNpc(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
@@ -28,13 +28,13 @@ ApiStatus GetNpcPointer(ScriptInstance* script, s32 isInitialCall) {
     NpcId npcID = get_variable(script, *ptrReadPos++);
     Bytecode varNPC = *ptrReadPos++;
 
-    set_variable(script, varNPC, get_npc_safe(npcID));
+    set_variable(script, varNPC, (s32)get_npc_safe(npcID));
     return ApiStatus_DONE2;
 }
 
-INCLUDE_API_ASM(code_f2470_len_27f0, SetNpcPos);
+INCLUDE_API_ASM("code_f2470_len_27f0", SetNpcPos);
 
-INCLUDE_API_ASM(code_f2470_len_27f0, SetNpcRotation);
+INCLUDE_API_ASM("code_f2470_len_27f0", SetNpcRotation);
 
 ApiStatus SetNpcScale(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
@@ -80,7 +80,7 @@ ApiStatus SetNpcSpeed(ScriptInstance* script, s32 isInitialCall) {
     f32 speed = get_float_variable(script, *ptrReadPos);
     Npc* npcPtr = resolve_npc(script, npcID);
 
-    if(npcPtr != NULL) {
+    if (npcPtr != NULL) {
         npcPtr->moveSpeed = speed;
         return ApiStatus_DONE2;
     }
@@ -93,7 +93,7 @@ ApiStatus SetNpcJumpscale(ScriptInstance* script, s32 isInitialCall) {
     f32 jumpScale = get_float_variable(script, *ptrReadPos);
     Npc* npcPtr = resolve_npc(script, npcID);
 
-    if(npcPtr != NULL) {
+    if (npcPtr != NULL) {
         npcPtr->jumpScale = jumpScale;
         return ApiStatus_DONE2;
     }
@@ -139,9 +139,9 @@ ApiStatus SetNpcAnimationSpeed(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_API_ASM(code_f2470_len_27f0, NpcMoveTo);
+INCLUDE_API_ASM("code_f2470_len_27f0", NpcMoveTo);
 
-INCLUDE_ASM(code_f2470_len_27f0, _npc_jump_to);
+INCLUDE_ASM("code_f2470_len_27f0", _npc_jump_to);
 
 void NpcJump0(ScriptInstance* script, s32 isInitialCall) {
     _npc_jump_to(script, isInitialCall, 0);
@@ -151,7 +151,7 @@ void NpcJump1(ScriptInstance* script, s32 isInitialCall) {
     _npc_jump_to(script, isInitialCall, 1);
 }
 
-INCLUDE_API_ASM(code_f2470_len_27f0, NpcFlyTo);
+INCLUDE_API_ASM("code_f2470_len_27f0", NpcFlyTo);
 
 ApiStatus GetNpcYaw(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
@@ -173,7 +173,7 @@ ApiStatus SetNpcYaw(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
     NpcId npcID = get_variable(script, *ptrReadPos++);
     Npc* npcPtr = resolve_npc(script, npcID);
-    
+
     if (npcPtr != NULL) {
         set_npc_yaw(npcPtr, get_variable(script, *ptrReadPos++));
         return ApiStatus_DONE2;
@@ -181,36 +181,36 @@ ApiStatus SetNpcYaw(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_API_ASM(code_f2470_len_27f0, InterpNpcYaw);
+INCLUDE_API_ASM("code_f2470_len_27f0", InterpNpcYaw);
 
-INCLUDE_API_ASM(code_f2470_len_27f0, NpcFacePlayer);
+INCLUDE_API_ASM("code_f2470_len_27f0", NpcFacePlayer);
 
-INCLUDE_API_ASM(code_f2470_len_27f0, NpcFaceNpc);
+INCLUDE_API_ASM("code_f2470_len_27f0", NpcFaceNpc);
 
-INCLUDE_API_ASM(code_f2470_len_27f0, SetNpcFlagBits);
+INCLUDE_API_ASM("code_f2470_len_27f0", SetNpcFlagBits);
 
-INCLUDE_API_ASM(code_f2470_len_27f0, GetNpcPos);
+INCLUDE_API_ASM("code_f2470_len_27f0", GetNpcPos);
 
-INCLUDE_API_ASM(code_f2470_len_27f0, EnableNpcShadow);
+INCLUDE_API_ASM("code_f2470_len_27f0", EnableNpcShadow);
 
-INCLUDE_API_ASM(code_f2470_len_27f0, EnableNpcBlur);
+INCLUDE_API_ASM("code_f2470_len_27f0", EnableNpcBlur);
 
-INCLUDE_API_ASM(code_f2470_len_27f0, ClearPartnerMoveHistory);
+INCLUDE_API_ASM("code_f2470_len_27f0", ClearPartnerMoveHistory);
 
-INCLUDE_API_ASM(code_f2470_len_27f0, NpcSetHomePosToCurrent);
+INCLUDE_API_ASM("code_f2470_len_27f0", NpcSetHomePosToCurrent);
 
-INCLUDE_API_ASM(code_f2470_len_27f0, GetPartnerPos);
+INCLUDE_API_ASM("code_f2470_len_27f0", GetPartnerPos);
 
-INCLUDE_API_ASM(code_f2470_len_27f0, DisablePartnerAI);
+INCLUDE_API_ASM("code_f2470_len_27f0", DisablePartnerAI);
 
-INCLUDE_API_ASM(code_f2470_len_27f0, EnablePartnerAI);
+INCLUDE_API_ASM("code_f2470_len_27f0", EnablePartnerAI);
 
-INCLUDE_API_ASM(code_f2470_len_27f0, BringPartnerOut);
+INCLUDE_API_ASM("code_f2470_len_27f0", BringPartnerOut);
 
-INCLUDE_API_ASM(code_f2470_len_27f0, PutPartnerAway);
+INCLUDE_API_ASM("code_f2470_len_27f0", PutPartnerAway);
 
-INCLUDE_API_ASM(code_f2470_len_27f0, GetCurrentPartnerID);
+INCLUDE_API_ASM("code_f2470_len_27f0", GetCurrentPartnerID);
 
-INCLUDE_API_ASM(code_f2470_len_27f0, SetNpcEffect);
+INCLUDE_API_ASM("code_f2470_len_27f0", SetNpcEffect);
 
-INCLUDE_API_ASM(code_f2470_len_27f0, PlaySoundAtNpc);
+INCLUDE_API_ASM("code_f2470_len_27f0", PlaySoundAtNpc);
