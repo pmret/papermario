@@ -1,6 +1,6 @@
 #include "common.h"
 
-INCLUDE_ASM(guOrtho, guOrthoF);
+INCLUDE_ASM("guOrtho", guOrthoF);
 /*void guOrthoF(f32 mf[4][4], f32 left, f32 right, f32 bottom, f32 top, f32 near, f32 far, f32 scale) {
     s32 i, j;
 
@@ -21,7 +21,7 @@ INCLUDE_ASM(guOrtho, guOrthoF);
     }
 }*/
 
-INCLUDE_ASM(guOrtho, guOrtho);
+INCLUDE_ASM("guOrtho", guOrtho);
 /*void guOrtho(Mtx* mtx, f32 left, f32 right, f32 bottom, f32 top, f32 near, f32 far, f32 scale) {
     float mf[4][4];
 

@@ -22,8 +22,8 @@ ifdef PM_HEADER_REBUILD
 	H_FILES := $(foreach dir,$(INCLUDE_DIRS),$(wildcard $(dir)/*.h))
 endif
 DATA_FILES := $(foreach dir,$(DATA_DIRS),$(wildcard $(dir)/*.bin))
-COMPRESSED_FILES := $(foreach dir,$(COMPRESSED_DIRS),$(wildcard $(dir)/*.yay0)) 
-MAP_FILES := $(foreach dir,$(MAP_DIRS),$(wildcard $(dir)/*.FS)) 
+COMPRESSED_FILES := $(foreach dir,$(COMPRESSED_DIRS),$(wildcard $(dir)/*.yay0))
+MAP_FILES := $(foreach dir,$(MAP_DIRS),$(wildcard $(dir)/*.FS))
 BGM_FILES := $(foreach dir,$(BGM_DIRS),$(wildcard $(dir)/*.bgm))
 
 # Object files
@@ -54,10 +54,10 @@ OBJCOPY = $(CROSS)objcopy
 
 TARGET = papermario
 
-CPPFLAGS = -Iinclude -D _LANGUAGE_C -ffreestanding -DF3DEX_GBI_2
+CPPFLAGS = -fno-builtin -Iinclude -D _LANGUAGE_C -ffreestanding -DF3DEX_GBI_2
 ASFLAGS = -EB -march=vr4300 -mtune=vr4300 -Iinclude
 OLDASFLAGS= -EB -Iinclude
-CFLAGS  = -O2 -quiet -G 0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32
+CFLAGS  = -fno-builtin -O2 -quiet -G 0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32
 LDFLAGS = -T undefined_syms.txt -T $(LD_SCRIPT) -Map $(BUILD_DIR)/papermario.map --no-check-sections
 
 ######################## Targets #############################
