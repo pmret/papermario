@@ -4,11 +4,11 @@
 s32 func_802B7000(f32 angle) {
     s32 angleDiff;
 
-    if (270.0f <= angle) {
+    if (angle >= 270.0f) {
         angleDiff = 360.0f - angle;
-    } else if (180.0f <= angle) {
+    } else if (angle >= 180.0f) {
         angleDiff = angle - 180.0f;
-    } else if (90.0f <= angle) {
+    } else if (angle >= 90.0f) {
         angleDiff = 180.0f - angle;
     } else {
         angleDiff = angle;
