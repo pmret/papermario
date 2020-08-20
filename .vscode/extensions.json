@@ -2,5 +2,9 @@
     "recommendations": [
         "ms-vscode.cpptools",
         "nanaian.vscode-star-rod",
-	],
+        "notskm.clang-tidy",
+    ],
+    "unwantedRecommendations": [
+        "llvm-vs-code-extensions.vscode-clangd",
+    ],
 }

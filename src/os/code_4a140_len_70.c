@@ -1,5 +1,5 @@
 #include "common.h"
 
-INCLUDE_API_ASM(os/code_4a140_len_70, strcpy);
+char* INCLUDE_ASM("os/code_4a140_len_70", strcpy, char* destination, const char* source);
 
-INCLUDE_API_ASM(os/code_4a140_len_70, strcmp);
+s32 INCLUDE_ASM("os/code_4a140_len_70", strcmp, const char* str1, const char* str2);

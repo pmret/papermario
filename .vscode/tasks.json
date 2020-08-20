@@ -9,7 +9,7 @@
                 {
                     "fileLocation": ["relative", "${workspaceFolder}"],
                     "pattern": {
-                        "regexp": "^(src\\/.*):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                        "regexp": "^(src\\/.*|include\\/.*):(\\d+):\\s+(warning|error):\\s+(.*)$",
                         "file": 1,
                         "line": 2,
                         "severity": 3,
@@ -20,7 +20,7 @@
                     "fileLocation": ["relative", "${workspaceFolder}"],
                     "severity": "error",
                     "pattern": {
-                        "regexp": "^(src\\/.*):(\\d+):\\s+(?!warning|\\()(.*)$",
+                        "regexp": "^(src\\/.*|include\\/.*):(\\d+):\\s+(?!warning|\\()(.*)$",
                         "file": 1,
                         "line": 2,
                         "message": 3,
@@ -44,7 +44,7 @@
                         "activeOnStart": true,
                     },
                     "pattern": {
-                        "regexp": "^(src\\/.*):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                        "regexp": "^(src\\/.*|include\\/.*):(\\d+):\\s+(warning|error):\\s+(.*)$",
                         "file": 1,
                         "line": 2,
                         "severity": 3,
@@ -58,7 +58,7 @@
                     },
                     "severity": "error",
                     "pattern": {
-                        "regexp": "^(src\\/.*):(\\d+):\\s+(?!warning|\\()(.*)$",
+                        "regexp": "^(src\\/.*|include\\/.*):(\\d+):\\s+(?!warning|\\()(.*)$",
                         "file": 1,
                         "line": 2,
                         "message": 3,

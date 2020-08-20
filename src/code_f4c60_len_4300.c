@@ -16,17 +16,17 @@ ApiStatus SpeakToNpc(ScriptInstance* script, s32 isInitialCall) {
     return _show_message(script, isInitialCall, 3);
 }
 
-INCLUDE_ASM(code_f4c60_len_4300, _show_message);
+INCLUDE_ASM("code_f4c60_len_4300", _show_message);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, ShowMessageAtScreenPos);
+INCLUDE_API_ASM("code_f4c60_len_4300", ShowMessageAtScreenPos);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, ShowMessageAtWorldPos);
+INCLUDE_API_ASM("code_f4c60_len_4300", ShowMessageAtWorldPos);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, CloseMessage);
+INCLUDE_API_ASM("code_f4c60_len_4300", CloseMessage);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, SwitchMessage);
+INCLUDE_API_ASM("code_f4c60_len_4300", SwitchMessage);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, ShowChoice);
+INCLUDE_API_ASM("code_f4c60_len_4300", ShowChoice);
 
 ApiStatus CloseChoice(ScriptInstance* script, s32 isInitialCall) {
     close_message(D_802DB268);
@@ -78,95 +78,95 @@ ApiStatus SetMessageValue(ScriptInstance* script, s32 initialCall) {
     return ApiStatus_DONE2;
 }
 #else
-INCLUDE_API_ASM(code_f4c60_len_4300, SetMessageValue);
+INCLUDE_API_ASM("code_f4c60_len_4300", SetMessageValue);
 #endif
 
-INCLUDE_API_ASM(code_f4c60_len_4300, HidePlayerShadow);
+INCLUDE_API_ASM("code_f4c60_len_4300", HidePlayerShadow);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, DisablePlayerPhysics);
+INCLUDE_API_ASM("code_f4c60_len_4300", DisablePlayerPhysics);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, DisablePlayerInput);
+INCLUDE_API_ASM("code_f4c60_len_4300", DisablePlayerInput);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, SetPlayerPos);
+INCLUDE_API_ASM("code_f4c60_len_4300", SetPlayerPos);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, SetPlayerCollisionSize);
+INCLUDE_API_ASM("code_f4c60_len_4300", SetPlayerCollisionSize);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, SetPlayerSpeed);
+INCLUDE_API_ASM("code_f4c60_len_4300", SetPlayerSpeed);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, SetPlayerJumpscale);
+INCLUDE_API_ASM("code_f4c60_len_4300", SetPlayerJumpscale);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, SetPlayerAnimation);
+INCLUDE_API_ASM("code_f4c60_len_4300", SetPlayerAnimation);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, SetPlayerActionState);
+INCLUDE_API_ASM("code_f4c60_len_4300", SetPlayerActionState);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, MovePlayerTo);
+INCLUDE_API_ASM("code_f4c60_len_4300", MovePlayerTo);
 
-INCLUDE_ASM(code_f4c60_len_4300, player_jump);
+INCLUDE_ASM("code_f4c60_len_4300", player_jump);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, PlayerJump);
+INCLUDE_API_ASM("code_f4c60_len_4300", PlayerJump);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, PlayerJump1);
+INCLUDE_API_ASM("code_f4c60_len_4300", PlayerJump1);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, PlayerJump2);
+INCLUDE_API_ASM("code_f4c60_len_4300", PlayerJump2);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, InterpPlayerYaw);
+INCLUDE_API_ASM("code_f4c60_len_4300", InterpPlayerYaw);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, PlayerFaceNpc);
+INCLUDE_API_ASM("code_f4c60_len_4300", PlayerFaceNpc);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, GetPlayerTargetYaw);
+INCLUDE_API_ASM("code_f4c60_len_4300", GetPlayerTargetYaw);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, SetPlayerFlagBits);
+INCLUDE_API_ASM("code_f4c60_len_4300", SetPlayerFlagBits);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, GetPlayerActionState);
+INCLUDE_API_ASM("code_f4c60_len_4300", GetPlayerActionState);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, GetPlayerPos);
+INCLUDE_API_ASM("code_f4c60_len_4300", GetPlayerPos);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, GetPlayerAnimation);
+INCLUDE_API_ASM("code_f4c60_len_4300", GetPlayerAnimation);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, FullyRestoreHPandFP);
+INCLUDE_API_ASM("code_f4c60_len_4300", FullyRestoreHPandFP);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, FullyRestoreSP);
+INCLUDE_API_ASM("code_f4c60_len_4300", FullyRestoreSP);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, EnablePartner);
+INCLUDE_API_ASM("code_f4c60_len_4300", EnablePartner);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, DisablePartner);
+INCLUDE_API_ASM("code_f4c60_len_4300", DisablePartner);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, ForceExitHeading);
+INCLUDE_API_ASM("code_f4c60_len_4300", ForceExitHeading);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, UseExitHeading);
+INCLUDE_API_ASM("code_f4c60_len_4300", UseExitHeading);
 
-INCLUDE_ASM(code_f4c60_len_4300, func_802D23F8);
+INCLUDE_ASM("code_f4c60_len_4300", func_802D23F8);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, DisablePulseStone);
+INCLUDE_API_ASM("code_f4c60_len_4300", DisablePulseStone);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, GetCurrentPartner);
+INCLUDE_API_ASM("code_f4c60_len_4300", GetCurrentPartner);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, Disable8bitMario);
+INCLUDE_API_ASM("code_f4c60_len_4300", Disable8bitMario);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, PlaySoundAtPlayer);
+INCLUDE_API_ASM("code_f4c60_len_4300", PlaySoundAtPlayer);
 
-INCLUDE_ASM(code_f4c60_len_4300, func_802D2D30);
+INCLUDE_ASM("code_f4c60_len_4300", func_802D2D30);
 
-INCLUDE_ASM(code_f4c60_len_4300, func_802D2F34);
+INCLUDE_ASM("code_f4c60_len_4300", func_802D2F34);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, CreateImageObj);
+INCLUDE_API_ASM("code_f4c60_len_4300", CreateImageObj);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, RemoveImageObj);
+INCLUDE_API_ASM("code_f4c60_len_4300", RemoveImageObj);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, SetObjPosition);
+INCLUDE_API_ASM("code_f4c60_len_4300", SetObjPosition);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, SetObjRotation);
+INCLUDE_API_ASM("code_f4c60_len_4300", SetObjRotation);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, SetObjScale);
+INCLUDE_API_ASM("code_f4c60_len_4300", SetObjScale);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, SetObjJumpScale);
+INCLUDE_API_ASM("code_f4c60_len_4300", SetObjJumpScale);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, JumpObj);
+INCLUDE_API_ASM("code_f4c60_len_4300", JumpObj);
 
-INCLUDE_ASM(code_f4c60_len_4300, func_802D4164);
+INCLUDE_ASM("code_f4c60_len_4300", func_802D4164);
 
-INCLUDE_ASM(code_f4c60_len_4300, func_802D43F4);
+INCLUDE_ASM("code_f4c60_len_4300", func_802D43F4);
 
-INCLUDE_ASM(code_f4c60_len_4300, func_802D4488);
+INCLUDE_ASM("code_f4c60_len_4300", func_802D4488);
 
-INCLUDE_ASM(code_f4c60_len_4300, func_802D4560);
+INCLUDE_ASM("code_f4c60_len_4300", func_802D4560);

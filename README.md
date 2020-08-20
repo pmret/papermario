@@ -94,7 +94,16 @@ You're on your own now. Get your C code compiling to match the original assembly
 
 If you use Visual Studio Code, you can use _Run Test Task_ to run `diff.py` and show you errors and warnings from the compiler inline. You might want to attach _Run Test Task_ to a keybinding, as you'll be using it often.
 
-Once you've matched a function, delete its assembly file. Run `./coverage.py --delete-matched` to do this automatically.
+#### After matching
+
+Once you've matched a function, run the following scripts:
+
+```sh
+$ ./coverage.py --delete-matched
+$ ./format.sh
+```
+
+If `format.sh` has any problems with your code, go and fix the issues. If you can't fix a warning without making the function not match anymore, append `// NOLINT` to the offending line.
 
 ## FAQ
 

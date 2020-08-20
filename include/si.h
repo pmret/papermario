@@ -1,6 +1,9 @@
 #ifndef _SI_H_
 #define _SI_H_
 
+#include "ultra64.h"
+#include "types.h"
+
 #define SI_VAR_0 0xFE363C80
 
 /* Return type of si_execute_next_command */

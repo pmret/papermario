@@ -18,7 +18,7 @@ typedef struct {
 
 extern struct_func_800F0CB0 D_8010D000[];
 
-INCLUDE_ASM(code_8a160_len_700, func_800F0CB0);
+INCLUDE_ASM("code_8a160_len_700", func_800F0CB0);
 // void func_800F0CB0(s32 arg0, f32 arg1, f32 arg2, f32 arg3)
 //{
 //    sub_struct_func_800F0CB0 *temp_a1 = &D_8010D000[arg0].unk00[0];
@@ -49,7 +49,7 @@ void func_800F0D5C(void) {
     }
 }
 
-INCLUDE_ASM(code_8a160_len_700, func_800F0D80);
+INCLUDE_ASM("code_8a160_len_700", func_800F0D80);
 
 /*extern u16 D_800741F0;
 extern Gfx *D_8009A66C;
@@ -58,7 +58,7 @@ extern void *D_801096B0;
 extern Gfx D_80109710[];
 extern Gfx D_801097D8[];*/
 
-INCLUDE_ASM(code_8a160_len_700, func_800F102C);
+INCLUDE_ASM("code_8a160_len_700", func_800F102C);
 /*void func_800F102C(void) {
     s32 temp_s2;
     s32 temp_s7;

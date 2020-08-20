@@ -50,9 +50,9 @@ s32 heap_free(s32 size) {
     }
 }
 
-INCLUDE_ASM(code_6000, collision_heap_create);
+INCLUDE_ASM("code_6000", collision_heap_create);
 
-INCLUDE_ASM(code_6000, collision_heap_malloc);
+INCLUDE_ASM("code_6000", collision_heap_malloc);
 
 #ifdef NON_MATCHING
 s32 collision_heap_free(s32 size) {
@@ -61,5 +61,5 @@ s32 collision_heap_free(s32 size) {
     return _heap_free((isBattle == 0) ? (&D_80268000) : (&D_803DA800), size);
 }
 #else
-INCLUDE_ASM(code_6000, collision_heap_free);
+INCLUDE_ASM("code_6000", collision_heap_free);
 #endif
