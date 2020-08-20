@@ -7,8 +7,8 @@ import re
 from glob import glob
 
 DIR = path.dirname(__file__)
-C_FILES = glob(path.join(DIR, "../src/*.c"))
-ASM_FILES = glob(path.join(DIR, "../asm/nonmatchings/**/*.s"))
+C_FILES = glob(path.join(DIR, "src/*.c"))
+ASM_FILES = glob(path.join(DIR, "asm/nonmatchings/**/*.s"))
 
 def strip_c_comments(text):
     def replacer(match):
