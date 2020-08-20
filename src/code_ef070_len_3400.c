@@ -4,7 +4,7 @@ ApiStatus SetCamEnabled(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
     Bytecode id = get_variable(script, *ptrReadPos++);
     Bytecode enabled = get_variable(script, *ptrReadPos++);
- 
+
     if (!enabled) {
         (&gCameras[id])->flags |= 0x2;
     } else {
@@ -64,11 +64,11 @@ ApiStatus func_802CA988(ScriptInstance* script, s32 isInitialCall) {
     Bytecode outVar4 = *ptrReadPos++;
     f32 temp1, temp2, temp3;
     f32 tempSqrt;
-    
+
     (&gCameras[id])->mode = 2;
-    (&gCameras[id])->unk_06 = 0;
     (&gCameras[id])->unk_1C = -1 * round((&gCameras[id])->currentPitch);
     (&gCameras[id])->unk_1E = -1 * (&gCameras[id])->currentBlendedYawNegated;
+    (&gCameras[id])->unk_06 = 0;
 
     temp1 = (&gCameras[id])->lookAt_obj[0] - (&gCameras[id])->lookAt_eye[0];
     temp2 = (&gCameras[id])->lookAt_obj[1] - (&gCameras[id])->lookAt_eye[1];
