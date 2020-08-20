@@ -335,8 +335,7 @@ ApiStatus AddStarPieces(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_API_ASM("code_fa4c0_len_3bf0", GetItemPower);
-/*
+#ifdef NON_MATCHING
 // Close to working
 ApiStatus GetItemPower(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
@@ -349,7 +348,9 @@ ApiStatus GetItemPower(ScriptInstance* script, s32 isInitialCall) {
     set_variable(script, ptrNextPos++, item->potencyB);
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_API_ASM("code_fa4c0_len_3bf0", GetItemPower);
+#endif
 
 INCLUDE_API_ASM("code_fa4c0_len_3bf0", ShowGotItem);
 
@@ -359,8 +360,7 @@ INCLUDE_ASM("code_fa4c0_len_3bf0", func_802D74C0);
 
 INCLUDE_API_ASM("code_fa4c0_len_3bf0", ShowEmote);
 
-INCLUDE_API_ASM("code_fa4c0_len_3bf0", RemoveEffect);
-/*
+#ifdef NON_MATCHING
 // Works
 ApiStatus RemoveEffect(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
@@ -398,8 +398,10 @@ ApiStatus func_802D7B74(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-// More functions still in RemoveEffect.s but the ones above are matching properly
-*/
+// TODO: More functions still in RemoveEffect.s but the ones above are matching properly
+#else
+INCLUDE_API_ASM("code_fa4c0_len_3bf0", RemoveEffect);
+#endif
 
 INCLUDE_API_ASM("code_fa4c0_len_3bf0", ShowSleepBubble);
 

@@ -370,7 +370,6 @@ INCLUDE_ASM("code_e92d0_len_5da0", si_handle_allocate_array);
 
 INCLUDE_ASM("code_e92d0_len_5da0", si_handle_AND);
 
-//INCLUDE_ASM("code_e92d0_len_5da0", si_handle_AND_const);
 ApiStatus si_handle_AND_const(ScriptInstance* script) {
     Bytecode* ptrReadPos = script->ptrReadPos;
 
@@ -385,7 +384,6 @@ ApiStatus si_handle_AND_const(ScriptInstance* script) {
 
 INCLUDE_ASM("code_e92d0_len_5da0", si_handle_OR);
 
-//INCLUDE_ASM("code_e92d0_len_5da0", si_handle_OR_const);
 ApiStatus si_handle_OR_const(ScriptInstance* script) {
     Bytecode* ptrReadPos = script->ptrReadPos;
 

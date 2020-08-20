@@ -1,6 +1,5 @@
 #include "common.h"
 
-
 void default_trigger_function_handler(s32* arg0) {
     arg0[0] |= 2;
 }
@@ -20,7 +19,6 @@ void init_trigger_list(void) {
 INCLUDE_ASM("code_dbd70_len_700", create_trigger);
 
 INCLUDE_ASM("code_dbd70_len_700", update_triggers);
-
 
 void delete_trigger(Trigger* toDelete) {
     s32 i;
@@ -43,8 +41,8 @@ Trigger* get_trigger_by_id(s32 triggerID) {
     return (*gCurrentTriggerListPtr)[triggerID];
 }
 
-INCLUDE_ASM("code_dbd70_len_700", func_80145CE8);
-/*s32 func_80145CE8(s32 arg0) {
+#ifdef NON_MATCHING
+s32 func_80145CE8(s32 arg0) {
     s32 i;
     s32 ret;
 
@@ -62,4 +60,7 @@ INCLUDE_ASM("code_dbd70_len_700", func_80145CE8);
     }
 
     return ret;
-}*/
+}
+#else
+INCLUDE_ASM("code_dbd70_len_700", func_80145CE8);
+#endif
