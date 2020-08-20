@@ -4,7 +4,7 @@ INCLUDE_ASM("code_7bb60_len_41b0", func_800E26B0);
 
 INCLUDE_ASM("code_7bb60_len_41b0", func_800E26C4);
 
-INCLUDE_ASM("code_7bb60_len_41b0", move_player);
+void set_action_state(s32 actionState);
 
 void move_player(s16 duration, f32 heading, f32 speed) {
     PlayerStatus* player_status = &gPlayerStatus;
@@ -83,7 +83,95 @@ INCLUDE_ASM("code_7bb60_len_41b0", func_800E5A2C);
 
 INCLUDE_ASM("code_7bb60_len_41b0", func_800E5C78);
 
-INCLUDE_ASM("code_7bb60_len_41b0", set_action_state);
+#ifdef NON_MATCHING
+void set_action_state(s32 actionState) {
+    PlayerStatus* player_status = &gPlayerStatus;
+    PlayerData* player_data = &gPlayerData;
+    UNK_TYPE* unknown_struct = &D_8010F250;
+
+    //s32 player_status->animFlags;
+    s32 temp_a1;
+    s32 temp_v0;
+    s32 temp_v0_2;
+    s32 isMovementAllowed;
+    s32 temp_v0_4;
+    //s32 player_status->flags;
+    SoundId sound;
+    u8 partner;
+    u8 partnerIgnoresHazards;
+    UNK_PTR** temp_v0_5;
+    s32 phi_return;
+
+    if (player_status->flags & 0x200) {
+        player_status->flags &= -0x201;
+        func_800E01A4();
+    }
+
+    //player_status->animFlags = player_status->animFlags;
+    isMovementAllowed = actionState < ActionState_CONVERSATION;
+    if (player_status->animFlags & 0x4000) {
+        if (isMovementAllowed && actionState >= 0) {
+            player_status->prevActionState = player_status->actionState;
+            player_status->actionState = actionState;
+            player_status->flags |= 0x80000000;
+        }
+    } else {
+        //if () {
+        //    goto hit_hazard;
+        //}
+        if (player_status->unk_BF == 3) {
+            actionState = ActionState_HIT_HAZARD;
+        }
+        if (actionState == ActionState_HIT_HAZARD || actionState == ActionState_HIT_LAVA) {
+        hit_hazard:
+
+            partner = player_data->currentPartner;
+            partnerIgnoresHazards = (partner - 7) < 2u; // Lakilester or Bow
+            if (partnerIgnoresHazards || (s8)partner == PartnerId_PARAKARRY) {
+                if (D_8010EBB0) {
+                    player_status->animFlags |= 0x4;
+                    player_status->flags |= 0x800;
+                    return;
+                }
+                //actionState = ActionState_HIT_HAZARD; // u8
+            }
+        }
+        if (actionState == ActionState_SLIDING) {
+            player_status->moveFrames = 0;
+            player_status->flags |= 0x10;
+            player_status->flags &= -0x4001;
+        }
+
+        player_status->prevActionState = player_status->actionState;
+        if (actionState != ActionState_USE_TWEESTER) {
+            // ???
+        }
+        player_status->prevActionState = ActionState_IDLE;
+        if (actionState == ActionState_ENEMY_FIRST_STRIKE) {
+            player_status->animFlags |= 4;
+        }
+        player_status->actionState = actionState;
+        player_status->flags |= 0x80000000;
+        //phi_return = 0x1A;
+        if (player_status->actionState != ActionState_SPIN) {
+            player_status->flags &= 0xFFFDFFFF;
+            sound = unknown_struct[0x30];
+            player_status->animFlags &= 0xFFFEFFFF;
+            if (sound) stop_sound(sound);
+
+            temp_v0_5 = player_status->unk_D8;
+            //phi_return = (s32) temp_v0_5;
+            if (temp_v0_5) {
+                temp_v0_5[0x0C][0x24] = 0xA;
+                player_status->unk_D8 = NULL;
+                //phi_return = 0xA;
+            }
+        }
+    }
+}
+#else
+void INCLUDE_ASM("code_7bb60_len_41b0", set_action_state, s32 actionState);
+#endif
 
 INCLUDE_ASM("code_7bb60_len_41b0", update_locomotion_state);
 
