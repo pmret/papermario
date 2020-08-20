@@ -6,6 +6,19 @@ INCLUDE_ASM("code_7bb60_len_41b0", func_800E26C4);
 
 INCLUDE_ASM("code_7bb60_len_41b0", move_player);
 
+void move_player(s16 duration, f32 heading, f32 speed) {
+    PlayerStatus* player_status = &gPlayerStatus;
+
+    player_status->flags = player_status->flags | 0x4000;
+    player_status->heading = heading;
+    player_status->moveFrames = duration;
+    player_status->currentSpeed = speed;
+
+    if (!(player_status->animFlags & 0x00400000)) {
+        set_action_state(speed > player_status->walkSpeed ? ActionState_RUN : ActionState_WALK);
+    }
+}
+
 INCLUDE_ASM("code_7bb60_len_41b0", func_800E27E0);
 
 INCLUDE_ASM("code_7bb60_len_41b0", func_800E29C8);

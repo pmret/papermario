@@ -11,19 +11,18 @@ typedef UNK_TYPE EncounterTriggerFlags;
 #define EncounterTriggerFlags_HAMMER  0x00000004
 #define EncounterTriggerFlags_PARTNER 0x00000006
 
-typedef UNK_TYPE PartnerId;
-#define PartnerId_NONE       0x00000000
-#define PartnerId_GOOMBARIO  0x00000001
-#define PartnerId_KOOPER     0x00000002
-#define PartnerId_BOMBETTE   0x00000003
-#define PartnerId_PARAKARRY  0x00000004
-#define PartnerId_GOOMPA     0x00000005
-#define PartnerId_WATT       0x00000006
-#define PartnerId_SUSHIE     0x00000007
-#define PartnerId_LAKILESTER 0x00000008
-#define PartnerId_BOW        0x00000009
-#define PartnerId_GOOMBARIA  0x0000000A
-#define PartnerId_TWINK      0x0000000B
+#define PartnerId_NONE       0x00
+#define PartnerId_GOOMBARIO  0x01
+#define PartnerId_KOOPER     0x02
+#define PartnerId_BOMBETTE   0x03
+#define PartnerId_PARAKARRY  0x04
+#define PartnerId_GOOMPA     0x05
+#define PartnerId_WATT       0x06
+#define PartnerId_SUSHIE     0x07
+#define PartnerId_LAKILESTER 0x08
+#define PartnerId_BOW        0x09
+#define PartnerId_GOOMBARIA  0x0A
+#define PartnerId_TWINK      0x0B
 
 typedef UNK_TYPE SpriteId;
 #define SpriteId_WORLD_GOOMBARIO       0x00000001
@@ -1224,7 +1223,6 @@ typedef UNK_TYPE DoorSounds;
 #define DoorSounds_CREAKY 0x00000003
 #define DoorSounds_GATE   0x00000004
 
-typedef UNK_TYPE ActionState;
 #define ActionState_IDLE               0x00000000
 #define ActionState_WALK               0x00000001
 #define ActionState_RUN                0x00000002
@@ -1236,6 +1234,7 @@ typedef UNK_TYPE ActionState;
 #define ActionState_STEP_DOWN          0x00000009
 #define ActionState_LAND               0x0000000A
 #define ActionState_STEP_DOWN_LAND     0x0000000B
+// Following states prohibit normal movement:
 #define ActionState_CONVERSATION       0x0000000C
 #define ActionState_SPIN_JUMP          0x0000000D
 #define ActionState_GROUND_POUND       0x0000000E
