@@ -80,7 +80,7 @@ ApiStatus SetNpcSpeed(ScriptInstance* script, s32 isInitialCall) {
     f32 speed = get_float_variable(script, *ptrReadPos);
     Npc* npc = resolve_npc(script, npcID);
 
-    if(npc != NULL) {
+    if (npc != NULL) {
         npc->moveSpeed = speed;
         return ApiStatus_DONE2;
     }
@@ -93,7 +93,7 @@ ApiStatus SetNpcJumpscale(ScriptInstance* script, s32 isInitialCall) {
     f32 jumpScale = get_float_variable(script, *ptrReadPos);
     Npc* npc = resolve_npc(script, npcID);
 
-    if(npc != NULL) {
+    if (npc != NULL) {
         npc->jumpScale = jumpScale;
         return ApiStatus_DONE2;
     }
@@ -173,7 +173,7 @@ ApiStatus SetNpcYaw(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
     NpcId npcID = get_variable(script, *ptrReadPos++);
     Npc* npc = resolve_npc(script, npcID);
-    
+
     if (npc != NULL) {
         set_npc_yaw(npc, get_variable(script, *ptrReadPos++));
         return ApiStatus_DONE2;
@@ -276,9 +276,9 @@ ApiStatus func_802CF54C(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus func_802CF56C(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
-    s32 value = get_variable(script, *ptrReadPos++); 
+    s32 value = get_variable(script, *ptrReadPos++);
 
-    if( value == 2) {
+    if (value == 2) {
         func_800EF3E4();
     } else {
         func_800EF3D4(value);
