@@ -5,17 +5,13 @@ SECTIONS
         build/asm/header.o(.text0_header);
     }
 
-    /* 0xA4000040 40-B70 (len B30) */
+    /* 0xA4000040 40-1000 (len FC0) */
     .text40_boot 0xA4000040 : AT(0x40) {
         build/asm/boot.o(.text40_boot);
-    }
-
-    /* 0x00000000 B70-1000 [490] */
-    .data_bootcode_font 0xB70 : AT(0xB70) {
         build/bin/bootcode_font.o(.data);
     }
 
-    /* 0x80025C00 1000-4E5A0 (len 4D5A0) */
+    /* 0x80025C00 1000-759B0 (len 749B0) */
     .text1000_code 0x80025C00 : AT(0x1000) {
         build/src/code_1000_len_60.o(.text);
         build/src/code_1060_len_310.o(.text);
@@ -182,14 +178,10 @@ SECTIONS
         build/src/os/code_4a1f0_len_170.o(.text);
         build/src/os/code_4a360_len_930.o(.text);
         build/src/os/code_4ac90_len_3910.o(.text);
+        build/bin/code_4E5A0.o(.data);
     }
 
-    /* 0x00000000 4E5A0-759B0 [27410] */
-    .data_4E5A0 0x4E5A0 : AT(0x4E5A0) {
-        build/bin/4E5A0.o(.data);
-    }
-
-    /* 0x800DC500 759B0-90FE0 (len 1B630) */
+    /* 0x800DC500 759B0-A5DD0 (len 30420) */
     .text759B0_code 0x800DC500 : AT(0x759B0) {
         build/src/code_759b0_len_61b0.o(.text);
         build/src/code_7bb60_len_41b0.o(.text);
@@ -200,14 +192,10 @@ SECTIONS
         build/src/code_8a160_len_700.o(.text);
         build/src/code_8a860_len_3f30.o(.text);
         build/src/code_8e790_len_2850.o(.text);
+        build/bin/code_90FE0.o(.data);
     }
 
-    /* 0x00000000 90FE0-A5DD0 [14DF0] */
-    .data_90FE0 0x90FE0 : AT(0x90FE0) {
-        build/bin/90FE0.o(.data);
-    }
-
-    /* 0x8010F6D0 A5DD0-E16B0 (len 3B8E0) */
+    /* 0x8010F6D0 A5DD0-E79B0 (len 41BE0) */
     .textA5DD0_code 0x8010F6D0 : AT(0xA5DD0) {
         build/src/code_a5dd0_len_114e0.o(.text);
         build/src/code_b72b0_len_15ed0.o(.text);
@@ -221,14 +209,10 @@ SECTIONS
         build/src/code_ddaf0_len_c50.o(.text);
         build/src/code_de740_len_23f0.o(.text);
         build/src/code_e0b30_len_b80.o(.text);
+        build/bin/code_E16B0.o(.data);
     }
 
-    /* 0x00000000 E16B0-E79B0 [6300] */
-    .data_E16B0 0xE16B0 : AT(0xE16B0) {
-        build/bin/E16B0.o(.data);
-    }
-
-    /* 0x802C3000 E79B0-FE650 (len 16CA0) */
+    /* 0x802C3000 E79B0-FEE30 (len 17480) */
     .textE79B0_code 0x802C3000 : AT(0xE79B0) {
         build/src/code_e79b0_len_1920.o(.text);
         build/src/code_e92d0_len_5da0.o(.text);
@@ -238,22 +222,14 @@ SECTIONS
         build/src/code_f8f60_len_1560.o(.text);
         build/src/code_fa4c0_len_3bf0.o(.text);
         build/src/code_fe0b0_len_5a0.o(.text);
+        build/bin/code_FE650.o(.data);
     }
 
-    /* 0x00000000 FE650-FEE30 [7E0] */
-    .data_FE650 0xFE650 : AT(0xFE650) {
-        build/bin/FE650.o(.data);
-    }
-
-    /* 0x802DBD40 FEE30-102480 (len 3650) */
+    /* 0x802DBD40 FEE30-102610 (len 37E0) */
     .textFEE30_code 0x802DBD40 : AT(0xFEE30) {
         build/src/code_fee30_len_2d60.o(.text);
         build/src/code_101b90_len_8f0.o(.text);
-    }
-
-    /* 0x00000000 102480-102610 [190] */
-    .data_102480 0x102480 : AT(0x102480) {
-        build/bin/102480.o(.data);
+        build/bin/code_102480.o(.data);
     }
 
     /* 0x802E0D90 102610-10A9F0 (len 83E0) */
@@ -276,37 +252,30 @@ SECTIONS
         build/bin/131340.o(.data);
     }
 
-    /* 0x80242BA0 135EE0-1422A0 (len C3C0) */
+    /* 0x80242BA0 135EE0-163400 (len 2D520) */
     .text135EE0_code 0x80242BA0 : AT(0x135EE0) {
         build/src/code_135EE0.o(.text);
+        build/bin/code_1422A0.o(.data);
     }
 
-    /* 0x00000000 1422A0-163400 [21160] */
-    .data_1422A0 0x1422A0 : AT(0x1422A0) {
-        build/bin/1422A0.o(.data);
-    }
-
-    /* 0x80242BA0 163400-16A3E0 (len 6FE0) */
+    /* 0x80242BA0 163400-16C8E0 (len 94E0) */
     .text163400_code 0x80242BA0 : AT(0x163400) {
         build/src/code_163400.o(.text);
         build/src/code_167570.o(.text);
         build/src/code_168590.o(.text);
         build/src/code_169BE0.o(.text);
+        build/bin/code_16A3E0.o(.data);
     }
 
-    /* 0x00000000 16A3E0-16C8E0 [2500] */
-    .data_16A3E0 0x16A3E0 : AT(0x16A3E0) {
-        build/bin/16A3E0.o(.data);
-    }
-
-    /* 0x8023E000 16C8E0-1AF2C0 (len 429E0) */
+    /* 0x8023E000 16C8E0-1CC310 (len 5FA30) */
     .text16C8E0_code 0x8023E000 : AT(0x16C8E0) {
         build/src/code_16c8e0.o(.text);
+        build/bin/code_1AF2C0.o(.data);
     }
 
-    /* 0x00000000 1AF2C0-3169F0 [167730] */
-    .data_1AF2C0 0x1AF2C0 : AT(0x1AF2C0) {
-        build/bin/1AF2C0.o(.data);
+    /* 0x00000000 1CC310-3169F0 [14A6E0] */
+    .data_1CC310 0x1CC310 : AT(0x1CC310) {
+        build/bin/1CC310.o(.data);
     }
 
     /* 0x80200000 3169F0-316C00 (len 210) */
