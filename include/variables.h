@@ -40,6 +40,8 @@ extern Shadow* gWorldShadowList[60];
 extern Shadow* gBattleShadowList[60];
 extern Shadow** gCurrentShadowListPtr[60];
 
+extern Camera gCameras[4];
+
 extern f32 gGlobalTimeSpace;
 
 extern s8 D_800A0900;
