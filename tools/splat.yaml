@@ -5,14 +5,12 @@ segments:
   - name: header
     type: code
     start: 0x00
-    end: 0x40
     vram: 0
     files:
     - [0x0000, "asm", "header"]
   - name: boot
     type: code
     start: 0x0040
-    end: 0x0B70
     vram: 0xA4000040
     files:
     - [0x0040, "asm", "boot"]
@@ -20,7 +18,6 @@ segments:
   - name: code
     type: code
     start: 0x1000
-    end: 0x4E5A0
     vram: 0x80025C00
     files:
     - [0x1000, "c", "code_1000_len_60"]
@@ -192,7 +189,6 @@ segments:
   - name: code
     type: code
     start: 0x759B0
-    end: 0x90FE0
     vram: 0x800DC500
     files:
     - [0x759b0, "c", "code_759b0_len_61b0"]
@@ -208,7 +204,6 @@ segments:
   - name: code
     type: code
     start: 0xA5DD0
-    end: 0xE16B0
     vram: 0x8010F6D0
     files:
     - [0xa5dd0, "c", "code_a5dd0_len_114e0"]
@@ -227,7 +222,6 @@ segments:
   - name: code
     type: code
     start: 0xE79B0
-    end: 0xFE650
     vram: 0x802C3000
     files:
     - [0xe79b0, "c", "code_e79b0_len_1920"]
@@ -242,7 +236,6 @@ segments:
   - name: code
     type: code
     start: 0xFEE30
-    end: 0x102480
     vram: 0x802DBD40
     files:
     - [0xfee30, "c", "code_fee30_len_2d60"]
@@ -251,7 +244,6 @@ segments:
   - name: code
     type: code
     start: 0x102610
-    end: 0x10A9F0
     vram: 0x802E0D90
     files:
     - [0x102610, "c", "code_102610_len_2330"]
@@ -265,7 +257,6 @@ segments:
   - name: code
     type: code
     start: 0x135EE0
-    end: 0x1422A0
     vram: 0x80242BA0
     files:
     - [0x135EE0, "c", "code_135EE0"]
@@ -273,7 +264,6 @@ segments:
   - name: code
     type: code
     start: 0x163400
-    end: 0x16A3E0
     vram: 0x80242BA0
     files:
     - [0x163400, "c", "code_163400"]
@@ -284,7 +274,6 @@ segments:
   - name: code
     type: code
     start: 0x16C8E0
-    end: 0x1AF2C0
     vram: 0x8023E000
     files:
     - [0x16C8E0, "c", "code_16c8e0"]
@@ -292,7 +281,6 @@ segments:
   - name: code
     type: code
     start: 0x3169F0
-    end: 0x316C00
     vram: 0x80200000
     files:
     - [0x3169f0, "c", "code_3169f0"]
@@ -301,14 +289,12 @@ segments:
   - name: code
     type: code
     start: 0x316D90
-    end: 0x316f30
     vram: 0x802AE000
     files:
     - [0x316d90, "c", "code_316d90"]
   - name: code
     type: code
     start: 0x316f30
-    end: 0x317020
     vram: 0x802B2000
     files:
     - [0x316f30, "c", "code_316f30"]
@@ -316,7 +302,6 @@ segments:
   - name: code
     type: code
     start: 0x415D90
-    end: 0x4200C0
     vram: 0x802A1000
     files:
     - [0x415D90, "c", "code_415D90"]
@@ -324,7 +309,6 @@ segments:
   - name: code
     type: code
     start: 0x7E0E80
-    end: 0x7E4D00
     vram: 0x80280000
     files:
     - [0x7e0e80, "c", "code_7e0e80"]
@@ -334,7 +318,6 @@ segments:
   - name: code
     type: code
     start: 0xE20EB0
-    end: 0xE215C0
     vram: 0x802B7000
     files:
     - [0xe20eb0, "c", "code_e20eb0"]
