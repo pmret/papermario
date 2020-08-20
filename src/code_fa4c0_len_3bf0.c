@@ -1,6 +1,6 @@
 #include "common.h"
 
-INCLUDE_ASM(code_fa4c0_len_3bf0, func_802D5B10);
+INCLUDE_ASM("code_fa4c0_len_3bf0", func_802D5B10);
 
 ApiStatus FadeOutMusic(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
@@ -20,7 +20,7 @@ ApiStatus SetMusicTrack(ScriptInstance* script, s32 isInitialCall) {
     return (set_music_track(musicPlayer, songID, variation, 0x1F4, volume) != 0) * 2;
 }
 
-INCLUDE_API_ASM(code_fa4c0_len_3bf0, FadeInMusic);
+INCLUDE_API_ASM("code_fa4c0_len_3bf0", FadeInMusic);
 
 ApiStatus PlayAmbientSounds(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
@@ -86,12 +86,12 @@ ApiStatus func_802D6340(ScriptInstance* script, s32 initialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_API_ASM(code_fa4c0_len_3bf0, PlaySoundAtF);
+INCLUDE_API_ASM("code_fa4c0_len_3bf0", PlaySoundAtF);
 
 ApiStatus RemoveKeyItemAt(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
     s32 index = get_variable(script, *ptrReadPos++);
-    s16* ptrKeyItems = (s16 *) &gPlayerData.keyItems;
+    s16* ptrKeyItems = (s16*) &gPlayerData.keyItems;
 
     ptrKeyItems[index] = 0;
     return ApiStatus_DONE2;
@@ -100,7 +100,7 @@ ApiStatus RemoveKeyItemAt(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus RemoveItemAt(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
     s32 index = get_variable(script, *ptrReadPos++);
-    s16* ptrInvItems = (s16 *) &gPlayerData.invItems;
+    s16* ptrInvItems = (s16*) &gPlayerData.invItems;
 
     ptrInvItems[index] = 0;
     sort_items();
@@ -146,7 +146,7 @@ ApiStatus HasKeyItem(ScriptInstance* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     s32 i;
 
-    for(i = 0; i < ARRAY_COUNT(playerData->keyItems); i++) {
+    for (i = 0; i < ARRAY_COUNT(playerData->keyItems); i++) {
         if (playerData->keyItems[i] == itemID) {
             break;
         }
@@ -163,7 +163,7 @@ ApiStatus FindKeyItem(ScriptInstance* script, s32 isInitialCall) {
     s32 i;
     s32 itemIndex;
 
-    for(i = 0; i < ARRAY_COUNT(playerData->keyItems); i++) {
+    for (i = 0; i < ARRAY_COUNT(playerData->keyItems); i++) {
         if (playerData->keyItems[i] == itemID) {
             break;
         }
@@ -181,9 +181,9 @@ ApiStatus FindKeyItem(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus AddItem(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
     s32 itemID = get_variable(script, *ptrReadPos++);
-    s32* ptrNextPos = (s32 *) *ptrReadPos++;
+    Bytecode outItemIdx = *ptrReadPos++;
 
-    set_variable(script, ptrNextPos, add_item(itemID));
+    set_variable(script, outItemIdx, add_item(itemID));
     return ApiStatus_DONE2;
 }
 
@@ -259,11 +259,11 @@ ApiStatus RemoveFortressKeys(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_API_ASM(code_fa4c0_len_3bf0, MakeItemEntity);
+INCLUDE_API_ASM("code_fa4c0_len_3bf0", MakeItemEntity);
 
-INCLUDE_API_ASM(code_fa4c0_len_3bf0, DropItemEntity);
+INCLUDE_API_ASM("code_fa4c0_len_3bf0", DropItemEntity);
 
-INCLUDE_API_ASM(code_fa4c0_len_3bf0, DropItemEntityB);
+INCLUDE_API_ASM("code_fa4c0_len_3bf0", DropItemEntityB);
 /*
 // Close to working
 ApiStatus DropItemEntityB(ScriptInstance* script, s32 isInitialCall) {
@@ -282,23 +282,23 @@ ApiStatus DropItemEntityB(ScriptInstance* script, s32 isInitialCall) {
 */
 
 ApiStatus RemoveItemEntity(ScriptInstance* script, s32 isInitialCall) {
-  Bytecode* ptrReadPos = script->ptrReadPos;
-  s32 itemEntityIndex = get_variable(script, *ptrReadPos++);
+    Bytecode* ptrReadPos = script->ptrReadPos;
+    s32 itemEntityIndex = get_variable(script, *ptrReadPos++);
 
-  remove_item_entity_by_index(itemEntityIndex);
-  return ApiStatus_DONE2;
+    remove_item_entity_by_index(itemEntityIndex);
+    return ApiStatus_DONE2;
 }
 
 ApiStatus AddBadge(ScriptInstance* script, s32 isInitialCall) {
-  Bytecode* ptrReadPos = script->ptrReadPos;
-  s32 itemID = get_variable(script, *ptrReadPos++);
-  s32* ptrNextPos = (s32 *) *ptrReadPos++;
+    Bytecode* ptrReadPos = script->ptrReadPos;
+    s32 badgeID = get_variable(script, *ptrReadPos++);
+    Bytecode outBadgeIdx = *ptrReadPos++;
 
-  set_variable(script, ptrNextPos, add_badge(itemID));
-  return ApiStatus_DONE2;
+    set_variable(script, outBadgeIdx, add_badge(badgeID));
+    return ApiStatus_DONE2;
 }
 
-INCLUDE_API_ASM(code_fa4c0_len_3bf0, RemoveBadge);
+INCLUDE_API_ASM("code_fa4c0_len_3bf0", RemoveBadge);
 
 ApiStatus SetItemPos(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
@@ -311,14 +311,14 @@ ApiStatus SetItemPos(ScriptInstance* script, s32 isInitialCall) {
     y = get_variable(script, *ptrReadPos++);
     z = get_variable(script, *ptrReadPos++);
 
-    ptrItemEntity = (ItemEntity *) get_item_entity(itemEntityIndex);
+    ptrItemEntity = (ItemEntity*) get_item_entity(itemEntityIndex);
     ptrItemEntity->position.x = x;
     ptrItemEntity->position.y = y;
     ptrItemEntity->position.z = z;
     return ApiStatus_DONE2;
 }
 
-INCLUDE_API_ASM(code_fa4c0_len_3bf0, SetItemFlags);
+INCLUDE_API_ASM("code_fa4c0_len_3bf0", SetItemFlags);
 
 ApiStatus AddCoin(ScriptInstance* script, s32 isInitialCall) {
     script->varTable[0] = add_coins(get_variable(script, *script->ptrReadPos));
@@ -335,7 +335,7 @@ ApiStatus AddStarPieces(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_API_ASM(code_fa4c0_len_3bf0, GetItemPower);
+INCLUDE_API_ASM("code_fa4c0_len_3bf0", GetItemPower);
 /*
 // Close to working
 ApiStatus GetItemPower(ScriptInstance* script, s32 isInitialCall) {
@@ -351,15 +351,15 @@ ApiStatus GetItemPower(ScriptInstance* script, s32 isInitialCall) {
 }
 */
 
-INCLUDE_API_ASM(code_fa4c0_len_3bf0, ShowGotItem);
+INCLUDE_API_ASM("code_fa4c0_len_3bf0", ShowGotItem);
 
-INCLUDE_ASM(code_fa4c0_len_3bf0, func_802D7460);
+INCLUDE_ASM("code_fa4c0_len_3bf0", func_802D7460);
 
-INCLUDE_ASM(code_fa4c0_len_3bf0, func_802D74C0);
+INCLUDE_ASM("code_fa4c0_len_3bf0", func_802D74C0);
 
-INCLUDE_API_ASM(code_fa4c0_len_3bf0, ShowEmote);
+INCLUDE_API_ASM("code_fa4c0_len_3bf0", ShowEmote);
 
-INCLUDE_API_ASM(code_fa4c0_len_3bf0, RemoveEffect);
+INCLUDE_API_ASM("code_fa4c0_len_3bf0", RemoveEffect);
 /*
 // Works
 ApiStatus RemoveEffect(ScriptInstance* script, s32 isInitialCall) {
@@ -401,6 +401,6 @@ ApiStatus func_802D7B74(ScriptInstance* script, s32 isInitialCall) {
 // More functions still in RemoveEffect.s but the ones above are matching properly
 */
 
-INCLUDE_API_ASM(code_fa4c0_len_3bf0, ShowSleepBubble);
+INCLUDE_API_ASM("code_fa4c0_len_3bf0", ShowSleepBubble);
 
-INCLUDE_API_ASM(code_fa4c0_len_3bf0, PlayEffect);
+INCLUDE_API_ASM("code_fa4c0_len_3bf0", PlayEffect);

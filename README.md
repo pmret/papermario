@@ -94,6 +94,16 @@ You're on your own now. Get your C code compiling to match the original assembly
 
 If you use Visual Studio Code, you can use _Run Test Task_ to run `diff.py` and show you errors and warnings from the compiler inline. You might want to attach _Run Test Task_ to a keybinding, as you'll be using it often.
 
+#### Formatting and linting
+
+Once your function is matching, you'll want to make a pull request. Before you do that, run the following script to reformat your code. (You can also format specific files with `./format.sh path/to/file.c`.)
+
+```sh
+$ ./format.sh
+```
+
+If `format.sh` has any problems with your code, go and fix the issues. If you can't fix a warning without making the function not match anymore, append `// NOLINT` to the offending line.
+
 ## FAQ
 
 * If you received the following error when running  `make`:

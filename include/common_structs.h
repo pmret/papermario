@@ -250,8 +250,8 @@ typedef struct ScriptInstance {
     /* 0x110 */ u8 switchBlockState[8];
     /* 0x118 */ s32 switchBlockValue[8];
     /* 0x138 */ s32* buffer;
-    /* 0x13C */ UNK_PTR array;
-    /* 0x140 */ UNK_PTR flagArray;
+    /* 0x13C */ s32* array;
+    /* 0x140 */ s32* flagArray;
     /* 0x144 */ s32 uniqueID;
     /* 0x148 */ struct Enemy* ownerActorID; /* controller*, battle ID, trigger* */
     /* 0x14C */ u32 ownerID; /* can be an npcID, a triggerID, a trigger ptr */
@@ -524,7 +524,7 @@ typedef struct BattleStatus {
     /* 0x0B1 */ char unk_B1[3];
     /* 0x0B4 */ UNK_FUN_PTR(preUpdateCallback);
     /* 0x0B8 */ char unk_B8[4];
-    /* 0x0BC */ struct ScriptInstance* controlScript; /* control handed over to this when changing partners, maybe general? */
+    /* 0x0BC */ struct ScriptInstance* controlScript; /* control handed over to this when changing partners */
     /* 0x0C0 */ s32 controlScriptID;
     /* 0x0C4 */ struct ScriptInstance* camMovementScript;
     /* 0x0C8 */ s32 camMovementScriptID;
@@ -1270,8 +1270,8 @@ typedef struct TileDescriptor {
 } TileDescriptor; // size = 0x30
 
 typedef struct BackgroundHeader {
-    /* 0x00 */ u32 raster;
-    /* 0x04 */ u32 palette;
+    /* 0x00 */ UNK_PTR raster;
+    /* 0x04 */ UNK_PTR palette;
     /* 0x08 */ u16 startX;
     /* 0x0A */ u16 startY;
     /* 0x0C */ u16 width;
