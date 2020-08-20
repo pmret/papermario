@@ -1,9 +1,9 @@
 #include "common.h"
 
 ApiStatus SetCamEnabled(ScriptInstance* script, s32 isInitialCall) {
-    Bytecode* ptrReadPos = script->ptrReadPos;
-    Bytecode id = get_variable(script, *ptrReadPos++);
-    Bytecode enabled = get_variable(script, *ptrReadPos++);
+    Bytecode* args = script->ptrReadPos;
+    s32 id = get_variable(script, *args++);
+    s32 enabled = get_variable(script, *args++);
 
     if (!enabled) {
         (&gCameras[id])->flags |= 0x2;
@@ -14,9 +14,9 @@ ApiStatus SetCamEnabled(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus SetCamFlag80(ScriptInstance* script, s32 isInitialCall) {
-    Bytecode* ptrReadPos = script->ptrReadPos;
-    Bytecode id = get_variable(script, *ptrReadPos++);
-    Bytecode enabled = get_variable(script, *ptrReadPos++);
+    Bytecode* args = script->ptrReadPos;
+    s32 id = get_variable(script, *args++);
+    s32 enabled = get_variable(script, *args++);
 
     if (!enabled) {
         (&gCameras[id])->flags |= 0x80;
@@ -27,29 +27,33 @@ ApiStatus SetCamFlag80(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus SetCamPerspective(ScriptInstance* script, s32 isInitialCall) {
-    Bytecode* ptrReadPos = script->ptrReadPos;
-    Bytecode id = get_variable(script, *ptrReadPos++);
-    Bytecode mode = get_variable(script, *ptrReadPos++);
-    f32 vfov = get_float_variable(script, *ptrReadPos++);
-    Bytecode nearClip = get_variable(script, *ptrReadPos++);
-    Bytecode farClip = get_variable(script, *ptrReadPos++);
+    Bytecode* args = script->ptrReadPos;
+    s32 id = get_variable(script, *args++);
+    s16 mode = get_variable(script, *args++);
+    f32 vfov = get_float_variable(script, *args++);
+    s16 nearClip = get_variable(script, *args++);
+    s16 farClip = get_variable(script, *args++);
+    Camera* cameras = &gCameras;
+    Camera* camera = &cameras[id];
 
-    (&gCameras[id])->farClip = farClip;
-    (&gCameras[id])->mode = mode;
-    (&gCameras[id])->unk_06 = 1;
-    (&gCameras[id])->unk_08 = 1;
-    (&gCameras[id])->vfov = vfov;
-    (&gCameras[id])->nearClip = nearClip;
+    camera->farClip = farClip;
+    camera->mode = mode;
+    camera->unk_06 = 1;
+    camera->unk_08 = 1;
+    camera->vfov = vfov;
+    camera->nearClip = nearClip;
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_802CA90C(ScriptInstance* script, s32 isInitialCall) {
-    Bytecode* ptrReadPos = script->ptrReadPos;
-    Bytecode id = get_variable(script, *ptrReadPos++);
-    Bytecode mode = get_variable(script, *ptrReadPos++);
+    Bytecode* args = script->ptrReadPos;
+    s32 id = get_variable(script, *args++);
+    s16 mode = get_variable(script, *args++);
+    Camera* cameras = &gCameras;
+    Camera* camera = &cameras[id];
 
-    (&gCameras[id])->mode = mode;
-    (&gCameras[id])->unk_06 = 0;
+    camera->mode = mode;
+    camera->unk_06 = 0;
     return ApiStatus_DONE2;
 }
 
@@ -112,7 +116,18 @@ INCLUDE_API_ASM("code_ef070_len_3400", UseSettingsFrom);
 
 INCLUDE_API_ASM("code_ef070_len_3400", LoadSettings);
 
-INCLUDE_API_ASM("code_ef070_len_3400", SetCamType);
+ApiStatus SetCamType(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 id = get_variable(script, *args++);
+    Camera* cameras = &gCameras;
+    Camera* camera = &cameras[id];
+    s32 controllerType = get_variable(script, *args++);
+    s32 enabled = get_variable(script, *args++);
+    
+    camera->unk_500 = enabled;
+    camera->controllerType = controllerType;
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_API_ASM("code_ef070_len_3400", SetCamPitch);
 

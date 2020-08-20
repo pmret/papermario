@@ -478,7 +478,7 @@ typedef struct Camera {
     /* 0x4E4 */ struct Vec3f posA;
     /* 0x4F0 */ struct Vec3f posB;
     /* 0x4FC */ f32 controllerViewPitch;
-    /* 0x500 */ char unk_500[4];
+    /* 0x500 */ s32 unk_500;
     /* 0x504 */ s16 boolTargetPlayer;
     /* 0x506 */ char unk_506[2];
     /* 0x508 */ s32 panPhase;
