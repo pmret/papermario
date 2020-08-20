@@ -9,7 +9,7 @@
 .include "macro.inc"
 
 
-.section .textA4000040, "ax"
+.section .text40_boot, "ax"
 
 /* 000040 A4000040 40806800 */  mtc0  $zero, $13
 /* 000044 A4000044 40804800 */  mtc0  $zero, $9
