@@ -202,9 +202,7 @@ ApiStatus EnableNpcShadow(ScriptInstance* script, s32 isInitialCall) {
             enable_npc_shadow(npc);
             return ApiStatus_DONE2;
         }
-        else {
-            disable_npc_shadow(npc);
-        }
+        disable_npc_shadow(npc);
     }
     return ApiStatus_DONE2;
 }
@@ -236,7 +234,6 @@ ApiStatus ClearPartnerMoveHistory(ScriptInstance* script, s32 isInitialCall) {
     }
     return ApiStatus_DONE2;
 }
-
 
 INCLUDE_API_ASM(code_f2470_len_27f0, NpcSetHomePosToCurrent);
 
