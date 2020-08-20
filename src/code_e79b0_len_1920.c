@@ -99,8 +99,8 @@ void set_script_priority(ScriptInstance* script, s8 priority) {
     script->priority = priority;
 }
 
-void set_script_timescale(ScriptInstance* script, f32 timeScale) {
-    script->timeScale = timeScale * gGlobalTimeSpace;
+void set_script_timescale(ScriptInstance* script, f32 timescale) {
+    script->timeScale = timescale * gGlobalTimeSpace;
 }
 
 INCLUDE_ASM("code_e79b0_len_1920", set_global_timespace);
