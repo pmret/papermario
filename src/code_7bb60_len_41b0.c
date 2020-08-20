@@ -181,7 +181,23 @@ INCLUDE_ASM("code_7bb60_len_41b0", start_bounce_a);
 
 INCLUDE_ASM("code_7bb60_len_41b0", start_bounce_b);
 
-INCLUDE_ASM("code_7bb60_len_41b0", check_input_hammer);
+s32 check_input_hammer(void) {
+    PlayerStatus* player_status = &gPlayerStatus;
+    PlayerData* player_data = &gPlayerData;
+
+    if (player_status->pressedButtons & Buttons_B) {
+        if (!(player_status->flags & 4)) {
+            if (D_8010EBB0 != 1 || player_data->currentPartner != PartnerId_WATT) {
+                if (player_data->hammerLevel != -1) {
+                    set_action_state(ActionState_HAMMER);
+                    return TRUE;
+                }
+            }
+        }
+    }
+
+    return FALSE;
+}
 
 INCLUDE_ASM("code_7bb60_len_41b0", check_input_jump);
 
