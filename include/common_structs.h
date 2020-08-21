@@ -432,7 +432,9 @@ typedef struct Camera {
     /* 0x01E */ s16 unk_1E;
     /* 0x020 */ s16 unk_20;
     /* 0x022 */ s16 unk_22;
-    /* 0x024 */ char unk_24[6];
+    /* 0x024 */ s16 unk_24;
+    /* 0x026 */ s16 unk_26;
+    /* 0x028 */ s16 unk_28;
     /* 0x02A */ s16 zoomPercent;
     /* 0x02C */ s16 backgroundColor[3];
     /* 0x032 */ s16 targetScreenCoords[3];
@@ -481,9 +483,11 @@ typedef struct Camera {
     /* 0x500 */ s32 unk_500;
     /* 0x504 */ s16 boolTargetPlayer;
     /* 0x506 */ u16 unk_506;
-    /* 0x508 */ s32 panPhase;
+    /* 0x508 */ f32 panPhase;
     /* 0x50C */ f32 leadAmount;
-    /* 0x510 */ char unk_510[36];
+    /* 0x510 */ char unk_510[16];
+    /* 0x520 */ f32 unk_520;
+    /* 0x524 */ char unk_524[16];
     /* 0x534 */ struct ColliderBoundingBox* aabbForZoneBelow;
     /* 0x538 */ char unk_538[32];
 } Camera; // size = 0x558
