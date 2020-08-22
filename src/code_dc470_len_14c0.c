@@ -11,7 +11,6 @@ void load_map_bg(char* optAssetName) {
     // StoryProgress check
     if (get_variable(0, 0xF5DE0180) >= 0x35) {
         // Use sunny Flower Fields bg rather than cloudy
-        // TODO: these globals should be string literals
         if (!strcmp(assetName, gCloudyFlowerFieldsBg)) {
             assetName = gSunnyFlowerFieldsBg;
         }
@@ -56,7 +55,7 @@ void set_background_size(s16 startX, s16 startY, s16 sizeX, s16 sizeY) {
 u16 func_80145E98(s32 arg0, s32 arg1, s32 arg2) {
     s32 temp_lo;
 
-    temp_lo = (arg1 - (u16)(arg0)) * arg2;
+    temp_lo = (arg1 - (u16)arg0) * arg2;
     if (temp_lo < 0) {
         temp_lo = temp_lo + 0xFF;
     }
@@ -65,3 +64,13 @@ u16 func_80145E98(s32 arg0, s32 arg1, s32 arg2) {
 }
 
 INCLUDE_ASM("code_dc470_len_14c0", func_80145EC0);
+
+INCLUDE_ASM("code_dc470_len_14c0", func_8014720C);
+/*void func_8014720C(void) {
+    D_8014F12F = 1;
+}*/
+
+INCLUDE_ASM("code_dc470_len_14c0", func_8014721C);
+/*void func_8014721C(void) {
+    D_8014F12F = 0;
+}*/

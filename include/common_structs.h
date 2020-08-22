@@ -230,7 +230,7 @@ typedef struct ScriptInstance {
     /* 0x002 */ u8 currentOpcode;
     /* 0x003 */ u8 priority;
     /* 0x004 */ u8 groupFlags;
-    /* 0x005 */ u8 blocked; /* 1 = blocking */
+    /* 0x005 */ s8 blocked; /* 1 = blocking */
     /* 0x006 */ s8 loopDepth; /* how many nested loops we are in, >= 8 hangs forever */
     /* 0x007 */ s8 switchDepth; /* how many nested switches we are in, max = 8 */
     /* 0x008 */ Bytecode* ptrNextLine;
@@ -1353,7 +1353,8 @@ typedef struct PlayerStatus {
     /* 0x0BE */ u8 renderMode;
     /* 0x0BF */ char unk_BF;
     /* 0x0C0 */ u32* decorationList;
-    /* 0x0C4 */ char unk_C4[8];
+    /* 0x0C4 */ char unk_C4[4];
+    /* 0x0C8 */ UNK_PTR unk_C8;
     /* 0x0CC */ s32 shadowID;
     /* 0x0D0 */ char unk_D0[12];
     /* 0x0DC */ s32 currentButtons;

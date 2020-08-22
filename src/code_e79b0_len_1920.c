@@ -16,19 +16,99 @@ INCLUDE_ASM("code_e79b0_len_1920", start_script_in_group);
 
 INCLUDE_ASM("code_e79b0_len_1920", start_child_script);
 
-INCLUDE_ASM("code_e79b0_len_1920", func_802C39F8);
+//INCLUDE_ASM("code_e79b0_len_1920", func_802C39F8);
 
-#ifdef NON_MATCHING
+extern s32 gStaticScriptCounter;
+extern s32 D_802D9CA4;
+extern s32 gNumScripts;
+extern s32 D_802DAC98;
+
+//INCLUDE_ASM(code_e79b0_len_1920, func_802C39F8);
+ScriptInstance* func_802C39F8(ScriptInstance* parentScript, Bytecode* nextLine, s32 newState) {
+    ScriptInstance** curScript = gCurrentScriptListPtr;
+    ScriptInstance* child;
+    ScriptInstance** temp3;
+    s32* temp6;
+    s32 temp2;
+    s32 temp7;
+    s32 i;
+
+    for(i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++){
+        if (curScript[i] == NULL) {
+            break;
+        }
+    }
+
+    temp3 = gCurrentScriptListPtr;
+    ASSERT(i < ARRAY_COUNT(gCurrentScriptListPtr));
+    temp2 = i;
+
+    child = heap_malloc(sizeof(ScriptInstance));
+    temp3[temp2] = child;
+    temp7 = gNumScripts++;
+    ASSERT(child != NULL);
+
+    child->state = newState | 1;
+    child->ptrNextLine = nextLine;
+    child->ptrFirstLine = nextLine;
+    child->ptrCurrentLine = nextLine;
+    child->currentOpcode = 0;
+    child->deleted = 0;
+    child->blockingParent = NULL;
+    child->parentScript = parentScript;
+    child->childScript = NULL;
+    child->priority = parentScript->priority;
+    child->uniqueID = gStaticScriptCounter++;
+    child->ownerActorID = parentScript->ownerActorID;
+    child->ownerID = parentScript->ownerID;
+    child->loopDepth = -1;
+    child->switchDepth = -1;
+    child->groupFlags = parentScript->groupFlags;
+    child->ptrSavedPosition = NULL;
+    child->array = parentScript->array;
+    child->flagArray = parentScript->flagArray;
+    child->timeScale = gGlobalTimeSpace;
+    child->frameCounter = 0;
+    child->unk_158 = 0;
+
+    for(i = 0; i < ARRAY_COUNT(child->varTable); i++) {
+        child->varTable[i] = parentScript->varTable[i];
+    }
+
+    for(i = 0; i < ARRAY_COUNT(child->varFlags); i++){
+        child->varFlags[i] = parentScript->varFlags[i];
+    }
+
+    find_script_labels(child);
+    if (D_802D9CA4 != 0) {
+        temp7 = D_802DAC98++;
+        gScriptIndexList[temp7] = temp2;
+        gScriptIdList[temp7] = child->uniqueID;
+    }
+
+    temp6 = &gStaticScriptCounter;
+    if (*temp6 == 0) {
+        *temp6 = 1;
+    }
+    func_802C3390(child);
+    return child;
+}
+
+INCLUDE_ASM(code_e79b0_len_1920, func_802C3C10)
+
 ScriptInstance* restart_script(ScriptInstance* script) {
+    Bytecode* temp;
     script->loopDepth = -1;
     script->switchDepth = -1;
     script->currentOpcode = 0;
-    script->frameCounter = 0; // TODO: force compiler to not optimise away this
+    script->frameCounter = 0;
+
+    temp = script->ptrFirstLine;
+    script->ptrNextLine = temp;
+    script->ptrCurrentLine = temp;
+    script->timeScale = 1.0f;
     script->frameCounter = 0;
     script->unk_158 = 0;
-
-    script->ptrNextLine = script->ptrFirstLine;
-    script->ptrCurrentLine = script->ptrFirstLine;
 
     script->timeScale = 1.0f;
     script->timeScale = gGlobalTimeSpace;
@@ -38,9 +118,6 @@ ScriptInstance* restart_script(ScriptInstance* script) {
 
     return script;
 }
-#else
-INCLUDE_ASM("code_e79b0_len_1920", restart_script);
-#endif
 
 INCLUDE_ASM("code_e79b0_len_1920", update_scripts);
 
@@ -107,7 +184,7 @@ void set_script_timescale(ScriptInstance* script, f32 timescale) {
 #ifdef NON_MATCHING
 // TODO: figure out why compiler/assembler isn't putting SWC1 in delay slot
 void set_global_timespace(f32 timeScale) {
-    //gGlobalTimeSpace = timeScale;
+    gGlobalTimeSpace = timeScale;
 }
 #else
 INCLUDE_ASM("code_e79b0_len_1920", set_global_timespace);
@@ -116,7 +193,7 @@ INCLUDE_ASM("code_e79b0_len_1920", set_global_timespace);
 #ifdef NON_MATCHING
 // TODO: figure out why compiler/assembler isn't putting LWC1 in delay slot
 f32 get_global_timespace(void) {
-    //return gGlobalTimeSpace;
+    return gGlobalTimeSpace;
 }
 #else
 INCLUDE_ASM("code_e79b0_len_1920", get_global_timespace);

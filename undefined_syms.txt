@@ -5,7 +5,11 @@ gPlayerStatus = 0x8010EFC8;
 gItemTable = 0x800878E0;
 gWorldScriptList = 0x802DA490;
 gBattleScriptList = 0x802DA690;
+gNumScripts = 0x802DA488;
 gCurrentScriptListPtr = 0x802DA890;
+D_802DAC98 = 0x802DAC98;
+gStaticScriptCounter = 0x802D9CA0;
+D_802D9CA4 = 0x802D9CA4;
 gGlobalTimeSpace = 0x802D9CA8;
 D_80147574 = 0x80147574;
 
@@ -60,8 +64,8 @@ D_00316D90 = 0x00316D90;
 D_00316F30 = 0x00316F30;
 
 D_8010D000 = 0x8010D000;
-gCloudyFlowerFieldsBg = 0x8014F120;
-gSunnyFlowerFieldsBg = 0x8014F128;
+gCloudyFlowerFieldsBg = 0x8014F120; 
+gSunnyFlowerFieldsBg = 0x8014F128;  
 D_8014F12F = 0x8014F12F;
 D_8014F140 = 0x8014F140;
 D_80151308 = 0x80151308;
