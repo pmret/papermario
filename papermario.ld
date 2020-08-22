@@ -210,6 +210,8 @@ SECTIONS
         build/src/code_de740_len_23f0.o(.text);
         build/src/code_e0b30_len_b80.o(.text);
         build/bin/code_E16B0.o(.data);
+        build/src/code_dc470_len_14c0.o(.data);
+        build/bin/code_E5830.o(.data);
     }
 
     /* 0x802C3000 E79B0-FEE30 (len 17480) */

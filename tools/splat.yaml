@@ -219,6 +219,8 @@ segments:
     - [0xde740, "c", "code_de740_len_23f0"]
     - [0xe0b30, "c", "code_e0b30_len_b80"]
     - [0xe16b0, "bin"]
+    - [0xE5820, ".data", "code_dc470_len_14c0"]
+    - [0xE5830, "bin"]
   - name: code
     type: code
     start: 0xE79B0
