@@ -178,7 +178,7 @@ INCLUDE_ASM("code_a5dd0_len_114e0", func_8011B660);
 
 void INCLUDE_ASM("code_a5dd0_len_114e0", clone_model, u16 srcModelID, u16 newModelID);
 
-INCLUDE_ASM("code_a5dd0_len_114e0", func_8011B7C0);
+void INCLUDE_ASM("code_a5dd0_len_114e0", func_8011B7C0, u16 arg0, s32 arg1, s32 arg2);
 
 INCLUDE_ASM("code_a5dd0_len_114e0", func_8011B950);
 
