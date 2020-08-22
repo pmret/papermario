@@ -1,5 +1,9 @@
 #include "common.h"
 
+char gCloudyFlowerFieldsBg[] = "fla_bg";
+char gSunnyFlowerFieldsBg[] = "flb_bg";
+s8 D_8014F12F = 0;
+
 void load_map_bg(char* optAssetName) {
     UNK_PTR compressedData;
     u32 assetSize;

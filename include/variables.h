@@ -49,9 +49,6 @@ extern s16* D_80151328;
 extern s16 D_8010CD10;
 extern s16 D_8010CD12;
 extern s32 D_801595A0;
-extern char gCloudyFlowerFieldsBg[]; // "fla_bg"
-extern char gSunnyFlowerFieldsBg[];  // "flb_bg"
-extern s8 D_8014F12F;
 extern BackgroundHeader gBackgroundImage;
 
 extern PrintContext* gCurrentPrintContext;
