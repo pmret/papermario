@@ -4,6 +4,7 @@
 #include "ultra64.h"
 #include "common_structs.h"
 #include "types.h"
+#include "enums.h"
 
 extern UiStatus gUIStatus;
 extern PlayerData gPlayerData;
