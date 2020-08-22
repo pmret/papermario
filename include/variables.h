@@ -7,6 +7,8 @@
 
 extern UiStatus gUIStatus;
 extern PlayerData gPlayerData;
+extern ActionState gPlayerActionState;
+extern PlayerAnim gPlayerAnimation;
 extern PlayerStatus gPlayerStatus;
 extern GameStatus* gGameStatusPtr[1];
 extern StaticItem gItemTable[364];
@@ -43,6 +45,8 @@ extern Shadow** gCurrentShadowListPtr[60];
 extern Camera gCameras[4];
 
 extern f32 gGlobalTimeSpace;
+
+extern Npc* gPlayerNpc;
 
 extern s8 D_800A0900;
 extern s16* D_80151328;
