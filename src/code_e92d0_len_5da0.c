@@ -261,30 +261,114 @@ ApiStatus si_handle_set_float(ScriptInstance* script) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_handle_add);
-/*ApiStatus si_handle_add(ScriptInstance* script) {
+ApiStatus si_handle_add(ScriptInstance* script) {
     Bytecode* thisPos = script->ptrReadPos;
-    Bytecode var1 = *thisPos++;
+    Bytecode var = *thisPos++;
+    s32 result = get_variable(script, *thisPos++);
+    s32 addend = get_variable(script, var);
 
-    set_variable(script, var1, get_variable(script, *thisPos++) + get_variable(script, var1));
+    result += addend;
+
+    set_variable(script, var, result);
     return ApiStatus_DONE2;
-}*/
+}
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_handle_subtract);
+ApiStatus si_handle_subtract(ScriptInstance* script) {
+    Bytecode* thisPos = script->ptrReadPos;
+    Bytecode var = *thisPos++;
+    s32 result = get_variable(script, *thisPos++);
+    s32 minuend = get_variable(script, var);
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_handle_multiply);
+    result = minuend - result;
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_handle_divide);
+    set_variable(script, var, result);
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_handle_mod);
+ApiStatus si_handle_multiply(ScriptInstance* script) {
+    Bytecode* thisPos = script->ptrReadPos;
+    Bytecode var = *thisPos++;
+    s32 result = get_variable(script, *thisPos++);
+    s32 multiplier = get_variable(script, var);
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_handle_addF);
+    result *= multiplier;
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_handle_subtractF);
+    set_variable(script, var, result);
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_handle_multiplyF);
+ApiStatus si_handle_divide(ScriptInstance* script) {
+    Bytecode* thisPos = script->ptrReadPos;
+    Bytecode var = *thisPos++;
+    s32 result = get_variable(script, *thisPos++);
+    s32 dividend = get_variable(script, var);
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_handle_divideF);
+    result = dividend / result;
+
+    set_variable(script, var, result);
+    return ApiStatus_DONE2;
+}
+
+ApiStatus si_handle_mod(ScriptInstance* script) {
+    Bytecode* thisPos = script->ptrReadPos;
+    Bytecode var = *thisPos++;
+    s32 result = get_variable(script, *thisPos++) + 0.5;
+    s32 num = get_variable(script, var) + 0.5;
+
+    result = num % result;
+
+    set_variable(script, var, result);
+    return ApiStatus_DONE2;
+}
+
+ApiStatus si_handle_addF(ScriptInstance* script) {
+    Bytecode* thisPos = script->ptrReadPos;
+    Bytecode var = *thisPos++;
+    f32 result = get_float_variable(script, *thisPos++);
+    f32 addend = get_float_variable(script, var);
+
+    result += addend;
+
+    set_float_variable(script, var, result);
+    return ApiStatus_DONE2;
+}
+
+ApiStatus si_handle_subtractF(ScriptInstance* script) {
+    Bytecode* thisPos = script->ptrReadPos;
+    Bytecode var = *thisPos++;
+    f32 result = get_float_variable(script, *thisPos++);
+    f32 minuend = get_float_variable(script, var);
+
+    result = minuend - result;
+
+    set_float_variable(script, var, result);
+    return ApiStatus_DONE2;
+}
+
+ApiStatus si_handle_multiplyF(ScriptInstance* script) {
+    Bytecode* thisPos = script->ptrReadPos;
+    Bytecode var = *thisPos++;
+    f32 result = get_float_variable(script, *thisPos++);
+    f32 multiplier = get_float_variable(script, var);
+
+    result *= multiplier;
+
+    set_float_variable(script, var, result);
+    return ApiStatus_DONE2;
+}
+
+ApiStatus si_handle_divideF(ScriptInstance* script) {
+    Bytecode* thisPos = script->ptrReadPos;
+    Bytecode var = *thisPos++;
+    f32 result = get_float_variable(script, *thisPos++);
+    f32 dividend = get_float_variable(script, var);
+
+    result = dividend / result;
+
+    set_float_variable(script, var, result);
+    return ApiStatus_DONE2;
+}
+
 
 ApiStatus si_handle_set_int_buffer_ptr(ScriptInstance* script) {
     script->buffer = get_variable(script, *script->ptrReadPos);
