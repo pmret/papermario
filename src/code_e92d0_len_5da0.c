@@ -84,8 +84,8 @@ ApiStatus si_handle_wait_seconds(ScriptInstance* script) {
 }
 
 ApiStatus si_handle_if_equal(ScriptInstance* script) {
-    Bytecode *thisPos = script->ptrReadPos;
-    
+    Bytecode* thisPos = script->ptrReadPos;
+
     if (get_variable(script, *thisPos++) != get_variable(script, *thisPos++)) {
         script->ptrNextLine = si_skip_if(script);
         return ApiStatus_DONE2;
@@ -95,8 +95,8 @@ ApiStatus si_handle_if_equal(ScriptInstance* script) {
 
 
 ApiStatus si_handle_if_not_equal(ScriptInstance* script) {
-    Bytecode *thisPos = script->ptrReadPos;
-    
+    Bytecode* thisPos = script->ptrReadPos;
+
     if (get_variable(script, *thisPos++) == get_variable(script, *thisPos++)) {
         script->ptrNextLine = si_skip_if(script);
         return ApiStatus_DONE2;
@@ -105,8 +105,8 @@ ApiStatus si_handle_if_not_equal(ScriptInstance* script) {
 }
 
 ApiStatus si_handle_if_less(ScriptInstance* script) {
-    Bytecode *thisPos = script->ptrReadPos;
-    
+    Bytecode* thisPos = script->ptrReadPos;
+
     if (get_variable(script, *thisPos++) >= get_variable(script, *thisPos++)) {
         script->ptrNextLine = si_skip_if(script);
         return ApiStatus_DONE2;
@@ -115,8 +115,8 @@ ApiStatus si_handle_if_less(ScriptInstance* script) {
 }
 
 ApiStatus si_handle_if_greater(ScriptInstance* script) {
-    Bytecode *thisPos = script->ptrReadPos;
-    
+    Bytecode* thisPos = script->ptrReadPos;
+
     if (get_variable(script, *thisPos++) <= get_variable(script, *thisPos++)) {
         script->ptrNextLine = si_skip_if(script);
         return ApiStatus_DONE2;
@@ -125,8 +125,8 @@ ApiStatus si_handle_if_greater(ScriptInstance* script) {
 }
 
 ApiStatus si_handle_if_less_equal(ScriptInstance* script) {
-    Bytecode *thisPos = script->ptrReadPos;
-    
+    Bytecode* thisPos = script->ptrReadPos;
+
     if (get_variable(script, *thisPos++) > get_variable(script, *thisPos++)) {
         script->ptrNextLine = si_skip_if(script);
         return ApiStatus_DONE2;
@@ -135,8 +135,8 @@ ApiStatus si_handle_if_less_equal(ScriptInstance* script) {
 }
 
 ApiStatus si_handle_if_greater_equal(ScriptInstance* script) {
-    Bytecode *thisPos = script->ptrReadPos;
-    
+    Bytecode* thisPos = script->ptrReadPos;
+
     if (get_variable(script, *thisPos++) < get_variable(script, *thisPos++)) {
         script->ptrNextLine = si_skip_if(script);
         return ApiStatus_DONE2;
