@@ -205,6 +205,7 @@ ApiStatus GetPlayerPos(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus GetPlayerAnimation(ScriptInstance* script, s32 isInitialCall) {
     Bytecode outVar = *script->ptrReadPos;
+    
     set_variable(script, outVar, gPlayerAnimation);
     return ApiStatus_DONE2;
 }

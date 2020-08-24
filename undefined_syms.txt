@@ -9,7 +9,7 @@ gWorldScriptList = 0x802DA490;
 gBattleScriptList = 0x802DA690;
 gCurrentScriptListPtr = 0x802DA890;
 gGlobalTimeSpace = 0x802D9CA8;
-gPlayerNpc = 0x802D9D20;
+gPlayerNpcPtr = 0x802D9D20;
 D_80147574 = 0x80147574;
 
 gMapTransitionAlpha = 0x800A0940;
