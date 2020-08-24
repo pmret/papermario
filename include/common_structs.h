@@ -1355,7 +1355,7 @@ typedef struct PlayerStatus {
     /* 0x0AC */ char unk_AC[4];
     /* 0x0B0 */ s16 colliderHeight;
     /* 0x0B2 */ s16 colliderDiameter;
-    /* 0x0B4 */ u8 actionState;
+    /* 0x0B4 */ s8 actionState;
     /* 0x0B5 */ u8 prevActionState;
     /* 0x0B6 */ u8 fallState;
     /* 0x0B7 */ char unk_B7;
