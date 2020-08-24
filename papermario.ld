@@ -1,1052 +1,246 @@
 SECTIONS
 {
-    /* 0x0 0-40 [40] */
+    /* 0x0 0-40 (len 40) */
     .text0_header 0x0 : AT(0x0) {
         build/asm/header.o(.text0_header);
     }
 
-    /* 0xA4000040 40-B70 [B30] */
+    /* 0xA4000040 40-1000 (len FC0) */
     .text40_boot 0xA4000040 : AT(0x40) {
         build/asm/boot.o(.text40_boot);
-    }
-
-    /* 0x00000000 B70-1000 [490] */
-    .data_bootcode_font 0xB70 : AT(0xB70) {
         build/bin/bootcode_font.o(.data);
     }
 
-    /* 0x80025C00 1000-1060 [60] */
+    /* 0x80025C00 1000-759B0 (len 749B0) */
     .text1000_code 0x80025C00 : AT(0x1000) {
         build/src/code_1000_len_60.o(.text);
-    }
-
-    /* 0x80025C60 1060-1370 [310] */
-    .text1060_code 0x80025C60 : AT(0x1060) {
         build/src/code_1060_len_310.o(.text);
-    }
-
-    /* 0x80025F70 1370-1B40 [7D0] */
-    .text1370_code 0x80025F70 : AT(0x1370) {
         build/src/code_1370_len_7d0.o(.text);
-    }
-
-    /* 0x80026740 1B40-3BF0 [20B0] */
-    .text1B40_code 0x80026740 : AT(0x1B40) {
         build/src/code_1b40_len_20b0.o(.text);
-    }
-
-    /* 0x800287F0 3BF0-42E0 [6F0] */
-    .text3BF0_code 0x800287F0 : AT(0x3BF0) {
         build/src/code_3bf0_len_6f0.o(.text);
-    }
-
-    /* 0x80028EE0 42E0-6000 [1D20] */
-    .text42E0_code 0x80028EE0 : AT(0x42E0) {
         build/src/code_42e0_len_1f60.o(.text);
-    }
-
-    /* 0x8002AC00 6000-6240 [240] */
-    .text6000_code 0x8002AC00 : AT(0x6000) {
         build/src/code_6000.o(.text);
-    }
-
-    /* 0x8002AE40 6240-6E40 [C00] */
-    .text6240_code 0x8002AE40 : AT(0x6240) {
         build/src/code_6240_len_c00.o(.text);
-    }
-
-    /* 0x8002BA40 6E40-7340 [500] */
-    .text6E40_code 0x8002BA40 : AT(0x6E40) {
         build/src/code_6e40_len_500.o(.text);
-    }
-
-    /* 0x8002BF40 7340-7E40 [B00] */
-    .text7340_code 0x8002BF40 : AT(0x7340) {
         build/src/code_7340_len_b00.o(.text);
-    }
-
-    /* 0x8002CA40 7E40-8230 [3F0] */
-    .text7E40_code 0x8002CA40 : AT(0x7E40) {
         build/src/os/code_7e40_len_3f0.o(.text);
-    }
-
-    /* 0x8002CE30 8230-9D10 [1AE0] */
-    .text8230_code 0x8002CE30 : AT(0x8230) {
         build/src/code_8230_len_1ae0.o(.text);
-    }
-
-    /* 0x8002E910 9D10-AD90 [1080] */
-    .text9D10_code 0x8002E910 : AT(0x9D10) {
         build/src/code_9d10_len_1080.o(.text);
-    }
-
-    /* 0x8002F990 AD90-D610 [2880] */
-    .textAD90_code 0x8002F990 : AT(0xAD90) {
         build/src/code_ad90_len_2880.o(.text);
-    }
-
-    /* 0x80032210 D610-E940 [1330] */
-    .textD610_code 0x80032210 : AT(0xD610) {
         build/src/code_d610_len_1330.o(.text);
-    }
-
-    /* 0x80033540 E940-EBD0 [290] */
-    .textE940_code 0x80033540 : AT(0xE940) {
         build/src/code_e940_len_290.o(.text);
-    }
-
-    /* 0x800337D0 EBD0-F270 [6A0] */
-    .textEBD0_code 0x800337D0 : AT(0xEBD0) {
         build/src/code_ebd0_len_6a0.o(.text);
-    }
-
-    /* 0x80033E70 F270-10400 [1190] */
-    .textF270_code 0x80033E70 : AT(0xF270) {
         build/src/code_f270_len_1190.o(.text);
-    }
-
-    /* 0x80035000 10400-11130 [D30] */
-    .text10400_code 0x80035000 : AT(0x10400) {
         build/src/code_10400_len_d30.o(.text);
-    }
-
-    /* 0x80035D30 11130-111F0 [C0] */
-    .text11130_code 0x80035D30 : AT(0x11130) {
         build/src/code_11130_len_c0.o(.text);
-    }
-
-    /* 0x80035DF0 111F0-11A50 [860] */
-    .text111F0_code 0x80035DF0 : AT(0x111F0) {
         build/src/code_111f0_len_860.o(.text);
-    }
-
-    /* 0x80036650 11A50-121F0 [7A0] */
-    .text11A50_code 0x80036650 : AT(0x11A50) {
         build/src/code_11a50_len_7a0.o(.text);
-    }
-
-    /* 0x80036DF0 121F0-13480 [1290] */
-    .text121F0_code 0x80036DF0 : AT(0x121F0) {
         build/src/code_121f0_len_1290.o(.text);
-    }
-
-    /* 0x80038080 13480-13870 [3F0] */
-    .text13480_code 0x80038080 : AT(0x13480) {
         build/src/code_13480_len_3f0.o(.text);
-    }
-
-    /* 0x80038470 13870-1A1F0 [6980] */
-    .text13870_code 0x80038470 : AT(0x13870) {
         build/src/code_13870_len_6980.o(.text);
-    }
-
-    /* 0x8003EDF0 1A1F0-1F580 [5390] */
-    .text1A1F0_code 0x8003EDF0 : AT(0x1A1F0) {
         build/src/code_1a1f0_len_5390.o(.text);
-    }
-
-    /* 0x80044180 1F580-20EC0 [1940] */
-    .text1F580_code 0x80044180 : AT(0x1F580) {
         build/src/code_1f580_len_1940.o(.text);
-    }
-
-    /* 0x80045AC0 20EC0-25F00 [5040] */
-    .text20EC0_code 0x80045AC0 : AT(0x20EC0) {
         build/src/code_20ec0_len_5040.o(.text);
-    }
-
-    /* 0x8004AB00 25F00-26840 [940] */
-    .text25F00_code 0x8004AB00 : AT(0x25F00) {
         build/src/code_25f00_len_940.o(.text);
-    }
-
-    /* 0x8004B440 26840-28910 [20D0] */
-    .text26840_code 0x8004B440 : AT(0x26840) {
         build/src/code_26840_len_20d0.o(.text);
-    }
-
-    /* 0x8004D510 28910-2D9A0 [5090] */
-    .text28910_code 0x8004D510 : AT(0x28910) {
         build/src/code_28910_len_5090.o(.text);
-    }
-
-    /* 0x800525A0 2D9A0-2E230 [890] */
-    .text2D9A0_code 0x800525A0 : AT(0x2D9A0) {
         build/src/code_2d9a0_len_890.o(.text);
-    }
-
-    /* 0x80052E30 2E230-303C0 [2190] */
-    .text2E230_code 0x80052E30 : AT(0x2E230) {
         build/src/code_2e230_len_2190.o(.text);
-    }
-
-    /* 0x80054FC0 303C0-341D0 [3E10] */
-    .text303C0_code 0x80054FC0 : AT(0x303C0) {
         build/src/code_303c0_len_3e10.o(.text);
-    }
-
-    /* 0x80058DD0 341D0-362A0 [20D0] */
-    .text341D0_code 0x80058DD0 : AT(0x341D0) {
         build/src/code_341d0_len_20d0.o(.text);
-    }
-
-    /* 0x8005AEA0 362A0-39210 [2F70] */
-    .text362A0_code 0x8005AEA0 : AT(0x362A0) {
         build/src/code_362a0_len_2f70.o(.text);
-    }
-
-    /* 0x8005DE10 39210-39CB0 [AA0] */
-    .text39210_code 0x8005DE10 : AT(0x39210) {
         build/src/code_39210_len_aa0.o(.text);
-    }
-
-    /* 0x8005E8B0 39CB0-39DB0 [100] */
-    .text39CB0_code 0x8005E8B0 : AT(0x39CB0) {
         build/src/os/code_39cb0_len_100.o(.text);
-    }
-
-    /* 0x8005E9B0 39DB0-3A650 [8A0] */
-    .text39DB0_code 0x8005E9B0 : AT(0x39DB0) {
         build/src/os/code_39db0_len_8a0.o(.text);
-    }
-
-    /* 0x8005F250 3A650-3A690 [40] */
-    .text3A650_code 0x8005F250 : AT(0x3A650) {
         build/src/os/code_3a650_len_40.o(.text);
-    }
-
-    /* 0x8005F290 3A690-3A6D0 [40] */
-    .text3A690_code 0x8005F290 : AT(0x3A690) {
         build/src/os/code_3a690_len_40.o(.text);
-    }
-
-    /* 0x8005F2D0 3A6D0-3A6F0 [20] */
-    .text3A6D0_code 0x8005F2D0 : AT(0x3A6D0) {
         build/src/os/code_3a6d0_len_20.o(.text);
-    }
-
-    /* 0x8005F2F0 3A6F0-3A800 [110] */
-    .text3A6F0_code 0x8005F2F0 : AT(0x3A6F0) {
         build/src/os/code_3a6f0_len_110.o(.text);
-    }
-
-    /* 0x8005F400 3A800-3A830 [30] */
-    .text3A800_code 0x8005F400 : AT(0x3A800) {
         build/src/os/code_3a800_len_30.o(.text);
-    }
-
-    /* 0x8005F430 3A830-3A850 [20] */
-    .text3A830_code 0x8005F430 : AT(0x3A830) {
         build/src/os/code_3a830_len_20.o(.text);
-    }
-
-    /* 0x8005F450 3A850-3B290 [A40] */
-    .text3A850_code 0x8005F450 : AT(0x3A850) {
         build/src/os/code_3a850_le_a40.o(.text);
-    }
-
-    /* 0x8005FE90 3B290-3B390 [100] */
-    .text3B290_code 0x8005FE90 : AT(0x3B290) {
         build/src/os/code_3b290_len_100.o(.text);
-    }
-
-    /* 0x8005FF90 3B390-3B4A0 [110] */
-    .text3B390_code 0x8005FF90 : AT(0x3B390) {
         build/src/os/code_3b390_len_110.o(.text);
-    }
-
-    /* 0x800600A0 3B4A0-3B710 [270] */
-    .text3B4A0_code 0x800600A0 : AT(0x3B4A0) {
         build/src/os/code_3b4a0_len_270.o(.text);
-    }
-
-    /* 0x80060310 3B710-3B750 [40] */
-    .text3B710_code 0x80060310 : AT(0x3B710) {
         build/src/os/code_3b710_len_40.o(.text);
-    }
-
-    /* 0x80060350 3B750-3B770 [20] */
-    .text3B750_code 0x80060350 : AT(0x3B750) {
         build/src/code_3b750_len_20.o(.text);
-    }
-
-    /* 0x80060370 3B770-3B7F0 [80] */
-    .text3B770_code 0x80060370 : AT(0x3B770) {
         build/src/os/code_3b770_len_80.o(.text);
-    }
-
-    /* 0x800603F0 3B7F0-3B910 [120] */
-    .text3B7F0_code 0x800603F0 : AT(0x3B7F0) {
         build/src/os/code_3b7f0_len_120.o(.text);
-    }
-
-    /* 0x80060510 3B910-3BD20 [410] */
-    .text3B910_code 0x80060510 : AT(0x3B910) {
         build/src/os/code_3b910_len_410.o(.text);
-    }
-
-    /* 0x80060920 3BD20-3BDE0 [C0] */
-    .text3BD20_code 0x80060920 : AT(0x3BD20) {
         build/src/os/code_3bd20_len_c0.o(.text);
-    }
-
-    /* 0x800609E0 3BDE0-3C1C0 [3E0] */
-    .text3BDE0_code 0x800609E0 : AT(0x3BDE0) {
         build/src/os/code_3bde0_len_3e0.o(.text);
-    }
-
-    /* 0x80060DC0 3C1C0-3C220 [60] */
-    .text3C1C0_code 0x80060DC0 : AT(0x3C1C0) {
         build/src/os/code_3c1c0_len_60.o(.text);
-    }
-
-    /* 0x80060E20 3C220-3C2C0 [A0] */
-    .text3C220_code 0x80060E20 : AT(0x3C220) {
         build/src/os/code_3c220_len_a0.o(.text);
-    }
-
-    /* 0x80060EC0 3C2C0-3C310 [50] */
-    .text3C2C0_code 0x80060EC0 : AT(0x3C2C0) {
         build/src/os/code_3c2c0_len_50.o(.text);
-    }
-
-    /* 0x80060F10 3C310-3C490 [180] */
-    .text3C310_code 0x80060F10 : AT(0x3C310) {
         build/src/os/code_3c310_len_180.o(.text);
-    }
-
-    /* 0x80061090 3C490-3C850 [3C0] */
-    .text3C490_code 0x80061090 : AT(0x3C490) {
         build/src/os/code_3c490_len_3c0.o(.text);
-    }
-
-    /* 0x80061450 3C850-3C940 [F0] */
-    .text3C850_code 0x80061450 : AT(0x3C850) {
         build/src/os/code_3c850_len_f0.o(.text);
-    }
-
-    /* 0x80061540 3C940-3CA80 [140] */
-    .text3C940_code 0x80061540 : AT(0x3C940) {
         build/src/os/code_3c940_len_140.o(.text);
-    }
-
-    /* 0x80061680 3CA80-3CB20 [A0] */
-    .text3CA80_code 0x80061680 : AT(0x3CA80) {
         build/src/os/code_3ca80_len_a0.o(.text);
-    }
-
-    /* 0x80061720 3CB20-3CC50 [130] */
-    .text3CB20_code 0x80061720 : AT(0x3CB20) {
         build/src/os/code_3cb20_len_130.o(.text);
-    }
-
-    /* 0x80061850 3CC50-3CCD0 [80] */
-    .text3CC50_code 0x80061850 : AT(0x3CC50) {
         build/src/os/code_3cc50_len_80.o(.text);
-    }
-
-    /* 0x800618D0 3CCD0-3CD00 [30] */
-    .text3CCD0_code 0x800618D0 : AT(0x3CCD0) {
         build/src/os/code_3ccd0_len_30.o(.text);
-    }
-
-    /* 0x80061900 3CD00-3D2F0 [5F0] */
-    .text3CD00_code 0x80061900 : AT(0x3CD00) {
         build/src/os/code_3cd00_len_5f0.o(.text);
-    }
-
-    /* 0x80061EF0 3D2F0-3D300 [10] */
-    .text3D2F0_code 0x80061EF0 : AT(0x3D2F0) {
         build/src/os/code_3d2f0_len_10.o(.text);
-    }
-
-    /* 0x80061F00 3D300-3D330 [30] */
-    .text3D300_code 0x80061F00 : AT(0x3D300) {
         build/src/os/code_3d300_len_30.o(.text);
-    }
-
-    /* 0x80061F30 3D330-3DCC0 [990] */
-    .text3D330_code 0x80061F30 : AT(0x3D330) {
         build/src/os/code_3d330_len_990.o(.text);
-    }
-
-    /* 0x800628C0 3DCC0-3E720 [A60] */
-    .text3DCC0_code 0x800628C0 : AT(0x3DCC0) {
         build/src/os/code_3dcc0_len_a60.o(.text);
-    }
-
-    /* 0x80063320 3E720-3ED10 [5F0] */
-    .text3E720_code 0x80063320 : AT(0x3E720) {
         build/src/os/code_3e720_len_5f0.o(.text);
-    }
-
-    /* 0x80063910 3ED10-3EF90 [280] */
-    .text3ED10_code 0x80063910 : AT(0x3ED10) {
         build/src/guOrtho.o(.text);
-    }
-
-    /* 0x80063B90 3EF90-3F310 [380] */
-    .text3EF90_code 0x80063B90 : AT(0x3EF90) {
         build/src/os/code_3ef90_len_600.o(.text);
-    }
-
-    /* 0x80063F10 3F310-3F6D0 [3C0] */
-    .text3F310_code 0x80063F10 : AT(0x3F310) {
         build/src/os/code_3f310_len_3c0.o(.text);
-    }
-
-    /* 0x800642D0 3F6D0-3F9F0 [320] */
-    .text3F6D0_code 0x800642D0 : AT(0x3F6D0) {
         build/src/os/code_3f6d0_len_320.o(.text);
-    }
-
-    /* 0x800645F0 3F9F0-3FA50 [60] */
-    .text3F9F0_code 0x800645F0 : AT(0x3F9F0) {
         build/src/os/code_3f9f0_len_60.o(.text);
-    }
-
-    /* 0x80064650 3FA50-409B0 [F60] */
-    .text3FA50_code 0x80064650 : AT(0x3FA50) {
         build/src/os/code_3fa50_len_f60.o(.text);
-    }
-
-    /* 0x800655B0 409B0-40AF0 [140] */
-    .text409B0_code 0x800655B0 : AT(0x409B0) {
         build/src/os/code_409b0_len_140.o(.text);
-    }
-
-    /* 0x800656F0 40AF0-40C20 [130] */
-    .text40AF0_code 0x800656F0 : AT(0x40AF0) {
         build/src/os/code_40af0_len_130.o(.text);
-    }
-
-    /* 0x80065820 40C20-40E10 [1F0] */
-    .text40C20_code 0x80065820 : AT(0x40C20) {
         build/src/os/code_40c20_len_1f0.o(.text);
-    }
-
-    /* 0x80065A10 40E10-41050 [240] */
-    .text40E10_code 0x80065A10 : AT(0x40E10) {
         build/src/os/code_40e10_len_240.o(.text);
-    }
-
-    /* 0x80065C50 41050-41170 [120] */
-    .text41050_code 0x80065C50 : AT(0x41050) {
         build/src/os/code_41050_len_120.o(.text);
-    }
-
-    /* 0x80065D70 41170-41260 [F0] */
-    .text41170_code 0x80065D70 : AT(0x41170) {
         build/src/os/code_41170_len_f0.o(.text);
-    }
-
-    /* 0x80065E60 41260-41330 [D0] */
-    .text41260_code 0x80065E60 : AT(0x41260) {
         build/src/os/osCreateThread.o(.text);
-    }
-
-    /* 0x80065F30 41330-41350 [20] */
-    .text41330_code 0x80065F30 : AT(0x41330) {
         build/src/os/osGetThreadPri.o(.text);
-    }
-
-    /* 0x80065F50 41350-41420 [D0] */
-    .text41350_code 0x80065F50 : AT(0x41350) {
         build/src/os/code_41350_len_d0.o(.text);
-    }
-
-    /* 0x80066020 41420-41540 [120] */
-    .text41420_code 0x80066020 : AT(0x41420) {
         build/src/os/code_41420_len_120.o(.text);
-    }
-
-    /* 0x80066140 41540-41600 [C0] */
-    .text41540_code 0x80066140 : AT(0x41540) {
         build/src/os/code_41540_len_c0.o(.text);
-    }
-
-    /* 0x80066200 41600-41640 [40] */
-    .text41600_code 0x80066200 : AT(0x41600) {
         build/src/os/code_41600_len_40.o(.text);
-    }
-
-    /* 0x80066240 41640-41690 [50] */
-    .text41640_code 0x80066240 : AT(0x41640) {
         build/src/os/code_41640_len_50.o(.text);
-    }
-
-    /* 0x80066290 41690-416A0 [10] */
-    .text41690_code 0x80066290 : AT(0x41690) {
         build/src/os/code_41690_len_10.o(.text);
-    }
-
-    /* 0x800662A0 416A0-41730 [90] */
-    .text416A0_code 0x800662A0 : AT(0x416A0) {
         build/src/os/code_416a0_len_90.o(.text);
-    }
-
-    /* 0x80066330 41730-41750 [20] */
-    .text41730_code 0x80066330 : AT(0x41730) {
         build/src/os/code_41730_len_20.o(.text);
-    }
-
-    /* 0x80066350 41750-41BA0 [450] */
-    .text41750_code 0x80066350 : AT(0x41750) {
         build/src/os/code_41750_len_450.o(.text);
-    }
-
-    /* 0x800667A0 41BA0-41C60 [C0] */
-    .text41BA0_code 0x800667A0 : AT(0x41BA0) {
         build/src/os/code_41ba0_len_c0.o(.text);
-    }
-
-    /* 0x80066860 41C60-41D20 [C0] */
-    .text41C60_code 0x80066860 : AT(0x41C60) {
         build/src/os/code_41c60_len_c0.o(.text);
-    }
-
-    /* 0x80066920 41D20-41D60 [40] */
-    .text41D20_code 0x80066920 : AT(0x41D20) {
         build/src/os/code_41d20_len_40.o(.text);
-    }
-
-    /* 0x80066960 41D60-41DB0 [50] */
-    .text41D60_code 0x80066960 : AT(0x41D60) {
         build/src/os/code_41d60_len_50.o(.text);
-    }
-
-    /* 0x800669B0 41DB0-41DF0 [40] */
-    .text41DB0_code 0x800669B0 : AT(0x41DB0) {
         build/src/os/code_41db0_len_40.o(.text);
-    }
-
-    /* 0x800669F0 41DF0-41E30 [40] */
-    .text41DF0_code 0x800669F0 : AT(0x41DF0) {
         build/src/os/code_41df0_len_40.o(.text);
-    }
-
-    /* 0x80066A30 41E30-41E70 [40] */
-    .text41E30_code 0x80066A30 : AT(0x41E30) {
         build/src/os/code_41e30_len_40.o(.text);
-    }
-
-    /* 0x80066A70 41E70-421B0 [340] */
-    .text41E70_code 0x80066A70 : AT(0x41E70) {
         build/src/os/code_41e70_len_340.o(.text);
-    }
-
-    /* 0x80066DB0 421B0-42210 [60] */
-    .text421B0_code 0x80066DB0 : AT(0x421B0) {
         build/src/os/code_421b0_len_60.o(.text);
-    }
-
-    /* 0x80066E10 42210-42260 [50] */
-    .text42210_code 0x80066E10 : AT(0x42210) {
         build/src/os/code_42210_len_50.o(.text);
-    }
-
-    /* 0x80066E60 42260-423D0 [170] */
-    .text42260_code 0x80066E60 : AT(0x42260) {
         build/src/os/code_42260_len_170.o(.text);
-    }
-
-    /* 0x80066FD0 423D0-42420 [50] */
-    .text423D0_code 0x80066FD0 : AT(0x423D0) {
         build/src/os/code_423d0_len_50.o(.text);
-    }
-
-    /* 0x80067020 42420-42470 [50] */
-    .text42420_code 0x80067020 : AT(0x42420) {
         build/src/os/code_42420_len_50.o(.text);
-    }
-
-    /* 0x80067070 42470-42780 [310] */
-    .text42470_code 0x80067070 : AT(0x42470) {
         build/src/os/code_42470_len_310.o(.text);
-    }
-
-    /* 0x80067380 42780-428A0 [120] */
-    .text42780_code 0x80067380 : AT(0x42780) {
         build/src/os/code_42780_len_120.o(.text);
-    }
-
-    /* 0x800674A0 428A0-42900 [60] */
-    .text428A0_code 0x800674A0 : AT(0x428A0) {
         build/src/os/guMtxIdentF.o(.text);
-    }
-
-    /* 0x80067500 42900-42980 [80] */
-    .text42900_code 0x80067500 : AT(0x42900) {
         build/src/os/code_42900_len_80.o(.text);
-    }
-
-    /* 0x80067580 42980-42A00 [80] */
-    .text42980_code 0x80067580 : AT(0x42980) {
         build/src/os/code_42980_len_80.o(.text);
-    }
-
-    /* 0x80067600 42A00-42B00 [100] */
-    .text42A00_code 0x80067600 : AT(0x42A00) {
         build/src/os/code_42a00_len_100.o(.text);
-    }
-
-    /* 0x80067700 42B00-42BC0 [C0] */
-    .text42B00_code 0x80067700 : AT(0x42B00) {
         build/src/os/code_42b00_len_c0.o(.text);
-    }
-
-    /* 0x800677C0 42BC0-42C20 [60] */
-    .text42BC0_code 0x800677C0 : AT(0x42BC0) {
         build/src/os/code_42bc0_len_60.o(.text);
-    }
-
-    /* 0x80067820 42C20-42D00 [E0] */
-    .text42C20_code 0x80067820 : AT(0x42C20) {
         build/src/os/code_42c20_len_e0.o(.text);
-    }
-
-    /* 0x80067900 42D00-42D60 [60] */
-    .text42D00_code 0x80067900 : AT(0x42D00) {
         build/src/os/code_42d00_len_60.o(.text);
-    }
-
-    /* 0x80067960 42D60-42DE0 [80] */
-    .text42D60_code 0x80067960 : AT(0x42D60) {
         build/src/os/code_42d60_len_80.o(.text);
-    }
-
-    /* 0x800679E0 42DE0-42E70 [90] */
-    .text42DE0_code 0x800679E0 : AT(0x42DE0) {
         build/src/os/code_42de0_len_90.o(.text);
-    }
-
-    /* 0x80067A70 42E70-43200 [390] */
-    .text42E70_code 0x80067A70 : AT(0x42E70) {
         build/src/os/code_42e70_len_390.o(.text);
-    }
-
-    /* 0x80067E00 43200-439C0 [7C0] */
-    .text43200_code 0x80067E00 : AT(0x43200) {
         build/src/os/code_43200_len_7c0.o(.text);
-    }
-
-    /* 0x800685C0 439C0-43BE0 [220] */
-    .text439C0_code 0x800685C0 : AT(0x439C0) {
         build/src/os/code_439c0_len_220.o(.text);
-    }
-
-    /* 0x800687E0 43BE0-441C0 [5E0] */
-    .text43BE0_code 0x800687E0 : AT(0x43BE0) {
         build/src/os/code_43be0_len_5e0.o(.text);
-    }
-
-    /* 0x80068DC0 441C0-44380 [1C0] */
-    .text441C0_code 0x80068DC0 : AT(0x441C0) {
         build/src/os/code_441c0_len_1c0.o(.text);
-    }
-
-    /* 0x80068F80 44380-44860 [4E0] */
-    .text44380_code 0x80068F80 : AT(0x44380) {
         build/src/os/code_44380_len_4e0.o(.text);
-    }
-
-    /* 0x80069460 44860-448C0 [60] */
-    .text44860_code 0x80069460 : AT(0x44860) {
         build/src/os/code_44860_len_60.o(.text);
-    }
-
-    /* 0x800694C0 448C0-44AD0 [210] */
-    .text448C0_code 0x800694C0 : AT(0x448C0) {
         build/src/os/code_448c0_len_210.o(.text);
-    }
-
-    /* 0x800696D0 44AD0-44B40 [70] */
-    .text44AD0_code 0x800696D0 : AT(0x44AD0) {
         build/src/os/code_44ad0_len_70.o(.text);
-    }
-
-    /* 0x80069740 44B40-455D0 [A90] */
-    .text44B40_code 0x80069740 : AT(0x44B40) {
         build/src/os/code_44b40_len_a90.o(.text);
-    }
-
-    /* 0x8006A1D0 455D0-457C0 [1F0] */
-    .text455D0_code 0x8006A1D0 : AT(0x455D0) {
         build/src/os/code_455d0_len_1f0.o(.text);
-    }
-
-    /* 0x8006A3C0 457C0-45A30 [270] */
-    .text457C0_code 0x8006A3C0 : AT(0x457C0) {
         build/src/os/code_457c0_len_270.o(.text);
-    }
-
-    /* 0x8006A630 45A30-45A50 [20] */
-    .text45A30_code 0x8006A630 : AT(0x45A30) {
         build/src/os/code_45a30_len_20.o(.text);
-    }
-
-    /* 0x8006A650 45A50-45DF0 [3A0] */
-    .text45A50_code 0x8006A650 : AT(0x45A50) {
         build/src/os/code_45a50_len_3a0.o(.text);
-    }
-
-    /* 0x8006A9F0 45DF0-46760 [970] */
-    .text45DF0_code 0x8006A9F0 : AT(0x45DF0) {
         build/src/os/code_45df0_len_970.o(.text);
-    }
-
-    /* 0x8006B360 46760-467F0 [90] */
-    .text46760_code 0x8006B360 : AT(0x46760) {
         build/src/os/code_46760_len_90.o(.text);
-    }
-
-    /* 0x8006B3F0 467F0-46880 [90] */
-    .text467F0_code 0x8006B3F0 : AT(0x467F0) {
         build/src/os/code_467f0_len_90.o(.text);
-    }
-
-    /* 0x8006B480 46880-46AE0 [260] */
-    .text46880_code 0x8006B480 : AT(0x46880) {
         build/src/os/code_46880_len_260.o(.text);
-    }
-
-    /* 0x8006B6E0 46AE0-46C50 [170] */
-    .text46AE0_code 0x8006B6E0 : AT(0x46AE0) {
         build/src/os/code_46ae0_len_170.o(.text);
-    }
-
-    /* 0x8006B850 46C50-46C70 [20] */
-    .text46C50_code 0x8006B850 : AT(0x46C50) {
         build/src/os/code_46c50_len_20.o(.text);
-    }
-
-    /* 0x8006B870 46C70-47A70 [E00] */
-    .text46C70_code 0x8006B870 : AT(0x46C70) {
         build/src/os/code_46c70_len_e00.o(.text);
-    }
-
-    /* 0x8006C670 47A70-47A80 [10] */
-    .text47A70_code 0x8006C670 : AT(0x47A70) {
         build/src/os/code_47a70_len_10.o(.text);
-    }
-
-    /* 0x8006C680 47A80-47A90 [10] */
-    .text47A80_code 0x8006C680 : AT(0x47A80) {
         build/src/os/code_47a80_len_10.o(.text);
-    }
-
-    /* 0x8006C690 47A90-47AE0 [50] */
-    .text47A90_code 0x8006C690 : AT(0x47A90) {
         build/src/os/code_47a90_len_50.o(.text);
-    }
-
-    /* 0x8006C6E0 47AE0-47BC0 [E0] */
-    .text47AE0_code 0x8006C6E0 : AT(0x47AE0) {
         build/src/os/code_47ae0_len_e0.o(.text);
-    }
-
-    /* 0x8006C7C0 47BC0-47C10 [50] */
-    .text47BC0_code 0x8006C7C0 : AT(0x47BC0) {
         build/src/os/code_47bc0_len_50.o(.text);
-    }
-
-    /* 0x8006C810 47C10-47C60 [50] */
-    .text47C10_code 0x8006C810 : AT(0x47C10) {
         build/src/os/code_47c10_len_50.o(.text);
-    }
-
-    /* 0x8006C860 47C60-47D50 [F0] */
-    .text47C60_code 0x8006C860 : AT(0x47C60) {
         build/src/os/code_47c60_len_f0.o(.text);
-    }
-
-    /* 0x8006C950 47D50-47E30 [E0] */
-    .text47D50_code 0x8006C950 : AT(0x47D50) {
         build/src/os/code_47d50_len_e0.o(.text);
-    }
-
-    /* 0x8006CA30 47E30-47E90 [60] */
-    .text47E30_code 0x8006CA30 : AT(0x47E30) {
         build/src/os/code_47e30_len_60.o(.text);
-    }
-
-    /* 0x8006CA90 47E90-47FA0 [110] */
-    .text47E90_code 0x8006CA90 : AT(0x47E90) {
         build/src/os/code_47e90_len_110.o(.text);
-    }
-
-    /* 0x8006CBA0 47FA0-47FC0 [20] */
-    .text47FA0_code 0x8006CBA0 : AT(0x47FA0) {
         build/src/os/code_47fa0_len_20.o(.text);
-    }
-
-    /* 0x8006CBC0 47FC0-48020 [60] */
-    .text47FC0_code 0x8006CBC0 : AT(0x47FC0) {
         build/src/os/code_47fc0_len_60.o(.text);
-    }
-
-    /* 0x8006CC20 48020-48A20 [A00] */
-    .text48020_code 0x8006CC20 : AT(0x48020) {
         build/src/os/code_48020_len_a00.o(.text);
-    }
-
-    /* 0x8006D620 48A20-48BE0 [1C0] */
-    .text48A20_code 0x8006D620 : AT(0x48A20) {
         build/src/os/code_48a20_len_1c0.o(.text);
-    }
-
-    /* 0x8006D7E0 48BE0-48C00 [20] */
-    .text48BE0_code 0x8006D7E0 : AT(0x48BE0) {
         build/src/os/code_48be0_len_20.o(.text);
-    }
-
-    /* 0x8006D800 48C00-491C0 [5C0] */
-    .text48C00_code 0x8006D800 : AT(0x48C00) {
         build/src/os/code_48c00_len_5c0.o(.text);
-    }
-
-    /* 0x8006DDC0 491C0-49C70 [AB0] */
-    .text491C0_code 0x8006DDC0 : AT(0x491C0) {
         build/src/os/code_491c0_len_f80.o(.text);
-    }
-
-    /* 0x8006E870 49C70-4A140 [4D0] */
-    .text49C70_code 0x8006E870 : AT(0x49C70) {
         build/src/os/code_49C70.o(.text);
-    }
-
-    /* 0x8006ED40 4A140-4A1B0 [70] */
-    .text4A140_code 0x8006ED40 : AT(0x4A140) {
         build/src/os/code_4a140_len_70.o(.text);
-    }
-
-    /* 0x8006EDB0 4A1B0-4A1F0 [40] */
-    .text4A1B0_code 0x8006EDB0 : AT(0x4A1B0) {
         build/src/os/code_4a1b0_len_40.o(.text);
-    }
-
-    /* 0x8006EDF0 4A1F0-4A360 [170] */
-    .text4A1F0_code 0x8006EDF0 : AT(0x4A1F0) {
         build/src/os/code_4a1f0_len_170.o(.text);
-    }
-
-    /* 0x8006EF60 4A360-4AC90 [930] */
-    .text4A360_code 0x8006EF60 : AT(0x4A360) {
         build/src/os/code_4a360_len_930.o(.text);
-    }
-
-    /* 0x8006F890 4AC90-4E5A0 [3910] */
-    .text4AC90_code 0x8006F890 : AT(0x4AC90) {
         build/src/os/code_4ac90_len_3910.o(.text);
+        build/bin/code_4E5A0.o(.data);
     }
 
-    /* 0x00000000 4E5A0-759B0 [27410] */
-    .data_4E5A0 0x4E5A0 : AT(0x4E5A0) {
-        build/bin/4E5A0.o(.data);
-    }
-
-    /* 0x800DC500 759B0-7BB60 [61B0] */
+    /* 0x800DC500 759B0-A5DD0 (len 30420) */
     .text759B0_code 0x800DC500 : AT(0x759B0) {
         build/src/code_759b0_len_61b0.o(.text);
-    }
-
-    /* 0x800E26B0 7BB60-7FD10 [41B0] */
-    .text7BB60_code 0x800E26B0 : AT(0x7BB60) {
         build/src/code_7bb60_len_41b0.o(.text);
-    }
-
-    /* 0x800E6860 7FD10-80850 [B40] */
-    .text7FD10_code 0x800E6860 : AT(0x7FD10) {
         build/src/code_7fd10_len_b40.o(.text);
-    }
-
-    /* 0x800E73A0 80850-838B0 [3060] */
-    .text80850_code 0x800E73A0 : AT(0x80850) {
         build/src/code_80850_len_3060.o(.text);
-    }
-
-    /* 0x800EA400 838B0-891B0 [5900] */
-    .text838B0_code 0x800EA400 : AT(0x838B0) {
         build/src/code_838b0_len_5900.o(.text);
-    }
-
-    /* 0x800EFD00 891B0-8A160 [FB0] */
-    .text891B0_code 0x800EFD00 : AT(0x891B0) {
         build/src/code_891b0_len_fb0.o(.text);
-    }
-
-    /* 0x800F0CB0 8A160-8A860 [700] */
-    .text8A160_code 0x800F0CB0 : AT(0x8A160) {
         build/src/code_8a160_len_700.o(.text);
-    }
-
-    /* 0x800F13B0 8A860-8E790 [3F30] */
-    .text8A860_code 0x800F13B0 : AT(0x8A860) {
         build/src/code_8a860_len_3f30.o(.text);
-    }
-
-    /* 0x800F52E0 8E790-90FE0 [2850] */
-    .text8E790_code 0x800F52E0 : AT(0x8E790) {
         build/src/code_8e790_len_2850.o(.text);
+        build/bin/code_90FE0.o(.data);
     }
 
-    /* 0x00000000 90FE0-A5DD0 [14DF0] */
-    .data_90FE0 0x90FE0 : AT(0x90FE0) {
-        build/bin/90FE0.o(.data);
-    }
-
-    /* 0x8010F6D0 A5DD0-B72B0 [114E0] */
+    /* 0x8010F6D0 A5DD0-E79B0 (len 41BE0) */
     .textA5DD0_code 0x8010F6D0 : AT(0xA5DD0) {
         build/src/code_a5dd0_len_114e0.o(.text);
-    }
-
-    /* 0x80120BB0 B72B0-CD180 [15ED0] */
-    .textB72B0_code 0x80120BB0 : AT(0xB72B0) {
         build/src/code_b72b0_len_15ed0.o(.text);
-    }
-
-    /* 0x80136A80 CD180-D0A70 [38F0] */
-    .textCD180_code 0x80136A80 : AT(0xCD180) {
         build/src/code_cd180_len_38f0.o(.text);
-    }
-
-    /* 0x8013A370 D0A70-D5A50 [4FE0] */
-    .textD0A70_code 0x8013A370 : AT(0xD0A70) {
         build/src/code_d0a70_len_4fe0.o(.text);
-    }
-
-    /* 0x8013F350 D5A50-DBA20 [5FD0] */
-    .textD5A50_code 0x8013F350 : AT(0xD5A50) {
         build/src/code_d5a50_len_5fd0.o(.text);
-    }
-
-    /* 0x80145320 DBA20-DBD70 [350] */
-    .textDBA20_code 0x80145320 : AT(0xDBA20) {
         build/src/code_dba20_len_350.o(.text);
-    }
-
-    /* 0x80145670 DBD70-DC470 [700] */
-    .textDBD70_code 0x80145670 : AT(0xDBD70) {
         build/src/code_dbd70_len_700.o(.text);
-    }
-
-    /* 0x80145D70 DC470-DD930 [14C0] */
-    .textDC470_code 0x80145D70 : AT(0xDC470) {
         build/src/code_dc470_len_14c0.o(.text);
-    }
-
-    /* 0x80147230 DD930-DDAF0 [1C0] */
-    .textDD930_code 0x80147230 : AT(0xDD930) {
         build/src/code_dd930_len_1c0.o(.text);
-    }
-
-    /* 0x801473F0 DDAF0-DE740 [C50] */
-    .textDDAF0_code 0x801473F0 : AT(0xDDAF0) {
         build/src/code_ddaf0_len_c50.o(.text);
-    }
-
-    /* 0x80148040 DE740-E0B30 [23F0] */
-    .textDE740_code 0x80148040 : AT(0xDE740) {
         build/src/code_de740_len_23f0.o(.text);
-    }
-
-    /* 0x8014A430 E0B30-E16B0 [B80] */
-    .textE0B30_code 0x8014A430 : AT(0xE0B30) {
         build/src/code_e0b30_len_b80.o(.text);
+        build/bin/code_E16B0.o(.data);
+        build/src/code_dc470_len_14c0.o(.data);
+        build/bin/code_E5830.o(.data);
     }
 
-    /* 0x00000000 E16B0-E79B0 [6300] */
-    .data_E16B0 0xE16B0 : AT(0xE16B0) {
-        build/bin/E16B0.o(.data);
-    }
-
-    /* 0x802C3000 E79B0-E92D0 [1920] */
+    /* 0x802C3000 E79B0-FEE30 (len 17480) */
     .textE79B0_code 0x802C3000 : AT(0xE79B0) {
         build/src/code_e79b0_len_1920.o(.text);
-    }
-
-    /* 0x802C4920 E92D0-EF070 [5DA0] */
-    .textE92D0_code 0x802C4920 : AT(0xE92D0) {
         build/src/code_e92d0_len_5da0.o(.text);
-    }
-
-    /* 0x802CA6C0 EF070-F2470 [3400] */
-    .textEF070_code 0x802CA6C0 : AT(0xEF070) {
         build/src/code_ef070_len_3400.o(.text);
-    }
-
-    /* 0x802CDAC0 F2470-F4C60 [27F0] */
-    .textF2470_code 0x802CDAC0 : AT(0xF2470) {
         build/src/code_f2470_len_27f0.o(.text);
-    }
-
-    /* 0x802D02B0 F4C60-F8F60 [4300] */
-    .textF4C60_code 0x802D02B0 : AT(0xF4C60) {
         build/src/code_f4c60_len_4300.o(.text);
-    }
-
-    /* 0x802D45B0 F8F60-FA4C0 [1560] */
-    .textF8F60_code 0x802D45B0 : AT(0xF8F60) {
         build/src/code_f8f60_len_1560.o(.text);
-    }
-
-    /* 0x802D5B10 FA4C0-FE0B0 [3BF0] */
-    .textFA4C0_code 0x802D5B10 : AT(0xFA4C0) {
         build/src/code_fa4c0_len_3bf0.o(.text);
-    }
-
-    /* 0x802D9700 FE0B0-FE650 [5A0] */
-    .textFE0B0_code 0x802D9700 : AT(0xFE0B0) {
         build/src/code_fe0b0_len_5a0.o(.text);
+        build/bin/code_FE650.o(.data);
     }
 
-    /* 0x00000000 FE650-FEE30 [7E0] */
-    .data_FE650 0xFE650 : AT(0xFE650) {
-        build/bin/FE650.o(.data);
-    }
-
-    /* 0x802DBD40 FEE30-101B90 [2D60] */
+    /* 0x802DBD40 FEE30-102610 (len 37E0) */
     .textFEE30_code 0x802DBD40 : AT(0xFEE30) {
         build/src/code_fee30_len_2d60.o(.text);
-    }
-
-    /* 0x802DEAA0 101B90-102480 [8F0] */
-    .text101B90_code 0x802DEAA0 : AT(0x101B90) {
         build/src/code_101b90_len_8f0.o(.text);
+        build/bin/code_102480.o(.data);
     }
 
-    /* 0x00000000 102480-102610 [190] */
-    .data_102480 0x102480 : AT(0x102480) {
-        build/bin/102480.o(.data);
-    }
-
-    /* 0x802E0D90 102610-104940 [2330] */
+    /* 0x802E0D90 102610-10A9F0 (len 83E0) */
     .text102610_code 0x802E0D90 : AT(0x102610) {
         build/src/code_102610_len_2330.o(.text);
-    }
-
-    /* 0x802E30C0 104940-105700 [DC0] */
-    .text104940_code 0x802E30C0 : AT(0x104940) {
         build/src/code_104940_len_dc0.o(.text);
-    }
-
-    /* 0x802E3E80 105700-107830 [2130] */
-    .text105700_code 0x802E3E80 : AT(0x105700) {
         build/src/code_105700_len_2130.o(.text);
-    }
-
-    /* 0x802E5FB0 107830-1086A0 [E70] */
-    .text107830_code 0x802E5FB0 : AT(0x107830) {
         build/src/code_107830_len_e70.o(.text);
-    }
-
-    /* 0x802E6E20 1086A0-109660 [FC0] */
-    .text1086A0_code 0x802E6E20 : AT(0x1086A0) {
         build/src/code_1086a0_len_fc0.o(.text);
-    }
-
-    /* 0x802E7DE0 109660-10A9F0 [1390] */
-    .text109660_code 0x802E7DE0 : AT(0x109660) {
         build/src/code_109660_len_1270.o(.text);
     }
 
@@ -1060,58 +254,35 @@ SECTIONS
         build/bin/131340.o(.data);
     }
 
-    /* 0x80242BA0 135EE0-1422A0 [C3C0] */
+    /* 0x80242BA0 135EE0-163400 (len 2D520) */
     .text135EE0_code 0x80242BA0 : AT(0x135EE0) {
         build/src/code_135EE0.o(.text);
+        build/bin/code_1422A0.o(.data);
     }
 
-    /* 0x00000000 1422A0-163400 [21160] */
-    .data_1422A0 0x1422A0 : AT(0x1422A0) {
-        build/bin/1422A0.o(.data);
-    }
-
-    /* 0x80242BA0 163400-167570 [4170] */
+    /* 0x80242BA0 163400-16C8E0 (len 94E0) */
     .text163400_code 0x80242BA0 : AT(0x163400) {
         build/src/code_163400.o(.text);
-    }
-
-    /* 0x80246D10 167570-168590 [1020] */
-    .text167570_code 0x80246D10 : AT(0x167570) {
         build/src/code_167570.o(.text);
-    }
-
-    /* 0x80247D30 168590-169BE0 [1650] */
-    .text168590_code 0x80247D30 : AT(0x168590) {
         build/src/code_168590.o(.text);
-    }
-
-    /* 0x80249380 169BE0-16A3E0 [800] */
-    .text169BE0_code 0x80249380 : AT(0x169BE0) {
         build/src/code_169BE0.o(.text);
+        build/bin/code_16A3E0.o(.data);
     }
 
-    /* 0x00000000 16A3E0-16C8E0 [2500] */
-    .data_16A3E0 0x16A3E0 : AT(0x16A3E0) {
-        build/bin/16A3E0.o(.data);
-    }
-
-    /* 0x8023E000 16C8E0-1AF2C0 [429E0] */
+    /* 0x8023E000 16C8E0-1CC310 (len 5FA30) */
     .text16C8E0_code 0x8023E000 : AT(0x16C8E0) {
         build/src/code_16c8e0.o(.text);
+        build/bin/code_1AF2C0.o(.data);
     }
 
-    /* 0x00000000 1AF2C0-3169F0 [167730] */
-    .data_1AF2C0 0x1AF2C0 : AT(0x1AF2C0) {
-        build/bin/1AF2C0.o(.data);
+    /* 0x00000000 1CC310-3169F0 [14A6E0] */
+    .data_1CC310 0x1CC310 : AT(0x1CC310) {
+        build/bin/1CC310.o(.data);
     }
 
-    /* 0x80200000 3169F0-316A70 [80] */
+    /* 0x80200000 3169F0-316C00 (len 210) */
     .text3169F0_code 0x80200000 : AT(0x3169F0) {
         build/src/code_3169f0.o(.text);
-    }
-
-    /* 0x80200080 316A70-316C00 [190] */
-    .text316A70_code 0x80200080 : AT(0x316A70) {
         build/src/code_316a70.o(.text);
     }
 
@@ -1120,12 +291,12 @@ SECTIONS
         build/bin/316C00.o(.data);
     }
 
-    /* 0x802AE000 316D90-316F30 [1A0] */
+    /* 0x802AE000 316D90-316F30 (len 1A0) */
     .text316D90_code 0x802AE000 : AT(0x316D90) {
         build/src/code_316d90.o(.text);
     }
 
-    /* 0x802B2000 316F30-317020 [F0] */
+    /* 0x802B2000 316F30-317020 (len F0) */
     .text316F30_code 0x802B2000 : AT(0x316F30) {
         build/src/code_316f30.o(.text);
     }
@@ -1135,7 +306,7 @@ SECTIONS
         build/bin/317020.o(.data);
     }
 
-    /* 0x802A1000 415D90-4200C0 [A330] */
+    /* 0x802A1000 415D90-4200C0 (len A330) */
     .text415D90_code 0x802A1000 : AT(0x415D90) {
         build/src/code_415D90.o(.text);
     }
@@ -1145,18 +316,10 @@ SECTIONS
         build/bin/4200C0.o(.data);
     }
 
-    /* 0x80280000 7E0E80-7E2AA0 [1C20] */
+    /* 0x80280000 7E0E80-7E4D00 (len 3E80) */
     .text7E0E80_code 0x80280000 : AT(0x7E0E80) {
         build/src/code_7e0e80.o(.text);
-    }
-
-    /* 0x80281C20 7E2AA0-7E3700 [C60] */
-    .text7E2AA0_code 0x80281C20 : AT(0x7E2AA0) {
         build/src/code_7E2AA0.o(.text);
-    }
-
-    /* 0x80282880 7E3700-7E4D00 [1600] */
-    .text7E3700_code 0x80282880 : AT(0x7E3700) {
         build/src/code_7E3700.o(.text);
     }
 
@@ -1165,7 +328,7 @@ SECTIONS
         build/bin/7E4D00.o(.data);
     }
 
-    /* 0x802B7000 E20EB0-E215C0 [710] */
+    /* 0x802B7000 E20EB0-E215C0 (len 710) */
     .textE20EB0_code 0x802B7000 : AT(0xE20EB0) {
         build/src/code_e20eb0.o(.text);
     }

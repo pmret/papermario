@@ -1,12 +1,15 @@
 gGameStatusPtr = 0x8007419C;
 gUIStatus = 0x8010EF58;
 gPlayerData = 0x8010F290;
+gPlayerActionState = 0x8010F07C;
+gPlayerAnimation = 0x8010F080;
 gPlayerStatus = 0x8010EFC8;
 gItemTable = 0x800878E0;
 gWorldScriptList = 0x802DA490;
 gBattleScriptList = 0x802DA690;
 gCurrentScriptListPtr = 0x802DA890;
 gGlobalTimeSpace = 0x802D9CA8;
+gPlayerNpcPtr = 0x802D9D20;
 D_80147574 = 0x80147574;
 D_8010EBB0 = 0x8010EBB0;
 D_8010F250 = 0x8010F250;
@@ -62,9 +65,6 @@ D_00316D90 = 0x00316D90;
 D_00316F30 = 0x00316F30;
 
 D_8010D000 = 0x8010D000;
-gCloudyFlowerFieldsBg = 0x8014F120;
-gSunnyFlowerFieldsBg = 0x8014F128;
-D_8014F12F = 0x8014F12F;
 D_8014F140 = 0x8014F140;
 D_80151308 = 0x80151308;
 D_80151328 = 0x80151328;

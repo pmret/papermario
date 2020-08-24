@@ -2,63 +2,7 @@
 .set noreorder # don't insert nops after branches
 
 
-glabel SetCamTarget
-/* 0EF8DC 802CAF2C 27BDFFD8 */  addiu $sp, $sp, -0x28
-/* 0EF8E0 802CAF30 AFB10014 */  sw    $s1, 0x14($sp)
-/* 0EF8E4 802CAF34 0080882D */  daddu $s1, $a0, $zero
-/* 0EF8E8 802CAF38 AFBF0020 */  sw    $ra, 0x20($sp)
-/* 0EF8EC 802CAF3C AFB3001C */  sw    $s3, 0x1c($sp)
-/* 0EF8F0 802CAF40 AFB20018 */  sw    $s2, 0x18($sp)
-/* 0EF8F4 802CAF44 AFB00010 */  sw    $s0, 0x10($sp)
-/* 0EF8F8 802CAF48 8E30000C */  lw    $s0, 0xc($s1)
-/* 0EF8FC 802CAF4C 8E050000 */  lw    $a1, ($s0)
-/* 0EF900 802CAF50 0C0B1EAF */  jal   get_variable
-/* 0EF904 802CAF54 26100004 */   addiu $s0, $s0, 4
-/* 0EF908 802CAF58 8E050000 */  lw    $a1, ($s0)
-/* 0EF90C 802CAF5C 26100004 */  addiu $s0, $s0, 4
-/* 0EF910 802CAF60 0220202D */  daddu $a0, $s1, $zero
-/* 0EF914 802CAF64 0C0B1EAF */  jal   get_variable
-/* 0EF918 802CAF68 0040902D */   daddu $s2, $v0, $zero
-/* 0EF91C 802CAF6C 8E050000 */  lw    $a1, ($s0)
-/* 0EF920 802CAF70 26100004 */  addiu $s0, $s0, 4
-/* 0EF924 802CAF74 0220202D */  daddu $a0, $s1, $zero
-/* 0EF928 802CAF78 0C0B1EAF */  jal   get_variable
-/* 0EF92C 802CAF7C 0040982D */   daddu $s3, $v0, $zero
-/* 0EF930 802CAF80 0220202D */  daddu $a0, $s1, $zero
-/* 0EF934 802CAF84 8E050000 */  lw    $a1, ($s0)
-/* 0EF938 802CAF88 0C0B1EAF */  jal   get_variable
-/* 0EF93C 802CAF8C 0040802D */   daddu $s0, $v0, $zero
-/* 0EF940 802CAF90 44821000 */  mtc1  $v0, $f2
-/* 0EF944 802CAF94 00000000 */  nop   
-/* 0EF948 802CAF98 468010A0 */  cvt.s.w $f2, $f2
-/* 0EF94C 802CAF9C 24020002 */  addiu $v0, $zero, 2
-/* 0EF950 802CAFA0 3C05800B */  lui   $a1, 0x800b
-/* 0EF954 802CAFA4 24A51D80 */  addiu $a1, $a1, 0x1d80
-/* 0EF958 802CAFA8 00521804 */  sllv  $v1, $s2, $v0
-/* 0EF95C 802CAFAC 00721821 */  addu  $v1, $v1, $s2
-/* 0EF960 802CAFB0 00431804 */  sllv  $v1, $v1, $v0
-/* 0EF964 802CAFB4 00721823 */  subu  $v1, $v1, $s2
-/* 0EF968 802CAFB8 000320C0 */  sll   $a0, $v1, 3
-/* 0EF96C 802CAFBC 00641821 */  addu  $v1, $v1, $a0
-/* 0EF970 802CAFC0 000318C0 */  sll   $v1, $v1, 3
-/* 0EF974 802CAFC4 00651821 */  addu  $v1, $v1, $a1
-/* 0EF978 802CAFC8 44930000 */  mtc1  $s3, $f0
-/* 0EF97C 802CAFCC 00000000 */  nop   
-/* 0EF980 802CAFD0 46800020 */  cvt.s.w $f0, $f0
-/* 0EF984 802CAFD4 E4600060 */  swc1  $f0, 0x60($v1)
-/* 0EF988 802CAFD8 44900000 */  mtc1  $s0, $f0
-/* 0EF98C 802CAFDC 00000000 */  nop   
-/* 0EF990 802CAFE0 46800020 */  cvt.s.w $f0, $f0
-/* 0EF994 802CAFE4 E4600064 */  swc1  $f0, 0x64($v1)
-/* 0EF998 802CAFE8 E4620068 */  swc1  $f2, 0x68($v1)
-/* 0EF99C 802CAFEC 8FBF0020 */  lw    $ra, 0x20($sp)
-/* 0EF9A0 802CAFF0 8FB3001C */  lw    $s3, 0x1c($sp)
-/* 0EF9A4 802CAFF4 8FB20018 */  lw    $s2, 0x18($sp)
-/* 0EF9A8 802CAFF8 8FB10014 */  lw    $s1, 0x14($sp)
-/* 0EF9AC 802CAFFC 8FB00010 */  lw    $s0, 0x10($sp)
-/* 0EF9B0 802CB000 03E00008 */  jr    $ra
-/* 0EF9B4 802CB004 27BD0028 */   addiu $sp, $sp, 0x28
-
+glabel func_802CB008
 /* 0EF9B8 802CB008 27BDFFD0 */  addiu $sp, $sp, -0x30
 /* 0EF9BC 802CB00C AFB3001C */  sw    $s3, 0x1c($sp)
 /* 0EF9C0 802CB010 0080982D */  daddu $s3, $a0, $zero
@@ -241,4 +185,3 @@ glabel SetCamTarget
 /* 0EFC4C 802CB29C 8FB00010 */  lw    $s0, 0x10($sp)
 /* 0EFC50 802CB2A0 03E00008 */  jr    $ra
 /* 0EFC54 802CB2A4 27BD0030 */   addiu $sp, $sp, 0x30
-

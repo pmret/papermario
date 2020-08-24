@@ -47,21 +47,102 @@ ApiStatus si_handle_break_loop(ScriptInstance* script) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_handle_wait);
+ApiStatus si_handle_wait(ScriptInstance* script) {
+    Bytecode* ptrReadPos = script->ptrReadPos;
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_handle_wait_seconds);
+    if (!script->blocked) {
+        script->functionTemp[0] = get_variable(script, *ptrReadPos);
+        script->blocked = 1;
+    }
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_handle_if_equal);
+    if (script->functionTemp[0]) {
+        s32 todo = 1; // val can be anything
+        if (todo) {
+            script->functionTemp[0] -= 1;
+        }
+        return !script->functionTemp[0];
+    }
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_handle_if_not_equal);
+ApiStatus si_handle_wait_seconds(ScriptInstance* script) {
+    Bytecode* ptrReadPos = script->ptrReadPos;
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_handle_if_less);
+    if (!script->blocked) {
+        script->functionTemp[0] = get_float_variable(script, *ptrReadPos) * 30.0f + 0.5;
+        script->blocked = 1;
+    }
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_handle_if_greater);
+    if (script->functionTemp[0]) {
+        s32 todo = 1; // val can be anything
+        if (todo) {
+            script->functionTemp[0] -= 1;
+        }
+        return !script->functionTemp[0];
+    }
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_handle_if_less_equal);
+ApiStatus si_handle_if_equal(ScriptInstance* script) {
+    Bytecode* thisPos = script->ptrReadPos;
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_handle_if_greater_equal);
+    if (get_variable(script, *thisPos++) != get_variable(script, *thisPos++)) {
+        script->ptrNextLine = si_skip_if(script);
+        return ApiStatus_DONE2;
+    }
+    return ApiStatus_DONE2;
+}
+
+
+ApiStatus si_handle_if_not_equal(ScriptInstance* script) {
+    Bytecode* thisPos = script->ptrReadPos;
+
+    if (get_variable(script, *thisPos++) == get_variable(script, *thisPos++)) {
+        script->ptrNextLine = si_skip_if(script);
+        return ApiStatus_DONE2;
+    }
+    return ApiStatus_DONE2;
+}
+
+ApiStatus si_handle_if_less(ScriptInstance* script) {
+    Bytecode* thisPos = script->ptrReadPos;
+
+    if (get_variable(script, *thisPos++) >= get_variable(script, *thisPos++)) {
+        script->ptrNextLine = si_skip_if(script);
+        return ApiStatus_DONE2;
+    }
+    return ApiStatus_DONE2;
+}
+
+ApiStatus si_handle_if_greater(ScriptInstance* script) {
+    Bytecode* thisPos = script->ptrReadPos;
+
+    if (get_variable(script, *thisPos++) <= get_variable(script, *thisPos++)) {
+        script->ptrNextLine = si_skip_if(script);
+        return ApiStatus_DONE2;
+    }
+    return ApiStatus_DONE2;
+}
+
+ApiStatus si_handle_if_less_equal(ScriptInstance* script) {
+    Bytecode* thisPos = script->ptrReadPos;
+
+    if (get_variable(script, *thisPos++) > get_variable(script, *thisPos++)) {
+        script->ptrNextLine = si_skip_if(script);
+        return ApiStatus_DONE2;
+    }
+    return ApiStatus_DONE2;
+}
+
+ApiStatus si_handle_if_greater_equal(ScriptInstance* script) {
+    Bytecode* thisPos = script->ptrReadPos;
+
+    if (get_variable(script, *thisPos++) < get_variable(script, *thisPos++)) {
+        script->ptrNextLine = si_skip_if(script);
+        return ApiStatus_DONE2;
+    }
+    return ApiStatus_DONE2;
+}
 
 ApiStatus si_handle_if_AND(ScriptInstance* script) {
     Bytecode* thisPos = script->ptrReadPos;
@@ -180,23 +261,114 @@ ApiStatus si_handle_set_float(ScriptInstance* script) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_handle_add);
+ApiStatus si_handle_add(ScriptInstance* script) {
+    Bytecode* thisPos = script->ptrReadPos;
+    Bytecode var = *thisPos++;
+    s32 result = get_variable(script, *thisPos++);
+    s32 addend = get_variable(script, var);
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_handle_subtract);
+    result += addend;
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_handle_multiply);
+    set_variable(script, var, result);
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_handle_divide);
+ApiStatus si_handle_subtract(ScriptInstance* script) {
+    Bytecode* thisPos = script->ptrReadPos;
+    Bytecode var = *thisPos++;
+    s32 result = get_variable(script, *thisPos++);
+    s32 minuend = get_variable(script, var);
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_handle_mod);
+    result = minuend - result;
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_handle_addF);
+    set_variable(script, var, result);
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_handle_subtractF);
+ApiStatus si_handle_multiply(ScriptInstance* script) {
+    Bytecode* thisPos = script->ptrReadPos;
+    Bytecode var = *thisPos++;
+    s32 result = get_variable(script, *thisPos++);
+    s32 multiplier = get_variable(script, var);
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_handle_multiplyF);
+    result *= multiplier;
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_handle_divideF);
+    set_variable(script, var, result);
+    return ApiStatus_DONE2;
+}
+
+ApiStatus si_handle_divide(ScriptInstance* script) {
+    Bytecode* thisPos = script->ptrReadPos;
+    Bytecode var = *thisPos++;
+    s32 result = get_variable(script, *thisPos++);
+    s32 dividend = get_variable(script, var);
+
+    result = dividend / result;
+
+    set_variable(script, var, result);
+    return ApiStatus_DONE2;
+}
+
+ApiStatus si_handle_mod(ScriptInstance* script) {
+    Bytecode* thisPos = script->ptrReadPos;
+    Bytecode var = *thisPos++;
+    s32 result = get_variable(script, *thisPos++) + 0.5;
+    s32 num = get_variable(script, var) + 0.5;
+
+    result = num % result;
+
+    set_variable(script, var, result);
+    return ApiStatus_DONE2;
+}
+
+ApiStatus si_handle_addF(ScriptInstance* script) {
+    Bytecode* thisPos = script->ptrReadPos;
+    Bytecode var = *thisPos++;
+    f32 result = get_float_variable(script, *thisPos++);
+    f32 addend = get_float_variable(script, var);
+
+    result += addend;
+
+    set_float_variable(script, var, result);
+    return ApiStatus_DONE2;
+}
+
+ApiStatus si_handle_subtractF(ScriptInstance* script) {
+    Bytecode* thisPos = script->ptrReadPos;
+    Bytecode var = *thisPos++;
+    f32 result = get_float_variable(script, *thisPos++);
+    f32 minuend = get_float_variable(script, var);
+
+    result = minuend - result;
+
+    set_float_variable(script, var, result);
+    return ApiStatus_DONE2;
+}
+
+ApiStatus si_handle_multiplyF(ScriptInstance* script) {
+    Bytecode* thisPos = script->ptrReadPos;
+    Bytecode var = *thisPos++;
+    f32 result = get_float_variable(script, *thisPos++);
+    f32 multiplier = get_float_variable(script, var);
+
+    result *= multiplier;
+
+    set_float_variable(script, var, result);
+    return ApiStatus_DONE2;
+}
+
+ApiStatus si_handle_divideF(ScriptInstance* script) {
+    Bytecode* thisPos = script->ptrReadPos;
+    Bytecode var = *thisPos++;
+    f32 result = get_float_variable(script, *thisPos++);
+    f32 dividend = get_float_variable(script, var);
+
+    result = dividend / result;
+
+    set_float_variable(script, var, result);
+    return ApiStatus_DONE2;
+}
+
 
 ApiStatus si_handle_set_int_buffer_ptr(ScriptInstance* script) {
     script->buffer = get_variable(script, *script->ptrReadPos);
@@ -561,8 +733,8 @@ INCLUDE_API_ASM("code_e92d0_len_5da0", GetModelIndex);
 
 ApiStatus CloneModel(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* thisPos = script->ptrReadPos;
-    s32 srcModelID = get_variable(script, *thisPos++);
-    s32 newModelID = get_variable(script, *thisPos++);
+    Bytecode srcModelID = get_variable(script, *thisPos++);
+    Bytecode newModelID = get_variable(script, *thisPos++);
 
     clone_model(srcModelID, newModelID);
     return ApiStatus_DONE2;
@@ -578,7 +750,14 @@ INCLUDE_API_ASM("code_e92d0_len_5da0", EnableTexPanning);
 
 INCLUDE_API_ASM("code_e92d0_len_5da0", EnableModel);
 
-INCLUDE_API_ASM("code_e92d0_len_5da0", SetGroupEnabled);
+ApiStatus SetGroupEnabled(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* thisPos = script->ptrReadPos;
+    Bytecode var1 = get_variable(script, *thisPos++);
+    Bytecode var2 = get_variable(script, *thisPos++);
+
+    func_8011B7C0(var1, 2, var2);
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_API_ASM("code_e92d0_len_5da0", SetTexPanOffset);
 

@@ -23,6 +23,7 @@ s32 func_80055464(s32, s32);
 s32 func_800554A4(s32, s32);
 s32 func_800554E8(s32, s32);
 s32 func_800555E4(s32);
+void func_8011B7C0(u16, s32, s32);
 void func_80137D88(s32, f32);
 void func_80137DA4(s32, f32);
 void func_80137E10(s32, u8, u8, u8);
@@ -31,6 +32,8 @@ s32 rand_int(s32);
 void sort_items(void);
 s32 is_ability_active(s32 arg0);
 f32 update_lerp(Easing easing, f32 start, f32 end, s32 elapsed, s32 duration);
+
+void set_cam_viewport(s16 id, s16 x, s16 y, s16 width, s16 height);
 
 Npc* get_npc_safe(NpcId npcId);
 Npc* get_npc_unsafe(NpcId npcId);

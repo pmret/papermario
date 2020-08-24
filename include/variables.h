@@ -4,9 +4,12 @@
 #include "ultra64.h"
 #include "common_structs.h"
 #include "types.h"
+#include "enums.h"
 
 extern UiStatus gUIStatus;
 extern PlayerData gPlayerData;
+extern ActionState gPlayerActionState;
+extern PlayerAnim gPlayerAnimation;
 extern PlayerStatus gPlayerStatus;
 extern GameStatus* gGameStatusPtr[1];
 extern StaticItem gItemTable[364];
@@ -44,13 +47,13 @@ extern Camera gCameras[4];
 
 extern f32 gGlobalTimeSpace;
 
+extern Npc* gPlayerNpcPtr;
+
 extern s8 D_800A0900;
 extern s16* D_80151328;
 extern s16 D_8010CD10;
 extern s16 D_8010CD12;
 extern s32 D_801595A0;
-extern char gCloudyFlowerFieldsBg[]; // "fla_bg"
-extern char gSunnyFlowerFieldsBg[];  // "flb_bg"
 extern BackgroundHeader gBackgroundImage;
 extern s8 D_8014F12F;
 

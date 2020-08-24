@@ -1223,6 +1223,7 @@ typedef UNK_TYPE DoorSounds;
 #define DoorSounds_CREAKY 0x00000003
 #define DoorSounds_GATE   0x00000004
 
+typedef s8 ActionState;
 #define ActionState_IDLE               0x00000000
 #define ActionState_WALK               0x00000001
 #define ActionState_RUN                0x00000002

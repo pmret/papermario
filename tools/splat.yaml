@@ -14,7 +14,7 @@ segments:
     vram: 0xA4000040
     files:
     - [0x0040, "asm", "boot"]
-  - [0x0B70, "bin", "bootcode_font"]
+    - [0x0B70, "bin", "bootcode_font"]
   - name: code
     type: code
     start: 0x1000
@@ -185,7 +185,7 @@ segments:
     - [0x4a1f0, "c", "os/code_4a1f0_len_170"]
     - [0x4a360, "c", "os/code_4a360_len_930"]
     - [0x4ac90, "c", "os/code_4ac90_len_3910"]
-  - [0x4E5A0, "bin"]
+    - [0x4E5A0, "bin"]
   - name: code
     type: code
     start: 0x759B0
@@ -200,7 +200,7 @@ segments:
     - [0x8a160, "c", "code_8a160_len_700"]
     - [0x8a860, "c", "code_8a860_len_3f30"]
     - [0x8e790, "c", "code_8e790_len_2850"]
-  - [0x90fe0, "bin"]
+    - [0x90fe0, "bin"]
   - name: code
     type: code
     start: 0xA5DD0
@@ -218,7 +218,9 @@ segments:
     - [0xddaf0, "c", "code_ddaf0_len_c50"]
     - [0xde740, "c", "code_de740_len_23f0"]
     - [0xe0b30, "c", "code_e0b30_len_b80"]
-  - [0xe16b0, "bin"]
+    - [0xe16b0, "bin"]
+    - [0xE5820, ".data", "code_dc470_len_14c0"]
+    - [0xE5830, "bin"]
   - name: code
     type: code
     start: 0xE79B0
@@ -232,7 +234,7 @@ segments:
     - [0xf8f60, "c", "code_f8f60_len_1560"]
     - [0xfa4c0, "c", "code_fa4c0_len_3bf0"]
     - [0xfe0b0, "c", "code_fe0b0_len_5a0"]
-  - [0xFE650, "bin"]
+    - [0xFE650, "bin"]
   - name: code
     type: code
     start: 0xFEE30
@@ -240,7 +242,7 @@ segments:
     files:
     - [0xfee30, "c", "code_fee30_len_2d60"]
     - [0x101b90, "c", "code_101b90_len_8f0"]
-  - [0x102480, "bin"]
+    - [0x102480, "bin"]
   - name: code
     type: code
     start: 0x102610
@@ -252,15 +254,15 @@ segments:
     - [0x107830, "c", "code_107830_len_e70"]
     - [0x1086a0, "c", "code_1086a0_len_fc0"]
     - [0x109660, "c", "code_109660_len_1270"]
-  - [0x10A9F0, "bin"]
-  - [0x131340, "bin"]
+  - [0x10A9F0, "bin"] # todo split this further
+  - [0x131340, "bin"] # 0x8023E000
   - name: code
     type: code
     start: 0x135EE0
     vram: 0x80242BA0
     files:
     - [0x135EE0, "c", "code_135EE0"]
-  - [0x1422A0, "bin"]
+    - [0x1422A0, "bin"]
   - name: code
     type: code
     start: 0x163400
@@ -270,14 +272,15 @@ segments:
     - [0x167570, "c", "code_167570"]
     - [0x168590, "c", "code_168590"]
     - [0x169BE0, "c", "code_169BE0"]
-  - [0x16a3e0, "bin"]
+    - [0x16A3E0, "bin"]
   - name: code
     type: code
     start: 0x16C8E0
     vram: 0x8023E000
     files:
     - [0x16C8E0, "c", "code_16c8e0"]
-  - [0x1AF2C0, "bin"]
+    - [0x1AF2C0, "bin"]
+  - [0x1CC310, "bin"] # icon images and palettes, vram unknown
   - name: code
     type: code
     start: 0x3169F0
@@ -285,7 +288,7 @@ segments:
     files:
     - [0x3169f0, "c", "code_3169f0"]
     - [0x316a70, "c", "code_316a70"]
-  - [0x316c00, "bin"]
+  - [0x316c00, "bin"] # 0x802AE000
   - name: code
     type: code
     start: 0x316D90
@@ -298,14 +301,14 @@ segments:
     vram: 0x802B2000
     files:
     - [0x316f30, "c", "code_316f30"]
-  - [0x317020, "bin"]
+  - [0x317020, "bin"] # todo split this further
   - name: code
     type: code
     start: 0x415D90
     vram: 0x802A1000
     files:
     - [0x415D90, "c", "code_415D90"]
-  - [0x4200C0, "bin"]
+  - [0x4200C0, "bin"] # todo split this further
   - name: code
     type: code
     start: 0x7E0E80
@@ -314,7 +317,7 @@ segments:
     - [0x7e0e80, "c", "code_7e0e80"]
     - [0x7E2AA0, "c", "code_7E2AA0"]
     - [0x7E3700, "c", "code_7E3700"]
-  - [0x7e4d00, "bin"]
+  - [0x7e4d00, "bin"] # todo split this further
   - name: code
     type: code
     start: 0xE20EB0
