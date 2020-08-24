@@ -47,7 +47,7 @@ extern Camera gCameras[4];
 
 extern f32 gGlobalTimeSpace;
 
-extern Npc* gPlayerNpc;
+extern Npc* gPlayerNpcPtr;
 
 extern s8 D_800A0900;
 extern s16* D_80151328;
