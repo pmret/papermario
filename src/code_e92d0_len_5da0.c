@@ -49,7 +49,6 @@ ApiStatus si_handle_break_loop(ScriptInstance* script) {
 
 ApiStatus si_handle_wait(ScriptInstance* script) {
     Bytecode* ptrReadPos = script->ptrReadPos;
-    s32 todo = 1; // val can be anything
 
     if (!script->blocked) {
         script->functionTemp[0] = get_variable(script, *ptrReadPos);
@@ -57,6 +56,7 @@ ApiStatus si_handle_wait(ScriptInstance* script) {
     }
 
     if (script->functionTemp[0]) {
+        s32 todo = 1; // val can be anything
         if (todo) {
             script->functionTemp[0] -= 1;
         }
@@ -67,7 +67,6 @@ ApiStatus si_handle_wait(ScriptInstance* script) {
 
 ApiStatus si_handle_wait_seconds(ScriptInstance* script) {
     Bytecode* ptrReadPos = script->ptrReadPos;
-    s32 todo = 1; // val can be anything
 
     if (!script->blocked) {
         script->functionTemp[0] = get_float_variable(script, *ptrReadPos) * 30.0f + 0.5;
@@ -75,6 +74,7 @@ ApiStatus si_handle_wait_seconds(ScriptInstance* script) {
     }
 
     if (script->functionTemp[0]) {
+        s32 todo = 1; // val can be anything
         if (todo) {
             script->functionTemp[0] -= 1;
         }
