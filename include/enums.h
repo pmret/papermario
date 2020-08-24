@@ -1235,8 +1235,7 @@ typedef s8 ActionState;
 #define ActionState_STEP_DOWN          0x00000009
 #define ActionState_LAND               0x0000000A
 #define ActionState_STEP_DOWN_LAND     0x0000000B
-// Following states prohibit normal movement:
-#define ActionState_CONVERSATION       0x0000000C
+#define ActionState_CONVERSATION       0x0000000C // This and following states prohibit normal movement.
 #define ActionState_SPIN_JUMP          0x0000000D
 #define ActionState_GROUND_POUND       0x0000000E
 #define ActionState_ULTRA_JUMP         0x0000000F
