@@ -26,7 +26,7 @@ INCLUDE_ASM("code_362a0_len_2f70", get_collider_type_by_id);
 
 INCLUDE_ASM("code_362a0_len_2f70", func_8005BDD8);
 
-INCLUDE_ASM("code_362a0_len_2f70", get_collider_center);
+void INCLUDE_ASM("code_362a0_len_2f70", get_collider_center, s32 colliderID, f32* x, f32* y, f32* z);
 
 INCLUDE_ASM("code_362a0_len_2f70", test_ray_triangle_general);
 

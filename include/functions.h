@@ -7,8 +7,12 @@
 
 void osCleanupThread(void);
 
+s32 heap_malloc(s32 size);
+
 void clone_model(u16 srcModelID, u16 newModelID);
 void update_collider_transform(s16 colliderID);
+void get_collider_center(s32 colliderID, f32* x, f32* y, f32* z);
+
 s32 get_variable(ScriptInstance* script, Bytecode var);
 s32 set_variable(ScriptInstance* script, Bytecode var, s32 value);
 f32 get_float_variable(ScriptInstance* script, Bytecode var);
