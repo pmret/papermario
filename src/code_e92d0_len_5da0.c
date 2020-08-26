@@ -538,13 +538,21 @@ ApiStatus si_handle_set_flag_array(ScriptInstance* script) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_handle_allocate_array);
+ApiStatus si_handle_allocate_array(ScriptInstance* script) {
+    Bytecode* thisPos = script->ptrReadPos;
+    s32 size = get_variable(script, *thisPos++);
+    Bytecode var = *thisPos++;
+
+    script->array = heap_malloc(size * 4);
+    set_variable(script, var, script->array);
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM("code_e92d0_len_5da0", si_handle_AND);
 
 ApiStatus si_handle_AND_const(ScriptInstance* script) {
     Bytecode* ptrReadPos = script->ptrReadPos;
-
+    // todo improve
     s32 constant = ptrReadPos[0]; // NOLINT
     s32 var = ptrReadPos[0];
 
@@ -558,7 +566,7 @@ INCLUDE_ASM("code_e92d0_len_5da0", si_handle_OR);
 
 ApiStatus si_handle_OR_const(ScriptInstance* script) {
     Bytecode* ptrReadPos = script->ptrReadPos;
-
+    // todo improve
     s32 constant = ptrReadPos[0]; // NOLINT
     s32 var = ptrReadPos[0];
 
@@ -779,7 +787,19 @@ INCLUDE_API_ASM("code_e92d0_len_5da0", ModifyColliderFlags);
 
 INCLUDE_API_ASM("code_e92d0_len_5da0", ResetFromLava);
 
-INCLUDE_API_ASM("code_e92d0_len_5da0", GetColliderCenter);
+ApiStatus GetColliderCenter(ScriptInstance* script, s32 initialCall) {
+    f32 x;
+    f32 y;
+    f32 z;
+
+    get_collider_center(get_variable(script, *script->ptrReadPos), &x, &y, &z);
+
+    script->varTable[0] = x;
+    script->varTable[1] = y;
+    script->varTable[2] = z;
+
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_API_ASM("code_e92d0_len_5da0", ParentColliderToModel);
 

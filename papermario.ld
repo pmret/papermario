@@ -1,18 +1,18 @@
 SECTIONS
 {
     /* 0x0 0-40 (len 40) */
-    .text0_header 0x0 : AT(0x0) {
-        build/asm/header.o(.text0_header);
+    .text_0 0x0 : AT(0x0) {
+        build/asm/header.o(.text_0);
     }
 
     /* 0xA4000040 40-1000 (len FC0) */
-    .text40_boot 0xA4000040 : AT(0x40) {
-        build/asm/boot.o(.text40_boot);
+    .text_40 0xA4000040 : AT(0x40) {
+        build/asm/boot.o(.text_40);
         build/bin/bootcode_font.o(.data);
     }
 
     /* 0x80025C00 1000-759B0 (len 749B0) */
-    .text1000_code 0x80025C00 : AT(0x1000) {
+    .text_1000 0x80025C00 : AT(0x1000) {
         build/src/code_1000_len_60.o(.text);
         build/src/code_1060_len_310.o(.text);
         build/src/code_1370_len_7d0.o(.text);
@@ -182,7 +182,7 @@ SECTIONS
     }
 
     /* 0x800DC500 759B0-A5DD0 (len 30420) */
-    .text759B0_code 0x800DC500 : AT(0x759B0) {
+    .text_759B0 0x800DC500 : AT(0x759B0) {
         build/src/code_759b0_len_61b0.o(.text);
         build/src/code_7bb60_len_41b0.o(.text);
         build/src/code_7fd10_len_b40.o(.text);
@@ -196,7 +196,7 @@ SECTIONS
     }
 
     /* 0x8010F6D0 A5DD0-E79B0 (len 41BE0) */
-    .textA5DD0_code 0x8010F6D0 : AT(0xA5DD0) {
+    .text_A5DD0 0x8010F6D0 : AT(0xA5DD0) {
         build/src/code_a5dd0_len_114e0.o(.text);
         build/src/code_b72b0_len_15ed0.o(.text);
         build/src/code_cd180_len_38f0.o(.text);
@@ -215,7 +215,7 @@ SECTIONS
     }
 
     /* 0x802C3000 E79B0-FEE30 (len 17480) */
-    .textE79B0_code 0x802C3000 : AT(0xE79B0) {
+    .text_E79B0 0x802C3000 : AT(0xE79B0) {
         build/src/code_e79b0_len_1920.o(.text);
         build/src/code_e92d0_len_5da0.o(.text);
         build/src/code_ef070_len_3400.o(.text);
@@ -228,14 +228,14 @@ SECTIONS
     }
 
     /* 0x802DBD40 FEE30-102610 (len 37E0) */
-    .textFEE30_code 0x802DBD40 : AT(0xFEE30) {
+    .text_FEE30 0x802DBD40 : AT(0xFEE30) {
         build/src/code_fee30_len_2d60.o(.text);
         build/src/code_101b90_len_8f0.o(.text);
         build/bin/code_102480.o(.data);
     }
 
     /* 0x802E0D90 102610-10A9F0 (len 83E0) */
-    .text102610_code 0x802E0D90 : AT(0x102610) {
+    .text_102610 0x802E0D90 : AT(0x102610) {
         build/src/code_102610_len_2330.o(.text);
         build/src/code_104940_len_dc0.o(.text);
         build/src/code_105700_len_2130.o(.text);
@@ -255,13 +255,13 @@ SECTIONS
     }
 
     /* 0x80242BA0 135EE0-163400 (len 2D520) */
-    .text135EE0_code 0x80242BA0 : AT(0x135EE0) {
+    .text_135EE0 0x80242BA0 : AT(0x135EE0) {
         build/src/code_135EE0.o(.text);
         build/bin/code_1422A0.o(.data);
     }
 
     /* 0x80242BA0 163400-16C8E0 (len 94E0) */
-    .text163400_code 0x80242BA0 : AT(0x163400) {
+    .text_163400 0x80242BA0 : AT(0x163400) {
         build/src/code_163400.o(.text);
         build/src/code_167570.o(.text);
         build/src/code_168590.o(.text);
@@ -270,7 +270,7 @@ SECTIONS
     }
 
     /* 0x8023E000 16C8E0-1CC310 (len 5FA30) */
-    .text16C8E0_code 0x8023E000 : AT(0x16C8E0) {
+    .text_16C8E0 0x8023E000 : AT(0x16C8E0) {
         build/src/code_16c8e0.o(.text);
         build/bin/code_1AF2C0.o(.data);
     }
@@ -281,7 +281,7 @@ SECTIONS
     }
 
     /* 0x80200000 3169F0-316C00 (len 210) */
-    .text3169F0_code 0x80200000 : AT(0x3169F0) {
+    .text_3169F0 0x80200000 : AT(0x3169F0) {
         build/src/code_3169f0.o(.text);
         build/src/code_316a70.o(.text);
     }
@@ -292,12 +292,12 @@ SECTIONS
     }
 
     /* 0x802AE000 316D90-316F30 (len 1A0) */
-    .text316D90_code 0x802AE000 : AT(0x316D90) {
+    .text_316D90 0x802AE000 : AT(0x316D90) {
         build/src/code_316d90.o(.text);
     }
 
     /* 0x802B2000 316F30-317020 (len F0) */
-    .text316F30_code 0x802B2000 : AT(0x316F30) {
+    .text_316F30 0x802B2000 : AT(0x316F30) {
         build/src/code_316f30.o(.text);
     }
 
@@ -307,7 +307,7 @@ SECTIONS
     }
 
     /* 0x802A1000 415D90-4200C0 (len A330) */
-    .text415D90_code 0x802A1000 : AT(0x415D90) {
+    .text_415D90 0x802A1000 : AT(0x415D90) {
         build/src/code_415D90.o(.text);
     }
 
@@ -317,7 +317,7 @@ SECTIONS
     }
 
     /* 0x80280000 7E0E80-7E4D00 (len 3E80) */
-    .text7E0E80_code 0x80280000 : AT(0x7E0E80) {
+    .text_7E0E80 0x80280000 : AT(0x7E0E80) {
         build/src/code_7e0e80.o(.text);
         build/src/code_7E2AA0.o(.text);
         build/src/code_7E3700.o(.text);
@@ -329,7 +329,7 @@ SECTIONS
     }
 
     /* 0x802B7000 E20EB0-E215C0 (len 710) */
-    .textE20EB0_code 0x802B7000 : AT(0xE20EB0) {
+    .text_E20EB0 0x802B7000 : AT(0xE20EB0) {
         build/src/code_e20eb0.o(.text);
     }
 
