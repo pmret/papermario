@@ -4,7 +4,10 @@ INCLUDE_ASM("code_e0b30_len_b80", get_default_variation_for_song);
 
 INCLUDE_ASM("code_e0b30_len_b80", func_8014A498);
 
-INCLUDE_ASM("code_e0b30_len_b80", func_8014A52C);
+void func_8014A52C(void) {
+    D_80159AE2 = (s16)0x08;
+    D_80159AE4 = (s16)0x08;
+}
 
 INCLUDE_ASM("code_e0b30_len_b80", func_8014A548);
 
