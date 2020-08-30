@@ -54,7 +54,7 @@ glabel _npc_jump_to
 /* 0F2EA0 802CE4F0 0240202D */   daddu $a0, $s2, $zero
 /* 0F2EA4 802CE4F4 0240202D */  daddu $a0, $s2, $zero
 /* 0F2EA8 802CE4F8 0200282D */  daddu $a1, $s0, $zero
-/* 0F2EAC 802CE4FC 0C0B36B0 */  jal   func_802CDAC0
+/* 0F2EAC 802CE4FC 0C0B36B0 */  jal   resolve_npc
 /* 0F2EB0 802CE500 0040882D */   daddu $s1, $v0, $zero
 /* 0F2EB4 802CE504 0040802D */  daddu $s0, $v0, $zero
 /* 0F2EB8 802CE508 56000003 */  bnel  $s0, $zero, .L802CE518

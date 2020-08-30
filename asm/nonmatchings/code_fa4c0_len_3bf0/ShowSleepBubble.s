@@ -84,7 +84,7 @@ glabel ShowSleepBubble
 
 .L802D8158:
 /* 0FCB08 802D8158 0220202D */  daddu $a0, $s1, $zero
-/* 0FCB0C 802D815C 0C0B36B0 */  jal   func_802CDAC0
+/* 0FCB0C 802D815C 0C0B36B0 */  jal   resolve_npc
 /* 0FCB10 802D8160 0260282D */   daddu $a1, $s3, $zero
 /* 0FCB14 802D8164 0040282D */  daddu $a1, $v0, $zero
 /* 0FCB18 802D8168 10A0002A */  beqz  $a1, .L802D8214

@@ -1,16 +1,15 @@
-*.z64
-n64split
-*.bin
-*.FS
-*.bgm
-ctx.c
-Map_Assets.FS
-bgm/
-bin/
-build/
-yay0/
-expected/
+# Python
+__pycache__/
+venv/
+
+# Misc
 .idea/
 .DS_Store
-venv/
-__pycache__/
+ctx.c
+expected/
+
+# Build artifacts
+*.z64
+*.bin
+bin/
+build/

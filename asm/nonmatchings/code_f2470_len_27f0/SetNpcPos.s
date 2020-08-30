@@ -38,7 +38,7 @@ glabel SetNpcPos
 /* 0F26E0 802CDD30 4482A000 */  mtc1  $v0, $f20
 /* 0F26E4 802CDD34 00000000 */  nop   
 /* 0F26E8 802CDD38 4680A520 */  cvt.s.w $f20, $f20
-/* 0F26EC 802CDD3C 0C0B36B0 */  jal   func_802CDAC0
+/* 0F26EC 802CDD3C 0C0B36B0 */  jal   resolve_npc
 /* 0F26F0 802CDD40 0240282D */   daddu $a1, $s2, $zero
 /* 0F26F4 802CDD44 0040282D */  daddu $a1, $v0, $zero
 /* 0F26F8 802CDD48 10A0000F */  beqz  $a1, .L802CDD88

@@ -92,7 +92,7 @@ glabel ShowEmote
 
 .L802D79F0:
 /* 0FC3A0 802D79F0 0220202D */  daddu $a0, $s1, $zero
-/* 0FC3A4 802D79F4 0C0B36B0 */  jal   func_802CDAC0
+/* 0FC3A4 802D79F4 0C0B36B0 */  jal   resolve_npc
 /* 0FC3A8 802D79F8 0260282D */   daddu $a1, $s3, $zero
 /* 0FC3AC 802D79FC 0040382D */  daddu $a3, $v0, $zero
 /* 0FC3B0 802D7A00 10E0002A */  beqz  $a3, .L802D7AAC

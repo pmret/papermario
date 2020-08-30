@@ -119,7 +119,7 @@ glabel _show_message
 /* 0F4E68 802D04B8 0040802D */   daddu $s0, $v0, $zero
 /* 0F4E6C 802D04BC 0240202D */  daddu $a0, $s2, $zero
 /* 0F4E70 802D04C0 0200282D */  daddu $a1, $s0, $zero
-/* 0F4E74 802D04C4 0C0B36B0 */  jal   func_802CDAC0
+/* 0F4E74 802D04C4 0C0B36B0 */  jal   resolve_npc
 /* 0F4E78 802D04C8 0040802D */   daddu $s0, $v0, $zero
 /* 0F4E7C 802D04CC 0040A82D */  daddu $s5, $v0, $zero
 /* 0F4E80 802D04D0 0200202D */  daddu $a0, $s0, $zero
@@ -157,7 +157,7 @@ glabel _show_message
 /* 0F4EF8 802D0548 2410FFFE */   addiu $s0, $zero, -2
 
 .L802D054C:
-/* 0F4EFC 802D054C 0C0B36B0 */  jal   func_802CDAC0
+/* 0F4EFC 802D054C 0C0B36B0 */  jal   resolve_npc
 /* 0F4F00 802D0550 03C0282D */   daddu $a1, $fp, $zero
 /* 0F4F04 802D0554 0040802D */  daddu $s0, $v0, $zero
 /* 0F4F08 802D0558 3C048007 */  lui   $a0, 0x8007

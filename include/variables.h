@@ -4,34 +4,67 @@
 #include "ultra64.h"
 #include "common_structs.h"
 #include "types.h"
+#include "enums.h"
 
-extern ui_status gUIStatus;
-extern player_data gPlayerData;
-extern player_status gPlayerStatus;
-extern game_status* gGameStatusPtr[1];
-extern item_table_entry gItemTable[364];
+extern UiStatus gUIStatus;
+extern PlayerData gPlayerData;
+extern ActionState gPlayerActionState;
+extern PlayerAnim gPlayerAnimation;
+extern PlayerStatus gPlayerStatus;
+extern GameStatus* gGameStatusPtr[1];
+extern StaticItem gItemTable[364];
+extern s16 gMainGameState; /* 0 = battle, 1 = pause, 2 = world */
+extern UNK_FUN_PTR(gCurrentUpdateFunction);
 
-extern script_context* gWorldScriptList[128];
-extern script_context* gBattleScriptList[128];
-extern script_context** gCurrentScriptListPtr[128];
+extern ScriptInstance* gWorldScriptList[128];
+extern ScriptInstance* gBattleScriptList[128];
+extern ScriptInstance** gCurrentScriptListPtr[128];
+
+extern s32 gScriptIdList[128];
+extern s32 gScriptIndexList[128];
+
+extern Model* gWorldModelList[256];
+extern Model* gBattleModelList[256];
+extern Model** gCurrentModelListPtr[256];
+
+extern u32* gWorldModelSpecialDls[32];
+extern u32* gBattleModelSpecialDls[32];
+extern u32** gCurrentModelSpecialDlsPtr[32];
+
+extern Entity* gWorldEntityList[30];
+extern Entity* gBattleEntityList[30];
+extern Entity** gCurrentEntityListPtr[30];
+
+extern UNK_TYPE* gWorldDynamicEntityList[16];
+extern UNK_TYPE* gBattleDynamicEntityList[16];
+extern UNK_TYPE** gCurrentDynamicEntityListPtr[16];
+
+extern Shadow* gWorldShadowList[60];
+extern Shadow* gBattleShadowList[60];
+extern Shadow** gCurrentShadowListPtr[60];
+
+extern Camera gCameras[4];
 
 extern f32 gGlobalTimeSpace;
+
+extern Npc* gPlayerNpcPtr;
 
 extern s8 D_800A0900;
 extern s16* D_80151328;
 extern s16 D_8010CD10;
 extern s16 D_8010CD12;
 extern s32 D_801595A0;
-extern char gCloudyFlowerFieldsBg[]; // "fla_bg"
-extern char gSunnyFlowerFieldsBg[]; // "flb_bg"
-extern bg_header gBackgroundImage;
+extern BackgroundHeader gBackgroundImage;
 extern s8 D_8014F12F;
 
+extern PrintContext* gCurrentPrintContext;
+extern PrintContext* D_802DB268;
+
 // Triggers
-/* 0x80151334 */ extern s16 gTriggerCount;
-/* 0x80159190 */ extern trigger gTriggerList1[64];
-/* 0x80159290 */ extern trigger gTriggerList2[64];
-/* 0x80159390 */ extern trigger** gCurrentTriggerListPtr[64];
+extern s16 gTriggerCount;
+extern Trigger* gTriggerList1[64];
+extern Trigger* gTriggerList2[64];
+extern Trigger** gCurrentTriggerListPtr[64];
 
 extern u16 gMapTransitionAlpha;
 extern u16 D_800A0942;
@@ -48,8 +81,5 @@ extern UNK_TYPE D_80147474;
 extern UNK_TYPE D_80147574;
 extern UNK_TYPE D_80109270;
 extern UNK_TYPE D_80108558;
-extern u16 D_800A0940;
-extern u16 D_800A0942;
-extern s16 D_800A0944;
 
 #endif

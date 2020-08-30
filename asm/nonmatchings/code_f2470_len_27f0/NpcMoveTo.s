@@ -42,7 +42,7 @@ glabel NpcMoveTo
 /* 0F2C68 802CE2B8 0240202D */   daddu $a0, $s2, $zero
 /* 0F2C6C 802CE2BC 0240202D */  daddu $a0, $s2, $zero
 /* 0F2C70 802CE2C0 0200282D */  daddu $a1, $s0, $zero
-/* 0F2C74 802CE2C4 0C0B36B0 */  jal   func_802CDAC0
+/* 0F2C74 802CE2C4 0C0B36B0 */  jal   resolve_npc
 /* 0F2C78 802CE2C8 0040882D */   daddu $s1, $v0, $zero
 /* 0F2C7C 802CE2CC 0040802D */  daddu $s0, $v0, $zero
 /* 0F2C80 802CE2D0 56000003 */  bnel  $s0, $zero, .L802CE2E0

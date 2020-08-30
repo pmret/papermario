@@ -307,7 +307,7 @@ glabel func_802D7E08
 
 .L802D7F48:
 /* 0FC8F8 802D7F48 0220202D */  daddu $a0, $s1, $zero
-/* 0FC8FC 802D7F4C 0C0B36B0 */  jal   func_802CDAC0
+/* 0FC8FC 802D7F4C 0C0B36B0 */  jal   resolve_npc
 /* 0FC900 802D7F50 0260282D */   daddu $a1, $s3, $zero
 /* 0FC904 802D7F54 0040282D */  daddu $a1, $v0, $zero
 /* 0FC908 802D7F58 10A00025 */  beqz  $a1, .L802D7FF0

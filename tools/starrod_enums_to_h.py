@@ -3,7 +3,7 @@
 import os
 import re
 from glob import glob
-from stringcase import constcase # pip install stringcase
+from stringcase import constcase, pascalcase # pip install stringcase
 
 DIR = os.path.dirname(__file__)
 SR_DATABASE = os.path.join(DIR, "star-rod/database")
@@ -19,7 +19,7 @@ with open(os.path.join(DIR, "../include/enums.h"), "w") as h:
 #define _ENUMS_H_
 
 #include "ultra64.h"
-#include "types.h" 
+#include "types.h"
 
 """)
 
@@ -28,9 +28,26 @@ with open(os.path.join(DIR, "../include/enums.h"), "w") as h:
             lines = file.readlines()
 
             # Get enum attributes
-            namespace = constcase(re.match(r"[^  \t]*", lines[0]).group(0))
+            namespace = pascalcase(re.match(r"[^  \t]*", lines[0]).group(0))
             library_name = re.match(r"[^  \t]*", lines[1]).group(0)
             reverse = True if re.match(r"[^  \t]*", lines[2]).group(0) == "true" else False
+
+            # Renamed namespaces
+            if namespace == "Item": namespace = "ItemId"
+            if namespace == "Sound": namespace = "SoundId"
+            if namespace == "Partner": namespace = "PartnerId"
+            if namespace == "Sprite": namespace = "SpriteId"
+            if namespace == "Outcome": namespace = "EncounterOutcome"
+            #if namespace == "Phase": namespace = "BattlePhase"
+            if namespace == "Actor": namespace = "ActorId"
+            #if namespace == "Status": namespace = "ActorStatus"
+            #if namespace == "StatusFlags": namespace = "ActorStatusFlags"
+            #if namespace == "Event": namespace = "BattleEvent"
+            if namespace == "Decoration": namespace = "DecorationId"
+            if namespace == "Npc": namespace = "NpcId"
+            if namespace == "Trigger": namespace = "TriggerFlags"
+            if namespace == "Anim": continue
+            if namespace == "Entity": continue # just ram addresses
 
             # Get a list of tuples containing (name, value)
             items = []
@@ -51,8 +68,9 @@ with open(os.path.join(DIR, "../include/enums.h"), "w") as h:
                             str_value = f"{value}"
                         else:
                             str_value = "0x" + f"{value:08x}".upper()
-                        
-                        name = constcase(name)
+
+                        if name.upper() != name:
+                            name = constcase(name)
                         items.append((name, str_value))
                         name_max_len = max(len(name), name_max_len)
                 elif "/%" in line:
