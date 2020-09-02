@@ -63,7 +63,7 @@ s32 collision_heap_malloc(s32 size) {
     }
 }
 
-s32 collision_heap_free(UNK_PTR data) {
+s32 collision_heap_free(void* data) {
     if (!(*gGameStatusPtr)->isBattle) {
         _heap_free(&D_80268000, data);
     } else {
