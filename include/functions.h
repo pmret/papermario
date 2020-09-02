@@ -8,6 +8,7 @@
 void osCleanupThread(void);
 
 s32 heap_malloc(s32 size);
+HeapNode* _heap_create(void* addr, s32 size);
 
 void clone_model(u16 srcModelID, u16 newModelID);
 void update_collider_transform(s16 colliderID);
