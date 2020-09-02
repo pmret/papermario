@@ -10,7 +10,7 @@ INCLUDE_ASM("code_42e0_len_1f60", func_80028FE0);
 
 INCLUDE_API_ASM("code_42e0_len_1f60", length2D);
 
-HeapNode* INCLUDE_ASM("code_42e0_len_1f60", _heap_create, u32* addr, s32 size);
+HeapNode* INCLUDE_ASM("code_42e0_len_1f60", _heap_create, UNK_PTR addr, s32 size);
 
 INCLUDE_ASM("code_42e0_len_1f60", _heap_malloc);
 
