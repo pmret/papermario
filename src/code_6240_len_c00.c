@@ -26,10 +26,14 @@ INCLUDE_ASM("code_6240_len_c00", fio_deserialize_state);
 
 INCLUDE_ASM("code_6240_len_c00", fio_serialize_state);
 
-INCLUDE_ASM("code_6240_len_c00", fio_init_flash);
+void fio_init_flash(void) {
+    osFlashInit();
+}
 
 INCLUDE_ASM("code_6240_len_c00", fio_read_flash);
 
 INCLUDE_ASM("code_6240_len_c00", fio_write_flash);
 
-INCLUDE_ASM("code_6240_len_c00", fio_erase_flash);
+void fio_erase_flash(s32 pageNum) {
+    osFlashSectorErase(pageNum * 128);
+}

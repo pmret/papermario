@@ -4,7 +4,7 @@ extern s32 D_80268000;
 extern s32 D_802FB800;
 extern s32 D_803DA800;
 
-s32 general_heap_create(void) {
+HeapNode* general_heap_create(void) {
     return _heap_create(&D_802FB800, 0x54000);
 }
 
@@ -21,7 +21,7 @@ s32 general_heap_free(s32 size) {
 }
 
 s32 battle_heap_create(void) {
-    if (_heap_create(&D_803DA800, 0x25800) == -1) {
+    if ((s32)_heap_create(&D_803DA800, 0x25800) == -1) {
         return -1;
     } else {
         return 0;
@@ -49,7 +49,7 @@ s32 heap_free(s32 size) {
 }
 
 s32 collision_heap_create(void) {
-    if (_heap_create(&D_80268000, 0x18000) == -1) {
+    if ((s32)_heap_create(&D_80268000, 0x18000) == -1) {
         return -1;
     }
     return 0;
@@ -63,10 +63,10 @@ s32 collision_heap_malloc(s32 size) {
     }
 }
 
-s32 collision_heap_free(s32 size) {
+s32 collision_heap_free(UNK_PTR data) {
     if (!(*gGameStatusPtr)->isBattle) {
-        _heap_free(&D_80268000, size);
+        _heap_free(&D_80268000, data);
     } else {
-        _heap_free(&D_803DA800, size);
+        _heap_free(&D_803DA800, data);
     }
 }
