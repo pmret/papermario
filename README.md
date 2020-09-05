@@ -76,6 +76,17 @@ Decide on a function to match. These can be found in the subdirectories of `asm/
 
 Take the relevant `.s` file and pass it to [mips_to_c](https://github.com/matt-kempster/mips_to_c) ([web version](https://simonsoftware.se/other/mips_to_c.py)).
 
+You can also use mips_to_c locally by registering `mips_to_c.py` as a global command in your bash PATH:
+```
+sudo apt update
+sudo apt install python3-pip
+sudo git clone https://github.com/matt-kempster/mips_to_c.git /usr/local/bin/mips_to_c
+```
+
+Then add `PATH="$PATH:/usr/local/bin/mips_to_c"` to the end of your `~/.bashrc` file.
+You should be able to run `mips_to_c.py` now for any file in `asm/nonmatchings/`. Here's an example `mips_to_c.py ./asm/nonmatchings/code_13870_len_6980/func_8003B3D0.s func_8003B3D0`.
+`.
+
 If mips_to_c gives you an error about branch-likely instructions, edit the `.s` file and rename any branch-likely instructions to their unlikely equivalent (i.e. remove the `l` suffix). Add a `nop` after the branches and move the instruction that was originally in the delay slot (directly after the branch instruction) to the start of the target label. Don't commit the edited assembly.
 
 Open up the relevant `.c` file and replace the function's `INCLUDE_ASM` macro with the output from mips_to_c. Run the following command to attempt to compile, replacing `function_name` with the name of the function you're working with:
