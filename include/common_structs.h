@@ -1031,16 +1031,19 @@ typedef struct FontRasterSet {
     /* 0x02 */ char unk_02[10];
 } FontRasterSet; // size = 0x0C
 
-typedef struct TriggerBp {
+typedef s32(*TriggerHandlerFunc)(struct Trigger*);
+
+typedef struct TriggerDefinition {
     /* 0x00 */ s32 flags;
     /* 0x04 */ s16 colliderIndex;
     /* 0x06 */ char unk_06[2];
     /* 0x08 */ s32 flagIndex;
-    /* 0x0C */ UNK_FUN_PTR(function);
-    /* 0x10 */ char unk_10[8];
+    /* 0x0C */ TriggerHandlerFunc function;
+    /* 0x10 */ char unk_10[4];
+    /* 0x14 */ s32 unk_14;
     /* 0x18 */ s32 inputArg3;
     /* 0x1C */ char unk_1C[4];
-} TriggerBp; // size = 0x20
+} TriggerDefinition; // size = 0x20
 
 typedef struct CollisionStatus {
     /* 0x00 */ s16 pushingAgainstWall; /* FFFF = none for all below VVV */
@@ -1389,7 +1392,7 @@ typedef struct AnimatedModelNode {
 typedef struct EncounterStatus {
     /* 0x00 */ s32 flags;
     /* 0x04 */ u8 eFirstStrike; /* 0 = none, 1 = player, 2 = enemy */
-    /* 0x05 */ u8 hitType; /* 1 = none/enemy, 2 = jump */
+    /* 0x05 */ s8 hitType; /* 1 = none/enemy, 2 = jump */
     /* 0x06 */ u8 hitTier; /* 0 = normal, 1 = super, 2 = ultra */
     /* 0x07 */ char unk_07[2];
     /* 0x09 */ u8 battleOutcome; /* 0 = won, 1 = lost */
@@ -1410,10 +1413,11 @@ typedef struct EncounterStatus {
     /* 0x21 */ char unk_21[3];
     /* 0x24 */ s32* npcGroupList;
     /* 0x28 */ struct Encounter* enounterList[24];
-    /* 0x2C */ char unk_2C[92];
     /* 0x88 */ struct Encounter* currentEncounter;
     /* 0x8C */ struct Enemy* currentEnemy;
-    /* 0x90 */ char unk_90[4];
-} EncounterStatus; // size = 0x94
+    /* 0x90 */ s32 unk_90;
+    /* 0x94 */ char unk_94[4];
+    /* 0x98 */ s32 unk_98;
+} EncounterStatus; // size = 0x9C
 
 #endif
