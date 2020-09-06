@@ -14,7 +14,34 @@ INCLUDE_ASM("code_d0a70_len_4fe0", func_8013A6E8);
 
 INCLUDE_ASM("code_d0a70_len_4fe0", func_8013A704);
 
-INCLUDE_ASM("code_d0a70_len_4fe0", func_8013A854);
+// INCLUDE_ASM("code_d0a70_len_4fe0", func_8013A854);
+s32 func_8013A854(u32 arg0) {
+    s32 temp_v0;
+    s32 phi_return;
+
+    phi_return = arg0 << 5;
+    if (arg0 < 0x5AU) {
+        temp_v0 = (arg0 * 0x7C) + func_8013A854(arg0);
+        temp_v0->unk14 = 0;
+        temp_v0->unk10 = (u16)-1;
+        phi_return = temp_v0;
+    }
+    return phi_return;
+}
+
+// s32 func_8013A854(u32 arg0) {
+//     s32 temp_v0;
+//     s32 phi_return;
+
+//     phi_return = arg0 << 5;
+//     if (arg0 < 0x5AU) {
+//         temp_v0 = (arg0 * 0x7C) + *(void *)0x80156954;
+//         temp_v0->unk14 = 0;
+//         temp_v0->unk10 = (u16)-1;
+//         phi_return = temp_v0;
+//     }
+//     return phi_return;
+// }
 
 INCLUDE_ASM("code_d0a70_len_4fe0", func_8013A93C);
 
