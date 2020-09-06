@@ -70,6 +70,7 @@ D_80151328 = 0x80151328;
 gCurrentDoorSoundsSet = 0x80151340;
 
 gTriggerCount = 0x80151334;
+D_80156954 = 0x80156954;
 gTriggerList1 = 0x80159190;
 gTriggerList2 = 0x80159290;
 gCurrentTriggerListPtr = 0x80159390;

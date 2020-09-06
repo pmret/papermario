@@ -15,15 +15,9 @@ INCLUDE_ASM("code_d0a70_len_4fe0", func_8013A6E8);
 INCLUDE_ASM("code_d0a70_len_4fe0", func_8013A704);
 
 // INCLUDE_ASM("code_d0a70_len_4fe0", func_8013A854);
-typedef struct UnkSructFromfunc8013A854 {
-    /* 0x10 */ u16 unk10;
-    /* 0x14 */ u16 unk14;
-} UnkSructFromfunc8013A854; // size = 0x24
 
 s32 func_8013A854(u32 arg0) {
-    // u16 temp_v0;
-    // TODO need actual pointer address
-    UnkSructFromfunc8013A854* temp_v0 = 0x80000000;
+    UnkSructFromfunc8013A854* temp_v0 = D_80156954;
     u16 phi_return;
 
     phi_return = arg0 << 5;

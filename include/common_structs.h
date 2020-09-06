@@ -168,6 +168,11 @@ typedef struct Trigger {
     /* 0x34 */ s32 runningScriptID;
 } Trigger; // size = 0x38
 
+typedef struct UnkSructFromfunc8013A854 {
+    /* 0x10 */ u16 unk10;
+    /* 0x14 */ u16 unk14;
+} UnkSructFromfunc8013A854; // size = 0x7C
+
 typedef struct Enemy {
     /* 0x00 */ s32 flags;
     /* 0x04 */ u8 encounterIndex;

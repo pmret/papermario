@@ -53,6 +53,7 @@ extern s8 D_800A0900;
 extern s16* D_80151328;
 extern s16 D_8010CD10;
 extern s16 D_8010CD12;
+extern s32 D_80156954;
 extern s32 D_801595A0;
 extern s16 D_80159AE2;
 extern s16 D_80159AE4;
