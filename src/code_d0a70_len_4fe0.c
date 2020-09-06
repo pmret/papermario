@@ -15,15 +15,23 @@ INCLUDE_ASM("code_d0a70_len_4fe0", func_8013A6E8);
 INCLUDE_ASM("code_d0a70_len_4fe0", func_8013A704);
 
 // INCLUDE_ASM("code_d0a70_len_4fe0", func_8013A854);
+typedef struct UnkSructFromfunc8013A854 {
+    /* 0x10 */ u16 unk10;
+    /* 0x14 */ u16 unk14;
+} UnkSructFromfunc8013A854; // size = 0x24
+
 s32 func_8013A854(u32 arg0) {
-    s32 temp_v0;
-    s32 phi_return;
+    // u16 temp_v0;
+    // TODO need actual pointer address
+    UnkSructFromfunc8013A854* temp_v0 = 0x80000000;
+    u16 phi_return;
 
     phi_return = arg0 << 5;
     if (arg0 < 0x5AU) {
-        temp_v0 = (arg0 * 0x7C) + func_8013A854(arg0);
-        temp_v0->unk14 = 0;
-        temp_v0->unk10 = (u16)-1;
+        // TODO what is being set here?
+        // temp_v0 = (arg0 * 0x7C) + func_8013A854(arg0);
+        temp_v0->unk14 = 0U;
+        temp_v0->unk10 = -1U;
         phi_return = temp_v0;
     }
     return phi_return;
@@ -34,7 +42,7 @@ s32 func_8013A854(u32 arg0) {
 //     s32 phi_return;
 
 //     phi_return = arg0 << 5;
-//     if (arg0 < 0x5AU) {
+//     if (arg0 < 0x5AU) {`
 //         temp_v0 = (arg0 * 0x7C) + *(void *)0x80156954;
 //         temp_v0->unk14 = 0;
 //         temp_v0->unk10 = (u16)-1;
