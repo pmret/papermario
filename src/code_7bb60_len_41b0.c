@@ -103,7 +103,7 @@ void set_action_state(s32 actionState) {
     s32 phi_return;
 
     if (player_status->flags & 0x200) {
-        player_status->flags &= -0x201;
+        player_status->flags &= ~0x200;
         func_800E01A4();
     }
 
