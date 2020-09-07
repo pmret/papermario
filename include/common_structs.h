@@ -836,7 +836,15 @@ typedef struct GameStatus {
     /* 0x042 */ char unk_42[2];
     /* 0x044 */ u8 stickY; /* with deadzone */
     /* 0x045 */ u8 altStickY; /* input used for batte when flag 80000 set */
-    /* 0x046 */ char unk_46[34];
+    /* 0x046 */ char unk_46[2];
+    /* 0x048 */ s16 unk_48;
+    /* 0x04A */ char unk_4A[6];
+    /* 0x050 */ s16 unk_50;
+    /* 0x052 */ char unk_52[6];
+    /* 0x058 */ s16 unk_58;
+    /* 0x05A */ char unk_5A[6];
+    /* 0x060 */ s16 unk_60;
+    /* 0x062 */ char unk_62[6];
     /* 0x068 */ s16 demoButtonInput;
     /* 0x06A */ s8 demoStickX;
     /* 0x06B */ s8 demoStickY;
@@ -1406,7 +1414,7 @@ typedef struct EncounterStatus {
     /* 0x12 */ char unk_12;
     /* 0x13 */ u8 dropWhackaBump;
     /* 0x14 */ s32 songID;
-    /* 0x18 */ char unk_18[4];
+    /* 0x18 */ s32 unk_18;
     /* 0x1C */ u8 numEncounters; /* number of encounters for current map (in list) */
     /* 0x1D */ char unk_1D[3];
     /* 0x20 */ u8 mapID;
