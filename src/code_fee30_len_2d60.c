@@ -21,14 +21,13 @@ INCLUDE_ASM("code_fee30_len_2d60", spr_draw_component);
 s32 _spr_sign_extend_12bit(u16 val) {
     s32 temp = val & 0xFFF;
 
-    if ((temp & 0x800)) {
+    if (temp & 0x800) {
         return temp | -0x1000;
     } else {
         return temp;
     }
 }
 
-//INCLUDE_ASM("code_fee30_len_2d60", _spr_sign_extend_16bit);
 s32 _spr_sign_extend_16bit(u16 val) {
     s32 temp = val & 0xFFFF;
 

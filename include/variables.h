@@ -20,7 +20,7 @@ extern ScriptInstance* gWorldScriptList[128];
 extern ScriptInstance* gBattleScriptList[128];
 extern ScriptInstance** gCurrentScriptListPtr[128];
 
-extern s32 gListCount;
+extern s32 gScriptListCount;
 
 extern s32 gScriptIdList[128];
 extern s32 gScriptIndexList[128];

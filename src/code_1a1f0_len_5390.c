@@ -39,8 +39,7 @@ ApiStatus OnFleeBattleDrops(ScriptInstance* script, s32 isInitialCall) {
         script->functionTemp[2] = 0;
     }
 
-    script->functionTemp[1]--;
-    return script->functionTemp[1] == 0;
+    return --script->functionTemp[1] == 0;
 }
 
 INCLUDE_ASM("code_1a1f0_len_5390", func_8003F7CC);

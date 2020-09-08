@@ -107,7 +107,7 @@ gCurrentDynamicEntityListPtr = 0x80154420;
 
 gScriptIdList = 0x802D1898;
 gScriptIndexList = 0x802DAA98;
-gListCount = 0x802DAC98;
+gScriptListCount = 0x802DAC98;
 
 func_802A91F8 = 0x802A91F8;
 func_802A9208 = 0x802A9208;
