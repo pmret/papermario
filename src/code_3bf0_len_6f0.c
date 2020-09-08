@@ -1,10 +1,11 @@
 #include "common.h"
 
 void func_800287F0(void) {
-    GameStatus* gameStatus = *gGameStatusPtr;
+    // TODO: Figure out macros
+    GameStatus* gameStatus;
     GameStatus* gameStatus2;
-    GameStatus* gameStatus3;
 
+    gameStatus = *gGameStatusPtr;
     gameStatus->stickX = 0;
     gameStatus2 = *gGameStatusPtr;
     gameStatus->currentButtons = 0;
@@ -12,12 +13,15 @@ void func_800287F0(void) {
     gameStatus->heldButtons = 0;
     gameStatus2->stickY = 0;
 
-    gameStatus3 = *gGameStatusPtr;
-    gameStatus3->unk_50 = 4;
-    gameStatus3->prevButtons = 0;
-    gameStatus3->unk_48 = 15;
-    gameStatus3->unk_60 = 0;
-    gameStatus3->unk_58 = 0;
+    // TODO: macro
+    {
+        GameStatus* gameStatus = *gGameStatusPtr;
+        gameStatus->prevButtons = 0;
+        gameStatus->unk_50 = 4;
+        gameStatus->unk_48 = 15;
+        gameStatus->unk_60 = 0;
+        gameStatus->unk_58 = 0;
+    }
 }
 
 INCLUDE_ASM("code_3bf0_len_6f0", func_80028838);
