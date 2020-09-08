@@ -32,7 +32,7 @@ s32 _spr_sign_extend_16bit(u16 val) {
     s32 temp = val & 0xFFFF;
 
     if (temp & 0x8000) {
-        return temp | 0xFFFF0000;
+        return temp | ~0xFFFF;
     } else {
         return temp;
     }
