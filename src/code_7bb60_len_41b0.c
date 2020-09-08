@@ -151,7 +151,7 @@ void set_action_state(s32 actionState) {
     }
 
     if (player_status->unk_D8) {
-        ((UNK_PTR**) (player_status->unk_D8))[3][9] = 0xA;
+        player_status->unk_D8[3][9] = 0xA;
         player_status->unk_D8 = NULL;
     }
 }
