@@ -67,7 +67,7 @@ if __name__ == "__main__":
             exit(1)
         elif "--delete-matched" in argv or input("Delete them [y/N]? ").upper() == "Y":
             for func in matched_but_undeleted_asm:
-                file = glob(path.join(DIR, f"../asm/nonmatchings/*/{func}.s"))[0]
+                file = glob(path.join(DIR, f"asm/nonmatchings/*/{func}.s"))[0]
                 remove(file)
     elif len(asm) != len(non_matched):
         print(f"warning: number of INCLUDE_ASM macros ({len(asm)}) != number of asm files ({len(non_matched)})")
