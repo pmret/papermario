@@ -1,36 +1,38 @@
 #include "common.h"
 
-INCLUDE_ASM(code_e79b0_len_1920, sort_scripts);
+INCLUDE_ASM("code_e79b0_len_1920", sort_scripts);
 
-INCLUDE_ASM(code_e79b0_len_1920, find_script_labels);
+INCLUDE_ASM("code_e79b0_len_1920", find_script_labels);
 
-INCLUDE_ASM(code_e79b0_len_1920, clear_script_list);
+INCLUDE_ASM("code_e79b0_len_1920", clear_script_list);
 
-INCLUDE_ASM(code_e79b0_len_1920, init_script_list);
+INCLUDE_ASM("code_e79b0_len_1920", init_script_list);
 
-INCLUDE_ASM(code_e79b0_len_1920, func_802C3390);
+INCLUDE_ASM("code_e79b0_len_1920", func_802C3390);
 
-INCLUDE_ASM(code_e79b0_len_1920, start_script);
+INCLUDE_ASM("code_e79b0_len_1920", start_script);
 
-INCLUDE_ASM(code_e79b0_len_1920, start_script_in_group);
+INCLUDE_ASM("code_e79b0_len_1920", start_script_in_group);
 
-INCLUDE_ASM(code_e79b0_len_1920, start_child_script);
+INCLUDE_ASM("code_e79b0_len_1920", start_child_script);
 
-INCLUDE_ASM(code_e79b0_len_1920, func_802C39F8);
+INCLUDE_ASM("code_e79b0_len_1920", func_802C39F8);
 
-INCLUDE_ASM(code_e79b0_len_1920, restart_script);
-/*
 ScriptInstance* restart_script(ScriptInstance* script) {
+    Bytecode* ptrFirstLine = script->ptrFirstLine;
+
+    // frameCounter gets set to 0 twice which makes me think a macro is being used here
     script->loopDepth = -1;
     script->switchDepth = -1;
+    script->frameCounter = 0;
     script->currentOpcode = 0;
-    script->frameCounter = 0; // TODO: force compiler to not optimise away this
     script->frameCounter = 0;
     script->unk_158 = 0;
 
-    script->ptrNextLine = script->ptrFirstLine;
-    script->ptrCurrentLine = script->ptrFirstLine;
+    script->ptrNextLine = ptrFirstLine;
+    script->ptrCurrentLine = ptrFirstLine;
 
+    // ???
     script->timeScale = 1.0f;
     script->timeScale = gGlobalTimeSpace;
 
@@ -39,15 +41,14 @@ ScriptInstance* restart_script(ScriptInstance* script) {
 
     return script;
 }
-*/
 
-INCLUDE_ASM(code_e79b0_len_1920, update_scripts);
+INCLUDE_ASM("code_e79b0_len_1920", update_scripts);
 
-INCLUDE_ASM(code_e79b0_len_1920, func_802C3EE4);
+INCLUDE_ASM("code_e79b0_len_1920", func_802C3EE4);
 
-INCLUDE_ASM(code_e79b0_len_1920, kill_script);
+INCLUDE_ASM("code_e79b0_len_1920", kill_script);
 
-void* kill_script_by_ID(s32 id) {
+void kill_script_by_ID(s32 id) {
     s32 i;
     ScriptInstance* scriptContextPtr;
 
@@ -59,24 +60,23 @@ void* kill_script_by_ID(s32 id) {
     }
 }
 
-s32 kill_all_scripts(void) {
+void kill_all_scripts(void) {
     s32 i;
     ScriptInstance* scriptContextPtr;
 
-    for(i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
+    for (i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
         if (scriptContextPtr != NULL) {
             kill_script(scriptContextPtr);
         }
     }
-    return;
 }
 
 s32 does_script_exist(s32 id) {
     s32 i;
     ScriptInstance* scriptContextPtr;
 
-    for(i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
+    for (i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
         if (scriptContextPtr != NULL && scriptContextPtr->uniqueID == id) {
             return 1;
@@ -88,8 +88,8 @@ s32 does_script_exist(s32 id) {
 s32 does_script_exist_by_ref(ScriptInstance* script) {
     s32 i;
 
-    for(i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
-        if(script == (*gCurrentScriptListPtr)[i]) {
+    for (i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
+        if (script == (*gCurrentScriptListPtr)[i]) {
             return 1;
         }
     }
@@ -100,34 +100,56 @@ void set_script_priority(ScriptInstance* script, s8 priority) {
     script->priority = priority;
 }
 
-void set_script_timescale(ScriptInstance* script, f32 timeScale) {
-    script->timeScale = timeScale * gGlobalTimeSpace;
+void set_script_timescale(ScriptInstance* script, f32 timescale) {
+    script->timeScale = timescale * gGlobalTimeSpace;
 }
 
-INCLUDE_ASM(code_e79b0_len_1920, set_global_timespace);
-/*
+#ifdef NON_MATCHING
 // TODO: figure out why compiler/assembler isn't putting SWC1 in delay slot
 void set_global_timespace(f32 timeScale) {
     //gGlobalTimeSpace = timeScale;
 }
-*/
+#else
+INCLUDE_ASM("code_e79b0_len_1920", set_global_timespace);
+#endif
 
-
-INCLUDE_ASM(code_e79b0_len_1920, get_global_timespace);
-/*
+#ifdef NON_MATCHING
 // TODO: figure out why compiler/assembler isn't putting LWC1 in delay slot
 f32 get_global_timespace(void) {
     //return gGlobalTimeSpace;
 }
-*/
+#else
+INCLUDE_ASM("code_e79b0_len_1920", get_global_timespace);
+#endif
 
 void set_script_group(ScriptInstance* script, s8 groupFlags) {
     script->groupFlags = groupFlags;
 }
 
-INCLUDE_ASM(code_e79b0_len_1920, bind_trigger);
+Trigger* bind_trigger(Bytecode* script, s32 flags, s32 triggerFlagIndex, s32 triggerVar0, s32 triggerVar1,
+                      s32 priority, s32 arg6) {
+    Trigger* trigger;
+    TriggerDefinition def;
 
-INCLUDE_ASM(code_e79b0_len_1920, bind_trigger_1);
+    def.flags = flags | 0x1000000;
+    def.flagIndex = triggerFlagIndex;
+    def.unk_14 = 0;
+    def.function = _bound_script_trigger_handler;
+    def.inputArg3 = arg6;
+
+    trigger = create_trigger(&def);
+    trigger->scriptStart = script;
+    trigger->runningScript = NULL;
+    trigger->priority = priority;
+    trigger->scriptVars[0] = triggerVar0;
+    trigger->scriptVars[1] = triggerVar1;
+    return trigger;
+}
+
+Trigger* bind_trigger_1(Bytecode* script, s32 flags, s32 triggerFlagIndex, s32 triggerVar0, s32 triggerVar1,
+                        s32 priority) {
+    return bind_trigger(script, flags, triggerFlagIndex, triggerVar0, triggerVar1, priority, 1);
+}
 
 void suspend_group_script(ScriptInstance* script, s32 groupFlags) {
     int i;
@@ -138,7 +160,7 @@ void suspend_group_script(ScriptInstance* script, s32 groupFlags) {
         suspend_group_script(childScript, groupFlags);
     }
 
-    for(i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
+    for (i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
         if (scriptContextPtr != NULL && scriptContextPtr->parentScript == script) {
             suspend_group_script(scriptContextPtr, groupFlags);
@@ -159,7 +181,7 @@ void resume_group_script(ScriptInstance* script, s32 groupFlags) {
         resume_group_script(childScript, groupFlags);
     }
 
-    for(i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
+    for (i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
         if (scriptContextPtr != NULL && scriptContextPtr->parentScript == script) {
             suspend_group_script(scriptContextPtr, groupFlags);
@@ -243,8 +265,7 @@ s32 resume_all_group(s32 groupFlags) {
     }
 }
 
-
-void suspend_group_others(s32 script, s32 groupFlags) {
+void suspend_group_others(ScriptInstance* script, s32 groupFlags) {
     s32 i;
     ScriptInstance* scriptContextPtr;
 
@@ -256,7 +277,7 @@ void suspend_group_others(s32 script, s32 groupFlags) {
     }
 }
 
-void resume_group_others(s32 script, s32 groupFlags) {
+void resume_group_others(ScriptInstance* script, s32 groupFlags) {
     s32 i;
     ScriptInstance* scriptContextPtr;
 
@@ -297,7 +318,7 @@ void set_script_flags(ScriptInstance* script, s32 flags) {
         set_script_flags(childScript, flags);
     }
 
-    for(i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
+    for (i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
         if (scriptContextPtr != NULL && scriptContextPtr->parentScript == script) {
             set_script_flags(script->parentScript, flags);
@@ -305,9 +326,7 @@ void set_script_flags(ScriptInstance* script, s32 flags) {
     }
 }
 
-INCLUDE_ASM(code_e79b0_len_1920, clear_script_flags);
-/*
-// TODO: Really close but some weirdness is going on
+
 void clear_script_flags(ScriptInstance* script, s32 flags) {
     int i;
     ScriptInstance* scriptContextPtr;
@@ -318,11 +337,10 @@ void clear_script_flags(ScriptInstance* script, s32 flags) {
         clear_script_flags(childScript, flags);
     }
 
-    for(i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
+    for (i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
         if (scriptContextPtr != NULL && scriptContextPtr->parentScript == script) {
-            clear_script_flags(script->parentScript, flags);
+            clear_script_flags(scriptContextPtr, flags);
         }
     }
 }
-*/

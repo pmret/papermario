@@ -1,0 +1,13 @@
+name: Coverage
+on:
+  pull_request:
+    paths:
+      - 'src/*'
+
+jobs:
+  build:
+    name: Check matched assembly files are deleted
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: ./coverage.py --fail-matched-undeleted

@@ -5,13 +5,13 @@ void func_80035DF0(s16 arg0) {
     *tempPtr = arg0;
 }
 
-INCLUDE_ASM(code_111f0_len_860, func_80035E00);
+INCLUDE_ASM("code_111f0_len_860", func_80035E00);
 
-INCLUDE_ASM(code_111f0_len_860, func_80035E24);
+INCLUDE_ASM("code_111f0_len_860", func_80035E24);
 
-INCLUDE_ASM(code_111f0_len_860, func_80035E54);
+INCLUDE_ASM("code_111f0_len_860", func_80035E54);
 
-INCLUDE_ASM(code_111f0_len_860, func_80035EEC);
+INCLUDE_ASM("code_111f0_len_860", func_80035EEC);
 
 void func_800360FC(void) {
     GameStatus* gameStatus = *gGameStatusPtr;
@@ -36,7 +36,7 @@ void func_80036130(void) {
     }
 }
 
-INCLUDE_ASM(code_111f0_len_860, func_8003617C);
+INCLUDE_ASM("code_111f0_len_860", func_8003617C);
 
 s32 func_800363FC(void) {
     s32 phi_return;
@@ -48,18 +48,18 @@ s32 func_800363FC(void) {
 }
 
 s32 func_80036430(void) {
-    PlayerStatus* pPlayerStatus = &gPlayerStatus;
+    PlayerStatus* playerStatus = &gPlayerStatus;
 
     gMapTransitionAlpha = 0xFF;
     D_800A0942 = 0x14;
     D_800A0944 = 0x01;
 
-    pPlayerStatus->flags |= 0x1000;
+    playerStatus->flags |= 0x1000;
 
-    return pPlayerStatus->flags;
+    return playerStatus->flags;
 }
 
-INCLUDE_ASM(code_111f0_len_860, func_8003646C);
+INCLUDE_ASM("code_111f0_len_860", func_8003646C);
 
 void func_80036640(void) {
 }

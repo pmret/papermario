@@ -16,17 +16,17 @@ ApiStatus SpeakToNpc(ScriptInstance* script, s32 isInitialCall) {
     return _show_message(script, isInitialCall, 3);
 }
 
-INCLUDE_ASM(code_f4c60_len_4300, _show_message);
+INCLUDE_ASM("code_f4c60_len_4300", _show_message);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, ShowMessageAtScreenPos);
+INCLUDE_API_ASM("code_f4c60_len_4300", ShowMessageAtScreenPos);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, ShowMessageAtWorldPos);
+INCLUDE_API_ASM("code_f4c60_len_4300", ShowMessageAtWorldPos);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, CloseMessage);
+INCLUDE_API_ASM("code_f4c60_len_4300", CloseMessage);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, SwitchMessage);
+INCLUDE_API_ASM("code_f4c60_len_4300", SwitchMessage);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, ShowChoice);
+INCLUDE_API_ASM("code_f4c60_len_4300", ShowChoice);
 
 ApiStatus CloseChoice(ScriptInstance* script, s32 isInitialCall) {
     close_message(D_802DB268);
@@ -58,18 +58,17 @@ ApiStatus func_802D0C94(ScriptInstance* script, s32 initialCall) {
 }
 
 ApiStatus SetMessageString(ScriptInstance* script, s32 isInitialCall) {
-    Bytecode* ptrReadPos = script->ptrReadPos;
-    Bytecode string = get_variable(script, *ptrReadPos++);
-    Bytecode index = get_variable(script, *ptrReadPos++);
+    Bytecode* args = script->ptrReadPos;
+    Bytecode string = get_variable(script, *args++);
+    Bytecode index = get_variable(script, *args++);
 
     set_message_string(string, index);
     return ApiStatus_DONE2;
 }
 
-INCLUDE_API_ASM(code_f4c60_len_4300, SetMessageValue);
+#ifdef NON_MATCHING
 // TODO: Figure out why there's an extra NOP after this function
 // It's probably because of a file split issue
-/*
 ApiStatus SetMessageValue(ScriptInstance* script, s32 initialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
     Bytecode value = get_variable(script, *ptrReadPos++);
@@ -78,94 +77,189 @@ ApiStatus SetMessageValue(ScriptInstance* script, s32 initialCall) {
     set_message_value(value, index);
     return ApiStatus_DONE2;
 }
+#else
+INCLUDE_API_ASM("code_f4c60_len_4300", SetMessageValue);
+#endif
+
+ApiStatus HidePlayerShadow(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 hideShadow = get_variable(script, *args++);
+
+    if (hideShadow) {
+        disable_player_shadow();
+    } else {
+        enable_player_shadow();
+    }
+    return ApiStatus_DONE2;
+}
+
+ApiStatus DisablePlayerPhysics(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 enable = get_variable(script, *args++);
+
+    if (enable) {
+        enable_player_physics();
+    } else {
+        disable_player_physics();
+    }
+    return ApiStatus_DONE2;
+}
+
+ApiStatus DisablePlayerInput(ScriptInstance* script, s32 isInitialCall) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    Bytecode* args = script->ptrReadPos;
+    s32 enable = get_variable(script, *args++);
+
+    if (enable) {
+        func_800E0178();
+        func_800EF628();
+        func_800E97B8();
+        func_800E984C();
+        if (playerStatus->actionState == ActionState_SPIN) {
+            playerStatus->animFlags |= 0x40000;
+        }
+        D_8009A650[0] |= 0x40;
+    } else {
+        func_800E01A4();
+        func_800EF600();
+        func_800E01DC();
+        D_8009A650[0] &= ~0x40;
+        func_800E983C();
+    }
+    return ApiStatus_DONE2;
+}
+
+INCLUDE_API_ASM("code_f4c60_len_4300", SetPlayerPos);
+/*
+ApiStatus SetPlayerPos(ScriptInstance* script, s32 isInitialCall) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    Bytecode* args = script->ptrReadPos;
+    f32 x = get_variable(script, *args++);
+    f32 y = get_variable(script, *args++);
+    f32 z = get_variable(script, *args++);
+    Npc* playerNpc = gPlayerNpc;
+
+    playerNpc->pos.x = x;
+    playerNpc->pos.z = z;
+    playerNpc->pos.y = y;
+
+    playerStatus->position.x = x;
+    playerStatus->position.y = y;
+    playerStatus->position.z = z;
+    return ApiStatus_DONE2;
+}
 */
 
-INCLUDE_API_ASM(code_f4c60_len_4300, HidePlayerShadow);
+INCLUDE_API_ASM("code_f4c60_len_4300", SetPlayerCollisionSize);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, DisablePlayerPhysics);
+INCLUDE_API_ASM("code_f4c60_len_4300", SetPlayerSpeed);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, DisablePlayerInput);
+INCLUDE_API_ASM("code_f4c60_len_4300", SetPlayerJumpscale);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, SetPlayerPos);
+INCLUDE_API_ASM("code_f4c60_len_4300", SetPlayerAnimation);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, SetPlayerCollisionSize);
+INCLUDE_API_ASM("code_f4c60_len_4300", SetPlayerActionState);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, SetPlayerSpeed);
+INCLUDE_API_ASM("code_f4c60_len_4300", MovePlayerTo);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, SetPlayerJumpscale);
+INCLUDE_ASM("code_f4c60_len_4300", player_jump);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, SetPlayerAnimation);
+void PlayerJump(ScriptInstance* script, s32 isInitialCall) {
+    player_jump(script, isInitialCall, 0);
+}
 
-INCLUDE_API_ASM(code_f4c60_len_4300, SetPlayerActionState);
+void PlayerJump1(ScriptInstance* script, s32 isInitialCall) {
+    player_jump(script, isInitialCall, 1);
+}
 
-INCLUDE_API_ASM(code_f4c60_len_4300, MovePlayerTo);
+void PlayerJump2(ScriptInstance* script, s32 isInitialCall) {
+    player_jump(script, isInitialCall, 2);
+}
 
-INCLUDE_ASM(code_f4c60_len_4300, player_jump);
+INCLUDE_API_ASM("code_f4c60_len_4300", InterpPlayerYaw);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, PlayerJump);
+INCLUDE_API_ASM("code_f4c60_len_4300", PlayerFaceNpc);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, PlayerJump1);
+INCLUDE_API_ASM("code_f4c60_len_4300", GetPlayerTargetYaw);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, PlayerJump2);
+INCLUDE_API_ASM("code_f4c60_len_4300", SetPlayerFlagBits);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, InterpPlayerYaw);
+ApiStatus GetPlayerActionState(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode outVar = *script->ptrReadPos;
+    set_variable(script, outVar, gPlayerActionState);
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_API_ASM(code_f4c60_len_4300, PlayerFaceNpc);
+ApiStatus GetPlayerPos(ScriptInstance* script, s32 isInitialCall) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    Bytecode* args = script->ptrReadPos;
+    Bytecode outVar1 = *args++;
+    Bytecode outVar2 = *args++;
+    Bytecode outVar3 = *args++;
 
-INCLUDE_API_ASM(code_f4c60_len_4300, GetPlayerTargetYaw);
+    set_variable(script, outVar1, playerStatus->position.x);
+    set_variable(script, outVar2, playerStatus->position.y);
+    set_variable(script, outVar3, playerStatus->position.z);
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_API_ASM(code_f4c60_len_4300, SetPlayerFlagBits);
+ApiStatus GetPlayerAnimation(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode outVar = *script->ptrReadPos;
 
-INCLUDE_API_ASM(code_f4c60_len_4300, GetPlayerActionState);
+    set_variable(script, outVar, gPlayerAnimation);
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_API_ASM(code_f4c60_len_4300, GetPlayerPos);
+ApiStatus FullyRestoreHPandFP(ScriptInstance* script, s32 isInitialCall) {
+    PlayerData* playerData = &gPlayerData;
 
-INCLUDE_API_ASM(code_f4c60_len_4300, GetPlayerAnimation);
+    playerData->curHP = playerData->curMaxHP;
+    playerData->curFP = playerData->curMaxFP;
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_API_ASM(code_f4c60_len_4300, FullyRestoreHPandFP);
+INCLUDE_API_ASM("code_f4c60_len_4300", FullyRestoreSP);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, FullyRestoreSP);
+INCLUDE_API_ASM("code_f4c60_len_4300", EnablePartner);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, EnablePartner);
+INCLUDE_API_ASM("code_f4c60_len_4300", DisablePartner);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, DisablePartner);
+INCLUDE_API_ASM("code_f4c60_len_4300", ForceExitHeading);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, ForceExitHeading);
+INCLUDE_API_ASM("code_f4c60_len_4300", UseExitHeading);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, UseExitHeading);
+INCLUDE_ASM("code_f4c60_len_4300", func_802D23F8);
 
-INCLUDE_ASM(code_f4c60_len_4300, func_802D23F8);
+INCLUDE_API_ASM("code_f4c60_len_4300", DisablePulseStone);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, DisablePulseStone);
+INCLUDE_API_ASM("code_f4c60_len_4300", GetCurrentPartner);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, GetCurrentPartner);
+INCLUDE_API_ASM("code_f4c60_len_4300", Disable8bitMario);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, Disable8bitMario);
+INCLUDE_API_ASM("code_f4c60_len_4300", PlaySoundAtPlayer);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, PlaySoundAtPlayer);
+INCLUDE_ASM("code_f4c60_len_4300", func_802D2D30);
 
-INCLUDE_ASM(code_f4c60_len_4300, func_802D2D30);
+INCLUDE_ASM("code_f4c60_len_4300", func_802D2F34);
 
-INCLUDE_ASM(code_f4c60_len_4300, func_802D2F34);
+INCLUDE_API_ASM("code_f4c60_len_4300", CreateImageObj);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, CreateImageObj);
+INCLUDE_API_ASM("code_f4c60_len_4300", RemoveImageObj);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, RemoveImageObj);
+INCLUDE_API_ASM("code_f4c60_len_4300", SetObjPosition);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, SetObjPosition);
+INCLUDE_API_ASM("code_f4c60_len_4300", SetObjRotation);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, SetObjRotation);
+INCLUDE_API_ASM("code_f4c60_len_4300", SetObjScale);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, SetObjScale);
+INCLUDE_API_ASM("code_f4c60_len_4300", SetObjJumpScale);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, SetObjJumpScale);
+INCLUDE_API_ASM("code_f4c60_len_4300", JumpObj);
 
-INCLUDE_API_ASM(code_f4c60_len_4300, JumpObj);
+INCLUDE_ASM("code_f4c60_len_4300", func_802D4164);
 
-INCLUDE_ASM(code_f4c60_len_4300, func_802D4164);
+INCLUDE_ASM("code_f4c60_len_4300", func_802D43F4);
 
-INCLUDE_ASM(code_f4c60_len_4300, func_802D43F4);
+INCLUDE_ASM("code_f4c60_len_4300", func_802D4488);
 
-INCLUDE_ASM(code_f4c60_len_4300, func_802D4488);
-
-INCLUDE_ASM(code_f4c60_len_4300, func_802D4560);
+INCLUDE_ASM("code_f4c60_len_4300", func_802D4560);

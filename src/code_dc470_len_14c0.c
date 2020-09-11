@@ -1,5 +1,9 @@
 #include "common.h"
 
+char gCloudyFlowerFieldsBg[] = "fla_bg";
+char gSunnyFlowerFieldsBg[] = "flb_bg";
+s8 D_8014F12F = 0;
+
 void load_map_bg(char* optAssetName) {
     UNK_PTR compressedData;
     u32 assetSize;
@@ -31,7 +35,7 @@ void func_80145DF8(void) {
     gameStatus->enableBackground &= 0xF0;
 }
 
-void read_background_size(BackgroundHeader *bg) {
+void read_background_size(BackgroundHeader* bg) {
     GameStatus* gameStatus = *gGameStatusPtr;
 
     gameStatus->backgroundMaxW = bg->width;
@@ -64,4 +68,4 @@ u16 func_80145E98(s32 arg0, s32 arg1, s32 arg2) {
     return temp_lo;
 }
 
-INCLUDE_ASM(code_dc470_len_14c0, func_80145EC0);
+INCLUDE_ASM("code_dc470_len_14c0", func_80145EC0);

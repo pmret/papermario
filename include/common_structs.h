@@ -61,7 +61,9 @@ typedef struct Npc {
     /* 0x020 */ struct NpcBlurData* blurData; /* related to movement somehow... */
     /* 0x024 */ char unk_24[4];
     /* 0x028 */ u32 currentAnim;
-    /* 0x02C */ char unk_2C[12];
+    /* 0x02C */ char unk_2C[4];
+    /* 0x030 */ f32 animationSpeed;
+    /* 0x034 */ char unk_34[4];
     /* 0x038 */ struct Vec3f pos;
     /* 0x044 */ struct Vec3f rotation;
     /* 0x050 */ char unk_50[4];
@@ -103,7 +105,7 @@ typedef struct PlayerData {
     /* 0x00F */ u8 starPieces;
     /* 0x010 */ s8 starPoints;
     /* 0x011 */ char unk_11;
-    /* 0x012 */ u8 currentPartner;
+    /* 0x012 */ s8 currentPartner;
     /* 0x013 */ char unk_13;
     /* 0x014 */ struct PartnerData partners[12];
     /* 0x074 */ s16 keyItems[32];
@@ -228,7 +230,7 @@ typedef struct ScriptInstance {
     /* 0x002 */ u8 currentOpcode;
     /* 0x003 */ u8 priority;
     /* 0x004 */ u8 groupFlags;
-    /* 0x005 */ u8 blocked; /* 1 = blocking */
+    /* 0x005 */ s8 blocked; /* 1 = blocking */
     /* 0x006 */ s8 loopDepth; /* how many nested loops we are in, >= 8 hangs forever */
     /* 0x007 */ s8 switchDepth; /* how many nested switches we are in, max = 8 */
     /* 0x008 */ Bytecode* ptrNextLine;
@@ -248,8 +250,8 @@ typedef struct ScriptInstance {
     /* 0x110 */ u8 switchBlockState[8];
     /* 0x118 */ s32 switchBlockValue[8];
     /* 0x138 */ s32* buffer;
-    /* 0x13C */ UNK_PTR array;
-    /* 0x140 */ UNK_PTR flagArray;
+    /* 0x13C */ s32* array;
+    /* 0x140 */ s32* flagArray;
     /* 0x144 */ s32 uniqueID;
     /* 0x148 */ struct Enemy* ownerActorID; /* controller*, battle ID, trigger* */
     /* 0x14C */ u32 ownerID; /* can be an npcID, a triggerID, a trigger ptr */
@@ -416,7 +418,8 @@ typedef struct Camera {
     /* 0x000 */ s16 flags;
     /* 0x002 */ s16 moveFlags;
     /* 0x004 */ s16 mode;
-    /* 0x006 */ char unk_06[4];
+    /* 0x006 */ u16 unk_06;
+    /* 0x008 */ u16 unk_08;
     /* 0x00A */ s16 viewportW;
     /* 0x00C */ s16 viewportH;
     /* 0x00E */ s16 viewportStartX;
@@ -425,7 +428,13 @@ typedef struct Camera {
     /* 0x014 */ s16 farClip;
     /* 0x016 */ char unk_16[2];
     /* 0x018 */ f32 vfov;
-    /* 0x01C */ char unk_1C[14];
+    /* 0x01C */ s16 unk_1C;
+    /* 0x01E */ s16 unk_1E;
+    /* 0x020 */ s16 unk_20;
+    /* 0x022 */ s16 unk_22;
+    /* 0x024 */ s16 unk_24;
+    /* 0x026 */ s16 unk_26;
+    /* 0x028 */ s16 unk_28;
     /* 0x02A */ s16 zoomPercent;
     /* 0x02C */ s16 backgroundColor[3];
     /* 0x032 */ s16 targetScreenCoords[3];
@@ -433,7 +442,9 @@ typedef struct Camera {
     /* 0x03A */ char unk_3A[2];
     /* 0x03C */ f32 lookAt_eye[3];
     /* 0x048 */ f32 lookAt_obj[3];
-    /* 0x054 */ char unk_54[12];
+    /* 0x054 */ f32 unk_54;
+    /* 0x058 */ f32 unk_58;
+    /* 0x05C */ f32 unk_5C;
     /* 0x060 */ struct Vec3f targetPos;
     /* 0x06C */ f32 currentYaw;
     /* 0x070 */ char unk_70[4];
@@ -469,12 +480,14 @@ typedef struct Camera {
     /* 0x4E4 */ struct Vec3f posA;
     /* 0x4F0 */ struct Vec3f posB;
     /* 0x4FC */ f32 controllerViewPitch;
-    /* 0x500 */ char unk_500[4];
+    /* 0x500 */ s32 unk_500;
     /* 0x504 */ s16 boolTargetPlayer;
-    /* 0x506 */ char unk_506[2];
-    /* 0x508 */ s32 panPhase;
+    /* 0x506 */ u16 unk_506;
+    /* 0x508 */ f32 panPhase;
     /* 0x50C */ f32 leadAmount;
-    /* 0x510 */ char unk_510[36];
+    /* 0x510 */ char unk_510[16];
+    /* 0x520 */ f32 unk_520;
+    /* 0x524 */ char unk_524[16];
     /* 0x534 */ struct ColliderBoundingBox* aabbForZoneBelow;
     /* 0x538 */ char unk_538[32];
 } Camera; // size = 0x558
@@ -522,7 +535,7 @@ typedef struct BattleStatus {
     /* 0x0B1 */ char unk_B1[3];
     /* 0x0B4 */ UNK_FUN_PTR(preUpdateCallback);
     /* 0x0B8 */ char unk_B8[4];
-    /* 0x0BC */ struct ScriptInstance* controlScript; /* control handed over to this when changing partners, maybe general? */
+    /* 0x0BC */ struct ScriptInstance* controlScript; /* control handed over to this when changing partners */
     /* 0x0C0 */ s32 controlScriptID;
     /* 0x0C4 */ struct ScriptInstance* camMovementScript;
     /* 0x0C8 */ s32 camMovementScriptID;
@@ -823,7 +836,15 @@ typedef struct GameStatus {
     /* 0x042 */ char unk_42[2];
     /* 0x044 */ u8 stickY; /* with deadzone */
     /* 0x045 */ u8 altStickY; /* input used for batte when flag 80000 set */
-    /* 0x046 */ char unk_46[34];
+    /* 0x046 */ char unk_46[2];
+    /* 0x048 */ s16 unk_48;
+    /* 0x04A */ char unk_4A[6];
+    /* 0x050 */ s16 unk_50;
+    /* 0x052 */ char unk_52[6];
+    /* 0x058 */ s16 unk_58;
+    /* 0x05A */ char unk_5A[6];
+    /* 0x060 */ s16 unk_60;
+    /* 0x062 */ char unk_62[6];
     /* 0x068 */ s16 demoButtonInput;
     /* 0x06A */ s8 demoStickX;
     /* 0x06B */ s8 demoStickY;
@@ -1018,16 +1039,19 @@ typedef struct FontRasterSet {
     /* 0x02 */ char unk_02[10];
 } FontRasterSet; // size = 0x0C
 
-typedef struct TriggerBp {
+typedef s32(*TriggerHandlerFunc)(struct Trigger*);
+
+typedef struct TriggerDefinition {
     /* 0x00 */ s32 flags;
     /* 0x04 */ s16 colliderIndex;
     /* 0x06 */ char unk_06[2];
     /* 0x08 */ s32 flagIndex;
-    /* 0x0C */ UNK_FUN_PTR(function);
-    /* 0x10 */ char unk_10[8];
+    /* 0x0C */ TriggerHandlerFunc function;
+    /* 0x10 */ char unk_10[4];
+    /* 0x14 */ s32 unk_14;
     /* 0x18 */ s32 inputArg3;
     /* 0x1C */ char unk_1C[4];
-} TriggerBp; // size = 0x20
+} TriggerDefinition; // size = 0x20
 
 typedef struct CollisionStatus {
     /* 0x00 */ s16 pushingAgainstWall; /* FFFF = none for all below VVV */
@@ -1268,8 +1292,8 @@ typedef struct TileDescriptor {
 } TileDescriptor; // size = 0x30
 
 typedef struct BackgroundHeader {
-    /* 0x00 */ u32 raster;
-    /* 0x04 */ u32 palette;
+    /* 0x00 */ UNK_PTR raster;
+    /* 0x04 */ UNK_PTR palette;
     /* 0x08 */ u16 startX;
     /* 0x0A */ u16 startY;
     /* 0x0C */ u16 width;
@@ -1326,7 +1350,7 @@ typedef struct PlayerStatus {
     /* 0x044 */ f32 decorationPos[2];
     /* 0x04C */ char unk_4C[4];
     /* 0x050 */ f32 jumpApexHeight;
-    /* 0x054 */ s32 currentSpeed;
+    /* 0x054 */ f32 currentSpeed;
     /* 0x058 */ f32 walkSpeed;
     /* 0x05C */ f32 runSpeed;
     /* 0x060 */ char unk_60[8];
@@ -1342,7 +1366,7 @@ typedef struct PlayerStatus {
     /* 0x0AC */ char unk_AC[4];
     /* 0x0B0 */ s16 colliderHeight;
     /* 0x0B2 */ s16 colliderDiameter;
-    /* 0x0B4 */ u8 actionState;
+    /* 0x0B4 */ s8 actionState;
     /* 0x0B5 */ u8 prevActionState;
     /* 0x0B6 */ u8 fallState;
     /* 0x0B7 */ char unk_B7;
@@ -1353,7 +1377,8 @@ typedef struct PlayerStatus {
     /* 0x0C0 */ u32* decorationList;
     /* 0x0C4 */ char unk_C4[8];
     /* 0x0CC */ s32 shadowID;
-    /* 0x0D0 */ char unk_D0[12];
+    /* 0x0D0 */ char unk_D0[8];
+    /* 0x0D8 */ UNK_PTR** unk_D8;
     /* 0x0DC */ s32 currentButtons;
     /* 0x0E0 */ s32 pressedButtons;
     /* 0x0E4 */ s32 heldButtons;
@@ -1376,7 +1401,7 @@ typedef struct AnimatedModelNode {
 typedef struct EncounterStatus {
     /* 0x00 */ s32 flags;
     /* 0x04 */ u8 eFirstStrike; /* 0 = none, 1 = player, 2 = enemy */
-    /* 0x05 */ u8 hitType; /* 1 = none/enemy, 2 = jump */
+    /* 0x05 */ s8 hitType; /* 1 = none/enemy, 2 = jump */
     /* 0x06 */ u8 hitTier; /* 0 = normal, 1 = super, 2 = ultra */
     /* 0x07 */ char unk_07[2];
     /* 0x09 */ u8 battleOutcome; /* 0 = won, 1 = lost */
@@ -1390,17 +1415,18 @@ typedef struct EncounterStatus {
     /* 0x12 */ char unk_12;
     /* 0x13 */ u8 dropWhackaBump;
     /* 0x14 */ s32 songID;
-    /* 0x18 */ char unk_18[4];
+    /* 0x18 */ s32 unk_18;
     /* 0x1C */ u8 numEncounters; /* number of encounters for current map (in list) */
     /* 0x1D */ char unk_1D[3];
     /* 0x20 */ u8 mapID;
     /* 0x21 */ char unk_21[3];
     /* 0x24 */ s32* npcGroupList;
     /* 0x28 */ struct Encounter* enounterList[24];
-    /* 0x2C */ char unk_2C[92];
     /* 0x88 */ struct Encounter* currentEncounter;
     /* 0x8C */ struct Enemy* currentEnemy;
-    /* 0x90 */ char unk_90[4];
-} EncounterStatus; // size = 0x94
+    /* 0x90 */ s32 unk_90;
+    /* 0x94 */ char unk_94[4];
+    /* 0x98 */ s32 unk_98;
+} EncounterStatus; // size = 0x9C
 
 #endif

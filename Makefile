@@ -11,9 +11,6 @@ SRC_DIRS := src src/os
 ASM_DIRS := asm asm/os
 INCLUDE_DIRS := include include/PR
 DATA_DIRS := bin
-COMPRESSED_DIRS := yay0
-MAP_DIRS := Map_Assets.FS
-BGM_DIRS := bgm
 
 # Source code files
 C_FILES := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))
@@ -22,17 +19,11 @@ ifdef PM_HEADER_REBUILD
 	H_FILES := $(foreach dir,$(INCLUDE_DIRS),$(wildcard $(dir)/*.h))
 endif
 DATA_FILES := $(foreach dir,$(DATA_DIRS),$(wildcard $(dir)/*.bin))
-COMPRESSED_FILES := $(foreach dir,$(COMPRESSED_DIRS),$(wildcard $(dir)/*.yay0)) 
-MAP_FILES := $(foreach dir,$(MAP_DIRS),$(wildcard $(dir)/*.FS)) 
-BGM_FILES := $(foreach dir,$(BGM_DIRS),$(wildcard $(dir)/*.bgm))
 
 # Object files
 O_FILES := $(foreach file,$(C_FILES),$(BUILD_DIR)/$(file:.c=.o)) \
            $(foreach file,$(S_FILES),$(BUILD_DIR)/$(file:.s=.o)) \
            $(foreach file,$(DATA_FILES),$(BUILD_DIR)/$(file:.bin=.o)) \
-           $(foreach file,$(COMPRESSED_FILES),$(BUILD_DIR)/$(file:.yay0=.yay0.o)) \
-           $(foreach file,$(MAP_FILES),$(BUILD_DIR)/$(file:.FS=.FS.o)) \
-           $(foreach file,$(BGM_FILES),$(BUILD_DIR)/$(file:.bgm=.bgm.o))
 
 
 ####################### Other Tools #########################
@@ -54,15 +45,15 @@ OBJCOPY = $(CROSS)objcopy
 
 TARGET = papermario
 
-CPPFLAGS = -Iinclude -D _LANGUAGE_C -ffreestanding -DF3DEX_GBI_2
-ASFLAGS = -EB -march=vr4300 -mtune=vr4300 -Iinclude
-OLDASFLAGS= -EB -Iinclude
-CFLAGS  = -O2 -quiet -G 0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32
-LDFLAGS = -T undefined_syms.txt -T $(LD_SCRIPT) -Map $(BUILD_DIR)/papermario.map --no-check-sections
+CPPFLAGS   = -fno-builtin -Iinclude -D _LANGUAGE_C -ffreestanding -DF3DEX_GBI_2
+ASFLAGS    = -EB -Iinclude -march=vr4300 -mtune=vr4300
+OLDASFLAGS = -EB -Iinclude
+CFLAGS     = -fno-builtin -O2 -quiet -G 0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32
+LDFLAGS    = -T undefined_syms.txt -T $(LD_SCRIPT) -Map $(BUILD_DIR)/papermario.map --no-check-sections
 
 ######################## Targets #############################
 
-$(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(DATA_DIRS) $(COMPRESSED_DIRS) $(MAP_DIRS) $(BGM_DIRS),$(shell mkdir -p build/$(dir)))
+$(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(DATA_DIRS) ,$(shell mkdir -p build/$(dir)))
 
 default: all
 
@@ -76,13 +67,10 @@ clean:
 submodules:
 	git submodule update --init --recursive
 
-n64split:
-	make -C tools/n64splitter
-
 split:
-	rm -rf $(DATA_DIRS) $(BGM_DIRS) && ./tools/n64splitter/bin/n64split -b -v -o . -c tools/n64split.yaml baserom.z64
+	rm -rf $(DATA_DIRS) && ./tools/n64splat/split.py baserom.z64 tools/splat.yaml .
 
-setup: clean submodules n64split split
+setup: clean submodules split
 
 print-% : ; $(info $* is a $(flavor $*) variable set to [$($*)]) @true
 
@@ -99,15 +87,6 @@ $(BUILD_DIR)/%.o: %.c $(H_FILES)
 	cpp $(CPPFLAGS) $< | $(CC) $(CFLAGS) -o - | $(OLD_AS) $(OLDASFLAGS) - -o $@
 
 $(BUILD_DIR)/%.o: %.bin
-	$(LD) -r -b binary -o $@ $<
-
-$(BUILD_DIR)/%.yay0.o: %.yay0
-	$(LD) -r -b binary -o $@ $<
-
-$(BUILD_DIR)/%.FS.o: %.FS
-	$(LD) -r -b binary -o $@ $<
-
-$(BUILD_DIR)/%.bgm.o: %.bgm
 	$(LD) -r -b binary -o $@ $<
 
 $(BUILD_DIR)/$(TARGET).bin: $(BUILD_DIR)/$(TARGET).elf
