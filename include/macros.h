@@ -9,4 +9,6 @@
 
 #define ASSERT(condition) if (!(condition)) { while (1) {} }
 
+#define SQ(x) (x*x)
+
 #endif
