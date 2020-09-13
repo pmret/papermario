@@ -29,12 +29,12 @@ INCLUDE_ASM("code_42e0_len_1f60", _heap_realloc);
 INCLUDE_API_ASM("code_42e0_len_1f60", cosine);
 
 s32 sign(s32 val) {
-    s32 ret = -1;
+    s32 sign = -1;
 
     if (val >= 0) {
-        ret = val > 0;
+        sign = val > 0;
     }
-    return ret;
+    return sign;
 }
 
 INCLUDE_ASM("code_42e0_len_1f60", int_to_string);
@@ -58,7 +58,7 @@ INCLUDE_ASM("code_42e0_len_1f60", dma_copy);
 INCLUDE_ASM("code_42e0_len_1f60", func_80029860);
 
 s32 _advance_rng(void) {
-    s32* rngVal = &D_80074410;
+    s32* rngVal = &gRandSeed;
 
     (*gGameStatusPtr)->nextRNG = *rngVal = (*rngVal * 0x5D588B65) + 1;
 
@@ -72,18 +72,18 @@ INCLUDE_ASM("code_42e0_len_1f60", func_80029994);
 s32 INCLUDE_ASM("code_42e0_len_1f60", rand_int, s32 arg0);
 
 f32 signF(f32 val) {
-    f32 ret;
+    f32 sign;
 
     if (!(val > 0.0f)) {
-        ret = -1.0f;
+        sign = -1.0f;
         if (!(val < 0.0f)) {
-            ret = 0.0f;
+            sign = 0.0f;
         }
     } else {
-        ret = 1.0f;
+        sign = 1.0f;
     }
 
-    return ret;
+    return sign;
 }
 
 INCLUDE_API_ASM("code_42e0_len_1f60", round);
@@ -104,7 +104,7 @@ f32 get_clamped_angle_diff(f32 a, f32 b) {
 f32 INCLUDE_ASM("code_42e0_len_1f60", atan2, f32 startX, f32 startZ, f32 endX, f32 endZ);
 
 f32 get_player_normal_yaw(void) {
-    return atan2(0, 0, (*gGameStatusPtr)->playerTraceNormal[0], (*gGameStatusPtr)->playerTraceNormal[2]);
+    return atan2(0, 0, (*gGameStatusPtr)->playerTraceNormal.x, (*gGameStatusPtr)->playerTraceNormal.z);
 }
 
 INCLUDE_ASM("code_42e0_len_1f60", get_player_normal_pitch);

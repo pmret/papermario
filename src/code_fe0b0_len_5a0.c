@@ -12,22 +12,22 @@ ApiStatus EnableSpriteShading(ScriptInstance* script, s32 isInitialCall) {
 }
 
 s32 getDemoState(ScriptInstance* script) {
-    set_variable(script, *script->ptrReadPos, (*gGameStatusPtr)->demoState);
+    set_variable(script, *script->ptrReadPos, GAME_STATUS->demoState);
     return ApiStatus_DONE2;
 }
 
 ApiStatus DemoPressButton(ScriptInstance* script, s32 isInitialCall) {
-    (*gGameStatusPtr)->demoButtonInput |= get_variable(script, *script->ptrReadPos);
+    GAME_STATUS->demoButtonInput |= get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
 ApiStatus DemoReleaseButton(ScriptInstance* script, s32 isInitialCall) {
-    (*gGameStatusPtr)->demoButtonInput &= ~get_variable(script, *script->ptrReadPos);
+    GAME_STATUS->demoButtonInput &= ~get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
 ApiStatus DemoSetButtons(ScriptInstance* script, s32 isInitialCall) {
-    (*gGameStatusPtr)->demoButtonInput = get_variable(script, *script->ptrReadPos);
+    GAME_STATUS->demoButtonInput = get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
@@ -39,8 +39,8 @@ ApiStatus DemoJoystickRadial(ScriptInstance* script, s32 isInitialCall) {
     a = get_float_variable(script, *thisPos++);
     b = get_float_variable(script, *thisPos++);
 
-    (*gGameStatusPtr)->demoStickX = a * sin_deg(b);
-    (*gGameStatusPtr)->demoStickY = a * cos_deg(b);
+    GAME_STATUS->demoStickX = a * sin_deg(b);
+    GAME_STATUS->demoStickY = a * cos_deg(b);
 
     return ApiStatus_DONE2;
 }
@@ -53,8 +53,8 @@ ApiStatus DemoJoystickXY(ScriptInstance* script, s32 isInitialCall) {
     x = get_float_variable(script, *thisPos++);
     y = get_float_variable(script, *thisPos++);
 
-    (*gGameStatusPtr)->demoStickX = x;
-    (*gGameStatusPtr)->demoStickY = y;
+    GAME_STATUS->demoStickX = x;
+    GAME_STATUS->demoStickY = y;
 
     return ApiStatus_DONE2;
 }

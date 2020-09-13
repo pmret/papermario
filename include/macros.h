@@ -9,6 +9,8 @@
 
 #define ASSERT(condition) if (!(condition)) { while (1) {} }
 
+#define GAME_STATUS (*gGameStatusPtr)
+
 #define SQ(x) (x*x)
 
 #endif
