@@ -7,7 +7,7 @@ shopt -s globstar
 FILES="src/**/*.c include/*.h"
 if (( $# > 0 )); then
     # only process .c and .h files
-    FILES=$(echo "$@" | sed 's/ /\n/g' | grep '.[ch]$')
+    FILES=$(echo "$@" | sed 's/ /\n/g' | grep '\.[ch]$')
 fi
 
 if [[ -z $FILES ]]; then
