@@ -1,6 +1,6 @@
 #!/bin/bash
 
-COMPILER_OPTS="-fno-builtin -std=gnu89 -Iinclude -Isrc -D_LANGUAGE_C"
+COMPILER_OPTS="-std=gnu89 -Iinclude -Isrc -D_LANGUAGE_C"
 
 shopt -s globstar
 
