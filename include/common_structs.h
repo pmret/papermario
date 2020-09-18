@@ -247,7 +247,7 @@ typedef struct ScriptInstance {
     /* 0x0C4 */ s32 varFlags[3];
     /* 0x0D0 */ s32 loopStartTable[8];
     /* 0x0F0 */ s32 loopCounterTable[8];
-    /* 0x110 */ u8 switchBlockState[8];
+    /* 0x110 */ s8 switchBlockState[8];
     /* 0x118 */ s32 switchBlockValue[8];
     /* 0x138 */ s32* buffer;
     /* 0x13C */ s32* array;
@@ -836,7 +836,15 @@ typedef struct GameStatus {
     /* 0x042 */ char unk_42[2];
     /* 0x044 */ u8 stickY; /* with deadzone */
     /* 0x045 */ u8 altStickY; /* input used for batte when flag 80000 set */
-    /* 0x046 */ char unk_46[34];
+    /* 0x046 */ char unk_46[2];
+    /* 0x048 */ s16 unk_48;
+    /* 0x04A */ char unk_4A[6];
+    /* 0x050 */ s16 unk_50;
+    /* 0x052 */ char unk_52[6];
+    /* 0x058 */ s16 unk_58;
+    /* 0x05A */ char unk_5A[6];
+    /* 0x060 */ s16 unk_60;
+    /* 0x062 */ char unk_62[6];
     /* 0x068 */ s16 demoButtonInput;
     /* 0x06A */ s8 demoStickX;
     /* 0x06B */ s8 demoStickY;
@@ -871,7 +879,7 @@ typedef struct GameStatus {
     /* 0x0BA */ s16 bootGreen;
     /* 0x0BC */ s16 bootRed;
     /* 0x0BE */ char unk_BE[106];
-    /* 0x128 */ f32 playerTraceNormal[3];
+    /* 0x128 */ Vec3f playerTraceNormal;
     /* 0x134 */ u16 frameCounter;
     /* 0x136 */ char unk_136[2];
     /* 0x138 */ s32 nextRNG;
@@ -1031,16 +1039,19 @@ typedef struct FontRasterSet {
     /* 0x02 */ char unk_02[10];
 } FontRasterSet; // size = 0x0C
 
-typedef struct TriggerBp {
+typedef s32(*TriggerHandlerFunc)(struct Trigger*);
+
+typedef struct TriggerDefinition {
     /* 0x00 */ s32 flags;
     /* 0x04 */ s16 colliderIndex;
     /* 0x06 */ char unk_06[2];
     /* 0x08 */ s32 flagIndex;
-    /* 0x0C */ UNK_FUN_PTR(function);
-    /* 0x10 */ char unk_10[8];
+    /* 0x0C */ TriggerHandlerFunc function;
+    /* 0x10 */ char unk_10[4];
+    /* 0x14 */ s32 unk_14;
     /* 0x18 */ s32 inputArg3;
     /* 0x1C */ char unk_1C[4];
-} TriggerBp; // size = 0x20
+} TriggerDefinition; // size = 0x20
 
 typedef struct CollisionStatus {
     /* 0x00 */ s16 pushingAgainstWall; /* FFFF = none for all below VVV */
@@ -1339,7 +1350,7 @@ typedef struct PlayerStatus {
     /* 0x044 */ f32 decorationPos[2];
     /* 0x04C */ char unk_4C[4];
     /* 0x050 */ f32 jumpApexHeight;
-    /* 0x054 */ s32 currentSpeed;
+    /* 0x054 */ f32 currentSpeed;
     /* 0x058 */ f32 walkSpeed;
     /* 0x05C */ f32 runSpeed;
     /* 0x060 */ char unk_60[8];
@@ -1355,7 +1366,7 @@ typedef struct PlayerStatus {
     /* 0x0AC */ char unk_AC[4];
     /* 0x0B0 */ s16 colliderHeight;
     /* 0x0B2 */ s16 colliderDiameter;
-    /* 0x0B4 */ u8 actionState;
+    /* 0x0B4 */ s8 actionState;
     /* 0x0B5 */ u8 prevActionState;
     /* 0x0B6 */ u8 fallState;
     /* 0x0B7 */ char unk_B7;
@@ -1391,7 +1402,7 @@ typedef struct AnimatedModelNode {
 typedef struct EncounterStatus {
     /* 0x00 */ s32 flags;
     /* 0x04 */ u8 eFirstStrike; /* 0 = none, 1 = player, 2 = enemy */
-    /* 0x05 */ u8 hitType; /* 1 = none/enemy, 2 = jump */
+    /* 0x05 */ s8 hitType; /* 1 = none/enemy, 2 = jump */
     /* 0x06 */ u8 hitTier; /* 0 = normal, 1 = super, 2 = ultra */
     /* 0x07 */ char unk_07[2];
     /* 0x09 */ u8 battleOutcome; /* 0 = won, 1 = lost */
@@ -1405,17 +1416,18 @@ typedef struct EncounterStatus {
     /* 0x12 */ char unk_12;
     /* 0x13 */ u8 dropWhackaBump;
     /* 0x14 */ s32 songID;
-    /* 0x18 */ char unk_18[4];
+    /* 0x18 */ s32 unk_18;
     /* 0x1C */ u8 numEncounters; /* number of encounters for current map (in list) */
     /* 0x1D */ char unk_1D[3];
     /* 0x20 */ u8 mapID;
     /* 0x21 */ char unk_21[3];
     /* 0x24 */ s32* npcGroupList;
     /* 0x28 */ struct Encounter* enounterList[24];
-    /* 0x2C */ char unk_2C[92];
     /* 0x88 */ struct Encounter* currentEncounter;
     /* 0x8C */ struct Enemy* currentEnemy;
-    /* 0x90 */ char unk_90[4];
-} EncounterStatus; // size = 0x94
+    /* 0x90 */ s32 unk_90;
+    /* 0x94 */ char unk_94[4];
+    /* 0x98 */ s32 unk_98;
+} EncounterStatus; // size = 0x9C
 
 #endif

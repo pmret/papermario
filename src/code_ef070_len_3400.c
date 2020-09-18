@@ -431,7 +431,18 @@ ApiStatus GetCamPosition(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_API_ASM("code_ef070_len_3400", WaitForCam);
+ApiStatus WaitForCam(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 id = get_variable(script, args[0]);
+    f32 endInterpValue = get_float_variable(script, args[1]);
+    Camera* cameras = &gCameras;
+    Camera* camera = &cameras[id];
+
+    if (isInitialCall || !(endInterpValue <= camera->sinInterpAlpha)) {
+        return ApiStatus_BLOCK;
+    }
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_API_ASM("code_ef070_len_3400", SetCamProperties);
 

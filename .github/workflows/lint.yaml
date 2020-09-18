@@ -23,7 +23,11 @@ jobs:
         uses: trilom/file-changes-action@v1.2.4
         with:
           output: ' '
+        continue-on-error: true
       - run: ./format.sh ${{ steps.files.outputs.files}}
+        if: ${{ steps.files.outcome == 'success' }}
+      - run: ./format.sh
+        if: ${{ steps.files.outcome == 'failure' }}
 
       # fail if any files were changed by ./format.sh
       - id: files_formatted

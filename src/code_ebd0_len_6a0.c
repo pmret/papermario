@@ -43,8 +43,8 @@ s16 func_80033830(add_val) {
 }
 
 void func_80033874(void) {
-    func_80137D88(0, (*gGameStatusPtr)->bootAlpha);
-    func_80137E10(0, (*gGameStatusPtr)->bootBlue, (*gGameStatusPtr)->bootGreen, (*gGameStatusPtr)->bootRed);
+    func_80137D88(0, GAME_STATUS->bootAlpha);
+    func_80137E10(0, GAME_STATUS->bootBlue, GAME_STATUS->bootGreen, GAME_STATUS->bootRed);
 }
 
 void start_battle_countdown(void) {

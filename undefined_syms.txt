@@ -1,6 +1,9 @@
 gGameStatusPtr = 0x8007419C;
+gRandSeed = 0x80074410;
 gUIStatus = 0x8010EF58;
 gPlayerData = 0x8010F290;
+gPlayerActionState = 0x8010F07C;
+gPlayerAnimation = 0x8010F080;
 gPlayerStatus = 0x8010EFC8;
 gItemTable = 0x800878E0;
 gWorldScriptList = 0x802DA490;
@@ -11,10 +14,10 @@ D_802DAC98 = 0x802DAC98;
 gStaticScriptCounter = 0x802D9CA0;
 D_802D9CA4 = 0x802D9CA4;
 gGlobalTimeSpace = 0x802D9CA8;
+gPlayerNpcPtr = 0x802D9D20;
 D_80147574 = 0x80147574;
 D_8010EBB0 = 0x8010EBB0;
 D_8010F250 = 0x8010F250;
-
 D_80159D50 = 0x80159D50;
 
 gMapTransitionAlpha = 0x800A0940;
@@ -28,6 +31,11 @@ D_800A0944 = 0x800A0944;
 
 D_8010CD10 = 0x8010CD10;
 D_8010CD12 = 0x8010CD12;
+
+gStaticScriptCounter = 0x802D9CA0;
+D_802D9CA4 = 0x802D9CA4;
+gNumScripts = 0x802DA488;
+D_802DAC98 = 0x802DAC98;
 
 D_000759B0 = 0x000759B0;
 D_000759B0_end = 0x000A5DD0;
@@ -44,9 +52,12 @@ D_0010CC10_end = 0x0010F1B0;
 D_80074021 = 0x80074021;
 D_800959D4 = 0x800959D4;
 D_8009A5D8 = 0x8009A5D8;
+gGameState = 0x8009A600;
 D_8009A650 = 0x8009A650;
 D_800A0900 = 0x800A0900;
+gCurrentEncounter = 0x800B0F10;
 gCameras = 0x800B1D80;
+gCurrentCameraID = 0x80077410;
 D_800DC500 = 0x800DC500;
 D_8010F6D0 = 0x8010F6D0;
 gBackgroundImage = 0x80200000;
@@ -80,6 +91,8 @@ gTriggerList2 = 0x80159290;
 gCurrentTriggerListPtr = 0x80159390;
 
 D_801595A0 = 0x801595A0;
+D_80159AE2 = 0x80159AE2;
+D_80159AE4 = 0x80159AE4;
 D_8015C7C0 = 0x8015C7C0;
 
 gWorldModelList = 0x80151770;
@@ -91,7 +104,7 @@ gBattleModelSpecialDls = 0x80152010;
 gCurrentModelSpecialDlsPtr = 0x801512E8;
 
 gWorldEntityList = 0x80151380;
-gWorldBattleEntityList = 0x801513F8;
+gBattleEntityList = 0x801513F8;
 gCurrentEntityListPtr = 0x80151470;
 
 gWorldShadowList = 0x80151478;
@@ -105,8 +118,9 @@ gWorldDynamicEntityList = 0x801543A0;
 gBattleDynamicEntityList = 0x801543E0;
 gCurrentDynamicEntityListPtr = 0x80154420;
 
-gScriptIdList = 0x802D1898;
+gScriptIdList = 0x802DA898;
 gScriptIndexList = 0x802DAA98;
+gScriptListCount = 0x802DAC98;
 
 sqrtf = 0x80061EF0;
 func_802A91F8 = 0x802A91F8;

@@ -269,12 +269,8 @@ ApiStatus func_802D4D88(ScriptInstance* script, s32 initialCall) {
     return ApiStatus_DONE2;
 }
 
-//INCLUDE_ASM("code_f8f60_len_1560", setup_path_data);
-
-#define SQ(n) ((n) * (n))
-
-void* heap_malloc(s32 size);
-
+#ifdef NON_MATCHING
+// most likely functionally equivalent, lots of issues though.
 void setup_path_data(s32 numVecs, f32* arg1, struct Vec3f* arg2, struct Vec3f* arg3) {
     struct Vec3f *temp_s4;
     f32 *temp_s7;
@@ -343,12 +339,15 @@ void setup_path_data(s32 numVecs, f32* arg1, struct Vec3f* arg2, struct Vec3f* a
     for (i = (numVecs - 2); i > 0 ; i--) {
         arg3[i].x = (arg3[i].x - (temp_s7[i] * arg3[i + 1].x)) / temp_s4[i].x;
         arg3[i].y = (arg3[i].y - (temp_s7[i] * arg3[i + 1].y)) / temp_s4[i].y;
-        arg3[i].z = (arg3[i].z - (temp_s7[i] * arg3[i].z)) / temp_s4[i].z;
+        arg3[i].z = (arg3[i].z - (temp_s7[i] * arg3[i + 1].z)) / temp_s4[i].z;
     }
 
     heap_free(temp_s7);
     heap_free(temp_s4);
 }
+#else
+INCLUDE_ASM("code_f8f60_len_1560", setup_path_data);
+#endif
 
 INCLUDE_ASM("code_f8f60_len_1560", func_802D5270);
 

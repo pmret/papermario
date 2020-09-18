@@ -1,4 +1,4 @@
-.section .text0_header, "a"
+.section .text_0, "a"
 .byte  0x80, 0x37, 0x12, 0x40 # PI BSD Domain 1 register
 .word  0x0000000F # clock rate setting
 .word  0x80125C00 # entry point

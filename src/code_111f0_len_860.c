@@ -48,15 +48,15 @@ s32 func_800363FC(void) {
 }
 
 s32 func_80036430(void) {
-    PlayerStatus* pPlayerStatus = &gPlayerStatus;
+    PlayerStatus* playerStatus = &gPlayerStatus;
 
     gMapTransitionAlpha = 0xFF;
     D_800A0942 = 0x14;
     D_800A0944 = 0x01;
 
-    pPlayerStatus->flags |= 0x1000;
+    playerStatus->flags |= 0x1000;
 
-    return pPlayerStatus->flags;
+    return playerStatus->flags;
 }
 
 INCLUDE_ASM("code_111f0_len_860", func_8003646C);

@@ -41,7 +41,15 @@ ApiStatus StartBattleWith(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_API_ASM("code_1f580_len_1940", StartBossBattle);
 
-INCLUDE_API_ASM("code_1f580_len_1940", SetBattleMusic);
+ApiStatus SetBattleMusic(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode songID = get_variable(script, *script->ptrReadPos);
+    EncounterStatus* currentEncounter = &gCurrentEncounter;
+
+    currentEncounter->allowFleeing = 1;
+    currentEncounter->songID = songID;
+    currentEncounter->unk_18 = -1;
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_API_ASM("code_1f580_len_1940", BindNpcAI);
 

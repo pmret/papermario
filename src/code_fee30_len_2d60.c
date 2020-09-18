@@ -18,9 +18,25 @@ INCLUDE_ASM("code_fee30_len_2d60", spr_transform_point);
 
 INCLUDE_ASM("code_fee30_len_2d60", spr_draw_component);
 
-INCLUDE_ASM("code_fee30_len_2d60", _spr_sign_extend_12bit);
+s32 _spr_sign_extend_12bit(u16 val) {
+    s32 temp = val & 0xFFF;
 
-INCLUDE_ASM("code_fee30_len_2d60", _spr_sign_extend_16bit);
+    if (temp & 0x800) {
+        return temp | ~0xFFF;
+    } else {
+        return temp;
+    }
+}
+
+s32 _spr_sign_extend_16bit(u16 val) {
+    s32 temp = val & 0xFFFF;
+
+    if (temp & 0x8000) {
+        return temp | ~0xFFFF;
+    } else {
+        return temp;
+    }
+}
 
 INCLUDE_ASM("code_fee30_len_2d60", update_component);
 
