@@ -821,7 +821,23 @@ INCLUDE_API_ASM("code_e92d0_len_5da0", RotateModel);
 
 INCLUDE_API_ASM("code_e92d0_len_5da0", ScaleModel);
 
-INCLUDE_API_ASM("code_e92d0_len_5da0", GetModelIndex);
+ApiStatus GetModelIndex(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* thisPos = script->ptrReadPos;
+    Bytecode modelID = get_variable(script, *thisPos++);
+    Bytecode index = *thisPos++;
+
+    set_variable(script, index, get_model_list_index_from_tree_index(modelID));
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_802C8EE4(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* thisPos = script->ptrReadPos;
+    Bytecode modelID = get_variable(script, *thisPos++);
+    Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(modelID));
+
+    model->flags &= ~0x400;
+    return ApiStatus_DONE2;
+}
 
 ApiStatus CloneModel(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* thisPos = script->ptrReadPos;

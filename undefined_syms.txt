@@ -94,7 +94,7 @@ gBattleModelSpecialDls = 0x80152010;
 gCurrentModelSpecialDlsPtr = 0x801512E8;
 
 gWorldEntityList = 0x80151380;
-gWorldBattleEntityList = 0x801513F8;
+gBattleEntityList = 0x801513F8;
 gCurrentEntityListPtr = 0x80151470;
 
 gWorldShadowList = 0x80151478;

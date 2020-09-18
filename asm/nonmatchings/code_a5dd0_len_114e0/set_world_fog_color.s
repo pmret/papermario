@@ -2,7 +2,7 @@
 .set noreorder # don't insert nops after branches
 
 
-glabel set_fog_color
+glabel set_world_fog_color
 /* 0B2288 8011BB88 3C028015 */  lui   $v0, 0x8015
 /* 0B228C 8011BB8C 8C423264 */  lw    $v0, 0x3264($v0)
 /* 0B2290 8011BB90 AC440004 */  sw    $a0, 4($v0)

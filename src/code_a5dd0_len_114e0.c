@@ -22,13 +22,37 @@ INCLUDE_ASM("code_a5dd0_len_114e0", func_80110374);
 
 INCLUDE_ASM("code_a5dd0_len_114e0", func_801104A4);
 
-INCLUDE_ASM("code_a5dd0_len_114e0", get_entity_by_index);
+Entity* get_entity_by_index(s32 index) {
+    return (*gCurrentEntityListPtr)[index & 0xFFF];
+}
 
-INCLUDE_ASM("code_a5dd0_len_114e0", get_shadow_by_index);
+Shadow* get_shadow_by_index(s32 index) {
+    return (*gCurrentShadowListPtr)[index & 0xFFF];
+}
 
-INCLUDE_ASM("code_a5dd0_len_114e0", get_entity_list);
+Entity** get_entity_list(void) {
+    Entity** ret;
 
-INCLUDE_ASM("code_a5dd0_len_114e0", get_shadow_list);
+    if (!GAME_STATUS->isBattle) {
+        ret = gWorldEntityList;
+    } else {
+        ret = gBattleEntityList;
+    }
+    return ret;
+}
+
+
+Shadow** get_shadow_list(void) {
+    Shadow** ret;
+
+    if (!GAME_STATUS->isBattle) {
+        ret = gWorldShadowList;
+    } else {
+        ret = gBattleShadowList;
+    }
+    return ret;
+}
+
 
 INCLUDE_ASM("code_a5dd0_len_114e0", func_80110678);
 
@@ -44,7 +68,9 @@ INCLUDE_ASM("code_a5dd0_len_114e0", func_801108B8);
 
 INCLUDE_ASM("code_a5dd0_len_114e0", test_player_entity_aabb);
 
-INCLUDE_ASM("code_a5dd0_len_114e0", is_player_action_state);
+s32 is_player_action_state(ActionState actionState) {
+    return actionState == gPlayerActionState;
+}
 
 INCLUDE_ASM("code_a5dd0_len_114e0", func_80110BCC);
 
@@ -154,7 +180,9 @@ INCLUDE_ASM("code_a5dd0_len_114e0", func_80117E74);
 
 INCLUDE_ASM("code_a5dd0_len_114e0", func_801180E8);
 
-Model* INCLUDE_ASM("code_a5dd0_len_114e0", get_model_from_list_index, s32 listIndex);
+Model* get_model_from_list_index(s32 listIndex) {
+    return (*gCurrentModelListPtr)[listIndex];
+}
 
 INCLUDE_ASM("code_a5dd0_len_114e0", load_data_for_models);
 
@@ -184,13 +212,15 @@ INCLUDE_ASM("code_a5dd0_len_114e0", func_8011B950);
 
 INCLUDE_ASM("code_a5dd0_len_114e0", func_8011BAE8);
 
-INCLUDE_ASM("code_a5dd0_len_114e0", set_fog_color);
+INCLUDE_ASM("code_a5dd0_len_114e0", set_world_fog_color);
 
 INCLUDE_ASM("code_a5dd0_len_114e0", func_8011BBA4);
 
 INCLUDE_ASM("code_a5dd0_len_114e0", get_fog_color);
 
-INCLUDE_ASM("code_a5dd0_len_114e0", set_tex_panner);
+void set_tex_panner(Model* model, s8 texPannerID) {
+    model->texPannerID = texPannerID;
+}
 
 INCLUDE_ASM("code_a5dd0_len_114e0", set_main_pan_u);
 
