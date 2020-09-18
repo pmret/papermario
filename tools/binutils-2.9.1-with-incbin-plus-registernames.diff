@@ -1,0 +1,1250 @@
+diff -Naur binutils-2.9.1/bfd/config.bfd binutils-2.9.1-modified/bfd/config.bfd
+--- binutils-2.9.1/bfd/config.bfd	1998-05-01 11:48:05.000000000 -0400
++++ binutils-2.9.1-modified/bfd/config.bfd	2020-08-19 19:16:39.121918512 -0400
+@@ -407,6 +407,10 @@
+     targ_defvec=ecoff_big_vec
+     targ_selvecs=ecoff_little_vec
+     ;;
++  mips-nintendo-*)
++    targ_defvec=bfd_elf32_bigmips_vec
++    DEFS="-DNU64 $DEFS"
++    ;;
+   mips*-*-lnews*)
+     targ_defvec=ecoff_biglittle_vec
+     targ_selvecs="ecoff_little_vec ecoff_big_vec"
+diff -Naur binutils-2.9.1/bfd/configure binutils-2.9.1-modified/bfd/configure
+--- binutils-2.9.1/bfd/configure	1998-05-01 11:48:05.000000000 -0400
++++ binutils-2.9.1-modified/bfd/configure	2020-08-19 19:16:39.125251880 -0400
+@@ -71,6 +71,7 @@
+ subdirs=
+ MFLAGS= MAKEFLAGS=
+ SHELL=${CONFIG_SHELL-/bin/sh}
++DEFS=
+ # Maximum number of lines to put in a shell here document.
+ ac_max_here_lines=12
+ 
+@@ -3298,7 +3299,7 @@
+ 
+ trap 'rm -f $CONFIG_STATUS conftest*; exit 1' 1 2 15
+ 
+-DEFS=-DHAVE_CONFIG_H
++DEFS="-DHAVE_CONFIG_H $DEFS"
+ 
+ # Without the "./", some shells look in PATH for config.status.
+ : ${CONFIG_STATUS=./config.status}
+diff -Naur binutils-2.9.1/bfd/elf32-mips.c binutils-2.9.1-modified/bfd/elf32-mips.c
+--- binutils-2.9.1/bfd/elf32-mips.c	1998-05-01 11:48:09.000000000 -0400
++++ binutils-2.9.1-modified/bfd/elf32-mips.c	2020-08-19 19:16:39.125251880 -0400
+@@ -2271,6 +2271,7 @@
+     {
+       hdr->sh_type = SHT_MIPS_MSYM;
+       hdr->sh_entsize = 8;
++      hdr->sh_info = 0;
+       /* FIXME: Set the sh_info field.  */
+     }
+   else if (strcmp (name, ".conflict") == 0)
+diff -Naur binutils-2.9.1/bfd/elf.c binutils-2.9.1-modified/bfd/elf.c
+--- binutils-2.9.1/bfd/elf.c	1998-05-01 11:48:08.000000000 -0400
++++ binutils-2.9.1-modified/bfd/elf.c	2020-09-18 17:08:49.877037543 -0400
+@@ -1905,7 +1905,7 @@
+ 
+   bfd_set_symtab (abfd, new_syms, num_locals + num_globals);
+ 
+-  elf_num_locals (abfd) = num_locals;
++  elf_num_locals (abfd) = num_locals + 3; // hack for PM.
+   elf_num_globals (abfd) = num_globals;
+   return true;
+ }
+@@ -2597,6 +2597,8 @@
+ 
+ 	  if (p->p_type == PT_LOAD)
+ 	    {
++#ifndef	NU64
++              printf("NU64 not turned on!\n");
+ 	      bfd_vma adjust;
+ 
+ 	      if ((flags & SEC_LOAD) != 0)
+@@ -2626,7 +2628,7 @@
+ 		  if ((flags & SEC_LOAD) != 0)
+ 		    p->p_filesz += adjust;
+ 		}
+-
++#endif
+ 	      sec->filepos = off;
+ 
+ 	      /* We check SEC_HAS_CONTENTS here because if NOLOAD is
+@@ -3473,7 +3475,7 @@
+     symtab_hdr->sh_type = SHT_SYMTAB;
+     symtab_hdr->sh_entsize = bed->s->sizeof_sym;
+     symtab_hdr->sh_size = symtab_hdr->sh_entsize * (symcount + 1);
+-    symtab_hdr->sh_info = elf_num_locals (abfd) + 1;
++    symtab_hdr->sh_info = elf_num_locals (abfd);
+     symtab_hdr->sh_addralign = bed->s->file_align;
+ 
+     symstrtab_hdr = &elf_tdata (abfd)->strtab_hdr;
+diff -Naur binutils-2.9.1/config.sub binutils-2.9.1-modified/config.sub
+--- binutils-2.9.1/config.sub	1998-05-01 11:48:46.000000000 -0400
++++ binutils-2.9.1-modified/config.sub	2020-08-19 19:16:39.128585248 -0400
+@@ -824,6 +824,10 @@
+ 		basic_machine=z8k-unknown
+ 		os=-sim
+ 		;;
++	nu64)
++		basic_machine=mips-nintendo
++		os=-nu64
++		;;
+ 	none)
+ 		basic_machine=none-none
+ 		os=-none
+@@ -1012,6 +1016,9 @@
+ 	-xenix)
+ 		os=-xenix
+ 		;;
++	-nu64)
++		os=-nu64
++		;;
+ 	-none)
+ 		;;
+ 	*)
+diff -Naur binutils-2.9.1/gas/config/obj-elf.c binutils-2.9.1-modified/gas/config/obj-elf.c
+--- binutils-2.9.1/gas/config/obj-elf.c	1998-05-01 11:44:36.000000000 -0400
++++ binutils-2.9.1-modified/gas/config/obj-elf.c	2020-08-19 19:16:39.128585248 -0400
+@@ -316,6 +316,22 @@
+ 	      as_warn ("Common alignment negative; 0 assumed");
+ 	    }
+ 	}
++#ifdef NU64
++      {
++	char  *n64align_env;
++	int    n64align;
++	static n64align_flag = -1;
++	
++	if(n64align_flag == -1){
++	  n64align_env = getenv("N64ALIGN");
++	  n64align_flag = (n64align_env && !strcasecmp(n64align_env, "ON") ? 1:0);
++	}
++	if(n64align_flag) {
++	  n64align = (size >= 1024 ? 16:(size >= 16 ? 8:0));
++	  if (n64align > temp) temp = n64align;
++	}
++      }
++#endif
+       if (symbolP->local)
+ 	{
+ 	  segT old_sec;
+diff -Naur binutils-2.9.1/gas/config/tc-mips.c binutils-2.9.1-modified/gas/config/tc-mips.c
+--- binutils-2.9.1/gas/config/tc-mips.c	1998-05-01 11:44:43.000000000 -0400
++++ binutils-2.9.1-modified/gas/config/tc-mips.c	2020-09-18 17:19:27.763054511 -0400
+@@ -95,6 +95,265 @@
+ 
+ #define ILLEGAL_REG (32)
+ 
++struct regname {
++  const char *name;
++  unsigned int num;
++};
++
++#define RNUM_MASK 0x00000ff
++#define RTYPE_MASK  0x0ffff00
++#define RTYPE_NUM 0x0000100
++#define RTYPE_FPU 0x0000200
++#define RTYPE_FCC 0x0000400
++#define RTYPE_VEC 0x0000800
++#define RTYPE_GP  0x0001000
++#define RTYPE_CP0 0x0002000
++#define RTYPE_PC  0x0004000
++#define RTYPE_ACC 0x0008000
++#define RTYPE_CCC 0x0010000
++#define RTYPE_VI  0x0020000
++#define RTYPE_VF  0x0040000
++#define RTYPE_R5900_I 0x0080000
++#define RTYPE_R5900_Q 0x0100000
++#define RTYPE_R5900_R 0x0200000
++#define RTYPE_R5900_ACC 0x0400000
++#define RTYPE_MSA 0x0800000
++#define RWARN   0x8000000
++
++#define GENERIC_REGISTER_NUMBERS \
++    {"$0",  RTYPE_NUM | 0},  \
++    {"$1",  RTYPE_NUM | 1},  \
++    {"$2",  RTYPE_NUM | 2},  \
++    {"$3",  RTYPE_NUM | 3},  \
++    {"$4",  RTYPE_NUM | 4},  \
++    {"$5",  RTYPE_NUM | 5},  \
++    {"$6",  RTYPE_NUM | 6},  \
++    {"$7",  RTYPE_NUM | 7},  \
++    {"$8",  RTYPE_NUM | 8},  \
++    {"$9",  RTYPE_NUM | 9},  \
++    {"$10", RTYPE_NUM | 10}, \
++    {"$11", RTYPE_NUM | 11}, \
++    {"$12", RTYPE_NUM | 12}, \
++    {"$13", RTYPE_NUM | 13}, \
++    {"$14", RTYPE_NUM | 14}, \
++    {"$15", RTYPE_NUM | 15}, \
++    {"$16", RTYPE_NUM | 16}, \
++    {"$17", RTYPE_NUM | 17}, \
++    {"$18", RTYPE_NUM | 18}, \
++    {"$19", RTYPE_NUM | 19}, \
++    {"$20", RTYPE_NUM | 20}, \
++    {"$21", RTYPE_NUM | 21}, \
++    {"$22", RTYPE_NUM | 22}, \
++    {"$23", RTYPE_NUM | 23}, \
++    {"$24", RTYPE_NUM | 24}, \
++    {"$25", RTYPE_NUM | 25}, \
++    {"$26", RTYPE_NUM | 26}, \
++    {"$27", RTYPE_NUM | 27}, \
++    {"$28", RTYPE_NUM | 28}, \
++    {"$29", RTYPE_NUM | 29}, \
++    {"$30", RTYPE_NUM | 30}, \
++    {"$31", RTYPE_NUM | 31}
++
++#define FPU_REGISTER_NAMES       \
++    {"$f0", RTYPE_FPU | 0},  \
++    {"$f1", RTYPE_FPU | 1},  \
++    {"$f2", RTYPE_FPU | 2},  \
++    {"$f3", RTYPE_FPU | 3},  \
++    {"$f4", RTYPE_FPU | 4},  \
++    {"$f5", RTYPE_FPU | 5},  \
++    {"$f6", RTYPE_FPU | 6},  \
++    {"$f7", RTYPE_FPU | 7},  \
++    {"$f8", RTYPE_FPU | 8},  \
++    {"$f9", RTYPE_FPU | 9},  \
++    {"$f10",  RTYPE_FPU | 10}, \
++    {"$f11",  RTYPE_FPU | 11}, \
++    {"$f12",  RTYPE_FPU | 12}, \
++    {"$f13",  RTYPE_FPU | 13}, \
++    {"$f14",  RTYPE_FPU | 14}, \
++    {"$f15",  RTYPE_FPU | 15}, \
++    {"$f16",  RTYPE_FPU | 16}, \
++    {"$f17",  RTYPE_FPU | 17}, \
++    {"$f18",  RTYPE_FPU | 18}, \
++    {"$f19",  RTYPE_FPU | 19}, \
++    {"$f20",  RTYPE_FPU | 20}, \
++    {"$f21",  RTYPE_FPU | 21}, \
++    {"$f22",  RTYPE_FPU | 22}, \
++    {"$f23",  RTYPE_FPU | 23}, \
++    {"$f24",  RTYPE_FPU | 24}, \
++    {"$f25",  RTYPE_FPU | 25}, \
++    {"$f26",  RTYPE_FPU | 26}, \
++    {"$f27",  RTYPE_FPU | 27}, \
++    {"$f28",  RTYPE_FPU | 28}, \
++    {"$f29",  RTYPE_FPU | 29}, \
++    {"$f30",  RTYPE_FPU | 30}, \
++    {"$f31",  RTYPE_FPU | 31}
++
++#define FPU_CONDITION_CODE_NAMES \
++    {"$fcc0", RTYPE_FCC | 0},  \
++    {"$fcc1", RTYPE_FCC | 1},  \
++    {"$fcc2", RTYPE_FCC | 2},  \
++    {"$fcc3", RTYPE_FCC | 3},  \
++    {"$fcc4", RTYPE_FCC | 4},  \
++    {"$fcc5", RTYPE_FCC | 5},  \
++    {"$fcc6", RTYPE_FCC | 6},  \
++    {"$fcc7", RTYPE_FCC | 7}
++
++#define COPROC_CONDITION_CODE_NAMES         \
++    {"$cc0",  RTYPE_FCC | RTYPE_CCC | 0}, \
++    {"$cc1",  RTYPE_FCC | RTYPE_CCC | 1}, \
++    {"$cc2",  RTYPE_FCC | RTYPE_CCC | 2}, \
++    {"$cc3",  RTYPE_FCC | RTYPE_CCC | 3}, \
++    {"$cc4",  RTYPE_FCC | RTYPE_CCC | 4}, \
++    {"$cc5",  RTYPE_FCC | RTYPE_CCC | 5}, \
++    {"$cc6",  RTYPE_FCC | RTYPE_CCC | 6}, \
++    {"$cc7",  RTYPE_FCC | RTYPE_CCC | 7}
++
++#define N32N64_SYMBOLIC_REGISTER_NAMES \
++    {"$a4", RTYPE_GP | 8},  \
++    {"$a5", RTYPE_GP | 9},  \
++    {"$a6", RTYPE_GP | 10}, \
++    {"$a7", RTYPE_GP | 11}, \
++    {"$ta0",  RTYPE_GP | 8},  /* alias for $a4 */ \
++    {"$ta1",  RTYPE_GP | 9},  /* alias for $a5 */ \
++    {"$ta2",  RTYPE_GP | 10}, /* alias for $a6 */ \
++    {"$ta3",  RTYPE_GP | 11}, /* alias for $a7 */ \
++    {"$t0", RTYPE_GP | 12}, \
++    {"$t1", RTYPE_GP | 13}, \
++    {"$t2", RTYPE_GP | 14}, \
++    {"$t3", RTYPE_GP | 15}
++
++#define O32_SYMBOLIC_REGISTER_NAMES \
++    {"$t0", RTYPE_GP | 8},  \
++    {"$t1", RTYPE_GP | 9},  \
++    {"$t2", RTYPE_GP | 10}, \
++    {"$t3", RTYPE_GP | 11}, \
++    {"$t4", RTYPE_GP | 12}, \
++    {"$t5", RTYPE_GP | 13}, \
++    {"$t6", RTYPE_GP | 14}, \
++    {"$t7", RTYPE_GP | 15}, \
++    {"$ta0",  RTYPE_GP | 12}, /* alias for $t4 */ \
++    {"$ta1",  RTYPE_GP | 13}, /* alias for $t5 */ \
++    {"$ta2",  RTYPE_GP | 14}, /* alias for $t6 */ \
++    {"$ta3",  RTYPE_GP | 15}  /* alias for $t7 */
++
++/* Remaining symbolic register names.  */
++#define SYMBOLIC_REGISTER_NAMES \
++    {"$zero", RTYPE_GP | 0},  \
++    {"$at", RTYPE_GP | 1},  \
++    {"$AT", RTYPE_GP | 1},  \
++    {"$v0", RTYPE_GP | 2},  \
++    {"$v1", RTYPE_GP | 3},  \
++    {"$a0", RTYPE_GP | 4},  \
++    {"$a1", RTYPE_GP | 5},  \
++    {"$a2", RTYPE_GP | 6},  \
++    {"$a3", RTYPE_GP | 7},  \
++    {"$s0", RTYPE_GP | 16}, \
++    {"$s1", RTYPE_GP | 17}, \
++    {"$s2", RTYPE_GP | 18}, \
++    {"$s3", RTYPE_GP | 19}, \
++    {"$s4", RTYPE_GP | 20}, \
++    {"$s5", RTYPE_GP | 21}, \
++    {"$s6", RTYPE_GP | 22}, \
++    {"$s7", RTYPE_GP | 23}, \
++    {"$t8", RTYPE_GP | 24}, \
++    {"$t9", RTYPE_GP | 25}, \
++    {"$k0", RTYPE_GP | 26}, \
++    {"$kt0",  RTYPE_GP | 26}, \
++    {"$k1", RTYPE_GP | 27}, \
++    {"$kt1",  RTYPE_GP | 27}, \
++    {"$gp", RTYPE_GP | 28}, \
++    {"$sp", RTYPE_GP | 29}, \
++    {"$s8", RTYPE_GP | 30}, \
++    {"$fp", RTYPE_GP | 30}, \
++    {"$ra", RTYPE_GP | 31}
++
++#define MIPS16_SPECIAL_REGISTER_NAMES \
++    {"$pc", RTYPE_PC | 0}
++
++#define MDMX_VECTOR_REGISTER_NAMES \
++    /* {"$v0",  RTYPE_VEC | 0},  Clash with REG 2 above.  */ \
++    /* {"$v1",  RTYPE_VEC | 1},  Clash with REG 3 above.  */ \
++    {"$v2", RTYPE_VEC | 2},  \
++    {"$v3", RTYPE_VEC | 3},  \
++    {"$v4", RTYPE_VEC | 4},  \
++    {"$v5", RTYPE_VEC | 5},  \
++    {"$v6", RTYPE_VEC | 6},  \
++    {"$v7", RTYPE_VEC | 7},  \
++    {"$v8", RTYPE_VEC | 8},  \
++    {"$v9", RTYPE_VEC | 9},  \
++    {"$v10",  RTYPE_VEC | 10}, \
++    {"$v11",  RTYPE_VEC | 11}, \
++    {"$v12",  RTYPE_VEC | 12}, \
++    {"$v13",  RTYPE_VEC | 13}, \
++    {"$v14",  RTYPE_VEC | 14}, \
++    {"$v15",  RTYPE_VEC | 15}, \
++    {"$v16",  RTYPE_VEC | 16}, \
++    {"$v17",  RTYPE_VEC | 17}, \
++    {"$v18",  RTYPE_VEC | 18}, \
++    {"$v19",  RTYPE_VEC | 19}, \
++    {"$v20",  RTYPE_VEC | 20}, \
++    {"$v21",  RTYPE_VEC | 21}, \
++    {"$v22",  RTYPE_VEC | 22}, \
++    {"$v23",  RTYPE_VEC | 23}, \
++    {"$v24",  RTYPE_VEC | 24}, \
++    {"$v25",  RTYPE_VEC | 25}, \
++    {"$v26",  RTYPE_VEC | 26}, \
++    {"$v27",  RTYPE_VEC | 27}, \
++    {"$v28",  RTYPE_VEC | 28}, \
++    {"$v29",  RTYPE_VEC | 29}, \
++    {"$v30",  RTYPE_VEC | 30}, \
++    {"$v31",  RTYPE_VEC | 31}
++
++#define R5900_I_NAMES \
++    {"$I",  RTYPE_R5900_I | 0}
++
++#define R5900_Q_NAMES \
++    {"$Q",  RTYPE_R5900_Q | 0}
++
++#define R5900_R_NAMES \
++    {"$R",  RTYPE_R5900_R | 0}
++
++#define R5900_ACC_NAMES \
++    {"$ACC",  RTYPE_R5900_ACC | 0 }
++
++#define MIPS_DSP_ACCUMULATOR_NAMES \
++    {"$ac0",  RTYPE_ACC | 0}, \
++    {"$ac1",  RTYPE_ACC | 1}, \
++    {"$ac2",  RTYPE_ACC | 2}, \
++    {"$ac3",  RTYPE_ACC | 3}
++
++static const struct regname reg_names[] = {
++  GENERIC_REGISTER_NUMBERS,
++  FPU_REGISTER_NAMES,
++  FPU_CONDITION_CODE_NAMES,
++  COPROC_CONDITION_CODE_NAMES,
++
++  /* The $txx registers depends on the abi,
++     these will be added later into the symbol table from
++     one of the tables below once mips_abi is set after
++     parsing of arguments from the command line. */
++  SYMBOLIC_REGISTER_NAMES,
++
++  MIPS16_SPECIAL_REGISTER_NAMES,
++  MDMX_VECTOR_REGISTER_NAMES,
++  R5900_I_NAMES,
++  R5900_Q_NAMES,
++  R5900_R_NAMES,
++  R5900_ACC_NAMES,
++  MIPS_DSP_ACCUMULATOR_NAMES,
++  {0, 0}
++};
++
++static const struct regname reg_names_o32[] = {
++  O32_SYMBOLIC_REGISTER_NAMES,
++  {0, 0}
++};
++
++static const struct regname reg_names_n32n64[] = {
++  N32N64_SYMBOLIC_REGISTER_NAMES,
++  {0, 0}
++};
++
+ /* Allow override of standard little-endian ECOFF format.  */
+ 
+ #ifndef ECOFF_LITTLE_FORMAT
+@@ -801,7 +1060,11 @@
+       if (strcmp (cpu, "mips") == 0)
+         {
+           if (mips_opts.isa < 0)
++#ifdef	NU64
++            mips_cpu = 6000;   
++#else
+             mips_cpu = 3000;   
++#endif
+ 
+           else if (mips_opts.isa == 2)
+             mips_cpu = 6000;
+@@ -867,7 +1130,11 @@
+         mips_cpu = 0; /* FIXME */
+ 
+       else
++#ifdef	NU64
++        mips_cpu = 6000;
++#else
+         mips_cpu = 3000;
++#endif
+     }
+ 
+   if (mips_opts.isa == -1)
+@@ -886,7 +1153,11 @@
+                || mips_cpu == 4300
+                || mips_cpu == 4600
+                || mips_cpu == 4650)
++#ifdef	NU64
++        mips_opts.isa = 2;
++#else
+         mips_opts.isa = 3;
++#endif
+ 
+       else if (mips_cpu == 5000
+                || mips_cpu == 8000
+@@ -1018,28 +1289,34 @@
+ 
+   /* We add all the general register names to the symbol table.  This
+      helps us detect invalid uses of them.  */
++  for (i = 0; reg_names[i].name; i++)
++    symbol_table_insert (symbol_new (reg_names[i].name, reg_section,
++             reg_names[i].num, /* & RNUM_MASK, */
++             &zero_address_frag));
++    for (i = 0; reg_names_o32[i].name; i++)
++      symbol_table_insert (symbol_new (reg_names_o32[i].name, reg_section,
++               reg_names_o32[i].num, /* & RNUM_MASK, */
++               &zero_address_frag));
++
+   for (i = 0; i < 32; i++)
+     {
+-      char buf[5];
++      char regname[6];
+ 
+-      sprintf (buf, "$%d", i);
+-      symbol_table_insert (symbol_new (buf, reg_section, i,
+-				       &zero_address_frag));
+-    }
+-  symbol_table_insert (symbol_new ("$fp", reg_section, FP,
+-				   &zero_address_frag));
+-  symbol_table_insert (symbol_new ("$sp", reg_section, SP,
+-				   &zero_address_frag));
+-  symbol_table_insert (symbol_new ("$gp", reg_section, GP,
+-				   &zero_address_frag));
+-  symbol_table_insert (symbol_new ("$at", reg_section, AT,
+-				   &zero_address_frag));
+-  symbol_table_insert (symbol_new ("$kt0", reg_section, KT0,
+-				   &zero_address_frag));
+-  symbol_table_insert (symbol_new ("$kt1", reg_section, KT1,
+-				   &zero_address_frag));
+-  symbol_table_insert (symbol_new ("$pc", reg_section, -1,
+-				   &zero_address_frag));
++      /* R5900 VU0 floating-point register.  */
++      sprintf (regname, "$vf%d", i);
++      symbol_table_insert (symbol_new (regname, reg_section,
++               RTYPE_VF | i, &zero_address_frag));
++
++      /* R5900 VU0 integer register.  */
++      sprintf (regname, "$vi%d", i);
++      symbol_table_insert (symbol_new (regname, reg_section,
++               RTYPE_VI | i, &zero_address_frag));
++
++      /* MSA register.  */
++      sprintf (regname, "$w%d", i);
++      symbol_table_insert (symbol_new (regname, reg_section,
++               RTYPE_MSA | i, &zero_address_frag));
++    }
+ 
+   mips_no_prev_insn (false);
+ 
+@@ -2365,7 +2642,9 @@
+ 	insn_isa = 4;
+       else
+ 	insn_isa = 15;
+-
++#ifdef	NU64
++      if (insn_isa >= 3) insn_isa = 2;
++#endif
+       if (strcmp (fmt, insn.insn_mo->args) == 0
+ 	  && insn.insn_mo->pinfo != INSN_MACRO
+ 	  && (insn_isa <= mips_opts.isa
+@@ -2890,8 +3169,11 @@
+     }
+ 
+   /* The value is larger than 32 bits.  */
+-
++#ifdef	NU64
++  if (mips_opts.isa < 2)
++#else
+   if (mips_opts.isa < 3)
++#endif
+     {
+       as_bad ("Number larger than 32 bits");
+       macro_build ((char *) NULL, counter, ep, "addiu", "t,r,j", reg, 0,
+@@ -4047,7 +4329,7 @@
+ 	       addiu	$tempreg,$tempreg,<sym>	(BFD_RELOC_LO16)
+ 	     If we have a constant, we need two instructions anyhow,
+ 	     so we may as well always use the latter form.  */
+-	  if ((valueT) offset_expr.X_add_number >= MAX_GPREL_OFFSET
++	  if ((valueT) offset_expr.X_add_number >= MAX_GPREL_OFFSET || (valueT) offset_expr.X_add_number >= g_switch_value
+ 	      || nopic_need_relax (offset_expr.X_add_symbol, 1))
+ 	    p = NULL;
+ 	  else
+@@ -4806,7 +5088,7 @@
+       if (offset_expr.X_op != O_constant
+ 	  && offset_expr.X_op != O_symbol)
+ 	{
+-	  as_bad ("expression too complex");
++	  as_bad ("expression too complex line: %d", __LINE__);
+ 	  offset_expr.X_op = O_constant;
+ 	}
+ 
+@@ -6822,6 +7104,30 @@
+   return 1;
+ }
+ 
++int mips_is_gp_reg(char *s)
++{
++
++    if(s[0] != '$')
++      return false;
++
++    char *e = s+1; // skip the $
++    while(isalnum(*e)) e++;
++    char save_c = *e;
++
++    *e = '\0'; //NULL terminate the register number
++    symbolS *symbol = symbol_find(s); // get a symbol based on register number
++    *e = save_c; // restore the saved character
++
++    unsigned int symval = 0;
++    if(symbol && S_GET_SEGMENT (symbol) == reg_section) //check we got a symbol and that the section matches what we expect
++    {
++      symval = S_GET_VALUE(symbol); // get the value from the symbol (in this case, the register number with a type bit attached)
++      if(symval & (RTYPE_GP | RTYPE_NUM) != 0) // check that this is a general purpose register
++        return 1;
++    }
++    return 0;
++}
++
+ /* This routine assembles an instruction into its binary format.  As a
+    side effect, it sets one of the global variables imm_reloc or
+    offset_reloc to the type of relocation to do if one of the operands
+@@ -6908,7 +7214,9 @@
+ 	insn_isa = 4;
+       else
+ 	insn_isa = 15;
+-
++#ifdef	NU64
++      if (insn_isa >= 3) insn_isa = 2;
++#endif
+       if (insn_isa <= mips_opts.isa)
+ 	ok = true;
+       else if (insn->pinfo == INSN_MACRO)
+@@ -7112,57 +7420,35 @@
+ 	    case 'x':		/* ignore register name */
+ 	    case 'z':		/* must be zero register */
+ 	      s_reset = s;
+-	      if (s[0] == '$')
++
++	  if (s[0] == '$')
+ 		{
+-		  if (isdigit (s[1]))
+-		    {
+-		      ++s;
+-		      regno = 0;
+-		      do
+-			{
+-			  regno *= 10;
+-			  regno += *s - '0';
+-			  ++s;
+-			}
+-		      while (isdigit (*s));
+-		      if (regno > 31)
+-			as_bad ("Invalid register number (%d)", regno);
+-		    }
++		  if (mips_is_gp_reg(s))
++		  {
++        char *e = s+1; // skip the $
++        while(isalnum(*e)) e++;
++        save_c = *e; // save the character as it will be modified and needs to be restored later
++        *e = '\0'; // NULL terminate the register number
++        symbolS *symbol = symbol_find(s); // get a symbol based on register number
++        *e = save_c; // restore the saved character
++
++        unsigned int symval = 0;
++        if(symbol || S_GET_SEGMENT (symbol) == reg_section) // check we got a symbol and that the section matches what we expect
++        {
++          symval = S_GET_VALUE(symbol); // get the value from the symbol (in this case, the register number with a type bit attached)
++          if(symval & RTYPE_GP) // check that this is a general purpose register
++            regno = symval & 0x1F; // get the register number
++        }
++
++        s = e;
++        if (regno > 31)
++          as_bad ("Invalid register number (%d)", regno);
++      }
+ 		  else if (*args == 'E' || *args == 'G')
+ 		    goto notreg;
+ 		  else
+ 		    {
+-		      if (s[1] == 'f' && s[2] == 'p')
+-			{
+-			  s += 3;
+-			  regno = FP;
+-			}
+-		      else if (s[1] == 's' && s[2] == 'p')
+-			{
+-			  s += 3;
+-			  regno = SP;
+-			}
+-		      else if (s[1] == 'g' && s[2] == 'p')
+-			{
+-			  s += 3;
+-			  regno = GP;
+-			}
+-		      else if (s[1] == 'a' && s[2] == 't')
+-			{
+-			  s += 3;
+-			  regno = AT;
+-			}
+-		      else if (s[1] == 'k' && s[2] == 't' && s[3] == '0')
+-			{
+-			  s += 4;
+-			  regno = KT0;
+-			}
+-		      else if (s[1] == 'k' && s[2] == 't' && s[3] == '1')
+-			{
+-			  s += 4;
+-			  regno = KT1;
+-			}
+-		      else if (itbl_have_entries)
++		      if (itbl_have_entries)
+ 			{
+ 			  char *p, *n;
+ 			  int r;
+@@ -7290,7 +7576,11 @@
+ 		    as_bad ("Invalid float register number (%d)", regno);
+ 
+ 		  if ((regno & 1) != 0
++#ifdef	NU64
++		      && mips_opts.isa < 2
++#else
+ 		      && mips_opts.isa < 3
++#endif
+ 		      && ! (strcmp (str, "mtc1") == 0
+ 			    || strcmp (str, "mfc1") == 0
+ 			    || strcmp (str, "lwc1") == 0
+@@ -8489,9 +8779,9 @@
+ 	;
+       if (sp - 4 >= str && sp[-1] == RP)
+ 	{
+-	  if (isdigit (sp[-2]))
++	  if (isalnum (sp[-2]))
+ 	    {
+-	      for (sp -= 3; sp >= str && isdigit (*sp); sp--)
++	      for (sp -= 3; sp >= str && isalnum (*sp); sp--)
+ 		;
+ 	      if (*sp == '$' && sp > str && sp[-1] == LP)
+ 		{
+@@ -8754,7 +9044,11 @@
+       break;
+ 
+     case OPTION_MIPS3:
++#ifdef	NU64
++      mips_opts.isa = 2;
++#else
+       mips_opts.isa = 3;
++#endif
+       break;
+ 
+     case OPTION_MIPS4:
+@@ -10000,7 +10294,14 @@
+     }
+   else
+     {
++#ifdef	NU64
++      *input_line_pointer = ch;
++      input_line_pointer=name;
++      s_set (x) ;
++      return;
++#else
+       as_warn ("Tried to set unrecognized symbol: %s\n", name);
++#endif
+     }
+   *input_line_pointer = ch;
+   demand_empty_rest_of_line ();
+@@ -11002,7 +11303,7 @@
+       fixptr = fragp->fr_literal + fragp->fr_fix;
+ 
+       if (new > 0)
+-	memcpy (fixptr - old, fixptr, new);
++	memmove (fixptr - old, fixptr, new);
+ 
+       fragp->fr_fix += new - old;
+     }
+diff -Naur binutils-2.9.1/gas/config/te-nu64.h binutils-2.9.1-modified/gas/config/te-nu64.h
+--- binutils-2.9.1/gas/config/te-nu64.h	1969-12-31 19:00:00.000000000 -0500
++++ binutils-2.9.1-modified/gas/config/te-nu64.h	2020-08-19 19:16:39.128585248 -0400
+@@ -0,0 +1,23 @@
++/*
++ * This file is te-generic.h and is intended to be a template for
++ * target environment specific header files.
++ *
++ * It is my intent that this file will evolve into a file suitable for config,
++ * compile, and copying as an aid for testing and porting.  xoxorich.
++ */
++
++/* Added these, because if we don't know what we're targetting we may
++   need an assembler version of libgcc, and that will use local
++   labels.  */
++#define LOCAL_LABELS_DOLLAR 1
++#define LOCAL_LABELS_FB 1
++#define	NU64
++
++/* these define interfaces */
++#ifdef OBJ_HEADER
++#include OBJ_HEADER
++#else
++#include "obj-format.h"
++#endif
++
++/* end of te-generic.h */
+diff -Naur binutils-2.9.1/gas/configure binutils-2.9.1-modified/gas/configure
+--- binutils-2.9.1/gas/configure	1998-05-01 11:45:07.000000000 -0400
++++ binutils-2.9.1-modified/gas/configure	2020-08-19 19:16:39.128585248 -0400
+@@ -69,6 +69,7 @@
+ subdirs=
+ MFLAGS= MAKEFLAGS=
+ SHELL=${CONFIG_SHELL-/bin/sh}
++DEFS=
+ # Maximum number of lines to put in a shell here document.
+ ac_max_here_lines=12
+ 
+@@ -1544,6 +1545,7 @@
+       m88k-*-coff*)         fmt=coff ;;
+ 
+       # don't change em like *-*-bsd does
++      mips-nintendo-*)      fmt=elf DEFS="-DNU64 $DEFS" ;;
+       mips-dec-netbsd*)	    fmt=elf endian=little ;;
+       mips-dec-openbsd*)    fmt=elf endian=little ;;
+       mips-dec-bsd*)        fmt=aout ;;
+@@ -3313,7 +3315,7 @@
+ 
+ trap 'rm -f $CONFIG_STATUS conftest*; exit 1' 1 2 15
+ 
+-DEFS=-DHAVE_CONFIG_H
++DEFS="-DHAVE_CONFIG_H $DEFS"
+ 
+ # Without the "./", some shells look in PATH for config.status.
+ : ${CONFIG_STATUS=./config.status}
+diff -Naur binutils-2.9.1/gas/read.c binutils-2.9.1-modified/gas/read.c
+--- binutils-2.9.1/gas/read.c	1998-05-01 11:45:16.000000000 -0400
++++ binutils-2.9.1-modified/gas/read.c	2020-08-19 19:16:39.131918617 -0400
+@@ -326,6 +326,7 @@
+   {"ifne", s_if, (int) O_ne},
+   {"ifnes", s_ifeqs, 1},
+   {"ifnotdef", s_ifdef, 1},
++  {"incbin", s_incbin, 0},
+   {"include", s_include, 0},
+   {"int", cons, 4},
+   {"irp", s_irp, 0},
+@@ -4788,6 +4789,123 @@
+     mri_comment_end (stop, stopc);
+ }				/* equals() */
+ 
++/* .incbin -- include a file verbatim at the current location.  */
++
++void
++s_incbin (x)
++     int x;
++{
++  FILE * binfile;
++  char * path;
++  char * filename;
++  char * binfrag;
++  long   skip = 0;
++  long   count = 0;
++  long   bytes;
++  int    len;
++
++#ifdef md_flush_pending_output
++  md_flush_pending_output ();
++#endif
++
++  SKIP_WHITESPACE ();
++  filename = demand_copy_string (& len);
++  if (filename == NULL)
++    return;
++
++  SKIP_WHITESPACE ();
++
++  /* Look for optional skip and count.  */
++  if (* input_line_pointer == ',')
++    {
++      ++ input_line_pointer;
++      skip = get_absolute_expression ();
++
++      SKIP_WHITESPACE ();
++
++      if (* input_line_pointer == ',')
++  {
++    ++ input_line_pointer;
++
++    count = get_absolute_expression ();
++    if (count == 0)
++      as_warn (".incbin count zero, ignoring `%s'", filename);
++
++    SKIP_WHITESPACE ();
++  }
++    }
++
++  demand_empty_rest_of_line ();
++
++  /* Try opening absolute path first, then try include dirs.  */
++  binfile = fopen (filename, FOPEN_RB);
++  if (binfile == NULL)
++    {
++      int i;
++
++      path = xmalloc ((unsigned long) len + include_dir_maxlen + 5);
++
++      for (i = 0; i < include_dir_count; i++)
++  {
++    sprintf (path, "%s/%s", include_dirs[i], filename);
++
++    binfile = fopen (path, FOPEN_RB);
++    if (binfile != NULL)
++      break;
++  }
++
++      if (binfile == NULL)
++  as_bad ("file not found: %s", filename);
++    }
++  else
++    path = xstrdup (filename);
++
++  if (binfile)
++    {
++      long   file_len;
++
++      register_dependency (path);
++
++      /* Compute the length of the file.  */
++      if (fseek (binfile, 0, SEEK_END) != 0)
++  {
++    as_bad ("seek to end of .incbin file failed `%s'", path);
++    goto done;
++  }
++      file_len = ftell (binfile);
++
++      /* If a count was not specified use the size of the file.  */
++      if (count == 0)
++  count = file_len;
++
++      if (skip + count > file_len)
++  {
++    as_bad ("skip (%ld) + count (%ld) larger than file size (%ld)",
++      skip, count, file_len);
++    goto done;
++  }
++
++      if (fseek (binfile, skip, SEEK_SET) != 0)
++  {
++    as_bad ("could not skip to %ld in file `%s'", skip, path);
++    goto done;
++  }
++
++      /* Allocate frag space and store file contents in it.  */
++      binfrag = frag_more (count);
++
++      bytes = fread (binfrag, 1, count, binfile);
++      if (bytes < count)
++  as_warn ("truncated file `%s', %ld of %ld bytes read",
++     path, bytes, count);
++    }
++done:
++  if (binfile != NULL)
++    fclose (binfile);
++  if (path)
++    free (path);
++}
++
+ /* .include -- include a file at this point. */
+ 
+ /* ARGSUSED */
+diff -Naur binutils-2.9.1/gas/read.h binutils-2.9.1-modified/gas/read.h
+--- binutils-2.9.1/gas/read.h	1998-05-01 11:45:16.000000000 -0400
++++ binutils-2.9.1-modified/gas/read.h	2020-08-19 19:16:39.131918617 -0400
+@@ -154,5 +154,6 @@
+ extern void stringer PARAMS ((int append_zero));
+ extern void s_xstab PARAMS ((int what));
+ extern void s_rva PARAMS ((int));
++extern void s_incbin PARAMS ((int));
+ 
+ /* end of read.h */
+diff -Naur binutils-2.9.1/ld/configure.tgt binutils-2.9.1-modified/ld/configure.tgt
+--- binutils-2.9.1/ld/configure.tgt	1998-05-01 11:48:48.000000000 -0400
++++ binutils-2.9.1-modified/ld/configure.tgt	2020-08-19 19:16:39.131918617 -0400
+@@ -165,6 +165,8 @@
+ 			targ_extra_emuls="elf32lsmip mipsbig mipslit"
+ 			;;
+ mips*-*-lnews*)		targ_emul=mipslnews ;;
++mips-nintendo-sysv)	targ_emul=mipsidt ;;
++mips-nintendo-nu64)	targ_emul=elf32ebmip ;;
+ mn10200-*-*)		targ_emul=mn10200 ;;
+ mn10300-*-*)		targ_emul=mn10300 ;;
+ alpha*-*-linuxecoff*)	targ_emul=alpha targ_extra_emuls=elf64alpha
+diff -Naur binutils-2.9.1/libiberty/Makefile.in binutils-2.9.1-modified/libiberty/Makefile.in
+--- binutils-2.9.1/libiberty/Makefile.in	1998-05-01 11:47:47.000000000 -0400
++++ binutils-2.9.1-modified/libiberty/Makefile.in	2020-08-19 19:16:39.131918617 -0400
+@@ -228,19 +228,12 @@
+ lconfig.h: needed2.awk errors
+ 	echo "/* !Automatically generated from $(srcdir)/functions.def"\
+ 	  "- DO NOT EDIT! */" >lconfig.h
+-	awk -f needed2.awk <errors >>lconfig.h
+ 
+ # Generate an awk script that looks for variables in functions.def
+ 
+ needed2.awk: $(srcdir)/functions.def Makefile
+ 	echo "# !Automatically generated from $(srcdir)/functions.def"\
+ 	  "- DO NOT EDIT!" >needed2.awk
+-	grep '^DEFVAR(' < $(srcdir)/functions.def \
+-	 | sed -e '/DEFVAR/s|DEFVAR.\([^,]*\).*|/\1/ { printf "#ifndef NEED_\1\\n#define NEED_\1\\n#endif\\n" }|' \
+-	 >>needed2.awk
+-	grep '^DEFFUNC(' < $(srcdir)/functions.def \
+-	 | sed -e '/DEFFUNC/s|DEFFUNC.\([^,]*\).*|/\1/ { printf "#ifndef NEED_\1\\n#define NEED_\1\\n#endif\\n" }|' \
+-	 >>needed2.awk
+ 
+ dummy.o: $(srcdir)/dummy.c $(srcdir)/functions.def
+ 	$(CC) -c $(CFLAGS) -I. -I$(INCDIR) $(HDEFINES) $(srcdir)/dummy.c 2>/dev/null
+diff -Naur binutils-2.9.1/sh_info binutils-2.9.1-modified/sh_info
+--- binutils-2.9.1/sh_info	1969-12-31 19:00:00.000000000 -0500
++++ binutils-2.9.1-modified/sh_info	2020-09-18 17:07:43.413123473 -0400
+@@ -0,0 +1,292 @@
++bfd/elf32-ppc.c:      if (r_symndx < symtab_hdr->sh_info)
++bfd/elf32-ppc.c:	h = sym_hashes[r_symndx - symtab_hdr->sh_info];
++bfd/elf32-ppc.c:		  size = symtab_hdr->sh_info * sizeof (bfd_vma);
++bfd/elf32-ppc.c:		  for (i = 0; i < symtab_hdr->sh_info; i++)
++bfd/elf32-ppc.c:	  if (r_symndx < symtab_hdr->sh_info)
++bfd/elf32-ppc.c:      if (r_symndx < symtab_hdr->sh_info)
++bfd/elf32-ppc.c:	  h = sym_hashes[r_symndx - symtab_hdr->sh_info];
++bfd/elf32-ppc.c:							    symtab_hdr->sh_link,
++bfd/elf32-sh.c:	  if (symtab_hdr->contents != NULL)
++bfd/elf32-sh.c:	    extsyms = (Elf32_External_Sym *) symtab_hdr->contents;
++bfd/elf32-sh.c:			 bfd_malloc (symtab_hdr->sh_size));
++bfd/elf32-sh.c:	      if (bfd_seek (abfd, symtab_hdr->sh_offset, SEEK_SET) != 0
++bfd/elf32-sh.c:		  || (bfd_read (extsyms, 1, symtab_hdr->sh_size, abfd)
++bfd/elf32-sh.c:		      != symtab_hdr->sh_size))
++bfd/elf32-sh.c:      if (ELF32_R_SYM (irelfn->r_info) < symtab_hdr->sh_info)
++bfd/elf32-sh.c:	  indx = ELF32_R_SYM (irelfn->r_info) - symtab_hdr->sh_info;
++bfd/elf32-sh.c:      symtab_hdr->contents = (bfd_byte *) extsyms;
++bfd/elf32-sh.c:      if (ELF32_R_SYM (irelfn->r_info) < symtab_hdr->sh_info)
++bfd/elf32-sh.c:	  symtab_hdr->contents = (bfd_byte *) extsyms;
++bfd/elf32-sh.c:	  symtab_hdr->contents = extsyms;
++bfd/elf32-sh.c:  extsyms = (Elf32_External_Sym *) symtab_hdr->contents;
++bfd/elf32-sh.c:	  if (ELF32_R_SYM (irel->r_info) < symtab_hdr->sh_info)
++bfd/elf32-sh.c:	  if (ELF32_R_SYM (irel->r_info) >= symtab_hdr->sh_info)
++bfd/elf32-sh.c:	  if (ELF32_R_SYM (irelscan->r_info) >= symtab_hdr->sh_info)
++bfd/elf32-sh.c:  esymend = esym + symtab_hdr->sh_info;
++bfd/elf32-sh.c:  esym = extsyms + symtab_hdr->sh_info;
++bfd/elf32-sh.c:  esymend = extsyms + (symtab_hdr->sh_size / sizeof (Elf32_External_Sym));
++bfd/elf32-sh.c:	  if (r_symndx < symtab_hdr->sh_info)
++bfd/elf32-sh.c:      if (r_symndx < symtab_hdr->sh_info)
++bfd/elf32-sh.c:	  h = sym_hashes[r_symndx - symtab_hdr->sh_info];
++bfd/elf32-sh.c:			    (input_bfd, symtab_hdr->sh_link, sym->st_name));
++bfd/elf32-sh.c:      if (symtab_hdr->contents != NULL)
++bfd/elf32-sh.c:	external_syms = (Elf32_External_Sym *) symtab_hdr->contents;
++bfd/elf32-sh.c:			   bfd_malloc (symtab_hdr->sh_info
++bfd/elf32-sh.c:	  if (external_syms == NULL && symtab_hdr->sh_info > 0)
++bfd/elf32-sh.c:	  if (bfd_seek (input_bfd, symtab_hdr->sh_offset, SEEK_SET) != 0
++bfd/elf32-sh.c:			    symtab_hdr->sh_info, input_bfd)
++bfd/elf32-sh.c:		  != (symtab_hdr->sh_info * sizeof (Elf32_External_Sym))))
++bfd/elf32-sh.c:		       bfd_malloc (symtab_hdr->sh_info
++bfd/elf32-sh.c:      if (internal_syms == NULL && symtab_hdr->sh_info > 0)
++bfd/elf32-sh.c:      sections = (asection **) bfd_malloc (symtab_hdr->sh_info
++bfd/elf32-sh.c:      if (sections == NULL && symtab_hdr->sh_info > 0)
++bfd/elf32-sh.c:      esymend = esym + symtab_hdr->sh_info;
++bfd/elf32-sh.c:      if (external_syms != NULL && symtab_hdr->contents == NULL)
++bfd/elf32-sh.c:  if (external_syms != NULL && symtab_hdr->contents == NULL)
++bfd/elf32-m32r.c:	  if (r_symndx >= symtab_hdr->sh_info)
++bfd/elf32-m32r.c:	  if (r_symndx < symtab_hdr->sh_info)
++bfd/elf32-m32r.c:	      h = sym_hashes[r_symndx - symtab_hdr->sh_info];
++bfd/elf32-m32r.c:		      (input_bfd, symtab_hdr->sh_link, sym->st_name));
++bfd/elf32-m32r.c:	  if (symtab_hdr->contents != NULL)
++bfd/elf32-m32r.c:	    extsyms = (Elf32_External_Sym *) symtab_hdr->contents;
++bfd/elf32-m32r.c:			 bfd_malloc (symtab_hdr->sh_size));
++bfd/elf32-m32r.c:	      if (bfd_seek (abfd, symtab_hdr->sh_offset, SEEK_SET) != 0
++bfd/elf32-m32r.c:		  || (bfd_read (extsyms, 1, symtab_hdr->sh_size, abfd)
++bfd/elf32-m32r.c:		      != symtab_hdr->sh_size))
++bfd/elf32-m32r.c:      if (ELF32_R_SYM (irel->r_info) < symtab_hdr->sh_info)
++bfd/elf32-m32r.c:	  indx = ELF32_R_SYM (irel->r_info) - symtab_hdr->sh_info;
++bfd/elf32-m32r.c:	  symtab_hdr->contents = (bfd_byte *) extsyms;
++bfd/elf32-m32r.c:	  symtab_hdr->contents = extsyms;
++bfd/elf32-m32r.c:  extsyms = (Elf32_External_Sym *) symtab_hdr->contents;
++bfd/elf32-m32r.c:  esymend = esym + symtab_hdr->sh_info;
++bfd/elf32-m32r.c:  esym = extsyms + symtab_hdr->sh_info;
++bfd/elf32-m32r.c:  esymend = extsyms + (symtab_hdr->sh_size / sizeof (Elf32_External_Sym));
++bfd/elf32-m32r.c:      if (symtab_hdr->contents != NULL)
++bfd/elf32-m32r.c:	external_syms = (Elf32_External_Sym *) symtab_hdr->contents;
++bfd/elf32-m32r.c:			   bfd_malloc (symtab_hdr->sh_info
++bfd/elf32-m32r.c:	  if (external_syms == NULL && symtab_hdr->sh_info > 0)
++bfd/elf32-m32r.c:	  if (bfd_seek (input_bfd, symtab_hdr->sh_offset, SEEK_SET) != 0
++bfd/elf32-m32r.c:			    symtab_hdr->sh_info, input_bfd)
++bfd/elf32-m32r.c:		  != (symtab_hdr->sh_info * sizeof (Elf32_External_Sym))))
++bfd/elf32-m32r.c:		       bfd_malloc (symtab_hdr->sh_info
++bfd/elf32-m32r.c:      if (internal_syms == NULL && symtab_hdr->sh_info > 0)
++bfd/elf32-m32r.c:      sections = (asection **) bfd_malloc (symtab_hdr->sh_info
++bfd/elf32-m32r.c:      if (sections == NULL && symtab_hdr->sh_info > 0)
++bfd/elf32-m32r.c:      esymend = esym + symtab_hdr->sh_info;
++bfd/elf32-m32r.c:      if (external_syms != NULL && symtab_hdr->contents == NULL)
++bfd/elf32-m32r.c:  if (external_syms != NULL && symtab_hdr->contents == NULL)
++bfd/elf32-i386.c:      if (r_symndx < symtab_hdr->sh_info)
++bfd/elf32-i386.c:	h = sym_hashes[r_symndx - symtab_hdr->sh_info];
++bfd/elf32-i386.c:		  size = symtab_hdr->sh_info * sizeof (bfd_vma);
++bfd/elf32-i386.c:		  for (i = 0; i < symtab_hdr->sh_info; i++)
++bfd/elf32-i386.c:	  if (r_symndx < symtab_hdr->sh_info)
++bfd/elf32-i386.c:      if (r_symndx < symtab_hdr->sh_info)
++bfd/elf32-i386.c:	  h = sym_hashes[r_symndx - symtab_hdr->sh_info];
++bfd/elf32-i386.c:							    symtab_hdr->sh_link,
++bfd/elf.c:    symtab_hdr->sh_type = SHT_SYMTAB;
++bfd/elf.c:    symtab_hdr->sh_entsize = bed->s->sizeof_sym;
++bfd/elf.c:    symtab_hdr->sh_size = symtab_hdr->sh_entsize * (symcount + 1);
++bfd/elf.c:    symtab_hdr->sh_info = elf_num_locals (abfd);
++bfd/elf.c:    symtab_hdr->sh_addralign = bed->s->file_align;
++bfd/elf.c:    symtab_hdr->contents = (PTR) outbound_syms;
++bfd/elf-m10200.c:	  if (r_symndx < symtab_hdr->sh_info)
++bfd/elf-m10200.c:      if (r_symndx < symtab_hdr->sh_info)
++bfd/elf-m10200.c:	  h = sym_hashes[r_symndx - symtab_hdr->sh_info];
++bfd/elf-m10200.c:		      (input_bfd, symtab_hdr->sh_link, sym->st_name));
++bfd/elf-m10200.c:	  if (symtab_hdr->contents != NULL)
++bfd/elf-m10200.c:	    extsyms = (Elf32_External_Sym *) symtab_hdr->contents;
++bfd/elf-m10200.c:			 bfd_malloc (symtab_hdr->sh_size));
++bfd/elf-m10200.c:	      if (bfd_seek (abfd, symtab_hdr->sh_offset, SEEK_SET) != 0
++bfd/elf-m10200.c:		  || (bfd_read (extsyms, 1, symtab_hdr->sh_size, abfd)
++bfd/elf-m10200.c:		      != symtab_hdr->sh_size))
++bfd/elf-m10200.c:      if (ELF32_R_SYM (irel->r_info) < symtab_hdr->sh_info)
++bfd/elf-m10200.c:	  indx = ELF32_R_SYM (irel->r_info) - symtab_hdr->sh_info;
++bfd/elf-m10200.c:	      symtab_hdr->contents = (bfd_byte *) extsyms;
++bfd/elf-m10200.c:	      symtab_hdr->contents = (bfd_byte *) extsyms;
++bfd/elf-m10200.c:	  symtab_hdr->contents = (bfd_byte *) extsyms;
++bfd/elf-m10200.c:		  symtab_hdr->contents = (bfd_byte *) extsyms;
++bfd/elf-m10200.c:		  symtab_hdr->contents = (bfd_byte *) extsyms;
++bfd/elf-m10200.c:		  symtab_hdr->contents = (bfd_byte *) extsyms;
++bfd/elf-m10200.c:		  symtab_hdr->contents = (bfd_byte *) extsyms;
++bfd/elf-m10200.c:	  symtab_hdr->contents = extsyms;
++bfd/elf-m10200.c:  extsyms = (Elf32_External_Sym *) symtab_hdr->contents;
++bfd/elf-m10200.c:  esymend = esym + symtab_hdr->sh_info;
++bfd/elf-m10200.c:  esym = extsyms + symtab_hdr->sh_info;
++bfd/elf-m10200.c:  esymend = extsyms + (symtab_hdr->sh_size / sizeof (Elf32_External_Sym));
++bfd/elf-m10200.c:  esymend = esym + symtab_hdr->sh_info;
++bfd/elf-m10200.c:		  + (symtab_hdr->sh_size / sizeof (Elf32_External_Sym)
++bfd/elf-m10200.c:		     - symtab_hdr->sh_info));
++bfd/elf-m10200.c:      if (symtab_hdr->contents != NULL)
++bfd/elf-m10200.c:	external_syms = (Elf32_External_Sym *) symtab_hdr->contents;
++bfd/elf-m10200.c:			   bfd_malloc (symtab_hdr->sh_info
++bfd/elf-m10200.c:	  if (external_syms == NULL && symtab_hdr->sh_info > 0)
++bfd/elf-m10200.c:	  if (bfd_seek (input_bfd, symtab_hdr->sh_offset, SEEK_SET) != 0
++bfd/elf-m10200.c:			    symtab_hdr->sh_info, input_bfd)
++bfd/elf-m10200.c:		  != (symtab_hdr->sh_info * sizeof (Elf32_External_Sym))))
++bfd/elf-m10200.c:		       bfd_malloc (symtab_hdr->sh_info
++bfd/elf-m10200.c:      if (internal_syms == NULL && symtab_hdr->sh_info > 0)
++bfd/elf-m10200.c:      sections = (asection **) bfd_malloc (symtab_hdr->sh_info
++bfd/elf-m10200.c:      if (sections == NULL && symtab_hdr->sh_info > 0)
++bfd/elf-m10200.c:      esymend = esym + symtab_hdr->sh_info;
++bfd/elf-m10200.c:      if (external_syms != NULL && symtab_hdr->contents == NULL)
++bfd/elf-m10200.c:  if (external_syms != NULL && symtab_hdr->contents == NULL)
++bfd/elf32-v850.c:      if (r_symndx < symtab_hdr->sh_info)
++bfd/elf32-v850.c:	h = sym_hashes[r_symndx - symtab_hdr->sh_info];
++bfd/elf32-v850.c:	  if (r_symndx < symtab_hdr->sh_info)
++bfd/elf32-v850.c:      if (r_symndx < symtab_hdr->sh_info)
++bfd/elf32-v850.c:	    name = bfd_elf_string_from_elf_section (input_bfd, symtab_hdr->sh_link, sym->st_name);
++bfd/elf32-v850.c:	  h = sym_hashes[r_symndx - symtab_hdr->sh_info];
++bfd/elf32-v850.c:		      (input_bfd, symtab_hdr->sh_link, sym->st_name));
++bfd/elf64-alpha.c:      if (r_symndx < symtab_hdr->sh_info)
++bfd/elf64-alpha.c:	  h = sym_hashes[r_symndx - symtab_hdr->sh_info];
++bfd/elf64-alpha.c:		    size = (symtab_hdr->sh_info
++bfd/elf64-alpha.c:    n = symtab_hdr->sh_size / symtab_hdr->sh_entsize - symtab_hdr->sh_info;
++bfd/elf64-alpha.c:    n = symtab_hdr->sh_size / symtab_hdr->sh_entsize - symtab_hdr->sh_info;
++bfd/elf64-alpha.c:	  if (r_symndx < symtab_hdr->sh_info)
++bfd/elf64-alpha.c:      if (r_symndx < symtab_hdr->sh_info)
++bfd/elf64-alpha.c:	  h = alpha_elf_sym_hashes (input_bfd)[r_symndx - symtab_hdr->sh_info];
++bfd/elf64-alpha.c:			(input_bfd, symtab_hdr->sh_link, sym->st_name));
++bfd/elf32-m68k.c:      if (r_symndx < symtab_hdr->sh_info)
++bfd/elf32-m68k.c:	h = sym_hashes[r_symndx - symtab_hdr->sh_info];
++bfd/elf32-m68k.c:		  size = symtab_hdr->sh_info * sizeof (bfd_vma);
++bfd/elf32-m68k.c:		  for (i = 0; i < symtab_hdr->sh_info; i++)
++bfd/elf32-m68k.c:	  if (r_symndx < symtab_hdr->sh_info)
++bfd/elf32-m68k.c:      if (r_symndx < symtab_hdr->sh_info)
++bfd/elf32-m68k.c:	  h = sym_hashes[r_symndx - symtab_hdr->sh_info];
++bfd/elf32-m68k.c:							    symtab_hdr->sh_link,
++bfd/elf32-hppa.c:	  if (r_symndx < symtab_hdr->sh_info)
++bfd/elf32-hppa.c:      if (r_symndx < symtab_hdr->sh_info)
++bfd/elf32-hppa.c:	  indx = r_symndx - symtab_hdr->sh_info;
++bfd/elf32-hppa.c:						      symtab_hdr->sh_link,
++bfd/elf32-hppa.c:	  if (value >= symtab_hdr->sh_size / sizeof (Elf32_External_Sym))
++bfd/elf32-hppa.c:	  if (current_index < symtab_hdr->sh_info)
++bfd/elf32-hppa.c:						      symtab_hdr->sh_link,
++bfd/elf32-hppa.c:	  else if (current_index >= symtab_hdr->sh_info)
++bfd/elf32-hppa.c:	      current_index -= symtab_hdr->sh_info;
++bfd/elf32-hppa.c:      if (symtab_hdr->sh_info == 0)
++bfd/elf32-hppa.c:	= (Elf_Internal_Sym *) bfd_malloc (symtab_hdr->sh_info
++bfd/elf32-hppa.c:	= (Elf32_External_Sym *) bfd_malloc (symtab_hdr->sh_info
++bfd/elf32-hppa.c:      if (bfd_seek (input_bfd, symtab_hdr->sh_offset, SEEK_SET) != 0
++bfd/elf32-hppa.c:		       (symtab_hdr->sh_info
++bfd/elf32-hppa.c:	  != (symtab_hdr->sh_info * sizeof (Elf32_External_Sym)))
++bfd/elf32-hppa.c:      for (i = 0; i < symtab_hdr->sh_info; i++, esym++, isym++)
++bfd/elf32-hppa.c:      if (symtab_hdr->sh_info == 0)
++bfd/elf32-hppa.c:	      if (r_index < symtab_hdr->sh_info)
++bfd/elf32-hppa.c:							      symtab_hdr->sh_link,
++bfd/elf32-hppa.c:		  index = r_index - symtab_hdr->sh_info;
++bfd/elf32-hppa.c:		      if (r_index < symtab_hdr->sh_info)
++bfd/elf32-hppa.c:		  if (r_index < symtab_hdr->sh_info)
++bfd/elf64-sparc.c:      if (r_symndx < symtab_hdr->sh_info)
++bfd/elf64-sparc.c:	h = sym_hashes[r_symndx - symtab_hdr->sh_info];
++bfd/elf64-sparc.c:		  size = symtab_hdr->sh_info * sizeof (bfd_vma);
++bfd/elf64-sparc.c:		  for (i = 0; i < symtab_hdr->sh_info; i++)
++bfd/elf64-sparc.c:	  if (r_symndx < symtab_hdr->sh_info)
++bfd/elf64-sparc.c:      if (r_symndx < symtab_hdr->sh_info)
++bfd/elf64-sparc.c:	  h = sym_hashes[r_symndx - symtab_hdr->sh_info];
++bfd/elf64-sparc.c:			 symtab_hdr->sh_link,
++bfd/elf32-mips.c:      locsymcount = symtab_hdr->sh_size / sizeof (Elf32_External_Sym);
++bfd/elf32-mips.c:      locsymcount = symtab_hdr->sh_info;
++bfd/elf32-mips.c:      extsymoff = symtab_hdr->sh_info;
++bfd/elf32-mips.c:							    symtab_hdr->sh_link,
++bfd/elf32-mips.c:  extsymoff = (elf_bad_symtab (abfd)) ? 0 : symtab_hdr->sh_info;
++bfd/elf32-mips.c:		symcount = symtab_hdr->sh_size / sizeof (Elf32_External_Sym);
++bfd/elf32-mips.c:		symcount = symtab_hdr->sh_info;
++bfd/elf32-sparc.c:      if (r_symndx < symtab_hdr->sh_info)
++bfd/elf32-sparc.c:	h = sym_hashes[r_symndx - symtab_hdr->sh_info];
++bfd/elf32-sparc.c:		  size = symtab_hdr->sh_info * sizeof (bfd_vma);
++bfd/elf32-sparc.c:		  for (i = 0; i < symtab_hdr->sh_info; i++)
++bfd/elf32-sparc.c:	  if (r_symndx < symtab_hdr->sh_info)
++bfd/elf32-sparc.c:      if (r_symndx < symtab_hdr->sh_info)
++bfd/elf32-sparc.c:	  h = sym_hashes[r_symndx - symtab_hdr->sh_info];
++bfd/elf32-sparc.c:							    symtab_hdr->sh_link,
++bfd/elflink.h:  symtab_hdr->sh_type = SHT_SYMTAB;
++bfd/elflink.h:  symtab_hdr->sh_flags = 0;
++bfd/elflink.h:  symtab_hdr->sh_addr = 0;
++bfd/elflink.h:  symtab_hdr->sh_size = 0;
++bfd/elflink.h:  symtab_hdr->sh_entsize = sizeof (Elf_External_Sym);
++bfd/elflink.h:  symtab_hdr->sh_addralign = 4;  /* FIXME: system dependent?  */
++bfd/elflink.h:  symtab_hdr->sh_info = abfd->symcount;
++bfd/elflink.h:  off += symtab_hdr->sh_size;
++bfd/elflink.h:      locsymcount = symtab_hdr->sh_size / sizeof (Elf_External_Sym);
++bfd/elflink.h:      locsymcount = symtab_hdr->sh_info;
++bfd/elflink.h:      extsymoff = symtab_hdr->sh_info;
++bfd/elflink.h:  if (symtab_hdr->contents != NULL)
++bfd/elflink.h:    external_syms = (Elf_External_Sym *) symtab_hdr->contents;
++bfd/elflink.h:      if (bfd_seek (input_bfd, symtab_hdr->sh_offset, SEEK_SET) != 0
++bfd/elflink.h:      name = bfd_elf_string_from_elf_section (input_bfd, symtab_hdr->sh_link,
++bfd/elflink.h:			  link = symtab_hdr->sh_link;
++bfd/elf-m10300.c:	  if (r_symndx < symtab_hdr->sh_info)
++bfd/elf-m10300.c:      if (r_symndx < symtab_hdr->sh_info)
++bfd/elf-m10300.c:	  h = sym_hashes[r_symndx - symtab_hdr->sh_info];
++bfd/elf-m10300.c:		      (input_bfd, symtab_hdr->sh_link, sym->st_name));
++bfd/elf-m10300.c:          if (symtab_hdr->contents != NULL)
++bfd/elf-m10300.c:            extsyms = (Elf32_External_Sym *) symtab_hdr->contents;
++bfd/elf-m10300.c:                         bfd_malloc (symtab_hdr->sh_size));
++bfd/elf-m10300.c:              if (bfd_seek (input_bfd, symtab_hdr->sh_offset, SEEK_SET) != 0
++bfd/elf-m10300.c:                  || (bfd_read (extsyms, 1, symtab_hdr->sh_size, input_bfd)
++bfd/elf-m10300.c:                      != symtab_hdr->sh_size))
++bfd/elf-m10300.c:		      if (r_index < symtab_hdr->sh_info)
++bfd/elf-m10300.c:							   symtab_hdr->sh_link,
++bfd/elf-m10300.c:			  if (r_index < symtab_hdr->sh_info
++bfd/elf-m10300.c:			  r_index -= symtab_hdr->sh_info;
++bfd/elf-m10300.c:		  esymend = esym + symtab_hdr->sh_info;
++bfd/elf-m10300.c:							symtab_hdr->sh_link,
++bfd/elf-m10300.c:		  esym = extsyms + symtab_hdr->sh_info;
++bfd/elf-m10300.c:		  esymend = extsyms + (symtab_hdr->sh_size
++bfd/elf-m10300.c:		  symtab_hdr->contents = extsyms;
++bfd/elf-m10300.c:          if (symtab_hdr->contents != NULL)
++bfd/elf-m10300.c:            extsyms = (Elf32_External_Sym *) symtab_hdr->contents;
++bfd/elf-m10300.c:                         bfd_malloc (symtab_hdr->sh_size));
++bfd/elf-m10300.c:              if (bfd_seek (input_bfd, symtab_hdr->sh_offset, SEEK_SET) != 0
++bfd/elf-m10300.c:                  || (bfd_read (extsyms, 1, symtab_hdr->sh_size, input_bfd)
++bfd/elf-m10300.c:                      != symtab_hdr->sh_size))
++bfd/elf-m10300.c:	      esymend = esym + symtab_hdr->sh_info;
++bfd/elf-m10300.c:							symtab_hdr->sh_link,
++bfd/elf-m10300.c:		      symtab_hdr->contents = (bfd_byte *)extsyms;
++bfd/elf-m10300.c:	      esym = extsyms + symtab_hdr->sh_info;
++bfd/elf-m10300.c:	      esymend = extsyms + (symtab_hdr->sh_size
++bfd/elf-m10300.c:		      symtab_hdr->contents = (bfd_byte *)extsyms;
++bfd/elf-m10300.c:		  symtab_hdr->contents = extsyms;
++bfd/elf-m10300.c:	  if (symtab_hdr->contents != NULL)
++bfd/elf-m10300.c:	    extsyms = (Elf32_External_Sym *) symtab_hdr->contents;
++bfd/elf-m10300.c:			 bfd_malloc (symtab_hdr->sh_size));
++bfd/elf-m10300.c:	      if (bfd_seek (abfd, symtab_hdr->sh_offset, SEEK_SET) != 0
++bfd/elf-m10300.c:		  || (bfd_read (extsyms, 1, symtab_hdr->sh_size, abfd)
++bfd/elf-m10300.c:		      != symtab_hdr->sh_size))
++bfd/elf-m10300.c:      if (ELF32_R_SYM (irel->r_info) < symtab_hdr->sh_info)
++bfd/elf-m10300.c:						      symtab_hdr->sh_link,
++bfd/elf-m10300.c:	  indx = ELF32_R_SYM (irel->r_info) - symtab_hdr->sh_info;
++bfd/elf-m10300.c:		  symtab_hdr->contents = (bfd_byte *) extsyms;
++bfd/elf-m10300.c:	      symtab_hdr->contents = (bfd_byte *) extsyms;
++bfd/elf-m10300.c:		  symtab_hdr->contents = (bfd_byte *) extsyms;
++bfd/elf-m10300.c:	      symtab_hdr->contents = (bfd_byte *) extsyms;
++bfd/elf-m10300.c:	  symtab_hdr->contents = (bfd_byte *) extsyms;
++bfd/elf-m10300.c:		    symtab_hdr->contents = (bfd_byte *) extsyms;
++bfd/elf-m10300.c:		    symtab_hdr->contents = (bfd_byte *) extsyms;
++bfd/elf-m10300.c:		    symtab_hdr->contents = (bfd_byte *) extsyms;
++bfd/elf-m10300.c:		    symtab_hdr->contents = (bfd_byte *) extsyms;
++bfd/elf-m10300.c:		    symtab_hdr->contents = (bfd_byte *) extsyms;
++bfd/elf-m10300.c:		  symtab_hdr->contents = (bfd_byte *) extsyms;
++bfd/elf-m10300.c:	  symtab_hdr->contents = extsyms;
++bfd/elf-m10300.c:  extsyms = (Elf32_External_Sym *) symtab_hdr->contents;
++bfd/elf-m10300.c:  esymend = esym + symtab_hdr->sh_info;
++bfd/elf-m10300.c:  esym = extsyms + symtab_hdr->sh_info;
++bfd/elf-m10300.c:  esymend = extsyms + (symtab_hdr->sh_size / sizeof (Elf32_External_Sym));
++bfd/elf-m10300.c:  esymend = esym + symtab_hdr->sh_info;
++bfd/elf-m10300.c:		  + (symtab_hdr->sh_size / sizeof (Elf32_External_Sym)
++bfd/elf-m10300.c:		     - symtab_hdr->sh_info));
++bfd/elf-m10300.c:      if (symtab_hdr->contents != NULL)
++bfd/elf-m10300.c:	external_syms = (Elf32_External_Sym *) symtab_hdr->contents;
++bfd/elf-m10300.c:			   bfd_malloc (symtab_hdr->sh_info
++bfd/elf-m10300.c:	  if (external_syms == NULL && symtab_hdr->sh_info > 0)
++bfd/elf-m10300.c:	  if (bfd_seek (input_bfd, symtab_hdr->sh_offset, SEEK_SET) != 0
++bfd/elf-m10300.c:			    symtab_hdr->sh_info, input_bfd)
++bfd/elf-m10300.c:		  != (symtab_hdr->sh_info * sizeof (Elf32_External_Sym))))
++bfd/elf-m10300.c:		       bfd_malloc (symtab_hdr->sh_info
++bfd/elf-m10300.c:      if (internal_syms == NULL && symtab_hdr->sh_info > 0)
++bfd/elf-m10300.c:      sections = (asection **) bfd_malloc (symtab_hdr->sh_info
++bfd/elf-m10300.c:      if (sections == NULL && symtab_hdr->sh_info > 0)
++bfd/elf-m10300.c:      esymend = esym + symtab_hdr->sh_info;
++bfd/elf-m10300.c:      if (external_syms != NULL && symtab_hdr->contents == NULL)
++bfd/elf-m10300.c:  if (external_syms != NULL && symtab_hdr->contents == NULL)
++bfd/ChangeLog:	symtab_hdr->contents.  Get contents from cache in
