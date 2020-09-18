@@ -41,7 +41,6 @@ Entity** get_entity_list(void) {
     return ret;
 }
 
-
 Shadow** get_shadow_list(void) {
     Shadow** ret;
 
