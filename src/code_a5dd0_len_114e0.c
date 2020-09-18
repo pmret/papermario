@@ -154,7 +154,7 @@ INCLUDE_ASM("code_a5dd0_len_114e0", func_80117E74);
 
 INCLUDE_ASM("code_a5dd0_len_114e0", func_801180E8);
 
-INCLUDE_ASM("code_a5dd0_len_114e0", get_model_from_list_index);
+Model* INCLUDE_ASM("code_a5dd0_len_114e0", get_model_from_list_index, s32 listIndex);
 
 INCLUDE_ASM("code_a5dd0_len_114e0", load_data_for_models);
 

@@ -11,6 +11,8 @@ s32 heap_malloc(s32 size);
 HeapNode* _heap_create(void* addr, s32 size);
 
 void clone_model(u16 srcModelID, u16 newModelID);
+Model* get_model_from_list_index(s32 listIndex);
+
 void update_collider_transform(s16 colliderID);
 void get_collider_center(s32 colliderID, f32* x, f32* y, f32* z);
 
@@ -31,6 +33,7 @@ s32 func_80055464(s32, s32);
 s32 func_800554A4(s32, s32);
 s32 func_800554E8(s32, s32);
 s32 func_800555E4(s32);
+s32 osGetId();
 void func_8011B7C0(u16, s32, s32);
 void func_80137D88(s32, f32);
 void func_80137DA4(s32, f32);

@@ -1,60 +1,7 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-
-glabel get_npc_pos
-/* 039210 8005DE10 27BDFFD8 */  addiu $sp, $sp, -0x28
-/* 039214 8005DE14 AFB00010 */  sw    $s0, 0x10($sp)
-/* 039218 8005DE18 00A0802D */  daddu $s0, $a1, $zero
-/* 03921C 8005DE1C AFB10014 */  sw    $s1, 0x14($sp)
-/* 039220 8005DE20 00C0882D */  daddu $s1, $a2, $zero
-/* 039224 8005DE24 AFB20018 */  sw    $s2, 0x18($sp)
-/* 039228 8005DE28 00E0902D */  daddu $s2, $a3, $zero
-/* 03922C 8005DE2C 3C038011 */  lui   $v1, 0x8011
-/* 039230 8005DE30 2463EFC8 */  addiu $v1, $v1, -0x1038
-/* 039234 8005DE34 AFB3001C */  sw    $s3, 0x1c($sp)
-/* 039238 8005DE38 8FB30038 */  lw    $s3, 0x38($sp)
-/* 03923C 8005DE3C 2402FFFF */  addiu $v0, $zero, -1
-/* 039240 8005DE40 AFBF0020 */  sw    $ra, 0x20($sp)
-/* 039244 8005DE44 AE000000 */  sw    $zero, ($s0)
-/* 039248 8005DE48 AE200000 */  sw    $zero, ($s1)
-/* 03924C 8005DE4C AE400000 */  sw    $zero, ($s2)
-/* 039250 8005DE50 1482000A */  bne   $a0, $v0, .L8005DE7C
-/* 039254 8005DE54 AE600000 */   sw    $zero, ($s3)
-/* 039258 8005DE58 C4600028 */  lwc1  $f0, 0x28($v1)
-/* 03925C 8005DE5C E6000000 */  swc1  $f0, ($s0)
-/* 039260 8005DE60 C460002C */  lwc1  $f0, 0x2c($v1)
-/* 039264 8005DE64 E6200000 */  swc1  $f0, ($s1)
-/* 039268 8005DE68 C4600030 */  lwc1  $f0, 0x30($v1)
-/* 03926C 8005DE6C E6400000 */  swc1  $f0, ($s2)
-/* 039270 8005DE70 8C620000 */  lw    $v0, ($v1)
-/* 039274 8005DE74 080177A9 */  j     .L8005DEA4
-/* 039278 8005DE78 30420006 */   andi  $v0, $v0, 6
-
-.L8005DE7C:
-/* 03927C 8005DE7C 0C00EABB */  jal   get_npc_unsafe
-/* 039280 8005DE80 00000000 */   nop   
-/* 039284 8005DE84 C4400038 */  lwc1  $f0, 0x38($v0)
-/* 039288 8005DE88 E6000000 */  swc1  $f0, ($s0)
-/* 03928C 8005DE8C C440003C */  lwc1  $f0, 0x3c($v0)
-/* 039290 8005DE90 E6200000 */  swc1  $f0, ($s1)
-/* 039294 8005DE94 C4400040 */  lwc1  $f0, 0x40($v0)
-/* 039298 8005DE98 E6400000 */  swc1  $f0, ($s2)
-/* 03929C 8005DE9C 8C420000 */  lw    $v0, ($v0)
-/* 0392A0 8005DEA0 30420800 */  andi  $v0, $v0, 0x800
-.L8005DEA4:
-/* 0392A4 8005DEA4 10400002 */  beqz  $v0, .L8005DEB0
-/* 0392A8 8005DEA8 24020001 */   addiu $v0, $zero, 1
-/* 0392AC 8005DEAC AE620000 */  sw    $v0, ($s3)
-.L8005DEB0:
-/* 0392B0 8005DEB0 8FBF0020 */  lw    $ra, 0x20($sp)
-/* 0392B4 8005DEB4 8FB3001C */  lw    $s3, 0x1c($sp)
-/* 0392B8 8005DEB8 8FB20018 */  lw    $s2, 0x18($sp)
-/* 0392BC 8005DEBC 8FB10014 */  lw    $s1, 0x14($sp)
-/* 0392C0 8005DEC0 8FB00010 */  lw    $s0, 0x10($sp)
-/* 0392C4 8005DEC4 03E00008 */  jr    $ra
-/* 0392C8 8005DEC8 27BD0028 */   addiu $sp, $sp, 0x28
-
+glabel func_8005DECC
 /* 0392CC 8005DECC 27BDFFD0 */  addiu $sp, $sp, -0x30
 /* 0392D0 8005DED0 AFB10014 */  sw    $s1, 0x14($sp)
 /* 0392D4 8005DED4 0080882D */  daddu $s1, $a0, $zero
@@ -741,5 +688,3 @@ glabel get_npc_pos
 
 /* 039CA8 8005E8A8 00000000 */  nop   
 /* 039CAC 8005E8AC 00000000 */  nop   
-
-

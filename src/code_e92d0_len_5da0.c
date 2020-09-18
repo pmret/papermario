@@ -213,7 +213,20 @@ INCLUDE_ASM("code_e92d0_len_5da0", si_handle_case_greater_equal);
 
 INCLUDE_ASM("code_e92d0_len_5da0", si_handle_case_range);
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_handle_case_default);
+ApiStatus si_handle_case_default(ScriptInstance* script) {
+    s32 switchDepth = script->switchDepth;
+
+    ASSERT(switchDepth >= 0);
+
+    if (script->switchBlockState[switchDepth] > 0) {
+        script->switchBlockState[switchDepth] = 0;
+    } else {
+        script->ptrNextLine = si_goto_end_case(script);
+    }
+    return ApiStatus_DONE2;
+
+    do {} while (0); // Necessary to match
+}
 
 INCLUDE_ASM("code_e92d0_len_5da0", si_handle_case_AND);
 
@@ -705,8 +718,6 @@ s32 func_802C73B8(ScriptInstance* script) {
 
 INCLUDE_ASM("code_e92d0_len_5da0", si_execute_next_command);
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_handle_end);
-
 s32 INCLUDE_ASM("code_e92d0_len_5da0", get_variable, ScriptInstance* script, Bytecode var);
 
 INCLUDE_ASM("code_e92d0_len_5da0", get_variable_index);
@@ -722,8 +733,80 @@ f32 INCLUDE_ASM("code_e92d0_len_5da0", set_float_variable, ScriptInstance* scrip
 INCLUDE_ASM("code_e92d0_len_5da0", si_goto_label);
 
 INCLUDE_ASM("code_e92d0_len_5da0", si_skip_if);
+// Matching but needs rodata support
+/*Bytecode* si_skip_if(ScriptInstance* script) {
+    s32 nestedIfDepth = 0;
+    Bytecode* pos = script->ptrNextLine;
+    Bytecode opcode;
+    s32 nargs;
+
+    do {
+        opcode = *pos++;
+        nargs = *pos++;
+        pos += nargs;
+        switch(opcode) {
+            case 1:
+                PANIC();
+            case 10:
+            case 11:
+            case 12:
+            case 13:
+            case 14:
+            case 15:
+            case 16:
+            case 19:
+                nestedIfDepth--;
+                if (nestedIfDepth < 0) {
+                    return pos;
+                }
+                break;
+            case 17:
+                nestedIfDepth++;
+                break;
+            case 18:
+                if (nestedIfDepth == 0) {
+                    return pos;
+                }
+            break;
+        }
+    } while(1);
+}*/
 
 INCLUDE_ASM("code_e92d0_len_5da0", si_skip_else);
+// Matching but needs rodata support
+/*Bytecode* si_skip_else(ScriptInstance* script) {
+    s32 nestedIfDepth = 0;
+    Bytecode* pos = script->ptrNextLine;
+    Bytecode opcode;
+    s32 nargs;
+
+    do {
+        opcode = *pos++;
+        nargs = *pos++;
+        pos += nargs;
+        switch(opcode) {
+            case 1:
+                PANIC();
+            case 10:
+            case 11:
+            case 12:
+            case 13:
+            case 14:
+            case 15:
+            case 16:
+            case 19:
+                nestedIfDepth--;
+                if (nestedIfDepth < 0) {
+                    return pos;
+                }
+                break;
+            case 17:
+                nestedIfDepth++;
+                break;
+            
+        }
+    } while(1);
+}*/
 
 INCLUDE_ASM("code_e92d0_len_5da0", si_goto_end_case);
 
@@ -731,6 +814,7 @@ INCLUDE_ASM("code_e92d0_len_5da0", si_goto_next_case);
 
 INCLUDE_ASM("code_e92d0_len_5da0", si_goto_end_loop);
 
+// Ethan: I think this is the start of a new file
 INCLUDE_API_ASM("code_e92d0_len_5da0", TranslateModel);
 
 INCLUDE_API_ASM("code_e92d0_len_5da0", RotateModel);
@@ -842,7 +926,15 @@ ApiStatus GetLoadType(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_API_ASM("code_e92d0_len_5da0", SetRenderMode);
+ApiStatus SetRenderMode(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* thisPos = script->ptrReadPos;
+    s32 treeIndex = get_variable(script, *thisPos++);
+    s8 renderMode = get_variable(script, *thisPos++);
+
+    get_model_from_list_index(get_model_list_index_from_tree_index(treeIndex))->renderMode = renderMode;
+    
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_API_ASM("code_e92d0_len_5da0", PlaySoundAtModel);
 
