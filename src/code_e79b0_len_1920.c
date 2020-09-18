@@ -16,15 +16,14 @@ INCLUDE_ASM("code_e79b0_len_1920", start_script_in_group);
 
 INCLUDE_ASM("code_e79b0_len_1920", start_child_script);
 
-//INCLUDE_ASM("code_e79b0_len_1920", func_802C39F8);
+INCLUDE_ASM("code_e79b0_len_1920", func_802C39F8);
 
 extern s32 gStaticScriptCounter;
 extern s32 D_802D9CA4;
 extern s32 gNumScripts;
 extern s32 D_802DAC98;
 
-//INCLUDE_ASM(code_e79b0_len_1920, func_802C39F8);
-ScriptInstance* func_802C39F8(ScriptInstance* parentScript, Bytecode* nextLine, s32 newState) {
+/*ScriptInstance* func_802C39F8(ScriptInstance* parentScript, Bytecode* nextLine, s32 newState) {
     ScriptInstance** curScript = gCurrentScriptListPtr;
     ScriptInstance* child;
     ScriptInstance** temp3;
@@ -92,9 +91,9 @@ ScriptInstance* func_802C39F8(ScriptInstance* parentScript, Bytecode* nextLine, 
     }
     func_802C3390(child);
     return child;
-}
+}*/
 
-INCLUDE_ASM(code_e79b0_len_1920, func_802C3C10)
+INCLUDE_ASM("code_e79b0_len_1920", func_802C3C10);
 
 ScriptInstance* restart_script(ScriptInstance* script) {
     Bytecode* temp;

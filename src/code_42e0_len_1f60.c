@@ -8,7 +8,7 @@ INCLUDE_ASM("code_42e0_len_1f60", func_80028F8C);
 
 INCLUDE_ASM("code_42e0_len_1f60", func_80028FE0);
 
-INCLUDE_API_ASM("code_42e0_len_1f60", length2D);
+INCLUDE_ASM("code_42e0_len_1f60", length2D);
 
 INCLUDE_ASM("code_42e0_len_1f60", _heap_create);
 
@@ -20,9 +20,9 @@ INCLUDE_ASM("code_42e0_len_1f60", _heap_free);
 
 INCLUDE_ASM("code_42e0_len_1f60", _heap_realloc);
 
-INCLUDE_API_ASM("code_42e0_len_1f60", cosine);
+INCLUDE_ASM("code_42e0_len_1f60", cosine);
 
-INCLUDE_API_ASM("code_42e0_len_1f60", sign);
+INCLUDE_ASM("code_42e0_len_1f60", sign);
 
 INCLUDE_ASM("code_42e0_len_1f60", int_to_string);
 
@@ -44,9 +44,9 @@ INCLUDE_ASM("code_42e0_len_1f60", func_80029994);
 
 s32 INCLUDE_ASM("code_42e0_len_1f60", rand_int, s32 arg0);
 
-INCLUDE_API_ASM("code_42e0_len_1f60", signF);
+INCLUDE_ASM("code_42e0_len_1f60", signF);
 
-INCLUDE_API_ASM("code_42e0_len_1f60", round);
+s16 INCLUDE_ASM("code_42e0_len_1f60", round, f32 arg0);
 
 f32 INCLUDE_ASM("code_42e0_len_1f60", clamp_angle, f32 theta);
 

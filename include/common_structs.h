@@ -105,7 +105,7 @@ typedef struct PlayerData {
     /* 0x00F */ u8 starPieces;
     /* 0x010 */ s8 starPoints;
     /* 0x011 */ char unk_11;
-    /* 0x012 */ u8 currentPartner;
+    /* 0x012 */ s8 currentPartner;
     /* 0x013 */ char unk_13;
     /* 0x014 */ struct PartnerData partners[12];
     /* 0x074 */ s16 keyItems[32];
@@ -1362,12 +1362,13 @@ typedef struct PlayerStatus {
     /* 0x0B8 */ s32 anim;
     /* 0x0BC */ char unk_BC[2];
     /* 0x0BE */ u8 renderMode;
-    /* 0x0BF */ char unk_BF;
+    /* 0x0BF */ s8 unk_BF;
     /* 0x0C0 */ u32* decorationList;
     /* 0x0C4 */ char unk_C4[4];
     /* 0x0C8 */ UNK_PTR unk_C8;
     /* 0x0CC */ s32 shadowID;
-    /* 0x0D0 */ char unk_D0[12];
+    /* 0x0D0 */ char unk_D0[8];
+    /* 0x0D8 */ UNK_PTR** unk_D8;
     /* 0x0DC */ s32 currentButtons;
     /* 0x0E0 */ s32 pressedButtons;
     /* 0x0E4 */ s32 heldButtons;

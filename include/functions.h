@@ -16,6 +16,7 @@ f32 set_float_variable(ScriptInstance* script, Bytecode var, f32 value);
 void set_script_timescale(ScriptInstance* script, f32 timescale);
 f32 sin_deg(f32 x);
 f32 cos_deg(f32 x);
+s16 round(f32);
 f32 atan2(f32 startX, f32 startZ, f32 endX, f32 endZ);
 f32 clamp_angle(f32 theta);
 s32 func_80055448(s32);

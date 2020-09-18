@@ -12,6 +12,10 @@ gStaticScriptCounter = 0x802D9CA0;
 D_802D9CA4 = 0x802D9CA4;
 gGlobalTimeSpace = 0x802D9CA8;
 D_80147574 = 0x80147574;
+D_8010EBB0 = 0x8010EBB0;
+D_8010F250 = 0x8010F250;
+
+D_80159D50 = 0x80159D50;
 
 gMapTransitionAlpha = 0x800A0940;
 D_800E92D8 = 0x800E92D8;
@@ -104,6 +108,7 @@ gCurrentDynamicEntityListPtr = 0x80154420;
 gScriptIdList = 0x802D1898;
 gScriptIndexList = 0x802DAA98;
 
+sqrtf = 0x80061EF0;
 func_802A91F8 = 0x802A91F8;
 func_802A9208 = 0x802A9208;
 func_802A9228 = 0x802A9228;

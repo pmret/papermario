@@ -57,8 +57,6 @@ ApiStatus func_802CA90C(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_API_ASM("code_ef070_len_3400", func_802CA988);
-/*
 ApiStatus func_802CA988(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
     Bytecode id = get_variable(script, *ptrReadPos++);
@@ -67,22 +65,17 @@ ApiStatus func_802CA988(ScriptInstance* script, s32 isInitialCall) {
     Bytecode outVar3 = *ptrReadPos++;
     Bytecode outVar4 = *ptrReadPos++;
     f32 temp1, temp2, temp3;
-    f32 tempSqrt;
 
     (&gCameras[id])->mode = 2;
-    (&gCameras[id])->unk_1C = -1 * round((&gCameras[id])->currentPitch);
-    (&gCameras[id])->unk_1E = -1 * (&gCameras[id])->currentBlendedYawNegated;
     (&gCameras[id])->unk_06 = 0;
+    (&gCameras[id])->unk_1C = -round((&gCameras[id])->currentPitch);
+    (&gCameras[id])->unk_1E = -(&gCameras[id])->currentBlendedYawNegated;
 
     temp1 = (&gCameras[id])->lookAt_obj[0] - (&gCameras[id])->lookAt_eye[0];
     temp2 = (&gCameras[id])->lookAt_obj[1] - (&gCameras[id])->lookAt_eye[1];
     temp3 = (&gCameras[id])->lookAt_obj[2] - (&gCameras[id])->lookAt_eye[2];
 
-    tempSqrt = sqrtf((temp1 * temp1) + (temp2 * temp2) + (temp3 * temp3));
-    if (tempSqrt != tempSqrt) {
-        (&gCameras[id])->unk_20 = round(tempSqrt);
-    }
-
+    (&gCameras[id])->unk_20 = round(sqrtf((temp1 * temp1) + (temp2 * temp2) + (temp3 * temp3)));
     (&gCameras[id])->unk_22 = 0;
     (&gCameras[id])->unk_54 = (&gCameras[id])->lookAt_obj[0];
     (&gCameras[id])->unk_58 = (&gCameras[id])->lookAt_obj[1];
@@ -94,7 +87,6 @@ ApiStatus func_802CA988(ScriptInstance* script, s32 isInitialCall) {
     set_variable(script, outVar4, (&gCameras[id])->unk_22);
     return ApiStatus_DONE2;
 }
-*/
 
 ApiStatus SetCamViewport(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

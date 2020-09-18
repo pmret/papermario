@@ -2,7 +2,7 @@
 .set noreorder # don't insert nops after branches
 
 
-glabel sqrtf
+glabel sqrtf_
 /* 03D2F0 80061EF0 03E00008 */  jr    $ra
 /* 03D2F4 80061EF4 46006004 */   sqrt.s $f0, $f12
 

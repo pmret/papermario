@@ -2,8 +2,8 @@
 
 // TODO: most likely part of the MusicPlayer struct
 typedef struct {
-    s16 flags;
-    s16 state;
+    s16 fadeFlags;
+    s16 fadeState;
     s32 fadeOutTime;
     s32 fadeInTime;
     s32 unkC;
@@ -19,36 +19,37 @@ void func_80147230(void) {
 void update_music_players(void) {
     struct_80147230* temp = &D_8015C7C0;
 
-    switch (temp->state) {
+    switch (temp->fadeState) {
         case 0: // idle
             break;
-        case 1: // fading in
-            if (temp->flags & 1) {
+        case 1: // fading out
+            if (temp->fadeFlags & 1) {
                 s32 phi_v0;
                 if (temp->fadeOutTime < 0xFA) {
                     phi_v0 = func_800554A4(0, temp->fadeOutTime);
                 } else {
                     phi_v0 = func_800554E8(0, temp->fadeOutTime);
                 }
+
                 if (phi_v0 != 0) {
                     return;
                 }
             }
-            temp->state = 2;
+            temp->fadeState = 2;
             break;
-        case 2: // fading out
-            if (temp->flags & 1) {
+        case 2: // fading in
+            if (temp->fadeFlags & 1) {
                 if (func_800555E4(0) != 0) {
                     return;
                 }
-                temp->flags &= ~1;
+                temp->fadeFlags &= ~1;
             }
             if (temp->fadeInTime < 0) {
-                temp->state = 0;
+                temp->fadeState = 0;
             } else if (func_80055448(temp->fadeInTime) == 0) {
                 if (func_80055464(0, 0) == 0) {
-                    temp->state = 0;
-                    temp->flags |= 1;
+                    temp->fadeState = 0;
+                    temp->fadeFlags |= 1;
                 }
             }
             break;
@@ -61,7 +62,7 @@ s32 play_ambient_sounds(s32 fadeInTime, s32 fadeOutTime) {
 
     if (!(*gGameStatusPtr)->musicEnabled) {
         func_800554A4(temp1->fadeInTime, fadeOutTime);
-        temp1->flags &= ~1;
+        temp1->fadeFlags &= ~1;
         return 1;
     }
 
@@ -71,6 +72,6 @@ s32 play_ambient_sounds(s32 fadeInTime, s32 fadeOutTime) {
 
     temp2->fadeInTime = fadeInTime;
     temp2->fadeOutTime = fadeOutTime;
-    temp2->state = 1;
+    temp2->fadeState = 1;
     return 1;
 }
