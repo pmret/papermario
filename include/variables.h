@@ -91,4 +91,7 @@ extern UNK_TYPE D_80108558;
 extern UNK_TYPE D_8010F250; // play_sound state struct?
 extern s8 D_8010EBB0;
 
+//nusys
+extern OSPiHandle* carthandle;
+
 #endif
