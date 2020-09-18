@@ -803,7 +803,7 @@ INCLUDE_ASM("code_e92d0_len_5da0", si_skip_else);
             case 17:
                 nestedIfDepth++;
                 break;
-            
+
         }
     } while(1);
 }*/
@@ -932,7 +932,7 @@ ApiStatus SetRenderMode(ScriptInstance* script, s32 isInitialCall) {
     s8 renderMode = get_variable(script, *thisPos++);
 
     get_model_from_list_index(get_model_list_index_from_tree_index(treeIndex))->renderMode = renderMode;
-    
+
     return ApiStatus_DONE2;
 }
 
