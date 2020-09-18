@@ -2,7 +2,8 @@
 
 INCLUDE_ASM("code_6e40_len_500", func_8002BA40);
 
-INCLUDE_ASM("code_6e40_len_500", func_8002BA78);
+void func_8002BA78(void) {
+}
 
 INCLUDE_ASM("code_6e40_len_500", func_8002BA80);
 

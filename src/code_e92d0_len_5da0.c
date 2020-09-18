@@ -594,7 +594,7 @@ ApiStatus si_handle_jump(ScriptInstance* script) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM("code_e92d0_len_5da0", _bound_script_trigger_handler);
+s32 INCLUDE_ASM("code_e92d0_len_5da0", _bound_script_trigger_handler, Trigger* trigger);
 
 INCLUDE_ASM("code_e92d0_len_5da0", si_handle_bind);
 

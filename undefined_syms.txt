@@ -1,4 +1,5 @@
 gGameStatusPtr = 0x8007419C;
+gRandSeed = 0x80074410;
 gUIStatus = 0x8010EF58;
 gPlayerData = 0x8010F290;
 gPlayerActionState = 0x8010F07C;
@@ -11,6 +12,8 @@ gCurrentScriptListPtr = 0x802DA890;
 gGlobalTimeSpace = 0x802D9CA8;
 gPlayerNpcPtr = 0x802D9D20;
 D_80147574 = 0x80147574;
+D_8010EBB0 = 0x8010EBB0;
+D_8010F250 = 0x8010F250;
 
 gMapTransitionAlpha = 0x800A0940;
 D_800E92D8 = 0x800E92D8;
@@ -39,9 +42,12 @@ D_0010CC10_end = 0x0010F1B0;
 D_80074021 = 0x80074021;
 D_800959D4 = 0x800959D4;
 D_8009A5D8 = 0x8009A5D8;
+gGameState = 0x8009A600;
 D_8009A650 = 0x8009A650;
 D_800A0900 = 0x800A0900;
+gCurrentEncounter = 0x800B0F10;
 gCameras = 0x800B1D80;
+gCurrentCameraID = 0x80077410;
 D_800DC500 = 0x800DC500;
 D_8010F6D0 = 0x8010F6D0;
 gBackgroundImage = 0x80200000;
@@ -105,6 +111,7 @@ gCurrentDynamicEntityListPtr = 0x80154420;
 
 gScriptIdList = 0x802D1898;
 gScriptIndexList = 0x802DAA98;
+gScriptListCount = 0x802DAC98;
 
 func_802A91F8 = 0x802A91F8;
 func_802A9208 = 0x802A9208;
