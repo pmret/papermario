@@ -34,7 +34,7 @@ s32 INCLUDE_ASM("code_dba20_len_350", get_global_flag, s32 index);
 
     if (index <= -120000000) {
         index += 130000000;
-    } 
+    }
     wordIdx = index / 32;
     bitIdx = index % 32;
     bit = gCurrentSaveFile->globalFlags[wordIdx] & (1 << bitIdx);
@@ -42,7 +42,7 @@ s32 INCLUDE_ASM("code_dba20_len_350", get_global_flag, s32 index);
     if (bit != 0) {
         bit = 1;
     }
-    return bit; 
+    return bit;
     //return (bit != 0) ? 1 : bit; // ??? surely this is `bit != 0`
 }*/
 

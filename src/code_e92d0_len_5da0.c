@@ -908,7 +908,8 @@ ApiStatus GetModelCenter(ScriptInstance* script, s32 isInitialCall) {
     f32 sizeY;
     f32 sizeZ;
 
-    get_model_center_and_size(get_variable(script, *thisPos++) & 0xFFFF, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
+    get_model_center_and_size(get_variable(script, *thisPos++) & 0xFFFF, &centerX, &centerY, &centerZ, &sizeX, &sizeY,
+                              &sizeZ);
     script->varTable[0] = centerX;
     script->varTable[1] = centerY;
     script->varTable[2] = centerZ;
