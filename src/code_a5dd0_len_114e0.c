@@ -191,7 +191,7 @@ INCLUDE_ASM("code_a5dd0_len_114e0", get_model_list_index_from_tree_index);
 
 INCLUDE_ASM("code_a5dd0_len_114e0", func_8011B090);
 
-INCLUDE_ASM("code_a5dd0_len_114e0", get_model_center_and_size);
+void INCLUDE_ASM("code_a5dd0_len_114e0", get_model_center_and_size, s32 modelID, f32* centerX, f32* centerY, f32* centerZ, f32* sizeX, f32* sizeY, f32* sizeZ);
 
 INCLUDE_ASM("code_a5dd0_len_114e0", func_8011B1C0);
 
