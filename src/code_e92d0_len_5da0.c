@@ -718,9 +718,9 @@ s32 func_802C73B8(ScriptInstance* script) {
 
 INCLUDE_ASM("code_e92d0_len_5da0", si_execute_next_command);
 
-s32 INCLUDE_ASM("code_e92d0_len_5da0", get_variable, ScriptInstance* script, Bytecode var);
 // TODO: consider renaming to si_get_variable
-/*s32 get_variable(ScriptInstance* script, Bytecode var) {
+#ifdef NON_MATCHING
+s32 get_variable(ScriptInstance* script, Bytecode var) {
     s32 abs_value;
     s32 word_index;
     s32 bit_index;
@@ -769,7 +769,10 @@ s32 INCLUDE_ASM("code_e92d0_len_5da0", get_variable, ScriptInstance* script, Byt
     } else {
         return var;
     }
-}*/
+}
+#else
+s32 INCLUDE_ASM("code_e92d0_len_5da0", get_variable, ScriptInstance* script, Bytecode var);
+#endif
 
 INCLUDE_ASM("code_e92d0_len_5da0", get_variable_index);
 
