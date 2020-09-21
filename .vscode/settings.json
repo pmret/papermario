@@ -5,7 +5,6 @@
     "files.insertFinalNewline": true,
     "editor.rulers": [120],
     "clang-tidy.compilerArgs": [
-        "-fno-builtin",
         "-std=gnu89",
         "-Iinclude",
         "-Iinclude/PR",

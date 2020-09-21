@@ -12,6 +12,7 @@ extern ActionState gPlayerActionState;
 extern PlayerAnim gPlayerAnimation;
 extern PlayerStatus gPlayerStatus;
 extern GameStatus* gGameStatusPtr[1];
+extern s32 gRandSeed;
 extern StaticItem gItemTable[364];
 extern s16 gMainGameState; /* 0 = battle, 1 = pause, 2 = world */
 extern UNK_FUN_PTR(gCurrentUpdateFunction);
@@ -93,5 +94,10 @@ extern s8 D_8010EBB0;
 
 //nusys
 extern OSPiHandle* carthandle;
+
+extern SaveData gCurrentSaveFile;
+
+extern u32* gMapFlags;
+extern u32* gMapVars;
 
 #endif
