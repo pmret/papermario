@@ -1,6 +1,6 @@
 #include "common.h"
 
-INCLUDE_API_ASM("os/code_43200_len_7c0", osMotorAccess);
+s32 INCLUDE_ASM("os/code_43200_len_7c0", __osMotorAccess, OSPfs* pfs, s32 unk);
 
 s32 INCLUDE_ASM("os/code_43200_len_7c0", osMotorInit, OSMesgQueue* queue, OSPfs* pfs, int unk);
 

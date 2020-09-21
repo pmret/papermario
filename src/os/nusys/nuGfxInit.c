@@ -23,6 +23,6 @@ void nuGfxInit(void) {
     gDPFullSync(ptr++);
     gSPEndDisplayList(ptr++);
 
-    nuGfxTaskStart(&gfx, (s32)(ptr - gfx) * sizeof(Gfx), NU_GFX_UCODE_F3DEX, NU_SC_NOSWAPBUFFER);
+    nuGfxTaskStart(gfx, (s32)(ptr - gfx) * sizeof(Gfx), NU_GFX_UCODE_F3DEX, NU_SC_NOSWAPBUFFER);
     nuGfxTaskAllEndWait();
 }

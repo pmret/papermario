@@ -2,7 +2,7 @@
 .set noreorder # don't insert nops after branches
 
 
-glabel osMotorAccess
+glabel __osMotorAccess
 /* 043200 80067E00 27BDFFD8 */  addiu $sp, $sp, -0x28
 /* 043204 80067E04 AFB10014 */  sw    $s1, 0x14($sp)
 /* 043208 80067E08 00808821 */  addu  $s1, $a0, $zero

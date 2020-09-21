@@ -9,15 +9,12 @@ void nuContPakMgrRemove(void) {
     nuSiCallBackRemove(&nuContCallBack);
 }
 
-// TODO: Determine what this is.
-extern OSMesgQueue D_800DAC78;
-
 static s32 contPakOpen(NUSiCommonMesg* mesg) {
     s32 err;
     NUContPakFile* file = (NUContPakFile*) mesg->dataPtr;
 
     file->type = NU_CONT_PAK_TYPE_NONE;
-    err = osPfsInitPak(&D_800DAC78, file->pfs, file->pfs->channel);
+    err = osPfsInitPak(&nuSiMesgQ, file->pfs, file->pfs->channel);
 
     if (err == 0) {
         file->type = NU_CONT_PAK_TYPE_PAK;
