@@ -156,8 +156,8 @@ typedef struct PlayerData {
 typedef struct Trigger {
     /* 0x00 */ s16 genericFlagIndex;
     /* 0x02 */ char unk_02[2];
-    /* 0x04 */ s16 crateFlagIndex;
-    /* 0x06 */ s16 panelFlagIndex;
+    /* 0x04 */ s32 crateFlagIndex;
+    ///* 0x06 */ s16 panelFlagIndex;
     /* 0x08 */ s32 colliderID;
     /* 0x0C */ UNK_FUN_PTR(functionHandler);
     /* 0x10 */ Bytecode* scriptStart;
@@ -1445,7 +1445,7 @@ typedef struct SaveData {
     /* 0x046C */ s16 entryID;
     /* 0x046E */ char unk_46E[2];
     /* 0x0470 */ s32 enemyDefeatFlags[720];
-    /* 0x0FB0 */ s8 globalFlags[256];
+    /* 0x0FB0 */ s32 globalFlags[64];
     /* 0x10B0 */ s8 globalBytes[512];
     /* 0x12B0 */ s32 areaFlags[8];
     /* 0x12D0 */ s8 areaBytes[16];

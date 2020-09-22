@@ -55,6 +55,8 @@ void make_item_entity_delayed(s32 itemID, f32 x, f32 y, f32 z, s32 unk1, s32 unk
 
 void set_cam_viewport(s16 id, s16 x, s16 y, s16 width, s16 height);
 
+void disable_player_shadow(void);
+
 Npc* get_npc_safe(NpcId npcId);
 Npc* get_npc_unsafe(NpcId npcId);
 Npc* resolve_npc(ScriptInstance* script, NpcId npcIdOrPtr);

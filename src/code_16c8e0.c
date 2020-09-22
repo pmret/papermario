@@ -650,7 +650,7 @@ INCLUDE_ASM("code_16c8e0", set_part_absolute_position);
 
 INCLUDE_ASM("code_16c8e0", set_actor_home_position);
 
-INCLUDE_ASM("code_16c8e0", get_actor);
+Actor* INCLUDE_ASM("code_16c8e0", get_actor, s32 actorID);
 
 INCLUDE_API_ASM("code_16c8e0", LoadBattleSection);
 
@@ -820,7 +820,26 @@ INCLUDE_API_ASM("code_16c8e0", GetOwnerID);
 
 INCLUDE_API_ASM("code_16c8e0", SetOwnerID);
 
-INCLUDE_API_ASM("code_16c8e0", ActorExists);
+ApiStatus ActorExists(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode isExist;
+    Actor* partner = gBattleStatus.partnerActor;
+    Bytecode* args = script->ptrReadPos;
+    ActorId actorID = get_variable(script, *args++);
+
+    if (actorID == -0x7F) {
+        actorID = script->ownerActorID;
+    }
+
+    isExist = get_actor(actorID) != NULL;
+    if ((actorID == ActorId_PARTNER) && (partner == NULL)) {
+        isExist = FALSE;
+    }
+
+    set_variable(script, *args++, isExist);
+    return ApiStatus_DONE2;
+}
+
+INCLUDE_API_ASM("code_16c8e0", func_8026DEF0);
 
 INCLUDE_API_ASM("code_16c8e0", SetBattleInputMask);
 
@@ -1082,7 +1101,20 @@ INCLUDE_ASM("code_16c8e0", dispatch_damage_event_partner_1);
 
 INCLUDE_API_ASM("code_16c8e0", MakeOwnerTargetIndex);
 
-INCLUDE_API_ASM("code_16c8e0", GetActorLevel);
+ApiStatus GetActorLevel(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 actorID = get_variable(script, *args++);
+    Bytecode* outVar;
+
+    if (actorID == -0x7F) {
+        actorID = script->ownerActorID;
+    }
+
+    outVar = *args++;
+    set_variable(script, outVar, get_actor(actorID)->staticActorData->level);
+
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_API_ASM("code_16c8e0", PartnerDamageEnemy);
 

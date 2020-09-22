@@ -38,11 +38,23 @@ INCLUDE_ASM("code_de740_len_23f0", _play_sound);
 
 INCLUDE_ASM("code_de740_len_23f0", stop_sound);
 
-INCLUDE_ASM("code_de740_len_23f0", play_sound);
+void play_sound(s32 soundID) {
+    _play_sound(soundID, 0, 0, 0);
+}
 
-INCLUDE_ASM("code_de740_len_23f0", play_sound_at_player);
+void play_sound_at_player(s32 soundID, s32 arg1) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
 
-INCLUDE_ASM("code_de740_len_23f0", play_sound_at_npc);
+    play_sound_at_position(soundID, arg1, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z);
+}
+
+void play_sound_at_npc(s32 soundID, s32 arg1, s32 npcID) {
+    Npc* npc = get_npc_safe(npcID);
+
+    if (npc != NULL) {
+        play_sound_at_position(soundID, arg1, npc->pos.x, npc->pos.y, npc->pos.z);
+    }
+}
 
 s32 INCLUDE_ASM("code_de740_len_23f0", play_sound_at_position, s32 soundID, s32 value2, f32 posX, f32 posY, f32 posZ);
 

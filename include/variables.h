@@ -17,6 +17,8 @@ extern StaticItem gItemTable[364];
 extern s16 gMainGameState; /* 0 = battle, 1 = pause, 2 = world */
 extern UNK_FUN_PTR(gCurrentUpdateFunction);
 
+extern BattleStatus gBattleStatus;
+
 extern ScriptInstance* gWorldScriptList[128];
 extern ScriptInstance* gBattleScriptList[128];
 extern ScriptInstance** gCurrentScriptListPtr[128];
