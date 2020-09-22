@@ -121,7 +121,7 @@ s8 set_global_byte(s32 index, s8 value) {
     return ret;
 }
 
-s8 get_global_byte(s32 index) {
+s32 get_global_byte(s32 index) {
     return gCurrentSaveFile.globalBytes[index];
 }
 
@@ -173,6 +173,6 @@ s8 set_area_byte(s32 index, s8 value) {
     return ret;
 }
 
-s8 get_area_byte(s32 index) {
+s32 get_area_byte(s32 index) {
     return gCurrentSaveFile.areaBytes[index];
 }

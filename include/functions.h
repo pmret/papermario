@@ -10,9 +10,9 @@ void osCleanupThread(void);
 s32 heap_malloc(s32 size);
 HeapNode* _heap_create(void* addr, s32 size);
 
-s8 get_global_byte(s32 index);
+s32 get_global_byte(s32 index);
 s32 get_global_flag(s32 index);
-s8 get_area_byte(s32 index);
+s32 get_area_byte(s32 index);
 s32 get_area_flag(s32 index);
 
 void clone_model(u16 srcModelID, u16 newModelID);

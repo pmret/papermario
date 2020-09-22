@@ -4,6 +4,7 @@ gUIStatus = 0x8010EF58;
 gPlayerData = 0x8010F290;
 gPlayerActionState = 0x8010F07C;
 gPlayerAnimation = 0x8010F080;
+gPlayerStatusPtr = 0x800F7B30;
 gPlayerStatus = 0x8010EFC8;
 gItemTable = 0x800878E0;
 gWorldScriptList = 0x802DA490;

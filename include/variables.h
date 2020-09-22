@@ -11,6 +11,7 @@ extern PlayerData gPlayerData;
 extern ActionState gPlayerActionState;
 extern PlayerAnim gPlayerAnimation;
 extern PlayerStatus gPlayerStatus;
+extern PlayerStatus* gPlayerStatusPtr;
 extern GameStatus* gGameStatusPtr[1];
 extern s32 gRandSeed;
 extern StaticItem gItemTable[364];

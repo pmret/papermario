@@ -264,7 +264,9 @@ typedef struct ScriptInstance {
 
 typedef struct Entity {
     /* 0x00 */ s32 flags;
-    /* 0x04 */ char unk_04[7];
+    /* 0x04 */ char unk_04[2];
+    /* 0x06 */ s8 unk_06;
+    /* 0x07 */ char unk_08[4];
     /* 0x0B */ u8 alpha; /* reported by rain */
     /* 0x0C */ s16 aabb[3];
     /* 0x12 */ char unk_12[4];
@@ -896,7 +898,7 @@ typedef struct GameStatus {
     /* 0x15C */ s16 unk_15C;
     /* 0x15E */ char unk_15E[0x2];
     /* 0x160 */ s16 savedPos[3];
-    /* 0x166 */ s8 saveSlot;
+    /* 0x166 */ u8 saveSlot;
     /* 0x167 */ u8 loadType; /* (0 = from map, 1 = from main menu) */
     /* 0x168 */ s32 saveCount;
     /* 0x16C */ char unk_16C[12];
