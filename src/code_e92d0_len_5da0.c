@@ -607,7 +607,7 @@ ApiStatus si_handle_jump(ScriptInstance* script) {
     return ApiStatus_DONE2;
 }
 
-s32 INCLUDE_ASM("code_e92d0_len_5da0", _bound_script_trigger_handler, Trigger* trigger);
+INCLUDE_ASM_T(s32, "code_e92d0_len_5da0", _bound_script_trigger_handler, Trigger* trigger);
 
 INCLUDE_ASM("code_e92d0_len_5da0", si_handle_bind);
 
@@ -671,18 +671,18 @@ ApiStatus si_handle_resume(ScriptInstance* script) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus INCLUDE_ASM("code_e92d0_len_5da0", si_handle_does_script_exist);
+INCLUDE_API_ASM("code_e92d0_len_5da0", si_handle_does_script_exist);
 
-ApiStatus INCLUDE_ASM("code_e92d0_len_5da0", si_handle_bind_lock);
+INCLUDE_API_ASM("code_e92d0_len_5da0", si_handle_bind_lock);
 
-ApiStatus INCLUDE_ASM("code_e92d0_len_5da0", si_handle_thread);
+INCLUDE_API_ASM("code_e92d0_len_5da0", si_handle_thread);
 
 ApiStatus si_handle_end_thread(ScriptInstance* script) {
     kill_script(script);
     return ApiStatus_FINISH;
 }
 
-ApiStatus INCLUDE_ASM("code_e92d0_len_5da0", si_handle_child_thread);
+INCLUDE_API_ASM("code_e92d0_len_5da0", si_handle_child_thread);
 
 ApiStatus si_handle_end_child_thread(ScriptInstance* script) {
     kill_script(script);
@@ -693,7 +693,7 @@ ApiStatus func_802C6E14(ScriptInstance* script) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus INCLUDE_ASM("code_e92d0_len_5da0", si_handle_print_debug_var);
+INCLUDE_API_ASM("code_e92d0_len_5da0", si_handle_print_debug_var);
 
 ApiStatus func_802C739C(ScriptInstance* script) {
     script->ptrSavedPosition = (Bytecode*)*script->ptrReadPos;
@@ -774,18 +774,18 @@ s32 get_variable(ScriptInstance* script, Bytecode var) {
     }
 }
 #else
-s32 INCLUDE_ASM("code_e92d0_len_5da0", get_variable, ScriptInstance* script, Bytecode var);
+INCLUDE_ASM_T(s32, "code_e92d0_len_5da0", get_variable, ScriptInstance* script, Bytecode var);
 #endif
 
 INCLUDE_ASM("code_e92d0_len_5da0", get_variable_index);
 
 INCLUDE_ASM("code_e92d0_len_5da0", get_variable_index_alt);
 
-s32 INCLUDE_ASM("code_e92d0_len_5da0", set_variable, ScriptInstance* script, Bytecode var, s32 value);
+INCLUDE_ASM_T(s32, "code_e92d0_len_5da0", set_variable, ScriptInstance* script, Bytecode var, s32 value);
 
-f32 INCLUDE_ASM("code_e92d0_len_5da0", get_float_variable, ScriptInstance* script, Bytecode var);
+INCLUDE_ASM_T(f32, "code_e92d0_len_5da0", get_float_variable, ScriptInstance* script, Bytecode var);
 
-f32 INCLUDE_ASM("code_e92d0_len_5da0", set_float_variable, ScriptInstance* script, Bytecode var, f32 value);
+INCLUDE_ASM_T(f32, "code_e92d0_len_5da0", set_float_variable, ScriptInstance* script, Bytecode var, f32 value);
 
 INCLUDE_ASM("code_e92d0_len_5da0", si_goto_label);
 

@@ -2,15 +2,15 @@
 
 INCLUDE_ASM("code_cd180_len_38f0", func_80136A80);
 
-void INCLUDE_ASM("code_cd180_len_38f0", func_80137D88, s32 arg0, f32 arg1);
+INCLUDE_ASM_T(void, "code_cd180_len_38f0", func_80137D88, s32 arg0, f32 arg1);
 
-void INCLUDE_ASM("code_cd180_len_38f0", func_80137DA4, s32 arg0, f32 arg1);
+INCLUDE_ASM_T(void, "code_cd180_len_38f0", func_80137DA4, s32 arg0, f32 arg1);
 
 INCLUDE_ASM("code_cd180_len_38f0", func_80137DC0);
 
-s32 INCLUDE_ASM("code_cd180_len_38f0", func_80137E10, s32 arg0, u8 arg1, u8 arg2, u8 arg3);
+INCLUDE_ASM_T(s32, "code_cd180_len_38f0", func_80137E10, s32 arg0, u8 arg1, u8 arg2, u8 arg3);
 
-void INCLUDE_ASM("code_cd180_len_38f0", func_80137E4C, s32 arg0, s32 arg1, s32 arg2, s32 arg3);
+INCLUDE_ASM_T(void, "code_cd180_len_38f0", func_80137E4C, s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 
 INCLUDE_ASM("code_cd180_len_38f0", func_801380D4);
 

@@ -74,4 +74,4 @@ INCLUDE_API_ASM("os/code_45df0_len_970", osDispatchThread);
 
 INCLUDE_API_ASM("os/code_45df0_len_970", osDispatchThreadSave);
 
-void INCLUDE_ASM("os/code_45df0_len_970", osCleanupThread, void);
+INCLUDE_ASM_T(void, "os/code_45df0_len_970", osCleanupThread, void);

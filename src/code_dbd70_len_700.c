@@ -16,7 +16,7 @@ void init_trigger_list(void) {
     gTriggerCount = 0;
 }
 
-Trigger* INCLUDE_ASM("code_dbd70_len_700", create_trigger, TriggerDefinition* def);
+INCLUDE_ASM_T(Trigger*, "code_dbd70_len_700", create_trigger, TriggerDefinition* def);
 
 INCLUDE_ASM("code_dbd70_len_700", update_triggers);
 

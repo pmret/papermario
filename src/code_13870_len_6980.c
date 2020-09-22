@@ -42,9 +42,9 @@ INCLUDE_ASM("code_13870_len_6980", render_npcs);
 
 INCLUDE_ASM("code_13870_len_6980", npc_move_heading);
 
-Npc* INCLUDE_ASM("code_13870_len_6980", get_npc_unsafe, NpcId npcId);
+INCLUDE_ASM_T(Npc*, "code_13870_len_6980", get_npc_unsafe, NpcId npcId);
 
-Npc* INCLUDE_ASM("code_13870_len_6980", get_npc_safe, NpcId npcId);
+INCLUDE_ASM_T(Npc*, "code_13870_len_6980", get_npc_safe, NpcId npcId);
 
 INCLUDE_ASM("code_13870_len_6980", enable_npc_shadow);
 
@@ -64,7 +64,7 @@ INCLUDE_ASM("code_13870_len_6980", func_8003B1A8);
 
 INCLUDE_ASM("code_13870_len_6980", func_8003B1B0);
 
-void INCLUDE_ASM("code_13870_len_6980", set_npc_yaw, Npc* npcPtr, f32 angle);
+INCLUDE_ASM_T(void, "code_13870_len_6980", set_npc_yaw, Npc* npcPtr, f32 angle);
 
 INCLUDE_ASM("code_13870_len_6980", func_8003B3D0);
 

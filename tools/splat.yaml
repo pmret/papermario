@@ -1,6 +1,6 @@
 name: "Paper Mario (North America)"
 basename: "papermario"
-options: ["skip-asm"]
+# options: ["find-file-boundaries"]
 compiler: "GCC"
 segments:
   - name: header

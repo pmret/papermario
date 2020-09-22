@@ -191,7 +191,7 @@ INCLUDE_ASM("code_a5dd0_len_114e0", get_model_list_index_from_tree_index);
 
 INCLUDE_ASM("code_a5dd0_len_114e0", func_8011B090);
 
-void INCLUDE_ASM("code_a5dd0_len_114e0", get_model_center_and_size, s32 modelID, f32* centerX, f32* centerY,
+INCLUDE_ASM_T(void, "code_a5dd0_len_114e0", get_model_center_and_size, s32 modelID, f32* centerX, f32* centerY,
                  f32* centerZ, f32* sizeX, f32* sizeY, f32* sizeZ);
 
 INCLUDE_ASM("code_a5dd0_len_114e0", func_8011B1C0);
@@ -204,9 +204,9 @@ INCLUDE_ASM("code_a5dd0_len_114e0", func_8011B5D0);
 
 INCLUDE_ASM("code_a5dd0_len_114e0", func_8011B660);
 
-void INCLUDE_ASM("code_a5dd0_len_114e0", clone_model, u16 srcModelID, u16 newModelID);
+INCLUDE_ASM_T(void, "code_a5dd0_len_114e0", clone_model, u16 srcModelID, u16 newModelID);
 
-void INCLUDE_ASM("code_a5dd0_len_114e0", func_8011B7C0, u16 arg0, s32 arg1, s32 arg2);
+INCLUDE_ASM_T(void, "code_a5dd0_len_114e0", func_8011B7C0, u16 arg0, s32 arg1, s32 arg2);
 
 INCLUDE_ASM("code_a5dd0_len_114e0", func_8011B950);
 

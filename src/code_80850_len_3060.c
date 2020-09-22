@@ -965,7 +965,7 @@ s32 is_ability_active(s32 arg0) {
     }
 }
 #else
-s32 INCLUDE_ASM("code_80850_len_3060", is_ability_active, s32 arg0);
+INCLUDE_ASM_T(s32, "code_80850_len_3060", is_ability_active, s32 arg0);
 #endif
 
 s32 is_partner_ability_active(void) {

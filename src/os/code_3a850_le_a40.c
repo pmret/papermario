@@ -31,7 +31,7 @@ INCLUDE_API_ASM("os/code_3a850_le_a40", contPakFileNum);
 INCLUDE_API_ASM("os/code_3a850_le_a40", contPakRepairId);
 
 #undef osMotorStop
-s32 INCLUDE_ASM("os/code_3a850_le_a40", osMotorStop, OSPfs* unk);
+INCLUDE_ASM_T(s32, "os/code_3a850_le_a40", osMotorStop, OSPfs* unk);
 
 INCLUDE_API_ASM("os/code_3a850_le_a40", contRmbControl);
 

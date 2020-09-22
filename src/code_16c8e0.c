@@ -650,7 +650,7 @@ INCLUDE_ASM("code_16c8e0", set_part_absolute_position);
 
 INCLUDE_ASM("code_16c8e0", set_actor_home_position);
 
-Actor* INCLUDE_ASM("code_16c8e0", get_actor, s32 actorID);
+INCLUDE_ASM_T(Actor*, "code_16c8e0", get_actor, s32 actorID);
 
 INCLUDE_API_ASM("code_16c8e0", LoadBattleSection);
 

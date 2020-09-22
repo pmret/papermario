@@ -1,6 +1,6 @@
 #include "common.h"
 
-int INCLUDE_ASM("os/code_46c70_len_e00", bcmp, const void* src, const void* dst, int size);
+INCLUDE_ASM_T(int, "os/code_46c70_len_e00", bcmp, const void* src, const void* dst, int size);
 
 INCLUDE_ASM("os/code_46c70_len_e00", _Litob);
 

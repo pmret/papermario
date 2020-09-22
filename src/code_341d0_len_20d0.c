@@ -40,6 +40,6 @@ INCLUDE_ASM("code_341d0_len_20d0", get_current_map_header);
 
 INCLUDE_ASM("code_341d0_len_20d0", get_map_IDs_by_name);
 
-void* INCLUDE_ASM("code_341d0_len_20d0", load_asset_by_name, char* name, s32* decompressedSize);
+INCLUDE_ASM_T(void*, "code_341d0_len_20d0", load_asset_by_name, char* name, s32* decompressedSize);
 
 INCLUDE_ASM("code_341d0_len_20d0", get_asset_offset);
