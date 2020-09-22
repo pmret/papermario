@@ -156,9 +156,8 @@ typedef struct PlayerData {
 typedef struct Trigger {
     /* 0x00 */ s16 genericFlagIndex;
     /* 0x02 */ char unk_02[2];
-    /* 0x04 */ s32 crateFlagIndex;
-    ///* 0x06 */ s16 panelFlagIndex;
-    /* 0x08 */ s32 colliderID;
+    /* 0x04 */ s32 params1;
+    /* 0x08 */ s32 params2;
     /* 0x0C */ UNK_FUN_PTR(functionHandler);
     /* 0x10 */ Bytecode* scriptStart;
     /* 0x14 */ struct ScriptInstance* runningScript;

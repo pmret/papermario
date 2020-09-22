@@ -34,7 +34,7 @@ void clear_area_flags(void) {
         for (i = ARRAY_COUNT(saveFile->areaFlags) - 1; i >= 0; i--) {
             saveFile->areaFlags[i] = 0;
         }
-   
+
         for (i = ARRAY_COUNT(saveFile->areaBytes) - 1; i >= 0; i--) {
             saveFile->areaBytes[i] = 0;
         }
@@ -56,7 +56,7 @@ s32 clear_global_flag(s32 index) {
 
     wordIdx = index / 32;
     bitIdx = index % 32;
-    
+
     saveFile = &gCurrentSaveFile;
     flag = saveFile->globalFlags[wordIdx] & (1 << bitIdx);
 
@@ -80,7 +80,7 @@ s32 set_global_flag(s32 index) {
 
     wordIdx = index / 32;
     bitIdx = index % 32;
-    
+
     saveFile = &gCurrentSaveFile;
     flag = saveFile->globalFlags[wordIdx] & (1 << bitIdx);
 
@@ -128,7 +128,7 @@ s8 get_global_byte(s32 index) {
 s32 clear_area_flag(s32 index) {
     s32 wordIdx = index / 32;
     s32 bitIdx = index % 32;
-    SaveData *saveFile = &gCurrentSaveFile;
+    SaveData* saveFile = &gCurrentSaveFile;
     s32 flag = saveFile->areaFlags[wordIdx] & (1 << bitIdx);
 
     if (flag != 0) {
@@ -142,7 +142,7 @@ s32 clear_area_flag(s32 index) {
 s32 set_area_flag(s32 index) {
     s32 wordIdx = index / 32;
     s32 bitIdx = index % 32;
-    SaveData *saveFile = &gCurrentSaveFile;
+    SaveData* saveFile = &gCurrentSaveFile;
     s32 flag = saveFile->areaFlags[wordIdx] & (1 << bitIdx);
 
     if (flag != 0) {

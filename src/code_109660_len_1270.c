@@ -9,9 +9,9 @@ void player_enter_blue_pipe(Entity* bluePipe) {
     Trigger* pipeTrigger = bluePipe->trigger;
 
     playerStatus->targetYaw = gCameras[gCurrentCameraID].currentYaw + 180.0f;
-    pipeTrigger->crateFlagIndex = 0x19;
+    pipeTrigger->params1 = 0x19;
     playerStatus->renderMode = 0xD;
-    
+
     func_802DDFF8(0x10002, 5, 2, 1, 1, 0, 0);
     play_sound(0x163);
     disable_player_shadow();
@@ -22,9 +22,9 @@ void func_802E8D74(Entity* entity) {
     Trigger* entityTrigger = entity->trigger;
 
     playerStatus->position.y--;
-    entityTrigger->crateFlagIndex--;
+    entityTrigger->params1--;
 
-    if (entityTrigger->crateFlagIndex == -1) {
+    if (entityTrigger->params1 == -1) {
         playerStatus->renderMode = 0xD;
         playerStatus->position.y -= 50.0f;
         func_802DDFF8(0x10002, 0, 0, 0, 0, 0, 0);
@@ -34,7 +34,7 @@ void func_802E8D74(Entity* entity) {
 
 void func_802E8E10(Entity* entity) {
     Bytecode* triggerScriptStart = entity->trigger->scriptStart;
-    
+
     D_8009A650[0] &= ~0x40;
     entity->boundScript = triggerScriptStart;
     func_80110678();
