@@ -721,51 +721,54 @@ INCLUDE_ASM("code_e92d0_len_5da0", si_execute_next_command);
 // TODO: consider renaming to si_get_variable
 #ifdef NON_MATCHING
 s32 get_variable(ScriptInstance* script, Bytecode var) {
-    s32 abs_value;
-    s32 word_index;
-    s32 bit_index;
+    s32 wordIdx;
+    s32 bitIdx;
 
     if (var <= -270000000) {
         return var;
     } else if (var <= -250000000) {
         return var;
     } else if (var <= -220000000) {
-        return (s32) fixed_var_to_float(var);
+        return fixed_var_to_float(var);
     } else if (var <= -200000000) {
         var += 210000000;
-        word_index = var / 32;
-        bit_index = var % 32;
-        return (script->flagArray[word_index] & (1 << bit_index)) != 0;
+        wordIdx = var / 32;
+        bitIdx = var % 32;
+        return (script->flagArray[wordIdx] & (1 << bitIdx)) != 0;
     } else if (var <= -180000000) {
         var += 190000000;
         var = script->array[var];
-        return (var > -270000000 && var < -220000000) ? (s32) fixed_var_to_float(var) : var;
+        return (var > -270000000 && var < -220000000) ? fixed_var_to_float(var) : var;
     } else if (var <= -160000000) {
-        return get_global_byte(var + 170000000);
+        var += 170000000;
+        return get_global_byte(var);
     } else if (var <= -140000000) {
-        return get_area_byte(var + 150000000);
+        var += 150000000;
+        return get_area_byte(var);
     } else if (var <= -120000000) {
-        return get_global_flag(var + 130000000);
+        var += 130000000;
+        return get_global_flag(var);
     } else if (var <= -100000000) {
-        return get_area_flag(var + 110000000);
+        var += 110000000;
+        return get_area_flag(var);
     } else if (var <= -80000000) {
-        s32 avar = var + 90000000;
-        word_index = avar / 32;
-        bit_index = avar % 32;
-        return (gMapFlags[word_index] & (1 << bit_index)) != 0;
+        var += 90000000;
+        wordIdx = var / 32;
+        bitIdx = var % 32;
+        return (gMapFlags[wordIdx] & (1 << bitIdx)) != 0;
     } else if (var <= -60000000) {
         var += 70000000;
-        word_index = var / 32;
-        bit_index = var % 32;
-        return (script->varFlags[word_index] & (1 << bit_index)) != 0;
+        wordIdx = var / 32;
+        bitIdx = var % 32;
+        return (script->varFlags[wordIdx] & (1 << bitIdx)) != 0;
     } else if (var <= -40000000) {
         var += 50000000;
         var = gMapVars[var];
-        return (var > -270000000 && var < -220000000) ? (s32) fixed_var_to_float(var) : var;
+        return (var > -270000000 && var < -220000000) ? fixed_var_to_float(var) : var;
     } else if (var <= -20000000) {
         var += 30000000;
         var = script->varTable[var];
-        return (var > -270000000 && var < -220000000) ? (s32) fixed_var_to_float(var) : var;
+        return (var > -270000000 && var < -220000000) ? fixed_var_to_float(var) : var;
     } else {
         return var;
     }

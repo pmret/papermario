@@ -1,34 +1,7 @@
 .set noat # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-
-glabel save_game_at_player_position
-/* 102A20 802E11A0 3C04800F */  lui   $a0, 0x800f
-/* 102A24 802E11A4 8C847B30 */  lw    $a0, 0x7b30($a0)
-/* 102A28 802E11A8 27BDFFE8 */  addiu $sp, $sp, -0x18
-/* 102A2C 802E11AC AFBF0010 */  sw    $ra, 0x10($sp)
-/* 102A30 802E11B0 C4800028 */  lwc1  $f0, 0x28($a0)
-/* 102A34 802E11B4 3C038007 */  lui   $v1, 0x8007
-/* 102A38 802E11B8 8C63419C */  lw    $v1, 0x419c($v1)
-/* 102A3C 802E11BC 4600008D */  trunc.w.s $f2, $f0
-/* 102A40 802E11C0 44021000 */  mfc1  $v0, $f2
-/* 102A44 802E11C4 00000000 */  nop   
-/* 102A48 802E11C8 A4620160 */  sh    $v0, 0x160($v1)
-/* 102A4C 802E11CC C480002C */  lwc1  $f0, 0x2c($a0)
-/* 102A50 802E11D0 4600008D */  trunc.w.s $f2, $f0
-/* 102A54 802E11D4 44021000 */  mfc1  $v0, $f2
-/* 102A58 802E11D8 00000000 */  nop   
-/* 102A5C 802E11DC A4620162 */  sh    $v0, 0x162($v1)
-/* 102A60 802E11E0 C4800030 */  lwc1  $f0, 0x30($a0)
-/* 102A64 802E11E4 90640166 */  lbu   $a0, 0x166($v1)
-/* 102A68 802E11E8 4600008D */  trunc.w.s $f2, $f0
-/* 102A6C 802E11EC 44021000 */  mfc1  $v0, $f2
-/* 102A70 802E11F0 0C00ACDD */  jal   fio_save_game
-/* 102A74 802E11F4 A4620164 */   sh    $v0, 0x164($v1)
-/* 102A78 802E11F8 8FBF0010 */  lw    $ra, 0x10($sp)
-/* 102A7C 802E11FC 03E00008 */  jr    $ra
-/* 102A80 802E1200 27BD0018 */   addiu $sp, $sp, 0x18
-
+glabel func_802E1204
 /* 102A84 802E1204 27BDFFE8 */  addiu $sp, $sp, -0x18
 /* 102A88 802E1208 AFB00010 */  sw    $s0, 0x10($sp)
 /* 102A8C 802E120C 0080802D */  daddu $s0, $a0, $zero
@@ -261,4 +234,3 @@ glabel save_game_at_player_position
 /* 102DB0 802E1530 8FB00010 */  lw    $s0, 0x10($sp)
 /* 102DB4 802E1534 03E00008 */  jr    $ra
 /* 102DB8 802E1538 27BD0018 */   addiu $sp, $sp, 0x18
-

@@ -70,7 +70,7 @@ INCLUDE_ASM("code_759b0_len_61b0", func_800E0088);
 
 INCLUDE_ASM("code_759b0_len_61b0", enable_player_shadow);
 
-INCLUDE_ASM("code_759b0_len_61b0", disable_player_shadow);
+void INCLUDE_ASM("code_759b0_len_61b0", disable_player_shadow);
 
 INCLUDE_ASM("code_759b0_len_61b0", enable_player_physics);
 

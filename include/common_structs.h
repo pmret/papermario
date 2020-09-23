@@ -156,9 +156,8 @@ typedef struct PlayerData {
 typedef struct Trigger {
     /* 0x00 */ s16 genericFlagIndex;
     /* 0x02 */ char unk_02[2];
-    /* 0x04 */ s16 crateFlagIndex;
-    /* 0x06 */ s16 panelFlagIndex;
-    /* 0x08 */ s32 colliderID;
+    /* 0x04 */ s32 params1;
+    /* 0x08 */ s32 params2;
     /* 0x0C */ UNK_FUN_PTR(functionHandler);
     /* 0x10 */ Bytecode* scriptStart;
     /* 0x14 */ struct ScriptInstance* runningScript;
@@ -265,7 +264,9 @@ typedef struct ScriptInstance {
 
 typedef struct Entity {
     /* 0x00 */ s32 flags;
-    /* 0x04 */ char unk_04[7];
+    /* 0x04 */ char unk_04[2];
+    /* 0x06 */ s8 unk_06;
+    /* 0x07 */ char unk_08[4];
     /* 0x0B */ u8 alpha; /* reported by rain */
     /* 0x0C */ s16 aabb[3];
     /* 0x12 */ char unk_12[4];
@@ -897,7 +898,7 @@ typedef struct GameStatus {
     /* 0x15C */ s16 unk_15C;
     /* 0x15E */ char unk_15E[0x2];
     /* 0x160 */ s16 savedPos[3];
-    /* 0x166 */ s8 saveSlot;
+    /* 0x166 */ u8 saveSlot;
     /* 0x167 */ u8 loadType; /* (0 = from map, 1 = from main menu) */
     /* 0x168 */ s32 saveCount;
     /* 0x16C */ char unk_16C[12];
@@ -1445,7 +1446,7 @@ typedef struct SaveData {
     /* 0x046C */ s16 entryID;
     /* 0x046E */ char unk_46E[2];
     /* 0x0470 */ s32 enemyDefeatFlags[720];
-    /* 0x0FB0 */ s8 globalFlags[256];
+    /* 0x0FB0 */ s32 globalFlags[64];
     /* 0x10B0 */ s8 globalBytes[512];
     /* 0x12B0 */ s32 areaFlags[8];
     /* 0x12D0 */ s8 areaBytes[16];

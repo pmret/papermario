@@ -1,6 +1,7 @@
 name: "Paper Mario (North America)"
 basename: "papermario"
 options: ["skip-asm"]
+compiler: "GCC"
 segments:
   - name: header
     type: code

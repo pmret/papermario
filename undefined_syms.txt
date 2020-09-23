@@ -4,6 +4,7 @@ gUIStatus = 0x8010EF58;
 gPlayerData = 0x8010F290;
 gPlayerActionState = 0x8010F07C;
 gPlayerAnimation = 0x8010F080;
+gPlayerStatusPtr = 0x800F7B30;
 gPlayerStatus = 0x8010EFC8;
 gItemTable = 0x800878E0;
 gWorldScriptList = 0x802DA490;
@@ -26,6 +27,8 @@ D_800A0944 = 0x800A0944;
 
 D_8010CD10 = 0x8010CD10;
 D_8010CD12 = 0x8010CD12;
+
+gBattleStatus = 0x800DC070;
 
 D_000759B0 = 0x000759B0;
 D_000759B0_end = 0x000A5DD0;

@@ -10,9 +10,9 @@ void osCleanupThread(void);
 s32 heap_malloc(s32 size);
 HeapNode* _heap_create(void* addr, s32 size);
 
-s8 get_global_byte(s32 index);
+s32 get_global_byte(s32 index);
 s32 get_global_flag(s32 index);
-s8 get_area_byte(s32 index);
+s32 get_area_byte(s32 index);
 s32 get_area_flag(s32 index);
 
 void clone_model(u16 srcModelID, u16 newModelID);
@@ -54,6 +54,8 @@ f32 update_lerp(Easing easing, f32 start, f32 end, s32 elapsed, s32 duration);
 void make_item_entity_delayed(s32 itemID, f32 x, f32 y, f32 z, s32 unk1, s32 unk2, s32 unk3);
 
 void set_cam_viewport(s16 id, s16 x, s16 y, s16 width, s16 height);
+
+void disable_player_shadow(void);
 
 Npc* get_npc_safe(NpcId npcId);
 Npc* get_npc_unsafe(NpcId npcId);
