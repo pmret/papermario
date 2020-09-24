@@ -22,8 +22,14 @@ INCLUDE_ASM("code_8230_len_1ae0", create_cameras_b);
 
 INCLUDE_ASM("code_8230_len_1ae0", initialize_next_camera);
 
-void INCLUDE_ASM("code_8230_len_1ae0", set_cam_viewport, s16 id, s16 x, s16 y, s16 width, s16 height);
+INCLUDE_ASM_T(void, "code_8230_len_1ae0", set_cam_viewport, s16 id, s16 x, s16 y, s16 width, s16 height);
 
 INCLUDE_ASM("code_8230_len_1ae0", get_cam_viewport);
 
 INCLUDE_ASM("code_8230_len_1ae0", get_screen_coords);
+
+INCLUDE_ASM("code_8230_len_1ae0", func_8002E754);
+
+INCLUDE_ASM("code_8230_len_1ae0", func_8002E7CC);
+
+INCLUDE_ASM("code_8230_len_1ae0", func_8002E82C);

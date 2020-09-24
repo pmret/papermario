@@ -4,6 +4,22 @@ INCLUDE_ASM("code_1a1f0_len_5390", get_defeated);
 
 INCLUDE_ASM("code_1a1f0_len_5390", set_defeated);
 
+INCLUDE_ASM("code_1a1f0_len_5390", func_8003EE98);
+
+INCLUDE_ASM("code_1a1f0_len_5390", func_8003EECC);
+
+INCLUDE_ASM("code_1a1f0_len_5390", FadeBackgroundToBlack);
+
+INCLUDE_ASM("code_1a1f0_len_5390", UnfadeBackgroundFromBlack);
+
+INCLUDE_ASM("code_1a1f0_len_5390", func_8003F018);
+
+INCLUDE_ASM("code_1a1f0_len_5390", func_8003F084);
+
+INCLUDE_ASM("code_1a1f0_len_5390", func_8003F0C4);
+
+INCLUDE_ASM("code_1a1f0_len_5390", func_8003F384);
+
 ApiStatus GetCamLookAtObjVector(ScriptInstance* script, s32 isInitialCall) {
     // Almost certainly a CURRENT_CAM macro
     script->varTable[0] = (&gCameras[gCurrentCameraID])->lookAt_obj[0];
@@ -14,6 +30,10 @@ ApiStatus GetCamLookAtObjVector(ScriptInstance* script, s32 isInitialCall) {
 }
 
 INCLUDE_API_ASM("code_1a1f0_len_5390", HasMerleeCasts);
+
+INCLUDE_ASM("code_1a1f0_len_5390", func_8003F414);
+
+INCLUDE_ASM("code_1a1f0_len_5390", func_8003F4CC);
 
 INCLUDE_API_ASM("code_1a1f0_len_5390", OnDefeatEnemy);
 

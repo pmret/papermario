@@ -18,6 +18,8 @@ INCLUDE_ASM("code_e79b0_len_1920", start_child_script);
 
 INCLUDE_ASM("code_e79b0_len_1920", func_802C39F8);
 
+INCLUDE_ASM("code_e79b0_len_1920", func_802C3C10);
+
 ScriptInstance* restart_script(ScriptInstance* script) {
     Bytecode* ptrFirstLine = script->ptrFirstLine;
 

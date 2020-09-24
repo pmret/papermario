@@ -2,6 +2,8 @@
 
 INCLUDE_ASM("code_1060_len_310", func_80025C60);
 
+INCLUDE_ASM("code_1060_len_310", func_80025CC0);
+
 INCLUDE_ASM("code_1060_len_310", func_80025CFC);
 
 INCLUDE_ASM("code_1060_len_310", func_80025D38);

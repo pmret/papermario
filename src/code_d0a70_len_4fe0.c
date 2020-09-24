@@ -16,6 +16,12 @@ INCLUDE_ASM("code_d0a70_len_4fe0", func_8013A704);
 
 INCLUDE_ASM("code_d0a70_len_4fe0", func_8013A854);
 
+INCLUDE_ASM("code_d0a70_len_4fe0", func_8013A888);
+
+INCLUDE_ASM("code_d0a70_len_4fe0", func_8013A8E0);
+
+INCLUDE_ASM("code_d0a70_len_4fe0", func_8013A920);
+
 INCLUDE_ASM("code_d0a70_len_4fe0", func_8013A93C);
 
 INCLUDE_ASM("code_d0a70_len_4fe0", func_8013A9C8);
@@ -23,6 +29,8 @@ INCLUDE_ASM("code_d0a70_len_4fe0", func_8013A9C8);
 INCLUDE_ASM("code_d0a70_len_4fe0", func_8013A9E8);
 
 INCLUDE_ASM("code_d0a70_len_4fe0", func_8013AA9C);
+
+INCLUDE_ASM("code_d0a70_len_4fe0", func_8013AF20);
 
 INCLUDE_ASM("code_d0a70_len_4fe0", func_8013AF70);
 

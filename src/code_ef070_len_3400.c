@@ -458,24 +458,48 @@ INCLUDE_API_ASM("code_ef070_len_3400", AdjustCam);
 
 INCLUDE_API_ASM("code_ef070_len_3400", ResetCam);
 
+INCLUDE_ASM("code_ef070_len_3400", func_802CCAC0);
+
 INCLUDE_ASM("code_ef070_len_3400", draw_anim_models);
 
-INCLUDE_API_ASM("code_ef070_len_3400", LoadModelAnimation);
+INCLUDE_ASM("code_ef070_len_3400", func_802CCCB0);
 
-INCLUDE_API_ASM("code_ef070_len_3400", PlayModelAnimation);
+INCLUDE_ASM("code_ef070_len_3400", LoadModelAnimation);
 
-INCLUDE_API_ASM("code_ef070_len_3400", ChangeModelAnimation);
+INCLUDE_ASM("code_ef070_len_3400", func_802CCDAC);
 
-INCLUDE_API_ASM("code_ef070_len_3400", SetAnimModelPosition);
+INCLUDE_ASM("code_ef070_len_3400", PlayModelAnimation);
 
-INCLUDE_API_ASM("code_ef070_len_3400", GetAnimModelPosition);
+INCLUDE_ASM("code_ef070_len_3400", func_802CCEDC);
 
-INCLUDE_API_ASM("code_ef070_len_3400", AddAnimModelPosition);
+INCLUDE_ASM("code_ef070_len_3400", ChangeModelAnimation);
 
-INCLUDE_API_ASM("code_ef070_len_3400", SetAnimModelRotation);
+INCLUDE_ASM("code_ef070_len_3400", SetAnimModelPosition);
 
-INCLUDE_API_ASM("code_ef070_len_3400", SetAnimModelScale);
+INCLUDE_ASM("code_ef070_len_3400", GetAnimModelPosition);
+
+INCLUDE_ASM("code_ef070_len_3400", AddAnimModelPosition);
+
+INCLUDE_ASM("code_ef070_len_3400", SetAnimModelRotation);
+
+INCLUDE_ASM("code_ef070_len_3400", SetAnimModelScale);
+
+INCLUDE_ASM("code_ef070_len_3400", func_802CD348);
+
+INCLUDE_ASM("code_ef070_len_3400", func_802CD3C0);
+
+INCLUDE_ASM("code_ef070_len_3400", func_802CD418);
 
 INCLUDE_ASM("code_ef070_len_3400", func_802CD4B4);
 
 INCLUDE_ASM("code_ef070_len_3400", func_802CD57C);
+
+INCLUDE_ASM("code_ef070_len_3400", func_802CD5C0);
+
+INCLUDE_ASM("code_ef070_len_3400", func_802CD6E0);
+
+INCLUDE_ASM("code_ef070_len_3400", func_802CD7D8);
+
+INCLUDE_ASM("code_ef070_len_3400", func_802CD8F8);
+
+INCLUDE_ASM("code_ef070_len_3400", func_802CD9F0);

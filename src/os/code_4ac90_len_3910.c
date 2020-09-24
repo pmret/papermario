@@ -4,6 +4,14 @@ INCLUDE_ASM("os/code_4ac90_len_3910", func_8006F890);
 
 INCLUDE_ASM("os/code_4ac90_len_3910", func_8006F8F0);
 
+INCLUDE_ASM("os/code_4ac90_len_3910", func_8006F950);
+
+INCLUDE_ASM("os/code_4ac90_len_3910", func_8006F9B0);
+
+INCLUDE_ASM("os/code_4ac90_len_3910", func_8006FA10);
+
+INCLUDE_ASM("os/code_4ac90_len_3910", func_8006FA70);
+
 INCLUDE_ASM("os/code_4ac90_len_3910", fx_walk_large);
 
 INCLUDE_ASM("os/code_4ac90_len_3910", fx_walk_normal);
@@ -75,6 +83,8 @@ INCLUDE_ASM("os/code_4ac90_len_3910", func_80070730);
 INCLUDE_ASM("os/code_4ac90_len_3910", fx_sweat);
 
 INCLUDE_ASM("os/code_4ac90_len_3910", fx_sleep_bubble);
+
+INCLUDE_ASM("os/code_4ac90_len_3910", func_80070850);
 
 INCLUDE_ASM("os/code_4ac90_len_3910", func_800708B0);
 
@@ -150,11 +160,15 @@ INCLUDE_ASM("os/code_4ac90_len_3910", func_800715D0);
 
 INCLUDE_ASM("os/code_4ac90_len_3910", func_80071630);
 
+INCLUDE_ASM("os/code_4ac90_len_3910", func_80071690);
+
 INCLUDE_ASM("os/code_4ac90_len_3910", func_800716F0);
 
 INCLUDE_ASM("os/code_4ac90_len_3910", func_80071750);
 
 INCLUDE_ASM("os/code_4ac90_len_3910", func_800717B0);
+
+INCLUDE_ASM("os/code_4ac90_len_3910", func_80071810);
 
 INCLUDE_ASM("os/code_4ac90_len_3910", func_80071870);
 
@@ -198,6 +212,8 @@ INCLUDE_ASM("os/code_4ac90_len_3910", func_80071F90);
 
 INCLUDE_ASM("os/code_4ac90_len_3910", func_80071FF0);
 
+INCLUDE_ASM("os/code_4ac90_len_3910", func_80072050);
+
 INCLUDE_ASM("os/code_4ac90_len_3910", func_800720B0);
 
 INCLUDE_ASM("os/code_4ac90_len_3910", func_80072110);
@@ -219,6 +235,8 @@ INCLUDE_ASM("os/code_4ac90_len_3910", func_800723B0);
 INCLUDE_ASM("os/code_4ac90_len_3910", func_80072410);
 
 INCLUDE_ASM("os/code_4ac90_len_3910", func_80072470);
+
+INCLUDE_ASM("os/code_4ac90_len_3910", func_800724D0);
 
 INCLUDE_ASM("os/code_4ac90_len_3910", func_80072530);
 
@@ -254,6 +272,8 @@ INCLUDE_ASM("os/code_4ac90_len_3910", func_80072AD0);
 
 INCLUDE_ASM("os/code_4ac90_len_3910", func_80072B30);
 
+INCLUDE_ASM("os/code_4ac90_len_3910", func_80072BB0);
+
 INCLUDE_ASM("os/code_4ac90_len_3910", func_80072BCC);
 
 INCLUDE_ASM("os/code_4ac90_len_3910", func_80072BDC);
@@ -265,6 +285,8 @@ INCLUDE_ASM("os/code_4ac90_len_3910", func_80072CCC);
 INCLUDE_ASM("os/code_4ac90_len_3910", func_80072CDC);
 
 INCLUDE_ASM("os/code_4ac90_len_3910", func_80072CEC);
+
+INCLUDE_ASM("os/code_4ac90_len_3910", func_80072CF4);
 
 INCLUDE_ASM("os/code_4ac90_len_3910", setup_demo_player);
 

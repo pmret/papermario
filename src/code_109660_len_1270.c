@@ -2,7 +2,29 @@
 
 INCLUDE_ASM("code_109660_len_1270", func_802E7DE0);
 
+INCLUDE_ASM("code_109660_len_1270", func_802E7F40);
+
 INCLUDE_ASM("code_109660_len_1270", func_802E7F6C);
+
+INCLUDE_ASM("code_109660_len_1270", func_802E7FA0);
+
+INCLUDE_ASM("code_109660_len_1270", func_802E854C);
+
+INCLUDE_ASM("code_109660_len_1270", func_802E8858);
+
+INCLUDE_ASM("code_109660_len_1270", func_802E88EC);
+
+INCLUDE_ASM("code_109660_len_1270", func_802E89B0);
+
+INCLUDE_ASM("code_109660_len_1270", func_802E89F8);
+
+INCLUDE_ASM("code_109660_len_1270", func_802E8A58);
+
+INCLUDE_ASM("code_109660_len_1270", func_802E8ADC);
+
+INCLUDE_ASM("code_109660_len_1270", func_802E8BC0);
+
+INCLUDE_ASM("code_109660_len_1270", func_802E8C94);
 
 void player_enter_blue_pipe(Entity* bluePipe) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -41,3 +63,5 @@ void func_802E8E10(Entity* entity) {
 }
 
 INCLUDE_ASM("code_109660_len_1270", push_entity_matrix);
+
+INCLUDE_ASM("code_109660_len_1270", func_802E8F94);

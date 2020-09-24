@@ -95,12 +95,12 @@ ApiStatus HidePlayerShadow(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus DisablePlayerPhysics(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 enable = get_variable(script, *args++);
+    s32 disable = get_variable(script, *args++);
 
-    if (enable) {
-        enable_player_physics();
+    if (disable) {
+        disable_player_static_collisions();
     } else {
-        disable_player_physics();
+        enable_player_static_collisions();
     }
     return ApiStatus_DONE2;
 }
@@ -111,7 +111,7 @@ ApiStatus DisablePlayerInput(ScriptInstance* script, s32 isInitialCall) {
     s32 enable = get_variable(script, *args++);
 
     if (enable) {
-        func_800E0178();
+        disable_player_input();
         func_800EF628();
         func_800E97B8();
         func_800E984C();
@@ -120,7 +120,7 @@ ApiStatus DisablePlayerInput(ScriptInstance* script, s32 isInitialCall) {
         }
         D_8009A650[0] |= 0x40;
     } else {
-        func_800E01A4();
+        enable_player_input();
         func_800EF600();
         func_800E01DC();
         D_8009A650[0] &= ~0x40;
@@ -160,7 +160,13 @@ INCLUDE_API_ASM("code_f4c60_len_4300", SetPlayerAnimation);
 
 INCLUDE_API_ASM("code_f4c60_len_4300", SetPlayerActionState);
 
-INCLUDE_API_ASM("code_f4c60_len_4300", MovePlayerTo);
+INCLUDE_API_ASM("code_f4c60_len_4300", SetPlayerAnimationSpeed);
+
+INCLUDE_API_ASM("code_f4c60_len_4300", PlayerMoveTo);
+
+INCLUDE_ASM("code_f4c60_len_4300", func_802D1270);
+
+INCLUDE_ASM("code_f4c60_len_4300", func_802D1380);
 
 INCLUDE_ASM("code_f4c60_len_4300", player_jump);
 
@@ -218,47 +224,117 @@ ApiStatus FullyRestoreHPandFP(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_API_ASM("code_f4c60_len_4300", FullyRestoreSP);
+INCLUDE_ASM("code_f4c60_len_4300", FullyRestoreSP);
 
-INCLUDE_API_ASM("code_f4c60_len_4300", EnablePartner);
+INCLUDE_ASM("code_f4c60_len_4300", EnablePartner);
 
-INCLUDE_API_ASM("code_f4c60_len_4300", DisablePartner);
+INCLUDE_ASM("code_f4c60_len_4300", DisablePartner);
 
-INCLUDE_API_ASM("code_f4c60_len_4300", ForceExitHeading);
+INCLUDE_ASM("code_f4c60_len_4300", UseEntryHeading);
 
-INCLUDE_API_ASM("code_f4c60_len_4300", UseExitHeading);
+INCLUDE_ASM("code_f4c60_len_4300", func_802D2148);
+
+INCLUDE_ASM("code_f4c60_len_4300", UseExitHeading);
 
 INCLUDE_ASM("code_f4c60_len_4300", func_802D23F8);
 
-INCLUDE_API_ASM("code_f4c60_len_4300", DisablePulseStone);
+INCLUDE_ASM("code_f4c60_len_4300", func_802D244C);
+
+INCLUDE_ASM("code_f4c60_len_4300", func_802D2484);
+
+INCLUDE_ASM("code_f4c60_len_4300", func_802D249C);
+
+INCLUDE_ASM("code_f4c60_len_4300", func_802D24F4);
+
+INCLUDE_ASM("code_f4c60_len_4300", func_802D2508);
+
+INCLUDE_ASM("code_f4c60_len_4300", func_802D2520);
+
+INCLUDE_ASM("code_f4c60_len_4300", func_802D286C);
+
+INCLUDE_ASM("code_f4c60_len_4300", func_802D2884);
+
+INCLUDE_ASM("code_f4c60_len_4300", DisablePulseStone);
 
 INCLUDE_API_ASM("code_f4c60_len_4300", GetCurrentPartner);
 
+INCLUDE_ASM("code_f4c60_len_4300", func_802D2B50);
+
+INCLUDE_ASM("code_f4c60_len_4300", func_802D2B6C);
+
 INCLUDE_API_ASM("code_f4c60_len_4300", Disable8bitMario);
+
+INCLUDE_ASM("code_f4c60_len_4300", func_802D2C14);
+
+INCLUDE_ASM("code_f4c60_len_4300", func_802D2C40);
 
 INCLUDE_API_ASM("code_f4c60_len_4300", PlaySoundAtPlayer);
 
 INCLUDE_ASM("code_f4c60_len_4300", func_802D2D30);
 
+INCLUDE_ASM("code_f4c60_len_4300", func_802D2ED4);
+
 INCLUDE_ASM("code_f4c60_len_4300", func_802D2F34);
 
-INCLUDE_API_ASM("code_f4c60_len_4300", CreateImageObj);
+INCLUDE_ASM("code_f4c60_len_4300", func_802D2FCC);
 
-INCLUDE_API_ASM("code_f4c60_len_4300", RemoveImageObj);
+INCLUDE_ASM("code_f4c60_len_4300", func_802D3028);
 
-INCLUDE_API_ASM("code_f4c60_len_4300", SetObjPosition);
+INCLUDE_ASM("code_f4c60_len_4300", func_802D31E0);
 
-INCLUDE_API_ASM("code_f4c60_len_4300", SetObjRotation);
+INCLUDE_ASM("code_f4c60_len_4300", func_802D3398);
 
-INCLUDE_API_ASM("code_f4c60_len_4300", SetObjScale);
+INCLUDE_ASM("code_f4c60_len_4300", func_802D33D4);
 
-INCLUDE_API_ASM("code_f4c60_len_4300", SetObjJumpScale);
+INCLUDE_ASM("code_f4c60_len_4300", func_802D3474);
 
-INCLUDE_API_ASM("code_f4c60_len_4300", JumpObj);
+INCLUDE_ASM("code_f4c60_len_4300", func_802D354C);
+
+INCLUDE_ASM("code_f4c60_len_4300", func_802D3624);
+
+INCLUDE_ASM("code_f4c60_len_4300", func_802D3674);
+
+INCLUDE_ASM("code_f4c60_len_4300", func_802D36E0);
+
+INCLUDE_ASM("code_f4c60_len_4300", func_802D378C);
+
+INCLUDE_ASM("code_f4c60_len_4300", func_802D3840);
+
+INCLUDE_ASM("code_f4c60_len_4300", func_802D38EC);
+
+INCLUDE_ASM("code_f4c60_len_4300", func_802D3998);
+
+INCLUDE_ASM("code_f4c60_len_4300", func_802D39FC);
+
+INCLUDE_ASM("code_f4c60_len_4300", func_802D3A60);
+
+INCLUDE_ASM("code_f4c60_len_4300", func_802D3C58);
+
+INCLUDE_ASM("code_f4c60_len_4300", func_802D3EB8);
+
+INCLUDE_ASM("code_f4c60_len_4300", func_802D3F74);
+
+INCLUDE_ASM("code_f4c60_len_4300", func_802D3FC8);
+
+INCLUDE_ASM("code_f4c60_len_4300", func_802D4050);
 
 INCLUDE_ASM("code_f4c60_len_4300", func_802D4164);
 
+INCLUDE_ASM("code_f4c60_len_4300", func_802D417C);
+
+INCLUDE_ASM("code_f4c60_len_4300", func_802D420C);
+
+INCLUDE_ASM("code_f4c60_len_4300", func_802D42AC);
+
+INCLUDE_ASM("code_f4c60_len_4300", func_802D4364);
+
+INCLUDE_ASM("code_f4c60_len_4300", func_802D43AC);
+
+INCLUDE_ASM("code_f4c60_len_4300", func_802D43D0);
+
 INCLUDE_ASM("code_f4c60_len_4300", func_802D43F4);
+
+INCLUDE_ASM("code_f4c60_len_4300", func_802D4434);
 
 INCLUDE_ASM("code_f4c60_len_4300", func_802D4488);
 

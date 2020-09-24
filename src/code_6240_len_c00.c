@@ -24,6 +24,8 @@ INCLUDE_ASM("code_6240_len_c00", fio_erase_game);
 
 INCLUDE_ASM("code_6240_len_c00", fio_deserialize_state);
 
+INCLUDE_ASM("code_6240_len_c00", func_8002B608);
+
 INCLUDE_ASM("code_6240_len_c00", fio_serialize_state);
 
 void fio_init_flash(void) {

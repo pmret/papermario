@@ -69,3 +69,7 @@ u16 func_80145E98(s32 arg0, s32 arg1, s32 arg2) {
 }
 
 INCLUDE_ASM("code_dc470_len_14c0", func_80145EC0);
+
+INCLUDE_ASM("code_dc470_len_14c0", func_8014720C);
+
+INCLUDE_ASM("code_dc470_len_14c0", func_8014721C);

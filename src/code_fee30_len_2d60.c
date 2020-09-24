@@ -48,13 +48,15 @@ INCLUDE_ASM("code_fee30_len_2d60", func_802DD7B0);
 
 INCLUDE_ASM("code_fee30_len_2d60", func_802DD820);
 
-INCLUDE_ASM("code_fee30_len_2d60", func_802DD88C);
+INCLUDE_ASM("code_fee30_len_2d60", set_anim_timescale);
 
 INCLUDE_ASM("code_fee30_len_2d60", func_802DD89C);
 
 INCLUDE_ASM("code_fee30_len_2d60", func_802DD8F8);
 
 INCLUDE_ASM("code_fee30_len_2d60", func_802DDA60);
+
+INCLUDE_ASM("code_fee30_len_2d60", func_802DDA84);
 
 INCLUDE_ASM("code_fee30_len_2d60", func_802DDA8C);
 
@@ -65,6 +67,8 @@ INCLUDE_ASM("code_fee30_len_2d60", func_802DDEC4);
 INCLUDE_ASM("code_fee30_len_2d60", func_802DDEE4);
 
 INCLUDE_ASM("code_fee30_len_2d60", func_802DDFF8);
+
+INCLUDE_ASM("code_fee30_len_2d60", func_802DE044);
 
 INCLUDE_ASM("code_fee30_len_2d60", func_802DE0C0);
 
@@ -78,9 +82,13 @@ INCLUDE_ASM("code_fee30_len_2d60", func_802DE5C8);
 
 INCLUDE_ASM("code_fee30_len_2d60", func_802DE5E8);
 
+INCLUDE_ASM("code_fee30_len_2d60", func_802DE748);
+
 INCLUDE_ASM("code_fee30_len_2d60", func_802DE780);
 
 INCLUDE_ASM("code_fee30_len_2d60", func_802DE894);
+
+INCLUDE_ASM("code_fee30_len_2d60", func_802DE8DC);
 
 INCLUDE_ASM("code_fee30_len_2d60", func_802DE9D8);
 

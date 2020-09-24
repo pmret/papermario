@@ -233,7 +233,7 @@ ApiStatus func_802D4CC4(ScriptInstance* script, s32 initialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D4D18(ScriptInstance* script, s32 initialCall) {
+ApiStatus func_802D4D14(ScriptInstance* script, s32 initialCall) {
     s32 value = get_float_variable(script, *script->ptrReadPos);
 
     func_80137E4C(0, 0, 0xC, 0x14);
@@ -324,10 +324,10 @@ ApiStatus EnableStatusMenu(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus ShowStatusMenu(ScriptInstance* script, s32 isInitialCall) {
     if (get_variable(script, *script->ptrReadPos) != 0) {
-        status_menu_enable_ignore_changes();
+        func_800E9894();
         func_800E97B8();
     } else {
-        status_menu_disable_ignore_changes();
+        func_800E98C4();
     }
 
     return ApiStatus_DONE2;

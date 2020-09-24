@@ -1,6 +1,12 @@
 #include "common.h"
 
-INCLUDE_ASM("code_121f0_len_1290", func_80036DF0);
+INCLUDE_ASM("code_121f0_len_1290", begin_state_title_screen);
+
+INCLUDE_ASM("code_121f0_len_1290", step_title_screen);
+
+INCLUDE_ASM("code_121f0_len_1290", func_800375A4);
+
+INCLUDE_ASM("code_121f0_len_1290", func_80037638);
 
 INCLUDE_ASM("code_121f0_len_1290", func_80037960);
 

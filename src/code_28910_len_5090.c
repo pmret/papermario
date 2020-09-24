@@ -54,13 +54,63 @@ INCLUDE_ASM("code_28910_len_5090", func_8004EC04);
 
 INCLUDE_ASM("code_28910_len_5090", func_8004EC68);
 
+INCLUDE_ASM("code_28910_len_5090", func_8004FBBC);
+
 INCLUDE_ASM("code_28910_len_5090", func_8004FC08);
 
+INCLUDE_ASM("code_28910_len_5090", func_8004FCB4);
+
+INCLUDE_ASM("code_28910_len_5090", func_8004FCE4);
+
+INCLUDE_ASM("code_28910_len_5090", func_8004FD04);
+
 INCLUDE_ASM("code_28910_len_5090", func_8004FD38);
+
+INCLUDE_ASM("code_28910_len_5090", func_8004FD94);
+
+INCLUDE_ASM("code_28910_len_5090", func_8004FE10);
+
+INCLUDE_ASM("code_28910_len_5090", func_8004FE6C);
 
 INCLUDE_ASM("code_28910_len_5090", func_8004FEB0);
 
 INCLUDE_ASM("code_28910_len_5090", func_8004FED0);
+
+INCLUDE_ASM("code_28910_len_5090", func_8004FF3C);
+
+INCLUDE_ASM("code_28910_len_5090", func_8004FF58);
+
+INCLUDE_ASM("code_28910_len_5090", func_8004FF70);
+
+INCLUDE_ASM("code_28910_len_5090", func_8004FF88);
+
+INCLUDE_ASM("code_28910_len_5090", func_8004FFA8);
+
+INCLUDE_ASM("code_28910_len_5090", func_8004FFB4);
+
+INCLUDE_ASM("code_28910_len_5090", func_8004FFC8);
+
+INCLUDE_ASM("code_28910_len_5090", func_8004FFE4);
+
+INCLUDE_ASM("code_28910_len_5090", func_8004FFF0);
+
+INCLUDE_ASM("code_28910_len_5090", func_8004FFFC);
+
+INCLUDE_ASM("code_28910_len_5090", func_80050004);
+
+INCLUDE_ASM("code_28910_len_5090", func_80050020);
+
+INCLUDE_ASM("code_28910_len_5090", func_80050128);
+
+INCLUDE_ASM("code_28910_len_5090", func_8005015C);
+
+INCLUDE_ASM("code_28910_len_5090", func_80050184);
+
+INCLUDE_ASM("code_28910_len_5090", func_800501A8);
+
+INCLUDE_ASM("code_28910_len_5090", func_800502F0);
+
+INCLUDE_ASM("code_28910_len_5090", func_80050560);
 
 INCLUDE_ASM("code_28910_len_5090", func_80050568);
 

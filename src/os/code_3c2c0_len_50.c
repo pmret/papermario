@@ -1,3 +1,3 @@
 #include "common.h"
 
-s32 INCLUDE_ASM("os/code_3c2c0_len_50", osEPiLinkHandle, OSPiHandle* handle);
+INCLUDE_ASM_T(s32, "os/code_3c2c0_len_50", osEPiLinkHandle, OSPiHandle* handle);

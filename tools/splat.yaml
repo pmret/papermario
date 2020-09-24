@@ -1,6 +1,6 @@
 name: "Paper Mario (North America)"
 basename: "papermario"
-options: ["skip-asm"]
+options: ["find-file-boundaries", "skip-asm"]
 compiler: "GCC"
 segments:
   - name: header
@@ -255,6 +255,7 @@ segments:
     - [0x107830, "c", "code_107830_len_e70"]
     - [0x1086a0, "c", "code_1086a0_len_fc0"]
     - [0x109660, "c", "code_109660_len_1270"]
+    - [0x10A8D0, "c", "code_10A8D0"]
   - [0x10A9F0, "bin"] # todo split this further
   - [0x131340, "bin"] # 0x8023E000
   - name: code
