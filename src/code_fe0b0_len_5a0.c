@@ -11,7 +11,7 @@ ApiStatus EnableSpriteShading(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-s32 getDemoState(ScriptInstance* script) {
+s32 GetDemoState(ScriptInstance* script) {
     set_variable(script, *script->ptrReadPos, GAME_STATUS->demoState);
     return ApiStatus_DONE2;
 }

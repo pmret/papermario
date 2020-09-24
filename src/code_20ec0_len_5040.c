@@ -2,7 +2,11 @@
 
 INCLUDE_ASM("code_20ec0_len_5040", func_80045AC0);
 
+INCLUDE_ASM("code_20ec0_len_5040", func_80045B10);
+
 INCLUDE_ASM("code_20ec0_len_5040", func_80045B68);
+
+INCLUDE_ASM("code_20ec0_len_5040", func_80045BC8);
 
 INCLUDE_ASM("code_20ec0_len_5040", func_80045C28);
 
@@ -12,9 +16,19 @@ INCLUDE_ASM("code_20ec0_len_5040", func_80045CC4);
 
 INCLUDE_ASM("code_20ec0_len_5040", func_80045D00);
 
+INCLUDE_ASM("code_20ec0_len_5040", func_80045D7C);
+
+INCLUDE_ASM("code_20ec0_len_5040", func_80045E4C);
+
+INCLUDE_ASM("code_20ec0_len_5040", func_80045ED0);
+
 INCLUDE_ASM("code_20ec0_len_5040", func_80045FA4);
 
 INCLUDE_ASM("code_20ec0_len_5040", func_80045FB4);
+
+INCLUDE_ASM("code_20ec0_len_5040", func_80046030);
+
+INCLUDE_ASM("code_20ec0_len_5040", func_800465E0);
 
 INCLUDE_ASM("code_20ec0_len_5040", func_80047608);
 
@@ -88,11 +102,19 @@ INCLUDE_ASM("code_20ec0_len_5040", spawn_drops);
 
 INCLUDE_ASM("code_20ec0_len_5040", get_coin_drop_amount);
 
+INCLUDE_ASM("code_20ec0_len_5040", func_80048E34);
+
+INCLUDE_ASM("code_20ec0_len_5040", func_80048F0C);
+
 INCLUDE_ASM("code_20ec0_len_5040", is_point_within_region);
 
 INCLUDE_ASM("code_20ec0_len_5040", func_800490B4);
 
+INCLUDE_ASM("code_20ec0_len_5040", func_800493EC);
+
 INCLUDE_ASM("code_20ec0_len_5040", func_800494C0);
+
+INCLUDE_ASM("code_20ec0_len_5040", func_80049550);
 
 INCLUDE_ASM("code_20ec0_len_5040", func_800495A0);
 
@@ -112,7 +134,9 @@ INCLUDE_ASM("code_20ec0_len_5040", func_8004A124);
 
 INCLUDE_ASM("code_20ec0_len_5040", func_8004A3E8);
 
-INCLUDE_API_ASM("code_20ec0_len_5040", DoBasicAI);
+INCLUDE_ASM("code_20ec0_len_5040", DoBasicAI);
+
+INCLUDE_ASM("code_20ec0_len_5040", func_8004A6F0);
 
 INCLUDE_ASM("code_20ec0_len_5040", func_8004A73C);
 

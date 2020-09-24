@@ -6,6 +6,8 @@ INCLUDE_ASM("code_7340_len_b00", func_8002BFB0);
 
 INCLUDE_ASM("code_7340_len_b00", func_8002C054);
 
+INCLUDE_ASM("code_7340_len_b00", func_8002C1D4);
+
 INCLUDE_ASM("code_7340_len_b00", crash_printf_string);
 
 INCLUDE_ASM("code_7340_len_b00", crash_print_fpr);
@@ -21,3 +23,5 @@ INCLUDE_ASM("code_7340_len_b00", crash_monitor_thread);
 INCLUDE_ASM("code_7340_len_b00", func_8002C890);
 
 INCLUDE_ASM("code_7340_len_b00", crash_create_monitor);
+
+INCLUDE_ASM("code_7340_len_b00", func_8002C94C);

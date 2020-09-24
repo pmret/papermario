@@ -17,7 +17,7 @@ void func_800360FC(void) {
     GameStatus* gameStatus = *gGameStatusPtr;
 
     if (gameStatus->loadMenuState == 2) {
-        func_800E973C();
+        draw_status_ui();
     }
 }
 
@@ -42,7 +42,7 @@ s32 func_800363FC(void) {
     s32 phi_return;
 
     if ((D_800A0944 == 4) || (phi_return = 4, (D_800A0944 == 0))) {
-        phi_return = func_800E973C();
+        phi_return = draw_status_ui();
     }
     return phi_return;
 }

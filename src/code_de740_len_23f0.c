@@ -4,6 +4,8 @@ INCLUDE_ASM("code_de740_len_23f0", func_80148040);
 
 INCLUDE_ASM("code_de740_len_23f0", func_801480F0);
 
+INCLUDE_ASM("code_de740_len_23f0", func_80148154);
+
 INCLUDE_ASM("code_de740_len_23f0", func_801481C4);
 
 INCLUDE_ASM("code_de740_len_23f0", func_801489B8);
@@ -32,9 +34,13 @@ INCLUDE_ASM("code_de740_len_23f0", func_80149908);
 
 INCLUDE_ASM("code_de740_len_23f0", func_80149974);
 
+INCLUDE_ASM("code_de740_len_23f0", func_801499EC);
+
 INCLUDE_ASM("code_de740_len_23f0", func_80149A6C);
 
 INCLUDE_ASM("code_de740_len_23f0", _play_sound);
+
+INCLUDE_ASM("code_de740_len_23f0", func_80149BE4);
 
 INCLUDE_ASM("code_de740_len_23f0", stop_sound);
 

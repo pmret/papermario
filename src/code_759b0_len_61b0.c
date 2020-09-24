@@ -10,6 +10,8 @@ INCLUDE_ASM("code_759b0_len_61b0", func_800DCE70);
 
 INCLUDE_ASM("code_759b0_len_61b0", func_800DD04C);
 
+INCLUDE_ASM("code_759b0_len_61b0", func_800DD228);
+
 INCLUDE_ASM("code_759b0_len_61b0", func_800DD44C);
 
 INCLUDE_ASM("code_759b0_len_61b0", func_800DD5B4);
@@ -22,6 +24,8 @@ INCLUDE_ASM("code_759b0_len_61b0", func_800DDAE4);
 
 INCLUDE_ASM("code_759b0_len_61b0", func_800DDC44);
 
+INCLUDE_ASM("code_759b0_len_61b0", func_800DDCEC);
+
 INCLUDE_ASM("code_759b0_len_61b0", func_800DDD94);
 
 INCLUDE_ASM("code_759b0_len_61b0", test_below_player);
@@ -30,11 +34,11 @@ INCLUDE_ASM("code_759b0_len_61b0", func_800DE46C);
 
 INCLUDE_ASM("code_759b0_len_61b0", trace_below_player);
 
-INCLUDE_ASM("code_759b0_len_61b0", func_800DE7E4);
+INCLUDE_ASM("code_759b0_len_61b0", collision_check_above);
 
 INCLUDE_ASM("code_759b0_len_61b0", trace_above_player);
 
-INCLUDE_ASM("code_759b0_len_61b0", func_800DEC04);
+INCLUDE_ASM("code_759b0_len_61b0", do_lateral_collision);
 
 INCLUDE_ASM("code_759b0_len_61b0", func_800DEE5C);
 
@@ -44,7 +48,7 @@ INCLUDE_ASM("code_759b0_len_61b0", func_800DF3FC);
 
 INCLUDE_ASM("code_759b0_len_61b0", test_player_lateral);
 
-INCLUDE_ASM("code_759b0_len_61b0", func_800DF740);
+INCLUDE_ASM("code_759b0_len_61b0", update_player);
 
 INCLUDE_ASM("code_759b0_len_61b0", check_input_use_partner);
 
@@ -62,6 +66,8 @@ INCLUDE_ASM("code_759b0_len_61b0", func_800DFD48);
 
 INCLUDE_ASM("code_759b0_len_61b0", func_800DFEFC);
 
+INCLUDE_ASM("code_759b0_len_61b0", func_800DFF50);
+
 INCLUDE_ASM("code_759b0_len_61b0", func_800DFF78);
 
 INCLUDE_ASM("code_759b0_len_61b0", func_800DFFCC);
@@ -72,13 +78,13 @@ INCLUDE_ASM("code_759b0_len_61b0", enable_player_shadow);
 
 INCLUDE_ASM_T(void, "code_759b0_len_61b0", disable_player_shadow);
 
-INCLUDE_ASM("code_759b0_len_61b0", enable_player_physics);
+INCLUDE_ASM("code_759b0_len_61b0", disable_player_static_collisions);
 
-INCLUDE_ASM("code_759b0_len_61b0", disable_player_physics);
+INCLUDE_ASM("code_759b0_len_61b0", enable_player_static_collisions);
 
-INCLUDE_ASM("code_759b0_len_61b0", func_800E0178);
+INCLUDE_ASM("code_759b0_len_61b0", disable_player_input);
 
-INCLUDE_ASM("code_759b0_len_61b0", func_800E01A4);
+INCLUDE_ASM("code_759b0_len_61b0", enable_player_input);
 
 INCLUDE_ASM("code_759b0_len_61b0", func_800E01DC);
 
@@ -108,6 +114,8 @@ INCLUDE_ASM("code_759b0_len_61b0", func_800E069C);
 
 INCLUDE_ASM("code_759b0_len_61b0", func_800E06C0);
 
+INCLUDE_ASM("code_759b0_len_61b0", func_800E06D8);
+
 INCLUDE_ASM("code_759b0_len_61b0", func_800E0818);
 
 INCLUDE_ASM("code_759b0_len_61b0", func_800E0AD0);
@@ -124,16 +132,20 @@ INCLUDE_ASM("code_759b0_len_61b0", render_player);
 
 INCLUDE_ASM("code_759b0_len_61b0", render_player_model);
 
-INCLUDE_ASM("code_759b0_len_61b0", make_player_display_list);
+INCLUDE_ASM("code_759b0_len_61b0", appendGfx_player);
 
-INCLUDE_ASM("code_759b0_len_61b0", make_spinning_player_display_list);
+INCLUDE_ASM("code_759b0_len_61b0", appendGfx_player_spin);
 
-INCLUDE_ASM("code_759b0_len_61b0", update_below_player);
+INCLUDE_ASM("code_759b0_len_61b0", update_player_shadow);
 
-INCLUDE_ASM("code_759b0_len_61b0", func_800E1F90);
+INCLUDE_ASM("code_759b0_len_61b0", update_player_input);
 
 INCLUDE_ASM("code_759b0_len_61b0", func_800E205C);
 
-INCLUDE_ASM("code_759b0_len_61b0", func_800E2304);
+INCLUDE_ASM("code_759b0_len_61b0", func_800E22E4);
+
+INCLUDE_ASM("code_759b0_len_61b0", input_to_move_vector);
+
+INCLUDE_ASM("code_759b0_len_61b0", func_800E23FC);
 
 INCLUDE_ASM("code_759b0_len_61b0", func_800E24F8);

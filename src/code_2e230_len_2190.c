@@ -42,6 +42,8 @@ INCLUDE_ASM("code_2e230_len_2190", func_80053BE8);
 
 INCLUDE_ASM("code_2e230_len_2190", func_80053C58);
 
+INCLUDE_ASM("code_2e230_len_2190", func_80053CB4);
+
 INCLUDE_ASM("code_2e230_len_2190", func_80053CF8);
 
 INCLUDE_ASM("code_2e230_len_2190", func_80053E58);
@@ -60,13 +62,19 @@ INCLUDE_ASM("code_2e230_len_2190", al_LoadPER);
 
 INCLUDE_ASM("code_2e230_len_2190", al_LoadPRG);
 
+INCLUDE_ASM("code_2e230_len_2190", func_8005465C);
+
 INCLUDE_ASM("code_2e230_len_2190", func_80054744);
 
 INCLUDE_ASM("code_2e230_len_2190", al_LoadBank);
 
 INCLUDE_ASM("code_2e230_len_2190", func_800549F8);
 
+INCLUDE_ASM("code_2e230_len_2190", func_80054AA0);
+
 INCLUDE_ASM("code_2e230_len_2190", func_80054C4C);
+
+INCLUDE_ASM("code_2e230_len_2190", func_80054C84);
 
 INCLUDE_ASM("code_2e230_len_2190", func_80054CE0);
 
@@ -77,5 +85,7 @@ INCLUDE_ASM("code_2e230_len_2190", func_80054DA8);
 INCLUDE_ASM("code_2e230_len_2190", al_DmaCopy);
 
 INCLUDE_ASM("code_2e230_len_2190", func_80054E90);
+
+INCLUDE_ASM("code_2e230_len_2190", func_80054F48);
 
 INCLUDE_ASM("code_2e230_len_2190", al_CopyWords);

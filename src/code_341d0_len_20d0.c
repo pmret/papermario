@@ -4,6 +4,8 @@ INCLUDE_ASM("code_341d0_len_20d0", func_80058DD0);
 
 INCLUDE_ASM("code_341d0_len_20d0", func_80058E84);
 
+INCLUDE_ASM("code_341d0_len_20d0", func_80058F88);
+
 INCLUDE_ASM("code_341d0_len_20d0", func_80059008);
 
 INCLUDE_ASM("code_341d0_len_20d0", func_8005904C);
@@ -16,13 +18,21 @@ INCLUDE_ASM("code_341d0_len_20d0", func_80059AB8);
 
 INCLUDE_ASM("code_341d0_len_20d0", func_80059BD4);
 
+INCLUDE_ASM("code_341d0_len_20d0", func_80059C80);
+
+INCLUDE_ASM("code_341d0_len_20d0", func_80059C88);
+
 INCLUDE_ASM("code_341d0_len_20d0", func_80059C9C);
+
+INCLUDE_ASM("code_341d0_len_20d0", func_80059D48);
 
 INCLUDE_ASM("code_341d0_len_20d0", func_80059D50);
 
 INCLUDE_ASM("code_341d0_len_20d0", render_effects);
 
 INCLUDE_ASM("code_341d0_len_20d0", func_80059F94);
+
+INCLUDE_ASM("code_341d0_len_20d0", func_8005A2BC);
 
 INCLUDE_ASM("code_341d0_len_20d0", remove_effect);
 

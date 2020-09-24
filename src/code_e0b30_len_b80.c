@@ -21,6 +21,10 @@ INCLUDE_ASM("code_e0b30_len_b80", func_8014AA54);
 
 INCLUDE_ASM("code_e0b30_len_b80", func_8014AB0C);
 
+INCLUDE_ASM("code_e0b30_len_b80", func_8014AB60);
+
+INCLUDE_ASM("code_e0b30_len_b80", func_8014ABB4);
+
 INCLUDE_ASM("code_e0b30_len_b80", func_8014AC08);
 
 INCLUDE_ASM("code_e0b30_len_b80", func_8014AC5C);
@@ -31,6 +35,8 @@ INCLUDE_ASM("code_e0b30_len_b80", func_8014AC84);
 
 INCLUDE_ASM("code_e0b30_len_b80", func_8014AC94);
 
+INCLUDE_ASM("code_e0b30_len_b80", func_8014AD40);
+
 INCLUDE_ASM("code_e0b30_len_b80", func_8014ADA4);
 
 INCLUDE_ASM("code_e0b30_len_b80", func_8014ADF8);
@@ -40,3 +46,5 @@ INCLUDE_ASM("code_e0b30_len_b80", func_8014AE6C);
 INCLUDE_ASM("code_e0b30_len_b80", func_8014AEF8);
 
 INCLUDE_ASM("code_e0b30_len_b80", func_8014AF8C);
+
+INCLUDE_ASM("code_e0b30_len_b80", func_8014AFA0);

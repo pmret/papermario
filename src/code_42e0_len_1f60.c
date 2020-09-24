@@ -55,6 +55,8 @@ void copy_matrix(Matrix4f* src, Matrix4f* dest) {
 
 INCLUDE_ASM("code_42e0_len_1f60", dma_copy);
 
+INCLUDE_ASM("code_42e0_len_1f60", func_800297D4);
+
 INCLUDE_ASM("code_42e0_len_1f60", func_80029860);
 
 s32 _advance_rng(void) {

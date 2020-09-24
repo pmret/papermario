@@ -21,11 +21,11 @@ ApiStatus si_handle_label(ScriptInstance* script) {
 }
 
 ApiStatus si_handle_goto(ScriptInstance* script) {
-    script->ptrNextLine = si_goto_label(script, get_variable(script, *script->ptrReadPos));
+    script->ptrNextLine = si_find_label(script, get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
 
-ApiStatus si_handle_Loop(ScriptInstance* script) {
+ApiStatus si_handle_loop(ScriptInstance* script) {
     Bytecode* thisPos = script->ptrReadPos;
     Bytecode var = *thisPos++;
     s32 loopDepth = ++script->loopDepth;
@@ -673,6 +673,8 @@ ApiStatus si_handle_resume(ScriptInstance* script) {
 
 INCLUDE_API_ASM("code_e92d0_len_5da0", si_handle_does_script_exist);
 
+INCLUDE_ASM("code_e92d0_len_5da0", func_802C6AD0);
+
 INCLUDE_API_ASM("code_e92d0_len_5da0", si_handle_bind_lock);
 
 INCLUDE_API_ASM("code_e92d0_len_5da0", si_handle_thread);
@@ -787,7 +789,7 @@ INCLUDE_ASM_T(f32, "code_e92d0_len_5da0", get_float_variable, ScriptInstance* sc
 
 INCLUDE_ASM_T(f32, "code_e92d0_len_5da0", set_float_variable, ScriptInstance* script, Bytecode var, f32 value);
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_goto_label);
+INCLUDE_ASM("code_e92d0_len_5da0", si_find_label);
 
 INCLUDE_ASM("code_e92d0_len_5da0", si_skip_if);
 // Matching but needs rodata support
@@ -872,7 +874,7 @@ INCLUDE_ASM("code_e92d0_len_5da0", si_goto_next_case);
 INCLUDE_ASM("code_e92d0_len_5da0", si_goto_end_loop);
 
 // Ethan: I think this is the start of a new file
-INCLUDE_API_ASM("code_e92d0_len_5da0", TranslateModel);
+//INCLUDE_API_ASM("code_e92d0_len_5da0", TranslateModel);
 
 INCLUDE_API_ASM("code_e92d0_len_5da0", RotateModel);
 
@@ -926,6 +928,10 @@ INCLUDE_API_ASM("code_e92d0_len_5da0", SetTexPanner);
 
 INCLUDE_API_ASM("code_e92d0_len_5da0", SetModelFlag10);
 
+INCLUDE_ASM("code_e92d0_len_5da0", func_802C90FC);
+
+INCLUDE_ASM("code_e92d0_len_5da0", func_802C91A4);
+
 INCLUDE_API_ASM("code_e92d0_len_5da0", EnableTexPanning);
 
 ApiStatus EnableModel(ScriptInstance* script, s32 isInitialCall) {
@@ -954,9 +960,17 @@ ApiStatus SetGroupEnabled(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_API_ASM("code_e92d0_len_5da0", SetTexPanOffset);
 
+INCLUDE_ASM("code_e92d0_len_5da0", func_802C9428);
+
+INCLUDE_ASM("code_e92d0_len_5da0", func_802C94A0);
+
 INCLUDE_API_ASM("code_e92d0_len_5da0", SetModelFlags);
 
 INCLUDE_ASM("code_e92d0_len_5da0", func_802C95A0);
+
+INCLUDE_ASM("code_e92d0_len_5da0", func_802C971C);
+
+INCLUDE_ASM("code_e92d0_len_5da0", func_802C9748);
 
 INCLUDE_API_ASM("code_e92d0_len_5da0", TranslateGroup);
 
@@ -964,13 +978,19 @@ INCLUDE_API_ASM("code_e92d0_len_5da0", RotateGroup);
 
 INCLUDE_API_ASM("code_e92d0_len_5da0", ScaleGroup);
 
+INCLUDE_ASM("code_e92d0_len_5da0", func_802C9B40);
+
 INCLUDE_API_ASM("code_e92d0_len_5da0", EnableGroup);
+
+INCLUDE_ASM("code_e92d0_len_5da0", func_802C9C70);
 
 INCLUDE_ASM("code_e92d0_len_5da0", modify_collider_family_flags);
 
 INCLUDE_API_ASM("code_e92d0_len_5da0", ModifyColliderFlags);
 
 INCLUDE_API_ASM("code_e92d0_len_5da0", ResetFromLava);
+
+INCLUDE_ASM("code_e92d0_len_5da0", func_802C9FD4);
 
 ApiStatus GetColliderCenter(ScriptInstance* script, s32 initialCall) {
     f32 x;
@@ -993,7 +1013,9 @@ ApiStatus UpdateColliderTransform(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM("code_e92d0_len_5da0", func_802CA1B8);
+INCLUDE_ASM("code_e92d0_len_5da0", set_zone_enabled);
+
+INCLUDE_ASM("code_e92d0_len_5da0", SetZoneEnabled);
 
 INCLUDE_ASM("code_e92d0_len_5da0", goto_map);
 

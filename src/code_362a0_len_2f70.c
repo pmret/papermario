@@ -4,6 +4,8 @@ INCLUDE_ASM("code_362a0_len_2f70", allocate_hit_tables);
 
 INCLUDE_ASM("code_362a0_len_2f70", func_8005AF84);
 
+INCLUDE_ASM("code_362a0_len_2f70", func_8005AF8C);
+
 INCLUDE_ASM("code_362a0_len_2f70", initialize_collision);
 
 INCLUDE_ASM("code_362a0_len_2f70", load_hit_asset);
@@ -41,3 +43,9 @@ INCLUDE_ASM("code_362a0_len_2f70", test_ray_zones);
 INCLUDE_ASM("code_362a0_len_2f70", test_up_ray_collider);
 
 INCLUDE_ASM("code_362a0_len_2f70", test_ray_entities);
+
+INCLUDE_ASM("code_362a0_len_2f70", func_8005DB00);
+
+INCLUDE_ASM("code_362a0_len_2f70", func_8005DD54);
+
+INCLUDE_ASM("code_362a0_len_2f70", func_8005DDF0);

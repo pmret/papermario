@@ -354,16 +354,16 @@ void show_coin_counter(void) {
     }
 
     if (uiStatus->unk_6C[0] == 0) {
-        func_80147CC8(0x14, 0x20, 0xa4, 0x40, 0x14, 0x15, &D_800E92D8, 0, -1);
+        set_ui_panel_properties(0x14, 0x20, 0xa4, 0x40, 0x14, 0x15, &D_800E92D8, 0, -1);
         func_80147E7C(0x14, &D_80147474);
         index = create_icon(&D_80109270);
         uiStatus->iconIndex10 = index;
         set_icon_flags(index, 0x80);
-        func_80144EFC(index, 0xff, 0xff, 0xff);
+        icon_set_tint(index, 0xff, 0xff, 0xff);
         index = create_icon(&D_80108558);
         uiStatus->iconIndex11 = index;
         set_icon_flags(index, 0x80);
-        func_80144EFC(index, 0xff, 0xff, 0xff);
+        icon_set_tint(index, 0xff, 0xff, 0xff);
         uiStatus->unk_6C[0] = 0;
 
         if (uiStatus->unk_6C[2] < 0) {
@@ -401,7 +401,7 @@ ApiStatus ShowCoinCounter(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-void func_800E973C(void) {
+void draw_status_ui(void) {
     update_status_menu();
     update_coin_counter();
 }
@@ -480,7 +480,7 @@ s32 func_800E9860(void) {
     return ret;
 }
 
-void status_menu_enable_ignore_changes(void) {
+void func_800E9894(void) {
     gUIStatus.ignoreChanges = 1;
 }
 
@@ -491,7 +491,7 @@ void func_800E98A8(void) {
     uiStatus->drawPosY = 18;
 }
 
-void status_menu_disable_ignore_changes(void) {
+void func_800E98C4(void) {
     gUIStatus.ignoreChanges = 0;
 }
 
@@ -1048,6 +1048,7 @@ void set_max_SP(s8 newMaxSP) {
 }
 
 void add_SP(s32 amt) {
+    // TODO cleanup
     PlayerData* playerData = &gPlayerData;
     PlayerData* playerData2 = &gPlayerData;
     UiStatus* uiStatus = &gUIStatus;

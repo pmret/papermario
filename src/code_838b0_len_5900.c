@@ -6,7 +6,13 @@ INCLUDE_ASM("code_838b0_len_5900", remove_consumable);
 
 INCLUDE_ASM("code_838b0_len_5900", func_800EA4B0);
 
-INCLUDE_ASM("code_838b0_len_5900", func_800EA5A4);
+INCLUDE_ASM("code_838b0_len_5900", func_800EA514);
+
+INCLUDE_ASM("code_838b0_len_5900", func_800EA524);
+
+INCLUDE_ASM("code_838b0_len_5900", func_800EA52C);
+
+INCLUDE_ASM("code_838b0_len_5900", is_current_partner_flying);
 
 INCLUDE_ASM("code_838b0_len_5900", func_800EA5B8);
 
@@ -20,25 +26,37 @@ INCLUDE_ASM("code_838b0_len_5900", func_800EB168);
 
 INCLUDE_ASM("code_838b0_len_5900", func_800EB200);
 
-INCLUDE_ASM("code_838b0_len_5900", use_partner_ability);
+INCLUDE_ASM("code_838b0_len_5900", func_800EB2A4);
 
-INCLUDE_ASM("code_838b0_len_5900", func_800EB3E0);
+INCLUDE_ASM("code_838b0_len_5900", partner_use_ability);
 
-INCLUDE_ASM("code_838b0_len_5900", func_800EB42C);
+INCLUDE_ASM("code_838b0_len_5900", partner_player_can_pause);
 
-INCLUDE_ASM("code_838b0_len_5900", func_800EB474);
+INCLUDE_ASM("code_838b0_len_5900", partner_can_use_ability);
 
-INCLUDE_ASM("code_838b0_len_5900", func_800EB580);
+INCLUDE_ASM("code_838b0_len_5900", partner_reset_data);
 
-INCLUDE_ASM("code_838b0_len_5900", func_800EB5E4);
+INCLUDE_ASM("code_838b0_len_5900", partner_initialize_data);
 
-INCLUDE_ASM("code_838b0_len_5900", func_800EB638);
+INCLUDE_ASM("code_838b0_len_5900", partner_test_enemy_collision);
 
-INCLUDE_ASM("code_838b0_len_5900", func_800EB658);
+INCLUDE_ASM("code_838b0_len_5900", partner_get_ride_script);
 
-INCLUDE_ASM("code_838b0_len_5900", func_800EB6C4);
+INCLUDE_ASM("code_838b0_len_5900", partner_handle_before_battle);
+
+INCLUDE_ASM("code_838b0_len_5900", partner_handle_after_battle);
+
+INCLUDE_ASM("code_838b0_len_5900", partner_kill_ability_script);
+
+INCLUDE_ASM("code_838b0_len_5900", partner_suspend_ability_script);
+
+INCLUDE_ASM("code_838b0_len_5900", partner_resume_ability_script);
 
 INCLUDE_ASM("code_838b0_len_5900", enable_partner_walking);
+
+INCLUDE_ASM("code_838b0_len_5900", func_800EBA3C);
+
+INCLUDE_ASM("code_838b0_len_5900", func_800EBB40);
 
 INCLUDE_ASM("code_838b0_len_5900", func_800EBC74);
 
@@ -46,7 +64,17 @@ INCLUDE_ASM("code_838b0_len_5900", enable_partner_flying);
 
 INCLUDE_ASM("code_838b0_len_5900", update_player_move_history);
 
+INCLUDE_ASM("code_838b0_len_5900", func_800ED5D0);
+
 INCLUDE_ASM("code_838b0_len_5900", func_800ED9F8);
+
+INCLUDE_ASM("code_838b0_len_5900", func_800EE994);
+
+INCLUDE_ASM("code_838b0_len_5900", func_800EE9B8);
+
+INCLUDE_ASM("code_838b0_len_5900", func_800EECC4);
+
+INCLUDE_ASM("code_838b0_len_5900", func_800EECE8);
 
 INCLUDE_ASM("code_838b0_len_5900", func_800EF300);
 
@@ -69,6 +97,8 @@ INCLUDE_ASM("code_838b0_len_5900", func_800EF414);
 INCLUDE_ASM("code_838b0_len_5900", func_800EF43C);
 
 INCLUDE_ASM("code_838b0_len_5900", clear_partner_move_history);
+
+INCLUDE_ASM("code_838b0_len_5900", func_800EF4E0);
 
 INCLUDE_ASM("code_838b0_len_5900", func_800EF600);
 

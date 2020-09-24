@@ -12,6 +12,8 @@ Npc* resolve_npc(ScriptInstance* script, NpcId npcIdOrPtr) {
 
 INCLUDE_ASM("code_f2470_len_27f0", set_npc_animation);
 
+INCLUDE_ASM("code_f2470_len_27f0", CreateNpc);
+
 ApiStatus DeleteNpc(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
     Npc* npc = get_npc_unsafe(get_variable(script, *ptrReadPos++));
@@ -35,6 +37,8 @@ ApiStatus GetNpcPointer(ScriptInstance* script, s32 isInitialCall) {
 INCLUDE_API_ASM("code_f2470_len_27f0", SetNpcPos);
 
 INCLUDE_API_ASM("code_f2470_len_27f0", SetNpcRotation);
+
+INCLUDE_API_ASM("code_f2470_len_27f0", func_802CDE68);
 
 ApiStatus SetNpcScale(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
@@ -191,6 +195,10 @@ INCLUDE_API_ASM("code_f2470_len_27f0", SetNpcFlagBits);
 
 INCLUDE_API_ASM("code_f2470_len_27f0", GetNpcPos);
 
+INCLUDE_ASM("code_f2470_len_27f0", func_802CF1B4);
+
+INCLUDE_ASM("code_f2470_len_27f0", func_802CF208);
+
 ApiStatus EnableNpcShadow(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
     NpcId npcID = get_variable(script, *ptrReadPos++);
@@ -286,11 +294,25 @@ ApiStatus func_802CF56C(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_API_ASM("code_f2470_len_27f0", BringPartnerOut);
+INCLUDE_ASM("code_f2470_len_27f0", BringPartnerOut);
 
-INCLUDE_API_ASM("code_f2470_len_27f0", PutPartnerAway);
+INCLUDE_ASM("code_f2470_len_27f0", PutPartnerAway);
 
-INCLUDE_API_ASM("code_f2470_len_27f0", GetCurrentPartnerID);
+INCLUDE_ASM("code_f2470_len_27f0", GetCurrentPartnerID);
+
+INCLUDE_ASM("code_f2470_len_27f0", PartnerCanUseAbility);
+
+INCLUDE_ASM("code_f2470_len_27f0", PartnerIsFlying);
+
+INCLUDE_ASM("code_f2470_len_27f0", func_802CFD30);
+
+INCLUDE_ASM("code_f2470_len_27f0", func_802CFE2C);
+
+INCLUDE_ASM("code_f2470_len_27f0", func_802CFE80);
+
+INCLUDE_ASM("code_f2470_len_27f0", func_802CFEEC);
+
+INCLUDE_ASM("code_f2470_len_27f0", func_802CFFC0);
 
 ApiStatus SetNpcEffect(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
@@ -320,7 +342,7 @@ ApiStatus PlaySoundAtNpc(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetNpcRenderMode(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802D0244(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
     NpcId npcID = get_variable(script, *ptrReadPos++);
     u8 renderMode = get_variable(script, *ptrReadPos++);
