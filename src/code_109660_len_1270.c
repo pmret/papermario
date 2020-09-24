@@ -65,5 +65,3 @@ void func_802E8E10(Entity* entity) {
 INCLUDE_ASM("code_109660_len_1270", push_entity_matrix);
 
 INCLUDE_ASM("code_109660_len_1270", func_802E8F94);
-
-INCLUDE_ASM("code_109660_len_1270", func_802E9050);
