@@ -142,7 +142,7 @@ INCLUDE_ASM("code_303c0_len_3e10", func_80056250);
 
 INCLUDE_ASM("code_303c0_len_3e10", func_800565A4);
 
-INCLUDE_ASM_T(Acmd*, "code_303c0_len_3e10", alAudioFrame, Acmd *cmdList, s32 *cmdLen, s16 *outBuf, s32 outLen);
+INCLUDE_ASM_T(Acmd*, "code_303c0_len_3e10", alAudioFrame, Acmd* cmdList, s32* cmdLen, s16* outBuf, s32 outLen);
 
 INCLUDE_ASM("code_303c0_len_3e10", func_80056D34);
 
@@ -211,7 +211,7 @@ INCLUDE_ASM("code_303c0_len_3e10", func_80057ED0);
 INCLUDE_ASM("code_303c0_len_3e10", func_80057F20);
 
 #undef alHeapAlloc
-INCLUDE_ASM_T(void, "code_303c0_len_3e10", alHeapAlloc, u8 *file, s32 line, ALHeap *hp, s32 num, s32 size);
+INCLUDE_ASM_T(void, "code_303c0_len_3e10", alHeapAlloc, u8* file, s32 line, ALHeap* hp, s32 num, s32 size);
 
 INCLUDE_ASM("code_303c0_len_3e10", func_80057FD8);
 

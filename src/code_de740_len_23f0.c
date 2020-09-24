@@ -62,7 +62,8 @@ void play_sound_at_npc(s32 soundID, s32 arg1, s32 npcID) {
     }
 }
 
-INCLUDE_ASM_T(s32, "code_de740_len_23f0", play_sound_at_position, s32 soundID, s32 value2, f32 posX, f32 posY, f32 posZ);
+INCLUDE_ASM_T(s32, "code_de740_len_23f0", play_sound_at_position, s32 soundID, s32 value2, f32 posX, f32 posY,
+              f32 posZ);
 
 INCLUDE_ASM("code_de740_len_23f0", func_80149E04);
 
