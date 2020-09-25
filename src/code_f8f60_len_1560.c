@@ -248,9 +248,9 @@ ApiStatus func_802D4D88(ScriptInstance* script, s32 initialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM("code_f8f60_len_1560", setup_path_data);
+INCLUDE_ASM(s32, "code_f8f60_len_1560", setup_path_data);
 
-INCLUDE_ASM("code_f8f60_len_1560", func_802D5270);
+INCLUDE_ASM(s32, "code_f8f60_len_1560", func_802D5270);
 
 INCLUDE_API_ASM("code_f8f60_len_1560", LoadPath);
 

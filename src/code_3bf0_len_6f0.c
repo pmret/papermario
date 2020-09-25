@@ -24,6 +24,6 @@ void func_800287F0(void) {
     }
 }
 
-INCLUDE_ASM("code_3bf0_len_6f0", func_80028838);
+INCLUDE_ASM(s32, "code_3bf0_len_6f0", func_80028838);
 
-INCLUDE_ASM("code_3bf0_len_6f0", update_input);
+INCLUDE_ASM(s32, "code_3bf0_len_6f0", update_input);

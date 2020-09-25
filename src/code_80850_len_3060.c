@@ -268,13 +268,13 @@ void enforce_hpfp_limits(void) {
     }
 }
 
-INCLUDE_ASM("code_80850_len_3060", initialize_status_menu);
+INCLUDE_ASM(s32, "code_80850_len_3060", initialize_status_menu);
 
-INCLUDE_ASM("code_80850_len_3060", status_menu_draw_number);
+INCLUDE_ASM(s32, "code_80850_len_3060", status_menu_draw_number);
 
-INCLUDE_ASM("code_80850_len_3060", status_menu_draw_stat);
+INCLUDE_ASM(s32, "code_80850_len_3060", status_menu_draw_stat);
 
-INCLUDE_ASM("code_80850_len_3060", update_status_menu);
+INCLUDE_ASM(s32, "code_80850_len_3060", update_status_menu);
 
 void coin_counter_draw_content(UNK_TYPE arg0, s32 posX, s32 posY) {
     UiStatus* uiStatus = &gUIStatus;
@@ -965,7 +965,7 @@ s32 is_ability_active(s32 arg0) {
     }
 }
 #else
-INCLUDE_ASM_T(s32, "code_80850_len_3060", is_ability_active, s32 arg0);
+INCLUDE_ASM(s32, "code_80850_len_3060", is_ability_active, s32 arg0);
 #endif
 
 s32 is_partner_ability_active(void) {

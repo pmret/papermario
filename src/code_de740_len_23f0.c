@@ -1,48 +1,48 @@
 #include "common.h"
 
-INCLUDE_ASM("code_de740_len_23f0", func_80148040);
+INCLUDE_ASM(s32, "code_de740_len_23f0", func_80148040);
 
-INCLUDE_ASM("code_de740_len_23f0", func_801480F0);
+INCLUDE_ASM(s32, "code_de740_len_23f0", func_801480F0);
 
-INCLUDE_ASM("code_de740_len_23f0", func_80148154);
+INCLUDE_ASM(s32, "code_de740_len_23f0", func_80148154);
 
-INCLUDE_ASM("code_de740_len_23f0", func_801481C4);
+INCLUDE_ASM(s32, "code_de740_len_23f0", func_801481C4);
 
-INCLUDE_ASM("code_de740_len_23f0", func_801489B8);
+INCLUDE_ASM(s32, "code_de740_len_23f0", func_801489B8);
 
-INCLUDE_ASM("code_de740_len_23f0", func_801491E4);
+INCLUDE_ASM(s32, "code_de740_len_23f0", func_801491E4);
 
-INCLUDE_ASM("code_de740_len_23f0", func_80149250);
+INCLUDE_ASM(s32, "code_de740_len_23f0", func_80149250);
 
-INCLUDE_ASM("code_de740_len_23f0", func_80149600);
+INCLUDE_ASM(s32, "code_de740_len_23f0", func_80149600);
 
-INCLUDE_ASM("code_de740_len_23f0", func_80149618);
+INCLUDE_ASM(s32, "code_de740_len_23f0", func_80149618);
 
-INCLUDE_ASM("code_de740_len_23f0", func_80149670);
+INCLUDE_ASM(s32, "code_de740_len_23f0", func_80149670);
 
-INCLUDE_ASM("code_de740_len_23f0", func_80149734);
+INCLUDE_ASM(s32, "code_de740_len_23f0", func_80149734);
 
-INCLUDE_ASM("code_de740_len_23f0", func_801497FC);
+INCLUDE_ASM(s32, "code_de740_len_23f0", func_801497FC);
 
-INCLUDE_ASM("code_de740_len_23f0", func_80149828);
+INCLUDE_ASM(s32, "code_de740_len_23f0", func_80149828);
 
-INCLUDE_ASM("code_de740_len_23f0", func_80149838);
+INCLUDE_ASM(s32, "code_de740_len_23f0", func_80149838);
 
-INCLUDE_ASM("code_de740_len_23f0", func_801498C4);
+INCLUDE_ASM(s32, "code_de740_len_23f0", func_801498C4);
 
-INCLUDE_ASM("code_de740_len_23f0", func_80149908);
+INCLUDE_ASM(s32, "code_de740_len_23f0", func_80149908);
 
-INCLUDE_ASM("code_de740_len_23f0", func_80149974);
+INCLUDE_ASM(s32, "code_de740_len_23f0", func_80149974);
 
-INCLUDE_ASM("code_de740_len_23f0", func_801499EC);
+INCLUDE_ASM(s32, "code_de740_len_23f0", func_801499EC);
 
-INCLUDE_ASM("code_de740_len_23f0", func_80149A6C);
+INCLUDE_ASM(s32, "code_de740_len_23f0", func_80149A6C);
 
-INCLUDE_ASM("code_de740_len_23f0", _play_sound);
+INCLUDE_ASM(s32, "code_de740_len_23f0", _play_sound);
 
-INCLUDE_ASM("code_de740_len_23f0", func_80149BE4);
+INCLUDE_ASM(s32, "code_de740_len_23f0", func_80149BE4);
 
-INCLUDE_ASM("code_de740_len_23f0", stop_sound);
+INCLUDE_ASM(s32, "code_de740_len_23f0", stop_sound);
 
 void play_sound(s32 soundID) {
     _play_sound(soundID, 0, 0, 0);
@@ -62,11 +62,11 @@ void play_sound_at_npc(s32 soundID, s32 arg1, s32 npcID) {
     }
 }
 
-INCLUDE_ASM_T(s32, "code_de740_len_23f0", play_sound_at_position, s32 soundID, s32 value2, f32 posX, f32 posY,
+INCLUDE_ASM(s32, "code_de740_len_23f0", play_sound_at_position, s32 soundID, s32 value2, f32 posX, f32 posY,
               f32 posZ);
 
-INCLUDE_ASM("code_de740_len_23f0", func_80149E04);
+INCLUDE_ASM(s32, "code_de740_len_23f0", func_80149E04);
 
-INCLUDE_ASM("code_de740_len_23f0", func_80149F58);
+INCLUDE_ASM(s32, "code_de740_len_23f0", func_80149F58);
 
-INCLUDE_ASM("code_de740_len_23f0", func_8014A1B4);
+INCLUDE_ASM(s32, "code_de740_len_23f0", func_8014A1B4);

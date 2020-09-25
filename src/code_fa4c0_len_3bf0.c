@@ -1,8 +1,8 @@
 #include "common.h"
 
-INCLUDE_ASM("code_fa4c0_len_3bf0", func_802D5B10);
+INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D5B10);
 
-INCLUDE_ASM("code_fa4c0_len_3bf0", func_802D5C70);
+INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D5C70);
 
 ApiStatus FadeOutMusic(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
@@ -24,23 +24,23 @@ ApiStatus SetMusicTrack(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_API_ASM("code_fa4c0_len_3bf0", FadeInMusic);
 
-INCLUDE_ASM("code_fa4c0_len_3bf0", func_802D5EE0);
+INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D5EE0);
 
-INCLUDE_ASM("code_fa4c0_len_3bf0", func_802D5F28);
+INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D5F28);
 
-INCLUDE_ASM("code_fa4c0_len_3bf0", func_802D5FA4);
+INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D5FA4);
 
-INCLUDE_ASM("code_fa4c0_len_3bf0", func_802D5FD8);
+INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D5FD8);
 
-INCLUDE_ASM("code_fa4c0_len_3bf0", func_802D5FF8);
+INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D5FF8);
 
-INCLUDE_ASM("code_fa4c0_len_3bf0", func_802D6050);
+INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D6050);
 
-INCLUDE_ASM("code_fa4c0_len_3bf0", func_802D6070);
+INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D6070);
 
-INCLUDE_ASM("code_fa4c0_len_3bf0", func_802D6090);
+INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D6090);
 
-INCLUDE_ASM("code_fa4c0_len_3bf0", ClearAmbientSounds);
+INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", ClearAmbientSounds);
 
 ApiStatus PlayAmbientSounds(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
@@ -108,9 +108,9 @@ ApiStatus func_802D6340(ScriptInstance* script, s32 initialCall) {
 
 INCLUDE_API_ASM("code_fa4c0_len_3bf0", PlaySoundAtF);
 
-INCLUDE_ASM("code_fa4c0_len_3bf0", func_802D6420);
+INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D6420);
 
-INCLUDE_ASM("code_fa4c0_len_3bf0", func_802D663C);
+INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D663C);
 
 ApiStatus RemoveKeyItemAt(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
@@ -344,7 +344,7 @@ ApiStatus SetItemPos(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_API_ASM("code_fa4c0_len_3bf0", SetItemFlags);
 
-INCLUDE_ASM("code_fa4c0_len_3bf0", func_802D721C);
+INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D721C);
 
 ApiStatus AddCoin(ScriptInstance* script, s32 isInitialCall) {
     script->varTable[0] = add_coins(get_variable(script, *script->ptrReadPos));
@@ -380,15 +380,15 @@ INCLUDE_API_ASM("code_fa4c0_len_3bf0", GetItemPower);
 
 INCLUDE_API_ASM("code_fa4c0_len_3bf0", ShowGotItem);
 
-INCLUDE_ASM("code_fa4c0_len_3bf0", func_802D7460);
+INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D7460);
 
-INCLUDE_ASM("code_fa4c0_len_3bf0", func_802D74C0);
+INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D74C0);
 
-INCLUDE_ASM("code_fa4c0_len_3bf0", func_802D7520);
+INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D7520);
 
-INCLUDE_ASM("code_fa4c0_len_3bf0", func_802D75D8);
+INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D75D8);
 
-INCLUDE_ASM("code_fa4c0_len_3bf0", func_802D7690);
+INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D7690);
 
 INCLUDE_API_ASM("code_fa4c0_len_3bf0", ShowEmote);
 
@@ -435,20 +435,20 @@ ApiStatus func_802D7B74(ScriptInstance* script, s32 isInitialCall) {
 INCLUDE_API_ASM("code_fa4c0_len_3bf0", RemoveEffect);
 #endif
 
-INCLUDE_ASM("code_fa4c0_len_3bf0", func_802D7B10);
+INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D7B10);
 
-INCLUDE_ASM("code_fa4c0_len_3bf0", func_802D7B44);
+INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D7B44);
 
-INCLUDE_ASM("code_fa4c0_len_3bf0", func_802D7B74);
+INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D7B74);
 
-INCLUDE_ASM("code_fa4c0_len_3bf0", func_802D7BA4);
+INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D7BA4);
 
-INCLUDE_ASM("code_fa4c0_len_3bf0", func_802D7CF8);
+INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D7CF8);
 
-INCLUDE_ASM("code_fa4c0_len_3bf0", func_802D7E08);
+INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D7E08);
 
-INCLUDE_ASM("code_fa4c0_len_3bf0", ShowSleepBubble);
+INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", ShowSleepBubble);
 
-INCLUDE_ASM("code_fa4c0_len_3bf0", func_802D8248);
+INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D8248);
 
-INCLUDE_ASM("code_fa4c0_len_3bf0", PlayEffect);
+INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", PlayEffect);

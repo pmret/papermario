@@ -15,8 +15,8 @@ s32 func_802B7000(f32 angle) {
     return 0xFF - angleDiff - angleDiff;
 }
 
-INCLUDE_ASM("code_e20eb0", func_802B70B4);
+INCLUDE_ASM(s32, "code_e20eb0", func_802B70B4);
 
-INCLUDE_ASM("code_e20eb0", func_802B71C8);
+INCLUDE_ASM(s32, "code_e20eb0", func_802B71C8);
 
-INCLUDE_ASM("code_e20eb0", func_802B742C);
+INCLUDE_ASM(s32, "code_e20eb0", func_802B742C);

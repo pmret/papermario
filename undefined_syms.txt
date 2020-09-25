@@ -27,6 +27,8 @@ D_800A0944 = 0x800A0944;
 
 D_8010CD10 = 0x8010CD10;
 D_8010CD12 = 0x8010CD12;
+D_8010CD20 = 0x8010CD20;
+D_8010F094 = 0x8010F094;
 
 gBattleStatus = 0x800DC070;
 
@@ -103,6 +105,10 @@ gCurrentEntityListPtr = 0x80151470;
 gWorldShadowList = 0x80151478;
 gBattleShadowList = 0x80151568;
 gCurrentShadowListPtr = 0x80151658;
+
+gWorldNpcList = 0x800A0990;
+gBattleNpcList = 0x800A0A90;
+gCurrentNpcListPtr = 0x800A0B90;
 
 gMainGameState = 0x80151700;
 gCurrentUpdateFunction = 0x8015170C;

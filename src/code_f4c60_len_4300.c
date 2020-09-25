@@ -16,7 +16,7 @@ ApiStatus SpeakToNpc(ScriptInstance* script, s32 isInitialCall) {
     return _show_message(script, isInitialCall, 3);
 }
 
-INCLUDE_ASM("code_f4c60_len_4300", _show_message);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", _show_message);
 
 INCLUDE_API_ASM("code_f4c60_len_4300", ShowMessageAtScreenPos);
 
@@ -164,11 +164,11 @@ INCLUDE_API_ASM("code_f4c60_len_4300", SetPlayerAnimationSpeed);
 
 INCLUDE_API_ASM("code_f4c60_len_4300", PlayerMoveTo);
 
-INCLUDE_ASM("code_f4c60_len_4300", func_802D1270);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", func_802D1270);
 
-INCLUDE_ASM("code_f4c60_len_4300", func_802D1380);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", func_802D1380);
 
-INCLUDE_ASM("code_f4c60_len_4300", player_jump);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", player_jump);
 
 void PlayerJump(ScriptInstance* script, s32 isInitialCall) {
     player_jump(script, isInitialCall, 0);
@@ -224,118 +224,118 @@ ApiStatus FullyRestoreHPandFP(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM("code_f4c60_len_4300", FullyRestoreSP);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", FullyRestoreSP);
 
-INCLUDE_ASM("code_f4c60_len_4300", EnablePartner);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", EnablePartner);
 
-INCLUDE_ASM("code_f4c60_len_4300", DisablePartner);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", DisablePartner);
 
-INCLUDE_ASM("code_f4c60_len_4300", UseEntryHeading);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", UseEntryHeading);
 
-INCLUDE_ASM("code_f4c60_len_4300", func_802D2148);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", func_802D2148);
 
-INCLUDE_ASM("code_f4c60_len_4300", UseExitHeading);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", UseExitHeading);
 
-INCLUDE_ASM("code_f4c60_len_4300", func_802D23F8);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", func_802D23F8);
 
-INCLUDE_ASM("code_f4c60_len_4300", func_802D244C);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", func_802D244C);
 
-INCLUDE_ASM("code_f4c60_len_4300", func_802D2484);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", func_802D2484);
 
-INCLUDE_ASM("code_f4c60_len_4300", func_802D249C);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", func_802D249C);
 
-INCLUDE_ASM("code_f4c60_len_4300", func_802D24F4);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", func_802D24F4);
 
-INCLUDE_ASM("code_f4c60_len_4300", func_802D2508);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", func_802D2508);
 
-INCLUDE_ASM("code_f4c60_len_4300", func_802D2520);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", func_802D2520);
 
-INCLUDE_ASM("code_f4c60_len_4300", func_802D286C);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", func_802D286C);
 
-INCLUDE_ASM("code_f4c60_len_4300", func_802D2884);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", func_802D2884);
 
-INCLUDE_ASM("code_f4c60_len_4300", DisablePulseStone);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", DisablePulseStone);
 
 INCLUDE_API_ASM("code_f4c60_len_4300", GetCurrentPartner);
 
-INCLUDE_ASM("code_f4c60_len_4300", func_802D2B50);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", func_802D2B50);
 
-INCLUDE_ASM("code_f4c60_len_4300", func_802D2B6C);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", func_802D2B6C);
 
 INCLUDE_API_ASM("code_f4c60_len_4300", Disable8bitMario);
 
-INCLUDE_ASM("code_f4c60_len_4300", func_802D2C14);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", func_802D2C14);
 
-INCLUDE_ASM("code_f4c60_len_4300", func_802D2C40);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", func_802D2C40);
 
 INCLUDE_API_ASM("code_f4c60_len_4300", PlaySoundAtPlayer);
 
-INCLUDE_ASM("code_f4c60_len_4300", func_802D2D30);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", func_802D2D30);
 
-INCLUDE_ASM("code_f4c60_len_4300", func_802D2ED4);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", func_802D2ED4);
 
-INCLUDE_ASM("code_f4c60_len_4300", func_802D2F34);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", func_802D2F34);
 
-INCLUDE_ASM("code_f4c60_len_4300", func_802D2FCC);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", func_802D2FCC);
 
-INCLUDE_ASM("code_f4c60_len_4300", func_802D3028);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", func_802D3028);
 
-INCLUDE_ASM("code_f4c60_len_4300", func_802D31E0);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", func_802D31E0);
 
-INCLUDE_ASM("code_f4c60_len_4300", func_802D3398);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", func_802D3398);
 
-INCLUDE_ASM("code_f4c60_len_4300", func_802D33D4);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", func_802D33D4);
 
-INCLUDE_ASM("code_f4c60_len_4300", func_802D3474);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", func_802D3474);
 
-INCLUDE_ASM("code_f4c60_len_4300", func_802D354C);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", func_802D354C);
 
-INCLUDE_ASM("code_f4c60_len_4300", func_802D3624);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", func_802D3624);
 
-INCLUDE_ASM("code_f4c60_len_4300", func_802D3674);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", func_802D3674);
 
-INCLUDE_ASM("code_f4c60_len_4300", func_802D36E0);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", func_802D36E0);
 
-INCLUDE_ASM("code_f4c60_len_4300", func_802D378C);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", func_802D378C);
 
-INCLUDE_ASM("code_f4c60_len_4300", func_802D3840);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", func_802D3840);
 
-INCLUDE_ASM("code_f4c60_len_4300", func_802D38EC);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", func_802D38EC);
 
-INCLUDE_ASM("code_f4c60_len_4300", func_802D3998);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", func_802D3998);
 
-INCLUDE_ASM("code_f4c60_len_4300", func_802D39FC);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", func_802D39FC);
 
-INCLUDE_ASM("code_f4c60_len_4300", func_802D3A60);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", func_802D3A60);
 
-INCLUDE_ASM("code_f4c60_len_4300", func_802D3C58);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", func_802D3C58);
 
-INCLUDE_ASM("code_f4c60_len_4300", func_802D3EB8);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", func_802D3EB8);
 
-INCLUDE_ASM("code_f4c60_len_4300", func_802D3F74);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", func_802D3F74);
 
-INCLUDE_ASM("code_f4c60_len_4300", func_802D3FC8);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", func_802D3FC8);
 
-INCLUDE_ASM("code_f4c60_len_4300", func_802D4050);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", func_802D4050);
 
-INCLUDE_ASM("code_f4c60_len_4300", func_802D4164);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", func_802D4164);
 
-INCLUDE_ASM("code_f4c60_len_4300", func_802D417C);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", func_802D417C);
 
-INCLUDE_ASM("code_f4c60_len_4300", func_802D420C);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", func_802D420C);
 
-INCLUDE_ASM("code_f4c60_len_4300", func_802D42AC);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", func_802D42AC);
 
-INCLUDE_ASM("code_f4c60_len_4300", func_802D4364);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", func_802D4364);
 
-INCLUDE_ASM("code_f4c60_len_4300", func_802D43AC);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", func_802D43AC);
 
-INCLUDE_ASM("code_f4c60_len_4300", func_802D43D0);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", func_802D43D0);
 
-INCLUDE_ASM("code_f4c60_len_4300", func_802D43F4);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", func_802D43F4);
 
-INCLUDE_ASM("code_f4c60_len_4300", func_802D4434);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", func_802D4434);
 
-INCLUDE_ASM("code_f4c60_len_4300", func_802D4488);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", func_802D4488);
 
-INCLUDE_ASM("code_f4c60_len_4300", func_802D4560);
+INCLUDE_ASM(s32, "code_f4c60_len_4300", func_802D4560);

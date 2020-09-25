@@ -43,7 +43,11 @@ extern Entity** gCurrentEntityListPtr[30];
 
 extern UNK_TYPE* gWorldDynamicEntityList[16];
 extern UNK_TYPE* gBattleDynamicEntityList[16];
-extern UNK_TYPE** gCurrentDynamicEntityListPtr[16];
+extern UNK_TYPE*** gCurrentDynamicEntityListPtr;
+
+extern Npc* gWorldNpcList[64];
+extern Npc* gBattleNpcList[64];
+extern Npc** gCurrentNpcListPtr[64];
 
 extern Shadow* gWorldShadowList[60];
 extern Shadow* gBattleShadowList[60];
@@ -61,6 +65,8 @@ extern EncounterStatus gCurrentEncounter;
 extern s16* D_80151328;
 extern s16 D_8010CD10;
 extern s16 D_8010CD12;
+extern s32 D_8010CD20;
+extern s32 D_8010F094; // player shadow index?
 extern s32 D_801595A0;
 extern s16 D_80159AE2;
 extern s16 D_80159AE4;

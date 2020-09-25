@@ -51,7 +51,7 @@ void begin_state_battle(void) {
     D_800A0900 = 5;
 }
 
-INCLUDE_ASM("code_ebd0_len_6a0", step_battle);
+INCLUDE_ASM(s32, "code_ebd0_len_6a0", step_battle);
 
 void func_80033B54(void) {
     func_8003E5B0();
@@ -66,7 +66,7 @@ void func_80033B88(void) {
     D_800A0900 = 5;
 }
 
-INCLUDE_ASM("code_ebd0_len_6a0", func_80033BC0);
+INCLUDE_ASM(s32, "code_ebd0_len_6a0", func_80033BC0);
 
 void func_80033E64(void) {
 }

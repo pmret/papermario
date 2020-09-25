@@ -15,8 +15,14 @@ s32 get_global_flag(s32 index);
 s32 get_area_byte(s32 index);
 s32 get_area_flag(s32 index);
 
+Shadow* get_shadow_by_index(s32 index);
+
+void render_player_model();
+
+void parent_collider_to_model(s32 colliderID, s16 modelIndex);
 void clone_model(u16 srcModelID, u16 newModelID);
 Model* get_model_from_list_index(s32 listIndex);
+s32 get_model_list_index_from_tree_index(s32 treeIndex);
 void get_model_center_and_size(s32 modelID, f32* centerX, f32* centerY, f32* centerZ, f32* sizeX, f32* sizeY,
                                f32* sizeZ);
 
@@ -68,4 +74,7 @@ void add_vec2D_polar(f32* x, f32* y, f32 r, f32 theta);
 
 s32 play_sound_at_position(s32 soundID, s32 value2, f32 posX, f32 posY, f32 posZ);
 s32 set_music_track(s32 musicPlayer, s32 songID, s32 variation, s32 unk, s32 volume);
+
+ScriptInstance* get_script_by_index(s32 index);
+
 #endif

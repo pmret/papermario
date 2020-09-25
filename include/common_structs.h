@@ -115,7 +115,7 @@ typedef struct PlayerData {
     /* 0x208 */ s16 equippedBadges[64];
     /* 0x288 */ char unk_288;
     /* 0x289 */ u8 merleeSpellType;
-    /* 0x28A */ u8 merleeCastsLeft;
+    /* 0x28A */ s8 merleeCastsLeft;
     /* 0x28B */ char unk_28B;
     /* 0x28C */ s16 merleeTurnCount;
     /* 0x28E */ s8 maxStarPower;
@@ -679,7 +679,8 @@ typedef struct Model {
     /* 0xA6 */ u8 renderMode; /* Created by retype action */
     /* 0xA7 */ char unk_A7;
     /* 0xA8 */ u8 textureID;
-    /* 0xA9 */ char unk_A9[7];
+    /* 0xA9 */ u8 unk_A9;
+    /* 0xAA */ char unk_AA[6];
 } Model; // size = 0xB0
 
 typedef struct AnimatedMesh {
@@ -855,7 +856,7 @@ typedef struct GameStatus {
     /* 0x072 */ u8 nextDemoScene; /* which part of the demo to play next */
     /* 0x073 */ u8 contBitPattern;
     /* 0x074 */ char unk_74[4];
-    /* 0x078 */ u8 disableScripts;
+    /* 0x078 */ s8 disableScripts;
     /* 0x079 */ char unk_79;
     /* 0x07A */ s8 musicEnabled;
     /* 0x07B */ char unk_7B[3];
@@ -1342,8 +1343,8 @@ typedef struct PlayerStatus {
     /* 0x00C */ u8 peachDisguise;
     /* 0x00D */ char unk_0D[5];
     /* 0x012 */ s16 moveFrames;
-    /* 0x014 */ u8 enableCollisionOverlapsCheck;
-    /* 0x015 */ u8 statusMenuCounterinputEnabledCounter; /* whether the C-up menu can appear */
+    /* 0x014 */ s8 enableCollisionOverlapsCheck;
+    /* 0x015 */ s8 statusMenuCounterinputEnabledCounter; /* whether the C-up menu can appear */
     /* 0x016 */ s16 lastGoodPosition[3];
     /* 0x01C */ struct Vec3f extraVelocity;
     /* 0x028 */ struct Vec3f position;

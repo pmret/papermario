@@ -22,7 +22,7 @@ void clear_saved_variables(void) {
     }
 }
 #else
-INCLUDE_ASM("code_dba20_len_350", clear_saved_variables);
+INCLUDE_ASM(s32, "code_dba20_len_350", clear_saved_variables);
 #endif
 
 #ifdef NON_MATCHING
@@ -41,7 +41,7 @@ void clear_area_flags(void) {
     }
 }
 #else
-INCLUDE_ASM("code_dba20_len_350", clear_area_flags);
+INCLUDE_ASM(s32, "code_dba20_len_350", clear_area_flags);
 #endif
 
 s32 clear_global_flag(s32 index) {
