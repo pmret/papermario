@@ -2,16 +2,23 @@
 
 INCLUDE_ASM(s32, "code_1f580_len_1940", SetEncounterStatusFlags, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "code_1f580_len_1940", func_800441F0);
+ApiStatus func_800441F0(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode arg1 = *script->ptrReadPos;
 
-INCLUDE_ASM(s32, "code_1f580_len_1940", func_80044238);
+    set_variable(script, arg1, func_80044148());
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_80044238(ScriptInstance* script, s32 isInitialCall) {
+    func_80072BCC(get_variable(script, *script->ptrReadPos));
+    return ApiStatus_DONE2;
+}
 
 ApiStatus LoadDemoBattle(ScriptInstance* script, s32 isInitialCall) {
     load_demo_battle(get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
 
-// ???
 ApiStatus func_80044290(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
@@ -22,11 +29,20 @@ INCLUDE_ASM(s32, "code_1f580_len_1940", RemoveNpc, ScriptInstance* script, s32 i
 
 INCLUDE_ASM(s32, "code_1f580_len_1940", RemoveEncounter, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "code_1f580_len_1940", GetBattleOutcome, ScriptInstance* script, s32 isInitialCall);
+ApiStatus GetBattleOutcome(ScriptInstance* script, s32 isInitialCall) {
+    set_variable(script, *script->ptrReadPos, gCurrentEncounter.battleOutcome);
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "code_1f580_len_1940", func_800445A8);
+ApiStatus func_800445A8(ScriptInstance* script, s32 isInitialCall) {
+    set_variable(script, *script->ptrReadPos, script->ownerActorID->unk_C4);
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "code_1f580_len_1940", func_800445D4);
+ApiStatus func_800445D4(ScriptInstance* script, s32 isInitialCall) {
+    set_variable(script, *script->ptrReadPos, script->ownerActorID->unk_C8);
+    return ApiStatus_DONE2;
+}
 
 ApiStatus GetOwnerEncounterTrigger(ScriptInstance* script, s32 isInitialCall) {
     set_variable(script, *script->ptrReadPos, script->ownerActorID->encountered);
@@ -109,21 +125,40 @@ INCLUDE_ASM(s32, "code_1f580_len_1940", ClearDefeatedEnemies, ScriptInstance* sc
 
 INCLUDE_ASM(s32, "code_1f580_len_1940", SetEnemyFlagBits, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "code_1f580_len_1940", func_8004572C);
+ApiStatus func_8004572C(ScriptInstance* script, s32 isInitialCall) {
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_1f580_len_1940", GetSelfAnimationFromTable, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "code_1f580_len_1940", func_80045798);
+ApiStatus func_80045798(ScriptInstance* script, s32 isInitialCall) {
+    D_8010EF08 = get_variable(script, *script->ptrReadPos);
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "code_1f580_len_1940", func_800457C4);
+ApiStatus func_800457C4(ScriptInstance* script, s32 isInitialCall) {
+    Enemy* ownerActor = script->ownerActorID;
 
-INCLUDE_ASM(s32, "code_1f580_len_1940", func_800457F8);
+    ownerActor->unk_B5 = get_variable(script, *script->ptrReadPos);
+    return 2;
+}
 
-INCLUDE_ASM(s32, "code_1f580_len_1940", func_8004580C);
+ApiStatus func_800457F8(ScriptInstance* script, s32 isInitialCall) {
+    gCurrentEncounter.unk_12 = 1;
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_8004580C(ScriptInstance* script, s32 isInitialCall) {
+    set_variable(script, *script->ptrReadPos, gCurrentEncounter.hitTier);
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_1f580_len_1940", func_80045838);
 
-INCLUDE_ASM(s32, "code_1f580_len_1940", func_800458CC);
+ApiStatus func_800458CC(ScriptInstance* script, s32 isInitialCall) {
+    set_variable(script, *script->ptrReadPos, script->ownerActorID->npcSettings->unkFlags & 8);
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_1f580_len_1940", func_80045900);
 

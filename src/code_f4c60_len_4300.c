@@ -25,19 +25,6 @@ INCLUDE_ASM(s32, "code_f4c60_len_4300", ShowMessageAtScreenPos, ScriptInstance* 
 INCLUDE_ASM(s32, "code_f4c60_len_4300", ShowMessageAtWorldPos, ScriptInstance* script, s32 isInitialCall);
 
 INCLUDE_ASM(s32, "code_f4c60_len_4300", CloseMessage, ScriptInstance* script, s32 isInitialCall);
-/*s32 CloseMessage(ScriptInstance* script, s32 isInitialCall) {
-    if (isInitialCall) {
-        close_message(gCurrentPrintContext);
-    }
-
-    if (!(gCurrentPrintContext->stateFlags & 0x40)) {
-        if (D_802DB264 == 1) {
-            script->varTable[0] = gCurrentPrintContext->unk_4E8;
-        }
-        return 0;
-    }
-    return 1;
-}*/
 
 INCLUDE_ASM(s32, "code_f4c60_len_4300", SwitchMessage, ScriptInstance* script, s32 isInitialCall);
 

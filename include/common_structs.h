@@ -197,9 +197,13 @@ typedef struct Enemy {
     /* 0x60 */ s32 defeatScriptID;
     /* 0x64 */ char unk_64[8];
     /* 0x6C */ s32 varTable[16];
-    /* 0xAC */ char unk_AC[12];
+    /* 0xAC */ char unk_AC[9];
+    /* 0xB5 */ s8 unk_B5;
+    /* 0xB6 */ char unk_B6[2];
     /* 0xB8 */ s32 unkSettings24;
-    /* 0xBC */ char unk_BC[16];
+    /* 0xBC */ char unk_BC[8];
+    /* 0xC4 */ s32 unk_C4;
+    /* 0xC8 */ s32 unk_C8;
     /* 0xCC */ UNK_PTR animList;
     /* 0xD0 */ UNK_PTR territoryData;
     /* 0xD4 */ UNK_PTR dropTables;
@@ -1406,9 +1410,9 @@ typedef struct EncounterStatus {
     /* 0x00 */ s32 flags;
     /* 0x04 */ u8 eFirstStrike; /* 0 = none, 1 = player, 2 = enemy */
     /* 0x05 */ s8 hitType; /* 1 = none/enemy, 2 = jump */
-    /* 0x06 */ u8 hitTier; /* 0 = normal, 1 = super, 2 = ultra */
+    /* 0x06 */ s8 hitTier; /* 0 = normal, 1 = super, 2 = ultra */
     /* 0x07 */ char unk_07[2];
-    /* 0x09 */ u8 battleOutcome; /* 0 = won, 1 = lost */
+    /* 0x09 */ s8 battleOutcome; /* 0 = won, 1 = lost */
     /* 0x0A */ char unk_0A;
     /* 0x0B */ u8 merleeCoinBonus; /* triple coins when != 0 */
     /* 0x0C */ u8 damageTaken; /* valid after battle */
@@ -1416,7 +1420,7 @@ typedef struct EncounterStatus {
     /* 0x0E */ s16 coinsEarned; /* valid after battle */
     /* 0x10 */ char unk_10;
     /* 0x11 */ u8 allowFleeing;
-    /* 0x12 */ char unk_12;
+    /* 0x12 */ s8 unk_12;
     /* 0x13 */ u8 dropWhackaBump;
     /* 0x14 */ s32 songID;
     /* 0x18 */ s32 unk_18;
