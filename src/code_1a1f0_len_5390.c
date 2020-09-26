@@ -56,7 +56,7 @@ INCLUDE_ASM(s32, "code_1a1f0_len_5390", func_8003F414);
 
 INCLUDE_ASM(s32, "code_1a1f0_len_5390", func_8003F4CC);
 
-INCLUDE_API_ASM("code_1a1f0_len_5390", OnDefeatEnemy);
+INCLUDE_ASM(s32, "code_1a1f0_len_5390", OnDefeatEnemy, ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus OnFleeBattleDrops(ScriptInstance* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;

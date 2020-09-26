@@ -1,6 +1,6 @@
 #include "common.h"
 
-INCLUDE_API_ASM("code_fe0b0_len_5a0", SetSpriteShading);
+INCLUDE_ASM(s32, "code_fe0b0_len_5a0", SetSpriteShading);
 
 ApiStatus EnableSpriteShading(ScriptInstance* script, s32 isInitialCall) {
     if (get_variable(script, *script->ptrReadPos) != 0) {

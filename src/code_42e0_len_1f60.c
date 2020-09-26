@@ -26,7 +26,7 @@ INCLUDE_ASM(s32, "code_42e0_len_1f60", _heap_free);
 
 INCLUDE_ASM(s32, "code_42e0_len_1f60", _heap_realloc);
 
-INCLUDE_API_ASM("code_42e0_len_1f60", cosine);
+INCLUDE_ASM(s32, "code_42e0_len_1f60", cosine);
 
 s32 sign(s32 val) {
     s32 sign = -1;
@@ -88,7 +88,7 @@ f32 signF(f32 val) {
     return sign;
 }
 
-INCLUDE_API_ASM("code_42e0_len_1f60", round);
+INCLUDE_ASM(s32, "code_42e0_len_1f60", round);
 
 INCLUDE_ASM(f32, "code_42e0_len_1f60", clamp_angle, f32 theta);
 

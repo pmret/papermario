@@ -22,7 +22,7 @@ ApiStatus SetMusicTrack(ScriptInstance* script, s32 isInitialCall) {
     return (set_music_track(musicPlayer, songID, variation, 0x1F4, volume) != 0) * 2;
 }
 
-INCLUDE_API_ASM("code_fa4c0_len_3bf0", FadeInMusic);
+INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", FadeInMusic, ScriptInstance* script, s32 isInitialCall);
 
 INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D5EE0);
 
@@ -106,7 +106,7 @@ ApiStatus func_802D6340(ScriptInstance* script, s32 initialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_API_ASM("code_fa4c0_len_3bf0", PlaySoundAtF);
+INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", PlaySoundAtF, ScriptInstance* script, s32 isInitialCall);
 
 INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D6420);
 
@@ -283,11 +283,11 @@ ApiStatus RemoveFortressKeys(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_API_ASM("code_fa4c0_len_3bf0", MakeItemEntity);
+INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", MakeItemEntity, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_API_ASM("code_fa4c0_len_3bf0", DropItemEntity);
+INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", DropItemEntity, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_API_ASM("code_fa4c0_len_3bf0", DropItemEntityB);
+INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", DropItemEntityB, ScriptInstance* script, s32 isInitialCall);
 /*
 // Close to working
 ApiStatus DropItemEntityB(ScriptInstance* script, s32 isInitialCall) {
@@ -322,7 +322,7 @@ ApiStatus AddBadge(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_API_ASM("code_fa4c0_len_3bf0", RemoveBadge);
+INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", RemoveBadge, ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus SetItemPos(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
@@ -342,7 +342,7 @@ ApiStatus SetItemPos(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_API_ASM("code_fa4c0_len_3bf0", SetItemFlags);
+INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", SetItemFlags, ScriptInstance* script, s32 isInitialCall);
 
 INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D721C);
 
@@ -362,23 +362,22 @@ ApiStatus AddStarPieces(ScriptInstance* script, s32 isInitialCall) {
 }
 
 #ifdef NON_MATCHING
-// Close to working
+/*
 ApiStatus GetItemPower(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
-    s32 itemID = get_variable(script, *ptrReadPos++);
-    s32* ptrNextPos = ptrReadPos++;
-    item_table_entry* item = &gItemTable[itemID];
+    StaticItem* item = &gItemTable[get_variable(script, *ptrReadPos++)];
+    Bytecode out1 = *ptrReadPos++;
+    Bytecode out2 = *ptrReadPos++;
 
-
-    set_variable(script, ptrNextPos++, item->potencyA);
-    set_variable(script, ptrNextPos++, item->potencyB);
+    set_variable(script, out1, item->potencyA);
+    set_variable(script, out2, item->potencyB);
     return ApiStatus_DONE2;
-}
+}*/
 #else
-INCLUDE_API_ASM("code_fa4c0_len_3bf0", GetItemPower);
+INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", GetItemPower, ScriptInstance* script, s32 isInitialCall);
 #endif
 
-INCLUDE_API_ASM("code_fa4c0_len_3bf0", ShowGotItem);
+INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", ShowGotItem, ScriptInstance* script, s32 isInitialCall);
 
 INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D7460);
 
@@ -390,10 +389,8 @@ INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D75D8);
 
 INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D7690);
 
-INCLUDE_API_ASM("code_fa4c0_len_3bf0", ShowEmote);
+INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", ShowEmote, ScriptInstance* script, s32 isInitialCall);
 
-#ifdef NON_MATCHING
-// Works
 ApiStatus RemoveEffect(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
 
@@ -401,7 +398,6 @@ ApiStatus RemoveEffect(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-// Works
 ApiStatus func_802D7B10(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
     s32* ptrValue = get_variable(script, *ptrReadPos++);
@@ -410,7 +406,6 @@ ApiStatus func_802D7B10(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-// Works
 ApiStatus func_802D7B44(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
     s32* ptrValue = get_variable(script, *ptrReadPos++);
@@ -420,26 +415,14 @@ ApiStatus func_802D7B44(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-// Works
 ApiStatus func_802D7B74(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
     s32* ptrValue = get_variable(script, *ptrReadPos++);
     s32* ptrTemp = ptrValue[3];
 
-    ptrTemp[11] = 5;
+    ptrTemp[12] = 5;
     return ApiStatus_DONE2;
 }
-
-// TODO: More functions still in RemoveEffect.s but the ones above are matching properly
-#else
-INCLUDE_API_ASM("code_fa4c0_len_3bf0", RemoveEffect);
-#endif
-
-INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D7B10);
-
-INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D7B44);
-
-INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D7B74);
 
 INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D7BA4);
 

@@ -104,23 +104,23 @@ INCLUDE_ASM(s32, "code_a5dd0_len_114e0", create_entity);
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", create_shadow_from_data);
 
-INCLUDE_API_ASM("code_a5dd0_len_114e0", MakeEntity);
+INCLUDE_ASM(s32, "code_a5dd0_len_114e0", MakeEntity, ScriptInstance* script, s32 isInitialCall);
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_80111E9C);
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_80111F2C);
 
-INCLUDE_API_ASM("code_a5dd0_len_114e0", AssignScript);
+INCLUDE_ASM(s32, "code_a5dd0_len_114e0", AssignScript, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_API_ASM("code_a5dd0_len_114e0", AssignAreaFlag);
+INCLUDE_ASM(s32, "code_a5dd0_len_114e0", AssignAreaFlag, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_API_ASM("code_a5dd0_len_114e0", AssignBlockFlag);
+INCLUDE_ASM(s32, "code_a5dd0_len_114e0", AssignBlockFlag, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_API_ASM("code_a5dd0_len_114e0", AssignFlag);
+INCLUDE_ASM(s32, "code_a5dd0_len_114e0", AssignFlag, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_API_ASM("code_a5dd0_len_114e0", AssignPanelFlag);
+INCLUDE_ASM(s32, "code_a5dd0_len_114e0", AssignPanelFlag, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_API_ASM("code_a5dd0_len_114e0", AssignCrateFlag);
+INCLUDE_ASM(s32, "code_a5dd0_len_114e0", AssignCrateFlag, ScriptInstance* script, s32 isInitialCall);
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", create_entity_shadow);
 

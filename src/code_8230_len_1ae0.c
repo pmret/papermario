@@ -1,14 +1,14 @@
 #include "common.h"
 
-INCLUDE_API_ASM("code_8230_len_1ae0", nuSiMgrInit);
+INCLUDE_ASM(s32, "code_8230_len_1ae0", nuSiMgrInit);
 
-INCLUDE_API_ASM("code_8230_len_1ae0", nuSiSendMesg);
+INCLUDE_ASM(s32, "code_8230_len_1ae0", nuSiSendMesg);
 
-INCLUDE_API_ASM("code_8230_len_1ae0", nuSiMgrStop);
+INCLUDE_ASM(s32, "code_8230_len_1ae0", nuSiMgrStop);
 
-INCLUDE_API_ASM("code_8230_len_1ae0", nuSiMgrRestart);
+INCLUDE_ASM(s32, "code_8230_len_1ae0", nuSiMgrRestart);
 
-INCLUDE_API_ASM("code_8230_len_1ae0", nuSiMgrThread);
+INCLUDE_ASM(s32, "code_8230_len_1ae0", nuSiMgrThread);
 
 INCLUDE_ASM(s32, "code_8230_len_1ae0", func_8002D160);
 

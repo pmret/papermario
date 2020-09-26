@@ -1,6 +1,6 @@
 #include "common.h"
 
-INCLUDE_API_ASM("code_1f580_len_1940", SetEncounterStatusFlags);
+INCLUDE_ASM(s32, "code_1f580_len_1940", SetEncounterStatusFlags, ScriptInstance* script, s32 isInitialCall);
 
 INCLUDE_ASM(s32, "code_1f580_len_1940", func_800441F0);
 
@@ -16,24 +16,24 @@ ApiStatus func_80044290(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_API_ASM("code_1f580_len_1940", MakeNpcs);
+INCLUDE_ASM(s32, "code_1f580_len_1940", MakeNpcs, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_API_ASM("code_1f580_len_1940", RemoveNpc);
+INCLUDE_ASM(s32, "code_1f580_len_1940", RemoveNpc, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_API_ASM("code_1f580_len_1940", RemoveEncounter);
+INCLUDE_ASM(s32, "code_1f580_len_1940", RemoveEncounter, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_API_ASM("code_1f580_len_1940", GetBattleOutcome);
+INCLUDE_ASM(s32, "code_1f580_len_1940", GetBattleOutcome, ScriptInstance* script, s32 isInitialCall);
 
 INCLUDE_ASM(s32, "code_1f580_len_1940", func_800445A8);
 
 INCLUDE_ASM(s32, "code_1f580_len_1940", func_800445D4);
 
-ApiStatus GetOwnerEncountered(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus GetOwnerEncounterTrigger(ScriptInstance* script, s32 isInitialCall) {
     set_variable(script, *script->ptrReadPos, script->ownerActorID->encountered);
     return ApiStatus_DONE2;
 }
 
-INCLUDE_API_ASM("code_1f580_len_1940", DoNpcDefeat);
+INCLUDE_ASM(s32, "code_1f580_len_1940", DoNpcDefeat, ScriptInstance* script, s32 isInitialCall);
 
 INCLUDE_ASM(s32, "code_1f580_len_1940", start_battle);
 
@@ -47,7 +47,7 @@ ApiStatus StartBattleWith(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE1;
 }
 
-INCLUDE_API_ASM("code_1f580_len_1940", StartBossBattle);
+INCLUDE_ASM(s32, "code_1f580_len_1940", StartBossBattle, ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus SetBattleMusic(ScriptInstance* script, s32 isInitialCall) {
     Bytecode songID = get_variable(script, *script->ptrReadPos);
@@ -59,44 +59,44 @@ ApiStatus SetBattleMusic(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_API_ASM("code_1f580_len_1940", BindNpcAI);
+INCLUDE_ASM(s32, "code_1f580_len_1940", BindNpcAI, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_API_ASM("code_1f580_len_1940", BindNpcIdle);
+INCLUDE_ASM(s32, "code_1f580_len_1940", BindNpcIdle, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_API_ASM("code_1f580_len_1940", RestartNpcAI);
+INCLUDE_ASM(s32, "code_1f580_len_1940", RestartNpcAI, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_API_ASM("code_1f580_len_1940", EnableNpcAI);
+INCLUDE_ASM(s32, "code_1f580_len_1940", EnableNpcAI, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_API_ASM("code_1f580_len_1940", SetNpcAux);
+INCLUDE_ASM(s32, "code_1f580_len_1940", SetNpcAux, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_API_ASM("code_1f580_len_1940", BindNpcAux);
+INCLUDE_ASM(s32, "code_1f580_len_1940", BindNpcAux, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_API_ASM("code_1f580_len_1940", RestartNpcAux);
+INCLUDE_ASM(s32, "code_1f580_len_1940", RestartNpcAux, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_API_ASM("code_1f580_len_1940", EnableNpcAux);
+INCLUDE_ASM(s32, "code_1f580_len_1940", EnableNpcAux, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_API_ASM("code_1f580_len_1940", BindNpcInteract);
+INCLUDE_ASM(s32, "code_1f580_len_1940", BindNpcInteract, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_API_ASM("code_1f580_len_1940", BindNpcHit);
+INCLUDE_ASM(s32, "code_1f580_len_1940", BindNpcHit, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_API_ASM("code_1f580_len_1940", BindNpcDefeat);
+INCLUDE_ASM(s32, "code_1f580_len_1940", BindNpcDefeat, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_API_ASM("code_1f580_len_1940", SetSelfVar);
+INCLUDE_ASM(s32, "code_1f580_len_1940", SetSelfVar, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_API_ASM("code_1f580_len_1940", GetSelfVar);
+INCLUDE_ASM(s32, "code_1f580_len_1940", GetSelfVar, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_API_ASM("code_1f580_len_1940", SetNpcVar);
+INCLUDE_ASM(s32, "code_1f580_len_1940", SetNpcVar, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_API_ASM("code_1f580_len_1940", GetNpcVar);
+INCLUDE_ASM(s32, "code_1f580_len_1940", GetNpcVar, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_API_ASM("code_1f580_len_1940", SetSelfRotation);
+INCLUDE_ASM(s32, "code_1f580_len_1940", SetSelfRotation, ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus SetSelfEnemyFlags(ScriptInstance* script, s32 isInitialCall) {
     script->ownerActorID->flags = *script->ptrReadPos;
     return ApiStatus_DONE2;
 }
 
-INCLUDE_API_ASM("code_1f580_len_1940", SetSelfEnemyFlagBits);
+INCLUDE_ASM(s32, "code_1f580_len_1940", SetSelfEnemyFlagBits, ScriptInstance* script, s32 isInitialCall);
 
 INCLUDE_ASM(s32, "code_1f580_len_1940", func_80045580);
 
@@ -105,13 +105,13 @@ ApiStatus GetSelfNpcID(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_API_ASM("code_1f580_len_1940", ClearDefeatedEnemies);
+INCLUDE_ASM(s32, "code_1f580_len_1940", ClearDefeatedEnemies, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_API_ASM("code_1f580_len_1940", SetEnemyFlagBits);
+INCLUDE_ASM(s32, "code_1f580_len_1940", SetEnemyFlagBits, ScriptInstance* script, s32 isInitialCall);
 
 INCLUDE_ASM(s32, "code_1f580_len_1940", func_8004572C);
 
-INCLUDE_API_ASM("code_1f580_len_1940", GetSelfAnimationFromTable);
+INCLUDE_ASM(s32, "code_1f580_len_1940", GetSelfAnimationFromTable, ScriptInstance* script, s32 isInitialCall);
 
 INCLUDE_ASM(s32, "code_1f580_len_1940", func_80045798);
 

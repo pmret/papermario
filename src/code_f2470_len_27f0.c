@@ -34,11 +34,11 @@ ApiStatus GetNpcPointer(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_API_ASM("code_f2470_len_27f0", SetNpcPos);
+INCLUDE_ASM(s32, "code_f2470_len_27f0", SetNpcPos, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_API_ASM("code_f2470_len_27f0", SetNpcRotation);
+INCLUDE_ASM(s32, "code_f2470_len_27f0", SetNpcRotation, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_API_ASM("code_f2470_len_27f0", func_802CDE68);
+INCLUDE_ASM(s32, "code_f2470_len_27f0", func_802CDE68, ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus SetNpcScale(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
@@ -143,7 +143,7 @@ ApiStatus SetNpcAnimationSpeed(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_API_ASM("code_f2470_len_27f0", NpcMoveTo);
+INCLUDE_ASM(s32, "code_f2470_len_27f0", NpcMoveTo, ScriptInstance* script, s32 isInitialCall);
 
 INCLUDE_ASM(s32, "code_f2470_len_27f0", _npc_jump_to);
 
@@ -155,7 +155,7 @@ void NpcJump1(ScriptInstance* script, s32 isInitialCall) {
     _npc_jump_to(script, isInitialCall, 1);
 }
 
-INCLUDE_API_ASM("code_f2470_len_27f0", NpcFlyTo);
+INCLUDE_ASM(s32, "code_f2470_len_27f0", NpcFlyTo, ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus GetNpcYaw(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
@@ -185,15 +185,15 @@ ApiStatus SetNpcYaw(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_API_ASM("code_f2470_len_27f0", InterpNpcYaw);
+INCLUDE_ASM(s32, "code_f2470_len_27f0", InterpNpcYaw, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_API_ASM("code_f2470_len_27f0", NpcFacePlayer);
+INCLUDE_ASM(s32, "code_f2470_len_27f0", NpcFacePlayer, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_API_ASM("code_f2470_len_27f0", NpcFaceNpc);
+INCLUDE_ASM(s32, "code_f2470_len_27f0", NpcFaceNpc, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_API_ASM("code_f2470_len_27f0", SetNpcFlagBits);
+INCLUDE_ASM(s32, "code_f2470_len_27f0", SetNpcFlagBits, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_API_ASM("code_f2470_len_27f0", GetNpcPos);
+INCLUDE_ASM(s32, "code_f2470_len_27f0", GetNpcPos, ScriptInstance* script, s32 isInitialCall);
 
 INCLUDE_ASM(s32, "code_f2470_len_27f0", func_802CF1B4);
 
@@ -243,7 +243,7 @@ ApiStatus ClearPartnerMoveHistory(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_API_ASM("code_f2470_len_27f0", NpcSetHomePosToCurrent);
+INCLUDE_ASM(s32, "code_f2470_len_27f0", NpcSetHomePosToCurrent, ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus GetPartnerPos(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;

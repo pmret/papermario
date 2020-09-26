@@ -730,8 +730,8 @@ typedef struct StaticItem {
     /* 0x14 */ s32 itemString;
     /* 0x18 */ s16 typeFlags;
     /* 0x1A */ u8 moveID;
-    /* 0x1B */ u8 potencyA;
-    /* 0x1C */ u8 potencyB;
+    /* 0x1B */ s8 potencyA;
+    /* 0x1C */ s8 potencyB;
     /* 0x1D */ char unk_1D[3];
 } StaticItem; // size = 0x20
 
@@ -804,7 +804,9 @@ typedef struct PrintContext {
     /* 0x45A */ char unk_45A[45];
     /* 0x487 */ u8 unkArraySize;
     /* 0x488 */ s16 unkArrayunkLength[4];
-    /* 0x490 */ char unk_490[108];
+    /* 0x490 */ char unk_490[0x58];
+    /* 0x4E8 */ u8 unk_4E8;
+    /* 0x4E9 */ char unk_4E9[19];
     /* 0x4FC */ s32 stateFlags;
     /* 0x500 */ char unk_500[9];
     /* 0x509 */ u8 lerpElpasedTime;

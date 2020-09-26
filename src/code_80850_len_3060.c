@@ -717,6 +717,7 @@ void reset_status_menu(void) {
 #ifdef NON_MATCHING
 // uses a jumptable, which we need .rodata support for.
 // Somewhat close. Needs work.
+/*
 s32 is_ability_active(s32 arg0) {
     s32 iVar2;
     u32 uVar3;
@@ -964,6 +965,7 @@ s32 is_ability_active(s32 arg0) {
         return iVar7;
     }
 }
+*/
 #else
 INCLUDE_ASM(s32, "code_80850_len_3060", is_ability_active, s32 arg0);
 #endif

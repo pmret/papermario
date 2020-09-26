@@ -1,3 +1,3 @@
 #include "common.h"
 
-INCLUDE_API_ASM("os/code_47fa0_len_20", osViGetCurrentContext);
+INCLUDE_ASM(s32, "os/code_47fa0_len_20", osViGetCurrentContext);

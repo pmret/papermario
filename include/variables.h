@@ -74,6 +74,7 @@ extern BackgroundHeader gBackgroundImage;
 extern s8 D_8014F12F;
 
 extern PrintContext* gCurrentPrintContext;
+extern s32 D_802DB264;
 extern PrintContext* D_802DB268;
 
 // Triggers

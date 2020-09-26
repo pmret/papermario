@@ -57,7 +57,7 @@ ApiStatus func_802CA90C(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_API_ASM("code_ef070_len_3400", func_802CA988);
+INCLUDE_ASM(s32, "code_ef070_len_3400", func_802CA988, ScriptInstance* script, s32 isInitialCall);
 /*
 ApiStatus func_802CA988(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
@@ -187,9 +187,9 @@ ApiStatus SetCamTarget(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_API_ASM("code_ef070_len_3400", func_802CB008);
+INCLUDE_ASM(s32, "code_ef070_len_3400", func_802CB008, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_API_ASM("code_ef070_len_3400", ShakeCam);
+INCLUDE_ASM(s32, "code_ef070_len_3400", ShakeCam, ScriptInstance* script, s32 isInitialCall);
 
 INCLUDE_ASM(s32, "code_ef070_len_3400", exec_ShakeCam1);
 
@@ -241,9 +241,9 @@ ApiStatus PanToTarget(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_API_ASM("code_ef070_len_3400", UseSettingsFrom);
+INCLUDE_ASM(s32, "code_ef070_len_3400", UseSettingsFrom, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_API_ASM("code_ef070_len_3400", LoadSettings);
+INCLUDE_ASM(s32, "code_ef070_len_3400", LoadSettings, ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus SetCamType(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -452,11 +452,11 @@ ApiStatus WaitForCam(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_API_ASM("code_ef070_len_3400", SetCamProperties);
+INCLUDE_ASM(s32, "code_ef070_len_3400", SetCamProperties, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_API_ASM("code_ef070_len_3400", AdjustCam);
+INCLUDE_ASM(s32, "code_ef070_len_3400", AdjustCam, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_API_ASM("code_ef070_len_3400", ResetCam);
+INCLUDE_ASM(s32, "code_ef070_len_3400", ResetCam, ScriptInstance* script, s32 isInitialCall);
 
 INCLUDE_ASM(s32, "code_ef070_len_3400", func_802CCAC0);
 
