@@ -203,8 +203,8 @@ INCLUDE_ASM(s32, "code_b72b0_len_15ed0", make_item_entity);
 INCLUDE_ASM(s32, "code_b72b0_len_15ed0", make_item_entity_nodelay);
 
 INCLUDE_ASM(void, "code_b72b0_len_15ed0", make_item_entity_delayed, s32 itemID, f32 x, f32 y, f32 z, s32 unk1,
-              s32 unk2,
-              s32 unk3);
+            s32 unk2,
+            s32 unk3);
 
 INCLUDE_ASM(s32, "code_b72b0_len_15ed0", init_got_item);
 

@@ -969,7 +969,7 @@ ApiStatus SetModelFlag10(ScriptInstance* script, s32 isInitialCall) {
     Bytecode treeIndex = get_variable(script, *thisPos++);
     Bytecode var2 = get_variable(script, *thisPos++);
     Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(treeIndex));
-    
+
     if (var2 != 0) {
         model->flags |= 0x10;
     } else {
@@ -985,7 +985,7 @@ ApiStatus func_802C90FC(ScriptInstance* script, s32 isInitialCall) {
     s32 var2 = get_variable(script, *thisPos++);
     s32 var3 = get_variable(script, *thisPos++);
     Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(treeIndex));
-    
+
     func_8011BC7C(model, var2, var3);
     if (var2 != -1) {
         model->flags |= 0x10;

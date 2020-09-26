@@ -6,11 +6,11 @@ void init_demo_data(void) {
         GAME_STATUS->nextDemoScene = 0;
         GAME_STATUS->demoState = 1;
     }
-    
+
     GAME_STATUS->demoStickX = 0;
     GAME_STATUS->demoButtonInput = 0;
     GAME_STATUS->demoStickY = 0;
-    
+
     func_80056228();
     set_map_transition_effect(2);
     func_80137D88(0, 255.0f);

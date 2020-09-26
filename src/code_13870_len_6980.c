@@ -11,7 +11,7 @@ INCLUDE_ASM(s32, "code_13870_len_6980", init_npc_list);
 
 INCLUDE_ASM(s32, "code_13870_len_6980", func_8003857C);
 
-INCLUDE_ASM(s32, "code_13870_len_6980", _create_npc, );
+INCLUDE_ASM(s32, "code_13870_len_6980", _create_npc);
 
 INCLUDE_ASM(s32, "code_13870_len_6980", create_basic_npc);
 
