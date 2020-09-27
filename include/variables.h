@@ -94,6 +94,13 @@ extern s16 D_800A0944;
 extern s32 gGameState;
 extern s32 D_8009A650[1];
 
+// curtains
+extern f32 D_8009BA90;
+extern f32 D_8009BA94; // curtain scale goal
+extern f32 D_8009BA98;
+extern f32 D_8009BA9C; // curtain fade goal
+extern s32 D_8009BAA0; // curtain draw callback
+
 extern s16 gCurrentDoorSoundsSet;
 
 extern UNK_TYPE D_800E92D8;

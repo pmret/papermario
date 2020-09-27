@@ -1,3 +1,5 @@
+#! /usr/bin/python3
+
 import glob
 import os
 import re
