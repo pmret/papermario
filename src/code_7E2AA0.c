@@ -1,23 +1,25 @@
 #include "common.h"
 
 typedef struct {
-    /* 0x00 */ s32 unk_00;
+    /* 0x00 */ s32 unk_00; // door state? 01 = using door
     /* 0x04 */ s32 unk_04;
     /* 0x08 */ s16 unk_08;
     /* 0x0A */ s16 unk_0A;
-    /* 0x0C */ f32 unk_0C;
+    /* 0x0C */ f32 unk_0C; // x pos entry ?
     /* 0x10 */ f32 unk_10;
     /* 0x14 */ f32 unk_14;
-    /* 0x18 */ f32 unk_18;
+    /* 0x18 */ f32 unk_18; // rotation entry
     /* 0x1C */ f32 unk_1C;
     /* 0x20 */ f32 unk_20;
-    /* 0x24 */ f32 unk_24;
-    /* 0x28 */ f32 unk_28;
-    /* 0x2C */ s32* unk_2C;
-    /* 0x30 */ s32* unk_30;
-    /* 0x34 */ s32 unk_34;
-    /* 0x38 */ s32* unk_38;
-    /* 0x3C */ s32 unk_3C;
+    /* 0x24 */ f32 unk_24; // x pos exit ?
+    /* 0x28 */ f32 unk_28; // rotation exit
+    /* 0x2C */ s32* unk_2C; // ptr to script
+    /* 0x30 */ s32* unk_30; // ptr to script
+    /* 0x34 */ s32* unk_34; // ptr to ??? (usually null?)
+    /* 0x38 */ s32* unk_38; // ptr to script
+    /* 0x3C */ s32 unk_3C; //flags (has to do with hiding certain objects)
+    /* 0x40 */ char unk_40[12];
+    /* 0x4C */ s32* unk_4C;
 } DoorStuff;
 
 ApiStatus func_80281C20(ScriptInstance* script, s32 isInitialCall) {
@@ -103,13 +105,18 @@ INCLUDE_ASM(s32, "code_7E2AA0", func_80282634);
 
 INCLUDE_ASM(s32, "code_7E2AA0", func_80282700);
 
-INCLUDE_ASM(s32, "code_7E2AA0", func_80282774);
+ApiStatus func_80282774(ScriptInstance* script, s32 isInitialCall) {
+    DoorStuff* doorStuff = (DoorStuff*)script->functionTemp[1];
 
-INCLUDE_ASM(s32, "code_7E2AA0", func_802827A8);
-/*ApiStatus func_802827A8(ScriptInstance* script, s32 isInitialCall) {
-    func_80134230(script->functionTemp[1]->unkA);
+    doorStuff->unk_0A = func_80134240();
+    func_80134230(doorStuff->unk_08);
     return ApiStatus_DONE2;
-}*/
+}
+
+ApiStatus func_802827A8(ScriptInstance* script, s32 isInitialCall) {
+    func_80134230(((DoorStuff*)script->functionTemp[1])->unk_0A);
+    return ApiStatus_DONE2;
+}
 
 ApiStatus func_802827CC(ScriptInstance* script, s32 isInitialCall) {
     DoorStuff* temp = script->functionTemp[1];

@@ -49,6 +49,7 @@ s32 func_800555E4(s32);
 s32 osGetId();
 
 s32 func_800EF394(f32);
+s32 does_script_exist(s32 id);
 
 void func_8011B7C0(u16, s32, s32);
 void func_80137D88(s32, f32);
