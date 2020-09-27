@@ -1,23 +1,23 @@
 #include "common.h"
 
 typedef struct {
-/* 0x00 */ s32 unk_00;
-/* 0x04 */ s32 unk_04;
-/* 0x08 */ s16 unk_08;
-/* 0x0A */ s16 unk_0A;
-/* 0x0C */ f32 unk_0C;
-/* 0x10 */ f32 unk_10;
-/* 0x14 */ f32 unk_14;
-/* 0x18 */ f32 unk_18;
-/* 0x1C */ f32 unk_1C;
-/* 0x20 */ f32 unk_20;
-/* 0x24 */ f32 unk_24;
-/* 0x28 */ f32 unk_28;
-/* 0x2C */ s32* unk_2C;
-/* 0x30 */ s32* unk_30;
-/* 0x34 */ s32 unk_34;
-/* 0x38 */ s32* unk_38;
-/* 0x3C */ s32 unk_3C;
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ s32 unk_04;
+    /* 0x08 */ s16 unk_08;
+    /* 0x0A */ s16 unk_0A;
+    /* 0x0C */ f32 unk_0C;
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ f32 unk_14;
+    /* 0x18 */ f32 unk_18;
+    /* 0x1C */ f32 unk_1C;
+    /* 0x20 */ f32 unk_20;
+    /* 0x24 */ f32 unk_24;
+    /* 0x28 */ f32 unk_28;
+    /* 0x2C */ s32* unk_2C;
+    /* 0x30 */ s32* unk_30;
+    /* 0x34 */ s32 unk_34;
+    /* 0x38 */ s32* unk_38;
+    /* 0x3C */ s32 unk_3C;
 } DoorStuff;
 
 ApiStatus func_80281C20(ScriptInstance* script, s32 isInitialCall) {
@@ -77,7 +77,7 @@ ApiStatus func_80282594(ScriptInstance* script, s32 isInitialCall) {
     } else {
         camera2->moveSpeed = D_80286540;
     }
-    
+
     return ApiStatus_DONE2;
 }
 #else
