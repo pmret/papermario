@@ -112,7 +112,18 @@ ApiStatus SetSelfEnemyFlags(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_1f580_len_1940", SetSelfEnemyFlagBits, ScriptInstance* script, s32 isInitialCall);
+ApiStatus SetSelfEnemyFlagBits(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* thisPos = script->ptrReadPos;
+    Enemy* owner = script->ownerActorID;
+    s32 bits = thisPos[0];
+
+    if (get_variable(script, thisPos[1])) {
+        owner->flags |= bits;
+    } else {
+        owner->flags &= ~bits;
+    }
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_1f580_len_1940", func_80045580);
 
