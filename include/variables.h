@@ -62,6 +62,8 @@ extern Npc* gPlayerNpcPtr;
 
 extern s8 D_800A0900;
 extern EncounterStatus gCurrentEncounter;
+extern s16 D_80151308;
+extern s32 D_80151310;
 extern s16* D_80151328;
 extern s16 D_8010CD10;
 extern s16 D_8010CD12;
@@ -88,7 +90,6 @@ extern u16 gMapTransitionAlpha;
 extern u16 D_800A0942;
 extern s16 D_800A0944;
 
-extern s16 D_80151308;
 
 extern s32 gGameState;
 extern s32 D_8009A650[1];
@@ -105,7 +106,11 @@ extern s8 D_8010EBB0;
 
 extern SaveData gCurrentSaveFile;
 
+extern s32 D_802D9CA4;
 extern u32* gMapFlags;
 extern u32* gMapVars;
+extern s32 gNumScripts;
+
+extern f32 D_80286540;
 
 #endif

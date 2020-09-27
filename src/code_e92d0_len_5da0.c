@@ -9,8 +9,9 @@ s32 si_goto_end_case(ScriptInstance* script);
 f32 fixed_var_to_float(s32 scriptVar) {
     if (scriptVar <= -220000000) {
         return (scriptVar + 230000000) * (1 / 1024.0f);
+    } else {
+        return scriptVar;
     }
-    return scriptVar;
 }
 
 s32 float_to_fixed_var(f32 value) {
@@ -1064,7 +1065,31 @@ ApiStatus func_802C94A0(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
+#ifdef NON_MATCHING
+/*ApiStatus SetModelFlags(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* thisPos = script->ptrReadPos;
+    s32 listIndex;
+    Bytecode zvar;
+    Bytecode avar;
+    Bytecode flag;
+    Model* model;
+
+    listIndex = get_model_list_index_from_tree_index(get_variable(script, *thisPos++));
+    zvar = thisPos[1];
+    avar = thisPos[0];
+    flag = get_variable(script, zvar);
+    model = get_model_from_list_index(listIndex);
+
+    if (flag != 0) {
+        model->flags |= avar;
+    } else {
+        model->flags &= ~avar;
+    }
+    return ApiStatus_DONE2;
+}*/
+#else
 INCLUDE_ASM(s32, "code_e92d0_len_5da0", SetModelFlags, ScriptInstance* script, s32 isInitialCall);
+#endif
 
 INCLUDE_ASM(s32, "code_e92d0_len_5da0", func_802C95A0);
 
