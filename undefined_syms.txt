@@ -71,6 +71,7 @@ gCurrentEncounter = 0x800B0F10;
 nuContRmbCtl = 0x800B1d40;
 nuContData = 0x800B1D68;
 gCameras = 0x800B1D80;
+nusched = 0x800DA440;
 nuContPfs = 0x800DAAD8;
 nuSiMesgQ = 0x800DAC78;
 D_800DC500 = 0x800DC500;

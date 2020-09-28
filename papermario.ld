@@ -51,7 +51,7 @@ SECTIONS
         build/src/code_362a0_len_2f70.o(.text);
         build/src/code_39210_len_aa0.o(.text);
         build/src/os/code_39cb0_len_100.o(.text);
-        build/src/os/code_39db0_len_8a0.o(.text);
+        build/src/os/nusys/nuSched.o(.text);
         build/src/os/nusys/nuGfxFuncSet.o(.text);
         build/src/os/nusys/nuGfxPreNMIFuncSet.o(.text);
         build/src/os/nusys/nuGfxTaskAllEndWait.o(.text);
@@ -65,7 +65,8 @@ SECTIONS
         build/src/os/nusys/nuContDataGet.o(.text);
         build/src/os/nusys/nuContPakMgr.o(.text);
         build/src/os/nusys/nuContRmbMgr.o(.text);
-        build/src/os/code_3b290_len_100.o(.text);
+        build/src/os/nusys/nuContRmbStart.o(.text);
+        build/src/os/nusys/nuContRmbCheck.o(.text);
         build/src/os/code_3b390_len_110.o(.text);
         build/src/os/code_3b4a0_len_270.o(.text);
         build/src/os/code_3b710_len_40.o(.text);

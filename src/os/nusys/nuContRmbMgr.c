@@ -151,7 +151,7 @@ static s32 contRmbForceStopMesg(NUSiCommonMesg* mesg) {
     return 0;
 }
 
-static s32 contRmbForceStopEndMesg(NUSiCommonMesg* mesg) {
+s32 contRmbForceStopEndMesg(NUSiCommonMesg* mesg) {
     u32 i;
 
     for (i = 0; i < NU_CONT_MAXCONTROLLERS; i++) {
