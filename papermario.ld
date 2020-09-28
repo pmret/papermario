@@ -2,7 +2,7 @@ SECTIONS
 {
     /* 0x0 0-40 (len 40) */
     .text_0 0x0 : AT(0x0) {
-        build/header/header.o(.text_0);
+        build/asm/header.o(.text_0);
     }
 
     /* 0xA4000040 40-1000 (len FC0) */
