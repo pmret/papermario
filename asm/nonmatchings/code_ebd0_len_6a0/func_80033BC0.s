@@ -4,10 +4,10 @@
 glabel func_80033BC0
 /* EFC0 80033BC0 27BDFFD0 */  addiu     $sp, $sp, -0x30
 /* EFC4 80033BC4 AFB30024 */  sw        $s3, 0x24($sp)
-/* EFC8 80033BC8 3C138011 */  lui       $s3, 0x8011
-/* EFCC 80033BCC 2673EFC8 */  addiu     $s3, $s3, -0x1038
-/* EFD0 80033BD0 3C06800A */  lui       $a2, 0x800a
-/* EFD4 80033BD4 24C60900 */  addiu     $a2, $a2, 0x900
+/* EFC8 80033BC8 3C138011 */  lui       $s3, %hi(gPlayerStatus)
+/* EFCC 80033BCC 2673EFC8 */  addiu     $s3, $s3, %lo(gPlayerStatus)
+/* EFD0 80033BD0 3C06800A */  lui       $a2, %hi(D_800A0900)
+/* EFD4 80033BD4 24C60900 */  addiu     $a2, $a2, %lo(D_800A0900)
 /* EFD8 80033BD8 AFBF0028 */  sw        $ra, 0x28($sp)
 /* EFDC 80033BDC AFB20020 */  sw        $s2, 0x20($sp)
 /* EFE0 80033BE0 AFB1001C */  sw        $s1, 0x1c($sp)
@@ -25,8 +25,8 @@ glabel func_80033BC0
 /* F010 80033C10 2402FFFF */  addiu     $v0, $zero, -1
 /* F014 80033C14 0C017CBC */  jal       nuGfxSetCfb
 /* F018 80033C18 A0C20000 */   sb       $v0, ($a2)
-/* F01C 80033C1C 3C04800A */  lui       $a0, 0x800a
-/* F020 80033C20 2484A650 */  addiu     $a0, $a0, -0x59b0
+/* F01C 80033C1C 3C04800A */  lui       $a0, %hi(D_8009A650)
+/* F020 80033C20 2484A650 */  addiu     $a0, $a0, %lo(D_8009A650)
 /* F024 80033C24 8C820000 */  lw        $v0, ($a0)
 /* F028 80033C28 2403FFF7 */  addiu     $v1, $zero, -9
 /* F02C 80033C2C 00431024 */  and       $v0, $v0, $v1
@@ -36,8 +36,8 @@ glabel func_80033BC0
 /* F03C 80033C3C 00000000 */   nop      
 /* F040 80033C40 0C016AFA */  jal       get_current_map_header
 /* F044 80033C44 00000000 */   nop      
-/* F048 80033C48 3C108007 */  lui       $s0, 0x8007
-/* F04C 80033C4C 2610419C */  addiu     $s0, $s0, 0x419c
+/* F048 80033C48 3C108007 */  lui       $s0, %hi(gGameStatusPtr)
+/* F04C 80033C4C 2610419C */  addiu     $s0, $s0, %lo(gGameStatusPtr)
 /* F050 80033C50 8E040000 */  lw        $a0, ($s0)
 /* F054 80033C54 0040902D */  daddu     $s2, $v0, $zero
 /* F058 80033C58 84830086 */  lh        $v1, 0x86($a0)
@@ -102,8 +102,8 @@ glabel func_80033BC0
 /* F144 80033D44 0800CF90 */  j         .L80033E40
 /* F148 80033D48 AE620004 */   sw       $v0, 4($s3)
 .L80033D4C:
-/* F14C 80033D4C 3C028011 */  lui       $v0, 0x8011
-/* F150 80033D50 2442F290 */  addiu     $v0, $v0, -0xd70
+/* F14C 80033D4C 3C028011 */  lui       $v0, %hi(gPlayerData)
+/* F150 80033D50 2442F290 */  addiu     $v0, $v0, %lo(gPlayerData)
 /* F154 80033D54 0C03AC80 */  jal       func_800EB200
 /* F158 80033D58 80440012 */   lb       $a0, 0x12($v0)
 /* F15C 80033D5C 0C0169B0 */  jal       load_map_script_lib

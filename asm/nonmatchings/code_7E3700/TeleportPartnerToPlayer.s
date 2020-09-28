@@ -6,8 +6,8 @@ glabel TeleportPartnerToPlayer
 /* 7E4700 80283880 8042F2A2 */  lb        $v0, -0xd5e($v0)
 /* 7E4704 80283884 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 7E4708 80283888 AFB10014 */  sw        $s1, 0x14($sp)
-/* 7E470C 8028388C 3C118011 */  lui       $s1, 0x8011
-/* 7E4710 80283890 2631EFC8 */  addiu     $s1, $s1, -0x1038
+/* 7E470C 8028388C 3C118011 */  lui       $s1, %hi(gPlayerStatus)
+/* 7E4710 80283890 2631EFC8 */  addiu     $s1, $s1, %lo(gPlayerStatus)
 /* 7E4714 80283894 AFB20018 */  sw        $s2, 0x18($sp)
 /* 7E4718 80283898 0220902D */  daddu     $s2, $s1, $zero
 /* 7E471C 8028389C AFBF001C */  sw        $ra, 0x1c($sp)

@@ -9,8 +9,8 @@ glabel update_dynamic_entities
 /* B9B14 80123414 2411FFFD */  addiu     $s1, $zero, -3
 /* B9B18 80123418 AFBF0018 */  sw        $ra, 0x18($sp)
 .L8012341C:
-/* B9B1C 8012341C 3C038015 */  lui       $v1, 0x8015
-/* B9B20 80123420 8C634420 */  lw        $v1, 0x4420($v1)
+/* B9B1C 8012341C 3C038015 */  lui       $v1, %hi(gCurrentDynamicEntityListPtr)
+/* B9B20 80123420 8C634420 */  lw        $v1, %lo(gCurrentDynamicEntityListPtr)($v1)
 /* B9B24 80123424 00101080 */  sll       $v0, $s0, 2
 /* B9B28 80123428 00431021 */  addu      $v0, $v0, $v1
 /* B9B2C 8012342C 8C440000 */  lw        $a0, ($v0)

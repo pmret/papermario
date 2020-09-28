@@ -2,10 +2,10 @@
 .set noreorder # don't insert nops after branches
 
 glabel fio_deserialize_state
-/* 6890 8002B490 3C038011 */  lui       $v1, 0x8011
-/* 6894 8002B494 2463F290 */  addiu     $v1, $v1, -0xd70
-/* 6898 8002B498 3C07800E */  lui       $a3, 0x800e
-/* 689C 8002B49C 24E7ACC0 */  addiu     $a3, $a3, -0x5340
+/* 6890 8002B490 3C038011 */  lui       $v1, %hi(gPlayerData)
+/* 6894 8002B494 2463F290 */  addiu     $v1, $v1, %lo(gPlayerData)
+/* 6898 8002B498 3C07800E */  lui       $a3, %hi(gCurrentSaveFile)
+/* 689C 8002B49C 24E7ACC0 */  addiu     $a3, $a3, %lo(gCurrentSaveFile)
 /* 68A0 8002B4A0 24E20040 */  addiu     $v0, $a3, 0x40
 /* 68A4 8002B4A4 24E40460 */  addiu     $a0, $a3, 0x460
 .L8002B4A8:
@@ -24,8 +24,8 @@ glabel fio_deserialize_state
 /* 68D8 8002B4D8 8C4A0004 */  lw        $t2, 4($v0)
 /* 68DC 8002B4DC AC690000 */  sw        $t1, ($v1)
 /* 68E0 8002B4E0 AC6A0004 */  sw        $t2, 4($v1)
-/* 68E4 8002B4E4 3C038007 */  lui       $v1, 0x8007
-/* 68E8 8002B4E8 8C63419C */  lw        $v1, 0x419c($v1)
+/* 68E4 8002B4E4 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
+/* 68E8 8002B4E8 8C63419C */  lw        $v1, %lo(gGameStatusPtr)($v1)
 /* 68EC 8002B4EC 94E20468 */  lhu       $v0, 0x468($a3)
 /* 68F0 8002B4F0 A4620086 */  sh        $v0, 0x86($v1)
 /* 68F4 8002B4F4 94E2046A */  lhu       $v0, 0x46a($a3)
@@ -38,8 +38,8 @@ glabel fio_deserialize_state
 /* 6910 8002B510 0000302D */  daddu     $a2, $zero, $zero
 /* 6914 8002B514 A4620162 */  sh        $v0, 0x162($v1)
 /* 6918 8002B518 94E212EA */  lhu       $v0, 0x12ea($a3)
-/* 691C 8002B51C 3C08800B */  lui       $t0, 0x800b
-/* 6920 8002B520 25080F10 */  addiu     $t0, $t0, 0xf10
+/* 691C 8002B51C 3C08800B */  lui       $t0, %hi(gCurrentEncounter)
+/* 6920 8002B520 25080F10 */  addiu     $t0, $t0, %lo(gCurrentEncounter)
 /* 6924 8002B524 A4620164 */  sh        $v0, 0x164($v1)
 /* 6928 8002B528 0000282D */  daddu     $a1, $zero, $zero
 .L8002B52C:
@@ -57,8 +57,8 @@ glabel fio_deserialize_state
 /* 6954 8002B554 28C2000C */  slti      $v0, $a2, 0xc
 /* 6958 8002B558 1440FFF4 */  bnez      $v0, .L8002B52C
 /* 695C 8002B55C 0000282D */   daddu    $a1, $zero, $zero
-/* 6960 8002B560 3C038007 */  lui       $v1, 0x8007
-/* 6964 8002B564 2463419C */  addiu     $v1, $v1, 0x419c
+/* 6960 8002B560 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
+/* 6964 8002B564 2463419C */  addiu     $v1, $v1, %lo(gGameStatusPtr)
 /* 6968 8002B568 8C620000 */  lw        $v0, ($v1)
 /* 696C 8002B56C A0400074 */  sb        $zero, 0x74($v0)
 /* 6970 8002B570 8C620000 */  lw        $v0, ($v1)

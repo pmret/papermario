@@ -8,8 +8,8 @@ glabel func_80149F58
 /* E0664 80149F64 00E0802D */  daddu     $s0, $a3, $zero
 /* E0668 80149F68 AFB10034 */  sw        $s1, 0x34($sp)
 /* E066C 80149F6C 8FB10058 */  lw        $s1, 0x58($sp)
-/* E0670 80149F70 3C048007 */  lui       $a0, 0x8007
-/* E0674 80149F74 8C847410 */  lw        $a0, 0x7410($a0)
+/* E0670 80149F70 3C048007 */  lui       $a0, %hi(gCurrentCameraID)
+/* E0674 80149F74 8C847410 */  lw        $a0, %lo(gCurrentCameraID)($a0)
 /* E0678 80149F78 44056000 */  mfc1      $a1, $f12
 /* E067C 80149F7C 44067000 */  mfc1      $a2, $f14
 /* E0680 80149F80 27A20020 */  addiu     $v0, $sp, 0x20
@@ -90,8 +90,8 @@ glabel func_80149F58
 /* E0798 8014A098 24020001 */   addiu    $v0, $zero, 1
 /* E079C 8014A09C A6020000 */  sh        $v0, ($s0)
 .L8014A0A0:
-/* E07A0 8014A0A0 3C028007 */  lui       $v0, 0x8007
-/* E07A4 8014A0A4 8C42419C */  lw        $v0, 0x419c($v0)
+/* E07A0 8014A0A0 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* E07A4 8014A0A4 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* E07A8 8014A0A8 80420070 */  lb        $v0, 0x70($v0)
 /* E07AC 8014A0AC 14400010 */  bnez      $v0, .L8014A0F0
 /* E07B0 8014A0B0 00000000 */   nop      

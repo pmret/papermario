@@ -3,8 +3,8 @@
 
 glabel func_80260A60
 /* 18F340 80260A60 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* 18F344 80260A64 3C02800E */  lui       $v0, 0x800e
-/* 18F348 80260A68 2442C070 */  addiu     $v0, $v0, -0x3f90
+/* 18F344 80260A64 3C02800E */  lui       $v0, %hi(gBattleStatus)
+/* 18F348 80260A68 2442C070 */  addiu     $v0, $v0, %lo(gBattleStatus)
 /* 18F34C 80260A6C 0040202D */  daddu     $a0, $v0, $zero
 /* 18F350 80260A70 AFBF0010 */  sw        $ra, 0x10($sp)
 /* 18F354 80260A74 8C820004 */  lw        $v0, 4($a0)

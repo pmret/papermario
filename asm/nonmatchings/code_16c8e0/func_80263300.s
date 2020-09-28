@@ -8,19 +8,19 @@ glabel func_80263300
 /* 191BEC 8026330C AFB20018 */  sw        $s2, 0x18($sp)
 /* 191BF0 80263310 0280902D */  daddu     $s2, $s4, $zero
 /* 191BF4 80263314 AFB60028 */  sw        $s6, 0x28($sp)
-/* 191BF8 80263318 3C168008 */  lui       $s6, 0x8008
-/* 191BFC 8026331C 26D678E0 */  addiu     $s6, $s6, 0x78e0
+/* 191BF8 80263318 3C168008 */  lui       $s6, %hi(gItemTable)
+/* 191BFC 8026331C 26D678E0 */  addiu     $s6, $s6, %lo(gItemTable)
 /* 191C00 80263320 AFB50024 */  sw        $s5, 0x24($sp)
 /* 191C04 80263324 24150002 */  addiu     $s5, $zero, 2
 /* 191C08 80263328 AFB10014 */  sw        $s1, 0x14($sp)
-/* 191C0C 8026332C 3C11800E */  lui       $s1, 0x800e
-/* 191C10 80263330 2631C070 */  addiu     $s1, $s1, -0x3f90
+/* 191C0C 8026332C 3C11800E */  lui       $s1, %hi(gBattleStatus)
+/* 191C10 80263330 2631C070 */  addiu     $s1, $s1, %lo(gBattleStatus)
 /* 191C14 80263334 AFBF002C */  sw        $ra, 0x2c($sp)
 /* 191C18 80263338 AFB3001C */  sw        $s3, 0x1c($sp)
 /* 191C1C 8026333C AFB00010 */  sw        $s0, 0x10($sp)
 /* 191C20 80263340 8E3300D8 */  lw        $s3, 0xd8($s1)
-/* 191C24 80263344 3C108011 */  lui       $s0, 0x8011
-/* 191C28 80263348 2610F290 */  addiu     $s0, $s0, -0xd70
+/* 191C24 80263344 3C108011 */  lui       $s0, %hi(gPlayerData)
+/* 191C28 80263348 2610F290 */  addiu     $s0, $s0, %lo(gPlayerData)
 /* 191C2C 8026334C A220007D */  sb        $zero, 0x7d($s1)
 .L80263350:
 /* 191C30 80263350 860201B4 */  lh        $v0, 0x1b4($s0)

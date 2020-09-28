@@ -8,8 +8,8 @@ glabel dispatch_damage_event_actor
 /* 1A6FC0 802786E0 AFB20020 */  sw        $s2, 0x20($sp)
 /* 1A6FC4 802786E4 00C0902D */  daddu     $s2, $a2, $zero
 /* 1A6FC8 802786E8 AFB30024 */  sw        $s3, 0x24($sp)
-/* 1A6FCC 802786EC 3C13800E */  lui       $s3, 0x800e
-/* 1A6FD0 802786F0 2673C070 */  addiu     $s3, $s3, -0x3f90
+/* 1A6FCC 802786EC 3C13800E */  lui       $s3, %hi(gBattleStatus)
+/* 1A6FD0 802786F0 2673C070 */  addiu     $s3, $s3, %lo(gBattleStatus)
 /* 1A6FD4 802786F4 AFBF0028 */  sw        $ra, 0x28($sp)
 /* 1A6FD8 802786F8 AFB1001C */  sw        $s1, 0x1c($sp)
 /* 1A6FDC 802786FC A665017E */  sh        $a1, 0x17e($s3)

@@ -8,11 +8,11 @@ glabel check_block_input
 /* 1977B8 80268ED8 AFB7002C */  sw        $s7, 0x2c($sp)
 /* 1977BC 80268EDC 0000B82D */  daddu     $s7, $zero, $zero
 /* 1977C0 80268EE0 AFB10014 */  sw        $s1, 0x14($sp)
-/* 1977C4 80268EE4 3C11800E */  lui       $s1, 0x800e
-/* 1977C8 80268EE8 2631C070 */  addiu     $s1, $s1, -0x3f90
+/* 1977C4 80268EE4 3C11800E */  lui       $s1, %hi(gBattleStatus)
+/* 1977C8 80268EE8 2631C070 */  addiu     $s1, $s1, %lo(gBattleStatus)
 /* 1977CC 80268EEC AFB50024 */  sw        $s5, 0x24($sp)
-/* 1977D0 80268EF0 3C158011 */  lui       $s5, 0x8011
-/* 1977D4 80268EF4 26B5F290 */  addiu     $s5, $s5, -0xd70
+/* 1977D0 80268EF0 3C158011 */  lui       $s5, %hi(gPlayerData)
+/* 1977D4 80268EF4 26B5F290 */  addiu     $s5, $s5, %lo(gPlayerData)
 /* 1977D8 80268EF8 AFB60028 */  sw        $s6, 0x28($sp)
 /* 1977DC 80268EFC 3C16802A */  lui       $s6, 0x802a
 /* 1977E0 80268F00 26D6FBE0 */  addiu     $s6, $s6, -0x420
@@ -36,8 +36,8 @@ glabel check_block_input
 /* 197824 80268F44 82220083 */  lb        $v0, 0x83($s1)
 /* 197828 80268F48 10400068 */  beqz      $v0, .L802690EC
 /* 19782C 80268F4C 0000102D */   daddu    $v0, $zero, $zero
-/* 197830 80268F50 3C028007 */  lui       $v0, 0x8007
-/* 197834 80268F54 8C42419C */  lw        $v0, 0x419c($v0)
+/* 197830 80268F50 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* 197834 80268F54 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 197838 80268F58 904200AA */  lbu       $v0, 0xaa($v0)
 /* 19783C 80268F5C 30420001 */  andi      $v0, $v0, 1
 /* 197840 80268F60 14400062 */  bnez      $v0, .L802690EC
@@ -63,8 +63,8 @@ glabel check_block_input
 .L80268FA4:
 /* 197884 80268FA4 0000902D */  daddu     $s2, $zero, $zero
 /* 197888 80268FA8 24100003 */  addiu     $s0, $zero, 3
-/* 19788C 80268FAC 3C02800E */  lui       $v0, 0x800e
-/* 197890 80268FB0 8C42C070 */  lw        $v0, -0x3f90($v0)
+/* 19788C 80268FAC 3C02800E */  lui       $v0, %hi(gBattleStatus)
+/* 197890 80268FB0 8C42C070 */  lw        $v0, %lo(gBattleStatus)($v0)
 /* 197894 80268FB4 3C030008 */  lui       $v1, 8
 /* 197898 80268FB8 00431024 */  and       $v0, $v0, $v1
 /* 19789C 80268FBC 14400005 */  bnez      $v0, .L80268FD4

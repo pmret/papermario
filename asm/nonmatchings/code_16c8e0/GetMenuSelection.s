@@ -6,8 +6,8 @@ glabel GetMenuSelection
 /* 1A1CA8 802733C8 AFB00010 */  sw        $s0, 0x10($sp)
 /* 1A1CAC 802733CC 0080802D */  daddu     $s0, $a0, $zero
 /* 1A1CB0 802733D0 AFB10014 */  sw        $s1, 0x14($sp)
-/* 1A1CB4 802733D4 3C11800E */  lui       $s1, 0x800e
-/* 1A1CB8 802733D8 2631C070 */  addiu     $s1, $s1, -0x3f90
+/* 1A1CB4 802733D4 3C11800E */  lui       $s1, %hi(gBattleStatus)
+/* 1A1CB8 802733D8 2631C070 */  addiu     $s1, $s1, %lo(gBattleStatus)
 /* 1A1CBC 802733DC AFBF0020 */  sw        $ra, 0x20($sp)
 /* 1A1CC0 802733E0 AFB3001C */  sw        $s3, 0x1c($sp)
 /* 1A1CC4 802733E4 AFB20018 */  sw        $s2, 0x18($sp)

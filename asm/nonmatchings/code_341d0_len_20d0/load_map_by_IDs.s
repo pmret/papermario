@@ -14,11 +14,11 @@ glabel load_map_by_IDs
 /* 35B18 8005A718 AFBF004C */  sw        $ra, 0x4c($sp)
 /* 35B1C 8005A71C 0C05260E */  jal       func_80149838
 /* 35B20 8005A720 AFB20040 */   sw       $s2, 0x40($sp)
-/* 35B24 8005A724 3C05800A */  lui       $a1, 0x800a
-/* 35B28 8005A728 24A5A650 */  addiu     $a1, $a1, -0x59b0
+/* 35B24 8005A724 3C05800A */  lui       $a1, %hi(D_8009A650)
+/* 35B28 8005A728 24A5A650 */  addiu     $a1, $a1, %lo(D_8009A650)
 /* 35B2C 8005A72C 2402FFBF */  addiu     $v0, $zero, -0x41
-/* 35B30 8005A730 3C128007 */  lui       $s2, 0x8007
-/* 35B34 8005A734 2652419C */  addiu     $s2, $s2, 0x419c
+/* 35B30 8005A730 3C128007 */  lui       $s2, %hi(gGameStatusPtr)
+/* 35B34 8005A734 2652419C */  addiu     $s2, $s2, %lo(gGameStatusPtr)
 /* 35B38 8005A738 8CA30000 */  lw        $v1, ($a1)
 /* 35B3C 8005A73C 8E440000 */  lw        $a0, ($s2)
 /* 35B40 8005A740 00621824 */  and       $v1, $v1, $v0
@@ -58,8 +58,8 @@ glabel load_map_by_IDs
 .L8005A7C0:
 /* 35BC0 8005A7C0 3C04800E */  lui       $a0, 0x800e
 /* 35BC4 8005A7C4 24849230 */  addiu     $a0, $a0, -0x6dd0
-/* 35BC8 8005A7C8 3C028007 */  lui       $v0, 0x8007
-/* 35BCC 8005A7CC 8C42419C */  lw        $v0, 0x419c($v0)
+/* 35BC8 8005A7C8 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* 35BCC 8005A7CC 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 35BD0 8005A7D0 00131C00 */  sll       $v1, $s3, 0x10
 /* 35BD4 8005A7D4 AC400144 */  sw        $zero, 0x144($v0)
 /* 35BD8 8005A7D8 00111400 */  sll       $v0, $s1, 0x10
@@ -176,8 +176,8 @@ glabel load_map_by_IDs
 /* 35D7C 8005A97C 00000000 */   nop      
 /* 35D80 8005A980 0C00B7BD */  jal       create_cameras_a
 /* 35D84 8005A984 00000000 */   nop      
-/* 35D88 8005A988 3C108007 */  lui       $s0, 0x8007
-/* 35D8C 8005A98C 2610419C */  addiu     $s0, $s0, 0x419c
+/* 35D88 8005A988 3C108007 */  lui       $s0, %hi(gGameStatusPtr)
+/* 35D8C 8005A98C 2610419C */  addiu     $s0, $s0, %lo(gGameStatusPtr)
 /* 35D90 8005A990 8E020000 */  lw        $v0, ($s0)
 /* 35D94 8005A994 0C0B763E */  jal       func_802DD8F8
 /* 35D98 8005A998 80440084 */   lb       $a0, 0x84($v0)
@@ -230,8 +230,8 @@ glabel load_map_by_IDs
 /* 35E4C 8005AA4C 00000000 */   nop      
 /* 35E50 8005AA50 0C04C3FC */  jal       clear_item_entity_data
 /* 35E54 8005AA54 00000000 */   nop      
-/* 35E58 8005AA58 3C028011 */  lui       $v0, 0x8011
-/* 35E5C 8005AA5C 2442EFC8 */  addiu     $v0, $v0, -0x1038
+/* 35E58 8005AA58 3C028011 */  lui       $v0, %hi(gPlayerStatus)
+/* 35E5C 8005AA5C 2442EFC8 */  addiu     $v0, $v0, %lo(gPlayerStatus)
 /* 35E60 8005AA60 C4400084 */  lwc1      $f0, 0x84($v0)
 /* 35E64 8005AA64 E4400080 */  swc1      $f0, 0x80($v0)
 /* 35E68 8005AA68 8E42001C */  lw        $v0, 0x1c($s2)
@@ -269,12 +269,12 @@ glabel load_map_by_IDs
 /* 35EE0 8005AAE0 0C05179C */  jal       set_background_size
 /* 35EE4 8005AAE4 24070014 */   addiu    $a3, $zero, 0x14
 .L8005AAE8:
-/* 35EE8 8005AAE8 3C04800B */  lui       $a0, 0x800b
-/* 35EEC 8005AAEC 24841D80 */  addiu     $a0, $a0, 0x1d80
+/* 35EE8 8005AAE8 3C04800B */  lui       $a0, %hi(gCameras)
+/* 35EEC 8005AAEC 24841D80 */  addiu     $a0, $a0, %lo(gCameras)
 /* 35EF0 8005AAF0 94820000 */  lhu       $v0, ($a0)
 /* 35EF4 8005AAF4 94830AB0 */  lhu       $v1, 0xab0($a0)
-/* 35EF8 8005AAF8 3C018007 */  lui       $at, 0x8007
-/* 35EFC 8005AAFC AC207410 */  sw        $zero, 0x7410($at)
+/* 35EF8 8005AAF8 3C018007 */  lui       $at, %hi(gCurrentCameraID)
+/* 35EFC 8005AAFC AC207410 */  sw        $zero, %lo(gCurrentCameraID)($at)
 /* 35F00 8005AB00 34420002 */  ori       $v0, $v0, 2
 /* 35F04 8005AB04 A4820000 */  sh        $v0, ($a0)
 /* 35F08 8005AB08 94820558 */  lhu       $v0, 0x558($a0)
@@ -283,8 +283,8 @@ glabel load_map_by_IDs
 /* 35F14 8005AB14 34420002 */  ori       $v0, $v0, 2
 /* 35F18 8005AB18 A4820558 */  sh        $v0, 0x558($a0)
 /* 35F1C 8005AB1C 94821008 */  lhu       $v0, 0x1008($a0)
-/* 35F20 8005AB20 3C038007 */  lui       $v1, 0x8007
-/* 35F24 8005AB24 8C63419C */  lw        $v1, 0x419c($v1)
+/* 35F20 8005AB20 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
+/* 35F24 8005AB24 8C63419C */  lw        $v1, %lo(gGameStatusPtr)($v1)
 /* 35F28 8005AB28 34420002 */  ori       $v0, $v0, 2
 /* 35F2C 8005AB2C A4821008 */  sh        $v0, 0x1008($a0)
 /* 35F30 8005AB30 806300A8 */  lb        $v1, 0xa8($v1)
@@ -311,8 +311,8 @@ glabel load_map_by_IDs
 /* 35F7C 8005AB7C 00000000 */   nop      
 /* 35F80 8005AB80 0000282D */  daddu     $a1, $zero, $zero
 /* 35F84 8005AB84 00A0302D */  daddu     $a2, $a1, $zero
-/* 35F88 8005AB88 3C108007 */  lui       $s0, 0x8007
-/* 35F8C 8005AB8C 2610419C */  addiu     $s0, $s0, 0x419c
+/* 35F88 8005AB88 3C108007 */  lui       $s0, %hi(gGameStatusPtr)
+/* 35F8C 8005AB8C 2610419C */  addiu     $s0, $s0, %lo(gGameStatusPtr)
 /* 35F90 8005AB90 8E030000 */  lw        $v1, ($s0)
 /* 35F94 8005AB94 240203E8 */  addiu     $v0, $zero, 0x3e8
 /* 35F98 8005AB98 A4620090 */  sh        $v0, 0x90($v1)

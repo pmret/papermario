@@ -31,8 +31,8 @@ glabel ShakeCam
 /* EFCC0 802CB310 8E050000 */  lw        $a1, ($s0)
 /* EFCC4 802CB314 0C0B210B */  jal       get_float_variable
 /* EFCC8 802CB318 02A0202D */   daddu    $a0, $s5, $zero
-/* EFCCC 802CB31C 3C04800B */  lui       $a0, 0x800b
-/* EFCD0 802CB320 24841D80 */  addiu     $a0, $a0, 0x1d80
+/* EFCCC 802CB31C 3C04800B */  lui       $a0, %hi(gCameras)
+/* EFCD0 802CB320 24841D80 */  addiu     $a0, $a0, %lo(gCameras)
 /* EFCD4 802CB324 00111080 */  sll       $v0, $s1, 2
 /* EFCD8 802CB328 00511021 */  addu      $v0, $v0, $s1
 /* EFCDC 802CB32C 00021080 */  sll       $v0, $v0, 2
@@ -54,8 +54,8 @@ glabel ShakeCam
 /* EFD18 802CB368 44810000 */  mtc1      $at, $f0
 /* EFD1C 802CB36C 00000000 */  nop       
 /* EFD20 802CB370 E6A0007C */  swc1      $f0, 0x7c($s5)
-/* EFD24 802CB374 3C028007 */  lui       $v0, 0x8007
-/* EFD28 802CB378 8C42419C */  lw        $v0, 0x419c($v0)
+/* EFD24 802CB374 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* EFD28 802CB378 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* EFD2C 802CB37C AEB40074 */  sw        $s4, 0x74($s5)
 /* EFD30 802CB380 80420070 */  lb        $v0, 0x70($v0)
 /* EFD34 802CB384 14400021 */  bnez      $v0, .L802CB40C

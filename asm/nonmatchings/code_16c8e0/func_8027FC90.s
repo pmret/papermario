@@ -15,8 +15,8 @@ glabel func_8027FC90
 /* 1AE598 8027FCB8 0C0B1EAF */  jal       get_variable
 /* 1AE59C 8027FCBC 26520004 */   addiu    $s2, $s2, 4
 /* 1AE5A0 8027FCC0 0040202D */  daddu     $a0, $v0, $zero
-/* 1AE5A4 8027FCC4 3C13800E */  lui       $s3, 0x800e
-/* 1AE5A8 8027FCC8 2673C070 */  addiu     $s3, $s3, -0x3f90
+/* 1AE5A4 8027FCC4 3C13800E */  lui       $s3, %hi(gBattleStatus)
+/* 1AE5A8 8027FCC8 2673C070 */  addiu     $s3, $s3, %lo(gBattleStatus)
 /* 1AE5AC 8027FCCC 2402FF81 */  addiu     $v0, $zero, -0x7f
 /* 1AE5B0 8027FCD0 14820002 */  bne       $a0, $v0, .L8027FCDC
 /* 1AE5B4 8027FCD4 00000000 */   nop      

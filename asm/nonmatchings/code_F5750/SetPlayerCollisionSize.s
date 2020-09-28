@@ -15,10 +15,10 @@ glabel SetPlayerCollisionSize
 /* F5988 802D0FD8 8E050000 */  lw        $a1, ($s0)
 /* F598C 802D0FDC 0C0B1EAF */  jal       get_variable
 /* F5990 802D0FE0 0040802D */   daddu    $s0, $v0, $zero
-/* F5994 802D0FE4 3C03802E */  lui       $v1, 0x802e
-/* F5998 802D0FE8 8C639D20 */  lw        $v1, -0x62e0($v1)
-/* F599C 802D0FEC 3C048011 */  lui       $a0, 0x8011
-/* F59A0 802D0FF0 2484EFC8 */  addiu     $a0, $a0, -0x1038
+/* F5994 802D0FE4 3C03802E */  lui       $v1, %hi(gPlayerNpcPtr)
+/* F5998 802D0FE8 8C639D20 */  lw        $v1, %lo(gPlayerNpcPtr)($v1)
+/* F599C 802D0FEC 3C048011 */  lui       $a0, %hi(gPlayerStatus)
+/* F59A0 802D0FF0 2484EFC8 */  addiu     $a0, $a0, %lo(gPlayerStatus)
 /* F59A4 802D0FF4 A47000A8 */  sh        $s0, 0xa8($v1)
 /* F59A8 802D0FF8 A46200A6 */  sh        $v0, 0xa6($v1)
 /* F59AC 802D0FFC 0200102D */  daddu     $v0, $s0, $zero

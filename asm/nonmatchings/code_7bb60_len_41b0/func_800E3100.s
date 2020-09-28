@@ -4,8 +4,8 @@
 glabel func_800E3100
 /* 7C5B0 800E3100 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 7C5B4 800E3104 AFB00018 */  sw        $s0, 0x18($sp)
-/* 7C5B8 800E3108 3C108011 */  lui       $s0, 0x8011
-/* 7C5BC 800E310C 2610EFC8 */  addiu     $s0, $s0, -0x1038
+/* 7C5B8 800E3108 3C108011 */  lui       $s0, %hi(gPlayerStatus)
+/* 7C5BC 800E310C 2610EFC8 */  addiu     $s0, $s0, %lo(gPlayerStatus)
 /* 7C5C0 800E3110 AFBF001C */  sw        $ra, 0x1c($sp)
 /* 7C5C4 800E3114 820300B4 */  lb        $v1, 0xb4($s0)
 /* 7C5C8 800E3118 24020007 */  addiu     $v0, $zero, 7

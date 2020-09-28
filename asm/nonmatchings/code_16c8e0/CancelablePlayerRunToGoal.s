@@ -6,8 +6,8 @@ glabel CancelablePlayerRunToGoal
 /* 1A27E0 80273F00 AFB30024 */  sw        $s3, 0x24($sp)
 /* 1A27E4 80273F04 0080982D */  daddu     $s3, $a0, $zero
 /* 1A27E8 80273F08 AFB40028 */  sw        $s4, 0x28($sp)
-/* 1A27EC 80273F0C 3C14800E */  lui       $s4, 0x800e
-/* 1A27F0 80273F10 2694C070 */  addiu     $s4, $s4, -0x3f90
+/* 1A27EC 80273F0C 3C14800E */  lui       $s4, %hi(gBattleStatus)
+/* 1A27F0 80273F10 2694C070 */  addiu     $s4, $s4, %lo(gBattleStatus)
 /* 1A27F4 80273F14 AFBF002C */  sw        $ra, 0x2c($sp)
 /* 1A27F8 80273F18 AFB20020 */  sw        $s2, 0x20($sp)
 /* 1A27FC 80273F1C AFB1001C */  sw        $s1, 0x1c($sp)

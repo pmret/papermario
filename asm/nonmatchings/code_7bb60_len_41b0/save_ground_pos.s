@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel save_ground_pos
-/* 7E990 800E54E0 3C038011 */  lui       $v1, 0x8011
-/* 7E994 800E54E4 2463EFC8 */  addiu     $v1, $v1, -0x1038
+/* 7E990 800E54E0 3C038011 */  lui       $v1, %hi(gPlayerStatus)
+/* 7E994 800E54E4 2463EFC8 */  addiu     $v1, $v1, %lo(gPlayerStatus)
 /* 7E998 800E54E8 C4600028 */  lwc1      $f0, 0x28($v1)
 /* 7E99C 800E54EC C4620030 */  lwc1      $f2, 0x30($v1)
 /* 7E9A0 800E54F0 4600010D */  trunc.w.s $f4, $f0

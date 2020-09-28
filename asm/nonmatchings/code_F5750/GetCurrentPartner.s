@@ -5,13 +5,13 @@ glabel GetCurrentPartner
 /* F74BC 802D2B0C 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* F74C0 802D2B10 AFBF0010 */  sw        $ra, 0x10($sp)
 /* F74C4 802D2B14 8C82000C */  lw        $v0, 0xc($a0)
-/* F74C8 802D2B18 3C038011 */  lui       $v1, 0x8011
-/* F74CC 802D2B1C 8063EBB0 */  lb        $v1, -0x1450($v1)
+/* F74C8 802D2B18 3C038011 */  lui       $v1, %hi(D_8010EBB0)
+/* F74CC 802D2B1C 8063EBB0 */  lb        $v1, %lo(D_8010EBB0)($v1)
 /* F74D0 802D2B20 8C450000 */  lw        $a1, ($v0)
 /* F74D4 802D2B24 10600004 */  beqz      $v1, .L802D2B38
 /* F74D8 802D2B28 0000302D */   daddu    $a2, $zero, $zero
-/* F74DC 802D2B2C 3C028011 */  lui       $v0, 0x8011
-/* F74E0 802D2B30 2442F290 */  addiu     $v0, $v0, -0xd70
+/* F74DC 802D2B2C 3C028011 */  lui       $v0, %hi(gPlayerData)
+/* F74E0 802D2B30 2442F290 */  addiu     $v0, $v0, %lo(gPlayerData)
 /* F74E4 802D2B34 80460012 */  lb        $a2, 0x12($v0)
 .L802D2B38:
 /* F74E8 802D2B38 0C0B2026 */  jal       set_variable

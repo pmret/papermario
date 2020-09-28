@@ -9,13 +9,13 @@ glabel fio_save_game
 /* 6784 8002B384 AFB10014 */  sw        $s1, 0x14($sp)
 /* 6788 8002B388 0C00AC55 */  jal       fio_fetch_saved_file_info
 /* 678C 8002B38C AFB00010 */   sw       $s0, 0x10($sp)
-/* 6790 8002B390 3C118007 */  lui       $s1, 0x8007
-/* 6794 8002B394 2631419C */  addiu     $s1, $s1, 0x419c
+/* 6790 8002B390 3C118007 */  lui       $s1, %hi(gGameStatusPtr)
+/* 6794 8002B394 2631419C */  addiu     $s1, $s1, %lo(gGameStatusPtr)
 /* 6798 8002B398 8E220000 */  lw        $v0, ($s1)
 /* 679C 8002B39C 0C00AD8C */  jal       fio_serialize_state
 /* 67A0 8002B3A0 A0520166 */   sb       $s2, 0x166($v0)
-/* 67A4 8002B3A4 3C10800E */  lui       $s0, 0x800e
-/* 67A8 8002B3A8 2610ACC0 */  addiu     $s0, $s0, -0x5340
+/* 67A4 8002B3A4 3C10800E */  lui       $s0, %hi(gCurrentSaveFile)
+/* 67A8 8002B3A8 2610ACC0 */  addiu     $s0, $s0, %lo(gCurrentSaveFile)
 /* 67AC 8002B3AC 3C058007 */  lui       $a1, 0x8007
 /* 67B0 8002B3B0 24A545D0 */  addiu     $a1, $a1, 0x45d0
 /* 67B4 8002B3B4 0C01BB50 */  jal       strcpy

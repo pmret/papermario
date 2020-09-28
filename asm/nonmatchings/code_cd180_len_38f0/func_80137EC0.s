@@ -6,10 +6,10 @@ glabel func_80137EC0
 /* CE5C4 80137EC4 AFB1003C */  sw        $s1, 0x3c($sp)
 /* CE5C8 80137EC8 0080882D */  daddu     $s1, $a0, $zero
 /* CE5CC 80137ECC AFB20040 */  sw        $s2, 0x40($sp)
-/* CE5D0 80137ED0 3C038007 */  lui       $v1, 0x8007
-/* CE5D4 80137ED4 8C637410 */  lw        $v1, 0x7410($v1)
-/* CE5D8 80137ED8 3C04800B */  lui       $a0, 0x800b
-/* CE5DC 80137EDC 24841D80 */  addiu     $a0, $a0, 0x1d80
+/* CE5D0 80137ED0 3C038007 */  lui       $v1, %hi(gCurrentCameraID)
+/* CE5D4 80137ED4 8C637410 */  lw        $v1, %lo(gCurrentCameraID)($v1)
+/* CE5D8 80137ED8 3C04800B */  lui       $a0, %hi(gCameras)
+/* CE5DC 80137EDC 24841D80 */  addiu     $a0, $a0, %lo(gCameras)
 /* CE5E0 80137EE0 AFBF0044 */  sw        $ra, 0x44($sp)
 /* CE5E4 80137EE4 AFB00038 */  sw        $s0, 0x38($sp)
 /* CE5E8 80137EE8 F7B40048 */  sdc1      $f20, 0x48($sp)

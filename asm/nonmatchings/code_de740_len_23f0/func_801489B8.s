@@ -25,10 +25,10 @@ glabel func_801489B8
 /* DF108 80148A08 0080882D */  daddu     $s1, $a0, $zero
 /* DF10C 80148A0C F7BC0060 */  sdc1      $f28, 0x60($sp)
 /* DF110 80148A10 4480E000 */  mtc1      $zero, $f28
-/* DF114 80148A14 3C038007 */  lui       $v1, 0x8007
-/* DF118 80148A18 8C637410 */  lw        $v1, 0x7410($v1)
-/* DF11C 80148A1C 3C04800B */  lui       $a0, 0x800b
-/* DF120 80148A20 24841D80 */  addiu     $a0, $a0, 0x1d80
+/* DF114 80148A14 3C038007 */  lui       $v1, %hi(gCurrentCameraID)
+/* DF118 80148A18 8C637410 */  lw        $v1, %lo(gCurrentCameraID)($v1)
+/* DF11C 80148A1C 3C04800B */  lui       $a0, %hi(gCameras)
+/* DF120 80148A20 24841D80 */  addiu     $a0, $a0, %lo(gCameras)
 /* DF124 80148A24 AFBF003C */  sw        $ra, 0x3c($sp)
 /* DF128 80148A28 4616B002 */  mul.s     $f0, $f22, $f22
 /* DF12C 80148A2C 00000000 */  nop       

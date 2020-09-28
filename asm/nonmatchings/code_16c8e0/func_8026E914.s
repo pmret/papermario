@@ -6,8 +6,8 @@ glabel func_8026E914
 /* 19D1F8 8026E918 AFB00010 */  sw        $s0, 0x10($sp)
 /* 19D1FC 8026E91C 0080802D */  daddu     $s0, $a0, $zero
 /* 19D200 8026E920 AFB20018 */  sw        $s2, 0x18($sp)
-/* 19D204 8026E924 3C12800E */  lui       $s2, 0x800e
-/* 19D208 8026E928 2652C070 */  addiu     $s2, $s2, -0x3f90
+/* 19D204 8026E924 3C12800E */  lui       $s2, %hi(gBattleStatus)
+/* 19D208 8026E928 2652C070 */  addiu     $s2, $s2, %lo(gBattleStatus)
 /* 19D20C 8026E92C AFBF001C */  sw        $ra, 0x1c($sp)
 /* 19D210 8026E930 AFB10014 */  sw        $s1, 0x14($sp)
 /* 19D214 8026E934 8E02000C */  lw        $v0, 0xc($s0)

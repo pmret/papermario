@@ -3,8 +3,8 @@
 
 glabel func_800E59A0
 /* 7EE50 800E59A0 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* 7EE54 800E59A4 3C048011 */  lui       $a0, 0x8011
-/* 7EE58 800E59A8 2484F250 */  addiu     $a0, $a0, -0xdb0
+/* 7EE54 800E59A4 3C048011 */  lui       $a0, %hi(D_8010F250)
+/* 7EE58 800E59A8 2484F250 */  addiu     $a0, $a0, %lo(D_8010F250)
 /* 7EE5C 800E59AC AFBF0010 */  sw        $ra, 0x10($sp)
 /* 7EE60 800E59B0 0C00A580 */  jal       mem_clear
 /* 7EE64 800E59B4 24050034 */   addiu    $a1, $zero, 0x34

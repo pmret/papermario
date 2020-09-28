@@ -4,11 +4,11 @@
 glabel update_heroes_start_turn
 /* 170904 80242024 27BDFFB0 */  addiu     $sp, $sp, -0x50
 /* 170908 80242028 AFB30024 */  sw        $s3, 0x24($sp)
-/* 17090C 8024202C 3C13800E */  lui       $s3, 0x800e
-/* 170910 80242030 2673C070 */  addiu     $s3, $s3, -0x3f90
+/* 17090C 8024202C 3C13800E */  lui       $s3, %hi(gBattleStatus)
+/* 170910 80242030 2673C070 */  addiu     $s3, $s3, %lo(gBattleStatus)
 /* 170914 80242034 AFB60030 */  sw        $s6, 0x30($sp)
-/* 170918 80242038 3C168011 */  lui       $s6, 0x8011
-/* 17091C 8024203C 26D6F290 */  addiu     $s6, $s6, -0xd70
+/* 170918 80242038 3C168011 */  lui       $s6, %hi(gPlayerData)
+/* 17091C 8024203C 26D6F290 */  addiu     $s6, $s6, %lo(gPlayerData)
 /* 170920 80242040 AFB20020 */  sw        $s2, 0x20($sp)
 /* 170924 80242044 3C12800E */  lui       $s2, 0x800e
 /* 170928 80242048 2652C4DC */  addiu     $s2, $s2, -0x3b24
@@ -282,8 +282,8 @@ glabel update_heroes_start_turn
 /* 170D18 80242438 9264009B */  lbu       $a0, 0x9b($s3)
 /* 170D1C 8024243C 10400024 */  beqz      $v0, .L802424D0
 /* 170D20 80242440 24020015 */   addiu    $v0, $zero, 0x15
-/* 170D24 80242444 3C05800E */  lui       $a1, 0x800e
-/* 170D28 80242448 24A5C070 */  addiu     $a1, $a1, -0x3f90
+/* 170D24 80242444 3C05800E */  lui       $a1, %hi(gBattleStatus)
+/* 170D28 80242448 24A5C070 */  addiu     $a1, $a1, %lo(gBattleStatus)
 /* 170D2C 8024244C 8CA30004 */  lw        $v1, 4($a1)
 /* 170D30 80242450 30620100 */  andi      $v0, $v1, 0x100
 /* 170D34 80242454 10400004 */  beqz      $v0, .L80242468
@@ -336,8 +336,8 @@ glabel update_heroes_start_turn
 /* 170DD8 802424F8 82220214 */  lb        $v0, 0x214($s1)
 /* 170DDC 802424FC 14400009 */  bnez      $v0, .L80242524
 /* 170DE0 80242500 24040001 */   addiu    $a0, $zero, 1
-/* 170DE4 80242504 3C03800E */  lui       $v1, 0x800e
-/* 170DE8 80242508 2463C070 */  addiu     $v1, $v1, -0x3f90
+/* 170DE4 80242504 3C03800E */  lui       $v1, %hi(gBattleStatus)
+/* 170DE8 80242508 2463C070 */  addiu     $v1, $v1, %lo(gBattleStatus)
 /* 170DEC 8024250C 8C620000 */  lw        $v0, ($v1)
 /* 170DF0 80242510 2405000A */  addiu     $a1, $zero, 0xa
 /* 170DF4 80242514 34420020 */  ori       $v0, $v0, 0x20
@@ -345,8 +345,8 @@ glabel update_heroes_start_turn
 /* 170DFC 8024251C AC620000 */   sw       $v0, ($v1)
 /* 170E00 80242520 3C03F7FF */  lui       $v1, 0xf7ff
 .L80242524:
-/* 170E04 80242524 3C10800E */  lui       $s0, 0x800e
-/* 170E08 80242528 2610C070 */  addiu     $s0, $s0, -0x3f90
+/* 170E04 80242524 3C10800E */  lui       $s0, %hi(gBattleStatus)
+/* 170E08 80242528 2610C070 */  addiu     $s0, $s0, %lo(gBattleStatus)
 /* 170E0C 8024252C 8E020004 */  lw        $v0, 4($s0)
 /* 170E10 80242530 3463FFFF */  ori       $v1, $v1, 0xffff
 /* 170E14 80242534 A2600099 */  sb        $zero, 0x99($s3)
@@ -381,8 +381,8 @@ glabel update_heroes_start_turn
 /* 170E84 802425A4 30420001 */  andi      $v0, $v0, 1
 /* 170E88 802425A8 1440000B */  bnez      $v0, .L802425D8
 /* 170E8C 802425AC 24020016 */   addiu    $v0, $zero, 0x16
-/* 170E90 802425B0 3C05800E */  lui       $a1, 0x800e
-/* 170E94 802425B4 24A5C070 */  addiu     $a1, $a1, -0x3f90
+/* 170E90 802425B0 3C05800E */  lui       $a1, %hi(gBattleStatus)
+/* 170E94 802425B4 24A5C070 */  addiu     $a1, $a1, %lo(gBattleStatus)
 /* 170E98 802425B8 3C040800 */  lui       $a0, 0x800
 /* 170E9C 802425BC 8CA20004 */  lw        $v0, 4($a1)
 /* 170EA0 802425C0 92630099 */  lbu       $v1, 0x99($s3)
@@ -715,8 +715,8 @@ glabel update_heroes_start_turn
 .L80242A70:
 /* 171350 80242A70 0C090464 */  jal       func_80241190
 /* 171354 80242A74 24040008 */   addiu    $a0, $zero, 8
-/* 171358 80242A78 3C03800E */  lui       $v1, 0x800e
-/* 17135C 80242A7C 2463C070 */  addiu     $v1, $v1, -0x3f90
+/* 171358 80242A78 3C03800E */  lui       $v1, %hi(gBattleStatus)
+/* 17135C 80242A7C 2463C070 */  addiu     $v1, $v1, %lo(gBattleStatus)
 /* 171360 80242A80 8C620004 */  lw        $v0, 4($v1)
 /* 171364 80242A84 34420002 */  ori       $v0, $v0, 2
 /* 171368 80242A88 AC620004 */  sw        $v0, 4($v1)

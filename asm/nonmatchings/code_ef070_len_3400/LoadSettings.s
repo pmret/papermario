@@ -12,8 +12,8 @@ glabel LoadSettings
 /* F03C4 802CBA14 0C0B1EAF */  jal       get_variable
 /* F03C8 802CBA18 26100004 */   addiu    $s0, $s0, 4
 /* F03CC 802CBA1C 0220202D */  daddu     $a0, $s1, $zero
-/* F03D0 802CBA20 3C03800B */  lui       $v1, 0x800b
-/* F03D4 802CBA24 24631D80 */  addiu     $v1, $v1, 0x1d80
+/* F03D0 802CBA20 3C03800B */  lui       $v1, %hi(gCameras)
+/* F03D4 802CBA24 24631D80 */  addiu     $v1, $v1, %lo(gCameras)
 /* F03D8 802CBA28 8E050000 */  lw        $a1, ($s0)
 /* F03DC 802CBA2C 00028080 */  sll       $s0, $v0, 2
 /* F03E0 802CBA30 02028021 */  addu      $s0, $s0, $v0

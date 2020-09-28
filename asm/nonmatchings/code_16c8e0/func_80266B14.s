@@ -5,8 +5,8 @@ glabel func_80266B14
 /* 1953F4 80266B14 0000302D */  daddu     $a2, $zero, $zero
 /* 1953F8 80266B18 3C07FFF7 */  lui       $a3, 0xfff7
 /* 1953FC 80266B1C 34E7FFFF */  ori       $a3, $a3, 0xffff
-/* 195400 80266B20 3C05800E */  lui       $a1, 0x800e
-/* 195404 80266B24 24A5C070 */  addiu     $a1, $a1, -0x3f90
+/* 195400 80266B20 3C05800E */  lui       $a1, %hi(gBattleStatus)
+/* 195404 80266B24 24A5C070 */  addiu     $a1, $a1, %lo(gBattleStatus)
 .L80266B28:
 /* 195408 80266B28 8CA400E0 */  lw        $a0, 0xe0($a1)
 /* 19540C 80266B2C 5080000D */  beql      $a0, $zero, .L80266B64

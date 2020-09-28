@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel get_enemy_safe
-/* 1A168 8003ED68 3C03800B */  lui       $v1, 0x800b
-/* 1A16C 8003ED6C 24630F10 */  addiu     $v1, $v1, 0xf10
+/* 1A168 8003ED68 3C03800B */  lui       $v1, %hi(gCurrentEncounter)
+/* 1A16C 8003ED6C 24630F10 */  addiu     $v1, $v1, %lo(gCurrentEncounter)
 /* 1A170 8003ED70 8062001C */  lb        $v0, 0x1c($v1)
 /* 1A174 8003ED74 1840001A */  blez      $v0, .L8003EDE0
 /* 1A178 8003ED78 0000382D */   daddu    $a3, $zero, $zero

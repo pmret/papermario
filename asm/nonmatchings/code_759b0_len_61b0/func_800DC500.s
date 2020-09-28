@@ -114,8 +114,8 @@ glabel func_800DC500
 /* 75B5C 800DC6AC 00000000 */  nop       
 /* 75B60 800DC6B0 46142402 */  mul.s     $f16, $f4, $f20
 /* 75B64 800DC6B4 00000000 */  nop       
-/* 75B68 800DC6B8 3C108007 */  lui       $s0, 0x8007
-/* 75B6C 800DC6BC 2610419C */  addiu     $s0, $s0, 0x419c
+/* 75B68 800DC6B8 3C108007 */  lui       $s0, %hi(gGameStatusPtr)
+/* 75B6C 800DC6BC 2610419C */  addiu     $s0, $s0, %lo(gGameStatusPtr)
 /* 75B70 800DC6C0 C7A2004C */  lwc1      $f2, 0x4c($sp)
 /* 75B74 800DC6C4 44068000 */  mfc1      $a2, $f16
 /* 75B78 800DC6C8 46141402 */  mul.s     $f16, $f2, $f20

@@ -4,8 +4,8 @@
 glabel func_800E63A4
 /* 7F854 800E63A4 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 7F858 800E63A8 AFB00010 */  sw        $s0, 0x10($sp)
-/* 7F85C 800E63AC 3C108011 */  lui       $s0, 0x8011
-/* 7F860 800E63B0 2610EFC8 */  addiu     $s0, $s0, -0x1038
+/* 7F85C 800E63AC 3C108011 */  lui       $s0, %hi(gPlayerStatus)
+/* 7F860 800E63B0 2610EFC8 */  addiu     $s0, $s0, %lo(gPlayerStatus)
 /* 7F864 800E63B4 10800005 */  beqz      $a0, .L800E63CC
 /* 7F868 800E63B8 AFBF0014 */   sw       $ra, 0x14($sp)
 /* 7F86C 800E63BC 0C039769 */  jal       set_action_state
@@ -15,8 +15,8 @@ glabel func_800E63A4
 .L800E63CC:
 /* 7F87C 800E63CC 2403DFFF */  addiu     $v1, $zero, -0x2001
 /* 7F880 800E63D0 8E020004 */  lw        $v0, 4($s0)
-/* 7F884 800E63D4 3C048007 */  lui       $a0, 0x8007
-/* 7F888 800E63D8 8C84419C */  lw        $a0, 0x419c($a0)
+/* 7F884 800E63D4 3C048007 */  lui       $a0, %hi(gGameStatusPtr)
+/* 7F888 800E63D8 8C84419C */  lw        $a0, %lo(gGameStatusPtr)($a0)
 /* 7F88C 800E63DC 00431024 */  and       $v0, $v0, $v1
 /* 7F890 800E63E0 AE020004 */  sw        $v0, 4($s0)
 /* 7F894 800E63E4 9082007E */  lbu       $v0, 0x7e($a0)

@@ -15,8 +15,8 @@ glabel func_80049F7C
 /* 253A4 80049FA4 86640008 */  lh        $a0, 8($s3)
 /* 253A8 80049FA8 0C00EABB */  jal       get_npc_unsafe
 /* 253AC 80049FAC 00A0902D */   daddu    $s2, $a1, $zero
-/* 253B0 80049FB0 3C04800F */  lui       $a0, 0x800f
-/* 253B4 80049FB4 8C847B30 */  lw        $a0, 0x7b30($a0)
+/* 253B0 80049FB0 3C04800F */  lui       $a0, %hi(gPlayerStatusPtr)
+/* 253B4 80049FB4 8C847B30 */  lw        $a0, %lo(gPlayerStatusPtr)($a0)
 /* 253B8 80049FB8 908300B4 */  lbu       $v1, 0xb4($a0)
 /* 253BC 80049FBC 0040802D */  daddu     $s0, $v0, $zero
 /* 253C0 80049FC0 2462FFFD */  addiu     $v0, $v1, -3
@@ -47,8 +47,8 @@ glabel func_80049F7C
 /* 2541C 8004A01C 56200031 */  bnel      $s1, $zero, .L8004A0E4
 /* 25420 8004A020 A600008E */   sh       $zero, 0x8e($s0)
 /* 25424 8004A024 C60C0038 */  lwc1      $f12, 0x38($s0)
-/* 25428 8004A028 3C02800F */  lui       $v0, 0x800f
-/* 2542C 8004A02C 8C427B30 */  lw        $v0, 0x7b30($v0)
+/* 25428 8004A028 3C02800F */  lui       $v0, %hi(gPlayerStatusPtr)
+/* 2542C 8004A02C 8C427B30 */  lw        $v0, %lo(gPlayerStatusPtr)($v0)
 /* 25430 8004A030 C60E0040 */  lwc1      $f14, 0x40($s0)
 /* 25434 8004A034 8C460028 */  lw        $a2, 0x28($v0)
 /* 25438 8004A038 0C00A720 */  jal       atan2

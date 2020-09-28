@@ -10,8 +10,8 @@ glabel func_80260E90
 /* 18F784 80260EA4 2405001D */  addiu     $a1, $zero, 0x1d
 /* 18F788 80260EA8 F7B40050 */  sdc1      $f20, 0x50($sp)
 /* 18F78C 80260EAC 4480A000 */  mtc1      $zero, $f20
-/* 18F790 80260EB0 3C02800E */  lui       $v0, 0x800e
-/* 18F794 80260EB4 2442C070 */  addiu     $v0, $v0, -0x3f90
+/* 18F790 80260EB0 3C02800E */  lui       $v0, %hi(gBattleStatus)
+/* 18F794 80260EB4 2442C070 */  addiu     $v0, $v0, %lo(gBattleStatus)
 /* 18F798 80260EB8 AFBF0048 */  sw        $ra, 0x48($sp)
 /* 18F79C 80260EBC AFB40040 */  sw        $s4, 0x40($sp)
 /* 18F7A0 80260EC0 AFB3003C */  sw        $s3, 0x3c($sp)
@@ -83,8 +83,8 @@ glabel func_80260E90
 /* 18F8A0 80260FC0 C6600144 */  lwc1      $f0, 0x144($s3)
 /* 18F8A4 80260FC4 C6760148 */  lwc1      $f22, 0x148($s3)
 /* 18F8A8 80260FC8 C662014C */  lwc1      $f2, 0x14c($s3)
-/* 18F8AC 80260FCC 3C048007 */  lui       $a0, 0x8007
-/* 18F8B0 80260FD0 8C847410 */  lw        $a0, 0x7410($a0)
+/* 18F8AC 80260FCC 3C048007 */  lui       $a0, %hi(gCurrentCameraID)
+/* 18F8B0 80260FD0 8C847410 */  lw        $a0, %lo(gCurrentCameraID)($a0)
 /* 18F8B4 80260FD4 27A20020 */  addiu     $v0, $sp, 0x20
 /* 18F8B8 80260FD8 AFA20010 */  sw        $v0, 0x10($sp)
 /* 18F8BC 80260FDC 27A20024 */  addiu     $v0, $sp, 0x24

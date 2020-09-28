@@ -12,8 +12,8 @@ glabel func_802E6118
 /* 1079B4 802E6134 24040006 */   addiu    $a0, $zero, 6
 /* 1079B8 802E6138 3C014170 */  lui       $at, 0x4170
 /* 1079BC 802E613C 44810000 */  mtc1      $at, $f0
-/* 1079C0 802E6140 3C028011 */  lui       $v0, 0x8011
-/* 1079C4 802E6144 2442EFC8 */  addiu     $v0, $v0, -0x1038
+/* 1079C0 802E6140 3C028011 */  lui       $v0, %hi(gPlayerStatus)
+/* 1079C4 802E6144 2442EFC8 */  addiu     $v0, $v0, %lo(gPlayerStatus)
 /* 1079C8 802E6148 AC400074 */  sw        $zero, 0x74($v0)
 /* 1079CC 802E614C E4400070 */  swc1      $f0, 0x70($v0)
 /* 1079D0 802E6150 C6000000 */  lwc1      $f0, ($s0)

@@ -3,11 +3,11 @@
 
 glabel func_800EFE2C
 /* 892DC 800EFE2C 27BDFFC8 */  addiu     $sp, $sp, -0x38
-/* 892E0 800EFE30 3C038007 */  lui       $v1, 0x8007
-/* 892E4 800EFE34 8C63419C */  lw        $v1, 0x419c($v1)
+/* 892E0 800EFE30 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
+/* 892E4 800EFE34 8C63419C */  lw        $v1, %lo(gGameStatusPtr)($v1)
 /* 892E8 800EFE38 AFB00030 */  sw        $s0, 0x30($sp)
-/* 892EC 800EFE3C 3C108011 */  lui       $s0, 0x8011
-/* 892F0 800EFE40 2610EFC8 */  addiu     $s0, $s0, -0x1038
+/* 892EC 800EFE3C 3C108011 */  lui       $s0, %hi(gPlayerStatus)
+/* 892F0 800EFE40 2610EFC8 */  addiu     $s0, $s0, %lo(gPlayerStatus)
 /* 892F4 800EFE44 AFBF0034 */  sw        $ra, 0x34($sp)
 /* 892F8 800EFE48 84620086 */  lh        $v0, 0x86($v1)
 /* 892FC 800EFE4C 24080005 */  addiu     $t0, $zero, 5

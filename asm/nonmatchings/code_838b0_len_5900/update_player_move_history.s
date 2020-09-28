@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel update_player_move_history
-/* 86968 800ED4B8 3C058011 */  lui       $a1, 0x8011
-/* 8696C 800ED4BC 24A5EFC8 */  addiu     $a1, $a1, -0x1038
+/* 86968 800ED4B8 3C058011 */  lui       $a1, %hi(gPlayerStatus)
+/* 8696C 800ED4BC 24A5EFC8 */  addiu     $a1, $a1, %lo(gPlayerStatus)
 /* 86970 800ED4C0 24020017 */  addiu     $v0, $zero, 0x17
 /* 86974 800ED4C4 80A300B4 */  lb        $v1, 0xb4($a1)
 /* 86978 800ED4C8 C4A4002C */  lwc1      $f4, 0x2c($a1)

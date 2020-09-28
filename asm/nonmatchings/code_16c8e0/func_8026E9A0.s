@@ -15,8 +15,8 @@ glabel func_8026E9A0
 /* 19D2A8 8026E9C8 8E050000 */  lw        $a1, ($s0)
 /* 19D2AC 8026E9CC 0C0B1EAF */  jal       get_variable
 /* 19D2B0 8026E9D0 0040802D */   daddu    $s0, $v0, $zero
-/* 19D2B4 8026E9D4 3C03800E */  lui       $v1, 0x800e
-/* 19D2B8 8026E9D8 2463C070 */  addiu     $v1, $v1, -0x3f90
+/* 19D2B4 8026E9D4 3C03800E */  lui       $v1, %hi(gBattleStatus)
+/* 19D2B8 8026E9D8 2463C070 */  addiu     $v1, $v1, %lo(gBattleStatus)
 /* 19D2BC 8026E9DC A06201A6 */  sb        $v0, 0x1a6($v1)
 /* 19D2C0 8026E9E0 A47001A4 */  sh        $s0, 0x1a4($v1)
 /* 19D2C4 8026E9E4 8FBF0018 */  lw        $ra, 0x18($sp)

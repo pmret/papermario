@@ -45,8 +45,8 @@ glabel create_entity
 /* A8060 80111960 24630004 */   addiu    $v1, $v1, 4
 .L80111964:
 /* A8064 80111964 0000882D */  daddu     $s1, $zero, $zero
-/* A8068 80111968 3C128015 */  lui       $s2, 0x8015
-/* A806C 8011196C 26521470 */  addiu     $s2, $s2, 0x1470
+/* A8068 80111968 3C128015 */  lui       $s2, %hi(gCurrentEntityListPtr)
+/* A806C 8011196C 26521470 */  addiu     $s2, $s2, %lo(gCurrentEntityListPtr)
 /* A8070 80111970 8E430000 */  lw        $v1, ($s2)
 .L80111974:
 /* A8074 80111974 8C620000 */  lw        $v0, ($v1)

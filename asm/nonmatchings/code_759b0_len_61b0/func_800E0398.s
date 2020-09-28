@@ -8,16 +8,16 @@ glabel func_800E0398
 /* 79854 800E03A4 2610C920 */  addiu     $s0, $s0, -0x36e0
 /* 79858 800E03A8 AFBF0014 */  sw        $ra, 0x14($sp)
 /* 7985C 800E03AC 8E020000 */  lw        $v0, ($s0)
-/* 79860 800E03B0 3C078011 */  lui       $a3, 0x8011
-/* 79864 800E03B4 24E7EFC8 */  addiu     $a3, $a3, -0x1038
+/* 79860 800E03B0 3C078011 */  lui       $a3, %hi(gPlayerStatus)
+/* 79864 800E03B4 24E7EFC8 */  addiu     $a3, $a3, %lo(gPlayerStatus)
 /* 79868 800E03B8 1440003D */  bnez      $v0, .L800E04B0
 /* 7986C 800E03BC 00000000 */   nop      
 /* 79870 800E03C0 8CE60004 */  lw        $a2, 4($a3)
 /* 79874 800E03C4 30C20100 */  andi      $v0, $a2, 0x100
 /* 79878 800E03C8 1440003D */  bnez      $v0, .L800E04C0
 /* 7987C 800E03CC 2402000A */   addiu    $v0, $zero, 0xa
-/* 79880 800E03D0 3C058007 */  lui       $a1, 0x8007
-/* 79884 800E03D4 8CA5419C */  lw        $a1, 0x419c($a1)
+/* 79880 800E03D0 3C058007 */  lui       $a1, %hi(gGameStatusPtr)
+/* 79884 800E03D4 8CA5419C */  lw        $a1, %lo(gGameStatusPtr)($a1)
 /* 79888 800E03D8 84A30086 */  lh        $v1, 0x86($a1)
 /* 7988C 800E03DC 14620038 */  bne       $v1, $v0, .L800E04C0
 /* 79890 800E03E0 00000000 */   nop      

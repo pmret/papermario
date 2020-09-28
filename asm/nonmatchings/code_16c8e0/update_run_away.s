@@ -4,11 +4,11 @@
 glabel update_run_away
 /* 1737E0 80244F00 27BDFFC8 */  addiu     $sp, $sp, -0x38
 /* 1737E4 80244F04 AFB1001C */  sw        $s1, 0x1c($sp)
-/* 1737E8 80244F08 3C11800E */  lui       $s1, 0x800e
-/* 1737EC 80244F0C 2631C070 */  addiu     $s1, $s1, -0x3f90
+/* 1737E8 80244F08 3C11800E */  lui       $s1, %hi(gBattleStatus)
+/* 1737EC 80244F0C 2631C070 */  addiu     $s1, $s1, %lo(gBattleStatus)
 /* 1737F0 80244F10 AFB5002C */  sw        $s5, 0x2c($sp)
-/* 1737F4 80244F14 3C158011 */  lui       $s5, 0x8011
-/* 1737F8 80244F18 26B5F290 */  addiu     $s5, $s5, -0xd70
+/* 1737F4 80244F14 3C158011 */  lui       $s5, %hi(gPlayerData)
+/* 1737F8 80244F18 26B5F290 */  addiu     $s5, $s5, %lo(gPlayerData)
 /* 1737FC 80244F1C AFB40028 */  sw        $s4, 0x28($sp)
 /* 173800 80244F20 3C14800E */  lui       $s4, 0x800e
 /* 173804 80244F24 2694C4DC */  addiu     $s4, $s4, -0x3b24
@@ -82,8 +82,8 @@ glabel update_run_away
 /* 173904 80245024 00000000 */  nop       
 /* 173908 80245028 46800020 */  cvt.s.w   $f0, $f0
 /* 17390C 8024502C 46001003 */  div.s     $f0, $f2, $f0
-/* 173910 80245030 3C028007 */  lui       $v0, 0x8007
-/* 173914 80245034 8C42419C */  lw        $v0, 0x419c($v0)
+/* 173910 80245030 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* 173914 80245034 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 173918 80245038 4600010D */  trunc.w.s $f4, $f0
 /* 17391C 8024503C E6640088 */  swc1      $f4, 0x88($s3)
 /* 173920 80245040 80430074 */  lb        $v1, 0x74($v0)
@@ -140,8 +140,8 @@ glabel update_run_away
 /* 1739DC 802450FC 0809146D */  j         .L802451B4
 /* 1739E0 80245100 AE820000 */   sw       $v0, ($s4)
 .L80245104:
-/* 1739E4 80245104 3C02800B */  lui       $v0, 0x800b
-/* 1739E8 80245108 24420F10 */  addiu     $v0, $v0, 0xf10
+/* 1739E4 80245104 3C02800B */  lui       $v0, %hi(gCurrentEncounter)
+/* 1739E8 80245108 24420F10 */  addiu     $v0, $v0, %lo(gCurrentEncounter)
 /* 1739EC 8024510C A0500009 */  sb        $s0, 9($v0)
 /* 1739F0 80245110 0C03A752 */  jal       is_ability_active
 /* 1739F4 80245114 24040017 */   addiu    $a0, $zero, 0x17

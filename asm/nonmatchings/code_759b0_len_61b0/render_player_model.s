@@ -5,8 +5,8 @@ glabel render_player_model
 /* 7A618 800E1168 27BDFFB0 */  addiu     $sp, $sp, -0x50
 /* 7A61C 800E116C AFB10044 */  sw        $s1, 0x44($sp)
 /* 7A620 800E1170 AFB00040 */  sw        $s0, 0x40($sp)
-/* 7A624 800E1174 3C108011 */  lui       $s0, 0x8011
-/* 7A628 800E1178 2610EFC8 */  addiu     $s0, $s0, -0x1038
+/* 7A624 800E1174 3C108011 */  lui       $s0, %hi(gPlayerStatus)
+/* 7A628 800E1178 2610EFC8 */  addiu     $s0, $s0, %lo(gPlayerStatus)
 /* 7A62C 800E117C AFBF0048 */  sw        $ra, 0x48($sp)
 /* 7A630 800E1180 8E030000 */  lw        $v1, ($s0)
 /* 7A634 800E1184 3C024000 */  lui       $v0, 0x4000

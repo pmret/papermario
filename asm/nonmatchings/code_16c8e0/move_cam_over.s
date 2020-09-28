@@ -8,8 +8,8 @@ glabel move_cam_over
 /* 17CDC4 8024E4E4 0080182D */  daddu     $v1, $a0, $zero
 /* 17CDC8 8024E4E8 1440000A */  bnez      $v0, .L8024E514
 /* 17CDCC 8024E4EC AFBF0010 */   sw       $ra, 0x10($sp)
-/* 17CDD0 8024E4F0 3C02800E */  lui       $v0, 0x800e
-/* 17CDD4 8024E4F4 2442C070 */  addiu     $v0, $v0, -0x3f90
+/* 17CDD0 8024E4F0 3C02800E */  lui       $v0, %hi(gBattleStatus)
+/* 17CDD4 8024E4F4 2442C070 */  addiu     $v0, $v0, %lo(gBattleStatus)
 /* 17CDD8 8024E4F8 8C4400C4 */  lw        $a0, 0xc4($v0)
 /* 17CDDC 8024E4FC 3C01802A */  lui       $at, 0x802a
 /* 17CDE0 8024E500 A423F29E */  sh        $v1, -0xd62($at)

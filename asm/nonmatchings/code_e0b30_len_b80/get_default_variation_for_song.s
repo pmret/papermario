@@ -5,8 +5,8 @@ glabel get_default_variation_for_song
 /* E0B30 8014A430 0000302D */  daddu     $a2, $zero, $zero
 /* E0B34 8014A434 3C078009 */  lui       $a3, 0x8009
 /* E0B38 8014A438 24E734F0 */  addiu     $a3, $a3, 0x34f0
-/* E0B3C 8014A43C 3C038007 */  lui       $v1, 0x8007
-/* E0B40 8014A440 2463419C */  addiu     $v1, $v1, 0x419c
+/* E0B3C 8014A43C 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
+/* E0B40 8014A440 2463419C */  addiu     $v1, $v1, %lo(gGameStatusPtr)
 /* E0B44 8014A444 3C058015 */  lui       $a1, 0x8015
 /* E0B48 8014A448 24A5F720 */  addiu     $a1, $a1, -0x8e0
 .L8014A44C:

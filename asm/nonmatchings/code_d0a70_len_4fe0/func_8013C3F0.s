@@ -655,8 +655,8 @@ glabel func_8013C3F0
 /* D34BC 8013CDBC 8FAD0014 */  lw        $t5, 0x14($sp)
 /* D34C0 8013CDC0 11A0006D */  beqz      $t5, .L8013CF78
 /* D34C4 8013CDC4 00000000 */   nop      
-/* D34C8 8013CDC8 3C028007 */  lui       $v0, 0x8007
-/* D34CC 8013CDCC 8C42419C */  lw        $v0, 0x419c($v0)
+/* D34C8 8013CDC8 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* D34CC 8013CDCC 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* D34D0 8013CDD0 94420134 */  lhu       $v0, 0x134($v0)
 /* D34D4 8013CDD4 15A00002 */  bnez      $t5, .L8013CDE0
 /* D34D8 8013CDD8 004D001A */   div      $zero, $v0, $t5

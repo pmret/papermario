@@ -4,8 +4,8 @@
 glabel switch_to_partner
 /* 1717E0 80242F00 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 1717E4 80242F04 AFB00010 */  sw        $s0, 0x10($sp)
-/* 1717E8 80242F08 3C10800E */  lui       $s0, 0x800e
-/* 1717EC 80242F0C 2610C070 */  addiu     $s0, $s0, -0x3f90
+/* 1717E8 80242F08 3C10800E */  lui       $s0, %hi(gBattleStatus)
+/* 1717EC 80242F0C 2610C070 */  addiu     $s0, $s0, %lo(gBattleStatus)
 /* 1717F0 80242F10 AFBF001C */  sw        $ra, 0x1c($sp)
 /* 1717F4 80242F14 AFB20018 */  sw        $s2, 0x18($sp)
 /* 1717F8 80242F18 AFB10014 */  sw        $s1, 0x14($sp)

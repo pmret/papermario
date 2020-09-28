@@ -7,8 +7,8 @@ glabel func_8026BF48
 /* 19A830 8026BF50 AFB10014 */  sw        $s1, 0x14($sp)
 /* 19A834 8026BF54 AFB00010 */  sw        $s0, 0x10($sp)
 /* 19A838 8026BF58 8C82000C */  lw        $v0, 0xc($a0)
-/* 19A83C 8026BF5C 3C10800E */  lui       $s0, 0x800e
-/* 19A840 8026BF60 2610C070 */  addiu     $s0, $s0, -0x3f90
+/* 19A83C 8026BF5C 3C10800E */  lui       $s0, %hi(gBattleStatus)
+/* 19A840 8026BF60 2610C070 */  addiu     $s0, $s0, %lo(gBattleStatus)
 /* 19A844 8026BF64 8C450000 */  lw        $a1, ($v0)
 /* 19A848 8026BF68 0C0B1EAF */  jal       get_variable
 /* 19A84C 8026BF6C 0200882D */   daddu    $s1, $s0, $zero

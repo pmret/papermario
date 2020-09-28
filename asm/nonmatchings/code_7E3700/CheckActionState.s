@@ -13,8 +13,8 @@ glabel CheckActionState
 /* 7E407C 802831FC 8C510000 */   lw       $s1, ($v0)
 /* 7E4080 80283200 0200202D */  daddu     $a0, $s0, $zero
 /* 7E4084 80283204 0220282D */  daddu     $a1, $s1, $zero
-/* 7E4088 80283208 3C068011 */  lui       $a2, 0x8011
-/* 7E408C 8028320C 80C6F07C */  lb        $a2, -0xf84($a2)
+/* 7E4088 80283208 3C068011 */  lui       $a2, %hi(gPlayerActionState)
+/* 7E408C 8028320C 80C6F07C */  lb        $a2, %lo(gPlayerActionState)($a2)
 /* 7E4090 80283210 4600008D */  trunc.w.s $f2, $f0
 /* 7E4094 80283214 44021000 */  mfc1      $v0, $f2
 /* 7E4098 80283218 00000000 */  nop       

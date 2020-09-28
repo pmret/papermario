@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel create_trigger
-/* DBE6C 8014576C 3C038016 */  lui       $v1, 0x8016
-/* DBE70 80145770 8C639390 */  lw        $v1, -0x6c70($v1)
+/* DBE6C 8014576C 3C038016 */  lui       $v1, %hi(gCurrentTriggerListPtr)
+/* DBE70 80145770 8C639390 */  lw        $v1, %lo(gCurrentTriggerListPtr)($v1)
 /* DBE74 80145774 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* DBE78 80145778 AFB10014 */  sw        $s1, 0x14($sp)
 /* DBE7C 8014577C 0080882D */  daddu     $s1, $a0, $zero
@@ -29,10 +29,10 @@ glabel create_trigger
 /* DBEBC 801457BC 0C00AB39 */  jal       heap_malloc
 /* DBEC0 801457C0 24040038 */   addiu    $a0, $zero, 0x38
 /* DBEC4 801457C4 00102080 */  sll       $a0, $s0, 2
-/* DBEC8 801457C8 3C038016 */  lui       $v1, 0x8016
-/* DBECC 801457CC 8C639390 */  lw        $v1, -0x6c70($v1)
-/* DBED0 801457D0 3C058015 */  lui       $a1, 0x8015
-/* DBED4 801457D4 24A51334 */  addiu     $a1, $a1, 0x1334
+/* DBEC8 801457C8 3C038016 */  lui       $v1, %hi(gCurrentTriggerListPtr)
+/* DBECC 801457CC 8C639390 */  lw        $v1, %lo(gCurrentTriggerListPtr)($v1)
+/* DBED0 801457D0 3C058015 */  lui       $a1, %hi(gTriggerCount)
+/* DBED4 801457D4 24A51334 */  addiu     $a1, $a1, %lo(gTriggerCount)
 /* DBED8 801457D8 00832021 */  addu      $a0, $a0, $v1
 /* DBEDC 801457DC 94A30000 */  lhu       $v1, ($a1)
 /* DBEE0 801457E0 0040302D */  daddu     $a2, $v0, $zero

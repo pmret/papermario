@@ -6,8 +6,8 @@ glabel MakeShopOwner
 /* 7E2A5C 80281BDC AFBF0014 */  sw        $ra, 0x14($sp)
 /* 7E2A60 80281BE0 AFB00010 */  sw        $s0, 0x10($sp)
 /* 7E2A64 80281BE4 8C82000C */  lw        $v0, 0xc($a0)
-/* 7E2A68 80281BE8 3C038007 */  lui       $v1, 0x8007
-/* 7E2A6C 80281BEC 8C63419C */  lw        $v1, 0x419c($v1)
+/* 7E2A68 80281BE8 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
+/* 7E2A6C 80281BEC 8C63419C */  lw        $v1, %lo(gGameStatusPtr)($v1)
 /* 7E2A70 80281BF0 8C450000 */  lw        $a1, ($v0)
 /* 7E2A74 80281BF4 0C0B1EAF */  jal       get_variable
 /* 7E2A78 80281BF8 8C700144 */   lw       $s0, 0x144($v1)

@@ -4,8 +4,8 @@
 glabel calc_enemy_test_target
 /* 1A5AD8 802771F8 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* 1A5ADC 802771FC AFB20018 */  sw        $s2, 0x18($sp)
-/* 1A5AE0 80277200 3C12800E */  lui       $s2, 0x800e
-/* 1A5AE4 80277204 2652C070 */  addiu     $s2, $s2, -0x3f90
+/* 1A5AE0 80277200 3C12800E */  lui       $s2, %hi(gBattleStatus)
+/* 1A5AE4 80277204 2652C070 */  addiu     $s2, $s2, %lo(gBattleStatus)
 /* 1A5AE8 80277208 AFBF0020 */  sw        $ra, 0x20($sp)
 /* 1A5AEC 8027720C AFB3001C */  sw        $s3, 0x1c($sp)
 /* 1A5AF0 80277210 AFB10014 */  sw        $s1, 0x14($sp)
@@ -37,8 +37,8 @@ glabel calc_enemy_test_target
 /* 1A5B50 80277270 00000000 */   nop      
 /* 1A5B54 80277274 14800008 */  bnez      $a0, .L80277298
 /* 1A5B58 80277278 00000000 */   nop      
-/* 1A5B5C 8027727C 3C028011 */  lui       $v0, 0x8011
-/* 1A5B60 80277280 2442F290 */  addiu     $v0, $v0, -0xd70
+/* 1A5B5C 8027727C 3C028011 */  lui       $v0, %hi(gPlayerData)
+/* 1A5B60 80277280 2442F290 */  addiu     $v0, $v0, %lo(gPlayerData)
 /* 1A5B64 80277284 90420002 */  lbu       $v0, 2($v0)
 /* 1A5B68 80277288 0809DCA6 */  j         .L80277298
 /* 1A5B6C 8027728C A20201B8 */   sb       $v0, 0x1b8($s0)

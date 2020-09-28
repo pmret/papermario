@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel draw_shop_items
-/* 7E23A4 80281524 3C028007 */  lui       $v0, 0x8007
-/* 7E23A8 80281528 8C42419C */  lw        $v0, 0x419c($v0)
+/* 7E23A4 80281524 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* 7E23A8 80281528 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 7E23AC 8028152C 27BDFF90 */  addiu     $sp, $sp, -0x70
 /* 7E23B0 80281530 AFBF005C */  sw        $ra, 0x5c($sp)
 /* 7E23B4 80281534 AFBE0058 */  sw        $fp, 0x58($sp)
@@ -22,13 +22,13 @@ glabel draw_shop_items
 /* 7E23E8 80281568 30420001 */  andi      $v0, $v0, 1
 /* 7E23EC 8028156C 10400005 */  beqz      $v0, .L80281584
 /* 7E23F0 80281570 2404000A */   addiu    $a0, $zero, 0xa
-/* 7E23F4 80281574 3C108014 */  lui       $s0, 0x8014
-/* 7E23F8 80281578 26107474 */  addiu     $s0, $s0, 0x7474
+/* 7E23F4 80281574 3C108014 */  lui       $s0, %hi(D_80147474)
+/* 7E23F8 80281578 26107474 */  addiu     $s0, $s0, %lo(D_80147474)
 /* 7E23FC 8028157C 080A0563 */  j         .L8028158C
 /* 7E2400 80281580 00000000 */   nop      
 .L80281584:
-/* 7E2404 80281584 3C108014 */  lui       $s0, 0x8014
-/* 7E2408 80281588 26107574 */  addiu     $s0, $s0, 0x7574
+/* 7E2404 80281584 3C108014 */  lui       $s0, %hi(D_80147574)
+/* 7E2408 80281588 26107574 */  addiu     $s0, $s0, %lo(D_80147574)
 .L8028158C:
 /* 7E240C 8028158C 0C051F9F */  jal       func_80147E7C
 /* 7E2410 80281590 0200282D */   daddu    $a1, $s0, $zero
@@ -39,12 +39,12 @@ glabel draw_shop_items
 /* 7E2424 802815A4 30420001 */  andi      $v0, $v0, 1
 /* 7E2428 802815A8 10400096 */  beqz      $v0, .L80281804
 /* 7E242C 802815AC 00000000 */   nop      
-/* 7E2430 802815B0 3C04800B */  lui       $a0, 0x800b
-/* 7E2434 802815B4 24841D80 */  addiu     $a0, $a0, 0x1d80
-/* 7E2438 802815B8 3C028007 */  lui       $v0, 0x8007
-/* 7E243C 802815BC 8C42419C */  lw        $v0, 0x419c($v0)
-/* 7E2440 802815C0 3C038007 */  lui       $v1, 0x8007
-/* 7E2444 802815C4 8C637410 */  lw        $v1, 0x7410($v1)
+/* 7E2430 802815B0 3C04800B */  lui       $a0, %hi(gCameras)
+/* 7E2434 802815B4 24841D80 */  addiu     $a0, $a0, %lo(gCameras)
+/* 7E2438 802815B8 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* 7E243C 802815BC 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
+/* 7E2440 802815C0 3C038007 */  lui       $v1, %hi(gCurrentCameraID)
+/* 7E2444 802815C4 8C637410 */  lw        $v1, %lo(gCurrentCameraID)($v1)
 /* 7E2448 802815C8 8C5E0140 */  lw        $fp, 0x140($v0)
 /* 7E244C 802815CC 00031080 */  sll       $v0, $v1, 2
 /* 7E2450 802815D0 00431021 */  addu      $v0, $v0, $v1

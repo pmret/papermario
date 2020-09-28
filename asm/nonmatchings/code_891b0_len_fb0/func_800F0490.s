@@ -20,8 +20,8 @@ glabel func_800F0490
 /* 8997C 800F04CC 44811000 */  mtc1      $at, $f2
 /* 89980 800F04D0 00000000 */  nop       
 /* 89984 800F04D4 46020000 */  add.s     $f0, $f0, $f2
-/* 89988 800F04D8 3C118011 */  lui       $s1, 0x8011
-/* 8998C 800F04DC 2631EFC8 */  addiu     $s1, $s1, -0x1038
+/* 89988 800F04D8 3C118011 */  lui       $s1, %hi(gPlayerStatus)
+/* 8998C 800F04DC 2631EFC8 */  addiu     $s1, $s1, %lo(gPlayerStatus)
 /* 89990 800F04E0 E4400000 */  swc1      $f0, ($v0)
 /* 89994 800F04E4 822300B4 */  lb        $v1, 0xb4($s1)
 /* 89998 800F04E8 2402000A */  addiu     $v0, $zero, 0xa

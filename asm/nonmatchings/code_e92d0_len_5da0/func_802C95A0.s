@@ -82,8 +82,8 @@ glabel func_802C95A0
 /* EE068 802C96B8 AE330000 */   sw       $s3, ($s1)
 /* EE06C 802C96BC 27A40010 */  addiu     $a0, $sp, 0x10
 .L802C96C0:
-/* EE070 802C96C0 3C038015 */  lui       $v1, 0x8015
-/* EE074 802C96C4 8C6312CC */  lw        $v1, 0x12cc($v1)
+/* EE070 802C96C0 3C038015 */  lui       $v1, %hi(gCurrentModelListPtr)
+/* EE074 802C96C4 8C6312CC */  lw        $v1, %lo(gCurrentModelListPtr)($v1)
 /* EE078 802C96C8 00101080 */  sll       $v0, $s0, 2
 /* EE07C 802C96CC 00431021 */  addu      $v0, $v0, $v1
 /* EE080 802C96D0 8C420000 */  lw        $v0, ($v0)

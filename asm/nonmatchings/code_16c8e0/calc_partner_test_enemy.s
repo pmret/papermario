@@ -4,8 +4,8 @@
 glabel calc_partner_test_enemy
 /* 1AC85C 8027DF7C 27BDFFD0 */  addiu     $sp, $sp, -0x30
 /* 1AC860 8027DF80 AFB1001C */  sw        $s1, 0x1c($sp)
-/* 1AC864 8027DF84 3C11800E */  lui       $s1, 0x800e
-/* 1AC868 8027DF88 2631C070 */  addiu     $s1, $s1, -0x3f90
+/* 1AC864 8027DF84 3C11800E */  lui       $s1, %hi(gBattleStatus)
+/* 1AC868 8027DF88 2631C070 */  addiu     $s1, $s1, %lo(gBattleStatus)
 /* 1AC86C 8027DF8C AFBF002C */  sw        $ra, 0x2c($sp)
 /* 1AC870 8027DF90 AFB40028 */  sw        $s4, 0x28($sp)
 /* 1AC874 8027DF94 AFB30024 */  sw        $s3, 0x24($sp)

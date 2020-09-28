@@ -11,8 +11,8 @@ glabel func_801413F8
 /* D7B10 80141410 AFBF0018 */  sw        $ra, 0x18($sp)
 /* D7B14 80141414 0C00B8C5 */  jal       set_cam_viewport
 /* D7B18 80141418 AFA20010 */   sw       $v0, 0x10($sp)
-/* D7B1C 8014141C 3C02800B */  lui       $v0, 0x800b
-/* D7B20 80141420 24421D80 */  addiu     $v0, $v0, 0x1d80
+/* D7B1C 8014141C 3C02800B */  lui       $v0, %hi(gCameras)
+/* D7B20 80141420 24421D80 */  addiu     $v0, $v0, %lo(gCameras)
 /* D7B24 80141424 3C014320 */  lui       $at, 0x4320
 /* D7B28 80141428 44810000 */  mtc1      $at, $f0
 /* D7B2C 8014142C 3C01C2F0 */  lui       $at, 0xc2f0

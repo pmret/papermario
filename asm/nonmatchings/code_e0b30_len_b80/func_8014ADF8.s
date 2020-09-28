@@ -4,8 +4,8 @@
 glabel func_8014ADF8
 /* E14F8 8014ADF8 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* E14FC 8014ADFC 0080402D */  daddu     $t0, $a0, $zero
-/* E1500 8014AE00 3C028007 */  lui       $v0, 0x8007
-/* E1504 8014AE04 8C42419C */  lw        $v0, 0x419c($v0)
+/* E1500 8014AE00 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* E1504 8014AE04 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* E1508 8014AE08 AFBF0018 */  sw        $ra, 0x18($sp)
 /* E150C 8014AE0C 80420071 */  lb        $v0, 0x71($v0)
 /* E1510 8014AE10 3C078016 */  lui       $a3, 0x8016

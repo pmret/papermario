@@ -4,8 +4,8 @@
 glabel check_input_jump
 /* 7F610 800E6160 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 7F614 800E6164 AFB10014 */  sw        $s1, 0x14($sp)
-/* 7F618 800E6168 3C118011 */  lui       $s1, 0x8011
-/* 7F61C 800E616C 2631EFC8 */  addiu     $s1, $s1, -0x1038
+/* 7F618 800E6168 3C118011 */  lui       $s1, %hi(gPlayerStatus)
+/* 7F61C 800E616C 2631EFC8 */  addiu     $s1, $s1, %lo(gPlayerStatus)
 /* 7F620 800E6170 AFBF0018 */  sw        $ra, 0x18($sp)
 /* 7F624 800E6174 AFB00010 */  sw        $s0, 0x10($sp)
 /* 7F628 800E6178 8E2200E0 */  lw        $v0, 0xe0($s1)

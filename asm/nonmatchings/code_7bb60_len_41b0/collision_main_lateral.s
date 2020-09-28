@@ -4,8 +4,8 @@
 glabel collision_main_lateral
 /* 7CAEC 800E363C 27BDFF80 */  addiu     $sp, $sp, -0x80
 /* 7CAF0 800E3640 AFB1005C */  sw        $s1, 0x5c($sp)
-/* 7CAF4 800E3644 3C118011 */  lui       $s1, 0x8011
-/* 7CAF8 800E3648 2631EFC8 */  addiu     $s1, $s1, -0x1038
+/* 7CAF4 800E3644 3C118011 */  lui       $s1, %hi(gPlayerStatus)
+/* 7CAF8 800E3648 2631EFC8 */  addiu     $s1, $s1, %lo(gPlayerStatus)
 /* 7CAFC 800E364C AFB40068 */  sw        $s4, 0x68($sp)
 /* 7CB00 800E3650 3C148016 */  lui       $s4, 0x8016
 /* 7CB04 800E3654 2694A550 */  addiu     $s4, $s4, -0x5ab0
@@ -52,8 +52,8 @@ glabel collision_main_lateral
 /* 7CBA0 800E36F0 8C22BE58 */  lw        $v0, -0x41a8($at)
 /* 7CBA4 800E36F4 00400008 */  jr        $v0
 /* 7CBA8 800E36F8 00000000 */   nop      
-/* 7CBAC 800E36FC 3C038007 */  lui       $v1, 0x8007
-/* 7CBB0 800E3700 8C637410 */  lw        $v1, 0x7410($v1)
+/* 7CBAC 800E36FC 3C038007 */  lui       $v1, %hi(gCurrentCameraID)
+/* 7CBB0 800E3700 8C637410 */  lw        $v1, %lo(gCurrentCameraID)($v1)
 /* 7CBB4 800E3704 C62200A8 */  lwc1      $f2, 0xa8($s1)
 /* 7CBB8 800E3708 3C0142B4 */  lui       $at, 0x42b4
 /* 7CBBC 800E370C 44810000 */  mtc1      $at, $f0
@@ -109,8 +109,8 @@ glabel collision_main_lateral
 /* 7CC80 800E37D0 C6200028 */  lwc1      $f0, 0x28($s1)
 /* 7CC84 800E37D4 C622002C */  lwc1      $f2, 0x2c($s1)
 /* 7CC88 800E37D8 C6240030 */  lwc1      $f4, 0x30($s1)
-/* 7CC8C 800E37DC 3C02800B */  lui       $v0, 0x800b
-/* 7CC90 800E37E0 24421D80 */  addiu     $v0, $v0, 0x1d80
+/* 7CC8C 800E37DC 3C02800B */  lui       $v0, %hi(gCameras)
+/* 7CC90 800E37E0 24421D80 */  addiu     $v0, $v0, %lo(gCameras)
 /* 7CC94 800E37E4 E4400060 */  swc1      $f0, 0x60($v0)
 /* 7CC98 800E37E8 E4420064 */  swc1      $f2, 0x64($v0)
 /* 7CC9C 800E37EC E4440068 */  swc1      $f4, 0x68($v0)
@@ -156,8 +156,8 @@ glabel collision_main_lateral
 /* 7CD38 800E3888 C6200028 */  lwc1      $f0, 0x28($s1)
 /* 7CD3C 800E388C C622002C */  lwc1      $f2, 0x2c($s1)
 /* 7CD40 800E3890 C6240030 */  lwc1      $f4, 0x30($s1)
-/* 7CD44 800E3894 3C02800B */  lui       $v0, 0x800b
-/* 7CD48 800E3898 24421D80 */  addiu     $v0, $v0, 0x1d80
+/* 7CD44 800E3894 3C02800B */  lui       $v0, %hi(gCameras)
+/* 7CD48 800E3898 24421D80 */  addiu     $v0, $v0, %lo(gCameras)
 /* 7CD4C 800E389C E4400060 */  swc1      $f0, 0x60($v0)
 /* 7CD50 800E38A0 E4420064 */  swc1      $f2, 0x64($v0)
 /* 7CD54 800E38A4 E4440068 */  swc1      $f4, 0x68($v0)
@@ -180,8 +180,8 @@ glabel collision_main_lateral
 /* 7CD94 800E38E4 4501027E */  bc1t      .L800E42E0
 /* 7CD98 800E38E8 00000000 */   nop      
 .L800E38EC:
-/* 7CD9C 800E38EC 3C038007 */  lui       $v1, 0x8007
-/* 7CDA0 800E38F0 8C637410 */  lw        $v1, 0x7410($v1)
+/* 7CD9C 800E38EC 3C038007 */  lui       $v1, %hi(gCurrentCameraID)
+/* 7CDA0 800E38F0 8C637410 */  lw        $v1, %lo(gCurrentCameraID)($v1)
 /* 7CDA4 800E38F4 C62200A8 */  lwc1      $f2, 0xa8($s1)
 /* 7CDA8 800E38F8 3C0142B4 */  lui       $at, 0x42b4
 /* 7CDAC 800E38FC 44810000 */  mtc1      $at, $f0
@@ -230,8 +230,8 @@ glabel collision_main_lateral
 /* 7CE54 800E39A4 C6200028 */  lwc1      $f0, 0x28($s1)
 /* 7CE58 800E39A8 C622002C */  lwc1      $f2, 0x2c($s1)
 /* 7CE5C 800E39AC C6240030 */  lwc1      $f4, 0x30($s1)
-/* 7CE60 800E39B0 3C02800B */  lui       $v0, 0x800b
-/* 7CE64 800E39B4 24421D80 */  addiu     $v0, $v0, 0x1d80
+/* 7CE60 800E39B0 3C02800B */  lui       $v0, %hi(gCameras)
+/* 7CE64 800E39B4 24421D80 */  addiu     $v0, $v0, %lo(gCameras)
 /* 7CE68 800E39B8 E4400060 */  swc1      $f0, 0x60($v0)
 /* 7CE6C 800E39BC E4420064 */  swc1      $f2, 0x64($v0)
 /* 7CE70 800E39C0 E4440068 */  swc1      $f4, 0x68($v0)
@@ -250,8 +250,8 @@ glabel collision_main_lateral
 /* 7CEA0 800E39F0 08038E90 */  j         .L800E3A40
 /* 7CEA4 800E39F4 E7A0002C */   swc1     $f0, 0x2c($sp)
 .L800E39F8:
-/* 7CEA8 800E39F8 3C038007 */  lui       $v1, 0x8007
-/* 7CEAC 800E39FC 8C637410 */  lw        $v1, 0x7410($v1)
+/* 7CEA8 800E39F8 3C038007 */  lui       $v1, %hi(gCurrentCameraID)
+/* 7CEAC 800E39FC 8C637410 */  lw        $v1, %lo(gCurrentCameraID)($v1)
 /* 7CEB0 800E3A00 C62000A8 */  lwc1      $f0, 0xa8($s1)
 /* 7CEB4 800E3A04 3C0142B4 */  lui       $at, 0x42b4
 /* 7CEB8 800E3A08 44811000 */  mtc1      $at, $f2
@@ -303,8 +303,8 @@ glabel collision_main_lateral
 /* 7CF6C 800E3ABC 45010208 */  bc1t      .L800E42E0
 /* 7CF70 800E3AC0 00000000 */   nop      
 .L800E3AC4:
-/* 7CF74 800E3AC4 3C038007 */  lui       $v1, 0x8007
-/* 7CF78 800E3AC8 8C637410 */  lw        $v1, 0x7410($v1)
+/* 7CF74 800E3AC4 3C038007 */  lui       $v1, %hi(gCurrentCameraID)
+/* 7CF78 800E3AC8 8C637410 */  lw        $v1, %lo(gCurrentCameraID)($v1)
 /* 7CF7C 800E3ACC C62200A8 */  lwc1      $f2, 0xa8($s1)
 /* 7CF80 800E3AD0 3C0142B4 */  lui       $at, 0x42b4
 /* 7CF84 800E3AD4 44810000 */  mtc1      $at, $f0
@@ -549,8 +549,8 @@ glabel collision_main_lateral
 /* 7D30C 800E3E5C C6200028 */  lwc1      $f0, 0x28($s1)
 /* 7D310 800E3E60 C622002C */  lwc1      $f2, 0x2c($s1)
 /* 7D314 800E3E64 C6240030 */  lwc1      $f4, 0x30($s1)
-/* 7D318 800E3E68 3C02800B */  lui       $v0, 0x800b
-/* 7D31C 800E3E6C 24421D80 */  addiu     $v0, $v0, 0x1d80
+/* 7D318 800E3E68 3C02800B */  lui       $v0, %hi(gCameras)
+/* 7D31C 800E3E6C 24421D80 */  addiu     $v0, $v0, %lo(gCameras)
 /* 7D320 800E3E70 E4400060 */  swc1      $f0, 0x60($v0)
 /* 7D324 800E3E74 E4420064 */  swc1      $f2, 0x64($v0)
 /* 7D328 800E3E78 E4440068 */  swc1      $f4, 0x68($v0)
@@ -589,8 +589,8 @@ glabel collision_main_lateral
 /* 7D3A8 800E3EF8 A6820012 */   sh       $v0, 0x12($s4)
 /* 7D3AC 800E3EFC 04430043 */  bgezl     $v0, .L800E400C
 /* 7D3B0 800E3F00 A6820012 */   sh       $v0, 0x12($s4)
-/* 7D3B4 800E3F04 3C038007 */  lui       $v1, 0x8007
-/* 7D3B8 800E3F08 8C637410 */  lw        $v1, 0x7410($v1)
+/* 7D3B4 800E3F04 3C038007 */  lui       $v1, %hi(gCurrentCameraID)
+/* 7D3B8 800E3F08 8C637410 */  lw        $v1, %lo(gCurrentCameraID)($v1)
 /* 7D3BC 800E3F0C C62200A8 */  lwc1      $f2, 0xa8($s1)
 /* 7D3C0 800E3F10 3C0142B4 */  lui       $at, 0x42b4
 /* 7D3C4 800E3F14 44810000 */  mtc1      $at, $f0
@@ -671,8 +671,8 @@ glabel collision_main_lateral
 /* 7D4EC 800E403C 00000000 */  nop       
 /* 7D4F0 800E4040 45000015 */  bc1f      .L800E4098
 /* 7D4F4 800E4044 0000202D */   daddu    $a0, $zero, $zero
-/* 7D4F8 800E4048 3C038007 */  lui       $v1, 0x8007
-/* 7D4FC 800E404C 8C637410 */  lw        $v1, 0x7410($v1)
+/* 7D4F8 800E4048 3C038007 */  lui       $v1, %hi(gCurrentCameraID)
+/* 7D4FC 800E404C 8C637410 */  lw        $v1, %lo(gCurrentCameraID)($v1)
 /* 7D500 800E4050 C62200A8 */  lwc1      $f2, 0xa8($s1)
 /* 7D504 800E4054 3C0142B4 */  lui       $at, 0x42b4
 /* 7D508 800E4058 44810000 */  mtc1      $at, $f0
@@ -811,8 +811,8 @@ glabel collision_main_lateral
 /* 7D6FC 800E424C 080390A6 */  j         .L800E4298
 /* 7D700 800E4250 00000000 */   nop      
 .L800E4254:
-/* 7D704 800E4254 3C038007 */  lui       $v1, 0x8007
-/* 7D708 800E4258 8C637410 */  lw        $v1, 0x7410($v1)
+/* 7D704 800E4254 3C038007 */  lui       $v1, %hi(gCurrentCameraID)
+/* 7D708 800E4258 8C637410 */  lw        $v1, %lo(gCurrentCameraID)($v1)
 /* 7D70C 800E425C C62200A8 */  lwc1      $f2, 0xa8($s1)
 /* 7D710 800E4260 3C0142B4 */  lui       $at, 0x42b4
 /* 7D714 800E4264 44810000 */  mtc1      $at, $f0

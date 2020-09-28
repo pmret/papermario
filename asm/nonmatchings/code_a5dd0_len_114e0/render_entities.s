@@ -15,13 +15,13 @@ glabel render_entities
 /* A65D8 8010FED8 0040802D */  daddu     $s0, $v0, $zero
 /* A65DC 8010FEDC 52000070 */  beql      $s0, $zero, .L801100A0
 /* A65E0 8010FEE0 26310001 */   addiu    $s1, $s1, 1
-/* A65E4 8010FEE4 3C028007 */  lui       $v0, 0x8007
-/* A65E8 8010FEE8 8C42419C */  lw        $v0, 0x419c($v0)
+/* A65E4 8010FEE4 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* A65E8 8010FEE8 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* A65EC 8010FEEC 80420070 */  lb        $v0, 0x70($v0)
 /* A65F0 8010FEF0 14400025 */  bnez      $v0, .L8010FF88
 /* A65F4 8010FEF4 00000000 */   nop      
-/* A65F8 8010FEF8 3C028015 */  lui       $v0, 0x8015
-/* A65FC 8010FEFC 8C421310 */  lw        $v0, 0x1310($v0)
+/* A65F8 8010FEF8 3C028015 */  lui       $v0, %hi(D_80151310)
+/* A65FC 8010FEFC 8C421310 */  lw        $v0, %lo(D_80151310)($v0)
 /* A6600 8010FF00 10400013 */  beqz      $v0, .L8010FF50
 /* A6604 8010FF04 3C030008 */   lui      $v1, 8
 /* A6608 8010FF08 8E020000 */  lw        $v0, ($s0)
@@ -29,8 +29,8 @@ glabel render_entities
 /* A6610 8010FF10 1440000F */  bnez      $v0, .L8010FF50
 /* A6614 8010FF14 00000000 */   nop      
 /* A6618 8010FF18 8E060048 */  lw        $a2, 0x48($s0)
-/* A661C 8010FF1C 3C02800F */  lui       $v0, 0x800f
-/* A6620 8010FF20 8C427B30 */  lw        $v0, 0x7b30($v0)
+/* A661C 8010FF1C 3C02800F */  lui       $v0, %hi(gPlayerStatusPtr)
+/* A6620 8010FF20 8C427B30 */  lw        $v0, %lo(gPlayerStatusPtr)($v0)
 /* A6624 8010FF24 8E070050 */  lw        $a3, 0x50($s0)
 /* A6628 8010FF28 C44C0028 */  lwc1      $f12, 0x28($v0)
 /* A662C 8010FF2C 0C00A7B5 */  jal       dist2D
@@ -43,8 +43,8 @@ glabel render_entities
 /* A6648 8010FF48 45030055 */  bc1tl     .L801100A0
 /* A664C 8010FF4C 26310001 */   addiu    $s1, $s1, 1
 .L8010FF50:
-/* A6650 8010FF50 3C038015 */  lui       $v1, 0x8015
-/* A6654 8010FF54 8C631310 */  lw        $v1, 0x1310($v1)
+/* A6650 8010FF50 3C038015 */  lui       $v1, %hi(D_80151310)
+/* A6654 8010FF54 8C631310 */  lw        $v1, %lo(D_80151310)($v1)
 /* A6658 8010FF58 24020001 */  addiu     $v0, $zero, 1
 /* A665C 8010FF5C 54620004 */  bnel      $v1, $v0, .L8010FF70
 /* A6660 8010FF60 24020002 */   addiu    $v0, $zero, 2

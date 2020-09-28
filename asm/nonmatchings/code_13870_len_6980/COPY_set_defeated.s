@@ -16,8 +16,8 @@ glabel COPY_set_defeated
 /* 19708 8003E308 00431021 */  addu      $v0, $v0, $v1
 /* 1970C 8003E30C 00021100 */  sll       $v0, $v0, 4
 /* 19710 8003E310 00822021 */  addu      $a0, $a0, $v0
-/* 19714 8003E314 3C02800B */  lui       $v0, 0x800b
-/* 19718 8003E318 24420F10 */  addiu     $v0, $v0, 0xf10
+/* 19714 8003E314 3C02800B */  lui       $v0, %hi(gCurrentEncounter)
+/* 19718 8003E318 24420F10 */  addiu     $v0, $v0, %lo(gCurrentEncounter)
 /* 1971C 8003E31C 00822021 */  addu      $a0, $a0, $v0
 /* 19720 8003E320 24030001 */  addiu     $v1, $zero, 1
 /* 19724 8003E324 8C8200B0 */  lw        $v0, 0xb0($a0)

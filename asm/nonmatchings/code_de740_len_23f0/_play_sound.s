@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel _play_sound
-/* E01B8 80149AB8 3C028007 */  lui       $v0, 0x8007
-/* E01BC 80149ABC 8C42419C */  lw        $v0, 0x419c($v0)
+/* E01B8 80149AB8 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* E01BC 80149ABC 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* E01C0 80149AC0 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* E01C4 80149AC4 AFBF0010 */  sw        $ra, 0x10($sp)
 /* E01C8 80149AC8 80420071 */  lb        $v0, 0x71($v0)
@@ -42,13 +42,13 @@ glabel _play_sound
 /* E0244 80149B44 080526F6 */  j         .L80149BD8
 /* E0248 80149B48 00000000 */   nop      
 .L80149B4C:
-/* E024C 80149B4C 3C028015 */  lui       $v0, 0x8015
-/* E0250 80149B50 94421340 */  lhu       $v0, 0x1340($v0)
+/* E024C 80149B4C 3C028015 */  lui       $v0, %hi(gCurrentDoorSoundsSet)
+/* E0250 80149B50 94421340 */  lhu       $v0, %lo(gCurrentDoorSoundsSet)($v0)
 /* E0254 80149B54 080526DA */  j         .L80149B68
 /* E0258 80149B58 00081880 */   sll      $v1, $t0, 2
 .L80149B5C:
-/* E025C 80149B5C 3C028015 */  lui       $v0, 0x8015
-/* E0260 80149B60 94421308 */  lhu       $v0, 0x1308($v0)
+/* E025C 80149B5C 3C028015 */  lui       $v0, %hi(D_80151308)
+/* E0260 80149B60 94421308 */  lhu       $v0, %lo(D_80151308)($v0)
 /* E0264 80149B64 00081880 */  sll       $v1, $t0, 2
 .L80149B68:
 /* E0268 80149B68 000210C0 */  sll       $v0, $v0, 3

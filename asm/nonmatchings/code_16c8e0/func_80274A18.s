@@ -6,8 +6,8 @@ glabel func_80274A18
 /* 1A32FC 80274A1C AFB30024 */  sw        $s3, 0x24($sp)
 /* 1A3300 80274A20 0080982D */  daddu     $s3, $a0, $zero
 /* 1A3304 80274A24 AFB40028 */  sw        $s4, 0x28($sp)
-/* 1A3308 80274A28 3C14800E */  lui       $s4, 0x800e
-/* 1A330C 80274A2C 2694C070 */  addiu     $s4, $s4, -0x3f90
+/* 1A3308 80274A28 3C14800E */  lui       $s4, %hi(gBattleStatus)
+/* 1A330C 80274A2C 2694C070 */  addiu     $s4, $s4, %lo(gBattleStatus)
 /* 1A3310 80274A30 AFBF002C */  sw        $ra, 0x2c($sp)
 /* 1A3314 80274A34 AFB20020 */  sw        $s2, 0x20($sp)
 /* 1A3318 80274A38 AFB1001C */  sw        $s1, 0x1c($sp)
@@ -547,8 +547,8 @@ glabel func_80274A18
 /* 1A3B18 80275238 E6400148 */  swc1      $f0, 0x148($s2)
 /* 1A3B1C 8027523C C6000008 */  lwc1      $f0, 8($s0)
 /* 1A3B20 80275240 E640014C */  swc1      $f0, 0x14c($s2)
-/* 1A3B24 80275244 3C02800E */  lui       $v0, 0x800e
-/* 1A3B28 80275248 8C42C070 */  lw        $v0, -0x3f90($v0)
+/* 1A3B24 80275244 3C02800E */  lui       $v0, %hi(gBattleStatus)
+/* 1A3B28 80275248 8C42C070 */  lw        $v0, %lo(gBattleStatus)($v0)
 /* 1A3B2C 8027524C 30422000 */  andi      $v0, $v0, 0x2000
 /* 1A3B30 80275250 10400003 */  beqz      $v0, .L80275260
 /* 1A3B34 80275254 00000000 */   nop      

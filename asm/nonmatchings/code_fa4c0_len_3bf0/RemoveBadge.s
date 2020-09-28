@@ -10,8 +10,8 @@ glabel RemoveBadge
 /* FBA14 802D7064 8C450000 */   lw       $a1, ($v0)
 /* FBA18 802D7068 0040282D */  daddu     $a1, $v0, $zero
 /* FBA1C 802D706C 0000202D */  daddu     $a0, $zero, $zero
-/* FBA20 802D7070 3C108011 */  lui       $s0, 0x8011
-/* FBA24 802D7074 2610F290 */  addiu     $s0, $s0, -0xd70
+/* FBA20 802D7070 3C108011 */  lui       $s0, %hi(gPlayerData)
+/* FBA24 802D7074 2610F290 */  addiu     $s0, $s0, %lo(gPlayerData)
 /* FBA28 802D7078 0200182D */  daddu     $v1, $s0, $zero
 .L802D707C:
 /* FBA2C 802D707C 846200B4 */  lh        $v0, 0xb4($v1)

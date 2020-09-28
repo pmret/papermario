@@ -5,8 +5,8 @@ glabel func_800431DC
 /* 1E5DC 800431DC 27BDFF58 */  addiu     $sp, $sp, -0xa8
 /* 1E5E0 800431E0 3C03FDFF */  lui       $v1, 0xfdff
 /* 1E5E4 800431E4 AFB40060 */  sw        $s4, 0x60($sp)
-/* 1E5E8 800431E8 3C148011 */  lui       $s4, 0x8011
-/* 1E5EC 800431EC 2694EFC8 */  addiu     $s4, $s4, -0x1038
+/* 1E5E8 800431E8 3C148011 */  lui       $s4, %hi(gPlayerStatus)
+/* 1E5EC 800431EC 2694EFC8 */  addiu     $s4, $s4, %lo(gPlayerStatus)
 /* 1E5F0 800431F0 AFBF0074 */  sw        $ra, 0x74($sp)
 /* 1E5F4 800431F4 AFBE0070 */  sw        $fp, 0x70($sp)
 /* 1E5F8 800431F8 AFB7006C */  sw        $s7, 0x6c($sp)
@@ -25,10 +25,10 @@ glabel func_800431DC
 /* 1E62C 8004322C 8E820000 */  lw        $v0, ($s4)
 /* 1E630 80043230 3463FFFF */  ori       $v1, $v1, 0xffff
 /* 1E634 80043234 00431024 */  and       $v0, $v0, $v1
-/* 1E638 80043238 3C038007 */  lui       $v1, 0x8007
-/* 1E63C 8004323C 8C637410 */  lw        $v1, 0x7410($v1)
-/* 1E640 80043240 3C04800B */  lui       $a0, 0x800b
-/* 1E644 80043244 24841D80 */  addiu     $a0, $a0, 0x1d80
+/* 1E638 80043238 3C038007 */  lui       $v1, %hi(gCurrentCameraID)
+/* 1E63C 8004323C 8C637410 */  lw        $v1, %lo(gCurrentCameraID)($v1)
+/* 1E640 80043240 3C04800B */  lui       $a0, %hi(gCameras)
+/* 1E644 80043244 24841D80 */  addiu     $a0, $a0, %lo(gCameras)
 /* 1E648 80043248 AE8000C8 */  sw        $zero, 0xc8($s4)
 /* 1E64C 8004324C AE820000 */  sw        $v0, ($s4)
 /* 1E650 80043250 00031080 */  sll       $v0, $v1, 2
@@ -55,8 +55,8 @@ glabel func_800431DC
 /* 1E6A4 800432A4 E7A6003C */  swc1      $f6, 0x3c($sp)
 /* 1E6A8 800432A8 E7A80040 */  swc1      $f8, 0x40($sp)
 /* 1E6AC 800432AC C6860028 */  lwc1      $f6, 0x28($s4)
-/* 1E6B0 800432B0 3C028011 */  lui       $v0, 0x8011
-/* 1E6B4 800432B4 8042EBB0 */  lb        $v0, -0x1450($v0)
+/* 1E6B0 800432B0 3C028011 */  lui       $v0, %hi(D_8010EBB0)
+/* 1E6B4 800432B4 8042EBB0 */  lb        $v0, %lo(D_8010EBB0)($v0)
 /* 1E6B8 800432B8 E7A60030 */  swc1      $f6, 0x30($sp)
 /* 1E6BC 800432BC C688002C */  lwc1      $f8, 0x2c($s4)
 /* 1E6C0 800432C0 E7A80034 */  swc1      $f8, 0x34($sp)
@@ -76,8 +76,8 @@ glabel func_800431DC
 /* 1E6F8 800432F8 E7A80048 */   swc1     $f8, 0x48($sp)
 /* 1E6FC 800432FC 00151080 */  sll       $v0, $s5, 2
 .L80043300:
-/* 1E700 80043300 3C08800B */  lui       $t0, 0x800b
-/* 1E704 80043304 25080F10 */  addiu     $t0, $t0, 0xf10
+/* 1E700 80043300 3C08800B */  lui       $t0, %hi(gCurrentEncounter)
+/* 1E704 80043304 25080F10 */  addiu     $t0, $t0, %lo(gCurrentEncounter)
 /* 1E708 80043308 01021021 */  addu      $v0, $t0, $v0
 /* 1E70C 8004330C 8C530028 */  lw        $s3, 0x28($v0)
 /* 1E710 80043310 126000AB */  beqz      $s3, .L800435C0

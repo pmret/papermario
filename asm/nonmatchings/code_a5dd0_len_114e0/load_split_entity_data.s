@@ -79,8 +79,8 @@ glabel load_split_entity_data
 /* A7C20 80111520 27A70014 */   addiu    $a3, $sp, 0x14
 /* A7C24 80111524 10400055 */  beqz      $v0, .L8011167C
 /* A7C28 80111528 00000000 */   nop      
-/* A7C2C 8011152C 3C028007 */  lui       $v0, 0x8007
-/* A7C30 80111530 8C42419C */  lw        $v0, 0x419c($v0)
+/* A7C2C 8011152C 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* A7C30 80111530 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* A7C34 80111534 80420070 */  lb        $v0, 0x70($v0)
 /* A7C38 80111538 14400005 */  bnez      $v0, .L80111550
 /* A7C3C 8011153C 00000000 */   nop      
@@ -156,8 +156,8 @@ glabel load_split_entity_data
 /* A7D3C 8011163C 00701823 */  subu      $v1, $v1, $s0
 /* A7D40 80111640 0C0441A9 */  jal       get_entity_type
 /* A7D44 80111644 00628023 */   subu     $s0, $v1, $v0
-/* A7D48 80111648 3C028007 */  lui       $v0, 0x8007
-/* A7D4C 8011164C 8C42419C */  lw        $v0, 0x419c($v0)
+/* A7D48 80111648 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* A7D4C 8011164C 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* A7D50 80111650 80420070 */  lb        $v0, 0x70($v0)
 /* A7D54 80111654 14400005 */  bnez      $v0, .L8011166C
 /* A7D58 80111658 24150001 */   addiu    $s5, $zero, 1

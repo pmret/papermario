@@ -3,8 +3,8 @@
 
 glabel func_800E0088
 /* 79538 800E0088 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* 7953C 800E008C 3C028011 */  lui       $v0, 0x8011
-/* 79540 800E0090 2442EFC8 */  addiu     $v0, $v0, -0x1038
+/* 7953C 800E008C 3C028011 */  lui       $v0, %hi(gPlayerStatus)
+/* 79540 800E0090 2442EFC8 */  addiu     $v0, $v0, %lo(gPlayerStatus)
 /* 79544 800E0094 AFBF0010 */  sw        $ra, 0x10($sp)
 /* 79548 800E0098 8C460028 */  lw        $a2, 0x28($v0)
 /* 7954C 800E009C 0C00A7B5 */  jal       dist2D

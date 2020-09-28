@@ -18,8 +18,8 @@ glabel is_actortype_hpbar_visible
 /* 1825AC 80253CCC 001080C3 */  sra       $s0, $s0, 3
 /* 1825B0 80253CD0 0C05154E */  jal       get_global_byte
 /* 1825B4 80253CD4 2604016D */   addiu    $a0, $s0, 0x16d
-/* 1825B8 80253CD8 3C03800E */  lui       $v1, 0x800e
-/* 1825BC 80253CDC 2463C070 */  addiu     $v1, $v1, -0x3f90
+/* 1825B8 80253CD8 3C03800E */  lui       $v1, %hi(gBattleStatus)
+/* 1825BC 80253CDC 2463C070 */  addiu     $v1, $v1, %lo(gBattleStatus)
 /* 1825C0 80253CE0 02031821 */  addu      $v1, $s0, $v1
 /* 1825C4 80253CE4 90630440 */  lbu       $v1, 0x440($v1)
 /* 1825C8 80253CE8 001080C0 */  sll       $s0, $s0, 3

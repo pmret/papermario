@@ -6,8 +6,8 @@ glabel func_802D1270
 /* F5C24 802D1274 AFB10014 */  sw        $s1, 0x14($sp)
 /* F5C28 802D1278 0080882D */  daddu     $s1, $a0, $zero
 /* F5C2C 802D127C AFB20018 */  sw        $s2, 0x18($sp)
-/* F5C30 802D1280 3C128011 */  lui       $s2, 0x8011
-/* F5C34 802D1284 2652EFC8 */  addiu     $s2, $s2, -0x1038
+/* F5C30 802D1280 3C128011 */  lui       $s2, %hi(gPlayerStatus)
+/* F5C34 802D1284 2652EFC8 */  addiu     $s2, $s2, %lo(gPlayerStatus)
 /* F5C38 802D1288 AFBF001C */  sw        $ra, 0x1c($sp)
 /* F5C3C 802D128C AFB00010 */  sw        $s0, 0x10($sp)
 /* F5C40 802D1290 F7B80030 */  sdc1      $f24, 0x30($sp)

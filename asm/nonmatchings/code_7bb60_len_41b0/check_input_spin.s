@@ -4,11 +4,11 @@
 glabel check_input_spin
 /* 7F718 800E6268 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 7F71C 800E626C AFB00010 */  sw        $s0, 0x10($sp)
-/* 7F720 800E6270 3C108011 */  lui       $s0, 0x8011
-/* 7F724 800E6274 2610EFC8 */  addiu     $s0, $s0, -0x1038
+/* 7F720 800E6270 3C108011 */  lui       $s0, %hi(gPlayerStatus)
+/* 7F724 800E6274 2610EFC8 */  addiu     $s0, $s0, %lo(gPlayerStatus)
 /* 7F728 800E6278 AFB10014 */  sw        $s1, 0x14($sp)
-/* 7F72C 800E627C 3C118011 */  lui       $s1, 0x8011
-/* 7F730 800E6280 2631F250 */  addiu     $s1, $s1, -0xdb0
+/* 7F72C 800E627C 3C118011 */  lui       $s1, %hi(D_8010F250)
+/* 7F730 800E6280 2631F250 */  addiu     $s1, $s1, %lo(D_8010F250)
 /* 7F734 800E6284 AFBF001C */  sw        $ra, 0x1c($sp)
 /* 7F738 800E6288 AFB20018 */  sw        $s2, 0x18($sp)
 /* 7F73C 800E628C 8E020000 */  lw        $v0, ($s0)

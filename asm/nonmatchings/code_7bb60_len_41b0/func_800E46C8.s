@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel func_800E46C8
-/* 7DB78 800E46C8 3C048011 */  lui       $a0, 0x8011
-/* 7DB7C 800E46CC 8C84F094 */  lw        $a0, -0xf6c($a0)
+/* 7DB78 800E46C8 3C048011 */  lui       $a0, %hi(D_8010F094)
+/* 7DB7C 800E46CC 8C84F094 */  lw        $a0, %lo(D_8010F094)($a0)
 /* 7DB80 800E46D0 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 7DB84 800E46D4 AFBF0010 */  sw        $ra, 0x10($sp)
 /* 7DB88 800E46D8 0C044181 */  jal       get_shadow_by_index

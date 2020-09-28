@@ -4,13 +4,13 @@
 glabel setup_item_popup
 /* 800F4 800E6C44 0000402D */  daddu     $t0, $zero, $zero
 /* 800F8 800E6C48 0100302D */  daddu     $a2, $t0, $zero
-/* 800FC 800E6C4C 3C0B8008 */  lui       $t3, 0x8008
-/* 80100 800E6C50 256B78E0 */  addiu     $t3, $t3, 0x78e0
+/* 800FC 800E6C4C 3C0B8008 */  lui       $t3, %hi(gItemTable)
+/* 80100 800E6C50 256B78E0 */  addiu     $t3, $t3, %lo(gItemTable)
 /* 80104 800E6C54 3C0A8009 */  lui       $t2, 0x8009
 /* 80108 800E6C58 254AA680 */  addiu     $t2, $t2, -0x5980
 /* 8010C 800E6C5C 24090001 */  addiu     $t1, $zero, 1
-/* 80110 800E6C60 3C078011 */  lui       $a3, 0x8011
-/* 80114 800E6C64 24E7F290 */  addiu     $a3, $a3, -0xd70
+/* 80110 800E6C60 3C078011 */  lui       $a3, %hi(gPlayerData)
+/* 80114 800E6C64 24E7F290 */  addiu     $a3, $a3, %lo(gPlayerData)
 .L800E6C68:
 /* 80118 800E6C68 84E201B4 */  lh        $v0, 0x1b4($a3)
 /* 8011C 800E6C6C 50400018 */  beql      $v0, $zero, .L800E6CD0

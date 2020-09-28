@@ -51,8 +51,8 @@ glabel free_npc
 .L80038A74:
 /* 13E74 80038A74 0C00AB4B */  jal       heap_free
 /* 13E78 80038A78 0220202D */   daddu    $a0, $s1, $zero
-/* 13E7C 80038A7C 3C05800A */  lui       $a1, 0x800a
-/* 13E80 80038A80 8CA50B90 */  lw        $a1, 0xb90($a1)
+/* 13E7C 80038A7C 3C05800A */  lui       $a1, %hi(gCurrentNpcListPtr)
+/* 13E80 80038A80 8CA50B90 */  lw        $a1, %lo(gCurrentNpcListPtr)($a1)
 /* 13E84 80038A84 0000802D */  daddu     $s0, $zero, $zero
 /* 13E88 80038A88 00A0182D */  daddu     $v1, $a1, $zero
 .L80038A8C:

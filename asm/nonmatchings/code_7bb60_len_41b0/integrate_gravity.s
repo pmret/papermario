@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel integrate_gravity
-/* 7C8F8 800E3448 3C048011 */  lui       $a0, 0x8011
-/* 7C8FC 800E344C 2484EFC8 */  addiu     $a0, $a0, -0x1038
+/* 7C8F8 800E3448 3C048011 */  lui       $a0, %hi(gPlayerStatus)
+/* 7C8FC 800E344C 2484EFC8 */  addiu     $a0, $a0, %lo(gPlayerStatus)
 /* 7C900 800E3450 8C820000 */  lw        $v0, ($a0)
 /* 7C904 800E3454 3C030004 */  lui       $v1, 4
 /* 7C908 800E3458 00431024 */  and       $v0, $v0, $v1

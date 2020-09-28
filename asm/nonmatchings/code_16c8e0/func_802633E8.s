@@ -6,8 +6,8 @@ glabel func_802633E8
 /* 191CCC 802633EC 00A0202D */  daddu     $a0, $a1, $zero
 /* 191CD0 802633F0 3C060040 */  lui       $a2, 0x40
 /* 191CD4 802633F4 34C64000 */  ori       $a2, $a2, 0x4000
-/* 191CD8 802633F8 3C03800E */  lui       $v1, 0x800e
-/* 191CDC 802633FC 2463C070 */  addiu     $v1, $v1, -0x3f90
+/* 191CD8 802633F8 3C03800E */  lui       $v1, %hi(gBattleStatus)
+/* 191CDC 802633FC 2463C070 */  addiu     $v1, $v1, %lo(gBattleStatus)
 .L80263400:
 /* 191CE0 80263400 8C6200E0 */  lw        $v0, 0xe0($v1)
 /* 191CE4 80263404 50400006 */  beql      $v0, $zero, .L80263420

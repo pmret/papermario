@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel update_actor_shadows
-/* 16CCE4 8023E404 3C02800E */  lui       $v0, 0x800e
-/* 16CCE8 8023E408 8C42C070 */  lw        $v0, -0x3f90($v0)
+/* 16CCE4 8023E404 3C02800E */  lui       $v0, %hi(gBattleStatus)
+/* 16CCE8 8023E408 8C42C070 */  lw        $v0, %lo(gBattleStatus)($v0)
 /* 16CCEC 8023E40C 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 16CCF0 8023E410 30420001 */  andi      $v0, $v0, 1
 /* 16CCF4 8023E414 10400005 */  beqz      $v0, .L8023E42C

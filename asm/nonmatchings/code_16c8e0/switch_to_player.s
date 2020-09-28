@@ -4,8 +4,8 @@
 glabel switch_to_player
 /* 1713A8 80242AC8 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 1713AC 80242ACC AFB00010 */  sw        $s0, 0x10($sp)
-/* 1713B0 80242AD0 3C10800E */  lui       $s0, 0x800e
-/* 1713B4 80242AD4 2610C070 */  addiu     $s0, $s0, -0x3f90
+/* 1713B0 80242AD0 3C10800E */  lui       $s0, %hi(gBattleStatus)
+/* 1713B4 80242AD4 2610C070 */  addiu     $s0, $s0, %lo(gBattleStatus)
 /* 1713B8 80242AD8 AFBF001C */  sw        $ra, 0x1c($sp)
 /* 1713BC 80242ADC AFB20018 */  sw        $s2, 0x18($sp)
 /* 1713C0 80242AE0 AFB10014 */  sw        $s1, 0x14($sp)

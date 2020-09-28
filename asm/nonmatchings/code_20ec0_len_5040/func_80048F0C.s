@@ -4,8 +4,8 @@
 glabel func_80048F0C
 /* 2430C 80048F0C 27BDFFD0 */  addiu     $sp, $sp, -0x30
 /* 24310 80048F10 AFB50024 */  sw        $s5, 0x24($sp)
-/* 24314 80048F14 3C15800B */  lui       $s5, 0x800b
-/* 24318 80048F18 26B50F10 */  addiu     $s5, $s5, 0xf10
+/* 24314 80048F14 3C15800B */  lui       $s5, %hi(gCurrentEncounter)
+/* 24318 80048F18 26B50F10 */  addiu     $s5, $s5, %lo(gCurrentEncounter)
 /* 2431C 80048F1C AFBF0028 */  sw        $ra, 0x28($sp)
 /* 24320 80048F20 AFB40020 */  sw        $s4, 0x20($sp)
 /* 24324 80048F24 AFB3001C */  sw        $s3, 0x1c($sp)

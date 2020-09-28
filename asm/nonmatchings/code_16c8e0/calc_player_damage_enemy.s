@@ -4,8 +4,8 @@
 glabel calc_player_damage_enemy
 /* 1A0224 80271944 27BDFFA0 */  addiu     $sp, $sp, -0x60
 /* 1A0228 80271948 AFB40048 */  sw        $s4, 0x48($sp)
-/* 1A022C 8027194C 3C14800E */  lui       $s4, 0x800e
-/* 1A0230 80271950 2694C070 */  addiu     $s4, $s4, -0x3f90
+/* 1A022C 8027194C 3C14800E */  lui       $s4, %hi(gBattleStatus)
+/* 1A0230 80271950 2694C070 */  addiu     $s4, $s4, %lo(gBattleStatus)
 /* 1A0234 80271954 AFBF005C */  sw        $ra, 0x5c($sp)
 /* 1A0238 80271958 AFBE0058 */  sw        $fp, 0x58($sp)
 /* 1A023C 8027195C AFB70054 */  sw        $s7, 0x54($sp)
@@ -53,8 +53,8 @@ glabel calc_player_damage_enemy
 /* 1A02DC 802719FC 0809C67F */  j         .L802719FC
 /* 1A02E0 80271A00 00000000 */   nop      
 .L80271A04:
-/* 1A02E4 80271A04 3C02800E */  lui       $v0, 0x800e
-/* 1A02E8 80271A08 8C42C070 */  lw        $v0, -0x3f90($v0)
+/* 1A02E4 80271A04 3C02800E */  lui       $v0, %hi(gBattleStatus)
+/* 1A02E8 80271A08 8C42C070 */  lw        $v0, %lo(gBattleStatus)($v0)
 /* 1A02EC 80271A0C 30420800 */  andi      $v0, $v0, 0x800
 /* 1A02F0 80271A10 10400003 */  beqz      $v0, .L80271A20
 /* 1A02F4 80271A14 24150002 */   addiu    $s5, $zero, 2
@@ -114,8 +114,8 @@ glabel calc_player_damage_enemy
 /* 1A03BC 80271ADC 8E460014 */  lw        $a2, 0x14($s2)
 /* 1A03C0 80271AE0 0C09996B */  jal       show_damage_popup
 /* 1A03C4 80271AE4 0000382D */   daddu    $a3, $zero, $zero
-/* 1A03C8 80271AE8 3C02800E */  lui       $v0, 0x800e
-/* 1A03CC 80271AEC 8C42C070 */  lw        $v0, -0x3f90($v0)
+/* 1A03C8 80271AE8 3C02800E */  lui       $v0, %hi(gBattleStatus)
+/* 1A03CC 80271AEC 8C42C070 */  lw        $v0, %lo(gBattleStatus)($v0)
 /* 1A03D0 80271AF0 0809C963 */  j         .L8027258C
 /* 1A03D4 80271AF4 30420240 */   andi     $v0, $v0, 0x240
 .L80271AF8:
@@ -191,8 +191,8 @@ glabel calc_player_damage_enemy
 /* 1A04E0 80271C00 0809C737 */  j         .L80271CDC
 /* 1A04E4 80271C04 2405001C */   addiu    $a1, $zero, 0x1c
 .L80271C08:
-/* 1A04E8 80271C08 3C10800E */  lui       $s0, 0x800e
-/* 1A04EC 80271C0C 2610C070 */  addiu     $s0, $s0, -0x3f90
+/* 1A04E8 80271C08 3C10800E */  lui       $s0, %hi(gBattleStatus)
+/* 1A04EC 80271C0C 2610C070 */  addiu     $s0, $s0, %lo(gBattleStatus)
 /* 1A04F0 80271C10 8E020000 */  lw        $v0, ($s0)
 /* 1A04F4 80271C14 30420020 */  andi      $v0, $v0, 0x20
 /* 1A04F8 80271C18 10400012 */  beqz      $v0, .L80271C64
@@ -393,8 +393,8 @@ glabel calc_player_damage_enemy
 /* 1A07D8 80271EF8 30420008 */  andi      $v0, $v0, 8
 /* 1A07DC 80271EFC 14400007 */  bnez      $v0, .L80271F1C
 /* 1A07E0 80271F00 24080001 */   addiu    $t0, $zero, 1
-/* 1A07E4 80271F04 3C03800E */  lui       $v1, 0x800e
-/* 1A07E8 80271F08 2463C070 */  addiu     $v1, $v1, -0x3f90
+/* 1A07E4 80271F04 3C03800E */  lui       $v1, %hi(gBattleStatus)
+/* 1A07E8 80271F08 2463C070 */  addiu     $v1, $v1, %lo(gBattleStatus)
 /* 1A07EC 80271F0C 8C620000 */  lw        $v0, ($v1)
 /* 1A07F0 80271F10 AFA80020 */  sw        $t0, 0x20($sp)
 /* 1A07F4 80271F14 34420020 */  ori       $v0, $v0, 0x20
@@ -434,8 +434,8 @@ glabel calc_player_damage_enemy
 /* 1A086C 80271F8C 828300AC */  lb        $v1, 0xac($s4)
 /* 1A0870 80271F90 1860000A */  blez      $v1, .L80271FBC
 /* 1A0874 80271F94 02028021 */   addu     $s0, $s0, $v0
-/* 1A0878 80271F98 3C02800E */  lui       $v0, 0x800e
-/* 1A087C 80271F9C 8C42C070 */  lw        $v0, -0x3f90($v0)
+/* 1A0878 80271F98 3C02800E */  lui       $v0, %hi(gBattleStatus)
+/* 1A087C 80271F9C 8C42C070 */  lw        $v0, %lo(gBattleStatus)($v0)
 /* 1A0880 80271FA0 30420010 */  andi      $v0, $v0, 0x10
 /* 1A0884 80271FA4 54400005 */  bnel      $v0, $zero, .L80271FBC
 /* 1A0888 80271FA8 02038021 */   addu     $s0, $s0, $v1
@@ -452,8 +452,8 @@ glabel calc_player_damage_enemy
 /* 1A08B0 80271FD0 10400008 */  beqz      $v0, .L80271FF4
 /* 1A08B4 80271FD4 3C04DFFF */   lui      $a0, 0xdfff
 /* 1A08B8 80271FD8 02038021 */  addu      $s0, $s0, $v1
-/* 1A08BC 80271FDC 3C03800E */  lui       $v1, 0x800e
-/* 1A08C0 80271FE0 2463C070 */  addiu     $v1, $v1, -0x3f90
+/* 1A08BC 80271FDC 3C03800E */  lui       $v1, %hi(gBattleStatus)
+/* 1A08C0 80271FE0 2463C070 */  addiu     $v1, $v1, %lo(gBattleStatus)
 /* 1A08C4 80271FE4 8C620000 */  lw        $v0, ($v1)
 /* 1A08C8 80271FE8 3484FFFF */  ori       $a0, $a0, 0xffff
 /* 1A08CC 80271FEC 00441024 */  and       $v0, $v0, $a0
@@ -469,8 +469,8 @@ glabel calc_player_damage_enemy
 /* 1A08F0 80272010 00000000 */   nop      
 /* 1A08F4 80272014 02048021 */  addu      $s0, $s0, $a0
 /* 1A08F8 80272018 3C04EFFF */  lui       $a0, 0xefff
-/* 1A08FC 8027201C 3C03800E */  lui       $v1, 0x800e
-/* 1A0900 80272020 2463C070 */  addiu     $v1, $v1, -0x3f90
+/* 1A08FC 8027201C 3C03800E */  lui       $v1, %hi(gBattleStatus)
+/* 1A0900 80272020 2463C070 */  addiu     $v1, $v1, %lo(gBattleStatus)
 /* 1A0904 80272024 8C620000 */  lw        $v0, ($v1)
 /* 1A0908 80272028 3484FFFF */  ori       $a0, $a0, 0xffff
 /* 1A090C 8027202C 00441024 */  and       $v0, $v0, $a0
@@ -517,8 +517,8 @@ glabel calc_player_damage_enemy
 /* 1A0998 802720B8 00501021 */  addu      $v0, $v0, $s0
 /* 1A099C 802720BC A2820089 */  sb        $v0, 0x89($s4)
 .L802720C0:
-/* 1A09A0 802720C0 3C05800E */  lui       $a1, 0x800e
-/* 1A09A4 802720C4 24A5C070 */  addiu     $a1, $a1, -0x3f90
+/* 1A09A0 802720C0 3C05800E */  lui       $a1, %hi(gBattleStatus)
+/* 1A09A4 802720C4 24A5C070 */  addiu     $a1, $a1, %lo(gBattleStatus)
 /* 1A09A8 802720C8 3C040400 */  lui       $a0, 0x400
 /* 1A09AC 802720CC 8CA20004 */  lw        $v0, 4($a1)
 /* 1A09B0 802720D0 82830089 */  lb        $v1, 0x89($s4)
@@ -542,8 +542,8 @@ glabel calc_player_damage_enemy
 /* 1A09F4 80272114 00501021 */  addu      $v0, $v0, $s0
 /* 1A09F8 80272118 A2820089 */  sb        $v0, 0x89($s4)
 .L8027211C:
-/* 1A09FC 8027211C 3C05800E */  lui       $a1, 0x800e
-/* 1A0A00 80272120 24A5C070 */  addiu     $a1, $a1, -0x3f90
+/* 1A09FC 8027211C 3C05800E */  lui       $a1, %hi(gBattleStatus)
+/* 1A0A00 80272120 24A5C070 */  addiu     $a1, $a1, %lo(gBattleStatus)
 /* 1A0A04 80272124 3C040400 */  lui       $a0, 0x400
 /* 1A0A08 80272128 8CA20004 */  lw        $v0, 4($a1)
 /* 1A0A0C 8027212C 82830089 */  lb        $v1, 0x89($s4)
@@ -554,8 +554,8 @@ glabel calc_player_damage_enemy
 /* 1A0A20 80272140 24020005 */  addiu     $v0, $zero, 5
 /* 1A0A24 80272144 A2820089 */  sb        $v0, 0x89($s4)
 .L80272148:
-/* 1A0A28 80272148 3C04800E */  lui       $a0, 0x800e
-/* 1A0A2C 8027214C 2484C070 */  addiu     $a0, $a0, -0x3f90
+/* 1A0A28 80272148 3C04800E */  lui       $a0, %hi(gBattleStatus)
+/* 1A0A2C 8027214C 2484C070 */  addiu     $a0, $a0, %lo(gBattleStatus)
 /* 1A0A30 80272150 8C820004 */  lw        $v0, 4($a0)
 /* 1A0A34 80272154 3C030800 */  lui       $v1, 0x800
 /* 1A0A38 80272158 00431024 */  and       $v0, $v0, $v1
@@ -590,8 +590,8 @@ glabel calc_player_damage_enemy
 /* 1A0AA0 802721C0 0C01C2EC */  jal       func_80070BB0
 /* 1A0AA4 802721C4 24040009 */   addiu    $a0, $zero, 9
 .L802721C8:
-/* 1A0AA8 802721C8 3C11800E */  lui       $s1, 0x800e
-/* 1A0AAC 802721CC 2631C070 */  addiu     $s1, $s1, -0x3f90
+/* 1A0AA8 802721C8 3C11800E */  lui       $s1, %hi(gBattleStatus)
+/* 1A0AAC 802721CC 2631C070 */  addiu     $s1, $s1, %lo(gBattleStatus)
 /* 1A0AB0 802721D0 8E220004 */  lw        $v0, 4($s1)
 /* 1A0AB4 802721D4 3C030100 */  lui       $v1, 0x100
 /* 1A0AB8 802721D8 00431024 */  and       $v0, $v0, $v1
@@ -631,8 +631,8 @@ glabel calc_player_damage_enemy
 /* 1A0B3C 8027225C 52000001 */  beql      $s0, $zero, .L80272264
 /* 1A0B40 80272260 24100001 */   addiu    $s0, $zero, 1
 .L80272264:
-/* 1A0B44 80272264 3C02800E */  lui       $v0, 0x800e
-/* 1A0B48 80272268 8C42C070 */  lw        $v0, -0x3f90($v0)
+/* 1A0B44 80272264 3C02800E */  lui       $v0, %hi(gBattleStatus)
+/* 1A0B48 80272268 8C42C070 */  lw        $v0, %lo(gBattleStatus)($v0)
 /* 1A0B4C 8027226C 30420020 */  andi      $v0, $v0, 0x20
 /* 1A0B50 80272270 1040000B */  beqz      $v0, .L802722A0
 /* 1A0B54 80272274 00000000 */   nop      
@@ -717,8 +717,8 @@ glabel calc_player_damage_enemy
 /* 1A0C6C 8027238C 30422000 */  andi      $v0, $v0, 0x2000
 /* 1A0C70 80272390 14400016 */  bnez      $v0, .L802723EC
 /* 1A0C74 80272394 0000A82D */   daddu    $s5, $zero, $zero
-/* 1A0C78 80272398 3C02800E */  lui       $v0, 0x800e
-/* 1A0C7C 8027239C 8C42C070 */  lw        $v0, -0x3f90($v0)
+/* 1A0C78 80272398 3C02800E */  lui       $v0, %hi(gBattleStatus)
+/* 1A0C7C 8027239C 8C42C070 */  lw        $v0, %lo(gBattleStatus)($v0)
 /* 1A0C80 802723A0 3C030200 */  lui       $v1, 0x200
 /* 1A0C84 802723A4 00431024 */  and       $v0, $v0, $v1
 /* 1A0C88 802723A8 14400010 */  bnez      $v0, .L802723EC
@@ -777,8 +777,8 @@ glabel calc_player_damage_enemy
 /* 1A0D50 80272470 10400338 */  beqz      $v0, .L80273154
 /* 1A0D54 80272474 00000000 */   nop      
 .L80272478:
-/* 1A0D58 80272478 3C10800E */  lui       $s0, 0x800e
-/* 1A0D5C 8027247C 2610C070 */  addiu     $s0, $s0, -0x3f90
+/* 1A0D58 80272478 3C10800E */  lui       $s0, %hi(gBattleStatus)
+/* 1A0D5C 8027247C 2610C070 */  addiu     $s0, $s0, %lo(gBattleStatus)
 /* 1A0D60 80272480 8E020000 */  lw        $v0, ($s0)
 /* 1A0D64 80272484 30420020 */  andi      $v0, $v0, 0x20
 /* 1A0D68 80272488 14400002 */  bnez      $v0, .L80272494
@@ -807,8 +807,8 @@ glabel calc_player_damage_enemy
 /* 1A0DC0 802724E0 0809C961 */  j         .L80272584
 /* 1A0DC4 802724E4 00000000 */   nop      
 .L802724E8:
-/* 1A0DC8 802724E8 3C10800E */  lui       $s0, 0x800e
-/* 1A0DCC 802724EC 2610C070 */  addiu     $s0, $s0, -0x3f90
+/* 1A0DC8 802724E8 3C10800E */  lui       $s0, %hi(gBattleStatus)
+/* 1A0DCC 802724EC 2610C070 */  addiu     $s0, $s0, %lo(gBattleStatus)
 /* 1A0DD0 802724F0 8E020000 */  lw        $v0, ($s0)
 /* 1A0DD4 802724F4 30420020 */  andi      $v0, $v0, 0x20
 /* 1A0DD8 802724F8 10400038 */  beqz      $v0, .L802725DC
@@ -854,8 +854,8 @@ glabel calc_player_damage_enemy
 /* 1A0E6C 8027258C 0809CC63 */  j         .L8027318C
 /* 1A0E70 80272590 0002102B */   sltu     $v0, $zero, $v0
 .L80272594:
-/* 1A0E74 80272594 3C02800E */  lui       $v0, 0x800e
-/* 1A0E78 80272598 8C42C070 */  lw        $v0, -0x3f90($v0)
+/* 1A0E74 80272594 3C02800E */  lui       $v0, %hi(gBattleStatus)
+/* 1A0E78 80272598 8C42C070 */  lw        $v0, %lo(gBattleStatus)($v0)
 /* 1A0E7C 8027259C 30420020 */  andi      $v0, $v0, 0x20
 /* 1A0E80 802725A0 1040000D */  beqz      $v0, .L802725D8
 /* 1A0E84 802725A4 24020009 */   addiu    $v0, $zero, 9
@@ -879,8 +879,8 @@ glabel calc_player_damage_enemy
 /* 1A0EBC 802725DC 52220001 */  beql      $s1, $v0, .L802725E4
 /* 1A0EC0 802725E0 24110009 */   addiu    $s1, $zero, 9
 .L802725E4:
-/* 1A0EC4 802725E4 3C10800E */  lui       $s0, 0x800e
-/* 1A0EC8 802725E8 2610C070 */  addiu     $s0, $s0, -0x3f90
+/* 1A0EC4 802725E4 3C10800E */  lui       $s0, %hi(gBattleStatus)
+/* 1A0EC8 802725E8 2610C070 */  addiu     $s0, $s0, %lo(gBattleStatus)
 /* 1A0ECC 802725EC 8E020000 */  lw        $v0, ($s0)
 /* 1A0ED0 802725F0 30420020 */  andi      $v0, $v0, 0x20
 /* 1A0ED4 802725F4 14400007 */  bnez      $v0, .L80272614
@@ -901,8 +901,8 @@ glabel calc_player_damage_enemy
 /* 1A0F0C 8027262C 9083001D */  lbu       $v1, 0x1d($a0)
 /* 1A0F10 80272630 1062001D */  beq       $v1, $v0, .L802726A8
 /* 1A0F14 80272634 00000000 */   nop      
-/* 1A0F18 80272638 3C028011 */  lui       $v0, 0x8011
-/* 1A0F1C 8027263C 2442F290 */  addiu     $v0, $v0, -0xd70
+/* 1A0F18 80272638 3C028011 */  lui       $v0, %hi(gPlayerData)
+/* 1A0F1C 8027263C 2442F290 */  addiu     $v0, $v0, %lo(gPlayerData)
 /* 1A0F20 80272640 80420001 */  lb        $v0, 1($v0)
 /* 1A0F24 80272644 24420001 */  addiu     $v0, $v0, 1
 /* 1A0F28 80272648 0043102A */  slt       $v0, $v0, $v1
@@ -934,8 +934,8 @@ glabel calc_player_damage_enemy
 /* 1A0F80 802726A0 52220001 */  beql      $s1, $v0, .L802726A8
 /* 1A0F84 802726A4 24110021 */   addiu    $s1, $zero, 0x21
 .L802726A8:
-/* 1A0F88 802726A8 3C02800E */  lui       $v0, 0x800e
-/* 1A0F8C 802726AC 8C42C070 */  lw        $v0, -0x3f90($v0)
+/* 1A0F88 802726A8 3C02800E */  lui       $v0, %hi(gBattleStatus)
+/* 1A0F8C 802726AC 8C42C070 */  lw        $v0, %lo(gBattleStatus)($v0)
 /* 1A0F90 802726B0 30420020 */  andi      $v0, $v0, 0x20
 /* 1A0F94 802726B4 10400045 */  beqz      $v0, .L802727CC
 /* 1A0F98 802726B8 3C031000 */   lui      $v1, 0x1000
@@ -966,8 +966,8 @@ glabel calc_player_damage_enemy
 /* 1A0FEC 8027270C 52220001 */  beql      $s1, $v0, .L80272714
 /* 1A0FF0 80272710 24110028 */   addiu    $s1, $zero, 0x28
 .L80272714:
-/* 1A0FF4 80272714 3C02800E */  lui       $v0, 0x800e
-/* 1A0FF8 80272718 8C42C070 */  lw        $v0, -0x3f90($v0)
+/* 1A0FF4 80272714 3C02800E */  lui       $v0, %hi(gBattleStatus)
+/* 1A0FF8 80272718 8C42C070 */  lw        $v0, %lo(gBattleStatus)($v0)
 /* 1A0FFC 8027271C 30420020 */  andi      $v0, $v0, 0x20
 /* 1A1000 80272720 1040002A */  beqz      $v0, .L802727CC
 /* 1A1004 80272724 00000000 */   nop      
@@ -988,8 +988,8 @@ glabel calc_player_damage_enemy
 .L8027275C:
 /* 1A103C 8027275C 24160001 */  addiu     $s6, $zero, 1
 .L80272760:
-/* 1A1040 80272760 3C02800E */  lui       $v0, 0x800e
-/* 1A1044 80272764 8C42C070 */  lw        $v0, -0x3f90($v0)
+/* 1A1040 80272760 3C02800E */  lui       $v0, %hi(gBattleStatus)
+/* 1A1044 80272764 8C42C070 */  lw        $v0, %lo(gBattleStatus)($v0)
 /* 1A1048 80272768 30420020 */  andi      $v0, $v0, 0x20
 /* 1A104C 8027276C 10400017 */  beqz      $v0, .L802727CC
 /* 1A1050 80272770 00000000 */   nop      
@@ -1013,8 +1013,8 @@ glabel calc_player_damage_enemy
 /* 1A1090 802727B0 50400001 */  beql      $v0, $zero, .L802727B8
 /* 1A1094 802727B4 24160001 */   addiu    $s6, $zero, 1
 .L802727B8:
-/* 1A1098 802727B8 3C02800E */  lui       $v0, 0x800e
-/* 1A109C 802727BC 8C42C070 */  lw        $v0, -0x3f90($v0)
+/* 1A1098 802727B8 3C02800E */  lui       $v0, %hi(gBattleStatus)
+/* 1A109C 802727BC 8C42C070 */  lw        $v0, %lo(gBattleStatus)($v0)
 /* 1A10A0 802727C0 30420020 */  andi      $v0, $v0, 0x20
 /* 1A10A4 802727C4 14400017 */  bnez      $v0, .L80272824
 /* 1A10A8 802727C8 00000000 */   nop      
@@ -1039,8 +1039,8 @@ glabel calc_player_damage_enemy
 /* 1A10E8 80272808 50400001 */  beql      $v0, $zero, .L80272810
 /* 1A10EC 8027280C 24160001 */   addiu    $s6, $zero, 1
 .L80272810:
-/* 1A10F0 80272810 3C02800E */  lui       $v0, 0x800e
-/* 1A10F4 80272814 8C42C070 */  lw        $v0, -0x3f90($v0)
+/* 1A10F0 80272810 3C02800E */  lui       $v0, %hi(gBattleStatus)
+/* 1A10F4 80272814 8C42C070 */  lw        $v0, %lo(gBattleStatus)($v0)
 /* 1A10F8 80272818 30420020 */  andi      $v0, $v0, 0x20
 /* 1A10FC 8027281C 504000A2 */  beql      $v0, $zero, .L80272AA8
 /* 1A1100 80272820 0260202D */   daddu    $a0, $s3, $zero
@@ -1063,8 +1063,8 @@ glabel calc_player_damage_enemy
 .L8027285C:
 /* 1A113C 8027285C 24160001 */  addiu     $s6, $zero, 1
 .L80272860:
-/* 1A1140 80272860 3C02800E */  lui       $v0, 0x800e
-/* 1A1144 80272864 8C42C070 */  lw        $v0, -0x3f90($v0)
+/* 1A1140 80272860 3C02800E */  lui       $v0, %hi(gBattleStatus)
+/* 1A1144 80272864 8C42C070 */  lw        $v0, %lo(gBattleStatus)($v0)
 /* 1A1148 80272868 30420020 */  andi      $v0, $v0, 0x20
 /* 1A114C 8027286C 5040008E */  beql      $v0, $zero, .L80272AA8
 /* 1A1150 80272870 0260202D */   daddu    $a0, $s3, $zero
@@ -1082,8 +1082,8 @@ glabel calc_player_damage_enemy
 /* 1A1178 80272898 24080001 */  addiu     $t0, $zero, 1
 /* 1A117C 8027289C AFA80028 */  sw        $t0, 0x28($sp)
 .L802728A0:
-/* 1A1180 802728A0 3C02800E */  lui       $v0, 0x800e
-/* 1A1184 802728A4 8C42C070 */  lw        $v0, -0x3f90($v0)
+/* 1A1180 802728A0 3C02800E */  lui       $v0, %hi(gBattleStatus)
+/* 1A1184 802728A4 8C42C070 */  lw        $v0, %lo(gBattleStatus)($v0)
 /* 1A1188 802728A8 30420020 */  andi      $v0, $v0, 0x20
 /* 1A118C 802728AC 5040007E */  beql      $v0, $zero, .L80272AA8
 /* 1A1190 802728B0 0260202D */   daddu    $a0, $s3, $zero
@@ -1285,20 +1285,20 @@ glabel calc_player_damage_enemy
 /* 1A1460 80272B80 12C00006 */  beqz      $s6, .L80272B9C
 /* 1A1464 80272B84 00000000 */   nop      
 .L80272B88:
-/* 1A1468 80272B88 3C02800E */  lui       $v0, 0x800e
-/* 1A146C 80272B8C 8C42C070 */  lw        $v0, -0x3f90($v0)
+/* 1A1468 80272B88 3C02800E */  lui       $v0, %hi(gBattleStatus)
+/* 1A146C 80272B8C 8C42C070 */  lw        $v0, %lo(gBattleStatus)($v0)
 /* 1A1470 80272B90 30420040 */  andi      $v0, $v0, 0x40
 /* 1A1474 80272B94 14400006 */  bnez      $v0, .L80272BB0
 /* 1A1478 80272B98 00000000 */   nop      
 .L80272B9C:
-/* 1A147C 80272B9C 3C02800E */  lui       $v0, 0x800e
-/* 1A1480 80272BA0 8C42C070 */  lw        $v0, -0x3f90($v0)
+/* 1A147C 80272B9C 3C02800E */  lui       $v0, %hi(gBattleStatus)
+/* 1A1480 80272BA0 8C42C070 */  lw        $v0, %lo(gBattleStatus)($v0)
 /* 1A1484 80272BA4 30420040 */  andi      $v0, $v0, 0x40
 /* 1A1488 80272BA8 1040002E */  beqz      $v0, .L80272C64
 /* 1A148C 80272BAC 00000000 */   nop      
 .L80272BB0:
-/* 1A1490 80272BB0 3C02800E */  lui       $v0, 0x800e
-/* 1A1494 80272BB4 8C42C070 */  lw        $v0, -0x3f90($v0)
+/* 1A1490 80272BB0 3C02800E */  lui       $v0, %hi(gBattleStatus)
+/* 1A1494 80272BB4 8C42C070 */  lw        $v0, %lo(gBattleStatus)($v0)
 /* 1A1498 80272BB8 30420080 */  andi      $v0, $v0, 0x80
 /* 1A149C 80272BBC 14400029 */  bnez      $v0, .L80272C64
 /* 1A14A0 80272BC0 00000000 */   nop      
@@ -1358,8 +1358,8 @@ glabel calc_player_damage_enemy
 /* 1A1560 80272C80 0C0999FC */  jal       func_802667F0
 /* 1A1564 80272C84 0260282D */   daddu    $a1, $s3, $zero
 .L80272C88:
-/* 1A1568 80272C88 3C02800E */  lui       $v0, 0x800e
-/* 1A156C 80272C8C 8C42C070 */  lw        $v0, -0x3f90($v0)
+/* 1A1568 80272C88 3C02800E */  lui       $v0, %hi(gBattleStatus)
+/* 1A156C 80272C8C 8C42C070 */  lw        $v0, %lo(gBattleStatus)($v0)
 /* 1A1570 80272C90 30420020 */  andi      $v0, $v0, 0x20
 /* 1A1574 80272C94 10400003 */  beqz      $v0, .L80272CA4
 /* 1A1578 80272C98 00000000 */   nop      
@@ -1649,8 +1649,8 @@ glabel calc_player_damage_enemy
 .L802730C0:
 /* 1A19A0 802730C0 0C099AB7 */  jal       func_80266ADC
 /* 1A19A4 802730C4 0260202D */   daddu    $a0, $s3, $zero
-/* 1A19A8 802730C8 3C02800E */  lui       $v0, 0x800e
-/* 1A19AC 802730CC 8C42C070 */  lw        $v0, -0x3f90($v0)
+/* 1A19A8 802730C8 3C02800E */  lui       $v0, %hi(gBattleStatus)
+/* 1A19AC 802730CC 8C42C070 */  lw        $v0, %lo(gBattleStatus)($v0)
 /* 1A19B0 802730D0 30420240 */  andi      $v0, $v0, 0x240
 /* 1A19B4 802730D4 10400006 */  beqz      $v0, .L802730F0
 /* 1A19B8 802730D8 00000000 */   nop      

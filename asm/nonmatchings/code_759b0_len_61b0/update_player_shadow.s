@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel update_player_shadow
-/* 7B074 800E1BC4 3C02800F */  lui       $v0, 0x800f
-/* 7B078 800E1BC8 8C427B30 */  lw        $v0, 0x7b30($v0)
+/* 7B074 800E1BC4 3C02800F */  lui       $v0, %hi(gPlayerStatusPtr)
+/* 7B078 800E1BC8 8C427B30 */  lw        $v0, %lo(gPlayerStatusPtr)($v0)
 /* 7B07C 800E1BCC 27BDFF90 */  addiu     $sp, $sp, -0x70
 /* 7B080 800E1BD0 AFBF0058 */  sw        $ra, 0x58($sp)
 /* 7B084 800E1BD4 AFB30054 */  sw        $s3, 0x54($sp)
@@ -14,17 +14,17 @@ glabel update_player_shadow
 /* 7B098 800E1BE8 F7B40060 */  sdc1      $f20, 0x60($sp)
 /* 7B09C 800E1BEC 0C044181 */  jal       get_shadow_by_index
 /* 7B0A0 800E1BF0 8C4400CC */   lw       $a0, 0xcc($v0)
-/* 7B0A4 800E1BF4 3C128011 */  lui       $s2, 0x8011
-/* 7B0A8 800E1BF8 2652EFC8 */  addiu     $s2, $s2, -0x1038
+/* 7B0A4 800E1BF4 3C128011 */  lui       $s2, %hi(gPlayerStatus)
+/* 7B0A8 800E1BF8 2652EFC8 */  addiu     $s2, $s2, %lo(gPlayerStatus)
 /* 7B0AC 800E1BFC 0040802D */  daddu     $s0, $v0, $zero
-/* 7B0B0 800E1C00 3C04800B */  lui       $a0, 0x800b
-/* 7B0B4 800E1C04 24841D80 */  addiu     $a0, $a0, 0x1d80
+/* 7B0B0 800E1C00 3C04800B */  lui       $a0, %hi(gCameras)
+/* 7B0B4 800E1C04 24841D80 */  addiu     $a0, $a0, %lo(gCameras)
 /* 7B0B8 800E1C08 44801000 */  mtc1      $zero, $f2
 /* 7B0BC 800E1C0C C64400A8 */  lwc1      $f4, 0xa8($s2)
 /* 7B0C0 800E1C10 3C0142B4 */  lui       $at, 0x42b4
 /* 7B0C4 800E1C14 44810000 */  mtc1      $at, $f0
-/* 7B0C8 800E1C18 3C038007 */  lui       $v1, 0x8007
-/* 7B0CC 800E1C1C 8C637410 */  lw        $v1, 0x7410($v1)
+/* 7B0C8 800E1C18 3C038007 */  lui       $v1, %hi(gCurrentCameraID)
+/* 7B0CC 800E1C1C 8C637410 */  lw        $v1, %lo(gCurrentCameraID)($v1)
 /* 7B0D0 800E1C20 46001206 */  mov.s     $f8, $f2
 /* 7B0D4 800E1C24 00031080 */  sll       $v0, $v1, 2
 /* 7B0D8 800E1C28 00431021 */  addu      $v0, $v0, $v1
@@ -48,8 +48,8 @@ glabel update_player_shadow
 /* 7B120 800E1C70 3C014334 */  lui       $at, 0x4334
 /* 7B124 800E1C74 44814000 */  mtc1      $at, $f8
 .L800E1C78:
-/* 7B128 800E1C78 3C038007 */  lui       $v1, 0x8007
-/* 7B12C 800E1C7C 8C637410 */  lw        $v1, 0x7410($v1)
+/* 7B128 800E1C78 3C038007 */  lui       $v1, %hi(gCurrentCameraID)
+/* 7B12C 800E1C7C 8C637410 */  lw        $v1, %lo(gCurrentCameraID)($v1)
 /* 7B130 800E1C80 C6420028 */  lwc1      $f2, 0x28($s2)
 /* 7B134 800E1C84 3C014480 */  lui       $at, 0x4480
 /* 7B138 800E1C88 44810000 */  mtc1      $at, $f0
@@ -150,8 +150,8 @@ glabel update_player_shadow
 /* 7B2B0 800E1E00 46146301 */  sub.s     $f12, $f12, $f20
 /* 7B2B4 800E1E04 0C00A6C9 */  jal       clamp_angle
 /* 7B2B8 800E1E08 46006300 */   add.s    $f12, $f12, $f0
-/* 7B2BC 800E1E0C 3C118007 */  lui       $s1, 0x8007
-/* 7B2C0 800E1E10 2631419C */  addiu     $s1, $s1, 0x419c
+/* 7B2BC 800E1E0C 3C118007 */  lui       $s1, %hi(gGameStatusPtr)
+/* 7B2C0 800E1E10 2631419C */  addiu     $s1, $s1, %lo(gGameStatusPtr)
 /* 7B2C4 800E1E14 8E220000 */  lw        $v0, ($s1)
 /* 7B2C8 800E1E18 C442012C */  lwc1      $f2, 0x12c($v0)
 /* 7B2CC 800E1E1C 4600028D */  trunc.w.s $f10, $f0
@@ -227,8 +227,8 @@ glabel update_player_shadow
 /* 7B3D8 800E1F28 00621825 */  or        $v1, $v1, $v0
 /* 7B3DC 800E1F2C A0830000 */  sb        $v1, ($a0)
 .L800E1F30:
-/* 7B3E0 800E1F30 3C028007 */  lui       $v0, 0x8007
-/* 7B3E4 800E1F34 8C42419C */  lw        $v0, 0x419c($v0)
+/* 7B3E0 800E1F30 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* 7B3E4 800E1F34 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 7B3E8 800E1F38 9042007E */  lbu       $v0, 0x7e($v0)
 /* 7B3EC 800E1F3C 30420001 */  andi      $v0, $v0, 1
 /* 7B3F0 800E1F40 14400006 */  bnez      $v0, .L800E1F5C

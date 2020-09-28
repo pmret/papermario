@@ -4,8 +4,8 @@
 glabel step_current_game_mode
 /* A9578 80112E78 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* A957C 80112E7C AFB00010 */  sw        $s0, 0x10($sp)
-/* A9580 80112E80 3C108015 */  lui       $s0, 0x8015
-/* A9584 80112E84 26101700 */  addiu     $s0, $s0, 0x1700
+/* A9580 80112E80 3C108015 */  lui       $s0, %hi(gMainGameState)
+/* A9584 80112E84 26101700 */  addiu     $s0, $s0, %lo(gMainGameState)
 /* A9588 80112E88 AFB10014 */  sw        $s1, 0x14($sp)
 /* A958C 80112E8C 0000882D */  daddu     $s1, $zero, $zero
 /* A9590 80112E90 AFBF0018 */  sw        $ra, 0x18($sp)

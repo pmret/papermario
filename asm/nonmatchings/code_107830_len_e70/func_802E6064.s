@@ -5,8 +5,8 @@ glabel func_802E6064
 /* 1078E4 802E6064 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* 1078E8 802E6068 AFB00018 */  sw        $s0, 0x18($sp)
 /* 1078EC 802E606C 0080802D */  daddu     $s0, $a0, $zero
-/* 1078F0 802E6070 3C058011 */  lui       $a1, 0x8011
-/* 1078F4 802E6074 24A5EFC8 */  addiu     $a1, $a1, -0x1038
+/* 1078F0 802E6070 3C058011 */  lui       $a1, %hi(gPlayerStatus)
+/* 1078F4 802E6074 24A5EFC8 */  addiu     $a1, $a1, %lo(gPlayerStatus)
 /* 1078F8 802E6078 AFB1001C */  sw        $s1, 0x1c($sp)
 /* 1078FC 802E607C 24030021 */  addiu     $v1, $zero, 0x21
 /* 107900 802E6080 AFBF0020 */  sw        $ra, 0x20($sp)

@@ -3,8 +3,8 @@
 
 glabel func_80111790
 /* A7E90 80111790 0000282D */  daddu     $a1, $zero, $zero
-/* A7E94 80111794 3C048015 */  lui       $a0, 0x8015
-/* A7E98 80111798 8C841470 */  lw        $a0, 0x1470($a0)
+/* A7E94 80111794 3C048015 */  lui       $a0, %hi(gCurrentEntityListPtr)
+/* A7E98 80111798 8C841470 */  lw        $a0, %lo(gCurrentEntityListPtr)($a0)
 .L8011179C:
 /* A7E9C 8011179C 8C820000 */  lw        $v0, ($a0)
 /* A7EA0 801117A0 10400009 */  beqz      $v0, .L801117C8

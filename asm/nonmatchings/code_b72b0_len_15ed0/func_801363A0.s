@@ -11,8 +11,8 @@ glabel func_801363A0
 /* CCAB8 801363B8 AFB1002C */  sw        $s1, 0x2c($sp)
 /* CCABC 801363BC AFB00028 */  sw        $s0, 0x28($sp)
 /* CCAC0 801363C0 86820018 */  lh        $v0, 0x18($s4)
-/* CCAC4 801363C4 3C038008 */  lui       $v1, 0x8008
-/* CCAC8 801363C8 246378E0 */  addiu     $v1, $v1, 0x78e0
+/* CCAC4 801363C4 3C038008 */  lui       $v1, %hi(gItemTable)
+/* CCAC8 801363C8 246378E0 */  addiu     $v1, $v1, %lo(gItemTable)
 /* CCACC 801363CC 00021140 */  sll       $v0, $v0, 5
 /* CCAD0 801363D0 00432021 */  addu      $a0, $v0, $v1
 /* CCAD4 801363D4 8283001A */  lb        $v1, 0x1a($s4)

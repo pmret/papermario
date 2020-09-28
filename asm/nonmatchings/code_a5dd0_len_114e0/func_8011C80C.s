@@ -7,12 +7,12 @@ glabel func_8011C80C
 /* B2F14 8011C814 00C0802D */  daddu     $s0, $a2, $zero
 /* B2F18 8011C818 AFB10044 */  sw        $s1, 0x44($sp)
 /* B2F1C 8011C81C 00E0882D */  daddu     $s1, $a3, $zero
-/* B2F20 8011C820 3C038007 */  lui       $v1, 0x8007
-/* B2F24 8011C824 8C637410 */  lw        $v1, 0x7410($v1)
+/* B2F20 8011C820 3C038007 */  lui       $v1, %hi(gCurrentCameraID)
+/* B2F24 8011C824 8C637410 */  lw        $v1, %lo(gCurrentCameraID)($v1)
 /* B2F28 8011C828 3084FFFF */  andi      $a0, $a0, 0xffff
 /* B2F2C 8011C82C AFA5007C */  sw        $a1, 0x7c($sp)
-/* B2F30 8011C830 3C05800B */  lui       $a1, 0x800b
-/* B2F34 8011C834 24A51D80 */  addiu     $a1, $a1, 0x1d80
+/* B2F30 8011C830 3C05800B */  lui       $a1, %hi(gCameras)
+/* B2F34 8011C834 24A51D80 */  addiu     $a1, $a1, %lo(gCameras)
 /* B2F38 8011C838 AFBF0064 */  sw        $ra, 0x64($sp)
 /* B2F3C 8011C83C AFBE0060 */  sw        $fp, 0x60($sp)
 /* B2F40 8011C840 AFB7005C */  sw        $s7, 0x5c($sp)

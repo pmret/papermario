@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel setup_partner_popup
-/* 80028 800E6B78 3C0B8011 */  lui       $t3, 0x8011
-/* 8002C 800E6B7C 256BF290 */  addiu     $t3, $t3, -0xd70
+/* 80028 800E6B78 3C0B8011 */  lui       $t3, %hi(gPlayerData)
+/* 8002C 800E6B7C 256BF290 */  addiu     $t3, $t3, %lo(gPlayerData)
 /* 80030 800E6B80 0000502D */  daddu     $t2, $zero, $zero
 /* 80034 800E6B84 24090001 */  addiu     $t1, $zero, 1
 /* 80038 800E6B88 24180005 */  addiu     $t8, $zero, 5

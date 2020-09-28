@@ -12,8 +12,8 @@ glabel calculate_model_sizes
 /* AC848 80116148 AFBF0018 */  sw        $ra, 0x18($sp)
 /* AC84C 8011614C AFB00010 */  sw        $s0, 0x10($sp)
 .L80116150:
-/* AC850 80116150 3C038015 */  lui       $v1, 0x8015
-/* AC854 80116154 8C6312CC */  lw        $v1, 0x12cc($v1)
+/* AC850 80116150 3C038015 */  lui       $v1, %hi(gCurrentModelListPtr)
+/* AC854 80116154 8C6312CC */  lw        $v1, %lo(gCurrentModelListPtr)($v1)
 /* AC858 80116158 00111080 */  sll       $v0, $s1, 2
 /* AC85C 8011615C 00431021 */  addu      $v0, $v0, $v1
 /* AC860 80116160 8C500000 */  lw        $s0, ($v0)

@@ -3,8 +3,8 @@
 
 glabel clear_entity_data
 /* A73B8 80110CB8 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* A73BC 80110CBC 3C058007 */  lui       $a1, 0x8007
-/* A73C0 80110CC0 24A5419C */  addiu     $a1, $a1, 0x419c
+/* A73BC 80110CBC 3C058007 */  lui       $a1, %hi(gGameStatusPtr)
+/* A73C0 80110CC0 24A5419C */  addiu     $a1, $a1, %lo(gGameStatusPtr)
 /* A73C4 80110CC4 AFBF0014 */  sw        $ra, 0x14($sp)
 /* A73C8 80110CC8 AFB00010 */  sw        $s0, 0x10($sp)
 /* A73CC 80110CCC 8CA20000 */  lw        $v0, ($a1)
@@ -22,8 +22,8 @@ glabel clear_entity_data
 /* A73FC 80110CFC 80420070 */  lb        $v0, 0x70($v0)
 /* A7400 80110D00 14400003 */  bnez      $v0, .L80110D10
 /* A7404 80110D04 00000000 */   nop      
-/* A7408 80110D08 3C018015 */  lui       $at, 0x8015
-/* A740C 80110D0C AC201310 */  sw        $zero, 0x1310($at)
+/* A7408 80110D08 3C018015 */  lui       $at, %hi(D_80151310)
+/* A740C 80110D0C AC201310 */  sw        $zero, %lo(D_80151310)($at)
 .L80110D10:
 /* A7410 80110D10 3C028016 */  lui       $v0, 0x8016
 /* A7414 80110D14 2442A578 */  addiu     $v0, $v0, -0x5a88
@@ -65,8 +65,8 @@ glabel clear_entity_data
 /* A7494 80110D94 0481FFFD */  bgez      $a0, .L80110D8C
 /* A7498 80110D98 2442FFFC */   addiu    $v0, $v0, -4
 .L80110D9C:
-/* A749C 80110D9C 3C028007 */  lui       $v0, 0x8007
-/* A74A0 80110DA0 8C42419C */  lw        $v0, 0x419c($v0)
+/* A749C 80110D9C 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* A74A0 80110DA0 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* A74A4 80110DA4 80420070 */  lb        $v0, 0x70($v0)
 /* A74A8 80110DA8 14400009 */  bnez      $v0, .L80110DD0
 /* A74AC 80110DAC 3C028025 */   lui      $v0, 0x8025
@@ -89,22 +89,22 @@ glabel clear_entity_data
 .L80110DEC:
 /* A74EC 80110DEC 0C044188 */  jal       get_entity_list
 /* A74F0 80110DF0 00000000 */   nop      
-/* A74F4 80110DF4 3C108015 */  lui       $s0, 0x8015
-/* A74F8 80110DF8 26101470 */  addiu     $s0, $s0, 0x1470
+/* A74F4 80110DF4 3C108015 */  lui       $s0, %hi(gCurrentEntityListPtr)
+/* A74F8 80110DF8 26101470 */  addiu     $s0, $s0, %lo(gCurrentEntityListPtr)
 /* A74FC 80110DFC 0C044193 */  jal       get_shadow_list
 /* A7500 80110E00 AE020000 */   sw       $v0, ($s0)
 /* A7504 80110E04 8E030000 */  lw        $v1, ($s0)
 /* A7508 80110E08 2404001D */  addiu     $a0, $zero, 0x1d
-/* A750C 80110E0C 3C018015 */  lui       $at, 0x8015
-/* A7510 80110E10 AC221658 */  sw        $v0, 0x1658($at)
+/* A750C 80110E0C 3C018015 */  lui       $at, %hi(gCurrentShadowListPtr)
+/* A7510 80110E10 AC221658 */  sw        $v0, %lo(gCurrentShadowListPtr)($at)
 /* A7514 80110E14 24630074 */  addiu     $v1, $v1, 0x74
 .L80110E18:
 /* A7518 80110E18 AC600000 */  sw        $zero, ($v1)
 /* A751C 80110E1C 2484FFFF */  addiu     $a0, $a0, -1
 /* A7520 80110E20 0481FFFD */  bgez      $a0, .L80110E18
 /* A7524 80110E24 2463FFFC */   addiu    $v1, $v1, -4
-/* A7528 80110E28 3C028015 */  lui       $v0, 0x8015
-/* A752C 80110E2C 8C421658 */  lw        $v0, 0x1658($v0)
+/* A7528 80110E28 3C028015 */  lui       $v0, %hi(gCurrentShadowListPtr)
+/* A752C 80110E2C 8C421658 */  lw        $v0, %lo(gCurrentShadowListPtr)($v0)
 /* A7530 80110E30 2404003B */  addiu     $a0, $zero, 0x3b
 /* A7534 80110E34 244200EC */  addiu     $v0, $v0, 0xec
 .L80110E38:

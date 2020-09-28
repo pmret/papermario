@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel ClearDefeatedEnemies
-/* 20A40 80045640 3C07800B */  lui       $a3, 0x800b
-/* 20A44 80045644 24E70F10 */  addiu     $a3, $a3, 0xf10
+/* 20A40 80045640 3C07800B */  lui       $a3, %hi(gCurrentEncounter)
+/* 20A44 80045644 24E70F10 */  addiu     $a3, $a3, %lo(gCurrentEncounter)
 /* 20A48 80045648 0000302D */  daddu     $a2, $zero, $zero
 /* 20A4C 8004564C 00C0282D */  daddu     $a1, $a2, $zero
 .L80045650:

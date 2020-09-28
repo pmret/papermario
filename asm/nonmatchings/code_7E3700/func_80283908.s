@@ -2,12 +2,12 @@
 .set noreorder # don't insert nops after branches
 
 glabel func_80283908
-/* 7E4788 80283908 3C038007 */  lui       $v1, 0x8007
-/* 7E478C 8028390C 8C63419C */  lw        $v1, 0x419c($v1)
+/* 7E4788 80283908 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
+/* 7E478C 8028390C 8C63419C */  lw        $v1, %lo(gGameStatusPtr)($v1)
 /* 7E4790 80283910 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 7E4794 80283914 AFB00010 */  sw        $s0, 0x10($sp)
-/* 7E4798 80283918 3C108011 */  lui       $s0, 0x8011
-/* 7E479C 8028391C 2610EFC8 */  addiu     $s0, $s0, -0x1038
+/* 7E4798 80283918 3C108011 */  lui       $s0, %hi(gPlayerStatus)
+/* 7E479C 8028391C 2610EFC8 */  addiu     $s0, $s0, %lo(gPlayerStatus)
 /* 7E47A0 80283920 AFBF001C */  sw        $ra, 0x1c($sp)
 /* 7E47A4 80283924 AFB20018 */  sw        $s2, 0x18($sp)
 /* 7E47A8 80283928 AFB10014 */  sw        $s1, 0x14($sp)
@@ -18,15 +18,15 @@ glabel func_80283908
 /* 7E47BC 8028393C 46800020 */  cvt.s.w   $f0, $f0
 /* 7E47C0 80283940 E6000028 */  swc1      $f0, 0x28($s0)
 /* 7E47C4 80283944 84620162 */  lh        $v0, 0x162($v1)
-/* 7E47C8 80283948 3C04800B */  lui       $a0, 0x800b
-/* 7E47CC 8028394C 24841D80 */  addiu     $a0, $a0, 0x1d80
+/* 7E47C8 80283948 3C04800B */  lui       $a0, %hi(gCameras)
+/* 7E47CC 8028394C 24841D80 */  addiu     $a0, $a0, %lo(gCameras)
 /* 7E47D0 80283950 44820000 */  mtc1      $v0, $f0
 /* 7E47D4 80283954 00000000 */  nop       
 /* 7E47D8 80283958 46800020 */  cvt.s.w   $f0, $f0
 /* 7E47DC 8028395C E600002C */  swc1      $f0, 0x2c($s0)
 /* 7E47E0 80283960 84620164 */  lh        $v0, 0x164($v1)
-/* 7E47E4 80283964 3C038007 */  lui       $v1, 0x8007
-/* 7E47E8 80283968 8C637410 */  lw        $v1, 0x7410($v1)
+/* 7E47E4 80283964 3C038007 */  lui       $v1, %hi(gCurrentCameraID)
+/* 7E47E8 80283968 8C637410 */  lw        $v1, %lo(gCurrentCameraID)($v1)
 /* 7E47EC 8028396C 44820000 */  mtc1      $v0, $f0
 /* 7E47F0 80283970 00000000 */  nop       
 /* 7E47F4 80283974 46800020 */  cvt.s.w   $f0, $f0

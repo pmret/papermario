@@ -7,8 +7,8 @@ glabel input_to_move_vector
 /* 7B7BC 800E230C 0080882D */  daddu     $s1, $a0, $zero
 /* 7B7C0 800E2310 AFB20018 */  sw        $s2, 0x18($sp)
 /* 7B7C4 800E2314 00A0902D */  daddu     $s2, $a1, $zero
-/* 7B7C8 800E2318 3C038011 */  lui       $v1, 0x8011
-/* 7B7CC 800E231C 2463EFC8 */  addiu     $v1, $v1, -0x1038
+/* 7B7C8 800E2318 3C038011 */  lui       $v1, %hi(gPlayerStatus)
+/* 7B7CC 800E231C 2463EFC8 */  addiu     $v1, $v1, %lo(gPlayerStatus)
 /* 7B7D0 800E2320 AFBF001C */  sw        $ra, 0x1c($sp)
 /* 7B7D4 800E2324 AFB00010 */  sw        $s0, 0x10($sp)
 /* 7B7D8 800E2328 F7BC0040 */  sdc1      $f28, 0x40($sp)

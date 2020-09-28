@@ -12,8 +12,8 @@ glabel GetItemPower
 /* FBCF8 802D7348 8E050000 */  lw        $a1, ($s0)
 /* FBCFC 802D734C 0C0B1EAF */  jal       get_variable
 /* FBD00 802D7350 26100004 */   addiu    $s0, $s0, 4
-/* FBD04 802D7354 3C038008 */  lui       $v1, 0x8008
-/* FBD08 802D7358 246378E0 */  addiu     $v1, $v1, 0x78e0
+/* FBD04 802D7354 3C038008 */  lui       $v1, %hi(gItemTable)
+/* FBD08 802D7358 246378E0 */  addiu     $v1, $v1, %lo(gItemTable)
 /* FBD0C 802D735C 00028940 */  sll       $s1, $v0, 5
 /* FBD10 802D7360 02238821 */  addu      $s1, $s1, $v1
 /* FBD14 802D7364 8E050000 */  lw        $a1, ($s0)

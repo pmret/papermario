@@ -7,8 +7,8 @@ glabel osViSetYScale
 /* 423D8 80066FD8 AFBF0010 */  sw        $ra, 0x10($sp)
 /* 423DC 80066FDC 0C01ACD8 */  jal       __osDisableInt
 /* 423E0 80066FE0 46006506 */   mov.s    $f20, $f12
-/* 423E4 80066FE4 3C048009 */  lui       $a0, 0x8009
-/* 423E8 80066FE8 8C8459D4 */  lw        $a0, 0x59d4($a0)
+/* 423E4 80066FE4 3C048009 */  lui       $a0, %hi(D_800959D4)
+/* 423E8 80066FE8 8C8459D4 */  lw        $a0, %lo(D_800959D4)($a0)
 /* 423EC 80066FEC 94830000 */  lhu       $v1, ($a0)
 /* 423F0 80066FF0 E4940024 */  swc1      $f20, 0x24($a0)
 /* 423F4 80066FF4 34630004 */  ori       $v1, $v1, 4

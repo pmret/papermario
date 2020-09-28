@@ -8,8 +8,8 @@ glabel bind_npc_aux
 /* 19F5C 8003EB5C AFB40020 */  sw        $s4, 0x20($sp)
 /* 19F60 8003EB60 00A0A02D */  daddu     $s4, $a1, $zero
 /* 19F64 8003EB64 AFB20018 */  sw        $s2, 0x18($sp)
-/* 19F68 8003EB68 3C12800B */  lui       $s2, 0x800b
-/* 19F6C 8003EB6C 26520F10 */  addiu     $s2, $s2, 0xf10
+/* 19F68 8003EB68 3C12800B */  lui       $s2, %hi(gCurrentEncounter)
+/* 19F6C 8003EB6C 26520F10 */  addiu     $s2, $s2, %lo(gCurrentEncounter)
 /* 19F70 8003EB70 AFBF0024 */  sw        $ra, 0x24($sp)
 /* 19F74 8003EB74 AFB10014 */  sw        $s1, 0x14($sp)
 /* 19F78 8003EB78 AFB00010 */  sw        $s0, 0x10($sp)

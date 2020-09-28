@@ -7,8 +7,8 @@ glabel update_player
 /* 78BF8 800DF748 AFB10014 */  sw        $s1, 0x14($sp)
 /* 78BFC 800DF74C 0C0382CE */  jal       func_800E0B38
 /* 78C00 800DF750 AFB00010 */   sw       $s0, 0x10($sp)
-/* 78C04 800DF754 3C108011 */  lui       $s0, 0x8011
-/* 78C08 800DF758 2610EFC8 */  addiu     $s0, $s0, -0x1038
+/* 78C04 800DF754 3C108011 */  lui       $s0, %hi(gPlayerStatus)
+/* 78C08 800DF758 2610EFC8 */  addiu     $s0, $s0, %lo(gPlayerStatus)
 /* 78C0C 800DF75C 860200C0 */  lh        $v0, 0xc0($s0)
 /* 78C10 800DF760 3C118016 */  lui       $s1, 0x8016
 /* 78C14 800DF764 2631A550 */  addiu     $s1, $s1, -0x5ab0
@@ -144,8 +144,8 @@ glabel update_player
 .L800DF94C:
 /* 78DFC 800DF94C 0C0382E4 */  jal       func_800E0B90
 /* 78E00 800DF950 00000000 */   nop      
-/* 78E04 800DF954 3C028007 */  lui       $v0, 0x8007
-/* 78E08 800DF958 8C42419C */  lw        $v0, 0x419c($v0)
+/* 78E04 800DF954 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* 78E08 800DF958 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 78E0C 800DF95C C6000028 */  lwc1      $f0, 0x28($s0)
 /* 78E10 800DF960 E4400098 */  swc1      $f0, 0x98($v0)
 /* 78E14 800DF964 C600002C */  lwc1      $f0, 0x2c($s0)

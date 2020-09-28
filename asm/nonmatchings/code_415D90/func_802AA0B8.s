@@ -6,8 +6,8 @@ glabel func_802AA0B8
 /* 41EE4C 802AA0BC 8C63C4DC */  lw        $v1, -0x3b24($v1)
 /* 41EE50 802AA0C0 27BDFFC8 */  addiu     $sp, $sp, -0x38
 /* 41EE54 802AA0C4 AFB20018 */  sw        $s2, 0x18($sp)
-/* 41EE58 802AA0C8 3C12800E */  lui       $s2, 0x800e
-/* 41EE5C 802AA0CC 2652C070 */  addiu     $s2, $s2, -0x3f90
+/* 41EE58 802AA0C8 3C12800E */  lui       $s2, %hi(gBattleStatus)
+/* 41EE5C 802AA0CC 2652C070 */  addiu     $s2, $s2, %lo(gBattleStatus)
 /* 41EE60 802AA0D0 AFBF001C */  sw        $ra, 0x1c($sp)
 /* 41EE64 802AA0D4 AFB10014 */  sw        $s1, 0x14($sp)
 /* 41EE68 802AA0D8 AFB00010 */  sw        $s0, 0x10($sp)
@@ -68,8 +68,8 @@ glabel func_802AA0B8
 /* 41EF24 802AA194 24040002 */   addiu    $a0, $zero, 2
 /* 41EF28 802AA198 0C093936 */  jal       move_cam_over
 /* 41EF2C 802AA19C 2404000A */   addiu    $a0, $zero, 0xa
-/* 41EF30 802AA1A0 3C02800E */  lui       $v0, 0x800e
-/* 41EF34 802AA1A4 8C42C070 */  lw        $v0, -0x3f90($v0)
+/* 41EF30 802AA1A0 3C02800E */  lui       $v0, %hi(gBattleStatus)
+/* 41EF34 802AA1A4 8C42C070 */  lw        $v0, %lo(gBattleStatus)($v0)
 /* 41EF38 802AA1A8 3C030010 */  lui       $v1, 0x10
 /* 41EF3C 802AA1AC 00431024 */  and       $v0, $v0, $v1
 /* 41EF40 802AA1B0 14400118 */  bnez      $v0, .L802AA614
@@ -187,16 +187,16 @@ glabel func_802AA0B8
 /* 41F0F8 802AA368 E6020140 */  swc1      $f2, 0x140($s0)
 /* 41F0FC 802AA36C C6200144 */  lwc1      $f0, 0x144($s1)
 /* 41F100 802AA370 C622014C */  lwc1      $f2, 0x14c($s1)
-/* 41F104 802AA374 3C04800E */  lui       $a0, 0x800e
-/* 41F108 802AA378 2484C070 */  addiu     $a0, $a0, -0x3f90
+/* 41F104 802AA374 3C04800E */  lui       $a0, %hi(gBattleStatus)
+/* 41F108 802AA378 2484C070 */  addiu     $a0, $a0, %lo(gBattleStatus)
 /* 41F10C 802AA37C E6200138 */  swc1      $f0, 0x138($s1)
 /* 41F110 802AA380 E6220140 */  swc1      $f2, 0x140($s1)
 /* 41F114 802AA384 8C820000 */  lw        $v0, ($a0)
 /* 41F118 802AA388 3C030010 */  lui       $v1, 0x10
 /* 41F11C 802AA38C 00431025 */  or        $v0, $v0, $v1
 /* 41F120 802AA390 AC820000 */  sw        $v0, ($a0)
-/* 41F124 802AA394 3C03800E */  lui       $v1, 0x800e
-/* 41F128 802AA398 2463C070 */  addiu     $v1, $v1, -0x3f90
+/* 41F124 802AA394 3C03800E */  lui       $v1, %hi(gBattleStatus)
+/* 41F128 802AA398 2463C070 */  addiu     $v1, $v1, %lo(gBattleStatus)
 /* 41F12C 802AA39C 8C620000 */  lw        $v0, ($v1)
 /* 41F130 802AA3A0 3C04FBFF */  lui       $a0, 0xfbff
 /* 41F134 802AA3A4 34420002 */  ori       $v0, $v0, 2

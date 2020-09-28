@@ -2,18 +2,18 @@
 .set noreorder # don't insert nops after branches
 
 glabel func_800EBB40
-/* 84FF0 800EBB40 3C028007 */  lui       $v0, 0x8007
-/* 84FF4 800EBB44 8C42419C */  lw        $v0, 0x419c($v0)
+/* 84FF0 800EBB40 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* 84FF4 800EBB44 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 84FF8 800EBB48 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 84FFC 800EBB4C AFB00010 */  sw        $s0, 0x10($sp)
 /* 85000 800EBB50 AFB20018 */  sw        $s2, 0x18($sp)
-/* 85004 800EBB54 3C128011 */  lui       $s2, 0x8011
-/* 85008 800EBB58 2652EFC8 */  addiu     $s2, $s2, -0x1038
+/* 85004 800EBB54 3C128011 */  lui       $s2, %hi(gPlayerStatus)
+/* 85008 800EBB58 2652EFC8 */  addiu     $s2, $s2, %lo(gPlayerStatus)
 /* 8500C 800EBB5C AFBF001C */  sw        $ra, 0x1c($sp)
 /* 85010 800EBB60 AFB10014 */  sw        $s1, 0x14($sp)
 /* 85014 800EBB64 80420081 */  lb        $v0, 0x81($v0)
-/* 85018 800EBB68 3C118011 */  lui       $s1, 0x8011
-/* 8501C 800EBB6C 2631EBB0 */  addiu     $s1, $s1, -0x1450
+/* 85018 800EBB68 3C118011 */  lui       $s1, %hi(D_8010EBB0)
+/* 8501C 800EBB6C 2631EBB0 */  addiu     $s1, $s1, %lo(D_8010EBB0)
 /* 85020 800EBB70 1040000B */  beqz      $v0, .L800EBBA0
 /* 85024 800EBB74 0080802D */   daddu    $s0, $a0, $zero
 /* 85028 800EBB78 8E420000 */  lw        $v0, ($s2)

@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel start_rumble
-/* 4308 80028F08 3C028007 */  lui       $v0, 0x8007
-/* 430C 80028F0C 8C42419C */  lw        $v0, 0x419c($v0)
+/* 4308 80028F08 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* 430C 80028F0C 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 4310 80028F10 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 4314 80028F14 AFB10014 */  sw        $s1, 0x14($sp)
 /* 4318 80028F18 0080882D */  daddu     $s1, $a0, $zero

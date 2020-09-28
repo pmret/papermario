@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel update_scripts
-/* E8724 802C3D74 3C028007 */  lui       $v0, 0x8007
-/* E8728 802C3D78 8C42419C */  lw        $v0, 0x419c($v0)
+/* E8724 802C3D74 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* E8728 802C3D78 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* E872C 802C3D7C 27BDFFC8 */  addiu     $sp, $sp, -0x38
 /* E8730 802C3D80 AFBF002C */  sw        $ra, 0x2c($sp)
 /* E8734 802C3D84 AFB60028 */  sw        $s6, 0x28($sp)
@@ -18,26 +18,26 @@ glabel update_scripts
 /* E8758 802C3DA8 24030001 */  addiu     $v1, $zero, 1
 /* E875C 802C3DAC 10430042 */  beq       $v0, $v1, .L802C3EB8
 /* E8760 802C3DB0 00000000 */   nop      
-/* E8764 802C3DB4 3C01802E */  lui       $at, 0x802e
-/* E8768 802C3DB8 AC239CA4 */  sw        $v1, -0x635c($at)
+/* E8764 802C3DB4 3C01802E */  lui       $at, %hi(D_802D9CA4)
+/* E8768 802C3DB8 AC239CA4 */  sw        $v1, %lo(D_802D9CA4)($at)
 /* E876C 802C3DBC 0C0B0C00 */  jal       sort_scripts
 /* E8770 802C3DC0 0000902D */   daddu    $s2, $zero, $zero
-/* E8774 802C3DC4 3C02802E */  lui       $v0, 0x802e
-/* E8778 802C3DC8 8C42AC98 */  lw        $v0, -0x5368($v0)
+/* E8774 802C3DC4 3C02802E */  lui       $v0, %hi(gScriptListCount)
+/* E8778 802C3DC8 8C42AC98 */  lw        $v0, %lo(gScriptListCount)($v0)
 /* E877C 802C3DCC 18400038 */  blez      $v0, .L802C3EB0
 /* E8780 802C3DD0 24160001 */   addiu    $s6, $zero, 1
 /* E8784 802C3DD4 3C013FF0 */  lui       $at, 0x3ff0
 /* E8788 802C3DD8 4481A800 */  mtc1      $at, $f21
 /* E878C 802C3DDC 4480A000 */  mtc1      $zero, $f20
 /* E8790 802C3DE0 2415FFFF */  addiu     $s5, $zero, -1
-/* E8794 802C3DE4 3C14802E */  lui       $s4, 0x802e
-/* E8798 802C3DE8 2694AA98 */  addiu     $s4, $s4, -0x5568
+/* E8794 802C3DE4 3C14802E */  lui       $s4, %hi(gScriptIndexList)
+/* E8798 802C3DE8 2694AA98 */  addiu     $s4, $s4, %lo(gScriptIndexList)
 /* E879C 802C3DEC 3C13802E */  lui       $s3, 0x802e
 /* E87A0 802C3DF0 2673A898 */  addiu     $s3, $s3, -0x5768
 .L802C3DF4:
 /* E87A4 802C3DF4 8E620000 */  lw        $v0, ($s3)
-/* E87A8 802C3DF8 3C03802E */  lui       $v1, 0x802e
-/* E87AC 802C3DFC 8C63A890 */  lw        $v1, -0x5770($v1)
+/* E87A8 802C3DF8 3C03802E */  lui       $v1, %hi(gCurrentScriptListPtr)
+/* E87AC 802C3DFC 8C63A890 */  lw        $v1, %lo(gCurrentScriptListPtr)($v1)
 /* E87B0 802C3E00 00021080 */  sll       $v0, $v0, 2
 /* E87B4 802C3E04 00431021 */  addu      $v0, $v0, $v1
 /* E87B8 802C3E08 8C500000 */  lw        $s0, ($v0)
@@ -80,15 +80,15 @@ glabel update_scripts
 /* E8840 802C3E90 16200007 */  bnez      $s1, .L802C3EB0
 /* E8844 802C3E94 26940004 */   addiu    $s4, $s4, 4
 .L802C3E98:
-/* E8848 802C3E98 3C02802E */  lui       $v0, 0x802e
-/* E884C 802C3E9C 8C42AC98 */  lw        $v0, -0x5368($v0)
+/* E8848 802C3E98 3C02802E */  lui       $v0, %hi(gScriptListCount)
+/* E884C 802C3E9C 8C42AC98 */  lw        $v0, %lo(gScriptListCount)($v0)
 /* E8850 802C3EA0 26520001 */  addiu     $s2, $s2, 1
 /* E8854 802C3EA4 0242102A */  slt       $v0, $s2, $v0
 /* E8858 802C3EA8 1440FFD2 */  bnez      $v0, .L802C3DF4
 /* E885C 802C3EAC 26730004 */   addiu    $s3, $s3, 4
 .L802C3EB0:
-/* E8860 802C3EB0 3C01802E */  lui       $at, 0x802e
-/* E8864 802C3EB4 AC209CA4 */  sw        $zero, -0x635c($at)
+/* E8860 802C3EB0 3C01802E */  lui       $at, %hi(D_802D9CA4)
+/* E8864 802C3EB4 AC209CA4 */  sw        $zero, %lo(D_802D9CA4)($at)
 .L802C3EB8:
 /* E8868 802C3EB8 8FBF002C */  lw        $ra, 0x2c($sp)
 /* E886C 802C3EBC 8FB60028 */  lw        $s6, 0x28($sp)

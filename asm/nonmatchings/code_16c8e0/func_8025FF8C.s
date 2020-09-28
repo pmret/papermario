@@ -18,8 +18,8 @@ glabel func_8025FF8C
 /* 18E8A0 8025FFC0 24020001 */   addiu    $v0, $zero, 1
 /* 18E8A4 8025FFC4 14820013 */  bne       $a0, $v0, .L80260014
 /* 18E8A8 8025FFC8 24110064 */   addiu    $s1, $zero, 0x64
-/* 18E8AC 8025FFCC 3C02800E */  lui       $v0, 0x800e
-/* 18E8B0 8025FFD0 2442C070 */  addiu     $v0, $v0, -0x3f90
+/* 18E8AC 8025FFCC 3C02800E */  lui       $v0, %hi(gBattleStatus)
+/* 18E8B0 8025FFD0 2442C070 */  addiu     $v0, $v0, %lo(gBattleStatus)
 /* 18E8B4 8025FFD4 80420048 */  lb        $v0, 0x48($v0)
 /* 18E8B8 8025FFD8 10400005 */  beqz      $v0, .L8025FFF0
 /* 18E8BC 8025FFDC 0000882D */   daddu    $s1, $zero, $zero

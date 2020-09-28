@@ -23,8 +23,8 @@ glabel func_80032970
 /* DDB4 800329B4 0800CA8D */  j         .L80032A34
 /* DDB8 800329B8 E4880510 */   swc1     $f8, 0x510($a0)
 .L800329BC:
-/* DDBC 800329BC 3C05800F */  lui       $a1, 0x800f
-/* DDC0 800329C0 8CA57B30 */  lw        $a1, 0x7b30($a1)
+/* DDBC 800329BC 3C05800F */  lui       $a1, %hi(gPlayerStatusPtr)
+/* DDC0 800329C0 8CA57B30 */  lw        $a1, %lo(gPlayerStatusPtr)($a1)
 /* DDC4 800329C4 8CA20004 */  lw        $v0, 4($a1)
 /* DDC8 800329C8 3C030040 */  lui       $v1, 0x40
 /* DDCC 800329CC 00431024 */  and       $v0, $v0, $v1

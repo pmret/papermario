@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel _create_npc
-/* 13998 80038598 3C03800A */  lui       $v1, 0x800a
-/* 1399C 8003859C 8C630B90 */  lw        $v1, 0xb90($v1)
+/* 13998 80038598 3C03800A */  lui       $v1, %hi(gCurrentNpcListPtr)
+/* 1399C 8003859C 8C630B90 */  lw        $v1, %lo(gCurrentNpcListPtr)($v1)
 /* 139A0 800385A0 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* 139A4 800385A4 AFB20018 */  sw        $s2, 0x18($sp)
 /* 139A8 800385A8 0080902D */  daddu     $s2, $a0, $zero
@@ -34,8 +34,8 @@ glabel _create_npc
 /* 139FC 800385FC 0C00AB39 */  jal       heap_malloc
 /* 13A00 80038600 24040340 */   addiu    $a0, $zero, 0x340
 /* 13A04 80038604 00112080 */  sll       $a0, $s1, 2
-/* 13A08 80038608 3C03800A */  lui       $v1, 0x800a
-/* 13A0C 8003860C 8C630B90 */  lw        $v1, 0xb90($v1)
+/* 13A08 80038608 3C03800A */  lui       $v1, %hi(gCurrentNpcListPtr)
+/* 13A0C 8003860C 8C630B90 */  lw        $v1, %lo(gCurrentNpcListPtr)($v1)
 /* 13A10 80038610 3C05800A */  lui       $a1, 0x800a
 /* 13A14 80038614 24A5A604 */  addiu     $a1, $a1, -0x59fc
 /* 13A18 80038618 00832021 */  addu      $a0, $a0, $v1
@@ -171,8 +171,8 @@ glabel _create_npc
 /* 13BF8 800387F8 0000202D */   daddu    $a0, $zero, $zero
 /* 13BFC 800387FC 3C013F80 */  lui       $at, 0x3f80
 /* 13C00 80038800 44810000 */  mtc1      $at, $f0
-/* 13C04 80038804 3C038007 */  lui       $v1, 0x8007
-/* 13C08 80038808 8C63419C */  lw        $v1, 0x419c($v1)
+/* 13C04 80038804 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
+/* 13C08 80038808 8C63419C */  lw        $v1, %lo(gGameStatusPtr)($v1)
 /* 13C0C 8003880C AE020078 */  sw        $v0, 0x78($s0)
 /* 13C10 80038810 E600007C */  swc1      $f0, 0x7c($s0)
 /* 13C14 80038814 80620070 */  lb        $v0, 0x70($v1)

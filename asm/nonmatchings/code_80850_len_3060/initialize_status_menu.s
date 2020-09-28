@@ -4,20 +4,20 @@
 glabel initialize_status_menu
 /* 80DE4 800E7934 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 80DE8 800E7938 AFB10014 */  sw        $s1, 0x14($sp)
-/* 80DEC 800E793C 3C118011 */  lui       $s1, 0x8011
-/* 80DF0 800E7940 2631EF58 */  addiu     $s1, $s1, -0x10a8
+/* 80DEC 800E793C 3C118011 */  lui       $s1, %hi(gUIStatus)
+/* 80DF0 800E7940 2631EF58 */  addiu     $s1, $s1, %lo(gUIStatus)
 /* 80DF4 800E7944 2402000C */  addiu     $v0, $zero, 0xc
 /* 80DF8 800E7948 AFBF001C */  sw        $ra, 0x1c($sp)
 /* 80DFC 800E794C AFB20018 */  sw        $s2, 0x18($sp)
 /* 80E00 800E7950 AFB00010 */  sw        $s0, 0x10($sp)
 /* 80E04 800E7954 A6220034 */  sh        $v0, 0x34($s1)
 /* 80E08 800E7958 2402FF9C */  addiu     $v0, $zero, -0x64
-/* 80E0C 800E795C 3C038011 */  lui       $v1, 0x8011
-/* 80E10 800E7960 2463F290 */  addiu     $v1, $v1, -0xd70
-/* 80E14 800E7964 3C018011 */  lui       $at, 0x8011
-/* 80E18 800E7968 A420CD10 */  sh        $zero, -0x32f0($at)
-/* 80E1C 800E796C 3C018011 */  lui       $at, 0x8011
-/* 80E20 800E7970 A420CD12 */  sh        $zero, -0x32ee($at)
+/* 80E0C 800E795C 3C038011 */  lui       $v1, %hi(gPlayerData)
+/* 80E10 800E7960 2463F290 */  addiu     $v1, $v1, %lo(gPlayerData)
+/* 80E14 800E7964 3C018011 */  lui       $at, %hi(D_8010CD10)
+/* 80E18 800E7968 A420CD10 */  sh        $zero, %lo(D_8010CD10)($at)
+/* 80E1C 800E796C 3C018011 */  lui       $at, %hi(D_8010CD12)
+/* 80E20 800E7970 A420CD12 */  sh        $zero, %lo(D_8010CD12)($at)
 /* 80E24 800E7974 A6220036 */  sh        $v0, 0x36($s1)
 /* 80E28 800E7978 A220003A */  sb        $zero, 0x3a($s1)
 /* 80E2C 800E797C 90640010 */  lbu       $a0, 0x10($v1)
@@ -112,8 +112,8 @@ glabel initialize_status_menu
 /* 80F90 800E7AE0 0200202D */  daddu     $a0, $s0, $zero
 /* 80F94 800E7AE4 0C05128B */  jal       clear_icon_flags
 /* 80F98 800E7AE8 34058000 */   ori      $a1, $zero, 0x8000
-/* 80F9C 800E7AEC 3C048011 */  lui       $a0, 0x8011
-/* 80FA0 800E7AF0 24848558 */  addiu     $a0, $a0, -0x7aa8
+/* 80F9C 800E7AEC 3C048011 */  lui       $a0, %hi(D_80108558)
+/* 80FA0 800E7AF0 24848558 */  addiu     $a0, $a0, %lo(D_80108558)
 /* 80FA4 800E7AF4 0C050529 */  jal       create_icon
 /* 80FA8 800E7AF8 00000000 */   nop      
 /* 80FAC 800E7AFC 0040802D */  daddu     $s0, $v0, $zero

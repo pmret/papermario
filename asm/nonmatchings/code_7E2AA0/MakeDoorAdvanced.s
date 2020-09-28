@@ -334,8 +334,8 @@ glabel MakeDoorAdvanced
 .L802821C0:
 /* 7E3040 802821C0 3C048028 */  lui       $a0, 0x8028
 /* 7E3044 802821C4 248447D4 */  addiu     $a0, $a0, 0x47d4
-/* 7E3048 802821C8 3C02800B */  lui       $v0, 0x800b
-/* 7E304C 802821CC 24421D80 */  addiu     $v0, $v0, 0x1d80
+/* 7E3048 802821C8 3C02800B */  lui       $v0, %hi(gCameras)
+/* 7E304C 802821CC 24421D80 */  addiu     $v0, $v0, %lo(gCameras)
 /* 7E3050 802821D0 C6400014 */  lwc1      $f0, 0x14($s2)
 /* 7E3054 802821D4 C6420018 */  lwc1      $f2, 0x18($s2)
 /* 7E3058 802821D8 C644000C */  lwc1      $f4, 0xc($s2)

@@ -13,8 +13,8 @@ glabel func_802E70B0
 /* 108950 802E70D0 44816000 */  mtc1      $at, $f12
 /* 108954 802E70D4 0C00A6C9 */  jal       clamp_angle
 /* 108958 802E70D8 46006301 */   sub.s    $f12, $f12, $f0
-/* 10895C 802E70DC 3C108011 */  lui       $s0, 0x8011
-/* 108960 802E70E0 2610EFC8 */  addiu     $s0, $s0, -0x1038
+/* 10895C 802E70DC 3C108011 */  lui       $s0, %hi(gPlayerStatus)
+/* 108960 802E70E0 2610EFC8 */  addiu     $s0, $s0, %lo(gPlayerStatus)
 /* 108964 802E70E4 C62C0048 */  lwc1      $f12, 0x48($s1)
 /* 108968 802E70E8 C62E0050 */  lwc1      $f14, 0x50($s1)
 /* 10896C 802E70EC 8E060028 */  lw        $a2, 0x28($s0)

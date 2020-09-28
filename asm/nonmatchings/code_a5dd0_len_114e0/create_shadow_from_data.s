@@ -9,8 +9,8 @@ glabel create_shadow_from_data
 /* A82E8 80111BE8 4486B000 */  mtc1      $a2, $f22
 /* A82EC 80111BEC F7B80030 */  sdc1      $f24, 0x30($sp)
 /* A82F0 80111BF0 4487C000 */  mtc1      $a3, $f24
-/* A82F4 80111BF4 3C038015 */  lui       $v1, 0x8015
-/* A82F8 80111BF8 8C631658 */  lw        $v1, 0x1658($v1)
+/* A82F4 80111BF4 3C038015 */  lui       $v1, %hi(gCurrentShadowListPtr)
+/* A82F8 80111BF8 8C631658 */  lw        $v1, %lo(gCurrentShadowListPtr)($v1)
 /* A82FC 80111BFC AFB20018 */  sw        $s2, 0x18($sp)
 /* A8300 80111C00 0080902D */  daddu     $s2, $a0, $zero
 /* A8304 80111C04 AFB10014 */  sw        $s1, 0x14($sp)
@@ -38,8 +38,8 @@ glabel create_shadow_from_data
 /* A834C 80111C4C 0040802D */  daddu     $s0, $v0, $zero
 /* A8350 80111C50 0200202D */  daddu     $a0, $s0, $zero
 /* A8354 80111C54 24050078 */  addiu     $a1, $zero, 0x78
-/* A8358 80111C58 3C038015 */  lui       $v1, 0x8015
-/* A835C 80111C5C 8C631658 */  lw        $v1, 0x1658($v1)
+/* A8358 80111C58 3C038015 */  lui       $v1, %hi(gCurrentShadowListPtr)
+/* A835C 80111C5C 8C631658 */  lw        $v1, %lo(gCurrentShadowListPtr)($v1)
 /* A8360 80111C60 00111080 */  sll       $v0, $s1, 2
 /* A8364 80111C64 00431021 */  addu      $v0, $v0, $v1
 /* A8368 80111C68 0C00A580 */  jal       mem_clear

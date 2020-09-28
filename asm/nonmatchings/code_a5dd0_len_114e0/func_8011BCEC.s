@@ -30,8 +30,8 @@ glabel func_8011BCEC
 /* B244C 8011BD4C 8C450000 */  lw        $a1, ($v0)
 /* B2450 8011BD50 10A0000D */  beqz      $a1, .L8011BD88
 /* B2454 8011BD54 0220202D */   daddu    $a0, $s1, $zero
-/* B2458 8011BD58 3C028015 */  lui       $v0, 0x8015
-/* B245C 8011BD5C 8C4212E8 */  lw        $v0, 0x12e8($v0)
+/* B2458 8011BD58 3C028015 */  lui       $v0, %hi(gCurrentModelSpecialDlsPtr)
+/* B245C 8011BD5C 8C4212E8 */  lw        $v0, %lo(gCurrentModelSpecialDlsPtr)($v0)
 /* B2460 8011BD60 8E430000 */  lw        $v1, ($s2)
 /* B2464 8011BD64 02021021 */  addu      $v0, $s0, $v0
 /* B2468 8011BD68 00A0F809 */  jalr      $a1
@@ -49,8 +49,8 @@ glabel func_8011BCEC
 /* B2494 8011BD94 50A0000F */  beql      $a1, $zero, .L8011BDD4
 /* B2498 8011BD98 26310001 */   addiu    $s1, $s1, 1
 /* B249C 8011BD9C 0220202D */  daddu     $a0, $s1, $zero
-/* B24A0 8011BDA0 3C028015 */  lui       $v0, 0x8015
-/* B24A4 8011BDA4 8C4212E8 */  lw        $v0, 0x12e8($v0)
+/* B24A0 8011BDA0 3C028015 */  lui       $v0, %hi(gCurrentModelSpecialDlsPtr)
+/* B24A4 8011BDA4 8C4212E8 */  lw        $v0, %lo(gCurrentModelSpecialDlsPtr)($v0)
 /* B24A8 8011BDA8 8E430000 */  lw        $v1, ($s2)
 /* B24AC 8011BDAC 02021021 */  addu      $v0, $s0, $v0
 /* B24B0 8011BDB0 00A0F809 */  jalr      $a1

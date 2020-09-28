@@ -4,13 +4,13 @@
 glabel func_80263914
 /* 1921F4 80263914 27BDFFC8 */  addiu     $sp, $sp, -0x38
 /* 1921F8 80263918 AFBE0030 */  sw        $fp, 0x30($sp)
-/* 1921FC 8026391C 3C1E8011 */  lui       $fp, 0x8011
-/* 192200 80263920 27DEF290 */  addiu     $fp, $fp, -0xd70
+/* 1921FC 8026391C 3C1E8011 */  lui       $fp, %hi(gPlayerData)
+/* 192200 80263920 27DEF290 */  addiu     $fp, $fp, %lo(gPlayerData)
 /* 192204 80263924 AFB10014 */  sw        $s1, 0x14($sp)
 /* 192208 80263928 24110017 */  addiu     $s1, $zero, 0x17
 /* 19220C 8026392C AFB40020 */  sw        $s4, 0x20($sp)
-/* 192210 80263930 3C14800E */  lui       $s4, 0x800e
-/* 192214 80263934 2694C070 */  addiu     $s4, $s4, -0x3f90
+/* 192210 80263930 3C14800E */  lui       $s4, %hi(gBattleStatus)
+/* 192214 80263934 2694C070 */  addiu     $s4, $s4, %lo(gBattleStatus)
 /* 192218 80263938 02911021 */  addu      $v0, $s4, $s1
 /* 19221C 8026393C AFBF0034 */  sw        $ra, 0x34($sp)
 /* 192220 80263940 AFB7002C */  sw        $s7, 0x2c($sp)

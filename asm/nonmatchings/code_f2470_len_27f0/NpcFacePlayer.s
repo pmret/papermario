@@ -6,8 +6,8 @@ glabel NpcFacePlayer
 /* F367C 802CECCC AFB10014 */  sw        $s1, 0x14($sp)
 /* F3680 802CECD0 0080882D */  daddu     $s1, $a0, $zero
 /* F3684 802CECD4 AFB40020 */  sw        $s4, 0x20($sp)
-/* F3688 802CECD8 3C148011 */  lui       $s4, 0x8011
-/* F368C 802CECDC 2694EFC8 */  addiu     $s4, $s4, -0x1038
+/* F3688 802CECD8 3C148011 */  lui       $s4, %hi(gPlayerStatus)
+/* F368C 802CECDC 2694EFC8 */  addiu     $s4, $s4, %lo(gPlayerStatus)
 /* F3690 802CECE0 AFB60028 */  sw        $s6, 0x28($sp)
 /* F3694 802CECE4 26360074 */  addiu     $s6, $s1, 0x74
 /* F3698 802CECE8 AFB50024 */  sw        $s5, 0x24($sp)

@@ -63,8 +63,8 @@ glabel ShowSleepBubble
 /* FCAC0 802D8110 4600B006 */   mov.s    $f0, $f22
 .L802D8114:
 /* FCAC4 802D8114 3C055555 */  lui       $a1, 0x5555
-/* FCAC8 802D8118 3C048011 */  lui       $a0, 0x8011
-/* FCACC 802D811C 2484EFC8 */  addiu     $a0, $a0, -0x1038
+/* FCAC8 802D8118 3C048011 */  lui       $a0, %hi(gPlayerStatus)
+/* FCACC 802D811C 2484EFC8 */  addiu     $a0, $a0, %lo(gPlayerStatus)
 /* FCAD0 802D8120 948200B0 */  lhu       $v0, 0xb0($a0)
 /* FCAD4 802D8124 34A55556 */  ori       $a1, $a1, 0x5556
 /* FCAD8 802D8128 00021400 */  sll       $v0, $v0, 0x10

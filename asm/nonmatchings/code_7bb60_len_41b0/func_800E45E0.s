@@ -4,13 +4,13 @@
 glabel func_800E45E0
 /* 7DA90 800E45E0 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 7DA94 800E45E4 AFB00010 */  sw        $s0, 0x10($sp)
-/* 7DA98 800E45E8 3C108011 */  lui       $s0, 0x8011
-/* 7DA9C 800E45EC 2610EFC8 */  addiu     $s0, $s0, -0x1038
+/* 7DA98 800E45E8 3C108011 */  lui       $s0, %hi(gPlayerStatus)
+/* 7DA9C 800E45EC 2610EFC8 */  addiu     $s0, $s0, %lo(gPlayerStatus)
 /* 7DAA0 800E45F0 AFBF0014 */  sw        $ra, 0x14($sp)
 /* 7DAA4 800E45F4 0C044181 */  jal       get_shadow_by_index
 /* 7DAA8 800E45F8 8E0400CC */   lw       $a0, 0xcc($s0)
-/* 7DAAC 800E45FC 3C068007 */  lui       $a2, 0x8007
-/* 7DAB0 800E4600 8CC6419C */  lw        $a2, 0x419c($a2)
+/* 7DAAC 800E45FC 3C068007 */  lui       $a2, %hi(gGameStatusPtr)
+/* 7DAB0 800E4600 8CC6419C */  lw        $a2, %lo(gGameStatusPtr)($a2)
 /* 7DAB4 800E4604 0040202D */  daddu     $a0, $v0, $zero
 /* 7DAB8 800E4608 84C30086 */  lh        $v1, 0x86($a2)
 /* 7DABC 800E460C 24020008 */  addiu     $v0, $zero, 8

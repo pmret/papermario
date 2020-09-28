@@ -5,8 +5,8 @@ glabel BringPartnerOut
 /* F3F68 802CF5B8 27BDFF98 */  addiu     $sp, $sp, -0x68
 /* F3F6C 802CF5BC AFB10024 */  sw        $s1, 0x24($sp)
 /* F3F70 802CF5C0 AFB20028 */  sw        $s2, 0x28($sp)
-/* F3F74 802CF5C4 3C128011 */  lui       $s2, 0x8011
-/* F3F78 802CF5C8 2652EFC8 */  addiu     $s2, $s2, -0x1038
+/* F3F74 802CF5C4 3C128011 */  lui       $s2, %hi(gPlayerStatus)
+/* F3F78 802CF5C8 2652EFC8 */  addiu     $s2, $s2, %lo(gPlayerStatus)
 /* F3F7C 802CF5CC AFBF0034 */  sw        $ra, 0x34($sp)
 /* F3F80 802CF5D0 AFB40030 */  sw        $s4, 0x30($sp)
 /* F3F84 802CF5D4 AFB3002C */  sw        $s3, 0x2c($sp)
@@ -23,8 +23,8 @@ glabel BringPartnerOut
 /* F3FB0 802CF600 8C450000 */  lw        $a1, ($v0)
 /* F3FB4 802CF604 0C0B1EAF */  jal       get_variable
 /* F3FB8 802CF608 00000000 */   nop      
-/* F3FBC 802CF60C 3C038011 */  lui       $v1, 0x8011
-/* F3FC0 802CF610 2463F290 */  addiu     $v1, $v1, -0xd70
+/* F3FBC 802CF60C 3C038011 */  lui       $v1, %hi(gPlayerData)
+/* F3FC0 802CF610 2463F290 */  addiu     $v1, $v1, %lo(gPlayerData)
 /* F3FC4 802CF614 80630012 */  lb        $v1, 0x12($v1)
 /* F3FC8 802CF618 3C14802E */  lui       $s4, 0x802e
 /* F3FCC 802CF61C 2694AE40 */  addiu     $s4, $s4, -0x51c0

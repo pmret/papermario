@@ -7,19 +7,19 @@ glabel CloseMessage
 /* F5450 802D0AA0 0080802D */  daddu     $s0, $a0, $zero
 /* F5454 802D0AA4 10A00005 */  beqz      $a1, .L802D0ABC
 /* F5458 802D0AA8 AFBF0014 */   sw       $ra, 0x14($sp)
-/* F545C 802D0AAC 3C04802E */  lui       $a0, 0x802e
-/* F5460 802D0AB0 8C84B260 */  lw        $a0, -0x4da0($a0)
+/* F545C 802D0AAC 3C04802E */  lui       $a0, %hi(gCurrentPrintContext)
+/* F5460 802D0AB0 8C84B260 */  lw        $a0, %lo(gCurrentPrintContext)($a0)
 /* F5464 802D0AB4 0C04971C */  jal       close_message
 /* F5468 802D0AB8 00000000 */   nop      
 .L802D0ABC:
-/* F546C 802D0ABC 3C04802E */  lui       $a0, 0x802e
-/* F5470 802D0AC0 8C84B260 */  lw        $a0, -0x4da0($a0)
+/* F546C 802D0ABC 3C04802E */  lui       $a0, %hi(gCurrentPrintContext)
+/* F5470 802D0AC0 8C84B260 */  lw        $a0, %lo(gCurrentPrintContext)($a0)
 /* F5474 802D0AC4 8C8204FC */  lw        $v0, 0x4fc($a0)
 /* F5478 802D0AC8 30420040 */  andi      $v0, $v0, 0x40
 /* F547C 802D0ACC 14400007 */  bnez      $v0, .L802D0AEC
 /* F5480 802D0AD0 24020001 */   addiu    $v0, $zero, 1
-/* F5484 802D0AD4 3C03802E */  lui       $v1, 0x802e
-/* F5488 802D0AD8 8C63B264 */  lw        $v1, -0x4d9c($v1)
+/* F5484 802D0AD4 3C03802E */  lui       $v1, %hi(D_802DB264)
+/* F5488 802D0AD8 8C63B264 */  lw        $v1, %lo(D_802DB264)($v1)
 /* F548C 802D0ADC 54620003 */  bnel      $v1, $v0, .L802D0AEC
 /* F5490 802D0AE0 0000102D */   daddu    $v0, $zero, $zero
 /* F5494 802D0AE4 908304E8 */  lbu       $v1, 0x4e8($a0)

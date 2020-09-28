@@ -4,11 +4,11 @@
 glabel func_80244710
 /* 172FF0 80244710 27BDFFC8 */  addiu     $sp, $sp, -0x38
 /* 172FF4 80244714 AFB30024 */  sw        $s3, 0x24($sp)
-/* 172FF8 80244718 3C13800E */  lui       $s3, 0x800e
-/* 172FFC 8024471C 2673C070 */  addiu     $s3, $s3, -0x3f90
+/* 172FF8 80244718 3C13800E */  lui       $s3, %hi(gBattleStatus)
+/* 172FFC 8024471C 2673C070 */  addiu     $s3, $s3, %lo(gBattleStatus)
 /* 173000 80244720 AFB5002C */  sw        $s5, 0x2c($sp)
-/* 173004 80244724 3C158011 */  lui       $s5, 0x8011
-/* 173008 80244728 26B5F290 */  addiu     $s5, $s5, -0xd70
+/* 173004 80244724 3C158011 */  lui       $s5, %hi(gPlayerData)
+/* 173008 80244728 26B5F290 */  addiu     $s5, $s5, %lo(gPlayerData)
 /* 17300C 8024472C AFB20020 */  sw        $s2, 0x20($sp)
 /* 173010 80244730 3C12800E */  lui       $s2, 0x800e
 /* 173014 80244734 2652C4DC */  addiu     $s2, $s2, -0x3b24
@@ -121,8 +121,8 @@ glabel func_80244710
 /* 1731A0 802448C0 08091259 */  j         .L80244964
 /* 1731A4 802448C4 00000000 */   nop      
 .L802448C8:
-/* 1731A8 802448C8 3C05800E */  lui       $a1, 0x800e
-/* 1731AC 802448CC 24A5C070 */  addiu     $a1, $a1, -0x3f90
+/* 1731A8 802448C8 3C05800E */  lui       $a1, %hi(gBattleStatus)
+/* 1731AC 802448CC 24A5C070 */  addiu     $a1, $a1, %lo(gBattleStatus)
 /* 1731B0 802448D0 2403FFFD */  addiu     $v1, $zero, -3
 /* 1731B4 802448D4 A260008C */  sb        $zero, 0x8c($s3)
 /* 1731B8 802448D8 8CA20004 */  lw        $v0, 4($a1)
@@ -198,8 +198,8 @@ glabel func_80244710
 /* 1732B8 802449D8 A6A202AA */  sh        $v0, 0x2aa($s5)
 .L802449DC:
 /* 1732BC 802449DC 24030003 */  addiu     $v1, $zero, 3
-/* 1732C0 802449E0 3C02800B */  lui       $v0, 0x800b
-/* 1732C4 802449E4 24420F10 */  addiu     $v0, $v0, 0xf10
+/* 1732C0 802449E0 3C02800B */  lui       $v0, %hi(gCurrentEncounter)
+/* 1732C4 802449E4 24420F10 */  addiu     $v0, $v0, %lo(gCurrentEncounter)
 /* 1732C8 802449E8 A0430009 */  sb        $v1, 9($v0)
 /* 1732CC 802449EC 3C02800E */  lui       $v0, 0x800e
 /* 1732D0 802449F0 8C42C074 */  lw        $v0, -0x3f8c($v0)

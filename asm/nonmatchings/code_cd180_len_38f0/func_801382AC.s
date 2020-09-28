@@ -33,8 +33,8 @@ glabel func_801382AC
 /* CEA1C 8013831C 02A0A02D */  daddu     $s4, $s5, $zero
 /* CEA20 80138320 02A0982D */  daddu     $s3, $s5, $zero
 /* CEA24 80138324 24110001 */  addiu     $s1, $zero, 1
-/* CEA28 80138328 3C048007 */  lui       $a0, 0x8007
-/* CEA2C 8013832C 8C84419C */  lw        $a0, 0x419c($a0)
+/* CEA28 80138328 3C048007 */  lui       $a0, %hi(gGameStatusPtr)
+/* CEA2C 8013832C 8C84419C */  lw        $a0, %lo(gGameStatusPtr)($a0)
 /* CEA30 80138330 80830071 */  lb        $v1, 0x71($a0)
 /* CEA34 80138334 24020002 */  addiu     $v0, $zero, 2
 /* CEA38 80138338 1462004C */  bne       $v1, $v0, .L8013846C
@@ -47,8 +47,8 @@ glabel func_801382AC
 /* CEA54 80138354 02A0982D */  daddu     $s3, $s5, $zero
 /* CEA58 80138358 0804E11B */  j         .L8013846C
 /* CEA5C 8013835C 24110001 */   addiu    $s1, $zero, 1
-/* CEA60 80138360 3C048007 */  lui       $a0, 0x8007
-/* CEA64 80138364 8C84419C */  lw        $a0, 0x419c($a0)
+/* CEA60 80138360 3C048007 */  lui       $a0, %hi(gGameStatusPtr)
+/* CEA64 80138364 8C84419C */  lw        $a0, %lo(gGameStatusPtr)($a0)
 /* CEA68 80138368 80830071 */  lb        $v1, 0x71($a0)
 /* CEA6C 8013836C 24020002 */  addiu     $v0, $zero, 2
 /* CEA70 80138370 14620004 */  bne       $v1, $v0, .L80138384

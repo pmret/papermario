@@ -6,8 +6,8 @@ glabel update_enemy_shadows
 /* 184840 80255F60 AFB10014 */  sw        $s1, 0x14($sp)
 /* 184844 80255F64 0000882D */  daddu     $s1, $zero, $zero
 /* 184848 80255F68 AFB00010 */  sw        $s0, 0x10($sp)
-/* 18484C 80255F6C 3C10800E */  lui       $s0, 0x800e
-/* 184850 80255F70 2610C070 */  addiu     $s0, $s0, -0x3f90
+/* 18484C 80255F6C 3C10800E */  lui       $s0, %hi(gBattleStatus)
+/* 184850 80255F70 2610C070 */  addiu     $s0, $s0, %lo(gBattleStatus)
 /* 184854 80255F74 AFBF0018 */  sw        $ra, 0x18($sp)
 .L80255F78:
 /* 184858 80255F78 8E0500E0 */  lw        $a1, 0xe0($s0)

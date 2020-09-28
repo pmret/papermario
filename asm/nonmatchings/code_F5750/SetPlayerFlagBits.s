@@ -4,8 +4,8 @@
 glabel SetPlayerFlagBits
 /* F6710 802D1D60 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* F6714 802D1D64 AFB10014 */  sw        $s1, 0x14($sp)
-/* F6718 802D1D68 3C118011 */  lui       $s1, 0x8011
-/* F671C 802D1D6C 2631EFC8 */  addiu     $s1, $s1, -0x1038
+/* F6718 802D1D68 3C118011 */  lui       $s1, %hi(gPlayerStatus)
+/* F671C 802D1D6C 2631EFC8 */  addiu     $s1, $s1, %lo(gPlayerStatus)
 /* F6720 802D1D70 AFBF001C */  sw        $ra, 0x1c($sp)
 /* F6724 802D1D74 AFB20018 */  sw        $s2, 0x18($sp)
 /* F6728 802D1D78 AFB00010 */  sw        $s0, 0x10($sp)

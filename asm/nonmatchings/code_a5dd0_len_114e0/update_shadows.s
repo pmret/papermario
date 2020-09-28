@@ -12,8 +12,8 @@ glabel update_shadows
 /* A61B4 8010FAB4 AFB40020 */  sw        $s4, 0x20($sp)
 /* A61B8 8010FAB8 3C144000 */  lui       $s4, 0x4000
 /* A61BC 8010FABC AFB3001C */  sw        $s3, 0x1c($sp)
-/* A61C0 8010FAC0 3C13800B */  lui       $s3, 0x800b
-/* A61C4 8010FAC4 26731D80 */  addiu     $s3, $s3, 0x1d80
+/* A61C0 8010FAC0 3C13800B */  lui       $s3, %hi(gCameras)
+/* A61C4 8010FAC4 26731D80 */  addiu     $s3, $s3, %lo(gCameras)
 /* A61C8 8010FAC8 AFBF0024 */  sw        $ra, 0x24($sp)
 /* A61CC 8010FACC AFB00010 */  sw        $s0, 0x10($sp)
 /* A61D0 8010FAD0 AC400000 */  sw        $zero, ($v0)
@@ -33,8 +33,8 @@ glabel update_shadows
 /* A6204 8010FB04 30622000 */  andi      $v0, $v1, 0x2000
 /* A6208 8010FB08 1040000E */  beqz      $v0, .L8010FB44
 /* A620C 8010FB0C 00000000 */   nop      
-/* A6210 8010FB10 3C038007 */  lui       $v1, 0x8007
-/* A6214 8010FB14 8C637410 */  lw        $v1, 0x7410($v1)
+/* A6210 8010FB10 3C038007 */  lui       $v1, %hi(gCurrentCameraID)
+/* A6214 8010FB14 8C637410 */  lw        $v1, %lo(gCurrentCameraID)($v1)
 /* A6218 8010FB18 00031080 */  sll       $v0, $v1, 2
 /* A621C 8010FB1C 00431021 */  addu      $v0, $v0, $v1
 /* A6220 8010FB20 00021080 */  sll       $v0, $v0, 2

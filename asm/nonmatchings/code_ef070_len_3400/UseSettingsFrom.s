@@ -17,8 +17,8 @@ glabel UseSettingsFrom
 /* F0240 802CB890 8E050000 */  lw        $a1, ($s0)
 /* F0244 802CB894 26100004 */  addiu     $s0, $s0, 4
 /* F0248 802CB898 0220202D */  daddu     $a0, $s1, $zero
-/* F024C 802CB89C 3C06800B */  lui       $a2, 0x800b
-/* F0250 802CB8A0 24C61D80 */  addiu     $a2, $a2, 0x1d80
+/* F024C 802CB89C 3C06800B */  lui       $a2, %hi(gCameras)
+/* F0250 802CB8A0 24C61D80 */  addiu     $a2, $a2, %lo(gCameras)
 /* F0254 802CB8A4 00021880 */  sll       $v1, $v0, 2
 /* F0258 802CB8A8 00621821 */  addu      $v1, $v1, $v0
 /* F025C 802CB8AC 00031880 */  sll       $v1, $v1, 2

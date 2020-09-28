@@ -3,8 +3,8 @@
 
 glabel get_npc_safe
 /* 15F48 8003AB48 0000182D */  daddu     $v1, $zero, $zero
-/* 15F4C 8003AB4C 3C06800A */  lui       $a2, 0x800a
-/* 15F50 8003AB50 8CC60B90 */  lw        $a2, 0xb90($a2)
+/* 15F4C 8003AB4C 3C06800A */  lui       $a2, %hi(gCurrentNpcListPtr)
+/* 15F50 8003AB50 8CC60B90 */  lw        $a2, %lo(gCurrentNpcListPtr)($a2)
 .L8003AB54:
 /* 15F54 8003AB54 8CC50000 */  lw        $a1, ($a2)
 /* 15F58 8003AB58 50A00008 */  beql      $a1, $zero, .L8003AB7C

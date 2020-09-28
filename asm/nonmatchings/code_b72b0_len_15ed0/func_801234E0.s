@@ -7,8 +7,8 @@ glabel func_801234E0
 /* B9BE8 801234E8 0000802D */  daddu     $s0, $zero, $zero
 /* B9BEC 801234EC AFBF0014 */  sw        $ra, 0x14($sp)
 .L801234F0:
-/* B9BF0 801234F0 3C038015 */  lui       $v1, 0x8015
-/* B9BF4 801234F4 8C634420 */  lw        $v1, 0x4420($v1)
+/* B9BF0 801234F0 3C038015 */  lui       $v1, %hi(gCurrentDynamicEntityListPtr)
+/* B9BF4 801234F4 8C634420 */  lw        $v1, %lo(gCurrentDynamicEntityListPtr)($v1)
 /* B9BF8 801234F8 00101080 */  sll       $v0, $s0, 2
 /* B9BFC 801234FC 00431021 */  addu      $v0, $v0, $v1
 /* B9C00 80123500 8C430000 */  lw        $v1, ($v0)

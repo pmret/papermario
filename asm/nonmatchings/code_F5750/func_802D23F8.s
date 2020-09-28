@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel func_802D23F8
-/* F6DA8 802D23F8 3C038011 */  lui       $v1, 0x8011
-/* F6DAC 802D23FC 9063F07C */  lbu       $v1, -0xf84($v1)
+/* F6DA8 802D23F8 3C038011 */  lui       $v1, %hi(gPlayerActionState)
+/* F6DAC 802D23FC 9063F07C */  lbu       $v1, %lo(gPlayerActionState)($v1)
 /* F6DB0 802D2400 2C620003 */  sltiu     $v0, $v1, 3
 /* F6DB4 802D2404 1440000D */  bnez      $v0, .L802D243C
 /* F6DB8 802D2408 00031600 */   sll      $v0, $v1, 0x18

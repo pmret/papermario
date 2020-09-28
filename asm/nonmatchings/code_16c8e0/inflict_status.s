@@ -29,8 +29,8 @@ glabel inflict_status
 /* 194880 80265FA0 24040015 */   addiu    $a0, $zero, 0x15
 /* 194884 80265FA4 144000A5 */  bnez      $v0, .L8026623C
 /* 194888 80265FA8 0000102D */   daddu    $v0, $zero, $zero
-/* 19488C 80265FAC 3C02800E */  lui       $v0, 0x800e
-/* 194890 80265FB0 2442C070 */  addiu     $v0, $v0, -0x3f90
+/* 19488C 80265FAC 3C02800E */  lui       $v0, %hi(gBattleStatus)
+/* 194890 80265FB0 2442C070 */  addiu     $v0, $v0, %lo(gBattleStatus)
 /* 194894 80265FB4 8042008B */  lb        $v0, 0x8b($v0)
 /* 194898 80265FB8 144000A0 */  bnez      $v0, .L8026623C
 /* 19489C 80265FBC 0000102D */   daddu    $v0, $zero, $zero

@@ -5,8 +5,8 @@ glabel make_disguise_npc
 /* 7FA2C 800E657C 27BDFFD0 */  addiu     $sp, $sp, -0x30
 /* 7FA30 800E6580 0080282D */  daddu     $a1, $a0, $zero
 /* 7FA34 800E6584 AFB10024 */  sw        $s1, 0x24($sp)
-/* 7FA38 800E6588 3C118011 */  lui       $s1, 0x8011
-/* 7FA3C 800E658C 2631EFC8 */  addiu     $s1, $s1, -0x1038
+/* 7FA38 800E6588 3C118011 */  lui       $s1, %hi(gPlayerStatus)
+/* 7FA3C 800E658C 2631EFC8 */  addiu     $s1, $s1, %lo(gPlayerStatus)
 /* 7FA40 800E6590 27A60010 */  addiu     $a2, $sp, 0x10
 /* 7FA44 800E6594 AFBF0028 */  sw        $ra, 0x28($sp)
 /* 7FA48 800E6598 14A00003 */  bnez      $a1, .L800E65A8
@@ -15,8 +15,8 @@ glabel make_disguise_npc
 /* 7FA54 800E65A4 0000102D */   daddu    $v0, $zero, $zero
 .L800E65A8:
 /* 7FA58 800E65A8 3C040004 */  lui       $a0, 4
-/* 7FA5C 800E65AC 3C038007 */  lui       $v1, 0x8007
-/* 7FA60 800E65B0 8C63419C */  lw        $v1, 0x419c($v1)
+/* 7FA5C 800E65AC 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
+/* 7FA60 800E65B0 8C63419C */  lw        $v1, %lo(gGameStatusPtr)($v1)
 /* 7FA64 800E65B4 24020025 */  addiu     $v0, $zero, 0x25
 /* 7FA68 800E65B8 A62200B0 */  sh        $v0, 0xb0($s1)
 /* 7FA6C 800E65BC 24020026 */  addiu     $v0, $zero, 0x26

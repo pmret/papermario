@@ -8,8 +8,8 @@ glabel bind_npc_ai
 /* 19E90 8003EA90 AFB40020 */  sw        $s4, 0x20($sp)
 /* 19E94 8003EA94 00A0A02D */  daddu     $s4, $a1, $zero
 /* 19E98 8003EA98 AFB20018 */  sw        $s2, 0x18($sp)
-/* 19E9C 8003EA9C 3C12800B */  lui       $s2, 0x800b
-/* 19EA0 8003EAA0 26520F10 */  addiu     $s2, $s2, 0xf10
+/* 19E9C 8003EA9C 3C12800B */  lui       $s2, %hi(gCurrentEncounter)
+/* 19EA0 8003EAA0 26520F10 */  addiu     $s2, $s2, %lo(gCurrentEncounter)
 /* 19EA4 8003EAA4 AFBF0024 */  sw        $ra, 0x24($sp)
 /* 19EA8 8003EAA8 AFB10014 */  sw        $s1, 0x14($sp)
 /* 19EAC 8003EAAC AFB00010 */  sw        $s0, 0x10($sp)

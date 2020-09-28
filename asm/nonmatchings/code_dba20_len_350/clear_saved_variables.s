@@ -3,8 +3,8 @@
 
 glabel clear_saved_variables
 /* DBA20 80145320 2402003F */  addiu     $v0, $zero, 0x3f
-/* DBA24 80145324 3C04800E */  lui       $a0, 0x800e
-/* DBA28 80145328 2484ACC0 */  addiu     $a0, $a0, -0x5340
+/* DBA24 80145324 3C04800E */  lui       $a0, %hi(gCurrentSaveFile)
+/* DBA28 80145328 2484ACC0 */  addiu     $a0, $a0, %lo(gCurrentSaveFile)
 /* DBA2C 8014532C 248300FC */  addiu     $v1, $a0, 0xfc
 .L80145330:
 /* DBA30 80145330 AC600FB0 */  sw        $zero, 0xfb0($v1)

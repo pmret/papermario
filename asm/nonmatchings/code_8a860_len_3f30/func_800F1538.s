@@ -88,8 +88,8 @@ glabel func_800F1538
 /* 8AB20 800F1670 1462000E */  bne       $v1, $v0, .L800F16AC
 /* 8AB24 800F1674 00000000 */   nop      
 .L800F1678:
-/* 8AB28 800F1678 3C028007 */  lui       $v0, 0x8007
-/* 8AB2C 800F167C 8C42419C */  lw        $v0, 0x419c($v0)
+/* 8AB28 800F1678 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* 8AB2C 800F167C 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 8AB30 800F1680 80420070 */  lb        $v0, 0x70($v0)
 /* 8AB34 800F1684 14400009 */  bnez      $v0, .L800F16AC
 /* 8AB38 800F1688 00000000 */   nop      

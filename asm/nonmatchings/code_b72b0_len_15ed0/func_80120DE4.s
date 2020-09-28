@@ -68,8 +68,8 @@ glabel func_80120DE4
 /* B75C0 80120EC0 AE020010 */  sw        $v0, 0x10($s0)
 .L80120EC4:
 /* B75C4 80120EC4 8E020010 */  lw        $v0, 0x10($s0)
-/* B75C8 80120EC8 3C038007 */  lui       $v1, 0x8007
-/* B75CC 80120ECC 8C63419C */  lw        $v1, 0x419c($v1)
+/* B75C8 80120EC8 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
+/* B75CC 80120ECC 8C63419C */  lw        $v1, %lo(gGameStatusPtr)($v1)
 /* B75D0 80120ED0 AE00005C */  sw        $zero, 0x5c($s0)
 /* B75D4 80120ED4 AE000060 */  sw        $zero, 0x60($s0)
 /* B75D8 80120ED8 AE020058 */  sw        $v0, 0x58($s0)

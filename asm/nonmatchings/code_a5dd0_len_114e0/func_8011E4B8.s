@@ -73,8 +73,8 @@ glabel func_8011E4B8
 /* B4CA8 8011E5A8 2882007A */  slti      $v0, $a0, 0x7a
 /* B4CAC 8011E5AC 5440FFFB */  bnel      $v0, $zero, .L8011E59C
 /* B4CB0 8011E5B0 00C41821 */   addu     $v1, $a2, $a0
-/* B4CB4 8011E5B4 3C028007 */  lui       $v0, 0x8007
-/* B4CB8 8011E5B8 8C42419C */  lw        $v0, 0x419c($v0)
+/* B4CB4 8011E5B4 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* B4CB8 8011E5B8 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* B4CBC 8011E5BC 80420070 */  lb        $v0, 0x70($v0)
 /* B4CC0 8011E5C0 54400001 */  bnel      $v0, $zero, .L8011E5C8
 /* B4CC4 8011E5C4 36100800 */   ori      $s0, $s0, 0x800

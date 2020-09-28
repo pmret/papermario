@@ -12,8 +12,8 @@ glabel func_80145CE8
 /* DC404 80145D04 08051756 */  j         .L80145D58
 /* DC408 80145D08 0000102D */   daddu    $v0, $zero, $zero
 .L80145D0C:
-/* DC40C 80145D0C 3C048016 */  lui       $a0, 0x8016
-/* DC410 80145D10 8C849390 */  lw        $a0, -0x6c70($a0)
+/* DC40C 80145D0C 3C048016 */  lui       $a0, %hi(gCurrentTriggerListPtr)
+/* DC410 80145D10 8C849390 */  lw        $a0, %lo(gCurrentTriggerListPtr)($a0)
 .L80145D14:
 /* DC414 80145D14 8C830000 */  lw        $v1, ($a0)
 /* DC418 80145D18 5060000B */  beql      $v1, $zero, .L80145D48

@@ -5,8 +5,8 @@ glabel _set_music_track
 /* E0EE0 8014A7E0 27BDFFD0 */  addiu     $sp, $sp, -0x30
 /* E0EE4 8014A7E4 AFB20018 */  sw        $s2, 0x18($sp)
 /* E0EE8 8014A7E8 00A0902D */  daddu     $s2, $a1, $zero
-/* E0EEC 8014A7EC 3C058007 */  lui       $a1, 0x8007
-/* E0EF0 8014A7F0 8CA5419C */  lw        $a1, 0x419c($a1)
+/* E0EEC 8014A7EC 3C058007 */  lui       $a1, %hi(gGameStatusPtr)
+/* E0EF0 8014A7F0 8CA5419C */  lw        $a1, %lo(gGameStatusPtr)($a1)
 /* E0EF4 8014A7F4 AFB3001C */  sw        $s3, 0x1c($sp)
 /* E0EF8 8014A7F8 8FB30040 */  lw        $s3, 0x40($sp)
 /* E0EFC 8014A7FC AFB10014 */  sw        $s1, 0x14($sp)

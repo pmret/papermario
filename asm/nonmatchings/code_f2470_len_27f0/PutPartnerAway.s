@@ -15,8 +15,8 @@ glabel PutPartnerAway
 /* F4360 802CF9B0 F7B40020 */  sdc1      $f20, 0x20($sp)
 /* F4364 802CF9B4 0C00EABB */  jal       get_npc_unsafe
 /* F4368 802CF9B8 2404FFFC */   addiu    $a0, $zero, -4
-/* F436C 802CF9BC 3C048011 */  lui       $a0, 0x8011
-/* F4370 802CF9C0 2484EFC8 */  addiu     $a0, $a0, -0x1038
+/* F436C 802CF9BC 3C048011 */  lui       $a0, %hi(gPlayerStatus)
+/* F4370 802CF9C0 2484EFC8 */  addiu     $a0, $a0, %lo(gPlayerStatus)
 /* F4374 802CF9C4 1200005F */  beqz      $s0, .L802CFB44
 /* F4378 802CF9C8 0040882D */   daddu    $s1, $v0, $zero
 /* F437C 802CF9CC 3C10802E */  lui       $s0, 0x802e

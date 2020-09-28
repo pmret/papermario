@@ -23,8 +23,8 @@ glabel func_8013559C
 /* CBCE4 801355E4 00C21024 */  and       $v0, $a2, $v0
 /* CBCE8 801355E8 14400008 */  bnez      $v0, .L8013560C
 /* CBCEC 801355EC 2402FFBF */   addiu    $v0, $zero, -0x41
-/* CBCF0 801355F0 3C028007 */  lui       $v0, 0x8007
-/* CBCF4 801355F4 8C42419C */  lw        $v0, 0x419c($v0)
+/* CBCF0 801355F0 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* CBCF4 801355F4 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* CBCF8 801355F8 94420134 */  lhu       $v0, 0x134($v0)
 /* CBCFC 801355FC 00471021 */  addu      $v0, $v0, $a3
 /* CBD00 80135600 30420001 */  andi      $v0, $v0, 1

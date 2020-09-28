@@ -394,8 +394,8 @@ glabel make_item_entity
 /* C80B8 801319B8 C7A0003C */  lwc1      $f0, 0x3c($sp)
 /* C80BC 801319BC C7A20040 */  lwc1      $f2, 0x40($sp)
 /* C80C0 801319C0 C7A40044 */  lwc1      $f4, 0x44($sp)
-/* C80C4 801319C4 3C028007 */  lui       $v0, 0x8007
-/* C80C8 801319C8 8C42419C */  lw        $v0, 0x419c($v0)
+/* C80C4 801319C4 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* C80C8 801319C8 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* C80CC 801319CC E6200010 */  swc1      $f0, 0x10($s1)
 /* C80D0 801319D0 E6220014 */  swc1      $f2, 0x14($s1)
 /* C80D4 801319D4 E6240018 */  swc1      $f4, 0x18($s1)

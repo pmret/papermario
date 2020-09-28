@@ -18,8 +18,8 @@ glabel create_actor
 /* 193CB8 802653D8 F7B60040 */  sdc1      $f22, 0x40($sp)
 /* 193CBC 802653DC F7B40038 */  sdc1      $f20, 0x38($sp)
 /* 193CC0 802653E0 8E640004 */  lw        $a0, 4($s3)
-/* 193CC4 802653E4 3C12800E */  lui       $s2, 0x800e
-/* 193CC8 802653E8 2652C070 */  addiu     $s2, $s2, -0x3f90
+/* 193CC4 802653E4 3C12800E */  lui       $s2, %hi(gBattleStatus)
+/* 193CC8 802653E8 2652C070 */  addiu     $s2, $s2, %lo(gBattleStatus)
 /* 193CCC 802653EC 0082102A */  slt       $v0, $a0, $v0
 /* 193CD0 802653F0 14400014 */  bnez      $v0, .L80265444
 /* 193CD4 802653F4 0000802D */   daddu    $s0, $zero, $zero

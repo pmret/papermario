@@ -96,8 +96,8 @@ glabel func_802AE000
 /* 316EE8 802AE158 080AB85C */  j         .L802AE170
 /* 316EEC 802AE15C 00000000 */   nop      
 .L802AE160:
-/* 316EF0 802AE160 3C04803E */  lui       $a0, 0x803e
-/* 316EF4 802AE164 2484A800 */  addiu     $a0, $a0, -0x5800
+/* 316EF0 802AE160 3C04803E */  lui       $a0, %hi(D_803DA800)
+/* 316EF4 802AE164 2484A800 */  addiu     $a0, $a0, %lo(D_803DA800)
 /* 316EF8 802AE168 0C00A40C */  jal       _heap_create
 /* 316EFC 802AE16C 3C050001 */   lui      $a1, 1
 .L802AE170:

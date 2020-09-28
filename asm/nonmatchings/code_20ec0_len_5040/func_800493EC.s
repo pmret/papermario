@@ -14,8 +14,8 @@ glabel func_800493EC
 /* 24810 80049410 4487A000 */  mtc1      $a3, $f20
 /* 24814 80049414 0C00EABB */  jal       get_npc_unsafe
 /* 24818 80049418 00A0802D */   daddu    $s0, $a1, $zero
-/* 2481C 8004941C 3C128011 */  lui       $s2, 0x8011
-/* 24820 80049420 2652EFC8 */  addiu     $s2, $s2, -0x1038
+/* 2481C 8004941C 3C128011 */  lui       $s2, %hi(gPlayerStatus)
+/* 24820 80049420 2652EFC8 */  addiu     $s2, $s2, %lo(gPlayerStatus)
 /* 24824 80049424 0600001D */  bltz      $s0, .L8004949C
 /* 24828 80049428 0040882D */   daddu    $s1, $v0, $zero
 /* 2482C 8004942C 12000003 */  beqz      $s0, .L8004943C

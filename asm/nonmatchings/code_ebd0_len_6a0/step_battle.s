@@ -4,8 +4,8 @@
 glabel step_battle
 /* ECE4 800338E4 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* ECE8 800338E8 AFB00010 */  sw        $s0, 0x10($sp)
-/* ECEC 800338EC 3C10800A */  lui       $s0, 0x800a
-/* ECF0 800338F0 26100900 */  addiu     $s0, $s0, 0x900
+/* ECEC 800338EC 3C10800A */  lui       $s0, %hi(D_800A0900)
+/* ECF0 800338F0 26100900 */  addiu     $s0, $s0, %lo(D_800A0900)
 /* ECF4 800338F4 24030005 */  addiu     $v1, $zero, 5
 /* ECF8 800338F8 AFBF0014 */  sw        $ra, 0x14($sp)
 /* ECFC 800338FC 82020000 */  lb        $v0, ($s0)
@@ -18,8 +18,8 @@ glabel step_battle
 /* ED18 80033918 8C42A64C */  lw        $v0, -0x59b4($v0)
 /* ED1C 8003391C 14620089 */  bne       $v1, $v0, .L80033B44
 /* ED20 80033920 2484FFFF */   addiu    $a0, $a0, -1
-/* ED24 80033924 3C02800A */  lui       $v0, 0x800a
-/* ED28 80033928 2442A650 */  addiu     $v0, $v0, -0x59b0
+/* ED24 80033924 3C02800A */  lui       $v0, %hi(D_8009A650)
+/* ED28 80033928 2442A650 */  addiu     $v0, $v0, %lo(D_8009A650)
 /* ED2C 8003392C 8C430000 */  lw        $v1, ($v0)
 /* ED30 80033930 A2040000 */  sb        $a0, ($s0)
 /* ED34 80033934 34630008 */  ori       $v1, $v1, 8
@@ -46,8 +46,8 @@ glabel step_battle
 /* ED80 80033980 00000000 */   nop      
 /* ED84 80033984 0C00EC6A */  jal       func_8003B1A8
 /* ED88 80033988 00000000 */   nop      
-/* ED8C 8003398C 3C108007 */  lui       $s0, 0x8007
-/* ED90 80033990 2610419C */  addiu     $s0, $s0, 0x419c
+/* ED8C 8003398C 3C108007 */  lui       $s0, %hi(gGameStatusPtr)
+/* ED90 80033990 2610419C */  addiu     $s0, $s0, %lo(gGameStatusPtr)
 /* ED94 80033994 8E030000 */  lw        $v1, ($s0)
 /* ED98 80033998 24020001 */  addiu     $v0, $zero, 1
 /* ED9C 8003399C 0C016BA8 */  jal       allocate_hit_tables
@@ -122,8 +122,8 @@ glabel step_battle
 /* EEA8 80033AA8 00000000 */   nop      
 /* EEAC 80033AAC 0C01CAF7 */  jal       func_80072BDC
 /* EEB0 80033AB0 00000000 */   nop      
-/* EEB4 80033AB4 3C04800F */  lui       $a0, 0x800f
-/* EEB8 80033AB8 8C847B30 */  lw        $a0, 0x7b30($a0)
+/* EEB4 80033AB4 3C04800F */  lui       $a0, %hi(gPlayerStatusPtr)
+/* EEB8 80033AB8 8C847B30 */  lw        $a0, %lo(gPlayerStatusPtr)($a0)
 /* EEBC 80033ABC 8C820004 */  lw        $v0, 4($a0)
 /* EEC0 80033AC0 2403FFBF */  addiu     $v1, $zero, -0x41
 /* EEC4 80033AC4 3C01800A */  lui       $at, 0x800a
@@ -135,12 +135,12 @@ glabel step_battle
 /* EEDC 80033ADC AC220908 */  sw        $v0, 0x908($at)
 /* EEE0 80033AE0 0C009C22 */  jal       func_80027088
 /* EEE4 80033AE4 0000202D */   daddu    $a0, $zero, $zero
-/* EEE8 80033AE8 3C05800A */  lui       $a1, 0x800a
-/* EEEC 80033AEC 24A5A650 */  addiu     $a1, $a1, -0x59b0
+/* EEE8 80033AE8 3C05800A */  lui       $a1, %hi(D_8009A650)
+/* EEEC 80033AEC 24A5A650 */  addiu     $a1, $a1, %lo(D_8009A650)
 /* EEF0 80033AF0 2403FFF7 */  addiu     $v1, $zero, -9
 /* EEF4 80033AF4 8CA20000 */  lw        $v0, ($a1)
-/* EEF8 80033AF8 3C04800A */  lui       $a0, 0x800a
-/* EEFC 80033AFC 80840900 */  lb        $a0, 0x900($a0)
+/* EEF8 80033AF8 3C04800A */  lui       $a0, %hi(D_800A0900)
+/* EEFC 80033AFC 80840900 */  lb        $a0, %lo(D_800A0900)($a0)
 /* EF00 80033B00 00431024 */  and       $v0, $v0, $v1
 /* EF04 80033B04 0481000F */  bgez      $a0, .L80033B44
 /* EF08 80033B08 ACA20000 */   sw       $v0, ($a1)

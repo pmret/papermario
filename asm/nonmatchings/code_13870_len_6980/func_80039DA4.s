@@ -7,8 +7,8 @@ glabel func_80039DA4
 /* 151AC 80039DAC 0080882D */  daddu     $s1, $a0, $zero
 /* 151B0 80039DB0 3C03800A */  lui       $v1, 0x800a
 /* 151B4 80039DB4 8463A634 */  lh        $v1, -0x59cc($v1)
-/* 151B8 80039DB8 3C04800B */  lui       $a0, 0x800b
-/* 151BC 80039DBC 24841D80 */  addiu     $a0, $a0, 0x1d80
+/* 151B8 80039DB8 3C04800B */  lui       $a0, %hi(gCameras)
+/* 151BC 80039DBC 24841D80 */  addiu     $a0, $a0, %lo(gCameras)
 /* 151C0 80039DC0 AFBF0018 */  sw        $ra, 0x18($sp)
 /* 151C4 80039DC4 AFB00010 */  sw        $s0, 0x10($sp)
 /* 151C8 80039DC8 F7B60028 */  sdc1      $f22, 0x28($sp)
@@ -20,8 +20,8 @@ glabel func_80039DA4
 /* 151E0 80039DE0 000218C0 */  sll       $v1, $v0, 3
 /* 151E4 80039DE4 00431021 */  addu      $v0, $v0, $v1
 /* 151E8 80039DE8 000210C0 */  sll       $v0, $v0, 3
-/* 151EC 80039DEC 3C03800A */  lui       $v1, 0x800a
-/* 151F0 80039DF0 8C63A650 */  lw        $v1, -0x59b0($v1)
+/* 151EC 80039DEC 3C03800A */  lui       $v1, %hi(D_8009A650)
+/* 151F0 80039DF0 8C63A650 */  lw        $v1, %lo(D_8009A650)($v1)
 /* 151F4 80039DF4 3063C000 */  andi      $v1, $v1, 0xc000
 /* 151F8 80039DF8 1460006C */  bnez      $v1, .L80039FAC
 /* 151FC 80039DFC 00441021 */   addu     $v0, $v0, $a0

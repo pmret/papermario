@@ -5,8 +5,8 @@ glabel func_80126F78
 /* BD678 80126F78 27BDFFA0 */  addiu     $sp, $sp, -0x60
 /* BD67C 80126F7C AFB00038 */  sw        $s0, 0x38($sp)
 /* BD680 80126F80 0080802D */  daddu     $s0, $a0, $zero
-/* BD684 80126F84 3C028007 */  lui       $v0, 0x8007
-/* BD688 80126F88 8C42419C */  lw        $v0, 0x419c($v0)
+/* BD684 80126F84 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* BD688 80126F88 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* BD68C 80126F8C 3C0316C1 */  lui       $v1, 0x16c1
 /* BD690 80126F90 AFBF0058 */  sw        $ra, 0x58($sp)
 /* BD694 80126F94 AFB70054 */  sw        $s7, 0x54($sp)

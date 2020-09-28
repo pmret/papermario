@@ -4,8 +4,8 @@
 glabel update_swap_partner
 /* 173FD8 802456F8 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* 173FDC 802456FC AFB20018 */  sw        $s2, 0x18($sp)
-/* 173FE0 80245700 3C12800E */  lui       $s2, 0x800e
-/* 173FE4 80245704 2652C070 */  addiu     $s2, $s2, -0x3f90
+/* 173FE0 80245700 3C12800E */  lui       $s2, %hi(gBattleStatus)
+/* 173FE4 80245704 2652C070 */  addiu     $s2, $s2, %lo(gBattleStatus)
 /* 173FE8 80245708 AFBF0020 */  sw        $ra, 0x20($sp)
 /* 173FEC 8024570C AFB3001C */  sw        $s3, 0x1c($sp)
 /* 173FF0 80245710 AFB10014 */  sw        $s1, 0x14($sp)
@@ -29,8 +29,8 @@ glabel update_swap_partner
 /* 174038 80245758 00431024 */  and       $v0, $v0, $v1
 /* 17403C 8024575C AE020000 */  sw        $v0, ($s0)
 /* 174040 80245760 8E220000 */  lw        $v0, ($s1)
-/* 174044 80245764 3C10800E */  lui       $s0, 0x800e
-/* 174048 80245768 2610C070 */  addiu     $s0, $s0, -0x3f90
+/* 174044 80245764 3C10800E */  lui       $s0, %hi(gBattleStatus)
+/* 174048 80245768 2610C070 */  addiu     $s0, $s0, %lo(gBattleStatus)
 /* 17404C 8024576C 00431024 */  and       $v0, $v0, $v1
 /* 174050 80245770 AE220000 */  sw        $v0, ($s1)
 /* 174054 80245774 8E020004 */  lw        $v0, 4($s0)
@@ -118,8 +118,8 @@ glabel update_swap_partner
 /* 174190 802458B0 0C0902EF */  jal       delete_actor
 /* 174194 802458B4 0220202D */   daddu    $a0, $s1, $zero
 /* 174198 802458B8 924301AC */  lbu       $v1, 0x1ac($s2)
-/* 17419C 802458BC 3C028011 */  lui       $v0, 0x8011
-/* 1741A0 802458C0 2442F290 */  addiu     $v0, $v0, -0xd70
+/* 17419C 802458BC 3C028011 */  lui       $v0, %hi(gPlayerData)
+/* 1741A0 802458C0 2442F290 */  addiu     $v0, $v0, %lo(gPlayerData)
 /* 1741A4 802458C4 0C0992DD */  jal       load_partner_actor
 /* 1741A8 802458C8 A0430012 */   sb       $v1, 0x12($v0)
 /* 1741AC 802458CC 8E5100DC */  lw        $s1, 0xdc($s2)
@@ -223,8 +223,8 @@ glabel update_swap_partner
 /* 174324 80245A44 8242008C */  lb        $v0, 0x8c($s2)
 /* 174328 80245A48 14400018 */  bnez      $v0, .L80245AAC
 /* 17432C 80245A4C 2403FFEF */   addiu    $v1, $zero, -0x11
-/* 174330 80245A50 3C04800E */  lui       $a0, 0x800e
-/* 174334 80245A54 2484C070 */  addiu     $a0, $a0, -0x3f90
+/* 174330 80245A50 3C04800E */  lui       $a0, %hi(gBattleStatus)
+/* 174334 80245A54 2484C070 */  addiu     $a0, $a0, %lo(gBattleStatus)
 /* 174338 80245A58 8C820004 */  lw        $v0, 4($a0)
 /* 17433C 80245A5C 00431024 */  and       $v0, $v0, $v1
 /* 174340 80245A60 AC820004 */  sw        $v0, 4($a0)

@@ -30,8 +30,8 @@ glabel GetActorHP
 /* 1AAFE0 8027C700 0809F1C7 */  j         .L8027C71C
 /* 1AAFE4 8027C704 00000000 */   nop      
 .L8027C708:
-/* 1AAFE8 8027C708 3C028011 */  lui       $v0, 0x8011
-/* 1AAFEC 8027C70C 2442F290 */  addiu     $v0, $v0, -0xd70
+/* 1AAFE8 8027C708 3C028011 */  lui       $v0, %hi(gPlayerData)
+/* 1AAFEC 8027C70C 2442F290 */  addiu     $v0, $v0, %lo(gPlayerData)
 /* 1AAFF0 8027C710 80460002 */  lb        $a2, 2($v0)
 /* 1AAFF4 8027C714 0809F1C9 */  j         .L8027C724
 /* 1AAFF8 8027C718 0240202D */   daddu    $a0, $s2, $zero

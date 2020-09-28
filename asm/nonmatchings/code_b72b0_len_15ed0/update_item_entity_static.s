@@ -16,8 +16,8 @@ glabel update_item_entity_static
 /* CBD84 80135684 3C018015 */  lui       $at, 0x8015
 /* CBD88 80135688 A42265A4 */  sh        $v0, 0x65a4($at)
 /* CBD8C 8013568C 2402001C */  addiu     $v0, $zero, 0x1c
-/* CBD90 80135690 3C03800A */  lui       $v1, 0x800a
-/* CBD94 80135694 2463A650 */  addiu     $v1, $v1, -0x59b0
+/* CBD90 80135690 3C03800A */  lui       $v1, %hi(D_8009A650)
+/* CBD94 80135694 2463A650 */  addiu     $v1, $v1, %lo(D_8009A650)
 /* CBD98 80135698 A202001B */  sb        $v0, 0x1b($s0)
 /* CBD9C 8013569C A200001A */  sb        $zero, 0x1a($s0)
 /* CBDA0 801356A0 8C620000 */  lw        $v0, ($v1)

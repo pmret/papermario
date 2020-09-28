@@ -85,8 +85,8 @@ glabel func_802601BC
 /* 18EBD4 802602F4 2694001C */   addiu    $s4, $s4, 0x1c
 /* 18EBD8 802602F8 0809820E */  j         .L80260838
 /* 18EBDC 802602FC 00000000 */   nop      
-/* 18EBE0 80260300 3C02800E */  lui       $v0, 0x800e
-/* 18EBE4 80260304 2442C070 */  addiu     $v0, $v0, -0x3f90
+/* 18EBE0 80260300 3C02800E */  lui       $v0, %hi(gBattleStatus)
+/* 18EBE4 80260304 2442C070 */  addiu     $v0, $v0, %lo(gBattleStatus)
 /* 18EBE8 80260308 80430048 */  lb        $v1, 0x48($v0)
 /* 18EBEC 8026030C 24020001 */  addiu     $v0, $zero, 1
 /* 18EBF0 80260310 1062006B */  beq       $v1, $v0, .L802604C0

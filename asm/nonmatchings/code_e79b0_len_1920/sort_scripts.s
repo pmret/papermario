@@ -5,10 +5,10 @@ glabel sort_scripts
 /* E79B0 802C3000 27BDFFF8 */  addiu     $sp, $sp, -8
 /* E79B4 802C3004 0000682D */  daddu     $t5, $zero, $zero
 /* E79B8 802C3008 01A0482D */  daddu     $t1, $t5, $zero
-/* E79BC 802C300C 3C05802E */  lui       $a1, 0x802e
-/* E79C0 802C3010 24A5AA98 */  addiu     $a1, $a1, -0x5568
-/* E79C4 802C3014 3C06802E */  lui       $a2, 0x802e
-/* E79C8 802C3018 8CC6A890 */  lw        $a2, -0x5770($a2)
+/* E79BC 802C300C 3C05802E */  lui       $a1, %hi(gScriptIndexList)
+/* E79C0 802C3010 24A5AA98 */  addiu     $a1, $a1, %lo(gScriptIndexList)
+/* E79C4 802C3014 3C06802E */  lui       $a2, %hi(gCurrentScriptListPtr)
+/* E79C8 802C3018 8CC6A890 */  lw        $a2, %lo(gCurrentScriptListPtr)($a2)
 /* E79CC 802C301C 3C04802E */  lui       $a0, 0x802e
 /* E79D0 802C3020 2484A898 */  addiu     $a0, $a0, -0x5768
 /* E79D4 802C3024 AFB00000 */  sw        $s0, ($sp)
@@ -30,15 +30,15 @@ glabel sort_scripts
 /* E7A0C 802C305C 29220080 */  slti      $v0, $t1, 0x80
 /* E7A10 802C3060 1440FFF1 */  bnez      $v0, .L802C3028
 /* E7A14 802C3064 24C60004 */   addiu    $a2, $a2, 4
-/* E7A18 802C3068 3C01802E */  lui       $at, 0x802e
-/* E7A1C 802C306C AC2DAC98 */  sw        $t5, -0x5368($at)
+/* E7A18 802C3068 3C01802E */  lui       $at, %hi(gScriptListCount)
+/* E7A1C 802C306C AC2DAC98 */  sw        $t5, %lo(gScriptListCount)($at)
 /* E7A20 802C3070 25A2FFFF */  addiu     $v0, $t5, -1
 /* E7A24 802C3074 18400031 */  blez      $v0, .L802C313C
 /* E7A28 802C3078 0000482D */   daddu    $t1, $zero, $zero
-/* E7A2C 802C307C 3C10802E */  lui       $s0, 0x802e
-/* E7A30 802C3080 2610A890 */  addiu     $s0, $s0, -0x5770
-/* E7A34 802C3084 3C0E802E */  lui       $t6, 0x802e
-/* E7A38 802C3088 25CEAA98 */  addiu     $t6, $t6, -0x5568
+/* E7A2C 802C307C 3C10802E */  lui       $s0, %hi(gCurrentScriptListPtr)
+/* E7A30 802C3080 2610A890 */  addiu     $s0, $s0, %lo(gCurrentScriptListPtr)
+/* E7A34 802C3084 3C0E802E */  lui       $t6, %hi(gScriptIndexList)
+/* E7A38 802C3088 25CEAA98 */  addiu     $t6, $t6, %lo(gScriptIndexList)
 /* E7A3C 802C308C 01C0C82D */  daddu     $t9, $t6, $zero
 /* E7A40 802C3090 3C18802E */  lui       $t8, 0x802e
 /* E7A44 802C3094 2718A898 */  addiu     $t8, $t8, -0x5768

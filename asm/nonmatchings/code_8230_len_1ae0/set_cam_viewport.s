@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel set_cam_viewport
-/* 9714 8002E314 3C08800B */  lui       $t0, 0x800b
-/* 9718 8002E318 25081D80 */  addiu     $t0, $t0, 0x1d80
+/* 9714 8002E314 3C08800B */  lui       $t0, %hi(gCameras)
+/* 9718 8002E318 25081D80 */  addiu     $t0, $t0, %lo(gCameras)
 /* 971C 8002E31C 00042400 */  sll       $a0, $a0, 0x10
 /* 9720 8002E320 00042403 */  sra       $a0, $a0, 0x10
 /* 9724 8002E324 00041880 */  sll       $v1, $a0, 2
@@ -61,8 +61,8 @@ glabel set_cam_viewport
 /* 97F4 8002E3F4 46800020 */  cvt.s.w   $f0, $f0
 /* 97F8 8002E3F8 46000000 */  add.s     $f0, $f0, $f0
 /* 97FC 8002E3FC 8462000C */  lh        $v0, 0xc($v1)
-/* 9800 8002E400 3C068007 */  lui       $a2, 0x8007
-/* 9804 8002E404 8CC6419C */  lw        $a2, 0x419c($a2)
+/* 9800 8002E400 3C068007 */  lui       $a2, %hi(gGameStatusPtr)
+/* 9804 8002E404 8CC6419C */  lw        $a2, %lo(gGameStatusPtr)($a2)
 /* 9808 8002E408 44821000 */  mtc1      $v0, $f2
 /* 980C 8002E40C 00000000 */  nop       
 /* 9810 8002E410 468010A0 */  cvt.s.w   $f2, $f2

@@ -10,16 +10,16 @@ glabel func_800DFBE8
 /* 790AC 800DFBFC 00000000 */   nop      
 /* 790B0 800DFC00 0C0392EE */  jal       func_800E4BB8
 /* 790B4 800DFC04 00000000 */   nop      
-/* 790B8 800DFC08 3C04800F */  lui       $a0, 0x800f
-/* 790BC 800DFC0C 8C847B30 */  lw        $a0, 0x7b30($a0)
+/* 790B8 800DFC08 3C04800F */  lui       $a0, %hi(gPlayerStatusPtr)
+/* 790BC 800DFC0C 8C847B30 */  lw        $a0, %lo(gPlayerStatusPtr)($a0)
 /* 790C0 800DFC10 8C820000 */  lw        $v0, ($a0)
 /* 790C4 800DFC14 3C030400 */  lui       $v1, 0x400
 /* 790C8 800DFC18 00431024 */  and       $v0, $v0, $v1
 /* 790CC 800DFC1C 14400009 */  bnez      $v0, .L800DFC44
 /* 790D0 800DFC20 00000000 */   nop      
 /* 790D4 800DFC24 C4800028 */  lwc1      $f0, 0x28($a0)
-/* 790D8 800DFC28 3C02800B */  lui       $v0, 0x800b
-/* 790DC 800DFC2C 24421D80 */  addiu     $v0, $v0, 0x1d80
+/* 790D8 800DFC28 3C02800B */  lui       $v0, %hi(gCameras)
+/* 790DC 800DFC2C 24421D80 */  addiu     $v0, $v0, %lo(gCameras)
 /* 790E0 800DFC30 E4400060 */  swc1      $f0, 0x60($v0)
 /* 790E4 800DFC34 C480002C */  lwc1      $f0, 0x2c($a0)
 /* 790E8 800DFC38 E4400064 */  swc1      $f0, 0x64($v0)

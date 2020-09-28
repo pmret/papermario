@@ -6,8 +6,8 @@ glabel InterpPlayerYaw
 /* F62F0 802D1940 AFB10014 */  sw        $s1, 0x14($sp)
 /* F62F4 802D1944 0080882D */  daddu     $s1, $a0, $zero
 /* F62F8 802D1948 AFB50024 */  sw        $s5, 0x24($sp)
-/* F62FC 802D194C 3C158011 */  lui       $s5, 0x8011
-/* F6300 802D1950 26B5EFC8 */  addiu     $s5, $s5, -0x1038
+/* F62FC 802D194C 3C158011 */  lui       $s5, %hi(gPlayerStatus)
+/* F6300 802D1950 26B5EFC8 */  addiu     $s5, $s5, %lo(gPlayerStatus)
 /* F6304 802D1954 AFB60028 */  sw        $s6, 0x28($sp)
 /* F6308 802D1958 26360074 */  addiu     $s6, $s1, 0x74
 /* F630C 802D195C AFB40020 */  sw        $s4, 0x20($sp)
@@ -19,8 +19,8 @@ glabel InterpPlayerYaw
 /* F6324 802D1974 8E32000C */  lw        $s2, 0xc($s1)
 /* F6328 802D1978 10A0002C */  beqz      $a1, .L802D1A2C
 /* F632C 802D197C 2633007C */   addiu    $s3, $s1, 0x7c
-/* F6330 802D1980 3C10802E */  lui       $s0, 0x802e
-/* F6334 802D1984 26109D20 */  addiu     $s0, $s0, -0x62e0
+/* F6330 802D1980 3C10802E */  lui       $s0, %hi(gPlayerNpcPtr)
+/* F6334 802D1984 26109D20 */  addiu     $s0, $s0, %lo(gPlayerNpcPtr)
 /* F6338 802D1988 8E020000 */  lw        $v0, ($s0)
 /* F633C 802D198C C6A00080 */  lwc1      $f0, 0x80($s5)
 /* F6340 802D1990 E440000C */  swc1      $f0, 0xc($v0)
@@ -67,8 +67,8 @@ glabel InterpPlayerYaw
 /* F63DC 802D1A2C 8E620000 */  lw        $v0, ($s3)
 /* F63E0 802D1A30 1C40000E */  bgtz      $v0, .L802D1A6C
 /* F63E4 802D1A34 00000000 */   nop      
-/* F63E8 802D1A38 3C10802E */  lui       $s0, 0x802e
-/* F63EC 802D1A3C 26109D20 */  addiu     $s0, $s0, -0x62e0
+/* F63E8 802D1A38 3C10802E */  lui       $s0, %hi(gPlayerNpcPtr)
+/* F63EC 802D1A3C 26109D20 */  addiu     $s0, $s0, %lo(gPlayerNpcPtr)
 /* F63F0 802D1A40 8E020000 */  lw        $v0, ($s0)
 /* F63F4 802D1A44 C6800000 */  lwc1      $f0, ($s4)
 /* F63F8 802D1A48 C44C000C */  lwc1      $f12, 0xc($v0)
@@ -81,8 +81,8 @@ glabel InterpPlayerYaw
 /* F6414 802D1A64 080B46B7 */  j         .L802D1ADC
 /* F6418 802D1A68 E6A00080 */   swc1     $f0, 0x80($s5)
 .L802D1A6C:
-/* F641C 802D1A6C 3C10802E */  lui       $s0, 0x802e
-/* F6420 802D1A70 26109D20 */  addiu     $s0, $s0, -0x62e0
+/* F641C 802D1A6C 3C10802E */  lui       $s0, %hi(gPlayerNpcPtr)
+/* F6420 802D1A70 26109D20 */  addiu     $s0, $s0, %lo(gPlayerNpcPtr)
 /* F6424 802D1A74 8E030000 */  lw        $v1, ($s0)
 /* F6428 802D1A78 9462008E */  lhu       $v0, 0x8e($v1)
 /* F642C 802D1A7C 24420001 */  addiu     $v0, $v0, 1

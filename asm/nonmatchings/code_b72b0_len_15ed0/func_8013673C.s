@@ -8,8 +8,8 @@ glabel func_8013673C
 /* CCE48 80136748 AFB20020 */  sw        $s2, 0x20($sp)
 /* CCE4C 8013674C 00A0902D */  daddu     $s2, $a1, $zero
 /* CCE50 80136750 AFB30024 */  sw        $s3, 0x24($sp)
-/* CCE54 80136754 3C048008 */  lui       $a0, 0x8008
-/* CCE58 80136758 248478E0 */  addiu     $a0, $a0, 0x78e0
+/* CCE54 80136754 3C048008 */  lui       $a0, %hi(gItemTable)
+/* CCE58 80136758 248478E0 */  addiu     $a0, $a0, %lo(gItemTable)
 /* CCE5C 8013675C AFBF0028 */  sw        $ra, 0x28($sp)
 /* CCE60 80136760 AFB00018 */  sw        $s0, 0x18($sp)
 /* CCE64 80136764 86230018 */  lh        $v1, 0x18($s1)
@@ -151,9 +151,9 @@ glabel func_8013673C
 /* CD04C 8013694C 3C028015 */  lui       $v0, 0x8015
 /* CD050 80136950 8C4268EC */  lw        $v0, 0x68ec($v0)
 /* CD054 80136954 00021140 */  sll       $v0, $v0, 5
-/* CD058 80136958 3C048008 */  lui       $a0, 0x8008
+/* CD058 80136958 3C048008 */  lui       $a0, %hi(gItemTable)
 /* CD05C 8013695C 00822021 */  addu      $a0, $a0, $v0
-/* CD060 80136960 8C8478E0 */  lw        $a0, 0x78e0($a0)
+/* CD060 80136960 8C8478E0 */  lw        $a0, %lo(gItemTable)($a0)
 /* CD064 80136964 0C0496CF */  jal       set_message_string
 /* CD068 80136968 0000282D */   daddu    $a1, $zero, $zero
 /* CD06C 8013696C 3C04001D */  lui       $a0, 0x1d

@@ -4,8 +4,8 @@
 glabel func_80112FC4
 /* A96C4 80112FC4 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* A96C8 80112FC8 AFB00010 */  sw        $s0, 0x10($sp)
-/* A96CC 80112FCC 3C108015 */  lui       $s0, 0x8015
-/* A96D0 80112FD0 26101700 */  addiu     $s0, $s0, 0x1700
+/* A96CC 80112FCC 3C108015 */  lui       $s0, %hi(gMainGameState)
+/* A96D0 80112FD0 26101700 */  addiu     $s0, $s0, %lo(gMainGameState)
 /* A96D4 80112FD4 AFB10014 */  sw        $s1, 0x14($sp)
 /* A96D8 80112FD8 0000882D */  daddu     $s1, $zero, $zero
 /* A96DC 80112FDC AFBF0018 */  sw        $ra, 0x18($sp)
@@ -29,8 +29,8 @@ glabel func_80112FC4
 /* A971C 8011301C 2A220002 */  slti      $v0, $s1, 2
 /* A9720 80113020 1440FFEF */  bnez      $v0, .L80112FE0
 /* A9724 80113024 26100018 */   addiu    $s0, $s0, 0x18
-/* A9728 80113028 3C108015 */  lui       $s0, 0x8015
-/* A972C 8011302C 26101700 */  addiu     $s0, $s0, 0x1700
+/* A9728 80113028 3C108015 */  lui       $s0, %hi(gMainGameState)
+/* A972C 8011302C 26101700 */  addiu     $s0, $s0, %lo(gMainGameState)
 /* A9730 80113030 0000882D */  daddu     $s1, $zero, $zero
 .L80113034:
 /* A9734 80113034 96030000 */  lhu       $v1, ($s0)

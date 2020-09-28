@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel count_power_plus
-/* 1923F0 80263B10 3C028007 */  lui       $v0, 0x8007
-/* 1923F4 80263B14 8C42419C */  lw        $v0, 0x419c($v0)
+/* 1923F0 80263B10 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* 1923F4 80263B14 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 1923F8 80263B18 9042007E */  lbu       $v0, 0x7e($v0)
 /* 1923FC 80263B1C 30420001 */  andi      $v0, $v0, 1
 /* 192400 80263B20 10400003 */  beqz      $v0, .L80263B30
@@ -12,17 +12,17 @@ glabel count_power_plus
 /* 19240C 80263B2C 0000102D */   daddu    $v0, $zero, $zero
 .L80263B30:
 /* 192410 80263B30 00E0302D */  daddu     $a2, $a3, $zero
-/* 192414 80263B34 3C0C8008 */  lui       $t4, 0x8008
-/* 192418 80263B38 258C78E0 */  addiu     $t4, $t4, 0x78e0
+/* 192414 80263B34 3C0C8008 */  lui       $t4, %hi(gItemTable)
+/* 192418 80263B38 258C78E0 */  addiu     $t4, $t4, %lo(gItemTable)
 /* 19241C 80263B3C 3C0B8009 */  lui       $t3, 0x8009
 /* 192420 80263B40 256BF060 */  addiu     $t3, $t3, -0xfa0
 /* 192424 80263B44 240A0007 */  addiu     $t2, $zero, 7
 /* 192428 80263B48 2409003B */  addiu     $t1, $zero, 0x3b
-/* 19242C 80263B4C 3C08800E */  lui       $t0, 0x800e
-/* 192430 80263B50 2508C070 */  addiu     $t0, $t0, -0x3f90
+/* 19242C 80263B4C 3C08800E */  lui       $t0, %hi(gBattleStatus)
+/* 192430 80263B50 2508C070 */  addiu     $t0, $t0, %lo(gBattleStatus)
 /* 192434 80263B54 30840080 */  andi      $a0, $a0, 0x80
-/* 192438 80263B58 3C058011 */  lui       $a1, 0x8011
-/* 19243C 80263B5C 24A5F290 */  addiu     $a1, $a1, -0xd70
+/* 192438 80263B58 3C058011 */  lui       $a1, %hi(gPlayerData)
+/* 19243C 80263B5C 24A5F290 */  addiu     $a1, $a1, %lo(gPlayerData)
 .L80263B60:
 /* 192440 80263B60 84A20208 */  lh        $v0, 0x208($a1)
 /* 192444 80263B64 00021140 */  sll       $v0, $v0, 5

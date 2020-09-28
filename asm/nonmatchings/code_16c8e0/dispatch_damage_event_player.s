@@ -5,8 +5,8 @@ glabel dispatch_damage_event_player
 /* 1A1A9C 802731BC 27BDFFD0 */  addiu     $sp, $sp, -0x30
 /* 1A1AA0 802731C0 00A0402D */  daddu     $t0, $a1, $zero
 /* 1A1AA4 802731C4 AFB30024 */  sw        $s3, 0x24($sp)
-/* 1A1AA8 802731C8 3C13800E */  lui       $s3, 0x800e
-/* 1A1AAC 802731CC 2673C070 */  addiu     $s3, $s3, -0x3f90
+/* 1A1AA8 802731C8 3C13800E */  lui       $s3, %hi(gBattleStatus)
+/* 1A1AAC 802731CC 2673C070 */  addiu     $s3, $s3, %lo(gBattleStatus)
 /* 1A1AB0 802731D0 AFBF0028 */  sw        $ra, 0x28($sp)
 /* 1A1AB4 802731D4 AFB20020 */  sw        $s2, 0x20($sp)
 /* 1A1AB8 802731D8 AFB1001C */  sw        $s1, 0x1c($sp)
@@ -16,8 +16,8 @@ glabel dispatch_damage_event_player
 /* 1A1AC8 802731E8 8E7000D8 */  lw        $s0, 0xd8($s3)
 /* 1A1ACC 802731EC 00043C03 */  sra       $a3, $a0, 0x10
 /* 1A1AD0 802731F0 960201FA */  lhu       $v0, 0x1fa($s0)
-/* 1A1AD4 802731F4 3C058011 */  lui       $a1, 0x8011
-/* 1A1AD8 802731F8 24A5F290 */  addiu     $a1, $a1, -0xd70
+/* 1A1AD4 802731F4 3C058011 */  lui       $a1, %hi(gPlayerData)
+/* 1A1AD8 802731F8 24A5F290 */  addiu     $a1, $a1, %lo(gPlayerData)
 /* 1A1ADC 802731FC 00471021 */  addu      $v0, $v0, $a3
 /* 1A1AE0 80273200 00021C00 */  sll       $v1, $v0, 0x10
 /* 1A1AE4 80273204 00033C03 */  sra       $a3, $v1, 0x10
@@ -108,8 +108,8 @@ glabel dispatch_damage_event_player
 /* 1A1C1C 8027333C 0C099C06 */  jal       func_80267018
 /* 1A1C20 80273340 24050001 */   addiu    $a1, $zero, 1
 .L80273344:
-/* 1A1C24 80273344 3C10800E */  lui       $s0, 0x800e
-/* 1A1C28 80273348 8E10C070 */  lw        $s0, -0x3f90($s0)
+/* 1A1C24 80273344 3C10800E */  lui       $s0, %hi(gBattleStatus)
+/* 1A1C28 80273348 8E10C070 */  lw        $s0, %lo(gBattleStatus)($s0)
 /* 1A1C2C 8027334C 0240202D */  daddu     $a0, $s2, $zero
 /* 1A1C30 80273350 32100240 */  andi      $s0, $s0, 0x240
 /* 1A1C34 80273354 0C09C596 */  jal       dispatch_event_player

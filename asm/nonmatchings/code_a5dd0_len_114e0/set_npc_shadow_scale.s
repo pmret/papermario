@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel set_npc_shadow_scale
-/* A9000 80112900 3C028007 */  lui       $v0, 0x8007
-/* A9004 80112904 8C42419C */  lw        $v0, 0x419c($v0)
+/* A9000 80112900 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* A9004 80112904 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* A9008 80112908 44851000 */  mtc1      $a1, $f2
 /* A900C 8011290C 80420070 */  lb        $v0, 0x70($v0)
 /* A9010 80112910 44862000 */  mtc1      $a2, $f4

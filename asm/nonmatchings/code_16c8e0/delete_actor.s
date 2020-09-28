@@ -104,8 +104,8 @@ glabel delete_actor
 /* 16F5F8 80240D18 8C42000C */  lw        $v0, 0xc($v0)
 /* 16F5FC 80240D1C AC400024 */  sw        $zero, 0x24($v0)
 .L80240D20:
-/* 16F600 80240D20 3C03800E */  lui       $v1, 0x800e
-/* 16F604 80240D24 2463C070 */  addiu     $v1, $v1, -0x3f90
+/* 16F600 80240D20 3C03800E */  lui       $v1, %hi(gBattleStatus)
+/* 16F604 80240D24 2463C070 */  addiu     $v1, $v1, %lo(gBattleStatus)
 .L80240D28:
 /* 16F608 80240D28 8C6200E0 */  lw        $v0, 0xe0($v1)
 /* 16F60C 80240D2C 14510003 */  bne       $v0, $s1, .L80240D3C

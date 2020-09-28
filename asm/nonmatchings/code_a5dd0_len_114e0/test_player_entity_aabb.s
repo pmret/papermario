@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel test_player_entity_aabb
-/* A71AC 80110AAC 3C058011 */  lui       $a1, 0x8011
-/* A71B0 80110AB0 24A5EFC8 */  addiu     $a1, $a1, -0x1038
+/* A71AC 80110AAC 3C058011 */  lui       $a1, %hi(gPlayerStatus)
+/* A71B0 80110AB0 24A5EFC8 */  addiu     $a1, $a1, %lo(gPlayerStatus)
 /* A71B4 80110AB4 84A300B0 */  lh        $v1, 0xb0($a1)
 /* A71B8 80110AB8 C4A0002C */  lwc1      $f0, 0x2c($a1)
 /* A71BC 80110ABC 44831000 */  mtc1      $v1, $f2

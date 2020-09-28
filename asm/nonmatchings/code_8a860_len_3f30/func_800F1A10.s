@@ -187,8 +187,8 @@ glabel func_800F1A10
 /* 8B184 800F1CD4 24020005 */  addiu     $v0, $zero, 5
 /* 8B188 800F1CD8 14620010 */  bne       $v1, $v0, .L800F1D1C
 /* 8B18C 800F1CDC 00000000 */   nop      
-/* 8B190 800F1CE0 3C048011 */  lui       $a0, 0x8011
-/* 8B194 800F1CE4 24848558 */  addiu     $a0, $a0, -0x7aa8
+/* 8B190 800F1CE0 3C048011 */  lui       $a0, %hi(D_80108558)
+/* 8B194 800F1CE4 24848558 */  addiu     $a0, $a0, %lo(D_80108558)
 /* 8B198 800F1CE8 0C050529 */  jal       create_icon
 /* 8B19C 800F1CEC 00000000 */   nop      
 /* 8B1A0 800F1CF0 3C018011 */  lui       $at, 0x8011
@@ -209,8 +209,8 @@ glabel func_800F1A10
 /* 8B1D8 800F1D28 2C420002 */  sltiu     $v0, $v0, 2
 /* 8B1DC 800F1D2C 10400010 */  beqz      $v0, .L800F1D70
 /* 8B1E0 800F1D30 00000000 */   nop      
-/* 8B1E4 800F1D34 3C048011 */  lui       $a0, 0x8011
-/* 8B1E8 800F1D38 24849270 */  addiu     $a0, $a0, -0x6d90
+/* 8B1E4 800F1D34 3C048011 */  lui       $a0, %hi(D_80109270)
+/* 8B1E8 800F1D38 24849270 */  addiu     $a0, $a0, %lo(D_80109270)
 /* 8B1EC 800F1D3C 0C050529 */  jal       create_icon
 /* 8B1F0 800F1D40 00000000 */   nop      
 /* 8B1F4 800F1D44 3C018011 */  lui       $at, 0x8011
@@ -884,15 +884,15 @@ glabel func_800F1A10
 /* 8BC0C 800F275C 00400008 */  jr        $v0
 /* 8BC10 800F2760 00000000 */   nop      
 /* 8BC14 800F2764 2404000E */  addiu     $a0, $zero, 0xe
-/* 8BC18 800F2768 3C108014 */  lui       $s0, 0x8014
-/* 8BC1C 800F276C 26107474 */  addiu     $s0, $s0, 0x7474
+/* 8BC18 800F2768 3C108014 */  lui       $s0, %hi(D_80147474)
+/* 8BC1C 800F276C 26107474 */  addiu     $s0, $s0, %lo(D_80147474)
 /* 8BC20 800F2770 0C051F9F */  jal       func_80147E7C
 /* 8BC24 800F2774 0200282D */   daddu    $a1, $s0, $zero
 /* 8BC28 800F2778 0803C9E6 */  j         .L800F2798
 /* 8BC2C 800F277C 24040001 */   addiu    $a0, $zero, 1
 /* 8BC30 800F2780 2404000E */  addiu     $a0, $zero, 0xe
-/* 8BC34 800F2784 3C108014 */  lui       $s0, 0x8014
-/* 8BC38 800F2788 26107474 */  addiu     $s0, $s0, 0x7474
+/* 8BC34 800F2784 3C108014 */  lui       $s0, %hi(D_80147474)
+/* 8BC38 800F2788 26107474 */  addiu     $s0, $s0, %lo(D_80147474)
 /* 8BC3C 800F278C 0C051F9F */  jal       func_80147E7C
 /* 8BC40 800F2790 0200282D */   daddu    $a1, $s0, $zero
 /* 8BC44 800F2794 24040002 */  addiu     $a0, $zero, 2
@@ -904,8 +904,8 @@ glabel func_800F1A10
 /* 8BC58 800F27A8 0200282D */   daddu    $a1, $s0, $zero
 /* 8BC5C 800F27AC 0803C9F4 */  j         .L800F27D0
 /* 8BC60 800F27B0 24040015 */   addiu    $a0, $zero, 0x15
-/* 8BC64 800F27B4 3C058014 */  lui       $a1, 0x8014
-/* 8BC68 800F27B8 24A57474 */  addiu     $a1, $a1, 0x7474
+/* 8BC64 800F27B4 3C058014 */  lui       $a1, %hi(D_80147474)
+/* 8BC68 800F27B8 24A57474 */  addiu     $a1, $a1, %lo(D_80147474)
 /* 8BC6C 800F27BC 0C051F9F */  jal       func_80147E7C
 /* 8BC70 800F27C0 2404000E */   addiu    $a0, $zero, 0xe
 /* 8BC74 800F27C4 0C05272D */  jal       play_sound
@@ -923,8 +923,8 @@ glabel func_800F1A10
 /* 8BC98 800F27E8 24020003 */  addiu     $v0, $zero, 3
 /* 8BC9C 800F27EC 14620008 */  bne       $v1, $v0, .L800F2810
 /* 8BCA0 800F27F0 24040010 */   addiu    $a0, $zero, 0x10
-/* 8BCA4 800F27F4 3C108014 */  lui       $s0, 0x8014
-/* 8BCA8 800F27F8 26107474 */  addiu     $s0, $s0, 0x7474
+/* 8BCA4 800F27F4 3C108014 */  lui       $s0, %hi(D_80147474)
+/* 8BCA8 800F27F8 26107474 */  addiu     $s0, $s0, %lo(D_80147474)
 /* 8BCAC 800F27FC 0C051F9F */  jal       func_80147E7C
 /* 8BCB0 800F2800 0200282D */   daddu    $a1, $s0, $zero
 /* 8BCB4 800F2804 24040014 */  addiu     $a0, $zero, 0x14
@@ -936,8 +936,8 @@ glabel func_800F1A10
 /* 8BCC8 800F2818 24020004 */  addiu     $v0, $zero, 4
 /* 8BCCC 800F281C 14620005 */  bne       $v1, $v0, .L800F2834
 /* 8BCD0 800F2820 00000000 */   nop      
-/* 8BCD4 800F2824 3C058014 */  lui       $a1, 0x8014
-/* 8BCD8 800F2828 24A57474 */  addiu     $a1, $a1, 0x7474
+/* 8BCD4 800F2824 3C058014 */  lui       $a1, %hi(D_80147474)
+/* 8BCD8 800F2828 24A57474 */  addiu     $a1, $a1, %lo(D_80147474)
 /* 8BCDC 800F282C 0C051F9F */  jal       func_80147E7C
 /* 8BCE0 800F2830 24040012 */   addiu    $a0, $zero, 0x12
 .L800F2834:
@@ -946,8 +946,8 @@ glabel func_800F1A10
 /* 8BCEC 800F283C 24020005 */  addiu     $v0, $zero, 5
 /* 8BCF0 800F2840 14620382 */  bne       $v1, $v0, .L800F364C
 /* 8BCF4 800F2844 24020001 */   addiu    $v0, $zero, 1
-/* 8BCF8 800F2848 3C058014 */  lui       $a1, 0x8014
-/* 8BCFC 800F284C 24A57474 */  addiu     $a1, $a1, 0x7474
+/* 8BCF8 800F2848 3C058014 */  lui       $a1, %hi(D_80147474)
+/* 8BCFC 800F284C 24A57474 */  addiu     $a1, $a1, %lo(D_80147474)
 /* 8BD00 800F2850 0C051F9F */  jal       func_80147E7C
 /* 8BD04 800F2854 24040010 */   addiu    $a0, $zero, 0x10
 /* 8BD08 800F2858 0803CD93 */  j         .L800F364C
@@ -963,8 +963,8 @@ glabel func_800F1A10
 /* 8BD2C 800F287C 3C060001 */  lui       $a2, 1
 /* 8BD30 800F2880 3C058011 */  lui       $a1, 0x8011
 /* 8BD34 800F2884 24A5D648 */  addiu     $a1, $a1, -0x29b8
-/* 8BD38 800F2888 3C048007 */  lui       $a0, 0x8007
-/* 8BD3C 800F288C 8C84419C */  lw        $a0, 0x419c($a0)
+/* 8BD38 800F2888 3C048007 */  lui       $a0, %hi(gGameStatusPtr)
+/* 8BD3C 800F288C 8C84419C */  lw        $a0, %lo(gGameStatusPtr)($a0)
 /* 8BD40 800F2890 8CA30000 */  lw        $v1, ($a1)
 /* 8BD44 800F2894 8C820020 */  lw        $v0, 0x20($a0)
 /* 8BD48 800F2898 34C62000 */  ori       $a2, $a2, 0x2000
@@ -982,8 +982,8 @@ glabel func_800F1A10
 .L800F28C8:
 /* 8BD78 800F28C8 ACA20000 */  sw        $v0, ($a1)
 .L800F28CC:
-/* 8BD7C 800F28CC 3C058007 */  lui       $a1, 0x8007
-/* 8BD80 800F28D0 8CA5419C */  lw        $a1, 0x419c($a1)
+/* 8BD7C 800F28CC 3C058007 */  lui       $a1, %hi(gGameStatusPtr)
+/* 8BD80 800F28D0 8CA5419C */  lw        $a1, %lo(gGameStatusPtr)($a1)
 /* 8BD84 800F28D4 3C060002 */  lui       $a2, 2
 /* 8BD88 800F28D8 8CA20020 */  lw        $v0, 0x20($a1)
 /* 8BD8C 800F28DC 34C60010 */  ori       $a2, $a2, 0x10
@@ -1101,8 +1101,8 @@ glabel func_800F1A10
 /* 8BF24 800F2A74 28C20004 */  slti      $v0, $a2, 4
 /* 8BF28 800F2A78 1440FFE2 */  bnez      $v0, .L800F2A04
 /* 8BF2C 800F2A7C 00000000 */   nop      
-/* 8BF30 800F2A80 3C028007 */  lui       $v0, 0x8007
-/* 8BF34 800F2A84 8C42419C */  lw        $v0, 0x419c($v0)
+/* 8BF30 800F2A80 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* 8BF34 800F2A84 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 8BF38 800F2A88 8C420010 */  lw        $v0, 0x10($v0)
 /* 8BF3C 800F2A8C 30428000 */  andi      $v0, $v0, 0x8000
 /* 8BF40 800F2A90 1040003F */  beqz      $v0, .L800F2B90
@@ -1204,8 +1204,8 @@ glabel func_800F1A10
 .L800F2BF4:
 /* 8C0A4 800F2BF4 0000182D */  daddu     $v1, $zero, $zero
 .L800F2BF8:
-/* 8C0A8 800F2BF8 3C028007 */  lui       $v0, 0x8007
-/* 8C0AC 800F2BFC 8C42419C */  lw        $v0, 0x419c($v0)
+/* 8C0A8 800F2BF8 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* 8C0AC 800F2BFC 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 8C0B0 800F2C00 8C420010 */  lw        $v0, 0x10($v0)
 /* 8C0B4 800F2C04 00431024 */  and       $v0, $v0, $v1
 /* 8C0B8 800F2C08 10400013 */  beqz      $v0, .L800F2C58
@@ -1249,8 +1249,8 @@ glabel func_800F1A10
 /* 8C13C 800F2C8C 8042D68E */  lb        $v0, -0x2972($v0)
 /* 8C140 800F2C90 10400270 */  beqz      $v0, .L800F3654
 /* 8C144 800F2C94 00000000 */   nop      
-/* 8C148 800F2C98 3C028007 */  lui       $v0, 0x8007
-/* 8C14C 800F2C9C 8C42419C */  lw        $v0, 0x419c($v0)
+/* 8C148 800F2C98 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* 8C14C 800F2C9C 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 8C150 800F2CA0 8C420010 */  lw        $v0, 0x10($v0)
 /* 8C154 800F2CA4 00431024 */  and       $v0, $v0, $v1
 /* 8C158 800F2CA8 1040026A */  beqz      $v0, .L800F3654
@@ -1536,8 +1536,8 @@ glabel func_800F1A10
 /* 8C590 800F30E0 AC23D640 */  sw        $v1, -0x29c0($at)
 /* 8C594 800F30E4 0803CD99 */  j         .L800F3664
 /* 8C598 800F30E8 0000102D */   daddu    $v0, $zero, $zero
-/* 8C59C 800F30EC 3C028007 */  lui       $v0, 0x8007
-/* 8C5A0 800F30F0 8C42419C */  lw        $v0, 0x419c($v0)
+/* 8C59C 800F30EC 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* 8C5A0 800F30F0 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 8C5A4 800F30F4 8C420010 */  lw        $v0, 0x10($v0)
 /* 8C5A8 800F30F8 3042C001 */  andi      $v0, $v0, 0xc001
 /* 8C5AC 800F30FC 10400003 */  beqz      $v0, .L800F310C

@@ -4,10 +4,10 @@
 glabel step_intro
 /* 11C54 80036854 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* 11C58 80036858 AFB10014 */  sw        $s1, 0x14($sp)
-/* 11C5C 8003685C 3C118011 */  lui       $s1, 0x8011
-/* 11C60 80036860 2631F290 */  addiu     $s1, $s1, -0xd70
-/* 11C64 80036864 3C028007 */  lui       $v0, 0x8007
-/* 11C68 80036868 8C42419C */  lw        $v0, 0x419c($v0)
+/* 11C5C 8003685C 3C118011 */  lui       $s1, %hi(gPlayerData)
+/* 11C60 80036860 2631F290 */  addiu     $s1, $s1, %lo(gPlayerData)
+/* 11C64 80036864 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* 11C68 80036868 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 11C6C 8003686C 2404FFFF */  addiu     $a0, $zero, -1
 /* 11C70 80036870 AFBF0018 */  sw        $ra, 0x18($sp)
 /* 11C74 80036874 AFB00010 */  sw        $s0, 0x10($sp)
@@ -29,8 +29,8 @@ glabel step_intro
 /* 11CB0 800368B0 24020001 */  addiu     $v0, $zero, 1
 /* 11CB4 800368B4 14620010 */  bne       $v1, $v0, .L800368F8
 /* 11CB8 800368B8 24020002 */   addiu    $v0, $zero, 2
-/* 11CBC 800368BC 3C048007 */  lui       $a0, 0x8007
-/* 11CC0 800368C0 8C84419C */  lw        $a0, 0x419c($a0)
+/* 11CBC 800368BC 3C048007 */  lui       $a0, %hi(gGameStatusPtr)
+/* 11CC0 800368C0 8C84419C */  lw        $a0, %lo(gGameStatusPtr)($a0)
 /* 11CC4 800368C4 908300AC */  lbu       $v1, 0xac($a0)
 /* 11CC8 800368C8 2C620002 */  sltiu     $v0, $v1, 2
 /* 11CCC 800368CC 14400018 */  bnez      $v0, .L80036930
@@ -48,8 +48,8 @@ glabel step_intro
 .L800368F8:
 /* 11CF8 800368F8 14620011 */  bne       $v1, $v0, .L80036940
 /* 11CFC 800368FC 00000000 */   nop      
-/* 11D00 80036900 3C048007 */  lui       $a0, 0x8007
-/* 11D04 80036904 8C84419C */  lw        $a0, 0x419c($a0)
+/* 11D00 80036900 3C048007 */  lui       $a0, %hi(gGameStatusPtr)
+/* 11D04 80036904 8C84419C */  lw        $a0, %lo(gGameStatusPtr)($a0)
 /* 11D08 80036908 908300AC */  lbu       $v1, 0xac($a0)
 /* 11D0C 8003690C 2C620002 */  sltiu     $v0, $v1, 2
 /* 11D10 80036910 14400005 */  bnez      $v0, .L80036928
@@ -67,8 +67,8 @@ glabel step_intro
 /* 11D38 80036938 0800DB72 */  j         .L80036DC8
 /* 11D3C 8003693C 00000000 */   nop      
 .L80036940:
-/* 11D40 80036940 3C028007 */  lui       $v0, 0x8007
-/* 11D44 80036944 8C42419C */  lw        $v0, 0x419c($v0)
+/* 11D40 80036940 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* 11D44 80036944 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 11D48 80036948 804300AC */  lb        $v1, 0xac($v0)
 /* 11D4C 8003694C 2C620016 */  sltiu     $v0, $v1, 0x16
 /* 11D50 80036950 10400109 */  beqz      $v0, .L80036D78
@@ -82,8 +82,8 @@ glabel step_intro
 /* 11D70 80036970 00000000 */   nop      
 /* 11D74 80036974 0C00B500 */  jal       update_cameras
 /* 11D78 80036978 00000000 */   nop      
-/* 11D7C 8003697C 3C108007 */  lui       $s0, 0x8007
-/* 11D80 80036980 2610419C */  addiu     $s0, $s0, 0x419c
+/* 11D7C 8003697C 3C108007 */  lui       $s0, %hi(gGameStatusPtr)
+/* 11D80 80036980 2610419C */  addiu     $s0, $s0, %lo(gGameStatusPtr)
 /* 11D84 80036984 8E060000 */  lw        $a2, ($s0)
 /* 11D88 80036988 80C300A8 */  lb        $v1, 0xa8($a2)
 /* 11D8C 8003698C 2402FFFF */  addiu     $v0, $zero, -1
@@ -124,8 +124,8 @@ glabel step_intro
 /* 11E14 80036A14 A0C200AC */   sb       $v0, 0xac($a2)
 /* 11E18 80036A18 0800DB5E */  j         .L80036D78
 /* 11E1C 80036A1C 00000000 */   nop      
-/* 11E20 80036A20 3C04800A */  lui       $a0, 0x800a
-/* 11E24 80036A24 2484A650 */  addiu     $a0, $a0, -0x59b0
+/* 11E20 80036A20 3C04800A */  lui       $a0, %hi(D_8009A650)
+/* 11E24 80036A24 2484A650 */  addiu     $a0, $a0, %lo(D_8009A650)
 /* 11E28 80036A28 8C820000 */  lw        $v0, ($a0)
 /* 11E2C 80036A2C 24030004 */  addiu     $v1, $zero, 4
 /* 11E30 80036A30 3C01800A */  lui       $at, 0x800a
@@ -145,22 +145,22 @@ glabel step_intro
 /* 11E68 80036A68 2442FFFF */  addiu     $v0, $v0, -1
 /* 11E6C 80036A6C 1C4000C2 */  bgtz      $v0, .L80036D78
 /* 11E70 80036A70 AC620000 */   sw       $v0, ($v1)
-/* 11E74 80036A74 3C04800A */  lui       $a0, 0x800a
-/* 11E78 80036A78 2484A650 */  addiu     $a0, $a0, -0x59b0
+/* 11E74 80036A74 3C04800A */  lui       $a0, %hi(D_8009A650)
+/* 11E78 80036A78 2484A650 */  addiu     $a0, $a0, %lo(D_8009A650)
 /* 11E7C 80036A7C 8C820000 */  lw        $v0, ($a0)
 /* 11E80 80036A80 2403FFF7 */  addiu     $v1, $zero, -9
 /* 11E84 80036A84 00431024 */  and       $v0, $v0, $v1
 /* 11E88 80036A88 AC820000 */  sw        $v0, ($a0)
 .L80036A8C:
-/* 11E8C 80036A8C 3C038007 */  lui       $v1, 0x8007
-/* 11E90 80036A90 8C63419C */  lw        $v1, 0x419c($v1)
+/* 11E8C 80036A8C 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
+/* 11E90 80036A90 8C63419C */  lw        $v1, %lo(gGameStatusPtr)($v1)
 /* 11E94 80036A94 24020002 */  addiu     $v0, $zero, 2
 /* 11E98 80036A98 0800DB5E */  j         .L80036D78
 /* 11E9C 80036A9C A06200AC */   sb       $v0, 0xac($v1)
 /* 11EA0 80036AA0 0C00AFC1 */  jal       set_curtain_draw_callback
 /* 11EA4 80036AA4 0000202D */   daddu    $a0, $zero, $zero
-/* 11EA8 80036AA8 3C038007 */  lui       $v1, 0x8007
-/* 11EAC 80036AAC 2463419C */  addiu     $v1, $v1, 0x419c
+/* 11EA8 80036AA8 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
+/* 11EAC 80036AAC 2463419C */  addiu     $v1, $v1, %lo(gGameStatusPtr)
 /* 11EB0 80036AB0 8C620000 */  lw        $v0, ($v1)
 /* 11EB4 80036AB4 A0400070 */  sb        $zero, 0x70($v0)
 /* 11EB8 80036AB8 8C620000 */  lw        $v0, ($v1)
@@ -249,8 +249,8 @@ glabel step_intro
 /* 11FFC 80036BFC 2484FFFF */  addiu     $a0, $a0, -1
 /* 12000 80036C00 0481FFFD */  bgez      $a0, .L80036BF8
 /* 12004 80036C04 2463FFF8 */   addiu    $v1, $v1, -8
-/* 12008 80036C08 3C108007 */  lui       $s0, 0x8007
-/* 1200C 80036C0C 2610419C */  addiu     $s0, $s0, 0x419c
+/* 12008 80036C08 3C108007 */  lui       $s0, %hi(gGameStatusPtr)
+/* 1200C 80036C0C 2610419C */  addiu     $s0, $s0, %lo(gGameStatusPtr)
 /* 12010 80036C10 8E020000 */  lw        $v0, ($s0)
 /* 12014 80036C14 A2200012 */  sb        $zero, 0x12($s1)
 /* 12018 80036C18 84440086 */  lh        $a0, 0x86($v0)
@@ -273,13 +273,13 @@ glabel step_intro
 /* 1205C 80036C5C AC820000 */  sw        $v0, ($a0)
 /* 12060 80036C60 240200FF */  addiu     $v0, $zero, 0xff
 .L80036C64:
-/* 12064 80036C64 3C04800A */  lui       $a0, 0x800a
-/* 12068 80036C68 2484A650 */  addiu     $a0, $a0, -0x59b0
+/* 12064 80036C64 3C04800A */  lui       $a0, %hi(D_8009A650)
+/* 12068 80036C68 2484A650 */  addiu     $a0, $a0, %lo(D_8009A650)
 /* 1206C 80036C6C 2405FFF7 */  addiu     $a1, $zero, -9
 /* 12070 80036C70 3C03800A */  lui       $v1, 0x800a
 /* 12074 80036C74 94630958 */  lhu       $v1, 0x958($v1)
-/* 12078 80036C78 3C06800B */  lui       $a2, 0x800b
-/* 1207C 80036C7C 24C61D80 */  addiu     $a2, $a2, 0x1d80
+/* 12078 80036C78 3C06800B */  lui       $a2, %hi(gCameras)
+/* 1207C 80036C7C 24C61D80 */  addiu     $a2, $a2, %lo(gCameras)
 /* 12080 80036C80 00431023 */  subu      $v0, $v0, $v1
 /* 12084 80036C84 3C01800A */  lui       $at, 0x800a
 /* 12088 80036C88 A4220954 */  sh        $v0, 0x954($at)
@@ -301,8 +301,8 @@ glabel step_intro
 /* 120C8 80036CC8 00000000 */   nop      
 /* 120CC 80036CCC 0C00B500 */  jal       update_cameras
 /* 120D0 80036CD0 00000000 */   nop      
-/* 120D4 80036CD4 3C108007 */  lui       $s0, 0x8007
-/* 120D8 80036CD8 2610419C */  addiu     $s0, $s0, 0x419c
+/* 120D4 80036CD4 3C108007 */  lui       $s0, %hi(gGameStatusPtr)
+/* 120D8 80036CD8 2610419C */  addiu     $s0, $s0, %lo(gGameStatusPtr)
 /* 120DC 80036CDC 8E020000 */  lw        $v0, ($s0)
 /* 120E0 80036CE0 0C0B1059 */  jal       does_script_exist
 /* 120E4 80036CE4 8C44006C */   lw       $a0, 0x6c($v0)

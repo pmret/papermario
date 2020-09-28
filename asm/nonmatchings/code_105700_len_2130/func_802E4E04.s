@@ -12,8 +12,8 @@ glabel func_802E4E04
 /* 1066A0 802E4E20 F7B40028 */  sdc1      $f20, 0x28($sp)
 /* 1066A4 802E4E24 8E300040 */  lw        $s0, 0x40($s1)
 /* 1066A8 802E4E28 92030001 */  lbu       $v1, 1($s0)
-/* 1066AC 802E4E2C 3C128011 */  lui       $s2, 0x8011
-/* 1066B0 802E4E30 2652EFC8 */  addiu     $s2, $s2, -0x1038
+/* 1066AC 802E4E2C 3C128011 */  lui       $s2, %hi(gPlayerStatus)
+/* 1066B0 802E4E30 2652EFC8 */  addiu     $s2, $s2, %lo(gPlayerStatus)
 /* 1066B4 802E4E34 2C620006 */  sltiu     $v0, $v1, 6
 /* 1066B8 802E4E38 1040012B */  beqz      $v0, .L802E52E8
 /* 1066BC 802E4E3C 00031080 */   sll      $v0, $v1, 2
@@ -317,8 +317,8 @@ glabel func_802E4E04
 /* 106B40 802E52C0 0C009C22 */  jal       func_80027088
 /* 106B44 802E52C4 0000202D */   daddu    $a0, $zero, $zero
 /* 106B48 802E52C8 0220202D */  daddu     $a0, $s1, $zero
-/* 106B4C 802E52CC 3C05800A */  lui       $a1, 0x800a
-/* 106B50 802E52D0 24A5A650 */  addiu     $a1, $a1, -0x59b0
+/* 106B4C 802E52CC 3C05800A */  lui       $a1, %hi(D_8009A650)
+/* 106B50 802E52D0 24A5A650 */  addiu     $a1, $a1, %lo(D_8009A650)
 /* 106B54 802E52D4 8CA20000 */  lw        $v0, ($a1)
 /* 106B58 802E52D8 2403FFBF */  addiu     $v1, $zero, -0x41
 /* 106B5C 802E52DC 00431024 */  and       $v0, $v0, $v1

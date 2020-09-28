@@ -4,8 +4,8 @@
 glabel update_locomotion_state
 /* 7F418 800E5F68 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 7F41C 800E5F6C AFB00010 */  sw        $s0, 0x10($sp)
-/* 7F420 800E5F70 3C108011 */  lui       $s0, 0x8011
-/* 7F424 800E5F74 2610EFC8 */  addiu     $s0, $s0, -0x1038
+/* 7F420 800E5F70 3C108011 */  lui       $s0, %hi(gPlayerStatus)
+/* 7F424 800E5F74 2610EFC8 */  addiu     $s0, $s0, %lo(gPlayerStatus)
 /* 7F428 800E5F78 AFBF0014 */  sw        $ra, 0x14($sp)
 /* 7F42C 800E5F7C 0C03A752 */  jal       is_ability_active
 /* 7F430 800E5F80 2404000B */   addiu    $a0, $zero, 0xb

@@ -4,8 +4,8 @@
 glabel load_partner_actor
 /* 193454 80264B74 27BDFFB0 */  addiu     $sp, $sp, -0x50
 /* 193458 80264B78 AFB30024 */  sw        $s3, 0x24($sp)
-/* 19345C 80264B7C 3C138011 */  lui       $s3, 0x8011
-/* 193460 80264B80 2673F290 */  addiu     $s3, $s3, -0xd70
+/* 19345C 80264B7C 3C138011 */  lui       $s3, %hi(gPlayerData)
+/* 193460 80264B80 2673F290 */  addiu     $s3, $s3, %lo(gPlayerData)
 /* 193464 80264B84 AFBF0034 */  sw        $ra, 0x34($sp)
 /* 193468 80264B88 AFB60030 */  sw        $s6, 0x30($sp)
 /* 19346C 80264B8C AFB5002C */  sw        $s5, 0x2c($sp)
@@ -17,8 +17,8 @@ glabel load_partner_actor
 /* 193484 80264BA4 F7B60040 */  sdc1      $f22, 0x40($sp)
 /* 193488 80264BA8 F7B40038 */  sdc1      $f20, 0x38($sp)
 /* 19348C 80264BAC 82640012 */  lb        $a0, 0x12($s3)
-/* 193490 80264BB0 3C12800E */  lui       $s2, 0x800e
-/* 193494 80264BB4 2652C070 */  addiu     $s2, $s2, -0x3f90
+/* 193490 80264BB0 3C12800E */  lui       $s2, %hi(gBattleStatus)
+/* 193494 80264BB4 2652C070 */  addiu     $s2, $s2, %lo(gBattleStatus)
 /* 193498 80264BB8 108001ED */  beqz      $a0, .L80265370
 /* 19349C 80264BBC AE4000DC */   sw       $zero, 0xdc($s2)
 /* 1934A0 80264BC0 3C038028 */  lui       $v1, 0x8028
@@ -39,14 +39,14 @@ glabel load_partner_actor
 /* 1934D4 80264BF4 8E050008 */  lw        $a1, 8($s0)
 /* 1934D8 80264BF8 0C017D24 */  jal       nuPiReadRom
 /* 1934DC 80264BFC 00C43023 */   subu     $a2, $a2, $a0
-/* 1934E0 80264C00 3C04800E */  lui       $a0, 0x800e
-/* 1934E4 80264C04 2484C070 */  addiu     $a0, $a0, -0x3f90
+/* 1934E0 80264C00 3C04800E */  lui       $a0, %hi(gBattleStatus)
+/* 1934E4 80264C04 2484C070 */  addiu     $a0, $a0, %lo(gBattleStatus)
 /* 1934E8 80264C08 8C820004 */  lw        $v0, 4($a0)
 /* 1934EC 80264C0C 30420040 */  andi      $v0, $v0, 0x40
 /* 1934F0 80264C10 14400007 */  bnez      $v0, .L80264C30
 /* 1934F4 80264C14 00000000 */   nop      
-/* 1934F8 80264C18 3C028007 */  lui       $v0, 0x8007
-/* 1934FC 80264C1C 8C42419C */  lw        $v0, 0x419c($v0)
+/* 1934F8 80264C18 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* 1934FC 80264C1C 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 193500 80264C20 904200AA */  lbu       $v0, 0xaa($v0)
 /* 193504 80264C24 30420002 */  andi      $v0, $v0, 2
 /* 193508 80264C28 1040000B */  beqz      $v0, .L80264C58

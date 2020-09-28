@@ -13,8 +13,8 @@ glabel func_8005DB00
 /* 38F20 8005DB20 84440008 */  lh        $a0, 8($v0)
 /* 38F24 8005DB24 0C00EABB */  jal       get_npc_unsafe
 /* 38F28 8005DB28 00A0802D */   daddu    $s0, $a1, $zero
-/* 38F2C 8005DB2C 3C138011 */  lui       $s3, 0x8011
-/* 38F30 8005DB30 2673EFC8 */  addiu     $s3, $s3, -0x1038
+/* 38F2C 8005DB2C 3C138011 */  lui       $s3, %hi(gPlayerStatus)
+/* 38F30 8005DB30 2673EFC8 */  addiu     $s3, $s3, %lo(gPlayerStatus)
 /* 38F34 8005DB34 12000002 */  beqz      $s0, .L8005DB40
 /* 38F38 8005DB38 0040882D */   daddu    $s1, $v0, $zero
 /* 38F3C 8005DB3C AE400070 */  sw        $zero, 0x70($s2)
@@ -56,8 +56,8 @@ glabel func_8005DB00
 /* 38FC4 8005DBC4 0801774D */  j         .L8005DD34
 /* 38FC8 8005DBC8 AE420070 */   sw       $v0, 0x70($s2)
 .L8005DBCC:
-/* 38FCC 8005DBCC 3C028011 */  lui       $v0, 0x8011
-/* 38FD0 8005DBD0 2442EBB0 */  addiu     $v0, $v0, -0x1450
+/* 38FCC 8005DBCC 3C028011 */  lui       $v0, %hi(D_8010EBB0)
+/* 38FD0 8005DBD0 2442EBB0 */  addiu     $v0, $v0, %lo(D_8010EBB0)
 /* 38FD4 8005DBD4 80430003 */  lb        $v1, 3($v0)
 /* 38FD8 8005DBD8 24020009 */  addiu     $v0, $zero, 9
 /* 38FDC 8005DBDC 10620056 */  beq       $v1, $v0, .L8005DD38

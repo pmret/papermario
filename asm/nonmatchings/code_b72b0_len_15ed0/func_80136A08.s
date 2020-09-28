@@ -3,8 +3,8 @@
 
 glabel func_80136A08
 /* CD108 80136A08 27BDFFE0 */  addiu     $sp, $sp, -0x20
-/* CD10C 80136A0C 3C038008 */  lui       $v1, 0x8008
-/* CD110 80136A10 246378E0 */  addiu     $v1, $v1, 0x78e0
+/* CD10C 80136A0C 3C038008 */  lui       $v1, %hi(gItemTable)
+/* CD110 80136A10 246378E0 */  addiu     $v1, $v1, %lo(gItemTable)
 /* CD114 80136A14 AFBF0018 */  sw        $ra, 0x18($sp)
 /* CD118 80136A18 84820018 */  lh        $v0, 0x18($a0)
 /* CD11C 80136A1C 8084001A */  lb        $a0, 0x1a($a0)

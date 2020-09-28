@@ -151,8 +151,8 @@ glabel EndActorSpeech
 /* 181DD8 802534F8 0C03A6CC */  jal       decrement_status_menu_disabled
 /* 181DDC 802534FC 00000000 */   nop      
 /* 181DE0 80253500 24020001 */  addiu     $v0, $zero, 1
-/* 181DE4 80253504 3C03800A */  lui       $v1, 0x800a
-/* 181DE8 80253508 2463A650 */  addiu     $v1, $v1, -0x59b0
+/* 181DE4 80253504 3C03800A */  lui       $v1, %hi(D_8009A650)
+/* 181DE8 80253508 2463A650 */  addiu     $v1, $v1, %lo(D_8009A650)
 /* 181DEC 8025350C 8C640000 */  lw        $a0, ($v1)
 /* 181DF0 80253510 2405FFEF */  addiu     $a1, $zero, -0x11
 /* 181DF4 80253514 00852024 */  and       $a0, $a0, $a1

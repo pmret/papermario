@@ -10,8 +10,8 @@ glabel func_802E8858
 /* 10A0EC 802E886C 30420001 */  andi      $v0, $v0, 1
 /* 10A0F0 802E8870 1040000C */  beqz      $v0, .L802E88A4
 /* 10A0F4 802E8874 0000202D */   daddu    $a0, $zero, $zero
-/* 10A0F8 802E8878 3C028011 */  lui       $v0, 0x8011
-/* 10A0FC 802E887C 2442EFC8 */  addiu     $v0, $v0, -0x1038
+/* 10A0F8 802E8878 3C028011 */  lui       $v0, %hi(gPlayerStatus)
+/* 10A0FC 802E887C 2442EFC8 */  addiu     $v0, $v0, %lo(gPlayerStatus)
 /* 10A100 802E8880 804300B4 */  lb        $v1, 0xb4($v0)
 /* 10A104 802E8884 2402000E */  addiu     $v0, $zero, 0xe
 /* 10A108 802E8888 10620003 */  beq       $v1, $v0, .L802E8898

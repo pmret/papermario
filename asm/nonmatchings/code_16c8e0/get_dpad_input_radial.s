@@ -6,8 +6,8 @@ glabel get_dpad_input_radial
 /* 16C8E4 8023E004 AFB00010 */  sw        $s0, 0x10($sp)
 /* 16C8E8 8023E008 0080802D */  daddu     $s0, $a0, $zero
 /* 16C8EC 8023E00C AFB10014 */  sw        $s1, 0x14($sp)
-/* 16C8F0 8023E010 3C02800E */  lui       $v0, 0x800e
-/* 16C8F4 8023E014 2442C070 */  addiu     $v0, $v0, -0x3f90
+/* 16C8F0 8023E010 3C02800E */  lui       $v0, %hi(gBattleStatus)
+/* 16C8F4 8023E014 2442C070 */  addiu     $v0, $v0, %lo(gBattleStatus)
 /* 16C8F8 8023E018 AFBF0018 */  sw        $ra, 0x18($sp)
 /* 16C8FC 8023E01C F7BC0040 */  sdc1      $f28, 0x40($sp)
 /* 16C900 8023E020 F7BA0038 */  sdc1      $f26, 0x38($sp)

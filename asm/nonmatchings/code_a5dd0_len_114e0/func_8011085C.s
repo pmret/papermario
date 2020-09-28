@@ -11,8 +11,8 @@ glabel func_8011085C
 /* A6F74 80110874 84440008 */  lh        $a0, 8($v0)
 /* A6F78 80110878 0C048B7F */  jal       func_80122DFC
 /* A6F7C 8011087C 00108080 */   sll      $s0, $s0, 2
-/* A6F80 80110880 3C118015 */  lui       $s1, 0x8015
-/* A6F84 80110884 26311658 */  addiu     $s1, $s1, 0x1658
+/* A6F80 80110880 3C118015 */  lui       $s1, %hi(gCurrentShadowListPtr)
+/* A6F84 80110884 26311658 */  addiu     $s1, $s1, %lo(gCurrentShadowListPtr)
 /* A6F88 80110888 8E220000 */  lw        $v0, ($s1)
 /* A6F8C 8011088C 02021021 */  addu      $v0, $s0, $v0
 /* A6F90 80110890 0C00AB4B */  jal       heap_free

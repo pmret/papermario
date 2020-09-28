@@ -7,8 +7,8 @@ glabel phys_player_land
 /* 7C730 800E3280 3442FFFF */  ori       $v0, $v0, 0xffff
 /* 7C734 800E3284 24040148 */  addiu     $a0, $zero, 0x148
 /* 7C738 800E3288 AFB00018 */  sw        $s0, 0x18($sp)
-/* 7C73C 800E328C 3C108011 */  lui       $s0, 0x8011
-/* 7C740 800E3290 2610EFC8 */  addiu     $s0, $s0, -0x1038
+/* 7C73C 800E328C 3C108011 */  lui       $s0, %hi(gPlayerStatus)
+/* 7C740 800E3290 2610EFC8 */  addiu     $s0, $s0, %lo(gPlayerStatus)
 /* 7C744 800E3294 AFBF0020 */  sw        $ra, 0x20($sp)
 /* 7C748 800E3298 AFB1001C */  sw        $s1, 0x1c($sp)
 /* 7C74C 800E329C 8E030000 */  lw        $v1, ($s0)

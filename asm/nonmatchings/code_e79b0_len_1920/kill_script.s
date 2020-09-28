@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel kill_script
-/* E88EC 802C3F3C 3C03802E */  lui       $v1, 0x802e
-/* E88F0 802C3F40 8C63A890 */  lw        $v1, -0x5770($v1)
+/* E88EC 802C3F3C 3C03802E */  lui       $v1, %hi(gCurrentScriptListPtr)
+/* E88F0 802C3F40 8C63A890 */  lw        $v1, %lo(gCurrentScriptListPtr)($v1)
 /* E88F4 802C3F44 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* E88F8 802C3F48 AFB20018 */  sw        $s2, 0x18($sp)
 /* E88FC 802C3F4C 0080902D */  daddu     $s2, $a0, $zero
@@ -29,8 +29,8 @@ glabel kill_script
 /* E8944 802C3F94 0C0B0FCF */  jal       kill_script
 /* E8948 802C3F98 00000000 */   nop      
 .L802C3F9C:
-/* E894C 802C3F9C 3C03802E */  lui       $v1, 0x802e
-/* E8950 802C3FA0 8C63A890 */  lw        $v1, -0x5770($v1)
+/* E894C 802C3F9C 3C03802E */  lui       $v1, %hi(gCurrentScriptListPtr)
+/* E8950 802C3FA0 8C63A890 */  lw        $v1, %lo(gCurrentScriptListPtr)($v1)
 /* E8954 802C3FA4 00111080 */  sll       $v0, $s1, 2
 /* E8958 802C3FA8 00431021 */  addu      $v0, $v0, $v1
 /* E895C 802C3FAC 8C440000 */  lw        $a0, ($v0)
@@ -81,15 +81,15 @@ glabel kill_script
 /* E8A00 802C4050 00000000 */   nop      
 /* E8A04 802C4054 AE400060 */  sw        $zero, 0x60($s2)
 .L802C4058:
-/* E8A08 802C4058 3C11802E */  lui       $s1, 0x802e
-/* E8A0C 802C405C 2631A890 */  addiu     $s1, $s1, -0x5770
+/* E8A08 802C4058 3C11802E */  lui       $s1, %hi(gCurrentScriptListPtr)
+/* E8A0C 802C405C 2631A890 */  addiu     $s1, $s1, %lo(gCurrentScriptListPtr)
 /* E8A10 802C4060 8E220000 */  lw        $v0, ($s1)
 /* E8A14 802C4064 00108080 */  sll       $s0, $s0, 2
 /* E8A18 802C4068 02021021 */  addu      $v0, $s0, $v0
 /* E8A1C 802C406C 0C00AB4B */  jal       heap_free
 /* E8A20 802C4070 8C440000 */   lw       $a0, ($v0)
-/* E8A24 802C4074 3C04802E */  lui       $a0, 0x802e
-/* E8A28 802C4078 2484A488 */  addiu     $a0, $a0, -0x5b78
+/* E8A24 802C4074 3C04802E */  lui       $a0, %hi(gNumScripts)
+/* E8A28 802C4078 2484A488 */  addiu     $a0, $a0, %lo(gNumScripts)
 /* E8A2C 802C407C 8E230000 */  lw        $v1, ($s1)
 /* E8A30 802C4080 8C820000 */  lw        $v0, ($a0)
 /* E8A34 802C4084 02038021 */  addu      $s0, $s0, $v1

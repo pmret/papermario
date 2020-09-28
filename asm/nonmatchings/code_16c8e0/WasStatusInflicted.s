@@ -11,8 +11,8 @@ glabel WasStatusInflicted
 /* 1AC560 8027DC80 8E050000 */  lw        $a1, ($s0)
 /* 1AC564 8027DC84 0C0B1EAF */  jal       get_variable
 /* 1AC568 8027DC88 26100004 */   addiu    $s0, $s0, 4
-/* 1AC56C 8027DC8C 3C02800E */  lui       $v0, 0x800e
-/* 1AC570 8027DC90 2442C070 */  addiu     $v0, $v0, -0x3f90
+/* 1AC56C 8027DC8C 3C02800E */  lui       $v0, %hi(gBattleStatus)
+/* 1AC570 8027DC90 2442C070 */  addiu     $v0, $v0, %lo(gBattleStatus)
 /* 1AC574 8027DC94 8E050000 */  lw        $a1, ($s0)
 /* 1AC578 8027DC98 80460199 */  lb        $a2, 0x199($v0)
 /* 1AC57C 8027DC9C 0C0B2026 */  jal       set_variable

@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel load_model_textures
-/* AC324 80115C24 3C028007 */  lui       $v0, 0x8007
-/* AC328 80115C28 8C42419C */  lw        $v0, 0x419c($v0)
+/* AC324 80115C24 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* AC328 80115C28 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* AC32C 80115C2C 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* AC330 80115C30 AFBF0010 */  sw        $ra, 0x10($sp)
 /* AC334 80115C34 80420070 */  lb        $v0, 0x70($v0)

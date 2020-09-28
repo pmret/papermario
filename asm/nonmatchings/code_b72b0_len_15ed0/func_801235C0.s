@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel func_801235C0
-/* B9CC0 801235C0 3C028007 */  lui       $v0, 0x8007
-/* B9CC4 801235C4 8C42419C */  lw        $v0, 0x419c($v0)
+/* B9CC0 801235C0 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* B9CC4 801235C4 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* B9CC8 801235C8 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* B9CCC 801235CC AFBF0018 */  sw        $ra, 0x18($sp)
 /* B9CD0 801235D0 AFB10014 */  sw        $s1, 0x14($sp)
@@ -16,8 +16,8 @@ glabel func_801235C0
 .L801235EC:
 /* B9CEC 801235EC 2402F7FF */  addiu     $v0, $zero, -0x801
 /* B9CF0 801235F0 00822024 */  and       $a0, $a0, $v0
-/* B9CF4 801235F4 3C118015 */  lui       $s1, 0x8015
-/* B9CF8 801235F8 26314420 */  addiu     $s1, $s1, 0x4420
+/* B9CF4 801235F4 3C118015 */  lui       $s1, %hi(gCurrentDynamicEntityListPtr)
+/* B9CF8 801235F8 26314420 */  addiu     $s1, $s1, %lo(gCurrentDynamicEntityListPtr)
 /* B9CFC 801235FC 8E220000 */  lw        $v0, ($s1)
 /* B9D00 80123600 00048080 */  sll       $s0, $a0, 2
 /* B9D04 80123604 02021021 */  addu      $v0, $s0, $v0

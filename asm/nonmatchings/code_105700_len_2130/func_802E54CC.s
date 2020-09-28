@@ -21,8 +21,8 @@ glabel func_802E54CC
 /* 106D8C 802E550C ACA00000 */   sw       $zero, ($a1)
 /* 106D90 802E5510 0C009C22 */  jal       func_80027088
 /* 106D94 802E5514 24040001 */   addiu    $a0, $zero, 1
-/* 106D98 802E5518 3C03800A */  lui       $v1, 0x800a
-/* 106D9C 802E551C 2463A650 */  addiu     $v1, $v1, -0x59b0
+/* 106D98 802E5518 3C03800A */  lui       $v1, %hi(D_8009A650)
+/* 106D9C 802E551C 2463A650 */  addiu     $v1, $v1, %lo(D_8009A650)
 /* 106DA0 802E5520 8C620000 */  lw        $v0, ($v1)
 /* 106DA4 802E5524 34420040 */  ori       $v0, $v0, 0x40
 /* 106DA8 802E5528 0C03805E */  jal       disable_player_input

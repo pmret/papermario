@@ -5,8 +5,8 @@ glabel func_8003034C
 /* B74C 8003034C 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* B750 80030350 AFB00010 */  sw        $s0, 0x10($sp)
 /* B754 80030354 0080802D */  daddu     $s0, $a0, $zero
-/* B758 80030358 3C028011 */  lui       $v0, 0x8011
-/* B75C 8003035C 2442EFC8 */  addiu     $v0, $v0, -0x1038
+/* B758 80030358 3C028011 */  lui       $v0, %hi(gPlayerStatus)
+/* B75C 8003035C 2442EFC8 */  addiu     $v0, $v0, %lo(gPlayerStatus)
 /* B760 80030360 AFBF0018 */  sw        $ra, 0x18($sp)
 /* B764 80030364 AFB10014 */  sw        $s1, 0x14($sp)
 /* B768 80030368 F7B40020 */  sdc1      $f20, 0x20($sp)

@@ -1501,8 +1501,8 @@ glabel appendGfx_model
 /* AAE2C 8011472C 10400018 */  beqz      $v0, .L80114790
 /* AAE30 80114730 00000000 */   nop      
 /* AAE34 80114734 92C200A5 */  lbu       $v0, 0xa5($s6)
-/* AAE38 80114738 3C038015 */  lui       $v1, 0x8015
-/* AAE3C 8011473C 246312E8 */  addiu     $v1, $v1, 0x12e8
+/* AAE38 80114738 3C038015 */  lui       $v1, %hi(gCurrentModelSpecialDlsPtr)
+/* AAE3C 8011473C 246312E8 */  addiu     $v1, $v1, %lo(gCurrentModelSpecialDlsPtr)
 /* AAE40 80114740 3042000F */  andi      $v0, $v0, 0xf
 /* AAE44 80114744 00021040 */  sll       $v0, $v0, 1
 /* AAE48 80114748 A7A20036 */  sh        $v0, 0x36($sp)
@@ -1726,8 +1726,8 @@ glabel appendGfx_model
 /* AB188 80114A88 10400016 */  beqz      $v0, .L80114AE4
 /* AB18C 80114A8C 00000000 */   nop      
 /* AB190 80114A90 97B50036 */  lhu       $s5, 0x36($sp)
-/* AB194 80114A94 3C078015 */  lui       $a3, 0x8015
-/* AB198 80114A98 24E712E8 */  addiu     $a3, $a3, 0x12e8
+/* AB194 80114A94 3C078015 */  lui       $a3, %hi(gCurrentModelSpecialDlsPtr)
+/* AB198 80114A98 24E712E8 */  addiu     $a3, $a3, %lo(gCurrentModelSpecialDlsPtr)
 /* AB19C 80114A9C 26B50001 */  addiu     $s5, $s5, 1
 /* AB1A0 80114AA0 A7B50036 */  sh        $s5, 0x36($sp)
 /* AB1A4 80114AA4 32A2FFFF */  andi      $v0, $s5, 0xffff

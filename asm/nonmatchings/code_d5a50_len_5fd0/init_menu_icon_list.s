@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel init_menu_icon_list
-/* D7A00 80141300 3C028007 */  lui       $v0, 0x8007
-/* D7A04 80141304 8C42419C */  lw        $v0, 0x419c($v0)
+/* D7A00 80141300 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* D7A04 80141304 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* D7A08 80141308 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* D7A0C 8014130C AFBF0014 */  sw        $ra, 0x14($sp)
 /* D7A10 80141310 AFB00010 */  sw        $s0, 0x10($sp)

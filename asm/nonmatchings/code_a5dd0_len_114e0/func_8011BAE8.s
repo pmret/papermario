@@ -3,8 +3,8 @@
 
 glabel func_8011BAE8
 /* B21E8 8011BAE8 0000202D */  daddu     $a0, $zero, $zero
-/* B21EC 8011BAEC 3C058015 */  lui       $a1, 0x8015
-/* B21F0 8011BAF0 8CA512CC */  lw        $a1, 0x12cc($a1)
+/* B21EC 8011BAEC 3C058015 */  lui       $a1, %hi(gCurrentModelListPtr)
+/* B21F0 8011BAF0 8CA512CC */  lw        $a1, %lo(gCurrentModelListPtr)($a1)
 .L8011BAF4:
 /* B21F4 8011BAF4 8CA30000 */  lw        $v1, ($a1)
 /* B21F8 8011BAF8 10600004 */  beqz      $v1, .L8011BB0C

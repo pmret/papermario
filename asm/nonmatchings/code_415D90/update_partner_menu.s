@@ -4,11 +4,11 @@
 glabel update_partner_menu
 /* 41CF58 802A81C8 27BDFFB0 */  addiu     $sp, $sp, -0x50
 /* 41CF5C 802A81CC AFB40020 */  sw        $s4, 0x20($sp)
-/* 41CF60 802A81D0 3C14800E */  lui       $s4, 0x800e
-/* 41CF64 802A81D4 2694C070 */  addiu     $s4, $s4, -0x3f90
+/* 41CF60 802A81D0 3C14800E */  lui       $s4, %hi(gBattleStatus)
+/* 41CF64 802A81D4 2694C070 */  addiu     $s4, $s4, %lo(gBattleStatus)
 /* 41CF68 802A81D8 AFB7002C */  sw        $s7, 0x2c($sp)
-/* 41CF6C 802A81DC 3C178011 */  lui       $s7, 0x8011
-/* 41CF70 802A81E0 26F7F290 */  addiu     $s7, $s7, -0xd70
+/* 41CF6C 802A81DC 3C178011 */  lui       $s7, %hi(gPlayerData)
+/* 41CF70 802A81E0 26F7F290 */  addiu     $s7, $s7, %lo(gPlayerData)
 /* 41CF74 802A81E4 AFB20018 */  sw        $s2, 0x18($sp)
 /* 41CF78 802A81E8 3C12802B */  lui       $s2, 0x802b
 /* 41CF7C 802A81EC 2652CCD0 */  addiu     $s2, $s2, -0x3330
@@ -182,8 +182,8 @@ glabel update_partner_menu
 /* 41D204 802A8474 E6020140 */  swc1      $f2, 0x140($s0)
 /* 41D208 802A8478 C6600144 */  lwc1      $f0, 0x144($s3)
 /* 41D20C 802A847C C662014C */  lwc1      $f2, 0x14c($s3)
-/* 41D210 802A8480 3C04800E */  lui       $a0, 0x800e
-/* 41D214 802A8484 2484C070 */  addiu     $a0, $a0, -0x3f90
+/* 41D210 802A8480 3C04800E */  lui       $a0, %hi(gBattleStatus)
+/* 41D214 802A8484 2484C070 */  addiu     $a0, $a0, %lo(gBattleStatus)
 /* 41D218 802A8488 AE220000 */  sw        $v0, ($s1)
 /* 41D21C 802A848C E6600138 */  swc1      $f0, 0x138($s3)
 /* 41D220 802A8490 E6620140 */  swc1      $f2, 0x140($s3)
@@ -397,14 +397,14 @@ glabel update_partner_menu
 /* 41D530 802A87A0 080AA20D */  j         .L802A8834
 /* 41D534 802A87A4 AC820000 */   sw       $v0, ($a0)
 .L802A87A8:
-/* 41D538 802A87A8 3C02800E */  lui       $v0, 0x800e
-/* 41D53C 802A87AC 8C42C070 */  lw        $v0, -0x3f90($v0)
+/* 41D538 802A87A8 3C02800E */  lui       $v0, %hi(gBattleStatus)
+/* 41D53C 802A87AC 8C42C070 */  lw        $v0, %lo(gBattleStatus)($v0)
 /* 41D540 802A87B0 3C030200 */  lui       $v1, 0x200
 /* 41D544 802A87B4 00431024 */  and       $v0, $v0, $v1
 /* 41D548 802A87B8 1440001E */  bnez      $v0, .L802A8834
 /* 41D54C 802A87BC 00000000 */   nop      
-/* 41D550 802A87C0 3C028007 */  lui       $v0, 0x8007
-/* 41D554 802A87C4 8C42419C */  lw        $v0, 0x419c($v0)
+/* 41D550 802A87C0 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* 41D554 802A87C4 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 41D558 802A87C8 8C420010 */  lw        $v0, 0x10($v0)
 /* 41D55C 802A87CC 30422000 */  andi      $v0, $v0, 0x2000
 /* 41D560 802A87D0 10400018 */  beqz      $v0, .L802A8834
@@ -799,8 +799,8 @@ glabel update_partner_menu
 /* 41DB18 802A8D88 00000000 */   nop      
 /* 41DB1C 802A8D8C 0000802D */  daddu     $s0, $zero, $zero
 /* 41DB20 802A8D90 0200882D */  daddu     $s1, $s0, $zero
-/* 41DB24 802A8D94 3C098008 */  lui       $t1, 0x8008
-/* 41DB28 802A8D98 252978E0 */  addiu     $t1, $t1, 0x78e0
+/* 41DB24 802A8D94 3C098008 */  lui       $t1, %hi(gItemTable)
+/* 41DB28 802A8D98 252978E0 */  addiu     $t1, $t1, %lo(gItemTable)
 /* 41DB2C 802A8D9C 3C088009 */  lui       $t0, 0x8009
 /* 41DB30 802A8DA0 2508A680 */  addiu     $t0, $t0, -0x5980
 /* 41DB34 802A8DA4 24070001 */  addiu     $a3, $zero, 1

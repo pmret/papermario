@@ -6,8 +6,8 @@ glabel LoadMoveScript
 /* 196A14 80268134 AFB20018 */  sw        $s2, 0x18($sp)
 /* 196A18 80268138 0080902D */  daddu     $s2, $a0, $zero
 /* 196A1C 8026813C AFB10014 */  sw        $s1, 0x14($sp)
-/* 196A20 80268140 3C11800E */  lui       $s1, 0x800e
-/* 196A24 80268144 2631C070 */  addiu     $s1, $s1, -0x3f90
+/* 196A20 80268140 3C11800E */  lui       $s1, %hi(gBattleStatus)
+/* 196A24 80268144 2631C070 */  addiu     $s1, $s1, %lo(gBattleStatus)
 /* 196A28 80268148 AFBF001C */  sw        $ra, 0x1c($sp)
 /* 196A2C 8026814C AFB00010 */  sw        $s0, 0x10($sp)
 /* 196A30 80268150 8630017C */  lh        $s0, 0x17c($s1)

@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel IncrementPlayerHP
-/* 190608 80261D28 3C048011 */  lui       $a0, 0x8011
-/* 19060C 80261D2C 2484F290 */  addiu     $a0, $a0, -0xd70
+/* 190608 80261D28 3C048011 */  lui       $a0, %hi(gPlayerData)
+/* 19060C 80261D2C 2484F290 */  addiu     $a0, $a0, %lo(gPlayerData)
 /* 190610 80261D30 90820002 */  lbu       $v0, 2($a0)
 /* 190614 80261D34 80830003 */  lb        $v1, 3($a0)
 /* 190618 80261D38 24420001 */  addiu     $v0, $v0, 1

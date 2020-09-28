@@ -22,8 +22,8 @@ glabel UseEntryHeading
 /* F6964 802D1FB4 8E050000 */  lw        $a1, ($s0)
 /* F6968 802D1FB8 0C0B1EAF */  jal       get_variable
 /* F696C 802D1FBC 0040982D */   daddu    $s3, $v0, $zero
-/* F6970 802D1FC0 3C108007 */  lui       $s0, 0x8007
-/* F6974 802D1FC4 2610419C */  addiu     $s0, $s0, 0x419c
+/* F6970 802D1FC0 3C108007 */  lui       $s0, %hi(gGameStatusPtr)
+/* F6974 802D1FC4 2610419C */  addiu     $s0, $s0, %lo(gGameStatusPtr)
 /* F6978 802D1FC8 8E050000 */  lw        $a1, ($s0)
 /* F697C 802D1FCC 84A3008E */  lh        $v1, 0x8e($a1)
 /* F6980 802D1FD0 8E240014 */  lw        $a0, 0x14($s1)
@@ -96,8 +96,8 @@ glabel UseEntryHeading
 /* F6A8C 802D20DC 4406A000 */  mfc1      $a2, $f20
 /* F6A90 802D20E0 4407B000 */  mfc1      $a3, $f22
 /* F6A94 802D20E4 46027381 */  sub.s     $f14, $f14, $f2
-/* F6A98 802D20E8 3C108011 */  lui       $s0, 0x8011
-/* F6A9C 802D20EC 2610EFC8 */  addiu     $s0, $s0, -0x1038
+/* F6A98 802D20E8 3C108011 */  lui       $s0, %hi(gPlayerStatus)
+/* F6A9C 802D20EC 2610EFC8 */  addiu     $s0, $s0, %lo(gPlayerStatus)
 /* F6AA0 802D20F0 E60C0028 */  swc1      $f12, 0x28($s0)
 /* F6AA4 802D20F4 0C00A7B5 */  jal       dist2D
 /* F6AA8 802D20F8 E60E0030 */   swc1     $f14, 0x30($s0)

@@ -10,8 +10,8 @@ glabel use_cam_preset
 /* 17B828 8024CF48 AFB00010 */  sw        $s0, 0x10($sp)
 /* 17B82C 8024CF4C 0000802D */  daddu     $s0, $zero, $zero
 /* 17B830 8024CF50 AFB20018 */  sw        $s2, 0x18($sp)
-/* 17B834 8024CF54 3C12800E */  lui       $s2, 0x800e
-/* 17B838 8024CF58 2652C070 */  addiu     $s2, $s2, -0x3f90
+/* 17B834 8024CF54 3C12800E */  lui       $s2, %hi(gBattleStatus)
+/* 17B838 8024CF58 2652C070 */  addiu     $s2, $s2, %lo(gBattleStatus)
 /* 17B83C 8024CF5C 14400518 */  bnez      $v0, .L8024E3C0
 /* 17B840 8024CF60 AFBF001C */   sw       $ra, 0x1c($sp)
 /* 17B844 8024CF64 24020001 */  addiu     $v0, $zero, 1

@@ -4,8 +4,8 @@
 glabel fio_load_game
 /* 66D0 8002B2D0 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 66D4 8002B2D4 AFB20018 */  sw        $s2, 0x18($sp)
-/* 66D8 8002B2D8 3C128007 */  lui       $s2, 0x8007
-/* 66DC 8002B2DC 2652419C */  addiu     $s2, $s2, 0x419c
+/* 66D8 8002B2D8 3C128007 */  lui       $s2, %hi(gGameStatusPtr)
+/* 66DC 8002B2DC 2652419C */  addiu     $s2, $s2, %lo(gGameStatusPtr)
 /* 66E0 8002B2E0 AFBF001C */  sw        $ra, 0x1c($sp)
 /* 66E4 8002B2E4 AFB10014 */  sw        $s1, 0x14($sp)
 /* 66E8 8002B2E8 AFB00010 */  sw        $s0, 0x10($sp)
@@ -13,8 +13,8 @@ glabel fio_load_game
 /* 66F0 8002B2F0 0080802D */  daddu     $s0, $a0, $zero
 /* 66F4 8002B2F4 0C00AC55 */  jal       fio_fetch_saved_file_info
 /* 66F8 8002B2F8 A0500166 */   sb       $s0, 0x166($v0)
-/* 66FC 8002B2FC 3C11800E */  lui       $s1, 0x800e
-/* 6700 8002B300 2631ACC0 */  addiu     $s1, $s1, -0x5340
+/* 66FC 8002B2FC 3C11800E */  lui       $s1, %hi(gCurrentSaveFile)
+/* 6700 8002B300 2631ACC0 */  addiu     $s1, $s1, %lo(gCurrentSaveFile)
 /* 6704 8002B304 0220282D */  daddu     $a1, $s1, $zero
 /* 6708 8002B308 001080C0 */  sll       $s0, $s0, 3
 /* 670C 8002B30C 3C04800A */  lui       $a0, 0x800a

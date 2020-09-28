@@ -369,10 +369,10 @@ glabel func_8013B1B0
 /* D1E34 8013B734 AC820000 */  sw        $v0, ($a0)
 /* D1E38 8013B738 2402F3F9 */  addiu     $v0, $zero, -0xc07
 /* D1E3C 8013B73C AC820004 */  sw        $v0, 4($a0)
-/* D1E40 8013B740 3C028007 */  lui       $v0, 0x8007
-/* D1E44 8013B744 8C427410 */  lw        $v0, 0x7410($v0)
-/* D1E48 8013B748 3C04800B */  lui       $a0, 0x800b
-/* D1E4C 8013B74C 24841D80 */  addiu     $a0, $a0, 0x1d80
+/* D1E40 8013B740 3C028007 */  lui       $v0, %hi(gCurrentCameraID)
+/* D1E44 8013B744 8C427410 */  lw        $v0, %lo(gCurrentCameraID)($v0)
+/* D1E48 8013B748 3C04800B */  lui       $a0, %hi(gCameras)
+/* D1E4C 8013B74C 24841D80 */  addiu     $a0, $a0, %lo(gCameras)
 /* D1E50 8013B750 AC660000 */  sw        $a2, ($v1)
 /* D1E54 8013B754 AC650004 */  sw        $a1, 4($v1)
 /* D1E58 8013B758 00028080 */  sll       $s0, $v0, 2

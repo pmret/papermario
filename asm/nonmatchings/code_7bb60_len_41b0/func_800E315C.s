@@ -4,11 +4,11 @@
 glabel func_800E315C
 /* 7C60C 800E315C 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 7C610 800E3160 AFB00010 */  sw        $s0, 0x10($sp)
-/* 7C614 800E3164 3C108011 */  lui       $s0, 0x8011
-/* 7C618 800E3168 2610EFC8 */  addiu     $s0, $s0, -0x1038
+/* 7C614 800E3164 3C108011 */  lui       $s0, %hi(gPlayerStatus)
+/* 7C618 800E3168 2610EFC8 */  addiu     $s0, $s0, %lo(gPlayerStatus)
 /* 7C61C 800E316C AFB10014 */  sw        $s1, 0x14($sp)
-/* 7C620 800E3170 3C118011 */  lui       $s1, 0x8011
-/* 7C624 800E3174 2631EBB0 */  addiu     $s1, $s1, -0x1450
+/* 7C620 800E3170 3C118011 */  lui       $s1, %hi(D_8010EBB0)
+/* 7C624 800E3174 2631EBB0 */  addiu     $s1, $s1, %lo(D_8010EBB0)
 /* 7C628 800E3178 0480003A */  bltz      $a0, .L800E3264
 /* 7C62C 800E317C AFBF0018 */   sw       $ra, 0x18($sp)
 /* 7C630 800E3180 0C016F6A */  jal       get_collider_type_by_id

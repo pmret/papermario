@@ -426,8 +426,8 @@ glabel si_execute_next_command
 /* EC438 802C7A88 14A2FE62 */  bne       $a1, $v0, .L802C7414
 /* EC43C 802C7A8C 00000000 */   nop      
 /* EC440 802C7A90 A2000002 */  sb        $zero, 2($s0)
-/* EC444 802C7A94 3C028007 */  lui       $v0, 0x8007
-/* EC448 802C7A98 8C42419C */  lw        $v0, 0x419c($v0)
+/* EC444 802C7A94 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* EC448 802C7A98 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* EC44C 802C7A9C 80420078 */  lb        $v0, 0x78($v0)
 /* EC450 802C7AA0 1445FE5C */  bne       $v0, $a1, .L802C7414
 /* EC454 802C7AA4 00000000 */   nop      

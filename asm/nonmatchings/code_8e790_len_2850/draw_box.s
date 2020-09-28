@@ -904,8 +904,8 @@ glabel draw_box
 /* 8F500 800F6050 2484A66C */  addiu     $a0, $a0, -0x5994
 /* 8F504 800F6054 3C06F200 */  lui       $a2, 0xf200
 /* 8F508 800F6058 8C820000 */  lw        $v0, ($a0)
-/* 8F50C 800F605C 3C038007 */  lui       $v1, 0x8007
-/* 8F510 800F6060 8C63419C */  lw        $v1, 0x419c($v1)
+/* 8F50C 800F605C 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
+/* 8F510 800F6060 8C63419C */  lw        $v1, %lo(gGameStatusPtr)($v1)
 /* 8F514 800F6064 0040482D */  daddu     $t1, $v0, $zero
 /* 8F518 800F6068 94670134 */  lhu       $a3, 0x134($v1)
 /* 8F51C 800F606C 24420008 */  addiu     $v0, $v0, 8

@@ -39,8 +39,8 @@ glabel delete_entity
 /* A6E4C 8011074C 00641825 */  or        $v1, $v1, $a0
 /* A6E50 80110750 AC430000 */  sw        $v1, ($v0)
 .L80110754:
-/* A6E54 80110754 3C118015 */  lui       $s1, 0x8015
-/* A6E58 80110758 26311470 */  addiu     $s1, $s1, 0x1470
+/* A6E54 80110754 3C118015 */  lui       $s1, %hi(gCurrentEntityListPtr)
+/* A6E58 80110758 26311470 */  addiu     $s1, $s1, %lo(gCurrentEntityListPtr)
 /* A6E5C 8011075C 8E220000 */  lw        $v0, ($s1)
 /* A6E60 80110760 00108080 */  sll       $s0, $s0, 2
 /* A6E64 80110764 02021021 */  addu      $v0, $s0, $v0

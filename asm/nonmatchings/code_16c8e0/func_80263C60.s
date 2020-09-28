@@ -3,8 +3,8 @@
 
 glabel func_80263C60
 /* 192540 80263C60 0000202D */  daddu     $a0, $zero, $zero
-/* 192544 80263C64 3C05800E */  lui       $a1, 0x800e
-/* 192548 80263C68 24A5C070 */  addiu     $a1, $a1, -0x3f90
+/* 192544 80263C64 3C05800E */  lui       $a1, %hi(gBattleStatus)
+/* 192548 80263C68 24A5C070 */  addiu     $a1, $a1, %lo(gBattleStatus)
 /* 19254C 80263C6C 00A0182D */  daddu     $v1, $a1, $zero
 .L80263C70:
 /* 192550 80263C70 8C6200E0 */  lw        $v0, 0xe0($v1)

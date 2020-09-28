@@ -10,8 +10,8 @@ glabel func_800EF640
 /* 88B04 800EF654 26731E54 */  addiu     $s3, $s3, 0x1e54
 /* 88B08 800EF658 0260202D */  daddu     $a0, $s3, $zero
 /* 88B0C 800EF65C AFB20050 */  sw        $s2, 0x50($sp)
-/* 88B10 800EF660 3C128011 */  lui       $s2, 0x8011
-/* 88B14 800EF664 2652EFC8 */  addiu     $s2, $s2, -0x1038
+/* 88B10 800EF660 3C128011 */  lui       $s2, %hi(gPlayerStatus)
+/* 88B14 800EF664 2652EFC8 */  addiu     $s2, $s2, %lo(gPlayerStatus)
 /* 88B18 800EF668 AFBF005C */  sw        $ra, 0x5c($sp)
 /* 88B1C 800EF66C AFB40058 */  sw        $s4, 0x58($sp)
 /* 88B20 800EF670 AFB00048 */  sw        $s0, 0x48($sp)
@@ -102,8 +102,8 @@ glabel func_800EF640
 /* 88C74 800EF7C4 0C00EA95 */  jal       npc_move_heading
 /* 88C78 800EF7C8 0220202D */   daddu    $a0, $s1, $zero
 /* 88C7C 800EF7CC 0200202D */  daddu     $a0, $s0, $zero
-/* 88C80 800EF7D0 3C028007 */  lui       $v0, 0x8007
-/* 88C84 800EF7D4 8C427410 */  lw        $v0, 0x7410($v0)
+/* 88C80 800EF7D0 3C028007 */  lui       $v0, %hi(gCurrentCameraID)
+/* 88C84 800EF7D4 8C427410 */  lw        $v0, %lo(gCurrentCameraID)($v0)
 /* 88C88 800EF7D8 3C064000 */  lui       $a2, 0x4000
 /* 88C8C 800EF7DC 00021880 */  sll       $v1, $v0, 2
 /* 88C90 800EF7E0 00621821 */  addu      $v1, $v1, $v0

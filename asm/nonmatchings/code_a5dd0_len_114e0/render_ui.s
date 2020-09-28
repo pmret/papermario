@@ -4,8 +4,8 @@
 glabel render_ui
 /* A9658 80112F58 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* A965C 80112F5C AFB00010 */  sw        $s0, 0x10($sp)
-/* A9660 80112F60 3C108015 */  lui       $s0, 0x8015
-/* A9664 80112F64 26101700 */  addiu     $s0, $s0, 0x1700
+/* A9660 80112F60 3C108015 */  lui       $s0, %hi(gMainGameState)
+/* A9664 80112F64 26101700 */  addiu     $s0, $s0, %lo(gMainGameState)
 /* A9668 80112F68 AFB10014 */  sw        $s1, 0x14($sp)
 /* A966C 80112F6C 0000882D */  daddu     $s1, $zero, $zero
 /* A9670 80112F70 AFBF0018 */  sw        $ra, 0x18($sp)

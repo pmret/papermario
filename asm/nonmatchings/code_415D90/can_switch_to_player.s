@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel can_switch_to_player
-/* 41A5A8 802A5818 3C06800E */  lui       $a2, 0x800e
-/* 41A5AC 802A581C 24C6C070 */  addiu     $a2, $a2, -0x3f90
+/* 41A5A8 802A5818 3C06800E */  lui       $a2, %hi(gBattleStatus)
+/* 41A5AC 802A581C 24C6C070 */  addiu     $a2, $a2, %lo(gBattleStatus)
 /* 41A5B0 802A5820 8CC20004 */  lw        $v0, 4($a2)
 /* 41A5B4 802A5824 8CC500D8 */  lw        $a1, 0xd8($a2)
 /* 41A5B8 802A5828 30420002 */  andi      $v0, $v0, 2

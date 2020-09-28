@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel pause_map_handle_input
-/* 141BB8 8024E878 3C038007 */  lui       $v1, 0x8007
-/* 141BBC 8024E87C 8C63419C */  lw        $v1, 0x419c($v1)
+/* 141BB8 8024E878 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
+/* 141BBC 8024E87C 8C63419C */  lw        $v1, %lo(gGameStatusPtr)($v1)
 /* 141BC0 8024E880 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 141BC4 8024E884 AFBF0018 */  sw        $ra, 0x18($sp)
 /* 141BC8 8024E888 AFB10014 */  sw        $s1, 0x14($sp)

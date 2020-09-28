@@ -3,8 +3,8 @@
 
 glabel func_80149250
 /* DF950 80149250 44860000 */  mtc1      $a2, $f0
-/* DF954 80149254 3C048007 */  lui       $a0, 0x8007
-/* DF958 80149258 8C847410 */  lw        $a0, 0x7410($a0)
+/* DF954 80149254 3C048007 */  lui       $a0, %hi(gCurrentCameraID)
+/* DF958 80149258 8C847410 */  lw        $a0, %lo(gCurrentCameraID)($a0)
 /* DF95C 8014925C 44056000 */  mfc1      $a1, $f12
 /* DF960 80149260 44067000 */  mfc1      $a2, $f14
 /* DF964 80149264 27BDFF98 */  addiu     $sp, $sp, -0x68

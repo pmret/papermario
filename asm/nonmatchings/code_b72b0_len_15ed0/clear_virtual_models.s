@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel clear_virtual_models
-/* B72B0 80120BB0 3C028007 */  lui       $v0, 0x8007
-/* B72B4 80120BB4 8C42419C */  lw        $v0, 0x419c($v0)
+/* B72B0 80120BB0 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* B72B4 80120BB4 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* B72B8 80120BB8 80420070 */  lb        $v0, 0x70($v0)
 /* B72BC 80120BBC 14400005 */  bnez      $v0, .L80120BD4
 /* B72C0 80120BC0 00000000 */   nop      

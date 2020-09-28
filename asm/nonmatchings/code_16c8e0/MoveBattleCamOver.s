@@ -12,8 +12,8 @@ glabel MoveBattleCamOver
 /* 17D504 8024EC24 8CA50000 */  lw        $a1, ($a1)
 /* 17D508 8024EC28 0C0B1EAF */  jal       get_variable
 /* 17D50C 8024EC2C 00000000 */   nop      
-/* 17D510 8024EC30 3C03800E */  lui       $v1, 0x800e
-/* 17D514 8024EC34 2463C070 */  addiu     $v1, $v1, -0x3f90
+/* 17D510 8024EC30 3C03800E */  lui       $v1, %hi(gBattleStatus)
+/* 17D514 8024EC34 2463C070 */  addiu     $v1, $v1, %lo(gBattleStatus)
 /* 17D518 8024EC38 8C6400C4 */  lw        $a0, 0xc4($v1)
 /* 17D51C 8024EC3C 3C01802A */  lui       $at, 0x802a
 /* 17D520 8024EC40 A422F29E */  sh        $v0, -0xd62($at)
