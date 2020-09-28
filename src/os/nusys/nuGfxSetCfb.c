@@ -1,3 +1,3 @@
 #include "common.h"
 
-INCLUDE_API_ASM("os/nuGfxSetCfb", nuGfxSetCfb);
+INCLUDE_ASM(void, "os/nuGfxSetCfb", nuGfxSetCfb);

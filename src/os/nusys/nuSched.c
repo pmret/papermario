@@ -5,7 +5,7 @@ INCLUDE_ASM(void, "os/code_39db0_len_8a0", nuScCreateScheduler, u8 videoMode, u8
 
 INCLUDE_ASM(void, "os/code_39db0_len_8a0", nuScExecuteAudio);
 
-INCLUDE_ASM(void, "os/code_39db0_len_8a0", nuScExecuteGraphics);
+// INCLUDE_ASM(void, "os/code_39db0_len_8a0", nuScExecuteGraphics);
 
 INCLUDE_ASM(void, "os/code_39db0_len_8a0", nuScAddClient, NUScClient *c, OSMesgQueue *mq, NUScMsg msgType);
 
@@ -71,7 +71,7 @@ s32 nuScGetFrameRate(void) {
     return nusched.frameRate;
 }
 #else
-(s32, "os/code_39db0_len_8a0", nuScGetFrameRate, void);
+INCLUDE_ASM(s32, "os/code_39db0_len_8a0", nuScGetFrameRate, void);
 #endif
 
 INCLUDE_ASM(void, "os/code_39db0_len_8a0", nuScEventHandler);

@@ -108,7 +108,7 @@ void nuContRmbMgrInit(void) {
     nuSiCallBackAdd(&nuContRmbCallBack);
 }
 #else
-void INCLUDE_ASM("os/nuContRmbMgr", nuContRmbMgrInit);
+INCLUDE_ASM(void, "os/nuContRmbMgr", nuContRmbMgrInit);
 #endif
 
 void nuContRmbMgrRemove(void) {
