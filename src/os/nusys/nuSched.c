@@ -1,13 +1,13 @@
 #include "common.h"
 #include "nu/nusys.h"
 
-void INCLUDE_ASM("os/code_39db0_len_8a0", nuScCreateScheduler, u8 videoMode, u8 numFields);
+INCLUDE_ASM(void, "os/code_39db0_len_8a0", nuScCreateScheduler, u8 videoMode, u8 numFields);
 
-INCLUDE_ASM("os/code_39db0_len_8a0", nuScExecuteAudio);
+INCLUDE_ASM(void, "os/code_39db0_len_8a0", nuScExecuteAudio);
 
-INCLUDE_ASM("os/code_39db0_len_8a0", nuScExecuteGraphics);
+INCLUDE_ASM(void, "os/code_39db0_len_8a0", nuScExecuteGraphics);
 
-void INCLUDE_ASM("os/code_39db0_len_8a0", nuScAddClient, NUScClient *c, OSMesgQueue *mq, NUScMsg msgType);
+INCLUDE_ASM(void, "os/code_39db0_len_8a0", nuScAddClient, NUScClient *c, OSMesgQueue *mq, NUScMsg msgType);
 
 void nuScRemoveClient(NUScClient *client) {
     s32 mask = osSetIntMask(OS_IM_NONE);
@@ -44,7 +44,7 @@ OSMesgQueue* nuScGetGfxMQ(void) {
     return &nusched.graphicsRequestMQ;
 }
 #else
-OSMesgQueue* INCLUDE_ASM("os/code_39db0_len_8a0", nuScGetGfxMQ, void);
+INCLUDE_ASM(OSMesgQueue*, "os/code_39db0_len_8a0", nuScGetGfxMQ, void);
 #endif
 
 #ifdef NON_MATCHING
@@ -53,7 +53,7 @@ OSMesgQueue* nuScGetAudioMQ(void) {
     return &nusched.audioRequestMQ;
 }
 #else
-OSMesgQueue* INCLUDE_ASM("os/code_39db0_len_8a0", nuScGetAudioMQ, void);
+INCLUDE_ASM(OSMesgQueue*, "os/code_39db0_len_8a0", nuScGetAudioMQ, void);
 #endif
 
 #ifdef NON_MATCHING
@@ -62,7 +62,7 @@ void nuScSetFrameBufferNum(u8 frameBufferNum) {
     nusched.frameBufferNum = frameBufferNum;
 }
 #else
-void INCLUDE_ASM("os/code_39db0_len_8a0", nuScSetFrameBufferNum, u8 frameBufferNum);
+INCLUDE_ASM(void, "os/code_39db0_len_8a0", nuScSetFrameBufferNum, u8 frameBufferNum);
 #endif
 
 #ifdef NON_MATCHING
@@ -71,10 +71,10 @@ s32 nuScGetFrameRate(void) {
     return nusched.frameRate;
 }
 #else
-s32 INCLUDE_ASM("os/code_39db0_len_8a0", nuScGetFrameRate, void);
+(s32, "os/code_39db0_len_8a0", nuScGetFrameRate, void);
 #endif
 
-INCLUDE_ASM("os/code_39db0_len_8a0", nuScEventHandler);
+INCLUDE_ASM(void, "os/code_39db0_len_8a0", nuScEventHandler);
 
 static void nuScEventBroadcast(NUScMsg *msg) {
     NUScClient *clientList = nusched.clientList;
@@ -87,4 +87,4 @@ static void nuScEventBroadcast(NUScMsg *msg) {
     }
 }
 
-INCLUDE_ASM("os/code_39db0_len_8a0", nuScWaitTaskReady);
+INCLUDE_ASM(void, "os/code_39db0_len_8a0", nuScWaitTaskReady);

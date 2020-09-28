@@ -34,13 +34,13 @@ extern s32 D_8009A5D8;
 
 void dma_copy(void*, void*, void*);
 
-INCLUDE_ASM("code_1b40_len_20b0", step_game_loop);
+INCLUDE_ASM(s32, "code_1b40_len_20b0", step_game_loop);
 
-INCLUDE_ASM("code_1b40_len_20b0", func_800269EC);
+INCLUDE_ASM(s32, "code_1b40_len_20b0", func_800269EC);
 
-INCLUDE_ASM("code_1b40_len_20b0", gfx_draw_frame);
+INCLUDE_ASM(s32, "code_1b40_len_20b0", gfx_draw_frame);
 
-INCLUDE_ASM("code_1b40_len_20b0", load_engine_data);
+INCLUDE_ASM(s32, "code_1b40_len_20b0", load_engine_data);
 /*void load_engine_data(void) {
     game_status *phi_s0;
     s32 i;
@@ -111,13 +111,13 @@ INCLUDE_ASM("code_1b40_len_20b0", load_engine_data);
     set_game_mode(0);
 }*/
 
-INCLUDE_ASM("code_1b40_len_20b0", func_80027088);
+INCLUDE_ASM(s32, "code_1b40_len_20b0", func_80027088);
 
 s32 func_80027190(void) {
     return D_8009A5D8;
 }
 
-INCLUDE_ASM("code_1b40_len_20b0", func_800271A0);
+INCLUDE_ASM(s32, "code_1b40_len_20b0", func_800271A0);
 /*void func_800271A0(void) {
     Gfx *temp = D_8009A66C[0] + 1;
 
@@ -128,16 +128,16 @@ INCLUDE_ASM("code_1b40_len_20b0", func_800271A0);
     gSPDisplayList(D_8009A66C[0]++, &D_00074210);
 }*/
 
-INCLUDE_ASM("code_1b40_len_20b0", func_800271FC);
+INCLUDE_ASM(s32, "code_1b40_len_20b0", func_800271FC);
 
-INCLUDE_ASM("code_1b40_len_20b0", func_8002725C);
+INCLUDE_ASM(s32, "code_1b40_len_20b0", func_8002725C);
 
-INCLUDE_ASM("code_1b40_len_20b0", func_80027600);
+INCLUDE_ASM(s32, "code_1b40_len_20b0", func_80027600);
 
-INCLUDE_ASM("code_1b40_len_20b0", func_80027774);
+INCLUDE_ASM(s32, "code_1b40_len_20b0", func_80027774);
 
-INCLUDE_ASM("code_1b40_len_20b0", func_800279B4);
+INCLUDE_ASM(s32, "code_1b40_len_20b0", func_800279B4);
 
-INCLUDE_ASM("code_1b40_len_20b0", func_80027BAC);
+INCLUDE_ASM(s32, "code_1b40_len_20b0", func_80027BAC);
 
-INCLUDE_ASM("code_1b40_len_20b0", func_80027E10);
+INCLUDE_ASM(s32, "code_1b40_len_20b0", func_80027E10);

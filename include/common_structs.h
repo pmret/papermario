@@ -115,7 +115,7 @@ typedef struct PlayerData {
     /* 0x208 */ s16 equippedBadges[64];
     /* 0x288 */ char unk_288;
     /* 0x289 */ u8 merleeSpellType;
-    /* 0x28A */ u8 merleeCastsLeft;
+    /* 0x28A */ s8 merleeCastsLeft;
     /* 0x28B */ char unk_28B;
     /* 0x28C */ s16 merleeTurnCount;
     /* 0x28E */ s8 maxStarPower;
@@ -156,9 +156,8 @@ typedef struct PlayerData {
 typedef struct Trigger {
     /* 0x00 */ s16 genericFlagIndex;
     /* 0x02 */ char unk_02[2];
-    /* 0x04 */ s16 crateFlagIndex;
-    /* 0x06 */ s16 panelFlagIndex;
-    /* 0x08 */ s32 colliderID;
+    /* 0x04 */ s32 params1;
+    /* 0x08 */ s32 params2;
     /* 0x0C */ UNK_FUN_PTR(functionHandler);
     /* 0x10 */ Bytecode* scriptStart;
     /* 0x14 */ struct ScriptInstance* runningScript;
@@ -198,9 +197,13 @@ typedef struct Enemy {
     /* 0x60 */ s32 defeatScriptID;
     /* 0x64 */ char unk_64[8];
     /* 0x6C */ s32 varTable[16];
-    /* 0xAC */ char unk_AC[12];
+    /* 0xAC */ char unk_AC[9];
+    /* 0xB5 */ s8 unk_B5;
+    /* 0xB6 */ char unk_B6[2];
     /* 0xB8 */ s32 unkSettings24;
-    /* 0xBC */ char unk_BC[16];
+    /* 0xBC */ char unk_BC[8];
+    /* 0xC4 */ s32 unk_C4;
+    /* 0xC8 */ s32 unk_C8;
     /* 0xCC */ UNK_PTR animList;
     /* 0xD0 */ UNK_PTR territoryData;
     /* 0xD4 */ UNK_PTR dropTables;
@@ -265,7 +268,9 @@ typedef struct ScriptInstance {
 
 typedef struct Entity {
     /* 0x00 */ s32 flags;
-    /* 0x04 */ char unk_04[7];
+    /* 0x04 */ char unk_04[2];
+    /* 0x06 */ s8 unk_06;
+    /* 0x07 */ char unk_08[4];
     /* 0x0B */ u8 alpha; /* reported by rain */
     /* 0x0C */ s16 aabb[3];
     /* 0x12 */ char unk_12[4];
@@ -678,7 +683,8 @@ typedef struct Model {
     /* 0xA6 */ u8 renderMode; /* Created by retype action */
     /* 0xA7 */ char unk_A7;
     /* 0xA8 */ u8 textureID;
-    /* 0xA9 */ char unk_A9[7];
+    /* 0xA9 */ u8 unk_A9;
+    /* 0xAA */ char unk_AA[6];
 } Model; // size = 0xB0
 
 typedef struct AnimatedMesh {
@@ -728,8 +734,8 @@ typedef struct StaticItem {
     /* 0x14 */ s32 itemString;
     /* 0x18 */ s16 typeFlags;
     /* 0x1A */ u8 moveID;
-    /* 0x1B */ u8 potencyA;
-    /* 0x1C */ u8 potencyB;
+    /* 0x1B */ s8 potencyA;
+    /* 0x1C */ s8 potencyB;
     /* 0x1D */ char unk_1D[3];
 } StaticItem; // size = 0x20
 
@@ -802,7 +808,9 @@ typedef struct PrintContext {
     /* 0x45A */ char unk_45A[45];
     /* 0x487 */ u8 unkArraySize;
     /* 0x488 */ s16 unkArrayunkLength[4];
-    /* 0x490 */ char unk_490[108];
+    /* 0x490 */ char unk_490[0x58];
+    /* 0x4E8 */ u8 unk_4E8;
+    /* 0x4E9 */ char unk_4E9[19];
     /* 0x4FC */ s32 stateFlags;
     /* 0x500 */ char unk_500[9];
     /* 0x509 */ u8 lerpElpasedTime;
@@ -854,7 +862,7 @@ typedef struct GameStatus {
     /* 0x072 */ u8 nextDemoScene; /* which part of the demo to play next */
     /* 0x073 */ u8 contBitPattern;
     /* 0x074 */ char unk_74[4];
-    /* 0x078 */ u8 disableScripts;
+    /* 0x078 */ s8 disableScripts;
     /* 0x079 */ char unk_79;
     /* 0x07A */ s8 musicEnabled;
     /* 0x07B */ char unk_7B[3];
@@ -897,7 +905,7 @@ typedef struct GameStatus {
     /* 0x15C */ s16 unk_15C;
     /* 0x15E */ char unk_15E[0x2];
     /* 0x160 */ s16 savedPos[3];
-    /* 0x166 */ s8 saveSlot;
+    /* 0x166 */ u8 saveSlot;
     /* 0x167 */ u8 loadType; /* (0 = from map, 1 = from main menu) */
     /* 0x168 */ s32 saveCount;
     /* 0x16C */ char unk_16C[12];
@@ -1341,8 +1349,8 @@ typedef struct PlayerStatus {
     /* 0x00C */ u8 peachDisguise;
     /* 0x00D */ char unk_0D[5];
     /* 0x012 */ s16 moveFrames;
-    /* 0x014 */ u8 enableCollisionOverlapsCheck;
-    /* 0x015 */ u8 statusMenuCounterinputEnabledCounter; /* whether the C-up menu can appear */
+    /* 0x014 */ s8 enableCollisionOverlapsCheck;
+    /* 0x015 */ s8 statusMenuCounterinputEnabledCounter; /* whether the C-up menu can appear */
     /* 0x016 */ s16 lastGoodPosition[3];
     /* 0x01C */ struct Vec3f extraVelocity;
     /* 0x028 */ struct Vec3f position;
@@ -1402,9 +1410,9 @@ typedef struct EncounterStatus {
     /* 0x00 */ s32 flags;
     /* 0x04 */ u8 eFirstStrike; /* 0 = none, 1 = player, 2 = enemy */
     /* 0x05 */ s8 hitType; /* 1 = none/enemy, 2 = jump */
-    /* 0x06 */ u8 hitTier; /* 0 = normal, 1 = super, 2 = ultra */
+    /* 0x06 */ s8 hitTier; /* 0 = normal, 1 = super, 2 = ultra */
     /* 0x07 */ char unk_07[2];
-    /* 0x09 */ u8 battleOutcome; /* 0 = won, 1 = lost */
+    /* 0x09 */ s8 battleOutcome; /* 0 = won, 1 = lost */
     /* 0x0A */ char unk_0A;
     /* 0x0B */ u8 merleeCoinBonus; /* triple coins when != 0 */
     /* 0x0C */ u8 damageTaken; /* valid after battle */
@@ -1412,7 +1420,7 @@ typedef struct EncounterStatus {
     /* 0x0E */ s16 coinsEarned; /* valid after battle */
     /* 0x10 */ char unk_10;
     /* 0x11 */ u8 allowFleeing;
-    /* 0x12 */ char unk_12;
+    /* 0x12 */ s8 unk_12;
     /* 0x13 */ u8 dropWhackaBump;
     /* 0x14 */ s32 songID;
     /* 0x18 */ s32 unk_18;
@@ -1445,7 +1453,7 @@ typedef struct SaveData {
     /* 0x046C */ s16 entryID;
     /* 0x046E */ char unk_46E[2];
     /* 0x0470 */ s32 enemyDefeatFlags[720];
-    /* 0x0FB0 */ s8 globalFlags[256];
+    /* 0x0FB0 */ s32 globalFlags[64];
     /* 0x10B0 */ s8 globalBytes[512];
     /* 0x12B0 */ s32 areaFlags[8];
     /* 0x12D0 */ s8 areaBytes[16];

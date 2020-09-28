@@ -1,111 +1,29 @@
-.set noat # allow manual use of $at
+.set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-
 glabel func_80280B78
-/* 7E19F8 80280B78 3C028007 */  lui   $v0, 0x8007
-/* 7E19FC 80280B7C 8C42419C */  lw    $v0, 0x419c($v0)
-/* 7E1A00 80280B80 8C420144 */  lw    $v0, 0x144($v0)
-/* 7E1A04 80280B84 84460004 */  lh    $a2, 4($v0)
-/* 7E1A08 80280B88 8C43001C */  lw    $v1, 0x1c($v0)
-/* 7E1A0C 80280B8C 18C0000A */  blez  $a2, .L80280BB8
-/* 7E1A10 80280B90 0000282D */   daddu $a1, $zero, $zero
+/* 7E19F8 80280B78 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* 7E19FC 80280B7C 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
+/* 7E1A00 80280B80 8C420144 */  lw        $v0, 0x144($v0)
+/* 7E1A04 80280B84 84460004 */  lh        $a2, 4($v0)
+/* 7E1A08 80280B88 8C43001C */  lw        $v1, 0x1c($v0)
+/* 7E1A0C 80280B8C 18C0000A */  blez      $a2, .L80280BB8
+/* 7E1A10 80280B90 0000282D */   daddu    $a1, $zero, $zero
 .L80280B94:
-/* 7E1A14 80280B94 8C620000 */  lw    $v0, ($v1)
-/* 7E1A18 80280B98 14440004 */  bne   $v0, $a0, .L80280BAC
-/* 7E1A1C 80280B9C 24A50001 */   addiu $a1, $a1, 1
-/* 7E1A20 80280BA0 8C620004 */  lw    $v0, 4($v1)
-/* 7E1A24 80280BA4 03E00008 */  jr    $ra
-/* 7E1A28 80280BA8 00000000 */   nop   
-
+/* 7E1A14 80280B94 8C620000 */  lw        $v0, ($v1)
+/* 7E1A18 80280B98 14440004 */  bne       $v0, $a0, .L80280BAC
+/* 7E1A1C 80280B9C 24A50001 */   addiu    $a1, $a1, 1
+/* 7E1A20 80280BA0 8C620004 */  lw        $v0, 4($v1)
+/* 7E1A24 80280BA4 03E00008 */  jr        $ra
+/* 7E1A28 80280BA8 00000000 */   nop      
 .L80280BAC:
-/* 7E1A2C 80280BAC 00A6102A */  slt   $v0, $a1, $a2
-/* 7E1A30 80280BB0 1440FFF8 */  bnez  $v0, .L80280B94
-/* 7E1A34 80280BB4 2463000C */   addiu $v1, $v1, 0xc
+/* 7E1A2C 80280BAC 00A6102A */  slt       $v0, $a1, $a2
+/* 7E1A30 80280BB0 1440FFF8 */  bnez      $v0, .L80280B94
+/* 7E1A34 80280BB4 2463000C */   addiu    $v1, $v1, 0xc
 .L80280BB8:
-/* 7E1A38 80280BB8 00041140 */  sll   $v0, $a0, 5
-/* 7E1A3C 80280BBC 3C018008 */  lui   $at, 0x8008
-/* 7E1A40 80280BC0 00220821 */  addu  $at, $at, $v0
-/* 7E1A44 80280BC4 842278EC */  lh    $v0, 0x78ec($at)
-/* 7E1A48 80280BC8 03E00008 */  jr    $ra
-/* 7E1A4C 80280BCC 00000000 */   nop   
-
-/* 7E1A50 80280BD0 3C028007 */  lui   $v0, 0x8007
-/* 7E1A54 80280BD4 8C42419C */  lw    $v0, 0x419c($v0)
-/* 7E1A58 80280BD8 27BDFFD8 */  addiu $sp, $sp, -0x28
-/* 7E1A5C 80280BDC AFB10014 */  sw    $s1, 0x14($sp)
-/* 7E1A60 80280BE0 AFB20018 */  sw    $s2, 0x18($sp)
-/* 7E1A64 80280BE4 3C128011 */  lui   $s2, 0x8011
-/* 7E1A68 80280BE8 2652F290 */  addiu $s2, $s2, -0xd70
-/* 7E1A6C 80280BEC AFBF0020 */  sw    $ra, 0x20($sp)
-/* 7E1A70 80280BF0 AFB3001C */  sw    $s3, 0x1c($sp)
-/* 7E1A74 80280BF4 AFB00010 */  sw    $s0, 0x10($sp)
-/* 7E1A78 80280BF8 8C500144 */  lw    $s0, 0x144($v0)
-/* 7E1A7C 80280BFC 10A00006 */  beqz  $a1, .L80280C18
-/* 7E1A80 80280C00 0080882D */   daddu $s1, $a0, $zero
-/* 7E1A84 80280C04 0C0A0000 */  jal   func_80280000
-/* 7E1A88 80280C08 24040004 */   addiu $a0, $zero, 4
-/* 7E1A8C 80280C0C AE220074 */  sw    $v0, 0x74($s1)
-/* 7E1A90 80280C10 24020004 */  addiu $v0, $zero, 4
-/* 7E1A94 80280C14 AE220070 */  sw    $v0, 0x70($s1)
-.L80280C18:
-/* 7E1A98 80280C18 8E230070 */  lw    $v1, 0x70($s1)
-/* 7E1A9C 80280C1C 24130020 */  addiu $s3, $zero, 0x20
-/* 7E1AA0 80280C20 10730117 */  beq   $v1, $s3, .L80281080
-/* 7E1AA4 80280C24 28620021 */   slti  $v0, $v1, 0x21
-/* 7E1AA8 80280C28 10400027 */  beqz  $v0, .L80280CC8
-/* 7E1AAC 80280C2C 24020007 */   addiu $v0, $zero, 7
-/* 7E1AB0 80280C30 1062018C */  beq   $v1, $v0, .L80281264
-/* 7E1AB4 80280C34 28620008 */   slti  $v0, $v1, 8
-/* 7E1AB8 80280C38 10400011 */  beqz  $v0, .L80280C80
-/* 7E1ABC 80280C3C 24020003 */   addiu $v0, $zero, 3
-/* 7E1AC0 80280C40 106200D9 */  beq   $v1, $v0, .L80280FA8
-/* 7E1AC4 80280C44 28620004 */   slti  $v0, $v1, 4
-/* 7E1AC8 80280C48 10400007 */  beqz  $v0, .L80280C68
-/* 7E1ACC 80280C4C 24020004 */   addiu $v0, $zero, 4
-/* 7E1AD0 80280C50 106001DC */  beqz  $v1, .L802813C4
-/* 7E1AD4 80280C54 24020002 */   addiu $v0, $zero, 2
-/* 7E1AD8 80280C58 106200AF */  beq   $v1, $v0, .L80280F18
-/* 7E1ADC 80280C5C 0000102D */   daddu $v0, $zero, $zero
-/* 7E1AE0 80280C60 080A0506 */  j     .L80281418
-/* 7E1AE4 80280C64 00000000 */   nop   
-
-.L80280C68:
-/* 7E1AE8 80280C68 1062003F */  beq   $v1, $v0, .L80280D68
-/* 7E1AEC 80280C6C 24020005 */   addiu $v0, $zero, 5
-/* 7E1AF0 80280C70 1062012B */  beq   $v1, $v0, .L80281120
-/* 7E1AF4 80280C74 0000102D */   daddu $v0, $zero, $zero
-/* 7E1AF8 80280C78 080A0506 */  j     .L80281418
-/* 7E1AFC 80280C7C 00000000 */   nop   
-
-.L80280C80:
-/* 7E1B00 80280C80 2402000C */  addiu $v0, $zero, 0xc
-/* 7E1B04 80280C84 10620108 */  beq   $v1, $v0, .L802810A8
-/* 7E1B08 80280C88 2862000D */   slti  $v0, $v1, 0xd
-/* 7E1B0C 80280C8C 10400007 */  beqz  $v0, .L80280CAC
-/* 7E1B10 80280C90 24020009 */   addiu $v0, $zero, 9
-/* 7E1B14 80280C94 106201CB */  beq   $v1, $v0, .L802813C4
-/* 7E1B18 80280C98 2402000A */   addiu $v0, $zero, 0xa
-/* 7E1B1C 80280C9C 106201D1 */  beq   $v1, $v0, .L802813E4
-/* 7E1B20 80280CA0 0000102D */   daddu $v0, $zero, $zero
-/* 7E1B24 80280CA4 080A0506 */  j     .L80281418
-/* 7E1B28 80280CA8 00000000 */   nop   
-
-.L80280CAC:
-/* 7E1B2C 80280CAC 24020015 */  addiu $v0, $zero, 0x15
-/* 7E1B30 80280CB0 106200A0 */  beq   $v1, $v0, .L80280F34
-/* 7E1B34 80280CB4 2402001F */   addiu $v0, $zero, 0x1f
-/* 7E1B38 80280CB8 106200C5 */  beq   $v1, $v0, .L80280FD0
-/* 7E1B3C 80280CBC 0000102D */   daddu $v0, $zero, $zero
-/* 7E1B40 80280CC0 080A0506 */  j     .L80281418
-/* 7E1B44 80280CC4 00000000 */   nop   
-
-.L80280CC8:
-/* 7E1B48 80280CC8 24020047 */  addiu $v0, $zero, 0x47
-/* 7E1B4C 80280CCC 1062016F */  beq   $v1, $v0, .L8028128C
-/* 7E1B50 80280CD0 28620048 */   slti  $v0, $v1, 0x48
-/* 7E1B54 80280CD4 10400012 */  beqz  $v0, .L80280D20
-/* 7E1B58 80280CD8 24020033 */   addiu $v0, $zero, 0x33
-/* 7E1B5C 80280CDC 10620117 */  beq   $v1, $v0, .L8028113C
-/* 7E1B60 80280CE0 28620034 */   slti  $v0, $v1, 0x34
-/* 7E1B64 80280CE4 10400007 */  beqz  $v0, .L80280D04
+/* 7E1A38 80280BB8 00041140 */  sll       $v0, $a0, 5
+/* 7E1A3C 80280BBC 3C018008 */  lui       $at, 0x8008
+/* 7E1A40 80280BC0 00220821 */  addu      $at, $at, $v0
+/* 7E1A44 80280BC4 842278EC */  lh        $v0, 0x78ec($at)
+/* 7E1A48 80280BC8 03E00008 */  jr        $ra
+/* 7E1A4C 80280BCC 00000000 */   nop      

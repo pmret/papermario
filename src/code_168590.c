@@ -1,3 +1,25 @@
 #include "common.h"
 
-INCLUDE_ASM("code_168590", func_80247D30);
+INCLUDE_ASM(s32, "code_168590", func_80247D30);
+
+INCLUDE_ASM(s32, "code_168590", func_80247FD0);
+
+INCLUDE_ASM(s32, "code_168590", func_80248024);
+
+INCLUDE_ASM(s32, "code_168590", func_80248160);
+
+INCLUDE_ASM(s32, "code_168590", func_80248168);
+
+INCLUDE_ASM(s32, "code_168590", func_80248170);
+
+INCLUDE_ASM(s32, "code_168590", func_802481B8);
+
+INCLUDE_ASM(s32, "code_168590", func_8024830C);
+
+INCLUDE_ASM(s32, "code_168590", func_80248A80);
+
+INCLUDE_ASM(s32, "code_168590", func_80248BF4);
+
+INCLUDE_ASM(s32, "code_168590", func_80249324);
+
+INCLUDE_ASM(s32, "code_168590", func_8024932C);

@@ -28,4 +28,8 @@ void get_npc_pos(s32 arg0, f32* outX, f32* outY, f32* outZ, s32* arg4) {
     }
 }
 
-INCLUDE_ASM("code_39210_len_aa0", func_8005DECC);
+INCLUDE_ASM(s32, "code_39210_len_aa0", func_8005DECC);
+
+INCLUDE_ASM(s32, "code_39210_len_aa0", func_8005DFD4);
+
+INCLUDE_ASM(s32, "code_39210_len_aa0", func_8005E12C);

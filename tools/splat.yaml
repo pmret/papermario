@@ -1,13 +1,14 @@
 name: "Paper Mario (North America)"
 basename: "papermario"
-options: ["skip-asm"]
+options: ["find-file-boundaries", "skip-asm"]
+compiler: "GCC"
 segments:
   - name: header
     type: code
     start: 0x00
     vram: 0
     files:
-    - [0x0000, "asm", "header"]
+    - [0x0000, "header", "header"]
   - name: boot
     type: code
     start: 0x0040
@@ -238,6 +239,7 @@ segments:
     - [0xef070, "c", "code_ef070_len_3400"]
     - [0xf2470, "c", "code_f2470_len_27f0"]
     - [0xf4c60, "c", "code_f4c60_len_4300"]
+    - [0xf5750, "c", "code_F5750"]
     - [0xf8f60, "c", "code_f8f60_len_1560"]
     - [0xfa4c0, "c", "code_fa4c0_len_3bf0"]
     - [0xfe0b0, "c", "code_fe0b0_len_5a0"]
@@ -261,6 +263,7 @@ segments:
     - [0x107830, "c", "code_107830_len_e70"]
     - [0x1086a0, "c", "code_1086a0_len_fc0"]
     - [0x109660, "c", "code_109660_len_1270"]
+    - [0x10A8D0, "c", "code_10A8D0"]
   - [0x10A9F0, "bin"] # todo split this further
   - [0x131340, "bin"] # 0x8023E000
   - name: code

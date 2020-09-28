@@ -1,3 +1,3 @@
 #include "common.h"
 
-OSPri INCLUDE_ASM("os/osGetThreadPri", osGetThreadPri, OSThread* thread);
+INCLUDE_ASM(OSPri, "os/osGetThreadPri", osGetThreadPri, OSThread* thread);
