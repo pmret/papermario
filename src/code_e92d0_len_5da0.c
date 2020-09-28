@@ -213,7 +213,20 @@ INCLUDE_ASM("code_e92d0_len_5da0", si_handle_case_greater_equal);
 
 INCLUDE_ASM("code_e92d0_len_5da0", si_handle_case_range);
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_handle_case_default);
+ApiStatus si_handle_case_default(ScriptInstance* script) {
+    s32 switchDepth = script->switchDepth;
+
+    ASSERT(switchDepth >= 0);
+
+    if (script->switchBlockState[switchDepth] > 0) {
+        script->switchBlockState[switchDepth] = 0;
+    } else {
+        script->ptrNextLine = si_goto_end_case(script);
+    }
+    return ApiStatus_DONE2;
+
+    do {} while (0); // Necessary to match
+}
 
 INCLUDE_ASM("code_e92d0_len_5da0", si_handle_case_AND);
 
@@ -705,9 +718,61 @@ s32 func_802C73B8(ScriptInstance* script) {
 
 INCLUDE_ASM("code_e92d0_len_5da0", si_execute_next_command);
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_handle_end);
+// TODO: consider renaming to si_get_variable
+#ifdef NON_MATCHING
+s32 get_variable(ScriptInstance* script, Bytecode var) {
+    s32 abs_value;
+    s32 word_index;
+    s32 bit_index;
 
+    if (var <= -270000000) {
+        return var;
+    } else if (var <= -250000000) {
+        return var;
+    } else if (var <= -220000000) {
+        return (s32) fixed_var_to_float(var);
+    } else if (var <= -200000000) {
+        var += 210000000;
+        word_index = var / 32;
+        bit_index = var % 32;
+        return (script->flagArray[word_index] & (1 << bit_index)) != 0;
+    } else if (var <= -180000000) {
+        var += 190000000;
+        var = script->array[var];
+        return (var > -270000000 && var < -220000000) ? (s32) fixed_var_to_float(var) : var;
+    } else if (var <= -160000000) {
+        return get_global_byte(var + 170000000);
+    } else if (var <= -140000000) {
+        return get_area_byte(var + 150000000);
+    } else if (var <= -120000000) {
+        return get_global_flag(var + 130000000);
+    } else if (var <= -100000000) {
+        return get_area_flag(var + 110000000);
+    } else if (var <= -80000000) {
+        s32 avar = var + 90000000;
+        word_index = avar / 32;
+        bit_index = avar % 32;
+        return (gMapFlags[word_index] & (1 << bit_index)) != 0;
+    } else if (var <= -60000000) {
+        var += 70000000;
+        word_index = var / 32;
+        bit_index = var % 32;
+        return (script->varFlags[word_index] & (1 << bit_index)) != 0;
+    } else if (var <= -40000000) {
+        var += 50000000;
+        var = gMapVars[var];
+        return (var > -270000000 && var < -220000000) ? (s32) fixed_var_to_float(var) : var;
+    } else if (var <= -20000000) {
+        var += 30000000;
+        var = script->varTable[var];
+        return (var > -270000000 && var < -220000000) ? (s32) fixed_var_to_float(var) : var;
+    } else {
+        return var;
+    }
+}
+#else
 s32 INCLUDE_ASM("code_e92d0_len_5da0", get_variable, ScriptInstance* script, Bytecode var);
+#endif
 
 INCLUDE_ASM("code_e92d0_len_5da0", get_variable_index);
 
@@ -722,8 +787,80 @@ f32 INCLUDE_ASM("code_e92d0_len_5da0", set_float_variable, ScriptInstance* scrip
 INCLUDE_ASM("code_e92d0_len_5da0", si_goto_label);
 
 INCLUDE_ASM("code_e92d0_len_5da0", si_skip_if);
+// Matching but needs rodata support
+/*Bytecode* si_skip_if(ScriptInstance* script) {
+    s32 nestedIfDepth = 0;
+    Bytecode* pos = script->ptrNextLine;
+    Bytecode opcode;
+    s32 nargs;
+
+    do {
+        opcode = *pos++;
+        nargs = *pos++;
+        pos += nargs;
+        switch(opcode) {
+            case 1:
+                PANIC();
+            case 10:
+            case 11:
+            case 12:
+            case 13:
+            case 14:
+            case 15:
+            case 16:
+            case 19:
+                nestedIfDepth--;
+                if (nestedIfDepth < 0) {
+                    return pos;
+                }
+                break;
+            case 17:
+                nestedIfDepth++;
+                break;
+            case 18:
+                if (nestedIfDepth == 0) {
+                    return pos;
+                }
+            break;
+        }
+    } while(1);
+}*/
 
 INCLUDE_ASM("code_e92d0_len_5da0", si_skip_else);
+// Matching but needs rodata support
+/*Bytecode* si_skip_else(ScriptInstance* script) {
+    s32 nestedIfDepth = 0;
+    Bytecode* pos = script->ptrNextLine;
+    Bytecode opcode;
+    s32 nargs;
+
+    do {
+        opcode = *pos++;
+        nargs = *pos++;
+        pos += nargs;
+        switch(opcode) {
+            case 1:
+                PANIC();
+            case 10:
+            case 11:
+            case 12:
+            case 13:
+            case 14:
+            case 15:
+            case 16:
+            case 19:
+                nestedIfDepth--;
+                if (nestedIfDepth < 0) {
+                    return pos;
+                }
+                break;
+            case 17:
+                nestedIfDepth++;
+                break;
+
+        }
+    } while(1);
+}*/
 
 INCLUDE_ASM("code_e92d0_len_5da0", si_goto_end_case);
 
@@ -731,13 +868,30 @@ INCLUDE_ASM("code_e92d0_len_5da0", si_goto_next_case);
 
 INCLUDE_ASM("code_e92d0_len_5da0", si_goto_end_loop);
 
+// Ethan: I think this is the start of a new file
 INCLUDE_API_ASM("code_e92d0_len_5da0", TranslateModel);
 
 INCLUDE_API_ASM("code_e92d0_len_5da0", RotateModel);
 
 INCLUDE_API_ASM("code_e92d0_len_5da0", ScaleModel);
 
-INCLUDE_API_ASM("code_e92d0_len_5da0", GetModelIndex);
+ApiStatus GetModelIndex(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* thisPos = script->ptrReadPos;
+    Bytecode modelID = get_variable(script, *thisPos++);
+    Bytecode index = *thisPos++;
+
+    set_variable(script, index, get_model_list_index_from_tree_index(modelID));
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_802C8EE4(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* thisPos = script->ptrReadPos;
+    Bytecode modelID = get_variable(script, *thisPos++);
+    Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(modelID));
+
+    model->flags &= ~0x400;
+    return ApiStatus_DONE2;
+}
 
 ApiStatus CloneModel(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* thisPos = script->ptrReadPos;
@@ -748,7 +902,22 @@ ApiStatus CloneModel(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_API_ASM("code_e92d0_len_5da0", GetModelCenter);
+ApiStatus GetModelCenter(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* thisPos = script->ptrReadPos;
+    f32 centerX;
+    f32 centerY;
+    f32 centerZ;
+    f32 sizeX;
+    f32 sizeY;
+    f32 sizeZ;
+
+    get_model_center_and_size(get_variable(script, *thisPos++) & 0xFFFF, &centerX, &centerY, &centerZ, &sizeX, &sizeY,
+                              &sizeZ);
+    script->varTable[0] = centerX;
+    script->varTable[1] = centerY;
+    script->varTable[2] = centerZ;
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_API_ASM("code_e92d0_len_5da0", SetTexPanner);
 
@@ -756,7 +925,20 @@ INCLUDE_API_ASM("code_e92d0_len_5da0", SetModelFlag10);
 
 INCLUDE_API_ASM("code_e92d0_len_5da0", EnableTexPanning);
 
-INCLUDE_API_ASM("code_e92d0_len_5da0", EnableModel);
+ApiStatus EnableModel(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* thisPos = script->ptrReadPos;
+    Bytecode treeIndex = get_variable(script, *thisPos++);
+    s32 listIndex = get_model_list_index_from_tree_index(treeIndex);
+    Bytecode flag = get_variable(script, *thisPos++);
+    Model* model = get_model_from_list_index(listIndex);
+
+    if (flag != 0) {
+        model->flags &= ~0x2;
+    } else {
+        model->flags |= 0x2;
+    }
+    return ApiStatus_DONE2;
+}
 
 ApiStatus SetGroupEnabled(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* thisPos = script->ptrReadPos;
@@ -842,7 +1024,15 @@ ApiStatus GetLoadType(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_API_ASM("code_e92d0_len_5da0", SetRenderMode);
+ApiStatus SetRenderMode(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* thisPos = script->ptrReadPos;
+    s32 treeIndex = get_variable(script, *thisPos++);
+    s8 renderMode = get_variable(script, *thisPos++);
+
+    get_model_from_list_index(get_model_list_index_from_tree_index(treeIndex))->renderMode = renderMode;
+
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_API_ASM("code_e92d0_len_5da0", PlaySoundAtModel);
 

@@ -1,13 +1,13 @@
 #!/bin/bash
 
-COMPILER_OPTS="-fno-builtin -std=gnu89 -Iinclude -Isrc -D_LANGUAGE_C"
+COMPILER_OPTS="-std=gnu89 -Iinclude -Isrc -D_LANGUAGE_C"
 
 shopt -s globstar
 
 FILES="src/**/*.c include/*.h"
 if (( $# > 0 )); then
     # only process .c and .h files
-    FILES=$(echo "$@" | sed 's/ /\n/g' | grep '.[ch]$')
+    FILES=$(echo "$@" | sed 's/ /\n/g' | grep '\.[ch]$')
 fi
 
 if [[ -z $FILES ]]; then
