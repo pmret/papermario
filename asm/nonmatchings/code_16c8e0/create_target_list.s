@@ -8,8 +8,8 @@ glabel create_target_list
 /* 190B2C 8026224C 0000A82D */  daddu     $s5, $zero, $zero
 /* 190B30 80262250 AFB70044 */  sw        $s7, 0x44($sp)
 /* 190B34 80262254 AFB60040 */  sw        $s6, 0x40($sp)
-/* 190B38 80262258 3C16800E */  lui       $s6, 0x800e
-/* 190B3C 8026225C 26D6C070 */  addiu     $s6, $s6, -0x3f90
+/* 190B38 80262258 3C16800E */  lui       $s6, %hi(gBattleStatus)
+/* 190B3C 8026225C 26D6C070 */  addiu     $s6, $s6, %lo(gBattleStatus)
 /* 190B40 80262260 AFBF004C */  sw        $ra, 0x4c($sp)
 /* 190B44 80262264 AFBE0048 */  sw        $fp, 0x48($sp)
 /* 190B48 80262268 AFB40038 */  sw        $s4, 0x38($sp)
@@ -881,15 +881,15 @@ glabel create_target_list
 /* 1917C0 80262EE0 8FB80018 */  lw        $t8, 0x18($sp)
 /* 1917C4 80262EE4 13000007 */  beqz      $t8, .L80262F04
 /* 1917C8 80262EE8 00000000 */   nop      
-/* 1917CC 80262EEC 3C03800E */  lui       $v1, 0x800e
-/* 1917D0 80262EF0 2463C070 */  addiu     $v1, $v1, -0x3f90
+/* 1917CC 80262EEC 3C03800E */  lui       $v1, %hi(gBattleStatus)
+/* 1917D0 80262EF0 2463C070 */  addiu     $v1, $v1, %lo(gBattleStatus)
 /* 1917D4 80262EF4 8C620004 */  lw        $v0, 4($v1)
 /* 1917D8 80262EF8 34421000 */  ori       $v0, $v0, 0x1000
 /* 1917DC 80262EFC 08098BC7 */  j         .L80262F1C
 /* 1917E0 80262F00 AC620004 */   sw       $v0, 4($v1)
 .L80262F04:
-/* 1917E4 80262F04 3C02800E */  lui       $v0, 0x800e
-/* 1917E8 80262F08 2442C070 */  addiu     $v0, $v0, -0x3f90
+/* 1917E4 80262F04 3C02800E */  lui       $v0, %hi(gBattleStatus)
+/* 1917E8 80262F08 2442C070 */  addiu     $v0, $v0, %lo(gBattleStatus)
 /* 1917EC 80262F0C 8C430004 */  lw        $v1, 4($v0)
 /* 1917F0 80262F10 2404EFFF */  addiu     $a0, $zero, -0x1001
 /* 1917F4 80262F14 00641824 */  and       $v1, $v1, $a0

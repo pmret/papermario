@@ -4,8 +4,8 @@
 glabel begin_state_intro
 /* 11A50 80036650 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 11A54 80036654 AFB10014 */  sw        $s1, 0x14($sp)
-/* 11A58 80036658 3C118007 */  lui       $s1, 0x8007
-/* 11A5C 8003665C 2631419C */  addiu     $s1, $s1, 0x419c
+/* 11A58 80036658 3C118007 */  lui       $s1, %hi(gGameStatusPtr)
+/* 11A5C 8003665C 2631419C */  addiu     $s1, $s1, %lo(gGameStatusPtr)
 /* 11A60 80036660 AFBF0018 */  sw        $ra, 0x18($sp)
 /* 11A64 80036664 AFB00010 */  sw        $s0, 0x10($sp)
 /* 11A68 80036668 8E220000 */  lw        $v0, ($s1)
@@ -89,8 +89,8 @@ glabel begin_state_intro
 /* 11B94 80036794 0C00CDF8 */  jal       intro_logos_set_fade_color
 /* 11B98 80036798 240400D0 */   addiu    $a0, $zero, 0xd0
 /* 11B9C 8003679C 2402FFFF */  addiu     $v0, $zero, -1
-/* 11BA0 800367A0 3C038007 */  lui       $v1, 0x8007
-/* 11BA4 800367A4 8C63419C */  lw        $v1, 0x419c($v1)
+/* 11BA0 800367A0 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
+/* 11BA4 800367A4 8C63419C */  lw        $v1, %lo(gGameStatusPtr)($v1)
 /* 11BA8 800367A8 3C048007 */  lui       $a0, 0x8007
 /* 11BAC 800367AC 248479B0 */  addiu     $a0, $a0, 0x79b0
 /* 11BB0 800367B0 A06200A8 */  sb        $v0, 0xa8($v1)

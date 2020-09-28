@@ -15,8 +15,8 @@ glabel func_80260BF4
 /* 18F4FC 80260C1C 0C00A67F */  jal       rand_int
 /* 18F500 80260C20 00442021 */   addu     $a0, $v0, $a0
 /* 18F504 80260C24 86030000 */  lh        $v1, ($s0)
-/* 18F508 80260C28 3C118011 */  lui       $s1, 0x8011
-/* 18F50C 80260C2C 2631F290 */  addiu     $s1, $s1, -0xd70
+/* 18F508 80260C28 3C118011 */  lui       $s1, %hi(gPlayerData)
+/* 18F50C 80260C2C 2631F290 */  addiu     $s1, $s1, %lo(gPlayerData)
 /* 18F510 80260C30 0043102A */  slt       $v0, $v0, $v1
 /* 18F514 80260C34 10400019 */  beqz      $v0, .L80260C9C
 /* 18F518 80260C38 0000202D */   daddu    $a0, $zero, $zero

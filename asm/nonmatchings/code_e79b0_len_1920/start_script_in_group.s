@@ -11,8 +11,8 @@ glabel start_script_in_group
 /* E7F98 802C35E8 00C0982D */  daddu     $s3, $a2, $zero
 /* E7F9C 802C35EC AFB50024 */  sw        $s5, 0x24($sp)
 /* E7FA0 802C35F0 00E0A82D */  daddu     $s5, $a3, $zero
-/* E7FA4 802C35F4 3C03802E */  lui       $v1, 0x802e
-/* E7FA8 802C35F8 8C63A890 */  lw        $v1, -0x5770($v1)
+/* E7FA4 802C35F4 3C03802E */  lui       $v1, %hi(gCurrentScriptListPtr)
+/* E7FA8 802C35F8 8C63A890 */  lw        $v1, %lo(gCurrentScriptListPtr)($v1)
 /* E7FAC 802C35FC 0000282D */  daddu     $a1, $zero, $zero
 /* E7FB0 802C3600 AFBF0028 */  sw        $ra, 0x28($sp)
 /* E7FB4 802C3604 AFB20018 */  sw        $s2, 0x18($sp)
@@ -36,10 +36,10 @@ glabel start_script_in_group
 /* E7FEC 802C363C 0C00AB39 */  jal       heap_malloc
 /* E7FF0 802C3640 00A0902D */   daddu    $s2, $a1, $zero
 /* E7FF4 802C3644 00122080 */  sll       $a0, $s2, 2
-/* E7FF8 802C3648 3C03802E */  lui       $v1, 0x802e
-/* E7FFC 802C364C 8C63A890 */  lw        $v1, -0x5770($v1)
-/* E8000 802C3650 3C05802E */  lui       $a1, 0x802e
-/* E8004 802C3654 24A5A488 */  addiu     $a1, $a1, -0x5b78
+/* E7FF8 802C3648 3C03802E */  lui       $v1, %hi(gCurrentScriptListPtr)
+/* E7FFC 802C364C 8C63A890 */  lw        $v1, %lo(gCurrentScriptListPtr)($v1)
+/* E8000 802C3650 3C05802E */  lui       $a1, %hi(gNumScripts)
+/* E8004 802C3654 24A5A488 */  addiu     $a1, $a1, %lo(gNumScripts)
 /* E8008 802C3658 00832021 */  addu      $a0, $a0, $v1
 /* E800C 802C365C 8CA30000 */  lw        $v1, ($a1)
 /* E8010 802C3660 0040802D */  daddu     $s0, $v0, $zero
@@ -96,16 +96,16 @@ glabel start_script_in_group
 /* E80CC 802C371C 2442FFFC */   addiu    $v0, $v0, -4
 /* E80D0 802C3720 0C0B0C52 */  jal       find_script_labels
 /* E80D4 802C3724 0200202D */   daddu    $a0, $s0, $zero
-/* E80D8 802C3728 3C02802E */  lui       $v0, 0x802e
-/* E80DC 802C372C 8C429CA4 */  lw        $v0, -0x635c($v0)
+/* E80D8 802C3728 3C02802E */  lui       $v0, %hi(D_802D9CA4)
+/* E80DC 802C372C 8C429CA4 */  lw        $v0, %lo(D_802D9CA4)($v0)
 /* E80E0 802C3730 10400012 */  beqz      $v0, .L802C377C
 /* E80E4 802C3734 00000000 */   nop      
 /* E80E8 802C3738 92020000 */  lbu       $v0, ($s0)
 /* E80EC 802C373C 30420020 */  andi      $v0, $v0, 0x20
 /* E80F0 802C3740 1040000E */  beqz      $v0, .L802C377C
 /* E80F4 802C3744 00000000 */   nop      
-/* E80F8 802C3748 3C05802E */  lui       $a1, 0x802e
-/* E80FC 802C374C 24A5AC98 */  addiu     $a1, $a1, -0x5368
+/* E80F8 802C3748 3C05802E */  lui       $a1, %hi(gScriptListCount)
+/* E80FC 802C374C 24A5AC98 */  addiu     $a1, $a1, %lo(gScriptListCount)
 /* E8100 802C3750 8CA20000 */  lw        $v0, ($a1)
 /* E8104 802C3754 00022080 */  sll       $a0, $v0, 2
 /* E8108 802C3758 3C01802E */  lui       $at, 0x802e
@@ -114,9 +114,9 @@ glabel start_script_in_group
 /* E8114 802C3764 8E030144 */  lw        $v1, 0x144($s0)
 /* E8118 802C3768 24420001 */  addiu     $v0, $v0, 1
 /* E811C 802C376C ACA20000 */  sw        $v0, ($a1)
-/* E8120 802C3770 3C01802E */  lui       $at, 0x802e
+/* E8120 802C3770 3C01802E */  lui       $at, %hi(gScriptIndexList)
 /* E8124 802C3774 00240821 */  addu      $at, $at, $a0
-/* E8128 802C3778 AC23AA98 */  sw        $v1, -0x5568($at)
+/* E8128 802C3778 AC23AA98 */  sw        $v1, %lo(gScriptIndexList)($at)
 .L802C377C:
 /* E812C 802C377C 0C0B0CE4 */  jal       func_802C3390
 /* E8130 802C3780 0200202D */   daddu    $a0, $s0, $zero

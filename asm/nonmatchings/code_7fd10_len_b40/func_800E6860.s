@@ -3,14 +3,14 @@
 
 glabel func_800E6860
 /* 7FD10 800E6860 27BDFFD0 */  addiu     $sp, $sp, -0x30
-/* 7FD14 800E6864 3C038011 */  lui       $v1, 0x8011
-/* 7FD18 800E6868 2463EBB0 */  addiu     $v1, $v1, -0x1450
+/* 7FD14 800E6864 3C038011 */  lui       $v1, %hi(D_8010EBB0)
+/* 7FD18 800E6868 2463EBB0 */  addiu     $v1, $v1, %lo(D_8010EBB0)
 /* 7FD1C 800E686C AFBF0028 */  sw        $ra, 0x28($sp)
 /* 7FD20 800E6870 AFB10024 */  sw        $s1, 0x24($sp)
 /* 7FD24 800E6874 AFB00020 */  sw        $s0, 0x20($sp)
 /* 7FD28 800E6878 80620000 */  lb        $v0, ($v1)
-/* 7FD2C 800E687C 3C118011 */  lui       $s1, 0x8011
-/* 7FD30 800E6880 2631EFC8 */  addiu     $s1, $s1, -0x1038
+/* 7FD2C 800E687C 3C118011 */  lui       $s1, %hi(gPlayerStatus)
+/* 7FD30 800E6880 2631EFC8 */  addiu     $s1, $s1, %lo(gPlayerStatus)
 /* 7FD34 800E6884 1040001A */  beqz      $v0, .L800E68F0
 /* 7FD38 800E6888 24020009 */   addiu    $v0, $zero, 9
 /* 7FD3C 800E688C 80630003 */  lb        $v1, 3($v1)

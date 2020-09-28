@@ -7,8 +7,8 @@ glabel DisablePulseStone
 /* F7460 802D2AB0 AFB10014 */  sw        $s1, 0x14($sp)
 /* F7464 802D2AB4 AFB00010 */  sw        $s0, 0x10($sp)
 /* F7468 802D2AB8 8C82000C */  lw        $v0, 0xc($a0)
-/* F746C 802D2ABC 3C108011 */  lui       $s0, 0x8011
-/* F7470 802D2AC0 2610EFC8 */  addiu     $s0, $s0, -0x1038
+/* F746C 802D2ABC 3C108011 */  lui       $s0, %hi(gPlayerStatus)
+/* F7470 802D2AC0 2610EFC8 */  addiu     $s0, $s0, %lo(gPlayerStatus)
 /* F7474 802D2AC4 8C450000 */  lw        $a1, ($v0)
 /* F7478 802D2AC8 0C0B1EAF */  jal       get_variable
 /* F747C 802D2ACC 0200882D */   daddu    $s1, $s0, $zero

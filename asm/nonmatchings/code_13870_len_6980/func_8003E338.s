@@ -5,8 +5,8 @@ glabel func_8003E338
 /* 19738 8003E338 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 1973C 8003E33C AFBF0010 */  sw        $ra, 0x10($sp)
 /* 19740 8003E340 24050017 */  addiu     $a1, $zero, 0x17
-/* 19744 8003E344 3C06800B */  lui       $a2, 0x800b
-/* 19748 8003E348 24C60F10 */  addiu     $a2, $a2, 0xf10
+/* 19744 8003E344 3C06800B */  lui       $a2, %hi(gCurrentEncounter)
+/* 19748 8003E348 24C60F10 */  addiu     $a2, $a2, %lo(gCurrentEncounter)
 /* 1974C 8003E34C 24C2005C */  addiu     $v0, $a2, 0x5c
 .L8003E350:
 /* 19750 8003E350 AC400028 */  sw        $zero, 0x28($v0)
@@ -49,8 +49,8 @@ glabel func_8003E338
 /* 197D8 8003E3D8 00000000 */   nop      
 /* 197DC 8003E3DC 3C058004 */  lui       $a1, 0x8004
 /* 197E0 8003E3E0 24A5E670 */  addiu     $a1, $a1, -0x1990
-/* 197E4 8003E3E4 3C01800A */  lui       $at, 0x800a
-/* 197E8 8003E3E8 AC20A600 */  sw        $zero, -0x5a00($at)
+/* 197E4 8003E3E4 3C01800A */  lui       $at, %hi(gGameState)
+/* 197E8 8003E3E8 AC20A600 */  sw        $zero, %lo(gGameState)($at)
 /* 197EC 8003E3EC 0C048C56 */  jal       bind_dynamic_entity_3
 /* 197F0 8003E3F0 0000202D */   daddu    $a0, $zero, $zero
 /* 197F4 8003E3F4 8FBF0010 */  lw        $ra, 0x10($sp)

@@ -3,8 +3,8 @@
 
 glabel func_80255FE0
 /* 1848C0 80255FE0 27BDFC30 */  addiu     $sp, $sp, -0x3d0
-/* 1848C4 80255FE4 3C03800E */  lui       $v1, 0x800e
-/* 1848C8 80255FE8 2463C070 */  addiu     $v1, $v1, -0x3f90
+/* 1848C4 80255FE4 3C03800E */  lui       $v1, %hi(gBattleStatus)
+/* 1848C8 80255FE8 2463C070 */  addiu     $v1, $v1, %lo(gBattleStatus)
 /* 1848CC 80255FEC 0060102D */  daddu     $v0, $v1, $zero
 /* 1848D0 80255FF0 AFBF039C */  sw        $ra, 0x39c($sp)
 /* 1848D4 80255FF4 AFBE0398 */  sw        $fp, 0x398($sp)
@@ -101,8 +101,8 @@ glabel func_80255FE0
 /* 184A30 80256150 E7A40368 */  swc1      $f4, 0x368($sp)
 /* 184A34 80256154 8C42000C */  lw        $v0, 0xc($v0)
 /* 184A38 80256158 E4440010 */  swc1      $f4, 0x10($v0)
-/* 184A3C 8025615C 3C02800E */  lui       $v0, 0x800e
-/* 184A40 80256160 8C42C070 */  lw        $v0, -0x3f90($v0)
+/* 184A3C 8025615C 3C02800E */  lui       $v0, %hi(gBattleStatus)
+/* 184A40 80256160 8C42C070 */  lw        $v0, %lo(gBattleStatus)($v0)
 /* 184A44 80256164 30420004 */  andi      $v0, $v0, 4
 /* 184A48 80256168 1440001C */  bnez      $v0, .L802561DC
 /* 184A4C 8025616C 3C030800 */   lui      $v1, 0x800
@@ -150,8 +150,8 @@ glabel func_80255FE0
 /* 184AE8 80256208 8E440228 */  lw        $a0, 0x228($s2)
 /* 184AEC 8025620C 10800030 */  beqz      $a0, .L802562D0
 /* 184AF0 80256210 00000000 */   nop      
-/* 184AF4 80256214 3C03800E */  lui       $v1, 0x800e
-/* 184AF8 80256218 8C63C070 */  lw        $v1, -0x3f90($v1)
+/* 184AF4 80256214 3C03800E */  lui       $v1, %hi(gBattleStatus)
+/* 184AF8 80256218 8C63C070 */  lw        $v1, %lo(gBattleStatus)($v1)
 /* 184AFC 8025621C 30620008 */  andi      $v0, $v1, 8
 /* 184B00 80256220 14400007 */  bnez      $v0, .L80256240
 /* 184B04 80256224 30620004 */   andi     $v0, $v1, 4
@@ -871,8 +871,8 @@ glabel func_80255FE0
 /* 18558C 80256CAC 24050001 */   addiu    $a1, $zero, 1
 /* 185590 80256CB0 AE220088 */  sw        $v0, 0x88($s1)
 .L80256CB4:
-/* 185594 80256CB4 3C02800E */  lui       $v0, 0x800e
-/* 185598 80256CB8 8C42C070 */  lw        $v0, -0x3f90($v0)
+/* 185594 80256CB4 3C02800E */  lui       $v0, %hi(gBattleStatus)
+/* 185598 80256CB8 8C42C070 */  lw        $v0, %lo(gBattleStatus)($v0)
 /* 18559C 80256CBC 30420004 */  andi      $v0, $v0, 4
 /* 1855A0 80256CC0 1440002E */  bnez      $v0, .L80256D7C
 /* 1855A4 80256CC4 3C030800 */   lui      $v1, 0x800

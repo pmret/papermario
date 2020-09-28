@@ -8,8 +8,8 @@ glabel func_80282594
 /* 7E3420 802825A0 0C0B210B */  jal       get_float_variable
 /* 7E3424 802825A4 8C450000 */   lw       $a1, ($v0)
 /* 7E3428 802825A8 46000086 */  mov.s     $f2, $f0
-/* 7E342C 802825AC 3C02800B */  lui       $v0, 0x800b
-/* 7E3430 802825B0 24421D80 */  addiu     $v0, $v0, 0x1d80
+/* 7E342C 802825AC 3C02800B */  lui       $v0, %hi(gCameras)
+/* 7E3430 802825B0 24421D80 */  addiu     $v0, $v0, %lo(gCameras)
 /* 7E3434 802825B4 44800000 */  mtc1      $zero, $f0
 /* 7E3438 802825B8 00000000 */  nop       
 /* 7E343C 802825BC 4602003E */  c.le.s    $f0, $f2

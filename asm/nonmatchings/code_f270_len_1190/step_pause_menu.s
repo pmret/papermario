@@ -34,11 +34,11 @@ glabel step_pause_menu
 /* FDEC 800349EC 3C01800A */  lui       $at, 0x800a
 /* FDF0 800349F0 A0220920 */  sb        $v0, 0x920($at)
 /* FDF4 800349F4 24020002 */  addiu     $v0, $zero, 2
-/* FDF8 800349F8 3C04800A */  lui       $a0, 0x800a
-/* FDFC 800349FC 2484A650 */  addiu     $a0, $a0, -0x59b0
+/* FDF8 800349F8 3C04800A */  lui       $a0, %hi(D_8009A650)
+/* FDFC 800349FC 2484A650 */  addiu     $a0, $a0, %lo(D_8009A650)
 /* FE00 80034A00 A2020000 */  sb        $v0, ($s0)
-/* FE04 80034A04 3C058007 */  lui       $a1, 0x8007
-/* FE08 80034A08 8CA5419C */  lw        $a1, 0x419c($a1)
+/* FE04 80034A04 3C058007 */  lui       $a1, %hi(gGameStatusPtr)
+/* FE08 80034A08 8CA5419C */  lw        $a1, %lo(gGameStatusPtr)($a1)
 /* FE0C 80034A0C 8C820000 */  lw        $v0, ($a0)
 /* FE10 80034A10 94A30148 */  lhu       $v1, 0x148($a1)
 /* FE14 80034A14 34420008 */  ori       $v0, $v0, 8
@@ -66,8 +66,8 @@ glabel step_pause_menu
 /* FE64 80034A64 2402FFFF */  addiu     $v0, $zero, -1
 /* FE68 80034A68 0C017CBC */  jal       nuGfxSetCfb
 /* FE6C 80034A6C A0C20000 */   sb       $v0, ($a2)
-/* FE70 80034A70 3C108007 */  lui       $s0, 0x8007
-/* FE74 80034A74 2610419C */  addiu     $s0, $s0, 0x419c
+/* FE70 80034A70 3C108007 */  lui       $s0, %hi(gGameStatusPtr)
+/* FE74 80034A74 2610419C */  addiu     $s0, $s0, %lo(gGameStatusPtr)
 /* FE78 80034A78 8E030000 */  lw        $v1, ($s0)
 /* FE7C 80034A7C 9462015C */  lhu       $v0, 0x15c($v1)
 /* FE80 80034A80 0C05260E */  jal       func_80149838
@@ -97,8 +97,8 @@ glabel step_pause_menu
 /* FEE0 80034AE0 00000000 */   nop      
 /* FEE4 80034AE4 0C048C2E */  jal       clear_dynamic_entity_list
 /* FEE8 80034AE8 00000000 */   nop      
-/* FEEC 80034AEC 3C048020 */  lui       $a0, 0x8020
-/* FEF0 80034AF0 24840000 */  addiu     $a0, $a0, 0
+/* FEEC 80034AEC 3C048020 */  lui       $a0, %hi(gBackgroundImage)
+/* FEF0 80034AF0 24840000 */  addiu     $a0, $a0, %lo(gBackgroundImage)
 /* FEF4 80034AF4 3C050003 */  lui       $a1, 3
 /* FEF8 80034AF8 0C0514BA */  jal       func_801452E8
 /* FEFC 80034AFC 34A58000 */   ori      $a1, $a1, 0x8000
@@ -129,8 +129,8 @@ glabel step_pause_menu
 /* FF60 80034B60 2484795C */   addiu    $a0, $a0, 0x795c
 /* FF64 80034B64 0C091018 */  jal       pause_init
 /* FF68 80034B68 00000000 */   nop      
-/* FF6C 80034B6C 3C04800A */  lui       $a0, 0x800a
-/* FF70 80034B70 2484A650 */  addiu     $a0, $a0, -0x59b0
+/* FF6C 80034B6C 3C04800A */  lui       $a0, %hi(D_8009A650)
+/* FF70 80034B70 2484A650 */  addiu     $a0, $a0, %lo(D_8009A650)
 /* FF74 80034B74 8C820000 */  lw        $v0, ($a0)
 /* FF78 80034B78 2403FFF7 */  addiu     $v1, $zero, -9
 /* FF7C 80034B7C 00431024 */  and       $v0, $v0, $v1
@@ -154,8 +154,8 @@ glabel step_pause_menu
 /* FFBC 80034BBC 0800D2F6 */  j         .L80034BD8
 /* FFC0 80034BC0 A2020000 */   sb       $v0, ($s0)
 .L80034BC4:
-/* FFC4 80034BC4 3C028007 */  lui       $v0, 0x8007
-/* FFC8 80034BC8 8C42419C */  lw        $v0, 0x419c($v0)
+/* FFC4 80034BC4 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* FFC8 80034BC8 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* FFCC 80034BCC 8C440010 */  lw        $a0, 0x10($v0)
 /* FFD0 80034BD0 0C091109 */  jal       pause_handle_input
 /* FFD4 80034BD4 8C450020 */   lw       $a1, 0x20($v0)

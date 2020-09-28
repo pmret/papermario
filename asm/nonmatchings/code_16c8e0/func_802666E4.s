@@ -7,8 +7,8 @@ glabel func_802666E4
 /* 194FCC 802666EC 44861000 */  mtc1      $a2, $f2
 /* 194FD0 802666F0 44872000 */  mtc1      $a3, $f4
 /* 194FD4 802666F4 8FA30030 */  lw        $v1, 0x30($sp)
-/* 194FD8 802666F8 3C05800E */  lui       $a1, 0x800e
-/* 194FDC 802666FC 24A5C070 */  addiu     $a1, $a1, -0x3f90
+/* 194FD8 802666F8 3C05800E */  lui       $a1, %hi(gBattleStatus)
+/* 194FDC 802666FC 24A5C070 */  addiu     $a1, $a1, %lo(gBattleStatus)
 /* 194FE0 80266700 28620003 */  slti      $v0, $v1, 3
 /* 194FE4 80266704 10400003 */  beqz      $v0, .L80266714
 /* 194FE8 80266708 AFBF0018 */   sw       $ra, 0x18($sp)

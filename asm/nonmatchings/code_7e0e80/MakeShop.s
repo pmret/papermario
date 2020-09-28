@@ -35,8 +35,8 @@ glabel MakeShop
 /* 7E2758 802818D8 2404035C */  addiu     $a0, $zero, 0x35c
 /* 7E275C 802818DC 0C00AB39 */  jal       heap_malloc
 /* 7E2760 802818E0 0040802D */   daddu    $s0, $v0, $zero
-/* 7E2764 802818E4 3C038007 */  lui       $v1, 0x8007
-/* 7E2768 802818E8 8C63419C */  lw        $v1, 0x419c($v1)
+/* 7E2764 802818E4 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
+/* 7E2768 802818E8 8C63419C */  lw        $v1, %lo(gGameStatusPtr)($v1)
 /* 7E276C 802818EC 0040A02D */  daddu     $s4, $v0, $zero
 /* 7E2770 802818F0 AC740144 */  sw        $s4, 0x144($v1)
 /* 7E2774 802818F4 AE950014 */  sw        $s5, 0x14($s4)
@@ -69,8 +69,8 @@ glabel MakeShop
 /* 7E27D0 80281950 A6920004 */   sh       $s2, 4($s4)
 /* 7E27D4 80281954 0C00AB39 */  jal       heap_malloc
 /* 7E27D8 80281958 00042100 */   sll      $a0, $a0, 4
-/* 7E27DC 8028195C 3C038007 */  lui       $v1, 0x8007
-/* 7E27E0 80281960 8C63419C */  lw        $v1, 0x419c($v1)
+/* 7E27DC 8028195C 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
+/* 7E27E0 80281960 8C63419C */  lw        $v1, %lo(gGameStatusPtr)($v1)
 /* 7E27E4 80281964 AC620140 */  sw        $v0, 0x140($v1)
 .L80281968:
 /* 7E27E8 80281968 8E930018 */  lw        $s3, 0x18($s4)
@@ -78,8 +78,8 @@ glabel MakeShop
 /* 7E27F0 80281970 8E950014 */  lw        $s5, 0x14($s4)
 /* 7E27F4 80281974 10400055 */  beqz      $v0, .L80281ACC
 /* 7E27F8 80281978 0000902D */   daddu    $s2, $zero, $zero
-/* 7E27FC 8028197C 3C1E8007 */  lui       $fp, 0x8007
-/* 7E2800 80281980 27DE419C */  addiu     $fp, $fp, 0x419c
+/* 7E27FC 8028197C 3C1E8007 */  lui       $fp, %hi(gGameStatusPtr)
+/* 7E2800 80281980 27DE419C */  addiu     $fp, $fp, %lo(gGameStatusPtr)
 /* 7E2804 80281984 3C178028 */  lui       $s7, 0x8028
 /* 7E2808 80281988 26F73F58 */  addiu     $s7, $s7, 0x3f58
 /* 7E280C 8028198C 24160003 */  addiu     $s6, $zero, 3

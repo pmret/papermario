@@ -27,8 +27,8 @@ glabel MakeNpcs
 /* 1F6E8 800442E8 8E050000 */  lw        $a1, ($s0)
 /* 1F6EC 800442EC 0C0B1EAF */  jal       get_variable
 /* 1F6F0 800442F0 0040802D */   daddu    $s0, $v0, $zero
-/* 1F6F4 800442F4 3C038007 */  lui       $v1, 0x8007
-/* 1F6F8 800442F8 8C63419C */  lw        $v1, 0x419c($v1)
+/* 1F6F4 800442F4 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
+/* 1F6F8 800442F8 8C63419C */  lw        $v1, %lo(gGameStatusPtr)($v1)
 /* 1F6FC 800442FC 0200202D */  daddu     $a0, $s0, $zero
 /* 1F700 80044300 8465008C */  lh        $a1, 0x8c($v1)
 /* 1F704 80044304 0C00F99E */  jal       make_npcs
@@ -37,8 +37,8 @@ glabel MakeNpcs
 /* 1F710 80044310 080110CA */  j         .L80044328
 /* 1F714 80044314 AE220070 */   sw       $v0, 0x70($s1)
 .L80044318:
-/* 1F718 80044318 3C03800A */  lui       $v1, 0x800a
-/* 1F71C 8004431C 8C63A600 */  lw        $v1, -0x5a00($v1)
+/* 1F718 80044318 3C03800A */  lui       $v1, %hi(gGameState)
+/* 1F71C 8004431C 8C63A600 */  lw        $v1, %lo(gGameState)($v1)
 /* 1F720 80044320 14640002 */  bne       $v1, $a0, .L8004432C
 /* 1F724 80044324 24020002 */   addiu    $v0, $zero, 2
 .L80044328:

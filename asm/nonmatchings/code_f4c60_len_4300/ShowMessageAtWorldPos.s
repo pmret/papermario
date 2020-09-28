@@ -29,8 +29,8 @@ glabel ShowMessageAtWorldPos
 /* F536C 802D09BC 0C0B1EAF */  jal       get_variable
 /* F5370 802D09C0 0040802D */   daddu    $s0, $v0, $zero
 /* F5374 802D09C4 0220202D */  daddu     $a0, $s1, $zero
-/* F5378 802D09C8 3C05802E */  lui       $a1, 0x802e
-/* F537C 802D09CC 24A5B264 */  addiu     $a1, $a1, -0x4d9c
+/* F5378 802D09C8 3C05802E */  lui       $a1, %hi(D_802DB264)
+/* F537C 802D09CC 24A5B264 */  addiu     $a1, $a1, %lo(D_802DB264)
 /* F5380 802D09D0 0040882D */  daddu     $s1, $v0, $zero
 /* F5384 802D09D4 0C049640 */  jal       load_string
 /* F5388 802D09D8 ACA00000 */   sw       $zero, ($a1)
@@ -45,11 +45,11 @@ glabel ShowMessageAtWorldPos
 /* F53AC 802D09FC 44910000 */  mtc1      $s1, $f0
 /* F53B0 802D0A00 00000000 */  nop       
 /* F53B4 802D0A04 46800020 */  cvt.s.w   $f0, $f0
-/* F53B8 802D0A08 3C048007 */  lui       $a0, 0x8007
-/* F53BC 802D0A0C 8C847410 */  lw        $a0, 0x7410($a0)
+/* F53B8 802D0A08 3C048007 */  lui       $a0, %hi(gCurrentCameraID)
+/* F53BC 802D0A0C 8C847410 */  lw        $a0, %lo(gCurrentCameraID)($a0)
 /* F53C0 802D0A10 44070000 */  mfc1      $a3, $f0
-/* F53C4 802D0A14 3C10802E */  lui       $s0, 0x802e
-/* F53C8 802D0A18 2610B260 */  addiu     $s0, $s0, -0x4da0
+/* F53C4 802D0A14 3C10802E */  lui       $s0, %hi(gCurrentPrintContext)
+/* F53C8 802D0A18 2610B260 */  addiu     $s0, $s0, %lo(gCurrentPrintContext)
 /* F53CC 802D0A1C AE020000 */  sw        $v0, ($s0)
 /* F53D0 802D0A20 27A20020 */  addiu     $v0, $sp, 0x20
 /* F53D4 802D0A24 AFA20010 */  sw        $v0, 0x10($sp)
@@ -63,14 +63,14 @@ glabel ShowMessageAtWorldPos
 /* F53F4 802D0A44 0C0496AE */  jal       clamp_printer_coords
 /* F53F8 802D0A48 8FA60024 */   lw       $a2, 0x24($sp)
 .L802D0A4C:
-/* F53FC 802D0A4C 3C04802E */  lui       $a0, 0x802e
-/* F5400 802D0A50 8C84B260 */  lw        $a0, -0x4da0($a0)
+/* F53FC 802D0A4C 3C04802E */  lui       $a0, %hi(gCurrentPrintContext)
+/* F5400 802D0A50 8C84B260 */  lw        $a0, %lo(gCurrentPrintContext)($a0)
 /* F5404 802D0A54 8C8204FC */  lw        $v0, 0x4fc($a0)
 /* F5408 802D0A58 30420040 */  andi      $v0, $v0, 0x40
 /* F540C 802D0A5C 14400007 */  bnez      $v0, .L802D0A7C
 /* F5410 802D0A60 24020001 */   addiu    $v0, $zero, 1
-/* F5414 802D0A64 3C03802E */  lui       $v1, 0x802e
-/* F5418 802D0A68 8C63B264 */  lw        $v1, -0x4d9c($v1)
+/* F5414 802D0A64 3C03802E */  lui       $v1, %hi(D_802DB264)
+/* F5418 802D0A68 8C63B264 */  lw        $v1, %lo(D_802DB264)($v1)
 /* F541C 802D0A6C 54620003 */  bnel      $v1, $v0, .L802D0A7C
 /* F5420 802D0A70 0000102D */   daddu    $v0, $zero, $zero
 /* F5424 802D0A74 908304E8 */  lbu       $v1, 0x4e8($a0)

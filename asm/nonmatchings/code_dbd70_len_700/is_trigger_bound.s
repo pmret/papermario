@@ -3,8 +3,8 @@
 
 glabel is_trigger_bound
 /* DC36C 80145C6C 0000402D */  daddu     $t0, $zero, $zero
-/* DC370 80145C70 3C078016 */  lui       $a3, 0x8016
-/* DC374 80145C74 8CE79390 */  lw        $a3, -0x6c70($a3)
+/* DC370 80145C70 3C078016 */  lui       $a3, %hi(gCurrentTriggerListPtr)
+/* DC374 80145C74 8CE79390 */  lw        $a3, %lo(gCurrentTriggerListPtr)($a3)
 .L80145C78:
 /* DC378 80145C78 8CE30000 */  lw        $v1, ($a3)
 /* DC37C 80145C7C 5060000F */  beql      $v1, $zero, .L80145CBC

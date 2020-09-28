@@ -16,8 +16,8 @@ glabel set_defeated
 /* 1A268 8003EE68 00431021 */  addu      $v0, $v0, $v1
 /* 1A26C 8003EE6C 00021100 */  sll       $v0, $v0, 4
 /* 1A270 8003EE70 00822021 */  addu      $a0, $a0, $v0
-/* 1A274 8003EE74 3C02800B */  lui       $v0, 0x800b
-/* 1A278 8003EE78 24420F10 */  addiu     $v0, $v0, 0xf10
+/* 1A274 8003EE74 3C02800B */  lui       $v0, %hi(gCurrentEncounter)
+/* 1A278 8003EE78 24420F10 */  addiu     $v0, $v0, %lo(gCurrentEncounter)
 /* 1A27C 8003EE7C 00822021 */  addu      $a0, $a0, $v0
 /* 1A280 8003EE80 24030001 */  addiu     $v1, $zero, 1
 /* 1A284 8003EE84 8C8200B0 */  lw        $v0, 0xb0($a0)

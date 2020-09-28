@@ -14,8 +14,8 @@ glabel EnemyFollowupAfflictTarget
 /* 1AB7D8 8027CEF8 0C0B1EAF */  jal       get_variable
 /* 1AB7DC 8027CEFC 26100004 */   addiu    $s0, $s0, 4
 /* 1AB7E0 8027CF00 0040202D */  daddu     $a0, $v0, $zero
-/* 1AB7E4 8027CF04 3C11800E */  lui       $s1, 0x800e
-/* 1AB7E8 8027CF08 2631C070 */  addiu     $s1, $s1, -0x3f90
+/* 1AB7E4 8027CF04 3C11800E */  lui       $s1, %hi(gBattleStatus)
+/* 1AB7E8 8027CF08 2631C070 */  addiu     $s1, $s1, %lo(gBattleStatus)
 /* 1AB7EC 8027CF0C 2402FF81 */  addiu     $v0, $zero, -0x7f
 /* 1AB7F0 8027CF10 14820002 */  bne       $a0, $v0, .L8027CF1C
 /* 1AB7F4 8027CF14 0220982D */   daddu    $s3, $s1, $zero

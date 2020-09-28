@@ -15,8 +15,8 @@ glabel func_802828DC
 /* 7E3784 80282904 8E4400B0 */  lw        $a0, 0xb0($s2)
 /* 7E3788 80282908 0C04417A */  jal       get_entity_by_index
 /* 7E378C 8028290C 00A0802D */   daddu    $s0, $a1, $zero
-/* 7E3790 80282910 3C138011 */  lui       $s3, 0x8011
-/* 7E3794 80282914 2673EFC8 */  addiu     $s3, $s3, -0x1038
+/* 7E3790 80282910 3C138011 */  lui       $s3, %hi(gPlayerStatus)
+/* 7E3794 80282914 2673EFC8 */  addiu     $s3, $s3, %lo(gPlayerStatus)
 /* 7E3798 80282918 1200001A */  beqz      $s0, .L80282984
 /* 7E379C 8028291C 0040882D */   daddu    $s1, $v0, $zero
 /* 7E37A0 80282920 AE400070 */  sw        $zero, 0x70($s2)
@@ -202,8 +202,8 @@ glabel func_802828DC
 /* 7E3A64 80282BE4 C6600028 */  lwc1      $f0, 0x28($s3)
 /* 7E3A68 80282BE8 C662002C */  lwc1      $f2, 0x2c($s3)
 /* 7E3A6C 80282BEC C6640030 */  lwc1      $f4, 0x30($s3)
-/* 7E3A70 80282BF0 3C02800B */  lui       $v0, 0x800b
-/* 7E3A74 80282BF4 24421D80 */  addiu     $v0, $v0, 0x1d80
+/* 7E3A70 80282BF0 3C02800B */  lui       $v0, %hi(gCameras)
+/* 7E3A74 80282BF4 24421D80 */  addiu     $v0, $v0, %lo(gCameras)
 /* 7E3A78 80282BF8 E4400060 */  swc1      $f0, 0x60($v0)
 /* 7E3A7C 80282BFC E4420064 */  swc1      $f2, 0x64($v0)
 /* 7E3A80 80282C00 E4440068 */  swc1      $f4, 0x68($v0)

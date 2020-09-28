@@ -112,8 +112,8 @@ glabel func_800F102C
 /* 8A688 800F11D8 AC820008 */  sw        $v0, 8($a0)
 /* 8A68C 800F11DC AC86000C */  sw        $a2, 0xc($a0)
 .L800F11E0:
-/* 8A690 800F11E0 3C0B8011 */  lui       $t3, 0x8011
-/* 8A694 800F11E4 256BD000 */  addiu     $t3, $t3, -0x3000
+/* 8A690 800F11E0 3C0B8011 */  lui       $t3, %hi(D_8010D000)
+/* 8A694 800F11E4 256BD000 */  addiu     $t3, $t3, %lo(D_8010D000)
 /* 8A698 800F11E8 028B1821 */  addu      $v1, $s4, $t3
 /* 8A69C 800F11EC 90620000 */  lbu       $v0, ($v1)
 /* 8A6A0 800F11F0 5040005C */  beql      $v0, $zero, .L800F1364
@@ -129,8 +129,8 @@ glabel func_800F102C
 /* 8A6C4 800F1214 02C0202D */   daddu    $a0, $s6, $zero
 /* 8A6C8 800F1218 C6000012 */  lwc1      $f0, 0x12($s0)
 /* 8A6CC 800F121C 4405B000 */  mfc1      $a1, $f22
-/* 8A6D0 800F1220 3C028007 */  lui       $v0, 0x8007
-/* 8A6D4 800F1224 8C42419C */  lw        $v0, 0x419c($v0)
+/* 8A6D0 800F1220 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* 8A6D4 800F1224 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 8A6D8 800F1228 4406B000 */  mfc1      $a2, $f22
 /* 8A6DC 800F122C 94430134 */  lhu       $v1, 0x134($v0)
 /* 8A6E0 800F1230 46140002 */  mul.s     $f0, $f0, $f20

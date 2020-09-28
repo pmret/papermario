@@ -23,8 +23,8 @@ glabel SetCamProperties
 /* F0DE4 802CC434 8E050000 */  lw        $a1, ($s0)
 /* F0DE8 802CC438 26100004 */  addiu     $s0, $s0, 4
 /* F0DEC 802CC43C 0220202D */  daddu     $a0, $s1, $zero
-/* F0DF0 802CC440 3C06800B */  lui       $a2, 0x800b
-/* F0DF4 802CC444 24C61D80 */  addiu     $a2, $a2, 0x1d80
+/* F0DF0 802CC440 3C06800B */  lui       $a2, %hi(gCameras)
+/* F0DF4 802CC444 24C61D80 */  addiu     $a2, $a2, %lo(gCameras)
 /* F0DF8 802CC448 00021880 */  sll       $v1, $v0, 2
 /* F0DFC 802CC44C 00621821 */  addu      $v1, $v1, $v0
 /* F0E00 802CC450 00031880 */  sll       $v1, $v1, 2

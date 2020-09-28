@@ -10,8 +10,8 @@ glabel init_got_item
 /* C8214 80131B14 AFB40038 */  sw        $s4, 0x38($sp)
 /* C8218 80131B18 00C0A02D */  daddu     $s4, $a2, $zero
 /* C821C 80131B1C AFB20030 */  sw        $s2, 0x30($sp)
-/* C8220 80131B20 3C128011 */  lui       $s2, 0x8011
-/* C8224 80131B24 2652EFC8 */  addiu     $s2, $s2, -0x1038
+/* C8220 80131B20 3C128011 */  lui       $s2, %hi(gPlayerStatus)
+/* C8224 80131B24 2652EFC8 */  addiu     $s2, $s2, %lo(gPlayerStatus)
 /* C8228 80131B28 3C048015 */  lui       $a0, 0x8015
 /* C822C 80131B2C 8C8465A0 */  lw        $a0, 0x65a0($a0)
 /* C8230 80131B30 0000182D */  daddu     $v1, $zero, $zero
@@ -152,8 +152,8 @@ glabel init_got_item
 /* C8428 80131D28 C7A00018 */  lwc1      $f0, 0x18($sp)
 /* C842C 80131D2C C7A2001C */  lwc1      $f2, 0x1c($sp)
 /* C8430 80131D30 C7A40020 */  lwc1      $f4, 0x20($sp)
-/* C8434 80131D34 3C028007 */  lui       $v0, 0x8007
-/* C8438 80131D38 8C42419C */  lw        $v0, 0x419c($v0)
+/* C8434 80131D34 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* C8438 80131D38 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* C843C 80131D3C E6000010 */  swc1      $f0, 0x10($s0)
 /* C8440 80131D40 E6020014 */  swc1      $f2, 0x14($s0)
 /* C8444 80131D44 E6040018 */  swc1      $f4, 0x18($s0)

@@ -5,8 +5,8 @@ glabel func_80266978
 /* 195258 80266978 0000302D */  daddu     $a2, $zero, $zero
 /* 19525C 8026697C 2409003C */  addiu     $t1, $zero, 0x3c
 /* 195260 80266980 24080005 */  addiu     $t0, $zero, 5
-/* 195264 80266984 3C07800E */  lui       $a3, 0x800e
-/* 195268 80266988 24E7C070 */  addiu     $a3, $a3, -0x3f90
+/* 195264 80266984 3C07800E */  lui       $a3, %hi(gBattleStatus)
+/* 195268 80266988 24E7C070 */  addiu     $a3, $a3, %lo(gBattleStatus)
 /* 19526C 8026698C 00E0282D */  daddu     $a1, $a3, $zero
 .L80266990:
 /* 195270 80266990 8CA400E0 */  lw        $a0, 0xe0($a1)

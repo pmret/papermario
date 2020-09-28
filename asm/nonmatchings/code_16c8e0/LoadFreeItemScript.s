@@ -6,10 +6,10 @@ glabel LoadFreeItemScript
 /* 196900 80268020 AFB3001C */  sw        $s3, 0x1c($sp)
 /* 196904 80268024 0080982D */  daddu     $s3, $a0, $zero
 /* 196908 80268028 AFB10014 */  sw        $s1, 0x14($sp)
-/* 19690C 8026802C 3C11800E */  lui       $s1, 0x800e
-/* 196910 80268030 2631C070 */  addiu     $s1, $s1, -0x3f90
-/* 196914 80268034 3C038008 */  lui       $v1, 0x8008
-/* 196918 80268038 246378E0 */  addiu     $v1, $v1, 0x78e0
+/* 19690C 8026802C 3C11800E */  lui       $s1, %hi(gBattleStatus)
+/* 196910 80268030 2631C070 */  addiu     $s1, $s1, %lo(gBattleStatus)
+/* 196914 80268034 3C038008 */  lui       $v1, %hi(gItemTable)
+/* 196918 80268038 246378E0 */  addiu     $v1, $v1, %lo(gItemTable)
 /* 19691C 8026803C AFBF0020 */  sw        $ra, 0x20($sp)
 /* 196920 80268040 AFB20018 */  sw        $s2, 0x18($sp)
 /* 196924 80268044 AFB00010 */  sw        $s0, 0x10($sp)

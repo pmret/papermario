@@ -133,8 +133,8 @@ glabel spr_appendMDL_component
 /* FFBD0 802DCAE0 00021180 */  sll       $v0, $v0, 6
 /* FFBD4 802DCAE4 00521021 */  addu      $v0, $v0, $s2
 /* FFBD8 802DCAE8 8E230000 */  lw        $v1, ($s1)
-/* FFBDC 802DCAEC 3C058015 */  lui       $a1, 0x8015
-/* FFBE0 802DCAF0 8CA51328 */  lw        $a1, 0x1328($a1)
+/* FFBDC 802DCAEC 3C058015 */  lui       $a1, %hi(D_80151328)
+/* FFBE0 802DCAF0 8CA51328 */  lw        $a1, %lo(D_80151328)($a1)
 /* FFBE4 802DCAF4 00621821 */  addu      $v1, $v1, $v0
 /* FFBE8 802DCAF8 3C028000 */  lui       $v0, 0x8000
 /* FFBEC 802DCAFC 00621821 */  addu      $v1, $v1, $v0

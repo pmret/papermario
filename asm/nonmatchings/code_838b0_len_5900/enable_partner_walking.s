@@ -5,8 +5,8 @@ glabel enable_partner_walking
 /* 84D58 800EB8A8 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 84D5C 800EB8AC AFB00010 */  sw        $s0, 0x10($sp)
 /* 84D60 800EB8B0 0080802D */  daddu     $s0, $a0, $zero
-/* 84D64 800EB8B4 3C078011 */  lui       $a3, 0x8011
-/* 84D68 800EB8B8 24E7EFC8 */  addiu     $a3, $a3, -0x1038
+/* 84D64 800EB8B4 3C078011 */  lui       $a3, %hi(gPlayerStatus)
+/* 84D68 800EB8B8 24E7EFC8 */  addiu     $a3, $a3, %lo(gPlayerStatus)
 /* 84D6C 800EB8BC 3C048011 */  lui       $a0, 0x8011
 /* 84D70 800EB8C0 2484CD38 */  addiu     $a0, $a0, -0x32c8
 /* 84D74 800EB8C4 0000302D */  daddu     $a2, $zero, $zero

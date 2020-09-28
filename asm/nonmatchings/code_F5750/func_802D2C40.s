@@ -15,8 +15,8 @@ glabel func_802D2C40
 /* F7618 802D2C68 44820000 */  mtc1      $v0, $f0
 /* F761C 802D2C6C 00000000 */  nop       
 /* F7620 802D2C70 46800020 */  cvt.s.w   $f0, $f0
-/* F7624 802D2C74 3C118011 */  lui       $s1, 0x8011
-/* F7628 802D2C78 2631EFC8 */  addiu     $s1, $s1, -0x1038
+/* F7624 802D2C74 3C118011 */  lui       $s1, %hi(gPlayerStatus)
+/* F7628 802D2C78 2631EFC8 */  addiu     $s1, $s1, %lo(gPlayerStatus)
 /* F762C 802D2C7C E620001C */  swc1      $f0, 0x1c($s1)
 /* F7630 802D2C80 8E050000 */  lw        $a1, ($s0)
 /* F7634 802D2C84 26100004 */  addiu     $s0, $s0, 4

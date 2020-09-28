@@ -20,18 +20,18 @@ glabel func_802E7AE4
 /* 1093A0 802E7B20 8C22B330 */  lw        $v0, -0x4cd0($at)
 /* 1093A4 802E7B24 00400008 */  jr        $v0
 /* 1093A8 802E7B28 00000000 */   nop      
-/* 1093AC 802E7B2C 3C018011 */  lui       $at, 0x8011
-/* 1093B0 802E7B30 A020F290 */  sb        $zero, -0xd70($at)
+/* 1093AC 802E7B2C 3C018011 */  lui       $at, %hi(gPlayerData)
+/* 1093B0 802E7B30 A020F290 */  sb        $zero, %lo(gPlayerData)($at)
 /* 1093B4 802E7B34 080B9EE2 */  j         .L802E7B88
 /* 1093B8 802E7B38 00000000 */   nop      
 /* 1093BC 802E7B3C 24020001 */  addiu     $v0, $zero, 1
-/* 1093C0 802E7B40 3C018011 */  lui       $at, 0x8011
-/* 1093C4 802E7B44 A022F290 */  sb        $v0, -0xd70($at)
+/* 1093C0 802E7B40 3C018011 */  lui       $at, %hi(gPlayerData)
+/* 1093C4 802E7B44 A022F290 */  sb        $v0, %lo(gPlayerData)($at)
 /* 1093C8 802E7B48 080B9EE2 */  j         .L802E7B88
 /* 1093CC 802E7B4C 00000000 */   nop      
 /* 1093D0 802E7B50 24020002 */  addiu     $v0, $zero, 2
-/* 1093D4 802E7B54 3C018011 */  lui       $at, 0x8011
-/* 1093D8 802E7B58 A022F290 */  sb        $v0, -0xd70($at)
+/* 1093D4 802E7B54 3C018011 */  lui       $at, %hi(gPlayerData)
+/* 1093D8 802E7B58 A022F290 */  sb        $v0, %lo(gPlayerData)($at)
 /* 1093DC 802E7B5C 080B9EE2 */  j         .L802E7B88
 /* 1093E0 802E7B60 00000000 */   nop      
 /* 1093E4 802E7B64 3C018011 */  lui       $at, 0x8011

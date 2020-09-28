@@ -4,16 +4,16 @@
 glabel begin_state_title_screen
 /* 121F0 80036DF0 27BDFFC8 */  addiu     $sp, $sp, -0x38
 /* 121F4 80036DF4 AFB20028 */  sw        $s2, 0x28($sp)
-/* 121F8 80036DF8 3C12800A */  lui       $s2, 0x800a
-/* 121FC 80036DFC 2652A650 */  addiu     $s2, $s2, -0x59b0
+/* 121F8 80036DF8 3C12800A */  lui       $s2, %hi(D_8009A650)
+/* 121FC 80036DFC 2652A650 */  addiu     $s2, $s2, %lo(D_8009A650)
 /* 12200 80036E00 24020001 */  addiu     $v0, $zero, 1
 /* 12204 80036E04 AFBF002C */  sw        $ra, 0x2c($sp)
 /* 12208 80036E08 AFB10024 */  sw        $s1, 0x24($sp)
 /* 1220C 80036E0C AFB00020 */  sw        $s0, 0x20($sp)
 /* 12210 80036E10 F7B40030 */  sdc1      $f20, 0x30($sp)
 /* 12214 80036E14 AE400000 */  sw        $zero, ($s2)
-/* 12218 80036E18 3C01800A */  lui       $at, 0x800a
-/* 1221C 80036E1C AC20A5D8 */  sw        $zero, -0x5a28($at)
+/* 12218 80036E18 3C01800A */  lui       $at, %hi(D_8009A5D8)
+/* 1221C 80036E1C AC20A5D8 */  sw        $zero, %lo(D_8009A5D8)($at)
 /* 12220 80036E20 3C018015 */  lui       $at, 0x8015
 /* 12224 80036E24 A022C248 */  sb        $v0, -0x3db8($at)
 /* 12228 80036E28 0C00AB00 */  jal       general_heap_create
@@ -22,8 +22,8 @@ glabel begin_state_title_screen
 /* 12234 80036E34 00000000 */   nop      
 /* 12238 80036E38 0C0525FF */  jal       func_801497FC
 /* 1223C 80036E3C 0000202D */   daddu    $a0, $zero, $zero
-/* 12240 80036E40 3C038007 */  lui       $v1, 0x8007
-/* 12244 80036E44 2463419C */  addiu     $v1, $v1, 0x419c
+/* 12240 80036E40 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
+/* 12244 80036E44 2463419C */  addiu     $v1, $v1, %lo(gGameStatusPtr)
 /* 12248 80036E48 8C620000 */  lw        $v0, ($v1)
 /* 1224C 80036E4C A04000AC */  sb        $zero, 0xac($v0)
 /* 12250 80036E50 8C620000 */  lw        $v0, ($v1)
@@ -68,8 +68,8 @@ glabel begin_state_title_screen
 /* 122EC 80036EEC 2405000C */  addiu     $a1, $zero, 0xc
 /* 122F0 80036EF0 2406001C */  addiu     $a2, $zero, 0x1c
 /* 122F4 80036EF4 24070128 */  addiu     $a3, $zero, 0x128
-/* 122F8 80036EF8 3C10800B */  lui       $s0, 0x800b
-/* 122FC 80036EFC 26101D80 */  addiu     $s0, $s0, 0x1d80
+/* 122F8 80036EF8 3C10800B */  lui       $s0, %hi(gCameras)
+/* 122FC 80036EFC 26101D80 */  addiu     $s0, $s0, %lo(gCameras)
 /* 12300 80036F00 3C0141C8 */  lui       $at, 0x41c8
 /* 12304 80036F04 4481A000 */  mtc1      $at, $f20
 /* 12308 80036F08 24020006 */  addiu     $v0, $zero, 6
@@ -81,8 +81,8 @@ glabel begin_state_title_screen
 /* 12320 80036F20 24021000 */  addiu     $v0, $zero, 0x1000
 /* 12324 80036F24 A6020014 */  sh        $v0, 0x14($s0)
 /* 12328 80036F28 240200B8 */  addiu     $v0, $zero, 0xb8
-/* 1232C 80036F2C 3C018007 */  lui       $at, 0x8007
-/* 12330 80036F30 AC207410 */  sw        $zero, 0x7410($at)
+/* 1232C 80036F2C 3C018007 */  lui       $at, %hi(gCurrentCameraID)
+/* 12330 80036F30 AC207410 */  sw        $zero, %lo(gCurrentCameraID)($at)
 /* 12334 80036F34 E6140018 */  swc1      $f20, 0x18($s0)
 /* 12338 80036F38 AFA20010 */  sw        $v0, 0x10($sp)
 /* 1233C 80036F3C 96020000 */  lhu       $v0, ($s0)
@@ -158,8 +158,8 @@ glabel begin_state_title_screen
 /* 12454 80037054 3C04800A */  lui       $a0, 0x800a
 /* 12458 80037058 0C05175C */  jal       load_map_bg
 /* 1245C 8003705C 2484839C */   addiu    $a0, $a0, -0x7c64
-/* 12460 80037060 3C048020 */  lui       $a0, 0x8020
-/* 12464 80037064 24840000 */  addiu     $a0, $a0, 0
+/* 12460 80037060 3C048020 */  lui       $a0, %hi(gBackgroundImage)
+/* 12464 80037064 24840000 */  addiu     $a0, $a0, %lo(gBackgroundImage)
 /* 12468 80037068 0C05178A */  jal       read_background_size
 /* 1246C 8003706C 00000000 */   nop      
 /* 12470 80037070 0000202D */  daddu     $a0, $zero, $zero

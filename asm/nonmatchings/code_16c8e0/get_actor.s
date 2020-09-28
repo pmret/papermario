@@ -3,8 +3,8 @@
 
 glabel get_actor
 /* 19864C 80269D6C 0000282D */  daddu     $a1, $zero, $zero
-/* 198650 80269D70 3C06800E */  lui       $a2, 0x800e
-/* 198654 80269D74 24C6C070 */  addiu     $a2, $a2, -0x3f90
+/* 198650 80269D70 3C06800E */  lui       $a2, %hi(gBattleStatus)
+/* 198654 80269D74 24C6C070 */  addiu     $a2, $a2, %lo(gBattleStatus)
 /* 198658 80269D78 30830700 */  andi      $v1, $a0, 0x700
 /* 19865C 80269D7C 24020100 */  addiu     $v0, $zero, 0x100
 /* 198660 80269D80 1062000F */  beq       $v1, $v0, .L80269DC0

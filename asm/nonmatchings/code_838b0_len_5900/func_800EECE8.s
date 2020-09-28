@@ -6,12 +6,12 @@ glabel func_800EECE8
 /* 8819C 800EECEC AFB00030 */  sw        $s0, 0x30($sp)
 /* 881A0 800EECF0 0080802D */  daddu     $s0, $a0, $zero
 /* 881A4 800EECF4 AFB10034 */  sw        $s1, 0x34($sp)
-/* 881A8 800EECF8 3C118011 */  lui       $s1, 0x8011
-/* 881AC 800EECFC 2631EFC8 */  addiu     $s1, $s1, -0x1038
-/* 881B0 800EED00 3C038007 */  lui       $v1, 0x8007
-/* 881B4 800EED04 8C637410 */  lw        $v1, 0x7410($v1)
-/* 881B8 800EED08 3C04800B */  lui       $a0, 0x800b
-/* 881BC 800EED0C 24841D80 */  addiu     $a0, $a0, 0x1d80
+/* 881A8 800EECF8 3C118011 */  lui       $s1, %hi(gPlayerStatus)
+/* 881AC 800EECFC 2631EFC8 */  addiu     $s1, $s1, %lo(gPlayerStatus)
+/* 881B0 800EED00 3C038007 */  lui       $v1, %hi(gCurrentCameraID)
+/* 881B4 800EED04 8C637410 */  lw        $v1, %lo(gCurrentCameraID)($v1)
+/* 881B8 800EED08 3C04800B */  lui       $a0, %hi(gCameras)
+/* 881BC 800EED0C 24841D80 */  addiu     $a0, $a0, %lo(gCameras)
 /* 881C0 800EED10 AFB3003C */  sw        $s3, 0x3c($sp)
 /* 881C4 800EED14 3C138011 */  lui       $s3, 0x8011
 /* 881C8 800EED18 2673CFC8 */  addiu     $s3, $s3, -0x3038
@@ -104,8 +104,8 @@ glabel func_800EECE8
 /* 88310 800EEE60 0240202D */  daddu     $a0, $s2, $zero
 /* 88314 800EEE64 27B30024 */  addiu     $s3, $sp, 0x24
 /* 88318 800EEE68 0260282D */  daddu     $a1, $s3, $zero
-/* 8831C 800EEE6C 3C158007 */  lui       $s5, 0x8007
-/* 88320 800EEE70 26B57410 */  addiu     $s5, $s5, 0x7410
+/* 8831C 800EEE6C 3C158007 */  lui       $s5, %hi(gCurrentCameraID)
+/* 88320 800EEE70 26B57410 */  addiu     $s5, $s5, %lo(gCurrentCameraID)
 /* 88324 800EEE74 8EA30000 */  lw        $v1, ($s5)
 /* 88328 800EEE78 3C014000 */  lui       $at, 0x4000
 /* 8832C 800EEE7C 4481C000 */  mtc1      $at, $f24
@@ -141,8 +141,8 @@ glabel func_800EECE8
 /* 883A4 800EEEF4 0260382D */  daddu     $a3, $s3, $zero
 /* 883A8 800EEEF8 E7A00014 */  swc1      $f0, 0x14($sp)
 /* 883AC 800EEEFC 860200A6 */  lh        $v0, 0xa6($s0)
-/* 883B0 800EEF00 3C14800B */  lui       $s4, 0x800b
-/* 883B4 800EEF04 26941D80 */  addiu     $s4, $s4, 0x1d80
+/* 883B0 800EEF00 3C14800B */  lui       $s4, %hi(gCameras)
+/* 883B4 800EEF04 26941D80 */  addiu     $s4, $s4, %lo(gCameras)
 /* 883B8 800EEF08 44820000 */  mtc1      $v0, $f0
 /* 883BC 800EEF0C 00000000 */  nop       
 /* 883C0 800EEF10 46800020 */  cvt.s.w   $f0, $f0

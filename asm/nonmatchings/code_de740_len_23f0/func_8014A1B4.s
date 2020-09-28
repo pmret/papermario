@@ -13,11 +13,11 @@ glabel func_8014A1B4
 /* E08D4 8014A1D4 AFA20014 */  sw        $v0, 0x14($sp)
 /* E08D8 8014A1D8 27A20028 */  addiu     $v0, $sp, 0x28
 /* E08DC 8014A1DC 44860000 */  mtc1      $a2, $f0
-/* E08E0 8014A1E0 3C048007 */  lui       $a0, 0x8007
-/* E08E4 8014A1E4 8C847410 */  lw        $a0, 0x7410($a0)
+/* E08E0 8014A1E0 3C048007 */  lui       $a0, %hi(gCurrentCameraID)
+/* E08E4 8014A1E4 8C847410 */  lw        $a0, %lo(gCurrentCameraID)($a0)
 /* E08E8 8014A1E8 44067000 */  mfc1      $a2, $f14
-/* E08EC 8014A1EC 3C05800B */  lui       $a1, 0x800b
-/* E08F0 8014A1F0 24A51D80 */  addiu     $a1, $a1, 0x1d80
+/* E08EC 8014A1EC 3C05800B */  lui       $a1, %hi(gCameras)
+/* E08F0 8014A1F0 24A51D80 */  addiu     $a1, $a1, %lo(gCameras)
 /* E08F4 8014A1F4 AFB10034 */  sw        $s1, 0x34($sp)
 /* E08F8 8014A1F8 AFA20018 */  sw        $v0, 0x18($sp)
 /* E08FC 8014A1FC 00041080 */  sll       $v0, $a0, 2

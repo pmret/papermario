@@ -17,8 +17,8 @@ glabel StartBossBattle
 /* 1FCCC 800448CC 24040001 */  addiu     $a0, $zero, 1
 /* 1FCD0 800448D0 0C0B1192 */  jal       resume_all_group
 /* 1FCD4 800448D4 0040802D */   daddu    $s0, $v0, $zero
-/* 1FCD8 800448D8 3C13800B */  lui       $s3, 0x800b
-/* 1FCDC 800448DC 26730F10 */  addiu     $s3, $s3, 0xf10
+/* 1FCD8 800448D8 3C13800B */  lui       $s3, %hi(gCurrentEncounter)
+/* 1FCDC 800448DC 26730F10 */  addiu     $s3, $s3, %lo(gCurrentEncounter)
 /* 1FCE0 800448E0 24030001 */  addiu     $v1, $zero, 1
 /* 1FCE4 800448E4 A2630005 */  sb        $v1, 5($s3)
 /* 1FCE8 800448E8 A2230005 */  sb        $v1, 5($s1)
@@ -102,8 +102,8 @@ glabel StartBossBattle
 /* 1FE08 80044A08 8FB10014 */  lw        $s1, 0x14($sp)
 /* 1FE0C 80044A0C 8FB00010 */  lw        $s0, 0x10($sp)
 /* 1FE10 80044A10 24030003 */  addiu     $v1, $zero, 3
-/* 1FE14 80044A14 3C01800A */  lui       $at, 0x800a
-/* 1FE18 80044A18 AC23A600 */  sw        $v1, -0x5a00($at)
+/* 1FE14 80044A14 3C01800A */  lui       $at, %hi(gGameState)
+/* 1FE18 80044A18 AC23A600 */  sw        $v1, %lo(gGameState)($at)
 /* 1FE1C 80044A1C 0040182D */  daddu     $v1, $v0, $zero
 /* 1FE20 80044A20 3C01800A */  lui       $at, 0x800a
 /* 1FE24 80044A24 AC23A678 */  sw        $v1, -0x5988($at)

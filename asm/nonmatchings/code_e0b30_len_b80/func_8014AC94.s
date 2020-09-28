@@ -13,15 +13,15 @@ glabel func_8014AC94
 /* E13B4 8014ACB4 08052B4D */  j         .L8014AD34
 /* E13B8 8014ACB8 A4820000 */   sh       $v0, ($a0)
 .L8014ACBC:
-/* E13BC 8014ACBC 3C038016 */  lui       $v1, 0x8016
-/* E13C0 8014ACC0 84639AE2 */  lh        $v1, -0x651e($v1)
-/* E13C4 8014ACC4 3C028016 */  lui       $v0, 0x8016
-/* E13C8 8014ACC8 84429AE4 */  lh        $v0, -0x651c($v0)
-/* E13CC 8014ACCC 3C048016 */  lui       $a0, 0x8016
-/* E13D0 8014ACD0 94849AE2 */  lhu       $a0, -0x651e($a0)
+/* E13BC 8014ACBC 3C038016 */  lui       $v1, %hi(D_80159AE2)
+/* E13C0 8014ACC0 84639AE2 */  lh        $v1, %lo(D_80159AE2)($v1)
+/* E13C4 8014ACC4 3C028016 */  lui       $v0, %hi(D_80159AE4)
+/* E13C8 8014ACC8 84429AE4 */  lh        $v0, %lo(D_80159AE4)($v0)
+/* E13CC 8014ACCC 3C048016 */  lui       $a0, %hi(D_80159AE2)
+/* E13D0 8014ACD0 94849AE2 */  lhu       $a0, %lo(D_80159AE2)($a0)
 /* E13D4 8014ACD4 0043102A */  slt       $v0, $v0, $v1
-/* E13D8 8014ACD8 3C038016 */  lui       $v1, 0x8016
-/* E13DC 8014ACDC 94639AE4 */  lhu       $v1, -0x651c($v1)
+/* E13D8 8014ACD8 3C038016 */  lui       $v1, %hi(D_80159AE4)
+/* E13DC 8014ACDC 94639AE4 */  lhu       $v1, %lo(D_80159AE4)($v1)
 /* E13E0 8014ACE0 54400001 */  bnel      $v0, $zero, .L8014ACE8
 /* E13E4 8014ACE4 0060202D */   daddu    $a0, $v1, $zero
 .L8014ACE8:

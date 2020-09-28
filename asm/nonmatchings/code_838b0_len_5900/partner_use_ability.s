@@ -22,13 +22,13 @@ glabel partner_use_ability
 /* 84808 800EB358 1040001E */  beqz      $v0, .L800EB3D4
 /* 8480C 800EB35C 0000102D */   daddu    $v0, $zero, $zero
 .L800EB360:
-/* 84810 800EB360 3C028007 */  lui       $v0, 0x8007
-/* 84814 800EB364 8C42419C */  lw        $v0, 0x419c($v0)
+/* 84810 800EB360 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* 84814 800EB364 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 84818 800EB368 80420081 */  lb        $v0, 0x81($v0)
 /* 8481C 800EB36C 1040000B */  beqz      $v0, .L800EB39C
 /* 84820 800EB370 00000000 */   nop      
-/* 84824 800EB374 3C028011 */  lui       $v0, 0x8011
-/* 84828 800EB378 2442EBB0 */  addiu     $v0, $v0, -0x1450
+/* 84824 800EB374 3C028011 */  lui       $v0, %hi(D_8010EBB0)
+/* 84828 800EB378 2442EBB0 */  addiu     $v0, $v0, %lo(D_8010EBB0)
 /* 8482C 800EB37C 8C420008 */  lw        $v0, 8($v0)
 /* 84830 800EB380 30424000 */  andi      $v0, $v0, 0x4000
 /* 84834 800EB384 10400005 */  beqz      $v0, .L800EB39C

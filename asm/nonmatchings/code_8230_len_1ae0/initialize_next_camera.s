@@ -5,8 +5,8 @@ glabel initialize_next_camera
 /* 956C 8002E16C 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 9570 8002E170 0080382D */  daddu     $a3, $a0, $zero
 /* 9574 8002E174 0000202D */  daddu     $a0, $zero, $zero
-/* 9578 8002E178 3C03800B */  lui       $v1, 0x800b
-/* 957C 8002E17C 24631D80 */  addiu     $v1, $v1, 0x1d80
+/* 9578 8002E178 3C03800B */  lui       $v1, %hi(gCameras)
+/* 957C 8002E17C 24631D80 */  addiu     $v1, $v1, %lo(gCameras)
 /* 9580 8002E180 AFBF001C */  sw        $ra, 0x1c($sp)
 /* 9584 8002E184 AFB00018 */  sw        $s0, 0x18($sp)
 .L8002E188:

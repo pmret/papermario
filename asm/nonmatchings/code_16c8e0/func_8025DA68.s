@@ -42,8 +42,8 @@ glabel func_8025DA68
 /* 18C3D4 8025DAF4 00000000 */  nop       
 /* 18C3D8 8025DAF8 46800020 */  cvt.s.w   $f0, $f0
 /* 18C3DC 8025DAFC 46001600 */  add.s     $f24, $f2, $f0
-/* 18C3E0 8025DB00 3C028007 */  lui       $v0, 0x8007
-/* 18C3E4 8025DB04 8C42419C */  lw        $v0, 0x419c($v0)
+/* 18C3E0 8025DB00 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* 18C3E4 8025DB04 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 18C3E8 8025DB08 C4820060 */  lwc1      $f2, 0x60($a0)
 /* 18C3EC 8025DB0C 3C0140A0 */  lui       $at, 0x40a0
 /* 18C3F0 8025DB10 44810000 */  mtc1      $at, $f0

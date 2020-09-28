@@ -3,8 +3,8 @@
 
 glabel check_input_use_partner
 /* 78EB0 800DFA00 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* 78EB4 800DFA04 3C038011 */  lui       $v1, 0x8011
-/* 78EB8 800DFA08 2463EFC8 */  addiu     $v1, $v1, -0x1038
+/* 78EB4 800DFA04 3C038011 */  lui       $v1, %hi(gPlayerStatus)
+/* 78EB8 800DFA08 2463EFC8 */  addiu     $v1, $v1, %lo(gPlayerStatus)
 /* 78EBC 800DFA0C AFBF0010 */  sw        $ra, 0x10($sp)
 /* 78EC0 800DFA10 8C640004 */  lw        $a0, 4($v1)
 /* 78EC4 800DFA14 806600B4 */  lb        $a2, 0xb4($v1)
@@ -32,8 +32,8 @@ glabel check_input_use_partner
 /* 78F18 800DFA68 2CC20003 */   sltiu    $v0, $a2, 3
 /* 78F1C 800DFA6C 1040000C */  beqz      $v0, .L800DFAA0
 /* 78F20 800DFA70 00000000 */   nop      
-/* 78F24 800DFA74 3C028011 */  lui       $v0, 0x8011
-/* 78F28 800DFA78 2442F290 */  addiu     $v0, $v0, -0xd70
+/* 78F24 800DFA74 3C028011 */  lui       $v0, %hi(gPlayerData)
+/* 78F28 800DFA78 2442F290 */  addiu     $v0, $v0, %lo(gPlayerData)
 /* 78F2C 800DFA7C 80430012 */  lb        $v1, 0x12($v0)
 /* 78F30 800DFA80 24020001 */  addiu     $v0, $zero, 1
 /* 78F34 800DFA84 14620004 */  bne       $v1, $v0, .L800DFA98

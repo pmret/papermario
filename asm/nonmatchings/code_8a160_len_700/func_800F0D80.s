@@ -29,8 +29,8 @@ glabel func_800F0D80
 /* 8A290 800F0DE0 F7BA0050 */  sdc1      $f26, 0x50($sp)
 /* 8A294 800F0DE4 F7B80048 */  sdc1      $f24, 0x48($sp)
 .L800F0DE8:
-/* 8A298 800F0DE8 3C058011 */  lui       $a1, 0x8011
-/* 8A29C 800F0DEC 24A5D000 */  addiu     $a1, $a1, -0x3000
+/* 8A298 800F0DE8 3C058011 */  lui       $a1, %hi(D_8010D000)
+/* 8A29C 800F0DEC 24A5D000 */  addiu     $a1, $a1, %lo(D_8010D000)
 /* 8A2A0 800F0DF0 02651821 */  addu      $v1, $s3, $a1
 /* 8A2A4 800F0DF4 90620000 */  lbu       $v0, ($v1)
 /* 8A2A8 800F0DF8 5040007A */  beql      $v0, $zero, .L800F0FE4

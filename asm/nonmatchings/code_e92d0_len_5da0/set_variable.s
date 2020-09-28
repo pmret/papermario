@@ -159,8 +159,8 @@ glabel set_variable
 /* ECC80 802C82D0 00041140 */  sll       $v0, $a0, 5
 /* ECC84 802C82D4 1240000A */  beqz      $s2, .L802C8300
 /* ECC88 802C82D8 02022823 */   subu     $a1, $s0, $v0
-/* ECC8C 802C82DC 3C02802E */  lui       $v0, 0x802e
-/* ECC90 802C82E0 8C42A480 */  lw        $v0, -0x5b80($v0)
+/* ECC8C 802C82DC 3C02802E */  lui       $v0, %hi(gMapFlags)
+/* ECC90 802C82E0 8C42A480 */  lw        $v0, %lo(gMapFlags)($v0)
 /* ECC94 802C82E4 00042080 */  sll       $a0, $a0, 2
 /* ECC98 802C82E8 00822021 */  addu      $a0, $a0, $v0
 /* ECC9C 802C82EC 24020001 */  addiu     $v0, $zero, 1
@@ -169,8 +169,8 @@ glabel set_variable
 /* ECCA8 802C82F8 080B20C9 */  j         .L802C8324
 /* ECCAC 802C82FC 00621825 */   or       $v1, $v1, $v0
 .L802C8300:
-/* ECCB0 802C8300 3C02802E */  lui       $v0, 0x802e
-/* ECCB4 802C8304 8C42A480 */  lw        $v0, -0x5b80($v0)
+/* ECCB0 802C8300 3C02802E */  lui       $v0, %hi(gMapFlags)
+/* ECCB4 802C8304 8C42A480 */  lw        $v0, %lo(gMapFlags)($v0)
 /* ECCB8 802C8308 00042080 */  sll       $a0, $a0, 2
 .L802C830C:
 /* ECCBC 802C830C 00822021 */  addu      $a0, $a0, $v0
@@ -227,8 +227,8 @@ glabel set_variable
 /* ECD6C 802C83BC 3C0202FA */  lui       $v0, 0x2fa
 /* ECD70 802C83C0 3442F080 */  ori       $v0, $v0, 0xf080
 /* ECD74 802C83C4 02028021 */  addu      $s0, $s0, $v0
-/* ECD78 802C83C8 3C03802E */  lui       $v1, 0x802e
-/* ECD7C 802C83CC 8C63A484 */  lw        $v1, -0x5b7c($v1)
+/* ECD78 802C83C8 3C03802E */  lui       $v1, %hi(gMapVars)
+/* ECD7C 802C83CC 8C63A484 */  lw        $v1, %lo(gMapVars)($v1)
 /* ECD80 802C83D0 00101080 */  sll       $v0, $s0, 2
 /* ECD84 802C83D4 00431021 */  addu      $v0, $v0, $v1
 /* ECD88 802C83D8 8C510000 */  lw        $s1, ($v0)

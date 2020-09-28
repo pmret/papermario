@@ -30,8 +30,8 @@ glabel func_802C3C10
 /* E8620 802C3C70 0C0B0FCF */  jal       kill_script
 /* E8624 802C3C74 00000000 */   nop      
 .L802C3C78:
-/* E8628 802C3C78 3C03802E */  lui       $v1, 0x802e
-/* E862C 802C3C7C 8C63A890 */  lw        $v1, -0x5770($v1)
+/* E8628 802C3C78 3C03802E */  lui       $v1, %hi(gCurrentScriptListPtr)
+/* E862C 802C3C7C 8C63A890 */  lw        $v1, %lo(gCurrentScriptListPtr)($v1)
 /* E8630 802C3C80 00101080 */  sll       $v0, $s0, 2
 /* E8634 802C3C84 00431021 */  addu      $v0, $v0, $v1
 /* E8638 802C3C88 8C440000 */  lw        $a0, ($v0)

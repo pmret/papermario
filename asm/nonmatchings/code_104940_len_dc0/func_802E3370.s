@@ -5,8 +5,8 @@ glabel func_802E3370
 /* 104BF0 802E3370 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 104BF4 802E3374 AFB00010 */  sw        $s0, 0x10($sp)
 /* 104BF8 802E3378 0080802D */  daddu     $s0, $a0, $zero
-/* 104BFC 802E337C 3C058011 */  lui       $a1, 0x8011
-/* 104C00 802E3380 24A5EFC8 */  addiu     $a1, $a1, -0x1038
+/* 104BFC 802E337C 3C058011 */  lui       $a1, %hi(gPlayerStatus)
+/* 104C00 802E3380 24A5EFC8 */  addiu     $a1, $a1, %lo(gPlayerStatus)
 /* 104C04 802E3384 AFB20018 */  sw        $s2, 0x18($sp)
 /* 104C08 802E3388 AFBF001C */  sw        $ra, 0x1c($sp)
 /* 104C0C 802E338C AFB10014 */  sw        $s1, 0x14($sp)

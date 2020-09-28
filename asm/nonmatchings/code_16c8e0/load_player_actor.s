@@ -8,8 +8,8 @@ glabel load_player_actor
 /* 192D90 802644B0 AFB1001C */  sw        $s1, 0x1c($sp)
 /* 192D94 802644B4 0C00AB39 */  jal       heap_malloc
 /* 192D98 802644B8 AFB00018 */   sw       $s0, 0x18($sp)
-/* 192D9C 802644BC 3C11800E */  lui       $s1, 0x800e
-/* 192DA0 802644C0 2631C070 */  addiu     $s1, $s1, -0x3f90
+/* 192D9C 802644BC 3C11800E */  lui       $s1, %hi(gBattleStatus)
+/* 192DA0 802644C0 2631C070 */  addiu     $s1, $s1, %lo(gBattleStatus)
 /* 192DA4 802644C4 0040802D */  daddu     $s0, $v0, $zero
 /* 192DA8 802644C8 16000003 */  bnez      $s0, .L802644D8
 /* 192DAC 802644CC AE2200D8 */   sw       $v0, 0xd8($s1)
@@ -33,8 +33,8 @@ glabel load_player_actor
 /* 192DEC 8026450C 30420040 */  andi      $v0, $v0, 0x40
 /* 192DF0 80264510 14400007 */  bnez      $v0, .L80264530
 /* 192DF4 80264514 00000000 */   nop      
-/* 192DF8 80264518 3C028007 */  lui       $v0, 0x8007
-/* 192DFC 8026451C 8C42419C */  lw        $v0, 0x419c($v0)
+/* 192DF8 80264518 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* 192DFC 8026451C 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 192E00 80264520 904200AA */  lbu       $v0, 0xaa($v0)
 /* 192E04 80264524 30420002 */  andi      $v0, $v0, 2
 /* 192E08 80264528 1040000D */  beqz      $v0, .L80264560

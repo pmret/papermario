@@ -14,14 +14,14 @@ glabel ShowChoice
 /* F5540 802D0B90 26050074 */  addiu     $a1, $s0, 0x74
 /* F5544 802D0B94 0C049640 */  jal       load_string
 /* F5548 802D0B98 AE000074 */   sw       $zero, 0x74($s0)
-/* F554C 802D0B9C 3C01802E */  lui       $at, 0x802e
-/* F5550 802D0BA0 AC22B268 */  sw        $v0, -0x4d98($at)
+/* F554C 802D0B9C 3C01802E */  lui       $at, %hi(D_802DB268)
+/* F5550 802D0BA0 AC22B268 */  sw        $v0, %lo(D_802DB268)($at)
 .L802D0BA4:
-/* F5554 802D0BA4 3C04802E */  lui       $a0, 0x802e
-/* F5558 802D0BA8 2484B268 */  addiu     $a0, $a0, -0x4d98
+/* F5554 802D0BA4 3C04802E */  lui       $a0, %hi(D_802DB268)
+/* F5558 802D0BA8 2484B268 */  addiu     $a0, $a0, %lo(D_802DB268)
 /* F555C 802D0BAC 8C820000 */  lw        $v0, ($a0)
-/* F5560 802D0BB0 3C03802E */  lui       $v1, 0x802e
-/* F5564 802D0BB4 8C63B260 */  lw        $v1, -0x4da0($v1)
+/* F5560 802D0BB0 3C03802E */  lui       $v1, %hi(gCurrentPrintContext)
+/* F5564 802D0BB4 8C63B260 */  lw        $v1, %lo(gCurrentPrintContext)($v1)
 /* F5568 802D0BB8 904204E8 */  lbu       $v0, 0x4e8($v0)
 /* F556C 802D0BBC A06204E8 */  sb        $v0, 0x4e8($v1)
 /* F5570 802D0BC0 8C830000 */  lw        $v1, ($a0)

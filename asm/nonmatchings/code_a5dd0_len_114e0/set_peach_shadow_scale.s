@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel set_peach_shadow_scale
-/* A90D4 801129D4 3C028007 */  lui       $v0, 0x8007
-/* A90D8 801129D8 8C42419C */  lw        $v0, 0x419c($v0)
+/* A90D4 801129D4 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* A90D8 801129D8 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* A90DC 801129DC 44852000 */  mtc1      $a1, $f4
 /* A90E0 801129E0 80420070 */  lb        $v0, 0x70($v0)
 /* A90E4 801129E4 3C013DF5 */  lui       $at, 0x3df5
@@ -11,8 +11,8 @@ glabel set_peach_shadow_scale
 /* A90EC 801129EC 44811000 */  mtc1      $at, $f2
 /* A90F0 801129F0 14400036 */  bnez      $v0, .L80112ACC
 /* A90F4 801129F4 3C03000C */   lui      $v1, 0xc
-/* A90F8 801129F8 3C028011 */  lui       $v0, 0x8011
-/* A90FC 801129FC 2442EFC8 */  addiu     $v0, $v0, -0x1038
+/* A90F8 801129F8 3C028011 */  lui       $v0, %hi(gPlayerStatus)
+/* A90FC 801129FC 2442EFC8 */  addiu     $v0, $v0, %lo(gPlayerStatus)
 /* A9100 80112A00 8C4500B8 */  lw        $a1, 0xb8($v0)
 /* A9104 80112A04 34630018 */  ori       $v1, $v1, 0x18
 /* A9108 80112A08 00A3182B */  sltu      $v1, $a1, $v1

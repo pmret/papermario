@@ -4,8 +4,8 @@
 glabel is_entity_data_loaded
 /* A785C 8011115C ACC00000 */  sw        $zero, ($a2)
 /* A7860 80111160 ACE00000 */  sw        $zero, ($a3)
-/* A7864 80111164 3C028007 */  lui       $v0, 0x8007
-/* A7868 80111168 8C42419C */  lw        $v0, 0x419c($v0)
+/* A7864 80111164 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* A7868 80111168 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* A786C 8011116C 80420070 */  lb        $v0, 0x70($v0)
 /* A7870 80111170 3C098015 */  lui       $t1, 0x8015
 /* A7874 80111174 252916E8 */  addiu     $t1, $t1, 0x16e8

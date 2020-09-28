@@ -598,8 +598,8 @@ glabel draw_battle_wheel
 /* 4172EC 802A255C 0C04993B */  jal       draw_string
 /* 4172F0 802A2560 02A0382D */   daddu    $a3, $s5, $zero
 .L802A2564:
-/* 4172F4 802A2564 3C04800E */  lui       $a0, 0x800e
-/* 4172F8 802A2568 2484C070 */  addiu     $a0, $a0, -0x3f90
+/* 4172F4 802A2564 3C04800E */  lui       $a0, %hi(gBattleStatus)
+/* 4172F8 802A2568 2484C070 */  addiu     $a0, $a0, %lo(gBattleStatus)
 /* 4172FC 802A256C 8C820000 */  lw        $v0, ($a0)
 /* 417300 802A2570 3C030200 */  lui       $v1, 0x200
 /* 417304 802A2574 00431024 */  and       $v0, $v0, $v1

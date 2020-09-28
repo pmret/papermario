@@ -4,8 +4,8 @@
 glabel calc_item_check_hit
 /* 17FEB0 802515D0 27BDFFD0 */  addiu     $sp, $sp, -0x30
 /* 17FEB4 802515D4 AFB30024 */  sw        $s3, 0x24($sp)
-/* 17FEB8 802515D8 3C13800E */  lui       $s3, 0x800e
-/* 17FEBC 802515DC 2673C070 */  addiu     $s3, $s3, -0x3f90
+/* 17FEB8 802515D8 3C13800E */  lui       $s3, %hi(gBattleStatus)
+/* 17FEBC 802515DC 2673C070 */  addiu     $s3, $s3, %lo(gBattleStatus)
 /* 17FEC0 802515E0 AFBF0028 */  sw        $ra, 0x28($sp)
 /* 17FEC4 802515E4 AFB20020 */  sw        $s2, 0x20($sp)
 /* 17FEC8 802515E8 AFB1001C */  sw        $s1, 0x1c($sp)

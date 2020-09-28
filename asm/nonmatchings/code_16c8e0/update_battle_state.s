@@ -4,8 +4,8 @@
 glabel update_battle_state
 /* 16CD18 8023E438 27BDFFC8 */  addiu     $sp, $sp, -0x38
 /* 16CD1C 8023E43C AFB00028 */  sw        $s0, 0x28($sp)
-/* 16CD20 8023E440 3C10800E */  lui       $s0, 0x800e
-/* 16CD24 8023E444 2610C070 */  addiu     $s0, $s0, -0x3f90
+/* 16CD20 8023E440 3C10800E */  lui       $s0, %hi(gBattleStatus)
+/* 16CD24 8023E444 2610C070 */  addiu     $s0, $s0, %lo(gBattleStatus)
 /* 16CD28 8023E448 2402FFFF */  addiu     $v0, $zero, -1
 /* 16CD2C 8023E44C AFBF0034 */  sw        $ra, 0x34($sp)
 /* 16CD30 8023E450 AFB20030 */  sw        $s2, 0x30($sp)
@@ -18,8 +18,8 @@ glabel update_battle_state
 /* 16CD4C 8023E46C 00431024 */  and       $v0, $v0, $v1
 /* 16CD50 8023E470 10400014 */  beqz      $v0, .L8023E4C4
 /* 16CD54 8023E474 00000000 */   nop      
-/* 16CD58 8023E478 3C038007 */  lui       $v1, 0x8007
-/* 16CD5C 8023E47C 8C63419C */  lw        $v1, 0x419c($v1)
+/* 16CD58 8023E478 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
+/* 16CD5C 8023E47C 8C63419C */  lw        $v1, %lo(gGameStatusPtr)($v1)
 /* 16CD60 8023E480 80620081 */  lb        $v0, 0x81($v1)
 /* 16CD64 8023E484 1040000F */  beqz      $v0, .L8023E4C4
 /* 16CD68 8023E488 00000000 */   nop      
@@ -38,8 +38,8 @@ glabel update_battle_state
 /* 16CD9C 8023E4BC 0808F941 */  j         .L8023E504
 /* 16CDA0 8023E4C0 AE020220 */   sw       $v0, 0x220($s0)
 .L8023E4C4:
-/* 16CDA4 8023E4C4 3C048007 */  lui       $a0, 0x8007
-/* 16CDA8 8023E4C8 8C84419C */  lw        $a0, 0x419c($a0)
+/* 16CDA4 8023E4C4 3C048007 */  lui       $a0, %hi(gGameStatusPtr)
+/* 16CDA8 8023E4C8 8C84419C */  lw        $a0, %lo(gGameStatusPtr)($a0)
 /* 16CDAC 8023E4CC 8E030224 */  lw        $v1, 0x224($s0)
 /* 16CDB0 8023E4D0 8C820000 */  lw        $v0, ($a0)
 /* 16CDB4 8023E4D4 00431024 */  and       $v0, $v0, $v1
@@ -283,8 +283,8 @@ glabel update_battle_state
 /* 16D154 8023E874 0808FA56 */  j         .L8023E958
 /* 16D158 8023E878 3C054357 */   lui      $a1, 0x4357
 .L8023E87C:
-/* 16D15C 8023E87C 3C028011 */  lui       $v0, 0x8011
-/* 16D160 8023E880 2442F290 */  addiu     $v0, $v0, -0xd70
+/* 16D15C 8023E87C 3C028011 */  lui       $v0, %hi(gPlayerData)
+/* 16D160 8023E880 2442F290 */  addiu     $v0, $v0, %lo(gPlayerData)
 /* 16D164 8023E884 80430012 */  lb        $v1, 0x12($v0)
 /* 16D168 8023E888 24020006 */  addiu     $v0, $zero, 6
 /* 16D16C 8023E88C 1462000F */  bne       $v1, $v0, .L8023E8CC
@@ -361,8 +361,8 @@ glabel update_battle_state
 /* 16D268 8023E988 96030000 */  lhu       $v1, ($s0)
 /* 16D26C 8023E98C 14820014 */  bne       $a0, $v0, .L8023E9E0
 /* 16D270 8023E990 240500FF */   addiu    $a1, $zero, 0xff
-/* 16D274 8023E994 3C028007 */  lui       $v0, 0x8007
-/* 16D278 8023E998 8C42419C */  lw        $v0, 0x419c($v0)
+/* 16D274 8023E994 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* 16D278 8023E998 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 16D27C 8023E99C 80430071 */  lb        $v1, 0x71($v0)
 /* 16D280 8023E9A0 24020002 */  addiu     $v0, $zero, 2
 /* 16D284 8023E9A4 1462002F */  bne       $v1, $v0, .L8023EA64

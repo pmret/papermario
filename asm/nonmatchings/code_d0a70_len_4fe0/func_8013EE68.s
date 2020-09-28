@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel func_8013EE68
-/* D5568 8013EE68 3C028007 */  lui       $v0, 0x8007
-/* D556C 8013EE6C 8C42419C */  lw        $v0, 0x419c($v0)
+/* D5568 8013EE68 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* D556C 8013EE6C 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* D5570 8013EE70 27BDFFB8 */  addiu     $sp, $sp, -0x48
 /* D5574 8013EE74 AFB20018 */  sw        $s2, 0x18($sp)
 /* D5578 8013EE78 0080902D */  daddu     $s2, $a0, $zero
@@ -37,8 +37,8 @@ glabel func_8013EE68
 /* D55E0 8013EEE0 00000000 */  nop       
 /* D55E4 8013EEE4 4503FFFB */  bc1tl     .L8013EED4
 /* D55E8 8013EEE8 46220001 */   sub.d    $f0, $f0, $f2
-/* D55EC 8013EEEC 3C028007 */  lui       $v0, 0x8007
-/* D55F0 8013EEF0 8C42419C */  lw        $v0, 0x419c($v0)
+/* D55EC 8013EEEC 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* D55F0 8013EEF0 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* D55F4 8013EEF4 94420134 */  lhu       $v0, 0x134($v0)
 /* D55F8 8013EEF8 3C018015 */  lui       $at, 0x8015
 /* D55FC 8013EEFC D4221110 */  ldc1      $f2, 0x1110($at)
@@ -60,8 +60,8 @@ glabel func_8013EE68
 /* D5634 8013EF34 00000000 */  nop       
 /* D5638 8013EF38 4503FFFB */  bc1tl     .L8013EF28
 /* D563C 8013EF3C 46220001 */   sub.d    $f0, $f0, $f2
-/* D5640 8013EF40 3C028007 */  lui       $v0, 0x8007
-/* D5644 8013EF44 8C42419C */  lw        $v0, 0x419c($v0)
+/* D5640 8013EF40 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* D5644 8013EF44 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* D5648 8013EF48 94420134 */  lhu       $v0, 0x134($v0)
 /* D564C 8013EF4C 3C018015 */  lui       $at, 0x8015
 /* D5650 8013EF50 D4221120 */  ldc1      $f2, 0x1120($at)

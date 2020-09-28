@@ -4,8 +4,8 @@
 glabel update_end_player_turn
 /* 171490 80242BB0 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* 171494 80242BB4 AFB20018 */  sw        $s2, 0x18($sp)
-/* 171498 80242BB8 3C12800E */  lui       $s2, 0x800e
-/* 17149C 80242BBC 2652C070 */  addiu     $s2, $s2, -0x3f90
+/* 171498 80242BB8 3C12800E */  lui       $s2, %hi(gBattleStatus)
+/* 17149C 80242BBC 2652C070 */  addiu     $s2, $s2, %lo(gBattleStatus)
 /* 1714A0 80242BC0 AFB10014 */  sw        $s1, 0x14($sp)
 /* 1714A4 80242BC4 3C11800E */  lui       $s1, 0x800e
 /* 1714A8 80242BC8 2631C4DC */  addiu     $s1, $s1, -0x3b24
@@ -56,8 +56,8 @@ glabel update_end_player_turn
 /* 171550 80242C70 3C05802A */  lui       $a1, 0x802a
 /* 171554 80242C74 24A5F254 */  addiu     $a1, $a1, -0xdac
 /* 171558 80242C78 8E5000DC */  lw        $s0, 0xdc($s2)
-/* 17155C 80242C7C 3C11800E */  lui       $s1, 0x800e
-/* 171560 80242C80 2631C070 */  addiu     $s1, $s1, -0x3f90
+/* 17155C 80242C7C 3C11800E */  lui       $s1, %hi(gBattleStatus)
+/* 171560 80242C80 2631C070 */  addiu     $s1, $s1, %lo(gBattleStatus)
 /* 171564 80242C84 A2420086 */  sb        $v0, 0x86($s2)
 /* 171568 80242C88 A2420087 */  sb        $v0, 0x87($s2)
 /* 17156C 80242C8C ACA00000 */  sw        $zero, ($a1)
@@ -135,8 +135,8 @@ glabel update_end_player_turn
 /* 171674 80242D94 00000000 */   nop      
 /* 171678 80242D98 AE0001D8 */  sw        $zero, 0x1d8($s0)
 .L80242D9C:
-/* 17167C 80242D9C 3C02800E */  lui       $v0, 0x800e
-/* 171680 80242DA0 2442C070 */  addiu     $v0, $v0, -0x3f90
+/* 17167C 80242D9C 3C02800E */  lui       $v0, %hi(gBattleStatus)
+/* 171680 80242DA0 2442C070 */  addiu     $v0, $v0, %lo(gBattleStatus)
 /* 171684 80242DA4 8C430004 */  lw        $v1, 4($v0)
 /* 171688 80242DA8 2404FFF7 */  addiu     $a0, $zero, -9
 /* 17168C 80242DAC 00641824 */  and       $v1, $v1, $a0
@@ -206,8 +206,8 @@ glabel update_end_player_turn
 .L80242E98:
 /* 171778 80242E98 3C02FFEF */  lui       $v0, 0xffef
 /* 17177C 80242E9C 3442FFFF */  ori       $v0, $v0, 0xffff
-/* 171780 80242EA0 3C05800E */  lui       $a1, 0x800e
-/* 171784 80242EA4 24A5C070 */  addiu     $a1, $a1, -0x3f90
+/* 171780 80242EA0 3C05800E */  lui       $a1, %hi(gBattleStatus)
+/* 171784 80242EA4 24A5C070 */  addiu     $a1, $a1, %lo(gBattleStatus)
 /* 171788 80242EA8 8CA30004 */  lw        $v1, 4($a1)
 /* 17178C 80242EAC 3C04802A */  lui       $a0, 0x802a
 /* 171790 80242EB0 8C84F254 */  lw        $a0, -0xdac($a0)

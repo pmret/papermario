@@ -5,13 +5,13 @@ glabel LoadStarPowerScript
 /* 1AF230 80280950 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 1AF234 80280954 AFB10014 */  sw        $s1, 0x14($sp)
 /* 1AF238 80280958 0080882D */  daddu     $s1, $a0, $zero
-/* 1AF23C 8028095C 3C05800E */  lui       $a1, 0x800e
-/* 1AF240 80280960 24A5C070 */  addiu     $a1, $a1, -0x3f90
+/* 1AF23C 8028095C 3C05800E */  lui       $a1, %hi(gBattleStatus)
+/* 1AF240 80280960 24A5C070 */  addiu     $a1, $a1, %lo(gBattleStatus)
 /* 1AF244 80280964 AFBF0018 */  sw        $ra, 0x18($sp)
 /* 1AF248 80280968 AFB00010 */  sw        $s0, 0x10($sp)
 /* 1AF24C 8028096C 84A3017C */  lh        $v1, 0x17c($a1)
-/* 1AF250 80280970 3C048011 */  lui       $a0, 0x8011
-/* 1AF254 80280974 2484F290 */  addiu     $a0, $a0, -0xd70
+/* 1AF250 80280970 3C048011 */  lui       $a0, %hi(gPlayerData)
+/* 1AF254 80280974 2484F290 */  addiu     $a0, $a0, %lo(gPlayerData)
 /* 1AF258 80280978 00031080 */  sll       $v0, $v1, 2
 /* 1AF25C 8028097C 00431021 */  addu      $v0, $v0, $v1
 /* 1AF260 80280980 00021080 */  sll       $v0, $v0, 2

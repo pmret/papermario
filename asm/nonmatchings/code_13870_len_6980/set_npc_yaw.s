@@ -3,8 +3,8 @@
 
 glabel set_npc_yaw
 /* 16740 8003B340 44857000 */  mtc1      $a1, $f14
-/* 16744 8003B344 3C038007 */  lui       $v1, 0x8007
-/* 16748 8003B348 8C637410 */  lw        $v1, 0x7410($v1)
+/* 16744 8003B344 3C038007 */  lui       $v1, %hi(gCurrentCameraID)
+/* 16748 8003B348 8C637410 */  lw        $v1, %lo(gCurrentCameraID)($v1)
 /* 1674C 8003B34C 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 16750 8003B350 AFB00010 */  sw        $s0, 0x10($sp)
 /* 16754 8003B354 0080802D */  daddu     $s0, $a0, $zero

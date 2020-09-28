@@ -4,8 +4,8 @@
 glabel pause_items_load_items
 /* 13D81C 8024A4DC 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 13D820 8024A4E0 AFB00010 */  sw        $s0, 0x10($sp)
-/* 13D824 8024A4E4 3C038011 */  lui       $v1, 0x8011
-/* 13D828 8024A4E8 2463F290 */  addiu     $v1, $v1, -0xd70
+/* 13D824 8024A4E4 3C038011 */  lui       $v1, %hi(gPlayerData)
+/* 13D828 8024A4E8 2463F290 */  addiu     $v1, $v1, %lo(gPlayerData)
 /* 13D82C 8024A4EC 24020001 */  addiu     $v0, $zero, 1
 /* 13D830 8024A4F0 AFBF0014 */  sw        $ra, 0x14($sp)
 /* 13D834 8024A4F4 3C018027 */  lui       $at, 0x8027

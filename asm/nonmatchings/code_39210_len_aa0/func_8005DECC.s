@@ -16,8 +16,8 @@ glabel func_8005DECC
 /* 392F8 8005DEF8 0C00AB39 */  jal       heap_malloc
 /* 392FC 8005DEFC AFB00010 */   sw       $s0, 0x10($sp)
 /* 39300 8005DF00 0040202D */  daddu     $a0, $v0, $zero
-/* 39304 8005DF04 3C108011 */  lui       $s0, 0x8011
-/* 39308 8005DF08 2610EFC8 */  addiu     $s0, $s0, -0x1038
+/* 39304 8005DF04 3C108011 */  lui       $s0, %hi(gPlayerStatus)
+/* 39308 8005DF08 2610EFC8 */  addiu     $s0, $s0, %lo(gPlayerStatus)
 /* 3930C 8005DF0C 14800003 */  bnez      $a0, .L8005DF1C
 /* 39310 8005DF10 AE240020 */   sw       $a0, 0x20($s1)
 .L8005DF14:

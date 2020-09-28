@@ -6,10 +6,10 @@ glabel render_models
 /* AD294 80116B94 F7BE00E8 */  sdc1      $f30, 0xe8($sp)
 /* AD298 80116B98 3C013F80 */  lui       $at, 0x3f80
 /* AD29C 80116B9C 4481F000 */  mtc1      $at, $f30
-/* AD2A0 80116BA0 3C038007 */  lui       $v1, 0x8007
-/* AD2A4 80116BA4 8C637410 */  lw        $v1, 0x7410($v1)
-/* AD2A8 80116BA8 3C04800B */  lui       $a0, 0x800b
-/* AD2AC 80116BAC 24841D80 */  addiu     $a0, $a0, 0x1d80
+/* AD2A0 80116BA0 3C038007 */  lui       $v1, %hi(gCurrentCameraID)
+/* AD2A4 80116BA4 8C637410 */  lw        $v1, %lo(gCurrentCameraID)($v1)
+/* AD2A8 80116BA8 3C04800B */  lui       $a0, %hi(gCameras)
+/* AD2AC 80116BAC 24841D80 */  addiu     $a0, $a0, %lo(gCameras)
 /* AD2B0 80116BB0 AFBF00BC */  sw        $ra, 0xbc($sp)
 /* AD2B4 80116BB4 AFB400B8 */  sw        $s4, 0xb8($sp)
 /* AD2B8 80116BB8 AFB300B4 */  sw        $s3, 0xb4($sp)
@@ -64,8 +64,8 @@ glabel render_models
 /* AD37C 80116C7C C65A0110 */  lwc1      $f26, 0x110($s2)
 /* AD380 80116C80 E7BA0084 */  swc1      $f26, 0x84($sp)
 .L80116C84:
-/* AD384 80116C84 3C038015 */  lui       $v1, 0x8015
-/* AD388 80116C88 8C6312CC */  lw        $v1, 0x12cc($v1)
+/* AD384 80116C84 3C038015 */  lui       $v1, %hi(gCurrentModelListPtr)
+/* AD388 80116C88 8C6312CC */  lw        $v1, %lo(gCurrentModelListPtr)($v1)
 /* AD38C 80116C8C 00131080 */  sll       $v0, $s3, 2
 /* AD390 80116C90 00431021 */  addu      $v0, $v0, $v1
 /* AD394 80116C94 8C500000 */  lw        $s0, ($v0)

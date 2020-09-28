@@ -232,8 +232,8 @@ glabel pause_spirits_draw_contents
 /* 1400C8 8024CD88 4481F000 */  mtc1      $at, $f30
 /* 1400CC 8024CD8C 00141880 */  sll       $v1, $s4, 2
 .L8024CD90:
-/* 1400D0 8024CD90 3C028007 */  lui       $v0, 0x8007
-/* 1400D4 8024CD94 8C42419C */  lw        $v0, 0x419c($v0)
+/* 1400D0 8024CD90 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* 1400D4 8024CD94 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 1400D8 8024CD98 3C128025 */  lui       $s2, 0x8025
 /* 1400DC 8024CD9C 02439021 */  addu      $s2, $s2, $v1
 /* 1400E0 8024CDA0 8E52F974 */  lw        $s2, -0x68c($s2)

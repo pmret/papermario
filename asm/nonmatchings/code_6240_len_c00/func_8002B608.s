@@ -3,8 +3,8 @@
 
 glabel func_8002B608
 /* 6A08 8002B608 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* 6A0C 8002B60C 3C038007 */  lui       $v1, 0x8007
-/* 6A10 8002B610 8C63419C */  lw        $v1, 0x419c($v1)
+/* 6A0C 8002B60C 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
+/* 6A10 8002B610 8C63419C */  lw        $v1, %lo(gGameStatusPtr)($v1)
 /* 6A14 8002B614 2402000A */  addiu     $v0, $zero, 0xa
 /* 6A18 8002B618 AFBF0010 */  sw        $ra, 0x10($sp)
 /* 6A1C 8002B61C 0C00AD8C */  jal       fio_serialize_state

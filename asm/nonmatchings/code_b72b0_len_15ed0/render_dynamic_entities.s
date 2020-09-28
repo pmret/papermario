@@ -7,8 +7,8 @@ glabel render_dynamic_entities
 /* B9B78 80123478 0000802D */  daddu     $s0, $zero, $zero
 /* B9B7C 8012347C AFBF0014 */  sw        $ra, 0x14($sp)
 .L80123480:
-/* B9B80 80123480 3C038015 */  lui       $v1, 0x8015
-/* B9B84 80123484 8C634420 */  lw        $v1, 0x4420($v1)
+/* B9B80 80123480 3C038015 */  lui       $v1, %hi(gCurrentDynamicEntityListPtr)
+/* B9B84 80123484 8C634420 */  lw        $v1, %lo(gCurrentDynamicEntityListPtr)($v1)
 /* B9B88 80123488 00101080 */  sll       $v0, $s0, 2
 /* B9B8C 8012348C 00431021 */  addu      $v0, $v0, $v1
 /* B9B90 80123490 8C430000 */  lw        $v1, ($v0)

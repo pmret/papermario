@@ -2,13 +2,13 @@
 .set noreorder # don't insert nops after branches
 
 glabel func_800ED5D0
-/* 86A80 800ED5D0 3C028007 */  lui       $v0, 0x8007
-/* 86A84 800ED5D4 8C42419C */  lw        $v0, 0x419c($v0)
+/* 86A80 800ED5D0 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* 86A84 800ED5D4 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 86A88 800ED5D8 27BDFFB0 */  addiu     $sp, $sp, -0x50
 /* 86A8C 800ED5DC AFB00030 */  sw        $s0, 0x30($sp)
 /* 86A90 800ED5E0 AFB20038 */  sw        $s2, 0x38($sp)
-/* 86A94 800ED5E4 3C128011 */  lui       $s2, 0x8011
-/* 86A98 800ED5E8 2652EFC8 */  addiu     $s2, $s2, -0x1038
+/* 86A94 800ED5E4 3C128011 */  lui       $s2, %hi(gPlayerStatus)
+/* 86A98 800ED5E8 2652EFC8 */  addiu     $s2, $s2, %lo(gPlayerStatus)
 /* 86A9C 800ED5EC AFBF004C */  sw        $ra, 0x4c($sp)
 /* 86AA0 800ED5F0 AFB60048 */  sw        $s6, 0x48($sp)
 /* 86AA4 800ED5F4 AFB50044 */  sw        $s5, 0x44($sp)
@@ -16,8 +16,8 @@ glabel func_800ED5D0
 /* 86AAC 800ED5FC AFB3003C */  sw        $s3, 0x3c($sp)
 /* 86AB0 800ED600 AFB10034 */  sw        $s1, 0x34($sp)
 /* 86AB4 800ED604 80420081 */  lb        $v0, 0x81($v0)
-/* 86AB8 800ED608 3C118011 */  lui       $s1, 0x8011
-/* 86ABC 800ED60C 2631EBB0 */  addiu     $s1, $s1, -0x1450
+/* 86AB8 800ED608 3C118011 */  lui       $s1, %hi(D_8010EBB0)
+/* 86ABC 800ED60C 2631EBB0 */  addiu     $s1, $s1, %lo(D_8010EBB0)
 /* 86AC0 800ED610 1040000B */  beqz      $v0, .L800ED640
 /* 86AC4 800ED614 0080802D */   daddu    $s0, $a0, $zero
 /* 86AC8 800ED618 8E420000 */  lw        $v0, ($s2)

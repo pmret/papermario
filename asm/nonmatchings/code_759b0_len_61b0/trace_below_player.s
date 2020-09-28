@@ -97,8 +97,8 @@ glabel trace_below_player
 /* 77B60 800DE6B0 C7A0003C */  lwc1      $f0, 0x3c($sp)
 /* 77B64 800DE6B4 E6600000 */  swc1      $f0, ($s3)
 /* 77B68 800DE6B8 C7A00040 */  lwc1      $f0, 0x40($sp)
-/* 77B6C 800DE6BC 3C108007 */  lui       $s0, 0x8007
-/* 77B70 800DE6C0 2610419C */  addiu     $s0, $s0, 0x419c
+/* 77B6C 800DE6BC 3C108007 */  lui       $s0, %hi(gGameStatusPtr)
+/* 77B70 800DE6C0 2610419C */  addiu     $s0, $s0, %lo(gGameStatusPtr)
 /* 77B74 800DE6C4 E6800000 */  swc1      $f0, ($s4)
 /* 77B78 800DE6C8 8E020000 */  lw        $v0, ($s0)
 /* 77B7C 800DE6CC C7A00048 */  lwc1      $f0, 0x48($sp)
@@ -155,8 +155,8 @@ glabel trace_below_player
 /* 77C48 800DE798 080379ED */  j         .L800DE7B4
 /* 77C4C 800DE79C E4400124 */   swc1     $f0, 0x124($v0)
 .L800DE7A0:
-/* 77C50 800DE7A0 3C028007 */  lui       $v0, 0x8007
-/* 77C54 800DE7A4 8C42419C */  lw        $v0, 0x419c($v0)
+/* 77C50 800DE7A0 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* 77C54 800DE7A4 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 77C58 800DE7A8 AC40011C */  sw        $zero, 0x11c($v0)
 /* 77C5C 800DE7AC AC400120 */  sw        $zero, 0x120($v0)
 /* 77C60 800DE7B0 AC400124 */  sw        $zero, 0x124($v0)

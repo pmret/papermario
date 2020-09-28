@@ -2,11 +2,11 @@
 .set noreorder # don't insert nops after branches
 
 glabel clear_area_flags
-/* DBA90 80145390 3C028007 */  lui       $v0, 0x8007
-/* DBA94 80145394 8C42419C */  lw        $v0, 0x419c($v0)
+/* DBA90 80145390 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* DBA94 80145394 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* DBA98 80145398 8442008A */  lh        $v0, 0x8a($v0)
-/* DBA9C 8014539C 3C04800E */  lui       $a0, 0x800e
-/* DBAA0 801453A0 2484ACC0 */  addiu     $a0, $a0, -0x5340
+/* DBA9C 8014539C 3C04800E */  lui       $a0, %hi(gCurrentSaveFile)
+/* DBAA0 801453A0 2484ACC0 */  addiu     $a0, $a0, %lo(gCurrentSaveFile)
 /* DBAA4 801453A4 1040000C */  beqz      $v0, .L801453D8
 /* DBAA8 801453A8 24020007 */   addiu    $v0, $zero, 7
 /* DBAAC 801453AC 2483001C */  addiu     $v1, $a0, 0x1c

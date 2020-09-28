@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel set_standard_shadow_scale
-/* A8F5C 8011285C 3C028007 */  lui       $v0, 0x8007
-/* A8F60 80112860 8C42419C */  lw        $v0, 0x419c($v0)
+/* A8F5C 8011285C 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* A8F60 80112860 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* A8F64 80112864 80420070 */  lb        $v0, 0x70($v0)
 /* A8F68 80112868 44851000 */  mtc1      $a1, $f2
 /* A8F6C 8011286C 1440000A */  bnez      $v0, .L80112898

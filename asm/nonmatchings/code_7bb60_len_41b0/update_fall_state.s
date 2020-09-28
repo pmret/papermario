@@ -4,8 +4,8 @@
 glabel update_fall_state
 /* 7C1C8 800E2D18 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 7C1CC 800E2D1C AFB00010 */  sw        $s0, 0x10($sp)
-/* 7C1D0 800E2D20 3C108011 */  lui       $s0, 0x8011
-/* 7C1D4 800E2D24 2610EFC8 */  addiu     $s0, $s0, -0x1038
+/* 7C1D0 800E2D20 3C108011 */  lui       $s0, %hi(gPlayerStatus)
+/* 7C1D4 800E2D24 2610EFC8 */  addiu     $s0, $s0, %lo(gPlayerStatus)
 /* 7C1D8 800E2D28 AFBF0014 */  sw        $ra, 0x14($sp)
 /* 7C1DC 800E2D2C F7B40018 */  sdc1      $f20, 0x18($sp)
 /* 7C1E0 800E2D30 860200C0 */  lh        $v0, 0xc0($s0)

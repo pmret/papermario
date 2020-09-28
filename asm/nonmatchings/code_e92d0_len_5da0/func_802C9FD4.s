@@ -19,8 +19,8 @@ glabel func_802C9FD4
 /* EE9BC 802CA00C 00C0902D */   daddu    $s2, $a2, $zero
 /* EE9C0 802CA010 0C016AFA */  jal       get_current_map_header
 /* EE9C4 802CA014 00000000 */   nop      
-/* EE9C8 802CA018 3C038007 */  lui       $v1, 0x8007
-/* EE9CC 802CA01C 8C63419C */  lw        $v1, 0x419c($v1)
+/* EE9C8 802CA018 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
+/* EE9CC 802CA01C 8C63419C */  lw        $v1, %lo(gGameStatusPtr)($v1)
 /* EE9D0 802CA020 8463008E */  lh        $v1, 0x8e($v1)
 /* EE9D4 802CA024 8C420014 */  lw        $v0, 0x14($v0)
 /* EE9D8 802CA028 00031900 */  sll       $v1, $v1, 4

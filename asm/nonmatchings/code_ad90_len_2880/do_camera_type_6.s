@@ -203,8 +203,8 @@ glabel do_camera_type_6
 /* B08C 8002FC8C 46006386 */   mov.s    $f14, $f12
 /* B090 8002FC90 E6000094 */  swc1      $f0, 0x94($s0)
 /* B094 8002FC94 C6000048 */  lwc1      $f0, 0x48($s0)
-/* B098 8002FC98 3C02800E */  lui       $v0, 0x800e
-/* B09C 8002FC9C 2442C070 */  addiu     $v0, $v0, -0x3f90
+/* B098 8002FC98 3C02800E */  lui       $v0, %hi(gBattleStatus)
+/* B09C 8002FC9C 2442C070 */  addiu     $v0, $v0, %lo(gBattleStatus)
 /* B0A0 8002FCA0 E44000CC */  swc1      $f0, 0xcc($v0)
 /* B0A4 8002FCA4 C600004C */  lwc1      $f0, 0x4c($s0)
 /* B0A8 8002FCA8 E44000D0 */  swc1      $f0, 0xd0($v0)

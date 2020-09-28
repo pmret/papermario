@@ -4,8 +4,8 @@
 glabel SetEncounterStatusFlags
 /* 1F580 80044180 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 1F584 80044184 AFB10014 */  sw        $s1, 0x14($sp)
-/* 1F588 80044188 3C11800B */  lui       $s1, 0x800b
-/* 1F58C 8004418C 26310F10 */  addiu     $s1, $s1, 0xf10
+/* 1F588 80044188 3C11800B */  lui       $s1, %hi(gCurrentEncounter)
+/* 1F58C 8004418C 26310F10 */  addiu     $s1, $s1, %lo(gCurrentEncounter)
 /* 1F590 80044190 AFBF001C */  sw        $ra, 0x1c($sp)
 /* 1F594 80044194 AFB20018 */  sw        $s2, 0x18($sp)
 /* 1F598 80044198 AFB00010 */  sw        $s0, 0x10($sp)

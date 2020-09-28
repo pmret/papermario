@@ -39,8 +39,8 @@ glabel boot_main
 /* 13E8 80025FE8 00000000 */   nop      
 /* 13EC 80025FEC 0C017D84 */  jal       nuContInit
 /* 13F0 80025FF0 00000000 */   nop      
-/* 13F4 80025FF4 3C038007 */  lui       $v1, 0x8007
-/* 13F8 80025FF8 8C63419C */  lw        $v1, 0x419c($v1)
+/* 13F4 80025FF4 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
+/* 13F8 80025FF8 8C63419C */  lw        $v1, %lo(gGameStatusPtr)($v1)
 /* 13FC 80025FFC 0C00B458 */  jal       func_8002D160
 /* 1400 80026000 A0620073 */   sb       $v0, 0x73($v1)
 /* 1404 80026004 0C0AC800 */  jal       func_802B2000
@@ -57,8 +57,8 @@ glabel boot_main
 /* 1430 80026030 00000000 */   nop      
 /* 1434 80026034 0C019680 */  jal       osGetCount
 /* 1438 80026038 00000000 */   nop      
-/* 143C 8002603C 3C048007 */  lui       $a0, 0x8007
-/* 1440 80026040 24844410 */  addiu     $a0, $a0, 0x4410
+/* 143C 8002603C 3C048007 */  lui       $a0, %hi(gRandSeed)
+/* 1440 80026040 24844410 */  addiu     $a0, $a0, %lo(gRandSeed)
 /* 1444 80026044 8C830000 */  lw        $v1, ($a0)
 /* 1448 80026048 00621821 */  addu      $v1, $v1, $v0
 /* 144C 8002604C 0C017D0C */  jal       nuGfxDisplayOn

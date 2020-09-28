@@ -18,8 +18,8 @@ glabel start_falling
 /* 7F4B4 800E6004 3C013C3C */  lui       $at, 0x3c3c
 /* 7F4B8 800E6008 3421BE62 */  ori       $at, $at, 0xbe62
 /* 7F4BC 800E600C 44813000 */  mtc1      $at, $f6
-/* 7F4C0 800E6010 3C028011 */  lui       $v0, 0x8011
-/* 7F4C4 800E6014 2442EFC8 */  addiu     $v0, $v0, -0x1038
+/* 7F4C0 800E6010 3C028011 */  lui       $v0, %hi(gPlayerStatus)
+/* 7F4C4 800E6014 2442EFC8 */  addiu     $v0, $v0, %lo(gPlayerStatus)
 /* 7F4C8 800E6018 E4400070 */  swc1      $f0, 0x70($v0)
 /* 7F4CC 800E601C E4420074 */  swc1      $f2, 0x74($v0)
 /* 7F4D0 800E6020 E4440078 */  swc1      $f4, 0x78($v0)

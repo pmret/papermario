@@ -13,8 +13,8 @@ glabel do_camera_type_unused
 /* B100 8002FD00 F7B60020 */  sdc1      $f22, 0x20($sp)
 /* B104 8002FD04 F7B40018 */  sdc1      $f20, 0x18($sp)
 /* B108 8002FD08 86020006 */  lh        $v0, 6($s0)
-/* B10C 8002FD0C 3C038011 */  lui       $v1, 0x8011
-/* B110 8002FD10 2463EFC8 */  addiu     $v1, $v1, -0x1038
+/* B10C 8002FD0C 3C038011 */  lui       $v1, %hi(gPlayerStatus)
+/* B110 8002FD10 2463EFC8 */  addiu     $v1, $v1, %lo(gPlayerStatus)
 /* B114 8002FD14 14400004 */  bnez      $v0, .L8002FD28
 /* B118 8002FD18 00000000 */   nop      
 /* B11C 8002FD1C 86020008 */  lh        $v0, 8($s0)

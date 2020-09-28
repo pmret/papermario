@@ -4,11 +4,11 @@
 glabel func_802439D8
 /* 1722B8 802439D8 27BDFFB0 */  addiu     $sp, $sp, -0x50
 /* 1722BC 802439DC AFB60028 */  sw        $s6, 0x28($sp)
-/* 1722C0 802439E0 3C16800E */  lui       $s6, 0x800e
-/* 1722C4 802439E4 26D6C070 */  addiu     $s6, $s6, -0x3f90
+/* 1722C0 802439E0 3C16800E */  lui       $s6, %hi(gBattleStatus)
+/* 1722C4 802439E4 26D6C070 */  addiu     $s6, $s6, %lo(gBattleStatus)
 /* 1722C8 802439E8 AFB7002C */  sw        $s7, 0x2c($sp)
-/* 1722CC 802439EC 3C178011 */  lui       $s7, 0x8011
-/* 1722D0 802439F0 26F7F290 */  addiu     $s7, $s7, -0xd70
+/* 1722CC 802439EC 3C178011 */  lui       $s7, %hi(gPlayerData)
+/* 1722D0 802439F0 26F7F290 */  addiu     $s7, $s7, %lo(gPlayerData)
 /* 1722D4 802439F4 AFBF0030 */  sw        $ra, 0x30($sp)
 /* 1722D8 802439F8 AFB50024 */  sw        $s5, 0x24($sp)
 /* 1722DC 802439FC AFB40020 */  sw        $s4, 0x20($sp)
@@ -83,8 +83,8 @@ glabel func_802439D8
 /* 1723D4 80243AF4 24020001 */  addiu     $v0, $zero, 1
 /* 1723D8 80243AF8 1462002A */  bne       $v1, $v0, .L80243BA4
 /* 1723DC 80243AFC 00000000 */   nop      
-/* 1723E0 80243B00 3C03800E */  lui       $v1, 0x800e
-/* 1723E4 80243B04 2463C070 */  addiu     $v1, $v1, -0x3f90
+/* 1723E0 80243B00 3C03800E */  lui       $v1, %hi(gBattleStatus)
+/* 1723E4 80243B04 2463C070 */  addiu     $v1, $v1, %lo(gBattleStatus)
 /* 1723E8 80243B08 8C620004 */  lw        $v0, 4($v1)
 /* 1723EC 80243B0C 30420040 */  andi      $v0, $v0, 0x40
 /* 1723F0 80243B10 14400007 */  bnez      $v0, .L80243B30
@@ -236,8 +236,8 @@ glabel func_802439D8
 /* 172624 80243D44 E6A20140 */  swc1      $f2, 0x140($s5)
 /* 172628 80243D48 AEA20000 */  sw        $v0, ($s5)
 /* 17262C 80243D4C 8E620000 */  lw        $v0, ($s3)
-/* 172630 80243D50 3C04800E */  lui       $a0, 0x800e
-/* 172634 80243D54 2484C070 */  addiu     $a0, $a0, -0x3f90
+/* 172630 80243D50 3C04800E */  lui       $a0, %hi(gBattleStatus)
+/* 172634 80243D54 2484C070 */  addiu     $a0, $a0, %lo(gBattleStatus)
 /* 172638 80243D58 00431025 */  or        $v0, $v0, $v1
 /* 17263C 80243D5C AE620000 */  sw        $v0, ($s3)
 /* 172640 80243D60 8C820004 */  lw        $v0, 4($a0)
@@ -264,8 +264,8 @@ glabel func_802439D8
 .L80243DA8:
 /* 172688 80243DA8 1462004C */  bne       $v1, $v0, .L80243EDC
 /* 17268C 80243DAC 3C02FFFE */   lui      $v0, 0xfffe
-/* 172690 80243DB0 3C10800E */  lui       $s0, 0x800e
-/* 172694 80243DB4 2610C070 */  addiu     $s0, $s0, -0x3f90
+/* 172690 80243DB0 3C10800E */  lui       $s0, %hi(gBattleStatus)
+/* 172694 80243DB4 2610C070 */  addiu     $s0, $s0, %lo(gBattleStatus)
 /* 172698 80243DB8 8E030004 */  lw        $v1, 4($s0)
 /* 17269C 80243DBC 3442FFFF */  ori       $v0, $v0, 0xffff
 /* 1726A0 80243DC0 00621824 */  and       $v1, $v1, $v0

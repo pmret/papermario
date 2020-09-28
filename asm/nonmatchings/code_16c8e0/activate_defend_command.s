@@ -4,8 +4,8 @@
 glabel activate_defend_command
 /* 18F3E4 80260B04 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 18F3E8 80260B08 AFB00010 */  sw        $s0, 0x10($sp)
-/* 18F3EC 80260B0C 3C10800E */  lui       $s0, 0x800e
-/* 18F3F0 80260B10 2610C070 */  addiu     $s0, $s0, -0x3f90
+/* 18F3EC 80260B0C 3C10800E */  lui       $s0, %hi(gBattleStatus)
+/* 18F3F0 80260B10 2610C070 */  addiu     $s0, $s0, %lo(gBattleStatus)
 /* 18F3F4 80260B14 AFBF0018 */  sw        $ra, 0x18($sp)
 /* 18F3F8 80260B18 AFB10014 */  sw        $s1, 0x14($sp)
 /* 18F3FC 80260B1C 8E0200D8 */  lw        $v0, 0xd8($s0)

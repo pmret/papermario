@@ -41,8 +41,8 @@ glabel do_camera_type_5
 /* B490 80030090 0800C04F */  j         .L8003013C
 /* B494 80030094 E600004C */   swc1     $f0, 0x4c($s0)
 .L80030098:
-/* B498 80030098 3C028011 */  lui       $v0, 0x8011
-/* B49C 8003009C 2442EFC8 */  addiu     $v0, $v0, -0x1038
+/* B498 80030098 3C028011 */  lui       $v0, %hi(gPlayerStatus)
+/* B49C 8003009C 2442EFC8 */  addiu     $v0, $v0, %lo(gPlayerStatus)
 /* B4A0 800300A0 C4480054 */  lwc1      $f8, 0x54($v0)
 /* B4A4 800300A4 3C013FC0 */  lui       $at, 0x3fc0
 /* B4A8 800300A8 44813000 */  mtc1      $at, $f6

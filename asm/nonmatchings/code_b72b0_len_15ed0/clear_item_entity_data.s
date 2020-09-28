@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel clear_item_entity_data
-/* C76F0 80130FF0 3C028007 */  lui       $v0, 0x8007
-/* C76F4 80130FF4 8C42419C */  lw        $v0, 0x419c($v0)
+/* C76F0 80130FF0 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* C76F4 80130FF4 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* C76F8 80130FF8 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* C76FC 80130FFC AFBF0010 */  sw        $ra, 0x10($sp)
 /* C7700 80131000 80420070 */  lb        $v0, 0x70($v0)
@@ -28,8 +28,8 @@ glabel clear_item_entity_data
 /* C7740 80131040 2463FFFF */  addiu     $v1, $v1, -1
 /* C7744 80131044 0461FFFD */  bgez      $v1, .L8013103C
 /* C7748 80131048 2442FFFC */   addiu    $v0, $v0, -4
-/* C774C 8013104C 3C028007 */  lui       $v0, 0x8007
-/* C7750 80131050 8C42419C */  lw        $v0, 0x419c($v0)
+/* C774C 8013104C 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* C7750 80131050 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* C7754 80131054 3C018015 */  lui       $at, 0x8015
 /* C7758 80131058 AC2012F8 */  sw        $zero, 0x12f8($at)
 /* C775C 8013105C 3C018015 */  lui       $at, 0x8015

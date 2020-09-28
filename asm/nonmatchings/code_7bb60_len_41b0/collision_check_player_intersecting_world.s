@@ -15,8 +15,8 @@ glabel collision_check_player_intersecting_world
 /* 7D7E0 800E4330 AFB10034 */  sw        $s1, 0x34($sp)
 /* 7D7E4 800E4334 0000882D */  daddu     $s1, $zero, $zero
 /* 7D7E8 800E4338 AFB00030 */  sw        $s0, 0x30($sp)
-/* 7D7EC 800E433C 3C10800F */  lui       $s0, 0x800f
-/* 7D7F0 800E4340 26107B30 */  addiu     $s0, $s0, 0x7b30
+/* 7D7EC 800E433C 3C10800F */  lui       $s0, %hi(gPlayerStatusPtr)
+/* 7D7F0 800E4340 26107B30 */  addiu     $s0, $s0, %lo(gPlayerStatusPtr)
 /* 7D7F4 800E4344 F7B60050 */  sdc1      $f22, 0x50($sp)
 /* 7D7F8 800E4348 4485B000 */  mtc1      $a1, $f22
 /* 7D7FC 800E434C 00000000 */  nop       

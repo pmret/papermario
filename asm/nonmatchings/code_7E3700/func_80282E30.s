@@ -10,8 +10,8 @@ glabel func_80282E30
 /* 7E3CC4 80282E44 8E0400B0 */  lw        $a0, 0xb0($s0)
 /* 7E3CC8 80282E48 0C04417A */  jal       get_entity_by_index
 /* 7E3CCC 80282E4C 8E1100AC */   lw       $s1, 0xac($s0)
-/* 7E3CD0 80282E50 3C038011 */  lui       $v1, 0x8011
-/* 7E3CD4 80282E54 2463EFC8 */  addiu     $v1, $v1, -0x1038
+/* 7E3CD0 80282E50 3C038011 */  lui       $v1, %hi(gPlayerStatus)
+/* 7E3CD4 80282E54 2463EFC8 */  addiu     $v1, $v1, %lo(gPlayerStatus)
 /* 7E3CD8 80282E58 0040502D */  daddu     $t2, $v0, $zero
 /* 7E3CDC 80282E5C C4600028 */  lwc1      $f0, 0x28($v1)
 /* 7E3CE0 80282E60 C462002C */  lwc1      $f2, 0x2c($v1)

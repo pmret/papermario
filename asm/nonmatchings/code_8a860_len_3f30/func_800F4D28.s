@@ -58,8 +58,8 @@ glabel func_800F4D28
 /* 8E2A4 800F4DF4 26660004 */  addiu     $a2, $s3, 4
 /* 8E2A8 800F4DF8 2402000A */  addiu     $v0, $zero, 0xa
 /* 8E2AC 800F4DFC AFA20010 */  sw        $v0, 0x10($sp)
-/* 8E2B0 800F4E00 3C028011 */  lui       $v0, 0x8011
-/* 8E2B4 800F4E04 2442F290 */  addiu     $v0, $v0, -0xd70
+/* 8E2B0 800F4E00 3C028011 */  lui       $v0, %hi(gPlayerData)
+/* 8E2B4 800F4E04 2442F290 */  addiu     $v0, $v0, %lo(gPlayerData)
 /* 8E2B8 800F4E08 AFA30018 */  sw        $v1, 0x18($sp)
 /* 8E2BC 800F4E0C 9044000F */  lbu       $a0, 0xf($v0)
 /* 8E2C0 800F4E10 8E220000 */  lw        $v0, ($s1)

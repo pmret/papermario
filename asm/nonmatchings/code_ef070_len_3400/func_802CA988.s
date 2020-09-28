@@ -19,8 +19,8 @@ glabel func_802CA988
 /* EF370 802CA9C0 26100004 */  addiu     $s0, $s0, 4
 /* EF374 802CA9C4 8E150000 */  lw        $s5, ($s0)
 /* EF378 802CA9C8 26100004 */  addiu     $s0, $s0, 4
-/* EF37C 802CA9CC 3C04800B */  lui       $a0, 0x800b
-/* EF380 802CA9D0 24841D80 */  addiu     $a0, $a0, 0x1d80
+/* EF37C 802CA9CC 3C04800B */  lui       $a0, %hi(gCameras)
+/* EF380 802CA9D0 24841D80 */  addiu     $a0, $a0, %lo(gCameras)
 /* EF384 802CA9D4 00021880 */  sll       $v1, $v0, 2
 /* EF388 802CA9D8 00621821 */  addu      $v1, $v1, $v0
 /* EF38C 802CA9DC 00031880 */  sll       $v1, $v1, 2

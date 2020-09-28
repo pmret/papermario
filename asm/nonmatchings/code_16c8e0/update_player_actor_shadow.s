@@ -3,8 +3,8 @@
 
 glabel update_player_actor_shadow
 /* 18648C 80257BAC 27BDFFC0 */  addiu     $sp, $sp, -0x40
-/* 186490 80257BB0 3C02800E */  lui       $v0, 0x800e
-/* 186494 80257BB4 2442C070 */  addiu     $v0, $v0, -0x3f90
+/* 186490 80257BB0 3C02800E */  lui       $v0, %hi(gBattleStatus)
+/* 186494 80257BB4 2442C070 */  addiu     $v0, $v0, %lo(gBattleStatus)
 /* 186498 80257BB8 AFBF0038 */  sw        $ra, 0x38($sp)
 /* 18649C 80257BBC AFB30034 */  sw        $s3, 0x34($sp)
 /* 1864A0 80257BC0 AFB20030 */  sw        $s2, 0x30($sp)

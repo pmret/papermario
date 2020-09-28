@@ -2,11 +2,11 @@
 .set noreorder # don't insert nops after branches
 
 glabel func_802409F4
-/* 16F2D4 802409F4 3C088011 */  lui       $t0, 0x8011
-/* 16F2D8 802409F8 2508EFC8 */  addiu     $t0, $t0, -0x1038
+/* 16F2D4 802409F4 3C088011 */  lui       $t0, %hi(gPlayerStatus)
+/* 16F2D8 802409F8 2508EFC8 */  addiu     $t0, $t0, %lo(gPlayerStatus)
 /* 16F2DC 802409FC 0000382D */  daddu     $a3, $zero, $zero
-/* 16F2E0 80240A00 3C04800B */  lui       $a0, 0x800b
-/* 16F2E4 80240A04 24841D80 */  addiu     $a0, $a0, 0x1d80
+/* 16F2E0 80240A00 3C04800B */  lui       $a0, %hi(gCameras)
+/* 16F2E4 80240A04 24841D80 */  addiu     $a0, $a0, %lo(gCameras)
 /* 16F2E8 80240A08 3C06802A */  lui       $a2, 0x802a
 /* 16F2EC 80240A0C 24C6DA50 */  addiu     $a2, $a2, -0x25b0
 .L80240A10:

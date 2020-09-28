@@ -2,12 +2,12 @@
 .set noreorder # don't insert nops after branches
 
 glabel func_800E0B90
-/* 7A040 800E0B90 3C038007 */  lui       $v1, 0x8007
-/* 7A044 800E0B94 8C637410 */  lw        $v1, 0x7410($v1)
+/* 7A040 800E0B90 3C038007 */  lui       $v1, %hi(gCurrentCameraID)
+/* 7A044 800E0B94 8C637410 */  lw        $v1, %lo(gCurrentCameraID)($v1)
 /* 7A048 800E0B98 27BDFFD0 */  addiu     $sp, $sp, -0x30
 /* 7A04C 800E0B9C AFB10014 */  sw        $s1, 0x14($sp)
-/* 7A050 800E0BA0 3C118011 */  lui       $s1, 0x8011
-/* 7A054 800E0BA4 2631EFC8 */  addiu     $s1, $s1, -0x1038
+/* 7A050 800E0BA0 3C118011 */  lui       $s1, %hi(gPlayerStatus)
+/* 7A054 800E0BA4 2631EFC8 */  addiu     $s1, $s1, %lo(gPlayerStatus)
 /* 7A058 800E0BA8 AFBF0018 */  sw        $ra, 0x18($sp)
 /* 7A05C 800E0BAC AFB00010 */  sw        $s0, 0x10($sp)
 /* 7A060 800E0BB0 F7B60028 */  sdc1      $f22, 0x28($sp)
@@ -76,8 +76,8 @@ glabel func_800E0B90
 /* 7A150 800E0CA0 24020002 */   addiu    $v0, $zero, 2
 /* 7A154 800E0CA4 10620020 */  beq       $v1, $v0, .L800E0D28
 /* 7A158 800E0CA8 00000000 */   nop      
-/* 7A15C 800E0CAC 3C028007 */  lui       $v0, 0x8007
-/* 7A160 800E0CB0 8C427410 */  lw        $v0, 0x7410($v0)
+/* 7A15C 800E0CAC 3C028007 */  lui       $v0, %hi(gCurrentCameraID)
+/* 7A160 800E0CB0 8C427410 */  lw        $v0, %lo(gCurrentCameraID)($v0)
 /* 7A164 800E0CB4 AC830000 */  sw        $v1, ($a0)
 /* 7A168 800E0CB8 00021080 */  sll       $v0, $v0, 2
 /* 7A16C 800E0CBC 10600005 */  beqz      $v1, .L800E0CD4
@@ -102,16 +102,16 @@ glabel func_800E0B90
 /* 7A1B0 800E0D00 00000000 */  nop       
 /* 7A1B4 800E0D04 45000008 */  bc1f      .L800E0D28
 /* 7A1B8 800E0D08 00000000 */   nop      
-/* 7A1BC 800E0D0C 3C028007 */  lui       $v0, 0x8007
-/* 7A1C0 800E0D10 8C427410 */  lw        $v0, 0x7410($v0)
+/* 7A1BC 800E0D0C 3C028007 */  lui       $v0, %hi(gCurrentCameraID)
+/* 7A1C0 800E0D10 8C427410 */  lw        $v0, %lo(gCurrentCameraID)($v0)
 /* 7A1C4 800E0D14 00021080 */  sll       $v0, $v0, 2
 /* 7A1C8 800E0D18 02221021 */  addu      $v0, $s1, $v0
 /* 7A1CC 800E0D1C C4400090 */  lwc1      $f0, 0x90($v0)
 /* 7A1D0 800E0D20 46000007 */  neg.s     $f0, $f0
 /* 7A1D4 800E0D24 E4400090 */  swc1      $f0, 0x90($v0)
 .L800E0D28:
-/* 7A1D8 800E0D28 3C028007 */  lui       $v0, 0x8007
-/* 7A1DC 800E0D2C 8C427410 */  lw        $v0, 0x7410($v0)
+/* 7A1D8 800E0D28 3C028007 */  lui       $v0, %hi(gCurrentCameraID)
+/* 7A1DC 800E0D2C 8C427410 */  lw        $v0, %lo(gCurrentCameraID)($v0)
 /* 7A1E0 800E0D30 44801000 */  mtc1      $zero, $f2
 /* 7A1E4 800E0D34 00021080 */  sll       $v0, $v0, 2
 /* 7A1E8 800E0D38 02221021 */  addu      $v0, $s1, $v0
@@ -155,8 +155,8 @@ glabel func_800E0B90
 /* 7A278 800E0DC8 00000000 */   nop      
 /* 7A27C 800E0DCC 44802000 */  mtc1      $zero, $f4
 .L800E0DD0:
-/* 7A280 800E0DD0 3C108007 */  lui       $s0, 0x8007
-/* 7A284 800E0DD4 26107410 */  addiu     $s0, $s0, 0x7410
+/* 7A280 800E0DD0 3C108007 */  lui       $s0, %hi(gCurrentCameraID)
+/* 7A284 800E0DD4 26107410 */  addiu     $s0, $s0, %lo(gCurrentCameraID)
 /* 7A288 800E0DD8 8E020000 */  lw        $v0, ($s0)
 /* 7A28C 800E0DDC 4600A306 */  mov.s     $f12, $f20
 /* 7A290 800E0DE0 00021080 */  sll       $v0, $v0, 2

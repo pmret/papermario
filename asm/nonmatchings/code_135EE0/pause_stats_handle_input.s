@@ -180,8 +180,8 @@ glabel pause_stats_handle_input
 /* 13A150 80246E10 0C05272D */  jal       play_sound
 /* 13A154 80246E14 240400C7 */   addiu    $a0, $zero, 0xc7
 .L80246E18:
-/* 13A158 80246E18 3C028011 */  lui       $v0, 0x8011
-/* 13A15C 80246E1C 2442F290 */  addiu     $v0, $v0, -0xd70
+/* 13A158 80246E18 3C028011 */  lui       $v0, %hi(gPlayerData)
+/* 13A15C 80246E1C 2442F290 */  addiu     $v0, $v0, %lo(gPlayerData)
 /* 13A160 80246E20 90430000 */  lbu       $v1, ($v0)
 /* 13A164 80246E24 90420001 */  lbu       $v0, 1($v0)
 /* 13A168 80246E28 00031E00 */  sll       $v1, $v1, 0x18

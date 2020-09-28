@@ -14,8 +14,8 @@ glabel npc_do_player_collision
 /* 146FC 800392FC F7B60030 */  sdc1      $f22, 0x30($sp)
 /* 14700 80039300 F7B40028 */  sdc1      $f20, 0x28($sp)
 /* 14704 80039304 8E230000 */  lw        $v1, ($s1)
-/* 14708 80039308 3C108011 */  lui       $s0, 0x8011
-/* 1470C 8003930C 2610EFC8 */  addiu     $s0, $s0, -0x1038
+/* 14708 80039308 3C108011 */  lui       $s0, %hi(gPlayerStatus)
+/* 1470C 8003930C 2610EFC8 */  addiu     $s0, $s0, %lo(gPlayerStatus)
 /* 14710 80039310 30620100 */  andi      $v0, $v1, 0x100
 /* 14714 80039314 144000D1 */  bnez      $v0, .L8003965C
 /* 14718 80039318 0000102D */   daddu    $v0, $zero, $zero

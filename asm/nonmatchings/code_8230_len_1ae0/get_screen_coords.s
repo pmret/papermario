@@ -16,8 +16,8 @@ glabel get_screen_coords
 /* 9964 8002E564 27A20030 */  addiu     $v0, $sp, 0x30
 /* 9968 8002E568 AFA2001C */  sw        $v0, 0x1c($sp)
 /* 996C 8002E56C 27A20034 */  addiu     $v0, $sp, 0x34
-/* 9970 8002E570 3C08800B */  lui       $t0, 0x800b
-/* 9974 8002E574 25081D80 */  addiu     $t0, $t0, 0x1d80
+/* 9970 8002E570 3C08800B */  lui       $t0, %hi(gCameras)
+/* 9974 8002E574 25081D80 */  addiu     $t0, $t0, %lo(gCameras)
 /* 9978 8002E578 AFA20020 */  sw        $v0, 0x20($sp)
 /* 997C 8002E57C 00041080 */  sll       $v0, $a0, 2
 /* 9980 8002E580 00441021 */  addu      $v0, $v0, $a0

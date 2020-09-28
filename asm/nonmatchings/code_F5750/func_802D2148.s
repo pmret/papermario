@@ -3,8 +3,8 @@
 
 glabel func_802D2148
 /* F6AF8 802D2148 3C04FBFF */  lui       $a0, 0xfbff
-/* F6AFC 802D214C 3C038011 */  lui       $v1, 0x8011
-/* F6B00 802D2150 2463EFC8 */  addiu     $v1, $v1, -0x1038
+/* F6AFC 802D214C 3C038011 */  lui       $v1, %hi(gPlayerStatus)
+/* F6B00 802D2150 2463EFC8 */  addiu     $v1, $v1, %lo(gPlayerStatus)
 /* F6B04 802D2154 8C620000 */  lw        $v0, ($v1)
 /* F6B08 802D2158 3484FFFF */  ori       $a0, $a0, 0xffff
 /* F6B0C 802D215C 00441024 */  and       $v0, $v0, $a0

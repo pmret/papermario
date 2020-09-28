@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel func_800E5348
-/* 7E7F8 800E5348 3C038007 */  lui       $v1, 0x8007
-/* 7E7FC 800E534C 8C637410 */  lw        $v1, 0x7410($v1)
+/* 7E7F8 800E5348 3C038007 */  lui       $v1, %hi(gCurrentCameraID)
+/* 7E7FC 800E534C 8C637410 */  lw        $v1, %lo(gCurrentCameraID)($v1)
 /* 7E800 800E5350 3C018011 */  lui       $at, 0x8011
 /* 7E804 800E5354 C42EF04C */  lwc1      $f14, -0xfb4($at)
 /* 7E808 800E5358 27BDFFE8 */  addiu     $sp, $sp, -0x18
@@ -58,8 +58,8 @@ glabel func_800E5348
 /* 7E8C4 800E5414 C4247B40 */  lwc1      $f4, 0x7b40($at)
 /* 7E8C8 800E5418 46802120 */  cvt.s.w   $f4, $f4
 .L800E541C:
-/* 7E8CC 800E541C 3C038007 */  lui       $v1, 0x8007
-/* 7E8D0 800E5420 8C637410 */  lw        $v1, 0x7410($v1)
+/* 7E8CC 800E541C 3C038007 */  lui       $v1, %hi(gCurrentCameraID)
+/* 7E8D0 800E5420 8C637410 */  lw        $v1, %lo(gCurrentCameraID)($v1)
 /* 7E8D4 800E5424 3C0142B4 */  lui       $at, 0x42b4
 /* 7E8D8 800E5428 44816000 */  mtc1      $at, $f12
 /* 7E8DC 800E542C 00031080 */  sll       $v0, $v1, 2

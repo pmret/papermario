@@ -28,10 +28,10 @@ glabel spawn_drops
 /* 236DC 800482DC 0C00EABB */  jal       get_npc_unsafe
 /* 236E0 800482E0 AFA80020 */   sw       $t0, 0x20($sp)
 /* 236E4 800482E4 0040802D */  daddu     $s0, $v0, $zero
-/* 236E8 800482E8 3C038007 */  lui       $v1, 0x8007
-/* 236EC 800482EC 8C637410 */  lw        $v1, 0x7410($v1)
-/* 236F0 800482F0 3C04800B */  lui       $a0, 0x800b
-/* 236F4 800482F4 24841D80 */  addiu     $a0, $a0, 0x1d80
+/* 236E8 800482E8 3C038007 */  lui       $v1, %hi(gCurrentCameraID)
+/* 236EC 800482EC 8C637410 */  lw        $v1, %lo(gCurrentCameraID)($v1)
+/* 236F0 800482F0 3C04800B */  lui       $a0, %hi(gCameras)
+/* 236F4 800482F4 24841D80 */  addiu     $a0, $a0, %lo(gCameras)
 /* 236F8 800482F8 00031080 */  sll       $v0, $v1, 2
 /* 236FC 800482FC 00431021 */  addu      $v0, $v0, $v1
 /* 23700 80048300 00021080 */  sll       $v0, $v0, 2

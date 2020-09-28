@@ -18,8 +18,8 @@ glabel func_802E8BC0
 /* 10A474 802E8BF4 C44C0000 */  lwc1      $f12, ($v0)
 /* 10A478 802E8BF8 0C038022 */  jal       func_800E0088
 /* 10A47C 802E8BFC C44E0008 */   lwc1     $f14, 8($v0)
-/* 10A480 802E8C00 3C038011 */  lui       $v1, 0x8011
-/* 10A484 802E8C04 2463EFC8 */  addiu     $v1, $v1, -0x1038
+/* 10A480 802E8C00 3C038011 */  lui       $v1, %hi(gPlayerStatus)
+/* 10A484 802E8C04 2463EFC8 */  addiu     $v1, $v1, %lo(gPlayerStatus)
 /* 10A488 802E8C08 C462005C */  lwc1      $f2, 0x5c($v1)
 /* 10A48C 802E8C0C 0060882D */  daddu     $s1, $v1, $zero
 /* 10A490 802E8C10 46020003 */  div.s     $f0, $f0, $f2

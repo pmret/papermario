@@ -24,8 +24,8 @@ glabel func_802B71C8
 /* E210C4 802B7214 00A0302D */  daddu     $a2, $a1, $zero
 /* E210C8 802B7218 0C019DF0 */  jal       guScaleF
 /* E210CC 802B721C 00A0382D */   daddu    $a3, $a1, $zero
-/* E210D0 802B7220 3C038007 */  lui       $v1, 0x8007
-/* E210D4 802B7224 8C637410 */  lw        $v1, 0x7410($v1)
+/* E210D0 802B7220 3C038007 */  lui       $v1, %hi(gCurrentCameraID)
+/* E210D4 802B7224 8C637410 */  lw        $v1, %lo(gCurrentCameraID)($v1)
 /* E210D8 802B7228 27B10078 */  addiu     $s1, $sp, 0x78
 /* E210DC 802B722C 00031080 */  sll       $v0, $v1, 2
 /* E210E0 802B7230 00431021 */  addu      $v0, $v0, $v1

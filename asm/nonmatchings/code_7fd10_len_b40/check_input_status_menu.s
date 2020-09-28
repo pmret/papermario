@@ -10,8 +10,8 @@ glabel check_input_status_menu
 /* 80750 800E72A0 AFB10014 */  sw        $s1, 0x14($sp)
 /* 80754 800E72A4 0C0B1EAF */  jal       get_variable
 /* 80758 800E72A8 AFB00010 */   sw       $s0, 0x10($sp)
-/* 8075C 800E72AC 3C118011 */  lui       $s1, 0x8011
-/* 80760 800E72B0 2631EFC8 */  addiu     $s1, $s1, -0x1038
+/* 8075C 800E72AC 3C118011 */  lui       $s1, %hi(gPlayerStatus)
+/* 80760 800E72B0 2631EFC8 */  addiu     $s1, $s1, %lo(gPlayerStatus)
 /* 80764 800E72B4 28420060 */  slti      $v0, $v0, 0x60
 /* 80768 800E72B8 10400031 */  beqz      $v0, .L800E7380
 /* 8076C 800E72BC 24020021 */   addiu    $v0, $zero, 0x21
@@ -21,8 +21,8 @@ glabel check_input_status_menu
 /* 8077C 800E72CC 08039CB8 */  j         .L800E72E0
 /* 80780 800E72D0 8E3000E0 */   lw       $s0, 0xe0($s1)
 .L800E72D4:
-/* 80784 800E72D4 3C028007 */  lui       $v0, 0x8007
-/* 80788 800E72D8 8C42419C */  lw        $v0, 0x419c($v0)
+/* 80784 800E72D4 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* 80788 800E72D8 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 8078C 800E72DC 8C500010 */  lw        $s0, 0x10($v0)
 .L800E72E0:
 /* 80790 800E72E0 0C03A644 */  jal       is_status_menu_visible

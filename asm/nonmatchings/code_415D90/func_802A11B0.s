@@ -3,8 +3,8 @@
 
 glabel func_802A11B0
 /* 415F40 802A11B0 27BDFFB8 */  addiu     $sp, $sp, -0x48
-/* 415F44 802A11B4 3C06800E */  lui       $a2, 0x800e
-/* 415F48 802A11B8 24C6C070 */  addiu     $a2, $a2, -0x3f90
+/* 415F44 802A11B4 3C06800E */  lui       $a2, %hi(gBattleStatus)
+/* 415F48 802A11B8 24C6C070 */  addiu     $a2, $a2, %lo(gBattleStatus)
 /* 415F4C 802A11BC AFB00018 */  sw        $s0, 0x18($sp)
 /* 415F50 802A11C0 3C10802B */  lui       $s0, 0x802b
 /* 415F54 802A11C4 2610D000 */  addiu     $s0, $s0, -0x3000

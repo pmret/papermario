@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel get_cam_viewport
-/* 98E8 8002E4E8 3C08800B */  lui       $t0, 0x800b
-/* 98EC 8002E4EC 25081D80 */  addiu     $t0, $t0, 0x1d80
+/* 98E8 8002E4E8 3C08800B */  lui       $t0, %hi(gCameras)
+/* 98EC 8002E4EC 25081D80 */  addiu     $t0, $t0, %lo(gCameras)
 /* 98F0 8002E4F0 00041080 */  sll       $v0, $a0, 2
 /* 98F4 8002E4F4 00441021 */  addu      $v0, $v0, $a0
 /* 98F8 8002E4F8 00021080 */  sll       $v0, $v0, 2

@@ -21,8 +21,8 @@ glabel osViInit
 /* 47ED0 8006CAD0 3C018009 */  lui       $at, 0x8009
 /* 47ED4 8006CAD4 A4225972 */  sh        $v0, 0x5972($at)
 /* 47ED8 8006CAD8 3C028000 */  lui       $v0, 0x8000
-/* 47EDC 8006CADC 3C018009 */  lui       $at, 0x8009
-/* 47EE0 8006CAE0 AC3059D4 */  sw        $s0, 0x59d4($at)
+/* 47EDC 8006CADC 3C018009 */  lui       $at, %hi(D_800959D4)
+/* 47EE0 8006CAE0 AC3059D4 */  sw        $s0, %lo(D_800959D4)($at)
 /* 47EE4 8006CAE4 3C018009 */  lui       $at, 0x8009
 /* 47EE8 8006CAE8 AC2259A4 */  sw        $v0, 0x59a4($at)
 /* 47EEC 8006CAEC 3C018009 */  lui       $at, 0x8009
@@ -44,8 +44,8 @@ glabel osViInit
 .L8006CB24:
 /* 47F24 8006CB24 3C018009 */  lui       $at, 0x8009
 /* 47F28 8006CB28 AC2259A8 */  sw        $v0, 0x59a8($at)
-/* 47F2C 8006CB2C 3C038009 */  lui       $v1, 0x8009
-/* 47F30 8006CB30 8C6359D4 */  lw        $v1, 0x59d4($v1)
+/* 47F2C 8006CB2C 3C038009 */  lui       $v1, %hi(D_800959D4)
+/* 47F30 8006CB30 8C6359D4 */  lw        $v1, %lo(D_800959D4)($v1)
 /* 47F34 8006CB34 8C640008 */  lw        $a0, 8($v1)
 /* 47F38 8006CB38 24020020 */  addiu     $v0, $zero, 0x20
 /* 47F3C 8006CB3C A4620000 */  sh        $v0, ($v1)

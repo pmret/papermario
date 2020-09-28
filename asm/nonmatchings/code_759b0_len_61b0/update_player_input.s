@@ -2,10 +2,10 @@
 .set noreorder # don't insert nops after branches
 
 glabel update_player_input
-/* 7B440 800E1F90 3C048011 */  lui       $a0, 0x8011
-/* 7B444 800E1F94 2484EFC8 */  addiu     $a0, $a0, -0x1038
-/* 7B448 800E1F98 3C038007 */  lui       $v1, 0x8007
-/* 7B44C 800E1F9C 8C63419C */  lw        $v1, 0x419c($v1)
+/* 7B440 800E1F90 3C048011 */  lui       $a0, %hi(gPlayerStatus)
+/* 7B444 800E1F94 2484EFC8 */  addiu     $a0, $a0, %lo(gPlayerStatus)
+/* 7B448 800E1F98 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
+/* 7B44C 800E1F9C 8C63419C */  lw        $v1, %lo(gGameStatusPtr)($v1)
 /* 7B450 800E1FA0 8C8501B8 */  lw        $a1, 0x1b8($a0)
 /* 7B454 800E1FA4 80660040 */  lb        $a2, 0x40($v1)
 /* 7B458 800E1FA8 AC8600E8 */  sw        $a2, 0xe8($a0)

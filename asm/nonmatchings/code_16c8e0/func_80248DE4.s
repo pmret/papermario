@@ -10,8 +10,8 @@ glabel func_80248DE4
 /* 1776D8 80248DF8 261022D8 */  addiu     $s0, $s0, 0x22d8
 /* 1776DC 80248DFC 3C02802A */  lui       $v0, 0x802a
 /* 1776E0 80248E00 9442F27C */  lhu       $v0, -0xd84($v0)
-/* 1776E4 80248E04 3C04800E */  lui       $a0, 0x800e
-/* 1776E8 80248E08 2484C070 */  addiu     $a0, $a0, -0x3f90
+/* 1776E4 80248E04 3C04800E */  lui       $a0, %hi(gBattleStatus)
+/* 1776E8 80248E08 2484C070 */  addiu     $a0, $a0, %lo(gBattleStatus)
 /* 1776EC 80248E0C AFBF0040 */  sw        $ra, 0x40($sp)
 /* 1776F0 80248E10 F7BE0070 */  sdc1      $f30, 0x70($sp)
 /* 1776F4 80248E14 F7BC0068 */  sdc1      $f28, 0x68($sp)

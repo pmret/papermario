@@ -70,8 +70,8 @@ glabel create_icon
 /* D7C8C 8014158C A202004B */  sb        $v0, 0x4b($s0)
 /* D7C90 80141590 A202004C */  sb        $v0, 0x4c($s0)
 /* D7C94 80141594 A202004D */  sb        $v0, 0x4d($s0)
-/* D7C98 80141598 3C048007 */  lui       $a0, 0x8007
-/* D7C9C 8014159C 8C84419C */  lw        $a0, 0x419c($a0)
+/* D7C98 80141598 3C048007 */  lui       $a0, %hi(gGameStatusPtr)
+/* D7C9C 8014159C 8C84419C */  lw        $a0, %lo(gGameStatusPtr)($a0)
 /* D7CA0 801415A0 24020400 */  addiu     $v0, $zero, 0x400
 /* D7CA4 801415A4 A600003C */  sh        $zero, 0x3c($s0)
 /* D7CA8 801415A8 A600003E */  sh        $zero, 0x3e($s0)

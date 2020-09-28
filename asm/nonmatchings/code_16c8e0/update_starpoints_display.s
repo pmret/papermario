@@ -3,8 +3,8 @@
 
 glabel update_starpoints_display
 /* 16EC9C 802403BC 27BDFF70 */  addiu     $sp, $sp, -0x90
-/* 16ECA0 802403C0 3C0B800E */  lui       $t3, 0x800e
-/* 16ECA4 802403C4 256BC070 */  addiu     $t3, $t3, -0x3f90
+/* 16ECA0 802403C0 3C0B800E */  lui       $t3, %hi(gBattleStatus)
+/* 16ECA4 802403C4 256BC070 */  addiu     $t3, $t3, %lo(gBattleStatus)
 /* 16ECA8 802403C8 AFBF007C */  sw        $ra, 0x7c($sp)
 /* 16ECAC 802403CC AFBE0078 */  sw        $fp, 0x78($sp)
 /* 16ECB0 802403D0 AFB70074 */  sw        $s7, 0x74($sp)

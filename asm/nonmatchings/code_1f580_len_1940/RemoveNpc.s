@@ -16,8 +16,8 @@ glabel RemoveNpc
 /* 1F76C 8004436C 0C0B1EAF */  jal       get_variable
 /* 1F770 80044370 24130001 */   addiu    $s3, $zero, 1
 /* 1F774 80044374 0040882D */  daddu     $s1, $v0, $zero
-/* 1F778 80044378 3C14800B */  lui       $s4, 0x800b
-/* 1F77C 8004437C 26940F10 */  addiu     $s4, $s4, 0xf10
+/* 1F778 80044378 3C14800B */  lui       $s4, %hi(gCurrentEncounter)
+/* 1F77C 8004437C 26940F10 */  addiu     $s4, $s4, %lo(gCurrentEncounter)
 /* 1F780 80044380 2402FFFF */  addiu     $v0, $zero, -1
 /* 1F784 80044384 12020017 */  beq       $s0, $v0, .L800443E4
 /* 1F788 80044388 00000000 */   nop      

@@ -8,8 +8,8 @@ glabel func_800E3514
 /* 7C9D0 800E3520 AFB00048 */  sw        $s0, 0x48($sp)
 /* 7C9D4 800E3524 00A0802D */  daddu     $s0, $a1, $zero
 /* 7C9D8 800E3528 AFB1004C */  sw        $s1, 0x4c($sp)
-/* 7C9DC 800E352C 3C118011 */  lui       $s1, 0x8011
-/* 7C9E0 800E3530 2631EFC8 */  addiu     $s1, $s1, -0x1038
+/* 7C9DC 800E352C 3C118011 */  lui       $s1, %hi(gPlayerStatus)
+/* 7C9E0 800E3530 2631EFC8 */  addiu     $s1, $s1, %lo(gPlayerStatus)
 /* 7C9E4 800E3534 AFBF0054 */  sw        $ra, 0x54($sp)
 /* 7C9E8 800E3538 AFB20050 */  sw        $s2, 0x50($sp)
 /* 7C9EC 800E353C 862200B0 */  lh        $v0, 0xb0($s1)

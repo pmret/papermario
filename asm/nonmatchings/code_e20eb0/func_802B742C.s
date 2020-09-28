@@ -5,8 +5,8 @@ glabel func_802B742C
 /* E212DC 802B742C 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* E212E0 802B7430 3C020204 */  lui       $v0, 0x204
 /* E212E4 802B7434 AFB00010 */  sw        $s0, 0x10($sp)
-/* E212E8 802B7438 3C108011 */  lui       $s0, 0x8011
-/* E212EC 802B743C 2610EFC8 */  addiu     $s0, $s0, -0x1038
+/* E212E8 802B7438 3C108011 */  lui       $s0, %hi(gPlayerStatus)
+/* E212EC 802B743C 2610EFC8 */  addiu     $s0, $s0, %lo(gPlayerStatus)
 /* E212F0 802B7440 AFBF0014 */  sw        $ra, 0x14($sp)
 /* E212F4 802B7444 8E030000 */  lw        $v1, ($s0)
 /* E212F8 802B7448 34420020 */  ori       $v0, $v0, 0x20
@@ -14,8 +14,8 @@ glabel func_802B742C
 /* E21300 802B7450 3C020200 */  lui       $v0, 0x200
 /* E21304 802B7454 14620010 */  bne       $v1, $v0, .L802B7498
 /* E21308 802B7458 240600FF */   addiu    $a2, $zero, 0xff
-/* E2130C 802B745C 3C03800A */  lui       $v1, 0x800a
-/* E21310 802B7460 8C63A600 */  lw        $v1, -0x5a00($v1)
+/* E2130C 802B745C 3C03800A */  lui       $v1, %hi(gGameState)
+/* E21310 802B7460 8C63A600 */  lw        $v1, %lo(gGameState)($v1)
 /* E21314 802B7464 24020004 */  addiu     $v0, $zero, 4
 /* E21318 802B7468 1062000B */  beq       $v1, $v0, .L802B7498
 /* E2131C 802B746C 00000000 */   nop      

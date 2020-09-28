@@ -4,8 +4,8 @@
 glabel collision_main_above
 /* 7BC90 800E27E0 27BDFFB8 */  addiu     $sp, $sp, -0x48
 /* 7BC94 800E27E4 AFB10034 */  sw        $s1, 0x34($sp)
-/* 7BC98 800E27E8 3C118011 */  lui       $s1, 0x8011
-/* 7BC9C 800E27EC 2631EFC8 */  addiu     $s1, $s1, -0x1038
+/* 7BC98 800E27E8 3C118011 */  lui       $s1, %hi(gPlayerStatus)
+/* 7BC9C 800E27EC 2631EFC8 */  addiu     $s1, $s1, %lo(gPlayerStatus)
 /* 7BCA0 800E27F0 AFBF003C */  sw        $ra, 0x3c($sp)
 /* 7BCA4 800E27F4 AFB20038 */  sw        $s2, 0x38($sp)
 /* 7BCA8 800E27F8 AFB00030 */  sw        $s0, 0x30($sp)
@@ -42,8 +42,8 @@ glabel collision_main_above
 /* 7BD24 800E2874 08038A31 */  j         .L800E28C4
 /* 7BD28 800E2878 27A50020 */   addiu    $a1, $sp, 0x20
 .L800E287C:
-/* 7BD2C 800E287C 3C038007 */  lui       $v1, 0x8007
-/* 7BD30 800E2880 8C637410 */  lw        $v1, 0x7410($v1)
+/* 7BD2C 800E287C 3C038007 */  lui       $v1, %hi(gCurrentCameraID)
+/* 7BD30 800E2880 8C637410 */  lw        $v1, %lo(gCurrentCameraID)($v1)
 /* 7BD34 800E2884 C62200A8 */  lwc1      $f2, 0xa8($s1)
 /* 7BD38 800E2888 3C0142B4 */  lui       $at, 0x42b4
 /* 7BD3C 800E288C 44810000 */  mtc1      $at, $f0

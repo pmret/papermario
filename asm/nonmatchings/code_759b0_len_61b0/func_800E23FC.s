@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel func_800E23FC
-/* 7B8AC 800E23FC 3C038007 */  lui       $v1, 0x8007
-/* 7B8B0 800E2400 8C63419C */  lw        $v1, 0x419c($v1)
+/* 7B8AC 800E23FC 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
+/* 7B8B0 800E2400 8C63419C */  lw        $v1, %lo(gGameStatusPtr)($v1)
 /* 7B8B4 800E2404 27BDFFB8 */  addiu     $sp, $sp, -0x48
 /* 7B8B8 800E2408 F7BA0038 */  sdc1      $f26, 0x38($sp)
 /* 7B8BC 800E240C 4480D000 */  mtc1      $zero, $f26
@@ -51,8 +51,8 @@ glabel func_800E23FC
 /* 7B960 800E24B0 00000000 */  nop       
 /* 7B964 800E24B4 45020005 */  bc1fl     .L800E24CC
 /* 7B968 800E24B8 E6000000 */   swc1     $f0, ($s0)
-/* 7B96C 800E24BC 3C028011 */  lui       $v0, 0x8011
-/* 7B970 800E24C0 2442EFC8 */  addiu     $v0, $v0, -0x1038
+/* 7B96C 800E24BC 3C028011 */  lui       $v0, %hi(gPlayerStatus)
+/* 7B970 800E24C0 2442EFC8 */  addiu     $v0, $v0, %lo(gPlayerStatus)
 /* 7B974 800E24C4 C4400080 */  lwc1      $f0, 0x80($v0)
 /* 7B978 800E24C8 E6000000 */  swc1      $f0, ($s0)
 .L800E24CC:

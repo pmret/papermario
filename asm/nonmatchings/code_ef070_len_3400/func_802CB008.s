@@ -45,8 +45,8 @@ glabel func_802CB008
 /* EFA58 802CB0A8 0C00AB39 */  jal       heap_malloc
 /* EFA5C 802CB0AC 0040902D */   daddu    $s2, $v0, $zero
 /* EFA60 802CB0B0 0040282D */  daddu     $a1, $v0, $zero
-/* EFA64 802CB0B4 3C04800B */  lui       $a0, 0x800b
-/* EFA68 802CB0B8 24841D80 */  addiu     $a0, $a0, 0x1d80
+/* EFA64 802CB0B4 3C04800B */  lui       $a0, %hi(gCameras)
+/* EFA68 802CB0B8 24841D80 */  addiu     $a0, $a0, %lo(gCameras)
 /* EFA6C 802CB0BC 00101080 */  sll       $v0, $s0, 2
 /* EFA70 802CB0C0 00501021 */  addu      $v0, $v0, $s0
 /* EFA74 802CB0C4 00021080 */  sll       $v0, $v0, 2

@@ -5,8 +5,8 @@ glabel func_800EFD08
 /* 891B8 800EFD08 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 891BC 800EFD0C AFB00010 */  sw        $s0, 0x10($sp)
 /* 891C0 800EFD10 AFB10014 */  sw        $s1, 0x14($sp)
-/* 891C4 800EFD14 3C118011 */  lui       $s1, 0x8011
-/* 891C8 800EFD18 2631EFC8 */  addiu     $s1, $s1, -0x1038
+/* 891C4 800EFD14 3C118011 */  lui       $s1, %hi(gPlayerStatus)
+/* 891C8 800EFD18 2631EFC8 */  addiu     $s1, $s1, %lo(gPlayerStatus)
 /* 891CC 800EFD1C AFBF001C */  sw        $ra, 0x1c($sp)
 /* 891D0 800EFD20 AFB20018 */  sw        $s2, 0x18($sp)
 /* 891D4 800EFD24 822200B4 */  lb        $v0, 0xb4($s1)

@@ -13,8 +13,8 @@ glabel update_entities
 /* A5DF0 8010F6F0 AFB20018 */  sw        $s2, 0x18($sp)
 /* A5DF4 8010F6F4 AFB00010 */  sw        $s0, 0x10($sp)
 /* A5DF8 8010F6F8 8C620000 */  lw        $v0, ($v1)
-/* A5DFC 8010F6FC 3C12800B */  lui       $s2, 0x800b
-/* A5E00 8010F700 26521D80 */  addiu     $s2, $s2, 0x1d80
+/* A5DFC 8010F6FC 3C12800B */  lui       $s2, %hi(gCameras)
+/* A5E00 8010F700 26521D80 */  addiu     $s2, $s2, %lo(gCameras)
 /* A5E04 8010F704 3C018015 */  lui       $at, 0x8015
 /* A5E08 8010F708 AC2012BC */  sw        $zero, 0x12bc($at)
 /* A5E0C 8010F70C 3C018015 */  lui       $at, 0x8015
@@ -80,8 +80,8 @@ glabel update_entities
 /* A5EE8 8010F7E8 30422000 */  andi      $v0, $v0, 0x2000
 /* A5EEC 8010F7EC 1040000E */  beqz      $v0, .L8010F828
 /* A5EF0 8010F7F0 00000000 */   nop      
-/* A5EF4 8010F7F4 3C038007 */  lui       $v1, 0x8007
-/* A5EF8 8010F7F8 8C637410 */  lw        $v1, 0x7410($v1)
+/* A5EF4 8010F7F4 3C038007 */  lui       $v1, %hi(gCurrentCameraID)
+/* A5EF8 8010F7F8 8C637410 */  lw        $v1, %lo(gCurrentCameraID)($v1)
 /* A5EFC 8010F7FC 00031080 */  sll       $v0, $v1, 2
 /* A5F00 8010F800 00431021 */  addu      $v0, $v0, $v1
 /* A5F04 8010F804 00021080 */  sll       $v0, $v0, 2
@@ -163,8 +163,8 @@ glabel update_entities
 /* A6018 8010F918 30422000 */  andi      $v0, $v0, 0x2000
 /* A601C 8010F91C 1040000E */  beqz      $v0, .L8010F958
 /* A6020 8010F920 00000000 */   nop      
-/* A6024 8010F924 3C038007 */  lui       $v1, 0x8007
-/* A6028 8010F928 8C637410 */  lw        $v1, 0x7410($v1)
+/* A6024 8010F924 3C038007 */  lui       $v1, %hi(gCurrentCameraID)
+/* A6028 8010F928 8C637410 */  lw        $v1, %lo(gCurrentCameraID)($v1)
 /* A602C 8010F92C 00031080 */  sll       $v0, $v1, 2
 /* A6030 8010F930 00431021 */  addu      $v0, $v0, $v1
 /* A6034 8010F934 00021080 */  sll       $v0, $v0, 2
@@ -177,8 +177,8 @@ glabel update_entities
 /* A6050 8010F950 46000007 */  neg.s     $f0, $f0
 /* A6054 8010F954 E6000064 */  swc1      $f0, 0x64($s0)
 .L8010F958:
-/* A6058 8010F958 3C028007 */  lui       $v0, 0x8007
-/* A605C 8010F95C 8C42419C */  lw        $v0, 0x419c($v0)
+/* A6058 8010F958 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* A605C 8010F95C 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* A6060 8010F960 80420078 */  lb        $v0, 0x78($v0)
 /* A6064 8010F964 14400014 */  bnez      $v0, .L8010F9B8
 /* A6068 8010F968 00000000 */   nop      

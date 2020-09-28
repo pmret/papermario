@@ -3,8 +3,8 @@
 
 glabel dispatch_damage_event_player_0
 /* 1A1C5C 8027337C 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* 1A1C60 80273380 3C02800E */  lui       $v0, 0x800e
-/* 1A1C64 80273384 2442C070 */  addiu     $v0, $v0, -0x3f90
+/* 1A1C60 80273380 3C02800E */  lui       $v0, %hi(gBattleStatus)
+/* 1A1C64 80273384 2442C070 */  addiu     $v0, $v0, %lo(gBattleStatus)
 /* 1A1C68 80273388 0000302D */  daddu     $a2, $zero, $zero
 /* 1A1C6C 8027338C AFBF0010 */  sw        $ra, 0x10($sp)
 /* 1A1C70 80273390 AC400188 */  sw        $zero, 0x188($v0)

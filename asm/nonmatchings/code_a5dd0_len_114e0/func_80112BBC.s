@@ -4,8 +4,8 @@
 glabel func_80112BBC
 /* A92BC 80112BBC 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* A92C0 80112BC0 AFB00010 */  sw        $s0, 0x10($sp)
-/* A92C4 80112BC4 3C108015 */  lui       $s0, 0x8015
-/* A92C8 80112BC8 26101700 */  addiu     $s0, $s0, 0x1700
+/* A92C4 80112BC4 3C108015 */  lui       $s0, %hi(gMainGameState)
+/* A92C8 80112BC8 26101700 */  addiu     $s0, $s0, %lo(gMainGameState)
 /* A92CC 80112BCC 0000182D */  daddu     $v1, $zero, $zero
 /* A92D0 80112BD0 AFBF0014 */  sw        $ra, 0x14($sp)
 .L80112BD4:

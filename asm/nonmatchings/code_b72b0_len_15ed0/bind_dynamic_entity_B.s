@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel bind_dynamic_entity_B
-/* B9A20 80123320 3C038015 */  lui       $v1, 0x8015
-/* B9A24 80123324 8C634420 */  lw        $v1, 0x4420($v1)
+/* B9A20 80123320 3C038015 */  lui       $v1, %hi(gCurrentDynamicEntityListPtr)
+/* B9A24 80123324 8C634420 */  lw        $v1, %lo(gCurrentDynamicEntityListPtr)($v1)
 /* B9A28 80123328 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* B9A2C 8012332C AFB10014 */  sw        $s1, 0x14($sp)
 /* B9A30 80123330 0080882D */  daddu     $s1, $a0, $zero
@@ -30,8 +30,8 @@ glabel bind_dynamic_entity_B
 .L80123378:
 /* B9A78 80123378 0C00AB39 */  jal       heap_malloc
 /* B9A7C 8012337C 2404000C */   addiu    $a0, $zero, 0xc
-/* B9A80 80123380 3C048015 */  lui       $a0, 0x8015
-/* B9A84 80123384 8C844420 */  lw        $a0, 0x4420($a0)
+/* B9A80 80123380 3C048015 */  lui       $a0, %hi(gCurrentDynamicEntityListPtr)
+/* B9A84 80123384 8C844420 */  lw        $a0, %lo(gCurrentDynamicEntityListPtr)($a0)
 /* B9A88 80123388 00101880 */  sll       $v1, $s0, 2
 /* B9A8C 8012338C 00641821 */  addu      $v1, $v1, $a0
 /* B9A90 80123390 0040202D */  daddu     $a0, $v0, $zero
@@ -55,8 +55,8 @@ glabel bind_dynamic_entity_B
 /* B9ACC 801233CC 244230B0 */  addiu     $v0, $v0, 0x30b0
 /* B9AD0 801233D0 AC820008 */  sw        $v0, 8($a0)
 .L801233D4:
-/* B9AD4 801233D4 3C028007 */  lui       $v0, 0x8007
-/* B9AD8 801233D8 8C42419C */  lw        $v0, 0x419c($v0)
+/* B9AD4 801233D4 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* B9AD8 801233D8 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* B9ADC 801233DC 80420070 */  lb        $v0, 0x70($v0)
 /* B9AE0 801233E0 54400001 */  bnel      $v0, $zero, .L801233E8
 /* B9AE4 801233E4 36100800 */   ori      $s0, $s0, 0x800

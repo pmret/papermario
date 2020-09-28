@@ -19,8 +19,8 @@ glabel func_801381A0
 /* CE8D8 801381D8 00000000 */  nop       
 /* CE8DC 801381DC 4501000D */  bc1t      .L80138214
 /* CE8E0 801381E0 00000000 */   nop      
-/* CE8E4 801381E4 3C028007 */  lui       $v0, 0x8007
-/* CE8E8 801381E8 8C42419C */  lw        $v0, 0x419c($v0)
+/* CE8E4 801381E4 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* CE8E8 801381E8 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* CE8EC 801381EC 80430070 */  lb        $v1, 0x70($v0)
 /* CE8F0 801381F0 24020002 */  addiu     $v0, $zero, 2
 /* CE8F4 801381F4 10620007 */  beq       $v1, $v0, .L80138214

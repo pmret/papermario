@@ -3473,8 +3473,8 @@ glabel func_80127D90
 .L8012B224:
 /* C1924 8012B224 1040001B */  beqz      $v0, .L8012B294
 /* C1928 8012B228 30C20080 */   andi     $v0, $a2, 0x80
-/* C192C 8012B22C 3C028007 */  lui       $v0, 0x8007
-/* C1930 8012B230 8C42419C */  lw        $v0, 0x419c($v0)
+/* C192C 8012B22C 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* C1930 8012B230 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* C1934 8012B234 94430134 */  lhu       $v1, 0x134($v0)
 /* C1938 8012B238 3C02AAAA */  lui       $v0, 0xaaaa
 /* C193C 8012B23C 3442AAAB */  ori       $v0, $v0, 0xaaab

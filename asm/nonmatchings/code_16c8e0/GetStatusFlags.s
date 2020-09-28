@@ -116,8 +116,8 @@ glabel GetStatusFlags
 /* 19DC8C 8026F3AC 14C00007 */  bnez      $a2, .L8026F3CC
 /* 19DC90 8026F3B0 00000000 */   nop      
 .L8026F3B4:
-/* 19DC94 8026F3B4 3C02800E */  lui       $v0, 0x800e
-/* 19DC98 8026F3B8 2442C070 */  addiu     $v0, $v0, -0x3f90
+/* 19DC94 8026F3B4 3C02800E */  lui       $v0, %hi(gBattleStatus)
+/* 19DC98 8026F3B8 2442C070 */  addiu     $v0, $v0, %lo(gBattleStatus)
 /* 19DC9C 8026F3BC 8042009A */  lb        $v0, 0x9a($v0)
 /* 19DCA0 8026F3C0 10400002 */  beqz      $v0, .L8026F3CC
 /* 19DCA4 8026F3C4 3C020400 */   lui      $v0, 0x400

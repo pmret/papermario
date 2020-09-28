@@ -15,8 +15,8 @@ glabel start_bounce_a
 /* 7F50C 800E605C 44812000 */  mtc1      $at, $f4
 /* 7F510 800E6060 3C01BF40 */  lui       $at, 0xbf40
 /* 7F514 800E6064 44813000 */  mtc1      $at, $f6
-/* 7F518 800E6068 3C028011 */  lui       $v0, 0x8011
-/* 7F51C 800E606C 2442EFC8 */  addiu     $v0, $v0, -0x1038
+/* 7F518 800E6068 3C028011 */  lui       $v0, %hi(gPlayerStatus)
+/* 7F51C 800E606C 2442EFC8 */  addiu     $v0, $v0, %lo(gPlayerStatus)
 /* 7F520 800E6070 E4400070 */  swc1      $f0, 0x70($v0)
 /* 7F524 800E6074 E4420074 */  swc1      $f2, 0x74($v0)
 /* 7F528 800E6078 E4440078 */  swc1      $f4, 0x78($v0)

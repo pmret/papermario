@@ -2,11 +2,11 @@
 .set noreorder # don't insert nops after branches
 
 glabel func_800E26C4
-/* 7BB74 800E26C4 3C04800F */  lui       $a0, 0x800f
-/* 7BB78 800E26C8 8C847B30 */  lw        $a0, 0x7b30($a0)
+/* 7BB74 800E26C4 3C04800F */  lui       $a0, %hi(gPlayerStatusPtr)
+/* 7BB78 800E26C8 8C847B30 */  lw        $a0, %lo(gPlayerStatusPtr)($a0)
 /* 7BB7C 800E26CC 808300B4 */  lb        $v1, 0xb4($a0)
-/* 7BB80 800E26D0 3C058011 */  lui       $a1, 0x8011
-/* 7BB84 800E26D4 24A5EBB0 */  addiu     $a1, $a1, -0x1450
+/* 7BB80 800E26D0 3C058011 */  lui       $a1, %hi(D_8010EBB0)
+/* 7BB84 800E26D4 24A5EBB0 */  addiu     $a1, $a1, %lo(D_8010EBB0)
 /* 7BB88 800E26D8 2C620003 */  sltiu     $v0, $v1, 3
 /* 7BB8C 800E26DC 14400005 */  bnez      $v0, .L800E26F4
 /* 7BB90 800E26E0 2402001F */   addiu    $v0, $zero, 0x1f
@@ -20,8 +20,8 @@ glabel func_800E26C4
 .L800E26FC:
 /* 7BBAC 800E26FC 1462001C */  bne       $v1, $v0, .L800E2770
 /* 7BBB0 800E2700 00000000 */   nop      
-/* 7BBB4 800E2704 3C028011 */  lui       $v0, 0x8011
-/* 7BBB8 800E2708 2442F290 */  addiu     $v0, $v0, -0xd70
+/* 7BBB4 800E2704 3C028011 */  lui       $v0, %hi(gPlayerData)
+/* 7BBB8 800E2708 2442F290 */  addiu     $v0, $v0, %lo(gPlayerData)
 /* 7BBBC 800E270C 90420012 */  lbu       $v0, 0x12($v0)
 /* 7BBC0 800E2710 2442FFF8 */  addiu     $v0, $v0, -8
 /* 7BBC4 800E2714 2C420002 */  sltiu     $v0, $v0, 2

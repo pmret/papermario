@@ -2,25 +2,25 @@
 .set noreorder # don't insert nops after branches
 
 glabel clear_trigger_data
-/* DBD80 80145680 3C028007 */  lui       $v0, 0x8007
-/* DBD84 80145684 8C42419C */  lw        $v0, 0x419c($v0)
+/* DBD80 80145680 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* DBD84 80145684 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* DBD88 80145688 80420070 */  lb        $v0, 0x70($v0)
 /* DBD8C 8014568C 3C048016 */  lui       $a0, 0x8016
 /* DBD90 80145690 2484A550 */  addiu     $a0, $a0, -0x5ab0
 /* DBD94 80145694 14400005 */  bnez      $v0, .L801456AC
 /* DBD98 80145698 00000000 */   nop      
-/* DBD9C 8014569C 3C028016 */  lui       $v0, 0x8016
-/* DBDA0 801456A0 24429190 */  addiu     $v0, $v0, -0x6e70
+/* DBD9C 8014569C 3C028016 */  lui       $v0, %hi(gTriggerList1)
+/* DBDA0 801456A0 24429190 */  addiu     $v0, $v0, %lo(gTriggerList1)
 /* DBDA4 801456A4 080515AD */  j         .L801456B4
 /* DBDA8 801456A8 00000000 */   nop      
 .L801456AC:
-/* DBDAC 801456AC 3C028016 */  lui       $v0, 0x8016
-/* DBDB0 801456B0 24429290 */  addiu     $v0, $v0, -0x6d70
+/* DBDAC 801456AC 3C028016 */  lui       $v0, %hi(gTriggerList2)
+/* DBDB0 801456B0 24429290 */  addiu     $v0, $v0, %lo(gTriggerList2)
 .L801456B4:
-/* DBDB4 801456B4 3C018016 */  lui       $at, 0x8016
-/* DBDB8 801456B8 AC229390 */  sw        $v0, -0x6c70($at)
-/* DBDBC 801456BC 3C028016 */  lui       $v0, 0x8016
-/* DBDC0 801456C0 8C429390 */  lw        $v0, -0x6c70($v0)
+/* DBDB4 801456B4 3C018016 */  lui       $at, %hi(gCurrentTriggerListPtr)
+/* DBDB8 801456B8 AC229390 */  sw        $v0, %lo(gCurrentTriggerListPtr)($at)
+/* DBDBC 801456BC 3C028016 */  lui       $v0, %hi(gCurrentTriggerListPtr)
+/* DBDC0 801456C0 8C429390 */  lw        $v0, %lo(gCurrentTriggerListPtr)($v0)
 /* DBDC4 801456C4 2403003F */  addiu     $v1, $zero, 0x3f
 /* DBDC8 801456C8 244200FC */  addiu     $v0, $v0, 0xfc
 .L801456CC:
@@ -29,8 +29,8 @@ glabel clear_trigger_data
 /* DBDD4 801456D4 0461FFFD */  bgez      $v1, .L801456CC
 /* DBDD8 801456D8 2442FFFC */   addiu    $v0, $v0, -4
 /* DBDDC 801456DC 2402FFFF */  addiu     $v0, $zero, -1
-/* DBDE0 801456E0 3C018015 */  lui       $at, 0x8015
-/* DBDE4 801456E4 A4201334 */  sh        $zero, 0x1334($at)
+/* DBDE0 801456E0 3C018015 */  lui       $at, %hi(gTriggerCount)
+/* DBDE4 801456E4 A4201334 */  sh        $zero, %lo(gTriggerCount)($at)
 /* DBDE8 801456E8 A4820000 */  sh        $v0, ($a0)
 /* DBDEC 801456EC A4820002 */  sh        $v0, 2($a0)
 /* DBDF0 801456F0 A4820004 */  sh        $v0, 4($a0)

@@ -6,8 +6,8 @@ glabel pause_badges_try_equip
 /* 13A67C 8024733C AFB00010 */  sw        $s0, 0x10($sp)
 /* 13A680 80247340 0080802D */  daddu     $s0, $a0, $zero
 /* 13A684 80247344 AFB10014 */  sw        $s1, 0x14($sp)
-/* 13A688 80247348 3C118011 */  lui       $s1, 0x8011
-/* 13A68C 8024734C 2631F290 */  addiu     $s1, $s1, -0xd70
+/* 13A688 80247348 3C118011 */  lui       $s1, %hi(gPlayerData)
+/* 13A68C 8024734C 2631F290 */  addiu     $s1, $s1, %lo(gPlayerData)
 /* 13A690 80247350 26250208 */  addiu     $a1, $s1, 0x208
 /* 13A694 80247354 00042400 */  sll       $a0, $a0, 0x10
 /* 13A698 80247358 00042403 */  sra       $a0, $a0, 0x10

@@ -6,8 +6,8 @@ glabel PlayerMoveTo
 /* F5AE8 802D1138 AFB10014 */  sw        $s1, 0x14($sp)
 /* F5AEC 802D113C 0080882D */  daddu     $s1, $a0, $zero
 /* F5AF0 802D1140 AFB20018 */  sw        $s2, 0x18($sp)
-/* F5AF4 802D1144 3C128011 */  lui       $s2, 0x8011
-/* F5AF8 802D1148 2652EFC8 */  addiu     $s2, $s2, -0x1038
+/* F5AF4 802D1144 3C128011 */  lui       $s2, %hi(gPlayerStatus)
+/* F5AF8 802D1148 2652EFC8 */  addiu     $s2, $s2, %lo(gPlayerStatus)
 /* F5AFC 802D114C AFBF001C */  sw        $ra, 0x1c($sp)
 /* F5B00 802D1150 AFB00010 */  sw        $s0, 0x10($sp)
 /* F5B04 802D1154 F7B60028 */  sdc1      $f22, 0x28($sp)
@@ -47,8 +47,8 @@ glabel PlayerMoveTo
 /* F5B8C 802D11DC 4407A000 */  mfc1      $a3, $f20
 /* F5B90 802D11E0 0C00A7B5 */  jal       dist2D
 /* F5B94 802D11E4 00000000 */   nop      
-/* F5B98 802D11E8 3C02802E */  lui       $v0, 0x802e
-/* F5B9C 802D11EC 8C429D20 */  lw        $v0, -0x62e0($v0)
+/* F5B98 802D11E8 3C02802E */  lui       $v0, %hi(gPlayerNpcPtr)
+/* F5B9C 802D11EC 8C429D20 */  lw        $v0, %lo(gPlayerNpcPtr)($v0)
 /* F5BA0 802D11F0 C4420018 */  lwc1      $f2, 0x18($v0)
 /* F5BA4 802D11F4 46020003 */  div.s     $f0, $f0, $f2
 /* F5BA8 802D11F8 4600010D */  trunc.w.s $f4, $f0

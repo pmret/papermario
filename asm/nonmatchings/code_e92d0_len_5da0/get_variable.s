@@ -122,8 +122,8 @@ glabel get_variable
 /* EC61C 802C7C6C 00C0182D */  daddu     $v1, $a2, $zero
 /* EC620 802C7C70 00031140 */  sll       $v0, $v1, 5
 /* EC624 802C7C74 00A23023 */  subu      $a2, $a1, $v0
-/* EC628 802C7C78 3C02802E */  lui       $v0, 0x802e
-/* EC62C 802C7C7C 8C42A480 */  lw        $v0, -0x5b80($v0)
+/* EC628 802C7C78 3C02802E */  lui       $v0, %hi(gMapFlags)
+/* EC62C 802C7C7C 8C42A480 */  lw        $v0, %lo(gMapFlags)($v0)
 /* EC630 802C7C80 00031880 */  sll       $v1, $v1, 2
 /* EC634 802C7C84 00621821 */  addu      $v1, $v1, $v0
 /* EC638 802C7C88 8C630000 */  lw        $v1, ($v1)
@@ -163,8 +163,8 @@ glabel get_variable
 /* EC6B0 802C7D00 3442F080 */  ori       $v0, $v0, 0xf080
 /* EC6B4 802C7D04 00A22821 */  addu      $a1, $a1, $v0
 /* EC6B8 802C7D08 3C03EFE8 */  lui       $v1, 0xefe8
-/* EC6BC 802C7D0C 3C04802E */  lui       $a0, 0x802e
-/* EC6C0 802C7D10 8C84A484 */  lw        $a0, -0x5b7c($a0)
+/* EC6BC 802C7D0C 3C04802E */  lui       $a0, %hi(gMapVars)
+/* EC6C0 802C7D10 8C84A484 */  lw        $a0, %lo(gMapVars)($a0)
 /* EC6C4 802C7D14 00051080 */  sll       $v0, $a1, 2
 /* EC6C8 802C7D18 00441021 */  addu      $v0, $v0, $a0
 /* EC6CC 802C7D1C 8C450000 */  lw        $a1, ($v0)

@@ -42,8 +42,8 @@ glabel delete_entity_and_unload_data
 /* A6F18 80110818 00641825 */  or        $v1, $v1, $a0
 /* A6F1C 8011081C AC430000 */  sw        $v1, ($v0)
 .L80110820:
-/* A6F20 80110820 3C118015 */  lui       $s1, 0x8015
-/* A6F24 80110824 26311470 */  addiu     $s1, $s1, 0x1470
+/* A6F20 80110820 3C118015 */  lui       $s1, %hi(gCurrentEntityListPtr)
+/* A6F24 80110824 26311470 */  addiu     $s1, $s1, %lo(gCurrentEntityListPtr)
 /* A6F28 80110828 8E220000 */  lw        $v0, ($s1)
 /* A6F2C 8011082C 00108080 */  sll       $s0, $s0, 2
 /* A6F30 80110830 02021021 */  addu      $v0, $s0, $v0

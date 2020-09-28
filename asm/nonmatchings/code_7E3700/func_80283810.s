@@ -10,8 +10,8 @@ glabel func_80283810
 /* 7E46A4 80283824 AE0000AC */   sw       $zero, 0xac($s0)
 /* 7E46A8 80283828 1040000F */  beqz      $v0, .L80283868
 /* 7E46AC 8028382C 00000000 */   nop      
-/* 7E46B0 80283830 3C028011 */  lui       $v0, 0x8011
-/* 7E46B4 80283834 8042EBB0 */  lb        $v0, -0x1450($v0)
+/* 7E46B0 80283830 3C028011 */  lui       $v0, %hi(D_8010EBB0)
+/* 7E46B4 80283834 8042EBB0 */  lb        $v0, %lo(D_8010EBB0)($v0)
 /* 7E46B8 80283838 14400003 */  bnez      $v0, .L80283848
 /* 7E46BC 8028383C 24020001 */   addiu    $v0, $zero, 1
 /* 7E46C0 80283840 080A0E1A */  j         .L80283868
@@ -20,8 +20,8 @@ glabel func_80283810
 /* 7E46C8 80283848 0C03AD8E */  jal       partner_get_ride_script
 /* 7E46CC 8028384C AE0200AC */   sw       $v0, 0xac($s0)
 /* 7E46D0 80283850 AE0200B0 */  sw        $v0, 0xb0($s0)
-/* 7E46D4 80283854 3C028011 */  lui       $v0, 0x8011
-/* 7E46D8 80283858 2442EFC8 */  addiu     $v0, $v0, -0x1038
+/* 7E46D4 80283854 3C028011 */  lui       $v0, %hi(gPlayerStatus)
+/* 7E46D8 80283858 2442EFC8 */  addiu     $v0, $v0, %lo(gPlayerStatus)
 /* 7E46DC 8028385C C4400080 */  lwc1      $f0, 0x80($v0)
 /* 7E46E0 80283860 4600008D */  trunc.w.s $f2, $f0
 /* 7E46E4 80283864 E60200B8 */  swc1      $f2, 0xb8($s0)

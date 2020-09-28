@@ -421,8 +421,8 @@ glabel pause_stats_draw_contents
 /* 13933C 80245FFC 00531023 */  subu      $v0, $v0, $s3
 /* 139340 80246000 0C049DA7 */  jal       draw_number
 /* 139344 80246004 00442023 */   subu     $a0, $v0, $a0
-/* 139348 80246008 3C028011 */  lui       $v0, 0x8011
-/* 13934C 8024600C 9042F290 */  lbu       $v0, -0xd70($v0)
+/* 139348 80246008 3C028011 */  lui       $v0, %hi(gPlayerData)
+/* 13934C 8024600C 9042F290 */  lbu       $v0, %lo(gPlayerData)($v0)
 /* 139350 80246010 3C038011 */  lui       $v1, 0x8011
 /* 139354 80246014 9063F291 */  lbu       $v1, -0xd6f($v1)
 /* 139358 80246018 8FA80084 */  lw        $t0, 0x84($sp)
@@ -610,8 +610,8 @@ glabel pause_stats_draw_contents
 /* 139618 802462D8 27C6003C */  addiu     $a2, $fp, 0x3c
 /* 13961C 802462DC 0C093BA5 */  jal       pause_draw_menu_label
 /* 139620 802462E0 2505008A */   addiu    $a1, $t0, 0x8a
-/* 139624 802462E4 3C178011 */  lui       $s7, 0x8011
-/* 139628 802462E8 26F7F290 */  addiu     $s7, $s7, -0xd70
+/* 139624 802462E4 3C178011 */  lui       $s7, %hi(gPlayerData)
+/* 139628 802462E8 26F7F290 */  addiu     $s7, $s7, %lo(gPlayerData)
 /* 13962C 802462EC 0260902D */  daddu     $s2, $s3, $zero
 /* 139630 802462F0 86E30290 */  lh        $v1, 0x290($s7)
 /* 139634 802462F4 8ED10028 */  lw        $s1, 0x28($s6)

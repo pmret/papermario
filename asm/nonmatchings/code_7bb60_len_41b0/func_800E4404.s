@@ -33,8 +33,8 @@ glabel func_800E4404
 /* 7D920 800E4470 C6A00000 */  lwc1      $f0, ($s5)
 /* 7D924 800E4474 02C0202D */  daddu     $a0, $s6, $zero
 /* 7D928 800E4478 46160000 */  add.s     $f0, $f0, $f22
-/* 7D92C 800E447C 3C05800F */  lui       $a1, 0x800f
-/* 7D930 800E4480 8CA57B30 */  lw        $a1, 0x7b30($a1)
+/* 7D92C 800E447C 3C05800F */  lui       $a1, %hi(gPlayerStatusPtr)
+/* 7D930 800E4480 8CA57B30 */  lw        $a1, %lo(gPlayerStatusPtr)($a1)
 /* 7D934 800E4484 27A60020 */  addiu     $a2, $sp, 0x20
 /* 7D938 800E4488 E7A00024 */  swc1      $f0, 0x24($sp)
 /* 7D93C 800E448C C6400000 */  lwc1      $f0, ($s2)

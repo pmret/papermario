@@ -71,8 +71,8 @@ glabel func_802DE5E8
 /* 1017CC 802DE6DC 2484F800 */  addiu     $a0, $a0, -0x800
 /* 1017D0 802DE6E0 10400003 */  beqz      $v0, .L802DE6F0
 /* 1017D4 802DE6E4 00000000 */   nop      
-/* 1017D8 802DE6E8 3C048030 */  lui       $a0, 0x8030
-/* 1017DC 802DE6EC 2484B800 */  addiu     $a0, $a0, -0x4800
+/* 1017D8 802DE6E8 3C048030 */  lui       $a0, %hi(D_802FB800)
+/* 1017DC 802DE6EC 2484B800 */  addiu     $a0, $a0, %lo(D_802FB800)
 .L802DE6F0:
 /* 1017E0 802DE6F0 0C00A487 */  jal       _heap_free
 /* 1017E4 802DE6F4 0200282D */   daddu    $a1, $s0, $zero

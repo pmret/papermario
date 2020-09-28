@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel init_item_entity_list
-/* C77CC 801310CC 3C028007 */  lui       $v0, 0x8007
-/* C77D0 801310D0 8C42419C */  lw        $v0, 0x419c($v0)
+/* C77CC 801310CC 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* C77D0 801310D0 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* C77D4 801310D4 80420070 */  lb        $v0, 0x70($v0)
 /* C77D8 801310D8 14400005 */  bnez      $v0, .L801310F0
 /* C77DC 801310DC 00000000 */   nop      

@@ -22,8 +22,8 @@ glabel func_8028070C
 /* 1AF030 80280750 0040802D */   daddu    $s0, $v0, $zero
 /* 1AF034 80280754 0200202D */  daddu     $a0, $s0, $zero
 /* 1AF038 80280758 96230428 */  lhu       $v1, 0x428($s1)
-/* 1AF03C 8028075C 3C06800E */  lui       $a2, 0x800e
-/* 1AF040 80280760 24C6C070 */  addiu     $a2, $a2, -0x3f90
+/* 1AF03C 8028075C 3C06800E */  lui       $a2, %hi(gBattleStatus)
+/* 1AF040 80280760 24C6C070 */  addiu     $a2, $a2, %lo(gBattleStatus)
 /* 1AF044 80280764 A4C301A0 */  sh        $v1, 0x1a0($a2)
 /* 1AF048 80280768 92230426 */  lbu       $v1, 0x426($s1)
 /* 1AF04C 8028076C 0040282D */  daddu     $a1, $v0, $zero

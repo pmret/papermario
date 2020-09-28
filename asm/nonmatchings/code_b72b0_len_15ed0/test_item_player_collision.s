@@ -6,15 +6,15 @@ glabel test_item_player_collision
 /* CA210 80133B10 AFB30034 */  sw        $s3, 0x34($sp)
 /* CA214 80133B14 0080982D */  daddu     $s3, $a0, $zero
 /* CA218 80133B18 AFB1002C */  sw        $s1, 0x2c($sp)
-/* CA21C 80133B1C 3C118011 */  lui       $s1, 0x8011
-/* CA220 80133B20 2631EFC8 */  addiu     $s1, $s1, -0x1038
+/* CA21C 80133B1C 3C118011 */  lui       $s1, %hi(gPlayerStatus)
+/* CA220 80133B20 2631EFC8 */  addiu     $s1, $s1, %lo(gPlayerStatus)
 /* CA224 80133B24 AFB40038 */  sw        $s4, 0x38($sp)
-/* CA228 80133B28 3C148011 */  lui       $s4, 0x8011
-/* CA22C 80133B2C 2694EBB0 */  addiu     $s4, $s4, -0x1450
-/* CA230 80133B30 3C038007 */  lui       $v1, 0x8007
-/* CA234 80133B34 8C637410 */  lw        $v1, 0x7410($v1)
-/* CA238 80133B38 3C04800B */  lui       $a0, 0x800b
-/* CA23C 80133B3C 24841D80 */  addiu     $a0, $a0, 0x1d80
+/* CA228 80133B28 3C148011 */  lui       $s4, %hi(D_8010EBB0)
+/* CA22C 80133B2C 2694EBB0 */  addiu     $s4, $s4, %lo(D_8010EBB0)
+/* CA230 80133B30 3C038007 */  lui       $v1, %hi(gCurrentCameraID)
+/* CA234 80133B34 8C637410 */  lw        $v1, %lo(gCurrentCameraID)($v1)
+/* CA238 80133B38 3C04800B */  lui       $a0, %hi(gCameras)
+/* CA23C 80133B3C 24841D80 */  addiu     $a0, $a0, %lo(gCameras)
 /* CA240 80133B40 AFBF003C */  sw        $ra, 0x3c($sp)
 /* CA244 80133B44 AFB20030 */  sw        $s2, 0x30($sp)
 /* CA248 80133B48 AFB00028 */  sw        $s0, 0x28($sp)
@@ -40,16 +40,16 @@ glabel test_item_player_collision
 /* CA298 80133B98 0804CFDA */  j         .L80133F68
 /* CA29C 80133B9C 00621024 */   and      $v0, $v1, $v0
 .L80133BA0:
-/* CA2A0 80133BA0 3C03800A */  lui       $v1, 0x800a
-/* CA2A4 80133BA4 8C63A600 */  lw        $v1, -0x5a00($v1)
+/* CA2A0 80133BA0 3C03800A */  lui       $v1, %hi(gGameState)
+/* CA2A4 80133BA4 8C63A600 */  lw        $v1, %lo(gGameState)($v1)
 /* CA2A8 80133BA8 24020002 */  addiu     $v0, $zero, 2
 /* CA2AC 80133BAC 10620003 */  beq       $v1, $v0, .L80133BBC
 /* CA2B0 80133BB0 00000000 */   nop      
 /* CA2B4 80133BB4 146000F6 */  bnez      $v1, .L80133F90
 /* CA2B8 80133BB8 0000102D */   daddu    $v0, $zero, $zero
 .L80133BBC:
-/* CA2BC 80133BBC 3C02800B */  lui       $v0, 0x800b
-/* CA2C0 80133BC0 24420F10 */  addiu     $v0, $v0, 0xf10
+/* CA2BC 80133BBC 3C02800B */  lui       $v0, %hi(gCurrentEncounter)
+/* CA2C0 80133BC0 24420F10 */  addiu     $v0, $v0, %lo(gCurrentEncounter)
 /* CA2C4 80133BC4 80430005 */  lb        $v1, 5($v0)
 /* CA2C8 80133BC8 24020005 */  addiu     $v0, $zero, 5
 /* CA2CC 80133BCC 106200EF */  beq       $v1, $v0, .L80133F8C
@@ -84,8 +84,8 @@ glabel test_item_player_collision
 /* CA33C 80133C3C 146200D4 */  bne       $v1, $v0, .L80133F90
 /* CA340 80133C40 0000102D */   daddu    $v0, $zero, $zero
 .L80133C44:
-/* CA344 80133C44 3C02800A */  lui       $v0, 0x800a
-/* CA348 80133C48 8C42A650 */  lw        $v0, -0x59b0($v0)
+/* CA344 80133C44 3C02800A */  lui       $v0, %hi(D_8009A650)
+/* CA348 80133C48 8C42A650 */  lw        $v0, %lo(D_8009A650)($v0)
 /* CA34C 80133C4C 3C030020 */  lui       $v1, 0x20
 /* CA350 80133C50 00431024 */  and       $v0, $v0, $v1
 /* CA354 80133C54 144000CE */  bnez      $v0, .L80133F90

@@ -13,8 +13,8 @@ glabel func_8003B1B0
 /* 165D0 8003B1D0 AFB10014 */  sw        $s1, 0x14($sp)
 /* 165D4 8003B1D4 AFB00010 */  sw        $s0, 0x10($sp)
 .L8003B1D8:
-/* 165D8 8003B1D8 3C03800A */  lui       $v1, 0x800a
-/* 165DC 8003B1DC 8C630B90 */  lw        $v1, 0xb90($v1)
+/* 165D8 8003B1D8 3C03800A */  lui       $v1, %hi(gCurrentNpcListPtr)
+/* 165DC 8003B1DC 8C630B90 */  lw        $v1, %lo(gCurrentNpcListPtr)($v1)
 /* 165E0 8003B1E0 00121080 */  sll       $v0, $s2, 2
 /* 165E4 8003B1E4 00431021 */  addu      $v0, $v0, $v1
 /* 165E8 8003B1E8 8C510000 */  lw        $s1, ($v0)

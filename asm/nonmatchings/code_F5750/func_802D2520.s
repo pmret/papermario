@@ -26,8 +26,8 @@ glabel func_802D2520
 /* F6F24 802D2574 AFA00014 */  sw        $zero, 0x14($sp)
 /* F6F28 802D2578 0C0B77FE */  jal       func_802DDFF8
 /* F6F2C 802D257C AFA00018 */   sw       $zero, 0x18($sp)
-/* F6F30 802D2580 3C128011 */  lui       $s2, 0x8011
-/* F6F34 802D2584 2652EFC8 */  addiu     $s2, $s2, -0x1038
+/* F6F30 802D2580 3C128011 */  lui       $s2, %hi(gPlayerStatus)
+/* F6F34 802D2584 2652EFC8 */  addiu     $s2, $s2, %lo(gPlayerStatus)
 /* F6F38 802D2588 2E22000E */  sltiu     $v0, $s1, 0xe
 /* F6F3C 802D258C 104000AB */  beqz      $v0, .L802D283C
 /* F6F40 802D2590 00111080 */   sll      $v0, $s1, 2

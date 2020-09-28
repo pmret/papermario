@@ -4,8 +4,8 @@
 glabel get_player_normal_pitch
 /* 5250 80029E50 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 5254 80029E54 AFB00010 */  sw        $s0, 0x10($sp)
-/* 5258 80029E58 3C108007 */  lui       $s0, 0x8007
-/* 525C 80029E5C 2610419C */  addiu     $s0, $s0, 0x419c
+/* 5258 80029E58 3C108007 */  lui       $s0, %hi(gGameStatusPtr)
+/* 525C 80029E5C 2610419C */  addiu     $s0, $s0, %lo(gGameStatusPtr)
 /* 5260 80029E60 AFBF0014 */  sw        $ra, 0x14($sp)
 /* 5264 80029E64 8E020000 */  lw        $v0, ($s0)
 /* 5268 80029E68 C4420128 */  lwc1      $f2, 0x128($v0)

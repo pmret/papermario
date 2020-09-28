@@ -4,8 +4,8 @@
 glabel func_8026E198
 /* 19CA78 8026E198 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 19CA7C 8026E19C AFB00010 */  sw        $s0, 0x10($sp)
-/* 19CA80 8026E1A0 3C10800E */  lui       $s0, 0x800e
-/* 19CA84 8026E1A4 2610C070 */  addiu     $s0, $s0, -0x3f90
+/* 19CA80 8026E1A0 3C10800E */  lui       $s0, %hi(gBattleStatus)
+/* 19CA84 8026E1A4 2610C070 */  addiu     $s0, $s0, %lo(gBattleStatus)
 /* 19CA88 8026E1A8 AFBF0014 */  sw        $ra, 0x14($sp)
 /* 19CA8C 8026E1AC 10A00008 */  beqz      $a1, .L8026E1D0
 /* 19CA90 8026E1B0 8C82000C */   lw       $v0, 0xc($a0)

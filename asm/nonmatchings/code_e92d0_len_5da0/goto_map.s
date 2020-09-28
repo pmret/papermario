@@ -35,8 +35,8 @@ glabel goto_map
 /* EED28 802CA378 0C016AFE */  jal       get_map_IDs_by_name
 /* EED2C 802CA37C 27A60012 */   addiu    $a2, $sp, 0x12
 .L802CA380:
-/* EED30 802CA380 3C108007 */  lui       $s0, 0x8007
-/* EED34 802CA384 2610419C */  addiu     $s0, $s0, 0x419c
+/* EED30 802CA380 3C108007 */  lui       $s0, %hi(gGameStatusPtr)
+/* EED34 802CA384 2610419C */  addiu     $s0, $s0, %lo(gGameStatusPtr)
 /* EED38 802CA388 8E040000 */  lw        $a0, ($s0)
 /* EED3C 802CA38C 97A20010 */  lhu       $v0, 0x10($sp)
 /* EED40 802CA390 97A30012 */  lhu       $v1, 0x12($sp)

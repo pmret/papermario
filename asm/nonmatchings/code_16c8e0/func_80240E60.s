@@ -4,14 +4,14 @@
 glabel func_80240E60
 /* 16F740 80240E60 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* 16F744 80240E64 AFB40020 */  sw        $s4, 0x20($sp)
-/* 16F748 80240E68 3C14800E */  lui       $s4, 0x800e
-/* 16F74C 80240E6C 2694C070 */  addiu     $s4, $s4, -0x3f90
+/* 16F748 80240E68 3C14800E */  lui       $s4, %hi(gBattleStatus)
+/* 16F74C 80240E6C 2694C070 */  addiu     $s4, $s4, %lo(gBattleStatus)
 /* 16F750 80240E70 AFB3001C */  sw        $s3, 0x1c($sp)
-/* 16F754 80240E74 3C13800B */  lui       $s3, 0x800b
-/* 16F758 80240E78 26730F10 */  addiu     $s3, $s3, 0xf10
+/* 16F754 80240E74 3C13800B */  lui       $s3, %hi(gCurrentEncounter)
+/* 16F758 80240E78 26730F10 */  addiu     $s3, $s3, %lo(gCurrentEncounter)
 /* 16F75C 80240E7C AFB00010 */  sw        $s0, 0x10($sp)
-/* 16F760 80240E80 3C108011 */  lui       $s0, 0x8011
-/* 16F764 80240E84 2610F290 */  addiu     $s0, $s0, -0xd70
+/* 16F760 80240E80 3C108011 */  lui       $s0, %hi(gPlayerData)
+/* 16F764 80240E84 2610F290 */  addiu     $s0, $s0, %lo(gPlayerData)
 /* 16F768 80240E88 AFBF0024 */  sw        $ra, 0x24($sp)
 /* 16F76C 80240E8C AFB20018 */  sw        $s2, 0x18($sp)
 /* 16F770 80240E90 AFB10014 */  sw        $s1, 0x14($sp)

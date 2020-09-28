@@ -14,8 +14,8 @@ glabel RemoveEncounter
 /* 1F89C 8004449C 0C0B1EAF */  jal       get_variable
 /* 1F8A0 800444A0 24120001 */   addiu    $s2, $zero, 1
 /* 1F8A4 800444A4 0040882D */  daddu     $s1, $v0, $zero
-/* 1F8A8 800444A8 3C13800B */  lui       $s3, 0x800b
-/* 1F8AC 800444AC 26730F10 */  addiu     $s3, $s3, 0xf10
+/* 1F8A8 800444A8 3C13800B */  lui       $s3, %hi(gCurrentEncounter)
+/* 1F8AC 800444AC 26730F10 */  addiu     $s3, $s3, %lo(gCurrentEncounter)
 /* 1F8B0 800444B0 2402FFFF */  addiu     $v0, $zero, -1
 /* 1F8B4 800444B4 1202000D */  beq       $s0, $v0, .L800444EC
 /* 1F8B8 800444B8 00000000 */   nop      

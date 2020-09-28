@@ -15,8 +15,8 @@ glabel func_802E75E4
 /* 108E8C 802E760C F7B40038 */  sdc1      $f20, 0x38($sp)
 /* 108E90 802E7610 8E110040 */  lw        $s1, 0x40($s0)
 /* 108E94 802E7614 8E220010 */  lw        $v0, 0x10($s1)
-/* 108E98 802E7618 3C128011 */  lui       $s2, 0x8011
-/* 108E9C 802E761C 2652EFC8 */  addiu     $s2, $s2, -0x1038
+/* 108E98 802E7618 3C128011 */  lui       $s2, %hi(gPlayerStatus)
+/* 108E9C 802E761C 2652EFC8 */  addiu     $s2, $s2, %lo(gPlayerStatus)
 /* 108EA0 802E7620 10400006 */  beqz      $v0, .L802E763C
 /* 108EA4 802E7624 00000000 */   nop      
 /* 108EA8 802E7628 8E240014 */  lw        $a0, 0x14($s1)
@@ -160,8 +160,8 @@ glabel func_802E75E4
 /* 1090B0 802E7830 46000606 */   mov.s    $f24, $f0
 /* 1090B4 802E7834 0C00A6C9 */  jal       clamp_angle
 /* 1090B8 802E7838 46000306 */   mov.s    $f12, $f0
-/* 1090BC 802E783C 3C028007 */  lui       $v0, 0x8007
-/* 1090C0 802E7840 8C42419C */  lw        $v0, 0x419c($v0)
+/* 1090BC 802E783C 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* 1090C0 802E7840 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 1090C4 802E7844 3C014080 */  lui       $at, 0x4080
 /* 1090C8 802E7848 4481B000 */  mtc1      $at, $f22
 /* 1090CC 802E784C 84430086 */  lh        $v1, 0x86($v0)
@@ -225,8 +225,8 @@ glabel func_802E75E4
 /* 1091AC 802E792C 3C040006 */  lui       $a0, 6
 /* 1091B0 802E7930 0C037FDE */  jal       func_800DFF78
 /* 1091B4 802E7934 3484000C */   ori      $a0, $a0, 0xc
-/* 1091B8 802E7938 3C10800B */  lui       $s0, 0x800b
-/* 1091BC 802E793C 26101D80 */  addiu     $s0, $s0, 0x1d80
+/* 1091B8 802E7938 3C10800B */  lui       $s0, %hi(gCameras)
+/* 1091BC 802E793C 26101D80 */  addiu     $s0, $s0, %lo(gCameras)
 /* 1091C0 802E7940 C600006C */  lwc1      $f0, 0x6c($s0)
 /* 1091C4 802E7944 3C0142B4 */  lui       $at, 0x42b4
 /* 1091C8 802E7948 44816000 */  mtc1      $at, $f12

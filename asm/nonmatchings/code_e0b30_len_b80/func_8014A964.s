@@ -5,8 +5,8 @@ glabel func_8014A964
 /* E1064 8014A964 27BDFFD0 */  addiu     $sp, $sp, -0x30
 /* E1068 8014A968 AFB40020 */  sw        $s4, 0x20($sp)
 /* E106C 8014A96C 00A0A02D */  daddu     $s4, $a1, $zero
-/* E1070 8014A970 3C058007 */  lui       $a1, 0x8007
-/* E1074 8014A974 8CA5419C */  lw        $a1, 0x419c($a1)
+/* E1070 8014A970 3C058007 */  lui       $a1, %hi(gGameStatusPtr)
+/* E1074 8014A974 8CA5419C */  lw        $a1, %lo(gGameStatusPtr)($a1)
 /* E1078 8014A978 AFB3001C */  sw        $s3, 0x1c($sp)
 /* E107C 8014A97C 8FB30040 */  lw        $s3, 0x40($sp)
 /* E1080 8014A980 AFB10014 */  sw        $s1, 0x14($sp)

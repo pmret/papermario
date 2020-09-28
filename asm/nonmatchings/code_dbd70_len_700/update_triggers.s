@@ -13,8 +13,8 @@ glabel update_triggers
 /* DBF80 80145880 AFB00018 */  sw        $s0, 0x18($sp)
 /* DBF84 80145884 A6400016 */  sh        $zero, 0x16($s2)
 .L80145888:
-/* DBF88 80145888 3C038016 */  lui       $v1, 0x8016
-/* DBF8C 8014588C 8C639390 */  lw        $v1, -0x6c70($v1)
+/* DBF88 80145888 3C038016 */  lui       $v1, %hi(gCurrentTriggerListPtr)
+/* DBF8C 8014588C 8C639390 */  lw        $v1, %lo(gCurrentTriggerListPtr)($v1)
 /* DBF90 80145890 00131080 */  sll       $v0, $s3, 2
 /* DBF94 80145894 00431021 */  addu      $v0, $v0, $v1
 /* DBF98 80145898 8C510000 */  lw        $s1, ($v0)
@@ -104,14 +104,14 @@ glabel update_triggers
 /* DC0C8 801459C8 8E220008 */  lw        $v0, 8($s1)
 /* DC0CC 801459CC 54430065 */  bnel      $v0, $v1, .L80145B64
 /* DC0D0 801459D0 26730001 */   addiu    $s3, $s3, 1
-/* DC0D4 801459D4 3C028007 */  lui       $v0, 0x8007
-/* DC0D8 801459D8 8C42419C */  lw        $v0, 0x419c($v0)
+/* DC0D4 801459D4 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* DC0D8 801459D8 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* DC0DC 801459DC 8C420010 */  lw        $v0, 0x10($v0)
 /* DC0E0 801459E0 30428000 */  andi      $v0, $v0, 0x8000
 /* DC0E4 801459E4 5040005F */  beql      $v0, $zero, .L80145B64
 /* DC0E8 801459E8 26730001 */   addiu    $s3, $s3, 1
-/* DC0EC 801459EC 3C028011 */  lui       $v0, 0x8011
-/* DC0F0 801459F0 8C42EFC8 */  lw        $v0, -0x1038($v0)
+/* DC0EC 801459EC 3C028011 */  lui       $v0, %hi(gPlayerStatus)
+/* DC0F0 801459F0 8C42EFC8 */  lw        $v0, %lo(gPlayerStatus)($v0)
 /* DC0F4 801459F4 30422000 */  andi      $v0, $v0, 0x2000
 /* DC0F8 801459F8 5440005A */  bnel      $v0, $zero, .L80145B64
 /* DC0FC 801459FC 26730001 */   addiu    $s3, $s3, 1
@@ -220,8 +220,8 @@ glabel update_triggers
 /* DC26C 80145B6C 2410FFFD */   addiu    $s0, $zero, -3
 /* DC270 80145B70 0000982D */  daddu     $s3, $zero, $zero
 .L80145B74:
-/* DC274 80145B74 3C038016 */  lui       $v1, 0x8016
-/* DC278 80145B78 8C639390 */  lw        $v1, -0x6c70($v1)
+/* DC274 80145B74 3C038016 */  lui       $v1, %hi(gCurrentTriggerListPtr)
+/* DC278 80145B78 8C639390 */  lw        $v1, %lo(gCurrentTriggerListPtr)($v1)
 /* DC27C 80145B7C 00131080 */  sll       $v0, $s3, 2
 /* DC280 80145B80 00431021 */  addu      $v0, $v0, $v1
 /* DC284 80145B84 8C510000 */  lw        $s1, ($v0)

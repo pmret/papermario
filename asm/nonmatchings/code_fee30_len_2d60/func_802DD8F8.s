@@ -22,8 +22,8 @@ glabel func_802DD8F8
 /* 100A28 802DD938 2610FFFF */  addiu     $s0, $s0, -1
 /* 100A2C 802DD93C 0601FFFD */  bgez      $s0, .L802DD934
 /* 100A30 802DD940 2442FFFC */   addiu    $v0, $v0, -4
-/* 100A34 802DD944 3C028007 */  lui       $v0, 0x8007
-/* 100A38 802DD948 8C42419C */  lw        $v0, 0x419c($v0)
+/* 100A34 802DD944 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* 100A38 802DD948 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 100A3C 802DD94C 3C01802E */  lui       $at, 0x802e
 /* 100A40 802DD950 AC20F580 */  sw        $zero, -0xa80($at)
 /* 100A44 802DD954 9042007E */  lbu       $v0, 0x7e($v0)

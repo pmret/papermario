@@ -7,8 +7,8 @@ glabel load_area_specific_entity_data
 /* A731C 80110C1C 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* A7320 80110C20 14400022 */  bnez      $v0, .L80110CAC
 /* A7324 80110C24 AFBF0010 */   sw       $ra, 0x10($sp)
-/* A7328 80110C28 3C028007 */  lui       $v0, 0x8007
-/* A732C 80110C2C 8C42419C */  lw        $v0, 0x419c($v0)
+/* A7328 80110C28 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* A732C 80110C2C 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* A7330 80110C30 84430086 */  lh        $v1, 0x86($v0)
 /* A7334 80110C34 24020011 */  addiu     $v0, $zero, 0x11
 /* A7338 80110C38 10620003 */  beq       $v1, $v0, .L80110C48

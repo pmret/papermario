@@ -4,11 +4,11 @@
 glabel can_pause
 /* 7FE8C 800E69DC 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 7FE90 800E69E0 AFB20018 */  sw        $s2, 0x18($sp)
-/* 7FE94 800E69E4 3C128011 */  lui       $s2, 0x8011
-/* 7FE98 800E69E8 2652EBB0 */  addiu     $s2, $s2, -0x1450
+/* 7FE94 800E69E4 3C128011 */  lui       $s2, %hi(D_8010EBB0)
+/* 7FE98 800E69E8 2652EBB0 */  addiu     $s2, $s2, %lo(D_8010EBB0)
 /* 7FE9C 800E69EC AFB10014 */  sw        $s1, 0x14($sp)
-/* 7FEA0 800E69F0 3C118011 */  lui       $s1, 0x8011
-/* 7FEA4 800E69F4 2631EFC8 */  addiu     $s1, $s1, -0x1038
+/* 7FEA0 800E69F0 3C118011 */  lui       $s1, %hi(gPlayerStatus)
+/* 7FEA4 800E69F4 2631EFC8 */  addiu     $s1, $s1, %lo(gPlayerStatus)
 /* 7FEA8 800E69F8 3C030010 */  lui       $v1, 0x10
 /* 7FEAC 800E69FC AFBF001C */  sw        $ra, 0x1c($sp)
 /* 7FEB0 800E6A00 AFB00010 */  sw        $s0, 0x10($sp)
@@ -27,8 +27,8 @@ glabel can_pause
 /* 7FEE4 800E6A34 30A21003 */  andi      $v0, $a1, 0x1003
 /* 7FEE8 800E6A38 10400045 */  beqz      $v0, .L800E6B50
 /* 7FEEC 800E6A3C 0000102D */   daddu    $v0, $zero, $zero
-/* 7FEF0 800E6A40 3C028007 */  lui       $v0, 0x8007
-/* 7FEF4 800E6A44 8C42419C */  lw        $v0, 0x419c($v0)
+/* 7FEF0 800E6A40 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* 7FEF4 800E6A44 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 7FEF8 800E6A48 8C420144 */  lw        $v0, 0x144($v0)
 /* 7FEFC 800E6A4C 10400005 */  beqz      $v0, .L800E6A64
 /* 7FF00 800E6A50 00000000 */   nop      
@@ -37,8 +37,8 @@ glabel can_pause
 /* 7FF0C 800E6A5C 1440003C */  bnez      $v0, .L800E6B50
 /* 7FF10 800E6A60 0000102D */   daddu    $v0, $zero, $zero
 .L800E6A64:
-/* 7FF14 800E6A64 3C02800A */  lui       $v0, 0x800a
-/* 7FF18 800E6A68 8C42A650 */  lw        $v0, -0x59b0($v0)
+/* 7FF14 800E6A64 3C02800A */  lui       $v0, %hi(D_8009A650)
+/* 7FF18 800E6A68 8C42A650 */  lw        $v0, %lo(D_8009A650)($v0)
 /* 7FF1C 800E6A6C 3C030004 */  lui       $v1, 4
 /* 7FF20 800E6A70 00431024 */  and       $v0, $v0, $v1
 /* 7FF24 800E6A74 14400036 */  bnez      $v0, .L800E6B50

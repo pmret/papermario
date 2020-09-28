@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel func_800E0208
-/* 796B8 800E0208 3C038007 */  lui       $v1, 0x8007
-/* 796BC 800E020C 8C63419C */  lw        $v1, 0x419c($v1)
+/* 796B8 800E0208 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
+/* 796BC 800E020C 8C63419C */  lw        $v1, %lo(gGameStatusPtr)($v1)
 /* 796C0 800E0210 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 796C4 800E0214 AFBF0010 */  sw        $ra, 0x10($sp)
 /* 796C8 800E0218 80620078 */  lb        $v0, 0x78($v1)
@@ -13,8 +13,8 @@ glabel func_800E0208
 /* 796D8 800E0228 30420010 */  andi      $v0, $v0, 0x10
 /* 796DC 800E022C 10400008 */  beqz      $v0, .L800E0250
 /* 796E0 800E0230 00000000 */   nop      
-/* 796E4 800E0234 3C028011 */  lui       $v0, 0x8011
-/* 796E8 800E0238 8042EBB0 */  lb        $v0, -0x1450($v0)
+/* 796E4 800E0234 3C028011 */  lui       $v0, %hi(D_8010EBB0)
+/* 796E8 800E0238 8042EBB0 */  lb        $v0, %lo(D_8010EBB0)($v0)
 /* 796EC 800E023C 54400004 */  bnel      $v0, $zero, .L800E0250
 /* 796F0 800E0240 24040001 */   addiu    $a0, $zero, 1
 /* 796F4 800E0244 0C039769 */  jal       set_action_state

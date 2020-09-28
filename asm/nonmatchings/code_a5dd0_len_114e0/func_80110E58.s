@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel func_80110E58
-/* A7558 80110E58 3C028007 */  lui       $v0, 0x8007
-/* A755C 80110E5C 8C42419C */  lw        $v0, 0x419c($v0)
+/* A7558 80110E58 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* A755C 80110E5C 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* A7560 80110E60 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* A7564 80110E64 AFBF0010 */  sw        $ra, 0x10($sp)
 /* A7568 80110E68 80420070 */  lb        $v0, 0x70($v0)
@@ -38,13 +38,13 @@ glabel func_80110E58
 .L80110ED4:
 /* A75D4 80110ED4 0C044188 */  jal       get_entity_list
 /* A75D8 80110ED8 00000000 */   nop      
-/* A75DC 80110EDC 3C018015 */  lui       $at, 0x8015
-/* A75E0 80110EE0 AC221470 */  sw        $v0, 0x1470($at)
+/* A75DC 80110EDC 3C018015 */  lui       $at, %hi(gCurrentEntityListPtr)
+/* A75E0 80110EE0 AC221470 */  sw        $v0, %lo(gCurrentEntityListPtr)($at)
 /* A75E4 80110EE4 0C044193 */  jal       get_shadow_list
 /* A75E8 80110EE8 00000000 */   nop      
 /* A75EC 80110EEC 8FBF0010 */  lw        $ra, 0x10($sp)
-/* A75F0 80110EF0 3C018015 */  lui       $at, 0x8015
-/* A75F4 80110EF4 AC221658 */  sw        $v0, 0x1658($at)
+/* A75F0 80110EF0 3C018015 */  lui       $at, %hi(gCurrentShadowListPtr)
+/* A75F4 80110EF4 AC221658 */  sw        $v0, %lo(gCurrentShadowListPtr)($at)
 /* A75F8 80110EF8 3C018015 */  lui       $at, 0x8015
 /* A75FC 80110EFC AC2012C0 */  sw        $zero, 0x12c0($at)
 /* A7600 80110F00 3C018015 */  lui       $at, 0x8015

@@ -29,10 +29,10 @@ glabel SetPlayerPos
 /* F5900 802D0F50 44820000 */  mtc1      $v0, $f0
 /* F5904 802D0F54 00000000 */  nop       
 /* F5908 802D0F58 46800020 */  cvt.s.w   $f0, $f0
-/* F590C 802D0F5C 3C03802E */  lui       $v1, 0x802e
-/* F5910 802D0F60 8C639D20 */  lw        $v1, -0x62e0($v1)
-/* F5914 802D0F64 3C048011 */  lui       $a0, 0x8011
-/* F5918 802D0F68 2484EFC8 */  addiu     $a0, $a0, -0x1038
+/* F590C 802D0F5C 3C03802E */  lui       $v1, %hi(gPlayerNpcPtr)
+/* F5910 802D0F60 8C639D20 */  lw        $v1, %lo(gPlayerNpcPtr)($v1)
+/* F5914 802D0F64 3C048011 */  lui       $a0, %hi(gPlayerStatus)
+/* F5918 802D0F68 2484EFC8 */  addiu     $a0, $a0, %lo(gPlayerStatus)
 /* F591C 802D0F6C E4760038 */  swc1      $f22, 0x38($v1)
 /* F5920 802D0F70 E4600040 */  swc1      $f0, 0x40($v1)
 /* F5924 802D0F74 4600B006 */  mov.s     $f0, $f22

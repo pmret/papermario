@@ -117,8 +117,8 @@ glabel ActorSpeak
 /* 1819C4 802530E4 AC24FA60 */  sw        $a0, -0x5a0($at)
 /* 1819C8 802530E8 0C0496AE */  jal       clamp_printer_coords
 /* 1819CC 802530EC 00000000 */   nop      
-/* 1819D0 802530F0 3C03800A */  lui       $v1, 0x800a
-/* 1819D4 802530F4 2463A650 */  addiu     $v1, $v1, -0x59b0
+/* 1819D0 802530F0 3C03800A */  lui       $v1, %hi(D_8009A650)
+/* 1819D4 802530F4 2463A650 */  addiu     $v1, $v1, %lo(D_8009A650)
 /* 1819D8 802530F8 AE600070 */  sw        $zero, 0x70($s3)
 /* 1819DC 802530FC 8C620000 */  lw        $v0, ($v1)
 /* 1819E0 80253100 3C06802A */  lui       $a2, 0x802a
@@ -231,8 +231,8 @@ glabel ActorSpeak
 /* 181B6C 8025328C 0C03A6CC */  jal       decrement_status_menu_disabled
 /* 181B70 80253290 00000000 */   nop      
 /* 181B74 80253294 24020001 */  addiu     $v0, $zero, 1
-/* 181B78 80253298 3C03800A */  lui       $v1, 0x800a
-/* 181B7C 8025329C 2463A650 */  addiu     $v1, $v1, -0x59b0
+/* 181B78 80253298 3C03800A */  lui       $v1, %hi(D_8009A650)
+/* 181B7C 8025329C 2463A650 */  addiu     $v1, $v1, %lo(D_8009A650)
 /* 181B80 802532A0 8C640000 */  lw        $a0, ($v1)
 /* 181B84 802532A4 2405FFEF */  addiu     $a1, $zero, -0x11
 /* 181B88 802532A8 00852024 */  and       $a0, $a0, $a1

@@ -14,8 +14,8 @@ glabel DropStarPoints
 /* 1AB1A8 8027C8C8 0C0B1EAF */  jal       get_variable
 /* 1AB1AC 8027C8CC 8C450000 */   lw       $a1, ($v0)
 /* 1AB1B0 8027C8D0 0040202D */  daddu     $a0, $v0, $zero
-/* 1AB1B4 8027C8D4 3C14800E */  lui       $s4, 0x800e
-/* 1AB1B8 8027C8D8 2694C070 */  addiu     $s4, $s4, -0x3f90
+/* 1AB1B4 8027C8D4 3C14800E */  lui       $s4, %hi(gBattleStatus)
+/* 1AB1B8 8027C8D8 2694C070 */  addiu     $s4, $s4, %lo(gBattleStatus)
 /* 1AB1BC 8027C8DC 2402FF81 */  addiu     $v0, $zero, -0x7f
 /* 1AB1C0 8027C8E0 14820002 */  bne       $a0, $v0, .L8027C8EC
 /* 1AB1C4 8027C8E4 00000000 */   nop      
@@ -37,8 +37,8 @@ glabel DropStarPoints
 /* 1AB200 8027C920 3C013F80 */  lui       $at, 0x3f80
 /* 1AB204 8027C924 44813000 */  mtc1      $at, $f6
 .L8027C928:
-/* 1AB208 8027C928 3C028011 */  lui       $v0, 0x8011
-/* 1AB20C 8027C92C 2442F290 */  addiu     $v0, $v0, -0xd70
+/* 1AB208 8027C928 3C028011 */  lui       $v0, %hi(gPlayerData)
+/* 1AB20C 8027C92C 2442F290 */  addiu     $v0, $v0, %lo(gPlayerData)
 /* 1AB210 8027C930 80430009 */  lb        $v1, 9($v0)
 /* 1AB214 8027C934 44832000 */  mtc1      $v1, $f4
 /* 1AB218 8027C938 00000000 */  nop       
@@ -111,8 +111,8 @@ glabel DropStarPoints
 /* 1AB310 8027CA30 00531021 */  addu      $v0, $v0, $s3
 /* 1AB314 8027CA34 A2820079 */  sb        $v0, 0x79($s4)
 .L8027CA38:
-/* 1AB318 8027CA38 3C03800E */  lui       $v1, 0x800e
-/* 1AB31C 8027CA3C 2463C070 */  addiu     $v1, $v1, -0x3f90
+/* 1AB318 8027CA38 3C03800E */  lui       $v1, %hi(gBattleStatus)
+/* 1AB31C 8027CA3C 2463C070 */  addiu     $v1, $v1, %lo(gBattleStatus)
 /* 1AB320 8027CA40 8C640000 */  lw        $a0, ($v1)
 /* 1AB324 8027CA44 3C050100 */  lui       $a1, 0x100
 /* 1AB328 8027CA48 00852025 */  or        $a0, $a0, $a1

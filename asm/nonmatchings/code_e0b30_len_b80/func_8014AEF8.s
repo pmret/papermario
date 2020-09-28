@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel func_8014AEF8
-/* E15F8 8014AEF8 3C028007 */  lui       $v0, 0x8007
-/* E15FC 8014AEFC 8C42419C */  lw        $v0, 0x419c($v0)
+/* E15F8 8014AEF8 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* E15FC 8014AEFC 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* E1600 8014AF00 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* E1604 8014AF04 AFBF001C */  sw        $ra, 0x1c($sp)
 /* E1608 8014AF08 AFB00018 */  sw        $s0, 0x18($sp)
@@ -12,8 +12,8 @@ glabel func_8014AEF8
 /* E1614 8014AF14 26109AF0 */  addiu     $s0, $s0, -0x6510
 /* E1618 8014AF18 14400018 */  bnez      $v0, .L8014AF7C
 /* E161C 8014AF1C 3C030002 */   lui      $v1, 2
-/* E1620 8014AF20 3C02800A */  lui       $v0, 0x800a
-/* E1624 8014AF24 8C42A650 */  lw        $v0, -0x59b0($v0)
+/* E1620 8014AF20 3C02800A */  lui       $v0, %hi(D_8009A650)
+/* E1624 8014AF24 8C42A650 */  lw        $v0, %lo(D_8009A650)($v0)
 /* E1628 8014AF28 00431024 */  and       $v0, $v0, $v1
 /* E162C 8014AF2C 14400013 */  bnez      $v0, .L8014AF7C
 /* E1630 8014AF30 0000202D */   daddu    $a0, $zero, $zero

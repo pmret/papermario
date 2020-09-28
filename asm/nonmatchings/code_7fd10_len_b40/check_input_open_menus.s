@@ -2,15 +2,15 @@
 .set noreorder # don't insert nops after branches
 
 glabel check_input_open_menus
-/* 80194 800E6CE4 3C038007 */  lui       $v1, 0x8007
-/* 80198 800E6CE8 8C63419C */  lw        $v1, 0x419c($v1)
+/* 80194 800E6CE4 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
+/* 80198 800E6CE8 8C63419C */  lw        $v1, %lo(gGameStatusPtr)($v1)
 /* 8019C 800E6CEC 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* 801A0 800E6CF0 AFB3001C */  sw        $s3, 0x1c($sp)
-/* 801A4 800E6CF4 3C138011 */  lui       $s3, 0x8011
-/* 801A8 800E6CF8 2673EBB0 */  addiu     $s3, $s3, -0x1450
+/* 801A4 800E6CF4 3C138011 */  lui       $s3, %hi(D_8010EBB0)
+/* 801A8 800E6CF8 2673EBB0 */  addiu     $s3, $s3, %lo(D_8010EBB0)
 /* 801AC 800E6CFC AFB40020 */  sw        $s4, 0x20($sp)
-/* 801B0 800E6D00 3C148011 */  lui       $s4, 0x8011
-/* 801B4 800E6D04 2694EFC8 */  addiu     $s4, $s4, -0x1038
+/* 801B0 800E6D00 3C148011 */  lui       $s4, %hi(gPlayerStatus)
+/* 801B4 800E6D04 2694EFC8 */  addiu     $s4, $s4, %lo(gPlayerStatus)
 /* 801B8 800E6D08 AFBF0024 */  sw        $ra, 0x24($sp)
 /* 801BC 800E6D0C AFB20018 */  sw        $s2, 0x18($sp)
 /* 801C0 800E6D10 AFB10014 */  sw        $s1, 0x14($sp)
@@ -113,8 +113,8 @@ glabel check_input_open_menus
 /* 80324 800E6E74 104000FD */  beqz      $v0, .L800E726C
 /* 80328 800E6E78 24030001 */   addiu    $v1, $zero, 1
 /* 8032C 800E6E7C AE420324 */  sw        $v0, 0x324($s2)
-/* 80330 800E6E80 3C028011 */  lui       $v0, 0x8011
-/* 80334 800E6E84 2442F290 */  addiu     $v0, $v0, -0xd70
+/* 80330 800E6E80 3C028011 */  lui       $v0, %hi(gPlayerData)
+/* 80334 800E6E84 2442F290 */  addiu     $v0, $v0, %lo(gPlayerData)
 /* 80338 800E6E88 80420012 */  lb        $v0, 0x12($v0)
 /* 8033C 800E6E8C AE430318 */  sw        $v1, 0x318($s2)
 /* 80340 800E6E90 00021080 */  sll       $v0, $v0, 2
@@ -191,8 +191,8 @@ glabel check_input_open_menus
 /* 8044C 800E6F9C 00021400 */  sll       $v0, $v0, 0x10
 /* 80450 800E6FA0 144000B2 */  bnez      $v0, .L800E726C
 /* 80454 800E6FA4 24040002 */   addiu    $a0, $zero, 2
-/* 80458 800E6FA8 3C02800A */  lui       $v0, 0x800a
-/* 8045C 800E6FAC 2442A650 */  addiu     $v0, $v0, -0x59b0
+/* 80458 800E6FA8 3C02800A */  lui       $v0, %hi(D_8009A650)
+/* 8045C 800E6FAC 2442A650 */  addiu     $v0, $v0, %lo(D_8009A650)
 /* 80460 800E6FB0 8C430000 */  lw        $v1, ($v0)
 /* 80464 800E6FB4 3C018011 */  lui       $at, 0x8011
 /* 80468 800E6FB8 A424CD00 */  sh        $a0, -0x3300($at)
@@ -331,8 +331,8 @@ glabel check_input_open_menus
 /* 80654 800E71A4 02421021 */  addu      $v0, $s2, $v0
 /* 80658 800E71A8 0C03A900 */  jal       use_consumable
 /* 8065C 800E71AC 8C440108 */   lw       $a0, 0x108($v0)
-/* 80660 800E71B0 3C04800A */  lui       $a0, 0x800a
-/* 80664 800E71B4 2484A650 */  addiu     $a0, $a0, -0x59b0
+/* 80660 800E71B0 3C04800A */  lui       $a0, %hi(D_8009A650)
+/* 80664 800E71B4 2484A650 */  addiu     $a0, $a0, %lo(D_8009A650)
 /* 80668 800E71B8 8C820000 */  lw        $v0, ($a0)
 /* 8066C 800E71BC 3C030020 */  lui       $v1, 0x20
 /* 80670 800E71C0 00431025 */  or        $v0, $v0, $v1
@@ -343,8 +343,8 @@ glabel check_input_open_menus
 /* 80680 800E71D0 0000202D */  daddu     $a0, $zero, $zero
 /* 80684 800E71D4 2403FFDF */  addiu     $v1, $zero, -0x21
 /* 80688 800E71D8 8E820000 */  lw        $v0, ($s4)
-/* 8068C 800E71DC 3C05800A */  lui       $a1, 0x800a
-/* 80690 800E71E0 24A5A650 */  addiu     $a1, $a1, -0x59b0
+/* 8068C 800E71DC 3C05800A */  lui       $a1, %hi(D_8009A650)
+/* 80690 800E71E0 24A5A650 */  addiu     $a1, $a1, %lo(D_8009A650)
 /* 80694 800E71E4 00431024 */  and       $v0, $v0, $v1
 /* 80698 800E71E8 AE820000 */  sw        $v0, ($s4)
 /* 8069C 800E71EC 8CA20000 */  lw        $v0, ($a1)
@@ -366,8 +366,8 @@ glabel check_input_open_menus
 /* 806DC 800E722C 00000000 */   nop      
 /* 806E0 800E7230 2403FFDF */  addiu     $v1, $zero, -0x21
 /* 806E4 800E7234 8E820000 */  lw        $v0, ($s4)
-/* 806E8 800E7238 3C04800A */  lui       $a0, 0x800a
-/* 806EC 800E723C 2484A650 */  addiu     $a0, $a0, -0x59b0
+/* 806E8 800E7238 3C04800A */  lui       $a0, %hi(D_8009A650)
+/* 806EC 800E723C 2484A650 */  addiu     $a0, $a0, %lo(D_8009A650)
 /* 806F0 800E7240 3C018011 */  lui       $at, 0x8011
 /* 806F4 800E7244 A420CD00 */  sh        $zero, -0x3300($at)
 /* 806F8 800E7248 00431024 */  and       $v0, $v0, $v1

@@ -3,8 +3,8 @@
 
 glabel func_802E6E20
 /* 1086A0 802E6E20 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* 1086A4 802E6E24 3C028007 */  lui       $v0, 0x8007
-/* 1086A8 802E6E28 8C42419C */  lw        $v0, 0x419c($v0)
+/* 1086A4 802E6E24 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* 1086A8 802E6E28 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 1086AC 802E6E2C AFBF0010 */  sw        $ra, 0x10($sp)
 /* 1086B0 802E6E30 84430086 */  lh        $v1, 0x86($v0)
 /* 1086B4 802E6E34 2402000B */  addiu     $v0, $zero, 0xb

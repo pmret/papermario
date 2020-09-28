@@ -3,15 +3,15 @@
 
 glabel deduct_current_move_fp
 /* 1924A8 80263BC8 27BDFFE0 */  addiu     $sp, $sp, -0x20
-/* 1924AC 80263BCC 3C04800E */  lui       $a0, 0x800e
-/* 1924B0 80263BD0 2484C070 */  addiu     $a0, $a0, -0x3f90
+/* 1924AC 80263BCC 3C04800E */  lui       $a0, %hi(gBattleStatus)
+/* 1924B0 80263BD0 2484C070 */  addiu     $a0, $a0, %lo(gBattleStatus)
 /* 1924B4 80263BD4 AFBF001C */  sw        $ra, 0x1c($sp)
 /* 1924B8 80263BD8 AFB20018 */  sw        $s2, 0x18($sp)
 /* 1924BC 80263BDC AFB10014 */  sw        $s1, 0x14($sp)
 /* 1924C0 80263BE0 AFB00010 */  sw        $s0, 0x10($sp)
 /* 1924C4 80263BE4 8483017C */  lh        $v1, 0x17c($a0)
-/* 1924C8 80263BE8 3C128011 */  lui       $s2, 0x8011
-/* 1924CC 80263BEC 2652F290 */  addiu     $s2, $s2, -0xd70
+/* 1924C8 80263BE8 3C128011 */  lui       $s2, %hi(gPlayerData)
+/* 1924CC 80263BEC 2652F290 */  addiu     $s2, $s2, %lo(gPlayerData)
 /* 1924D0 80263BF0 00031080 */  sll       $v0, $v1, 2
 /* 1924D4 80263BF4 00431021 */  addu      $v0, $v0, $v1
 /* 1924D8 80263BF8 00021080 */  sll       $v0, $v0, 2

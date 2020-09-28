@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel func_80265D44
-/* 194624 80265D44 3C03800E */  lui       $v1, 0x800e
-/* 194628 80265D48 2463C070 */  addiu     $v1, $v1, -0x3f90
+/* 194624 80265D44 3C03800E */  lui       $v1, %hi(gBattleStatus)
+/* 194628 80265D48 2463C070 */  addiu     $v1, $v1, %lo(gBattleStatus)
 /* 19462C 80265D4C 8C6600D8 */  lw        $a2, 0xd8($v1)
 /* 194630 80265D50 8CC201F4 */  lw        $v0, 0x1f4($a2)
 /* 194634 80265D54 8C450094 */  lw        $a1, 0x94($v0)
@@ -20,8 +20,8 @@ glabel func_80265D44
 /* 194658 80265D78 30420040 */  andi      $v0, $v0, 0x40
 /* 19465C 80265D7C 14400022 */  bnez      $v0, .L80265E08
 /* 194660 80265D80 0000382D */   daddu    $a3, $zero, $zero
-/* 194664 80265D84 3C028011 */  lui       $v0, 0x8011
-/* 194668 80265D88 2442F290 */  addiu     $v0, $v0, -0xd70
+/* 194664 80265D84 3C028011 */  lui       $v0, %hi(gPlayerData)
+/* 194668 80265D88 2442F290 */  addiu     $v0, $v0, %lo(gPlayerData)
 /* 19466C 80265D8C 80420002 */  lb        $v0, 2($v0)
 /* 194670 80265D90 28420006 */  slti      $v0, $v0, 6
 /* 194674 80265D94 10400009 */  beqz      $v0, .L80265DBC

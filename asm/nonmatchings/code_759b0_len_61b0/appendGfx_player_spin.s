@@ -6,13 +6,13 @@ glabel appendGfx_player_spin
 /* 7ABB8 800E1708 F7B60158 */  sdc1      $f22, 0x158($sp)
 /* 7ABBC 800E170C 4480B000 */  mtc1      $zero, $f22
 /* 7ABC0 800E1710 AFB10134 */  sw        $s1, 0x134($sp)
-/* 7ABC4 800E1714 3C118011 */  lui       $s1, 0x8011
-/* 7ABC8 800E1718 2631EFC8 */  addiu     $s1, $s1, -0x1038
+/* 7ABC4 800E1714 3C118011 */  lui       $s1, %hi(gPlayerStatus)
+/* 7ABC8 800E1718 2631EFC8 */  addiu     $s1, $s1, %lo(gPlayerStatus)
 /* 7ABCC 800E171C AFB3013C */  sw        $s3, 0x13c($sp)
 /* 7ABD0 800E1720 0000982D */  daddu     $s3, $zero, $zero
 /* 7ABD4 800E1724 AFB60148 */  sw        $s6, 0x148($sp)
-/* 7ABD8 800E1728 3C16800B */  lui       $s6, 0x800b
-/* 7ABDC 800E172C 26D61D80 */  addiu     $s6, $s6, 0x1d80
+/* 7ABD8 800E1728 3C16800B */  lui       $s6, %hi(gCameras)
+/* 7ABDC 800E172C 26D61D80 */  addiu     $s6, $s6, %lo(gCameras)
 /* 7ABE0 800E1730 AFB50144 */  sw        $s5, 0x144($sp)
 /* 7ABE4 800E1734 241500FF */  addiu     $s5, $zero, 0xff
 /* 7ABE8 800E1738 AFB00130 */  sw        $s0, 0x130($sp)

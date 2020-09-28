@@ -6,8 +6,8 @@ glabel func_802E44F8
 /* 105D7C 802E44FC AFBF0010 */  sw        $ra, 0x10($sp)
 /* 105D80 802E4500 0C03805E */  jal       disable_player_input
 /* 105D84 802E4504 00000000 */   nop      
-/* 105D88 802E4508 3C028011 */  lui       $v0, 0x8011
-/* 105D8C 802E450C 2442EFC8 */  addiu     $v0, $v0, -0x1038
+/* 105D88 802E4508 3C028011 */  lui       $v0, %hi(gPlayerStatus)
+/* 105D8C 802E450C 2442EFC8 */  addiu     $v0, $v0, %lo(gPlayerStatus)
 /* 105D90 802E4510 8C430000 */  lw        $v1, ($v0)
 /* 105D94 802E4514 3C040080 */  lui       $a0, 0x80
 /* 105D98 802E4518 AC400054 */  sw        $zero, 0x54($v0)

@@ -15,8 +15,8 @@ glabel clone_model
 /* B1E18 8011B718 0040202D */   daddu    $a0, $v0, $zero
 /* B1E1C 8011B71C 0040882D */  daddu     $s1, $v0, $zero
 /* B1E20 8011B720 0000802D */  daddu     $s0, $zero, $zero
-/* B1E24 8011B724 3C128015 */  lui       $s2, 0x8015
-/* B1E28 8011B728 265212CC */  addiu     $s2, $s2, 0x12cc
+/* B1E24 8011B724 3C128015 */  lui       $s2, %hi(gCurrentModelListPtr)
+/* B1E28 8011B728 265212CC */  addiu     $s2, $s2, %lo(gCurrentModelListPtr)
 /* B1E2C 8011B72C 8E430000 */  lw        $v1, ($s2)
 .L8011B730:
 /* B1E30 8011B730 8C620000 */  lw        $v0, ($v1)

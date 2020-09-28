@@ -8,7 +8,7 @@ segments:
     start: 0x00
     vram: 0
     files:
-    - [0x0000, "asm", "header"]
+    - [0x0000, "header", "header"]
   - name: boot
     type: code
     start: 0x0040

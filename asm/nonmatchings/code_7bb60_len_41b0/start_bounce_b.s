@@ -6,8 +6,8 @@ glabel start_bounce_b
 /* 7F540 800E6090 AFBF0010 */  sw        $ra, 0x10($sp)
 /* 7F544 800E6094 0C039769 */  jal       set_action_state
 /* 7F548 800E6098 24040004 */   addiu    $a0, $zero, 4
-/* 7F54C 800E609C 3C048011 */  lui       $a0, 0x8011
-/* 7F550 800E60A0 2484EFC8 */  addiu     $a0, $a0, -0x1038
+/* 7F54C 800E609C 3C048011 */  lui       $a0, %hi(gPlayerStatus)
+/* 7F550 800E60A0 2484EFC8 */  addiu     $a0, $a0, %lo(gPlayerStatus)
 /* 7F554 800E60A4 3C014100 */  lui       $at, 0x4100
 /* 7F558 800E60A8 44810000 */  mtc1      $at, $f0
 /* 7F55C 800E60AC 3C01BF80 */  lui       $at, 0xbf80

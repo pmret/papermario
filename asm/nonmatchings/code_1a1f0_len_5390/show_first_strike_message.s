@@ -3,8 +3,8 @@
 
 glabel show_first_strike_message
 /* 1D05C 80041C5C 27BDFFA8 */  addiu     $sp, $sp, -0x58
-/* 1D060 80041C60 3C05800B */  lui       $a1, 0x800b
-/* 1D064 80041C64 24A50F10 */  addiu     $a1, $a1, 0xf10
+/* 1D060 80041C60 3C05800B */  lui       $a1, %hi(gCurrentEncounter)
+/* 1D064 80041C64 24A50F10 */  addiu     $a1, $a1, %lo(gCurrentEncounter)
 /* 1D068 80041C68 AFBF0054 */  sw        $ra, 0x54($sp)
 /* 1D06C 80041C6C AFB00050 */  sw        $s0, 0x50($sp)
 /* 1D070 80041C70 8CA20094 */  lw        $v0, 0x94($a1)

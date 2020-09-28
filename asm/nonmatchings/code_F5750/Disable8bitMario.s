@@ -7,8 +7,8 @@ glabel Disable8bitMario
 /* F7540 802D2B90 AFB10014 */  sw        $s1, 0x14($sp)
 /* F7544 802D2B94 AFB00010 */  sw        $s0, 0x10($sp)
 /* F7548 802D2B98 8C82000C */  lw        $v0, 0xc($a0)
-/* F754C 802D2B9C 3C108011 */  lui       $s0, 0x8011
-/* F7550 802D2BA0 2610EFC8 */  addiu     $s0, $s0, -0x1038
+/* F754C 802D2B9C 3C108011 */  lui       $s0, %hi(gPlayerStatus)
+/* F7550 802D2BA0 2610EFC8 */  addiu     $s0, $s0, %lo(gPlayerStatus)
 /* F7554 802D2BA4 8C450000 */  lw        $a1, ($v0)
 /* F7558 802D2BA8 0C0B1EAF */  jal       get_variable
 /* F755C 802D2BAC 0200882D */   daddu    $s1, $s0, $zero

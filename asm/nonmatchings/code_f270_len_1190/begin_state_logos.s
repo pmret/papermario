@@ -9,8 +9,8 @@ glabel begin_state_logos
 /* F280 80033E80 AFB00018 */  sw        $s0, 0x18($sp)
 /* F284 80033E84 0C00AB00 */  jal       general_heap_create
 /* F288 80033E88 F7B40028 */   sdc1     $f20, 0x28($sp)
-/* F28C 80033E8C 3C128007 */  lui       $s2, 0x8007
-/* F290 80033E90 2652419C */  addiu     $s2, $s2, 0x419c
+/* F28C 80033E8C 3C128007 */  lui       $s2, %hi(gGameStatusPtr)
+/* F290 80033E90 2652419C */  addiu     $s2, $s2, %lo(gGameStatusPtr)
 /* F294 80033E94 8E420000 */  lw        $v0, ($s2)
 /* F298 80033E98 A04000AC */  sb        $zero, 0xac($v0)
 /* F29C 80033E9C 8E420000 */  lw        $v0, ($s2)
@@ -52,8 +52,8 @@ glabel begin_state_logos
 /* F32C 80033F2C 0000202D */  daddu     $a0, $zero, $zero
 /* F330 80033F30 2405000C */  addiu     $a1, $zero, 0xc
 /* F334 80033F34 2406001C */  addiu     $a2, $zero, 0x1c
-/* F338 80033F38 3C10800B */  lui       $s0, 0x800b
-/* F33C 80033F3C 26101D80 */  addiu     $s0, $s0, 0x1d80
+/* F338 80033F38 3C10800B */  lui       $s0, %hi(gCameras)
+/* F33C 80033F3C 26101D80 */  addiu     $s0, $s0, %lo(gCameras)
 /* F340 80033F40 24020006 */  addiu     $v0, $zero, 6
 /* F344 80033F44 A6020004 */  sh        $v0, 4($s0)
 /* F348 80033F48 24020001 */  addiu     $v0, $zero, 1
@@ -66,8 +66,8 @@ glabel begin_state_logos
 /* F364 80033F64 3C0141C8 */  lui       $at, 0x41c8
 /* F368 80033F68 4481A000 */  mtc1      $at, $f20
 /* F36C 80033F6C 24070128 */  addiu     $a3, $zero, 0x128
-/* F370 80033F70 3C018007 */  lui       $at, 0x8007
-/* F374 80033F74 AC207410 */  sw        $zero, 0x7410($at)
+/* F370 80033F70 3C018007 */  lui       $at, %hi(gCurrentCameraID)
+/* F374 80033F74 AC207410 */  sw        $zero, %lo(gCurrentCameraID)($at)
 /* F378 80033F78 E6140018 */  swc1      $f20, 0x18($s0)
 /* F37C 80033F7C AFA20010 */  sw        $v0, 0x10($sp)
 /* F380 80033F80 96020000 */  lhu       $v0, ($s0)
@@ -128,8 +128,8 @@ glabel begin_state_logos
 /* F45C 8003405C 24040001 */   addiu    $a0, $zero, 1
 /* F460 80034060 0C016727 */  jal       func_80059C9C
 /* F464 80034064 00000000 */   nop      
-/* F468 80034068 3C03800A */  lui       $v1, 0x800a
-/* F46C 8003406C 2463A650 */  addiu     $v1, $v1, -0x59b0
+/* F468 80034068 3C03800A */  lui       $v1, %hi(D_8009A650)
+/* F46C 8003406C 2463A650 */  addiu     $v1, $v1, %lo(D_8009A650)
 /* F470 80034070 8C620000 */  lw        $v0, ($v1)
 /* F474 80034074 34420002 */  ori       $v0, $v0, 2
 /* F478 80034078 0C00CE1D */  jal       intro_logos_update_fade

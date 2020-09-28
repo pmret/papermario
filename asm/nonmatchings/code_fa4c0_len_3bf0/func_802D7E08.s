@@ -67,8 +67,8 @@ glabel func_802D7E08
 /* FC8B0 802D7F00 4600C006 */   mov.s    $f0, $f24
 .L802D7F04:
 /* FC8B4 802D7F04 3C055555 */  lui       $a1, 0x5555
-/* FC8B8 802D7F08 3C048011 */  lui       $a0, 0x8011
-/* FC8BC 802D7F0C 2484EFC8 */  addiu     $a0, $a0, -0x1038
+/* FC8B8 802D7F08 3C048011 */  lui       $a0, %hi(gPlayerStatus)
+/* FC8BC 802D7F0C 2484EFC8 */  addiu     $a0, $a0, %lo(gPlayerStatus)
 /* FC8C0 802D7F10 948200B0 */  lhu       $v0, 0xb0($a0)
 /* FC8C4 802D7F14 34A55556 */  ori       $a1, $a1, 0x5556
 /* FC8C8 802D7F18 00021400 */  sll       $v0, $v0, 0x10

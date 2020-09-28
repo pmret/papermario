@@ -23,8 +23,8 @@ glabel func_8003CFB4
 /* 183FC 8003CFFC F7B60030 */  sdc1      $f22, 0x30($sp)
 /* 18400 8003D000 4600A586 */  mov.s     $f22, $f20
 .L8003D004:
-/* 18404 8003D004 3C03800A */  lui       $v1, 0x800a
-/* 18408 8003D008 8C630B90 */  lw        $v1, 0xb90($v1)
+/* 18404 8003D004 3C03800A */  lui       $v1, %hi(gCurrentNpcListPtr)
+/* 18408 8003D008 8C630B90 */  lw        $v1, %lo(gCurrentNpcListPtr)($v1)
 /* 1840C 8003D00C 00111080 */  sll       $v0, $s1, 2
 /* 18410 8003D010 00431021 */  addu      $v0, $v0, $v1
 /* 18414 8003D014 8C500000 */  lw        $s0, ($v0)

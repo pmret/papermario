@@ -4,8 +4,8 @@
 glabel func_800EB168
 /* 84618 800EB168 3C038011 */  lui       $v1, 0x8011
 /* 8461C 800EB16C 8C63CFD8 */  lw        $v1, -0x3028($v1)
-/* 84620 800EB170 3C058011 */  lui       $a1, 0x8011
-/* 84624 800EB174 24A5EFC8 */  addiu     $a1, $a1, -0x1038
+/* 84620 800EB170 3C058011 */  lui       $a1, %hi(gPlayerStatus)
+/* 84624 800EB174 24A5EFC8 */  addiu     $a1, $a1, %lo(gPlayerStatus)
 /* 84628 800EB178 1064000C */  beq       $v1, $a0, .L800EB1AC
 /* 8462C 800EB17C 24020001 */   addiu    $v0, $zero, 1
 /* 84630 800EB180 3C018011 */  lui       $at, 0x8011

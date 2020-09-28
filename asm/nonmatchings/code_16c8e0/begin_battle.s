@@ -9,11 +9,11 @@ glabel begin_battle
 /* 16FB08 80241228 3C02800E */  lui       $v0, 0x800e
 /* 16FB0C 8024122C 8C42C4F4 */  lw        $v0, -0x3b0c($v0)
 /* 16FB10 80241230 AFB40030 */  sw        $s4, 0x30($sp)
-/* 16FB14 80241234 3C14800E */  lui       $s4, 0x800e
-/* 16FB18 80241238 2694C070 */  addiu     $s4, $s4, -0x3f90
+/* 16FB14 80241234 3C14800E */  lui       $s4, %hi(gBattleStatus)
+/* 16FB18 80241238 2694C070 */  addiu     $s4, $s4, %lo(gBattleStatus)
 /* 16FB1C 8024123C AFBE0040 */  sw        $fp, 0x40($sp)
-/* 16FB20 80241240 3C1E800B */  lui       $fp, 0x800b
-/* 16FB24 80241244 27DE0F10 */  addiu     $fp, $fp, 0xf10
+/* 16FB20 80241240 3C1E800B */  lui       $fp, %hi(gCurrentEncounter)
+/* 16FB24 80241244 27DE0F10 */  addiu     $fp, $fp, %lo(gCurrentEncounter)
 /* 16FB28 80241248 AFBF0044 */  sw        $ra, 0x44($sp)
 /* 16FB2C 8024124C AFB7003C */  sw        $s7, 0x3c($sp)
 /* 16FB30 80241250 AFB50034 */  sw        $s5, 0x34($sp)
@@ -88,13 +88,13 @@ glabel begin_battle
 /* 16FC2C 8024134C 00000000 */   nop      
 /* 16FC30 80241350 0C05175C */  jal       load_map_bg
 /* 16FC34 80241354 00000000 */   nop      
-/* 16FC38 80241358 3C048020 */  lui       $a0, 0x8020
-/* 16FC3C 8024135C 24840000 */  addiu     $a0, $a0, 0
+/* 16FC38 80241358 3C048020 */  lui       $a0, %hi(gBackgroundImage)
+/* 16FC3C 8024135C 24840000 */  addiu     $a0, $a0, %lo(gBackgroundImage)
 /* 16FC40 80241360 0C05178A */  jal       read_background_size
 /* 16FC44 80241364 00000000 */   nop      
 .L80241368:
-/* 16FC48 80241368 3C028007 */  lui       $v0, 0x8007
-/* 16FC4C 8024136C 8C42419C */  lw        $v0, 0x419c($v0)
+/* 16FC48 80241368 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* 16FC4C 8024136C 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 16FC50 80241370 904200AA */  lbu       $v0, 0xaa($v0)
 /* 16FC54 80241374 30420001 */  andi      $v0, $v0, 1
 /* 16FC58 80241378 10400005 */  beqz      $v0, .L80241390
@@ -104,8 +104,8 @@ glabel begin_battle
 /* 16FC68 80241388 0C00AFB7 */  jal       set_curtain_scale_goal
 /* 16FC6C 8024138C 00000000 */   nop      
 .L80241390:
-/* 16FC70 80241390 3C05800B */  lui       $a1, 0x800b
-/* 16FC74 80241394 24A51D80 */  addiu     $a1, $a1, 0x1d80
+/* 16FC70 80241390 3C05800B */  lui       $a1, %hi(gCameras)
+/* 16FC74 80241394 24A51D80 */  addiu     $a1, $a1, %lo(gCameras)
 /* 16FC78 80241398 94A20000 */  lhu       $v0, ($a1)
 /* 16FC7C 8024139C 24040006 */  addiu     $a0, $zero, 6
 /* 16FC80 802413A0 AE8000BC */  sw        $zero, 0xbc($s4)
@@ -138,8 +138,8 @@ glabel begin_battle
 .L8024140C:
 /* 16FCEC 8024140C 2405FFFF */  addiu     $a1, $zero, -1
 /* 16FCF0 80241410 2402FFFF */  addiu     $v0, $zero, -1
-/* 16FCF4 80241414 3C06800E */  lui       $a2, 0x800e
-/* 16FCF8 80241418 24C6C070 */  addiu     $a2, $a2, -0x3f90
+/* 16FCF4 80241414 3C06800E */  lui       $a2, %hi(gBattleStatus)
+/* 16FCF8 80241418 24C6C070 */  addiu     $a2, $a2, %lo(gBattleStatus)
 /* 16FCFC 8024141C A2800081 */  sb        $zero, 0x81($s4)
 /* 16FD00 80241420 A2800082 */  sb        $zero, 0x82($s4)
 /* 16FD04 80241424 A6850070 */  sh        $a1, 0x70($s4)
@@ -224,8 +224,8 @@ glabel begin_battle
 /* 16FE38 80241558 24840EB8 */  addiu     $a0, $a0, 0xeb8
 /* 16FE3C 8024155C 2405000A */  addiu     $a1, $zero, 0xa
 /* 16FE40 80241560 24100001 */  addiu     $s0, $zero, 1
-/* 16FE44 80241564 3C018007 */  lui       $at, 0x8007
-/* 16FE48 80241568 AC307410 */  sw        $s0, 0x7410($at)
+/* 16FE44 80241564 3C018007 */  lui       $at, %hi(gCurrentCameraID)
+/* 16FE48 80241568 AC307410 */  sw        $s0, %lo(gCurrentCameraID)($at)
 /* 16FE4C 8024156C 0C0B0CF8 */  jal       start_script
 /* 16FE50 80241570 0000302D */   daddu    $a2, $zero, $zero
 /* 16FE54 80241574 0040182D */  daddu     $v1, $v0, $zero
@@ -252,12 +252,12 @@ glabel begin_battle
 /* 16FEA8 802415C8 AE8200C0 */  sw        $v0, 0xc0($s4)
 /* 16FEAC 802415CC 24110017 */  addiu     $s1, $zero, 0x17
 .L802415D0:
-/* 16FEB0 802415D0 3C04800E */  lui       $a0, 0x800e
-/* 16FEB4 802415D4 2484C070 */  addiu     $a0, $a0, -0x3f90
+/* 16FEB0 802415D0 3C04800E */  lui       $a0, %hi(gBattleStatus)
+/* 16FEB4 802415D4 2484C070 */  addiu     $a0, $a0, %lo(gBattleStatus)
 /* 16FEB8 802415D8 2685005C */  addiu     $a1, $s4, 0x5c
 /* 16FEBC 802415DC 8C830000 */  lw        $v1, ($a0)
-/* 16FEC0 802415E0 3C028011 */  lui       $v0, 0x8011
-/* 16FEC4 802415E4 2442EF58 */  addiu     $v0, $v0, -0x10a8
+/* 16FEC0 802415E0 3C028011 */  lui       $v0, %hi(gUIStatus)
+/* 16FEC4 802415E4 2442EF58 */  addiu     $v0, $v0, %lo(gUIStatus)
 /* 16FEC8 802415E8 A040003A */  sb        $zero, 0x3a($v0)
 /* 16FECC 802415EC 34630001 */  ori       $v1, $v1, 1
 /* 16FED0 802415F0 AC830000 */  sw        $v1, ($a0)
@@ -475,8 +475,8 @@ glabel begin_battle
 /* 1701C8 802418E8 080906A0 */  j         .L80241A80
 /* 1701CC 802418EC 24040002 */   addiu    $a0, $zero, 2
 .L802418F0:
-/* 1701D0 802418F0 3C028007 */  lui       $v0, 0x8007
-/* 1701D4 802418F4 8C42419C */  lw        $v0, 0x419c($v0)
+/* 1701D0 802418F0 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* 1701D4 802418F4 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 1701D8 802418F8 904200AA */  lbu       $v0, 0xaa($v0)
 /* 1701DC 802418FC 30420001 */  andi      $v0, $v0, 1
 /* 1701E0 80241900 14400012 */  bnez      $v0, .L8024194C
@@ -555,8 +555,8 @@ glabel begin_battle
 /* 1702F0 80241A10 0C093903 */  jal       func_8024E40C
 /* 1702F4 80241A14 24040002 */   addiu    $a0, $zero, 2
 .L80241A18:
-/* 1702F8 80241A18 3C028007 */  lui       $v0, 0x8007
-/* 1702FC 80241A1C 8C42419C */  lw        $v0, 0x419c($v0)
+/* 1702F8 80241A18 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* 1702FC 80241A1C 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 170300 80241A20 904200AA */  lbu       $v0, 0xaa($v0)
 /* 170304 80241A24 30420001 */  andi      $v0, $v0, 1
 /* 170308 80241A28 14400004 */  bnez      $v0, .L80241A3C

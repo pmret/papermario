@@ -20,8 +20,8 @@ glabel UseExitHeading
 /* F6B58 802D21A8 8E70000C */  lw        $s0, 0xc($s3)
 /* F6B5C 802D21AC 0C016AFA */  jal       get_current_map_header
 /* F6B60 802D21B0 26750098 */   addiu    $s5, $s3, 0x98
-/* F6B64 802D21B4 3C128011 */  lui       $s2, 0x8011
-/* F6B68 802D21B8 2652EFC8 */  addiu     $s2, $s2, -0x1038
+/* F6B64 802D21B4 3C128011 */  lui       $s2, %hi(gPlayerStatus)
+/* F6B68 802D21B8 2652EFC8 */  addiu     $s2, $s2, %lo(gPlayerStatus)
 /* F6B6C 802D21BC 0C0389B1 */  jal       func_800E26C4
 /* F6B70 802D21C0 0040A02D */   daddu    $s4, $v0, $zero
 /* F6B74 802D21C4 1040007D */  beqz      $v0, .L802D23BC
@@ -109,8 +109,8 @@ glabel UseExitHeading
 /* F6CB4 802D2304 00000000 */  nop       
 /* F6CB8 802D2308 46041102 */  mul.s     $f4, $f2, $f4
 /* F6CBC 802D230C 00000000 */  nop       
-/* F6CC0 802D2310 3C028007 */  lui       $v0, 0x8007
-/* F6CC4 802D2314 8C42419C */  lw        $v0, 0x419c($v0)
+/* F6CC0 802D2310 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* F6CC4 802D2314 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* F6CC8 802D2318 46082382 */  mul.s     $f14, $f4, $f8
 /* F6CCC 802D231C 00000000 */  nop       
 /* F6CD0 802D2320 E4420094 */  swc1      $f2, 0x94($v0)

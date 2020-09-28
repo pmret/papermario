@@ -6,8 +6,8 @@ glabel appendGfx_player
 /* 7A7A8 800E12F8 8463A634 */  lh        $v1, -0x59cc($v1)
 /* 7A7AC 800E12FC 27BDFEB0 */  addiu     $sp, $sp, -0x150
 /* 7A7B0 800E1300 AFB20128 */  sw        $s2, 0x128($sp)
-/* 7A7B4 800E1304 3C128011 */  lui       $s2, 0x8011
-/* 7A7B8 800E1308 2652EFC8 */  addiu     $s2, $s2, -0x1038
+/* 7A7B4 800E1304 3C128011 */  lui       $s2, %hi(gPlayerStatus)
+/* 7A7B8 800E1308 2652EFC8 */  addiu     $s2, $s2, %lo(gPlayerStatus)
 /* 7A7BC 800E130C AFBF012C */  sw        $ra, 0x12c($sp)
 /* 7A7C0 800E1310 AFB10124 */  sw        $s1, 0x124($sp)
 /* 7A7C4 800E1314 AFB00120 */  sw        $s0, 0x120($sp)

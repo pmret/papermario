@@ -6,8 +6,8 @@ glabel remove_player_buffs
 /* 195D38 80267458 AFB30024 */  sw        $s3, 0x24($sp)
 /* 195D3C 8026745C 0080982D */  daddu     $s3, $a0, $zero
 /* 195D40 80267460 AFB20020 */  sw        $s2, 0x20($sp)
-/* 195D44 80267464 3C12800E */  lui       $s2, 0x800e
-/* 195D48 80267468 2652C070 */  addiu     $s2, $s2, -0x3f90
+/* 195D44 80267464 3C12800E */  lui       $s2, %hi(gBattleStatus)
+/* 195D48 80267468 2652C070 */  addiu     $s2, $s2, %lo(gBattleStatus)
 /* 195D4C 8026746C 32620001 */  andi      $v0, $s3, 1
 /* 195D50 80267470 AFBF002C */  sw        $ra, 0x2c($sp)
 /* 195D54 80267474 AFB40028 */  sw        $s4, 0x28($sp)
@@ -196,8 +196,8 @@ glabel remove_player_buffs
 /* 196008 80267728 02621024 */  and       $v0, $s3, $v0
 /* 19600C 8026772C 10400008 */  beqz      $v0, .L80267750
 /* 196010 80267730 3C04BFFF */   lui      $a0, 0xbfff
-/* 196014 80267734 3C03800E */  lui       $v1, 0x800e
-/* 196018 80267738 2463C070 */  addiu     $v1, $v1, -0x3f90
+/* 196014 80267734 3C03800E */  lui       $v1, %hi(gBattleStatus)
+/* 196018 80267738 2463C070 */  addiu     $v1, $v1, %lo(gBattleStatus)
 /* 19601C 8026773C A2800220 */  sb        $zero, 0x220($s4)
 /* 196020 80267740 8C620000 */  lw        $v0, ($v1)
 /* 196024 80267744 3484FFFF */  ori       $a0, $a0, 0xffff

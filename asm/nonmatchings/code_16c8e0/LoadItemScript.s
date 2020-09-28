@@ -7,17 +7,17 @@ glabel LoadItemScript
 /* 1967B8 80267ED8 0080982D */  daddu     $s3, $a0, $zero
 /* 1967BC 80267EDC AFB00010 */  sw        $s0, 0x10($sp)
 /* 1967C0 80267EE0 0000802D */  daddu     $s0, $zero, $zero
-/* 1967C4 80267EE4 3C068011 */  lui       $a2, 0x8011
-/* 1967C8 80267EE8 24C6F290 */  addiu     $a2, $a2, -0xd70
+/* 1967C4 80267EE4 3C068011 */  lui       $a2, %hi(gPlayerData)
+/* 1967C8 80267EE8 24C6F290 */  addiu     $a2, $a2, %lo(gPlayerData)
 /* 1967CC 80267EEC 00C0282D */  daddu     $a1, $a2, $zero
 /* 1967D0 80267EF0 AFB10014 */  sw        $s1, 0x14($sp)
-/* 1967D4 80267EF4 3C11800E */  lui       $s1, 0x800e
-/* 1967D8 80267EF8 2631C070 */  addiu     $s1, $s1, -0x3f90
+/* 1967D4 80267EF4 3C11800E */  lui       $s1, %hi(gBattleStatus)
+/* 1967D8 80267EF8 2631C070 */  addiu     $s1, $s1, %lo(gBattleStatus)
 /* 1967DC 80267EFC AFBF0020 */  sw        $ra, 0x20($sp)
 /* 1967E0 80267F00 AFB20018 */  sw        $s2, 0x18($sp)
 /* 1967E4 80267F04 8624017A */  lh        $a0, 0x17a($s1)
-/* 1967E8 80267F08 3C038008 */  lui       $v1, 0x8008
-/* 1967EC 80267F0C 246378E0 */  addiu     $v1, $v1, 0x78e0
+/* 1967E8 80267F08 3C038008 */  lui       $v1, %hi(gItemTable)
+/* 1967EC 80267F0C 246378E0 */  addiu     $v1, $v1, %lo(gItemTable)
 /* 1967F0 80267F10 00041140 */  sll       $v0, $a0, 5
 /* 1967F4 80267F14 00439021 */  addu      $s2, $v0, $v1
 .L80267F18:

@@ -4,8 +4,8 @@
 glabel func_8011D82C
 /* B3F2C 8011D82C 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* B3F30 8011D830 AFB10014 */  sw        $s1, 0x14($sp)
-/* B3F34 8011D834 3C118015 */  lui       $s1, 0x8015
-/* B3F38 8011D838 8E3112CC */  lw        $s1, 0x12cc($s1)
+/* B3F34 8011D834 3C118015 */  lui       $s1, %hi(gCurrentModelListPtr)
+/* B3F38 8011D838 8E3112CC */  lw        $s1, %lo(gCurrentModelListPtr)($s1)
 /* B3F3C 8011D83C AFB20018 */  sw        $s2, 0x18($sp)
 /* B3F40 8011D840 0080902D */  daddu     $s2, $a0, $zero
 /* B3F44 8011D844 AFB00010 */  sw        $s0, 0x10($sp)

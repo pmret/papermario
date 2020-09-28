@@ -5,8 +5,8 @@ glabel func_801341B0
 /* CA8B0 801341B0 00042080 */  sll       $a0, $a0, 2
 /* CA8B4 801341B4 3C028015 */  lui       $v0, 0x8015
 /* CA8B8 801341B8 8C4265A0 */  lw        $v0, 0x65a0($v0)
-/* CA8BC 801341BC 3C05800A */  lui       $a1, 0x800a
-/* CA8C0 801341C0 24A5A650 */  addiu     $a1, $a1, -0x59b0
+/* CA8BC 801341BC 3C05800A */  lui       $a1, %hi(D_8009A650)
+/* CA8C0 801341C0 24A5A650 */  addiu     $a1, $a1, %lo(D_8009A650)
 /* CA8C4 801341C4 00822021 */  addu      $a0, $a0, $v0
 /* CA8C8 801341C8 8C840000 */  lw        $a0, ($a0)
 /* CA8CC 801341CC 8CA20000 */  lw        $v0, ($a1)

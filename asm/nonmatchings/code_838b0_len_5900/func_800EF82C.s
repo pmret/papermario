@@ -8,8 +8,8 @@ glabel func_800EF82C
 /* 88CE8 800EF838 AFB40040 */  sw        $s4, 0x40($sp)
 /* 88CEC 800EF83C 00A0A02D */  daddu     $s4, $a1, $zero
 /* 88CF0 800EF840 AFB3003C */  sw        $s3, 0x3c($sp)
-/* 88CF4 800EF844 3C138011 */  lui       $s3, 0x8011
-/* 88CF8 800EF848 2673EFC8 */  addiu     $s3, $s3, -0x1038
+/* 88CF4 800EF844 3C138011 */  lui       $s3, %hi(gPlayerStatus)
+/* 88CF8 800EF848 2673EFC8 */  addiu     $s3, $s3, %lo(gPlayerStatus)
 /* 88CFC 800EF84C 3C058011 */  lui       $a1, 0x8011
 /* 88D00 800EF850 24A5CFCE */  addiu     $a1, $a1, -0x3032
 /* 88D04 800EF854 24020001 */  addiu     $v0, $zero, 1

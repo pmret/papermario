@@ -110,8 +110,8 @@ glabel func_80268C9C
 /* 19771C 80268E3C 3C05FFFF */  lui       $a1, 0xffff
 .L80268E40:
 /* 197720 80268E40 34A57FFF */  ori       $a1, $a1, 0x7fff
-/* 197724 80268E44 3C04800E */  lui       $a0, 0x800e
-/* 197728 80268E48 2484C070 */  addiu     $a0, $a0, -0x3f90
+/* 197724 80268E44 3C04800E */  lui       $a0, %hi(gBattleStatus)
+/* 197728 80268E48 2484C070 */  addiu     $a0, $a0, %lo(gBattleStatus)
 /* 19772C 80268E4C A600004A */  sh        $zero, 0x4a($s0)
 /* 197730 80268E50 8C820000 */  lw        $v0, ($a0)
 /* 197734 80268E54 2403DFFF */  addiu     $v1, $zero, -0x2001

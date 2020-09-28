@@ -4,11 +4,11 @@
 glabel func_800EF4E0
 /* 88990 800EF4E0 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* 88994 800EF4E4 AFB10014 */  sw        $s1, 0x14($sp)
-/* 88998 800EF4E8 3C118011 */  lui       $s1, 0x8011
-/* 8899C 800EF4EC 2631EFC8 */  addiu     $s1, $s1, -0x1038
+/* 88998 800EF4E8 3C118011 */  lui       $s1, %hi(gPlayerStatus)
+/* 8899C 800EF4EC 2631EFC8 */  addiu     $s1, $s1, %lo(gPlayerStatus)
 /* 889A0 800EF4F0 AFB00010 */  sw        $s0, 0x10($sp)
-/* 889A4 800EF4F4 3C10800B */  lui       $s0, 0x800b
-/* 889A8 800EF4F8 26101D80 */  addiu     $s0, $s0, 0x1d80
+/* 889A4 800EF4F4 3C10800B */  lui       $s0, %hi(gCameras)
+/* 889A8 800EF4F8 26101D80 */  addiu     $s0, $s0, %lo(gCameras)
 /* 889AC 800EF4FC AFBF001C */  sw        $ra, 0x1c($sp)
 /* 889B0 800EF500 AFB20018 */  sw        $s2, 0x18($sp)
 /* 889B4 800EF504 F7B40020 */  sdc1      $f20, 0x20($sp)

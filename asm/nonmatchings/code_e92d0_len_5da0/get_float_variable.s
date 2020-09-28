@@ -77,8 +77,8 @@ glabel get_float_variable
 /* ECEE0 802C8530 00031140 */  sll       $v0, $v1, 5
 /* ECEE4 802C8534 00A23023 */  subu      $a2, $a1, $v0
 /* ECEE8 802C8538 00031880 */  sll       $v1, $v1, 2
-/* ECEEC 802C853C 3C02802E */  lui       $v0, 0x802e
-/* ECEF0 802C8540 8C42A480 */  lw        $v0, -0x5b80($v0)
+/* ECEEC 802C853C 3C02802E */  lui       $v0, %hi(gMapFlags)
+/* ECEF0 802C8540 8C42A480 */  lw        $v0, %lo(gMapFlags)($v0)
 /* ECEF4 802C8544 3C013F80 */  lui       $at, 0x3f80
 /* ECEF8 802C8548 44810000 */  mtc1      $at, $f0
 /* ECEFC 802C854C 00621821 */  addu      $v1, $v1, $v0
@@ -124,8 +124,8 @@ glabel get_float_variable
 /* ECF8C 802C85DC 3C0202FA */  lui       $v0, 0x2fa
 /* ECF90 802C85E0 3442F080 */  ori       $v0, $v0, 0xf080
 /* ECF94 802C85E4 00A22821 */  addu      $a1, $a1, $v0
-/* ECF98 802C85E8 3C03802E */  lui       $v1, 0x802e
-/* ECF9C 802C85EC 8C63A484 */  lw        $v1, -0x5b7c($v1)
+/* ECF98 802C85E8 3C03802E */  lui       $v1, %hi(gMapVars)
+/* ECF9C 802C85EC 8C63A484 */  lw        $v1, %lo(gMapVars)($v1)
 /* ECFA0 802C85F0 00051080 */  sll       $v0, $a1, 2
 /* ECFA4 802C85F4 00431021 */  addu      $v0, $v0, $v1
 /* ECFA8 802C85F8 080B218B */  j         .L802C862C

@@ -24,8 +24,8 @@ glabel func_80035660
 /* 10AA8 800356A8 3C06FFFE */  lui       $a2, 0xfffe
 /* 10AAC 800356AC 34C6FFFF */  ori       $a2, $a2, 0xffff
 /* 10AB0 800356B0 0000202D */  daddu     $a0, $zero, $zero
-/* 10AB4 800356B4 3C05800A */  lui       $a1, 0x800a
-/* 10AB8 800356B8 24A5A650 */  addiu     $a1, $a1, -0x59b0
+/* 10AB4 800356B4 3C05800A */  lui       $a1, %hi(D_8009A650)
+/* 10AB8 800356B8 24A5A650 */  addiu     $a1, $a1, %lo(D_8009A650)
 /* 10ABC 800356BC 24030008 */  addiu     $v1, $zero, 8
 /* 10AC0 800356C0 8CA20000 */  lw        $v0, ($a1)
 /* 10AC4 800356C4 240703E8 */  addiu     $a3, $zero, 0x3e8
@@ -36,8 +36,8 @@ glabel func_80035660
 /* 10AD8 800356D8 0C052A46 */  jal       set_music_track
 /* 10ADC 800356DC 0080302D */   daddu    $a2, $a0, $zero
 .L800356E0:
-/* 10AE0 800356E0 3C02800A */  lui       $v0, 0x800a
-/* 10AE4 800356E4 2442A650 */  addiu     $v0, $v0, -0x59b0
+/* 10AE0 800356E0 3C02800A */  lui       $v0, %hi(D_8009A650)
+/* 10AE4 800356E4 2442A650 */  addiu     $v0, $v0, %lo(D_8009A650)
 /* 10AE8 800356E8 8C430000 */  lw        $v1, ($v0)
 /* 10AEC 800356EC 2404FFBF */  addiu     $a0, $zero, -0x41
 /* 10AF0 800356F0 00641824 */  and       $v1, $v1, $a0

@@ -273,8 +273,8 @@ glabel pause_map_draw_contents
 .L8024DF2C:
 /* 14126C 8024DF2C 3C058888 */  lui       $a1, 0x8888
 /* 141270 8024DF30 8D030000 */  lw        $v1, ($t0)
-/* 141274 8024DF34 3C028007 */  lui       $v0, 0x8007
-/* 141278 8024DF38 8C42419C */  lw        $v0, 0x419c($v0)
+/* 141274 8024DF34 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* 141278 8024DF38 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 14127C 8024DF3C 0060302D */  daddu     $a2, $v1, $zero
 /* 141280 8024DF40 3C0FFA00 */  lui       $t7, 0xfa00
 /* 141284 8024DF44 ACCF0000 */  sw        $t7, ($a2)
@@ -449,8 +449,8 @@ glabel pause_map_draw_contents
 /* 141518 8024E1D8 24C6A66C */  addiu     $a2, $a2, -0x5994
 /* 14151C 8024E1DC 3C05AAAA */  lui       $a1, 0xaaaa
 /* 141520 8024E1E0 34A5AAAB */  ori       $a1, $a1, 0xaaab
-/* 141524 8024E1E4 3C028007 */  lui       $v0, 0x8007
-/* 141528 8024E1E8 8C42419C */  lw        $v0, 0x419c($v0)
+/* 141524 8024E1E4 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* 141528 8024E1E8 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 14152C 8024E1EC 3C148027 */  lui       $s4, 0x8027
 /* 141530 8024E1F0 26940704 */  addiu     $s4, $s4, 0x704
 /* 141534 8024E1F4 94430134 */  lhu       $v1, 0x134($v0)

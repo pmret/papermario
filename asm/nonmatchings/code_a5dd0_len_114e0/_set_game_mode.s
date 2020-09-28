@@ -3,8 +3,8 @@
 
 glabel _set_game_mode
 /* A93A8 80112CA8 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* A93AC 80112CAC 3C038015 */  lui       $v1, 0x8015
-/* A93B0 80112CB0 24631700 */  addiu     $v1, $v1, 0x1700
+/* A93AC 80112CAC 3C038015 */  lui       $v1, %hi(gMainGameState)
+/* A93B0 80112CB0 24631700 */  addiu     $v1, $v1, %lo(gMainGameState)
 /* A93B4 80112CB4 00041040 */  sll       $v0, $a0, 1
 /* A93B8 80112CB8 00441021 */  addu      $v0, $v0, $a0
 /* A93BC 80112CBC 000210C0 */  sll       $v0, $v0, 3

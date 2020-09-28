@@ -5,8 +5,8 @@ glabel setup_demo_player
 /* 4E12C 80072D2C 24030001 */  addiu     $v1, $zero, 1
 /* 4E130 80072D30 0060382D */  daddu     $a3, $v1, $zero
 /* 4E134 80072D34 24060002 */  addiu     $a2, $zero, 2
-/* 4E138 80072D38 3C058011 */  lui       $a1, 0x8011
-/* 4E13C 80072D3C 24A5F290 */  addiu     $a1, $a1, -0xd70
+/* 4E138 80072D38 3C058011 */  lui       $a1, %hi(gPlayerData)
+/* 4E13C 80072D3C 24A5F290 */  addiu     $a1, $a1, %lo(gPlayerData)
 /* 4E140 80072D40 24A40008 */  addiu     $a0, $a1, 8
 /* 4E144 80072D44 2402000F */  addiu     $v0, $zero, 0xf
 /* 4E148 80072D48 A0A20002 */  sb        $v0, 2($a1)

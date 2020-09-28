@@ -11,12 +11,12 @@ glabel func_80283A50
 /* 7E48E8 80283A68 0C016AFA */  jal       get_current_map_header
 /* 7E48EC 80283A6C AFB10014 */   sw       $s1, 0x14($sp)
 /* 7E48F0 80283A70 0000302D */  daddu     $a2, $zero, $zero
-/* 7E48F4 80283A74 3C118011 */  lui       $s1, 0x8011
-/* 7E48F8 80283A78 2631EFC8 */  addiu     $s1, $s1, -0x1038
+/* 7E48F4 80283A74 3C118011 */  lui       $s1, %hi(gPlayerStatus)
+/* 7E48F8 80283A78 2631EFC8 */  addiu     $s1, $s1, %lo(gPlayerStatus)
 /* 7E48FC 80283A7C 12000021 */  beqz      $s0, .L80283B04
 /* 7E4900 80283A80 0040282D */   daddu    $a1, $v0, $zero
-/* 7E4904 80283A84 3C048007 */  lui       $a0, 0x8007
-/* 7E4908 80283A88 8C84419C */  lw        $a0, 0x419c($a0)
+/* 7E4904 80283A84 3C048007 */  lui       $a0, %hi(gGameStatusPtr)
+/* 7E4908 80283A88 8C84419C */  lw        $a0, %lo(gGameStatusPtr)($a0)
 /* 7E490C 80283A8C 8482008E */  lh        $v0, 0x8e($a0)
 /* 7E4910 80283A90 8CA30014 */  lw        $v1, 0x14($a1)
 /* 7E4914 80283A94 00021100 */  sll       $v0, $v0, 4
@@ -71,8 +71,8 @@ glabel func_80283A50
 /* 7E49CC 80283B4C C6200028 */  lwc1      $f0, 0x28($s1)
 /* 7E49D0 80283B50 C622002C */  lwc1      $f2, 0x2c($s1)
 /* 7E49D4 80283B54 C6240030 */  lwc1      $f4, 0x30($s1)
-/* 7E49D8 80283B58 3C03800B */  lui       $v1, 0x800b
-/* 7E49DC 80283B5C 24631D80 */  addiu     $v1, $v1, 0x1d80
+/* 7E49D8 80283B58 3C03800B */  lui       $v1, %hi(gCameras)
+/* 7E49DC 80283B5C 24631D80 */  addiu     $v1, $v1, %lo(gCameras)
 /* 7E49E0 80283B60 E4600060 */  swc1      $f0, 0x60($v1)
 /* 7E49E4 80283B64 E4620064 */  swc1      $f2, 0x64($v1)
 /* 7E49E8 80283B68 E4640068 */  swc1      $f4, 0x68($v1)

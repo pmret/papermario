@@ -10,8 +10,8 @@ glabel func_802B70B4
 /* E20F78 802B70C8 8E040000 */  lw        $a0, ($s0)
 /* E20F7C 802B70CC 0C00A580 */  jal       mem_clear
 /* E20F80 802B70D0 2405002C */   addiu    $a1, $zero, 0x2c
-/* E20F84 802B70D4 3C058011 */  lui       $a1, 0x8011
-/* E20F88 802B70D8 24A5EFC8 */  addiu     $a1, $a1, -0x1038
+/* E20F84 802B70D4 3C058011 */  lui       $a1, %hi(gPlayerStatus)
+/* E20F88 802B70D8 24A5EFC8 */  addiu     $a1, $a1, %lo(gPlayerStatus)
 /* E20F8C 802B70DC 8CA400C8 */  lw        $a0, 0xc8($a1)
 /* E20F90 802B70E0 8E020000 */  lw        $v0, ($s0)
 /* E20F94 802B70E4 AC440000 */  sw        $a0, ($v0)
@@ -49,8 +49,8 @@ glabel func_802B70B4
 /* E21014 802B7164 34420020 */  ori       $v0, $v0, 0x20
 /* E21018 802B7168 ACA20004 */  sw        $v0, 4($a1)
 /* E2101C 802B716C A080002A */  sb        $zero, 0x2a($a0)
-/* E21020 802B7170 3C038007 */  lui       $v1, 0x8007
-/* E21024 802B7174 8C637410 */  lw        $v1, 0x7410($v1)
+/* E21020 802B7170 3C038007 */  lui       $v1, %hi(gCurrentCameraID)
+/* E21024 802B7174 8C637410 */  lw        $v1, %lo(gCurrentCameraID)($v1)
 /* E21028 802B7178 E4800014 */  swc1      $f0, 0x14($a0)
 /* E2102C 802B717C 00031080 */  sll       $v0, $v1, 2
 /* E21030 802B7180 00431021 */  addu      $v0, $v0, $v1

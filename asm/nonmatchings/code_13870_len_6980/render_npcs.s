@@ -21,8 +21,8 @@ glabel render_npcs
 /* 15C30 8003A830 4481B000 */  mtc1      $at, $f22
 /* 15C34 8003A834 3C03800A */  lui       $v1, 0x800a
 /* 15C38 8003A838 8463A634 */  lh        $v1, -0x59cc($v1)
-/* 15C3C 8003A83C 3C04800B */  lui       $a0, 0x800b
-/* 15C40 8003A840 24841D80 */  addiu     $a0, $a0, 0x1d80
+/* 15C3C 8003A83C 3C04800B */  lui       $a0, %hi(gCameras)
+/* 15C40 8003A840 24841D80 */  addiu     $a0, $a0, %lo(gCameras)
 /* 15C44 8003A844 AFBF0064 */  sw        $ra, 0x64($sp)
 /* 15C48 8003A848 AFB40060 */  sw        $s4, 0x60($sp)
 /* 15C4C 8003A84C AFB00050 */  sw        $s0, 0x50($sp)
@@ -36,8 +36,8 @@ glabel render_npcs
 /* 15C6C 8003A86C 000210C0 */  sll       $v0, $v0, 3
 /* 15C70 8003A870 0044A021 */  addu      $s4, $v0, $a0
 .L8003A874:
-/* 15C74 8003A874 3C03800A */  lui       $v1, 0x800a
-/* 15C78 8003A878 8C630B90 */  lw        $v1, 0xb90($v1)
+/* 15C74 8003A874 3C03800A */  lui       $v1, %hi(gCurrentNpcListPtr)
+/* 15C78 8003A878 8C630B90 */  lw        $v1, %lo(gCurrentNpcListPtr)($v1)
 /* 15C7C 8003A87C 00121080 */  sll       $v0, $s2, 2
 /* 15C80 8003A880 00431021 */  addu      $v0, $v0, $v1
 /* 15C84 8003A884 8C500000 */  lw        $s0, ($v0)

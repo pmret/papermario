@@ -3,8 +3,8 @@
 
 glabel func_8002E754
 /* 9B54 8002E754 00A0402D */  daddu     $t0, $a1, $zero
-/* 9B58 8002E758 3C05800B */  lui       $a1, 0x800b
-/* 9B5C 8002E75C 24A51D80 */  addiu     $a1, $a1, 0x1d80
+/* 9B58 8002E758 3C05800B */  lui       $a1, %hi(gCameras)
+/* 9B5C 8002E75C 24A51D80 */  addiu     $a1, $a1, %lo(gCameras)
 /* 9B60 8002E760 00041080 */  sll       $v0, $a0, 2
 /* 9B64 8002E764 00441021 */  addu      $v0, $v0, $a0
 /* 9B68 8002E768 00021080 */  sll       $v0, $v0, 2

@@ -2,15 +2,15 @@
 .set noreorder # don't insert nops after branches
 
 glabel func_802C3EE4
-/* E8894 802C3EE4 3C02802E */  lui       $v0, 0x802e
-/* E8898 802C3EE8 8C42AC98 */  lw        $v0, -0x5368($v0)
+/* E8894 802C3EE4 3C02802E */  lui       $v0, %hi(gScriptListCount)
+/* E8898 802C3EE8 8C42AC98 */  lw        $v0, %lo(gScriptListCount)($v0)
 /* E889C 802C3EEC 18400011 */  blez      $v0, .L802C3F34
 /* E88A0 802C3EF0 0000202D */   daddu    $a0, $zero, $zero
-/* E88A4 802C3EF4 3C08802E */  lui       $t0, 0x802e
-/* E88A8 802C3EF8 8D08A890 */  lw        $t0, -0x5770($t0)
+/* E88A4 802C3EF4 3C08802E */  lui       $t0, %hi(gCurrentScriptListPtr)
+/* E88A8 802C3EF8 8D08A890 */  lw        $t0, %lo(gCurrentScriptListPtr)($t0)
 /* E88AC 802C3EFC 0040382D */  daddu     $a3, $v0, $zero
-/* E88B0 802C3F00 3C06802E */  lui       $a2, 0x802e
-/* E88B4 802C3F04 24C6AA98 */  addiu     $a2, $a2, -0x5568
+/* E88B0 802C3F00 3C06802E */  lui       $a2, %hi(gScriptIndexList)
+/* E88B4 802C3F04 24C6AA98 */  addiu     $a2, $a2, %lo(gScriptIndexList)
 /* E88B8 802C3F08 3C05802E */  lui       $a1, 0x802e
 /* E88BC 802C3F0C 24A5A898 */  addiu     $a1, $a1, -0x5768
 .L802C3F10:

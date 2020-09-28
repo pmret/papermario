@@ -3,8 +3,8 @@
 
 glabel init_demo_data
 /* 13480 80038080 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* 13484 80038084 3C048007 */  lui       $a0, 0x8007
-/* 13488 80038088 2484419C */  addiu     $a0, $a0, 0x419c
+/* 13484 80038084 3C048007 */  lui       $a0, %hi(gGameStatusPtr)
+/* 13488 80038088 2484419C */  addiu     $a0, $a0, %lo(gGameStatusPtr)
 /* 1348C 8003808C AFBF0010 */  sw        $ra, 0x10($sp)
 /* 13490 80038090 8C830000 */  lw        $v1, ($a0)
 /* 13494 80038094 80620071 */  lb        $v0, 0x71($v1)

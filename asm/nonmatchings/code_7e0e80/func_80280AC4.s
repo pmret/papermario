@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel func_80280AC4
-/* 7E1944 80280AC4 3C028007 */  lui       $v0, 0x8007
-/* 7E1948 80280AC8 8C42419C */  lw        $v0, 0x419c($v0)
+/* 7E1944 80280AC4 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* 7E1948 80280AC8 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 7E194C 80280ACC 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 7E1950 80280AD0 AFBF001C */  sw        $ra, 0x1c($sp)
 /* 7E1954 80280AD4 AFB20018 */  sw        $s2, 0x18($sp)

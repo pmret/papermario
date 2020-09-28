@@ -22,8 +22,8 @@ glabel func_800DE46C
 /* 77960 800DE4B0 3C014334 */  lui       $at, 0x4334
 /* 77964 800DE4B4 44812000 */  mtc1      $at, $f4
 .L800DE4B8:
-/* 77968 800DE4B8 3C038007 */  lui       $v1, 0x8007
-/* 7796C 800DE4BC 8C637410 */  lw        $v1, 0x7410($v1)
+/* 77968 800DE4B8 3C038007 */  lui       $v1, %hi(gCurrentCameraID)
+/* 7796C 800DE4BC 8C637410 */  lw        $v1, %lo(gCurrentCameraID)($v1)
 /* 77970 800DE4C0 3C0142B4 */  lui       $at, 0x42b4
 /* 77974 800DE4C4 44816000 */  mtc1      $at, $f12
 /* 77978 800DE4C8 00031080 */  sll       $v0, $v1, 2

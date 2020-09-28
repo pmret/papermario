@@ -7,8 +7,8 @@ glabel func_80143C48
 /* DA350 80143C50 0080F02D */  daddu     $fp, $a0, $zero
 /* DA354 80143C54 AFB10024 */  sw        $s1, 0x24($sp)
 /* DA358 80143C58 00C0882D */  daddu     $s1, $a2, $zero
-/* DA35C 80143C5C 3C02800B */  lui       $v0, 0x800b
-/* DA360 80143C60 24421D80 */  addiu     $v0, $v0, 0x1d80
+/* DA35C 80143C5C 3C02800B */  lui       $v0, %hi(gCameras)
+/* DA360 80143C60 24421D80 */  addiu     $v0, $v0, %lo(gCameras)
 /* DA364 80143C64 00111880 */  sll       $v1, $s1, 2
 /* DA368 80143C68 00711821 */  addu      $v1, $v1, $s1
 /* DA36C 80143C6C 00031880 */  sll       $v1, $v1, 2

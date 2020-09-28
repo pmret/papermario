@@ -3,10 +3,10 @@
 
 glabel func_80244D90
 /* 173670 80244D90 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* 173674 80244D94 3C038007 */  lui       $v1, 0x8007
-/* 173678 80244D98 8C637410 */  lw        $v1, 0x7410($v1)
-/* 17367C 80244D9C 3C04800B */  lui       $a0, 0x800b
-/* 173680 80244DA0 24841D80 */  addiu     $a0, $a0, 0x1d80
+/* 173674 80244D94 3C038007 */  lui       $v1, %hi(gCurrentCameraID)
+/* 173678 80244D98 8C637410 */  lw        $v1, %lo(gCurrentCameraID)($v1)
+/* 17367C 80244D9C 3C04800B */  lui       $a0, %hi(gCameras)
+/* 173680 80244DA0 24841D80 */  addiu     $a0, $a0, %lo(gCameras)
 /* 173684 80244DA4 AFBF0010 */  sw        $ra, 0x10($sp)
 /* 173688 80244DA8 00031080 */  sll       $v0, $v1, 2
 /* 17368C 80244DAC 00431021 */  addu      $v0, $v0, $v1
@@ -21,8 +21,8 @@ glabel func_80244D90
 /* 1736B0 80244DD0 24020001 */  addiu     $v0, $zero, 1
 /* 1736B4 80244DD4 1462000E */  bne       $v1, $v0, .L80244E10
 /* 1736B8 80244DD8 3C030080 */   lui      $v1, 0x80
-/* 1736BC 80244DDC 3C02800E */  lui       $v0, 0x800e
-/* 1736C0 80244DE0 8C42C070 */  lw        $v0, -0x3f90($v0)
+/* 1736BC 80244DDC 3C02800E */  lui       $v0, %hi(gBattleStatus)
+/* 1736C0 80244DE0 8C42C070 */  lw        $v0, %lo(gBattleStatus)($v0)
 /* 1736C4 80244DE4 00431024 */  and       $v0, $v0, $v1
 /* 1736C8 80244DE8 14400009 */  bnez      $v0, .L80244E10
 /* 1736CC 80244DEC 24040007 */   addiu    $a0, $zero, 7

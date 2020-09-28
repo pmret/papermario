@@ -2,10 +2,10 @@
 .set noreorder # don't insert nops after branches
 
 glabel make_npcs
-/* 19A78 8003E678 3C028007 */  lui       $v0, 0x8007
-/* 19A7C 8003E67C 8C42419C */  lw        $v0, 0x419c($v0)
-/* 19A80 8003E680 3C08800B */  lui       $t0, 0x800b
-/* 19A84 8003E684 25080F10 */  addiu     $t0, $t0, 0xf10
+/* 19A78 8003E678 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* 19A7C 8003E67C 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
+/* 19A80 8003E680 3C08800B */  lui       $t0, %hi(gCurrentEncounter)
+/* 19A84 8003E684 25080F10 */  addiu     $t0, $t0, %lo(gCurrentEncounter)
 /* 19A88 8003E688 A1040021 */  sb        $a0, 0x21($t0)
 /* 19A8C 8003E68C A1050020 */  sb        $a1, 0x20($t0)
 /* 19A90 8003E690 AD060024 */  sw        $a2, 0x24($t0)
@@ -28,8 +28,8 @@ glabel make_npcs
 /* 19ACC 8003E6CC 28A2003C */  slti      $v0, $a1, 0x3c
 /* 19AD0 8003E6D0 1440FFF5 */  bnez      $v0, .L8003E6A8
 /* 19AD4 8003E6D4 24E70030 */   addiu    $a3, $a3, 0x30
-/* 19AD8 8003E6D8 3C028007 */  lui       $v0, 0x8007
-/* 19ADC 8003E6DC 8C42419C */  lw        $v0, 0x419c($v0)
+/* 19AD8 8003E6D8 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* 19ADC 8003E6DC 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 19AE0 8003E6E0 8442008A */  lh        $v0, 0x8a($v0)
 /* 19AE4 8003E6E4 10400008 */  beqz      $v0, .L8003E708
 /* 19AE8 8003E6E8 00000000 */   nop      
@@ -44,8 +44,8 @@ glabel make_npcs
 .L8003E708:
 /* 19B08 8003E708 10C00007 */  beqz      $a2, .L8003E728
 /* 19B0C 8003E70C 24020001 */   addiu    $v0, $zero, 1
-/* 19B10 8003E710 3C01800A */  lui       $at, 0x800a
-/* 19B14 8003E714 AC22A600 */  sw        $v0, -0x5a00($at)
+/* 19B10 8003E710 3C01800A */  lui       $at, %hi(gGameState)
+/* 19B14 8003E714 AC22A600 */  sw        $v0, %lo(gGameState)($at)
 /* 19B18 8003E718 3C01800A */  lui       $at, 0x800a
 /* 19B1C 8003E71C AC22A678 */  sw        $v0, -0x5988($at)
 /* 19B20 8003E720 3C01800A */  lui       $at, 0x800a

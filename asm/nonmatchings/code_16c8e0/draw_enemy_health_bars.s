@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel draw_enemy_health_bars
-/* 16E880 8023FFA0 3C028007 */  lui       $v0, 0x8007
-/* 16E884 8023FFA4 8C42419C */  lw        $v0, 0x419c($v0)
+/* 16E880 8023FFA0 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* 16E884 8023FFA4 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 16E888 8023FFA8 27BDFFA8 */  addiu     $sp, $sp, -0x58
 /* 16E88C 8023FFAC AFBF0054 */  sw        $ra, 0x54($sp)
 /* 16E890 8023FFB0 AFBE0050 */  sw        $fp, 0x50($sp)
@@ -18,8 +18,8 @@ glabel draw_enemy_health_bars
 /* 16E8B4 8023FFD4 8042007C */  lb        $v0, 0x7c($v0)
 /* 16E8B8 8023FFD8 104000EC */  beqz      $v0, .L8024038C
 /* 16E8BC 8023FFDC 00000000 */   nop      
-/* 16E8C0 8023FFE0 3C02800E */  lui       $v0, 0x800e
-/* 16E8C4 8023FFE4 8C42C070 */  lw        $v0, -0x3f90($v0)
+/* 16E8C0 8023FFE0 3C02800E */  lui       $v0, %hi(gBattleStatus)
+/* 16E8C4 8023FFE4 8C42C070 */  lw        $v0, %lo(gBattleStatus)($v0)
 /* 16E8C8 8023FFE8 30420001 */  andi      $v0, $v0, 1
 /* 16E8CC 8023FFEC 104000E7 */  beqz      $v0, .L8024038C
 /* 16E8D0 8023FFF0 0000B82D */   daddu    $s7, $zero, $zero
@@ -28,8 +28,8 @@ glabel draw_enemy_health_bars
 /* 16E8DC 8023FFFC 241E0008 */  addiu     $fp, $zero, 8
 /* 16E8E0 80240000 00171080 */  sll       $v0, $s7, 2
 .L80240004:
-/* 16E8E4 80240004 3C08800E */  lui       $t0, 0x800e
-/* 16E8E8 80240008 2508C070 */  addiu     $t0, $t0, -0x3f90
+/* 16E8E4 80240004 3C08800E */  lui       $t0, %hi(gBattleStatus)
+/* 16E8E8 80240008 2508C070 */  addiu     $t0, $t0, %lo(gBattleStatus)
 /* 16E8EC 8024000C 01021021 */  addu      $v0, $t0, $v0
 /* 16E8F0 80240010 8C5300E0 */  lw        $s3, 0xe0($v0)
 /* 16E8F4 80240014 526000DA */  beql      $s3, $zero, .L80240380
@@ -84,8 +84,8 @@ glabel draw_enemy_health_bars
 /* 16E9A4 802400C4 00621024 */  and       $v0, $v1, $v0
 /* 16E9A8 802400C8 544000AD */  bnel      $v0, $zero, .L80240380
 /* 16E9AC 802400CC 26F70001 */   addiu    $s7, $s7, 1
-/* 16E9B0 802400D0 3C02800E */  lui       $v0, 0x800e
-/* 16E9B4 802400D4 8C42C070 */  lw        $v0, -0x3f90($v0)
+/* 16E9B0 802400D0 3C02800E */  lui       $v0, %hi(gBattleStatus)
+/* 16E9B4 802400D4 8C42C070 */  lw        $v0, %lo(gBattleStatus)($v0)
 /* 16E9B8 802400D8 30420002 */  andi      $v0, $v0, 2
 /* 16E9BC 802400DC 14400004 */  bnez      $v0, .L802400F0
 /* 16E9C0 802400E0 3C020008 */   lui      $v0, 8

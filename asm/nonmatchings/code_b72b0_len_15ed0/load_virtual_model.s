@@ -60,8 +60,8 @@ glabel load_virtual_model
 /* B74A4 80120DA4 ACC20010 */  sw        $v0, 0x10($a2)
 .L80120DA8:
 /* B74A8 80120DA8 8CC20010 */  lw        $v0, 0x10($a2)
-/* B74AC 80120DAC 3C038007 */  lui       $v1, 0x8007
-/* B74B0 80120DB0 8C63419C */  lw        $v1, 0x419c($v1)
+/* B74AC 80120DAC 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
+/* B74B0 80120DB0 8C63419C */  lw        $v1, %lo(gGameStatusPtr)($v1)
 /* B74B4 80120DB4 ACC0005C */  sw        $zero, 0x5c($a2)
 /* B74B8 80120DB8 ACC00060 */  sw        $zero, 0x60($a2)
 /* B74BC 80120DBC ACC20058 */  sw        $v0, 0x58($a2)

@@ -9,8 +9,8 @@ glabel get_coin_drop_amount
 /* 24160 80048D60 AFB10014 */  sw        $s1, 0x14($sp)
 /* 24164 80048D64 AFB00010 */  sw        $s0, 0x10($sp)
 /* 24168 80048D68 8E4200D4 */  lw        $v0, 0xd4($s2)
-/* 2416C 80048D6C 3C11800B */  lui       $s1, 0x800b
-/* 24170 80048D70 26310F10 */  addiu     $s1, $s1, 0xf10
+/* 2416C 80048D6C 3C11800B */  lui       $s1, %hi(gCurrentEncounter)
+/* 24170 80048D70 26310F10 */  addiu     $s1, $s1, %lo(gCurrentEncounter)
 /* 24174 80048D74 845000B2 */  lh        $s0, 0xb2($v0)
 /* 24178 80048D78 844300B4 */  lh        $v1, 0xb4($v0)
 /* 2417C 80048D7C 0070102A */  slt       $v0, $v1, $s0

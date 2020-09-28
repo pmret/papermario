@@ -4,14 +4,14 @@
 glabel func_80041F10
 /* 1D310 80041F10 27BDFFC8 */  addiu     $sp, $sp, -0x38
 /* 1D314 80041F14 AFB60028 */  sw        $s6, 0x28($sp)
-/* 1D318 80041F18 3C16800B */  lui       $s6, 0x800b
-/* 1D31C 80041F1C 26D60F10 */  addiu     $s6, $s6, 0xf10
+/* 1D318 80041F18 3C16800B */  lui       $s6, %hi(gCurrentEncounter)
+/* 1D31C 80041F1C 26D60F10 */  addiu     $s6, $s6, %lo(gCurrentEncounter)
 /* 1D320 80041F20 AFB7002C */  sw        $s7, 0x2c($sp)
-/* 1D324 80041F24 3C178011 */  lui       $s7, 0x8011
-/* 1D328 80041F28 26F7EFC8 */  addiu     $s7, $s7, -0x1038
+/* 1D324 80041F24 3C178011 */  lui       $s7, %hi(gPlayerStatus)
+/* 1D328 80041F28 26F7EFC8 */  addiu     $s7, $s7, %lo(gPlayerStatus)
 /* 1D32C 80041F2C AFB00010 */  sw        $s0, 0x10($sp)
-/* 1D330 80041F30 3C108011 */  lui       $s0, 0x8011
-/* 1D334 80041F34 2610F290 */  addiu     $s0, $s0, -0xd70
+/* 1D330 80041F30 3C108011 */  lui       $s0, %hi(gPlayerData)
+/* 1D334 80041F34 2610F290 */  addiu     $s0, $s0, %lo(gPlayerData)
 /* 1D338 80041F38 3C04800A */  lui       $a0, 0x800a
 /* 1D33C 80041F3C 2484A5D0 */  addiu     $a0, $a0, -0x5a30
 /* 1D340 80041F40 AFBF0034 */  sw        $ra, 0x34($sp)
@@ -142,8 +142,8 @@ glabel func_80041F10
 /* 1D510 80042110 0C03ADB1 */  jal       partner_handle_after_battle
 /* 1D514 80042114 00000000 */   nop      
 .L80042118:
-/* 1D518 80042118 3C028011 */  lui       $v0, 0x8011
-/* 1D51C 8004211C 2442EBB0 */  addiu     $v0, $v0, -0x1450
+/* 1D518 80042118 3C028011 */  lui       $v0, %hi(D_8010EBB0)
+/* 1D51C 8004211C 2442EBB0 */  addiu     $v0, $v0, %lo(D_8010EBB0)
 /* 1D520 80042120 80420001 */  lb        $v0, 1($v0)
 /* 1D524 80042124 3C03800A */  lui       $v1, 0x800a
 /* 1D528 80042128 2463A63C */  addiu     $v1, $v1, -0x59c4
@@ -458,8 +458,8 @@ glabel func_80041F10
 /* 1D988 80042588 30420002 */  andi      $v0, $v0, 2
 /* 1D98C 8004258C 14400009 */  bnez      $v0, .L800425B4
 /* 1D990 80042590 00000000 */   nop      
-/* 1D994 80042594 3C038007 */  lui       $v1, 0x8007
-/* 1D998 80042598 8C63419C */  lw        $v1, 0x419c($v1)
+/* 1D994 80042594 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
+/* 1D998 80042598 8C63419C */  lw        $v1, %lo(gGameStatusPtr)($v1)
 /* 1D99C 8004259C 80620040 */  lb        $v0, 0x40($v1)
 /* 1D9A0 800425A0 54400004 */  bnel      $v0, $zero, .L800425B4
 /* 1D9A4 800425A4 AEC00094 */   sw       $zero, 0x94($s6)
@@ -739,8 +739,8 @@ glabel func_80041F10
 /* 1DD74 80042974 8EC20094 */  lw        $v0, 0x94($s6)
 /* 1DD78 80042978 1040000D */  beqz      $v0, .L800429B0
 /* 1DD7C 8004297C 2442FFFF */   addiu    $v0, $v0, -1
-/* 1DD80 80042980 3C038007 */  lui       $v1, 0x8007
-/* 1DD84 80042984 8C63419C */  lw        $v1, 0x419c($v1)
+/* 1DD80 80042980 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
+/* 1DD84 80042984 8C63419C */  lw        $v1, %lo(gGameStatusPtr)($v1)
 /* 1DD88 80042988 AEC20094 */  sw        $v0, 0x94($s6)
 /* 1DD8C 8004298C 8C620000 */  lw        $v0, ($v1)
 /* 1DD90 80042990 14400007 */  bnez      $v0, .L800429B0
@@ -908,8 +908,8 @@ glabel func_80041F10
 /* 1DFD0 80042BD0 8EC20094 */  lw        $v0, 0x94($s6)
 /* 1DFD4 80042BD4 104000D3 */  beqz      $v0, .L80042F24
 /* 1DFD8 80042BD8 2442FFFF */   addiu    $v0, $v0, -1
-/* 1DFDC 80042BDC 3C038007 */  lui       $v1, 0x8007
-/* 1DFE0 80042BE0 8C63419C */  lw        $v1, 0x419c($v1)
+/* 1DFDC 80042BDC 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
+/* 1DFE0 80042BE0 8C63419C */  lw        $v1, %lo(gGameStatusPtr)($v1)
 /* 1DFE4 80042BE4 AEC20094 */  sw        $v0, 0x94($s6)
 /* 1DFE8 80042BE8 8C620000 */  lw        $v0, ($v1)
 /* 1DFEC 80042BEC 144000CD */  bnez      $v0, .L80042F24
@@ -1151,8 +1151,8 @@ glabel func_80041F10
 /* 1E324 80042F24 0C0B1192 */  jal       resume_all_group
 /* 1E328 80042F28 24040010 */   addiu    $a0, $zero, 0x10
 /* 1E32C 80042F2C 24020002 */  addiu     $v0, $zero, 2
-/* 1E330 80042F30 3C01800A */  lui       $at, 0x800a
-/* 1E334 80042F34 AC22A600 */  sw        $v0, -0x5a00($at)
+/* 1E330 80042F30 3C01800A */  lui       $at, %hi(gGameState)
+/* 1E334 80042F34 AC22A600 */  sw        $v0, %lo(gGameState)($at)
 /* 1E338 80042F38 24020001 */  addiu     $v0, $zero, 1
 /* 1E33C 80042F3C 3C01800A */  lui       $at, 0x800a
 /* 1E340 80042F40 AC22A678 */  sw        $v0, -0x5988($at)

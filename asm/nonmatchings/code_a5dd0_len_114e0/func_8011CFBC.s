@@ -3,15 +3,15 @@
 
 glabel func_8011CFBC
 /* B36BC 8011CFBC 44860000 */  mtc1      $a2, $f0
-/* B36C0 8011CFC0 3C038007 */  lui       $v1, 0x8007
-/* B36C4 8011CFC4 8C637410 */  lw        $v1, 0x7410($v1)
+/* B36C0 8011CFC0 3C038007 */  lui       $v1, %hi(gCurrentCameraID)
+/* B36C4 8011CFC4 8C637410 */  lw        $v1, %lo(gCurrentCameraID)($v1)
 /* B36C8 8011CFC8 27BDFF88 */  addiu     $sp, $sp, -0x78
 /* B36CC 8011CFCC AFB00040 */  sw        $s0, 0x40($sp)
 /* B36D0 8011CFD0 8FB00088 */  lw        $s0, 0x88($sp)
 /* B36D4 8011CFD4 AFB10044 */  sw        $s1, 0x44($sp)
 /* B36D8 8011CFD8 8FB1008C */  lw        $s1, 0x8c($sp)
-/* B36DC 8011CFDC 3C04800B */  lui       $a0, 0x800b
-/* B36E0 8011CFE0 24841D80 */  addiu     $a0, $a0, 0x1d80
+/* B36DC 8011CFDC 3C04800B */  lui       $a0, %hi(gCameras)
+/* B36E0 8011CFE0 24841D80 */  addiu     $a0, $a0, %lo(gCameras)
 /* B36E4 8011CFE4 AFBF0064 */  sw        $ra, 0x64($sp)
 /* B36E8 8011CFE8 AFBE0060 */  sw        $fp, 0x60($sp)
 /* B36EC 8011CFEC AFB7005C */  sw        $s7, 0x5c($sp)

@@ -8,8 +8,8 @@ glabel func_802E1614
 /* 102EA0 802E1620 30420001 */  andi      $v0, $v0, 1
 /* 102EA4 802E1624 1040000B */  beqz      $v0, .L802E1654
 /* 102EA8 802E1628 00000000 */   nop      
-/* 102EAC 802E162C 3C028011 */  lui       $v0, 0x8011
-/* 102EB0 802E1630 2442EFC8 */  addiu     $v0, $v0, -0x1038
+/* 102EAC 802E162C 3C028011 */  lui       $v0, %hi(gPlayerStatus)
+/* 102EB0 802E1630 2442EFC8 */  addiu     $v0, $v0, %lo(gPlayerStatus)
 /* 102EB4 802E1634 804300B4 */  lb        $v1, 0xb4($v0)
 /* 102EB8 802E1638 2402000E */  addiu     $v0, $zero, 0xe
 /* 102EBC 802E163C 10620003 */  beq       $v1, $v0, .L802E164C

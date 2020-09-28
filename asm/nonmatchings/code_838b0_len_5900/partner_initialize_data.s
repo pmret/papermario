@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel partner_initialize_data
-/* 84A30 800EB580 3C028011 */  lui       $v0, 0x8011
-/* 84A34 800EB584 2442EBB0 */  addiu     $v0, $v0, -0x1450
+/* 84A30 800EB580 3C028011 */  lui       $v0, %hi(D_8010EBB0)
+/* 84A34 800EB584 2442EBB0 */  addiu     $v0, $v0, %lo(D_8010EBB0)
 /* 84A38 800EB588 3C018011 */  lui       $at, 0x8011
 /* 84A3C 800EB58C AC20CFD8 */  sw        $zero, -0x3028($at)
 /* 84A40 800EB590 3C018011 */  lui       $at, 0x8011

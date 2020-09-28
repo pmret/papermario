@@ -19,8 +19,8 @@ glabel update_cameras
 /* 8838 8002D438 AFB40050 */  sw        $s4, 0x50($sp)
 /* 883C 8002D43C 27B40038 */  addiu     $s4, $sp, 0x38
 /* 8840 8002D440 AFB00040 */  sw        $s0, 0x40($sp)
-/* 8844 8002D444 3C10800B */  lui       $s0, 0x800b
-/* 8848 8002D448 26101D80 */  addiu     $s0, $s0, 0x1d80
+/* 8844 8002D444 3C10800B */  lui       $s0, %hi(gCameras)
+/* 8848 8002D448 26101D80 */  addiu     $s0, $s0, %lo(gCameras)
 /* 884C 8002D44C AFBF005C */  sw        $ra, 0x5c($sp)
 /* 8850 8002D450 AFB20048 */  sw        $s2, 0x48($sp)
 /* 8854 8002D454 AFB10044 */  sw        $s1, 0x44($sp)

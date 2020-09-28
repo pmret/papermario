@@ -9,8 +9,8 @@ glabel try_inflict_status
 /* 195468 80266B88 00A0A02D */  daddu     $s4, $a1, $zero
 /* 19546C 80266B8C AFB50024 */  sw        $s5, 0x24($sp)
 /* 195470 80266B90 AFB3001C */  sw        $s3, 0x1c($sp)
-/* 195474 80266B94 3C13800E */  lui       $s3, 0x800e
-/* 195478 80266B98 2673C070 */  addiu     $s3, $s3, -0x3f90
+/* 195474 80266B94 3C13800E */  lui       $s3, %hi(gBattleStatus)
+/* 195478 80266B98 2673C070 */  addiu     $s3, $s3, %lo(gBattleStatus)
 /* 19547C 80266B9C AFBF0028 */  sw        $ra, 0x28($sp)
 /* 195480 80266BA0 AFB10014 */  sw        $s1, 0x14($sp)
 /* 195484 80266BA4 AFB00010 */  sw        $s0, 0x10($sp)

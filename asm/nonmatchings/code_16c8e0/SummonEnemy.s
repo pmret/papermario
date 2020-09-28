@@ -6,8 +6,8 @@ glabel SummonEnemy
 /* 19C448 8026DB68 AFB20018 */  sw        $s2, 0x18($sp)
 /* 19C44C 8026DB6C 0080902D */  daddu     $s2, $a0, $zero
 /* 19C450 8026DB70 AFB10014 */  sw        $s1, 0x14($sp)
-/* 19C454 8026DB74 3C11800E */  lui       $s1, 0x800e
-/* 19C458 8026DB78 2631C070 */  addiu     $s1, $s1, -0x3f90
+/* 19C454 8026DB74 3C11800E */  lui       $s1, %hi(gBattleStatus)
+/* 19C458 8026DB78 2631C070 */  addiu     $s1, $s1, %lo(gBattleStatus)
 /* 19C45C 8026DB7C AFBF001C */  sw        $ra, 0x1c($sp)
 /* 19C460 8026DB80 AFB00010 */  sw        $s0, 0x10($sp)
 /* 19C464 8026DB84 8E50000C */  lw        $s0, 0xc($s2)

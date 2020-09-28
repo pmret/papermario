@@ -6,8 +6,8 @@ glabel load_tattle_flags
 /* 18275C 80253E7C AFB20018 */  sw        $s2, 0x18($sp)
 /* 182760 80253E80 0080902D */  daddu     $s2, $a0, $zero
 /* 182764 80253E84 AFB50024 */  sw        $s5, 0x24($sp)
-/* 182768 80253E88 3C15800E */  lui       $s5, 0x800e
-/* 18276C 80253E8C 26B5C070 */  addiu     $s5, $s5, -0x3f90
+/* 182768 80253E88 3C15800E */  lui       $s5, %hi(gBattleStatus)
+/* 18276C 80253E8C 26B5C070 */  addiu     $s5, $s5, %lo(gBattleStatus)
 /* 182770 80253E90 240600FF */  addiu     $a2, $zero, 0xff
 /* 182774 80253E94 AFB40020 */  sw        $s4, 0x20($sp)
 /* 182778 80253E98 24140001 */  addiu     $s4, $zero, 1

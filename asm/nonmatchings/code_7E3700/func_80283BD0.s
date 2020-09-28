@@ -6,8 +6,8 @@ glabel func_80283BD0
 /* 7E4A54 80283BD4 AFB00010 */  sw        $s0, 0x10($sp)
 /* 7E4A58 80283BD8 0080802D */  daddu     $s0, $a0, $zero
 /* 7E4A5C 80283BDC AFB10014 */  sw        $s1, 0x14($sp)
-/* 7E4A60 80283BE0 3C118011 */  lui       $s1, 0x8011
-/* 7E4A64 80283BE4 2631EFC8 */  addiu     $s1, $s1, -0x1038
+/* 7E4A60 80283BE0 3C118011 */  lui       $s1, %hi(gPlayerStatus)
+/* 7E4A64 80283BE4 2631EFC8 */  addiu     $s1, $s1, %lo(gPlayerStatus)
 /* 7E4A68 80283BE8 AFBF0018 */  sw        $ra, 0x18($sp)
 /* 7E4A6C 80283BEC 10A00008 */  beqz      $a1, .L80283C10
 /* 7E4A70 80283BF0 8E02000C */   lw       $v0, 0xc($s0)

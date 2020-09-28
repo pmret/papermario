@@ -4,8 +4,8 @@
 glabel pause_badges_count_all
 /* 13A394 80247054 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 13A398 80247058 AFB00010 */  sw        $s0, 0x10($sp)
-/* 13A39C 8024705C 3C108011 */  lui       $s0, 0x8011
-/* 13A3A0 80247060 2610F290 */  addiu     $s0, $s0, -0xd70
+/* 13A39C 8024705C 3C108011 */  lui       $s0, %hi(gPlayerData)
+/* 13A3A0 80247060 2610F290 */  addiu     $s0, $s0, %lo(gPlayerData)
 /* 13A3A4 80247064 260400B4 */  addiu     $a0, $s0, 0xb4
 /* 13A3A8 80247068 3C068024 */  lui       $a2, 0x8024
 /* 13A3AC 8024706C 24C66FE0 */  addiu     $a2, $a2, 0x6fe0

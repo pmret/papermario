@@ -6,8 +6,8 @@ glabel func_8023ED5C
 /* 16D640 8023ED60 8C42C068 */  lw        $v0, -0x3f98($v0)
 /* 16D644 8023ED64 27BDFFB8 */  addiu     $sp, $sp, -0x48
 /* 16D648 8023ED68 AFB40030 */  sw        $s4, 0x30($sp)
-/* 16D64C 8023ED6C 3C14800E */  lui       $s4, 0x800e
-/* 16D650 8023ED70 2694C070 */  addiu     $s4, $s4, -0x3f90
+/* 16D64C 8023ED6C 3C14800E */  lui       $s4, %hi(gBattleStatus)
+/* 16D650 8023ED70 2694C070 */  addiu     $s4, $s4, %lo(gBattleStatus)
 /* 16D654 8023ED74 AFB00020 */  sw        $s0, 0x20($sp)
 /* 16D658 8023ED78 27B00010 */  addiu     $s0, $sp, 0x10
 /* 16D65C 8023ED7C AFBF0040 */  sw        $ra, 0x40($sp)

@@ -10,8 +10,8 @@ glabel func_8024A214
 /* 178B08 8024A228 263122D8 */  addiu     $s1, $s1, 0x22d8
 /* 178B0C 8024A22C 3C02802A */  lui       $v0, 0x802a
 /* 178B10 8024A230 9442F27C */  lhu       $v0, -0xd84($v0)
-/* 178B14 8024A234 3C04800E */  lui       $a0, 0x800e
-/* 178B18 8024A238 2484C070 */  addiu     $a0, $a0, -0x3f90
+/* 178B14 8024A234 3C04800E */  lui       $a0, %hi(gBattleStatus)
+/* 178B18 8024A238 2484C070 */  addiu     $a0, $a0, %lo(gBattleStatus)
 /* 178B1C 8024A23C AFBF002C */  sw        $ra, 0x2c($sp)
 /* 178B20 8024A240 AFB00020 */  sw        $s0, 0x20($sp)
 /* 178B24 8024A244 F7BE0058 */  sdc1      $f30, 0x58($sp)

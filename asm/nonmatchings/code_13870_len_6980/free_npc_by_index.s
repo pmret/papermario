@@ -6,8 +6,8 @@ glabel free_npc_by_index
 /* 13CA4 800388A4 2402F7FF */  addiu     $v0, $zero, -0x801
 /* 13CA8 800388A8 AFB20018 */  sw        $s2, 0x18($sp)
 /* 13CAC 800388AC 00829024 */  and       $s2, $a0, $v0
-/* 13CB0 800388B0 3C03800A */  lui       $v1, 0x800a
-/* 13CB4 800388B4 8C630B90 */  lw        $v1, 0xb90($v1)
+/* 13CB0 800388B0 3C03800A */  lui       $v1, %hi(gCurrentNpcListPtr)
+/* 13CB4 800388B4 8C630B90 */  lw        $v1, %lo(gCurrentNpcListPtr)($v1)
 /* 13CB8 800388B8 00121080 */  sll       $v0, $s2, 2
 /* 13CBC 800388BC AFBF001C */  sw        $ra, 0x1c($sp)
 /* 13CC0 800388C0 AFB10014 */  sw        $s1, 0x14($sp)
@@ -61,8 +61,8 @@ glabel free_npc_by_index
 /* 13D70 80038970 0C00EB6B */  jal       disable_npc_blur
 /* 13D74 80038974 0200202D */   daddu    $a0, $s0, $zero
 .L80038978:
-/* 13D78 80038978 3C11800A */  lui       $s1, 0x800a
-/* 13D7C 8003897C 26310B90 */  addiu     $s1, $s1, 0xb90
+/* 13D78 80038978 3C11800A */  lui       $s1, %hi(gCurrentNpcListPtr)
+/* 13D7C 8003897C 26310B90 */  addiu     $s1, $s1, %lo(gCurrentNpcListPtr)
 /* 13D80 80038980 8E220000 */  lw        $v0, ($s1)
 /* 13D84 80038984 00128080 */  sll       $s0, $s2, 2
 /* 13D88 80038988 02021021 */  addu      $v0, $s0, $v0

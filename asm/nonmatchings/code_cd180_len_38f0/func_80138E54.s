@@ -6,13 +6,13 @@ glabel func_80138E54
 /* CF558 80138E58 F7B80068 */  sdc1      $f24, 0x68($sp)
 /* CF55C 80138E5C 4487C000 */  mtc1      $a3, $f24
 /* CF560 80138E60 44800000 */  mtc1      $zero, $f0
-/* CF564 80138E64 3C038007 */  lui       $v1, 0x8007
-/* CF568 80138E68 8C637410 */  lw        $v1, 0x7410($v1)
+/* CF564 80138E64 3C038007 */  lui       $v1, %hi(gCurrentCameraID)
+/* CF568 80138E68 8C637410 */  lw        $v1, %lo(gCurrentCameraID)($v1)
 /* CF56C 80138E6C F7BE0080 */  sdc1      $f30, 0x80($sp)
 /* CF570 80138E70 C7BE0098 */  lwc1      $f30, 0x98($sp)
 /* CF574 80138E74 AFA40088 */  sw        $a0, 0x88($sp)
-/* CF578 80138E78 3C04800B */  lui       $a0, 0x800b
-/* CF57C 80138E7C 24841D80 */  addiu     $a0, $a0, 0x1d80
+/* CF578 80138E78 3C04800B */  lui       $a0, %hi(gCameras)
+/* CF57C 80138E7C 24841D80 */  addiu     $a0, $a0, %lo(gCameras)
 /* CF580 80138E80 AFBF0054 */  sw        $ra, 0x54($sp)
 /* CF584 80138E84 AFBE0050 */  sw        $fp, 0x50($sp)
 /* CF588 80138E88 AFB7004C */  sw        $s7, 0x4c($sp)
@@ -277,8 +277,8 @@ glabel func_80138E54
 .L8013928C:
 /* CF98C 8013928C 1660000C */  bnez      $s3, .L801392C0
 /* CF990 80139290 241000FF */   addiu    $s0, $zero, 0xff
-/* CF994 80139294 3C028007 */  lui       $v0, 0x8007
-/* CF998 80139298 8C42419C */  lw        $v0, 0x419c($v0)
+/* CF994 80139294 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* CF998 80139298 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* CF99C 8013929C 94420134 */  lhu       $v0, 0x134($v0)
 /* CF9A0 801392A0 44826000 */  mtc1      $v0, $f12
 /* CF9A4 801392A4 00000000 */  nop       
@@ -289,8 +289,8 @@ glabel func_80138E54
 /* CF9B8 801392B8 0804E4BC */  j         .L801392F0
 /* CF9BC 801392BC 46000021 */   cvt.d.s  $f0, $f0
 .L801392C0:
-/* CF9C0 801392C0 3C028007 */  lui       $v0, 0x8007
-/* CF9C4 801392C4 8C42419C */  lw        $v0, 0x419c($v0)
+/* CF9C0 801392C0 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* CF9C4 801392C4 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* CF9C8 801392C8 94420134 */  lhu       $v0, 0x134($v0)
 /* CF9CC 801392CC 00021040 */  sll       $v0, $v0, 1
 /* CF9D0 801392D0 00571021 */  addu      $v0, $v0, $s7

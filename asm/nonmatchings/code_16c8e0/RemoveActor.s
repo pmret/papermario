@@ -13,10 +13,10 @@ glabel RemoveActor
 /* 1AB0B0 8027C7D0 0C0B1EAF */  jal       get_variable
 /* 1AB0B4 8027C7D4 8C450000 */   lw       $a1, ($v0)
 /* 1AB0B8 8027C7D8 0040882D */  daddu     $s1, $v0, $zero
-/* 1AB0BC 8027C7DC 3C12800E */  lui       $s2, 0x800e
-/* 1AB0C0 8027C7E0 2652C070 */  addiu     $s2, $s2, -0x3f90
-/* 1AB0C4 8027C7E4 3C13800B */  lui       $s3, 0x800b
-/* 1AB0C8 8027C7E8 26730F10 */  addiu     $s3, $s3, 0xf10
+/* 1AB0BC 8027C7DC 3C12800E */  lui       $s2, %hi(gBattleStatus)
+/* 1AB0C0 8027C7E0 2652C070 */  addiu     $s2, $s2, %lo(gBattleStatus)
+/* 1AB0C4 8027C7E4 3C13800B */  lui       $s3, %hi(gCurrentEncounter)
+/* 1AB0C8 8027C7E8 26730F10 */  addiu     $s3, $s3, %lo(gCurrentEncounter)
 /* 1AB0CC 8027C7EC 2402FF81 */  addiu     $v0, $zero, -0x7f
 /* 1AB0D0 8027C7F0 16220002 */  bne       $s1, $v0, .L8027C7FC
 /* 1AB0D4 8027C7F4 00000000 */   nop      

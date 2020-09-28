@@ -10,8 +10,8 @@ glabel PlayerPowerBounceEnemy
 /* 1A2D94 802744B4 AFB10014 */  sw        $s1, 0x14($sp)
 /* 1A2D98 802744B8 AFB00010 */  sw        $s0, 0x10($sp)
 /* 1A2D9C 802744BC 8E50000C */  lw        $s0, 0xc($s2)
-/* 1A2DA0 802744C0 3C11800E */  lui       $s1, 0x800e
-/* 1A2DA4 802744C4 2631C070 */  addiu     $s1, $s1, -0x3f90
+/* 1A2DA0 802744C0 3C11800E */  lui       $s1, %hi(gBattleStatus)
+/* 1A2DA4 802744C4 2631C070 */  addiu     $s1, $s1, %lo(gBattleStatus)
 /* 1A2DA8 802744C8 8E130000 */  lw        $s3, ($s0)
 /* 1A2DAC 802744CC 26100004 */  addiu     $s0, $s0, 4
 /* 1A2DB0 802744D0 8E020000 */  lw        $v0, ($s0)
@@ -65,15 +65,15 @@ glabel PlayerPowerBounceEnemy
 /* 1A2E5C 8027457C 32020040 */  andi      $v0, $s0, 0x40
 /* 1A2E60 80274580 10400007 */  beqz      $v0, .L802745A0
 /* 1A2E64 80274584 2404FFBF */   addiu    $a0, $zero, -0x41
-/* 1A2E68 80274588 3C03800E */  lui       $v1, 0x800e
-/* 1A2E6C 8027458C 2463C070 */  addiu     $v1, $v1, -0x3f90
+/* 1A2E68 80274588 3C03800E */  lui       $v1, %hi(gBattleStatus)
+/* 1A2E6C 8027458C 2463C070 */  addiu     $v1, $v1, %lo(gBattleStatus)
 /* 1A2E70 80274590 8C620000 */  lw        $v0, ($v1)
 /* 1A2E74 80274594 34420040 */  ori       $v0, $v0, 0x40
 /* 1A2E78 80274598 0809D16D */  j         .L802745B4
 /* 1A2E7C 8027459C AC620000 */   sw       $v0, ($v1)
 .L802745A0:
-/* 1A2E80 802745A0 3C02800E */  lui       $v0, 0x800e
-/* 1A2E84 802745A4 2442C070 */  addiu     $v0, $v0, -0x3f90
+/* 1A2E80 802745A0 3C02800E */  lui       $v0, %hi(gBattleStatus)
+/* 1A2E84 802745A4 2442C070 */  addiu     $v0, $v0, %lo(gBattleStatus)
 /* 1A2E88 802745A8 8C430000 */  lw        $v1, ($v0)
 /* 1A2E8C 802745AC 00641824 */  and       $v1, $v1, $a0
 /* 1A2E90 802745B0 AC430000 */  sw        $v1, ($v0)
@@ -81,15 +81,15 @@ glabel PlayerPowerBounceEnemy
 /* 1A2E94 802745B4 32020200 */  andi      $v0, $s0, 0x200
 /* 1A2E98 802745B8 10400007 */  beqz      $v0, .L802745D8
 /* 1A2E9C 802745BC 2404FDFF */   addiu    $a0, $zero, -0x201
-/* 1A2EA0 802745C0 3C03800E */  lui       $v1, 0x800e
-/* 1A2EA4 802745C4 2463C070 */  addiu     $v1, $v1, -0x3f90
+/* 1A2EA0 802745C0 3C03800E */  lui       $v1, %hi(gBattleStatus)
+/* 1A2EA4 802745C4 2463C070 */  addiu     $v1, $v1, %lo(gBattleStatus)
 /* 1A2EA8 802745C8 8C620000 */  lw        $v0, ($v1)
 /* 1A2EAC 802745CC 34420200 */  ori       $v0, $v0, 0x200
 /* 1A2EB0 802745D0 0809D17B */  j         .L802745EC
 /* 1A2EB4 802745D4 AC620000 */   sw       $v0, ($v1)
 .L802745D8:
-/* 1A2EB8 802745D8 3C02800E */  lui       $v0, 0x800e
-/* 1A2EBC 802745DC 2442C070 */  addiu     $v0, $v0, -0x3f90
+/* 1A2EB8 802745D8 3C02800E */  lui       $v0, %hi(gBattleStatus)
+/* 1A2EBC 802745DC 2442C070 */  addiu     $v0, $v0, %lo(gBattleStatus)
 /* 1A2EC0 802745E0 8C430000 */  lw        $v1, ($v0)
 /* 1A2EC4 802745E4 00641824 */  and       $v1, $v1, $a0
 /* 1A2EC8 802745E8 AC430000 */  sw        $v1, ($v0)
@@ -97,15 +97,15 @@ glabel PlayerPowerBounceEnemy
 /* 1A2ECC 802745EC 32020080 */  andi      $v0, $s0, 0x80
 /* 1A2ED0 802745F0 10400007 */  beqz      $v0, .L80274610
 /* 1A2ED4 802745F4 2404FF7F */   addiu    $a0, $zero, -0x81
-/* 1A2ED8 802745F8 3C03800E */  lui       $v1, 0x800e
-/* 1A2EDC 802745FC 2463C070 */  addiu     $v1, $v1, -0x3f90
+/* 1A2ED8 802745F8 3C03800E */  lui       $v1, %hi(gBattleStatus)
+/* 1A2EDC 802745FC 2463C070 */  addiu     $v1, $v1, %lo(gBattleStatus)
 /* 1A2EE0 80274600 8C620000 */  lw        $v0, ($v1)
 /* 1A2EE4 80274604 34420080 */  ori       $v0, $v0, 0x80
 /* 1A2EE8 80274608 0809D189 */  j         .L80274624
 /* 1A2EEC 8027460C AC620000 */   sw       $v0, ($v1)
 .L80274610:
-/* 1A2EF0 80274610 3C02800E */  lui       $v0, 0x800e
-/* 1A2EF4 80274614 2442C070 */  addiu     $v0, $v0, -0x3f90
+/* 1A2EF0 80274610 3C02800E */  lui       $v0, %hi(gBattleStatus)
+/* 1A2EF4 80274614 2442C070 */  addiu     $v0, $v0, %lo(gBattleStatus)
 /* 1A2EF8 80274618 8C430000 */  lw        $v1, ($v0)
 /* 1A2EFC 8027461C 00641824 */  and       $v1, $v1, $a0
 /* 1A2F00 80274620 AC430000 */  sw        $v1, ($v0)
@@ -113,15 +113,15 @@ glabel PlayerPowerBounceEnemy
 /* 1A2F04 80274624 32020800 */  andi      $v0, $s0, 0x800
 /* 1A2F08 80274628 10400007 */  beqz      $v0, .L80274648
 /* 1A2F0C 8027462C 2404F7FF */   addiu    $a0, $zero, -0x801
-/* 1A2F10 80274630 3C03800E */  lui       $v1, 0x800e
-/* 1A2F14 80274634 2463C070 */  addiu     $v1, $v1, -0x3f90
+/* 1A2F10 80274630 3C03800E */  lui       $v1, %hi(gBattleStatus)
+/* 1A2F14 80274634 2463C070 */  addiu     $v1, $v1, %lo(gBattleStatus)
 /* 1A2F18 80274638 8C620000 */  lw        $v0, ($v1)
 /* 1A2F1C 8027463C 34420800 */  ori       $v0, $v0, 0x800
 /* 1A2F20 80274640 0809D197 */  j         .L8027465C
 /* 1A2F24 80274644 AC620000 */   sw       $v0, ($v1)
 .L80274648:
-/* 1A2F28 80274648 3C02800E */  lui       $v0, 0x800e
-/* 1A2F2C 8027464C 2442C070 */  addiu     $v0, $v0, -0x3f90
+/* 1A2F28 80274648 3C02800E */  lui       $v0, %hi(gBattleStatus)
+/* 1A2F2C 8027464C 2442C070 */  addiu     $v0, $v0, %lo(gBattleStatus)
 /* 1A2F30 80274650 8C430000 */  lw        $v1, ($v0)
 /* 1A2F34 80274654 00641824 */  and       $v1, $v1, $a0
 /* 1A2F38 80274658 AC430000 */  sw        $v1, ($v0)

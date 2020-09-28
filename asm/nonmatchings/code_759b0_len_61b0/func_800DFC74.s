@@ -4,8 +4,8 @@
 glabel func_800DFC74
 /* 79124 800DFC74 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 79128 800DFC78 AFB00010 */  sw        $s0, 0x10($sp)
-/* 7912C 800DFC7C 3C108011 */  lui       $s0, 0x8011
-/* 79130 800DFC80 2610EFC8 */  addiu     $s0, $s0, -0x1038
+/* 7912C 800DFC7C 3C108011 */  lui       $s0, %hi(gPlayerStatus)
+/* 79130 800DFC80 2610EFC8 */  addiu     $s0, $s0, %lo(gPlayerStatus)
 /* 79134 800DFC84 0200202D */  daddu     $a0, $s0, $zero
 /* 79138 800DFC88 AFBF0014 */  sw        $ra, 0x14($sp)
 /* 7913C 800DFC8C 0C00A580 */  jal       mem_clear

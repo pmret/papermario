@@ -11,8 +11,8 @@ glabel osViSetEvent
 /* 421C8 80066DC8 AFBF001C */  sw        $ra, 0x1c($sp)
 /* 421CC 80066DCC 0C01ACD8 */  jal       __osDisableInt
 /* 421D0 80066DD0 00C09021 */   addu     $s2, $a2, $zero
-/* 421D4 80066DD4 3C038009 */  lui       $v1, 0x8009
-/* 421D8 80066DD8 8C6359D4 */  lw        $v1, 0x59d4($v1)
+/* 421D4 80066DD4 3C038009 */  lui       $v1, %hi(D_800959D4)
+/* 421D8 80066DD8 8C6359D4 */  lw        $v1, %lo(D_800959D4)($v1)
 /* 421DC 80066DDC 00402021 */  addu      $a0, $v0, $zero
 /* 421E0 80066DE0 AC700010 */  sw        $s0, 0x10($v1)
 /* 421E4 80066DE4 AC710014 */  sw        $s1, 0x14($v1)
