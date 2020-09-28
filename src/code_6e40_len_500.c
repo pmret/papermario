@@ -1,18 +1,36 @@
 #include "common.h"
 
-INCLUDE_ASM("code_6e40_len_500", initialize_curtains)
+void initialize_curtains(void) {
+    D_8009BAA0 = 0;
+    D_8009BA90 = 2.0f;
+    D_8009BA94 = 2.0f;
+    D_8009BA98 = 0;
+    D_8009BA9C = 0;
+}
 
 void update_curtains(void) {
 }
 
-INCLUDE_ASM("code_6e40_len_500", render_curtains);
+INCLUDE_ASM(s32, "code_6e40_len_500", render_curtains);
 
-INCLUDE_ASM("code_6e40_len_500", set_curtain_scale_goal);
+void set_curtain_scale_goal(f32 arg0) {
+    D_8009BA94 = arg0;
+}
 
-INCLUDE_ASM("code_6e40_len_500", set_curtain_scale);
+void set_curtain_scale(f32 arg0) {
+    D_8009BA94 = arg0;
+    D_8009BA90 = arg0;
+}
 
-INCLUDE_ASM("code_6e40_len_500", set_curtain_draw_callback);
+void set_curtain_draw_callback(s32 arg0) {
+    D_8009BAA0 = arg0;
+}
 
-INCLUDE_ASM("code_6e40_len_500", set_curtain_fade_goal);
+void set_curtain_fade_goal(f32 arg0) {
+    D_8009BA9C = arg0;
+}
 
-INCLUDE_ASM("code_6e40_len_500", set_curtain_fade);
+void set_curtain_fade(f32 arg0) {
+    D_8009BA9C = arg0;
+    D_8009BA98 = arg0;
+}

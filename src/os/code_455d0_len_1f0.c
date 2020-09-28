@@ -1,3 +1,3 @@
 #include "common.h"
 
-INCLUDE_API_ASM("os/code_455d0_len_1f0", osContRamRead);
+INCLUDE_ASM(s32, "os/code_455d0_len_1f0", osContRamRead);

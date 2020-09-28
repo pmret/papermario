@@ -43,7 +43,11 @@ extern Entity** gCurrentEntityListPtr[30];
 
 extern UNK_TYPE* gWorldDynamicEntityList[16];
 extern UNK_TYPE* gBattleDynamicEntityList[16];
-extern UNK_TYPE** gCurrentDynamicEntityListPtr[16];
+extern UNK_TYPE*** gCurrentDynamicEntityListPtr;
+
+extern Npc* gWorldNpcList[64];
+extern Npc* gBattleNpcList[64];
+extern Npc** gCurrentNpcListPtr[64];
 
 extern Shadow* gWorldShadowList[60];
 extern Shadow* gBattleShadowList[60];
@@ -58,9 +62,14 @@ extern Npc* gPlayerNpcPtr;
 
 extern s8 D_800A0900;
 extern EncounterStatus gCurrentEncounter;
+extern s16 D_80151308;
+extern s32 D_80151310;
 extern s16* D_80151328;
 extern s16 D_8010CD10;
 extern s16 D_8010CD12;
+extern s32 D_8010CD20;
+extern s32 D_8010EF08;
+extern s32 D_8010F094; // player shadow index?
 extern s32 D_801595A0;
 extern s16 D_80159AE2;
 extern s16 D_80159AE4;
@@ -68,6 +77,7 @@ extern BackgroundHeader gBackgroundImage;
 extern s8 D_8014F12F;
 
 extern PrintContext* gCurrentPrintContext;
+extern s32 D_802DB264;
 extern PrintContext* D_802DB268;
 
 // Triggers
@@ -80,10 +90,16 @@ extern u16 gMapTransitionAlpha;
 extern u16 D_800A0942;
 extern s16 D_800A0944;
 
-extern s16 D_80151308;
 
 extern s32 gGameState;
 extern s32 D_8009A650[1];
+
+// curtains
+extern f32 D_8009BA90;
+extern f32 D_8009BA94; // curtain scale goal
+extern f32 D_8009BA98;
+extern f32 D_8009BA9C; // curtain fade goal
+extern s32 D_8009BAA0; // curtain draw callback
 
 extern s16 gCurrentDoorSoundsSet;
 
@@ -97,7 +113,11 @@ extern s8 D_8010EBB0;
 
 extern SaveData gCurrentSaveFile;
 
+extern s32 D_802D9CA4;
 extern u32* gMapFlags;
 extern u32* gMapVars;
+extern s32 gNumScripts;
+
+extern f32 D_80286540;
 
 #endif

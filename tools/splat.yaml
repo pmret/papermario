@@ -232,6 +232,7 @@ segments:
     - [0xef070, "c", "code_ef070_len_3400"]
     - [0xf2470, "c", "code_f2470_len_27f0"]
     - [0xf4c60, "c", "code_f4c60_len_4300"]
+    - [0xf5750, "c", "code_F5750"]
     - [0xf8f60, "c", "code_f8f60_len_1560"]
     - [0xfa4c0, "c", "code_fa4c0_len_3bf0"]
     - [0xfe0b0, "c", "code_fe0b0_len_5a0"]

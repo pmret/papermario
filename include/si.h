@@ -22,10 +22,4 @@ typedef s32 ApiStatus;
 
 #define API_FUN(NAME) ApiStatus (*NAME)(struct ScriptInstance* script, s32 isInitialCall)
 
-#ifndef SPLAT
-#define INCLUDE_API_ASM(FOLDER, NAME) ApiStatus INCLUDE_ASM(FOLDER, NAME, struct ScriptInstance* script, s32 isInitialCall)
-#else
-#define INCLUDE_API_ASM(FOLDER, NAME)
-#endif
-
 #endif

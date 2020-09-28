@@ -34,7 +34,7 @@ def funcs_in_c(text):
     return (match.group(1) for match in c_func_pattern.finditer(text))
 
 asm_func_pattern = re.compile(
-    r"INCLUDE_(?:API_)?ASM\([^,]+, ([^,)]+)",
+    r"INCLUDE_ASM\([^,]+, [^,]+, ([^,)]+)",
     re.MULTILINE
 )
 def include_asms_in_c(text):
