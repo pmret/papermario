@@ -1,21 +1,22 @@
 #include "common.h"
 
-INCLUDE_ASM("code_e79b0_len_1920", sort_scripts);
+INCLUDE_ASM(s32, "code_e79b0_len_1920", sort_scripts);
 
-INCLUDE_ASM("code_e79b0_len_1920", find_script_labels);
+INCLUDE_ASM(s32, "code_e79b0_len_1920", find_script_labels);
 
-INCLUDE_ASM("code_e79b0_len_1920", clear_script_list);
+INCLUDE_ASM(s32, "code_e79b0_len_1920", clear_script_list);
 
-INCLUDE_ASM("code_e79b0_len_1920", init_script_list);
+INCLUDE_ASM(s32, "code_e79b0_len_1920", init_script_list);
 
-INCLUDE_ASM("code_e79b0_len_1920", func_802C3390);
+INCLUDE_ASM(s32, "code_e79b0_len_1920", func_802C3390);
 
-INCLUDE_ASM("code_e79b0_len_1920", start_script);
+INCLUDE_ASM(s32, "code_e79b0_len_1920", start_script);
 
-INCLUDE_ASM("code_e79b0_len_1920", start_script_in_group);
+INCLUDE_ASM(s32, "code_e79b0_len_1920", start_script_in_group);
 
-INCLUDE_ASM("code_e79b0_len_1920", start_child_script);
+INCLUDE_ASM(s32, "code_e79b0_len_1920", start_child_script);
 
+<<<<<<< HEAD
 #ifdef NON_MATCHING
 //appears to be functionally equivalent, some ordering and regalloc issues
 ScriptInstance* func_802C39F8(ScriptInstance* parentScript, Bytecode* nextLine, s32 newState) {
@@ -88,10 +89,15 @@ ScriptInstance* func_802C39F8(ScriptInstance* parentScript, Bytecode* nextLine, 
     return child;
 }
 #else
-INCLUDE_ASM("code_e79b0_len_1920", func_802C39F8);
+INCLUDE_ASM(ScriptInstance*, "code_e79b0_len_1920", func_802C39F8, ScriptInstance* parentScript, Bytecode* nextLine, s32 newState);
 #endif
 
 INCLUDE_ASM("code_e79b0_len_1920", func_802C3C10);
+=======
+INCLUDE_ASM(s32, "code_e79b0_len_1920", func_802C39F8);
+
+INCLUDE_ASM(s32, "code_e79b0_len_1920", func_802C3C10);
+>>>>>>> 3bf3c987d710d9a78dfbc0505eb69843053cda25
 
 ScriptInstance* restart_script(ScriptInstance* script) {
     Bytecode* ptrFirstLine = script->ptrFirstLine;
@@ -116,11 +122,11 @@ ScriptInstance* restart_script(ScriptInstance* script) {
     return script;
 }
 
-INCLUDE_ASM("code_e79b0_len_1920", update_scripts);
+INCLUDE_ASM(s32, "code_e79b0_len_1920", update_scripts);
 
-INCLUDE_ASM("code_e79b0_len_1920", func_802C3EE4);
+INCLUDE_ASM(s32, "code_e79b0_len_1920", func_802C3EE4);
 
-INCLUDE_ASM("code_e79b0_len_1920", kill_script);
+INCLUDE_ASM(s32, "code_e79b0_len_1920", kill_script);
 
 void kill_script_by_ID(s32 id) {
     s32 i;
@@ -184,7 +190,7 @@ void set_global_timespace(f32 timeScale) {
     gGlobalTimeSpace = timeScale;
 }
 #else
-INCLUDE_ASM("code_e79b0_len_1920", set_global_timespace);
+INCLUDE_ASM(s32, "code_e79b0_len_1920", set_global_timespace);
 #endif
 
 #ifdef NON_MATCHING
@@ -193,7 +199,7 @@ f32 get_global_timespace(void) {
     return gGlobalTimeSpace;
 }
 #else
-INCLUDE_ASM("code_e79b0_len_1920", get_global_timespace);
+INCLUDE_ASM(s32, "code_e79b0_len_1920", get_global_timespace);
 #endif
 
 void set_script_group(ScriptInstance* script, s8 groupFlags) {

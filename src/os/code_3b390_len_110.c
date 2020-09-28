@@ -1,3 +1,3 @@
 #include "common.h"
 
-INCLUDE_API_ASM("os/code_3b390_len_110", nuContRmbModeSet);
+INCLUDE_ASM(s32, "os/code_3b390_len_110", nuContRmbModeSet);

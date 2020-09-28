@@ -33,7 +33,7 @@ ApiStatus SetCamPerspective(ScriptInstance* script, s32 isInitialCall) {
     f32 vfov = get_float_variable(script, *args++);
     s16 nearClip = get_variable(script, *args++);
     s16 farClip = get_variable(script, *args++);
-    Camera* cameras = &gCameras;
+    Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
 
     camera->farClip = farClip;
@@ -49,7 +49,7 @@ ApiStatus func_802CA90C(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 id = get_variable(script, *args++);
     s16 mode = get_variable(script, *args++);
-    Camera* cameras = &gCameras;
+    Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
 
     camera->mode = mode;
@@ -57,6 +57,8 @@ ApiStatus func_802CA90C(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
+INCLUDE_ASM(s32, "code_ef070_len_3400", func_802CA988, ScriptInstance* script, s32 isInitialCall);
+/*
 ApiStatus func_802CA988(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
     Bytecode id = get_variable(script, *ptrReadPos++);
@@ -87,6 +89,7 @@ ApiStatus func_802CA988(ScriptInstance* script, s32 isInitialCall) {
     set_variable(script, outVar4, (&gCameras[id])->unk_22);
     return ApiStatus_DONE2;
 }
+*/
 
 ApiStatus SetCamViewport(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -107,7 +110,7 @@ ApiStatus func_802CABE8(ScriptInstance* script, s32 isInitialCall) {
     s32 value2 = get_variable(script, *args++);
     s32 value3 = get_variable(script, *args++);
     s16 value4 = get_variable(script, *args++);
-    Camera* cameras = &gCameras;
+    Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
 
     camera->unk_22 = value4;
@@ -124,7 +127,7 @@ ApiStatus func_802CACC0(ScriptInstance* script, s32 isInitialCall) {
     s32 value2 = get_variable(script, *args++);
     s32 value3 = get_variable(script, *args++);
     s16 zoomPercent = get_variable(script, *args++);
-    Camera* cameras = &gCameras;
+    Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
 
     camera->zoomPercent = zoomPercent;
@@ -140,7 +143,7 @@ ApiStatus SetCamBGColor(ScriptInstance* script, s32 isInitialCall) {
     s16 r = get_variable(script, *args++);
     s16 g = get_variable(script, *args++);
     s16 b = get_variable(script, *args++);
-    Camera* cameras = &gCameras;
+    Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
 
     camera->backgroundColor[0] = r;
@@ -155,7 +158,7 @@ ApiStatus func_802CAE50(ScriptInstance* script, s32 isInitialCall) {
     s32 value1 = get_variable(script, *args++);
     s32 value2 = get_variable(script, *args++);
     s32 value3 = get_variable(script, *args++);
-    Camera* cameras = &gCameras;
+    Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
 
     camera->unk_54 = value1;
@@ -170,7 +173,7 @@ ApiStatus SetCamTarget(ScriptInstance* script, s32 isInitialCall) {
     s32 x = get_variable(script, *args++);
     s32 y = get_variable(script, *args++);
     s32 z = get_variable(script, *args++);
-    Camera* cameras = &gCameras;
+    Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
 
     camera->targetPos.x = x;
@@ -179,19 +182,19 @@ ApiStatus SetCamTarget(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_API_ASM("code_ef070_len_3400", func_802CB008);
+INCLUDE_ASM(s32, "code_ef070_len_3400", func_802CB008, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_API_ASM("code_ef070_len_3400", ShakeCam);
+INCLUDE_ASM(s32, "code_ef070_len_3400", ShakeCam, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM("code_ef070_len_3400", exec_ShakeCam1);
+INCLUDE_ASM(s32, "code_ef070_len_3400", exec_ShakeCam1);
 
-INCLUDE_ASM("code_ef070_len_3400", exec_ShakeCamX);
+INCLUDE_ASM(s32, "code_ef070_len_3400", exec_ShakeCamX);
 
 ApiStatus SetCamLeadPlayer(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 id = get_variable(script, *args++);
     s32 enabled = get_variable(script, *args++);
-    Camera* cameras = &gCameras;
+    Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
 
     if (enabled) {
@@ -206,7 +209,7 @@ ApiStatus func_802CB710(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 id = get_variable(script, *args++);
     f32 value = get_variable(script, *args++);
-    Camera* cameras = &gCameras;
+    Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
 
     camera->unk_520 = (value / 100.0f);
@@ -218,7 +221,7 @@ ApiStatus PanToTarget(ScriptInstance* script, s32 isInitialCall) {
     s32 id = get_variable(script, *args++);
     f32 panPhase = get_float_variable(script, *args++);
     s32 targetType = get_variable(script, *args++);
-    Camera* cameras = &gCameras;
+    Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
 
     camera->unk_506 = 1;
@@ -233,14 +236,14 @@ ApiStatus PanToTarget(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_API_ASM("code_ef070_len_3400", UseSettingsFrom);
+INCLUDE_ASM(s32, "code_ef070_len_3400", UseSettingsFrom, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_API_ASM("code_ef070_len_3400", LoadSettings);
+INCLUDE_ASM(s32, "code_ef070_len_3400", LoadSettings, ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus SetCamType(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 id = get_variable(script, *args++);
-    Camera* cameras = &gCameras;
+    Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
     s32 controllerType = get_variable(script, *args++);
     s32 enabled = get_variable(script, *args++);
@@ -253,7 +256,7 @@ ApiStatus SetCamType(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus SetCamPitch(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 id = get_variable(script, *args++);
-    Camera* cameras = &gCameras;
+    Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
     f32 boomPitch = get_float_variable(script, *args++);
     f32 viewPitch = get_float_variable(script, *args++);
@@ -266,7 +269,7 @@ ApiStatus SetCamPitch(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus SetCamDistance(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 id = get_variable(script, *args++);
-    Camera* cameras = &gCameras;
+    Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
     f32 boomLength = get_float_variable(script, *args++);
 
@@ -277,7 +280,7 @@ ApiStatus SetCamDistance(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus SetCamPosA(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 id = get_variable(script, *args++);
-    Camera* cameras = &gCameras;
+    Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
     f32 x = get_float_variable(script, *args++);
     f32 z = get_float_variable(script, *args++);
@@ -290,7 +293,7 @@ ApiStatus SetCamPosA(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus SetCamPosB(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 id = get_variable(script, *args++);
-    Camera* cameras = &gCameras;
+    Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
     f32 x = get_float_variable(script, *args++);
     f32 z = get_float_variable(script, *args++);
@@ -303,7 +306,7 @@ ApiStatus SetCamPosB(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus SetCamPosC(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 id = get_variable(script, *args++);
-    Camera* cameras = &gCameras;
+    Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
     f32 y1 = get_float_variable(script, *args++);
     f32 y2 = get_float_variable(script, *args++);
@@ -316,7 +319,7 @@ ApiStatus SetCamPosC(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus SetPanTarget(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 id = get_variable(script, *args++);
-    Camera* cameras = &gCameras;
+    Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
     f32 x = get_float_variable(script, *args++);
     f32 y = get_float_variable(script, *args++);
@@ -333,7 +336,7 @@ ApiStatus SetCamSpeed(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 id = get_variable(script, *args++);
     f32 speed = get_float_variable(script, *args++);
-    Camera* cameras = &gCameras;
+    Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
 
     camera->moveSpeed = speed;
@@ -345,7 +348,7 @@ ApiStatus GetCamType(ScriptInstance* script, s32 isInitialCall) {
     s32 id = get_variable(script, *args++);
     Bytecode outVar1 = *args++;
     Bytecode outVar2 = *args++;
-    Camera* cameras = &gCameras;
+    Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
 
     set_variable(script, outVar1, camera->controllerType);
@@ -358,7 +361,7 @@ ApiStatus GetCamPitch(ScriptInstance* script, s32 isInitialCall) {
     s32 id = get_variable(script, *args++);
     Bytecode outVar1 = *args++;
     Bytecode outVar2 = *args++;
-    Camera* cameras = &gCameras;
+    Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
 
     set_float_variable(script, outVar1, camera->controllerBoomPitch);
@@ -370,7 +373,7 @@ ApiStatus GetCamDistance(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 id = get_variable(script, *args++);
     Bytecode outVar1 = *args++;
-    Camera* cameras = &gCameras;
+    Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
 
     set_float_variable(script, outVar1, camera->controllerBoomLen);
@@ -382,7 +385,7 @@ ApiStatus GetCamPosA(ScriptInstance* script, s32 isInitialCall) {
     s32 id = get_variable(script, *args++);
     Bytecode outVar1 = *args++;
     Bytecode outVar2 = *args++;
-    Camera* cameras = &gCameras;
+    Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
 
     set_float_variable(script, outVar1, camera->posA.x);
@@ -395,7 +398,7 @@ ApiStatus GetCamPosB(ScriptInstance* script, s32 isInitialCall) {
     s32 id = get_variable(script, *args++);
     Bytecode outVar1 = *args++;
     Bytecode outVar2 = *args++;
-    Camera* cameras = &gCameras;
+    Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
 
     set_float_variable(script, outVar1, camera->posB.x);
@@ -408,7 +411,7 @@ ApiStatus GetCamPosC(ScriptInstance* script, s32 isInitialCall) {
     s32 id = get_variable(script, *args++);
     Bytecode outVar1 = *args++;
     Bytecode outVar2 = *args++;
-    Camera* cameras = &gCameras;
+    Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
 
     set_float_variable(script, outVar1, camera->posA.y);
@@ -422,7 +425,7 @@ ApiStatus GetCamPosition(ScriptInstance* script, s32 isInitialCall) {
     Bytecode outVar1 = *args++;
     Bytecode outVar2 = *args++;
     Bytecode outVar3 = *args++;
-    Camera* cameras = &gCameras;
+    Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
 
     set_float_variable(script, outVar1, camera->movePos.x);
@@ -435,7 +438,7 @@ ApiStatus WaitForCam(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 id = get_variable(script, args[0]);
     f32 endInterpValue = get_float_variable(script, args[1]);
-    Camera* cameras = &gCameras;
+    Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
 
     if (isInitialCall || !(endInterpValue <= camera->sinInterpAlpha)) {
@@ -444,30 +447,54 @@ ApiStatus WaitForCam(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_API_ASM("code_ef070_len_3400", SetCamProperties);
+INCLUDE_ASM(s32, "code_ef070_len_3400", SetCamProperties, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_API_ASM("code_ef070_len_3400", AdjustCam);
+INCLUDE_ASM(s32, "code_ef070_len_3400", AdjustCam, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_API_ASM("code_ef070_len_3400", ResetCam);
+INCLUDE_ASM(s32, "code_ef070_len_3400", ResetCam, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM("code_ef070_len_3400", draw_anim_models);
+INCLUDE_ASM(s32, "code_ef070_len_3400", func_802CCAC0);
 
-INCLUDE_API_ASM("code_ef070_len_3400", LoadModelAnimation);
+INCLUDE_ASM(s32, "code_ef070_len_3400", draw_anim_models);
 
-INCLUDE_API_ASM("code_ef070_len_3400", PlayModelAnimation);
+INCLUDE_ASM(s32, "code_ef070_len_3400", func_802CCCB0);
 
-INCLUDE_API_ASM("code_ef070_len_3400", ChangeModelAnimation);
+INCLUDE_ASM(s32, "code_ef070_len_3400", LoadModelAnimation);
 
-INCLUDE_API_ASM("code_ef070_len_3400", SetAnimModelPosition);
+INCLUDE_ASM(s32, "code_ef070_len_3400", func_802CCDAC);
 
-INCLUDE_API_ASM("code_ef070_len_3400", GetAnimModelPosition);
+INCLUDE_ASM(s32, "code_ef070_len_3400", PlayModelAnimation);
 
-INCLUDE_API_ASM("code_ef070_len_3400", AddAnimModelPosition);
+INCLUDE_ASM(s32, "code_ef070_len_3400", func_802CCEDC);
 
-INCLUDE_API_ASM("code_ef070_len_3400", SetAnimModelRotation);
+INCLUDE_ASM(s32, "code_ef070_len_3400", ChangeModelAnimation);
 
-INCLUDE_API_ASM("code_ef070_len_3400", SetAnimModelScale);
+INCLUDE_ASM(s32, "code_ef070_len_3400", SetAnimModelPosition);
 
-INCLUDE_ASM("code_ef070_len_3400", func_802CD4B4);
+INCLUDE_ASM(s32, "code_ef070_len_3400", GetAnimModelPosition);
 
-INCLUDE_ASM("code_ef070_len_3400", func_802CD57C);
+INCLUDE_ASM(s32, "code_ef070_len_3400", AddAnimModelPosition);
+
+INCLUDE_ASM(s32, "code_ef070_len_3400", SetAnimModelRotation);
+
+INCLUDE_ASM(s32, "code_ef070_len_3400", SetAnimModelScale);
+
+INCLUDE_ASM(s32, "code_ef070_len_3400", func_802CD348);
+
+INCLUDE_ASM(s32, "code_ef070_len_3400", func_802CD3C0);
+
+INCLUDE_ASM(s32, "code_ef070_len_3400", func_802CD418);
+
+INCLUDE_ASM(s32, "code_ef070_len_3400", func_802CD4B4);
+
+INCLUDE_ASM(s32, "code_ef070_len_3400", func_802CD57C);
+
+INCLUDE_ASM(s32, "code_ef070_len_3400", func_802CD5C0);
+
+INCLUDE_ASM(s32, "code_ef070_len_3400", func_802CD6E0);
+
+INCLUDE_ASM(s32, "code_ef070_len_3400", func_802CD7D8);
+
+INCLUDE_ASM(s32, "code_ef070_len_3400", func_802CD8F8);
+
+INCLUDE_ASM(s32, "code_ef070_len_3400", func_802CD9F0);

@@ -21,44 +21,26 @@ void func_801473F0(void) {
     }
 }
 
-INCLUDE_ASM("code_ddaf0_len_c50", func_80147414);
-/*void func_80147414(void) {
-    struct_80159D50 *phi_a1 = &D_80159D50[0];
-    struct_80159D50 *phi_a0 = &D_80159D50[0];
-    s32 i;
+INCLUDE_ASM(s32, "code_ddaf0_len_c50", func_80147414);
 
-    for(i = 0; i < 0x40; i++)
-    {
-        if (phi_a1[i].unk_00 != 0) {
-            if ((phi_a1[i].unk_00 & 0x20) == 0) {
-                if ((phi_a1[i].unk_00 & 2) != 0) {
-                    phi_a1[i].unk_00 &= ~2;
-                    phi_a0[i].unk_1C = 0;
-                    phi_a0[i].unk_04 = phi_a0[i].unk_08;
-                }
-            }
-        }
-    }
-}*/
+INCLUDE_ASM(s32, "code_ddaf0_len_c50", func_80147474);
 
-INCLUDE_ASM("code_ddaf0_len_c50", func_80147474);
+INCLUDE_ASM(s32, "code_ddaf0_len_c50", func_80147574);
 
-INCLUDE_ASM("code_ddaf0_len_c50", func_80147574);
+INCLUDE_ASM(s32, "code_ddaf0_len_c50", func_80147650);
 
-INCLUDE_ASM("code_ddaf0_len_c50", func_80147650);
+INCLUDE_ASM(s32, "code_ddaf0_len_c50", func_80147698);
 
-INCLUDE_ASM("code_ddaf0_len_c50", func_80147698);
+INCLUDE_ASM(s32, "code_ddaf0_len_c50", func_80147AC4);
 
-INCLUDE_ASM("code_ddaf0_len_c50", func_80147AC4);
+INCLUDE_ASM(s32, "code_ddaf0_len_c50", set_ui_panel_properties);
 
-INCLUDE_ASM("code_ddaf0_len_c50", func_80147CC8);
+INCLUDE_ASM(s32, "code_ddaf0_len_c50", func_80147D70);
 
-INCLUDE_ASM("code_ddaf0_len_c50", func_80147D70);
+INCLUDE_ASM(s32, "code_ddaf0_len_c50", func_80147E48);
 
-INCLUDE_ASM("code_ddaf0_len_c50", func_80147E48);
+INCLUDE_ASM(s32, "code_ddaf0_len_c50", func_80147E7C);
 
-INCLUDE_ASM("code_ddaf0_len_c50", func_80147E7C);
+INCLUDE_ASM(s32, "code_ddaf0_len_c50", func_80147EC4);
 
-INCLUDE_ASM("code_ddaf0_len_c50", func_80147EC4);
-
-INCLUDE_ASM("code_ddaf0_len_c50", func_80147F30);
+INCLUDE_ASM(s32, "code_ddaf0_len_c50", func_80147F30);

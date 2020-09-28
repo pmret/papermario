@@ -1,10 +1,17 @@
 #include "common.h"
 
+s32 si_find_label(ScriptInstance* script, s32 arg1);
+s32 si_skip_if(ScriptInstance* script);
+s32 si_skip_else(ScriptInstance* script);
+s32 si_goto_end_loop(ScriptInstance* script);
+s32 si_goto_end_case(ScriptInstance* script);
+
 f32 fixed_var_to_float(s32 scriptVar) {
     if (scriptVar <= -220000000) {
         return (scriptVar + 230000000) * (1 / 1024.0f);
+    } else {
+        return scriptVar;
     }
-    return scriptVar;
 }
 
 s32 float_to_fixed_var(f32 value) {
@@ -21,11 +28,11 @@ ApiStatus si_handle_label(ScriptInstance* script) {
 }
 
 ApiStatus si_handle_goto(ScriptInstance* script) {
-    script->ptrNextLine = si_goto_label(script, get_variable(script, *script->ptrReadPos));
+    script->ptrNextLine = si_find_label(script, get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
 
-ApiStatus si_handle_Loop(ScriptInstance* script) {
+ApiStatus si_handle_loop(ScriptInstance* script) {
     Bytecode* thisPos = script->ptrReadPos;
     Bytecode var = *thisPos++;
     s32 loopDepth = ++script->loopDepth;
@@ -38,7 +45,7 @@ ApiStatus si_handle_Loop(ScriptInstance* script) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_handle_end_loop);
+INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_handle_end_loop);
 
 ApiStatus si_handle_break_loop(ScriptInstance* script) {
     ASSERT(script->loopDepth >= 0);
@@ -199,19 +206,19 @@ ApiStatus si_handle_switch_const(ScriptInstance* script) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_handle_case_equal);
+INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_handle_case_equal);
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_handle_case_not_equal);
+INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_handle_case_not_equal);
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_handle_case_less);
+INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_handle_case_less);
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_handle_case_less_equal);
+INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_handle_case_less_equal);
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_handle_case_greater);
+INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_handle_case_greater);
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_handle_case_greater_equal);
+INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_handle_case_greater_equal);
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_handle_case_range);
+INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_handle_case_range);
 
 ApiStatus si_handle_case_default(ScriptInstance* script) {
     s32 switchDepth = script->switchDepth;
@@ -228,13 +235,13 @@ ApiStatus si_handle_case_default(ScriptInstance* script) {
     do {} while (0); // Necessary to match
 }
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_handle_case_AND);
+INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_handle_case_AND);
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_handle_case_equal_OR);
+INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_handle_case_equal_OR);
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_handle_case_equal_AND);
+INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_handle_case_equal_AND);
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_handle_end_case_group);
+INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_handle_end_case_group);
 
 ApiStatus si_handle_break_case(ScriptInstance* script) {
     ASSERT(script->switchDepth >= 0);
@@ -556,12 +563,19 @@ ApiStatus si_handle_allocate_array(ScriptInstance* script) {
     s32 size = get_variable(script, *thisPos++);
     Bytecode var = *thisPos++;
 
-    script->array = heap_malloc(size * 4);
-    set_variable(script, var, script->array);
+    script->array = (s32)heap_malloc(size * 4);
+    set_variable(script, var, (s32)script->array);
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_handle_AND);
+ApiStatus si_handle_AND(ScriptInstance* script) {
+    Bytecode var = script->ptrReadPos[0];
+    s32 val = get_variable(script, script->ptrReadPos[1]);
+
+    val &= get_variable(script, var);
+    set_variable(script, var, val);
+    return ApiStatus_DONE2;
+}
 
 ApiStatus si_handle_AND_const(ScriptInstance* script) {
     Bytecode* ptrReadPos = script->ptrReadPos;
@@ -575,7 +589,14 @@ ApiStatus si_handle_AND_const(ScriptInstance* script) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_handle_OR);
+ApiStatus si_handle_OR(ScriptInstance* script) {
+    Bytecode var = script->ptrReadPos[0];
+    s32 val = get_variable(script, script->ptrReadPos[1]);
+
+    val |= get_variable(script, var);
+    set_variable(script, var, val);
+    return ApiStatus_DONE2;
+}
 
 ApiStatus si_handle_OR_const(ScriptInstance* script) {
     Bytecode* ptrReadPos = script->ptrReadPos;
@@ -589,11 +610,11 @@ ApiStatus si_handle_OR_const(ScriptInstance* script) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_handle_call);
+INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_handle_call);
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_handle_exec1);
+INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_handle_exec1);
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_handle_exec2);
+INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_handle_exec2);
 
 ApiStatus si_handle_exec_wait(ScriptInstance* script) {
     start_child_script(script, get_variable(script, *script->ptrReadPos), 0);
@@ -607,9 +628,9 @@ ApiStatus si_handle_jump(ScriptInstance* script) {
     return ApiStatus_DONE2;
 }
 
-s32 INCLUDE_ASM("code_e92d0_len_5da0", _bound_script_trigger_handler, Trigger* trigger);
+INCLUDE_ASM(s32, "code_e92d0_len_5da0", _bound_script_trigger_handler, Trigger* trigger);
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_handle_bind);
+INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_handle_bind);
 
 ApiStatus DeleteTrigger(ScriptInstance* script, s32 isInitialCall) {
     delete_trigger(get_variable(script, *script->ptrReadPos));
@@ -671,18 +692,27 @@ ApiStatus si_handle_resume(ScriptInstance* script) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus INCLUDE_ASM("code_e92d0_len_5da0", si_handle_does_script_exist);
+ApiStatus si_handle_does_script_exist(ScriptInstance* script) {
+    Bytecode* thisPos = script->ptrReadPos;
+    Bytecode scriptID = get_variable(script, *thisPos++);
+    Bytecode var2 = *thisPos++;
 
-ApiStatus INCLUDE_ASM("code_e92d0_len_5da0", si_handle_bind_lock);
+    set_variable(script, var2, does_script_exist(scriptID));
+    return ApiStatus_DONE2;
+}
 
-ApiStatus INCLUDE_ASM("code_e92d0_len_5da0", si_handle_thread);
+INCLUDE_ASM(s32, "code_e92d0_len_5da0", func_802C6AD0);
+
+INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_handle_bind_lock, ScriptInstance* script, s32 isInitialCall);
+
+INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_handle_thread, ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus si_handle_end_thread(ScriptInstance* script) {
     kill_script(script);
     return ApiStatus_FINISH;
 }
 
-ApiStatus INCLUDE_ASM("code_e92d0_len_5da0", si_handle_child_thread);
+INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_handle_child_thread, ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus si_handle_end_child_thread(ScriptInstance* script) {
     kill_script(script);
@@ -693,7 +723,7 @@ ApiStatus func_802C6E14(ScriptInstance* script) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus INCLUDE_ASM("code_e92d0_len_5da0", si_handle_print_debug_var);
+INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_handle_print_debug_var, ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus func_802C739C(ScriptInstance* script) {
     script->ptrSavedPosition = (Bytecode*)*script->ptrReadPos;
@@ -716,23 +746,82 @@ s32 func_802C73B8(ScriptInstance* script) {
     return 1;
 }
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_execute_next_command);
+INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_execute_next_command);
 
-s32 INCLUDE_ASM("code_e92d0_len_5da0", get_variable, ScriptInstance* script, Bytecode var);
+// TODO: consider renaming to si_get_variable
+#ifdef NON_MATCHING
+/*
+s32 get_variable(ScriptInstance* script, Bytecode var) {
+    s32 wordIdx;
+    s32 bitIdx;
 
-INCLUDE_ASM("code_e92d0_len_5da0", get_variable_index);
+    if (var <= -270000000) {
+        return var;
+    } else if (var <= -250000000) {
+        return var;
+    } else if (var <= -220000000) {
+        return fixed_var_to_float(var);
+    } else if (var <= -200000000) {
+        var += 210000000;
+        wordIdx = var / 32;
+        bitIdx = var % 32;
+        return (script->flagArray[wordIdx] & (1 << bitIdx)) != 0;
+    } else if (var <= -180000000) {
+        var += 190000000;
+        var = script->array[var];
+        return (var > -270000000 && var < -220000000) ? fixed_var_to_float(var) : var;
+    } else if (var <= -160000000) {
+        var += 170000000;
+        return get_global_byte(var);
+    } else if (var <= -140000000) {
+        var += 150000000;
+        return get_area_byte(var);
+    } else if (var <= -120000000) {
+        var += 130000000;
+        return get_global_flag(var);
+    } else if (var <= -100000000) {
+        var += 110000000;
+        return get_area_flag(var);
+    } else if (var <= -80000000) {
+        var += 90000000;
+        wordIdx = var / 32;
+        bitIdx = var % 32;
+        return (gMapFlags[wordIdx] & (1 << bitIdx)) != 0;
+    } else if (var <= -60000000) {
+        var += 70000000;
+        wordIdx = var / 32;
+        bitIdx = var % 32;
+        return (script->varFlags[wordIdx] & (1 << bitIdx)) != 0;
+    } else if (var <= -40000000) {
+        var += 50000000;
+        var = gMapVars[var];
+        return (var > -270000000 && var < -220000000) ? fixed_var_to_float(var) : var;
+    } else if (var <= -20000000) {
+        var += 30000000;
+        var = script->varTable[var];
+        return (var > -270000000 && var < -220000000) ? fixed_var_to_float(var) : var;
+    } else {
+        return var;
+    }
+}
+*/
+#else
+INCLUDE_ASM(s32, "code_e92d0_len_5da0", get_variable, ScriptInstance* script, Bytecode var);
+#endif
 
-INCLUDE_ASM("code_e92d0_len_5da0", get_variable_index_alt);
+INCLUDE_ASM(s32, "code_e92d0_len_5da0", get_variable_index);
 
-s32 INCLUDE_ASM("code_e92d0_len_5da0", set_variable, ScriptInstance* script, Bytecode var, s32 value);
+INCLUDE_ASM(s32, "code_e92d0_len_5da0", get_variable_index_alt);
 
-f32 INCLUDE_ASM("code_e92d0_len_5da0", get_float_variable, ScriptInstance* script, Bytecode var);
+INCLUDE_ASM(s32, "code_e92d0_len_5da0", set_variable, ScriptInstance* script, Bytecode var, s32 value);
 
-f32 INCLUDE_ASM("code_e92d0_len_5da0", set_float_variable, ScriptInstance* script, Bytecode var, f32 value);
+INCLUDE_ASM(f32, "code_e92d0_len_5da0", get_float_variable, ScriptInstance* script, Bytecode var);
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_goto_label);
+INCLUDE_ASM(f32, "code_e92d0_len_5da0", set_float_variable, ScriptInstance* script, Bytecode var, f32 value);
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_skip_if);
+INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_find_label, ScriptInstance* script, s32 arg1);
+
+INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_skip_if, ScriptInstance* script);
 // Matching but needs rodata support
 /*Bytecode* si_skip_if(ScriptInstance* script) {
     s32 nestedIfDepth = 0;
@@ -772,7 +861,7 @@ INCLUDE_ASM("code_e92d0_len_5da0", si_skip_if);
     } while(1);
 }*/
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_skip_else);
+INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_skip_else, ScriptInstance* script);
 // Matching but needs rodata support
 /*Bytecode* si_skip_else(ScriptInstance* script) {
     s32 nestedIfDepth = 0;
@@ -808,18 +897,18 @@ INCLUDE_ASM("code_e92d0_len_5da0", si_skip_else);
     } while(1);
 }*/
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_goto_end_case);
+INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_goto_end_case, ScriptInstance* script);
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_goto_next_case);
+INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_goto_next_case, ScriptInstance* script);
 
-INCLUDE_ASM("code_e92d0_len_5da0", si_goto_end_loop);
+INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_goto_end_loop, ScriptInstance* script);
 
 // Ethan: I think this is the start of a new file
-INCLUDE_API_ASM("code_e92d0_len_5da0", TranslateModel);
+//INCLUDE_ASM(s32, "code_e92d0_len_5da0", TranslateModel, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_API_ASM("code_e92d0_len_5da0", RotateModel);
+INCLUDE_ASM(s32, "code_e92d0_len_5da0", RotateModel, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_API_ASM("code_e92d0_len_5da0", ScaleModel);
+INCLUDE_ASM(s32, "code_e92d0_len_5da0", ScaleModel, ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus GetModelIndex(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* thisPos = script->ptrReadPos;
@@ -848,15 +937,102 @@ ApiStatus CloneModel(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_API_ASM("code_e92d0_len_5da0", GetModelCenter);
+ApiStatus GetModelCenter(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* thisPos = script->ptrReadPos;
+    f32 centerX;
+    f32 centerY;
+    f32 centerZ;
+    f32 sizeX;
+    f32 sizeY;
+    f32 sizeZ;
 
-INCLUDE_API_ASM("code_e92d0_len_5da0", SetTexPanner);
+    get_model_center_and_size(get_variable(script, *thisPos++) & 0xFFFF, &centerX, &centerY, &centerZ, &sizeX, &sizeY,
+                              &sizeZ);
+    script->varTable[0] = centerX;
+    script->varTable[1] = centerY;
+    script->varTable[2] = centerZ;
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_API_ASM("code_e92d0_len_5da0", SetModelFlag10);
+ApiStatus SetTexPanner(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* thisPos = script->ptrReadPos;
+    s32 treeIndex = get_variable(script, *thisPos++);
+    s32 var2 = get_variable(script, *thisPos++);
+    Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(treeIndex));
 
-INCLUDE_API_ASM("code_e92d0_len_5da0", EnableTexPanning);
+    set_tex_panner(model, var2);
+    model->flags |= 0x800;
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_API_ASM("code_e92d0_len_5da0", EnableModel);
+ApiStatus SetModelFlag10(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* thisPos = script->ptrReadPos;
+    Bytecode treeIndex = get_variable(script, *thisPos++);
+    Bytecode var2 = get_variable(script, *thisPos++);
+    Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(treeIndex));
+
+    if (var2 != 0) {
+        model->flags |= 0x10;
+    } else {
+        model->flags &= ~0x10;
+    }
+    return ApiStatus_DONE2;
+}
+
+#ifdef NON_MATCHING
+ApiStatus func_802C90FC(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* thisPos = script->ptrReadPos;
+    s32 treeIndex = get_variable(script, *thisPos++);
+    s32 var2 = get_variable(script, *thisPos++);
+    s32 var3 = get_variable(script, *thisPos++);
+    Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(treeIndex));
+
+    func_8011BC7C(model, var2, var3);
+    if (var2 != -1) {
+        model->flags |= 0x10;
+    }
+    return ApiStatus_DONE2;
+}
+#else
+INCLUDE_ASM(s32, "code_e92d0_len_5da0", func_802C90FC);
+#endif
+
+ApiStatus func_802C91A4(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* thisPos = script->ptrReadPos;
+    Bytecode treeIndex = get_variable(script, *thisPos++);
+    Bytecode var2 = get_variable(script, *thisPos++);
+
+    get_model_from_list_index(get_model_list_index_from_tree_index(treeIndex))->unk_A9 = var2;
+    return ApiStatus_DONE2;
+}
+
+ApiStatus EnableTexPanning(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* thisPos = script->ptrReadPos;
+    s32 treeIndex = get_variable(script, *thisPos++);
+    s32 flag = get_variable(script, *thisPos++);
+    Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(treeIndex));
+
+    if (flag) {
+        model->flags |= 0x800;
+    } else {
+        model->flags &= ~0x800;
+    }
+    return ApiStatus_DONE2;
+}
+
+ApiStatus EnableModel(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* thisPos = script->ptrReadPos;
+    s32 listIndex = get_model_list_index_from_tree_index(get_variable(script, *thisPos++));
+    Bytecode flag = get_variable(script, *thisPos++);
+    Model* model = get_model_from_list_index(listIndex);
+
+    if (flag != 0) {
+        model->flags &= ~0x2;
+    } else {
+        model->flags |= 0x2;
+    }
+    return ApiStatus_DONE2;
+}
 
 ApiStatus SetGroupEnabled(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* thisPos = script->ptrReadPos;
@@ -867,25 +1043,108 @@ ApiStatus SetGroupEnabled(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_API_ASM("code_e92d0_len_5da0", SetTexPanOffset);
+INCLUDE_ASM(s32, "code_e92d0_len_5da0", SetTexPanOffset, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_API_ASM("code_e92d0_len_5da0", SetModelFlags);
+ApiStatus func_802C9428(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* thisPos = script->ptrReadPos;
+    s32 var1 = get_variable(script, *thisPos++);
+    s32 var2 = get_variable(script, *thisPos++);
+    s32 var3 = get_variable(script, *thisPos++);
 
-INCLUDE_ASM("code_e92d0_len_5da0", func_802C95A0);
+    func_8011BCB4(var1, var2, var3);
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_API_ASM("code_e92d0_len_5da0", TranslateGroup);
+ApiStatus func_802C94A0(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* thisPos = script->ptrReadPos;
+    s32 var1 = get_variable(script, *thisPos++);
+    s32 var2 = get_variable(script, *thisPos++);
+    s32 var3 = get_variable(script, *thisPos++);
 
-INCLUDE_API_ASM("code_e92d0_len_5da0", RotateGroup);
+    func_8011BCD0(var1, var2, var3);
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_API_ASM("code_e92d0_len_5da0", ScaleGroup);
+#ifdef NON_MATCHING
+/*ApiStatus SetModelFlags(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* thisPos = script->ptrReadPos;
+    s32 listIndex;
+    Bytecode zvar;
+    Bytecode avar;
+    Bytecode flag;
+    Model* model;
 
-INCLUDE_API_ASM("code_e92d0_len_5da0", EnableGroup);
+    listIndex = get_model_list_index_from_tree_index(get_variable(script, *thisPos++));
+    zvar = thisPos[1];
+    avar = thisPos[0];
+    flag = get_variable(script, zvar);
+    model = get_model_from_list_index(listIndex);
 
-INCLUDE_ASM("code_e92d0_len_5da0", modify_collider_family_flags);
+    if (flag != 0) {
+        model->flags |= avar;
+    } else {
+        model->flags &= ~avar;
+    }
+    return ApiStatus_DONE2;
+}*/
+#else
+INCLUDE_ASM(s32, "code_e92d0_len_5da0", SetModelFlags, ScriptInstance* script, s32 isInitialCall);
+#endif
 
-INCLUDE_API_ASM("code_e92d0_len_5da0", ModifyColliderFlags);
+INCLUDE_ASM(s32, "code_e92d0_len_5da0", func_802C95A0);
 
-INCLUDE_API_ASM("code_e92d0_len_5da0", ResetFromLava);
+ApiStatus func_802C971C(ScriptInstance* script, s32 isInitialCall) {
+    func_8011B37C((u16)get_variable(script, *script->ptrReadPos));
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_802C9748(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* thisPos = script->ptrReadPos;
+    u16 var1 = get_variable(script, *thisPos++);
+    s32 var2 = get_variable(script, *thisPos++);
+
+    if (var2 != 0) {
+        func_8011B5D0(var1);
+    } else {
+        func_8011B660(var1);
+    }
+    return ApiStatus_DONE2;
+}
+
+INCLUDE_ASM(s32, "code_e92d0_len_5da0", TranslateGroup, ScriptInstance* script, s32 isInitialCall);
+
+INCLUDE_ASM(s32, "code_e92d0_len_5da0", RotateGroup, ScriptInstance* script, s32 isInitialCall);
+
+INCLUDE_ASM(s32, "code_e92d0_len_5da0", ScaleGroup, ScriptInstance* script, s32 isInitialCall);
+
+ApiStatus func_802C9B40(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* thisPos = script->ptrReadPos;
+    s32 var1 = get_variable(script, *thisPos++);
+    Bytecode var2 = *thisPos++;
+
+    set_variable(script, var2, func_8011B090(var1));
+    return ApiStatus_DONE2;
+}
+
+INCLUDE_ASM(s32, "code_e92d0_len_5da0", EnableGroup, ScriptInstance* script, s32 isInitialCall);
+
+ApiStatus func_802C9C70(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* thisPos = script->ptrReadPos;
+    s32 var1 = get_variable(script, *thisPos++);
+    u16 var2 = get_variable(script, *thisPos++);
+    s32 var3 = get_variable(script, *thisPos++);
+
+    func_8011C164(var1, var2, var3);
+    return ApiStatus_DONE2;
+}
+
+INCLUDE_ASM(s32, "code_e92d0_len_5da0", modify_collider_family_flags);
+
+INCLUDE_ASM(s32, "code_e92d0_len_5da0", ModifyColliderFlags, ScriptInstance* script, s32 isInitialCall);
+
+INCLUDE_ASM(s32, "code_e92d0_len_5da0", ResetFromLava, ScriptInstance* script, s32 isInitialCall);
+
+INCLUDE_ASM(s32, "code_e92d0_len_5da0", func_802C9FD4);
 
 ApiStatus GetColliderCenter(ScriptInstance* script, s32 initialCall) {
     f32 x;
@@ -901,16 +1160,26 @@ ApiStatus GetColliderCenter(ScriptInstance* script, s32 initialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_API_ASM("code_e92d0_len_5da0", ParentColliderToModel);
+ApiStatus ParentColliderToModel(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* thisPos = script->ptrReadPos;
+    s16 colliderID = get_variable(script, *thisPos++);
+    s32 treeIndex = get_variable(script, *thisPos++);
+
+    parent_collider_to_model(colliderID, get_model_list_index_from_tree_index(treeIndex));
+    update_collider_transform(colliderID);
+    return ApiStatus_DONE2;
+}
 
 ApiStatus UpdateColliderTransform(ScriptInstance* script, s32 isInitialCall) {
     update_collider_transform(get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM("code_e92d0_len_5da0", func_802CA1B8);
+INCLUDE_ASM(s32, "code_e92d0_len_5da0", set_zone_enabled);
 
-INCLUDE_ASM("code_e92d0_len_5da0", goto_map);
+INCLUDE_ASM(s32, "code_e92d0_len_5da0", SetZoneEnabled);
+
+INCLUDE_ASM(s32, "code_e92d0_len_5da0", goto_map);
 
 ApiStatus GotoMap(ScriptInstance* script, s32 isInitialCall) {
     goto_map(script, 0);
@@ -952,6 +1221,6 @@ ApiStatus SetRenderMode(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_API_ASM("code_e92d0_len_5da0", PlaySoundAtModel);
+INCLUDE_ASM(s32, "code_e92d0_len_5da0", PlaySoundAtModel, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_API_ASM("code_e92d0_len_5da0", PlaySoundAtCollider);
+INCLUDE_ASM(s32, "code_e92d0_len_5da0", PlaySoundAtCollider, ScriptInstance* script, s32 isInitialCall);

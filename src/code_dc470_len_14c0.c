@@ -67,7 +67,7 @@ u16 func_80145E98(s32 arg0, s32 arg1, s32 arg2) {
     return temp_lo;
 }
 
-INCLUDE_ASM("code_dc470_len_14c0", func_80145EC0);
+INCLUDE_ASM(s32, "code_dc470_len_14c0", func_80145EC0);
 
 void func_8014720C(void) {
     D_8014F12F = 1;

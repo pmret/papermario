@@ -1,3 +1,3 @@
 #include "common.h"
 
-INCLUDE_API_ASM("os/code_41600_len_40", osDequeueThread);
+INCLUDE_ASM(s32, "os/code_41600_len_40", osDequeueThread);
