@@ -71,15 +71,27 @@ ApiStatus SetPlayerPos(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "code_F5750", SetPlayerCollisionSize, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "code_F5750", SetPlayerSpeed, ScriptInstance* script, s32 isInitialCall);
+ApiStatus SetPlayerSpeed(ScriptInstance* script, s32 isInitialCall) {
+    gPlayerNpcPtr->moveSpeed = get_float_variable(script, *script->ptrReadPos);
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "code_F5750", SetPlayerJumpscale, ScriptInstance* script, s32 isInitialCall);
+ApiStatus SetPlayerJumpscale(ScriptInstance* script, s32 isInitialCall) {
+    gPlayerNpcPtr->jumpScale = get_float_variable(script, *script->ptrReadPos);
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_F5750", SetPlayerAnimation, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "code_F5750", SetPlayerActionState, ScriptInstance* script, s32 isInitialCall);
+ApiStatus SetPlayerActionState(ScriptInstance* script, s32 isInitialCall) {
+    set_action_state(get_variable(script, *script->ptrReadPos));
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "code_F5750", SetPlayerAnimationSpeed, ScriptInstance* script, s32 isInitialCall);
+ApiStatus SetPlayerAnimationSpeed(ScriptInstance* script, s32 isInitialCall) {
+    gPlayerNpcPtr->animationSpeed = get_float_variable(script, *script->ptrReadPos);
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_F5750", PlayerMoveTo, ScriptInstance* script, s32 isInitialCall);
 
@@ -105,7 +117,10 @@ INCLUDE_ASM(s32, "code_F5750", InterpPlayerYaw, ScriptInstance* script, s32 isIn
 
 INCLUDE_ASM(s32, "code_F5750", PlayerFaceNpc, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "code_F5750", GetPlayerTargetYaw, ScriptInstance* script, s32 isInitialCall);
+ApiStatus GetPlayerTargetYaw(ScriptInstance* script, s32 isInitialCall) {
+    set_variable(script, *script->ptrReadPos, gPlayerStatus.targetYaw);
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_F5750", SetPlayerFlagBits, ScriptInstance* script, s32 isInitialCall);
 
