@@ -10,9 +10,27 @@ void osCleanupThread(void);
 s32 heap_malloc(s32 size);
 HeapNode* _heap_create(void* addr, s32 size);
 
+s32 get_global_byte(s32 index);
+s32 get_global_flag(s32 index);
+s32 get_area_byte(s32 index);
+s32 get_area_flag(s32 index);
+
+Shadow* get_shadow_by_index(s32 index);
+
+void render_player_model();
+
+void parent_collider_to_model(s32 colliderID, s16 modelIndex);
 void clone_model(u16 srcModelID, u16 newModelID);
+Model* get_model_from_list_index(s32 listIndex);
+s32 get_model_list_index_from_tree_index(s32 treeIndex);
+void get_model_center_and_size(s32 modelID, f32* centerX, f32* centerY, f32* centerZ, f32* sizeX, f32* sizeY,
+                               f32* sizeZ);
+
 void update_collider_transform(s16 colliderID);
 void get_collider_center(s32 colliderID, f32* x, f32* y, f32* z);
+
+Trigger* create_trigger(TriggerDefinition* def);
+s32 _bound_script_trigger_handler(Trigger* trigger);
 
 s32 get_variable(ScriptInstance* script, Bytecode var);
 s32 set_variable(ScriptInstance* script, Bytecode var, s32 value);
@@ -28,17 +46,26 @@ s32 func_80055464(s32, s32);
 s32 func_800554A4(s32, s32);
 s32 func_800554E8(s32, s32);
 s32 func_800555E4(s32);
+s32 osGetId();
+
+s32 func_800EF394(f32);
+s32 does_script_exist(s32 id);
+
 void func_8011B7C0(u16, s32, s32);
 void func_80137D88(s32, f32);
 void func_80137DA4(s32, f32);
-void func_80137E10(s32, u8, u8, u8);
+s32 func_80137E10(s32, u8, u8, u8);
 void func_80137E4C(s32, s32, s32, s32);
 s32 rand_int(s32);
 void sort_items(void);
 s32 is_ability_active(s32 arg0);
 f32 update_lerp(Easing easing, f32 start, f32 end, s32 elapsed, s32 duration);
 
+void make_item_entity_delayed(s32 itemID, f32 x, f32 y, f32 z, s32 unk1, s32 unk2, s32 unk3);
+
 void set_cam_viewport(s16 id, s16 x, s16 y, s16 width, s16 height);
+
+void disable_player_shadow(void);
 
 Npc* get_npc_safe(NpcId npcId);
 Npc* get_npc_unsafe(NpcId npcId);
@@ -51,4 +78,7 @@ void add_vec2D_polar(f32* x, f32* y, f32 r, f32 theta);
 
 s32 play_sound_at_position(s32 soundID, s32 value2, f32 posX, f32 posY, f32 posZ);
 s32 set_music_track(s32 musicPlayer, s32 songID, s32 variation, s32 unk, s32 volume);
+
+ScriptInstance* get_script_by_index(s32 index);
+
 #endif

@@ -1,17 +1,36 @@
 #include "common.h"
 
-INCLUDE_ASM("code_6e40_len_500", func_8002BA40);
+void initialize_curtains(void) {
+    D_8009BAA0 = 0;
+    D_8009BA90 = 2.0f;
+    D_8009BA94 = 2.0f;
+    D_8009BA98 = 0;
+    D_8009BA9C = 0;
+}
 
-INCLUDE_ASM("code_6e40_len_500", func_8002BA78);
+void update_curtains(void) {
+}
 
-INCLUDE_ASM("code_6e40_len_500", func_8002BA80);
+INCLUDE_ASM(s32, "code_6e40_len_500", render_curtains);
 
-INCLUDE_ASM("code_6e40_len_500", func_8002BEDC);
+void set_curtain_scale_goal(f32 arg0) {
+    D_8009BA94 = arg0;
+}
 
-INCLUDE_ASM("code_6e40_len_500", func_8002BEEC);
+void set_curtain_scale(f32 arg0) {
+    D_8009BA94 = arg0;
+    D_8009BA90 = arg0;
+}
 
-INCLUDE_ASM("code_6e40_len_500", func_8002BF04);
+void set_curtain_draw_callback(s32 arg0) {
+    D_8009BAA0 = arg0;
+}
 
-INCLUDE_ASM("code_6e40_len_500", func_8002BF14);
+void set_curtain_fade_goal(f32 arg0) {
+    D_8009BA9C = arg0;
+}
 
-INCLUDE_ASM("code_6e40_len_500", func_8002BF24);
+void set_curtain_fade(f32 arg0) {
+    D_8009BA9C = arg0;
+    D_8009BA98 = arg0;
+}

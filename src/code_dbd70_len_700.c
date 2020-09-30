@@ -4,7 +4,7 @@ void default_trigger_function_handler(s32* arg0) {
     arg0[0] |= 2;
 }
 
-INCLUDE_ASM("code_dbd70_len_700", clear_trigger_data);
+INCLUDE_ASM(s32, "code_dbd70_len_700", clear_trigger_data);
 
 void init_trigger_list(void) {
     if ((*gGameStatusPtr)->isBattle == 0) {
@@ -16,9 +16,9 @@ void init_trigger_list(void) {
     gTriggerCount = 0;
 }
 
-INCLUDE_ASM("code_dbd70_len_700", create_trigger);
+INCLUDE_ASM(Trigger*, "code_dbd70_len_700", create_trigger, TriggerDefinition* def);
 
-INCLUDE_ASM("code_dbd70_len_700", update_triggers);
+INCLUDE_ASM(s32, "code_dbd70_len_700", update_triggers);
 
 void delete_trigger(Trigger* toDelete) {
     s32 i;
@@ -35,7 +35,7 @@ void delete_trigger(Trigger* toDelete) {
     }
 }
 
-INCLUDE_ASM("code_dbd70_len_700", is_trigger_bound);
+INCLUDE_ASM(s32, "code_dbd70_len_700", is_trigger_bound);
 
 Trigger* get_trigger_by_id(s32 triggerID) {
     return (*gCurrentTriggerListPtr)[triggerID];
@@ -62,5 +62,5 @@ s32 func_80145CE8(s32 arg0) {
     return ret;
 }
 #else
-INCLUDE_ASM("code_dbd70_len_700", func_80145CE8);
+INCLUDE_ASM(s32, "code_dbd70_len_700", func_80145CE8);
 #endif
