@@ -85,25 +85,19 @@ sudo git clone https://github.com/matt-kempster/mips_to_c.git path/to/mips_to_c
 
 Here's a starter function you can use:
 ```sh
-# don't forget to replace /path/to/mips_to_c with you're path
+# don't forget to replace /path/to/mips_to_c with your path
 function mipstoc() {
-    if [ "$#" -eq 2 ]; then
-        echo "running mips_to_c on file $1 for func $2";
-        /path/to/mips_to_c/mips_to_c.py $1 $2;
-    elif [ "$#" -gt 2 ]; then
-        echo "running mips_to_c on file $1 for func $2 with flags";
+    if [ "$#" -gt 1 ]; then
         /path/to/mips_to_c/mips_to_c.py $@;
     else
         printf "Please call mipstoc using this format and make sure you're at the repo root:";
-        printf "\nmipstoc\t\033[0;31marg1 - the nonmatching asm file\033[0m \t\t\t\033[0;34marg2 - the target function\033[0m \033[0;33margN - any of the optional mips_to_c.py flags\033[0m";
-        printf "\nmipstoc \033[0;31m./asm/nonmatchings/code_13870_len_6980/func_8003B3D0.s\033[0m \t\033[0;34mfunc_8003B3D0\033[0m \033[0;33m--flag1 --flag2 --flag3\033[0m\n";
+        printf "\nmipstoc \033[0;31marg1 - the nonmatching asm file\033[0m \033[0;34marg2 - the target function\033[0m \033[0;33margN - any of the optional mips_to_c.py flags\033[0m";
+        printf "\nmipstoc \033[0;31m./asm/nonmatchings/code_13870_len_6980/func_8003B3D0.s\033[0m \033[0;34mfunc_8003B3D0\033[0m \033[0;33m--flag1 --flag2 --flagN\033[0m\n";
         /path/to/mips_to_c/mips_to_c.py;
     fi
 }
 export -f mipstoc
 ```
-
-If mips_to_c gives you an error about branch-likely instructions, edit the `.s` file and rename any branch-likely instructions to their unlikely equivalent (i.e. remove the `l` suffix). Add a `nop` after the branches and move the instruction that was originally in the delay slot (directly after the branch instruction) to the start of the target label. Don't commit the edited assembly.
 
 Open up the relevant `.c` file and replace the function's `INCLUDE_ASM` macro with the output from mips_to_c. Run the following command to attempt to compile, replacing `function_name` with the name of the function you're working with:
 
