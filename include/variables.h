@@ -103,6 +103,7 @@ extern s32 D_8009BAA0; // curtain draw callback
 
 extern s16 gCurrentDoorSoundsSet;
 
+extern s32 D_800D9620;
 extern UNK_TYPE D_800E92D8;
 extern UNK_TYPE D_80147474;
 extern UNK_TYPE D_80147574;

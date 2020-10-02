@@ -5,6 +5,7 @@ s32 si_skip_if(ScriptInstance* script);
 s32 si_skip_else(ScriptInstance* script);
 s32 si_goto_end_loop(ScriptInstance* script);
 s32 si_goto_end_case(ScriptInstance* script);
+s32 si_goto_next_case(ScriptInstance* script);
 
 f32 fixed_var_to_float(s32 scriptVar) {
     if (scriptVar <= -220000000) {
@@ -235,13 +236,52 @@ ApiStatus si_handle_case_default(ScriptInstance* script) {
     do {} while (0); // Necessary to match
 }
 
+#ifdef NON_MATCHING
+ApiStatus si_handle_case_AND(ScriptInstance* script) {
+    Bytecode *args = script->ptrReadPos;
+    s32 a0;
+    s32 switchBlockValue;
+    
+    ASSERT(script->switchDepth >= 0);
+
+    switchBlockValue = script->switchBlockValue[script->switchDepth];
+    a0 = *args;
+
+    if (script->switchBlockState[script->switchDepth] <= 0) {
+        script->ptrNextLine = si_goto_end_case(script);
+    } else if ((a0 & switchBlockValue) != 0) { 
+        script->switchBlockState[script->switchDepth] = 0; 
+    } else { 
+        script->ptrNextLine = si_goto_next_case(script); 
+    }
+
+    return ApiStatus_DONE2;
+    do {} while (0); // Necessary to match
+}
+#else
 INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_handle_case_AND);
+#endif
 
 INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_handle_case_equal_OR);
 
 INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_handle_case_equal_AND);
 
-INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_handle_end_case_group);
+ApiStatus si_handle_end_case_group(ScriptInstance* script) {
+    ASSERT(script->switchDepth >= 0);
+
+    if (script->switchBlockState[script->switchDepth] == 0) {
+        script->ptrNextLine = si_goto_end_case(script);
+    } else if (script->switchBlockState[script->switchDepth] != -1) {
+        script->switchBlockState[script->switchDepth] = 1;
+        script->ptrNextLine = si_goto_next_case(script);
+    } else {
+        script->switchBlockState[script->switchDepth] = 0;
+        script->ptrNextLine = si_goto_end_case(script);
+    }
+    
+    return ApiStatus_DONE2;
+    do {} while (0); // Necessary to match
+}
 
 ApiStatus si_handle_break_case(ScriptInstance* script) {
     ASSERT(script->switchDepth >= 0);
@@ -610,7 +650,28 @@ ApiStatus si_handle_OR_const(ScriptInstance* script) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_handle_call);
+ApiStatus si_handle_call(ScriptInstance* script) {
+    Bytecode* args = script->ptrReadPos;
+    s32 isInitialCall;
+    ApiFunc func;
+    ScriptInstance* newScript; // todo fake match 
+
+    if (script->blocked) {
+        isInitialCall = FALSE;
+        func = script->callFunction;
+        newScript = script; // todo fake match 
+    } else {
+        script->callFunction = get_variable(script, *args++);
+        newScript = script; // todo fake match 
+        script->ptrReadPos = args;
+        script->flags.bytes.currentArgc--;
+        script->blocked = TRUE;
+        isInitialCall = TRUE;
+        func = script->callFunction;
+    }
+    
+    return func(newScript, isInitialCall); // todo fake match 
+}
 
 INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_handle_exec1);
 
@@ -618,8 +679,8 @@ INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_handle_exec2);
 
 ApiStatus si_handle_exec_wait(ScriptInstance* script) {
     start_child_script(script, get_variable(script, *script->ptrReadPos), 0);
-    script->currentOpcode = 0;
-    return 0xFF;
+    script->flags.bytes.currentOpcode = 0;
+    return ApiStatus_FINISH;
 }
 
 ApiStatus si_handle_jump(ScriptInstance* script) {
@@ -702,6 +763,31 @@ ApiStatus si_handle_does_script_exist(ScriptInstance* script) {
 }
 
 INCLUDE_ASM(s32, "code_e92d0_len_5da0", func_802C6AD0);
+//ApiStatus func_802C6AD0(ScriptInstance* script);
+/*ApiStatus func_802C6AD0(ScriptInstance* script) {
+    ScriptInstance* newScript;
+    s32 scriptExists;
+    s32 ret;
+    s32 a;
+
+    if (script->labelIndices[1] == 0) {
+        newScript = start_script(script->labelIndices[0], script->labelIndices[2], 0x20);
+        script->labelIndices[1] = newScript;
+        script->labelPositions[5] = newScript->uniqueID;
+        newScript->varTable[0] = script->labelIndices[3];
+        newScript->varTable[1] = script->labelPositions[0];
+        newScript->varTable[2] = script->labelPositions[1];
+        newScript->ownerID = script;
+    }
+
+    ret = scriptExists = does_script_exist(script->labelPositions[5]);
+    if (!scriptExists) {
+        script->labelIndices[1] = NULL;
+        script->flags.flags &= ~0x2;
+        ret = script->flags.flags;
+    }
+    return ret;
+}*/
 
 INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_handle_bind_lock, ScriptInstance* script, s32 isInitialCall);
 
@@ -1178,6 +1264,40 @@ ApiStatus UpdateColliderTransform(ScriptInstance* script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "code_e92d0_len_5da0", set_zone_enabled);
 
 INCLUDE_ASM(s32, "code_e92d0_len_5da0", SetZoneEnabled);
+/*ApiStatus SetZoneEnabled(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+
+    s16 temp_a0;
+    s32 temp_a1;
+
+    s32 temp_s0_2;
+    s32 temp_v0;
+
+    void *temp_s1;
+    s32 phi_v0;
+
+    temp_s0_2 = get_variable(script, *args++);
+    temp_v0 = get_variable(script, *args++);
+    
+    temp_s1 = *(void *)0x800D91D4 + (temp_s0_2 * 0x1C);
+    temp_a0 = temp_s1->unk6;
+    if ((s32) temp_a0 >= 0) {
+        set_zone_enabled(temp_a0, temp_v0);
+    }
+    if (temp_v0 != 0) {
+        if (temp_v0 != 1) {
+
+        } else {
+            phi_v0 = temp_s1->unk0 & ~0x10000;
+block_7:
+            temp_s1->unk0 = phi_v0;
+        }
+    } else {
+        phi_v0 = temp_s1->unk0 | 0x10000;
+        goto block_7;
+    }
+    return 2;
+}*/
 
 INCLUDE_ASM(s32, "code_e92d0_len_5da0", goto_map);
 

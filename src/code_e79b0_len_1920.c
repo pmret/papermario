@@ -27,7 +27,7 @@ ScriptInstance* restart_script(ScriptInstance* script) {
     script->loopDepth = -1;
     script->switchDepth = -1;
     script->frameCounter = 0;
-    script->currentOpcode = 0;
+    script->flags.bytes.currentOpcode = 0;
     script->frameCounter = 0;
     script->unk_158 = 0;
 
@@ -99,7 +99,7 @@ s32 does_script_exist_by_ref(ScriptInstance* script) {
 }
 
 void set_script_priority(ScriptInstance* script, s8 priority) {
-    script->priority = priority;
+    script->flags.bytes.priority = priority;
 }
 
 void set_script_timescale(ScriptInstance* script, f32 timescale) {
@@ -170,7 +170,7 @@ void suspend_group_script(ScriptInstance* script, s32 groupFlags) {
     }
 
     if ((script->groupFlags & groupFlags) != 0) {
-        script->state |= 0x2;
+        script->flags.bytes.state |= 0x2;
     }
 }
 
@@ -191,7 +191,7 @@ void resume_group_script(ScriptInstance* script, s32 groupFlags) {
     }
 
     if ((script->groupFlags & groupFlags) != 0) {
-        script->state &= 0xFD;
+        script->flags.bytes.state &= ~0x2;
     }
 }
 
@@ -315,7 +315,7 @@ void set_script_flags(ScriptInstance* script, s32 flags) {
     ScriptInstance* scriptContextPtr;
     ScriptInstance* childScript = script->childScript;
 
-    script->state |= flags;
+    script->flags.bytes.state |= flags;
     if (childScript != NULL) {
         set_script_flags(childScript, flags);
     }
@@ -334,7 +334,7 @@ void clear_script_flags(ScriptInstance* script, s32 flags) {
     ScriptInstance* scriptContextPtr;
     ScriptInstance* childScript = script->childScript;
 
-    script->state &= ~flags;
+    script->flags.bytes.state &= ~flags;
     if (childScript != NULL) {
         clear_script_flags(childScript, flags);
     }

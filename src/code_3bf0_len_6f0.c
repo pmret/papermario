@@ -17,8 +17,8 @@ void func_800287F0(void) {
     {
         GameStatus* gameStatus = *gGameStatusPtr;
         gameStatus->prevButtons = 0;
-        gameStatus->unk_50 = 4;
-        gameStatus->unk_48 = 15;
+        gameStatus->unk_50[0] = 4;
+        gameStatus->unk_48[0] = 15;
         gameStatus->unk_60 = 0;
         gameStatus->unk_58 = 0;
     }
