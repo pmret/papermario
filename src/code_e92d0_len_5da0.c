@@ -762,16 +762,9 @@ ApiStatus si_handle_does_script_exist(ScriptInstance* script) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_e92d0_len_5da0", func_802C6AD0);
-//ApiStatus func_802C6AD0(ScriptInstance* script);
-/*ApiStatus func_802C6AD0(ScriptInstance* script) {
-    ScriptInstance* newScript;
-    s32 scriptExists;
-    s32 ret;
-    s32 a;
-
+void func_802C6AD0(ScriptInstance* script) {
     if (script->labelIndices[1] == 0) {
-        newScript = start_script(script->labelIndices[0], script->labelIndices[2], 0x20);
+        ScriptInstance* newScript = start_script(script->labelIndices[0], script->labelIndices[2], 0x20);
         script->labelIndices[1] = newScript;
         script->labelPositions[5] = newScript->uniqueID;
         newScript->varTable[0] = script->labelIndices[3];
@@ -780,14 +773,11 @@ INCLUDE_ASM(s32, "code_e92d0_len_5da0", func_802C6AD0);
         newScript->ownerID = script;
     }
 
-    ret = scriptExists = does_script_exist(script->labelPositions[5]);
-    if (!scriptExists) {
+    if (!does_script_exist(script->labelPositions[5])) {
         script->labelIndices[1] = NULL;
         script->flags.flags &= ~0x2;
-        ret = script->flags.flags;
     }
-    return ret;
-}*/
+}
 
 INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_handle_bind_lock, ScriptInstance* script, s32 isInitialCall);
 
