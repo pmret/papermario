@@ -1254,40 +1254,6 @@ ApiStatus UpdateColliderTransform(ScriptInstance* script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "code_e92d0_len_5da0", set_zone_enabled);
 
 INCLUDE_ASM(s32, "code_e92d0_len_5da0", SetZoneEnabled);
-/*ApiStatus SetZoneEnabled(ScriptInstance* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-
-    s16 temp_a0;
-    s32 temp_a1;
-
-    s32 temp_s0_2;
-    s32 temp_v0;
-
-    void *temp_s1;
-    s32 phi_v0;
-
-    temp_s0_2 = get_variable(script, *args++);
-    temp_v0 = get_variable(script, *args++);
-    
-    temp_s1 = *(void *)0x800D91D4 + (temp_s0_2 * 0x1C);
-    temp_a0 = temp_s1->unk6;
-    if ((s32) temp_a0 >= 0) {
-        set_zone_enabled(temp_a0, temp_v0);
-    }
-    if (temp_v0 != 0) {
-        if (temp_v0 != 1) {
-
-        } else {
-            phi_v0 = temp_s1->unk0 & ~0x10000;
-block_7:
-            temp_s1->unk0 = phi_v0;
-        }
-    } else {
-        phi_v0 = temp_s1->unk0 | 0x10000;
-        goto block_7;
-    }
-    return 2;
-}*/
 
 INCLUDE_ASM(s32, "code_e92d0_len_5da0", goto_map);
 
