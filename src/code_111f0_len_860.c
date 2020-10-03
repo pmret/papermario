@@ -5,19 +5,19 @@ void func_80035DF0(s16 arg0) {
     *tempPtr = arg0;
 }
 
-INCLUDE_ASM("code_111f0_len_860", func_80035E00);
+INCLUDE_ASM(s32, "code_111f0_len_860", func_80035E00);
 
-INCLUDE_ASM("code_111f0_len_860", func_80035E24);
+INCLUDE_ASM(s32, "code_111f0_len_860", func_80035E24);
 
-INCLUDE_ASM("code_111f0_len_860", func_80035E54);
+INCLUDE_ASM(s32, "code_111f0_len_860", func_80035E54);
 
-INCLUDE_ASM("code_111f0_len_860", func_80035EEC);
+INCLUDE_ASM(s32, "code_111f0_len_860", func_80035EEC);
 
 void func_800360FC(void) {
     GameStatus* gameStatus = *gGameStatusPtr;
 
     if (gameStatus->loadMenuState == 2) {
-        func_800E973C();
+        draw_status_ui();
     }
 }
 
@@ -36,13 +36,13 @@ void func_80036130(void) {
     }
 }
 
-INCLUDE_ASM("code_111f0_len_860", func_8003617C);
+INCLUDE_ASM(s32, "code_111f0_len_860", func_8003617C);
 
 s32 func_800363FC(void) {
     s32 phi_return;
 
     if ((D_800A0944 == 4) || (phi_return = 4, (D_800A0944 == 0))) {
-        phi_return = func_800E973C();
+        phi_return = draw_status_ui();
     }
     return phi_return;
 }
@@ -59,7 +59,7 @@ s32 func_80036430(void) {
     return playerStatus->flags;
 }
 
-INCLUDE_ASM("code_111f0_len_860", func_8003646C);
+INCLUDE_ASM(s32, "code_111f0_len_860", func_8003646C);
 
 void func_80036640(void) {
 }

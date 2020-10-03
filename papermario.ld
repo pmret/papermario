@@ -221,6 +221,7 @@ SECTIONS
         build/src/code_ef070_len_3400.o(.text);
         build/src/code_f2470_len_27f0.o(.text);
         build/src/code_f4c60_len_4300.o(.text);
+        build/src/code_F5750.o(.text);
         build/src/code_f8f60_len_1560.o(.text);
         build/src/code_fa4c0_len_3bf0.o(.text);
         build/src/code_fe0b0_len_5a0.o(.text);
@@ -242,6 +243,7 @@ SECTIONS
         build/src/code_107830_len_e70.o(.text);
         build/src/code_1086a0_len_fc0.o(.text);
         build/src/code_109660_len_1270.o(.text);
+        build/src/code_10A8D0.o(.text);
     }
 
     /* 0x00000000 10A9F0-131340 [26950] */

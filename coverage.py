@@ -5,10 +5,13 @@ from os import remove
 from sys import argv
 import re
 from glob import glob
+from pathlib import Path
 
 DIR = path.dirname(__file__)
-C_FILES = glob(path.join(DIR, "src/*.c"))
-ASM_FILES = glob(path.join(DIR, "asm/nonmatchings/**/*.s"))
+NONMATCHINGS_DIR = Path(path.join(DIR, "asm", "nonmatchings"))
+
+C_FILES = Path(path.join(DIR, "src")).rglob("*.c")
+ASM_FILES = NONMATCHINGS_DIR.rglob("*.s")
 
 def strip_c_comments(text):
     def replacer(match):
@@ -31,7 +34,7 @@ def funcs_in_c(text):
     return (match.group(1) for match in c_func_pattern.finditer(text))
 
 asm_func_pattern = re.compile(
-    r"INCLUDE_(?:API_)?ASM\([^,]+, ([^,)]+)",
+    r"INCLUDE_ASM\([^,]+, [^,]+, ([^,)]+)",
     re.MULTILINE
 )
 def include_asms_in_c(text):
@@ -67,7 +70,7 @@ if __name__ == "__main__":
             exit(1)
         elif "--delete-matched" in argv or input("Delete them [y/N]? ").upper() == "Y":
             for func in matched_but_undeleted_asm:
-                file = glob(path.join(DIR, f"asm/nonmatchings/*/{func}.s"))[0]
-                remove(file)
+                f = next(NONMATCHINGS_DIR.rglob(func + ".s"))
+                remove(f)
     elif len(asm) != len(non_matched):
         print(f"warning: number of INCLUDE_ASM macros ({len(asm)}) != number of asm files ({len(non_matched)})")

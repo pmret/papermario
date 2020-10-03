@@ -1,3 +1,3 @@
 #include "common.h"
 
-INCLUDE_API_ASM("os/code_46c50_len_20", osAiDeviceBusy);
+INCLUDE_ASM(s32, "os/code_46c50_len_20", osAiDeviceBusy);
