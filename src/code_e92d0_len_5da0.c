@@ -238,10 +238,10 @@ ApiStatus si_handle_case_default(ScriptInstance* script) {
 
 #ifdef NON_MATCHING
 ApiStatus si_handle_case_AND(ScriptInstance* script) {
-    Bytecode *args = script->ptrReadPos;
+    Bytecode* args = script->ptrReadPos;
     s32 a0;
     s32 switchBlockValue;
-    
+
     ASSERT(script->switchDepth >= 0);
 
     switchBlockValue = script->switchBlockValue[script->switchDepth];
@@ -249,10 +249,10 @@ ApiStatus si_handle_case_AND(ScriptInstance* script) {
 
     if (script->switchBlockState[script->switchDepth] <= 0) {
         script->ptrNextLine = si_goto_end_case(script);
-    } else if ((a0 & switchBlockValue) != 0) { 
-        script->switchBlockState[script->switchDepth] = 0; 
-    } else { 
-        script->ptrNextLine = si_goto_next_case(script); 
+    } else if ((a0 & switchBlockValue) != 0) {
+        script->switchBlockState[script->switchDepth] = 0;
+    } else {
+        script->ptrNextLine = si_goto_next_case(script);
     }
 
     return ApiStatus_DONE2;
@@ -278,7 +278,7 @@ ApiStatus si_handle_end_case_group(ScriptInstance* script) {
         script->switchBlockState[script->switchDepth] = 0;
         script->ptrNextLine = si_goto_end_case(script);
     }
-    
+
     return ApiStatus_DONE2;
     do {} while (0); // Necessary to match
 }
@@ -654,23 +654,23 @@ ApiStatus si_handle_call(ScriptInstance* script) {
     Bytecode* args = script->ptrReadPos;
     s32 isInitialCall;
     ApiFunc func;
-    ScriptInstance* newScript; // todo fake match 
+    ScriptInstance* newScript; // todo fake match
 
     if (script->blocked) {
         isInitialCall = FALSE;
         func = script->callFunction;
-        newScript = script; // todo fake match 
+        newScript = script; // todo fake match
     } else {
         script->callFunction = get_variable(script, *args++);
-        newScript = script; // todo fake match 
+        newScript = script; // todo fake match
         script->ptrReadPos = args;
         script->flags.bytes.currentArgc--;
         script->blocked = TRUE;
         isInitialCall = TRUE;
         func = script->callFunction;
     }
-    
-    return func(newScript, isInitialCall); // todo fake match 
+
+    return func(newScript, isInitialCall); // todo fake match
 }
 
 INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_handle_exec1);

@@ -140,7 +140,7 @@ s32 get_coin_drop_amount(Enemy* enemy) {
         amt *= 3;
     }
 
-    if (is_ability_active(Ability_MONEY_MONEY) ) {
+    if (is_ability_active(Ability_MONEY_MONEY)) {
         amt *= 2;
     }
 
@@ -149,7 +149,7 @@ s32 get_coin_drop_amount(Enemy* enemy) {
     if (enemy->flags & 0x840000) {
         amt = 0;
     }
-    
+
     if (amt > 20) {
         amt = 20;
     }

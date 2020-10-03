@@ -9,7 +9,7 @@ void begin_state_init(void) {
 void step_init_state(void) {
     GameStatus* gameStatus = GAME_STATUS;
     s32 i;
-    
+
     if (gameStatus->loadMenuState != 0) {
         gameStatus->loadMenuState--;
         return;
@@ -69,7 +69,7 @@ void step_init_state(void) {
     }
 
     fio_has_valid_backup();
-    
+
     if (D_800D9620 == 0) {
         GAME_STATUS->unk_AB = 1;
         func_8005615C();
@@ -77,7 +77,7 @@ void step_init_state(void) {
         GAME_STATUS->unk_AB = 0;
         func_80056180();
     }
-    
+
     D_8009A650[0] &= ~0x8;
     set_game_mode(1);
 }

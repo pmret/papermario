@@ -2,7 +2,7 @@
 
 void func_80035DF0(s16 arg0) {
     s16* tempPtr = &D_800A0942;
-    
+
     *tempPtr = arg0;
 }
 

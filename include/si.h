@@ -23,6 +23,6 @@ typedef s32 ApiStatus;
 
 struct ScriptInstance;
 
-typedef ApiStatus (*ApiFunc)(struct ScriptInstance* script, s32 isInitialCall);
+typedef ApiStatus(*ApiFunc)(struct ScriptInstance* script, s32 isInitialCall);
 
 #endif
