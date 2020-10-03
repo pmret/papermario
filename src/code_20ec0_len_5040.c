@@ -100,7 +100,7 @@ INCLUDE_ASM(s32, "code_20ec0_len_5040", func_8004824C);
 
 INCLUDE_ASM(s32, "code_20ec0_len_5040", spawn_drops);
 
-//INCLUDE_ASM(s32, "code_20ec0_len_5040", get_coin_drop_amount);
+#ifdef NON_MATCHING
 s32 get_coin_drop_amount(Enemy* enemy) {
     EncounterStatus* currentEncounter;
     s32 amt;
@@ -156,6 +156,9 @@ s32 get_coin_drop_amount(Enemy* enemy) {
 
     return amt;
 }
+#else
+INCLUDE_ASM(s32, "code_20ec0_len_5040", get_coin_drop_amount);
+#endif
 
 INCLUDE_ASM(s32, "code_20ec0_len_5040", func_80048E34);
 

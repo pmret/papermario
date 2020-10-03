@@ -1,21 +1,25 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "code_7bb60_len_41b0", func_800E26B0);
+void func_800E26B0(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+
+    playerStatus->jumpApexHeight = playerStatus->position.y;
+}
 
 INCLUDE_ASM(s32, "code_7bb60_len_41b0", func_800E26C4);
 
 void set_action_state(s32 actionState);
 
 void move_player(s16 duration, f32 heading, f32 speed) {
-    PlayerStatus* player_status = &gPlayerStatus;
+    PlayerStatus* playerStatus = &gPlayerStatus;
 
-    player_status->flags = player_status->flags | 0x4000;
-    player_status->heading = heading;
-    player_status->moveFrames = duration;
-    player_status->currentSpeed = speed;
+    playerStatus->flags |= 0x4000;
+    playerStatus->heading = heading;
+    playerStatus->moveFrames = duration;
+    playerStatus->currentSpeed = speed;
 
-    if (!(player_status->animFlags & 0x00400000)) {
-        set_action_state(speed > player_status->walkSpeed ? ActionState_RUN : ActionState_WALK);
+    if (!(playerStatus->animFlags & 0x00400000)) {
+        set_action_state(speed > playerStatus->walkSpeed ? ActionState_RUN : ActionState_WALK);
     }
 }
 
@@ -37,9 +41,16 @@ INCLUDE_ASM(s32, "code_7bb60_len_41b0", func_800E315C);
 
 INCLUDE_ASM(s32, "code_7bb60_len_41b0", phys_player_land);
 
-INCLUDE_ASM(s32, "code_7bb60_len_41b0", integrate_gravity);
+INCLUDE_ASM(f32, "code_7bb60_len_41b0", integrate_gravity);
 
-INCLUDE_ASM(s32, "code_7bb60_len_41b0", func_800E34D8);
+f32 func_800E34D8(void) {
+    f32 ret = integrate_gravity();
+
+    if (func_800E0208() != 0) {
+        ret = 0.0f;
+    }
+    return ret;
+}
 
 INCLUDE_ASM(s32, "code_7bb60_len_41b0", func_800E3514);
 
@@ -67,7 +78,9 @@ INCLUDE_ASM(s32, "code_7bb60_len_41b0", func_800E4F10);
 
 INCLUDE_ASM(s32, "code_7bb60_len_41b0", check_input_midair_jump);
 
-INCLUDE_ASM(s32, "code_7bb60_len_41b0", get_current_partner_id);
+PartnerId get_current_partner_id(void) {
+    return gPlayerData.currentPartner;
+}
 
 INCLUDE_ASM(s32, "code_7bb60_len_41b0", func_800E5098);
 
@@ -81,7 +94,13 @@ INCLUDE_ASM(s32, "code_7bb60_len_41b0", func_800E5348);
 
 INCLUDE_ASM(s32, "code_7bb60_len_41b0", func_800E546C);
 
-INCLUDE_ASM(s32, "code_7bb60_len_41b0", save_ground_pos);
+void save_ground_pos(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+
+    playerStatus->lastGoodPosition.x = playerStatus->position.x;
+    playerStatus->lastGoodPosition.y = playerStatus->position.y;
+    playerStatus->lastGoodPosition.z = playerStatus->position.z;
+}
 
 INCLUDE_ASM(s32, "code_7bb60_len_41b0", func_800E5520);
 
@@ -98,21 +117,21 @@ INCLUDE_ASM(s32, "code_7bb60_len_41b0", func_800E5A2C);
 INCLUDE_ASM(s32, "code_7bb60_len_41b0", func_800E5C78);
 
 void set_action_state(s32 actionState) {
-    PlayerStatus* player_status = &gPlayerStatus;
-    PlayerData* player_data = &gPlayerData;
-    UNK_TYPE* unknown_struct = &D_8010F250;
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    PlayerData* playerData = &gPlayerData;
+    UNK_TYPE* unknownStruct = &D_8010F250;
 
-    if (player_status->flags & 0x200) {
-        player_status->flags &= ~0x200;
+    if (playerStatus->flags & 0x200) {
+        playerStatus->flags &= ~0x200;
         enable_player_input();
     }
 
-    if (player_status->animFlags & 0x4000) {
+    if (playerStatus->animFlags & 0x4000) {
         if (actionState < ActionState_CONVERSATION) {
             if (actionState >= 0) {
-                player_status->prevActionState = player_status->actionState;
-                player_status->actionState = actionState;
-                player_status->flags |= 0x80000000;
+                playerStatus->prevActionState = playerStatus->actionState;
+                playerStatus->actionState = actionState;
+                playerStatus->flags |= 0x80000000;
             }
         }
         return;
@@ -121,71 +140,117 @@ void set_action_state(s32 actionState) {
     if (actionState == ActionState_HIT_HAZARD || actionState == ActionState_HIT_LAVA) {
         u8 partner;
 
-        if (player_status->unk_BF == 3) {
+        if (playerStatus->unk_BF == 3) {
             actionState = ActionState_HIT_HAZARD;
         }
 
         // Whilst Lakilester, Bow, or Parakarry's ability is active, hazards have no effect.
-        partner = player_data->currentPartner;
-        if ((partner - 7) < 2u || (s8)partner == PartnerId_PARAKARRY) {
-            if (D_8010EBB0) {
-                player_status->animFlags |= 0x4;
-                player_status->flags |= 0x800;
+        partner = playerData->currentPartner;
+        if (((u8)(partner - 7) < 2) || (playerData->currentPartner == PartnerId_PARAKARRY)) {
+            if (D_8010EBB0[0]) {
+                playerStatus->animFlags |= 0x4;
+                playerStatus->flags |= 0x800;
                 return;
             }
         }
     }
 
     if (actionState == ActionState_SLIDING) {
-        player_status->flags |= 0x10;
-        player_status->moveFrames = 0;
-        player_status->flags &= ~0x4000;
+        playerStatus->flags |= 0x10;
+        playerStatus->moveFrames = 0;
+        playerStatus->flags &= ~0x4000;
     }
 
-    player_status->prevActionState = player_status->actionState;
+    playerStatus->prevActionState = playerStatus->actionState;
     if (actionState == ActionState_USE_TWEESTER) {
-        player_status->prevActionState = ActionState_IDLE;
+        playerStatus->prevActionState = ActionState_IDLE;
     }
 
     if (actionState == ActionState_ENEMY_FIRST_STRIKE) {
-        player_status->animFlags |= 4;
+        playerStatus->animFlags |= 4;
     }
-    player_status->actionState = actionState;
-    player_status->flags |= 0x80000000;
+    playerStatus->actionState = actionState;
+    playerStatus->flags |= 0x80000000;
 
-    if (player_status->actionState == ActionState_SPIN) {
+    if (playerStatus->actionState == ActionState_SPIN) {
         return;
     }
 
-    player_status->flags &= 0xFFFDFFFF;
-    player_status->animFlags &= 0xFFFEFFFF;
+    playerStatus->flags &= ~0x20000;
+    playerStatus->animFlags &= ~0x10000;
 
-    if (unknown_struct[0xC]) {
-        stop_sound(unknown_struct[0xC]);
+    if (unknownStruct[0xC]) {
+        stop_sound(unknownStruct[0xC]);
     }
 
-    if (player_status->unk_D8) {
-        player_status->unk_D8[3][9] = 0xA;
-        player_status->unk_D8 = NULL;
+    if (playerStatus->unk_D8) {
+        playerStatus->unk_D8[3][9] = 0xA;
+        playerStatus->unk_D8 = NULL;
     }
 }
 
 INCLUDE_ASM(s32, "code_7bb60_len_41b0", update_locomotion_state);
+/*void update_locomotion_state(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    ActionState actionState = ActionState_WALK;
 
-INCLUDE_ASM(s32, "code_7bb60_len_41b0", start_falling);
+    if (!is_ability_active(Ability_SLOW_GO)) {
+        actionState = ActionState_WALK;
+        if (SQ(playerStatus->stickAxis[0]) + SQ(playerStatus->stickAxis[1]) >= 0xBD2) {
+            actionState = ActionState_RUN;
+        }
+    }
+    set_action_state(actionState);
+}*/
 
-INCLUDE_ASM(s32, "code_7bb60_len_41b0", start_bounce_a);
+// todo these floats don't work
+#ifdef NON_MATCHING
+void start_falling(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
 
-INCLUDE_ASM(s32, "code_7bb60_len_41b0", start_bounce_b);
+    set_action_state(ActionState_FALLING);
+    playerStatus->gravityIntegrator[1] = 0.1143f;
+    playerStatus->gravityIntegrator[2] = -0.2871f;
+    playerStatus->gravityIntegrator[3] = -0.1823f;
+    playerStatus->gravityIntegrator[4] = 0.01152f;
+}
+#else
+INCLUDE_ASM(void, "code_7bb60_len_41b0", start_falling);
+#endif
+
+#ifdef NON_MATCHING
+void start_bounce_a(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+
+    set_action_state(ActionState_BOUNCE);
+    playerStatus->gravityIntegrator[0] = 10.0f;
+    playerStatus->gravityIntegrator[1] = -2.0f;
+    playerStatus->gravityIntegrator[2] = 0.5f; // todo is 0.8f but this doesn't work atm
+    playerStatus->gravityIntegrator[3] = -0.75f;
+}
+#else
+INCLUDE_ASM(void, "code_7bb60_len_41b0", start_bounce_a);
+#endif
+
+void start_bounce_b(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+
+    set_action_state(ActionState_BOUNCE);
+    playerStatus->gravityIntegrator[0] = 8.0f;
+    playerStatus->gravityIntegrator[1] = -1.0f;
+    playerStatus->gravityIntegrator[2] = 0;
+    playerStatus->gravityIntegrator[3] = 0;
+    playerStatus->flags |= 0x800000;
+}
 
 s32 check_input_hammer(void) {
-    PlayerStatus* player_status = &gPlayerStatus;
-    PlayerData* player_data = &gPlayerData;
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    PlayerData* playerData = &gPlayerData;
 
-    if (player_status->pressedButtons & Buttons_B) {
-        if (!(player_status->flags & 4)) {
-            if (D_8010EBB0 != 1 || player_data->currentPartner != PartnerId_WATT) {
-                if (player_data->hammerLevel != -1) {
+    if (playerStatus->pressedButtons & Buttons_B) {
+        if (!(playerStatus->flags & 4)) {
+            if (D_8010EBB0[0] != 1 || playerData->currentPartner != PartnerId_WATT) {
+                if (playerData->hammerLevel != -1) {
                     set_action_state(ActionState_HAMMER);
                     return TRUE;
                 }

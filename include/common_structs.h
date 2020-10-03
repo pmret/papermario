@@ -1368,7 +1368,7 @@ typedef struct PlayerStatus {
     /* 0x012 */ s16 moveFrames;
     /* 0x014 */ s8 enableCollisionOverlapsCheck;
     /* 0x015 */ s8 statusMenuCounterinputEnabledCounter; /* whether the C-up menu can appear */
-    /* 0x016 */ s16 lastGoodPosition[3];
+    /* 0x016 */ Vec3s lastGoodPosition;
     /* 0x01C */ struct Vec3f extraVelocity;
     /* 0x028 */ struct Vec3f position;
     /* 0x034 */ char unk_34[16];

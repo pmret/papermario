@@ -19,6 +19,8 @@ Shadow* get_shadow_by_index(s32 index);
 
 void render_player_model();
 
+f32 integrate_gravity(void);
+
 void parent_collider_to_model(s32 colliderID, s16 modelIndex);
 void clone_model(u16 srcModelID, u16 newModelID);
 Model* get_model_from_list_index(s32 listIndex);
