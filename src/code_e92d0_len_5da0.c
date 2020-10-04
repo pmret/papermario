@@ -1273,17 +1273,17 @@ ApiStatus GotoMapByID(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus GetEntryID(ScriptInstance* script, s32 isInitialCall) {
-    set_variable(script, *script->ptrReadPos, (*gGameStatusPtr)->entryID);
+    set_variable(script, *script->ptrReadPos, GAME_STATUS->entryID);
     return ApiStatus_DONE2;
 }
 
 ApiStatus GetMapID(ScriptInstance* script, s32 isInitialCall) {
-    set_variable(script, *script->ptrReadPos, (*gGameStatusPtr)->mapID);
+    set_variable(script, *script->ptrReadPos, GAME_STATUS->mapID);
     return ApiStatus_DONE2;
 }
 
 ApiStatus GetLoadType(ScriptInstance* script, s32 isInitialCall) {
-    set_variable(script, *script->ptrReadPos, (*gGameStatusPtr)->loadType != 0);
+    set_variable(script, *script->ptrReadPos, GAME_STATUS->loadType != 0);
     return ApiStatus_DONE2;
 }
 

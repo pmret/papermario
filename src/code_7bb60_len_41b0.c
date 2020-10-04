@@ -190,18 +190,6 @@ void set_action_state(s32 actionState) {
 }
 
 INCLUDE_ASM(s32, "code_7bb60_len_41b0", update_locomotion_state);
-/*void update_locomotion_state(void) {
-    PlayerStatus* playerStatus = &gPlayerStatus;
-    ActionState actionState = ActionState_WALK;
-
-    if (!is_ability_active(Ability_SLOW_GO)) {
-        actionState = ActionState_WALK;
-        if (SQ(playerStatus->stickAxis[0]) + SQ(playerStatus->stickAxis[1]) >= 0xBD2) {
-            actionState = ActionState_RUN;
-        }
-    }
-    set_action_state(actionState);
-}*/
 
 // todo these floats don't work
 #ifdef NON_MATCHING

@@ -22,13 +22,13 @@ void step_init_state(void) {
     gameStatus->mapID = 0;
     gameStatus->entryID = 0;
 
-    (*gGameStatusPtr)->unk_76 = 0;
-    (*gGameStatusPtr)->disableScripts = 0;
-    (*gGameStatusPtr)->unk_7D = 0;
-    (*gGameStatusPtr)->unk_A8 = -1;
-    (*gGameStatusPtr)->unk_AA = 0;
-    (*gGameStatusPtr)->unk_A9 = -1;
-    (*gGameStatusPtr)->demoState = 0;
+    GAME_STATUS->unk_76 = 0;
+    GAME_STATUS->disableScripts = 0;
+    GAME_STATUS->unk_7D = 0;
+    GAME_STATUS->unk_A8 = -1;
+    GAME_STATUS->unk_AA = 0;
+    GAME_STATUS->unk_A9 = -1;
+    GAME_STATUS->demoState = 0;
 
     general_heap_create();
     func_8011D890();

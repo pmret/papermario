@@ -5,9 +5,9 @@ void func_800287F0(void) {
     GameStatus* gameStatus;
     GameStatus* gameStatus2;
 
-    gameStatus = *gGameStatusPtr;
+    gameStatus = GAME_STATUS;
     gameStatus->stickX = 0;
-    gameStatus2 = *gGameStatusPtr;
+    gameStatus2 = GAME_STATUS;
     gameStatus->currentButtons = 0;
     gameStatus->pressedButtons = 0;
     gameStatus->heldButtons = 0;
@@ -15,7 +15,7 @@ void func_800287F0(void) {
 
     // TODO: macro
     {
-        GameStatus* gameStatus = *gGameStatusPtr;
+        GameStatus* gameStatus = GAME_STATUS;
         gameStatus->prevButtons = 0;
         gameStatus->unk_50[0] = 4;
         gameStatus->unk_48[0] = 15;
