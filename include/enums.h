@@ -11,6 +11,7 @@ typedef UNK_TYPE EncounterTriggerFlags;
 #define EncounterTriggerFlags_HAMMER  0x00000004
 #define EncounterTriggerFlags_PARTNER 0x00000006
 
+typedef s8 PartnerId;
 #define PartnerId_NONE       0x00
 #define PartnerId_GOOMBARIO  0x01
 #define PartnerId_KOOPER     0x02

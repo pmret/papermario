@@ -4,6 +4,7 @@
 #include "ultra64.h"
 #include "types.h"
 #include "macros.h"
+#include "common_structs.h"
 
 #define SI_VAR_0 0xFE363C80
 
@@ -20,6 +21,8 @@ typedef s32 ApiStatus;
 #define ApiStatus_REPEAT 3   /* Call again immediately */
 #define ApiStatus_FINISH 255 /* Corresponds to SI_FINISH */
 
-#define API_FUN(NAME) ApiStatus (*NAME)(struct ScriptInstance* script, s32 isInitialCall)
+struct ScriptInstance;
+
+typedef ApiStatus(*ApiFunc)(struct ScriptInstance* script, s32 isInitialCall);
 
 #endif

@@ -62,7 +62,7 @@ INCLUDE_ASM(s32, "code_42e0_len_1f60", func_80029860);
 s32 _advance_rng(void) {
     s32* rngVal = &gRandSeed;
 
-    (*gGameStatusPtr)->nextRNG = *rngVal = (*rngVal * 0x5D588B65) + 1;
+    GAME_STATUS->nextRNG = *rngVal = (*rngVal * 0x5D588B65) + 1;
 
     return *rngVal;
 }
@@ -106,7 +106,7 @@ f32 get_clamped_angle_diff(f32 a, f32 b) {
 INCLUDE_ASM(f32, "code_42e0_len_1f60", atan2, f32 startX, f32 startZ, f32 endX, f32 endZ);
 
 f32 get_player_normal_yaw(void) {
-    return atan2(0, 0, (*gGameStatusPtr)->playerTraceNormal.x, (*gGameStatusPtr)->playerTraceNormal.z);
+    return atan2(0, 0, GAME_STATUS->playerTraceNormal.x, GAME_STATUS->playerTraceNormal.z);
 }
 
 INCLUDE_ASM(s32, "code_42e0_len_1f60", get_player_normal_pitch);
