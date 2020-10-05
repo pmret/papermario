@@ -16,9 +16,9 @@ INCLUDE_ASM(s32, "code_d0a70_len_4fe0", func_8013A704);
 
 typedef struct UnkStructFromfunc8013A854 {
     /* 0x00 */ char unk_00[0x10];
-    /* 0x10 */ u16 unk10;
+    /* 0x10 */ s16 unk10;
     /* 0x11 */ char unk_11[0x01];
-    /* 0x14 */ u16 unk14;
+    /* 0x14 */ s32 unk14;
     /* 0x15 */ char unk_15[0x67];
 } UnkStructFromfunc8013A854; // size = 0x7C
 
@@ -28,12 +28,13 @@ void func_8013A854(u32 index) {
     if (index < 0x5AU) {
         UnkStructFromfunc8013A854* unkStruct;
         temp_v0 = temp_v0 - index;
+        u32 temp_v1;
         u32 temp_v1 = 0x80156954;
         temp_v0 = temp_v0 << 2;
         temp_v0 = temp_v0 + temp_v1;
         unkStruct = &D_80156954[temp_v0];
         unkStruct->unk14 = 0;
-        unkStruct->unk10 = (u16)-1;
+        unkStruct->unk10 = (s16)-1;
     }
 }
 
