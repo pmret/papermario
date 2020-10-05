@@ -21,8 +21,4 @@ typedef s32 ApiStatus;
 #define ApiStatus_REPEAT 3   /* Call again immediately */
 #define ApiStatus_FINISH 255 /* Corresponds to SI_FINISH */
 
-struct ScriptInstance;
-
-typedef ApiStatus(*ApiFunc)(struct ScriptInstance* script, s32 isInitialCall);
-
 #endif

@@ -243,6 +243,10 @@ typedef union {
     s32 flags;
 } ScriptFlags;
 
+struct ScriptInstance;
+
+typedef ApiStatus(*ApiFunc)(struct ScriptInstance*, s32);
+
 typedef struct ScriptInstance {
     /* 0x000 */ ScriptFlags flags;
     /* 0x004 */ u8 groupFlags;
@@ -1407,7 +1411,7 @@ typedef struct PlayerStatus {
     /* 0x0DC */ s32 currentButtons;
     /* 0x0E0 */ s32 pressedButtons;
     /* 0x0E4 */ s32 heldButtons;
-    /* 0x0E8 */ f32 stickAxis[2];
+    /* 0x0E8 */ s32 stickAxis[2];
     /* 0x0F0 */ s32 currentButtonsBuffer[10];
     /* 0x118 */ s32 pressedButtonsBuffer[10];
     /* 0x140 */ s32 heldButtonsBuffer[10];
