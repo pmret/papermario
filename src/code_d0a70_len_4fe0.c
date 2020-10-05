@@ -15,14 +15,21 @@ INCLUDE_ASM(s32, "code_d0a70_len_4fe0", func_8013A6E8);
 INCLUDE_ASM(s32, "code_d0a70_len_4fe0", func_8013A704);
 
 // INCLUDE_ASM(s32, "code_d0a70_len_4fe0", func_8013A854);
+typedef struct UnkSructFromfunc8013A854 {
+    /* 0x00 */ char unk_00[0x10];
+    /* 0x10 */ u16 unk10;
+    /* 0x11 */ char unk_11[0x03];
+    /* 0x14 */ u16 unk14;
+    /* 0x15 */ char unk_15[0x67];
+} UnkSructFromfunc8013A854; // size = 0x7C
+
 s32 func_8013A854(u32 a0) {
     UnkSructFromfunc8013A854* v0 = D_80156954;
+    s32 temp_v0;
     s32 phi_return;
-
-    phi_return = a0 << 5;
     if (a0 < 0x5AU) { // sltiu $v0, $a0, 0x5a bool result of less then compare, won't run code if equal 0
         s32 v1 = 0x80156954; 
-        v0 = (a0 * 0x7C) + func_8013A854(a0);
+        v0 = (a0 * 0x7C) + 0x80156954;
         v0 = v0 - a0;
         v0 = 0x80156954 << 2;
         v0 = v0 + v1;
@@ -30,6 +37,7 @@ s32 func_8013A854(u32 a0) {
         v0->unk10 = (u16)-1;
         phi_return = v0;
     }
+    phi_return = a0 << 5;
     return phi_return;
 }
 
