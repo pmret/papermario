@@ -26,11 +26,9 @@ void func_8013A854(u32 index) {
     s32 temp_v0;
     if (index < 0x5AU) {
         UnkStructFromfunc8013A854* unkStruct;
-        temp_v0 = index << 5;
-        temp_v0 = temp_v0 - index;
-        unkStruct = &D_80156954[temp_v0];
+        unkStruct = &D_80156954[(index * 32) - index];
         unkStruct->unk14 = 0;
-        unkStruct->unk10 = (s16)-1;
+        unkStruct->unk10 = -1;
     }
 }
 
