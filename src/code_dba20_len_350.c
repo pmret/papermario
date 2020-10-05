@@ -1,48 +1,40 @@
 #include "common.h"
 
-#ifdef NON_MATCHING
 void clear_saved_variables(void) {
     SaveData* saveFile = &gCurrentSaveFile;
     s32 i;
 
-    for (i = ARRAY_COUNT(saveFile->globalFlags) - 1; i >= 0; i--) {
+    for (i = 0; i < ARRAY_COUNT(saveFile->globalFlags); i++) {
         saveFile->globalFlags[i] = 0;
     }
 
-    for (i = ARRAY_COUNT(saveFile->globalBytes) - 1; i >= 0; i--) {
+    for (i = 0; i < ARRAY_COUNT(saveFile->globalBytes); i++) {
         saveFile->globalBytes[i] = 0;
     }
 
-    for (i = ARRAY_COUNT(saveFile->areaFlags) - 1; i >= 0; i--) {
+    for (i = 0; i < ARRAY_COUNT(saveFile->areaFlags); i++) {
         saveFile->areaFlags[i] = 0;
     }
 
-    for (i = ARRAY_COUNT(saveFile->areaBytes) - 1; i >= 0; i--) {
+    for (i = 0; i < ARRAY_COUNT(saveFile->areaBytes); i++) {
         saveFile->areaBytes[i] = 0;
     }
 }
-#else
-INCLUDE_ASM(s32, "code_dba20_len_350", clear_saved_variables);
-#endif
 
-#ifdef NON_MATCHING
 void clear_area_flags(void) {
     SaveData* saveFile = &gCurrentSaveFile;
     s32 i;
 
     if (GAME_STATUS->changedArea) {
-        for (i = ARRAY_COUNT(saveFile->areaFlags) - 1; i >= 0; i--) {
+        for (i = 0; i < ARRAY_COUNT(saveFile->areaFlags); i++) {
             saveFile->areaFlags[i] = 0;
         }
 
-        for (i = ARRAY_COUNT(saveFile->areaBytes) - 1; i >= 0; i--) {
+        for (i = 0; i < ARRAY_COUNT(saveFile->areaBytes); i++) {
             saveFile->areaBytes[i] = 0;
         }
     }
 }
-#else
-INCLUDE_ASM(s32, "code_dba20_len_350", clear_area_flags);
-#endif
 
 s32 clear_global_flag(s32 index) {
     s32 wordIdx;
@@ -60,7 +52,7 @@ s32 clear_global_flag(s32 index) {
     saveFile = &gCurrentSaveFile;
     flag = saveFile->globalFlags[wordIdx] & (1 << bitIdx);
 
-    if (flag) {
+    if (flag != 0) {
         flag = 1;
     }
 
@@ -84,7 +76,7 @@ s32 set_global_flag(s32 index) {
     saveFile = &gCurrentSaveFile;
     flag = saveFile->globalFlags[wordIdx] & (1 << bitIdx);
 
-    if (flag) {
+    if (flag != 0) {
         flag = 1;
     }
 
