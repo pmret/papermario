@@ -23,13 +23,14 @@ typedef struct UnkStructFromfunc8013A854 {
 } UnkStructFromfunc8013A854; // size = 0x7C
 
 void func_8013A854(u32 index) {
-    u32 temp_v0;
-    temp_v0 = index << 5;
+    s32 temp_v0;
+    temp_v0 = index < 0x5AU;
     if (index < 0x5AU) {
         UnkStructFromfunc8013A854* unkStruct;
+        temp_v0 = index << 5;
         temp_v0 = temp_v0 - index;
-        u32 temp_v1;
-        u32 temp_v1 = 0x80156954;
+        s32 temp_v1;
+        temp_v1 = 0x80156954;
         temp_v0 = temp_v0 << 2;
         temp_v0 = temp_v0 + temp_v1;
         unkStruct = &D_80156954[temp_v0];
