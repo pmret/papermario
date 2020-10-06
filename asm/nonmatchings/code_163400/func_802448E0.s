@@ -64,8 +64,8 @@ glabel func_802448E0
 /* 16521C 802449BC 14400031 */  bnez      $v0, .L80244A84
 /* 165220 802449C0 0260202D */   daddu    $a0, $s3, $zero
 /* 165224 802449C4 0000802D */  daddu     $s0, $zero, $zero
-/* 165228 802449C8 3C15800E */  lui       $s5, 0x800e
-/* 16522C 802449CC 26B5ACC0 */  addiu     $s5, $s5, -0x5340
+/* 165228 802449C8 3C15800E */  lui       $s5, %hi(gCurrentSaveFile)
+/* 16522C 802449CC 26B5ACC0 */  addiu     $s5, $s5, %lo(gCurrentSaveFile)
 /* 165230 802449D0 24140001 */  addiu     $s4, $zero, 1
 /* 165234 802449D4 3C118007 */  lui       $s1, 0x8007
 /* 165238 802449D8 26317A24 */  addiu     $s1, $s1, 0x7a24
@@ -110,14 +110,14 @@ glabel func_802448E0
 /* 1652C8 80244A68 50400001 */  beql      $v0, $zero, .L80244A70
 /* 1652CC 80244A6C AC80003C */   sw       $zero, 0x3c($a0)
 .L80244A70:
-/* 1652D0 80244A70 3C038007 */  lui       $v1, 0x8007
-/* 1652D4 80244A74 8C63419C */  lw        $v1, 0x419c($v1)
+/* 1652D0 80244A70 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
+/* 1652D4 80244A74 8C63419C */  lw        $v1, %lo(gGameStatusPtr)($v1)
 /* 1652D8 80244A78 9082003F */  lbu       $v0, 0x3f($a0)
 /* 1652DC 80244A7C A0620166 */  sb        $v0, 0x166($v1)
 /* 1652E0 80244A80 0260202D */  daddu     $a0, $s3, $zero
 .L80244A84:
-/* 1652E4 80244A84 3C028007 */  lui       $v0, 0x8007
-/* 1652E8 80244A88 8C42419C */  lw        $v0, 0x419c($v0)
+/* 1652E4 80244A84 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* 1652E8 80244A88 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 1652EC 80244A8C 3C118025 */  lui       $s1, 0x8025
 /* 1652F0 80244A90 26319B84 */  addiu     $s1, $s1, -0x647c
 /* 1652F4 80244A94 90460166 */  lbu       $a2, 0x166($v0)

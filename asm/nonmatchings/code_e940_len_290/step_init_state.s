@@ -114,8 +114,8 @@ glabel step_init_state
 /* EB14 80033714 24630002 */   addiu    $v1, $v1, 2
 /* EB18 80033718 0C00ABF6 */  jal       fio_has_valid_backup
 /* EB1C 8003371C 00000000 */   nop      
-/* EB20 80033720 3C02800E */  lui       $v0, 0x800e
-/* EB24 80033724 8C429620 */  lw        $v0, -0x69e0($v0)
+/* EB20 80033720 3C02800E */  lui       $v0, %hi(D_800D9620)
+/* EB24 80033724 8C429620 */  lw        $v0, %lo(D_800D9620)($v0)
 /* EB28 80033728 14400007 */  bnez      $v0, .L80033748
 /* EB2C 8003372C 24020001 */   addiu    $v0, $zero, 1
 /* EB30 80033730 3C038007 */  lui       $v1, %hi(gGameStatusPtr)

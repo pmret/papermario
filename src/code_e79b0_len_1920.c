@@ -12,7 +12,7 @@ INCLUDE_ASM(s32, "code_e79b0_len_1920", func_802C3390);
 
 INCLUDE_ASM(s32, "code_e79b0_len_1920", start_script);
 
-INCLUDE_ASM(s32, "code_e79b0_len_1920", start_script_in_group);
+INCLUDE_ASM(ScriptInstance*, "code_e79b0_len_1920", start_script_in_group, ScriptInstance* script, s32 priority, s32 flags, s32 groups);
 
 INCLUDE_ASM(s32, "code_e79b0_len_1920", start_child_script);
 
