@@ -37,32 +37,6 @@ ApiStatus func_80044290(ScriptInstance* script, s32 isInitialCall) {
 }
 
 INCLUDE_ASM(s32, "code_1f580_len_1940", MakeNpcs, ScriptInstance* script, s32 isInitialCall);
-/*ApiStatus MakeNpcs(ScriptInstance* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    s32 var1;
-    s32 ret;
-
-    if (isInitialCall) {
-        script->functionTemp[0] = 0;
-    }
-
-    if (script->functionTemp[0] != 0) {
-        if (script->functionTemp[0] != 1) {
-            return 0;
-        }
-    } else {
-        var1 = get_variable(script, *args++);
-        make_npcs(var1, GAME_STATUS->mapID, get_variable(script, *args));
-        script->functionTemp[0] = 1;
-        return script->functionTemp[0];
-    }
-
-    if (gGameState != script->functionTemp[0]) {
-        return 2;
-    }
-
-    return script->functionTemp[0];
-}*/
 
 INCLUDE_ASM(s32, "code_1f580_len_1940", RemoveNpc, ScriptInstance* script, s32 isInitialCall);
 
