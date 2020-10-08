@@ -3,7 +3,13 @@
 void NOP_npc_callback(void) {
 }
 
-INCLUDE_ASM(s32, "code_13870_len_6980", mtx_ident_mirror_y);
+void mtx_ident_mirror_y(Matrix4f* mtx) {
+    guMtxIdentF(mtx);
+    mtx->mtx[0][0] = 1.0f;
+    mtx->mtx[1][1] = -1.0f;
+    mtx->mtx[2][2] = 1.0f;
+    mtx->mtx[3][3] = 1.0f;
+}
 
 INCLUDE_ASM(s32, "code_13870_len_6980", clear_npcs);
 
@@ -59,9 +65,29 @@ INCLUDE_ASM(s32, "code_13870_len_6980", func_8003AC5C);
 
 INCLUDE_ASM(s32, "code_13870_len_6980", enable_npc_blur);
 
-INCLUDE_ASM(s32, "code_13870_len_6980", disable_npc_blur);
+void disable_npc_blur(Npc *npc) {
+    if (npc->flags & 0x100000) {
+        npc->flags &= ~0x100000;
+        heap_free(npc->blurData);
+        npc->blurData = NULL;
+    }
+}
 
-INCLUDE_ASM(s32, "code_13870_len_6980", update_npc_blur);
+void update_npc_blur(Npc *npc) {
+    NpcBlurData* blurData = npc->blurData;
+    s32 index = blurData->unk_01;
+
+    blurData->xpos[index] = npc->pos.x;
+    blurData->ypos[index] = npc->pos.y;
+    blurData->zpos[index] = npc->pos.z;
+
+    index++;
+    if (index >= 20) {
+        index = 0;
+    }
+
+    blurData->unk_01 = index;
+}
 
 INCLUDE_ASM(s32, "code_13870_len_6980", appedGfx_npc_blur);
 

@@ -162,27 +162,25 @@ ApiStatus func_802C94A0(ScriptInstance* script, s32 isInitialCall) {
 }
 
 #ifdef NON_MATCHING
-/*ApiStatus SetModelFlags(ScriptInstance* script, s32 isInitialCall) {
-    Bytecode* thisPos = script->ptrReadPos;
-    s32 listIndex;
-    Bytecode zvar;
-    Bytecode avar;
-    Bytecode flag;
+ApiStatus SetModelFlags(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 treeIndex = get_variable(script, *args++);
+    s32 listIndex = get_model_list_index_from_tree_index(treeIndex);
+    s32 a1 = *args++;
+    s32 var2;
     Model* model;
 
-    listIndex = get_model_list_index_from_tree_index(get_variable(script, *thisPos++));
-    zvar = thisPos[1];
-    avar = thisPos[0];
-    flag = get_variable(script, zvar);
+    var2 = get_variable(script, *args);
     model = get_model_from_list_index(listIndex);
 
-    if (flag != 0) {
-        model->flags |= avar;
+    if (var2 != 0) {
+        model->flags |= a1;
     } else {
-        model->flags &= ~avar;
+        model->flags &= ~a1;
     }
+    
     return ApiStatus_DONE2;
-}*/
+}
 #else
 INCLUDE_ASM(s32, "code_ED510", SetModelFlags, ScriptInstance* script, s32 isInitialCall);
 #endif

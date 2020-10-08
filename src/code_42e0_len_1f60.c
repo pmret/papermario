@@ -17,6 +17,21 @@ f32 length2D(f32 x, f32 y) {
 }
 
 INCLUDE_ASM(HeapNode*, "code_42e0_len_1f60", _heap_create, void* addr, s32 size);
+// HeapNode* _heap_create(s32* addr, s32 size) {
+//     s32 temp_a1;
+//     HeapNode* temp_v0;
+
+//     if (size >= 32) {
+//         temp_v0 = (arg0 + 0xF) & -0x10;
+//         temp_a1 = size - (temp_v0 - arg0);
+//         temp_v0->next = NULL;
+//         temp_v0->length = temp_a1 - 16;
+//         temp_v0->allocated = 0;
+//         temp_v0->capacity = temp_a1;
+//         return temp_v0;
+//     }
+//     return -1;
+// }
 
 INCLUDE_ASM(s32, "code_42e0_len_1f60", _heap_malloc);
 

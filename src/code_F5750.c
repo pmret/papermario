@@ -66,7 +66,21 @@ ApiStatus SetPlayerPos(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_F5750", SetPlayerCollisionSize, ScriptInstance* script, s32 isInitialCall);
+ApiStatus SetPlayerCollisionSize(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 height = get_variable(script, *args++);
+    s32 radius = get_variable(script, *args);
+    Npc* player = gPlayerNpcPtr;
+    PlayerStatus* playerStatus = &gPlayerStatus;
+
+    player->collisionHeight = height;
+    player->collisionRadius = radius;
+    
+    playerStatus->colliderHeight = player->collisionHeight;
+    playerStatus->colliderDiameter = player->collisionRadius;
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus SetPlayerSpeed(ScriptInstance* script, s32 isInitialCall) {
     gPlayerNpcPtr->moveSpeed = get_float_variable(script, *script->ptrReadPos);
@@ -80,7 +94,10 @@ ApiStatus SetPlayerJumpscale(ScriptInstance* script, s32 isInitialCall) {
 
 #ifdef NON_MATCHING
 ApiStatus SetPlayerAnimation(ScriptInstance* script, s32 isInitialCall) {
-    PlayerAnim animation = get_variable(script, *script->ptrReadPos);
+    Bytecode* args = script->ptrReadPos;
+    PlayerAnim animation;
+
+    animation = get_variable(script, *args);
 
     gPlayerNpcPtr->currentAnim = animation;
     gPlayerAnimation = animation;
@@ -134,7 +151,21 @@ ApiStatus GetPlayerTargetYaw(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_F5750", SetPlayerFlagBits, ScriptInstance* script, s32 isInitialCall);
+ApiStatus SetPlayerFlagBits(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    PlayerStatus* playerStatus2 = &gPlayerStatus;
+    Bytecode bits = *args++;
+    Bytecode a1 = *args;
+
+    if (get_variable(script, a1)) {
+        playerStatus->flags |= bits;
+    } else {
+        playerStatus2->flags &= ~bits;
+    }
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus GetPlayerActionState(ScriptInstance* script, s32 isInitialCall) {
     Bytecode outVar = *script->ptrReadPos;
@@ -248,7 +279,23 @@ INCLUDE_ASM(s32, "code_F5750", func_802D2B50);
 
 INCLUDE_ASM(s32, "code_F5750", func_802D2B6C);
 
-INCLUDE_ASM(s32, "code_F5750", Disable8bitMario, ScriptInstance* script, s32 isInitialCall);
+ApiStatus Disable8bitMario(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    PlayerStatus* playerStatus2 = &gPlayerStatus;
+
+    if (get_variable(script, *args)) {
+        playerStatus->colliderHeight = 37;
+        playerStatus->colliderDiameter = 26;
+        playerStatus->animFlags &= ~0x4000;
+    } else {
+        playerStatus2->colliderHeight = 19;
+        playerStatus2->colliderDiameter = 26;
+        playerStatus2->animFlags |= 0x44004;
+    }
+
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_F5750", func_802D2C14);
 

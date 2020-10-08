@@ -54,7 +54,9 @@ typedef struct HeapNode {
 } HeapNode; // size = 0x10
 
 typedef struct NpcBlurData {
-    /* 0x00 */ char unk_00[4];
+    /* 0x00 */ char unk_00;
+    /* 0x01 */ s8 unk_01;
+    /* 0x02 */ char unk_02[2];
     /* 0x04 */ f32 xpos[20];
     /* 0x54 */ f32 ypos[20];
     /* 0xA4 */ f32 zpos[20];
