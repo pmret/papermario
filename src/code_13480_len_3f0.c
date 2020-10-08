@@ -1,15 +1,19 @@
 #include "common.h"
 
-#ifdef NON_MATCHING
 void init_demo_data(void) {
+    GameStatus* gameStatus;
+    GameStatus* gameStatus2;
+
     if (GAME_STATUS->demoState == 0) {
         GAME_STATUS->nextDemoScene = 0;
         GAME_STATUS->demoState = 1;
     }
 
+    gameStatus = GAME_STATUS;
     GAME_STATUS->demoStickX = 0;
-    GAME_STATUS->demoButtonInput = 0;
-    GAME_STATUS->demoStickY = 0;
+    gameStatus2 = GAME_STATUS;
+    gameStatus->demoButtonInput = 0;
+    gameStatus2->demoStickY = 0;
 
     func_80056228();
     set_map_transition_effect(2);
@@ -17,9 +21,6 @@ void init_demo_data(void) {
     clear_saved_variables();
     clear_script_list();
 }
-#else
-INCLUDE_ASM(s32, "code_13480_len_3f0", init_demo_data);
-#endif
 
 INCLUDE_ASM(s32, "code_13480_len_3f0", next_demo_scene);
 

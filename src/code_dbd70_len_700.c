@@ -35,7 +35,7 @@ void delete_trigger(Trigger* toDelete) {
     }
 }
 
-INCLUDE_ASM(s32, "code_dbd70_len_700", is_trigger_bound);
+INCLUDE_ASM(s32, "code_dbd70_len_700", is_trigger_bound, Trigger* trigger, Bytecode* script);
 
 Trigger* get_trigger_by_id(s32 triggerID) {
     return (*gCurrentTriggerListPtr)[triggerID];

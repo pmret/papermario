@@ -41,6 +41,7 @@ extern u32** gCurrentModelSpecialDlsPtr[32];
 extern Entity* gWorldEntityList[30];
 extern Entity* gBattleEntityList[30];
 extern Entity** gCurrentEntityListPtr[30];
+extern s32 gLastCreatedEntityIndex;
 
 extern UNK_TYPE* gWorldDynamicEntityList[16];
 extern UNK_TYPE* gBattleDynamicEntityList[16];
@@ -121,5 +122,8 @@ extern u32* gMapVars;
 extern s32 gNumScripts;
 
 extern f32 D_80286540;
+
+// Scripts
+extern Bytecode* SCRIPT_NpcDefeat;
 
 #endif

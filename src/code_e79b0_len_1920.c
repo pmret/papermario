@@ -10,9 +10,10 @@ INCLUDE_ASM(s32, "code_e79b0_len_1920", init_script_list);
 
 INCLUDE_ASM(s32, "code_e79b0_len_1920", func_802C3390);
 
-INCLUDE_ASM(s32, "code_e79b0_len_1920", start_script);
+INCLUDE_ASM(ScriptInstance*, "code_e79b0_len_1920", start_script, Bytecode* script, s32 priority, s32 flags);
 
-INCLUDE_ASM(ScriptInstance*, "code_e79b0_len_1920", start_script_in_group, ScriptInstance* script, s32 priority, s32 flags, s32 groups);
+INCLUDE_ASM(ScriptInstance*, "code_e79b0_len_1920", start_script_in_group, ScriptInstance* script, s32 priority,
+            s32 flags, s32 groups);
 
 INCLUDE_ASM(s32, "code_e79b0_len_1920", start_child_script);
 
@@ -27,7 +28,7 @@ ScriptInstance* restart_script(ScriptInstance* script) {
     script->loopDepth = -1;
     script->switchDepth = -1;
     script->frameCounter = 0;
-    script->flags.bytes.currentOpcode = 0;
+    script->currentOpcode = 0;
     script->frameCounter = 0;
     script->unk_158 = 0;
 
@@ -99,7 +100,7 @@ s32 does_script_exist_by_ref(ScriptInstance* script) {
 }
 
 void set_script_priority(ScriptInstance* script, s8 priority) {
-    script->flags.bytes.priority = priority;
+    script->priority = priority;
 }
 
 void set_script_timescale(ScriptInstance* script, f32 timescale) {
@@ -109,7 +110,7 @@ void set_script_timescale(ScriptInstance* script, f32 timescale) {
 #ifdef NON_MATCHING
 // TODO: figure out why compiler/assembler isn't putting SWC1 in delay slot
 void set_global_timespace(f32 timeScale) {
-    //gGlobalTimeSpace = timeScale;
+    gGlobalTimeSpace = timeScale;
 }
 #else
 INCLUDE_ASM(s32, "code_e79b0_len_1920", set_global_timespace);
@@ -118,7 +119,7 @@ INCLUDE_ASM(s32, "code_e79b0_len_1920", set_global_timespace);
 #ifdef NON_MATCHING
 // TODO: figure out why compiler/assembler isn't putting LWC1 in delay slot
 f32 get_global_timespace(void) {
-    //return gGlobalTimeSpace;
+    return gGlobalTimeSpace;
 }
 #else
 INCLUDE_ASM(s32, "code_e79b0_len_1920", get_global_timespace);
@@ -170,7 +171,7 @@ void suspend_group_script(ScriptInstance* script, s32 groupFlags) {
     }
 
     if ((script->groupFlags & groupFlags) != 0) {
-        script->flags.bytes.state |= 0x2;
+        script->state |= 0x2;
     }
 }
 
@@ -191,7 +192,7 @@ void resume_group_script(ScriptInstance* script, s32 groupFlags) {
     }
 
     if ((script->groupFlags & groupFlags) != 0) {
-        script->flags.bytes.state &= ~0x2;
+        script->state &= ~0x2;
     }
 }
 
@@ -315,7 +316,7 @@ void set_script_flags(ScriptInstance* script, s32 flags) {
     ScriptInstance* scriptContextPtr;
     ScriptInstance* childScript = script->childScript;
 
-    script->flags.bytes.state |= flags;
+    script->state |= flags;
     if (childScript != NULL) {
         set_script_flags(childScript, flags);
     }
@@ -334,7 +335,7 @@ void clear_script_flags(ScriptInstance* script, s32 flags) {
     ScriptInstance* scriptContextPtr;
     ScriptInstance* childScript = script->childScript;
 
-    script->flags.bytes.state &= ~flags;
+    script->state &= ~flags;
     if (childScript != NULL) {
         clear_script_flags(childScript, flags);
     }

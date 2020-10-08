@@ -5,6 +5,11 @@
 #include "types.h"
 #include "si.h"
 
+struct ScriptInstance;
+
+typedef ApiStatus(*ApiFunc)(struct ScriptInstance*, s32);
+
+
 typedef struct Vec3f {
     /* 0x00 */ f32 x;
     /* 0x04 */ f32 y;
@@ -159,9 +164,16 @@ typedef struct PlayerData {
     /* 0x33E */ char unk_33E[2];
 } PlayerData; // size = 0x340
 
+typedef union {
+    struct {
+        /* 0x0 */ s16 genericFlagIndex;
+        /* 0x2 */ char unk_2;
+    } bytes;
+    s32 flags;
+} TriggerFlags;
+
 typedef struct Trigger {
-    /* 0x00 */ s16 genericFlagIndex;
-    /* 0x02 */ char unk_02[2];
+    /* 0x00 */ TriggerFlags flags;
     /* 0x04 */ s32 params1;
     /* 0x08 */ s32 params2;
     /* 0x0C */ UNK_FUN_PTR(functionHandler);
@@ -169,7 +181,8 @@ typedef struct Trigger {
     /* 0x14 */ struct ScriptInstance* runningScript;
     /* 0x18 */ s32 priority;
     /* 0x1C */ s32 scriptVars[3];
-    /* 0x28 */ char unk_28[12];
+    /* 0x28 */ char unk_28[8];
+    /* 0x30 */ s32 unk_30;
     /* 0x34 */ s32 runningScriptID;
 } Trigger; // size = 0x38
 
@@ -178,10 +191,11 @@ typedef struct Enemy {
     /* 0x04 */ u8 encounterIndex;
     /* 0x05 */ s8 encountered;
     /* 0x06 */ u8 scriptGroup; /* scripts launched for this npc controller will be assigned this group */
-    /* 0x07 */ char unk_07;
+    /* 0x07 */ s8 unk_07;
     /* 0x08 */ s16 npcID;
     /* 0x0A */ s16 spawnPos[3];
-    /* 0x10 */ char unk_10[8];
+    /* 0x10 */ Vec3s unk_10;
+    /* 0x16 */ char unk_16[2];
     /* 0x18 */ struct StaticNpcSettings* npcSettings;
     /* 0x1C */ Bytecode* initBytecode;
     /* 0x20 */ Bytecode* interactBytecode;
@@ -210,7 +224,7 @@ typedef struct Enemy {
     /* 0xBC */ char unk_BC[8];
     /* 0xC4 */ s32 unk_C4;
     /* 0xC8 */ s32 unk_C8;
-    /* 0xCC */ UNK_PTR animList;
+    /* 0xCC */ s32* animList;
     /* 0xD0 */ UNK_PTR territoryData;
     /* 0xD4 */ s16* dropTables;
     /* 0xD8 */ u32 tattleString;
@@ -233,22 +247,11 @@ typedef struct StaticNpcSettings {
     /* 0x2A */ s16 unkFlags;
 } StaticNpcSettings; // size = 0x2C
 
-typedef union {
-    struct {
-        /* 0x000 */ u8 state;
-        /* 0x001 */ u8 currentArgc;
-        /* 0x002 */ u8 currentOpcode;
-        /* 0x003 */ u8 priority;
-    } bytes;
-    s32 flags;
-} ScriptFlags;
-
-struct ScriptInstance;
-
-typedef ApiStatus(*ApiFunc)(struct ScriptInstance*, s32);
-
 typedef struct ScriptInstance {
-    /* 0x000 */ ScriptFlags flags;
+    /* 0x000 */ u8 state;
+    /* 0x001 */ u8 currentArgc;
+    /* 0x002 */ u8 currentOpcode;
+    /* 0x003 */ u8 priority;
     /* 0x004 */ u8 groupFlags;
     /* 0x005 */ s8 blocked; /* 1 = blocking */
     /* 0x006 */ s8 loopDepth; /* how many nested loops we are in, >= 8 hangs forever */
@@ -1446,7 +1449,9 @@ typedef struct EncounterStatus {
     /* 0x14 */ s32 songID;
     /* 0x18 */ s32 unk_18;
     /* 0x1C */ u8 numEncounters; /* number of encounters for current map (in list) */
-    /* 0x1D */ char unk_1D[3];
+    /* 0x1D */ s8 currentAreaIndex;
+    /* 0x1E */ u8 currentMapIndex;
+    /* 0x1F */ u8 currentEntryIndex;
     /* 0x20 */ u8 mapID;
     /* 0x21 */ char unk_21[3];
     /* 0x24 */ s32* npcGroupList;
@@ -1454,9 +1459,11 @@ typedef struct EncounterStatus {
     /* 0x88 */ struct Encounter* currentEncounter;
     /* 0x8C */ struct Enemy* currentEnemy;
     /* 0x90 */ s32 unk_90;
-    /* 0x94 */ char unk_94[4];
+    /* 0x94 */ s32 unk_94;
     /* 0x98 */ s32 unk_98;
-} EncounterStatus; // size = 0x9C
+    /* 0x9C */ char unk_9C[20];
+    /* 0xB0 */ s32 defeatFlags[60][12];
+} EncounterStatus; // size = 0xE0
 
 typedef struct SaveData {
     /* 0x0000 */ char magicString[16]; /* "Mario Story 006" string */

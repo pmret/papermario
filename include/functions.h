@@ -31,8 +31,12 @@ void get_model_center_and_size(s32 modelID, f32* centerX, f32* centerY, f32* cen
 void update_collider_transform(s16 colliderID);
 void get_collider_center(s32 colliderID, f32* x, f32* y, f32* z);
 
+s32 is_trigger_bound(Trigger*, Bytecode* script);
 Trigger* create_trigger(TriggerDefinition* def);
 s32 _bound_script_trigger_handler(Trigger* trigger);
+
+
+s32 func_800494C0(Npc* npc, s32 arg1, s32 arg2);
 
 s32 get_variable(ScriptInstance* script, Bytecode var);
 s32 set_variable(ScriptInstance* script, Bytecode var, s32 value);
@@ -52,6 +56,7 @@ s32 osGetId();
 
 s32 func_800EF394(f32);
 s32 does_script_exist(s32 id);
+ScriptInstance* start_script(Bytecode* script, s32 priority, s32 flags);
 ScriptInstance* start_script_in_group(ScriptInstance* script, s32 priority, s32 flags, s32 groups);
 
 void func_8011B7C0(u16, s32, s32);
@@ -74,6 +79,8 @@ Npc* get_npc_safe(NpcId npcId);
 Npc* get_npc_unsafe(NpcId npcId);
 Npc* resolve_npc(ScriptInstance* script, NpcId npcIdOrPtr);
 void set_npc_yaw(Npc* npcPtr, f32 angle);
+
+Enemy* get_enemy(NpcId npcId);
 
 f32 dist2D(f32 ax, f32 ay, f32 bx, f32 by);
 f32 dist3D(f32 ax, f32 ay, f32 az, f32 bx, f32 by, f32 bz);

@@ -185,7 +185,7 @@ INCLUDE_ASM(s32, "code_20ec0_len_5040", func_800490B4);
 
 INCLUDE_ASM(s32, "code_20ec0_len_5040", func_800493EC);
 
-INCLUDE_ASM(s32, "code_20ec0_len_5040", func_800494C0);
+INCLUDE_ASM(s32, "code_20ec0_len_5040", func_800494C0, Npc* npc, s32 arg1, s32 arg2);
 
 INCLUDE_ASM(s32, "code_20ec0_len_5040", func_80049550);
 

@@ -1,6 +1,19 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "code_1f580_len_1940", SetEncounterStatusFlags, ScriptInstance* script, s32 isInitialCall);
+ApiStatus SetEncounterStatusFlags(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    EncounterStatus* currentEncounter = &gCurrentEncounter;
+    EncounterStatus* currentEncounter2 = &gCurrentEncounter;
+    s32 a0 = *args++;
+
+    if (get_variable(script, *args)) {
+        currentEncounter->flags |= a0;
+    } else {
+        currentEncounter2->flags &= ~a0;
+    }
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus func_800441F0(ScriptInstance* script, s32 isInitialCall) {
     Bytecode arg1 = *script->ptrReadPos;
@@ -24,6 +37,32 @@ ApiStatus func_80044290(ScriptInstance* script, s32 isInitialCall) {
 }
 
 INCLUDE_ASM(s32, "code_1f580_len_1940", MakeNpcs, ScriptInstance* script, s32 isInitialCall);
+/*ApiStatus MakeNpcs(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 var1;
+    s32 ret;
+
+    if (isInitialCall) {
+        script->functionTemp[0] = 0;
+    }
+
+    if (script->functionTemp[0] != 0) {
+        if (script->functionTemp[0] != 1) {
+            return 0;
+        }
+    } else {
+        var1 = get_variable(script, *args++);
+        make_npcs(var1, GAME_STATUS->mapID, get_variable(script, *args));
+        script->functionTemp[0] = 1;
+        return script->functionTemp[0];
+    }
+
+    if (gGameState != script->functionTemp[0]) {
+        return 2;
+    }
+
+    return script->functionTemp[0];
+}*/
 
 INCLUDE_ASM(s32, "code_1f580_len_1940", RemoveNpc, ScriptInstance* script, s32 isInitialCall);
 
@@ -49,7 +88,22 @@ ApiStatus GetOwnerEncounterTrigger(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_1f580_len_1940", DoNpcDefeat, ScriptInstance* script, s32 isInitialCall);
+ApiStatus DoNpcDefeat(ScriptInstance* script, s32 isInitialCall) {
+    Enemy* owner = script->ownerActorID;
+    Npc* temp_s1 = get_npc_unsafe(owner->npcID);
+    ScriptInstance* newScript;
+
+    kill_script(script);
+    temp_s1->currentAnim = owner->animList[6];
+    newScript = start_script(&SCRIPT_NpcDefeat, 10, 0);
+    owner->defeatScript = newScript;
+    owner->defeatScriptID = newScript->uniqueID;
+    newScript->ownerActorID = owner;
+    newScript->ownerID = owner->npcID;
+    newScript->groupFlags = owner->scriptGroup;
+
+    return ApiStatus_FINISH;
+}
 
 INCLUDE_ASM(s32, "code_1f580_len_1940", start_battle);
 
@@ -77,35 +131,270 @@ ApiStatus SetBattleMusic(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "code_1f580_len_1940", BindNpcAI, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "code_1f580_len_1940", BindNpcIdle, ScriptInstance* script, s32 isInitialCall);
+ApiStatus BindNpcIdle(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Enemy* owner = script->ownerActorID;
+    NpcId npcID = get_variable(script, *args++);
+    Bytecode* aiBytecode = (Bytecode*)get_variable(script, *args);
 
-INCLUDE_ASM(s32, "code_1f580_len_1940", RestartNpcAI, ScriptInstance* script, s32 isInitialCall);
+    if (npcID == NpcId_SELF) {
+        npcID = owner->npcID;
+    }
 
-INCLUDE_ASM(s32, "code_1f580_len_1940", EnableNpcAI, ScriptInstance* script, s32 isInitialCall);
+    get_enemy(npcID)->aiBytecode = aiBytecode;
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus RestartNpcAI(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Enemy* enemy = script->ownerActorID;
+    NpcId npcId = get_variable(script, *args++);
+    ScriptInstance* newScript;
+    s32 groupFlags;
+
+    if (npcId == NpcId_SELF) {
+        npcId = enemy->npcID;
+    }
+
+    enemy = get_enemy(npcId);
+
+    if (enemy->flags & 1) {
+        groupFlags = 10;
+    } else {
+        groupFlags = 11;
+    }
+
+    if (enemy->aiScript != NULL) {
+        kill_script_by_ID(enemy->aiScriptID);
+    }
+
+    enemy->unk_C8 = 100;
+    newScript = start_script(enemy->aiBytecode, 10, 0);
+    enemy->aiScript = newScript;
+    enemy->aiScriptID = newScript->uniqueID;
+    newScript->ownerActorID = enemy;
+    newScript->ownerID = script->ownerID;
+    newScript->groupFlags = groupFlags;
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus EnableNpcAI(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Enemy* enemy = script->ownerActorID;
+    NpcId npcId = get_variable(script, *args++);
+    s32 var2 = get_variable(script, *args);
+
+    if (npcId == NpcId_SELF) {
+        npcId = enemy->npcID;
+    }
+
+    enemy = get_enemy(npcId);
+    if (var2 != 0) {
+        if (enemy->aiScript != NULL) {
+            resume_all_script(enemy->aiScriptID);
+        }
+    } else if (enemy->aiScript != NULL) {
+        suspend_all_script(enemy->aiScriptID);
+    }
+
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_1f580_len_1940", SetNpcAux, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "code_1f580_len_1940", BindNpcAux, ScriptInstance* script, s32 isInitialCall);
+ApiStatus BindNpcAux(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Enemy* owner = script->ownerActorID;
+    NpcId npcId = get_variable(script, *args++);
+    Bytecode* auxBytecode = (Bytecode*)get_variable(script, *args);
 
-INCLUDE_ASM(s32, "code_1f580_len_1940", RestartNpcAux, ScriptInstance* script, s32 isInitialCall);
+    if (npcId == NpcId_SELF) {
+        npcId = owner->npcID;
+    }
 
-INCLUDE_ASM(s32, "code_1f580_len_1940", EnableNpcAux, ScriptInstance* script, s32 isInitialCall);
+    get_enemy(npcId)->auxBytecode = auxBytecode;
 
-INCLUDE_ASM(s32, "code_1f580_len_1940", BindNpcInteract, ScriptInstance* script, s32 isInitialCall);
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "code_1f580_len_1940", BindNpcHit, ScriptInstance* script, s32 isInitialCall);
+ApiStatus RestartNpcAux(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Enemy* enemy = script->ownerActorID;
+    NpcId npcId = get_variable(script, *args++);
+    ScriptInstance* newScript;
+    s32 groupFlags;
 
-INCLUDE_ASM(s32, "code_1f580_len_1940", BindNpcDefeat, ScriptInstance* script, s32 isInitialCall);
+    if (npcId == NpcId_SELF) {
+        npcId = enemy->npcID;
+    }
 
-INCLUDE_ASM(s32, "code_1f580_len_1940", SetSelfVar, ScriptInstance* script, s32 isInitialCall);
+    enemy = get_enemy(npcId);
 
-INCLUDE_ASM(s32, "code_1f580_len_1940", GetSelfVar, ScriptInstance* script, s32 isInitialCall);
+    if (enemy->flags & 1) {
+        groupFlags = 10;
+    } else {
+        groupFlags = 11;
+    }
 
-INCLUDE_ASM(s32, "code_1f580_len_1940", SetNpcVar, ScriptInstance* script, s32 isInitialCall);
+    if (enemy->auxScript != NULL) {
+        kill_script_by_ID(enemy->auxScriptID);
+    }
 
-INCLUDE_ASM(s32, "code_1f580_len_1940", GetNpcVar, ScriptInstance* script, s32 isInitialCall);
+    newScript = start_script(enemy->auxBytecode, 10, 0);
+    enemy->auxScript = newScript;
+    enemy->auxScriptID = newScript->uniqueID;
+    newScript->ownerActorID = enemy;
+    newScript->ownerID = npcId;
+    newScript->groupFlags = groupFlags;
 
-INCLUDE_ASM(s32, "code_1f580_len_1940", SetSelfRotation, ScriptInstance* script, s32 isInitialCall);
+    return ApiStatus_DONE2;
+}
+
+ApiStatus EnableNpcAux(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Enemy* enemy = script->ownerActorID;
+    NpcId npcId = get_variable(script, *args++);
+    s32 var2 = get_variable(script, *args);
+
+    if (npcId == NpcId_SELF) {
+        npcId = enemy->npcID;
+    }
+
+    enemy = get_enemy(npcId);
+    if (var2 != 0) {
+        if (enemy->auxScript != NULL) {
+            resume_all_script(enemy->auxScriptID);
+        }
+    } else if (enemy->auxScript != NULL) {
+        suspend_all_script(enemy->auxScriptID);
+    }
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus BindNpcInteract(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Enemy* npc = script->ownerActorID;
+    NpcId npcId = get_variable(script, *args++);
+    Bytecode* interactBytecode = (Bytecode*)get_variable(script, *args);
+
+    if (npcId == NpcId_SELF) {
+        npcId = npc->npcID;
+    }
+
+    npc = get_enemy(npcId);
+    if (npc->interactScript != NULL) {
+        kill_script_by_ID(npc->interactScriptID);
+    }
+    npc->interactBytecode = interactBytecode;
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus BindNpcHit(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Enemy* npc = script->ownerActorID;
+    NpcId npcId = get_variable(script, *args++);
+    Bytecode* hitBytecode = (Bytecode*)get_variable(script, *args);
+
+    if (npcId == NpcId_SELF) {
+        npcId = npc->npcID;
+    }
+
+    npc = get_enemy(npcId);
+    if (npc->hitScript != NULL) {
+        kill_script_by_ID(npc->hitScriptID);
+    }
+    npc->hitBytecode = hitBytecode;
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus BindNpcDefeat(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Enemy* owner = script->ownerActorID;
+    s32 npcId = get_variable(script, *args++);
+    Bytecode* defeatBytecode = (Bytecode*)get_variable(script, *args);
+
+    if (npcId == -1) {
+        npcId = owner->npcID;
+    }
+
+    get_enemy(npcId)->defeatBytecode = defeatBytecode;
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus SetSelfVar(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Enemy* owner = script->ownerActorID;
+    s32 var1 = get_variable(script, *args++);
+    s32 var2 = get_variable(script, *args);
+
+    owner->varTable[var1] = var2;
+    return ApiStatus_DONE2;
+}
+
+ApiStatus GetSelfVar(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+
+    set_variable(script, *args, script->ownerActorID->varTable[get_variable(script, *args++)]);
+    return ApiStatus_DONE2;
+}
+
+ApiStatus SetNpcVar(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Enemy* owner = script->ownerActorID;
+    NpcId npcID = get_variable(script, *args++);
+    s32 varIdx = get_variable(script, *args++);
+    s32 val = get_variable(script, *args);
+
+    if (npcID == NpcId_SELF) {
+        npcID = owner->npcID;
+    }
+
+    get_enemy(npcID)->varTable[varIdx] = val;
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus GetNpcVar(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Enemy* enemy;
+    NpcId npcID;
+    s32 varIdx;
+    s32 var3;
+
+    enemy = script->ownerActorID;
+    npcID = get_variable(script, *args++);
+    varIdx = get_variable(script, *args++);
+    var3 = *args;
+
+    if (npcID == NpcId_SELF) {
+        npcID = enemy->npcID;
+    }
+
+    enemy = get_enemy(npcID);
+    set_variable(script, var3, enemy->varTable[varIdx]);
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus SetSelfRotation(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Npc* self = get_npc_unsafe(script->ownerID);
+    s32 rotX = get_variable(script, *args++);
+    s32 rotY = get_variable(script, *args++);
+    s32 rotZ = get_variable(script, *args++);
+
+    self->rotation.x = rotX;
+    self->rotation.y = rotY;
+    self->rotation.z = rotZ;
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus SetSelfEnemyFlags(ScriptInstance* script, s32 isInitialCall) {
     script->ownerActorID->flags = *script->ptrReadPos;
@@ -113,11 +402,11 @@ ApiStatus SetSelfEnemyFlags(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus SetSelfEnemyFlagBits(ScriptInstance* script, s32 isInitialCall) {
-    Bytecode* thisPos = script->ptrReadPos;
+    Bytecode* args = script->ptrReadPos;
     Enemy* owner = script->ownerActorID;
-    s32 bits = thisPos[0];
+    s32 bits = args[0];
 
-    if (get_variable(script, thisPos[1])) {
+    if (get_variable(script, args[1])) {
         owner->flags |= bits;
     } else {
         owner->flags &= ~bits;
@@ -125,22 +414,69 @@ ApiStatus SetSelfEnemyFlagBits(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_1f580_len_1940", func_80045580);
+ApiStatus func_80045580(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Enemy* owner = script->ownerActorID;
+    Npc* npc = get_npc_unsafe(script->ownerID);
+
+    owner->unk_07 = get_variable(script, *args);
+    owner->unk_10.x = npc->pos.x;
+    owner->unk_10.y = npc->pos.y;
+    owner->unk_10.z = npc->pos.z;
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus GetSelfNpcID(ScriptInstance* script, s32 isInitialCall) {
     set_variable(script, *script->ptrReadPos, script->ownerActorID->npcID);
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_1f580_len_1940", ClearDefeatedEnemies, ScriptInstance* script, s32 isInitialCall);
+ApiStatus ClearDefeatedEnemies(ScriptInstance* script, s32 isInitialCall) {
+    EncounterStatus* currentEncounter = &gCurrentEncounter;
+    s32 i;
+    s32 j;
 
-INCLUDE_ASM(s32, "code_1f580_len_1940", SetEnemyFlagBits, ScriptInstance* script, s32 isInitialCall);
+    for (i = 0; i < 60; i++) {
+        for (j = 0; j < 12; j++) {
+            currentEncounter->defeatFlags[i][j] = 0;
+        }
+    }
+    return ApiStatus_DONE2;
+}
+
+ApiStatus SetEnemyFlagBits(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Enemy* enemy = script->ownerActorID;
+    NpcId npcId = get_variable(script, *args++);
+    s32 bits = *args++;
+    s32 var2 = get_variable(script, *args);
+
+    if (npcId == NpcId_SELF) {
+        npcId = enemy->npcID;
+    }
+
+    enemy = get_enemy(npcId);
+    if (var2 != NULL) {
+        enemy->flags |= bits;
+    } else {
+        enemy->flags &= ~bits;
+    }
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus func_8004572C(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_1f580_len_1940", GetSelfAnimationFromTable, ScriptInstance* script, s32 isInitialCall);
+ApiStatus GetSelfAnimationFromTable(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Enemy* owner = script->ownerActorID;
+
+    set_variable(script, *args, owner->animList[get_variable(script, *args++)]);
+    return ApiStatus_DONE2;
+}
 
 ApiStatus func_80045798(ScriptInstance* script, s32 isInitialCall) {
     D_8010EF08 = get_variable(script, *script->ptrReadPos);
@@ -151,7 +487,7 @@ ApiStatus func_800457C4(ScriptInstance* script, s32 isInitialCall) {
     Enemy* ownerActor = script->ownerActorID;
 
     ownerActor->unk_B5 = get_variable(script, *script->ptrReadPos);
-    return 2;
+    return ApiStatus_DONE2;
 }
 
 ApiStatus func_800457F8(ScriptInstance* script, s32 isInitialCall) {
@@ -164,7 +500,23 @@ ApiStatus func_8004580C(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_1f580_len_1940", func_80045838);
+//INCLUDE_ASM(s32, "code_1f580_len_1940", func_80045838);
+ApiStatus func_80045838(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Npc* npc;
+    s32 var1 = get_variable(script, *args++);
+    s32 var2 = get_variable(script, *args++);
+    s32 var3 = get_variable(script, *args);
+
+    npc = resolve_npc(script, var1);
+    if (npc != NULL) {
+        func_800494C0(npc, var2, var3);
+    }
+
+    return ApiStatus_DONE2;
+
+    do {} while (0); // necessary to match
+}
 
 ApiStatus func_800458CC(ScriptInstance* script, s32 isInitialCall) {
     set_variable(script, *script->ptrReadPos, script->ownerActorID->npcSettings->unkFlags & 8);
@@ -173,4 +525,11 @@ ApiStatus func_800458CC(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "code_1f580_len_1940", func_80045900);
 
-INCLUDE_ASM(s32, "code_1f580_len_1940", func_80045A58);
+ApiStatus SetTattleString(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    NpcId enemyId = get_variable(script, *args++);
+    u32 tattleString = get_variable(script, *args);
+
+    get_enemy(enemyId)->tattleString = tattleString;
+    return ApiStatus_DONE2;
+}

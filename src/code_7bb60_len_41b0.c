@@ -245,7 +245,7 @@ s32 check_input_hammer(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PlayerData* playerData = &gPlayerData;
 
-    if (playerStatus->pressedButtons & Buttons_B) {
+    if (playerStatus->pressedButtons & Button_B) {
         if (!(playerStatus->flags & 4)) {
             if (D_8010EBB0[0] != 1 || playerData->currentPartner != PartnerId_WATT) {
                 if (playerData->hammerLevel != -1) {
