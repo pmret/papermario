@@ -184,7 +184,8 @@ typedef struct Trigger {
     /* 0x18 */ s32 priority;
     /* 0x1C */ s32 scriptVars[3];
     /* 0x28 */ char unk_28[8];
-    /* 0x30 */ s32 unk_30;
+    /* 0x30 */ u8 unk_30;
+    /* 0x31 */ char unk_31[3];
     /* 0x34 */ s32 runningScriptID;
 } Trigger; // size = 0x38
 
