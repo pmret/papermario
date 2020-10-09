@@ -75,7 +75,7 @@ ApiStatus SetPlayerCollisionSize(ScriptInstance* script, s32 isInitialCall) {
 
     player->collisionHeight = height;
     player->collisionRadius = radius;
-    
+
     playerStatus->colliderHeight = player->collisionHeight;
     playerStatus->colliderDiameter = player->collisionRadius;
 

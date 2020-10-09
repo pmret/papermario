@@ -178,7 +178,7 @@ ApiStatus SetModelFlags(ScriptInstance* script, s32 isInitialCall) {
     } else {
         model->flags &= ~a1;
     }
-    
+
     return ApiStatus_DONE2;
 }
 #else

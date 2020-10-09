@@ -65,7 +65,7 @@ INCLUDE_ASM(s32, "code_13870_len_6980", func_8003AC5C);
 
 INCLUDE_ASM(s32, "code_13870_len_6980", enable_npc_blur);
 
-void disable_npc_blur(Npc *npc) {
+void disable_npc_blur(Npc* npc) {
     if (npc->flags & 0x100000) {
         npc->flags &= ~0x100000;
         heap_free(npc->blurData);
@@ -73,7 +73,7 @@ void disable_npc_blur(Npc *npc) {
     }
 }
 
-void update_npc_blur(Npc *npc) {
+void update_npc_blur(Npc* npc) {
     NpcBlurData* blurData = npc->blurData;
     s32 index = blurData->unk_01;
 
