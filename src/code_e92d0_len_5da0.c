@@ -896,14 +896,12 @@ ApiStatus si_handle_exec2(ScriptInstance* script) {
     newScript->ownerActorID = script->ownerActorID;
     newScript->ownerID = script->ownerID;
 
-    i = 0;
-    while (i < ARRAY_COUNT(script->varTable)) {
-        newScript->varTable[i] = script->varTable[i++];
+    for (i = 0; i < ARRAY_COUNT(script->varTable); i++) {
+        newScript->varTable[i] = script->varTable[i];
     }
 
-    i = 0;
-    while (i < ARRAY_COUNT(script->varFlags)) {
-        newScript->varFlags[i] = script->varFlags[i++];
+    for (i = 0; i < ARRAY_COUNT(script->varFlags); i++) {
+        newScript->varFlags[i] = script->varFlags[i];
     }
 
     newScript->array = script->array;
@@ -1072,34 +1070,6 @@ void si_standard_trigger_executor(Trigger* trigger) {
 }
 
 INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_handle_bind_lock, ScriptInstance* script, s32 isInitialCall);
-/*ApiStatus si_handle_bind_lock(ScriptInstance* script) {
-    Bytecode* args = script->ptrReadPos;
-    Trigger* trigger;
-    TriggerDefinition def;
-    s32 var0 = get_variable(script, *args++);
-    Bytecode flags = *args++;
-    Bytecode index = *args++;
-    s32 var3 = get_variable(script, *args++);
-    Bytecode a4 = *args++;
-    Bytecode a5 = *args++;
-
-    def.flags = flags | 0x1000000;
-    def.flagIndex = get_variable(script, index);
-    def.colliderIndex = get_variable_index(script, index);
-    def.unk_14 = var3;
-    def.inputArg3 = a4;
-    def.function = _bound_script_trigger_handler;
-
-    trigger = create_trigger(&def);
-    trigger->scriptStart = var0;
-    trigger->runningScript = NULL;
-    trigger->priority = script->flags.bytes.priority;
-    trigger->scriptVars[0] = get_variable(script, script->varTable[0]);
-    trigger->scriptVars[1] = get_variable(script, script->varTable[1]);
-    trigger->scriptVars[2] = get_variable(script, script->varTable[2]);
-
-    return ApiStatus_DONE2;
-}*/
 
 INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_handle_thread, ScriptInstance* script, s32 isInitialCall);
 

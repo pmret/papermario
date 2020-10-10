@@ -116,7 +116,6 @@ INCLUDE_ASM(s32, "code_a5dd0_len_114e0", AssignAreaFlag, ScriptInstance* script,
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", AssignBlockFlag, ScriptInstance* script, s32 isInitialCall);
 
-//INCLUDE_ASM(s32, "code_a5dd0_len_114e0", AssignFlag, ScriptInstance* script, s32 isInitialCall);
 ApiStatus AssignFlag(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Trigger* trigger;
