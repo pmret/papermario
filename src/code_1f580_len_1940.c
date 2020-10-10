@@ -115,39 +115,40 @@ ApiStatus BindNpcIdle(ScriptInstance* script, s32 isInitialCall) {
         npcID = owner->npcID;
     }
 
-    get_enemy(npcID)->aiBytecode = aiBytecode;
+    owner = get_enemy(npcID);
+    owner->aiBytecode = aiBytecode;
 
     return ApiStatus_DONE2;
 }
 
 ApiStatus RestartNpcAI(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    Enemy* enemy = script->ownerActorID;
+    Enemy* npc = script->ownerActorID;
     NpcId npcId = get_variable(script, *args++);
     ScriptInstance* newScript;
     s32 groupFlags;
 
     if (npcId == NpcId_SELF) {
-        npcId = enemy->npcID;
+        npcId = npc->npcID;
     }
 
-    enemy = get_enemy(npcId);
+    npc = get_enemy(npcId);
 
-    if (enemy->flags & 1) {
+    if (npc->flags & 1) {
         groupFlags = 10;
     } else {
         groupFlags = 11;
     }
 
-    if (enemy->aiScript != NULL) {
-        kill_script_by_ID(enemy->aiScriptID);
+    if (npc->aiScript != NULL) {
+        kill_script_by_ID(npc->aiScriptID);
     }
 
-    enemy->unk_C8 = 100;
-    newScript = start_script(enemy->aiBytecode, 10, 0);
-    enemy->aiScript = newScript;
-    enemy->aiScriptID = newScript->uniqueID;
-    newScript->ownerActorID = enemy;
+    npc->unk_C8 = 100;
+    newScript = start_script(npc->aiBytecode, 10, 0);
+    npc->aiScript = newScript;
+    npc->aiScriptID = newScript->uniqueID;
+    newScript->ownerActorID = npc;
     newScript->ownerID = script->ownerID;
     newScript->groupFlags = groupFlags;
 
@@ -156,21 +157,22 @@ ApiStatus RestartNpcAI(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus EnableNpcAI(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    Enemy* enemy = script->ownerActorID;
+    Enemy* npc = script->ownerActorID;
     NpcId npcId = get_variable(script, *args++);
     s32 var2 = get_variable(script, *args);
 
     if (npcId == NpcId_SELF) {
-        npcId = enemy->npcID;
+        npcId = npc->npcID;
     }
 
-    enemy = get_enemy(npcId);
+    npc = get_enemy(npcId);
+
     if (var2 != 0) {
-        if (enemy->aiScript != NULL) {
-            resume_all_script(enemy->aiScriptID);
+        if (npc->aiScript != NULL) {
+            resume_all_script(npc->aiScriptID);
         }
-    } else if (enemy->aiScript != NULL) {
-        suspend_all_script(enemy->aiScriptID);
+    } else if (npc->aiScript != NULL) {
+        suspend_all_script(npc->aiScriptID);
     }
 
     return ApiStatus_DONE2;
@@ -180,15 +182,16 @@ INCLUDE_ASM(s32, "code_1f580_len_1940", SetNpcAux, ScriptInstance* script, s32 i
 
 ApiStatus BindNpcAux(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    Enemy* enemy = script->ownerActorID;
+    Enemy* npc = script->ownerActorID;
     NpcId npcId = get_variable(script, *args++);
     Bytecode* auxBytecode = (Bytecode*)get_variable(script, *args);
 
     if (npcId == NpcId_SELF) {
-        npcId = enemy->npcID;
+        npcId = npc->npcID;
     }
 
-    get_enemy(npcId)->auxBytecode = auxBytecode;
+    npc = get_enemy(npcId);
+    npc->auxBytecode = auxBytecode;
 
     return ApiStatus_DONE2;
 }
@@ -237,6 +240,7 @@ ApiStatus EnableNpcAux(ScriptInstance* script, s32 isInitialCall) {
     }
 
     npc = get_enemy(npcId);
+
     if (var2 != 0) {
         if (npc->auxScript != NULL) {
             resume_all_script(npc->auxScriptID);
@@ -259,6 +263,7 @@ ApiStatus BindNpcInteract(ScriptInstance* script, s32 isInitialCall) {
     }
 
     npc = get_enemy(npcId);
+
     if (npc->interactScript != NULL) {
         kill_script_by_ID(npc->interactScriptID);
     }
@@ -278,6 +283,7 @@ ApiStatus BindNpcHit(ScriptInstance* script, s32 isInitialCall) {
     }
 
     npc = get_enemy(npcId);
+
     if (npc->hitScript != NULL) {
         kill_script_by_ID(npc->hitScriptID);
     }
@@ -288,15 +294,16 @@ ApiStatus BindNpcHit(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus BindNpcDefeat(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    Enemy* owner = script->ownerActorID;
+    Enemy* npc = script->ownerActorID;
     s32 npcId = get_variable(script, *args++);
     Bytecode* defeatBytecode = (Bytecode*)get_variable(script, *args);
 
     if (npcId == -1) {
-        npcId = owner->npcID;
+        npcId = npc->npcID;
     }
 
-    get_enemy(npcId)->defeatBytecode = defeatBytecode;
+    npc = get_enemy(npcId);
+    npc->defeatBytecode = defeatBytecode;
 
     return ApiStatus_DONE2;
 }
@@ -320,38 +327,39 @@ ApiStatus GetSelfVar(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus SetNpcVar(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    Enemy* owner = script->ownerActorID;
-    NpcId npcID = get_variable(script, *args++);
+    Enemy* npc = script->ownerActorID;
+    NpcId npcId = get_variable(script, *args++);
     s32 varIdx = get_variable(script, *args++);
     s32 val = get_variable(script, *args);
 
-    if (npcID == NpcId_SELF) {
-        npcID = owner->npcID;
+    if (npcId == NpcId_SELF) {
+        npcId = npc->npcID;
     }
 
-    get_enemy(npcID)->varTable[varIdx] = val;
+    npc = get_enemy(npcId);
+    npc->varTable[varIdx] = val;
 
     return ApiStatus_DONE2;
 }
 
 ApiStatus GetNpcVar(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    Enemy* enemy;
+    Enemy* npc;
     NpcId npcID;
     s32 varIdx;
     s32 var3;
 
-    enemy = script->ownerActorID;
+    npc = script->ownerActorID;
     npcID = get_variable(script, *args++);
     varIdx = get_variable(script, *args++);
     var3 = *args;
 
     if (npcID == NpcId_SELF) {
-        npcID = enemy->npcID;
+        npcID = npc->npcID;
     }
 
-    enemy = get_enemy(npcID);
-    set_variable(script, var3, enemy->varTable[varIdx]);
+    npc = get_enemy(npcID);
+    set_variable(script, var3, npc->varTable[varIdx]);
 
     return ApiStatus_DONE2;
 }
@@ -431,6 +439,7 @@ ApiStatus SetEnemyFlagBits(ScriptInstance* script, s32 isInitialCall) {
     }
 
     npc = get_enemy(npcId);
+
     if (var2 != NULL) {
         npc->flags |= bits;
     } else {
@@ -502,7 +511,8 @@ ApiStatus SetTattleString(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     NpcId enemyId = get_variable(script, *args++);
     u32 tattleString = get_variable(script, *args);
+    Enemy* npc = get_enemy(enemyId);
 
-    get_enemy(enemyId)->tattleString = tattleString;
+    npc->tattleString = tattleString;
     return ApiStatus_DONE2;
 }
