@@ -9,7 +9,6 @@ struct ScriptInstance;
 
 typedef ApiStatus(*ApiFunc)(struct ScriptInstance*, s32);
 
-
 typedef struct Vec3f {
     /* 0x00 */ f32 x;
     /* 0x04 */ f32 y;

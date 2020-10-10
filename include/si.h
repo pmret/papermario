@@ -2,9 +2,6 @@
 #define _SI_H_
 
 #include "ultra64.h"
-#include "types.h"
-#include "macros.h"
-#include "common_structs.h"
 
 #define SI_VAR_0 0xFE363C80
 
