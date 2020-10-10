@@ -180,12 +180,12 @@ INCLUDE_ASM(s32, "code_1f580_len_1940", SetNpcAux, ScriptInstance* script, s32 i
 
 ApiStatus BindNpcAux(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    Enemy* owner = script->ownerActorID;
+    Enemy* enemy = script->ownerActorID;
     NpcId npcId = get_variable(script, *args++);
     Bytecode* auxBytecode = (Bytecode*)get_variable(script, *args);
 
     if (npcId == NpcId_SELF) {
-        npcId = owner->npcID;
+        npcId = enemy->npcID;
     }
 
     get_enemy(npcId)->auxBytecode = auxBytecode;
@@ -195,31 +195,31 @@ ApiStatus BindNpcAux(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus RestartNpcAux(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    Enemy* enemy = script->ownerActorID;
+    Enemy* npc = script->ownerActorID;
     NpcId npcId = get_variable(script, *args++);
     ScriptInstance* newScript;
     s32 groupFlags;
 
     if (npcId == NpcId_SELF) {
-        npcId = enemy->npcID;
+        npcId = npc->npcID;
     }
 
-    enemy = get_enemy(npcId);
+    npc = get_enemy(npcId);
 
-    if (enemy->flags & 1) {
+    if (npc->flags & 1) {
         groupFlags = 10;
     } else {
         groupFlags = 11;
     }
 
-    if (enemy->auxScript != NULL) {
-        kill_script_by_ID(enemy->auxScriptID);
+    if (npc->auxScript != NULL) {
+        kill_script_by_ID(npc->auxScriptID);
     }
 
-    newScript = start_script(enemy->auxBytecode, 10, 0);
-    enemy->auxScript = newScript;
-    enemy->auxScriptID = newScript->uniqueID;
-    newScript->ownerActorID = enemy;
+    newScript = start_script(npc->auxBytecode, 10, 0);
+    npc->auxScript = newScript;
+    npc->auxScriptID = newScript->uniqueID;
+    newScript->ownerActorID = npc;
     newScript->ownerID = npcId;
     newScript->groupFlags = groupFlags;
 
@@ -228,21 +228,21 @@ ApiStatus RestartNpcAux(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus EnableNpcAux(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    Enemy* enemy = script->ownerActorID;
+    Enemy* npc = script->ownerActorID;
     NpcId npcId = get_variable(script, *args++);
     s32 var2 = get_variable(script, *args);
 
     if (npcId == NpcId_SELF) {
-        npcId = enemy->npcID;
+        npcId = npc->npcID;
     }
 
-    enemy = get_enemy(npcId);
+    npc = get_enemy(npcId);
     if (var2 != 0) {
-        if (enemy->auxScript != NULL) {
-            resume_all_script(enemy->auxScriptID);
+        if (npc->auxScript != NULL) {
+            resume_all_script(npc->auxScriptID);
         }
-    } else if (enemy->auxScript != NULL) {
-        suspend_all_script(enemy->auxScriptID);
+    } else if (npc->auxScript != NULL) {
+        suspend_all_script(npc->auxScriptID);
     }
 
     return ApiStatus_DONE2;
@@ -378,9 +378,9 @@ ApiStatus SetSelfEnemyFlags(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus SetSelfEnemyFlagBits(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Enemy* owner = script->ownerActorID;
-    s32 bits = args[0];
+    s32 bits = *args++;
 
-    if (get_variable(script, args[1])) {
+    if (get_variable(script, *args)) {
         owner->flags |= bits;
     } else {
         owner->flags &= ~bits;
@@ -421,20 +421,20 @@ ApiStatus ClearDefeatedEnemies(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus SetEnemyFlagBits(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    Enemy* enemy = script->ownerActorID;
+    Enemy* npc = script->ownerActorID;
     NpcId npcId = get_variable(script, *args++);
     s32 bits = *args++;
     s32 var2 = get_variable(script, *args);
 
     if (npcId == NpcId_SELF) {
-        npcId = enemy->npcID;
+        npcId = npc->npcID;
     }
 
-    enemy = get_enemy(npcId);
+    npc = get_enemy(npcId);
     if (var2 != NULL) {
-        enemy->flags |= bits;
+        npc->flags |= bits;
     } else {
-        enemy->flags &= ~bits;
+        npc->flags &= ~bits;
     }
 
     return ApiStatus_DONE2;
@@ -474,7 +474,6 @@ ApiStatus func_8004580C(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-//INCLUDE_ASM(s32, "code_1f580_len_1940", func_80045838);
 ApiStatus func_80045838(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Npc* npc;
