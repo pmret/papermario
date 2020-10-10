@@ -5,30 +5,29 @@ void begin_state_init(void) {
     GAME_STATUS->loadMenuState = 3;
 }
 
-#ifdef NON_MATCHING
 void step_init_state(void) {
-    GameStatus* gameStatus = GAME_STATUS;
+    GameStatus** gameStatusPtr = gGameStatusPtr;
+    GameStatus* gameStatus = *gameStatusPtr;
     s32 i;
 
-    if (gameStatus->loadMenuState != 0) {
-        gameStatus->loadMenuState--;
+    if (GAME_STATUS->loadMenuState != 0) {
+        GAME_STATUS->loadMenuState--;
         return;
     }
 
     D_8009A650[0] = 0;
-    gameStatus->areaID = 0;
+    (*gameStatusPtr)->areaID = 0;
     gameStatus->isBattle = 0;
     gameStatus->prevArea = -1;
     gameStatus->mapID = 0;
     gameStatus->entryID = 0;
-
-    GAME_STATUS->unk_76 = 0;
-    GAME_STATUS->disableScripts = 0;
-    GAME_STATUS->unk_7D = 0;
-    GAME_STATUS->unk_A8 = -1;
-    GAME_STATUS->unk_AA = 0;
-    GAME_STATUS->unk_A9 = -1;
-    GAME_STATUS->demoState = 0;
+    (*gameStatusPtr)->unk_76 = 0;
+    (*gameStatusPtr)->disableScripts = 0;
+    (*gameStatusPtr)->unk_7D = 0;
+    (*gameStatusPtr)->unk_A8 = -1;
+    (*gameStatusPtr)->unk_AA = 0;
+    (*gameStatusPtr)->unk_A9 = -1;
+    (*gameStatusPtr)->demoState = 0;
 
     general_heap_create();
     func_8011D890();
@@ -64,8 +63,8 @@ void step_init_state(void) {
     initialize_curtains();
 
     for (i = 0; i < 4; i++) {
-        gameStatus->unk_50[i] = 4;
-        gameStatus->unk_48[i] = 0xF;
+        (*gameStatusPtr)->unk_50[i] = 4;
+        (*gameStatusPtr)->unk_48[i] = 0xF;
     }
 
     fio_has_valid_backup();
@@ -81,9 +80,6 @@ void step_init_state(void) {
     D_8009A650[0] &= ~0x8;
     set_game_mode(1);
 }
-#else
-INCLUDE_ASM(s32, "code_e940_len_290", step_init_state);
-#endif
 
 void func_80033788(void) {
     func_8002AB5C(0, 0, 0x13F, 0xEF, 0, 0, 0, 0xFF);

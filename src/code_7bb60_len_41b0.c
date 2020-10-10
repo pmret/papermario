@@ -18,7 +18,7 @@ void move_player(s16 duration, f32 heading, f32 speed) {
     playerStatus->moveFrames = duration;
     playerStatus->currentSpeed = speed;
 
-    if (!(playerStatus->animFlags & 0x00400000)) {
+    if (!(playerStatus->animFlags & 0x400000)) {
         set_action_state(speed > playerStatus->walkSpeed ? ActionState_RUN : ActionState_WALK);
     }
 }
@@ -41,7 +41,20 @@ INCLUDE_ASM(s32, "code_7bb60_len_41b0", func_800E315C);
 
 INCLUDE_ASM(s32, "code_7bb60_len_41b0", phys_player_land);
 
-INCLUDE_ASM(f32, "code_7bb60_len_41b0", integrate_gravity);
+f32 integrate_gravity(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+
+    if (playerStatus->flags & 0x40000) {
+        playerStatus->gravityIntegrator[2] += playerStatus->gravityIntegrator[3] / 1.7f;
+        playerStatus->gravityIntegrator[1] += playerStatus->gravityIntegrator[2] / 1.7f;
+        playerStatus->gravityIntegrator[0] += playerStatus->gravityIntegrator[1] / 1.7f;
+    } else {
+        playerStatus->gravityIntegrator[2] += playerStatus->gravityIntegrator[3];
+        playerStatus->gravityIntegrator[1] += playerStatus->gravityIntegrator[2];
+        playerStatus->gravityIntegrator[0] += playerStatus->gravityIntegrator[1];
+    }
+    return playerStatus->gravityIntegrator[0];
+}
 
 f32 func_800E34D8(void) {
     f32 ret = integrate_gravity();
@@ -189,36 +202,33 @@ void set_action_state(s32 actionState) {
     }
 }
 
-INCLUDE_ASM(s32, "code_7bb60_len_41b0", update_locomotion_state);
+void update_locomotion_state(void) {
+    PlayerStatus* playerStatus = (&gPlayerStatus);
+    do { } while (0); // required to match
 
-// todo these floats don't work
-#ifdef NON_MATCHING
+    set_action_state((!is_ability_active(Ability_SLOW_GO)
+                      && (SQ(playerStatus->stickAxis[0]) + SQ(playerStatus->stickAxis[1]) >= 0xBD2)) ? ActionState_RUN : ActionState_WALK);
+}
+
 void start_falling(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     set_action_state(ActionState_FALLING);
-    playerStatus->gravityIntegrator[1] = 0.1143f;
-    playerStatus->gravityIntegrator[2] = -0.2871f;
-    playerStatus->gravityIntegrator[3] = -0.1823f;
-    playerStatus->gravityIntegrator[4] = 0.01152f;
+    playerStatus->gravityIntegrator[0] = 0.1143f;
+    playerStatus->gravityIntegrator[1] = -0.2871f;
+    playerStatus->gravityIntegrator[2] = -0.1823f;
+    playerStatus->gravityIntegrator[3] = 0.01152f;
 }
-#else
-INCLUDE_ASM(void, "code_7bb60_len_41b0", start_falling);
-#endif
 
-#ifdef NON_MATCHING
 void start_bounce_a(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     set_action_state(ActionState_BOUNCE);
     playerStatus->gravityIntegrator[0] = 10.0f;
     playerStatus->gravityIntegrator[1] = -2.0f;
-    playerStatus->gravityIntegrator[2] = 0.5f; // todo is 0.8f but this doesn't work atm
+    playerStatus->gravityIntegrator[2] = 0.8f;
     playerStatus->gravityIntegrator[3] = -0.75f;
 }
-#else
-INCLUDE_ASM(void, "code_7bb60_len_41b0", start_bounce_a);
-#endif
 
 void start_bounce_b(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -235,7 +245,7 @@ s32 check_input_hammer(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PlayerData* playerData = &gPlayerData;
 
-    if (playerStatus->pressedButtons & Buttons_B) {
+    if (playerStatus->pressedButtons & Button_B) {
         if (!(playerStatus->flags & 4)) {
             if (D_8010EBB0[0] != 1 || playerData->currentPartner != PartnerId_WATT) {
                 if (playerData->hammerLevel != -1) {
