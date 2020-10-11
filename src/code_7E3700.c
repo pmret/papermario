@@ -12,7 +12,14 @@ INCLUDE_ASM(s32, "code_7E3700", func_80283080);
 
 INCLUDE_ASM(s32, "code_7E3700", func_80283174);
 
-INCLUDE_ASM(s32, "code_7E3700", CheckActionState);
+ApiStatus CheckActionState(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Bytecode a0 = *args++;
+    s32 var = get_float_variable(script, *args);
+
+    set_variable(script, a0, gPlayerActionState == var);
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_7E3700", func_80283240);
 

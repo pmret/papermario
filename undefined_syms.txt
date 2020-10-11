@@ -63,6 +63,7 @@ D_800A0900 = 0x800A0900;
 gCurrentEncounter = 0x800B0F10;
 gCameras = 0x800B1D80;
 gCurrentCameraID = 0x80077410;
+SCRIPT_NpcDefeat = 0x80077E38;
 D_800DC500 = 0x800DC500;
 D_8010F6D0 = 0x8010F6D0;
 gBackgroundImage = 0x80200000;
@@ -104,6 +105,7 @@ D_80159AE2 = 0x80159AE2;
 D_80159AE4 = 0x80159AE4;
 gCollisionStatus = 0x8015A55A0;
 D_8015C7C0 = 0x8015C7C0;
+gLastCreatedEntityIndex = 0x801512EC;
 
 gWorldModelList = 0x80151770;
 gBattleModelList = 0x80151B70;

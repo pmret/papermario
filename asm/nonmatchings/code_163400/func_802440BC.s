@@ -248,8 +248,8 @@ glabel func_802440BC
 /* 164CB0 80244450 0C019D40 */  jal       guMtxF2L
 /* 164CB4 80244454 00452821 */   addu     $a1, $v0, $a1
 /* 164CB8 80244458 0200202D */  daddu     $a0, $s0, $zero
-/* 164CBC 8024445C 3C1E8007 */  lui       $fp, 0x8007
-/* 164CC0 80244460 27DE419C */  addiu     $fp, $fp, 0x419c
+/* 164CBC 8024445C 3C1E8007 */  lui       $fp, %hi(gGameStatusPtr)
+/* 164CC0 80244460 27DE419C */  addiu     $fp, $fp, %lo(gGameStatusPtr)
 /* 164CC4 80244464 8E280000 */  lw        $t0, ($s1)
 /* 164CC8 80244468 4406A000 */  mfc1      $a2, $f20
 /* 164CCC 8024446C 4407A000 */  mfc1      $a3, $f20

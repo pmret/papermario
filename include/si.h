@@ -2,9 +2,6 @@
 #define _SI_H_
 
 #include "ultra64.h"
-#include "types.h"
-#include "macros.h"
-#include "common_structs.h"
 
 #define SI_VAR_0 0xFE363C80
 
@@ -20,9 +17,5 @@ typedef s32 ApiStatus;
 #define ApiStatus_DONE2  2   /* Conditional on ScriptInstance->disableScripts */
 #define ApiStatus_REPEAT 3   /* Call again immediately */
 #define ApiStatus_FINISH 255 /* Corresponds to SI_FINISH */
-
-struct ScriptInstance;
-
-typedef ApiStatus(*ApiFunc)(struct ScriptInstance* script, s32 isInitialCall);
 
 #endif

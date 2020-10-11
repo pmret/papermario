@@ -116,7 +116,18 @@ INCLUDE_ASM(s32, "code_a5dd0_len_114e0", AssignAreaFlag, ScriptInstance* script,
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", AssignBlockFlag, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", AssignFlag, ScriptInstance* script, s32 isInitialCall);
+ApiStatus AssignFlag(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Trigger* trigger;
+
+    if (isInitialCall == TRUE) {
+        trigger = get_entity_by_index(gLastCreatedEntityIndex)->trigger;
+        trigger->flags.bytes.genericFlagIndex = get_variable_index(script, *args);
+        return ApiStatus_DONE2;
+    }
+
+    return ApiStatus_DONE1;
+}
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", AssignPanelFlag, ScriptInstance* script, s32 isInitialCall);
 
