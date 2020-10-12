@@ -1,8 +1,8 @@
 name: "Paper Mario (North America)"
 basename: "papermario"
 options:
-  "find-file-boundaries": True
-  "skip-asm": True
+  find-file-boundaries: True
+  skip-asm: True
   pycparser_flags: ["-Iinclude", "-D_LANGUAGE_C", "-ffreestanding", "-DF3DEX_GBI_2", "-DSPLAT"]
   compiler: "GCC"
 segments:
