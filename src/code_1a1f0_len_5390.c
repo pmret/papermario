@@ -1,8 +1,23 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "code_1a1f0_len_5390", get_defeated);
+s32 get_defeated(s32 mapID, s32 encounterID) {
+    EncounterStatus* currentEncounter = &gCurrentEncounter;
+    s32 encounterIdx = encounterID / 32;
+    s32 encounterShift = encounterID % 32;
 
-INCLUDE_ASM(s32, "code_1a1f0_len_5390", set_defeated);
+    return currentEncounter->defeatFlags[mapID][encounterIdx] & (1 << encounterShift);
+}
+
+void set_defeated(s32 mapID, s32 encounterID) {
+    EncounterStatus* currentEncounter = &gCurrentEncounter;
+    s32 encounterIdx;
+    s32 encounterShift;
+
+    encounterIdx = encounterID / 32;
+    encounterShift = encounterID % 32;
+
+    currentEncounter->defeatFlags[mapID][encounterIdx] |= (1 << encounterShift);
+}
 
 INCLUDE_ASM(s32, "code_1a1f0_len_5390", func_8003EE98);
 
