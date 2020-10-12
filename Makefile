@@ -70,6 +70,9 @@ submodules:
 split:
 	rm -rf $(DATA_DIRS) && ./tools/n64splat/split.py baserom.z64 tools/splat.yaml .
 
+splitld: tools/splat.yaml
+	./tools/n64splat/split.py baserom.z64 tools/splat.yaml . --modes ld
+
 setup: clean submodules split
 
 print-% : ; $(info $* is a $(flavor $*) variable set to [$($*)]) @true

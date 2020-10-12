@@ -9,14 +9,22 @@ s32 get_defeated(s32 mapID, s32 encounterID) {
 }
 
 void set_defeated(s32 mapID, s32 encounterID) {
-    EncounterStatus* currentEncounter = &gCurrentEncounter;
-    s32 encounterIdx;
+    EncounterStatus *currentEncounter = &gCurrentEncounter;
+    s32 encounterIdx = encounterID / 32;
     s32 encounterShift;
-
-    encounterIdx = encounterID / 32;
-    encounterShift = encounterID % 32;
-
-    currentEncounter->defeatFlags[mapID][encounterIdx] |= (1 << encounterShift);
+    s32 flag;
+    
+    flag = encounterID % 32;
+    encounterShift = flag;
+    flag = currentEncounter->defeatFlags[mapID][encounterIdx];
+    currentEncounter->defeatFlags[mapID][encounterIdx] = flag | (1 << encounterShift);
+    
+    // TODO: The below should work but has regalloc issues:
+    /*EncounterStatus *currentEncounter = &gCurrentEncounter;
+    s32 encounterIdx = encounterID / 32;
+    s32 encounterShift = encounterID % 32;
+    
+    currentEncounter->defeatFlags[mapID][encounterIdx] |= (1 << encounterShift);*/
 }
 
 INCLUDE_ASM(s32, "code_1a1f0_len_5390", func_8003EE98);
