@@ -162,7 +162,7 @@ void func_802C3390(ScriptInstance* script) {
 }
 
 #ifdef NON_MATCHING
-ScriptInstance* start_script(Bytecode* initialLine, u8 priority, s32 initialState) {
+ScriptInstance* start_script(Bytecode* initialLine, s32 priority, s32 initialState) {
     ScriptInstance* newScript;
     s32 curScriptIndex;
     s32 scriptListCount;
@@ -227,11 +227,11 @@ ScriptInstance* start_script(Bytecode* initialLine, u8 priority, s32 initialStat
     return newScript;
 }
 #else
-INCLUDE_ASM(ScriptInstance*, "code_e79b0_len_1920", start_script, Bytecode* initialLine, u8 priority, s32 initialState);
+INCLUDE_ASM(ScriptInstance*, "code_e79b0_len_1920", start_script, Bytecode* initialLine, s32 priority, s32 initialState);
 #endif
 
 #ifdef NON_MATCHING
-ScriptInstance* start_script_in_group(Bytecode* initialLine, s8 priority, s32 initialState, s8 groupFlags) {
+ScriptInstance* start_script_in_group(Bytecode* initialLine, u8 priority, s32 initialState, u8 groupFlags) {
     ScriptInstance* newScript;
     s32 scriptListCount;
     s32 i;
@@ -297,8 +297,8 @@ ScriptInstance* start_script_in_group(Bytecode* initialLine, s8 priority, s32 in
 return newScript;
 }
 #else
-INCLUDE_ASM(ScriptInstance*, "code_e79b0_len_1920", start_script_in_group, Bytecode* initialLine, s8 priority,
-            s32 initialState, s8 groupFlags);
+INCLUDE_ASM(ScriptInstance*, "code_e79b0_len_1920", start_script_in_group, Bytecode* initialLine, u8 priority,
+            s32 initialState, u8 groupFlags);
 #endif
 
 INCLUDE_ASM(s32, "code_e79b0_len_1920", start_child_script);
