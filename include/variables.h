@@ -13,6 +13,7 @@ extern ActionState gPlayerActionState;
 extern PlayerAnim gPlayerAnimation;
 extern PlayerStatus gPlayerStatus;
 extern PlayerStatus* gPlayerStatusPtr;
+extern CollisionStatus gCollisionStatus;
 extern GameStatus* gGameStatusPtr[1];
 extern s32 gRandSeed;
 extern StaticItem gItemTable[364];
@@ -44,6 +45,7 @@ extern u32** gCurrentModelSpecialDlsPtr[32];
 extern Entity* gWorldEntityList[30];
 extern Entity* gBattleEntityList[30];
 extern Entity** gCurrentEntityListPtr[30];
+extern s32 gLastCreatedEntityIndex;
 
 extern UNK_TYPE* gWorldDynamicEntityList[16];
 extern UNK_TYPE* gBattleDynamicEntityList[16];
@@ -104,13 +106,14 @@ extern s32 D_8009BAA0; // curtain draw callback
 
 extern s16 gCurrentDoorSoundsSet;
 
+extern s32 D_800D9620;
 extern UNK_TYPE D_800E92D8;
 extern UNK_TYPE D_80147474;
 extern UNK_TYPE D_80147574;
 extern UNK_TYPE D_80109270;
 extern UNK_TYPE D_80108558;
 extern UNK_TYPE D_8010F250; // play_sound state struct?
-extern s8 D_8010EBB0;
+extern s8 D_8010EBB0[];
 
 extern SaveData gCurrentSaveFile;
 
@@ -128,5 +131,8 @@ extern u32 gWorldMapFlags[MAX_MAPFLAGS];
 extern u32 gBattleMapFlags[MAX_MAPFLAGS];
 
 extern s32 D_8009A5D8;
+
+// Scripts
+extern Bytecode* SCRIPT_NpcDefeat;
 
 #endif

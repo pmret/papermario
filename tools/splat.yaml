@@ -1,7 +1,9 @@
 name: "Paper Mario (North America)"
 basename: "papermario"
-options: ["find-file-boundaries", "skip-asm"]
-compiler: "GCC"
+options:
+  find-file-boundaries: True
+  pycparser_flags: ["-Iinclude", "-D_LANGUAGE_C", "-ffreestanding", "-DF3DEX_GBI_2", "-DSPLAT"]
+  compiler: "GCC"
 segments:
   - name: header
     type: code
@@ -229,6 +231,7 @@ segments:
     files:
     - [0xe79b0, "c", "code_e79b0_len_1920"]
     - [0xe92d0, "c", "code_e92d0_len_5da0"]
+    - [0xED510, "c", "code_ED510"]
     - [0xef070, "c", "code_ef070_len_3400"]
     - [0xf2470, "c", "code_f2470_len_27f0"]
     - [0xf4c60, "c", "code_f4c60_len_4300"]

@@ -2,11 +2,11 @@
 
 // TODO: most likely part of the MusicPlayer struct
 typedef struct {
-    s16 fadeFlags;
-    s16 fadeState;
-    s32 fadeOutTime;
-    s32 fadeInTime;
-    s32 unkC;
+    /* 0x0 */ s16 fadeFlags;
+    /* 0x2 */ s16 fadeState;
+    /* 0x4 */ s32 fadeOutTime;
+    /* 0x8 */ s32 fadeInTime;
+    /* 0xC */ s32 unkC;
 } struct_80147230;
 
 extern struct_80147230 D_8014F140;
@@ -60,7 +60,7 @@ s32 play_ambient_sounds(s32 fadeInTime, s32 fadeOutTime) {
     struct_80147230* temp1 = &D_8015C7C0;
     struct_80147230* temp2 = &D_8015C7C0;
 
-    if (!(*gGameStatusPtr)->musicEnabled) {
+    if (!GAME_STATUS->musicEnabled) {
         func_800554A4(temp1->fadeInTime, fadeOutTime);
         temp1->fadeFlags &= ~1;
         return 1;

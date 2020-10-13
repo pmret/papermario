@@ -134,7 +134,7 @@ glabel draw_main_battle_ui
 /* 16D554 8023EC74 00000000 */   nop      
 /* 16D558 8023EC78 0808FB4E */  j         .L8023ED38
 /* 16D55C 8023EC7C 00000000 */   nop      
-/* 16D560 8023EC80 0C0911C2 */  jal       func_80244708
+/* 16D560 8023EC80 0C0911C2 */  jal       pause_cleanup
 /* 16D564 8023EC84 00000000 */   nop      
 /* 16D568 8023EC88 0808FB4E */  j         .L8023ED38
 /* 16D56C 8023EC8C 00000000 */   nop      

@@ -69,7 +69,7 @@ void find_script_labels(ScriptInstance *script) {
 
     j = 0;
     curLine = script->ptrNextLine;
-    for(j; j < ARRAY_COUNT(script->labelIndices); j++) {
+    for(j = 0; j < ARRAY_COUNT(script->labelIndices); j++) {
         type = *curLine++;
         numArgs = *curLine++;
         label = *curLine;
@@ -236,7 +236,7 @@ ScriptInstance* start_script_in_group(Bytecode* initialLine, s8 priority, s32 in
     s32 scriptListCount;
     s32 i;
     s32 curScriptIndex;
-    s32* tempCounter;
+    s32* tempCounter = &gStaticScriptCounter;
 
     for(i = 0; i < MAX_SCRIPTS; i++) {
         if ((*gCurrentScriptListPtr)[i] == NULL) {
@@ -289,8 +289,6 @@ ScriptInstance* start_script_in_group(Bytecode* initialLine, s8 priority, s32 in
     }
 
     func_802C3390(newScript);
-    {
-        s32* tempCounter = &gStaticScriptCounter;
         if (*tempCounter == 0) {
             *tempCounter = 1;
         }
@@ -299,7 +297,7 @@ ScriptInstance* start_script_in_group(Bytecode* initialLine, s8 priority, s32 in
     return newScript;
 }
 #else
-INCLUDE_ASM(s32, "code_e79b0_len_1920", start_script_in_group);
+INCLUDE_ASM(ScriptInstance*, "code_e79b0_len_1920", start_script_in_group, Bytecode* initialLine, s8 priority, s32 initialState, s8 groupFlags);
 #endif
 
 INCLUDE_ASM(s32, "code_e79b0_len_1920", start_child_script);
@@ -627,7 +625,7 @@ void resume_group_script(ScriptInstance* script, s32 groupFlags) {
     }
 
     if ((script->groupFlags & groupFlags) != 0) {
-        script->state &= 0xFD;
+        script->state &= ~0x2;
     }
 }
 

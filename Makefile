@@ -47,7 +47,7 @@ TARGET = papermario
 
 CPPFLAGS   = -Iinclude -D _LANGUAGE_C -ffreestanding -DF3DEX_GBI_2
 ASFLAGS    = -EB -Iinclude -march=vr4300 -mtune=vr4300
-OLDASFLAGS = -EB -Iinclude
+OLDASFLAGS = -EB -Iinclude -G 0
 CFLAGS     = -O2 -quiet -G 0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32
 LDFLAGS    = -T undefined_syms.txt -T $(LD_SCRIPT) -Map $(BUILD_DIR)/papermario.map --no-check-sections
 
@@ -68,7 +68,7 @@ submodules:
 	git submodule update --init --recursive
 
 split:
-	rm -rf $(DATA_DIRS) && ./tools/n64splat/split.py baserom.z64 tools/splat.yaml .
+	rm -rf $(DATA_DIRS) && ./tools/n64splat/split.py baserom.z64 tools/splat.yaml . --modes ld bin
 
 setup: clean submodules split
 

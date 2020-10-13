@@ -64,7 +64,7 @@ glabel func_80243EEC
 /* 164838 80243FD8 AFA00014 */  sw        $zero, 0x14($sp)
 /* 16483C 80243FDC AFA00018 */  sw        $zero, 0x18($sp)
 /* 164840 80243FE0 AFA0001C */  sw        $zero, 0x1c($sp)
-/* 164844 80243FE4 0C090AE8 */  jal       func_80242BA0
+/* 164844 80243FE4 0C090AE8 */  jal       pause_set_cursor_opacity
 /* 164848 80243FE8 AFA00020 */   sw       $zero, 0x20($sp)
 /* 16484C 80243FEC 00101040 */  sll       $v0, $s0, 1
 /* 164850 80243FF0 3C038025 */  lui       $v1, 0x8025

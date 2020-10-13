@@ -26,7 +26,7 @@ void load_map_bg(char* optAssetName) {
 }
 
 void func_80145DF8(void) {
-    GameStatus* gameStatus = *gGameStatusPtr;
+    GameStatus* gameStatus = GAME_STATUS;
     D_801595A0 = 0;
     D_8014F12F = 0;
 
@@ -35,7 +35,7 @@ void func_80145DF8(void) {
 }
 
 void read_background_size(BackgroundHeader* bg) {
-    GameStatus* gameStatus = *gGameStatusPtr;
+    GameStatus* gameStatus = GAME_STATUS;
 
     gameStatus->backgroundMaxW = bg->width;
     gameStatus->backgroundMaxH = bg->height;
@@ -47,7 +47,7 @@ void read_background_size(BackgroundHeader* bg) {
 }
 
 void set_background_size(s16 startX, s16 startY, s16 sizeX, s16 sizeY) {
-    GameStatus* gameStatus = *gGameStatusPtr;
+    GameStatus* gameStatus = GAME_STATUS;
 
     gameStatus->enableBackground &= ~1;
     gameStatus->backgroundMaxW = startX;
