@@ -1,6 +1,7 @@
 #ifndef _COMMON_STRUCTS_H_
 #define _COMMON_STRUCTS_H_
 
+#include "macros.h"
 #include "ultra64.h"
 #include "types.h"
 #include "si.h"
@@ -238,9 +239,9 @@ typedef struct ScriptInstance {
     /* 0x007 */ s8 switchDepth; /* how many nested switches we are in, max = 8 */
     /* 0x008 */ Bytecode* ptrNextLine;
     /* 0x00C */ Bytecode* ptrReadPos;
-    /* 0x010 */ u8 labelIndices[16];
+    /* 0x010 */ s8 labelIndices[16];
     /* 0x020 */ UNK_PTR labelPositions[16];
-    /* 0x060 */ s32 deleted; /* set to zero in KillScript when malloc'd */
+    /* 0x060 */ UNK_PTR unk_60; /* unknown pointer; allocated on the heap, free'd in kill_script() */
     /* 0x064 */ struct ScriptInstance* blockingParent; /* parent? */
     /* 0x068 */ struct ScriptInstance* childScript;
     /* 0x06C */ struct ScriptInstance* parentScript; /* brother? */
@@ -265,6 +266,8 @@ typedef struct ScriptInstance {
     /* 0x160 */ Bytecode* ptrSavedPosition;
     /* 0x164 */ Bytecode* ptrCurrentLine;
 } ScriptInstance; // size = 0x168
+
+typedef ScriptInstance* ScriptList[MAX_SCRIPTS];
 
 typedef struct Entity {
     /* 0x00 */ s32 flags;

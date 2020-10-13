@@ -82,4 +82,7 @@ s32 set_music_track(s32 musicPlayer, s32 songID, s32 variation, s32 unk, s32 vol
 
 ScriptInstance* get_script_by_index(s32 index);
 
+void suspend_all_group(s32 groupFlags);
+void kill_script(ScriptInstance* instanceToKill);
+
 #endif

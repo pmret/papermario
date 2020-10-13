@@ -88,7 +88,7 @@ f32 signF(f32 val) {
     return sign;
 }
 
-INCLUDE_ASM(s32, "code_42e0_len_1f60", round);
+INCLUDE_ASM(s16, "code_42e0_len_1f60", round, f32 arg0);
 
 INCLUDE_ASM(f32, "code_42e0_len_1f60", clamp_angle, f32 theta);
 

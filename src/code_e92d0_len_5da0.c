@@ -737,12 +737,11 @@ ApiStatus func_802C73B0(ScriptInstance* script) {
 s32 func_802C73B8(ScriptInstance* script) {
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(gCurrentScriptListPtr); i++) {
+    for (i = 0; i < 128; i++) { // replace with MAX_SCRIPTS define
         if (script == get_script_by_index(i)) {
             break;
         }
     }
-
     return 1;
 }
 

@@ -30,8 +30,8 @@ glabel update_scripts
 /* E8788 802C3DD8 4481A800 */  mtc1      $at, $f21
 /* E878C 802C3DDC 4480A000 */  mtc1      $zero, $f20
 /* E8790 802C3DE0 2415FFFF */  addiu     $s5, $zero, -1
-/* E8794 802C3DE4 3C14802E */  lui       $s4, %hi(gScriptIndexList)
-/* E8798 802C3DE8 2694AA98 */  addiu     $s4, $s4, %lo(gScriptIndexList)
+/* E8794 802C3DE4 3C14802E */  lui       $s4, %hi(gScriptIdList)
+/* E8798 802C3DE8 2694AA98 */  addiu     $s4, $s4, %lo(gScriptIdList)
 /* E879C 802C3DEC 3C13802E */  lui       $s3, 0x802e
 /* E87A0 802C3DF0 2673A898 */  addiu     $s3, $s3, -0x5768
 .L802C3DF4:

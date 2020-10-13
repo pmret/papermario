@@ -4,6 +4,7 @@
 #include "ultra64.h"
 #include "common_structs.h"
 #include "types.h"
+#include "macros.h"
 #include "enums.h"
 
 extern UiStatus gUIStatus;
@@ -20,19 +21,17 @@ extern UNK_FUN_PTR(gCurrentUpdateFunction);
 
 extern BattleStatus gBattleStatus;
 
-extern ScriptInstance* gWorldScriptList[128];
-extern ScriptInstance* gBattleScriptList[128];
-extern ScriptInstance** gCurrentScriptListPtr[128];
+extern ScriptList gWorldScriptList;
+extern ScriptList gBattleScriptList;
+extern ScriptList* gCurrentScriptListPtr;
 
-extern s32 gStaticScriptCounter;
-extern s32 D_802D9CA4;
 extern s32 gNumScripts;
 extern s32 D_802DAC98;
 
 extern s32 gScriptListCount;
 
-extern s32 gScriptIdList[128];
-extern s32 gScriptIndexList[128];
+extern s32 gScriptIdList[MAX_SCRIPTS];
+extern s32 gScriptIndexList[MAX_SCRIPTS];
 
 extern Model* gWorldModelList[256];
 extern Model* gBattleModelList[256];
@@ -60,8 +59,6 @@ extern Shadow** gCurrentShadowListPtr[60];
 
 extern Camera gCameras[4];
 extern s32 gCurrentCameraID;
-
-extern f32 gGlobalTimeSpace;
 
 extern Npc* gPlayerNpcPtr;
 
@@ -123,5 +120,13 @@ extern u32* gMapVars;
 extern s32 gNumScripts;
 
 extern f32 D_80286540;
+
+extern u32 gWorldMapVars[MAX_MAPVARS];
+extern u32 gBattleMapVars[MAX_MAPVARS];
+
+extern u32 gWorldMapFlags[MAX_MAPFLAGS];
+extern u32 gBattleMapFlags[MAX_MAPFLAGS];
+
+extern s32 D_8009A5D8;
 
 #endif
