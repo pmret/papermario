@@ -188,8 +188,6 @@ ApiStatus AddVectorPolar(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-//INCLUDE_ASM(s32, "code_f8f60_len_1560", func_802D4BDC, ScriptInstance* script, s32 isInitialCall);
-
 ApiStatus func_802D4BDC(ScriptInstance* script, s32 initialCall) {
     s32* t0 = &script->functionTemp[0];
     s32* t1 = &script->functionTemp[1];
