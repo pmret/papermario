@@ -227,7 +227,8 @@ ScriptInstance* start_script(Bytecode* initialLine, s32 priority, s32 initialSta
     return newScript;
 }
 #else
-INCLUDE_ASM(ScriptInstance*, "code_e79b0_len_1920", start_script, Bytecode* initialLine, s32 priority, s32 initialState);
+INCLUDE_ASM(ScriptInstance*, "code_e79b0_len_1920", start_script, Bytecode* initialLine, s32 priority,
+            s32 initialState);
 #endif
 
 #ifdef NON_MATCHING

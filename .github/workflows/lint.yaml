@@ -1,13 +1,11 @@
 name: Lint
 on:
-  push:
-    paths:
-      - 'src/*'
-      - 'include/*'
   pull_request:
     paths:
       - 'src/*'
       - 'include/*'
+      - 'format.sh'
+      - '.clang-tidy'
 
 jobs:
   build:
@@ -18,18 +16,9 @@ jobs:
 
       - run: sudo apt-get install -y astyle clang-tidy
 
-      # lint files changed by the push/pr
-      - id: files
-        uses: trilom/file-changes-action@v1.2.4
-        with:
-          output: ' '
-        continue-on-error: true
-      - run: ./format.sh ${{ steps.files.outputs.files}}
-        if: ${{ steps.files.outcome == 'success' }}
       - run: ./format.sh
-        if: ${{ steps.files.outcome == 'failure' }}
 
-      # fail if any files were changed by ./format.sh
+      # Detect any files changed by ./format.sh
       - id: files_formatted
         uses: jackton1/find-changed-files@v1.1
         with:
