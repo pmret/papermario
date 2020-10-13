@@ -239,7 +239,10 @@ segments:
     - [0xf8f60, "c", "code_f8f60_len_1560"]
     - [0xfa4c0, "c", "code_fa4c0_len_3bf0"]
     - [0xfe0b0, "c", "code_fe0b0_len_5a0"]
-    - [0xFE650, "bin"]
+    - [0xFE650, ".data", "code_e79b0_len_1920"]
+    - [0xFE660, "bin"]
+    - [0xFE730, ".rodata", "code_e79b0_len_1920"]
+  - [0xFE748, "bin"] # rodata chunk for above overlay; here to avoid the 0x10 alignment
   - name: code
     type: code
     start: 0xFEE30

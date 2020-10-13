@@ -48,4 +48,5 @@ INCLUDE_ASM(s32, "code_e0b30_len_b80", func_8014AEF8);
 
 INCLUDE_ASM(s32, "code_e0b30_len_b80", func_8014AF8C);
 
-INCLUDE_ASM(s32, "code_e0b30_len_b80", func_8014AFA0);
+void func_8014AFA0(void) {
+}
