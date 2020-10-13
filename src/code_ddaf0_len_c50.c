@@ -12,12 +12,12 @@ extern struct_80159D50 D_80159D50[0x40];
 
 //INCLUDE_ASM("code_ddaf0_len_c50", func_801473F0);
 void func_801473F0(void) {
-    struct_80159D50 *phi_v1 = &D_80159D50;
+    struct_80159D50* phi_v1 = &D_80159D50;
     s32 i;
 
-    for(i = 0; i < 0x40; i++) {
-      phi_v1->unk_00 = 0;
-      phi_v1++;
+    for (i = 0; i < 0x40; i++) {
+        phi_v1->unk_00 = 0;
+        phi_v1++;
     }
 }
 

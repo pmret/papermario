@@ -205,7 +205,7 @@ ApiStatus func_802D4BDC(ScriptInstance* script, s32 initialCall) {
         if (t1v == 255) {
             return ApiStatus_DONE2;
         }
-    
+
         t1v += 10;
         *t1 = t1v;
         if (t1v > 255) {
@@ -236,7 +236,7 @@ ApiStatus func_802D4C4C(ScriptInstance* script, s32 initialCall) {
         }
         t1v -= 10;
         *t1 = t1v;
-        if(t1v < 0) {
+        if (t1v < 0) {
             *t1 = 0;
         }
         func_80137DA4(10, *t1);
@@ -274,10 +274,10 @@ ApiStatus func_802D4D88(ScriptInstance* script, s32 initialCall) {
 #ifdef NON_MATCHING
 // most likely functionally equivalent, lots of issues though.
 void setup_path_data(s32 numVecs, f32* arg1, struct Vec3f* arg2, struct Vec3f* arg3) {
-    struct Vec3f *temp_s4;
-    f32 *temp_s7;
+    struct Vec3f* temp_s4;
+    f32* temp_s7;
     s32 i;
-    f32 *temp;
+    f32* temp;
     f32 new_var;
     f32 new_var2;
 

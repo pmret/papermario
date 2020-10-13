@@ -15,10 +15,10 @@ void sort_scripts(void) {
     s32 i;
     s32 j;
     s32 numValidScripts = 0;
-    s32 *scriptIndexList = gScriptIndexList;
-    s32 *scriptIdList = gScriptIdList;
+    s32* scriptIndexList = gScriptIndexList;
+    s32* scriptIdList = gScriptIdList;
 
-    for(i = 0; i < MAX_SCRIPTS; i++) {
+    for (i = 0; i < MAX_SCRIPTS; i++) {
         curScript = (*gCurrentScriptListPtr)[i];
         if (curScript != NULL) {
             if (curScript->state != 0) {
@@ -31,11 +31,11 @@ void sort_scripts(void) {
 
     gScriptListCount = numValidScripts;
     j = numValidScripts;
-    for(i = 0; i < (j - 1); i++) {
+    for (i = 0; i < (j - 1); i++) {
         currentScriptListPtr = &gCurrentScriptListPtr;
         scriptIdList = gScriptIdList;
         scriptIndexList = gScriptIndexList;
-        for(j = i + 1; j < numValidScripts; j++) {
+        for (j = i + 1; j < numValidScripts; j++) {
             temp_a1 = scriptIndexList[i];
             temp_a0 = scriptIndexList[j];
             if ((**currentScriptListPtr)[temp_a1]->priority > (**currentScriptListPtr)[temp_a0]->priority) {
@@ -54,22 +54,22 @@ INCLUDE_ASM(s32, "code_e79b0_len_1920", sort_scripts);
 
 #ifdef NON_MATCHING
 // Very close. Reordering/branch likely issues
-void find_script_labels(ScriptInstance *script) {
-    Bytecode *curLine;
+void find_script_labels(ScriptInstance* script) {
+    Bytecode* curLine;
     s32 type;
     s32 label;
     s32 numArgs;
     s32 i;
     s32 j;
 
-    for(i = 0; i < ARRAY_COUNT(script->labelIndices); i++){
+    for (i = 0; i < ARRAY_COUNT(script->labelIndices); i++) {
         script->labelIndices[i] = -1;
         script->labelPositions[i] = 0;
     }
 
     j = 0;
     curLine = script->ptrNextLine;
-    for(j = 0; j < ARRAY_COUNT(script->labelIndices); j++) {
+    for (j = 0; j < ARRAY_COUNT(script->labelIndices); j++) {
         type = *curLine++;
         numArgs = *curLine++;
         label = *curLine;
@@ -103,7 +103,7 @@ void clear_script_list(void) {
         gMapFlags = gBattleMapFlags;
     }
 
-    for(i = 0; i < MAX_SCRIPTS; i++) {
+    for (i = 0; i < MAX_SCRIPTS; i++) {
         (*gCurrentScriptListPtr)[i] = NULL;
     }
 
@@ -111,11 +111,11 @@ void clear_script_list(void) {
     gScriptListCount = 0;
     D_802D9CA4 = 0;
 
-    for(i = 0; i < MAX_MAPVARS; i++) {
+    for (i = 0; i < MAX_MAPVARS; i++) {
         gMapVars[i] = 0;
     }
 
-    for(i = 0; i < MAX_MAPFLAGS; i++) {
+    for (i = 0; i < MAX_MAPFLAGS; i++) {
         gMapFlags[i] = 0;
     }
 
@@ -144,7 +144,7 @@ void init_script_list(void) {
 
 void func_802C3390(ScriptInstance* script) {
     s32 arg;
-    switch(D_8009A5D8) {
+    switch (D_8009A5D8) {
         default:
         case 0:
         case 4:
@@ -162,13 +162,13 @@ void func_802C3390(ScriptInstance* script) {
 }
 
 #ifdef NON_MATCHING
-ScriptInstance* start_script(Bytecode *initialLine, u8 priority, s32 initialState) {
-    ScriptInstance *newScript;
+ScriptInstance* start_script(Bytecode* initialLine, u8 priority, s32 initialState) {
+    ScriptInstance* newScript;
     s32 curScriptIndex;
     s32 scriptListCount;
     s32 i;
 
-    for(i = 0; i < MAX_SCRIPTS; i++) {
+    for (i = 0; i < MAX_SCRIPTS; i++) {
         if ((*gCurrentScriptListPtr)[i] == NULL) {
             break;
         }
@@ -202,11 +202,11 @@ ScriptInstance* start_script(Bytecode *initialLine, u8 priority, s32 initialStat
 
     scriptListCount = 0;
 
-    for(i = 0; i < 16; i++) {
+    for (i = 0; i < 16; i++) {
         newScript->varTable[i] = 0;
     }
 
-    for(i = 0; i < 3; i++){
+    for (i = 0; i < 3; i++) {
         newScript->varFlags[i] = 0;
     }
 
@@ -227,18 +227,18 @@ ScriptInstance* start_script(Bytecode *initialLine, u8 priority, s32 initialStat
     return newScript;
 }
 #else
-INCLUDE_ASM(ScriptInstance*, "code_e79b0_len_1920", start_script, Bytecode *initialLine, u8 priority, s32 initialState);
+INCLUDE_ASM(ScriptInstance*, "code_e79b0_len_1920", start_script, Bytecode* initialLine, u8 priority, s32 initialState);
 #endif
 
 #ifdef NON_MATCHING
 ScriptInstance* start_script_in_group(Bytecode* initialLine, s8 priority, s32 initialState, s8 groupFlags) {
-    ScriptInstance *newScript;
+    ScriptInstance* newScript;
     s32 scriptListCount;
     s32 i;
     s32 curScriptIndex;
     s32* tempCounter = &gStaticScriptCounter;
 
-    for(i = 0; i < MAX_SCRIPTS; i++) {
+    for (i = 0; i < MAX_SCRIPTS; i++) {
         if ((*gCurrentScriptListPtr)[i] == NULL) {
             break;
         }
@@ -272,11 +272,11 @@ ScriptInstance* start_script_in_group(Bytecode* initialLine, s8 priority, s32 in
 
     scriptListCount = 0;
 
-    for(i = 0; i < 16; i++) {
+    for (i = 0; i < 16; i++) {
         newScript->varTable[i] = 0;
     }
 
-    for(i = 0; i < 3; i++){
+    for (i = 0; i < 3; i++) {
         newScript->varFlags[i] = 0;
     }
 
@@ -289,15 +289,16 @@ ScriptInstance* start_script_in_group(Bytecode* initialLine, s8 priority, s32 in
     }
 
     func_802C3390(newScript);
-        if (*tempCounter == 0) {
-            *tempCounter = 1;
-        }
+    if (*tempCounter == 0) {
+        *tempCounter = 1;
     }
+}
 
-    return newScript;
+return newScript;
 }
 #else
-INCLUDE_ASM(ScriptInstance*, "code_e79b0_len_1920", start_script_in_group, Bytecode* initialLine, s8 priority, s32 initialState, s8 groupFlags);
+INCLUDE_ASM(ScriptInstance*, "code_e79b0_len_1920", start_script_in_group, Bytecode* initialLine, s8 priority,
+            s32 initialState, s8 groupFlags);
 #endif
 
 INCLUDE_ASM(s32, "code_e79b0_len_1920", start_child_script);
@@ -311,7 +312,7 @@ ScriptInstance* func_802C39F8(ScriptInstance* parentScript, Bytecode* nextLine, 
     s32 i;
     s32 scriptListCount;
 
-    for(i = 0; i < MAX_SCRIPTS; i++) {
+    for (i = 0; i < MAX_SCRIPTS; i++) {
         if ((*gCurrentScriptListPtr)[i] == NULL) {
             break;
         }
@@ -346,11 +347,11 @@ ScriptInstance* func_802C39F8(ScriptInstance* parentScript, Bytecode* nextLine, 
 
     scriptListCount = 0;
 
-    for(i = 0; i < ARRAY_COUNT(child->varTable); i++) {
+    for (i = 0; i < ARRAY_COUNT(child->varTable); i++) {
         child->varTable[i] = parentScript->varTable[i];
     }
 
-    for(i = 0; i < ARRAY_COUNT(child->varFlags); i++){
+    for (i = 0; i < ARRAY_COUNT(child->varFlags); i++) {
         child->varFlags[i] = parentScript->varFlags[i];
     }
 
@@ -369,11 +370,12 @@ ScriptInstance* func_802C39F8(ScriptInstance* parentScript, Bytecode* nextLine, 
     return child;
 }
 #else
-INCLUDE_ASM(ScriptInstance*, "code_e79b0_len_1920", func_802C39F8, ScriptInstance* parentScript, Bytecode* nextLine, s32 newState);
+INCLUDE_ASM(ScriptInstance*, "code_e79b0_len_1920", func_802C39F8, ScriptInstance* parentScript, Bytecode* nextLine,
+            s32 newState);
 #endif
 
-ScriptInstance* func_802C3C10(ScriptInstance *script, Bytecode* line, s32 arg2) {
-    ScriptInstance *curScript;
+ScriptInstance* func_802C3C10(ScriptInstance* script, Bytecode* line, s32 arg2) {
+    ScriptInstance* curScript;
     s32 i;
 
     script->ptrNextLine = line;
@@ -393,7 +395,7 @@ ScriptInstance* func_802C3C10(ScriptInstance *script, Bytecode* line, s32 arg2) 
         kill_script(script->childScript);
     }
 
-    for(i = 0; i < MAX_SCRIPTS; i++) {
+    for (i = 0; i < MAX_SCRIPTS; i++) {
         curScript = (*gCurrentScriptListPtr)[i];
         if ((curScript != 0) && (curScript->parentScript == script)) {
             kill_script(curScript);
@@ -447,7 +449,7 @@ void kill_script(ScriptInstance* instanceToKill) {
     s32 j;
     s32 i;
 
-    for(i = 0; i < MAX_SCRIPTS; i++) {
+    for (i = 0; i < MAX_SCRIPTS; i++) {
         if ((*gCurrentScriptListPtr)[i] == instanceToKill) {
             break;
         }
@@ -462,7 +464,7 @@ void kill_script(ScriptInstance* instanceToKill) {
         kill_script(childScript);
     }
 
-    for(j = 0; j < MAX_SCRIPTS; j++) {
+    for (j = 0; j < MAX_SCRIPTS; j++) {
         ScriptInstance* tempScriptInstance = (*gCurrentScriptListPtr)[j];
         if (tempScriptInstance != NULL) {
             if (tempScriptInstance->parentScript == instanceToKill) {
@@ -476,11 +478,11 @@ void kill_script(ScriptInstance* instanceToKill) {
         blockingParent->childScript = NULL;
         blockingParent->state &= ~0x10;
 
-        for(j = 0; j < ARRAY_COUNT(blockingParent->varTable); j++) {
+        for (j = 0; j < ARRAY_COUNT(blockingParent->varTable); j++) {
             blockingParent->varTable[j] = instanceToKill->varTable[j];
         }
 
-        for(j = 0; j < ARRAY_COUNT(blockingParent->varFlags); j++) {
+        for (j = 0; j < ARRAY_COUNT(blockingParent->varFlags); j++) {
             blockingParent->varFlags[j] = instanceToKill->varFlags[j];
         }
     }
