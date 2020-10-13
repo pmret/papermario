@@ -1,13 +1,13 @@
 #include "common.h"
 
 void intro_logos_set_fade_alpha(s16 new_alpha) {
-    GameStatus* gameStatus = *gGameStatusPtr;
+    GameStatus* gameStatus = GAME_STATUS;
 
     gameStatus->bootAlpha = new_alpha;
 }
 
 void intro_logos_set_fade_color(s16 arg0) {
-    GameStatus* gameStatus = *gGameStatusPtr;
+    GameStatus* gameStatus = GAME_STATUS;
 
     gameStatus->bootRed = arg0;
     gameStatus->bootGreen = arg0;
@@ -15,7 +15,7 @@ void intro_logos_set_fade_color(s16 arg0) {
 }
 
 s16 intro_logos_fade_in(subtract_val) {
-    GameStatus* gameStatus = *gGameStatusPtr;
+    GameStatus* gameStatus = GAME_STATUS;
 
     if (gameStatus->bootAlpha != 0) {
         gameStatus->bootAlpha -= subtract_val;
@@ -29,7 +29,7 @@ s16 intro_logos_fade_in(subtract_val) {
 }
 
 s16 intro_logos_fade_out(add_val) {
-    GameStatus* gameStatus = *gGameStatusPtr;
+    GameStatus* gameStatus = GAME_STATUS;
 
     if (gameStatus->bootAlpha != 0xFF) {
         gameStatus->bootAlpha += add_val;

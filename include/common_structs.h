@@ -5,11 +5,21 @@
 #include "types.h"
 #include "si.h"
 
+struct ScriptInstance;
+
+typedef ApiStatus(*ApiFunc)(struct ScriptInstance*, s32);
+
 typedef struct Vec3f {
     /* 0x00 */ f32 x;
     /* 0x04 */ f32 y;
     /* 0x08 */ f32 z;
 } Vec3f; // size = 0x0C
+
+typedef struct Vec3s {
+    /* 0x00 */ s16 x;
+    /* 0x02 */ s16 y;
+    /* 0x04 */ s16 z;
+} Vec3s; // size = 0x06
 
 typedef struct Matrix4f {
     /* 0x00 */ f32 mtx[4][4];
@@ -43,7 +53,9 @@ typedef struct HeapNode {
 } HeapNode; // size = 0x10
 
 typedef struct NpcBlurData {
-    /* 0x00 */ char unk_00[4];
+    /* 0x00 */ char unk_00;
+    /* 0x01 */ s8 unk_01;
+    /* 0x02 */ char unk_02[2];
     /* 0x04 */ f32 xpos[20];
     /* 0x54 */ f32 ypos[20];
     /* 0xA4 */ f32 zpos[20];
@@ -153,9 +165,16 @@ typedef struct PlayerData {
     /* 0x33E */ char unk_33E[2];
 } PlayerData; // size = 0x340
 
+typedef union {
+    struct {
+        /* 0x0 */ s16 genericFlagIndex;
+        /* 0x2 */ char unk_2;
+    } bytes;
+    s32 flags;
+} TriggerFlags;
+
 typedef struct Trigger {
-    /* 0x00 */ s16 genericFlagIndex;
-    /* 0x02 */ char unk_02[2];
+    /* 0x00 */ TriggerFlags flags;
     /* 0x04 */ s32 params1;
     /* 0x08 */ s32 params2;
     /* 0x0C */ UNK_FUN_PTR(functionHandler);
@@ -163,7 +182,9 @@ typedef struct Trigger {
     /* 0x14 */ struct ScriptInstance* runningScript;
     /* 0x18 */ s32 priority;
     /* 0x1C */ s32 scriptVars[3];
-    /* 0x28 */ char unk_28[12];
+    /* 0x28 */ char unk_28[8];
+    /* 0x30 */ u8 unk_30;
+    /* 0x31 */ char unk_31[3];
     /* 0x34 */ s32 runningScriptID;
 } Trigger; // size = 0x38
 
@@ -172,10 +193,11 @@ typedef struct Enemy {
     /* 0x04 */ u8 encounterIndex;
     /* 0x05 */ s8 encountered;
     /* 0x06 */ u8 scriptGroup; /* scripts launched for this npc controller will be assigned this group */
-    /* 0x07 */ char unk_07;
+    /* 0x07 */ s8 unk_07;
     /* 0x08 */ s16 npcID;
     /* 0x0A */ s16 spawnPos[3];
-    /* 0x10 */ char unk_10[8];
+    /* 0x10 */ Vec3s unk_10;
+    /* 0x16 */ char unk_16[2];
     /* 0x18 */ struct StaticNpcSettings* npcSettings;
     /* 0x1C */ Bytecode* initBytecode;
     /* 0x20 */ Bytecode* interactBytecode;
@@ -204,9 +226,9 @@ typedef struct Enemy {
     /* 0xBC */ char unk_BC[8];
     /* 0xC4 */ s32 unk_C4;
     /* 0xC8 */ s32 unk_C8;
-    /* 0xCC */ UNK_PTR animList;
+    /* 0xCC */ s32* animList;
     /* 0xD0 */ UNK_PTR territoryData;
-    /* 0xD4 */ UNK_PTR dropTables;
+    /* 0xD4 */ s16* dropTables;
     /* 0xD8 */ u32 tattleString;
     /* 0xDC */ char unk_DC[20];
 } Enemy; // size = 0xF0
@@ -238,14 +260,14 @@ typedef struct ScriptInstance {
     /* 0x007 */ s8 switchDepth; /* how many nested switches we are in, max = 8 */
     /* 0x008 */ Bytecode* ptrNextLine;
     /* 0x00C */ Bytecode* ptrReadPos;
-    /* 0x010 */ u8 labelIndices[16];
+    /* 0x010 */ s32 labelIndices[4];
     /* 0x020 */ UNK_PTR labelPositions[16];
     /* 0x060 */ s32 deleted; /* set to zero in KillScript when malloc'd */
     /* 0x064 */ struct ScriptInstance* blockingParent; /* parent? */
     /* 0x068 */ struct ScriptInstance* childScript;
     /* 0x06C */ struct ScriptInstance* parentScript; /* brother? */
     /* 0x070 */ s32 functionTemp[4];
-    /* 0x080 */ API_FUN(callFunction);
+    /* 0x080 */ ApiFunc callFunction;
     /* 0x084 */ s32 varTable[16];
     /* 0x0C4 */ s32 varFlags[3];
     /* 0x0D0 */ s32 loopStartTable[8];
@@ -282,9 +304,9 @@ typedef struct Entity {
     /* 0x3C */ char unk_3C[4];
     /* 0x40 */ struct Trigger* trigger;
     /* 0x44 */ s32* vertexData;
-    /* 0x48 */ f32 position[3];
-    /* 0x54 */ f32 scale[3];
-    /* 0x60 */ f32 rotation[3];
+    /* 0x48 */ Vec3f position;
+    /* 0x54 */ Vec3f scale;
+    /* 0x60 */ Vec3f rotation;
     /* 0x6C */ char unk_6C[4];
     /* 0x70 */ struct Matrix4f* inverseTransformMatrix; /* world-to-local */
     /* 0x74 */ char unk_74[60];
@@ -845,10 +867,8 @@ typedef struct GameStatus {
     /* 0x044 */ u8 stickY; /* with deadzone */
     /* 0x045 */ u8 altStickY; /* input used for batte when flag 80000 set */
     /* 0x046 */ char unk_46[2];
-    /* 0x048 */ s16 unk_48;
-    /* 0x04A */ char unk_4A[6];
-    /* 0x050 */ s16 unk_50;
-    /* 0x052 */ char unk_52[6];
+    /* 0x048 */ s16 unk_48[4];
+    /* 0x050 */ s16 unk_50[4];
     /* 0x058 */ s16 unk_58;
     /* 0x05A */ char unk_5A[6];
     /* 0x060 */ s16 unk_60;
@@ -861,11 +881,14 @@ typedef struct GameStatus {
     /* 0x071 */ s8 demoState; /* (0 = not demo, 1 = map demo, 2 = demo map changing) */
     /* 0x072 */ u8 nextDemoScene; /* which part of the demo to play next */
     /* 0x073 */ u8 contBitPattern;
-    /* 0x074 */ char unk_74[4];
+    /* 0x074 */ char unk_74[2];
+    /* 0x076 */ s8 unk_76;
+    /* 0x077 */ char unk_77;
     /* 0x078 */ s8 disableScripts;
     /* 0x079 */ char unk_79;
     /* 0x07A */ s8 musicEnabled;
-    /* 0x07B */ char unk_7B[3];
+    /* 0x07B */ char unk_7B[2];
+    /* 0x07D */ s8 unk_7D;
     /* 0x07E */ u8 peachFlags; /* (1 = isPeach, 2 = isTransformed, 4 = hasUmbrella) */
     /* 0x07F */ u8 peachDisguise; /* (1 = koopatrol, 2 = hammer bros, 3 = clubba) */
     /* 0x080 */ char unk_80[6];
@@ -878,7 +901,10 @@ typedef struct GameStatus {
     /* 0x094 */ f32 exitAngle;
     /* 0x098 */ struct Vec3f playerPos;
     /* 0x0A4 */ f32 playerYaw;
-    /* 0x0A8 */ char unk_A8[4];
+    /* 0x0A8 */ s8 unk_A8;
+    /* 0x0A9 */ s8 unk_A9;
+    /* 0x0AA */ s8 unk_AA;
+    /* 0x0AB */ s8 unk_AB;
     /* 0x0AC */ s8 loadMenuState;
     /* 0x0AD */ u8 menuCounter;
     /* 0x0AE */ char unk_AE[8];
@@ -1351,7 +1377,7 @@ typedef struct PlayerStatus {
     /* 0x012 */ s16 moveFrames;
     /* 0x014 */ s8 enableCollisionOverlapsCheck;
     /* 0x015 */ s8 statusMenuCounterinputEnabledCounter; /* whether the C-up menu can appear */
-    /* 0x016 */ s16 lastGoodPosition[3];
+    /* 0x016 */ Vec3s lastGoodPosition;
     /* 0x01C */ struct Vec3f extraVelocity;
     /* 0x028 */ struct Vec3f position;
     /* 0x034 */ char unk_34[16];
@@ -1390,7 +1416,7 @@ typedef struct PlayerStatus {
     /* 0x0DC */ s32 currentButtons;
     /* 0x0E0 */ s32 pressedButtons;
     /* 0x0E4 */ s32 heldButtons;
-    /* 0x0E8 */ f32 stickAxis[2];
+    /* 0x0E8 */ s32 stickAxis[2];
     /* 0x0F0 */ s32 currentButtonsBuffer[10];
     /* 0x118 */ s32 pressedButtonsBuffer[10];
     /* 0x140 */ s32 heldButtonsBuffer[10];
@@ -1414,7 +1440,7 @@ typedef struct EncounterStatus {
     /* 0x07 */ char unk_07[2];
     /* 0x09 */ s8 battleOutcome; /* 0 = won, 1 = lost */
     /* 0x0A */ char unk_0A;
-    /* 0x0B */ u8 merleeCoinBonus; /* triple coins when != 0 */
+    /* 0x0B */ s8 merleeCoinBonus; /* triple coins when != 0 */
     /* 0x0C */ u8 damageTaken; /* valid after battle */
     /* 0x0D */ char unk_0D;
     /* 0x0E */ s16 coinsEarned; /* valid after battle */
@@ -1425,7 +1451,9 @@ typedef struct EncounterStatus {
     /* 0x14 */ s32 songID;
     /* 0x18 */ s32 unk_18;
     /* 0x1C */ u8 numEncounters; /* number of encounters for current map (in list) */
-    /* 0x1D */ char unk_1D[3];
+    /* 0x1D */ s8 currentAreaIndex;
+    /* 0x1E */ u8 currentMapIndex;
+    /* 0x1F */ u8 currentEntryIndex;
     /* 0x20 */ u8 mapID;
     /* 0x21 */ char unk_21[3];
     /* 0x24 */ s32* npcGroupList;
@@ -1433,9 +1461,11 @@ typedef struct EncounterStatus {
     /* 0x88 */ struct Encounter* currentEncounter;
     /* 0x8C */ struct Enemy* currentEnemy;
     /* 0x90 */ s32 unk_90;
-    /* 0x94 */ char unk_94[4];
+    /* 0x94 */ s32 unk_94;
     /* 0x98 */ s32 unk_98;
-} EncounterStatus; // size = 0x9C
+    /* 0x9C */ char unk_9C[20];
+    /* 0xB0 */ s32 defeatFlags[60][12];
+} EncounterStatus; // size = 0xE0
 
 typedef struct SaveData {
     /* 0x0000 */ char magicString[16]; /* "Mario Story 006" string */

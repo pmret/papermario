@@ -58,7 +58,7 @@ s32 play_ambient_sounds(s32 arg0, s32 arg1) {
     struct_80147230* temp1 = &D_8015C7C0;
     struct_80147230* temp2 = &D_8015C7C0;
 
-    if ((*gGameStatusPtr)->musicEnabled == 0) {
+    if (!GAME_STATUS->musicEnabled) {
         func_800554A4(temp1->unk8, arg1);
         temp1->unk0 &= ~1;
         return 1;

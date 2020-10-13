@@ -1663,6 +1663,7 @@ si_handle_wait;0x802C4B5C
 si_handle_wait_seconds;0x802C4BB8
 si_skip_else;0x802C8978
 si_skip_if;0x802C88FC
+si_standard_trigger_executor;0x802C6AD0
 sign;0x800294B0
 signF;0x80029A7C
 sin_cos_deg;0x8002A234
