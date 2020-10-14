@@ -33,6 +33,8 @@ D_8010CD20 = 0x8010CD20;
 D_8010EF08 = 0x8010EF08;
 D_8010F094 = 0x8010F094;
 
+D_800D9620 = 0x800D9620;
+
 gBattleStatus = 0x800DC070;
 
 D_000759B0 = 0x000759B0;
@@ -92,9 +94,14 @@ gCurrentEncounter = 0x800B0F10;
 nuContRmbCtl = 0x800B1d40;
 nuContData = 0x800B1D68;
 gCameras = 0x800B1D80;
+
 nusched = 0x800DA440;
 nuContPfs = 0x800DAAD8;
 nuSiMesgQ = 0x800DAC78;
+
+gCurrentCameraID = 0x80077410;
+SCRIPT_NpcDefeat = 0x80077E38;
+
 D_800DC500 = 0x800DC500;
 D_8010F6D0 = 0x8010F6D0;
 
@@ -134,7 +141,9 @@ gCurrentTriggerListPtr = 0x80159390;
 D_801595A0 = 0x801595A0;
 D_80159AE2 = 0x80159AE2;
 D_80159AE4 = 0x80159AE4;
+gCollisionStatus = 0x8015A55A0;
 D_8015C7C0 = 0x8015C7C0;
+gLastCreatedEntityIndex = 0x801512EC;
 
 gWorldModelList = 0x80151770;
 gBattleModelList = 0x80151B70;

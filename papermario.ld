@@ -225,6 +225,7 @@ SECTIONS
     .text_E79B0 0x802C3000 : AT(0xE79B0) {
         build/src/code_e79b0_len_1920.o(.text);
         build/src/code_e92d0_len_5da0.o(.text);
+        build/src/code_ED510.o(.text);
         build/src/code_ef070_len_3400.o(.text);
         build/src/code_f2470_len_27f0.o(.text);
         build/src/code_f4c60_len_4300.o(.text);
