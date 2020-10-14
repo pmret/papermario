@@ -89,10 +89,21 @@ extern Trigger* gTriggerList1[64];
 extern Trigger* gTriggerList2[64];
 extern Trigger** gCurrentTriggerListPtr[64];
 
+// Map transition data. Should probably be a struct
 extern u16 gMapTransitionAlpha;
-extern u16 D_800A0942;
+extern s16 D_800A0942;
 extern s16 D_800A0944;
-
+extern s16 D_800A0954;
+extern s16 D_800A0956;
+extern s16 D_800A0958;
+extern s16 D_800A095A;
+extern u8 D_800A095B;
+extern s16 D_800A095C;
+extern u8 D_800A095D;
+extern s16 D_800A095E;
+extern u8 D_800A095F;
+extern s32 D_800A0960;
+extern s32 D_800A0964;
 
 extern s32 gGameState;
 extern s32 D_8009A650[1];
@@ -137,6 +148,9 @@ extern u32 gWorldMapFlags[MAX_MAPFLAGS];
 extern u32 gBattleMapFlags[MAX_MAPFLAGS];
 
 extern s32 D_8009A5D8;
+
+extern u8 D_800779B0;
+extern u8 D_800A0963;
 
 extern s32 mapScriptLibStart;
 extern s32 mapScriptLibEnd;
