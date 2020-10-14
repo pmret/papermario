@@ -1,3 +1,5 @@
+osTvType = 0x80000300;
+
 gGameStatusPtr = 0x8007419C;
 gRandSeed = 0x80074410;
 gUIStatus = 0x8010EF58;
@@ -59,7 +61,9 @@ nuContRmbCallBack = 0x80093D00;
 nuGfxFunc = 0x80093D10;
 nuGfxPreNMIFunc = 0x80093D14;
 
+osViModeTable = 0x800946A0;
 D_800959D4 = 0x800959D4;
+D_8009A5B0 = 0x8009A5B0;
 D_8009A5D8 = 0x8009A5D8;
 nuGfxZBuffer = 0x8009A5DC;
 nuGfxDisplay = 0x8009A5F8;
@@ -78,6 +82,9 @@ D_8009BA9C = 0x8009BA9C;
 D_8009BAA0 = 0x8009BAA0;
 
 D_800A0900 = 0x800A0900;
+nuScStack  = 0x800A65D0;
+nuScAudioStack = 0x800A85D0;
+nuScGraphicsStack = 0x800AA5D0;
 D_800AC5D0 = 0x800AC5D0;
 D_800AC5E8 = 0x800AC5E8;
 

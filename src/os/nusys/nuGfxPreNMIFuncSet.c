@@ -2,9 +2,8 @@
 #include "nu/nusys.h"
 
 void nuGfxPreNMIFuncSet(NUGfxPreNMIFunc func) {
-    OSIntMask intMask;
+    OSIntMask intMask = osSetIntMask(OS_IM_NONE);
 
-    intMask = osSetIntMask(OS_IM_NONE);
     nuGfxPreNMIFunc = func;
     osSetIntMask(intMask);
 }
