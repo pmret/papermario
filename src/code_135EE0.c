@@ -34,7 +34,7 @@ INCLUDE_ASM(s32, "code_135EE0", pause_interp_vertical_scroll);
 
 INCLUDE_ASM(s32, "code_135EE0", pause_update_cursor);
 
-INCLUDE_ASM(s32, "code_135EE0", func_80243568);
+void func_80243568(void) {}
 
 INCLUDE_ASM(s32, "code_135EE0", pause_textbox_draw_contents);
 

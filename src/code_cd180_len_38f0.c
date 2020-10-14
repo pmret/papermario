@@ -20,7 +20,7 @@ INCLUDE_ASM(s32, "code_cd180_len_38f0", func_80138108);
 
 INCLUDE_ASM(s32, "code_cd180_len_38f0", func_80138188);
 
-INCLUDE_ASM(s32, "code_cd180_len_38f0", func_80138198);
+void func_80138198(void) {}
 
 INCLUDE_ASM(s32, "code_cd180_len_38f0", func_801381A0);
 

@@ -8,7 +8,7 @@ INCLUDE_ASM(s32, "code_16c8e0", func_8023E11C);
 
 INCLUDE_ASM(s32, "code_16c8e0", initialize_battle);
 
-INCLUDE_ASM(s32, "code_16c8e0", func_8023E3FC);
+void func_8023E3FC(void) {}
 
 INCLUDE_ASM(s32, "code_16c8e0", update_actor_shadows);
 
@@ -48,47 +48,47 @@ INCLUDE_ASM(s32, "code_16c8e0", func_80241AB8);
 
 INCLUDE_ASM(s32, "code_16c8e0", func_80241B14);
 
-INCLUDE_ASM(s32, "code_16c8e0", func_8024201C);
+void func_8024201C(void) {}
 
 INCLUDE_ASM(s32, "code_16c8e0", update_heroes_start_turn);
 
-INCLUDE_ASM(s32, "code_16c8e0", func_80242AC0);
+void func_80242AC0(void) {}
 
 INCLUDE_ASM(s32, "code_16c8e0", switch_to_player);
 
-INCLUDE_ASM(s32, "code_16c8e0", func_80242BA8);
+void func_80242BA8(void) {}
 
 INCLUDE_ASM(s32, "code_16c8e0", update_end_player_turn);
 
-INCLUDE_ASM(s32, "code_16c8e0", func_80242EF8);
+void func_80242EF8(void) {}
 
 INCLUDE_ASM(s32, "code_16c8e0", switch_to_partner);
 
-INCLUDE_ASM(s32, "code_16c8e0", func_80242FD8);
+void func_80242FD8(void) {}
 
 INCLUDE_ASM(s32, "code_16c8e0", func_80242FE0);
 
-INCLUDE_ASM(s32, "code_16c8e0", func_80243910);
+void func_80243910(void) {}
 
 INCLUDE_ASM(s32, "code_16c8e0", switch_order);
 
-INCLUDE_ASM(s32, "code_16c8e0", func_802439D0);
+void func_802439D0(void) {}
 
 INCLUDE_ASM(s32, "code_16c8e0", func_802439D8);
 
-INCLUDE_ASM(s32, "code_16c8e0", func_80243FD4);
+void func_80243FD4(void) {}
 
 INCLUDE_ASM(s32, "code_16c8e0", func_80243FDC);
 
-INCLUDE_ASM(s32, "code_16c8e0", func_80244000);
+void func_80244000(void) {}
 
 INCLUDE_ASM(s32, "code_16c8e0", func_80244008);
 
-INCLUDE_ASM(s32, "code_16c8e0", func_80244708);
+void func_80244708(void) {}
 
 INCLUDE_ASM(s32, "code_16c8e0", func_80244710);
 
-INCLUDE_ASM(s32, "code_16c8e0", func_80244A48);
+void func_80244A48(void) {}
 
 INCLUDE_ASM(s32, "code_16c8e0", end_battle);
 
@@ -96,15 +96,15 @@ INCLUDE_ASM(s32, "code_16c8e0", func_80244D90);
 
 INCLUDE_ASM(s32, "code_16c8e0", func_80244E38);
 
-INCLUDE_ASM(s32, "code_16c8e0", func_80244EF8);
+void func_80244EF8(void) {}
 
 INCLUDE_ASM(s32, "code_16c8e0", update_run_away);
 
-INCLUDE_ASM(s32, "code_16c8e0", func_80245438);
+void func_80245438(void) {}
 
 INCLUDE_ASM(s32, "code_16c8e0", func_80245440);
 
-INCLUDE_ASM(s32, "code_16c8e0", func_802456B0);
+void func_802456B0(void) {}
 
 INCLUDE_ASM(s32, "code_16c8e0", EnablePartnerBlur);
 
@@ -112,31 +112,31 @@ INCLUDE_ASM(s32, "code_16c8e0", DisablePartnerBlur);
 
 INCLUDE_ASM(s32, "code_16c8e0", update_swap_partner);
 
-INCLUDE_ASM(s32, "code_16c8e0", func_80245AC8);
+void func_80245AC8(void) {}
 
 INCLUDE_ASM(s32, "code_16c8e0", update_player_action);
 
-INCLUDE_ASM(s32, "code_16c8e0", func_80246448);
+void func_80246448(void) {}
 
 INCLUDE_ASM(s32, "code_16c8e0", update_player_change_turn);
 
-INCLUDE_ASM(s32, "code_16c8e0", func_80246B2C_code);
+void func_80246B2C_code(void) {}
 
 INCLUDE_ASM(s32, "code_16c8e0", update_partner_action);
 
-INCLUDE_ASM(s32, "code_16c8e0", func_80247214);
+void func_80247214(void) {}
 
 INCLUDE_ASM(s32, "code_16c8e0", func_8024721C);
 
-INCLUDE_ASM(s32, "code_16c8e0", func_802472A4);
+void func_802472A4(void) {}
 
 INCLUDE_ASM(s32, "code_16c8e0", update_enemy_change_turn);
 
-INCLUDE_ASM(s32, "code_16c8e0", func_80247568);
+void func_80247568(void) {}
 
 INCLUDE_ASM(s32, "code_16c8e0", update_enemy_action);
 
-INCLUDE_ASM(s32, "code_16c8e0", func_80247AFC);
+void func_80247AFC(void) {}
 
 INCLUDE_ASM(s32, "code_16c8e0", func_80247B04);
 
@@ -432,7 +432,7 @@ INCLUDE_ASM(s32, "code_16c8e0", update_enemy_shadows);
 
 INCLUDE_ASM(s32, "code_16c8e0", update_hero_shadows);
 
-INCLUDE_ASM(s32, "code_16c8e0", func_80255FD8);
+void func_80255FD8(void) {}
 
 INCLUDE_ASM(s32, "code_16c8e0", func_80255FE0);
 
@@ -504,9 +504,9 @@ INCLUDE_ASM(s32, "code_16c8e0", func_8025CEC8);
 
 INCLUDE_ASM(s32, "code_16c8e0", _remove_part_decoration);
 
-INCLUDE_ASM(s32, "code_16c8e0", func_8025D150);
+void func_8025D150(void) {}
 
-INCLUDE_ASM(s32, "code_16c8e0", func_8025D158);
+void func_8025D158(void) {}
 
 INCLUDE_ASM(s32, "code_16c8e0", func_8025D160);
 
@@ -514,7 +514,7 @@ INCLUDE_ASM(s32, "code_16c8e0", func_8025D290);
 
 INCLUDE_ASM(s32, "code_16c8e0", func_8025D2B0);
 
-INCLUDE_ASM(s32, "code_16c8e0", func_8025D3C4);
+void func_8025D3C4(void) {}
 
 INCLUDE_ASM(s32, "code_16c8e0", func_8025D3CC);
 
@@ -538,11 +538,11 @@ INCLUDE_ASM(s32, "code_16c8e0", func_8025D8EC);
 
 INCLUDE_ASM(s32, "code_16c8e0", func_8025D90C);
 
-INCLUDE_ASM(s32, "code_16c8e0", func_8025DA60);
+void func_8025DA60(void) {}
 
 INCLUDE_ASM(s32, "code_16c8e0", func_8025DA68);
 
-INCLUDE_ASM(s32, "code_16c8e0", func_8025DBC8);
+void func_8025DBC8(void) {}
 
 INCLUDE_ASM(s32, "code_16c8e0", func_8025DBD0);
 

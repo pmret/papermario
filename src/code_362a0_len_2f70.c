@@ -2,9 +2,9 @@
 
 INCLUDE_ASM(s32, "code_362a0_len_2f70", allocate_hit_tables);
 
-INCLUDE_ASM(s32, "code_362a0_len_2f70", func_8005AF84);
+void func_8005AF84(void) {}
 
-INCLUDE_ASM(s32, "code_362a0_len_2f70", func_8005AF8C);
+void func_8005AF8C(void) {}
 
 INCLUDE_ASM(s32, "code_362a0_len_2f70", initialize_collision);
 

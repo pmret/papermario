@@ -12,7 +12,8 @@ INCLUDE_ASM(s32, "code_f270_len_1190", begin_state_pause_menu);
 
 INCLUDE_ASM(s32, "code_f270_len_1190", step_pause_menu);
 
-INCLUDE_ASM(s32, "code_f270_len_1190", func_80034BF4);
+//INCLUDE_ASM(s32, "code_f270_len_1190", func_80034BF4);
+void func_80034BF4(void) {}
 
 INCLUDE_ASM(s32, "code_f270_len_1190", func_80034BFC);
 
