@@ -59,7 +59,7 @@ default: all
 
 LD_SCRIPT = $(TARGET).ld
 
-all: papermario.ld $(BUILD_DIR) $(TARGET).z64 verify
+all: $(TARGET).ld $(BUILD_DIR) $(TARGET).z64 verify
 
 clean:
 	rm -rf $(BUILD_DIR) $(TARGET).z64
@@ -70,7 +70,7 @@ submodules:
 split:
 	rm -rf $(DATA_DIRS) && ./tools/n64splat/split.py baserom.z64 tools/splat.yaml . --modes ld bin
 
-papermario.ld: tools/splat.yaml
+$(TARGET).ld: tools/splat.yaml
 	./tools/n64splat/split.py baserom.z64 tools/splat.yaml . --modes ld
 
 setup: clean submodules split
