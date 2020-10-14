@@ -79,19 +79,21 @@ typedef struct Npc {
     /* 0x034 */ char unk_34[4];
     /* 0x038 */ struct Vec3f pos;
     /* 0x044 */ struct Vec3f rotation;
-    /* 0x050 */ char unk_50[4];
+    /* 0x050 */ f32 unk_50;
     /* 0x054 */ struct Vec3f scale;
     /* 0x060 */ struct Vec3f moveToPos;
     /* 0x06C */ struct Vec3f colliderPos; /* used during collision with player */
     /* 0x078 */ s32 shadowIndex;
     /* 0x07C */ f32 shadowScale;
-    /* 0x080 */ char unk_80[8];
+    /* 0x080 */ s32 unk_80;
+    /* 0x084 */ char unk_84[4];
     /* 0x088 */ s16 isFacingAway;
     /* 0x08A */ s16 yawCamOffset;
     /* 0x08C */ char unk_8C[2];
     /* 0x08E */ s16 duration; /* formerly interp_counter */
     /* 0x090 */ s16 homePos[3];
-    /* 0x096 */ char unk_96[14];
+    /* 0x096 */ char unk_96[12];
+    /* 0x0A2 */ s16 unk_A2;
     /* 0x0A4 */ u8 npcID;
     /* 0x0A5 */ char unk_A5;
     /* 0x0A6 */ s16 collisionRadius;
