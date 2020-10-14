@@ -96,6 +96,10 @@ extern s16 D_800A0944;
 
 extern s32 gGameState;
 extern s32 D_8009A650[1];
+extern u16 D_8009A6A0;
+extern u16 D_8009A6A2;
+extern u16 D_8009A6A4;
+extern u16 D_8009A6A6;
 
 // curtains
 extern f32 D_8009BA90;
