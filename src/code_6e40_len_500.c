@@ -1,4 +1,4 @@
-#include "common.h"
+#include "code_6e40_len_500.h"
 
 void initialize_curtains(void) {
     D_8009BAA0 = 0;

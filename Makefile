@@ -86,7 +86,7 @@ $(BUILD_DIR)/$(TARGET).elf: $(O_FILES) $(LD_SCRIPT)
 $(BUILD_DIR)/%.o: %.s
 	$(AS) $(ASFLAGS) -o $@ $<
 
-$(BUILD_DIR)/%.o: %.c $(H_FILES)
+$(BUILD_DIR)/%.o: %.c %.h $(H_FILES)
 	cpp $(CPPFLAGS) $< | $(CC) $(CFLAGS) -o - | $(OLD_AS) $(OLDASFLAGS) - -o $@
 
 $(BUILD_DIR)/%.o: %.bin

@@ -1,9 +1,4 @@
-#include "common.h"
-
-void set_curtain_scale_goal(f32 arg0);
-void set_curtain_fade_goal(f32 arg0);
-void intro_logos_set_fade_alpha(s16 new_alpha);
-void intro_logos_set_fade_color(s16 arg0);
+#include "code_11a50_len_7a0.h"
 
 #ifdef NON_MATCHING
 void begin_state_intro(void) {
