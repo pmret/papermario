@@ -42,7 +42,9 @@ INCLUDE_ASM(s32, "code_341d0_len_20d0", remove_all_effects);
 
 INCLUDE_ASM(s32, "code_341d0_len_20d0", play_effect);
 
-INCLUDE_ASM(s32, "code_341d0_len_20d0", load_map_script_lib);
+void load_map_script_lib(void) {
+    dma_copy(&mapScriptLibStart, &mapScriptLibEnd, &mapScriptLibVram);
+}
 
 INCLUDE_ASM(s32, "code_341d0_len_20d0", load_map_by_IDs);
 

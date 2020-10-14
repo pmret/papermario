@@ -15,8 +15,8 @@ INCLUDE_ASM(s32, "code_f2470_len_27f0", set_npc_animation);
 INCLUDE_ASM(s32, "code_f2470_len_27f0", CreateNpc);
 
 ApiStatus DeleteNpc(ScriptInstance* script, s32 isInitialCall) {
-    Bytecode* ptrReadPos = script->ptrReadPos;
-    Npc* npc = get_npc_unsafe(get_variable(script, *ptrReadPos++));
+    Bytecode* args = script->ptrReadPos;
+    Npc* npc = get_npc_unsafe(get_variable(script, *args++));
 
     if (npc) {
         free_npc(npc);
@@ -26,9 +26,9 @@ ApiStatus DeleteNpc(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus GetNpcPointer(ScriptInstance* script, s32 isInitialCall) {
-    Bytecode* ptrReadPos = script->ptrReadPos;
-    NpcId npcID = get_variable(script, *ptrReadPos++);
-    Bytecode varNPC = *ptrReadPos++;
+    Bytecode* args = script->ptrReadPos;
+    NpcId npcID = get_variable(script, *args++);
+    Bytecode varNPC = *args++;
 
     set_variable(script, varNPC, (s32)get_npc_safe(npcID));
     return ApiStatus_DONE2;
@@ -38,7 +38,20 @@ INCLUDE_ASM(s32, "code_f2470_len_27f0", SetNpcPos, ScriptInstance* script, s32 i
 
 INCLUDE_ASM(s32, "code_f2470_len_27f0", SetNpcRotation, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "code_f2470_len_27f0", func_802CDE68, ScriptInstance* script, s32 isInitialCall);
+ApiStatus func_802CDE68(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    NpcId npcId = get_variable(script, *args++);
+    f32 var1 = get_float_variable(script, *args++);
+    Npc* npc;
+
+    npc = resolve_npc(script, npcId);
+    if (npc != NULL) {
+        npc->unk_50 = var1;
+    }
+
+    return ApiStatus_DONE2;
+    do {} while (0); // necessary to match
+}
 
 ApiStatus SetNpcScale(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
@@ -195,9 +208,35 @@ INCLUDE_ASM(s32, "code_f2470_len_27f0", SetNpcFlagBits, ScriptInstance* script, 
 
 INCLUDE_ASM(s32, "code_f2470_len_27f0", GetNpcPos, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "code_f2470_len_27f0", func_802CF1B4);
+ApiStatus func_802CF1B4(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    NpcId npcId = get_variable(script, *args++);
+    Bytecode arg1 = *args;
+    Npc* npc;
 
-INCLUDE_ASM(s32, "code_f2470_len_27f0", func_802CF208);
+    npc = resolve_npc(script, npcId);
+    if (npc != NULL) {
+        npc->unk_80 = arg1;
+    }
+
+    return ApiStatus_DONE2;
+    do {} while (0); // necessary to match
+}
+
+ApiStatus func_802CF208(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    NpcId npcId = get_variable(script, *args++);
+    Bytecode arg1 = *args;
+    Npc* npc;
+
+    npc = resolve_npc(script, npcId);
+    if (npc != NULL) {
+        func_8003AC5C(npc, arg1, 0);
+    }
+
+    return ApiStatus_DONE2;
+    do {} while (0); // necessary to match
+}
 
 ApiStatus EnableNpcShadow(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
@@ -298,17 +337,56 @@ INCLUDE_ASM(s32, "code_f2470_len_27f0", BringPartnerOut);
 
 INCLUDE_ASM(s32, "code_f2470_len_27f0", PutPartnerAway);
 
-INCLUDE_ASM(s32, "code_f2470_len_27f0", GetCurrentPartnerID);
+ApiStatus GetCurrentPartnerID(ScriptInstance* script, s32 isInitialCall) {
+    set_variable(script, *script->ptrReadPos, gPlayerData.currentPartner);
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "code_f2470_len_27f0", PartnerCanUseAbility);
+ApiStatus PartnerCanUseAbility(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode arg0 = *script->ptrReadPos;
 
-INCLUDE_ASM(s32, "code_f2470_len_27f0", PartnerIsFlying);
+    set_variable(script, arg0, partner_can_use_ability());
+    return ApiStatus_DONE2;
+}
+
+ApiStatus PartnerIsFlying(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode arg0 = *script->ptrReadPos;
+
+    set_variable(script, arg0, is_current_partner_flying());
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_f2470_len_27f0", func_802CFD30);
 
-INCLUDE_ASM(s32, "code_f2470_len_27f0", func_802CFE2C);
+ApiStatus func_802CFE2C(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    NpcId npcId = get_variable(script, *args++);
+    Bytecode arg1 = *args;
+    Npc* npc;
 
-INCLUDE_ASM(s32, "code_f2470_len_27f0", func_802CFE80);
+    npc = resolve_npc(script, npcId);
+    if (npc != NULL) {
+        npc->unk_A2 = arg1;
+    }
+
+    return ApiStatus_DONE2;
+    do {} while (0); // necessary to match
+}
+
+ApiStatus func_802CFE80(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    NpcId npcId = get_variable(script, *args++);
+    Bytecode var1 = get_variable(script, *args++);
+    Npc* npc;
+
+    npc = resolve_npc(script, npcId);
+    if (npc != NULL) {
+        func_8003B3D0(npc, var1);
+    }
+
+    return ApiStatus_DONE2;
+    do {} while (0); // necessary to match
+}
 
 INCLUDE_ASM(s32, "code_f2470_len_27f0", func_802CFEEC);
 
