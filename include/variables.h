@@ -112,13 +112,6 @@ extern u16 D_8009A6A2;
 extern u16 D_8009A6A4;
 extern u16 D_8009A6A6;
 
-// curtains
-extern f32 D_8009BA90;
-extern f32 D_8009BA94; // curtain scale goal
-extern f32 D_8009BA98;
-extern f32 D_8009BA9C; // curtain fade goal
-extern s32 D_8009BAA0; // curtain draw callback
-
 extern s16 gCurrentDoorSoundsSet;
 
 extern s32 D_800D9620;
