@@ -56,7 +56,9 @@ INCLUDE_ASM(s32, "code_fee30_len_2d60", func_802DD8F8);
 
 INCLUDE_ASM(s32, "code_fee30_len_2d60", func_802DDA60);
 
-INCLUDE_ASM(s32, "code_fee30_len_2d60", func_802DDA84);
+s32 func_802DDA84(void) {
+    return 0;
+}
 
 INCLUDE_ASM(s32, "code_fee30_len_2d60", func_802DDA8C);
 

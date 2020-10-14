@@ -151,7 +151,8 @@ INCLUDE_ASM(s32, "code_a5dd0_len_114e0", set_peach_shadow_scale);
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_80112B20);
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", NOP_state);
+void NOP_state(void) {
+}
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_80112B98);
 
