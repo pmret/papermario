@@ -103,7 +103,9 @@ INCLUDE_ASM(s32, "code_135EE0", pause_badges_is_visible);
 
 INCLUDE_ASM(s32, "code_135EE0", pause_badges_scroll_offset_y);
 
-INCLUDE_ASM(s32, "code_135EE0", pause_badges_scroll_offset_x);
+s32 pause_badges_scroll_offset_x(s32 x) {
+    return x;
+}
 
 INCLUDE_ASM(s32, "code_135EE0", pause_badges_try_remove);
 
