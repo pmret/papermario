@@ -1,6 +1,7 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "code_891b0_len_fb0", func_800EFD00);
+void func_800EFD00(void) {
+}
 
 INCLUDE_ASM(s32, "code_891b0_len_fb0", func_800EFD08);
 

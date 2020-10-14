@@ -10,7 +10,8 @@ INCLUDE_ASM(s32, "code_ad90_len_2880", func_80030210);
 
 INCLUDE_ASM(s32, "code_ad90_len_2880", func_8003034C);
 
-INCLUDE_ASM(s32, "code_ad90_len_2880", func_80030450);
+void func_80030450(void) {
+}
 
 INCLUDE_ASM(s32, "code_ad90_len_2880", test_ray_zone_aabb);
 
