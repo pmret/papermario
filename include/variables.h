@@ -119,9 +119,20 @@ extern SaveData gCurrentSaveFile;
 extern s32 D_802D9CA4;
 extern u32* gMapFlags;
 extern u32* gMapVars;
-extern s32 gNumScripts;
 
 extern f32 D_80286540;
+
+extern u32 gWorldMapVars[MAX_MAPVARS];
+extern u32 gBattleMapVars[MAX_MAPVARS];
+
+extern u32 gWorldMapFlags[MAX_MAPFLAGS];
+extern u32 gBattleMapFlags[MAX_MAPFLAGS];
+
+extern s32 D_8009A5D8;
+
+extern s32 mapScriptLibStart;
+extern s32 mapScriptLibEnd;
+extern s32 mapScriptLibVram;
 
 // Scripts
 extern Bytecode* SCRIPT_NpcDefeat;

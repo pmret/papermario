@@ -319,16 +319,17 @@ SECTIONS
         build/bin/4200C0.o(.data);
     }
 
-    /* 0x80280000 7E0E80-7E4D00 (len 3E80) */
+    /* 0x80280000 7E0E80-7E73A0 (len 6520) */
     .text_7E0E80 0x80280000 : AT(0x7E0E80) {
         build/src/code_7e0e80.o(.text);
         build/src/code_7E2AA0.o(.text);
         build/src/code_7E3700.o(.text);
+        build/bin/code_7E4D00.o(.data);
     }
 
-    /* 0x00000000 7E4D00-E20EB0 [63C1B0] */
-    .data_7E4D00 0x7E4D00 : AT(0x7E4D00) {
-        build/bin/7E4D00.o(.data);
+    /* 0x00000000 7E73A0-E20EB0 [639B10] */
+    .data_7E73A0 0x7E73A0 : AT(0x7E73A0) {
+        build/bin/7E73A0.o(.data);
     }
 
     /* 0x802B7000 E20EB0-E215C0 (len 710) */
