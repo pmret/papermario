@@ -129,9 +129,9 @@ glabel start_child_script
 /* E8348 802C3998 8E030144 */  lw        $v1, 0x144($s0)
 /* E834C 802C399C 24420001 */  addiu     $v0, $v0, 1
 /* E8350 802C39A0 ACA20000 */  sw        $v0, ($a1)
-/* E8354 802C39A4 3C01802E */  lui       $at, %hi(gScriptIndexList)
+/* E8354 802C39A4 3C01802E */  lui       $at, %hi(gScriptIdList)
 /* E8358 802C39A8 00240821 */  addu      $at, $at, $a0
-/* E835C 802C39AC AC23AA98 */  sw        $v1, %lo(gScriptIndexList)($at)
+/* E835C 802C39AC AC23AA98 */  sw        $v1, %lo(gScriptIdList)($at)
 .L802C39B0:
 /* E8360 802C39B0 0C0B0CE4 */  jal       func_802C3390
 /* E8364 802C39B4 0200202D */   daddu    $a0, $s0, $zero

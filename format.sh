@@ -33,4 +33,7 @@ astyle ${FILES} \
 find ${FILES} -exec sed -i -e '$a\' {} \;
 
 # lint
-clang-tidy -p . ${FILES} -- ${COMPILER_OPTS}
+C_FILES=$(echo "$FILES" | grep '\.c$')
+if [[ ! -z $C_FILES ]]; then
+    clang-tidy -p . ${C_FILES} -- ${COMPILER_OPTS}
+fi

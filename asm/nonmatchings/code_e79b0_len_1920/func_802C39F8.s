@@ -124,9 +124,9 @@ glabel func_802C39F8
 /* E8564 802C3BB4 8E030144 */  lw        $v1, 0x144($s0)
 /* E8568 802C3BB8 24420001 */  addiu     $v0, $v0, 1
 /* E856C 802C3BBC ACA20000 */  sw        $v0, ($a1)
-/* E8570 802C3BC0 3C01802E */  lui       $at, %hi(gScriptIndexList)
+/* E8570 802C3BC0 3C01802E */  lui       $at, %hi(gScriptIdList)
 /* E8574 802C3BC4 00240821 */  addu      $at, $at, $a0
-/* E8578 802C3BC8 AC23AA98 */  sw        $v1, %lo(gScriptIndexList)($at)
+/* E8578 802C3BC8 AC23AA98 */  sw        $v1, %lo(gScriptIdList)($at)
 .L802C3BCC:
 /* E857C 802C3BCC 3C03802E */  lui       $v1, 0x802e
 /* E8580 802C3BD0 24639CA0 */  addiu     $v1, $v1, -0x6360

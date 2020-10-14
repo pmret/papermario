@@ -214,7 +214,7 @@ SECTIONS
         build/bin/code_E5830.o(.data);
     }
 
-    /* 0x802C3000 E79B0-FEE30 (len 17480) */
+    /* 0x802C3000 E79B0-FE748 (len 16D98) */
     .text_E79B0 0x802C3000 : AT(0xE79B0) {
         build/src/code_e79b0_len_1920.o(.text);
         build/src/code_e92d0_len_5da0.o(.text);
@@ -226,7 +226,14 @@ SECTIONS
         build/src/code_f8f60_len_1560.o(.text);
         build/src/code_fa4c0_len_3bf0.o(.text);
         build/src/code_fe0b0_len_5a0.o(.text);
-        build/bin/code_FE650.o(.data);
+        build/src/code_e79b0_len_1920.o(.data);
+        build/bin/code_FE660.o(.data);
+        build/src/code_e79b0_len_1920.o(.rodata);
+    }
+
+    /* 0x00000000 FE748-FEE30 [6E8] */
+    .data_FE748 0xFE748 : AT(0xFE748) {
+        build/bin/FE748.o(.data);
     }
 
     /* 0x802DBD40 FEE30-102610 (len 37E0) */

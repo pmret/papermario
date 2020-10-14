@@ -9,12 +9,22 @@ gPlayerStatus = 0x8010EFC8;
 gItemTable = 0x800878E0;
 gWorldScriptList = 0x802DA490;
 gBattleScriptList = 0x802DA690;
+gNumScripts = 0x802DA488;
 gCurrentScriptListPtr = 0x802DA890;
+gStaticScriptCounter = 0x802D9CA0;
+D_802D9CA4 = 0x802D9CA4;
 gGlobalTimeSpace = 0x802D9CA8;
 gPlayerNpcPtr = 0x802D9D20;
 D_80147574 = 0x80147574;
 D_8010EBB0 = 0x8010EBB0;
 D_8010F250 = 0x8010F250;
+D_80159D50 = 0x80159D50;
+
+gWorldMapVars = 0x802DBCA8;
+gBattleMapVars = 0x802DBCE8;
+
+gWorldMapFlags = 0x802DBC70;
+gBattleMapFlags = 0x802DBD34;
 
 gMapTransitionAlpha = 0x800A0940;
 D_800E92D8 = 0x800E92D8;
@@ -137,16 +147,14 @@ gWorldDynamicEntityList = 0x801543A0;
 gBattleDynamicEntityList = 0x801543E0;
 gCurrentDynamicEntityListPtr = 0x80154420;
 
-gScriptIdList = 0x802D1898;
-gScriptIndexList = 0x802DAA98;
+gScriptIndexList = 0x802DA898;
+gScriptIdList = 0x802DAA98;
 gScriptListCount = 0x802DAC98;
 
 gCurrentSaveFile = 0x800DACC0;
 
-D_802D9CA4 = 0x802D9CA4;
 gMapFlags = 0x802DA480;
 gMapVars = 0x802DA484;
-gNumScripts = 0x802DA488;
 
 func_802A91F8 = 0x802A91F8;
 func_802A9208 = 0x802A9208;
