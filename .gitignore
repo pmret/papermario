@@ -9,6 +9,7 @@ ctx.c
 expected/
 
 # Build artifacts
+*.ld
 *.z64
 *.bin
 bin/
