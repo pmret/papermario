@@ -95,7 +95,8 @@ INCLUDE_ASM(s32, "code_13870_len_6980", func_8003B184);
 
 INCLUDE_ASM(s32, "code_13870_len_6980", func_8003B198);
 
-void func_8003B1A8(void) {}
+void func_8003B1A8(void) {
+}
 
 INCLUDE_ASM(s32, "code_13870_len_6980", func_8003B1B0);
 
@@ -133,9 +134,11 @@ INCLUDE_ASM(s32, "code_13870_len_6980", func_8003C53C);
 
 INCLUDE_ASM(s32, "code_13870_len_6980", func_8003C61C);
 
-void func_8003C658(void) {}
+void func_8003C658(void) {
+}
 
-void func_8003C660(void) {}
+void func_8003C660(void) {
+}
 
 INCLUDE_ASM(s32, "code_13870_len_6980", func_8003C668);
 
@@ -143,7 +146,8 @@ INCLUDE_ASM(s32, "code_13870_len_6980", func_8003C78C);
 
 INCLUDE_ASM(s32, "code_13870_len_6980", func_8003C7A8);
 
-void func_8003C8AC(void) {}
+void func_8003C8AC(void) {
+}
 
 INCLUDE_ASM(s32, "code_13870_len_6980", func_8003C8B4);
 
@@ -159,7 +163,8 @@ INCLUDE_ASM(s32, "code_13870_len_6980", func_8003CC8C);
 
 INCLUDE_ASM(s32, "code_13870_len_6980", func_8003CCB0);
 
-void func_8003CFA0(void) {}
+void func_8003CFA0(void) {
+}
 
 INCLUDE_ASM(s32, "code_13870_len_6980", func_8003CFA8);
 
@@ -195,7 +200,8 @@ INCLUDE_ASM(s32, "code_13870_len_6980", func_8003E338);
 
 INCLUDE_ASM(s32, "code_13870_len_6980", clear_encounter_status);
 
-void func_8003E50C(void) {}
+void func_8003E50C(void) {
+}
 
 INCLUDE_ASM(s32, "code_13870_len_6980", func_8003E514);
 
@@ -205,7 +211,8 @@ INCLUDE_ASM(s32, "code_13870_len_6980", func_8003E5B0);
 
 INCLUDE_ASM(s32, "code_13870_len_6980", func_8003E63C);
 
-void func_8003E670(void) {}
+void func_8003E670(void) {
+}
 
 INCLUDE_ASM(s32, "code_13870_len_6980", make_npcs);
 

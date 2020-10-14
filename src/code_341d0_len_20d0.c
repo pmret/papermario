@@ -18,13 +18,15 @@ INCLUDE_ASM(s32, "code_341d0_len_20d0", func_80059AB8);
 
 INCLUDE_ASM(s32, "code_341d0_len_20d0", func_80059BD4);
 
-void func_80059C80(void) {}
+void func_80059C80(void) {
+}
 
 INCLUDE_ASM(s32, "code_341d0_len_20d0", func_80059C88);
 
 INCLUDE_ASM(s32, "code_341d0_len_20d0", func_80059C9C);
 
-void func_80059D48(void) {}
+void func_80059D48(void) {
+}
 
 INCLUDE_ASM(s32, "code_341d0_len_20d0", func_80059D50);
 
