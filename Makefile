@@ -9,7 +9,7 @@ BUILD_DIR = build
 
 SRC_DIRS := src src/os src/os/nusys
 ASM_DIRS := asm asm/os
-INCLUDE_DIRS := include include/PR
+INCLUDE_DIRS := include include/PR src
 DATA_DIRS := bin
 
 # Source code files
