@@ -20,8 +20,8 @@ glabel TranslateGroup
 /* EE1A0 802C97F0 2402FFFF */  addiu     $v0, $zero, -1
 /* EE1A4 802C97F4 16220007 */  bne       $s1, $v0, .L802C9814
 /* EE1A8 802C97F8 26100004 */   addiu    $s0, $s0, 4
-/* EE1AC 802C97FC 3C04802D */  lui       $a0, 0x802d
-/* EE1B0 802C9800 24848B60 */  addiu     $a0, $a0, -0x74a0
+/* EE1AC 802C97FC 3C04802D */  lui       $a0, %hi(TranslateModel)
+/* EE1B0 802C9800 24848B60 */  addiu     $a0, $a0, %lo(TranslateModel)
 /* EE1B4 802C9804 0C0B2568 */  jal       func_802C95A0
 /* EE1B8 802C9808 0240282D */   daddu    $a1, $s2, $zero
 /* EE1BC 802C980C 080B262D */  j         .L802C98B4

@@ -70,8 +70,8 @@ glabel func_80245440
 /* 173E14 80245534 24040019 */   addiu    $a0, $zero, 0x19
 /* 173E18 80245538 0C09390F */  jal       cam_target_actor
 /* 173E1C 8024553C 0000202D */   daddu    $a0, $zero, $zero
-/* 173E20 80245540 3C048028 */  lui       $a0, 0x8028
-/* 173E24 80245544 24844EBC */  addiu     $a0, $a0, 0x4ebc
+/* 173E20 80245540 3C048028 */  lui       $a0, %hi(PlayerScriptDispatcher)
+/* 173E24 80245544 24844EBC */  addiu     $a0, $a0, %lo(PlayerScriptDispatcher)
 /* 173E28 80245548 2405000A */  addiu     $a1, $zero, 0xa
 /* 173E2C 8024554C 0000302D */  daddu     $a2, $zero, $zero
 /* 173E30 80245550 24020004 */  addiu     $v0, $zero, 4
@@ -111,8 +111,8 @@ glabel func_80245440
 /* 173EB0 802455D0 24040095 */   addiu    $a0, $zero, 0x95
 /* 173EB4 802455D4 04400017 */  bltz      $v0, .L80245634
 /* 173EB8 802455D8 2405000A */   addiu    $a1, $zero, 0xa
-/* 173EBC 802455DC 3C048028 */  lui       $a0, 0x8028
-/* 173EC0 802455E0 24844EBC */  addiu     $a0, $a0, 0x4ebc
+/* 173EBC 802455DC 3C048028 */  lui       $a0, %hi(PlayerScriptDispatcher)
+/* 173EC0 802455E0 24844EBC */  addiu     $a0, $a0, %lo(PlayerScriptDispatcher)
 /* 173EC4 802455E4 0000302D */  daddu     $a2, $zero, $zero
 /* 173EC8 802455E8 24020008 */  addiu     $v0, $zero, 8
 /* 173ECC 802455EC 0C0B0CF8 */  jal       start_script

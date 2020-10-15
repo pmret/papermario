@@ -14,8 +14,8 @@ glabel nuBoot
 /* 39CD4 8005E8D4 AFA20010 */  sw        $v0, 0x10($sp)
 /* 39CD8 8005E8D8 2402000A */  addiu     $v0, $zero, 0xa
 /* 39CDC 8005E8DC 24050001 */  addiu     $a1, $zero, 1
-/* 39CE0 8005E8E0 3C068006 */  lui       $a2, 0x8006
-/* 39CE4 8005E8E4 24C6E90C */  addiu     $a2, $a2, -0x16f4
+/* 39CE0 8005E8E0 3C068006 */  lui       $a2, %hi(boot_idle)
+/* 39CE4 8005E8E4 24C6E90C */  addiu     $a2, $a2, %lo(boot_idle)
 /* 39CE8 8005E8E8 0000382D */  daddu     $a3, $zero, $zero
 /* 39CEC 8005E8EC 0C019798 */  jal       osCreateThread
 /* 39CF0 8005E8F0 AFA20014 */   sw       $v0, 0x14($sp)

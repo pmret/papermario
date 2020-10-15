@@ -485,12 +485,12 @@ glabel begin_battle
 /* 1701EC 8024190C 8C42C074 */  lw        $v0, -0x3f8c($v0)
 /* 1701F0 80241910 8E9000D8 */  lw        $s0, 0xd8($s4)
 /* 1701F4 80241914 30420040 */  andi      $v0, $v0, 0x40
-/* 1701F8 80241918 3C048028 */  lui       $a0, 0x8028
-/* 1701FC 8024191C 24844A40 */  addiu     $a0, $a0, 0x4a40
+/* 1701F8 80241918 3C048028 */  lui       $a0, %hi(MarioEnterStage)
+/* 1701FC 8024191C 24844A40 */  addiu     $a0, $a0, %lo(MarioEnterStage)
 /* 170200 80241920 10400003 */  beqz      $v0, .L80241930
 /* 170204 80241924 2405000A */   addiu    $a1, $zero, 0xa
-/* 170208 80241928 3C048028 */  lui       $a0, 0x8028
-/* 17020C 8024192C 24844D04 */  addiu     $a0, $a0, 0x4d04
+/* 170208 80241928 3C048028 */  lui       $a0, %hi(PeachEnterStage)
+/* 17020C 8024192C 24844D04 */  addiu     $a0, $a0, %lo(PeachEnterStage)
 .L80241930:
 /* 170210 80241930 0C0B0CF8 */  jal       start_script
 /* 170214 80241934 0000302D */   daddu    $a2, $zero, $zero
@@ -511,8 +511,8 @@ glabel begin_battle
 /* 17024C 8024196C 2404002D */   addiu    $a0, $zero, 0x2d
 /* 170250 80241970 1040000C */  beqz      $v0, .L802419A4
 /* 170254 80241974 2405000A */   addiu    $a1, $zero, 0xa
-/* 170258 80241978 3C048029 */  lui       $a0, 0x8029
-/* 17025C 8024197C 2484907C */  addiu     $a0, $a0, -0x6f84
+/* 170258 80241978 3C048029 */  lui       $a0, %hi(DoDizzyAttack)
+/* 17025C 8024197C 2484907C */  addiu     $a0, $a0, %lo(DoDizzyAttack)
 /* 170260 80241980 8E9000E0 */  lw        $s0, 0xe0($s4)
 /* 170264 80241984 0C0B0CF8 */  jal       start_script
 /* 170268 80241988 0000302D */   daddu    $a2, $zero, $zero

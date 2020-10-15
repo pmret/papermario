@@ -18,8 +18,8 @@ glabel func_802AE000
 /* 316DC4 802AE034 AFB20020 */  sw        $s2, 0x20($sp)
 /* 316DC8 802AE038 0200902D */  daddu     $s2, $s0, $zero
 /* 316DCC 802AE03C AFB5002C */  sw        $s5, 0x2c($sp)
-/* 316DD0 802AE040 3C158006 */  lui       $s5, 0x8006
-/* 316DD4 802AE044 26B50DC0 */  addiu     $s5, $s5, 0xdc0
+/* 316DD0 802AE040 3C158006 */  lui       $s5, %hi(osEPiReadIo)
+/* 316DD4 802AE044 26B50DC0 */  addiu     $s5, $s5, %lo(osEPiReadIo)
 /* 316DD8 802AE048 AFBF003C */  sw        $ra, 0x3c($sp)
 /* 316DDC 802AE04C AFBE0038 */  sw        $fp, 0x38($sp)
 /* 316DE0 802AE050 AFB70034 */  sw        $s7, 0x34($sp)

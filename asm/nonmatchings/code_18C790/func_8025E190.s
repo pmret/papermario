@@ -242,8 +242,8 @@ glabel func_8025E190
 /* 18CDFC 8025E51C 00441024 */  and       $v0, $v0, $a0
 /* 18CE00 8025E520 AE420000 */  sw        $v0, ($s2)
 .L8025E524:
-/* 18CE04 8025E524 3C048028 */  lui       $a0, 0x8028
-/* 18CE08 8025E528 24844EBC */  addiu     $a0, $a0, 0x4ebc
+/* 18CE04 8025E524 3C048028 */  lui       $a0, %hi(PlayerScriptDispatcher)
+/* 18CE08 8025E528 24844EBC */  addiu     $a0, $a0, %lo(PlayerScriptDispatcher)
 /* 18CE0C 8025E52C 2405000A */  addiu     $a1, $zero, 0xa
 /* 18CE10 8025E530 0000302D */  daddu     $a2, $zero, $zero
 /* 18CE14 8025E534 24020005 */  addiu     $v0, $zero, 5

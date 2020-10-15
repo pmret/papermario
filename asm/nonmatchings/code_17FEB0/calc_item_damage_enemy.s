@@ -898,8 +898,8 @@ glabel calc_item_damage_enemy
 /* 180C6C 8025238C 00000000 */   nop      
 /* 180C70 80252390 12A00016 */  beqz      $s5, .L802523EC
 /* 180C74 80252394 00000000 */   nop      
-/* 180C78 80252398 3C048029 */  lui       $a0, 0x8029
-/* 180C7C 8025239C 248445E0 */  addiu     $a0, $a0, 0x45e0
+/* 180C78 80252398 3C048029 */  lui       $a0, %hi(DoSleepHit)
+/* 180C7C 8025239C 248445E0 */  addiu     $a0, $a0, %lo(DoSleepHit)
 /* 180C80 802523A0 2405000A */  addiu     $a1, $zero, 0xa
 /* 180C84 802523A4 0C0B0CF8 */  jal       start_script
 /* 180C88 802523A8 0000302D */   daddu    $a2, $zero, $zero
@@ -927,8 +927,8 @@ glabel calc_item_damage_enemy
 /* 180CDC 802523FC 00000000 */   nop      
 /* 180CE0 80252400 12A00016 */  beqz      $s5, .L8025245C
 /* 180CE4 80252404 00000000 */   nop      
-/* 180CE8 80252408 3C048029 */  lui       $a0, 0x8029
-/* 180CEC 8025240C 248445FC */  addiu     $a0, $a0, 0x45fc
+/* 180CE8 80252408 3C048029 */  lui       $a0, %hi(DoDizzyHit)
+/* 180CEC 8025240C 248445FC */  addiu     $a0, $a0, %lo(DoDizzyHit)
 /* 180CF0 80252410 2405000A */  addiu     $a1, $zero, 0xa
 /* 180CF4 80252414 0C0B0CF8 */  jal       start_script
 /* 180CF8 80252418 0000302D */   daddu    $a2, $zero, $zero
@@ -956,8 +956,8 @@ glabel calc_item_damage_enemy
 /* 180D4C 8025246C 00000000 */   nop      
 /* 180D50 80252470 12A00016 */  beqz      $s5, .L802524CC
 /* 180D54 80252474 00000000 */   nop      
-/* 180D58 80252478 3C048029 */  lui       $a0, 0x8029
-/* 180D5C 8025247C 24844618 */  addiu     $a0, $a0, 0x4618
+/* 180D58 80252478 3C048029 */  lui       $a0, %hi(DoParalyzeHit)
+/* 180D5C 8025247C 24844618 */  addiu     $a0, $a0, %lo(DoParalyzeHit)
 /* 180D60 80252480 2405000A */  addiu     $a1, $zero, 0xa
 /* 180D64 80252484 0C0B0CF8 */  jal       start_script
 /* 180D68 80252488 0000302D */   daddu    $a2, $zero, $zero
@@ -985,8 +985,8 @@ glabel calc_item_damage_enemy
 /* 180DBC 802524DC 00000000 */   nop      
 /* 180DC0 802524E0 12A00016 */  beqz      $s5, .L8025253C
 /* 180DC4 802524E4 00000000 */   nop      
-/* 180DC8 802524E8 3C048029 */  lui       $a0, 0x8029
-/* 180DCC 802524EC 24844634 */  addiu     $a0, $a0, 0x4634
+/* 180DC8 802524E8 3C048029 */  lui       $a0, %hi(DoPoisonHit)
+/* 180DCC 802524EC 24844634 */  addiu     $a0, $a0, %lo(DoPoisonHit)
 /* 180DD0 802524F0 2405000A */  addiu     $a1, $zero, 0xa
 /* 180DD4 802524F4 0C0B0CF8 */  jal       start_script
 /* 180DD8 802524F8 0000302D */   daddu    $a2, $zero, $zero
@@ -1014,8 +1014,8 @@ glabel calc_item_damage_enemy
 /* 180E2C 8025254C 00000000 */   nop      
 /* 180E30 80252550 12A00016 */  beqz      $s5, .L802525AC
 /* 180E34 80252554 00000000 */   nop      
-/* 180E38 80252558 3C048029 */  lui       $a0, 0x8029
-/* 180E3C 8025255C 24844650 */  addiu     $a0, $a0, 0x4650
+/* 180E38 80252558 3C048029 */  lui       $a0, %hi(DoStopHit)
+/* 180E3C 8025255C 24844650 */  addiu     $a0, $a0, %lo(DoStopHit)
 /* 180E40 80252560 2405000A */  addiu     $a1, $zero, 0xa
 /* 180E44 80252564 0C0B0CF8 */  jal       start_script
 /* 180E48 80252568 0000302D */   daddu    $a2, $zero, $zero
@@ -1042,8 +1042,8 @@ glabel calc_item_damage_enemy
 /* 180E98 802525B8 00000000 */   nop      
 /* 180E9C 802525BC 12A00017 */  beqz      $s5, .L8025261C
 /* 180EA0 802525C0 00000000 */   nop      
-/* 180EA4 802525C4 3C048029 */  lui       $a0, 0x8029
-/* 180EA8 802525C8 2484466C */  addiu     $a0, $a0, 0x466c
+/* 180EA4 802525C4 3C048029 */  lui       $a0, %hi(DoFreezeHit)
+/* 180EA8 802525C8 2484466C */  addiu     $a0, $a0, %lo(DoFreezeHit)
 /* 180EAC 802525CC 2405000A */  addiu     $a1, $zero, 0xa
 /* 180EB0 802525D0 0C0B0CF8 */  jal       start_script
 /* 180EB4 802525D4 0000302D */   daddu    $a2, $zero, $zero
@@ -1072,8 +1072,8 @@ glabel calc_item_damage_enemy
 /* 180F0C 8025262C 00000000 */   nop      
 /* 180F10 80252630 12A00017 */  beqz      $s5, .L80252690
 /* 180F14 80252634 00000000 */   nop      
-/* 180F18 80252638 3C048029 */  lui       $a0, 0x8029
-/* 180F1C 8025263C 248446B8 */  addiu     $a0, $a0, 0x46b8
+/* 180F18 80252638 3C048029 */  lui       $a0, %hi(DoShinkHit)
+/* 180F1C 8025263C 248446B8 */  addiu     $a0, $a0, %lo(DoShinkHit)
 /* 180F20 80252640 2405000A */  addiu     $a1, $zero, 0xa
 /* 180F24 80252644 0C0B0CF8 */  jal       start_script
 /* 180F28 80252648 0000302D */   daddu    $a2, $zero, $zero

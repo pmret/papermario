@@ -111,8 +111,8 @@ glabel update_player_change_turn
 /* 174EBC 802465DC 080919A8 */  j         .L802466A0
 /* 174EC0 802465E0 00000000 */   nop      
 .L802465E4:
-/* 174EC4 802465E4 3C048028 */  lui       $a0, 0x8028
-/* 174EC8 802465E8 24844EBC */  addiu     $a0, $a0, 0x4ebc
+/* 174EC4 802465E4 3C048028 */  lui       $a0, %hi(PlayerScriptDispatcher)
+/* 174EC8 802465E8 24844EBC */  addiu     $a0, $a0, %lo(PlayerScriptDispatcher)
 /* 174ECC 802465EC 2405000A */  addiu     $a1, $zero, 0xa
 /* 174ED0 802465F0 0000302D */  daddu     $a2, $zero, $zero
 /* 174ED4 802465F4 0C0B0CF8 */  jal       start_script

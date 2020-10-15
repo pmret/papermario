@@ -88,15 +88,15 @@ glabel render_player_model
 /* 7A74C 800E129C 00021023 */  negu      $v0, $v0
 /* 7A750 800E12A0 AE220004 */  sw        $v0, 4($s1)
 /* 7A754 800E12A4 820200BE */  lb        $v0, 0xbe($s0)
-/* 7A758 800E12A8 3C04800E */  lui       $a0, 0x800e
-/* 7A75C 800E12AC 24841704 */  addiu     $a0, $a0, 0x1704
+/* 7A758 800E12A8 3C04800E */  lui       $a0, %hi(appendGfx_player_spin)
+/* 7A75C 800E12AC 24841704 */  addiu     $a0, $a0, %lo(appendGfx_player_spin)
 /* 7A760 800E12B0 AE220000 */  sw        $v0, ($s1)
 /* 7A764 800E12B4 8E020000 */  lw        $v0, ($s0)
 /* 7A768 800E12B8 00431024 */  and       $v0, $v0, $v1
 /* 7A76C 800E12BC 54400004 */  bnel      $v0, $zero, .L800E12D0
 /* 7A770 800E12C0 AE24000C */   sw       $a0, 0xc($s1)
-/* 7A774 800E12C4 3C04800E */  lui       $a0, 0x800e
-/* 7A778 800E12C8 248412F4 */  addiu     $a0, $a0, 0x12f4
+/* 7A774 800E12C4 3C04800E */  lui       $a0, %hi(appendGfx_player)
+/* 7A778 800E12C8 248412F4 */  addiu     $a0, $a0, %lo(appendGfx_player)
 /* 7A77C 800E12CC AE24000C */  sw        $a0, 0xc($s1)
 .L800E12D0:
 /* 7A780 800E12D0 0C047644 */  jal       queue_render_task

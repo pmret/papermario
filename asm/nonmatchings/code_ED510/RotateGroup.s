@@ -21,8 +21,8 @@ glabel RotateGroup
 /* EE2C8 802C9918 2402FFFF */  addiu     $v0, $zero, -1
 /* EE2CC 802C991C 16420007 */  bne       $s2, $v0, .L802C993C
 /* EE2D0 802C9920 26100004 */   addiu    $s0, $s0, 4
-/* EE2D4 802C9924 3C04802D */  lui       $a0, 0x802d
-/* EE2D8 802C9928 24848C64 */  addiu     $a0, $a0, -0x739c
+/* EE2D4 802C9924 3C04802D */  lui       $a0, %hi(RotateModel)
+/* EE2D8 802C9928 24848C64 */  addiu     $a0, $a0, %lo(RotateModel)
 /* EE2DC 802C992C 0C0B2568 */  jal       func_802C95A0
 /* EE2E0 802C9930 0220282D */   daddu    $a1, $s1, $zero
 /* EE2E4 802C9934 080B267D */  j         .L802C99F4

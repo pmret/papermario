@@ -57,8 +57,8 @@ glabel pause_items_load_items
 .L8024A594:
 /* 13D8D4 8024A594 3C048027 */  lui       $a0, 0x8027
 /* 13D8D8 8024A598 24840400 */  addiu     $a0, $a0, 0x400
-/* 13D8DC 8024A59C 3C068025 */  lui       $a2, 0x8025
-/* 13D8E0 8024A5A0 24C697B0 */  addiu     $a2, $a2, -0x6850
+/* 13D8DC 8024A59C 3C068025 */  lui       $a2, %hi(pause_items_comparator)
+/* 13D8E0 8024A5A0 24C697B0 */  addiu     $a2, $a2, %lo(pause_items_comparator)
 /* 13D8E4 8024A5A4 0C091293 */  jal       pause_sort_item_list
 /* 13D8E8 8024A5A8 0200282D */   daddu    $a1, $s0, $zero
 .L8024A5AC:

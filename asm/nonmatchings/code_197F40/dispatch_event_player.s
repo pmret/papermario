@@ -11,8 +11,8 @@ glabel dispatch_event_player
 /* 19FF50 80271670 AFB20018 */  sw        $s2, 0x18($sp)
 /* 19FF54 80271674 AFB10014 */  sw        $s1, 0x14($sp)
 /* 19FF58 80271678 A20401F0 */  sb        $a0, 0x1f0($s0)
-/* 19FF5C 8027167C 3C048028 */  lui       $a0, 0x8028
-/* 19FF60 80271680 248452D4 */  addiu     $a0, $a0, 0x52d4
+/* 19FF5C 8027167C 3C048028 */  lui       $a0, %hi(HandleEvent_Player)
+/* 19FF60 80271680 248452D4 */  addiu     $a0, $a0, %lo(HandleEvent_Player)
 /* 19FF64 80271684 8E1101D8 */  lw        $s1, 0x1d8($s0)
 /* 19FF68 80271688 8E1201E8 */  lw        $s2, 0x1e8($s0)
 /* 19FF6C 8027168C 0C0B0CF8 */  jal       start_script

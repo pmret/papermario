@@ -92,8 +92,8 @@ glabel update_run_away
 /* 17392C 8024504C 24020064 */   addiu    $v0, $zero, 0x64
 /* 173930 80245050 AE620088 */  sw        $v0, 0x88($s3)
 .L80245054:
-/* 173934 80245054 3C048028 */  lui       $a0, 0x8028
-/* 173938 80245058 24844EBC */  addiu     $a0, $a0, 0x4ebc
+/* 173934 80245054 3C048028 */  lui       $a0, %hi(PlayerScriptDispatcher)
+/* 173938 80245058 24844EBC */  addiu     $a0, $a0, %lo(PlayerScriptDispatcher)
 /* 17393C 8024505C 2405000A */  addiu     $a1, $zero, 0xa
 /* 173940 80245060 0000302D */  daddu     $a2, $zero, $zero
 /* 173944 80245064 24020003 */  addiu     $v0, $zero, 3
@@ -295,8 +295,8 @@ glabel update_run_away
 /* 173C14 80245334 08091505 */  j         .L80245414
 /* 173C18 80245338 00000000 */   nop      
 .L8024533C:
-/* 173C1C 8024533C 3C048028 */  lui       $a0, 0x8028
-/* 173C20 80245340 24844EBC */  addiu     $a0, $a0, 0x4ebc
+/* 173C1C 8024533C 3C048028 */  lui       $a0, %hi(PlayerScriptDispatcher)
+/* 173C20 80245340 24844EBC */  addiu     $a0, $a0, %lo(PlayerScriptDispatcher)
 /* 173C24 80245344 2405000A */  addiu     $a1, $zero, 0xa
 /* 173C28 80245348 0000302D */  daddu     $a2, $zero, $zero
 /* 173C2C 8024534C 24020007 */  addiu     $v0, $zero, 7

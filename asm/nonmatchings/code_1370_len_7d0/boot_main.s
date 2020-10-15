@@ -47,12 +47,12 @@ glabel boot_main
 /* 1408 80026008 00000000 */   nop      
 /* 140C 8002600C 0C0AC80F */  jal       func_802B203C
 /* 1410 80026010 00000000 */   nop      
-/* 1414 80026014 3C048002 */  lui       $a0, 0x8002
-/* 1418 80026018 2484605C */  addiu     $a0, $a0, 0x605c
+/* 1414 80026014 3C048002 */  lui       $a0, %hi(gfxRetrace_Callback)
+/* 1418 80026018 2484605C */  addiu     $a0, $a0, %lo(gfxRetrace_Callback)
 /* 141C 8002601C 0C017C94 */  jal       nuGfxFuncSet
 /* 1420 80026020 00000000 */   nop      
-/* 1424 80026024 3C048002 */  lui       $a0, 0x8002
-/* 1428 80026028 2484670C */  addiu     $a0, $a0, 0x670c
+/* 1424 80026024 3C048002 */  lui       $a0, %hi(gfxPreNMI_Callback)
+/* 1428 80026028 2484670C */  addiu     $a0, $a0, %lo(gfxPreNMI_Callback)
 /* 142C 8002602C 0C017CA4 */  jal       nuGfxPreNMIFuncSet
 /* 1430 80026030 00000000 */   nop      
 /* 1434 80026034 0C019680 */  jal       osGetCount

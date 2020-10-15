@@ -493,8 +493,8 @@ glabel func_80242FE0
 /* 171FD8 802436F8 24020002 */  addiu     $v0, $zero, 2
 /* 171FDC 802436FC 14620011 */  bne       $v1, $v0, .L80243744
 /* 171FE0 80243700 3C04F7FF */   lui      $a0, 0xf7ff
-/* 171FE4 80243704 3C048028 */  lui       $a0, 0x8028
-/* 171FE8 80243708 24844EBC */  addiu     $a0, $a0, 0x4ebc
+/* 171FE4 80243704 3C048028 */  lui       $a0, %hi(PlayerScriptDispatcher)
+/* 171FE8 80243708 24844EBC */  addiu     $a0, $a0, %lo(PlayerScriptDispatcher)
 /* 171FEC 8024370C 2405000A */  addiu     $a1, $zero, 0xa
 /* 171FF0 80243710 0000302D */  daddu     $a2, $zero, $zero
 /* 171FF4 80243714 24020003 */  addiu     $v0, $zero, 3

@@ -27,8 +27,8 @@ glabel nuGfxTaskMgrInit
 /* 7F90 8002CB90 2610C518 */  addiu     $s0, $s0, -0x3ae8
 /* 7F94 8002CB94 0200202D */  daddu     $a0, $s0, $zero
 /* 7F98 8002CB98 24050005 */  addiu     $a1, $zero, 5
-/* 7F9C 8002CB9C 3C068003 */  lui       $a2, 0x8003
-/* 7FA0 8002CBA0 24C6CA40 */  addiu     $a2, $a2, -0x35c0
+/* 7F9C 8002CB9C 3C068003 */  lui       $a2, %hi(nuGfxTaskMgr)
+/* 7FA0 8002CBA0 24C6CA40 */  addiu     $a2, $a2, %lo(nuGfxTaskMgr)
 /* 7FA4 8002CBA4 3C02800A */  lui       $v0, 0x800a
 /* 7FA8 8002CBA8 2442E6D0 */  addiu     $v0, $v0, -0x1930
 /* 7FAC 8002CBAC AFA20010 */  sw        $v0, 0x10($sp)

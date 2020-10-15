@@ -175,8 +175,8 @@ glabel MakeShop
 /* 7E296C 80281AEC 8E840020 */  lw        $a0, 0x20($s4)
 /* 7E2970 80281AF0 0C05128B */  jal       clear_icon_flags
 /* 7E2974 80281AF4 34058000 */   ori      $a1, $zero, 0x8000
-/* 7E2978 80281AF8 3C058028 */  lui       $a1, 0x8028
-/* 7E297C 80281AFC 24A51524 */  addiu     $a1, $a1, 0x1524
+/* 7E2978 80281AF8 3C058028 */  lui       $a1, %hi(draw_shop_items)
+/* 7E297C 80281AFC 24A51524 */  addiu     $a1, $a1, %lo(draw_shop_items)
 /* 7E2980 80281B00 0C048C8F */  jal       bind_dynamic_entity_7
 /* 7E2984 80281B04 0000202D */   daddu    $a0, $zero, $zero
 /* 7E2988 80281B08 0C048D8F */  jal       get_dynamic_entity

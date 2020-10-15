@@ -19,8 +19,8 @@ glabel func_80112D84
 /* A94B4 80112DB4 34420020 */  ori       $v0, $v0, 0x20
 /* A94B8 80112DB8 14A00004 */  bnez      $a1, .L80112DCC
 /* A94BC 80112DBC A4620000 */   sh       $v0, ($v1)
-/* A94C0 80112DC0 3C028011 */  lui       $v0, 0x8011
-/* A94C4 80112DC4 24422B90 */  addiu     $v0, $v0, 0x2b90
+/* A94C0 80112DC0 3C028011 */  lui       $v0, %hi(NOP_state)
+/* A94C4 80112DC4 24422B90 */  addiu     $v0, $v0, %lo(NOP_state)
 /* A94C8 80112DC8 AC620014 */  sw        $v0, 0x14($v1)
 .L80112DCC:
 /* A94CC 80112DCC 03E00008 */  jr        $ra

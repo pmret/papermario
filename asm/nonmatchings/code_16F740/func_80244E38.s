@@ -20,8 +20,8 @@ glabel func_80244E38
 /* 173754 80244E74 080913B8 */  j         .L80244EE0
 /* 173758 80244E78 00000000 */   nop      
 .L80244E7C:
-/* 17375C 80244E7C 3C048028 */  lui       $a0, 0x8028
-/* 173760 80244E80 24844EBC */  addiu     $a0, $a0, 0x4ebc
+/* 17375C 80244E7C 3C048028 */  lui       $a0, %hi(PlayerScriptDispatcher)
+/* 173760 80244E80 24844EBC */  addiu     $a0, $a0, %lo(PlayerScriptDispatcher)
 /* 173764 80244E84 24020006 */  addiu     $v0, $zero, 6
 /* 173768 80244E88 2405000A */  addiu     $a1, $zero, 0xa
 /* 17376C 80244E8C 0000302D */  daddu     $a2, $zero, $zero

@@ -15,8 +15,8 @@ glabel show_battle_message
 /* 17E268 8024F988 3C028025 */  lui       $v0, 0x8025
 /* 17E26C 8024F98C 2442FB3C */  addiu     $v0, $v0, -0x4c4
 /* 17E270 8024F990 AC620004 */  sw        $v0, 4($v1)
-/* 17E274 8024F994 3C028025 */  lui       $v0, 0x8025
-/* 17E278 8024F998 24420EA4 */  addiu     $v0, $v0, 0xea4
+/* 17E274 8024F994 3C028025 */  lui       $v0, %hi(show_message_popup)
+/* 17E278 8024F998 24420EA4 */  addiu     $v0, $v0, %lo(show_message_popup)
 /* 17E27C 8024F99C AC62000C */  sw        $v0, 0xc($v1)
 /* 17E280 8024F9A0 24020001 */  addiu     $v0, $zero, 1
 /* 17E284 8024F9A4 AC600000 */  sw        $zero, ($v1)

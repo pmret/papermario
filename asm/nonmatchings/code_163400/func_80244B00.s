@@ -6,8 +6,8 @@ glabel func_80244B00
 /* 165364 80244B04 AFB00010 */  sw        $s0, 0x10($sp)
 /* 165368 80244B08 0000802D */  daddu     $s0, $zero, $zero
 /* 16536C 80244B0C AFB10014 */  sw        $s1, 0x14($sp)
-/* 165370 80244B10 3C118025 */  lui       $s1, 0x8025
-/* 165374 80244B14 2631C0A0 */  addiu     $s1, $s1, -0x3f60
+/* 165370 80244B10 3C118025 */  lui       $s1, %hi(pause_partners_draw_movelist_flower)
+/* 165374 80244B14 2631C0A0 */  addiu     $s1, $s1, %lo(pause_partners_draw_movelist_flower)
 /* 165378 80244B18 AFBF0018 */  sw        $ra, 0x18($sp)
 .L80244B1C:
 /* 16537C 80244B1C 8E240000 */  lw        $a0, ($s1)

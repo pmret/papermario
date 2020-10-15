@@ -90,8 +90,8 @@ glabel update_swap_partner
 .L80245844:
 /* 174124 80245844 0C098EF2 */  jal       deduct_current_move_fp
 /* 174128 80245848 00000000 */   nop      
-/* 17412C 8024584C 3C048028 */  lui       $a0, 0x8028
-/* 174130 80245850 24840A34 */  addiu     $a0, $a0, 0xa34
+/* 17412C 8024584C 3C048028 */  lui       $a0, %hi(BtlPutPartnerAway)
+/* 174130 80245850 24840A34 */  addiu     $a0, $a0, %lo(BtlPutPartnerAway)
 /* 174134 80245854 2405000A */  addiu     $a1, $zero, 0xa
 /* 174138 80245858 0C0B0CF8 */  jal       start_script
 /* 17413C 8024585C 0000302D */   daddu    $a2, $zero, $zero
@@ -158,8 +158,8 @@ glabel update_swap_partner
 /* 174230 80245950 00000000 */   nop      
 /* 174234 80245954 AE2001D4 */  sw        $zero, 0x1d4($s1)
 .L80245958:
-/* 174238 80245958 3C048028 */  lui       $a0, 0x8028
-/* 17423C 8024595C 24840B6C */  addiu     $a0, $a0, 0xb6c
+/* 174238 80245958 3C048028 */  lui       $a0, %hi(BtlBringPartnerOut)
+/* 17423C 8024595C 24840B6C */  addiu     $a0, $a0, %lo(BtlBringPartnerOut)
 /* 174240 80245960 2405000A */  addiu     $a1, $zero, 0xa
 /* 174244 80245964 0C0B0CF8 */  jal       start_script
 /* 174248 80245968 0000302D */   daddu    $a2, $zero, $zero

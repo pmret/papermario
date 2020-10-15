@@ -22,8 +22,8 @@ glabel func_8002D160
 /* 85A4 8002D1A4 AFB20020 */  sw        $s2, 0x20($sp)
 /* 85A8 8002D1A8 0200902D */  daddu     $s2, $s0, $zero
 /* 85AC 8002D1AC AFB40028 */  sw        $s4, 0x28($sp)
-/* 85B0 8002D1B0 3C148006 */  lui       $s4, 0x8006
-/* 85B4 8002D1B4 26940DC0 */  addiu     $s4, $s4, 0xdc0
+/* 85B0 8002D1B0 3C148006 */  lui       $s4, %hi(osEPiReadIo)
+/* 85B4 8002D1B4 26940DC0 */  addiu     $s4, $s4, %lo(osEPiReadIo)
 /* 85B8 8002D1B8 AFBF003C */  sw        $ra, 0x3c($sp)
 /* 85BC 8002D1BC AFBE0038 */  sw        $fp, 0x38($sp)
 /* 85C0 8002D1C0 AFB70034 */  sw        $s7, 0x34($sp)
@@ -98,8 +98,8 @@ glabel func_8002D160
 /* 86C0 8002D2C0 27A60014 */  addiu     $a2, $sp, 0x14
 /* 86C4 8002D2C4 3C04800A */  lui       $a0, %hi(carthandle)
 /* 86C8 8002D2C8 8C84A638 */  lw        $a0, %lo(carthandle)($a0)
-/* 86CC 8002D2CC 3C148006 */  lui       $s4, 0x8006
-/* 86D0 8002D2D0 26940DC0 */  addiu     $s4, $s4, 0xdc0
+/* 86CC 8002D2CC 3C148006 */  lui       $s4, %hi(osEPiReadIo)
+/* 86D0 8002D2D0 26940DC0 */  addiu     $s4, $s4, %lo(osEPiReadIo)
 /* 86D4 8002D2D4 0280F809 */  jalr      $s4
 /* 86D8 8002D2D8 0200902D */   daddu    $s2, $s0, $zero
 /* 86DC 8002D2DC 3C110031 */  lui       $s1, 0x31

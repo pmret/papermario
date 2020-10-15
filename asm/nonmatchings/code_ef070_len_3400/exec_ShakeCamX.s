@@ -9,8 +9,8 @@ glabel exec_ShakeCamX
 /* EFF88 802CB5D8 00A0902D */  daddu     $s2, $a1, $zero
 /* EFF8C 802CB5DC AFB3001C */  sw        $s3, 0x1c($sp)
 /* EFF90 802CB5E0 00C0982D */  daddu     $s3, $a2, $zero
-/* EFF94 802CB5E4 3C04802E */  lui       $a0, 0x802e
-/* EFF98 802CB5E8 24849CE8 */  addiu     $a0, $a0, -0x6318
+/* EFF94 802CB5E4 3C04802E */  lui       $a0, %hi(ShakeCamX)
+/* EFF98 802CB5E8 24849CE8 */  addiu     $a0, $a0, %lo(ShakeCamX)
 /* EFF9C 802CB5EC 24050001 */  addiu     $a1, $zero, 1
 /* EFFA0 802CB5F0 0000302D */  daddu     $a2, $zero, $zero
 /* EFFA4 802CB5F4 F7B40028 */  sdc1      $f20, 0x28($sp)

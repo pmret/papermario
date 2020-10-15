@@ -1304,8 +1304,8 @@ glabel calc_partner_damage_enemy
 /* 1ADE6C 8027F58C 00000000 */   nop      
 /* 1ADE70 8027F590 12A00016 */  beqz      $s5, .L8027F5EC
 /* 1ADE74 8027F594 00000000 */   nop      
-/* 1ADE78 8027F598 3C048029 */  lui       $a0, 0x8029
-/* 1ADE7C 8027F59C 248445E0 */  addiu     $a0, $a0, 0x45e0
+/* 1ADE78 8027F598 3C048029 */  lui       $a0, %hi(DoSleepHit)
+/* 1ADE7C 8027F59C 248445E0 */  addiu     $a0, $a0, %lo(DoSleepHit)
 /* 1ADE80 8027F5A0 2405000A */  addiu     $a1, $zero, 0xa
 /* 1ADE84 8027F5A4 0C0B0CF8 */  jal       start_script
 /* 1ADE88 8027F5A8 0000302D */   daddu    $a2, $zero, $zero
@@ -1333,8 +1333,8 @@ glabel calc_partner_damage_enemy
 /* 1ADEDC 8027F5FC 00000000 */   nop      
 /* 1ADEE0 8027F600 12A00016 */  beqz      $s5, .L8027F65C
 /* 1ADEE4 8027F604 00000000 */   nop      
-/* 1ADEE8 8027F608 3C048029 */  lui       $a0, 0x8029
-/* 1ADEEC 8027F60C 248445FC */  addiu     $a0, $a0, 0x45fc
+/* 1ADEE8 8027F608 3C048029 */  lui       $a0, %hi(DoDizzyHit)
+/* 1ADEEC 8027F60C 248445FC */  addiu     $a0, $a0, %lo(DoDizzyHit)
 /* 1ADEF0 8027F610 2405000A */  addiu     $a1, $zero, 0xa
 /* 1ADEF4 8027F614 0C0B0CF8 */  jal       start_script
 /* 1ADEF8 8027F618 0000302D */   daddu    $a2, $zero, $zero
@@ -1362,8 +1362,8 @@ glabel calc_partner_damage_enemy
 /* 1ADF4C 8027F66C 00000000 */   nop      
 /* 1ADF50 8027F670 12A00016 */  beqz      $s5, .L8027F6CC
 /* 1ADF54 8027F674 00000000 */   nop      
-/* 1ADF58 8027F678 3C048029 */  lui       $a0, 0x8029
-/* 1ADF5C 8027F67C 24844618 */  addiu     $a0, $a0, 0x4618
+/* 1ADF58 8027F678 3C048029 */  lui       $a0, %hi(DoParalyzeHit)
+/* 1ADF5C 8027F67C 24844618 */  addiu     $a0, $a0, %lo(DoParalyzeHit)
 /* 1ADF60 8027F680 2405000A */  addiu     $a1, $zero, 0xa
 /* 1ADF64 8027F684 0C0B0CF8 */  jal       start_script
 /* 1ADF68 8027F688 0000302D */   daddu    $a2, $zero, $zero
@@ -1391,8 +1391,8 @@ glabel calc_partner_damage_enemy
 /* 1ADFBC 8027F6DC 00000000 */   nop      
 /* 1ADFC0 8027F6E0 12A00016 */  beqz      $s5, .L8027F73C
 /* 1ADFC4 8027F6E4 00000000 */   nop      
-/* 1ADFC8 8027F6E8 3C048029 */  lui       $a0, 0x8029
-/* 1ADFCC 8027F6EC 24844634 */  addiu     $a0, $a0, 0x4634
+/* 1ADFC8 8027F6E8 3C048029 */  lui       $a0, %hi(DoPoisonHit)
+/* 1ADFCC 8027F6EC 24844634 */  addiu     $a0, $a0, %lo(DoPoisonHit)
 /* 1ADFD0 8027F6F0 2405000A */  addiu     $a1, $zero, 0xa
 /* 1ADFD4 8027F6F4 0C0B0CF8 */  jal       start_script
 /* 1ADFD8 8027F6F8 0000302D */   daddu    $a2, $zero, $zero
@@ -1420,8 +1420,8 @@ glabel calc_partner_damage_enemy
 /* 1AE02C 8027F74C 00000000 */   nop      
 /* 1AE030 8027F750 12A00016 */  beqz      $s5, .L8027F7AC
 /* 1AE034 8027F754 00000000 */   nop      
-/* 1AE038 8027F758 3C048029 */  lui       $a0, 0x8029
-/* 1AE03C 8027F75C 24844650 */  addiu     $a0, $a0, 0x4650
+/* 1AE038 8027F758 3C048029 */  lui       $a0, %hi(DoStopHit)
+/* 1AE03C 8027F75C 24844650 */  addiu     $a0, $a0, %lo(DoStopHit)
 /* 1AE040 8027F760 2405000A */  addiu     $a1, $zero, 0xa
 /* 1AE044 8027F764 0C0B0CF8 */  jal       start_script
 /* 1AE048 8027F768 0000302D */   daddu    $a2, $zero, $zero
@@ -1448,8 +1448,8 @@ glabel calc_partner_damage_enemy
 /* 1AE098 8027F7B8 00000000 */   nop      
 /* 1AE09C 8027F7BC 12A00017 */  beqz      $s5, .L8027F81C
 /* 1AE0A0 8027F7C0 00000000 */   nop      
-/* 1AE0A4 8027F7C4 3C048029 */  lui       $a0, 0x8029
-/* 1AE0A8 8027F7C8 2484466C */  addiu     $a0, $a0, 0x466c
+/* 1AE0A4 8027F7C4 3C048029 */  lui       $a0, %hi(DoFreezeHit)
+/* 1AE0A8 8027F7C8 2484466C */  addiu     $a0, $a0, %lo(DoFreezeHit)
 /* 1AE0AC 8027F7CC 2405000A */  addiu     $a1, $zero, 0xa
 /* 1AE0B0 8027F7D0 0C0B0CF8 */  jal       start_script
 /* 1AE0B4 8027F7D4 0000302D */   daddu    $a2, $zero, $zero
@@ -1478,8 +1478,8 @@ glabel calc_partner_damage_enemy
 /* 1AE10C 8027F82C 00000000 */   nop      
 /* 1AE110 8027F830 12A00017 */  beqz      $s5, .L8027F890
 /* 1AE114 8027F834 00000000 */   nop      
-/* 1AE118 8027F838 3C048029 */  lui       $a0, 0x8029
-/* 1AE11C 8027F83C 248446B8 */  addiu     $a0, $a0, 0x46b8
+/* 1AE118 8027F838 3C048029 */  lui       $a0, %hi(DoShinkHit)
+/* 1AE11C 8027F83C 248446B8 */  addiu     $a0, $a0, %lo(DoShinkHit)
 /* 1AE120 8027F840 2405000A */  addiu     $a1, $zero, 0xa
 /* 1AE124 8027F844 0C0B0CF8 */  jal       start_script
 /* 1AE128 8027F848 0000302D */   daddu    $a2, $zero, $zero

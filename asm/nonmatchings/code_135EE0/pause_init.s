@@ -7,8 +7,8 @@ glabel pause_init
 /* 1373A8 80244068 24841340 */  addiu     $a0, $a0, 0x1340
 /* 1373AC 8024406C 3C050013 */  lui       $a1, 0x13
 /* 1373B0 80244070 24A55EE0 */  addiu     $a1, $a1, 0x5ee0
-/* 1373B4 80244074 3C068024 */  lui       $a2, 0x8024
-/* 1373B8 80244078 24C6E000 */  addiu     $a2, $a2, -0x2000
+/* 1373B4 80244074 3C068024 */  lui       $a2, %hi(get_dpad_input_radial)
+/* 1373B8 80244078 24C6E000 */  addiu     $a2, $a2, %lo(get_dpad_input_radial)
 /* 1373BC 8024407C AFBF0028 */  sw        $ra, 0x28($sp)
 /* 1373C0 80244080 AFB50024 */  sw        $s5, 0x24($sp)
 /* 1373C4 80244084 AFB40020 */  sw        $s4, 0x20($sp)

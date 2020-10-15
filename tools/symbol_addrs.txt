@@ -1098,7 +1098,7 @@ npc_do_player_collision;0x800392D8
 npc_do_world_collision;0x80038AFC
 npc_move_heading;0x8003AA54
 nuAuCleanDMABuffers;0x8004B268
-nuAuDmaCallBack;0x8004B074
+!nuAuDmaCallBack;0x8004B074
 nuAuDmaNew;0x8004B224
 nuBoot;0x8005E8B0
 nuContDataClose;0x8006060C

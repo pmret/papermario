@@ -13,8 +13,8 @@ glabel func_802E8F94
 /* 10A834 802E8FB4 8C430000 */  lw        $v1, ($v0)
 /* 10A838 802E8FB8 8C440004 */  lw        $a0, 4($v0)
 /* 10A83C 802E8FBC 8C450008 */  lw        $a1, 8($v0)
-/* 10A840 802E8FC0 3C02802F */  lui       $v0, 0x802f
-/* 10A844 802E8FC4 24428E4C */  addiu     $v0, $v0, -0x71b4
+/* 10A840 802E8FC0 3C02802F */  lui       $v0, %hi(push_entity_matrix)
+/* 10A844 802E8FC4 24428E4C */  addiu     $v0, $v0, %lo(push_entity_matrix)
 /* 10A848 802E8FC8 8E300040 */  lw        $s0, 0x40($s1)
 /* 10A84C 802E8FCC 2632004C */  addiu     $s2, $s1, 0x4c
 /* 10A850 802E8FD0 AE22003C */  sw        $v0, 0x3c($s1)

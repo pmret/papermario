@@ -40,8 +40,8 @@ glabel si_handle_bind_lock
 /* EB590 802C6BE0 AFA20018 */   sw       $v0, 0x18($sp)
 /* EB594 802C6BE4 27A40010 */  addiu     $a0, $sp, 0x10
 /* EB598 802C6BE8 A7A20014 */  sh        $v0, 0x14($sp)
-/* EB59C 802C6BEC 3C02802C */  lui       $v0, 0x802c
-/* EB5A0 802C6BF0 24426AD0 */  addiu     $v0, $v0, 0x6ad0
+/* EB59C 802C6BEC 3C02802C */  lui       $v0, %hi(si_standard_trigger_executor)
+/* EB5A0 802C6BF0 24426AD0 */  addiu     $v0, $v0, %lo(si_standard_trigger_executor)
 /* EB5A4 802C6BF4 AFB0002C */  sw        $s0, 0x2c($sp)
 /* EB5A8 802C6BF8 AFA2001C */  sw        $v0, 0x1c($sp)
 /* EB5AC 802C6BFC AFB40024 */  sw        $s4, 0x24($sp)

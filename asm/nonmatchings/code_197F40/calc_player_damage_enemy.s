@@ -1436,8 +1436,8 @@ glabel calc_player_damage_enemy
 /* 1A1668 80272D88 00000000 */   nop      
 /* 1A166C 80272D8C 12E00016 */  beqz      $s7, .L80272DE8
 /* 1A1670 80272D90 00000000 */   nop      
-/* 1A1674 80272D94 3C048029 */  lui       $a0, 0x8029
-/* 1A1678 80272D98 248445E0 */  addiu     $a0, $a0, 0x45e0
+/* 1A1674 80272D94 3C048029 */  lui       $a0, %hi(DoSleepHit)
+/* 1A1678 80272D98 248445E0 */  addiu     $a0, $a0, %lo(DoSleepHit)
 /* 1A167C 80272D9C 2405000A */  addiu     $a1, $zero, 0xa
 /* 1A1680 80272DA0 0C0B0CF8 */  jal       start_script
 /* 1A1684 80272DA4 0000302D */   daddu    $a2, $zero, $zero
@@ -1465,8 +1465,8 @@ glabel calc_player_damage_enemy
 /* 1A16D8 80272DF8 00000000 */   nop      
 /* 1A16DC 80272DFC 12E00016 */  beqz      $s7, .L80272E58
 /* 1A16E0 80272E00 00000000 */   nop      
-/* 1A16E4 80272E04 3C048029 */  lui       $a0, 0x8029
-/* 1A16E8 80272E08 248445FC */  addiu     $a0, $a0, 0x45fc
+/* 1A16E4 80272E04 3C048029 */  lui       $a0, %hi(DoDizzyHit)
+/* 1A16E8 80272E08 248445FC */  addiu     $a0, $a0, %lo(DoDizzyHit)
 /* 1A16EC 80272E0C 2405000A */  addiu     $a1, $zero, 0xa
 /* 1A16F0 80272E10 0C0B0CF8 */  jal       start_script
 /* 1A16F4 80272E14 0000302D */   daddu    $a2, $zero, $zero
@@ -1494,8 +1494,8 @@ glabel calc_player_damage_enemy
 /* 1A1748 80272E68 00000000 */   nop      
 /* 1A174C 80272E6C 12E00016 */  beqz      $s7, .L80272EC8
 /* 1A1750 80272E70 00000000 */   nop      
-/* 1A1754 80272E74 3C048029 */  lui       $a0, 0x8029
-/* 1A1758 80272E78 24844618 */  addiu     $a0, $a0, 0x4618
+/* 1A1754 80272E74 3C048029 */  lui       $a0, %hi(DoParalyzeHit)
+/* 1A1758 80272E78 24844618 */  addiu     $a0, $a0, %lo(DoParalyzeHit)
 /* 1A175C 80272E7C 2405000A */  addiu     $a1, $zero, 0xa
 /* 1A1760 80272E80 0C0B0CF8 */  jal       start_script
 /* 1A1764 80272E84 0000302D */   daddu    $a2, $zero, $zero
@@ -1523,8 +1523,8 @@ glabel calc_player_damage_enemy
 /* 1A17B8 80272ED8 00000000 */   nop      
 /* 1A17BC 80272EDC 12E00016 */  beqz      $s7, .L80272F38
 /* 1A17C0 80272EE0 00000000 */   nop      
-/* 1A17C4 80272EE4 3C048029 */  lui       $a0, 0x8029
-/* 1A17C8 80272EE8 24844634 */  addiu     $a0, $a0, 0x4634
+/* 1A17C4 80272EE4 3C048029 */  lui       $a0, %hi(DoPoisonHit)
+/* 1A17C8 80272EE8 24844634 */  addiu     $a0, $a0, %lo(DoPoisonHit)
 /* 1A17CC 80272EEC 2405000A */  addiu     $a1, $zero, 0xa
 /* 1A17D0 80272EF0 0C0B0CF8 */  jal       start_script
 /* 1A17D4 80272EF4 0000302D */   daddu    $a2, $zero, $zero
@@ -1552,8 +1552,8 @@ glabel calc_player_damage_enemy
 /* 1A1828 80272F48 00000000 */   nop      
 /* 1A182C 80272F4C 12E00016 */  beqz      $s7, .L80272FA8
 /* 1A1830 80272F50 00000000 */   nop      
-/* 1A1834 80272F54 3C048029 */  lui       $a0, 0x8029
-/* 1A1838 80272F58 24844650 */  addiu     $a0, $a0, 0x4650
+/* 1A1834 80272F54 3C048029 */  lui       $a0, %hi(DoStopHit)
+/* 1A1838 80272F58 24844650 */  addiu     $a0, $a0, %lo(DoStopHit)
 /* 1A183C 80272F5C 2405000A */  addiu     $a1, $zero, 0xa
 /* 1A1840 80272F60 0C0B0CF8 */  jal       start_script
 /* 1A1844 80272F64 0000302D */   daddu    $a2, $zero, $zero
@@ -1580,8 +1580,8 @@ glabel calc_player_damage_enemy
 /* 1A1894 80272FB4 00000000 */   nop      
 /* 1A1898 80272FB8 12E00017 */  beqz      $s7, .L80273018
 /* 1A189C 80272FBC 00000000 */   nop      
-/* 1A18A0 80272FC0 3C048029 */  lui       $a0, 0x8029
-/* 1A18A4 80272FC4 2484466C */  addiu     $a0, $a0, 0x466c
+/* 1A18A0 80272FC0 3C048029 */  lui       $a0, %hi(DoFreezeHit)
+/* 1A18A4 80272FC4 2484466C */  addiu     $a0, $a0, %lo(DoFreezeHit)
 /* 1A18A8 80272FC8 2405000A */  addiu     $a1, $zero, 0xa
 /* 1A18AC 80272FCC 0C0B0CF8 */  jal       start_script
 /* 1A18B0 80272FD0 0000302D */   daddu    $a2, $zero, $zero
@@ -1610,8 +1610,8 @@ glabel calc_player_damage_enemy
 /* 1A1908 80273028 00000000 */   nop      
 /* 1A190C 8027302C 12E00017 */  beqz      $s7, .L8027308C
 /* 1A1910 80273030 00000000 */   nop      
-/* 1A1914 80273034 3C048029 */  lui       $a0, 0x8029
-/* 1A1918 80273038 248446B8 */  addiu     $a0, $a0, 0x46b8
+/* 1A1914 80273034 3C048029 */  lui       $a0, %hi(DoShinkHit)
+/* 1A1918 80273038 248446B8 */  addiu     $a0, $a0, %lo(DoShinkHit)
 /* 1A191C 8027303C 2405000A */  addiu     $a1, $zero, 0xa
 /* 1A1920 80273040 0C0B0CF8 */  jal       start_script
 /* 1A1924 80273044 0000302D */   daddu    $a2, $zero, $zero

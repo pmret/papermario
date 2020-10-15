@@ -17,8 +17,8 @@ glabel show_variable_battle_message
 /* 17E314 8024FA34 3C028025 */  lui       $v0, 0x8025
 /* 17E318 8024FA38 2442FB3C */  addiu     $v0, $v0, -0x4c4
 /* 17E31C 8024FA3C AC620004 */  sw        $v0, 4($v1)
-/* 17E320 8024FA40 3C028025 */  lui       $v0, 0x8025
-/* 17E324 8024FA44 24420EA4 */  addiu     $v0, $v0, 0xea4
+/* 17E320 8024FA40 3C028025 */  lui       $v0, %hi(show_message_popup)
+/* 17E324 8024FA44 24420EA4 */  addiu     $v0, $v0, %lo(show_message_popup)
 /* 17E328 8024FA48 AC62000C */  sw        $v0, 0xc($v1)
 /* 17E32C 8024FA4C 24020001 */  addiu     $v0, $zero, 1
 /* 17E330 8024FA50 AC600000 */  sw        $zero, ($v1)

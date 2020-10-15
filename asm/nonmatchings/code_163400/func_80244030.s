@@ -17,8 +17,8 @@ glabel func_80244030
 /* 1648C0 80244060 50400001 */  beql      $v0, $zero, .L80244068
 /* 1648C4 80244064 240500FF */   addiu    $a1, $zero, 0xff
 .L80244068:
-/* 1648C8 80244068 3C108025 */  lui       $s0, 0x8025
-/* 1648CC 8024406C 2610C0A0 */  addiu     $s0, $s0, -0x3f60
+/* 1648C8 80244068 3C108025 */  lui       $s0, %hi(pause_partners_draw_movelist_flower)
+/* 1648CC 8024406C 2610C0A0 */  addiu     $s0, $s0, %lo(pause_partners_draw_movelist_flower)
 /* 1648D0 80244070 0C0513AC */  jal       icon_set_opacity
 /* 1648D4 80244074 8E040000 */   lw       $a0, ($s0)
 /* 1648D8 80244078 8E040000 */  lw        $a0, ($s0)

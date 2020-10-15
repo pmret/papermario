@@ -192,8 +192,8 @@ glabel func_80247B04
 /* 17669C 80247DBC 0000202D */   daddu    $a0, $zero, $zero
 /* 1766A0 80247DC0 0C098F18 */  jal       func_80263C60
 /* 1766A4 80247DC4 00000000 */   nop      
-/* 1766A8 80247DC8 3C048028 */  lui       $a0, 0x8028
-/* 1766AC 80247DCC 24844EBC */  addiu     $a0, $a0, 0x4ebc
+/* 1766A8 80247DC8 3C048028 */  lui       $a0, %hi(PlayerScriptDispatcher)
+/* 1766AC 80247DCC 24844EBC */  addiu     $a0, $a0, %lo(PlayerScriptDispatcher)
 /* 1766B0 80247DD0 2405000A */  addiu     $a1, $zero, 0xa
 /* 1766B4 80247DD4 0000302D */  daddu     $a2, $zero, $zero
 /* 1766B8 80247DD8 0C0B0CF8 */  jal       start_script

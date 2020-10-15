@@ -91,8 +91,8 @@ glabel update_player_action
 /* 1744F4 80245C14 8290008A */  lb        $s0, 0x8a($s4)
 /* 1744F8 80245C18 1602001C */  bne       $s0, $v0, .L80245C8C
 /* 1744FC 80245C1C 24020003 */   addiu    $v0, $zero, 3
-/* 174500 80245C20 3C048028 */  lui       $a0, 0x8028
-/* 174504 80245C24 24844EBC */  addiu     $a0, $a0, 0x4ebc
+/* 174500 80245C20 3C048028 */  lui       $a0, %hi(PlayerScriptDispatcher)
+/* 174504 80245C24 24844EBC */  addiu     $a0, $a0, %lo(PlayerScriptDispatcher)
 /* 174508 80245C28 2405000A */  addiu     $a1, $zero, 0xa
 /* 17450C 80245C2C 0000302D */  daddu     $a2, $zero, $zero
 /* 174510 80245C30 24020003 */  addiu     $v0, $zero, 3
@@ -225,12 +225,12 @@ glabel update_player_action
 /* 1746DC 80245DFC AE020000 */   sw       $v0, ($s0)
 /* 1746E0 80245E00 8E020004 */  lw        $v0, 4($s0)
 /* 1746E4 80245E04 30420040 */  andi      $v0, $v0, 0x40
-/* 1746E8 80245E08 3C048028 */  lui       $a0, 0x8028
-/* 1746EC 80245E0C 24844EBC */  addiu     $a0, $a0, 0x4ebc
+/* 1746E8 80245E08 3C048028 */  lui       $a0, %hi(PlayerScriptDispatcher)
+/* 1746EC 80245E0C 24844EBC */  addiu     $a0, $a0, %lo(PlayerScriptDispatcher)
 /* 1746F0 80245E10 10400003 */  beqz      $v0, .L80245E20
 /* 1746F4 80245E14 A28001A7 */   sb       $zero, 0x1a7($s4)
-/* 1746F8 80245E18 3C048028 */  lui       $a0, 0x8028
-/* 1746FC 80245E1C 24845010 */  addiu     $a0, $a0, 0x5010
+/* 1746F8 80245E18 3C048028 */  lui       $a0, %hi(PeachScriptDispatcher)
+/* 1746FC 80245E1C 24845010 */  addiu     $a0, $a0, %lo(PeachScriptDispatcher)
 .L80245E20:
 /* 174700 80245E20 2405000A */  addiu     $a1, $zero, 0xa
 /* 174704 80245E24 0C0B0CF8 */  jal       start_script

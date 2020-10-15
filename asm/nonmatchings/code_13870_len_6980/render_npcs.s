@@ -102,8 +102,8 @@ glabel render_npcs
 /* 15D64 8003A964 4600A007 */  neg.s     $f0, $f20
 /* 15D68 8003A968 4600018D */  trunc.w.s $f6, $f0
 /* 15D6C 8003A96C E6260004 */  swc1      $f6, 4($s1)
-/* 15D70 8003A970 3C028004 */  lui       $v0, 0x8004
-/* 15D74 8003A974 24429FD0 */  addiu     $v0, $v0, -0x6030
+/* 15D70 8003A970 3C028004 */  lui       $v0, %hi(appendGfx_npc)
+/* 15D74 8003A974 24429FD0 */  addiu     $v0, $v0, %lo(appendGfx_npc)
 /* 15D78 8003A978 AE300008 */  sw        $s0, 8($s1)
 /* 15D7C 8003A97C AE22000C */  sw        $v0, 0xc($s1)
 /* 15D80 8003A980 820200AA */  lb        $v0, 0xaa($s0)
@@ -139,8 +139,8 @@ glabel render_npcs
 /* 15DEC 8003A9EC 4600018D */  trunc.w.s $f6, $f0
 /* 15DF0 8003A9F0 E6260004 */  swc1      $f6, 4($s1)
 /* 15DF4 8003A9F4 0220202D */  daddu     $a0, $s1, $zero
-/* 15DF8 8003A9F8 3C028004 */  lui       $v0, 0x8004
-/* 15DFC 8003A9FC 2442AE38 */  addiu     $v0, $v0, -0x51c8
+/* 15DF8 8003A9F8 3C028004 */  lui       $v0, %hi(appedGfx_npc_blur)
+/* 15DFC 8003A9FC 2442AE38 */  addiu     $v0, $v0, %lo(appedGfx_npc_blur)
 /* 15E00 8003AA00 AE22000C */  sw        $v0, 0xc($s1)
 /* 15E04 8003AA04 24020011 */  addiu     $v0, $zero, 0x11
 /* 15E08 8003AA08 AE300008 */  sw        $s0, 8($s1)
