@@ -1,0 +1,6 @@
+ansiwrap
+colorama
+cxxfilt
+python-Levenshtein
+stringcase
+watchdog
