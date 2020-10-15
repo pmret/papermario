@@ -300,6 +300,22 @@ segments:
     vram: 0x8023E000
     files:
     - [0x16C8E0, "c", "code_16c8e0"]
+    - [0x16F740, "c"]
+    - [0x1776B0, "c"]
+    - [0x17D6A0, "c"]
+    - [0x17FEB0, "c"]
+    - [0x181810, "c"]
+    - [0x182B30, "c"]
+    - [0x18C790, "c"]
+    - [0x18F340, "c"]
+    - [0x190B20, "c"]
+    - [0x1967B0, "c"]
+    - [0x196AA0, "c"]
+    - [0x197F40, "c"]
+    - [0x1A5830, "c"]
+    - [0x1AC760, "c"]
+    - [0x1AF120, "c"]
+    - [0x1AF230, "c"]
     - [0x1AF2C0, "bin"]
   - [0x1CC310, "bin"] # icon images and palettes, vram unknown
   - name: code

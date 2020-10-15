@@ -35,6 +35,7 @@ s32 is_trigger_bound(Trigger*, Bytecode* script);
 Trigger* create_trigger(TriggerDefinition* def);
 s32 _bound_script_trigger_handler(Trigger* trigger);
 
+Actor* get_actor(s32 actorID);
 
 s32 func_800494C0(Npc* npc, s32 arg1, s32 arg2);
 
