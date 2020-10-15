@@ -6,6 +6,8 @@ INCLUDE_ASM(s32, "code_25f00_len_940", func_8004ADD0);
 
 INCLUDE_ASM(s32, "code_25f00_len_940", func_8004AE08);
 
+INCLUDE_ASM(s32, "code_25f00_len_940", nuAuDmaCallBack);
+
 INCLUDE_ASM(s32, "code_25f00_len_940", nuAuDmaNew);
 
 INCLUDE_ASM(s32, "code_25f00_len_940", nuAuCleanDMABuffers);

@@ -112,8 +112,8 @@ glabel step_battle
 /* EE80 80033A80 2484C8E0 */  addiu     $a0, $a0, -0x3720
 /* EE84 80033A84 3C05001D */  lui       $a1, 0x1d
 /* EE88 80033A88 24A5C310 */  addiu     $a1, $a1, -0x3cf0
-/* EE8C 80033A8C 3C068024 */  lui       $a2, 0x8024
-/* EE90 80033A90 24C6E000 */  addiu     $a2, $a2, -0x2000
+/* EE8C 80033A8C 3C068024 */  lui       $a2, %hi(get_dpad_input_radial)
+/* EE90 80033A90 24C6E000 */  addiu     $a2, $a2, %lo(get_dpad_input_radial)
 /* EE94 80033A94 0C00A5CF */  jal       dma_copy
 /* EE98 80033A98 00000000 */   nop      
 /* EE9C 80033A9C 0C08F84C */  jal       initialize_battle

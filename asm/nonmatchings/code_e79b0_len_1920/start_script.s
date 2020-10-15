@@ -50,8 +50,8 @@ glabel start_script
 /* E7E30 802C3480 00000000 */   nop      
 .L802C3484:
 /* E7E34 802C3484 36620001 */  ori       $v0, $s3, 1
-/* E7E38 802C3488 3C03802E */  lui       $v1, 0x802e
-/* E7E3C 802C348C 24639CA0 */  addiu     $v1, $v1, -0x6360
+/* E7E38 802C3488 3C03802E */  lui       $v1, %hi(gStaticScriptCounter)
+/* E7E3C 802C348C 24639CA0 */  addiu     $v1, $v1, %lo(gStaticScriptCounter)
 /* E7E40 802C3490 A2020000 */  sb        $v0, ($s0)
 /* E7E44 802C3494 A2000002 */  sb        $zero, 2($s0)
 /* E7E48 802C3498 A2140003 */  sb        $s4, 3($s0)
@@ -107,9 +107,9 @@ glabel start_script
 /* E7F08 802C3558 24A5AC98 */  addiu     $a1, $a1, %lo(gScriptListCount)
 /* E7F0C 802C355C 8CA20000 */  lw        $v0, ($a1)
 /* E7F10 802C3560 00022080 */  sll       $a0, $v0, 2
-/* E7F14 802C3564 3C01802E */  lui       $at, 0x802e
+/* E7F14 802C3564 3C01802E */  lui       $at, %hi(gScriptIndexList)
 /* E7F18 802C3568 00240821 */  addu      $at, $at, $a0
-/* E7F1C 802C356C AC32A898 */  sw        $s2, -0x5768($at)
+/* E7F1C 802C356C AC32A898 */  sw        $s2, %lo(gScriptIndexList)($at)
 /* E7F20 802C3570 8E030144 */  lw        $v1, 0x144($s0)
 /* E7F24 802C3574 24420001 */  addiu     $v0, $v0, 1
 /* E7F28 802C3578 ACA20000 */  sw        $v0, ($a1)
@@ -119,8 +119,8 @@ glabel start_script
 .L802C3588:
 /* E7F38 802C3588 0C0B0CE4 */  jal       func_802C3390
 /* E7F3C 802C358C 0200202D */   daddu    $a0, $s0, $zero
-/* E7F40 802C3590 3C03802E */  lui       $v1, 0x802e
-/* E7F44 802C3594 24639CA0 */  addiu     $v1, $v1, -0x6360
+/* E7F40 802C3590 3C03802E */  lui       $v1, %hi(gStaticScriptCounter)
+/* E7F44 802C3594 24639CA0 */  addiu     $v1, $v1, %lo(gStaticScriptCounter)
 /* E7F48 802C3598 8C620000 */  lw        $v0, ($v1)
 /* E7F4C 802C359C 14400004 */  bnez      $v0, .L802C35B0
 /* E7F50 802C35A0 0200102D */   daddu    $v0, $s0, $zero

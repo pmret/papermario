@@ -166,8 +166,8 @@ glabel func_8011CFBC
 /* B3938 8011D238 000421C0 */  sll       $a0, $a0, 7
 /* B393C 8011D23C 3C13E700 */  lui       $s3, 0xe700
 /* B3940 8011D240 8E320000 */  lw        $s2, ($s1)
-/* B3944 8011D244 3C02800A */  lui       $v0, 0x800a
-/* B3948 8011D248 8C42A5DC */  lw        $v0, -0x5a24($v0)
+/* B3944 8011D244 3C02800A */  lui       $v0, %hi(nuGfxZBuffer)
+/* B3948 8011D248 8C42A5DC */  lw        $v0, %lo(nuGfxZBuffer)($v0)
 /* B394C 8011D24C 0240182D */  daddu     $v1, $s2, $zero
 /* B3950 8011D250 26520008 */  addiu     $s2, $s2, 8
 /* B3954 8011D254 00442021 */  addu      $a0, $v0, $a0

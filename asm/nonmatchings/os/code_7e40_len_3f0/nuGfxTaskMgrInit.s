@@ -9,8 +9,8 @@ glabel nuGfxTaskMgrInit
 /* 7F48 8002CB48 24020004 */  addiu     $v0, $zero, 4
 /* 7F4C 8002CB4C 3C01800A */  lui       $at, 0x800a
 /* 7F50 8002CB50 A422C516 */  sh        $v0, -0x3aea($at)
-/* 7F54 8002CB54 3C02800A */  lui       $v0, 0x800a
-/* 7F58 8002CB58 2442A618 */  addiu     $v0, $v0, -0x59e8
+/* 7F54 8002CB54 3C02800A */  lui       $v0, %hi(nuGfxTaskSpool)
+/* 7F58 8002CB58 2442A618 */  addiu     $v0, $v0, %lo(nuGfxTaskSpool)
 /* 7F5C 8002CB5C AFBF0038 */  sw        $ra, 0x38($sp)
 /* 7F60 8002CB60 AFB70034 */  sw        $s7, 0x34($sp)
 /* 7F64 8002CB64 AFB60030 */  sw        $s6, 0x30($sp)
@@ -27,8 +27,8 @@ glabel nuGfxTaskMgrInit
 /* 7F90 8002CB90 2610C518 */  addiu     $s0, $s0, -0x3ae8
 /* 7F94 8002CB94 0200202D */  daddu     $a0, $s0, $zero
 /* 7F98 8002CB98 24050005 */  addiu     $a1, $zero, 5
-/* 7F9C 8002CB9C 3C068003 */  lui       $a2, 0x8003
-/* 7FA0 8002CBA0 24C6CA40 */  addiu     $a2, $a2, -0x35c0
+/* 7F9C 8002CB9C 3C068003 */  lui       $a2, %hi(nuGfxTaskMgr)
+/* 7FA0 8002CBA0 24C6CA40 */  addiu     $a2, $a2, %lo(nuGfxTaskMgr)
 /* 7FA4 8002CBA4 3C02800A */  lui       $v0, 0x800a
 /* 7FA8 8002CBA8 2442E6D0 */  addiu     $v0, $v0, -0x1930
 /* 7FAC 8002CBAC AFA20010 */  sw        $v0, 0x10($sp)

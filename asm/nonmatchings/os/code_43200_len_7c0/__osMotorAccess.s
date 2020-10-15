@@ -20,7 +20,6 @@ glabel __osMotorAccess
 /* 4323C 80067E3C 00449021 */   addu     $s2, $v0, $a0
 /* 43240 80067E40 08019FCA */  j         .L80067F28
 /* 43244 80067E44 24020005 */   addiu    $v0, $zero, 5
-
 .L80067E48:
 /* 43248 80067E48 0C019771 */  jal       osSiGetAccess
 /* 4324C 80067E4C 00000000 */   nop      

@@ -153,8 +153,8 @@ glabel osInitialize
 /* 45D50 8006A950 0C01925C */  jal       bzero
 /* 45D54 8006A954 24050040 */   addiu    $a1, $zero, 0x40
 .L8006A958:
-/* 45D58 8006A958 3C038000 */  lui       $v1, 0x8000
-/* 45D5C 8006A95C 8C630300 */  lw        $v1, 0x300($v1)
+/* 45D58 8006A958 3C038000 */  lui       $v1, %hi(osTvType)
+/* 45D5C 8006A95C 8C630300 */  lw        $v1, %lo(osTvType)($v1)
 /* 45D60 8006A960 54600004 */  bnel      $v1, $zero, .L8006A974
 /* 45D64 8006A964 24020002 */   addiu    $v0, $zero, 2
 /* 45D68 8006A968 3C0202F5 */  lui       $v0, 0x2f5

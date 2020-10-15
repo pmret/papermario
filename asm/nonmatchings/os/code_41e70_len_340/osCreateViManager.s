@@ -65,8 +65,8 @@ glabel osCreateViManager
 /* 41F5C 80066B5C 2610F918 */  addiu     $s0, $s0, -0x6e8
 /* 41F60 80066B60 02002021 */  addu      $a0, $s0, $zero
 /* 41F64 80066B64 00002821 */  addu      $a1, $zero, $zero
-/* 41F68 80066B68 3C068006 */  lui       $a2, 0x8006
-/* 41F6C 80066B6C 24C66C10 */  addiu     $a2, $a2, 0x6c10
+/* 41F68 80066B68 3C068006 */  lui       $a2, %hi(viMgrMain)
+/* 41F6C 80066B6C 24C66C10 */  addiu     $a2, $a2, %lo(viMgrMain)
 /* 41F70 80066B70 24030001 */  addiu     $v1, $zero, 1
 /* 41F74 80066B74 AE830000 */  sw        $v1, ($s4)
 /* 41F78 80066B78 3C03800B */  lui       $v1, 0x800b

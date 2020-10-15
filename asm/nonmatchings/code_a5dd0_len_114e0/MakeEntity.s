@@ -78,8 +78,8 @@ glabel MakeEntity
 /* A8554 80111E54 AFA2001C */   sw       $v0, 0x1c($sp)
 /* A8558 80111E58 0040182D */  daddu     $v1, $v0, $zero
 /* A855C 80111E5C 24020002 */  addiu     $v0, $zero, 2
-/* A8560 80111E60 3C018015 */  lui       $at, 0x8015
-/* A8564 80111E64 AC2312EC */  sw        $v1, 0x12ec($at)
+/* A8560 80111E60 3C018015 */  lui       $at, %hi(gLastCreatedEntityIndex)
+/* A8564 80111E64 AC2312EC */  sw        $v1, %lo(gLastCreatedEntityIndex)($at)
 /* A8568 80111E68 AE430084 */  sw        $v1, 0x84($s2)
 .L80111E6C:
 /* A856C 80111E6C 8FBF004C */  lw        $ra, 0x4c($sp)

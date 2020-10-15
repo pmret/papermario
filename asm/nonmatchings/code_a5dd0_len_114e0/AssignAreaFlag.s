@@ -11,8 +11,8 @@ glabel AssignAreaFlag
 /* A8710 80112010 8C83000C */   lw       $v1, 0xc($a0)
 /* A8714 80112014 0C0B1EAF */  jal       get_variable
 /* A8718 80112018 8C650000 */   lw       $a1, ($v1)
-/* A871C 8011201C 3C048015 */  lui       $a0, 0x8015
-/* A8720 80112020 8C8412EC */  lw        $a0, 0x12ec($a0)
+/* A871C 8011201C 3C048015 */  lui       $a0, %hi(gLastCreatedEntityIndex)
+/* A8720 80112020 8C8412EC */  lw        $a0, %lo(gLastCreatedEntityIndex)($a0)
 /* A8724 80112024 0C04417A */  jal       get_entity_by_index
 /* A8728 80112028 0040802D */   daddu    $s0, $v0, $zero
 /* A872C 8011202C 0040882D */  daddu     $s1, $v0, $zero
