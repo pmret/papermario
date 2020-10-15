@@ -5,12 +5,12 @@ if command -v apt &> /dev/null; then
     echo "Installing packages for Ubuntu"
 
     sudo apt install -y git python3 python3-pip build-essential binutils-mips-linux-gnu zlib1g-dev libyaml-dev gcc-multilib || exit 1
-    python3 -m pip install capstone
+    python3 -m pip install -U -r requirements.txt
 
     if [[ $1 == "--extra" ]]; then
         echo "Installing extra"
         sudo apt install -y clang-tidy astyle || exit 1
-        python3 -m pip install stringcase || exit 1
+        python3 -m pip install -U -r requirements_extra.txt || exit 1
     fi
 
     echo "Done"
@@ -26,7 +26,7 @@ if command -v pacman &> /dev/null; then
 
     # Install dependencies
     sudo pacman -S --noconfirm --needed git python python-pip base-devel zlib libyaml lib32-glibc || exit 1
-    python3 -m pip install capstone
+    python3 -m pip install -U -r requirements.txt
 
     # Install binutils if required
     if ! command -v mips-linux-gnu-ar &> /dev/null; then
@@ -51,7 +51,7 @@ if command -v pacman &> /dev/null; then
     if [[ $1 == "--extra" ]]; then
         echo "Installing extra"
         sudo pacman -S --noconfirm --needed clang astyle || exit 1
-        python3 -m pip install stringcase || exit 1
+        python3 -m pip install -U -r requirements_extra.txt || exit 1
     fi
 
     echo "Done"
