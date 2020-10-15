@@ -277,17 +277,22 @@ segments:
     start: 0x135EE0
     vram: 0x80242BA0
     files:
-    - [0x135EE0, "c", "code_135EE0"]
+    - [0x135EE0, "c"]
+    - [0x13CAF0, "c"]
+    - [0x13FD40, "c"]
+    - [0x140C70, "c"]
+    - [0x1421C0, "c"]
     - [0x1422A0, "bin"]
   - name: code
     type: code
     start: 0x163400
     vram: 0x80242BA0
     files:
-    - [0x163400, "c", "code_163400"]
-    - [0x167570, "c", "code_167570"]
-    - [0x168590, "c", "code_168590"]
-    - [0x169BE0, "c", "code_169BE0"]
+    - [0x163400, "c"]
+    - [0x165490, "c"]
+    - [0x167570, "c"]
+    - [0x168590, "c"]
+    - [0x169BE0, "c"]
     - [0x16A3E0, "bin"]
   - name: code
     type: code
