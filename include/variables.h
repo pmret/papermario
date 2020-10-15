@@ -105,6 +105,9 @@ extern u8 D_800A095F;
 extern s32 D_800A0960;
 extern s32 D_800A0964;
 
+// Pause
+//extern s32 gPauseMenuStrings[348];
+
 extern s32 gGameState;
 extern s32 D_8009A650[1];
 extern u16 D_8009A6A0;
@@ -122,6 +125,9 @@ extern UNK_TYPE D_80109270;
 extern UNK_TYPE D_80108558;
 extern UNK_TYPE D_8010F250; // play_sound state struct?
 extern s8 D_8010EBB0[];
+
+// Effects
+extern EffectTableEntry gEffectTable[135];
 
 //nusys
 extern OSPiHandle* carthandle;

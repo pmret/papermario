@@ -74,10 +74,10 @@ if __name__ == "__main__":
             for func in matched_but_undeleted_asm:
                 f = next(NONMATCHINGS_DIR.rglob(func + ".s"))
                 remove(f)
-    elif len(asm) != len(non_matched):
+    elif len(set(asm)) != len(set(non_matched)):
         #print(f"warning: number of INCLUDE_ASM macros ({len(asm)}) != number of asm files ({len(non_matched)})")
 
-        if len(non_matched) > len(asm):
+        if len(set(non_matched)) > len(set(asm)):
             print(f"The following functions are unmatched but are also unINCLUDEd: {set(non_matched) - set(asm)}")
 
             if "--fail-unincluded" in argv:

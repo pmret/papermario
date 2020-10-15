@@ -1876,3 +1876,5 @@ SetTattleString;0x80045A58
 !osEnqueueThread;0x8006B174
 !send_mesg;0x8006AF7C
 !handle_CPU;0x8006B038
+gPauseMenuStrings;0x8026F778
+gEffectTable;0x8007F214

@@ -38,9 +38,15 @@ INCLUDE_ASM(s32, "code_196AA0", func_8026919C);
 
 INCLUDE_ASM(s32, "code_196AA0", func_802691C8);
 
-INCLUDE_ASM(s32, "code_196AA0", GetActionSuccess);
+ApiStatus GetActionSuccess(ScriptInstance* script, s32 isInitialCall) {
+    set_variable(script, *script->ptrReadPos, gBattleStatus.actionSuccess);
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "code_196AA0", SetActionSuccess);
+ApiStatus SetActionSuccess(ScriptInstance* script, s32 isInitialCall) {
+    gBattleStatus.actionSuccess = get_variable(script, *script->ptrReadPos);
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_196AA0", func_802692EC);
 
@@ -52,7 +58,10 @@ INCLUDE_ASM(s32, "code_196AA0", func_80269370);
 
 INCLUDE_ASM(s32, "code_196AA0", func_8026939C);
 
-INCLUDE_ASM(s32, "code_196AA0", func_802693F0);
+ApiStatus func_802693F0(ScriptInstance* script, s32 isInitialCall) {
+    gBattleStatus.flags1 &= ~0x4000;
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_196AA0", CloseActionCommandInfo);
 
@@ -60,13 +69,19 @@ INCLUDE_ASM(s32, "code_196AA0", func_80269470);
 
 INCLUDE_ASM(s32, "code_196AA0", func_802694A4);
 
-INCLUDE_ASM(s32, "code_196AA0", GetActionSuccessCopy);
+ApiStatus GetActionSuccessCopy(ScriptInstance* script, s32 isInitialCall) {
+    set_variable(script, *script->ptrReadPos, gBattleStatus.actionSuccess);
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_196AA0", func_80269524);
 
 INCLUDE_ASM(s32, "code_196AA0", func_80269550);
 
-INCLUDE_ASM(s32, "code_196AA0", GetBlockResult);
+ApiStatus GetBlockResult(ScriptInstance* script, s32 isInitialCall) {
+    set_variable(script, *script->ptrReadPos, gBattleStatus.blockResult);
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_196AA0", func_802695A8);
 

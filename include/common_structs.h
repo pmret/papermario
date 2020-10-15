@@ -537,8 +537,12 @@ typedef struct BattleStatus {
     /* 0x07A */ u8 incrementStarPointDelay; /* related to star points, set to 0x28 when they are dropped */
     /* 0x07B */ u8 damageTaken;
     /* 0x07C */ u8 changePartnerAllowed;
-    /* 0x07D */ char unk_7D[10];
-    /* 0x087 */ u8 blockResult; /* 0 = fail, 1 = success, -1 = mashed */
+    /* 0x07D */ char unk_7D[4];
+    /* 0x081 */ s8 actionSuccess;
+    /* 0x072 */ char unk_7C[3];
+    /* 0x085 */ s8 unk_85;
+    /* 0x086 */ char unk_86;
+    /* 0x087 */ s8 blockResult; /* 0 = fail, 1 = success, -1 = mashed */
     /* 0x088 */ u8 itemUsesLeft; /* set to 2 for doublke dip, 3 for triple */
     /* 0x089 */ u8 hpDrainCount;
     /* 0x08A */ char unk_8A;
@@ -575,7 +579,6 @@ typedef struct BattleStatus {
     /* 0x0D8 */ struct Actor* playerActor;
     /* 0x0DC */ struct Actor* partnerActor;
     /* 0x0E0 */ struct Actor* enemyActors[24];
-    /* 0x0E4 */ char unk_E4[92];
     /* 0x140 */ s16 enemyIDs[24];
     /* 0x170 */ char unk_170;
     /* 0x171 */ u8 numEnemyActors;
@@ -769,6 +772,15 @@ typedef struct StaticItem {
 typedef struct Effect {
     /* 0x00 */ char unk_00[32];
 } Effect; // size = 0x20
+
+typedef struct EffectTableEntry {
+    /* 0x00 */ s32 dmaStart;
+    /* 0x04 */ s32 dmaEnd;
+    /* 0x08 */ s32 dmaDest;
+    /* 0x0C */ s32 unkStartRom;
+    /* 0x10 */ s32 unkEndRom;
+    /* 0x14 */ UNK_FUN_PTR(delegate);
+} EffectTableEntry; // size = 0x18
 
 typedef struct ItemEntity {
     /* 0x00 */ s32 flags;
