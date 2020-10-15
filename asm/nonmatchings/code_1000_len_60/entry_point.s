@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel entry_point
-/* 1000 80025C00 3C08800A */  lui       $t0, 0x800a
-/* 1004 80025C04 2508A5B0 */  addiu     $t0, $t0, -0x5a50
+/* 1000 80025C00 3C08800A */  lui       $t0, %hi(D_8009A5B0)
+/* 1004 80025C04 2508A5B0 */  addiu     $t0, $t0, %lo(D_8009A5B0)
 /* 1008 80025C08 3C090004 */  lui       $t1, 4
 /* 100C 80025C0C 25291F50 */  addiu     $t1, $t1, 0x1f50
 .L80025C10:

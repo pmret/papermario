@@ -163,8 +163,8 @@ glabel func_80138E54
 /* CF7C4 801390C4 3C09FF18 */  lui       $t1, 0xff18
 /* CF7C8 801390C8 3529003F */  ori       $t1, $t1, 0x3f
 /* CF7CC 801390CC 8E500000 */  lw        $s0, ($s2)
-/* CF7D0 801390D0 3C04800A */  lui       $a0, 0x800a
-/* CF7D4 801390D4 8C84A5DC */  lw        $a0, -0x5a24($a0)
+/* CF7D0 801390D0 3C04800A */  lui       $a0, %hi(nuGfxZBuffer)
+/* CF7D4 801390D4 8C84A5DC */  lw        $a0, %lo(nuGfxZBuffer)($a0)
 /* CF7D8 801390D8 96820000 */  lhu       $v0, ($s4)
 /* CF7DC 801390DC 0200282D */  daddu     $a1, $s0, $zero
 /* CF7E0 801390E0 26100008 */  addiu     $s0, $s0, 8
@@ -408,8 +408,8 @@ glabel func_80138E54
 /* CFB88 80139488 24120040 */  addiu     $s2, $zero, 0x40
 /* CFB8C 8013948C 02A0102D */  daddu     $v0, $s5, $zero
 /* CFB90 80139490 8E300000 */  lw        $s0, ($s1)
-/* CFB94 80139494 3C04800A */  lui       $a0, 0x800a
-/* CFB98 80139498 8C84A5DC */  lw        $a0, -0x5a24($a0)
+/* CFB94 80139494 3C04800A */  lui       $a0, %hi(nuGfxZBuffer)
+/* CFB98 80139498 8C84A5DC */  lw        $a0, %lo(nuGfxZBuffer)($a0)
 /* CFB9C 8013949C 0200182D */  daddu     $v1, $s0, $zero
 /* CFBA0 801394A0 26100008 */  addiu     $s0, $s0, 8
 /* CFBA4 801394A4 AE300000 */  sw        $s0, ($s1)
@@ -446,8 +446,8 @@ glabel func_80138E54
 /* CFC1C 8013951C 34A5003F */  ori       $a1, $a1, 0x3f
 /* CFC20 80139520 00132300 */  sll       $a0, $s3, 0xc
 /* CFC24 80139524 8E220000 */  lw        $v0, ($s1)
-/* CFC28 80139528 3C03800A */  lui       $v1, 0x800a
-/* CFC2C 8013952C 8C63A5DC */  lw        $v1, -0x5a24($v1)
+/* CFC28 80139528 3C03800A */  lui       $v1, %hi(nuGfxZBuffer)
+/* CFC2C 8013952C 8C63A5DC */  lw        $v1, %lo(nuGfxZBuffer)($v1)
 /* CFC30 80139530 0040802D */  daddu     $s0, $v0, $zero
 /* CFC34 80139534 24420008 */  addiu     $v0, $v0, 8
 /* CFC38 80139538 00642021 */  addu      $a0, $v1, $a0
@@ -530,8 +530,8 @@ glabel func_80138E54
 /* CFD6C 8013966C 36B5001C */  ori       $s5, $s5, 0x1c
 /* CFD70 80139670 3C16800A */  lui       $s6, 0x800a
 /* CFD74 80139674 26D6A66C */  addiu     $s6, $s6, -0x5994
-/* CFD78 80139678 3C13800A */  lui       $s3, 0x800a
-/* CFD7C 8013967C 2673A5DC */  addiu     $s3, $s3, -0x5a24
+/* CFD78 80139678 3C13800A */  lui       $s3, %hi(nuGfxZBuffer)
+/* CFD7C 8013967C 2673A5DC */  addiu     $s3, $s3, %lo(nuGfxZBuffer)
 /* CFD80 80139680 8EC20000 */  lw        $v0, ($s6)
 /* CFD84 80139684 8E640000 */  lw        $a0, ($s3)
 /* CFD88 80139688 0040882D */  daddu     $s1, $v0, $zero

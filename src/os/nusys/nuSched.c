@@ -59,9 +59,9 @@ void nuScCreateScheduler(u8 videoMode, u8 numFields) {
     osStartThread(&nusched.graphicsThread);
 }
 
-INCLUDE_ASM(void, "os/code_39db0_len_8a0", nuScExecuteAudio);
+INCLUDE_ASM(void, "os/nusys/nuSched", nuScExecuteAudio);
 
-INCLUDE_ASM(void, "os/code_39db0_len_8a0", nuScExecuteGraphics);
+INCLUDE_ASM(void, "os/nusys/nuSched", nuScExecuteGraphics);
 
 void nuScAddClient(NUScClient* c, OSMesgQueue* mq, NUScMsg msgType) {
     s32 mask;
@@ -116,7 +116,7 @@ OSMesgQueue* nuScGetGfxMQ(void) {
     return &nusched.graphicsRequestMQ;
 }
 #else
-INCLUDE_ASM(OSMesgQueue*, "os/code_39db0_len_8a0", nuScGetGfxMQ, void);
+INCLUDE_ASM(OSMesgQueue*, "os/nusys/nuSched", nuScGetGfxMQ, void);
 #endif
 
 #ifdef NON_MATCHING
@@ -125,7 +125,7 @@ OSMesgQueue* nuScGetAudioMQ(void) {
     return &nusched.audioRequestMQ;
 }
 #else
-INCLUDE_ASM(OSMesgQueue*, "os/code_39db0_len_8a0", nuScGetAudioMQ, void);
+INCLUDE_ASM(OSMesgQueue*, "os/nusys/nuSched", nuScGetAudioMQ, void);
 #endif
 
 #ifdef NON_MATCHING
@@ -134,7 +134,7 @@ void nuScSetFrameBufferNum(u8 frameBufferNum) {
     nusched.frameBufferNum = frameBufferNum;
 }
 #else
-INCLUDE_ASM(void, "os/code_39db0_len_8a0", nuScSetFrameBufferNum, u8 frameBufferNum);
+INCLUDE_ASM(void, "os/nusys/nuSched", nuScSetFrameBufferNum, u8 frameBufferNum);
 #endif
 
 #ifdef NON_MATCHING
@@ -143,10 +143,10 @@ s32 nuScGetFrameRate(void) {
     return nusched.frameRate;
 }
 #else
-INCLUDE_ASM(s32, "os/code_39db0_len_8a0", nuScGetFrameRate, void);
+INCLUDE_ASM(s32, "os/nusys/nuSched", nuScGetFrameRate, void);
 #endif
 
-INCLUDE_ASM(void, "os/code_39db0_len_8a0", nuScEventHandler);
+INCLUDE_ASM(void, "os/nusys/nuSched", nuScEventHandler);
 
 static void nuScEventBroadcast(NUScMsg* msg) {
     NUScClient* clientList = nusched.clientList;
@@ -159,4 +159,4 @@ static void nuScEventBroadcast(NUScMsg* msg) {
     }
 }
 
-INCLUDE_ASM(void, "os/code_39db0_len_8a0", nuScWaitTaskReady);
+INCLUDE_ASM(void, "os/nusys/nuSched", nuScWaitTaskReady);

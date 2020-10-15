@@ -4,8 +4,8 @@
 glabel nuSiMgrInit
 /* 8230 8002CE30 27BDFFC8 */  addiu     $sp, $sp, -0x38
 /* 8234 8002CE34 AFB00030 */  sw        $s0, 0x30($sp)
-/* 8238 8002CE38 3C10800E */  lui       $s0, 0x800e
-/* 823C 8002CE3C 2610AC78 */  addiu     $s0, $s0, -0x5388
+/* 8238 8002CE38 3C10800E */  lui       $s0, %hi(nuSiMesgQ)
+/* 823C 8002CE3C 2610AC78 */  addiu     $s0, $s0, %lo(nuSiMesgQ)
 /* 8240 8002CE40 0200202D */  daddu     $a0, $s0, $zero
 /* 8244 8002CE44 3C05800A */  lui       $a1, 0x800a
 /* 8248 8002CE48 24A5E6F0 */  addiu     $a1, $a1, -0x1910

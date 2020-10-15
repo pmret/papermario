@@ -40,8 +40,8 @@ glabel nuPiReadRomOverlay
 /* 3B568 80060168 24104000 */  addiu     $s0, $zero, 0x4000
 .L8006016C:
 /* 3B56C 8006016C 27A50010 */  addiu     $a1, $sp, 0x10
-/* 3B570 80060170 3C04800A */  lui       $a0, 0x800a
-/* 3B574 80060174 8C84A638 */  lw        $a0, -0x59c8($a0)
+/* 3B570 80060170 3C04800A */  lui       $a0, %hi(carthandle)
+/* 3B574 80060174 8C84A638 */  lw        $a0, %lo(carthandle)($a0)
 /* 3B578 80060178 0000302D */  daddu     $a2, $zero, $zero
 /* 3B57C 8006017C AFB30018 */  sw        $s3, 0x18($sp)
 /* 3B580 80060180 AFB2001C */  sw        $s2, 0x1c($sp)

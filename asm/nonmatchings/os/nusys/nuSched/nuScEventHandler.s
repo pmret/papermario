@@ -38,8 +38,8 @@ glabel nuScEventHandler
 /* 3A41C 8005F01C AC223B94 */  sw        $v0, 0x3b94($at)
 /* 3A420 8005F020 0C017C30 */  jal       nuScEventBroadcast
 /* 3A424 8005F024 2624FF8C */   addiu    $a0, $s1, -0x74
-/* 3A428 8005F028 3C02800A */  lui       $v0, 0x800a
-/* 3A42C 8005F02C 9042A5B0 */  lbu       $v0, -0x5a50($v0)
+/* 3A428 8005F028 3C02800A */  lui       $v0, %hi(D_8009A5B0)
+/* 3A42C 8005F02C 9042A5B0 */  lbu       $v0, %lo(D_8009A5B0)($v0)
 /* 3A430 8005F030 1040FFEC */  beqz      $v0, .L8005EFE4
 /* 3A434 8005F034 0220202D */   daddu    $a0, $s1, $zero
 /* 3A438 8005F038 12000003 */  beqz      $s0, .L8005F048
@@ -47,9 +47,9 @@ glabel nuScEventHandler
 /* 3A440 8005F040 08017BF9 */  j         .L8005EFE4
 /* 3A444 8005F044 2610FFFF */   addiu    $s0, $s0, -1
 .L8005F048:
-/* 3A448 8005F048 3C01800A */  lui       $at, 0x800a
+/* 3A448 8005F048 3C01800A */  lui       $at, %hi(D_8009A5B0)
 /* 3A44C 8005F04C 0C01A98C */  jal       osAfterPreNMI
-/* 3A450 8005F050 A022A5B0 */   sb       $v0, -0x5a50($at)
+/* 3A450 8005F050 A022A5B0 */   sb       $v0, %lo(D_8009A5B0)($at)
 /* 3A454 8005F054 3C013F80 */  lui       $at, 0x3f80
 /* 3A458 8005F058 44816000 */  mtc1      $at, $f12
 /* 3A45C 8005F05C 0C019BF4 */  jal       osViSetYScale
@@ -59,8 +59,8 @@ glabel nuScEventHandler
 /* 3A46C 8005F06C 08017BF9 */  j         .L8005EFE4
 /* 3A470 8005F070 0220202D */   daddu    $a0, $s1, $zero
 .L8005F074:
-/* 3A474 8005F074 3C01800A */  lui       $at, 0x800a
-/* 3A478 8005F078 A032A5B0 */  sb        $s2, -0x5a50($at)
+/* 3A474 8005F074 3C01800A */  lui       $at, %hi(D_8009A5B0)
+/* 3A478 8005F078 A032A5B0 */  sb        $s2, %lo(D_8009A5B0)($at)
 /* 3A47C 8005F07C 0C017C30 */  jal       nuScEventBroadcast
 /* 3A480 8005F080 2624FF8E */   addiu    $a0, $s1, -0x72
 /* 3A484 8005F084 3C028009 */  lui       $v0, 0x8009

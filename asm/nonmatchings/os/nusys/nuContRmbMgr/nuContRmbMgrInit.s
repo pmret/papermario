@@ -21,9 +21,9 @@ glabel nuContRmbMgrInit
 /* 3B0C8 8005FCC8 2C820004 */  sltiu     $v0, $a0, 4
 /* 3B0CC 8005FCCC 1440FFF4 */  bnez      $v0, .L8005FCA0
 /* 3B0D0 8005FCD0 2463000A */   addiu    $v1, $v1, 0xa
-/* 3B0D4 8005FCD4 3C048009 */  lui       $a0, 0x8009
+/* 3B0D4 8005FCD4 3C048009 */  lui       $a0, %hi(nuContRmbCallBack)
 /* 3B0D8 8005FCD8 0C0180FC */  jal       nuSiCallBackAdd
-/* 3B0DC 8005FCDC 24843D00 */   addiu    $a0, $a0, 0x3d00
+/* 3B0DC 8005FCDC 24843D00 */   addiu    $a0, $a0, %lo(nuContRmbCallBack)
 /* 3B0E0 8005FCE0 8FBF0010 */  lw        $ra, 0x10($sp)
 /* 3B0E4 8005FCE4 03E00008 */  jr        $ra
 /* 3B0E8 8005FCE8 27BD0018 */   addiu    $sp, $sp, 0x18

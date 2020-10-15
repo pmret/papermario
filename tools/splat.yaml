@@ -6,7 +6,7 @@ options:
   compiler: "GCC"
 segments:
   - name: header
-    type: code
+    type: header
     start: 0x00
     vram: 0
     files:
@@ -165,7 +165,7 @@ segments:
     - [0x457c0, "c", "os/code_457c0_len_270"]
     - [0x45a30, "c", "os/code_45a30_len_20"]
     - [0x45a50, "c", "os/code_45a50_len_3a0"]
-    - [0x45df0, "c", "os/code_45df0_len_970"]
+    - [0x45df0, "hasm", "os/code_45df0_len_970"]
     - [0x46760, "c", "os/code_46760_len_90"]
     - [0x467f0, "c", "os/code_467f0_len_90"]
     - [0x46880, "c", "os/code_46880_len_260"]

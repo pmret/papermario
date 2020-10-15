@@ -10,8 +10,8 @@ glabel AssignBlockFlag
 /* A8780 80112080 8C83000C */   lw       $v1, 0xc($a0)
 /* A8784 80112084 0C0B1F6A */  jal       get_variable_index
 /* A8788 80112088 8C650000 */   lw       $a1, ($v1)
-/* A878C 8011208C 3C048015 */  lui       $a0, 0x8015
-/* A8790 80112090 8C8412EC */  lw        $a0, 0x12ec($a0)
+/* A878C 8011208C 3C048015 */  lui       $a0, %hi(gLastCreatedEntityIndex)
+/* A8790 80112090 8C8412EC */  lw        $a0, %lo(gLastCreatedEntityIndex)($a0)
 /* A8794 80112094 0C04417A */  jal       get_entity_by_index
 /* A8798 80112098 0040802D */   daddu    $s0, $v0, $zero
 /* A879C 8011209C 8C430040 */  lw        $v1, 0x40($v0)

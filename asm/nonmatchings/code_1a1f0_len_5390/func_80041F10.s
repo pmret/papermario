@@ -296,8 +296,8 @@ glabel func_80041F10
 /* 1D74C 8004234C 080108E2 */  j         .L80042388
 /* 1D750 80042350 AED2009C */   sw       $s2, 0x9c($s6)
 .L80042354:
-/* 1D754 80042354 3C048007 */  lui       $a0, 0x8007
-/* 1D758 80042358 24847E38 */  addiu     $a0, $a0, 0x7e38
+/* 1D754 80042354 3C048007 */  lui       $a0, %hi(SCRIPT_NpcDefeat)
+/* 1D758 80042358 24847E38 */  addiu     $a0, $a0, %lo(SCRIPT_NpcDefeat)
 /* 1D75C 8004235C 0000302D */  daddu     $a2, $zero, $zero
 /* 1D760 80042360 0C0B0D74 */  jal       start_script_in_group
 /* 1D764 80042364 00C0382D */   daddu    $a3, $a2, $zero

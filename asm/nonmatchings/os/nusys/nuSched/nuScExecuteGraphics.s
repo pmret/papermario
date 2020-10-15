@@ -2,7 +2,6 @@
 .set noreorder # don't insert nops after branches
 
 glabel nuScExecuteGraphics
-
 /* 3A114 8005ED14 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* 3A118 8005ED18 AFB00018 */  sw        $s0, 0x18($sp)
 /* 3A11C 8005ED1C 3C10800E */  lui       $s0, 0x800e
@@ -15,8 +14,8 @@ glabel nuScExecuteGraphics
 /* 3A134 8005ED34 27A50010 */  addiu     $a1, $sp, 0x10
 /* 3A138 8005ED38 0C0195BC */  jal       osRecvMesg
 /* 3A13C 8005ED3C 24060001 */   addiu    $a2, $zero, 1
-/* 3A140 8005ED40 3C02800A */  lui       $v0, 0x800a
-/* 3A144 8005ED44 9042A5B0 */  lbu       $v0, -0x5a50($v0)
+/* 3A140 8005ED40 3C02800A */  lui       $v0, %hi(D_8009A5B0)
+/* 3A144 8005ED44 9042A5B0 */  lbu       $v0, %lo(D_8009A5B0)($v0)
 /* 3A148 8005ED48 30420002 */  andi      $v0, $v0, 2
 /* 3A14C 8005ED4C 14400032 */  bnez      $v0, .L8005EE18
 /* 3A150 8005ED50 00000000 */   nop      

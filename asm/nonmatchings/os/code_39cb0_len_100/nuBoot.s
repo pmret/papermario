@@ -9,8 +9,8 @@ glabel nuBoot
 /* 39CC0 8005E8C0 3C10800A */  lui       $s0, 0x800a
 /* 39CC4 8005E8C4 26104270 */  addiu     $s0, $s0, 0x4270
 /* 39CC8 8005E8C8 0200202D */  daddu     $a0, $s0, $zero
-/* 39CCC 8005E8CC 3C02800A */  lui       $v0, 0x800a
-/* 39CD0 8005E8D0 244265D0 */  addiu     $v0, $v0, 0x65d0
+/* 39CCC 8005E8CC 3C02800A */  lui       $v0, %hi(nuScStack)
+/* 39CD0 8005E8D0 244265D0 */  addiu     $v0, $v0, %lo(nuScStack)
 /* 39CD4 8005E8D4 AFA20010 */  sw        $v0, 0x10($sp)
 /* 39CD8 8005E8D8 2402000A */  addiu     $v0, $zero, 0xa
 /* 39CDC 8005E8DC 24050001 */  addiu     $a1, $zero, 1

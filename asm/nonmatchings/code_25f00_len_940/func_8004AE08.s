@@ -267,8 +267,8 @@ glabel func_8004AE08
 /* 265C8 8004B1C8 AE22000C */  sw        $v0, 0xc($s1)
 /* 265CC 8004B1CC AC830000 */  sw        $v1, ($a0)
 /* 265D0 8004B1D0 A0A00002 */  sb        $zero, 2($a1)
-/* 265D4 8004B1D4 3C04800A */  lui       $a0, 0x800a
-/* 265D8 8004B1D8 8C84A638 */  lw        $a0, -0x59c8($a0)
+/* 265D4 8004B1D4 3C04800A */  lui       $a0, %hi(carthandle)
+/* 265D8 8004B1D8 8C84A638 */  lw        $a0, %lo(carthandle)($a0)
 /* 265DC 8004B1DC 3C02800A */  lui       $v0, 0x800a
 /* 265E0 8004B1E0 24423640 */  addiu     $v0, $v0, 0x3640
 /* 265E4 8004B1E4 ACA20004 */  sw        $v0, 4($a1)

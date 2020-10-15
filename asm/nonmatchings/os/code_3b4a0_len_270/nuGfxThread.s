@@ -34,19 +34,19 @@ glabel nuGfxThread
 /* 3B6B8 800602B8 080180A3 */  j         .L8006028C
 /* 3B6BC 800602BC 00000000 */   nop      
 .L800602C0:
-/* 3B6C0 800602C0 3C028009 */  lui       $v0, 0x8009
-/* 3B6C4 800602C4 8C423D10 */  lw        $v0, 0x3d10($v0)
+/* 3B6C0 800602C0 3C028009 */  lui       $v0, %hi(nuGfxFunc)
+/* 3B6C4 800602C4 8C423D10 */  lw        $v0, %lo(nuGfxFunc)($v0)
 /* 3B6C8 800602C8 1040FFF0 */  beqz      $v0, .L8006028C
 /* 3B6CC 800602CC 00000000 */   nop      
-/* 3B6D0 800602D0 3C04800A */  lui       $a0, 0x800a
-/* 3B6D4 800602D4 8C84A618 */  lw        $a0, -0x59e8($a0)
+/* 3B6D0 800602D0 3C04800A */  lui       $a0, %hi(nuGfxTaskSpool)
+/* 3B6D4 800602D4 8C84A618 */  lw        $a0, %lo(nuGfxTaskSpool)($a0)
 /* 3B6D8 800602D8 0040F809 */  jalr      $v0
 /* 3B6DC 800602DC 00000000 */   nop      
 /* 3B6E0 800602E0 080180A3 */  j         .L8006028C
 /* 3B6E4 800602E4 00000000 */   nop      
 .L800602E8:
-/* 3B6E8 800602E8 3C028009 */  lui       $v0, 0x8009
-/* 3B6EC 800602EC 8C423D14 */  lw        $v0, 0x3d14($v0)
+/* 3B6E8 800602E8 3C028009 */  lui       $v0, %hi(nuGfxPreNMIFunc)
+/* 3B6EC 800602EC 8C423D14 */  lw        $v0, %lo(nuGfxPreNMIFunc)($v0)
 /* 3B6F0 800602F0 1040FFE6 */  beqz      $v0, .L8006028C
 /* 3B6F4 800602F4 00000000 */   nop      
 /* 3B6F8 800602F8 0040F809 */  jalr      $v0

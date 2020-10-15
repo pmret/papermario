@@ -11,8 +11,8 @@ glabel nuGfxTaskStart
 /* 80DC 8002CCDC 8D480000 */  lw        $t0, ($t2)
 /* 80E0 8002CCE0 000630C0 */  sll       $a2, $a2, 3
 /* 80E4 8002CCE4 AD020014 */  sw        $v0, 0x14($t0)
-/* 80E8 8002CCE8 3C02800A */  lui       $v0, 0x800a
-/* 80EC 8002CCEC 8C42A610 */  lw        $v0, -0x59f0($v0)
+/* 80E8 8002CCE8 3C02800A */  lui       $v0, %hi(D_8009A610)
+/* 80EC 8002CCEC 8C42A610 */  lw        $v0, %lo(D_8009A610)($v0)
 /* 80F0 8002CCF0 3C0B800A */  lui       $t3, 0x800a
 /* 80F4 8002CCF4 256BA64C */  addiu     $t3, $t3, -0x59b4
 /* 80F8 8002CCF8 AD040040 */  sw        $a0, 0x40($t0)
@@ -71,8 +71,8 @@ glabel nuGfxTaskStart
 .L8002CDC0:
 /* 81C0 8002CDC0 0C018250 */  jal       osSetIntMask
 /* 81C4 8002CDC4 24040001 */   addiu    $a0, $zero, 1
-/* 81C8 8002CDC8 3C05800A */  lui       $a1, 0x800a
-/* 81CC 8002CDCC 24A5A618 */  addiu     $a1, $a1, -0x59e8
+/* 81C8 8002CDC8 3C05800A */  lui       $a1, %hi(nuGfxTaskSpool)
+/* 81CC 8002CDCC 24A5A618 */  addiu     $a1, $a1, %lo(nuGfxTaskSpool)
 /* 81D0 8002CDD0 8CA30000 */  lw        $v1, ($a1)
 /* 81D4 8002CDD4 0040202D */  daddu     $a0, $v0, $zero
 /* 81D8 8002CDD8 24630001 */  addiu     $v1, $v1, 1

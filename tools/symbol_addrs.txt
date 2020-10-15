@@ -264,8 +264,6 @@ HasMerleeCasts;0x8003F3F4
 HasMerleeCastsLeft;0x802619C8
 HealActor;0x80270CA4
 HidePlayerShadow;0x802D0DA0
-!IP6_Hdlr;0x8006AC44
-!IP7_Hdlr;0x8006AC50
 IdleFlyToGoal;0x8027BBB8
 IdleJumpToGoal;0x8027910C
 IdleRunToGoal;0x8027A264
@@ -316,7 +314,6 @@ MultiplyVec2ByActorScale;0x80254048
 MultiplyVec3ByActorScale;0x802540DC
 NOP_npc_callback;0x80038470
 NOP_state;0x80112B90
-!NoMoreRcpInts;0x8006AE30
 NpcFaceNpc;0x802CEE80
 NpcFacePlayer;0x802CECC8
 NpcFlyTo;0x802CE6FC
@@ -675,7 +672,6 @@ cam_target_actor;0x8024E43C
 can_pause;0x800E69DC
 can_switch_to_player;0x802A5818
 cancel_message;0x80125B08
-!cart;0x8006AC80
 check_block_input;0x80268ECC
 check_input_hammer;0x800E60E0
 check_input_jump;0x800E6160
@@ -731,8 +727,10 @@ contReadData;0x80060738
 contReadNW;0x800607B4
 contRetrace;0x8006065C
 contRmbCheckMesg;0x8005FD10
-contRmbControl;0x8005FB10
+contRmbForceStopEndMesg;0x8005FE54
+contRmbForceStopMesg;0x8005FE0C
 contRmbStartMesg;0x8005FD58
+contRmbStopMesg;0x8005FDE4
 copy_matrix;0x80029720
 corrupted;0x8006D1D8
 corrupted_init;0x8006D080
@@ -742,7 +740,6 @@ cosine;0x800293D4
 coss;0x80061F00
 count_power_plus;0x80263B10
 count_targets;0x80269660
-!counter;0x8006AC5C
 crash_create_monitor;0x8002C8B0
 crash_delay_msec;0x8002BF40
 crash_monitor_thread;0x8002C81C
@@ -844,10 +841,8 @@ enable_player_shadow;0x800E00B0
 enable_player_static_collisions;0x800E0140
 enable_world_fog;0x8011BB50
 end_battle;0x80244A50
-!endrcp;0x8006AB6C
 enemy_create_target_list;0x80263048
 enforce_hpfp_limits;0x800E786C
-!enqueueRunning;0x8006AF34
 entity_get_collision_flags;0x801108B8
 entity_init_BlueSwitch;0x802E2380
 entity_init_Chest;0x802E7D84
@@ -874,7 +869,6 @@ fio_serialize_state;0x8002B630
 fio_validate_file_checksum;0x8002B0F8
 fio_validate_header_checksums;0x8002AF70
 fio_write_flash;0x8002B948
-!firstnmi;0x8006AE6C
 fixed_var_to_float;0x802C4920
 float_to_fixed_var;0x802C496C
 free_icon;0x801448F4
@@ -958,7 +952,7 @@ get_variable_index_alt;0x802C7F20
 get_world_fog_color;0x8011BBD8
 get_world_fog_distance;0x8011BBB4
 gfxPreNMI_Callback;0x8002670C
-gfxRetrace_Callback;0x8002605C
+!gfxRetrace_Callback;0x8002605C
 gfx_draw_frame;0x80026B08
 goto_map;0x802CA304
 gravity_use_fall_parms;0x800E306C
@@ -994,9 +988,6 @@ guScale;0x80067700
 guScaleF;0x800677C0
 guTranslate;0x80067820
 guTranslateF;0x80067900
-!handle_CPU;0x8006B038
-!handle_break;0x8006AEE8
-!handle_interrupt;0x8006AC08
 has_full_fp;0x800EA37C
 has_full_hp;0x800EA360
 heap_free;0x8002AD2C
@@ -1102,8 +1093,6 @@ move_player;0x800E2778
 mtx_ident_mirror_y;0x80038478
 mtx_mirror_y;0x80254288
 next_demo_scene;0x800380F4
-!next_interrupt;0x8006AC0C
-!noEnqueue;0x8006B16C
 npc_do_other_npc_collision;0x8003900C
 npc_do_player_collision;0x800392D8
 npc_do_world_collision;0x80038AFC
@@ -1153,7 +1142,7 @@ nuScCreateScheduler;0x8005E9B0
 !nuScEventBroadcast;0x8005F0C0
 nuScEventHandler;0x8005EFA8
 nuScExecuteAudio;0x8005EBE0
-nuScExecuteGraphics;0x8005ED14
+!nuScExecuteGraphics;0x8005ED14
 nuScGetAudioMQ;0x8005EF84
 nuScGetFrameRate;0x8005EF9C
 nuScGetGfxMQ;0x8005EF78
@@ -1179,7 +1168,6 @@ osAiSetNextBuffer;0x80061680
 osCartRomInit;0x80060F10
 osCheckId;0x80069DD4
 osCheckPackId;0x80069AA4
-!osCleanupThread;0x8006B350
 osContAddressCrc;0x8006C860
 osContDataCrc;0x8006C8CC
 osContGetInitData;0x80061D1C
@@ -1198,7 +1186,6 @@ osDequeueThread;0x80066200
 osDestroyThread;0x8006C950
 osDevMgrMain;0x80061090
 __osDisableInt;0x8006B360
-!osDispatchThread;0x8006B1D4
 osDispatchThreadSave;0x8006B1F4
 osEPiLinkHandle;0x80060EC0
 osEPiRawReadIo;0x8006B570
@@ -1207,8 +1194,6 @@ osEPiRawWriteIo;0x8006B6E0
 osEPiReadIo;0x80060DC0
 osEPiStartDma;0x80060E20
 osEPiWriteIo;0x80060D60
-!osEnqueueAndYield;0x8006B06C
-!osEnqueueThread;0x8006B174
 osExceptionPreamble;0x8006AA00
 osFlashAllErase;0x8006F308
 osFlashClearStatus;0x8006F29C
@@ -1234,10 +1219,9 @@ osInvalICache;0x800617D0
 osJamMesg;0x800655B0
 osMapTLB;0x800667A0
 osMapTLBRdb;0x8006CA30
-osMotorAccess;0x80067E00
+__osMotorAccess;0x80067E00
 osMotorInit;0x80067F44
-osMotorStop;0x8005F920
-!osNop;0x8006B1CC
+contRmbControl;0x8005F920
 osPackReadData;0x80061AC4
 osPackRequestData;0x80061DD0
 osPfsAllocateFile;0x80068190
@@ -1266,7 +1250,6 @@ osPiGetAccess;0x800614A4
 osPiGetCmdQueue;0x8006B550
 osPiRawStartDma;0x8006B480
 osPiRelAccess;0x80061510
-!osPopThread;0x8006B1BC
 osProbeTLB;0x80066860
 osRecvMesg;0x800656F0
 osRepairPackId;0x800697B8
@@ -1324,7 +1307,6 @@ osVirtualToPhysical;0x80061E90
 osWritebackDCache;0x80061850
 osWritebackDCacheAll;0x800618D0
 osYieldThread;0x80066240
-!panic;0x8006AF4C
 parent_collider_to_model;0x8005B780
 partner_can_use_ability;0x800EB42C
 partner_get_ride_script;0x800EB638
@@ -1439,7 +1421,6 @@ player_create_target_list;0x8026302C
 player_enter_blue_pipe;0x802E8CCC
 player_jump;0x802D14E0
 poll_rumble;0x80028EE0
-!prenmi;0x8006AE3C
 proutSprintf;0x80065548
 push_entity_matrix;0x802E8E4C
 queue_render_task;0x8011D910
@@ -1447,7 +1428,6 @@ rand_int;0x800299FC
 read_background_size;0x80145E28
 recover_fp;0x800EA264
 recover_hp;0x800EA2CC
-!redispatch;0x8006AF00
 remove_actor_decoration;0x80267234
 remove_all_effects;0x8005A4E0
 remove_consumable;0x800EA47C
@@ -1488,9 +1468,6 @@ round;0x80029AC4
 save_game_at_player_position;0x802E11A0
 save_ground_pos;0x800E54E0
 save_tattle_flags;0x80253D10
-!savercp;0x8006AB34
-!send_done;0x8006AFC4
-!send_mesg;0x8006AF7C
 set_action_state;0x800E5DA4
 set_actor_current_position;0x80269C24
 set_actor_home_position;0x80269D20
@@ -1673,7 +1650,6 @@ sin_rad;0x8002A16C
 sins;0x800645F0
 sort_items;0x800E76CC
 sort_scripts;0x802C3000
-!sp_other_break;0x8006AD2C
 spawn_drops;0x80048280
 spr_appendMDL_component;0x802DC8F4
 spr_draw_component;0x802DCEDC
@@ -1725,8 +1701,6 @@ suspend_all_script;0x802C4420
 suspend_group_others;0x802C46A8
 suspend_group_script;0x802C42D8
 suspend_group_script_index;0x802C44F8
-!sw1;0x8006AEC4
-!sw2;0x8006AEA0
 switch_order;0x80243918
 switch_to_partner;0x80242F00
 switch_to_player;0x80242AC8
@@ -1895,10 +1869,10 @@ func_802B71E8;0x802B71E8
 func_802BD7DC;0x802BD7DC
 func_802BE070;0x802BE070
 !func_8006AA34;0x8006AA34
-!vi;0x8006AD3C
-!ai;0x8006AD64
-!si;0x8006AD90
-!pi;0x8006ADB8
-!dp;0x8006AE0C
-!rcp;0x8006ACC8
-!savecontext;0x8006AA34
+SetTattleString;0x80045A58
+!osEnqueueAndYield;0x8006B06C
+!osPopThread;0x8006B1BC
+!osDispatchThread;0x8006B1D4
+!osEnqueueThread;0x8006B174
+!send_mesg;0x8006AF7C
+!handle_CPU;0x8006B038

@@ -21,8 +21,8 @@ glabel func_80029860
 /* 4CA0 800298A0 0C019560 */  jal       osCreateMesgQueue
 /* 4CA4 800298A4 24060001 */   addiu    $a2, $zero, 1
 /* 4CA8 800298A8 27A50010 */  addiu     $a1, $sp, 0x10
-/* 4CAC 800298AC 3C04800A */  lui       $a0, 0x800a
-/* 4CB0 800298B0 8C84A638 */  lw        $a0, -0x59c8($a0)
+/* 4CAC 800298AC 3C04800A */  lui       $a0, %hi(carthandle)
+/* 4CB0 800298B0 8C84A638 */  lw        $a0, %lo(carthandle)($a0)
 /* 4CB4 800298B4 24060001 */  addiu     $a2, $zero, 1
 /* 4CB8 800298B8 A3A00012 */  sb        $zero, 0x12($sp)
 /* 4CBC 800298BC AFB00014 */  sw        $s0, 0x14($sp)
