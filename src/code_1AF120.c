@@ -14,15 +14,3 @@ ApiStatus GetDamageIntensity(ScriptInstance* script, s32 isInitialCall) {
 }
 
 INCLUDE_ASM(s32, "code_1AF120", ActorAddMovePos);
-/*ApiStatus ActorAddMovePos(ScriptInstance* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    Actor* actor;
-    Vec3f* actorMoveCurrentPos;
-
-    actor = (Actor*)get_variable(script, *args++);
-    actorMoveCurrentPos = &actor->moveCurrentPos;
-    actorMoveCurrentPos->x += get_variable(script, *args++);
-    actorMoveCurrentPos->y += get_variable(script, *args++);
-    actorMoveCurrentPos->z += get_variable(script, *args++);
-    return ApiStatus_DONE2;
-}*/
