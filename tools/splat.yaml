@@ -345,7 +345,7 @@ segments:
     start: 0x415D90
     vram: 0x802A1000
     files:
-    - [0x415D90, "c", "code_415D90"]
+    - [0x415D90, "c"]
   - [0x4200C0, "bin"] # todo split this further
   - name: code
     type: code
@@ -353,8 +353,8 @@ segments:
     vram: 0x80280000
     files:
     - [0x7e0e80, "c", "code_7e0e80"]
-    - [0x7E2AA0, "c", "code_7E2AA0"]
-    - [0x7E3700, "c", "code_7E3700"]
+    - [0x7E2AA0, "c"]
+    - [0x7E3700, "c"]
     - [0x7e4d00, "bin"]
   - [0x7E73A0, "bin"]  # todo split this further
   - name: code
@@ -363,7 +363,15 @@ segments:
     vram: 0x802B7000
     files:
     - [0xe20eb0, "c", "code_e20eb0"]
-  - [0xe215c0, "bin"]
+  - [0xE215C0, "bin"]
+  - name: code
+    type: code
+    start: 0xE21870
+    vram: 0x802B7000
+    files:
+    - [0xE21870, "c"]
+    - [0xE21EB0, "bin"]
+  - [0xE225B0, "bin"]
   - [0xF007C0, "bin", "Battle_Fanfare_02"] # BGM start
   - [0xF02160, "bin", "Hey_You_03"]
   - [0xF03740, "bin", "The_Goomba_King_s_Decree_07"]

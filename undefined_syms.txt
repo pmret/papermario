@@ -213,6 +213,8 @@ gCurrentSaveFile = 0x800DACC0;
 gMapFlags = 0x802DA480;
 gMapVars = 0x802DA484;
 
+gEffectTable = 0x8007F214;
+
 MarioEnterStage = 0x80284A40;
 PeachEnterStage = 0x80284D04;
 HandleEvent_Player = 0x802852D4;

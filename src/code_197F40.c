@@ -206,7 +206,7 @@ ApiStatus ActorExists(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     ActorId actorID = get_variable(script, *args++);
 
-    if (actorID == -0x7F) {
+    if (actorID == ActorId_SELF) {
         actorID = script->ownerActorID;
     }
 

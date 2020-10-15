@@ -70,6 +70,9 @@ submodules:
 split:
 	rm -rf $(DATA_DIRS) && ./tools/n64splat/split.py baserom.z64 tools/splat.yaml . --modes ld bin
 
+split-all:
+	rm -rf $(DATA_DIRS) && ./tools/n64splat/split.py baserom.z64 tools/splat.yaml . --modes all
+
 $(TARGET).ld: tools/splat.yaml
 	./tools/n64splat/split.py baserom.z64 tools/splat.yaml . --modes ld
 
