@@ -78,11 +78,35 @@ INCLUDE_ASM(s32, "code_190B20", func_80265CE8);
 
 INCLUDE_ASM(s32, "code_190B20", func_80265D44);
 
+#ifdef NON_MATCHING
+typedef struct {
+    Element element;
+    s32 defense;
+} DefenseTableEntry;
+s32 lookup_defense(DefenseTableEntry* defenseTable, Element elementKey) {
+    DefenseTableEntry* row;
+    s32 normalDefense = 0;
+
+    for (row = defenseTable; row->element != Element_END; row++) {
+        if (row->element == Element_NORMAL) {
+            normalDefense = row->defense;
+        }
+
+        if (row->element == elementKey) {
+            return row->defense;
+        }
+    }
+
+    // Fall back to normal defense if given element is not specified in table
+    return normalDefense;
+}
+#else
 INCLUDE_ASM(s32, "code_190B20", lookup_defense);
+#endif
 
-INCLUDE_ASM(s32, "code_190B20", lookup_status_chance);
+INCLUDE_ASM(s32, "code_190B20", lookup_status_chance); // exactly (?) the same as lookup_defense
 
-INCLUDE_ASM(s32, "code_190B20", lookup_status_duration_mod);
+INCLUDE_ASM(s32, "code_190B20", lookup_status_duration_mod); // exactly (?) the same as lookup_defense
 
 INCLUDE_ASM(s32, "code_190B20", inflict_status);
 
@@ -138,9 +162,32 @@ INCLUDE_ASM(s32, "code_190B20", func_8026709C);
 
 INCLUDE_ASM(s32, "code_190B20", func_802670C8);
 
-INCLUDE_ASM(s32, "code_190B20", add_part_decoration);
+#ifdef NON_MATCHING
+// Register allocation issues (decorationIndex is placed in s2 for seemingly no reason?).
+// Should be easy to clean up once DecorationTable is more understood
+void add_part_decoration(ActorPart* part, s32 decorationIndex, DecorationId decorationType) {
+    if (part->idleAnimations && (part->flags & 2) == 0) {
+        DecorationTable* decoration = &part->decorationTable->unk_00[decorationIndex];
+        _remove_part_decoration(part, decorationIndex);
+        decoration->decorationType[0] = decorationType;
+        decoration->unk_8BA = 1;
+        decoration->unk_8BC = 0;
+        func_8025CEC8(part);
+    }
+}
+#else
+INCLUDE_ASM(void, "code_190B20", add_part_decoration, ActorPart* part, s32 decorationIndex,
+            DecorationId decorationType);
+#endif
 
-INCLUDE_ASM(s32, "code_190B20", add_actor_decoration);
+void add_actor_decoration(Actor* actor, s32 decorationIndex, DecorationId decorationType) {
+    ActorPart* part;
+    for (part = actor->partsTable; part != NULL; part = part->nextPart) {
+        if ((part->flags & 0x100001) == 0 && part->idleAnimations && (part->flags & 2) == 0) {
+            add_part_decoration(part, decorationIndex, decorationType);
+        }
+    }
+}
 
 void remove_part_decoration(ActorPart* part, s32 decorationIndex) {
     _remove_part_decoration(part, decorationIndex);
@@ -188,7 +235,7 @@ void remove_part_shadow(s32 actorId, s32 partIndex) {
     func_80112328(part->shadow);
 }
 
-void create_part_shadow_by_ptr(UNK_TYPE unused, ActorPart* part) {
+void create_part_shadow_by_ptr(UNK_TYPE arg0, ActorPart* part) {
     part->flags &= ~4;
     part->shadow = create_shadow_type(0, part->currentPos.x, part->currentPos.y, part->currentPos.z);
     part->shadowScale = part->size[0] / 24.0;
@@ -215,3 +262,4 @@ INCLUDE_ASM(s32, "code_190B20", show_foreground_models);
 INCLUDE_ASM(s32, "code_190B20", StartRumbleWithParams);
 
 INCLUDE_ASM(s32, "code_190B20", start_rumble_type);
+

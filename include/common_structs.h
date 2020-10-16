@@ -1136,7 +1136,10 @@ typedef struct DecorationTable {
     /* 0x8AC */ u8 effectType; /* 0 =  blur, 14 = none? */
     /* 0x8AD */ char unk_8AD[11];
     /* 0x8B8 */ u8 decorationType[2];
-    /* 0x8BA */ char unk_8BA[46];
+    /* 0x8BA */ u8 unk_8BA;
+    /* 0x8BB */ u8 unk_8BB;
+    /* 0x8BC */ u8 unk_8BC;
+    /* 0x8BD */ char unk_8BD[43];
 } DecorationTable; // size = 0x8E8
 
 typedef struct Shop {
