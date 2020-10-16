@@ -43,5 +43,5 @@ for root, dirs, files in os.walk(asm_dir):
         if "/os" not in root:
             do_dir(root, asm_dir)
 
-for thing in sorted(sizes.keys(), key=lambda x: sizes[x][3]):
-    print(thing.ljust(25) + str(sizes[thing][3]))
+for thing in sorted(sizes.keys(), key=lambda x: sizes[x][2]):
+    print(thing.ljust(25) + str(sizes[thing][2]))

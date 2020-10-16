@@ -17,10 +17,10 @@ ApiStatus func_80260DB8(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus func_80260DD8(ScriptInstance* script, s32 isInitialCall) {
     Actor* player = gBattleStatus.playerActor;
-    
+
     if (!gPlayerData.hasActionCommands) {
         s32 var = player->varTable[0];
-        
+
         if (var >= rand_int(100)) {
             script->varTable[0] = 1;
         } else {
@@ -57,7 +57,7 @@ INCLUDE_ASM(s32, "code_18F340", func_8026127C);
 
 ApiStatus func_80261388(ScriptInstance* script, s32 isInitialCall) {
     s32 partnerActorExists = gBattleStatus.partnerActor != NULL;
-    
+
     script->varTable[0] = FALSE;
     if (partnerActorExists) {
         script->varTable[0] = TRUE;

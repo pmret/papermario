@@ -10,7 +10,7 @@ ApiStatus LoadMoveScript(ScriptInstance* script, s32 isInitialCall) {
 
     dma_copy(moveScript[0], moveScript[1], moveScript[2]);
     script->varTable[0] = moveScript[3];
-    
+
     deduct_current_move_fp();
 
     if (gBattleStatus.flags2 & 0x8000000) {

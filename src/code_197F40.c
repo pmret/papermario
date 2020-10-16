@@ -225,9 +225,15 @@ INCLUDE_ASM(s32, "code_197F40", func_8026DF88);
 
 INCLUDE_ASM(s32, "code_197F40", func_8026E020);
 
-INCLUDE_ASM(s32, "code_197F40", func_8026E038);
+ApiStatus func_8026E038(ScriptInstance* script, s32 isInitialCall) {
+    gBattleStatus.unk_74 = *script->ptrReadPos;
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "code_197F40", SetBattleInputMask);
+ApiStatus SetBattleInputMask(ScriptInstance* script, s32 isInitialCall) {
+    gBattleStatus.inputBitmask = *script->ptrReadPos;
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_197F40", SetBattleInputButtons);
 

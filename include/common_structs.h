@@ -531,7 +531,8 @@ typedef struct BattleStatus {
     /* 0x048 */ u8 currentSubmenu;
     /* 0x049 */ char unk_49[10];
     /* 0x053 */ u8 stratsLastCursorPos;
-    /* 0x054 */ char unk_54[36];
+    /* 0x054 */ char unk_54[32];
+    /* 0x074 */ s32 unk_74;
     /* 0x078 */ u8 totalStarPoints;
     /* 0x079 */ u8 pendingStarPoints; /* how many to add */
     /* 0x07A */ u8 incrementStarPointDelay; /* related to star points, set to 0x28 when they are dropped */
