@@ -103,7 +103,7 @@ typedef struct Npc {
 } Npc; // size = 0x340
 
 typedef struct PlayerData {
-    /* 0x000 */ u8 bootsLevel;
+    /* 0x000 */ s8 bootsLevel;
     /* 0x001 */ s8 hammerLevel;
     /* 0x002 */ s8 curHP;
     /* 0x003 */ s8 curMaxHP;
@@ -113,7 +113,7 @@ typedef struct PlayerData {
     /* 0x007 */ u8 hardMaxFP;
     /* 0x008 */ u8 maxBP;
     /* 0x009 */ u8 level;
-    /* 0x00A */ u8 hasActionCommands;
+    /* 0x00A */ s8 hasActionCommands;
     /* 0x00B */ char unk_0B;
     /* 0x00C */ s16 coins;
     /* 0x00E */ s8 fortressKeyCount;
@@ -1285,7 +1285,7 @@ typedef struct Actor {
     /* 0x211 */ u8 debuffDuration;
     /* 0x212 */ u8 staticStatus; /* 0B = yes */
     /* 0x213 */ u8 staticDuration;
-    /* 0x214 */ u8 stoneStatus; /* 0C = yes */
+    /* 0x214 */ s8 stoneStatus; /* 0C = yes */
     /* 0x215 */ u8 stoneDuration;
     /* 0x216 */ u8 koStatus; /* 0D = yes */
     /* 0x217 */ u8 koDuration;
