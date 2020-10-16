@@ -524,6 +524,20 @@ typedef struct Camera {
     /* 0x538 */ char unk_538[32];
 } Camera; // size = 0x558
 
+typedef struct BattleStatusUnkInner {
+    /* 0x00 */ char unk_00[0x10];
+    /* 0x10 */ s16 unk_10;
+    /* 0x12 */ char unk_12[8];
+    /* 0x1A */ s16 unk_1A;
+    /* 0x1C */ char unk_1C[8];
+    /* 0x24 */ s16 unk_24;
+} BattleStatusUnkInner; // size = unknown
+
+typedef struct BattleStatusUnk {
+    /* 0x00 */ char unk_00[0xC];
+    /* 0x0C */ BattleStatusUnkInner* unk_0C;
+} BattleStatusUnk; // size = unknown
+
 typedef struct BattleStatus {
     /* 0x000 */ s32 flags1;
     /* 0x004 */ s32 flags2;
@@ -552,17 +566,18 @@ typedef struct BattleStatus {
     /* 0x08C */ char unk_8C[2];
     /* 0x08E */ u8 initialEnemyCount; /* used for SP award bonus */
     /* 0x08F */ char unk_8F[7];
-    /* 0x096 */ u8 hammerCharge;
-    /* 0x097 */ u8 jumpCharge;
+    /* 0x096 */ s8 hammerCharge;
+    /* 0x097 */ s8 jumpCharge;
     /* 0x098 */ char unk_98;
     /* 0x099 */ u8 dangerFlags; /* 1 = danger, 2 = peril */
     /* 0x09A */ u8 outtaSightActive;
-    /* 0x09B */ u8 turboChargeTurnsLeft;
+    /* 0x09B */ s8 turboChargeTurnsLeft;
     /* 0x09C */ u8 turboChargeAmount; /* unused? */
-    /* 0x09D */ u8 waterBlockTurnsLeft;
+    /* 0x09D */ s8 waterBlockTurnsLeft;
     /* 0x09E */ u8 waterBlockAmount; /* unused? */
-    /* 0x09F */ char unk_9F[5];
-    /* 0x0A4 */ u8 cloudNineTurnsLeft;
+    /* 0x09F */ char unk_9F;
+    /* 0x0A0 */ s32* unk_A0;
+    /* 0x0A4 */ s8 cloudNineTurnsLeft;
     /* 0x0A5 */ u8 cloudNineDodgeChance; /* = 50% */
     /* 0x0A6 */ char unk_A6[2];
     /* 0x0A8 */ s32 cloudNineEffect;
@@ -631,7 +646,7 @@ typedef struct BattleStatus {
     /* 0x432 */ char unk_432[2];
     /* 0x434 */ s32 unk_434;
     /* 0x438 */ s32* foregroundModelList;
-    /* 0x43C */ UNK_PTR turboChargeCounter;
+    /* 0x43C */ BattleStatusUnk* unk_43C;
     /* 0x440 */ u8 tattleFlags[27];
     /* 0x45B */ char unk_45B[17];
     /* 0x46C */ s32 battleState; /* 0 = load assets, 1 = create actors, 4 = start scripts, 7 & 8 = unk */
@@ -1286,20 +1301,20 @@ typedef struct Actor {
     /* 0x20C */ u32* statusTable;
     /* 0x210 */ u8 debuff;
     /* 0x211 */ u8 debuffDuration;
-    /* 0x212 */ u8 staticStatus; /* 0B = yes */
+    /* 0x212 */ s8 staticStatus; /* 0B = yes */
     /* 0x213 */ u8 staticDuration;
     /* 0x214 */ s8 stoneStatus; /* 0C = yes */
     /* 0x215 */ u8 stoneDuration;
     /* 0x216 */ u8 koStatus; /* 0D = yes */
     /* 0x217 */ u8 koDuration;
-    /* 0x218 */ u8 transStatus; /* 0E = yes */
+    /* 0x218 */ s8 transStatus; /* 0E = yes */
     /* 0x219 */ u8 transDuration;
     /* 0x21A */ char unk_21A[2];
     /* 0x21C */ u8 status;
     /* 0x21D */ char unk_21D[3];
-    /* 0x220 */ u8 bGlowing;
+    /* 0x220 */ u8 isGlowing;
     /* 0x221 */ u8 attackBoost;
-    /* 0x222 */ u8 defenseBoost;
+    /* 0x222 */ s8 defenseBoost;
     /* 0x223 */ u8 chillOutAmount; /* attack reduction */
     /* 0x224 */ u8 chillOutTurns;
     /* 0x225 */ char unk_225[7];
@@ -1314,7 +1329,7 @@ typedef struct Actor {
     /* 0x42C */ struct Shadow* shadow; /* might be shadow ID */
     /* 0x430 */ f32 shadowScale; /* = actor size / 24.0 */
     /* 0x434 */ s16 renderMode; /* initially 0xD, set to 0x22 if any part is transparent */
-    /* 0x436 */ char unk_436[2];
+    /* 0x436 */ s16 unk_436;
     /* 0x438 */ s32 x[2]; /* ??? see FUN_80253974 */
     /* 0x440 */ struct MenuIcon* ptrDefuffIcon;
 } Actor; // size = 0x444

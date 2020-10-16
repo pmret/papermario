@@ -83,6 +83,7 @@ typedef struct {
     Element element;
     s32 defense;
 } DefenseTableEntry;
+
 s32 lookup_defense(DefenseTableEntry* defenseTable, Element elementKey) {
     DefenseTableEntry* row;
     s32 normalDefense = 0;
@@ -112,7 +113,99 @@ INCLUDE_ASM(s32, "code_190B20", inflict_status);
 
 INCLUDE_ASM(s32, "code_190B20", inflict_partner_ko);
 
-INCLUDE_ASM(s32, "code_190B20", get_defense);
+s32 get_defense(Actor* actor, s32* defenseTable, s32 elementFlags) {
+    s32 defense;
+    s32 minDefense = 0xFF;
+
+    if (defenseTable != NULL) {
+        if (elementFlags & 2) {
+            defense = lookup_defense(defenseTable, Element_FIRE);
+            if (defense < minDefense) {
+                minDefense = defense;
+            }
+        }
+        if (elementFlags & 4) {
+            defense = lookup_defense(defenseTable, Element_WATER);
+            if (defense < minDefense) {
+                minDefense = defense;
+            }
+        }
+        if (elementFlags & 8) {
+            defense = lookup_defense(defenseTable, Element_ICE);
+            if (defense < minDefense) {
+                minDefense = defense;
+            }
+        }
+        // Element_MYSTERY missing?
+        if (elementFlags & 0x10) {
+            defense = lookup_defense(defenseTable, Element_MAGIC);
+            if (defense < minDefense) {
+                minDefense = defense;
+            }
+        }
+        if (elementFlags & 0x40) {
+            defense = lookup_defense(defenseTable, Element_HAMMER);
+            if (defense < minDefense) {
+                minDefense = defense;
+            }
+        }
+        if (elementFlags & 0x80) {
+            defense = lookup_defense(defenseTable, Element_JUMP);
+            if (defense < minDefense) {
+                minDefense = defense;
+            }
+        }
+        if (elementFlags & 0x100) {
+            defense = lookup_defense(defenseTable, Element_COSMIC);
+            if (defense < minDefense) {
+                minDefense = defense;
+            }
+        }
+        if (elementFlags & 0x200) {
+            defense = lookup_defense(defenseTable, Element_BLAST);
+            if (defense < minDefense) {
+                minDefense = defense;
+            }
+        }
+        if (elementFlags & 0x20) {
+            defense = lookup_defense(defenseTable, Element_SHOCK);
+            if (defense < minDefense) {
+                minDefense = defense;
+            }
+        }
+        if (elementFlags & 0x800) {
+            defense = lookup_defense(defenseTable, Element_QUAKE);
+            if (defense < minDefense) {
+                minDefense = defense;
+            }
+        }
+        if (elementFlags & 0x40000) {
+            defense = lookup_defense(defenseTable, Element_THROW);
+            if (defense < minDefense) {
+                minDefense = defense;
+            }
+        }
+    }
+
+    // If no element flags were set, fall back to normal defense.
+    if (minDefense == 0xFF) {
+        defense = lookup_defense(defenseTable, Element_NORMAL);
+        if (defense < 0xFF) {
+            minDefense = defense;
+        }
+    }
+
+    if (elementFlags & 0x8000000) { // "ignore defense" flag
+        if (minDefense == 99) {
+            // Immune
+            minDefense = 999;
+        } else if (minDefense > 0) {
+            minDefense = 0;
+        }
+    }
+
+    return minDefense;
+}
 
 INCLUDE_ASM(s32, "code_190B20", func_802664DC);
 
@@ -241,7 +334,73 @@ void create_part_shadow_by_ptr(UNK_TYPE arg0, ActorPart* part) {
     part->shadowScale = part->size[0] / 24.0;
 }
 
-INCLUDE_ASM(s32, "code_190B20", remove_player_buffs);
+void func_80071A50(s32, f32 x, f32 y, f32 z, f32 scale /* maybe */, s32);
+void func_80071C30(s32, f32 x, f32 y, f32 z, f32 scale /* maybe */, s32);
+
+void remove_player_buffs(PlayerBuff buffs) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    Actor* player = battleStatus->playerActor;
+    Actor* partner = battleStatus->partnerActor;
+    ActorPart* playerPartsTable = player->partsTable;
+
+    if (buffs & 1) {
+        battleStatus->jumpCharge = 0;
+        battleStatus->flags1 &= ~0x20000000;
+    }
+    if (buffs & 2) {
+        battleStatus->hammerCharge = 0;
+        battleStatus->flags1 &= ~0x10000000;
+    }
+    if (buffs & 8) {
+        player->stoneDuration = 0;
+        player->stoneStatus = 0;
+    }
+    if (buffs & 0x10) {
+        battleStatus->hustleTurns = 0;
+        battleStatus->flags1 &= ~0x04000000;
+    }
+    if ((buffs & 0x20) && (player->staticStatus != 0)) {
+        player->staticDuration = 0;
+        player->staticStatus = 0;
+        func_800479A0(player->unk_436);
+    }
+    if ((buffs & 0x40) && (player->transStatus != 0)) {
+        player->transDuration = 0;
+        player->transStatus = 0;
+        playerPartsTable->flags &= ~0x100;
+        func_80047AA8(player->unk_436);
+    }
+    if ((buffs & 0x200) && (battleStatus->waterBlockTurnsLeft != 0)) {
+        battleStatus->waterBlockTurnsLeft = 0;
+        battleStatus->unk_43C->unk_0C->unk_10 = 0;
+        battleStatus->unk_A0[0] |= 0x10;
+
+        func_80071A50(1, player->currentPos.x, player->currentPos.y + 18.0f, player->currentPos.z + 5.0f, 1.5f, 0xA);
+        func_80071C30(0, player->currentPos.x - 10.0f, player->currentPos.y + 5.0f, player->currentPos.z + 5.0f, 1.0f, 0x18);
+        func_80071C30(0, player->currentPos.x - 15.0f, player->currentPos.y + 32.0f, player->currentPos.z + 5.0f, 1.0f, 0x18);
+        func_80071C30(1, player->currentPos.x + 15.0f, player->currentPos.y + 22.0f, player->currentPos.z + 5.0f, 1.0f, 0x18);
+
+        battleStatus->unk_A0 = NULL;
+        play_sound(0x299);
+    }
+    if ((buffs & 0x100) && (battleStatus->turboChargeTurnsLeft != 0)) {
+        battleStatus->turboChargeTurnsLeft = 0;
+        battleStatus->unk_43C->unk_0C->unk_24 = 0;
+    }
+    if ((buffs & 0x80) && (battleStatus->cloudNineTurnsLeft != 0)) {
+        battleStatus->cloudNineTurnsLeft = 0;
+        battleStatus->unk_43C->unk_0C->unk_1A = 0;
+        remove_effect(battleStatus->cloudNineEffect);
+        battleStatus->cloudNineEffect = 0;
+    }
+
+    if ((partner != NULL) && (buffs & 0x10000)) {
+        BattleStatus* bs = &gBattleStatus;
+
+        partner->isGlowing = FALSE;
+        bs->flags1 &= ~0x40000000;
+    }
+}
 
 INCLUDE_ASM(s32, "code_190B20", func_8026777C);
 
