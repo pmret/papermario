@@ -181,7 +181,11 @@ void remove_part_shadow(s32 actorId, s32 partIndex) {
     func_80112328(part->shadow);
 }
 
-INCLUDE_ASM(s32, "code_190B20", func_802673E4);
+void create_part_shadow_by_ptr(UNK_TYPE unused, ActorPart* part) {
+    part->flags &= ~4;
+    part->shadow = create_shadow_type(0, part->currentPos.x, part->currentPos.y, part->currentPos.z);
+    part->shadowScale = part->size[0] / 24.0;
+}
 
 INCLUDE_ASM(s32, "code_190B20", remove_player_buffs);
 
