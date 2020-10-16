@@ -146,7 +146,14 @@ void remove_part_decoration(ActorPart* part, s32 decorationIndex) {
     _remove_part_decoration(part, decorationIndex);
 }
 
-INCLUDE_ASM(s32, "code_190B20", remove_actor_decoration);
+void remove_actor_decoration(Actor* actor, s32 decorationIndex) {
+    ActorPart* part;
+    for (part = actor->partsTable; part != NULL; part = part->nextPart) {
+        if ((part->flags & 0x100001) == 0 && part->idleAnimations && (part->flags & 2) == 0) {
+            remove_part_decoration(part, decorationIndex);
+        }
+    }
+}
 
 s32 heroes_is_ability_active(Actor* actor, Ability ability) {
     s32 actorGenus = actor->actorID & 0x700;
