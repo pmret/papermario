@@ -1,10 +1,16 @@
 #include "common.h"
 
+ActorPart* get_actor_part(Actor* actor, s32 partIndex);
+
 INCLUDE_ASM(s32, "code_190B20", create_target_list);
 
-INCLUDE_ASM(s32, "code_190B20", player_create_target_list);
+void player_create_target_list(Actor* actor) {
+    create_target_list(actor, 0);
+}
 
-INCLUDE_ASM(s32, "code_190B20", enemy_create_target_list);
+void enemy_create_target_list(Actor* actor) {
+    create_target_list(actor, 1);
+}
 
 INCLUDE_ASM(s32, "code_190B20", func_80263064);
 
@@ -42,9 +48,13 @@ INCLUDE_ASM(s32, "code_190B20", func_80263E08);
 
 INCLUDE_ASM(s32, "code_190B20", set_animation_rate);
 
-INCLUDE_ASM(s32, "code_190B20", set_actor_yaw);
+void set_actor_yaw(s32 actorId, s32 yaw) {
+    get_actor(actorId)->yaw = yaw;
+}
 
-INCLUDE_ASM(s32, "code_190B20", set_part_yaw);
+void set_part_yaw(s32 actorID, s32 partIndex, s32 value) {
+    get_actor_part(get_actor(actorID), partIndex)->yaw = value;
+}
 
 INCLUDE_ASM(s32, "code_190B20", func_80263FE8);
 
@@ -58,7 +68,7 @@ INCLUDE_ASM(s32, "code_190B20", add_xz_vec3f_copy2);
 
 INCLUDE_ASM(s32, "code_190B20", play_movement_dust_effects);
 
-INCLUDE_ASM(s32, "code_190B20", get_actor_part);
+INCLUDE_ASM(ActorPart*, "code_190B20", get_actor_part, Actor* actor, s32 partIndex);
 
 INCLUDE_ASM(s32, "code_190B20", load_player_actor);
 
@@ -134,7 +144,9 @@ INCLUDE_ASM(s32, "code_190B20", add_part_decoration);
 
 INCLUDE_ASM(s32, "code_190B20", add_actor_decoration);
 
-INCLUDE_ASM(s32, "code_190B20", remove_part_decoration);
+void remove_part_decoration(ActorPart* part, s32 decorationIndex) {
+    _remove_part_decoration(part, decorationIndex);
+}
 
 INCLUDE_ASM(s32, "code_190B20", remove_actor_decoration);
 
@@ -142,7 +154,12 @@ INCLUDE_ASM(s32, "code_190B20", heroes_is_ability_active);
 
 INCLUDE_ASM(s32, "code_190B20", create_part_shadow);
 
-INCLUDE_ASM(s32, "code_190B20", remove_part_shadow);
+void remove_part_shadow(s32 actorId, s32 partIndex) {
+    ActorPart* part = get_actor_part(get_actor(actorId), partIndex);
+
+    part->flags |= 4;
+    func_80112328(part->shadow);
+}
 
 INCLUDE_ASM(s32, "code_190B20", func_802673E4);
 

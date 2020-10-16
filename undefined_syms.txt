@@ -197,6 +197,8 @@ gWorldNpcList = 0x800A0990;
 gBattleNpcList = 0x800A0A90;
 gCurrentNpcListPtr = 0x800A0B90;
 
+gMoveScriptTable = 0x80293E80;
+
 gMainGameState = 0x80151700;
 gCurrentUpdateFunction = 0x8015170C;
 

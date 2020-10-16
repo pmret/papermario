@@ -1878,3 +1878,4 @@ SetTattleString;0x80045A58
 !handle_CPU;0x8006B038
 gPauseMenuStrings;0x8026F778
 gEffectTable;0x8007F214
+gMoveScriptTable;0x80293E80
