@@ -1,6 +1,4 @@
-#include "common.h"
-
-ActorPart* get_actor_part(Actor* actor, s32 partIndex);
+#include "code_190B20.h"
 
 INCLUDE_ASM(s32, "code_190B20", create_target_list);
 
@@ -150,9 +148,31 @@ void remove_part_decoration(ActorPart* part, s32 decorationIndex) {
 
 INCLUDE_ASM(s32, "code_190B20", remove_actor_decoration);
 
-INCLUDE_ASM(s32, "code_190B20", heroes_is_ability_active);
+s32 heroes_is_ability_active(Actor* actor, Ability ability) {
+    s32 actorGenus = actor->actorID & 0x700;
+    s32 hasAbility = FALSE;
 
-INCLUDE_ASM(s32, "code_190B20", create_part_shadow);
+    if (actorGenus != 0x100) {
+        // Separate ifs required to match
+        if (actorGenus <= 0x100) {
+            if (actorGenus == 0 && (gBattleStatus.flags2 & 0x40) == 0) {
+                hasAbility = is_ability_active(ability);
+            }
+        }
+    } else {
+        hasAbility = is_partner_ability_active(ability);
+    }
+
+    return hasAbility;
+}
+
+void create_part_shadow(s32 actorId, s32 partIndex) {
+    ActorPart* part = get_actor_part(get_actor(actorId), partIndex);
+
+    part->flags &= ~4;
+    part->shadow = create_shadow_type(0, part->currentPos.x, part->currentPos.y, part->currentPos.z);
+    part->shadowScale = part->size[0] / 24.0;
+}
 
 void remove_part_shadow(s32 actorId, s32 partIndex) {
     ActorPart* part = get_actor_part(get_actor(actorId), partIndex);
