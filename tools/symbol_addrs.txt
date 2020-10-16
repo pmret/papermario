@@ -242,7 +242,7 @@ GetPartTargetFlags;0x8026D2AC
 GetPartYaw;0x8026B4C0
 GetPartnerPos;0x802CF438
 GetPlayerActionState;0x802D1DD0
-GetPlayerActorID;0x8026E974
+GetAttackerActorID;0x8026E974
 GetPlayerAnimation;0x802D1E94
 GetPlayerHP;0x80274234
 GetPlayerPos;0x802D1DFC
@@ -1879,3 +1879,7 @@ SetTattleString;0x80045A58
 gPauseMenuStrings;0x8026F778
 gEffectTable;0x8007F214
 gMoveScriptTable;0x80293E80
+gStaticScriptCounter;0x802D9CA0
+D_802D9CA4;0x802D9CA4
+gGlobalTimeSpace;0x802D9CA8
+gBattleState;0x800DC068

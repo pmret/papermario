@@ -603,13 +603,14 @@ typedef struct BattleStatus {
     /* 0x197 */ u8 targetHomeIndex; /* some sort of home idnex used for target list construction */
     /* 0x198 */ u8 powerBounceCounter;
     /* 0x199 */ u8 wasStatusInflicted; /* during last attack */
-    /* 0x19A */ char unk_19A[6];
+    /* 0x19A */ s8 unk_19A;
+    /* 0x19B */ char unk_19B[5];
     /* 0x1A0 */ s16 currentTargetID; /* selected? */
     /* 0x1A2 */ u8 currentTargetPart; /* selected? */
     /* 0x1A3 */ char unk_1A3;
     /* 0x1A4 */ s16 currentTargetID2;
     /* 0x1A6 */ u8 currentTargetPart2;
-    /* 0x1A7 */ u8 battlePhase;
+    /* 0x1A7 */ s8 battlePhase;
     /* 0x1A8 */ s16 attackerActorID;
     /* 0x1AA */ char unk_1AA[4];
     /* 0x1AE */ s16 submenuIcons[24]; /* icon IDs */

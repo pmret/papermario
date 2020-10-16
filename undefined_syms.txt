@@ -13,9 +13,6 @@ gWorldScriptList = 0x802DA490;
 gBattleScriptList = 0x802DA690;
 gNumScripts = 0x802DA488;
 gCurrentScriptListPtr = 0x802DA890;
-gStaticScriptCounter = 0x802D9CA0;
-D_802D9CA4 = 0x802D9CA4;
-gGlobalTimeSpace = 0x802D9CA8;
 gPlayerNpcPtr = 0x802D9D20;
 D_80147574 = 0x80147574;
 D_8010EBB0 = 0x8010EBB0;
@@ -59,6 +56,7 @@ D_8010F094 = 0x8010F094;
 
 D_800D9620 = 0x800D9620;
 
+gBattleState = 0x800DC068;
 gBattleStatus = 0x800DC070;
 
 mapScriptLibStart = 0x7E0E80;
