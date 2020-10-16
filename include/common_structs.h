@@ -539,9 +539,11 @@ typedef struct BattleStatus {
     /* 0x07C */ u8 changePartnerAllowed;
     /* 0x07D */ char unk_7D[4];
     /* 0x081 */ s8 actionSuccess;
-    /* 0x072 */ char unk_7C[3];
+    /* 0x082 */ char unk_82;
+    /* 0x083 */ s8 unk_83;
+    /* 0x084 */ s8 unk_84;
     /* 0x085 */ s8 unk_85;
-    /* 0x086 */ char unk_86;
+    /* 0x086 */ s8 unk_86;
     /* 0x087 */ s8 blockResult; /* 0 = fail, 1 = success, -1 = mashed */
     /* 0x088 */ u8 itemUsesLeft; /* set to 2 for doublke dip, 3 for triple */
     /* 0x089 */ u8 hpDrainCount;
@@ -626,7 +628,8 @@ typedef struct BattleStatus {
     /* 0x330 */ s32 pushInputBuffer[64];
     /* 0x430 */ u8 holdInputBufferPos;
     /* 0x431 */ u8 inputBufferPos;
-    /* 0x432 */ char unk_432[6];
+    /* 0x432 */ char unk_432[2];
+    /* 0x434 */ s32 unk_434;
     /* 0x438 */ s32* foregroundModelList;
     /* 0x43C */ UNK_PTR turboChargeCounter;
     /* 0x440 */ u8 tattleFlags[27];

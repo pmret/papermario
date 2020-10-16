@@ -317,7 +317,7 @@ segments:
     - [0x1AC760, "c"]
     - [0x1AF120, "c"]
     - [0x1AF230, "c"]
-    - [0x1AF2C0, "bin"]
+    - [0x1AF2D0, "bin"]
   - [0x1CC310, "bin"] # icon images and palettes, vram unknown
   - name: code
     type: code

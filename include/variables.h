@@ -106,7 +106,7 @@ extern s32 D_800A0960;
 extern s32 D_800A0964;
 
 // Pause
-//extern s32 gPauseMenuStrings[348];
+extern s32 gPauseMenuStrings[348];
 
 extern s32 gGameState;
 extern s32 D_8009A650[1];
