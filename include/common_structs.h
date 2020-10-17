@@ -192,6 +192,17 @@ typedef struct Trigger {
 } Trigger; // size = 0x38
 
 // assuming these are the struct fields based off of func_8013AA9C
+// it has some sub structs like the undefineds
+typedef union {
+    struct {
+        /* 0x00 */ u16 unk;
+    } bytes;
+} UnionUnk10;
+typedef union {
+    struct {
+        /* 0x00 */ u8 unk;
+    } bytes;
+} UnionUnk14;
 typedef struct UnkStructFromfunc8013A854 {
     /* 0x01 */ u8 unk1; // undefined 
     /* 0x02 */ u8 unk2; // undefined
@@ -199,23 +210,29 @@ typedef struct UnkStructFromfunc8013A854 {
     /* 0x04 */ u8 unk4; // undefined
     /* 0x05 */ u8 unk5; // undefined
     /* 0x06 */ u8 unk6; // undefined
-    /* 0x10 */ u16 unk10;
-    /* 0x14 */ u32 unk14; // uint
+    // /* 0x10 */ UnkSubStruct unk10; // ulonglong is 32 bits or u16? undefined?
+    UnionUnk10 unk10;
+    // /* 0x14 */ UnkSubStruct unk14; //  u8? undefined?
+    UnionUnk14 unk14;
     /* 0x20 */ u32 unk20;
     /* 0x24 */ u8 unk24; // int
     /* 0x28 */ u8 unk28; // int
     /* 0x34 */ u8 unk34; // int
     /* 0x38 */ u8 unk38; // int
-    /* 0x1c */ u32 unk1c; // undefined
+    /* 0x1c */ u32 unk1C; // undefined
     /* 0x30 */ u64 unk30; // undefined
-    /* 0x2c */ u64 unk2c; // undefined
-    /* 0x3c */ u64 unk3c; // undefined
+    /* 0x2c */ u64 unk2C; // undefined
+    /* 0x3c */ u64 unk3C; // undefined
     /* 0x40 */ u64 unk40; // undefined
-    /* 0x4c */ u64 unk4c; // undefined
+    /* 0x4c */ u64 unk4C; // undefined
     /* 0x50 */ u64 unk50; // undefined
-    /* 0x5c */ u64 unk5c; // undefined
+    /* 0x5c */ u64 unk5C; // undefined
     /* 0x60 */ u64 unk60; //
 } UnkStructFromfunc8013A854; // size = 0x7C
+typedef struct UnkSubStruct {
+
+} UnkSubStruct;
+
 
 typedef struct Enemy {
     /* 0x00 */ s32 flags;

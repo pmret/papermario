@@ -16,31 +16,41 @@ INCLUDE_ASM(s32, "code_d0a70_len_4fe0", func_8013A704);
 
 // INCLUDE_ASM(s32, "code_d0a70_len_4fe0", func_8013A854);
 // TODO research how the array D_80156954 is used in other funcs should solve this
-void func_8013A854(u32 index) {
-    if (index < 90) {
-        UnkStructFromfunc8013A854* unkStruct;
-        unkStruct = &D_80156954[index * 31];
-        unkStruct->unk14 = 0;
-        unkStruct->unk10 = -1;
+void func_8013A854(u32 i) {
+    UnkStructFromfunc8013A854* unkStruct;
+    if (i < 90) {
+        unkStruct = D_80156954[i * 31];
+        unkStruct->unk10.bytes.unk = 0;
+        unkStruct->unk14.bytes.unk = -1;
     }
 }
 /*
 Occurrences of DAT_80156954
-block_3::8013a3e0		FUN_block_3__8013a37c	sw v0,0x0(v1)=>DAT_80156954
-block_3::8013a3f0	    LAB_block_3__8013a3f0	Global	lw a0,0x0(s2)=>DAT_80156954
-block_3::8013a3fc		FUN_block_3__8013a37c	lw a0,0x0(s2)=>DAT_80156954
-block_3::8013a4fc		FUN_block_3__8013a4d0	lw a0,0x0(s0)=>DAT_80156954
-block_3::8013a528		FUN_block_3__8013a4d0	lw v1,0x0(s0)=>DAT_80156954
-block_3::8013a544		FUN_block_3__8013a4d0	lw v0,offset DAT_80156954(v0)
-block_3::8013a594	    LAB_block_3__8013a594	Global	lw v0,0x0(s2)=>DAT_80156954
-block_3::8013a5d4		FUN_block_3__8013a4d0	lw v0,0x0(s2)=>DAT_80156954
-block_3::8013a708		FUN_block_3__8013a704	lw v0,offset DAT_80156954(v0)
-block_3::8013a7a4		FUN_block_3__8013a704	lw v1,offset DAT_80156954(v1)
-block_3::8013a7e0	    LAB_block_3__8013a7e0	Global	lw v0,0x0(s4)=>DAT_80156954
-block_3::8013a7ec		FUN_block_3__8013a704	lw param_1,0x0(s4)=>DAT_80156954
-block_3::8013a7f8		FUN_block_3__8013a704	lw v0,0x0(s4)=>DAT_80156954
-block_3::8013a868		FUN_block_3__8013a854	lw v1,offset DAT_80156954(v1)
-block_3::8013a8b0		FUN_block_3__8013a888	lw v1,offset DAT_80156954(v1)
+* 37c all the same func
+* block_3::8013a3e0		FUN_block_3__8013a37c	sw v0,0x0(v1)=>DAT_80156954
+* block_3::8013a3f0	    LAB_block_3__8013a3f0	Global	lw a0,0x0(s2)=>DAT_80156954
+* block_3::8013a3fc		FUN_block_3__8013a37c	lw a0,0x0(s2)=>DAT_80156954
+* 37c all the same func
+
+* 4d0 all the same func
+* block_3::8013a4fc		FUN_block_3__8013a4d0	lw a0,0x0(s0)=>DAT_80156954
+* block_3::8013a528		FUN_block_3__8013a4d0	lw v1,0x0(s0)=>DAT_80156954
+* block_3::8013a544		FUN_block_3__8013a4d0	lw v0,offset DAT_80156954(v0)
+* block_3::8013a594	    LAB_block_3__8013a594	Global	lw v0,0x0(s2)=>DAT_80156954
+* block_3::8013a5d4		FUN_block_3__8013a4d0	lw v0,0x0(s2)=>DAT_80156954
+* 4d0 all the same func
+
+* 704 all the same func
+* accessed 4 times
+* block_3::8013a708		FUN_block_3__8013a704	lw v0,offset DAT_80156954(v0)
+* block_3::8013a7a4		FUN_block_3__8013a704	lw v1,offset DAT_80156954(v1)
+* block_3::8013a7e0	    LAB_block_3__8013a7e0	Global	lw v0,0x0(s4)=>DAT_80156954
+* block_3::8013a7ec		FUN_block_3__8013a704	lw param_1,0x0(s4)=>DAT_80156954
+* block_3::8013a7f8		FUN_block_3__8013a704	lw v0,0x0(s4)=>DAT_80156954 
+* 704 all the same func
+
+block_3::8013a868		FUN_block_3__8013a854	lw v1,offset DAT_80156954(v1) accessed twice
+block_3::8013a8b0		FUN_block_3__8013a888	lw v1,offset DAT_80156954(v1) accessed once
 block_3::8013aab4		FUN_block_3__8013aa9c	lw v1,offset DAT_80156954(v1) seems to access it in many places
 
 void FUN_block_3__8013aa9c
