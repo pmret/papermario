@@ -14,15 +14,23 @@ INCLUDE_ASM(s32, "code_d0a70_len_4fe0", func_8013A6E8);
 
 INCLUDE_ASM(s32, "code_d0a70_len_4fe0", func_8013A704);
 
-// INCLUDE_ASM(s32, "code_d0a70_len_4fe0", func_8013A854);
-// TODO get regalloc to work then alter the struct
-// mipstoc ./asm/nonmatchings/code_d0a70_len_4fe0/func_8013A854.s func_8013A854
-void func_8013A854(u32 index) {
-    if (index < 90) {
-        UnkStructFromfunc8013A854* unkStruct;
-        unkStruct = &D_80156954[index * 31];
-        unkStruct->unk14 = 0;
-        unkStruct->unk10 = -1;
+// does not match
+// void func_8013A854(u32 index) {
+//     if (index < 90) {
+//         UnkStructFromfunc8013A854* unkStruct;
+//         unkStruct = &D_80156954[index * 31];
+//         unkStruct->unk14 = 0;
+//         unkStruct->unk10 = -1;
+//     }
+// }
+
+// OK
+void func_8013A854(u32 i) {
+    UnkStructFromfunc8013A854* unkStruct;
+    if (i < 90) {
+        unkStruct = *D_80156954;
+        unkStruct[i].unk_14 = 0;
+        unkStruct[i].unk_10 = -1;
     }
 }
 
