@@ -196,7 +196,7 @@ void encode()
 	}
 	if ( v1 != 0x80000000 )
 		++cp;
-	fprintf(stderr, "IN=%d OUT=%d\n", insize, dp + 2 * pp + 4 * cp + 16);
+	//fprintf(stderr, "IN=%d OUT=%d\n", insize, dp + 2 * pp + 4 * cp + 16);
 }
 
 void search(unsigned int a1, int a2, int *a3, unsigned int *a4)

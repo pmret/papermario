@@ -11,6 +11,7 @@ SRC_DIRS := src src/os src/os/nusys
 ASM_DIRS := asm asm/os
 INCLUDE_DIRS := include include/PR src
 DATA_DIRS := bin
+YAY0_DIRS := bin/Yay0
 
 # Source code files
 C_FILES := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))
@@ -26,6 +27,7 @@ O_FILES := $(foreach file,$(C_FILES),$(BUILD_DIR)/$(file:.c=.o)) \
            $(foreach file,$(S_FILES),$(BUILD_DIR)/$(file:.s=.o)) \
            $(foreach file,$(DATA_FILES),$(BUILD_DIR)/$(file:.bin=.o)) \
 
+YAY0_FILES := $(foreach file,$(YAY0_FILES),$(BUILD_DIR)/$(file:.bin=.bin.Yay0))
 
 ####################### Other Tools #########################
 
@@ -69,7 +71,7 @@ submodules:
 	git submodule update --init --recursive
 
 split:
-	rm -rf $(DATA_DIRS) && ./tools/n64splat/split.py baserom.z64 tools/splat.yaml . --modes ld bin
+	rm -rf $(DATA_DIRS) && ./tools/n64splat/split.py baserom.z64 tools/splat.yaml . --modes ld bin Yay0
 
 split-all:
 	rm -rf $(DATA_DIRS) && ./tools/n64splat/split.py baserom.z64 tools/splat.yaml . --modes all
@@ -97,9 +99,10 @@ $(BUILD_DIR)/%.o: %.c $(H_FILES)
 $(BUILD_DIR)/%.o: %.bin
 	$(LD) -r -b binary -o $@ $<
 
-$(BUILD_DIR)/%.Yay0: %.bin
-	tools/Yay0compress $< $@
-	$(LD) -r -b binary -o $@ $<
+$(BUILD_DIR)/%.bin.Yay0: %.bin
+	mkdir -p build/bin/Yay0
+	tools/Yay0compress $< $<.Yay0
+	$(LD) -r -b binary -o $@ $<.Yay0
 
 $(BUILD_DIR)/$(TARGET).bin: $(BUILD_DIR)/$(TARGET).elf
 	$(OBJCOPY) $< $@ -O binary
