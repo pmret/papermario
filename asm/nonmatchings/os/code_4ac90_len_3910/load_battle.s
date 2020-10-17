@@ -9,8 +9,8 @@ glabel load_battle
 /* 4E0A0 80072CA0 0C00CD3C */  jal       set_game_mode
 /* 4E0A4 80072CA4 24040008 */   addiu    $a0, $zero, 8
 /* 4E0A8 80072CA8 8FBF0010 */  lw        $ra, 0x10($sp)
-/* 4E0AC 80072CAC 3C01800E */  lui       $at, 0x800e
-/* 4E0B0 80072CB0 AC20C068 */  sw        $zero, -0x3f98($at)
+/* 4E0AC 80072CAC 3C01800E */  lui       $at, %hi(gBattleState)
+/* 4E0B0 80072CB0 AC20C068 */  sw        $zero, %lo(gBattleState)($at)
 /* 4E0B4 80072CB4 3C01800E */  lui       $at, 0x800e
 /* 4E0B8 80072CB8 AC20C4D0 */  sw        $zero, -0x3b30($at)
 /* 4E0BC 80072CBC 3C01800E */  lui       $at, 0x800e

@@ -92,13 +92,13 @@ glabel update_battle_state
 /* 16CE64 8023E584 82030095 */  lb        $v1, 0x95($s0)
 /* 16CE68 8023E588 10600005 */  beqz      $v1, .L8023E5A0
 /* 16CE6C 8023E58C 24110001 */   addiu    $s1, $zero, 1
-/* 16CE70 8023E590 3C02800E */  lui       $v0, 0x800e
-/* 16CE74 8023E594 8C42C068 */  lw        $v0, -0x3f98($v0)
+/* 16CE70 8023E590 3C02800E */  lui       $v0, %hi(gBattleState)
+/* 16CE74 8023E594 8C42C068 */  lw        $v0, %lo(gBattleState)($v0)
 /* 16CE78 8023E598 10620092 */  beq       $v1, $v0, .L8023E7E4
 /* 16CE7C 8023E59C 00000000 */   nop      
 .L8023E5A0:
-/* 16CE80 8023E5A0 3C02800E */  lui       $v0, 0x800e
-/* 16CE84 8023E5A4 8C42C068 */  lw        $v0, -0x3f98($v0)
+/* 16CE80 8023E5A0 3C02800E */  lui       $v0, %hi(gBattleState)
+/* 16CE84 8023E5A4 8C42C068 */  lw        $v0, %lo(gBattleState)($v0)
 /* 16CE88 8023E5A8 24430001 */  addiu     $v1, $v0, 1
 /* 16CE8C 8023E5AC 2C620025 */  sltiu     $v0, $v1, 0x25
 /* 16CE90 8023E5B0 1040008C */  beqz      $v0, .L8023E7E4
@@ -383,8 +383,8 @@ glabel update_battle_state
 .L8023E9E0:
 /* 16D2C0 8023E9E0 1485000A */  bne       $a0, $a1, .L8023EA0C
 /* 16D2C4 8023E9E4 2462000A */   addiu    $v0, $v1, 0xa
-/* 16D2C8 8023E9E8 3C03800E */  lui       $v1, 0x800e
-/* 16D2CC 8023E9EC 8C63C068 */  lw        $v1, -0x3f98($v1)
+/* 16D2C8 8023E9E8 3C03800E */  lui       $v1, %hi(gBattleState)
+/* 16D2CC 8023E9EC 8C63C068 */  lw        $v1, %lo(gBattleState)($v1)
 /* 16D2D0 8023E9F0 24020023 */  addiu     $v0, $zero, 0x23
 /* 16D2D4 8023E9F4 1062001B */  beq       $v1, $v0, .L8023EA64
 /* 16D2D8 8023E9F8 00000000 */   nop      

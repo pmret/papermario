@@ -189,8 +189,8 @@ glabel end_battle
 /* 1735E0 80244D00 3C04802A */  lui       $a0, 0x802a
 /* 1735E4 80244D04 2484CAAC */  addiu     $a0, $a0, -0x3554
 /* 1735E8 80244D08 27A50010 */  addiu     $a1, $sp, 0x10
-/* 1735EC 80244D0C 3C02800E */  lui       $v0, 0x800e
-/* 1735F0 80244D10 8C42C068 */  lw        $v0, -0x3f98($v0)
+/* 1735EC 80244D0C 3C02800E */  lui       $v0, %hi(gBattleState)
+/* 1735F0 80244D10 8C42C068 */  lw        $v0, %lo(gBattleState)($v0)
 /* 1735F4 80244D14 3C01800E */  lui       $at, 0x800e
 /* 1735F8 80244D18 AC22C4D0 */  sw        $v0, -0x3b30($at)
 /* 1735FC 80244D1C 0C016AFE */  jal       get_map_IDs_by_name
@@ -207,8 +207,8 @@ glabel end_battle
 .L80244D48:
 /* 173628 80244D48 0C090464 */  jal       func_80241190
 /* 17362C 80244D4C 0000202D */   daddu    $a0, $zero, $zero
-/* 173630 80244D50 3C02800E */  lui       $v0, 0x800e
-/* 173634 80244D54 8C42C068 */  lw        $v0, -0x3f98($v0)
+/* 173630 80244D50 3C02800E */  lui       $v0, %hi(gBattleState)
+/* 173634 80244D54 8C42C068 */  lw        $v0, %lo(gBattleState)($v0)
 /* 173638 80244D58 3C01800E */  lui       $at, 0x800e
 /* 17363C 80244D5C AC22C4D0 */  sw        $v0, -0x3b30($at)
 /* 173640 80244D60 0C00F945 */  jal       func_8003E514

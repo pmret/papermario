@@ -19,6 +19,7 @@ ifdef PM_HEADER_REBUILD
 	H_FILES := $(foreach dir,$(INCLUDE_DIRS),$(wildcard $(dir)/*.h))
 endif
 DATA_FILES := $(foreach dir,$(DATA_DIRS),$(wildcard $(dir)/*.bin))
+YAY0_FILES := $(foreach dir,$(YAY0_DIRS),$(wildcard $(dir)/*.bin))
 
 # Object files
 O_FILES := $(foreach file,$(C_FILES),$(BUILD_DIR)/$(file:.c=.o)) \
@@ -77,13 +78,14 @@ $(TARGET).ld: tools/splat.yaml
 	./tools/n64splat/split.py baserom.z64 tools/splat.yaml . --modes ld
 
 setup: clean submodules split
+	make -C tools
 
 print-% : ; $(info $* is a $(flavor $*) variable set to [$($*)]) @true
 
 $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
 
-$(BUILD_DIR)/$(TARGET).elf: $(O_FILES) $(LD_SCRIPT)
+$(BUILD_DIR)/$(TARGET).elf: $(O_FILES) $(YAY0_FILES) $(LD_SCRIPT)
 	@$(LD) $(LDFLAGS) -o $@ $(O_FILES)
 
 $(BUILD_DIR)/%.o: %.s
@@ -93,6 +95,10 @@ $(BUILD_DIR)/%.o: %.c $(H_FILES)
 	cpp $(CPPFLAGS) $< | $(CC) $(CFLAGS) -o - | $(OLD_AS) $(OLDASFLAGS) - -o $@
 
 $(BUILD_DIR)/%.o: %.bin
+	$(LD) -r -b binary -o $@ $<
+
+$(BUILD_DIR)/%.Yay0: %.bin
+	tools/Yay0compress $< $@
 	$(LD) -r -b binary -o $@ $<
 
 $(BUILD_DIR)/$(TARGET).bin: $(BUILD_DIR)/$(TARGET).elf
