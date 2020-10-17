@@ -66,7 +66,22 @@ INCLUDE_ASM(s32, "code_190B20", add_xz_vec3f_copy2);
 
 INCLUDE_ASM(s32, "code_190B20", play_movement_dust_effects);
 
-INCLUDE_ASM(ActorPart*, "code_190B20", get_actor_part, Actor* actor, s32 partIndex);
+ActorPart* get_actor_part(Actor* actor, s32 partIndex) {
+    ActorPart* part = &actor->partsTable[0];
+
+    if (partIndex < 0 || part->nextPart == NULL) {
+        return part;
+    }
+
+    while (part != NULL) {
+        if (part->staticData->index == partIndex) {
+            return part;
+        }
+        part = part->nextPart;
+    }
+
+    return NULL;
+}
 
 INCLUDE_ASM(s32, "code_190B20", load_player_actor);
 
@@ -424,15 +439,78 @@ INCLUDE_ASM(s32, "code_190B20", func_80267A3C);
 
 INCLUDE_ASM(s32, "code_190B20", reset_all_actor_sounds);
 
-INCLUDE_ASM(s32, "code_190B20", hide_foreground_models_unchecked);
+void hide_foreground_models_unsafe(void) {
+    FGModelData* data = gBattleStatus.foregroundModelData;
 
-INCLUDE_ASM(s32, "code_190B20", show_foreground_models_unchecked);
+    if (data != NULL && data->idList != NULL) {
+        s32* idList = data->idList;
+        while (*idList != 0) {
+            s32 id = *idList++;
+            if (id >= 0) {
+                Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(id));
+                model->flags |= 2;
+            }
+        }
+    }
+}
 
-INCLUDE_ASM(s32, "code_190B20", hide_foreground_models);
+void show_foreground_models_unsafe(void) {
+    FGModelData* data = gBattleStatus.foregroundModelData;
 
-INCLUDE_ASM(s32, "code_190B20", show_foreground_models);
+    if (data != NULL && data->idList != NULL) {
+        s32* idList = data->idList;
+        while (*idList != 0) {
+            s32 id = *idList++;
+            if (id >= 0) {
+                Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(id));
+                model->flags &= ~2;
+            }
+        }
+    }
+}
 
-INCLUDE_ASM(s32, "code_190B20", StartRumbleWithParams);
+void hide_foreground_models(void) {
+    FGModelData* data = gBattleStatus.foregroundModelData;
+
+    if (data != NULL && data->idList != NULL) {
+        s32* idList = data->idList;
+        while (*idList != 0) {
+            s32 id = *idList++;
+            if (id < 0) {
+                break;
+            } else {
+                Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(id));
+                model->flags |= 2;
+            }
+
+        }
+    }
+}
+
+void show_foreground_models(void) {
+    FGModelData* data = gBattleStatus.foregroundModelData;
+
+    if (data != NULL && data->idList != NULL) {
+        s32* idList = data->idList;
+        while (*idList != 0) {
+            s32 id = *idList++;
+            if (id < 0) {
+                break;
+            } else {
+                Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(id));
+                model->flags &= ~2;
+            }
+        }
+    }
+}
+
+ApiStatus StartRumbleWithParams(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+
+    start_rumble(get_variable(script, *args++), get_variable(script, *args++));
+
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_190B20", start_rumble_type);
 

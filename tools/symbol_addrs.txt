@@ -995,7 +995,7 @@ heap_malloc;0x8002ACE4
 heroes_is_ability_active;0x802672AC
 hide_coin_counter;0x800E9698
 hide_foreground_models;0x80267CB4
-hide_foreground_models_unchecked;0x80267BDC
+hide_foreground_models_unsafe;0x80267BDC
 icon_set_opacity;0x80144EB0
 icon_set_tint;0x80144EFC
 increment_max_SP;0x800EA1B4
@@ -1541,7 +1541,7 @@ show_coin_counter;0x800E9518
 show_damage_popup;0x802665AC
 show_first_strike_message;0x80041C5C
 show_foreground_models;0x80267D28
-show_foreground_models_unchecked;0x80267C48
+show_foreground_models_unsafe;0x80267C48
 show_message_popup;0x80250EA4
 show_variable_battle_message;0x8024FA04
 si;0x8006AD90

@@ -538,6 +538,11 @@ typedef struct BattleStatusUnk {
     /* 0x0C */ BattleStatusUnkInner* unk_0C;
 } BattleStatusUnk; // size = unknown
 
+typedef struct FGModelData {
+    /* 0x00 */ char unk_00[0x18];
+    /* 0x18 */ s32* idList;
+} FGModelData; // size = unknown
+
 typedef struct BattleStatus {
     /* 0x000 */ s32 flags1;
     /* 0x004 */ s32 flags2;
@@ -647,7 +652,7 @@ typedef struct BattleStatus {
     /* 0x431 */ u8 inputBufferPos;
     /* 0x432 */ char unk_432[2];
     /* 0x434 */ s32 unk_434;
-    /* 0x438 */ s32* foregroundModelList;
+    /* 0x438 */ FGModelData* foregroundModelData;
     /* 0x43C */ BattleStatusUnk* unk_43C;
     /* 0x440 */ u8 tattleFlags[27];
     /* 0x45B */ char unk_45B[17];
@@ -718,7 +723,7 @@ typedef struct CollisionData {
 } CollisionData; // size = 0x10
 
 typedef struct Model {
-    /* 0x00 */ s16 flags;
+    /* 0x00 */ u16 flags;
     /* 0x02 */ s16 modelID;
     /* 0x04 */ char unk_04[4];
     /* 0x08 */ s32* modelNode;
@@ -1338,7 +1343,7 @@ typedef struct Actor {
 
 typedef struct StaticActorPart {
     /* 0x00 */ s32 flags;
-    /* 0x04 */ u8 index;
+    /* 0x04 */ s8 index;
     /* 0x05 */ u8 posOffset[3];
     /* 0x08 */ u8 targetOffset[2];
     /* 0x0A */ s16 opacity;

@@ -9,12 +9,12 @@ glabel SetForegroundModelsVisibleUnchecked
 /* 182398 80253AB8 8C450000 */   lw       $a1, ($v0)
 /* 18239C 80253ABC 10400005 */  beqz      $v0, .L80253AD4
 /* 1823A0 80253AC0 00000000 */   nop      
-/* 1823A4 80253AC4 0C099F12 */  jal       show_foreground_models_unchecked
+/* 1823A4 80253AC4 0C099F12 */  jal       show_foreground_models_unsafe
 /* 1823A8 80253AC8 00000000 */   nop      
 /* 1823AC 80253ACC 08094EB7 */  j         .L80253ADC
 /* 1823B0 80253AD0 00000000 */   nop      
 .L80253AD4:
-/* 1823B4 80253AD4 0C099EF7 */  jal       hide_foreground_models_unchecked
+/* 1823B4 80253AD4 0C099EF7 */  jal       hide_foreground_models_unsafe
 /* 1823B8 80253AD8 00000000 */   nop      
 .L80253ADC:
 /* 1823BC 80253ADC 8FBF0010 */  lw        $ra, 0x10($sp)
