@@ -1284,15 +1284,15 @@ typedef struct Actor {
     /* 0x208 */ char unk_208[4];
     /* 0x20C */ u32* statusTable;
     /* 0x210 */ u8 debuff;
-    /* 0x211 */ u8 debuffDuration;
-    /* 0x212 */ u8 staticStatus; /* 0B = yes */
-    /* 0x213 */ u8 staticDuration;
+    /* 0x211 */ s8 debuffDuration;
+    /* 0x212 */ s8 staticStatus; /* 0B = yes */
+    /* 0x213 */ s8 staticDuration;
     /* 0x214 */ s8 stoneStatus; /* 0C = yes */
-    /* 0x215 */ u8 stoneDuration;
-    /* 0x216 */ u8 koStatus; /* 0D = yes */
-    /* 0x217 */ u8 koDuration;
-    /* 0x218 */ u8 transStatus; /* 0E = yes */
-    /* 0x219 */ u8 transDuration;
+    /* 0x215 */ s8 stoneDuration;
+    /* 0x216 */ s8 koStatus; /* 0D = yes */
+    /* 0x217 */ s8 koDuration;
+    /* 0x218 */ s8 transStatus; /* 0E = yes */
+    /* 0x219 */ s8 transDuration;
     /* 0x21A */ char unk_21A[2];
     /* 0x21C */ u8 status;
     /* 0x21D */ char unk_21D[3];

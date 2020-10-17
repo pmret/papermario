@@ -88,7 +88,21 @@ INCLUDE_ASM(s32, "code_190B20", lookup_status_duration_mod);
 
 INCLUDE_ASM(s32, "code_190B20", inflict_status);
 
-INCLUDE_ASM(s32, "code_190B20", inflict_partner_ko);
+s32 inflict_partner_ko(Actor* target, s32 statusTypeKey, s32 duration) {
+    if (statusTypeKey == Status_DAZE) {
+        if (statusTypeKey != target->koStatus) {
+            inflict_status(target, Status_DAZE);
+            play_sound(0x2107);
+        } else {
+            target->koDuration += duration;
+            if (target->koDuration > 9) {
+                target->koDuration = 9;
+            }
+        }
+    }
+
+    return TRUE;
+}
 
 INCLUDE_ASM(s32, "code_190B20", get_defense);
 
@@ -161,7 +175,11 @@ void remove_part_shadow(s32 actorId, s32 partIndex) {
     func_80112328(part->shadow);
 }
 
-INCLUDE_ASM(s32, "code_190B20", func_802673E4);
+void create_part_shadow_by_ptr(UNK_TYPE actor, ActorPart* part) {
+    part->flags &= ~4;
+    part->shadow = create_shadow_type(0, part->currentPos.x, part->currentPos.y, part->currentPos.z);
+    part->shadowScale = part->size[0] / 24.0;
+}
 
 INCLUDE_ASM(s32, "code_190B20", remove_player_buffs);
 
