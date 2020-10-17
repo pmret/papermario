@@ -193,16 +193,12 @@ typedef struct Trigger {
 
 // assuming these are the struct fields based off of func_8013AA9C
 // it has some sub structs like the undefineds
-typedef union {
-    struct {
-        /* 0x00 */ u16 unk;
-    } bytes;
-} UnionUnk10;
-typedef union {
-    struct {
-        /* 0x00 */ u8 unk;
-    } bytes;
-} UnionUnk14;
+typedef struct StructUnk10 {
+    u8 byte;
+} StructUnk10;
+typedef struct StructUnk14 {
+    u16 byte;
+} StructUnk14;
 typedef struct UnkStructFromfunc8013A854 {
     /* 0x01 */ u8 unk1; // undefined 
     /* 0x02 */ u8 unk2; // undefined
@@ -210,10 +206,10 @@ typedef struct UnkStructFromfunc8013A854 {
     /* 0x04 */ u8 unk4; // undefined
     /* 0x05 */ u8 unk5; // undefined
     /* 0x06 */ u8 unk6; // undefined
-    // /* 0x10 */ UnkSubStruct unk10; // ulonglong is 32 bits or u16? undefined?
-    UnionUnk10 unk10;
-    // /* 0x14 */ UnkSubStruct unk14; //  u8? undefined?
-    UnionUnk14 unk14;
+    /* 0x10 */ u16 unk10; // ulonglong is 32 bits or u16? undefined?
+    // StructUnk10 unk10; //  u8? undefined?
+    /* 0x14 */ u8 unk14; //  u8? undefined?
+    // StructUnk14 unk14; //  u8? undefined?
     /* 0x20 */ u32 unk20;
     /* 0x24 */ u8 unk24; // int
     /* 0x28 */ u8 unk28; // int
@@ -229,10 +225,6 @@ typedef struct UnkStructFromfunc8013A854 {
     /* 0x5c */ u64 unk5C; // undefined
     /* 0x60 */ u64 unk60; //
 } UnkStructFromfunc8013A854; // size = 0x7C
-typedef struct UnkSubStruct {
-
-} UnkSubStruct;
-
 
 typedef struct Enemy {
     /* 0x00 */ s32 flags;

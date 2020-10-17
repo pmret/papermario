@@ -15,15 +15,17 @@ INCLUDE_ASM(s32, "code_d0a70_len_4fe0", func_8013A6E8);
 INCLUDE_ASM(s32, "code_d0a70_len_4fe0", func_8013A704);
 
 // INCLUDE_ASM(s32, "code_d0a70_len_4fe0", func_8013A854);
-// TODO research how the array D_80156954 is used in other funcs should solve this
-void func_8013A854(u32 i) {
-    UnkStructFromfunc8013A854* unkStruct;
-    if (i < 90) {
-        unkStruct = D_80156954[i * 31];
-        unkStruct->unk10.bytes.unk = 0;
-        unkStruct->unk14.bytes.unk = -1;
+// TODO get regalloc to work then alter the struct
+// mipstoc ./asm/nonmatchings/code_d0a70_len_4fe0/func_8013A854.s func_8013A854
+void func_8013A854(u32 index) {
+    if (index < 90) {
+        UnkStructFromfunc8013A854* unkStruct;
+        unkStruct = &D_80156954[index * 31];
+        unkStruct->unk14 = 0;
+        unkStruct->unk10 = -1;
     }
 }
+
 /*
 Occurrences of DAT_80156954
 * 37c all the same func
