@@ -191,12 +191,30 @@ typedef struct Trigger {
     /* 0x34 */ s32 runningScriptID;
 } Trigger; // size = 0x38
 
+// assuming these are the struct fields based off of func_8013AA9C
 typedef struct UnkStructFromfunc8013A854 {
-    /* 0x00 */ char unk_00[0x10];
-    /* 0x10 */ s16 unk10;
-    /* 0x11 */ char unk_11[0x01];
-    /* 0x14 */ s32 unk14;
-    /* 0x15 */ char unk_15[0x67];
+    /* 0x01 */ u8 unk1; // undefined 
+    /* 0x02 */ u8 unk2; // undefined
+    /* 0x03 */ u8 unk3; // undefined
+    /* 0x04 */ u8 unk4; // undefined
+    /* 0x05 */ u8 unk5; // undefined
+    /* 0x06 */ u8 unk6; // undefined
+    /* 0x10 */ u16 unk10;
+    /* 0x14 */ u32 unk14; // uint
+    /* 0x20 */ u32 unk20;
+    /* 0x24 */ u8 unk24; // int
+    /* 0x28 */ u8 unk28; // int
+    /* 0x34 */ u8 unk34; // int
+    /* 0x38 */ u8 unk38; // int
+    /* 0x1c */ u32 unk1c; // undefined
+    /* 0x30 */ u64 unk30; // undefined
+    /* 0x2c */ u64 unk2c; // undefined
+    /* 0x3c */ u64 unk3c; // undefined
+    /* 0x40 */ u64 unk40; // undefined
+    /* 0x4c */ u64 unk4c; // undefined
+    /* 0x50 */ u64 unk50; // undefined
+    /* 0x5c */ u64 unk5c; // undefined
+    /* 0x60 */ u64 unk60; //
 } UnkStructFromfunc8013A854; // size = 0x7C
 
 typedef struct Enemy {
