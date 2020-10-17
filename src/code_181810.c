@@ -1,17 +1,5 @@
 #include "common.h"
 
-// typedef struct DialogueState {
-//     /* 0x00 */ PrintContext* printCtx;
-//     /* 0x04 */ s32 unk_04;
-//     /* 0x08 */ s32 unk_08;
-//     /* 0x0C */ s32 talkAnim;
-//     /* 0x10 */ s32 idleAnim;
-//     /* 0x14 */ Actor* actor;
-//     /* 0x18 */ ActorPart* part;
-// } DialogueState; // 0x8029FA60 size = unknown
-
-// extern DialogueState gDialogueState;
-
 extern PrintContext* gSpeakingActorPrintCtx;
 extern s32 gSpeakingActorPrintIsDone; // unk_08
 extern s32 gSpeakingActorTalkAnim;
@@ -19,18 +7,21 @@ extern s32 gSpeakingActorIdleAnim;
 extern Actor* gSpeakingActor;
 extern ActorPart* gSpeakingActorPart;
 
-INCLUDE_ASM(s32, "code_181810", ActorSpeak);
-/*ApiStatus ActorSpeak(ScriptInstance *script, s32 isInitialCall) {
+#ifdef NON_MATCHING
+void clamp_printer_coords(PrintContext* printer, f32 x, f32 y);
+
+// Register allocation issues, otherwise equivalent (?)
+ApiStatus ActorSpeak(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    Actor *actor;
-    ActorPart *part;
+    Actor* actor;
+    ActorPart* part;
     s32 stringID;
     s32 actorID;
     s32 partIndex;
-    PrintContext *printContext;
-    f32 speakerMouthY;
+    PrintContext** printContext;
     s32 anim;
 
+    f32 headX, headY, headZ;
     f32 screenX, screenY, screenZ;
 
     if (isInitialCall) {
@@ -48,16 +39,22 @@ INCLUDE_ASM(s32, "code_181810", ActorSpeak);
         gSpeakingActor = actor;
         gSpeakingActorPart = part;
 
+        headX = actor->currentPos.x + actor->headOffset.x;
         if ((actor->flags & 0x8000) == 0) {
-            speakerMouthY = actor->otherPosheadOffset.y + actor->currentPos.y + actor->size[1];
+            headY = actor->size.y + (actor->currentPos.y + actor->headOffset.y);
         } else {
-            speakerMouthY = actor->otherPosheadOffset.y + actor->currentPos.y + (actor->size[1] / 2);
+            headY = actor->headOffset.y + actor->currentPos.y + (actor->size.y / 2);
         }
+        headZ = actor->headOffset.z + actor->currentPos.z;
+        get_screen_coords(Cam_BATTLE, headX, headY, headZ, &screenX, &screenY, &screenZ);
 
-        get_screen_coords(Cam_BATTLE, actor->currentPos.x + actor->otherPosheadOffset.x, speakerMouthY, actor->currentPos.z + actor->otherPosheadOffset.z, &screenX, &screenY, &screenZ);
-        gSpeakingActorPrintIsDone = 0;
-        gSpeakingActorPrintCtx = load_string(stringID, &gSpeakingActorPrintIsDone);
+        {
+            s32* isPrintDone = &gSpeakingActorPrintIsDone;
+            *isPrintDone = FALSE;
+            gSpeakingActorPrintCtx = load_string(stringID, isPrintDone);
+        }
         clamp_printer_coords(gSpeakingActorPrintCtx, screenX, screenY);
+
         script->functionTemp[0] = 0;
         D_8009A650[0] |= 0x10;
         if (gSpeakingActorTalkAnim >= 0) {
@@ -69,20 +66,25 @@ INCLUDE_ASM(s32, "code_181810", ActorSpeak);
     if (script->functionTemp[0] == 0) {
         actor = gSpeakingActor;
         part = gSpeakingActorPart;
-        if ((actor->flags & 0x8000) == 0) {
-            speakerMouthY = actor->currentPos.y + actor->otherPosheadOffset.y + actor->size[1];
-        } else {
-            speakerMouthY = actor->currentPos.y + actor->otherPosheadOffset.y + (actor->size[1] / 2);
-        }
-        get_screen_coords(Cam_BATTLE, actor->currentPos.x + actor->otherPosheadOffset.x, speakerMouthY, actor->currentPos.z + actor->otherPosheadOffset.z, &screenX, &screenY, &screenZ);
-        clamp_printer_coords(printContext = gSpeakingActorPrintCtx, screenX, screenY);
 
-        if (printContext->stateFlags & 0x40) {
+        headX = actor->currentPos.x + actor->headOffset.x;
+        if ((actor->flags & 0x8000) == 0) {
+            headY = actor->size.y + (actor->currentPos.y + actor->headOffset.y);
+        } else {
+            headY = actor->headOffset.y + actor->currentPos.y + (actor->size.y / 2);
+        }
+        headZ = actor->headOffset.z + actor->currentPos.z;
+        get_screen_coords(Cam_BATTLE, headX, headY, headZ, &screenX, &screenY, &screenZ);
+
+        printContext = &gSpeakingActorPrintCtx;
+        clamp_printer_coords(*printContext, screenX, screenY);
+
+        if ((*printContext)->stateFlags & 0x40) {
             decrement_status_menu_disabled();
             return ApiStatus_DONE1;
         }
 
-        if (printContext->stateFlags & 0x80) { // "is talking" flag
+        if ((*printContext)->stateFlags & 0x80) { // "is talking" flag
             anim = gSpeakingActorTalkAnim;
         } else {
             anim = gSpeakingActorIdleAnim;
@@ -100,7 +102,10 @@ INCLUDE_ASM(s32, "code_181810", ActorSpeak);
     }
 
     return ApiStatus_BLOCK;
-}*/
+}
+#else
+INCLUDE_ASM(s32, "code_181810", ActorSpeak);
+#endif
 
 INCLUDE_ASM(s32, "code_181810", EndActorSpeech);
 

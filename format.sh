@@ -21,7 +21,7 @@ astyle ${FILES} \
     --lineend=linux \
     --convert-tabs \
     --max-code-length=120 \
-    --min-conditional-indent=1 \
+    --min-conditional-indent=0 \
     --style=attach \
     --align-pointer=type --align-reference=name \
     --indent-switches \
