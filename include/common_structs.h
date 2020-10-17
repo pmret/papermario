@@ -10,6 +10,11 @@ struct ScriptInstance;
 
 typedef ApiStatus(*ApiFunc)(struct ScriptInstance*, s32);
 
+typedef struct Vec2b {
+    /* 0x00 */ u8 x;
+    /* 0x01 */ u8 y;
+} Vec2b; // size = 0x02
+
 typedef struct Vec3f {
     /* 0x00 */ f32 x;
     /* 0x04 */ f32 y;
@@ -1263,7 +1268,7 @@ typedef struct Actor {
     /* 0x137 */ char unk_137;
     /* 0x138 */ struct Vec3f homePos;
     /* 0x144 */ struct Vec3f currentPos;
-    /* 0x150 */ Vec3s otherPosheadOffset;
+    /* 0x150 */ Vec3s headOffset;
     /* 0x156 */ s16 healthBarPosition[3];
     /* 0x15C */ f32 rotation[3];
     /* 0x168 */ s16 rotationPivotOffset[3];
@@ -1272,7 +1277,7 @@ typedef struct Actor {
     /* 0x17C */ f32 scaleModifier[3]; /* multiplies normal scale factors componentwise */
     /* 0x188 */ f32 scalingFactor;
     /* 0x18C */ f32 yaw;
-    /* 0x190 */ u8 size[2];
+    /* 0x190 */ Vec2b size;
     /* 0x192 */ s16 actorID;
     /* 0x194 */ char unk_194[8];
     /* 0x19C */ s32 actorTypeData1[6]; /* 4 = jump sound */
