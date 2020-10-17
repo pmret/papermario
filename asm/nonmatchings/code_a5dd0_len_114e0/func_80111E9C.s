@@ -5,8 +5,8 @@ glabel func_80111E9C
 /* A859C 80111E9C 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* A85A0 80111EA0 AFB00010 */  sw        $s0, 0x10($sp)
 /* A85A4 80111EA4 0080802D */  daddu     $s0, $a0, $zero
-/* A85A8 80111EA8 3C048015 */  lui       $a0, 0x8015
-/* A85AC 80111EAC 8C8412EC */  lw        $a0, 0x12ec($a0)
+/* A85A8 80111EA8 3C048015 */  lui       $a0, %hi(gLastCreatedEntityIndex)
+/* A85AC 80111EAC 8C8412EC */  lw        $a0, %lo(gLastCreatedEntityIndex)($a0)
 /* A85B0 80111EB0 AFBF0014 */  sw        $ra, 0x14($sp)
 /* A85B4 80111EB4 0C04417A */  jal       get_entity_by_index
 /* A85B8 80111EB8 00000000 */   nop      

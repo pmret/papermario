@@ -16,10 +16,10 @@ glabel nuGfxTaskMgr
 /* 7E6C 8002CA6C AFB00018 */   sw       $s0, 0x18($sp)
 /* 7E70 8002CA70 24130004 */  addiu     $s3, $zero, 4
 /* 7E74 8002CA74 24120008 */  addiu     $s2, $zero, 8
-/* 7E78 8002CA78 3C11800A */  lui       $s1, 0x800a
-/* 7E7C 8002CA7C 2631A5F8 */  addiu     $s1, $s1, -0x5a08
-/* 7E80 8002CA80 3C10800A */  lui       $s0, 0x800a
-/* 7E84 8002CA84 2610A618 */  addiu     $s0, $s0, -0x59e8
+/* 7E78 8002CA78 3C11800A */  lui       $s1, %hi(nuGfxDisplay)
+/* 7E7C 8002CA7C 2631A5F8 */  addiu     $s1, $s1, %lo(nuGfxDisplay)
+/* 7E80 8002CA80 3C10800A */  lui       $s0, %hi(nuGfxTaskSpool)
+/* 7E84 8002CA84 2610A618 */  addiu     $s0, $s0, %lo(nuGfxTaskSpool)
 .L8002CA88:
 /* 7E88 8002CA88 3C04800E */  lui       $a0, 0x800e
 /* 7E8C 8002CA8C 2484AC90 */  addiu     $a0, $a0, -0x5370

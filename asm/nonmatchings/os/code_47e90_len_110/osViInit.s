@@ -10,8 +10,8 @@ glabel osViInit
 /* 47EA4 8006CAA4 AFBF0014 */  sw        $ra, 0x14($sp)
 /* 47EA8 8006CAA8 0C01925C */  jal       bzero
 /* 47EAC 8006CAAC 24050060 */   addiu    $a1, $zero, 0x60
-/* 47EB0 8006CAB0 3C038000 */  lui       $v1, 0x8000
-/* 47EB4 8006CAB4 8C630300 */  lw        $v1, 0x300($v1)
+/* 47EB0 8006CAB0 3C038000 */  lui       $v1, %hi(osTvType)
+/* 47EB4 8006CAB4 8C630300 */  lw        $v1, %lo(osTvType)($v1)
 /* 47EB8 8006CAB8 3C018009 */  lui       $at, 0x8009
 /* 47EBC 8006CABC AC3059D0 */  sw        $s0, 0x59d0($at)
 /* 47EC0 8006CAC0 26100030 */  addiu     $s0, $s0, 0x30

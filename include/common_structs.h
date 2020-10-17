@@ -1,6 +1,7 @@
 #ifndef _COMMON_STRUCTS_H_
 #define _COMMON_STRUCTS_H_
 
+#include "macros.h"
 #include "ultra64.h"
 #include "types.h"
 #include "si.h"
@@ -78,19 +79,21 @@ typedef struct Npc {
     /* 0x034 */ char unk_34[4];
     /* 0x038 */ struct Vec3f pos;
     /* 0x044 */ struct Vec3f rotation;
-    /* 0x050 */ char unk_50[4];
+    /* 0x050 */ f32 unk_50;
     /* 0x054 */ struct Vec3f scale;
     /* 0x060 */ struct Vec3f moveToPos;
     /* 0x06C */ struct Vec3f colliderPos; /* used during collision with player */
     /* 0x078 */ s32 shadowIndex;
     /* 0x07C */ f32 shadowScale;
-    /* 0x080 */ char unk_80[8];
+    /* 0x080 */ s32 unk_80;
+    /* 0x084 */ char unk_84[4];
     /* 0x088 */ s16 isFacingAway;
     /* 0x08A */ s16 yawCamOffset;
     /* 0x08C */ char unk_8C[2];
     /* 0x08E */ s16 duration; /* formerly interp_counter */
     /* 0x090 */ s16 homePos[3];
-    /* 0x096 */ char unk_96[14];
+    /* 0x096 */ char unk_96[12];
+    /* 0x0A2 */ s16 unk_A2;
     /* 0x0A4 */ u8 npcID;
     /* 0x0A5 */ char unk_A5;
     /* 0x0A6 */ s16 collisionRadius;
@@ -268,9 +271,9 @@ typedef struct ScriptInstance {
     /* 0x007 */ s8 switchDepth; /* how many nested switches we are in, max = 8 */
     /* 0x008 */ Bytecode* ptrNextLine;
     /* 0x00C */ Bytecode* ptrReadPos;
-    /* 0x010 */ s32 labelIndices[4];
+    /* 0x010 */ s8 labelIndices[16];
     /* 0x020 */ UNK_PTR labelPositions[16];
-    /* 0x060 */ s32 deleted; /* set to zero in KillScript when malloc'd */
+    /* 0x060 */ UNK_PTR unk_60; /* unknown pointer; allocated on the heap, free'd in kill_script() */
     /* 0x064 */ struct ScriptInstance* blockingParent; /* parent? */
     /* 0x068 */ struct ScriptInstance* childScript;
     /* 0x06C */ struct ScriptInstance* parentScript; /* brother? */
@@ -295,6 +298,8 @@ typedef struct ScriptInstance {
     /* 0x160 */ Bytecode* ptrSavedPosition;
     /* 0x164 */ Bytecode* ptrCurrentLine;
 } ScriptInstance; // size = 0x168
+
+typedef ScriptInstance* ScriptList[MAX_SCRIPTS];
 
 typedef struct Entity {
     /* 0x00 */ s32 flags;
@@ -540,8 +545,12 @@ typedef struct BattleStatus {
     /* 0x07A */ u8 incrementStarPointDelay; /* related to star points, set to 0x28 when they are dropped */
     /* 0x07B */ u8 damageTaken;
     /* 0x07C */ u8 changePartnerAllowed;
-    /* 0x07D */ char unk_7D[10];
-    /* 0x087 */ u8 blockResult; /* 0 = fail, 1 = success, -1 = mashed */
+    /* 0x07D */ char unk_7D[4];
+    /* 0x081 */ s8 actionSuccess;
+    /* 0x072 */ char unk_7C[3];
+    /* 0x085 */ s8 unk_85;
+    /* 0x086 */ char unk_86;
+    /* 0x087 */ s8 blockResult; /* 0 = fail, 1 = success, -1 = mashed */
     /* 0x088 */ u8 itemUsesLeft; /* set to 2 for doublke dip, 3 for triple */
     /* 0x089 */ u8 hpDrainCount;
     /* 0x08A */ char unk_8A;
@@ -578,7 +587,6 @@ typedef struct BattleStatus {
     /* 0x0D8 */ struct Actor* playerActor;
     /* 0x0DC */ struct Actor* partnerActor;
     /* 0x0E0 */ struct Actor* enemyActors[24];
-    /* 0x0E4 */ char unk_E4[92];
     /* 0x140 */ s16 enemyIDs[24];
     /* 0x170 */ char unk_170;
     /* 0x171 */ u8 numEnemyActors;
@@ -772,6 +780,15 @@ typedef struct StaticItem {
 typedef struct Effect {
     /* 0x00 */ char unk_00[32];
 } Effect; // size = 0x20
+
+typedef struct EffectTableEntry {
+    /* 0x00 */ s32 dmaStart;
+    /* 0x04 */ s32 dmaEnd;
+    /* 0x08 */ s32 dmaDest;
+    /* 0x0C */ s32 unkStartRom;
+    /* 0x10 */ s32 unkEndRom;
+    /* 0x14 */ UNK_FUN_PTR(delegate);
+} EffectTableEntry; // size = 0x18
 
 typedef struct ItemEntity {
     /* 0x00 */ s32 flags;
@@ -1415,9 +1432,10 @@ typedef struct PlayerStatus {
     /* 0x0B8 */ s32 anim;
     /* 0x0BC */ char unk_BC[2];
     /* 0x0BE */ u8 renderMode;
-    /* 0x0BF */ char unk_BF;
+    /* 0x0BF */ s8 unk_BF;
     /* 0x0C0 */ u32* decorationList;
-    /* 0x0C4 */ char unk_C4[8];
+    /* 0x0C4 */ char unk_C4[4];
+    /* 0x0C8 */ UNK_PTR unk_C8;
     /* 0x0CC */ s32 shadowID;
     /* 0x0D0 */ char unk_D0[8];
     /* 0x0D8 */ UNK_PTR** unk_D8;

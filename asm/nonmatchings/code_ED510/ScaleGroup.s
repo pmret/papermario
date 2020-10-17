@@ -20,8 +20,8 @@ glabel ScaleGroup
 /* EE408 802C9A58 2402FFFF */  addiu     $v0, $zero, -1
 /* EE40C 802C9A5C 16220007 */  bne       $s1, $v0, .L802C9A7C
 /* EE410 802C9A60 26100004 */   addiu    $s0, $s0, 4
-/* EE414 802C9A64 3C04802D */  lui       $a0, 0x802d
-/* EE418 802C9A68 24848D88 */  addiu     $a0, $a0, -0x7278
+/* EE414 802C9A64 3C04802D */  lui       $a0, %hi(ScaleModel)
+/* EE418 802C9A68 24848D88 */  addiu     $a0, $a0, %lo(ScaleModel)
 /* EE41C 802C9A6C 0C0B2568 */  jal       func_802C95A0
 /* EE420 802C9A70 0240282D */   daddu    $a1, $s2, $zero
 /* EE424 802C9A74 080B26C7 */  j         .L802C9B1C

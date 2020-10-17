@@ -5,12 +5,12 @@ glabel sort_scripts
 /* E79B0 802C3000 27BDFFF8 */  addiu     $sp, $sp, -8
 /* E79B4 802C3004 0000682D */  daddu     $t5, $zero, $zero
 /* E79B8 802C3008 01A0482D */  daddu     $t1, $t5, $zero
-/* E79BC 802C300C 3C05802E */  lui       $a1, %hi(gScriptIndexList)
-/* E79C0 802C3010 24A5AA98 */  addiu     $a1, $a1, %lo(gScriptIndexList)
+/* E79BC 802C300C 3C05802E */  lui       $a1, %hi(gScriptIdList)
+/* E79C0 802C3010 24A5AA98 */  addiu     $a1, $a1, %lo(gScriptIdList)
 /* E79C4 802C3014 3C06802E */  lui       $a2, %hi(gCurrentScriptListPtr)
 /* E79C8 802C3018 8CC6A890 */  lw        $a2, %lo(gCurrentScriptListPtr)($a2)
-/* E79CC 802C301C 3C04802E */  lui       $a0, 0x802e
-/* E79D0 802C3020 2484A898 */  addiu     $a0, $a0, -0x5768
+/* E79CC 802C301C 3C04802E */  lui       $a0, %hi(gScriptIndexList)
+/* E79D0 802C3020 2484A898 */  addiu     $a0, $a0, %lo(gScriptIndexList)
 /* E79D4 802C3024 AFB00000 */  sw        $s0, ($sp)
 .L802C3028:
 /* E79D8 802C3028 8CC30000 */  lw        $v1, ($a2)
@@ -37,11 +37,11 @@ glabel sort_scripts
 /* E7A28 802C3078 0000482D */   daddu    $t1, $zero, $zero
 /* E7A2C 802C307C 3C10802E */  lui       $s0, %hi(gCurrentScriptListPtr)
 /* E7A30 802C3080 2610A890 */  addiu     $s0, $s0, %lo(gCurrentScriptListPtr)
-/* E7A34 802C3084 3C0E802E */  lui       $t6, %hi(gScriptIndexList)
-/* E7A38 802C3088 25CEAA98 */  addiu     $t6, $t6, %lo(gScriptIndexList)
+/* E7A34 802C3084 3C0E802E */  lui       $t6, %hi(gScriptIdList)
+/* E7A38 802C3088 25CEAA98 */  addiu     $t6, $t6, %lo(gScriptIdList)
 /* E7A3C 802C308C 01C0C82D */  daddu     $t9, $t6, $zero
-/* E7A40 802C3090 3C18802E */  lui       $t8, 0x802e
-/* E7A44 802C3094 2718A898 */  addiu     $t8, $t8, -0x5768
+/* E7A40 802C3090 3C18802E */  lui       $t8, %hi(gScriptIndexList)
+/* E7A44 802C3094 2718A898 */  addiu     $t8, $t8, %lo(gScriptIndexList)
 /* E7A48 802C3098 0300782D */  daddu     $t7, $t8, $zero
 .L802C309C:
 /* E7A4C 802C309C 25280001 */  addiu     $t0, $t1, 1

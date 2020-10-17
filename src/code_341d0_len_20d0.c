@@ -18,13 +18,15 @@ INCLUDE_ASM(s32, "code_341d0_len_20d0", func_80059AB8);
 
 INCLUDE_ASM(s32, "code_341d0_len_20d0", func_80059BD4);
 
-INCLUDE_ASM(s32, "code_341d0_len_20d0", func_80059C80);
+void func_80059C80(void) {
+}
 
 INCLUDE_ASM(s32, "code_341d0_len_20d0", func_80059C88);
 
 INCLUDE_ASM(s32, "code_341d0_len_20d0", func_80059C9C);
 
-INCLUDE_ASM(s32, "code_341d0_len_20d0", func_80059D48);
+void func_80059D48(void) {
+}
 
 INCLUDE_ASM(s32, "code_341d0_len_20d0", func_80059D50);
 
@@ -40,7 +42,9 @@ INCLUDE_ASM(s32, "code_341d0_len_20d0", remove_all_effects);
 
 INCLUDE_ASM(s32, "code_341d0_len_20d0", play_effect);
 
-INCLUDE_ASM(s32, "code_341d0_len_20d0", load_map_script_lib);
+void load_map_script_lib(void) {
+    dma_copy(&mapScriptLibStart, &mapScriptLibEnd, &mapScriptLibVram);
+}
 
 INCLUDE_ASM(s32, "code_341d0_len_20d0", load_map_by_IDs);
 

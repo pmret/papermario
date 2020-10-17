@@ -8,10 +8,9 @@ Discord: [Paper Mario Modding](https://discord.gg/urUm3VG)
 
 ## Setup
 
-You'll need Linux, a Linux VM, or Windows 10 (WSL) to work on this project. For WSL, we've included `windows_termainl.bat` under tools that you can use to quickly spin up a terminal for your default distro set using `wsl --set-default <Distro>`.
+You'll need Linux, a Linux VM, or [Windows 10 (WSL2)](#wsl) to work on this project.
 
 #### Clone the repository
-
 ```sh
 $ git clone https://github.com/ethteck/papermario.git
 $ cd papermario
@@ -48,6 +47,10 @@ If you get `OK`, you're all set! Otherwise, please feel free to reach out to us 
 ### Dependencies
 
 There are a few additional dependencies needed when contributing to this project. You can install them with `./install.sh --extra`.
+
+### WSL
+
+We provide [windows_terminal.bat](tools/windows_terminal.bat) to open a [Windows Terminal](https://www.microsoft.com/en-us/p/windows-terminal/9n0dx20hk701) with a recommended layout. Make sure a default distro (e.g. `wsl --set-default ubuntu`) is set beforehand.
 
 ### Rebuilding
 

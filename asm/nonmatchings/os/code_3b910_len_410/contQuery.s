@@ -4,8 +4,8 @@
 glabel contQuery
 /* 3BC70 80060870 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 3BC74 80060874 AFB00010 */  sw        $s0, 0x10($sp)
-/* 3BC78 80060878 3C10800E */  lui       $s0, 0x800e
-/* 3BC7C 8006087C 2610AC78 */  addiu     $s0, $s0, -0x5388
+/* 3BC78 80060878 3C10800E */  lui       $s0, %hi(nuSiMesgQ)
+/* 3BC7C 8006087C 2610AC78 */  addiu     $s0, $s0, %lo(nuSiMesgQ)
 /* 3BC80 80060880 AFBF0014 */  sw        $ra, 0x14($sp)
 /* 3BC84 80060884 0C018640 */  jal       osContStartQuery
 /* 3BC88 80060888 0200202D */   daddu    $a0, $s0, $zero

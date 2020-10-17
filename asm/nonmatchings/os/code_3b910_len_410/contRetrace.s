@@ -14,14 +14,14 @@ glabel contRetrace
 /* 3BA80 80060680 0000282D */  daddu     $a1, $zero, $zero
 /* 3BA84 80060684 0C0195BC */  jal       osRecvMesg
 /* 3BA88 80060688 00A0302D */   daddu    $a2, $a1, $zero
-/* 3BA8C 8006068C 3C04800E */  lui       $a0, 0x800e
-/* 3BA90 80060690 2484AC78 */  addiu     $a0, $a0, -0x5388
+/* 3BA8C 8006068C 3C04800E */  lui       $a0, %hi(nuSiMesgQ)
+/* 3BA90 80060690 2484AC78 */  addiu     $a0, $a0, %lo(nuSiMesgQ)
 /* 3BA94 80060694 0C018668 */  jal       osContStartReadData
 /* 3BA98 80060698 00000000 */   nop      
 /* 3BA9C 8006069C 14400016 */  bnez      $v0, .L800606F8
 /* 3BAA0 800606A0 0000282D */   daddu    $a1, $zero, $zero
-/* 3BAA4 800606A4 3C04800E */  lui       $a0, 0x800e
-/* 3BAA8 800606A8 2484AC78 */  addiu     $a0, $a0, -0x5388
+/* 3BAA4 800606A4 3C04800E */  lui       $a0, %hi(nuSiMesgQ)
+/* 3BAA8 800606A8 2484AC78 */  addiu     $a0, $a0, %lo(nuSiMesgQ)
 /* 3BAAC 800606AC 0C0195BC */  jal       osRecvMesg
 /* 3BAB0 800606B0 24060001 */   addiu    $a2, $zero, 1
 /* 3BAB4 800606B4 3C02800A */  lui       $v0, 0x800a
@@ -33,9 +33,9 @@ glabel contRetrace
 /* 3BACC 800606CC 2484C040 */  addiu     $a0, $a0, -0x3fc0
 /* 3BAD0 800606D0 0C019608 */  jal       osSendMesg
 /* 3BAD4 800606D4 24060001 */   addiu    $a2, $zero, 1
-/* 3BAD8 800606D8 3C04800B */  lui       $a0, 0x800b
+/* 3BAD8 800606D8 3C04800B */  lui       $a0, %hi(nuContData)
 /* 3BADC 800606DC 0C01868A */  jal       osContGetReadData
-/* 3BAE0 800606E0 24841D68 */   addiu    $a0, $a0, 0x1d68
+/* 3BAE0 800606E0 24841D68 */   addiu    $a0, $a0, %lo(nuContData)
 /* 3BAE4 800606E4 3C04800E */  lui       $a0, 0x800e
 /* 3BAE8 800606E8 2484C040 */  addiu     $a0, $a0, -0x3fc0
 /* 3BAEC 800606EC 0000282D */  daddu     $a1, $zero, $zero

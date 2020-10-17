@@ -808,8 +808,8 @@ glabel func_8023F088
 /* 16E5B8 8023FCD8 AE180090 */  sw        $t8, 0x90($s0)
 /* 16E5BC 8023FCDC AE030094 */  sw        $v1, 0x94($s0)
 /* 16E5C0 8023FCE0 AFC20000 */  sw        $v0, ($fp)
-/* 16E5C4 8023FCE4 3C04800A */  lui       $a0, 0x800a
-/* 16E5C8 8023FCE8 8C84A5DC */  lw        $a0, -0x5a24($a0)
+/* 16E5C4 8023FCE4 3C04800A */  lui       $a0, %hi(nuGfxZBuffer)
+/* 16E5C8 8023FCE8 8C84A5DC */  lw        $a0, %lo(nuGfxZBuffer)($a0)
 /* 16E5CC 8023FCEC 260200A8 */  addiu     $v0, $s0, 0xa8
 /* 16E5D0 8023FCF0 AE190098 */  sw        $t9, 0x98($s0)
 /* 16E5D4 8023FCF4 AE03009C */  sw        $v1, 0x9c($s0)

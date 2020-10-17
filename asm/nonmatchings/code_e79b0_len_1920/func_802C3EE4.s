@@ -9,10 +9,10 @@ glabel func_802C3EE4
 /* E88A4 802C3EF4 3C08802E */  lui       $t0, %hi(gCurrentScriptListPtr)
 /* E88A8 802C3EF8 8D08A890 */  lw        $t0, %lo(gCurrentScriptListPtr)($t0)
 /* E88AC 802C3EFC 0040382D */  daddu     $a3, $v0, $zero
-/* E88B0 802C3F00 3C06802E */  lui       $a2, %hi(gScriptIndexList)
-/* E88B4 802C3F04 24C6AA98 */  addiu     $a2, $a2, %lo(gScriptIndexList)
-/* E88B8 802C3F08 3C05802E */  lui       $a1, 0x802e
-/* E88BC 802C3F0C 24A5A898 */  addiu     $a1, $a1, -0x5768
+/* E88B0 802C3F00 3C06802E */  lui       $a2, %hi(gScriptIdList)
+/* E88B4 802C3F04 24C6AA98 */  addiu     $a2, $a2, %lo(gScriptIdList)
+/* E88B8 802C3F08 3C05802E */  lui       $a1, %hi(gScriptIndexList)
+/* E88BC 802C3F0C 24A5A898 */  addiu     $a1, $a1, %lo(gScriptIndexList)
 .L802C3F10:
 /* E88C0 802C3F10 8CA20000 */  lw        $v0, ($a1)
 /* E88C4 802C3F14 00021080 */  sll       $v0, $v0, 2

@@ -14,8 +14,8 @@ glabel nuAuDmaNew
 /* 26648 8004B248 AC600004 */  sw        $zero, 4($v1)
 /* 2664C 8004B24C A0620000 */  sb        $v0, ($v1)
 .L8004B250:
-/* 26650 8004B250 3C028005 */  lui       $v0, 0x8005
-/* 26654 8004B254 2442B074 */  addiu     $v0, $v0, -0x4f8c
+/* 26650 8004B250 3C028005 */  lui       $v0, %hi(nuAuDmaCallBack)
+/* 26654 8004B254 2442B074 */  addiu     $v0, $v0, %lo(nuAuDmaCallBack)
 /* 26658 8004B258 3C018008 */  lui       $at, 0x8008
 /* 2665C 8004B25C AC208178 */  sw        $zero, -0x7e88($at)
 /* 26660 8004B260 03E00008 */  jr        $ra

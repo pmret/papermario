@@ -7,8 +7,8 @@ glabel pause_badges_count_equipped
 /* 13A3F8 802470B8 3C108011 */  lui       $s0, %hi(gPlayerData)
 /* 13A3FC 802470BC 2610F290 */  addiu     $s0, $s0, %lo(gPlayerData)
 /* 13A400 802470C0 26040208 */  addiu     $a0, $s0, 0x208
-/* 13A404 802470C4 3C068024 */  lui       $a2, 0x8024
-/* 13A408 802470C8 24C66FE0 */  addiu     $a2, $a2, 0x6fe0
+/* 13A404 802470C4 3C068024 */  lui       $a2, %hi(pause_badges_comparator)
+/* 13A408 802470C8 24C66FE0 */  addiu     $a2, $a2, %lo(pause_badges_comparator)
 /* 13A40C 802470CC AFBF0014 */  sw        $ra, 0x14($sp)
 /* 13A410 802470D0 0C091293 */  jal       pause_sort_item_list
 /* 13A414 802470D4 24050040 */   addiu    $a1, $zero, 0x40

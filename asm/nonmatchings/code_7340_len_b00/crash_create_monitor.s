@@ -27,8 +27,8 @@ glabel crash_create_monitor
 /* 7D08 8002C908 AE0209CC */   sw       $v0, 0x9cc($s0)
 /* 7D0C 8002C90C 0200202D */  daddu     $a0, $s0, $zero
 /* 7D10 8002C910 24050002 */  addiu     $a1, $zero, 2
-/* 7D14 8002C914 3C068003 */  lui       $a2, 0x8003
-/* 7D18 8002C918 24C6C81C */  addiu     $a2, $a2, -0x37e4
+/* 7D14 8002C914 3C068003 */  lui       $a2, %hi(crash_monitor_thread)
+/* 7D18 8002C918 24C6C81C */  addiu     $a2, $a2, %lo(crash_monitor_thread)
 /* 7D1C 8002C91C 24020080 */  addiu     $v0, $zero, 0x80
 /* 7D20 8002C920 0000382D */  daddu     $a3, $zero, $zero
 /* 7D24 8002C924 AFB10010 */  sw        $s1, 0x10($sp)

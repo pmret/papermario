@@ -45,14 +45,14 @@ glabel bind_dynamic_entity_3
 /* B98E0 801231E0 AC820000 */  sw        $v0, ($a0)
 /* B98E4 801231E4 16200004 */  bnez      $s1, .L801231F8
 /* B98E8 801231E8 AC910004 */   sw       $s1, 4($a0)
-/* B98EC 801231EC 3C028012 */  lui       $v0, 0x8012
-/* B98F0 801231F0 244230B0 */  addiu     $v0, $v0, 0x30b0
+/* B98EC 801231EC 3C028012 */  lui       $v0, %hi(stub_dynamic_entity_delegate)
+/* B98F0 801231F0 244230B0 */  addiu     $v0, $v0, %lo(stub_dynamic_entity_delegate)
 /* B98F4 801231F4 AC820004 */  sw        $v0, 4($a0)
 .L801231F8:
 /* B98F8 801231F8 16400004 */  bnez      $s2, .L8012320C
 /* B98FC 801231FC AC920008 */   sw       $s2, 8($a0)
-/* B9900 80123200 3C028012 */  lui       $v0, 0x8012
-/* B9904 80123204 244230B0 */  addiu     $v0, $v0, 0x30b0
+/* B9900 80123200 3C028012 */  lui       $v0, %hi(stub_dynamic_entity_delegate)
+/* B9904 80123204 244230B0 */  addiu     $v0, $v0, %lo(stub_dynamic_entity_delegate)
 /* B9908 80123208 AC820008 */  sw        $v0, 8($a0)
 .L8012320C:
 /* B990C 8012320C 3C028007 */  lui       $v0, %hi(gGameStatusPtr)

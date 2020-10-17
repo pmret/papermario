@@ -1,13 +1,13 @@
 name: "Paper Mario (North America)"
 basename: "papermario"
 options:
-  "find-file-boundaries": True
-  "skip-asm": True
+  find-file-boundaries: True
   pycparser_flags: ["-Iinclude", "-D_LANGUAGE_C", "-ffreestanding", "-DF3DEX_GBI_2", "-DSPLAT"]
   compiler: "GCC"
+  mnemonic_ljust: 10
 segments:
   - name: header
-    type: code
+    type: header
     start: 0x00
     vram: 0
     files:
@@ -62,15 +62,22 @@ segments:
     - [0x362a0, "c", "code_362a0_len_2f70"]
     - [0x39210, "c", "code_39210_len_aa0"]
     - [0x39cb0, "c", "os/code_39cb0_len_100"]
-    - [0x39db0, "c", "os/code_39db0_len_8a0"]
-    - [0x3a650, "c", "os/code_3a650_len_40"]
-    - [0x3a690, "c", "os/code_3a690_len_40"]
-    - [0x3a6d0, "c", "os/code_3a6d0_len_20"]
-    - [0x3a6f0, "c", "os/code_3a6f0_len_110"]
-    - [0x3a800, "c", "os/code_3a800_len_30"]
-    - [0x3a830, "c", "os/code_3a830_len_20"]
-    - [0x3a850, "c", "os/code_3a850_le_a40"]
-    - [0x3b290, "c", "os/code_3b290_len_100"]
+    - [0x39db0, "c", "os/nusys/nuSched"]
+    - [0x3a650, "c", "os/nusys/nuGfxFuncSet"]
+    - [0x3a690, "c", "os/nusys/nuGfxPreNMIFuncSet"]
+    - [0x3a6d0, "c", "os/nusys/nuGfxTaskAllEndWait"]
+    - [0x3a6f0, "c", "os/nusys/nuGfxSetCfb"]
+    - [0x3a800, "c", "os/nusys/nuGfxDisplayOff"]
+    - [0x3a830, "c", "os/nusys/nuGfxDisplayOn"]
+    - [0x3a850, "c", "os/nusys/nuPiInit"]
+    - [0x3a890, "c", "os/nusys/nuPiReadRom"]
+    - [0x3a960, "c", "os/nusys/nuGfxInit"]
+    - [0x3aa10, "c", "os/nusys/nuContInit"]
+    - [0x3aa50, "c", "os/nusys/nuContDataGet"]
+    - [0x3aab0, "c", "os/nusys/nuContPakMgr"]
+    - [0x3af10, "c", "os/nusys/nuContRmbMgr"]
+    - [0x3b290, "c", "os/nusys/nuContRmbStart"]
+    - [0x3b2f0, "c", "os/nusys/nuContRmbCheck"]
     - [0x3b390, "c", "os/code_3b390_len_110"]
     - [0x3b4a0, "c", "os/code_3b4a0_len_270"]
     - [0x3b710, "c", "os/code_3b710_len_40"]
@@ -159,7 +166,7 @@ segments:
     - [0x457c0, "c", "os/code_457c0_len_270"]
     - [0x45a30, "c", "os/code_45a30_len_20"]
     - [0x45a50, "c", "os/code_45a50_len_3a0"]
-    - [0x45df0, "c", "os/code_45df0_len_970"]
+    - [0x45df0, "hasm", "os/code_45df0_len_970"]
     - [0x46760, "c", "os/code_46760_len_90"]
     - [0x467f0, "c", "os/code_467f0_len_90"]
     - [0x46880, "c", "os/code_46880_len_260"]
@@ -240,7 +247,10 @@ segments:
     - [0xf8f60, "c", "code_f8f60_len_1560"]
     - [0xfa4c0, "c", "code_fa4c0_len_3bf0"]
     - [0xfe0b0, "c", "code_fe0b0_len_5a0"]
-    - [0xFE650, "bin"]
+    - [0xFE650, ".data", "code_e79b0_len_1920"]
+    - [0xFE660, "bin"]
+    - [0xFE730, ".rodata", "code_e79b0_len_1920"]
+  - [0xFE748, "bin"] # rodata chunk for above overlay; here to avoid the 0x10 alignment
   - name: code
     type: code
     start: 0xFEE30
@@ -268,17 +278,22 @@ segments:
     start: 0x135EE0
     vram: 0x80242BA0
     files:
-    - [0x135EE0, "c", "code_135EE0"]
+    - [0x135EE0, "c"]
+    - [0x13CAF0, "c"]
+    - [0x13FD40, "c"]
+    - [0x140C70, "c"]
+    - [0x1421C0, "c"]
     - [0x1422A0, "bin"]
   - name: code
     type: code
     start: 0x163400
     vram: 0x80242BA0
     files:
-    - [0x163400, "c", "code_163400"]
-    - [0x167570, "c", "code_167570"]
-    - [0x168590, "c", "code_168590"]
-    - [0x169BE0, "c", "code_169BE0"]
+    - [0x163400, "c"]
+    - [0x165490, "c"]
+    - [0x167570, "c"]
+    - [0x168590, "c"]
+    - [0x169BE0, "c"]
     - [0x16A3E0, "bin"]
   - name: code
     type: code
@@ -286,6 +301,22 @@ segments:
     vram: 0x8023E000
     files:
     - [0x16C8E0, "c", "code_16c8e0"]
+    - [0x16F740, "c"]
+    - [0x1776B0, "c"]
+    - [0x17D6A0, "c"]
+    - [0x17FEB0, "c"]
+    - [0x181810, "c"]
+    - [0x182B30, "c"]
+    - [0x18C790, "c"]
+    - [0x18F340, "c"]
+    - [0x190B20, "c"]
+    - [0x1967B0, "c"]
+    - [0x196AA0, "c"]
+    - [0x197F40, "c"]
+    - [0x1A5830, "c"]
+    - [0x1AC760, "c"]
+    - [0x1AF120, "c"]
+    - [0x1AF230, "c"]
     - [0x1AF2C0, "bin"]
   - [0x1CC310, "bin"] # icon images and palettes, vram unknown
   - name: code
@@ -314,7 +345,7 @@ segments:
     start: 0x415D90
     vram: 0x802A1000
     files:
-    - [0x415D90, "c", "code_415D90"]
+    - [0x415D90, "c"]
   - [0x4200C0, "bin"] # todo split this further
   - name: code
     type: code
@@ -322,16 +353,25 @@ segments:
     vram: 0x80280000
     files:
     - [0x7e0e80, "c", "code_7e0e80"]
-    - [0x7E2AA0, "c", "code_7E2AA0"]
-    - [0x7E3700, "c", "code_7E3700"]
-  - [0x7e4d00, "bin"] # todo split this further
+    - [0x7E2AA0, "c"]
+    - [0x7E3700, "c"]
+    - [0x7e4d00, "bin"]
+  - [0x7E73A0, "bin"]  # todo split this further
   - name: code
     type: code
     start: 0xE20EB0
     vram: 0x802B7000
     files:
     - [0xe20eb0, "c", "code_e20eb0"]
-  - [0xe215c0, "bin"]
+  - [0xE215C0, "bin"]
+  - name: code
+    type: code
+    start: 0xE21870
+    vram: 0x802B7000
+    files:
+    - [0xE21870, "c"]
+    - [0xE21EB0, "bin"]
+  - [0xE225B0, "bin"]
   - [0xF007C0, "bin", "Battle_Fanfare_02"] # BGM start
   - [0xF02160, "bin", "Hey_You_03"]
   - [0xF03740, "bin", "The_Goomba_King_s_Decree_07"]

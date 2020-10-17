@@ -64,8 +64,8 @@ glabel start_child_script
 /* E824C 802C389C AE000068 */  sw        $zero, 0x68($s0)
 /* E8250 802C38A0 AE00006C */  sw        $zero, 0x6c($s0)
 /* E8254 802C38A4 92220003 */  lbu       $v0, 3($s1)
-/* E8258 802C38A8 3C04802E */  lui       $a0, 0x802e
-/* E825C 802C38AC 24849CA0 */  addiu     $a0, $a0, -0x6360
+/* E8258 802C38A8 3C04802E */  lui       $a0, %hi(gStaticScriptCounter)
+/* E825C 802C38AC 24849CA0 */  addiu     $a0, $a0, %lo(gStaticScriptCounter)
 /* E8260 802C38B0 24420001 */  addiu     $v0, $v0, 1
 /* E8264 802C38B4 A2020003 */  sb        $v0, 3($s0)
 /* E8268 802C38B8 8C820000 */  lw        $v0, ($a0)
@@ -123,20 +123,20 @@ glabel start_child_script
 /* E8330 802C3980 24A5AC98 */  addiu     $a1, $a1, %lo(gScriptListCount)
 /* E8334 802C3984 8CA20000 */  lw        $v0, ($a1)
 /* E8338 802C3988 00022080 */  sll       $a0, $v0, 2
-/* E833C 802C398C 3C01802E */  lui       $at, 0x802e
+/* E833C 802C398C 3C01802E */  lui       $at, %hi(gScriptIndexList)
 /* E8340 802C3990 00240821 */  addu      $at, $at, $a0
-/* E8344 802C3994 AC33A898 */  sw        $s3, -0x5768($at)
+/* E8344 802C3994 AC33A898 */  sw        $s3, %lo(gScriptIndexList)($at)
 /* E8348 802C3998 8E030144 */  lw        $v1, 0x144($s0)
 /* E834C 802C399C 24420001 */  addiu     $v0, $v0, 1
 /* E8350 802C39A0 ACA20000 */  sw        $v0, ($a1)
-/* E8354 802C39A4 3C01802E */  lui       $at, %hi(gScriptIndexList)
+/* E8354 802C39A4 3C01802E */  lui       $at, %hi(gScriptIdList)
 /* E8358 802C39A8 00240821 */  addu      $at, $at, $a0
-/* E835C 802C39AC AC23AA98 */  sw        $v1, %lo(gScriptIndexList)($at)
+/* E835C 802C39AC AC23AA98 */  sw        $v1, %lo(gScriptIdList)($at)
 .L802C39B0:
 /* E8360 802C39B0 0C0B0CE4 */  jal       func_802C3390
 /* E8364 802C39B4 0200202D */   daddu    $a0, $s0, $zero
-/* E8368 802C39B8 3C03802E */  lui       $v1, 0x802e
-/* E836C 802C39BC 24639CA0 */  addiu     $v1, $v1, -0x6360
+/* E8368 802C39B8 3C03802E */  lui       $v1, %hi(gStaticScriptCounter)
+/* E836C 802C39BC 24639CA0 */  addiu     $v1, $v1, %lo(gStaticScriptCounter)
 /* E8370 802C39C0 8C620000 */  lw        $v0, ($v1)
 /* E8374 802C39C4 14400004 */  bnez      $v0, .L802C39D8
 /* E8378 802C39C8 0200102D */   daddu    $v0, $s0, $zero

@@ -4,8 +4,8 @@
 glabel set_ui_panel_properties
 /* DE3C8 80147CC8 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* DE3CC 80147CCC 0080582D */  daddu     $t3, $a0, $zero
-/* DE3D0 80147CD0 3C0A8016 */  lui       $t2, 0x8016
-/* DE3D4 80147CD4 254A9D50 */  addiu     $t2, $t2, -0x62b0
+/* DE3D0 80147CD0 3C0A8016 */  lui       $t2, %hi(D_80159D50)
+/* DE3D4 80147CD4 254A9D50 */  addiu     $t2, $t2, %lo(D_80159D50)
 /* DE3D8 80147CD8 8FA90030 */  lw        $t1, 0x30($sp)
 /* DE3DC 80147CDC 000B1140 */  sll       $v0, $t3, 5
 /* DE3E0 80147CE0 AFB00010 */  sw        $s0, 0x10($sp)

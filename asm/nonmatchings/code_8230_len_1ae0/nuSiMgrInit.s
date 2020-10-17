@@ -4,8 +4,8 @@
 glabel nuSiMgrInit
 /* 8230 8002CE30 27BDFFC8 */  addiu     $sp, $sp, -0x38
 /* 8234 8002CE34 AFB00030 */  sw        $s0, 0x30($sp)
-/* 8238 8002CE38 3C10800E */  lui       $s0, 0x800e
-/* 823C 8002CE3C 2610AC78 */  addiu     $s0, $s0, -0x5388
+/* 8238 8002CE38 3C10800E */  lui       $s0, %hi(nuSiMesgQ)
+/* 823C 8002CE3C 2610AC78 */  addiu     $s0, $s0, %lo(nuSiMesgQ)
 /* 8240 8002CE40 0200202D */  daddu     $a0, $s0, $zero
 /* 8244 8002CE44 3C05800A */  lui       $a1, 0x800a
 /* 8248 8002CE48 24A5E6F0 */  addiu     $a1, $a1, -0x1910
@@ -50,8 +50,8 @@ glabel nuSiMgrInit
 /* 82DC 8002CEDC 2610E710 */  addiu     $s0, $s0, -0x18f0
 /* 82E0 8002CEE0 0200202D */  daddu     $a0, $s0, $zero
 /* 82E4 8002CEE4 24050006 */  addiu     $a1, $zero, 6
-/* 82E8 8002CEE8 3C068003 */  lui       $a2, 0x8003
-/* 82EC 8002CEEC 24C6CFD0 */  addiu     $a2, $a2, -0x3030
+/* 82E8 8002CEE8 3C068003 */  lui       $a2, %hi(nuSiMgrThread)
+/* 82EC 8002CEEC 24C6CFD0 */  addiu     $a2, $a2, %lo(nuSiMgrThread)
 /* 82F0 8002CEF0 3C02800A */  lui       $v0, 0x800a
 /* 82F4 8002CEF4 244208C0 */  addiu     $v0, $v0, 0x8c0
 /* 82F8 8002CEF8 AFA20010 */  sw        $v0, 0x10($sp)

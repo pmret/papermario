@@ -1,24 +1,24 @@
-#include "common.h"
+#include "code_ebd0_len_6a0.h"
 
-void intro_logos_set_fade_alpha(s16 new_alpha) {
+void intro_logos_set_fade_alpha(s16 alpha) {
     GameStatus* gameStatus = GAME_STATUS;
 
-    gameStatus->bootAlpha = new_alpha;
+    gameStatus->bootAlpha = alpha;
 }
 
-void intro_logos_set_fade_color(s16 arg0) {
+void intro_logos_set_fade_color(s16 color) {
     GameStatus* gameStatus = GAME_STATUS;
 
-    gameStatus->bootRed = arg0;
-    gameStatus->bootGreen = arg0;
-    gameStatus->bootBlue = arg0;
+    gameStatus->bootRed = color;
+    gameStatus->bootGreen = color;
+    gameStatus->bootBlue = color;
 }
 
-s16 intro_logos_fade_in(subtract_val) {
+s16 intro_logos_fade_in(s16 subtractAlpha) {
     GameStatus* gameStatus = GAME_STATUS;
 
     if (gameStatus->bootAlpha != 0) {
-        gameStatus->bootAlpha -= subtract_val;
+        gameStatus->bootAlpha -= subtractAlpha;
         if (gameStatus->bootAlpha << 16 < 0) {
             gameStatus->bootAlpha = 0;
         }
@@ -28,11 +28,11 @@ s16 intro_logos_fade_in(subtract_val) {
     return 0;
 }
 
-s16 intro_logos_fade_out(add_val) {
+s16 intro_logos_fade_out(s16 addAlpha) {
     GameStatus* gameStatus = GAME_STATUS;
 
     if (gameStatus->bootAlpha != 0xFF) {
-        gameStatus->bootAlpha += add_val;
+        gameStatus->bootAlpha += addAlpha;
         if ((gameStatus->bootAlpha > 0xFF)) {
             gameStatus->bootAlpha = 0xFF;
         }

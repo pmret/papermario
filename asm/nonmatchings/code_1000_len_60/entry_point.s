@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel entry_point
-/* 1000 80025C00 3C08800A */  lui       $t0, 0x800a
-/* 1004 80025C04 2508A5B0 */  addiu     $t0, $t0, -0x5a50
+/* 1000 80025C00 3C08800A */  lui       $t0, %hi(D_8009A5B0)
+/* 1004 80025C04 2508A5B0 */  addiu     $t0, $t0, %lo(D_8009A5B0)
 /* 1008 80025C08 3C090004 */  lui       $t1, 4
 /* 100C 80025C0C 25291F50 */  addiu     $t1, $t1, 0x1f50
 .L80025C10:
@@ -15,8 +15,8 @@ glabel entry_point
 /* 1024 80025C24 00000000 */   nop      
 /* 1028 80025C28 3C1D800B */  lui       $sp, 0x800b
 /* 102C 80025C2C 27BD6590 */  addiu     $sp, $sp, 0x6590
-/* 1030 80025C30 3C0A8006 */  lui       $t2, 0x8006
-/* 1034 80025C34 254AE8B0 */  addiu     $t2, $t2, -0x1750
+/* 1030 80025C30 3C0A8006 */  lui       $t2, %hi(nuBoot)
+/* 1034 80025C34 254AE8B0 */  addiu     $t2, $t2, %lo(nuBoot)
 /* 1038 80025C38 01400008 */  jr        $t2
 /* 103C 80025C3C 00000000 */   nop      
 /* 1040 80025C40 00000000 */  nop       

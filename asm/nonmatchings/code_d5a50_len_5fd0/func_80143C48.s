@@ -115,8 +115,8 @@ glabel func_80143C48
 /* DA500 80143E00 AE0D0040 */  sw        $t5, 0x40($s0)
 /* DA504 80143E04 AE420000 */  sw        $v0, ($s2)
 /* DA508 80143E08 AE0E0048 */  sw        $t6, 0x48($s0)
-/* DA50C 80143E0C 3C04800A */  lui       $a0, 0x800a
-/* DA510 80143E10 8C84A5DC */  lw        $a0, -0x5a24($a0)
+/* DA50C 80143E0C 3C04800A */  lui       $a0, %hi(nuGfxZBuffer)
+/* DA510 80143E10 8C84A5DC */  lw        $a0, %lo(nuGfxZBuffer)($a0)
 /* DA514 80143E14 26020058 */  addiu     $v0, $s0, 0x58
 /* DA518 80143E18 AE03004C */  sw        $v1, 0x4c($s0)
 /* DA51C 80143E1C AE420000 */  sw        $v0, ($s2)

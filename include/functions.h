@@ -35,6 +35,7 @@ s32 is_trigger_bound(Trigger*, Bytecode* script);
 Trigger* create_trigger(TriggerDefinition* def);
 s32 _bound_script_trigger_handler(Trigger* trigger);
 
+Actor* get_actor(s32 actorID);
 
 s32 func_800494C0(Npc* npc, s32 arg1, s32 arg2);
 
@@ -45,6 +46,7 @@ f32 set_float_variable(ScriptInstance* script, Bytecode var, f32 value);
 void set_script_timescale(ScriptInstance* script, f32 timescale);
 f32 sin_deg(f32 x);
 f32 cos_deg(f32 x);
+s16 round(f32);
 f32 atan2(f32 startX, f32 startZ, f32 endX, f32 endZ);
 f32 clamp_angle(f32 theta);
 s32 func_80055448(s32);
@@ -56,8 +58,8 @@ s32 osGetId();
 
 s32 func_800EF394(f32);
 s32 does_script_exist(s32 id);
-ScriptInstance* start_script(Bytecode* script, s32 priority, s32 flags);
-ScriptInstance* start_script_in_group(ScriptInstance* script, s32 priority, s32 flags, s32 groups);
+ScriptInstance* start_script(Bytecode* initialLine, s32 priority, s32 initialState);
+ScriptInstance* start_script_in_group(Bytecode* initialLine, u8 priority, s32 initialState, u8 groupFlags);
 
 void func_8011B7C0(u16, s32, s32);
 void func_80137D88(s32, f32);
@@ -90,5 +92,8 @@ s32 play_sound_at_position(s32 soundID, s32 value2, f32 posX, f32 posY, f32 posZ
 s32 set_music_track(s32 musicPlayer, s32 songID, s32 variation, s32 unk, s32 volume);
 
 ScriptInstance* get_script_by_index(s32 index);
+
+void suspend_all_group(s32 groupFlags);
+void kill_script(ScriptInstance* instanceToKill);
 
 #endif

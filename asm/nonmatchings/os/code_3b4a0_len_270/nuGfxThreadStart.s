@@ -12,8 +12,8 @@ glabel nuGfxThreadStart
 /* 3B60C 8006020C AFA20010 */  sw        $v0, 0x10($sp)
 /* 3B610 80060210 24020032 */  addiu     $v0, $zero, 0x32
 /* 3B614 80060214 24050004 */  addiu     $a1, $zero, 4
-/* 3B618 80060218 3C068006 */  lui       $a2, 0x8006
-/* 3B61C 8006021C 24C60248 */  addiu     $a2, $a2, 0x248
+/* 3B618 80060218 3C068006 */  lui       $a2, %hi(nuGfxThread)
+/* 3B61C 8006021C 24C60248 */  addiu     $a2, $a2, %lo(nuGfxThread)
 /* 3B620 80060220 0000382D */  daddu     $a3, $zero, $zero
 /* 3B624 80060224 AFBF001C */  sw        $ra, 0x1c($sp)
 /* 3B628 80060228 0C019798 */  jal       osCreateThread

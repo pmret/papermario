@@ -10,8 +10,8 @@ glabel AssignScript
 /* A86C4 80111FC4 8C83000C */   lw       $v1, 0xc($a0)
 /* A86C8 80111FC8 0C0B1EAF */  jal       get_variable
 /* A86CC 80111FCC 8C650000 */   lw       $a1, ($v1)
-/* A86D0 80111FD0 3C048015 */  lui       $a0, 0x8015
-/* A86D4 80111FD4 8C8412EC */  lw        $a0, 0x12ec($a0)
+/* A86D0 80111FD0 3C048015 */  lui       $a0, %hi(gLastCreatedEntityIndex)
+/* A86D4 80111FD4 8C8412EC */  lw        $a0, %lo(gLastCreatedEntityIndex)($a0)
 /* A86D8 80111FD8 0C04417A */  jal       get_entity_by_index
 /* A86DC 80111FDC 0040802D */   daddu    $s0, $v0, $zero
 /* A86E0 80111FE0 AC500028 */  sw        $s0, 0x28($v0)

@@ -51,8 +51,8 @@ glabel draw_item_entities
 /* C9430 80132D30 2402000D */  addiu     $v0, $zero, 0xd
 .L80132D34:
 /* C9434 80132D34 AE020000 */  sw        $v0, ($s0)
-/* C9438 80132D38 3C028013 */  lui       $v0, 0x8013
-/* C943C 80132D3C 244221A4 */  addiu     $v0, $v0, 0x21a4
+/* C9438 80132D38 3C028013 */  lui       $v0, %hi(appendGfx_item_entity)
+/* C943C 80132D3C 244221A4 */  addiu     $v0, $v0, %lo(appendGfx_item_entity)
 /* C9440 80132D40 0200202D */  daddu     $a0, $s0, $zero
 /* C9444 80132D44 AE050008 */  sw        $a1, 8($s0)
 /* C9448 80132D48 AE02000C */  sw        $v0, 0xc($s0)

@@ -45,8 +45,8 @@ glabel func_8004AB00
 /* 25FA0 8004ABA0 00620019 */  multu     $v1, $v0
 /* 25FA4 8004ABA4 A3A00024 */  sb        $zero, 0x24($sp)
 /* 25FA8 8004ABA8 AFB0002C */  sw        $s0, 0x2c($sp)
-/* 25FAC 8004ABAC 3C028005 */  lui       $v0, 0x8005
-/* 25FB0 8004ABB0 2442B224 */  addiu     $v0, $v0, -0x4ddc
+/* 25FAC 8004ABAC 3C028005 */  lui       $v0, %hi(nuAuDmaNew)
+/* 25FB0 8004ABB0 2442B224 */  addiu     $v0, $v0, %lo(nuAuDmaNew)
 /* 25FB4 8004ABB4 AFA20028 */  sw        $v0, 0x28($sp)
 /* 25FB8 8004ABB8 00001810 */  mfhi      $v1
 /* 25FBC 8004ABBC 000319C2 */  srl       $v1, $v1, 7

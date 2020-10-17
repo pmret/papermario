@@ -34,7 +34,8 @@ INCLUDE_ASM(s32, "code_135EE0", pause_interp_vertical_scroll);
 
 INCLUDE_ASM(s32, "code_135EE0", pause_update_cursor);
 
-INCLUDE_ASM(s32, "code_135EE0", func_80243568);
+void func_80243568(void) {
+}
 
 INCLUDE_ASM(s32, "code_135EE0", pause_textbox_draw_contents);
 
@@ -103,7 +104,9 @@ INCLUDE_ASM(s32, "code_135EE0", pause_badges_is_visible);
 
 INCLUDE_ASM(s32, "code_135EE0", pause_badges_scroll_offset_y);
 
-INCLUDE_ASM(s32, "code_135EE0", pause_badges_scroll_offset_x);
+s32 pause_badges_scroll_offset_x(s32 x) {
+    return x;
+}
 
 INCLUDE_ASM(s32, "code_135EE0", pause_badges_try_remove);
 
@@ -122,85 +125,3 @@ INCLUDE_ASM(s32, "code_135EE0", pause_badges_handle_input);
 INCLUDE_ASM(s32, "code_135EE0", pause_badges_update);
 
 INCLUDE_ASM(s32, "code_135EE0", pause_badges_cleanup);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_items_comparator);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_items_get_pos_x);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_items_get_pos_y);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_items_get_column);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_items_get_row);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_items_is_visible);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_items_scroll_offset_y);
-
-s32 pause_items_scroll_offset_x(s32 beforeX) {
-    return beforeX;
-}
-
-INCLUDE_ASM(s32, "code_135EE0", pause_items_draw_contents);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_items_load_items);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_items_init);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_items_handle_input);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_items_update);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_items_cleanup);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_partners_load_portrait);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_partners_draw_contents);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_partners_draw_title);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_partners_draw_movelist);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_partners_draw_movelist_title);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_partners_draw_movelist_flower);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_partners_init);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_partners_handle_input);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_partners_update);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_partners_cleanup);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_spirits_draw_contents);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_spirits_draw_title);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_spirits_init);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_spirits_handle_input);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_spirits_update);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_spirits_cleanup);
-
-INCLUDE_ASM(s32, "code_135EE0", func_8024D930);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_map_draw_border_arrows);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_map_draw_contents);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_map_draw_title);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_map_init);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_map_handle_input);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_map_update);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_map_cleanup);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_get_menu_string);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_draw_menu_label);

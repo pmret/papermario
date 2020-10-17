@@ -7,9 +7,9 @@ SHELL=/bin/bash -o pipefail
 # BUILD_DIR is location where all build artifacts are placed
 BUILD_DIR = build
 
-SRC_DIRS := src src/os
+SRC_DIRS := src src/os src/os/nusys
 ASM_DIRS := asm asm/os
-INCLUDE_DIRS := include include/PR
+INCLUDE_DIRS := include include/PR src
 DATA_DIRS := bin
 
 # Source code files
@@ -49,7 +49,7 @@ CPPFLAGS   = -Iinclude -D _LANGUAGE_C -ffreestanding -DF3DEX_GBI_2
 ASFLAGS    = -EB -Iinclude -march=vr4300 -mtune=vr4300
 OLDASFLAGS = -EB -Iinclude -G 0
 CFLAGS     = -O2 -quiet -G 0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32
-LDFLAGS    = -T undefined_syms.txt -T $(LD_SCRIPT) -Map $(BUILD_DIR)/papermario.map --no-check-sections
+LDFLAGS    = -T undefined_syms.txt -T undefined_funcs.txt -T $(LD_SCRIPT) -Map $(BUILD_DIR)/papermario.map --no-check-sections
 
 ######################## Targets #############################
 
@@ -59,7 +59,7 @@ default: all
 
 LD_SCRIPT = $(TARGET).ld
 
-all: $(BUILD_DIR) $(TARGET).z64 verify
+all: $(TARGET).ld $(BUILD_DIR) $(TARGET).z64 verify
 
 clean:
 	rm -rf $(BUILD_DIR) $(TARGET).z64
@@ -68,7 +68,13 @@ submodules:
 	git submodule update --init --recursive
 
 split:
-	rm -rf $(DATA_DIRS) && ./tools/n64splat/split.py baserom.z64 tools/splat.yaml .
+	rm -rf $(DATA_DIRS) && ./tools/n64splat/split.py baserom.z64 tools/splat.yaml . --modes ld bin
+
+split-all:
+	rm -rf $(DATA_DIRS) && ./tools/n64splat/split.py baserom.z64 tools/splat.yaml . --modes all
+
+$(TARGET).ld: tools/splat.yaml
+	./tools/n64splat/split.py baserom.z64 tools/splat.yaml . --modes ld
 
 setup: clean submodules split
 
@@ -100,4 +106,4 @@ $(TARGET).z64: $(BUILD_DIR)/$(TARGET).bin
 verify: $(TARGET).z64
 	sha1sum -c checksum.sha1
 
-.PHONY: all clean default diff test
+.PHONY: all clean default
