@@ -21,6 +21,6 @@ s32 heroes_is_ability_active(Actor* actor, Ability ability);
 
 void create_part_shadow(s32 actorId, s32 partIndex);
 void remove_part_shadow(s32 actorId, s32 partIndex);
-void create_part_shadow_by_ptr(UNK_TYPE arg0, ActorPart* part); // arg0 unused
+void create_part_shadow_by_ref(UNK_TYPE arg0, ActorPart* part); // arg0 unused
 
 #endif
