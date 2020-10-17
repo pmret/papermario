@@ -357,7 +357,7 @@ void remove_part_shadow(s32 actorId, s32 partIndex) {
     func_80112328(part->shadow);
 }
 
-void create_part_shadow_by_ptr(UNK_TYPE arg0, ActorPart* part) {
+void create_part_shadow_by_ref(UNK_TYPE arg0, ActorPart* part) {
     part->flags &= ~4;
     part->shadow = create_shadow_type(0, part->currentPos.x, part->currentPos.y, part->currentPos.z);
     part->shadowScale = part->size[0] / 24.0;
