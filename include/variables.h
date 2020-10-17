@@ -22,6 +22,7 @@ extern UNK_FUN_PTR(gCurrentUpdateFunction);
 
 extern s32 gBattleState;
 extern BattleStatus gBattleStatus;
+extern s32 gBattleDmaDest;
 
 extern ScriptList gWorldScriptList;
 extern ScriptList gBattleScriptList;

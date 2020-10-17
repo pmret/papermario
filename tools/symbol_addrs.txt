@@ -1782,7 +1782,7 @@ PeachScriptDispatcher;0x80285010
 ExecutePlayerAction;0x8028505C
 ExecutePeachAction;0x80285174
 HandleEvent_Player;0x802852D4
-SetForegroundModelsVisibleUnchecked;0x80253AA8
+SetForegroundModelsVisibleUnsafe;0x80253AA8
 JumpToGoalSimple2;0x80279420
 LandJumpPart;0x8027AB5C
 _advance_rng;0x80029900
@@ -1884,3 +1884,11 @@ gStaticScriptCounter;0x802D9CA0
 D_802D9CA4;0x802D9CA4
 gGlobalTimeSpace;0x802D9CA8
 gBattleState;0x800DC068
+gBattleDmaDest;0x80284000
+gDialogueState;0x8029FA60
+gSpeakingActorPrintCtx;0x8029FA60
+gSpeakingActorPrintIsDone;0x8029FA68
+gSpeakingActorTalkAnim;0x8029FA6C
+gSpeakingActorIdleAnim;0x8029FA70
+gSpeakingActor;0x8029FA74
+gSpeakingActorPart;0x8029FA7C

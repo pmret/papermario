@@ -1263,7 +1263,7 @@ typedef struct Actor {
     /* 0x137 */ char unk_137;
     /* 0x138 */ struct Vec3f homePos;
     /* 0x144 */ struct Vec3f currentPos;
-    /* 0x150 */ s16 otherPosheadOffset[3];
+    /* 0x150 */ Vec3s otherPosheadOffset;
     /* 0x156 */ s16 healthBarPosition[3];
     /* 0x15C */ f32 rotation[3];
     /* 0x168 */ s16 rotationPivotOffset[3];

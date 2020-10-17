@@ -107,7 +107,7 @@ INCLUDE_ASM(s32, "code_b72b0_len_15ed0", dma_load_string);
 
 INCLUDE_ASM(s32, "code_b72b0_len_15ed0", load_message_to_buffer);
 
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", load_string);
+INCLUDE_ASM(PrintContext*, "code_b72b0_len_15ed0", load_string, s32 stringId, s32* a1);
 
 INCLUDE_ASM(s32, "code_b72b0_len_15ed0", _load_string);
 

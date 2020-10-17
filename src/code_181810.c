@@ -1,6 +1,106 @@
 #include "common.h"
 
+// typedef struct DialogueState {
+//     /* 0x00 */ PrintContext* printCtx;
+//     /* 0x04 */ s32 unk_04;
+//     /* 0x08 */ s32 unk_08;
+//     /* 0x0C */ s32 talkAnim;
+//     /* 0x10 */ s32 idleAnim;
+//     /* 0x14 */ Actor* actor;
+//     /* 0x18 */ ActorPart* part;
+// } DialogueState; // 0x8029FA60 size = unknown
+
+// extern DialogueState gDialogueState;
+
+extern PrintContext* gSpeakingActorPrintCtx;
+extern s32 gSpeakingActorPrintIsDone; // unk_08
+extern s32 gSpeakingActorTalkAnim;
+extern s32 gSpeakingActorIdleAnim;
+extern Actor* gSpeakingActor;
+extern ActorPart* gSpeakingActorPart;
+
 INCLUDE_ASM(s32, "code_181810", ActorSpeak);
+/*ApiStatus ActorSpeak(ScriptInstance *script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Actor *actor;
+    ActorPart *part;
+    s32 stringID;
+    s32 actorID;
+    s32 partIndex;
+    PrintContext *printContext;
+    f32 speakerMouthY;
+    s32 anim;
+
+    f32 screenX, screenY, screenZ;
+
+    if (isInitialCall) {
+        stringID = get_variable(script, *args++);
+        actorID = get_variable(script, *args++);
+        partIndex = get_variable(script, *args++);
+        gSpeakingActorTalkAnim = get_variable(script, *args++);
+        gSpeakingActorIdleAnim = get_variable(script, *args++);
+
+        if (actorID == ActorId_SELF) {
+            actorID = script->ownerActorID;
+        }
+        actor = get_actor(actorID);
+        part = get_actor_part(actor, partIndex);
+        gSpeakingActor = actor;
+        gSpeakingActorPart = part;
+
+        if ((actor->flags & 0x8000) == 0) {
+            speakerMouthY = actor->otherPosheadOffset.y + actor->currentPos.y + actor->size[1];
+        } else {
+            speakerMouthY = actor->otherPosheadOffset.y + actor->currentPos.y + (actor->size[1] / 2);
+        }
+
+        get_screen_coords(Cam_BATTLE, actor->currentPos.x + actor->otherPosheadOffset.x, speakerMouthY, actor->currentPos.z + actor->otherPosheadOffset.z, &screenX, &screenY, &screenZ);
+        gSpeakingActorPrintIsDone = 0;
+        gSpeakingActorPrintCtx = load_string(stringID, &gSpeakingActorPrintIsDone);
+        clamp_printer_coords(gSpeakingActorPrintCtx, screenX, screenY);
+        script->functionTemp[0] = 0;
+        D_8009A650[0] |= 0x10;
+        if (gSpeakingActorTalkAnim >= 0) {
+            func_80263E08(actor, part, gSpeakingActorTalkAnim);
+        }
+        increment_status_menu_disabled();
+    }
+
+    if (script->functionTemp[0] == 0) {
+        actor = gSpeakingActor;
+        part = gSpeakingActorPart;
+        if ((actor->flags & 0x8000) == 0) {
+            speakerMouthY = actor->currentPos.y + actor->otherPosheadOffset.y + actor->size[1];
+        } else {
+            speakerMouthY = actor->currentPos.y + actor->otherPosheadOffset.y + (actor->size[1] / 2);
+        }
+        get_screen_coords(Cam_BATTLE, actor->currentPos.x + actor->otherPosheadOffset.x, speakerMouthY, actor->currentPos.z + actor->otherPosheadOffset.z, &screenX, &screenY, &screenZ);
+        clamp_printer_coords(printContext = gSpeakingActorPrintCtx, screenX, screenY);
+
+        if (printContext->stateFlags & 0x40) {
+            decrement_status_menu_disabled();
+            return ApiStatus_DONE1;
+        }
+
+        if (printContext->stateFlags & 0x80) { // "is talking" flag
+            anim = gSpeakingActorTalkAnim;
+        } else {
+            anim = gSpeakingActorIdleAnim;
+        }
+
+        if (anim >= 0) {
+            func_80263E08(actor, part, anim);
+        }
+
+        if (gSpeakingActorPrintIsDone == 1) {
+            decrement_status_menu_disabled();
+            D_8009A650[0] &= ~0x10;
+            return ApiStatus_DONE1;
+        }
+    }
+
+    return ApiStatus_BLOCK;
+}*/
 
 INCLUDE_ASM(s32, "code_181810", EndActorSpeech);
 
@@ -8,7 +108,10 @@ INCLUDE_ASM(s32, "code_181810", ShowBattleChoice);
 
 INCLUDE_ASM(s32, "code_181810", func_802535B4);
 
-INCLUDE_ASM(s32, "code_181810", OverrideBattleDmaDest);
+ApiStatus OverrideBattleDmaDest(ScriptInstance* script, s32 isInitialCall) {
+    gBattleDmaDest = get_variable(script, *script->ptrReadPos);
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_181810", LoadBattleDmaData);
 
@@ -26,11 +129,33 @@ INCLUDE_ASM(s32, "code_181810", PlayLoopingSoundAtActor);
 
 INCLUDE_ASM(s32, "code_181810", StopLoopingSoundAtActor);
 
-INCLUDE_ASM(s32, "code_181810", SetForegroundModelsVisibleUnchecked);
+ApiStatus SetForegroundModelsVisibleUnsafe(ScriptInstance* script, s32 isInitialCall) {
+    if (get_variable(script, *script->ptrReadPos)) {
+        show_foreground_models_unsafe();
+    } else {
+        hide_foreground_models_unsafe();
+    }
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "code_181810", SetForegroundModelsVisible);
+ApiStatus SetForegroundModelsVisible(ScriptInstance* script, s32 isInitialCall) {
+    if (get_variable(script, *script->ptrReadPos)) {
+        show_foreground_models();
+    } else {
+        hide_foreground_models();
+    }
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "code_181810", func_80253B30);
+ApiStatus func_80253B30(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Bytecode a0 = *args++;
+    Bytecode a1 = *args++;
+    s32 var1 = get_variable(script, *args++);
+
+    set_variable(script, a0, (a1 | 0xFE) | (var1 * 256));
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_181810", MakeStatusField);
 
@@ -52,4 +177,7 @@ INCLUDE_ASM(s32, "code_181810", MultiplyVec3ByActorScale);
 
 INCLUDE_ASM(s32, "code_181810", ApplyShrinkFromOwner);
 
-INCLUDE_ASM(s32, "code_181810", StartRumble);
+ApiStatus StartRumble(ScriptInstance* script, s32 isInitialCall) {
+    start_rumble_type(get_variable(script, *script->ptrReadPos));
+    return ApiStatus_DONE2;
+}
