@@ -225,14 +225,14 @@ typedef struct UnkStructFromfunc8013A854 {
     // /* 0x38 */ u8 unk38;
     /* 0x1C */ s32 unk_1C;
     /* 0x2C */ s32 unk_2C;
-    // /* 0x30 */ u32 unk30;
-    // /* 0x3C */ u32 unk3C;
-    // /* 0x40 */ u32 unk40;
-    // /* 0x4C */ u32 unk4C;
-    // /* 0x50 */ u32 unk50;
-    // /* 0x5C */ u32 unk5C;
-    // /* 0x60 */ u32 unk60;
-    char unk_18[0x42];
+    /* 0x30 */ u32 unk30;
+    /* 0x3C */ u32 unk3C;
+    /* 0x40 */ u32 unk40;
+    /* 0x4C */ u32 unk4C;
+    /* 0x50 */ u32 unk50;
+    /* 0x5C */ u32 unk5C;
+    /* 0x60 */ u32 unk60;
+    /* 0x7C */ char padding_n[0x25];
 } UnkStructFromfunc8013A854; // size = 0x7C
 
 typedef struct Enemy {
