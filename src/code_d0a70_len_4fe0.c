@@ -32,10 +32,9 @@ typedef UnkStruct8013A854 UnkStruct8013A854List[UNKSTRUCT8013A854_SIZE];
 extern UnkStruct8013A854List* D_80156954[UNKSTRUCT8013A854_SIZE];
 
 void func_8013A854(u32 i) {
-    UnkStruct8013A854* unkStruct80156954ListPtr;
 
     if (i < 90) {
-        unkStruct80156954ListPtr = *D_80156954;
+        UnkStruct8013A854* unkStruct80156954ListPtr = *D_80156954;
         unkStruct80156954ListPtr[i].unk_14 = 0;
         unkStruct80156954ListPtr[i].unk_10 = -1;
     }
