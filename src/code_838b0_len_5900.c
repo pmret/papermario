@@ -65,11 +65,11 @@ INCLUDE_ASM(s32, "code_838b0_len_5900", func_800EBB40);
 
 INCLUDE_ASM(s32, "code_838b0_len_5900", func_800EBC74);
 
-INCLUDE_ASM(s32, "code_838b0_len_5900", enable_partner_flying);
+INCLUDE_ASM(void, "code_838b0_len_5900", enable_partner_flying, Npc* partner, s32 isFlying);
 
-INCLUDE_ASM(s32, "code_838b0_len_5900", update_player_move_history);
+INCLUDE_ASM(void, "code_838b0_len_5900", update_player_move_history, Npc* partner);
 
-INCLUDE_ASM(s32, "code_838b0_len_5900", func_800ED5D0);
+INCLUDE_ASM(void, "code_838b0_len_5900", func_800ED5D0, Npc* partner);
 
 INCLUDE_ASM(s32, "code_838b0_len_5900", func_800ED9F8);
 

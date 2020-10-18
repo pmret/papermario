@@ -61,6 +61,11 @@ s32 func_800554E8(s32, s32);
 s32 func_800555E4(s32);
 s32 osGetId();
 
+// Partner
+void enable_partner_flying(Npc* partner, s32 isFlying);
+void update_player_move_history(Npc* partner);
+void func_800ED5D0(Npc* partner);
+
 s32 func_800EF394(f32);
 s32 does_script_exist(s32 id);
 ScriptInstance* start_script(Bytecode* initialLine, s32 priority, s32 initialState);

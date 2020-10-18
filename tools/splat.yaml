@@ -414,7 +414,7 @@ segments:
     start: 0x325070
     vram: 0x802BD100
     files:
-      - [0x325070, "c"]
+      - [0x325070, "c", "world_twink"]
       - [0x325160, "bin"]
   - name: code
     type: code
