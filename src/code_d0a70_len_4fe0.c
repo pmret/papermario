@@ -15,7 +15,7 @@ INCLUDE_ASM(s32, "code_d0a70_len_4fe0", func_8013A6E8);
 INCLUDE_ASM(s32, "code_d0a70_len_4fe0", func_8013A704);
 
 void func_8013A854(u32 i) {
-    UnkStructFromfunc8013A854* unkStruct;
+    UnkStruct8013A854* unkStruct;
     if (i < 90) {
         unkStruct = *D_80156954;
         unkStruct[i].unk_14 = 0;

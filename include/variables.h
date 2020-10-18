@@ -78,7 +78,7 @@ extern s16 D_8010CD12;
 extern s32 D_8010CD20;
 extern s32 D_8010EF08;
 extern s32 D_8010F094; // player shadow index?
-extern UnkStructFromfunc8013A854* D_80156954[90];
+extern UnkStruct8013A854* D_80156954[90];
 extern s32 D_801595A0;
 extern s16 D_80159AE2;
 extern s16 D_80159AE4;

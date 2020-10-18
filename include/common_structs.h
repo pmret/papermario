@@ -203,39 +203,13 @@ typedef struct Trigger {
     here, each struct of size 0x7C.
 */
 typedef struct   {
-    /* 0x00 */ char padding_1[1];
-    /* 0x01 */ u8 unk_1;
-    /* 0x02 */ u8 unk_2;
-    /* 0x03 */ u8 unk_3;
-    /* 0x04 */ u8 unk_4;
-    /* 0x05 */ u8 unk_5;
-    /* 0x06 */ u8 unk_6;
-    /* 0x07 */ char padding_2[8];
+    /* 0x00 */ char unk_0[0x10];
     /* 0x10 */ s16 unk_10;
-    /* 0x12 */ char padding_3[2];
     /* 0x14 */ s32 unk_14;
-    /* 0x15 */ char padding_4[6];
-    /* 0x20 */ s16 unk20;
-    /* 0x21 */ char padding_5[4];
-    /* 0x24 */ u8 unk24;
-    /* 0x25 */ char padding_6[4];
-    /* 0x28 */ u8 unk28;
-    /* 0x25 */ char padding_7[6];
-    /* 0x34 */ u8 unk34;
-    /* 0x35 */ char padding_8[4];
-    /* 0x38 */ u8 unk38;
-    /* 0x35 */ char padding_9[28];
-    /* 0x1C */ s32 unk_1C;
-    /* 0x2C */ s32 unk_2C;
-    /* 0x30 */ u32 unk30;
-    /* 0x3C */ u32 unk3C;
-    /* 0x40 */ u32 unk40;
-    /* 0x4C */ u32 unk4C;
-    /* 0x50 */ u32 unk50;
-    /* 0x5C */ u32 unk5C;
-    /* 0x60 */ u32 unk60;
-    /* 0x7C */ char padding_n[0x3];
-} UnkStructFromfunc8013A854; // size = 0x7C
+    /* 0x18 */ char unk_18[0x64];
+} UnkStruct8013A854 ; // size = 0x7C
+
+typedef UnkStruct8013A854 UnkStruct8013A854List[90];
 
 typedef struct Enemy {
     /* 0x00 */ s32 flags;
