@@ -21,7 +21,7 @@ void boot_main(void) {
     nuGfxDisplayOff();
     crash_create_monitor();
     func_80025C60();
-    nuGfxInit();
+    nuGfxInitEX2();
     GAME_STATUS->contBitPattern = nuContInit();
     func_8002D160();
     func_802B2000();

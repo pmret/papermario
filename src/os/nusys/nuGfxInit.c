@@ -6,7 +6,7 @@ extern UNK_PTR D_8009A610;
 extern UNK_PTR D_80093BA0;
 extern Gfx rdpstateinit_dl[];
 
-void nuGfxInit(void) {
+void nuGfxInitEX2(void) {
     Gfx gfx[0x100];
     Gfx* ptr;
 
