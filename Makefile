@@ -1,5 +1,3 @@
-# Makefile to rebuild SM64 split image
-
 SHELL=/bin/bash -o pipefail
 
 ################ Target Executable and Sources ###############
@@ -36,12 +34,10 @@ YAY0_FILES := $(foreach file,$(YAY0_FILES),$(BUILD_DIR)/$(file:.bin=.bin.Yay0))
 
 # N64 tools
 TOOLS_DIR = tools
-MIO0TOOL = $(TOOLS_DIR)/mio0
 N64CKSUM = $(TOOLS_DIR)/n64crc
 
 ##################### Compiler Options #######################
 CROSS = mips-linux-gnu-
-CROSS_IRIX = mips-sgi-irix5-
 AS = $(CROSS)as
 OLD_AS = $(TOOLS_DIR)/mips-nintendo-nu64-as
 CC = $(TOOLS_DIR)/cc1

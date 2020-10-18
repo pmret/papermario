@@ -36,7 +36,7 @@ extern s32 gScriptListCount;
 extern s32 gScriptIdList[MAX_SCRIPTS];
 extern s32 gScriptIndexList[MAX_SCRIPTS];
 
-extern s32 gMoveScriptTable[10][4]; // not 10 - how many?
+extern s32 gMoveScriptTable[][4];
 
 extern Model* gWorldModelList[256];
 extern Model* gBattleModelList[256];

@@ -1122,7 +1122,7 @@ nuContRmbStart;0x8005FE90
 nuGfxDisplayOff;0x8005F400
 nuGfxDisplayOn;0x8005F430
 nuGfxFuncSet;0x8005F250
-nuGfxInit;0x8005F560
+nuGfxInitEX2;0x8005F560
 nuGfxPreNMIFuncSet;0x8005F290
 nuGfxRetraceWait;0x80060370
 nuGfxSetCfb;0x8005F2F0
@@ -1436,7 +1436,7 @@ remove_item_entity_by_index;0x801339FC
 remove_item_entity_by_reference;0x80133930
 remove_part_decoration;0x80267218
 remove_part_shadow;0x802673A0
-create_part_shadow_by_ptr;0x802673E4
+create_part_shadow_by_ref;0x802673E4
 remove_player_buffs;0x80267454
 render_curtains;0x8002BA80
 render_dynamic_entities;0x80123470
