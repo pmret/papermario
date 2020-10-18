@@ -837,6 +837,61 @@ segments:
   - [0x3A4320, "bin"]
   - name: code
     type: code
+    start: 0x3A70F0
+    vram: 0xE00A8000
+    files:
+      - [0x3A70F0, "c"]
+      - [0x3A7710, "bin"]
+  - [0x3A77A0, "bin"] # split further
+  - name: code
+    type: code
+    start: 0x3AA920
+    vram: 0xE00AA000
+    files:
+    - [0x3AA920, "c"]
+    - [0x3AAFE0, "bin"]
+  - [0x3AB030, "bin"] # todo split this further
+  - name: code
+    type: code
+    start: 0x3AEE20
+    vram: 0xE00AC000
+    files:
+    - [0x3AEE20, "c"]
+    - [0x3AF5D0, "bin"]
+  - [0x3AF700, "bin"] # todo split this further
+  - name: code
+    type: code
+    start: 0x3B2350
+    vram: 0xE00AE000
+    files:
+    - [0x3B2350, "c"]
+  - [0x3B2D90, "bin"] # todo split this further
+  - name: code
+    type: code
+    start: 0x3B3EB0
+    vram: 0xE00B0000
+    files:
+    - [0x3B3EB0, "c"]
+    - [0x3B4690, "bin"]
+  - [0x3B46A0, "bin"] # todo split this further
+  - name: code
+    type: code
+    start: 0x3B7B80
+    vram: 0xE00B8000
+    files:
+    - [0x3B7B80, "c"]
+    - [0x3B8470, "bin"]
+  - [0x3B8860, "bin"] # todo split this further
+  - name: code
+    type: code
+    start: 0x3BA030
+    vram: 0xE00BC000
+    files:
+    - [0x3BA030, "c"]
+    - [0x3BAC60, "bin"]
+  - [0x3BAEA0, "bin"] # todo split this further ADD STUFF AFTER HERE
+  - name: code
+    type: code
     start: 0x415D90
     vram: 0x802A1000
     files:
@@ -858,7 +913,7 @@ segments:
     vram: 0x802B7000
     files:
     - [0xe20eb0, "c", "code_e20eb0"]
-  - [0xE215C0, "bin"]
+    - [0xE215C0, "bin"]
   - name: code
     type: code
     start: 0xE21870

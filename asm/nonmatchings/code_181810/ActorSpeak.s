@@ -54,8 +54,8 @@ glabel ActorSpeak
 /* 1818D0 80252FF0 8E220000 */  lw        $v0, ($s1)
 /* 1818D4 80252FF4 3C01802A */  lui       $at, %hi(gSpeakingActor)
 /* 1818D8 80252FF8 AC31FA74 */  sw        $s1, %lo(gSpeakingActor)($at)
-/* 1818DC 80252FFC 3C01802A */  lui       $at, 0x802a
-/* 1818E0 80253000 AC32FA78 */  sw        $s2, -0x588($at)
+/* 1818DC 80252FFC 3C01802A */  lui       $at, %hi(gSpeakingActorPart)
+/* 1818E0 80253000 AC32FA78 */  sw        $s2, %lo(gSpeakingActorPart)($at)
 /* 1818E4 80253004 44831000 */  mtc1      $v1, $f2
 /* 1818E8 80253008 00000000 */  nop       
 /* 1818EC 8025300C 468010A0 */  cvt.s.w   $f2, $f2
@@ -138,8 +138,8 @@ glabel ActorSpeak
 /* 181A10 80253130 0000102D */   daddu    $v0, $zero, $zero
 /* 181A14 80253134 3C11802A */  lui       $s1, %hi(gSpeakingActor)
 /* 181A18 80253138 8E31FA74 */  lw        $s1, %lo(gSpeakingActor)($s1)
-/* 181A1C 8025313C 3C12802A */  lui       $s2, 0x802a
-/* 181A20 80253140 8E52FA78 */  lw        $s2, -0x588($s2)
+/* 181A1C 8025313C 3C12802A */  lui       $s2, %hi(gSpeakingActorPart)
+/* 181A20 80253140 8E52FA78 */  lw        $s2, %lo(gSpeakingActorPart)($s2)
 /* 181A24 80253144 86220150 */  lh        $v0, 0x150($s1)
 /* 181A28 80253148 C6200144 */  lwc1      $f0, 0x144($s1)
 /* 181A2C 8025314C 44821000 */  mtc1      $v0, $f2
