@@ -8,6 +8,9 @@ venv/
 ctx.c
 expected/
 
+# Assets
+assets
+
 # Build artifacts
 *.ld
 *.z64

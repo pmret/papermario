@@ -1259,6 +1259,8 @@ segments:
   - [0x1B81E88, "Yay0"]
   - [0x1B82058, "Yay0"]
   - [0x1B82202, "bin"]
-  - [0x1E40000, "bin", "map_assets.fs"] # todo add fs support
+  - name: assets/fs
+    type: PaperMarioMapFS
+    start: 0x1E40000
   - [0x27FEE22, "bin"]
   - [0x2800000]
