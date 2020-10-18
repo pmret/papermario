@@ -197,12 +197,12 @@ typedef struct Trigger {
 } Trigger; // size = 0x38
 
 /* TODO sonicspiral oct 2020 
-    All unks needs type verification.
+    All unks needs type ans size verification.
     Assuming these are the struct fields based off of func_8013AA9C seen in Ghidra.
     After reviewing with stuckpixel it looks like there's an array of 90 structs 
     here, each struct of size 0x7C.
 */
-typedef struct UnkStructFromfunc8013A854 {
+typedef struct   {
     /* 0x00 */ char padding_1[1];
     /* 0x01 */ u8 unk_1;
     /* 0x02 */ u8 unk_2;
@@ -221,8 +221,10 @@ typedef struct UnkStructFromfunc8013A854 {
     /* 0x25 */ char padding_6[4];
     /* 0x28 */ u8 unk28;
     /* 0x25 */ char padding_7[6];
-    // /* 0x34 */ u8 unk34;
-    // /* 0x38 */ u8 unk38;
+    /* 0x34 */ u8 unk34;
+    /* 0x35 */ char padding_8[4];
+    /* 0x38 */ u8 unk38;
+    /* 0x35 */ char padding_9[28];
     /* 0x1C */ s32 unk_1C;
     /* 0x2C */ s32 unk_2C;
     /* 0x30 */ u32 unk30;
@@ -232,7 +234,7 @@ typedef struct UnkStructFromfunc8013A854 {
     /* 0x50 */ u32 unk50;
     /* 0x5C */ u32 unk5C;
     /* 0x60 */ u32 unk60;
-    /* 0x7C */ char padding_n[0x25];
+    /* 0x7C */ char padding_n[0x3];
 } UnkStructFromfunc8013A854; // size = 0x7C
 
 typedef struct Enemy {
