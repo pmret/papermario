@@ -5,8 +5,8 @@ glabel func_80241190
 /* 16FA70 80241190 3C03800E */  lui       $v1, 0x800e
 /* 16FA74 80241194 8C63C074 */  lw        $v1, -0x3f8c($v1)
 /* 16FA78 80241198 24020001 */  addiu     $v0, $zero, 1
-/* 16FA7C 8024119C 3C01800E */  lui       $at, 0x800e
-/* 16FA80 802411A0 AC24C068 */  sw        $a0, -0x3f98($at)
+/* 16FA7C 8024119C 3C01800E */  lui       $at, %hi(gBattleState)
+/* 16FA80 802411A0 AC24C068 */  sw        $a0, %lo(gBattleState)($at)
 /* 16FA84 802411A4 3C01800E */  lui       $at, 0x800e
 /* 16FA88 802411A8 AC22C4E0 */  sw        $v0, -0x3b20($at)
 /* 16FA8C 802411AC 3C01800E */  lui       $at, 0x800e
@@ -36,8 +36,8 @@ glabel func_80241190
 .L80241204:
 /* 16FAE4 80241204 24040007 */  addiu     $a0, $zero, 7
 .L80241208:
-/* 16FAE8 80241208 3C01800E */  lui       $at, 0x800e
-/* 16FAEC 8024120C AC24C068 */  sw        $a0, -0x3f98($at)
+/* 16FAE8 80241208 3C01800E */  lui       $at, %hi(gBattleState)
+/* 16FAEC 8024120C AC24C068 */  sw        $a0, %lo(gBattleState)($at)
 .L80241210:
 /* 16FAF0 80241210 03E00008 */  jr        $ra
 /* 16FAF4 80241214 00000000 */   nop      

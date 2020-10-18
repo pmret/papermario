@@ -7,8 +7,8 @@ glabel draw_main_battle_ui
 /* 16D364 8023EA84 0000882D */  daddu     $s1, $zero, $zero
 /* 16D368 8023EA88 AFBF0018 */  sw        $ra, 0x18($sp)
 /* 16D36C 8023EA8C AFB00010 */  sw        $s0, 0x10($sp)
-/* 16D370 8023EA90 3C10800E */  lui       $s0, 0x800e
-/* 16D374 8023EA94 8E10C068 */  lw        $s0, -0x3f98($s0)
+/* 16D370 8023EA90 3C10800E */  lui       $s0, %hi(gBattleState)
+/* 16D374 8023EA94 8E10C068 */  lw        $s0, %lo(gBattleState)($s0)
 /* 16D378 8023EA98 3C04800E */  lui       $a0, 0x800e
 /* 16D37C 8023EA9C 2484C4D0 */  addiu     $a0, $a0, -0x3b30
 /* 16D380 8023EAA0 8C820000 */  lw        $v0, ($a0)

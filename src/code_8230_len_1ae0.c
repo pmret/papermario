@@ -26,7 +26,8 @@ INCLUDE_ASM(void, "code_8230_len_1ae0", set_cam_viewport, s16 id, s16 x, s16 y, 
 
 INCLUDE_ASM(s32, "code_8230_len_1ae0", get_cam_viewport);
 
-INCLUDE_ASM(s32, "code_8230_len_1ae0", get_screen_coords);
+INCLUDE_ASM(void, "code_8230_len_1ae0", get_screen_coords, Cam camID, f32 x, f32 y, f32 z, f32* outX, f32* outY,
+            f32* outZ);
 
 INCLUDE_ASM(s32, "code_8230_len_1ae0", func_8002E754);
 

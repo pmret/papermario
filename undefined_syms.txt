@@ -13,9 +13,6 @@ gWorldScriptList = 0x802DA490;
 gBattleScriptList = 0x802DA690;
 gNumScripts = 0x802DA488;
 gCurrentScriptListPtr = 0x802DA890;
-gStaticScriptCounter = 0x802D9CA0;
-D_802D9CA4 = 0x802D9CA4;
-gGlobalTimeSpace = 0x802D9CA8;
 gPlayerNpcPtr = 0x802D9D20;
 D_80147574 = 0x80147574;
 D_8010EBB0 = 0x8010EBB0;
@@ -59,6 +56,15 @@ D_8010F094 = 0x8010F094;
 
 D_800D9620 = 0x800D9620;
 
+gSpeakingActorPrintCtx = 0x8029FA60;
+gSpeakingActorPrintIsDone = 0x8029FA68;
+gSpeakingActorTalkAnim = 0x8029FA6C;
+gSpeakingActorIdleAnim = 0x8029FA70;
+gSpeakingActor = 0x8029FA74;
+gSpeakingActorPart = 0x8029FA7C;
+
+gBattleDmaDest = 0x80284000;
+gBattleState = 0x800DC068;
 gBattleStatus = 0x800DC070;
 
 mapScriptLibStart = 0x7E0E80;
@@ -198,6 +204,8 @@ gWorldNpcList = 0x800A0990;
 gBattleNpcList = 0x800A0A90;
 gCurrentNpcListPtr = 0x800A0B90;
 
+gMoveScriptTable = 0x80293E80;
+
 gMainGameState = 0x80151700;
 gCurrentUpdateFunction = 0x8015170C;
 
@@ -215,6 +223,8 @@ gMapFlags = 0x802DA480;
 gMapVars = 0x802DA484;
 
 gEffectTable = 0x8007F214;
+
+gPauseMenuStrings = 0x8026F778;
 
 MarioEnterStage = 0x80284A40;
 PeachEnterStage = 0x80284D04;
