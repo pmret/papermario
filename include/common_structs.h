@@ -214,21 +214,25 @@ typedef struct UnkStructFromfunc8013A854 {
     /* 0x10 */ s16 unk_10;
     /* 0x12 */ char padding_3[2];
     /* 0x14 */ s32 unk_14;
-    // /* 0x00 */ s16 unk20;
-    // /* 0x00 */ u8 unk24;
-    // /* 0x00 */ u8 unk28;
-    // /* 0x00 */ u8 unk34;
-    // /* 0x00 */ u8 unk38;
-    /* 0x00 */ s32 unk_1C;
-    /* 0x00 */ s32 unk_2C;
-    // /* 0x00 */ u32 unk30;
-    // /* 0x00 */ u32 unk3C;
-    // /* 0x00 */ u32 unk40;
-    // /* 0x00 */ u32 unk4C;
-    // /* 0x00 */ u32 unk50;
-    // /* 0x00 */ u32 unk5C;
-    // /* 0x00 */ u32 unk60;
-    char unk_18[0x5A];
+    /* 0x15 */ char padding_4[6];
+    /* 0x20 */ s16 unk20;
+    /* 0x21 */ char padding_5[4];
+    /* 0x24 */ u8 unk24;
+    /* 0x25 */ char padding_6[4];
+    /* 0x28 */ u8 unk28;
+    /* 0x25 */ char padding_7[6];
+    // /* 0x34 */ u8 unk34;
+    // /* 0x38 */ u8 unk38;
+    /* 0x1C */ s32 unk_1C;
+    /* 0x2C */ s32 unk_2C;
+    // /* 0x30 */ u32 unk30;
+    // /* 0x3C */ u32 unk3C;
+    // /* 0x40 */ u32 unk40;
+    // /* 0x4C */ u32 unk4C;
+    // /* 0x50 */ u32 unk50;
+    // /* 0x5C */ u32 unk5C;
+    // /* 0x60 */ u32 unk60;
+    char unk_18[0x42];
 } UnkStructFromfunc8013A854; // size = 0x7C
 
 typedef struct Enemy {
