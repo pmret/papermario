@@ -22,7 +22,7 @@
 #define MAX_MAPFLAGS 3
 
 #define MAX_SCRIPTS 128
-#define UNKSTRUCT8013A854_SIZE 124
+#define UNKSTRUCT8013A854_SIZE 90
 
 //NOTE: SCRIPT_ALLOC is probably not quite correct, but this is the closest thing to matching for the functions its used in. Needs more work.
 #define SCRIPT_ALLOC(new, index) \

@@ -209,7 +209,7 @@ typedef struct   {
     /* 0x18 */ char unk_18[0x64];
 } UnkStruct8013A854 ; // size = 0x7C
 
-typedef UnkStruct8013A854 UnkStruct8013A854List[90];
+typedef UnkStruct8013A854 UnkStruct8013A854List[UNKSTRUCT8013A854_SIZE];
 
 typedef struct Enemy {
     /* 0x00 */ s32 flags;
