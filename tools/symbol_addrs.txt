@@ -1122,7 +1122,7 @@ nuContRmbStart;0x8005FE90
 nuGfxDisplayOff;0x8005F400
 nuGfxDisplayOn;0x8005F430
 nuGfxFuncSet;0x8005F250
-nuGfxInit;0x8005F560
+nuGfxInitEX2;0x8005F560
 nuGfxPreNMIFuncSet;0x8005F290
 nuGfxRetraceWait;0x80060370
 nuGfxSetCfb;0x8005F2F0

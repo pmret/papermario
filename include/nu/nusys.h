@@ -9,7 +9,7 @@
 /* Ver 1.2	98/07/12	Modified by Kensaku Ohki(SLANP)		*/
 /* Ver 2.0	90/01/23	Modified by Kensaku Ohki(SLANP)		*/
 /*----------------------------------------------------------------------*/
-/* $Id: nusys.h,v 1.21 1999/01/26 02:33:26 ohki Exp $		*/
+/* $Id: nusys.h,v 1.26 1999/05/07 08:23:45 ohki Exp ohki $		*/
 /*======================================================================*/
 #ifndef _NUSYS_H_
 #define _NUSYS_H_
@@ -33,7 +33,7 @@ extern "C" {
 /*	DEFINE								*/
 /*----------------------------------------------------------------------*/
 /*----------------------------------------------------------------------*/
-#define NU_VERSION		"1.0"
+#define NU_VERSION		"2.05"
 
 /*--------------------------------------*/
 /* NuSystem spec define			*/
@@ -46,7 +46,7 @@ extern "C" {
 /* Thread ID for DEBUG 	(a precaution)	*/
 /*--------------------------------------*/
 #define NU_IDLE_THREAD_ID	1
-#define NU_RMON_THERAD_ID	2	/* no use */
+#define NU_RMON_THREAD_ID	2	/* no use */
 #define NU_MAIN_THREAD_ID	3
 
 									
@@ -61,6 +61,7 @@ extern "C" {
 /* NUSYS STACK SIZE			*/
 /*--------------------------------------*/
 #define NU_IDLE_STACK_SIZE	0x2000			/* Idle thread */
+#define	NU_RMON_STACK_SIZE	0x2000			/* Rmon thread */
 #define NU_MAIN_STACK_SIZE	NU_SPEC_BOOT_STACK_SIZE	/* Main thread */
 
 
@@ -89,6 +90,9 @@ extern "C" {
 #define NU_SC_HANDLER_PRI	120	/* EVENT HANDLER THREAD PRORITY */
 #define NU_SC_AUDIO_PRI		110	/* AUDIO DISPATCHER THREAD PRORITY */
 #define NU_SC_GRAPHICS_PRI	100	/* GFX DISPATCHER THREAD PRORITY */
+#define NU_SC_HANDLER_THREAD_ID	19
+#define NU_SC_AUDIO_THREAD_ID	18
+#define NU_SC_GRAPHICS_THREAD_ID 17   
 #define	NU_SC_PRENMI_YET	0	/* PRE NMI has not occurred. */
 #define	NU_SC_PRENMI_GET	1	/* PRE NMI received flag */
 #define	NU_SC_BEFORE_RESET 	2	/* Pre-RESET flag for frame before reset  */
@@ -139,14 +143,15 @@ extern "C" {
 #endif /* F3DEX_GBI_2 */
 
     
-/*--------------------------------------*/
+/*----------------------------------------------*/
 /* The number of graphics task structures	*/
-/* should be set to a value at least as large as the Scheduler*/
-/* message buffer size.	*/
-/* Otherwise, a task structure in use may */
-/* be used.		*/
-/*--------------------------------------*/
-#define NU_GFX_TASK_NUM		10	/* Number of graphics task structures	*/
+/* should be set to a value at least as large as*/
+/* the Scheduler 				*/
+/* message buffer size.				*/
+/* Otherwise, a task structure in use may 	*/
+/* be used.					*/
+/*----------------------------------------------*/
+#define NU_GFX_TASK_NUM		10   /* Number of graphics task structures */
 #define	NU_GFX_RDP_OUTPUTBUFF_SIZE	0x20000	/* fifo buffer size	*/
 
 /*--------------------------------------*/
@@ -175,6 +180,7 @@ extern "C" {
 #define	NU_GFX_DISPLAY_ON		1	/* Display */
 #define	NU_GFX_DISPLAY_ON_TRIGGER	0x80	/* Trigger		*/
 
+#define NU_GFX_YIELD_BUF_SIZE		(OS_YIELD_DATA_SIZE + 0x10)
 					   
 /*----------------------------------------------------------------------*/
 /* SI MANAGER DEFINE							*/
@@ -203,7 +209,7 @@ extern "C" {
 #define NU_CONT_MAXCONTROLLERS		MAXCONTROLLERS
 #define	NU_CONT_STACK_SIZE		0x2000
 #define	NU_CONT_MESG_MAX		8
-#define NU_CONT_THREAD_ID		5
+#define NU_CONT_THREAD_ID		6
 #define NU_CONT_THREAD_PRI		115
 #define	NU_CONT_DATA_UNLOCK		0
 #define	NU_CONT_DATA_LOCK		1
@@ -318,8 +324,12 @@ extern "C" {
 /*----------------------------------------------------------------------*/
 /* DEBUG 								*/
 /*----------------------------------------------------------------------*/
-#define	NU_DEB_PERF_GFXTASK_CNT	8	/* Graphics task count */
-#define	NU_DEB_PERF_AUTASK_CNT		4	/* Audio task count */
+#define NU_DEB_PERF_BUF_NUM		3
+#define	NU_DEB_PERF_GFXTASK_CNT		8	/* Graphics task count  */
+#define	NU_DEB_PERF_AUTASK_CNT		4	/* Audio task count	*/
+#define NU_DEB_PERF_RUNNING		0	/* Sampling		*/
+#define NU_DEB_PERF_STOP		1	/* Stop sampling	*/
+#define NU_DEB_PERF_START		2	/* Start sampling	*/
 #define NU_DEB_DP_CLOCK_CTR		0	/* RDP internal counter	*/
 #define	NU_DEB_DP_CMD_CTR		1	/* CMD counter		*/
 #define NU_DEB_DP_PIPE_CTR			2	/* PIPE counter	*/
@@ -365,6 +375,8 @@ extern "C" {
 #define NU_DEB_CON_WINDOW_OFF		0
 #define NU_DEB_CON_WINDOW_ON		1    
     
+#define NU_DEB_MARKER_NUM		10
+
 #if defined(_LANGUAGE_C) || defined(_LANGUAGE_C_PLUS_PLUS)
 /*----------------------------------------------------------------------*/
 /*----------------------------------------------------------------------*/
@@ -463,6 +475,21 @@ typedef void (*NUContPakFunc)(void*);	/* Controller Pak control function callbac
 typedef void (*NUContRmbFunc)(void*);	/* Rumble Pak control function callback */
 typedef s32 (*NUCallBackFunc)(void*);	/* Callback function  */
 
+
+/*--------------------------------------*/
+/* PI Common Message 			*/
+/*--------------------------------------*/
+typedef struct st_PiOverlaySegment {
+    u8* romStart;		/* Segment's ROM start offset          */
+    u8* romEnd;			/* Segment's ROM end offset            */
+    u8*	ramStart;		/* Segment's CPU start address         */
+    u8* textStart;		/* test attribute's DRAM start address */
+    u8* textEnd;		/* test attribute's DRAM end address   */
+    u8* dataStart;		/* data attribute's DRAM start address */
+    u8* dataEnd;		/* data attribute's DRAM end address   */
+    u8* bssStart;		/* bss attribute's DRAM start address  */
+    u8*	bssEnd;			/* bss attribute's DRAM start address  */
+} NUPiOverlaySegment;
 
 /*--------------------------------------*/
 /* SI Common  message 			*/
@@ -600,6 +627,7 @@ typedef struct st_GfxTaskTime {
 
 typedef struct st_DebTaskPerf {
     s64		retraceTime;		/* retrace event time*/
+    s64		markerTime[NU_DEB_MARKER_NUM];
     u8		gfxTaskCnt;		/* Number of graphics tasks */
     u8		auTaskCnt;		/* Number of audio tasks */
     u8		gfxTaskStart;
@@ -630,9 +658,9 @@ typedef struct st_DebConWindow {
 /*----------------------------------------------------------------------*/
 /*----------------------------------------------------------------------*/    
 
-extern u8	nuRDPOutputBuf[NU_GFX_RDP_OUTPUTBUFF_SIZE];
-extern u8	nuDramStack[SP_DRAM_STACK_SIZE8];
-extern u8	nuYieldBuf[OS_YIELD_DATA_SIZE];
+extern u8	nuRDPOutputBuf[];
+extern u8	nuDramStack[];
+extern u8	nuYieldBuf[];
 extern NUSched	nusched;		/* Scheduler structure */
 extern OSMesgQueue nuGfxMesgQ;	/* Graphics thread queue */
 extern u32	nuScRetraceCounter;    /* Retrace counter */
@@ -648,16 +676,18 @@ extern u16*		nuGfxZBuffer;	/* Pointer to the Z buffer */
 extern volatile u32	nuGfxTaskSpool; /* Number of tasks in queue */
 extern u32		nuGfxDisplay;	/* Display on/off flag  */
 extern u32		nuGfxCfbCounter; /* For frame buffer swapping */
+extern OSMesgQueue	nuGfxMesgQ;
+extern OSThread		nuGfxThread;			/* graphic thread */
 
 /*--------------------------------------*/
 /*  controller  Manager variables 	*/
 /*--------------------------------------*/
-extern OSContStatus	nuContStatus[NU_CONT_MAXCONTROLLERS];
-extern OSContPad	nuContData[NU_CONT_MAXCONTROLLERS];
+extern OSContStatus	nuContStatus[];
+extern OSContPad	nuContData[];
 extern u32		nuContNum;	/* Number of controllers connected */
 extern u32		nuContDataLockKey; /* Lock Controller data. */
 extern OSMesgQueue	nuContWaitMesgQ; /* Wait for Controller read */
-extern OSPfs		nuContPfs[4];
+extern OSPfs		nuContPfs[];
 extern NUCallBackList	nuContCallBack;
 extern u16		nuContPakCompanyCode;	/* Company code */
 extern u32		nuContPakGameCode;	/* Game code */
@@ -666,7 +696,7 @@ extern NUCallBackList	nuContPakCallBack;
 /*--------------------------------------*/
 /*  RUMBUL Manager variables 		*/
 /*--------------------------------------*/
-extern NUContRmbCtl	nuContRmbCtl[4];
+extern NUContRmbCtl	nuContRmbCtl[];
 extern u32		nuContRmbSearchTime;
 extern NUCallBackList	nuContRmbCallBack;
 
@@ -698,6 +728,7 @@ extern NUCallBackList*	nuSiCallBackList;/* Callback function list */
 /*--------------------------------------*/
 extern OSPiHandle*	nuPiCartHandle;
 extern OSPiHandle*	nuPiSramHandle;
+extern OSPiHandle*	nuPiDDRomHandle;
     
 /*--------------------------------------*/
 /* CALL BACK Function pointer 		*/
@@ -713,8 +744,14 @@ extern NUContReadFunc	nuContReadFunc;		/* When controller read ends */
 /*--------------------------------------*/
 /* Debug 		 		*/
 /*--------------------------------------*/
+
 extern NUDebTaskPerf*	nuDebTaskPerfPtr;
 extern NUDebConWindow	nuDebConWin[];
+extern NUDebTaskPerf	nuDebTaskPerf[];
+extern u32		nuDebTaskPerfInterval;
+extern volatile u32	nuDebTaskPerfCnt;
+extern volatile u32	nuDebTaskPerfEnd;
+
 
 /*----------------------------------------------------------------------*/    
 /*----------------------------------------------------------------------*/
@@ -733,7 +770,6 @@ extern void nuScCreateScheduler(u8 videoMode, u8 numFields);
 extern void nuScAddClient(NUScClient *c, OSMesgQueue *mq, NUScMsg msgType);
 extern void nuScRemoveClient(NUScClient *client);
 extern void nuScResetClientMesgType(NUScClient* client, NUScMsg msgType);
-/* extern void nuPreNMIFuncSet(NUScPreNMIFunc func); redundant extern warning */
 extern OSMesgQueue* nuScGetGfxMQ(void);
 extern OSMesgQueue* nuScGetAudioMQ(void);
 extern void nuScSetFrameBufferNum(u8 frameBufferNum);
@@ -759,9 +795,9 @@ extern void nuGfxRetraceWait(u32 retrace_num);
 extern void nuGfxDisplayOff(void);
 extern void nuGfxDisplayOn(void);
 
-/*  #ifdef F3DEX_GBI_2
-    #define	    nuGfxInit()	nuGfxInitEX2()
-    #endif /* F3DEX_GBI_2 */
+#ifdef F3DEX_GBI_2
+#define	nuGfxInit()	nuGfxInitEX2()
+#endif /* F3DEX_GBI_2 */
 /*--------------------------------------*/
 /* controller  Manager function		*/
 /*--------------------------------------*/
@@ -858,6 +894,7 @@ extern void nuPiReadRom(u32 rom_addr, void* buf_ptr, u32 size);
 extern void nuPiInitSram(void);
 extern void nuPiInitDDrom(void);
 extern void nuPiReadWriteSram(u32 addr, void* buf_ptr, u32 size, s32 flag);
+extern void nuPiReadRomOverlay(NUPiOverlaySegment* segment);
 
 /*--------------------------------------*/
 /* si functions				*/
@@ -887,15 +924,24 @@ extern s32 nuVrsMaskDictionary(NUVrsHandle* handle, u8* maskpattern, s32 size);
 /* dubug functions			*/
 /*--------------------------------------*/
 #ifdef NDEBUG
-#define nuDebTaskPerfBar0(EX0 ,EX1 ,EX2)       ((void)0)
-#define nuDebTaskPerfBar1(EX0 ,EX1 ,EX2)       ((void)0)
-#define nuDebTaskPerfBar0EX2(EX0 ,EX1 ,EX2)       ((void)0)
-#define nuDebTaskPerfBar1EX2(EX0 ,EX1 ,EX2)       ((void)0)
+#define nuDebTaskPerfBar0(EX0 ,EX1 ,EX2)	((void)0)
+#define nuDebTaskPerfBar1(EX0 ,EX1 ,EX2)	((void)0)
+#define nuDebTaskPerfBar0EX2(EX0 ,EX1 ,EX2)	((void)0)
+#define nuDebTaskPerfBar1EX2(EX0 ,EX1 ,EX2)	((void)0)
+#define	nuDebPerfMarkSet(EX0)			((void)0)
+#define nuDebTaskPerfIntervalSet(EX0)		((void)0)
 #else
 extern void nuDebTaskPerfBar0(u32 frameNum, u32 y, u32 flag);
 extern void nuDebTaskPerfBar1(u32 frameNum, u32 y, u32 flag);
 extern void nuDebTaskPerfBar0EX2(u32 frameNum, u32 y, u32 flag);
 extern void nuDebTaskPerfBar1EX2(u32 frameNum, u32 y, u32 flag);
+extern u32 nuDebPerfMarkSet(s32 markNo);
+extern void nuDebTaskPerfIntervalSet(u32 interval);
+#ifdef F3DEX_GBI_2
+#define nuDebTaskPerfBar0(a, b, c)	nuDebTaskPerfBar0EX2(a, b, c)
+#define nuDebTaskPerfBar1(a, b, c)	nuDebTaskPerfBar1EX2(a, b, c)
+#endif	/* F3DEX_GBI_2 */
+
 #endif /* NDEBUG */
 
 extern void nuDebConDisp(u32 flag);
@@ -917,10 +963,9 @@ extern void nuDebConPutc(u32 wndNo, u32  c);
 extern void nuDebTaskPerfLoad(void);
 extern void nuDebConPrintf(u32 wndNo, const char* fmt, ...);
 
+
 #ifdef F3DEX_GBI_2
 #define	nuDebConDisp(flag)		nuDebConDispEX2(flag)
-#define nuDebTaskPerfBar0(a, b, c)	nuDebTaskPerfBar0EX2(a, b, c)
-#define nuDebTaskPerfBar1(a, b, c)	nuDebTaskPerfBar1EX2(a, b, c)
 #endif	/* F3DEX_GBI_2 */
 
 /*----------------------------------------------------------------------*/
@@ -1044,6 +1089,8 @@ extern void nuDebConPrintf(u32 wndNo, const char* fmt, ...);
 /*----------------------------------------------------------------------*/
 #define	nuVrsCheckWord		osVoiceCheckWord
 #define	nuVrsCountSyllables	osVoiceCountSyllables
+
+
 
 #endif  /* defined(_LANGUAGE_C) || defined(_LANGUAGE_C_PLUS_PLUS) */
 #ifdef _LANGUAGE_C_PLUS_PLUS

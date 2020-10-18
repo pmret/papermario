@@ -35,7 +35,7 @@ glabel boot_main
 /* 13D8 80025FD8 00000000 */   nop      
 /* 13DC 80025FDC 0C009718 */  jal       func_80025C60
 /* 13E0 80025FE0 00000000 */   nop      
-/* 13E4 80025FE4 0C017D58 */  jal       nuGfxInit
+/* 13E4 80025FE4 0C017D58 */  jal       nuGfxInitEX2
 /* 13E8 80025FE8 00000000 */   nop      
 /* 13EC 80025FEC 0C017D84 */  jal       nuContInit
 /* 13F0 80025FF0 00000000 */   nop      
