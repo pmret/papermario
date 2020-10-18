@@ -20,8 +20,8 @@ glabel func_8026E198
 /* 19CAB0 8026E1D0 82030095 */  lb        $v1, 0x95($s0)
 /* 19CAB4 8026E1D4 50600008 */  beql      $v1, $zero, .L8026E1F8
 /* 19CAB8 8026E1D8 24020002 */   addiu    $v0, $zero, 2
-/* 19CABC 8026E1DC 3C02800E */  lui       $v0, 0x800e
-/* 19CAC0 8026E1E0 8C42C068 */  lw        $v0, -0x3f98($v0)
+/* 19CABC 8026E1DC 3C02800E */  lui       $v0, %hi(gBattleState)
+/* 19CAC0 8026E1E0 8C42C068 */  lw        $v0, %lo(gBattleState)($v0)
 /* 19CAC4 8026E1E4 00431026 */  xor       $v0, $v0, $v1
 /* 19CAC8 8026E1E8 2C420001 */  sltiu     $v0, $v0, 1
 /* 19CACC 8026E1EC 0809B87E */  j         .L8026E1F8

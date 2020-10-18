@@ -15,8 +15,8 @@ glabel func_8026127C
 /* 18FB84 802612A4 AFBF0018 */  sw        $ra, 0x18($sp)
 /* 18FB88 802612A8 AFB10014 */  sw        $s1, 0x14($sp)
 /* 18FB8C 802612AC A2000099 */  sb        $zero, 0x99($s0)
-/* 18FB90 802612B0 3C01800E */  lui       $at, 0x800e
-/* 18FB94 802612B4 AC22C068 */  sw        $v0, -0x3f98($at)
+/* 18FB90 802612B0 3C01800E */  lui       $at, %hi(gBattleState)
+/* 18FB94 802612B4 AC22C068 */  sw        $v0, %lo(gBattleState)($at)
 /* 18FB98 802612B8 8E020000 */  lw        $v0, ($s0)
 /* 18FB9C 802612BC 3C118011 */  lui       $s1, %hi(gPlayerData)
 /* 18FBA0 802612C0 2631F290 */  addiu     $s1, $s1, %lo(gPlayerData)

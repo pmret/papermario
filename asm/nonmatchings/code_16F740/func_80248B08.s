@@ -159,8 +159,8 @@ glabel func_80248B08
 .L80248D40:
 /* 177620 80248D40 0C090464 */  jal       func_80241190
 /* 177624 80248D44 0000202D */   daddu    $a0, $zero, $zero
-/* 177628 80248D48 3C02800E */  lui       $v0, 0x800e
-/* 17762C 80248D4C 8C42C068 */  lw        $v0, -0x3f98($v0)
+/* 177628 80248D48 3C02800E */  lui       $v0, %hi(gBattleState)
+/* 17762C 80248D4C 8C42C068 */  lw        $v0, %lo(gBattleState)($v0)
 /* 177630 80248D50 3C01800E */  lui       $at, 0x800e
 /* 177634 80248D54 AC22C4D0 */  sw        $v0, -0x3b30($at)
 /* 177638 80248D58 0C00CD3C */  jal       set_game_mode
