@@ -23,6 +23,7 @@ ApiStatus ActorSpeak(ScriptInstance* script, s32 isInitialCall) {
 
     f32 headX, headY, headZ;
     f32 screenX, screenY, screenZ;
+    s32 stringID2;
 
     if (isInitialCall) {
         stringID = get_variable(script, *args++);
@@ -30,10 +31,12 @@ ApiStatus ActorSpeak(ScriptInstance* script, s32 isInitialCall) {
         partIndex = get_variable(script, *args++);
         gSpeakingActorTalkAnim = get_variable(script, *args++);
         gSpeakingActorIdleAnim = get_variable(script, *args++);
+        stringID2 = stringID;
 
         if (actorID == ActorId_SELF) {
             actorID = script->ownerActorID;
         }
+
         actor = get_actor(actorID);
         part = get_actor_part(actor, partIndex);
         gSpeakingActor = actor;
@@ -43,15 +46,16 @@ ApiStatus ActorSpeak(ScriptInstance* script, s32 isInitialCall) {
         if ((actor->flags & 0x8000) == 0) {
             headY = actor->size.y + (actor->currentPos.y + actor->headOffset.y);
         } else {
-            headY = actor->headOffset.y + actor->currentPos.y + (actor->size.y / 2);
+            headY = actor->headOffset.y;
+            headY = headY + actor->currentPos.y + (actor->size.y / 2);
         }
-        headZ = actor->headOffset.z + actor->currentPos.z;
+        headZ = actor->currentPos.z + actor->headOffset.z;
         get_screen_coords(Cam_BATTLE, headX, headY, headZ, &screenX, &screenY, &screenZ);
 
         {
             s32* isPrintDone = &gSpeakingActorPrintIsDone;
             *isPrintDone = FALSE;
-            gSpeakingActorPrintCtx = load_string(stringID, isPrintDone);
+            gSpeakingActorPrintCtx = load_string(stringID2, isPrintDone);
         }
         clamp_printer_coords(gSpeakingActorPrintCtx, screenX, screenY);
 
@@ -71,9 +75,10 @@ ApiStatus ActorSpeak(ScriptInstance* script, s32 isInitialCall) {
         if ((actor->flags & 0x8000) == 0) {
             headY = actor->size.y + (actor->currentPos.y + actor->headOffset.y);
         } else {
-            headY = actor->headOffset.y + actor->currentPos.y + (actor->size.y / 2);
+            headY = actor->headOffset.y;
+            headY = headY + actor->currentPos.y + (actor->size.y / 2);
         }
-        headZ = actor->headOffset.z + actor->currentPos.z;
+        headZ = actor->currentPos.z + actor->headOffset.z;
         get_screen_coords(Cam_BATTLE, headX, headY, headZ, &screenX, &screenY, &screenZ);
 
         printContext = &gSpeakingActorPrintCtx;
@@ -111,7 +116,14 @@ INCLUDE_ASM(s32, "code_181810", EndActorSpeech);
 
 INCLUDE_ASM(s32, "code_181810", ShowBattleChoice);
 
-INCLUDE_ASM(s32, "code_181810", func_802535B4);
+ApiStatus func_802535B4(ScriptInstance* script, s32 isInitialCall) {
+    if (get_variable(script, *script->ptrReadPos)) {
+        decrement_status_menu_disabled();
+    } else {
+        increment_status_menu_disabled();
+    }
+    return ApiStatus_DONE2;
+}
 
 ApiStatus OverrideBattleDmaDest(ScriptInstance* script, s32 isInitialCall) {
     gBattleDmaDest = get_variable(script, *script->ptrReadPos);
@@ -126,7 +138,21 @@ INCLUDE_ASM(s32, "code_181810", func_80253734);
 
 INCLUDE_ASM(s32, "code_181810", func_802537C0);
 
-INCLUDE_ASM(s32, "code_181810", PlaySoundAtActor);
+ApiStatus PlaySoundAtActor(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    ActorId actorID = get_variable(script, *args++);
+    Bytecode soundID = *args++;
+    Actor* actor;
+
+    if (actorID == ActorId_SELF) {
+        actorID = script->ownerActorID;
+    }
+
+    actor = get_actor(actorID);
+    play_sound_at_position(soundID, 0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
+
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_181810", PlaySoundAtPart);
 
@@ -174,7 +200,13 @@ INCLUDE_ASM(s32, "code_181810", load_tattle_flags);
 
 INCLUDE_ASM(s32, "code_181810", func_80253FB0);
 
-INCLUDE_ASM(s32, "code_181810", MultiplyByActorScale);
+ApiStatus MultiplyByActorScale(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Actor* actor = get_actor(script->ownerActorID);
+
+    set_float_variable(script, *args, get_float_variable(script, *args) * actor->scalingFactor);
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_181810", MultiplyVec2ByActorScale);
 
