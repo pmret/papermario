@@ -196,21 +196,6 @@ typedef struct Trigger {
     /* 0x34 */ s32 runningScriptID;
 } Trigger; // size = 0x38
 
-/* TODO sonicspiral oct 2020
-    All unks needs type ans size verification.
-    Assuming these are the struct fields based off of func_8013AA9C seen in Ghidra.
-    After reviewing with stuckpixel it looks like there's an array of 90 structs
-    here, each struct of size 0x7C.
-*/
-typedef struct   {
-    /* 0x00 */ char unk_0[0x10];
-    /* 0x10 */ s16 unk_10;
-    /* 0x14 */ s32 unk_14;
-    /* 0x18 */ char unk_18[0x64];
-} UnkStruct8013A854 ; // size = 0x7C
-
-typedef UnkStruct8013A854 UnkStruct8013A854List[UNKSTRUCT8013A854_SIZE];
-
 typedef struct Enemy {
     /* 0x00 */ s32 flags;
     /* 0x04 */ u8 encounterIndex;
