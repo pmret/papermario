@@ -238,7 +238,7 @@ segments:
     vram: 0x802C3000
     files:
     - [0xe79b0, "c", "code_e79b0_len_1920"]
-    - [0xe92d0, "c", "code_e92d0_len_5da0"]
+    - [0xe92d0, "c", "si"]
     - [0xED510, "c", "code_ED510"]
     - [0xef070, "c", "code_ef070_len_3400"]
     - [0xf2470, "c", "code_f2470_len_27f0"]
@@ -317,7 +317,7 @@ segments:
     - [0x1AC760, "c"]
     - [0x1AF120, "c"]
     - [0x1AF230, "c"]
-    - [0x1AF2C0, "bin"]
+    - [0x1AF2D0, "bin"]
   - [0x1CC310, "bin"] # icon images and palettes, vram unknown
   - name: code
     type: code

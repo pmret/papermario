@@ -447,9 +447,9 @@ ApiStatus si_handle_case_AND(ScriptInstance* script) {
 }
 
 
-INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_handle_case_equal_OR);
+INCLUDE_ASM(s32, "si", si_handle_case_equal_OR);
 
-INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_handle_case_equal_AND);
+INCLUDE_ASM(s32, "si", si_handle_case_equal_AND);
 
 ApiStatus si_handle_end_case_group(ScriptInstance* script) {
     ASSERT(script->switchDepth >= 0);
@@ -1069,16 +1069,16 @@ void si_standard_trigger_executor(Trigger* trigger) {
     }
 }
 
-INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_handle_bind_lock, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(s32, "si", si_handle_bind_lock, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_handle_thread, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(s32, "si", si_handle_thread, ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus si_handle_end_thread(ScriptInstance* script) {
     kill_script(script);
     return ApiStatus_FINISH;
 }
 
-INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_handle_child_thread, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(s32, "si", si_handle_child_thread, ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus si_handle_end_child_thread(ScriptInstance* script) {
     kill_script(script);
@@ -1089,7 +1089,7 @@ ApiStatus func_802C6E14(ScriptInstance* script) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_handle_print_debug_var, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(s32, "si", si_handle_print_debug_var, ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus func_802C739C(ScriptInstance* script) {
     script->ptrSavedPosition = (Bytecode*)*script->ptrReadPos;
@@ -1111,7 +1111,7 @@ s32 func_802C73B8(ScriptInstance* script) {
     return 1;
 }
 
-INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_execute_next_command);
+INCLUDE_ASM(s32, "si", si_execute_next_command);
 
 // TODO: consider renaming to si_get_variable
 #ifdef NON_MATCHING
@@ -1171,7 +1171,7 @@ s32 get_variable(ScriptInstance* script, Bytecode var) {
 }
 */
 #else
-INCLUDE_ASM(s32, "code_e92d0_len_5da0", get_variable, ScriptInstance* script, Bytecode var);
+INCLUDE_ASM(s32, "si", get_variable, ScriptInstance* script, Bytecode var);
 #endif
 
 s32 get_variable_index(ScriptInstance* script, s32 var) {
@@ -1260,15 +1260,15 @@ s32 get_variable_index_alt(s32 var) {
     return var;
 }
 
-INCLUDE_ASM(s32, "code_e92d0_len_5da0", set_variable, ScriptInstance* script, Bytecode var, s32 value);
+INCLUDE_ASM(s32, "si", set_variable, ScriptInstance* script, Bytecode var, s32 value);
 
-INCLUDE_ASM(f32, "code_e92d0_len_5da0", get_float_variable, ScriptInstance* script, Bytecode var);
+INCLUDE_ASM(f32, "si", get_float_variable, ScriptInstance* script, Bytecode var);
 
-INCLUDE_ASM(f32, "code_e92d0_len_5da0", set_float_variable, ScriptInstance* script, Bytecode var, f32 value);
+INCLUDE_ASM(f32, "si", set_float_variable, ScriptInstance* script, Bytecode var, f32 value);
 
-INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_find_label, ScriptInstance* script, s32 arg1);
+INCLUDE_ASM(s32, "si", si_find_label, ScriptInstance* script, s32 arg1);
 
-INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_skip_if, ScriptInstance* script);
+INCLUDE_ASM(s32, "si", si_skip_if, ScriptInstance* script);
 // Matching but needs rodata support
 /*Bytecode* si_skip_if(ScriptInstance* script) {
     s32 nestedIfDepth = 0;
@@ -1308,7 +1308,7 @@ INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_skip_if, ScriptInstance* script);
     } while(1);
 }*/
 
-INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_skip_else, ScriptInstance* script);
+INCLUDE_ASM(s32, "si", si_skip_else, ScriptInstance* script);
 // Matching but needs rodata support
 /*Bytecode* si_skip_else(ScriptInstance* script) {
     s32 nestedIfDepth = 0;
@@ -1344,8 +1344,8 @@ INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_skip_else, ScriptInstance* script);
     } while(1);
 }*/
 
-INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_goto_end_case, ScriptInstance* script);
+INCLUDE_ASM(s32, "si", si_goto_end_case, ScriptInstance* script);
 
-INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_goto_next_case, ScriptInstance* script);
+INCLUDE_ASM(s32, "si", si_goto_next_case, ScriptInstance* script);
 
-INCLUDE_ASM(s32, "code_e92d0_len_5da0", si_goto_end_loop, ScriptInstance* script);
+INCLUDE_ASM(s32, "si", si_goto_end_loop, ScriptInstance* script);

@@ -25,7 +25,7 @@ glabel func_8023F088
 /* 16D9B8 8023F0D8 000218C0 */  sll       $v1, $v0, 3
 /* 16D9BC 8023F0DC 00431021 */  addu      $v0, $v0, $v1
 /* 16D9C0 8023F0E0 000210C0 */  sll       $v0, $v0, 3
-/* 16D9C4 8023F0E4 0C099EF7 */  jal       hide_foreground_models_unchecked
+/* 16D9C4 8023F0E4 0C099EF7 */  jal       hide_foreground_models_unsafe
 /* 16D9C8 8023F0E8 0044B821 */   addu     $s7, $v0, $a0
 /* 16D9CC 8023F0EC 0C046EE9 */  jal       is_world_fog_enabled
 /* 16D9D0 8023F0F0 00000000 */   nop      
