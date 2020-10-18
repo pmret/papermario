@@ -199,29 +199,29 @@ typedef struct Trigger {
 // assuming these are the struct fields based off of func_8013AA9C
 // it looks like there's an array of 90 structs here, each struct of size 0x7C
 typedef struct UnkStructFromfunc8013A854 {
-    char unk_0[14];
-    /* 0x01 */ u8 unk_1; /* type needs verification */
-    /* 0x02 */ u8 unk_2; /* type needs verification */
-    // /* 0x03 */ u8 unk_3; /* type needs verification */
-    // /* 0x04 */ u8 unk_4; /* type needs verification */
-    // /* 0x05 */ u8 unk_5; /* type needs verification */
-    // /* 0x06 */ u8 unk_6; /* type needs verification */
-    /* 0x10 */ s16 unk_10;
-    /* 0x14 */ s32 unk_14;
-    // /* 0x20 */ u32 unk20; /* type needs verification */
+    /* 0x00 */ u8 unk_1; /* type needs verification */
+    /* 0x01 */ u8 unk_2; /* type needs verification */
+    /* 0x02 */ u8 unk_3; /* type needs verification */
+    /* 0x03 */ u8 unk_4; /* type needs verification */
+    /* 0x04 */ u8 unk_5; /* type needs verification */
+    /* 0x05 */ u8 unk_6; /* type needs verification */
+    /* 0x06 */ char padding_1[9];
+    /* 0x0F */ s16 unk_10;
+    /* 0x11 */ s32 unk_14;
+    // /* 0x13 */ s16 unk20; /* type needs verification */
     // /* 0x24 */ u8 unk24; /* type needs verification */
     // /* 0x28 */ u8 unk28; /* type needs verification */
     // /* 0x34 */ u8 unk34; /* type needs verification */
     // /* 0x38 */ u8 unk38; /* type needs verification */
-    // /* 0x1c */ u32 unk1C; /* type needs verification */
-    // /* 0x30 */ u64 unk30; /* type needs verification */
-    // /* 0x2c */ u64 unk2C; /* type needs verification */
-    // /* 0x3c */ u64 unk3C; /* type needs verification */
-    // /* 0x40 */ u64 unk40; /* type needs verification */
-    // /* 0x4c */ u64 unk4C; /* type needs verification */
-    // /* 0x50 */ u64 unk50; /* type needs verification */
-    // /* 0x5c */ u64 unk5C; /* type needs verification */
-    // /* 0x60 */ u64 unk60; /* type needs verification */
+    // /* 0x1c */ s32 unk_1C; /* type needs verification */
+    // /* 0x30 */ u32 unk30; /* type needs verification */
+    // /* 0x2c */ s32 unk_2C; /* type needs verification */
+    // /* 0x3c */ u32 unk3C; /* type needs verification */
+    // /* 0x40 */ u32 unk40; /* type needs verification */
+    // /* 0x4c */ u32 unk4C; /* type needs verification */
+    // /* 0x50 */ u32 unk50; /* type needs verification */
+    // /* 0x5c */ u32 unk5C; /* type needs verification */
+    // /* 0x60 */ u32 unk60; /* type needs verification */
     char unk_18[0x64];
 } UnkStructFromfunc8013A854; // size = 0x7C
 
