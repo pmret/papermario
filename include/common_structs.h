@@ -10,6 +10,11 @@ struct ScriptInstance;
 
 typedef ApiStatus(*ApiFunc)(struct ScriptInstance*, s32);
 
+typedef struct Vec2b {
+    /* 0x00 */ u8 x;
+    /* 0x01 */ u8 y;
+} Vec2b; // size = 0x02
+
 typedef struct Vec3f {
     /* 0x00 */ f32 x;
     /* 0x04 */ f32 y;
@@ -103,7 +108,7 @@ typedef struct Npc {
 } Npc; // size = 0x340
 
 typedef struct PlayerData {
-    /* 0x000 */ u8 bootsLevel;
+    /* 0x000 */ s8 bootsLevel;
     /* 0x001 */ s8 hammerLevel;
     /* 0x002 */ s8 curHP;
     /* 0x003 */ s8 curMaxHP;
@@ -113,7 +118,7 @@ typedef struct PlayerData {
     /* 0x007 */ u8 hardMaxFP;
     /* 0x008 */ u8 maxBP;
     /* 0x009 */ u8 level;
-    /* 0x00A */ u8 hasActionCommands;
+    /* 0x00A */ s8 hasActionCommands;
     /* 0x00B */ char unk_0B;
     /* 0x00C */ s16 coins;
     /* 0x00E */ s8 fortressKeyCount;
@@ -524,6 +529,25 @@ typedef struct Camera {
     /* 0x538 */ char unk_538[32];
 } Camera; // size = 0x558
 
+typedef struct BattleStatusUnkInner {
+    /* 0x00 */ char unk_00[0x10];
+    /* 0x10 */ s16 unk_10;
+    /* 0x12 */ char unk_12[8];
+    /* 0x1A */ s16 unk_1A;
+    /* 0x1C */ char unk_1C[8];
+    /* 0x24 */ s16 unk_24;
+} BattleStatusUnkInner; // size = unknown
+
+typedef struct BattleStatusUnk {
+    /* 0x00 */ char unk_00[0xC];
+    /* 0x0C */ BattleStatusUnkInner* unk_0C;
+} BattleStatusUnk; // size = unknown
+
+typedef struct FGModelData {
+    /* 0x00 */ char unk_00[0x18];
+    /* 0x18 */ s32* idList;
+} FGModelData; // size = unknown
+
 typedef struct BattleStatus {
     /* 0x000 */ s32 flags1;
     /* 0x004 */ s32 flags2;
@@ -531,7 +555,8 @@ typedef struct BattleStatus {
     /* 0x048 */ u8 currentSubmenu;
     /* 0x049 */ char unk_49[10];
     /* 0x053 */ u8 stratsLastCursorPos;
-    /* 0x054 */ char unk_54[36];
+    /* 0x054 */ char unk_54[32];
+    /* 0x074 */ s32 unk_74;
     /* 0x078 */ u8 totalStarPoints;
     /* 0x079 */ u8 pendingStarPoints; /* how many to add */
     /* 0x07A */ u8 incrementStarPointDelay; /* related to star points, set to 0x28 when they are dropped */
@@ -539,9 +564,11 @@ typedef struct BattleStatus {
     /* 0x07C */ u8 changePartnerAllowed;
     /* 0x07D */ char unk_7D[4];
     /* 0x081 */ s8 actionSuccess;
-    /* 0x072 */ char unk_7C[3];
+    /* 0x082 */ char unk_82;
+    /* 0x083 */ s8 unk_83;
+    /* 0x084 */ s8 unk_84;
     /* 0x085 */ s8 unk_85;
-    /* 0x086 */ char unk_86;
+    /* 0x086 */ s8 unk_86;
     /* 0x087 */ s8 blockResult; /* 0 = fail, 1 = success, -1 = mashed */
     /* 0x088 */ u8 itemUsesLeft; /* set to 2 for doublke dip, 3 for triple */
     /* 0x089 */ u8 hpDrainCount;
@@ -550,17 +577,18 @@ typedef struct BattleStatus {
     /* 0x08C */ char unk_8C[2];
     /* 0x08E */ u8 initialEnemyCount; /* used for SP award bonus */
     /* 0x08F */ char unk_8F[7];
-    /* 0x096 */ u8 hammerCharge;
-    /* 0x097 */ u8 jumpCharge;
+    /* 0x096 */ s8 hammerCharge;
+    /* 0x097 */ s8 jumpCharge;
     /* 0x098 */ char unk_98;
     /* 0x099 */ u8 dangerFlags; /* 1 = danger, 2 = peril */
     /* 0x09A */ u8 outtaSightActive;
-    /* 0x09B */ u8 turboChargeTurnsLeft;
+    /* 0x09B */ s8 turboChargeTurnsLeft;
     /* 0x09C */ u8 turboChargeAmount; /* unused? */
-    /* 0x09D */ u8 waterBlockTurnsLeft;
+    /* 0x09D */ s8 waterBlockTurnsLeft;
     /* 0x09E */ u8 waterBlockAmount; /* unused? */
-    /* 0x09F */ char unk_9F[5];
-    /* 0x0A4 */ u8 cloudNineTurnsLeft;
+    /* 0x09F */ char unk_9F;
+    /* 0x0A0 */ s32* unk_A0;
+    /* 0x0A4 */ s8 cloudNineTurnsLeft;
     /* 0x0A5 */ u8 cloudNineDodgeChance; /* = 50% */
     /* 0x0A6 */ char unk_A6[2];
     /* 0x0A8 */ s32 cloudNineEffect;
@@ -600,13 +628,14 @@ typedef struct BattleStatus {
     /* 0x197 */ u8 targetHomeIndex; /* some sort of home idnex used for target list construction */
     /* 0x198 */ u8 powerBounceCounter;
     /* 0x199 */ u8 wasStatusInflicted; /* during last attack */
-    /* 0x19A */ char unk_19A[6];
+    /* 0x19A */ s8 unk_19A;
+    /* 0x19B */ char unk_19B[5];
     /* 0x1A0 */ s16 currentTargetID; /* selected? */
     /* 0x1A2 */ u8 currentTargetPart; /* selected? */
     /* 0x1A3 */ char unk_1A3;
     /* 0x1A4 */ s16 currentTargetID2;
     /* 0x1A6 */ u8 currentTargetPart2;
-    /* 0x1A7 */ u8 battlePhase;
+    /* 0x1A7 */ s8 battlePhase;
     /* 0x1A8 */ s16 attackerActorID;
     /* 0x1AA */ char unk_1AA[4];
     /* 0x1AE */ s16 submenuIcons[24]; /* icon IDs */
@@ -626,9 +655,10 @@ typedef struct BattleStatus {
     /* 0x330 */ s32 pushInputBuffer[64];
     /* 0x430 */ u8 holdInputBufferPos;
     /* 0x431 */ u8 inputBufferPos;
-    /* 0x432 */ char unk_432[6];
-    /* 0x438 */ s32* foregroundModelList;
-    /* 0x43C */ UNK_PTR turboChargeCounter;
+    /* 0x432 */ char unk_432[2];
+    /* 0x434 */ s32 unk_434;
+    /* 0x438 */ FGModelData* foregroundModelData;
+    /* 0x43C */ BattleStatusUnk* unk_43C;
     /* 0x440 */ u8 tattleFlags[27];
     /* 0x45B */ char unk_45B[17];
     /* 0x46C */ s32 battleState; /* 0 = load assets, 1 = create actors, 4 = start scripts, 7 & 8 = unk */
@@ -698,7 +728,7 @@ typedef struct CollisionData {
 } CollisionData; // size = 0x10
 
 typedef struct Model {
-    /* 0x00 */ s16 flags;
+    /* 0x00 */ u16 flags;
     /* 0x02 */ s16 modelID;
     /* 0x04 */ char unk_04[4];
     /* 0x08 */ s32* modelNode;
@@ -1133,7 +1163,10 @@ typedef struct DecorationTable {
     /* 0x8AC */ u8 effectType; /* 0 =  blur, 14 = none? */
     /* 0x8AD */ char unk_8AD[11];
     /* 0x8B8 */ u8 decorationType[2];
-    /* 0x8BA */ char unk_8BA[46];
+    /* 0x8BA */ u8 unk_8BA;
+    /* 0x8BB */ u8 unk_8BB;
+    /* 0x8BC */ u8 unk_8BC;
+    /* 0x8BD */ char unk_8BD[43];
 } DecorationTable; // size = 0x8E8
 
 typedef struct Shop {
@@ -1235,7 +1268,7 @@ typedef struct Actor {
     /* 0x137 */ char unk_137;
     /* 0x138 */ struct Vec3f homePos;
     /* 0x144 */ struct Vec3f currentPos;
-    /* 0x150 */ s16 otherPosheadOffset[3];
+    /* 0x150 */ Vec3s headOffset;
     /* 0x156 */ s16 healthBarPosition[3];
     /* 0x15C */ f32 rotation[3];
     /* 0x168 */ s16 rotationPivotOffset[3];
@@ -1244,7 +1277,7 @@ typedef struct Actor {
     /* 0x17C */ f32 scaleModifier[3]; /* multiplies normal scale factors componentwise */
     /* 0x188 */ f32 scalingFactor;
     /* 0x18C */ f32 yaw;
-    /* 0x190 */ u8 size[2];
+    /* 0x190 */ Vec2b size;
     /* 0x192 */ s16 actorID;
     /* 0x194 */ char unk_194[8];
     /* 0x19C */ s32 actorTypeData1[6]; /* 4 = jump sound */
@@ -1279,21 +1312,21 @@ typedef struct Actor {
     /* 0x208 */ char unk_208[4];
     /* 0x20C */ u32* statusTable;
     /* 0x210 */ u8 debuff;
-    /* 0x211 */ u8 debuffDuration;
-    /* 0x212 */ u8 staticStatus; /* 0B = yes */
-    /* 0x213 */ u8 staticDuration;
-    /* 0x214 */ u8 stoneStatus; /* 0C = yes */
-    /* 0x215 */ u8 stoneDuration;
-    /* 0x216 */ u8 koStatus; /* 0D = yes */
-    /* 0x217 */ u8 koDuration;
-    /* 0x218 */ u8 transStatus; /* 0E = yes */
-    /* 0x219 */ u8 transDuration;
+    /* 0x211 */ s8 debuffDuration;
+    /* 0x212 */ s8 staticStatus; /* 0B = yes */
+    /* 0x213 */ s8 staticDuration;
+    /* 0x214 */ s8 stoneStatus; /* 0C = yes */
+    /* 0x215 */ s8 stoneDuration;
+    /* 0x216 */ s8 koStatus; /* 0D = yes */
+    /* 0x217 */ s8 koDuration;
+    /* 0x218 */ s8 transStatus; /* 0E = yes */
+    /* 0x219 */ s8 transDuration;
     /* 0x21A */ char unk_21A[2];
     /* 0x21C */ u8 status;
     /* 0x21D */ char unk_21D[3];
-    /* 0x220 */ u8 bGlowing;
+    /* 0x220 */ u8 isGlowing;
     /* 0x221 */ u8 attackBoost;
-    /* 0x222 */ u8 defenseBoost;
+    /* 0x222 */ s8 defenseBoost;
     /* 0x223 */ u8 chillOutAmount; /* attack reduction */
     /* 0x224 */ u8 chillOutTurns;
     /* 0x225 */ char unk_225[7];
@@ -1308,14 +1341,14 @@ typedef struct Actor {
     /* 0x42C */ struct Shadow* shadow; /* might be shadow ID */
     /* 0x430 */ f32 shadowScale; /* = actor size / 24.0 */
     /* 0x434 */ s16 renderMode; /* initially 0xD, set to 0x22 if any part is transparent */
-    /* 0x436 */ char unk_436[2];
+    /* 0x436 */ s16 unk_436;
     /* 0x438 */ s32 x[2]; /* ??? see FUN_80253974 */
     /* 0x440 */ struct MenuIcon* ptrDefuffIcon;
 } Actor; // size = 0x444
 
 typedef struct StaticActorPart {
     /* 0x00 */ s32 flags;
-    /* 0x04 */ u8 index;
+    /* 0x04 */ s8 index;
     /* 0x05 */ u8 posOffset[3];
     /* 0x08 */ u8 targetOffset[2];
     /* 0x0A */ s16 opacity;

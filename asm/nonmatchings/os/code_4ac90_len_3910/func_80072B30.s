@@ -6,8 +6,8 @@ glabel func_80072B30
 /* 4DF34 80072B34 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 4DF38 80072B38 A04000AA */  sb        $zero, 0xaa($v0)
 /* 4DF3C 80072B3C 24020001 */  addiu     $v0, $zero, 1
-/* 4DF40 80072B40 3C01800E */  lui       $at, 0x800e
-/* 4DF44 80072B44 AC20C068 */  sw        $zero, -0x3f98($at)
+/* 4DF40 80072B40 3C01800E */  lui       $at, %hi(gBattleState)
+/* 4DF44 80072B44 AC20C068 */  sw        $zero, %lo(gBattleState)($at)
 /* 4DF48 80072B48 3C01800E */  lui       $at, 0x800e
 /* 4DF4C 80072B4C AC22C4E0 */  sw        $v0, -0x3b20($at)
 /* 4DF50 80072B50 3C01800E */  lui       $at, 0x800e

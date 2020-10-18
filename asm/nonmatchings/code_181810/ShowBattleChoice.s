@@ -23,8 +23,8 @@ glabel ShowBattleChoice
 /* 181E5C 8025357C 0000102D */   daddu    $v0, $zero, $zero
 /* 181E60 80253580 3C02802A */  lui       $v0, 0x802a
 /* 181E64 80253584 8C42FA64 */  lw        $v0, -0x59c($v0)
-/* 181E68 80253588 3C04802A */  lui       $a0, 0x802a
-/* 181E6C 8025358C 8C84FA60 */  lw        $a0, -0x5a0($a0)
+/* 181E68 80253588 3C04802A */  lui       $a0, %hi(gSpeakingActorPrintCtx)
+/* 181E6C 8025358C 8C84FA60 */  lw        $a0, %lo(gSpeakingActorPrintCtx)($a0)
 /* 181E70 80253590 904304E8 */  lbu       $v1, 0x4e8($v0)
 /* 181E74 80253594 24020001 */  addiu     $v0, $zero, 1
 /* 181E78 80253598 A08304E8 */  sb        $v1, 0x4e8($a0)

@@ -1,6 +1,13 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "code_197F40", count_targets);
+s8 count_targets(Actor* actor, s32 targetHomeIndex, s32 targetSelectionFlags) {
+    BattleStatus* battleStatus = &gBattleStatus;
+
+    battleStatus->targetHomeIndex = targetHomeIndex;
+    battleStatus->currentTargetListFlags = targetSelectionFlags;
+    player_create_target_list(actor);
+    return actor->targetListLength;
+}
 
 INCLUDE_ASM(s32, "code_197F40", get_nearest_home_index);
 
@@ -18,9 +25,15 @@ INCLUDE_ASM(Actor*, "code_197F40", get_actor, s32 actorID);
 
 INCLUDE_ASM(s32, "code_197F40", LoadBattleSection);
 
-INCLUDE_ASM(s32, "code_197F40", GetBattlePhase);
+ApiStatus GetBattlePhase(ScriptInstance* script, s32 isInitialCall) {
+    set_variable(script, *script->ptrReadPos, gBattleStatus.battlePhase);
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "code_197F40", GetLastElement);
+ApiStatus GetLastElement(ScriptInstance* script, s32 isInitialCall) {
+    set_variable(script, *script->ptrReadPos, gBattleStatus.currentAttackElement);
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_197F40", func_80269E80);
 
@@ -148,11 +161,28 @@ INCLUDE_ASM(s32, "code_197F40", SetPartScale);
 
 INCLUDE_ASM(s32, "code_197F40", GetPartScale);
 
-INCLUDE_ASM(s32, "code_197F40", GetBattleFlags);
+ApiStatus GetBattleFlags(ScriptInstance* script, s32 isInitialCall) {
+    set_variable(script, *script->ptrReadPos, gBattleStatus.flags1);
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "code_197F40", SetBattleFlagBits);
+ApiStatus SetBattleFlagBits(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Bytecode a0 = *args++;
 
-INCLUDE_ASM(s32, "code_197F40", GetBattleFlags2);
+    if (get_variable(script, *args)) {
+        gBattleStatus.flags1 |= a0;
+    } else {
+        gBattleStatus.flags1 &= ~a0;
+    }
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus GetBattleFlags2(ScriptInstance* script, s32 isInitialCall) {
+    set_variable(script, *script->ptrReadPos, gBattleStatus.flags2);
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_197F40", SetBattleFlagBits2);
 
@@ -196,9 +226,15 @@ INCLUDE_ASM(s32, "code_197F40", func_8026DA94);
 
 INCLUDE_ASM(s32, "code_197F40", SummonEnemy);
 
-INCLUDE_ASM(s32, "code_197F40", GetOwnerID);
+ApiStatus GetOwnerID(ScriptInstance* script, s32 isInitialCall) {
+    set_variable(script, *script->ptrReadPos, script->ownerActorID);
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "code_197F40", SetOwnerID);
+ApiStatus SetOwnerID(ScriptInstance* script, s32 isInitialCall) {
+    script->ownerActorID = get_variable(script, *script->ptrReadPos);
+    return ApiStatus_DONE2;
+}
 
 ApiStatus ActorExists(ScriptInstance* script, s32 isInitialCall) {
     Bytecode isExist;
@@ -225,19 +261,64 @@ INCLUDE_ASM(s32, "code_197F40", func_8026DF88);
 
 INCLUDE_ASM(s32, "code_197F40", func_8026E020);
 
-INCLUDE_ASM(s32, "code_197F40", func_8026E038);
+ApiStatus func_8026E038(ScriptInstance* script, s32 isInitialCall) {
+    gBattleStatus.unk_74 = *script->ptrReadPos;
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "code_197F40", SetBattleInputMask);
+ApiStatus SetBattleInputMask(ScriptInstance* script, s32 isInitialCall) {
+    gBattleStatus.inputBitmask = *script->ptrReadPos;
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "code_197F40", SetBattleInputButtons);
+ApiStatus SetBattleInputButtons(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    BattleStatus* battleStatus = &gBattleStatus;
+    s32 currentButtonsDown = *args++;
+    s32 currentButtonsPressed = *args++;
+    s32 currentButtonsHeld = *args;
 
-INCLUDE_ASM(s32, "code_197F40", CheckButtonPress);
+    battleStatus->currentButtonsDown = currentButtonsDown;
+    battleStatus->currentButtonsPressed = currentButtonsPressed;
+    battleStatus->currentButtonsHeld = currentButtonsHeld;
 
-INCLUDE_ASM(s32, "code_197F40", CheckButtonHeld);
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "code_197F40", CheckButtonDown);
+ApiStatus CheckButtonPress(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Bytecode buttons = *args++;
+    Bytecode out = *args;
+    s32 buttonsPressed = gBattleStatus.currentButtonsPressed;
 
-INCLUDE_ASM(s32, "code_197F40", GetBattleState);
+    set_variable(script, out, (buttonsPressed & buttons) != 0);
+    return ApiStatus_DONE2;
+}
+
+ApiStatus CheckButtonHeld(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Bytecode buttons = *args++;
+    Bytecode out = *args;
+    s32 buttonsHeld = gBattleStatus.currentButtonsHeld;
+
+    set_variable(script, out, (buttonsHeld & buttons) != 0);
+    return ApiStatus_DONE2;
+}
+
+ApiStatus CheckButtonDown(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Bytecode buttons = *args++;
+    Bytecode out = *args;
+    s32 buttonsDown = gBattleStatus.currentButtonsDown;
+
+    set_variable(script, out, (buttonsDown & buttons) != 0);
+    return ApiStatus_DONE2;
+}
+
+ApiStatus GetBattleState(ScriptInstance* script, s32 isInitialCall) {
+    set_variable(script, *script->ptrReadPos, gBattleState);
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_197F40", func_8026E16C);
 
@@ -247,9 +328,25 @@ INCLUDE_ASM(s32, "code_197F40", func_8026E208);
 
 INCLUDE_ASM(s32, "code_197F40", func_8026E260);
 
-INCLUDE_ASM(s32, "code_197F40", PlayerCreateTargetList);
+ApiStatus PlayerCreateTargetList(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Actor* actor = get_actor(script->ownerActorID);
 
-INCLUDE_ASM(s32, "code_197F40", EnemyCreateTargetList);
+    gBattleStatus.currentTargetListFlags = *args;
+    player_create_target_list(actor);
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus EnemyCreateTargetList(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Actor* actor = get_actor(script->ownerActorID);
+
+    gBattleStatus.currentTargetListFlags = *args;
+    enemy_create_target_list(actor);
+
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_197F40", InitTargetIterator);
 
@@ -265,7 +362,10 @@ INCLUDE_ASM(s32, "code_197F40", GetOwnerTarget);
 
 INCLUDE_ASM(s32, "code_197F40", func_8026E914);
 
-INCLUDE_ASM(s32, "code_197F40", GetPlayerActorID);
+ApiStatus GetAttackerActorID(ScriptInstance* script, s32 isInitialCall) {
+    set_variable(script, *script->ptrReadPos, gBattleStatus.attackerActorID);
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_197F40", func_8026E9A0);
 
@@ -293,7 +393,10 @@ INCLUDE_ASM(s32, "code_197F40", func_8026F1A0);
 
 INCLUDE_ASM(s32, "code_197F40", GetStatusFlags);
 
-INCLUDE_ASM(s32, "code_197F40", RemovePlayerBuffs);
+ApiStatus RemovePlayerBuffs(ScriptInstance* script, s32 isInitialCall) {
+    remove_player_buffs(*script->ptrReadPos);
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_197F40", SetPartAlpha);
 
@@ -363,9 +466,17 @@ INCLUDE_ASM(s32, "code_197F40", calc_player_damage_enemy);
 
 INCLUDE_ASM(s32, "code_197F40", dispatch_damage_event_player);
 
-INCLUDE_ASM(s32, "code_197F40", dispatch_damage_event_player_0);
+void dispatch_damage_event_player_0(s32 damageAmount, Event event) {
+    BattleStatus* battleStatus = &gBattleStatus;
 
-INCLUDE_ASM(s32, "code_197F40", dispatch_damage_event_player_1);
+    battleStatus->currentAttackElement = Element_END;
+    battleStatus->unk_19A = 0;
+    dispatch_damage_event_player(damageAmount, event, FALSE);
+}
+
+void dispatch_damage_event_player_1(s32 damageAmount, Event event) {
+    dispatch_damage_event_player(damageAmount, event, TRUE);
+}
 
 INCLUDE_ASM(s32, "code_197F40", GetMenuSelection);
 
@@ -379,7 +490,11 @@ INCLUDE_ASM(s32, "code_197F40", PlayerRunToGoal);
 
 INCLUDE_ASM(s32, "code_197F40", CancelablePlayerRunToGoal);
 
-INCLUDE_ASM(s32, "code_197F40", GetPlayerHP);
+ApiStatus GetPlayerHP(ScriptInstance* script, s32 isInitialCall) {
+    set_variable(script, *script->ptrReadPos, gPlayerData.curHP);
+    return ApiStatus_DONE2;
+}
+
 
 INCLUDE_ASM(s32, "code_197F40", PlayerDamageEnemy);
 

@@ -20,7 +20,9 @@ extern StaticItem gItemTable[364];
 extern s16 gMainGameState; /* 0 = battle, 1 = pause, 2 = world */
 extern UNK_FUN_PTR(gCurrentUpdateFunction);
 
+extern s32 gBattleState;
 extern BattleStatus gBattleStatus;
+extern s32 gBattleDmaDest;
 
 extern ScriptList gWorldScriptList;
 extern ScriptList gBattleScriptList;
@@ -33,6 +35,8 @@ extern s32 gScriptListCount;
 
 extern s32 gScriptIdList[MAX_SCRIPTS];
 extern s32 gScriptIndexList[MAX_SCRIPTS];
+
+extern s32 gMoveScriptTable[][4];
 
 extern Model* gWorldModelList[256];
 extern Model* gBattleModelList[256];
@@ -106,7 +110,7 @@ extern s32 D_800A0960;
 extern s32 D_800A0964;
 
 // Pause
-//extern s32 gPauseMenuStrings[348];
+extern s32 gPauseMenuStrings[348];
 
 extern s32 gGameState;
 extern s32 D_8009A650[1];

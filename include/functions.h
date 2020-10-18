@@ -21,6 +21,10 @@ void render_player_model();
 
 f32 integrate_gravity(void);
 
+// Text
+PrintContext* load_string(s32 stringID, s32* a1);
+void get_screen_coords(Cam camID, f32 x, f32 y, f32 z, f32* outX, f32* outY, f32* outZ);
+
 void parent_collider_to_model(s32 colliderID, s16 modelIndex);
 void clone_model(u16 srcModelID, u16 newModelID);
 Model* get_model_from_list_index(s32 listIndex);
@@ -36,6 +40,7 @@ Trigger* create_trigger(TriggerDefinition* def);
 s32 _bound_script_trigger_handler(Trigger* trigger);
 
 Actor* get_actor(s32 actorID);
+ActorPart* get_actor_part(Actor* actor, s32 partIndex);
 
 s32 func_800494C0(Npc* npc, s32 arg1, s32 arg2);
 

@@ -242,7 +242,7 @@ GetPartTargetFlags;0x8026D2AC
 GetPartYaw;0x8026B4C0
 GetPartnerPos;0x802CF438
 GetPlayerActionState;0x802D1DD0
-GetPlayerActorID;0x8026E974
+GetAttackerActorID;0x8026E974
 GetPlayerAnimation;0x802D1E94
 GetPlayerHP;0x80274234
 GetPlayerPos;0x802D1DFC
@@ -995,7 +995,7 @@ heap_malloc;0x8002ACE4
 heroes_is_ability_active;0x802672AC
 hide_coin_counter;0x800E9698
 hide_foreground_models;0x80267CB4
-hide_foreground_models_unchecked;0x80267BDC
+hide_foreground_models_unsafe;0x80267BDC
 icon_set_opacity;0x80144EB0
 icon_set_tint;0x80144EFC
 increment_max_SP;0x800EA1B4
@@ -1436,6 +1436,7 @@ remove_item_entity_by_index;0x801339FC
 remove_item_entity_by_reference;0x80133930
 remove_part_decoration;0x80267218
 remove_part_shadow;0x802673A0
+create_part_shadow_by_ref;0x802673E4
 remove_player_buffs;0x80267454
 render_curtains;0x8002BA80
 render_dynamic_entities;0x80123470
@@ -1540,7 +1541,7 @@ show_coin_counter;0x800E9518
 show_damage_popup;0x802665AC
 show_first_strike_message;0x80041C5C
 show_foreground_models;0x80267D28
-show_foreground_models_unchecked;0x80267C48
+show_foreground_models_unsafe;0x80267C48
 show_message_popup;0x80250EA4
 show_variable_battle_message;0x8024FA04
 si;0x8006AD90
@@ -1781,7 +1782,7 @@ PeachScriptDispatcher;0x80285010
 ExecutePlayerAction;0x8028505C
 ExecutePeachAction;0x80285174
 HandleEvent_Player;0x802852D4
-SetForegroundModelsVisibleUnchecked;0x80253AA8
+SetForegroundModelsVisibleUnsafe;0x80253AA8
 JumpToGoalSimple2;0x80279420
 LandJumpPart;0x8027AB5C
 _advance_rng;0x80029900
@@ -1878,3 +1879,16 @@ SetTattleString;0x80045A58
 !handle_CPU;0x8006B038
 gPauseMenuStrings;0x8026F778
 gEffectTable;0x8007F214
+gMoveScriptTable;0x80293E80
+gStaticScriptCounter;0x802D9CA0
+D_802D9CA4;0x802D9CA4
+gGlobalTimeSpace;0x802D9CA8
+gBattleState;0x800DC068
+gBattleDmaDest;0x80284000
+gDialogueState;0x8029FA60
+gSpeakingActorPrintCtx;0x8029FA60
+gSpeakingActorPrintIsDone;0x8029FA68
+gSpeakingActorTalkAnim;0x8029FA6C
+gSpeakingActorIdleAnim;0x8029FA70
+gSpeakingActor;0x8029FA74
+gSpeakingActorPart;0x8029FA7C
