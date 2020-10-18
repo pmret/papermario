@@ -1,0 +1,19 @@
+#include "common.h"
+
+INCLUDE_ASM(s32, "code_3251D0", func_802BD100_3251D0);
+
+INCLUDE_ASM(s32, "code_3251D0", func_802BD1AC_3251D0);
+
+INCLUDE_ASM(s32, "code_3251D0", func_802BD26C);
+
+INCLUDE_ASM(s32, "code_3251D0", func_802BD32C);
+
+INCLUDE_ASM(s32, "code_3251D0", func_802BD388);
+
+INCLUDE_ASM(s32, "code_3251D0", func_802BD3E4);
+
+INCLUDE_ASM(s32, "code_3251D0", func_802BD41C);
+
+INCLUDE_ASM(s32, "code_3251D0", func_802BD458);
+
+INCLUDE_ASM(s32, "code_3251D0", func_802BD4E8);

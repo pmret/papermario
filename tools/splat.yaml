@@ -339,7 +339,502 @@ segments:
     vram: 0x802B2000
     files:
     - [0x316f30, "c", "code_316f30"]
-  - [0x317020, "bin"] # todo split this further
+  - name: code
+    type: code
+    start: 0x317020
+    vram: 0x802BD100
+    files:
+      - [0x317020, "c"]
+      - [0x317b60, "bin"]
+  - name: code
+    type: code
+    start: 0x317e50
+    vram: 0x802BD100
+    files:
+      - [0x317e50, "c"]
+      - [0x3195d0, "bin"]
+  - name: code
+    type: code
+    start: 0x319670
+    vram: 0x802BD100
+    files:
+      - [0x319670, "c"]
+      - [0x31b000, "bin"]
+  - name: code
+    type: code
+    start: 0x31b120
+    vram: 0x802BD100
+    files:
+      - [0x31b120, "c"]
+      - [0x31cb60, "bin"]
+  - name: code
+    type: code
+    start: 0x31cc70
+    vram: 0x802BD100
+    files:
+      - [0x31cc70, "c"]
+      - [0x31ddc0, "bin"]
+  - name: code
+    type: code
+    start: 0x31de70
+    vram: 0x802BD100
+    files:
+      - [0x31de70, "c"]
+      - [0x320b20, "bin"]
+  - name: code
+    type: code
+    start: 0x320c50
+    vram: 0x802BD100
+    files:
+      - [0x320c50, "c"]
+      - [0x3239b0, "bin"]
+  - name: code
+    type: code
+    start: 0x323A50
+    vram: 0x802BD100
+    files:
+      - [0x323A50, "c"]
+      - [0x324930, "bin"]
+  - name: code
+    type: code
+    start: 0x324a10
+    vram: 0x802BD100
+    files:
+      - [0x324a10, "c"]
+      - [0x324e80, "bin"]
+  - name: code
+    type: code
+    start: 0x324f10
+    vram: 0x802BD100
+    files:
+      - [0x324f10, "c"]
+      - [0x325000, "bin"]
+  - name: code
+    type: code
+    start: 0x325070
+    vram: 0x802BD100
+    files:
+      - [0x325070, "c"]
+      - [0x325160, "bin"]
+  - name: code
+    type: code
+    start: 0x3251d0
+    vram: 0x802BD100
+    files:
+      - [0x3251d0, "c"]
+      - [0x3255e0, "bin"]
+  - name: code
+    type: code
+    start: 0x325ad0
+    vram: 0xE0200000
+    files:
+      - [0x325ad0, "c"]
+      - [0x325ee0, "c"]
+      - [0x326160, "bin"]
+  - [0x326410, "bin"]
+  - name: code
+    type: code
+    start: 0x3278f0
+    vram: 0xE0002000
+    files:
+      - [0x3278f0, "c"]
+      - [0x328050, "bin"]
+  - name: code
+    type: code
+    start: 0x328110
+    vram: 0xE000C000
+    files:
+      - [0x328110, "c"]
+      - [0x328d20, "bin"]
+  - [0x328EA0, "bin"]
+  - name: code
+    type: code
+    start: 0x32C110
+    vram: 0xE000E000
+    files:
+      - [0x32C110, "c"]
+      - [0x32c770, "bin"]
+  - [0x32c7a0, "bin"] # code, unknown VRAM addr. Leaving as bin for now.
+  - [0x32ceb0, "bin"] # data/rodata section for above.
+  - [0x32dd10, "bin"] # code, unknown VRAM addr. Leaving as bin for now.
+  - [0x32ec10, "bin"] # data/rodata section for above.
+  - [0x32ee30, "bin"] # code, unknown VRAM addr. Leaving as bin for now.
+  - [0x32f550, "bin"] # data/rodata section for above.
+  - [0x32f580, "bin"] # code, unknown VRAM addr. Leaving as bin for now.
+  - [0x32fb50, "bin"] # data/rodata section for above.
+  - [0x32fe30, "bin"] # code, unknown VRAM addr. Leaving as bin for now.
+  - [0x330440, "bin"] # data/rodata section for above.
+  - [0x330910, "bin"] # code, unknown VRAM addr. Leaving as bin for now.
+  - [0x330ef0, "bin"] # data/rodata section for above.
+  - name: code
+    type: code
+    start: 0x331940
+    vram: 0xE001E000
+    files:
+      - [0x331940, "c"]
+      - [0x332690, "bin"]
+  - [0x3326A0, "bin"]
+  - name: code
+    type: code
+    start: 0x333ec0
+    vram: 0xE0020000
+    files:
+      - [0x333ec0, "c"]
+      - [0x334b50, "bin"]
+  - [0x334C70, "bin"]
+  - name: code
+    type: code
+    start: 0x337240
+    vram: 0xE0022000
+    files:
+      - [0x337240, "c"]
+      - [0x337f10, "bin"]
+  - [0x337FC0, "bin"]
+  - name: code
+    type: code
+    start: 0x339250
+    vram: 0xE0024000
+    files:
+      - [0x339250, "c"]
+      - [0x339f10, "bin"]
+  - [0x339F60, "bin"]
+  - name: code
+    type: code
+    start: 0x33B180
+    vram: 0xE0026000
+    files:
+      - [0x33B180, "c"]
+      - [0x33bb70, "bin"]
+  - [0x33BBD0, "bin"]
+  - name: code
+    type: code
+    start: 0x33CDF0
+    vram: 0xE0028000
+    files:
+      - [0x33CDF0, "c"]
+      - [0x33d5d0, "bin"]
+  - name: code
+    type: code
+    start: 0x33E8C0
+    vram: 0xE002A000
+    files:
+      - [0x33E8C0, "c"]
+      - [0x33efe0, "bin"]
+  - [0x33D610, "bin"]
+  - name: code
+    type: code
+    start: 0x33FE80
+    vram: 0xE002C000
+    files:
+      - [0x33FE80, "c"]
+      - [0x3407c0, "bin"]
+  - [0x340880, "bin"]
+  - name: code
+    type: code
+    start: 0x3419E0
+    vram: 0xE002E000
+    files:
+      - [0x3419E0, "c"]
+      - [0x342120, "bin"]
+  - name: code
+    type: code
+    start: 0x342140
+    vram: 0xE0030000
+    files:
+      - [0x342140, "c"]
+      - [0x342fd0, "bin"]
+  - [0x343040, "bin"]
+  - name: code
+    type: code
+    start: 0x343680
+    vram: 0xE0032000
+    files:
+      - [0x343680, "c"]
+      - [0x343f30, "bin"]
+  - [0x343F70, "bin"]
+  - name: code
+    type: code
+    start: 0x344a10
+    vram: 0xE0034000
+    files:
+      - [0x344a10, "c"]
+      - [0x345190, "bin"]
+  - [0x3451E0, "bin"]
+  - name: code
+    type: code
+    start: 0x3454E0
+    vram: 0xE0036000
+    files:
+      - [0x3454E0, "c"]
+      - [0x345b10, "bin"]
+  - [0x345B40, "bin"]
+  - name: code
+    type: code
+    start: 0x34EC80
+    vram: 0xE003A000
+    files:
+      - [0x34EC80, "c"]
+      - [0x34f480, "bin"]
+  - name: code
+    type: code
+    start: 0x34F4C0
+    vram: 0xE003C000
+    files:
+      - [0x34F4C0, "c"]
+      - [0x350160, "bin"]
+  - [0x350220, "bin"]
+  - name: code
+    type: code
+    start: 0x352440
+    vram: 0xE003E000
+    files:
+      - [0x352440, "c"]
+      - [0x352cb0, "bin"]
+  - [0x352CE0, "bin"]
+  - name: code
+    type: code
+    start: 0x354F60
+    vram: 0xE0044000
+    files:
+      - [0x354F60, "c"]
+      - [0x355d10, "bin"]
+  - name: code
+    type: code
+    start: 0x355EE0
+    vram: 0xE0046000
+    files:
+      - [0x355EE0, "c"]
+      - [0x3564e0, "bin"]
+  - [0x356530, "bin"]
+  - name: code
+    type: code
+    start: 0x356980
+    vram: 0xE0048000
+    files:
+      - [0x356980, "c"]
+      - [0x357380, "bin"]
+  - [0x3573A0, "bin"]
+  - name: code
+    type: code
+    start: 0x3584C0
+    vram: 0xE004A000
+    files:
+      - [0x3584C0, "c"]
+      - [0x359320, "bin"]
+  - [0x3593B0, "bin"]
+  - name: code
+    type: code
+    start: 0x35B9D0
+    vram: 0xE004E000
+    files:
+      - [0x35B9D0, "c"]
+      - [0x35bfb0, "bin"]
+  - name: code
+    type: code
+    start: 0x35BFD0
+    vram: 0xE0050000
+    files:
+      - [0x35BFD0, "c"]
+      - [0x35c530, "bin"]
+  - [0x35C550, "bin"]
+  - name: code
+    type: code
+    start: 0x3602C0
+    vram: 0xE005A000
+    files:
+      - [0x3602C0, "c"]
+      - [0x360a10, "bin"]
+  - [0x360A30, "bin"]
+  - [0x360f40, "bin"] # code, unknown VRAM addr. Leaving as bin for now.
+  - [0x361640, "bin"] # data/rodata for the above, and some extra unknown data.
+  - [0x3625c0, "bin"] # code, unknown VRAM addr. Leaving as bin for now.
+  - [0x362c30, "bin"] # data/rodata for the above, and some extra unknown data.
+  - [0x363160, "bin"] # code, unknown VRAM addr. Leaving as bin for now.
+  - [0x363890, "bin"] # data/rodata for the above, and some extra unknown data.
+  - [0x364300, "bin"] # code, unknown VRAM addr. Leaving as bin for now.
+  - [0x364bc0, "bin"] # data/rodata for the above, and some extra unknown data.
+  - [0x364f10, "bin"] # code, unknown VRAM addr. Leaving as bin for now.
+  - [0x365970, "bin"] # data/rodata for the above, and some extra unknown data.
+  - name: code
+    type: code
+    start: 0x366030
+    vram: 0xE0066000
+    files:
+      - [0x366030, "c"]
+      - [0x366c80, "bin"]
+  - [0x366D60, "bin"]
+  - name: code
+    type: code
+    start: 0x36A8D0
+    vram: 0xE0068000
+    files:
+      - [0x36A8D0, "c"]
+      - [0x36ae80, "bin"]
+  - [0x36AEE0, "bin"]
+  - name: code
+    type: code
+    start: 0x36D020
+    vram: 0xE006A000
+    files:
+      - [0x36D020, "c"]
+      - [0x36de10, "bin"]
+  - [0x36DF90, "bin"]
+  - name: code
+    type: code
+    start: 0x36E1D0
+    vram: 0xE006C000
+    files:
+      - [0x36E1D0, "c"]
+      - [0x36ed30, "bin"]
+  - [0x36ED60, "bin"]
+  - name: code
+    type: code
+    start: 0x372790
+    vram: 0xE006E000
+    files:
+      - [0x372790, "c"]
+      - [0x373390, "bin"]
+  - [0x3733E0, "bin"]
+  - name: code
+    type: code
+    start: 0x3740B0
+    vram: 0xE0070000
+    files:
+      - [0x3740B0, "c"]
+      - [0x374d80, "bin"]
+  - name: code
+    type: code
+    start: 0x374E50
+    vram: 0xE0072000
+    files:
+      - [0x374E50, "c"]
+      - [0x375500, "bin"]
+  - [0x375510, "bin"]
+  - name: code
+    type: code
+    start: 0x376460
+    vram: 0xE0074000
+    files:
+      - [0x376460, "c"]
+      - [0x376fc0, "bin"]
+  - name: code
+    type: code
+    start: 0x377070
+    vram: 0xE0076000
+    files:
+      - [0x377070, "c"]
+      - [0x377f00, "bin"]
+  - [0x377F80, "bin"]
+  - name: code
+    type: code
+    start: 0x37A3F0
+    vram: 0xE0078000
+    files:
+      - [0x37A3F0, "c"]
+      - [0x37acf0, "bin"]
+  - [0x37ADD0, "bin"]
+  - [0x37D9D0, "bin"]
+  - name: code
+    type: code
+    start: 0x37F720
+    vram: 0xE007E000
+    files:
+      - [0x37F720, "c"]
+      - [0x380350, "bin"]
+  - [0x3803A0, "bin"]
+  - name: code
+    type: code
+    start: 0x3812C0
+    vram: 0xE0080000
+    files:
+      - [0x3812C0, "c"]
+      - [0x381d80, "bin"]
+  - [0x381E00, "bin"]
+  - name: code
+    type: code
+    start: 0x385640
+    vram: 0xE0082000
+    files:
+      - [0x385640, "c"]
+      - [0x386340, "bin"]
+  - [0x3863B0, "bin"]
+  - name: code
+    type: code
+    start: 0x3889D0
+    vram: 0xE0084000
+    files:
+      - [0x3889D0, "c"]
+      - [0x3897e0, "bin"]
+  - name: code
+    type: code
+    start: 0x389850
+    vram: 0xE0086000
+    files:
+      - [0x389850, "c"]
+      - [0x38a2f0, "bin"]
+  - [0x38A350, "bin"]
+  - name: code
+    type: code
+    start: 0x38ADF0
+    vram: 0xE0088000
+    files:
+      - [0x38ADF0, "c"]
+      - [0x38bab0, "bin"]
+  - [0x38BBA0, "bin"]
+  - name: code
+    type: code
+    start: 0x38EE60
+    vram: 0xE008E000
+    files:
+      - [0x38EE60, "c"]
+      - [0x38f6f0, "bin"]
+  - [0x38F710, "bin"]
+  - name: code
+    type: code
+    start: 0x38F900
+    vram: 0xE0090000
+    files:
+      - [0x38F900, "c"]
+      - [0x390340, "bin"]
+  - [0x3903D0, "bin"]
+  - name: code
+    type: code
+    start: 0x391D30
+    vram: 0xE0092000
+    files:
+      - [0x391D30, "c"]
+      - [0x3923c0, "bin"]
+  - [0x392440, "bin"]
+  - name: code
+    type: code
+    start: 0x3928D0
+    vram: 0xE0094000
+    files:
+      - [0x3928D0, "c"]
+      - [0x393080, "bin"]
+  - [0x3930A0, "bin"]
+  - [0x394280, "bin"] # code, unknown VRAM addr. Leaving as bin for now.
+  - [0x394660, "bin"] # data/rodata for the above, and some extra unknown data.
+  - [0x395bb0, "bin"] # code, unknown VRAM addr. Leaving as bin for now.
+  - [0x3960c0, "bin"] # data/rodata for the above, and some extra unknown data.
+  - [0x3965b0, "bin"] # code, unknown VRAM addr. Leaving as bin for now.
+  - [0x397010, "bin"] # data/rodata for the above, and some extra unknown data.
+  - [0x3981f0, "bin"] # code, unknown VRAM addr. Leaving as bin for now.
+  - [0x398bc0, "bin"] # data/rodata for the above, and some extra unknown data.
+  - [0x39ff20, "bin"] # code, unknown VRAM addr. Leaving as bin for now.
+  - [0x3a0d10, "bin"] # data/rodata for the above, and some extra unknown data.
+  - [0x3a2290, "bin"] # code, unknown VRAM addr. Leaving as bin for now.
+  - [0x3a2440, "bin"] # data/rodata for the above, and some extra unknown data.
+  - [0x3a2990, "bin"] # code, unknown VRAM addr. Leaving as bin for now.
+  - [0x3a3360, "bin"] # data/rodata for the above, and some extra unknown data.
+  - name: code
+    type: code
+    start: 0x3A37E0
+    vram: 0xE00A4000
+    files:
+      - [0x3A37E0, "c"]
+      - [0x3a42b0, "bin"]
+  - [0x3A4320, "bin"]
   - name: code
     type: code
     start: 0x415D90
