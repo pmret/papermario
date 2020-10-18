@@ -15,11 +15,11 @@ INCLUDE_ASM(s32, "code_d0a70_len_4fe0", func_8013A6E8);
 INCLUDE_ASM(s32, "code_d0a70_len_4fe0", func_8013A704);
 
 void func_8013A854(u32 i) {
-    UnkStruct8013A854* unkStruct;
+    UnkStruct8013A854* unkStruct80156954ListPtr;
     if (i < 90) {
-        unkStruct = *D_80156954;
-        unkStruct[i].unk_14 = 0;
-        unkStruct[i].unk_10 = -1;
+        unkStruct80156954ListPtr = *D_80156954;
+        unkStruct80156954ListPtr[i].unk_14 = 0;
+        unkStruct80156954ListPtr[i].unk_10 = -1;
     }
 }
 
