@@ -196,33 +196,39 @@ typedef struct Trigger {
     /* 0x34 */ s32 runningScriptID;
 } Trigger; // size = 0x38
 
-// assuming these are the struct fields based off of func_8013AA9C
-// it looks like there's an array of 90 structs here, each struct of size 0x7C
+/* TODO sonicspiral oct 2020 
+    All unks needs type verification.
+    Assuming these are the struct fields based off of func_8013AA9C seen in Ghidra.
+    After reviewing with stuckpixel it looks like there's an array of 90 structs 
+    here, each struct of size 0x7C.
+*/
 typedef struct UnkStructFromfunc8013A854 {
-    /* 0x00 */ u8 unk_1; /* type needs verification */
-    /* 0x01 */ u8 unk_2; /* type needs verification */
-    /* 0x02 */ u8 unk_3; /* type needs verification */
-    /* 0x03 */ u8 unk_4; /* type needs verification */
-    /* 0x04 */ u8 unk_5; /* type needs verification */
-    /* 0x05 */ u8 unk_6; /* type needs verification */
-    /* 0x06 */ char padding_1[9];
-    /* 0x0F */ s16 unk_10;
-    /* 0x11 */ s32 unk_14;
-    // /* 0x13 */ s16 unk20; /* type needs verification */
-    // /* 0x24 */ u8 unk24; /* type needs verification */
-    // /* 0x28 */ u8 unk28; /* type needs verification */
-    // /* 0x34 */ u8 unk34; /* type needs verification */
-    // /* 0x38 */ u8 unk38; /* type needs verification */
-    // /* 0x1c */ s32 unk_1C; /* type needs verification */
-    // /* 0x30 */ u32 unk30; /* type needs verification */
-    // /* 0x2c */ s32 unk_2C; /* type needs verification */
-    // /* 0x3c */ u32 unk3C; /* type needs verification */
-    // /* 0x40 */ u32 unk40; /* type needs verification */
-    // /* 0x4c */ u32 unk4C; /* type needs verification */
-    // /* 0x50 */ u32 unk50; /* type needs verification */
-    // /* 0x5c */ u32 unk5C; /* type needs verification */
-    // /* 0x60 */ u32 unk60; /* type needs verification */
-    char unk_18[0x64];
+    /* 0x00 */ char padding_1[1];
+    /* 0x01 */ u8 unk_1;
+    /* 0x02 */ u8 unk_2;
+    /* 0x03 */ u8 unk_3;
+    /* 0x04 */ u8 unk_4;
+    /* 0x05 */ u8 unk_5;
+    /* 0x06 */ u8 unk_6;
+    /* 0x07 */ char padding_2[8];
+    /* 0x10 */ s16 unk_10;
+    /* 0x12 */ char padding_3[2];
+    /* 0x14 */ s32 unk_14;
+    // /* 0x00 */ s16 unk20;
+    // /* 0x00 */ u8 unk24;
+    // /* 0x00 */ u8 unk28;
+    // /* 0x00 */ u8 unk34;
+    // /* 0x00 */ u8 unk38;
+    /* 0x00 */ s32 unk_1C;
+    /* 0x00 */ s32 unk_2C;
+    // /* 0x00 */ u32 unk30;
+    // /* 0x00 */ u32 unk3C;
+    // /* 0x00 */ u32 unk40;
+    // /* 0x00 */ u32 unk4C;
+    // /* 0x00 */ u32 unk50;
+    // /* 0x00 */ u32 unk5C;
+    // /* 0x00 */ u32 unk60;
+    char unk_18[0x5A];
 } UnkStructFromfunc8013A854; // size = 0x7C
 
 typedef struct Enemy {
