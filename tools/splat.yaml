@@ -852,974 +852,2911 @@ segments:
     - [0x7E2AA0, "c"]
     - [0x7E3700, "c"]
     - [0x7e4d00, "bin"]
-  - name: world/area_mac
+  - name: world/area_mac/machi
     type: code
     start: 0x7E73A0
     vram: 0x80240000
-    vram_lock: yes
     files:
       - [0x7E73A0, "c", "world/area_mac/machi"]
       - [0x7E7A30, "bin", "world/area_mac/machi_data"]
+  - name: world/area_mac/mac_00
+    type: code
+    start: 0x7EAD10
+    vram: 0x80240000
+    files:
       - [0x7EAD10, "c", "world/area_mac/mac_00"]
       - [0x7EE870, "bin", "world/area_mac/mac_00_data"]
+  - name: world/area_mac/mac_01
+    type: code
+    start: 0x800880
+    vram: 0x80240000
+    files:
       - [0x800880, "c", "world/area_mac/mac_01"]
       - [0x806F50, "bin", "world/area_mac/mac_01_data"]
+  - name: world/area_mac/mac_02
+    type: code
+    start: 0x8232C0
+    vram: 0x80240000
+    files:
       - [0x8232C0, "c", "world/area_mac/mac_02"]
       - [0x8267E0, "bin", "world/area_mac/mac_02_data"]
+  - name: world/area_mac/mac_03
+    type: code
+    start: 0x831800
+    vram: 0x80240000
+    files:
       - [0x831800, "c", "world/area_mac/mac_03"]
       - [0x834070, "bin", "world/area_mac/mac_03_data"]
+  - name: world/area_mac/mac_04
+    type: code
+    start: 0x842BD0
+    vram: 0x80240000
+    files:
       - [0x842BD0, "c", "world/area_mac/mac_04"]
       - [0x844BF0, "bin", "world/area_mac/mac_04_data"]
+  - name: world/area_mac/mac_05
+    type: code
+    start: 0x852170
+    vram: 0x80240000
+    files:
       - [0x852170, "c", "world/area_mac/mac_05"]
       - [0x8562D0, "bin", "world/area_mac/mac_05_data"]
+  - name: world/area_mac/mac_06
+    type: code
+    start: 0x864B40
+    vram: 0x80240000
+    files:
       - [0x864B40, "c", "world/area_mac/mac_06"]
       - [0x8661D0, "bin", "world/area_mac/mac_06_data"]
-  - name: world/area_tik
+  - name: world/area_tik/tik_01
     type: code
     start: 0x8694B0
     vram: 0x80240000
-    vram_lock: yes
     files:
       - [0x8694B0, "c", "world/area_tik/tik_01"]
       - [0x869F40, "bin", "world/area_tik/tik_01_data"]
+  - name: world/area_tik/tik_02
+    type: code
+    start: 0x86C740
+    vram: 0x80240000
+    files:
       - [0x86C740, "c", "world/area_tik/tik_02"]
       - [0x86D0E0, "bin", "world/area_tik/tik_02_data"]
+  - name: world/area_tik/tik_03
+    type: code
+    start: 0x86EB00
+    vram: 0x80240000
+    files:
       - [0x86EB00, "c", "world/area_tik/tik_03"]
       - [0x86F5D0, "bin", "world/area_tik/tik_03_data"]
+  - name: world/area_tik/tik_04
+    type: code
+    start: 0x871A30
+    vram: 0x80240000
+    files:
       - [0x871A30, "c", "world/area_tik/tik_04"]
       - [0x8726A0, "bin", "world/area_tik/tik_04_data"]
+  - name: world/area_tik/tik_05
+    type: code
+    start: 0x874DC0
+    vram: 0x80240000
+    files:
       - [0x874DC0, "c", "world/area_tik/tik_05"]
       - [0x875810, "bin", "world/area_tik/tik_05_data"]
+  - name: world/area_tik/tik_06
+    type: code
+    start: 0x876EE0
+    vram: 0x80240000
+    files:
       - [0x876EE0, "c", "world/area_tik/tik_06"]
       - [0x877840, "bin", "world/area_tik/tik_06_data"]
+  - name: world/area_tik/tik_07
+    type: code
+    start: 0x879BE0
+    vram: 0x80240000
+    files:
       - [0x879BE0, "c", "world/area_tik/tik_07"]
       - [0x87C4D0, "bin", "world/area_tik/tik_07_data"]
+  - name: world/area_tik/tik_08
+    type: code
+    start: 0x87EDF0
+    vram: 0x80240000
+    files:
       - [0x87EDF0, "c", "world/area_tik/tik_08"]
       - [0x87F8B0, "bin", "world/area_tik/tik_08_data"]
+  - name: world/area_tik/tik_09
+    type: code
+    start: 0x8821C0
+    vram: 0x80240000
+    files:
       - [0x8821C0, "c", "world/area_tik/tik_09"]
       - [0x883460, "bin", "world/area_tik/tik_09_data"]
+  - name: world/area_tik/tik_10
+    type: code
+    start: 0x8863C0
+    vram: 0x80240000
+    files:
       - [0x8863C0, "c", "world/area_tik/tik_10"]
       - [0x887780, "bin", "world/area_tik/tik_10_data"]
+  - name: world/area_tik/tik_12
+    type: code
+    start: 0x888BD0
+    vram: 0x80240000
+    files:
       - [0x888BD0, "c", "world/area_tik/tik_12"]
       - [0x88AE20, "bin", "world/area_tik/tik_12_data"]
+  - name: world/area_tik/tik_14
+    type: code
+    start: 0x88D600
+    vram: 0x80240000
+    files:
       - [0x88D600, "c", "world/area_tik/tik_14"]
       - [0x88DF60, "bin", "world/area_tik/tik_14_data"]
+  - name: world/area_tik/tik_15
+    type: code
+    start: 0x88FBA0
+    vram: 0x80240000
+    files:
       - [0x88FBA0, "c", "world/area_tik/tik_15"]
       - [0x8906B0, "bin", "world/area_tik/tik_15_data"]
+  - name: world/area_tik/tik_17
+    type: code
+    start: 0x892A20
+    vram: 0x80240000
+    files:
       - [0x892A20, "c", "world/area_tik/tik_17"]
       - [0x893D80, "bin", "world/area_tik/tik_17_data"]
+  - name: world/area_tik/tik_18
+    type: code
+    start: 0x8956E0
+    vram: 0x80240000
+    files:
       - [0x8956E0, "c", "world/area_tik/tik_18"]
       - [0x895D90, "bin", "world/area_tik/tik_18_data"]
+  - name: world/area_tik/tik_19
+    type: code
+    start: 0x8975E0
+    vram: 0x80240000
+    files:
       - [0x8975E0, "c", "world/area_tik/tik_19"]
       - [0x898910, "bin", "world/area_tik/tik_19_data"]
+  - name: world/area_tik/tik_20
+    type: code
+    start: 0x89A350
+    vram: 0x80240000
+    files:
       - [0x89A350, "c", "world/area_tik/tik_20"]
       - [0x89B490, "bin", "world/area_tik/tik_20_data"]
+  - name: world/area_tik/tik_21
+    type: code
+    start: 0x89D7A0
+    vram: 0x80240000
+    files:
       - [0x89D7A0, "c", "world/area_tik/tik_21"]
       - [0x89E100, "bin", "world/area_tik/tik_21_data"]
+  - name: world/area_tik/tik_22
+    type: code
+    start: 0x89FEC0
+    vram: 0x80240000
+    files:
       - [0x89FEC0, "c", "world/area_tik/tik_22"]
       - [0x8A0870, "bin", "world/area_tik/tik_22_data"]
+  - name: world/area_tik/tik_23
+    type: code
+    start: 0x8A23D0
+    vram: 0x80240000
+    files:
       - [0x8A23D0, "c", "world/area_tik/tik_23"]
       - [0x8A3510, "bin", "world/area_tik/tik_23_data"]
+  - name: world/area_tik/tik_24
+    type: code
+    start: 0x8A5A80
+    vram: 0x80240000
+    files:
       - [0x8A5A80, "c", "world/area_tik/tik_24"]
       - [0x8A6930, "bin", "world/area_tik/tik_24_data"]
+  - name: world/area_tik/tik_25
+    type: code
+    start: 0x8A7F80
+    vram: 0x80240000
+    files:
       - [0x8A7F80, "c", "world/area_tik/tik_25"]
       - [0x8A8740, "bin", "world/area_tik/tik_25_data"]
-  - name: world/area_kgr
+  - name: world/area_kgr/kgr_01
     type: code
     start: 0x8A9A10
     vram: 0x80240000
-    vram_lock: yes
     files:
       - [0x8A9A10, "c", "world/area_kgr/kgr_01"]
       - [0x8A9F30, "bin", "world/area_kgr/kgr_01_data"]
+  - name: world/area_kgr/kgr_02
+    type: code
+    start: 0x8AA450
+    vram: 0x80240000
+    files:
       - [0x8AA450, "c", "world/area_kgr/kgr_02"]
       - [0x8AABD0, "bin", "world/area_kgr/kgr_02_data"]
-  - name: world/area_kmr
+  - name: world/area_kmr/kmr_00
     type: code
     start: 0x8ABF90
     vram: 0x80240000
-    vram_lock: yes
     files:
       - [0x8ABF90, "c", "world/area_kmr/kmr_00"]
       - [0x8ACD00, "bin", "world/area_kmr/kmr_00_data"]
+  - name: world/area_kmr/kmr_02
+    type: code
+    start: 0x8B0070
+    vram: 0x80240000
+    files:
       - [0x8B0070, "c", "world/area_kmr/kmr_02"]
       - [0x8B3AB0, "bin", "world/area_kmr/kmr_02_data"]
+  - name: world/area_kmr/kmr_03
+    type: code
+    start: 0x8C7F90
+    vram: 0x80240000
+    files:
       - [0x8C7F90, "c", "world/area_kmr/kmr_03"]
       - [0x8C85E0, "bin", "world/area_kmr/kmr_03_data"]
+  - name: world/area_kmr/kmr_04
+    type: code
+    start: 0x8CA900
+    vram: 0x80240000
+    files:
       - [0x8CA900, "c", "world/area_kmr/kmr_04"]
       - [0x8CAD70, "bin", "world/area_kmr/kmr_04_data"]
+  - name: world/area_kmr/kmr_05
+    type: code
+    start: 0x8CE070
+    vram: 0x80240000
+    files:
       - [0x8CE070, "c", "world/area_kmr/kmr_05"]
       - [0x8CF7F0, "bin", "world/area_kmr/kmr_05_data"]
+  - name: world/area_kmr/kmr_06
+    type: code
+    start: 0x8D1510
+    vram: 0x80240000
+    files:
       - [0x8D1510, "c", "world/area_kmr/kmr_06"]
       - [0x8D32B0, "bin", "world/area_kmr/kmr_06_data"]
+  - name: world/area_kmr/kmr_07
+    type: code
+    start: 0x8D3DC0
+    vram: 0x80240000
+    files:
       - [0x8D3DC0, "c", "world/area_kmr/kmr_07"]
       - [0x8D4880, "bin", "world/area_kmr/kmr_07_data"]
+  - name: world/area_kmr/kmr_09
+    type: code
+    start: 0x8D5E00
+    vram: 0x80240000
+    files:
       - [0x8D5E00, "c", "world/area_kmr/kmr_09"]
       - [0x8D7330, "bin", "world/area_kmr/kmr_09_data"]
+  - name: world/area_kmr/kmr_10
+    type: code
+    start: 0x8D84D0
+    vram: 0x80240000
+    files:
       - [0x8D84D0, "c", "world/area_kmr/kmr_10"]
       - [0x8D8AE0, "bin", "world/area_kmr/kmr_10_data"]
+  - name: world/area_kmr/kmr_11
+    type: code
+    start: 0x8DA100
+    vram: 0x80240000
+    files:
       - [0x8DA100, "c", "world/area_kmr/kmr_11"]
       - [0x8DB260, "bin", "world/area_kmr/kmr_11_data"]
+  - name: world/area_kmr/kmr_12
+    type: code
+    start: 0x8EB360
+    vram: 0x80240000
+    files:
       - [0x8EB360, "c", "world/area_kmr/kmr_12"]
       - [0x8EB390, "bin", "world/area_kmr/kmr_12_data"]
+  - name: world/area_kmr/kmr_20
+    type: code
+    start: 0x8EBE20
+    vram: 0x80240000
+    files:
       - [0x8EBE20, "c", "world/area_kmr/kmr_20"]
       - [0x8EE9D0, "bin", "world/area_kmr/kmr_20_data"]
+  - name: world/area_kmr/kmr_21
+    type: code
+    start: 0x8FEE80
+    vram: 0x80240000
+    files:
       - [0x8FEE80, "c", "world/area_kmr/kmr_21"]
       - [0x8FF160, "bin", "world/area_kmr/kmr_21_data"]
+  - name: world/area_kmr/kmr_22
+    type: code
+    start: 0x8FF670
+    vram: 0x80240000
+    files:
       - [0x8FF670, "c", "world/area_kmr/kmr_22"]
       - [0x900380, "bin", "world/area_kmr/kmr_22_data"]
+  - name: world/area_kmr/kmr_23
+    type: code
+    start: 0x907A30
+    vram: 0x80240000
+    files:
       - [0x907A30, "c", "world/area_kmr/kmr_23"]
       - [0x908B00, "bin", "world/area_kmr/kmr_23_data"]
+  - name: world/area_kmr/kmr_24
+    type: code
+    start: 0x90B240
+    vram: 0x80240000
+    files:
       - [0x90B240, "c", "world/area_kmr/kmr_24"]
       - [0x90B350, "bin", "world/area_kmr/kmr_24_data"]
+  - name: world/area_kmr/kmr_30
+    type: code
+    start: 0x90B6D0
+    vram: 0x80240000
+    files:
       - [0x90B6D0, "c", "world/area_kmr/kmr_30"]
       - [0x90BBB0, "bin", "world/area_kmr/kmr_30_data"]
-  - name: world/area_iwa
+  - name: world/area_iwa/iwa_00
     type: code
     start: 0x90CC40
     vram: 0x80240000
-    vram_lock: yes
     files:
       - [0x90CC40, "c", "world/area_iwa/iwa_00"]
       - [0x90CF20, "bin", "world/area_iwa/iwa_00_data"]
+  - name: world/area_iwa/iwa_01
+    type: code
+    start: 0x90F6B0
+    vram: 0x80240000
+    files:
       - [0x90F6B0, "c", "world/area_iwa/iwa_01"]
       - [0x912990, "bin", "world/area_iwa/iwa_01_data"]
+  - name: world/area_iwa/iwa_02
+    type: code
+    start: 0x915D70
+    vram: 0x80240000
+    files:
       - [0x915D70, "c", "world/area_iwa/iwa_02"]
       - [0x916E70, "bin", "world/area_iwa/iwa_02_data"]
+  - name: world/area_iwa/iwa_03
+    type: code
+    start: 0x918BB0
+    vram: 0x80240000
+    files:
       - [0x918BB0, "c", "world/area_iwa/iwa_03"]
       - [0x919F00, "bin", "world/area_iwa/iwa_03_data"]
+  - name: world/area_iwa/iwa_04
+    type: code
+    start: 0x91B8E0
+    vram: 0x80240000
+    files:
       - [0x91B8E0, "c", "world/area_iwa/iwa_04"]
       - [0x91C9C0, "bin", "world/area_iwa/iwa_04_data"]
+  - name: world/area_iwa/iwa_10
+    type: code
+    start: 0x91E570
+    vram: 0x80240000
+    files:
       - [0x91E570, "c", "world/area_iwa/iwa_10"]
       - [0x91FD60, "bin", "world/area_iwa/iwa_10_data"]
+  - name: world/area_iwa/iwa_11
+    type: code
+    start: 0x9269F0
+    vram: 0x80240000
+    files:
       - [0x9269F0, "c", "world/area_iwa/iwa_11"]
       - [0x926D00, "bin", "world/area_iwa/iwa_11_data"]
-  - name: world/area_sbk
+  - name: world/area_sbk/sbk_00
     type: code
     start: 0x929270
     vram: 0x80240000
-    vram_lock: yes
     files:
       - [0x929270, "c", "world/area_sbk/sbk_00"]
       - [0x9292D0, "bin", "world/area_sbk/sbk_00_data"]
+  - name: world/area_sbk/sbk_01
+    type: code
+    start: 0x929A90
+    vram: 0x80240000
+    files:
       - [0x929A90, "c", "world/area_sbk/sbk_01"]
       - [0x929AF0, "bin", "world/area_sbk/sbk_01_data"]
+  - name: world/area_sbk/sbk_02
+    type: code
+    start: 0x92A2B0
+    vram: 0x80240000
+    files:
       - [0x92A2B0, "c", "world/area_sbk/sbk_02"]
       - [0x92AEB0, "bin", "world/area_sbk/sbk_02_data"]
+  - name: world/area_sbk/sbk_03
+    type: code
+    start: 0x92F8B0
+    vram: 0x80240000
+    files:
       - [0x92F8B0, "c", "world/area_sbk/sbk_03"]
       - [0x92F910, "bin", "world/area_sbk/sbk_03_data"]
+  - name: world/area_sbk/sbk_04
+    type: code
+    start: 0x9304D0
+    vram: 0x80240000
+    files:
       - [0x9304D0, "c", "world/area_sbk/sbk_04"]
       - [0x930530, "bin", "world/area_sbk/sbk_04_data"]
+  - name: world/area_sbk/sbk_05
+    type: code
+    start: 0x930CF0
+    vram: 0x80240000
+    files:
       - [0x930CF0, "c", "world/area_sbk/sbk_05"]
       - [0x930D50, "bin", "world/area_sbk/sbk_05_data"]
+  - name: world/area_sbk/sbk_06
+    type: code
+    start: 0x9325C0
+    vram: 0x80240000
+    files:
       - [0x9325C0, "c", "world/area_sbk/sbk_06"]
       - [0x932940, "bin", "world/area_sbk/sbk_06_data"]
+  - name: world/area_sbk/sbk_10
+    type: code
+    start: 0x933C80
+    vram: 0x80240000
+    files:
       - [0x933C80, "c", "world/area_sbk/sbk_10"]
       - [0x933CC0, "bin", "world/area_sbk/sbk_10_data"]
+  - name: world/area_sbk/sbk_11
+    type: code
+    start: 0x934040
+    vram: 0x80240000
+    files:
       - [0x934040, "c", "world/area_sbk/sbk_11"]
       - [0x9341A0, "bin", "world/area_sbk/sbk_11_data"]
+  - name: world/area_sbk/sbk_12
+    type: code
+    start: 0x934D40
+    vram: 0x80240000
+    files:
       - [0x934D40, "c", "world/area_sbk/sbk_12"]
       - [0x934DA0, "bin", "world/area_sbk/sbk_12_data"]
+  - name: world/area_sbk/sbk_13
+    type: code
+    start: 0x9357E0
+    vram: 0x80240000
+    files:
       - [0x9357E0, "c", "world/area_sbk/sbk_13"]
       - [0x935940, "bin", "world/area_sbk/sbk_13_data"]
+  - name: world/area_sbk/sbk_14
+    type: code
+    start: 0x9366E0
+    vram: 0x80240000
+    files:
       - [0x9366E0, "c", "world/area_sbk/sbk_14"]
       - [0x936720, "bin", "world/area_sbk/sbk_14_data"]
+  - name: world/area_sbk/sbk_15
+    type: code
+    start: 0x936CD0
+    vram: 0x80240000
+    files:
       - [0x936CD0, "c", "world/area_sbk/sbk_15"]
       - [0x936D30, "bin", "world/area_sbk/sbk_15_data"]
+  - name: world/area_sbk/sbk_16
+    type: code
+    start: 0x937570
+    vram: 0x80240000
+    files:
       - [0x937570, "c", "world/area_sbk/sbk_16"]
       - [0x9377F0, "bin", "world/area_sbk/sbk_16_data"]
+  - name: world/area_sbk/sbk_20
+    type: code
+    start: 0x938590
+    vram: 0x80240000
+    files:
       - [0x938590, "c", "world/area_sbk/sbk_20"]
       - [0x9386D0, "bin", "world/area_sbk/sbk_20_data"]
+  - name: world/area_sbk/sbk_21
+    type: code
+    start: 0x939560
+    vram: 0x80240000
+    files:
       - [0x939560, "c", "world/area_sbk/sbk_21"]
       - [0x9395A0, "bin", "world/area_sbk/sbk_21_data"]
+  - name: world/area_sbk/sbk_22
+    type: code
+    start: 0x939930
+    vram: 0x80240000
+    files:
       - [0x939930, "c", "world/area_sbk/sbk_22"]
       - [0x939A90, "bin", "world/area_sbk/sbk_22_data"]
+  - name: world/area_sbk/sbk_23
+    type: code
+    start: 0x93A760
+    vram: 0x80240000
+    files:
       - [0x93A760, "c", "world/area_sbk/sbk_23"]
       - [0x93A7A0, "bin", "world/area_sbk/sbk_23_data"]
+  - name: world/area_sbk/sbk_24
+    type: code
+    start: 0x93AC30
+    vram: 0x80240000
+    files:
       - [0x93AC30, "c", "world/area_sbk/sbk_24"]
       - [0x93AFB0, "bin", "world/area_sbk/sbk_24_data"]
+  - name: world/area_sbk/sbk_25
+    type: code
+    start: 0x93C280
+    vram: 0x80240000
+    files:
       - [0x93C280, "c", "world/area_sbk/sbk_25"]
       - [0x93C600, "bin", "world/area_sbk/sbk_25_data"]
+  - name: world/area_sbk/sbk_26
+    type: code
+    start: 0x93DCD0
+    vram: 0x80240000
+    files:
       - [0x93DCD0, "c", "world/area_sbk/sbk_26"]
       - [0x93E070, "bin", "world/area_sbk/sbk_26_data"]
+  - name: world/area_sbk/sbk_30
+    type: code
+    start: 0x93F5B0
+    vram: 0x80240000
+    files:
       - [0x93F5B0, "c", "world/area_sbk/sbk_30"]
       - [0x940DC0, "bin", "world/area_sbk/sbk_30_data"]
+  - name: world/area_sbk/sbk_31
+    type: code
+    start: 0x944000
+    vram: 0x80240000
+    files:
       - [0x944000, "c", "world/area_sbk/sbk_31"]
       - [0x944140, "bin", "world/area_sbk/sbk_31_data"]
+  - name: world/area_sbk/sbk_32
+    type: code
+    start: 0x944A60
+    vram: 0x80240000
+    files:
       - [0x944A60, "c", "world/area_sbk/sbk_32"]
       - [0x944BC0, "bin", "world/area_sbk/sbk_32_data"]
+  - name: world/area_sbk/sbk_33
+    type: code
+    start: 0x9459D0
+    vram: 0x80240000
+    files:
       - [0x9459D0, "c", "world/area_sbk/sbk_33"]
       - [0x945A10, "bin", "world/area_sbk/sbk_33_data"]
+  - name: world/area_sbk/sbk_34
+    type: code
+    start: 0x945ED0
+    vram: 0x80240000
+    files:
       - [0x945ED0, "c", "world/area_sbk/sbk_34"]
       - [0x9468B0, "bin", "world/area_sbk/sbk_34_data"]
+  - name: world/area_sbk/sbk_35
+    type: code
+    start: 0x9486B0
+    vram: 0x80240000
+    files:
       - [0x9486B0, "c", "world/area_sbk/sbk_35"]
       - [0x948A30, "bin", "world/area_sbk/sbk_35_data"]
+  - name: world/area_sbk/sbk_36
+    type: code
+    start: 0x949E60
+    vram: 0x80240000
+    files:
       - [0x949E60, "c", "world/area_sbk/sbk_36"]
       - [0x94A0E0, "bin", "world/area_sbk/sbk_36_data"]
+  - name: world/area_sbk/sbk_40
+    type: code
+    start: 0x94B3A0
+    vram: 0x80240000
+    files:
       - [0x94B3A0, "c", "world/area_sbk/sbk_40"]
       - [0x94B4E0, "bin", "world/area_sbk/sbk_40_data"]
+  - name: world/area_sbk/sbk_41
+    type: code
+    start: 0x94C040
+    vram: 0x80240000
+    files:
       - [0x94C040, "c", "world/area_sbk/sbk_41"]
       - [0x94C080, "bin", "world/area_sbk/sbk_41_data"]
+  - name: world/area_sbk/sbk_42
+    type: code
+    start: 0x94C510
+    vram: 0x80240000
+    files:
       - [0x94C510, "c", "world/area_sbk/sbk_42"]
       - [0x94C650, "bin", "world/area_sbk/sbk_42_data"]
+  - name: world/area_sbk/sbk_43
+    type: code
+    start: 0x94D170
+    vram: 0x80240000
+    files:
       - [0x94D170, "c", "world/area_sbk/sbk_43"]
       - [0x94D1B0, "bin", "world/area_sbk/sbk_43_data"]
+  - name: world/area_sbk/sbk_44
+    type: code
+    start: 0x94D5A0
+    vram: 0x80240000
+    files:
       - [0x94D5A0, "c", "world/area_sbk/sbk_44"]
       - [0x94D700, "bin", "world/area_sbk/sbk_44_data"]
+  - name: world/area_sbk/sbk_45
+    type: code
+    start: 0x94E4A0
+    vram: 0x80240000
+    files:
       - [0x94E4A0, "c", "world/area_sbk/sbk_45"]
       - [0x94E4E0, "bin", "world/area_sbk/sbk_45_data"]
+  - name: world/area_sbk/sbk_46
+    type: code
+    start: 0x94E9A0
+    vram: 0x80240000
+    files:
       - [0x94E9A0, "c", "world/area_sbk/sbk_46"]
       - [0x94ED40, "bin", "world/area_sbk/sbk_46_data"]
+  - name: world/area_sbk/sbk_50
+    type: code
+    start: 0x950610
+    vram: 0x80240000
+    files:
       - [0x950610, "c", "world/area_sbk/sbk_50"]
       - [0x950650, "bin", "world/area_sbk/sbk_50_data"]
+  - name: world/area_sbk/sbk_51
+    type: code
+    start: 0x950970
+    vram: 0x80240000
+    files:
       - [0x950970, "c", "world/area_sbk/sbk_51"]
       - [0x950AD0, "bin", "world/area_sbk/sbk_51_data"]
+  - name: world/area_sbk/sbk_52
+    type: code
+    start: 0x951670
+    vram: 0x80240000
+    files:
       - [0x951670, "c", "world/area_sbk/sbk_52"]
       - [0x9516B0, "bin", "world/area_sbk/sbk_52_data"]
+  - name: world/area_sbk/sbk_53
+    type: code
+    start: 0x951AE0
+    vram: 0x80240000
+    files:
       - [0x951AE0, "c", "world/area_sbk/sbk_53"]
       - [0x951B40, "bin", "world/area_sbk/sbk_53_data"]
+  - name: world/area_sbk/sbk_54
+    type: code
+    start: 0x952580
+    vram: 0x80240000
+    files:
       - [0x952580, "c", "world/area_sbk/sbk_54"]
       - [0x9525C0, "bin", "world/area_sbk/sbk_54_data"]
+  - name: world/area_sbk/sbk_55
+    type: code
+    start: 0x952A50
+    vram: 0x80240000
+    files:
       - [0x952A50, "c", "world/area_sbk/sbk_55"]
       - [0x952CF0, "bin", "world/area_sbk/sbk_55_data"]
+  - name: world/area_sbk/sbk_56
+    type: code
+    start: 0x953FC0
+    vram: 0x80240000
+    files:
       - [0x953FC0, "c", "world/area_sbk/sbk_56"]
       - [0x954FC0, "bin", "world/area_sbk/sbk_56_data"]
+  - name: world/area_sbk/sbk_60
+    type: code
+    start: 0x9569F0
+    vram: 0x80240000
+    files:
       - [0x9569F0, "c", "world/area_sbk/sbk_60"]
       - [0x956A50, "bin", "world/area_sbk/sbk_60_data"]
+  - name: world/area_sbk/sbk_61
+    type: code
+    start: 0x956F90
+    vram: 0x80240000
+    files:
       - [0x956F90, "c", "world/area_sbk/sbk_61"]
       - [0x956FD0, "bin", "world/area_sbk/sbk_61_data"]
+  - name: world/area_sbk/sbk_62
+    type: code
+    start: 0x957350
+    vram: 0x80240000
+    files:
       - [0x957350, "c", "world/area_sbk/sbk_62"]
       - [0x9573B0, "bin", "world/area_sbk/sbk_62_data"]
+  - name: world/area_sbk/sbk_63
+    type: code
+    start: 0x957D70
+    vram: 0x80240000
+    files:
       - [0x957D70, "c", "world/area_sbk/sbk_63"]
       - [0x957DD0, "bin", "world/area_sbk/sbk_63_data"]
+  - name: world/area_sbk/sbk_64
+    type: code
+    start: 0x958590
+    vram: 0x80240000
+    files:
       - [0x958590, "c", "world/area_sbk/sbk_64"]
       - [0x9585D0, "bin", "world/area_sbk/sbk_64_data"]
+  - name: world/area_sbk/sbk_65
+    type: code
+    start: 0x958950
+    vram: 0x80240000
+    files:
       - [0x958950, "c", "world/area_sbk/sbk_65"]
       - [0x958990, "bin", "world/area_sbk/sbk_65_data"]
+  - name: world/area_sbk/sbk_66
+    type: code
+    start: 0x958CB0
+    vram: 0x80240000
+    files:
       - [0x958CB0, "c", "world/area_sbk/sbk_66"]
       - [0x959030, "bin", "world/area_sbk/sbk_66_data"]
+  - name: world/area_sbk/sbk_99
+    type: code
+    start: 0x95AEB0
+    vram: 0x80240000
+    files:
       - [0x95AEB0, "bin", "world/area_sbk/sbk_99"]
-  - name: world/area_dro
+  - name: world/area_dro/dro_01
     type: code
     start: 0x95B200
     vram: 0x80240000
-    vram_lock: yes
     files:
       - [0x95B200, "c", "world/area_dro/dro_01"]
       - [0x95ECC0, "bin", "world/area_dro/dro_01_data"]
+  - name: world/area_dro/dro_02
+    type: code
+    start: 0x9691C0
+    vram: 0x80240000
+    files:
       - [0x9691C0, "c", "world/area_dro/dro_02"]
       - [0x96CC30, "bin", "world/area_dro/dro_02_data"]
-  - name: world/area_isk
+  - name: world/area_isk/isk_01
     type: code
     start: 0x978140
     vram: 0x80240000
-    vram_lock: yes
     files:
       - [0x978140, "bin", "world/area_isk/isk_01"]
+  - name: world/area_isk/isk_02
+    type: code
+    start: 0x978710
+    vram: 0x80240000
+    files:
       - [0x978710, "c", "world/area_isk/isk_02"]
       - [0x978820, "bin", "world/area_isk/isk_02_data"]
+  - name: world/area_isk/isk_03
+    type: code
+    start: 0x979E50
+    vram: 0x80240000
+    files:
       - [0x979E50, "bin", "world/area_isk/isk_03"]
+  - name: world/area_isk/isk_04
+    type: code
+    start: 0x97B630
+    vram: 0x80240000
+    files:
       - [0x97B630, "c", "world/area_isk/isk_04"]
       - [0x97C0A0, "bin", "world/area_isk/isk_04_data"]
+  - name: world/area_isk/isk_05
+    type: code
+    start: 0x97DAD0
+    vram: 0x80240000
+    files:
       - [0x97DAD0, "c", "world/area_isk/isk_05"]
       - [0x97F990, "bin", "world/area_isk/isk_05_data"]
+  - name: world/area_isk/isk_06
+    type: code
+    start: 0x980A20
+    vram: 0x80240000
+    files:
       - [0x980A20, "bin", "world/area_isk/isk_06"]
+  - name: world/area_isk/isk_07
+    type: code
+    start: 0x982440
+    vram: 0x80240000
+    files:
       - [0x982440, "c", "world/area_isk/isk_07"]
       - [0x982550, "bin", "world/area_isk/isk_07_data"]
+  - name: world/area_isk/isk_08
+    type: code
+    start: 0x984E30
+    vram: 0x80240000
+    files:
       - [0x984E30, "c", "world/area_isk/isk_08"]
       - [0x985720, "bin", "world/area_isk/isk_08_data"]
+  - name: world/area_isk/isk_09
+    type: code
+    start: 0x9864E0
+    vram: 0x80240000
+    files:
       - [0x9864E0, "c", "world/area_isk/isk_09"]
       - [0x986810, "bin", "world/area_isk/isk_09_data"]
+  - name: world/area_isk/isk_10
+    type: code
+    start: 0x988B60
+    vram: 0x80240000
+    files:
       - [0x988B60, "c", "world/area_isk/isk_10"]
       - [0x989910, "bin", "world/area_isk/isk_10_data"]
+  - name: world/area_isk/isk_11
+    type: code
+    start: 0x98AA10
+    vram: 0x80240000
+    files:
       - [0x98AA10, "c", "world/area_isk/isk_11"]
       - [0x98AB70, "bin", "world/area_isk/isk_11_data"]
+  - name: world/area_isk/isk_12
+    type: code
+    start: 0x98D640
+    vram: 0x80240000
+    files:
       - [0x98D640, "bin", "world/area_isk/isk_12"]
+  - name: world/area_isk/isk_13
+    type: code
+    start: 0x98F7E0
+    vram: 0x80240000
+    files:
       - [0x98F7E0, "c", "world/area_isk/isk_13"]
       - [0x991850, "bin", "world/area_isk/isk_13_data"]
+  - name: world/area_isk/isk_14
+    type: code
+    start: 0x992730
+    vram: 0x80240000
+    files:
       - [0x992730, "c", "world/area_isk/isk_14"]
       - [0x994490, "bin", "world/area_isk/isk_14_data"]
+  - name: world/area_isk/isk_16
+    type: code
+    start: 0x9951F0
+    vram: 0x80240000
+    files:
       - [0x9951F0, "c", "world/area_isk/isk_16"]
       - [0x995CF0, "bin", "world/area_isk/isk_16_data"]
+  - name: world/area_isk/isk_18
+    type: code
+    start: 0x997F70
+    vram: 0x80240000
+    files:
       - [0x997F70, "c", "world/area_isk/isk_18"]
       - [0x998860, "bin", "world/area_isk/isk_18_data"]
+  - name: world/area_isk/isk_19
+    type: code
+    start: 0x999740
+    vram: 0x80240000
+    files:
       - [0x999740, "bin", "world/area_isk/isk_19"]
-  - name: world/area_trd
+  - name: world/area_trd/trd_00
     type: code
     start: 0x999C70
     vram: 0x80240000
-    vram_lock: yes
     files:
       - [0x999C70, "c", "world/area_trd/trd_00"]
       - [0x99A2A0, "bin", "world/area_trd/trd_00_data"]
+  - name: world/area_trd/trd_01
+    type: code
+    start: 0x99C990
+    vram: 0x80240000
+    files:
       - [0x99C990, "c", "world/area_trd/trd_01"]
       - [0x99E050, "bin", "world/area_trd/trd_01_data"]
+  - name: world/area_trd/trd_02
+    type: code
+    start: 0x9A0FE0
+    vram: 0x80240000
+    files:
       - [0x9A0FE0, "c", "world/area_trd/trd_02"]
       - [0x9A2A30, "bin", "world/area_trd/trd_02_data"]
+  - name: world/area_trd/trd_03
+    type: code
+    start: 0x9A4650
+    vram: 0x80240000
+    files:
       - [0x9A4650, "c", "world/area_trd/trd_03"]
       - [0x9A5040, "bin", "world/area_trd/trd_03_data"]
+  - name: world/area_trd/trd_04
+    type: code
+    start: 0x9A83F0
+    vram: 0x80240000
+    files:
       - [0x9A83F0, "c", "world/area_trd/trd_04"]
       - [0x9ABC90, "bin", "world/area_trd/trd_04_data"]
+  - name: world/area_trd/trd_05
+    type: code
+    start: 0x9AE700
+    vram: 0x80240000
+    files:
       - [0x9AE700, "c", "world/area_trd/trd_05"]
       - [0x9AEE70, "bin", "world/area_trd/trd_05_data"]
+  - name: world/area_trd/trd_06
+    type: code
+    start: 0x9B1790
+    vram: 0x80240000
+    files:
       - [0x9B1790, "c", "world/area_trd/trd_06"]
       - [0x9B24B0, "bin", "world/area_trd/trd_06_data"]
+  - name: world/area_trd/trd_07
+    type: code
+    start: 0x9B6980
+    vram: 0x80240000
+    files:
       - [0x9B6980, "c", "world/area_trd/trd_07"]
       - [0x9B9270, "bin", "world/area_trd/trd_07_data"]
+  - name: world/area_trd/trd_08
+    type: code
+    start: 0x9BB2A0
+    vram: 0x80240000
+    files:
       - [0x9BB2A0, "c", "world/area_trd/trd_08"]
       - [0x9BBCC0, "bin", "world/area_trd/trd_08_data"]
+  - name: world/area_trd/trd_09
+    type: code
+    start: 0x9BD660
+    vram: 0x80240000
+    files:
       - [0x9BD660, "c", "world/area_trd/trd_09"]
       - [0x9BD830, "bin", "world/area_trd/trd_09_data"]
+  - name: world/area_trd/trd_10
+    type: code
+    start: 0x9C2910
+    vram: 0x80240000
+    files:
       - [0x9C2910, "c", "world/area_trd/trd_10"]
       - [0x9C3160, "bin", "world/area_trd/trd_10_data"]
-  - name: world/area_nok
+  - name: world/area_nok/nok_01
     type: code
     start: 0x9C53E0
     vram: 0x80240000
-    vram_lock: yes
     files:
       - [0x9C53E0, "c", "world/area_nok/nok_01"]
       - [0x9C7F50, "bin", "world/area_nok/nok_01_data"]
+  - name: world/area_nok/nok_02
+    type: code
+    start: 0x9D7020
+    vram: 0x80240000
+    files:
       - [0x9D7020, "c", "world/area_nok/nok_02"]
       - [0x9DB5C0, "bin", "world/area_nok/nok_02_data"]
+  - name: world/area_nok/nok_03
+    type: code
+    start: 0x9EB7F0
+    vram: 0x80240000
+    files:
       - [0x9EB7F0, "c", "world/area_nok/nok_03"]
       - [0x9EC610, "bin", "world/area_nok/nok_03_data"]
+  - name: world/area_nok/nok_04
+    type: code
+    start: 0x9EDBF0
+    vram: 0x80240000
+    files:
       - [0x9EDBF0, "c", "world/area_nok/nok_04"]
       - [0x9EEB20, "bin", "world/area_nok/nok_04_data"]
+  - name: world/area_nok/nok_11
+    type: code
+    start: 0x9F4A40
+    vram: 0x80240000
+    files:
       - [0x9F4A40, "c", "world/area_nok/nok_11"]
       - [0x9F6990, "bin", "world/area_nok/nok_11_data"]
+  - name: world/area_nok/nok_12
+    type: code
+    start: 0x9FA7F0
+    vram: 0x80240000
+    files:
       - [0x9FA7F0, "c", "world/area_nok/nok_12"]
       - [0x9FC8B0, "bin", "world/area_nok/nok_12_data"]
+  - name: world/area_nok/nok_13
+    type: code
+    start: 0xA00600
+    vram: 0x80240000
+    files:
       - [0xA00600, "c", "world/area_nok/nok_13"]
       - [0xA01A90, "bin", "world/area_nok/nok_13_data"]
+  - name: world/area_nok/nok_14
+    type: code
+    start: 0xA02840
+    vram: 0x80240000
+    files:
       - [0xA02840, "c", "world/area_nok/nok_14"]
       - [0xA04C60, "bin", "world/area_nok/nok_14_data"]
+  - name: world/area_nok/nok_15
+    type: code
+    start: 0xA06F00
+    vram: 0x80240000
+    files:
       - [0xA06F00, "c", "world/area_nok/nok_15"]
       - [0xA09680, "bin", "world/area_nok/nok_15_data"]
-  - name: world/area_hos
+  - name: world/area_hos/hos_00
     type: code
     start: 0xA0BCF0
     vram: 0x80240000
-    vram_lock: yes
     files:
       - [0xA0BCF0, "c", "world/area_hos/hos_00"]
       - [0xA0CA00, "bin", "world/area_hos/hos_00_data"]
+  - name: world/area_hos/hos_01
+    type: code
+    start: 0xA10880
+    vram: 0x80240000
+    files:
       - [0xA10880, "c", "world/area_hos/hos_01"]
       - [0xA116A0, "bin", "world/area_hos/hos_01_data"]
+  - name: world/area_hos/hos_02
+    type: code
+    start: 0xA16220
+    vram: 0x80240000
+    files:
       - [0xA16220, "c", "world/area_hos/hos_02"]
       - [0xA18D00, "bin", "world/area_hos/hos_02_data"]
+  - name: world/area_hos/hos_03
+    type: code
+    start: 0xA1B100
+    vram: 0x80240000
+    files:
       - [0xA1B100, "c", "world/area_hos/hos_03"]
       - [0xA1E640, "bin", "world/area_hos/hos_03_data"]
+  - name: world/area_hos/hos_04
+    type: code
+    start: 0xA26ED0
+    vram: 0x80240000
+    files:
       - [0xA26ED0, "c", "world/area_hos/hos_04"]
       - [0xA27D60, "bin", "world/area_hos/hos_04_data"]
+  - name: world/area_hos/hos_05
+    type: code
+    start: 0xA2A240
+    vram: 0x80240000
+    files:
       - [0xA2A240, "c", "world/area_hos/hos_05"]
       - [0xA2FAA0, "bin", "world/area_hos/hos_05_data"]
+  - name: world/area_hos/hos_06
+    type: code
+    start: 0xA394E0
+    vram: 0x80240000
+    files:
       - [0xA394E0, "c", "world/area_hos/hos_06"]
       - [0xA3BA40, "bin", "world/area_hos/hos_06_data"]
+  - name: world/area_hos/hos_10
+    type: code
+    start: 0xA3F740
+    vram: 0x80240000
+    files:
       - [0xA3F740, "c", "world/area_hos/hos_10"]
       - [0xA403C0, "bin", "world/area_hos/hos_10_data"]
+  - name: world/area_hos/hos_20
+    type: code
+    start: 0xA45930
+    vram: 0x80240000
+    files:
       - [0xA45930, "c", "world/area_hos/hos_20"]
       - [0xA45C90, "bin", "world/area_hos/hos_20_data"]
-  - name: world/area_kpa
+  - name: world/area_kpa/kpa_01
     type: code
     start: 0xA46F60
     vram: 0x80240000
-    vram_lock: yes
     files:
       - [0xA46F60, "c", "world/area_kpa/kpa_01"]
       - [0xA479B0, "bin", "world/area_kpa/kpa_01_data"]
+  - name: world/area_kpa/kpa_03
+    type: code
+    start: 0xA485C0
+    vram: 0x80240000
+    files:
       - [0xA485C0, "c", "world/area_kpa/kpa_03"]
       - [0xA4A480, "bin", "world/area_kpa/kpa_03_data"]
+  - name: world/area_kpa/kpa_04
+    type: code
+    start: 0xA4BF60
+    vram: 0x80240000
+    files:
       - [0xA4BF60, "c", "world/area_kpa/kpa_04"]
       - [0xA4C0D0, "bin", "world/area_kpa/kpa_04_data"]
+  - name: world/area_kpa/kpa_08
+    type: code
+    start: 0xA4CA20
+    vram: 0x80240000
+    files:
       - [0xA4CA20, "c", "world/area_kpa/kpa_08"]
       - [0xA4DEC0, "bin", "world/area_kpa/kpa_08_data"]
+  - name: world/area_kpa/kpa_09
+    type: code
+    start: 0xA4F000
+    vram: 0x80240000
+    files:
       - [0xA4F000, "c", "world/area_kpa/kpa_09"]
       - [0xA502F0, "bin", "world/area_kpa/kpa_09_data"]
+  - name: world/area_kpa/kpa_10
+    type: code
+    start: 0xA51980
+    vram: 0x80240000
+    files:
       - [0xA51980, "c", "world/area_kpa/kpa_10"]
       - [0xA51C90, "bin", "world/area_kpa/kpa_10_data"]
+  - name: world/area_kpa/kpa_11
+    type: code
+    start: 0xA528C0
+    vram: 0x80240000
+    files:
       - [0xA528C0, "c", "world/area_kpa/kpa_11"]
       - [0xA533B0, "bin", "world/area_kpa/kpa_11_data"]
+  - name: world/area_kpa/kpa_12
+    type: code
+    start: 0xA54950
+    vram: 0x80240000
+    files:
       - [0xA54950, "c", "world/area_kpa/kpa_12"]
       - [0xA54DC0, "bin", "world/area_kpa/kpa_12_data"]
+  - name: world/area_kpa/kpa_13
+    type: code
+    start: 0xA55F20
+    vram: 0x80240000
+    files:
       - [0xA55F20, "c", "world/area_kpa/kpa_13"]
       - [0xA56390, "bin", "world/area_kpa/kpa_13_data"]
+  - name: world/area_kpa/kpa_14
+    type: code
+    start: 0xA574B0
+    vram: 0x80240000
+    files:
       - [0xA574B0, "c", "world/area_kpa/kpa_14"]
       - [0xA57D20, "bin", "world/area_kpa/kpa_14_data"]
+  - name: world/area_kpa/kpa_15
+    type: code
+    start: 0xA59390
+    vram: 0x80240000
+    files:
       - [0xA59390, "c", "world/area_kpa/kpa_15"]
       - [0xA59960, "bin", "world/area_kpa/kpa_15_data"]
+  - name: world/area_kpa/kpa_16
+    type: code
+    start: 0xA5A030
+    vram: 0x80240000
+    files:
       - [0xA5A030, "c", "world/area_kpa/kpa_16"]
       - [0xA5A3D0, "bin", "world/area_kpa/kpa_16_data"]
+  - name: world/area_kpa/kpa_17
+    type: code
+    start: 0xA5CA20
+    vram: 0x80240000
+    files:
       - [0xA5CA20, "bin", "world/area_kpa/kpa_17"]
+  - name: world/area_kpa/kpa_32
+    type: code
+    start: 0xA5E0C0
+    vram: 0x80240000
+    files:
       - [0xA5E0C0, "c", "world/area_kpa/kpa_32"]
       - [0xA5E3D0, "bin", "world/area_kpa/kpa_32_data"]
+  - name: world/area_kpa/kpa_33
+    type: code
+    start: 0xA5F080
+    vram: 0x80240000
+    files:
       - [0xA5F080, "c", "world/area_kpa/kpa_33"]
       - [0xA5F390, "bin", "world/area_kpa/kpa_33_data"]
+  - name: world/area_kpa/kpa_40
+    type: code
+    start: 0xA60040
+    vram: 0x80240000
+    files:
       - [0xA60040, "bin", "world/area_kpa/kpa_40"]
+  - name: world/area_kpa/kpa_41
+    type: code
+    start: 0xA60470
+    vram: 0x80240000
+    files:
       - [0xA60470, "bin", "world/area_kpa/kpa_41"]
+  - name: world/area_kpa/kpa_50
+    type: code
+    start: 0xA609D0
+    vram: 0x80240000
+    files:
       - [0xA609D0, "c", "world/area_kpa/kpa_50"]
       - [0xA623F0, "bin", "world/area_kpa/kpa_50_data"]
+  - name: world/area_kpa/kpa_51
+    type: code
+    start: 0xA64090
+    vram: 0x80240000
+    files:
       - [0xA64090, "c", "world/area_kpa/kpa_51"]
       - [0xA65CB0, "bin", "world/area_kpa/kpa_51_data"]
+  - name: world/area_kpa/kpa_52
+    type: code
+    start: 0xA67100
+    vram: 0x80240000
+    files:
       - [0xA67100, "c", "world/area_kpa/kpa_52"]
       - [0xA68430, "bin", "world/area_kpa/kpa_52_data"]
+  - name: world/area_kpa/kpa_53
+    type: code
+    start: 0xA6ACA0
+    vram: 0x80240000
+    files:
       - [0xA6ACA0, "c", "world/area_kpa/kpa_53"]
       - [0xA6AE10, "bin", "world/area_kpa/kpa_53_data"]
+  - name: world/area_kpa/kpa_60
+    type: code
+    start: 0xA6CB00
+    vram: 0x80240000
+    files:
       - [0xA6CB00, "c", "world/area_kpa/kpa_60"]
       - [0xA6CEF0, "bin", "world/area_kpa/kpa_60_data"]
+  - name: world/area_kpa/kpa_61
+    type: code
+    start: 0xA6E3E0
+    vram: 0x80240000
+    files:
       - [0xA6E3E0, "c", "world/area_kpa/kpa_61"]
       - [0xA70720, "bin", "world/area_kpa/kpa_61_data"]
+  - name: world/area_kpa/kpa_62
+    type: code
+    start: 0xA72220
+    vram: 0x80240000
+    files:
       - [0xA72220, "c", "world/area_kpa/kpa_62"]
       - [0xA72610, "bin", "world/area_kpa/kpa_62_data"]
+  - name: world/area_kpa/kpa_63
+    type: code
+    start: 0xA735B0
+    vram: 0x80240000
+    files:
       - [0xA735B0, "c", "world/area_kpa/kpa_63"]
       - [0xA73740, "bin", "world/area_kpa/kpa_63_data"]
+  - name: world/area_kpa/kpa_70
+    type: code
+    start: 0xA74870
+    vram: 0x80240000
+    files:
       - [0xA74870, "c", "world/area_kpa/kpa_70"]
       - [0xA75360, "bin", "world/area_kpa/kpa_70_data"]
+  - name: world/area_kpa/kpa_81
+    type: code
+    start: 0xA784C0
+    vram: 0x80240000
+    files:
       - [0xA784C0, "c", "world/area_kpa/kpa_81"]
       - [0xA78900, "bin", "world/area_kpa/kpa_81_data"]
+  - name: world/area_kpa/kpa_82
+    type: code
+    start: 0xA7A500
+    vram: 0x80240000
+    files:
       - [0xA7A500, "c", "world/area_kpa/kpa_82"]
       - [0xA7A940, "bin", "world/area_kpa/kpa_82_data"]
+  - name: world/area_kpa/kpa_83
+    type: code
+    start: 0xA83490
+    vram: 0x80240000
+    files:
       - [0xA83490, "c", "world/area_kpa/kpa_83"]
       - [0xA83500, "bin", "world/area_kpa/kpa_83_data"]
+  - name: world/area_kpa/kpa_90
+    type: code
+    start: 0xA867B0
+    vram: 0x80240000
+    files:
       - [0xA867B0, "bin", "world/area_kpa/kpa_90"]
+  - name: world/area_kpa/kpa_91
+    type: code
+    start: 0xA86A50
+    vram: 0x80240000
+    files:
       - [0xA86A50, "c", "world/area_kpa/kpa_91"]
       - [0xA88360, "bin", "world/area_kpa/kpa_91_data"]
+  - name: world/area_kpa/kpa_94
+    type: code
+    start: 0xA8C7C0
+    vram: 0x80240000
+    files:
       - [0xA8C7C0, "bin", "world/area_kpa/kpa_94"]
+  - name: world/area_kpa/kpa_95
+    type: code
+    start: 0xA8CA80
+    vram: 0x80240000
+    files:
       - [0xA8CA80, "c", "world/area_kpa/kpa_95"]
       - [0xA8E390, "bin", "world/area_kpa/kpa_95_data"]
+  - name: world/area_kpa/kpa_96
+    type: code
+    start: 0xA927C0
+    vram: 0x80240000
+    files:
       - [0xA927C0, "c", "world/area_kpa/kpa_96"]
       - [0xA927F0, "bin", "world/area_kpa/kpa_96_data"]
+  - name: world/area_kpa/kpa_100
+    type: code
+    start: 0xA93160
+    vram: 0x80240000
+    files:
       - [0xA93160, "c", "world/area_kpa/kpa_100"]
       - [0xA931B0, "bin", "world/area_kpa/kpa_100_data"]
+  - name: world/area_kpa/kpa_101
+    type: code
+    start: 0xA93440
+    vram: 0x80240000
+    files:
       - [0xA93440, "c", "world/area_kpa/kpa_101"]
       - [0xA93490, "bin", "world/area_kpa/kpa_101_data"]
+  - name: world/area_kpa/kpa_102
+    type: code
+    start: 0xA93740
+    vram: 0x80240000
+    files:
       - [0xA93740, "c", "world/area_kpa/kpa_102"]
       - [0xA96CD0, "bin", "world/area_kpa/kpa_102_data"]
+  - name: world/area_kpa/kpa_111
+    type: code
+    start: 0xA99590
+    vram: 0x80240000
+    files:
       - [0xA99590, "c", "world/area_kpa/kpa_111"]
       - [0xA9A950, "bin", "world/area_kpa/kpa_111_data"]
+  - name: world/area_kpa/kpa_112
+    type: code
+    start: 0xA9C990
+    vram: 0x80240000
+    files:
       - [0xA9C990, "bin", "world/area_kpa/kpa_112"]
+  - name: world/area_kpa/kpa_113
+    type: code
+    start: 0xA9CC30
+    vram: 0x80240000
+    files:
       - [0xA9CC30, "c", "world/area_kpa/kpa_113"]
       - [0xA9D6D0, "bin", "world/area_kpa/kpa_113_data"]
+  - name: world/area_kpa/kpa_114
+    type: code
+    start: 0xA9E980
+    vram: 0x80240000
+    files:
       - [0xA9E980, "c", "world/area_kpa/kpa_114"]
       - [0xA9E9D0, "bin", "world/area_kpa/kpa_114_data"]
+  - name: world/area_kpa/kpa_115
+    type: code
+    start: 0xA9ED40
+    vram: 0x80240000
+    files:
       - [0xA9ED40, "c", "world/area_kpa/kpa_115"]
       - [0xAA0100, "bin", "world/area_kpa/kpa_115_data"]
+  - name: world/area_kpa/kpa_116
+    type: code
+    start: 0xAA1EE0
+    vram: 0x80240000
+    files:
       - [0xAA1EE0, "bin", "world/area_kpa/kpa_116"]
+  - name: world/area_kpa/kpa_117
+    type: code
+    start: 0xAA2180
+    vram: 0x80240000
+    files:
       - [0xAA2180, "bin", "world/area_kpa/kpa_117"]
+  - name: world/area_kpa/kpa_118
+    type: code
+    start: 0xAA23C0
+    vram: 0x80240000
+    files:
       - [0xAA23C0, "bin", "world/area_kpa/kpa_118"]
+  - name: world/area_kpa/kpa_119
+    type: code
+    start: 0xAA2660
+    vram: 0x80240000
+    files:
       - [0xAA2660, "bin", "world/area_kpa/kpa_119"]
+  - name: world/area_kpa/kpa_121
+    type: code
+    start: 0xAA28F0
+    vram: 0x80240000
+    files:
       - [0xAA28F0, "bin", "world/area_kpa/kpa_121"]
+  - name: world/area_kpa/kpa_130
+    type: code
+    start: 0xAA2D20
+    vram: 0x80240000
+    files:
       - [0xAA2D20, "c", "world/area_kpa/kpa_130"]
       - [0xAA3460, "bin", "world/area_kpa/kpa_130_data"]
+  - name: world/area_kpa/kpa_133
+    type: code
+    start: 0xAA7480
+    vram: 0x80240000
+    files:
       - [0xAA7480, "c", "world/area_kpa/kpa_133"]
       - [0xAA78F0, "bin", "world/area_kpa/kpa_133_data"]
+  - name: world/area_kpa/kpa_134
+    type: code
+    start: 0xAA8FA0
+    vram: 0x80240000
+    files:
       - [0xAA8FA0, "c", "world/area_kpa/kpa_134"]
       - [0xAA96A0, "bin", "world/area_kpa/kpa_134_data"]
-  - name: world/area_osr
+  - name: world/area_osr/osr_00
     type: code
     start: 0xAAC830
     vram: 0x80240000
-    vram_lock: yes
     files:
       - [0xAAC830, "c", "world/area_osr/osr_00"]
       - [0xAACFC0, "bin", "world/area_osr/osr_00_data"]
+  - name: world/area_osr/osr_01
+    type: code
+    start: 0xAAFFF0
+    vram: 0x80240000
+    files:
       - [0xAAFFF0, "c", "world/area_osr/osr_01"]
       - [0xAB0AB0, "bin", "world/area_osr/osr_01_data"]
+  - name: world/area_osr/osr_02
+    type: code
+    start: 0xAB2170
+    vram: 0x80240000
+    files:
       - [0xAB2170, "c", "world/area_osr/osr_02"]
       - [0xAB22C0, "bin", "world/area_osr/osr_02_data"]
+  - name: world/area_osr/osr_03
+    type: code
+    start: 0xAB6290
+    vram: 0x80240000
+    files:
       - [0xAB6290, "c", "world/area_osr/osr_03"]
       - [0xAB6610, "bin", "world/area_osr/osr_03_data"]
+  - name: world/area_osr/osr_04
+    type: code
+    start: 0xAB92B0
+    vram: 0x80240000
+    files:
       - [0xAB92B0, "c", "world/area_osr/osr_04"]
       - [0xAB9370, "bin", "world/area_osr/osr_04_data"]
-  - name: world/area_kkj
+  - name: world/area_kkj/kkj_00
     type: code
     start: 0xABB290
     vram: 0x80240000
-    vram_lock: yes
     files:
       - [0xABB290, "c", "world/area_kkj/kkj_00"]
       - [0xABC250, "bin", "world/area_kkj/kkj_00_data"]
+  - name: world/area_kkj/kkj_01
+    type: code
+    start: 0xAC5170
+    vram: 0x80240000
+    files:
       - [0xAC5170, "c", "world/area_kkj/kkj_01"]
       - [0xAC6000, "bin", "world/area_kkj/kkj_01_data"]
+  - name: world/area_kkj/kkj_02
+    type: code
+    start: 0xAC8D20
+    vram: 0x80240000
+    files:
       - [0xAC8D20, "bin", "world/area_kkj/kkj_02"]
+  - name: world/area_kkj/kkj_03
+    type: code
+    start: 0xAC9710
+    vram: 0x80240000
+    files:
       - [0xAC9710, "c", "world/area_kkj/kkj_03"]
       - [0xAC9A40, "bin", "world/area_kkj/kkj_03_data"]
+  - name: world/area_kkj/kkj_10
+    type: code
+    start: 0xACAB20
+    vram: 0x80240000
+    files:
       - [0xACAB20, "c", "world/area_kkj/kkj_10"]
       - [0xACBBF0, "bin", "world/area_kkj/kkj_10_data"]
+  - name: world/area_kkj/kkj_11
+    type: code
+    start: 0xACE140
+    vram: 0x80240000
+    files:
       - [0xACE140, "c", "world/area_kkj/kkj_11"]
       - [0xACF210, "bin", "world/area_kkj/kkj_11_data"]
+  - name: world/area_kkj/kkj_12
+    type: code
+    start: 0xAD4090
+    vram: 0x80240000
+    files:
       - [0xAD4090, "c", "world/area_kkj/kkj_12"]
       - [0xAD4940, "bin", "world/area_kkj/kkj_12_data"]
+  - name: world/area_kkj/kkj_13
+    type: code
+    start: 0xAD5ED0
+    vram: 0x80240000
+    files:
       - [0xAD5ED0, "c", "world/area_kkj/kkj_13"]
       - [0xAD6630, "bin", "world/area_kkj/kkj_13_data"]
+  - name: world/area_kkj/kkj_14
+    type: code
+    start: 0xADAEA0
+    vram: 0x80240000
+    files:
       - [0xADAEA0, "c", "world/area_kkj/kkj_14"]
       - [0xADB360, "bin", "world/area_kkj/kkj_14_data"]
+  - name: world/area_kkj/kkj_15
+    type: code
+    start: 0xAE5590
+    vram: 0x80240000
+    files:
       - [0xAE5590, "c", "world/area_kkj/kkj_15"]
       - [0xAE5BA0, "bin", "world/area_kkj/kkj_15_data"]
+  - name: world/area_kkj/kkj_16
+    type: code
+    start: 0xAED410
+    vram: 0x80240000
+    files:
       - [0xAED410, "c", "world/area_kkj/kkj_16"]
       - [0xAEE490, "bin", "world/area_kkj/kkj_16_data"]
+  - name: world/area_kkj/kkj_17
+    type: code
+    start: 0xAF1C60
+    vram: 0x80240000
+    files:
       - [0xAF1C60, "c", "world/area_kkj/kkj_17"]
       - [0xAF2200, "bin", "world/area_kkj/kkj_17_data"]
+  - name: world/area_kkj/kkj_18
+    type: code
+    start: 0xAF2CA0
+    vram: 0x80240000
+    files:
       - [0xAF2CA0, "c", "world/area_kkj/kkj_18"]
       - [0xAF34C0, "bin", "world/area_kkj/kkj_18_data"]
+  - name: world/area_kkj/kkj_19
+    type: code
+    start: 0xAF7950
+    vram: 0x80240000
+    files:
       - [0xAF7950, "c", "world/area_kkj/kkj_19"]
       - [0xAF8660, "bin", "world/area_kkj/kkj_19_data"]
+  - name: world/area_kkj/kkj_20
+    type: code
+    start: 0xAFDB40
+    vram: 0x80240000
+    files:
       - [0xAFDB40, "c", "world/area_kkj/kkj_20"]
       - [0xAFE130, "bin", "world/area_kkj/kkj_20_data"]
+  - name: world/area_kkj/kkj_21
+    type: code
+    start: 0xB022A0
+    vram: 0x80240000
+    files:
       - [0xB022A0, "bin", "world/area_kkj/kkj_21"]
+  - name: world/area_kkj/kkj_22
+    type: code
+    start: 0xB024F0
+    vram: 0x80240000
+    files:
       - [0xB024F0, "bin", "world/area_kkj/kkj_22"]
+  - name: world/area_kkj/kkj_23
+    type: code
+    start: 0xB02880
+    vram: 0x80240000
+    files:
       - [0xB02880, "c", "world/area_kkj/kkj_23"]
       - [0xB03250, "bin", "world/area_kkj/kkj_23_data"]
+  - name: world/area_kkj/kkj_24
+    type: code
+    start: 0xB06570
+    vram: 0x80240000
+    files:
       - [0xB06570, "c", "world/area_kkj/kkj_24"]
       - [0xB06590, "bin", "world/area_kkj/kkj_24_data"]
+  - name: world/area_kkj/kkj_25
+    type: code
+    start: 0xB06A00
+    vram: 0x80240000
+    files:
       - [0xB06A00, "c", "world/area_kkj/kkj_25"]
       - [0xB07940, "bin", "world/area_kkj/kkj_25_data"]
+  - name: world/area_kkj/kkj_26
+    type: code
+    start: 0xB13120
+    vram: 0x80240000
+    files:
       - [0xB13120, "c", "world/area_kkj/kkj_26"]
       - [0xB13150, "bin", "world/area_kkj/kkj_26_data"]
+  - name: world/area_kkj/kkj_26
+    type: code
+    start: 0xB13120
+    vram: 0x80240000
+    files:
       - [0xB13120, "c", "world/area_kkj/kkj_26"]
       - [0xB13150, "bin", "world/area_kkj/kkj_26_data"]
+  - name: world/area_kkj/kkj_27
+    type: code
+    start: 0xB13D70
+    vram: 0x80240000
+    files:
       - [0xB13D70, "c", "world/area_kkj/kkj_27"]
       - [0xB14210, "bin", "world/area_kkj/kkj_27_data"]
+  - name: world/area_kkj/kkj_28
+    type: code
+    start: 0xB14EA0
+    vram: 0x80240000
+    files:
       - [0xB14EA0, "bin", "world/area_kkj/kkj_28"]
+  - name: world/area_kkj/kkj_29
+    type: code
+    start: 0xB150B0
+    vram: 0x80240000
+    files:
       - [0xB150B0, "c", "world/area_kkj/kkj_29"]
       - [0xB15120, "bin", "world/area_kkj/kkj_29_data"]
-  - name: world/area_tst
+  - name: world/area_tst/tst_01
     type: code
     start: 0xB1A900
     vram: 0x80240000
-    vram_lock: yes
     files:
       - [0xB1A900, "bin", "world/area_tst/tst_01"]
+  - name: world/area_tst/tst_02
+    type: code
+    start: 0xB1AC30
+    vram: 0x80240000
+    files:
       - [0xB1AC30, "bin", "world/area_tst/tst_02"]
+  - name: world/area_tst/tst_03
+    type: code
+    start: 0xB1AF80
+    vram: 0x80240000
+    files:
       - [0xB1AF80, "bin", "world/area_tst/tst_03"]
+  - name: world/area_tst/tst_04
+    type: code
+    start: 0xB1B570
+    vram: 0x80240000
+    files:
       - [0xB1B570, "c", "world/area_tst/tst_04"]
       - [0xB1BC00, "bin", "world/area_tst/tst_04_data"]
+  - name: world/area_tst/tst_10
+    type: code
+    start: 0xB1C540
+    vram: 0x80240000
+    files:
       - [0xB1C540, "bin", "world/area_tst/tst_10"]
+  - name: world/area_tst/tst_11
+    type: code
+    start: 0xB1CA50
+    vram: 0x80240000
+    files:
       - [0xB1CA50, "c", "world/area_tst/tst_11"]
       - [0xB1D1C0, "bin", "world/area_tst/tst_11_data"]
+  - name: world/area_tst/tst_12
+    type: code
+    start: 0xB1D2F0
+    vram: 0x80240000
+    files:
       - [0xB1D2F0, "bin", "world/area_tst/tst_12"]
+  - name: world/area_tst/tst_13
+    type: code
+    start: 0xB1D760
+    vram: 0x80240000
+    files:
       - [0xB1D760, "c", "world/area_tst/tst_13"]
       - [0xB1DB20, "bin", "world/area_tst/tst_13_data"]
+  - name: world/area_tst/tst_20
+    type: code
+    start: 0xB20470
+    vram: 0x80240000
+    files:
       - [0xB20470, "bin", "world/area_tst/tst_20"]
-  - name: world/area_jan
+  - name: world/area_jan/jan_00
     type: code
     start: 0xB20540
     vram: 0x80240000
-    vram_lock: yes
     files:
       - [0xB20540, "c", "world/area_jan/jan_00"]
       - [0xB220E0, "bin", "world/area_jan/jan_00_data"]
+  - name: world/area_jan/jan_01
+    type: code
+    start: 0xB28030
+    vram: 0x80240000
+    files:
       - [0xB28030, "c", "world/area_jan/jan_01"]
       - [0xB29400, "bin", "world/area_jan/jan_01_data"]
+  - name: world/area_jan/jan_02
+    type: code
+    start: 0xB2C470
+    vram: 0x80240000
+    files:
       - [0xB2C470, "c", "world/area_jan/jan_02"]
       - [0xB2ED90, "bin", "world/area_jan/jan_02_data"]
+  - name: world/area_jan/jan_03
+    type: code
+    start: 0xB34BD0
+    vram: 0x80240000
+    files:
       - [0xB34BD0, "c", "world/area_jan/jan_03"]
       - [0xB37E60, "bin", "world/area_jan/jan_03_data"]
+  - name: world/area_jan/jan_04
+    type: code
+    start: 0xB44770
+    vram: 0x80240000
+    files:
       - [0xB44770, "c", "world/area_jan/jan_04"]
       - [0xB45860, "bin", "world/area_jan/jan_04_data"]
+  - name: world/area_jan/jan_05
+    type: code
+    start: 0xB4AA70
+    vram: 0x80240000
+    files:
       - [0xB4AA70, "c", "world/area_jan/jan_05"]
       - [0xB4D140, "bin", "world/area_jan/jan_05_data"]
+  - name: world/area_jan/jan_06
+    type: code
+    start: 0xB52830
+    vram: 0x80240000
+    files:
       - [0xB52830, "c", "world/area_jan/jan_06"]
       - [0xB54E10, "bin", "world/area_jan/jan_06_data"]
+  - name: world/area_jan/jan_07
+    type: code
+    start: 0xB59870
+    vram: 0x80240000
+    files:
       - [0xB59870, "c", "world/area_jan/jan_07"]
       - [0xB5AA90, "bin", "world/area_jan/jan_07_data"]
+  - name: world/area_jan/jan_08
+    type: code
+    start: 0xB5E2B0
+    vram: 0x80240000
+    files:
       - [0xB5E2B0, "c", "world/area_jan/jan_08"]
       - [0xB606E0, "bin", "world/area_jan/jan_08_data"]
+  - name: world/area_jan/jan_09
+    type: code
+    start: 0xB65AB0
+    vram: 0x80240000
+    files:
       - [0xB65AB0, "c", "world/area_jan/jan_09"]
       - [0xB673D0, "bin", "world/area_jan/jan_09_data"]
+  - name: world/area_jan/jan_10
+    type: code
+    start: 0xB6C390
+    vram: 0x80240000
+    files:
       - [0xB6C390, "c", "world/area_jan/jan_10"]
       - [0xB6DAD0, "bin", "world/area_jan/jan_10_data"]
+  - name: world/area_jan/jan_11
+    type: code
+    start: 0xB70860
+    vram: 0x80240000
+    files:
       - [0xB70860, "c", "world/area_jan/jan_11"]
       - [0xB71060, "bin", "world/area_jan/jan_11_data"]
+  - name: world/area_jan/jan_12
+    type: code
+    start: 0xB730B0
+    vram: 0x80240000
+    files:
       - [0xB730B0, "c", "world/area_jan/jan_12"]
       - [0xB74310, "bin", "world/area_jan/jan_12_data"]
+  - name: world/area_jan/jan_13
+    type: code
+    start: 0xB767B0
+    vram: 0x80240000
+    files:
       - [0xB767B0, "c", "world/area_jan/jan_13"]
       - [0xB76D80, "bin", "world/area_jan/jan_13_data"]
+  - name: world/area_jan/jan_14
+    type: code
+    start: 0xB7A050
+    vram: 0x80240000
+    files:
       - [0xB7A050, "c", "world/area_jan/jan_14"]
       - [0xB7B330, "bin", "world/area_jan/jan_14_data"]
+  - name: world/area_jan/jan_15
+    type: code
+    start: 0xB7D920
+    vram: 0x80240000
+    files:
       - [0xB7D920, "c", "world/area_jan/jan_15"]
       - [0xB7DC20, "bin", "world/area_jan/jan_15_data"]
+  - name: world/area_jan/jan_16
+    type: code
+    start: 0xB80000
+    vram: 0x80240000
+    files:
       - [0xB80000, "c", "world/area_jan/jan_16"]
       - [0xB80540, "bin", "world/area_jan/jan_16_data"]
+  - name: world/area_jan/jan_17
+    type: code
+    start: 0xB837C0
+    vram: 0x80240000
+    files:
       - [0xB837C0, "c", "world/area_jan/jan_17"]
       - [0xB837E0, "bin", "world/area_jan/jan_17_data"]
+  - name: world/area_jan/jan_18
+    type: code
+    start: 0xB83B90
+    vram: 0x80240000
+    files:
       - [0xB83B90, "bin", "world/area_jan/jan_18"]
+  - name: world/area_jan/jan_19
+    type: code
+    start: 0xB83E60
+    vram: 0x80240000
+    files:
       - [0xB83E60, "c", "world/area_jan/jan_19"]
       - [0xB83E80, "bin", "world/area_jan/jan_19_data"]
+  - name: world/area_jan/jan_22
+    type: code
+    start: 0xB84180
+    vram: 0x80240000
+    files:
       - [0xB84180, "c", "world/area_jan/jan_22"]
       - [0xB85AE0, "bin", "world/area_jan/jan_22_data"]
+  - name: world/area_jan/jan_23
+    type: code
+    start: 0xB8FCD0
+    vram: 0x80240000
+    files:
       - [0xB8FCD0, "bin", "world/area_jan/jan_23"]
-  - name: world/area_mim
+  - name: world/area_mim/mim_01
     type: code
     start: 0xB93440
     vram: 0x80240000
-    vram_lock: yes
     files:
       - [0xB93440, "c", "world/area_mim/mim_01"]
       - [0xB952F0, "bin", "world/area_mim/mim_01_data"]
+  - name: world/area_mim/mim_02
+    type: code
+    start: 0xB97C00
+    vram: 0x80240000
+    files:
       - [0xB97C00, "c", "world/area_mim/mim_02"]
       - [0xB98DE0, "bin", "world/area_mim/mim_02_data"]
+  - name: world/area_mim/mim_03
+    type: code
+    start: 0xB9B480
+    vram: 0x80240000
+    files:
       - [0xB9B480, "c", "world/area_mim/mim_03"]
       - [0xB9B9B0, "bin", "world/area_mim/mim_03_data"]
+  - name: world/area_mim/mim_04
+    type: code
+    start: 0xB9D960
+    vram: 0x80240000
+    files:
       - [0xB9D960, "c", "world/area_mim/mim_04"]
       - [0xB9EA90, "bin", "world/area_mim/mim_04_data"]
+  - name: world/area_mim/mim_05
+    type: code
+    start: 0xBA0730
+    vram: 0x80240000
+    files:
       - [0xBA0730, "c", "world/area_mim/mim_05"]
       - [0xBA2150, "bin", "world/area_mim/mim_05_data"]
+  - name: world/area_mim/mim_06
+    type: code
+    start: 0xBA4780
+    vram: 0x80240000
+    files:
       - [0xBA4780, "c", "world/area_mim/mim_06"]
       - [0xBA74B0, "bin", "world/area_mim/mim_06_data"]
+  - name: world/area_mim/mim_07
+    type: code
+    start: 0xBAA140
+    vram: 0x80240000
+    files:
       - [0xBAA140, "c", "world/area_mim/mim_07"]
       - [0xBAB1D0, "bin", "world/area_mim/mim_07_data"]
+  - name: world/area_mim/mim_08
+    type: code
+    start: 0xBAD940
+    vram: 0x80240000
+    files:
       - [0xBAD940, "c", "world/area_mim/mim_08"]
       - [0xBB0880, "bin", "world/area_mim/mim_08_data"]
+  - name: world/area_mim/mim_09
+    type: code
+    start: 0xBB2E00
+    vram: 0x80240000
+    files:
       - [0xBB2E00, "c", "world/area_mim/mim_09"]
       - [0xBB3CC0, "bin", "world/area_mim/mim_09_data"]
+  - name: world/area_mim/mim_10
+    type: code
+    start: 0xBB59E0
+    vram: 0x80240000
+    files:
       - [0xBB59E0, "c", "world/area_mim/mim_10"]
       - [0xBB5B70, "bin", "world/area_mim/mim_10_data"]
+  - name: world/area_mim/mim_11
+    type: code
+    start: 0xBB7070
+    vram: 0x80240000
+    files:
       - [0xBB7070, "c", "world/area_mim/mim_11"]
       - [0xBB7C30, "bin", "world/area_mim/mim_11_data"]
+  - name: world/area_mim/mim_12
+    type: code
+    start: 0xBBB380
+    vram: 0x80240000
+    files:
       - [0xBBB380, "c", "world/area_mim/mim_12"]
       - [0xBBB960, "bin", "world/area_mim/mim_12_data"]
-  - name: world/area_obk
+  - name: world/area_obk/obk_01
     type: code
     start: 0xBBD1A0
     vram: 0x80240000
-    vram_lock: yes
     files:
       - [0xBBD1A0, "c", "world/area_obk/obk_01"]
       - [0xBBE2E0, "bin", "world/area_obk/obk_01_data"]
+  - name: world/area_obk/obk_02
+    type: code
+    start: 0xBC2A90
+    vram: 0x80240000
+    files:
       - [0xBC2A90, "c", "world/area_obk/obk_02"]
       - [0xBC2D40, "bin", "world/area_obk/obk_02_data"]
+  - name: world/area_obk/obk_03
+    type: code
+    start: 0xBC4280
+    vram: 0x80240000
+    files:
       - [0xBC4280, "c", "world/area_obk/obk_03"]
       - [0xBC5270, "bin", "world/area_obk/obk_03_data"]
+  - name: world/area_obk/obk_04
+    type: code
+    start: 0xBC7E60
+    vram: 0x80240000
+    files:
       - [0xBC7E60, "c", "world/area_obk/obk_04"]
       - [0xBC8CE0, "bin", "world/area_obk/obk_04_data"]
+  - name: world/area_obk/obk_05
+    type: code
+    start: 0xBCD060
+    vram: 0x80240000
+    files:
       - [0xBCD060, "c", "world/area_obk/obk_05"]
       - [0xBCDA40, "bin", "world/area_obk/obk_05_data"]
+  - name: world/area_obk/obk_06
+    type: code
+    start: 0xBCE690
+    vram: 0x80240000
+    files:
       - [0xBCE690, "bin", "world/area_obk/obk_06"]
+  - name: world/area_obk/obk_07
+    type: code
+    start: 0xBCEBF0
+    vram: 0x80240000
+    files:
       - [0xBCEBF0, "c", "world/area_obk/obk_07"]
       - [0xBD0780, "bin", "world/area_obk/obk_07_data"]
+  - name: world/area_obk/obk_08
+    type: code
+    start: 0xBD3870
+    vram: 0x80240000
+    files:
       - [0xBD3870, "c", "world/area_obk/obk_08"]
       - [0xBD5010, "bin", "world/area_obk/obk_08_data"]
+  - name: world/area_obk/obk_09
+    type: code
+    start: 0xBDA7B0
+    vram: 0x80240000
+    files:
       - [0xBDA7B0, "c", "world/area_obk/obk_09"]
       - [0xBDABE0, "bin", "world/area_obk/obk_09_data"]
-  - name: world/area_arn
+  - name: world/area_arn/arn_02
     type: code
     start: 0xBDD1B0
     vram: 0x80240000
-    vram_lock: yes
     files:
       - [0xBDD1B0, "c", "world/area_arn/arn_02"]
       - [0xBDE190, "bin", "world/area_arn/arn_02_data"]
+  - name: world/area_arn/arn_03
+    type: code
+    start: 0xBDED90
+    vram: 0x80240000
+    files:
       - [0xBDED90, "c", "world/area_arn/arn_03"]
       - [0xBE04B0, "bin", "world/area_arn/arn_03_data"]
+  - name: world/area_arn/arn_04
+    type: code
+    start: 0xBE37B0
+    vram: 0x80240000
+    files:
       - [0xBE37B0, "c", "world/area_arn/arn_04"]
       - [0xBE6B20, "bin", "world/area_arn/arn_04_data"]
+  - name: world/area_arn/arn_05
+    type: code
+    start: 0xBE7BE0
+    vram: 0x80240000
+    files:
       - [0xBE7BE0, "c", "world/area_arn/arn_05"]
       - [0xBE8EE0, "bin", "world/area_arn/arn_05_data"]
+  - name: world/area_arn/arn_07
+    type: code
+    start: 0xBECDF0
+    vram: 0x80240000
+    files:
       - [0xBECDF0, "c", "world/area_arn/arn_07"]
       - [0xBEEC80, "bin", "world/area_arn/arn_07_data"]
+  - name: world/area_arn/arn_08
+    type: code
+    start: 0xBF47A0
+    vram: 0x80240000
+    files:
       - [0xBF47A0, "c", "world/area_arn/arn_08"]
       - [0xBF4A30, "bin", "world/area_arn/arn_08_data"]
+  - name: world/area_arn/arn_09
+    type: code
+    start: 0xBF6060
+    vram: 0x80240000
+    files:
       - [0xBF6060, "c", "world/area_arn/arn_09"]
       - [0xBF60A0, "bin", "world/area_arn/arn_09_data"]
+  - name: world/area_arn/arn_10
+    type: code
+    start: 0xBF6A00
+    vram: 0x80240000
+    files:
       - [0xBF6A00, "bin", "world/area_arn/arn_10"]
+  - name: world/area_arn/arn_11
+    type: code
+    start: 0xBF7680
+    vram: 0x80240000
+    files:
       - [0xBF7680, "bin", "world/area_arn/arn_11"]
+  - name: world/area_arn/arn_12
+    type: code
+    start: 0xBF8790
+    vram: 0x80240000
+    files:
       - [0xBF8790, "bin", "world/area_arn/arn_12"]
+  - name: world/area_arn/arn_13
+    type: code
+    start: 0xBF9410
+    vram: 0x80240000
+    files:
       - [0xBF9410, "bin", "world/area_arn/arn_13"]
-  - name: world/area_dgb
+  - name: world/area_dgb/dgb_00
     type: code
     start: 0xBFA0A0
     vram: 0x80240000
-    vram_lock: yes
     files:
       - [0xBFA0A0, "c", "world/area_dgb/dgb_00"]
       - [0xBFA150, "bin", "world/area_dgb/dgb_00_data"]
+  - name: world/area_dgb/dgb_01
+    type: code
+    start: 0xBFD880
+    vram: 0x80240000
+    files:
       - [0xBFD880, "c", "world/area_dgb/dgb_01"]
       - [0xC00C70, "bin", "world/area_dgb/dgb_01_data"]
+  - name: world/area_dgb/dgb_02
+    type: code
+    start: 0xC2EBA0
+    vram: 0x80240000
+    files:
       - [0xC2EBA0, "c", "world/area_dgb/dgb_02"]
       - [0xC2FFD0, "bin", "world/area_dgb/dgb_02_data"]
+  - name: world/area_dgb/dgb_03
+    type: code
+    start: 0xC314E0
+    vram: 0x80240000
+    files:
       - [0xC314E0, "c", "world/area_dgb/dgb_03"]
       - [0xC33CB0, "bin", "world/area_dgb/dgb_03_data"]
+  - name: world/area_dgb/dgb_04
+    type: code
+    start: 0xC36530
+    vram: 0x80240000
+    files:
       - [0xC36530, "c", "world/area_dgb/dgb_04"]
       - [0xC39640, "bin", "world/area_dgb/dgb_04_data"]
+  - name: world/area_dgb/dgb_05
+    type: code
+    start: 0xC3AA10
+    vram: 0x80240000
+    files:
       - [0xC3AA10, "c", "world/area_dgb/dgb_05"]
       - [0xC3BEA0, "bin", "world/area_dgb/dgb_05_data"]
+  - name: world/area_dgb/dgb_06
+    type: code
+    start: 0xC3D080
+    vram: 0x80240000
+    files:
       - [0xC3D080, "c", "world/area_dgb/dgb_06"]
       - [0xC3D340, "bin", "world/area_dgb/dgb_06_data"]
+  - name: world/area_dgb/dgb_07
+    type: code
+    start: 0xC3DBF0
+    vram: 0x80240000
+    files:
       - [0xC3DBF0, "c", "world/area_dgb/dgb_07"]
       - [0xC3F020, "bin", "world/area_dgb/dgb_07_data"]
+  - name: world/area_dgb/dgb_08
+    type: code
+    start: 0xC3FDB0
+    vram: 0x80240000
+    files:
       - [0xC3FDB0, "c", "world/area_dgb/dgb_08"]
       - [0xC43A40, "bin", "world/area_dgb/dgb_08_data"]
+  - name: world/area_dgb/dgb_09
+    type: code
+    start: 0xC46BE0
+    vram: 0x80240000
+    files:
       - [0xC46BE0, "c", "world/area_dgb/dgb_09"]
       - [0xC4A3E0, "bin", "world/area_dgb/dgb_09_data"]
+  - name: world/area_dgb/dgb_10
+    type: code
+    start: 0xC4C390
+    vram: 0x80240000
+    files:
       - [0xC4C390, "c", "world/area_dgb/dgb_10"]
       - [0xC4C580, "bin", "world/area_dgb/dgb_10_data"]
+  - name: world/area_dgb/dgb_11
+    type: code
+    start: 0xC4D3E0
+    vram: 0x80240000
+    files:
       - [0xC4D3E0, "c", "world/area_dgb/dgb_11"]
       - [0xC4D430, "bin", "world/area_dgb/dgb_11_data"]
+  - name: world/area_dgb/dgb_12
+    type: code
+    start: 0xC4DEF0
+    vram: 0x80240000
+    files:
       - [0xC4DEF0, "c", "world/area_dgb/dgb_12"]
       - [0xC4E1B0, "bin", "world/area_dgb/dgb_12_data"]
+  - name: world/area_dgb/dgb_13
+    type: code
+    start: 0xC4E960
+    vram: 0x80240000
+    files:
       - [0xC4E960, "bin", "world/area_dgb/dgb_13"]
+  - name: world/area_dgb/dgb_14
+    type: code
+    start: 0xC4F030
+    vram: 0x80240000
+    files:
       - [0xC4F030, "bin", "world/area_dgb/dgb_14"]
+  - name: world/area_dgb/dgb_15
+    type: code
+    start: 0xC4F510
+    vram: 0x80240000
+    files:
       - [0xC4F510, "c", "world/area_dgb/dgb_15"]
       - [0xC50D80, "bin", "world/area_dgb/dgb_15_data"]
+  - name: world/area_dgb/dgb_16
+    type: code
+    start: 0xC52540
+    vram: 0x80240000
+    files:
       - [0xC52540, "c", "world/area_dgb/dgb_16"]
       - [0xC53970, "bin", "world/area_dgb/dgb_16_data"]
+  - name: world/area_dgb/dgb_17
+    type: code
+    start: 0xC55A60
+    vram: 0x80240000
+    files:
       - [0xC55A60, "bin", "world/area_dgb/dgb_17"]
+  - name: world/area_dgb/dgb_18
+    type: code
+    start: 0xC55F40
+    vram: 0x80240000
+    files:
       - [0xC55F40, "c", "world/area_dgb/dgb_18"]
       - [0xC571B0, "bin", "world/area_dgb/dgb_18_data"]
-  - name: world/area_kzn
+  - name: world/area_kzn/kzn_01
     type: code
     start: 0xC599D0
     vram: 0x80240000
-    vram_lock: yes
     files:
       - [0xC599D0, "c", "world/area_kzn/kzn_01"]
       - [0xC59CE0, "bin", "world/area_kzn/kzn_01_data"]
+  - name: world/area_kzn/kzn_02
+    type: code
+    start: 0xC5A740
+    vram: 0x80240000
+    files:
       - [0xC5A740, "c", "world/area_kzn/kzn_02"]
       - [0xC5CF60, "bin", "world/area_kzn/kzn_02_data"]
+  - name: world/area_kzn/kzn_03
+    type: code
+    start: 0xC60D10
+    vram: 0x80240000
+    files:
       - [0xC60D10, "c", "world/area_kzn/kzn_03"]
       - [0xC63DA0, "bin", "world/area_kzn/kzn_03_data"]
+  - name: world/area_kzn/kzn_04
+    type: code
+    start: 0xC68130
+    vram: 0x80240000
+    files:
       - [0xC68130, "c", "world/area_kzn/kzn_04"]
       - [0xC69890, "bin", "world/area_kzn/kzn_04_data"]
+  - name: world/area_kzn/kzn_05
+    type: code
+    start: 0xC6C0D0
+    vram: 0x80240000
+    files:
       - [0xC6C0D0, "c", "world/area_kzn/kzn_05"]
       - [0xC6C3E0, "bin", "world/area_kzn/kzn_05_data"]
+  - name: world/area_kzn/kzn_06
+    type: code
+    start: 0xC6C920
+    vram: 0x80240000
+    files:
       - [0xC6C920, "c", "world/area_kzn/kzn_06"]
       - [0xC6D390, "bin", "world/area_kzn/kzn_06_data"]
+  - name: world/area_kzn/kzn_07
+    type: code
+    start: 0xC6E330
+    vram: 0x80240000
+    files:
       - [0xC6E330, "c", "world/area_kzn/kzn_07"]
       - [0xC70640, "bin", "world/area_kzn/kzn_07_data"]
+  - name: world/area_kzn/kzn_08
+    type: code
+    start: 0xC71480
+    vram: 0x80240000
+    files:
       - [0xC71480, "c", "world/area_kzn/kzn_08"]
       - [0xC755A0, "bin", "world/area_kzn/kzn_08_data"]
+  - name: world/area_kzn/kzn_09
+    type: code
+    start: 0xC76CE0
+    vram: 0x80240000
+    files:
       - [0xC76CE0, "c", "world/area_kzn/kzn_09"]
       - [0xC7A6F0, "bin", "world/area_kzn/kzn_09_data"]
+  - name: world/area_kzn/kzn_10
+    type: code
+    start: 0xC7E180
+    vram: 0x80240000
+    files:
       - [0xC7E180, "c", "world/area_kzn/kzn_10"]
       - [0xC7E850, "bin", "world/area_kzn/kzn_10_data"]
+  - name: world/area_kzn/kzn_11
+    type: code
+    start: 0xC801A0
+    vram: 0x80240000
+    files:
       - [0xC801A0, "c", "world/area_kzn/kzn_11"]
       - [0xC82800, "bin", "world/area_kzn/kzn_11_data"]
+  - name: world/area_kzn/kzn_17
+    type: code
+    start: 0xC85AB0
+    vram: 0x80240000
+    files:
       - [0xC85AB0, "c", "world/area_kzn/kzn_17"]
       - [0xC88B50, "bin", "world/area_kzn/kzn_17_data"]
+  - name: world/area_kzn/kzn_18
+    type: code
+    start: 0xC8C0A0
+    vram: 0x80240000
+    files:
       - [0xC8C0A0, "c", "world/area_kzn/kzn_18"]
       - [0xC8C460, "bin", "world/area_kzn/kzn_18_data"]
+  - name: world/area_kzn/kzn_19
+    type: code
+    start: 0xC8DBB0
+    vram: 0x80240000
+    files:
       - [0xC8DBB0, "c", "world/area_kzn/kzn_19"]
       - [0xC8F8E0, "bin", "world/area_kzn/kzn_19_data"]
+  - name: world/area_kzn/kzn_20
+    type: code
+    start: 0xC95F30
+    vram: 0x80240000
+    files:
       - [0xC95F30, "c", "world/area_kzn/kzn_20"]
       - [0xC969F0, "bin", "world/area_kzn/kzn_20_data"]
+  - name: world/area_kzn/kzn_22
+    type: code
+    start: 0xC9A200
+    vram: 0x80240000
+    files:
       - [0xC9A200, "c", "world/area_kzn/kzn_22"]
       - [0xC9A590, "bin", "world/area_kzn/kzn_22_data"]
+  - name: world/area_kzn/kzn_23
+    type: code
+    start: 0xC9C300
+    vram: 0x80240000
+    files:
       - [0xC9C300, "c", "world/area_kzn/kzn_23"]
       - [0xC9C920, "bin", "world/area_kzn/kzn_23_data"]
-  - name: world/area_flo
+  - name: world/area_flo/flo_00
     type: code
     start: 0xC9DF20
     vram: 0x80240000
-    vram_lock: yes
     files:
       - [0xC9DF20, "c", "world/area_flo/flo_00"]
       - [0xC9F300, "bin", "world/area_flo/flo_00_data"]
+  - name: world/area_flo/flo_03
+    type: code
+    start: 0xCA72A0
+    vram: 0x80240000
+    files:
       - [0xCA72A0, "c", "world/area_flo/flo_03"]
       - [0xCA78D0, "bin", "world/area_flo/flo_03_data"]
+  - name: world/area_flo/flo_07
+    type: code
+    start: 0xCAC1F0
+    vram: 0x80240000
+    files:
       - [0xCAC1F0, "c", "world/area_flo/flo_07"]
       - [0xCAC930, "bin", "world/area_flo/flo_07_data"]
+  - name: world/area_flo/flo_08
+    type: code
+    start: 0xCAED40
+    vram: 0x80240000
+    files:
       - [0xCAED40, "c", "world/area_flo/flo_08"]
       - [0xCB0C20, "bin", "world/area_flo/flo_08_data"]
+  - name: world/area_flo/flo_09
+    type: code
+    start: 0xCB5000
+    vram: 0x80240000
+    files:
       - [0xCB5000, "c", "world/area_flo/flo_09"]
       - [0xCB6820, "bin", "world/area_flo/flo_09_data"]
+  - name: world/area_flo/flo_10
+    type: code
+    start: 0xCB9200
+    vram: 0x80240000
+    files:
       - [0xCB9200, "c", "world/area_flo/flo_10"]
       - [0xCBA670, "bin", "world/area_flo/flo_10_data"]
+  - name: world/area_flo/flo_11
+    type: code
+    start: 0xCBDCD0
+    vram: 0x80240000
+    files:
       - [0xCBDCD0, "c", "world/area_flo/flo_11"]
       - [0xCBDFF0, "bin", "world/area_flo/flo_11_data"]
+  - name: world/area_flo/flo_12
+    type: code
+    start: 0xCC0E30
+    vram: 0x80240000
+    files:
       - [0xCC0E30, "c", "world/area_flo/flo_12"]
       - [0xCC1520, "bin", "world/area_flo/flo_12_data"]
+  - name: world/area_flo/flo_13
+    type: code
+    start: 0xCC3810
+    vram: 0x80240000
+    files:
       - [0xCC3810, "c", "world/area_flo/flo_13"]
       - [0xCC6E80, "bin", "world/area_flo/flo_13_data"]
+  - name: world/area_flo/flo_14
+    type: code
+    start: 0xCCB310
+    vram: 0x80240000
+    files:
       - [0xCCB310, "c", "world/area_flo/flo_14"]
       - [0xCCD6A0, "bin", "world/area_flo/flo_14_data"]
+  - name: world/area_flo/flo_15
+    type: code
+    start: 0xCD06C0
+    vram: 0x80240000
+    files:
       - [0xCD06C0, "bin", "world/area_flo/flo_15"]
+  - name: world/area_flo/flo_16
+    type: code
+    start: 0xCD1E30
+    vram: 0x80240000
+    files:
       - [0xCD1E30, "c", "world/area_flo/flo_16"]
       - [0xCD47A0, "bin", "world/area_flo/flo_16_data"]
+  - name: world/area_flo/flo_17
+    type: code
+    start: 0xCD72E0
+    vram: 0x80240000
+    files:
       - [0xCD72E0, "c", "world/area_flo/flo_17"]
       - [0xCDA500, "bin", "world/area_flo/flo_17_data"]
+  - name: world/area_flo/flo_18
+    type: code
+    start: 0xCDC6A0
+    vram: 0x80240000
+    files:
       - [0xCDC6A0, "c", "world/area_flo/flo_18"]
       - [0xCDCE70, "bin", "world/area_flo/flo_18_data"]
+  - name: world/area_flo/flo_19
+    type: code
+    start: 0xCE36F0
+    vram: 0x80240000
+    files:
       - [0xCE36F0, "c", "world/area_flo/flo_19"]
       - [0xCE4030, "bin", "world/area_flo/flo_19_data"]
+  - name: world/area_flo/flo_21
+    type: code
+    start: 0xCE6700
+    vram: 0x80240000
+    files:
       - [0xCE6700, "c", "world/area_flo/flo_21"]
       - [0xCE73F0, "bin", "world/area_flo/flo_21_data"]
+  - name: world/area_flo/flo_22
+    type: code
+    start: 0xCEC240
+    vram: 0x80240000
+    files:
       - [0xCEC240, "c", "world/area_flo/flo_22"]
       - [0xCEC4D0, "bin", "world/area_flo/flo_22_data"]
+  - name: world/area_flo/flo_23
+    type: code
+    start: 0xCEE260
+    vram: 0x80240000
+    files:
       - [0xCEE260, "c", "world/area_flo/flo_23"]
       - [0xCEEF30, "bin", "world/area_flo/flo_23_data"]
+  - name: world/area_flo/flo_24
+    type: code
+    start: 0xCF0940
+    vram: 0x80240000
+    files:
       - [0xCF0940, "c", "world/area_flo/flo_24"]
       - [0xCF0ED0, "bin", "world/area_flo/flo_24_data"]
+  - name: world/area_flo/flo_25
+    type: code
+    start: 0xCF2BD0
+    vram: 0x80240000
+    files:
       - [0xCF2BD0, "c", "world/area_flo/flo_25"]
       - [0xCF4EA0, "bin", "world/area_flo/flo_25_data"]
-  - name: world/area_sam
+  - name: world/area_sam/sam_01
     type: code
     start: 0xCF7B70
     vram: 0x80240000
-    vram_lock: yes
     files:
       - [0xCF7B70, "c", "world/area_sam/sam_01"]
       - [0xCF9AC0, "bin", "world/area_sam/sam_01_data"]
+  - name: world/area_sam/sam_02
+    type: code
+    start: 0xD05730
+    vram: 0x80240000
+    files:
       - [0xD05730, "c", "world/area_sam/sam_02"]
       - [0xD072F0, "bin", "world/area_sam/sam_02_data"]
+  - name: world/area_sam/sam_03
+    type: code
+    start: 0xD110C0
+    vram: 0x80240000
+    files:
       - [0xD110C0, "c", "world/area_sam/sam_03"]
       - [0xD119E0, "bin", "world/area_sam/sam_03_data"]
+  - name: world/area_sam/sam_04
+    type: code
+    start: 0xD135D0
+    vram: 0x80240000
+    files:
       - [0xD135D0, "c", "world/area_sam/sam_04"]
       - [0xD13CD0, "bin", "world/area_sam/sam_04_data"]
+  - name: world/area_sam/sam_05
+    type: code
+    start: 0xD187E0
+    vram: 0x80240000
+    files:
       - [0xD187E0, "c", "world/area_sam/sam_05"]
       - [0xD1A520, "bin", "world/area_sam/sam_05_data"]
+  - name: world/area_sam/sam_06
+    type: code
+    start: 0xD1FE90
+    vram: 0x80240000
+    files:
       - [0xD1FE90, "c", "world/area_sam/sam_06"]
       - [0xD224B0, "bin", "world/area_sam/sam_06_data"]
+  - name: world/area_sam/sam_07
+    type: code
+    start: 0xD2BD30
+    vram: 0x80240000
+    files:
       - [0xD2BD30, "c", "world/area_sam/sam_07"]
       - [0xD2DD30, "bin", "world/area_sam/sam_07_data"]
+  - name: world/area_sam/sam_08
+    type: code
+    start: 0xD2FC80
+    vram: 0x80240000
+    files:
       - [0xD2FC80, "c", "world/area_sam/sam_08"]
       - [0xD31430, "bin", "world/area_sam/sam_08_data"]
+  - name: world/area_sam/sam_09
+    type: code
+    start: 0xD362F0
+    vram: 0x80240000
+    files:
       - [0xD362F0, "c", "world/area_sam/sam_09"]
       - [0xD366F0, "bin", "world/area_sam/sam_09_data"]
+  - name: world/area_sam/sam_10
+    type: code
+    start: 0xD37800
+    vram: 0x80240000
+    files:
       - [0xD37800, "c", "world/area_sam/sam_10"]
       - [0xD384A0, "bin", "world/area_sam/sam_10_data"]
+  - name: world/area_sam/sam_11
+    type: code
+    start: 0xD3A5D0
+    vram: 0x80240000
+    files:
       - [0xD3A5D0, "c", "world/area_sam/sam_11"]
       - [0xD3C740, "bin", "world/area_sam/sam_11_data"]
+  - name: world/area_sam/sam_12
+    type: code
+    start: 0xD4BA20
+    vram: 0x80240000
+    files:
       - [0xD4BA20, "c", "world/area_sam/sam_12"]
       - [0xD4BDC0, "bin", "world/area_sam/sam_12_data"]
-  - name: world/area_pra
+  - name: world/area_pra/pra_01
     type: code
     start: 0xD4D040
     vram: 0x80240000
-    vram_lock: yes
     files:
       - [0xD4D040, "c", "world/area_pra/pra_01"]
       - [0xD4E3F0, "bin", "world/area_pra/pra_01_data"]
+  - name: world/area_pra/pra_02
+    type: code
+    start: 0xD4FFF0
+    vram: 0x80240000
+    files:
       - [0xD4FFF0, "c", "world/area_pra/pra_02"]
       - [0xD51650, "bin", "world/area_pra/pra_02_data"]
+  - name: world/area_pra/pra_03
+    type: code
+    start: 0xD53CB0
+    vram: 0x80240000
+    files:
       - [0xD53CB0, "c", "world/area_pra/pra_03"]
       - [0xD53E60, "bin", "world/area_pra/pra_03_data"]
+  - name: world/area_pra/pra_04
+    type: code
+    start: 0xD54690
+    vram: 0x80240000
+    files:
       - [0xD54690, "c", "world/area_pra/pra_04"]
       - [0xD54FD0, "bin", "world/area_pra/pra_04_data"]
+  - name: world/area_pra/pra_05
+    type: code
+    start: 0xD55BB0
+    vram: 0x80240000
+    files:
       - [0xD55BB0, "c", "world/area_pra/pra_05"]
       - [0xD56D90, "bin", "world/area_pra/pra_05_data"]
+  - name: world/area_pra/pra_06
+    type: code
+    start: 0xD57430
+    vram: 0x80240000
+    files:
       - [0xD57430, "c", "world/area_pra/pra_06"]
       - [0xD58380, "bin", "world/area_pra/pra_06_data"]
+  - name: world/area_pra/pra_09
+    type: code
+    start: 0xD58890
+    vram: 0x80240000
+    files:
       - [0xD58890, "c", "world/area_pra/pra_09"]
       - [0xD59EE0, "bin", "world/area_pra/pra_09_data"]
+  - name: world/area_pra/pra_10
+    type: code
+    start: 0xD5F2B0
+    vram: 0x80240000
+    files:
       - [0xD5F2B0, "c", "world/area_pra/pra_10"]
       - [0xD60960, "bin", "world/area_pra/pra_10_data"]
+  - name: world/area_pra/pra_11
+    type: code
+    start: 0xD61500
+    vram: 0x80240000
+    files:
       - [0xD61500, "c", "world/area_pra/pra_11"]
       - [0xD626E0, "bin", "world/area_pra/pra_11_data"]
+  - name: world/area_pra/pra_12
+    type: code
+    start: 0xD62D10
+    vram: 0x80240000
+    files:
       - [0xD62D10, "c", "world/area_pra/pra_12"]
       - [0xD63F20, "bin", "world/area_pra/pra_12_data"]
+  - name: world/area_pra/pra_13
+    type: code
+    start: 0xD645E0
+    vram: 0x80240000
+    files:
       - [0xD645E0, "c", "world/area_pra/pra_13"]
       - [0xD65BC0, "bin", "world/area_pra/pra_13_data"]
+  - name: world/area_pra/pra_14
+    type: code
+    start: 0xD67D00
+    vram: 0x80240000
+    files:
       - [0xD67D00, "c", "world/area_pra/pra_14"]
       - [0xD68EE0, "bin", "world/area_pra/pra_14_data"]
+  - name: world/area_pra/pra_15
+    type: code
+    start: 0xD69810
+    vram: 0x80240000
+    files:
       - [0xD69810, "c", "world/area_pra/pra_15"]
       - [0xD69850, "bin", "world/area_pra/pra_15_data"]
+  - name: world/area_pra/pra_16
+    type: code
+    start: 0xD69B20
+    vram: 0x80240000
+    files:
       - [0xD69B20, "c", "world/area_pra/pra_16"]
       - [0xD6AA40, "bin", "world/area_pra/pra_16_data"]
+  - name: world/area_pra/pra_18
+    type: code
+    start: 0xD6B620
+    vram: 0x80240000
+    files:
       - [0xD6B620, "c", "world/area_pra/pra_18"]
       - [0xD6C540, "bin", "world/area_pra/pra_18_data"]
+  - name: world/area_pra/pra_19
+    type: code
+    start: 0xD6E9B0
+    vram: 0x80240000
+    files:
       - [0xD6E9B0, "c", "world/area_pra/pra_19"]
       - [0xD70360, "bin", "world/area_pra/pra_19_data"]
+  - name: world/area_pra/pra_20
+    type: code
+    start: 0xD763A0
+    vram: 0x80240000
+    files:
       - [0xD763A0, "c", "world/area_pra/pra_20"]
       - [0xD772C0, "bin", "world/area_pra/pra_20_data"]
+  - name: world/area_pra/pra_21
+    type: code
+    start: 0xD77F20
+    vram: 0x80240000
+    files:
       - [0xD77F20, "c", "world/area_pra/pra_21"]
       - [0xD78040, "bin", "world/area_pra/pra_21_data"]
+  - name: world/area_pra/pra_22
+    type: code
+    start: 0xD78880
+    vram: 0x80240000
+    files:
       - [0xD78880, "c", "world/area_pra/pra_22"]
       - [0xD78B50, "bin", "world/area_pra/pra_22_data"]
+  - name: world/area_pra/pra_27
+    type: code
+    start: 0xD799F0
+    vram: 0x80240000
+    files:
       - [0xD799F0, "c", "world/area_pra/pra_27"]
       - [0xD7AC00, "bin", "world/area_pra/pra_27_data"]
+  - name: world/area_pra/pra_28
+    type: code
+    start: 0xD7B2A0
+    vram: 0x80240000
+    files:
       - [0xD7B2A0, "c", "world/area_pra/pra_28"]
       - [0xD7C4B0, "bin", "world/area_pra/pra_28_data"]
+  - name: world/area_pra/pra_29
+    type: code
+    start: 0xD7CB50
+    vram: 0x80240000
+    files:
       - [0xD7CB50, "c", "world/area_pra/pra_29"]
       - [0xD7DDD0, "bin", "world/area_pra/pra_29_data"]
+  - name: world/area_pra/pra_31
+    type: code
+    start: 0xD7ED60
+    vram: 0x80240000
+    files:
       - [0xD7ED60, "c", "world/area_pra/pra_31"]
       - [0xD7FE10, "bin", "world/area_pra/pra_31_data"]
+  - name: world/area_pra/pra_32
+    type: code
+    start: 0xD86A00
+    vram: 0x80240000
+    files:
       - [0xD86A00, "c", "world/area_pra/pra_32"]
       - [0xD87240, "bin", "world/area_pra/pra_32_data"]
+  - name: world/area_pra/pra_33
+    type: code
+    start: 0xD896E0
+    vram: 0x80240000
+    files:
       - [0xD896E0, "c", "world/area_pra/pra_33"]
       - [0xD8A770, "bin", "world/area_pra/pra_33_data"]
+  - name: world/area_pra/pra_34
+    type: code
+    start: 0xD8B3B0
+    vram: 0x80240000
+    files:
       - [0xD8B3B0, "c", "world/area_pra/pra_34"]
       - [0xD8C3B0, "bin", "world/area_pra/pra_34_data"]
+  - name: world/area_pra/pra_35
+    type: code
+    start: 0xD8D250
+    vram: 0x80240000
+    files:
       - [0xD8D250, "c", "world/area_pra/pra_35"]
       - [0xD8FE60, "bin", "world/area_pra/pra_35_data"]
+  - name: world/area_pra/pra_36
+    type: code
+    start: 0xD91700
+    vram: 0x80240000
+    files:
       - [0xD91700, "c", "world/area_pra/pra_36"]
       - [0xD92650, "bin", "world/area_pra/pra_36_data"]
+  - name: world/area_pra/pra_37
+    type: code
+    start: 0xD92F40
+    vram: 0x80240000
+    files:
       - [0xD92F40, "c", "world/area_pra/pra_37"]
       - [0xD94760, "bin", "world/area_pra/pra_37_data"]
+  - name: world/area_pra/pra_38
+    type: code
+    start: 0xD955F0
+    vram: 0x80240000
+    files:
       - [0xD955F0, "c", "world/area_pra/pra_38"]
       - [0xD96CD0, "bin", "world/area_pra/pra_38_data"]
+  - name: world/area_pra/pra_39
+    type: code
+    start: 0xD97890
+    vram: 0x80240000
+    files:
       - [0xD97890, "c", "world/area_pra/pra_39"]
       - [0xD98F70, "bin", "world/area_pra/pra_39_data"]
+  - name: world/area_pra/pra_40
+    type: code
+    start: 0xD999B0
+    vram: 0x80240000
+    files:
       - [0xD999B0, "c", "world/area_pra/pra_40"]
       - [0xD9A8D0, "bin", "world/area_pra/pra_40_data"]
-  - name: world/area_omo
+  - name: world/area_omo/omo_01
     type: code
     start: 0xD9AEF0
     vram: 0x80240000
-    vram_lock: yes
     files:
       - [0xD9AEF0, "c", "world/area_omo/omo_01"]
       - [0xD9BB20, "bin", "world/area_omo/omo_01_data"]
+  - name: world/area_omo/omo_02
+    type: code
+    start: 0xD9D4D0
+    vram: 0x80240000
+    files:
       - [0xD9D4D0, "c", "world/area_omo/omo_02"]
       - [0xDA0080, "bin", "world/area_omo/omo_02_data"]
+  - name: world/area_omo/omo_03
+    type: code
+    start: 0xDA5240
+    vram: 0x80240000
+    files:
       - [0xDA5240, "c", "world/area_omo/omo_03"]
       - [0xDA5AD0, "bin", "world/area_omo/omo_03_data"]
+  - name: world/area_omo/omo_04
+    type: code
+    start: 0xDAD400
+    vram: 0x80240000
+    files:
       - [0xDAD400, "c", "world/area_omo/omo_04"]
       - [0xDAF320, "bin", "world/area_omo/omo_04_data"]
+  - name: world/area_omo/omo_05
+    type: code
+    start: 0xDB22C0
+    vram: 0x80240000
+    files:
       - [0xDB22C0, "c", "world/area_omo/omo_05"]
       - [0xDB46C0, "bin", "world/area_omo/omo_05_data"]
+  - name: world/area_omo/omo_06
+    type: code
+    start: 0xDB7910
+    vram: 0x80240000
+    files:
       - [0xDB7910, "c", "world/area_omo/omo_06"]
       - [0xDB8440, "bin", "world/area_omo/omo_06_data"]
+  - name: world/area_omo/omo_07
+    type: code
+    start: 0xDBD2B0
+    vram: 0x80240000
+    files:
       - [0xDBD2B0, "c", "world/area_omo/omo_07"]
       - [0xDC05B0, "bin", "world/area_omo/omo_07_data"]
+  - name: world/area_omo/omo_08
+    type: code
+    start: 0xDC43D0
+    vram: 0x80240000
+    files:
       - [0xDC43D0, "c", "world/area_omo/omo_08"]
       - [0xDC51B0, "bin", "world/area_omo/omo_08_data"]
+  - name: world/area_omo/omo_09
+    type: code
+    start: 0xDCCCD0
+    vram: 0x80240000
+    files:
       - [0xDCCCD0, "c", "world/area_omo/omo_09"]
       - [0xDD03C0, "bin", "world/area_omo/omo_09_data"]
+  - name: world/area_omo/omo_10
+    type: code
+    start: 0xDD79B0
+    vram: 0x80240000
+    files:
       - [0xDD79B0, "c", "world/area_omo/omo_10"]
       - [0xDD8220, "bin", "world/area_omo/omo_10_data"]
+  - name: world/area_omo/omo_11
+    type: code
+    start: 0xDDC830
+    vram: 0x80240000
+    files:
       - [0xDDC830, "c", "world/area_omo/omo_11"]
       - [0xDDDD00, "bin", "world/area_omo/omo_11_data"]
+  - name: world/area_omo/omo_12
+    type: code
+    start: 0xDDF310
+    vram: 0x80240000
+    files:
       - [0xDDF310, "c", "world/area_omo/omo_12"]
       - [0xDDF7D0, "bin", "world/area_omo/omo_12_data"]
+  - name: world/area_omo/omo_13
+    type: code
+    start: 0xDE2490
+    vram: 0x80240000
+    files:
       - [0xDE2490, "c", "world/area_omo/omo_13"]
       - [0xDE3980, "bin", "world/area_omo/omo_13_data"]
+  - name: world/area_omo/omo_14
+    type: code
+    start: 0xDE56B0
+    vram: 0x80240000
+    files:
       - [0xDE56B0, "c", "world/area_omo/omo_14"]
       - [0xDE5C70, "bin", "world/area_omo/omo_14_data"]
+  - name: world/area_omo/omo_15
+    type: code
+    start: 0xDE8770
+    vram: 0x80240000
+    files:
       - [0xDE8770, "c", "world/area_omo/omo_15"]
       - [0xDE8F70, "bin", "world/area_omo/omo_15_data"]
+  - name: world/area_omo/omo_16
+    type: code
+    start: 0xDEBED0
+    vram: 0x80240000
+    files:
       - [0xDEBED0, "c", "world/area_omo/omo_16"]
       - [0xDEC4D0, "bin", "world/area_omo/omo_16_data"]
+  - name: world/area_omo/omo_17
+    type: code
+    start: 0xDEEEA0
+    vram: 0x80240000
+    files:
       - [0xDEEEA0, "c", "world/area_omo/omo_17"]
       - [0xDF25B0, "bin", "world/area_omo/omo_17_data"]
-  - name: world/area_end
+  - name: world/area_end/end_00
     type: code
     start: 0xDF6A00
     vram: 0x80240000
-    vram_lock: yes
     files:
       - [0xDF6A00, "c", "world/area_end/end_00"]
       - [0xDF9540, "bin", "world/area_end/end_00_data"]
+  - name: world/area_end/end_01
+    type: code
+    start: 0xE05360
+    vram: 0x80240000
+    files:
       - [0xE05360, "c", "world/area_end/end_01"]
       - [0xE08350, "bin", "world/area_end/end_01_data"]
-  - name: world/area_mgm
+  - name: world/area_mgm/mgm_00
     type: code
     start: 0xE0E7A0
     vram: 0x80240000
-    vram_lock: yes
     files:
       - [0xE0E7A0, "c", "world/area_mgm/mgm_00"]
       - [0xE0FF60, "bin", "world/area_mgm/mgm_00_data"]
+  - name: world/area_mgm/mgm_01
+    type: code
+    start: 0xE12760
+    vram: 0x80240000
+    files:
       - [0xE12760, "c", "world/area_mgm/mgm_01"]
       - [0xE13F10, "bin", "world/area_mgm/mgm_01_data"]
+  - name: world/area_mgm/mgm_02
+    type: code
+    start: 0xE15D80
+    vram: 0x80240000
+    files:
       - [0xE15D80, "c", "world/area_mgm/mgm_02"]
       - [0xE18180, "bin", "world/area_mgm/mgm_02_data"]
+  - name: world/area_mgm/mgm_03
+    type: code
+    start: 0xE1E380
+    vram: 0x80240000
+    files:
       - [0xE1E380, "bin", "world/area_mgm/mgm_03"]
-  - name: world/area_gv
+  - name: world/area_gv/gv_01
     type: code
     start: 0xE1E460
     vram: 0x80240000
-    vram_lock: yes
     files:
       - [0xE1E460, "c", "world/area_gv/gv_01"]
       - [0xE1EC20, "bin", "world/area_gv/gv_01_data"]
