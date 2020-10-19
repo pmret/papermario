@@ -5,7 +5,7 @@ SHELL=/bin/bash -o pipefail
 # BUILD_DIR is location where all build artifacts are placed
 BUILD_DIR = build
 
-WORLD_AREAS := area_dgb area_dro area_end area_flo area_gv area_hos area_isk area_iwa area_jan area_kgr area_kkj area_kmr area_kpa area_kzn area_mac area_mgm area_mim area_nok area_obk area_omo area_osr area_pra area_sam area_sbk area_tik area_trd area_tst
+WORLD_AREAS := area_dgb area_arn area_dro area_end area_flo area_gv area_hos area_isk area_iwa area_jan area_kgr area_kkj area_kmr area_kpa area_kzn area_mac area_mgm area_mim area_nok area_obk area_omo area_osr area_pra area_sam area_sbk area_tik area_trd area_tst
 
 SRC_DIRS := src src/os src/os/nusys $(foreach area,$(WORLD_AREAS),src/world/$(area))
 ASM_DIRS := asm asm/os
@@ -30,7 +30,7 @@ O_FILES := $(foreach file,$(C_FILES),$(BUILD_DIR)/$(file:.c=.o)) \
 		   $(foreach file,$(DATA_FILES),$(BUILD_DIR)/$(file:.bin=.o)) \
 		   $(foreach dir,$(ASSETS_FS_DIRS),$(BUILD_DIR)/$(dir).o) \
 
-YAY0_FILES := $(foreach file,$(YAY0_FILES),$(BUILD_DIR)/$(file:.bin=.bin.Yay0))
+YAY0_FILES := $(foreach file,$(YAY0_FILES),$(BUILD_DIR)/$(file:.bin=.Yay0.o))
 
 ####################### Other Tools #########################
 
@@ -100,7 +100,7 @@ $(BUILD_DIR)/%.o: %.c $(H_FILES)
 $(BUILD_DIR)/%.o: %.bin
 	$(LD) -r -b binary -o $@ $<
 
-$(BUILD_DIR)/%.bin.Yay0: %.bin
+$(BUILD_DIR)/%.Yay0.o: %.bin
 	mkdir -p build/bin/Yay0
 	tools/Yay0compress $< $<.Yay0
 	$(LD) -r -b binary -o $@ $<.Yay0
