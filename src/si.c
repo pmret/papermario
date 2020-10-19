@@ -954,30 +954,30 @@ s32 _bound_script_trigger_handler(Trigger* trigger) {
 ApiStatus si_handle_bind(ScriptInstance* script) {
     Bytecode* args = script->ptrReadPos;
     Trigger* trigger;
-    s32 var0 = get_variable(script, *args++);
-    Bytecode flags = *args++;
-    Bytecode index = *args++;
+    Bytecode* triggerScript = get_variable(script, *args++);
+    Bytecode eventType = *args++;
+    Bytecode colliderIDVar = *args++;
     Bytecode a3 = *args++;
-    Bytecode a4 = *args++;
+    Bytecode triggerOut = *args++;
     TriggerDefinition def;
 
-    def.flags = flags | 0x1000000;
-    def.flagIndex = get_variable(script, index);
-    def.colliderIndex = get_variable_index(script, index);
+    def.flags = eventType | 0x1000000;
+    def.flagIndex = get_variable(script, colliderIDVar);
+    def.colliderIndex = get_variable_index(script, colliderIDVar);
     def.inputArg3 = a3;
     def.unk_14 = 0;
     def.function = _bound_script_trigger_handler;
 
     trigger = create_trigger(&def);
-    trigger->scriptStart = var0;
+    trigger->scriptStart = triggerScript;
     trigger->runningScript = NULL;
     trigger->priority = script->priority;
     trigger->scriptVars[0] = get_variable(script, script->varTable[0]);
     trigger->scriptVars[1] = get_variable(script, script->varTable[1]);
     trigger->scriptVars[2] = get_variable(script, script->varTable[2]);
 
-    if (a4 != 0) {
-        set_variable(script, a4, trigger);
+    if (triggerOut != 0) {
+        set_variable(script, triggerOut, trigger);
     }
 
     return ApiStatus_DONE2;
@@ -1069,7 +1069,35 @@ void si_standard_trigger_executor(Trigger* trigger) {
     }
 }
 
-INCLUDE_ASM(s32, "si", si_handle_bind_lock, ScriptInstance* script, s32 isInitialCall);
+ApiStatus si_handle_bind_lock(ScriptInstance *script) {
+    Bytecode* args = script->ptrReadPos;
+    Trigger* trigger;
+    Bytecode* triggerScript = get_variable(script, *args++);
+    Bytecode eventType = *args++;
+    Bytecode colliderIDVar = *args++;
+    s32* itemList = get_variable(script, *args++);
+    Bytecode triggerOut = *args++;
+    s32 a5 = *args++;
+    TriggerDefinition def;
+
+    def.flags = eventType | 0x1000000;
+    def.flagIndex = get_variable(script, colliderIDVar);
+    def.colliderIndex = get_variable_index(script, colliderIDVar);
+    def.unk_1C = itemList;
+    def.function = si_standard_trigger_executor;
+    def.unk_14 = triggerOut;
+    def.inputArg3 = a5;
+
+    trigger = create_trigger(&def);
+    trigger->scriptStart = triggerScript;
+    trigger->runningScript = NULL;
+    trigger->priority = script->priority;
+    trigger->scriptVars[0] = get_variable(script, script->varTable[0]);
+    trigger->scriptVars[1] = get_variable(script, script->varTable[1]);
+    trigger->scriptVars[2] = get_variable(script, script->varTable[2]);
+
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "si", si_handle_thread, ScriptInstance* script, s32 isInitialCall);
 

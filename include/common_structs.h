@@ -1131,7 +1131,7 @@ typedef struct TriggerDefinition {
     /* 0x10 */ char unk_10[4];
     /* 0x14 */ s32 unk_14;
     /* 0x18 */ s32 inputArg3;
-    /* 0x1C */ char unk_1C[4];
+    /* 0x1C */ s32 unk_1C;
 } TriggerDefinition; // size = 0x20
 
 typedef struct CollisionStatus {
