@@ -400,7 +400,7 @@ segments:
     start: 0x324a10
     vram: 0x802BD100
     files:
-      - [0x324a10, "c"]
+      - [0x324a10, "c", "world_goompa"]
       - [0x324e80, "bin"]
   - name: code
     type: code
