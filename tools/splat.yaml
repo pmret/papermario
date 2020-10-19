@@ -197,7 +197,7 @@ segments:
     - [0x4a360, "c", "os/code_4a360_len_930"]
     - [0x4ac90, "c", "os/code_4ac90_len_3910"]
     - [0x4E5A0, "bin"]
-  - [0x6E8F0, "PaperMarioAreaTable", "areas"]
+  - [0x6E8F0, "bin", "world/area_table"]
   - name: code
     type: code
     start: 0x759B0
