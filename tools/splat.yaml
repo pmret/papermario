@@ -407,7 +407,7 @@ segments:
     start: 0x324f10
     vram: 0x802BD100
     files:
-      - [0x324f10, "c"]
+      - [0x324f10, "c", "world_goombaria"]
       - [0x325000, "bin"]
   - name: code
     type: code

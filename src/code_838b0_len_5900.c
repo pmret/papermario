@@ -57,15 +57,15 @@ INCLUDE_ASM(s32, "code_838b0_len_5900", partner_suspend_ability_script);
 
 INCLUDE_ASM(s32, "code_838b0_len_5900", partner_resume_ability_script);
 
-INCLUDE_ASM(s32, "code_838b0_len_5900", enable_partner_walking);
+INCLUDE_ASM(void, "code_838b0_len_5900", enable_partner_walking, Npc* partner, s32 val);
 
-INCLUDE_ASM(s32, "code_838b0_len_5900", func_800EBA3C);
+INCLUDE_ASM(void, "code_838b0_len_5900", func_800EBA3C, Npc* partner);
 
-INCLUDE_ASM(s32, "code_838b0_len_5900", func_800EBB40);
+INCLUDE_ASM(void, "code_838b0_len_5900", func_800EBB40, Npc* partner);
 
 INCLUDE_ASM(s32, "code_838b0_len_5900", func_800EBC74);
 
-INCLUDE_ASM(void, "code_838b0_len_5900", enable_partner_flying, Npc* partner, s32 isFlying);
+INCLUDE_ASM(void, "code_838b0_len_5900", enable_partner_flying, Npc* partner, s32 val);
 
 INCLUDE_ASM(void, "code_838b0_len_5900", update_player_move_history, Npc* partner);
 

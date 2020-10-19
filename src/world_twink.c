@@ -25,7 +25,7 @@ ApiStatus func_802BD148_325070(ScriptInstance* script, s32 isInitialCall) {
     
     update_player_move_history(ownerID);
     func_800ED5D0(ownerID);
-    playerData->unk_2F4[11]++;
+    playerData->unk_2F4[PartnerId_TWINK]++;
 
     return ApiStatus_BLOCK;
 }
