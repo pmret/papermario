@@ -16,10 +16,6 @@ INCLUDE_ASM(s32, "code_d0a70_len_4fe0", func_8013A6E8);
 
 INCLUDE_ASM(s32, "code_d0a70_len_4fe0", func_8013A704);
 
-/* TODO sonicspiral oct 2020
-    After reviewing with stuckpixel it looks like there's an array of 90 structs
-    here, each struct of size 0x7C. Need to uncover what these other structs are.
-*/
 typedef struct {
     /* 0x00 */ char unk_0[0x10];
     /* 0x10 */ s16 unk_10;
