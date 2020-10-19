@@ -1,5 +1,7 @@
 #include "common.h"
 
+#define UNKSTRUCT8013A854_SIZE 90
+
 INCLUDE_ASM(s32, "code_d0a70_len_4fe0", func_8013A370);
 
 INCLUDE_ASM(s32, "code_d0a70_len_4fe0", func_8013A37C);
@@ -14,7 +16,25 @@ INCLUDE_ASM(s32, "code_d0a70_len_4fe0", func_8013A6E8);
 
 INCLUDE_ASM(s32, "code_d0a70_len_4fe0", func_8013A704);
 
-INCLUDE_ASM(s32, "code_d0a70_len_4fe0", func_8013A854);
+typedef struct {
+    /* 0x00 */ char unk_0[0x10];
+    /* 0x10 */ s16 unk_10;
+    /* 0x14 */ s32 unk_14;
+    /* 0x18 */ char unk_18[0x64];
+} UnkStruct8013A854 ; // size = 0x7C
+
+typedef UnkStruct8013A854 UnkStruct8013A854List[UNKSTRUCT8013A854_SIZE];
+
+extern UnkStruct8013A854List* D_80156954[UNKSTRUCT8013A854_SIZE];
+
+void func_8013A854(u32 i) {
+
+    if (i < 90) {
+        UnkStruct8013A854* unkStruct80156954ListPtr = *D_80156954;
+        unkStruct80156954ListPtr[i].unk_14 = 0;
+        unkStruct80156954ListPtr[i].unk_10 = -1;
+    }
+}
 
 INCLUDE_ASM(s32, "code_d0a70_len_4fe0", func_8013A888);
 
