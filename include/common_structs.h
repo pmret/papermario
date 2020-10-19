@@ -1547,4 +1547,29 @@ typedef struct SaveData {
     /* 0x1304 */ char unk_1304[0x7C];
 } SaveData; // size = 0x1380
 
+typedef struct MapHeader {
+    /* 0x00 */ char unk_00[0x10];
+    /* 0x10 */ Bytecode* mainScript;
+    /* 0x14 */ f32* entryList;
+    /* 0x18 */ s32 entryCount;
+    /* 0x1C */ char unk_1C[0x1C];
+    /* 0x38 */ s32 background; // 0x80200000 if there is one, 0 otherwise
+    /* 0x3C */ UNK_FUN_PTR(tattle); // or string id
+} MapHeader; // size = 0x40
+
+typedef struct NpcAISettings {
+    /* 0x00 */ f32 moveSpeed;
+    /* 0x04 */ s32 moveTime;
+    /* 0x08 */ s32 waitTime;
+    /* 0x0C */ f32 alertRadius;
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ s32 unk_14;
+    /* 0x18 */ f32 chaseSpeed;
+    /* 0x1C */ s32 unk_1C; // chase turn step?
+    /* 0x20 */ s32 unk_20;
+    /* 0x24 */ f32 chaseRadius;
+    /* 0x28 */ f32 unk_28;
+    /* 0x2C */ s32 unk_2C; // bool
+} NpcAISettings; // size = 0x30
+
 #endif
