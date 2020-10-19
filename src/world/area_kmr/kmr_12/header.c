@@ -20,3 +20,8 @@ Bytecode kmr_12_play_music[] = {
     SI_RETURN(),
     SI_END(),
 };
+
+ApiStatus get_goomba_ref(ScriptInstance* script, s32 isInitialCall) {
+    script->varTable[0] = get_enemy_safe(0);
+    return ApiStatus_DONE2;
+}

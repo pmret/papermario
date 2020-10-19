@@ -2,6 +2,8 @@
 #include "script_api/map.h"
 
 Bytecode kmr_12_play_music[];
+ApiStatus get_goomba_ref(ScriptInstance* script, s32 isInitialCall);
+
 Bytecode make_entities[];
 Bytecode read_sign[];
 
@@ -60,11 +62,6 @@ StaticNpcSettings goomba_npc_settings = {
     .hitScript = (Bytecode*)0x80077F70,
     .defeatScript = (Bytecode*)0x8007809C,
 };
-
-ApiStatus get_goomba_ref(ScriptInstance* script, s32 isInitialCall) {
-    script->varTable[0] = get_enemy_safe(0);
-    return ApiStatus_DONE2;
-}
 
 Bytecode read_sign[] = { // *INDENT-OFF*
     SI_GROUP(0),
