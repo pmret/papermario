@@ -22,7 +22,7 @@ ApiStatus func_802BD148_325070(ScriptInstance* script, s32 isInitialCall) {
     if (isInitialCall) {
         enable_partner_flying(ownerID, TRUE);
     }
-    
+
     update_player_move_history(ownerID);
     func_800ED5D0(ownerID);
     playerData->unk_2F4[PartnerId_TWINK]++;

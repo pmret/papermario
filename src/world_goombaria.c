@@ -22,7 +22,7 @@ ApiStatus func_802BD14C_324F10(ScriptInstance* script, s32 isInitialCall) {
     if (isInitialCall) {
         enable_partner_walking(ownerID, TRUE);
     }
-    
+
     func_800EBA3C(ownerID);
     func_800EBB40(ownerID);
     playerData->unk_2F4[PartnerId_GOOMBARIA]++;

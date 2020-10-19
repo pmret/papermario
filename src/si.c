@@ -1069,7 +1069,7 @@ void si_standard_trigger_executor(Trigger* trigger) {
     }
 }
 
-ApiStatus si_handle_bind_lock(ScriptInstance *script) {
+ApiStatus si_handle_bind_lock(ScriptInstance* script) {
     Bytecode* args = script->ptrReadPos;
     Trigger* trigger;
     Bytecode* triggerScript = get_variable(script, *args++);

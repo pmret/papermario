@@ -1,17 +1,18 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "guOrtho", guOrthoF);
-/*void guOrthoF(f32 mf[4][4], f32 left, f32 right, f32 bottom, f32 top, f32 near, f32 far, f32 scale) {
+#ifdef NON_MATCHING
+void guOrthoF(float mf[4][4], float l, float r, float b, float t,
+              float n, float f, float scale) {
     s32 i, j;
 
     guMtxIdentF(mf);
 
-    mf[0][0] = 2 / (right - left);
-    mf[1][1] = 2 / (top - bottom);
-    mf[2][2] = -2 / (far - near);
-    mf[3][0] = -(right + left) / (right - left);
-    mf[3][1] = -(top + bottom) / (top - bottom);
-    mf[3][2] = -(far + near) / (far - near);
+    mf[0][0] = 2 / (r - l);
+    mf[1][1] = 2 / (t - b);
+    mf[2][2] = -2 / (f - n);
+    mf[3][0] = -(r + l) / (r - l);
+    mf[3][1] = -(t + b) / (t - b);
+    mf[3][2] = -(f + n) / (f - n);
     mf[3][3] = 1;
 
     for (i = 0; i < 4; i++) {
@@ -19,13 +20,22 @@ INCLUDE_ASM(s32, "guOrtho", guOrthoF);
             mf[i][j] *= scale;
         }
     }
-}*/
+}
+#else
+INCLUDE_ASM(void, "guOrtho", guOrthoF, float mf[4][4], float l, float r, float b, float t, float n, float f,
+            float scale);
+#endif
 
-INCLUDE_ASM(s32, "guOrtho", guOrtho);
-/*void guOrtho(Mtx* mtx, f32 left, f32 right, f32 bottom, f32 top, f32 near, f32 far, f32 scale) {
+#ifdef NON_MATCHING
+void guOrtho(Mtx* m, float l, float r, float b, float t,
+             float n, float f, float scale) {
     float mf[4][4];
 
-    guOrthoF(mf, left, right, bottom, top, near, far, scale);
+    guOrthoF(mf, l, r, b, t, n, f, scale);
 
-    guMtxF2L(mf, mtx);
-}*/
+    guMtxF2L(mf, m);
+}
+#else
+INCLUDE_ASM(void, "guOrtho", guOrtho, Mtx* m, float l, float r, float b, float t,
+            float n, float f, float scale);
+#endif
