@@ -18,6 +18,6 @@ INCLUDE_ASM(s32, "world/area_kpa/kpa_113", func_80240544_A9CC30);
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_113", func_80240984_A9CC30);
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_113", func_802409CC);
+#include "world/common/AwaitPlayerNearNPC.c"
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_113", func_80240A24_A9CC30);
