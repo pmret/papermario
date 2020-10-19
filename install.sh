@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# Ubuntu
+# Ubuntu (apt)
 if command -v apt &> /dev/null; then
-    echo "Installing packages for Ubuntu"
+    echo "Installing packages for Ubuntu (apt)"
 
-    sudo apt install -y git python3 python3-pip build-essential binutils-mips-linux-gnu zlib1g-dev libyaml-dev gcc-multilib || exit 1
+    sudo apt install -y git python3 python3-pip build-essential binutils-mips-linux-gnu zlib1g-dev libyaml-dev || exit 1
     python3 -m pip install -U -r requirements.txt
 
     if [[ $1 == "--extra" ]]; then
@@ -17,15 +17,15 @@ if command -v apt &> /dev/null; then
     exit
 fi
 
-# Arch
+# Arch Linux (pacman)
 if command -v pacman &> /dev/null; then
-    echo "Installing packages for Arch"
+    echo "Installing packages for Arch Linux (pacman)"
 
     # Upgrade existing packages (note: no --noconfirm)
     sudo pacman -Syu || exit 1
 
     # Install dependencies
-    sudo pacman -S --noconfirm --needed git python python-pip base-devel zlib libyaml lib32-glibc || exit 1
+    sudo pacman -S --noconfirm --needed git python python-pip base-devel zlib libyaml || exit 1
     python3 -m pip install -U -r requirements.txt
 
     # Install binutils if required
@@ -58,6 +58,103 @@ if command -v pacman &> /dev/null; then
     exit
 fi
 
-echo "Only Ubuntu (apt) and Arch Linux (pacman) are supported by install.sh."
+# openSUSE (zypper)
+if command -v zypper &> /dev/null; then
+    echo "Installing packages for openSUSE (zypper)"
+
+    sudo zypper -n install git python3 python3-devel python3-pip gcc gcc-c++ glibc-devel make cross-mips-binutils zlib-devel libyaml-devel
+
+    # Link the openSUSE locations for binutils tools to their usual GNU locations
+    sudo ln -s /usr/bin/mips-suse-linux-addr2line /usr/bin/mips-linux-gnu-addr2line
+    sudo ln -s /usr/bin/mips-suse-linux-ar /usr/bin/mips-linux-gnu-ar
+    sudo ln -s /usr/bin/mips-suse-linux-as /usr/bin/mips-linux-gnu-as
+    sudo ln -s /usr/bin/mips-suse-linux-elfedit /usr/bin/mips-linux-gnu-elfedit
+    sudo ln -s /usr/bin/mips-suse-linux-gprof /usr/bin/mips-linux-gnu-gprof
+    sudo ln -s /usr/bin/mips-suse-linux-ld /usr/bin/mips-linux-gnu-ld
+    sudo ln -s /usr/bin/mips-suse-linux-ld.bfd /usr/bin/mips-linux-gnu-ld.bfd
+    sudo ln -s /usr/bin/mips-suse-linux-nm /usr/bin/mips-linux-gnu-nm
+    sudo ln -s /usr/bin/mips-suse-linux-objcopy /usr/bin/mips-linux-gnu-objcopy
+    sudo ln -s /usr/bin/mips-suse-linux-objdump /usr/bin/mips-linux-gnu-objdump
+    sudo ln -s /usr/bin/mips-suse-linux-ranlib /usr/bin/mips-linux-gnu-ranlib
+    sudo ln -s /usr/bin/mips-suse-linux-readelf /usr/bin/mips-linux-gnu-readelf
+    sudo ln -s /usr/bin/mips-suse-linux-size /usr/bin/mips-linux-gnu-size
+    sudo ln -s /usr/bin/mips-suse-linux-strings /usr/bin/mips-linux-gnu-strings
+    sudo ln -s /usr/bin/mips-suse-linux-strip /usr/bin/mips-linux-gnu-strip
+
+    python3 -m pip install -U -r requirements.txt
+
+    if [[ $1 == "--extra" ]]; then
+        echo "Installing extra"
+        sudo zypper -n install clang astyle || exit 1
+        python3 -m pip install -U -r requirements_extra.txt || exit 1
+    fi
+
+    echo "Done"
+    exit
+fi
+
+# Alpine Linux (apk)
+if command -v apk &> /dev/null; then
+    echo "Installing packages for Alpine Linux (apk)"
+
+    # If the edge/community repo isn't present, it needs to be for astyle
+    if ! grep -q "edge/community" /etc/apk/repositories; then
+        echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
+    fi
+
+    # Install dependencies
+    sudo apk add --no-cache bash wget git python3 python3-dev py3-pip build-base zlib-dev yaml-dev
+    python3 -m pip install -U -r requirements.txt
+
+    # Install binutils if required
+    if ! command -v mips-linux-gnu-ar &> /dev/null; then
+        PKG="mips-linux-gnu-binutils"
+
+        RETURNDIR="$(pwd)"
+        cd "$(mktemp -d)"
+
+        wget ftp://ftp.gnu.org/gnu/binutils/binutils-2.35.tar.bz2
+        tar -xf binutils-2.35.tar.bz2
+
+        cd binutils-2.35
+        sed -i "/ac_cpp=/s/\$CPPFLAGS/\$CPPFLAGS -O2/" libiberty/configure
+        ./configure --target=mips-linux-gnu \
+                    --with-sysroot=/usr/mips-linux-gnu \
+                    --prefix=/usr \
+                    --disable-multilib \
+                    --with-gnu-as \
+                    --with-gnu-ld \
+                    --disable-nls \
+                    --enable-ld=default \
+                    --enable-plugins \
+                    --enable-deterministic-archives \
+                    --disable-werror
+        sudo make
+        sudo make install
+
+        cd ..
+        # delete temp directory we made
+        rm -rf "$(pwd)"
+        # go back to old dir
+        cd "${RETURNDIR}"
+    fi
+
+    if [[ $1 == "--extra" ]]; then
+        echo "Installing extra"
+        sudo apk add --no-cache clang-extra-tools astyle || exit 1
+        python3 -m pip install -U -r requirements_extra.txt || exit 1
+    fi
+
+    echo "Done"
+    exit
+
+fi
+
+
+echo "Only the following distros are supported by install.sh:"
+echo "- Ubuntu (apt)"
+echo "- Arch Linux (pacman)"
+echo "- openSUSE (zypper)"
+echo "- Alpine Linux (apk)"
 echo "Please consider contributing and adding an installation script for your distro."
 exit 1
