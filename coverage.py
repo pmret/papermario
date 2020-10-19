@@ -27,7 +27,7 @@ def strip_c_comments(text):
     return re.sub(pattern, replacer, text)
 
 c_func_pattern = re.compile(
-    r"^(static\s+)?[^\s]+\s+([^\s(]+)\(([^\n)]*)\)\s+{",
+    r"^(static\s+)?[^\s]+\s+([^\s(]+)\(([^;)]*)\)[^;]+{",
     re.MULTILINE
 )
 def funcs_in_c(text):
