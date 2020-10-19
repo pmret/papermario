@@ -1249,7 +1249,8 @@ segments:
     start: 0x929270
     vram: 0x80240000
     files:
-      - [0x929270, "c", "world/area_sbk/sbk_00"]
+      - [0x929270, "c", "world/area_sbk/sbk_00/sbk_00"]
+      - [0x9292B0, "c", "world/area_sbk/sbk_00/sbk_00_2"]
       - [0x9292D0, "bin", "world/area_sbk/sbk_00_data"]
   - name: world/area_sbk/sbk_01
     type: code

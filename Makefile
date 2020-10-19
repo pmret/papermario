@@ -5,12 +5,10 @@ SHELL=/bin/bash -o pipefail
 # BUILD_DIR is location where all build artifacts are placed
 BUILD_DIR = build
 
-WORLD_AREAS := $(foreach dir, $(wildcard src/world/*), $(dir:src/world/%=%))
-
-SRC_DIRS := src src/os src/os/nusys $(foreach area,$(WORLD_AREAS),src/world/$(area))
+SRC_DIRS := $(shell find src -type d)
 ASM_DIRS := asm asm/os
 INCLUDE_DIRS := include include/PR src
-DATA_DIRS := bin bin/world $(foreach area,$(WORLD_AREAS),bin/world/$(area))
+DATA_DIRS := $(shell find bin -type d -not -name Yay0)
 YAY0_DIRS := bin/Yay0
 ASSETS_FS_DIRS := assets/fs
 
