@@ -18,4 +18,7 @@ INCLUDE_ASM(s32, "world/area_sbk/sbk_02/92A9A0", func_80240B5C);
 
 INCLUDE_ASM(s32, "world/area_sbk/sbk_02/92A9A0", func_80240B98_92AE48);
 
-INCLUDE_ASM(s32, "world/area_sbk/sbk_02/92A9A0", func_80240BD4);
+ApiStatus func_80240BD4(ScriptInstance* script, s32 isInitialCall) {
+    script->varTable[0] = get_item_count();
+    return ApiStatus_DONE2;
+}
