@@ -62,6 +62,7 @@ static NpcSettings goomba_npc_settings = {
 };
 
 // *INDENT-OFF*
+/// @bug The RETURN command is after the END command, so this script will never terminate.
 static Script read_west_sign = {
     SI_GROUP(0),
 
@@ -88,7 +89,7 @@ static Script read_west_sign = {
     SI_END_IF(),
 
     SI_END(),
-    SI_RETURN(), // Whoops!
+    SI_RETURN(),
 };
 
 static Script goomba_idle = {
