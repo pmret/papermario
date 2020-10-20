@@ -8,15 +8,15 @@ s32 si_goto_end_case(ScriptInstance* script);
 s32 si_goto_next_case(ScriptInstance* script);
 s32 get_variable_index(ScriptInstance* script, s32 var);
 
-f32 fixed_var_to_float(s32 scriptVar) {
+f32 fixed_var_to_float(Bytecode scriptVar) {
     if (scriptVar <= -220000000) {
-        return (scriptVar + 230000000) * (1 / 1024.0f);
+        return (scriptVar + 230000000) / 1024.0f;
     } else {
         return scriptVar;
     }
 }
 
-s32 float_to_fixed_var(f32 value) {
+Bytecode float_to_fixed_var(f32 value) {
     return (s32)(value * 1024.0f) - 230000000;
 }
 
@@ -129,7 +129,6 @@ ApiStatus si_handle_if_equal(ScriptInstance* script) {
     }
     return ApiStatus_DONE2;
 }
-
 
 ApiStatus si_handle_if_not_equal(ScriptInstance* script) {
     Bytecode* args = script->ptrReadPos;
@@ -907,7 +906,7 @@ ApiStatus si_handle_exec2(ScriptInstance* script) {
     newScript->array = script->array;
     newScript->flagArray = script->flagArray;
 
-    set_variable(script, arg2, newScript->uniqueID);
+    set_variable(script, arg2, newScript->id);
 
     return ApiStatus_DONE2;
 }
@@ -936,7 +935,7 @@ s32 _bound_script_trigger_handler(Trigger* trigger) {
 
         script = start_script(scriptStart, trigger->priority, 0x20);
         trigger->runningScript = script;
-        trigger->runningScriptID = script->uniqueID;
+        trigger->runningScriptID = script->id;
         script->varTable[0] = trigger->scriptVars[0];
         script->varTable[1] = trigger->scriptVars[1];
         script->varTable[2] = trigger->scriptVars[2];
@@ -1045,7 +1044,7 @@ ApiStatus si_handle_resume(ScriptInstance* script) {
 
 ApiStatus si_handle_does_script_exist(ScriptInstance* script) {
     Bytecode* args = script->ptrReadPos;
-    Bytecode scriptID = get_variable(script, *args++);
+    ScriptID scriptID = get_variable(script, *args++);
     Bytecode var2 = *args++;
 
     set_variable(script, var2, does_script_exist(scriptID));
@@ -1056,7 +1055,7 @@ void si_standard_trigger_executor(Trigger* trigger) {
     if (trigger->runningScript == NULL) {
         ScriptInstance* newScript = start_script(trigger->scriptStart, trigger->priority, 0x20);
         trigger->runningScript = newScript;
-        trigger->runningScriptID = newScript->uniqueID;
+        trigger->runningScriptID = newScript->id;
         newScript->varTable[0] = trigger->scriptVars[0];
         newScript->varTable[1] = trigger->scriptVars[1];
         newScript->varTable[2] = trigger->scriptVars[2];

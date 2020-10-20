@@ -227,6 +227,9 @@ gEffectTable = 0x8007F214;
 
 gPauseMenuStrings = 0x8026F778;
 
+EnterWalk = 0x80285960;
+ExitWalk = 0x80285CF4;
+
 MarioEnterStage = 0x80284A40;
 PeachEnterStage = 0x80284D04;
 HandleEvent_Player = 0x802852D4;
@@ -254,3 +257,6 @@ DoSpinSmashHit = 0x8029B998;
 DoStopHit = 0x80294650;
 ShakeCam1 = 0x802D9CB0;
 ShakeCamX = 0x802D9CE8;
+
+EnemyNpcHit = 0x80077F70;
+EnemyNpcDefeat = 0x8007809C;

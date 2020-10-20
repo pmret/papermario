@@ -1,4 +1,5 @@
 #include "common.h"
+#include "map.h"
 
 ApiStatus SetEncounterStatusFlags(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -71,7 +72,7 @@ ApiStatus DoNpcDefeat(ScriptInstance* script, s32 isInitialCall) {
     temp_s1->currentAnim = owner->animList[6];
     newScript = start_script(&SCRIPT_NpcDefeat, 10, 0);
     owner->defeatScript = newScript;
-    owner->defeatScriptID = newScript->uniqueID;
+    owner->defeatScriptID = newScript->id;
     newScript->ownerActorID = owner;
     newScript->ownerID = owner->npcID;
     newScript->groupFlags = owner->scriptGroup;
@@ -147,7 +148,7 @@ ApiStatus RestartNpcAI(ScriptInstance* script, s32 isInitialCall) {
     npc->unk_C8 = 100;
     newScript = start_script(npc->aiBytecode, 10, 0);
     npc->aiScript = newScript;
-    npc->aiScriptID = newScript->uniqueID;
+    npc->aiScriptID = newScript->id;
     newScript->ownerActorID = npc;
     newScript->ownerID = script->ownerID;
     newScript->groupFlags = groupFlags;
@@ -221,7 +222,7 @@ ApiStatus RestartNpcAux(ScriptInstance* script, s32 isInitialCall) {
 
     newScript = start_script(npc->auxBytecode, 10, 0);
     npc->auxScript = newScript;
-    npc->auxScriptID = newScript->uniqueID;
+    npc->auxScriptID = newScript->id;
     newScript->ownerActorID = npc;
     newScript->ownerID = npcId;
     newScript->groupFlags = groupFlags;
@@ -501,7 +502,7 @@ ApiStatus func_80045838(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus func_800458CC(ScriptInstance* script, s32 isInitialCall) {
-    set_variable(script, *script->ptrReadPos, script->ownerActorID->npcSettings->unkFlags & 8);
+    set_variable(script, *script->ptrReadPos, script->ownerActorID->npcSettings->unk_2A & 8);
     return ApiStatus_DONE2;
 }
 

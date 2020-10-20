@@ -1151,8 +1151,10 @@ segments:
     start: 0x8EB360
     vram: 0x80240000
     files:
-      - [0x8EB360, "c", "world/area_kmr/kmr_12"]
-      - [0x8EB390, "bin", "world/area_kmr/kmr_12_data"]
+      - [0x8EB360, "c", "world/area_kmr/kmr_12/header"]
+      - [0x8EB390, ".data", "world/area_kmr/kmr_12/header"]
+      - [0x8EB420, ".data", "world/area_kmr/kmr_12/events"]
+      - [0x8EBE10, ".rodata", "world/area_kmr/kmr_12/events"]
   - name: world/area_kmr/kmr_20
     type: code
     start: 0x8EBE20
