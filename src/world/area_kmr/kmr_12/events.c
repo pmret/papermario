@@ -1,7 +1,7 @@
 #include "kmr_12.h"
 
-GEN_EXIT_WALK_SCRIPT(exit_west, 60, 0, 0x80240AB0 /*"kmr_07"*/, 1);
-GEN_EXIT_WALK_SCRIPT(exit_east, 60, 1, 0x80240AB8 /*"kmr_11"*/, 0);
+GEN_EXIT_WALK_SCRIPT(exit_west, 60, 0, "kmr_07", 1);
+GEN_EXIT_WALK_SCRIPT(exit_east, 60, 1, "kmr_11", 0);
 
 Script bind_exits = {
     SI_BIND(exit_west, TriggerFlag_FLOOR_ABOVE, 0 /* deili1 */, NULL),
