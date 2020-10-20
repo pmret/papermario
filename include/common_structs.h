@@ -114,6 +114,7 @@ typedef struct Npc {
     /* 0x0AA */ u8 renderMode;
     /* 0x0AB */ char unk_AB[661];
 } Npc; // size = 0x340
+
 typedef struct PlayerData {
     /* 0x000 */ s8 bootsLevel;
     /* 0x001 */ s8 hammerLevel;
@@ -179,6 +180,7 @@ typedef struct PlayerData {
     /* 0x33C */ s16 smashGameRecord;
     /* 0x33E */ char unk_33E[2];
 } PlayerData; // size = 0x340
+
 typedef union {
     struct {
         /* 0x0 */ s16 genericFlagIndex;
@@ -186,6 +188,7 @@ typedef union {
     } bytes;
     s32 flags;
 } TriggerFlags;
+
 typedef struct Trigger {
     /* 0x00 */ TriggerFlags flags;
     /* 0x04 */ s32 params1;
@@ -200,6 +203,7 @@ typedef struct Trigger {
     /* 0x31 */ char unk_31[3];
     /* 0x34 */ s32 runningScriptID;
 } Trigger; // size = 0x38
+
 typedef struct ScriptInstance {
     /* 0x000 */ u8 state;
     /* 0x001 */ u8 currentArgc;
