@@ -151,7 +151,7 @@ if command -v apk &> /dev/null; then
 fi
 
 
-echo "Only the following distros are supported by install.sh:"
+echo "The following distros are supported by install.sh:"
 echo "- Ubuntu (apt)"
 echo "- Arch Linux (pacman)"
 echo "- openSUSE (zypper)"
