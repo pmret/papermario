@@ -3,6 +3,10 @@ on:
   push:
     branches:
       - master
+    paths:
+      - 'src/*'
+      - 'include/*'
+      - 'docs/*'
 
 jobs:
   deploy:
