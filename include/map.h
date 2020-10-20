@@ -61,12 +61,25 @@ typedef struct ItemDrop {
     /* 0x04 */ s16 unk_08;
 } ItemDrop; // size = 0x06
 
+/// @brief Describes heart/flower drop chances after defeating an Npc in the overworld.
+///
+/// The algorithm for calculating the number of hearts/flowers from a StatDrop is:
+/// - If current HP/FP > cutoff, drop 0.
+/// - Roll generalChance. If it fails, drop 0.
+/// - Roll chancePerAttempt attempts times. For each success, drop a heart/flower.
+///
+/// StaticNpc holds a table of StatDrops for each stat (hearts, flowers). All are checked together
+/// and the number of hearts/flowers to drop is the total number of successful attempts for each stat.
+///
+/// Each heart/flower is worth 1 HP and 1 FP respectively, if picked up.
+///
+/// cutoff, generalChance, and chancePerAttempt are short fixed-point percentage values.
+/// That is, `F16(0)` is a 0% chance and `F16(100)` is a 100% chance.
 typedef struct StatDrop {
-    // NOTE: these %s are F16
-    /* 0x00 */ s16 hpCutoff; // % of max HP/FP
-    /* 0x02 */ s16 generalChance; // %
-    /* 0x04 */ s16 attempts;
-    /* 0x06 */ s16 chancePerAttempt; // %
+    /* 0x00 */ s16 cutoff;           ///< % of max HP/FP. If current HP/FP > cutoff, no hearts/flowers can be dropped.
+    /* 0x02 */ s16 generalChance;    ///< % chance for any hearts/flowers to be dropped at all from this StatDrop.
+    /* 0x04 */ s16 attempts;         ///< Maximum number of hearts/flowers that can be dropped from this StatDrop.
+    /* 0x06 */ s16 chancePerAttempt; ///< % chance for a single heart/flower to be dropped from each attempt.
 } StatDrop; // size = 0x08
 
 #define NO_DROPS { F16(100), F16(0), 0, F16(0) }
@@ -135,8 +148,8 @@ typedef struct StaticNPC {
     /* 0x028 */ s8 dropFlags;
     /* 0x029 */ s8 itemDropChance; // %
     /* 0x02A */ ItemDrop itemDrops[8];
-    /* 0x05A */ StatDrop heartDrops[8];
-    /* 0x09A */ StatDrop flowerDrops[8];
+    /* 0x05A */ StatDrop[5] heartDrops;
+    /* 0x09A */ StatDrop[5] flowerDrops;
     /* 0x0DA */ s16 minCoinBonus;
     /* 0x0DC */ s16 maxCoinBonus;
     /* 0x0DE */ char unk_DE[2];
