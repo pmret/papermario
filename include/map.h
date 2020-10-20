@@ -11,7 +11,7 @@
 
 typedef Vec4f EntryList[];
 
-typedef struct MapHeader {
+typedef struct MapConfig {
     /* 0x00 */ char unk_00[0x10];
     /* 0x10 */ Script* main;
     /* 0x14 */ EntryList* entryList;
@@ -22,7 +22,7 @@ typedef struct MapHeader {
         MessageID msgID;
         UNK_FUN_PTR(get);
     } tattle;
-} MapHeader; // size = 0x40
+} MapConfig; // size = 0x40
 
 typedef struct NpcAISettings {
     /* 0x00 */ f32 moveSpeed;

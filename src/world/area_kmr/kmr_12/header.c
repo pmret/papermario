@@ -5,7 +5,7 @@ static EntryList entryList = {
     { 471.0f, 0.0f, 12.0f, 270.0f }, // east, towards Goomba King's Fortress
 };
 
-MapHeader header = {
+MapConfig config = {
     .main = kmr_12_main,
     .entryList = entryList,
     .entryCount = ENTRY_COUNT(entryList),
