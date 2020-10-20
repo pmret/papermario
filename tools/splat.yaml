@@ -863,6 +863,7 @@ segments:
       - [0x7E8470, "bin"]
       - [0x7EA340, "bin"]
       - [0x7EAA50, "bin"]
+      - [0x7EACD8, "bin"] # rodata
       - [0x7EAD10, "bin"] # rodata
   - name: world/area_mac/mac_00/
     type: code
@@ -918,6 +919,7 @@ segments:
       - [0x823970, "c"]
       - [0x823BB0, "c"]
       - [0x823BF0, "c"]
+      - [0x8267E0, "bin"]
       - [0x8268F0, "bin"]
       - [0x827E70, "bin"]
       - [0x8282E0, "bin"]
@@ -933,6 +935,7 @@ segments:
       - [0x831B20, "c"]
       - [0x833500, "c"]
       - [0x833740, "c"]
+      - [0x834070, "bin"]
       - [0x834170, "bin"]
       - [0x835370, "bin"]
       - [0x837CB0, "bin"]
@@ -952,6 +955,7 @@ segments:
       - [0x843030, "c"]
       - [0x844860, "c"]
       - [0x844AC0, "c"]
+      - [0x844BF0, "bin"]
       - [0x844D50, "bin"]
       - [0x845280, "bin"]
       - [0x845CA0, "bin"]
@@ -971,12 +975,14 @@ segments:
       - [0x852170, "c"]
       - [0x855560, "c"]
       - [0x855F20, "c"]
+      - [0x8562D0, "bin"]
       - [0x8564E0, "bin"]
       - [0x856650, "bin"]
       - [0x857070, "bin"]
       - [0x862BC0, "bin"]
       - [0x864450, "bin"]
       - [0x8648B4, "bin"]
+      - [0x864910, "bin"] # rodata
       - [0x864AE0, "bin"] # rodata
       - [0x864B20, "bin"] # rodata
   - name: world/area_mac/mac_06/
@@ -1018,6 +1024,7 @@ segments:
       - [0x86D190, "bin"]
       - [0x86D800, "bin"]
       - [0x86E2C0, "bin"]
+      - [0x86EAF0, "bin"] # rodata
       - [0x86EB00, "bin"] # rodata
   - name: world/area_tik/tik_03/
     type: code
@@ -1046,6 +1053,7 @@ segments:
       - [0x8739F0, "bin"]
       - [0x8742C0, "bin"]
       - [0x8746E0, "bin"]
+      - [0x874DA0, "bin"] # rodata
   - name: world/area_tik/tik_05/
     type: code
     start: 0x874DC0
@@ -1058,6 +1066,7 @@ segments:
       - [0x875D10, "bin"]
       - [0x8765C0, "bin"]
       - [0x876A50, "bin"]
+      - [0x876ED0, "bin"] # rodata
       - [0x876EE0, "bin"] # rodata
   - name: world/area_tik/tik_06/
     type: code
@@ -1066,9 +1075,11 @@ segments:
     files:
       - [0x876EE0, "c"]
       - [0x8774D0, "c"]
+      - [0x877840, "bin"]
       - [0x8778F0, "bin"]
       - [0x878F90, "bin"]
       - [0x879860, "bin"]
+      - [0x879BB0, "bin"] # rodata
       - [0x879BE0, "bin"] # rodata
   - name: world/area_tik/tik_07/
     type: code
@@ -1147,9 +1158,11 @@ segments:
     files:
       - [0x88D600, "c"]
       - [0x88DBF0, "c"]
+      - [0x88DF60, "bin"]
       - [0x88DFF0, "bin"]
       - [0x88F180, "bin"]
       - [0x88FA30, "bin"]
+      - [0x88FB90, "bin"] # rodata
   - name: world/area_tik/tik_15/
     type: code
     start: 0x88FBA0
@@ -1161,6 +1174,7 @@ segments:
       - [0x890740, "bin"]
       - [0x891890, "bin"]
       - [0x8922A0, "bin"]
+      - [0x892A10, "bin"] # rodata
   - name: world/area_tik/tik_17/
     type: code
     start: 0x892A20
@@ -1181,9 +1195,11 @@ segments:
     files:
       - [0x8956E0, "c"]
       - [0x8959F0, "c"]
+      - [0x895D90, "bin"]
       - [0x895E20, "bin"]
       - [0x896CA0, "bin"]
       - [0x897450, "bin"]
+      - [0x8975D0, "bin"] # rodata
   - name: world/area_tik/tik_19/
     type: code
     start: 0x8975E0
@@ -1227,7 +1243,9 @@ segments:
     files:
       - [0x89FEC0, "c"]
       - [0x89FEF0, "c"]
+      - [0x8A0870, "bin"]
       - [0x8A0930, "bin"]
+      - [0x8A23C0, "bin"] # rodata
   - name: world/area_tik/tik_23/
     type: code
     start: 0x8A23D0
@@ -1252,6 +1270,7 @@ segments:
       - [0x8A69C0, "bin"]
       - [0x8A7810, "bin"]
       - [0x8A7A20, "bin"]
+      - [0x8A7EF0, "bin"] # rodata
       - [0x8A7F20, "bin"] # rodata
       - [0x8A7F80, "bin"] # rodata
   - name: world/area_tik/tik_25/
@@ -1318,6 +1337,7 @@ segments:
       - [0x8C51D0, "bin"]
       - [0x8C7010, "bin"]
       - [0x8C7B70, "bin"]
+      - [0x8C7D90, "bin"] # rodata
       - [0x8C7DB0, "bin"] # rodata
       - [0x8C7F70, "bin"] # rodata
       - [0x8C7F90, "bin"] # rodata
@@ -1359,6 +1379,7 @@ segments:
       - [0x8CF880, "bin"]
       - [0x8D0900, "bin"]
       - [0x8D0940, "bin"]
+      - [0x8D14A0, "bin"] # rodata
       - [0x8D1510, "bin"] # rodata
   - name: world/area_kmr/kmr_06/
     type: code
@@ -1405,6 +1426,7 @@ segments:
       - [0x8D8B80, "bin"]
       - [0x8D8E60, "bin"]
       - [0x8D90F0, "bin"]
+      - [0x8DA0F0, "bin"] # rodata
   - name: world/area_kmr/kmr_11/
     type: code
     start: 0x8DA100
@@ -1421,6 +1443,7 @@ segments:
       - [0x8DFB88, "bin"]
       - [0x8DFBB0, "bin"]
       - [0x8E0190, "bin"]
+      - [0x8EB190, "bin"] # rodata
       - [0x8EB1B0, "bin"] # rodata
       - [0x8EB360, "bin"] # rodata
   - name: world/area_kmr/kmr_12/
@@ -1429,6 +1452,7 @@ segments:
     vram: 0x80240000
     files:
       - [0x8EB360, "c"]
+      - [0x8EB390, "bin"]
       - [0x8EB420, "bin"]
       - [0x8EBE10, "bin"] # rodata
   - name: world/area_kmr/kmr_20/
@@ -1468,6 +1492,7 @@ segments:
       - [0x8FEE80, "c"]
       - [0x8FEE90, "c"]
       - [0x8FF160, "bin"]
+      - [0x8FF650, "bin"] # rodata
       - [0x8FF670, "bin"] # rodata
   - name: world/area_kmr/kmr_22/
     type: code
@@ -1533,6 +1558,7 @@ segments:
       - [0x913070, "bin"]
       - [0x9135D0, "bin"]
       - [0x9154B0, "bin"]
+      - [0x915A00, "bin"] # rodata
       - [0x915A20, "bin"] # rodata
       - [0x915A40, "bin"] # rodata
       - [0x915D70, "bin"] # rodata
@@ -1566,6 +1592,7 @@ segments:
     vram: 0x80240000
     files:
       - [0x91B8E0, "c"]
+      - [0x91C9C0, "bin"]
       - [0x91CA50, "bin"]
       - [0x91CFA0, "bin"]
       - [0x91E460, "bin"] # rodata
@@ -1610,6 +1637,7 @@ segments:
       - [0x9292B0, "c"]
       - [0x9292D0, "bin"]
       - [0x929A00, "bin"]
+      - [0x929A80, "bin"] # rodata
   - name: world/area_sbk/sbk_01/
     type: code
     start: 0x929A90
@@ -1628,10 +1656,12 @@ segments:
     files:
       - [0x92A2B0, "c"]
       - [0x92A9A0, "c"]
+      - [0x92AEB0, "bin"]
       - [0x92AFF0, "bin"]
       - [0x92B500, "bin"]
       - [0x92E220, "bin"]
       - [0x92F830, "bin"]
+      - [0x92F880, "bin"] # rodata
       - [0x92F8B0, "bin"] # rodata
   - name: world/area_sbk/sbk_03/
     type: code
@@ -1756,6 +1786,7 @@ segments:
     files:
       - [0x938590, "c"]
       - [0x9385D0, "c"]
+      - [0x9386D0, "bin"]
       - [0x9389F0, "bin"]
       - [0x938DD0, "bin"]
       - [0x939540, "bin"] # rodata
@@ -1767,6 +1798,7 @@ segments:
     files:
       - [0x939560, "c"]
       - [0x9395A0, "bin"]
+      - [0x939910, "bin"] # rodata
   - name: world/area_sbk/sbk_22/
     type: code
     start: 0x939930
@@ -1821,6 +1853,7 @@ segments:
       - [0x93E070, "bin"]
       - [0x93E390, "bin"]
       - [0x93EB80, "bin"]
+      - [0x93F590, "bin"] # rodata
       - [0x93F5B0, "bin"] # rodata
   - name: world/area_sbk/sbk_30/
     type: code
@@ -1839,6 +1872,7 @@ segments:
     files:
       - [0x944000, "c"]
       - [0x944040, "c"]
+      - [0x944140, "bin"]
       - [0x9444D0, "bin"]
       - [0x944A40, "bin"] # rodata
   - name: world/area_sbk/sbk_32/
@@ -1870,6 +1904,7 @@ segments:
       - [0x946670, "c"]
       - [0x9468B0, "bin"]
       - [0x947C80, "bin"]
+      - [0x948690, "bin"] # rodata
   - name: world/area_sbk/sbk_35/
     type: code
     start: 0x9486B0
@@ -1897,8 +1932,10 @@ segments:
     files:
       - [0x94B3A0, "c"]
       - [0x94B3E0, "c"]
+      - [0x94B4E0, "bin"]
       - [0x94B800, "bin"]
       - [0x94BF70, "bin"]
+      - [0x94C020, "bin"] # rodata
       - [0x94C040, "bin"] # rodata
   - name: world/area_sbk/sbk_41/
     type: code
@@ -1917,6 +1954,7 @@ segments:
     files:
       - [0x94C510, "c"]
       - [0x94C550, "c"]
+      - [0x94C650, "bin"]
       - [0x94C9E0, "bin"]
       - [0x94D150, "bin"] # rodata
   - name: world/area_sbk/sbk_43/
@@ -1946,6 +1984,7 @@ segments:
       - [0x94E4A0, "c"]
       - [0x94E4E0, "bin"]
       - [0x94E8E0, "bin"]
+      - [0x94E980, "bin"] # rodata
   - name: world/area_sbk/sbk_46/
     type: code
     start: 0x94E9A0
@@ -1958,6 +1997,7 @@ segments:
       - [0x94F070, "bin"]
       - [0x94FA60, "bin"]
       - [0x950570, "bin"]
+      - [0x9505F0, "bin"] # rodata
       - [0x950610, "bin"] # rodata
   - name: world/area_sbk/sbk_50/
     type: code
@@ -2039,6 +2079,7 @@ segments:
       - [0x956A30, "c"]
       - [0x956A50, "bin"]
       - [0x956CF0, "bin"]
+      - [0x956F80, "bin"] # rodata
   - name: world/area_sbk/sbk_61/
     type: code
     start: 0x956F90
@@ -2124,6 +2165,7 @@ segments:
       - [0x966CA0, "bin"]
       - [0x967780, "bin"]
       - [0x9685C0, "bin"]
+      - [0x968FD0, "bin"] # rodata
       - [0x969198, "bin"] # rodata
       - [0x9691B0, "bin"] # rodata
       - [0x9691C0, "bin"] # rodata
@@ -2194,6 +2236,7 @@ segments:
     vram: 0x80240000
     files:
       - [0x97DAD0, "c"]
+      - [0x97F990, "bin"]
       - [0x97FCE0, "bin"]
       - [0x97FE50, "bin"]
       - [0x980970, "bin"] # rodata
@@ -2225,6 +2268,7 @@ segments:
       - [0x983AD0, "bin"]
       - [0x984390, "bin"]
       - [0x9845D0, "bin"]
+      - [0x984E20, "bin"] # rodata
   - name: world/area_isk/isk_08/
     type: code
     start: 0x984E30
@@ -2248,6 +2292,7 @@ segments:
       - [0x986BD0, "bin"]
       - [0x987560, "bin"]
       - [0x988290, "bin"]
+      - [0x988B50, "bin"] # rodata
       - [0x988B60, "bin"] # rodata
   - name: world/area_isk/isk_10/
     type: code
@@ -2257,6 +2302,7 @@ segments:
       - [0x988B60, "c"]
       - [0x989910, "bin"]
       - [0x98A580, "bin"]
+      - [0x98A9E0, "bin"] # rodata
       - [0x98AA00, "bin"] # rodata
   - name: world/area_isk/isk_11/
     type: code
@@ -2290,6 +2336,7 @@ segments:
     vram: 0x80240000
     files:
       - [0x98F7E0, "c"]
+      - [0x991850, "bin"]
       - [0x991A90, "bin"]
       - [0x992680, "bin"] # rodata
       - [0x992690, "bin"] # rodata
@@ -2320,6 +2367,7 @@ segments:
       - [0x996410, "bin"]
       - [0x996C40, "bin"]
       - [0x997E20, "bin"]
+      - [0x997F40, "bin"] # rodata
       - [0x997F70, "bin"] # rodata
   - name: world/area_isk/isk_18/
     type: code
@@ -2363,6 +2411,7 @@ segments:
       - [0x99C990, "c"]
       - [0x99CCA0, "c"]
       - [0x99CD80, "c"]
+      - [0x99E050, "bin"]
       - [0x99E110, "bin"]
       - [0x99F960, "bin"]
       - [0x99FD80, "bin"]
@@ -2381,6 +2430,7 @@ segments:
       - [0x9A2B00, "bin"]
       - [0x9A3870, "bin"]
       - [0x9A3AB0, "bin"]
+      - [0x9A42B0, "bin"] # rodata
       - [0x9A4320, "bin"] # rodata
   - name: world/area_trd/trd_03/
     type: code
@@ -2390,6 +2440,7 @@ segments:
       - [0x9A4650, "c"]
       - [0x9A46F0, "c"]
       - [0x9A4ED0, "c"]
+      - [0x9A5040, "bin"]
       - [0x9A51A0, "bin"]
       - [0x9A5FF0, "bin"]
       - [0x9A60F0, "bin"]
@@ -2403,6 +2454,7 @@ segments:
       - [0x9A83F0, "c"]
       - [0x9A8700, "c"]
       - [0x9A88A0, "c"]
+      - [0x9ABC90, "bin"]
       - [0x9ABD70, "bin"]
       - [0x9AD960, "bin"]
       - [0x9AE2B0, "bin"] # rodata
@@ -2443,6 +2495,7 @@ segments:
     files:
       - [0x9B6980, "c"]
       - [0x9B6C90, "c"]
+      - [0x9B9270, "bin"]
       - [0x9B9310, "bin"]
       - [0x9B9760, "bin"]
       - [0x9BA050, "bin"]
@@ -2457,6 +2510,7 @@ segments:
     files:
       - [0x9BB2A0, "c"]
       - [0x9BB5B0, "c"]
+      - [0x9BBCC0, "bin"]
       - [0x9BBD50, "bin"]
       - [0x9BC1A0, "bin"]
       - [0x9BD650, "bin"] # rodata
@@ -2468,10 +2522,12 @@ segments:
     files:
       - [0x9BD660, "c"]
       - [0x9BD720, "c"]
+      - [0x9BD830, "bin"]
       - [0x9BD960, "bin"]
       - [0x9BDD80, "bin"]
       - [0x9BDE80, "bin"]
       - [0x9C24C0, "bin"]
+      - [0x9C28F0, "bin"] # rodata
       - [0x9C2910, "bin"] # rodata
   - name: world/area_trd/trd_10/
     type: code
@@ -2479,6 +2535,7 @@ segments:
     vram: 0x80240000
     files:
       - [0x9C2910, "c"]
+      - [0x9C3160, "bin"]
       - [0x9C3A30, "bin"]
       - [0x9C4FC0, "bin"]
       - [0x9C53B0, "bin"] # rodata
@@ -2522,6 +2579,7 @@ segments:
       - [0x9E9420, "bin"]
       - [0x9EA630, "bin"]
       - [0x9EB3D0, "bin"]
+      - [0x9EB620, "bin"] # rodata
       - [0x9EB640, "bin"] # rodata
   - name: world/area_nok/nok_03/
     type: code
@@ -2571,6 +2629,7 @@ segments:
       - [0x9FAB20, "c"]
       - [0x9FAD60, "c"]
       - [0x9FC6D0, "c"]
+      - [0x9FC8B0, "bin"]
       - [0x9FC970, "bin"]
       - [0x9FD410, "bin"]
       - [0x9FE000, "bin"]
@@ -2585,6 +2644,7 @@ segments:
     files:
       - [0xA00600, "c"]
       - [0xA01420, "c"]
+      - [0xA01A90, "bin"]
       - [0xA01B40, "bin"]
       - [0xA02040, "bin"]
       - [0xA02420, "bin"]
@@ -2621,6 +2681,7 @@ segments:
       - [0xA09750, "bin"]
       - [0xA0AB50, "bin"]
       - [0xA0AB90, "bin"]
+      - [0xA0BBD0, "bin"] # rodata
       - [0xA0BBF0, "bin"] # rodata
       - [0xA0BC50, "bin"] # rodata
       - [0xA0BCA8, "bin"] # rodata
@@ -2640,6 +2701,7 @@ segments:
       - [0xA0D7A0, "bin"]
       - [0xA0E520, "bin"]
       - [0xA107E0, "bin"]
+      - [0xA10820, "bin"] # rodata
       - [0xA10830, "bin"] # rodata
       - [0xA10870, "bin"] # rodata
       - [0xA10880, "bin"] # rodata
@@ -2699,6 +2761,7 @@ segments:
       - [0xA274B0, "c"]
       - [0xA27A30, "c"]
       - [0xA27AA0, "c"]
+      - [0xA27D60, "bin"]
       - [0xA27F20, "bin"]
       - [0xA285C0, "bin"]
       - [0xA28920, "bin"]
@@ -2738,6 +2801,7 @@ segments:
       - [0xA394E0, "c"]
       - [0xA397F0, "c"]
       - [0xA3B4B0, "c"]
+      - [0xA3BA40, "bin"]
       - [0xA3BAE0, "bin"]
       - [0xA3C090, "bin"]
       - [0xA3DAB0, "bin"]
@@ -2756,6 +2820,7 @@ segments:
       - [0xA40540, "bin"]
       - [0xA42DA0, "bin"]
       - [0xA43920, "bin"]
+      - [0xA45910, "bin"] # rodata
       - [0xA45930, "bin"] # rodata
   - name: world/area_hos/hos_20/
     type: code
@@ -2788,6 +2853,7 @@ segments:
       - [0xA485C0, "c"]
       - [0xA48720, "c"]
       - [0xA4A410, "c"]
+      - [0xA4A480, "bin"]
       - [0xA4A520, "bin"]
       - [0xA4A750, "bin"]
       - [0xA4BE30, "bin"] # rodata
@@ -2800,6 +2866,7 @@ segments:
     vram: 0x80240000
     files:
       - [0xA4BF60, "c"]
+      - [0xA4C0D0, "bin"]
       - [0xA4C1A0, "bin"]
       - [0xA4CA10, "bin"] # rodata
   - name: world/area_kpa/kpa_08/
@@ -2901,6 +2968,7 @@ segments:
       - [0xA596A0, "c"]
       - [0xA59960, "bin"]
       - [0xA59E30, "bin"]
+      - [0xA5A020, "bin"] # rodata
       - [0xA5A030, "bin"] # rodata
   - name: world/area_kpa/kpa_16/
     type: code
@@ -2932,6 +3000,7 @@ segments:
       - [0xA5E3D0, "bin"]
       - [0xA5E4C0, "bin"]
       - [0xA5E500, "bin"]
+      - [0xA5F060, "bin"] # rodata
   - name: world/area_kpa/kpa_33/
     type: code
     start: 0xA5F080
@@ -2941,6 +3010,7 @@ segments:
       - [0xA5F390, "bin"]
       - [0xA5F480, "bin"]
       - [0xA5F4C0, "bin"]
+      - [0xA60020, "bin"] # rodata
   - name: world/area_kpa/kpa_40/
     type: code
     start: 0xA60040
@@ -2948,6 +3018,7 @@ segments:
     files:
       - [0xA60040, "bin"]
       - [0xA60130, "bin"]
+      - [0xA60450, "bin"] # rodata
       - [0xA60470, "bin"] # rodata
   - name: world/area_kpa/kpa_41/
     type: code
@@ -2964,7 +3035,9 @@ segments:
     vram: 0x80240000
     files:
       - [0xA609D0, "c"]
+      - [0xA623F0, "bin"]
       - [0xA624D0, "bin"]
+      - [0xA63E60, "bin"] # rodata
       - [0xA64090, "bin"] # rodata
   - name: world/area_kpa/kpa_51/
     type: code
@@ -2973,6 +3046,7 @@ segments:
     files:
       - [0xA64090, "c"]
       - [0xA640E0, "c"]
+      - [0xA65CB0, "bin"]
       - [0xA65D80, "bin"]
       - [0xA660E0, "bin"]
       - [0xA66FB0, "bin"] # rodata
@@ -3015,6 +3089,7 @@ segments:
       - [0xA6CB00, "c"]
       - [0xA6CBE0, "c"]
       - [0xA6CEF0, "bin"]
+      - [0xA6E3A0, "bin"] # rodata
       - [0xA6E3E0, "bin"] # rodata
   - name: world/area_kpa/kpa_61/
     type: code
@@ -3040,6 +3115,7 @@ segments:
       - [0xA72300, "c"]
       - [0xA72610, "bin"]
       - [0xA72740, "bin"]
+      - [0xA73590, "bin"] # rodata
   - name: world/area_kpa/kpa_63/
     type: code
     start: 0xA735B0
@@ -3050,6 +3126,7 @@ segments:
       - [0xA738E0, "bin"]
       - [0xA73920, "bin"]
       - [0xA73D30, "bin"]
+      - [0xA74860, "bin"] # rodata
   - name: world/area_kpa/kpa_70/
     type: code
     start: 0xA74870
@@ -3060,6 +3137,7 @@ segments:
       - [0xA75360, "bin"]
       - [0xA75440, "bin"]
       - [0xA75B70, "bin"]
+      - [0xA78450, "bin"] # rodata
       - [0xA784C0, "bin"] # rodata
   - name: world/area_kpa/kpa_81/
     type: code
@@ -3068,6 +3146,7 @@ segments:
     files:
       - [0xA784C0, "c"]
       - [0xA78510, "c"]
+      - [0xA78900, "bin"]
       - [0xA789F0, "bin"]
       - [0xA79200, "bin"]
       - [0xA7A4C0, "bin"] # rodata
@@ -3079,8 +3158,10 @@ segments:
     files:
       - [0xA7A500, "c"]
       - [0xA7A550, "c"]
+      - [0xA7A940, "bin"]
       - [0xA7AA10, "bin"]
       - [0xA7AF80, "bin"]
+      - [0xA83460, "bin"] # rodata
       - [0xA83490, "bin"] # rodata
   - name: world/area_kpa/kpa_83/
     type: code
@@ -3122,6 +3203,7 @@ segments:
     files:
       - [0xA8C7C0, "bin"]
       - [0xA8C890, "bin"]
+      - [0xA8CA70, "bin"] # rodata
   - name: world/area_kpa/kpa_95/
     type: code
     start: 0xA8CA80
@@ -3129,6 +3211,7 @@ segments:
     files:
       - [0xA8CA80, "c"]
       - [0xA8CB60, "c"]
+      - [0xA8E390, "bin"]
       - [0xA8E450, "bin"]
       - [0xA8E690, "bin"]
       - [0xA8E970, "bin"]
@@ -3191,6 +3274,7 @@ segments:
       - [0xA9AA20, "bin"]
       - [0xA9ACF0, "bin"]
       - [0xA9C740, "bin"]
+      - [0xA9C7C0, "bin"] # rodata
       - [0xA9C990, "bin"] # rodata
   - name: world/area_kpa/kpa_112/
     type: code
@@ -3297,6 +3381,7 @@ segments:
     files:
       - [0xAA7480, "c"]
       - [0xAA7790, "c"]
+      - [0xAA78F0, "bin"]
       - [0xAA79E0, "bin"]
       - [0xAA8290, "bin"]
       - [0xAA8C70, "bin"]
@@ -3315,6 +3400,7 @@ segments:
       - [0xAAA060, "bin"]
       - [0xAABF00, "bin"]
       - [0xAAC3B0, "bin"]
+      - [0xAAC820, "bin"] # rodata
   - name: world/area_osr/osr_00/
     type: code
     start: 0xAAC830
@@ -3350,6 +3436,7 @@ segments:
       - [0xAB2B00, "bin"]
       - [0xAB2BB0, "bin"]
       - [0xAB5D40, "bin"]
+      - [0xAB6270, "bin"] # rodata
       - [0xAB6290, "bin"] # rodata
   - name: world/area_osr/osr_03/
     type: code
@@ -3363,6 +3450,7 @@ segments:
       - [0xAB7E20, "bin"]
       - [0xAB8350, "bin"]
       - [0xAB8B10, "bin"]
+      - [0xAB9270, "bin"] # rodata
       - [0xAB92B0, "bin"] # rodata
   - name: world/area_osr/osr_04/
     type: code
@@ -3370,6 +3458,7 @@ segments:
     vram: 0x80240000
     files:
       - [0xAB92B0, "c"]
+      - [0xAB9370, "bin"]
       - [0xAB95D0, "bin"]
       - [0xABB260, "bin"] # rodata
       - [0xABB290, "bin"] # rodata
@@ -3393,6 +3482,7 @@ segments:
     vram: 0x80240000
     files:
       - [0xAC5170, "c"]
+      - [0xAC6000, "bin"]
       - [0xAC6140, "bin"]
       - [0xAC67E0, "bin"]
       - [0xAC8B60, "bin"] # rodata
@@ -3405,6 +3495,7 @@ segments:
       - [0xAC8D20, "bin"]
       - [0xAC8E40, "bin"]
       - [0xAC9160, "bin"]
+      - [0xAC9700, "bin"] # rodata
   - name: world/area_kkj/kkj_03/
     type: code
     start: 0xAC9710
@@ -3453,6 +3544,7 @@ segments:
     files:
       - [0xAD4090, "c"]
       - [0xAD4100, "c"]
+      - [0xAD4940, "bin"]
       - [0xAD5EA0, "bin"] # rodata
   - name: world/area_kkj/kkj_13/
     type: code
@@ -3462,6 +3554,7 @@ segments:
       - [0xAD5ED0, "c"]
       - [0xAD5EF0, "c"]
       - [0xAD6200, "c"]
+      - [0xAD6630, "bin"]
       - [0xAD6780, "bin"]
       - [0xAD6820, "bin"]
       - [0xAD6E60, "bin"]
@@ -3522,6 +3615,7 @@ segments:
       - [0xAEE7F0, "bin"]
       - [0xAF09D0, "bin"]
       - [0xAF1B10, "bin"]
+      - [0xAF1C10, "bin"] # rodata
   - name: world/area_kkj/kkj_17/
     type: code
     start: 0xAF1C60
@@ -3560,6 +3654,7 @@ segments:
       - [0xAF8B40, "bin"]
       - [0xAF9050, "bin"]
       - [0xAF9460, "bin"]
+      - [0xAFDAF0, "bin"] # rodata
       - [0xAFDB40, "bin"] # rodata
   - name: world/area_kkj/kkj_20/
     type: code
@@ -3603,6 +3698,7 @@ segments:
       - [0xB036B0, "bin"]
       - [0xB04420, "bin"]
       - [0xB04FB0, "bin"]
+      - [0xB06530, "bin"] # rodata
       - [0xB06550, "bin"] # rodata
   - name: world/area_kkj/kkj_24/
     type: code
@@ -3610,6 +3706,7 @@ segments:
     vram: 0x80240000
     files:
       - [0xB06570, "c"]
+      - [0xB06590, "bin"]
       - [0xB06640, "bin"]
       - [0xB069B0, "bin"]
       - [0xB069F0, "bin"] # rodata
@@ -3623,6 +3720,7 @@ segments:
       - [0xB06A50, "c"]
       - [0xB06A80, "c"]
       - [0xB06D10, "c"]
+      - [0xB07940, "bin"]
       - [0xB081C0, "bin"]
       - [0xB0B310, "bin"]
       - [0xB0E3A0, "bin"]
@@ -3637,6 +3735,7 @@ segments:
       - [0xB13150, "bin"]
       - [0xB13500, "bin"]
       - [0xB13A40, "bin"]
+      - [0xB13D50, "bin"] # rodata
   - name: world/area_kkj/kkj_26/
     type: code
     start: 0xB13120
@@ -3646,6 +3745,7 @@ segments:
       - [0xB13150, "bin"]
       - [0xB13500, "bin"]
       - [0xB13A40, "bin"]
+      - [0xB13D50, "bin"] # rodata
   - name: world/area_kkj/kkj_27/
     type: code
     start: 0xB13D70
@@ -3653,6 +3753,7 @@ segments:
     files:
       - [0xB13D70, "c"]
       - [0xB14080, "c"]
+      - [0xB14210, "bin"]
       - [0xB14340, "bin"]
       - [0xB143E0, "bin"]
       - [0xB14E90, "bin"] # rodata
@@ -3698,6 +3799,7 @@ segments:
     files:
       - [0xB1AF80, "bin"]
       - [0xB1B240, "bin"]
+      - [0xB1B560, "bin"] # rodata
   - name: world/area_tst/tst_04/
     type: code
     start: 0xB1B570
@@ -3824,6 +3926,7 @@ segments:
       - [0xB45150, "c"]
       - [0xB451F0, "c"]
       - [0xB45730, "c"]
+      - [0xB45860, "bin"]
       - [0xB45A20, "bin"]
       - [0xB461B0, "bin"]
       - [0xB47EC0, "bin"]
@@ -3852,6 +3955,7 @@ segments:
       - [0xB4F170, "bin"]
       - [0xB517F0, "bin"]
       - [0xB523E0, "bin"]
+      - [0xB52470, "bin"] # rodata
       - [0xB524A0, "bin"] # rodata
       - [0xB524E8, "bin"] # rodata
       - [0xB52830, "bin"] # rodata
@@ -3948,6 +4052,7 @@ segments:
     files:
       - [0xB70860, "c"]
       - [0xB71010, "c"]
+      - [0xB71060, "bin"]
       - [0xB710F0, "bin"]
       - [0xB728B0, "bin"]
       - [0xB730A0, "bin"] # rodata
@@ -4019,6 +4124,7 @@ segments:
     vram: 0x80240000
     files:
       - [0xB837C0, "c"]
+      - [0xB837E0, "bin"]
       - [0xB838C0, "bin"]
       - [0xB83B20, "bin"]
       - [0xB83B80, "bin"] # rodata
@@ -4036,6 +4142,7 @@ segments:
     vram: 0x80240000
     files:
       - [0xB83E60, "c"]
+      - [0xB83E80, "bin"]
       - [0xB84110, "bin"]
       - [0xB84170, "bin"] # rodata
   - name: world/area_jan/jan_22/
@@ -4086,6 +4193,7 @@ segments:
       - [0xB98EA0, "bin"]
       - [0xB9A390, "bin"]
       - [0xB9B250, "bin"]
+      - [0xB9B420, "bin"] # rodata
       - [0xB9B480, "bin"] # rodata
   - name: world/area_mim/mim_03/
     type: code
@@ -4097,6 +4205,7 @@ segments:
       - [0xB9BA70, "bin"]
       - [0xB9BE30, "bin"]
       - [0xB9D500, "bin"]
+      - [0xB9D940, "bin"] # rodata
       - [0xB9D960, "bin"] # rodata
   - name: world/area_mim/mim_04/
     type: code
@@ -4188,6 +4297,7 @@ segments:
     vram: 0x80240000
     files:
       - [0xBB59E0, "c"]
+      - [0xBB5B70, "bin"]
       - [0xBB5EB0, "bin"]
       - [0xBB5EF0, "bin"]
       - [0xBB61D0, "bin"]
@@ -4212,6 +4322,7 @@ segments:
     vram: 0x80240000
     files:
       - [0xBBB380, "c"]
+      - [0xBBB960, "bin"]
       - [0xBBBB90, "bin"]
       - [0xBBBE60, "bin"]
       - [0xBBC2B0, "bin"]
@@ -4265,6 +4376,7 @@ segments:
     files:
       - [0xBC7E60, "c"]
       - [0xBC7EB0, "c"]
+      - [0xBC8CE0, "bin"]
       - [0xBC8DE0, "bin"]
       - [0xBC9020, "bin"]
       - [0xBCB260, "bin"]
@@ -4307,6 +4419,7 @@ segments:
       - [0xBD0DB0, "bin"]
       - [0xBD14F0, "bin"]
       - [0xBD1C80, "bin"]
+      - [0xBD3860, "bin"] # rodata
       - [0xBD3870, "bin"] # rodata
   - name: world/area_obk/obk_08/
     type: code
@@ -4321,6 +4434,7 @@ segments:
       - [0xBD50D0, "bin"]
       - [0xBD64D0, "bin"]
       - [0xBD6DD0, "bin"]
+      - [0xBDA730, "bin"] # rodata
       - [0xBDA7B0, "bin"] # rodata
   - name: world/area_obk/obk_09/
     type: code
@@ -4342,6 +4456,7 @@ segments:
     vram: 0x80240000
     files:
       - [0xBDD1B0, "c"]
+      - [0xBDE190, "bin"]
       - [0xBDE2A0, "bin"]
       - [0xBDE480, "bin"]
       - [0xBDEC80, "bin"] # rodata
@@ -4394,6 +4509,7 @@ segments:
       - [0xBEEC80, "bin"]
       - [0xBEEE30, "bin"]
       - [0xBF0580, "bin"]
+      - [0xBF46F0, "bin"] # rodata
       - [0xBF4730, "bin"] # rodata
       - [0xBF4740, "bin"] # rodata
       - [0xBF47A0, "bin"] # rodata
@@ -4487,6 +4603,7 @@ segments:
       - [0xC00DD0, "bin"]
       - [0xC01770, "bin"]
       - [0xC047F0, "bin"]
+      - [0xC20C70, "bin"] # rodata
       - [0xC20CF8, "bin"] # rodata
       - [0xC20F40, "bin"] # rodata
   - name: world/area_dgb/dgb_02/
@@ -4506,6 +4623,7 @@ segments:
     files:
       - [0xC314E0, "c"]
       - [0xC31730, "c"]
+      - [0xC33CB0, "bin"]
       - [0xC33DF0, "bin"]
       - [0xC345C0, "bin"]
       - [0xC34C20, "bin"]
@@ -4533,6 +4651,7 @@ segments:
       - [0xC3C200, "bin"]
       - [0xC3C280, "bin"]
       - [0xC3C2D0, "bin"]
+      - [0xC3CD40, "bin"] # rodata
   - name: world/area_dgb/dgb_06/
     type: code
     start: 0xC3D080
@@ -4565,6 +4684,7 @@ segments:
       - [0xC43B40, "bin"]
       - [0xC43EB0, "bin"]
       - [0xC46790, "bin"]
+      - [0xC467A0, "bin"] # rodata
       - [0xC467B0, "bin"] # rodata
       - [0xC46B40, "bin"] # rodata
   - name: world/area_dgb/dgb_09/
@@ -4585,6 +4705,7 @@ segments:
     vram: 0x80240000
     files:
       - [0xC4C390, "c"]
+      - [0xC4C580, "bin"]
       - [0xC4C680, "bin"]
       - [0xC4CA00, "bin"]
       - [0xC4D270, "bin"]
@@ -4608,6 +4729,7 @@ segments:
       - [0xC4E1B0, "bin"]
       - [0xC4E2A0, "bin"]
       - [0xC4E760, "bin"]
+      - [0xC4E950, "bin"] # rodata
       - [0xC4E960, "bin"] # rodata
   - name: world/area_dgb/dgb_13/
     type: code
@@ -4617,6 +4739,7 @@ segments:
       - [0xC4E960, "bin"]
       - [0xC4EA50, "bin"]
       - [0xC4ECE0, "bin"]
+      - [0xC4F020, "bin"] # rodata
       - [0xC4F030, "bin"] # rodata
   - name: world/area_dgb/dgb_14/
     type: code
@@ -4638,6 +4761,7 @@ segments:
       - [0xC50ED0, "bin"]
       - [0xC513B0, "bin"]
       - [0xC51FE0, "bin"]
+      - [0xC521E0, "bin"] # rodata
       - [0xC52200, "bin"] # rodata
   - name: world/area_dgb/dgb_16/
     type: code
@@ -4649,6 +4773,7 @@ segments:
       - [0xC53A60, "bin"]
       - [0xC53CC0, "bin"]
       - [0xC53D00, "bin"]
+      - [0xC55720, "bin"] # rodata
       - [0xC55730, "bin"] # rodata
   - name: world/area_dgb/dgb_17/
     type: code
@@ -4689,6 +4814,7 @@ segments:
       - [0xC5AA50, "c"]
       - [0xC5AC20, "c"]
       - [0xC5CE70, "c"]
+      - [0xC5CF60, "bin"]
       - [0xC5D9B0, "bin"]
       - [0xC609C0, "bin"]
       - [0xC60C30, "bin"] # rodata
@@ -4719,6 +4845,7 @@ segments:
       - [0xC68130, "c"]
       - [0xC68440, "c"]
       - [0xC69180, "c"]
+      - [0xC69890, "bin"]
       - [0xC69D70, "bin"]
       - [0xC6A420, "bin"]
       - [0xC6C0C0, "bin"] # rodata
@@ -4790,7 +4917,9 @@ segments:
     files:
       - [0xC7E180, "c"]
       - [0xC7E4B0, "c"]
+      - [0xC7E850, "bin"]
       - [0xC7EE90, "bin"]
+      - [0xC80170, "bin"] # rodata
       - [0xC801A0, "bin"] # rodata
   - name: world/area_kzn/kzn_11/
     type: code
@@ -4803,6 +4932,7 @@ segments:
       - [0xC82800, "bin"]
       - [0xC83180, "bin"]
       - [0xC83870, "bin"]
+      - [0xC859E0, "bin"] # rodata
       - [0xC85A48, "bin"] # rodata
       - [0xC85AB0, "bin"] # rodata
   - name: world/area_kzn/kzn_17/
@@ -4815,6 +4945,7 @@ segments:
       - [0xC887B0, "c"]
       - [0xC88B50, "bin"]
       - [0xC89450, "bin"]
+      - [0xC8BE40, "bin"] # rodata
       - [0xC8C080, "bin"] # rodata
   - name: world/area_kzn/kzn_18/
     type: code
@@ -4825,6 +4956,7 @@ segments:
       - [0xC8C0E0, "c"]
       - [0xC8C3F0, "c"]
       - [0xC8C460, "bin"]
+      - [0xC8DBA0, "bin"] # rodata
   - name: world/area_kzn/kzn_19/
     type: code
     start: 0xC8DBB0
@@ -4837,6 +4969,7 @@ segments:
       - [0xC90BF0, "bin"]
       - [0xC959B0, "bin"]
       - [0xC95E70, "bin"]
+      - [0xC95EF0, "bin"] # rodata
       - [0xC95F20, "bin"] # rodata
       - [0xC95F30, "bin"] # rodata
   - name: world/area_kzn/kzn_20/
@@ -4856,6 +4989,7 @@ segments:
     files:
       - [0xC9A200, "c"]
       - [0xC9A540, "c"]
+      - [0xC9A590, "bin"]
       - [0xC9A650, "bin"]
       - [0xC9B120, "bin"]
       - [0xC9C2F0, "bin"] # rodata
@@ -4977,6 +5111,7 @@ segments:
       - [0xCC1520, "bin"]
       - [0xCC16A0, "bin"]
       - [0xCC1C60, "bin"]
+      - [0xCC3800, "bin"] # rodata
   - name: world/area_flo/flo_13/
     type: code
     start: 0xCC3810
@@ -5016,6 +5151,7 @@ segments:
       - [0xCD09C0, "bin"]
       - [0xCD19A0, "bin"]
       - [0xCD1A20, "bin"]
+      - [0xCD1E20, "bin"] # rodata
   - name: world/area_flo/flo_16/
     type: code
     start: 0xCD1E30
@@ -5026,9 +5162,11 @@ segments:
       - [0xCD1F10, "c"]
       - [0xCD2C80, "c"]
       - [0xCD4770, "c"]
+      - [0xCD47A0, "bin"]
       - [0xCD5530, "bin"]
       - [0xCD5E40, "bin"]
       - [0xCD6330, "bin"]
+      - [0xCD7210, "bin"] # rodata
       - [0xCD7278, "bin"] # rodata
       - [0xCD72E0, "bin"] # rodata
   - name: world/area_flo/flo_17/
@@ -5064,6 +5202,7 @@ segments:
     vram: 0x80240000
     files:
       - [0xCE36F0, "c"]
+      - [0xCE4030, "bin"]
       - [0xCE41B0, "bin"]
       - [0xCE41F0, "bin"]
       - [0xCE4740, "bin"]
@@ -5076,7 +5215,9 @@ segments:
     files:
       - [0xCE6700, "c"]
       - [0xCE7240, "c"]
+      - [0xCE73F0, "bin"]
       - [0xCE7EC0, "bin"]
+      - [0xCEC210, "bin"] # rodata
       - [0xCEC240, "bin"] # rodata
   - name: world/area_flo/flo_22/
     type: code
@@ -5097,6 +5238,7 @@ segments:
     files:
       - [0xCEE260, "c"]
       - [0xCEE2A0, "c"]
+      - [0xCEEF30, "bin"]
       - [0xCEF540, "bin"]
       - [0xCF0800, "bin"]
       - [0xCF08D0, "bin"] # rodata
@@ -5150,11 +5292,13 @@ segments:
     files:
       - [0xD05730, "c"]
       - [0xD05F60, "c"]
+      - [0xD072F0, "bin"]
       - [0xD07440, "bin"]
       - [0xD09570, "bin"]
       - [0xD09AD0, "bin"]
       - [0xD0C294, "bin"]
       - [0xD10DA0, "bin"]
+      - [0xD110A0, "bin"] # rodata
       - [0xD110C0, "bin"] # rodata
   - name: world/area_sam/sam_03/
     type: code
@@ -5162,6 +5306,7 @@ segments:
     vram: 0x80240000
     files:
       - [0xD110C0, "c"]
+      - [0xD119E0, "bin"]
       - [0xD11A70, "bin"]
       - [0xD11D40, "bin"]
       - [0xD13420, "bin"] # rodata
@@ -5174,10 +5319,12 @@ segments:
       - [0xD135D0, "c"]
       - [0xD13810, "c"]
       - [0xD138E0, "c"]
+      - [0xD13CD0, "bin"]
       - [0xD13D80, "bin"]
       - [0xD15010, "bin"]
       - [0xD16E20, "bin"]
       - [0xD18720, "bin"]
+      - [0xD187C0, "bin"] # rodata
       - [0xD187E0, "bin"] # rodata
   - name: world/area_sam/sam_05/
     type: code
@@ -5185,10 +5332,12 @@ segments:
     vram: 0x80240000
     files:
       - [0xD187E0, "c"]
+      - [0xD1A520, "bin"]
       - [0xD1A5B0, "bin"]
       - [0xD1A890, "bin"]
       - [0xD1A900, "bin"]
       - [0xD1F780, "bin"]
+      - [0xD1FCB0, "bin"] # rodata
       - [0xD1FE90, "bin"] # rodata
   - name: world/area_sam/sam_06/
     type: code
@@ -5215,6 +5364,7 @@ segments:
       - [0xD2E0B0, "bin"]
       - [0xD2E1F0, "bin"]
       - [0xD2E9C0, "bin"]
+      - [0xD2FAA0, "bin"] # rodata
       - [0xD2FC80, "bin"] # rodata
   - name: world/area_sam/sam_08/
     type: code
@@ -5238,6 +5388,7 @@ segments:
       - [0xD366F0, "bin"]
       - [0xD36780, "bin"]
       - [0xD369A0, "bin"]
+      - [0xD377F0, "bin"] # rodata
   - name: world/area_sam/sam_10/
     type: code
     start: 0xD37800
@@ -5245,6 +5396,7 @@ segments:
     files:
       - [0xD37800, "c"]
       - [0xD37BD0, "c"]
+      - [0xD384A0, "bin"]
       - [0xD38550, "bin"]
       - [0xD38840, "bin"]
       - [0xD3A410, "bin"] # rodata
@@ -5260,10 +5412,12 @@ segments:
       - [0xD3A850, "c"]
       - [0xD3A930, "c"]
       - [0xD3ADA0, "c"]
+      - [0xD3C740, "bin"]
       - [0xD3C850, "bin"]
       - [0xD3D900, "bin"]
       - [0xD46980, "bin"]
       - [0xD48C40, "bin"]
+      - [0xD4B9E0, "bin"] # rodata
       - [0xD4BA00, "bin"] # rodata
       - [0xD4BA20, "bin"] # rodata
   - name: world/area_sam/sam_12/
@@ -5273,6 +5427,7 @@ segments:
     files:
       - [0xD4BA20, "c"]
       - [0xD4BAB0, "c"]
+      - [0xD4BDC0, "bin"]
       - [0xD4BE40, "bin"]
       - [0xD4BFE0, "bin"]
       - [0xD4C2A0, "bin"]
@@ -5290,6 +5445,7 @@ segments:
       - [0xD4E500, "bin"]
       - [0xD4EF50, "bin"]
       - [0xD4FFC0, "bin"]
+      - [0xD4FFD0, "bin"] # rodata
       - [0xD4FFF0, "bin"] # rodata
   - name: world/area_pra/pra_02/
     type: code
@@ -5328,6 +5484,7 @@ segments:
       - [0xD55080, "bin"]
       - [0xD554E0, "bin"]
       - [0xD55840, "bin"]
+      - [0xD55B40, "bin"] # rodata
       - [0xD55B60, "bin"] # rodata
   - name: world/area_pra/pra_05/
     type: code
@@ -5338,6 +5495,7 @@ segments:
       - [0xD55BD0, "c"]
       - [0xD56D90, "bin"]
       - [0xD56E20, "bin"]
+      - [0xD57420, "bin"] # rodata
       - [0xD57430, "bin"] # rodata
   - name: world/area_pra/pra_06/
     type: code
@@ -5345,6 +5503,7 @@ segments:
     vram: 0x80240000
     files:
       - [0xD57430, "c"]
+      - [0xD58380, "bin"]
       - [0xD58410, "bin"]
       - [0xD58860, "bin"] # rodata
       - [0xD58890, "bin"] # rodata
@@ -5378,6 +5537,7 @@ segments:
       - [0xD626E0, "bin"]
       - [0xD62770, "bin"]
       - [0xD62B10, "bin"]
+      - [0xD62D00, "bin"] # rodata
       - [0xD62D10, "bin"] # rodata
   - name: world/area_pra/pra_12/
     type: code
@@ -5387,6 +5547,7 @@ segments:
       - [0xD62D10, "c"]
       - [0xD63F20, "bin"]
       - [0xD63FB0, "bin"]
+      - [0xD645B0, "bin"] # rodata
       - [0xD645E0, "bin"] # rodata
   - name: world/area_pra/pra_13/
     type: code
@@ -5398,6 +5559,7 @@ segments:
       - [0xD65BC0, "bin"]
       - [0xD65C70, "bin"]
       - [0xD66880, "bin"]
+      - [0xD67CF0, "bin"] # rodata
   - name: world/area_pra/pra_14/
     type: code
     start: 0xD67D00
@@ -5417,6 +5579,7 @@ segments:
     files:
       - [0xD69810, "c"]
       - [0xD69830, "c"]
+      - [0xD69850, "bin"]
       - [0xD698E0, "bin"]
       - [0xD69AD0, "bin"]
       - [0xD69B10, "bin"] # rodata
@@ -5428,6 +5591,7 @@ segments:
     files:
       - [0xD69B20, "c"]
       - [0xD69B40, "c"]
+      - [0xD6AA40, "bin"]
       - [0xD6AAF0, "bin"]
       - [0xD6B610, "bin"] # rodata
   - name: world/area_pra/pra_18/
@@ -5437,8 +5601,10 @@ segments:
     files:
       - [0xD6B620, "c"]
       - [0xD6B640, "c"]
+      - [0xD6C540, "bin"]
       - [0xD6C5F0, "bin"]
       - [0xD6CF60, "bin"]
+      - [0xD6E9A0, "bin"] # rodata
   - name: world/area_pra/pra_19/
     type: code
     start: 0xD6E9B0
@@ -5457,7 +5623,9 @@ segments:
     files:
       - [0xD763A0, "c"]
       - [0xD763C0, "c"]
+      - [0xD772C0, "bin"]
       - [0xD77390, "bin"]
+      - [0xD77F00, "bin"] # rodata
   - name: world/area_pra/pra_21/
     type: code
     start: 0xD77F20
@@ -5489,6 +5657,7 @@ segments:
       - [0xD7AC00, "bin"]
       - [0xD7AC90, "bin"]
       - [0xD7B080, "bin"]
+      - [0xD7B270, "bin"] # rodata
       - [0xD7B2A0, "bin"] # rodata
   - name: world/area_pra/pra_28/
     type: code
@@ -5499,6 +5668,7 @@ segments:
       - [0xD7C4B0, "bin"]
       - [0xD7C540, "bin"]
       - [0xD7C930, "bin"]
+      - [0xD7CB20, "bin"] # rodata
       - [0xD7CB50, "bin"] # rodata
   - name: world/area_pra/pra_29/
     type: code
@@ -5510,6 +5680,7 @@ segments:
       - [0xD7DDD0, "bin"]
       - [0xD7DE90, "bin"]
       - [0xD7E9B0, "bin"]
+      - [0xD7ED50, "bin"] # rodata
   - name: world/area_pra/pra_31/
     type: code
     start: 0xD7ED60
@@ -5522,6 +5693,7 @@ segments:
       - [0xD7FEC0, "bin"]
       - [0xD80E20, "bin"]
       - [0xD81250, "bin"]
+      - [0xD869E0, "bin"] # rodata
       - [0xD86A00, "bin"] # rodata
   - name: world/area_pra/pra_32/
     type: code
@@ -5541,6 +5713,7 @@ segments:
     files:
       - [0xD896E0, "c"]
       - [0xD89700, "c"]
+      - [0xD8A770, "bin"]
       - [0xD8A820, "bin"]
       - [0xD8B060, "bin"]
       - [0xD8B3A0, "bin"] # rodata
@@ -5567,6 +5740,7 @@ segments:
       - [0xD8FF10, "bin"]
       - [0xD90700, "bin"]
       - [0xD91030, "bin"]
+      - [0xD91220, "bin"] # rodata
       - [0xD91700, "bin"] # rodata
   - name: world/area_pra/pra_36/
     type: code
@@ -5574,6 +5748,7 @@ segments:
     vram: 0x80240000
     files:
       - [0xD91700, "c"]
+      - [0xD92650, "bin"]
       - [0xD926F0, "bin"]
       - [0xD92F10, "bin"] # rodata
       - [0xD92F40, "bin"] # rodata
@@ -5583,6 +5758,7 @@ segments:
     vram: 0x80240000
     files:
       - [0xD92F40, "c"]
+      - [0xD94760, "bin"]
       - [0xD94800, "bin"]
       - [0xD95420, "bin"] # rodata
       - [0xD95450, "bin"] # rodata
@@ -5614,6 +5790,7 @@ segments:
     files:
       - [0xD999B0, "c"]
       - [0xD999D0, "c"]
+      - [0xD9A8D0, "bin"]
       - [0xD9A970, "bin"]
       - [0xD9AE80, "bin"]
       - [0xD9AEE0, "bin"] # rodata
@@ -5665,6 +5842,7 @@ segments:
       - [0xDAF240, "c"]
       - [0xDAF320, "bin"]
       - [0xDAF3E0, "bin"]
+      - [0xDB20A0, "bin"] # rodata
       - [0xDB20B0, "bin"] # rodata
       - [0xDB2108, "bin"] # rodata
       - [0xDB22B0, "bin"] # rodata
@@ -5708,6 +5886,7 @@ segments:
       - [0xDC0B80, "bin"]
       - [0xDC30B0, "bin"]
       - [0xDC3730, "bin"]
+      - [0xDC3E70, "bin"] # rodata
       - [0xDC3E80, "bin"] # rodata
       - [0xDC43C0, "bin"] # rodata
       - [0xDC43D0, "bin"] # rodata
@@ -5741,6 +5920,7 @@ segments:
       - [0xDD3520, "bin"]
       - [0xDD4150, "bin"]
       - [0xDD6BB0, "bin"]
+      - [0xDD72F0, "bin"] # rodata
       - [0xDD7300, "bin"] # rodata
       - [0xDD79A0, "bin"] # rodata
       - [0xDD79B0, "bin"] # rodata
@@ -5766,6 +5946,7 @@ segments:
       - [0xDDDD00, "bin"]
       - [0xDDDD90, "bin"]
       - [0xDDEE80, "bin"]
+      - [0xDDF300, "bin"] # rodata
   - name: world/area_omo/omo_12/
     type: code
     start: 0xDDF310
@@ -5776,6 +5957,7 @@ segments:
       - [0xDDF7D0, "bin"]
       - [0xDDF960, "bin"]
       - [0xDDFB60, "bin"]
+      - [0xDE2470, "bin"] # rodata
   - name: world/area_omo/omo_13/
     type: code
     start: 0xDE2490
@@ -5788,6 +5970,7 @@ segments:
       - [0xDE3A10, "bin"]
       - [0xDE3F70, "bin"]
       - [0xDE5100, "bin"]
+      - [0xDE5360, "bin"] # rodata
   - name: world/area_omo/omo_14/
     type: code
     start: 0xDE56B0
@@ -5795,6 +5978,7 @@ segments:
     files:
       - [0xDE56B0, "c"]
       - [0xDE5810, "c"]
+      - [0xDE5C70, "bin"]
       - [0xDE5D00, "bin"]
       - [0xDE5FA0, "bin"]
       - [0xDE8760, "bin"] # rodata
@@ -5814,6 +5998,7 @@ segments:
     vram: 0x80240000
     files:
       - [0xDEBED0, "c"]
+      - [0xDEC4D0, "bin"]
       - [0xDEC600, "bin"]
       - [0xDEEC30, "bin"]
       - [0xDEEE80, "bin"] # rodata
@@ -5848,6 +6033,7 @@ segments:
       - [0xE019E0, "bin"]
       - [0xE04180, "bin"]
       - [0xE052C0, "bin"]
+      - [0xE05300, "bin"] # rodata
   - name: world/area_end/end_01/
     type: code
     start: 0xE05360
@@ -5863,6 +6049,7 @@ segments:
       - [0xE0C0C0, "bin"]
       - [0xE0D510, "bin"]
       - [0xE0E700, "bin"]
+      - [0xE0E740, "bin"] # rodata
   - name: world/area_mgm/mgm_00/
     type: code
     start: 0xE0E7A0
@@ -5886,6 +6073,7 @@ segments:
       - [0xE13F10, "bin"]
       - [0xE141D0, "bin"]
       - [0xE15440, "bin"]
+      - [0xE15D10, "bin"] # rodata
       - [0xE15D80, "bin"] # rodata
   - name: world/area_mgm/mgm_02/
     type: code
@@ -5897,6 +6085,7 @@ segments:
       - [0xE18180, "bin"]
       - [0xE183D0, "bin"]
       - [0xE1E020, "bin"]
+      - [0xE1E260, "bin"] # rodata
       - [0xE1E380, "bin"] # rodata
   - name: world/area_mgm/mgm_03/
     type: code
