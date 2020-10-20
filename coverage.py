@@ -80,17 +80,19 @@ if __name__ == "__main__":
         print("--fail-unincluded           exit with error code 2 if unincluded assembly files exist")
         print("--delete-matched            delete matched function(s) from asm/nonmatchings/ without asking")
         print("--delete-unincluded         delete unincluded, unmatched assembly files")
+        print("--skip-sizes                don't attempt to read build/papermario.map to determine sizes")
         exit()
 
     total = len(matched) + len(non_matched)
     print(f"{len(matched)}+{len(partial_matched)} / {total} functions ({(len(matched) / total) * 100:.2f}%)")
 
-    function_sizes = parse_map_file()
-    size_matched = sum(function_sizes.get(f, 0) for f in matched)
-    size_partial_matched = sum(function_sizes.get(f, 0) for f in partial_matched)
-    size_non_matched = sum(function_sizes.get(f, 0) for f in non_matched)
-    size_total = size_matched + size_non_matched
-    print(f"{size_matched}+{size_partial_matched} / {size_total} bytes ({(size_matched / size_total) * 100:.2f}%)")
+    if not "--skip-sizes" in argv:
+        function_sizes = parse_map_file()
+        size_matched = sum(function_sizes.get(f, 0) for f in matched)
+        size_partial_matched = sum(function_sizes.get(f, 0) for f in partial_matched)
+        size_non_matched = sum(function_sizes.get(f, 0) for f in non_matched)
+        size_total = size_matched + size_non_matched
+        print(f"{size_matched}+{size_partial_matched} / {size_total} bytes ({(size_matched / size_total) * 100:.2f}%)")
 
     if len(matched_but_undeleted_asm) > 0:
         print(f"The following functions have been matched but still exist in asm/nonmatchings/: {' '.join(matched_but_undeleted_asm)}")

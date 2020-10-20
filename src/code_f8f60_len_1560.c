@@ -119,7 +119,7 @@ ApiStatus IsPlayerWithin(ScriptInstance* script, s32 isInitialCall) {
     s32* distanceRequired = &script->functionTemp[2];
 
     f32 distance;
-    Bytecode outVar = SI_VAR_0;
+    Bytecode outVar = SI_VAR(0);
 
     if (isInitialCall) {
         *targetX = get_variable(script, *ptrReadPos++);
