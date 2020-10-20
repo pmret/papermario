@@ -7,24 +7,24 @@ void func_802BD100_325070(Npc* npc) {
 }
 
 ApiStatus func_802BD110(ScriptInstance* script, s32 isInitialCall) {
-    s32 ownerID = script->ownerID;
+    Npc* owner = script->owner2.npc;
 
     if (isInitialCall) {
-        func_800EECC4(ownerID);
+        func_800EECC4(owner);
     }
-    return func_800EECE8(ownerID) != 0;
+    return func_800EECE8(owner) != 0;
 }
 
 ApiStatus func_802BD148_325070(ScriptInstance* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
-    s32 ownerID = script->ownerID;
+    Npc* owner = script->owner2.npc;
 
     if (isInitialCall) {
-        enable_partner_flying(ownerID, TRUE);
+        enable_partner_flying(owner, TRUE);
     }
 
-    update_player_move_history(ownerID);
-    func_800ED5D0(ownerID);
+    update_player_move_history(owner);
+    func_800ED5D0(owner);
     playerData->unk_2F4[PartnerId_TWINK]++;
 
     return ApiStatus_BLOCK;
@@ -35,10 +35,10 @@ ApiStatus func_802BD1A8(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus func_802BD1B0(ScriptInstance* script, s32 isInitialCall) {
-    s32 ownerID = script->ownerID;
+    Npc* owner = script->owner2.npc;
 
     if (isInitialCall) {
-        func_800EE994(ownerID);
+        func_800EE994(owner);
     }
-    return func_800EE9B8(ownerID) != 0;
+    return func_800EE9B8(owner) != 0;
 }

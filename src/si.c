@@ -864,8 +864,8 @@ ApiStatus si_handle_exec1(ScriptInstance* script) {
     newScript = start_script_in_group((ScriptInstance*)get_variable(script, *script->ptrReadPos), script->priority, 0,
                                       script->groupFlags);
 
-    newScript->ownerActorID = script->ownerActorID;
-    newScript->ownerID = script->ownerID;
+    newScript->owner1 = script->owner1;
+    newScript->owner2 = script->owner2;
 
     i = 0;
     while (i < ARRAY_COUNT(script->varTable)) {
@@ -892,8 +892,8 @@ ApiStatus si_handle_exec2(ScriptInstance* script) {
 
     newScript = start_script_in_group(var, script->priority, 0, script->groupFlags);
 
-    newScript->ownerActorID = script->ownerActorID;
-    newScript->ownerID = script->ownerID;
+    newScript->owner1 = script->owner1;
+    newScript->owner2 = script->owner2;
 
     for (i = 0; i < ARRAY_COUNT(script->varTable); i++) {
         newScript->varTable[i] = script->varTable[i];
@@ -939,7 +939,7 @@ s32 _bound_script_trigger_handler(Trigger* trigger) {
         script->varTable[0] = trigger->scriptVars[0];
         script->varTable[1] = trigger->scriptVars[1];
         script->varTable[2] = trigger->scriptVars[2];
-        script->ownerID = trigger;
+        script->owner2.trigger = trigger;
     }
 
     if (!does_script_exist(trigger->runningScriptID)) {
@@ -988,7 +988,7 @@ ApiStatus DeleteTrigger(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus si_handle_unbind(ScriptInstance* script) {
-    delete_trigger(script->ownerID);
+    delete_trigger(script->owner2.trigger);
     return ApiStatus_DONE2;
 }
 
@@ -1059,7 +1059,7 @@ void si_standard_trigger_executor(Trigger* trigger) {
         newScript->varTable[0] = trigger->scriptVars[0];
         newScript->varTable[1] = trigger->scriptVars[1];
         newScript->varTable[2] = trigger->scriptVars[2];
-        newScript->ownerID = trigger;
+        newScript->owner2.trigger = trigger;
     }
 
     if (!does_script_exist(trigger->runningScriptID)) {

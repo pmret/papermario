@@ -34,7 +34,7 @@ ApiStatus ActorSpeak(ScriptInstance* script, s32 isInitialCall) {
         stringID2 = stringID;
 
         if (actorID == ActorId_SELF) {
-            actorID = script->ownerActorID;
+            actorID = script->owner1.actorID;
         }
 
         actor = get_actor(actorID);
@@ -145,7 +145,7 @@ ApiStatus PlaySoundAtActor(ScriptInstance* script, s32 isInitialCall) {
     Actor* actor;
 
     if (actorID == ActorId_SELF) {
-        actorID = script->ownerActorID;
+        actorID = script->owner1.actorID;
     }
 
     actor = get_actor(actorID);
@@ -202,7 +202,7 @@ INCLUDE_ASM(s32, "code_181810", func_80253FB0);
 
 ApiStatus MultiplyByActorScale(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    Actor* actor = get_actor(script->ownerActorID);
+    Actor* actor = get_actor(script->owner1.actorID);
 
     set_float_variable(script, *args, get_float_variable(script, *args) * actor->scalingFactor);
     return ApiStatus_DONE2;

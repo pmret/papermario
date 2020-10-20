@@ -6,12 +6,12 @@ void func_802BD100_324A10(Npc* npc) {
 }
 
 ApiStatus func_802BD114(ScriptInstance* script, s32 isInitialCall) {
-    s32 ownerID = script->ownerID;
+    Npc* owner = script->owner2.npc;
 
     if (isInitialCall) {
-        func_800EECC4(ownerID);
+        func_800EECC4(owner);
     }
-    return func_800EECE8(ownerID) != 0;
+    return func_800EECE8(owner) != 0;
 }
 
 
@@ -24,10 +24,10 @@ ApiStatus func_802BD524(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus func_802BD52C(ScriptInstance* script, s32 isInitialCall) {
-    s32 ownerID = script->ownerID;
+    Npc* owner = script->owner2.npc;
 
     if (isInitialCall) {
-        func_800EE994(ownerID);
+        func_800EE994(owner);
     }
-    return func_800EE9B8(ownerID) != 0;
+    return func_800EE9B8(owner) != 0;
 }
