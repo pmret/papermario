@@ -10,7 +10,7 @@ MapHeader header = {
     .entryList = entryList,
     .entryCount = ENTRY_COUNT(entryList),
     .background = 0x80200000,
-    .tattle = 0x00190040,
+    .tattle = MessageID_TATTLE_KMR_12,
 };
 
 Script kmr_12_play_music = {

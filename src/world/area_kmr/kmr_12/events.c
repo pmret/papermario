@@ -68,7 +68,7 @@ static Script read_west_sign = {
     // "Eat a Mushroom to regain your energy!"
     SI_SUSPEND_GROUP(1),
     SI_CALL(DisablePlayerInput, TRUE),
-    SI_CALL(ShowMessageAtScreenPos, 0x1D0167, 160, 40),
+    SI_CALL(ShowMessageAtScreenPos, MessageID_SIGN_MUSHROOM_GOOMBA_TRAP, 160, 40),
     SI_RESUME_GROUP(1),
 
     SI_SET(SI_FLAG(0), FALSE),
@@ -204,10 +204,9 @@ static Script read_east_sign = {
 
     SI_GROUP(0),
 
-    // "Goomba King's Fortress Ahead"
     SI_CALL(func_802D5830, 1),
     SI_CALL(DisablePlayerInput, 1),
-    SI_CALL(ShowMessageAtScreenPos, 0x1D0168, 160, 40),
+    SI_CALL(ShowMessageAtScreenPos, MessageID_SIGN_GOOMBA_KINGS_FORTRESS_AHEAD, 160, 40),
     SI_CALL(DisablePlayerInput, 0),
     SI_CALL(func_802D5830, 0),
 

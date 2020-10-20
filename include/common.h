@@ -9,5 +9,6 @@
 #include "macros.h"
 #include "enums.h"
 #include "si.h"
+#include "messages.h"
 
 #endif
