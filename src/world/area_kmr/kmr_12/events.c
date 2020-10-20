@@ -187,8 +187,8 @@ StaticNpc goomba_npc = {
 };
 
 NpcGroupList npc_groups = {
-    { sizeof(goomba_npc) / sizeof(StaticNpc), &goomba_npc, 0x00010003 },
-    { 0, 0, 0 },
+    NPC_GROUP(goomba_npc, 0x00010003),
+    NPC_GROUP_LIST_END(),
 };
 
 // *INDENT-OFF*
