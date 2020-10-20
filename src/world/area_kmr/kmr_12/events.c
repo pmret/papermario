@@ -193,7 +193,7 @@ NpcGroupList npc_groups = {
 
 // *INDENT-OFF*
 Script read_east_sign = {
-    SI_CALL(0x800441F0, SI_VAR(0)),
+    SI_CALL(func_800441F0, SI_VAR(0)),
     SI_IF_EQ(SI_VAR(0), 1),
         SI_RETURN(),
     SI_END_IF(),
@@ -201,11 +201,11 @@ Script read_east_sign = {
     SI_GROUP(0),
 
     // "Goomba King's Fortress Ahead"
-    SI_CALL(0x802D5830, 1),
+    SI_CALL(func_802D5830, 1),
     SI_CALL(DisablePlayerInput, 1),
     SI_CALL(ShowMessageAtScreenPos, 0x1D0168, 160, 40),
     SI_CALL(DisablePlayerInput, 0),
-    SI_CALL(0x802D5830, 0),
+    SI_CALL(func_802D5830, 0),
 
     SI_RETURN(),
     SI_END(),

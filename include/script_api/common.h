@@ -264,6 +264,8 @@ ApiStatus DemoJoystickXY(ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus func_802CFE2C(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_802CFD30(ScriptInstance* script, s32 isInitialCall);
+ApiStatus func_800441F0(ScriptInstance* script, s32 isInitialCall);
+ApiStatus func_802D5830(ScriptInstance* script, s32 isInitialCall);
 
 extern Bytecode* ShakeCam1;
 extern Bytecode* ShakeCamX;
