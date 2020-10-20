@@ -191,7 +191,7 @@ static StaticNpc goomba_npc = {
 };
 
 static NpcGroupList npc_groups = {
-    NPC_GROUP(goomba_npc, 0x00010003),
+    NPC_GROUP(goomba_npc, FORMATION_ID(1, 0, 3)),
     NPC_GROUP_LIST_END(),
 };
 

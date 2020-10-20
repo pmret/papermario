@@ -192,10 +192,10 @@ typedef struct Enemy {
 typedef struct {
     /* 0x00 */ s32 npcCount;
     /* 0x04 */ StaticNpc* npcs;
-    /* 0x08 */ s32 battleID;
+    /* 0x08 */ FormationID formationID;
 } NpcGroupList[]; // size = 0x0C
 
-#define NPC_GROUP(npcs, battleID) { sizeof(npcs) / sizeof(StaticNpc), &npcs, battleID }
+#define NPC_GROUP(npcs, formationID) { sizeof(npcs) / sizeof(StaticNpc), &npcs, formationID }
 #define NPC_GROUP_LIST_END() { 0, 0, 0 }
 
 Enemy* get_enemy(NpcId npcId);
