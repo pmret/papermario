@@ -89,7 +89,7 @@ $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
 
 $(BUILD_DIR)/$(TARGET).elf: $(O_FILES) $(YAY0_FILES) $(LD_SCRIPT)
-	@$(LD) $(LDFLAGS) -o $@ $(O_FILES)
+	@$(LD) $(LDFLAGS) -o $@
 
 $(BUILD_DIR)/%.o: %.s
 	$(AS) $(ASFLAGS) -o $@ $<
