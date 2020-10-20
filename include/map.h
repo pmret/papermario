@@ -121,6 +121,9 @@ typedef struct StatDrop {
 
 #define ANIMATION(sprite, palette, anim) (sprite << 16) + (palette << 8) + anim
 
+#define OVERRIDE_MOVEMENT_SPEED(speed) (speed * 32767)
+#define NO_OVERRIDE_MOVEMENT_SPEED OVERRIDE_MOVEMENT_SPEED(-1)
+
 typedef struct StaticNPC {
     /* 0x000 */ NpcId id;
     /* 0x004 */ NpcSettings* settings;
@@ -137,7 +140,7 @@ typedef struct StaticNPC {
     /* 0x0DA */ s16 minCoinBonus;
     /* 0x0DC */ s16 maxCoinBonus;
     /* 0x0DE */ char unk_DE[2];
-    /* 0x0E0 */ s32 movement[48];
+    /* 0x0E0 */ s32 movement[48]; // TODO: type
     /* 0x1A0 */ s32 animations[16];
     /* 0x1E0 */ char unk_1E0[8];
     /* 0x1E8 */ UNK_PTR extraAnimations;

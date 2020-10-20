@@ -169,7 +169,20 @@ static StaticNpc goomba_npc = {
     .itemDrops = { { ItemId_MUSHROOM, 10 } },
     .heartDrops = GENEROUS_WHEN_LOW_HEART_DROPS(2),
     .flowerDrops = GENEROUS_WHEN_LOW_FLOWER_DROPS(2),
-    .movement = { 0xFFFFFFDF, 0x0, 0x1E, 0x28, 0x14, 0xFFFF8001, 0x1, 0xC8, 0x0, 0x0, 0x190, 0x3C, 0x1, 0x1 },
+    .movement = {
+        // Wander
+        /* center x, y, z */ -33, 0, 30,
+        /* size x, z */ 40, 20,
+        /* speed */ NO_OVERRIDE_MOVEMENT_SPEED,
+        /* box? */ TRUE,
+
+        // Detect
+        /* center x, y, z */ 200, 0, 0,
+        /* size x, z */ 400, 60,
+        /* box? */ TRUE,
+
+        /* flying? */ TRUE,
+    },
     .animations = {
         ANIMATION(SpriteId_GOOMBA, 0, 1),
         ANIMATION(SpriteId_GOOMBA, 0, 2),
