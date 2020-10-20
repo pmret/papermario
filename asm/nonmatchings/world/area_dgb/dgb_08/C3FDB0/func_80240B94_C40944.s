@@ -167,7 +167,7 @@ glabel func_80240B94_C40944
 /* C40BB4 80240E04 00000000 */   nop      
 /* C40BB8 80240E08 0280202D */  daddu     $a0, $s4, $zero
 /* C40BBC 80240E0C 0260282D */  daddu     $a1, $s3, $zero
-/* C40BC0 80240E10 0C090207 */  jal       func_8024081C
+/* C40BC0 80240E10 0C090207 */  jal       func_8024081C_C405CC
 /* C40BC4 80240E14 02A0302D */   daddu    $a2, $s5, $zero
 /* C40BC8 80240E18 0280202D */  daddu     $a0, $s4, $zero
 /* C40BCC 80240E1C 0260282D */  daddu     $a1, $s3, $zero

@@ -17,6 +17,7 @@
 #define PANIC() ASSERT(0)
 
 #define GAME_STATUS (*gGameStatusPtr)
+#define PLAYER_STATUS (&gPlayerStatus)
 
 #define MAX_MAPVARS 16
 #define MAX_MAPFLAGS 3

@@ -5,8 +5,6 @@ SHELL=/bin/bash -o pipefail
 # BUILD_DIR is location where all build artifacts are placed
 BUILD_DIR = build
 
-WORLD_AREAS := area_dgb area_arn area_dro area_end area_flo area_gv area_hos area_isk area_iwa area_jan area_kgr area_kkj area_kmr area_kpa area_kzn area_mac area_mgm area_mim area_nok area_obk area_omo area_osr area_pra area_sam area_sbk area_tik area_trd area_tst
-
 SRC_DIRS := $(shell find src -type d)
 ASM_DIRS := asm asm/os
 INCLUDE_DIRS := include include/PR src
@@ -29,27 +27,26 @@ O_FILES := $(foreach file,$(C_FILES),$(BUILD_DIR)/$(file:.c=.o)) \
 		   $(foreach file,$(S_FILES),$(BUILD_DIR)/$(file:.s=.o)) \
 		   $(foreach file,$(DATA_FILES),$(BUILD_DIR)/$(file:.bin=.o)) \
 		   $(foreach dir,$(ASSETS_FS_DIRS),$(BUILD_DIR)/$(dir).o) \
+		   $(foreach file,$(YAY0_FILES),$(BUILD_DIR)/$(file:.bin=.Yay0.o))
 
-YAY0_FILES := $(foreach file,$(YAY0_FILES),$(BUILD_DIR)/$(file:.bin=.Yay0.o))
+####################### Tools #########################
 
-####################### Other Tools #########################
-
-# N64 tools
-TOOLS_DIR = tools
-N64CKSUM = $(TOOLS_DIR)/n64crc
+TOOLS = tools
+N64CKSUM = $(TOOLS)/n64crc
+SPLAT = ./$(TOOLS)/n64splat/split.py baserom.z64 $(TOOLS)/splat.yaml .
 
 ##################### Compiler Options #######################
 CROSS = mips-linux-gnu-
 AS = $(CROSS)as
-OLD_AS = $(TOOLS_DIR)/mips-nintendo-nu64-as
-CC = $(TOOLS_DIR)/cc1
+OLD_AS = $(TOOLS)/mips-nintendo-nu64-as
+CC = $(TOOLS)/cc1
 LD = $(CROSS)ld
 OBJDUMP = $(CROSS)objdump
 OBJCOPY = $(CROSS)objcopy
 
 TARGET = papermario
 
-CPPFLAGS   = -Iinclude -D _LANGUAGE_C -ffreestanding -DF3DEX_GBI_2
+CPPFLAGS   = -Iinclude -Isrc -D _LANGUAGE_C -ffreestanding -DF3DEX_GBI_2
 ASFLAGS    = -EB -Iinclude -march=vr4300 -mtune=vr4300
 OLDASFLAGS = -EB -Iinclude -G 0
 CFLAGS     = -O2 -quiet -G 0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32
@@ -72,24 +69,18 @@ submodules:
 	git submodule update --init --recursive
 
 split:
-	rm -rf $(DATA_DIRS) && ./tools/n64splat/split.py baserom.z64 tools/splat.yaml . --modes ld bin Yay0 PaperMarioMapFS
+	rm -rf bin && $(SPLAT) --modes ld bin Yay0 PaperMarioMapFS
 
 split-all:
-	rm -rf $(DATA_DIRS) && ./tools/n64splat/split.py baserom.z64 tools/splat.yaml . --modes all
-
-$(TARGET).ld: tools/splat.yaml
-	./tools/n64splat/split.py baserom.z64 tools/splat.yaml . --modes ld
+	rm -rf $(DATA_DIRS) && $(SPLAT) --modes all
 
 setup: clean submodules split
-	make -C tools
+	make -C $(TOOLS)
 
 print-% : ; $(info $* is a $(flavor $*) variable set to [$($*)]) @true
 
 $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
-
-$(BUILD_DIR)/$(TARGET).elf: $(O_FILES) $(YAY0_FILES) $(LD_SCRIPT)
-	@$(LD) $(LDFLAGS) -o $@
 
 $(BUILD_DIR)/%.o: %.s
 	$(AS) $(ASFLAGS) -o $@ $<
@@ -100,19 +91,25 @@ $(BUILD_DIR)/%.o: %.c $(H_FILES)
 $(BUILD_DIR)/%.o: %.bin
 	$(LD) -r -b binary -o $@ $<
 
-$(BUILD_DIR)/%.Yay0.o: %.bin
-	mkdir -p build/bin/Yay0
-	tools/Yay0compress $< $<.Yay0
-	$(LD) -r -b binary -o $@ $<.Yay0
-
 $(BUILD_DIR)/assets/fs/%: $(ASSETS_FS_FILES)
-	tools/build_assets_fs.py $*
+	$(TOOLS)/build_assets_fs.py $*
 
-$(BUILD_DIR)/assets/fs.bin: assets/fs.json tools/build_assets_fs.py $(foreach file,$(ASSETS_FS_FILES),build/$(file))
-	tools/build_assets_fs.py
+$(BUILD_DIR)/assets/fs.bin: assets/fs.json $(TOOLS)/build_assets_fs.py $(foreach file,$(ASSETS_FS_FILES),build/$(file))
+	$(TOOLS)/build_assets_fs.py
 
 $(BUILD_DIR)/assets/fs.o: $(BUILD_DIR)/assets/fs.bin
 	$(LD) -r -b binary -o $@ $<
+
+$(BUILD_DIR)/%.Yay0.o: %.bin
+	mkdir -p build/bin/Yay0
+	$(TOOLS)/Yay0compress $< $<.Yay0
+	$(LD) -r -b binary -o $@ $<.Yay0
+
+$(LD_SCRIPT): $(TOOLS)/splat.yaml
+	$(SPLAT) --modes ld
+
+$(BUILD_DIR)/$(TARGET).elf: $(O_FILES) $(LD_SCRIPT)
+	$(LD) $(LDFLAGS) -o $@
 
 $(BUILD_DIR)/$(TARGET).bin: $(BUILD_DIR)/$(TARGET).elf
 	$(OBJCOPY) $< $@ -O binary
