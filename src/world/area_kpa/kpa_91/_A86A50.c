@@ -57,7 +57,3 @@ INCLUDE_ASM(s32, "world/area_kpa/kpa_91/_A86A50", func_802417B8);
 INCLUDE_ASM(s32, "world/area_kpa/kpa_91/_A86A50", func_802417EC_A8823C);
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_91/_A86A50", func_8024181C_A8826C);
-
-INCLUDE_ASM(s32, "world/area_kpa/kpa_91/_A86A50", func_80241830);
-
-INCLUDE_ASM(s32, "world/area_kpa/kpa_91/_A86A50", func_80241864);

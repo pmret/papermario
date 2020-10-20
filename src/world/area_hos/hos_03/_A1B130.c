@@ -13,7 +13,3 @@ INCLUDE_ASM(s32, "world/area_hos/hos_03/_A1B130", func_802407E8);
 INCLUDE_ASM(s32, "world/area_hos/hos_03/_A1B130", func_80240928);
 
 INCLUDE_ASM(s32, "world/area_hos/hos_03/_A1B130", func_80240A50);
-
-INCLUDE_ASM(s32, "world/area_hos/hos_03/_A1B130", func_80240A70_A1BB70);
-
-INCLUDE_ASM(s32, "world/area_hos/hos_03/_A1B130", func_80240AE0);

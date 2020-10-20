@@ -13,5 +13,3 @@ INCLUDE_ASM(s32, "world/area_trd/trd_10/_9C2910", func_802405FC_9C2F0C);
 INCLUDE_ASM(s32, "world/area_trd/trd_10/_9C2910", func_80240708_9C3018);
 
 INCLUDE_ASM(s32, "world/area_trd/trd_10/_9C2910", func_802407F4_9C3104);
-
-INCLUDE_ASM(s32, "world/area_trd/trd_10/_9C2910", func_80240820);
