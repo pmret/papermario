@@ -1,0 +1,37 @@
+#include "common.h"
+
+INCLUDE_ASM(s32, "world/area_mgm/mgm_02/E15D80", func_80240000_E15D80);
+
+INCLUDE_ASM(s32, "world/area_mgm/mgm_02/E15D80", func_80240430_E161B0);
+
+INCLUDE_ASM(s32, "world/area_mgm/mgm_02/E15D80", func_80240468_E161E8);
+
+INCLUDE_ASM(s32, "world/area_mgm/mgm_02/E15D80", func_80240544_E162C4);
+
+INCLUDE_ASM(s32, "world/area_mgm/mgm_02/E15D80", func_80240580_E16300);
+
+INCLUDE_ASM(s32, "world/area_mgm/mgm_02/E15D80", func_802405A4_E16324);
+
+INCLUDE_ASM(s32, "world/area_mgm/mgm_02/E15D80", func_802405D0_E16350);
+
+INCLUDE_ASM(s32, "world/area_mgm/mgm_02/E15D80", func_80240644_E163C4);
+
+INCLUDE_ASM(s32, "world/area_mgm/mgm_02/E15D80", func_80240790_E16510);
+
+INCLUDE_ASM(s32, "world/area_mgm/mgm_02/E15D80", func_80240BB0_E16930);
+
+INCLUDE_ASM(s32, "world/area_mgm/mgm_02/E15D80", func_80241DCC_E17B4C);
+
+INCLUDE_ASM(s32, "world/area_mgm/mgm_02/E15D80", func_80241F38_E17CB8);
+
+INCLUDE_ASM(s32, "world/area_mgm/mgm_02/E15D80", func_80241FE4);
+
+INCLUDE_ASM(s32, "world/area_mgm/mgm_02/E15D80", func_80242274);
+
+INCLUDE_ASM(s32, "world/area_mgm/mgm_02/E15D80", func_802422D0);
+
+INCLUDE_ASM(s32, "world/area_mgm/mgm_02/E15D80", func_80242314_E18094);
+
+INCLUDE_ASM(s32, "world/area_mgm/mgm_02/E15D80", func_80242340);
+
+INCLUDE_ASM(s32, "world/area_mgm/mgm_02/E15D80", func_802423A4);

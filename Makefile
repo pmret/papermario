@@ -69,7 +69,7 @@ submodules:
 	git submodule update --init --recursive
 
 split:
-	rm -rf $(DATA_DIRS) && $(SPLAT) --modes ld bin Yay0 PaperMarioMapFS
+	rm -rf bin && $(SPLAT) --modes ld bin Yay0 PaperMarioMapFS
 
 split-all:
 	rm -rf $(DATA_DIRS) && $(SPLAT) --modes all
@@ -109,7 +109,7 @@ $(LD_SCRIPT): $(TOOLS)/splat.yaml
 	$(SPLAT) --modes ld
 
 $(BUILD_DIR)/$(TARGET).elf: $(O_FILES) $(LD_SCRIPT)
-	@$(LD) $(LDFLAGS) -o $@ $(O_FILES)
+	$(LD) $(LDFLAGS) -o $@
 
 $(BUILD_DIR)/$(TARGET).bin: $(BUILD_DIR)/$(TARGET).elf
 	$(OBJCOPY) $< $@ -O binary

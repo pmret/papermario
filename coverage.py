@@ -86,7 +86,7 @@ if __name__ == "__main__":
     total = len(matched) + len(non_matched)
     print(f"{len(matched)}+{len(partial_matched)} / {total} functions ({(len(matched) / total) * 100:.2f}%)")
 
-    if not "--skip-sizes":
+    if not "--skip-sizes" in argv:
         function_sizes = parse_map_file()
         size_matched = sum(function_sizes.get(f, 0) for f in matched)
         size_partial_matched = sum(function_sizes.get(f, 0) for f in partial_matched)

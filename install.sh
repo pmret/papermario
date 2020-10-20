@@ -9,7 +9,7 @@ if command -v apt &> /dev/null; then
 
     if [[ $1 == "--extra" ]]; then
         echo "Installing extra"
-        sudo apt install -y clang-tidy astyle || exit 1
+        sudo apt install -y clang-tidy astyle doxygen || exit 1
         python3 -m pip install -U -r requirements_extra.txt || exit 1
     fi
 
@@ -50,7 +50,7 @@ if command -v pacman &> /dev/null; then
 
     if [[ $1 == "--extra" ]]; then
         echo "Installing extra"
-        sudo pacman -S --noconfirm --needed clang astyle || exit 1
+        sudo pacman -S --noconfirm --needed clang astyle doxygen || exit 1
         python3 -m pip install -U -r requirements_extra.txt || exit 1
     fi
 
@@ -85,7 +85,7 @@ if command -v zypper &> /dev/null; then
 
     if [[ $1 == "--extra" ]]; then
         echo "Installing extra"
-        sudo zypper -n install clang astyle || exit 1
+        sudo zypper -n install clang astyle doxygen || exit 1
         python3 -m pip install -U -r requirements_extra.txt || exit 1
     fi
 
@@ -141,7 +141,7 @@ if command -v apk &> /dev/null; then
 
     if [[ $1 == "--extra" ]]; then
         echo "Installing extra"
-        sudo apk add --no-cache clang-extra-tools astyle || exit 1
+        sudo apk add --no-cache clang-extra-tools astyle doxygen || exit 1
         python3 -m pip install -U -r requirements_extra.txt || exit 1
     fi
 
