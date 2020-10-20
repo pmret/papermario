@@ -14,7 +14,7 @@ INCLUDE_ASM(s32, "world/area_isk/isk_04", func_802403D4);
 
 INCLUDE_ASM(s32, "world/area_isk/isk_04", func_80240814);
 
-#include "world/common/AwaitPlayerNearNPC.c"
+#include "world/common/AwaitPlayerNearNPC.inc.c"
 
 INCLUDE_ASM(s32, "world/area_isk/isk_04", func_802408B4_97B630);
 

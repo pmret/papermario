@@ -1,3 +1,3 @@
 #include "common.h"
 
-#include "world/common/SpawnSunEffect.c"
+#include "world/common/SpawnSunEffect.inc.c"

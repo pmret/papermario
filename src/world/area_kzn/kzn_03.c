@@ -16,7 +16,7 @@ INCLUDE_ASM(s32, "world/area_kzn/kzn_03", func_802406A4_C60D10);
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_03", func_80240AE4_C60D10);
 
-#include "world/common/AwaitPlayerNearNPC.c"
+#include "world/common/AwaitPlayerNearNPC.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_03", func_80240B84_C60D10);
 
