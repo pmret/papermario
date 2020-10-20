@@ -138,8 +138,8 @@ typedef s32 ApiStatus;
 #define SI_CHILD_THREAD() SI_CMD(0x58)
 #define SI_END_CHILD_THREAD() SI_CMD(0x59)
 
-#define GEN_EXIT_WALK_SCRIPT(name, walkDistance, exitIdx, map, entryIdx) \
-    Script name = { \
+#define EXIT_WALK_SCRIPT(walkDistance, exitIdx, map, entryIdx) \
+    { \
         SI_GROUP(0x1B), \
         SI_CALL(UseExitHeading, walkDistance, exitIdx), \
         SI_EXEC(ExitWalk), \

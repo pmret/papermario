@@ -1,6 +1,6 @@
 #include "kmr_12.h"
 
-EntryList entryList = {
+static EntryList entryList = {
     { -126.0f, 0.0f, 12.0f, 90.0f }, // west, towards Red/Blue Goomba miniboss room
     { 471.0f, 0.0f, 12.0f, 270.0f }, // east, towards Goomba King's Fortress
 };
@@ -19,7 +19,7 @@ Script kmr_12_play_music = {
     SI_END(),
 };
 
-ApiStatus get_goomba_ref(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus kmr_12_get_goomba_ref(ScriptInstance* script, s32 isInitialCall) {
     script->varTable[0] = get_enemy_safe(NpcId_GOOMBA);
     return ApiStatus_DONE2;
 }

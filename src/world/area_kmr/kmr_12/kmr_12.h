@@ -5,8 +5,4 @@
 
 Script kmr_12_main;
 Script kmr_12_play_music;
-Script make_entities;
-Script read_west_sign;
-NpcGroupList npc_groups;
-
-ApiStatus get_goomba_ref(ScriptInstance* script, s32 isInitialCall);
+ApiStatus kmr_12_get_goomba_ref(ScriptInstance* script, s32 isInitialCall);

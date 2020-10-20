@@ -1,9 +1,13 @@
 #include "kmr_12.h"
 
-GEN_EXIT_WALK_SCRIPT(exit_west, 60, 0, "kmr_07", 1);
-GEN_EXIT_WALK_SCRIPT(exit_east, 60, 1, "kmr_11", 0);
+static Script make_entities;
+static Script read_west_sign;
+static NpcGroupList npc_groups;
 
-Script bind_exits = {
+static Script exit_west = EXIT_WALK_SCRIPT(60, 0, "kmr_07", 1);
+static Script exit_east = EXIT_WALK_SCRIPT(60, 1, "kmr_11", 0);
+
+static Script bind_exits = {
     SI_BIND(exit_west, TriggerFlag_FLOOR_ABOVE, 0 /* deili1 */, NULL),
     SI_BIND(exit_east, TriggerFlag_FLOOR_ABOVE, 3 /* deili2 */, NULL),
     SI_RETURN(),
@@ -27,7 +31,7 @@ Script kmr_12_main = {
     SI_END(),
 };
 
-NpcAISettings goomba_ai_settings = {
+static NpcAISettings goomba_ai_settings = {
     .moveSpeed = 1.5f,
     .moveTime = 30,
     .waitTime = 30,
@@ -42,13 +46,13 @@ NpcAISettings goomba_ai_settings = {
     .unk_2C = TRUE,
 };
 
-Script goomba_ai = {
+static Script goomba_ai = {
     SI_CALL(DoBasicAI, &goomba_ai_settings),
     SI_RETURN(),
     SI_END(),
 };
 
-StaticNpcSettings goomba_npc_settings = {
+static StaticNpcSettings goomba_npc_settings = {
     .height = 20,
     .radius = 23,
     .aiScript = &goomba_ai,
@@ -58,7 +62,7 @@ StaticNpcSettings goomba_npc_settings = {
 };
 
 // *INDENT-OFF*
-Script read_west_sign = {
+static Script read_west_sign = {
     SI_GROUP(0),
 
     // "Eat a Mushroom to regain your energy!"
@@ -68,7 +72,7 @@ Script read_west_sign = {
     SI_RESUME_GROUP(1),
 
     SI_SET(SI_FLAG(0), FALSE),
-    SI_CALL(get_goomba_ref),
+    SI_CALL(kmr_12_get_goomba_ref),
     SI_IF_NE(SI_VAR(0), FALSE),
         SI_CALL(GetNpcVar, NpcId_GOOMBA, 0, SI_VAR(0)),
         SI_IF_EQ(SI_VAR(0), FALSE),
@@ -87,7 +91,7 @@ Script read_west_sign = {
     SI_RETURN(), // Whoops!
 };
 
-Script goomba_idle = {
+static Script goomba_idle = {
     SI_WAIT_FRAMES(1),
 
     SI_CALL(SetSelfVar, 0, FALSE),
@@ -146,14 +150,14 @@ Script goomba_idle = {
     SI_END(),
 };
 
-Script goomba_init = {
+static Script goomba_init = {
     SI_CALL(BindNpcIdle, NpcId_SELF, &goomba_idle),
     SI_RETURN(),
     SI_END(),
 };
 // *INDENT-ON*
 
-StaticNpc goomba_npc = {
+static StaticNpc goomba_npc = {
     .id = NpcId_GOOMBA,
     .settings = &goomba_npc_settings,
     .pos = { -33.0f, 30.0f, -25.0f },
@@ -186,13 +190,13 @@ StaticNpc goomba_npc = {
     },
 };
 
-NpcGroupList npc_groups = {
+static NpcGroupList npc_groups = {
     NPC_GROUP(goomba_npc, 0x00010003),
     NPC_GROUP_LIST_END(),
 };
 
 // *INDENT-OFF*
-Script read_east_sign = {
+static Script read_east_sign = {
     SI_CALL(func_800441F0, SI_VAR(0)),
     SI_IF_EQ(SI_VAR(0), 1),
         SI_RETURN(),
@@ -211,9 +215,9 @@ Script read_east_sign = {
     SI_END(),
 };
 
-Script make_entities = {
+static Script make_entities = {
     SI_CALL(MakeEntity, 0x802EAFDC, 436, 0, -42, 0, 0x80000000),
-    SI_CALL(AssignScript, read_east_sign),
+    SI_CALL(AssignScript, &read_east_sign),
 
     SI_RETURN(),
     SI_END(),
