@@ -13,12 +13,15 @@ typedef Vec4f EntryList[];
 
 typedef struct MapHeader {
     /* 0x00 */ char unk_00[0x10];
-    /* 0x10 */ Bytecode* main;
+    /* 0x10 */ Script* main;
     /* 0x14 */ EntryList* entryList;
     /* 0x18 */ s32 entryCount;
     /* 0x1C */ char unk_1C[0x1C];
-    /* 0x38 */ s32 background; // 0x80200000 if there is one, 0 otherwise
-    /* 0x3C */ UNK_FUN_PTR(tattle); // or string id
+    /* 0x38 */ BackgroundHeader* background;
+    /* 0x3C */ union {
+        MessageID msgID;
+        UNK_FUN_PTR(get);
+    } tattle;
 } MapHeader; // size = 0x40
 
 typedef struct NpcAISettings {
@@ -36,21 +39,21 @@ typedef struct NpcAISettings {
     /* 0x2C */ s32 unk_2C; // bool
 } NpcAISettings; // size = 0x30
 
-typedef struct StaticNpcSettings {
+typedef struct NpcSettings {
     /* 0x00 */ char unk_00[4];
     /* 0x04 */ s16 height;
     /* 0x06 */ s16 radius;
     /* 0x08 */ UNK_PTR otherAI;
-    /* 0x0C */ Bytecode* interactScript;
-    /* 0x10 */ Bytecode* aiScript;
-    /* 0x14 */ Bytecode* hitScript;
-    /* 0x18 */ Bytecode* auxScript;
-    /* 0x1C */ Bytecode* defeatScript;
+    /* 0x0C */ Script* onInteract;
+    /* 0x10 */ Script* ai;
+    /* 0x14 */ Script* onHit;
+    /* 0x18 */ Script* aux;
+    /* 0x1C */ Script* onDefeat;
     /* 0x20 */ s32 flags;
     /* 0x24 */ char unk_24[4];
     /* 0x28 */ s16 level;
     /* 0x2A */ s16 unk_2A;
-} StaticNpcSettings; // size = 0x2C
+} NpcSettings; // size = 0x2C
 
 typedef struct ItemDrop {
     /* 0x00 */ ItemId item;
@@ -120,7 +123,7 @@ typedef struct StatDrop {
 
 typedef struct StaticNPC {
     /* 0x000 */ NpcId id;
-    /* 0x004 */ StaticNpcSettings* settings;
+    /* 0x004 */ NpcSettings* settings;
     /* 0x008 */ Vec3f pos;
     /* 0x014 */ s32 flags;
     /* 0x018 */ Bytecode* init;
@@ -138,7 +141,7 @@ typedef struct StaticNPC {
     /* 0x1A0 */ s32 animations[16];
     /* 0x1E0 */ char unk_1E0[8];
     /* 0x1E8 */ UNK_PTR extraAnimations;
-    /* 0x1EC */ s32 tattle;
+    /* 0x1EC */ MessageID tattle;
 } StaticNpc; // size = 0x1F0
 
 typedef struct Enemy {
@@ -151,7 +154,7 @@ typedef struct Enemy {
     /* 0x0A */ s16 spawnPos[3];
     /* 0x10 */ Vec3s unk_10;
     /* 0x16 */ char unk_16[2];
-    /* 0x18 */ struct StaticNpcSettings* npcSettings;
+    /* 0x18 */ struct NpcSettings* npcSettings;
     /* 0x1C */ Bytecode* initBytecode;
     /* 0x20 */ Bytecode* interactBytecode;
     /* 0x24 */ Bytecode* aiBytecode;
@@ -164,12 +167,12 @@ typedef struct Enemy {
     /* 0x40 */ struct ScriptInstance* hitScript;
     /* 0x44 */ struct ScriptInstance* auxScript;
     /* 0x48 */ struct ScriptInstance* defeatScript;
-    /* 0x4C */ s32 initScriptID;
-    /* 0x50 */ s32 interactScriptID;
-    /* 0x54 */ s32 aiScriptID;
-    /* 0x58 */ s32 hitScriptID;
-    /* 0x5C */ s32 auxScriptID;
-    /* 0x60 */ s32 defeatScriptID;
+    /* 0x4C */ ScriptID initScriptID;
+    /* 0x50 */ ScriptID interactScriptID;
+    /* 0x54 */ ScriptID aiScriptID;
+    /* 0x58 */ ScriptID hitScriptID;
+    /* 0x5C */ ScriptID auxScriptID;
+    /* 0x60 */ ScriptID defeatScriptID;
     /* 0x64 */ char unk_64[8];
     /* 0x6C */ s32 varTable[16];
     /* 0xAC */ char unk_AC[9];

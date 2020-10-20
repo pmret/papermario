@@ -1894,3 +1894,5 @@ gSpeakingActorIdleAnim;0x8029FA70
 gSpeakingActor;0x8029FA74
 gSpeakingActorPart;0x8029FA7C
 EnterWalk;0x80285960
+EnemyNpcHit;0x80077F70
+EnemyNpcDefeat;0x8007809C

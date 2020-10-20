@@ -3,6 +3,9 @@
 
 #include "ultra64.h"
 
+typedef s32 Bytecode;
+typedef s32 ScriptID;
+
 #define SI_VAR(v) (v - 30000000)
 #define SI_MAP_VAR(v) (v - 50000000)
 #define SI_FLAG(v) (v - 70000000)
@@ -147,6 +150,6 @@ typedef s32 ApiStatus;
         SI_WAIT_FRAMES(100), \
         SI_RETURN(), \
         SI_END(), \
-    };
+    }
 
 #endif

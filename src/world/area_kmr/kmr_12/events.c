@@ -52,12 +52,12 @@ static Script goomba_ai = {
     SI_END(),
 };
 
-static StaticNpcSettings goomba_npc_settings = {
+static NpcSettings goomba_npc_settings = {
     .height = 20,
     .radius = 23,
-    .aiScript = &goomba_ai,
-    .hitScript = (Bytecode*)0x80077F70,
-    .defeatScript = (Bytecode*)0x8007809C,
+    .ai = &goomba_ai,
+    .onHit = EnemyNpcHit,
+    .onDefeat = EnemyNpcDefeat,
     .level = 5,
 };
 

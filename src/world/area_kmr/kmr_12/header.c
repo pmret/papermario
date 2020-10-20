@@ -9,7 +9,7 @@ MapHeader header = {
     .main = kmr_12_main,
     .entryList = entryList,
     .entryCount = ENTRY_COUNT(entryList),
-    .background = 0x80200000,
+    .background = &gBackgroundImage,
     .tattle = MessageID_TATTLE_KMR_12,
 };
 

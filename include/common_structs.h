@@ -201,7 +201,7 @@ typedef struct Trigger {
     /* 0x28 */ char unk_28[8];
     /* 0x30 */ u8 unk_30;
     /* 0x31 */ char unk_31[3];
-    /* 0x34 */ s32 runningScriptID;
+    /* 0x34 */ ScriptID runningScriptID;
 } Trigger; // size = 0x38
 
 typedef struct ScriptInstance {
@@ -232,7 +232,7 @@ typedef struct ScriptInstance {
     /* 0x138 */ s32* buffer;
     /* 0x13C */ s32* array;
     /* 0x140 */ s32* flagArray;
-    /* 0x144 */ s32 uniqueID;
+    /* 0x144 */ ScriptID id;
     /* 0x148 */ struct Enemy* ownerActorID; /* controller*, battle ID, trigger* */
     /* 0x14C */ u32 ownerID; /* can be an npcID, a triggerID, a trigger ptr */
     /* 0x150 */ f32 timeScale;
@@ -525,9 +525,9 @@ typedef struct BattleStatus {
     /* 0x0B4 */ UNK_FUN_PTR(preUpdateCallback);
     /* 0x0B8 */ char unk_B8[4];
     /* 0x0BC */ struct ScriptInstance* controlScript; /* control handed over to this when changing partners */
-    /* 0x0C0 */ s32 controlScriptID;
+    /* 0x0C0 */ ScriptID controlScriptID;
     /* 0x0C4 */ struct ScriptInstance* camMovementScript;
-    /* 0x0C8 */ s32 camMovementScriptID;
+    /* 0x0C8 */ ScriptID camMovementScriptID;
     /* 0x0CC */ char unk_CC[12];
     /* 0x0D8 */ struct Actor* playerActor;
     /* 0x0DC */ struct Actor* partnerActor;
@@ -848,7 +848,7 @@ typedef struct GameStatus {
     /* 0x068 */ s16 demoButtonInput;
     /* 0x06A */ s8 demoStickX;
     /* 0x06B */ s8 demoStickY;
-    /* 0x06C */ s32 mainScriptID;
+    /* 0x06C */ ScriptID mainScriptID;
     /* 0x070 */ s8 isBattle;
     /* 0x071 */ s8 demoState; /* (0 = not demo, 1 = map demo, 2 = demo map changing) */
     /* 0x072 */ u8 nextDemoScene; /* which part of the demo to play next */
@@ -1220,10 +1220,10 @@ typedef struct Actor {
     /* 0x1D4 */ struct ScriptInstance* takeTurnScript;
     /* 0x1D8 */ struct ScriptInstance* onHitScript;
     /* 0x1DC */ struct ScriptInstance* onTurnChangeScript;
-    /* 0x1E0 */ s32 idleScriptID;
-    /* 0x1E4 */ s32 takeTurnID;
-    /* 0x1E8 */ s32 onHitID;
-    /* 0x1EC */ s32 onTurnChangeID;
+    /* 0x1E0 */ ScriptID idleScriptID;
+    /* 0x1E4 */ ScriptID takeTurnID;
+    /* 0x1E8 */ ScriptID onHitID;
+    /* 0x1EC */ ScriptID onTurnChangeID;
     /* 0x1F0 */ u8 lastEventType;
     /* 0x1F1 */ u8 turnPriority;
     /* 0x1F2 */ u8 enemyIndex; /* actorID = this | 200 */
