@@ -1,4 +1,5 @@
 #include "common.h"
+#include "map.h"
 
 void NOP_npc_callback(void) {
 }

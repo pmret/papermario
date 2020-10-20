@@ -45,4 +45,7 @@
 
 #define SQ(x) (x*x)
 
+// Fixed-point short literal
+#define F16(f) (s16)(f * 327.67f)
+
 #endif

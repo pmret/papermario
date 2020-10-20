@@ -7,10 +7,10 @@ BUILD_DIR = build
 
 WORLD_AREAS := area_dgb area_arn area_dro area_end area_flo area_gv area_hos area_isk area_iwa area_jan area_kgr area_kkj area_kmr area_kpa area_kzn area_mac area_mgm area_mim area_nok area_obk area_omo area_osr area_pra area_sam area_sbk area_tik area_trd area_tst
 
-SRC_DIRS := src src/os src/os/nusys $(foreach area,$(WORLD_AREAS),src/world/$(area))
+SRC_DIRS := $(shell find src -type d)
 ASM_DIRS := asm asm/os
 INCLUDE_DIRS := include include/PR src
-DATA_DIRS := bin bin/world $(foreach area,$(WORLD_AREAS),bin/world/$(area))
+DATA_DIRS := $(shell find bin -type d -not -name Yay0)
 YAY0_DIRS := bin/Yay0
 ASSETS_FS_DIRS := assets/fs
 

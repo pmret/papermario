@@ -554,7 +554,7 @@ typedef UNK_TYPE Cam;
 #define Cam_TATTLE  0x00000002
 #define Cam_CAM3    0x00000003
 
-typedef UNK_TYPE ItemId;
+typedef s16 ItemId;
 #define ItemId_JUMP               0x00000001
 #define ItemId_SPIN_JUMP          0x00000002
 #define ItemId_TORNADO_JUMP       0x00000003
@@ -1259,18 +1259,18 @@ typedef s32 NpcId;
 #define NpcId_PARTNER 0xFFFFFFFC
 
 typedef UNK_TYPE TriggerFlag;
-#define TriggerFlag_FLOOR_TOUCH   0x00000080
-#define TriggerFlag_FLOOR_ABOVE   0x00080000
-#define TriggerFlag_FLOOR_PRESS_A 0x00000800
-#define TriggerFlag_FLOOR_JUMP    0x00000200
-#define TriggerFlag_WALL_TOUCH    0x00000400
-#define TriggerFlag_WALL_PUSH     0x00000040
-#define TriggerFlag_WALL_PRESS_A  0x00000100
-#define TriggerFlag_WALL_HAMMER   0x00001000
-#define TriggerFlag_CEILING_TOUCH 0x00040000
-#define TriggerFlag_POINT_BOMB    0x00100000
-#define TriggerFlag_GAME_FLAG_SET 0x00010000
-#define TriggerFlag_AREA_FLAG_SET 0x00020000
+#define TriggerFlag_FLOOR_TOUCH    0x00000080
+#define TriggerFlag_FLOOR_ABOVE    0x00080000
+#define TriggerFlag_FLOOR_INTERACT 0x00000800
+#define TriggerFlag_FLOOR_JUMP     0x00000200
+#define TriggerFlag_WALL_TOUCH     0x00000400
+#define TriggerFlag_WALL_PUSH      0x00000040
+#define TriggerFlag_WALL_INTERACT  0x00000100
+#define TriggerFlag_WALL_HAMMER    0x00001000
+#define TriggerFlag_CEILING_TOUCH  0x00040000
+#define TriggerFlag_BOMB           0x00100000
+#define TriggerFlag_SAVE_FLAG_SET  0x00010000
+#define TriggerFlag_AREA_FLAG_SET  0x00020000
 
 typedef UNK_TYPE Button;
 #define Button_A       0x00008000

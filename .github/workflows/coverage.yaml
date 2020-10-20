@@ -10,4 +10,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: ./coverage.py --fail-matched-undeleted --fail-unincluded
+      - run: ./coverage.py --fail-matched-undeleted --fail-unincluded --skip-sizes

@@ -87,8 +87,6 @@ Npc* get_npc_unsafe(NpcId npcId);
 Npc* resolve_npc(ScriptInstance* script, NpcId npcIdOrPtr);
 void set_npc_yaw(Npc* npcPtr, f32 angle);
 
-Enemy* get_enemy(NpcId npcId);
-
 f32 dist2D(f32 ax, f32 ay, f32 bx, f32 by);
 f32 dist3D(f32 ax, f32 ay, f32 az, f32 bx, f32 by, f32 bz);
 void add_vec2D_polar(f32* x, f32* y, f32 r, f32 theta);

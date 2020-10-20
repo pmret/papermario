@@ -23,7 +23,7 @@ void sort_scripts(void) {
         if (curScript != NULL) {
             if (curScript->state != 0) {
                 scriptIndexList[numValidScripts] = i;
-                scriptIdList[numValidScripts] = curScript->uniqueID;
+                scriptIdList[numValidScripts] = curScript->id;
                 numValidScripts++;
             }
         }
@@ -189,7 +189,7 @@ ScriptInstance* start_script(Bytecode* initialLine, s32 priority, s32 initialSta
     newScript->blockingParent = NULL;
     newScript->childScript = NULL;
     newScript->parentScript = NULL;
-    newScript->uniqueID = gStaticScriptCounter++;
+    newScript->id = gStaticScriptCounter++;
     newScript->ownerActorID = -1;
     newScript->ownerID = -1;
     newScript->loopDepth = -1;
@@ -215,7 +215,7 @@ ScriptInstance* start_script(Bytecode* initialLine, s32 priority, s32 initialSta
     if ((D_802D9CA4 != 0) && ((newScript->state & 0x20) != 0)) {
         scriptListCount = gScriptListCount++;
         gScriptIndexList[scriptListCount] = curScriptIndex;
-        gScriptIdList[scriptListCount] = newScript->uniqueID;
+        gScriptIdList[scriptListCount] = newScript->id;
     }
     func_802C3390(newScript);
     {
@@ -260,7 +260,7 @@ ScriptInstance* start_script_in_group(Bytecode* initialLine, u8 priority, s32 in
     newScript->blockingParent = NULL;
     newScript->childScript = NULL;
     newScript->parentScript = NULL;
-    newScript->uniqueID = gStaticScriptCounter++;
+    newScript->id = gStaticScriptCounter++;
     newScript->ownerActorID = -1;
     newScript->ownerID = -1;
     newScript->loopDepth = -1;
@@ -286,7 +286,7 @@ ScriptInstance* start_script_in_group(Bytecode* initialLine, u8 priority, s32 in
     if ((D_802D9CA4 != 0) && ((newScript->state & 0x20) != 0)) {
         scriptListCount = gScriptListCount++;
         gScriptIndexList[scriptListCount] = curScriptIndex;
-        gScriptIdList[scriptListCount] = newScript->uniqueID;
+        gScriptIdList[scriptListCount] = newScript->id;
     }
 
     func_802C3390(newScript);
@@ -333,7 +333,7 @@ ScriptInstance* func_802C39F8(ScriptInstance* parentScript, Bytecode* nextLine, 
     child->parentScript = parentScript;
     child->childScript = NULL;
     child->priority = parentScript->priority;
-    child->uniqueID = gStaticScriptCounter++;
+    child->id = gStaticScriptCounter++;
     child->ownerActorID = parentScript->ownerActorID;
     child->ownerID = parentScript->ownerID;
     child->loopDepth = -1;
@@ -360,7 +360,7 @@ ScriptInstance* func_802C39F8(ScriptInstance* parentScript, Bytecode* nextLine, 
     if (D_802D9CA4 != 0) {
         scriptListCount = gScriptListCount++;
         gScriptIndexList[scriptListCount] = curScriptIndex;
-        gScriptIdList[scriptListCount] = child->uniqueID;
+        gScriptIdList[scriptListCount] = child->id;
     }
 
     temp6 = &gStaticScriptCounter;
@@ -502,7 +502,7 @@ void kill_script_by_ID(s32 id) {
 
     for (i = 0; i < MAX_SCRIPTS; i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
-        if (scriptContextPtr != NULL && scriptContextPtr->uniqueID == id) {
+        if (scriptContextPtr != NULL && scriptContextPtr->id == id) {
             kill_script(scriptContextPtr);
         }
     }
@@ -527,7 +527,7 @@ s32 does_script_exist(s32 id) {
 
     for (i = 0; i < MAX_SCRIPTS; i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
-        if (scriptContextPtr != NULL && scriptContextPtr->uniqueID == id) {
+        if (scriptContextPtr != NULL && scriptContextPtr->id == id) {
             return 1;
         }
     }
@@ -638,7 +638,7 @@ s32 suspend_all_script(s32 id) {
 
     for (i = 0; i < MAX_SCRIPTS; i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
-        if (scriptContextPtr != NULL && scriptContextPtr->uniqueID == id) {
+        if (scriptContextPtr != NULL && scriptContextPtr->id == id) {
             suspend_group_script(scriptContextPtr, 0xEF);
         }
     }
@@ -650,7 +650,7 @@ s32 resume_all_script(s32 id) {
 
     for (i = 0; i < MAX_SCRIPTS; i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
-        if (scriptContextPtr != NULL && scriptContextPtr->uniqueID == id) {
+        if (scriptContextPtr != NULL && scriptContextPtr->id == id) {
             resume_group_script(scriptContextPtr, 0xEF);
         }
     }
@@ -662,7 +662,7 @@ void suspend_group_script_index(s32 id, s32 groupFlags) {
 
     for (i = 0; i < MAX_SCRIPTS; i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
-        if (scriptContextPtr != NULL && scriptContextPtr->uniqueID == id) {
+        if (scriptContextPtr != NULL && scriptContextPtr->id == id) {
             suspend_group_script(scriptContextPtr, groupFlags);
         }
     }
@@ -674,7 +674,7 @@ void resume_group_script_index(s32 id, s32 groupFlags) {
 
     for (i = 0; i < MAX_SCRIPTS; i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
-        if (scriptContextPtr != NULL && scriptContextPtr->uniqueID == id) {
+        if (scriptContextPtr != NULL && scriptContextPtr->id == id) {
             resume_group_script(scriptContextPtr, groupFlags);
         }
     }
@@ -739,7 +739,7 @@ ScriptInstance* get_script_by_id(s32 id) {
     for (i = 0; i < MAX_SCRIPTS; i++) {
         if ((*gCurrentScriptListPtr)[i] != NULL) {
             scriptContextPtr = (*gCurrentScriptListPtr)[i];
-            if (scriptContextPtr->uniqueID == id) {
+            if (scriptContextPtr->id == id) {
                 return scriptContextPtr;
             }
         }
