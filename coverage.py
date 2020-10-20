@@ -27,7 +27,7 @@ def strip_c_comments(text):
     return re.sub(pattern, replacer, text)
 
 c_func_pattern = re.compile(
-    r"^(static\s+)?[^\s]+\s+([^\s(]+)\(([^\n)]*)\)\s+{",
+    r"^(static\s+)?[^\s]+\s+([^\s(]+)\(([^;)]*)\)[^;]+{",
     re.MULTILINE
 )
 def funcs_in_c(text):
@@ -39,6 +39,26 @@ asm_func_pattern = re.compile(
 )
 def include_asms_in_c(text):
     return (match.group(1) for match in asm_func_pattern.finditer(text))
+
+def parse_map_file(p = Path(DIR, "build", "papermario.map")):
+    addresses = []
+    with open(p, "r") as f:
+        for match in re.compile(f"^\s+0x([a-f0-9]+)\s+([_a-zA-Z0-9]+)", re.MULTILINE).finditer(f.read()):
+            addr = int(match.group(1), 16)
+            func = match.group(2)
+
+            addresses.append((func, addr))
+
+    addresses.sort(key=lambda x: x[1]) # sort by address
+
+    sizes = {}
+    for i in range(0, len(addresses) - 1):
+        func, addr = addresses[i]
+        next_addr = addresses[i + 1][1]
+
+        sizes[func] = next_addr - addr
+
+    return sizes
 
 matched = []
 asm = []
@@ -63,7 +83,14 @@ if __name__ == "__main__":
         exit()
 
     total = len(matched) + len(non_matched)
-    print(f"{len(matched)}+{len(partial_matched)} / {total} functions ({(len(matched) / total) * 100:.2f}% matched)")
+    print(f"{len(matched)}+{len(partial_matched)} / {total} functions ({(len(matched) / total) * 100:.2f}%)")
+
+    function_sizes = parse_map_file()
+    size_matched = sum(function_sizes.get(f, 0) for f in matched)
+    size_partial_matched = sum(function_sizes.get(f, 0) for f in partial_matched)
+    size_non_matched = sum(function_sizes.get(f, 0) for f in non_matched)
+    size_total = size_matched + size_non_matched
+    print(f"{size_matched}+{size_partial_matched} / {size_total} bytes ({(size_matched / size_total) * 100:.2f}%)")
 
     if len(matched_but_undeleted_asm) > 0:
         print(f"The following functions have been matched but still exist in asm/nonmatchings/: {' '.join(matched_but_undeleted_asm)}")
