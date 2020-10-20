@@ -43,8 +43,8 @@ typedef s32 ApiStatus;
 #define SI_END_LOOP() SI_CMD(0x06)
 #define SI_BREAK_LOOP() SI_CMD(0x07)
 
-#define SI_WAIT_FRAMES(i) SI_CMD(0x08, 1, i)
-#define SI_WAIT_SECS(i) SI_CMD(0x09, 1, i)
+#define SI_WAIT_FRAMES(i) SI_CMD(0x08, i)
+#define SI_WAIT_SECS(i) SI_CMD(0x09, i)
 
 #define SI_IF_EQ(a, b) SI_CMD(0x0A, a, b)
 #define SI_IF_NE(a, b) SI_CMD(0x0B, a, b)
@@ -54,8 +54,8 @@ typedef s32 ApiStatus;
 #define SI_IF_GE(a, b) SI_CMD(0x0F, a, b)
 #define SI_IF_BITS_ON(a, b) SI_CMD(0x10, a, b)
 #define SI_IF_BITS_OFF(a, b) SI_CMD(0x11, a, b)
-#define SI_ELSE() SI_CMD(0x12, 0)
-#define SI_END_IF() SI_CMD(0x13, 0)
+#define SI_ELSE() SI_CMD(0x12)
+#define SI_END_IF() SI_CMD(0x13)
 
 #define SI_SWITCH(a) SI_CMD(0x14, a)
 #define SI_SWITCH_CONST(a) SI_CMD(0x15, a) // Does not get_variable
@@ -139,11 +139,11 @@ typedef s32 ApiStatus;
 #define SI_END_CHILD_THREAD() SI_CMD(0x59)
 
 #define GEN_EXIT_WALK_SCRIPT(name, walkDistance, exitIdx, map, entryIdx) \
-    Bytecode name[] = { \
+    Script name = { \
         SI_GROUP(0x1B), \
-        SI_CALL(&UseExitHeading, walkDistance, exitIdx), \
-        SI_EXEC(&ExitWalk), \
-        SI_CALL(&GotoMap, map, entryIdx), \
+        SI_CALL(UseExitHeading, walkDistance, exitIdx), \
+        SI_EXEC(ExitWalk), \
+        SI_CALL(GotoMap, map, entryIdx), \
         SI_WAIT_FRAMES(100), \
         SI_RETURN(), \
         SI_END(), \

@@ -554,7 +554,7 @@ typedef UNK_TYPE Cam;
 #define Cam_TATTLE  0x00000002
 #define Cam_CAM3    0x00000003
 
-typedef UNK_TYPE ItemId;
+typedef s16 ItemId;
 #define ItemId_JUMP               0x00000001
 #define ItemId_SPIN_JUMP          0x00000002
 #define ItemId_TORNADO_JUMP       0x00000003

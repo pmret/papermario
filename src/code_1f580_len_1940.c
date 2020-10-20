@@ -1,4 +1,5 @@
 #include "common.h"
+#include "map.h"
 
 ApiStatus SetEncounterStatusFlags(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -501,7 +502,7 @@ ApiStatus func_80045838(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus func_800458CC(ScriptInstance* script, s32 isInitialCall) {
-    set_variable(script, *script->ptrReadPos, script->ownerActorID->npcSettings->unkFlags & 8);
+    set_variable(script, *script->ptrReadPos, script->ownerActorID->npcSettings->unk_2A & 8);
     return ApiStatus_DONE2;
 }
 

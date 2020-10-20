@@ -35,7 +35,7 @@ def star_rod_lib():
                                     if kind == "api":
                                         print(f"ApiStatus {name}(ScriptInstance* script, s32 isInitialCall);")
                                     elif kind == "scr":
-                                        print(f"extern Bytecode {name}[];")
+                                        print(f"extern Script {name};")
                                 """
                         except:
                             pass
@@ -43,14 +43,9 @@ def star_rod_lib():
     return _star_rod_lib
 
 def addr_ref(addr):
-    func_name = star_rod_lib().get(addr)
-    if func_name:
-        func_name = "&" + func_name
-    else:
-        func_name = f"0x{addr:08X}"
-    return func_name
+    return star_rod_lib().get(addr, f"0x{addr:08X}")
 
-def disassemble(bytes, indent = 0):
+def disassemble(bytes, indent = 0, script_name = "script"):
     out = ""
     prefix = ""
 
@@ -121,10 +116,12 @@ def disassemble(bytes, indent = 0):
             indent -= 1
 
             if indent_used:
-                prefix_line("Bytecode script[] = { // *INDENT-OFF*")
-                write_line("}; // *INDENT-ON*")
+                prefix_line("// *INDENT-OFF*")
+                prefix_line(f"Script {script_name} = {{")
+                write_line("};")
+                write_line("// *INDENT-ON*")
             else:
-                prefix_line("Bytecode script[] = {")
+                prefix_line(f"Script {script_name} = {{")
                 write_line("};")
 
             return prefix + out

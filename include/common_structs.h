@@ -5,6 +5,7 @@
 #include "ultra64.h"
 #include "types.h"
 #include "si.h"
+#include "enums.h"
 
 struct ScriptInstance;
 
@@ -26,6 +27,13 @@ typedef struct Vec3s {
     /* 0x02 */ s16 y;
     /* 0x04 */ s16 z;
 } Vec3s; // size = 0x06
+
+typedef struct Vec4f {
+    /* 0x00 */ f32 x;
+    /* 0x04 */ f32 y;
+    /* 0x08 */ f32 z;
+    /* 0x0C */ f32 yaw;
+} Vec4f; // size = 0x10
 
 typedef struct Matrix4f {
     /* 0x00 */ f32 mtx[4][4];
@@ -106,7 +114,6 @@ typedef struct Npc {
     /* 0x0AA */ u8 renderMode;
     /* 0x0AB */ char unk_AB[661];
 } Npc; // size = 0x340
-
 typedef struct PlayerData {
     /* 0x000 */ s8 bootsLevel;
     /* 0x001 */ s8 hammerLevel;
@@ -172,7 +179,6 @@ typedef struct PlayerData {
     /* 0x33C */ s16 smashGameRecord;
     /* 0x33E */ char unk_33E[2];
 } PlayerData; // size = 0x340
-
 typedef union {
     struct {
         /* 0x0 */ s16 genericFlagIndex;
@@ -180,7 +186,6 @@ typedef union {
     } bytes;
     s32 flags;
 } TriggerFlags;
-
 typedef struct Trigger {
     /* 0x00 */ TriggerFlags flags;
     /* 0x04 */ s32 params1;
@@ -195,68 +200,6 @@ typedef struct Trigger {
     /* 0x31 */ char unk_31[3];
     /* 0x34 */ s32 runningScriptID;
 } Trigger; // size = 0x38
-
-typedef struct Enemy {
-    /* 0x00 */ s32 flags;
-    /* 0x04 */ u8 encounterIndex;
-    /* 0x05 */ s8 encountered;
-    /* 0x06 */ u8 scriptGroup; /* scripts launched for this npc controller will be assigned this group */
-    /* 0x07 */ s8 unk_07;
-    /* 0x08 */ s16 npcID;
-    /* 0x0A */ s16 spawnPos[3];
-    /* 0x10 */ Vec3s unk_10;
-    /* 0x16 */ char unk_16[2];
-    /* 0x18 */ struct StaticNpcSettings* npcSettings;
-    /* 0x1C */ Bytecode* initBytecode;
-    /* 0x20 */ Bytecode* interactBytecode;
-    /* 0x24 */ Bytecode* aiBytecode;
-    /* 0x28 */ Bytecode* hitBytecode;
-    /* 0x2C */ Bytecode* auxBytecode;
-    /* 0x30 */ Bytecode* defeatBytecode;
-    /* 0x34 */ struct ScriptInstance* initScript;
-    /* 0x38 */ struct ScriptInstance* interactScript;
-    /* 0x3C */ struct ScriptInstance* aiScript;
-    /* 0x40 */ struct ScriptInstance* hitScript;
-    /* 0x44 */ struct ScriptInstance* auxScript;
-    /* 0x48 */ struct ScriptInstance* defeatScript;
-    /* 0x4C */ s32 initScriptID;
-    /* 0x50 */ s32 interactScriptID;
-    /* 0x54 */ s32 aiScriptID;
-    /* 0x58 */ s32 hitScriptID;
-    /* 0x5C */ s32 auxScriptID;
-    /* 0x60 */ s32 defeatScriptID;
-    /* 0x64 */ char unk_64[8];
-    /* 0x6C */ s32 varTable[16];
-    /* 0xAC */ char unk_AC[9];
-    /* 0xB5 */ s8 unk_B5;
-    /* 0xB6 */ char unk_B6[2];
-    /* 0xB8 */ s32 unkSettings24;
-    /* 0xBC */ char unk_BC[8];
-    /* 0xC4 */ s32 unk_C4;
-    /* 0xC8 */ s32 unk_C8;
-    /* 0xCC */ s32* animList;
-    /* 0xD0 */ UNK_PTR territoryData;
-    /* 0xD4 */ s16* dropTables;
-    /* 0xD8 */ u32 tattleString;
-    /* 0xDC */ char unk_DC[20];
-} Enemy; // size = 0xF0
-
-typedef struct StaticNpcSettings {
-    /* 0x00 */ char unk_00[4];
-    /* 0x04 */ s16 height;
-    /* 0x06 */ s16 radius;
-    /* 0x08 */ UNK_PTR otherAI;
-    /* 0x0C */ Bytecode* interactScript;
-    /* 0x10 */ Bytecode* aiScript;
-    /* 0x14 */ Bytecode* hitScript;
-    /* 0x18 */ Bytecode* auxScript;
-    /* 0x1C */ Bytecode* defeatScript;
-    /* 0x20 */ s32 flags;
-    /* 0x24 */ char unk_24[4];
-    /* 0x28 */ s16 level;
-    /* 0x2A */ s16 unkFlags;
-} StaticNpcSettings; // size = 0x2C
-
 typedef struct ScriptInstance {
     /* 0x000 */ u8 state;
     /* 0x001 */ u8 currentArgc;
@@ -347,27 +290,6 @@ typedef struct MusicPlayer {
     /* 0x18 */ char unk_18[24];
 } MusicPlayer; // size = 0x30
 
-typedef struct StaticNpc {
-    /* 0x000 */ s32 ID;
-    /* 0x004 */ struct StaticNpcSettings* npcSettings;
-    /* 0x008 */ s32 spawnPos[3];
-    /* 0x014 */ s32 flags;
-    /* 0x018 */ Bytecode* initScript;
-    /* 0x01C */ char unk_1C[8];
-    /* 0x024 */ s32 spawnYaw;
-    /* 0x028 */ s16 itemDrops[25];
-    /* 0x05A */ s16 heartDrops[32];
-    /* 0x09A */ s16 flowerDrops[32];
-    /* 0x0DA */ s16 minCoinBonus;
-    /* 0x0DC */ s16 maxCoinBonus;
-    /* 0x0DE */ char unk_DE[2];
-    /* 0x0E0 */ s32 movementData[48];
-    /* 0x1A0 */ s32 animations[16];
-    /* 0x1E0 */ char unk_1E0[8];
-    /* 0x1E8 */ UNK_PTR extraAnimations;
-    /* 0x1EC */ s32 tattle;
-} StaticNpc; // size = 0x1F0
-
 typedef struct MenuIcon {
     /* 0x00 */ u32 flags;
     /* 0x04 */ u32* readPos;
@@ -438,7 +360,6 @@ typedef struct UiStatus {
     /* 0x68 */ s32 iconIndex13;
     /* 0x6C */ s8 unk_6C[4];
 } UiStatus; // size = 0x70
-
 typedef struct Collider {
     /* 0x00 */ s32 flags;
     /* 0x04 */ s16 nextSibling;
@@ -1546,30 +1467,5 @@ typedef struct SaveData {
     /* 0x1300 */ s32 unk_1300;
     /* 0x1304 */ char unk_1304[0x7C];
 } SaveData; // size = 0x1380
-
-typedef struct MapHeader {
-    /* 0x00 */ char unk_00[0x10];
-    /* 0x10 */ Bytecode* mainScript;
-    /* 0x14 */ f32* entryList;
-    /* 0x18 */ s32 entryCount;
-    /* 0x1C */ char unk_1C[0x1C];
-    /* 0x38 */ s32 background; // 0x80200000 if there is one, 0 otherwise
-    /* 0x3C */ UNK_FUN_PTR(tattle); // or string id
-} MapHeader; // size = 0x40
-
-typedef struct NpcAISettings {
-    /* 0x00 */ f32 moveSpeed;
-    /* 0x04 */ s32 moveTime;
-    /* 0x08 */ s32 waitTime;
-    /* 0x0C */ f32 alertRadius;
-    /* 0x10 */ f32 unk_10;
-    /* 0x14 */ s32 unk_14;
-    /* 0x18 */ f32 chaseSpeed;
-    /* 0x1C */ s32 unk_1C; // chase turn step?
-    /* 0x20 */ s32 unk_20;
-    /* 0x24 */ f32 chaseRadius;
-    /* 0x28 */ f32 unk_28;
-    /* 0x2C */ s32 unk_2C; // bool
-} NpcAISettings; // size = 0x30
 
 #endif
