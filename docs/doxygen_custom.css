@@ -1,0 +1,150 @@
+/* typography */
+
+body, table, div, p, dl { font: inherit }
+
+body, table, div, p, dl, p.reference, p.definition, .memberdecls .header {
+    color: #121212;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
+}
+
+:root { font-size: 10px } /* rem multiplier */
+h1 { font-size: 3rem; }
+h2 { font-size: 2.25rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.25rem; }
+h5 { font-size: 1rem; }
+h6 { font-size: .875rem; }
+h1, h2, h3, h4, h5, h6 { margin-bottom: 3px }
+h1 { border-bottom: 1px solid #eee }
+
+.contents a:any-link { color: #357edd }
+.contents a.visited { color: #5e2ca5 }
+
+p.reference,         p.definition { color: #959da5; font-weight: normal; font-size: 11px; line-height: 1.2 }
+p.reference a,       p.definition a { color: #959da5 !important }
+p.reference a:hover, p.definition a:hover { color: #357edd }
+
+.memname, .fragment, .memberdecls, .fragment .line, code {
+    font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+}
+
+#PageDoc, .content, p {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #1b1f23;
+}
+
+hr {
+    border-color: #eee;
+    margin: 2em;
+}
+
+/* layout */
+
+html { height: 100% }
+
+body {
+    display: flex;
+    flex-direction: row;
+
+    width: 100%;
+    max-width: 1000px;
+    min-height: 100%;
+    margin: 0 auto;
+}
+
+#side-nav {
+    position: relative;
+    width: 250px !important;
+}
+
+.ui-resizable-handle, #nav-sync { display: none !important }
+
+#doc-content {
+    margin-left: 0 !important;
+    flex: 1;
+}
+
+#nav-path { display: none } /* hide footer */
+#MathJax_Message { display: none } /* hide "MathJax loading..." message */
+
+#MSearchBox {
+    position: fixed;
+    top: 1em;
+    right: 1em;
+}
+
+.contents {
+    font-size: 16px;
+    padding-top: 1em;
+    padding-bottom: 2em;
+}
+
+/*
+table {
+    table-layout: fixed;
+    width: 100%;
+}
+.memItemLeft { width: 32ch }
+*/
+
+/* cleaning */
+
+#details + .groupheader,
+.definition,
+.memtitle,
+.contents > p:first-child > a:first-child /* "Go to the source code of this file." */
+{ display: none }
+
+table.memname * {
+    display: inline;
+}
+
+/* candy */
+
+div.fragment, .memproto {
+    padding: 16px;
+    border: 0;
+    border-radius: 6px;
+    background: #f6f8fa;
+}
+
+div.fragment div.line {
+    font-size: 85%;
+    line-height: 1.45;
+}
+
+code {
+    padding: .2em .4em;
+    margin: 0;
+    font-size: 85%;
+    background: #f6f8fa;
+}
+
+.memitem {
+    display: block !important;
+    border-left: 1px solid #eee;
+    padding-left: 1em;
+    margin: 1em 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.memproto {
+    padding: 8px;
+    margin-bottom: .5em;
+    box-shadow: none;
+    text-shadow: none;
+    display: inline-block;
+}
+
+.memname {
+    margin-left: 0;
+}
+
+.memdoc {
+    border: 0;
+    padding: 0;
+    box-shadow: none;
+    background: none;
+}

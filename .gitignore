@@ -7,7 +7,6 @@ venv/
 .DS_Store
 ctx.c
 expected/
-docs/
 
 # Assets
 assets
@@ -18,3 +17,4 @@ assets
 *.bin
 bin/
 build/
+docs/doxygen/
