@@ -28,18 +28,18 @@ Script kmr_12_main = {
 };
 
 NpcAISettings goomba_ai_settings = {
-    1.5f,
-    30,
-    30,
-    130.0f,
-    0.0f,
-    1,
-    2.5f,
-    180,
-    3,
-    150.0f,
-    0.0f,
-    TRUE
+    .moveSpeed = 1.5f,
+    .moveTime = 30,
+    .waitTime = 30,
+    .alertRadius = 130.0f,
+    .unk_10 = 0.0f,
+    .unk_14 = 1,
+    .chaseSpeed = 2.5f,
+    .unk_1C = 180,
+    .unk_20 = 3,
+    .chaseRadius = 150.0f,
+    .unk_28 = 0.0f,
+    .unk_2C = TRUE,
 };
 
 Script goomba_ai = {
@@ -91,9 +91,9 @@ Script goomba_idle = {
     SI_WAIT_FRAMES(1),
 
     SI_CALL(SetSelfVar, 0, FALSE),
-    SI_CALL(SetNpcAnimation, NpcId_SELF, 0x26000D),
-    SI_CALL(EnableNpcShadow, NpcId_SELF, 0),
-    SI_CALL(SetSelfEnemyFlagBits, 32, 1),
+    SI_CALL(SetNpcAnimation, NpcId_SELF, ANIMATION(SpriteId_GOOMBA, 0, 13)),
+    SI_CALL(EnableNpcShadow, NpcId_SELF, FALSE),
+    SI_CALL(SetSelfEnemyFlagBits, 0x00000020, TRUE),
 
     // Wait until read_sign sets NPC var 0
     SI_LABEL(0),
@@ -104,7 +104,7 @@ Script goomba_idle = {
     SI_END_IF(),
 
     // Peel and jump off the sign
-    SI_CALL(SetNpcFlagBits, NpcId_SELF, 0x240000, 1),
+    SI_CALL(SetNpcFlagBits, NpcId_SELF, 0x00240000, TRUE),
     SI_WAIT_FRAMES(3),
     SI_SET_F(SI_VAR(0), SI_FIXED(0.0f)),
     SI_LOOP(9),
@@ -112,29 +112,29 @@ Script goomba_idle = {
         SI_CALL(SetNpcRotation, NpcId_SELF, 0, SI_VAR(0), 0),
         SI_WAIT_FRAMES(1),
     SI_END_LOOP(),
-    SI_CALL(SetNpcAnimation, NpcId_SELF, 0x260000),
+    SI_CALL(SetNpcAnimation, NpcId_SELF, ANIMATION(SpriteId_GOOMBA, 0, 0)),
     SI_LOOP(9),
         SI_ADD_F(SI_VAR(0), SI_FIXED(10.0f)),
         SI_CALL(SetNpcRotation, NpcId_SELF, 0, SI_VAR(0), 0),
         SI_WAIT_FRAMES(1),
     SI_END_LOOP(),
-    SI_CALL(SetNpcAnimation, NpcId_SELF, 0x260007),
+    SI_CALL(SetNpcAnimation, NpcId_SELF, ANIMATION(SpriteId_GOOMBA, 0, 7)),
     SI_WAIT_FRAMES(20),
-    SI_CALL(SetNpcAnimation, NpcId_SELF, 0x260001),
+    SI_CALL(SetNpcAnimation, NpcId_SELF, ANIMATION(SpriteId_GOOMBA, 0, 1)),
     SI_CALL(PlaySoundAtNpc, NpcId_SELF, 248, 0),
     SI_CALL(func_802CFE2C, NpcId_SELF, 8192),
     SI_CALL(func_802CFD30, NpcId_SELF, 5, 6, 1, 1, 0),
     SI_WAIT_FRAMES(12),
     SI_WAIT_FRAMES(5),
     SI_CALL(PlaySoundAtNpc, NpcId_SELF, 812, 0),
-    SI_CALL(EnableNpcShadow, NpcId_SELF, 1),
+    SI_CALL(EnableNpcShadow, NpcId_SELF, TRUE),
     SI_CALL(SetNpcJumpscale, NpcId_SELF, SI_FIXED(0.6005859375f)),
-    SI_CALL(NpcJump0, NpcId_SELF, 0xFFFFFFDD, 0, 30, 23),
+    SI_CALL(NpcJump0, NpcId_SELF, -35, 0, 30, 23),
     SI_CALL(func_802CFD30, NpcId_SELF, 0, 0, 0, 0, 0),
     SI_CALL(InterpNpcYaw, NpcId_SELF, 90, 0),
-    SI_CALL(SetNpcFlagBits, NpcId_SELF, 0x240000, 0),
-    SI_CALL(SetSelfEnemyFlagBits, 32, 0),
-    SI_CALL(SetSelfEnemyFlagBits, 0x40000000, 1),
+    SI_CALL(SetNpcFlagBits, NpcId_SELF, 0x00240000, FALSE),
+    SI_CALL(SetSelfEnemyFlagBits, 0x00000020, FALSE),
+    SI_CALL(SetSelfEnemyFlagBits, 0x40000000, TRUE),
 
     // We're done jumping off; the player can read the sign again
     SI_BIND(read_west_sign, TriggerFlag_WALL_INTERACT, 10, NULL),
@@ -145,13 +145,13 @@ Script goomba_idle = {
     SI_RETURN(),
     SI_END(),
 };
-// *INDENT-ON*
 
 Script goomba_init = {
     SI_CALL(BindNpcIdle, NpcId_SELF, &goomba_idle),
     SI_RETURN(),
     SI_END(),
 };
+// *INDENT-ON*
 
 StaticNpc goomba_npc = {
     .id = NpcId_GOOMBA,
