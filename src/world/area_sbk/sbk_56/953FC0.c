@@ -1,6 +1,6 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "world/area_sbk/sbk_56/953FC0", func_80240000_953FC0);
+#include "world/common/SpawnSunEffect.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sbk/sbk_56/953FC0", func_80240038_953FF8);
 

@@ -1,3 +1,1 @@
-#include "common.h"
-
-INCLUDE_ASM(s32, "world/area_sbk/sbk_35/9486B0", func_80240000_9486B0);
+#include "world/common/SpawnSunEffect.inc.c"
