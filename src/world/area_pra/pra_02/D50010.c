@@ -28,7 +28,7 @@ INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_80240EEC_D50EDC);
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 
-INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_80240F7C_D50F6C);
+#include "world/common/SomeXYZFuncTodoRename.inc.c"
 
 INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_8024114C_D5113C);
 

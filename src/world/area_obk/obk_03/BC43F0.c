@@ -6,7 +6,7 @@ INCLUDE_ASM(s32, "world/area_obk/obk_03/BC43F0", func_80240170_BC43F0);
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 
-INCLUDE_ASM(s32, "world/area_obk/obk_03/BC43F0", func_802402E4);
+#include "world/common/SomeXYZFuncTodoRename.inc.c"
 
 INCLUDE_ASM(s32, "world/area_obk/obk_03/BC43F0", func_802404B4);
 

@@ -80,7 +80,7 @@ INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_802424D4);
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 
-INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_80242560);
+#include "world/common/SomeXYZFuncTodoRename.inc.c"
 
 INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_80242730);
 

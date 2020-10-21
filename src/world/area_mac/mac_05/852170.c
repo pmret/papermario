@@ -88,7 +88,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80242384_8544F4);
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80242410);
+#include "world/common/SomeXYZFuncTodoRename.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_802425E0);
 

@@ -96,7 +96,7 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80242014);
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_8024209C);
+#include "world/common/SomeXYZFuncTodoRename.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_8024226C);
 
