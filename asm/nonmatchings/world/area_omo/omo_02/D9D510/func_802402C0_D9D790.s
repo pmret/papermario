@@ -25,7 +25,7 @@ glabel func_802402C0_D9D790
 /* D9D7DC 8024030C 16020005 */  bne       $s0, $v0, .L80240324
 /* D9D7E0 80240310 24020001 */   addiu    $v0, $zero, 1
 /* D9D7E4 80240314 0260202D */  daddu     $a0, $s3, $zero
-/* D9D7E8 80240318 0C0900B0 */  jal       func_802402C0
+/* D9D7E8 80240318 0C0900B0 */  jal       func_802402C0_D9D790
 /* D9D7EC 8024031C 02A0282D */   daddu    $a1, $s5, $zero
 /* D9D7F0 80240320 24020001 */  addiu     $v0, $zero, 1
 .L80240324:

@@ -95,17 +95,17 @@ glabel func_80240E60_BAAFA0
 /* BAB100 80240FC0 00000000 */   nop      
 /* BAB104 80240FC4 0260202D */  daddu     $a0, $s3, $zero
 /* BAB108 80240FC8 0280282D */  daddu     $a1, $s4, $zero
-/* BAB10C 80240FCC 0C09009C */  jal       func_80240270
+/* BAB10C 80240FCC 0C09009C */  jal       func_80240270_BAA3B0
 /* BAB110 80240FD0 0200302D */   daddu    $a2, $s0, $zero
 /* BAB114 80240FD4 0260202D */  daddu     $a0, $s3, $zero
 /* BAB118 80240FD8 0280282D */  daddu     $a1, $s4, $zero
-/* BAB11C 80240FDC 0C090128 */  jal       func_802404A0
+/* BAB11C 80240FDC 0C090128 */  jal       func_802404A0_BAA5E0
 /* BAB120 80240FE0 0200302D */   daddu    $a2, $s0, $zero
 /* BAB124 80240FE4 08090418 */  j         .L80241060
 /* BAB128 80240FE8 0000102D */   daddu    $v0, $zero, $zero
 /* BAB12C 80240FEC 0260202D */  daddu     $a0, $s3, $zero
 /* BAB130 80240FF0 0280282D */  daddu     $a1, $s4, $zero
-/* BAB134 80240FF4 0C0901F6 */  jal       func_802407D8
+/* BAB134 80240FF4 0C0901F6 */  jal       func_802407D8_BAA918
 /* BAB138 80240FF8 0200302D */   daddu    $a2, $s0, $zero
 /* BAB13C 80240FFC 8E630070 */  lw        $v1, 0x70($s3)
 /* BAB140 80241000 24020003 */  addiu     $v0, $zero, 3
@@ -113,17 +113,17 @@ glabel func_80240E60_BAAFA0
 /* BAB148 80241008 0000102D */   daddu    $v0, $zero, $zero
 /* BAB14C 8024100C 0260202D */  daddu     $a0, $s3, $zero
 /* BAB150 80241010 0280282D */  daddu     $a1, $s4, $zero
-/* BAB154 80241014 0C090226 */  jal       func_80240898
+/* BAB154 80241014 0C090226 */  jal       func_80240898_BAA9D8
 /* BAB158 80241018 0200302D */   daddu    $a2, $s0, $zero
 /* BAB15C 8024101C 08090418 */  j         .L80241060
 /* BAB160 80241020 0000102D */   daddu    $v0, $zero, $zero
 /* BAB164 80241024 0260202D */  daddu     $a0, $s3, $zero
 /* BAB168 80241028 0280282D */  daddu     $a1, $s4, $zero
-/* BAB16C 8024102C 0C09028F */  jal       func_80240A3C
+/* BAB16C 8024102C 0C09028F */  jal       func_80240A3C_BAAB7C
 /* BAB170 80241030 0200302D */   daddu    $a2, $s0, $zero
 /* BAB174 80241034 0260202D */  daddu     $a0, $s3, $zero
 /* BAB178 80241038 0280282D */  daddu     $a1, $s4, $zero
-/* BAB17C 8024103C 0C0902C7 */  jal       func_80240B1C
+/* BAB17C 8024103C 0C0902C7 */  jal       func_80240B1C_BAAC5C
 /* BAB180 80241040 0200302D */   daddu    $a2, $s0, $zero
 /* BAB184 80241044 08090418 */  j         .L80241060
 /* BAB188 80241048 0000102D */   daddu    $v0, $zero, $zero

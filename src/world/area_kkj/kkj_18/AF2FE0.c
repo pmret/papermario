@@ -14,4 +14,4 @@ INCLUDE_ASM(s32, "world/area_kkj/kkj_18/AF2FE0", func_80240694_AF3334);
 
 INCLUDE_ASM(s32, "world/area_kkj/kkj_18/AF2FE0", func_80240730_AF33D0);
 
-INCLUDE_ASM(s32, "world/area_kkj/kkj_18/AF2FE0", func_80240774);
+INCLUDE_ASM(s32, "world/area_kkj/kkj_18/AF2FE0", func_80240774_AF3414);

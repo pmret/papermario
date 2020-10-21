@@ -6,9 +6,9 @@ INCLUDE_ASM(s32, "world/area_mim/mim_02/B97C70", func_802402A0_B97EA0);
 
 INCLUDE_ASM(s32, "world/area_mim/mim_02/B97C70", func_802405D8_B981D8);
 
-INCLUDE_ASM(s32, "world/area_mim/mim_02/B97C70", func_80240698);
+INCLUDE_ASM(s32, "world/area_mim/mim_02/B97C70", func_80240698_B98298);
 
-INCLUDE_ASM(s32, "world/area_mim/mim_02/B97C70", func_8024083C);
+INCLUDE_ASM(s32, "world/area_mim/mim_02/B97C70", func_8024083C_B9843C);
 
 INCLUDE_ASM(s32, "world/area_mim/mim_02/B97C70", func_8024091C_B9851C);
 
@@ -24,4 +24,4 @@ INCLUDE_ASM(s32, "world/area_mim/mim_02/B97C70", func_802410B0_B98CB0);
 
 INCLUDE_ASM(s32, "world/area_mim/mim_02/B97C70", func_80241104_B98D04);
 
-INCLUDE_ASM(s32, "world/area_mim/mim_02/B97C70", func_8024113C);
+INCLUDE_ASM(s32, "world/area_mim/mim_02/B97C70", func_8024113C_B98D3C);

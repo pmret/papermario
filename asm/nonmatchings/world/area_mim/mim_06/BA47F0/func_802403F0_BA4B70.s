@@ -22,7 +22,7 @@ glabel func_802403F0_BA4B70
 /* BA4BB4 80240434 8C420004 */  lw        $v0, 4($v0)
 /* BA4BB8 80240438 27A60014 */  addiu     $a2, $sp, 0x14
 /* BA4BBC 8024043C 8C440000 */  lw        $a0, ($v0)
-/* BA4BC0 80240440 0C09001C */  jal       func_80240070
+/* BA4BC0 80240440 0C09001C */  jal       func_80240070_BA47F0
 /* BA4BC4 80240444 27A70018 */   addiu    $a3, $sp, 0x18
 /* BA4BC8 80240448 C7A00010 */  lwc1      $f0, 0x10($sp)
 /* BA4BCC 8024044C 3C014480 */  lui       $at, 0x4480

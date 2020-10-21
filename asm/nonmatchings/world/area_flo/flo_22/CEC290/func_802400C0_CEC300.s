@@ -55,7 +55,7 @@ glabel func_802400C0_CEC300
 /* CEC3C8 80240188 4405E000 */  mfc1      $a1, $f28
 /* CEC3CC 8024018C 4406D000 */  mfc1      $a2, $f26
 /* CEC3D0 80240190 4407C000 */  mfc1      $a3, $f24
-/* CEC3D4 80240194 0C090014 */  jal       func_80240050
+/* CEC3D4 80240194 0C090014 */  jal       func_80240050_CEC290
 /* CEC3D8 80240198 27A40010 */   addiu    $a0, $sp, 0x10
 /* CEC3DC 8024019C 27A40010 */  addiu     $a0, $sp, 0x10
 /* CEC3E0 802401A0 0200282D */  daddu     $a1, $s0, $zero
@@ -90,7 +90,7 @@ glabel func_802400C0_CEC300
 /* CEC450 80240210 4405E000 */  mfc1      $a1, $f28
 /* CEC454 80240214 4406D000 */  mfc1      $a2, $f26
 /* CEC458 80240218 4407C000 */  mfc1      $a3, $f24
-/* CEC45C 8024021C 0C090014 */  jal       func_80240050
+/* CEC45C 8024021C 0C090014 */  jal       func_80240050_CEC290
 /* CEC460 80240220 27A40010 */   addiu    $a0, $sp, 0x10
 /* CEC464 80240224 27A40010 */  addiu     $a0, $sp, 0x10
 /* CEC468 80240228 0200282D */  daddu     $a1, $s0, $zero

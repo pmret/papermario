@@ -55,7 +55,7 @@ glabel func_802412A0_CBA4A0
 /* CBA568 80241368 4405E000 */  mfc1      $a1, $f28
 /* CBA56C 8024136C 4406D000 */  mfc1      $a2, $f26
 /* CBA570 80241370 4407C000 */  mfc1      $a3, $f24
-/* CBA574 80241374 0C09048C */  jal       func_80241230
+/* CBA574 80241374 0C09048C */  jal       func_80241230_CBA430
 /* CBA578 80241378 27A40010 */   addiu    $a0, $sp, 0x10
 /* CBA57C 8024137C 27A40010 */  addiu     $a0, $sp, 0x10
 /* CBA580 80241380 0200282D */  daddu     $a1, $s0, $zero
@@ -90,7 +90,7 @@ glabel func_802412A0_CBA4A0
 /* CBA5F0 802413F0 4405E000 */  mfc1      $a1, $f28
 /* CBA5F4 802413F4 4406D000 */  mfc1      $a2, $f26
 /* CBA5F8 802413F8 4407C000 */  mfc1      $a3, $f24
-/* CBA5FC 802413FC 0C09048C */  jal       func_80241230
+/* CBA5FC 802413FC 0C09048C */  jal       func_80241230_CBA430
 /* CBA600 80241400 27A40010 */   addiu    $a0, $sp, 0x10
 /* CBA604 80241404 27A40010 */  addiu     $a0, $sp, 0x10
 /* CBA608 80241408 0200282D */  daddu     $a1, $s0, $zero

@@ -12,11 +12,11 @@ INCLUDE_ASM(s32, "world/area_flo/flo_00/C9DF60", func_802406BC_C9E5DC);
 
 INCLUDE_ASM(s32, "world/area_flo/flo_00/C9DF60", func_80240770_C9E690);
 
-INCLUDE_ASM(s32, "world/area_flo/flo_00/C9DF60", func_802407E4);
+INCLUDE_ASM(s32, "world/area_flo/flo_00/C9DF60", func_802407E4_C9E704);
 
 INCLUDE_ASM(s32, "world/area_flo/flo_00/C9DF60", func_8024085C_C9E77C);
 
-INCLUDE_ASM(s32, "world/area_flo/flo_00/C9DF60", func_8024098C);
+INCLUDE_ASM(s32, "world/area_flo/flo_00/C9DF60", func_8024098C_C9E8AC);
 
 INCLUDE_ASM(s32, "world/area_flo/flo_00/C9DF60", func_80240AAC_C9E9CC);
 

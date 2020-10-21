@@ -27,7 +27,7 @@ glabel func_80240120_CAEE60
 /* CAEEB4 80240174 50400008 */  beql      $v0, $zero, .L80240198
 /* CAEEB8 80240178 26100001 */   addiu    $s0, $s0, 1
 /* CAEEBC 8024017C 0200202D */  daddu     $a0, $s0, $zero
-/* CAEEC0 80240180 0C090035 */  jal       func_802400D4
+/* CAEEC0 80240180 0C090035 */  jal       func_802400D4_CAEE14
 /* CAEEC4 80240184 00122C03 */   sra      $a1, $s2, 0x10
 /* CAEEC8 80240188 10540003 */  beq       $v0, $s4, .L80240198
 /* CAEECC 8024018C 26100001 */   addiu    $s0, $s0, 1

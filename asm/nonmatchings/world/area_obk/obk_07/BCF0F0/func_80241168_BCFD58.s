@@ -5,7 +5,7 @@ glabel func_80241168_BCFD58
 /* BCFD58 80241168 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* BCFD5C 8024116C AFBF0018 */  sw        $ra, 0x18($sp)
 /* BCFD60 80241170 AFB10014 */  sw        $s1, 0x14($sp)
-/* BCFD64 80241174 0C090150 */  jal       func_80240540
+/* BCFD64 80241174 0C090150 */  jal       func_80240540_BCF130
 /* BCFD68 80241178 AFB00010 */   sw       $s0, 0x10($sp)
 /* BCFD6C 8024117C 3C048024 */  lui       $a0, 0x8024
 /* BCFD70 80241180 24840A6C */  addiu     $a0, $a0, 0xa6c

@@ -105,7 +105,7 @@ glabel func_8024032C_AD43BC
 /* AD4548 802404B8 46200020 */  cvt.s.d   $f0, $f0
 /* AD454C 802404BC E7A00010 */  swc1      $f0, 0x10($sp)
 /* AD4550 802404C0 8E26003C */  lw        $a2, 0x3c($s1)
-/* AD4554 802404C4 0C0900A0 */  jal       func_80240280
+/* AD4554 802404C4 0C0900A0 */  jal       func_80240280_AD4310
 /* AD4558 802404C8 02C0202D */   daddu    $a0, $s6, $zero
 /* AD455C 802404CC 02A0202D */  daddu     $a0, $s5, $zero
 /* AD4560 802404D0 4406C000 */  mfc1      $a2, $f24

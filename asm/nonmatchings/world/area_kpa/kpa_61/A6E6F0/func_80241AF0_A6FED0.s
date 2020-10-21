@@ -58,7 +58,7 @@ glabel func_80241AF0_A6FED0
 .L80241BC4:
 /* A6FFA4 80241BC4 8E450024 */  lw        $a1, 0x24($s2)
 /* A6FFA8 80241BC8 8E460028 */  lw        $a2, 0x28($s2)
-/* A6FFAC 80241BCC 0C0902B9 */  jal       func_80240AE4
+/* A6FFAC 80241BCC 0C0902B9 */  jal       func_80240AE4_A6EEC4
 /* A6FFB0 80241BD0 0260382D */   daddu    $a3, $s3, $zero
 /* A6FFB4 80241BD4 24030001 */  addiu     $v1, $zero, 1
 /* A6FFB8 80241BD8 1443002F */  bne       $v0, $v1, .L80241C98

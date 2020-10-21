@@ -28,7 +28,7 @@ glabel func_802BDD9C
 /* 31D964 802BDDF4 0C03BD17 */  jal       clear_partner_move_history
 /* 31D968 802BDDF8 A0C20001 */   sb       $v0, 1($a2)
 .L802BDDFC:
-/* 31D96C 802BDDFC 0C0AF460 */  jal       func_802BD180_31CC70
+/* 31D96C 802BDDFC 0C0AF460 */  jal       func_802BD180
 /* 31D970 802BDE00 00000000 */   nop      
 /* 31D974 802BDE04 8FBF0010 */  lw        $ra, 0x10($sp)
 /* 31D978 802BDE08 03E00008 */  jr        $ra

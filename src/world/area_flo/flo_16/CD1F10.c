@@ -14,11 +14,11 @@ INCLUDE_ASM(s32, "world/area_flo/flo_16/CD1F10", func_80240200_CD2030);
 
 INCLUDE_ASM(s32, "world/area_flo/flo_16/CD1F10", func_802402AC_CD20DC);
 
-INCLUDE_ASM(s32, "world/area_flo/flo_16/CD1F10", func_802404FC);
+INCLUDE_ASM(s32, "world/area_flo/flo_16/CD1F10", func_802404FC_CD232C);
 
 INCLUDE_ASM(s32, "world/area_flo/flo_16/CD1F10", func_80240528_CD2358);
 
-INCLUDE_ASM(s32, "world/area_flo/flo_16/CD1F10", func_80240560);
+INCLUDE_ASM(s32, "world/area_flo/flo_16/CD1F10", func_80240560_CD2390);
 
 INCLUDE_ASM(s32, "world/area_flo/flo_16/CD1F10", func_802405F0_CD2420);
 
@@ -30,7 +30,7 @@ INCLUDE_ASM(s32, "world/area_flo/flo_16/CD1F10", func_802406E0_CD2510);
 
 INCLUDE_ASM(s32, "world/area_flo/flo_16/CD1F10", func_80240C18_CD2A48);
 
-INCLUDE_ASM(s32, "world/area_flo/flo_16/CD1F10", func_80240D58);
+INCLUDE_ASM(s32, "world/area_flo/flo_16/CD1F10", func_80240D58_CD2B88);
 
 INCLUDE_ASM(s32, "world/area_flo/flo_16/CD1F10", func_80240DA0_CD2BD0);
 

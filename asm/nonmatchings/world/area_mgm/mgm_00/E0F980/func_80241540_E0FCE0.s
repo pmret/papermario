@@ -93,7 +93,7 @@ glabel func_80241540_E0FCE0
 /* E0FE3C 8024169C AE110000 */   sw       $s1, ($s0)
 .L802416A0:
 /* E0FE40 802416A0 8E05000C */  lw        $a1, 0xc($s0)
-/* E0FE44 802416A4 0C090478 */  jal       func_802411E0
+/* E0FE44 802416A4 0C090478 */  jal       func_802411E0_E0F980
 /* E0FE48 802416A8 0200202D */   daddu    $a0, $s0, $zero
 /* E0FE4C 802416AC 8FBF0020 */  lw        $ra, 0x20($sp)
 /* E0FE50 802416B0 8FB1001C */  lw        $s1, 0x1c($sp)

@@ -55,7 +55,7 @@ glabel func_802401F0_A60BC0
 /* A60C88 802402B8 080900C4 */  j         .L80240310
 /* A60C8C 802402BC AE030028 */   sw       $v1, 0x28($s0)
 .L802402C0:
-/* A60C90 802402C0 0C090000 */  jal       func_80240000
+/* A60C90 802402C0 0C090000 */  jal       func_80240000_A609D0
 /* A60C94 802402C4 0240202D */   daddu    $a0, $s2, $zero
 /* A60C98 802402C8 0040202D */  daddu     $a0, $v0, $zero
 /* A60C9C 802402CC 2402FFFF */  addiu     $v0, $zero, -1

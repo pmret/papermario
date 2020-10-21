@@ -105,7 +105,7 @@ glabel func_80240B5C_ACEC9C
 /* ACEE28 80240CE8 46200020 */  cvt.s.d   $f0, $f0
 /* ACEE2C 80240CEC E7A00010 */  swc1      $f0, 0x10($sp)
 /* ACEE30 80240CF0 8E26003C */  lw        $a2, 0x3c($s1)
-/* ACEE34 80240CF4 0C0902AC */  jal       func_80240AB0
+/* ACEE34 80240CF4 0C0902AC */  jal       func_80240AB0_ACEBF0
 /* ACEE38 80240CF8 02C0202D */   daddu    $a0, $s6, $zero
 /* ACEE3C 80240CFC 02A0202D */  daddu     $a0, $s5, $zero
 /* ACEE40 80240D00 4406C000 */  mfc1      $a2, $f24

@@ -8,7 +8,7 @@ INCLUDE_ASM(s32, "world/area_arn/arn_07/BED740", func_80241128_BEDF18);
 
 INCLUDE_ASM(s32, "world/area_arn/arn_07/BED740", func_802411E8_BEDFD8);
 
-INCLUDE_ASM(s32, "world/area_arn/arn_07/BED740", func_8024152C);
+INCLUDE_ASM(s32, "world/area_arn/arn_07/BED740", func_8024152C_BEE31C);
 
 INCLUDE_ASM(s32, "world/area_arn/arn_07/BED740", func_802415A4_BEE394);
 
@@ -18,7 +18,7 @@ INCLUDE_ASM(s32, "world/area_arn/arn_07/BED740", func_80241744_BEE534);
 
 INCLUDE_ASM(s32, "world/area_arn/arn_07/BED740", func_802417A8_BEE598);
 
-INCLUDE_ASM(s32, "world/area_arn/arn_07/BED740", func_80241B38);
+INCLUDE_ASM(s32, "world/area_arn/arn_07/BED740", func_80241B38_BEE928);
 
 INCLUDE_ASM(s32, "world/area_arn/arn_07/BED740", func_80241C5C_BEEA4C);
 

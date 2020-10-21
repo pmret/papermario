@@ -22,4 +22,4 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_09/8D5E00", func_802411E8_8D6FE8);
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_09/8D5E00", func_8024130C_8D710C);
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_09/8D5E00", func_802414F8);
+INCLUDE_ASM(s32, "world/area_kmr/kmr_09/8D5E00", func_802414F8_8D72F8);

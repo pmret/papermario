@@ -34,12 +34,12 @@ glabel func_802BDE88
 /* 31DA64 802BDEF4 00000000 */   nop      
 /* 31DA68 802BDEF8 0C03ADF3 */  jal       partner_kill_ability_script
 /* 31DA6C 802BDEFC 00000000 */   nop      
-/* 31DA70 802BDF00 0C0AF460 */  jal       func_802BD180_31CC70
+/* 31DA70 802BDF00 0C0AF460 */  jal       func_802BD180
 /* 31DA74 802BDF04 00000000 */   nop      
 /* 31DA78 802BDF08 080AF7C6 */  j         .L802BDF18
 /* 31DA7C 802BDF0C 00000000 */   nop      
 .L802BDF10:
-/* 31DA80 802BDF10 0C0AF440 */  jal       func_802BD100_31CC70
+/* 31DA80 802BDF10 0C0AF440 */  jal       func_802BD100
 /* 31DA84 802BDF14 0240202D */   daddu    $a0, $s2, $zero
 .L802BDF18:
 /* 31DA88 802BDF18 C6220088 */  lwc1      $f2, 0x88($s1)

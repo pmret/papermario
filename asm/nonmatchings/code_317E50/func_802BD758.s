@@ -546,7 +546,7 @@ glabel func_802BD758
 /* 318C8C 802BDF3C E6800020 */  swc1      $f0, 0x20($s4)
 /* 318C90 802BDF40 C6200040 */  lwc1      $f0, 0x40($s1)
 /* 318C94 802BDF44 0220202D */  daddu     $a0, $s1, $zero
-/* 318C98 802BDF48 0C0AF440 */  jal       func_802BD100_317E50
+/* 318C98 802BDF48 0C0AF440 */  jal       func_802BD100
 /* 318C9C 802BDF4C E6800024 */   swc1     $f0, 0x24($s4)
 /* 318CA0 802BDF50 24020001 */  addiu     $v0, $zero, 1
 /* 318CA4 802BDF54 3C01802C */  lui       $at, 0x802c

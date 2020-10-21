@@ -95,17 +95,17 @@ glabel func_80240DF0_B9E750
 /* B9E8B0 80240F50 00000000 */   nop      
 /* B9E8B4 80240F54 0260202D */  daddu     $a0, $s3, $zero
 /* B9E8B8 80240F58 0280282D */  daddu     $a1, $s4, $zero
-/* B9E8BC 80240F5C 0C090080 */  jal       func_80240200
+/* B9E8BC 80240F5C 0C090080 */  jal       func_80240200_B9DB60
 /* B9E8C0 80240F60 0200302D */   daddu    $a2, $s0, $zero
 /* B9E8C4 80240F64 0260202D */  daddu     $a0, $s3, $zero
 /* B9E8C8 80240F68 0280282D */  daddu     $a1, $s4, $zero
-/* B9E8CC 80240F6C 0C09010C */  jal       func_80240430
+/* B9E8CC 80240F6C 0C09010C */  jal       func_80240430_B9DD90
 /* B9E8D0 80240F70 0200302D */   daddu    $a2, $s0, $zero
 /* B9E8D4 80240F74 080903FC */  j         .L80240FF0
 /* B9E8D8 80240F78 0000102D */   daddu    $v0, $zero, $zero
 /* B9E8DC 80240F7C 0260202D */  daddu     $a0, $s3, $zero
 /* B9E8E0 80240F80 0280282D */  daddu     $a1, $s4, $zero
-/* B9E8E4 80240F84 0C0901DA */  jal       func_80240768
+/* B9E8E4 80240F84 0C0901DA */  jal       func_80240768_B9E0C8
 /* B9E8E8 80240F88 0200302D */   daddu    $a2, $s0, $zero
 /* B9E8EC 80240F8C 8E630070 */  lw        $v1, 0x70($s3)
 /* B9E8F0 80240F90 24020003 */  addiu     $v0, $zero, 3
@@ -113,7 +113,7 @@ glabel func_80240DF0_B9E750
 /* B9E8F8 80240F98 0000102D */   daddu    $v0, $zero, $zero
 /* B9E8FC 80240F9C 0260202D */  daddu     $a0, $s3, $zero
 /* B9E900 80240FA0 0280282D */  daddu     $a1, $s4, $zero
-/* B9E904 80240FA4 0C09020A */  jal       func_80240828
+/* B9E904 80240FA4 0C09020A */  jal       func_80240828_B9E188
 /* B9E908 80240FA8 0200302D */   daddu    $a2, $s0, $zero
 /* B9E90C 80240FAC 080903FC */  j         .L80240FF0
 /* B9E910 80240FB0 0000102D */   daddu    $v0, $zero, $zero
@@ -123,7 +123,7 @@ glabel func_80240DF0_B9E750
 /* B9E920 80240FC0 0200302D */   daddu    $a2, $s0, $zero
 /* B9E924 80240FC4 0260202D */  daddu     $a0, $s3, $zero
 /* B9E928 80240FC8 0280282D */  daddu     $a1, $s4, $zero
-/* B9E92C 80240FCC 0C0902AB */  jal       func_80240AAC
+/* B9E92C 80240FCC 0C0902AB */  jal       func_80240AAC_B9E40C
 /* B9E930 80240FD0 0200302D */   daddu    $a2, $s0, $zero
 /* B9E934 80240FD4 080903FC */  j         .L80240FF0
 /* B9E938 80240FD8 0000102D */   daddu    $v0, $zero, $zero

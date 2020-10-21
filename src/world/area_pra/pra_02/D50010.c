@@ -38,9 +38,9 @@ INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_802411D8_D511C8);
 
 INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_80241274_D51264);
 
-INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_80241310);
+INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_80241310_D51300);
 
-INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_802413D8);
+INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_802413D8_D513C8);
 
 INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_80241478_D51468);
 
@@ -48,4 +48,4 @@ INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_802414A8_D51498);
 
 INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_80241588_D51578);
 
-INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_802415BC);
+INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_802415BC_D515AC);

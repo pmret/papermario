@@ -145,7 +145,7 @@ glabel func_802BFAB8
 /* 320A40 802BFCD0 8E26000C */  lw        $a2, 0xc($s1)
 /* 320A44 802BFCD4 0C00EA95 */  jal       npc_move_heading
 /* 320A48 802BFCD8 0220202D */   daddu    $a0, $s1, $zero
-/* 320A4C 802BFCDC 0C0AF440 */  jal       func_802BD100_31DE70
+/* 320A4C 802BFCDC 0C0AF440 */  jal       func_802BD100
 /* 320A50 802BFCE0 00000000 */   nop      
 /* 320A54 802BFCE4 8E620074 */  lw        $v0, 0x74($s3)
 /* 320A58 802BFCE8 30420003 */  andi      $v0, $v0, 3

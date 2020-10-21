@@ -37,7 +37,7 @@ glabel func_80240128_D67E28
 /* D67EA8 802401A8 0C00B94E */  jal       get_screen_coords
 /* D67EAC 802401AC AFA20018 */   sw       $v0, 0x18($sp)
 /* D67EB0 802401B0 8E0400A4 */  lw        $a0, 0xa4($s0)
-/* D67EB4 802401B4 0C090008 */  jal       func_80240020
+/* D67EB4 802401B4 0C090008 */  jal       func_80240020_D67D20
 /* D67EB8 802401B8 00000000 */   nop      
 /* D67EBC 802401BC C6020080 */  lwc1      $f2, 0x80($s0)
 /* D67EC0 802401C0 3C014307 */  lui       $at, 0x4307
@@ -54,7 +54,7 @@ glabel func_80240128_D67E28
 /* D67EEC 802401EC 00000000 */  nop       
 /* D67EF0 802401F0 45000004 */  bc1f      .L80240204
 /* D67EF4 802401F4 00000000 */   nop      
-/* D67EF8 802401F8 0C090015 */  jal       func_80240054
+/* D67EF8 802401F8 0C090015 */  jal       func_80240054_D67D54
 /* D67EFC 802401FC 0040202D */   daddu    $a0, $v0, $zero
 /* D67F00 80240200 24040002 */  addiu     $a0, $zero, 2
 .L80240204:

@@ -34,7 +34,7 @@ glabel func_802BD2B4
 /* 31CE94 802BD324 24420001 */  addiu     $v0, $v0, 1
 /* 31CE98 802BD328 16400026 */  bnez      $s2, .L802BD3C4
 /* 31CE9C 802BD32C AE02030C */   sw       $v0, 0x30c($s0)
-/* 31CEA0 802BD330 0C0AF440 */  jal       func_802BD100_31CC70
+/* 31CEA0 802BD330 0C0AF440 */  jal       func_802BD100
 /* 31CEA4 802BD334 0220202D */   daddu    $a0, $s1, $zero
 /* 31CEA8 802BD338 0C03B52E */  jal       update_player_move_history
 /* 31CEAC 802BD33C 0220202D */   daddu    $a0, $s1, $zero

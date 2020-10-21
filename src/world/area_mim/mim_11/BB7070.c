@@ -18,6 +18,6 @@ INCLUDE_ASM(s32, "world/area_mim/mim_11/BB7070", func_80240404_BB7474);
 
 INCLUDE_ASM(s32, "world/area_mim/mim_11/BB7070", func_802405EC_BB765C);
 
-INCLUDE_ASM(s32, "world/area_mim/mim_11/BB7070", func_8024066C);
+INCLUDE_ASM(s32, "world/area_mim/mim_11/BB7070", func_8024066C_BB76DC);
 
-INCLUDE_ASM(s32, "world/area_mim/mim_11/BB7070", func_80240790);
+INCLUDE_ASM(s32, "world/area_mim/mim_11/BB7070", func_80240790_BB7800);

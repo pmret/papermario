@@ -55,7 +55,7 @@ glabel func_802438F0_95EAF0
 /* 95EBB8 802439B8 4405E000 */  mfc1      $a1, $f28
 /* 95EBBC 802439BC 4406D000 */  mfc1      $a2, $f26
 /* 95EBC0 802439C0 4407C000 */  mfc1      $a3, $f24
-/* 95EBC4 802439C4 0C090E20 */  jal       func_80243880
+/* 95EBC4 802439C4 0C090E20 */  jal       func_80243880_95EA80
 /* 95EBC8 802439C8 27A40010 */   addiu    $a0, $sp, 0x10
 /* 95EBCC 802439CC 27A40010 */  addiu     $a0, $sp, 0x10
 /* 95EBD0 802439D0 0200282D */  daddu     $a1, $s0, $zero
@@ -90,7 +90,7 @@ glabel func_802438F0_95EAF0
 /* 95EC40 80243A40 4405E000 */  mfc1      $a1, $f28
 /* 95EC44 80243A44 4406D000 */  mfc1      $a2, $f26
 /* 95EC48 80243A48 4407C000 */  mfc1      $a3, $f24
-/* 95EC4C 80243A4C 0C090E20 */  jal       func_80243880
+/* 95EC4C 80243A4C 0C090E20 */  jal       func_80243880_95EA80
 /* 95EC50 80243A50 27A40010 */   addiu    $a0, $sp, 0x10
 /* 95EC54 80243A54 27A40010 */  addiu     $a0, $sp, 0x10
 /* 95EC58 80243A58 0200282D */  daddu     $a1, $s0, $zero

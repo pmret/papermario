@@ -105,7 +105,7 @@ glabel func_8024031C_AED72C
 /* AED8B8 802404A8 46200020 */  cvt.s.d   $f0, $f0
 /* AED8BC 802404AC E7A00010 */  swc1      $f0, 0x10($sp)
 /* AED8C0 802404B0 8E26003C */  lw        $a2, 0x3c($s1)
-/* AED8C4 802404B4 0C09009C */  jal       func_80240270
+/* AED8C4 802404B4 0C09009C */  jal       func_80240270_AED680
 /* AED8C8 802404B8 02C0202D */   daddu    $a0, $s6, $zero
 /* AED8CC 802404BC 02A0202D */  daddu     $a0, $s5, $zero
 /* AED8D0 802404C0 4406C000 */  mfc1      $a2, $f24

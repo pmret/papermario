@@ -7,7 +7,7 @@ glabel func_80240EF8_BCFAE8
 /* BCFAF0 80240F00 AFBF0018 */  sw        $ra, 0x18($sp)
 /* BCFAF4 80240F04 AFB00010 */  sw        $s0, 0x10($sp)
 /* BCFAF8 80240F08 F7B40020 */  sdc1      $f20, 0x20($sp)
-/* BCFAFC 80240F0C 0C090150 */  jal       func_80240540
+/* BCFAFC 80240F0C 0C090150 */  jal       func_80240540_BCF130
 /* BCFB00 80240F10 0080882D */   daddu    $s1, $a0, $zero
 /* BCFB04 80240F14 3C041062 */  lui       $a0, 0x1062
 /* BCFB08 80240F18 8E230084 */  lw        $v1, 0x84($s1)

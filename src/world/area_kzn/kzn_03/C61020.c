@@ -16,7 +16,7 @@ INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_80240AE4_C617F4);
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_80240B84_C61894);
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_80240BF8);
+INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_80240BF8_C61908);
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_80240C64_C61974);
 
@@ -26,19 +26,19 @@ INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_80240DAC_C61ABC);
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_80240E00_C61B10);
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_80240FB4);
+INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_80240FB4_C61CC4);
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_80241214_C61F24);
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_802414C8_C621D8);
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_80241534);
+INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_80241534_C62244);
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_80241630_C62340);
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_80242070_C62D80);
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_80242100);
+INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_80242100_C62E10);
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_80242200_C62F10);
 
@@ -56,14 +56,14 @@ INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_8024259C_C632AC);
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_802428E0_C635F0);
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_80242934);
+INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_80242934_C63644);
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_8024296C);
+INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_8024296C_C6367C);
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_80242A08);
+INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_80242A08_C63718);
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_80242AF8_C63808);
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_80242C84);
+INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_80242C84_C63994);
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_80242CC8);
+INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_80242CC8_C639D8);

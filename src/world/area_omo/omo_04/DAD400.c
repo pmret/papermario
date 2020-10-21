@@ -24,7 +24,7 @@ INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80240C38_DAE038);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80240F7C_DAE37C);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80240FF4);
+INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80240FF4_DAE3F4);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80241060_DAE460);
 
@@ -34,18 +34,18 @@ INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_802411F8_DAE5F8);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80241588_DAE988);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_802416AC);
+INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_802416AC_DAEAAC);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80241898_DAEC98);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80241908);
+INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80241908_DAED08);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_802419D8_DAEDD8);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80241A70);
+INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80241A70_DAEE70);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80241AD0_DAEED0);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80241E04_DAF204);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80241E20);
+INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80241E20_DAF220);

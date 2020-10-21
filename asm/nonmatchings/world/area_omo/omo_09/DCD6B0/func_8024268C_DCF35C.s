@@ -18,7 +18,7 @@ glabel func_8024268C_DCF35C
 /* DCF390 802426C0 00021400 */  sll       $v0, $v0, 0x10
 /* DCF394 802426C4 1C40002B */  bgtz      $v0, .L80242774
 /* DCF398 802426C8 00000000 */   nop      
-/* DCF39C 802426CC 0C0908D6 */  jal       func_80242358
+/* DCF39C 802426CC 0C0908D6 */  jal       func_80242358_DCF028
 /* DCF3A0 802426D0 0240202D */   daddu    $a0, $s2, $zero
 /* DCF3A4 802426D4 0040202D */  daddu     $a0, $v0, $zero
 /* DCF3A8 802426D8 0481001A */  bgez      $a0, .L80242744

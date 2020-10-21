@@ -42,16 +42,16 @@ INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_80241174_940724);
 
 INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_802411AC_94075C);
 
-INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_80241248);
+INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_80241248_9407F8);
 
-INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_802412E4);
+INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_802412E4_940894);
 
 INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_802413D4_940984);
 
-INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_80241560);
+INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_80241560_940B10);
 
-INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_802415A4);
+INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_802415A4_940B54);
 
-INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_802415D0);
+INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_802415D0_940B80);
 
-INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_80241640);
+INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_80241640_940BF0);

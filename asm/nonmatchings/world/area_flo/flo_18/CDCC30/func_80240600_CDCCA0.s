@@ -55,7 +55,7 @@ glabel func_80240600_CDCCA0
 /* CDCD68 802406C8 4405E000 */  mfc1      $a1, $f28
 /* CDCD6C 802406CC 4406D000 */  mfc1      $a2, $f26
 /* CDCD70 802406D0 4407C000 */  mfc1      $a3, $f24
-/* CDCD74 802406D4 0C090164 */  jal       func_80240590
+/* CDCD74 802406D4 0C090164 */  jal       func_80240590_CDCC30
 /* CDCD78 802406D8 27A40010 */   addiu    $a0, $sp, 0x10
 /* CDCD7C 802406DC 27A40010 */  addiu     $a0, $sp, 0x10
 /* CDCD80 802406E0 0200282D */  daddu     $a1, $s0, $zero
@@ -90,7 +90,7 @@ glabel func_80240600_CDCCA0
 /* CDCDF0 80240750 4405E000 */  mfc1      $a1, $f28
 /* CDCDF4 80240754 4406D000 */  mfc1      $a2, $f26
 /* CDCDF8 80240758 4407C000 */  mfc1      $a3, $f24
-/* CDCDFC 8024075C 0C090164 */  jal       func_80240590
+/* CDCDFC 8024075C 0C090164 */  jal       func_80240590_CDCC30
 /* CDCE00 80240760 27A40010 */   addiu    $a0, $sp, 0x10
 /* CDCE04 80240764 27A40010 */  addiu     $a0, $sp, 0x10
 /* CDCE08 80240768 0200282D */  daddu     $a1, $s0, $zero

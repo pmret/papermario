@@ -2,7 +2,7 @@
 
 INCLUDE_ASM(s32, "world/area_flo/flo_07/CAC5D0", func_802403E0_CAC5D0);
 
-INCLUDE_ASM(s32, "world/area_flo/flo_07/CAC5D0", func_80240450);
+INCLUDE_ASM(s32, "world/area_flo/flo_07/CAC5D0", func_80240450_CAC640);
 
 INCLUDE_ASM(s32, "world/area_flo/flo_07/CAC5D0", func_8024061C_CAC80C);
 

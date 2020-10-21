@@ -5,7 +5,7 @@ glabel func_802415F4_BD01E4
 /* BD01E4 802415F4 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* BD01E8 802415F8 AFB00010 */  sw        $s0, 0x10($sp)
 /* BD01EC 802415FC AFBF0014 */  sw        $ra, 0x14($sp)
-/* BD01F0 80241600 0C090150 */  jal       func_80240540
+/* BD01F0 80241600 0C090150 */  jal       func_80240540_BCF130
 /* BD01F4 80241604 0080802D */   daddu    $s0, $a0, $zero
 /* BD01F8 80241608 3C05FE36 */  lui       $a1, 0xfe36
 /* BD01FC 8024160C 34A53C80 */  ori       $a1, $a1, 0x3c80

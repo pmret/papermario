@@ -30,10 +30,10 @@ INCLUDE_ASM(s32, "world/area_isk/isk_14/992730", func_802415C0_993CF0);
 
 INCLUDE_ASM(s32, "world/area_isk/isk_14/992730", func_80241610_993D40);
 
-INCLUDE_ASM(s32, "world/area_isk/isk_14/992730", func_80241AF0);
+INCLUDE_ASM(s32, "world/area_isk/isk_14/992730", func_80241AF0_994220);
 
-INCLUDE_ASM(s32, "world/area_isk/isk_14/992730", func_80241BC4);
+INCLUDE_ASM(s32, "world/area_isk/isk_14/992730", func_80241BC4_9942F4);
 
 INCLUDE_ASM(s32, "world/area_isk/isk_14/992730", func_80241BEC_99431C);
 
-INCLUDE_ASM(s32, "world/area_isk/isk_14/992730", func_80241CA0);
+INCLUDE_ASM(s32, "world/area_isk/isk_14/992730", func_80241CA0_9943D0);

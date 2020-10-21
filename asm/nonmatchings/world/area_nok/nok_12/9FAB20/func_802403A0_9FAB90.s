@@ -55,7 +55,7 @@ glabel func_802403A0_9FAB90
 /* 9FAC58 80240468 4405E000 */  mfc1      $a1, $f28
 /* 9FAC5C 8024046C 4406D000 */  mfc1      $a2, $f26
 /* 9FAC60 80240470 4407C000 */  mfc1      $a3, $f24
-/* 9FAC64 80240474 0C0900CC */  jal       func_80240330
+/* 9FAC64 80240474 0C0900CC */  jal       func_80240330_9FAB20
 /* 9FAC68 80240478 27A40010 */   addiu    $a0, $sp, 0x10
 /* 9FAC6C 8024047C 27A40010 */  addiu     $a0, $sp, 0x10
 /* 9FAC70 80240480 0200282D */  daddu     $a1, $s0, $zero
@@ -90,7 +90,7 @@ glabel func_802403A0_9FAB90
 /* 9FACE0 802404F0 4405E000 */  mfc1      $a1, $f28
 /* 9FACE4 802404F4 4406D000 */  mfc1      $a2, $f26
 /* 9FACE8 802404F8 4407C000 */  mfc1      $a3, $f24
-/* 9FACEC 802404FC 0C0900CC */  jal       func_80240330
+/* 9FACEC 802404FC 0C0900CC */  jal       func_80240330_9FAB20
 /* 9FACF0 80240500 27A40010 */   addiu    $a0, $sp, 0x10
 /* 9FACF4 80240504 27A40010 */  addiu     $a0, $sp, 0x10
 /* 9FACF8 80240508 0200282D */  daddu     $a1, $s0, $zero

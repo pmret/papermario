@@ -55,7 +55,7 @@ glabel func_80241B38_D9F008
 /* D9F0D0 80241C00 08090716 */  j         .L80241C58
 /* D9F0D4 80241C04 AE030028 */   sw       $v1, 0x28($s0)
 .L80241C08:
-/* D9F0D8 80241C08 0C090652 */  jal       func_80241948
+/* D9F0D8 80241C08 0C090652 */  jal       func_80241948_D9EE18
 /* D9F0DC 80241C0C 0240202D */   daddu    $a0, $s2, $zero
 /* D9F0E0 80241C10 0040202D */  daddu     $a0, $v0, $zero
 /* D9F0E4 80241C14 2402FFFF */  addiu     $v0, $zero, -1

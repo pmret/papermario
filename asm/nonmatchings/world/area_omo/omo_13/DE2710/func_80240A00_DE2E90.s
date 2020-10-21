@@ -141,11 +141,11 @@ glabel func_80240A00_DE2E90
 /* DE3098 80240C08 00000000 */   nop      
 /* DE309C 80240C0C 0260202D */  daddu     $a0, $s3, $zero
 /* DE30A0 80240C10 0280282D */  daddu     $a1, $s4, $zero
-/* DE30A4 80240C14 0C0901FB */  jal       func_802407EC
+/* DE30A4 80240C14 0C0901FB */  jal       func_802407EC_DE2C7C
 /* DE30A8 80240C18 02A0302D */   daddu    $a2, $s5, $zero
 /* DE30AC 80240C1C 0260202D */  daddu     $a0, $s3, $zero
 /* DE30B0 80240C20 0280282D */  daddu     $a1, $s4, $zero
-/* DE30B4 80240C24 0C09020F */  jal       func_8024083C
+/* DE30B4 80240C24 0C09020F */  jal       func_8024083C_DE2CCC
 /* DE30B8 80240C28 02A0302D */   daddu    $a2, $s5, $zero
 /* DE30BC 80240C2C 0809032B */  j         .L80240CAC
 /* DE30C0 80240C30 00000000 */   nop      

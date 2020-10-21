@@ -105,7 +105,7 @@ glabel func_80240B5C_ACB67C
 /* ACB808 80240CE8 46200020 */  cvt.s.d   $f0, $f0
 /* ACB80C 80240CEC E7A00010 */  swc1      $f0, 0x10($sp)
 /* ACB810 80240CF0 8E26003C */  lw        $a2, 0x3c($s1)
-/* ACB814 80240CF4 0C0902AC */  jal       func_80240AB0
+/* ACB814 80240CF4 0C0902AC */  jal       func_80240AB0_ACB5D0
 /* ACB818 80240CF8 02C0202D */   daddu    $a0, $s6, $zero
 /* ACB81C 80240CFC 02A0202D */  daddu     $a0, $s5, $zero
 /* ACB820 80240D00 4406C000 */  mfc1      $a2, $f24

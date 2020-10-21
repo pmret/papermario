@@ -34,44 +34,44 @@ INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_802410D4_C47CB4);
 
 INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_80241424_C48004);
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_802415D4);
+INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_802415D4_C481B4);
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_80241BFC);
+INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_80241BFC_C487DC);
 
 INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_80241CBC_C4889C);
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_80242000);
+INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_80242000_C48BE0);
 
 INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_80242078_C48C58);
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_802420E4);
+INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_802420E4_C48CC4);
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_80242218);
+INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_80242218_C48DF8);
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_8024227C);
+INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_8024227C_C48E5C);
 
 INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_8024260C_C491EC);
 
 INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_80242730_C49310);
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_8024291C);
+INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_8024291C_C494FC);
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_80242A74);
+INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_80242A74_C49654);
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_80242B78);
+INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_80242B78_C49758);
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_80242C1C);
+INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_80242C1C_C497FC);
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_80242EB8);
+INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_80242EB8_C49A98);
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_80242F70);
+INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_80242F70_C49B50);
 
 INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_802430F0_C49CD0);
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_80243138);
+INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_80243138_C49D18);
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_802431B8);
+INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_802431B8_C49D98);
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_80243260);
+INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_80243260_C49E40);
 
 INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_80243578_C4A158);

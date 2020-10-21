@@ -53,7 +53,7 @@ glabel func_80240AF0_BD4360
 /* BD4420 80240BB0 00000000 */  nop       
 /* BD4424 80240BB4 45000003 */  bc1f      .L80240BC4
 /* BD4428 80240BB8 00000000 */   nop      
-/* BD442C 80240BBC 0C09027A */  jal       func_802409E8
+/* BD442C 80240BBC 0C09027A */  jal       func_802409E8_BD4258
 /* BD4430 80240BC0 00000000 */   nop      
 .L80240BC4:
 /* BD4434 80240BC4 C600000C */  lwc1      $f0, 0xc($s0)
@@ -78,7 +78,7 @@ glabel func_80240AF0_BD4360
 /* BD4480 80240C10 34A50F81 */  ori       $a1, $a1, 0xf81
 /* BD4484 80240C14 0C0B2026 */  jal       set_variable
 /* BD4488 80240C18 24060001 */   addiu    $a2, $zero, 1
-/* BD448C 80240C1C 0C09029F */  jal       func_80240A7C
+/* BD448C 80240C1C 0C09029F */  jal       func_80240A7C_BD42EC
 /* BD4490 80240C20 00000000 */   nop      
 /* BD4494 80240C24 08090320 */  j         .L80240C80
 /* BD4498 80240C28 2402000C */   addiu    $v0, $zero, 0xc

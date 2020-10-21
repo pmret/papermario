@@ -1,6 +1,6 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_802407D0);
+INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_802407D0_D3ADA0);
 
 #include "world/common/GetItemName.inc.c"
 
@@ -8,11 +8,11 @@ INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_802408E8_D3AEB8);
 
 INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_802408FC_D3AECC);
 
-INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_8024090C);
+INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_8024090C_D3AEDC);
 
 INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_80240B30_D3B100);
 
-INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_80240B7C);
+INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_80240B7C_D3B14C);
 
 INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_80240B9C_D3B16C);
 
@@ -26,9 +26,9 @@ INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_80240F40_D3B510);
 
 INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_80241158_D3B728);
 
-INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_8024120C);
+INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_8024120C_D3B7DC);
 
-INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_80241240);
+INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_80241240_D3B810);
 
 INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_802412C0_D3B890);
 
@@ -52,22 +52,22 @@ INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_802416E0_D3BCB0);
 
 INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_802417C8_D3BD98);
 
-INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_80241834);
+INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_80241834_D3BE04);
 
 INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_80241864_D3BE34);
 
-INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_802418B4);
+INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_802418B4_D3BE84);
 
 INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_80241A6C_D3C03C);
 
-INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_80241AA0);
+INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_80241AA0_D3C070);
 
 INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_80241BC4_D3C194);
 
 INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_80241DAC_D3C37C);
 
-INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_80241FB0);
+INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_80241FB0_D3C580);
 
-INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_80241FE8);
+INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_80241FE8_D3C5B8);
 
-INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_80242074);
+INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_80242074_D3C644);

@@ -61,27 +61,27 @@ glabel func_8024113C_BE8D1C
 /* BE8DF8 80241218 00000000 */   nop      
 /* BE8DFC 8024121C 0280202D */  daddu     $a0, $s4, $zero
 /* BE8E00 80241220 0200282D */  daddu     $a1, $s0, $zero
-/* BE8E04 80241224 0C090000 */  jal       func_80240000
+/* BE8E04 80241224 0C090000 */  jal       func_80240000_BE7BE0
 /* BE8E08 80241228 0240302D */   daddu    $a2, $s2, $zero
 /* BE8E0C 8024122C 0280202D */  daddu     $a0, $s4, $zero
 /* BE8E10 80241230 0200282D */  daddu     $a1, $s0, $zero
-/* BE8E14 80241234 0C0903A4 */  jal       func_80240E90
+/* BE8E14 80241234 0C0903A4 */  jal       func_80240E90_BE8A70
 /* BE8E18 80241238 0240302D */   daddu    $a2, $s2, $zero
 /* BE8E1C 8024123C 0809049F */  j         .L8024127C
 /* BE8E20 80241240 00000000 */   nop      
 /* BE8E24 80241244 0280202D */  daddu     $a0, $s4, $zero
 /* BE8E28 80241248 0200282D */  daddu     $a1, $s0, $zero
-/* BE8E2C 8024124C 0C090100 */  jal       func_80240400
+/* BE8E2C 8024124C 0C090100 */  jal       func_80240400_BE7FE0
 /* BE8E30 80241250 0240302D */   daddu    $a2, $s2, $zero
 /* BE8E34 80241254 0280202D */  daddu     $a0, $s4, $zero
 /* BE8E38 80241258 0200282D */  daddu     $a1, $s0, $zero
-/* BE8E3C 8024125C 0C09041A */  jal       func_80241068
+/* BE8E3C 8024125C 0C09041A */  jal       func_80241068_BE8C48
 /* BE8E40 80241260 0240302D */   daddu    $a2, $s2, $zero
 /* BE8E44 80241264 0809049F */  j         .L8024127C
 /* BE8E48 80241268 00000000 */   nop      
 /* BE8E4C 8024126C 0280202D */  daddu     $a0, $s4, $zero
 /* BE8E50 80241270 0200282D */  daddu     $a1, $s0, $zero
-/* BE8E54 80241274 0C09019F */  jal       func_8024067C
+/* BE8E54 80241274 0C09019F */  jal       func_8024067C_BE825C
 /* BE8E58 80241278 0240302D */   daddu    $a2, $s2, $zero
 .L8024127C:
 /* BE8E5C 8024127C C6A0003C */  lwc1      $f0, 0x3c($s5)

@@ -24,14 +24,14 @@ INCLUDE_ASM(s32, "world/area_mgm/mgm_02/E15D80", func_80241DCC_E17B4C);
 
 INCLUDE_ASM(s32, "world/area_mgm/mgm_02/E15D80", func_80241F38_E17CB8);
 
-INCLUDE_ASM(s32, "world/area_mgm/mgm_02/E15D80", func_80241FE4);
+INCLUDE_ASM(s32, "world/area_mgm/mgm_02/E15D80", func_80241FE4_E17D64);
 
-INCLUDE_ASM(s32, "world/area_mgm/mgm_02/E15D80", func_80242274);
+INCLUDE_ASM(s32, "world/area_mgm/mgm_02/E15D80", func_80242274_E17FF4);
 
-INCLUDE_ASM(s32, "world/area_mgm/mgm_02/E15D80", func_802422D0);
+INCLUDE_ASM(s32, "world/area_mgm/mgm_02/E15D80", func_802422D0_E18050);
 
 INCLUDE_ASM(s32, "world/area_mgm/mgm_02/E15D80", func_80242314_E18094);
 
-INCLUDE_ASM(s32, "world/area_mgm/mgm_02/E15D80", func_80242340);
+INCLUDE_ASM(s32, "world/area_mgm/mgm_02/E15D80", func_80242340_E180C0);
 
-INCLUDE_ASM(s32, "world/area_mgm/mgm_02/E15D80", func_802423A4);
+INCLUDE_ASM(s32, "world/area_mgm/mgm_02/E15D80", func_802423A4_E18124);

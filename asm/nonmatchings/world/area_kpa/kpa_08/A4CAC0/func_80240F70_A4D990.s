@@ -25,7 +25,7 @@ glabel func_80240F70_A4D990
 /* A4D9E0 80240FC0 0260202D */  daddu     $a0, $s3, $zero
 /* A4D9E4 80240FC4 8E250024 */  lw        $a1, 0x24($s1)
 /* A4D9E8 80240FC8 8E260028 */  lw        $a2, 0x28($s1)
-/* A4D9EC 80240FCC 0C090028 */  jal       func_802400A0
+/* A4D9EC 80240FCC 0C090028 */  jal       func_802400A0_A4CAC0
 /* A4D9F0 80240FD0 0280382D */   daddu    $a3, $s4, $zero
 /* A4D9F4 80240FD4 0040882D */  daddu     $s1, $v0, $zero
 /* A4D9F8 80240FD8 24020001 */  addiu     $v0, $zero, 1

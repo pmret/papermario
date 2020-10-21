@@ -7,8 +7,8 @@ glabel func_8013AA9C
 /* D11A4 8013AAA4 00C0802D */  daddu     $s0, $a2, $zero
 /* D11A8 8013AAA8 00041140 */  sll       $v0, $a0, 5
 /* D11AC 8013AAAC 00441023 */  subu      $v0, $v0, $a0
-/* D11B0 8013AAB0 3C038015 */  lui       $v1, 0x8015
-/* D11B4 8013AAB4 8C636954 */  lw        $v1, 0x6954($v1)
+/* D11B0 8013AAB0 3C038015 */  lui       $v1, %hi(D_80156954)
+/* D11B4 8013AAB4 8C636954 */  lw        $v1, %lo(D_80156954)($v1)
 /* D11B8 8013AAB8 8FA80030 */  lw        $t0, 0x30($sp)
 /* D11BC 8013AABC 8FA60034 */  lw        $a2, 0x34($sp)
 /* D11C0 8013AAC0 00021080 */  sll       $v0, $v0, 2

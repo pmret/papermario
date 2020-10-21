@@ -15,7 +15,7 @@ glabel func_80240564_BCF154
 /* BCF17C 8024058C AFB10044 */  sw        $s1, 0x44($sp)
 /* BCF180 80240590 AFB00040 */  sw        $s0, 0x40($sp)
 /* BCF184 80240594 AFA40068 */  sw        $a0, 0x68($sp)
-/* BCF188 80240598 0C090150 */  jal       func_80240540
+/* BCF188 80240598 0C090150 */  jal       func_80240540_BCF130
 /* BCF18C 8024059C AFA5006C */   sw       $a1, 0x6c($sp)
 /* BCF190 802405A0 8FAB0068 */  lw        $t3, 0x68($sp)
 /* BCF194 802405A4 0040A82D */  daddu     $s5, $v0, $zero

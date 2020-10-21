@@ -22,6 +22,6 @@ INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7020", func_802402E0_9D7300);
 
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7020", func_80240624_9D7644);
 
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7020", func_80240678);
+INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7020", func_80240678_9D7698);
 
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7020", func_802406B0_9D76D0);
