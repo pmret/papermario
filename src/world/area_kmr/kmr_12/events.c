@@ -154,7 +154,7 @@ Script M(GoombaInit) = {
 };
 // *INDENT-ON*
 
-StaticNpc M(goombaNPC) = {
+StaticNpc M(goombaNpc) = {
     .id = NpcId_GOOMBA,
     .settings = &M(goombaNpcSettings),
     .pos = { -33.0f, 30.0f, -25.0f },
@@ -201,7 +201,7 @@ StaticNpc M(goombaNPC) = {
 };
 
 NpcGroupList M(npcGroupList) = {
-    NPC_GROUP(M(goombaNPC), FORMATION_ID(1, 0, 3)),
+    NPC_GROUP(M(goombaNpc), FORMATION_ID(1, 0, 3)),
     NPC_GROUP_LIST_END(),
 };
 
