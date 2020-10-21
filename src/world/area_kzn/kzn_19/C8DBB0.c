@@ -34,7 +34,7 @@ INCLUDE_ASM(s32, "world/area_kzn/kzn_19/C8DBB0", func_8024140C);
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_19/C8DBB0", func_80241468);
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_19/C8DBB0", func_8024151C);
+#include "world/common/GetItemName.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_19/C8DBB0", func_80241580);
 

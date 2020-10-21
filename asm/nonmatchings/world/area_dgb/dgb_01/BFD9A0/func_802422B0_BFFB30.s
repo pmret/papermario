@@ -108,7 +108,7 @@ glabel func_802422B0_BFFB30
 /* BFFCC4 80242444 00000000 */   nop      
 /* BFFCC8 80242448 0280202D */  daddu     $a0, $s4, $zero
 /* BFFCCC 8024244C 0220282D */  daddu     $a1, $s1, $zero
-/* BFFCD0 80242450 0C09061D */  jal       func_80241874
+/* BFFCD0 80242450 0C09061D */  jal       func_80241874_BFF0F4
 /* BFFCD4 80242454 0260302D */   daddu    $a2, $s3, $zero
 /* BFFCD8 80242458 8E830070 */  lw        $v1, 0x70($s4)
 /* BFFCDC 8024245C 2402000F */  addiu     $v0, $zero, 0xf

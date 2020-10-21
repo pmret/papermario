@@ -26,7 +26,7 @@ INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_80241174_95C374);
 
 INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_80241470);
 
-INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_80241524);
+#include "world/common/GetItemName.inc.c"
 
 INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_80241588);
 

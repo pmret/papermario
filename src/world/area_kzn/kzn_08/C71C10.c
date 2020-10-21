@@ -2,7 +2,7 @@
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_08/C71C10", func_80240790_C71C10);
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_08/C71C10", func_80240844_C71CC4);
+#include "world/common/GetItemName.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_08/C71C10", func_802408A8_C71D28);
 

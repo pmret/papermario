@@ -83,7 +83,7 @@ glabel func_8024162C_CB662C
 /* CB675C 8024175C 0000102D */   daddu    $v0, $zero, $zero
 /* CB6760 80241760 0280202D */  daddu     $a0, $s4, $zero
 /* CB6764 80241764 0200282D */  daddu     $a1, $s0, $zero
-/* CB6768 80241768 0C0902BE */  jal       func_80240AF8
+/* CB6768 80241768 0C0902BE */  jal       func_80240AF8_CB5AF8
 /* CB676C 8024176C 0260302D */   daddu    $a2, $s3, $zero
 /* CB6770 80241770 0280202D */  daddu     $a0, $s4, $zero
 /* CB6774 80241774 0200282D */  daddu     $a1, $s0, $zero

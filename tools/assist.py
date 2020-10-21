@@ -93,6 +93,13 @@ def get_map_offsets(syms):
     return offsets
 
 
+def is_zeros(vals):
+    for val in vals:
+        if val != 0:
+            return False
+    return True
+
+
 def diff_syms(qb, tb):
     if len(tb) < 8:
         return 0
@@ -105,6 +112,9 @@ def diff_syms(qb, tb):
         smaller = qb
     
     len_ratio = len(smaller) / len(larger)
+    
+    if abs(len(larger) - len(smaller)) < 16 and is_zeros(larger[len(smaller):]):
+        len_ratio = 1
 
     n_bytes = len(smaller)
     matches = 0
@@ -122,6 +132,8 @@ def get_matches(query):
     ret = {}
     for symbol in map_offsets:
         if symbol is not None and query != symbol:
+            if symbol == "func_802410C8_B9EA28":
+                dog = 5
             target_bytes = get_symbol_bytes(map_offsets, symbol)
             if target_bytes is not None:
                 score = diff_syms(query_bytes, target_bytes)
@@ -157,7 +169,7 @@ def do_query(query):
 parser = argparse.ArgumentParser(description="Tools to assist with decomp")
 parser.add_argument("query", help="function or file")
 parser.add_argument("--threshold", help="score threshold between 0 and 1 (higher is more restrictive)", type=float, default=0.95, required=False)
-parser.add_argument("--num-out", help="number of functions to display", type=int, default=10, required=False)
+parser.add_argument("--num-out", help="number of functions to display", type=int, default=100, required=False)
 
 args = parser.parse_args()
 

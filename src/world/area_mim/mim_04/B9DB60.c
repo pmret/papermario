@@ -18,4 +18,4 @@ INCLUDE_ASM(s32, "world/area_mim/mim_04/B9DB60", func_80240DF0_B9E750);
 
 INCLUDE_ASM(s32, "world/area_mim/mim_04/B9DB60", func_80241014);
 
-INCLUDE_ASM(s32, "world/area_mim/mim_04/B9DB60", func_802410C8_B9EA28);
+#include "world/common/GetItemName.inc.c"

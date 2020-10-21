@@ -36,7 +36,7 @@ INCLUDE_ASM(s32, "world/area_jan/jan_02/B2C8A0", func_80241578);
 
 INCLUDE_ASM(s32, "world/area_jan/jan_02/B2C8A0", func_80241614_B2DA84);
 
-INCLUDE_ASM(s32, "world/area_jan/jan_02/B2C8A0", func_802416C8_B2DB38);
+#include "world/common/GetItemName.inc.c"
 
 INCLUDE_ASM(s32, "world/area_jan/jan_02/B2C8A0", func_8024172C);
 

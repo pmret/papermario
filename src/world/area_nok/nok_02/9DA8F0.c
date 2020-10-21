@@ -16,7 +16,7 @@ INCLUDE_ASM(s32, "world/area_nok/nok_02/9DA8F0", func_80243D14);
 
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9DA8F0", func_80243DB0_9DADD0);
 
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9DA8F0", func_80243E64);
+#include "world/common/GetItemName.inc.c"
 
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9DA8F0", func_80243EC8);
 

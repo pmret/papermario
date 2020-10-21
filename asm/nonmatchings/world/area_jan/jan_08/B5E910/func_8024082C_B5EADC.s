@@ -49,7 +49,7 @@ glabel func_8024082C_B5EADC
 /* B5EB88 802408D8 AE300108 */  sw        $s0, 0x108($s1)
 /* B5EB8C 802408DC 8C420000 */  lw        $v0, ($v0)
 /* B5EB90 802408E0 02E0282D */  daddu     $a1, $s7, $zero
-/* B5EB94 802408E4 0C0901CD */  jal       func_80240734
+/* B5EB94 802408E4 0C0901CD */  jal       func_80240734_B5E9E4
 /* B5EB98 802408E8 AE220084 */   sw       $v0, 0x84($s1)
 /* B5EB9C 802408EC 0040202D */  daddu     $a0, $v0, $zero
 /* B5EBA0 802408F0 04800011 */  bltz      $a0, .L80240938

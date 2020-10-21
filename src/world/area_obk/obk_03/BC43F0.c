@@ -2,7 +2,7 @@
 
 INCLUDE_ASM(s32, "world/area_obk/obk_03/BC43F0", func_80240170_BC43F0);
 
-INCLUDE_ASM(s32, "world/area_obk/obk_03/BC43F0", func_80240224_BC44A4);
+#include "world/common/GetItemName.inc.c"
 
 INCLUDE_ASM(s32, "world/area_obk/obk_03/BC43F0", func_80240288);
 

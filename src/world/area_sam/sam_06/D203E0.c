@@ -24,7 +24,7 @@ INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_8024185C);
 
 INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80241A48);
 
-INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80241AFC);
+#include "world/common/GetItemName.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80241B60);
 

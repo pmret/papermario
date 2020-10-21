@@ -16,7 +16,7 @@ glabel func_80240A10
 /* BCF62C 80240A3C 0220202D */  daddu     $a0, $s1, $zero
 /* BCF630 80240A40 0240282D */  daddu     $a1, $s2, $zero
 /* BCF634 80240A44 0260302D */  daddu     $a2, $s3, $zero
-/* BCF638 80240A48 0C090159 */  jal       func_80240564
+/* BCF638 80240A48 0C090159 */  jal       func_80240564_BCF154
 /* BCF63C 80240A4C AC500000 */   sw       $s0, ($v0)
 /* BCF640 80240A50 8FBF0020 */  lw        $ra, 0x20($sp)
 /* BCF644 80240A54 8FB3001C */  lw        $s3, 0x1c($sp)

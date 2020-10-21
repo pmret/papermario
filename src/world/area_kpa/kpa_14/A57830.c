@@ -2,7 +2,7 @@
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_14/A57830", func_80240380_A57830);
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_14/A57830", func_80240434_A578E4);
+#include "world/common/GetItemName.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_14/A57830", func_80240498);
 

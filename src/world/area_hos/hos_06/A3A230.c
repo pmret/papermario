@@ -12,7 +12,7 @@ INCLUDE_ASM(s32, "world/area_hos/hos_06/A3A230", func_80241008);
 
 INCLUDE_ASM(s32, "world/area_hos/hos_06/A3A230", func_802410A4);
 
-INCLUDE_ASM(s32, "world/area_hos/hos_06/A3A230", func_80241158);
+#include "world/common/GetItemName.inc.c"
 
 INCLUDE_ASM(s32, "world/area_hos/hos_06/A3A230", func_802411BC);
 
