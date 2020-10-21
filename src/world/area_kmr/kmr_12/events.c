@@ -1,37 +1,33 @@
 #include "kmr_12.h"
 
-static Script make_entities;
-static Script read_west_sign;
-static NpcGroupList npc_groups;
+Script M(ExitWest) = EXIT_WALK_SCRIPT(60, 0, "kmr_07", 1);
+Script M(ExitEast) = EXIT_WALK_SCRIPT(60, 1, "kmr_11", 0);
 
-static Script exit_west = EXIT_WALK_SCRIPT(60, 0, "kmr_07", 1);
-static Script exit_east = EXIT_WALK_SCRIPT(60, 1, "kmr_11", 0);
-
-static Script bind_exits = {
-    SI_BIND(exit_west, TriggerFlag_FLOOR_ABOVE, 0 /* deili1 */, NULL),
-    SI_BIND(exit_east, TriggerFlag_FLOOR_ABOVE, 3 /* deili2 */, NULL),
+Script M(BindExits) = {
+    SI_BIND(M(ExitWest), TriggerFlag_FLOOR_ABOVE, 0 /* deili1 */, NULL),
+    SI_BIND(M(ExitEast), TriggerFlag_FLOOR_ABOVE, 3 /* deili2 */, NULL),
     SI_RETURN(),
     SI_END(),
 };
 
-Script kmr_12_main = {
+Script M(Main) = {
     SI_SET(SI_SAVE_VAR(425), 31),
     SI_CALL(SetSpriteShading, -1),
     SI_CALL(SetCamPerspective, 0, 3, 25, 16, 4096),
     SI_CALL(SetCamBGColor, 0, 0, 0, 0),
     SI_CALL(SetCamEnabled, 0, 1),
-    SI_CALL(MakeNpcs, 0, npc_groups),
-    SI_EXEC_WAIT(make_entities),
-    SI_EXEC(kmr_12_play_music),
-    SI_SET(SI_VAR(0), bind_exits),
+    SI_CALL(MakeNpcs, 0, M(npcGroupList)),
+    SI_EXEC_WAIT(M(MakeEntities)),
+    SI_EXEC(M(PlayMusic)),
+    SI_SET(SI_VAR(0), M(BindExits)),
     SI_EXEC(EnterWalk),
     SI_WAIT_FRAMES(1),
-    SI_BIND(read_west_sign, TriggerFlag_WALL_INTERACT, 10, NULL),
+    SI_BIND(M(ReadWestSign), TriggerFlag_WALL_INTERACT, 10, NULL),
     SI_RETURN(),
     SI_END(),
 };
 
-static NpcAISettings goomba_ai_settings = {
+NpcAISettings M(goombaAISettings) = {
     .moveSpeed = 1.5f,
     .moveTime = 30,
     .waitTime = 30,
@@ -46,16 +42,16 @@ static NpcAISettings goomba_ai_settings = {
     .unk_2C = TRUE,
 };
 
-static Script goomba_ai = {
-    SI_CALL(DoBasicAI, &goomba_ai_settings),
+Script M(GoombaAI) = {
+    SI_CALL(DoBasicAI, &M(goombaAISettings)),
     SI_RETURN(),
     SI_END(),
 };
 
-static NpcSettings goomba_npc_settings = {
+NpcSettings M(GoombaNpcSettings) = {
     .height = 20,
     .radius = 23,
-    .ai = &goomba_ai,
+    .ai = &M(GoombaAI),
     .onHit = EnemyNpcHit,
     .onDefeat = EnemyNpcDefeat,
     .level = 5,
@@ -63,7 +59,7 @@ static NpcSettings goomba_npc_settings = {
 
 // *INDENT-OFF*
 /// @bug The RETURN command is after the END command, so this script will never terminate.
-static Script read_west_sign = {
+Script M(ReadWestSign) = {
     SI_GROUP(0),
 
     // "Eat a Mushroom to regain your energy!"
@@ -73,7 +69,7 @@ static Script read_west_sign = {
     SI_RESUME_GROUP(1),
 
     SI_SET(SI_FLAG(0), FALSE),
-    SI_CALL(kmr_12_get_goomba_ref),
+    SI_CALL(M(GetGoomba)),
     SI_IF_NE(SI_VAR(0), FALSE),
         SI_CALL(GetNpcVar, NpcId_GOOMBA, 0, SI_VAR(0)),
         SI_IF_EQ(SI_VAR(0), FALSE),
@@ -92,7 +88,7 @@ static Script read_west_sign = {
     SI_RETURN(),
 };
 
-static Script goomba_idle = {
+Script M(GoombaIdle) = {
     SI_WAIT_FRAMES(1),
 
     SI_CALL(SetSelfVar, 0, FALSE),
@@ -142,28 +138,28 @@ static Script goomba_idle = {
     SI_CALL(SetSelfEnemyFlagBits, 0x40000000, TRUE),
 
     // We're done jumping off; the player can read the sign again
-    SI_BIND(read_west_sign, TriggerFlag_WALL_INTERACT, 10, NULL),
+    SI_BIND(M(ReadWestSign), TriggerFlag_WALL_INTERACT, 10, NULL),
 
     // Behave like a normal enemy from now on
-    SI_CALL(BindNpcAI, NpcId_SELF, &goomba_ai),
+    SI_CALL(BindNpcAI, NpcId_SELF, &M(GoombaAI)),
 
     SI_RETURN(),
     SI_END(),
 };
 
-static Script goomba_init = {
-    SI_CALL(BindNpcIdle, NpcId_SELF, &goomba_idle),
+Script M(GoombaInit) = {
+    SI_CALL(BindNpcIdle, NpcId_SELF, &M(GoombaIdle)),
     SI_RETURN(),
     SI_END(),
 };
 // *INDENT-ON*
 
-static StaticNpc goomba_npc = {
+StaticNpc M(GoombaNPC) = {
     .id = NpcId_GOOMBA,
-    .settings = &goomba_npc_settings,
+    .settings = &M(GoombaNpcSettings),
     .pos = { -33.0f, 30.0f, -25.0f },
     .flags = 0x00000C00,
-    .init = goomba_init,
+    .init = M(GoombaInit),
     .yaw = 90,
     .dropFlags = 0x80,
     .itemDropChance = 5,
@@ -204,13 +200,13 @@ static StaticNpc goomba_npc = {
     },
 };
 
-static NpcGroupList npc_groups = {
-    NPC_GROUP(goomba_npc, FORMATION_ID(1, 0, 3)),
+NpcGroupList M(npcGroupList) = {
+    NPC_GROUP(M(GoombaNPC), FORMATION_ID(1, 0, 3)),
     NPC_GROUP_LIST_END(),
 };
 
 // *INDENT-OFF*
-static Script read_east_sign = {
+Script M(ReadEastSign) = {
     SI_CALL(func_800441F0, SI_VAR(0)),
     SI_IF_EQ(SI_VAR(0), 1),
         SI_RETURN(),
@@ -228,9 +224,9 @@ static Script read_east_sign = {
     SI_END(),
 };
 
-static Script make_entities = {
+Script M(MakeEntities) = {
     SI_CALL(MakeEntity, 0x802EAFDC, 436, 0, -42, 0, 0x80000000),
-    SI_CALL(AssignScript, &read_east_sign),
+    SI_CALL(AssignScript, &M(ReadEastSign)),
 
     SI_RETURN(),
     SI_END(),
