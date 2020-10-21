@@ -13,7 +13,7 @@ def disassemble(bytes, offset, midx, symbol_map = {}, map_name = "map"):
     while len(midx) > 0:
         struct = midx.pop(0)
         name = struct["name"]
-        if name == "Script_Main": name = f"{map_name}_Main"
+        if name == "Script_Main": name = f"M(Main)"
 
         #print(f"{offset:X} ({name}, start = {struct['start']:X}, len = {struct['length']:X})")
 
@@ -26,26 +26,26 @@ def disassemble(bytes, offset, midx, symbol_map = {}, map_name = "map"):
 
             # format struct
             if struct["type"].startswith("Script"):
-                out += disassemble_script(bytes, name, symbol_map)
+                out += disassemble_script(bytes, f"M({name})", symbol_map)
             elif struct["type"] == "Padding":
                 # nops at end of file
                 bytes.seek(offset % 4, 1)
                 return out
             elif struct["type"] == "EntryList":
-                out += f"EntryList {map_name}_entryList = {{"
+                out += f"EntryList M(entryList) = {{"
                 for i in range(0, struct["length"], 4 * 4):
                     x,y,z,yaw = unpack(">ffff", bytes.read(4 * 4))
                     out += f"\n    {{ {x}f, {y}f, {z}f, {yaw}f }},"
                 out += f"\n}};\n"
             elif struct["type"] == "Header":
-                out += f"MapConfig {map_name}_config = {{\n"
+                out += f"MapConfig M(config) = {{\n"
 
                 bytes.read(0x10)
 
                 main,entry_list,entry_count = unpack(">IIi", bytes.read(4 * 3))
-                out += f"    .main = {map_name}_Main,\n"
-                out += f"    .entryList = {map_name}_entryList,\n"
-                out += f"    .entryCount = {entry_count},\n"
+                out += f"    .main = M(Main)\n"
+                out += f"    .entryList = M(entryList)\n"
+                out += f"    .entryCount = {entry_count}, // prefer ENTRY_COUNT(M(entryList)) if it matches\n"
 
                 bytes.read(0x1C)
 
@@ -55,7 +55,7 @@ def disassemble(bytes, offset, midx, symbol_map = {}, map_name = "map"):
 
                 out += f"}};\n"
             else: # unknown type of struct
-                out += f"s32 {name}[] = {{"
+                out += f"s32 M({name})[] = {{"
                 for i in range(0, struct["length"], 4):
                     if (i % 0x20) == 0:
                         out += f"\n   "
@@ -63,7 +63,7 @@ def disassemble(bytes, offset, midx, symbol_map = {}, map_name = "map"):
                     word = int.from_bytes(bytes.read(4), byteorder="big")
 
                     if word in symbol_map:
-                        out += f" {symbol_map[word]},"
+                        out += f" M({symbol_map[word]}),"
                     else:
                         out += f" 0x{word:08X},"
 
@@ -131,7 +131,13 @@ def parse_midx(file, prefix = ""):
     return structs
 
 def name_struct(s):
-    return s[1:].replace("???", "unk")
+    s = s[1:].replace("???", "unk")
+
+    # use ThisCase for scripts
+    if s.startswith("$Script"):
+        return s[0].upper() + s[1:]
+
+    return s[0].lower() + s[1:]
 
 if __name__ == "__main__":
     if len(sys.argv) == 1:
@@ -145,7 +151,7 @@ if __name__ == "__main__":
         area_name = area_name[:8]
 
     with open(sys.argv[1], "r") as f:
-        midx = parse_midx(f, map_name + "_")
+        midx = parse_midx(f)
 
     symbol_map = {}
     for struct in midx:

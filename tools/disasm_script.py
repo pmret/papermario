@@ -206,7 +206,7 @@ def disassemble(bytes, script_name = "script", symbol_map = {}):
             indent += 1
         elif opcode == 0x1C:
             indent -= 1
-            write_line(f"SI_CASE_DEFAULT({var(argv[0])}),")
+            write_line(f"SI_CASE_DEFAULT(),")
             indent += 1
         elif opcode == 0x1D:
             indent -= 1
