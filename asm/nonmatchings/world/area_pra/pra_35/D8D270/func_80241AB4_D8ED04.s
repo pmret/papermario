@@ -161,7 +161,7 @@ glabel func_80241AB4_D8ED04
 /* D8EF5C 80241D0C 02A0302D */   daddu    $a2, $s5, $zero
 /* D8EF60 80241D10 0280202D */  daddu     $a0, $s4, $zero
 /* D8EF64 80241D14 0260282D */  daddu     $a1, $s3, $zero
-/* D8EF68 80241D18 0C0905B1 */  jal       func_802416C4
+/* D8EF68 80241D18 0C0905B1 */  jal       func_802416C4_D8E914
 /* D8EF6C 80241D1C 02A0302D */   daddu    $a2, $s5, $zero
 /* D8EF70 80241D20 08090762 */  j         .L80241D88
 /* D8EF74 80241D24 00000000 */   nop      

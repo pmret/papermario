@@ -12,7 +12,7 @@ INCLUDE_ASM(s32, "world/area_jan/jan_00/B20540", func_802403F4_B20934);
 
 #include "world/common/GetItemName.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_00/B20540", func_8024050C_B20A4C);
+#include "world/common/GetNpcCollisionHeight.inc.c"
 
 INCLUDE_ASM(s32, "world/area_jan/jan_00/B20540", func_80240568_B20AA8);
 

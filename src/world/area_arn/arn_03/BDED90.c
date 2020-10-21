@@ -34,7 +34,7 @@ INCLUDE_ASM(s32, "world/area_arn/arn_03/BDED90", func_802412B0_BE0040);
 
 #include "world/common/GetItemName.inc.c"
 
-INCLUDE_ASM(s32, "world/area_arn/arn_03/BDED90", func_802413C8);
+#include "world/common/GetNpcCollisionHeight.inc.c"
 
 INCLUDE_ASM(s32, "world/area_arn/arn_03/BDED90", func_80241424_BE01B4);
 

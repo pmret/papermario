@@ -22,7 +22,7 @@ INCLUDE_ASM(s32, "world/area_flo/flo_14/CCBE20", func_80241CF8);
 
 INCLUDE_ASM(s32, "world/area_flo/flo_14/CCBE20", func_80241E1C);
 
-INCLUDE_ASM(s32, "world/area_flo/flo_14/CCBE20", func_80242008);
+#include "world/common/GetNpcCollisionHeight.inc.c"
 
 INCLUDE_ASM(s32, "world/area_flo/flo_14/CCBE20", func_80242064);
 

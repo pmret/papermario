@@ -30,7 +30,7 @@ INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_80240F20_D4DF60);
 
 INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_80240F60_D4DFA0);
 
-INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_80240F80_D4DFC0);
+#include "world/common/GetNpcCollisionHeight.inc.c"
 
 INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_80240FDC_D4E01C);
 
@@ -42,4 +42,12 @@ INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_80241238);
 
 INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_802412D4_D4E314);
 
-INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_80241370_D4E3B0);
+static ApiStatus PostChapter7StatUpdate(ScriptInstance* script, s32 isInitialCall) {
+    PlayerData* playerData = PLAYER_DATA;
+
+    set_max_SP(7);
+    playerData->curHP = playerData->curMaxHP;
+    playerData->curFP = playerData->curMaxFP;
+    sync_status_menu();
+    return ApiStatus_DONE2;
+}

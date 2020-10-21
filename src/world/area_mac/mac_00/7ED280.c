@@ -28,7 +28,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_00/7ED280", func_80243400);
 
 #include "world/common/GetItemName.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_00/7ED280", func_80243518);
+#include "world/common/GetNpcCollisionHeight.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_00/7ED280", func_80243574);
 

@@ -34,7 +34,7 @@ INCLUDE_ASM(s32, "world/area_kzn/kzn_02/C5AC20", func_80241FCC_C5C70C);
 
 #include "world/common/GetItemName.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_02/C5AC20", func_802420E4_C5C824);
+#include "world/common/GetNpcCollisionHeight.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_02/C5AC20", func_80242140);
 

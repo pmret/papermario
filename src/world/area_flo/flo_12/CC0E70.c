@@ -8,7 +8,7 @@ INCLUDE_ASM(s32, "world/area_flo/flo_12/CC0E70", func_8024027C_CC10AC);
 
 #include "world/common/GetItemName.inc.c"
 
-INCLUDE_ASM(s32, "world/area_flo/flo_12/CC0E70", func_80240394_CC11C4);
+#include "world/common/GetNpcCollisionHeight.inc.c"
 
 INCLUDE_ASM(s32, "world/area_flo/flo_12/CC0E70", func_802403F0_CC1220);
 

@@ -4,7 +4,7 @@ INCLUDE_ASM(s32, "world/area_hos/hos_06/A397F0", func_80240310_A397F0);
 
 #include "world/common/GetItemName.inc.c"
 
-INCLUDE_ASM(s32, "world/area_hos/hos_06/A397F0", func_80240428_A39908);
+#include "world/common/GetNpcCollisionHeight.inc.c"
 
 INCLUDE_ASM(s32, "world/area_hos/hos_06/A397F0", func_80240484);
 

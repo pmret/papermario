@@ -135,7 +135,7 @@ glabel func_80240B94_AC5D04
 /* AC5EF4 80240D84 02A0302D */   daddu    $a2, $s5, $zero
 /* AC5EF8 80240D88 0280202D */  daddu     $a0, $s4, $zero
 /* AC5EFC 80240D8C 0260282D */  daddu     $a1, $s3, $zero
-/* AC5F00 80240D90 0C090056 */  jal       func_80240158
+/* AC5F00 80240D90 0C090056 */  jal       func_80240158_AC52C8
 /* AC5F04 80240D94 02A0302D */   daddu    $a2, $s5, $zero
 /* AC5F08 80240D98 0809039A */  j         .L80240E68
 /* AC5F0C 80240D9C 00000000 */   nop      

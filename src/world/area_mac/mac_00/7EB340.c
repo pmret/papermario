@@ -54,7 +54,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80241628);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80241694);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_802416C4);
+#include "world/common/GetNpcCollisionHeight.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80241720);
 

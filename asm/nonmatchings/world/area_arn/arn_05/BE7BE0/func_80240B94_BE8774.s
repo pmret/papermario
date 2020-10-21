@@ -135,7 +135,7 @@ glabel func_80240B94_BE8774
 /* BE8964 80240D84 02A0302D */   daddu    $a2, $s5, $zero
 /* BE8968 80240D88 0280202D */  daddu     $a0, $s4, $zero
 /* BE896C 80240D8C 0260282D */  daddu     $a1, $s3, $zero
-/* BE8970 80240D90 0C090056 */  jal       func_80240158
+/* BE8970 80240D90 0C090056 */  jal       func_80240158_BE7D38
 /* BE8974 80240D94 02A0302D */   daddu    $a2, $s5, $zero
 /* BE8978 80240D98 0809039A */  j         .L80240E68
 /* BE897C 80240D9C 00000000 */   nop      

@@ -1,6 +1,6 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "world/area_hos/hos_06/A3A230", func_80240D50);
+#include "world/common/GetNpcCollisionHeight.inc.c"
 
 INCLUDE_ASM(s32, "world/area_hos/hos_06/A3A230", func_80240DAC);
 

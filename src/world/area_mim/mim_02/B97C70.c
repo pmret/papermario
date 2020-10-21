@@ -16,7 +16,7 @@ INCLUDE_ASM(s32, "world/area_mim/mim_02/B97C70", func_80240C1C_B9881C);
 
 INCLUDE_ASM(s32, "world/area_mim/mim_02/B97C70", func_80240C60_B98860);
 
-INCLUDE_ASM(s32, "world/area_mim/mim_02/B97C70", func_80240E84);
+#include "world/common/GetNpcCollisionHeight.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mim/mim_02/B97C70", func_80240EE0_B98AE0);
 

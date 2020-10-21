@@ -24,4 +24,12 @@ INCLUDE_ASM(s32, "world/area_flo/flo_00/C9DF60", func_80240B14_C9EA34);
 
 INCLUDE_ASM(s32, "world/area_flo/flo_00/C9DF60", func_80240BD4_C9EAF4);
 
-INCLUDE_ASM(s32, "world/area_flo/flo_00/C9DF60", func_80240ED0_C9EDF0);
+static ApiStatus PostChapter6StatUpdate(ScriptInstance* script, s32 isInitialCall) {
+    PlayerData* playerData = PLAYER_DATA;
+
+    set_max_SP(6);
+    playerData->curHP = playerData->curMaxHP;
+    playerData->curFP = playerData->curMaxFP;
+    sync_status_menu();
+    return ApiStatus_DONE2;
+}

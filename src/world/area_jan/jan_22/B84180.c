@@ -32,4 +32,12 @@ INCLUDE_ASM(s32, "world/area_jan/jan_22/B84180", func_80240FA8);
 
 INCLUDE_ASM(s32, "world/area_jan/jan_22/B84180", func_80240FC4_B85144);
 
-INCLUDE_ASM(s32, "world/area_jan/jan_22/B84180", func_80240FE0_B85160);
+static ApiStatus PostChapter5StatUpdate(ScriptInstance* script, s32 isInitialCall) {
+    PlayerData* playerData = PLAYER_DATA;
+
+    set_max_SP(5);
+    playerData->curHP = playerData->curMaxHP;
+    playerData->curFP = playerData->curMaxFP;
+    sync_status_menu();
+    return ApiStatus_DONE2;
+}
