@@ -15,6 +15,7 @@
 
 #define ASSERT(condition) if (!(condition)) { while (1) {} }
 #define PANIC() ASSERT(0)
+#define STATIC_ASSERT(condition) enum { static_assert_fail = 1/(!!(condition)) } // Causes division by zero ("not integer constant") if false
 
 #define GAME_STATUS (*gGameStatusPtr)
 #define PLAYER_STATUS (&gPlayerStatus)
