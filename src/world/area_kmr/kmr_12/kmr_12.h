@@ -1,7 +1,7 @@
 #include "common.h"
 #include "map.h"
 
-#define M(sym) kmr_12 ## _ ## sym
+#define MAP_NAME kmr_12
 
 #define NpcId_GOOMBA 0
 

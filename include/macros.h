@@ -48,4 +48,7 @@
 // Fixed-point short literal
 #define F16(f) (s16)(f * 327.67f)
 
+#define _NAMESPACE(x, y) x ## _ ## y
+#define NAMESPACE(x, y) _NAMESPACE(x, y)
+
 #endif

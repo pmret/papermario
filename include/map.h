@@ -7,6 +7,8 @@
 
 // TODO: consider moving Npc here
 
+#define M(sym) NAMESPACE(MAP_NAME, sym)
+
 #define ENTRY_COUNT(entryList) (sizeof(entryList) / sizeof(Vec4f))
 
 typedef Vec4f EntryList[];
