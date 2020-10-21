@@ -65,6 +65,9 @@ all: $(TARGET).ld $(BUILD_DIR) $(TARGET).z64 verify
 clean:
 	rm -rf $(BUILD_DIR) $(TARGET).z64
 
+clean-code:
+	rm -rf $(BUILD_DIR)/src $(TARGET).z64
+
 submodules:
 	git submodule update --init --recursive
 
