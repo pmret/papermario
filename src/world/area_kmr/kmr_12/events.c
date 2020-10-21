@@ -1,33 +1,33 @@
 #include "kmr_12.h"
 
-Script M(ExitWest) = EXIT_WALK_SCRIPT(60, 0, "kmr_07", 1);
-Script M(ExitEast) = EXIT_WALK_SCRIPT(60, 1, "kmr_11", 0);
+Script ExitWest = EXIT_WALK_SCRIPT(60, 0, "kmr_07", 1);
+Script ExitEast = EXIT_WALK_SCRIPT(60, 1, "kmr_11", 0);
 
-Script M(BindExits) = {
-    SI_BIND(M(ExitWest), TriggerFlag_FLOOR_ABOVE, 0 /* deili1 */, NULL),
-    SI_BIND(M(ExitEast), TriggerFlag_FLOOR_ABOVE, 3 /* deili2 */, NULL),
+Script BindExits = {
+    SI_BIND(ExitWest, TriggerFlag_FLOOR_ABOVE, 0 /* deili1 */, NULL),
+    SI_BIND(ExitEast, TriggerFlag_FLOOR_ABOVE, 3 /* deili2 */, NULL),
     SI_RETURN(),
     SI_END(),
 };
 
-Script M(Main) = {
+Script Main = {
     SI_SET(SI_SAVE_VAR(425), 31),
     SI_CALL(SetSpriteShading, -1),
     SI_CALL(SetCamPerspective, 0, 3, 25, 16, 4096),
     SI_CALL(SetCamBGColor, 0, 0, 0, 0),
     SI_CALL(SetCamEnabled, 0, 1),
-    SI_CALL(MakeNpcs, 0, M(npcGroupList)),
-    SI_EXEC_WAIT(M(MakeEntities)),
-    SI_EXEC(M(PlayMusic)),
-    SI_SET(SI_VAR(0), M(BindExits)),
+    SI_CALL(MakeNpcs, 0, npcGroupList),
+    SI_EXEC_WAIT(MakeEntities),
+    SI_EXEC(PlayMusic),
+    SI_SET(SI_VAR(0), BindExits),
     SI_EXEC(EnterWalk),
     SI_WAIT_FRAMES(1),
-    SI_BIND(M(ReadWestSign), TriggerFlag_WALL_INTERACT, 10, NULL),
+    SI_BIND(ReadWestSign, TriggerFlag_WALL_INTERACT, 10, NULL),
     SI_RETURN(),
     SI_END(),
 };
 
-NpcAISettings M(goombaAISettings) = {
+NpcAISettings goombaAISettings = {
     .moveSpeed = 1.5f,
     .moveTime = 30,
     .waitTime = 30,
@@ -42,16 +42,16 @@ NpcAISettings M(goombaAISettings) = {
     .unk_2C = TRUE,
 };
 
-Script M(GoombaAI) = {
-    SI_CALL(DoBasicAI, &M(goombaAISettings)),
+Script GoombaAI = {
+    SI_CALL(DoBasicAI, &goombaAISettings),
     SI_RETURN(),
     SI_END(),
 };
 
-NpcSettings M(goombaNpcSettings) = {
+NpcSettings goombaNpcSettings = {
     .height = 20,
     .radius = 23,
-    .ai = &M(GoombaAI),
+    .ai = &GoombaAI,
     .onHit = EnemyNpcHit,
     .onDefeat = EnemyNpcDefeat,
     .level = 5,
@@ -59,7 +59,7 @@ NpcSettings M(goombaNpcSettings) = {
 
 // *INDENT-OFF*
 /// @bug The RETURN command is after the END command, so this script will never terminate.
-Script M(ReadWestSign) = {
+Script ReadWestSign = {
     SI_GROUP(0),
 
     // "Eat a Mushroom to regain your energy!"
@@ -69,7 +69,7 @@ Script M(ReadWestSign) = {
     SI_RESUME_GROUP(1),
 
     SI_SET(SI_FLAG(0), FALSE),
-    SI_CALL(M(GetGoomba)),
+    SI_CALL(GetGoomba),
     SI_IF_NE(SI_VAR(0), FALSE),
         SI_CALL(GetNpcVar, NpcId_GOOMBA, 0, SI_VAR(0)),
         SI_IF_EQ(SI_VAR(0), FALSE),
@@ -88,7 +88,7 @@ Script M(ReadWestSign) = {
     SI_RETURN(),
 };
 
-Script M(GoombaIdle) = {
+Script GoombaIdle = {
     SI_WAIT_FRAMES(1),
 
     SI_CALL(SetSelfVar, 0, FALSE),
@@ -138,28 +138,28 @@ Script M(GoombaIdle) = {
     SI_CALL(SetSelfEnemyFlagBits, 0x40000000, TRUE),
 
     // We're done jumping off; the player can read the sign again
-    SI_BIND(M(ReadWestSign), TriggerFlag_WALL_INTERACT, 10, NULL),
+    SI_BIND(ReadWestSign, TriggerFlag_WALL_INTERACT, 10, NULL),
 
     // Behave like a normal enemy from now on
-    SI_CALL(BindNpcAI, NpcId_SELF, &M(GoombaAI)),
+    SI_CALL(BindNpcAI, NpcId_SELF, &GoombaAI),
 
     SI_RETURN(),
     SI_END(),
 };
 
-Script M(GoombaInit) = {
-    SI_CALL(BindNpcIdle, NpcId_SELF, &M(GoombaIdle)),
+Script GoombaInit = {
+    SI_CALL(BindNpcIdle, NpcId_SELF, &GoombaIdle),
     SI_RETURN(),
     SI_END(),
 };
 // *INDENT-ON*
 
-StaticNpc M(goombaNpc) = {
+StaticNpc goombaNpc = {
     .id = NpcId_GOOMBA,
-    .settings = &M(goombaNpcSettings),
+    .settings = &goombaNpcSettings,
     .pos = { -33.0f, 30.0f, -25.0f },
     .flags = 0x00000C00,
-    .init = M(GoombaInit),
+    .init = GoombaInit,
     .yaw = 90,
     .dropFlags = 0x80,
     .itemDropChance = 5,
@@ -200,13 +200,13 @@ StaticNpc M(goombaNpc) = {
     },
 };
 
-NpcGroupList M(npcGroupList) = {
-    NPC_GROUP(M(goombaNpc), FORMATION_ID(1, 0, 3)),
+NpcGroupList npcGroupList = {
+    NPC_GROUP(goombaNpc, FORMATION_ID(1, 0, 3)),
     NPC_GROUP_LIST_END(),
 };
 
 // *INDENT-OFF*
-Script M(ReadEastSign) = {
+Script ReadEastSign = {
     SI_CALL(func_800441F0, SI_VAR(0)),
     SI_IF_EQ(SI_VAR(0), 1),
         SI_RETURN(),
@@ -224,9 +224,9 @@ Script M(ReadEastSign) = {
     SI_END(),
 };
 
-Script M(MakeEntities) = {
+Script MakeEntities = {
     SI_CALL(MakeEntity, 0x802EAFDC, 436, 0, -42, 0, 0x80000000),
-    SI_CALL(AssignScript, &M(ReadEastSign)),
+    SI_CALL(AssignScript, &ReadEastSign),
 
     SI_RETURN(),
     SI_END(),
