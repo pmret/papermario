@@ -274,7 +274,7 @@ def disassemble(bytes, script_name = "script", symbol_map = {}):
         elif opcode == 0x4E:
             if argv[4] != 0:
                 raise "BIND_PADLOCK argv[4] != NULL"
-            if argv[5] != 0:
+            if argv[5] != 1:
                 raise "BIND_PADLOCK argv[5] != 1"
 
             write_line(f"SI_BIND_PADLOCK({addr_ref(argv[0])}, {trigger(argv[1])}, {var(argv[2])}, {var(argv[3])}),")
