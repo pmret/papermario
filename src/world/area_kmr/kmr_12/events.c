@@ -48,7 +48,7 @@ Script M(GoombaAI) = {
     SI_END(),
 };
 
-NpcSettings M(GoombaNpcSettings) = {
+NpcSettings M(goombaNpcSettings) = {
     .height = 20,
     .radius = 23,
     .ai = &M(GoombaAI),
@@ -156,7 +156,7 @@ Script M(GoombaInit) = {
 
 StaticNpc M(GoombaNPC) = {
     .id = NpcId_GOOMBA,
-    .settings = &M(GoombaNpcSettings),
+    .settings = &M(goombaNpcSettings),
     .pos = { -33.0f, 30.0f, -25.0f },
     .flags = 0x00000C00,
     .init = M(GoombaInit),
