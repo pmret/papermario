@@ -32,6 +32,6 @@ static ApiStatus SomeMatrixOperation2(ScriptInstance* script, s32 isInitialCall)
         guTranslateF(&mtx, 0.0f, -temp_f22, 0.0f);
         guMtxCatF(&mtx, &model->transformMatrix, &model->transformMatrix);
     }
-    
+
     return ApiStatus_DONE2;
 }

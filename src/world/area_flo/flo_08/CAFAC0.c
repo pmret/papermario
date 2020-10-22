@@ -26,4 +26,3 @@ INCLUDE_ASM(s32, "world/area_flo/flo_08/CAFAC0", func_80241BCC_CB090C);
 
 #include "world/common/SomeMatrixOperations.inc.c"
 
-

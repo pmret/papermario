@@ -10,4 +10,3 @@ INCLUDE_ASM(s32, "world/area_jan/jan_04/B451F0", func_80240D0C_B4547C);
 
 #include "world/common/SomeMatrixOperations.inc.c"
 
-

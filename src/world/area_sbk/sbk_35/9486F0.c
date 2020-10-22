@@ -4,4 +4,3 @@
 
 #include "world/common/SomeMatrixOperations.inc.c"
 
-

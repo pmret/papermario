@@ -35,7 +35,6 @@ INCLUDE_ASM(s32, "world/area_nok/nok_11/9F4A40", func_80241AE0_9F6520);
 #include "world/common/SomeMatrixOperations.inc.c"
 
 
-
 INCLUDE_ASM(s32, "world/area_nok/nok_11/9F4A40", func_80241F08_9F6948);
 
 INCLUDE_ASM(s32, "world/area_nok/nok_11/9F4A40", func_80241F30_9F6970);

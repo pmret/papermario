@@ -3,7 +3,6 @@
 #include "world/common/SomeMatrixOperations.inc.c"
 
 
-
 INCLUDE_ASM(s32, "world/area_kmr/kmr_04/8CA960", func_8024029C_8CAB9C);
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_04/8CA960", func_802402C8_8CABC8);

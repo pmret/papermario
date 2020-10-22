@@ -1,6 +1,6 @@
 #include "common.h"
 
-static ApiStatus Bandit_DropCoin(ScriptInstance *script, s32 isInitialCall) {
+static ApiStatus Bandit_DropCoin(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     NpcId npcID;
     Npc* npc;
@@ -19,7 +19,7 @@ static ApiStatus Bandit_DropCoin(ScriptInstance *script, s32 isInitialCall) {
         } else {
             npc = npcID;
         }
-        
+
         script->functionTemp[0] = npc;
         script->functionTemp[1] = itemEntityIndex;
         script->functionTemp[2] = areaFlag;

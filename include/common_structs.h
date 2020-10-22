@@ -234,17 +234,17 @@ typedef struct ScriptInstance {
     /* 0x140 */ s32* flagArray;
     /* 0x144 */ ScriptID id;
     /* 0x148 */ union {
-                    s32 enemyID;
-                    s32 actorID;
-                    struct Enemy* enemy; ///< For overworld scripts owned by an Npc
-                    struct Actor* actor; ///< For battle scripts
-                } owner1;                ///< Initially -1
+        s32 enemyID;
+        s32 actorID;
+        struct Enemy* enemy; ///< For overworld scripts owned by an Npc
+        struct Actor* actor; ///< For battle scripts
+    } owner1;                ///< Initially -1
     /* 0x14C */ union {
-                    NpcId npcID;
-                    s32 triggerID;
-                    struct Npc* npc;            ///< For overworld scripts owned by an Npc
-                    struct Trigger* trigger;
-                } owner2;                       ///< Initially -1
+        NpcId npcID;
+        s32 triggerID;
+        struct Npc* npc;            ///< For overworld scripts owned by an Npc
+        struct Trigger* trigger;
+    } owner2;                       ///< Initially -1
     /* 0x150 */ f32 timeScale;
     /* 0x154 */ f32 frameCounter;
     /* 0x158 */ s32 unk_158;
