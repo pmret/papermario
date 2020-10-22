@@ -12,9 +12,9 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8ED5A0", func_80241950_8ED770);
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8ED5A0", func_802419BC_8ED7DC);
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8ED5A0", func_80241A60_8ED880);
+#include "world/common/SomeMatrixOperations.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8ED5A0", func_80241AD0_8ED8F0);
+
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8ED5A0", func_80241C9C_8EDABC);
 

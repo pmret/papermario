@@ -1,5 +1,5 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B37C20", func_80243050_B37C20);
+#include "world/common/SomeMatrixOperations.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B37C20", func_802430C0_B37C90);
+

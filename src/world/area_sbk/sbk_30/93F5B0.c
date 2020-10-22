@@ -52,6 +52,6 @@ INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_80241560_940B10);
 
 INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_802415A4_940B54);
 
-INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_802415D0_940B80);
+#include "world/common/SomeMatrixOperations.inc.c"
 
-INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_80241640_940BF0);
+

@@ -8,6 +8,6 @@ INCLUDE_ASM(s32, "world/area_jan/jan_13/B767B0", func_80240214_B769C4);
 
 INCLUDE_ASM(s32, "world/area_jan/jan_13/B767B0", func_802402B8_B76A68);
 
-INCLUDE_ASM(s32, "world/area_jan/jan_13/B767B0", func_80240390_B76B40);
+#include "world/common/SomeMatrixOperations.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_13/B767B0", func_80240400_B76BB0);
+

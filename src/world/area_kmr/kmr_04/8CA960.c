@@ -1,8 +1,8 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_04/8CA960", func_80240060_8CA960);
+#include "world/common/SomeMatrixOperations.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_04/8CA960", func_802400D0_8CA9D0);
+
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_04/8CA960", func_8024029C_8CAB9C);
 

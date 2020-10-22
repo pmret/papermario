@@ -1,5 +1,5 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_11/8DB020", func_80240F20_8DB020);
+#include "world/common/SomeMatrixOperations.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_11/8DB020", func_80240F90_8DB090);
+

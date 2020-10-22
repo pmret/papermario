@@ -32,9 +32,9 @@ INCLUDE_ASM(s32, "world/area_nok/nok_11/9F4A40", func_802419BC_9F63FC);
 
 INCLUDE_ASM(s32, "world/area_nok/nok_11/9F4A40", func_80241AE0_9F6520);
 
-INCLUDE_ASM(s32, "world/area_nok/nok_11/9F4A40", func_80241CCC_9F670C);
+#include "world/common/SomeMatrixOperations.inc.c"
 
-INCLUDE_ASM(s32, "world/area_nok/nok_11/9F4A40", func_80241D3C_9F677C);
+
 
 INCLUDE_ASM(s32, "world/area_nok/nok_11/9F4A40", func_80241F08_9F6948);
 
