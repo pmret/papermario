@@ -88,7 +88,7 @@ print-% : ; $(info $* is a $(flavor $*) variable set to [$($*)]) @true
 $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
 
-$(BUILD_DIR)/%.o: %.s
+$(BUILD_DIR)/%.s.o: %.s
 	$(AS) $(ASFLAGS) -o $@ $<
 
 $(BUILD_DIR)/%.c.o: %.c $(H_FILES)
