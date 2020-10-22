@@ -13,7 +13,7 @@ WORLD_AREAS := area_dgb area_arn area_dro area_end area_flo area_gv area_hos are
 SRC_DIRS := $(shell find src -type d)
 ASM_DIRS := asm asm/os
 INCLUDE_DIRS := include include/PR src
-DATA_DIRS := $(shell find bin -type d -not -name Yay0)
+DATA_DIRS := $(shell mkdir -p bin && find bin -type d -not -name Yay0)
 YAY0_DIRS := bin/Yay0
 ASSETS_FS_DIRS := assets/fs
 
