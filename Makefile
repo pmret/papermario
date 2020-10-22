@@ -28,9 +28,9 @@ YAY0_FILES := $(foreach dir,$(YAY0_DIRS),$(wildcard $(dir)/*.bin))
 ASSETS_FS_FILES := $(foreach dir,$(ASSETS_FS_DIRS),$(wildcard $(dir)/*.*))
 
 # Object files
-O_FILES := $(foreach file,$(C_FILES),$(BUILD_DIR)/$(file:.c=.o)) \
-		   $(foreach file,$(S_FILES),$(BUILD_DIR)/$(file:.s=.o)) \
-		   $(foreach file,$(DATA_FILES),$(BUILD_DIR)/$(file:.bin=.o)) \
+O_FILES := $(foreach file,$(C_FILES),$(BUILD_DIR)/$(file:.c=.c.o)) \
+		   $(foreach file,$(S_FILES),$(BUILD_DIR)/$(file:.s=.s.o)) \
+		   $(foreach file,$(DATA_FILES),$(BUILD_DIR)/$(file:.bin=.bin.o)) \
 		   $(foreach dir,$(ASSETS_FS_DIRS),$(BUILD_DIR)/$(dir).o) \
 
 YAY0_FILES := $(foreach file,$(YAY0_FILES),$(BUILD_DIR)/$(file:.bin=.Yay0.o))
@@ -68,7 +68,7 @@ all: $(TARGET).ld $(BUILD_DIR) $(TARGET).z64 verify
 
 clean:
 	rm -rf $(BUILD_DIR) $(TARGET).z64
-	mkdir -p $(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(DATA_DIRS) $(ASSETS_FS_DIRS),build/$(dir)
+	mkdir -p $(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(DATA_DIRS) $(ASSETS_FS_DIRS),build/$(dir))
 
 submodules:
 	git submodule update --init --recursive
@@ -93,13 +93,13 @@ $(BUILD_DIR):
 $(BUILD_DIR)/$(TARGET).elf: $(O_FILES) $(YAY0_FILES) $(LD_SCRIPT)
 	@$(LD) $(LDFLAGS) -o $@
 
-$(BUILD_DIR)/%.o: %.s
+$(BUILD_DIR)/%.s.o: %.s
 	$(AS) $(ASFLAGS) -o $@ $<
 
-$(BUILD_DIR)/%.o: %.c $(H_FILES)
+$(BUILD_DIR)/%.c.o: %.c $(H_FILES)
 	cpp $(CPPFLAGS) $< | $(CC) $(CFLAGS) -o - | $(OLD_AS) $(OLDASFLAGS) - -o $@
 
-$(BUILD_DIR)/%.o: %.bin
+$(BUILD_DIR)/%.bin.o: %.bin
 	$(LD) -r -b binary -o $@ $<
 
 $(BUILD_DIR)/%.Yay0.o: %.bin
