@@ -2,7 +2,7 @@
 
 INCLUDE_ASM(s32, "world/area_iwa/iwa_10/91E6D0", func_80240160_91E6D0);
 
-INCLUDE_ASM(s32, "world/area_iwa/iwa_10/91E6D0", func_802402F0_91E860);
+#include "world/common/Set8009A650_40.inc.c"
 
 INCLUDE_ASM(s32, "world/area_iwa/iwa_10/91E6D0", func_8024030C_91E87C);
 

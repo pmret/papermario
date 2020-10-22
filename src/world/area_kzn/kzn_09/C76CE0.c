@@ -1,6 +1,6 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C76CE0", func_80240000_C76CE0);
+#include "world/common/Set8009A650_40.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C76CE0", func_8024001C_C76CFC);
 

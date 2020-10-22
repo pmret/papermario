@@ -10,7 +10,7 @@ INCLUDE_ASM(s32, "world/area_tik/tik_12/8891C0", func_80240A78_889648);
 
 INCLUDE_ASM(s32, "world/area_tik/tik_12/8891C0", func_80240BC8_889798);
 
-INCLUDE_ASM(s32, "world/area_tik/tik_12/8891C0", func_80240C1C_8897EC);
+#include "world/common/Set8009A650_40.inc.c"
 
 INCLUDE_ASM(s32, "world/area_tik/tik_12/8891C0", func_80240C38_889808);
 

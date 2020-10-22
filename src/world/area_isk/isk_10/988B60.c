@@ -1,6 +1,6 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "world/area_isk/isk_10/988B60", func_80240000_988B60);
+#include "world/common/Set8009A650_40.inc.c"
 
 INCLUDE_ASM(s32, "world/area_isk/isk_10/988B60", func_8024001C_988B7C);
 

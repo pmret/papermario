@@ -44,7 +44,7 @@ INCLUDE_ASM(s32, "world/area_dgb/dgb_04/C36530", func_80241E3C_C3836C);
 
 INCLUDE_ASM(s32, "world/area_dgb/dgb_04/C36530", func_80242154_C38684);
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_04/C36530", func_802423D0_C38900);
+#include "world/common/Set8009A650_40.inc.c"
 
 INCLUDE_ASM(s32, "world/area_dgb/dgb_04/C36530", func_802423EC_C3891C);
 

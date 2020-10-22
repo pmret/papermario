@@ -12,7 +12,7 @@ INCLUDE_ASM(s32, "world/area_tik/tik_07/879BE0", func_802401D0_879DB0);
 
 INCLUDE_ASM(s32, "world/area_tik/tik_07/879BE0", func_8024023C_879E1C);
 
-INCLUDE_ASM(s32, "world/area_tik/tik_07/879BE0", func_802402E0_879EC0);
+#include "world/common/Set8009A650_40.inc.c"
 
 INCLUDE_ASM(s32, "world/area_tik/tik_07/879BE0", func_802402FC_879EDC);
 

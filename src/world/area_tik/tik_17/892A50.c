@@ -1,6 +1,6 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "world/area_tik/tik_17/892A50", func_80240030_892A50);
+#include "world/common/Set8009A650_40.inc.c"
 
 INCLUDE_ASM(s32, "world/area_tik/tik_17/892A50", func_8024004C_892A6C);
 

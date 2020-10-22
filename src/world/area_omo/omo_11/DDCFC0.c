@@ -1,6 +1,6 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_11/DDCFC0", func_80240790_DDCFC0);
+#include "world/common/Set8009A650_40.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_11/DDCFC0", func_802407AC_DDCFDC);
 

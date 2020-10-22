@@ -1,6 +1,6 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "world/area_flo/flo_08/CAED40", func_80240000_CAED40);
+#include "world/common/Set8009A650_40.inc.c"
 
 INCLUDE_ASM(s32, "world/area_flo/flo_08/CAED40", func_8024001C_CAED5C);
 
