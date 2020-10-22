@@ -1,5 +1,8 @@
 SHELL=/bin/bash -o pipefail
 
+MAKEFLAGS += --no-builtin-rules
+MAKEFLAGS += --no-builtin-variables
+
 ################ Target Executable and Sources ###############
 
 # BUILD_DIR is location where all build artifacts are placed
@@ -57,8 +60,6 @@ LDFLAGS    = -T undefined_syms.txt -T undefined_funcs.txt -T $(LD_SCRIPT) -Map $
 
 ######################## Targets #############################
 
-$(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(DATA_DIRS) $(ASSETS_FS_DIRS) ,$(shell mkdir -p build/$(dir)))
-
 default: all
 
 LD_SCRIPT = $(TARGET).ld
@@ -67,6 +68,7 @@ all: $(TARGET).ld $(BUILD_DIR) $(TARGET).z64 verify
 
 clean:
 	rm -rf $(BUILD_DIR) $(TARGET).z64
+	mkdir -p $(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(DATA_DIRS) $(ASSETS_FS_DIRS),build/$(dir)
 
 submodules:
 	git submodule update --init --recursive
