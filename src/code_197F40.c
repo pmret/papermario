@@ -495,7 +495,6 @@ ApiStatus GetPlayerHP(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-
 INCLUDE_ASM(s32, "code_197F40", PlayerDamageEnemy);
 
 INCLUDE_ASM(s32, "code_197F40", PlayerPowerBounceEnemy);

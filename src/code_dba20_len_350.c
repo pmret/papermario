@@ -104,7 +104,6 @@ s32 get_global_flag(s32 index) {
     return flag;
 }
 
-
 s8 set_global_byte(s32 index, s8 value) {
     SaveData* saveFile = &gCurrentSaveFile;
     s32 ret = saveFile->globalBytes[index];

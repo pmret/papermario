@@ -508,7 +508,6 @@ void kill_script_by_ID(s32 id) {
     }
 }
 
-
 void kill_all_scripts(void) {
     s32 i;
     ScriptInstance* scriptContextPtr;

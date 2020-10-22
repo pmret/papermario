@@ -14,7 +14,6 @@ ApiStatus func_802BD114_324F10(ScriptInstance* script, s32 isInitialCall) {
     return func_800EECE8(owner) != 0;
 }
 
-
 ApiStatus func_802BD14C_324F10(ScriptInstance* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     Npc* owner = script->owner2.npc;

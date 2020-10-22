@@ -93,7 +93,6 @@ static s32 contRmbRetrace(NUSiCommonMesg* mesg) {
     return 0;
 }
 
-
 #ifdef NON_MATCHING
 // Will match when data is decompiled.
 void nuContRmbMgrInit(void) {

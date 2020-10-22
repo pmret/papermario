@@ -445,7 +445,6 @@ ApiStatus si_handle_case_AND(ScriptInstance* script) {
     do {} while (0); // Necessary to match
 }
 
-
 INCLUDE_ASM(s32, "si", si_handle_case_equal_OR);
 
 INCLUDE_ASM(s32, "si", si_handle_case_equal_AND);

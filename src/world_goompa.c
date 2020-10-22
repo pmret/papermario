@@ -14,7 +14,6 @@ ApiStatus func_802BD114(ScriptInstance* script, s32 isInitialCall) {
     return func_800EECE8(owner) != 0;
 }
 
-
 INCLUDE_ASM(s32, "world_goompa", func_802BD14C);
 
 INCLUDE_ASM(s32, "world_goompa", func_802BD4E0);
