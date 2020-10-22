@@ -42,14 +42,11 @@ def star_rod_lib():
 
     return _star_rod_lib
 
-def addr_ref(addr):
-    return star_rod_lib().get(addr, f"0x{addr:08X}")
-
-def disassemble(bytes, indent = 0, script_name = "script"):
+def disassemble(bytes, script_name = "script", symbol_map = {}):
     out = ""
     prefix = ""
 
-    indent += 1
+    indent = 1
     indent_used = False
 
     def write_line(line):
@@ -65,6 +62,9 @@ def disassemble(bytes, indent = 0, script_name = "script"):
         prefix += "\n"
 
     def var(arg):
+        if arg in symbol_map:
+            return symbol_map[arg]
+
         v = arg - 2**32 # convert to s32
         if v > -250000000:
             if v <= -220000000: return f"SI_FIXED({(v + 230000000) / 1024}f)"
@@ -85,6 +85,11 @@ def disassemble(bytes, indent = 0, script_name = "script"):
             return f"0x{arg:X}"
         else:
             return f"{arg}"
+
+    def addr_ref(addr):
+        if addr in symbol_map:
+            return symbol_map[addr]
+        return star_rod_lib().get(addr, f"0x{addr:08X}")
 
     def trigger(trigger):
         if trigger == 0x00000080: trigger = "TriggerFlag_FLOOR_TOUCH"
@@ -107,6 +112,10 @@ def disassemble(bytes, indent = 0, script_name = "script"):
     while True:
         opcode = read_word()
         argc = read_word()
+
+        if opcode > 0xFF or argc > 0xFF:
+            return f"/* malformed script: {script_name} */\n"
+
         argv = []
         for i in range(0, argc):
             argv.append(read_word())
@@ -167,7 +176,7 @@ def disassemble(bytes, indent = 0, script_name = "script"):
             write_line(f"SI_END_IF(),")
         elif opcode == 0x14:
             write_line(f"SI_SWITCH({var(argv[0])}),")
-            indent += 1
+            indent += 2
         elif opcode == 0x15:
             write_line(f"SI_SWITCH_CONST(0x{argv[0]:X}),")
             indent += 2
@@ -197,7 +206,7 @@ def disassemble(bytes, indent = 0, script_name = "script"):
             indent += 1
         elif opcode == 0x1C:
             indent -= 1
-            write_line(f"SI_CASE_DEFAULT({var(argv[0])}),")
+            write_line(f"SI_CASE_DEFAULT(),")
             indent += 1
         elif opcode == 0x1D:
             indent -= 1
@@ -265,7 +274,7 @@ def disassemble(bytes, indent = 0, script_name = "script"):
         elif opcode == 0x4E:
             if argv[4] != 0:
                 raise "BIND_PADLOCK argv[4] != NULL"
-            if argv[5] != 0:
+            if argv[5] != 1:
                 raise "BIND_PADLOCK argv[5] != 1"
 
             write_line(f"SI_BIND_PADLOCK({addr_ref(argv[0])}, {trigger(argv[1])}, {var(argv[2])}, {var(argv[3])}),")

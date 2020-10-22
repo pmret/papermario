@@ -1,8 +1,16 @@
 #include "common.h"
 #include "map.h"
 
+#define MAP_NAME kmr_12
+
 #define NpcId_GOOMBA 0
 
-Script kmr_12_main;
-Script kmr_12_play_music;
-ApiStatus kmr_12_get_goomba_ref(ScriptInstance* script, s32 isInitialCall);
+#define GetGoomba M(GetGoomba)
+ApiStatus GetGoomba(ScriptInstance* script, s32 isInitialCall);
+
+Script M(Main);
+Script M(PlayMusic);
+Script M(MakeEntities);
+Script M(ReadWestSign);
+
+NpcGroupList M(npcGroupList);
