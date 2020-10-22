@@ -19,7 +19,7 @@ Script M(PlayMusic) = {
     SI_END(),
 };
 
-ApiStatus M(GetGoomba)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus GetGoomba(ScriptInstance* script, s32 isInitialCall) {
     script->varTable[0] = get_enemy_safe(NpcId_GOOMBA);
     return ApiStatus_DONE2;
 }

@@ -69,7 +69,7 @@ Script M(ReadWestSign) = {
     SI_RESUME_GROUP(1),
 
     SI_SET(SI_FLAG(0), FALSE),
-    SI_CALL(M(GetGoomba)),
+    SI_CALL(GetGoomba),
     SI_IF_NE(SI_VAR(0), FALSE),
         SI_CALL(GetNpcVar, NpcId_GOOMBA, 0, SI_VAR(0)),
         SI_IF_EQ(SI_VAR(0), FALSE),

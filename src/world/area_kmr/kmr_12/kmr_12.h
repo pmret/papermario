@@ -5,7 +5,8 @@
 
 #define NpcId_GOOMBA 0
 
-ApiStatus M(GetGoomba)(ScriptInstance* script, s32 isInitialCall);
+#define GetGoomba M(GetGoomba)
+ApiStatus GetGoomba(ScriptInstance* script, s32 isInitialCall);
 
 Script M(Main);
 Script M(PlayMusic);
