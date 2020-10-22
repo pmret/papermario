@@ -115,6 +115,8 @@ typedef struct Npc {
     /* 0x0AB */ char unk_AB[661];
 } Npc; // size = 0x340
 
+typedef Npc* NpcList[MAX_NPCS];
+
 typedef struct PlayerData {
     /* 0x000 */ s8 bootsLevel;
     /* 0x001 */ s8 hammerLevel;
@@ -204,6 +206,8 @@ typedef struct Trigger {
     /* 0x34 */ ScriptID runningScriptID;
 } Trigger; // size = 0x38
 
+typedef Trigger* TriggerList[MAX_TRIGGERS];
+
 typedef struct ScriptInstance {
     /* 0x000 */ u8 state;
     /* 0x001 */ u8 currentArgc;
@@ -270,6 +274,10 @@ typedef struct Entity {
     /* 0xB0 */ u8 radius; /* Created by retype action */
     /* 0xB1 */ char unk_B1[71];
 } Entity; // size = 0xF8
+
+typedef Entity* EntityList[MAX_ENTITIES];
+
+typedef UNK_TYPE* DynamicEntityList[MAX_DYNAMIC_ENTITIES];
 
 typedef struct StaticEntityData {
     /* 0x00 */ s16 flags;
@@ -364,6 +372,7 @@ typedef struct UiStatus {
     /* 0x68 */ s32 iconIndex13;
     /* 0x6C */ s8 unk_6C[4];
 } UiStatus; // size = 0x70
+
 typedef struct Collider {
     /* 0x00 */ s32 flags;
     /* 0x04 */ s16 nextSibling;
@@ -672,6 +681,8 @@ typedef struct Model {
     /* 0xAA */ char unk_AA[6];
 } Model; // size = 0xB0
 
+typedef Model* ModelList[MAX_MODELS];
+
 typedef struct AnimatedMesh {
     /* 0x000 */ s32 flags;
     /* 0x004 */ u8 renderMode;
@@ -920,6 +931,8 @@ typedef struct Shadow {
     /* 0x1C */ struct Vec3f scale;
     /* 0x28 */ char unk_28[80];
 } Shadow; // size = 0x78
+
+typedef Shadow* ShadowList[MAX_SHADOWS];
 
 typedef struct PushBlockGrid {
     /* 0x00 */ s8* cells;
