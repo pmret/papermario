@@ -148,8 +148,8 @@ typedef struct StaticNPC {
     /* 0x028 */ s8 dropFlags;
     /* 0x029 */ s8 itemDropChance; // %
     /* 0x02A */ ItemDrop itemDrops[8];
-    /* 0x05A */ StatDrop heartDrops[5];
-    /* 0x09A */ StatDrop flowerDrops[5];
+    /* 0x05A */ StatDrop heartDrops[8];
+    /* 0x09A */ StatDrop flowerDrops[8];
     /* 0x0DA */ s16 minCoinBonus;
     /* 0x0DC */ s16 maxCoinBonus;
     /* 0x0DE */ char unk_DE[2];
