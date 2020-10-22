@@ -6,7 +6,7 @@ INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_80240040_93F5F0);
 
 INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_80240164_93F714);
 
-INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_80240338_93F8E8);
+#include "world/common/SpawnSunEffect.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_80240370_93F920);
 

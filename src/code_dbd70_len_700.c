@@ -8,9 +8,9 @@ INCLUDE_ASM(s32, "code_dbd70_len_700", clear_trigger_data);
 
 void init_trigger_list(void) {
     if (!GAME_STATUS->isBattle) {
-        *gCurrentTriggerListPtr = gTriggerList1;
+        gCurrentTriggerListPtr = &gTriggerList1;
     } else {
-        *gCurrentTriggerListPtr = gTriggerList2;
+        gCurrentTriggerListPtr = &gTriggerList2;
     }
 
     gTriggerCount = 0;
@@ -22,16 +22,17 @@ INCLUDE_ASM(s32, "code_dbd70_len_700", update_triggers);
 
 void delete_trigger(Trigger* toDelete) {
     s32 i;
+    TriggerList** currentTriggerListPtr = &gCurrentTriggerListPtr;
 
-    for (i = 0; i < ARRAY_COUNT(gCurrentTriggerListPtr); i++) {
-        if ((*gCurrentTriggerListPtr)[i] == toDelete) {
+    for (i = 0; i < MAX_TRIGGERS; i++) {
+        if ((**currentTriggerListPtr)[i] == toDelete) {
             break;
         }
     }
 
-    if (i < ARRAY_COUNT(gCurrentTriggerListPtr)) {
-        heap_free((*gCurrentTriggerListPtr)[i]);
-        (*gCurrentTriggerListPtr)[i] = NULL;
+    if (i < MAX_TRIGGERS) {
+        heap_free((**currentTriggerListPtr)[i]);
+        (**currentTriggerListPtr)[i] = NULL;
     }
 }
 
@@ -48,7 +49,7 @@ s32 func_80145CE8(s32 arg0) {
         return 0;
     }
 
-    for (i = 0; i < ARRAY_COUNT(gCurrentTriggerListPtr); i++) {
+    for (i = 0; i < MAX_TRIGGERS; i++) {
         Trigger* trigger = (*gCurrentTriggerListPtr)[i];
 
         if ((trigger != NULL) &&
