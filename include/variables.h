@@ -38,30 +38,31 @@ extern s32 gScriptIndexList[MAX_SCRIPTS];
 
 extern s32 gMoveScriptTable[][4];
 
-extern Model* gWorldModelList[256];
-extern Model* gBattleModelList[256];
-extern Model** gCurrentModelListPtr[256];
+extern ModelList gWorldModelList;
+extern ModelList gBattleModelList;
+extern ModelList* gCurrentModelListPtr;
 
+// TODO: potentially a display list, figure this out
 extern u32* gWorldModelSpecialDls[32];
 extern u32* gBattleModelSpecialDls[32];
 extern u32** gCurrentModelSpecialDlsPtr[32];
 
-extern Entity* gWorldEntityList[30];
-extern Entity* gBattleEntityList[30];
-extern Entity** gCurrentEntityListPtr[30];
+extern EntityList gWorldEntityList;
+extern EntityList gBattleEntityList;
+extern EntityList* gCurrentEntityListPtr;
 extern s32 gLastCreatedEntityIndex;
 
-extern UNK_TYPE* gWorldDynamicEntityList[16];
-extern UNK_TYPE* gBattleDynamicEntityList[16];
-extern UNK_TYPE*** gCurrentDynamicEntityListPtr;
+extern DynamicEntityList gWorldDynamicEntityList;
+extern DynamicEntityList gBattleDynamicEntityList;
+extern DynamicEntityList* gCurrentDynamicEntityListPtr;
 
-extern Npc* gWorldNpcList[64];
-extern Npc* gBattleNpcList[64];
-extern Npc** gCurrentNpcListPtr[64];
+extern NpcList gWorldNpcList;
+extern NpcList gBattleNpcList;
+extern NpcList* gCurrentNpcListPtr;
 
-extern Shadow* gWorldShadowList[60];
-extern Shadow* gBattleShadowList[60];
-extern Shadow** gCurrentShadowListPtr[60];
+extern ShadowList gWorldShadowList;
+extern ShadowList gBattleShadowList;
+extern ShadowList* gCurrentShadowListPtr;
 
 extern Camera gCameras[4];
 extern s32 gCurrentCameraID;
@@ -89,9 +90,9 @@ extern PrintContext* D_802DB268;
 
 // Triggers
 extern s16 gTriggerCount;
-extern Trigger* gTriggerList1[64];
-extern Trigger* gTriggerList2[64];
-extern Trigger** gCurrentTriggerListPtr[64];
+extern TriggerList gTriggerList1;
+extern TriggerList gTriggerList2;
+extern TriggerList* gCurrentTriggerListPtr;
 
 // Map transition data. Should probably be a struct
 extern u16 gMapTransitionAlpha;

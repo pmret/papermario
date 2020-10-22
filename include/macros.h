@@ -23,7 +23,13 @@
 #define MAX_MAPVARS 16
 #define MAX_MAPFLAGS 3
 
+#define MAX_MODELS 256
 #define MAX_SCRIPTS 128
+#define MAX_NPCS 64
+#define MAX_TRIGGERS 64
+#define MAX_SHADOWS 60
+#define MAX_ENTITIES 30
+#define MAX_DYNAMIC_ENTITIES 16
 
 //NOTE: SCRIPT_ALLOC is probably not quite correct, but this is the closest thing to matching for the functions its used in. Needs more work.
 #define SCRIPT_ALLOC(new, index) \
