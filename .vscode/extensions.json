@@ -3,6 +3,7 @@
         "ms-vscode.cpptools",
         "nanaian.vscode-star-rod",
         "notskm.clang-tidy",
+        "EditorConfig.EditorConfig",
     ],
     "unwantedRecommendations": [
         "llvm-vs-code-extensions.vscode-clangd",

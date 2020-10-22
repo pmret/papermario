@@ -1,6 +1,4 @@
 {
-    "editor.detectIndentation": false,
-    "editor.insertSpaces": true,
     "files.eol": "\n",
     "files.insertFinalNewline": true,
     "editor.rulers": [120],
@@ -10,6 +8,7 @@
         "-Iinclude/PR",
         "-Isrc",
         "-D_LANGUAGE_C",
+        "-DSCRIPT(...)={}",
     ],
     "python.pythonPath": "/usr/bin/python3",
 }

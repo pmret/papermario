@@ -205,30 +205,22 @@ NpcGroupList M(npcGroupList) = {
     NPC_GROUP_LIST_END(),
 };
 
-// *INDENT-OFF*
-Script M(ReadEastSign) = {
-    SI_CALL(func_800441F0, SI_VAR(0)),
-    SI_IF_EQ(SI_VAR(0), 1),
-        SI_RETURN(),
-    SI_END_IF(),
+Script M(ReadEastSign) = SCRIPT({
+    func_800441F0(SI_VAR(0))
+    if SI_VAR(0) == 1 {
+        return
+    }
 
-    SI_GROUP(0),
+    setgroup 0
 
-    SI_CALL(func_802D5830, 1),
-    SI_CALL(DisablePlayerInput, 1),
-    SI_CALL(ShowMessageAtScreenPos, MessageID_SIGN_GOOMBA_KINGS_FORTRESS_AHEAD, 160, 40),
-    SI_CALL(DisablePlayerInput, 0),
-    SI_CALL(func_802D5830, 0),
+    func_802D5830(1)
+    DisablePlayerInput(1)
+    ShowMessageAtScreenPos(MessageID_SIGN_GOOMBA_KINGS_FORTRESS_AHEAD, 160, 40)
+    DisablePlayerInput(0)
+    func_802D5830(0)
+});
 
-    SI_RETURN(),
-    SI_END(),
-};
-
-Script M(MakeEntities) = {
-    SI_CALL(MakeEntity, 0x802EAFDC, 436, 0, -42, 0, 0x80000000),
-    SI_CALL(AssignScript, &M(ReadEastSign)),
-
-    SI_RETURN(),
-    SI_END(),
-};
-// *INDENT-ON*
+Script M(MakeEntities) = SCRIPT({
+    MakeEntity(0x802EAFDC, 436, 0, -42, 0, 0x80000000)
+    AssignScript(M(ReadEastSign))
+});

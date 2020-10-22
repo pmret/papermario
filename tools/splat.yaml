@@ -2,9 +2,9 @@ name: "Paper Mario (North America)"
 basename: "papermario"
 options:
   find-file-boundaries: True
-  pycparser_flags: ["-Iinclude", "-D_LANGUAGE_C", "-ffreestanding", "-DF3DEX_GBI_2", "-DSPLAT"]
   compiler: "GCC"
   mnemonic_ljust: 10
+  o_as_suffix: yes
 segments:
   - name: header
     type: header
