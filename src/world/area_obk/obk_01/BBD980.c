@@ -14,7 +14,7 @@ INCLUDE_ASM(s32, "world/area_obk/obk_01/BBD980", func_80240B78_BBDD18);
 
 INCLUDE_ASM(s32, "world/area_obk/obk_01/BBD980", func_80240BB0_BBDD50);
 
-INCLUDE_ASM(s32, "world/area_obk/obk_01/BBD980", func_80240C4C_BBDDEC);
+#include "world/common/SetManyVars.inc.c"
 
 INCLUDE_ASM(s32, "world/area_obk/obk_01/BBD980", func_80240D3C_BBDEDC);
 

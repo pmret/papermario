@@ -62,7 +62,7 @@ INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80242214_D220A4);
 
 INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80242244_D220D4);
 
-INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_8024224C_D220DC);
+#include "world/common/SetManyVars.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_8024233C_D221CC);
 

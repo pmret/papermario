@@ -102,7 +102,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_80243088_826348);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_802430D0_826390);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_80243104_8263C4);
+#include "world/common/SetManyVars.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_802431F4_8264B4);
 

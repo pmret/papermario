@@ -112,7 +112,7 @@ INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_80243748_96C908);
 
 INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_80243778_96C938);
 
-INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_80243780_96C940);
+#include "world/common/SetManyVars.inc.c"
 
 INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_80243870_96CA30);
 

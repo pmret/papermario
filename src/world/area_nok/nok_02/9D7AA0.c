@@ -88,7 +88,7 @@ INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80242C24_9D9C44);
 
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80242C5C_9D9C7C);
 
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80242CF8_9D9D18);
+#include "world/common/SetManyVars.inc.c"
 
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80242DE8_9D9E08);
 

@@ -14,7 +14,7 @@ INCLUDE_ASM(s32, "world/area_kzn/kzn_20/C96240", func_802406A8_C965D8);
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_20/C96240", func_802406E0_C96610);
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_20/C96240", func_8024077C_C966AC);
+#include "world/common/SetManyVars.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_20/C96240", func_8024086C_C9679C);
 

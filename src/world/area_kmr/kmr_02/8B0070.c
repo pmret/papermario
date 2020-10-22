@@ -106,7 +106,7 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_802422F8_8B2368);
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80242394_8B2404);
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80242424_8B2494);
+#include "world/common/SetManyVars.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80242514_8B2584);
 
