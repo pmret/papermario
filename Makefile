@@ -43,7 +43,7 @@ YAY0COMPRESS = tools/Yay0compress
 BUILD_ASSETS_FS := $(PYTHON) tools/build_assets_fs.py $(ASSETS_FS) $(BUILD_DIR)/$(ASSETS_FS)
 
 ifndef EMULATOR
-ifneq ($(shell command -v mupen64plus-gui),)
+ifneq ($(shell which mupen64plus-gui),)
 EMULATOR = mupen64plus-gui
 else
 EMULATOR = mupen64plus
@@ -81,6 +81,7 @@ clean-code:
 	rm -rf $(BUILD_DIR)/src
 
 setup: clean submodules split
+	make -C tools
 
 submodules:
 	git submodule update --init --recursive
