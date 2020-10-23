@@ -4,7 +4,8 @@
         {
             "name": "papermario",
             "includePath": [
-                "${workspaceFolder}/include"
+                "${workspaceFolder}/include",
+                "${workspaceFolder}/src"
             ],
             "defines": [
                 "F3DEX_GBI_2",

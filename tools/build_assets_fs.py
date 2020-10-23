@@ -39,7 +39,7 @@ def build_mapfs(src_dir, build_dir, out_bin):
             size = next_multiple(build_path.stat().st_size, 2)
             decompressed_size = src_path.stat().st_size
 
-            print(f"{name} {offset:08X} {size:08X} {decompressed_size:08X}")
+            #print(f"{name} {offset:08X} {size:08X} {decompressed_size:08X}")
 
             written_names.append(name)
             # write all previously-written names; required to match
@@ -93,9 +93,14 @@ def build_file(src_dir, out_dir, filename):
         shutil.copy(src_path, out_path)
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        # copy (and compress if required) the given file
-        build_file("assets/fs", "build/assets/fs", sys.argv[1])
+    sys.argv.pop(0)
+    src = sys.argv.pop(0)
+    dest = sys.argv.pop(0)
+
+    if len(sys.argv) > 0:
+        # copy (and compress if required) the given file(s)
+        while len(sys.argv) > 0:
+            build_file(src, dest, sys.argv.pop())
     else:
         # build the aggregate file
-        build_mapfs("assets/fs", "build/assets/fs", "build/assets/fs.bin")
+        build_mapfs(src, dest, dest + ".bin")

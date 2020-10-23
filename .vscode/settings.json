@@ -11,4 +11,5 @@
         "-DSCRIPT(...)={}",
     ],
     "python.pythonPath": "/usr/bin/python3",
+    "git.ignoreLimitWarning": true,
 }

@@ -119,7 +119,7 @@ glabel func_80240DF0_B9E750
 /* B9E910 80240FB0 0000102D */   daddu    $v0, $zero, $zero
 /* B9E914 80240FB4 0260202D */  daddu     $a0, $s3, $zero
 /* B9E918 80240FB8 0280282D */  daddu     $a1, $s4, $zero
-/* B9E91C 80240FBC 0C090273 */  jal       func_802409CC
+/* B9E91C 80240FBC 0C090273 */  jal       func_802409CC_B9E32C
 /* B9E920 80240FC0 0200302D */   daddu    $a2, $s0, $zero
 /* B9E924 80240FC4 0260202D */  daddu     $a0, $s3, $zero
 /* B9E928 80240FC8 0280282D */  daddu     $a1, $s4, $zero

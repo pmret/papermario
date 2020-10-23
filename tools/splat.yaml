@@ -4,7 +4,7 @@ options:
   find-file-boundaries: True
   compiler: "GCC"
   mnemonic_ljust: 10
-  o_as_suffix: yes
+  ld_o_replace_extension: no
 segments:
   - name: header
     type: header

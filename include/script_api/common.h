@@ -4,7 +4,7 @@
 #include "common_structs.h"
 #include "si.h"
 
-typedef Bytecode Script[];
+typedef Bytecode Script[0];
 
 ApiStatus FadeBackgroundToBlack(ScriptInstance* script, s32 isInitialCall);
 ApiStatus UnfadeBackgroundFromBlack(ScriptInstance* script, s32 isInitialCall);

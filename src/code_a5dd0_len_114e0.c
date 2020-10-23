@@ -34,24 +34,24 @@ Shadow* get_shadow_by_index(s32 index) {
     return (*gCurrentShadowListPtr)[index & 0xFFF];
 }
 
-Entity** get_entity_list(void) {
-    Entity** ret;
+EntityList* get_entity_list(void) {
+    EntityList* ret;
 
     if (!GAME_STATUS->isBattle) {
-        ret = gWorldEntityList;
+        ret = &gWorldEntityList;
     } else {
-        ret = gBattleEntityList;
+        ret = &gBattleEntityList;
     }
     return ret;
 }
 
-Shadow** get_shadow_list(void) {
-    Shadow** ret;
+ShadowList* get_shadow_list(void) {
+    ShadowList* ret;
 
     if (!GAME_STATUS->isBattle) {
-        ret = gWorldShadowList;
+        ret = &gWorldShadowList;
     } else {
-        ret = gBattleShadowList;
+        ret = &gBattleShadowList;
     }
     return ret;
 }
