@@ -1,6 +1,6 @@
 #include "common.h"
 
-static ApiStatus SomeXYZFuncTodoRename(ScriptInstance* script) {
+ApiStatus SomeXYZFuncTodoRename(ScriptInstance* script) {
     PlayerStatus* playerStatus = PLAYER_STATUS;
     Bytecode* args = script->ptrReadPos;
     s32 xVar = *args++;

@@ -1,6 +1,6 @@
 #include "common.h"
 
-static ApiStatus GetItemName(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus GetItemName(ScriptInstance* script, s32 isInitialCall) {
     Bytecode a0 = *script->ptrReadPos;
     s32 itemID = get_variable(script, a0);
 

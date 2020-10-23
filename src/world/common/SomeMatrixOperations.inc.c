@@ -1,13 +1,13 @@
 #include "common.h"
 
-static void SomeMatrixOperation(Matrix4f* mtx, f32 arg1, f32 arg2, f32 arg3) {
+void SomeMatrixOperation(Matrix4f* mtx, f32 arg1, f32 arg2, f32 arg3) {
     guMtxIdentF(mtx);
     mtx->mtx[1][0] = arg1 * arg2;
     mtx->mtx[1][1] = 1.0f;
     mtx->mtx[1][2] = arg1 * arg3;
 }
 
-static ApiStatus SomeMatrixOperation2(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SomeMatrixOperation2(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 modelListIndex = get_model_list_index_from_tree_index(get_variable(script, *args++));
     f32 temp_f28 = get_float_variable(script, *args++);
