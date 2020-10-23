@@ -142,14 +142,12 @@ typedef s32 ApiStatus;
 #define SI_END_CHILD_THREAD() SI_CMD(0x59)
 
 #define EXIT_WALK_SCRIPT(walkDistance, exitIdx, map, entryIdx) \
-    { \
-        SI_GROUP(0x1B), \
-        SI_CALL(UseExitHeading, walkDistance, exitIdx), \
-        SI_EXEC(ExitWalk), \
-        SI_CALL(GotoMap, map, entryIdx), \
-        SI_WAIT_FRAMES(100), \
-        SI_RETURN(), \
-        SI_END(), \
-    }
+    SCRIPT({ \
+        group 0x1B; \
+        UseExitHeading(walkDistance, exitIdx); \
+        spawn ExitWalk; \
+        GotoMap(map, entryIdx); \
+        sleep 100; \
+    })
 
 #endif

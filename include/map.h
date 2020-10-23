@@ -134,7 +134,7 @@ typedef struct StatDrop {
     { F16(100), F16(30), attempts, F16(40) }, \
 }
 
-#define ANIMATION(sprite, palette, anim) (sprite << 16) + (palette << 8) + anim
+#define ANIMATION(sprite, palette, anim) ((sprite << 16) + (palette << 8) + anim)
 
 #define OVERRIDE_MOVEMENT_SPEED(speed) (speed * 32767)
 #define NO_OVERRIDE_MOVEMENT_SPEED OVERRIDE_MOVEMENT_SPEED(-1)
