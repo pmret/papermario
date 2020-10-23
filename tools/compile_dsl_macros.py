@@ -205,7 +205,6 @@ class LabelAllocation(Visitor):
 class Compile(Transformer):
     SIGNED_INT = str
     HEX_INT = str
-    ESCAPED_STRING = str
 
     def transform(self, tree):
         self.alloc = LabelAllocation()
@@ -214,6 +213,9 @@ class Compile(Transformer):
 
     def CNAME(self, name):
         return f"(Bytecode)(&{name})"
+
+    def ESCAPED_STRING(self, str_with_quotes):
+        return f"(Bytecode)({str_with_quotes})"
 
     NOT_PARENS = str
     def c_const_expr_internal(self, tree):

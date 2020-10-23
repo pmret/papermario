@@ -46,8 +46,8 @@ NpcSettings M(goombaNpcSettings) = {
     .height = 20,
     .radius = 23,
     .ai = &M(GoombaAI),
-    .onHit = EnemyNpcHit,
-    .onDefeat = EnemyNpcDefeat,
+    .onHit = &EnemyNpcHit,
+    .onDefeat = &EnemyNpcDefeat,
     .level = 5,
 };
 
