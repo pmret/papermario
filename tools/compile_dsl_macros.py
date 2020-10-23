@@ -1,6 +1,6 @@
 #! /usr/bin/python3
 
-from sys import stdin, stderr
+from sys import argv, stdin, stderr
 from lark import Lark, exceptions, Tree, Transformer, Visitor, v_args, Token
 from lark.visitors import Discard
 import traceback
@@ -8,8 +8,11 @@ import traceback
 def eprint(*args, **kwargs):
     print(*args, file=stderr, **kwargs)
 
+write_buf = ""
 def write(s):
-    print(s, end="")
+    global write_buf
+    write_buf += s
+    #print(s, end="")
 
 ANSI_RED = "\033[1;31;40m"
 ANSI_RESET = "\u001b[0m"
@@ -434,7 +437,7 @@ def read_until_closing_paren(depth=1, lex_strings=False):
     string_escape = False
 
     while True:
-        char = stdin.read(1)
+        char = f.read(1)
 
         if len(char) == 0:
             # EOF
@@ -461,7 +464,7 @@ def read_line():
     line = ""
 
     while True:
-        char = stdin.read(1)
+        char = f.read(1)
 
         if len(char) == 0:
             # EOF
@@ -492,114 +495,122 @@ def gen_line_map(source, source_line_no = 1):
 
     return output, line_map
 
-# Expects output from C preprocessor on stdin
+# Expects output from C preprocessor on argv
 if __name__ == "__main__":
     line_no = 1
     char_no = 1
     file_info = []
     error = False
 
-    macro_name = "" # captures recent UPPER_CASE identifier
-    prev_char = ""
-    while True:
-        char = stdin.read(1)
+    num_scripts = int(stdin.read())
+    if num_scripts == 0:
+        exit(0)
+    print(f"compiling {num_scripts} scripts")
 
-        if len(char) == 0:
-            # EOF
-            write(macro_name)
-            if error:
-                exit(1)
-            else:
-                exit(0)
+    with open(argv[1], 'r') as f:
+        macro_name = "" # captures recent UPPER_CASE identifier
+        prev_char = ""
+        while True:
+            char = f.read(1)
 
-        if char == "#" and (prev_char == "\n" or prev_char == ""):
-            # cpp line/file marker
-            line = read_line()
-            line_split = line[1:].split(" ")
+            if len(char) == 0:
+                # EOF
+                write(macro_name)
+                break
 
-            line_no = int(line_split[0])
-            file_info = line_split[1:]
+            if char == "#" and (prev_char == "\n" or prev_char == ""):
+                # cpp line/file marker
+                line = read_line()
+                line_split = line[1:].split(" ")
 
-            write("#" + line + "\n")
-        elif char == "(":
-            filename = file_info[0][1:-1]
+                line_no = int(line_split[0])
+                file_info = line_split[1:]
 
-            # SCRIPT(...)
-            if macro_name == "SCRIPT":
-                script_source, line_map = gen_line_map(read_until_closing_paren(lex_strings=True), source_line_no=line_no)
+                write("#" + line + "\n")
+            elif char == "(":
+                filename = file_info[0][1:-1]
 
-                try:
-                    commands = compile_script(script_source)
+                # SCRIPT(...)
+                if macro_name == "SCRIPT":
+                    script_source, line_map = gen_line_map(read_until_closing_paren(lex_strings=True), source_line_no=line_no)
 
-                    write("{\n")
-                    for command in commands:
-                        if command.meta:
-                            write(f"# {line_map[command.meta.line]} {file_info[0]}\n")
-                        write("    ")
-                        for word in command.to_bytecode():
-                            if type(word) == str:
-                                write(word)
-                            elif type(word) == int:
-                                write(f"0x{word & 0xFFFFFFFF:X}")
-                            else:
-                                raise Exception(f"{command}.to_bytecode() gave {type(word)} {word}")
-                            write(", ")
-                        write("\n")
-                    write("}")
-                except exceptions.UnexpectedEOF as e:
-                    eprint(f"{filename}:{line_no}: {ANSI_RED}error{ANSI_RESET}: unterminated SCRIPT(...) macro")
-                    error = True
-                except exceptions.UnexpectedCharacters as e:
-                    eprint(e.line)
-                    line = line_map[e.line]
-                    char = script_source[e.pos_in_stream]
-                    allowed = e.allowed
+                    try:
+                        commands = compile_script(script_source)
 
-                    eprint(f"{filename}:{line}: {ANSI_RED}script parse error{ANSI_RESET}: unexpected `{char}', expected {' or '.join(allowed)}")
-                    eprint(e.get_context(script_source))
+                        write("{\n")
+                        for command in commands:
+                            if command.meta:
+                                write(f"# {line_map[command.meta.line]} {file_info[0]}\n")
+                            write("    ")
+                            for word in command.to_bytecode():
+                                if type(word) == str:
+                                    write(word)
+                                elif type(word) == int:
+                                    write(f"0x{word & 0xFFFFFFFF:X}")
+                                else:
+                                    raise Exception(f"{command}.to_bytecode() gave {type(word)} {word}")
+                                write(", ")
+                            write("\n")
+                        write("}")
+                    except exceptions.UnexpectedEOF as e:
+                        eprint(f"{filename}:{line_no}: {ANSI_RED}error{ANSI_RESET}: unterminated SCRIPT(...) macro")
+                        error = True
+                    except exceptions.UnexpectedCharacters as e:
+                        line = line_map[e.line]
+                        char = script_source[e.pos_in_stream]
+                        allowed = e.allowed
 
-                    error = True
-                except exceptions.UnexpectedToken as e:
-                    line = line_map[e.line]
+                        eprint(f"{filename}:{line}: {ANSI_RED}script parse error{ANSI_RESET}: unexpected `{char}', expected {' or '.join(allowed)}")
+                        eprint(e.get_context(script_source))
 
-                    eprint(f"{filename}:{line}: {ANSI_RED}script parse error{ANSI_RESET}: unexpected `{e.token}'")
-                    eprint(e.get_context(script_source))
+                        error = True
+                    except exceptions.UnexpectedToken as e:
+                        line = line_map[e.line]
 
-                    error = True
-                except exceptions.VisitError as e:
-                    if type(e.orig_exc) == CompileError:
-                        line = line_map[e.orig_exc.meta.line]
-                        eprint(f"{filename}:{line}: {ANSI_RED}script compile error{ANSI_RESET}: {e.orig_exc}")
-                    else:
-                        eprint(f"{filename}:{line_no}: {ANSI_RED}internal script transform error{ANSI_RESET}")
+                        eprint(f"{filename}:{line}: {ANSI_RED}script parse error{ANSI_RESET}: unexpected `{e.token}'")
+                        eprint(e.get_context(script_source))
+
+                        error = True
+                    except exceptions.VisitError as e:
+                        if type(e.orig_exc) == CompileError:
+                            line = line_map[e.orig_exc.meta.line]
+                            eprint(f"{filename}:{line}: {ANSI_RED}script compile error{ANSI_RESET}: {e.orig_exc}")
+                        else:
+                            eprint(f"{filename}:{line_no}: {ANSI_RED}internal script transform error{ANSI_RESET}")
+                            traceback.print_exc()
+                        error = True
+                    except CompileError as e:
+                        line = line_map[e.meta.line]
+                        eprint(f"{filename}:{line}: {ANSI_RED}script compile error{ANSI_RESET}: {e}")
+                        error = True
+                    except Exception as e:
+                        eprint(f"{filename}:{line_no}: {ANSI_RED}internal script compilation error{ANSI_RESET}")
                         traceback.print_exc()
-                    error = True
-                except CompileError as e:
-                    line = line_map[e.meta.line]
-                    eprint(f"{filename}:{line}: {ANSI_RED}script compile error{ANSI_RESET}: {e}")
-                    error = True
-                except Exception as e:
-                    eprint(f"{filename}:{line_no}: {ANSI_RED}internal script compilation error{ANSI_RESET}")
-                    traceback.print_exc()
-                    error = True
+                        error = True
 
+                    line_no += script_source.count("\n")
+                    write(f"\n# {line_no} {file_info[0]}\n")
+                else:
+                    # leave non-macro in source
+                    write(macro_name + char)
 
-                line_no += script_source.count("\n")
-                write(f"\n# {line_no} {file_info[0]}\n")
+                macro_name = ""
+            elif char == "_" or (char >= 'A' and char <= 'Z'):
+                macro_name += char
             else:
-                # leave non-macro in source
                 write(macro_name + char)
+                macro_name = ""
 
-            macro_name = ""
-        elif char == "_" or (char >= 'A' and char <= 'Z'):
-            macro_name += char
-        else:
-            write(macro_name + char)
-            macro_name = ""
+                if char == "\n":
+                    char_no = 0
+                    line_no += 1
 
-            if char == "\n":
-                char_no = 0
-                line_no += 1
+            char_no += 1
+            prev_char = char
 
-        char_no += 1
-        prev_char = char
+    if error:
+        exit(1)
+    else:
+        with open(argv[1], "w") as f:
+            f.write(write_buf)
+        exit(0)

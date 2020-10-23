@@ -121,7 +121,9 @@ else
 # C
 $(filter %.c.o,$(OBJECTS)): $(BUILD_DIR)/%.c.o: %.c
 	@mkdir -p $(shell dirname $@)
-	cpp $(CPPFLAGS) $< | tools/compile_dsl_macros.py > $(BUILD_DIR)/$*.i
+
+	cpp $(CPPFLAGS) $< > $(BUILD_DIR)/$*.i
+	@grep -cF "SCRIPT(" $(BUILD_DIR)/$*.i | tools/compile_dsl_macros.py $(BUILD_DIR)/$*.i
 	$(CC) $(CFLAGS) -o - $(BUILD_DIR)/$*.i | $(OLD_AS) $(OLDASFLAGS) - -o $@
 
 # Assembly
