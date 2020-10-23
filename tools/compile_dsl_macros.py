@@ -32,7 +32,6 @@ script_parser = Lark(r"""
          | label ":"            -> label_decl
          | "goto" label         -> label_goto
          | if_stmt
-         | do_while_stmt
          | "return"             -> return_stmt
          | "break"              -> break_stmt
          | "sleep" expr         -> sleep_stmt
@@ -49,14 +48,13 @@ script_parser = Lark(r"""
          | resume_stmt
          | kill_stmt
          | loop_stmt
+         | loop_until_stmt
 
     call: CNAME "(" [expr ("," expr)* [","]] ")"
 
     if_stmt: "if" expr if_op expr block ["else" block]
     ?if_op: "==" -> if_op_eq
           | "!=" -> if_op_ne
-
-    do_while_stmt: "do" block "while" expr if_op expr
 
     suspend_stmt: "suspend" control_type expr ("," control_type expr)* [","]
     resume_stmt: "resume" control_type expr ("," control_type expr)* [","]
@@ -69,6 +67,7 @@ script_parser = Lark(r"""
     bind_set_stmt: lhs "=" "bind" expr "to" expr expr
 
     loop_stmt: "loop" [expr] block
+    loop_until_stmt: "loop" block "until" expr if_op expr
 
     ?expr: c_const_expr
          | ESCAPED_STRING
@@ -172,9 +171,9 @@ class LoopCtx(CmdCtx):
     def break_opcode(self, meta):
         return 0x07
 
-class DoWhileCtx(CmdCtx):
+class LoopUntilCtx(CmdCtx):
     def break_opcode(self, meta):
-        raise CompileError("breaking out of a do..while loop is not supported (hint: use a label)", meta)
+        raise CompileError("breaking out of a loop..until is not supported (hint: use a label)", meta)
 
 class CompileError(Exception):
     def __init__(self, message, meta):
@@ -267,13 +266,13 @@ class Compile(Transformer):
 
         return [ Cmd(0x05, expr, meta=tree.meta), *block, Cmd(0x06) ]
 
-    # do..while pseudoinstruction
-    def do_while_stmt(self, tree):
-        block, a,  op, b = tree.children
+    # loop..until pseudoinstruction
+    def loop_until_stmt(self, tree):
+        block, a, op, b = tree.children
 
         for cmd in block:
             if isinstance(cmd, BaseCmd):
-                cmd.add_context(DoWhileCtx())
+                cmd.add_context(LoopUntilCtx())
 
         label = self.alloc.gen_label()
 
