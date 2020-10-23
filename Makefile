@@ -77,6 +77,9 @@ endif
 clean:
 	rm -rf $(BUILD_DIR)
 
+clean-code:
+	rm -rf $(BUILD_DIR)/src
+
 setup: clean submodules split
 
 submodules:
