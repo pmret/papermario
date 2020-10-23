@@ -67,6 +67,10 @@ OLDASFLAGS = -EB -Iinclude -G 0
 CFLAGS     = -O2 -quiet -G 0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wimplicit -Wuninitialized -Wshadow
 LDFLAGS    = -T undefined_syms.txt -T undefined_funcs.txt -T $(LD_SCRIPT) -Map $(LD_MAP) --no-check-sections
 
+ifeq ($(NON_MATCHING),1)
+CPPFLAGS += -DNON_MATCHING
+endif
+
 
 ### Targets ###
 
