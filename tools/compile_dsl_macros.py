@@ -1,7 +1,7 @@
 #! /usr/bin/python3
 
 from sys import stdin, stderr
-from lark import Lark, exceptions, Tree, Transformer, Visitor, v_args
+from lark import Lark, exceptions, Tree, Transformer, Visitor, v_args, Token
 from lark.visitors import Discard
 import traceback
 
@@ -108,50 +108,66 @@ script_parser = Lark(r"""
 
 """, start="block", propagate_positions=True)#, parser="lalr", cache=True)
 
-class Cmd():
-    def __init__(self, opcode, *args, **kwargs):
-        if opcode:
-            self.opcode = opcode
+class BaseCmd():
+    def __init__(self, *args, **kwargs):
         self.args = args
         self.meta = kwargs.get("meta", None)
-        self.context = []
+        self.context = [RootCtx()]
 
-    def add_context(self, context):
-        self.context.insert(0, context)
+    def add_context(self, ctx):
+        if not isinstance(ctx, CmdCtx):
+            raise Exception()
+        self.context.insert(0, ctx)
+
+    # must be overloaded
+    def opcode():
+        raise Exception()
 
     def to_bytecode(self):
-        return [ self.opcode, len(self.args), *self.args ]
+        return [ self.opcode(), len(self.args), *self.args ]
 
     def __str__(self):
-        return f"Cmd({self.opcode:02X}, {', '.join(map(str, self.args))})"
+        return f"Cmd({self.opcode():02X}, {', '.join(map(str, self.args))})"
 
-class BreakCmd(Cmd):
+class Cmd(BaseCmd):
+    def __init__(self, opcode, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._opcode = opcode
+
+    def opcode(self):
+        return self._opcode
+
+class BreakCmd(BaseCmd):
     def __init__(self, **kwargs):
-        super().__init__(None, **kwargs)
+        super().__init__(**kwargs)
 
-    @property
     def opcode(self):
         for ctx in self.context:
-            if "break_opcode" in ctx:
-                return ctx.break_opcode(self.meta)
-        return 0x01 # break out of whole script (end; no return)
+            opcode = ctx.break_opcode(self.meta)
+            if opcode:
+                return opcode
 
     def __str__(self):
         return "BreakCmd"
 
 class CmdCtx():
-    pass
+    def break_opcode(self, meta):
+        pass
+
+class RootCtx(CmdCtx):
+    def break_opcode(self, meta):
+        return 0x01
 
 class IfCtx(CmdCtx):
     pass
 
 class SwitchCtx(CmdCtx):
     def break_opcode(self, meta):
-        return Cmd(0x22)
+        return 0x22
 
 class LoopCtx(CmdCtx):
     def break_opcode(self, meta):
-        return Cmd(0x07)
+        return 0x07
 
 class DoWhileCtx(CmdCtx):
     def break_opcode(self, meta):
@@ -215,8 +231,12 @@ class Compile(Transformer):
         for node in tree.children:
             if type(node) == list:
                 flat += node
-            elif isinstance(node, Cmd):
+            elif isinstance(node, BaseCmd):
                 flat.append(node)
+            elif isinstance(node, Token) and (node.value.startswith("\n") or node.value == ";"):
+                pass
+            else:
+                raise Exception(f"block statment {type(node)} is not a BaseCmd: {node}")
         return flat
 
     def call(self, tree):
@@ -226,7 +246,7 @@ class Compile(Transformer):
     def if_stmt(self, tree):
         a, op, b, block = tree.children
         for cmd in block:
-            if type(cmd) == Cmd:
+            if isinstance(cmd, BaseCmd):
                 cmd.add_context(IfCtx())
         return [ Cmd(op, a, b, meta=tree.meta), *block, Cmd(0x13) ]
     def if_op_eq(self, tree): return 0x0A
@@ -237,7 +257,7 @@ class Compile(Transformer):
         block = tree.children[0]
 
         for cmd in block:
-            if type(cmd) == Cmd:
+            if isinstance(cmd, BaseCmd):
                 cmd.add_context(LoopCtx())
 
         return [ Cmd(0x05, expr, meta=tree.meta), *block, Cmd(0x06) ]
@@ -247,7 +267,7 @@ class Compile(Transformer):
         block, a,  op, b = tree.children
 
         for cmd in block:
-            if type(cmd) == Cmd:
+            if isinstance(cmd, BaseCmd):
                 cmd.add_context(DoWhileCtx())
 
         label = self.alloc.gen_label()
@@ -399,12 +419,8 @@ def compile_script(s):
 
     commands = Compile().transform(tree)
 
-    for cmd in commands:
-        if not isinstance(cmd, Cmd):
-            raise Exception(f"uncompiled {cmd}")
-
     # add RETURN END if no explicit END (top-level `break') was given
-    if next((cmd for cmd in commands if cmd.opcode == 0x01), None) == None:
+    if next((cmd for cmd in commands if cmd.opcode() == 0x01), None) == None:
         commands += (Cmd(0x02), Cmd(0x01))
 
     return commands
@@ -524,7 +540,7 @@ if __name__ == "__main__":
                             elif type(word) == int:
                                 write(f"0x{word & 0xFFFFFFFF:X}")
                             else:
-                                raise Exception(f"uncompiled: {command}")
+                                raise Exception(f"{command}.to_bytecode() gave {type(word)} {word}")
                             write(", ")
                         write("\n")
                     write("}")
@@ -553,9 +569,18 @@ if __name__ == "__main__":
                         line = line_map[e.orig_exc.meta.line]
                         eprint(f"{filename}:{line}: {ANSI_RED}script compile error{ANSI_RESET}: {e.orig_exc}")
                     else:
-                        eprint(f"{filename}:{line_no}: {ANSI_RED}internal script compilation error{ANSI_RESET}")
+                        eprint(f"{filename}:{line_no}: {ANSI_RED}internal script transform error{ANSI_RESET}")
                         traceback.print_exc()
                     error = True
+                except CompileError as e:
+                    line = line_map[e.meta.line]
+                    eprint(f"{filename}:{line}: {ANSI_RED}script compile error{ANSI_RESET}: {e}")
+                    error = True
+                except Exception as e:
+                    eprint(f"{filename}:{line_no}: {ANSI_RED}internal script compilation error{ANSI_RESET}")
+                    traceback.print_exc()
+                    error = True
+
 
                 line_no += script_source.count("\n")
                 write(f"\n# {line_no} {file_info[0]}\n")
