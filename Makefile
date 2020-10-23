@@ -1,135 +1,180 @@
-SHELL=/bin/bash -o pipefail
+### Build Options ###
 
-MAKEFLAGS += --no-builtin-rules
-MAKEFLAGS += --no-builtin-variables
+# Override these options in settings.mk or with `make SETTING=value'.
 
-################ Target Executable and Sources ###############
+BASEROM = baserom.z64
+TARGET = papermario
+COMPARE = 1
+NON_MATCHING = 0
 
-# BUILD_DIR is location where all build artifacts are placed
-BUILD_DIR = build
+-include settings.mk
 
-SRC_DIRS := $(shell find src -type d)
-ASM_DIRS := asm asm/os
-INCLUDE_DIRS := include include/PR src
-DATA_DIRS := $(shell mkdir -p bin && find bin -type d -not -name Yay0)
-YAY0_DIRS := bin/Yay0
-ASSETS_FS_DIRS := assets/fs
-ASSETS_FS_BIN := $(BUILD_DIR)/assets/fs.bin
-
-# Source code files
-C_FILES := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))
-S_FILES := $(foreach dir,$(ASM_DIRS),$(wildcard $(dir)/*.s))
-ifdef PM_HEADER_REBUILD
-	H_FILES := $(foreach dir,$(INCLUDE_DIRS),$(wildcard $(dir)/*.h))
+# Fail early if baserom does not exist
+ifeq ($(wildcard $(BASEROM)),)
+$(error Baserom `$(BASEROM)' not found.)
 endif
-DATA_FILES := $(foreach dir,$(DATA_DIRS),$(wildcard $(dir)/*.bin))
-YAY0_FILES := $(foreach dir,$(YAY0_DIRS),$(wildcard $(dir)/*.bin))
-ASSETS_FS_FILES := $(foreach dir,$(ASSETS_FS_DIRS),$(wildcard $(dir)/*.*))
 
-# Object files
-ASSETS_FS_O := $(ASSETS_FS_BIN:.bin=.o)
-O_FILES := $(foreach file,$(C_FILES),$(BUILD_DIR)/$(file:.c=.c.o)) \
-		   $(foreach file,$(S_FILES),$(BUILD_DIR)/$(file:.s=.s.o)) \
-		   $(foreach file,$(DATA_FILES),$(BUILD_DIR)/$(file:.bin=.bin.o)) \
-		   $(ASSETS_FS_O) \
-		   $(foreach file,$(YAY0_FILES),$(BUILD_DIR)/$(file:.bin=.Yay0.o))
 
-####################### Tools #########################
+### Sources ###
 
-TOOLS = tools
-N64CKSUM = $(TOOLS)/n64crc
-SPLAT = ./$(TOOLS)/n64splat/split.py baserom.z64 $(TOOLS)/splat.yaml .
+include sources.mk
 
-##################### Compiler Options #######################
+
+### Output ###
+
+BUILD_DIR = build
+ROM = $(TARGET).z64
+ELF = $(BUILD_DIR)/$(TARGET).elf
+LD_SCRIPT = $(TARGET).ld
+LD_MAP = $(BUILD_DIR)/$(TARGET).map
+
+ifdef ASSETS_FS
+ASSETS_FS_OBJ = $(BUILD_DIR)/$(ASSETS_FS).o
+endif
+
+
+### Tools ###
+
+PYTHON = python3
+N64CKSUM = tools/n64crc
+SPLAT_YAML = tools/splat.yaml
+SPLAT = $(PYTHON) tools/n64splat/split.py $(BASEROM) $(SPLAT_YAML) .
+YAY0COMPRESS = tools/Yay0compress
+BUILD_ASSETS_FS := $(PYTHON) tools/build_assets_fs.py $(ASSETS_FS) $(BUILD_DIR)/$(ASSETS_FS)
+
+ifndef EMULATOR
+ifneq ($(shell which mupen64plus-gui),)
+EMULATOR = mupen64plus-gui
+else
+EMULATOR = mupen64plus
+endif
+endif
+
+
+### Compiler Options ###
+
 CROSS = mips-linux-gnu-
 AS = $(CROSS)as
-OLD_AS = $(TOOLS)/mips-nintendo-nu64-as
-CC = $(TOOLS)/cc1
+OLD_AS = tools/mips-nintendo-nu64-as
+CC = tools/cc1
+CPP = cpp
 LD = $(CROSS)ld
-OBJDUMP = $(CROSS)objdump
 OBJCOPY = $(CROSS)objcopy
-
-TARGET = papermario
 
 CPPFLAGS   = -Iinclude -Isrc -D _LANGUAGE_C -ffreestanding -DF3DEX_GBI_2
 ASFLAGS    = -EB -Iinclude -march=vr4300 -mtune=vr4300
 OLDASFLAGS = -EB -Iinclude -G 0
 CFLAGS     = -O2 -quiet -G 0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wimplicit -Wuninitialized -Wshadow
-LDFLAGS    = -T undefined_syms.txt -T undefined_funcs.txt -T $(LD_SCRIPT) -Map $(BUILD_DIR)/papermario.map --no-check-sections
+LDFLAGS    = -T undefined_syms.txt -T undefined_funcs.txt -T $(LD_SCRIPT) -Map $(LD_MAP) --no-check-sections
 
-######################## Targets #############################
+ifeq ($(NON_MATCHING),1)
+CPPFLAGS += -DNON_MATCHING
+endif
 
-default: all
 
-LD_SCRIPT = $(TARGET).ld
-
-all: $(TARGET).ld $(BUILD_DIR) $(TARGET).z64 verify
+### Targets ###
 
 clean:
-	rm -rf $(BUILD_DIR) $(TARGET).z64
-	make $(BUILD_DIR)
+	rm -rf $(BUILD_DIR)
 
 clean-code:
-	rm -rf $(BUILD_DIR)/src $(TARGET).z64
-	make $(BUILD_DIR)
+	rm -rf $(BUILD_DIR)/src
+
+setup: clean submodules split
+	make -C tools
 
 submodules:
 	git submodule update --init --recursive
 
 split:
-	rm -rf bin && $(SPLAT) --modes ld bin Yay0 PaperMarioMapFS
+	rm -rf bin assets
+	$(SPLAT) --modes ld bin Yay0 PaperMarioMapFS
 
 split-all:
-	rm -rf $(DATA_DIRS) && $(SPLAT) --modes all
+	rm -rf bin assets
+	$(SPLAT) --modes all
 
-setup: clean submodules split
-	make -C $(TOOLS)
+test: $(ROM)
+ifdef EMULATOR
+	$(EMULATOR) $<
+else
+	@echo "N64 emulator not detected." && false
+endif
 
-print-% : ; $(info $* is a $(flavor $*) variable set to [$($*)]) @true
-
-$(BUILD_DIR):
-	mkdir -p $(BUILD_DIR)
-	@mkdir -p $(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(DATA_DIRS) $(ASSETS_FS_DIRS),build/$(dir))
-
-$(BUILD_DIR)/%.s.o: %.s
-	$(AS) $(ASFLAGS) -o $@ $<
-
-$(BUILD_DIR)/%.c.o: %.c $(H_FILES)
-	cpp $(CPPFLAGS) $< | $(CC) $(CFLAGS) -o - | $(OLD_AS) $(OLDASFLAGS) - -o $@
-
-$(BUILD_DIR)/%.bin.o: %.bin
-	$(LD) -r -b binary -o $@ $<
-
-$(BUILD_DIR)/assets/fs/%: assets/fs/%
-	@rm -f $@
-	$(TOOLS)/build_assets_fs.py $*
-
-$(BUILD_DIR)/assets/fs.bin: assets/fs.json $(TOOLS)/build_assets_fs.py $(foreach file,$(ASSETS_FS_FILES),build/$(file))
-	$(TOOLS)/build_assets_fs.py
-
-$(ASSETS_FS_O): $(ASSETS_FS_BIN)
-	$(LD) -r -b binary -o $@ $<
-
-$(BUILD_DIR)/%.Yay0.o: %.bin
-	mkdir -p build/bin/Yay0
-	$(TOOLS)/Yay0compress $< $<.Yay0
-	$(LD) -r -b binary -o $@ $<.Yay0
-
-$(LD_SCRIPT): $(TOOLS)/splat.yaml
+$(LD_SCRIPT): $(SPLAT_YAML)
 	$(SPLAT) --modes ld
 
-$(BUILD_DIR)/$(TARGET).elf: $(O_FILES) $(LD_SCRIPT)
-	$(LD) $(LDFLAGS) -o $@
+$(ROM): $(BUILD_DIR)/$(TARGET).bin
+	@cp $< $@
+ifeq ($(COMPARE),1)
+	@sha1sum -c checksum.sha1 || (echo 'The build succeeded, but did not match the base ROM. This is expected if you are making changes to the game. To skip this check, use "make COMPARE=0".' && false)
+endif
 
 $(BUILD_DIR)/$(TARGET).bin: $(BUILD_DIR)/$(TARGET).elf
 	$(OBJCOPY) $< $@ -O binary
 
-# final z64 updates checksum
-$(TARGET).z64: $(BUILD_DIR)/$(TARGET).bin
-	@cp $< $@
-	$(N64CKSUM) $@
+$(BUILD_DIR)/$(TARGET).elf: $(LD_SCRIPT) $(OBJECTS) $(ASSETS_FS_OBJ)
+	$(LD) $(LDFLAGS) -o $@
 
-verify: $(TARGET).z64
-	sha1sum -c checksum.sha1
+# `make print-VARNAME' to print the value of $(VARNAME)
+print-%: ; $(info $* is a $(flavor $*) variable set to [$($*)]) @true
 
-.PHONY: all clean default $(BUILD_DIR)
+
+### Object Targets (see sources.mk) ###
+
+ifndef OBJECTS
+$(warning OBJECTS is not defined by `sources.mk'.)
+else
+
+# C
+$(filter %.c.o,$(OBJECTS)): $(BUILD_DIR)/%.c.o: %.c
+	@mkdir -p $(shell dirname $@)
+	cpp $(CPPFLAGS) $< | $(CC) $(CFLAGS) -o - | $(OLD_AS) $(OLDASFLAGS) - -o $@
+
+# Assembly
+$(filter %.s.o,$(OBJECTS)): $(BUILD_DIR)/%.s.o: %.s
+	@mkdir -p $(shell dirname $@)
+	$(AS) $(ASFLAGS) -o $@ $<
+
+# Uncompressed data
+$(filter %.bin.o,$(OBJECTS)): $(BUILD_DIR)/%.bin.o: %.bin
+	@mkdir -p $(shell dirname $@)
+	$(LD) -r -b binary -o $@ $<
+
+# Compressed data
+$(filter %.Yay0.o,$(OBJECTS)): $(BUILD_DIR)/%.Yay0.o: %.bin
+	@mkdir -p $(shell dirname $@)
+	$(YAY0COMPRESS) $< $(BUILD_DIR)/$*.Yay0
+	$(LD) -r -b binary -o $@ $(BUILD_DIR)/$*.Yay0
+
+endif
+
+
+### Asset Filesystem (see sources.mk) ###
+
+# Complain if ASSETS_FS_SOURCES is undefined but ASSETS_FS is.
+ifndef ASSETS_FS_SOURCES
+ifdef ASSETS_FS
+$(warning ASSETS_FS_SOURCES is not defined by `sources.mk' but ASSETS_FS is.)
+endif
+else
+
+$(BUILD_DIR)/$(ASSETS_FS)/%: $(ASSETS_FS)/%
+	@mkdir -p $(shell dirname $@)
+	@rm -f $@
+	$(BUILD_ASSETS_FS) $*
+
+$(ASSETS_FS_OBJ): $(ASSETS_FS).json $(foreach file,$(ASSETS_FS_SOURCES),$(BUILD_DIR)/$(file))
+	$(BUILD_ASSETS_FS)
+	$(LD) -r -b binary -o $@ $(BUILD_DIR)/$(ASSETS_FS).bin
+
+endif
+
+
+### Make Settings ###
+
+.PHONY: clean test setup submodules split $(ROM)
+.DEFAULT_GOAL := $(ROM)
+
+# Remove built-in implicit rules to improve performance
+MAKEFLAGS += --no-builtin-rules
