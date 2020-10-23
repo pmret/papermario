@@ -29,6 +29,7 @@ script_parser = Lark(r"""
          | label ":"            -> label_decl
          | "goto" label         -> label_goto
          | if_stmt
+         | do_while_stmt
          | "return"             -> return_stmt
          | "break"              -> break_stmt
          | "sleep" expr         -> sleep_stmt
@@ -51,6 +52,8 @@ script_parser = Lark(r"""
     if_stmt: "if" expr if_op expr block ["else" block]
     ?if_op: "==" -> if_op_eq
           | "!=" -> if_op_ne
+
+    do_while_stmt: "do" block "while" expr if_op expr
 
     suspend_stmt: "suspend" control_type expr ("," control_type expr)* [","]
     resume_stmt: "resume" control_type expr ("," control_type expr)* [","]
@@ -114,7 +117,7 @@ class Cmd():
         self.context = []
 
     def add_context(self, context):
-        self.context.append(context)
+        self.context.insert(0, context)
 
     def to_bytecode(self):
         return [ self.opcode, len(self.args), *self.args ]
@@ -128,21 +131,31 @@ class BreakCmd(Cmd):
 
     @property
     def opcode(self):
-        # are we in a switch or a loop?
-        context = None
-        for c in self.context:
-            if c in ("switch", "loop"):
-                context = c
-
-        if not context:
-            return 0x01 # END
-        elif context == "loop":
-            return 0x07 # SI_BREAK_LOOP
-        elif context == "switch":
-            return 0x22 # BREAK_CASE
+        for ctx in self.context:
+            if "break_opcode" in ctx:
+                return ctx.break_opcode(self.meta)
+        return 0x01 # break out of whole script (end; no return)
 
     def __str__(self):
         return "BreakCmd"
+
+class CmdCtx():
+    pass
+
+class IfCtx(CmdCtx):
+    pass
+
+class SwitchCtx(CmdCtx):
+    def break_opcode(self, meta):
+        return Cmd(0x22)
+
+class LoopCtx(CmdCtx):
+    def break_opcode(self, meta):
+        return Cmd(0x07)
+
+class DoWhileCtx(CmdCtx):
+    def break_opcode(self, meta):
+        raise CompileError("breaking out of a do..while loop is not supported (hint: use a label)", meta)
 
 class CompileError(Exception):
     def __init__(self, message, meta):
@@ -167,6 +180,10 @@ class LabelAllocation(Visitor):
         if name in self.labels:
             raise CompileError(f"label `{name}' already declared", tree.meta)
         self.labels.append(name)
+
+    def gen_label(self):
+        self.labels.append("$generated")
+        return len(self.labels) - 1
 
 @v_args(tree=True)
 class Compile(Transformer):
@@ -210,7 +227,7 @@ class Compile(Transformer):
         a, op, b, block = tree.children
         for cmd in block:
             if type(cmd) == Cmd:
-                cmd.add_context("if")
+                cmd.add_context(IfCtx())
         return [ Cmd(op, a, b, meta=tree.meta), *block, Cmd(0x13) ]
     def if_op_eq(self, tree): return 0x0A
     def if_op_ne(self, tree): return 0x0B
@@ -221,16 +238,36 @@ class Compile(Transformer):
 
         for cmd in block:
             if type(cmd) == Cmd:
-                cmd.add_context("loop")
+                cmd.add_context(LoopCtx())
 
         return [ Cmd(0x05, expr, meta=tree.meta), *block, Cmd(0x06) ]
 
-    def return_stmt(self, tree): return Cmd(0x02, meta=tree.meta)
+    # do..while pseudoinstruction
+    def do_while_stmt(self, tree):
+        block, a,  op, b = tree.children
+
+        for cmd in block:
+            if type(cmd) == Cmd:
+                cmd.add_context(DoWhileCtx())
+
+        label = self.alloc.gen_label()
+
+        return [
+            Cmd(0x03, label, meta=tree.meta), # label:
+            *block,
+            Cmd(op, a, b, meta=tree.meta), # if a op b
+            Cmd(0x04, label, meta=tree.meta), # goto label
+            Cmd(0x13, meta=tree.meta), # end if
+        ]
+
+    def return_stmt(self, tree):
+        return Cmd(0x02, meta=tree.meta)
 
     def break_stmt(self, tree):
         return BreakCmd(meta=tree.meta)
 
-    def set_group(self, tree): return Cmd(0x4D, tree.children[0], meta=tree.meta)
+    def set_group(self, tree):
+        return Cmd(0x4D, tree.children[0], meta=tree.meta)
 
     def suspend_stmt(self, tree):
         commands = []
@@ -354,17 +391,6 @@ class Compile(Transformer):
         if name in self.alloc.labels:
             return self.alloc.labels.index(name)
         raise CompileError(f"label `{name}' is undeclared", tree.meta)
-
-#define SI_SET_CONST(var, value) SI_CMD(0x25, var, value) // Does not get_variable
-#define SI_SUB(a, b) SI_CMD(0x28, a, b) // -=
-#define SI_MUL(a, b) SI_CMD(0x29, a, b) // *=
-#define SI_DIV(a, b) SI_CMD(0x2A, a, b) // /=
-#define SI_MOD(a, b) SI_CMD(0x2B, a, b) // %=
-
-#define SI_SET_F(var, value) SI_CMD(0x26, var, value)
-#define SI_SUB_F(a, b) SI_CMD(0x2D, a, b) // -=
-#define SI_MUL_F(a, b) SI_CMD(0x2E, a, b) // *=
-#define SI_DIV_F(a, b) SI_CMD(0x2F, a, b) // /=
 
 def compile_script(s):
     tree = script_parser.parse(s)

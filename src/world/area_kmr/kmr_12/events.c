@@ -90,12 +90,10 @@ Script M(GoombaIdle) = SCRIPT({
     SetSelfEnemyFlagBits(0x00000020, TRUE)
 
     // Wait until read_sign sets NPC var 0
-    lbl:
-    GetSelfVar(0, SI_VAR(0))
-    sleep 1
-    if SI_VAR(0) == FALSE {
-        goto lbl
-    }
+    do {
+        GetSelfVar(0, SI_VAR(0))
+        sleep 1
+    } while SI_VAR(0) == FALSE
 
     // Peel and jump off the sign
     SetNpcFlagBits(NpcId_SELF, 0x00240000, TRUE)
