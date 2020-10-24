@@ -255,7 +255,6 @@ ApiStatus si_handle_case_equal(ScriptInstance* script) {
     }
 
     return ApiStatus_DONE2;
-
     do {} while (0); // Necessary to match
 }
 
@@ -279,7 +278,6 @@ ApiStatus si_handle_case_not_equal(ScriptInstance* script) {
     }
 
     return ApiStatus_DONE2;
-
     do {} while (0); // Necessary to match
 }
 
@@ -303,7 +301,6 @@ ApiStatus si_handle_case_less(ScriptInstance* script) {
     }
 
     return ApiStatus_DONE2;
-
     do {} while (0); // Necessary to match
 }
 
@@ -327,7 +324,6 @@ ApiStatus si_handle_case_less_equal(ScriptInstance* script) {
     }
 
     return ApiStatus_DONE2;
-
     do {} while (0); // Necessary to match
 }
 
@@ -351,7 +347,6 @@ ApiStatus si_handle_case_greater(ScriptInstance* script) {
     }
 
     return ApiStatus_DONE2;
-
     do {} while (0); // Necessary to match
 }
 
@@ -375,7 +370,6 @@ ApiStatus si_handle_case_greater_equal(ScriptInstance* script) {
     }
 
     return ApiStatus_DONE2;
-
     do {} while (0); // Necessary to match
 }
 
@@ -402,7 +396,6 @@ ApiStatus si_handle_case_range(ScriptInstance* script) {
     }
 
     return ApiStatus_DONE2;
-
     do {} while (0); // Necessary to match
 }
 
@@ -417,7 +410,6 @@ ApiStatus si_handle_case_default(ScriptInstance* script) {
         script->ptrNextLine = si_goto_end_case(script);
     }
     return ApiStatus_DONE2;
-
     do {} while (0); // Necessary to match
 }
 
@@ -426,13 +418,15 @@ ApiStatus si_handle_case_AND(ScriptInstance* script) {
     s32 switchDepth = script->switchDepth;
     s32 var;
     s32 switchBlockValue;
+    s32 switchBlockState;
 
     ASSERT(switchDepth >= 0);
 
     var = *args;
     switchBlockValue = script->switchBlockValue[switchDepth];
+    switchBlockState = script->switchBlockState[switchDepth];
 
-    if (script->switchBlockState[switchDepth] <= 0) {
+    if (switchBlockState <= 0) {
         script->ptrNextLine = si_goto_end_case(script);
     } else if ((var & switchBlockValue) == 0) {
         script->ptrNextLine = si_goto_next_case(script);
@@ -441,13 +435,61 @@ ApiStatus si_handle_case_AND(ScriptInstance* script) {
     }
 
     return ApiStatus_DONE2;
-
     do {} while (0); // Necessary to match
 }
 
-INCLUDE_ASM(s32, "si", si_handle_case_equal_OR);
+ApiStatus si_handle_case_equal_OR(ScriptInstance* script) {
+    Bytecode* args = script->ptrReadPos;
+    s32 switchDepth = script->switchDepth;
+    s32 var;
+    s32 switchBlockValue;
+    s32 switchBlockState;
 
-INCLUDE_ASM(s32, "si", si_handle_case_equal_AND);
+    ASSERT(switchDepth >= 0);
+
+    var = get_variable(script, *args);
+    switchBlockValue = script->switchBlockValue[switchDepth];
+    switchBlockState = script->switchBlockState[switchDepth];
+
+    if (switchBlockState == 0) {
+        script->ptrNextLine = si_goto_end_case(script);
+    } else if (var == switchBlockValue) {
+        script->switchBlockState[switchDepth] = -1;
+    } else if (switchBlockState != -1) {
+        script->ptrNextLine = si_goto_next_case(script);
+    }
+
+    return ApiStatus_DONE2;
+    do {} while (0); // Necessary to match
+}
+
+ApiStatus si_handle_case_equal_AND(ScriptInstance* script) {
+    Bytecode* args = script->ptrReadPos;
+    s32 switchDepth = script->switchDepth;
+    s32 var;
+    s32 switchBlockValue;
+    s32 switchBlockState;
+
+    ASSERT(switchDepth >= 0);
+
+    var = get_variable(script, *args);
+    switchBlockValue = script->switchBlockValue[switchDepth];
+    switchBlockState = script->switchBlockState[switchDepth];
+
+    if (switchBlockState == 0) {
+        script->ptrNextLine = si_goto_end_case(script);
+    } else if (switchBlockState == -2) {
+        script->ptrNextLine = si_goto_next_case(script);
+    } else if (var == switchBlockValue) {
+        script->switchBlockState[switchDepth] = -1;
+    } else {
+        script->switchBlockState[switchDepth] = -2;
+        script->ptrNextLine = si_goto_next_case(script);
+    }
+
+    return ApiStatus_DONE2;
+    do {} while (0); // Necessary to match
+}
 
 ApiStatus si_handle_end_case_group(ScriptInstance* script) {
     ASSERT(script->switchDepth >= 0);
@@ -1141,7 +1183,6 @@ INCLUDE_ASM(s32, "si", si_execute_next_command);
 
 // TODO: consider renaming to si_get_variable
 #ifdef NON_MATCHING
-/*
 s32 get_variable(ScriptInstance* script, Bytecode var) {
     s32 wordIdx;
     s32 bitIdx;
@@ -1195,7 +1236,6 @@ s32 get_variable(ScriptInstance* script, Bytecode var) {
         return var;
     }
 }
-*/
 #else
 INCLUDE_ASM(s32, "si", get_variable, ScriptInstance* script, Bytecode var);
 #endif
@@ -1288,7 +1328,55 @@ s32 get_variable_index_alt(s32 var) {
 
 INCLUDE_ASM(s32, "si", set_variable, ScriptInstance* script, Bytecode var, s32 value);
 
+// Tiny regalloc issue with the var <= -80000000 / -60000000 blocks
+#ifdef NON_MATCHING
+f32 get_float_variable(ScriptInstance* script, Bytecode var) {
+    s32 temp;
+
+    if (var <= -270000000) {
+        return var;
+    } else if (var <= -250000000) {
+        return var;
+    } else if (var <= -220000000) {
+        return fixed_var_to_float(var);
+    } else if (var <= -180000000) {
+        var += 190000000;
+        return fixed_var_to_float(script->array[var]);
+    } else if (var <= -160000000) {
+        var += 170000000;
+        return fixed_var_to_float(get_global_byte(var));
+    } else if (var <= -140000000) {
+        var += 150000000;
+        return fixed_var_to_float(get_area_byte(var));
+    } else if (var <= -80000000) {
+        var += 90000000;
+        temp = var % 32;
+        if ((gMapFlags[var / 32] & (1 << temp))) {
+            return 1.0f;
+        } else {
+            return 0.0f;
+        }
+    } else if (var <= -60000000) {
+        var += 70000000;
+        temp = var % 32;
+        if ((script->varFlags[var / 32] & (1 << temp))) {
+            return 1.0f;
+        } else {
+            return 0.0f;
+        }
+    } else if (var <= -40000000) {
+        var += 50000000;
+        return fixed_var_to_float(gMapVars[var]);
+    } else if (var <= -20000000) {
+        var += 30000000;
+        return fixed_var_to_float(script->varTable[var]);
+    } else {
+        return fixed_var_to_float(var);
+    }
+}
+#else
 INCLUDE_ASM(f32, "si", get_float_variable, ScriptInstance* script, Bytecode var);
+#endif
 
 INCLUDE_ASM(f32, "si", set_float_variable, ScriptInstance* script, Bytecode var, f32 value);
 
