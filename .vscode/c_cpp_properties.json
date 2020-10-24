@@ -9,7 +9,8 @@
             ],
             "defines": [
                 "F3DEX_GBI_2",
-                "_LANGUAGE_C"
+                "_LANGUAGE_C",
+                "SCRIPT(...)={}"
             ],
             "cStandard": "c89",
             "cppStandard": "c++17",

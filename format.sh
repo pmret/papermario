@@ -1,6 +1,6 @@
 #!/bin/bash
 
-COMPILER_OPTS="-std=gnu89 -Iinclude -Isrc -D_LANGUAGE_C"
+COMPILER_OPTS="-std=gnu89 -Iinclude -Isrc -D_LANGUAGE_C -DSCRIPT(...)={}"
 
 shopt -s globstar
 

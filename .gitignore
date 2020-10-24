@@ -1,6 +1,7 @@
 # Python
 __pycache__/
 venv/
+.lark_cache*
 
 # Misc
 .idea/
