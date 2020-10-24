@@ -223,7 +223,23 @@ INCLUDE_ASM(s32, "code_f2470_len_27f0", NpcFaceNpc, ScriptInstance* script, s32 
 
 INCLUDE_ASM(s32, "code_f2470_len_27f0", SetNpcFlagBits, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "code_f2470_len_27f0", GetNpcPos, ScriptInstance* script, s32 isInitialCall);
+ApiStatus GetNpcPos(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    NpcId npcID = get_variable(script, *args++);
+    s32 a1 = *args++;
+    s32 a2 = *args++;
+    s32 a3 = *args++;
+    Npc* npc = resolve_npc(script, npcID);
+
+    if (npc == NULL) {
+        return ApiStatus_DONE2;
+    }
+
+    set_variable(script, a1, npc->pos.x);
+    set_variable(script, a2, npc->pos.y);
+    set_variable(script, a3, npc->pos.z);
+    return ApiStatus_DONE2;
+}
 
 ApiStatus func_802CF1B4(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

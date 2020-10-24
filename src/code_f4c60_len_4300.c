@@ -24,9 +24,37 @@ INCLUDE_ASM(s32, "code_f4c60_len_4300", ShowMessageAtScreenPos, ScriptInstance* 
 
 INCLUDE_ASM(s32, "code_f4c60_len_4300", ShowMessageAtWorldPos, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "code_f4c60_len_4300", CloseMessage, ScriptInstance* script, s32 isInitialCall);
+ApiStatus CloseMessage(ScriptInstance* script, s32 isInitialCall) {
+    if (isInitialCall) {
+        close_message(gCurrentPrintContext);
+    }
 
-INCLUDE_ASM(s32, "code_f4c60_len_4300", SwitchMessage, ScriptInstance* script, s32 isInitialCall);
+    if (gCurrentPrintContext->stateFlags & 0x40) {
+        return ApiStatus_DONE1;
+    } else if (D_802DB264 != 1) {
+        return ApiStatus_BLOCK;
+    } else {
+        script->varTable[0] = gCurrentPrintContext->unk_4E8;
+        return ApiStatus_DONE1;
+    }
+}
+
+ApiStatus SwitchMessage(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+
+    if (isInitialCall) {
+        load_message_to_printer(get_variable(script, *args), gCurrentPrintContext);
+    }
+
+    if (gCurrentPrintContext->stateFlags & 0x40) {
+        return ApiStatus_DONE1;
+    } else if (D_802DB264 != 1) {
+        return ApiStatus_BLOCK;
+    } else {
+        script->varTable[0] = gCurrentPrintContext->unk_4E8;
+        return ApiStatus_DONE1;
+    }
+}
 
 INCLUDE_ASM(s32, "code_f4c60_len_4300", ShowChoice, ScriptInstance* script, s32 isInitialCall);
 
