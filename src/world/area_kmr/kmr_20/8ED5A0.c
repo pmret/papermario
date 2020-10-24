@@ -2,7 +2,7 @@
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8ED5A0", func_80241780_8ED5A0);
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8ED5A0", func_802417A0_8ED5C0);
+#include "world/common/GetCurrentFloor.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8ED5A0", func_802417B4_8ED5D4);
 

@@ -2,7 +2,7 @@
 
 INCLUDE_ASM(s32, "world/area_dro/dro_01/95B200", func_80240000_95B200);
 
-INCLUDE_ASM(s32, "world/area_dro/dro_01/95B200", func_80240020_95B220);
+#include "world/common/GetCurrentFloor.inc.c"
 
 INCLUDE_ASM(s32, "world/area_dro/dro_01/95B200", func_80240034_95B234);
 

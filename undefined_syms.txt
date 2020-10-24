@@ -181,7 +181,7 @@ gCurrentTriggerListPtr = 0x80159390;
 D_801595A0 = 0x801595A0;
 D_80159AE2 = 0x80159AE2;
 D_80159AE4 = 0x80159AE4;
-gCollisionStatus = 0x8015A55A0;
+gCollisionStatus = 0x8015A550;
 D_8015C7C0 = 0x8015C7C0;
 gLastCreatedEntityIndex = 0x801512EC;
 
