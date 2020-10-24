@@ -480,7 +480,7 @@ ApiStatus si_handle_case_equal_AND(ScriptInstance* script) {
         script->ptrNextLine = si_goto_end_case(script);
     } else if (switchBlockState == -2) {
         script->ptrNextLine = si_goto_next_case(script);
-    } else if  (var == switchBlockValue) {
+    } else if (var == switchBlockValue) {
         script->switchBlockState[switchDepth] = -1;
     } else {
         script->switchBlockState[switchDepth] = -2;
