@@ -1380,7 +1380,24 @@ INCLUDE_ASM(f32, "si", get_float_variable, ScriptInstance* script, Bytecode var)
 
 INCLUDE_ASM(f32, "si", set_float_variable, ScriptInstance* script, Bytecode var, f32 value);
 
-INCLUDE_ASM(s32, "si", si_find_label, ScriptInstance* script, s32 arg1);
+s32 si_find_label(ScriptInstance* script, s32 arg1) {
+    s32 ret = script->ptrReadPos;
+    s32 i;
+
+    if (arg1 < -270000000) {
+        return arg1;
+    }
+
+    for (i = 0; i < 0x10; i++) {
+        if (script->labelIndices[i] == arg1) {
+            ret = script->labelPositions[i];
+            break;
+        }
+    }
+
+    ASSERT(i < 0x10);
+    return ret;
+}
 
 INCLUDE_ASM(s32, "si", si_skip_if, ScriptInstance* script);
 // Matching but needs rodata support
