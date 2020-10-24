@@ -186,9 +186,24 @@ INCLUDE_ASM(s32, "code_ef070_len_3400", func_802CB008, ScriptInstance* script, s
 
 INCLUDE_ASM(s32, "code_ef070_len_3400", ShakeCam, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "code_ef070_len_3400", exec_ShakeCam1);
+void exec_ShakeCam1(s32 arg0, s32 arg1, s32 arg2) {
+    ScriptInstance* script;
 
-INCLUDE_ASM(s32, "code_ef070_len_3400", exec_ShakeCamX);
+    script = start_script_in_group(&ShakeCam1, 1, 0, 4);
+    script->varTable[0] = arg0;
+    script->varTable[1] = arg1;
+    script->varTable[2] = arg2;
+}
+
+void exec_ShakeCamX(s32 arg0, s32 arg1, s32 arg2, f32 arg3) {
+    ScriptInstance* script;
+
+    script = start_script_in_group(&ShakeCamX, 1, 0, 4);
+    set_variable(script, SI_VAR(0), arg0);
+    set_variable(script, SI_VAR(1), arg1);
+    set_variable(script, SI_VAR(2), arg2);
+    set_float_variable(script, SI_VAR(3), arg3);
+}
 
 ApiStatus SetCamLeadPlayer(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

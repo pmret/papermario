@@ -267,9 +267,6 @@ ApiStatus func_802CFD30(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_800441F0(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_802D5830(ScriptInstance* script, s32 isInitialCall);
 
-extern Script ShakeCam1;
-extern Script ShakeCamX;
-
 extern Script EnemyNpcHit;
 extern Script EnemyNpcDefeat;
 

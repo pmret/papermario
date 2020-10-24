@@ -4,7 +4,7 @@ s32 si_find_label(ScriptInstance* script, s32 arg1);
 s32 si_skip_if(ScriptInstance* script);
 s32 si_skip_else(ScriptInstance* script);
 s32 si_goto_end_loop(ScriptInstance* script);
-s32 si_goto_end_case(ScriptInstance* script);
+Bytecode* si_goto_end_case(ScriptInstance* script);
 s32 si_goto_next_case(ScriptInstance* script);
 s32 get_variable_index(ScriptInstance* script, s32 var);
 
@@ -1475,7 +1475,7 @@ INCLUDE_ASM(s32, "si", si_skip_else, ScriptInstance* script);
     } while(1);
 }*/
 
-INCLUDE_ASM(s32, "si", si_goto_end_case, ScriptInstance* script);
+INCLUDE_ASM(Bytecode*, "si", si_goto_end_case, ScriptInstance* script);
 
 INCLUDE_ASM(s32, "si", si_goto_next_case, ScriptInstance* script);
 

@@ -486,19 +486,17 @@ ApiStatus func_8004580C(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus func_80045838(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    Npc* npc;
     s32 var1 = get_variable(script, *args++);
     s32 var2 = get_variable(script, *args++);
     s32 var3 = get_variable(script, *args);
+    Npc* npc = resolve_npc(script, var1);
 
-    npc = resolve_npc(script, var1);
-    if (npc != NULL) {
-        func_800494C0(npc, var2, var3);
+    if (npc == NULL) {
+        return ApiStatus_DONE2;
     }
 
+    func_800494C0(npc, var2, var3);
     return ApiStatus_DONE2;
-
-    do {} while (0); // necessary to match
 }
 
 ApiStatus func_800458CC(ScriptInstance* script, s32 isInitialCall) {
