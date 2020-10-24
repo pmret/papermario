@@ -8,7 +8,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_00/7EAD10", func_80240034_7EAD44);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_00/7EAD10", func_802400F0_7EAE00);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_00/7EAD10", func_802401D0_7EAEE0);
+#include "world/common/GetCurrentCameraYawClamped180.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_00/7EAD10", func_8024023C_7EAF4C);
 

@@ -8,7 +8,7 @@ INCLUDE_ASM(s32, "world/area_tik/tik_07/879BE0", func_80240034_879C14);
 
 INCLUDE_ASM(s32, "world/area_tik/tik_07/879BE0", func_802400F0_879CD0);
 
-INCLUDE_ASM(s32, "world/area_tik/tik_07/879BE0", func_802401D0_879DB0);
+#include "world/common/GetCurrentCameraYawClamped180.inc.c"
 
 INCLUDE_ASM(s32, "world/area_tik/tik_07/879BE0", func_8024023C_879E1C);
 

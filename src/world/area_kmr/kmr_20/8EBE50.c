@@ -8,7 +8,7 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8EBE50", func_80240064_8EBE84);
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8EBE50", func_80240120_8EBF40);
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8EBE50", func_80240200_8EC020);
+#include "world/common/GetCurrentCameraYawClamped180.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8EBE50", func_8024026C_8EC08C);
 
