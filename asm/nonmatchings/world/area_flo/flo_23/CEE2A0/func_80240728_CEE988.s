@@ -232,25 +232,25 @@ glabel func_80240728_CEE988
 .L80240A78:
 /* CEECD8 80240A78 0260202D */  daddu     $a0, $s3, $zero
 /* CEECDC 80240A7C 0280282D */  daddu     $a1, $s4, $zero
-/* CEECE0 80240A80 0C0900E5 */  jal       func_80240394
+/* CEECE0 80240A80 0C0900E5 */  jal       func_80240394_CEE5F4
 /* CEECE4 80240A84 02A0302D */   daddu    $a2, $s5, $zero
 /* CEECE8 80240A88 0260202D */  daddu     $a0, $s3, $zero
 .L80240A8C:
 /* CEECEC 80240A8C 0280282D */  daddu     $a1, $s4, $zero
-/* CEECF0 80240A90 0C090104 */  jal       func_80240410
+/* CEECF0 80240A90 0C090104 */  jal       func_80240410_CEE670
 /* CEECF4 80240A94 02A0302D */   daddu    $a2, $s5, $zero
 /* CEECF8 80240A98 080902B5 */  j         .L80240AD4
 /* CEECFC 80240A9C 00000000 */   nop      
 .L80240AA0:
 /* CEED00 80240AA0 0260202D */  daddu     $a0, $s3, $zero
 /* CEED04 80240AA4 0280282D */  daddu     $a1, $s4, $zero
-/* CEED08 80240AA8 0C090151 */  jal       func_80240544
+/* CEED08 80240AA8 0C090151 */  jal       func_80240544_CEE7A4
 /* CEED0C 80240AAC 02A0302D */   daddu    $a2, $s5, $zero
 /* CEED10 80240AB0 080902B5 */  j         .L80240AD4
 /* CEED14 80240AB4 00000000 */   nop      
 .L80240AB8:
 /* CEED18 80240AB8 0280282D */  daddu     $a1, $s4, $zero
-/* CEED1C 80240ABC 0C0901AA */  jal       func_802406A8
+/* CEED1C 80240ABC 0C0901AA */  jal       func_802406A8_CEE908
 /* CEED20 80240AC0 02A0302D */   daddu    $a2, $s5, $zero
 /* CEED24 80240AC4 080902B5 */  j         .L80240AD4
 /* CEED28 80240AC8 00000000 */   nop      

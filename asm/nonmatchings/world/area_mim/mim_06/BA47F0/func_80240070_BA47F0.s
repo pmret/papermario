@@ -62,7 +62,7 @@ glabel func_80240070_BA47F0
 /* BA48C8 80240148 02A0382D */  daddu     $a3, $s5, $zero
 /* BA48CC 8024014C E7A00018 */  swc1      $f0, 0x18($sp)
 /* BA48D0 80240150 E7A2001C */  swc1      $f2, 0x1c($sp)
-/* BA48D4 80240154 0C09001C */  jal       func_80240070
+/* BA48D4 80240154 0C09001C */  jal       func_80240070_BA47F0
 /* BA48D8 80240158 E7B00020 */   swc1     $f16, 0x20($sp)
 /* BA48DC 8024015C C7A00018 */  lwc1      $f0, 0x18($sp)
 /* BA48E0 80240160 C7A2001C */  lwc1      $f2, 0x1c($sp)

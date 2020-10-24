@@ -38,7 +38,7 @@ glabel update_heroes_start_turn_A2C264
 /* A2C2E8 802420A8 001080C0 */  sll       $s0, $s0, 3
 /* A2C2EC 802420AC 4406A000 */  mfc1      $a2, $f20
 /* A2C2F0 802420B0 02038021 */  addu      $s0, $s0, $v1
-/* A2C2F4 802420B4 0C090439 */  jal       func_802410E4
+/* A2C2F4 802420B4 0C090439 */  jal       func_802410E4_A2B324
 /* A2C2F8 802420B8 E7A00010 */   swc1     $f0, 0x10($sp)
 /* A2C2FC 802420BC 3C026666 */  lui       $v0, 0x6666
 /* A2C300 802420C0 34426667 */  ori       $v0, $v0, 0x6667

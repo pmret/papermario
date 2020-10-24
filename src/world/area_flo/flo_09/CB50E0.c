@@ -1,5 +1,4 @@
-#include "common.h"
+#include "flo_09.h"
 
-INCLUDE_ASM(s32, "world/area_flo/flo_09/CB50E0", func_802400E0_CB50E0);
+#include "world/common/SomeMatrixOperations.inc.c"
 
-INCLUDE_ASM(s32, "world/area_flo/flo_09/CB50E0", func_80240150_CB5150);

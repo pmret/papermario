@@ -1,4 +1,4 @@
-#include "common.h"
+#include "omo_02.h"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_02/D9D510", func_80240040_D9D510);
 
@@ -16,13 +16,13 @@ INCLUDE_ASM(s32, "world/area_omo/omo_02/D9D510", func_80240B48_D9E018);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_02/D9D510", func_80240BA8_D9E078);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_02/D9D510", func_80240EDC);
+INCLUDE_ASM(s32, "world/area_omo/omo_02/D9D510", func_80240EDC_D9E3AC);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_02/D9D510", func_80240F90_D9E460);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_02/D9D510", func_802410B0_D9E580);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_02/D9D510", func_80241110);
+INCLUDE_ASM(s32, "world/area_omo/omo_02/D9D510", func_80241110_D9E5E0);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_02/D9D510", func_80241188_D9E658);
 
@@ -46,14 +46,14 @@ INCLUDE_ASM(s32, "world/area_omo/omo_02/D9D510", func_80241D7C_D9F24C);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_02/D9D510", func_80241DC0_D9F290);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_02/D9D510", func_80241E60);
+INCLUDE_ASM(s32, "world/area_omo/omo_02/D9D510", func_80241E60_D9F330);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_02/D9D510", func_80241EA4);
+INCLUDE_ASM(s32, "world/area_omo/omo_02/D9D510", func_80241EA4_D9F374);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_02/D9D510", func_802423E0);
+INCLUDE_ASM(s32, "world/area_omo/omo_02/D9D510", func_802423E0_D9F8B0);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_02/D9D510", func_8024283C);
+INCLUDE_ASM(s32, "world/area_omo/omo_02/D9D510", func_8024283C_D9FD0C);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_02/D9D510", func_80242B5C);
+INCLUDE_ASM(s32, "world/area_omo/omo_02/D9D510", func_80242B5C_DA002C);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_02/D9D510", func_80242B70);
+INCLUDE_ASM(s32, "world/area_omo/omo_02/D9D510", func_80242B70_DA0040);

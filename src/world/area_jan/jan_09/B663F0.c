@@ -1,4 +1,4 @@
-#include "common.h"
+#include "jan_09.h"
 
 INCLUDE_ASM(s32, "world/area_jan/jan_09/B663F0", func_80240940_B663F0);
 
@@ -8,7 +8,7 @@ INCLUDE_ASM(s32, "world/area_jan/jan_09/B663F0", func_80240B54_B66604);
 
 INCLUDE_ASM(s32, "world/area_jan/jan_09/B663F0", func_80240BC0_B66670);
 
-INCLUDE_ASM(s32, "world/area_jan/jan_09/B663F0", func_80240C30);
+INCLUDE_ASM(s32, "world/area_jan/jan_09/B663F0", func_80240C30_B666E0);
 
 INCLUDE_ASM(s32, "world/area_jan/jan_09/B663F0", func_80240D08_B667B8);
 

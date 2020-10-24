@@ -4,7 +4,7 @@
 glabel func_802413D0_BCFFC0
 /* BCFFC0 802413D0 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* BCFFC4 802413D4 AFBF0014 */  sw        $ra, 0x14($sp)
-/* BCFFC8 802413D8 0C090150 */  jal       func_80240540
+/* BCFFC8 802413D8 0C090150 */  jal       func_80240540_BCF130
 /* BCFFCC 802413DC AFB00010 */   sw       $s0, 0x10($sp)
 /* BCFFD0 802413E0 0040802D */  daddu     $s0, $v0, $zero
 /* BCFFD4 802413E4 2402FFFF */  addiu     $v0, $zero, -1

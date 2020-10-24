@@ -18,3 +18,5 @@ assets
 bin/
 build/
 docs/doxygen/
+
+.vscode/launch.json

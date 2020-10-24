@@ -1,4 +1,4 @@
-#include "common.h"
+#include "nok_04.h"
 
 INCLUDE_ASM(s32, "world/area_nok/nok_04/9EDBF0", func_80240000_9EDBF0);
 
@@ -10,7 +10,7 @@ INCLUDE_ASM(s32, "world/area_nok/nok_04/9EDBF0", func_802403C0_9EDFB0);
 
 INCLUDE_ASM(s32, "world/area_nok/nok_04/9EDBF0", func_802404D0_9EE0C0);
 
-INCLUDE_ASM(s32, "world/area_nok/nok_04/9EDBF0", func_8024051C);
+INCLUDE_ASM(s32, "world/area_nok/nok_04/9EDBF0", func_8024051C_9EE10C);
 
 INCLUDE_ASM(s32, "world/area_nok/nok_04/9EDBF0", func_80240548_9EE138);
 
@@ -22,6 +22,6 @@ INCLUDE_ASM(s32, "world/area_nok/nok_04/9EDBF0", func_802406C4_9EE2B4);
 
 INCLUDE_ASM(s32, "world/area_nok/nok_04/9EDBF0", func_80240814_9EE404);
 
-INCLUDE_ASM(s32, "world/area_nok/nok_04/9EDBF0", func_80240E4C);
+INCLUDE_ASM(s32, "world/area_nok/nok_04/9EDBF0", func_80240E4C_9EEA3C);
 
 INCLUDE_ASM(s32, "world/area_nok/nok_04/9EDBF0", func_80240E70_9EEA60);

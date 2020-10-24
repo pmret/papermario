@@ -1,5 +1,4 @@
-#include "common.h"
+#include "nok_02.h"
 
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9DB380", func_80244360);
+#include "world/common/SomeMatrixOperations.inc.c"
 
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9DB380", func_802443D0);

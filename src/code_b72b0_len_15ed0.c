@@ -239,7 +239,7 @@ INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_801341B0);
 
 INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_801341E8);
 
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", set_item_entity_position);
+INCLUDE_ASM(void, "code_b72b0_len_15ed0", set_item_entity_position, s32 itemEntityIndex, f32 x, f32 y, f32 z);
 
 INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80134230);
 

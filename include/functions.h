@@ -63,6 +63,14 @@ s32 func_800554E8(s32, s32);
 s32 func_800555E4(s32);
 s32 osGetId();
 
+// Partner
+void func_800EBA3C(Npc* partner);
+void func_800EBB40(Npc* partner);
+void enable_partner_walking(Npc* partner, s32 val);
+void enable_partner_flying(Npc* partner, s32 val);
+void update_player_move_history(Npc* partner);
+void func_800ED5D0(Npc* partner);
+
 s32 func_800EF394(f32);
 s32 does_script_exist(s32 id);
 ScriptInstance* start_script(Bytecode* initialLine, s32 priority, s32 initialState);
@@ -79,6 +87,7 @@ s32 is_ability_active(s32 arg0);
 f32 update_lerp(Easing easing, f32 start, f32 end, s32 elapsed, s32 duration);
 
 void make_item_entity_delayed(s32 itemID, f32 x, f32 y, f32 z, s32 unk1, s32 unk2, s32 unk3);
+void set_item_entity_position(s32 itemEntityIndex, f32 x, f32 y, f32 z);
 
 void set_cam_viewport(s16 id, s16 x, s16 y, s16 width, s16 height);
 

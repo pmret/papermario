@@ -1,4 +1,4 @@
-#include "common.h"
+#include "kpa_61.h"
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_61/A6E6F0", func_80240310_A6E6F0);
 
@@ -18,9 +18,9 @@ INCLUDE_ASM(s32, "world/area_kpa/kpa_61/A6E6F0", func_802411C4_A6F5A4);
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_61/A6E6F0", func_80241200_A6F5E0);
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_61/A6E6F0", func_8024138C);
+INCLUDE_ASM(s32, "world/area_kpa/kpa_61/A6E6F0", func_8024138C_A6F76C);
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_61/A6E6F0", func_8024177C);
+INCLUDE_ASM(s32, "world/area_kpa/kpa_61/A6E6F0", func_8024177C_A6FB5C);
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_61/A6E6F0", func_80241870_A6FC50);
 
@@ -30,14 +30,14 @@ INCLUDE_ASM(s32, "world/area_kpa/kpa_61/A6E6F0", func_80241AF0_A6FED0);
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_61/A6E6F0", func_80241CBC_A7009C);
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_61/A6E6F0", func_80241D28);
+INCLUDE_ASM(s32, "world/area_kpa/kpa_61/A6E6F0", func_80241D28_A70108);
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_61/A6E6F0", func_80241E5C_A7023C);
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_61/A6E6F0", func_80241F4C);
+INCLUDE_ASM(s32, "world/area_kpa/kpa_61/A6E6F0", func_80241F4C_A7032C);
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_61/A6E6F0", update_heroes_start_turn_A70404);
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_61/A6E6F0", func_802422B8);
+INCLUDE_ASM(s32, "world/area_kpa/kpa_61/A6E6F0", func_802422B8_A70698);
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_61/A6E6F0", func_802422F0_A706D0);

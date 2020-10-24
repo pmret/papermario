@@ -1,4 +1,4 @@
-#include "common.h"
+#include "flo_00.h"
 
 INCLUDE_ASM(s32, "world/area_flo/flo_00/C9EE30", func_80240F10_C9EE30);
 
@@ -12,4 +12,4 @@ INCLUDE_ASM(s32, "world/area_flo/flo_00/C9EE30", func_8024137C_C9F29C);
 
 INCLUDE_ASM(s32, "world/area_flo/flo_00/C9EE30", func_8024139C_C9F2BC);
 
-INCLUDE_ASM(s32, "world/area_flo/flo_00/C9EE30", func_802413BC);
+INCLUDE_ASM(s32, "world/area_flo/flo_00/C9EE30", func_802413BC_C9F2DC);

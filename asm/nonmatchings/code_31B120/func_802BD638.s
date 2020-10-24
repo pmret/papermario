@@ -514,7 +514,7 @@ glabel func_802BD638
 /* 31BE10 802BDDF0 10400027 */  beqz      $v0, .L802BDE90
 /* 31BE14 802BDDF4 34048000 */   ori      $a0, $zero, 0x8000
 .L802BDDF8:
-/* 31BE18 802BDDF8 0C0AF440 */  jal       func_802BD100_31B120
+/* 31BE18 802BDDF8 0C0AF440 */  jal       func_802BD100
 /* 31BE1C 802BDDFC 0200202D */   daddu    $a0, $s0, $zero
 /* 31BE20 802BDE00 14400004 */  bnez      $v0, .L802BDE14
 /* 31BE24 802BDE04 2404010C */   addiu    $a0, $zero, 0x10c

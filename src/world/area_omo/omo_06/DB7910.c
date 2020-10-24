@@ -1,4 +1,4 @@
-#include "common.h"
+#include "omo_06.h"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_06/DB7910", func_80240000_DB7910);
 
@@ -6,9 +6,9 @@ INCLUDE_ASM(s32, "world/area_omo/omo_06/DB7910", func_8024001C_DB792C);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_06/DB7910", func_802400E4_DB79F4);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_06/DB7910", func_80240168);
+INCLUDE_ASM(s32, "world/area_omo/omo_06/DB7910", func_80240168_DB7A78);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_06/DB7910", func_802401EC);
+INCLUDE_ASM(s32, "world/area_omo/omo_06/DB7910", func_802401EC_DB7AFC);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_06/DB7910", func_80240290_DB7BA0);
 

@@ -1,4 +1,4 @@
-#include "common.h"
+#include "pra_16.h"
 
 INCLUDE_ASM(s32, "world/area_pra/pra_16/D69B40", func_80240020_D69B40);
 

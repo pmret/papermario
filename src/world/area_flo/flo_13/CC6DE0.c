@@ -1,3 +1,3 @@
-#include "common.h"
+#include "flo_13.h"
 
-INCLUDE_ASM(s32, "world/area_flo/flo_13/CC6DE0", func_802435D0);
+INCLUDE_ASM(s32, "world/area_flo/flo_13/CC6DE0", func_802435D0_CC6DE0);

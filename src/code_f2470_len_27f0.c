@@ -2,7 +2,7 @@
 
 Npc* resolve_npc(ScriptInstance* script, NpcId npcIdOrPtr) {
     if (npcIdOrPtr == NpcId_SELF) {
-        return get_npc_safe(script->ownerID);
+        return get_npc_safe(script->owner2.npcID);
     } else if (npcIdOrPtr >= -270000000) {
         return get_npc_safe(npcIdOrPtr);
     } else {

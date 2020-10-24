@@ -1,8 +1,8 @@
-#include "common.h"
+#include "isk_09.h"
 
 INCLUDE_ASM(s32, "world/area_isk/isk_09/9864E0", func_80240000_9864E0);
 
-INCLUDE_ASM(s32, "world/area_isk/isk_09/9864E0", func_802400B4_986594);
+#include "world/common/GetItemName.inc.c"
 
 INCLUDE_ASM(s32, "world/area_isk/isk_09/9864E0", func_80240118_9865F8);
 

@@ -227,12 +227,12 @@ INCLUDE_ASM(s32, "code_197F40", func_8026DA94);
 INCLUDE_ASM(s32, "code_197F40", SummonEnemy);
 
 ApiStatus GetOwnerID(ScriptInstance* script, s32 isInitialCall) {
-    set_variable(script, *script->ptrReadPos, script->ownerActorID);
+    set_variable(script, *script->ptrReadPos, script->owner1.actorID);
     return ApiStatus_DONE2;
 }
 
 ApiStatus SetOwnerID(ScriptInstance* script, s32 isInitialCall) {
-    script->ownerActorID = get_variable(script, *script->ptrReadPos);
+    script->owner1.actorID = get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
@@ -243,7 +243,7 @@ ApiStatus ActorExists(ScriptInstance* script, s32 isInitialCall) {
     ActorId actorID = get_variable(script, *args++);
 
     if (actorID == ActorId_SELF) {
-        actorID = script->ownerActorID;
+        actorID = script->owner1.actorID;
     }
 
     isExist = get_actor(actorID) != NULL;
@@ -330,7 +330,7 @@ INCLUDE_ASM(s32, "code_197F40", func_8026E260);
 
 ApiStatus PlayerCreateTargetList(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    Actor* actor = get_actor(script->ownerActorID);
+    Actor* actor = get_actor(script->owner1.actorID);
 
     gBattleStatus.currentTargetListFlags = *args;
     player_create_target_list(actor);
@@ -340,7 +340,7 @@ ApiStatus PlayerCreateTargetList(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus EnemyCreateTargetList(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    Actor* actor = get_actor(script->ownerActorID);
+    Actor* actor = get_actor(script->owner1.actorID);
 
     gBattleStatus.currentTargetListFlags = *args;
     enemy_create_target_list(actor);
@@ -494,7 +494,6 @@ ApiStatus GetPlayerHP(ScriptInstance* script, s32 isInitialCall) {
     set_variable(script, *script->ptrReadPos, gPlayerData.curHP);
     return ApiStatus_DONE2;
 }
-
 
 INCLUDE_ASM(s32, "code_197F40", PlayerDamageEnemy);
 

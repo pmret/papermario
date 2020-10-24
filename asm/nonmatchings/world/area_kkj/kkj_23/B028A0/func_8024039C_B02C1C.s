@@ -105,7 +105,7 @@ glabel func_8024039C_B02C1C
 /* B02DA8 80240528 46200020 */  cvt.s.d   $f0, $f0
 /* B02DAC 8024052C E7A00010 */  swc1      $f0, 0x10($sp)
 /* B02DB0 80240530 8E26003C */  lw        $a2, 0x3c($s1)
-/* B02DB4 80240534 0C0900BC */  jal       func_802402F0
+/* B02DB4 80240534 0C0900BC */  jal       func_802402F0_B02B70
 /* B02DB8 80240538 02C0202D */   daddu    $a0, $s6, $zero
 /* B02DBC 8024053C 02A0202D */  daddu     $a0, $s5, $zero
 /* B02DC0 80240540 4406C000 */  mfc1      $a2, $f24

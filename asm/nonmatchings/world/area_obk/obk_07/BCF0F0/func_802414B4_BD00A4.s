@@ -6,7 +6,7 @@ glabel func_802414B4_BD00A4
 /* BD00A8 802414B8 AFB00010 */  sw        $s0, 0x10($sp)
 /* BD00AC 802414BC 0080802D */  daddu     $s0, $a0, $zero
 /* BD00B0 802414C0 AFBF0018 */  sw        $ra, 0x18($sp)
-/* BD00B4 802414C4 0C090150 */  jal       func_80240540
+/* BD00B4 802414C4 0C090150 */  jal       func_80240540_BCF130
 /* BD00B8 802414C8 AFB10014 */   sw       $s1, 0x14($sp)
 /* BD00BC 802414CC 0200202D */  daddu     $a0, $s0, $zero
 /* BD00C0 802414D0 3C05FE36 */  lui       $a1, 0xfe36

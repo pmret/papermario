@@ -1,4 +1,4 @@
-#include "common.h"
+#include "dgb_07.h"
 
 INCLUDE_ASM(s32, "world/area_dgb/dgb_07/C3DBF0", func_80240000_C3DBF0);
 

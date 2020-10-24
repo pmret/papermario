@@ -26,8 +26,8 @@ glabel func_8013A37C
 /* D0ACC 8013A3CC 2484F800 */  addiu     $a0, $a0, -0x800
 /* D0AD0 8013A3D0 0C00A41B */  jal       _heap_malloc
 /* D0AD4 8013A3D4 24052B98 */   addiu    $a1, $zero, 0x2b98
-/* D0AD8 8013A3D8 3C038015 */  lui       $v1, 0x8015
-/* D0ADC 8013A3DC 24636954 */  addiu     $v1, $v1, 0x6954
+/* D0AD8 8013A3D8 3C038015 */  lui       $v1, %hi(D_80156954)
+/* D0ADC 8013A3DC 24636954 */  addiu     $v1, $v1, %lo(D_80156954)
 /* D0AE0 8013A3E0 AC620000 */  sw        $v0, ($v1)
 /* D0AE4 8013A3E4 0000882D */  daddu     $s1, $zero, $zero
 /* D0AE8 8013A3E8 0060902D */  daddu     $s2, $v1, $zero

@@ -1,4 +1,4 @@
-#include "common.h"
+#include "sbk_30.h"
 
 INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_80240000_93F5B0);
 
@@ -30,11 +30,11 @@ INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_80240B64_940114);
 
 INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_80240DDC_94038C);
 
-INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_80240E90_940440);
+#include "world/common/GetItemName.inc.c"
 
-INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_80240EF4);
+#include "world/common/GetNpcCollisionHeight.inc.c"
 
-INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_80240F50_940500);
+#include "world/common/SomeXYZFuncTodoRename.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_80241120_9406D0);
 
@@ -42,16 +42,15 @@ INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_80241174_940724);
 
 INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_802411AC_94075C);
 
-INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_80241248);
+INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_80241248_9407F8);
 
-INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_802412E4);
+#include "world/common/SetManyVars.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_802413D4_940984);
 
-INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_80241560);
+INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_80241560_940B10);
 
-INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_802415A4);
+INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_802415A4_940B54);
 
-INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_802415D0);
+#include "world/common/SomeMatrixOperations.inc.c"
 
-INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_80241640);

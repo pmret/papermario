@@ -16,7 +16,7 @@ glabel func_802415B0_B21AF0
 /* B21B1C 802415DC 8FA40010 */  lw        $a0, 0x10($sp)
 /* B21B20 802415E0 8FA50014 */  lw        $a1, 0x14($sp)
 /* B21B24 802415E4 8FA60018 */  lw        $a2, 0x18($sp)
-/* B21B28 802415E8 0C0904CE */  jal       func_80241338
+/* B21B28 802415E8 0C0904CE */  jal       func_80241338_B21878
 /* B21B2C 802415EC 0220382D */   daddu    $a3, $s1, $zero
 /* B21B30 802415F0 3C03800A */  lui       $v1, 0x800a
 /* B21B34 802415F4 2463A66C */  addiu     $v1, $v1, -0x5994

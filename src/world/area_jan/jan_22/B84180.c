@@ -1,4 +1,4 @@
-#include "common.h"
+#include "jan_22.h"
 
 INCLUDE_ASM(s32, "world/area_jan/jan_22/B84180", func_80240000_B84180);
 
@@ -26,10 +26,18 @@ INCLUDE_ASM(s32, "world/area_jan/jan_22/B84180", func_80240B94_B84D14);
 
 INCLUDE_ASM(s32, "world/area_jan/jan_22/B84180", func_80240E90_B85010);
 
-INCLUDE_ASM(s32, "world/area_jan/jan_22/B84180", func_80240F44_B850C4);
+#include "world/common/GetItemName.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_22/B84180", func_80240FA8);
+INCLUDE_ASM(s32, "world/area_jan/jan_22/B84180", func_80240FA8_B85128);
 
 INCLUDE_ASM(s32, "world/area_jan/jan_22/B84180", func_80240FC4_B85144);
 
-INCLUDE_ASM(s32, "world/area_jan/jan_22/B84180", func_80240FE0_B85160);
+static ApiStatus PostChapter5StatUpdate(ScriptInstance* script, s32 isInitialCall) {
+    PlayerData* playerData = PLAYER_DATA;
+
+    set_max_SP(5);
+    playerData->curHP = playerData->curMaxHP;
+    playerData->curFP = playerData->curMaxFP;
+    sync_status_menu();
+    return ApiStatus_DONE2;
+}

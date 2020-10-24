@@ -1,91 +1,99 @@
-#include "common.h"
+#include "mac_04.h"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80240460);
+INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80240460_843030);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80240514);
+#include "world/common/GetItemName.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80240578);
+INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80240578_843148);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_8024058C);
+INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_8024058C_84315C);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_8024059C);
+INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_8024059C_84316C);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_802407C0);
+INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_802407C0_843390);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_8024080C);
+INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_8024080C_8433DC);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_8024082C);
+INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_8024082C_8433FC);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_8024088C);
+INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_8024088C_84345C);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_802409D8);
+INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_802409D8_8435A8);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80240B4C);
+INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80240B4C_84371C);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80240BD0);
+INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80240BD0_8437A0);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80240DE8);
+INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80240DE8_8439B8);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80240E9C);
+INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80240E9C_843A6C);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80240ED0);
+INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80240ED0_843AA0);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80240F50_843B20);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80240F68);
+INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80240F68_843B38);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80240F84);
+INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80240F84_843B54);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80240F9C);
+INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80240F9C_843B6C);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80240FCC);
+INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80240FCC_843B9C);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80241040);
+INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80241040_843C10);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_802410E0);
+INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_802410E0_843CB0);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_8024127C_843E4C);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_802412E0);
+INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_802412E0_843EB0);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80241370);
+INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80241370_843F40);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80241458);
+INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80241458_844028);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_802414C4_844094);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_802414F4);
+#include "world/common/GetNpcCollisionHeight.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80241550);
+#include "world/common/SomeXYZFuncTodoRename.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80241720_8442F0);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80241774);
+INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80241774_844344);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_802417AC);
+INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_802417AC_84437C);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80241848);
+INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80241848_844418);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_802418AC);
+INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_802418AC_84447C);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80241944_844514);
+static ApiStatus PostChapter4StatUpdate(ScriptInstance* script, s32 isInitialCall) {
+    PlayerData* playerData = PLAYER_DATA;
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80241980);
+    set_max_SP(4);
+    playerData->curHP = playerData->curMaxHP;
+    playerData->curFP = playerData->curMaxFP;
+    sync_status_menu();
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_802419AC);
+INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80241980_844550);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_802419D0);
+INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_802419AC_84457C);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_802419E4);
+INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_802419D0_8445A0);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80241A64);
+INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_802419E4_8445B4);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80241B90);
+INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80241A64_844634);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80241BB8);
+INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80241B90_844760);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80241C20);
+INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80241BB8_844788);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80241C40);
+INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80241C20_8447F0);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80241C60);
+INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80241C40_844810);
+
+INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80241C60_844830);

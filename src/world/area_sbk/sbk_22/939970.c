@@ -1,5 +1,4 @@
-#include "common.h"
+#include "sbk_22.h"
+#include "world/common/Bandit_DropCoin.inc.c"
 
-INCLUDE_ASM(s32, "world/area_sbk/sbk_22/939970", func_80240040_939970);
-
-INCLUDE_ASM(s32, "world/area_sbk/sbk_22/939970", func_80240140_939A70);
+#include "world/common/SetNpcB5_3.inc.c"

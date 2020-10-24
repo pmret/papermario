@@ -1,20 +1,20 @@
-#include "common.h"
+#include "sbk_34.h"
 
 INCLUDE_ASM(s32, "world/area_sbk/sbk_34/945F10", func_80240040_945F10);
 
-INCLUDE_ASM(s32, "world/area_sbk/sbk_34/945F10", func_802400F4_945FC4);
+#include "world/common/GetItemName.inc.c"
 
-INCLUDE_ASM(s32, "world/area_sbk/sbk_34/945F10", func_80240158);
+#include "world/common/GetNpcCollisionHeight.inc.c"
 
-INCLUDE_ASM(s32, "world/area_sbk/sbk_34/945F10", func_802401B4);
+#include "world/common/SomeXYZFuncTodoRename.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sbk/sbk_34/945F10", func_80240384_946254);
 
-INCLUDE_ASM(s32, "world/area_sbk/sbk_34/945F10", func_802403D8);
+INCLUDE_ASM(s32, "world/area_sbk/sbk_34/945F10", func_802403D8_9462A8);
 
 INCLUDE_ASM(s32, "world/area_sbk/sbk_34/945F10", func_80240410_9462E0);
 
-INCLUDE_ASM(s32, "world/area_sbk/sbk_34/945F10", func_802404AC_94637C);
+#include "world/common/SetManyVars.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sbk/sbk_34/945F10", func_8024059C_94646C);
 

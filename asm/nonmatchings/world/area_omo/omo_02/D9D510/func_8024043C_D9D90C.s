@@ -120,7 +120,7 @@ glabel func_8024043C_D9D90C
 /* D9DAD4 80240604 8E420008 */  lw        $v0, 8($s2)
 /* D9DAD8 80240608 8C420004 */  lw        $v0, 4($v0)
 /* D9DADC 8024060C 8C440000 */  lw        $a0, ($v0)
-/* D9DAE0 80240610 0C0900B0 */  jal       func_802402C0
+/* D9DAE0 80240610 0C0900B0 */  jal       func_802402C0_D9D790
 /* D9DAE4 80240614 0200282D */   daddu    $a1, $s0, $zero
 /* D9DAE8 80240618 0000302D */  daddu     $a2, $zero, $zero
 /* D9DAEC 8024061C 0000282D */  daddu     $a1, $zero, $zero

@@ -1,4 +1,4 @@
-#include "common.h"
+#include "mim_04.h"
 
 INCLUDE_ASM(s32, "world/area_mim/mim_04/B9DB60", func_80240200_B9DB60);
 
@@ -16,6 +16,6 @@ INCLUDE_ASM(s32, "world/area_mim/mim_04/B9DB60", func_80240DAC_B9E70C);
 
 INCLUDE_ASM(s32, "world/area_mim/mim_04/B9DB60", func_80240DF0_B9E750);
 
-INCLUDE_ASM(s32, "world/area_mim/mim_04/B9DB60", func_80241014);
+INCLUDE_ASM(s32, "world/area_mim/mim_04/B9DB60", func_80241014_B9E974);
 
-INCLUDE_ASM(s32, "world/area_mim/mim_04/B9DB60", func_802410C8_B9EA28);
+#include "world/common/GetItemName.inc.c"

@@ -122,17 +122,17 @@ glabel func_8024150C_CB024C
 /* CB0410 802416D0 00000000 */   nop      
 /* CB0414 802416D4 0280202D */  daddu     $a0, $s4, $zero
 /* CB0418 802416D8 0240282D */  daddu     $a1, $s2, $zero
-/* CB041C 802416DC 0C090360 */  jal       func_80240D80
+/* CB041C 802416DC 0C090360 */  jal       func_80240D80_CAFAC0
 /* CB0420 802416E0 0260302D */   daddu    $a2, $s3, $zero
 /* CB0424 802416E4 0280202D */  daddu     $a0, $s4, $zero
 /* CB0428 802416E8 0240282D */  daddu     $a1, $s2, $zero
-/* CB042C 802416EC 0C0904D9 */  jal       func_80241364
+/* CB042C 802416EC 0C0904D9 */  jal       func_80241364_CB00A4
 /* CB0430 802416F0 0260302D */   daddu    $a2, $s3, $zero
 /* CB0434 802416F4 080905C7 */  j         .L8024171C
 /* CB0438 802416F8 00000000 */   nop      
 /* CB043C 802416FC 0280202D */  daddu     $a0, $s4, $zero
 /* CB0440 80241700 0240282D */  daddu     $a1, $s2, $zero
-/* CB0444 80241704 0C090532 */  jal       func_802414C8
+/* CB0444 80241704 0C090532 */  jal       func_802414C8_CB0208
 /* CB0448 80241708 0260302D */   daddu    $a2, $s3, $zero
 /* CB044C 8024170C 080905C7 */  j         .L8024171C
 /* CB0450 80241710 00000000 */   nop      

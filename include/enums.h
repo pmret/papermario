@@ -554,6 +554,9 @@ typedef UNK_TYPE Cam;
 #define Cam_TATTLE  0x00000002
 #define Cam_CAM3    0x00000003
 
+
+#define LOOKUP_ITEM(itemID) gItemTable[itemID & ~0xF0000]
+
 typedef s16 ItemId;
 #define ItemId_JUMP               0x00000001
 #define ItemId_SPIN_JUMP          0x00000002

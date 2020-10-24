@@ -190,8 +190,8 @@ ScriptInstance* start_script(Bytecode* initialLine, s32 priority, s32 initialSta
     newScript->childScript = NULL;
     newScript->parentScript = NULL;
     newScript->id = gStaticScriptCounter++;
-    newScript->ownerActorID = -1;
-    newScript->ownerID = -1;
+    newScript->owner1.actorID = -1;
+    newScript->owner2.npcID = -1;
     newScript->loopDepth = -1;
     newScript->switchDepth = -1;
     newScript->groupFlags = ~0x10;
@@ -261,8 +261,8 @@ ScriptInstance* start_script_in_group(Bytecode* initialLine, u8 priority, s32 in
     newScript->childScript = NULL;
     newScript->parentScript = NULL;
     newScript->id = gStaticScriptCounter++;
-    newScript->ownerActorID = -1;
-    newScript->ownerID = -1;
+    newScript->owner1.actorID = -1;
+    newScript->owner2.npcID = -1;
     newScript->loopDepth = -1;
     newScript->switchDepth = -1;
     newScript->groupFlags = groupFlags;
@@ -334,8 +334,8 @@ ScriptInstance* func_802C39F8(ScriptInstance* parentScript, Bytecode* nextLine, 
     child->childScript = NULL;
     child->priority = parentScript->priority;
     child->id = gStaticScriptCounter++;
-    child->ownerActorID = parentScript->ownerActorID;
-    child->ownerID = parentScript->ownerID;
+    child->owner1.actorID = parentScript->owner1.actorID;
+    child->owner2.npcID = parentScript->owner2.npcID;
     child->loopDepth = -1;
     child->switchDepth = -1;
     child->groupFlags = parentScript->groupFlags;
@@ -507,7 +507,6 @@ void kill_script_by_ID(s32 id) {
         }
     }
 }
-
 
 void kill_all_scripts(void) {
     s32 i;

@@ -125,7 +125,7 @@ ApiStatus IncrementPlayerFP(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus func_80261D98(ScriptInstance* script, s32 isInitialCall) {
-    inflict_status_set_duration(get_actor(script->ownerActorID), 4, 0, 1);
+    inflict_status_set_duration(get_actor(script->owner1.actorID), 4, 0, 1);
     func_8026777C();
     return ApiStatus_DONE2;
 }

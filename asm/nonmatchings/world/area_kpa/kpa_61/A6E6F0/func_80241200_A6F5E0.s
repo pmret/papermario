@@ -49,7 +49,7 @@ glabel func_80241200_A6F5E0
 /* A6F690 802412B0 0280202D */  daddu     $a0, $s4, $zero
 /* A6F694 802412B4 8E250024 */  lw        $a1, 0x24($s1)
 /* A6F698 802412B8 8E260028 */  lw        $a2, 0x28($s1)
-/* A6F69C 802412BC 0C0902B9 */  jal       func_80240AE4
+/* A6F69C 802412BC 0C0902B9 */  jal       func_80240AE4_A6EEC4
 /* A6F6A0 802412C0 0240382D */   daddu    $a3, $s2, $zero
 /* A6F6A4 802412C4 24030001 */  addiu     $v1, $zero, 1
 /* A6F6A8 802412C8 1443001E */  bne       $v0, $v1, .L80241344

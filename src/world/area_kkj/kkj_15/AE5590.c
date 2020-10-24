@@ -1,4 +1,4 @@
-#include "common.h"
+#include "kkj_15.h"
 
 INCLUDE_ASM(s32, "world/area_kkj/kkj_15/AE5590", func_80240000_AE5590);
 

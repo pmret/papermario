@@ -1,3 +1,2 @@
-#include "common.h"
-
-INCLUDE_ASM(s32, "world/area_sbk/sbk_62/957390", func_80240040_957390);
+#include "sbk_62.h"
+#include "world/common/SetNpcB5_3.inc.c"

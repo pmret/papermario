@@ -7,7 +7,7 @@ glabel func_80240A6C_BCF65C
 /* BCF664 80240A74 AFB20018 */  sw        $s2, 0x18($sp)
 /* BCF668 80240A78 AFB10014 */  sw        $s1, 0x14($sp)
 /* BCF66C 80240A7C AFB00010 */  sw        $s0, 0x10($sp)
-/* BCF670 80240A80 0C090150 */  jal       func_80240540
+/* BCF670 80240A80 0C090150 */  jal       func_80240540_BCF130
 /* BCF674 80240A84 F7B40020 */   sdc1     $f20, 0x20($sp)
 /* BCF678 80240A88 0040882D */  daddu     $s1, $v0, $zero
 /* BCF67C 80240A8C 8E2301C0 */  lw        $v1, 0x1c0($s1)

@@ -37,7 +37,7 @@ glabel func_80240128_D7CC78
 /* D7CCF8 802401A8 0C00B94E */  jal       get_screen_coords
 /* D7CCFC 802401AC AFA20018 */   sw       $v0, 0x18($sp)
 /* D7CD00 802401B0 8E0400A4 */  lw        $a0, 0xa4($s0)
-/* D7CD04 802401B4 0C090008 */  jal       func_80240020
+/* D7CD04 802401B4 0C090008 */  jal       func_80240020_D7CB70
 /* D7CD08 802401B8 00000000 */   nop      
 /* D7CD0C 802401BC C6020080 */  lwc1      $f2, 0x80($s0)
 /* D7CD10 802401C0 3C014307 */  lui       $at, 0x4307
@@ -54,7 +54,7 @@ glabel func_80240128_D7CC78
 /* D7CD3C 802401EC 00000000 */  nop       
 /* D7CD40 802401F0 45000004 */  bc1f      .L80240204
 /* D7CD44 802401F4 00000000 */   nop      
-/* D7CD48 802401F8 0C090015 */  jal       func_80240054
+/* D7CD48 802401F8 0C090015 */  jal       func_80240054_D7CBA4
 /* D7CD4C 802401FC 0040202D */   daddu    $a0, $v0, $zero
 /* D7CD50 80240200 24040002 */  addiu     $a0, $zero, 2
 .L80240204:

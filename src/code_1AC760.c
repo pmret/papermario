@@ -24,7 +24,7 @@ ApiStatus GetActorLevel(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* outVar;
 
     if (actorID == -0x7F) {
-        actorID = script->ownerActorID;
+        actorID = script->owner1.enemyID;
     }
 
     outVar = *args++;

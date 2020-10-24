@@ -1,4 +1,4 @@
-#include "common.h"
+#include "omo_13.h"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_13/DE2710", func_80240280_DE2710);
 
@@ -10,15 +10,15 @@ INCLUDE_ASM(s32, "world/area_omo/omo_13/DE2710", func_80240458_DE28E8);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_13/DE2710", func_802404B8_DE2948);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_13/DE2710", func_802407EC);
+INCLUDE_ASM(s32, "world/area_omo/omo_13/DE2710", func_802407EC_DE2C7C);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_13/DE2710", func_8024083C_DE2CCC);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_13/DE2710", func_80240A00_DE2E90);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_13/DE2710", func_80240CD4_DE3164);
+#include "world/common/GetNpcCollisionHeight.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_13/DE2710", func_80240D30_DE31C0);
+#include "world/common/SomeXYZFuncTodoRename.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_13/DE2710", func_80240F00_DE3390);
 
@@ -26,4 +26,4 @@ INCLUDE_ASM(s32, "world/area_omo/omo_13/DE2710", func_80240F54_DE33E4);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_13/DE2710", func_80240F8C_DE341C);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_13/DE2710", func_80241028);
+INCLUDE_ASM(s32, "world/area_omo/omo_13/DE2710", func_80241028_DE34B8);

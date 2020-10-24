@@ -1,5 +1,4 @@
-#include "common.h"
+#include "iwa_10.h"
 
-INCLUDE_ASM(s32, "world/area_iwa/iwa_10/91FB20", func_802415B0);
+#include "world/common/SomeMatrixOperations.inc.c"
 
-INCLUDE_ASM(s32, "world/area_iwa/iwa_10/91FB20", func_80241620_91FB90);

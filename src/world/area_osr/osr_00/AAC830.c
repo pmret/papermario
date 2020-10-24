@@ -1,4 +1,4 @@
-#include "common.h"
+#include "osr_00.h"
 
 INCLUDE_ASM(s32, "world/area_osr/osr_00/AAC830", func_80240000_AAC830);
 

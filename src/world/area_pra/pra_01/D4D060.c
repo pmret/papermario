@@ -1,12 +1,12 @@
-#include "common.h"
+#include "pra_01.h"
 
 INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_80240020_D4D060);
 
-INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_80240054);
+INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_80240054_D4D094);
 
 INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_802400EC_D4D12C);
 
-INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_80240128);
+INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_80240128_D4D168);
 
 INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_802402F0_D4D330);
 
@@ -30,16 +30,24 @@ INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_80240F20_D4DF60);
 
 INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_80240F60_D4DFA0);
 
-INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_80240F80_D4DFC0);
+#include "world/common/GetNpcCollisionHeight.inc.c"
 
-INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_80240FDC_D4E01C);
+#include "world/common/SomeXYZFuncTodoRename.inc.c"
 
 INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_802411AC_D4E1EC);
 
 INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_80241200_D4E240);
 
-INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_80241238);
+INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_80241238_D4E278);
 
 INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_802412D4_D4E314);
 
-INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_80241370_D4E3B0);
+static ApiStatus PostChapter7StatUpdate(ScriptInstance* script, s32 isInitialCall) {
+    PlayerData* playerData = PLAYER_DATA;
+
+    set_max_SP(7);
+    playerData->curHP = playerData->curMaxHP;
+    playerData->curFP = playerData->curMaxFP;
+    sync_status_menu();
+    return ApiStatus_DONE2;
+}

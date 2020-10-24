@@ -232,25 +232,25 @@ glabel func_802406A4_A52F64
 .L802409F4:
 /* A532B4 802409F4 0260202D */  daddu     $a0, $s3, $zero
 /* A532B8 802409F8 0280282D */  daddu     $a1, $s4, $zero
-/* A532BC 802409FC 0C0900C4 */  jal       func_80240310
+/* A532BC 802409FC 0C0900C4 */  jal       func_80240310_A52BD0
 /* A532C0 80240A00 02A0302D */   daddu    $a2, $s5, $zero
 /* A532C4 80240A04 0260202D */  daddu     $a0, $s3, $zero
 .L80240A08:
 /* A532C8 80240A08 0280282D */  daddu     $a1, $s4, $zero
-/* A532CC 80240A0C 0C0900E3 */  jal       func_8024038C
+/* A532CC 80240A0C 0C0900E3 */  jal       func_8024038C_A52C4C
 /* A532D0 80240A10 02A0302D */   daddu    $a2, $s5, $zero
 /* A532D4 80240A14 08090294 */  j         .L80240A50
 /* A532D8 80240A18 00000000 */   nop      
 .L80240A1C:
 /* A532DC 80240A1C 0260202D */  daddu     $a0, $s3, $zero
 /* A532E0 80240A20 0280282D */  daddu     $a1, $s4, $zero
-/* A532E4 80240A24 0C090130 */  jal       func_802404C0
+/* A532E4 80240A24 0C090130 */  jal       func_802404C0_A52D80
 /* A532E8 80240A28 02A0302D */   daddu    $a2, $s5, $zero
 /* A532EC 80240A2C 08090294 */  j         .L80240A50
 /* A532F0 80240A30 00000000 */   nop      
 .L80240A34:
 /* A532F4 80240A34 0280282D */  daddu     $a1, $s4, $zero
-/* A532F8 80240A38 0C090189 */  jal       func_80240624
+/* A532F8 80240A38 0C090189 */  jal       func_80240624_A52EE4
 /* A532FC 80240A3C 02A0302D */   daddu    $a2, $s5, $zero
 /* A53300 80240A40 08090294 */  j         .L80240A50
 /* A53304 80240A44 00000000 */   nop      

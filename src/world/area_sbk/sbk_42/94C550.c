@@ -1,3 +1,2 @@
-#include "common.h"
-
-INCLUDE_ASM(s32, "world/area_sbk/sbk_42/94C550", func_80240040_94C550);
+#include "sbk_42.h"
+#include "world/common/Bandit_DropCoin.inc.c"

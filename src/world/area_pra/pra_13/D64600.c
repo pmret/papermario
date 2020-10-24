@@ -1,4 +1,4 @@
-#include "common.h"
+#include "pra_13.h"
 
 INCLUDE_ASM(s32, "world/area_pra/pra_13/D64600", func_80240020_D64600);
 
@@ -26,9 +26,9 @@ INCLUDE_ASM(s32, "world/area_pra/pra_13/D64600", func_80240EB8_D65498);
 
 INCLUDE_ASM(s32, "world/area_pra/pra_13/D64600", func_80240EEC_D654CC);
 
-INCLUDE_ASM(s32, "world/area_pra/pra_13/D64600", func_80240F20_D65500);
+#include "world/common/GetNpcCollisionHeight.inc.c"
 
-INCLUDE_ASM(s32, "world/area_pra/pra_13/D64600", func_80240F7C_D6555C);
+#include "world/common/SomeXYZFuncTodoRename.inc.c"
 
 INCLUDE_ASM(s32, "world/area_pra/pra_13/D64600", func_8024114C_D6572C);
 

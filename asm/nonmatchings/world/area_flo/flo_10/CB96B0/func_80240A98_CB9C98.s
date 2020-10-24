@@ -466,7 +466,7 @@ glabel func_80240A98_CB9C98
 /* CBA388 80241188 AC730044 */  sw        $s3, 0x44($v1)
 /* CBA38C 8024118C AE420000 */  sw        $v0, ($s2)
 /* CBA390 80241190 AC710048 */  sw        $s1, 0x48($v1)
-/* CBA394 80241194 0C09012C */  jal       func_802404B0
+/* CBA394 80241194 0C09012C */  jal       func_802404B0_CB96B0
 /* CBA398 80241198 AC60004C */   sw       $zero, 0x4c($v1)
 /* CBA39C 8024119C 8E420000 */  lw        $v0, ($s2)
 /* CBA3A0 802411A0 0040182D */  daddu     $v1, $v0, $zero

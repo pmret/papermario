@@ -1,4 +1,4 @@
-#include "common.h"
+#include "pra_34.h"
 
 INCLUDE_ASM(s32, "world/area_pra/pra_34/D8B3D0", func_80240020_D8B3D0);
 
@@ -28,4 +28,4 @@ INCLUDE_ASM(s32, "world/area_pra/pra_34/D8B3D0", func_80240EEC_D8C29C);
 
 INCLUDE_ASM(s32, "world/area_pra/pra_34/D8B3D0", func_80240F20_D8C2D0);
 
-INCLUDE_ASM(s32, "world/area_pra/pra_34/D8B3D0", func_80240F54);
+INCLUDE_ASM(s32, "world/area_pra/pra_34/D8B3D0", func_80240F54_D8C304);

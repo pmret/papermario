@@ -55,7 +55,7 @@ glabel func_80240710_90FDC0
 /* 90FE88 802407D8 0809020C */  j         .L80240830
 /* 90FE8C 802407DC AE030028 */   sw       $v1, 0x28($s0)
 .L802407E0:
-/* 90FE90 802407E0 0C090148 */  jal       func_80240520
+/* 90FE90 802407E0 0C090148 */  jal       func_80240520_90FBD0
 /* 90FE94 802407E4 0240202D */   daddu    $a0, $s2, $zero
 /* 90FE98 802407E8 0040202D */  daddu     $a0, $v0, $zero
 /* 90FE9C 802407EC 2402FFFF */  addiu     $v0, $zero, -1

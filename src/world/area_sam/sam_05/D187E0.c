@@ -1,4 +1,4 @@
-#include "common.h"
+#include "sam_05.h"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_05/D187E0", func_80240000_D187E0);
 
@@ -20,7 +20,7 @@ INCLUDE_ASM(s32, "world/area_sam/sam_05/D187E0", func_8024093C_D1911C);
 
 INCLUDE_ASM(s32, "world/area_sam/sam_05/D187E0", func_80240A38_D19218);
 
-INCLUDE_ASM(s32, "world/area_sam/sam_05/D187E0", func_80241478);
+INCLUDE_ASM(s32, "world/area_sam/sam_05/D187E0", func_80241478_D19C58);
 
 INCLUDE_ASM(s32, "world/area_sam/sam_05/D187E0", func_80241508_D19CE8);
 
@@ -30,6 +30,6 @@ INCLUDE_ASM(s32, "world/area_sam/sam_05/D187E0", func_80241668_D19E48);
 
 INCLUDE_ASM(s32, "world/area_sam/sam_05/D187E0", func_80241754_D19F34);
 
-INCLUDE_ASM(s32, "world/area_sam/sam_05/D187E0", func_802419A4);
+INCLUDE_ASM(s32, "world/area_sam/sam_05/D187E0", func_802419A4_D1A184);
 
 INCLUDE_ASM(s32, "world/area_sam/sam_05/D187E0", func_80241D20_D1A500);

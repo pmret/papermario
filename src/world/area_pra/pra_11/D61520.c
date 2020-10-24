@@ -1,4 +1,4 @@
-#include "common.h"
+#include "pra_11.h"
 
 INCLUDE_ASM(s32, "world/area_pra/pra_11/D61520", func_80240020_D61520);
 
@@ -28,7 +28,7 @@ INCLUDE_ASM(s32, "world/area_pra/pra_11/D61520", func_80240EEC_D623EC);
 
 INCLUDE_ASM(s32, "world/area_pra/pra_11/D61520", func_80240F20_D62420);
 
-INCLUDE_ASM(s32, "world/area_pra/pra_11/D61520", func_80240FD4_D624D4);
+#include "world/common/GetItemName.inc.c"
 
 INCLUDE_ASM(s32, "world/area_pra/pra_11/D61520", func_80241038_D62538);
 

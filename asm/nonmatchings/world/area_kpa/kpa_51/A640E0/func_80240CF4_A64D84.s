@@ -58,7 +58,7 @@ glabel func_80240CF4_A64D84
 .L80240DC8:
 /* A64E58 80240DC8 8E450024 */  lw        $a1, 0x24($s2)
 /* A64E5C 80240DCC 8E460028 */  lw        $a2, 0x28($s2)
-/* A64E60 80240DD0 0C090014 */  jal       func_80240050
+/* A64E60 80240DD0 0C090014 */  jal       func_80240050_A640E0
 /* A64E64 80240DD4 0260382D */   daddu    $a3, $s3, $zero
 /* A64E68 80240DD8 24030001 */  addiu     $v1, $zero, 1
 /* A64E6C 80240DDC 1443002C */  bne       $v0, $v1, .L80240E90

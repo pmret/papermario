@@ -1,8 +1,8 @@
-#include "common.h"
+#include "kkj_17.h"
 
 INCLUDE_ASM(s32, "world/area_kkj/kkj_17/AF1C60", func_80240000_AF1C60);
 
-INCLUDE_ASM(s32, "world/area_kkj/kkj_17/AF1C60", func_802400B4_AF1D14);
+#include "world/common/GetItemName.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kkj/kkj_17/AF1C60", func_80240118_AF1D78);
 

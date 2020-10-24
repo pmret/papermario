@@ -1,7 +1,7 @@
-#include "common.h"
+#include "trd_04.h"
 
 INCLUDE_ASM(s32, "world/area_trd/trd_04/9A8700", func_80240310_9A8700);
 
 INCLUDE_ASM(s32, "world/area_trd/trd_04/9A8700", func_80240344_9A8734);
 
-INCLUDE_ASM(s32, "world/area_trd/trd_04/9A8700", func_80240408);
+INCLUDE_ASM(s32, "world/area_trd/trd_04/9A8700", func_80240408_9A87F8);

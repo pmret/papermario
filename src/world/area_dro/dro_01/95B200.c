@@ -1,4 +1,4 @@
-#include "common.h"
+#include "dro_01.h"
 
 INCLUDE_ASM(s32, "world/area_dro/dro_01/95B200", func_80240000_95B200);
 

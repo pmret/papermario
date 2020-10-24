@@ -171,7 +171,7 @@ typedef struct PlayerData {
     /* 0x2C2 */ s16 quizzesCorrect;
     /* 0x2C4 */ s32 unk_2C4[12];
     /* 0x2F4 */ s32 unk_2F4[12];
-    /* 0x324 */ char unk_324;
+    /* 0x324 */ s32 tradeEventStartTime;
     /* 0x328 */ s32 unk_328;
     /* 0x32C */ s16 starPiecesCollected;
     /* 0x32E */ s16 jumpGamePlays;
@@ -237,8 +237,18 @@ typedef struct ScriptInstance {
     /* 0x13C */ s32* array;
     /* 0x140 */ s32* flagArray;
     /* 0x144 */ ScriptID id;
-    /* 0x148 */ struct Enemy* ownerActorID; /* controller*, battle ID, trigger* */
-    /* 0x14C */ u32 ownerID; /* can be an npcID, a triggerID, a trigger ptr */
+    /* 0x148 */ union {
+        s32 enemyID;
+        s32 actorID;
+        struct Enemy* enemy; ///< For overworld scripts owned by an Npc
+        struct Actor* actor; ///< For battle scripts
+    } owner1;                ///< Initially -1
+    /* 0x14C */ union {
+        NpcId npcID;
+        s32 triggerID;
+        struct Npc* npc;            ///< For overworld scripts owned by an Npc
+        struct Trigger* trigger;
+    } owner2;                       ///< Initially -1
     /* 0x150 */ f32 timeScale;
     /* 0x154 */ f32 frameCounter;
     /* 0x158 */ s32 unk_158;
@@ -1069,7 +1079,7 @@ typedef struct TriggerDefinition {
     /* 0x10 */ char unk_10[4];
     /* 0x14 */ s32 unk_14;
     /* 0x18 */ s32 inputArg3;
-    /* 0x1C */ char unk_1C[4];
+    /* 0x1C */ s32 unk_1C;
 } TriggerDefinition; // size = 0x20
 
 typedef struct CollisionStatus {

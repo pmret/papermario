@@ -402,21 +402,21 @@ segments:
     start: 0x324a10
     vram: 0x802BD100
     files:
-      - [0x324a10, "c"]
+      - [0x324a10, "c", "world_goompa"]
       - [0x324e80, "bin"]
   - name: code
     type: code
     start: 0x324f10
     vram: 0x802BD100
     files:
-      - [0x324f10, "c"]
+      - [0x324f10, "c", "world_goombaria"]
       - [0x325000, "bin"]
   - name: code
     type: code
     start: 0x325070
     vram: 0x802BD100
     files:
-      - [0x325070, "c"]
+      - [0x325070, "c", "world_twink"]
       - [0x325160, "bin"]
   - name: code
     type: code
@@ -839,6 +839,61 @@ segments:
   - [0x3A4320, "bin"]
   - name: code
     type: code
+    start: 0x3A70F0
+    vram: 0xE00A8000
+    files:
+      - [0x3A70F0, "c"]
+      - [0x3A7710, "bin"]
+  - [0x3A77A0, "bin"] # split further
+  - name: code
+    type: code
+    start: 0x3AA920
+    vram: 0xE00AA000
+    files:
+    - [0x3AA920, "c"]
+    - [0x3AAFE0, "bin"]
+  - [0x3AB030, "bin"] # todo split this further
+  - name: code
+    type: code
+    start: 0x3AEE20
+    vram: 0xE00AC000
+    files:
+    - [0x3AEE20, "c"]
+    - [0x3AF5D0, "bin"]
+  - [0x3AF700, "bin"] # todo split this further
+  - name: code
+    type: code
+    start: 0x3B2350
+    vram: 0xE00AE000
+    files:
+    - [0x3B2350, "c"]
+  - [0x3B2D90, "bin"] # todo split this further
+  - name: code
+    type: code
+    start: 0x3B3EB0
+    vram: 0xE00B0000
+    files:
+    - [0x3B3EB0, "c"]
+    - [0x3B4690, "bin"]
+  - [0x3B46A0, "bin"] # todo split this further
+  - name: code
+    type: code
+    start: 0x3B7B80
+    vram: 0xE00B8000
+    files:
+    - [0x3B7B80, "c"]
+    - [0x3B8470, "bin"]
+  - [0x3B8860, "bin"] # todo split this further
+  - name: code
+    type: code
+    start: 0x3BA030
+    vram: 0xE00BC000
+    files:
+    - [0x3BA030, "c"]
+    - [0x3BAC60, "bin"]
+  - [0x3BAEA0, "bin"] # todo split this further ADD STUFF AFTER HERE
+  - name: code
+    type: code
     start: 0x415D90
     vram: 0x802A1000
     files:
@@ -855,6 +910,7 @@ segments:
     - [0x7e4d00, "bin"]
   - name: world/area_mac/machi/
     type: code
+    overlay: True
     start: 0x7E73A0
     vram: 0x80240000
     files:
@@ -869,6 +925,7 @@ segments:
       - [0x7EAD10, "bin"] # rodata
   - name: world/area_mac/mac_00/
     type: code
+    overlay: True
     start: 0x7EAD10
     vram: 0x80240000
     files:
@@ -892,6 +949,7 @@ segments:
       - [0x800880, "bin"] # rodata
   - name: world/area_mac/mac_01/
     type: code
+    overlay: True
     start: 0x800880
     vram: 0x80240000
     files:
@@ -913,6 +971,7 @@ segments:
       - [0x8232C0, "bin"] # rodata
   - name: world/area_mac/mac_02/
     type: code
+    overlay: True
     start: 0x8232C0
     vram: 0x80240000
     files:
@@ -930,6 +989,7 @@ segments:
       - [0x831490, "bin"] # rodata
   - name: world/area_mac/mac_03/
     type: code
+    overlay: True
     start: 0x831800
     vram: 0x80240000
     files:
@@ -947,6 +1007,7 @@ segments:
       - [0x842BB0, "bin"] # rodata
   - name: world/area_mac/mac_04/
     type: code
+    overlay: True
     start: 0x842BD0
     vram: 0x80240000
     files:
@@ -971,6 +1032,7 @@ segments:
       - [0x852170, "bin"] # rodata
   - name: world/area_mac/mac_05/
     type: code
+    overlay: True
     start: 0x852170
     vram: 0x80240000
     files:
@@ -989,6 +1051,7 @@ segments:
       - [0x864B20, "bin"] # rodata
   - name: world/area_mac/mac_06/
     type: code
+    overlay: True
     start: 0x864B40
     vram: 0x80240000
     files:
@@ -1002,6 +1065,7 @@ segments:
       - [0x869490, "bin"] # rodata
   - name: world/area_tik/tik_01/
     type: code
+    overlay: True
     start: 0x8694B0
     vram: 0x80240000
     files:
@@ -1016,6 +1080,7 @@ segments:
       - [0x86C740, "bin"] # rodata
   - name: world/area_tik/tik_02/
     type: code
+    overlay: True
     start: 0x86C740
     vram: 0x80240000
     files:
@@ -1030,6 +1095,7 @@ segments:
       - [0x86EB00, "bin"] # rodata
   - name: world/area_tik/tik_03/
     type: code
+    overlay: True
     start: 0x86EB00
     vram: 0x80240000
     files:
@@ -1045,6 +1111,7 @@ segments:
       - [0x871A30, "bin"] # rodata
   - name: world/area_tik/tik_04/
     type: code
+    overlay: True
     start: 0x871A30
     vram: 0x80240000
     files:
@@ -1058,6 +1125,7 @@ segments:
       - [0x874DA0, "bin"] # rodata
   - name: world/area_tik/tik_05/
     type: code
+    overlay: True
     start: 0x874DC0
     vram: 0x80240000
     files:
@@ -1072,6 +1140,7 @@ segments:
       - [0x876EE0, "bin"] # rodata
   - name: world/area_tik/tik_06/
     type: code
+    overlay: True
     start: 0x876EE0
     vram: 0x80240000
     files:
@@ -1085,6 +1154,7 @@ segments:
       - [0x879BE0, "bin"] # rodata
   - name: world/area_tik/tik_07/
     type: code
+    overlay: True
     start: 0x879BE0
     vram: 0x80240000
     files:
@@ -1099,6 +1169,7 @@ segments:
       - [0x87EDF0, "bin"] # rodata
   - name: world/area_tik/tik_08/
     type: code
+    overlay: True
     start: 0x87EDF0
     vram: 0x80240000
     files:
@@ -1112,6 +1183,7 @@ segments:
       - [0x8821A0, "bin"] # rodata
   - name: world/area_tik/tik_09/
     type: code
+    overlay: True
     start: 0x8821C0
     vram: 0x80240000
     files:
@@ -1127,6 +1199,7 @@ segments:
       - [0x8863C0, "bin"] # rodata
   - name: world/area_tik/tik_10/
     type: code
+    overlay: True
     start: 0x8863C0
     vram: 0x80240000
     files:
@@ -1140,6 +1213,7 @@ segments:
       - [0x888BD0, "bin"] # rodata
   - name: world/area_tik/tik_12/
     type: code
+    overlay: True
     start: 0x888BD0
     vram: 0x80240000
     files:
@@ -1155,6 +1229,7 @@ segments:
       - [0x88D600, "bin"] # rodata
   - name: world/area_tik/tik_14/
     type: code
+    overlay: True
     start: 0x88D600
     vram: 0x80240000
     files:
@@ -1167,6 +1242,7 @@ segments:
       - [0x88FB90, "bin"] # rodata
   - name: world/area_tik/tik_15/
     type: code
+    overlay: True
     start: 0x88FBA0
     vram: 0x80240000
     files:
@@ -1179,6 +1255,7 @@ segments:
       - [0x892A10, "bin"] # rodata
   - name: world/area_tik/tik_17/
     type: code
+    overlay: True
     start: 0x892A20
     vram: 0x80240000
     files:
@@ -1192,6 +1269,7 @@ segments:
       - [0x8956E0, "bin"] # rodata
   - name: world/area_tik/tik_18/
     type: code
+    overlay: True
     start: 0x8956E0
     vram: 0x80240000
     files:
@@ -1204,6 +1282,7 @@ segments:
       - [0x8975D0, "bin"] # rodata
   - name: world/area_tik/tik_19/
     type: code
+    overlay: True
     start: 0x8975E0
     vram: 0x80240000
     files:
@@ -1216,6 +1295,7 @@ segments:
       - [0x89A350, "bin"] # rodata
   - name: world/area_tik/tik_20/
     type: code
+    overlay: True
     start: 0x89A350
     vram: 0x80240000
     files:
@@ -1229,6 +1309,7 @@ segments:
       - [0x89D7A0, "bin"] # rodata
   - name: world/area_tik/tik_21/
     type: code
+    overlay: True
     start: 0x89D7A0
     vram: 0x80240000
     files:
@@ -1240,6 +1321,7 @@ segments:
       - [0x89FEC0, "bin"] # rodata
   - name: world/area_tik/tik_22/
     type: code
+    overlay: True
     start: 0x89FEC0
     vram: 0x80240000
     files:
@@ -1250,6 +1332,7 @@ segments:
       - [0x8A23C0, "bin"] # rodata
   - name: world/area_tik/tik_23/
     type: code
+    overlay: True
     start: 0x8A23D0
     vram: 0x80240000
     files:
@@ -1262,6 +1345,7 @@ segments:
       - [0x8A5A80, "bin"] # rodata
   - name: world/area_tik/tik_24/
     type: code
+    overlay: True
     start: 0x8A5A80
     vram: 0x80240000
     files:
@@ -1277,6 +1361,7 @@ segments:
       - [0x8A7F80, "bin"] # rodata
   - name: world/area_tik/tik_25/
     type: code
+    overlay: True
     start: 0x8A7F80
     vram: 0x80240000
     files:
@@ -1289,6 +1374,7 @@ segments:
       - [0x8A9A10, "bin"] # rodata
   - name: world/area_kgr/kgr_01/
     type: code
+    overlay: True
     start: 0x8A9A10
     vram: 0x80240000
     files:
@@ -1300,6 +1386,7 @@ segments:
       - [0x8AA430, "bin"] # rodata
   - name: world/area_kgr/kgr_02/
     type: code
+    overlay: True
     start: 0x8AA450
     vram: 0x80240000
     files:
@@ -1312,6 +1399,7 @@ segments:
       - [0x8ABF80, "bin"] # rodata
   - name: world/area_kmr/kmr_00/
     type: code
+    overlay: True
     start: 0x8ABF90
     vram: 0x80240000
     files:
@@ -1324,6 +1412,7 @@ segments:
       - [0x8B0060, "bin"] # rodata
   - name: world/area_kmr/kmr_02/
     type: code
+    overlay: True
     start: 0x8B0070
     vram: 0x80240000
     files:
@@ -1345,6 +1434,7 @@ segments:
       - [0x8C7F90, "bin"] # rodata
   - name: world/area_kmr/kmr_03/
     type: code
+    overlay: True
     start: 0x8C7F90
     vram: 0x80240000
     files:
@@ -1360,6 +1450,7 @@ segments:
       - [0x8CA8F0, "bin"] # rodata
   - name: world/area_kmr/kmr_04/
     type: code
+    overlay: True
     start: 0x8CA900
     vram: 0x80240000
     files:
@@ -1374,6 +1465,7 @@ segments:
       - [0x8CE070, "bin"] # rodata
   - name: world/area_kmr/kmr_05/
     type: code
+    overlay: True
     start: 0x8CE070
     vram: 0x80240000
     files:
@@ -1387,6 +1479,7 @@ segments:
       - [0x8D1510, "bin"] # rodata
   - name: world/area_kmr/kmr_06/
     type: code
+    overlay: True
     start: 0x8D1510
     vram: 0x80240000
     files:
@@ -1400,6 +1493,7 @@ segments:
       - [0x8D3DC0, "bin"] # rodata
   - name: world/area_kmr/kmr_07/
     type: code
+    overlay: True
     start: 0x8D3DC0
     vram: 0x80240000
     files:
@@ -1410,6 +1504,7 @@ segments:
       - [0x8D5E00, "bin"] # rodata
   - name: world/area_kmr/kmr_09/
     type: code
+    overlay: True
     start: 0x8D5E00
     vram: 0x80240000
     files:
@@ -1421,6 +1516,7 @@ segments:
       - [0x8D84D0, "bin"] # rodata
   - name: world/area_kmr/kmr_10/
     type: code
+    overlay: True
     start: 0x8D84D0
     vram: 0x80240000
     files:
@@ -1433,6 +1529,7 @@ segments:
       - [0x8DA0F0, "bin"] # rodata
   - name: world/area_kmr/kmr_11/
     type: code
+    overlay: True
     start: 0x8DA100
     vram: 0x80240000
     files:
@@ -1452,6 +1549,7 @@ segments:
       - [0x8EB360, "bin"] # rodata
   - name: world/area_kmr/kmr_12/
     type: code
+    overlay: True
     start: 0x8EB360
     vram: 0x80240000
     files:
@@ -1461,6 +1559,7 @@ segments:
       - [0x8EBE10, ".rodata", "world/area_kmr/kmr_12/events"]
   - name: world/area_kmr/kmr_20/
     type: code
+    overlay: True
     start: 0x8EBE20
     vram: 0x80240000
     files:
@@ -1490,6 +1589,7 @@ segments:
       - [0x8FEE80, "bin"] # rodata
   - name: world/area_kmr/kmr_21/
     type: code
+    overlay: True
     start: 0x8FEE80
     vram: 0x80240000
     files:
@@ -1500,6 +1600,7 @@ segments:
       - [0x8FF670, "bin"] # rodata
   - name: world/area_kmr/kmr_22/
     type: code
+    overlay: True
     start: 0x8FF670
     vram: 0x80240000
     files:
@@ -1513,6 +1614,7 @@ segments:
       - [0x907A30, "bin"] # rodata
   - name: world/area_kmr/kmr_23/
     type: code
+    overlay: True
     start: 0x907A30
     vram: 0x80240000
     files:
@@ -1523,6 +1625,7 @@ segments:
       - [0x90B240, "bin"] # rodata
   - name: world/area_kmr/kmr_24/
     type: code
+    overlay: True
     start: 0x90B240
     vram: 0x80240000
     files:
@@ -1533,6 +1636,7 @@ segments:
       - [0x90B6D0, "bin"] # rodata
   - name: world/area_kmr/kmr_30/
     type: code
+    overlay: True
     start: 0x90B6D0
     vram: 0x80240000
     files:
@@ -1543,6 +1647,7 @@ segments:
       - [0x90BFF0, "bin"]
   - name: world/area_iwa/iwa_00/
     type: code
+    overlay: True
     start: 0x90CC40
     vram: 0x80240000
     files:
@@ -1552,6 +1657,7 @@ segments:
       - [0x90F6A0, "bin"] # rodata
   - name: world/area_iwa/iwa_01/
     type: code
+    overlay: True
     start: 0x90F6B0
     vram: 0x80240000
     files:
@@ -1568,6 +1674,7 @@ segments:
       - [0x915D70, "bin"] # rodata
   - name: world/area_iwa/iwa_02/
     type: code
+    overlay: True
     start: 0x915D70
     vram: 0x80240000
     files:
@@ -1579,6 +1686,7 @@ segments:
       - [0x918BB0, "bin"] # rodata
   - name: world/area_iwa/iwa_03/
     type: code
+    overlay: True
     start: 0x918BB0
     vram: 0x80240000
     files:
@@ -1592,6 +1700,7 @@ segments:
       - [0x91B8E0, "bin"] # rodata
   - name: world/area_iwa/iwa_04/
     type: code
+    overlay: True
     start: 0x91B8E0
     vram: 0x80240000
     files:
@@ -1603,6 +1712,7 @@ segments:
       - [0x91E570, "bin"] # rodata
   - name: world/area_iwa/iwa_10/
     type: code
+    overlay: True
     start: 0x91E570
     vram: 0x80240000
     files:
@@ -1621,6 +1731,7 @@ segments:
       - [0x9269D0, "bin"] # rodata
   - name: world/area_iwa/iwa_11/
     type: code
+    overlay: True
     start: 0x9269F0
     vram: 0x80240000
     files:
@@ -1634,6 +1745,7 @@ segments:
       - [0x929270, "bin"] # rodata
   - name: world/area_sbk/sbk_00/
     type: code
+    overlay: True
     start: 0x929270
     vram: 0x80240000
     files:
@@ -1644,6 +1756,7 @@ segments:
       - [0x929A80, "bin"] # rodata
   - name: world/area_sbk/sbk_01/
     type: code
+    overlay: True
     start: 0x929A90
     vram: 0x80240000
     files:
@@ -1655,6 +1768,7 @@ segments:
       - [0x92A2B0, "bin"] # rodata
   - name: world/area_sbk/sbk_02/
     type: code
+    overlay: True
     start: 0x92A2B0
     vram: 0x80240000
     files:
@@ -1669,6 +1783,7 @@ segments:
       - [0x92F8B0, "bin"] # rodata
   - name: world/area_sbk/sbk_03/
     type: code
+    overlay: True
     start: 0x92F8B0
     vram: 0x80240000
     files:
@@ -1680,6 +1795,7 @@ segments:
       - [0x9304D0, "bin"] # rodata
   - name: world/area_sbk/sbk_04/
     type: code
+    overlay: True
     start: 0x9304D0
     vram: 0x80240000
     files:
@@ -1691,6 +1807,7 @@ segments:
       - [0x930CF0, "bin"] # rodata
   - name: world/area_sbk/sbk_05/
     type: code
+    overlay: True
     start: 0x930CF0
     vram: 0x80240000
     files:
@@ -1703,6 +1820,7 @@ segments:
       - [0x9325C0, "bin"] # rodata
   - name: world/area_sbk/sbk_06/
     type: code
+    overlay: True
     start: 0x9325C0
     vram: 0x80240000
     files:
@@ -1714,6 +1832,7 @@ segments:
       - [0x933C70, "bin"] # rodata
   - name: world/area_sbk/sbk_10/
     type: code
+    overlay: True
     start: 0x933C80
     vram: 0x80240000
     files:
@@ -1724,6 +1843,7 @@ segments:
       - [0x934040, "bin"] # rodata
   - name: world/area_sbk/sbk_11/
     type: code
+    overlay: True
     start: 0x934040
     vram: 0x80240000
     files:
@@ -1734,6 +1854,7 @@ segments:
       - [0x934D20, "bin"] # rodata
   - name: world/area_sbk/sbk_12/
     type: code
+    overlay: True
     start: 0x934D40
     vram: 0x80240000
     files:
@@ -1744,6 +1865,7 @@ segments:
       - [0x9357C0, "bin"] # rodata
   - name: world/area_sbk/sbk_13/
     type: code
+    overlay: True
     start: 0x9357E0
     vram: 0x80240000
     files:
@@ -1754,6 +1876,7 @@ segments:
       - [0x9366C0, "bin"] # rodata
   - name: world/area_sbk/sbk_14/
     type: code
+    overlay: True
     start: 0x9366E0
     vram: 0x80240000
     files:
@@ -1764,6 +1887,7 @@ segments:
       - [0x936CD0, "bin"] # rodata
   - name: world/area_sbk/sbk_15/
     type: code
+    overlay: True
     start: 0x936CD0
     vram: 0x80240000
     files:
@@ -1774,6 +1898,7 @@ segments:
       - [0x937550, "bin"] # rodata
   - name: world/area_sbk/sbk_16/
     type: code
+    overlay: True
     start: 0x937570
     vram: 0x80240000
     files:
@@ -1785,6 +1910,7 @@ segments:
       - [0x938590, "bin"] # rodata
   - name: world/area_sbk/sbk_20/
     type: code
+    overlay: True
     start: 0x938590
     vram: 0x80240000
     files:
@@ -1797,6 +1923,7 @@ segments:
       - [0x939560, "bin"] # rodata
   - name: world/area_sbk/sbk_21/
     type: code
+    overlay: True
     start: 0x939560
     vram: 0x80240000
     files:
@@ -1805,6 +1932,7 @@ segments:
       - [0x939910, "bin"] # rodata
   - name: world/area_sbk/sbk_22/
     type: code
+    overlay: True
     start: 0x939930
     vram: 0x80240000
     files:
@@ -1815,6 +1943,7 @@ segments:
       - [0x93A740, "bin"] # rodata
   - name: world/area_sbk/sbk_23/
     type: code
+    overlay: True
     start: 0x93A760
     vram: 0x80240000
     files:
@@ -1825,6 +1954,7 @@ segments:
       - [0x93AC30, "bin"] # rodata
   - name: world/area_sbk/sbk_24/
     type: code
+    overlay: True
     start: 0x93AC30
     vram: 0x80240000
     files:
@@ -1836,6 +1966,7 @@ segments:
       - [0x93C260, "bin"] # rodata
   - name: world/area_sbk/sbk_25/
     type: code
+    overlay: True
     start: 0x93C280
     vram: 0x80240000
     files:
@@ -1848,6 +1979,7 @@ segments:
       - [0x93DCB0, "bin"] # rodata
   - name: world/area_sbk/sbk_26/
     type: code
+    overlay: True
     start: 0x93DCD0
     vram: 0x80240000
     files:
@@ -1861,6 +1993,7 @@ segments:
       - [0x93F5B0, "bin"] # rodata
   - name: world/area_sbk/sbk_30/
     type: code
+    overlay: True
     start: 0x93F5B0
     vram: 0x80240000
     files:
@@ -1871,6 +2004,7 @@ segments:
       - [0x944000, "bin"] # rodata
   - name: world/area_sbk/sbk_31/
     type: code
+    overlay: True
     start: 0x944000
     vram: 0x80240000
     files:
@@ -1881,6 +2015,7 @@ segments:
       - [0x944A40, "bin"] # rodata
   - name: world/area_sbk/sbk_32/
     type: code
+    overlay: True
     start: 0x944A60
     vram: 0x80240000
     files:
@@ -1890,6 +2025,7 @@ segments:
       - [0x9459B0, "bin"] # rodata
   - name: world/area_sbk/sbk_33/
     type: code
+    overlay: True
     start: 0x9459D0
     vram: 0x80240000
     files:
@@ -1900,6 +2036,7 @@ segments:
       - [0x945ED0, "bin"] # rodata
   - name: world/area_sbk/sbk_34/
     type: code
+    overlay: True
     start: 0x945ED0
     vram: 0x80240000
     files:
@@ -1911,6 +2048,7 @@ segments:
       - [0x948690, "bin"] # rodata
   - name: world/area_sbk/sbk_35/
     type: code
+    overlay: True
     start: 0x9486B0
     vram: 0x80240000
     files:
@@ -1921,6 +2059,7 @@ segments:
       - [0x949E40, "bin"] # rodata
   - name: world/area_sbk/sbk_36/
     type: code
+    overlay: True
     start: 0x949E60
     vram: 0x80240000
     files:
@@ -1931,6 +2070,7 @@ segments:
       - [0x94B380, "bin"] # rodata
   - name: world/area_sbk/sbk_40/
     type: code
+    overlay: True
     start: 0x94B3A0
     vram: 0x80240000
     files:
@@ -1943,6 +2083,7 @@ segments:
       - [0x94C040, "bin"] # rodata
   - name: world/area_sbk/sbk_41/
     type: code
+    overlay: True
     start: 0x94C040
     vram: 0x80240000
     files:
@@ -1953,6 +2094,7 @@ segments:
       - [0x94C510, "bin"] # rodata
   - name: world/area_sbk/sbk_42/
     type: code
+    overlay: True
     start: 0x94C510
     vram: 0x80240000
     files:
@@ -1963,6 +2105,7 @@ segments:
       - [0x94D150, "bin"] # rodata
   - name: world/area_sbk/sbk_43/
     type: code
+    overlay: True
     start: 0x94D170
     vram: 0x80240000
     files:
@@ -1972,6 +2115,7 @@ segments:
       - [0x94D580, "bin"] # rodata
   - name: world/area_sbk/sbk_44/
     type: code
+    overlay: True
     start: 0x94D5A0
     vram: 0x80240000
     files:
@@ -1982,6 +2126,7 @@ segments:
       - [0x94E480, "bin"] # rodata
   - name: world/area_sbk/sbk_45/
     type: code
+    overlay: True
     start: 0x94E4A0
     vram: 0x80240000
     files:
@@ -1991,6 +2136,7 @@ segments:
       - [0x94E980, "bin"] # rodata
   - name: world/area_sbk/sbk_46/
     type: code
+    overlay: True
     start: 0x94E9A0
     vram: 0x80240000
     files:
@@ -2005,6 +2151,7 @@ segments:
       - [0x950610, "bin"] # rodata
   - name: world/area_sbk/sbk_50/
     type: code
+    overlay: True
     start: 0x950610
     vram: 0x80240000
     files:
@@ -2014,6 +2161,7 @@ segments:
       - [0x950970, "bin"] # rodata
   - name: world/area_sbk/sbk_51/
     type: code
+    overlay: True
     start: 0x950970
     vram: 0x80240000
     files:
@@ -2024,6 +2172,7 @@ segments:
       - [0x951650, "bin"] # rodata
   - name: world/area_sbk/sbk_52/
     type: code
+    overlay: True
     start: 0x951670
     vram: 0x80240000
     files:
@@ -2033,6 +2182,7 @@ segments:
       - [0x951AC0, "bin"] # rodata
   - name: world/area_sbk/sbk_53/
     type: code
+    overlay: True
     start: 0x951AE0
     vram: 0x80240000
     files:
@@ -2043,6 +2193,7 @@ segments:
       - [0x952560, "bin"] # rodata
   - name: world/area_sbk/sbk_54/
     type: code
+    overlay: True
     start: 0x952580
     vram: 0x80240000
     files:
@@ -2053,6 +2204,7 @@ segments:
       - [0x952A50, "bin"] # rodata
   - name: world/area_sbk/sbk_55/
     type: code
+    overlay: True
     start: 0x952A50
     vram: 0x80240000
     files:
@@ -2065,6 +2217,7 @@ segments:
       - [0x953FA0, "bin"] # rodata
   - name: world/area_sbk/sbk_56/
     type: code
+    overlay: True
     start: 0x953FC0
     vram: 0x80240000
     files:
@@ -2076,6 +2229,7 @@ segments:
       - [0x9569F0, "bin"] # rodata
   - name: world/area_sbk/sbk_60/
     type: code
+    overlay: True
     start: 0x9569F0
     vram: 0x80240000
     files:
@@ -2086,6 +2240,7 @@ segments:
       - [0x956F80, "bin"] # rodata
   - name: world/area_sbk/sbk_61/
     type: code
+    overlay: True
     start: 0x956F90
     vram: 0x80240000
     files:
@@ -2096,6 +2251,7 @@ segments:
       - [0x957350, "bin"] # rodata
   - name: world/area_sbk/sbk_62/
     type: code
+    overlay: True
     start: 0x957350
     vram: 0x80240000
     files:
@@ -2107,6 +2263,7 @@ segments:
       - [0x957D70, "bin"] # rodata
   - name: world/area_sbk/sbk_63/
     type: code
+    overlay: True
     start: 0x957D70
     vram: 0x80240000
     files:
@@ -2118,6 +2275,7 @@ segments:
       - [0x958590, "bin"] # rodata
   - name: world/area_sbk/sbk_64/
     type: code
+    overlay: True
     start: 0x958590
     vram: 0x80240000
     files:
@@ -2128,6 +2286,7 @@ segments:
       - [0x958950, "bin"] # rodata
   - name: world/area_sbk/sbk_65/
     type: code
+    overlay: True
     start: 0x958950
     vram: 0x80240000
     files:
@@ -2137,6 +2296,7 @@ segments:
       - [0x958CB0, "bin"] # rodata
   - name: world/area_sbk/sbk_66/
     type: code
+    overlay: True
     start: 0x958CB0
     vram: 0x80240000
     files:
@@ -2149,6 +2309,7 @@ segments:
       - [0x95AEA0, "bin"] # rodata
   - name: world/area_sbk/sbk_99/
     type: code
+    overlay: True
     start: 0x95AEB0
     vram: 0x80240000
     files:
@@ -2157,6 +2318,7 @@ segments:
       - [0x95B1F0, "bin"] # rodata
   - name: world/area_dro/dro_01/
     type: code
+    overlay: True
     start: 0x95B200
     vram: 0x80240000
     files:
@@ -2175,6 +2337,7 @@ segments:
       - [0x9691C0, "bin"] # rodata
   - name: world/area_dro/dro_02/
     type: code
+    overlay: True
     start: 0x9691C0
     vram: 0x80240000
     files:
@@ -2188,6 +2351,7 @@ segments:
       - [0x9780D0, "bin"] # rodata
   - name: world/area_isk/isk_01/
     type: code
+    overlay: True
     start: 0x978140
     vram: 0x80240000
     files:
@@ -2197,6 +2361,7 @@ segments:
       - [0x978700, "bin"] # rodata
   - name: world/area_isk/isk_02/
     type: code
+    overlay: True
     start: 0x978710
     vram: 0x80240000
     files:
@@ -2211,6 +2376,7 @@ segments:
       - [0x979E40, "bin"] # rodata
   - name: world/area_isk/isk_03/
     type: code
+    overlay: True
     start: 0x979E50
     vram: 0x80240000
     files:
@@ -2220,6 +2386,7 @@ segments:
       - [0x97B620, "bin"] # rodata
   - name: world/area_isk/isk_04/
     type: code
+    overlay: True
     start: 0x97B630
     vram: 0x80240000
     files:
@@ -2236,6 +2403,7 @@ segments:
       - [0x97DAD0, "bin"] # rodata
   - name: world/area_isk/isk_05/
     type: code
+    overlay: True
     start: 0x97DAD0
     vram: 0x80240000
     files:
@@ -2250,6 +2418,7 @@ segments:
       - [0x980A20, "bin"] # rodata
   - name: world/area_isk/isk_06/
     type: code
+    overlay: True
     start: 0x980A20
     vram: 0x80240000
     files:
@@ -2260,6 +2429,7 @@ segments:
       - [0x982440, "bin"] # rodata
   - name: world/area_isk/isk_07/
     type: code
+    overlay: True
     start: 0x982440
     vram: 0x80240000
     files:
@@ -2275,6 +2445,7 @@ segments:
       - [0x984E20, "bin"] # rodata
   - name: world/area_isk/isk_08/
     type: code
+    overlay: True
     start: 0x984E30
     vram: 0x80240000
     files:
@@ -2286,6 +2457,7 @@ segments:
       - [0x9864E0, "bin"] # rodata
   - name: world/area_isk/isk_09/
     type: code
+    overlay: True
     start: 0x9864E0
     vram: 0x80240000
     files:
@@ -2300,6 +2472,7 @@ segments:
       - [0x988B60, "bin"] # rodata
   - name: world/area_isk/isk_10/
     type: code
+    overlay: True
     start: 0x988B60
     vram: 0x80240000
     files:
@@ -2310,6 +2483,7 @@ segments:
       - [0x98AA00, "bin"] # rodata
   - name: world/area_isk/isk_11/
     type: code
+    overlay: True
     start: 0x98AA10
     vram: 0x80240000
     files:
@@ -2325,6 +2499,7 @@ segments:
       - [0x98D640, "bin"] # rodata
   - name: world/area_isk/isk_12/
     type: code
+    overlay: True
     start: 0x98D640
     vram: 0x80240000
     files:
@@ -2336,6 +2511,7 @@ segments:
       - [0x98F7E0, "bin"] # rodata
   - name: world/area_isk/isk_13/
     type: code
+    overlay: True
     start: 0x98F7E0
     vram: 0x80240000
     files:
@@ -2349,6 +2525,7 @@ segments:
       - [0x992730, "bin"] # rodata
   - name: world/area_isk/isk_14/
     type: code
+    overlay: True
     start: 0x992730
     vram: 0x80240000
     files:
@@ -2362,6 +2539,7 @@ segments:
       - [0x9951F0, "bin"] # rodata
   - name: world/area_isk/isk_16/
     type: code
+    overlay: True
     start: 0x9951F0
     vram: 0x80240000
     files:
@@ -2375,6 +2553,7 @@ segments:
       - [0x997F70, "bin"] # rodata
   - name: world/area_isk/isk_18/
     type: code
+    overlay: True
     start: 0x997F70
     vram: 0x80240000
     files:
@@ -2386,6 +2565,7 @@ segments:
       - [0x999740, "bin"] # rodata
   - name: world/area_isk/isk_19/
     type: code
+    overlay: True
     start: 0x999740
     vram: 0x80240000
     files:
@@ -2395,6 +2575,7 @@ segments:
       - [0x999C60, "bin"] # rodata
   - name: world/area_trd/trd_00/
     type: code
+    overlay: True
     start: 0x999C70
     vram: 0x80240000
     files:
@@ -2409,6 +2590,7 @@ segments:
       - [0x99C990, "bin"] # rodata
   - name: world/area_trd/trd_01/
     type: code
+    overlay: True
     start: 0x99C990
     vram: 0x80240000
     files:
@@ -2425,6 +2607,7 @@ segments:
       - [0x9A0FE0, "bin"] # rodata
   - name: world/area_trd/trd_02/
     type: code
+    overlay: True
     start: 0x9A0FE0
     vram: 0x80240000
     files:
@@ -2438,6 +2621,7 @@ segments:
       - [0x9A4320, "bin"] # rodata
   - name: world/area_trd/trd_03/
     type: code
+    overlay: True
     start: 0x9A4650
     vram: 0x80240000
     files:
@@ -2452,6 +2636,7 @@ segments:
       - [0x9A83F0, "bin"] # rodata
   - name: world/area_trd/trd_04/
     type: code
+    overlay: True
     start: 0x9A83F0
     vram: 0x80240000
     files:
@@ -2467,6 +2652,7 @@ segments:
       - [0x9AE700, "bin"] # rodata
   - name: world/area_trd/trd_05/
     type: code
+    overlay: True
     start: 0x9AE700
     vram: 0x80240000
     files:
@@ -2480,6 +2666,7 @@ segments:
       - [0x9B1790, "bin"] # rodata
   - name: world/area_trd/trd_06/
     type: code
+    overlay: True
     start: 0x9B1790
     vram: 0x80240000
     files:
@@ -2494,6 +2681,7 @@ segments:
       - [0x9B6950, "bin"] # rodata
   - name: world/area_trd/trd_07/
     type: code
+    overlay: True
     start: 0x9B6980
     vram: 0x80240000
     files:
@@ -2509,6 +2697,7 @@ segments:
       - [0x9BB2A0, "bin"] # rodata
   - name: world/area_trd/trd_08/
     type: code
+    overlay: True
     start: 0x9BB2A0
     vram: 0x80240000
     files:
@@ -2521,6 +2710,7 @@ segments:
       - [0x9BD660, "bin"] # rodata
   - name: world/area_trd/trd_09/
     type: code
+    overlay: True
     start: 0x9BD660
     vram: 0x80240000
     files:
@@ -2535,6 +2725,7 @@ segments:
       - [0x9C2910, "bin"] # rodata
   - name: world/area_trd/trd_10/
     type: code
+    overlay: True
     start: 0x9C2910
     vram: 0x80240000
     files:
@@ -2547,6 +2738,7 @@ segments:
       - [0x9C53E0, "bin"] # rodata
   - name: world/area_nok/nok_01/
     type: code
+    overlay: True
     start: 0x9C53E0
     vram: 0x80240000
     files:
@@ -2565,6 +2757,7 @@ segments:
       - [0x9D7020, "bin"] # rodata
   - name: world/area_nok/nok_02/
     type: code
+    overlay: True
     start: 0x9D7020
     vram: 0x80240000
     files:
@@ -2588,6 +2781,7 @@ segments:
       - [0x9EB640, "bin"] # rodata
   - name: world/area_nok/nok_03/
     type: code
+    overlay: True
     start: 0x9EB7F0
     vram: 0x80240000
     files:
@@ -2599,6 +2793,7 @@ segments:
       - [0x9EDBF0, "bin"] # rodata
   - name: world/area_nok/nok_04/
     type: code
+    overlay: True
     start: 0x9EDBF0
     vram: 0x80240000
     files:
@@ -2613,6 +2808,7 @@ segments:
       - [0x9F4A30, "bin"] # rodata
   - name: world/area_nok/nok_11/
     type: code
+    overlay: True
     start: 0x9F4A40
     vram: 0x80240000
     files:
@@ -2625,6 +2821,7 @@ segments:
       - [0x9FA7F0, "bin"] # rodata
   - name: world/area_nok/nok_12/
     type: code
+    overlay: True
     start: 0x9FA7F0
     vram: 0x80240000
     files:
@@ -2644,6 +2841,7 @@ segments:
       - [0xA00600, "bin"] # rodata
   - name: world/area_nok/nok_13/
     type: code
+    overlay: True
     start: 0xA00600
     vram: 0x80240000
     files:
@@ -2660,6 +2858,7 @@ segments:
       - [0xA02840, "bin"] # rodata
   - name: world/area_nok/nok_14/
     type: code
+    overlay: True
     start: 0xA02840
     vram: 0x80240000
     files:
@@ -2677,6 +2876,7 @@ segments:
       - [0xA06F00, "bin"] # rodata
   - name: world/area_nok/nok_15/
     type: code
+    overlay: True
     start: 0xA06F00
     vram: 0x80240000
     files:
@@ -2693,6 +2893,7 @@ segments:
       - [0xA0BCF0, "bin"] # rodata
   - name: world/area_hos/hos_00/
     type: code
+    overlay: True
     start: 0xA0BCF0
     vram: 0x80240000
     files:
@@ -2712,6 +2913,7 @@ segments:
       - [0xA10880, "bin"] # rodata
   - name: world/area_hos/hos_01/
     type: code
+    overlay: True
     start: 0xA10880
     vram: 0x80240000
     files:
@@ -2726,6 +2928,7 @@ segments:
       - [0xA161F0, "bin"] # rodata
   - name: world/area_hos/hos_02/
     type: code
+    overlay: True
     start: 0xA16220
     vram: 0x80240000
     files:
@@ -2741,6 +2944,7 @@ segments:
       - [0xA1B100, "bin"] # rodata
   - name: world/area_hos/hos_03/
     type: code
+    overlay: True
     start: 0xA1B100
     vram: 0x80240000
     files:
@@ -2760,6 +2964,7 @@ segments:
       - [0xA26ED0, "bin"] # rodata
   - name: world/area_hos/hos_04/
     type: code
+    overlay: True
     start: 0xA26ED0
     vram: 0x80240000
     files:
@@ -2782,6 +2987,7 @@ segments:
       - [0xA2A240, "bin"] # rodata
   - name: world/area_hos/hos_05/
     type: code
+    overlay: True
     start: 0xA2A240
     vram: 0x80240000
     files:
@@ -2802,6 +3008,7 @@ segments:
       - [0xA394E0, "bin"] # rodata
   - name: world/area_hos/hos_06/
     type: code
+    overlay: True
     start: 0xA394E0
     vram: 0x80240000
     files:
@@ -2818,6 +3025,7 @@ segments:
       - [0xA3F740, "bin"] # rodata
   - name: world/area_hos/hos_10/
     type: code
+    overlay: True
     start: 0xA3F740
     vram: 0x80240000
     files:
@@ -2833,6 +3041,7 @@ segments:
       - [0xA45930, "bin"] # rodata
   - name: world/area_hos/hos_20/
     type: code
+    overlay: True
     start: 0xA45930
     vram: 0x80240000
     files:
@@ -2843,6 +3052,7 @@ segments:
       - [0xA46F40, "bin"] # rodata
   - name: world/area_kpa/kpa_01/
     type: code
+    overlay: True
     start: 0xA46F60
     vram: 0x80240000
     files:
@@ -2856,6 +3066,7 @@ segments:
       - [0xA485C0, "bin"] # rodata
   - name: world/area_kpa/kpa_03/
     type: code
+    overlay: True
     start: 0xA485C0
     vram: 0x80240000
     files:
@@ -2871,6 +3082,7 @@ segments:
       - [0xA4BF60, "bin"] # rodata
   - name: world/area_kpa/kpa_04/
     type: code
+    overlay: True
     start: 0xA4BF60
     vram: 0x80240000
     files:
@@ -2880,6 +3092,7 @@ segments:
       - [0xA4CA10, "bin"] # rodata
   - name: world/area_kpa/kpa_08/
     type: code
+    overlay: True
     start: 0xA4CA20
     vram: 0x80240000
     files:
@@ -2894,6 +3107,7 @@ segments:
       - [0xA4F000, "bin"] # rodata
   - name: world/area_kpa/kpa_09/
     type: code
+    overlay: True
     start: 0xA4F000
     vram: 0x80240000
     files:
@@ -2907,6 +3121,7 @@ segments:
       - [0xA51980, "bin"] # rodata
   - name: world/area_kpa/kpa_10/
     type: code
+    overlay: True
     start: 0xA51980
     vram: 0x80240000
     files:
@@ -2917,6 +3132,7 @@ segments:
       - [0xA528C0, "bin"] # rodata
   - name: world/area_kpa/kpa_11/
     type: code
+    overlay: True
     start: 0xA528C0
     vram: 0x80240000
     files:
@@ -2931,6 +3147,7 @@ segments:
       - [0xA54950, "bin"] # rodata
   - name: world/area_kpa/kpa_12/
     type: code
+    overlay: True
     start: 0xA54950
     vram: 0x80240000
     files:
@@ -2943,6 +3160,7 @@ segments:
       - [0xA55F20, "bin"] # rodata
   - name: world/area_kpa/kpa_13/
     type: code
+    overlay: True
     start: 0xA55F20
     vram: 0x80240000
     files:
@@ -2956,6 +3174,7 @@ segments:
       - [0xA574B0, "bin"] # rodata
   - name: world/area_kpa/kpa_14/
     type: code
+    overlay: True
     start: 0xA574B0
     vram: 0x80240000
     files:
@@ -2970,6 +3189,7 @@ segments:
       - [0xA59390, "bin"] # rodata
   - name: world/area_kpa/kpa_15/
     type: code
+    overlay: True
     start: 0xA59390
     vram: 0x80240000
     files:
@@ -2981,6 +3201,7 @@ segments:
       - [0xA5A030, "bin"] # rodata
   - name: world/area_kpa/kpa_16/
     type: code
+    overlay: True
     start: 0xA5A030
     vram: 0x80240000
     files:
@@ -2992,6 +3213,7 @@ segments:
       - [0xA5CA20, "bin"] # rodata
   - name: world/area_kpa/kpa_17/
     type: code
+    overlay: True
     start: 0xA5CA20
     vram: 0x80240000
     files:
@@ -3002,6 +3224,7 @@ segments:
       - [0xA5E0B0, "bin"] # rodata
   - name: world/area_kpa/kpa_32/
     type: code
+    overlay: True
     start: 0xA5E0C0
     vram: 0x80240000
     files:
@@ -3012,6 +3235,7 @@ segments:
       - [0xA5F060, "bin"] # rodata
   - name: world/area_kpa/kpa_33/
     type: code
+    overlay: True
     start: 0xA5F080
     vram: 0x80240000
     files:
@@ -3022,6 +3246,7 @@ segments:
       - [0xA60020, "bin"] # rodata
   - name: world/area_kpa/kpa_40/
     type: code
+    overlay: True
     start: 0xA60040
     vram: 0x80240000
     files:
@@ -3031,6 +3256,7 @@ segments:
       - [0xA60470, "bin"] # rodata
   - name: world/area_kpa/kpa_41/
     type: code
+    overlay: True
     start: 0xA60470
     vram: 0x80240000
     files:
@@ -3040,6 +3266,7 @@ segments:
       - [0xA609D0, "bin"] # rodata
   - name: world/area_kpa/kpa_50/
     type: code
+    overlay: True
     start: 0xA609D0
     vram: 0x80240000
     files:
@@ -3050,6 +3277,7 @@ segments:
       - [0xA64090, "bin"] # rodata
   - name: world/area_kpa/kpa_51/
     type: code
+    overlay: True
     start: 0xA64090
     vram: 0x80240000
     files:
@@ -3065,6 +3293,7 @@ segments:
       - [0xA67100, "bin"] # rodata
   - name: world/area_kpa/kpa_52/
     type: code
+    overlay: True
     start: 0xA67100
     vram: 0x80240000
     files:
@@ -3079,6 +3308,7 @@ segments:
       - [0xA6ACA0, "bin"] # rodata
   - name: world/area_kpa/kpa_53/
     type: code
+    overlay: True
     start: 0xA6ACA0
     vram: 0x80240000
     files:
@@ -3092,6 +3322,7 @@ segments:
       - [0xA6CB00, "bin"] # rodata
   - name: world/area_kpa/kpa_60/
     type: code
+    overlay: True
     start: 0xA6CB00
     vram: 0x80240000
     files:
@@ -3102,6 +3333,7 @@ segments:
       - [0xA6E3E0, "bin"] # rodata
   - name: world/area_kpa/kpa_61/
     type: code
+    overlay: True
     start: 0xA6E3E0
     vram: 0x80240000
     files:
@@ -3117,6 +3349,7 @@ segments:
       - [0xA72220, "bin"] # rodata
   - name: world/area_kpa/kpa_62/
     type: code
+    overlay: True
     start: 0xA72220
     vram: 0x80240000
     files:
@@ -3127,6 +3360,7 @@ segments:
       - [0xA73590, "bin"] # rodata
   - name: world/area_kpa/kpa_63/
     type: code
+    overlay: True
     start: 0xA735B0
     vram: 0x80240000
     files:
@@ -3138,6 +3372,7 @@ segments:
       - [0xA74860, "bin"] # rodata
   - name: world/area_kpa/kpa_70/
     type: code
+    overlay: True
     start: 0xA74870
     vram: 0x80240000
     files:
@@ -3150,6 +3385,7 @@ segments:
       - [0xA784C0, "bin"] # rodata
   - name: world/area_kpa/kpa_81/
     type: code
+    overlay: True
     start: 0xA784C0
     vram: 0x80240000
     files:
@@ -3162,6 +3398,7 @@ segments:
       - [0xA7A500, "bin"] # rodata
   - name: world/area_kpa/kpa_82/
     type: code
+    overlay: True
     start: 0xA7A500
     vram: 0x80240000
     files:
@@ -3174,6 +3411,7 @@ segments:
       - [0xA83490, "bin"] # rodata
   - name: world/area_kpa/kpa_83/
     type: code
+    overlay: True
     start: 0xA83490
     vram: 0x80240000
     files:
@@ -3186,6 +3424,7 @@ segments:
       - [0xA867B0, "bin"] # rodata
   - name: world/area_kpa/kpa_90/
     type: code
+    overlay: True
     start: 0xA867B0
     vram: 0x80240000
     files:
@@ -3194,6 +3433,7 @@ segments:
       - [0xA86A40, "bin"] # rodata
   - name: world/area_kpa/kpa_91/
     type: code
+    overlay: True
     start: 0xA86A50
     vram: 0x80240000
     files:
@@ -3208,6 +3448,7 @@ segments:
       - [0xA8C7C0, "bin"] # rodata
   - name: world/area_kpa/kpa_94/
     type: code
+    overlay: True
     start: 0xA8C7C0
     vram: 0x80240000
     files:
@@ -3216,6 +3457,7 @@ segments:
       - [0xA8CA70, "bin"] # rodata
   - name: world/area_kpa/kpa_95/
     type: code
+    overlay: True
     start: 0xA8CA80
     vram: 0x80240000
     files:
@@ -3230,6 +3472,7 @@ segments:
       - [0xA927C0, "bin"] # rodata
   - name: world/area_kpa/kpa_96/
     type: code
+    overlay: True
     start: 0xA927C0
     vram: 0x80240000
     files:
@@ -3240,6 +3483,7 @@ segments:
       - [0xA93160, "bin"] # rodata
   - name: world/area_kpa/kpa_100/
     type: code
+    overlay: True
     start: 0xA93160
     vram: 0x80240000
     files:
@@ -3251,6 +3495,7 @@ segments:
       - [0xA93440, "bin"] # rodata
   - name: world/area_kpa/kpa_101/
     type: code
+    overlay: True
     start: 0xA93440
     vram: 0x80240000
     files:
@@ -3262,6 +3507,7 @@ segments:
       - [0xA93740, "bin"] # rodata
   - name: world/area_kpa/kpa_102/
     type: code
+    overlay: True
     start: 0xA93740
     vram: 0x80240000
     files:
@@ -3276,6 +3522,7 @@ segments:
       - [0xA99590, "bin"] # rodata
   - name: world/area_kpa/kpa_111/
     type: code
+    overlay: True
     start: 0xA99590
     vram: 0x80240000
     files:
@@ -3288,6 +3535,7 @@ segments:
       - [0xA9C990, "bin"] # rodata
   - name: world/area_kpa/kpa_112/
     type: code
+    overlay: True
     start: 0xA9C990
     vram: 0x80240000
     files:
@@ -3296,6 +3544,7 @@ segments:
       - [0xA9CC20, "bin"] # rodata
   - name: world/area_kpa/kpa_113/
     type: code
+    overlay: True
     start: 0xA9CC30
     vram: 0x80240000
     files:
@@ -3310,6 +3559,7 @@ segments:
       - [0xA9E980, "bin"] # rodata
   - name: world/area_kpa/kpa_114/
     type: code
+    overlay: True
     start: 0xA9E980
     vram: 0x80240000
     files:
@@ -3320,6 +3570,7 @@ segments:
       - [0xA9ED40, "bin"] # rodata
   - name: world/area_kpa/kpa_115/
     type: code
+    overlay: True
     start: 0xA9ED40
     vram: 0x80240000
     files:
@@ -3333,6 +3584,7 @@ segments:
       - [0xAA1EE0, "bin"] # rodata
   - name: world/area_kpa/kpa_116/
     type: code
+    overlay: True
     start: 0xAA1EE0
     vram: 0x80240000
     files:
@@ -3341,6 +3593,7 @@ segments:
       - [0xAA2170, "bin"] # rodata
   - name: world/area_kpa/kpa_117/
     type: code
+    overlay: True
     start: 0xAA2180
     vram: 0x80240000
     files:
@@ -3350,6 +3603,7 @@ segments:
       - [0xAA23C0, "bin"] # rodata
   - name: world/area_kpa/kpa_118/
     type: code
+    overlay: True
     start: 0xAA23C0
     vram: 0x80240000
     files:
@@ -3358,6 +3612,7 @@ segments:
       - [0xAA2650, "bin"] # rodata
   - name: world/area_kpa/kpa_119/
     type: code
+    overlay: True
     start: 0xAA2660
     vram: 0x80240000
     files:
@@ -3368,6 +3623,7 @@ segments:
       - [0xAA28F0, "bin"] # rodata
   - name: world/area_kpa/kpa_121/
     type: code
+    overlay: True
     start: 0xAA28F0
     vram: 0x80240000
     files:
@@ -3376,6 +3632,7 @@ segments:
       - [0xAA2D10, "bin"] # rodata
   - name: world/area_kpa/kpa_130/
     type: code
+    overlay: True
     start: 0xAA2D20
     vram: 0x80240000
     files:
@@ -3386,6 +3643,7 @@ segments:
       - [0xAA7460, "bin"] # rodata
   - name: world/area_kpa/kpa_133/
     type: code
+    overlay: True
     start: 0xAA7480
     vram: 0x80240000
     files:
@@ -3399,6 +3657,7 @@ segments:
       - [0xAA8F90, "bin"] # rodata
   - name: world/area_kpa/kpa_134/
     type: code
+    overlay: True
     start: 0xAA8FA0
     vram: 0x80240000
     files:
@@ -3413,6 +3672,7 @@ segments:
       - [0xAAC820, "bin"] # rodata
   - name: world/area_osr/osr_00/
     type: code
+    overlay: True
     start: 0xAAC830
     vram: 0x80240000
     files:
@@ -3423,6 +3683,7 @@ segments:
       - [0xAAFFD0, "bin"] # rodata
   - name: world/area_osr/osr_01/
     type: code
+    overlay: True
     start: 0xAAFFF0
     vram: 0x80240000
     files:
@@ -3435,6 +3696,7 @@ segments:
       - [0xAB2150, "bin"] # rodata
   - name: world/area_osr/osr_02/
     type: code
+    overlay: True
     start: 0xAB2170
     vram: 0x80240000
     files:
@@ -3450,6 +3712,7 @@ segments:
       - [0xAB6290, "bin"] # rodata
   - name: world/area_osr/osr_03/
     type: code
+    overlay: True
     start: 0xAB6290
     vram: 0x80240000
     files:
@@ -3464,6 +3727,7 @@ segments:
       - [0xAB92B0, "bin"] # rodata
   - name: world/area_osr/osr_04/
     type: code
+    overlay: True
     start: 0xAB92B0
     vram: 0x80240000
     files:
@@ -3474,6 +3738,7 @@ segments:
       - [0xABB290, "bin"] # rodata
   - name: world/area_kkj/kkj_00/
     type: code
+    overlay: True
     start: 0xABB290
     vram: 0x80240000
     files:
@@ -3488,6 +3753,7 @@ segments:
       - [0xAC5170, "bin"] # rodata
   - name: world/area_kkj/kkj_01/
     type: code
+    overlay: True
     start: 0xAC5170
     vram: 0x80240000
     files:
@@ -3499,6 +3765,7 @@ segments:
       - [0xAC8B80, "bin"] # rodata
   - name: world/area_kkj/kkj_02/
     type: code
+    overlay: True
     start: 0xAC8D20
     vram: 0x80240000
     files:
@@ -3508,6 +3775,7 @@ segments:
       - [0xAC9700, "bin"] # rodata
   - name: world/area_kkj/kkj_03/
     type: code
+    overlay: True
     start: 0xAC9710
     vram: 0x80240000
     files:
@@ -3521,6 +3789,7 @@ segments:
       - [0xACAB20, "bin"] # rodata
   - name: world/area_kkj/kkj_10/
     type: code
+    overlay: True
     start: 0xACAB20
     vram: 0x80240000
     files:
@@ -3534,6 +3803,7 @@ segments:
       - [0xACE0D0, "bin"] # rodata
   - name: world/area_kkj/kkj_11/
     type: code
+    overlay: True
     start: 0xACE140
     vram: 0x80240000
     files:
@@ -3549,6 +3819,7 @@ segments:
       - [0xAD4010, "bin"] # rodata
   - name: world/area_kkj/kkj_12/
     type: code
+    overlay: True
     start: 0xAD4090
     vram: 0x80240000
     files:
@@ -3558,6 +3829,7 @@ segments:
       - [0xAD5EA0, "bin"] # rodata
   - name: world/area_kkj/kkj_13/
     type: code
+    overlay: True
     start: 0xAD5ED0
     vram: 0x80240000
     files:
@@ -3573,6 +3845,7 @@ segments:
       - [0xADAE60, "bin"] # rodata
   - name: world/area_kkj/kkj_14/
     type: code
+    overlay: True
     start: 0xADAEA0
     vram: 0x80240000
     files:
@@ -3595,6 +3868,7 @@ segments:
       - [0xAE5550, "bin"] # rodata
   - name: world/area_kkj/kkj_15/
     type: code
+    overlay: True
     start: 0xAE5590
     vram: 0x80240000
     files:
@@ -3616,6 +3890,7 @@ segments:
       - [0xAED410, "bin"] # rodata
   - name: world/area_kkj/kkj_16/
     type: code
+    overlay: True
     start: 0xAED410
     vram: 0x80240000
     files:
@@ -3628,6 +3903,7 @@ segments:
       - [0xAF1C10, "bin"] # rodata
   - name: world/area_kkj/kkj_17/
     type: code
+    overlay: True
     start: 0xAF1C60
     vram: 0x80240000
     files:
@@ -3639,6 +3915,7 @@ segments:
       - [0xAF2CA0, "bin"] # rodata
   - name: world/area_kkj/kkj_18/
     type: code
+    overlay: True
     start: 0xAF2CA0
     vram: 0x80240000
     files:
@@ -3654,6 +3931,7 @@ segments:
       - [0xAF7950, "bin"] # rodata
   - name: world/area_kkj/kkj_19/
     type: code
+    overlay: True
     start: 0xAF7950
     vram: 0x80240000
     files:
@@ -3668,6 +3946,7 @@ segments:
       - [0xAFDB40, "bin"] # rodata
   - name: world/area_kkj/kkj_20/
     type: code
+    overlay: True
     start: 0xAFDB40
     vram: 0x80240000
     files:
@@ -3681,6 +3960,7 @@ segments:
       - [0xB022A0, "bin"] # rodata
   - name: world/area_kkj/kkj_21/
     type: code
+    overlay: True
     start: 0xB022A0
     vram: 0x80240000
     files:
@@ -3689,6 +3969,7 @@ segments:
       - [0xB024F0, "bin"] # rodata
   - name: world/area_kkj/kkj_22/
     type: code
+    overlay: True
     start: 0xB024F0
     vram: 0x80240000
     files:
@@ -3697,6 +3978,7 @@ segments:
       - [0xB02870, "bin"] # rodata
   - name: world/area_kkj/kkj_23/
     type: code
+    overlay: True
     start: 0xB02880
     vram: 0x80240000
     files:
@@ -3712,6 +3994,7 @@ segments:
       - [0xB06550, "bin"] # rodata
   - name: world/area_kkj/kkj_24/
     type: code
+    overlay: True
     start: 0xB06570
     vram: 0x80240000
     files:
@@ -3722,6 +4005,7 @@ segments:
       - [0xB069F0, "bin"] # rodata
   - name: world/area_kkj/kkj_25/
     type: code
+    overlay: True
     start: 0xB06A00
     vram: 0x80240000
     files:
@@ -3738,6 +4022,7 @@ segments:
       - [0xB13100, "bin"] # rodata
   - name: world/area_kkj/kkj_26/
     type: code
+    overlay: True
     start: 0xB13120
     vram: 0x80240000
     files:
@@ -3748,6 +4033,7 @@ segments:
       - [0xB13D50, "bin"] # rodata
   - name: world/area_kkj/kkj_26/
     type: code
+    overlay: True
     start: 0xB13120
     vram: 0x80240000
     files:
@@ -3758,6 +4044,7 @@ segments:
       - [0xB13D50, "bin"] # rodata
   - name: world/area_kkj/kkj_27/
     type: code
+    overlay: True
     start: 0xB13D70
     vram: 0x80240000
     files:
@@ -3769,6 +4056,7 @@ segments:
       - [0xB14E90, "bin"] # rodata
   - name: world/area_kkj/kkj_28/
     type: code
+    overlay: True
     start: 0xB14EA0
     vram: 0x80240000
     files:
@@ -3777,6 +4065,7 @@ segments:
       - [0xB150B0, "bin"] # rodata
   - name: world/area_kkj/kkj_29/
     type: code
+    overlay: True
     start: 0xB150B0
     vram: 0x80240000
     files:
@@ -3788,6 +4077,7 @@ segments:
       - [0xB1A8F0, "bin"] # rodata
   - name: world/area_tst/tst_01/
     type: code
+    overlay: True
     start: 0xB1A900
     vram: 0x80240000
     files:
@@ -3796,6 +4086,7 @@ segments:
       - [0xB1AC20, "bin"] # rodata
   - name: world/area_tst/tst_02/
     type: code
+    overlay: True
     start: 0xB1AC30
     vram: 0x80240000
     files:
@@ -3804,6 +4095,7 @@ segments:
       - [0xB1AF70, "bin"] # rodata
   - name: world/area_tst/tst_03/
     type: code
+    overlay: True
     start: 0xB1AF80
     vram: 0x80240000
     files:
@@ -3812,6 +4104,7 @@ segments:
       - [0xB1B560, "bin"] # rodata
   - name: world/area_tst/tst_04/
     type: code
+    overlay: True
     start: 0xB1B570
     vram: 0x80240000
     files:
@@ -3826,6 +4119,7 @@ segments:
       - [0xB1C540, "bin"] # rodata
   - name: world/area_tst/tst_10/
     type: code
+    overlay: True
     start: 0xB1C540
     vram: 0x80240000
     files:
@@ -3834,6 +4128,7 @@ segments:
       - [0xB1CA50, "bin"] # rodata
   - name: world/area_tst/tst_11/
     type: code
+    overlay: True
     start: 0xB1CA50
     vram: 0x80240000
     files:
@@ -3843,6 +4138,7 @@ segments:
       - [0xB1D2F0, "bin"]
   - name: world/area_tst/tst_12/
     type: code
+    overlay: True
     start: 0xB1D2F0
     vram: 0x80240000
     files:
@@ -3850,6 +4146,7 @@ segments:
       - [0xB1D760, "bin"]
   - name: world/area_tst/tst_13/
     type: code
+    overlay: True
     start: 0xB1D760
     vram: 0x80240000
     files:
@@ -3859,12 +4156,14 @@ segments:
       - [0xB20470, "bin"] # rodata
   - name: world/area_tst/tst_20/
     type: code
+    overlay: True
     start: 0xB20470
     vram: 0x80240000
     files:
       - [0xB20470, "bin"]
   - name: world/area_jan/jan_00/
     type: code
+    overlay: True
     start: 0xB20540
     vram: 0x80240000
     files:
@@ -3880,6 +4179,7 @@ segments:
       - [0xB28030, "bin"] # rodata
   - name: world/area_jan/jan_01/
     type: code
+    overlay: True
     start: 0xB28030
     vram: 0x80240000
     files:
@@ -3894,6 +4194,7 @@ segments:
       - [0xB2C470, "bin"] # rodata
   - name: world/area_jan/jan_02/
     type: code
+    overlay: True
     start: 0xB2C470
     vram: 0x80240000
     files:
@@ -3909,6 +4210,7 @@ segments:
       - [0xB34A20, "bin"] # rodata
   - name: world/area_jan/jan_03/
     type: code
+    overlay: True
     start: 0xB34BD0
     vram: 0x80240000
     files:
@@ -3925,6 +4227,7 @@ segments:
       - [0xB44770, "bin"] # rodata
   - name: world/area_jan/jan_04/
     type: code
+    overlay: True
     start: 0xB44770
     vram: 0x80240000
     files:
@@ -3950,6 +4253,7 @@ segments:
       - [0xB4AA70, "bin"] # rodata
   - name: world/area_jan/jan_05/
     type: code
+    overlay: True
     start: 0xB4AA70
     vram: 0x80240000
     files:
@@ -3971,6 +4275,7 @@ segments:
       - [0xB52830, "bin"] # rodata
   - name: world/area_jan/jan_06/
     type: code
+    overlay: True
     start: 0xB52830
     vram: 0x80240000
     files:
@@ -3991,6 +4296,7 @@ segments:
       - [0xB59870, "bin"] # rodata
   - name: world/area_jan/jan_07/
     type: code
+    overlay: True
     start: 0xB59870
     vram: 0x80240000
     files:
@@ -4006,6 +4312,7 @@ segments:
       - [0xB5DF70, "bin"] # rodata
   - name: world/area_jan/jan_08/
     type: code
+    overlay: True
     start: 0xB5E2B0
     vram: 0x80240000
     files:
@@ -4024,6 +4331,7 @@ segments:
       - [0xB65770, "bin"] # rodata
   - name: world/area_jan/jan_09/
     type: code
+    overlay: True
     start: 0xB65AB0
     vram: 0x80240000
     files:
@@ -4039,6 +4347,7 @@ segments:
       - [0xB6C050, "bin"] # rodata
   - name: world/area_jan/jan_10/
     type: code
+    overlay: True
     start: 0xB6C390
     vram: 0x80240000
     files:
@@ -4057,6 +4366,7 @@ segments:
       - [0xB70860, "bin"] # rodata
   - name: world/area_jan/jan_11/
     type: code
+    overlay: True
     start: 0xB70860
     vram: 0x80240000
     files:
@@ -4069,6 +4379,7 @@ segments:
       - [0xB730B0, "bin"] # rodata
   - name: world/area_jan/jan_12/
     type: code
+    overlay: True
     start: 0xB730B0
     vram: 0x80240000
     files:
@@ -4081,6 +4392,7 @@ segments:
       - [0xB76470, "bin"] # rodata
   - name: world/area_jan/jan_13/
     type: code
+    overlay: True
     start: 0xB767B0
     vram: 0x80240000
     files:
@@ -4092,6 +4404,7 @@ segments:
       - [0xB7A020, "bin"] # rodata
   - name: world/area_jan/jan_14/
     type: code
+    overlay: True
     start: 0xB7A050
     vram: 0x80240000
     files:
@@ -4106,6 +4419,7 @@ segments:
       - [0xB7D920, "bin"] # rodata
   - name: world/area_jan/jan_15/
     type: code
+    overlay: True
     start: 0xB7D920
     vram: 0x80240000
     files:
@@ -4118,6 +4432,7 @@ segments:
       - [0xB7FFF0, "bin"] # rodata
   - name: world/area_jan/jan_16/
     type: code
+    overlay: True
     start: 0xB80000
     vram: 0x80240000
     files:
@@ -4130,6 +4445,7 @@ segments:
       - [0xB837C0, "bin"] # rodata
   - name: world/area_jan/jan_17/
     type: code
+    overlay: True
     start: 0xB837C0
     vram: 0x80240000
     files:
@@ -4140,6 +4456,7 @@ segments:
       - [0xB83B80, "bin"] # rodata
   - name: world/area_jan/jan_18/
     type: code
+    overlay: True
     start: 0xB83B90
     vram: 0x80240000
     files:
@@ -4148,6 +4465,7 @@ segments:
       - [0xB83E50, "bin"] # rodata
   - name: world/area_jan/jan_19/
     type: code
+    overlay: True
     start: 0xB83E60
     vram: 0x80240000
     files:
@@ -4157,6 +4475,7 @@ segments:
       - [0xB84170, "bin"] # rodata
   - name: world/area_jan/jan_22/
     type: code
+    overlay: True
     start: 0xB84180
     vram: 0x80240000
     files:
@@ -4171,6 +4490,7 @@ segments:
       - [0xB8FCD0, "bin"] # rodata
   - name: world/area_jan/jan_23/
     type: code
+    overlay: True
     start: 0xB8FCD0
     vram: 0x80240000
     files:
@@ -4179,6 +4499,7 @@ segments:
       - [0xB93430, "bin"] # rodata
   - name: world/area_mim/mim_01/
     type: code
+    overlay: True
     start: 0xB93440
     vram: 0x80240000
     files:
@@ -4194,6 +4515,7 @@ segments:
       - [0xB97C00, "bin"] # rodata
   - name: world/area_mim/mim_02/
     type: code
+    overlay: True
     start: 0xB97C00
     vram: 0x80240000
     files:
@@ -4207,6 +4529,7 @@ segments:
       - [0xB9B480, "bin"] # rodata
   - name: world/area_mim/mim_03/
     type: code
+    overlay: True
     start: 0xB9B480
     vram: 0x80240000
     files:
@@ -4219,6 +4542,7 @@ segments:
       - [0xB9D960, "bin"] # rodata
   - name: world/area_mim/mim_04/
     type: code
+    overlay: True
     start: 0xB9D960
     vram: 0x80240000
     files:
@@ -4234,6 +4558,7 @@ segments:
       - [0xBA0730, "bin"] # rodata
   - name: world/area_mim/mim_05/
     type: code
+    overlay: True
     start: 0xBA0730
     vram: 0x80240000
     files:
@@ -4246,6 +4571,7 @@ segments:
       - [0xBA4780, "bin"] # rodata
   - name: world/area_mim/mim_06/
     type: code
+    overlay: True
     start: 0xBA4780
     vram: 0x80240000
     files:
@@ -4261,6 +4587,7 @@ segments:
       - [0xBAA140, "bin"] # rodata
   - name: world/area_mim/mim_07/
     type: code
+    overlay: True
     start: 0xBAA140
     vram: 0x80240000
     files:
@@ -4277,6 +4604,7 @@ segments:
       - [0xBAD940, "bin"] # rodata
   - name: world/area_mim/mim_08/
     type: code
+    overlay: True
     start: 0xBAD940
     vram: 0x80240000
     files:
@@ -4290,6 +4618,7 @@ segments:
       - [0xBB2C38, "bin"] # rodata
   - name: world/area_mim/mim_09/
     type: code
+    overlay: True
     start: 0xBB2E00
     vram: 0x80240000
     files:
@@ -4303,6 +4632,7 @@ segments:
       - [0xBB59E0, "bin"] # rodata
   - name: world/area_mim/mim_10/
     type: code
+    overlay: True
     start: 0xBB59E0
     vram: 0x80240000
     files:
@@ -4315,6 +4645,7 @@ segments:
       - [0xBB7070, "bin"] # rodata
   - name: world/area_mim/mim_11/
     type: code
+    overlay: True
     start: 0xBB7070
     vram: 0x80240000
     files:
@@ -4328,6 +4659,7 @@ segments:
       - [0xBBB380, "bin"] # rodata
   - name: world/area_mim/mim_12/
     type: code
+    overlay: True
     start: 0xBBB380
     vram: 0x80240000
     files:
@@ -4339,6 +4671,7 @@ segments:
       - [0xBBD190, "bin"] # rodata
   - name: world/area_obk/obk_01/
     type: code
+    overlay: True
     start: 0xBBD1A0
     vram: 0x80240000
     files:
@@ -4351,6 +4684,7 @@ segments:
       - [0xBC2A30, "bin"] # rodata
   - name: world/area_obk/obk_02/
     type: code
+    overlay: True
     start: 0xBC2A90
     vram: 0x80240000
     files:
@@ -4365,6 +4699,7 @@ segments:
       - [0xBC4280, "bin"] # rodata
   - name: world/area_obk/obk_03/
     type: code
+    overlay: True
     start: 0xBC4280
     vram: 0x80240000
     files:
@@ -4381,6 +4716,7 @@ segments:
       - [0xBC7E40, "bin"] # rodata
   - name: world/area_obk/obk_04/
     type: code
+    overlay: True
     start: 0xBC7E60
     vram: 0x80240000
     files:
@@ -4395,6 +4731,7 @@ segments:
       - [0xBCD060, "bin"] # rodata
   - name: world/area_obk/obk_05/
     type: code
+    overlay: True
     start: 0xBCD060
     vram: 0x80240000
     files:
@@ -4407,6 +4744,7 @@ segments:
       - [0xBCE680, "bin"] # rodata
   - name: world/area_obk/obk_06/
     type: code
+    overlay: True
     start: 0xBCE690
     vram: 0x80240000
     files:
@@ -4417,6 +4755,7 @@ segments:
       - [0xBCEBF0, "bin"] # rodata
   - name: world/area_obk/obk_07/
     type: code
+    overlay: True
     start: 0xBCEBF0
     vram: 0x80240000
     files:
@@ -4433,6 +4772,7 @@ segments:
       - [0xBD3870, "bin"] # rodata
   - name: world/area_obk/obk_08/
     type: code
+    overlay: True
     start: 0xBD3870
     vram: 0x80240000
     files:
@@ -4448,6 +4788,7 @@ segments:
       - [0xBDA7B0, "bin"] # rodata
   - name: world/area_obk/obk_09/
     type: code
+    overlay: True
     start: 0xBDA7B0
     vram: 0x80240000
     files:
@@ -4462,6 +4803,7 @@ segments:
       - [0xBDD1B0, "bin"] # rodata
   - name: world/area_arn/arn_02/
     type: code
+    overlay: True
     start: 0xBDD1B0
     vram: 0x80240000
     files:
@@ -4473,6 +4815,7 @@ segments:
       - [0xBDED90, "bin"] # rodata
   - name: world/area_arn/arn_03/
     type: code
+    overlay: True
     start: 0xBDED90
     vram: 0x80240000
     files:
@@ -4485,6 +4828,7 @@ segments:
       - [0xBE37B0, "bin"] # rodata
   - name: world/area_arn/arn_04/
     type: code
+    overlay: True
     start: 0xBE37B0
     vram: 0x80240000
     files:
@@ -4498,6 +4842,7 @@ segments:
       - [0xBE7BE0, "bin"] # rodata
   - name: world/area_arn/arn_05/
     type: code
+    overlay: True
     start: 0xBE7BE0
     vram: 0x80240000
     files:
@@ -4509,6 +4854,7 @@ segments:
       - [0xBECDF0, "bin"] # rodata
   - name: world/area_arn/arn_07/
     type: code
+    overlay: True
     start: 0xBECDF0
     vram: 0x80240000
     files:
@@ -4525,6 +4871,7 @@ segments:
       - [0xBF47A0, "bin"] # rodata
   - name: world/area_arn/arn_08/
     type: code
+    overlay: True
     start: 0xBF47A0
     vram: 0x80240000
     files:
@@ -4541,6 +4888,7 @@ segments:
       - [0xBF6060, "bin"] # rodata
   - name: world/area_arn/arn_09/
     type: code
+    overlay: True
     start: 0xBF6060
     vram: 0x80240000
     files:
@@ -4553,6 +4901,7 @@ segments:
       - [0xBF69F0, "bin"] # rodata
   - name: world/area_arn/arn_10/
     type: code
+    overlay: True
     start: 0xBF6A00
     vram: 0x80240000
     files:
@@ -4563,6 +4912,7 @@ segments:
       - [0xBF7670, "bin"] # rodata
   - name: world/area_arn/arn_11/
     type: code
+    overlay: True
     start: 0xBF7680
     vram: 0x80240000
     files:
@@ -4573,6 +4923,7 @@ segments:
       - [0xBF8790, "bin"] # rodata
   - name: world/area_arn/arn_12/
     type: code
+    overlay: True
     start: 0xBF8790
     vram: 0x80240000
     files:
@@ -4582,6 +4933,7 @@ segments:
       - [0xBF9400, "bin"] # rodata
   - name: world/area_arn/arn_13/
     type: code
+    overlay: True
     start: 0xBF9410
     vram: 0x80240000
     files:
@@ -4591,6 +4943,7 @@ segments:
       - [0xBFA090, "bin"] # rodata
   - name: world/area_dgb/dgb_00/
     type: code
+    overlay: True
     start: 0xBFA0A0
     vram: 0x80240000
     files:
@@ -4603,6 +4956,7 @@ segments:
       - [0xBFD880, "bin"] # rodata
   - name: world/area_dgb/dgb_01/
     type: code
+    overlay: True
     start: 0xBFD880
     vram: 0x80240000
     files:
@@ -4618,6 +4972,7 @@ segments:
       - [0xC20F40, "bin"] # rodata
   - name: world/area_dgb/dgb_02/
     type: code
+    overlay: True
     start: 0xC2EBA0
     vram: 0x80240000
     files:
@@ -4628,6 +4983,7 @@ segments:
       - [0xC31190, "bin"] # rodata
   - name: world/area_dgb/dgb_03/
     type: code
+    overlay: True
     start: 0xC314E0
     vram: 0x80240000
     files:
@@ -4641,6 +4997,7 @@ segments:
       - [0xC35EA0, "bin"] # rodata
   - name: world/area_dgb/dgb_04/
     type: code
+    overlay: True
     start: 0xC36530
     vram: 0x80240000
     files:
@@ -4652,6 +5009,7 @@ segments:
       - [0xC3A978, "bin"] # rodata
   - name: world/area_dgb/dgb_05/
     type: code
+    overlay: True
     start: 0xC3AA10
     vram: 0x80240000
     files:
@@ -4664,6 +5022,7 @@ segments:
       - [0xC3CD40, "bin"] # rodata
   - name: world/area_dgb/dgb_06/
     type: code
+    overlay: True
     start: 0xC3D080
     vram: 0x80240000
     files:
@@ -4675,6 +5034,7 @@ segments:
       - [0xC3DBF0, "bin"] # rodata
   - name: world/area_dgb/dgb_07/
     type: code
+    overlay: True
     start: 0xC3DBF0
     vram: 0x80240000
     files:
@@ -4686,6 +5046,7 @@ segments:
       - [0xC3FA80, "bin"] # rodata
   - name: world/area_dgb/dgb_08/
     type: code
+    overlay: True
     start: 0xC3FDB0
     vram: 0x80240000
     files:
@@ -4699,6 +5060,7 @@ segments:
       - [0xC46B40, "bin"] # rodata
   - name: world/area_dgb/dgb_09/
     type: code
+    overlay: True
     start: 0xC46BE0
     vram: 0x80240000
     files:
@@ -4711,6 +5073,7 @@ segments:
       - [0xC4C2F8, "bin"] # rodata
   - name: world/area_dgb/dgb_10/
     type: code
+    overlay: True
     start: 0xC4C390
     vram: 0x80240000
     files:
@@ -4722,6 +5085,7 @@ segments:
       - [0xC4D3D0, "bin"] # rodata
   - name: world/area_dgb/dgb_11/
     type: code
+    overlay: True
     start: 0xC4D3E0
     vram: 0x80240000
     files:
@@ -4732,6 +5096,7 @@ segments:
       - [0xC4DEE0, "bin"] # rodata
   - name: world/area_dgb/dgb_12/
     type: code
+    overlay: True
     start: 0xC4DEF0
     vram: 0x80240000
     files:
@@ -4743,6 +5108,7 @@ segments:
       - [0xC4E960, "bin"] # rodata
   - name: world/area_dgb/dgb_13/
     type: code
+    overlay: True
     start: 0xC4E960
     vram: 0x80240000
     files:
@@ -4753,6 +5119,7 @@ segments:
       - [0xC4F030, "bin"] # rodata
   - name: world/area_dgb/dgb_14/
     type: code
+    overlay: True
     start: 0xC4F030
     vram: 0x80240000
     files:
@@ -4762,6 +5129,7 @@ segments:
       - [0xC4F500, "bin"] # rodata
   - name: world/area_dgb/dgb_15/
     type: code
+    overlay: True
     start: 0xC4F510
     vram: 0x80240000
     files:
@@ -4775,6 +5143,7 @@ segments:
       - [0xC52200, "bin"] # rodata
   - name: world/area_dgb/dgb_16/
     type: code
+    overlay: True
     start: 0xC52540
     vram: 0x80240000
     files:
@@ -4787,6 +5156,7 @@ segments:
       - [0xC55730, "bin"] # rodata
   - name: world/area_dgb/dgb_17/
     type: code
+    overlay: True
     start: 0xC55A60
     vram: 0x80240000
     files:
@@ -4795,6 +5165,7 @@ segments:
       - [0xC55F30, "bin"] # rodata
   - name: world/area_dgb/dgb_18/
     type: code
+    overlay: True
     start: 0xC55F40
     vram: 0x80240000
     files:
@@ -4809,6 +5180,7 @@ segments:
       - [0xC599D0, "bin"] # rodata
   - name: world/area_kzn/kzn_01/
     type: code
+    overlay: True
     start: 0xC599D0
     vram: 0x80240000
     files:
@@ -4817,6 +5189,7 @@ segments:
       - [0xC5A730, "bin"] # rodata
   - name: world/area_kzn/kzn_02/
     type: code
+    overlay: True
     start: 0xC5A740
     vram: 0x80240000
     files:
@@ -4833,6 +5206,7 @@ segments:
       - [0xC60D10, "bin"] # rodata
   - name: world/area_kzn/kzn_03/
     type: code
+    overlay: True
     start: 0xC60D10
     vram: 0x80240000
     files:
@@ -4849,6 +5223,7 @@ segments:
       - [0xC68130, "bin"] # rodata
   - name: world/area_kzn/kzn_04/
     type: code
+    overlay: True
     start: 0xC68130
     vram: 0x80240000
     files:
@@ -4862,6 +5237,7 @@ segments:
       - [0xC6C0D0, "bin"] # rodata
   - name: world/area_kzn/kzn_05/
     type: code
+    overlay: True
     start: 0xC6C0D0
     vram: 0x80240000
     files:
@@ -4870,6 +5246,7 @@ segments:
       - [0xC6C910, "bin"] # rodata
   - name: world/area_kzn/kzn_06/
     type: code
+    overlay: True
     start: 0xC6C920
     vram: 0x80240000
     files:
@@ -4882,6 +5259,7 @@ segments:
       - [0xC6E330, "bin"] # rodata
   - name: world/area_kzn/kzn_07/
     type: code
+    overlay: True
     start: 0xC6E330
     vram: 0x80240000
     files:
@@ -4896,6 +5274,7 @@ segments:
       - [0xC71480, "bin"] # rodata
   - name: world/area_kzn/kzn_08/
     type: code
+    overlay: True
     start: 0xC71480
     vram: 0x80240000
     files:
@@ -4909,6 +5288,7 @@ segments:
       - [0xC76B18, "bin"] # rodata
   - name: world/area_kzn/kzn_09/
     type: code
+    overlay: True
     start: 0xC76CE0
     vram: 0x80240000
     files:
@@ -4922,6 +5302,7 @@ segments:
       - [0xC7E180, "bin"] # rodata
   - name: world/area_kzn/kzn_10/
     type: code
+    overlay: True
     start: 0xC7E180
     vram: 0x80240000
     files:
@@ -4933,6 +5314,7 @@ segments:
       - [0xC801A0, "bin"] # rodata
   - name: world/area_kzn/kzn_11/
     type: code
+    overlay: True
     start: 0xC801A0
     vram: 0x80240000
     files:
@@ -4947,6 +5329,7 @@ segments:
       - [0xC85AB0, "bin"] # rodata
   - name: world/area_kzn/kzn_17/
     type: code
+    overlay: True
     start: 0xC85AB0
     vram: 0x80240000
     files:
@@ -4959,6 +5342,7 @@ segments:
       - [0xC8C080, "bin"] # rodata
   - name: world/area_kzn/kzn_18/
     type: code
+    overlay: True
     start: 0xC8C0A0
     vram: 0x80240000
     files:
@@ -4969,6 +5353,7 @@ segments:
       - [0xC8DBA0, "bin"] # rodata
   - name: world/area_kzn/kzn_19/
     type: code
+    overlay: True
     start: 0xC8DBB0
     vram: 0x80240000
     files:
@@ -4984,6 +5369,7 @@ segments:
       - [0xC95F30, "bin"] # rodata
   - name: world/area_kzn/kzn_20/
     type: code
+    overlay: True
     start: 0xC95F30
     vram: 0x80240000
     files:
@@ -4994,6 +5380,7 @@ segments:
       - [0xC9A1F0, "bin"] # rodata
   - name: world/area_kzn/kzn_22/
     type: code
+    overlay: True
     start: 0xC9A200
     vram: 0x80240000
     files:
@@ -5005,6 +5392,7 @@ segments:
       - [0xC9C2F0, "bin"] # rodata
   - name: world/area_kzn/kzn_23/
     type: code
+    overlay: True
     start: 0xC9C300
     vram: 0x80240000
     files:
@@ -5016,6 +5404,7 @@ segments:
       - [0xC9DF10, "bin"] # rodata
   - name: world/area_flo/flo_00/
     type: code
+    overlay: True
     start: 0xC9DF20
     vram: 0x80240000
     files:
@@ -5032,6 +5421,7 @@ segments:
       - [0xCA7290, "bin"] # rodata
   - name: world/area_flo/flo_03/
     type: code
+    overlay: True
     start: 0xCA72A0
     vram: 0x80240000
     files:
@@ -5043,6 +5433,7 @@ segments:
       - [0xCAC1D0, "bin"] # rodata
   - name: world/area_flo/flo_07/
     type: code
+    overlay: True
     start: 0xCAC1F0
     vram: 0x80240000
     files:
@@ -5055,6 +5446,7 @@ segments:
       - [0xCAED40, "bin"] # rodata
   - name: world/area_flo/flo_08/
     type: code
+    overlay: True
     start: 0xCAED40
     vram: 0x80240000
     files:
@@ -5069,6 +5461,7 @@ segments:
       - [0xCB4E60, "bin"] # rodata
   - name: world/area_flo/flo_09/
     type: code
+    overlay: True
     start: 0xCB5000
     vram: 0x80240000
     files:
@@ -5083,6 +5476,7 @@ segments:
       - [0xCB9200, "bin"] # rodata
   - name: world/area_flo/flo_10/
     type: code
+    overlay: True
     start: 0xCB9200
     vram: 0x80240000
     files:
@@ -5102,6 +5496,7 @@ segments:
       - [0xCBDCD0, "bin"] # rodata
   - name: world/area_flo/flo_11/
     type: code
+    overlay: True
     start: 0xCBDCD0
     vram: 0x80240000
     files:
@@ -5113,6 +5508,7 @@ segments:
       - [0xCC0E30, "bin"] # rodata
   - name: world/area_flo/flo_12/
     type: code
+    overlay: True
     start: 0xCC0E30
     vram: 0x80240000
     files:
@@ -5124,6 +5520,7 @@ segments:
       - [0xCC3800, "bin"] # rodata
   - name: world/area_flo/flo_13/
     type: code
+    overlay: True
     start: 0xCC3810
     vram: 0x80240000
     files:
@@ -5138,6 +5535,7 @@ segments:
       - [0xCCB2F8, "bin"] # rodata
   - name: world/area_flo/flo_14/
     type: code
+    overlay: True
     start: 0xCCB310
     vram: 0x80240000
     files:
@@ -5153,6 +5551,7 @@ segments:
       - [0xCD06C0, "bin"] # rodata
   - name: world/area_flo/flo_15/
     type: code
+    overlay: True
     start: 0xCD06C0
     vram: 0x80240000
     files:
@@ -5164,6 +5563,7 @@ segments:
       - [0xCD1E20, "bin"] # rodata
   - name: world/area_flo/flo_16/
     type: code
+    overlay: True
     start: 0xCD1E30
     vram: 0x80240000
     files:
@@ -5181,6 +5581,7 @@ segments:
       - [0xCD72E0, "bin"] # rodata
   - name: world/area_flo/flo_17/
     type: code
+    overlay: True
     start: 0xCD72E0
     vram: 0x80240000
     files:
@@ -5195,6 +5596,7 @@ segments:
       - [0xCDC698, "bin"] # rodata
   - name: world/area_flo/flo_18/
     type: code
+    overlay: True
     start: 0xCDC6A0
     vram: 0x80240000
     files:
@@ -5208,6 +5610,7 @@ segments:
       - [0xCE36E0, "bin"] # rodata
   - name: world/area_flo/flo_19/
     type: code
+    overlay: True
     start: 0xCE36F0
     vram: 0x80240000
     files:
@@ -5220,6 +5623,7 @@ segments:
       - [0xCE66F0, "bin"] # rodata
   - name: world/area_flo/flo_21/
     type: code
+    overlay: True
     start: 0xCE6700
     vram: 0x80240000
     files:
@@ -5231,6 +5635,7 @@ segments:
       - [0xCEC240, "bin"] # rodata
   - name: world/area_flo/flo_22/
     type: code
+    overlay: True
     start: 0xCEC240
     vram: 0x80240000
     files:
@@ -5245,6 +5650,7 @@ segments:
       - [0xCEE260, "bin"] # rodata
   - name: world/area_flo/flo_23/
     type: code
+    overlay: True
     start: 0xCEE260
     vram: 0x80240000
     files:
@@ -5257,6 +5663,7 @@ segments:
       - [0xCF0940, "bin"] # rodata
   - name: world/area_flo/flo_24/
     type: code
+    overlay: True
     start: 0xCF0940
     vram: 0x80240000
     files:
@@ -5270,6 +5677,7 @@ segments:
       - [0xCF2BD0, "bin"] # rodata
   - name: world/area_flo/flo_25/
     type: code
+    overlay: True
     start: 0xCF2BD0
     vram: 0x80240000
     files:
@@ -5286,6 +5694,7 @@ segments:
       - [0xCF7B70, "bin"] # rodata
   - name: world/area_sam/sam_01/
     type: code
+    overlay: True
     start: 0xCF7B70
     vram: 0x80240000
     files:
@@ -5299,6 +5708,7 @@ segments:
       - [0xD05730, "bin"] # rodata
   - name: world/area_sam/sam_02/
     type: code
+    overlay: True
     start: 0xD05730
     vram: 0x80240000
     files:
@@ -5314,6 +5724,7 @@ segments:
       - [0xD110C0, "bin"] # rodata
   - name: world/area_sam/sam_03/
     type: code
+    overlay: True
     start: 0xD110C0
     vram: 0x80240000
     files:
@@ -5325,6 +5736,7 @@ segments:
       - [0xD135D0, "bin"] # rodata
   - name: world/area_sam/sam_04/
     type: code
+    overlay: True
     start: 0xD135D0
     vram: 0x80240000
     files:
@@ -5340,6 +5752,7 @@ segments:
       - [0xD187E0, "bin"] # rodata
   - name: world/area_sam/sam_05/
     type: code
+    overlay: True
     start: 0xD187E0
     vram: 0x80240000
     files:
@@ -5353,6 +5766,7 @@ segments:
       - [0xD1FE90, "bin"] # rodata
   - name: world/area_sam/sam_06/
     type: code
+    overlay: True
     start: 0xD1FE90
     vram: 0x80240000
     files:
@@ -5367,6 +5781,7 @@ segments:
       - [0xD2BD30, "bin"] # rodata
   - name: world/area_sam/sam_07/
     type: code
+    overlay: True
     start: 0xD2BD30
     vram: 0x80240000
     files:
@@ -5380,6 +5795,7 @@ segments:
       - [0xD2FC80, "bin"] # rodata
   - name: world/area_sam/sam_08/
     type: code
+    overlay: True
     start: 0xD2FC80
     vram: 0x80240000
     files:
@@ -5393,6 +5809,7 @@ segments:
       - [0xD362F0, "bin"] # rodata
   - name: world/area_sam/sam_09/
     type: code
+    overlay: True
     start: 0xD362F0
     vram: 0x80240000
     files:
@@ -5403,6 +5820,7 @@ segments:
       - [0xD377F0, "bin"] # rodata
   - name: world/area_sam/sam_10/
     type: code
+    overlay: True
     start: 0xD37800
     vram: 0x80240000
     files:
@@ -5416,6 +5834,7 @@ segments:
       - [0xD3A5D0, "bin"] # rodata
   - name: world/area_sam/sam_11/
     type: code
+    overlay: True
     start: 0xD3A5D0
     vram: 0x80240000
     files:
@@ -5434,6 +5853,7 @@ segments:
       - [0xD4BA20, "bin"] # rodata
   - name: world/area_sam/sam_12/
     type: code
+    overlay: True
     start: 0xD4BA20
     vram: 0x80240000
     files:
@@ -5448,6 +5868,7 @@ segments:
       - [0xD4D040, "bin"] # rodata
   - name: world/area_pra/pra_01/
     type: code
+    overlay: True
     start: 0xD4D040
     vram: 0x80240000
     files:
@@ -5461,6 +5882,7 @@ segments:
       - [0xD4FFF0, "bin"] # rodata
   - name: world/area_pra/pra_02/
     type: code
+    overlay: True
     start: 0xD4FFF0
     vram: 0x80240000
     files:
@@ -5474,6 +5896,7 @@ segments:
       - [0xD53CB0, "bin"] # rodata
   - name: world/area_pra/pra_03/
     type: code
+    overlay: True
     start: 0xD53CB0
     vram: 0x80240000
     files:
@@ -5486,6 +5909,7 @@ segments:
       - [0xD54690, "bin"] # rodata
   - name: world/area_pra/pra_04/
     type: code
+    overlay: True
     start: 0xD54690
     vram: 0x80240000
     files:
@@ -5500,6 +5924,7 @@ segments:
       - [0xD55B60, "bin"] # rodata
   - name: world/area_pra/pra_05/
     type: code
+    overlay: True
     start: 0xD55BB0
     vram: 0x80240000
     files:
@@ -5511,6 +5936,7 @@ segments:
       - [0xD57430, "bin"] # rodata
   - name: world/area_pra/pra_06/
     type: code
+    overlay: True
     start: 0xD57430
     vram: 0x80240000
     files:
@@ -5521,6 +5947,7 @@ segments:
       - [0xD58890, "bin"] # rodata
   - name: world/area_pra/pra_09/
     type: code
+    overlay: True
     start: 0xD58890
     vram: 0x80240000
     files:
@@ -5531,6 +5958,7 @@ segments:
       - [0xD5F2A0, "bin"] # rodata
   - name: world/area_pra/pra_10/
     type: code
+    overlay: True
     start: 0xD5F2B0
     vram: 0x80240000
     files:
@@ -5541,6 +5969,7 @@ segments:
       - [0xD614A0, "bin"] # rodata
   - name: world/area_pra/pra_11/
     type: code
+    overlay: True
     start: 0xD61500
     vram: 0x80240000
     files:
@@ -5553,6 +5982,7 @@ segments:
       - [0xD62D10, "bin"] # rodata
   - name: world/area_pra/pra_12/
     type: code
+    overlay: True
     start: 0xD62D10
     vram: 0x80240000
     files:
@@ -5563,6 +5993,7 @@ segments:
       - [0xD645E0, "bin"] # rodata
   - name: world/area_pra/pra_13/
     type: code
+    overlay: True
     start: 0xD645E0
     vram: 0x80240000
     files:
@@ -5574,6 +6005,7 @@ segments:
       - [0xD67CF0, "bin"] # rodata
   - name: world/area_pra/pra_14/
     type: code
+    overlay: True
     start: 0xD67D00
     vram: 0x80240000
     files:
@@ -5586,6 +6018,7 @@ segments:
       - [0xD69810, "bin"] # rodata
   - name: world/area_pra/pra_15/
     type: code
+    overlay: True
     start: 0xD69810
     vram: 0x80240000
     files:
@@ -5598,6 +6031,7 @@ segments:
       - [0xD69B20, "bin"] # rodata
   - name: world/area_pra/pra_16/
     type: code
+    overlay: True
     start: 0xD69B20
     vram: 0x80240000
     files:
@@ -5608,6 +6042,7 @@ segments:
       - [0xD6B610, "bin"] # rodata
   - name: world/area_pra/pra_18/
     type: code
+    overlay: True
     start: 0xD6B620
     vram: 0x80240000
     files:
@@ -5619,6 +6054,7 @@ segments:
       - [0xD6E9A0, "bin"] # rodata
   - name: world/area_pra/pra_19/
     type: code
+    overlay: True
     start: 0xD6E9B0
     vram: 0x80240000
     files:
@@ -5630,6 +6066,7 @@ segments:
       - [0xD76390, "bin"] # rodata
   - name: world/area_pra/pra_20/
     type: code
+    overlay: True
     start: 0xD763A0
     vram: 0x80240000
     files:
@@ -5640,6 +6077,7 @@ segments:
       - [0xD77F00, "bin"] # rodata
   - name: world/area_pra/pra_21/
     type: code
+    overlay: True
     start: 0xD77F20
     vram: 0x80240000
     files:
@@ -5651,6 +6089,7 @@ segments:
       - [0xD78870, "bin"] # rodata
   - name: world/area_pra/pra_22/
     type: code
+    overlay: True
     start: 0xD78880
     vram: 0x80240000
     files:
@@ -5662,6 +6101,7 @@ segments:
       - [0xD799E0, "bin"] # rodata
   - name: world/area_pra/pra_27/
     type: code
+    overlay: True
     start: 0xD799F0
     vram: 0x80240000
     files:
@@ -5673,6 +6113,7 @@ segments:
       - [0xD7B2A0, "bin"] # rodata
   - name: world/area_pra/pra_28/
     type: code
+    overlay: True
     start: 0xD7B2A0
     vram: 0x80240000
     files:
@@ -5684,6 +6125,7 @@ segments:
       - [0xD7CB50, "bin"] # rodata
   - name: world/area_pra/pra_29/
     type: code
+    overlay: True
     start: 0xD7CB50
     vram: 0x80240000
     files:
@@ -5695,6 +6137,7 @@ segments:
       - [0xD7ED50, "bin"] # rodata
   - name: world/area_pra/pra_31/
     type: code
+    overlay: True
     start: 0xD7ED60
     vram: 0x80240000
     files:
@@ -5709,6 +6152,7 @@ segments:
       - [0xD86A00, "bin"] # rodata
   - name: world/area_pra/pra_32/
     type: code
+    overlay: True
     start: 0xD86A00
     vram: 0x80240000
     files:
@@ -5720,6 +6164,7 @@ segments:
       - [0xD896E0, "bin"] # rodata
   - name: world/area_pra/pra_33/
     type: code
+    overlay: True
     start: 0xD896E0
     vram: 0x80240000
     files:
@@ -5731,6 +6176,7 @@ segments:
       - [0xD8B3A0, "bin"] # rodata
   - name: world/area_pra/pra_34/
     type: code
+    overlay: True
     start: 0xD8B3B0
     vram: 0x80240000
     files:
@@ -5742,6 +6188,7 @@ segments:
       - [0xD8D240, "bin"] # rodata
   - name: world/area_pra/pra_35/
     type: code
+    overlay: True
     start: 0xD8D250
     vram: 0x80240000
     files:
@@ -5756,6 +6203,7 @@ segments:
       - [0xD91700, "bin"] # rodata
   - name: world/area_pra/pra_36/
     type: code
+    overlay: True
     start: 0xD91700
     vram: 0x80240000
     files:
@@ -5766,6 +6214,7 @@ segments:
       - [0xD92F40, "bin"] # rodata
   - name: world/area_pra/pra_37/
     type: code
+    overlay: True
     start: 0xD92F40
     vram: 0x80240000
     files:
@@ -5777,6 +6226,7 @@ segments:
       - [0xD955F0, "bin"] # rodata
   - name: world/area_pra/pra_38/
     type: code
+    overlay: True
     start: 0xD955F0
     vram: 0x80240000
     files:
@@ -5787,6 +6237,7 @@ segments:
       - [0xD97840, "bin"] # rodata
   - name: world/area_pra/pra_39/
     type: code
+    overlay: True
     start: 0xD97890
     vram: 0x80240000
     files:
@@ -5797,6 +6248,7 @@ segments:
       - [0xD99960, "bin"] # rodata
   - name: world/area_pra/pra_40/
     type: code
+    overlay: True
     start: 0xD999B0
     vram: 0x80240000
     files:
@@ -5808,6 +6260,7 @@ segments:
       - [0xD9AEE0, "bin"] # rodata
   - name: world/area_omo/omo_01/
     type: code
+    overlay: True
     start: 0xD9AEF0
     vram: 0x80240000
     files:
@@ -5822,6 +6275,7 @@ segments:
       - [0xD9D4D0, "bin"] # rodata
   - name: world/area_omo/omo_02/
     type: code
+    overlay: True
     start: 0xD9D4D0
     vram: 0x80240000
     files:
@@ -5836,6 +6290,7 @@ segments:
       - [0xDA4D30, "bin"] # rodata
   - name: world/area_omo/omo_03/
     type: code
+    overlay: True
     start: 0xDA5240
     vram: 0x80240000
     files:
@@ -5847,6 +6302,7 @@ segments:
       - [0xDAD3B0, "bin"] # rodata
   - name: world/area_omo/omo_04/
     type: code
+    overlay: True
     start: 0xDAD400
     vram: 0x80240000
     files:
@@ -5861,6 +6317,7 @@ segments:
       - [0xDB22C0, "bin"] # rodata
   - name: world/area_omo/omo_05/
     type: code
+    overlay: True
     start: 0xDB22C0
     vram: 0x80240000
     files:
@@ -5873,6 +6330,7 @@ segments:
       - [0xDB7908, "bin"] # rodata
   - name: world/area_omo/omo_06/
     type: code
+    overlay: True
     start: 0xDB7910
     vram: 0x80240000
     files:
@@ -5886,6 +6344,7 @@ segments:
       - [0xDBD2B0, "bin"] # rodata
   - name: world/area_omo/omo_07/
     type: code
+    overlay: True
     start: 0xDBD2B0
     vram: 0x80240000
     files:
@@ -5904,6 +6363,7 @@ segments:
       - [0xDC43D0, "bin"] # rodata
   - name: world/area_omo/omo_08/
     type: code
+    overlay: True
     start: 0xDC43D0
     vram: 0x80240000
     files:
@@ -5916,6 +6376,7 @@ segments:
       - [0xDCCB00, "bin"] # rodata
   - name: world/area_omo/omo_09/
     type: code
+    overlay: True
     start: 0xDCCCD0
     vram: 0x80240000
     files:
@@ -5938,6 +6399,7 @@ segments:
       - [0xDD79B0, "bin"] # rodata
   - name: world/area_omo/omo_10/
     type: code
+    overlay: True
     start: 0xDD79B0
     vram: 0x80240000
     files:
@@ -5950,6 +6412,7 @@ segments:
       - [0xDDC830, "bin"] # rodata
   - name: world/area_omo/omo_11/
     type: code
+    overlay: True
     start: 0xDDC830
     vram: 0x80240000
     files:
@@ -5961,6 +6424,7 @@ segments:
       - [0xDDF300, "bin"] # rodata
   - name: world/area_omo/omo_12/
     type: code
+    overlay: True
     start: 0xDDF310
     vram: 0x80240000
     files:
@@ -5972,6 +6436,7 @@ segments:
       - [0xDE2470, "bin"] # rodata
   - name: world/area_omo/omo_13/
     type: code
+    overlay: True
     start: 0xDE2490
     vram: 0x80240000
     files:
@@ -5985,6 +6450,7 @@ segments:
       - [0xDE5360, "bin"] # rodata
   - name: world/area_omo/omo_14/
     type: code
+    overlay: True
     start: 0xDE56B0
     vram: 0x80240000
     files:
@@ -5996,6 +6462,7 @@ segments:
       - [0xDE8760, "bin"] # rodata
   - name: world/area_omo/omo_15/
     type: code
+    overlay: True
     start: 0xDE8770
     vram: 0x80240000
     files:
@@ -6006,6 +6473,7 @@ segments:
       - [0xDEBED0, "bin"] # rodata
   - name: world/area_omo/omo_16/
     type: code
+    overlay: True
     start: 0xDEBED0
     vram: 0x80240000
     files:
@@ -6016,6 +6484,7 @@ segments:
       - [0xDEEE80, "bin"] # rodata
   - name: world/area_omo/omo_17/
     type: code
+    overlay: True
     start: 0xDEEEA0
     vram: 0x80240000
     files:
@@ -6032,6 +6501,7 @@ segments:
       - [0xDF6848, "bin"] # rodata
   - name: world/area_end/end_00/
     type: code
+    overlay: True
     start: 0xDF6A00
     vram: 0x80240000
     files:
@@ -6048,6 +6518,7 @@ segments:
       - [0xE05300, "bin"] # rodata
   - name: world/area_end/end_01/
     type: code
+    overlay: True
     start: 0xE05360
     vram: 0x80240000
     files:
@@ -6064,6 +6535,7 @@ segments:
       - [0xE0E740, "bin"] # rodata
   - name: world/area_mgm/mgm_00/
     type: code
+    overlay: True
     start: 0xE0E7A0
     vram: 0x80240000
     files:
@@ -6077,6 +6549,7 @@ segments:
       - [0xE12760, "bin"] # rodata
   - name: world/area_mgm/mgm_01/
     type: code
+    overlay: True
     start: 0xE12760
     vram: 0x80240000
     files:
@@ -6089,6 +6562,7 @@ segments:
       - [0xE15D80, "bin"] # rodata
   - name: world/area_mgm/mgm_02/
     type: code
+    overlay: True
     start: 0xE15D80
     vram: 0x80240000
     files:
@@ -6101,6 +6575,7 @@ segments:
       - [0xE1E380, "bin"] # rodata
   - name: world/area_mgm/mgm_03/
     type: code
+    overlay: True
     start: 0xE1E380
     vram: 0x80240000
     files:
@@ -6108,6 +6583,7 @@ segments:
       - [0xE1E460, "bin"]
   - name: world/area_gv/gv_01/
     type: code
+    overlay: True
     start: 0xE1E460
     vram: 0x80240000
     files:
@@ -6116,13 +6592,15 @@ segments:
       - [0xE20110, "bin"]
   - name: code
     type: code
+    overlay: True
     start: 0xE20EB0
     vram: 0x802B7000
     files:
     - [0xe20eb0, "c", "code_e20eb0"]
-  - [0xE215C0, "bin"]
+    - [0xE215C0, "bin"]
   - name: code
     type: code
+    overlay: True
     start: 0xE21870
     vram: 0x802B7000
     files:

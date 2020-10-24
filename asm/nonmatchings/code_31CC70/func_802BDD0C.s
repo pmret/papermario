@@ -13,7 +13,7 @@ glabel func_802BDD0C
 /* 31D89C 802BDD2C AFB00010 */  sw        $s0, 0x10($sp)
 /* 31D8A0 802BDD30 10A00011 */  beqz      $a1, .L802BDD78
 /* 31D8A4 802BDD34 8C90014C */   lw       $s0, 0x14c($a0)
-/* 31D8A8 802BDD38 0C0AF460 */  jal       func_802BD180_31CC70
+/* 31D8A8 802BDD38 0C0AF460 */  jal       func_802BD180
 /* 31D8AC 802BDD3C 00000000 */   nop      
 /* 31D8B0 802BDD40 0C03BA65 */  jal       func_800EE994
 /* 31D8B4 802BDD44 0200202D */   daddu    $a0, $s0, $zero

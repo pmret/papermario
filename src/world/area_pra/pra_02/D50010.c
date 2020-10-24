@@ -1,4 +1,4 @@
-#include "common.h"
+#include "pra_02.h"
 
 INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_80240020_D50010);
 
@@ -26,9 +26,9 @@ INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_80240EB8_D50EA8);
 
 INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_80240EEC_D50EDC);
 
-INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_80240F20_D50F10);
+#include "world/common/GetNpcCollisionHeight.inc.c"
 
-INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_80240F7C_D50F6C);
+#include "world/common/SomeXYZFuncTodoRename.inc.c"
 
 INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_8024114C_D5113C);
 
@@ -38,9 +38,9 @@ INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_802411D8_D511C8);
 
 INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_80241274_D51264);
 
-INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_80241310);
+INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_80241310_D51300);
 
-INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_802413D8);
+INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_802413D8_D513C8);
 
 INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_80241478_D51468);
 
@@ -48,4 +48,4 @@ INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_802414A8_D51498);
 
 INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_80241588_D51578);
 
-INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_802415BC);
+INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_802415BC_D515AC);

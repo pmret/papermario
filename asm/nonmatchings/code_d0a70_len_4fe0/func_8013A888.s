@@ -12,8 +12,8 @@ glabel func_8013A888
 .L8013A8A4:
 /* D0FA4 8013A8A4 00041140 */  sll       $v0, $a0, 5
 /* D0FA8 8013A8A8 00441023 */  subu      $v0, $v0, $a0
-/* D0FAC 8013A8AC 3C038015 */  lui       $v1, 0x8015
-/* D0FB0 8013A8B0 8C636954 */  lw        $v1, 0x6954($v1)
+/* D0FAC 8013A8AC 3C038015 */  lui       $v1, %hi(D_80156954)
+/* D0FB0 8013A8B0 8C636954 */  lw        $v1, %lo(D_80156954)($v1)
 /* D0FB4 8013A8B4 00021080 */  sll       $v0, $v0, 2
 /* D0FB8 8013A8B8 00431021 */  addu      $v0, $v0, $v1
 /* D0FBC 8013A8BC 0C04EA15 */  jal       func_8013A854

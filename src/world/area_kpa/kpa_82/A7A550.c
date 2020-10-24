@@ -1,8 +1,8 @@
-#include "common.h"
+#include "kpa_82.h"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_82/A7A550", func_80240050_A7A550);
+#include "world/common/GetNpcCollisionHeight.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_82/A7A550", func_802400AC_A7A5AC);
+#include "world/common/SomeXYZFuncTodoRename.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_82/A7A550", func_8024027C_A7A77C);
 

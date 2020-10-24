@@ -6,7 +6,7 @@ glabel func_80240E6C_A27D3C
 /* A27D40 80240E70 3C048024 */  lui       $a0, 0x8024
 /* A27D44 80240E74 24843284 */  addiu     $a0, $a0, 0x3284
 /* A27D48 80240E78 AFBF0010 */  sw        $ra, 0x10($sp)
-/* A27D4C 80240E7C 0C0902F4 */  jal       func_80240BD0
+/* A27D4C 80240E7C 0C0902F4 */  jal       func_80240BD0_A27AA0
 /* A27D50 80240E80 00000000 */   nop      
 /* A27D54 80240E84 8FBF0010 */  lw        $ra, 0x10($sp)
 /* A27D58 80240E88 03E00008 */  jr        $ra

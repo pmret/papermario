@@ -1,8 +1,8 @@
-#include "common.h"
+#include "sam_09.h"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_09/D362F0", func_80240000_D362F0);
 
-INCLUDE_ASM(s32, "world/area_sam/sam_09/D362F0", func_802400B4_D363A4);
+#include "world/common/GetItemName.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_09/D362F0", func_80240118_D36408);
 

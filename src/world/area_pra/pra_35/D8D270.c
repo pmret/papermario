@@ -1,4 +1,4 @@
-#include "common.h"
+#include "pra_35.h"
 
 INCLUDE_ASM(s32, "world/area_pra/pra_35/D8D270", func_80240020_D8D270);
 
@@ -42,26 +42,26 @@ INCLUDE_ASM(s32, "world/area_pra/pra_35/D8D270", func_802416C4_D8E914);
 
 INCLUDE_ASM(s32, "world/area_pra/pra_35/D8D270", func_8024173C_D8E98C);
 
-INCLUDE_ASM(s32, "world/area_pra/pra_35/D8D270", func_8024186C);
+INCLUDE_ASM(s32, "world/area_pra/pra_35/D8D270", func_8024186C_D8EABC);
 
-INCLUDE_ASM(s32, "world/area_pra/pra_35/D8D270", func_8024198C);
+INCLUDE_ASM(s32, "world/area_pra/pra_35/D8D270", func_8024198C_D8EBDC);
 
 INCLUDE_ASM(s32, "world/area_pra/pra_35/D8D270", func_802419F4_D8EC44);
 
 INCLUDE_ASM(s32, "world/area_pra/pra_35/D8D270", func_80241AB4_D8ED04);
 
-INCLUDE_ASM(s32, "world/area_pra/pra_35/D8D270", func_80241DB0);
+INCLUDE_ASM(s32, "world/area_pra/pra_35/D8D270", func_80241DB0_D8F000);
 
 INCLUDE_ASM(s32, "world/area_pra/pra_35/D8D270", func_80241E1C_D8F06C);
 
 INCLUDE_ASM(s32, "world/area_pra/pra_35/D8D270", func_80241E8C_D8F0DC);
 
-INCLUDE_ASM(s32, "world/area_pra/pra_35/D8D270", func_80241F64);
+INCLUDE_ASM(s32, "world/area_pra/pra_35/D8D270", func_80241F64_D8F1B4);
 
-INCLUDE_ASM(s32, "world/area_pra/pra_35/D8D270", func_80241FB8);
+INCLUDE_ASM(s32, "world/area_pra/pra_35/D8D270", func_80241FB8_D8F208);
 
 INCLUDE_ASM(s32, "world/area_pra/pra_35/D8D270", func_8024216C_D8F3BC);
 
 INCLUDE_ASM(s32, "world/area_pra/pra_35/D8D270", func_802423CC_D8F61C);
 
-INCLUDE_ASM(s32, "world/area_pra/pra_35/D8D270", func_80242698);
+INCLUDE_ASM(s32, "world/area_pra/pra_35/D8D270", func_80242698_D8F8E8);
