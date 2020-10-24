@@ -1,6 +1,6 @@
 #include "kmr_20.h"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8EBE50", func_80240030_8EBE50);
+#include "world/common/SetPlayerStatusAnimFlags100000.inc.c"
 
 #include "world/common/GetCurrentFloor.inc.c"
 

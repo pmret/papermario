@@ -1,6 +1,6 @@
 #include "nok_02.h"
 
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7020", func_80240000_9D7020);
+#include "world/common/SetPlayerStatusAnimFlags100000.inc.c"
 
 #include "world/common/GetCurrentFloor.inc.c"
 

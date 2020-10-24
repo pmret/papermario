@@ -4,7 +4,7 @@ INCLUDE_ASM(s32, "world/area_tik/tik_20/89A350", func_80240000_89A350);
 
 INCLUDE_ASM(s32, "world/area_tik/tik_20/89A350", func_80240124_89A474);
 
-INCLUDE_ASM(s32, "world/area_tik/tik_20/89A350", func_8024030C_89A65C);
+#include "world/common/SetPlayerStatusAnimFlags100000.inc.c"
 
 #include "world/common/GetCurrentFloor.inc.c"
 

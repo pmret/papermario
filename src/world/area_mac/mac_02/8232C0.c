@@ -1,6 +1,6 @@
 #include "mac_02.h"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_02/8232C0", func_80240000_8232C0);
+#include "world/common/SetPlayerStatusAnimFlags100000.inc.c"
 
 #include "world/common/GetCurrentFloor.inc.c"
 

@@ -1,6 +1,6 @@
 #include "mim_11.h"
 
-INCLUDE_ASM(s32, "world/area_mim/mim_11/BB7070", func_80240000_BB7070);
+#include "world/common/SetPlayerStatusAnimFlags100000.inc.c"
 
 #include "world/common/GetCurrentFloor.inc.c"
 

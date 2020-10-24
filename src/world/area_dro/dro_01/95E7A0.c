@@ -1,6 +1,6 @@
 #include "dro_01.h"
 
-INCLUDE_ASM(s32, "world/area_dro/dro_01/95E7A0", func_802435A0_95E7A0);
+#include "world/common/SetPlayerStatusAnimFlags100000.inc.c"
 
 #include "world/common/GetCurrentFloor.inc.c"
 

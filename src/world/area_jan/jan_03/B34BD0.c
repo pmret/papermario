@@ -1,6 +1,6 @@
 #include "jan_03.h"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80240000_B34BD0);
+#include "world/common/SetPlayerStatusAnimFlags100000.inc.c"
 
 #include "world/common/GetCurrentFloor.inc.c"
 

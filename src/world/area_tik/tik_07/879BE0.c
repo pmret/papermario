@@ -1,6 +1,6 @@
 #include "tik_07.h"
 
-INCLUDE_ASM(s32, "world/area_tik/tik_07/879BE0", func_80240000_879BE0);
+#include "world/common/SetPlayerStatusAnimFlags100000.inc.c"
 
 #include "world/common/GetCurrentFloor.inc.c"
 

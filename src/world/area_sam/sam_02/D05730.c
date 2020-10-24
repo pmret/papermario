@@ -1,6 +1,6 @@
 #include "sam_02.h"
 
-INCLUDE_ASM(s32, "world/area_sam/sam_02/D05730", func_80240000_D05730);
+#include "world/common/SetPlayerStatusAnimFlags100000.inc.c"
 
 #include "world/common/GetCurrentFloor.inc.c"
 

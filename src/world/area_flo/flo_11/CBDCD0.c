@@ -1,6 +1,6 @@
 #include "flo_11.h"
 
-INCLUDE_ASM(s32, "world/area_flo/flo_11/CBDCD0", func_80240000_CBDCD0);
+#include "world/common/SetPlayerStatusAnimFlags100000.inc.c"
 
 #include "world/common/GetCurrentFloor.inc.c"
 

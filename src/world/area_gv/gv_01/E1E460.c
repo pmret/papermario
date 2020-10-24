@@ -1,6 +1,6 @@
 #include "gv_01.h"
 
-INCLUDE_ASM(s32, "world/area_gv/gv_01/E1E460", func_80240000_E1E460);
+#include "world/common/SetPlayerStatusAnimFlags100000.inc.c"
 
 #include "world/common/GetCurrentFloor.inc.c"
 
