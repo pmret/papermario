@@ -1,4 +1,4 @@
-#include "common.h"
+#include "mgm_02.h"
 
 INCLUDE_ASM(s32, "world/area_mgm/mgm_02/E15D80", func_80240000_E15D80);
 

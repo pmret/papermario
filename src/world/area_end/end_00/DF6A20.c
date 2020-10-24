@@ -1,4 +1,4 @@
-#include "common.h"
+#include "end_00.h"
 
 INCLUDE_ASM(s32, "world/area_end/end_00/DF6A20", func_80240020_DF6A20);
 

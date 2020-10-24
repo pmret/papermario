@@ -1,4 +1,4 @@
-#include "common.h"
+#include "trd_04.h"
 
 INCLUDE_ASM(s32, "world/area_trd/trd_04/9A88A0", func_802404B0_9A88A0);
 

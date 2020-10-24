@@ -1,4 +1,4 @@
-#include "common.h"
+#include "nok_15.h"
 
 INCLUDE_ASM(s32, "world/area_nok/nok_15/A06F00", func_80240000_A06F00);
 

@@ -1,4 +1,4 @@
-#include "common.h"
+#include "omo_02.h"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_02/D9D510", func_80240040_D9D510);
 

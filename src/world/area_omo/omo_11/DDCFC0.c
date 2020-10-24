@@ -1,4 +1,4 @@
-#include "common.h"
+#include "omo_11.h"
 
 #include "world/common/Set8009A650_40.inc.c"
 

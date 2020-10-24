@@ -1,4 +1,4 @@
-#include "common.h"
+#include "kzn_08.h"
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_08/C71ED0", func_80240A50_C71ED0);
 

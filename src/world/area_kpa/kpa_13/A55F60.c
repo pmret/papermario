@@ -1,4 +1,4 @@
-#include "common.h"
+#include "kpa_13.h"
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_13/A55F60", func_80240040_A55F60);
 

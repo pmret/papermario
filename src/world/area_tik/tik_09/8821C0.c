@@ -1,4 +1,4 @@
-#include "common.h"
+#include "tik_09.h"
 
 INCLUDE_ASM(s32, "world/area_tik/tik_09/8821C0", func_80240000_8821C0);
 

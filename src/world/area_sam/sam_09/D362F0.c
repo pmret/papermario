@@ -1,4 +1,4 @@
-#include "common.h"
+#include "sam_09.h"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_09/D362F0", func_80240000_D362F0);
 

@@ -1,4 +1,4 @@
-#include "common.h"
+#include "flo_21.h"
 
 INCLUDE_ASM(s32, "world/area_flo/flo_21/CE6700", func_80240000_CE6700);
 

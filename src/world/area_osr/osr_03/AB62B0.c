@@ -1,4 +1,4 @@
-#include "common.h"
+#include "osr_03.h"
 
 INCLUDE_ASM(s32, "world/area_osr/osr_03/AB62B0", func_80240020_AB62B0);
 

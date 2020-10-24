@@ -1,4 +1,4 @@
-#include "common.h"
+#include "tik_19.h"
 
 #include "world/common/Set8009A650_40.inc.c"
 

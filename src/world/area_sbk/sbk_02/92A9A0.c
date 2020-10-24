@@ -1,4 +1,4 @@
-#include "common.h"
+#include "sbk_02.h"
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 

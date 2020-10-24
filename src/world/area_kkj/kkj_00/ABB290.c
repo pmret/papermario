@@ -1,4 +1,4 @@
-#include "common.h"
+#include "kkj_00.h"
 
 INCLUDE_ASM(s32, "world/area_kkj/kkj_00/ABB290", func_80240000_ABB290);
 

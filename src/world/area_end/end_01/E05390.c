@@ -1,4 +1,4 @@
-#include "common.h"
+#include "end_01.h"
 
 INCLUDE_ASM(s32, "world/area_end/end_01/E05390", func_80240030_E05390);
 

@@ -1,4 +1,4 @@
-#include "common.h"
+#include "kkj_18.h"
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 

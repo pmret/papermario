@@ -1,4 +1,4 @@
-#include "common.h"
+#include "jan_14.h"
 
 INCLUDE_ASM(s32, "world/area_jan/jan_14/B7A510", func_802404C0_B7A510);
 

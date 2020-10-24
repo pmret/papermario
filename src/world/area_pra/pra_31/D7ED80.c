@@ -1,4 +1,4 @@
-#include "common.h"
+#include "pra_31.h"
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 

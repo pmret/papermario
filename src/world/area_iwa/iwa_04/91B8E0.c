@@ -1,4 +1,4 @@
-#include "common.h"
+#include "iwa_04.h"
 
 INCLUDE_ASM(s32, "world/area_iwa/iwa_04/91B8E0", func_80240000_91B8E0);
 

@@ -1,4 +1,4 @@
-#include "common.h"
+#include "hos_05.h"
 
 INCLUDE_ASM(s32, "world/area_hos/hos_05/A2EF00", pause_tabs_draw_badges_A2EF00);
 

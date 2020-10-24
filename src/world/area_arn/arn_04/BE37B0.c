@@ -1,4 +1,4 @@
-#include "common.h"
+#include "arn_04.h"
 
 INCLUDE_ASM(s32, "world/area_arn/arn_04/BE37B0", func_80240000_BE37B0);
 

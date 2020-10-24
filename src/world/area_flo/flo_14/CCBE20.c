@@ -1,4 +1,4 @@
-#include "common.h"
+#include "flo_14.h"
 
 INCLUDE_ASM(s32, "world/area_flo/flo_14/CCBE20", func_80240B10_CCBE20);
 

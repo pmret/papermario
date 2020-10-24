@@ -1,4 +1,4 @@
-#include "common.h"
+#include "mim_09.h"
 
 INCLUDE_ASM(s32, "world/area_mim/mim_09/BB2E00", func_80240000_BB2E00);
 

@@ -1,6 +1,6 @@
 #include "common.h"
 
-ApiStatus AwaitPlayerNearNpc(ScriptInstance* script, s32 isInitialCall) {
+static ApiStatus AwaitPlayerNearNpc(ScriptInstance* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = PLAYER_STATUS;
     Npc* npc = get_npc_safe(script->owner2.npcID);
 

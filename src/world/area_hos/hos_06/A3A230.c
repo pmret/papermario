@@ -1,4 +1,4 @@
-#include "common.h"
+#include "hos_06.h"
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 

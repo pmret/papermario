@@ -1,4 +1,4 @@
-#include "common.h"
+#include "mac_04.h"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_04/844860", func_80241C90_844860);
 

@@ -1,4 +1,4 @@
-#include "common.h"
+#include "isk_14.h"
 
 INCLUDE_ASM(s32, "world/area_isk/isk_14/992730", func_80240000_992730);
 

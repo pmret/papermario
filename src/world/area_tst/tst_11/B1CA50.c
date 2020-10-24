@@ -1,4 +1,4 @@
-#include "common.h"
+#include "tst_11.h"
 
 INCLUDE_ASM(s32, "world/area_tst/tst_11/B1CA50", func_80240000_B1CA50);
 

@@ -1,4 +1,4 @@
-#include "common.h"
+#include "sbk_56.h"
 
 #include "world/common/SpawnSunEffect.inc.c"
 

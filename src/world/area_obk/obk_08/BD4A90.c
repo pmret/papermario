@@ -1,4 +1,4 @@
-#include "common.h"
+#include "obk_08.h"
 
 INCLUDE_ASM(s32, "world/area_obk/obk_08/BD4A90", func_80241220_BD4A90);
 

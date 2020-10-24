@@ -1,4 +1,4 @@
-#include "common.h"
+#include "kpa_82.h"
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 

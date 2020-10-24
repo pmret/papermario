@@ -1,4 +1,4 @@
-#include "common.h"
+#include "trd_00.h"
 
 static ApiStatus PostChapter1StatUpdate(ScriptInstance* script, s32 isInitialCall) {
     PlayerData* playerData = PLAYER_DATA;

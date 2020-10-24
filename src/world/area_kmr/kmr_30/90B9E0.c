@@ -1,4 +1,4 @@
-#include "common.h"
+#include "kmr_30.h"
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_30/90B9E0", func_80240310_90B9E0);
 

@@ -1,4 +1,4 @@
-#include "common.h"
+#include "machi.h"
 
 INCLUDE_ASM(s32, "world/area_mac/machi/7E7550", func_802401B0_7E7550);
 
