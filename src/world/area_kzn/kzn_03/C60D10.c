@@ -2,4 +2,4 @@
 
 #include "world/common/UnkTexturePanFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C60D10", func_80240124_C60E34);
+#include "world/common/UnkTexturePanFunc2.inc.c"

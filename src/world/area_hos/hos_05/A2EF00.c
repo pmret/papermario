@@ -6,7 +6,7 @@ INCLUDE_ASM(s32, "world/area_hos/hos_05/A2EF00", func_80244DE4_A2F024);
 
 #include "world/common/UnkTexturePanFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_hos/hos_05/A2EF00", func_802450DC_A2F31C);
+#include "world/common/UnkTexturePanFunc2.inc.c"
 
 INCLUDE_ASM(s32, "world/area_hos/hos_05/A2EF00", func_802452C4_A2F504);
 

@@ -18,4 +18,4 @@ INCLUDE_ASM(s32, "world/area_omo/omo_08/DC43D0", func_80240518_DC48E8);
 
 #include "world/common/UnkTexturePanFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_08/DC43D0", func_80240680_DC4A50);
+#include "world/common/UnkTexturePanFunc2.inc.c"

@@ -2,7 +2,7 @@
 
 #include "world/common/UnkTexturePanFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_02/B2C4A0", func_80240154_B2C5C4);
+#include "world/common/UnkTexturePanFunc2.inc.c"
 
 INCLUDE_ASM(s32, "world/area_jan/jan_02/B2C4A0", func_8024033C_B2C7AC);
 

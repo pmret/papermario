@@ -14,7 +14,7 @@ INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_8024023C_B34E0C);
 
 #include "world/common/UnkTexturePanFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80240404_B34FD4);
+#include "world/common/UnkTexturePanFunc2.inc.c"
 
 INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_802405EC_B351BC);
 

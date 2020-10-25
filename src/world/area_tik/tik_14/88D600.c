@@ -14,4 +14,4 @@ INCLUDE_ASM(s32, "world/area_tik/tik_14/88D600", func_8024023C_88D83C);
 
 #include "world/common/UnkTexturePanFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_tik/tik_14/88D600", func_80240404_88DA04);
+#include "world/common/UnkTexturePanFunc2.inc.c"
