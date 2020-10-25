@@ -1,6 +1,6 @@
 #include "mac_05.h"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80240000_852170);
+#include "world/common/UnkTexturePanFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80240124_852294);
 

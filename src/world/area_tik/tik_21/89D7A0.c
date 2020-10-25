@@ -1,6 +1,6 @@
 #include "tik_21.h"
 
-INCLUDE_ASM(s32, "world/area_tik/tik_21/89D7A0", func_80240000_89D7A0);
+#include "world/common/UnkTexturePanFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_tik/tik_21/89D7A0", func_80240124_89D8C4);
 

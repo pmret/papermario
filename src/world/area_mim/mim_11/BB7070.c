@@ -12,7 +12,7 @@ INCLUDE_ASM(s32, "world/area_mim/mim_11/BB7070", func_802400F0_BB7160);
 
 INCLUDE_ASM(s32, "world/area_mim/mim_11/BB7070", func_8024023C_BB72AC);
 
-INCLUDE_ASM(s32, "world/area_mim/mim_11/BB7070", func_802402E0_BB7350);
+#include "world/common/UnkTexturePanFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mim/mim_11/BB7070", func_80240404_BB7474);
 

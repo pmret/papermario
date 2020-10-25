@@ -1,6 +1,6 @@
 #include "kkj_14.h"
 
-INCLUDE_ASM(s32, "world/area_kkj/kkj_14/ADAEF0", func_80240050_ADAEF0);
+#include "world/common/UnkTexturePanFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kkj/kkj_14/ADAEF0", func_80240174_ADB014);
 

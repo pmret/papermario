@@ -1,6 +1,6 @@
 #include "flo_07.h"
 
-INCLUDE_ASM(s32, "world/area_flo/flo_07/CAC1F0", func_80240000_CAC1F0);
+#include "world/common/UnkTexturePanFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_flo/flo_07/CAC1F0", func_80240124_CAC314);
 
