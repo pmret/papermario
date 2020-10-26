@@ -65,6 +65,8 @@ s32 func_800554E8(s32, s32);
 s32 func_800555E4(s32);
 s32 osGetId();
 
+void fx_walk_normal(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4, s32 arg5);
+
 // Partner
 void func_800EBA3C(Npc* partner);
 void func_800EBB40(Npc* partner);
