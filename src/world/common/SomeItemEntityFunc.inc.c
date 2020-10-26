@@ -12,7 +12,7 @@ static ApiStatus SomeItemEntityFunc(ScriptInstance* script, s32 isInitialCall) {
     switch (script->functionTemp[1].s) {
         case 0:
             itemEntity->position.y = script->functionTemp[2].f + ((1.0f - cos_rad((script->functionTemp[3].s *
-                                     (1.570796f)) / 30.0f)) * 20.0f);
+                                     (PI / 2)) / 30.0f)) * 20.0f);
             if (script->functionTemp[3].s == 30) {
                 script->functionTemp[1].s = 1;
                 script->functionTemp[3].s = 0;

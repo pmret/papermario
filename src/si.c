@@ -1,11 +1,11 @@
 #include "common.h"
 
-s32 si_find_label(ScriptInstance* script, s32 arg1);
-s32 si_skip_if(ScriptInstance* script);
-s32 si_skip_else(ScriptInstance* script);
-s32 si_goto_end_loop(ScriptInstance* script);
+Bytecode* si_find_label(ScriptInstance* script, s32 arg1);
+Bytecode* si_skip_if(ScriptInstance* script);
+Bytecode* si_skip_else(ScriptInstance* script);
 Bytecode* si_goto_end_case(ScriptInstance* script);
-s32 si_goto_next_case(ScriptInstance* script);
+Bytecode* si_goto_next_case(ScriptInstance* script);
+Bytecode* si_goto_end_loop(ScriptInstance* script);
 s32 get_variable_index(ScriptInstance* script, s32 var);
 
 f32 fixed_var_to_float(Bytecode scriptVar) {
@@ -1380,8 +1380,8 @@ INCLUDE_ASM(f32, "si", get_float_variable, ScriptInstance* script, Bytecode var)
 
 INCLUDE_ASM(f32, "si", set_float_variable, ScriptInstance* script, Bytecode var, f32 value);
 
-s32 si_find_label(ScriptInstance* script, s32 arg1) {
-    s32 ret = script->ptrReadPos;
+Bytecode* si_find_label(ScriptInstance* script, s32 arg1) {
+    Bytecode* ret = script->ptrReadPos;
     s32 i;
 
     if (arg1 < -270000000) {
@@ -1399,7 +1399,7 @@ s32 si_find_label(ScriptInstance* script, s32 arg1) {
     return ret;
 }
 
-INCLUDE_ASM(s32, "si", si_skip_if, ScriptInstance* script);
+INCLUDE_ASM(Bytecode*, "si", si_skip_if, ScriptInstance* script);
 // Matching but needs rodata support
 /*Bytecode* si_skip_if(ScriptInstance* script) {
     s32 nestedIfDepth = 0;
@@ -1439,7 +1439,7 @@ INCLUDE_ASM(s32, "si", si_skip_if, ScriptInstance* script);
     } while(1);
 }*/
 
-INCLUDE_ASM(s32, "si", si_skip_else, ScriptInstance* script);
+INCLUDE_ASM(Bytecode*, "si", si_skip_else, ScriptInstance* script);
 // Matching but needs rodata support
 /*Bytecode* si_skip_else(ScriptInstance* script) {
     s32 nestedIfDepth = 0;
@@ -1477,6 +1477,6 @@ INCLUDE_ASM(s32, "si", si_skip_else, ScriptInstance* script);
 
 INCLUDE_ASM(Bytecode*, "si", si_goto_end_case, ScriptInstance* script);
 
-INCLUDE_ASM(s32, "si", si_goto_next_case, ScriptInstance* script);
+INCLUDE_ASM(Bytecode*, "si", si_goto_next_case, ScriptInstance* script);
 
-INCLUDE_ASM(s32, "si", si_goto_end_loop, ScriptInstance* script);
+INCLUDE_ASM(Bytecode*, "si", si_goto_end_loop, ScriptInstance* script);
