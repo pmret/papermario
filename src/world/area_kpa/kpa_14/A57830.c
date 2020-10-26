@@ -8,7 +8,7 @@ INCLUDE_ASM(s32, "world/area_kpa/kpa_14/A57830", func_80240380_A57830);
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_14/A57830", func_802405E8_A57A98);
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_14/A57830", func_8024063C_A57AEC);
+#include "world/common/SetEntityFlags100000.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_14/A57830", func_80240670_A57B20);
 

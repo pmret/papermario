@@ -46,6 +46,6 @@ INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_80241478_D51468);
 
 INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_802414A8_D51498);
 
-INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_80241588_D51578);
+#include "world/common/SetEntityFlags100000.inc.c"
 
 INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_802415BC_D515AC);
