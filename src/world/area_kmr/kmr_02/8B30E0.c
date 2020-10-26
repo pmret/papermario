@@ -28,6 +28,6 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B30E0", func_80243370_8B33E0);
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B30E0", func_802433AC_8B341C);
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B30E0", func_80243474_8B34E4);
+#include "world/common/GetEntityPosition.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B30E0", func_80243514_8B3584);

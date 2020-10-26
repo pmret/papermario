@@ -28,4 +28,4 @@ INCLUDE_ASM(s32, "world/area_pra/pra_34/D8B3D0", func_80240EEC_D8C29C);
 
 #include "world/common/SetEntityFlags100000.inc.c"
 
-INCLUDE_ASM(s32, "world/area_pra/pra_34/D8B3D0", func_80240F54_D8C304);
+#include "world/common/GetEntityPosition.inc.c"
