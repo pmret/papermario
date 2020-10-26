@@ -4,7 +4,7 @@ INCLUDE_ASM(s32, "world/area_kpa/kpa_14/A57830", func_80240380_A57830);
 
 #include "world/common/GetItemName.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_14/A57830", func_80240498_A57948);
+#include "world/common/SomeItemEntityFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_14/A57830", func_802405E8_A57A98);
 

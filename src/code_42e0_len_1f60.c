@@ -132,9 +132,9 @@ INCLUDE_ASM(s32, "code_42e0_len_1f60", _wrap_trig_lookup_value);
 
 INCLUDE_ASM(s32, "code_42e0_len_1f60", sin_cos_rad);
 
-INCLUDE_ASM(s32, "code_42e0_len_1f60", sin_rad);
+INCLUDE_ASM(f32, "code_42e0_len_1f60", sin_rad, f32 angle);
 
-INCLUDE_ASM(s32, "code_42e0_len_1f60", cos_rad);
+INCLUDE_ASM(f32, "code_42e0_len_1f60", cos_rad, f32 angle);
 
 INCLUDE_ASM(s32, "code_42e0_len_1f60", sin_cos_deg);
 
