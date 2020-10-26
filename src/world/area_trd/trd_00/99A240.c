@@ -10,4 +10,4 @@ static ApiStatus PostChapter1StatUpdate(ScriptInstance* script, s32 isInitialCal
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "world/area_trd/trd_00/99A240", func_8024060C_99A27C);
+#include "world/common/SyncStatusMenu.inc.c"

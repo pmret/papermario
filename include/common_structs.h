@@ -104,7 +104,7 @@ typedef struct Npc {
     /* 0x08A */ s16 yawCamOffset;
     /* 0x08C */ char unk_8C[2];
     /* 0x08E */ s16 duration; /* formerly interp_counter */
-    /* 0x090 */ s16 homePos[3];
+    /* 0x090 */ Vec3s homePos;
     /* 0x096 */ char unk_96[12];
     /* 0x0A2 */ s16 unk_A2;
     /* 0x0A4 */ u8 npcID;
@@ -225,7 +225,10 @@ typedef struct ScriptInstance {
     /* 0x064 */ struct ScriptInstance* blockingParent; /* parent? */
     /* 0x068 */ struct ScriptInstance* childScript;
     /* 0x06C */ struct ScriptInstance* parentScript; /* brother? */
-    /* 0x070 */ s32 functionTemp[4];
+    /* 0x070 */ union {
+        s32 s;
+        f32 f;
+    } functionTemp[4];
     /* 0x080 */ ApiFunc callFunction;
     /* 0x084 */ s32 varTable[16];
     /* 0x0C4 */ s32 varFlags[3];
@@ -854,7 +857,7 @@ typedef struct GameStatus {
     /* 0x028 */ char unk_28[8];
     /* 0x030 */ u32 prevButtons; /* from previous frame */
     /* 0x034 */ char unk_34[12];
-    /* 0x040 */ u8 stickX; /* with deadzone */
+    /* 0x040 */ s8 stickX; /* with deadzone */
     /* 0x041 */ u8 altStickX; /* input used for batte when flag 80000 set */
     /* 0x042 */ char unk_42[2];
     /* 0x044 */ u8 stickY; /* with deadzone */

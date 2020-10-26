@@ -4,7 +4,7 @@ INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80240000_DAD400);
 
 #include "world/common/GetItemName.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80240118_DAD518);
+#include "world/common/SomeItemEntityFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80240268_DAD668);
 

@@ -4,7 +4,7 @@ INCLUDE_ASM(s32, "world/area_sam/sam_07/D2BD30", func_80240000_D2BD30);
 
 INCLUDE_ASM(s32, "world/area_sam/sam_07/D2BD30", func_80240448_D2C178);
 
-INCLUDE_ASM(s32, "world/area_sam/sam_07/D2BD30", func_80240510_D2C240);
+#include "world/common/GetEntityPosition.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_07/D2BD30", func_802405B0_D2C2E0);
 

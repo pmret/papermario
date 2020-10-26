@@ -17,18 +17,19 @@ ApiStatus func_80260DB8(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus func_80260DD8(ScriptInstance* script, s32 isInitialCall) {
     Actor* player = gBattleStatus.playerActor;
+    s32 var;
 
-    if (!gPlayerData.hasActionCommands) {
-        s32 var = player->varTable[0];
+    if (gPlayerData.hasActionCommands) {
+        return ApiStatus_DONE2;
+    }
 
-        if (var >= rand_int(100)) {
-            script->varTable[0] = 1;
-        } else {
-            script->varTable[0] = 0;
-        }
+    var = player->varTable[0];
+    if (var >= rand_int(100)) {
+        script->varTable[0] = 1;
+    } else {
+        script->varTable[0] = 0;
     }
     return ApiStatus_DONE2;
-    do {} while (0); // necessary to match
 }
 
 ApiStatus func_80260E38(ScriptInstance* script, s32 isInitialCall) {

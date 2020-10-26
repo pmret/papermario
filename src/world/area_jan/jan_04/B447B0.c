@@ -1,5 +1,5 @@
 #include "jan_04.h"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_04/B447B0", func_80240040_B447B0);
+#include "world/common/UnkTexturePanFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_04/B447B0", func_80240164_B448D4);
+#include "world/common/UnkTexturePanFunc2.inc.c"

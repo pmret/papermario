@@ -1883,6 +1883,7 @@ gMoveScriptTable;0x80293E80
 gStaticScriptCounter;0x802D9CA0
 D_80156954;0x80156954
 D_802D9CA4;0x802D9CA4
+gCollisionStatus;0x8015A550
 gGlobalTimeSpace;0x802D9CA8
 gBattleState;0x800DC068
 gBattleDmaDest;0x80284000

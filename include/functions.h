@@ -53,6 +53,8 @@ f32 set_float_variable(ScriptInstance* script, Bytecode var, f32 value);
 void set_script_timescale(ScriptInstance* script, f32 timescale);
 f32 sin_deg(f32 x);
 f32 cos_deg(f32 x);
+f32 sin_rad(f32 x);
+f32 cos_rad(f32 x);
 s16 round(f32);
 f32 atan2(f32 startX, f32 startZ, f32 endX, f32 endZ);
 f32 clamp_angle(f32 theta);
@@ -62,6 +64,8 @@ s32 func_800554A4(s32, s32);
 s32 func_800554E8(s32, s32);
 s32 func_800555E4(s32);
 s32 osGetId();
+
+void fx_walk_normal(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4, s32 arg5);
 
 // Partner
 void func_800EBA3C(Npc* partner);

@@ -1,14 +1,14 @@
 #include "nok_02.h"
 
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7020", func_80240000_9D7020);
+#include "world/common/SetPlayerStatusAnimFlags100000.inc.c"
 
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7020", func_80240020_9D7040);
+#include "world/common/GetCurrentFloor.inc.c"
 
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7020", func_80240034_9D7054);
 
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7020", func_802400F0_9D7110);
 
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7020", func_802401D0_9D71F0);
+#include "world/common/GetCurrentCameraYawClamped180.inc.c"
 
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7020", func_8024023C_9D725C);
 

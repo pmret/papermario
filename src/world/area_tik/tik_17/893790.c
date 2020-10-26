@@ -1,17 +1,17 @@
 #include "tik_17.h"
 
-INCLUDE_ASM(s32, "world/area_tik/tik_17/893790", func_80240D70_893790);
+#include "world/common/SetPlayerStatusAnimFlags100000.inc.c"
 
-INCLUDE_ASM(s32, "world/area_tik/tik_17/893790", func_80240D90_8937B0);
+#include "world/common/GetCurrentFloor.inc.c"
 
 INCLUDE_ASM(s32, "world/area_tik/tik_17/893790", func_80240DA4_8937C4);
 
 INCLUDE_ASM(s32, "world/area_tik/tik_17/893790", func_80240E60_893880);
 
-INCLUDE_ASM(s32, "world/area_tik/tik_17/893790", func_80240F40_893960);
+#include "world/common/GetCurrentCameraYawClamped180.inc.c"
 
 INCLUDE_ASM(s32, "world/area_tik/tik_17/893790", func_80240FAC_8939CC);
 
-INCLUDE_ASM(s32, "world/area_tik/tik_17/893790", func_80241050_893A70);
+#include "world/common/UnkTexturePanFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_tik/tik_17/893790", func_80241174_893B94);
+#include "world/common/UnkTexturePanFunc2.inc.c"

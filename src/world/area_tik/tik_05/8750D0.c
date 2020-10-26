@@ -6,7 +6,7 @@ INCLUDE_ASM(s32, "world/area_tik/tik_05/8750D0", func_80240680_875440);
 
 #include "world/common/GetItemName.inc.c"
 
-INCLUDE_ASM(s32, "world/area_tik/tik_05/8750D0", func_80240798_875558);
+#include "world/common/SomeItemEntityFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_tik/tik_05/8750D0", func_802408E8_8756A8);
 

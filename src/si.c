@@ -1,11 +1,11 @@
 #include "common.h"
 
-s32 si_find_label(ScriptInstance* script, s32 arg1);
-s32 si_skip_if(ScriptInstance* script);
-s32 si_skip_else(ScriptInstance* script);
-s32 si_goto_end_loop(ScriptInstance* script);
-s32 si_goto_end_case(ScriptInstance* script);
-s32 si_goto_next_case(ScriptInstance* script);
+Bytecode* si_find_label(ScriptInstance* script, s32 arg1);
+Bytecode* si_skip_if(ScriptInstance* script);
+Bytecode* si_skip_else(ScriptInstance* script);
+Bytecode* si_goto_end_case(ScriptInstance* script);
+Bytecode* si_goto_next_case(ScriptInstance* script);
+Bytecode* si_goto_end_loop(ScriptInstance* script);
 s32 get_variable_index(ScriptInstance* script, s32 var);
 
 f32 fixed_var_to_float(Bytecode scriptVar) {
@@ -88,16 +88,16 @@ ApiStatus si_handle_wait(ScriptInstance* script) {
     Bytecode* ptrReadPos = script->ptrReadPos;
 
     if (!script->blocked) {
-        script->functionTemp[0] = get_variable(script, *ptrReadPos);
+        script->functionTemp[0].s = get_variable(script, *ptrReadPos);
         script->blocked = 1;
     }
 
-    if (script->functionTemp[0]) {
+    if (script->functionTemp[0].s) {
         s32 todo = 1; // val can be anything
         if (todo) {
-            script->functionTemp[0] -= 1;
+            script->functionTemp[0].s -= 1;
         }
-        return !script->functionTemp[0];
+        return !script->functionTemp[0].s;
     }
     return ApiStatus_DONE2;
 }
@@ -106,16 +106,16 @@ ApiStatus si_handle_wait_seconds(ScriptInstance* script) {
     Bytecode* ptrReadPos = script->ptrReadPos;
 
     if (!script->blocked) {
-        script->functionTemp[0] = get_float_variable(script, *ptrReadPos) * 30.0f + 0.5;
+        script->functionTemp[0].s = get_float_variable(script, *ptrReadPos) * 30.0f + 0.5;
         script->blocked = 1;
     }
 
-    if (script->functionTemp[0]) {
+    if (script->functionTemp[0].s != 0) {
         s32 todo = 1; // val can be anything
         if (todo) {
-            script->functionTemp[0] -= 1;
+            script->functionTemp[0].s -= 1;
         }
-        return !script->functionTemp[0];
+        return !script->functionTemp[0].s;
     }
     return ApiStatus_DONE2;
 }
@@ -1380,9 +1380,26 @@ INCLUDE_ASM(f32, "si", get_float_variable, ScriptInstance* script, Bytecode var)
 
 INCLUDE_ASM(f32, "si", set_float_variable, ScriptInstance* script, Bytecode var, f32 value);
 
-INCLUDE_ASM(s32, "si", si_find_label, ScriptInstance* script, s32 arg1);
+Bytecode* si_find_label(ScriptInstance* script, s32 arg1) {
+    Bytecode* ret = script->ptrReadPos;
+    s32 i;
 
-INCLUDE_ASM(s32, "si", si_skip_if, ScriptInstance* script);
+    if (arg1 < -270000000) {
+        return arg1;
+    }
+
+    for (i = 0; i < 0x10; i++) {
+        if (script->labelIndices[i] == arg1) {
+            ret = script->labelPositions[i];
+            break;
+        }
+    }
+
+    ASSERT(i < 0x10);
+    return ret;
+}
+
+INCLUDE_ASM(Bytecode*, "si", si_skip_if, ScriptInstance* script);
 // Matching but needs rodata support
 /*Bytecode* si_skip_if(ScriptInstance* script) {
     s32 nestedIfDepth = 0;
@@ -1422,7 +1439,7 @@ INCLUDE_ASM(s32, "si", si_skip_if, ScriptInstance* script);
     } while(1);
 }*/
 
-INCLUDE_ASM(s32, "si", si_skip_else, ScriptInstance* script);
+INCLUDE_ASM(Bytecode*, "si", si_skip_else, ScriptInstance* script);
 // Matching but needs rodata support
 /*Bytecode* si_skip_else(ScriptInstance* script) {
     s32 nestedIfDepth = 0;
@@ -1458,8 +1475,8 @@ INCLUDE_ASM(s32, "si", si_skip_else, ScriptInstance* script);
     } while(1);
 }*/
 
-INCLUDE_ASM(s32, "si", si_goto_end_case, ScriptInstance* script);
+INCLUDE_ASM(Bytecode*, "si", si_goto_end_case, ScriptInstance* script);
 
-INCLUDE_ASM(s32, "si", si_goto_next_case, ScriptInstance* script);
+INCLUDE_ASM(Bytecode*, "si", si_goto_next_case, ScriptInstance* script);
 
-INCLUDE_ASM(s32, "si", si_goto_end_loop, ScriptInstance* script);
+INCLUDE_ASM(Bytecode*, "si", si_goto_end_loop, ScriptInstance* script);

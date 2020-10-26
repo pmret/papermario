@@ -12,8 +12,8 @@ INCLUDE_ASM(s32, "world/area_flo/flo_21/CE6700", func_802405FC_CE6CFC);
 
 INCLUDE_ASM(s32, "world/area_flo/flo_21/CE6700", func_80240708_CE6E08);
 
-INCLUDE_ASM(s32, "world/area_flo/flo_21/CE6700", func_802407F4_CE6EF4);
+#include "world/common/UnkTexturePanFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_flo/flo_21/CE6700", func_80240918_CE7018);
+#include "world/common/UnkTexturePanFunc2.inc.c"
 
 INCLUDE_ASM(s32, "world/area_flo/flo_21/CE6700", func_80240B00_CE7200);

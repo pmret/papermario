@@ -1,20 +1,20 @@
 #include "jan_03.h"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80240000_B34BD0);
+#include "world/common/SetPlayerStatusAnimFlags100000.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80240020_B34BF0);
+#include "world/common/GetCurrentFloor.inc.c"
 
 INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80240034_B34C04);
 
 INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_802400F0_B34CC0);
 
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_802401D0_B34DA0);
+#include "world/common/GetCurrentCameraYawClamped180.inc.c"
 
 INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_8024023C_B34E0C);
 
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_802402E0_B34EB0);
+#include "world/common/UnkTexturePanFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80240404_B34FD4);
+#include "world/common/UnkTexturePanFunc2.inc.c"
 
 INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_802405EC_B351BC);
 

@@ -59,7 +59,7 @@ ApiStatus ActorSpeak(ScriptInstance* script, s32 isInitialCall) {
         }
         clamp_printer_coords(gSpeakingActorPrintCtx, screenX, screenY);
 
-        script->functionTemp[0] = 0;
+        script->functionTemp[0].s = 0;
         D_8009A650[0] |= 0x10;
         if (gSpeakingActorTalkAnim >= 0) {
             func_80263E08(actor, part, gSpeakingActorTalkAnim);
@@ -67,7 +67,7 @@ ApiStatus ActorSpeak(ScriptInstance* script, s32 isInitialCall) {
         increment_status_menu_disabled();
     }
 
-    if (script->functionTemp[0] == 0) {
+    if (script->functionTemp[0].s == 0) {
         actor = gSpeakingActor;
         part = gSpeakingActorPart;
 

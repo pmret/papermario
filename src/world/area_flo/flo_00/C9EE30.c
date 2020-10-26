@@ -8,7 +8,7 @@ INCLUDE_ASM(s32, "world/area_flo/flo_00/C9EE30", func_802410B4_C9EFD4);
 
 INCLUDE_ASM(s32, "world/area_flo/flo_00/C9EE30", func_802411EC_C9F10C);
 
-INCLUDE_ASM(s32, "world/area_flo/flo_00/C9EE30", func_8024137C_C9F29C);
+#include "world/common/SyncStatusMenu.inc.c"
 
 INCLUDE_ASM(s32, "world/area_flo/flo_00/C9EE30", func_8024139C_C9F2BC);
 

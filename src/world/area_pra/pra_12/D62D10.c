@@ -32,6 +32,6 @@ INCLUDE_ASM(s32, "world/area_pra/pra_12/D62D10", func_80240F50_D63C60);
 
 #include "world/common/GetItemName.inc.c"
 
-INCLUDE_ASM(s32, "world/area_pra/pra_12/D62D10", func_80241068_D63D78);
+#include "world/common/SomeItemEntityFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_pra/pra_12/D62D10", func_802411B8_D63EC8);

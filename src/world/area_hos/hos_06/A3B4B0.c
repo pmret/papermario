@@ -4,7 +4,7 @@ INCLUDE_ASM(s32, "world/area_hos/hos_06/A3B4B0", func_80241FD0_A3B4B0);
 
 #include "world/common/GetItemName.inc.c"
 
-INCLUDE_ASM(s32, "world/area_hos/hos_06/A3B4B0", func_802420E8_A3B5C8);
+#include "world/common/SomeItemEntityFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_hos/hos_06/A3B4B0", func_80242238_A3B718);
 

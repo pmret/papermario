@@ -1,14 +1,14 @@
 #include "kmr_20.h"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8EBE50", func_80240030_8EBE50);
+#include "world/common/SetPlayerStatusAnimFlags100000.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8EBE50", func_80240050_8EBE70);
+#include "world/common/GetCurrentFloor.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8EBE50", func_80240064_8EBE84);
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8EBE50", func_80240120_8EBF40);
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8EBE50", func_80240200_8EC020);
+#include "world/common/GetCurrentCameraYawClamped180.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8EBE50", func_8024026C_8EC08C);
 

@@ -16,6 +16,6 @@ INCLUDE_ASM(s32, "world/area_omo/omo_06/DB7910", func_80240388_DB7C98);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_06/DB7910", func_80240518_DB7E28);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_06/DB7910", func_8024055C_DB7E6C);
+#include "world/common/UnkTexturePanFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_06/DB7910", func_80240680_DB7F90);
+#include "world/common/UnkTexturePanFunc2.inc.c"

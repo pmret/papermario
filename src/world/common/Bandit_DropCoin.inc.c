@@ -20,14 +20,14 @@ static ApiStatus Bandit_DropCoin(ScriptInstance* script, s32 isInitialCall) {
             npc = npcID;
         }
 
-        script->functionTemp[0] = npc;
-        script->functionTemp[1] = itemEntityIndex;
-        script->functionTemp[2] = areaFlag;
+        script->functionTemp[0].s = npc;
+        script->functionTemp[1].s = itemEntityIndex;
+        script->functionTemp[2].s = areaFlag;
     }
 
-    npc = script->functionTemp[0];
-    itemEntityIndex = script->functionTemp[1];
-    areaFlag = script->functionTemp[2];
+    npc = script->functionTemp[0].s;
+    itemEntityIndex = script->functionTemp[1].s;
+    areaFlag = script->functionTemp[2].s;
 
     if (get_variable(script, areaFlag)) {
         set_item_entity_position(itemEntityIndex, npc->pos.x, npc->pos.y + 30.0f, npc->pos.z);

@@ -60,9 +60,9 @@ INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_802418B4_D3BE84);
 
 INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_80241A6C_D3C03C);
 
-INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_80241AA0_D3C070);
+#include "world/common/UnkTexturePanFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_80241BC4_D3C194);
+#include "world/common/UnkTexturePanFunc2.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_80241DAC_D3C37C);
 

@@ -118,10 +118,17 @@ def diff_syms(qb, tb):
 
     n_bytes = len(smaller)
     matches = 0
+    exact_matches = 0
     for i in range(0, n_bytes, 4):
         if smaller[i] == larger[i]:
             matches += 4
-    return (matches / n_bytes) * len_ratio
+            if smaller[i : i + 4] == larger[i : i + 4]:
+                exact_matches += 4
+    exact_match = exact_matches == matches and exact_matches > 0
+    score = (matches / n_bytes) * len_ratio
+    if score == 1.0 and not exact_match:
+        score = 0.99
+    return score
 
 
 def get_matches(query):
@@ -132,8 +139,6 @@ def get_matches(query):
     ret = {}
     for symbol in map_offsets:
         if symbol is not None and query != symbol:
-            if symbol == "func_802410C8_B9EA28":
-                dog = 5
             target_bytes = get_symbol_bytes(map_offsets, symbol)
             if target_bytes is not None:
                 score = diff_syms(query_bytes, target_bytes)

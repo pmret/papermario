@@ -1,5 +1,5 @@
 #include "kpa_62.h"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_62/A72300", func_802400E0_A72300);
+#include "world/common/UnkTexturePanFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_62/A72300", func_80240204_A72424);
+#include "world/common/UnkTexturePanFunc2.inc.c"
