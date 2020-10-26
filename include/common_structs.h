@@ -857,7 +857,7 @@ typedef struct GameStatus {
     /* 0x028 */ char unk_28[8];
     /* 0x030 */ u32 prevButtons; /* from previous frame */
     /* 0x034 */ char unk_34[12];
-    /* 0x040 */ u8 stickX; /* with deadzone */
+    /* 0x040 */ s8 stickX; /* with deadzone */
     /* 0x041 */ u8 altStickX; /* input used for batte when flag 80000 set */
     /* 0x042 */ char unk_42[2];
     /* 0x044 */ u8 stickY; /* with deadzone */
