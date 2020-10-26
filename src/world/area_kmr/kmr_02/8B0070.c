@@ -130,7 +130,7 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_8024280C_8B287C);
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80242860_8B28D0);
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_8024293C_8B29AC);
+#include "world/common/SyncStatusMenu.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_8024295C_8B29CC);
 
