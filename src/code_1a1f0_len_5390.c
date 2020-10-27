@@ -27,9 +27,19 @@ void set_defeated(s32 mapID, s32 encounterID) {
     currentEncounter->defeatFlags[mapID][encounterIdx] |= (1 << encounterShift);*/
 }
 
-INCLUDE_ASM(s32, "code_1a1f0_len_5390", func_8003EE98);
+ApiStatus func_8003EE98(ScriptInstance* script, s32 isInitialCall) {
+    if (isInitialCall) {
+        func_80045D00(0, 60);
+    }
+    return (func_80045FA4() == 0) * 2;
+}
 
-INCLUDE_ASM(s32, "code_1a1f0_len_5390", func_8003EECC);
+ApiStatus func_8003EECC(ScriptInstance* script, s32 isInitialCall) {
+    if (isInitialCall) {
+        func_80045D00(1, 60);
+    }
+    return (func_80045FA4() == 0) * 2;
+}
 
 INCLUDE_ASM(s32, "code_1a1f0_len_5390", FadeBackgroundToBlack);
 
@@ -49,7 +59,22 @@ ApiStatus UnfadeBackgroundFromBlack(ScriptInstance* script, s32 isInitialCall) {
     }
 }
 
-INCLUDE_ASM(s32, "code_1a1f0_len_5390", func_8003F018);
+ApiStatus func_8003F018(ScriptInstance* script, s32 isInitialCall) {
+    Npc* npc = get_npc_unsafe(-0xA);
+
+    if (isInitialCall) {
+        play_sound(0x24B);
+        npc->unk_AC = 0;
+    }
+
+    npc->unk_AC += 17;
+
+    if ((u32)(npc->unk_AC & 0xFF) >= 0xFF) {
+        npc->unk_AC = 0xFF;
+        return ApiStatus_DONE1;
+    }
+    return ApiStatus_BLOCK;
+}
 
 INCLUDE_ASM(s32, "code_1a1f0_len_5390", func_8003F084);
 

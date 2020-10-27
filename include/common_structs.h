@@ -112,7 +112,9 @@ typedef struct Npc {
     /* 0x0A6 */ s16 collisionRadius;
     /* 0x0A8 */ s16 collisionHeight;
     /* 0x0AA */ u8 renderMode;
-    /* 0x0AB */ char unk_AB[661];
+    /* 0x0AB */ char unk_AB;
+    /* 0x0AC */ u8 unk_AC;
+    /* 0x0AD */ char unk_AD[659];
 } Npc; // size = 0x340
 
 typedef Npc* NpcList[MAX_NPCS];
@@ -1234,7 +1236,7 @@ typedef struct Actor {
     /* 0x19C */ s32 actorTypeData1[6]; /* 4 = jump sound */
     /* 0x1B4 */ s16 actorTypeData1b[2];
     /* 0x1B8 */ u8 currentHP;
-    /* 0x1B9 */ u8 maxHP;
+    /* 0x1B9 */ s8 maxHP;
     /* 0x1BA */ char unk_1BA[2];
     /* 0x1BC */ u8 hpFraction; /* used to render HP bar */
     /* 0x1BD */ char unk_1BD[3];
@@ -1250,7 +1252,7 @@ typedef struct Actor {
     /* 0x1E4 */ ScriptID takeTurnID;
     /* 0x1E8 */ ScriptID onHitID;
     /* 0x1EC */ ScriptID onTurnChangeID;
-    /* 0x1F0 */ u8 lastEventType;
+    /* 0x1F0 */ s8 lastEventType;
     /* 0x1F1 */ u8 turnPriority;
     /* 0x1F2 */ u8 enemyIndex; /* actorID = this | 200 */
     /* 0x1F3 */ u8 numParts;
@@ -1260,7 +1262,8 @@ typedef struct Actor {
     /* 0x1FC */ s16 damageCounter;
     /* 0x1FE */ char unk_1FE[9];
     /* 0x207 */ u8 extraCoinBonus;
-    /* 0x208 */ char unk_208[4];
+    /* 0x208 */ s8 unk_208;
+    /* 0x209 */ char unk_209[3];
     /* 0x20C */ u32* statusTable;
     /* 0x210 */ u8 debuff;
     /* 0x211 */ s8 debuffDuration;
