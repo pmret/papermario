@@ -187,7 +187,7 @@ INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80130ACC);
 
 INCLUDE_ASM(s32, "code_b72b0_len_15ed0", draw_coin_sparkles);
 
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", get_item_entity);
+INCLUDE_ASM(ItemEntity*, "code_b72b0_len_15ed0", get_item_entity, s32 itemEntityIndex);
 
 INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80130F70);
 
@@ -201,7 +201,8 @@ INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80131128);
 
 INCLUDE_ASM(s32, "code_b72b0_len_15ed0", make_item_entity);
 
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", make_item_entity_nodelay);
+INCLUDE_ASM(s32, "code_b72b0_len_15ed0", make_item_entity_nodelay, s32 itemID, f32 x, f32 y, f32 z,
+            ItemSpawnMode itemSpawnMode, s32 pickupVar);
 
 INCLUDE_ASM(void, "code_b72b0_len_15ed0", make_item_entity_delayed, s32 itemID, f32 x, f32 y, f32 z, s32 unk1,
             s32 unk2,

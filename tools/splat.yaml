@@ -247,6 +247,7 @@ segments:
     - [0xf5750, "c", "code_F5750"]
     - [0xf8f60, "c", "code_f8f60_len_1560"]
     - [0xfa4c0, "c", "code_fa4c0_len_3bf0"]
+    - [0xFBE10, "c"]
     - [0xfe0b0, "c", "code_fe0b0_len_5a0"]
     - [0xFE650, ".data", "code_e79b0_len_1920"]
     - [0xFE660, "bin"]

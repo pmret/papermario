@@ -92,6 +92,9 @@ f32 update_lerp(Easing easing, f32 start, f32 end, s32 elapsed, s32 duration);
 
 void make_item_entity_delayed(s32 itemID, f32 x, f32 y, f32 z, s32 unk1, s32 unk2, s32 unk3);
 void set_item_entity_position(s32 itemEntityIndex, f32 x, f32 y, f32 z);
+ItemEntity* get_item_entity(s32 itemEntityIndex);
+s32 make_item_entity_nodelay(s32 itemID, f32 x, f32 y, f32 z, ItemSpawnMode itemSpawnMode, s32 pickupVar);
+
 
 void set_cam_viewport(s16 id, s16 x, s16 y, s16 width, s16 height);
 
