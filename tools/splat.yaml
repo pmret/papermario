@@ -829,7 +829,6 @@ segments:
     - [0x7E3700, "c"]
     - [0x7e4d00, "bin"]
   - name: world/area_mac/machi/
-    ld_name: machi
     type: code
     overlay: True
     start: 0x7E73A0
