@@ -12,4 +12,8 @@
     ],
     "python.pythonPath": "/usr/bin/python3",
     "git.ignoreLimitWarning": true,
+    "search.exclude": {
+        "build": true,
+        "docs/doxygen": true,
+    },
 }

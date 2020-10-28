@@ -8,16 +8,17 @@ venv/
 .DS_Store
 ctx.c
 expected/
-
-# Assets
-assets
+settings.mk
 
 # Build artifacts
 *.ld
 *.z64
 *.bin
+*.i
+*.Yay0
 bin/
 build/
 docs/doxygen/
+include/ld_addrs.h
 
 .vscode/launch.json

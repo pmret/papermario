@@ -3,6 +3,13 @@
     "configurations": [
         {
             "name": "papermario",
+            "browse": {
+                "limitSymbolsToIncludedHeaders": true,
+                "path": [
+                    "${workspaceFolder}/include",
+                    "${workspaceFolder}/src"
+                ]
+            },
             "includePath": [
                 "${workspaceFolder}/include",
                 "${workspaceFolder}/src"
