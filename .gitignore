@@ -8,6 +8,7 @@ venv/
 .DS_Store
 ctx.c
 expected/
+settings.mk
 
 # Build artifacts
 *.ld
