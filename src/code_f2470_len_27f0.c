@@ -35,7 +35,6 @@ ApiStatus GetNpcPointer(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#ifdef NON_MATCHING
 ApiStatus SetNpcPos(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     NpcId npcID = get_variable(script, *args++);
@@ -51,15 +50,13 @@ ApiStatus SetNpcPos(ScriptInstance* script, s32 isInitialCall) {
     npc->pos.x = x;
     npc->pos.y = y;
     npc->pos.z = z;
-    npc->colliderPos.x = x;
-    npc->colliderPos.y = y;
-    npc->colliderPos.z = z;
+    npc->colliderPos.x = npc->pos.x;
+    npc->colliderPos.y = npc->pos.y;
+    npc->colliderPos.z = npc->pos.z;
     npc->flags |= 0x10000;
+    
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(s32, "code_f2470_len_27f0", SetNpcPos, ScriptInstance* script, s32 isInitialCall);
-#endif
 
 ApiStatus SetNpcRotation(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

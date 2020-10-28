@@ -26,6 +26,7 @@ ApiStatus func_80240034_7EAD44(ScriptInstance* script, s32 isInitialCall) {
             return ApiStatus_DONE2;
         }
     }
+    
     return ApiStatus_BLOCK;
 }
 #else
