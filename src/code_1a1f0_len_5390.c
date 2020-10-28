@@ -31,14 +31,14 @@ ApiStatus func_8003EE98(ScriptInstance* script, s32 isInitialCall) {
     if (isInitialCall) {
         func_80045D00(0, 60);
     }
-    return (func_80045FA4() == 0) * 2;
+    return (func_80045FA4() == 0) * ApiStatus_DONE2;
 }
 
 ApiStatus func_8003EECC(ScriptInstance* script, s32 isInitialCall) {
     if (isInitialCall) {
         func_80045D00(1, 60);
     }
-    return (func_80045FA4() == 0) * 2;
+    return (func_80045FA4() == 0) * ApiStatus_DONE2;
 }
 
 INCLUDE_ASM(s32, "code_1a1f0_len_5390", FadeBackgroundToBlack);

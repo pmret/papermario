@@ -9,7 +9,7 @@ ApiStatus FadeOutMusic(ScriptInstance* script, s32 isInitialCall) {
     s32 itemID = get_variable(script, *args++);
     s32* ptrNextPos = args++;
 
-    return (set_music_track(itemID, -1, 0, get_variable(script, *ptrNextPos++), 8) != 0) * 2;
+    return (set_music_track(itemID, -1, 0, get_variable(script, *ptrNextPos++), 8) != 0) * ApiStatus_DONE2;
 }
 
 ApiStatus SetMusicTrack(ScriptInstance* script, s32 isInitialCall) {
@@ -19,7 +19,7 @@ ApiStatus SetMusicTrack(ScriptInstance* script, s32 isInitialCall) {
     s32 variation = get_variable(script, *args++);
     s16 volume = get_variable(script, *args++);
 
-    return (set_music_track(musicPlayer, songID, variation, 0x1F4, volume) != 0) * 2;
+    return (set_music_track(musicPlayer, songID, variation, 0x1F4, volume) != 0) * ApiStatus_DONE2;
 }
 
 ApiStatus FadeInMusic(ScriptInstance* script, s32 isInitialCall) {
@@ -31,7 +31,7 @@ ApiStatus FadeInMusic(ScriptInstance* script, s32 isInitialCall) {
     s16 var4 = get_variable(script, *args++);
     s16 var5 = get_variable(script, *args++);
 
-    return (func_8014A964(var0, var1, var2, var3, var4, var5) != 0) * 2;
+    return (func_8014A964(var0, var1, var2, var3, var4, var5) != 0) * ApiStatus_DONE2;
 }
 
 INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D5EE0);
@@ -81,14 +81,14 @@ ApiStatus ClearAmbientSounds(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 flags = get_variable(script, *args++);
 
-    return (play_ambient_sounds(-1, flags) != 0) * 2;
+    return (play_ambient_sounds(-1, flags) != 0) * ApiStatus_DONE2;
 }
 
 ApiStatus PlayAmbientSounds(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 soundID = get_variable(script, *args++);
 
-    return (play_ambient_sounds(soundID, 0xFA) != 0) * 2;
+    return (play_ambient_sounds(soundID, 0xFA) != 0) * ApiStatus_DONE2;
 }
 
 ApiStatus PlaySound(ScriptInstance* script, s32 isInitialCall) {
@@ -483,7 +483,6 @@ ApiStatus GetItemPower(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus ShowGotItem(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ItemEntity* e;
 
     if (isInitialCall) {
         script->functionTemp[0].s = 0;
