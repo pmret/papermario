@@ -5,8 +5,8 @@ glabel clear_trigger_data
 /* DBD80 80145680 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
 /* DBD84 80145684 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* DBD88 80145688 80420070 */  lb        $v0, 0x70($v0)
-/* DBD8C 8014568C 3C048016 */  lui       $a0, 0x8016
-/* DBD90 80145690 2484A550 */  addiu     $a0, $a0, -0x5ab0
+/* DBD8C 8014568C 3C048016 */  lui       $a0, %hi(gCollisionStatus)
+/* DBD90 80145690 2484A550 */  addiu     $a0, $a0, %lo(gCollisionStatus)
 /* DBD94 80145694 14400005 */  bnez      $v0, .L801456AC
 /* DBD98 80145698 00000000 */   nop      
 /* DBD9C 8014569C 3C028016 */  lui       $v0, %hi(gTriggerList1)

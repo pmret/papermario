@@ -10,8 +10,8 @@ glabel func_80240020_D788A0
 /* D788B4 80240034 0C0B1EAF */  jal       get_variable
 /* D788B8 80240038 8C450000 */   lw       $a1, ($v0)
 /* D788BC 8024003C 0040302D */  daddu     $a2, $v0, $zero
-/* D788C0 80240040 3C058016 */  lui       $a1, 0x8016
-/* D788C4 80240044 84A5A550 */  lh        $a1, -0x5ab0($a1)
+/* D788C0 80240040 3C058016 */  lui       $a1, %hi(gCollisionStatus)
+/* D788C4 80240044 84A5A550 */  lh        $a1, %lo(gCollisionStatus)($a1)
 /* D788C8 80240048 3C048011 */  lui       $a0, %hi(gPlayerStatus)
 /* D788CC 8024004C 2484EFC8 */  addiu     $a0, $a0, %lo(gPlayerStatus)
 /* D788D0 80240050 10A60004 */  beq       $a1, $a2, .L80240064

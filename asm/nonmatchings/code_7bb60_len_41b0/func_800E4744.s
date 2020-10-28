@@ -57,8 +57,8 @@ glabel func_800E4744
 /* 7DCC4 800E4814 2673EBB0 */  addiu     $s3, $s3, %lo(D_8010EBB0)
 /* 7DCC8 800E4818 C7A20034 */  lwc1      $f2, 0x34($sp)
 /* 7DCCC 800E481C 4614B500 */  add.s     $f20, $f22, $f20
-/* 7DCD0 800E4820 3C148016 */  lui       $s4, 0x8016
-/* 7DCD4 800E4824 2694A550 */  addiu     $s4, $s4, -0x5ab0
+/* 7DCD0 800E4820 3C148016 */  lui       $s4, %hi(gCollisionStatus)
+/* 7DCD4 800E4824 2694A550 */  addiu     $s4, $s4, %lo(gCollisionStatus)
 /* 7DCD8 800E4828 4602A03C */  c.lt.s    $f20, $f2
 /* 7DCDC 800E482C 00000000 */  nop       
 /* 7DCE0 800E4830 45000002 */  bc1f      .L800E483C

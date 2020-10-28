@@ -106,7 +106,7 @@ typedef struct Npc {
     /* 0x08E */ s16 duration; /* formerly interp_counter */
     /* 0x090 */ Vec3s homePos;
     /* 0x096 */ char unk_96[12];
-    /* 0x0A2 */ s16 unk_A2;
+    /* 0x0A2 */ u16 unk_A2;
     /* 0x0A4 */ u8 npcID;
     /* 0x0A5 */ char unk_A5;
     /* 0x0A6 */ s16 collisionRadius;
@@ -862,7 +862,7 @@ typedef struct GameStatus {
     /* 0x040 */ s8 stickX; /* with deadzone */
     /* 0x041 */ u8 altStickX; /* input used for batte when flag 80000 set */
     /* 0x042 */ char unk_42[2];
-    /* 0x044 */ u8 stickY; /* with deadzone */
+    /* 0x044 */ s8 stickY; /* with deadzone */
     /* 0x045 */ u8 altStickY; /* input used for batte when flag 80000 set */
     /* 0x046 */ char unk_46[2];
     /* 0x048 */ s16 unk_48[4];

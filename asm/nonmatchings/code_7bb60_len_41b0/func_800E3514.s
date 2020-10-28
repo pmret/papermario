@@ -45,8 +45,8 @@ glabel func_800E3514
 /* 7CA64 800E35B4 27A20044 */  addiu     $v0, $sp, 0x44
 /* 7CA68 800E35B8 0C03791B */  jal       func_800DE46C
 /* 7CA6C 800E35BC AFA20020 */   sw       $v0, 0x20($sp)
-/* 7CA70 800E35C0 3C128016 */  lui       $s2, 0x8016
-/* 7CA74 800E35C4 2652A550 */  addiu     $s2, $s2, -0x5ab0
+/* 7CA70 800E35C0 3C128016 */  lui       $s2, %hi(gCollisionStatus)
+/* 7CA74 800E35C4 2652A550 */  addiu     $s2, $s2, %lo(gCollisionStatus)
 /* 7CA78 800E35C8 AE020000 */  sw        $v0, ($s0)
 /* 7CA7C 800E35CC 04410010 */  bgez      $v0, .L800E3610
 /* 7CA80 800E35D0 0240802D */   daddu    $s0, $s2, $zero

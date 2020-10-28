@@ -231,13 +231,13 @@ INCLUDE_ASM(ScriptInstance*, "code_e79b0_len_1920", start_script, Bytecode* init
             s32 initialState);
 #endif
 
-#ifdef NON_MATCHING
-ScriptInstance* start_script_in_group(Bytecode* initialLine, u8 priority, s32 initialState, u8 groupFlags) {
+ScriptInstance* start_script_in_group(Bytecode* initialLine, u8 priority, u8 initialState, u8 groupFlags) {
     ScriptInstance* newScript;
     s32 scriptListCount;
     s32 i;
     s32 curScriptIndex;
-    s32* tempCounter = &gStaticScriptCounter;
+    s32* tempCounter;
+    s32* numScripts;
 
     for (i = 0; i < MAX_SCRIPTS; i++) {
         if ((*gCurrentScriptListPtr)[i] == NULL) {
@@ -248,59 +248,60 @@ ScriptInstance* start_script_in_group(Bytecode* initialLine, u8 priority, s32 in
     ASSERT(i < MAX_SCRIPTS);
     curScriptIndex = i;
 
-    SCRIPT_ALLOC(newScript, curScriptIndex);
+    (*gCurrentScriptListPtr)[curScriptIndex] = newScript = heap_malloc(sizeof(ScriptInstance));
+    numScripts = &gNumScripts;
+    (*numScripts)++;
+    ASSERT(newScript != NULL);
 
-    newScript->state = (initialState | 1);
-    newScript->ptrNextLine = initialLine;
-    newScript->ptrFirstLine = initialLine;
-    newScript->ptrCurrentLine = initialLine;
-    newScript->currentOpcode = 0;
-    newScript->priority = priority;
-    newScript->unk_60 = NULL;
-    newScript->blockingParent = NULL;
-    newScript->childScript = NULL;
-    newScript->parentScript = NULL;
-    newScript->id = gStaticScriptCounter++;
-    newScript->owner1.actorID = -1;
-    newScript->owner2.npcID = -1;
-    newScript->loopDepth = -1;
-    newScript->switchDepth = -1;
-    newScript->groupFlags = groupFlags;
-    newScript->ptrSavedPosition = NULL;
-    newScript->frameCounter = 0.0f;
-    newScript->unk_158 = 0;
-    newScript->timeScale = gGlobalTimeSpace;
+    // Some of this function is surely macros. I think we'll learn more as we do others in this file. -Ethan
+    do {
+        newScript->state = initialState | 1;
+        newScript->currentOpcode = 0;
+        newScript->priority = priority;
+        newScript->id = gStaticScriptCounter++;
+        newScript->ptrNextLine = initialLine;
+        newScript->ptrFirstLine = initialLine;
+        newScript->ptrCurrentLine = initialLine;
+        newScript->unk_60 = 0;
+        newScript->blockingParent = 0;
+        newScript->childScript = 0;
+        newScript->parentScript = 0;
+        newScript->owner1.actorID = -1;
+        newScript->owner2.npcID = -1;
+        newScript->loopDepth = -1;
+        newScript->switchDepth = -1;
+        newScript->groupFlags = groupFlags;
+        newScript->ptrSavedPosition = 0;
+        newScript->frameCounter = 0.0f;
+        newScript->unk_158 = 0;
+        newScript->timeScale = gGlobalTimeSpace;
+        scriptListCount = 0;
 
-    scriptListCount = 0;
+        for (i = 0; i < ((s32)((sizeof(newScript->varTable)) / (sizeof(newScript->varTable[0])))); i++) {
+            newScript->varTable[i] = 0;
+        }
+        for (i = 0; i < ((s32)((sizeof(newScript->varFlags)) / (sizeof(newScript->varFlags[0])))); i++) {
+            newScript->varFlags[i] = 0;
+        }
 
-    for (i = 0; i < 16; i++) {
-        newScript->varTable[i] = 0;
-    }
+        find_script_labels(newScript);
 
-    for (i = 0; i < 3; i++) {
-        newScript->varFlags[i] = 0;
-    }
-
-    find_script_labels(newScript);
-
-    if ((D_802D9CA4 != 0) && ((newScript->state & 0x20) != 0)) {
-        scriptListCount = gScriptListCount++;
-        gScriptIndexList[scriptListCount] = curScriptIndex;
-        gScriptIdList[scriptListCount] = newScript->id;
-    }
+        if ((D_802D9CA4 != 0) && (newScript->state & 0x20)) {
+            scriptListCount = gScriptListCount++;
+            gScriptIndexList[scriptListCount] = curScriptIndex;
+            gScriptIdList[scriptListCount] = newScript->id;
+        }
+    } while (0);
 
     func_802C3390(newScript);
+
+    tempCounter = &gStaticScriptCounter;
     if (*tempCounter == 0) {
         *tempCounter = 1;
     }
-}
 
-return newScript;
+    return newScript;
 }
-#else
-INCLUDE_ASM(ScriptInstance*, "code_e79b0_len_1920", start_script_in_group, Bytecode* initialLine, u8 priority,
-            s32 initialState, u8 groupFlags);
-#endif
 
 INCLUDE_ASM(s32, "code_e79b0_len_1920", start_child_script);
 

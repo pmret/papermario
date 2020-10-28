@@ -65,6 +65,9 @@ s32 func_800554E8(s32, s32);
 s32 func_800555E4(s32);
 s32 osGetId();
 
+void set_curtain_scale_goal(f32 scale);
+void set_curtain_fade(f32 scale);
+
 void fx_walk_normal(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4, s32 arg5);
 
 // Partner
@@ -78,7 +81,7 @@ void func_800ED5D0(Npc* partner);
 s32 func_800EF394(f32);
 s32 does_script_exist(s32 id);
 ScriptInstance* start_script(Bytecode* initialLine, s32 priority, s32 initialState);
-ScriptInstance* start_script_in_group(Bytecode* initialLine, u8 priority, s32 initialState, u8 groupFlags);
+ScriptInstance* start_script_in_group(Bytecode* initialLine, u8 priority, u8 initialState, u8 groupFlags);
 
 void func_8011B7C0(u16, s32, s32);
 void func_80137D88(s32, f32);

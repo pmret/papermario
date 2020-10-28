@@ -238,7 +238,9 @@ INCLUDE_ASM(s32, "code_F5750", func_802D2484);
 
 INCLUDE_ASM(s32, "code_F5750", func_802D249C);
 
-INCLUDE_ASM(s32, "code_F5750", func_802D24F4);
+ApiStatus func_802D24F4(ScriptInstance* script, s32 isInitialCall) {
+    return (gPlayerStatus.moveFrames == 0) * ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_F5750", func_802D2508);
 

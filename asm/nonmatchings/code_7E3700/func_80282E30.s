@@ -141,8 +141,8 @@ glabel func_80282E30
 /* 7E3EBC 8028303C 90420000 */  lbu       $v0, ($v0)
 /* 7E3EC0 80283040 14400008 */  bnez      $v0, .L80283064
 /* 7E3EC4 80283044 24020001 */   addiu    $v0, $zero, 1
-/* 7E3EC8 80283048 3C038016 */  lui       $v1, 0x8016
-/* 7E3ECC 8028304C 8463A550 */  lh        $v1, -0x5ab0($v1)
+/* 7E3EC8 80283048 3C038016 */  lui       $v1, %hi(gCollisionStatus)
+/* 7E3ECC 8028304C 8463A550 */  lh        $v1, %lo(gCollisionStatus)($v1)
 /* 7E3ED0 80283050 2402FFFF */  addiu     $v0, $zero, -1
 /* 7E3ED4 80283054 10620003 */  beq       $v1, $v0, .L80283064
 /* 7E3ED8 80283058 24020001 */   addiu    $v0, $zero, 1

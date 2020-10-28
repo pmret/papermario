@@ -12,8 +12,8 @@ glabel func_802BE3A4
 /* 31F130 802BE3C0 3C108011 */  lui       $s0, %hi(gPlayerData)
 /* 31F134 802BE3C4 2610F290 */  addiu     $s0, $s0, %lo(gPlayerData)
 /* 31F138 802BE3C8 AFB60060 */  sw        $s6, 0x60($sp)
-/* 31F13C 802BE3CC 3C168016 */  lui       $s6, 0x8016
-/* 31F140 802BE3D0 26D6A550 */  addiu     $s6, $s6, -0x5ab0
+/* 31F13C 802BE3CC 3C168016 */  lui       $s6, %hi(gCollisionStatus)
+/* 31F140 802BE3D0 26D6A550 */  addiu     $s6, $s6, %lo(gCollisionStatus)
 /* 31F144 802BE3D4 AFB40058 */  sw        $s4, 0x58($sp)
 /* 31F148 802BE3D8 3C148011 */  lui       $s4, %hi(D_8010EBB0)
 /* 31F14C 802BE3DC 2694EBB0 */  addiu     $s4, $s4, %lo(D_8010EBB0)

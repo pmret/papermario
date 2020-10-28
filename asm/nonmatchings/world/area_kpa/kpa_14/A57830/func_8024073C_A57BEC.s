@@ -22,8 +22,8 @@ glabel func_8024073C_A57BEC
 /* A57C30 80240780 0C0B1EAF */  jal       get_variable
 /* A57C34 80240784 0040802D */   daddu    $s0, $v0, $zero
 /* A57C38 80240788 0040202D */  daddu     $a0, $v0, $zero
-/* A57C3C 8024078C 3C038016 */  lui       $v1, 0x8016
-/* A57C40 80240790 2463A550 */  addiu     $v1, $v1, -0x5ab0
+/* A57C3C 8024078C 3C038016 */  lui       $v1, %hi(gCollisionStatus)
+/* A57C40 80240790 2463A550 */  addiu     $v1, $v1, %lo(gCollisionStatus)
 /* A57C44 80240794 84620002 */  lh        $v0, 2($v1)
 /* A57C48 80240798 3C058011 */  lui       $a1, %hi(gPlayerStatus)
 /* A57C4C 8024079C 24A5EFC8 */  addiu     $a1, $a1, %lo(gPlayerStatus)
