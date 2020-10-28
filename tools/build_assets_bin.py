@@ -1,43 +1,40 @@
 #! /usr/bin/python3
 
 import os
-import json
-import sys
-from subprocess import call
+from sys import argv
 from pathlib import Path
-import shutil
-
-tools_dir = Path(__file__).parent.absolute()
 
 def next_multiple(pos, multiple):
     return pos + pos % multiple
 
-def build_mapfs(src_dir, build_dir, out_bin):
-    with open(src_dir + ".json", "r") as f:
-        config = json.loads(f.read())
-
+def build_mapfs(out_bin, assets):
     # every TOC entry's name field has data after the null terminator made up from all the previous name fields.
     # we probably don't have to do this for the game to read the data properly (it doesn't read past the null terminator
     # of `string`), but the original devs' equivalent to build_assets_fs.py had this bug so we need to replicate it to match.
     written_names = []
 
     with open(out_bin, "wb") as f:
-        f.write(config["title"].encode("ascii"))
+        f.write("Map Ver.00/11/07 15:36".encode("ascii"))
 
-        next_data_pos = (len(config["assets"]) + 1) * 0x1C
+        next_data_pos = (len(assets) + 1) * 0x1C
 
         asset_idx = 0
-        for asset in config["assets"]:
+        for decompressed in assets:
             toc_entry_pos = 0x20 + asset_idx * 0x1C
 
-            src_path = Path(src_dir, asset["path"])
-            build_path = Path(build_dir, asset["path"])
+            decompressed = Path(decompressed)
+            compressed = decompressed.with_suffix(".Yay0")
+
+            # non-texture assets should be compressed
+            if not decompressed.stem.endswith("_tex") and not compressed.exists():
+                print(f"uncompressed asset: {decompressed} (expected {compressed} to exist)")
+                exit(1)
 
             # data for TOC entry
-            name = asset["name"] + "\0"
+            name = decompressed.stem + "\0"
             offset = next_data_pos
-            size = next_multiple(build_path.stat().st_size, 2)
-            decompressed_size = src_path.stat().st_size
+            decompressed_size = decompressed.stat().st_size
+            size = next_multiple(compressed.stat().st_size, 2) if compressed.exists() else decompressed_size
 
             #print(f"{name} {offset:08X} {size:08X} {decompressed_size:08X}")
 
@@ -55,7 +52,7 @@ def build_mapfs(src_dir, build_dir, out_bin):
 
             # write data.
             f.seek(0x20 + next_data_pos)
-            f.write(build_path.read_bytes())
+            f.write(compressed.read_bytes() if compressed.exists() else decompressed.read_bytes())
             next_data_pos += size
 
             asset_idx += 1
@@ -71,36 +68,8 @@ def build_mapfs(src_dir, build_dir, out_bin):
         f.seek(toc_entry_pos + 0x18)
         f.write((0x903F0000).to_bytes(4, byteorder="big")) # TODO: figure out purpose
 
-def build_file(src_dir, out_dir, filename):
-    with open(src_dir + ".json", "r") as f:
-        config = json.loads(f.read())
-
-    asset = None
-    for a in config["assets"]:
-        if (a["path"] == filename):
-            asset = a
-
-    if not asset:
-        print("asset not configured in {}.json".format(src_dir))
-        exit(1)
-
-    src_path = Path(src_dir, filename)
-    out_path = Path(out_dir, filename)
-
-    if asset["compress"]:
-        call([f"{tools_dir}/Yay0compress", src_path, out_path])
-    else:
-        shutil.copy(src_path, out_path)
-
 if __name__ == "__main__":
-    sys.argv.pop(0)
-    src = sys.argv.pop(0)
-    dest = sys.argv.pop(0)
+    argv.pop(0) # python3
+    out = argv.pop(0)
 
-    if len(sys.argv) > 0:
-        # copy (and compress if required) the given file(s)
-        while len(sys.argv) > 0:
-            build_file(src, dest, sys.argv.pop())
-    else:
-        # build the aggregate file
-        build_mapfs(src, dest, dest + ".bin")
+    build_mapfs(out, argv)
