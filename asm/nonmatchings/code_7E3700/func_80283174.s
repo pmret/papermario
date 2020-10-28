@@ -5,8 +5,8 @@ glabel func_80283174
 /* 7E3FF4 80283174 3C058011 */  lui       $a1, %hi(gPlayerStatus)
 /* 7E3FF8 80283178 24A5EFC8 */  addiu     $a1, $a1, %lo(gPlayerStatus)
 /* 7E3FFC 8028317C 8C8200B0 */  lw        $v0, 0xb0($a0)
-/* 7E4000 80283180 3C038016 */  lui       $v1, 0x8016
-/* 7E4004 80283184 8463A550 */  lh        $v1, -0x5ab0($v1)
+/* 7E4000 80283180 3C038016 */  lui       $v1, %hi(gCollisionStatus)
+/* 7E4004 80283184 8463A550 */  lh        $v1, %lo(gCollisionStatus)($v1)
 /* 7E4008 80283188 24424000 */  addiu     $v0, $v0, 0x4000
 /* 7E400C 8028318C 5462000F */  bnel      $v1, $v0, .L802831CC
 /* 7E4010 80283190 AC8000B8 */   sw       $zero, 0xb8($a0)

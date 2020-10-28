@@ -9,8 +9,8 @@ glabel check_input_jump
 /* 7F620 800E6170 AFBF0018 */  sw        $ra, 0x18($sp)
 /* 7F624 800E6174 AFB00010 */  sw        $s0, 0x10($sp)
 /* 7F628 800E6178 8E2200E0 */  lw        $v0, 0xe0($s1)
-/* 7F62C 800E617C 3C108016 */  lui       $s0, 0x8016
-/* 7F630 800E6180 2610A550 */  addiu     $s0, $s0, -0x5ab0
+/* 7F62C 800E617C 3C108016 */  lui       $s0, %hi(gCollisionStatus)
+/* 7F630 800E6180 2610A550 */  addiu     $s0, $s0, %lo(gCollisionStatus)
 /* 7F634 800E6184 30428000 */  andi      $v0, $v0, 0x8000
 /* 7F638 800E6188 10400032 */  beqz      $v0, .L800E6254
 /* 7F63C 800E618C 0000102D */   daddu    $v0, $zero, $zero

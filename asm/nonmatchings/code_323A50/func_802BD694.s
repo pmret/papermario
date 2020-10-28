@@ -12,8 +12,8 @@ glabel func_802BD694
 /* 324000 802BD6B0 3C158011 */  lui       $s5, %hi(D_8010EBB0)
 /* 324004 802BD6B4 26B5EBB0 */  addiu     $s5, $s5, %lo(D_8010EBB0)
 /* 324008 802BD6B8 AFB10024 */  sw        $s1, 0x24($sp)
-/* 32400C 802BD6BC 3C118016 */  lui       $s1, 0x8016
-/* 324010 802BD6C0 2631A550 */  addiu     $s1, $s1, -0x5ab0
+/* 32400C 802BD6BC 3C118016 */  lui       $s1, %hi(gCollisionStatus)
+/* 324010 802BD6C0 2631A550 */  addiu     $s1, $s1, %lo(gCollisionStatus)
 /* 324014 802BD6C4 AFBF0038 */  sw        $ra, 0x38($sp)
 /* 324018 802BD6C8 AFB20028 */  sw        $s2, 0x28($sp)
 /* 32401C 802BD6CC AFB00020 */  sw        $s0, 0x20($sp)

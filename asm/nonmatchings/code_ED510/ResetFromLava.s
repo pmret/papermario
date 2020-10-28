@@ -42,8 +42,8 @@ glabel ResetFromLava
 /* EE910 802C9F60 3C01802E */  lui       $at, 0x802e
 /* EE914 802C9F64 AC22ADA4 */  sw        $v0, -0x525c($at)
 .L802C9F68:
-/* EE918 802C9F68 3C028016 */  lui       $v0, 0x8016
-/* EE91C 802C9F6C 2442A550 */  addiu     $v0, $v0, -0x5ab0
+/* EE918 802C9F68 3C028016 */  lui       $v0, %hi(gCollisionStatus)
+/* EE91C 802C9F6C 2442A550 */  addiu     $v0, $v0, %lo(gCollisionStatus)
 /* EE920 802C9F70 94430002 */  lhu       $v1, 2($v0)
 /* EE924 802C9F74 30624000 */  andi      $v0, $v1, 0x4000
 /* EE928 802C9F78 1440000F */  bnez      $v0, .L802C9FB8

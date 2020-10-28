@@ -23,8 +23,8 @@ glabel func_802BDDD8
 /* 321970 802BDE20 00000000 */   nop      
 /* 321974 802BDE24 3C148011 */  lui       $s4, %hi(gPlayerStatus)
 /* 321978 802BDE28 2694EFC8 */  addiu     $s4, $s4, %lo(gPlayerStatus)
-/* 32197C 802BDE2C 3C158016 */  lui       $s5, 0x8016
-/* 321980 802BDE30 26B5A550 */  addiu     $s5, $s5, -0x5ab0
+/* 32197C 802BDE2C 3C158016 */  lui       $s5, %hi(gCollisionStatus)
+/* 321980 802BDE30 26B5A550 */  addiu     $s5, $s5, %lo(gCollisionStatus)
 /* 321984 802BDE34 304200FF */  andi      $v0, $v0, 0xff
 /* 321988 802BDE38 24030003 */  addiu     $v1, $zero, 3
 /* 32198C 802BDE3C 14430008 */  bne       $v0, $v1, .L802BDE60

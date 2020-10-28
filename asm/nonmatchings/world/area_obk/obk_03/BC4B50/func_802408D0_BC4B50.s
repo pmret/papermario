@@ -8,8 +8,8 @@ glabel func_802408D0_BC4B50
 /* BC4B5C 802408DC 3C138011 */  lui       $s3, %hi(gPlayerStatus)
 /* BC4B60 802408E0 2673EFC8 */  addiu     $s3, $s3, %lo(gPlayerStatus)
 /* BC4B64 802408E4 AFB00068 */  sw        $s0, 0x68($sp)
-/* BC4B68 802408E8 3C108016 */  lui       $s0, 0x8016
-/* BC4B6C 802408EC 2610A550 */  addiu     $s0, $s0, -0x5ab0
+/* BC4B68 802408E8 3C108016 */  lui       $s0, %hi(gCollisionStatus)
+/* BC4B6C 802408EC 2610A550 */  addiu     $s0, $s0, %lo(gCollisionStatus)
 /* BC4B70 802408F0 AFBF0078 */  sw        $ra, 0x78($sp)
 /* BC4B74 802408F4 AFB1006C */  sw        $s1, 0x6c($sp)
 /* BC4B78 802408F8 F7B60088 */  sdc1      $f22, 0x88($sp)

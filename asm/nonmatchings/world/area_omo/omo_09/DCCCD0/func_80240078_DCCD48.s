@@ -96,8 +96,8 @@ glabel func_80240078_DCCD48
 /* DCCEA0 802401D0 14400032 */  bnez      $v0, .L8024029C
 /* DCCEA4 802401D4 24020002 */   addiu    $v0, $zero, 2
 .L802401D8:
-/* DCCEA8 802401D8 3C178016 */  lui       $s7, 0x8016
-/* DCCEAC 802401DC 26F7A550 */  addiu     $s7, $s7, -0x5ab0
+/* DCCEA8 802401D8 3C178016 */  lui       $s7, %hi(gCollisionStatus)
+/* DCCEAC 802401DC 26F7A550 */  addiu     $s7, $s7, %lo(gCollisionStatus)
 /* DCCEB0 802401E0 24120004 */  addiu     $s2, $zero, 4
 /* DCCEB4 802401E4 3C168024 */  lui       $s6, 0x8024
 /* DCCEB8 802401E8 26D63A90 */  addiu     $s6, $s6, 0x3a90

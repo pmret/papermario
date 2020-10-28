@@ -4,8 +4,8 @@
 glabel update_triggers
 /* DBF60 80145860 27BDFFD0 */  addiu     $sp, $sp, -0x30
 /* DBF64 80145864 AFB20020 */  sw        $s2, 0x20($sp)
-/* DBF68 80145868 3C128016 */  lui       $s2, 0x8016
-/* DBF6C 8014586C 2652A550 */  addiu     $s2, $s2, -0x5ab0
+/* DBF68 80145868 3C128016 */  lui       $s2, %hi(gCollisionStatus)
+/* DBF6C 8014586C 2652A550 */  addiu     $s2, $s2, %lo(gCollisionStatus)
 /* DBF70 80145870 AFB30024 */  sw        $s3, 0x24($sp)
 /* DBF74 80145874 0000982D */  daddu     $s3, $zero, $zero
 /* DBF78 80145878 AFBF0028 */  sw        $ra, 0x28($sp)

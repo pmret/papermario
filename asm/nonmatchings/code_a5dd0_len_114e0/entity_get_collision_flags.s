@@ -44,8 +44,8 @@ glabel entity_get_collision_flags
 /* A7048 80110948 50C20001 */  beql      $a2, $v0, .L80110950
 /* A704C 8011094C 34A50004 */   ori      $a1, $a1, 4
 .L80110950:
-/* A7050 80110950 3C038016 */  lui       $v1, 0x8016
-/* A7054 80110954 8463A550 */  lh        $v1, -0x5ab0($v1)
+/* A7050 80110950 3C038016 */  lui       $v1, %hi(gCollisionStatus)
+/* A7054 80110954 8463A550 */  lh        $v1, %lo(gCollisionStatus)($v1)
 /* A7058 80110958 2402FFFF */  addiu     $v0, $zero, -1
 /* A705C 8011095C 10620005 */  beq       $v1, $v0, .L80110974
 /* A7060 80110960 30624000 */   andi     $v0, $v1, 0x4000

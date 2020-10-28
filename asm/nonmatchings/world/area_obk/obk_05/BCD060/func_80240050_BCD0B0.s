@@ -8,8 +8,8 @@ glabel func_80240050_BCD0B0
 /* BCD0BC 8024005C 3C138011 */  lui       $s3, %hi(gPlayerStatus)
 /* BCD0C0 80240060 2673EFC8 */  addiu     $s3, $s3, %lo(gPlayerStatus)
 /* BCD0C4 80240064 AFB00068 */  sw        $s0, 0x68($sp)
-/* BCD0C8 80240068 3C108016 */  lui       $s0, 0x8016
-/* BCD0CC 8024006C 2610A550 */  addiu     $s0, $s0, -0x5ab0
+/* BCD0C8 80240068 3C108016 */  lui       $s0, %hi(gCollisionStatus)
+/* BCD0CC 8024006C 2610A550 */  addiu     $s0, $s0, %lo(gCollisionStatus)
 /* BCD0D0 80240070 AFBF0078 */  sw        $ra, 0x78($sp)
 /* BCD0D4 80240074 AFB1006C */  sw        $s1, 0x6c($sp)
 /* BCD0D8 80240078 F7B60088 */  sdc1      $f22, 0x88($sp)
