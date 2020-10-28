@@ -129,9 +129,9 @@ $ ./format.sh
 
 If `format.sh` has any problems with your code, go and fix the issues. If you can't fix a warning without making the function not match anymore, append `// NOLINT` to the offending line.
 
-## FAQ
+## Troubleshooting
 
-* If you received the following error when running  `make`:
+* If you are using Windows, you may encounter the following when you run `make`:
 ```
 sha1sum -c checksum.sha1
 sha1sum: 'papermario.z64'$'\r': No such file or directory
@@ -141,5 +141,4 @@ Makefile:118: recipe for target 'verify' failed
 make: *** [verify] Error 1
 ```
 > 💡 Solution
->
-> This is a Windows line ending issue run `git checkout checksum.sha1` to fix it.
+> Run `git checkout checksum.sha1` and retry building. Windows messwes with line endings, causing some of our tools to break. 
