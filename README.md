@@ -142,4 +142,4 @@ make: *** [verify] Error 1
 ```
 > 💡 Solution
 
-Run `git checkout checksum.sha1` and retry building. Windows messwes with line endings, causing some of our tools to break. 
+> Run `git checkout checksum.sha1` and retry building. Windows has different line endings than Linux, causing some of our tools to break. 
