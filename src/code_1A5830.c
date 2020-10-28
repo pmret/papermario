@@ -274,7 +274,7 @@ INCLUDE_ASM(s32, "code_1A5830", func_8027D4C8);
 ApiStatus EnableActorBlur(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     ActorId actorID = get_variable(script, *args++);
-    s32 var1 = get_variable(script, *args++);
+    s32 enable = get_variable(script, *args++);
     Actor* actor;
 
     if (actorID == ActorId_SELF) {
@@ -283,9 +283,9 @@ ApiStatus EnableActorBlur(ScriptInstance* script, s32 isInitialCall) {
 
     actor = get_actor(actorID);
 
-    if (var1 == 0) {
+    if (enable == 0) {
         disable_actor_blur(actor);
-    } else if (var1 == 1) {
+    } else if (enable == 1) {
         enable_actor_blur(actor);
     } else {
         reset_actor_blur(actor);
