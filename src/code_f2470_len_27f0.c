@@ -54,7 +54,7 @@ ApiStatus SetNpcPos(ScriptInstance* script, s32 isInitialCall) {
     npc->colliderPos.y = npc->pos.y;
     npc->colliderPos.z = npc->pos.z;
     npc->flags |= 0x10000;
-    
+
     return ApiStatus_DONE2;
 }
 
