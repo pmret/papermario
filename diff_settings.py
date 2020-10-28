@@ -5,4 +5,4 @@ def apply(config, args):
     config['myimg'] = 'papermario.z64'
     config['mapfile'] = 'build/papermario.map'
     config['source_directories'] = ['.']
-    config['makeflags'] = ['COMPARE=0']
+    config['makeflags'] = ['COMPARE=0', 'WATCH_INCLUDES=0']
