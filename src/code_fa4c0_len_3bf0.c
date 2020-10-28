@@ -77,7 +77,6 @@ ApiStatus func_802D6090(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-//INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", ClearAmbientSounds);
 ApiStatus ClearAmbientSounds(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 flags = get_variable(script, *args++);

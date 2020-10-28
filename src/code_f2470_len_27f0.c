@@ -35,11 +35,35 @@ ApiStatus GetNpcPointer(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
+#ifdef NON_MATCHING
+ApiStatus SetNpcPos(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    NpcId npcID = get_variable(script, *args++);
+    f32 x = get_variable(script, *args++);
+    f32 y = get_variable(script, *args++);
+    f32 z = get_variable(script, *args++);
+    Npc* npc = resolve_npc(script, npcID);
+
+    if (npc == NULL) {
+        return ApiStatus_DONE2;
+    }
+
+    npc->pos.x = x;
+    npc->pos.y = y;
+    npc->pos.z = z;
+    npc->colliderPos.x = x;
+    npc->colliderPos.y = y;
+    npc->colliderPos.z = z;
+    npc->flags |= 0x10000;
+    return ApiStatus_DONE2;
+}
+#else
 INCLUDE_ASM(s32, "code_f2470_len_27f0", SetNpcPos, ScriptInstance* script, s32 isInitialCall);
+#endif
 
 ApiStatus SetNpcRotation(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 npcID = get_variable(script, *args++);
+    NpcId npcID = get_variable(script, *args++);
     f32 rotX = get_float_variable(script, *args++);
     f32 rotY = get_float_variable(script, *args++);
     f32 rotZ = get_float_variable(script, *args++);
@@ -404,7 +428,23 @@ ApiStatus PartnerIsFlying(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_f2470_len_27f0", func_802CFD30);
+ApiStatus func_802CFD30(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    NpcId npcId = get_variable(script, *args++);
+    Bytecode var1 = get_variable(script, *args++);
+    Bytecode var2 = get_variable(script, *args++);
+    Bytecode var3 = get_variable(script, *args++);
+    Bytecode var4 = get_variable(script, *args++);
+    Bytecode var5 = get_variable(script, *args++);
+    Npc* npc = resolve_npc(script, npcId);
+
+    if (npc == NULL) {
+        return ApiStatus_DONE2;
+    }
+
+    func_8003D624(npc, var1, var2, var3, var4, var5, npc->unk_A2);
+    return ApiStatus_DONE2;
+}
 
 ApiStatus func_802CFE2C(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -434,9 +474,44 @@ ApiStatus func_802CFE80(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_f2470_len_27f0", func_802CFEEC);
+ApiStatus func_802CFEEC(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    NpcId npcId = get_variable(script, *args++);
+    Bytecode var1 = get_variable(script, *args++);
+    Bytecode var2 = get_variable(script, *args++);
+    Bytecode var3 = get_variable(script, *args++);
+    Bytecode var4 = get_variable(script, *args++);
+    Npc* npc = resolve_npc(script, npcId);
 
-INCLUDE_ASM(s32, "code_f2470_len_27f0", func_802CFFC0);
+    if (npc == NULL) {
+        return ApiStatus_DONE2;
+    }
+
+    func_8003B44C(npc, var1, var2, var3, var4);
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_802CFFC0(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    NpcId npcId = get_variable(script, *args++);
+    Bytecode var1 = get_variable(script, *args++);
+    Bytecode var2 = get_variable(script, *args++);
+    Bytecode var3 = get_variable(script, *args++);
+    Bytecode var4 = get_variable(script, *args++);
+    Bytecode var5 = get_variable(script, *args++);
+    Bytecode var6 = get_variable(script, *args++);
+    Bytecode var7 = get_variable(script, *args++);
+    Bytecode var8 = get_variable(script, *args++);
+    Npc* npc = resolve_npc(script, npcId);
+
+    if (npc == NULL) {
+        return ApiStatus_DONE2;
+    }
+
+    func_8003B44C(npc, var1, var2, var3, var4);
+    func_8003B464(npc, var5, var6, var7, var8);
+    return ApiStatus_DONE2;
+}
 
 ApiStatus SetNpcEffect(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;

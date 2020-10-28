@@ -65,6 +65,9 @@ s32 func_800554E8(s32, s32);
 s32 func_800555E4(s32);
 s32 osGetId();
 
+void set_curtain_scale_goal(f32 scale);
+void set_curtain_fade(f32 scale);
+
 void fx_walk_normal(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4, s32 arg5);
 
 // Partner
