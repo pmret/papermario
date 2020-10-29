@@ -125,26 +125,26 @@ ApiStatus SetPlayerAnimationSpeed(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus PlayerMoveTo(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     PlayerStatus* playerStatus = PLAYER_STATUS;
-    f32 var0;
-    f32 var1;
-    f32 moveSpeed;
 
     if (isInitialCall) {
-        var1 = get_variable(script, *args++);
-        var0 = get_variable(script, *args++);
+        f32 targetX = get_variable(script, *args++);
+        f32 targetZ = get_variable(script, *args++);
+        f32 moveSpeed;
+
         script->functionTemp[0].s = get_variable(script, *args++);
-        playerStatus->targetYaw = atan2(playerStatus->position.x, playerStatus->position.z, var1, var0);
+        playerStatus->targetYaw = atan2(playerStatus->position.x, playerStatus->position.z, targetX, targetZ);
 
         if (script->functionTemp[0].s == 0) {
-            script->functionTemp[0].s = (dist2D(playerStatus->position.x, playerStatus->position.z, var1,
-                                                var0) / gPlayerNpcPtr->moveSpeed);
+            script->functionTemp[0].s = dist2D(playerStatus->position.x, playerStatus->position.z, targetX,
+                                               targetZ) / gPlayerNpcPtr->moveSpeed;
             moveSpeed = gPlayerNpcPtr->moveSpeed;
         } else {
-            moveSpeed = dist2D(playerStatus->position.x, playerStatus->position.z, var1, var0) / script->functionTemp[0].s;
+            moveSpeed = dist2D(playerStatus->position.x, playerStatus->position.z, targetX, targetZ) / script->functionTemp[0].s;
         }
         move_player(script->functionTemp[0].s, playerStatus->targetYaw, moveSpeed);
     }
 
+    // functionTemp 0 is the time left
     script->functionTemp[0].s--;
     return script->functionTemp[0].s < 0;
 }
@@ -170,41 +170,43 @@ void PlayerJump2(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus InterpPlayerYaw(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     PlayerStatus* playerStatus = PLAYER_STATUS;
-    f32* t1 = &script->functionTemp[1].f;
-    f32* t2 = &script->functionTemp[2].f;
-    s32* t3 = &script->functionTemp[3].s;
+    f32* initialYaw = &script->functionTemp[1].f;
+    f32* deltaYaw = &script->functionTemp[2].f;
+    s32* time = &script->functionTemp[3].s;
 
     if (isInitialCall) {
         Npc** player = &gPlayerNpcPtr;
 
         (*player)->yaw = playerStatus->targetYaw;
-        *t1 = (*player)->yaw;
-        *t2 = get_float_variable(script, *args++) - *t1;
-        *t3 = get_variable(script, *args++);
+        *initialYaw = (*player)->yaw;
+        *deltaYaw = get_float_variable(script, *args++) - *initialYaw;
+        *time = get_variable(script, *args++);
         (*player)->duration = 0;
 
-        if (*t2 < -180.0f) {
-            *t2 += 360.0f;
+        if (*deltaYaw < -180.0f) {
+            *deltaYaw += 360.0f;
         }
-        if (*t2 > 180.0f) {
-            *t2 -= 360.0f;
+        if (*deltaYaw > 180.0f) {
+            *deltaYaw -= 360.0f;
         }
     }
 
-    if (*t3 > 0) {
+    if (*time > 0) {
         Npc** player = &gPlayerNpcPtr;
 
         (*player)->duration++;
-        (*player)->yaw = *t1 + ((*t2 * (*player)->duration) / *t3);
+        (*player)->yaw = *initialYaw + ((*deltaYaw * (*player)->duration) / *time);
         (*player)->yaw = clamp_angle((*player)->yaw);
         playerStatus->targetYaw = (*player)->yaw;
-        return ((*player)->duration < *t3) ^ 1;
+
+        return !((*player)->duration < *time);
     } else {
         Npc** player = &gPlayerNpcPtr;
 
-        (*player)->yaw += *t2;
-        (*player)->yaw = clamp_angle((*player)->yaw);;
+        (*player)->yaw += *deltaYaw;
+        (*player)->yaw = clamp_angle((*player)->yaw);
         playerStatus->targetYaw = (*player)->yaw;
+
         return ApiStatus_DONE2;
     }
 }

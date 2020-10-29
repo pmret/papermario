@@ -67,7 +67,7 @@ ApiStatus func_802D7B74(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "code_FBE10", func_802D7BA4);
 
-ApiStatus func_802D7CF8(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus Spawn802D9D50(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var0 = get_variable(script, *args++);
     s32 var1 = get_variable(script, *args++);
