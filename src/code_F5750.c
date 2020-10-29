@@ -167,7 +167,47 @@ void PlayerJump2(ScriptInstance* script, s32 isInitialCall) {
     player_jump(script, isInitialCall, 2);
 }
 
-INCLUDE_ASM(s32, "code_F5750", InterpPlayerYaw, ScriptInstance* script, s32 isInitialCall);
+ApiStatus InterpPlayerYaw(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    PlayerStatus* playerStatus = PLAYER_STATUS;
+    f32* t1 = &script->functionTemp[1].f;
+    f32* t2 = &script->functionTemp[2].f;
+    s32* t3 = &script->functionTemp[3].s;
+
+    if (isInitialCall) {
+        Npc** player = &gPlayerNpcPtr;
+
+        (*player)->yaw = playerStatus->targetYaw;
+        *t1 = (*player)->yaw;
+        *t2 = get_float_variable(script, *args++) - *t1;
+        *t3 = get_variable(script, *args++);
+        (*player)->duration = 0;
+
+        if (*t2 < -180.0f) {
+            *t2 += 360.0f;
+        }
+        if (*t2 > 180.0f) {
+            *t2 -= 360.0f;
+        }
+    }
+
+    if (*t3 > 0) {
+        Npc** player = &gPlayerNpcPtr;
+
+        (*player)->duration++;
+        (*player)->yaw = *t1 + ((*t2 * (*player)->duration) / *t3);
+        (*player)->yaw = clamp_angle((*player)->yaw);
+        playerStatus->targetYaw = (*player)->yaw;
+        return ((*player)->duration < *t3) ^ 1;
+    } else {
+        Npc** player = &gPlayerNpcPtr;
+
+        (*player)->yaw += *t2;
+        (*player)->yaw = clamp_angle((*player)->yaw);;
+        playerStatus->targetYaw = (*player)->yaw;
+        return ApiStatus_DONE2;
+    }
+}
 
 INCLUDE_ASM(s32, "code_F5750", PlayerFaceNpc, ScriptInstance* script, s32 isInitialCall);
 
