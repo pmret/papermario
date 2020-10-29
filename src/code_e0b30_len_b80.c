@@ -26,7 +26,21 @@ s32 get_song_variation_override_for_cur_map(SongID songID) {
     return -1;
 }
 
-INCLUDE_ASM(s32, "code_e0b30_len_b80", func_8014A498);
+//INCLUDE_ASM(s32, "code_e0b30_len_b80", func_8014A498);
+void func_8014A498(void) {
+    MusicPlayer* src;
+    s32 i;
+
+    for (i = 0; i < 2; i++) {
+        MusicPlayer *musicPlayers = gMusicPlayers;
+        musicPlayers[i] = *(src = &D_8014F6F0);
+    }
+
+    gMusicTargetVolume = 8;
+    gMusicUnkVolume2 = 8;
+    gMusicCurrentVolume = 8;
+    func_800561A4(8);
+}
 
 void func_8014A52C(void) {
     gMusicTargetVolume = 8;

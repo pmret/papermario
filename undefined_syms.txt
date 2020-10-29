@@ -182,8 +182,9 @@ D_801595A0 = 0x801595A0;
 gMusicUnkVolume = 0x80159AE0;
 gMusicTargetVolume = 0x80159AE2;
 gMusicUnkVolume2 = 0x80159AE4;
-gMusicCurVolume = 0x80159AE6;
+gMusicCurrentVolume = 0x80159AE6;
 gMusicPlayers = 0x80159AF0;
+D_8014F6F0 = 0x8014F6F0;
 
 gCollisionStatus = 0x8015A550;
 D_8015C7C0 = 0x8015C7C0;
