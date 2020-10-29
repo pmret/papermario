@@ -80,8 +80,6 @@ extern s32 D_8010CD20;
 extern s32 D_8010EF08;
 extern s32 D_8010F094; // player shadow index?
 extern s32 D_801595A0;
-extern s16 D_80159AE2; // music target volume?
-extern s16 D_80159AE4;
 extern BackgroundHeader gBackgroundImage;
 
 extern PrintContext* gCurrentPrintContext;
@@ -166,6 +164,7 @@ extern Bytecode* ShakeCam1;
 extern Bytecode* ShakeCamX;
 
 extern s16 gMusicUnkVolume;
+extern s16 gMusicUnkVolume2;
 extern s16 gMusicCurrentVolume;
 extern s16 gMusicTargetVolume;
 extern MusicPlayer gMusicPlayers[];

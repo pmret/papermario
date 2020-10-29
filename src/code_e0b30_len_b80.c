@@ -1,6 +1,5 @@
 #include "common.h"
 
-
 void func_8014AC84(s16 volume);
 
 INCLUDE_ASM(s32, "code_e0b30_len_b80", get_default_variation_for_song);
@@ -8,8 +7,8 @@ INCLUDE_ASM(s32, "code_e0b30_len_b80", get_default_variation_for_song);
 INCLUDE_ASM(s32, "code_e0b30_len_b80", func_8014A498);
 
 void func_8014A52C(void) {
-    D_80159AE2 = 0x08;
-    D_80159AE4 = 0x08;
+    gMusicTargetVolume = 8;
+    gMusicUnkVolume2 = 8;
 }
 
 INCLUDE_ASM(s32, "code_e0b30_len_b80", func_8014A548);
@@ -126,20 +125,56 @@ s32 func_8014AA54(s32 playerIndex, s32 arg1, s16 arg2) {
     return 1;
 }
 
-INCLUDE_ASM(s32, "code_e0b30_len_b80", func_8014AB0C);
+s32 func_8014AB0C(s32 playerIndex, s16 arg1) {
+    MusicPlayer* musicPlayers = &gMusicPlayers;
+    MusicPlayer* musicPlayer = &musicPlayers[playerIndex];
 
-INCLUDE_ASM(s32, "code_e0b30_len_b80", func_8014AB60);
+    if (!(musicPlayer->flags & 1)) {
+        return 0;
+    }
 
-INCLUDE_ASM(s32, "code_e0b30_len_b80", func_8014ABB4);
+    return func_80055DDC(musicPlayer->unk_18, arg1);
+}
 
-INCLUDE_ASM(s32, "code_e0b30_len_b80", func_8014AC08);
+s32 func_8014AB60(s32 playerIndex, s16 arg1) {
+    MusicPlayer* musicPlayers = &gMusicPlayers;
+    MusicPlayer* musicPlayer = &musicPlayers[playerIndex];
 
-INCLUDE_ASM(s32, "code_e0b30_len_b80", func_8014AC5C);
+    if (!(musicPlayer->flags & 1)) {
+        return 0;
+    }
 
-INCLUDE_ASM(s32, "code_e0b30_len_b80", func_8014AC70);
+    return func_80055E48(musicPlayer->unk_18, arg1);
+}
+
+s32 func_8014ABB4(s32 playerIndex, s16 arg1) {
+    MusicPlayer* musicPlayers = &gMusicPlayers;
+    MusicPlayer* musicPlayer = &musicPlayers[playerIndex];
+
+    if (!(musicPlayer->flags & 1)) {
+        return 0;
+    }
+
+    return func_80055CC4(musicPlayer->unk_18, arg1);
+}
+
+s32 func_8014AC08(void) {
+    set_music_track(0, -1, 0, 250, 8);
+    set_music_track(1, -1, 0, 250, 8);
+
+    return 1;
+}
+
+void func_8014AC5C(void) {
+    gMusicUnkVolume2 = 4;
+}
+
+void func_8014AC70(void) {
+    gMusicUnkVolume2 = 8;
+}
 
 void func_8014AC84(s16 volume) {
-    D_80159AE2 = volume;
+    gMusicTargetVolume = volume;
 }
 
 INCLUDE_ASM(s32, "code_e0b30_len_b80", func_8014AC94);
@@ -154,7 +189,11 @@ INCLUDE_ASM(s32, "code_e0b30_len_b80", func_8014AE6C);
 
 INCLUDE_ASM(s32, "code_e0b30_len_b80", func_8014AEF8);
 
-INCLUDE_ASM(s32, "code_e0b30_len_b80", func_8014AF8C);
+void func_8014AF8C(s32 arg0, s32 arg1) {
+    MusicPlayer* musicPlayer = &gMusicPlayers[0];
+    musicPlayer->unk_1C = arg0;
+    musicPlayer->unk_20 = arg1;
+}
 
 void func_8014AFA0(void) {
 }

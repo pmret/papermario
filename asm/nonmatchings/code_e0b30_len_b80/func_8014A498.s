@@ -30,10 +30,10 @@ glabel func_8014A498
 /* E0BF4 8014A4F4 1440FFF0 */  bnez      $v0, .L8014A4B8
 /* E0BF8 8014A4F8 24840030 */   addiu    $a0, $a0, 0x30
 /* E0BFC 8014A4FC 24020008 */  addiu     $v0, $zero, 8
-/* E0C00 8014A500 3C018016 */  lui       $at, %hi(D_80159AE2)
-/* E0C04 8014A504 A4229AE2 */  sh        $v0, %lo(D_80159AE2)($at)
-/* E0C08 8014A508 3C018016 */  lui       $at, %hi(D_80159AE4)
-/* E0C0C 8014A50C A4229AE4 */  sh        $v0, %lo(D_80159AE4)($at)
+/* E0C00 8014A500 3C018016 */  lui       $at, %hi(gMusicTargetVolume)
+/* E0C04 8014A504 A4229AE2 */  sh        $v0, %lo(gMusicTargetVolume)($at)
+/* E0C08 8014A508 3C018016 */  lui       $at, %hi(gMusicUnkVolume2)
+/* E0C0C 8014A50C A4229AE4 */  sh        $v0, %lo(gMusicUnkVolume2)($at)
 /* E0C10 8014A510 3C018016 */  lui       $at, 0x8016
 /* E0C14 8014A514 A4229AE6 */  sh        $v0, -0x651a($at)
 /* E0C18 8014A518 0C015869 */  jal       func_800561A4
