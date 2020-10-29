@@ -122,7 +122,32 @@ ApiStatus SetPlayerAnimationSpeed(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_F5750", PlayerMoveTo, ScriptInstance* script, s32 isInitialCall);
+ApiStatus PlayerMoveTo(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    PlayerStatus* playerStatus = PLAYER_STATUS;
+    f32 var0;
+    f32 var1;
+    f32 moveSpeed;
+
+    if (isInitialCall) {
+        var1 = get_variable(script, *args++);
+        var0 = get_variable(script, *args++);
+        script->functionTemp[0].s = get_variable(script, *args++);
+        playerStatus->targetYaw = atan2(playerStatus->position.x, playerStatus->position.z, var1, var0);
+
+        if (script->functionTemp[0].s == 0) {
+            script->functionTemp[0].s = (dist2D(playerStatus->position.x, playerStatus->position.z, var1,
+                                                var0) / gPlayerNpcPtr->moveSpeed);
+            moveSpeed = gPlayerNpcPtr->moveSpeed;
+        } else {
+            moveSpeed = dist2D(playerStatus->position.x, playerStatus->position.z, var1, var0) / script->functionTemp[0].s;
+        }
+        move_player(script->functionTemp[0].s, playerStatus->targetYaw, moveSpeed);
+    }
+
+    script->functionTemp[0].s--;
+    return script->functionTemp[0].s < 0;
+}
 
 INCLUDE_ASM(s32, "code_F5750", func_802D1270);
 
@@ -236,7 +261,16 @@ INCLUDE_ASM(s32, "code_F5750", func_802D244C);
 
 INCLUDE_ASM(s32, "code_F5750", func_802D2484);
 
-INCLUDE_ASM(s32, "code_F5750", func_802D249C);
+ApiStatus func_802D249C(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 val = 0;
+    if (gCollisionStatus.currentFloor >= 0) {
+        val = func_802D23F8() != 0;
+    }
+    set_variable(script, *args, val);
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus func_802D24F4(ScriptInstance* script, s32 isInitialCall) {
     return (gPlayerStatus.moveFrames == 0) * ApiStatus_DONE2;
