@@ -311,7 +311,8 @@ typedef struct MusicPlayer {
     /* 0x02 */ u16 unk_02;
     /* 0x04 */ s32 fadeOutTime;
     /* 0x08 */ s32 fadeInTime;
-    /* 0x0C */ char unk_0C[4];
+    /* 0x0C */ s16 unk_0C;
+    /* 0x0E */ s16 unk_0E;
     /* 0x10 */ s32 songID;
     /* 0x14 */ s32 variation;
     /* 0x18 */ s32 unk_18;
