@@ -57,12 +57,12 @@ s32 _set_music_track(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime
     }
 }
 
-void set_music_track(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s16 volume) {
+s32 set_music_track(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s16 volume) {
     MusicPlayer* musicPlayers = &gMusicPlayers;
 
     musicPlayers[playerIndex].flags &= ~8;
 
-    _set_music_track(playerIndex, songID, variation, fadeOutTime, volume);
+    return _set_music_track(playerIndex, songID, variation, fadeOutTime, volume);
 }
 
 INCLUDE_ASM(s32, "code_e0b30_len_b80", func_8014A964);
