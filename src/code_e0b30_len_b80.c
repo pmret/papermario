@@ -19,7 +19,8 @@ s32 _set_music_track(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime
     if (gameStatus->demoState != 0) {
         return 1;
     } else {
-        MusicPlayer* musicPlayers = &gMusicPlayers;
+        // TODO: these two lines likely a MUSIC_PLAYER(idx) macro
+        MusicPlayer* musicPlayers = gMusicPlayers;
         MusicPlayer* musicPlayer = &musicPlayers[playerIndex];
 
         if (!gameStatus->musicEnabled) {
@@ -57,7 +58,7 @@ s32 _set_music_track(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime
 }
 
 s32 set_music_track(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s16 volume) {
-    MusicPlayer* musicPlayers = &gMusicPlayers;
+    MusicPlayer* musicPlayers = gMusicPlayers;
 
     musicPlayers[playerIndex].flags &= ~8;
 
@@ -70,7 +71,7 @@ s32 func_8014A964(s32 playerIndex, s32 songID, s32 variation, s32 fadeInTime, s1
     if (gameStatus->demoState != 0) {
         return 1;
     } else {
-        MusicPlayer* musicPlayers = &gMusicPlayers;
+        MusicPlayer* musicPlayers = gMusicPlayers;
         MusicPlayer* musicPlayer = &musicPlayers[playerIndex];
 
         if (!gameStatus->musicEnabled) {
@@ -99,7 +100,7 @@ s32 func_8014A964(s32 playerIndex, s32 songID, s32 variation, s32 fadeInTime, s1
 }
 
 s32 func_8014AA54(s32 playerIndex, s32 arg1, s16 arg2) {
-    MusicPlayer* musicPlayers = &gMusicPlayers;
+    MusicPlayer* musicPlayers = gMusicPlayers;
     MusicPlayer* musicPlayer = &musicPlayers[playerIndex];
 
     if (!(musicPlayer->flags & 1)) {
@@ -126,7 +127,7 @@ s32 func_8014AA54(s32 playerIndex, s32 arg1, s16 arg2) {
 }
 
 s32 func_8014AB0C(s32 playerIndex, s16 arg1) {
-    MusicPlayer* musicPlayers = &gMusicPlayers;
+    MusicPlayer* musicPlayers = gMusicPlayers;
     MusicPlayer* musicPlayer = &musicPlayers[playerIndex];
 
     if (!(musicPlayer->flags & 1)) {
@@ -137,7 +138,7 @@ s32 func_8014AB0C(s32 playerIndex, s16 arg1) {
 }
 
 s32 func_8014AB60(s32 playerIndex, s16 arg1) {
-    MusicPlayer* musicPlayers = &gMusicPlayers;
+    MusicPlayer* musicPlayers = gMusicPlayers;
     MusicPlayer* musicPlayer = &musicPlayers[playerIndex];
 
     if (!(musicPlayer->flags & 1)) {
@@ -148,7 +149,7 @@ s32 func_8014AB60(s32 playerIndex, s16 arg1) {
 }
 
 s32 func_8014ABB4(s32 playerIndex, s16 arg1) {
-    MusicPlayer* musicPlayers = &gMusicPlayers;
+    MusicPlayer* musicPlayers = gMusicPlayers;
     MusicPlayer* musicPlayer = &musicPlayers[playerIndex];
 
     if (!(musicPlayer->flags & 1)) {

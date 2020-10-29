@@ -167,6 +167,6 @@ extern s16 gMusicUnkVolume;
 extern s16 gMusicUnkVolume2;
 extern s16 gMusicCurrentVolume;
 extern s16 gMusicTargetVolume;
-extern MusicPlayer gMusicPlayers[];
+extern MusicPlayer gMusicPlayers[]; // TODO: how many?
 
 #endif
