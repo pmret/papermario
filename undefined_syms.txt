@@ -263,3 +263,5 @@ EnemyNpcDefeat = 0x8007809C;
 
 D_80078DB0 = 0x80078DB0;
 D_80078DB4 = 0x80078DB4;
+
+gMusicPlayers = 0x80159AF0;

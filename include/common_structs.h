@@ -307,7 +307,7 @@ typedef struct StaticEntityData {
 } StaticEntityData; // size = 0x24
 
 typedef struct MusicPlayer {
-    /* 0x00 */ s16 unkFlags;
+    /* 0x00 */ u16 unkFlags;
     /* 0x02 */ char unk_02[2];
     /* 0x04 */ s32 fadeOutTime;
     /* 0x08 */ s32 fadeInTime;
