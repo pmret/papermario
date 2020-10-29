@@ -1,7 +1,7 @@
 #include "common.h"
 #include "map.h"
 
-void func_8014AC84(s16 volume);
+void transition_music_volume_to(s16 volume);
 
 /// If the given song ID is present in gSongsUsingVariationFlag, returns the current
 /// map's `flags2 & 1` value. Otherwise, returns -1.
@@ -57,7 +57,7 @@ s32 _set_music_track(s32 playerIndex, SongID songID, s32 variation, s32 fadeOutT
             }
 
             if (musicPlayer->songID == songID && musicPlayer->variation == variation) {
-                func_8014AC84(volume); // transition volume to?
+                transition_music_volume_to(volume);
 
                 if (musicPlayer->flags & 4) {
                     func_80055B80(musicPlayer->unk_18);
@@ -196,7 +196,7 @@ void func_8014AC70(void) {
     gMusicUnkVolume2 = 8;
 }
 
-void func_8014AC84(s16 volume) {
+void transition_music_volume_to(s16 volume) {
     gMusicTargetVolume = volume;
 }
 
