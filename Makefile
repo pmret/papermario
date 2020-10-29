@@ -58,7 +58,7 @@ CPP := cpp
 LD := $(CROSS)ld
 OBJCOPY := $(CROSS)objcopy
 
-CPPFLAGS   := -Iinclude -Isrc -D _LANGUAGE_C -ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -Wundef -Wcomment
+CPPFLAGS   := -Iinclude -Isrc -D _LANGUAGE_C -ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -Wundef -Wcomment -MP -MD
 ASFLAGS    := -EB -Iinclude -march=vr4300 -mtune=vr4300
 OLDASFLAGS := -EB -Iinclude -G 0
 CFLAGS     := -O2 -quiet -G 0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wimplicit -Wuninitialized -Wshadow
@@ -133,12 +133,12 @@ $(BUILD_DIR)/%.Yay0.o: $(BUILD_DIR)/%.bin.Yay0
 # Compile C files
 $(BUILD_DIR)/%.c.o: %.c $(BUILD_DIR)/%.d
 	@mkdir -p $(shell dirname $@)
-	$(CPP) $(CPPFLAGS) -MP -MD -o - $< -MF $@.mk -MT $(BUILD_DIR)/$*.d | $(CC) $(CFLAGS) -o - - | $(OLD_AS) $(OLDASFLAGS) -o $@ -
+	$(CPP) $(CPPFLAGS) -o - $< -MF $@.mk -MT $(BUILD_DIR)/$*.d | $(CC) $(CFLAGS) -o - - | $(OLD_AS) $(OLDASFLAGS) -o $@ -
 
 # Compile C files (with DSL macros)
 $(foreach cfile, $(DSL_C_FILES), $(BUILD_DIR)/$(cfile).o): $(BUILD_DIR)/%.c.o: %.c $(BUILD_DIR)/%.d
 	@mkdir -p $(shell dirname $@)
-	$(CPP) $(CPPFLAGS) -MP -MD -o - $< -MF $@.mk -MT $(BUILD_DIR)/$*.d | tools/compile_dsl_macros.py | $(CC) $(CFLAGS) -o - - | $(OLD_AS) $(OLDASFLAGS) -o $@ -
+	$(CPP) $(CPPFLAGS) -o - $< -MF $@.mk -MT $(BUILD_DIR)/$*.d | tools/compile_dsl_macros.py | $(CC) $(CFLAGS) -o - - | $(OLD_AS) $(OLDASFLAGS) -o $@ -
 
 # Assemble handwritten ASM
 $(BUILD_DIR)/%.s.o: %.s
