@@ -165,7 +165,9 @@ extern Bytecode* SCRIPT_NpcDefeat;
 extern Bytecode* ShakeCam1;
 extern Bytecode* ShakeCamX;
 
-extern s16 gMusicVolume;
+extern s16 gMusicUnkVolume;
+extern s16 gMusicCurrentVolume;
+extern s16 gMusicTargetVolume;
 extern MusicPlayer gMusicPlayers[];
 
 #endif

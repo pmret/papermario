@@ -1899,5 +1899,7 @@ EnemyNpcHit;0x80077F70
 EnemyNpcDefeat;0x8007809C
 D_80078DB0;0x80078DB0
 D_80078DB4;0x80078DB4
-gMusicVolume;0x80159AE0
 gMusicPlayers;0x80159AF0
+gMusicUnkVolume;0x80159AE0
+gMusicTargetVolume;0x80159AE2
+gMusicCurVolume;0x80159AE6

@@ -45,7 +45,7 @@ s32 _set_music_track(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime
                 return 2;
             }
 
-            gMusicVolume = volume;
+            gMusicUnkVolume = volume;
             musicPlayer->songID = songID;
             musicPlayer->variation = variation;
             musicPlayer->fadeOutTime = fadeOutTime;
@@ -99,7 +99,32 @@ s32 func_8014A964(s32 playerIndex, s32 songID, s32 variation, s32 fadeInTime, s1
     }
 }
 
-INCLUDE_ASM(s32, "code_e0b30_len_b80", func_8014AA54);
+s32 func_8014AA54(s32 playerIndex, s32 arg1, s16 arg2) {
+    MusicPlayer* musicPlayers = &gMusicPlayers;
+    MusicPlayer* musicPlayer = &musicPlayers[playerIndex];
+
+    if (!(musicPlayer->flags & 1)) {
+        return 0;
+    }
+
+    if (!(musicPlayer->flags & 2)) {
+        return 0;
+    }
+
+    switch (arg2) {
+        case 0:
+            func_80056028(musicPlayer->unk_18, arg1);
+            break;
+        case 1:
+            func_80056044(musicPlayer->unk_18, arg1);
+            break;
+        case 2:
+            func_80056068(musicPlayer->unk_18, arg1);
+            break;
+    }
+
+    return 1;
+}
 
 INCLUDE_ASM(s32, "code_e0b30_len_b80", func_8014AB0C);
 
