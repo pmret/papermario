@@ -25,7 +25,7 @@ s32 _set_music_track(s32 playerIndex, s32 songID, s32 variation, s32 unk, s16 vo
 
         if (!gameStatus->musicEnabled) {
             func_800559C4(musicPlayer->unk_18);
-            musicPlayer->unkFlags &= ~1;
+            musicPlayer->flags &= ~1;
 
             return 1;
         } else {
@@ -37,9 +37,9 @@ s32 _set_music_track(s32 playerIndex, s32 songID, s32 variation, s32 unk, s16 vo
             if (musicPlayer->songID == songID && musicPlayer->variation == variation) {
                 func_8014AC84(volume); // transition volume to?
 
-                if (musicPlayer->unkFlags & 4) {
+                if (musicPlayer->flags & 4) {
                     func_80055B80(musicPlayer->unk_18);
-                    musicPlayer->unkFlags &= ~4;
+                    musicPlayer->flags &= ~4;
                 }
 
                 return 2;
@@ -50,7 +50,7 @@ s32 _set_music_track(s32 playerIndex, s32 songID, s32 variation, s32 unk, s16 vo
             musicPlayer->variation = variation;
             musicPlayer->fadeOutTime = unk;
             musicPlayer->unk_02 = 1;
-            musicPlayer->unkFlags &= ~2;
+            musicPlayer->flags &= ~2;
 
             return 1;
         }
@@ -60,7 +60,7 @@ s32 _set_music_track(s32 playerIndex, s32 songID, s32 variation, s32 unk, s16 vo
 void set_music_track(s32 playerIndex, s32 songID, s32 variation, s32 unk, s16 volume) {
     MusicPlayer* musicPlayers = &gMusicPlayers;
 
-    musicPlayers[playerIndex].unkFlags &= ~8;
+    musicPlayers[playerIndex].flags &= ~8;
 
     _set_music_track(playerIndex, songID, variation, unk, volume);
 }
