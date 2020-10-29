@@ -14,7 +14,7 @@ void func_8014A52C(void) {
 
 INCLUDE_ASM(s32, "code_e0b30_len_b80", func_8014A548);
 
-s32 _set_music_track(s32 playerIndex, s32 songID, s32 variation, s32 unk, s16 volume) {
+s32 _set_music_track(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s16 volume) {
     GameStatus* gameStatus = GAME_STATUS;
 
     if (gameStatus->demoState != 0) {
@@ -48,7 +48,7 @@ s32 _set_music_track(s32 playerIndex, s32 songID, s32 variation, s32 unk, s16 vo
             gMusicVolume = volume;
             musicPlayer->songID = songID;
             musicPlayer->variation = variation;
-            musicPlayer->fadeOutTime = unk;
+            musicPlayer->fadeOutTime = fadeOutTime;
             musicPlayer->unk_02 = 1;
             musicPlayer->flags &= ~2;
 
@@ -57,12 +57,12 @@ s32 _set_music_track(s32 playerIndex, s32 songID, s32 variation, s32 unk, s16 vo
     }
 }
 
-void set_music_track(s32 playerIndex, s32 songID, s32 variation, s32 unk, s16 volume) {
+void set_music_track(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s16 volume) {
     MusicPlayer* musicPlayers = &gMusicPlayers;
 
     musicPlayers[playerIndex].flags &= ~8;
 
-    _set_music_track(playerIndex, songID, variation, unk, volume);
+    _set_music_track(playerIndex, songID, variation, fadeOutTime, volume);
 }
 
 INCLUDE_ASM(s32, "code_e0b30_len_b80", func_8014A964);
