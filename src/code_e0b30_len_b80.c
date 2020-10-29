@@ -1,8 +1,30 @@
 #include "common.h"
+#include "map.h"
 
 void func_8014AC84(s16 volume);
 
-INCLUDE_ASM(s32, "code_e0b30_len_b80", get_default_variation_for_song);
+/// If the given song ID is present in gSongsUsingVariationFlag, returns the current
+/// map's `flags2 & 1` value. Otherwise, returns -1.
+///
+/// @see gSongsUsingVariationFlag
+/// @returns -1: no override; 0: override to variation 0; 1 override to variation 1
+s32 get_song_variation_override_for_cur_map(SongID songID) {
+    u32 i = 0;
+    Area* areas = gAreas;
+    SongID* allowed = gSongsUsingVariationFlag;
+    GameStatus** gameStatusPtr = gGameStatusPtr;
+
+    for (i = 0; i < ARRAY_COUNT(gSongsUsingVariationFlag); i++) {
+        if (allowed[i] == songID) {
+            GameStatus* gameStatus = *gameStatusPtr;
+            Map* map = &areas[gameStatus->areaID].maps[gameStatus->mapID];
+
+            return map->flags2 & 1;
+        }
+    }
+
+    return -1;
+}
 
 INCLUDE_ASM(s32, "code_e0b30_len_b80", func_8014A498);
 
@@ -13,7 +35,7 @@ void func_8014A52C(void) {
 
 INCLUDE_ASM(s32, "code_e0b30_len_b80", func_8014A548);
 
-s32 _set_music_track(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s16 volume) {
+s32 _set_music_track(s32 playerIndex, SongID songID, s32 variation, s32 fadeOutTime, s16 volume) {
     GameStatus* gameStatus = GAME_STATUS;
 
     if (gameStatus->demoState != 0) {
@@ -29,9 +51,9 @@ s32 _set_music_track(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime
 
             return 1;
         } else {
-            s32 defaultVariation = get_default_variation_for_song(songID);
-            if (defaultVariation >= 0) {
-                variation = defaultVariation;
+            s32 override = get_song_variation_override_for_cur_map(songID);
+            if (override >= 0) {
+                variation = override;
             }
 
             if (musicPlayer->songID == songID && musicPlayer->variation == variation) {
@@ -57,7 +79,7 @@ s32 _set_music_track(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime
     }
 }
 
-s32 set_music_track(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s16 volume) {
+s32 set_music_track(s32 playerIndex, SongID songID, s32 variation, s32 fadeOutTime, s16 volume) {
     MusicPlayer* musicPlayers = gMusicPlayers;
 
     musicPlayers[playerIndex].flags &= ~8;
@@ -65,7 +87,7 @@ s32 set_music_track(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime,
     return _set_music_track(playerIndex, songID, variation, fadeOutTime, volume);
 }
 
-s32 func_8014A964(s32 playerIndex, s32 songID, s32 variation, s32 fadeInTime, s16 arg4, s16 arg5) {
+s32 func_8014A964(s32 playerIndex, SongID songID, s32 variation, s32 fadeInTime, s16 arg4, s16 arg5) {
     GameStatus* gameStatus = GAME_STATUS;
 
     if (gameStatus->demoState != 0) {
@@ -80,7 +102,7 @@ s32 func_8014A964(s32 playerIndex, s32 songID, s32 variation, s32 fadeInTime, s1
 
             return 1;
         } else {
-            s32 defaultVariation = get_default_variation_for_song(songID);
+            s32 defaultVariation = get_song_variation_override_for_cur_map(songID);
             if (defaultVariation >= 0) {
                 variation = defaultVariation;
             }

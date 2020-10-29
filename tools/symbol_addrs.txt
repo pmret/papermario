@@ -1904,3 +1904,5 @@ gMusicUnkVolume;0x80159AE0
 gMusicUnkVolume2;0x80159AE4
 gMusicTargetVolume;0x80159AE2
 gMusicCurVolume;0x80159AE6
+gAreas;0x800934F0
+gSongArray;0x8014F720
