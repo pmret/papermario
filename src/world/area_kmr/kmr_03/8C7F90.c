@@ -2,7 +2,7 @@
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_03/8C7F90", func_80240000_8C7F90);
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_03/8C7F90", func_80240184_8C8114);
+#include "world/common/CheckPartnerFlags1000.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_03/8C7F90", func_802401B0_8C8140);
 
