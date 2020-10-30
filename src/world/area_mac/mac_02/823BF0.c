@@ -28,9 +28,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_802417C0_824A80);
 
 #include "world/common/GetItemName.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_802418D8_824B98);
-
-#include "world/common/Set80151310_0.inc.c"
+#include "world/common/Set80151310.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_802418FC_824BBC);
 

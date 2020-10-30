@@ -20,9 +20,7 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80240390_8B0400);
 
 #include "world/common/GetItemName.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_802404A8_8B0518);
-
-#include "world/common/Set80151310_0.inc.c"
+#include "world/common/Set80151310.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_802404CC_8B053C);
 

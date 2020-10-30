@@ -50,9 +50,7 @@ INCLUDE_ASM(s32, "world/area_hos/hos_03/A1BDB0", func_802424A4_A1D5A4);
 
 #include "world/common/GetItemName.inc.c"
 
-INCLUDE_ASM(s32, "world/area_hos/hos_03/A1BDB0", func_802425BC_A1D6BC);
-
-#include "world/common/Set80151310_0.inc.c"
+#include "world/common/Set80151310.inc.c"
 
 INCLUDE_ASM(s32, "world/area_hos/hos_03/A1BDB0", func_802425E0_A1D6E0);
 
