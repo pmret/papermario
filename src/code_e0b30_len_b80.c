@@ -12,12 +12,10 @@ s32 get_song_variation_override_for_cur_map(SongID songID) {
     u32 i = 0;
     Area* areas = gAreas;
     SongID* allowed = gSongsUsingVariationFlag;
-    GameStatus** gameStatusPtr = gGameStatusPtr;
 
     for (i = 0; i < ARRAY_COUNT(gSongsUsingVariationFlag); i++) {
         if (allowed[i] == songID) {
-            GameStatus* gameStatus = *gameStatusPtr;
-            Map* map = &areas[gameStatus->areaID].maps[gameStatus->mapID];
+            Map* map = &areas[GAME_STATUS->areaID].maps[GAME_STATUS->mapID];
 
             return map->flags2 & 1;
         }
