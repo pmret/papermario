@@ -40,7 +40,7 @@ INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80241EB4_D21D44);
 
 #include "world/common/Call800E9894.inc.c"
 
-#include "world/common/Unk800E98C4SyncStatusMenu.inc.c"
+#include "world/common/Call800E98C4SyncStatusMenu.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80241F98_D21E28);
 

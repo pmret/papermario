@@ -24,7 +24,7 @@ INCLUDE_ASM(s32, "world/area_hos/hos_03/A1BDB0", func_80241FBC_A1D0BC);
 
 #include "world/common/Call800E9894.inc.c"
 
-#include "world/common/Unk800E98C4SyncStatusMenu.inc.c"
+#include "world/common/Call800E98C4SyncStatusMenu.inc.c"
 
 INCLUDE_ASM(s32, "world/area_hos/hos_03/A1BDB0", func_802421F0_A1D2F0);
 

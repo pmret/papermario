@@ -94,7 +94,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80243740_803FC0);
 
 #include "world/common/Call800E9894.inc.c"
 
-#include "world/common/Unk800E98C4SyncStatusMenu.inc.c"
+#include "world/common/Call800E98C4SyncStatusMenu.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", pause_tutorial_draw_contents_804074);
 
