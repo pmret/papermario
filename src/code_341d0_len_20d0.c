@@ -51,9 +51,22 @@ void load_world_script_api(void) {
     dma_copy(&world_script_api_ROM_START, &world_script_api_ROM_END, &world_script_api_VRAM);
 }
 
-//const char* shape_sprintf = "%s_shape";
-//const char* hit_sprintf = "%s_hit";
-//const char* tex_sprintf = "%s_tex";
+// TODO
+static const s32 rodata_73DA0[] = {
+    0x82C882B5, 0x00000000, 0x82A982AD, 0x82B982A2,
+    0x00000000, 0x82B982C1, 0x82AB82E5, 0x82A40000,
+    0x82DE82C9, 0x82E182DE, 0x82C982E1, 0x00000000,
+    0x82D082C6, 0x82E882DA, 0x82AF0000, 0x83748340,
+    0x83438369, 0x838B837B, 0x83808377, 0x83430000,
+    0x83748340, 0x83438369, 0x838B834E, 0x838A8357,
+    0x83430000, 0X82C282A4, 0x82B682E5, 0x82A40000,
+
+    // These string literals belong to load_map_by_IDs
+    0x25735F73, 0x68617065, 0x00000000, // "%_shape"
+    0x25735F68, 0x69740000, // "%s_hit"
+    0x25735F74, 0x65780000, // "%s_tex"
+};
+
 INCLUDE_ASM(s32, "code_341d0_len_20d0", load_map_by_IDs);
 
 INCLUDE_ASM(s32, "code_341d0_len_20d0", get_current_map_config);
