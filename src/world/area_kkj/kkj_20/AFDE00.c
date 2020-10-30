@@ -8,7 +8,7 @@ INCLUDE_ASM(s32, "world/area_kkj/kkj_20/AFDE00", func_80240308_AFDE48);
 
 INCLUDE_ASM(s32, "world/area_kkj/kkj_20/AFDE00", func_80240384_AFDEC4);
 
-INCLUDE_ASM(s32, "world/area_kkj/kkj_20/AFDE00", func_80240404_AFDF44);
+#include "world/common/NotDoesScriptExist.inc.c"
 
 #include "world/common/PartnerToggleAbilityScript.inc.c"
 

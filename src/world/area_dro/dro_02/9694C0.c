@@ -94,7 +94,7 @@ INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_802434CC_96C68C);
 
 INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_80243548_96C708);
 
-INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_802435C8_96C788);
+#include "world/common/NotDoesScriptExist.inc.c"
 
 #include "world/common/PartnerToggleAbilityScript.inc.c"
 

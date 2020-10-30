@@ -8,7 +8,7 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8ED0C0", func_802412E8_8ED108);
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8ED0C0", func_80241364_8ED184);
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8ED0C0", func_802413E4_8ED204);
+#include "world/common/NotDoesScriptExist.inc.c"
 
 #include "world/common/PartnerToggleAbilityScript.inc.c"
 
