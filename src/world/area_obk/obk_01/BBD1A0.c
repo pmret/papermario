@@ -1,6 +1,6 @@
 #include "obk_01.h"
 
-INCLUDE_ASM(s32, "world/area_obk/obk_01/BBD1A0", func_80240000_BBD1A0);
+#include "world/common/SetCamera0MoveFlagNeg1.inc.c"
 
 INCLUDE_ASM(s32, "world/area_obk/obk_01/BBD1A0", func_8024001C_BBD1BC);
 

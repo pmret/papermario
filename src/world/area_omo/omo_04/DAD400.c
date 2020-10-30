@@ -8,7 +8,7 @@ INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80240000_DAD400);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80240268_DAD668);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_802402BC_DAD6BC);
+#include "world/common/SetCamera0MoveFlagNeg1.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_802402D8_DAD6D8);
 
