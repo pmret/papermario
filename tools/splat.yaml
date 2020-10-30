@@ -201,6 +201,7 @@ segments:
     - [0x6B450, ".data", "code_341d0_len_20d0"]
     - [0x6EAC0, "bin"] # has scripts
     - [0x73DA0, ".rodata", "code_341d0_len_20d0"]
+    - [0x74EA0, "bin"]
   - type: code
     start: 0x759B0
     vram: 0x800DC500
@@ -4883,11 +4884,11 @@ segments:
       - [0xC047F0, "bin"]
       - [0xC20C70, "bin"] # rodata
       - [0xC20CF8, "bin"] # rodata
-      - [0xC20F40, "bin"] # rodata
+  - [0xC20F40, "bin"]
   - name: world/area_dgb/dgb_02/
     type: code
     overlay: True
-    start: 0xC2EBA0
+    start: 0xC2EBA0 # this is right
     vram: 0x80240000
     files:
       - [0xC2EBA0, "c"]
@@ -6503,7 +6504,7 @@ segments:
     files:
       - [0xE1E460, "c"]
       - [0xE1EC20, "bin"]
-      - [0xE20110, "bin"]
+  - [0xE20110, "bin"]
   - type: code
     overlay: True
     start: 0xE20EB0
