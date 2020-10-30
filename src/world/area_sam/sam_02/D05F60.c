@@ -66,7 +66,7 @@ INCLUDE_ASM(s32, "world/area_sam/sam_02/D05F60", func_80241948_D07078);
 
 INCLUDE_ASM(s32, "world/area_sam/sam_02/D05F60", func_802419AC_D070DC);
 
-INCLUDE_ASM(s32, "world/area_sam/sam_02/D05F60", func_80241A3C_D0716C);
+#include "world/common/UnkMoveNpc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_02/D05F60", func_80241B24_D07254);
 

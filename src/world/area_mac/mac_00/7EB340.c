@@ -46,7 +46,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_8024144C_7EC15C);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_802414B0_7EC1C0);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80241540_7EC250);
+#include "world/common/UnkMoveNpc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80241628_7EC338);
 
@@ -66,7 +66,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80241A18_7EC728);
 
 #include "world/common/SetManyVars.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80241BA4_7EC8B4);
+INCLUDE_ASM(ApiStatus, "world/area_mac/mac_00/7EB340", func_80241BA4_7EC8B4, ScriptInstance* script, s32 isInitialCall);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80241D30_7ECA40);
 
@@ -80,7 +80,25 @@ INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80241E80_7ECB90);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80241FF0_7ECD00);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80242078_7ECD88);
+ApiStatus func_80242078_7ECD88(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    PlayerStatus* playerStatus = PLAYER_STATUS;
+    f32 var0 = get_variable(script, *args++);
+    f32 var1 = get_variable(script, *args++);
+    f32 var2 = get_variable(script, *args++);
+    f32 var3 = get_variable(script, *args++);
+    f32 temp;
+
+    temp = (var3 - var1) / (var2 - var0);
+
+    if (playerStatus->position.z < ((temp * playerStatus->position.x) + (var1 - (temp * var0)))) {
+        script->varTable[0] = 0;
+    } else {
+        script->varTable[0] = 1;
+    }
+
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80242178_7ECE88);
 

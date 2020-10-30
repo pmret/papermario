@@ -72,7 +72,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242D2C_8035AC);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242D90_803610);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242E20_8036A0);
+#include "world/common/UnkMoveNpc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242F08_803788);
 

@@ -62,7 +62,7 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_802411AC_8B121C);
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80241210_8B1280);
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_802412A0_8B1310);
+#include "world/common/UnkMoveNpc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80241388_8B13F8);
 

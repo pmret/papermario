@@ -120,7 +120,7 @@ INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_802429B8_B37588);
 
 INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80242A1C_B375EC);
 
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80242AAC_B3767C);
+#include "world/common/UnkMoveNpc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80242B94_B37764);
 
