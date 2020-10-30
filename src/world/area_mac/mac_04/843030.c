@@ -40,7 +40,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80240FCC_843B9C);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80241040_843C10);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_802410E0_843CB0);
+#include "world/common/UnkCameraFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_8024127C_843E4C);
 

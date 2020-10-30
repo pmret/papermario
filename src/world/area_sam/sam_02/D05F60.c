@@ -60,7 +60,7 @@ INCLUDE_ASM(s32, "world/area_sam/sam_02/D05F60", func_80241698_D06DC8);
 
 INCLUDE_ASM(s32, "world/area_sam/sam_02/D05F60", func_8024170C_D06E3C);
 
-INCLUDE_ASM(s32, "world/area_sam/sam_02/D05F60", func_802417AC_D06EDC);
+#include "world/common/UnkCameraFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_02/D05F60", func_80241948_D07078);
 

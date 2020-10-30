@@ -40,7 +40,7 @@ INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_80240E6C_96A02C);
 
 INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_80240EE0_96A0A0);
 
-INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_80240F80_96A140);
+#include "world/common/UnkCameraFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_8024111C_96A2DC);
 

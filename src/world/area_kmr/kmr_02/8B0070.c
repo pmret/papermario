@@ -56,7 +56,7 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80240EFC_8B0F6C);
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80240F70_8B0FE0);
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80241010_8B1080);
+#include "world/common/UnkCameraFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_802411AC_8B121C);
 

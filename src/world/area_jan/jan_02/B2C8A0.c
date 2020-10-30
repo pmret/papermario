@@ -74,7 +74,7 @@ INCLUDE_ASM(s32, "world/area_jan/jan_02/B2C8A0", func_80242180_B2E5F0);
 
 INCLUDE_ASM(s32, "world/area_jan/jan_02/B2C8A0", func_802421F4_B2E664);
 
-INCLUDE_ASM(s32, "world/area_jan/jan_02/B2C8A0", func_80242294_B2E704);
+#include "world/common/UnkCameraFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_jan/jan_02/B2C8A0", func_80242430_B2E8A0);
 
