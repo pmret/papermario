@@ -50,7 +50,7 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80240E98_8B0F08);
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80240EB4_8B0F24);
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80240ECC_8B0F3C);
+#include "world/common/GetGameStatus75.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80240EFC_8B0F6C);
 

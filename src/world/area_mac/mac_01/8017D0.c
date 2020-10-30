@@ -60,7 +60,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242A18_803298);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242A34_8032B4);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242A4C_8032CC);
+#include "world/common/GetGameStatus75.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242A7C_8032FC);
 

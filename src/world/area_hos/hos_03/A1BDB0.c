@@ -78,7 +78,7 @@ INCLUDE_ASM(s32, "world/area_hos/hos_03/A1BDB0", func_80242FAC_A1E0AC);
 
 INCLUDE_ASM(s32, "world/area_hos/hos_03/A1BDB0", func_80242FC8_A1E0C8);
 
-INCLUDE_ASM(s32, "world/area_hos/hos_03/A1BDB0", func_80242FE0_A1E0E0);
+#include "world/common/GetGameStatus75.inc.c"
 
 INCLUDE_ASM(s32, "world/area_hos/hos_03/A1BDB0", func_80243010_A1E110);
 

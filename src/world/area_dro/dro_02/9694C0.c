@@ -34,7 +34,7 @@ INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_80240E08_969FC8);
 
 INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_80240E24_969FE4);
 
-INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_80240E3C_969FFC);
+#include "world/common/GetGameStatus75.inc.c"
 
 INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_80240E6C_96A02C);
 

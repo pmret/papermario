@@ -58,7 +58,7 @@ INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80242418_9D9438);
 
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80242434_9D9454);
 
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_8024244C_9D946C);
+#include "world/common/GetGameStatus75.inc.c"
 
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_8024247C_9D949C);
 

@@ -879,7 +879,8 @@ typedef struct GameStatus {
     /* 0x071 */ s8 demoState; /* (0 = not demo, 1 = map demo, 2 = demo map changing) */
     /* 0x072 */ u8 nextDemoScene; /* which part of the demo to play next */
     /* 0x073 */ u8 contBitPattern;
-    /* 0x074 */ char unk_74[2];
+    /* 0x074 */ char unk_74;
+    /* 0x075 */ s8 unk_75;
     /* 0x076 */ s8 unk_76;
     /* 0x077 */ char unk_77;
     /* 0x078 */ s8 disableScripts;

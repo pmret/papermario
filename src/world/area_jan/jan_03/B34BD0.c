@@ -110,7 +110,7 @@ INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_802426A4_B37274);
 
 INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_802426C0_B37290);
 
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_802426D8_B372A8);
+#include "world/common/GetGameStatus75.inc.c"
 
 INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80242708_B372D8);
 

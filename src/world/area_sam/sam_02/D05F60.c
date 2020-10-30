@@ -56,7 +56,7 @@ INCLUDE_ASM(s32, "world/area_sam/sam_02/D05F60", func_80241634_D06D64);
 
 INCLUDE_ASM(s32, "world/area_sam/sam_02/D05F60", func_80241650_D06D80);
 
-INCLUDE_ASM(s32, "world/area_sam/sam_02/D05F60", func_80241668_D06D98);
+#include "world/common/GetGameStatus75.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_02/D05F60", func_80241698_D06DC8);
 
