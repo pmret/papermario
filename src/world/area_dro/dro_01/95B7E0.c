@@ -34,7 +34,7 @@ INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_802415AC_95C7AC);
 
 INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_802417D0_95C9D0);
 
-INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_8024181C_95CA1C);
+#include "world/common/GetNpcUnsafeOwner2.inc.c"
 
 INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_8024183C_95CA3C);
 

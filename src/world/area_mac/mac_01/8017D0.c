@@ -36,7 +36,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_8024204C_8028CC);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242270_802AF0);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802422BC_802B3C);
+#include "world/common/GetNpcUnsafeOwner2.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802422DC_802B5C);
 
@@ -104,7 +104,10 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802438F0_804170);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80243920_8041A0);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_8024394C_8041CC);
+ApiStatus PartnerResumeAbilityScript(ScriptInstance* script, s32 isInitialCall) {
+    partner_resume_ability_script();
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_8024396C_8041EC);
 

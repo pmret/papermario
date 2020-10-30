@@ -34,7 +34,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_802418FC_824BBC);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_80241B20_824DE0);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_80241B6C_824E2C);
+#include "world/common/GetNpcUnsafeOwner2.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_80241B8C_824E4C);
 

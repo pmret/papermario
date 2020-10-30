@@ -88,7 +88,7 @@ INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80241CD8_B368A8);
 
 INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80241EFC_B36ACC);
 
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80241F48_B36B18);
+#include "world/common/GetNpcUnsafeOwner2.inc.c"
 
 INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80241F68_B36B38);
 

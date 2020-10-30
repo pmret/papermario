@@ -26,7 +26,7 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_802404CC_8B053C);
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_802406F0_8B0760);
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_8024073C_8B07AC);
+#include "world/common/GetNpcUnsafeOwner2.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_8024075C_8B07CC);
 
