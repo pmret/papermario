@@ -96,6 +96,7 @@ ApiStatus func_80282610(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
+// common probably
 ApiStatus func_80282624(ScriptInstance* script, s32 isInitialCall) {
     D_80151310 = 0;
     return ApiStatus_DONE2;

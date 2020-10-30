@@ -232,7 +232,7 @@ INCLUDE_ASM(s32, "code_b72b0_len_15ed0", test_item_player_collision);
 
 INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80133FC8);
 
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", set_item_entity_flags);
+INCLUDE_ASM(void, "code_b72b0_len_15ed0", set_item_entity_flags, s32 itemEntityIndex, s32 flag);
 
 INCLUDE_ASM(s32, "code_b72b0_len_15ed0", clear_item_entity_flags);
 

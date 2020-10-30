@@ -52,7 +52,7 @@ INCLUDE_ASM(s32, "world/area_hos/hos_03/A1BDB0", func_802424A4_A1D5A4);
 
 INCLUDE_ASM(s32, "world/area_hos/hos_03/A1BDB0", func_802425BC_A1D6BC);
 
-INCLUDE_ASM(s32, "world/area_hos/hos_03/A1BDB0", func_802425D0_A1D6D0);
+#include "world/common/Set80151310_0.inc.c"
 
 INCLUDE_ASM(s32, "world/area_hos/hos_03/A1BDB0", func_802425E0_A1D6E0);
 

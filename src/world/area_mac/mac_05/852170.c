@@ -38,7 +38,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80241320_853490);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80241438_8535A8);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_8024144C_8535BC);
+#include "world/common/Set80151310_0.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_8024145C_8535CC);
 

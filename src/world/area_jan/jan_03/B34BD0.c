@@ -84,7 +84,7 @@ INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80241B9C_B3676C);
 
 INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80241CB4_B36884);
 
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80241CC8_B36898);
+#include "world/common/Set80151310_0.inc.c"
 
 INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80241CD8_B368A8);
 

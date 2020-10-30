@@ -22,7 +22,7 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80240390_8B0400);
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_802404A8_8B0518);
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_802404BC_8B052C);
+#include "world/common/Set80151310_0.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_802404CC_8B053C);
 

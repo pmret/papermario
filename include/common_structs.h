@@ -916,7 +916,7 @@ typedef struct GameStatus {
     /* 0x136 */ char unk_136[2];
     /* 0x138 */ s32 nextRNG;
     /* 0x13C */ char unk_13C[4];
-    /* 0x140 */ UNK_PTR shopItemData;
+    /* 0x140 */ s32* shopItemData;
     /* 0x144 */ struct Shop* mapShop;
     /* 0x148 */ s16 enableBackground; /* (bit 2 is also used for something) */
     /* 0x14A */ s16 backgroundMinW;

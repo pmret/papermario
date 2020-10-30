@@ -50,7 +50,7 @@ INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", delete_player_actor_9C6148);
 
 INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_80240E80_9C6260);
 
-INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_80240E94_9C6274);
+#include "world/common/Set80151310_0.inc.c"
 
 INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_80240EA4_9C6284);
 

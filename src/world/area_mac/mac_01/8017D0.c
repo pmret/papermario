@@ -32,7 +32,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80241F10_802790);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242028_8028A8);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_8024203C_8028BC);
+#include "world/common/Set80151310_0.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_8024204C_8028CC);
 
@@ -116,7 +116,9 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80243A3C_8042BC);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80243A70_8042F0);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80243AA0_804320);
+ApiStatus func_80243AA0_804320(ScriptInstance* script, s32 isInitialCall) {
+    return ApiStatus_DONE2;
+}
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 

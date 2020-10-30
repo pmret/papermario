@@ -6,7 +6,7 @@ INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_802407D0_D3ADA0);
 
 INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_802408E8_D3AEB8);
 
-INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_802408FC_D3AECC);
+#include "world/common/Set80151310_0.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_8024090C_D3AEDC);
 

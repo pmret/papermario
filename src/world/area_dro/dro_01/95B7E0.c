@@ -30,7 +30,7 @@ INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_80241470_95C670);
 
 INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_80241588_95C788);
 
-INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_8024159C_95C79C);
+#include "world/common/Set80151310_0.inc.c"
 
 INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_802415AC_95C7AC);
 
