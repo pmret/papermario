@@ -31,7 +31,7 @@ void func_8014A498(void) {
     s32 i;
 
     for (i = 0; i < 2; i++) {
-        MusicPlayer *musicPlayers = gMusicPlayers;
+        MusicPlayer* musicPlayers = gMusicPlayers;
         musicPlayers[i] = *(src = &D_8014F6F0);
     }
 

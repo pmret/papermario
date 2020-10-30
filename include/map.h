@@ -41,7 +41,7 @@ typedef struct Map {
     /* 0x0C */ void* dmaEnd;
     /* 0x10 */ void* dmaDest;
     /* 0x14 */ char* bgName;
-    /* 0x18 */ s32 (*init)(void); ///< Return TRUE to skip normal asset (shape/hit/bg/tex) loading.
+    /* 0x18 */ s32(*init)(void);  ///< Return TRUE to skip normal asset (shape/hit/bg/tex) loading.
     /* 0x1C */ s16 flags1;
     /* 0x1E */ s8 flags2;
     /* 0x1F */ s8 flags3;
