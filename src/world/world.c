@@ -79,7 +79,7 @@ INCLUDE_ASM(void*, "code_341d0_len_20d0", load_asset_by_name, char* name, s32* d
 
 INCLUDE_ASM(s32, "code_341d0_len_20d0", get_asset_offset);
 
-#define AREA(area, jp_name) { ARRAY_COUNT(area##_maps), &area##_maps, "area_" #area, jp_name }
+#define AREA(area, jp_name) { ARRAY_COUNT(area##_maps), area##_maps, "area_" #area, jp_name }
 
 #define MAP(map) \
     .id = #map, \
