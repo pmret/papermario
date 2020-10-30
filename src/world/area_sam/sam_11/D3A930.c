@@ -15,9 +15,9 @@ static ApiStatus Set80151310_0(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/SetCamera0MoveFlagNeg1.inc.c"
+#include "world/common/UnsetCamera0MoveFlag1.inc.c"
 
-INCLUDE_ASM(s32, "world/area_sam/sam_11/D3A930", func_80240580_D3AB50);
+#include "world/common/SetCamera0MoveFlag1.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_11/D3A930", func_8024059C_D3AB6C);
 

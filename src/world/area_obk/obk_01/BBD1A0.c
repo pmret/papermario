@@ -1,8 +1,8 @@
 #include "obk_01.h"
 
-#include "world/common/SetCamera0MoveFlagNeg1.inc.c"
+#include "world/common/UnsetCamera0MoveFlag1.inc.c"
 
-INCLUDE_ASM(s32, "world/area_obk/obk_01/BBD1A0", func_8024001C_BBD1BC);
+#include "world/common/SetCamera0MoveFlag1.inc.c"
 
 INCLUDE_ASM(s32, "world/area_obk/obk_01/BBD1A0", func_80240038_BBD1D8);
 

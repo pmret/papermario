@@ -1,8 +1,8 @@
 #include "kmr_03.h"
 
-#include "world/common/SetCamera0MoveFlagNeg1.inc.c"
+#include "world/common/UnsetCamera0MoveFlag1.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_03/8C82B0", func_8024033C_8C82CC);
+#include "world/common/SetCamera0MoveFlag1.inc.c"
 
 ApiStatus func_80240358_8C82E8(ScriptInstance* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = PLAYER_STATUS;

@@ -1,8 +1,8 @@
 #include "kzn_03.h"
 
-#include "world/common/SetCamera0MoveFlagNeg1.inc.c"
+#include "world/common/UnsetCamera0MoveFlag1.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C63A10", func_80242D1C_C63A2C);
+#include "world/common/SetCamera0MoveFlag1.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C63A10", func_80242D38_C63A48);
 

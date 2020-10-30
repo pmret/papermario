@@ -8,7 +8,7 @@ INCLUDE_ASM(s32, "world/area_sam/sam_07/D2BD30", func_80240448_D2C178);
 
 INCLUDE_ASM(s32, "world/area_sam/sam_07/D2BD30", func_802405B0_D2C2E0);
 
-#include "world/common/SetCamera0MoveFlagNeg1.inc.c"
+#include "world/common/UnsetCamera0MoveFlag1.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_07/D2BD30", func_80240650_D2C380);
 

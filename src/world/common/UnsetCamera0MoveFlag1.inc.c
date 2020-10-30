@@ -1,6 +1,6 @@
 #include "common.h"
 
-static ApiStatus SetCamera0MoveFlagNeg1(ScriptInstance* script, s32 isInitialCall) {
+static ApiStatus UnsetCamera0MoveFlag1(ScriptInstance* script, s32 isInitialCall) {
     Camera* camera = &gCameras[0];
 
     camera->moveFlags &= ~1;
