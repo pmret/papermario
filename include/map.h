@@ -33,6 +33,8 @@ typedef struct MapConfig {
     } tattle;
 } MapConfig; // size = 0x40
 
+typedef s32 MapInitialiser(void);
+
 #define MAP_ID_MAX_LEN 7 ///< "xxx_yyy" excluding null terminator.
 typedef struct Map {
     /* 0x00 */ char* id; ///< @see MAP_ID_MAX_LEN
@@ -41,10 +43,10 @@ typedef struct Map {
     /* 0x0C */ void* dmaEnd;
     /* 0x10 */ void* dmaDest;
     /* 0x14 */ char* bgName;
-    /* 0x18 */ s32 (*init)(void); ///< Return TRUE to skip normal asset (shape/hit/bg/tex) loading.
-    /* 0x1C */ s16 flags1;
-    /* 0x1E */ s8 flags2;
-    /* 0x1F */ s8 flags3;
+    /* 0x18 */ MapInitialiser* init; ///< Return TRUE to skip normal asset (shape/hit/bg/tex) loading.
+    /* 0x1C */ s16 unk_1C; // Unused?
+    /* 0x1E */ s8 songVariation; ///< 0 or 1. @see get_song_variation_override_for_cur_map
+    /* 0x1F */ s8 flags;
 } Map; // size = 0x20
 
 typedef struct Area {
@@ -246,9 +248,9 @@ typedef struct {
 Enemy* get_enemy(NpcId npcId);
 
 /// Zero-terminated.
-extern Area gAreas[];
+Area gAreas[29];
 
-/// Lists the songs that are forced to use the variation determined by `map.flags2 & 1`.
+/// Lists the songs that are forced to use the variation determined by `map.songVariation & 1`.
 /// @see get_song_variation_override_for_cur_map
 extern SongID gSongsUsingVariationFlag[6];
 
