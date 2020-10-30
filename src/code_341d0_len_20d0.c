@@ -1,4 +1,5 @@
 #include "common.h"
+#include "ld_addrs.h"
 
 INCLUDE_ASM(s32, "code_341d0_len_20d0", func_80058DD0);
 
@@ -42,8 +43,8 @@ INCLUDE_ASM(s32, "code_341d0_len_20d0", remove_all_effects);
 
 INCLUDE_ASM(s32, "code_341d0_len_20d0", play_effect);
 
-void load_map_script_lib(void) {
-    dma_copy(&mapScriptLibStart, &mapScriptLibEnd, &mapScriptLibVram);
+void load_world_script_api(void) {
+    dma_copy(&world_script_api_ROM_START, &world_script_api_ROM_END, &world_script_api_VRAM);
 }
 
 INCLUDE_ASM(s32, "code_341d0_len_20d0", load_map_by_IDs);

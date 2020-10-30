@@ -820,11 +820,13 @@ segments:
     files:
     - [0x415D90, "c"]
   - [0x4200C0, "bin"] # todo split this further
-  - type: code
+  - name: world/script_api/
+    ld_name: world_script_api
+    type: code
     start: 0x7E0E80
     vram: 0x80280000
     files:
-    - [0x7e0e80, "c", "code_7e0e80"]
+    - [0x7e0e80, "c"]
     - [0x7E2AA0, "c"]
     - [0x7E3700, "c"]
     - [0x7e4d00, "bin"]

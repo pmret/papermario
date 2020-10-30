@@ -68,10 +68,6 @@ gBattleState = 0x800DC068;
 gBattleStatus = 0x800DC070;
 gPauseMenuStrings = 0x8026F778;
 
-mapScriptLibStart = 0x7E0E80;
-mapScriptLibEnd = 0x7E73A0;
-mapScriptLibVram = 0x80280000;
-
 D_000759B0 = 0x000759B0;
 D_000759B0_end = 0x000A5DD0;
 D_000A5DD0 = 0x000A5DD0;
