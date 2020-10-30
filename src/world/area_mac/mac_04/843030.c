@@ -82,7 +82,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80241980_844550);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_802419AC_84457C);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_802419D0_8445A0);
+#include "world/common/GetPlayerCoins.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_802419E4_8445B4);
 
