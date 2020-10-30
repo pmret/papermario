@@ -44,7 +44,7 @@ INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_802411B4_B35D84);
 
 #include "world/common/Call800E9894.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_802414D0_B360A0);
+#include "world/common/Unk800E98C4SyncStatusMenu.inc.c"
 
 INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_802414F8_B360C8);
 

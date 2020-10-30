@@ -2,7 +2,7 @@
 
 #include "world/common/Call800E9894.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8ED0C0", func_802412C0_8ED0E0);
+#include "world/common/Unk800E98C4SyncStatusMenu.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8ED0C0", func_802412E8_8ED108);
 

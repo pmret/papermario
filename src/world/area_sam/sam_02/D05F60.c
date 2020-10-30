@@ -2,7 +2,7 @@
 
 #include "world/common/Call800E9894.inc.c"
 
-INCLUDE_ASM(s32, "world/area_sam/sam_02/D05F60", func_80240850_D05F80);
+#include "world/common/Unk800E98C4SyncStatusMenu.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_02/D05F60", func_80240878_D05FA8);
 

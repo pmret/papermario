@@ -94,7 +94,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80243740_803FC0);
 
 #include "world/common/Call800E9894.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802437CC_80404C);
+#include "world/common/Unk800E98C4SyncStatusMenu.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", pause_tutorial_draw_contents_804074);
 
@@ -189,4 +189,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802454B4_805D34);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80245504_805D84);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_8024552C_805DAC);
+ApiStatus func_8024552C_805DAC(ScriptInstance* script, s32 isInitialCall) {
+    func_800EF3A4();
+    return ApiStatus_DONE2;
+}

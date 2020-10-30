@@ -88,7 +88,7 @@ INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_802433E8_96C5A8);
 
 #include "world/common/Call800E9894.inc.c"
 
-INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_802434A4_96C664);
+#include "world/common/Unk800E98C4SyncStatusMenu.inc.c"
 
 INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_802434CC_96C68C);
 

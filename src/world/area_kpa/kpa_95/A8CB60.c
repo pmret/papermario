@@ -36,7 +36,7 @@ INCLUDE_ASM(s32, "world/area_kpa/kpa_95/A8CB60", func_80241304_A8DD84);
 
 #include "world/common/Call800E9894.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_95/A8CB60", func_80241628_A8E0A8);
+#include "world/common/Unk800E98C4SyncStatusMenu.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_95/A8CB60", func_80241650_A8E0D0);
 
