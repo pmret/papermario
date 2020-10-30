@@ -142,7 +142,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802443E0_804C60);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802446AC_804F2C);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802446E0_804F60);
+#include "world/common/UnkPositionFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802447E0_805060);
 
