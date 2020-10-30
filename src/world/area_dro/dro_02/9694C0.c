@@ -86,7 +86,7 @@ INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_8024334C_96C50C);
 
 INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_802433E8_96C5A8);
 
-INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_80243484_96C644);
+#include "world/common/Call800E9894.inc.c"
 
 INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_802434A4_96C664);
 

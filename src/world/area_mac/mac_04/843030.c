@@ -90,7 +90,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80241B90_844760);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80241BB8_844788);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80241C20_8447F0);
+#include "world/common/Call800E9894.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80241C40_844810);
 

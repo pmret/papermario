@@ -22,7 +22,7 @@ INCLUDE_ASM(s32, "world/area_hos/hos_03/A1BDB0", func_80241E98_A1CF98);
 
 INCLUDE_ASM(s32, "world/area_hos/hos_03/A1BDB0", func_80241FBC_A1D0BC);
 
-INCLUDE_ASM(s32, "world/area_hos/hos_03/A1BDB0", func_802421A8_A1D2A8);
+#include "world/common/Call800E9894.inc.c"
 
 INCLUDE_ASM(s32, "world/area_hos/hos_03/A1BDB0", func_802421C8_A1D2C8);
 

@@ -34,7 +34,7 @@ INCLUDE_ASM(s32, "world/area_kpa/kpa_95/A8CB60", func_80241284_A8DD04);
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_95/A8CB60", func_80241304_A8DD84);
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_95/A8CB60", func_80241608_A8E088);
+#include "world/common/Call800E9894.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_95/A8CB60", func_80241628_A8E0A8);
 
