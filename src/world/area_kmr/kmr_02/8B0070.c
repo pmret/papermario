@@ -52,13 +52,13 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80240EB4_8B0F24);
 
 #include "world/common/GetGameStatus75.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80240EFC_8B0F6C);
+#include "world/common/SetCamVfov.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80240F70_8B0FE0);
+#include "world/common/GetCamVfov.inc.c"
 
 #include "world/common/UnkCameraFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_802411AC_8B121C);
+#include "world/common/UnkRotatePlayer.inc.c"
 
 #include "world/common/UnkPartnerFuncs.inc.c"
 

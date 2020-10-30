@@ -62,13 +62,13 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242A34_8032B4);
 
 #include "world/common/GetGameStatus75.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242A7C_8032FC);
+#include "world/common/SetCamVfov.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242AF0_803370);
+#include "world/common/GetCamVfov.inc.c"
 
 #include "world/common/UnkCameraFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242D2C_8035AC);
+#include "world/common/UnkRotatePlayer.inc.c"
 
 #include "world/common/UnkPartnerFuncs.inc.c"
 

@@ -17,7 +17,6 @@ static ApiStatus UnkRotatePartner(ScriptInstance* script, s32 isInitialCall) {
     return (script->functionTemp[0].s >> 0x1F) & ApiStatus_DONE2;
 }
 
-
 static ApiStatus UnkMovePartner(ScriptInstance* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(NpcId_PARTNER);
 

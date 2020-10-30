@@ -60,13 +60,13 @@ INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_80241F94_95D194);
 
 #include "world/common/GetGameStatus75.inc.c"
 
-INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_80241FDC_95D1DC);
+#include "world/common/SetCamVfov.inc.c"
 
-INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_80242050_95D250);
+#include "world/common/GetCamVfov.inc.c"
 
 #include "world/common/UnkCameraFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_8024228C_95D48C);
+#include "world/common/UnkRotatePlayer.inc.c"
 
 #include "world/common/UnkPartnerFuncs.inc.c"
 

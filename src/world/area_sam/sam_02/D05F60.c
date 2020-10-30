@@ -56,13 +56,13 @@ INCLUDE_ASM(s32, "world/area_sam/sam_02/D05F60", func_80241650_D06D80);
 
 #include "world/common/GetGameStatus75.inc.c"
 
-INCLUDE_ASM(s32, "world/area_sam/sam_02/D05F60", func_80241698_D06DC8);
+#include "world/common/SetCamVfov.inc.c"
 
-INCLUDE_ASM(s32, "world/area_sam/sam_02/D05F60", func_8024170C_D06E3C);
+#include "world/common/GetCamVfov.inc.c"
 
 #include "world/common/UnkCameraFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_sam/sam_02/D05F60", func_80241948_D07078);
+#include "world/common/UnkRotatePlayer.inc.c"
 
 #include "world/common/UnkPartnerFuncs.inc.c"
 
