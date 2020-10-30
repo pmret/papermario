@@ -33,7 +33,7 @@ s32 func_8004DA0C(UNK_TYPE arg0) {
 
 INCLUDE_ASM(s32, "code_28910_len_5090", func_8004DA74);
 
-void func_8004DAA8(UnkStructFor8004DAA8 *arg0) {
+void func_8004DAA8(UnkStructFor8004DAA8* arg0) {
     if (arg0->unk_221 != 0) {
         arg0->unk_221 = 4;
         arg0->unk_010 = 1;
