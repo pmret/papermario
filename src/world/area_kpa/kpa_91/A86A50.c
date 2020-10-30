@@ -50,8 +50,6 @@ INCLUDE_ASM(s32, "world/area_kpa/kpa_91/A86A50", func_802416E8_A88138);
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_91/A86A50", func_8024173C_A8818C);
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_91/A86A50", func_802417B8_A88208);
-
-#include "world/common/Call800EB168.inc.c"
+#include "world/common/GetPartnerCall800EB168.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_91/A86A50", func_8024181C_A8826C);

@@ -54,9 +54,7 @@ INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80242110_D21FA0);
 
 INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80242164_D21FF4);
 
-INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_802421E0_D22070);
-
-#include "world/common/Call800EB168.inc.c"
+#include "world/common/GetPartnerCall800EB168.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80242244_D220D4);
 

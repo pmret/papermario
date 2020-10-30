@@ -108,9 +108,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_8024396C_8041EC);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802439C0_804240);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80243A3C_8042BC);
-
-#include "world/common/Call800EB168.inc.c"
+#include "world/common/GetPartnerCall800EB168.inc.c"
 
 ApiStatus func_80243AA0_804320(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
