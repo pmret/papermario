@@ -10,9 +10,7 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8ED0C0", func_80241364_8ED184);
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8ED0C0", func_802413E4_8ED204);
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8ED0C0", func_80241414_8ED234);
-
-INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8ED0C0", func_80241440_8ED260);
+#include "world/common/PartnerToggleAbilityScript.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8ED0C0", func_80241460_8ED280);
 

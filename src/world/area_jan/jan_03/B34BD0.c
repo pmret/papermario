@@ -52,9 +52,7 @@ INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80241574_B36144);
 
 INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_802415F4_B361C4);
 
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80241624_B361F4);
-
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80241650_B36220);
+#include "world/common/PartnerToggleAbilityScript.inc.c"
 
 INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80241670_B36240);
 

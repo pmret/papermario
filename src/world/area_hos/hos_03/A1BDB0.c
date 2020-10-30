@@ -32,9 +32,7 @@ INCLUDE_ASM(s32, "world/area_hos/hos_03/A1BDB0", func_8024226C_A1D36C);
 
 INCLUDE_ASM(s32, "world/area_hos/hos_03/A1BDB0", func_802422EC_A1D3EC);
 
-INCLUDE_ASM(s32, "world/area_hos/hos_03/A1BDB0", func_8024231C_A1D41C);
-
-INCLUDE_ASM(s32, "world/area_hos/hos_03/A1BDB0", func_80242348_A1D448);
+#include "world/common/PartnerToggleAbilityScript.inc.c"
 
 INCLUDE_ASM(s32, "world/area_hos/hos_03/A1BDB0", func_80242368_A1D468);
 

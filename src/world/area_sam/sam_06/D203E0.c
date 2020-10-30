@@ -48,9 +48,7 @@ INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80242014_D21EA4);
 
 INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80242094_D21F24);
 
-INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_802420C4_D21F54);
-
-INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_802420F0_D21F80);
+#include "world/common/PartnerToggleAbilityScript.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80242110_D21FA0);
 

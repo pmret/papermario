@@ -44,9 +44,7 @@ INCLUDE_ASM(s32, "world/area_kpa/kpa_91/A86A50", func_802415EC_A8803C);
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_91/A86A50", func_8024166C_A880BC);
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_91/A86A50", func_8024169C_A880EC);
-
-INCLUDE_ASM(s32, "world/area_kpa/kpa_91/A86A50", func_802416C8_A88118);
+#include "world/common/PartnerToggleAbilityScript.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_91/A86A50", func_802416E8_A88138);
 

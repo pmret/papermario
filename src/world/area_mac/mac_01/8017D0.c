@@ -102,12 +102,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80243870_8040F0);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802438F0_804170);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80243920_8041A0);
-
-ApiStatus PartnerResumeAbilityScript(ScriptInstance* script, s32 isInitialCall) {
-    partner_resume_ability_script();
-    return ApiStatus_DONE2;
-}
+#include "world/common/PartnerToggleAbilityScript.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_8024396C_8041EC);
 
@@ -187,7 +182,10 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80245488_805D08);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802454B4_805D34);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80245504_805D84);
+ApiStatus func_80245504_805D84(ScriptInstance* script, s32 isInitialCall) {
+    func_800EF394(20.0f);
+    return ApiStatus_DONE2;
+}
 
 ApiStatus func_8024552C_805DAC(ScriptInstance* script, s32 isInitialCall) {
     func_800EF3A4();

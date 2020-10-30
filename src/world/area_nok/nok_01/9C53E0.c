@@ -30,9 +30,7 @@ INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_80240B30_9C5F10);
 
 INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_80240BB0_9C5F90);
 
-INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_80240BE0_9C5FC0);
-
-INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_80240C0C_9C5FEC);
+#include "world/common/PartnerToggleAbilityScript.inc.c"
 
 INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_80240C2C_9C600C);
 
