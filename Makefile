@@ -151,7 +151,7 @@ $(BUILD_DIR)/bin/assets/%: bin/assets/%.bin
 	@mkdir -p $(shell dirname $@)
 	@cp $< $@
 
-$(ASSETS_BIN): $(ASSET_FILES) $(YAY0_ASSET_FILES)
+$(ASSETS_BIN): sources.mk $(ASSET_FILES) $(YAY0_ASSET_FILES)
 	@mkdir -p $(shell dirname $@)
 	@echo "building $@"
 	@$(PYTHON) tools/build_assets_bin.py $@ $(ASSET_FILES)
