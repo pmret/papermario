@@ -174,7 +174,16 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80245028_8058A8);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_8024522C_805AAC);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80245440_805CC0);
+ApiStatus func_80245440_805CC0(ScriptInstance* script, s32 isInitialCall) {
+    if (PLAYER_DATA->currentPartner == script->varTable[10]) {
+        script->varTable[1] = 0;
+        return ApiStatus_DONE2;
+    }
+
+    func_800EB168(script->varTable[10]);
+    script->varTable[1] = 1;
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80245488_805D08);
 

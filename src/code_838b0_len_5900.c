@@ -27,7 +27,7 @@ INCLUDE_ASM(s32, "code_838b0_len_5900", func_800EA6A8);
 
 INCLUDE_ASM(s32, "code_838b0_len_5900", func_800EA6CC);
 
-INCLUDE_ASM(s32, "code_838b0_len_5900", func_800EB168, s8 arg0);
+INCLUDE_ASM(s32, "code_838b0_len_5900", func_800EB168, s32 arg0);
 
 INCLUDE_ASM(s32, "code_838b0_len_5900", func_800EB200);
 

@@ -7,6 +7,6 @@ static ApiStatus GetPartnerCall800EB168(ScriptInstance* script, s32 isInitialCal
 }
 
 static ApiStatus Call800EB168(ScriptInstance* script, s32 isInitialCall) {
-    func_800EB168(get_variable(script, *script->ptrReadPos));
+    func_800EB168((s8)get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }

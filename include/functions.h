@@ -70,7 +70,7 @@ void set_curtain_fade(f32 scale);
 
 void fx_walk_normal(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4, s32 arg5);
 
-s32 func_800EB168(s8);
+s32 func_800EB168(s32);
 
 // Partner
 void func_800EBA3C(Npc* partner);
