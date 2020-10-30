@@ -26,9 +26,8 @@ s32 get_song_variation_override_for_cur_map(SongID songID) {
     return -1;
 }
 
-//INCLUDE_ASM(s32, "code_e0b30_len_b80", func_8014A498);
 void func_8014A498(void) {
-    MusicPlayer* src;
+    MusicPlayer* src; // TODO: remove this temp when .data section for this file (incl. D_8014F6F0) is set up
     s32 i;
 
     for (i = 0; i < 2; i++) {
