@@ -44,9 +44,7 @@ INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_802413B0_D3B980);
 
 INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_802415EC_D3BBBC);
 
-INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_80241650_D3BC20);
-
-#include "world/common/UnkMoveNpc.inc.c"
+#include "world/common/UnkPartnerFuncs.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_802417C8_D3BD98);
 
