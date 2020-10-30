@@ -132,12 +132,12 @@ $(BUILD_DIR)/%.Yay0.o: $(BUILD_DIR)/%.bin.Yay0
 # Compile C files
 $(BUILD_DIR)/%.c.o: %.c $(MDEPS)
 	@mkdir -p $(shell dirname $@)
-	iconv --from UTF-8 --to SHIFT-JIS $< | $(CPP) $(CPPFLAGS) -o - $(CPPMFLAGS) | $(CC) $(CFLAGS) -o - | $(OLD_AS) $(OLDASFLAGS) -o $@ -
+	$(CPP) $(CPPFLAGS) -o - $(CPPMFLAGS) $< | iconv --from UTF-8 --to SHIFT-JIS | $(CC) $(CFLAGS) -o - | $(OLD_AS) $(OLDASFLAGS) -o $@ -
 
 # Compile C files (with DSL macros)
 $(foreach cfile, $(DSL_C_FILES), $(BUILD_DIR)/$(cfile).o): $(BUILD_DIR)/%.c.o: %.c $(MDEPS)
 	@mkdir -p $(shell dirname $@)
-	iconv --from UTF-8 --to SHIFT-JIS $< | $(CPP) $(CPPFLAGS) -o - $(CPPMFLAGS) | tools/compile_dsl_macros.py | $(CC) $(CFLAGS) -o - | $(OLD_AS) $(OLDASFLAGS) -o $@ -
+	$(CPP) $(CPPFLAGS) -o - $(CPPMFLAGS) $< | tools/compile_dsl_macros.py | iconv --from UTF-8 --to SHIFT-JIS | $(CC) $(CFLAGS) -o - | $(OLD_AS) $(OLDASFLAGS) -o $@ -
 
 # Assemble handwritten ASM
 $(BUILD_DIR)/%.s.o: %.s
