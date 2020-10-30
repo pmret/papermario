@@ -38,7 +38,7 @@ INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_80240C80_9C6060);
 
 INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_80240CFC_9C60DC);
 
-INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_80240D30_9C6110);
+#include "world/common/Call800EB168.inc.c"
 
 INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_80240D60_9C6140);
 

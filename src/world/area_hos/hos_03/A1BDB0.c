@@ -40,7 +40,7 @@ INCLUDE_ASM(s32, "world/area_hos/hos_03/A1BDB0", func_802423BC_A1D4BC);
 
 INCLUDE_ASM(s32, "world/area_hos/hos_03/A1BDB0", func_80242438_A1D538);
 
-INCLUDE_ASM(s32, "world/area_hos/hos_03/A1BDB0", func_8024246C_A1D56C);
+#include "world/common/Call800EB168.inc.c"
 
 INCLUDE_ASM(s32, "world/area_hos/hos_03/A1BDB0", func_8024249C_A1D59C);
 

@@ -18,7 +18,7 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B30E0", func_80243284_8B32F4);
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B30E0", func_80243300_8B3370);
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B30E0", func_80243334_8B33A4);
+#include "world/common/Call800EB168.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B30E0", func_80243364_8B33D4);
 
