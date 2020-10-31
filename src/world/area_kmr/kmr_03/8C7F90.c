@@ -1,5 +1,7 @@
 #include "kmr_03.h"
 
+Script M(Main);
+
 ApiStatus func_80240000_8C7F90(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     PlayerData* playerData = PLAYER_DATA;
@@ -47,11 +49,23 @@ ApiStatus func_80240000_8C7F90(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/CheckPartnerFlags1000.inc.c"
 
-ApiStatus func_802401B0_8C8140(ScriptInstance* script, s32 isInitialCall) {
-    Npc* npc = get_npc_unsafe(0);
+// 8C85E0
+EntryList M(entryList) = {
+    { -340.0f, 0.0f, 348.0f, 48.0f },
+    { 480.0f, 0.0f, 0.0f, 270.0f },
+    { -310.0f, 20.0f, -80.0f, 135.0f },
+};
 
-    script->varTable[1] = func_800E0088(npc->pos.x, npc->pos.z) / npc->moveSpeed * 0.8f;
-    return ApiStatus_DONE2;
-}
+MapConfig M(config) = {
+    .main = M(Main),
+    .entryList = M(entryList),
+    .entryCount = ENTRY_COUNT(M(entryList)),
+    .background = &gBackgroundImage,
+    .tattle = MessageID_TATTLE_KMR_03,
+};
 
-#include "world/common/UnkPositionFunc.inc.c"
+Script M(script_802406C0) = {
+    SI_CALL(SetMusicTrack, 0, 17, 0, 8),
+    SI_RETURN(),
+    SI_END(),
+};

@@ -1359,15 +1359,16 @@ segments:
     vram: 0x80240000
     files:
       - [0x8C7F90, "c"]
+      - [0x8C8140, "c"]
       - [0x8C82B0, "c"]
       - [0x8C83A0, "c"]
-      - [0x8C85E0, "bin"]
-      - [0x8C8680, "bin"]
-      - [0x8C88E0, "bin"]
-      - [0x8C9400, "bin"]
-      - [0x8C9780, "bin"]
-      - [0x8CA2D0, "bin"]
-      - [0x8CA8F0, "bin"] # rodata
+      - [0x8C85E0, ".data", "world/area_kmr/kmr_03/8C7F90"]
+      - [0x8C8680, ".data", "world/area_kmr/kmr_03/8C8140"]
+      - [0x8C88E0, ".data", "world/area_kmr/kmr_03/8C82B0"]
+      # - [0x8C9400, "bin"]
+      - [0x8C9780, ".data", "world/area_kmr/kmr_03/8C83A0"]
+      # - [0x8CA2D0, "bin"]
+      - [0x8CA8F0, ".rodata", "world/area_kmr/kmr_03/8C8140"]
   - name: world/area_kmr/kmr_04/
     type: code
     overlay: True
