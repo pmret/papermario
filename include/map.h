@@ -33,7 +33,7 @@ typedef struct MapConfig {
     } tattle;
 } MapConfig; // size = 0x40
 
-typedef s32 MapInitialiser(void);
+typedef s32 MapInit(void);
 
 #define MAP_ID_MAX_LEN 7 ///< "xxx_yyy" excluding null terminator.
 typedef struct Map {
@@ -43,7 +43,7 @@ typedef struct Map {
     /* 0x0C */ void* dmaEnd;
     /* 0x10 */ void* dmaDest;
     /* 0x14 */ char* bgName;
-    /* 0x18 */ MapInitialiser* init; ///< Return TRUE to skip normal asset (shape/hit/bg/tex) loading.
+    /* 0x18 */ MapInit* init; ///< Return TRUE to skip normal asset (shape/hit/bg/tex) loading.
     /* 0x1C */ s16 unk_1C; // Unused?
     /* 0x1E */ s8 songVariation; ///< 0 or 1. @see get_song_variation_override_for_cur_map
     /* 0x1F */ s8 flags;
