@@ -939,7 +939,9 @@ typedef struct PartnerAnimations {
 
 typedef struct Shadow {
     /* 0x00 */ s32 flags;
-    /* 0x04 */ char unk_04[12];
+    /* 0x04 */ char unk_04[2];
+    /* 0x06 */ u8 unk_06;
+    /* 0x07 */ char unk_07[9];
     /* 0x10 */ struct Vec3f position;
     /* 0x1C */ struct Vec3f scale;
     /* 0x28 */ char unk_28[80];
