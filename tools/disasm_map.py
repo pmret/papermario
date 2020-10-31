@@ -43,14 +43,17 @@ def disassemble(bytes, offset, midx, symbol_map = {}, map_name = "map"):
                 bytes.read(0x10)
 
                 main,entry_list,entry_count = unpack(">IIi", bytes.read(4 * 3))
-                out += f"    .main = M(Main)\n"
-                out += f"    .entryList = M(entryList)\n"
-                out += f"    .entryCount = {entry_count}, // prefer ENTRY_COUNT(M(entryList)) if it matches\n"
+                out += f"    .main = M(Main),\n"
+                out += f"    .entryList = M(entryList),\n"
+                out += f"    .entryCount = ENTRY_COUNT(M(entryList)),\n"
 
                 bytes.read(0x1C)
 
                 bg,tattle = unpack(">II", bytes.read(4 * 2))
-                out += f"    .background = {'&gBackgroundImage' if bg == 0x80200000 else 'NULL'},\n"
+                if bg == 0x80200000:
+                    out += f"    .background = &gBackgroundImage,\n"
+                elif bg != 0:
+                    raise Exception(f"unknown MapConfig background {bg:X}")
                 out += f"    .tattle = {tattle:X},\n"
 
                 out += f"}};\n"
@@ -63,7 +66,7 @@ def disassemble(bytes, offset, midx, symbol_map = {}, map_name = "map"):
                     word = int.from_bytes(bytes.read(4), byteorder="big")
 
                     if word in symbol_map:
-                        out += f" M({symbol_map[word]}),"
+                        out += f" {symbol_map[word]},"
                     else:
                         out += f" 0x{word:08X},"
 
@@ -94,6 +97,7 @@ def parse_midx(file, prefix = ""):
         if len(s) == 5:
             if s[0] == "$Start": continue
             if s[0] == "$End": continue
+
             structs.append({
                 "name": prefix + name_struct(s[0]),
                 "type": s[1],
@@ -134,8 +138,23 @@ def name_struct(s):
     s = s[1:].replace("???", "unk")
 
     # use ThisCase for scripts
-    if s.startswith("$Script"):
-        return s[0].upper() + s[1:]
+    if s.startswith("Script_"):
+        s = s[7].upper() + s[8:]
+
+        # if `s` is hex, prefix it with Script_ again
+        try:
+            int(s, 16)
+            return "Script_" + s
+        except Exception:
+            pass
+
+        if s.startswith("Main"):
+            return "Main"
+
+        return s
+
+    if s.startswith("ASCII"):
+        return s
 
     return s[0].lower() + s[1:]
 
@@ -155,7 +174,7 @@ if __name__ == "__main__":
 
     symbol_map = {}
     for struct in midx:
-        symbol_map[struct["vaddr"]] = struct["name"]
+        symbol_map[struct["vaddr"]] = "M(" + struct["name"] + ")"
 
     bin_dir = f"bin/world/{area_name}/{map_name}"
     src_dir = f"src/world/{area_name}/{map_name}"
@@ -184,5 +203,8 @@ if __name__ == "__main__":
 
         if filetype == "bin":
             with open(f"{bin_dir}/{rom_addr:X}.bin", "rb") as bytes:
-                print(f"// {rom_addr:X}")
-                print(disassemble(bytes, rom_addr - rom_start, midx, symbol_map, map_name))
+                disasm = disassemble(bytes, rom_addr - rom_start, midx, symbol_map, map_name)
+
+                if len(disasm.strip()) > 0:
+                    with open(f"{src_dir}/{rom_addr:X}.bin.c", "w") as f:
+                        f.write(disasm)
