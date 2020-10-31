@@ -214,6 +214,8 @@ gWorldDynamicEntityList = 0x801543A0;
 gBattleDynamicEntityList = 0x801543E0;
 gCurrentDynamicEntityListPtr = 0x80154420;
 
+D_802D9D50 = 0x802D9D50;
+
 gScriptIndexList = 0x802DA898;
 gScriptIdList = 0x802DAA98;
 gScriptListCount = 0x802DAC98;
