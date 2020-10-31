@@ -6,7 +6,7 @@ import yaml
 import json
 from struct import unpack
 
-from disasm_script import disassemble as disassemble_script
+import disasm_script
 
 def disassemble(bytes, offset, midx, symbol_map = {}, map_name = "map"):
     out = ""
@@ -15,6 +15,9 @@ def disassemble(bytes, offset, midx, symbol_map = {}, map_name = "map"):
     while len(midx) > 0:
         struct = midx.pop(0)
         name = struct["name"]
+
+        print(name)
+
         if name == "Script_Main": name = f"M(Main)"
 
         #print(f"{offset:X} ({name}, start = {struct['start']:X}, len = {struct['length']:X})")
@@ -28,7 +31,12 @@ def disassemble(bytes, offset, midx, symbol_map = {}, map_name = "map"):
 
             # format struct
             if struct["type"].startswith("Script"):
-                out += disassemble_script(bytes, f"M({name})", symbol_map)
+                pos = bytes.tell()
+                try:
+                    out += disasm_script.ScriptDSLDisassembler(bytes, f"M({name})", symbol_map).disassemble()
+                except disasm_script.UnsupportedScript as e:
+                    bytes.seek(pos)
+                    out += disasm_script.ScriptDisassembler(bytes, f"M({name})", symbol_map).disassemble()
             elif struct["type"] == "Padding":
                 # nops at end of file
                 bytes.seek(offset % 4, 1)
@@ -56,7 +64,7 @@ def disassemble(bytes, offset, midx, symbol_map = {}, map_name = "map"):
                     out += f"    .background = &gBackgroundImage,\n"
                 elif bg != 0:
                     raise Exception(f"unknown MapConfig background {bg:X}")
-                out += f"    .tattle = {tattle:X},\n"
+                out += f"    .tattle = 0x{tattle:X},\n"
 
                 out += f"}};\n"
             elif struct["type"] == "ASCII":
@@ -218,4 +226,5 @@ if __name__ == "__main__":
 
                 if len(disasm.strip()) > 0:
                     with open(f"{src_dir}/{rom_addr:X}.bin.c", "w") as f:
-                        f.write(disasm)
+                        f.write(f'#include "{map_name}.h"\n\n')
+                        f.write(disasm.rstrip() + "\n")
