@@ -179,8 +179,13 @@ gTriggerList2 = 0x80159290;
 gCurrentTriggerListPtr = 0x80159390;
 
 D_801595A0 = 0x801595A0;
-D_80159AE2 = 0x80159AE2;
-D_80159AE4 = 0x80159AE4;
+gMusicUnkVolume = 0x80159AE0;
+gMusicTargetVolume = 0x80159AE2;
+gMusicUnkVolume2 = 0x80159AE4;
+gMusicCurrentVolume = 0x80159AE6;
+gMusicPlayers = 0x80159AF0;
+D_8014F6F0 = 0x8014F6F0;
+
 gCollisionStatus = 0x8015A550;
 D_8015C7C0 = 0x8015C7C0;
 gLastCreatedEntityIndex = 0x801512EC;
@@ -262,3 +267,9 @@ ShakeCamX = 0x802D9CE8;
 
 EnemyNpcHit = 0x80077F70;
 EnemyNpcDefeat = 0x8007809C;
+
+D_80078DB0 = 0x80078DB0;
+D_80078DB4 = 0x80078DB4;
+
+gAreas = 0x800934F0;
+gSongsUsingVariationFlag = 0x8014F720;

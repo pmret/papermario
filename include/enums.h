@@ -260,7 +260,7 @@ typedef UNK_TYPE SpriteId;
 #define SpriteId_PARADE_TWINK          0x000000E8
 #define SpriteId_LEAF                  0x000000E9
 
-typedef UNK_TYPE Song;
+typedef s32 SongID;
 #define Song_TOAD_TOWN              0x00000000
 #define Song_NORMAL_BATTLE          0x00000002
 #define Song_SPECIAL_BATTLE         0x00000003

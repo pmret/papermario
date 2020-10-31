@@ -1,4 +1,4 @@
-#include "common.h"
+#include "code_28910_len_5090.h"
 
 INCLUDE_ASM(s32, "code_28910_len_5090", func_8004D510);
 
@@ -6,11 +6,41 @@ INCLUDE_ASM(s32, "code_28910_len_5090", func_8004D794);
 
 INCLUDE_ASM(s32, "code_28910_len_5090", func_8004D7E0);
 
-INCLUDE_ASM(s32, "code_28910_len_5090", func_8004DA0C);
+s32 func_8004DA0C(UNK_TYPE arg0) {
+    s32 ret = 0;
+
+    if (arg0 != 0) {
+        UnkStructFor8004DAA8* unknown;
+
+        do {
+            unknown = func_8004D794();
+        } while (0);
+
+        do {
+            if (unknown == NULL) {
+                ret = 2;
+            } else if (arg0 == unknown->unk_01C) {
+                func_8004DAA8(unknown);
+                ret = 0;
+            }
+        } while (0);
+    } else {
+        ret = 3;
+    }
+
+    return ret;
+}
 
 INCLUDE_ASM(s32, "code_28910_len_5090", func_8004DA74);
 
-INCLUDE_ASM(s32, "code_28910_len_5090", func_8004DAA8);
+void func_8004DAA8(UnkStructFor8004DAA8* arg0) {
+    if (arg0->unk_221 != 0) {
+        arg0->unk_221 = 4;
+        arg0->unk_010 = 1;
+        arg0->unk_008 = 1;
+        func_80053A18(&arg0->unk_02C);
+    }
+}
 
 INCLUDE_ASM(s32, "code_28910_len_5090", func_8004DAE0);
 
