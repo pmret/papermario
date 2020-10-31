@@ -4888,7 +4888,7 @@ segments:
   - name: world/area_dgb/dgb_02/
     type: code
     overlay: True
-    start: 0xC2EBA0 # this is right
+    start: 0xC2EBA0
     vram: 0x80240000
     files:
       - [0xC2EBA0, "c"]
