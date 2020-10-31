@@ -2,9 +2,6 @@
 #include "ld_addrs.h"
 #include "map.h"
 
-#include "world/area_kmr/kmr_12/kmr_12.h"
-#undef MAP_NAME
-
 INCLUDE_ASM(s32, "code_341d0_len_20d0", func_80058DD0);
 
 INCLUDE_ASM(s32, "code_341d0_len_20d0", func_80058E84);
@@ -141,6 +138,7 @@ static Map kgr_maps[] = {
 };
 
 /// Goomba Region
+MapConfig kmr_12_config;
 static Map kmr_maps[] = {
     { MAP_UNSPLIT(kmr_00, 0x80240D80), .bgName = "kmr_bg", .flags = 1 },
     { MAP_UNSPLIT(kmr_02, 0x80243AF0), .bgName = "kmr_bg" },
