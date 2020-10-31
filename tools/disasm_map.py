@@ -3,7 +3,9 @@
 import sys
 import os
 import yaml
+import json
 from struct import unpack
+
 from disasm_script import disassemble as disassemble_script
 
 def disassemble(bytes, offset, midx, symbol_map = {}, map_name = "map"):
@@ -57,6 +59,15 @@ def disassemble(bytes, offset, midx, symbol_map = {}, map_name = "map"):
                 out += f"    .tattle = {tattle:X},\n"
 
                 out += f"}};\n"
+            elif struct["type"] == "ASCII":
+                string_data = bytes.read(struct["length"]).decode("ascii")
+
+                # strip null terminator(s)
+                while string_data[-1] == "\0":
+                    string_data = string_data[:-1]
+
+                string_literal = json.dumps(string_data)
+                out += f"const char M({struct['name']})[] = {string_literal};"
             else: # unknown type of struct
                 out += f"s32 M({name})[] = {{"
                 for i in range(0, struct["length"], 4):
