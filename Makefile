@@ -135,7 +135,7 @@ $(BUILD_DIR)/%.c.o: %.c $(MDEPS)
 	$(CPP) $(CPPFLAGS) -o - $< $(CPPMFLAGS) | $(CC) $(CFLAGS) -o - | $(OLD_AS) $(OLDASFLAGS) -o $@ -
 
 # Compile C files (with DSL macros)
-$(foreach cfile, $(DSL_C_FILES), $(BUILD_DIR)/$(cfile).o): $(BUILD_DIR)/%.c.o: %.c $(MDEPS)
+$(foreach cfile, $(DSL_C_FILES), $(BUILD_DIR)/$(cfile).o): $(BUILD_DIR)/%.c.o: %.c $(MDEPS) tools/compile_dsl_macros.py
 	@mkdir -p $(shell dirname $@)
 	$(CPP) $(CPPFLAGS) -o - $< $(CPPMFLAGS) | tools/compile_dsl_macros.py | $(CC) $(CFLAGS) -o - | $(OLD_AS) $(OLDASFLAGS) -o $@ -
 
@@ -151,7 +151,7 @@ $(BUILD_DIR)/bin/assets/%: bin/assets/%.bin
 	@mkdir -p $(shell dirname $@)
 	@cp $< $@
 
-$(ASSETS_BIN): $(ASSET_FILES) $(YAY0_ASSET_FILES)
+$(ASSETS_BIN): $(ASSET_FILES) $(YAY0_ASSET_FILES) sources.mk
 	@mkdir -p $(shell dirname $@)
 	@echo "building $@"
 	@$(PYTHON) tools/build_assets_bin.py $@ $(ASSET_FILES)
