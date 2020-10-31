@@ -162,6 +162,7 @@ extern s32 mapScriptLibVram;
 extern Bytecode* SCRIPT_NpcDefeat;
 extern Bytecode* ShakeCam1;
 extern Bytecode* ShakeCamX;
+extern Bytecode* D_802D9D50;
 
 extern s16 gMusicUnkVolume;
 extern s16 gMusicUnkVolume2;

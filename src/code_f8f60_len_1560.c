@@ -351,7 +351,27 @@ INCLUDE_ASM(s32, "code_f8f60_len_1560", setup_path_data);
 
 INCLUDE_ASM(s32, "code_f8f60_len_1560", func_802D5270);
 
-INCLUDE_ASM(s32, "code_f8f60_len_1560", LoadPath, ScriptInstance* script, s32 isInitialCall);
+s32 LoadPath(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 time = get_variable(script, *args++);
+    s32 vectorList = get_variable(script, *args++);
+    s32 numVectors = get_variable(script, *args++);
+    s32 easingType = get_variable(script, *args++);
+    Path* path = heap_malloc(sizeof(Path));
+
+    script->varTable[15] = path;
+    path->numVectors = numVectors;
+    path->unk_04 = heap_malloc(numVectors * sizeof(f32));
+    path->staticVectorList = vectorList;
+    path->vectors = heap_malloc(numVectors * sizeof(Vec3f));
+    setup_path_data(path->numVectors, path->unk_04, path->staticVectorList, path->vectors);
+
+    path->timeElapsed = 0;
+    path->timeLeft = time - 1;
+    path->easingType = easingType;
+
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_f8f60_len_1560", GetNextPathPos, ScriptInstance* script, s32 isInitialCall);
 

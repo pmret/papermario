@@ -1906,3 +1906,4 @@ gMusicTargetVolume;0x80159AE2
 gMusicCurrentVolume;0x80159AE6
 gAreas;0x800934F0
 gSongArray;0x8014F720
+D_802D9D50;0x802D9D50

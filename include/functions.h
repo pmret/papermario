@@ -102,6 +102,7 @@ s32 make_item_entity_nodelay(s32 itemID, f32 x, f32 y, f32 z, ItemSpawnMode item
 void set_cam_viewport(s16 id, s16 x, s16 y, s16 width, s16 height);
 
 void disable_player_shadow(void);
+void move_player(s32 duration, f32 heading, f32 speed);
 
 Npc* get_npc_safe(NpcId npcId);
 Npc* get_npc_unsafe(NpcId npcId);

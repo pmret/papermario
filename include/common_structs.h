@@ -49,7 +49,7 @@ typedef struct CamPosSettings {
     /* 0x04 */ f32 boomLength;
     /* 0x08 */ f32 boomPitch;
     /* 0x0C */ f32 viewPitch;
-    /* 0x10 */ struct Vec3f position;
+    /* 0x10 */ Vec3f position;
 } CamPosSettings; // size = 0x1C
 
 typedef struct PartnerData {
@@ -90,12 +90,12 @@ typedef struct Npc {
     /* 0x02C */ char unk_2C[4];
     /* 0x030 */ f32 animationSpeed;
     /* 0x034 */ char unk_34[4];
-    /* 0x038 */ struct Vec3f pos;
-    /* 0x044 */ struct Vec3f rotation;
+    /* 0x038 */ Vec3f pos;
+    /* 0x044 */ Vec3f rotation;
     /* 0x050 */ f32 unk_50;
-    /* 0x054 */ struct Vec3f scale;
-    /* 0x060 */ struct Vec3f moveToPos;
-    /* 0x06C */ struct Vec3f colliderPos; /* used during collision with player */
+    /* 0x054 */ Vec3f scale;
+    /* 0x060 */ Vec3f moveToPos;
+    /* 0x06C */ Vec3f colliderPos; /* used during collision with player */
     /* 0x078 */ s32 shadowIndex;
     /* 0x07C */ f32 shadowScale;
     /* 0x080 */ s32 unk_80;
@@ -435,7 +435,7 @@ typedef struct Camera {
     /* 0x054 */ f32 unk_54;
     /* 0x058 */ f32 unk_58;
     /* 0x05C */ f32 unk_5C;
-    /* 0x060 */ struct Vec3f targetPos;
+    /* 0x060 */ Vec3f targetPos;
     /* 0x06C */ f32 currentYaw;
     /* 0x070 */ char unk_70[4];
     /* 0x074 */ f32 currentBoomYaw;
@@ -462,13 +462,13 @@ typedef struct Camera {
     /* 0x48C */ f32 linearInterpScale; /* 3.0? */
     /* 0x490 */ f32 moveSpeed;
     /* 0x494 */ char unk_494[28];
-    /* 0x4B0 */ struct Vec3f movePos;
+    /* 0x4B0 */ Vec3f movePos;
     /* 0x4BC */ char unk_4BC[28];
     /* 0x4D8 */ s32 controllerType;
     /* 0x4DC */ f32 controllerBoomLen;
     /* 0x4E0 */ f32 controllerBoomPitch;
-    /* 0x4E4 */ struct Vec3f posA;
-    /* 0x4F0 */ struct Vec3f posB;
+    /* 0x4E4 */ Vec3f posA;
+    /* 0x4F0 */ Vec3f posB;
     /* 0x4FC */ f32 controllerViewPitch;
     /* 0x500 */ s32 unk_500;
     /* 0x504 */ s16 boolTargetPlayer;
@@ -771,7 +771,7 @@ typedef struct ItemEntity {
     /* 0x00 */ s32 flags;
     /* 0x04 */ s16 boundVar; /* see make_item_entity */
     /* 0x06 */ char unk_06[2];
-    /* 0x08 */ struct Vec3f position;
+    /* 0x08 */ Vec3f position;
     /* 0x14 */ struct ItemEntityPhysicsData* physicsData;
     /* 0x18 */ s16 itemID; /* into item table, also worldIconID */
     /* 0x1A */ u8 state;
@@ -810,10 +810,10 @@ typedef struct SpriteComponent {
     /* 0x10 */ s32 loopCounter;
     /* 0x14 */ s32 currentRaster;
     /* 0x18 */ s32 currentPalette;
-    /* 0x1C */ struct Vec3f posOffset;
-    /* 0x28 */ struct Vec3f compPos;
-    /* 0x34 */ struct Vec3f rotation;
-    /* 0x40 */ struct Vec3f scale;
+    /* 0x1C */ Vec3f posOffset;
+    /* 0x28 */ Vec3f compPos;
+    /* 0x34 */ Vec3f rotation;
+    /* 0x40 */ Vec3f scale;
     /* 0x4C */ char unk_4C[4];
 } SpriteComponent; // size = 0x50
 
@@ -901,7 +901,7 @@ typedef struct GameStatus {
     /* 0x08E */ s16 entryID;
     /* 0x090 */ char unk_90[4];
     /* 0x094 */ f32 exitAngle;
-    /* 0x098 */ struct Vec3f playerPos;
+    /* 0x098 */ Vec3f playerPos;
     /* 0x0A4 */ f32 playerYaw;
     /* 0x0A8 */ s8 unk_A8;
     /* 0x0A9 */ s8 unk_A9;
@@ -946,8 +946,8 @@ typedef struct PartnerAnimations {
 typedef struct Shadow {
     /* 0x00 */ s32 flags;
     /* 0x04 */ char unk_04[12];
-    /* 0x10 */ struct Vec3f position;
-    /* 0x1C */ struct Vec3f scale;
+    /* 0x10 */ Vec3f position;
+    /* 0x1C */ Vec3f scale;
     /* 0x28 */ char unk_28[80];
 } Shadow; // size = 0x78
 
@@ -1009,13 +1009,13 @@ typedef struct ActorPart {
     /* 0x10 */ struct ActorPartMovement* movement;
     /* 0x14 */ s16 partOffset[3];
     /* 0x1A */ s16 visualOffset[3];
-    /* 0x20 */ struct Vec3f partOffsetFloat;
-    /* 0x2C */ struct Vec3f absolutePosition;
-    /* 0x38 */ struct Vec3f rotation;
+    /* 0x20 */ Vec3f partOffsetFloat;
+    /* 0x2C */ Vec3f absolutePosition;
+    /* 0x38 */ Vec3f rotation;
     /* 0x44 */ s16 rotationPivotOffset[3];
     /* 0x4A */ char unk_4A[2];
     /* 0x4C */ f32 scale[3];
-    /* 0x58 */ struct Vec3f currentPos;
+    /* 0x58 */ Vec3f currentPos;
     /* 0x64 */ f32 yaw;
     /* 0x68 */ s16 unkOffset[2];
     /* 0x6C */ s16 targetOffset[2];
@@ -1146,14 +1146,14 @@ typedef struct Encounter {
 
 typedef struct PlayerPathElement {
     /* 0x00 */ char unk_00[4];
-    /* 0x04 */ struct Vec3f pos;
+    /* 0x04 */ Vec3f pos;
 } PlayerPathElement; // size = 0x10
 
 typedef struct AnimatedModel {
     /* 0x00 */ s32 animModelID;
-    /* 0x04 */ struct Vec3f pos; /* Created by retype action */
-    /* 0x10 */ struct Vec3f rot;
-    /* 0x1C */ struct Vec3f scale;
+    /* 0x04 */ Vec3f pos; /* Created by retype action */
+    /* 0x10 */ Vec3f rot;
+    /* 0x1C */ Vec3f scale;
     /* 0x28 */ struct Matrix4s* mtx;
     /* 0x2C */ char unk_2C[60];
     /* 0x68 */ u32 currentAnimData;
@@ -1186,9 +1186,9 @@ typedef struct Actor {
     /* 0x000 */ s32 flags;
     /* 0x004 */ char unk_04[4];
     /* 0x008 */ struct StaticActorData* staticActorData;
-    /* 0x00C */ struct Vec3f moveCurrentPos;
-    /* 0x018 */ struct Vec3f moveGoalPos;
-    /* 0x024 */ struct Vec3f moveEndPos; /* where other actors should target this one at. saved before partner switching */
+    /* 0x00C */ Vec3f moveCurrentPos;
+    /* 0x018 */ Vec3f moveGoalPos;
+    /* 0x024 */ Vec3f moveEndPos; /* where other actors should target this one at. saved before partner switching */
     /* 0x030 */ char unk_30[24];
     /* 0x048 */ f32 jumpAccel;
     /* 0x04C */ f32 moveSpeed;
@@ -1206,9 +1206,9 @@ typedef struct Actor {
     /* 0x077 */ u8 jumpPartIndex;
     /* 0x078 */ char unk_78[16];
     /* 0x088 */ s32 varTable[16];
-    /* 0x0C8 */ struct Vec3f flyCurrentPos;
-    /* 0x0D4 */ struct Vec3f flyGoalPos;
-    /* 0x0E0 */ struct Vec3f flyTempPos; /* used for start in fly functions, end in flyrun functions */
+    /* 0x0C8 */ Vec3f flyCurrentPos;
+    /* 0x0D4 */ Vec3f flyGoalPos;
+    /* 0x0E0 */ Vec3f flyTempPos; /* used for start in fly functions, end in flyrun functions */
     /* 0x0EC */ char unk_EC[24];
     /* 0x104 */ f32 flyJumpAccel;
     /* 0x108 */ f32 flySpeed;
@@ -1223,8 +1223,8 @@ typedef struct Actor {
     /* 0x135 */ u8 footStepCounter;
     /* 0x136 */ u8 actorType;
     /* 0x137 */ char unk_137;
-    /* 0x138 */ struct Vec3f homePos;
-    /* 0x144 */ struct Vec3f currentPos;
+    /* 0x138 */ Vec3f homePos;
+    /* 0x144 */ Vec3f currentPos;
     /* 0x150 */ Vec3s headOffset;
     /* 0x156 */ s16 healthBarPosition[3];
     /* 0x15C */ f32 rotation[3];
@@ -1386,8 +1386,8 @@ typedef struct PlayerStatus {
     /* 0x014 */ s8 enableCollisionOverlapsCheck;
     /* 0x015 */ s8 statusMenuCounterinputEnabledCounter; /* whether the C-up menu can appear */
     /* 0x016 */ Vec3s lastGoodPosition;
-    /* 0x01C */ struct Vec3f extraVelocity;
-    /* 0x028 */ struct Vec3f position;
+    /* 0x01C */ Vec3f extraVelocity;
+    /* 0x028 */ Vec3f position;
     /* 0x034 */ char unk_34[16];
     /* 0x044 */ f32 decorationPos[2];
     /* 0x04C */ char unk_4C[4];
@@ -1504,5 +1504,15 @@ typedef struct SaveData {
     /* 0x1300 */ s32 unk_1300;
     /* 0x1304 */ char unk_1304[0x7C];
 } SaveData; // size = 0x1380
+
+typedef struct {
+    /* 0x00 */ s32 numVectors;
+    /* 0x04 */ s32 unk_04;
+    /* 0x08 */ Vec3f* staticVectorList;
+    /* 0x0C */ Vec3f* vectors;
+    /* 0x10 */ s32 timeElapsed;
+    /* 0x14 */ s32 timeLeft;
+    /* 0x18 */ s32 easingType;
+} Path; // size = 0x1C
 
 #endif
