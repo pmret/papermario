@@ -178,8 +178,9 @@ D_801595A0 = 0x801595A0;
 gMusicUnkVolume = 0x80159AE0;
 gMusicTargetVolume = 0x80159AE2;
 gMusicUnkVolume2 = 0x80159AE4;
-gMusicCurVolume = 0x80159AE6;
+gMusicCurrentVolume = 0x80159AE6;
 gMusicPlayers = 0x80159AF0;
+D_8014F6F0 = 0x8014F6F0;
 
 gCollisionStatus = 0x8015A550;
 D_8015C7C0 = 0x8015C7C0;
@@ -213,6 +214,8 @@ gCurrentUpdateFunction = 0x8015170C;
 gWorldDynamicEntityList = 0x801543A0;
 gBattleDynamicEntityList = 0x801543E0;
 gCurrentDynamicEntityListPtr = 0x80154420;
+
+D_802D9D50 = 0x802D9D50;
 
 gScriptIndexList = 0x802DA898;
 gScriptIdList = 0x802DAA98;

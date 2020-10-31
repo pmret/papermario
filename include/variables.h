@@ -158,11 +158,13 @@ extern u8 D_800A0963;
 extern Bytecode* SCRIPT_NpcDefeat;
 extern Bytecode* ShakeCam1;
 extern Bytecode* ShakeCamX;
+extern Bytecode* D_802D9D50;
 
 extern s16 gMusicUnkVolume;
 extern s16 gMusicUnkVolume2;
 extern s16 gMusicCurrentVolume;
 extern s16 gMusicTargetVolume;
-extern MusicPlayer gMusicPlayers[]; // TODO: how many?
+extern MusicPlayer gMusicPlayers[4];
+extern MusicPlayer D_8014F6F0;
 
 #endif

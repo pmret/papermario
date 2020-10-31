@@ -1,7 +1,7 @@
 #include "common.h"
 #include "map.h"
 
-void func_8014AC84(s16 volume);
+void transition_music_volume_to(s16 volume);
 
 /// If the given song ID is present in gSongsUsingVariationFlag, returns the current
 /// map's `songVariation & 1` value. Otherwise, returns -1.
@@ -12,12 +12,10 @@ s32 get_song_variation_override_for_cur_map(SongID songID) {
     u32 i = 0;
     Area* areas = gAreas;
     SongID* allowed = gSongsUsingVariationFlag;
-    GameStatus** gameStatusPtr = gGameStatusPtr;
 
     for (i = 0; i < ARRAY_COUNT(gSongsUsingVariationFlag); i++) {
         if (allowed[i] == songID) {
-            GameStatus* gameStatus = *gameStatusPtr;
-            Map* map = &areas[gameStatus->areaID].maps[gameStatus->mapID];
+            Map* map = &areas[GAME_STATUS->areaID].maps[GAME_STATUS->mapID];
 
             return map->songVariation & 1;
         }
@@ -26,7 +24,20 @@ s32 get_song_variation_override_for_cur_map(SongID songID) {
     return -1;
 }
 
-INCLUDE_ASM(s32, "code_e0b30_len_b80", func_8014A498);
+void func_8014A498(void) {
+    MusicPlayer* src; // TODO: remove this temp when .data section for this file (incl. D_8014F6F0) is set up
+    s32 i;
+
+    for (i = 0; i < 2; i++) {
+        MusicPlayer* musicPlayers = gMusicPlayers;
+        musicPlayers[i] = *(src = &D_8014F6F0);
+    }
+
+    gMusicTargetVolume = 8;
+    gMusicUnkVolume2 = 8;
+    gMusicCurrentVolume = 8;
+    func_800561A4(8);
+}
 
 void func_8014A52C(void) {
     gMusicTargetVolume = 8;
@@ -57,7 +68,7 @@ s32 _set_music_track(s32 playerIndex, SongID songID, s32 variation, s32 fadeOutT
             }
 
             if (musicPlayer->songID == songID && musicPlayer->variation == variation) {
-                func_8014AC84(volume); // transition volume to?
+                transition_music_volume_to(volume);
 
                 if (musicPlayer->flags & 4) {
                     func_80055B80(musicPlayer->unk_18);
@@ -196,7 +207,7 @@ void func_8014AC70(void) {
     gMusicUnkVolume2 = 8;
 }
 
-void func_8014AC84(s16 volume) {
+void transition_music_volume_to(s16 volume) {
     gMusicTargetVolume = volume;
 }
 
