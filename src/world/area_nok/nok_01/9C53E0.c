@@ -28,7 +28,7 @@ INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_80240AB4_9C5E94);
 
 INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_80240B30_9C5F10);
 
-#include "world/common/NotDoesScriptExist.inc.c"
+#include "world/common/AwaitScriptComplete.inc.c"
 
 #include "world/common/PartnerToggleAbilityScript.inc.c"
 

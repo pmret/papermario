@@ -30,7 +30,7 @@ INCLUDE_ASM(s32, "world/area_hos/hos_03/A1BDB0", func_802421F0_A1D2F0);
 
 INCLUDE_ASM(s32, "world/area_hos/hos_03/A1BDB0", func_8024226C_A1D36C);
 
-#include "world/common/NotDoesScriptExist.inc.c"
+#include "world/common/AwaitScriptComplete.inc.c"
 
 #include "world/common/PartnerToggleAbilityScript.inc.c"
 

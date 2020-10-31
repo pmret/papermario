@@ -98,7 +98,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", pause_tutorial_draw_contents_80
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80243870_8040F0);
 
-#include "world/common/NotDoesScriptExist.inc.c"
+#include "world/common/AwaitScriptComplete.inc.c"
 
 #include "world/common/PartnerToggleAbilityScript.inc.c"
 

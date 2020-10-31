@@ -46,7 +46,7 @@ INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80241F98_D21E28);
 
 INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80242014_D21EA4);
 
-#include "world/common/NotDoesScriptExist.inc.c"
+#include "world/common/AwaitScriptComplete.inc.c"
 
 #include "world/common/PartnerToggleAbilityScript.inc.c"
 
