@@ -692,6 +692,7 @@ enable_partner_ai = 0x800EF328;
 clear_partner_move_history = 0x800EF45C;
 draw_submenu_title = 0x800F4648;
 draw_box = 0x800F52E0;
+gPlayerStatus = 0x8010EFC8; // size:0x288
 gPlayerData = 0x8010F290; // size:0x340
 update_entities = 0x8010F6D0;
 update_shadows = 0x8010FA98;
