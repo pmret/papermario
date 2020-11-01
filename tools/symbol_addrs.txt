@@ -1,1909 +1,1907 @@
-ActorExists;0x8026DE5C
-ActorSpeak;0x80252F30
-AddActorDecoration;0x8026EE88
-AddActorPos;0x8026B92C
-AddActorVar;0x8026C0D4
-AddBadge;0x802D6FF8
-AddBattleCamOffsetZ;0x8024EA98
-AddBattleCamZoom;0x8024ECAC
-AddCoin;0x802D7278
-AddGoalPos;0x8026A748
-AddItem;0x802D6A98
-AddKeyItem;0x802D68C8
-AddPartDispOffset;0x8026BD88
-AddPartMovementVar;0x8026C2E8
-AddStarPieces;0x802D72F0
-AddStarPoints;0x802D72B4
-AddVectorPolar;0x802D4B14
-AdjustCam;0x802CC660
-AfflictActor;0x8027D67C
-ApplyShrinkFromOwner;0x80254198
-AssignAreaFlag;0x80111FF8
-AssignBlockFlag;0x8011206C
-AssignCrateFlag;0x80112170
-AssignFlag;0x801120B8
-AssignPanelFlag;0x80112114
-AssignScript;0x80111FB0
-AwaitPlayerApproach;0x802D48AC
-AwaitPlayerLeave;0x802D4A5C
-BattleCamTargetActor;0x8024EB24
-BindHandleEvent;0x80278C20
-BindIdle;0x80278A94
-BindNextTurn;0x80278C94
-BindNpcAI;0x80044A78
-BindNpcAux;0x80044EB8
-BindNpcDefeat;0x800451DC
-BindNpcHit;0x80045140
-BindNpcIdle;0x80044BAC
-BindNpcInteract;0x800450A4
-BindTakeTurn;0x80278930
-BoostAttack;0x8026FCD4
-BoostDefense;0x80270174
-BringPartnerOut;0x802CF5B8
-BtlBringPartnerOut;0x80280B6C
-BtlPutPartnerAway;0x80280A34
-CancelMessage;0x802D0C20
-CancelMessageAndBlock;0x802D0C48
-CancelablePlayerRunToGoal;0x80273EFC
-ChangeModelAnimation;0x802CCF6C
-CheckActionState;0x802831DC
-CheckButtonDown;0x8026E108
-CheckButtonHeld;0x8026E0D0
-CheckButtonPress;0x8026E098
-ChooseNextTarget;0x8026E414
-ClampAngleFloat;0x802D5AB4
-ClampAngleInt;0x802D5A58
-ClearAmbientSounds;0x802D60E8
-ClearDefeatedEnemies;0x80045640
-ClearPartnerMoveHistory;0x802CF370
-ClearStatusEffects;0x8027DDA0
-CloneModel;0x802C8F28
-CloseActionCommandInfo;0x80269410
-CloseChoice;0x802D0BF8
-CloseMessage;0x802D0A98
-ContinueSpeech;0x802D02E8
-CopyBuffs;0x80271160
-CopyStatusEffects;0x8027DCBC
-CountFortressKeys;0x802D6C4C
-CountPlayerTargets;0x8026A14C
-CreateNpc;0x802CDBA4
-CreatePartShadow;0x8026F52C
-CreatePushBlockGrid;0x802832E0
-DeleteNpc;0x802CDC1C
-DeletePartner;0x802807A8
-DeleteTrigger;0x802C6824
-DemoJoystickRadial;0x802D9B64
-DemoJoystickXY;0x802D9C10
-DemoPressButton;0x802D9AC0
-DemoReleaseButton;0x802D9AF8
-DemoSetButtons;0x802D9B34
-DidActionSucceed;0x80276EB4
-Disable8bitMario;0x802D2B88
-DisablePartner;0x802D1F38
-DisablePartnerAI;0x802CF4E8
-DisablePartnerBlur;0x802456D8
-DisablePlayerInput;0x802D0E28
-DisablePlayerPhysics;0x802D0DE4
-DisablePulseStone;0x802D2AA8
-DispatchDamageEvent;0x8027D1BC
-DispatchDamagePlayerEvent;0x8027491C
-DispatchEvent;0x8027D264
-DoAirLift;0x8029C37C
-DoBasicAI;0x8004A47C
-DoBlowAway;0x8029C4A8
-DoBurnHit;0x8029A0D0
-DoDeath;0x8029AEC0
-DoDizzyAttack;0x8028907C
-DoDizzyHit;0x802945FC
-DoFreezeHit;0x8029466C
-DoImmune;0x8029AC70
-DoJumpBack;0x8029BD70
-DoNormalHit;0x80299044
-DoNpcDefeat;0x8004462C
-DoParalyzeHit;0x80294618
-DoPoisonHit;0x80294634
-DoRecover;0x8029BFA0
-DoReturnHome;0x8029BEB8
-DoScareAway;0x8029B22C
-DoShinkHit;0x802946B8
-DoShockHit;0x8029A6FC
-DoSleepHit;0x802945E0
-DoSpinSmashHit;0x8029B998
-DoStopHit;0x80294650
-DropItemEntity;0x802D6DC0
-DropItemEntityB;0x802D6EC0
-DropStarPoints;0x8027C8A4
-ElectrifyActor;0x8027095C
-EnableActorBlur;0x8027D57C
-EnableActorGlow;0x8027DBA4
-EnableGroup;0x802C9B98
-EnableIdleScript;0x80278B4C
-EnableModel;0x802C9288
-EnableNpcAI;0x80044CF0
-EnableNpcAux;0x80044FF0
-EnableNpcBlur;0x802CF2EC
-EnableNpcShadow;0x802CF268
-EnablePartner;0x802D1EFC
-EnablePartnerAI;0x802CF52C
-EnablePartnerBlur;0x802456B8
-EnablePlayerBlur;0x80274978
-EnableSpriteShading;0x802D9A3C
-EnableStatusMenu;0x802D5998
-EnableTexPanning;0x802C9208
-EndActorSpeech;0x802532D0
-EndSpeech;0x802D02CC
-EnemyCreateTargetList;0x8026E310
-EnemyDamageTarget;0x8027CCB4
-EnemyFollowupAfflictTarget;0x8027CED4
-EnemyTestTarget;0x8027CFB8
-EnterDoubleDoor;0x80285E74
-EnterSavePoint;0x80285CB0
-EnterSingleDoor;0x80285DD4
-EnterWalk;0x80285960
-EnterWalkShort;0x80285A60
-ExitDoubleDoor;0x80285E4C
-ExitSingleDoor;0x80285DAC
-ExitWalk;0x80285CF4
-FXRecoverFP;0x80261C68
-FXRecoverHP;0x80261BA8
-FadeBackgroundToBlack;0x8003EF00
-FadeInMusic;0x802D5DF4
-FadeOutMusic;0x802D5CE0
-FallPartTo;0x8027A854
-FallToGoal;0x80279BEC
-FindItem;0x802D6B18
-FindKeyItem;0x802D6A14
-FlyPartTo;0x8027BF38
-FlyToGoal;0x8027B624
-ForceCloseMessageBox;0x802513F0
-ForceHomePos;0x8026A1EC
-ForceNextTarget;0x80298BF0
-FreezeBattleCam;0x8024ED78
-FullyRestoreHPandFP;0x802D1EC0
-FullyRestoreSP;0x802D1EE0
-GetActionSuccess;0x80269294
-GetActionSuccessCopy;0x802694F8
-GetActorAttackBoost;0x8026FC04
-GetActorDefenseBoost;0x8026FC6C
-GetActorFlags;0x8026CF20
-GetActorHP;0x8027C6A0
-GetActorLevel;0x8027FD48
-GetActorPos;0x8026AAA8
-GetActorRotation;0x8026C56C
-GetActorScale;0x8026CA84
-GetActorSize;0x8027D8E0
-GetActorVar;0x8026BFB4
-GetActorYaw;0x8026B3C8
-GetAngleBetweenNPCs;0x802D4708
-GetAngleToNPC;0x802D47B4
-GetAngleToPlayer;0x802D4830
-GetAnimation;0x8026B238
-GetBattleFlags;0x8026CD10
-GetBattleFlags2;0x8026CDA0
-GetBattleOutcome;0x8004457C
-GetBattlePhase;0x80269E28
-GetBattleState;0x8026E140
-GetBattleVar;0x8026F694
-GetBlockResult;0x8026957C
-GetCamDistance;0x802CC084
-GetCamLookAtObjVector;0x8003F398
-GetCamPitch;0x802CBFF4
-GetCamPosA;0x802CC0F4
-GetCamPosB;0x802CC184
-GetCamPosC;0x802CC214
-GetCamPosition;0x802CC2A4
-GetCamType;0x802CBF64
-GetColliderCenter;0x802CA0AC
-GetCurrentActorType;0x8027DAD4
-GetCurrentPartner;0x802D2B0C
-GetCurrentPartnerID;0x802CFC74
-GetDamageIntensity;0x80280840
-GetDemoState;0x802D9A90
-GetDist2D;0x802D5770
-GetDistanceToGoal;0x8026E9FC
-GetEncounterState;0x8027D7C4
-GetEnemyMaxHP;0x8027C748
-GetEntryID;0x802CA460
-GetGoalPos;0x8026A820
-GetGridIndexFromPos;0x802836B8
-GetHomePos;0x8026AD74
-GetIdleGoal;0x8026A8EC
-GetIndexFromHome;0x8026A0D4
-GetIndexFromPos;0x8026A05C
-GetItemPower;0x802D732C
-GetLastDamage;0x8027DB3C
-GetLastElement;0x80269E54
-GetLastEvent;0x8027C4E0
-GetLoadType;0x802CA4C0
-GetMapID;0x802CA490
-GetMenuSelection;0x802733C4
-GetModelCenter;0x802C8F80
-GetModelIndex;0x802C8E8C
-GetNextPathPos;0x802D5524
-GetNpcAnimation;0x802CE160
-GetNpcPointer;0x802CDC58
-GetNpcPos;0x802CF0F4
-GetNpcVar;0x800453BC
-GetNpcYaw;0x802CEA10
-GetOriginalActorType;0x8027DA68
-GetOwnerEncounterTrigger;0x80044600
-GetOwnerID;0x8026DE00
-GetOwnerTarget;0x8026E8AC
-GetPartDispOffset;0x8026BAE8
-GetPartEventFlags;0x8026D488
-GetPartFlags;0x8026D218
-GetPartMovementVar;0x8026C170
-GetPartOffset;0x8026AB74
-GetPartPos;0x8026AC88
-GetPartRotation;0x8026C828
-GetPartScale;0x8026CC34
-GetPartTarget;0x8026A9B8
-GetPartTargetFlags;0x8026D2AC
-GetPartYaw;0x8026B4C0
-GetPartnerPos;0x802CF438
-GetPlayerActionState;0x802D1DD0
-GetAttackerActorID;0x8026E974
-GetPlayerAnimation;0x802D1E94
-GetPlayerHP;0x80274234
-GetPlayerPos;0x802D1DFC
-GetPlayerTargetYaw;0x802D1D28
-GetPushBlock;0x802835C0
-GetSelfAnimationFromTable;0x80045734
-GetSelfNpcID;0x80045614
-GetSelfVar;0x800452C0
-GetStatusFlags;0x8026F230
-GetTargetListLength;0x8026E864
-GetValueByRef;0x802D593C
-GotoMap;0x802CA400
-GotoMapByID;0x802CA440
-GotoMapSpecial;0x802CA420
-HPBarToCurrent;0x8026D7A8
-HPBarToHome;0x8026D664
-HasKeyItem;0x802D699C
-HasMerleeCasts;0x8003F3F4
-HasMerleeCastsLeft;0x802619C8
-HealActor;0x80270CA4
-HidePlayerShadow;0x802D0DA0
-IdleFlyToGoal;0x8027BBB8
-IdleJumpToGoal;0x8027910C
-IdleRunToGoal;0x8027A264
-IncrementPlayerFP;0x80261D60
-IncrementPlayerHP;0x80261D28
-InitTargetIterator;0x8026E354
-InterpNpcYaw;0x802CEB04
-InterpPlayerYaw;0x802D193C
-IsMessageBoxDisplayed;0x80251384
-IsPlayerWithin;0x802D4964
-ItemAfflictEnemy;0x80252924
-ItemCheckHit;0x80252D40
-ItemDamageEnemy;0x80252728
-JumpPartTo;0x8027A4E4
-JumpToGoal;0x80278D08
-JumpWithBounce;0x80279728
-LandJump;0x80279AD4
-LoadActionCommand;0x802681C0
-LoadBattleDmaData;0x80253624
-LoadBattleSection;0x80269DE4
-LoadDemoBattle;0x80044264
-LoadFreeItemScript;0x8026801C
-LoadItemScript;0x80267ED0
-LoadModelAnimation;0x802CCCEC
-LoadMoveScript;0x80268130
-LoadPath;0x802D5430
-LoadSettings;0x802CB9F8
-LoadStarPowerScript;0x80280950
-MakeDoorAdvanced;0x80281CAC
-MakeEntity;0x80111D38
-MakeItemEntity;0x802D6CC0
-MakeLerp;0x802D45B0
-MakeNpcs;0x80044298
-MakeOwnerTargetIndex;0x8027FBB8
-MakeShop;0x80281860
-MakeShopOwner;0x80281BD8
-MakeStatusField;0x80253B94
-MarioEnterStage;0x80284A40
-MerleeAttackBonus;0x80288400
-MerleeDefenseBonus;0x8028870C
-MerleeExpBonus;0x80288A58
-MerleeRunOut;0x80288398
-ModifyActorDecoration;0x8026EFF0
-ModifyColliderFlags;0x802C9DCC
-MoveBattleCamOver;0x8024EC08
-MultiplyByActorScale;0x80253FDC
-MultiplyVec2ByActorScale;0x80254048
-MultiplyVec3ByActorScale;0x802540DC
-NOP_npc_callback;0x80038470
-NOP_state;0x80112B90
-NpcFaceNpc;0x802CEE80
-NpcFacePlayer;0x802CECC8
-NpcFlyTo;0x802CE6FC
-NpcJump0;0x802CE6C4
-NpcJump1;0x802CE6E0
-NpcMoveTo;0x802CE22C
-OnDefeatEnemy;0x8003F580
-OnFleeBattleDrops;0x8003F6E8
-OverrideBattleDmaDest;0x802535F8
-PanToTarget;0x802CB79C
-ParentColliderToModel;0x802CA114
-PartnerAfflictEnemy;0x80280004
-PartnerCanUseAbility;0x802CFCA0
-PartnerDamageEnemy;0x8027FDB4
-PartnerIsFlying;0x802CFCE8
-PartnerPowerBounceEnemy;0x80280270
-PartnerTestEnemy;0x802804D0
-PauseTakeTurn;0x802789A4
-PeachEnterStage;0x80284D04
-PlayAmbientSounds;0x802D611C
-PlayDrinkFX;0x80287948
-PlayEatFX;0x802878D0
-PlayEffect;0x802D829C
-PlayLoopingSoundAtActor;0x80253974
-PlayModelAnimation;0x802CCE6C
-PlaySound;0x802D6150
-PlaySoundAt;0x802D61DC
-PlaySoundAtActor;0x8025385C
-PlaySoundAtCollider;0x802CA614
-PlaySoundAtF;0x802D636C
-PlaySoundAtModel;0x802CA558
-PlaySoundAtNpc;0x802D01AC
-PlaySoundAtPart;0x802538D0
-PlaySoundAtPlayer;0x802D2CD8
-PlayerCreateTargetList;0x8026E2CC
-PlayerDamageEnemy;0x80274260
-PlayerFaceNpc;0x802D1B04
-PlayerFallToGoal;0x80273894
-PlayerFirstStrike;0x802851FC
-PlayerHappy;0x80288D64
-PlayerJump;0x802D18E8
-PlayerJump1;0x802D1904
-PlayerJump2;0x802D1920
-PlayerLandJump;0x80273B04
-PlayerMoveTo;0x802D1134
-PlayerPowerBounceEnemy;0x802744A0
-PlayerRunToGoal;0x80273C64
-PlayerTestEnemy;0x802746F0
-PutPartnerAway;0x802CF988
-RandInt;0x802D46B0
-RegainAbility;0x80289110
-RemoveActor;0x8027C7B0
-RemoveActorDecoration;0x8026EF4C
-RemoveBadge;0x802D7050
-RemoveEffect;0x802D7AE4
-RemoveEncounter;0x80044478
-RemoveFortressKeys;0x802D6C94
-RemoveItem;0x802D6B9C
-RemoveItemAt;0x802D688C
-RemoveItemEntity;0x802D6FCC
-RemoveKeyItemAt;0x802D6858
-RemoveNpc;0x80044340
-RemovePartShadow;0x8026F59C
-RemovePlayerBuffs;0x8026F44C
-ResetActorSounds;0x8026F838
-ResetAllActorSounds;0x8026F6EC
-ResetCam;0x802CC8C8
-ResetFromLava;0x802C9ED8
-RestartNpcAI;0x80044C2C
-RestartNpcAux;0x80044F38
-ResumeTakeTurn;0x80278A1C
-RotateGroup;0x802C98D8
-RotateModel;0x802C8C64
-RunAwayFail;0x80287078
-RunAwayReset;0x80287128
-RunAwayStart;0x802868BC
-RunPartTo;0x8027ACAC
-RunToGoal;0x80279E64
-ScaleGroup;0x802C9A1C
-ScaleModel;0x802C8D88
-SetActionSuccess;0x802692C0
-SetActorDispOffset;0x8026BA04
-SetActorFlagBits;0x8026CE8C
-SetActorFlags;0x8026CE30
-SetActorIdleJumpGravity;0x8026B5D8
-SetActorIdleSpeed;0x8026B6D0
-SetActorJumpGravity;0x8026B55C
-SetActorPos;0x8026AE40
-SetActorRotation;0x8026C3AC
-SetActorRotationOffset;0x8026C4AC
-SetActorScale;0x8026C904
-SetActorScaleModifier;0x8026C9C4
-SetActorSize;0x8027D810
-SetActorSounds;0x8026F740
-SetActorSpeed;0x8026B654
-SetActorType;0x8026FB20
-SetActorVar;0x8026C044
-SetActorYaw;0x8026B358
-SetAnimation;0x8026B1B0
-SetAnimationRate;0x8026B2D0
-SetBattleCamOffsetZ;0x8024EA58
-SetBattleCamTarget;0x8024E90C
-SetBattleCamYaw;0x8024EAE4
-SetBattleCamZoom;0x8024EC6C
-SetBattleFlagBits;0x8026CD3C
-SetBattleFlagBits2;0x8026CDCC
-SetBattleInputButtons;0x8026E068
-SetBattleInputMask;0x8026E050
-SetBattleMusic;0x80044A38
-SetBattleVar;0x8026F638
-SetCamBGColor;0x802CAD98
-SetCamDistance;0x802CBBE4
-SetCamEnabled;0x802CA6C0
-SetCamFlag80;0x802CA774
-SetCamLeadPlayer;0x802CB680
-SetCamPerspective;0x802CA828
-SetCamPitch;0x802CBB48
-SetCamPosA;0x802CBC58
-SetCamPosB;0x802CBCF4
-SetCamPosC;0x802CBD90
-SetCamProperties;0x802CC3EC
-SetCamSpeed;0x802CBEF0
-SetCamTarget;0x802CAF2C
-SetCamType;0x802CBAB4
-SetCamViewport;0x802CAB18
-SetDefenseTable;0x8027CA74
-SetEncounterStatusFlags;0x80044180
-SetEnemyFlagBits;0x80045688
-SetEnemyHP;0x8027C5C8
-SetEnemyTargetOffset;0x8026B0A0
-SetForegroundModelsVisible;0x80253AEC
-SetGameMode;0x802D5A28
-SetGoalPos;0x8026A510
-SetGoalToFirstTarget;0x8026A49C
-SetGoalToHome;0x80269EC4
-SetGoalToIndex;0x80269F94
-SetGoalToTarget;0x8026A3A8
-SetGroupEnabled;0x802C9308
-SetHomePos;0x8026A2D0
-SetIdleAnimations;0x8027CB7C
-SetIdleGoal;0x8026A62C
-SetIdleGoalToHome;0x80269F2C
-SetItemFlags;0x802D7194
-SetItemPos;0x802D70D0
-SetJumpAnimations;0x8026B88C
-SetMessageBoxDuration;0x80251408
-SetMessageImages;0x802D0C70
-SetMessageString;0x802D0CEC
-SetMessageValue;0x802D0D44
-SetModelFlag10;0x802C907C
-SetModelFlags;0x802C9518
-SetMusicTrack;0x802D5D4C
-SetNpcAnimation;0x802CE0F4
-SetNpcAnimationSpeed;0x802CE1C0
-SetNpcAux;0x80044DA4
-SetNpcCollisionSize;0x802CDF8C
-SetNpcEffect;0x802D0118
-SetNpcFlagBits;0x802CF060
-SetNpcJumpscale;0x802CE088
-SetNpcPos;0x802CDCB0
-SetNpcRotation;0x802CDDB0
-SetNpcScale;0x802CDED4
-SetNpcSpeed;0x802CE01C
-SetNpcVar;0x80045320
-SetNpcYaw;0x802CEA84
-SetOwnerID;0x8026DE28
-SetOwnerTarget;0x8026E3A8
-SetPanTarget;0x802CBE2C
-SetPartAlpha;0x8026F470
-SetPartDispOffset;0x8026BC38
-SetPartEventBits;0x8026D3C8
-SetPartEventFlags;0x8026D340
-SetPartFlagBits;0x8026D010
-SetPartFlags;0x8026CF88
-SetPartGoalToTarget;0x8026A404
-SetPartJumpGravity;0x8026B74C
-SetPartMoveSpeed;0x8026B7EC
-SetPartMovementVar;0x8026C22C
-SetPartPos;0x8026AF18
-SetPartRotation;0x8026C634
-SetPartRotationOffset;0x8026C740
-SetPartScale;0x8026CB4C
-SetPartSize;0x8027D970
-SetPartSounds;0x8026FA00
-SetPartTargetFlagBits;0x8026D158
-SetPartTargetFlags;0x8026D0D0
-SetPartYaw;0x8026B438
-SetPlayerActionState;0x802D10D8
-SetPlayerAnimation;0x802D1084
-SetPlayerAnimationSpeed;0x802D1104
-SetPlayerCollisionSize;0x802D0FB0
-SetPlayerFlagBits;0x802D1D60
-SetPlayerJumpscale;0x802D1054
-SetPlayerPos;0x802D0EF0
-SetPlayerSpeed;0x802D1024
-SetPushBlock;0x8028347C
-SetPushBlockFallEffect;0x802837AC
-SetRenderMode;0x802CA4F4
-SetSelfEnemyFlagBits;0x80045524
-SetSelfEnemyFlags;0x8004550C
-SetSelfRotation;0x8004545C
-SetSelfVar;0x8004525C
-SetSpriteShading;0x802D9700
-SetStatusTable;0x8027CB08
-SetTargetActor;0x8027C548
-SetTargetOffset;0x8027D380
-SetTexPanOffset;0x802C9364
-SetTexPanner;0x802C9000
-SetValueByRef;0x802D58E0
-SetZoneEnabled;0x802CA254
-ShakeCam;0x802CB2A8
-ShakeCam1;0x802D9CB0
-ShakeCamX;0x802D9CE8
-ShowBattleChoice;0x80253538
-ShowChoice;0x802D0B6C
-ShowCoinCounter;0x800E96F8
-ShowEmote;0x802D78A0
-ShowGotItem;0x802D73A4
-ShowMessageAtScreenPos;0x802D0894
-ShowMessageAtWorldPos;0x802D095C
-ShowMessageBox;0x802512B4
-ShowShockEffect;0x8026FBB0
-ShowSleepBubble;0x802D8028
-ShowStatusMenu;0x802D59DC
-ShowVariableMessageBox;0x8025130C
-SpeakToNpc;0x802D0304
-SpeakToPlayer;0x802D02B0
-StartBattle;0x80044840
-StartBattleWith;0x80044860
-StartBossBattle;0x8004489C
-StartDefend;0x802852B8
-StartRumble;0x80254218
-StartRumbleWithParams;0x80267D9C
-StopLoopingSoundAtActor;0x80253A18
-StopSound;0x802D62B8
-SummonEnemy;0x8026DB64
-SwitchMessage;0x802D0AFC
-TeleportPartnerToPlayer;0x8028387C
-TranslateGroup;0x802C97B4
-TranslateModel;0x802C8B60
-UnfadeBackgroundFromBlack;0x8003EF98
-UpdateColliderTransform;0x802CA188
-UpdateLerp;0x802D462C
-UseCamPreset;0x8024E61C
-UseDoorSounds;0x802D6314
-UseEntryHeading;0x802D1F70
-UseExitHeading;0x802D216C
-UseIdleAnimation;0x8026F0EC
-UseLifeShroom;0x802879C0
-UseMystery;0x80293E40
-UseSettingsFrom;0x802CB860
-VanishActor;0x80270614
-WaitForBuffDone;0x8027114C
-WaitForCam;0x802CC354
-WaitForMessageBoxDone;0x802513CC
-WasStatusInflicted;0x8027DC68
-YieldTurn;0x8027D7F0
-_Genld;0x8006C0B4
-_Ldtob;0x8006BBD0
-_Ldunscale;0x8006C01C
-_Litob;0x8006B980
-_Printf;0x80064AA0
-_Putfld;0x80065020
-_add_hit_vert_to_buffer;0x8005B9A0
-_bound_script_trigger_handler;0x802C667C
-_create_npc;0x80038598
-_draw_message_box;0x8012CC08
-_get_hit_vert_index_from_buffer;0x8005B9F4
-_heap_create;0x80029030
-_heap_free;0x8002921C
-_heap_malloc;0x8002906C
-_heap_malloc_tail;0x80029164
-_heap_realloc;0x800292C4
-_load_model_textures;0x80115B44
-_load_string;0x8012591C
-_npc_jump_to;0x802CE434
-_play_sound;0x80149AB8
-_remove_part_decoration;0x8025D03C
-_set_game_mode;0x80112CA8
-_set_music_track;0x8014A7E0
-_show_message;0x802D0320
-_spr_sign_extend_12bit;0x802DD0DC
-_spr_sign_extend_16bit;0x802DD0FC
-_update_message;0x80123898
-_wrap_trig_lookup_value;0x8002A034
-activate_defend_command;0x80260B04
-add_SP;0x800EA1F4
-add_actor_decoration;0x80267190
-add_badge;0x800E773C
-add_cam_zoom;0x8024E5B4
-add_coins;0x800EA0C0
-add_fortress_keys;0x800EA398
-add_item;0x800E7574
-add_part_decoration;0x80267114
-add_star_pieces;0x800EA170
-add_star_points;0x800EA128
-add_vec2D_polar;0x80029F9C
-add_xz_vec3f;0x80264128
-add_xz_vec3f_copy1;0x802641C0
-add_xz_vec3f_copy2;0x80264258
-ai;0x8006AD64
-alAudioFrame;0x800565C0
-alHeapAlloc;0x80057F90
-alLink;0x8004B3EC
-alUnlink;0x8004B40C
-al_CopyFileTableEntry;0x8005447C
-al_CopyWords;0x80054F74
-al_DmaCopy;0x80054E00
-al_LoadBKHeaders;0x80054FC0
-al_LoadBank;0x800547C8
-al_LoadINIT;0x800542BC
-al_LoadPER;0x800544F8
-al_LoadPRG;0x800545B4
-allocate_hit_tables;0x8005AEA0
-appedGfx_npc_blur;0x8003AE38
-appendGfx_item_entity;0x801321A4
-appendGfx_model;0x80113090
-appendGfx_model_group;0x80117C94
-appendGfx_npc;0x80039FD0
-appendGfx_player;0x800E12F4
-appendGfx_player_spin;0x800E1704
-atan2;0x80029C80
-battle_heap_create;0x8002ACA0
-bcmp;0x8006B870
-bcopy;0x80064650
-begin_battle;0x80241218
-begin_state_battle;0x800338D0
-begin_state_init;0x80033540
-begin_state_intro;0x80036650
-begin_state_logos;0x80033E70
-begin_state_pause_menu;0x80034940
-begin_state_title_screen;0x80036DF0
-begin_state_world;0x80035D30
-bind_dynamic_entity_3;0x80123158
-bind_dynamic_entity_7;0x8012323C
-bind_dynamic_entity_B;0x80123320
-bind_enemy_ai;0x8003E94C
-bind_enemy_aux;0x8003E9B4
-bind_enemy_interact;0x8003EA1C
-bind_npc_ai;0x8003EA84
-bind_npc_aux;0x8003EB50
-bind_npc_interact;0x8003EC1C
-boot_idle;0x8005E90C
-boot_main;0x80025F70
-!bzero;0x80064970
-calc_enemy_damage_target;0x8027742C
-calc_enemy_test_target;0x802771F8
-calc_item_check_hit;0x802515D0
-calc_item_damage_enemy;0x802516E8
-calc_partner_damage_enemy;0x8027E328
-calc_partner_test_enemy;0x8027DF7C
-calc_player_damage_enemy;0x80271944
-calc_player_test_enemy;0x80271754
-calculate_model_sizes;0x8011612C
-cam_target_actor;0x8024E43C
-can_pause;0x800E69DC
-can_switch_to_player;0x802A5818
-cancel_message;0x80125B08
-check_block_input;0x80268ECC
-check_input_hammer;0x800E60E0
-check_input_jump;0x800E6160
-check_input_midair_jump;0x800E4FCC
-check_input_open_menus;0x800E6CE4
-check_input_spin;0x800E6268
-check_input_status_menu;0x800E728C
-check_input_use_partner;0x800DFA00
-clamp_angle;0x80029B24
-clamp_printer_coords;0x80125AB8
-clear_area_flag;0x8014554C
-clear_area_flags;0x80145390
-clear_character_set;0x80123660
-clear_dynamic_entity_list;0x801230B8
-clear_encounter_status;0x8003E400
-clear_entity_data;0x80110CB8
-clear_global_flag;0x801453E0
-clear_icon_flags;0x80144A2C
-clear_item_entity_data;0x80130FF0
-clear_item_entity_flags;0x80134188
-clear_model_data;0x80115D44
-clear_npcs;0x800384BC
-clear_partner_move_history;0x800EF45C
-clear_player_data;0x800E73A0
-clear_player_status;0x800DFC50
-clear_printers;0x80123674
-clear_saved_variables;0x80145320
-clear_script_flags;0x802C4880
-clear_script_list;0x802C31DC
-clear_trigger_data;0x80145680
-clear_virtual_models;0x80120BB0
-clone_model;0x8011B6F0
-close_action_command_instruction_popup;0x8024FB0C
-close_message;0x80125C70
-coin_counter_draw_content;0x800E92D8
-collision_check_above;0x800DE7E4
-collision_check_player_intersecting_world;0x800E4308
-collision_heap_create;0x8002AD74
-collision_heap_free;0x8002ADF4
-collision_heap_malloc;0x8002ADB0
-collision_main_above;0x800E27E0
-collision_main_lateral;0x800E363C
-contPakFileDelete;0x8005F864
-contPakFileNum;0x8005F8D0
-contPakFileOpen;0x8005F7B0
-contPakFileReadWrite;0x8005F770
-contPakFileState;0x8005F8A4
-contPakFree;0x8005F748
-contPakOpen;0x8005F6F8
-contPakRepairId;0x8005F8FC
-contQuery;0x80060870
-contReadData;0x80060738
-contReadNW;0x800607B4
-contRetrace;0x8006065C
-contRmbCheckMesg;0x8005FD10
-contRmbForceStopEndMesg;0x8005FE54
-contRmbForceStopMesg;0x8005FE0C
-contRmbStartMesg;0x8005FD58
-contRmbStopMesg;0x8005FDE4
-copy_matrix;0x80029720
-corrupted;0x8006D1D8
-corrupted_init;0x8006D080
-cos_deg;0x8002A350
-cos_rad;0x8002A1D0
-cosine;0x800293D4
-coss;0x80061F00
-count_power_plus;0x80263B10
-count_targets;0x80269660
-crash_create_monitor;0x8002C8B0
-crash_delay_msec;0x8002BF40
-crash_monitor_thread;0x8002C81C
-crash_print_fpr;0x8002C2B8
-crash_printf_string;0x8002C208
-crash_show_handler;0x8002C3B0
-create_actor;0x802653A4
-create_basic_npc;0x80038844
-create_cameras_a;0x8002DEF4
-create_cameras_b;0x8002E038
-create_entity;0x801118C4
-create_entity_shadow;0x801121CC
-create_icon;0x801414A4
-create_npcs;0x800436B0
-create_part_shadow;0x8026731C
-create_partner_npc;0x80038880
-create_popup;0x8024EF68
-create_shadow_callback;0x802E0D90
-create_shadow_from_data;0x80111BD8
-create_shadow_type;0x80112260
-create_standard_npc;0x80038864
-create_target_list;0x80262240
-create_trigger;0x8014576C
-decode_yay0;0x8006EDF0
-decrement_status_menu_disabled;0x800E9B30
-deduct_current_move_fp;0x80263BC8
-default_trigger_function_handler;0x80145670
-delete_actor;0x80240BBC
-delete_entity;0x801106D0
-delete_entity_and_unload_data;0x80110790
-delete_player_actor;0x80240D68
-delete_trigger;0x80145BF4
-disable_actor_blur;0x8025455C
-disable_entity_fog;0x80123000
-disable_npc_blur;0x8003ADAC
-disable_npc_shadow;0x8003ABFC
-disable_partner_blur;0x80254668
-disable_player_blur;0x80254914
-disable_player_input;0x800E0178
-disable_player_shadow;0x800E00E4
-disable_player_static_collisions;0x800E0114
-disable_world_fog;0x8011BB64
-dispatch_damage_event_actor;0x802786D4
-dispatch_damage_event_actor_0;0x802788F8
-dispatch_damage_event_actor_1;0x80278914
-dispatch_damage_event_partner;0x8027F9CC
-dispatch_damage_event_partner_0;0x8027FB80
-dispatch_damage_event_partner_1;0x8027FB9C
-dispatch_damage_event_player;0x802731BC
-dispatch_damage_event_player_0;0x8027337C
-dispatch_damage_event_player_1;0x802733A8
-dispatch_event_actor;0x80277160
-dispatch_event_general;0x80276F8C
-dispatch_event_partner;0x8027DE80
-dispatch_event_partner_continue_turn;0x8027DF0C
-dispatch_event_player;0x80271658
-dispatch_event_player_continue_turn;0x802716E4
-dist2D;0x80029ED4
-dist3D;0x80029F2C
-dma_copy;0x8002973C
-dma_load_string;0x80125804
-do_camera_type_0;0x8002F850
-do_camera_type_1;0x8002F290
-do_camera_type_2;0x8002ECF8
-do_camera_type_3;0x80031494
-do_camera_type_4;0x8002E910
-do_camera_type_5;0x80030000
-do_camera_type_6;0x8002F990
-do_camera_type_unused;0x8002FCE0
-do_lateral_collision;0x800DEC04
-does_script_exist;0x802C4164
-does_script_exist_by_ref;0x802C41A4
-dp;0x8006AE0C
-draw_battle_wheel;0x802A1C54
-draw_box;0x800F52E0
-draw_coin_sparkles;0x80130B0C
-draw_digit;0x801274C0
-draw_enemy_health_bars;0x8023FFA0
-draw_icon_0;0x801447A8
-draw_icon_1;0x801447C4
-draw_icon_2;0x801447E0
-draw_item_entities;0x80132C80
-draw_main_battle_ui;0x8023EA7C
-draw_number;0x8012769C
-draw_shop_items;0x80281524
-draw_status_ui;0x800E973C
-draw_string;0x801264EC
-enable_actor_blur;0x802542CC
-enable_entity_fog;0x80122FEC
-enable_npc_blur;0x8003AD24
-enable_npc_shadow;0x8003ABA0
-enable_partner_ai;0x800EF328
-enable_partner_blur;0x80254644
-enable_partner_flying;0x800ED310
-enable_partner_walking;0x800EB8A8
-enable_player_blur;0x802546D4
-enable_player_input;0x800E01A4
-enable_player_shadow;0x800E00B0
-enable_player_static_collisions;0x800E0140
-enable_world_fog;0x8011BB50
-end_battle;0x80244A50
-enemy_create_target_list;0x80263048
-enforce_hpfp_limits;0x800E786C
-entity_get_collision_flags;0x801108B8
-entity_init_BlueSwitch;0x802E2380
-entity_init_Chest;0x802E7D84
-entity_init_Hammer1Block_normal;0x802E3E00
-entity_init_Hammer23Block_normal;0x802E36E4
-entity_init_HammerBlock_small;0x802E3E30
-entity_init_HugeBlueSwitch;0x802E2408
-entry_point;0x80025C00
-exec_ShakeCam1;0x802CB56C
-exec_ShakeCamX;0x802CB5C8
-find_item;0x800E7644
-find_script_labels;0x802C3148
-fio_calc_file_checksum;0x8002B0D0
-fio_calc_header_checksum;0x8002AF40
-fio_deserialize_state;0x8002B490
-fio_erase_flash;0x8002BA1C
-fio_erase_game;0x8002B42C
-fio_fetch_saved_file_info;0x8002B154
-fio_init_flash;0x8002B84C
-fio_load_game;0x8002B2D0
-fio_read_flash;0x8002B868
-fio_save_game;0x8002B374
-fio_serialize_state;0x8002B630
-fio_validate_file_checksum;0x8002B0F8
-fio_validate_header_checksums;0x8002AF70
-fio_write_flash;0x8002B948
-fixed_var_to_float;0x802C4920
-float_to_fixed_var;0x802C496C
-free_icon;0x801448F4
-free_npc;0x800389CC
-free_npc_by_index;0x800388A0
-fx_emote;0x8006FE90
-fx_sleep_bubble;0x800707F0
-fx_sweat;0x80070790
-fx_walk_large;0x8006FAD0
-fx_walk_normal;0x8006FB30
-general_heap_create;0x8002AC00
-general_heap_free;0x8002AC78
-general_heap_malloc;0x8002AC28
-general_heap_malloc_tail;0x8002AC50
-get_actor;0x80269D6C
-get_actor_part;0x8026445C
-get_area_byte;0x80145650
-get_area_flag;0x801455F0
-get_asset_offset;0x8005ADD0
-get_background_color_blend;0x8011BE80
-get_cam_viewport;0x8002E4E8
-get_char_width;0x80125DF4
-get_clamped_angle_diff;0x80029C28
-get_coin_drop_amount;0x80048D50
-get_collider_center;0x8005BE10
-get_collider_type_by_id;0x8005BDA8
-get_current_map_config;0x8005ABD8
-get_current_map_header;0x8005ABE8
-get_current_partner_id;0x800E5088
-get_default_variation_for_song;0x8014A430
-get_defeated;0x8003EDF0
-get_defense;0x802662BC
-get_dpad_input_radial;0x8023E000
-get_dynamic_entity;0x8012363C
-get_enemy;0x8003ECE8
-get_enemy_safe;0x8003ED68
-get_entity_by_index;0x801105E8
-get_entity_fog_color;0x8012307C
-get_entity_fog_distance;0x80123060
-get_entity_list;0x80110620
-get_entity_type;0x801106A4
-get_float_variable;0x802C842C
-get_fortress_key_count;0x800EA3E4
-get_game_mode;0x80033528
-get_global_byte;0x80145538
-get_global_flag;0x801454BC
-get_global_timespace;0x802C420C
-get_icon_render_pos;0x801449AC
-get_item_count;0x800E75EC
-get_item_empty_count;0x800E7620
-get_item_entity;0x80130F58
-get_map_IDs_by_name;0x8005ABF8
-get_menu_icon;0x801448D4
-get_menu_icon_script;0x801448B0
-get_model_center_and_size;0x8011B0EC
-get_model_from_list_index;0x8011AD30
-get_model_list_index_from_tree_index;0x8011B010
-get_model_property;0x80115B0C
-get_nearest_home_index;0x80269698
-get_npc_by_index;0x80038ADC
-get_npc_pos;0x8005DE10
-get_npc_safe;0x8003AB48
-get_npc_unsafe;0x8003AAEC
-get_player_data;0x800E7564
-get_player_normal_pitch;0x80029E50
-get_player_normal_yaw;0x80029E20
-get_screen_coords;0x8002E538
-get_script_by_id;0x802C47A8
-get_script_by_index;0x802C4790
-get_shadow_by_index;0x80110604
-get_shadow_list;0x8011064C
-get_spirits_rescued;0x8002AE40
-get_stored_count;0x800E7814
-get_stored_empty_count;0x800E7848
-get_string_properties;0x80125F68
-get_string_width;0x80126474
-get_trigger_by_id;0x80145CD0
-get_variable;0x802C7ABC
-get_variable_index;0x802C7DA8
-get_variable_index_alt;0x802C7F20
-get_world_fog_color;0x8011BBD8
-get_world_fog_distance;0x8011BBB4
-gfxPreNMI_Callback;0x8002670C
-!gfxRetrace_Callback;0x8002605C
-gfx_draw_frame;0x80026B08
-goto_map;0x802CA304
-gravity_use_fall_parms;0x800E306C
-gravity_use_jump_parms;0x800E2FD0
-guFrustum;0x80062060
-guFrustumF;0x80061F30
-guLookAt;0x80062530
-guLookAtF;0x800621B0
-guLookAtHilite;0x80063244
-guLookAtHiliteF;0x800628C0
-guLookAtReflect;0x80063898
-guLookAtReflectF;0x80063320
-guMtxCat;0x80067960
-guMtxCatF;0x80067600
-guMtxF2L;0x80067500
-guMtxIdent;0x80067440
-guMtxIdentF;0x800674A0
-guMtxL2F;0x80067580
-guMtxXFMF;0x80067A70
-guMtxXFML;0x800679E0
-guNormalize;0x8006CBC0
-guOrtho;0x80063A40
-guOrthoF;0x80063910
-guPerspective;0x80063D40
-guPerspectiveF;0x80063B90
-guPosition;0x800640E8
-guPositionF;0x80063F10
-guRotate;0x80067C80
-guRotateAngles;0x80064458
-guRotateAnglesF;0x800642D0
-guRotateF;0x80067B20
-guScale;0x80067700
-guScaleF;0x800677C0
-guTranslate;0x80067820
-guTranslateF;0x80067900
-has_full_fp;0x800EA37C
-has_full_hp;0x800EA360
-heap_free;0x8002AD2C
-heap_malloc;0x8002ACE4
-heroes_is_ability_active;0x802672AC
-hide_coin_counter;0x800E9698
-hide_foreground_models;0x80267CB4
-hide_foreground_models_unsafe;0x80267BDC
-icon_set_opacity;0x80144EB0
-icon_set_tint;0x80144EFC
-increment_max_SP;0x800EA1B4
-increment_status_menu_disabled;0x800E9B54
-inflict_partner_ko;0x80266254
-inflict_status;0x80265F40
-inflict_status_set_duration;0x80266CF0
-init_demo_data;0x80038080
-init_dynamic_entity_list;0x80123114
-init_got_item;0x80131B00
-init_item_entity_list;0x801310CC
-init_menu_icon_list;0x80141300
-init_model_data;0x80115FE8
-init_npc_list;0x8003852C
-init_script_list;0x802C32EC
-init_trigger_list;0x80145728
-init_virtual_models;0x80120C58
-initialize_battle;0x8023E130
-initialize_collision;0x8005AF94
-initialize_curtains;0x8002BA40
-initialize_next_camera;0x8002E16C
-initialize_printer;0x801256A4
-initialize_status_menu;0x800E7934
-input_to_move_vector;0x800E2304
-int_to_string;0x800294C4
-integrate_gravity;0x800E3448
-intro_logos_fade_in;0x800337F8
-intro_logos_fade_out;0x80033830
-intro_logos_set_fade_alpha;0x800337D0
-intro_logos_set_fade_color;0x800337E0
-intro_logos_update_fade;0x80033874
-is_ability_active;0x800E9D48
-is_actor_hp_bar_visible;0x80253C20
-is_actortype_hpbar_visible;0x80253C9C
-is_current_partner_flying;0x800EA5A4
-!is_entity_data_loaded;0x8011115C
-is_entity_fog_enabled;0x80123050
-is_partner_ability_active;0x800EA0B8
-is_player_action_state;0x80110BB0
-is_point_within_region;0x80048FD4
-is_popup_displayed;0x8024FAB4
-is_status_menu_visible;0x800E9910
-is_trigger_bound;0x80145C6C
-is_world_fog_enabled;0x8011BBA4
-kill_all_scripts;0x802C4114
-kill_encounter;0x8003E730
-kill_enemy;0x8003E7AC
-kill_script;0x802C3F3C
-kill_script_by_ID;0x802C40AC
-ldiv;0x8006D620
-length2D;0x80028FF0
-lldiv;0x8006D6A4
-load_area_specific_entity_data;0x80110C14
-load_asset_by_name;0x8005ACE8
-load_battle;0x80072C90
-load_collision;0x8005B058
-load_data_for_models;0x8011AD48
-load_demo_battle;0x80072E14
-load_engine_data;0x80026DDC
-load_font;0x80123734
-load_font_data;0x80123708
-load_hit_asset;0x8005AFC0
-load_hit_data;0x8005B23C
-load_map_bg;0x80145D70
-load_map_by_IDs;0x8005A6F4
-load_map_script_lib;0x8005A6C0
-load_message_to_buffer;0x8012588C
-load_message_to_printer;0x80125A68
-load_model_textures;0x80115C24
-load_model_transforms;0x8011ADC8
-load_partner_actor;0x80264B74
-load_player_actor;0x802644A4
-load_simple_entity_data;0x801112A4
-load_split_entity_data;0x80111408
-load_sprite;0x802DEB0C
-load_stage_collision;0x8005B1A0
-load_string;0x80125900
-load_tattle_flags;0x80253E78
-load_tile_header;0x80114D6C
-load_virtual_model;0x80120CE0
-lookup_defense;0x80265E44
-lookup_status_chance;0x80265E98
-lookup_status_duration_mod;0x80265EEC
-make_disguise_npc;0x800E657C
-make_item_entity;0x801313F4
-make_item_entity_delayed;0x80131AC8
-make_item_entity_nodelay;0x80131A94
-make_npcs;0x8003E678
-mem_clear;0x80029600
-memcpy;0x80064A74
-memset;0x8006EDB0
-modify_collider_family_flags;0x802C9CE8
-move_cam_over;0x8024E4D8
-move_player;0x800E2778
-mtx_ident_mirror_y;0x80038478
-mtx_mirror_y;0x80254288
-next_demo_scene;0x800380F4
-npc_do_other_npc_collision;0x8003900C
-npc_do_player_collision;0x800392D8
-npc_do_world_collision;0x80038AFC
-npc_move_heading;0x8003AA54
-nuAuCleanDMABuffers;0x8004B268
-!nuAuDmaCallBack;0x8004B074
-nuAuDmaNew;0x8004B224
-nuBoot;0x8005E8B0
-nuContDataClose;0x8006060C
-nuContDataGet;0x8005F650
-nuContDataLock;0x800608C0
-nuContDataOpen;0x80060634
-nuContDataUnLock;0x800608F0
-nuContInit;0x8005F610
-nuContMgrInit;0x80060510
-nuContMgrRemove;0x800605E8
-nuContPakMgrInit;0x8005F6B0
-nuContPakMgrRemove;0x8005F6D4
-nuContQueryRead;0x80060920
-nuContRmbCheck;0x8005FEF0
-nuContRmbForceStop;0x800600A0
-nuContRmbForceStopEnd;0x800600C0
-nuContRmbMgrInit;0x8005FC8C
-nuContRmbMgrRemove;0x8005FCEC
-nuContRmbModeSet;0x8005FF90
-nuContRmbStart;0x8005FE90
-nuGfxDisplayOff;0x8005F400
-nuGfxDisplayOn;0x8005F430
-nuGfxFuncSet;0x8005F250
-nuGfxInitEX2;0x8005F560
-nuGfxPreNMIFuncSet;0x8005F290
-nuGfxRetraceWait;0x80060370
-nuGfxSetCfb;0x8005F2F0
-nuGfxSwapCfb;0x80060350
-nuGfxSwapCfbFuncSet;0x80060310
-nuGfxTaskAllEndWait;0x8005F2D0
-nuGfxTaskMgr;0x8002CA40
-!nuGfxTaskMgrInit;0x8002CB38
-nuGfxTaskStart;0x8002CCC4
-nuGfxThread;0x80060248
-nuGfxThreadStart;0x800601F0
-nuPiInit;0x8005F450
-nuPiReadRom;0x8005F490
-nuPiReadRomOverlay;0x800600E0
-!nuScAddClient;0x8005EE30
-nuScCreateScheduler;0x8005E9B0
-!nuScEventBroadcast;0x8005F0C0
-nuScEventHandler;0x8005EFA8
-nuScExecuteAudio;0x8005EBE0
-!nuScExecuteGraphics;0x8005ED14
-nuScGetAudioMQ;0x8005EF84
-nuScGetFrameRate;0x8005EF9C
-nuScGetGfxMQ;0x8005EF78
-nuScRemoveClient;0x8005EEBC
-nuScResetClientMesgType;0x8005EF38
-nuScSetFrameBufferNum;0x8005EF90
-nuScWaitTaskReady;0x8005F120
-nuSiCallBackAdd;0x800603F0
-nuSiCallBackRemove;0x80060490
-nuSiMgrInit;0x8002CE30
-nuSiMgrRestart;0x8002CFAC
-nuSiMgrStop;0x8002CF8C
-nuSiMgrThread;0x8002CFD0
-nuSiSendMesg;0x8002CF28
-open_status_menu_long;0x800E9760
-open_status_menu_short;0x800E978C
-osAfterPreNMI;0x8006A630
-osAiDeviceBusy;0x8006B850
-osAiGetLength;0x80061540
-osAiGetStatus;0x80061550
-osAiSetFrequency;0x80061560
-osAiSetNextBuffer;0x80061680
-osCartRomInit;0x80060F10
-osCheckId;0x80069DD4
-osCheckPackId;0x80069AA4
-osContAddressCrc;0x8006C860
-osContDataCrc;0x8006C8CC
-osContGetInitData;0x80061D1C
-osContGetQuery;0x80061980
-osContGetReadData;0x80061A28
-osContInit;0x80061B80
-osContRamRead;0x8006A1D0
-osContRamWrite;0x8006A3C0
-osContStartQuery;0x80061900
-osContStartReadData;0x800619A0
-osCreateMesgQueue;0x80065580
-osCreatePiManager;0x800609E0
-osCreateThread;0x80065E60
-osCreateViManager;0x80066A70
-osDequeueThread;0x80066200
-osDestroyThread;0x8006C950
-osDevMgrMain;0x80061090
-__osDisableInt;0x8006B360
-osDispatchThreadSave;0x8006B1F4
-osEPiLinkHandle;0x80060EC0
-osEPiRawReadIo;0x8006B570
-osEPiRawStartDma;0x80060B70
-osEPiRawWriteIo;0x8006B6E0
-osEPiReadIo;0x80060DC0
-osEPiStartDma;0x80060E20
-osEPiWriteIo;0x80060D60
-osExceptionPreamble;0x8006AA00
-osFlashAllErase;0x8006F308
-osFlashClearStatus;0x8006F29C
-osFlashInit;0x8006EF68
-osFlashReadArray;0x8006F75C
-osFlashReadId;0x8006F184
-osFlashReadStatus;0x8006F0B8
-osFlashSectorErase;0x8006F424
-osFlashWriteArray;0x8006F61C
-osFlashWriteBuffer;0x8006F550
-osGetActiveQueue;0x80066290
-osGetCause;0x8006C660
-osGetCount;0x80065A00
-osGetId;0x80069C08
-osGetSR;0x8006C670
-osGetThreadPri;0x80065F30
-osGetTime;0x800662A0
-osIdCheckSum;0x80069774
-osInitialize;0x8006A708
-osInsertTimer;0x80066690
-osInvalDCache;0x80061720
-osInvalICache;0x800617D0
-osJamMesg;0x800655B0
-osMapTLB;0x800667A0
-osMapTLBRdb;0x8006CA30
-__osMotorAccess;0x80067E00
-osMotorInit;0x80067F44
-contRmbControl;0x8005F920
-osPackReadData;0x80061AC4
-osPackRequestData;0x80061DD0
-osPfsAllocateFile;0x80068190
-osPfsCheckRamArea;0x80069388
-osPfsChecker;0x8006CC20
-osPfsDeclearPage;0x8006849C
-osPfsDeleteFile;0x800685C0
-osPfsFileState;0x80068C20
-osPfsFindFile;0x80068DC0
-osPfsFreeBlocks;0x80068F80
-osPfsGetInitData;0x8006D560
-osPfsGetOneChannelData;0x80069644
-osPfsGetStatus;0x800694C0
-osPfsInitPak;0x80069190
-osPfsIsPlug;0x8006D340
-osPfsNumFiles;0x80069090
-osPfsRWInode;0x80069E8C
-osPfsReadWriteFile;0x800687E0
-osPfsReleasePages;0x8006876C
-osPfsRepairId;0x80069460
-osPfsRequestData;0x8006D4BC
-osPfsRequestOneChannel;0x800695B0
-osPfsSelectBank;0x800696D0
-osPiCreateAccessQueue;0x80061450
-osPiGetAccess;0x800614A4
-osPiGetCmdQueue;0x8006B550
-osPiRawStartDma;0x8006B480
-osPiRelAccess;0x80061510
-osProbeTLB;0x80066860
-osRecvMesg;0x800656F0
-osRepairPackId;0x800697B8
-osResetGlobalIntMask;0x8006B430
-__osRestoreInt;0x8006B3D0
-osSendMesg;0x80065820
-osSetCompare;0x8006C680
-osSetEventMesg;0x80065950
-osSetFpcCsr;0x8006C690
-osSetGlobalIntMask;0x8006B3F0
-osSetIntMask;0x80060940
-osSetSR;0x8006C6A0
-osSetThreadPri;0x80065F50
-osSetTime;0x80066330
-osSetTimer;0x80066350
-osSetTimerIntr;0x80066610
-osSetWatchLo;0x8006C6B0
-osSiCreateAccessQueue;0x80065D70
-osSiDeviceBusy;0x8006D7E0
-osSiGetAccess;0x80065DC4
-osSiRawReadIo;0x8006C7C0
-osSiRawStartDma;0x80065CC0
-osSiRawWriteIo;0x8006C810
-osSiRelAccess;0x80065E30
-osSpDeviceBusy;0x8006C6C0
-osSpGetStatus;0x8006C6E0
-osSpRawStartDma;0x8006C730
-osSpSetPc;0x8006C700
-osSpSetStatus;0x8006C6F0
-osSpTaskLoad;0x80065A10
-osSpTaskStartGo;0x80065C1C
-osSpTaskYield;0x80065C50
-osSpTaskYielded;0x80065C70
-osStartThread;0x80066020
-osStopThread;0x80066140
-osSumcalc;0x80069740
-osTimerInterrupt;0x800664D4
-osTimerServicesInit;0x80066480
-osUnmapTLB;0x80066920
-osUnmapTLBAll;0x80066960
-osViBlack;0x80067380
-osViGetCurrentContext;0x8006CBA0
-osViGetCurrentFramebuffer;0x800669B0
-osViGetCurrentMode;0x80066A30
-osViGetNextFramebuffer;0x800669F0
-osViInit;0x8006CA90
-osViRepeatLine;0x800673E0
-osViSetEvent;0x80066DB0
-osViSetMode;0x80066E10
-osViSetSpecialFeatures;0x80066E60
-osViSetYScale;0x80066FD0
-osViSwapBuffer;0x80067020
-osViSwapContext;0x80067070
-osVirtualToPhysical;0x80061E90
-osWritebackDCache;0x80061850
-osWritebackDCacheAll;0x800618D0
-osYieldThread;0x80066240
-parent_collider_to_model;0x8005B780
-partner_can_use_ability;0x800EB42C
-partner_get_ride_script;0x800EB638
-partner_handle_after_battle;0x800EB6C4
-partner_handle_before_battle;0x800EB658
-partner_initialize_data;0x800EB580
-partner_kill_ability_script;0x800EB7CC
-partner_player_can_pause;0x800EB3E0
-partner_reset_data;0x800EB474
-partner_resume_ability_script;0x800EB860
-partner_suspend_ability_script;0x800EB818
-partner_test_enemy_collision;0x800EB5E4
-partner_use_ability;0x800EB314
-pause_badges_cleanup;0x80249758
-pause_badges_comparator;0x80246FE0
-pause_badges_count_all;0x80247054
-pause_badges_count_equipped;0x802470B0
-pause_badges_draw_bp_orbs;0x80247458
-pause_badges_draw_contents;0x80247508
-pause_badges_get_column;0x802471D8
-pause_badges_get_pos_x;0x8024710C
-pause_badges_get_pos_y;0x80247168
-pause_badges_get_row;0x80247220
-pause_badges_handle_input;0x802490A8
-pause_badges_init;0x80248FC0
-pause_badges_is_visible;0x80247270
-pause_badges_load_badges;0x80248D8C
-pause_badges_scroll_offset_x;0x802472A8
-pause_badges_scroll_offset_y;0x80247298
-pause_badges_try_equip;0x80247338
-pause_badges_try_remove;0x802472B0
-pause_badges_update;0x8024961C
-pause_cleanup;0x80244708;0x135EE0
-pause_draw_menu_label;0x8024EE94
-pause_draw_rect;0x80244858
-pause_get_menu_string;0x8024EE80
-pause_get_total_equipped_bp_cost;0x802447F4
-pause_handle_input;0x80244424
-pause_init;0x80244060
-pause_interp_cursor;0x80242E6C
-pause_interp_text_scroll;0x80243418
-pause_interp_vertical_scroll;0x8024346C
-pause_items_cleanup;0x8024AD90
-pause_items_comparator;0x802497B0
-pause_items_draw_contents;0x80249970
-pause_items_get_column;0x80249898
-pause_items_get_pos_x;0x802497D0
-pause_items_get_pos_y;0x80249828
-pause_items_get_row;0x802498E0
-pause_items_handle_input;0x8024A7D8
-pause_items_init;0x8024A714
-pause_items_is_visible;0x80249930
-pause_items_load_items;0x8024A4DC
-pause_items_scroll_offset_x;0x80249968
-pause_items_scroll_offset_y;0x80249958
-pause_items_update;0x8024AC54
-pause_map_cleanup;0x8024EE2C
-pause_map_draw_border_arrows;0x8024DA28
-pause_map_draw_contents;0x8024DB1C
-pause_map_draw_title;0x8024E54C
-pause_map_handle_input;0x8024E878
-pause_map_init;0x8024E604
-pause_map_update;0x8024ECB0
-pause_partners_cleanup;0x8024C984
-pause_partners_draw_contents;0x8024AEF8
-pause_partners_draw_movelist;0x8024BD38
-pause_partners_draw_movelist_flower;0x8024C0A0
-pause_partners_draw_movelist_title;0x8024C048
-pause_partners_draw_title;0x8024BBAC
-pause_partners_handle_input;0x8024C338
-pause_partners_init;0x8024C0E0
-pause_partners_load_portrait;0x8024ADE0
-pause_partners_update;0x8024C7A4
-pause_set_cursor_opacity;0x80242BA0;0x135EE0
-pause_sort_item_list;0x80244A4C
-pause_spirits_cleanup;0x8024D8D8
-pause_spirits_draw_contents;0x8024CA00
-pause_spirits_draw_title;0x8024D294
-pause_spirits_handle_input;0x8024D44C
-pause_spirits_init;0x8024D360
-pause_spirits_update;0x8024D800
-pause_stats_cleanup;0x80246F94
-pause_stats_draw_contents;0x80245980
-pause_stats_handle_input;0x80246B74
-pause_stats_init;0x80246AC8
-pause_tabs_cleanup;0x80245930
-pause_tabs_draw_badges;0x80244CC0
-pause_tabs_draw_invis;0x80244B90
-pause_tabs_draw_items;0x80244DE8
-pause_tabs_draw_map;0x80245160
-pause_tabs_draw_party;0x80244F10
-pause_tabs_draw_spirits;0x80245038
-pause_tabs_draw_stats;0x80244B98
-pause_tabs_handle_input;0x80245354
-pause_tabs_init;0x80245288
-pause_tabs_update;0x802455BC
-pause_textbox_draw_contents;0x80243570
-pause_tutorial_draw_contents;0x802437F4
-pause_tutorial_input;0x802442A0
-pause_update_cursor;0x802434DC;0x135EE0
-phys_player_land;0x800E3278
-play_ambient_sounds;0x80147368
-play_effect;0x8005A564
-play_hit_sound;0x80277004
-play_model_animation;0x80120148
-play_movement_dust_effects;0x802642F0
-play_sound;0x80149CB4
-play_sound_at_npc;0x80149D08
-play_sound_at_player;0x80149CD8
-play_sound_at_position;0x80149D5C
-player_create_target_list;0x8026302C
-player_enter_blue_pipe;0x802E8CCC
-player_jump;0x802D14E0
-poll_rumble;0x80028EE0
-proutSprintf;0x80065548
-push_entity_matrix;0x802E8E4C
-queue_render_task;0x8011D910
-rand_int;0x800299FC
-read_background_size;0x80145E28
-recover_fp;0x800EA264
-recover_hp;0x800EA2CC
-remove_actor_decoration;0x80267234
-remove_all_effects;0x8005A4E0
-remove_consumable;0x800EA47C
-remove_effect;0x8005A450
-remove_item_entity_by_index;0x801339FC
-remove_item_entity_by_reference;0x80133930
-remove_part_decoration;0x80267218
-remove_part_shadow;0x802673A0
-create_part_shadow_by_ref;0x802673E4
-remove_player_buffs;0x80267454
-render_curtains;0x8002BA80
-render_dynamic_entities;0x80123470
-render_effects;0x80059EF4
-render_entities;0x8010FEB4
-render_frame;0x8002D73C
-render_item_entities;0x80132E54
-render_menu_icon;0x80142BFC
-render_menu_icons;0x801436B4
-render_messages;0x80124204
-render_models;0x80116B90
-render_npcs;0x8003A7F0
-render_player;0x800E1138
-render_player_model;0x800E1168
-render_shadows;0x801100CC
-render_sprite;0x802DDC40
-render_ui;0x80112F58
-reset_actor_blur;0x802545AC
-reset_all_actor_sounds;0x80267A9C
-reset_partner_blur;0x8025468C
-reset_status_menu;0x800E9BB0
-resolve_npc;0x802CDAC0
-restart_script;0x802C3D04
-resume_all_group;0x802C4648
-resume_all_script;0x802C448C
-resume_group_others;0x802C471C
-resume_group_script;0x802C437C
-resume_group_script_index;0x802C4570
-round;0x80029AC4
-save_game_at_player_position;0x802E11A0
-save_ground_pos;0x800E54E0
-save_tattle_flags;0x80253D10
-set_action_state;0x800E5DA4
-set_actor_current_position;0x80269C24
-set_actor_home_position;0x80269D20
-set_actor_yaw;0x80263F68
-set_anim_timescale;0x802DD88C
-set_animation;0x80263CFC
-set_animation_rate;0x80263EB8
-set_area_byte;0x80145638
-set_area_flag;0x801455A0
-set_aux_pan_u;0x8011BC4C
-set_aux_pan_v;0x8011BC64
-set_background_color_blend;0x8011BE5C
-set_background_size;0x80145E70
-set_cam_target_pos;0x8024E520
-set_cam_viewport;0x8002E314
-set_cam_zoffset;0x8024E5E0
-set_cam_zoom;0x8024E594
-set_curtain_draw_callback;0x8002BF04
-set_curtain_fade;0x8002BF24
-set_curtain_fade_goal;0x8002BF14
-set_curtain_scale;0x8002BEEC
-set_curtain_scale_goal;0x8002BEDC
-set_defeated;0x8003EE40
-set_entity_fog_color;0x80123028
-set_entity_fog_dist;0x80123010
-set_float_variable;0x802C8640
-set_game_mode;0x800334F0
-set_global_byte;0x80145520
-set_global_flag;0x80145450
-set_global_timespace;0x802C4200
-set_goal_pos_to_part;0x80269754
-set_icon_flags;0x80144A00
-set_icon_render_pos;0x80144984
-set_item_entity_flags;0x80134148
-set_item_entity_position;0x8013420C
-set_main_pan_u;0x8011BC1C
-set_main_pan_v;0x8011BC34
-set_map_transition_effect;0x801382A0
-set_max_SP;0x800EA1D8
-set_menu_icon_script;0x801447FC
-set_message_images;0x80125B2C
-set_message_string;0x80125B3C
-set_message_value;0x80125BE8
-set_music_track;0x8014A918
-set_npc_animation;0x802CDB0C
-set_npc_shadow_scale;0x80112900
-set_npc_yaw;0x8003B340
-set_part_absolute_position;0x80269C70
-set_part_goal_to_actor_part;0x802699D8
-set_part_yaw;0x80263F9C
-set_peach_shadow_scale;0x801129D4
-set_popup_duration;0x8024FAC4
-set_script_flags;0x802C47E8
-set_script_group;0x802C4218
-set_script_priority;0x802C41D8
-set_script_timescale;0x802C41E0
-set_standard_shadow_scale;0x8011285C
-set_tex_panner;0x8011BC14
-set_ui_panel_properties;0x80147CC8
-set_variable;0x802C8098
-set_world_fog_color;0x8011BB88
-set_world_fog_dist;0x8011BB74
-set_zone_enabled;0x802CA1B8
-setup_demo_player;0x80072D2C
-setup_item_popup;0x800E6C44
-setup_partner_popup;0x800E6B78
-setup_path_data;0x802D4DAC
-show_battle_message;0x8024F960
-show_coin_counter;0x800E9518
-show_damage_popup;0x802665AC
-show_first_strike_message;0x80041C5C
-show_foreground_models;0x80267D28
-show_foreground_models_unsafe;0x80267C48
-show_message_popup;0x80250EA4
-show_variable_battle_message;0x8024FA04
-si;0x8006AD90
-si_execute_next_command;0x802C7404
-si_find_label;0x802C8890
-!si_goto_end_case;0x802C89E4
-si_goto_end_loop;0x802C8AE4
-si_goto_next_case;0x802C8A60
-si_handle_AND;0x802C6270
-si_handle_AND_const;0x802C62D4
-si_handle_OR;0x802C632C
-si_handle_OR_const;0x802C6390
-si_handle_add;0x802C5804
-si_handle_addF;0x802C5A84
-si_handle_allocate_array;0x802C6214
-si_handle_bind;0x802C6714
-si_handle_bind_lock;0x802C6B54
-si_handle_break_case;0x802C56D4
-si_handle_break_loop;0x802C4B0C
-si_handle_call;0x802C63E8
-si_handle_case_AND;0x802C549C
-si_handle_case_default;0x802C5444
-si_handle_case_equal;0x802C5030
-si_handle_case_equal_AND;0x802C55B8
-si_handle_case_equal_OR;0x802C5518
-si_handle_case_greater;0x802C5268
-si_handle_case_greater_equal;0x802C52F8
-si_handle_case_less;0x802C5148
-si_handle_case_less_equal;0x802C51D8
-si_handle_case_not_equal;0x802C50BC
-si_handle_case_range;0x802C5388
-si_handle_child_thread;0x802C6D6C
-si_handle_divide;0x802C5934
-si_handle_divideF;0x802C5BC0
-si_handle_does_script_exist;0x802C6A78
-si_handle_else;0x802C4F40
-si_handle_end_case_group;0x802C565C
-si_handle_end_child_thread;0x802C6DF4
-si_handle_end_if;0x802C4F6C
-si_handle_end_loop;0x802C4A48
-si_handle_end_switch;0x802C5718
-si_handle_end_thread;0x802C6D4C
-si_handle_exec1;0x802C646C
-si_handle_exec2;0x802C6524
-si_handle_exec_wait;0x802C65FC
-si_handle_get_1_float;0x802C5EB4
-si_handle_get_1_word;0x802C5C90
-si_handle_get_2_float;0x802C5F0C
-si_handle_get_2_word;0x802C5CC4
-si_handle_get_3_float;0x802C5F9C
-si_handle_get_3_word;0x802C5D2C
-si_handle_get_4_float;0x802C605C
-si_handle_get_4_word;0x802C5DB4
-si_handle_get_Nth_float;0x802C614C
-si_handle_get_Nth_word;0x802C5E5C
-si_handle_goto;0x802C49C0
-si_handle_if_AND;0x802C4E90
-si_handle_if_equal;0x802C4C40
-si_handle_if_greater;0x802C4D64
-si_handle_if_greater_equal;0x802C4E2C
-si_handle_if_less;0x802C4D00
-si_handle_if_less_equal;0x802C4DC8
-si_handle_if_not_AND;0x802C4EE8
-si_handle_if_not_equal;0x802C4CA0
-si_handle_jump;0x802C6640
-si_handle_kill;0x802C6870
-si_handle_label;0x802C49B8
-si_handle_loop;0x802C4A00
-si_handle_mod;0x802C59BC
-si_handle_multiply;0x802C58CC
-si_handle_multiplyF;0x802C5B54
-si_handle_print_debug_var;0x802C6E1C
-si_handle_resume;0x802C6A4C
-si_handle_resume_all;0x802C697C
-si_handle_resume_others;0x802C69E4
-si_handle_return;0x802C4998
-si_handle_set_array;0x802C61AC
-si_handle_set_const;0x802C5790
-si_handle_set_flag_array;0x802C61E0
-si_handle_set_float;0x802C57B8
-si_handle_set_float_buffer_ptr;0x802C5C5C
-si_handle_set_group;0x802C6914
-si_handle_set_int_buffer_ptr;0x802C5C28
-si_handle_set_priority;0x802C689C
-si_handle_set_timescale;0x802C68D8
-si_handle_set_var;0x802C5744
-si_handle_subtract;0x802C5868
-si_handle_subtractF;0x802C5AEC
-si_handle_suspend;0x802C6A20
-si_handle_suspend_all;0x802C6950
-si_handle_suspend_others;0x802C69A8
-si_handle_switch;0x802C4F74
-si_handle_switch_const;0x802C4FE4
-si_handle_thread;0x802C6C78
-si_handle_unbind;0x802C6850
-si_handle_wait;0x802C4B5C
-si_handle_wait_seconds;0x802C4BB8
-si_skip_else;0x802C8978
-si_skip_if;0x802C88FC
-si_standard_trigger_executor;0x802C6AD0
-sign;0x800294B0
-signF;0x80029A7C
-sin_cos_deg;0x8002A234
-sin_cos_rad;0x8002A0B4
-sin_deg;0x8002A2EC
-sin_rad;0x8002A16C
-sins;0x800645F0
-sort_items;0x800E76CC
-sort_scripts;0x802C3000
-spawn_drops;0x80048280
-spr_appendMDL_component;0x802DC8F4
-spr_draw_component;0x802DCEDC
-spr_transform_point;0x802DCD00
-sprintf;0x800654F0
-sqrtf;0x80061EF0
-start_battle;0x800446B4
-start_bounce_a;0x800E6034
-start_bounce_b;0x800E608C
-start_child_script;0x802C37C8
-start_falling;0x800E5FD0
-start_rumble;0x80028F08
-start_rumble_type;0x80267DF4
-start_script;0x802C33E0
-start_script_in_group;0x802C35D0
-status_menu_draw_number;0x800E7CA4
-status_menu_draw_stat;0x800E7E34
-status_menu_start_blinking_coins;0x800E99F4
-status_menu_start_blinking_fp;0x800E998C
-status_menu_start_blinking_hp;0x800E9920
-status_menu_start_blinking_sp;0x800E9A60
-status_menu_start_blinking_sp_bars;0x800E9AB8
-status_menu_start_blinking_starpoints;0x800E9AE4
-status_menu_stop_blinking_coins;0x800E9A38
-status_menu_stop_blinking_fp;0x800E99D0
-status_menu_stop_blinking_hp;0x800E9964
-status_menu_stop_blinking_sp;0x800E9A94
-status_menu_stop_blinking_starpoints;0x800E9B0C
-step_battle;0x800338E4
-step_current_game_mode;0x80112E78
-step_game_loop;0x80026740
-step_init_state;0x80033568
-step_intro;0x80036854
-step_logos;0x800340A4
-step_pause_menu;0x8003497C
-step_title_screen;0x800370B4
-step_world;0x80035D54
-stop_sound;0x80149C6C
-store_item;0x800E77C4
-strchr;0x80064A10
-strcmp;0x8006ED70
-strcpy;0x8006ED40
-strlen;0x80064A50
-stub_dynamic_entity_delegate;0x801230B0
-subtract_fortress_keys;0x800EA3B8
-subtract_hp;0x800EA334
-suspend_all_group;0x802C45E8
-suspend_all_script;0x802C4420
-suspend_group_others;0x802C46A8
-suspend_group_script;0x802C42D8
-suspend_group_script_index;0x802C44F8
-switch_order;0x80243918
-switch_to_partner;0x80242F00
-switch_to_player;0x80242AC8
-sync_status_menu;0x800E9B6C
-test_below_player;0x800DDFD0
-test_down_ray_triangle;0x8005C49C
-test_item_player_collision;0x80133B0C
-test_player_entity_aabb;0x80110AAC
-test_player_lateral;0x800DF460
-test_ray_colliders;0x8005CCD0
-test_ray_entities;0x8005D448
-test_ray_triangle_general;0x8005BE84
-test_ray_zone_aabb;0x80030458
-test_ray_zones;0x8005D124
-test_up_ray_collider;0x8005D2DC
-test_up_ray_triangle;0x8005C7A4
-trace_above_player;0x800DEA08
-trace_below_player;0x800DE54C
-transform_point;0x80029620
-try_inflict_status;0x80266B78
-unfreeze_cam;0x8024E600
-update_actor_shadow;0x802559BC
-update_actor_shadows;0x8023E404
-update_battle_state;0x8023E438
-update_cameras;0x8002D400
-update_coin_counter;0x800E93DC
-update_collider_transform;0x8005BA24
-update_component;0x802DD11C
-update_curtains;0x8002BA78
-update_dynamic_entities;0x80123404
-update_end_player_turn;0x80242BB0
-update_enemy_action;0x80247570
-update_enemy_change_turn;0x802472AC
-update_enemy_shadows;0x80255F5C
-update_entities;0x8010F6D0
-update_entity_inverse_rotation_matrix;0x801104A4
-update_entity_transform_matrix;0x8011022C
-update_fall_state;0x800E2D18
-update_hero_shadows;0x80255FAC
-update_heroes_start_turn;0x80242024
-update_input;0x80028874
-update_item_entities;0x80131EEC
-update_item_entity_collectable;0x80134250
-update_item_entity_static;0x80135658
-update_item_entity_temp;0x801356DC
-update_lerp;0x8002A3B4
-update_lerp_battle;0x8027B0DC
-update_locomotion_state;0x800E5F68
-update_menu_icons;0x80141610
-update_messages;0x801237D8
-update_npc_blur;0x8003ADF8
-update_npcs;0x80039930
-update_partner_action;0x80246B34
-update_partner_menu;0x802A81C8
-update_player;0x800DF740
-update_player_action;0x80245AD0
-update_player_actor_shadow;0x80257BAC
-update_player_change_turn;0x80246450
-update_player_input;0x800E1F90
-update_player_menu;0x802A5988
-update_player_move_history;0x800ED4B8
-update_player_shadow;0x800E1BC4
-update_run_away;0x80244F00
-update_scripts;0x802C3D74
-update_shadow_transform_matrix;0x80110374
-update_shadows;0x8010FA98
-update_starpoints_display;0x802403BC
-update_status_menu;0x800E80B4
-update_swap_partner;0x802456F8
-update_targeting_enemies;0x802AA688
-update_triggers;0x80145860
-use_cam_preset;0x8024CF34
-use_consumable;0x800EA400
-viMgrMain;0x80066C10
-ActorAddMovePos;0x80280880
-PlayerScriptDispatcher;0x80284EBC
-PeachScriptDispatcher;0x80285010
-ExecutePlayerAction;0x8028505C
-ExecutePeachAction;0x80285174
-HandleEvent_Player;0x802852D4
-SetForegroundModelsVisibleUnsafe;0x80253AA8
-JumpToGoalSimple2;0x80279420
-LandJumpPart;0x8027AB5C
-_advance_rng;0x80029900
-fio_has_valid_backup;0x8002AFD8
-fio_flush_backups;0x8002B04C
-COPY_set_defeated;0x8003E2E0
-GetCamLookAtObjVector;0x8003F398
-draw_submenu_title;0x800F4648
-AssignScript;0x80111FB0
-draw_menu_icon;0x80144298
-bind_trigger;0x802C4220
-bind_trigger_1;0x802C42A8
-draw_anim_models;0x802CCB18
-SetAnimModelPosition;0x802CCFE4
-GetAnimModelPosition;0x802CD090
-AddAnimModelPosition;0x802CD12C
-SetAnimModelRotation;0x802CD1F0
-SetAnimModelScale;0x802CD29C
-NpcSetHomePosToCurrent;0x802CF3BC
-!func_8002D160;0x8002D160
-!func_8002C890;0x8002C890
-func_802A91F8;0x802A91F8
-func_802A9208;0x802A9208
-func_802A9228;0x802A9228
-func_802A9234;0x802A9234
-func_802A9254;0x802A9254
-func_802A9278;0x802A9278
-func_802A928C;0x802A928C
-func_802A9294;0x802A9294
-func_802A9298;0x802A9298
-func_802A92A0;0x802A92A0
-func_802A92D4;0x802A92D4
-func_802A92DC;0x802A92DC
-func_802A92F0;0x802A92F0
-func_802A9310;0x802A9310
-func_802A936C;0x802A936C
-func_802A9378;0x802A9378
-func_802A948C;0x802A948C
-func_802A94A4;0x802A94A4
-func_802A94D8;0x802A94D8
-func_802A9544;0x802A9544
-func_802A955C;0x802A955C
-func_802A9590;0x802A9590
-func_802A959C;0x802A959C
-func_802A9634;0x802A9634
-func_802A963C;0x802A963C
-func_802A9664;0x802A9664
-func_802A96B8;0x802A96B8
-func_802A96DC;0x802A96DC
-func_802A96EC;0x802A96EC
-func_802A96F4;0x802A96F4
-func_802A9708;0x802A9708
-func_802A9718;0x802A9718
-func_802A9720;0x802A9720
-func_802A973C;0x802A973C
-func_802A9744;0x802A9744
-func_802A9764;0x802A9764
-func_802A97AC;0x802A97AC
-func_802A97BC;0x802A97BC
-func_802A97CC;0x802A97CC
-func_802A97F8;0x802A97F8
-func_802A97FC;0x802A97FC
-func_802A9810;0x802A9810
-func_802A981C;0x802A981C
-func_802A9834;0x802A9834
-func_802A984C;0x802A984C
-func_802A9894;0x802A9894
-func_802A9898;0x802A9898
-func_802A98B0;0x802A98B0
-func_802A98D0;0x802A98D0
-func_802A98DC;0x802A98DC
-func_802A98E0;0x802A98E0
-func_802A9914;0x802A9914
-func_802A992C;0x802A992C
-func_802A9990;0x802A9990
-func_802A99D4;0x802A99D4
-func_802A9A30;0x802A9A30
-func_802A9A54;0x802A9A54
-func_802AA014;0x802AA014
-func_802AA0D8;0x802AA0D8
-func_802AB330;0x802AB330
-func_802AB338;0x802AB338
-func_802B71D4;0x802B71D4
-func_802B71E8;0x802B71E8
-func_802BD7DC;0x802BD7DC
-func_802BE070;0x802BE070
-!func_8006AA34;0x8006AA34
-SetTattleString;0x80045A58
-!osEnqueueAndYield;0x8006B06C
-!osPopThread;0x8006B1BC
-!osDispatchThread;0x8006B1D4
-!osEnqueueThread;0x8006B174
-!send_mesg;0x8006AF7C
-!handle_CPU;0x8006B038
-gPauseMenuStrings;0x8026F778
-gEffectTable;0x8007F214
-gMoveScriptTable;0x80293E80
-gStaticScriptCounter;0x802D9CA0
-D_80156954;0x80156954
-D_802D9CA4;0x802D9CA4
-gCollisionStatus;0x8015A550
-gGlobalTimeSpace;0x802D9CA8
-gBattleState;0x800DC068
-gBattleDmaDest;0x80284000
-gDialogueState;0x8029FA60
-gSpeakingActorPrintCtx;0x8029FA60
-gSpeakingActorPrintIsDone;0x8029FA68
-gSpeakingActorTalkAnim;0x8029FA6C
-gSpeakingActorIdleAnim;0x8029FA70
-gSpeakingActor;0x8029FA74
-gSpeakingActorPart;0x8029FA78
-EnterWalk;0x80285960
-EnemyNpcHit;0x80077F70
-EnemyNpcDefeat;0x8007809C
-D_80078DB0;0x80078DB0
-D_80078DB4;0x80078DB4
-gMusicPlayers;0x80159AF0
-gMusicUnkVolume;0x80159AE0
-gMusicUnkVolume2;0x80159AE4
-gMusicTargetVolume;0x80159AE2
-gMusicCurrentVolume;0x80159AE6
-gAreas;0x800934F0
-gSongArray;0x8014F720
-D_802D9D50;0x802D9D50
+entry_point = 0x80025C00;
+boot_main = 0x80025F70;
+gfxRetrace_Callback = 0x8002605C; // !
+gfxPreNMI_Callback = 0x8002670C;
+step_game_loop = 0x80026740;
+gfx_draw_frame = 0x80026B08;
+load_engine_data = 0x80026DDC;
+update_input = 0x80028874;
+poll_rumble = 0x80028EE0;
+start_rumble = 0x80028F08;
+length2D = 0x80028FF0;
+_heap_create = 0x80029030;
+_heap_malloc = 0x8002906C;
+_heap_malloc_tail = 0x80029164;
+_heap_free = 0x8002921C;
+_heap_realloc = 0x800292C4;
+cosine = 0x800293D4;
+sign = 0x800294B0;
+int_to_string = 0x800294C4;
+mem_clear = 0x80029600;
+transform_point = 0x80029620;
+copy_matrix = 0x80029720;
+dma_copy = 0x8002973C;
+_advance_rng = 0x80029900;
+rand_int = 0x800299FC;
+signF = 0x80029A7C;
+round = 0x80029AC4;
+clamp_angle = 0x80029B24;
+get_clamped_angle_diff = 0x80029C28;
+atan2 = 0x80029C80;
+get_player_normal_yaw = 0x80029E20;
+get_player_normal_pitch = 0x80029E50;
+dist2D = 0x80029ED4;
+dist3D = 0x80029F2C;
+add_vec2D_polar = 0x80029F9C;
+_wrap_trig_lookup_value = 0x8002A034;
+sin_cos_rad = 0x8002A0B4;
+sin_rad = 0x8002A16C;
+cos_rad = 0x8002A1D0;
+sin_cos_deg = 0x8002A234;
+sin_deg = 0x8002A2EC;
+cos_deg = 0x8002A350;
+update_lerp = 0x8002A3B4;
+general_heap_create = 0x8002AC00;
+general_heap_malloc = 0x8002AC28;
+general_heap_malloc_tail = 0x8002AC50;
+general_heap_free = 0x8002AC78;
+battle_heap_create = 0x8002ACA0;
+heap_malloc = 0x8002ACE4;
+heap_free = 0x8002AD2C;
+collision_heap_create = 0x8002AD74;
+collision_heap_malloc = 0x8002ADB0;
+collision_heap_free = 0x8002ADF4;
+get_spirits_rescued = 0x8002AE40;
+fio_calc_header_checksum = 0x8002AF40;
+fio_validate_header_checksums = 0x8002AF70;
+fio_has_valid_backup = 0x8002AFD8;
+fio_flush_backups = 0x8002B04C;
+fio_calc_file_checksum = 0x8002B0D0;
+fio_validate_file_checksum = 0x8002B0F8;
+fio_fetch_saved_file_info = 0x8002B154;
+fio_load_game = 0x8002B2D0;
+fio_save_game = 0x8002B374;
+fio_erase_game = 0x8002B42C;
+fio_deserialize_state = 0x8002B490;
+fio_serialize_state = 0x8002B630;
+fio_init_flash = 0x8002B84C;
+fio_read_flash = 0x8002B868;
+fio_write_flash = 0x8002B948;
+fio_erase_flash = 0x8002BA1C;
+initialize_curtains = 0x8002BA40;
+update_curtains = 0x8002BA78;
+render_curtains = 0x8002BA80;
+set_curtain_scale_goal = 0x8002BEDC;
+set_curtain_scale = 0x8002BEEC;
+set_curtain_draw_callback = 0x8002BF04;
+set_curtain_fade_goal = 0x8002BF14;
+set_curtain_fade = 0x8002BF24;
+crash_delay_msec = 0x8002BF40;
+crash_printf_string = 0x8002C208;
+crash_print_fpr = 0x8002C2B8;
+crash_show_handler = 0x8002C3B0;
+crash_monitor_thread = 0x8002C81C;
+func_8002C890 = 0x8002C890; // !
+crash_create_monitor = 0x8002C8B0;
+nuGfxTaskMgr = 0x8002CA40;
+nuGfxTaskMgrInit = 0x8002CB38; // !
+nuGfxTaskStart = 0x8002CCC4;
+nuSiMgrInit = 0x8002CE30;
+nuSiSendMesg = 0x8002CF28;
+nuSiMgrStop = 0x8002CF8C;
+nuSiMgrRestart = 0x8002CFAC;
+nuSiMgrThread = 0x8002CFD0;
+func_8002D160 = 0x8002D160; // !
+update_cameras = 0x8002D400;
+render_frame = 0x8002D73C;
+create_cameras_a = 0x8002DEF4;
+create_cameras_b = 0x8002E038;
+initialize_next_camera = 0x8002E16C;
+set_cam_viewport = 0x8002E314;
+get_cam_viewport = 0x8002E4E8;
+get_screen_coords = 0x8002E538;
+do_camera_type_4 = 0x8002E910;
+do_camera_type_2 = 0x8002ECF8;
+do_camera_type_1 = 0x8002F290;
+do_camera_type_0 = 0x8002F850;
+do_camera_type_6 = 0x8002F990;
+do_camera_type_unused = 0x8002FCE0;
+do_camera_type_5 = 0x80030000;
+test_ray_zone_aabb = 0x80030458;
+do_camera_type_3 = 0x80031494;
+set_game_mode = 0x800334F0;
+get_game_mode = 0x80033528;
+begin_state_init = 0x80033540;
+step_init_state = 0x80033568;
+intro_logos_set_fade_alpha = 0x800337D0;
+intro_logos_set_fade_color = 0x800337E0;
+intro_logos_fade_in = 0x800337F8;
+intro_logos_fade_out = 0x80033830;
+intro_logos_update_fade = 0x80033874;
+begin_state_battle = 0x800338D0;
+step_battle = 0x800338E4;
+begin_state_logos = 0x80033E70;
+step_logos = 0x800340A4;
+begin_state_pause_menu = 0x80034940;
+step_pause_menu = 0x8003497C;
+begin_state_world = 0x80035D30;
+step_world = 0x80035D54;
+begin_state_intro = 0x80036650;
+step_intro = 0x80036854;
+begin_state_title_screen = 0x80036DF0;
+step_title_screen = 0x800370B4;
+init_demo_data = 0x80038080;
+next_demo_scene = 0x800380F4;
+NOP_npc_callback = 0x80038470;
+mtx_ident_mirror_y = 0x80038478;
+clear_npcs = 0x800384BC;
+init_npc_list = 0x8003852C;
+_create_npc = 0x80038598;
+create_basic_npc = 0x80038844;
+create_standard_npc = 0x80038864;
+create_partner_npc = 0x80038880;
+free_npc_by_index = 0x800388A0;
+free_npc = 0x800389CC;
+get_npc_by_index = 0x80038ADC;
+npc_do_world_collision = 0x80038AFC;
+npc_do_other_npc_collision = 0x8003900C;
+npc_do_player_collision = 0x800392D8;
+update_npcs = 0x80039930;
+appendGfx_npc = 0x80039FD0;
+render_npcs = 0x8003A7F0;
+npc_move_heading = 0x8003AA54;
+get_npc_unsafe = 0x8003AAEC;
+get_npc_safe = 0x8003AB48;
+enable_npc_shadow = 0x8003ABA0;
+disable_npc_shadow = 0x8003ABFC;
+enable_npc_blur = 0x8003AD24;
+disable_npc_blur = 0x8003ADAC;
+update_npc_blur = 0x8003ADF8;
+appedGfx_npc_blur = 0x8003AE38;
+set_npc_yaw = 0x8003B340;
+COPY_set_defeated = 0x8003E2E0;
+clear_encounter_status = 0x8003E400;
+make_npcs = 0x8003E678;
+kill_encounter = 0x8003E730;
+kill_enemy = 0x8003E7AC;
+bind_enemy_ai = 0x8003E94C;
+bind_enemy_aux = 0x8003E9B4;
+bind_enemy_interact = 0x8003EA1C;
+bind_npc_ai = 0x8003EA84;
+bind_npc_aux = 0x8003EB50;
+bind_npc_interact = 0x8003EC1C;
+get_enemy = 0x8003ECE8;
+get_enemy_safe = 0x8003ED68;
+get_defeated = 0x8003EDF0;
+set_defeated = 0x8003EE40;
+FadeBackgroundToBlack = 0x8003EF00;
+UnfadeBackgroundFromBlack = 0x8003EF98;
+GetCamLookAtObjVector = 0x8003F398;
+HasMerleeCasts = 0x8003F3F4;
+OnDefeatEnemy = 0x8003F580;
+OnFleeBattleDrops = 0x8003F6E8;
+show_first_strike_message = 0x80041C5C;
+create_npcs = 0x800436B0;
+SetEncounterStatusFlags = 0x80044180;
+LoadDemoBattle = 0x80044264;
+MakeNpcs = 0x80044298;
+RemoveNpc = 0x80044340;
+RemoveEncounter = 0x80044478;
+GetBattleOutcome = 0x8004457C;
+GetOwnerEncounterTrigger = 0x80044600;
+DoNpcDefeat = 0x8004462C;
+start_battle = 0x800446B4;
+StartBattle = 0x80044840;
+StartBattleWith = 0x80044860;
+StartBossBattle = 0x8004489C;
+SetBattleMusic = 0x80044A38;
+BindNpcAI = 0x80044A78;
+BindNpcIdle = 0x80044BAC;
+RestartNpcAI = 0x80044C2C;
+EnableNpcAI = 0x80044CF0;
+SetNpcAux = 0x80044DA4;
+BindNpcAux = 0x80044EB8;
+RestartNpcAux = 0x80044F38;
+EnableNpcAux = 0x80044FF0;
+BindNpcInteract = 0x800450A4;
+BindNpcHit = 0x80045140;
+BindNpcDefeat = 0x800451DC;
+SetSelfVar = 0x8004525C;
+GetSelfVar = 0x800452C0;
+SetNpcVar = 0x80045320;
+GetNpcVar = 0x800453BC;
+SetSelfRotation = 0x8004545C;
+SetSelfEnemyFlags = 0x8004550C;
+SetSelfEnemyFlagBits = 0x80045524;
+GetSelfNpcID = 0x80045614;
+ClearDefeatedEnemies = 0x80045640;
+SetEnemyFlagBits = 0x80045688;
+GetSelfAnimationFromTable = 0x80045734;
+SetTattleString = 0x80045A58;
+spawn_drops = 0x80048280;
+get_coin_drop_amount = 0x80048D50;
+is_point_within_region = 0x80048FD4;
+DoBasicAI = 0x8004A47C;
+nuAuDmaCallBack = 0x8004B074; // !
+nuAuDmaNew = 0x8004B224;
+nuAuCleanDMABuffers = 0x8004B268;
+alLink = 0x8004B3EC;
+alUnlink = 0x8004B40C;
+al_LoadINIT = 0x800542BC;
+al_CopyFileTableEntry = 0x8005447C;
+al_LoadPER = 0x800544F8;
+al_LoadPRG = 0x800545B4;
+al_LoadBank = 0x800547C8;
+al_DmaCopy = 0x80054E00;
+al_CopyWords = 0x80054F74;
+al_LoadBKHeaders = 0x80054FC0;
+alAudioFrame = 0x800565C0;
+alHeapAlloc = 0x80057F90;
+render_effects = 0x80059EF4;
+remove_effect = 0x8005A450;
+remove_all_effects = 0x8005A4E0;
+play_effect = 0x8005A564;
+load_map_script_lib = 0x8005A6C0;
+load_map_by_IDs = 0x8005A6F4;
+get_current_map_config = 0x8005ABD8;
+get_current_map_header = 0x8005ABE8;
+get_map_IDs_by_name = 0x8005ABF8;
+load_asset_by_name = 0x8005ACE8;
+get_asset_offset = 0x8005ADD0;
+allocate_hit_tables = 0x8005AEA0;
+initialize_collision = 0x8005AF94;
+load_hit_asset = 0x8005AFC0;
+load_collision = 0x8005B058;
+load_stage_collision = 0x8005B1A0;
+load_hit_data = 0x8005B23C;
+parent_collider_to_model = 0x8005B780;
+_add_hit_vert_to_buffer = 0x8005B9A0;
+_get_hit_vert_index_from_buffer = 0x8005B9F4;
+update_collider_transform = 0x8005BA24;
+get_collider_type_by_id = 0x8005BDA8;
+get_collider_center = 0x8005BE10;
+test_ray_triangle_general = 0x8005BE84;
+test_down_ray_triangle = 0x8005C49C;
+test_up_ray_triangle = 0x8005C7A4;
+test_ray_colliders = 0x8005CCD0;
+test_ray_zones = 0x8005D124;
+test_up_ray_collider = 0x8005D2DC;
+test_ray_entities = 0x8005D448;
+get_npc_pos = 0x8005DE10;
+nuBoot = 0x8005E8B0;
+boot_idle = 0x8005E90C;
+nuScCreateScheduler = 0x8005E9B0;
+nuScExecuteAudio = 0x8005EBE0;
+nuScExecuteGraphics = 0x8005ED14; // !
+nuScAddClient = 0x8005EE30; // !
+nuScRemoveClient = 0x8005EEBC;
+nuScResetClientMesgType = 0x8005EF38;
+nuScGetGfxMQ = 0x8005EF78;
+nuScGetAudioMQ = 0x8005EF84;
+nuScSetFrameBufferNum = 0x8005EF90;
+nuScGetFrameRate = 0x8005EF9C;
+nuScEventHandler = 0x8005EFA8;
+nuScEventBroadcast = 0x8005F0C0; // !
+nuScWaitTaskReady = 0x8005F120;
+nuGfxFuncSet = 0x8005F250;
+nuGfxPreNMIFuncSet = 0x8005F290;
+nuGfxTaskAllEndWait = 0x8005F2D0;
+nuGfxSetCfb = 0x8005F2F0;
+nuGfxDisplayOff = 0x8005F400;
+nuGfxDisplayOn = 0x8005F430;
+nuPiInit = 0x8005F450;
+nuPiReadRom = 0x8005F490;
+nuGfxInitEX2 = 0x8005F560;
+nuContInit = 0x8005F610;
+nuContDataGet = 0x8005F650;
+nuContPakMgrInit = 0x8005F6B0;
+nuContPakMgrRemove = 0x8005F6D4;
+contPakOpen = 0x8005F6F8;
+contPakFree = 0x8005F748;
+contPakFileReadWrite = 0x8005F770;
+contPakFileOpen = 0x8005F7B0;
+contPakFileDelete = 0x8005F864;
+contPakFileState = 0x8005F8A4;
+contPakFileNum = 0x8005F8D0;
+contPakRepairId = 0x8005F8FC;
+contRmbControl = 0x8005F920;
+contRmbRetrace = 0x8005FB20;
+nuContRmbMgrInit = 0x8005FC8C;
+nuContRmbMgrRemove = 0x8005FCEC;
+contRmbCheckMesg = 0x8005FD10;
+contRmbStartMesg = 0x8005FD58;
+contRmbStopMesg = 0x8005FDE4;
+contRmbForceStopMesg = 0x8005FE0C;
+contRmbForceStopEndMesg = 0x8005FE54;
+nuContRmbStart = 0x8005FE90;
+nuContRmbCheck = 0x8005FEF0;
+nuContRmbModeSet = 0x8005FF90;
+nuContRmbForceStop = 0x800600A0;
+nuContRmbForceStopEnd = 0x800600C0;
+nuPiReadRomOverlay = 0x800600E0;
+nuGfxThreadStart = 0x800601F0;
+nuGfxThread = 0x80060248;
+nuGfxSwapCfbFuncSet = 0x80060310;
+nuGfxSwapCfb = 0x80060350;
+nuGfxRetraceWait = 0x80060370;
+nuSiCallBackAdd = 0x800603F0;
+nuSiCallBackRemove = 0x80060490;
+nuContMgrInit = 0x80060510;
+nuContMgrRemove = 0x800605E8;
+nuContDataClose = 0x8006060C;
+nuContDataOpen = 0x80060634;
+contRetrace = 0x8006065C;
+contReadData = 0x80060738;
+contReadNW = 0x800607B4;
+contQuery = 0x80060870;
+nuContDataLock = 0x800608C0;
+nuContDataUnLock = 0x800608F0;
+nuContQueryRead = 0x80060920;
+osSetIntMask = 0x80060940;
+osCreatePiManager = 0x800609E0;
+osEPiRawStartDma = 0x80060B70;
+osEPiWriteIo = 0x80060D60;
+osEPiReadIo = 0x80060DC0;
+osEPiStartDma = 0x80060E20;
+osEPiLinkHandle = 0x80060EC0;
+osCartRomInit = 0x80060F10;
+osDevMgrMain = 0x80061090;
+osPiCreateAccessQueue = 0x80061450;
+osPiGetAccess = 0x800614A4;
+osPiRelAccess = 0x80061510;
+osAiGetLength = 0x80061540;
+osAiGetStatus = 0x80061550;
+osAiSetFrequency = 0x80061560;
+osAiSetNextBuffer = 0x80061680;
+osInvalDCache = 0x80061720;
+osInvalICache = 0x800617D0;
+osWritebackDCache = 0x80061850;
+osWritebackDCacheAll = 0x800618D0;
+osContStartQuery = 0x80061900;
+osContGetQuery = 0x80061980;
+osContStartReadData = 0x800619A0;
+osContGetReadData = 0x80061A28;
+osPackReadData = 0x80061AC4;
+osContInit = 0x80061B80;
+osContGetInitData = 0x80061D1C;
+osPackRequestData = 0x80061DD0;
+osVirtualToPhysical = 0x80061E90;
+sqrtf = 0x80061EF0;
+coss = 0x80061F00;
+guFrustumF = 0x80061F30;
+guFrustum = 0x80062060;
+guLookAtF = 0x800621B0;
+guLookAt = 0x80062530;
+guLookAtHiliteF = 0x800628C0;
+guLookAtHilite = 0x80063244;
+guLookAtReflectF = 0x80063320;
+guLookAtReflect = 0x80063898;
+guOrthoF = 0x80063910;
+guOrtho = 0x80063A40;
+guPerspectiveF = 0x80063B90;
+guPerspective = 0x80063D40;
+guPositionF = 0x80063F10;
+guPosition = 0x800640E8;
+guRotateAnglesF = 0x800642D0;
+guRotateAngles = 0x80064458;
+sins = 0x800645F0;
+bcopy = 0x80064650;
+bzero = 0x80064970; // !
+strchr = 0x80064A10;
+strlen = 0x80064A50;
+memcpy = 0x80064A74;
+_Printf = 0x80064AA0;
+_Putfld = 0x80065020;
+sprintf = 0x800654F0;
+proutSprintf = 0x80065548;
+osCreateMesgQueue = 0x80065580;
+osJamMesg = 0x800655B0;
+osRecvMesg = 0x800656F0;
+osSendMesg = 0x80065820;
+osSetEventMesg = 0x80065950;
+osGetCount = 0x80065A00;
+osSpTaskLoad = 0x80065A10;
+osSpTaskStartGo = 0x80065C1C;
+osSpTaskYield = 0x80065C50;
+osSpTaskYielded = 0x80065C70;
+osSiRawStartDma = 0x80065CC0;
+osSiCreateAccessQueue = 0x80065D70;
+osSiGetAccess = 0x80065DC4;
+osSiRelAccess = 0x80065E30;
+osCreateThread = 0x80065E60;
+osGetThreadPri = 0x80065F30;
+osSetThreadPri = 0x80065F50;
+osStartThread = 0x80066020;
+osStopThread = 0x80066140;
+osDequeueThread = 0x80066200;
+osYieldThread = 0x80066240;
+osGetActiveQueue = 0x80066290;
+osGetTime = 0x800662A0;
+osSetTime = 0x80066330;
+osSetTimer = 0x80066350;
+osTimerServicesInit = 0x80066480;
+osTimerInterrupt = 0x800664D4;
+osSetTimerIntr = 0x80066610;
+osInsertTimer = 0x80066690;
+osMapTLB = 0x800667A0;
+osProbeTLB = 0x80066860;
+osUnmapTLB = 0x80066920;
+osUnmapTLBAll = 0x80066960;
+osViGetCurrentFramebuffer = 0x800669B0;
+osViGetNextFramebuffer = 0x800669F0;
+osViGetCurrentMode = 0x80066A30;
+osCreateViManager = 0x80066A70;
+viMgrMain = 0x80066C10;
+osViSetEvent = 0x80066DB0;
+osViSetMode = 0x80066E10;
+osViSetSpecialFeatures = 0x80066E60;
+osViSetYScale = 0x80066FD0;
+osViSwapBuffer = 0x80067020;
+osViSwapContext = 0x80067070;
+osViBlack = 0x80067380;
+osViRepeatLine = 0x800673E0;
+guMtxIdent = 0x80067440;
+guMtxIdentF = 0x800674A0;
+guMtxF2L = 0x80067500;
+guMtxL2F = 0x80067580;
+guMtxCatF = 0x80067600;
+guScale = 0x80067700;
+guScaleF = 0x800677C0;
+guTranslate = 0x80067820;
+guTranslateF = 0x80067900;
+guMtxCat = 0x80067960;
+guMtxXFML = 0x800679E0;
+guMtxXFMF = 0x80067A70;
+guRotateF = 0x80067B20;
+guRotate = 0x80067C80;
+__osMotorAccess = 0x80067E00;
+osMotorInit = 0x80067F44;
+osPfsAllocateFile = 0x80068190;
+osPfsDeclearPage = 0x8006849C;
+osPfsDeleteFile = 0x800685C0;
+osPfsReleasePages = 0x8006876C;
+osPfsReadWriteFile = 0x800687E0;
+osPfsFileState = 0x80068C20;
+osPfsFindFile = 0x80068DC0;
+osPfsFreeBlocks = 0x80068F80;
+osPfsNumFiles = 0x80069090;
+osPfsInitPak = 0x80069190;
+osPfsCheckRamArea = 0x80069388;
+osPfsRepairId = 0x80069460;
+osPfsGetStatus = 0x800694C0;
+osPfsRequestOneChannel = 0x800695B0;
+osPfsGetOneChannelData = 0x80069644;
+osPfsSelectBank = 0x800696D0;
+osSumcalc = 0x80069740;
+osIdCheckSum = 0x80069774;
+osRepairPackId = 0x800697B8;
+osCheckPackId = 0x80069AA4;
+osGetId = 0x80069C08;
+osCheckId = 0x80069DD4;
+osPfsRWInode = 0x80069E8C;
+osContRamRead = 0x8006A1D0;
+osContRamWrite = 0x8006A3C0;
+osAfterPreNMI = 0x8006A630;
+osInitialize = 0x8006A708;
+osExceptionPreamble = 0x8006AA00;
+func_8006AA34 = 0x8006AA34; // !
+ai = 0x8006AD64;
+si = 0x8006AD90;
+dp = 0x8006AE0C;
+send_mesg = 0x8006AF7C; // !
+handle_CPU = 0x8006B038; // !
+osEnqueueAndYield = 0x8006B06C; // !
+osEnqueueThread = 0x8006B174; // !
+osPopThread = 0x8006B1BC; // !
+osDispatchThread = 0x8006B1D4; // !
+osDispatchThreadSave = 0x8006B1F4;
+__osDisableInt = 0x8006B360;
+__osRestoreInt = 0x8006B3D0;
+osSetGlobalIntMask = 0x8006B3F0;
+osResetGlobalIntMask = 0x8006B430;
+osPiRawStartDma = 0x8006B480;
+osPiGetCmdQueue = 0x8006B550;
+osEPiRawReadIo = 0x8006B570;
+osEPiRawWriteIo = 0x8006B6E0;
+osAiDeviceBusy = 0x8006B850;
+bcmp = 0x8006B870;
+_Litob = 0x8006B980;
+_Ldtob = 0x8006BBD0;
+_Ldunscale = 0x8006C01C;
+_Genld = 0x8006C0B4;
+osGetCause = 0x8006C660;
+osGetSR = 0x8006C670;
+osSetCompare = 0x8006C680;
+osSetFpcCsr = 0x8006C690;
+osSetSR = 0x8006C6A0;
+osSetWatchLo = 0x8006C6B0;
+osSpDeviceBusy = 0x8006C6C0;
+osSpGetStatus = 0x8006C6E0;
+osSpSetStatus = 0x8006C6F0;
+osSpSetPc = 0x8006C700;
+osSpRawStartDma = 0x8006C730;
+osSiRawReadIo = 0x8006C7C0;
+osSiRawWriteIo = 0x8006C810;
+osContAddressCrc = 0x8006C860;
+osContDataCrc = 0x8006C8CC;
+osDestroyThread = 0x8006C950;
+osMapTLBRdb = 0x8006CA30;
+osViInit = 0x8006CA90;
+osViGetCurrentContext = 0x8006CBA0;
+guNormalize = 0x8006CBC0;
+osPfsChecker = 0x8006CC20;
+corrupted_init = 0x8006D080;
+corrupted = 0x8006D1D8;
+osPfsIsPlug = 0x8006D340;
+osPfsRequestData = 0x8006D4BC;
+osPfsGetInitData = 0x8006D560;
+ldiv = 0x8006D620;
+lldiv = 0x8006D6A4;
+osSiDeviceBusy = 0x8006D7E0;
+strcpy = 0x8006ED40;
+strcmp = 0x8006ED70;
+memset = 0x8006EDB0;
+decode_yay0 = 0x8006EDF0;
+osFlashInit = 0x8006EF68;
+osFlashReadStatus = 0x8006F0B8;
+osFlashReadId = 0x8006F184;
+osFlashClearStatus = 0x8006F29C;
+osFlashAllErase = 0x8006F308;
+osFlashSectorErase = 0x8006F424;
+osFlashWriteBuffer = 0x8006F550;
+osFlashWriteArray = 0x8006F61C;
+osFlashReadArray = 0x8006F75C;
+fx_walk_large = 0x8006FAD0;
+fx_walk_normal = 0x8006FB30;
+fx_emote = 0x8006FE90;
+fx_sweat = 0x80070790;
+fx_sleep_bubble = 0x800707F0;
+load_battle = 0x80072C90;
+setup_demo_player = 0x80072D2C;
+load_demo_battle = 0x80072E14;
+EnemyNpcHit = 0x80077F70;
+EnemyNpcDefeat = 0x8007809C;
+D_80078DB0 = 0x80078DB0;
+D_80078DB4 = 0x80078DB4;
+gEffectTable = 0x8007F214;
+gAreas = 0x800934F0;
+gBattleState = 0x800DC068;
+test_below_player = 0x800DDFD0;
+trace_below_player = 0x800DE54C;
+collision_check_above = 0x800DE7E4;
+trace_above_player = 0x800DEA08;
+do_lateral_collision = 0x800DEC04;
+test_player_lateral = 0x800DF460;
+update_player = 0x800DF740;
+check_input_use_partner = 0x800DFA00;
+clear_player_status = 0x800DFC50;
+enable_player_shadow = 0x800E00B0;
+disable_player_shadow = 0x800E00E4;
+disable_player_static_collisions = 0x800E0114;
+enable_player_static_collisions = 0x800E0140;
+disable_player_input = 0x800E0178;
+enable_player_input = 0x800E01A4;
+render_player = 0x800E1138;
+render_player_model = 0x800E1168;
+appendGfx_player = 0x800E12F4;
+appendGfx_player_spin = 0x800E1704;
+update_player_shadow = 0x800E1BC4;
+update_player_input = 0x800E1F90;
+input_to_move_vector = 0x800E2304;
+move_player = 0x800E2778;
+collision_main_above = 0x800E27E0;
+update_fall_state = 0x800E2D18;
+gravity_use_jump_parms = 0x800E2FD0;
+gravity_use_fall_parms = 0x800E306C;
+phys_player_land = 0x800E3278;
+integrate_gravity = 0x800E3448;
+collision_main_lateral = 0x800E363C;
+collision_check_player_intersecting_world = 0x800E4308;
+check_input_midair_jump = 0x800E4FCC;
+get_current_partner_id = 0x800E5088;
+save_ground_pos = 0x800E54E0;
+set_action_state = 0x800E5DA4;
+update_locomotion_state = 0x800E5F68;
+start_falling = 0x800E5FD0;
+start_bounce_a = 0x800E6034;
+start_bounce_b = 0x800E608C;
+check_input_hammer = 0x800E60E0;
+check_input_jump = 0x800E6160;
+check_input_spin = 0x800E6268;
+make_disguise_npc = 0x800E657C;
+can_pause = 0x800E69DC;
+setup_partner_popup = 0x800E6B78;
+setup_item_popup = 0x800E6C44;
+check_input_open_menus = 0x800E6CE4;
+check_input_status_menu = 0x800E728C;
+clear_player_data = 0x800E73A0;
+get_player_data = 0x800E7564;
+add_item = 0x800E7574;
+get_item_count = 0x800E75EC;
+get_item_empty_count = 0x800E7620;
+find_item = 0x800E7644;
+sort_items = 0x800E76CC;
+add_badge = 0x800E773C;
+store_item = 0x800E77C4;
+get_stored_count = 0x800E7814;
+get_stored_empty_count = 0x800E7848;
+enforce_hpfp_limits = 0x800E786C;
+initialize_status_menu = 0x800E7934;
+status_menu_draw_number = 0x800E7CA4;
+status_menu_draw_stat = 0x800E7E34;
+update_status_menu = 0x800E80B4;
+coin_counter_draw_content = 0x800E92D8;
+update_coin_counter = 0x800E93DC;
+show_coin_counter = 0x800E9518;
+hide_coin_counter = 0x800E9698;
+ShowCoinCounter = 0x800E96F8;
+draw_status_ui = 0x800E973C;
+open_status_menu_long = 0x800E9760;
+open_status_menu_short = 0x800E978C;
+is_status_menu_visible = 0x800E9910;
+status_menu_start_blinking_hp = 0x800E9920;
+status_menu_stop_blinking_hp = 0x800E9964;
+status_menu_start_blinking_fp = 0x800E998C;
+status_menu_stop_blinking_fp = 0x800E99D0;
+status_menu_start_blinking_coins = 0x800E99F4;
+status_menu_stop_blinking_coins = 0x800E9A38;
+status_menu_start_blinking_sp = 0x800E9A60;
+status_menu_stop_blinking_sp = 0x800E9A94;
+status_menu_start_blinking_sp_bars = 0x800E9AB8;
+status_menu_start_blinking_starpoints = 0x800E9AE4;
+status_menu_stop_blinking_starpoints = 0x800E9B0C;
+decrement_status_menu_disabled = 0x800E9B30;
+increment_status_menu_disabled = 0x800E9B54;
+sync_status_menu = 0x800E9B6C;
+reset_status_menu = 0x800E9BB0;
+is_ability_active = 0x800E9D48;
+is_partner_ability_active = 0x800EA0B8;
+add_coins = 0x800EA0C0;
+add_star_points = 0x800EA128;
+add_star_pieces = 0x800EA170;
+increment_max_SP = 0x800EA1B4;
+set_max_SP = 0x800EA1D8;
+add_SP = 0x800EA1F4;
+recover_fp = 0x800EA264;
+recover_hp = 0x800EA2CC;
+subtract_hp = 0x800EA334;
+has_full_hp = 0x800EA360;
+has_full_fp = 0x800EA37C;
+add_fortress_keys = 0x800EA398;
+subtract_fortress_keys = 0x800EA3B8;
+get_fortress_key_count = 0x800EA3E4;
+use_consumable = 0x800EA400;
+remove_consumable = 0x800EA47C;
+is_current_partner_flying = 0x800EA5A4;
+partner_use_ability = 0x800EB314;
+partner_player_can_pause = 0x800EB3E0;
+partner_can_use_ability = 0x800EB42C;
+partner_reset_data = 0x800EB474;
+partner_initialize_data = 0x800EB580;
+partner_test_enemy_collision = 0x800EB5E4;
+partner_get_ride_script = 0x800EB638;
+partner_handle_before_battle = 0x800EB658;
+partner_handle_after_battle = 0x800EB6C4;
+partner_kill_ability_script = 0x800EB7CC;
+partner_suspend_ability_script = 0x800EB818;
+partner_resume_ability_script = 0x800EB860;
+enable_partner_walking = 0x800EB8A8;
+enable_partner_flying = 0x800ED310;
+update_player_move_history = 0x800ED4B8;
+enable_partner_ai = 0x800EF328;
+clear_partner_move_history = 0x800EF45C;
+draw_submenu_title = 0x800F4648;
+draw_box = 0x800F52E0;
+update_entities = 0x8010F6D0;
+update_shadows = 0x8010FA98;
+render_entities = 0x8010FEB4;
+render_shadows = 0x801100CC;
+update_entity_transform_matrix = 0x8011022C;
+update_shadow_transform_matrix = 0x80110374;
+update_entity_inverse_rotation_matrix = 0x801104A4;
+get_entity_by_index = 0x801105E8;
+get_shadow_by_index = 0x80110604;
+get_entity_list = 0x80110620;
+get_shadow_list = 0x8011064C;
+get_entity_type = 0x801106A4;
+delete_entity = 0x801106D0;
+delete_entity_and_unload_data = 0x80110790;
+entity_get_collision_flags = 0x801108B8;
+test_player_entity_aabb = 0x80110AAC;
+is_player_action_state = 0x80110BB0;
+load_area_specific_entity_data = 0x80110C14;
+clear_entity_data = 0x80110CB8;
+is_entity_data_loaded = 0x8011115C; // !
+load_simple_entity_data = 0x801112A4;
+load_split_entity_data = 0x80111408;
+create_entity = 0x801118C4;
+create_shadow_from_data = 0x80111BD8;
+MakeEntity = 0x80111D38;
+AssignScript = 0x80111FB0;
+AssignAreaFlag = 0x80111FF8;
+AssignBlockFlag = 0x8011206C;
+AssignFlag = 0x801120B8;
+AssignPanelFlag = 0x80112114;
+AssignCrateFlag = 0x80112170;
+create_entity_shadow = 0x801121CC;
+create_shadow_type = 0x80112260;
+set_standard_shadow_scale = 0x8011285C;
+set_npc_shadow_scale = 0x80112900;
+set_peach_shadow_scale = 0x801129D4;
+NOP_state = 0x80112B90;
+_set_game_mode = 0x80112CA8;
+step_current_game_mode = 0x80112E78;
+render_ui = 0x80112F58;
+appendGfx_model = 0x80113090;
+load_tile_header = 0x80114D6C;
+get_model_property = 0x80115B0C;
+_load_model_textures = 0x80115B44;
+load_model_textures = 0x80115C24;
+clear_model_data = 0x80115D44;
+init_model_data = 0x80115FE8;
+calculate_model_sizes = 0x8011612C;
+render_models = 0x80116B90;
+appendGfx_model_group = 0x80117C94;
+get_model_from_list_index = 0x8011AD30;
+load_data_for_models = 0x8011AD48;
+load_model_transforms = 0x8011ADC8;
+get_model_list_index_from_tree_index = 0x8011B010;
+get_model_center_and_size = 0x8011B0EC;
+clone_model = 0x8011B6F0;
+enable_world_fog = 0x8011BB50;
+disable_world_fog = 0x8011BB64;
+set_world_fog_dist = 0x8011BB74;
+set_world_fog_color = 0x8011BB88;
+is_world_fog_enabled = 0x8011BBA4;
+get_world_fog_distance = 0x8011BBB4;
+get_world_fog_color = 0x8011BBD8;
+set_tex_panner = 0x8011BC14;
+set_main_pan_u = 0x8011BC1C;
+set_main_pan_v = 0x8011BC34;
+set_aux_pan_u = 0x8011BC4C;
+set_aux_pan_v = 0x8011BC64;
+set_background_color_blend = 0x8011BE5C;
+get_background_color_blend = 0x8011BE80;
+queue_render_task = 0x8011D910;
+play_model_animation = 0x80120148;
+clear_virtual_models = 0x80120BB0;
+init_virtual_models = 0x80120C58;
+load_virtual_model = 0x80120CE0;
+enable_entity_fog = 0x80122FEC;
+disable_entity_fog = 0x80123000;
+set_entity_fog_dist = 0x80123010;
+set_entity_fog_color = 0x80123028;
+is_entity_fog_enabled = 0x80123050;
+get_entity_fog_distance = 0x80123060;
+get_entity_fog_color = 0x8012307C;
+stub_dynamic_entity_delegate = 0x801230B0;
+clear_dynamic_entity_list = 0x801230B8;
+init_dynamic_entity_list = 0x80123114;
+bind_dynamic_entity_3 = 0x80123158;
+bind_dynamic_entity_7 = 0x8012323C;
+bind_dynamic_entity_B = 0x80123320;
+update_dynamic_entities = 0x80123404;
+render_dynamic_entities = 0x80123470;
+get_dynamic_entity = 0x8012363C;
+clear_character_set = 0x80123660;
+clear_printers = 0x80123674;
+load_font_data = 0x80123708;
+load_font = 0x80123734;
+update_messages = 0x801237D8;
+_update_message = 0x80123898;
+render_messages = 0x80124204;
+initialize_printer = 0x801256A4;
+dma_load_string = 0x80125804;
+load_message_to_buffer = 0x8012588C;
+load_string = 0x80125900;
+_load_string = 0x8012591C;
+load_message_to_printer = 0x80125A68;
+clamp_printer_coords = 0x80125AB8;
+cancel_message = 0x80125B08;
+set_message_images = 0x80125B2C;
+set_message_string = 0x80125B3C;
+set_message_value = 0x80125BE8;
+close_message = 0x80125C70;
+get_char_width = 0x80125DF4;
+get_string_properties = 0x80125F68;
+get_string_width = 0x80126474;
+draw_string = 0x801264EC;
+draw_digit = 0x801274C0;
+draw_number = 0x8012769C;
+_draw_message_box = 0x8012CC08;
+draw_coin_sparkles = 0x80130B0C;
+get_item_entity = 0x80130F58;
+clear_item_entity_data = 0x80130FF0;
+init_item_entity_list = 0x801310CC;
+make_item_entity = 0x801313F4;
+make_item_entity_nodelay = 0x80131A94;
+make_item_entity_delayed = 0x80131AC8;
+init_got_item = 0x80131B00;
+update_item_entities = 0x80131EEC;
+appendGfx_item_entity = 0x801321A4;
+draw_item_entities = 0x80132C80;
+render_item_entities = 0x80132E54;
+remove_item_entity_by_reference = 0x80133930;
+remove_item_entity_by_index = 0x801339FC;
+test_item_player_collision = 0x80133B0C;
+set_item_entity_flags = 0x80134148;
+clear_item_entity_flags = 0x80134188;
+set_item_entity_position = 0x8013420C;
+update_item_entity_collectable = 0x80134250;
+update_item_entity_static = 0x80135658;
+update_item_entity_temp = 0x801356DC;
+set_map_transition_effect = 0x801382A0;
+init_menu_icon_list = 0x80141300;
+create_icon = 0x801414A4;
+update_menu_icons = 0x80141610;
+render_menu_icon = 0x80142BFC;
+render_menu_icons = 0x801436B4;
+draw_menu_icon = 0x80144298;
+draw_icon_0 = 0x801447A8;
+draw_icon_1 = 0x801447C4;
+draw_icon_2 = 0x801447E0;
+set_menu_icon_script = 0x801447FC;
+get_menu_icon_script = 0x801448B0;
+get_menu_icon = 0x801448D4;
+free_icon = 0x801448F4;
+set_icon_render_pos = 0x80144984;
+get_icon_render_pos = 0x801449AC;
+set_icon_flags = 0x80144A00;
+clear_icon_flags = 0x80144A2C;
+icon_set_opacity = 0x80144EB0;
+icon_set_tint = 0x80144EFC;
+clear_saved_variables = 0x80145320;
+clear_area_flags = 0x80145390;
+clear_global_flag = 0x801453E0;
+set_global_flag = 0x80145450;
+get_global_flag = 0x801454BC;
+set_global_byte = 0x80145520;
+get_global_byte = 0x80145538;
+clear_area_flag = 0x8014554C;
+set_area_flag = 0x801455A0;
+get_area_flag = 0x801455F0;
+set_area_byte = 0x80145638;
+get_area_byte = 0x80145650;
+default_trigger_function_handler = 0x80145670;
+clear_trigger_data = 0x80145680;
+init_trigger_list = 0x80145728;
+create_trigger = 0x8014576C;
+update_triggers = 0x80145860;
+delete_trigger = 0x80145BF4;
+is_trigger_bound = 0x80145C6C;
+get_trigger_by_id = 0x80145CD0;
+load_map_bg = 0x80145D70;
+read_background_size = 0x80145E28;
+set_background_size = 0x80145E70;
+play_ambient_sounds = 0x80147368;
+set_ui_panel_properties = 0x80147CC8;
+_play_sound = 0x80149AB8;
+stop_sound = 0x80149C6C;
+play_sound = 0x80149CB4;
+play_sound_at_player = 0x80149CD8;
+play_sound_at_npc = 0x80149D08;
+play_sound_at_position = 0x80149D5C;
+get_default_variation_for_song = 0x8014A430;
+_set_music_track = 0x8014A7E0;
+set_music_track = 0x8014A918;
+transition_music_volume_to = 0x8014AC84;
+gSongArray = 0x8014F720;
+D_80156954 = 0x80156954;
+gMusicUnkVolume = 0x80159AE0;
+gMusicTargetVolume = 0x80159AE2;
+gMusicUnkVolume2 = 0x80159AE4;
+gMusicCurrentVolume = 0x80159AE6;
+gMusicPlayers = 0x80159AF0;
+gCollisionStatus = 0x8015A550;
+get_dpad_input_radial = 0x8023E000;
+initialize_battle = 0x8023E130;
+update_actor_shadows = 0x8023E404;
+update_battle_state = 0x8023E438;
+draw_main_battle_ui = 0x8023EA7C;
+draw_enemy_health_bars = 0x8023FFA0;
+update_starpoints_display = 0x802403BC;
+delete_actor = 0x80240BBC;
+delete_player_actor = 0x80240D68;
+begin_battle = 0x80241218;
+update_heroes_start_turn = 0x80242024;
+switch_to_player = 0x80242AC8;
+pause_set_cursor_opacity = 0x80242BA0; // seg_rom:0x135EE0
+update_end_player_turn = 0x80242BB0;
+pause_interp_cursor = 0x80242E6C;
+switch_to_partner = 0x80242F00;
+pause_interp_text_scroll = 0x80243418;
+pause_interp_vertical_scroll = 0x8024346C;
+pause_update_cursor = 0x802434DC; // seg_rom:0x135EE0
+pause_textbox_draw_contents = 0x80243570;
+pause_tutorial_draw_contents = 0x802437F4;
+switch_order = 0x80243918;
+pause_init = 0x80244060;
+pause_tutorial_input = 0x802442A0;
+pause_handle_input = 0x80244424;
+pause_cleanup = 0x80244708; // seg_rom:0x135EE0
+pause_get_total_equipped_bp_cost = 0x802447F4;
+pause_draw_rect = 0x80244858;
+pause_sort_item_list = 0x80244A4C;
+end_battle = 0x80244A50;
+pause_tabs_draw_invis = 0x80244B90;
+pause_tabs_draw_stats = 0x80244B98;
+pause_tabs_draw_badges = 0x80244CC0;
+pause_tabs_draw_items = 0x80244DE8;
+update_run_away = 0x80244F00;
+pause_tabs_draw_party = 0x80244F10;
+pause_tabs_draw_spirits = 0x80245038;
+pause_tabs_draw_map = 0x80245160;
+pause_tabs_init = 0x80245288;
+pause_tabs_handle_input = 0x80245354;
+pause_tabs_update = 0x802455BC;
+EnablePartnerBlur = 0x802456B8;
+DisablePartnerBlur = 0x802456D8;
+update_swap_partner = 0x802456F8;
+pause_tabs_cleanup = 0x80245930;
+pause_stats_draw_contents = 0x80245980;
+update_player_action = 0x80245AD0;
+update_player_change_turn = 0x80246450;
+pause_stats_init = 0x80246AC8;
+update_partner_action = 0x80246B34;
+pause_stats_handle_input = 0x80246B74;
+pause_stats_cleanup = 0x80246F94;
+pause_badges_comparator = 0x80246FE0;
+pause_badges_count_all = 0x80247054;
+pause_badges_count_equipped = 0x802470B0;
+pause_badges_get_pos_x = 0x8024710C;
+pause_badges_get_pos_y = 0x80247168;
+pause_badges_get_column = 0x802471D8;
+pause_badges_get_row = 0x80247220;
+pause_badges_is_visible = 0x80247270;
+pause_badges_scroll_offset_y = 0x80247298;
+pause_badges_scroll_offset_x = 0x802472A8;
+update_enemy_change_turn = 0x802472AC;
+pause_badges_try_remove = 0x802472B0;
+pause_badges_try_equip = 0x80247338;
+pause_badges_draw_bp_orbs = 0x80247458;
+pause_badges_draw_contents = 0x80247508;
+update_enemy_action = 0x80247570;
+pause_badges_load_badges = 0x80248D8C;
+pause_badges_init = 0x80248FC0;
+pause_badges_handle_input = 0x802490A8;
+pause_badges_update = 0x8024961C;
+pause_badges_cleanup = 0x80249758;
+pause_items_comparator = 0x802497B0;
+pause_items_get_pos_x = 0x802497D0;
+pause_items_get_pos_y = 0x80249828;
+pause_items_get_column = 0x80249898;
+pause_items_get_row = 0x802498E0;
+pause_items_is_visible = 0x80249930;
+pause_items_scroll_offset_y = 0x80249958;
+pause_items_scroll_offset_x = 0x80249968;
+pause_items_draw_contents = 0x80249970;
+pause_items_load_items = 0x8024A4DC;
+pause_items_init = 0x8024A714;
+pause_items_handle_input = 0x8024A7D8;
+pause_items_update = 0x8024AC54;
+pause_items_cleanup = 0x8024AD90;
+pause_partners_load_portrait = 0x8024ADE0;
+pause_partners_draw_contents = 0x8024AEF8;
+pause_partners_draw_title = 0x8024BBAC;
+pause_partners_draw_movelist = 0x8024BD38;
+pause_partners_draw_movelist_title = 0x8024C048;
+pause_partners_draw_movelist_flower = 0x8024C0A0;
+pause_partners_init = 0x8024C0E0;
+pause_partners_handle_input = 0x8024C338;
+pause_partners_update = 0x8024C7A4;
+pause_partners_cleanup = 0x8024C984;
+pause_spirits_draw_contents = 0x8024CA00;
+use_cam_preset = 0x8024CF34;
+pause_spirits_draw_title = 0x8024D294;
+pause_spirits_init = 0x8024D360;
+pause_spirits_handle_input = 0x8024D44C;
+pause_spirits_update = 0x8024D800;
+pause_spirits_cleanup = 0x8024D8D8;
+pause_map_draw_border_arrows = 0x8024DA28;
+pause_map_draw_contents = 0x8024DB1C;
+cam_target_actor = 0x8024E43C;
+move_cam_over = 0x8024E4D8;
+set_cam_target_pos = 0x8024E520;
+pause_map_draw_title = 0x8024E54C;
+set_cam_zoom = 0x8024E594;
+add_cam_zoom = 0x8024E5B4;
+set_cam_zoffset = 0x8024E5E0;
+unfreeze_cam = 0x8024E600;
+pause_map_init = 0x8024E604;
+UseCamPreset = 0x8024E61C;
+pause_map_handle_input = 0x8024E878;
+SetBattleCamTarget = 0x8024E90C;
+SetBattleCamOffsetZ = 0x8024EA58;
+AddBattleCamOffsetZ = 0x8024EA98;
+SetBattleCamYaw = 0x8024EAE4;
+BattleCamTargetActor = 0x8024EB24;
+MoveBattleCamOver = 0x8024EC08;
+SetBattleCamZoom = 0x8024EC6C;
+AddBattleCamZoom = 0x8024ECAC;
+pause_map_update = 0x8024ECB0;
+FreezeBattleCam = 0x8024ED78;
+pause_map_cleanup = 0x8024EE2C;
+pause_get_menu_string = 0x8024EE80;
+pause_draw_menu_label = 0x8024EE94;
+create_popup = 0x8024EF68;
+show_battle_message = 0x8024F960;
+show_variable_battle_message = 0x8024FA04;
+is_popup_displayed = 0x8024FAB4;
+set_popup_duration = 0x8024FAC4;
+close_action_command_instruction_popup = 0x8024FB0C;
+show_message_popup = 0x80250EA4;
+ShowMessageBox = 0x802512B4;
+ShowVariableMessageBox = 0x8025130C;
+IsMessageBoxDisplayed = 0x80251384;
+WaitForMessageBoxDone = 0x802513CC;
+ForceCloseMessageBox = 0x802513F0;
+SetMessageBoxDuration = 0x80251408;
+calc_item_check_hit = 0x802515D0;
+calc_item_damage_enemy = 0x802516E8;
+ItemDamageEnemy = 0x80252728;
+ItemAfflictEnemy = 0x80252924;
+ItemCheckHit = 0x80252D40;
+ActorSpeak = 0x80252F30;
+EndActorSpeech = 0x802532D0;
+ShowBattleChoice = 0x80253538;
+OverrideBattleDmaDest = 0x802535F8;
+LoadBattleDmaData = 0x80253624;
+PlaySoundAtActor = 0x8025385C;
+PlaySoundAtPart = 0x802538D0;
+PlayLoopingSoundAtActor = 0x80253974;
+StopLoopingSoundAtActor = 0x80253A18;
+SetForegroundModelsVisibleUnsafe = 0x80253AA8;
+SetForegroundModelsVisible = 0x80253AEC;
+MakeStatusField = 0x80253B94;
+is_actor_hp_bar_visible = 0x80253C20;
+is_actortype_hpbar_visible = 0x80253C9C;
+save_tattle_flags = 0x80253D10;
+load_tattle_flags = 0x80253E78;
+MultiplyByActorScale = 0x80253FDC;
+MultiplyVec2ByActorScale = 0x80254048;
+MultiplyVec3ByActorScale = 0x802540DC;
+ApplyShrinkFromOwner = 0x80254198;
+StartRumble = 0x80254218;
+mtx_mirror_y = 0x80254288;
+enable_actor_blur = 0x802542CC;
+disable_actor_blur = 0x8025455C;
+reset_actor_blur = 0x802545AC;
+enable_partner_blur = 0x80254644;
+disable_partner_blur = 0x80254668;
+reset_partner_blur = 0x8025468C;
+enable_player_blur = 0x802546D4;
+disable_player_blur = 0x80254914;
+update_actor_shadow = 0x802559BC;
+update_enemy_shadows = 0x80255F5C;
+update_hero_shadows = 0x80255FAC;
+update_player_actor_shadow = 0x80257BAC;
+_remove_part_decoration = 0x8025D03C;
+activate_defend_command = 0x80260B04;
+HasMerleeCastsLeft = 0x802619C8;
+FXRecoverHP = 0x80261BA8;
+FXRecoverFP = 0x80261C68;
+IncrementPlayerHP = 0x80261D28;
+IncrementPlayerFP = 0x80261D60;
+create_target_list = 0x80262240;
+player_create_target_list = 0x8026302C;
+enemy_create_target_list = 0x80263048;
+count_power_plus = 0x80263B10;
+deduct_current_move_fp = 0x80263BC8;
+set_animation = 0x80263CFC;
+set_animation_rate = 0x80263EB8;
+set_actor_yaw = 0x80263F68;
+set_part_yaw = 0x80263F9C;
+add_xz_vec3f = 0x80264128;
+add_xz_vec3f_copy1 = 0x802641C0;
+add_xz_vec3f_copy2 = 0x80264258;
+play_movement_dust_effects = 0x802642F0;
+get_actor_part = 0x8026445C;
+load_player_actor = 0x802644A4;
+load_partner_actor = 0x80264B74;
+create_actor = 0x802653A4;
+lookup_defense = 0x80265E44;
+lookup_status_chance = 0x80265E98;
+lookup_status_duration_mod = 0x80265EEC;
+inflict_status = 0x80265F40;
+inflict_partner_ko = 0x80266254;
+get_defense = 0x802662BC;
+show_damage_popup = 0x802665AC;
+try_inflict_status = 0x80266B78;
+inflict_status_set_duration = 0x80266CF0;
+add_part_decoration = 0x80267114;
+add_actor_decoration = 0x80267190;
+remove_part_decoration = 0x80267218;
+remove_actor_decoration = 0x80267234;
+heroes_is_ability_active = 0x802672AC;
+create_part_shadow = 0x8026731C;
+remove_part_shadow = 0x802673A0;
+create_part_shadow_by_ref = 0x802673E4;
+remove_player_buffs = 0x80267454;
+reset_all_actor_sounds = 0x80267A9C;
+hide_foreground_models_unsafe = 0x80267BDC;
+show_foreground_models_unsafe = 0x80267C48;
+hide_foreground_models = 0x80267CB4;
+show_foreground_models = 0x80267D28;
+StartRumbleWithParams = 0x80267D9C;
+start_rumble_type = 0x80267DF4;
+LoadItemScript = 0x80267ED0;
+LoadFreeItemScript = 0x8026801C;
+LoadMoveScript = 0x80268130;
+LoadActionCommand = 0x802681C0;
+check_block_input = 0x80268ECC;
+GetActionSuccess = 0x80269294;
+SetActionSuccess = 0x802692C0;
+CloseActionCommandInfo = 0x80269410;
+GetActionSuccessCopy = 0x802694F8;
+GetBlockResult = 0x8026957C;
+count_targets = 0x80269660;
+get_nearest_home_index = 0x80269698;
+set_goal_pos_to_part = 0x80269754;
+set_part_goal_to_actor_part = 0x802699D8;
+set_actor_current_position = 0x80269C24;
+set_part_absolute_position = 0x80269C70;
+set_actor_home_position = 0x80269D20;
+get_actor = 0x80269D6C;
+LoadBattleSection = 0x80269DE4;
+GetBattlePhase = 0x80269E28;
+GetLastElement = 0x80269E54;
+SetGoalToHome = 0x80269EC4;
+SetIdleGoalToHome = 0x80269F2C;
+SetGoalToIndex = 0x80269F94;
+GetIndexFromPos = 0x8026A05C;
+GetIndexFromHome = 0x8026A0D4;
+CountPlayerTargets = 0x8026A14C;
+ForceHomePos = 0x8026A1EC;
+SetHomePos = 0x8026A2D0;
+SetGoalToTarget = 0x8026A3A8;
+SetPartGoalToTarget = 0x8026A404;
+SetGoalToFirstTarget = 0x8026A49C;
+SetGoalPos = 0x8026A510;
+SetIdleGoal = 0x8026A62C;
+AddGoalPos = 0x8026A748;
+GetGoalPos = 0x8026A820;
+GetIdleGoal = 0x8026A8EC;
+GetPartTarget = 0x8026A9B8;
+GetActorPos = 0x8026AAA8;
+GetPartOffset = 0x8026AB74;
+GetPartPos = 0x8026AC88;
+GetHomePos = 0x8026AD74;
+SetActorPos = 0x8026AE40;
+SetPartPos = 0x8026AF18;
+SetEnemyTargetOffset = 0x8026B0A0;
+SetAnimation = 0x8026B1B0;
+GetAnimation = 0x8026B238;
+SetAnimationRate = 0x8026B2D0;
+SetActorYaw = 0x8026B358;
+GetActorYaw = 0x8026B3C8;
+SetPartYaw = 0x8026B438;
+GetPartYaw = 0x8026B4C0;
+SetActorJumpGravity = 0x8026B55C;
+SetActorIdleJumpGravity = 0x8026B5D8;
+SetActorSpeed = 0x8026B654;
+SetActorIdleSpeed = 0x8026B6D0;
+SetPartJumpGravity = 0x8026B74C;
+SetPartMoveSpeed = 0x8026B7EC;
+SetJumpAnimations = 0x8026B88C;
+AddActorPos = 0x8026B92C;
+SetActorDispOffset = 0x8026BA04;
+GetPartDispOffset = 0x8026BAE8;
+SetPartDispOffset = 0x8026BC38;
+AddPartDispOffset = 0x8026BD88;
+GetActorVar = 0x8026BFB4;
+SetActorVar = 0x8026C044;
+AddActorVar = 0x8026C0D4;
+GetPartMovementVar = 0x8026C170;
+SetPartMovementVar = 0x8026C22C;
+AddPartMovementVar = 0x8026C2E8;
+SetActorRotation = 0x8026C3AC;
+SetActorRotationOffset = 0x8026C4AC;
+GetActorRotation = 0x8026C56C;
+SetPartRotation = 0x8026C634;
+SetPartRotationOffset = 0x8026C740;
+GetPartRotation = 0x8026C828;
+SetActorScale = 0x8026C904;
+SetActorScaleModifier = 0x8026C9C4;
+GetActorScale = 0x8026CA84;
+SetPartScale = 0x8026CB4C;
+GetPartScale = 0x8026CC34;
+GetBattleFlags = 0x8026CD10;
+SetBattleFlagBits = 0x8026CD3C;
+GetBattleFlags2 = 0x8026CDA0;
+SetBattleFlagBits2 = 0x8026CDCC;
+SetActorFlags = 0x8026CE30;
+SetActorFlagBits = 0x8026CE8C;
+GetActorFlags = 0x8026CF20;
+SetPartFlags = 0x8026CF88;
+SetPartFlagBits = 0x8026D010;
+SetPartTargetFlags = 0x8026D0D0;
+SetPartTargetFlagBits = 0x8026D158;
+GetPartFlags = 0x8026D218;
+GetPartTargetFlags = 0x8026D2AC;
+SetPartEventFlags = 0x8026D340;
+SetPartEventBits = 0x8026D3C8;
+GetPartEventFlags = 0x8026D488;
+HPBarToHome = 0x8026D664;
+HPBarToCurrent = 0x8026D7A8;
+SummonEnemy = 0x8026DB64;
+GetOwnerID = 0x8026DE00;
+SetOwnerID = 0x8026DE28;
+ActorExists = 0x8026DE5C;
+SetBattleInputMask = 0x8026E050;
+SetBattleInputButtons = 0x8026E068;
+CheckButtonPress = 0x8026E098;
+CheckButtonHeld = 0x8026E0D0;
+CheckButtonDown = 0x8026E108;
+GetBattleState = 0x8026E140;
+PlayerCreateTargetList = 0x8026E2CC;
+EnemyCreateTargetList = 0x8026E310;
+InitTargetIterator = 0x8026E354;
+SetOwnerTarget = 0x8026E3A8;
+ChooseNextTarget = 0x8026E414;
+GetTargetListLength = 0x8026E864;
+GetOwnerTarget = 0x8026E8AC;
+GetAttackerActorID = 0x8026E974;
+GetDistanceToGoal = 0x8026E9FC;
+AddActorDecoration = 0x8026EE88;
+RemoveActorDecoration = 0x8026EF4C;
+ModifyActorDecoration = 0x8026EFF0;
+UseIdleAnimation = 0x8026F0EC;
+GetStatusFlags = 0x8026F230;
+RemovePlayerBuffs = 0x8026F44C;
+SetPartAlpha = 0x8026F470;
+CreatePartShadow = 0x8026F52C;
+RemovePartShadow = 0x8026F59C;
+SetBattleVar = 0x8026F638;
+GetBattleVar = 0x8026F694;
+ResetAllActorSounds = 0x8026F6EC;
+SetActorSounds = 0x8026F740;
+gPauseMenuStrings = 0x8026F778;
+ResetActorSounds = 0x8026F838;
+SetPartSounds = 0x8026FA00;
+SetActorType = 0x8026FB20;
+ShowShockEffect = 0x8026FBB0;
+GetActorAttackBoost = 0x8026FC04;
+GetActorDefenseBoost = 0x8026FC6C;
+BoostAttack = 0x8026FCD4;
+BoostDefense = 0x80270174;
+VanishActor = 0x80270614;
+ElectrifyActor = 0x8027095C;
+HealActor = 0x80270CA4;
+WaitForBuffDone = 0x8027114C;
+CopyBuffs = 0x80271160;
+dispatch_event_player = 0x80271658;
+dispatch_event_player_continue_turn = 0x802716E4;
+calc_player_test_enemy = 0x80271754;
+calc_player_damage_enemy = 0x80271944;
+dispatch_damage_event_player = 0x802731BC;
+dispatch_damage_event_player_0 = 0x8027337C;
+dispatch_damage_event_player_1 = 0x802733A8;
+GetMenuSelection = 0x802733C4;
+PlayerFallToGoal = 0x80273894;
+PlayerLandJump = 0x80273B04;
+PlayerRunToGoal = 0x80273C64;
+CancelablePlayerRunToGoal = 0x80273EFC;
+GetPlayerHP = 0x80274234;
+PlayerDamageEnemy = 0x80274260;
+PlayerPowerBounceEnemy = 0x802744A0;
+PlayerTestEnemy = 0x802746F0;
+DispatchDamagePlayerEvent = 0x8027491C;
+EnablePlayerBlur = 0x80274978;
+DidActionSucceed = 0x80276EB4;
+dispatch_event_general = 0x80276F8C;
+play_hit_sound = 0x80277004;
+dispatch_event_actor = 0x80277160;
+calc_enemy_test_target = 0x802771F8;
+calc_enemy_damage_target = 0x8027742C;
+dispatch_damage_event_actor = 0x802786D4;
+dispatch_damage_event_actor_0 = 0x802788F8;
+dispatch_damage_event_actor_1 = 0x80278914;
+BindTakeTurn = 0x80278930;
+PauseTakeTurn = 0x802789A4;
+ResumeTakeTurn = 0x80278A1C;
+BindIdle = 0x80278A94;
+EnableIdleScript = 0x80278B4C;
+BindHandleEvent = 0x80278C20;
+BindNextTurn = 0x80278C94;
+JumpToGoal = 0x80278D08;
+IdleJumpToGoal = 0x8027910C;
+JumpToGoalSimple2 = 0x80279420;
+JumpWithBounce = 0x80279728;
+LandJump = 0x80279AD4;
+FallToGoal = 0x80279BEC;
+RunToGoal = 0x80279E64;
+IdleRunToGoal = 0x8027A264;
+JumpPartTo = 0x8027A4E4;
+FallPartTo = 0x8027A854;
+LandJumpPart = 0x8027AB5C;
+RunPartTo = 0x8027ACAC;
+update_lerp_battle = 0x8027B0DC;
+FlyToGoal = 0x8027B624;
+IdleFlyToGoal = 0x8027BBB8;
+FlyPartTo = 0x8027BF38;
+GetLastEvent = 0x8027C4E0;
+SetTargetActor = 0x8027C548;
+SetEnemyHP = 0x8027C5C8;
+GetActorHP = 0x8027C6A0;
+GetEnemyMaxHP = 0x8027C748;
+RemoveActor = 0x8027C7B0;
+DropStarPoints = 0x8027C8A4;
+SetDefenseTable = 0x8027CA74;
+SetStatusTable = 0x8027CB08;
+SetIdleAnimations = 0x8027CB7C;
+EnemyDamageTarget = 0x8027CCB4;
+EnemyFollowupAfflictTarget = 0x8027CED4;
+EnemyTestTarget = 0x8027CFB8;
+DispatchDamageEvent = 0x8027D1BC;
+DispatchEvent = 0x8027D264;
+SetTargetOffset = 0x8027D380;
+EnableActorBlur = 0x8027D57C;
+AfflictActor = 0x8027D67C;
+GetEncounterState = 0x8027D7C4;
+YieldTurn = 0x8027D7F0;
+SetActorSize = 0x8027D810;
+GetActorSize = 0x8027D8E0;
+SetPartSize = 0x8027D970;
+GetOriginalActorType = 0x8027DA68;
+GetCurrentActorType = 0x8027DAD4;
+GetLastDamage = 0x8027DB3C;
+EnableActorGlow = 0x8027DBA4;
+WasStatusInflicted = 0x8027DC68;
+CopyStatusEffects = 0x8027DCBC;
+ClearStatusEffects = 0x8027DDA0;
+dispatch_event_partner = 0x8027DE80;
+dispatch_event_partner_continue_turn = 0x8027DF0C;
+calc_partner_test_enemy = 0x8027DF7C;
+calc_partner_damage_enemy = 0x8027E328;
+dispatch_damage_event_partner = 0x8027F9CC;
+dispatch_damage_event_partner_0 = 0x8027FB80;
+dispatch_damage_event_partner_1 = 0x8027FB9C;
+MakeOwnerTargetIndex = 0x8027FBB8;
+GetActorLevel = 0x8027FD48;
+PartnerDamageEnemy = 0x8027FDB4;
+PartnerAfflictEnemy = 0x80280004;
+PartnerPowerBounceEnemy = 0x80280270;
+PartnerTestEnemy = 0x802804D0;
+DeletePartner = 0x802807A8;
+GetDamageIntensity = 0x80280840;
+ActorAddMovePos = 0x80280880;
+LoadStarPowerScript = 0x80280950;
+BtlPutPartnerAway = 0x80280A34;
+BtlBringPartnerOut = 0x80280B6C;
+draw_shop_items = 0x80281524;
+MakeShop = 0x80281860;
+MakeShopOwner = 0x80281BD8;
+MakeDoorAdvanced = 0x80281CAC;
+CheckActionState = 0x802831DC;
+CreatePushBlockGrid = 0x802832E0;
+SetPushBlock = 0x8028347C;
+GetPushBlock = 0x802835C0;
+GetGridIndexFromPos = 0x802836B8;
+SetPushBlockFallEffect = 0x802837AC;
+TeleportPartnerToPlayer = 0x8028387C;
+gBattleDmaDest = 0x80284000;
+MarioEnterStage = 0x80284A40;
+PeachEnterStage = 0x80284D04;
+PlayerScriptDispatcher = 0x80284EBC;
+PeachScriptDispatcher = 0x80285010;
+ExecutePlayerAction = 0x8028505C;
+ExecutePeachAction = 0x80285174;
+PlayerFirstStrike = 0x802851FC;
+StartDefend = 0x802852B8;
+HandleEvent_Player = 0x802852D4;
+EnterWalk = 0x80285960;
+EnterWalkShort = 0x80285A60;
+EnterSavePoint = 0x80285CB0;
+ExitWalk = 0x80285CF4;
+ExitSingleDoor = 0x80285DAC;
+EnterSingleDoor = 0x80285DD4;
+ExitDoubleDoor = 0x80285E4C;
+EnterDoubleDoor = 0x80285E74;
+RunAwayStart = 0x802868BC;
+RunAwayFail = 0x80287078;
+RunAwayReset = 0x80287128;
+PlayEatFX = 0x802878D0;
+PlayDrinkFX = 0x80287948;
+UseLifeShroom = 0x802879C0;
+MerleeRunOut = 0x80288398;
+MerleeAttackBonus = 0x80288400;
+MerleeDefenseBonus = 0x8028870C;
+MerleeExpBonus = 0x80288A58;
+PlayerHappy = 0x80288D64;
+DoDizzyAttack = 0x8028907C;
+RegainAbility = 0x80289110;
+UseMystery = 0x80293E40;
+gMoveScriptTable = 0x80293E80;
+DoSleepHit = 0x802945E0;
+DoDizzyHit = 0x802945FC;
+DoParalyzeHit = 0x80294618;
+DoPoisonHit = 0x80294634;
+DoStopHit = 0x80294650;
+DoFreezeHit = 0x8029466C;
+DoShinkHit = 0x802946B8;
+ForceNextTarget = 0x80298BF0;
+DoNormalHit = 0x80299044;
+DoBurnHit = 0x8029A0D0;
+DoShockHit = 0x8029A6FC;
+DoImmune = 0x8029AC70;
+DoDeath = 0x8029AEC0;
+DoScareAway = 0x8029B22C;
+DoSpinSmashHit = 0x8029B998;
+DoJumpBack = 0x8029BD70;
+DoReturnHome = 0x8029BEB8;
+DoRecover = 0x8029BFA0;
+DoAirLift = 0x8029C37C;
+DoBlowAway = 0x8029C4A8;
+gSpeakingActorPrintCtx = 0x8029FA60;
+gSpeakingActorPrintIsDone = 0x8029FA68;
+gSpeakingActorTalkAnim = 0x8029FA6C;
+gSpeakingActorIdleAnim = 0x8029FA70;
+gSpeakingActor = 0x8029FA74;
+gSpeakingActorPart = 0x8029FA78;
+draw_battle_wheel = 0x802A1C54;
+can_switch_to_player = 0x802A5818;
+update_player_menu = 0x802A5988;
+update_partner_menu = 0x802A81C8;
+func_802A91F8 = 0x802A91F8;
+func_802A9208 = 0x802A9208;
+func_802A9228 = 0x802A9228;
+func_802A9234 = 0x802A9234;
+func_802A9254 = 0x802A9254;
+func_802A9278 = 0x802A9278;
+func_802A928C = 0x802A928C;
+func_802A9294 = 0x802A9294;
+func_802A9298 = 0x802A9298;
+func_802A92A0 = 0x802A92A0;
+func_802A92D4 = 0x802A92D4;
+func_802A92DC = 0x802A92DC;
+func_802A92F0 = 0x802A92F0;
+func_802A9310 = 0x802A9310;
+func_802A936C = 0x802A936C;
+func_802A9378 = 0x802A9378;
+func_802A948C = 0x802A948C;
+func_802A94A4 = 0x802A94A4;
+func_802A94D8 = 0x802A94D8;
+func_802A9544 = 0x802A9544;
+func_802A955C = 0x802A955C;
+func_802A9590 = 0x802A9590;
+func_802A959C = 0x802A959C;
+func_802A9634 = 0x802A9634;
+func_802A963C = 0x802A963C;
+func_802A9664 = 0x802A9664;
+func_802A96B8 = 0x802A96B8;
+func_802A96DC = 0x802A96DC;
+func_802A96EC = 0x802A96EC;
+func_802A96F4 = 0x802A96F4;
+func_802A9708 = 0x802A9708;
+func_802A9718 = 0x802A9718;
+func_802A9720 = 0x802A9720;
+func_802A973C = 0x802A973C;
+func_802A9744 = 0x802A9744;
+func_802A9764 = 0x802A9764;
+func_802A97AC = 0x802A97AC;
+func_802A97BC = 0x802A97BC;
+func_802A97CC = 0x802A97CC;
+func_802A97F8 = 0x802A97F8;
+func_802A97FC = 0x802A97FC;
+func_802A9810 = 0x802A9810;
+func_802A981C = 0x802A981C;
+func_802A9834 = 0x802A9834;
+func_802A984C = 0x802A984C;
+func_802A9894 = 0x802A9894;
+func_802A9898 = 0x802A9898;
+func_802A98B0 = 0x802A98B0;
+func_802A98D0 = 0x802A98D0;
+func_802A98DC = 0x802A98DC;
+func_802A98E0 = 0x802A98E0;
+func_802A9914 = 0x802A9914;
+func_802A992C = 0x802A992C;
+func_802A9990 = 0x802A9990;
+func_802A99D4 = 0x802A99D4;
+func_802A9A30 = 0x802A9A30;
+func_802A9A54 = 0x802A9A54;
+func_802AA014 = 0x802AA014;
+func_802AA0D8 = 0x802AA0D8;
+update_targeting_enemies = 0x802AA688;
+func_802AB330 = 0x802AB330;
+func_802AB338 = 0x802AB338;
+func_802B71D4 = 0x802B71D4;
+func_802B71E8 = 0x802B71E8;
+func_802BD7DC = 0x802BD7DC;
+func_802BE070 = 0x802BE070;
+sort_scripts = 0x802C3000;
+find_script_labels = 0x802C3148;
+clear_script_list = 0x802C31DC;
+init_script_list = 0x802C32EC;
+start_script = 0x802C33E0;
+start_script_in_group = 0x802C35D0;
+start_child_script = 0x802C37C8;
+restart_script = 0x802C3D04;
+update_scripts = 0x802C3D74;
+kill_script = 0x802C3F3C;
+kill_script_by_ID = 0x802C40AC;
+kill_all_scripts = 0x802C4114;
+does_script_exist = 0x802C4164;
+does_script_exist_by_ref = 0x802C41A4;
+set_script_priority = 0x802C41D8;
+set_script_timescale = 0x802C41E0;
+set_global_timespace = 0x802C4200;
+get_global_timespace = 0x802C420C;
+set_script_group = 0x802C4218;
+bind_trigger = 0x802C4220;
+bind_trigger_1 = 0x802C42A8;
+suspend_group_script = 0x802C42D8;
+resume_group_script = 0x802C437C;
+suspend_all_script = 0x802C4420;
+resume_all_script = 0x802C448C;
+suspend_group_script_index = 0x802C44F8;
+resume_group_script_index = 0x802C4570;
+suspend_all_group = 0x802C45E8;
+resume_all_group = 0x802C4648;
+suspend_group_others = 0x802C46A8;
+resume_group_others = 0x802C471C;
+get_script_by_index = 0x802C4790;
+get_script_by_id = 0x802C47A8;
+set_script_flags = 0x802C47E8;
+clear_script_flags = 0x802C4880;
+fixed_var_to_float = 0x802C4920;
+float_to_fixed_var = 0x802C496C;
+si_handle_return = 0x802C4998;
+si_handle_label = 0x802C49B8;
+si_handle_goto = 0x802C49C0;
+si_handle_loop = 0x802C4A00;
+si_handle_end_loop = 0x802C4A48;
+si_handle_break_loop = 0x802C4B0C;
+si_handle_wait = 0x802C4B5C;
+si_handle_wait_seconds = 0x802C4BB8;
+si_handle_if_equal = 0x802C4C40;
+si_handle_if_not_equal = 0x802C4CA0;
+si_handle_if_less = 0x802C4D00;
+si_handle_if_greater = 0x802C4D64;
+si_handle_if_less_equal = 0x802C4DC8;
+si_handle_if_greater_equal = 0x802C4E2C;
+si_handle_if_AND = 0x802C4E90;
+si_handle_if_not_AND = 0x802C4EE8;
+si_handle_else = 0x802C4F40;
+si_handle_end_if = 0x802C4F6C;
+si_handle_switch = 0x802C4F74;
+si_handle_switch_const = 0x802C4FE4;
+si_handle_case_equal = 0x802C5030;
+si_handle_case_not_equal = 0x802C50BC;
+si_handle_case_less = 0x802C5148;
+si_handle_case_less_equal = 0x802C51D8;
+si_handle_case_greater = 0x802C5268;
+si_handle_case_greater_equal = 0x802C52F8;
+si_handle_case_range = 0x802C5388;
+si_handle_case_default = 0x802C5444;
+si_handle_case_AND = 0x802C549C;
+si_handle_case_equal_OR = 0x802C5518;
+si_handle_case_equal_AND = 0x802C55B8;
+si_handle_end_case_group = 0x802C565C;
+si_handle_break_case = 0x802C56D4;
+si_handle_end_switch = 0x802C5718;
+si_handle_set_var = 0x802C5744;
+si_handle_set_const = 0x802C5790;
+si_handle_set_float = 0x802C57B8;
+si_handle_add = 0x802C5804;
+si_handle_subtract = 0x802C5868;
+si_handle_multiply = 0x802C58CC;
+si_handle_divide = 0x802C5934;
+si_handle_mod = 0x802C59BC;
+si_handle_addF = 0x802C5A84;
+si_handle_subtractF = 0x802C5AEC;
+si_handle_multiplyF = 0x802C5B54;
+si_handle_divideF = 0x802C5BC0;
+si_handle_set_int_buffer_ptr = 0x802C5C28;
+si_handle_set_float_buffer_ptr = 0x802C5C5C;
+si_handle_get_1_word = 0x802C5C90;
+si_handle_get_2_word = 0x802C5CC4;
+si_handle_get_3_word = 0x802C5D2C;
+si_handle_get_4_word = 0x802C5DB4;
+si_handle_get_Nth_word = 0x802C5E5C;
+si_handle_get_1_float = 0x802C5EB4;
+si_handle_get_2_float = 0x802C5F0C;
+si_handle_get_3_float = 0x802C5F9C;
+si_handle_get_4_float = 0x802C605C;
+si_handle_get_Nth_float = 0x802C614C;
+si_handle_set_array = 0x802C61AC;
+si_handle_set_flag_array = 0x802C61E0;
+si_handle_allocate_array = 0x802C6214;
+si_handle_AND = 0x802C6270;
+si_handle_AND_const = 0x802C62D4;
+si_handle_OR = 0x802C632C;
+si_handle_OR_const = 0x802C6390;
+si_handle_call = 0x802C63E8;
+si_handle_exec1 = 0x802C646C;
+si_handle_exec2 = 0x802C6524;
+si_handle_exec_wait = 0x802C65FC;
+si_handle_jump = 0x802C6640;
+_bound_script_trigger_handler = 0x802C667C;
+si_handle_bind = 0x802C6714;
+DeleteTrigger = 0x802C6824;
+si_handle_unbind = 0x802C6850;
+si_handle_kill = 0x802C6870;
+si_handle_set_priority = 0x802C689C;
+si_handle_set_timescale = 0x802C68D8;
+si_handle_set_group = 0x802C6914;
+si_handle_suspend_all = 0x802C6950;
+si_handle_resume_all = 0x802C697C;
+si_handle_suspend_others = 0x802C69A8;
+si_handle_resume_others = 0x802C69E4;
+si_handle_suspend = 0x802C6A20;
+si_handle_resume = 0x802C6A4C;
+si_handle_does_script_exist = 0x802C6A78;
+si_standard_trigger_executor = 0x802C6AD0;
+si_handle_bind_lock = 0x802C6B54;
+si_handle_thread = 0x802C6C78;
+si_handle_end_thread = 0x802C6D4C;
+si_handle_child_thread = 0x802C6D6C;
+si_handle_end_child_thread = 0x802C6DF4;
+si_handle_print_debug_var = 0x802C6E1C;
+si_execute_next_command = 0x802C7404;
+get_variable = 0x802C7ABC;
+get_variable_index = 0x802C7DA8;
+get_variable_index_alt = 0x802C7F20;
+set_variable = 0x802C8098;
+get_float_variable = 0x802C842C;
+set_float_variable = 0x802C8640;
+si_find_label = 0x802C8890;
+si_skip_if = 0x802C88FC;
+si_skip_else = 0x802C8978;
+si_goto_end_case = 0x802C89E4; // !
+si_goto_next_case = 0x802C8A60;
+si_goto_end_loop = 0x802C8AE4;
+TranslateModel = 0x802C8B60;
+RotateModel = 0x802C8C64;
+ScaleModel = 0x802C8D88;
+GetModelIndex = 0x802C8E8C;
+CloneModel = 0x802C8F28;
+GetModelCenter = 0x802C8F80;
+SetTexPanner = 0x802C9000;
+SetModelFlag10 = 0x802C907C;
+EnableTexPanning = 0x802C9208;
+EnableModel = 0x802C9288;
+SetGroupEnabled = 0x802C9308;
+SetTexPanOffset = 0x802C9364;
+SetModelFlags = 0x802C9518;
+TranslateGroup = 0x802C97B4;
+RotateGroup = 0x802C98D8;
+ScaleGroup = 0x802C9A1C;
+EnableGroup = 0x802C9B98;
+modify_collider_family_flags = 0x802C9CE8;
+ModifyColliderFlags = 0x802C9DCC;
+ResetFromLava = 0x802C9ED8;
+GetColliderCenter = 0x802CA0AC;
+ParentColliderToModel = 0x802CA114;
+UpdateColliderTransform = 0x802CA188;
+set_zone_enabled = 0x802CA1B8;
+SetZoneEnabled = 0x802CA254;
+goto_map = 0x802CA304;
+GotoMap = 0x802CA400;
+GotoMapSpecial = 0x802CA420;
+GotoMapByID = 0x802CA440;
+GetEntryID = 0x802CA460;
+GetMapID = 0x802CA490;
+GetLoadType = 0x802CA4C0;
+SetRenderMode = 0x802CA4F4;
+PlaySoundAtModel = 0x802CA558;
+PlaySoundAtCollider = 0x802CA614;
+SetCamEnabled = 0x802CA6C0;
+SetCamFlag80 = 0x802CA774;
+SetCamPerspective = 0x802CA828;
+SetCamViewport = 0x802CAB18;
+SetCamBGColor = 0x802CAD98;
+SetCamTarget = 0x802CAF2C;
+ShakeCam = 0x802CB2A8;
+exec_ShakeCam1 = 0x802CB56C;
+exec_ShakeCamX = 0x802CB5C8;
+SetCamLeadPlayer = 0x802CB680;
+PanToTarget = 0x802CB79C;
+UseSettingsFrom = 0x802CB860;
+LoadSettings = 0x802CB9F8;
+SetCamType = 0x802CBAB4;
+SetCamPitch = 0x802CBB48;
+SetCamDistance = 0x802CBBE4;
+SetCamPosA = 0x802CBC58;
+SetCamPosB = 0x802CBCF4;
+SetCamPosC = 0x802CBD90;
+SetPanTarget = 0x802CBE2C;
+SetCamSpeed = 0x802CBEF0;
+GetCamType = 0x802CBF64;
+GetCamPitch = 0x802CBFF4;
+GetCamDistance = 0x802CC084;
+GetCamPosA = 0x802CC0F4;
+GetCamPosB = 0x802CC184;
+GetCamPosC = 0x802CC214;
+GetCamPosition = 0x802CC2A4;
+WaitForCam = 0x802CC354;
+SetCamProperties = 0x802CC3EC;
+AdjustCam = 0x802CC660;
+ResetCam = 0x802CC8C8;
+draw_anim_models = 0x802CCB18;
+LoadModelAnimation = 0x802CCCEC;
+PlayModelAnimation = 0x802CCE6C;
+ChangeModelAnimation = 0x802CCF6C;
+SetAnimModelPosition = 0x802CCFE4;
+GetAnimModelPosition = 0x802CD090;
+AddAnimModelPosition = 0x802CD12C;
+SetAnimModelRotation = 0x802CD1F0;
+SetAnimModelScale = 0x802CD29C;
+resolve_npc = 0x802CDAC0;
+set_npc_animation = 0x802CDB0C;
+CreateNpc = 0x802CDBA4;
+DeleteNpc = 0x802CDC1C;
+GetNpcPointer = 0x802CDC58;
+SetNpcPos = 0x802CDCB0;
+SetNpcRotation = 0x802CDDB0;
+SetNpcScale = 0x802CDED4;
+SetNpcCollisionSize = 0x802CDF8C;
+SetNpcSpeed = 0x802CE01C;
+SetNpcJumpscale = 0x802CE088;
+SetNpcAnimation = 0x802CE0F4;
+GetNpcAnimation = 0x802CE160;
+SetNpcAnimationSpeed = 0x802CE1C0;
+NpcMoveTo = 0x802CE22C;
+_npc_jump_to = 0x802CE434;
+NpcJump0 = 0x802CE6C4;
+NpcJump1 = 0x802CE6E0;
+NpcFlyTo = 0x802CE6FC;
+GetNpcYaw = 0x802CEA10;
+SetNpcYaw = 0x802CEA84;
+InterpNpcYaw = 0x802CEB04;
+NpcFacePlayer = 0x802CECC8;
+NpcFaceNpc = 0x802CEE80;
+SetNpcFlagBits = 0x802CF060;
+GetNpcPos = 0x802CF0F4;
+EnableNpcShadow = 0x802CF268;
+EnableNpcBlur = 0x802CF2EC;
+ClearPartnerMoveHistory = 0x802CF370;
+NpcSetHomePosToCurrent = 0x802CF3BC;
+GetPartnerPos = 0x802CF438;
+DisablePartnerAI = 0x802CF4E8;
+EnablePartnerAI = 0x802CF52C;
+BringPartnerOut = 0x802CF5B8;
+PutPartnerAway = 0x802CF988;
+GetCurrentPartnerID = 0x802CFC74;
+PartnerCanUseAbility = 0x802CFCA0;
+PartnerIsFlying = 0x802CFCE8;
+SetNpcEffect = 0x802D0118;
+PlaySoundAtNpc = 0x802D01AC;
+SpeakToPlayer = 0x802D02B0;
+EndSpeech = 0x802D02CC;
+ContinueSpeech = 0x802D02E8;
+SpeakToNpc = 0x802D0304;
+_show_message = 0x802D0320;
+ShowMessageAtScreenPos = 0x802D0894;
+ShowMessageAtWorldPos = 0x802D095C;
+CloseMessage = 0x802D0A98;
+SwitchMessage = 0x802D0AFC;
+ShowChoice = 0x802D0B6C;
+CloseChoice = 0x802D0BF8;
+CancelMessage = 0x802D0C20;
+CancelMessageAndBlock = 0x802D0C48;
+SetMessageImages = 0x802D0C70;
+SetMessageString = 0x802D0CEC;
+SetMessageValue = 0x802D0D44;
+HidePlayerShadow = 0x802D0DA0;
+DisablePlayerPhysics = 0x802D0DE4;
+DisablePlayerInput = 0x802D0E28;
+SetPlayerPos = 0x802D0EF0;
+SetPlayerCollisionSize = 0x802D0FB0;
+SetPlayerSpeed = 0x802D1024;
+SetPlayerJumpscale = 0x802D1054;
+SetPlayerAnimation = 0x802D1084;
+SetPlayerActionState = 0x802D10D8;
+SetPlayerAnimationSpeed = 0x802D1104;
+PlayerMoveTo = 0x802D1134;
+player_jump = 0x802D14E0;
+PlayerJump = 0x802D18E8;
+PlayerJump1 = 0x802D1904;
+PlayerJump2 = 0x802D1920;
+InterpPlayerYaw = 0x802D193C;
+PlayerFaceNpc = 0x802D1B04;
+GetPlayerTargetYaw = 0x802D1D28;
+SetPlayerFlagBits = 0x802D1D60;
+GetPlayerActionState = 0x802D1DD0;
+GetPlayerPos = 0x802D1DFC;
+GetPlayerAnimation = 0x802D1E94;
+FullyRestoreHPandFP = 0x802D1EC0;
+FullyRestoreSP = 0x802D1EE0;
+EnablePartner = 0x802D1EFC;
+DisablePartner = 0x802D1F38;
+UseEntryHeading = 0x802D1F70;
+UseExitHeading = 0x802D216C;
+DisablePulseStone = 0x802D2AA8;
+GetCurrentPartner = 0x802D2B0C;
+Disable8bitMario = 0x802D2B88;
+PlaySoundAtPlayer = 0x802D2CD8;
+MakeLerp = 0x802D45B0;
+UpdateLerp = 0x802D462C;
+RandInt = 0x802D46B0;
+GetAngleBetweenNPCs = 0x802D4708;
+GetAngleToNPC = 0x802D47B4;
+GetAngleToPlayer = 0x802D4830;
+AwaitPlayerApproach = 0x802D48AC;
+IsPlayerWithin = 0x802D4964;
+AwaitPlayerLeave = 0x802D4A5C;
+AddVectorPolar = 0x802D4B14;
+setup_path_data = 0x802D4DAC;
+LoadPath = 0x802D5430;
+GetNextPathPos = 0x802D5524;
+GetDist2D = 0x802D5770;
+SetValueByRef = 0x802D58E0;
+GetValueByRef = 0x802D593C;
+EnableStatusMenu = 0x802D5998;
+ShowStatusMenu = 0x802D59DC;
+SetGameMode = 0x802D5A28;
+ClampAngleInt = 0x802D5A58;
+ClampAngleFloat = 0x802D5AB4;
+FadeOutMusic = 0x802D5CE0;
+SetMusicTrack = 0x802D5D4C;
+FadeInMusic = 0x802D5DF4;
+ClearAmbientSounds = 0x802D60E8;
+PlayAmbientSounds = 0x802D611C;
+PlaySound = 0x802D6150;
+PlaySoundAt = 0x802D61DC;
+StopSound = 0x802D62B8;
+UseDoorSounds = 0x802D6314;
+PlaySoundAtF = 0x802D636C;
+RemoveKeyItemAt = 0x802D6858;
+RemoveItemAt = 0x802D688C;
+AddKeyItem = 0x802D68C8;
+HasKeyItem = 0x802D699C;
+FindKeyItem = 0x802D6A14;
+AddItem = 0x802D6A98;
+FindItem = 0x802D6B18;
+RemoveItem = 0x802D6B9C;
+CountFortressKeys = 0x802D6C4C;
+RemoveFortressKeys = 0x802D6C94;
+MakeItemEntity = 0x802D6CC0;
+DropItemEntity = 0x802D6DC0;
+DropItemEntityB = 0x802D6EC0;
+RemoveItemEntity = 0x802D6FCC;
+AddBadge = 0x802D6FF8;
+RemoveBadge = 0x802D7050;
+SetItemPos = 0x802D70D0;
+SetItemFlags = 0x802D7194;
+AddCoin = 0x802D7278;
+AddStarPoints = 0x802D72B4;
+AddStarPieces = 0x802D72F0;
+GetItemPower = 0x802D732C;
+ShowGotItem = 0x802D73A4;
+ShowEmote = 0x802D78A0;
+RemoveEffect = 0x802D7AE4;
+ShowSleepBubble = 0x802D8028;
+PlayEffect = 0x802D829C;
+SetSpriteShading = 0x802D9700;
+EnableSpriteShading = 0x802D9A3C;
+GetDemoState = 0x802D9A90;
+DemoPressButton = 0x802D9AC0;
+DemoReleaseButton = 0x802D9AF8;
+DemoSetButtons = 0x802D9B34;
+DemoJoystickRadial = 0x802D9B64;
+DemoJoystickXY = 0x802D9C10;
+gStaticScriptCounter = 0x802D9CA0;
+D_802D9CA4 = 0x802D9CA4;
+gGlobalTimeSpace = 0x802D9CA8;
+ShakeCam1 = 0x802D9CB0;
+ShakeCamX = 0x802D9CE8;
+D_802D9D50 = 0x802D9D50;
+spr_appendMDL_component = 0x802DC8F4;
+spr_transform_point = 0x802DCD00;
+spr_draw_component = 0x802DCEDC;
+_spr_sign_extend_12bit = 0x802DD0DC;
+_spr_sign_extend_16bit = 0x802DD0FC;
+update_component = 0x802DD11C;
+set_anim_timescale = 0x802DD88C;
+render_sprite = 0x802DDC40;
+load_sprite = 0x802DEB0C;
+create_shadow_callback = 0x802E0D90;
+save_game_at_player_position = 0x802E11A0;
+entity_init_BlueSwitch = 0x802E2380;
+entity_init_HugeBlueSwitch = 0x802E2408;
+entity_init_Hammer23Block_normal = 0x802E36E4;
+entity_init_Hammer1Block_normal = 0x802E3E00;
+entity_init_HammerBlock_small = 0x802E3E30;
+entity_init_Chest = 0x802E7D84;
+player_enter_blue_pipe = 0x802E8CCC;
+push_entity_matrix = 0x802E8E4C;

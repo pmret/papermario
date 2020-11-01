@@ -25,8 +25,8 @@ glabel func_8014AC94
 /* E13E0 8014ACE0 54400001 */  bnel      $v0, $zero, .L8014ACE8
 /* E13E4 8014ACE4 0060202D */   daddu    $a0, $v1, $zero
 .L8014ACE8:
-/* E13E8 8014ACE8 3C058016 */  lui       $a1, 0x8016
-/* E13EC 8014ACEC 24A59AE6 */  addiu     $a1, $a1, -0x651a
+/* E13E8 8014ACE8 3C058016 */  lui       $a1, %hi(gMusicCurrentVolume)
+/* E13EC 8014ACEC 24A59AE6 */  addiu     $a1, $a1, %lo(gMusicCurrentVolume)
 /* E13F0 8014ACF0 00041400 */  sll       $v0, $a0, 0x10
 /* E13F4 8014ACF4 00022403 */  sra       $a0, $v0, 0x10
 /* E13F8 8014ACF8 84A20000 */  lh        $v0, ($a1)
@@ -38,10 +38,10 @@ glabel func_8014AC94
 /* E1410 8014AD10 2462FFFF */  addiu     $v0, $v1, -1
 .L8014AD14:
 /* E1414 8014AD14 A4A20000 */  sh        $v0, ($a1)
-/* E1418 8014AD18 3C048016 */  lui       $a0, 0x8016
-/* E141C 8014AD1C 84849AE6 */  lh        $a0, -0x651a($a0)
+/* E1418 8014AD18 3C048016 */  lui       $a0, %hi(gMusicCurrentVolume)
+/* E141C 8014AD1C 84849AE6 */  lh        $a0, %lo(gMusicCurrentVolume)($a0)
 /* E1420 8014AD20 0C015869 */  jal       func_800561A4
-/* E1424 8014AD24 00000000 */   nop
+/* E1424 8014AD24 00000000 */   nop      
 /* E1428 8014AD28 24020003 */  addiu     $v0, $zero, 3
 /* E142C 8014AD2C 3C018015 */  lui       $at, 0x8015
 /* E1430 8014AD30 A422F738 */  sh        $v0, -0x8c8($at)

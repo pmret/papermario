@@ -7,8 +7,8 @@ glabel func_802D5EE0
 /* FA898 802D5EE8 8C82000C */  lw        $v0, 0xc($a0)
 /* FA89C 802D5EEC 0C0B1EAF */  jal       get_variable
 /* FA8A0 802D5EF0 8C450000 */   lw       $a1, ($v0)
-/* FA8A4 802D5EF4 3C048016 */  lui       $a0, 0x8016
-/* FA8A8 802D5EF8 24849AF0 */  addiu     $a0, $a0, -0x6510
+/* FA8A4 802D5EF4 3C048016 */  lui       $a0, %hi(gMusicPlayers)
+/* FA8A8 802D5EF8 24849AF0 */  addiu     $a0, $a0, %lo(gMusicPlayers)
 /* FA8AC 802D5EFC 00021840 */  sll       $v1, $v0, 1
 /* FA8B0 802D5F00 00621821 */  addu      $v1, $v1, $v0
 /* FA8B4 802D5F04 00031900 */  sll       $v1, $v1, 4

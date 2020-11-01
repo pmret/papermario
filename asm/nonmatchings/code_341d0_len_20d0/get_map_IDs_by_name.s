@@ -9,8 +9,8 @@ glabel get_map_IDs_by_name
 /* 36008 8005AC08 00A0B02D */  daddu     $s6, $a1, $zero
 /* 3600C 8005AC0C AFB7002C */  sw        $s7, 0x2c($sp)
 /* 36010 8005AC10 00C0B82D */  daddu     $s7, $a2, $zero
-/* 36014 8005AC14 3C028009 */  lui       $v0, 0x8009
-/* 36018 8005AC18 244234F0 */  addiu     $v0, $v0, 0x34f0
+/* 36014 8005AC14 3C028009 */  lui       $v0, %hi(gAreas)
+/* 36018 8005AC18 244234F0 */  addiu     $v0, $v0, %lo(gAreas)
 /* 3601C 8005AC1C AFBF0030 */  sw        $ra, 0x30($sp)
 /* 36020 8005AC20 AFB40020 */  sw        $s4, 0x20($sp)
 /* 36024 8005AC24 AFB3001C */  sw        $s3, 0x1c($sp)
@@ -26,8 +26,8 @@ glabel get_map_IDs_by_name
 /* 36048 8005AC48 8C420000 */  lw        $v0, ($v0)
 /* 3604C 8005AC4C 18400012 */  blez      $v0, .L8005AC98
 /* 36050 8005AC50 0000802D */   daddu    $s0, $zero, $zero
-/* 36054 8005AC54 3C028009 */  lui       $v0, 0x8009
-/* 36058 8005AC58 244234F0 */  addiu     $v0, $v0, 0x34f0
+/* 36054 8005AC54 3C028009 */  lui       $v0, %hi(gAreas)
+/* 36058 8005AC58 244234F0 */  addiu     $v0, $v0, %lo(gAreas)
 /* 3605C 8005AC5C 02429821 */  addu      $s3, $s2, $v0
 /* 36060 8005AC60 0080882D */  daddu     $s1, $a0, $zero
 .L8005AC64:
@@ -50,8 +50,8 @@ glabel get_map_IDs_by_name
 /* 3609C 8005AC9C 3C048009 */  lui       $a0, 0x8009
 /* 360A0 8005ACA0 00922021 */  addu      $a0, $a0, $s2
 /* 360A4 8005ACA4 8C8434F4 */  lw        $a0, 0x34f4($a0)
-/* 360A8 8005ACA8 3C028009 */  lui       $v0, 0x8009
-/* 360AC 8005ACAC 244234F0 */  addiu     $v0, $v0, 0x34f0
+/* 360A8 8005ACA8 3C028009 */  lui       $v0, %hi(gAreas)
+/* 360AC 8005ACAC 244234F0 */  addiu     $v0, $v0, %lo(gAreas)
 /* 360B0 8005ACB0 1480FFE4 */  bnez      $a0, .L8005AC44
 /* 360B4 8005ACB4 26940001 */   addiu    $s4, $s4, 1
 .L8005ACB8:

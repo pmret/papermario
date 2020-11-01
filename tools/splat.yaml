@@ -488,7 +488,7 @@ segments:
     files:
       - [0x33E8C0, "c"]
       - [0x33efe0, "bin"]
-  - [0x33D610, "bin"]
+  - [0x33F210, "bin"]
   - type: code
     start: 0x33FE80
     vram: 0xE002C000
@@ -6436,6 +6436,7 @@ segments:
       - [0xE05360, "c"]
       - [0xE05370, "c"]
       - [0xE05390, "c"]
+      - [0xE07C20, "c"]
       - [0xE08050, "c"]
       - [0xE08350, "bin"]
       - [0xE08470, "bin"]
