@@ -3,8 +3,8 @@
 
 glabel func_802403D4_CCB6E4
 /* CCB6E4 802403D4 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* CCB6E8 802403D8 3C028011 */  lui       $v0, 0x8011
-/* CCB6EC 802403DC 8042F2A2 */  lb        $v0, -0xd5e($v0)
+/* CCB6E8 802403D8 3C028011 */  lui       $v0, %hi(gPlayerData+0x12)
+/* CCB6EC 802403DC 8042F2A2 */  lb        $v0, %lo(gPlayerData+0x12)($v0)
 /* CCB6F0 802403E0 0080182D */  daddu     $v1, $a0, $zero
 /* CCB6F4 802403E4 1040000C */  beqz      $v0, .L80240418
 /* CCB6F8 802403E8 AFBF0010 */   sw       $ra, 0x10($sp)

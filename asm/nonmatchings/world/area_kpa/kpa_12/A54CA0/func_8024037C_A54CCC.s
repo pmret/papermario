@@ -32,8 +32,8 @@ glabel func_8024037C_A54CCC
 /* A54D34 802403E4 2442EFC8 */  addiu     $v0, $v0, %lo(gPlayerStatus)
 /* A54D38 802403E8 E440001C */  swc1      $f0, 0x1c($v0)
 .L802403EC:
-/* A54D3C 802403EC 3C028011 */  lui       $v0, 0x8011
-/* A54D40 802403F0 8042F2A2 */  lb        $v0, -0xd5e($v0)
+/* A54D3C 802403EC 3C028011 */  lui       $v0, %hi(gPlayerData+0x12)
+/* A54D40 802403F0 8042F2A2 */  lb        $v0, %lo(gPlayerData+0x12)($v0)
 /* A54D44 802403F4 1040000D */  beqz      $v0, .L8024042C
 /* A54D48 802403F8 00000000 */   nop      
 /* A54D4C 802403FC 0C00EABB */  jal       get_npc_unsafe
