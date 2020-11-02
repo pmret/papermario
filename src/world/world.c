@@ -81,17 +81,17 @@ INCLUDE_ASM(s32, "code_341d0_len_20d0", get_asset_offset);
 #define MAP(map) \
     .id = #map, \
     .config = &map##_config, \
-    .dmaStart = (void*)LD_code_##map##_ROM_START, \
-    .dmaEnd = (void*)LD_code_##map##_ROM_END, \
-    .dmaDest = (void*)LD_code_##map##_VRAM \
+    .dmaStart = &code_##map##_ROM_START, \
+    .dmaEnd = &code_##map##_ROM_END, \
+    .dmaDest = &code_##map##_VRAM \
 
 // Should be removed once the data section containing .init and .config of all maps have been disassembled
 #define MAP_UNSPLIT(map, configVRAM) \
     .id = #map, \
     .config = (MapConfig*)(configVRAM), \
-    .dmaStart = (void*)LD_code_##map##_ROM_START, \
-    .dmaEnd = (void*)LD_code_##map##_ROM_END, \
-    .dmaDest = (void*)LD_code_##map##_VRAM \
+    .dmaStart = &code_##map##_ROM_START, \
+    .dmaEnd = &code_##map##_ROM_END, \
+    .dmaDest = &code_##map##_VRAM \
 
 /// Toad Town
 static Map mac_maps[] = {
