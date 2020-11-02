@@ -88,6 +88,12 @@ extern PrintContext* gCurrentPrintContext;
 extern s32 D_802DB264;
 extern PrintContext* D_802DB268;
 
+extern s32 D_802EB390;
+extern s32 D_802EB394;
+extern PrintContext* D_802EB398;
+extern PrintContext* D_802EB39C;
+extern s32 D_802E99DC;
+
 // Triggers
 extern s16 gTriggerCount;
 extern TriggerList gTriggerList1;

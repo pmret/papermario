@@ -40,12 +40,6 @@ void save_game_at_player_position(void) {
     fio_save_game(gameStatus->saveSlot);
 }
 
-extern s32 D_802EB390;
-extern s32 D_802EB394;
-extern PrintContext* D_802EB398;
-extern PrintContext* D_802EB39C;
-extern s32 D_802E99DC;
-
 void func_802E1204(s32 arg0) {
 
     if (get_global_flag(0xF8405BDF) == 0) {
