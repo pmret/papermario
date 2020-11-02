@@ -213,6 +213,8 @@ $(BUILD_DIR)/$(TARGET).elf: $(BUILD_DIR)/$(LD_SCRIPT) $(OBJECTS)
 $(BUILD_DIR)/$(TARGET).bin: $(BUILD_DIR)/$(TARGET).elf
 	$(OBJCOPY) $< $@ -O binary
 
+include/ld_addrs.h: $(BUILD_DIR)/$(LD_SCRIPT)
+	grep -E "[^ ]+ =" $< -o | sed 's/^/extern void* /; s/ =/;/' > $@
 
 ### Make Settings ###
 
