@@ -16,7 +16,7 @@ typedef s32 ScriptID;
 #define SI_SAVE_VAR(v) (v - 170000000)
 #define SI_ARRAY(v) (v - 190000000)
 #define SI_ARRAY_FLAG(v) (v - 210000000)
-#define SI_FIXED(v) ((s32)(v * 1024.0f) - 230000000) // See float_to_fixed_var
+#define SI_FIXED(v) ((v * 1024.0f) + -230000000) // See float_to_fixed_var
 
 /* Return type of si_execute_next_command */
 #define SI_CONTINUE 0   /* Continue to next command */

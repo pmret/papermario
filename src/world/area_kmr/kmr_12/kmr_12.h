@@ -8,6 +8,8 @@
 #define GetGoomba M(GetGoomba)
 ApiStatus GetGoomba(ScriptInstance* script, s32 isInitialCall);
 
+MapConfig M(config);
+
 Script M(Main);
 Script M(PlayMusic);
 Script M(MakeEntities);

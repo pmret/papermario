@@ -6,8 +6,8 @@ glabel func_80243580_DD0250
 /* DD0254 80243584 3C05FE36 */  lui       $a1, 0xfe36
 /* DD0258 80243588 AFBF0010 */  sw        $ra, 0x10($sp)
 /* DD025C 8024358C 8C820148 */  lw        $v0, 0x148($a0)
-/* DD0260 80243590 3C06800B */  lui       $a2, 0x800b
-/* DD0264 80243594 8CC60F9C */  lw        $a2, 0xf9c($a2)
+/* DD0260 80243590 3C06800B */  lui       $a2, %hi(gCurrentEncounter+0x8C)
+/* DD0264 80243594 8CC60F9C */  lw        $a2, %lo(gCurrentEncounter+0x8C)($a2)
 /* DD0268 80243598 34A53C80 */  ori       $a1, $a1, 0x3c80
 /* DD026C 8024359C 00C23026 */  xor       $a2, $a2, $v0
 /* DD0270 802435A0 0C0B2026 */  jal       set_variable

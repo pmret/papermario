@@ -11,8 +11,8 @@ glabel func_80240028_AED438
 /* AED450 80240040 4600008D */  trunc.w.s $f2, $f0
 /* AED454 80240044 44021000 */  mfc1      $v0, $f2
 /* AED458 80240048 00000000 */  nop       
-/* AED45C 8024004C 3C018011 */  lui       $at, 0x8011
-/* AED460 80240050 A022EFD5 */  sb        $v0, -0x102b($at)
+/* AED45C 8024004C 3C018011 */  lui       $at, %hi(gPlayerStatus+0xD)
+/* AED460 80240050 A022EFD5 */  sb        $v0, %lo(gPlayerStatus+0xD)($at)
 /* AED464 80240054 24020002 */  addiu     $v0, $zero, 2
 /* AED468 80240058 03E00008 */  jr        $ra
 /* AED46C 8024005C 27BD0018 */   addiu    $sp, $sp, 0x18

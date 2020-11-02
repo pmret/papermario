@@ -102,9 +102,9 @@ glabel func_8013673C
 /* CCF94 80136894 86250018 */  lh        $a1, 0x18($s1)
 /* CCF98 80136898 00021040 */  sll       $v0, $v0, 1
 /* CCF9C 8013689C 00051940 */  sll       $v1, $a1, 5
-/* CCFA0 801368A0 3C048008 */  lui       $a0, 0x8008
+/* CCFA0 801368A0 3C048008 */  lui       $a0, %hi(gItemTable+0x18)
 /* CCFA4 801368A4 00832021 */  addu      $a0, $a0, $v1
-/* CCFA8 801368A8 948478F8 */  lhu       $a0, 0x78f8($a0)
+/* CCFA8 801368A8 948478F8 */  lhu       $a0, %lo(gItemTable+0x18)($a0)
 /* CCFAC 801368AC 3C068015 */  lui       $a2, 0x8015
 /* CCFB0 801368B0 00C23021 */  addu      $a2, $a2, $v0
 /* CCFB4 801368B4 84C6C6E4 */  lh        $a2, -0x391c($a2)

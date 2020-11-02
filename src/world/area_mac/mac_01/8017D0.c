@@ -30,15 +30,13 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80241F10_802790);
 
 #include "world/common/GetItemName.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242028_8028A8);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_8024203C_8028BC);
+#include "world/common/Set80151310.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_8024204C_8028CC);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242270_802AF0);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802422BC_802B3C);
+#include "world/common/GetNpcUnsafeOwner2.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802422DC_802B5C);
 
@@ -62,19 +60,17 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242A18_803298);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242A34_8032B4);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242A4C_8032CC);
+#include "world/common/GetGameStatus75.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242A7C_8032FC);
+#include "world/common/SetCamVfov.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242AF0_803370);
+#include "world/common/GetCamVfov.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242B90_803410);
+#include "world/common/UnkCameraFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242D2C_8035AC);
+#include "world/common/UnkRotatePlayer.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242D90_803610);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242E20_8036A0);
+#include "world/common/UnkPartnerFuncs.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242F08_803788);
 
@@ -94,29 +90,27 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80243680_803F00);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80243740_803FC0);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802437AC_80402C);
+#include "world/common/Call800E9894.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802437CC_80404C);
+#include "world/common/Call800E98C4SyncStatusMenu.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", pause_tutorial_draw_contents_804074);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80243870_8040F0);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802438F0_804170);
+#include "world/common/AwaitScriptComplete.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80243920_8041A0);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_8024394C_8041CC);
+#include "world/common/PartnerToggleAbilityScript.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_8024396C_8041EC);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802439C0_804240);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80243A3C_8042BC);
+#include "world/common/GetPartnerCall800EB168.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80243A70_8042F0);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80243AA0_804320);
+ApiStatus func_80243AA0_804320(ScriptInstance* script, s32 isInitialCall) {
+    return ApiStatus_DONE2;
+}
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 
@@ -136,7 +130,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80244078_8048F8);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802440BC_80493C);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802440E8_804968);
+#include "world/common/GetPlayerCoins.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802440FC_80497C);
 
@@ -148,7 +142,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802443E0_804C60);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802446AC_804F2C);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802446E0_804F60);
+#include "world/common/UnkPositionFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802447E0_805060);
 
@@ -178,12 +172,27 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80245028_8058A8);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_8024522C_805AAC);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80245440_805CC0);
+ApiStatus func_80245440_805CC0(ScriptInstance* script, s32 isInitialCall) {
+    if (PLAYER_DATA->currentPartner == script->varTable[10]) {
+        script->varTable[1] = 0;
+        return ApiStatus_DONE2;
+    }
+
+    func_800EB168(script->varTable[10]);
+    script->varTable[1] = 1;
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80245488_805D08);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802454B4_805D34);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80245504_805D84);
+ApiStatus func_80245504_805D84(ScriptInstance* script, s32 isInitialCall) {
+    func_800EF394(20.0f);
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_8024552C_805DAC);
+ApiStatus func_8024552C_805DAC(ScriptInstance* script, s32 isInitialCall) {
+    func_800EF3A4();
+    return ApiStatus_DONE2;
+}

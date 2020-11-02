@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel pause_badges_try_remove
-/* 13A5F0 802472B0 3C068011 */  lui       $a2, 0x8011
-/* 13A5F4 802472B4 24C6F498 */  addiu     $a2, $a2, -0xb68
+/* 13A5F0 802472B0 3C068011 */  lui       $a2, %hi(gPlayerData+0x208)
+/* 13A5F4 802472B4 24C6F498 */  addiu     $a2, $a2, %lo(gPlayerData+0x208)
 /* 13A5F8 802472B8 00C0182D */  daddu     $v1, $a2, $zero
 /* 13A5FC 802472BC 00042400 */  sll       $a0, $a0, 0x10
 /* 13A600 802472C0 00042403 */  sra       $a0, $a0, 0x10

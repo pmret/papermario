@@ -262,9 +262,9 @@ glabel pause_items_handle_input
 /* 13DED4 8024AB94 00000000 */   nop      
 /* 13DED8 8024AB98 10600008 */  beqz      $v1, .L8024ABBC
 /* 13DEDC 8024AB9C 00031140 */   sll      $v0, $v1, 5
-/* 13DEE0 8024ABA0 3C018008 */  lui       $at, 0x8008
+/* 13DEE0 8024ABA0 3C018008 */  lui       $at, %hi(gItemTable+0x10)
 /* 13DEE4 8024ABA4 00220821 */  addu      $at, $at, $v0
-/* 13DEE8 8024ABA8 8C2278F0 */  lw        $v0, 0x78f0($at)
+/* 13DEE8 8024ABA8 8C2278F0 */  lw        $v0, %lo(gItemTable+0x10)($at)
 /* 13DEEC 8024ABAC 3C018027 */  lui       $at, 0x8027
 /* 13DEF0 8024ABB0 AC2200C8 */  sw        $v0, 0xc8($at)
 /* 13DEF4 8024ABB4 08092AFE */  j         .L8024ABF8

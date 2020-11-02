@@ -11,9 +11,9 @@ glabel kill_enemy
 /* 19BC4 8003E7C4 AFB10014 */  sw        $s1, 0x14($sp)
 /* 19BC8 8003E7C8 82020004 */  lb        $v0, 4($s0)
 /* 19BCC 8003E7CC 00021080 */  sll       $v0, $v0, 2
-/* 19BD0 8003E7D0 3C13800B */  lui       $s3, 0x800b
+/* 19BD0 8003E7D0 3C13800B */  lui       $s3, %hi(gCurrentEncounter+0x28)
 /* 19BD4 8003E7D4 02629821 */  addu      $s3, $s3, $v0
-/* 19BD8 8003E7D8 8E730F38 */  lw        $s3, 0xf38($s3)
+/* 19BD8 8003E7D8 8E730F38 */  lw        $s3, %lo(gCurrentEncounter+0x28)($s3)
 /* 19BDC 8003E7DC 8E640000 */  lw        $a0, ($s3)
 /* 19BE0 8003E7E0 3C12800B */  lui       $s2, %hi(gCurrentEncounter)
 /* 19BE4 8003E7E4 26520F10 */  addiu     $s2, $s2, %lo(gCurrentEncounter)

@@ -124,9 +124,9 @@ glabel func_802416B4_C32B94
 /* C32D58 80241878 2C620064 */  sltiu     $v0, $v1, 0x64
 /* C32D5C 8024187C 10400042 */  beqz      $v0, .L80241988
 /* C32D60 80241880 00031080 */   sll      $v0, $v1, 2
-/* C32D64 80241884 3C018024 */  lui       $at, 0x8024
+/* C32D64 80241884 3C018024 */  lui       $at, %hi(pause_tabs_draw_stats)
 /* C32D68 80241888 00220821 */  addu      $at, $at, $v0
-/* C32D6C 8024188C 8C224B98 */  lw        $v0, 0x4b98($at)
+/* C32D6C 8024188C 8C224B98 */  lw        $v0, %lo(pause_tabs_draw_stats)($at)
 /* C32D70 80241890 00400008 */  jr        $v0
 /* C32D74 80241894 00000000 */   nop      
 /* C32D78 80241898 0280202D */  daddu     $a0, $s4, $zero

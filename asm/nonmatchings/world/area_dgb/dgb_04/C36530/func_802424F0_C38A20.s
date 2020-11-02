@@ -12,8 +12,8 @@ glabel func_802424F0_C38A20
 /* C38A3C 8024250C AFB50024 */  sw        $s5, 0x24($sp)
 /* C38A40 80242510 0200A82D */  daddu     $s5, $s0, $zero
 /* C38A44 80242514 AFB10014 */  sw        $s1, 0x14($sp)
-/* C38A48 80242518 3C118011 */  lui       $s1, 0x8011
-/* C38A4C 8024251C 2631F298 */  addiu     $s1, $s1, -0xd68
+/* C38A48 80242518 3C118011 */  lui       $s1, %hi(gPlayerData+0x8)
+/* C38A4C 8024251C 2631F298 */  addiu     $s1, $s1, %lo(gPlayerData+0x8)
 /* C38A50 80242520 AFBF0028 */  sw        $ra, 0x28($sp)
 /* C38A54 80242524 AFB20018 */  sw        $s2, 0x18($sp)
 /* C38A58 80242528 8E6200B4 */  lw        $v0, 0xb4($s3)

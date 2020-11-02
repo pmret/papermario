@@ -11,8 +11,8 @@ glabel func_802417EC_A3ACCC
 /* A3ACE4 80241804 8E050000 */  lw        $a1, ($s0)
 /* A3ACE8 80241808 0C0B1EAF */  jal       get_variable
 /* A3ACEC 8024180C 26100004 */   addiu    $s0, $s0, 4
-/* A3ACF0 80241810 3C038011 */  lui       $v1, 0x8011
-/* A3ACF4 80241814 8463F29C */  lh        $v1, -0xd64($v1)
+/* A3ACF0 80241810 3C038011 */  lui       $v1, %hi(gPlayerData+0xC)
+/* A3ACF4 80241814 8463F29C */  lh        $v1, %lo(gPlayerData+0xC)($v1)
 /* A3ACF8 80241818 3C018024 */  lui       $at, 0x8024
 /* A3ACFC 8024181C 00220821 */  addu      $at, $at, $v0
 /* A3AD00 80241820 902247D0 */  lbu       $v0, 0x47d0($at)

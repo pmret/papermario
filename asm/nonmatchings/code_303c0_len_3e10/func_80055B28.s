@@ -4,8 +4,8 @@
 glabel func_80055B28
 /* 30F28 80055B28 27BDFFC8 */  addiu     $sp, $sp, -0x38
 /* 30F2C 80055B2C AFB00030 */  sw        $s0, 0x30($sp)
-/* 30F30 80055B30 3C108008 */  lui       $s0, 0x8008
-/* 30F34 80055B34 26108DB0 */  addiu     $s0, $s0, -0x7250
+/* 30F30 80055B30 3C108008 */  lui       $s0, %hi(D_80078DB0)
+/* 30F34 80055B34 26108DB0 */  addiu     $s0, $s0, %lo(D_80078DB0)
 /* 30F38 80055B38 24030001 */  addiu     $v1, $zero, 1
 /* 30F3C 80055B3C 240207D0 */  addiu     $v0, $zero, 0x7d0
 /* 30F40 80055B40 AFBF0034 */  sw        $ra, 0x34($sp)

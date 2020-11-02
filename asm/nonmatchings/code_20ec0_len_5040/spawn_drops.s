@@ -192,8 +192,8 @@ glabel spawn_drops
 /* 23948 80048548 0C051514 */  jal       set_global_flag
 /* 2394C 8004854C 24840715 */   addiu    $a0, $a0, 0x715
 .L80048550:
-/* 23950 80048550 3C02800B */  lui       $v0, 0x800b
-/* 23954 80048554 80420F23 */  lb        $v0, 0xf23($v0)
+/* 23950 80048550 3C02800B */  lui       $v0, %hi(gCurrentEncounter+0x13)
+/* 23954 80048554 80420F23 */  lb        $v0, %lo(gCurrentEncounter+0x13)($v0)
 /* 23958 80048558 10400026 */  beqz      $v0, .L800485F4
 /* 2395C 8004855C 24040093 */   addiu    $a0, $zero, 0x93
 /* 23960 80048560 24020004 */  addiu     $v0, $zero, 4
@@ -208,8 +208,8 @@ glabel spawn_drops
 /* 23984 80048584 4407F000 */  mfc1      $a3, $f30
 /* 23988 80048588 8FA80024 */  lw        $t0, 0x24($sp)
 /* 2398C 8004858C 02C21021 */  addu      $v0, $s6, $v0
-/* 23990 80048590 3C01800B */  lui       $at, 0x800b
-/* 23994 80048594 A0200F23 */  sb        $zero, 0xf23($at)
+/* 23990 80048590 3C01800B */  lui       $at, %hi(gCurrentEncounter+0x13)
+/* 23994 80048594 A0200F23 */  sb        $zero, %lo(gCurrentEncounter+0x13)($at)
 /* 23998 80048598 AFA20018 */  sw        $v0, 0x18($sp)
 /* 2399C 8004859C AFA0001C */  sw        $zero, 0x1c($sp)
 /* 239A0 800485A0 0C04C4FD */  jal       make_item_entity
@@ -245,10 +245,10 @@ glabel spawn_drops
 /* 23A10 80048610 4481D000 */  mtc1      $at, $f26
 /* 23A14 80048614 3C0142C8 */  lui       $at, 0x42c8
 /* 23A18 80048618 4481E000 */  mtc1      $at, $f28
-/* 23A1C 8004861C 3C028011 */  lui       $v0, 0x8011
-/* 23A20 80048620 8042F292 */  lb        $v0, -0xd6e($v0)
-/* 23A24 80048624 3C038011 */  lui       $v1, 0x8011
-/* 23A28 80048628 8063F293 */  lb        $v1, -0xd6d($v1)
+/* 23A1C 8004861C 3C028011 */  lui       $v0, %hi(gPlayerData+0x2)
+/* 23A20 80048620 8042F292 */  lb        $v0, %lo(gPlayerData+0x2)($v0)
+/* 23A24 80048624 3C038011 */  lui       $v1, %hi(gPlayerData+0x3)
+/* 23A28 80048628 8063F293 */  lb        $v1, %lo(gPlayerData+0x3)($v1)
 /* 23A2C 8004862C 24130002 */  addiu     $s3, $zero, 2
 /* 23A30 80048630 AFA00030 */  sw        $zero, 0x30($sp)
 /* 23A34 80048634 44821000 */  mtc1      $v0, $f2
@@ -431,10 +431,10 @@ glabel spawn_drops
 /* 23CC0 800488C0 4481D000 */  mtc1      $at, $f26
 /* 23CC4 800488C4 3C0142C8 */  lui       $at, 0x42c8
 /* 23CC8 800488C8 4481E000 */  mtc1      $at, $f28
-/* 23CCC 800488CC 3C028011 */  lui       $v0, 0x8011
-/* 23CD0 800488D0 8042F295 */  lb        $v0, -0xd6b($v0)
-/* 23CD4 800488D4 3C038011 */  lui       $v1, 0x8011
-/* 23CD8 800488D8 8063F296 */  lb        $v1, -0xd6a($v1)
+/* 23CCC 800488CC 3C028011 */  lui       $v0, %hi(gPlayerData+0x5)
+/* 23CD0 800488D0 8042F295 */  lb        $v0, %lo(gPlayerData+0x5)($v0)
+/* 23CD4 800488D4 3C038011 */  lui       $v1, %hi(gPlayerData+0x6)
+/* 23CD8 800488D8 8063F296 */  lb        $v1, %lo(gPlayerData+0x6)($v1)
 /* 23CDC 800488DC 24130002 */  addiu     $s3, $zero, 2
 /* 23CE0 800488E0 AFA00030 */  sw        $zero, 0x30($sp)
 /* 23CE4 800488E4 44821000 */  mtc1      $v0, $f2
@@ -636,26 +636,26 @@ glabel spawn_drops
 /* 23FA8 80048BA8 06220001 */  bltzl     $s1, .L80048BB0
 /* 23FAC 80048BAC 0000882D */   daddu    $s1, $zero, $zero
 .L80048BB0:
-/* 23FB0 80048BB0 3C02800B */  lui       $v0, 0x800b
-/* 23FB4 80048BB4 84420F1E */  lh        $v0, 0xf1e($v0)
+/* 23FB0 80048BB0 3C02800B */  lui       $v0, %hi(gCurrentEncounter+0xE)
+/* 23FB4 80048BB4 84420F1E */  lh        $v0, %lo(gCurrentEncounter+0xE)($v0)
 /* 23FB8 80048BB8 24040019 */  addiu     $a0, $zero, 0x19
 /* 23FBC 80048BBC 0C03A752 */  jal       is_ability_active
 /* 23FC0 80048BC0 02228821 */   addu     $s1, $s1, $v0
 /* 23FC4 80048BC4 10400007 */  beqz      $v0, .L80048BE4
 /* 23FC8 80048BC8 00000000 */   nop      
-/* 23FCC 80048BCC 3C02800B */  lui       $v0, 0x800b
-/* 23FD0 80048BD0 90420F1C */  lbu       $v0, 0xf1c($v0)
-/* 23FD4 80048BD4 3C01800B */  lui       $at, 0x800b
-/* 23FD8 80048BD8 A0200F1C */  sb        $zero, 0xf1c($at)
+/* 23FCC 80048BCC 3C02800B */  lui       $v0, %hi(gCurrentEncounter+0xC)
+/* 23FD0 80048BD0 90420F1C */  lbu       $v0, %lo(gCurrentEncounter+0xC)($v0)
+/* 23FD4 80048BD4 3C01800B */  lui       $at, %hi(gCurrentEncounter+0xC)
+/* 23FD8 80048BD8 A0200F1C */  sb        $zero, %lo(gCurrentEncounter+0xC)($at)
 /* 23FDC 80048BDC 00021042 */  srl       $v0, $v0, 1
 /* 23FE0 80048BE0 02228821 */  addu      $s1, $s1, $v0
 .L80048BE4:
-/* 23FE4 80048BE4 3C02800B */  lui       $v0, 0x800b
-/* 23FE8 80048BE8 80420F1B */  lb        $v0, 0xf1b($v0)
+/* 23FE4 80048BE4 3C02800B */  lui       $v0, %hi(gCurrentEncounter+0xB)
+/* 23FE8 80048BE8 80420F1B */  lb        $v0, %lo(gCurrentEncounter+0xB)($v0)
 /* 23FEC 80048BEC 10400004 */  beqz      $v0, .L80048C00
 /* 23FF0 80048BF0 00111040 */   sll      $v0, $s1, 1
-/* 23FF4 80048BF4 3C01800B */  lui       $at, 0x800b
-/* 23FF8 80048BF8 A0200F1B */  sb        $zero, 0xf1b($at)
+/* 23FF4 80048BF4 3C01800B */  lui       $at, %hi(gCurrentEncounter+0xB)
+/* 23FF8 80048BF8 A0200F1B */  sb        $zero, %lo(gCurrentEncounter+0xB)($at)
 /* 23FFC 80048BFC 02228821 */  addu      $s1, $s1, $v0
 .L80048C00:
 /* 24000 80048C00 0C03A752 */  jal       is_ability_active

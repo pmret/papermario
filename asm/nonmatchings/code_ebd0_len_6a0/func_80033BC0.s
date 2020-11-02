@@ -106,7 +106,7 @@ glabel func_80033BC0
 /* F150 80033D50 2442F290 */  addiu     $v0, $v0, %lo(gPlayerData)
 /* F154 80033D54 0C03AC80 */  jal       func_800EB200
 /* F158 80033D58 80440012 */   lb       $a0, 0x12($v0)
-/* F15C 80033D5C 0C0169B0 */  jal       load_map_script_lib
+/* F15C 80033D5C 0C0169B0 */  jal       load_world_script_api
 /* F160 80033D60 00000000 */   nop      
 /* F164 80033D64 3C04800E */  lui       $a0, 0x800e
 /* F168 80033D68 24849230 */  addiu     $a0, $a0, -0x6dd0

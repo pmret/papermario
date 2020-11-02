@@ -1,10 +1,22 @@
 #include "common.h"
 
+// TODO: rodata
+extern s32 D_80078DB0;
+extern u16 D_80078DB4;
+
 INCLUDE_ASM(s32, "code_303c0_len_3e10", al_LoadBKHeaders);
 
-INCLUDE_ASM(s32, "code_303c0_len_3e10", func_80055050);
+#ifdef NON_MATCHING
+// Delay slot (probably needs rodata)
+void func_80055050(void) {
+    D_80078DB4 = 1;
+    D_80078DB0 = 0;
+}
+#else
+INCLUDE_ASM(void, "code_303c0_len_3e10", func_80055050, void);
+#endif
 
-INCLUDE_ASM(s32, "code_303c0_len_3e10", func_80055068);
+INCLUDE_ASM(void, "code_303c0_len_3e10", func_80055068, u32 arg0);
 
 INCLUDE_ASM(s32, "code_303c0_len_3e10", func_80055110);
 
@@ -58,7 +70,9 @@ INCLUDE_ASM(s32, "code_303c0_len_3e10", func_8005591C);
 
 INCLUDE_ASM(s32, "code_303c0_len_3e10", func_80055970);
 
-INCLUDE_ASM(s32, "code_303c0_len_3e10", func_800559C4);
+s32 func_800559C4(UNK_TYPE arg0) {
+    return func_8004DA0C(arg0);
+}
 
 INCLUDE_ASM(s32, "code_303c0_len_3e10", func_800559E0);
 

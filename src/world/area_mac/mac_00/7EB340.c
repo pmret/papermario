@@ -4,15 +4,13 @@ INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80240630_7EB340);
 
 #include "world/common/GetItemName.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80240748_7EB458);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_8024075C_7EB46C);
+#include "world/common/Set80151310.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_8024076C_7EB47C);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80240990_7EB6A0);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_802409DC_7EB6EC);
+#include "world/common/GetNpcUnsafeOwner2.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_802409FC_7EB70C);
 
@@ -36,19 +34,17 @@ INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80241138_7EBE48);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80241154_7EBE64);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_8024116C_7EBE7C);
+#include "world/common/GetGameStatus75.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_8024119C_7EBEAC);
+#include "world/common/SetCamVfov.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80241210_7EBF20);
+#include "world/common/GetCamVfov.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_802412B0_7EBFC0);
+#include "world/common/UnkCameraFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_8024144C_7EC15C);
+#include "world/common/UnkRotatePlayer.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_802414B0_7EC1C0);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80241540_7EC250);
+#include "world/common/UnkPartnerFuncs.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80241628_7EC338);
 
@@ -68,7 +64,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80241A18_7EC728);
 
 #include "world/common/SetManyVars.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80241BA4_7EC8B4);
+INCLUDE_ASM(ApiStatus, "world/area_mac/mac_00/7EB340", func_80241BA4_7EC8B4, ScriptInstance* script, s32 isInitialCall);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80241D30_7ECA40);
 
@@ -82,7 +78,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80241E80_7ECB90);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80241FF0_7ECD00);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80242078_7ECD88);
+#include "world/common/UnkPositionFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80242178_7ECE88);
 

@@ -10,7 +10,7 @@ INCLUDE_ASM(s32, "code_7bb60_len_41b0", func_800E26C4);
 
 void set_action_state(s32 actionState);
 
-void move_player(s16 duration, f32 heading, f32 speed) {
+void move_player(s32 duration, f32 heading, f32 speed) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     playerStatus->flags |= 0x4000;

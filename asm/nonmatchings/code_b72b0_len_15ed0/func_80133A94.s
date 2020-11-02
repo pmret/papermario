@@ -17,9 +17,9 @@ glabel func_80133A94
 /* CA1C4 80133AC4 34424000 */  ori       $v0, $v0, 0x4000
 /* CA1C8 80133AC8 00431824 */  and       $v1, $v0, $v1
 /* CA1CC 80133ACC AC830000 */  sw        $v1, ($a0)
-/* CA1D0 80133AD0 3C028008 */  lui       $v0, 0x8008
+/* CA1D0 80133AD0 3C028008 */  lui       $v0, %hi(gItemTable+0x18)
 /* CA1D4 80133AD4 00451021 */  addu      $v0, $v0, $a1
-/* CA1D8 80133AD8 944278F8 */  lhu       $v0, 0x78f8($v0)
+/* CA1D8 80133AD8 944278F8 */  lhu       $v0, %lo(gItemTable+0x18)($v0)
 /* CA1DC 80133ADC 30421000 */  andi      $v0, $v0, 0x1000
 /* CA1E0 80133AE0 10400005 */  beqz      $v0, .L80133AF8
 /* CA1E4 80133AE4 3C020004 */   lui      $v0, 4

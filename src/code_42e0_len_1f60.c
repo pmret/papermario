@@ -53,7 +53,7 @@ void copy_matrix(Matrix4f* src, Matrix4f* dest) {
     bcopy(src, dest, sizeof(Matrix4f));
 }
 
-INCLUDE_ASM(s32, "code_42e0_len_1f60", dma_copy);
+INCLUDE_ASM(void, "code_42e0_len_1f60", dma_copy, void* romStart, void* romEnd, void* vramDest);
 
 INCLUDE_ASM(s32, "code_42e0_len_1f60", func_800297D4);
 

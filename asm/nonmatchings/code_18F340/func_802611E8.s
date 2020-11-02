@@ -8,8 +8,8 @@ glabel func_802611E8
 /* 18FAD4 802611F4 3C048011 */  lui       $a0, %hi(gPlayerData)
 /* 18FAD8 802611F8 2484F290 */  addiu     $a0, $a0, %lo(gPlayerData)
 /* 18FADC 802611FC AFB10014 */  sw        $s1, 0x14($sp)
-/* 18FAE0 80261200 3C118009 */  lui       $s1, 0x8009
-/* 18FAE4 80261204 26318B80 */  addiu     $s1, $s1, -0x7480
+/* 18FAE0 80261200 3C118009 */  lui       $s1, %hi(gItemTable+0x12A0)
+/* 18FAE4 80261204 26318B80 */  addiu     $s1, $s1, %lo(gItemTable+0x12A0)
 /* 18FAE8 80261208 AFBF001C */  sw        $ra, 0x1c($sp)
 /* 18FAEC 8026120C AFB00010 */  sw        $s0, 0x10($sp)
 /* 18FAF0 80261210 90820002 */  lbu       $v0, 2($a0)

@@ -38,27 +38,23 @@ INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80241E18_D21CA8);
 
 INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80241EB4_D21D44);
 
-INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80241F50_D21DE0);
+#include "world/common/Call800E9894.inc.c"
 
-INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80241F70_D21E00);
+#include "world/common/Call800E98C4SyncStatusMenu.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80241F98_D21E28);
 
 INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80242014_D21EA4);
 
-INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80242094_D21F24);
+#include "world/common/AwaitScriptComplete.inc.c"
 
-INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_802420C4_D21F54);
-
-INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_802420F0_D21F80);
+#include "world/common/PartnerToggleAbilityScript.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80242110_D21FA0);
 
 INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80242164_D21FF4);
 
-INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_802421E0_D22070);
-
-INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80242214_D220A4);
+#include "world/common/GetPartnerCall800EB168.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80242244_D220D4);
 

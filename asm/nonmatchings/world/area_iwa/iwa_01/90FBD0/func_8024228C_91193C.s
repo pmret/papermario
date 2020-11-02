@@ -6,8 +6,8 @@ glabel func_8024228C_91193C
 /* 911940 80242290 3C05FE36 */  lui       $a1, 0xfe36
 /* 911944 80242294 AFBF0010 */  sw        $ra, 0x10($sp)
 /* 911948 80242298 8C820148 */  lw        $v0, 0x148($a0)
-/* 91194C 8024229C 3C06800B */  lui       $a2, 0x800b
-/* 911950 802422A0 8CC60F9C */  lw        $a2, 0xf9c($a2)
+/* 91194C 8024229C 3C06800B */  lui       $a2, %hi(gCurrentEncounter+0x8C)
+/* 911950 802422A0 8CC60F9C */  lw        $a2, %lo(gCurrentEncounter+0x8C)($a2)
 /* 911954 802422A4 34A53C80 */  ori       $a1, $a1, 0x3c80
 /* 911958 802422A8 00C23026 */  xor       $a2, $a2, $v0
 /* 91195C 802422AC 0C0B2026 */  jal       set_variable

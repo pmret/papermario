@@ -23,9 +23,9 @@ glabel func_80260E90
 /* 18F7B8 80260ED8 8442017A */  lh        $v0, 0x17a($v0)
 /* 18F7BC 80260EDC 0260202D */  daddu     $a0, $s3, $zero
 /* 18F7C0 80260EE0 00021140 */  sll       $v0, $v0, 5
-/* 18F7C4 80260EE4 3C128008 */  lui       $s2, 0x8008
+/* 18F7C4 80260EE4 3C128008 */  lui       $s2, %hi(gItemTable+0xC)
 /* 18F7C8 80260EE8 02429021 */  addu      $s2, $s2, $v0
-/* 18F7CC 80260EEC 865278EC */  lh        $s2, 0x78ec($s2)
+/* 18F7CC 80260EEC 865278EC */  lh        $s2, %lo(gItemTable+0xC)($s2)
 /* 18F7D0 80260EF0 92620191 */  lbu       $v0, 0x191($s3)
 /* 18F7D4 80260EF4 C6620148 */  lwc1      $f2, 0x148($s3)
 /* 18F7D8 80260EF8 44820000 */  mtc1      $v0, $f0

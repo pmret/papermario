@@ -119,7 +119,7 @@ glabel func_80034C3C
 /* 101F8 80034DF8 00000000 */   nop      
 /* 101FC 80034DFC 0C052B1C */  jal       func_8014AC70
 /* 10200 80034E00 00000000 */   nop      
-/* 10204 80034E04 0C0169B0 */  jal       load_map_script_lib
+/* 10204 80034E04 0C0169B0 */  jal       load_world_script_api
 /* 10208 80034E08 00000000 */   nop      
 /* 1020C 80034E0C 3C04800E */  lui       $a0, 0x800e
 /* 10210 80034E10 24849230 */  addiu     $a0, $a0, -0x6dd0

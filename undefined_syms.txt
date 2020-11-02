@@ -68,10 +68,6 @@ gBattleState = 0x800DC068;
 gBattleStatus = 0x800DC070;
 gPauseMenuStrings = 0x8026F778;
 
-mapScriptLibStart = 0x7E0E80;
-mapScriptLibEnd = 0x7E73A0;
-mapScriptLibVram = 0x80280000;
-
 D_000759B0 = 0x000759B0;
 D_000759B0_end = 0x000A5DD0;
 D_000A5DD0 = 0x000A5DD0;
@@ -179,8 +175,13 @@ gTriggerList2 = 0x80159290;
 gCurrentTriggerListPtr = 0x80159390;
 
 D_801595A0 = 0x801595A0;
-D_80159AE2 = 0x80159AE2;
-D_80159AE4 = 0x80159AE4;
+gMusicUnkVolume = 0x80159AE0;
+gMusicTargetVolume = 0x80159AE2;
+gMusicUnkVolume2 = 0x80159AE4;
+gMusicCurrentVolume = 0x80159AE6;
+gMusicPlayers = 0x80159AF0;
+D_8014F6F0 = 0x8014F6F0;
+
 gCollisionStatus = 0x8015A550;
 D_8015C7C0 = 0x8015C7C0;
 gLastCreatedEntityIndex = 0x801512EC;
@@ -213,6 +214,8 @@ gCurrentUpdateFunction = 0x8015170C;
 gWorldDynamicEntityList = 0x801543A0;
 gBattleDynamicEntityList = 0x801543E0;
 gCurrentDynamicEntityListPtr = 0x80154420;
+
+D_802D9D50 = 0x802D9D50;
 
 gScriptIndexList = 0x802DA898;
 gScriptIdList = 0x802DAA98;
@@ -260,3 +263,8 @@ ShakeCamX = 0x802D9CE8;
 
 EnemyNpcHit = 0x80077F70;
 EnemyNpcDefeat = 0x8007809C;
+
+D_80078DB0 = 0x80078DB0;
+D_80078DB4 = 0x80078DB4;
+
+gSongsUsingVariationFlag = 0x8014F720;

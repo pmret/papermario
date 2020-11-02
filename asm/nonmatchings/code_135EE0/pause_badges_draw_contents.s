@@ -60,8 +60,8 @@ glabel pause_badges_draw_contents
 /* 13A91C 802475DC 00005810 */  mfhi      $t3
 /* 13A920 802475E0 24040004 */  addiu     $a0, $zero, 4
 /* 13A924 802475E4 8FA700C8 */  lw        $a3, 0xc8($sp)
-/* 13A928 802475E8 3C088011 */  lui       $t0, 0x8011
-/* 13A92C 802475EC 8108F298 */  lb        $t0, -0xd68($t0)
+/* 13A928 802475E8 3C088011 */  lui       $t0, %hi(gPlayerData+0x8)
+/* 13A92C 802475EC 8108F298 */  lb        $t0, %lo(gPlayerData+0x8)($t0)
 /* 13A930 802475F0 3C058027 */  lui       $a1, 0x8027
 /* 13A934 802475F4 24A5FC48 */  addiu     $a1, $a1, -0x3b8
 /* 13A938 802475F8 AFA00010 */  sw        $zero, 0x10($sp)
@@ -211,8 +211,8 @@ glabel pause_badges_draw_contents
 /* 13AB60 80247820 AFAA0094 */  sw        $t2, 0x94($sp)
 .L80247824:
 /* 13AB64 80247824 8FAB0078 */  lw        $t3, 0x78($sp)
-/* 13AB68 80247828 3C128011 */  lui       $s2, 0x8011
-/* 13AB6C 8024782C 2652F498 */  addiu     $s2, $s2, -0xb68
+/* 13AB68 80247828 3C128011 */  lui       $s2, %hi(gPlayerData+0x208)
+/* 13AB6C 8024782C 2652F498 */  addiu     $s2, $s2, %lo(gPlayerData+0x208)
 /* 13AB70 80247830 AFA00084 */  sw        $zero, 0x84($sp)
 /* 13AB74 80247834 8D620004 */  lw        $v0, 4($t3)
 /* 13AB78 80247838 24037FFF */  addiu     $v1, $zero, 0x7fff
@@ -1012,8 +1012,8 @@ glabel pause_badges_draw_contents
 /* 13B734 802483F4 24070001 */  addiu     $a3, $zero, 1
 /* 13B738 802483F8 241500FF */  addiu     $s5, $zero, 0xff
 /* 13B73C 802483FC 8FAB00C4 */  lw        $t3, 0xc4($sp)
-/* 13B740 80248400 3C048011 */  lui       $a0, 0x8011
-/* 13B744 80248404 8084F298 */  lb        $a0, -0xd68($a0)
+/* 13B740 80248400 3C048011 */  lui       $a0, %hi(gPlayerData+0x8)
+/* 13B744 80248404 8084F298 */  lb        $a0, %lo(gPlayerData+0x8)($a0)
 /* 13B748 80248408 24140003 */  addiu     $s4, $zero, 3
 /* 13B74C 8024840C AFB30010 */  sw        $s3, 0x10($sp)
 /* 13B750 80248410 AFB50014 */  sw        $s5, 0x14($sp)
@@ -1023,8 +1023,8 @@ glabel pause_badges_draw_contents
 /* 13B760 80248420 0C0911FD */  jal       pause_get_total_equipped_bp_cost
 /* 13B764 80248424 0000902D */   daddu    $s2, $zero, $zero
 /* 13B768 80248428 3C056666 */  lui       $a1, 0x6666
-/* 13B76C 8024842C 3C048011 */  lui       $a0, 0x8011
-/* 13B770 80248430 8084F298 */  lb        $a0, -0xd68($a0)
+/* 13B76C 8024842C 3C048011 */  lui       $a0, %hi(gPlayerData+0x8)
+/* 13B770 80248430 8084F298 */  lb        $a0, %lo(gPlayerData+0x8)($a0)
 /* 13B774 80248434 34A56667 */  ori       $a1, $a1, 0x6667
 /* 13B778 80248438 2483FFFF */  addiu     $v1, $a0, -1
 /* 13B77C 8024843C 00650018 */  mult      $v1, $a1
@@ -1068,8 +1068,8 @@ glabel pause_badges_draw_contents
 /* 13B810 802484D0 0060202D */  daddu     $a0, $v1, $zero
 /* 13B814 802484D4 24630008 */  addiu     $v1, $v1, 8
 /* 13B818 802484D8 ACC30000 */  sw        $v1, ($a2)
-/* 13B81C 802484DC 3C108011 */  lui       $s0, 0x8011
-/* 13B820 802484E0 8210F298 */  lb        $s0, -0xd68($s0)
+/* 13B81C 802484DC 3C108011 */  lui       $s0, %hi(gPlayerData+0x8)
+/* 13B820 802484E0 8210F298 */  lb        $s0, %lo(gPlayerData+0x8)($s0)
 /* 13B824 802484E4 241E0064 */  addiu     $fp, $zero, 0x64
 /* 13B828 802484E8 AC820000 */  sw        $v0, ($a0)
 /* 13B82C 802484EC 3C028027 */  lui       $v0, 0x8027

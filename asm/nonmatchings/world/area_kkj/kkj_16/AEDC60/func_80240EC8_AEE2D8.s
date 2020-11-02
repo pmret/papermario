@@ -5,8 +5,8 @@ glabel func_80240EC8_AEE2D8
 /* AEE2D8 80240EC8 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* AEE2DC 80240ECC AFBF0010 */  sw        $ra, 0x10($sp)
 /* AEE2E0 80240ED0 8C82000C */  lw        $v0, 0xc($a0)
-/* AEE2E4 80240ED4 3C068011 */  lui       $a2, 0x8011
-/* AEE2E8 80240ED8 80C6EFD4 */  lb        $a2, -0x102c($a2)
+/* AEE2E4 80240ED4 3C068011 */  lui       $a2, %hi(gPlayerStatus+0xC)
+/* AEE2E8 80240ED8 80C6EFD4 */  lb        $a2, %lo(gPlayerStatus+0xC)($a2)
 /* AEE2EC 80240EDC 0C0B2026 */  jal       set_variable
 /* AEE2F0 80240EE0 8C450000 */   lw       $a1, ($v0)
 /* AEE2F4 80240EE4 8FBF0010 */  lw        $ra, 0x10($sp)

@@ -46,8 +46,8 @@ glabel func_8024073C_A57BEC
 /* A57C8C 802407DC 46800020 */  cvt.s.w   $f0, $f0
 /* A57C90 802407E0 E4A0001C */  swc1      $f0, 0x1c($a1)
 .L802407E4:
-/* A57C94 802407E4 3C028011 */  lui       $v0, 0x8011
-/* A57C98 802407E8 8042F2A2 */  lb        $v0, -0xd5e($v0)
+/* A57C94 802407E4 3C028011 */  lui       $v0, %hi(gPlayerData+0x12)
+/* A57C98 802407E8 8042F2A2 */  lb        $v0, %lo(gPlayerData+0x12)($v0)
 /* A57C9C 802407EC 1040000D */  beqz      $v0, .L80240824
 /* A57CA0 802407F0 00000000 */   nop      
 /* A57CA4 802407F4 0C00EABB */  jal       get_npc_unsafe

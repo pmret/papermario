@@ -4,8 +4,8 @@
 glabel func_802416CC_E13E2C
 /* E13E2C 802416CC 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* E13E30 802416D0 3C05FE36 */  lui       $a1, 0xfe36
-/* E13E34 802416D4 3C068011 */  lui       $a2, 0x8011
-/* E13E38 802416D8 84C6F29C */  lh        $a2, -0xd64($a2)
+/* E13E34 802416D4 3C068011 */  lui       $a2, %hi(gPlayerData+0xC)
+/* E13E38 802416D8 84C6F29C */  lh        $a2, %lo(gPlayerData+0xC)($a2)
 /* E13E3C 802416DC AFBF0010 */  sw        $ra, 0x10($sp)
 /* E13E40 802416E0 0C0B2026 */  jal       set_variable
 /* E13E44 802416E4 34A53C8A */   ori      $a1, $a1, 0x3c8a

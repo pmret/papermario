@@ -80,8 +80,6 @@ extern s32 D_8010CD20;
 extern s32 D_8010EF08;
 extern s32 D_8010F094; // player shadow index?
 extern s32 D_801595A0;
-extern s16 D_80159AE2;
-extern s16 D_80159AE4;
 extern BackgroundHeader gBackgroundImage;
 
 extern PrintContext* gCurrentPrintContext;
@@ -156,13 +154,17 @@ extern s32 D_8009A5D8;
 extern u8 D_800779B0;
 extern u8 D_800A0963;
 
-extern s32 mapScriptLibStart;
-extern s32 mapScriptLibEnd;
-extern s32 mapScriptLibVram;
-
 // Scripts
 extern Bytecode* SCRIPT_NpcDefeat;
 extern Bytecode* ShakeCam1;
 extern Bytecode* ShakeCamX;
+extern Bytecode* D_802D9D50;
+
+extern s16 gMusicUnkVolume;
+extern s16 gMusicUnkVolume2;
+extern s16 gMusicCurrentVolume;
+extern s16 gMusicTargetVolume;
+extern MusicPlayer gMusicPlayers[4];
+extern MusicPlayer D_8014F6F0;
 
 #endif

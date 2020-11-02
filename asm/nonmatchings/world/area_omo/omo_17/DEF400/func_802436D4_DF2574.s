@@ -6,8 +6,8 @@ glabel func_802436D4_DF2574
 /* DF2578 802436D8 3C05FE36 */  lui       $a1, 0xfe36
 /* DF257C 802436DC AFBF0010 */  sw        $ra, 0x10($sp)
 /* DF2580 802436E0 8C820148 */  lw        $v0, 0x148($a0)
-/* DF2584 802436E4 3C06800B */  lui       $a2, 0x800b
-/* DF2588 802436E8 8CC60F9C */  lw        $a2, 0xf9c($a2)
+/* DF2584 802436E4 3C06800B */  lui       $a2, %hi(gCurrentEncounter+0x8C)
+/* DF2588 802436E8 8CC60F9C */  lw        $a2, %lo(gCurrentEncounter+0x8C)($a2)
 /* DF258C 802436EC 34A53C80 */  ori       $a1, $a1, 0x3c80
 /* DF2590 802436F0 00C23026 */  xor       $a2, $a2, $v0
 /* DF2594 802436F4 0C0B2026 */  jal       set_variable

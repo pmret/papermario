@@ -6,7 +6,7 @@ INCLUDE_ASM(s32, "world/area_sam/sam_10/D37800", func_80240000_D37800);
 
 #include "world/common/SomeItemEntityFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_sam/sam_10/D37800", func_80240268_D37A68);
+#include "world/common/CheckItemFlags40.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_10/D37800", func_802402BC_D37ABC);
 
