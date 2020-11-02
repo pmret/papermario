@@ -30,21 +30,17 @@ INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C77D00", func_80242688_C79368);
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C77D00", func_80242774_C79454);
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C77D00", func_802429C4_C796A4);
+#include "world/common/SetNpcAnim.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C77D00", func_80242A40_C79720);
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C77D00", func_80242B74_C79854);
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C77D00", func_80242CD8_C799B8);
+#include "world/common/SetNpcColHeight.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C77D00", func_80242D58_C79A38);
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C77D00", func_80243198_C79E78);
-
 #include "world/common/AwaitPlayerNearNpc.inc.c"
-
-INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C77D00", func_80243238_C79F18);
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C77D00", func_802432AC_C79F8C);
 

@@ -232,7 +232,7 @@ glabel func_80242D58_C79A38
 .L802430A8:
 /* C79D88 802430A8 0260202D */  daddu     $a0, $s3, $zero
 /* C79D8C 802430AC 0280282D */  daddu     $a1, $s4, $zero
-/* C79D90 802430B0 0C090A71 */  jal       func_802429C4_C796A4
+/* C79D90 802430B0 0C090A71 */  jal       SetNpcAnim
 /* C79D94 802430B4 02A0302D */   daddu    $a2, $s5, $zero
 /* C79D98 802430B8 0260202D */  daddu     $a0, $s3, $zero
 .L802430BC:
@@ -250,7 +250,7 @@ glabel func_80242D58_C79A38
 /* C79DC4 802430E4 00000000 */   nop      
 .L802430E8:
 /* C79DC8 802430E8 0280282D */  daddu     $a1, $s4, $zero
-/* C79DCC 802430EC 0C090B36 */  jal       func_80242CD8_C799B8
+/* C79DCC 802430EC 0C090B36 */  jal       SetNpcColHeight
 /* C79DD0 802430F0 02A0302D */   daddu    $a2, $s5, $zero
 /* C79DD4 802430F4 08090C41 */  j         .L80243104
 /* C79DD8 802430F8 00000000 */   nop      
