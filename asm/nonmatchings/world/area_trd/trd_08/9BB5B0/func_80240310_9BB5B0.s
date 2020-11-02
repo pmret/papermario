@@ -301,8 +301,8 @@ glabel func_80240310_9BB5B0
 /* 9BBA28 80240788 0C052757 */  jal       play_sound_at_position
 /* 9BBA2C 8024078C E7A00010 */   swc1     $f0, 0x10($sp)
 /* 9BBA30 80240790 2402002D */  addiu     $v0, $zero, 0x2d
-/* 9BBA34 80240794 3C01800B */  lui       $at, 0x800b
-/* 9BBA38 80240798 A0220F1A */  sb        $v0, 0xf1a($at)
+/* 9BBA34 80240794 3C01800B */  lui       $at, %hi(gCurrentEncounter+0xA)
+/* 9BBA38 80240798 A0220F1A */  sb        $v0, %lo(gCurrentEncounter+0xA)($at)
 /* 9BBA3C 8024079C C6600028 */  lwc1      $f0, 0x28($s3)
 /* 9BBA40 802407A0 C6620030 */  lwc1      $f2, 0x30($s3)
 /* 9BBA44 802407A4 2402002D */  addiu     $v0, $zero, 0x2d

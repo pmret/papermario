@@ -36,9 +36,9 @@ ApiStatus func_80281C84(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_7E2AA0", MakeDoorAdvanced);
+INCLUDE_ASM(s32, "world/script_api/7E2AA0", MakeDoorAdvanced);
 
-INCLUDE_ASM(s32, "code_7E2AA0", func_802822A8);
+INCLUDE_ASM(s32, "world/script_api/7E2AA0", func_802822A8);
 
 ApiStatus func_80282314(ScriptInstance* script, s32 isInitialCall) {
     script->functionTemp[1].s = script->varTable[1];
@@ -57,11 +57,11 @@ ApiStatus func_80282338(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_7E2AA0", func_8028236C);
+INCLUDE_ASM(s32, "world/script_api/7E2AA0", func_8028236C);
 
-INCLUDE_ASM(s32, "code_7E2AA0", func_802823B0);
+INCLUDE_ASM(s32, "world/script_api/7E2AA0", func_802823B0);
 
-INCLUDE_ASM(s32, "code_7E2AA0", func_80282414);
+INCLUDE_ASM(s32, "world/script_api/7E2AA0", func_80282414);
 
 #ifdef NON_MATCHING
 ApiStatus func_80282594(ScriptInstance* script, s32 isInitialCall) {
@@ -83,7 +83,7 @@ ApiStatus func_80282594(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 #else
-INCLUDE_ASM(s32, "code_7E2AA0", func_80282594);
+INCLUDE_ASM(s32, "world/script_api/7E2AA0", func_80282594);
 #endif
 
 ApiStatus func_802825FC(ScriptInstance* script, s32 isInitialCall) {
@@ -102,9 +102,9 @@ ApiStatus func_80282624(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_7E2AA0", func_80282634);
+INCLUDE_ASM(s32, "world/script_api/7E2AA0", func_80282634);
 
-INCLUDE_ASM(s32, "code_7E2AA0", func_80282700);
+INCLUDE_ASM(s32, "world/script_api/7E2AA0", func_80282700);
 
 ApiStatus func_80282774(ScriptInstance* script, s32 isInitialCall) {
     DoorStuff* doorStuff = (DoorStuff*)script->functionTemp[1].s;

@@ -2,47 +2,47 @@
 #include "ld_addrs.h"
 #include "map.h"
 
-INCLUDE_ASM(s32, "code_341d0_len_20d0", func_80058DD0);
+INCLUDE_ASM(s32, "world/world", func_80058DD0);
 
-INCLUDE_ASM(s32, "code_341d0_len_20d0", func_80058E84);
+INCLUDE_ASM(s32, "world/world", func_80058E84);
 
-INCLUDE_ASM(s32, "code_341d0_len_20d0", func_80058F88);
+INCLUDE_ASM(s32, "world/world", func_80058F88);
 
-INCLUDE_ASM(s32, "code_341d0_len_20d0", func_80059008);
+INCLUDE_ASM(s32, "world/world", func_80059008);
 
-INCLUDE_ASM(s32, "code_341d0_len_20d0", func_8005904C);
+INCLUDE_ASM(s32, "world/world", func_8005904C);
 
-INCLUDE_ASM(s32, "code_341d0_len_20d0", func_80059310);
+INCLUDE_ASM(s32, "world/world", func_80059310);
 
-INCLUDE_ASM(s32, "code_341d0_len_20d0", func_800598A0);
+INCLUDE_ASM(s32, "world/world", func_800598A0);
 
-INCLUDE_ASM(s32, "code_341d0_len_20d0", func_80059AB8);
+INCLUDE_ASM(s32, "world/world", func_80059AB8);
 
-INCLUDE_ASM(s32, "code_341d0_len_20d0", func_80059BD4);
+INCLUDE_ASM(s32, "world/world", func_80059BD4);
 
 void func_80059C80(void) {
 }
 
-INCLUDE_ASM(s32, "code_341d0_len_20d0", func_80059C88);
+INCLUDE_ASM(s32, "world/world", func_80059C88);
 
-INCLUDE_ASM(s32, "code_341d0_len_20d0", func_80059C9C);
+INCLUDE_ASM(s32, "world/world", func_80059C9C);
 
 void func_80059D48(void) {
 }
 
-INCLUDE_ASM(s32, "code_341d0_len_20d0", func_80059D50);
+INCLUDE_ASM(s32, "world/world", func_80059D50);
 
-INCLUDE_ASM(s32, "code_341d0_len_20d0", render_effects);
+INCLUDE_ASM(s32, "world/world", render_effects);
 
-INCLUDE_ASM(s32, "code_341d0_len_20d0", func_80059F94);
+INCLUDE_ASM(s32, "world/world", func_80059F94);
 
-INCLUDE_ASM(s32, "code_341d0_len_20d0", func_8005A2BC);
+INCLUDE_ASM(s32, "world/world", func_8005A2BC);
 
-INCLUDE_ASM(s32, "code_341d0_len_20d0", remove_effect);
+INCLUDE_ASM(s32, "world/world", remove_effect);
 
-INCLUDE_ASM(s32, "code_341d0_len_20d0", remove_all_effects);
+INCLUDE_ASM(s32, "world/world", remove_all_effects);
 
-INCLUDE_ASM(s32, "code_341d0_len_20d0", play_effect);
+INCLUDE_ASM(s32, "world/world", play_effect);
 
 void load_world_script_api(void) {
     dma_copy(&world_script_api_ROM_START, &world_script_api_ROM_END, &world_script_api_VRAM);
@@ -64,17 +64,17 @@ static const s32 rodata_73DA0[] = {
     0x25735F74, 0x65780000, // "%s_tex"
 };
 
-INCLUDE_ASM(s32, "code_341d0_len_20d0", load_map_by_IDs);
+INCLUDE_ASM(s32, "world/world", load_map_by_IDs);
 
-INCLUDE_ASM(s32, "code_341d0_len_20d0", get_current_map_config);
+INCLUDE_ASM(s32, "world/world", get_current_map_config);
 
-INCLUDE_ASM(s32, "code_341d0_len_20d0", get_current_map_header);
+INCLUDE_ASM(s32, "world/world", get_current_map_header);
 
-INCLUDE_ASM(s32, "code_341d0_len_20d0", get_map_IDs_by_name);
+INCLUDE_ASM(s32, "world/world", get_map_IDs_by_name);
 
-INCLUDE_ASM(void*, "code_341d0_len_20d0", load_asset_by_name, char* name, s32* decompressedSize);
+INCLUDE_ASM(void*, "world/world", load_asset_by_name, char* name, s32* decompressedSize);
 
-INCLUDE_ASM(s32, "code_341d0_len_20d0", get_asset_offset);
+INCLUDE_ASM(s32, "world/world", get_asset_offset);
 
 #define AREA(area, jp_name) { ARRAY_COUNT(area##_maps), area##_maps, "area_" #area, jp_name }
 

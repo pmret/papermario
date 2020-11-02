@@ -22,8 +22,8 @@ glabel func_80280B78
 /* 7E1A34 80280BB4 2463000C */   addiu    $v1, $v1, 0xc
 .L80280BB8:
 /* 7E1A38 80280BB8 00041140 */  sll       $v0, $a0, 5
-/* 7E1A3C 80280BBC 3C018008 */  lui       $at, 0x8008
+/* 7E1A3C 80280BBC 3C018008 */  lui       $at, %hi(gItemTable+0xC)
 /* 7E1A40 80280BC0 00220821 */  addu      $at, $at, $v0
-/* 7E1A44 80280BC4 842278EC */  lh        $v0, 0x78ec($at)
+/* 7E1A44 80280BC4 842278EC */  lh        $v0, %lo(gItemTable+0xC)($at)
 /* 7E1A48 80280BC8 03E00008 */  jr        $ra
 /* 7E1A4C 80280BCC 00000000 */   nop      

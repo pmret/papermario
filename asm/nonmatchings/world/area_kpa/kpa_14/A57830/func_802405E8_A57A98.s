@@ -11,9 +11,9 @@ glabel func_802405E8_A57A98
 /* A57AB0 80240600 8C450000 */   lw       $a1, ($v0)
 /* A57AB4 80240604 00021140 */  sll       $v0, $v0, 5
 /* A57AB8 80240608 AE000084 */  sw        $zero, 0x84($s0)
-/* A57ABC 8024060C 3C018008 */  lui       $at, 0x8008
+/* A57ABC 8024060C 3C018008 */  lui       $at, %hi(gItemTable+0x18)
 /* A57AC0 80240610 00220821 */  addu      $at, $at, $v0
-/* A57AC4 80240614 942278F8 */  lhu       $v0, 0x78f8($at)
+/* A57AC4 80240614 942278F8 */  lhu       $v0, %lo(gItemTable+0x18)($at)
 /* A57AC8 80240618 30420040 */  andi      $v0, $v0, 0x40
 /* A57ACC 8024061C 10400002 */  beqz      $v0, .L80240628
 /* A57AD0 80240620 24020001 */   addiu    $v0, $zero, 1

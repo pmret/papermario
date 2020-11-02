@@ -271,7 +271,8 @@ typedef struct Entity {
     /* 0x07 */ char unk_08[4];
     /* 0x0B */ u8 alpha; /* reported by rain */
     /* 0x0C */ s16 aabb[3];
-    /* 0x12 */ char unk_12[4];
+    /* 0x12 */ char unk_12[2];
+    /* 0x14 */ s16 unk_14;
     /* 0x16 */ s16 shadowIndex;
     /* 0x18 */ char unk_18[16];
     /* 0x28 */ Bytecode* boundScript;

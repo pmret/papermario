@@ -2,5 +2,12 @@
 
 #include "world/common/SomeMatrixOperations.inc.c"
 
+ApiStatus func_8024173C_8CF7AC(ScriptInstance* script, s32 isInitialCall) {
+    if (get_enemy_safe(6) == NULL) {
+        script->varTable[0] = FALSE;
+    } else {
+        script->varTable[0] = TRUE;
+    }
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_05/8CF570", func_8024173C_8CF7AC);
+    return ApiStatus_DONE2;
+}
