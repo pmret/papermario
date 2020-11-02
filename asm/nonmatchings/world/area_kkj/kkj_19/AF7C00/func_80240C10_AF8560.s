@@ -10,8 +10,8 @@ glabel func_80240C10_AF8560
 /* AF8574 80240C24 3C048007 */  lui       $a0, %hi(gGameStatusPtr)
 /* AF8578 80240C28 8C84419C */  lw        $a0, %lo(gGameStatusPtr)($a0)
 /* AF857C 80240C2C 0040182D */  daddu     $v1, $v0, $zero
-/* AF8580 80240C30 3C018011 */  lui       $at, 0x8011
-/* AF8584 80240C34 A023F08C */  sb        $v1, -0xf74($at)
+/* AF8580 80240C30 3C018011 */  lui       $at, %hi(gPlayerStatus+0xC4)
+/* AF8584 80240C34 A023F08C */  sb        $v1, %lo(gPlayerStatus+0xC4)($at)
 /* AF8588 80240C38 A0830080 */  sb        $v1, 0x80($a0)
 /* AF858C 80240C3C 8FBF0010 */  lw        $ra, 0x10($sp)
 /* AF8590 80240C40 24020002 */  addiu     $v0, $zero, 2

@@ -23,8 +23,8 @@ glabel func_80240508_9AEC08
 /* 9AEC50 80240550 44103000 */  mfc1      $s0, $f6
 /* 9AEC54 80240554 0C0B210B */  jal       get_float_variable
 /* 9AEC58 80240558 0220202D */   daddu    $a0, $s1, $zero
-/* 9AEC5C 8024055C 3C028011 */  lui       $v0, 0x8011
-/* 9AEC60 80240560 8442F078 */  lh        $v0, -0xf88($v0)
+/* 9AEC5C 8024055C 3C028011 */  lui       $v0, %hi(gPlayerStatus+0xB0)
+/* 9AEC60 80240560 8442F078 */  lh        $v0, %lo(gPlayerStatus+0xB0)($v0)
 /* 9AEC64 80240564 3C018024 */  lui       $at, 0x8024
 /* 9AEC68 80240568 D4223078 */  ldc1      $f2, 0x3078($at)
 /* 9AEC6C 8024056C 44822000 */  mtc1      $v0, $f4

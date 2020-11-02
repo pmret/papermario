@@ -16,9 +16,9 @@ glabel use_consumable
 /* 838DC 800EA42C 00111040 */  sll       $v0, $s1, 1
 /* 838E0 800EA430 3C018011 */  lui       $at, %hi(D_8010CD20)
 /* 838E4 800EA434 AC31CD20 */  sw        $s1, %lo(D_8010CD20)($at)
-/* 838E8 800EA438 3C118011 */  lui       $s1, 0x8011
+/* 838E8 800EA438 3C118011 */  lui       $s1, %hi(gPlayerData+0x1B4)
 /* 838EC 800EA43C 02228821 */  addu      $s1, $s1, $v0
-/* 838F0 800EA440 8631F444 */  lh        $s1, -0xbbc($s1)
+/* 838F0 800EA440 8631F444 */  lh        $s1, %lo(gPlayerData+0x1B4)($s1)
 /* 838F4 800EA444 0C00A5CF */  jal       dma_copy
 /* 838F8 800EA448 00000000 */   nop      
 /* 838FC 800EA44C 24050001 */  addiu     $a1, $zero, 1

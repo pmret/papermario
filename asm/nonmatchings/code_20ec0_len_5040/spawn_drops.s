@@ -245,10 +245,10 @@ glabel spawn_drops
 /* 23A10 80048610 4481D000 */  mtc1      $at, $f26
 /* 23A14 80048614 3C0142C8 */  lui       $at, 0x42c8
 /* 23A18 80048618 4481E000 */  mtc1      $at, $f28
-/* 23A1C 8004861C 3C028011 */  lui       $v0, 0x8011
-/* 23A20 80048620 8042F292 */  lb        $v0, -0xd6e($v0)
-/* 23A24 80048624 3C038011 */  lui       $v1, 0x8011
-/* 23A28 80048628 8063F293 */  lb        $v1, -0xd6d($v1)
+/* 23A1C 8004861C 3C028011 */  lui       $v0, %hi(gPlayerData+0x2)
+/* 23A20 80048620 8042F292 */  lb        $v0, %lo(gPlayerData+0x2)($v0)
+/* 23A24 80048624 3C038011 */  lui       $v1, %hi(gPlayerData+0x3)
+/* 23A28 80048628 8063F293 */  lb        $v1, %lo(gPlayerData+0x3)($v1)
 /* 23A2C 8004862C 24130002 */  addiu     $s3, $zero, 2
 /* 23A30 80048630 AFA00030 */  sw        $zero, 0x30($sp)
 /* 23A34 80048634 44821000 */  mtc1      $v0, $f2
@@ -431,10 +431,10 @@ glabel spawn_drops
 /* 23CC0 800488C0 4481D000 */  mtc1      $at, $f26
 /* 23CC4 800488C4 3C0142C8 */  lui       $at, 0x42c8
 /* 23CC8 800488C8 4481E000 */  mtc1      $at, $f28
-/* 23CCC 800488CC 3C028011 */  lui       $v0, 0x8011
-/* 23CD0 800488D0 8042F295 */  lb        $v0, -0xd6b($v0)
-/* 23CD4 800488D4 3C038011 */  lui       $v1, 0x8011
-/* 23CD8 800488D8 8063F296 */  lb        $v1, -0xd6a($v1)
+/* 23CCC 800488CC 3C028011 */  lui       $v0, %hi(gPlayerData+0x5)
+/* 23CD0 800488D0 8042F295 */  lb        $v0, %lo(gPlayerData+0x5)($v0)
+/* 23CD4 800488D4 3C038011 */  lui       $v1, %hi(gPlayerData+0x6)
+/* 23CD8 800488D8 8063F296 */  lb        $v1, %lo(gPlayerData+0x6)($v1)
 /* 23CDC 800488DC 24130002 */  addiu     $s3, $zero, 2
 /* 23CE0 800488E0 AFA00030 */  sw        $zero, 0x30($sp)
 /* 23CE4 800488E4 44821000 */  mtc1      $v0, $f2

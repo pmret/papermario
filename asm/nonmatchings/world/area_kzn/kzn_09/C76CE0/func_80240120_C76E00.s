@@ -12,8 +12,8 @@ glabel func_80240120_C76E00
 /* C76E1C 8024013C AFB50024 */  sw        $s5, 0x24($sp)
 /* C76E20 80240140 0200A82D */  daddu     $s5, $s0, $zero
 /* C76E24 80240144 AFB10014 */  sw        $s1, 0x14($sp)
-/* C76E28 80240148 3C118011 */  lui       $s1, 0x8011
-/* C76E2C 8024014C 2631F298 */  addiu     $s1, $s1, -0xd68
+/* C76E28 80240148 3C118011 */  lui       $s1, %hi(gPlayerData+0x8)
+/* C76E2C 8024014C 2631F298 */  addiu     $s1, $s1, %lo(gPlayerData+0x8)
 /* C76E30 80240150 AFBF0028 */  sw        $ra, 0x28($sp)
 /* C76E34 80240154 AFB20018 */  sw        $s2, 0x18($sp)
 /* C76E38 80240158 8E6200B4 */  lw        $v0, 0xb4($s3)

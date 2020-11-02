@@ -7,8 +7,8 @@ glabel func_8014AE6C
 /* E1574 8014AE74 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* E1578 8014AE78 AFBF0018 */  sw        $ra, 0x18($sp)
 /* E157C 8014AE7C 80420071 */  lb        $v0, 0x71($v0)
-/* E1580 8014AE80 3C068016 */  lui       $a2, 0x8016
-/* E1584 8014AE84 24C69AF0 */  addiu     $a2, $a2, -0x6510
+/* E1580 8014AE80 3C068016 */  lui       $a2, %hi(gMusicPlayers)
+/* E1584 8014AE84 24C69AF0 */  addiu     $a2, $a2, %lo(gMusicPlayers)
 /* E1588 8014AE88 14400018 */  bnez      $v0, .L8014AEEC
 /* E158C 8014AE8C 3C020002 */   lui      $v0, 2
 /* E1590 8014AE90 3C04800A */  lui       $a0, %hi(D_8009A650)

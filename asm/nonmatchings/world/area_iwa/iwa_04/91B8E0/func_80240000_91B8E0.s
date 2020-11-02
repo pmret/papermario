@@ -3,8 +3,8 @@
 
 glabel func_80240000_91B8E0
 /* 91B8E0 80240000 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* 91B8E4 80240004 3C028011 */  lui       $v0, 0x8011
-/* 91B8E8 80240008 8442EFE0 */  lh        $v0, -0x1020($v0)
+/* 91B8E4 80240004 3C028011 */  lui       $v0, %hi(gPlayerStatus+0x18)
+/* 91B8E8 80240008 8442EFE0 */  lh        $v0, %lo(gPlayerStatus+0x18)($v0)
 /* 91B8EC 8024000C 3C01C059 */  lui       $at, 0xc059
 /* 91B8F0 80240010 44810800 */  mtc1      $at, $f1
 /* 91B8F4 80240014 44800000 */  mtc1      $zero, $f0

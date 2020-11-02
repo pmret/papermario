@@ -8,8 +8,8 @@ glabel func_8014ADF8
 /* E1504 8014AE04 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* E1508 8014AE08 AFBF0018 */  sw        $ra, 0x18($sp)
 /* E150C 8014AE0C 80420071 */  lb        $v0, 0x71($v0)
-/* E1510 8014AE10 3C078016 */  lui       $a3, 0x8016
-/* E1514 8014AE14 24E79AF0 */  addiu     $a3, $a3, -0x6510
+/* E1510 8014AE10 3C078016 */  lui       $a3, %hi(gMusicPlayers)
+/* E1514 8014AE14 24E79AF0 */  addiu     $a3, $a3, %lo(gMusicPlayers)
 /* E1518 8014AE18 14400011 */  bnez      $v0, .L8014AE60
 /* E151C 8014AE1C 00A0482D */   daddu    $t1, $a1, $zero
 /* E1520 8014AE20 8CE40010 */  lw        $a0, 0x10($a3)

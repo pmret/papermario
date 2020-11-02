@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel TeleportPartnerToPlayer
-/* 7E46FC 8028387C 3C028011 */  lui       $v0, 0x8011
-/* 7E4700 80283880 8042F2A2 */  lb        $v0, -0xd5e($v0)
+/* 7E46FC 8028387C 3C028011 */  lui       $v0, %hi(gPlayerData+0x12)
+/* 7E4700 80283880 8042F2A2 */  lb        $v0, %lo(gPlayerData+0x12)($v0)
 /* 7E4704 80283884 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 7E4708 80283888 AFB10014 */  sw        $s1, 0x14($sp)
 /* 7E470C 8028388C 3C118011 */  lui       $s1, %hi(gPlayerStatus)
