@@ -88,9 +88,9 @@ glabel func_80242B04_BA7284
 /* BA73C8 80242C48 2C62000F */  sltiu     $v0, $v1, 0xf
 /* BA73CC 80242C4C 1040002C */  beqz      $v0, .L80242D00
 /* BA73D0 80242C50 00031080 */   sll      $v0, $v1, 2
-/* BA73D4 80242C54 3C018024 */  lui       $at, 0x8024
+/* BA73D4 80242C54 3C018024 */  lui       $at, %hi(pause_stats_draw_contents)
 /* BA73D8 80242C58 00220821 */  addu      $at, $at, $v0
-/* BA73DC 80242C5C 8C225980 */  lw        $v0, 0x5980($at)
+/* BA73DC 80242C5C 8C225980 */  lw        $v0, %lo(pause_stats_draw_contents)($at)
 /* BA73E0 80242C60 00400008 */  jr        $v0
 /* BA73E4 80242C64 00000000 */   nop      
 /* BA73E8 80242C68 0260202D */  daddu     $a0, $s3, $zero
