@@ -11,9 +11,9 @@ glabel func_80240AD8_DB83E8
 /* DB8400 80240AF0 8C450000 */   lw       $a1, ($v0)
 /* DB8404 80240AF4 00021140 */  sll       $v0, $v0, 5
 /* DB8408 80240AF8 AE000084 */  sw        $zero, 0x84($s0)
-/* DB840C 80240AFC 3C018008 */  lui       $at, 0x8008
+/* DB840C 80240AFC 3C018008 */  lui       $at, %hi(gItemTable+0x18)
 /* DB8410 80240B00 00220821 */  addu      $at, $at, $v0
-/* DB8414 80240B04 942278F8 */  lhu       $v0, 0x78f8($at)
+/* DB8414 80240B04 942278F8 */  lhu       $v0, %lo(gItemTable+0x18)($at)
 /* DB8418 80240B08 30420040 */  andi      $v0, $v0, 0x40
 /* DB841C 80240B0C 10400002 */  beqz      $v0, .L80240B18
 /* DB8420 80240B10 24020001 */   addiu    $v0, $zero, 1

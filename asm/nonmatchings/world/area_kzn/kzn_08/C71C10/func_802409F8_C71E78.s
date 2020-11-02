@@ -11,9 +11,9 @@ glabel func_802409F8_C71E78
 /* C71E90 80240A10 8C450000 */   lw       $a1, ($v0)
 /* C71E94 80240A14 00021140 */  sll       $v0, $v0, 5
 /* C71E98 80240A18 AE000084 */  sw        $zero, 0x84($s0)
-/* C71E9C 80240A1C 3C018008 */  lui       $at, 0x8008
+/* C71E9C 80240A1C 3C018008 */  lui       $at, %hi(gItemTable+0x18)
 /* C71EA0 80240A20 00220821 */  addu      $at, $at, $v0
-/* C71EA4 80240A24 942278F8 */  lhu       $v0, 0x78f8($at)
+/* C71EA4 80240A24 942278F8 */  lhu       $v0, %lo(gItemTable+0x18)($at)
 /* C71EA8 80240A28 30420040 */  andi      $v0, $v0, 0x40
 /* C71EAC 80240A2C 10400002 */  beqz      $v0, .L80240A38
 /* C71EB0 80240A30 24020001 */   addiu    $v0, $zero, 1

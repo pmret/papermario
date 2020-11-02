@@ -11,9 +11,9 @@ glabel func_802405B8_B44D28
 /* B44D40 802405D0 8C450000 */   lw       $a1, ($v0)
 /* B44D44 802405D4 00021140 */  sll       $v0, $v0, 5
 /* B44D48 802405D8 AE000084 */  sw        $zero, 0x84($s0)
-/* B44D4C 802405DC 3C018008 */  lui       $at, 0x8008
+/* B44D4C 802405DC 3C018008 */  lui       $at, %hi(gItemTable+0x18)
 /* B44D50 802405E0 00220821 */  addu      $at, $at, $v0
-/* B44D54 802405E4 942278F8 */  lhu       $v0, 0x78f8($at)
+/* B44D54 802405E4 942278F8 */  lhu       $v0, %lo(gItemTable+0x18)($at)
 /* B44D58 802405E8 30420040 */  andi      $v0, $v0, 0x40
 /* B44D5C 802405EC 10400002 */  beqz      $v0, .L802405F8
 /* B44D60 802405F0 24020001 */   addiu    $v0, $zero, 1

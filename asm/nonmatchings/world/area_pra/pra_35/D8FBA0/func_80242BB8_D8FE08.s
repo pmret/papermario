@@ -11,9 +11,9 @@ glabel func_80242BB8_D8FE08
 /* D8FE20 80242BD0 8C450000 */   lw       $a1, ($v0)
 /* D8FE24 80242BD4 00021140 */  sll       $v0, $v0, 5
 /* D8FE28 80242BD8 AE000084 */  sw        $zero, 0x84($s0)
-/* D8FE2C 80242BDC 3C018008 */  lui       $at, 0x8008
+/* D8FE2C 80242BDC 3C018008 */  lui       $at, %hi(gItemTable+0x18)
 /* D8FE30 80242BE0 00220821 */  addu      $at, $at, $v0
-/* D8FE34 80242BE4 942278F8 */  lhu       $v0, 0x78f8($at)
+/* D8FE34 80242BE4 942278F8 */  lhu       $v0, %lo(gItemTable+0x18)($at)
 /* D8FE38 80242BE8 30420040 */  andi      $v0, $v0, 0x40
 /* D8FE3C 80242BEC 10400002 */  beqz      $v0, .L80242BF8
 /* D8FE40 80242BF0 24020001 */   addiu    $v0, $zero, 1

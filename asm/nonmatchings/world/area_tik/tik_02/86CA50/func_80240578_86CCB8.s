@@ -11,9 +11,9 @@ glabel func_80240578_86CCB8
 /* 86CCD0 80240590 8C450000 */   lw       $a1, ($v0)
 /* 86CCD4 80240594 00021140 */  sll       $v0, $v0, 5
 /* 86CCD8 80240598 AE000084 */  sw        $zero, 0x84($s0)
-/* 86CCDC 8024059C 3C018008 */  lui       $at, 0x8008
+/* 86CCDC 8024059C 3C018008 */  lui       $at, %hi(gItemTable+0x18)
 /* 86CCE0 802405A0 00220821 */  addu      $at, $at, $v0
-/* 86CCE4 802405A4 942278F8 */  lhu       $v0, 0x78f8($at)
+/* 86CCE4 802405A4 942278F8 */  lhu       $v0, %lo(gItemTable+0x18)($at)
 /* 86CCE8 802405A8 30420040 */  andi      $v0, $v0, 0x40
 /* 86CCEC 802405AC 10400002 */  beqz      $v0, .L802405B8
 /* 86CCF0 802405B0 24020001 */   addiu    $v0, $zero, 1

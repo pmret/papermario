@@ -116,9 +116,9 @@ glabel make_item_entity
 /* C7C8C 8013158C A6020036 */  sh        $v0, 0x36($s0)
 /* C7C90 80131590 A6020038 */  sh        $v0, 0x38($s0)
 /* C7C94 80131594 00121140 */  sll       $v0, $s2, 5
-/* C7C98 80131598 3C018008 */  lui       $at, 0x8008
+/* C7C98 80131598 3C018008 */  lui       $at, %hi(gItemTable+0x18)
 /* C7C9C 8013159C 00220821 */  addu      $at, $at, $v0
-/* C7CA0 801315A0 942278F8 */  lhu       $v0, 0x78f8($at)
+/* C7CA0 801315A0 942278F8 */  lhu       $v0, %lo(gItemTable+0x18)($at)
 /* C7CA4 801315A4 2403001E */  addiu     $v1, $zero, 0x1e
 /* C7CA8 801315A8 3C018015 */  lui       $at, 0x8015
 /* C7CAC 801315AC A42365A6 */  sh        $v1, 0x65a6($at)

@@ -11,9 +11,9 @@ glabel func_80241188_D68E88
 /* D68EA0 802411A0 8C450000 */   lw       $a1, ($v0)
 /* D68EA4 802411A4 00021140 */  sll       $v0, $v0, 5
 /* D68EA8 802411A8 AE000084 */  sw        $zero, 0x84($s0)
-/* D68EAC 802411AC 3C018008 */  lui       $at, 0x8008
+/* D68EAC 802411AC 3C018008 */  lui       $at, %hi(gItemTable+0x18)
 /* D68EB0 802411B0 00220821 */  addu      $at, $at, $v0
-/* D68EB4 802411B4 942278F8 */  lhu       $v0, 0x78f8($at)
+/* D68EB4 802411B4 942278F8 */  lhu       $v0, %lo(gItemTable+0x18)($at)
 /* D68EB8 802411B8 30420040 */  andi      $v0, $v0, 0x40
 /* D68EBC 802411BC 10400002 */  beqz      $v0, .L802411C8
 /* D68EC0 802411C0 24020001 */   addiu    $v0, $zero, 1

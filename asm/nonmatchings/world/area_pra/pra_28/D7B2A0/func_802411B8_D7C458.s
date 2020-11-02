@@ -11,9 +11,9 @@ glabel func_802411B8_D7C458
 /* D7C470 802411D0 8C450000 */   lw       $a1, ($v0)
 /* D7C474 802411D4 00021140 */  sll       $v0, $v0, 5
 /* D7C478 802411D8 AE000084 */  sw        $zero, 0x84($s0)
-/* D7C47C 802411DC 3C018008 */  lui       $at, 0x8008
+/* D7C47C 802411DC 3C018008 */  lui       $at, %hi(gItemTable+0x18)
 /* D7C480 802411E0 00220821 */  addu      $at, $at, $v0
-/* D7C484 802411E4 942278F8 */  lhu       $v0, 0x78f8($at)
+/* D7C484 802411E4 942278F8 */  lhu       $v0, %lo(gItemTable+0x18)($at)
 /* D7C488 802411E8 30420040 */  andi      $v0, $v0, 0x40
 /* D7C48C 802411EC 10400002 */  beqz      $v0, .L802411F8
 /* D7C490 802411F0 24020001 */   addiu    $v0, $zero, 1

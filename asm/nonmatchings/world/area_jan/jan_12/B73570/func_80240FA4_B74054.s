@@ -100,9 +100,9 @@ glabel func_80240FA4_B74054
 /* B741B8 80241108 2C620064 */  sltiu     $v0, $v1, 0x64
 /* B741BC 8024110C 10400048 */  beqz      $v0, .L80241230
 /* B741C0 80241110 00031080 */   sll      $v0, $v1, 2
-/* B741C4 80241114 3C018024 */  lui       $at, 0x8024
+/* B741C4 80241114 3C018024 */  lui       $at, %hi(pause_textbox_draw_contents)
 /* B741C8 80241118 00220821 */  addu      $at, $at, $v0
-/* B741CC 8024111C 8C223570 */  lw        $v0, 0x3570($at)
+/* B741CC 8024111C 8C223570 */  lw        $v0, %lo(pause_textbox_draw_contents)($at)
 /* B741D0 80241120 00400008 */  jr        $v0
 /* B741D4 80241124 00000000 */   nop      
 /* B741D8 80241128 0240202D */  daddu     $a0, $s2, $zero

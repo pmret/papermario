@@ -11,9 +11,9 @@ glabel func_80240268_AF1EC8
 /* AF1EE0 80240280 8C450000 */   lw       $a1, ($v0)
 /* AF1EE4 80240284 00021140 */  sll       $v0, $v0, 5
 /* AF1EE8 80240288 AE000084 */  sw        $zero, 0x84($s0)
-/* AF1EEC 8024028C 3C018008 */  lui       $at, 0x8008
+/* AF1EEC 8024028C 3C018008 */  lui       $at, %hi(gItemTable+0x18)
 /* AF1EF0 80240290 00220821 */  addu      $at, $at, $v0
-/* AF1EF4 80240294 942278F8 */  lhu       $v0, 0x78f8($at)
+/* AF1EF4 80240294 942278F8 */  lhu       $v0, %lo(gItemTable+0x18)($at)
 /* AF1EF8 80240298 30420040 */  andi      $v0, $v0, 0x40
 /* AF1EFC 8024029C 10400002 */  beqz      $v0, .L802402A8
 /* AF1F00 802402A0 24020001 */   addiu    $v0, $zero, 1

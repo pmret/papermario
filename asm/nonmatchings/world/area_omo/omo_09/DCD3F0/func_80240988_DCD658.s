@@ -11,9 +11,9 @@ glabel func_80240988_DCD658
 /* DCD670 802409A0 8C450000 */   lw       $a1, ($v0)
 /* DCD674 802409A4 00021140 */  sll       $v0, $v0, 5
 /* DCD678 802409A8 AE000084 */  sw        $zero, 0x84($s0)
-/* DCD67C 802409AC 3C018008 */  lui       $at, 0x8008
+/* DCD67C 802409AC 3C018008 */  lui       $at, %hi(gItemTable+0x18)
 /* DCD680 802409B0 00220821 */  addu      $at, $at, $v0
-/* DCD684 802409B4 942278F8 */  lhu       $v0, 0x78f8($at)
+/* DCD684 802409B4 942278F8 */  lhu       $v0, %lo(gItemTable+0x18)($at)
 /* DCD688 802409B8 30420040 */  andi      $v0, $v0, 0x40
 /* DCD68C 802409BC 10400002 */  beqz      $v0, .L802409C8
 /* DCD690 802409C0 24020001 */   addiu    $v0, $zero, 1

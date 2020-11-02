@@ -52,9 +52,9 @@ glabel func_802E3F0C
 /* 105844 802E3FC4 3C014034 */  lui       $at, 0x4034
 /* 105848 802E3FC8 44811800 */  mtc1      $at, $f3
 /* 10584C 802E3FCC 44801000 */  mtc1      $zero, $f2
-/* 105850 802E3FD0 3C018008 */  lui       $at, 0x8008
+/* 105850 802E3FD0 3C018008 */  lui       $at, %hi(gItemTable+0x18)
 /* 105854 802E3FD4 00220821 */  addu      $at, $at, $v0
-/* 105858 802E3FD8 942278F8 */  lhu       $v0, 0x78f8($at)
+/* 105858 802E3FD8 942278F8 */  lhu       $v0, %lo(gItemTable+0x18)($at)
 /* 10585C 802E3FDC 46000021 */  cvt.d.s   $f0, $f0
 /* 105860 802E3FE0 46220000 */  add.d     $f0, $f0, $f2
 /* 105864 802E3FE4 26070050 */  addiu     $a3, $s0, 0x50

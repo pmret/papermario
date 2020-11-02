@@ -11,9 +11,9 @@ glabel func_80241498_DE3928
 /* DE3940 802414B0 8C450000 */   lw       $a1, ($v0)
 /* DE3944 802414B4 00021140 */  sll       $v0, $v0, 5
 /* DE3948 802414B8 AE000084 */  sw        $zero, 0x84($s0)
-/* DE394C 802414BC 3C018008 */  lui       $at, 0x8008
+/* DE394C 802414BC 3C018008 */  lui       $at, %hi(gItemTable+0x18)
 /* DE3950 802414C0 00220821 */  addu      $at, $at, $v0
-/* DE3954 802414C4 942278F8 */  lhu       $v0, 0x78f8($at)
+/* DE3954 802414C4 942278F8 */  lhu       $v0, %lo(gItemTable+0x18)($at)
 /* DE3958 802414C8 30420040 */  andi      $v0, $v0, 0x40
 /* DE395C 802414CC 10400002 */  beqz      $v0, .L802414D8
 /* DE3960 802414D0 24020001 */   addiu    $v0, $zero, 1
