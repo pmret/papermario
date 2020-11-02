@@ -26,9 +26,9 @@ ApiStatus func_80241CC8_8D31D8(ScriptInstance* script, s32 isInitialCall) {
     heap_free(mapVar11);
     heap_free(mapVar12);
 
-    set_variable(script, SI_MAP_VAR(10), 0);
-    set_variable(script, SI_MAP_VAR(11), 0);
-    set_variable(script, SI_MAP_VAR(12), 0);
+    set_variable(script, SI_MAP_VAR(10), NULL);
+    set_variable(script, SI_MAP_VAR(11), NULL);
+    set_variable(script, SI_MAP_VAR(12), NULL);
 
     return ApiStatus_DONE2;
 }
