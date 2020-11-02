@@ -17,6 +17,7 @@ settings.mk
 *.i
 *.Yay0
 bin/
+img/
 build/
 docs/doxygen/
 include/ld_addrs.h
