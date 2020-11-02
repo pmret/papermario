@@ -11,7 +11,7 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_10/8D84D0", func_80240000_8D84D0);
 #ifdef NON_MATCHING
 ApiStatus func_802402BC_8D878C(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    Entity *entity = get_entity_by_index(get_variable(script, *args++));
+    Entity* entity = get_entity_by_index(get_variable(script, *args++));
     s32 something = 0x1E4;
 
     if (entity == NULL) {
