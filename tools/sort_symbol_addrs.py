@@ -21,6 +21,6 @@ for line in symbol_lines:
         sys.exit(55)
     syms[addr] = line
 
-with open("test.txt", newline="\n", mode="w") as f:
+with open(file_path, newline="\n", mode="w") as f:
     for addr in sorted(syms):
         f.write(syms[addr])
