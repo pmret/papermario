@@ -2,3 +2,4 @@ capstone
 PyYAML
 lark-parser
 python-ranges
+pypng
