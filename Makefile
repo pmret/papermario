@@ -130,7 +130,7 @@ $(BUILD_DIR)/%.Yay0.o: $(BUILD_DIR)/%.bin.Yay0
 	$(LD) -r -b binary -o $@ $<
 
 # Compile C files
-$(BUILD_DIR)/%.c.o: %.c $(MDEPS)
+$(BUILD_DIR)/%.c.o: %.c $(MDEPS) include/ld_addrs.h
 	@mkdir -p $(shell dirname $@)
 	$(CPP) $(CPPFLAGS) -o - $(CPPMFLAGS) $< | iconv --from UTF-8 --to SHIFT-JIS | $(CC) $(CFLAGS) -o - | $(OLD_AS) $(OLDASFLAGS) -o $@ -
 
