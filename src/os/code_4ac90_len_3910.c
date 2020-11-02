@@ -34,7 +34,7 @@ INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_8006FE30);
 
 INCLUDE_ASM(s32, "os/code_4ac90_len_3910", fx_emote);
 
-INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_8006FEF0);
+INCLUDE_ASM(void, "os/code_4ac90_len_3910", func_8006FEF0, s32 a0, f32 a1, f32 a2, f32 a3, f32 a4);
 
 INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_8006FF50);
 
@@ -164,7 +164,7 @@ INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_80071690);
 
 INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_800716F0);
 
-INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_80071750);
+INCLUDE_ASM(void, "os/code_4ac90_len_3910", func_80071750, s32 a0, f32 a1, f32 a2, f32 a3, f32 a4, s32 a5);
 
 INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_800717B0);
 

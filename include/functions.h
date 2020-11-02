@@ -33,6 +33,8 @@ s32 get_model_list_index_from_tree_index(s32 treeIndex);
 void get_model_center_and_size(s32 modelID, f32* centerX, f32* centerY, f32* centerZ, f32* sizeX, f32* sizeY,
                                f32* sizeZ);
 
+void func_8006FEF0(s32, f32, f32, f32, f32);
+void func_80071750(s32, f32, f32, f32, f32, s32);
 void func_80072950(s32, f32, f32, f32, f32, s32 time);
 
 void update_collider_transform(s16 colliderID);
@@ -73,6 +75,8 @@ void fx_walk_normal(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4, s32 arg5);
 
 f32 func_800E0088(f32, f32);
 s32 func_800EB168(s32);
+
+PlayerData* get_player_data(void);
 
 // Partner
 void func_800EBA3C(Npc* partner);

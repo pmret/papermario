@@ -2,4 +2,8 @@
 
 #include "world/common/CheckPartnerFlags1000.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_04/8CA900", func_8024002C_8CA92C);
+ApiStatus func_8024002C_8CA92C(ScriptInstance* script, s32 isInitialCall) {
+    script->varTable[0] = get_player_data()->curHP;
+
+    return ApiStatus_DONE2;
+}
