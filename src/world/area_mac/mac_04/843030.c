@@ -4,15 +4,13 @@ INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80240460_843030);
 
 #include "world/common/GetItemName.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80240578_843148);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_8024058C_84315C);
+#include "world/common/Set80151310.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_8024059C_84316C);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_802407C0_843390);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_8024080C_8433DC);
+#include "world/common/GetNpcUnsafeOwner2.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_8024082C_8433FC);
 
@@ -36,19 +34,17 @@ INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80240F68_843B38);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80240F84_843B54);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80240F9C_843B6C);
+#include "world/common/GetGameStatus75.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80240FCC_843B9C);
+#include "world/common/SetCamVfov.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80241040_843C10);
+#include "world/common/GetCamVfov.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_802410E0_843CB0);
+#include "world/common/UnkCameraFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_8024127C_843E4C);
+#include "world/common/UnkRotatePlayer.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_802412E0_843EB0);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80241370_843F40);
+#include "world/common/UnkPartnerFuncs.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80241458_844028);
 
@@ -82,7 +78,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80241980_844550);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_802419AC_84457C);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_802419D0_8445A0);
+#include "world/common/GetPlayerCoins.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_802419E4_8445B4);
 
@@ -92,7 +88,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80241B90_844760);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80241BB8_844788);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80241C20_8447F0);
+#include "world/common/Call800E9894.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80241C40_844810);
 

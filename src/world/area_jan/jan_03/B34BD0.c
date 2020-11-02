@@ -42,27 +42,23 @@ INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_802410F4_B35CC4);
 
 INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_802411B4_B35D84);
 
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_802414B0_B36080);
+#include "world/common/Call800E9894.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_802414D0_B360A0);
+#include "world/common/Call800E98C4SyncStatusMenu.inc.c"
 
 INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_802414F8_B360C8);
 
 INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80241574_B36144);
 
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_802415F4_B361C4);
+#include "world/common/AwaitScriptComplete.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80241624_B361F4);
-
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80241650_B36220);
+#include "world/common/PartnerToggleAbilityScript.inc.c"
 
 INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80241670_B36240);
 
 INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_802416C4_B36294);
 
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80241740_B36310);
-
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80241774_B36344);
+#include "world/common/GetPartnerCall800EB168.inc.c"
 
 INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_802417A4_B36374);
 
@@ -82,15 +78,13 @@ INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80241B9C_B3676C);
 
 #include "world/common/GetItemName.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80241CB4_B36884);
-
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80241CC8_B36898);
+#include "world/common/Set80151310.inc.c"
 
 INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80241CD8_B368A8);
 
 INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80241EFC_B36ACC);
 
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80241F48_B36B18);
+#include "world/common/GetNpcUnsafeOwner2.inc.c"
 
 INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80241F68_B36B38);
 
@@ -114,19 +108,17 @@ INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_802426A4_B37274);
 
 INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_802426C0_B37290);
 
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_802426D8_B372A8);
+#include "world/common/GetGameStatus75.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80242708_B372D8);
+#include "world/common/SetCamVfov.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_8024277C_B3734C);
+#include "world/common/GetCamVfov.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_8024281C_B373EC);
+#include "world/common/UnkCameraFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_802429B8_B37588);
+#include "world/common/UnkRotatePlayer.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80242A1C_B375EC);
-
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80242AAC_B3767C);
+#include "world/common/UnkPartnerFuncs.inc.c"
 
 INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80242B94_B37764);
 

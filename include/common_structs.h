@@ -883,7 +883,8 @@ typedef struct GameStatus {
     /* 0x071 */ s8 demoState; /* (0 = not demo, 1 = map demo, 2 = demo map changing) */
     /* 0x072 */ u8 nextDemoScene; /* which part of the demo to play next */
     /* 0x073 */ u8 contBitPattern;
-    /* 0x074 */ char unk_74[2];
+    /* 0x074 */ char unk_74;
+    /* 0x075 */ s8 unk_75;
     /* 0x076 */ s8 unk_76;
     /* 0x077 */ char unk_77;
     /* 0x078 */ s8 disableScripts;
@@ -920,7 +921,7 @@ typedef struct GameStatus {
     /* 0x136 */ char unk_136[2];
     /* 0x138 */ s32 nextRNG;
     /* 0x13C */ char unk_13C[4];
-    /* 0x140 */ UNK_PTR shopItemData;
+    /* 0x140 */ s32* shopItemData;
     /* 0x144 */ struct Shop* mapShop;
     /* 0x148 */ s16 enableBackground; /* (bit 2 is also used for something) */
     /* 0x14A */ s16 backgroundMinW;

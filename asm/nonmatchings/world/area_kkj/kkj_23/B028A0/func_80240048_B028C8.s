@@ -11,8 +11,8 @@ glabel func_80240048_B028C8
 /* B028E0 80240060 4600008D */  trunc.w.s $f2, $f0
 /* B028E4 80240064 44021000 */  mfc1      $v0, $f2
 /* B028E8 80240068 00000000 */  nop       
-/* B028EC 8024006C 3C018011 */  lui       $at, 0x8011
-/* B028F0 80240070 A022EFD5 */  sb        $v0, -0x102b($at)
+/* B028EC 8024006C 3C018011 */  lui       $at, %hi(gPlayerStatus+0xD)
+/* B028F0 80240070 A022EFD5 */  sb        $v0, %lo(gPlayerStatus+0xD)($at)
 /* B028F4 80240074 24020002 */  addiu     $v0, $zero, 2
 /* B028F8 80240078 03E00008 */  jr        $ra
 /* B028FC 8024007C 27BD0018 */   addiu    $sp, $sp, 0x18

@@ -11,8 +11,8 @@ glabel func_80240034_ACAB54
 /* ACAB6C 8024004C 4600008D */  trunc.w.s $f2, $f0
 /* ACAB70 80240050 44021000 */  mfc1      $v0, $f2
 /* ACAB74 80240054 00000000 */  nop       
-/* ACAB78 80240058 3C018011 */  lui       $at, 0x8011
-/* ACAB7C 8024005C A022EFD5 */  sb        $v0, -0x102b($at)
+/* ACAB78 80240058 3C018011 */  lui       $at, %hi(gPlayerStatus+0xD)
+/* ACAB7C 8024005C A022EFD5 */  sb        $v0, %lo(gPlayerStatus+0xD)($at)
 /* ACAB80 80240060 24020002 */  addiu     $v0, $zero, 2
 /* ACAB84 80240064 03E00008 */  jr        $ra
 /* ACAB88 80240068 27BD0018 */   addiu    $sp, $sp, 0x18

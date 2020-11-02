@@ -5,8 +5,8 @@ glabel func_80242224_7ECF34
 /* 7ECF34 80242224 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 7ECF38 80242228 24020001 */  addiu     $v0, $zero, 1
 /* 7ECF3C 8024222C AFBF0010 */  sw        $ra, 0x10($sp)
-/* 7ECF40 80242230 3C018011 */  lui       $at, 0x8011
-/* 7ECF44 80242234 A022F292 */  sb        $v0, -0xd6e($at)
+/* 7ECF40 80242230 3C018011 */  lui       $at, %hi(gPlayerData+0x2)
+/* 7ECF44 80242234 A022F292 */  sb        $v0, %lo(gPlayerData+0x2)($at)
 /* 7ECF48 80242238 0C03A6DB */  jal       sync_status_menu
 /* 7ECF4C 8024223C 00000000 */   nop      
 /* 7ECF50 80242240 8FBF0010 */  lw        $ra, 0x10($sp)

@@ -1,6 +1,6 @@
 #include "omo_03.h"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_03/DA5260", func_80240020_DA5260);
+#include "world/common/UnsetCamera0MoveFlag1.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_03/DA5260", func_8024003C_DA527C);
 

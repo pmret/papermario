@@ -55,3 +55,6 @@ ASSETS := \
 	kmr_bg nok_bg sbk_bg sbk3_bg iwa_bg hos_bg arn_bg obk_bg omo_bg yos_bg jan_bg fla_bg flb_bg sra_bg yki_bg sam_bg kpa_bg title_bg \
 	title_data \
 	party_kurio party_kameki party_pinki party_pareta party_resa party_akari party_opuku party_pokopi
+
+# Image settings
+$(BUILD_DIR)/img/battle/text_action_command_ratings.ia4.png: IMG_FLAGS = --flip-y

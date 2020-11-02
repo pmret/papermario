@@ -4,15 +4,13 @@ INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_80240300_9694C0);
 
 #include "world/common/GetItemName.inc.c"
 
-INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_80240418_9695D8);
-
-INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_8024042C_9695EC);
+#include "world/common/Set80151310.inc.c"
 
 INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_8024043C_9695FC);
 
 INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_80240660_969820);
 
-INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_802406AC_96986C);
+#include "world/common/GetNpcUnsafeOwner2.inc.c"
 
 INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_802406CC_96988C);
 
@@ -36,19 +34,17 @@ INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_80240E08_969FC8);
 
 INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_80240E24_969FE4);
 
-INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_80240E3C_969FFC);
+#include "world/common/GetGameStatus75.inc.c"
 
-INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_80240E6C_96A02C);
+#include "world/common/SetCamVfov.inc.c"
 
-INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_80240EE0_96A0A0);
+#include "world/common/GetCamVfov.inc.c"
 
-INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_80240F80_96A140);
+#include "world/common/UnkCameraFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_8024111C_96A2DC);
+#include "world/common/UnkRotatePlayer.inc.c"
 
-INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_80241180_96A340);
-
-INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_80241210_96A3D0);
+#include "world/common/UnkPartnerFuncs.inc.c"
 
 INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_802412F8_96A4B8);
 
@@ -88,27 +84,23 @@ INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_8024334C_96C50C);
 
 INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_802433E8_96C5A8);
 
-INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_80243484_96C644);
+#include "world/common/Call800E9894.inc.c"
 
-INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_802434A4_96C664);
+#include "world/common/Call800E98C4SyncStatusMenu.inc.c"
 
 INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_802434CC_96C68C);
 
 INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_80243548_96C708);
 
-INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_802435C8_96C788);
+#include "world/common/AwaitScriptComplete.inc.c"
 
-INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_802435F8_96C7B8);
-
-INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_80243624_96C7E4);
+#include "world/common/PartnerToggleAbilityScript.inc.c"
 
 INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_80243644_96C804);
 
 INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_80243698_96C858);
 
-INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_80243714_96C8D4);
-
-INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_80243748_96C908);
+#include "world/common/GetPartnerCall800EB168.inc.c"
 
 INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_80243778_96C938);
 

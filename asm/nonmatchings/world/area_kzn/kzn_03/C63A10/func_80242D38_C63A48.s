@@ -3,8 +3,8 @@
 
 glabel func_80242D38_C63A48
 /* C63A48 80242D38 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* C63A4C 80242D3C 3C028011 */  lui       $v0, 0x8011
-/* C63A50 80242D40 8442EFE0 */  lh        $v0, -0x1020($v0)
+/* C63A4C 80242D3C 3C028011 */  lui       $v0, %hi(gPlayerStatus+0x18)
+/* C63A50 80242D40 8442EFE0 */  lh        $v0, %lo(gPlayerStatus+0x18)($v0)
 /* C63A54 80242D44 3C014089 */  lui       $at, 0x4089
 /* C63A58 80242D48 44810800 */  mtc1      $at, $f1
 /* C63A5C 80242D4C 44800000 */  mtc1      $zero, $f0

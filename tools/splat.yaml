@@ -216,6 +216,14 @@ segments:
     - [0x8a860, "c", "code_8a860_len_3f30"]
     - [0x8e790, "c", "code_8e790_len_2850"]
     - [0x90fe0, "bin"]
+  - [0x93CD0, ci4,     ui/hammer, 32, 32]
+  - [0x93ED0, palette, ui/hammer]
+  - [0x93EF0, palette, ui/hammer.disabled]
+  - [0x93FF0, bin]
+  - [0x9D658, rgba32,  ui/stat_heart, 16, 16]
+  - [0x9DA58, bin]
+  - [0x9DA60, rgba32,  ui/stat_flower, 16, 16]
+  - [0x9DE60, bin]
   - type: code
     start: 0xA5DD0
     vram: 0x8010F6D0
@@ -272,8 +280,17 @@ segments:
     - [0x1086a0, "c", "code_1086a0_len_fc0"]
     - [0x109660, "c", "code_109660_len_1270"]
     - [0x10A8D0, "c", "code_10A8D0"]
-  - [0x10A9F0, "bin"] # todo split this further
-  - [0x131340, "bin"] # 0x8023E000
+  - [0x10A9F0, i4,      shadow/square, 16, 16]
+  - [0x10AA70, i4,      shadow/circle, 16, 16]
+  - [0x10AAF0, bin]
+  - [0x10AB70, i4,      shadow/10AB70, 32, 32]
+  - [0x10AD70, i4,      shadow/10AD70, 32, 32]
+  - [0x10AF70, bin] # TODO
+  - [0x1164B8, ci8,     peach_letter, 150, 105]
+  - [0x11A23E, bin]
+  - [0x11A240, palette, peach_letter]
+  - [0x11A440, bin]
+  - [0x131340, bin]
   - type: code
     start: 0x135EE0
     vram: 0x80242BA0
@@ -284,6 +301,28 @@ segments:
     - [0x140C70, "c"]
     - [0x1421C0, "c"]
     - [0x1422A0, "bin"]
+  - [0x1443F0, ci8,        pause/world_map, 320, 320]
+  - [0x15D3F0, palette,    pause/world_map]
+  - [0x15D5F0, ci4,        pause/spirits_bg, 128, 110]
+  - [0x15F170, palette,    pause/spirits_bg]
+  - [0x15F270, bin]
+  - [0x15F970, ci4,        pause/banner_hp, 64, 16]
+  - [0x15FB70, palette,    pause/banner_hp]
+  - [0x15FD70, ci4,        pause/banner_fp, 64, 16]
+  - [0x15FF70, palette,    pause/banner_fp]
+  - [0x160170, ci4,        pause/banner_bp, 64, 16]
+  - [0x160370, palette,    pause/banner_bp]
+  - [0x160570, ci4,        pause/banner_boots, 48, 16]
+  - [0x1606F0, palette,    pause/banner_boots]
+  - [0x1608F0, ci4,        pause/banner_hammer, 48, 16]
+  - [0x160A70, palette,    pause/banner_hammer]
+  - [0x160C70, ci4,        pause/banner_star_energy, 48, 16]
+  - [0x160DF0, palette,    pause/banner_star_energy]
+  - [0x160FF0, ci4,        pause/available, 64, 16]
+  - [0x1611F0, palette,    pause/available]
+  - [0x1613F0, ci4,        pause/prompt_check_abilities, 128, 16]
+  - [0x1617F0, palette,    pause/prompt_check_abilities]
+  - [0x1619F0, bin]
   - type: code
     start: 0x163400
     vram: 0x80242BA0
@@ -317,6 +356,21 @@ segments:
     - [0x1AF230, "c"]
     - [0x1AF2D0, "bin"]
   - [0x1CC310, "bin"] # icon images and palettes, vram unknown
+  - [0x1FE1B0, rgba16,  title/logo_n64, 128, 112]
+  - [0x2051B0, rgba16,  title/logo_is, 256, 122]
+  - [0x2131B0, rgba16,  title/logo_nintendo, 256, 48]
+  - [0x2191B0, ci8,     title/bg_1, 264, 162]
+  - [0x2238C0, palette, title/bg_1]
+  - [0x223AC0, ci8,     title/bg_2, 264, 162]
+  - [0x22E1D0, palette, title/bg_2]
+  - [0x22E3D0, ci8,     title/bg_3, 264, 162]
+  - [0x238AE0, palette, title/bg_3]
+  - [0x238CE0, ci8,     title/bg_4, 264, 162]
+  - [0x2433F0, palette, title/bg_4]
+  - [0x2435F0, ia8,     title/tape, 128, 128]
+  - [0x2475F0, ci8,     title/bowser_silhouette, 128, 128]
+  - [0x24B5F0, palette, title/bowser_silhouette]
+  - [0x24B7F0, bin]
   - type: code
     start: 0x3169F0
     vram: 0x80200000
@@ -486,13 +540,13 @@ segments:
     files:
       - [0x33CDF0, "c"]
       - [0x33d5d0, "bin"]
+  - [0x33D610, "bin"]
   - type: code
     start: 0x33E8C0
     vram: 0xE002A000
     files:
       - [0x33E8C0, "c"]
       - [0x33efe0, "bin"]
-  - [0x33D610, "bin"]
   - type: code
     start: 0x33FE80
     vram: 0xE002C000
@@ -735,6 +789,13 @@ segments:
       - [0x38F900, "c"]
       - [0x390340, "bin"]
   - [0x3903D0, "bin"]
+  - start: 0x390810
+    type: ia4
+    name: battle/text_action_command_ratings
+    width: 64
+    height: 125
+    flip: vertical
+  - [0x3917B0, bin]
   - type: code
     start: 0x391D30
     vram: 0xE0092000
@@ -818,6 +879,8 @@ segments:
     - [0x3BA030, "c"]
     - [0x3BAC60, "bin"]
   - [0x3BAEA0, "bin"] # todo split this further ADD STUFF AFTER HERE
+  - [0x3ED4E0, "ia8", "world/text_chapter", 128, 38]
+  - [0x3EE7E0, "bin"]
   - type: code
     start: 0x415D90
     vram: 0x802A1000
@@ -1365,15 +1428,17 @@ segments:
     vram: 0x80240000
     files:
       - [0x8C7F90, "c"]
+      - [0x8C8140, "c"]
       - [0x8C82B0, "c"]
       - [0x8C83A0, "c"]
-      - [0x8C85E0, "bin"]
-      - [0x8C8680, "bin"]
-      - [0x8C88E0, "bin"]
-      - [0x8C9400, "bin"]
-      - [0x8C9780, "bin"]
-      - [0x8CA2D0, "bin"]
-      - [0x8CA8F0, "bin"] # rodata
+      - [0x8C85E0, "c"]
+      - [0x8C85E0, ".data", "world/area_kmr/kmr_03/8C7F90"]
+      - [0x8C8680, ".data", "world/area_kmr/kmr_03/8C8140"]
+      - [0x8C88E0, ".data", "world/area_kmr/kmr_03/8C82B0"]
+      # - [0x8C9400, "bin"]
+      - [0x8C9780, ".data", "world/area_kmr/kmr_03/8C83A0"]
+      - [0x8CA2D0, ".data", "world/area_kmr/kmr_03/8C85E0"]
+      - [0x8CA8F0, ".rodata", "world/area_kmr/kmr_03/8C8140"]
   - name: world/area_kmr/kmr_04/
     type: code
     overlay: True
@@ -6440,6 +6505,7 @@ segments:
       - [0xE05360, "c"]
       - [0xE05370, "c"]
       - [0xE05390, "c"]
+      - [0xE07C20, "c"]
       - [0xE08050, "c"]
       - [0xE08350, "bin"]
       - [0xE08470, "bin"]

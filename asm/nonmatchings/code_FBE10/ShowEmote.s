@@ -66,8 +66,8 @@ glabel ShowEmote
 /* FC344 802D7994 080B5E9E */  j         .L802D7A78
 /* FC348 802D7998 4600B106 */   mov.s    $f4, $f22
 .L802D799C:
-/* FC34C 802D799C 3C028011 */  lui       $v0, 0x8011
-/* FC350 802D79A0 9442F078 */  lhu       $v0, -0xf88($v0)
+/* FC34C 802D799C 3C028011 */  lui       $v0, %hi(gPlayerStatus+0xB0)
+/* FC350 802D79A0 9442F078 */  lhu       $v0, %lo(gPlayerStatus+0xB0)($v0)
 /* FC354 802D79A4 34A55556 */  ori       $a1, $a1, 0x5556
 /* FC358 802D79A8 00021400 */  sll       $v0, $v0, 0x10
 /* FC35C 802D79AC 00022403 */  sra       $a0, $v0, 0x10
