@@ -130,9 +130,9 @@ glabel func_80240AD0_A39FB0
 /* A3A188 80240CA8 AE620094 */  sw        $v0, 0x94($s3)
 /* A3A18C 80240CAC 8C620000 */  lw        $v0, ($v1)
 /* A3A190 80240CB0 00021140 */  sll       $v0, $v0, 5
-/* A3A194 80240CB4 3C038008 */  lui       $v1, 0x8008
+/* A3A194 80240CB4 3C038008 */  lui       $v1, %hi(gItemTable+0x1A)
 /* A3A198 80240CB8 00621821 */  addu      $v1, $v1, $v0
-/* A3A19C 80240CBC 906378FA */  lbu       $v1, 0x78fa($v1)
+/* A3A19C 80240CBC 906378FA */  lbu       $v1, %lo(gItemTable+0x1A)($v1)
 /* A3A1A0 80240CC0 00031080 */  sll       $v0, $v1, 2
 /* A3A1A4 80240CC4 00431021 */  addu      $v0, $v0, $v1
 /* A3A1A8 80240CC8 00021080 */  sll       $v0, $v0, 2

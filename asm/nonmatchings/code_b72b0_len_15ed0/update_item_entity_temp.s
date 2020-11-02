@@ -97,9 +97,9 @@ glabel update_item_entity_temp
 /* CBF38 80135838 00000000 */   nop      
 /* CBF3C 8013583C 86240018 */  lh        $a0, 0x18($s1)
 /* CBF40 80135840 00041140 */  sll       $v0, $a0, 5
-/* CBF44 80135844 3C038008 */  lui       $v1, 0x8008
+/* CBF44 80135844 3C038008 */  lui       $v1, %hi(gItemTable+0x18)
 /* CBF48 80135848 00621821 */  addu      $v1, $v1, $v0
-/* CBF4C 8013584C 946378F8 */  lhu       $v1, 0x78f8($v1)
+/* CBF4C 8013584C 946378F8 */  lhu       $v1, %lo(gItemTable+0x18)($v1)
 /* CBF50 80135850 30620040 */  andi      $v0, $v1, 0x40
 /* CBF54 80135854 10400003 */  beqz      $v0, .L80135864
 /* CBF58 80135858 30620008 */   andi     $v0, $v1, 8
@@ -310,9 +310,9 @@ glabel update_item_entity_temp
 /* CC234 80135B34 00000000 */   nop      
 /* CC238 80135B38 86240018 */  lh        $a0, 0x18($s1)
 /* CC23C 80135B3C 00041140 */  sll       $v0, $a0, 5
-/* CC240 80135B40 3C038008 */  lui       $v1, 0x8008
+/* CC240 80135B40 3C038008 */  lui       $v1, %hi(gItemTable+0x18)
 /* CC244 80135B44 00621821 */  addu      $v1, $v1, $v0
-/* CC248 80135B48 946378F8 */  lhu       $v1, 0x78f8($v1)
+/* CC248 80135B48 946378F8 */  lhu       $v1, %lo(gItemTable+0x18)($v1)
 /* CC24C 80135B4C 30620040 */  andi      $v0, $v1, 0x40
 /* CC250 80135B50 1440000F */  bnez      $v0, .L80135B90
 /* CC254 80135B54 30620008 */   andi     $v0, $v1, 8
@@ -377,9 +377,9 @@ glabel update_item_entity_temp
 /* CC334 80135C34 00000000 */   nop      
 /* CC338 80135C38 86240018 */  lh        $a0, 0x18($s1)
 /* CC33C 80135C3C 00041140 */  sll       $v0, $a0, 5
-/* CC340 80135C40 3C038008 */  lui       $v1, 0x8008
+/* CC340 80135C40 3C038008 */  lui       $v1, %hi(gItemTable+0x18)
 /* CC344 80135C44 00621821 */  addu      $v1, $v1, $v0
-/* CC348 80135C48 946378F8 */  lhu       $v1, 0x78f8($v1)
+/* CC348 80135C48 946378F8 */  lhu       $v1, %lo(gItemTable+0x18)($v1)
 /* CC34C 80135C4C 30620040 */  andi      $v0, $v1, 0x40
 /* CC350 80135C50 54400013 */  bnel      $v0, $zero, .L80135CA0
 /* CC354 80135C54 3C040006 */   lui      $a0, 6
@@ -413,9 +413,9 @@ glabel update_item_entity_temp
 /* CC3B8 80135CB8 24020006 */   addiu    $v0, $zero, 6
 /* CC3BC 80135CBC 86240018 */  lh        $a0, 0x18($s1)
 /* CC3C0 80135CC0 00041140 */  sll       $v0, $a0, 5
-/* CC3C4 80135CC4 3C038008 */  lui       $v1, 0x8008
+/* CC3C4 80135CC4 3C038008 */  lui       $v1, %hi(gItemTable+0x18)
 /* CC3C8 80135CC8 00621821 */  addu      $v1, $v1, $v0
-/* CC3CC 80135CCC 946378F8 */  lhu       $v1, 0x78f8($v1)
+/* CC3CC 80135CCC 946378F8 */  lhu       $v1, %lo(gItemTable+0x18)($v1)
 /* CC3D0 80135CD0 30620040 */  andi      $v0, $v1, 0x40
 /* CC3D4 80135CD4 1440000F */  bnez      $v0, .L80135D14
 /* CC3D8 80135CD8 30620008 */   andi     $v0, $v1, 8
