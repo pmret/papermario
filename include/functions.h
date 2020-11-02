@@ -70,6 +70,9 @@ void set_curtain_fade(f32 scale);
 
 void fx_walk_normal(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4, s32 arg5);
 
+f32 func_800E0088(f32, f32);
+s32 func_800EB168(s32);
+
 // Partner
 void func_800EBA3C(Npc* partner);
 void func_800EBB40(Npc* partner);
@@ -97,7 +100,7 @@ void make_item_entity_delayed(s32 itemID, f32 x, f32 y, f32 z, s32 unk1, s32 unk
 void set_item_entity_position(s32 itemEntityIndex, f32 x, f32 y, f32 z);
 ItemEntity* get_item_entity(s32 itemEntityIndex);
 s32 make_item_entity_nodelay(s32 itemID, f32 x, f32 y, f32 z, ItemSpawnMode itemSpawnMode, s32 pickupVar);
-
+void set_item_entity_flags(s32 itemEntityIndex, s32 flag);
 
 void set_cam_viewport(s16 id, s16 x, s16 y, s16 width, s16 height);
 

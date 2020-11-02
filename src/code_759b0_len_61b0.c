@@ -74,7 +74,7 @@ INCLUDE_ASM(s32, "code_759b0_len_61b0", func_800DFF78);
 
 INCLUDE_ASM(s32, "code_759b0_len_61b0", func_800DFFCC);
 
-INCLUDE_ASM(s32, "code_759b0_len_61b0", func_800E0088);
+INCLUDE_ASM(f32, "code_759b0_len_61b0", func_800E0088, f32 arg0, f32 arg1);
 
 void enable_player_shadow(void) {
     get_shadow_by_index(D_8010F094)->flags &= ~1;

@@ -26,7 +26,7 @@ def get_c_file(directory):
 
 def import_c_file(in_file):
     in_file = os.path.relpath(in_file, root_dir)
-    cpp_command = ["gcc", "-E", "-P", "-Iinclude", "-D_LANGUAGE_C", "-ffreestanding", "-DF3DEX_GBI_2", in_file]
+    cpp_command = ["gcc", "-E", "-P", "-Iinclude", "-Isrc", "-D_LANGUAGE_C", "-ffreestanding", "-DF3DEX_GBI_2", in_file]
     try:
         return subprocess.check_output(cpp_command, cwd=root_dir, encoding="utf-8")
     except subprocess.CalledProcessError:
@@ -53,7 +53,7 @@ def main():
             sys.exit("Cannot find appropriate c file dir. In argumentless mode, run this script from the c file's corresponding asm dir.")
         c_file = get_c_file(c_dir_path)
         c_file_path = os.path.join(c_dir_path, c_file)
-    
+
     processed = import_c_file(c_file_path)
     processed_lines = processed.split("\n")
     output = []

@@ -28,15 +28,13 @@ INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_802417C0_824A80);
 
 #include "world/common/GetItemName.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_802418D8_824B98);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_802418EC_824BAC);
+#include "world/common/Set80151310.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_802418FC_824BBC);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_80241B20_824DE0);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_80241B6C_824E2C);
+#include "world/common/GetNpcUnsafeOwner2.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_80241B8C_824E4C);
 
@@ -60,19 +58,17 @@ INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_802422C8_825588);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_802422E4_8255A4);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_802422FC_8255BC);
+#include "world/common/GetGameStatus75.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_8024232C_8255EC);
+#include "world/common/SetCamVfov.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_802423A0_825660);
+#include "world/common/GetCamVfov.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_80242440_825700);
+#include "world/common/UnkCameraFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_802425DC_82589C);
+#include "world/common/UnkRotatePlayer.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_80242640_825900);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_802426D0_825990);
+#include "world/common/UnkPartnerFuncs.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_802427B8_825A78);
 

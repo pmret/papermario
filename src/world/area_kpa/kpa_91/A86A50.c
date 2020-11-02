@@ -34,26 +34,22 @@ INCLUDE_ASM(s32, "world/area_kpa/kpa_91/A86A50", func_802411A4_A87BF4);
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_91/A86A50", func_80241224_A87C74);
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_91/A86A50", func_80241528_A87F78);
+#include "world/common/Call800E9894.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_91/A86A50", func_80241548_A87F98);
+#include "world/common/Call800E98C4SyncStatusMenu.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_91/A86A50", func_80241570_A87FC0);
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_91/A86A50", func_802415EC_A8803C);
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_91/A86A50", func_8024166C_A880BC);
+#include "world/common/AwaitScriptComplete.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_91/A86A50", func_8024169C_A880EC);
-
-INCLUDE_ASM(s32, "world/area_kpa/kpa_91/A86A50", func_802416C8_A88118);
+#include "world/common/PartnerToggleAbilityScript.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_91/A86A50", func_802416E8_A88138);
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_91/A86A50", func_8024173C_A8818C);
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_91/A86A50", func_802417B8_A88208);
-
-INCLUDE_ASM(s32, "world/area_kpa/kpa_91/A86A50", func_802417EC_A8823C);
+#include "world/common/GetPartnerCall800EB168.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_91/A86A50", func_8024181C_A8826C);

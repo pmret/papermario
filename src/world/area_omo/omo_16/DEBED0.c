@@ -1,6 +1,6 @@
 #include "omo_16.h"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_16/DEBED0", func_80240000_DEBED0);
+#include "world/common/UnsetCamera0MoveFlag1.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_16/DEBED0", func_8024001C_DEBEEC);
 
