@@ -191,9 +191,17 @@ typedef union {
     s32 flags;
 } TriggerFlags;
 
+typedef union {
+    struct {
+        /* 0x0 */ s16 unkParams;
+        /* 0x2 */ char unk_2;
+    } bytes;
+    s32 params;
+} TriggerParams;
+
 typedef struct Trigger {
     /* 0x00 */ TriggerFlags flags;
-    /* 0x04 */ s32 params1;
+    /* 0x04 */ TriggerParams params1;
     /* 0x08 */ s32 params2;
     /* 0x0C */ UNK_FUN_PTR(functionHandler);
     /* 0x10 */ Bytecode* scriptStart;
@@ -264,18 +272,22 @@ typedef ScriptInstance* ScriptList[MAX_SCRIPTS];
 
 typedef struct Entity {
     /* 0x00 */ s32 flags;
-    /* 0x04 */ char unk_04[2];
+    /* 0x04 */ s8 listIndex;
+    /* 0x05 */ char unk_05;
     /* 0x06 */ s8 unk_06;
-    /* 0x07 */ char unk_08[4];
+    /* 0x07 */ char unk_07[4];
     /* 0x0B */ u8 alpha; /* reported by rain */
     /* 0x0C */ s16 aabb[3];
-    /* 0x12 */ char unk_12[4];
+    /* 0x12 */ char unk_12[2];
+    /* 0x14 */ s16 virtualModelIndex;
     /* 0x16 */ s16 shadowIndex;
-    /* 0x18 */ char unk_18[16];
+    /* 0x18 */ char unk_18[8];
+    /* 0x20 */ UNK_PTR buildMatrixOverride;
+    /* 0x24 */ char unk_24[4];
     /* 0x28 */ Bytecode* boundScript;
     /* 0x2C */ char unk_2C[12];
     /* 0x38 */ struct StaticEntityData* static_data;
-    /* 0x3C */ char unk_3C[4];
+    /* 0x3C */ UNK_PTR unk_3C;
     /* 0x40 */ struct Trigger* trigger;
     /* 0x44 */ s32* vertexData;
     /* 0x48 */ Vec3f position;
@@ -284,8 +296,9 @@ typedef struct Entity {
     /* 0x6C */ char unk_6C[4];
     /* 0x70 */ struct Matrix4f* inverseTransformMatrix; /* world-to-local */
     /* 0x74 */ char unk_74[60];
-    /* 0xB0 */ u8 radius; /* Created by retype action */
-    /* 0xB1 */ char unk_B1[71];
+    /* 0xB0 */ float effectiveSize;
+    /* 0xB4 */ char unk_B4[4];
+    /* 0xB8 */ Matrix4s transformMatrix;
 } Entity; // size = 0xF8
 
 typedef Entity* EntityList[MAX_ENTITIES];
@@ -760,6 +773,7 @@ typedef struct EffectTableEntry {
     /* 0x10 */ s32 unkEndRom;
     /* 0x14 */ UNK_FUN_PTR(delegate);
 } EffectTableEntry; // size = 0x18
+
 
 typedef struct ItemEntity {
     /* 0x00 */ s32 flags;

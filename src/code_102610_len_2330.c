@@ -102,44 +102,11 @@ void func_802E1350(s32 arg0) {
     }
 }
 
-INCLUDE_ASM(s32, "code_102610_len_2330", func_802E13B8);
+void func_802E13B8(Entity *entity) {
+    Trigger* trigger;
 
-INCLUDE_ASM(s32, "code_102610_len_2330", func_802E1400);
-
-INCLUDE_ASM(s32, "code_102610_len_2330", func_802E1460);
-
-INCLUDE_ASM(s32, "code_102610_len_2330", func_802E14D8);
-
-INCLUDE_ASM(s32, "code_102610_len_2330", func_802E153C);
-
-INCLUDE_ASM(s32, "code_102610_len_2330", func_802E1614);
-
-INCLUDE_ASM(s32, "code_102610_len_2330", func_802E1660);
-
-INCLUDE_ASM(s32, "code_102610_len_2330", func_802E1740);
-
-INCLUDE_ASM(s32, "code_102610_len_2330", func_802E176C);
-
-INCLUDE_ASM(s32, "code_102610_len_2330", func_802E17A8);
-
-INCLUDE_ASM(s32, "code_102610_len_2330", func_802E1EA8);
-
-INCLUDE_ASM(s32, "code_102610_len_2330", func_802E1EDC);
-
-INCLUDE_ASM(s32, "code_102610_len_2330", func_802E234C);
-
-INCLUDE_ASM(s32, "code_102610_len_2330", entity_init_BlueSwitch);
-
-INCLUDE_ASM(s32, "code_102610_len_2330", entity_init_HugeBlueSwitch);
-
-INCLUDE_ASM(s32, "code_102610_len_2330", func_802E2450);
-
-INCLUDE_ASM(s32, "code_102610_len_2330", func_802E246C);
-
-INCLUDE_ASM(s32, "code_102610_len_2330", func_802E263C);
-
-INCLUDE_ASM(s32, "code_102610_len_2330", func_802E2BA4);
-
-INCLUDE_ASM(s32, "code_102610_len_2330", func_802E2EB0);
-
-INCLUDE_ASM(s32, "code_102610_len_2330", func_802E2FD0);
+    trigger = entity->trigger;
+    entity_init_Hammer23Block_normal();
+    entity->unk_3C = func_802E0DE0;
+    trigger->params1.bytes.unkParams = 8;
+}

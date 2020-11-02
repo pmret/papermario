@@ -31,7 +31,7 @@ void player_enter_blue_pipe(Entity* bluePipe) {
     Trigger* pipeTrigger = bluePipe->trigger;
 
     playerStatus->targetYaw = gCameras[gCurrentCameraID].currentYaw + 180.0f;
-    pipeTrigger->params1 = 0x19;
+    pipeTrigger->params1.params = 0x19;
     playerStatus->renderMode = 0xD;
 
     func_802DDFF8(0x10002, 5, 2, 1, 1, 0, 0);
@@ -44,9 +44,9 @@ void func_802E8D74(Entity* entity) {
     Trigger* entityTrigger = entity->trigger;
 
     playerStatus->position.y--;
-    entityTrigger->params1--;
+    entityTrigger->params1.params--;
 
-    if (entityTrigger->params1 == -1) {
+    if (entityTrigger->params1.params == -1) {
         playerStatus->renderMode = 0xD;
         playerStatus->position.y -= 50.0f;
         func_802DDFF8(0x10002, 0, 0, 0, 0, 0, 0);
