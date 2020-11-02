@@ -16,8 +16,8 @@ glabel func_80244D90
 /* 17369C 80244DBC 00431021 */  addu      $v0, $v0, $v1
 /* 1736A0 80244DC0 000210C0 */  sll       $v0, $v0, 3
 /* 1736A4 80244DC4 00443021 */  addu      $a2, $v0, $a0
-/* 1736A8 80244DC8 3C03800B */  lui       $v1, 0x800b
-/* 1736AC 80244DCC 80630F19 */  lb        $v1, 0xf19($v1)
+/* 1736A8 80244DC8 3C03800B */  lui       $v1, %hi(gCurrentEncounter+0x9)
+/* 1736AC 80244DCC 80630F19 */  lb        $v1, %lo(gCurrentEncounter+0x9)($v1)
 /* 1736B0 80244DD0 24020001 */  addiu     $v0, $zero, 1
 /* 1736B4 80244DD4 1462000E */  bne       $v1, $v0, .L80244E10
 /* 1736B8 80244DD8 3C030080 */   lui      $v1, 0x80
