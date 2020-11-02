@@ -65,7 +65,13 @@ s32 func_800554E8(s32, s32);
 s32 func_800555E4(s32);
 s32 osGetId();
 
+void set_curtain_scale_goal(f32 scale);
+void set_curtain_fade(f32 scale);
+
 void fx_walk_normal(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4, s32 arg5);
+
+f32 func_800E0088(f32, f32);
+s32 func_800EB168(s32);
 
 // Partner
 void func_800EBA3C(Npc* partner);
@@ -78,7 +84,7 @@ void func_800ED5D0(Npc* partner);
 s32 func_800EF394(f32);
 s32 does_script_exist(s32 id);
 ScriptInstance* start_script(Bytecode* initialLine, s32 priority, s32 initialState);
-ScriptInstance* start_script_in_group(Bytecode* initialLine, u8 priority, s32 initialState, u8 groupFlags);
+ScriptInstance* start_script_in_group(Bytecode* initialLine, u8 priority, u8 initialState, u8 groupFlags);
 
 void func_8011B7C0(u16, s32, s32);
 void func_80137D88(s32, f32);
@@ -92,10 +98,14 @@ f32 update_lerp(Easing easing, f32 start, f32 end, s32 elapsed, s32 duration);
 
 void make_item_entity_delayed(s32 itemID, f32 x, f32 y, f32 z, s32 unk1, s32 unk2, s32 unk3);
 void set_item_entity_position(s32 itemEntityIndex, f32 x, f32 y, f32 z);
+ItemEntity* get_item_entity(s32 itemEntityIndex);
+s32 make_item_entity_nodelay(s32 itemID, f32 x, f32 y, f32 z, ItemSpawnMode itemSpawnMode, s32 pickupVar);
+void set_item_entity_flags(s32 itemEntityIndex, s32 flag);
 
 void set_cam_viewport(s16 id, s16 x, s16 y, s16 width, s16 height);
 
 void disable_player_shadow(void);
+void move_player(s32 duration, f32 heading, f32 speed);
 
 Npc* get_npc_safe(NpcId npcId);
 Npc* get_npc_unsafe(NpcId npcId);
@@ -107,7 +117,7 @@ f32 dist3D(f32 ax, f32 ay, f32 az, f32 bx, f32 by, f32 bz);
 void add_vec2D_polar(f32* x, f32* y, f32 r, f32 theta);
 
 s32 play_sound_at_position(s32 soundID, s32 value2, f32 posX, f32 posY, f32 posZ);
-s32 set_music_track(s32 musicPlayer, s32 songID, s32 variation, s32 unk, s32 volume);
+s32 set_music_track(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s16 volume);
 
 ScriptInstance* get_script_by_index(s32 index);
 

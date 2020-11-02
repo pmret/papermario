@@ -1,26 +1,22 @@
 #include "kmr_20.h"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8ED0C0", func_802412A0_8ED0C0);
+#include "world/common/Call800E9894.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8ED0C0", func_802412C0_8ED0E0);
+#include "world/common/Call800E98C4SyncStatusMenu.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8ED0C0", func_802412E8_8ED108);
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8ED0C0", func_80241364_8ED184);
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8ED0C0", func_802413E4_8ED204);
+#include "world/common/AwaitScriptComplete.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8ED0C0", func_80241414_8ED234);
-
-INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8ED0C0", func_80241440_8ED260);
+#include "world/common/PartnerToggleAbilityScript.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8ED0C0", func_80241460_8ED280);
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8ED0C0", func_802414B4_8ED2D4);
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8ED0C0", func_80241530_8ED350);
-
-INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8ED0C0", func_80241564_8ED384);
+#include "world/common/GetPartnerCall800EB168.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8ED0C0", func_80241594_8ED3B4);
 

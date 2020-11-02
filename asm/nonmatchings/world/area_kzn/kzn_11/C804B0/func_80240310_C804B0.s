@@ -22,8 +22,8 @@ glabel func_80240310_C804B0
 /* C804F4 80240354 0C0B1EAF */  jal       get_variable
 /* C804F8 80240358 0040882D */   daddu    $s1, $v0, $zero
 /* C804FC 8024035C 0040802D */  daddu     $s0, $v0, $zero
-/* C80500 80240360 3C028016 */  lui       $v0, 0x8016
-/* C80504 80240364 2442A550 */  addiu     $v0, $v0, -0x5ab0
+/* C80500 80240360 3C028016 */  lui       $v0, %hi(gCollisionStatus)
+/* C80504 80240364 2442A550 */  addiu     $v0, $v0, %lo(gCollisionStatus)
 /* C80508 80240368 84430002 */  lh        $v1, 2($v0)
 /* C8050C 8024036C 10710008 */  beq       $v1, $s1, .L80240390
 /* C80510 80240370 00000000 */   nop      

@@ -1,4 +1,4 @@
-#include "common.h"
+#include "code_2e230_len_2190.h"
 
 INCLUDE_ASM(s32, "code_2e230_len_2190", func_80052E30);
 
@@ -24,7 +24,11 @@ INCLUDE_ASM(s32, "code_2e230_len_2190", func_800538F8);
 
 INCLUDE_ASM(s32, "code_2e230_len_2190", func_80053974);
 
-INCLUDE_ASM(s32, "code_2e230_len_2190", func_80053A18);
+void func_80053A18(UnkStructFor80053A18* arg0) {
+    arg0->unk_0A = 0;
+    arg0->unk_04 = 0;
+    arg0->unk_0C = 0;
+}
 
 INCLUDE_ASM(s32, "code_2e230_len_2190", func_80053A28);
 

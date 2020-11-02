@@ -9,7 +9,7 @@ ApiStatus FadeOutMusic(ScriptInstance* script, s32 isInitialCall) {
     s32 itemID = get_variable(script, *args++);
     s32* ptrNextPos = args++;
 
-    return (set_music_track(itemID, -1, 0, get_variable(script, *ptrNextPos++), 8) != 0) * 2;
+    return (set_music_track(itemID, -1, 0, get_variable(script, *ptrNextPos++), 8) != 0) * ApiStatus_DONE2;
 }
 
 ApiStatus SetMusicTrack(ScriptInstance* script, s32 isInitialCall) {
@@ -19,40 +19,76 @@ ApiStatus SetMusicTrack(ScriptInstance* script, s32 isInitialCall) {
     s32 variation = get_variable(script, *args++);
     s16 volume = get_variable(script, *args++);
 
-    return (set_music_track(musicPlayer, songID, variation, 0x1F4, volume) != 0) * 2;
+    return (set_music_track(musicPlayer, songID, variation, 0x1F4, volume) != 0) * ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", FadeInMusic, ScriptInstance* script, s32 isInitialCall);
+ApiStatus FadeInMusic(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 var0 = get_variable(script, *args++);
+    s32 var1 = get_variable(script, *args++);
+    s32 var2 = get_variable(script, *args++);
+    s32 var3 = get_variable(script, *args++);
+    s16 var4 = get_variable(script, *args++);
+    s16 var5 = get_variable(script, *args++);
+
+    return (func_8014A964(var0, var1, var2, var3, var4, var5) != 0) * ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D5EE0);
 
-INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D5F28);
+ApiStatus func_802D5F28(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
 
-INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D5FA4);
+    func_8014AA54(get_variable(script, *args++), get_variable(script, *args++), (s16)get_variable(script, *args++));
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D5FD8);
+ApiStatus func_802D5FA4(ScriptInstance* script, s32 isInitialCall) {
+    func_8014AB0C(0, (s16)get_variable(script, *script->ptrReadPos));
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D5FF8);
+ApiStatus func_802D5FD8(ScriptInstance* script, s32 isInitialCall) {
+    func_8014ADA4();
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D6050);
+ApiStatus func_802D5FF8(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
 
-INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D6070);
+    func_8014ADF8(get_variable(script, *args++), get_variable(script, *args++));
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D6090);
+ApiStatus func_802D6050(ScriptInstance* script, s32 isInitialCall) {
+    func_8014AE6C();
+    return ApiStatus_DONE2;
+}
 
-//INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", ClearAmbientSounds);
+ApiStatus func_802D6070(ScriptInstance* script, s32 isInitialCall) {
+    func_8014AEF8();
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_802D6090(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+
+    func_8014AF8C(get_variable(script, *args++), get_variable(script, *args++));
+    return ApiStatus_DONE2;
+}
+
 ApiStatus ClearAmbientSounds(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 flags = get_variable(script, *args++);
 
-    return (play_ambient_sounds(-1, flags) != 0) * 2;
+    return (play_ambient_sounds(-1, flags) != 0) * ApiStatus_DONE2;
 }
 
 ApiStatus PlayAmbientSounds(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 soundID = get_variable(script, *args++);
 
-    return (play_ambient_sounds(soundID, 0xFA) != 0) * 2;
+    return (play_ambient_sounds(soundID, 0xFA) != 0) * ApiStatus_DONE2;
 }
 
 ApiStatus PlaySound(ScriptInstance* script, s32 isInitialCall) {
@@ -112,7 +148,17 @@ ApiStatus func_802D6340(ScriptInstance* script, s32 initialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", PlaySoundAtF, ScriptInstance* script, s32 isInitialCall);
+ApiStatus PlaySoundAtF(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Bytecode soundID = *args++;
+    u16 value2 = get_variable(script, *args++);
+    f32 x = get_float_variable(script, *args++);
+    f32 y = get_float_variable(script, *args++);
+    f32 z = get_float_variable(script, *args++);
+
+    play_sound_at_position(soundID, value2, x, y, z);
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D6420);
 
@@ -289,13 +335,32 @@ ApiStatus RemoveFortressKeys(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", MakeItemEntity, ScriptInstance* script, s32 isInitialCall);
+ApiStatus MakeItemEntity(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 itemID = get_variable(script, *args++);
+    s32 x = get_variable(script, *args++);
+    s32 y = get_variable(script, *args++);
+    s32 z = get_variable(script, *args++);
+    s32 itemSpawnMode = get_variable(script, *args++);
+    s32 pickupVar = get_variable_index(script, *args++);
 
-INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", DropItemEntity, ScriptInstance* script, s32 isInitialCall);
+    script->varTable[0] = make_item_entity_nodelay(itemID, x, y, z, itemSpawnMode, pickupVar);
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", DropItemEntityB, ScriptInstance* script, s32 isInitialCall);
-/*
-// Close to working
+ApiStatus DropItemEntity(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 itemID = get_variable(script, *args++);
+    s32 x = get_variable(script, *args++);
+    s32 y = get_variable(script, *args++);
+    s32 z = get_variable(script, *args++);
+    s32 itemSpawnMode = get_variable(script, *args++);
+    s32 pickupVar = get_variable(script, *args++);
+
+    script->varTable[0] = make_item_entity_nodelay(itemID, x, y, z, itemSpawnMode, pickupVar);
+    return ApiStatus_DONE2;
+}
+
 ApiStatus DropItemEntityB(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 itemID = get_variable(script, *args++);
@@ -303,13 +368,12 @@ ApiStatus DropItemEntityB(ScriptInstance* script, s32 isInitialCall) {
     s32 y = get_variable(script, *args++);
     s32 z = get_variable(script, *args++);
     s32 itemSpawnMode = get_variable(script, *args++);
-    s32 pickupFlag = get_variable(script, *args++);
+    s32 pickupVar = get_variable_index(script, *args++);
 
-    script->varTable[0] = make_item_entity_nodelay(itemID, x, y, z);
-    set_item_entity_flags(script, 0x4000);
+    script->varTable[0] = make_item_entity_nodelay(itemID, x, y, z, itemSpawnMode, pickupVar);
+    set_item_entity_flags(script->varTable[0], 0x4000);
     return ApiStatus_DONE2;
 }
-*/
 
 ApiStatus RemoveItemEntity(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -328,7 +392,25 @@ ApiStatus AddBadge(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", RemoveBadge, ScriptInstance* script, s32 isInitialCall);
+ApiStatus RemoveBadge(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    PlayerData* playerData = PLAYER_DATA;
+    s32 badge = get_variable(script, *args++);
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(playerData->badges); i++) {
+        if (playerData->badges[i] == badge) {
+            playerData->badges[i] = 0;
+        }
+    }
+
+    for (i = 0; i < ARRAY_COUNT(playerData->equippedBadges); i++) {
+        if (playerData->equippedBadges[i] == badge) {
+            playerData->equippedBadges[i] = 0;
+        }
+    }
+    return ApiStatus_DONE2;
+}
 
 ApiStatus SetItemPos(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -348,9 +430,30 @@ ApiStatus SetItemPos(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", SetItemFlags, ScriptInstance* script, s32 isInitialCall);
+ApiStatus SetItemFlags(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 itemEntityIndex = get_variable(script, *args++);
+    s32 flagBits = *args++;
+    s32 var2 = get_variable(script, *args++);
+    ItemEntity* itemEntity = get_item_entity(itemEntityIndex);
 
-INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D721C);
+    if (var2 != 0) {
+        itemEntity->flags |= flagBits;
+    } else {
+        itemEntity->flags &= ~flagBits;
+    }
+    return ApiStatus_DONE2;
+}
+;
+ApiStatus func_802D721C(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 itemEntityIndex = get_variable(script, *args++);
+    s32 var2 = get_variable(script, *args++);
+    ItemEntity* itemEntity = get_item_entity(itemEntityIndex);
+
+    itemEntity->unk_2F = var2;
+    return ApiStatus_DONE2;
+}
 
 ApiStatus AddCoin(ScriptInstance* script, s32 isInitialCall) {
     script->varTable[0] = add_coins(get_variable(script, *script->ptrReadPos));
@@ -378,61 +481,22 @@ ApiStatus GetItemPower(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", ShowGotItem, ScriptInstance* script, s32 isInitialCall);
-
-INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D7460);
-
-INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D74C0);
-
-INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D7520);
-
-INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D75D8);
-
-INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D7690);
-
-INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", ShowEmote, ScriptInstance* script, s32 isInitialCall);
-
-ApiStatus RemoveEffect(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus ShowGotItem(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
-    remove_effect(get_variable(script, *args++));
-    return ApiStatus_DONE2;
+    if (isInitialCall) {
+        script->functionTemp[0].s = 0;
+    }
+
+    switch (script->functionTemp[0].s) {
+        case 0:
+            script->functionTemp[1].s = init_got_item(get_variable(script, *args++), get_variable(script, *args++), *args++);
+            script->functionTemp[0].s = 1;
+            break;
+        case 1:
+            if (get_item_entity(script->functionTemp[1].s) == NULL) {
+                return ApiStatus_DONE2;
+            }
+    }
+    return ApiStatus_BLOCK;
 }
-
-ApiStatus func_802D7B10(ScriptInstance* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    s32* ptrValue = get_variable(script, *args++);
-
-    *ptrValue |= 0x10;
-    return ApiStatus_DONE2;
-}
-
-ApiStatus func_802D7B44(ScriptInstance* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    s32* ptrValue = get_variable(script, *args++);
-    s32* ptrTemp = ptrValue[3];
-
-    ptrTemp[5] = 10;
-    return ApiStatus_DONE2;
-}
-
-ApiStatus func_802D7B74(ScriptInstance* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    s32* ptrValue = get_variable(script, *args++);
-    s32* ptrTemp = ptrValue[3];
-
-    ptrTemp[12] = 5;
-    return ApiStatus_DONE2;
-}
-
-INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D7BA4);
-
-INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D7CF8);
-
-INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D7E08);
-
-INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", ShowSleepBubble);
-
-INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D8248);
-
-INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", PlayEffect);

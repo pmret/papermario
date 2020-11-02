@@ -10,8 +10,8 @@ glabel func_802BD368
 /* 31E0EC 802BD37C C7A6004C */  lwc1      $f6, 0x4c($sp)
 /* 31E0F0 802BD380 27A20020 */  addiu     $v0, $sp, 0x20
 /* 31E0F4 802BD384 AFB00028 */  sw        $s0, 0x28($sp)
-/* 31E0F8 802BD388 3C108016 */  lui       $s0, 0x8016
-/* 31E0FC 802BD38C 2610A550 */  addiu     $s0, $s0, -0x5ab0
+/* 31E0F8 802BD388 3C108016 */  lui       $s0, %hi(gCollisionStatus)
+/* 31E0FC 802BD38C 2610A550 */  addiu     $s0, $s0, %lo(gCollisionStatus)
 /* 31E100 802BD390 AFB1002C */  sw        $s1, 0x2c($sp)
 /* 31E104 802BD394 0200882D */  daddu     $s1, $s0, $zero
 /* 31E108 802BD398 AFA5003C */  sw        $a1, 0x3c($sp)

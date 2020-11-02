@@ -34,26 +34,22 @@ INCLUDE_ASM(s32, "world/area_kpa/kpa_95/A8CB60", func_80241284_A8DD04);
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_95/A8CB60", func_80241304_A8DD84);
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_95/A8CB60", func_80241608_A8E088);
+#include "world/common/Call800E9894.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_95/A8CB60", func_80241628_A8E0A8);
+#include "world/common/Call800E98C4SyncStatusMenu.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_95/A8CB60", func_80241650_A8E0D0);
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_95/A8CB60", func_802416CC_A8E14C);
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_95/A8CB60", func_8024174C_A8E1CC);
+#include "world/common/AwaitScriptComplete.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_95/A8CB60", func_8024177C_A8E1FC);
-
-INCLUDE_ASM(s32, "world/area_kpa/kpa_95/A8CB60", func_802417A8_A8E228);
+#include "world/common/PartnerToggleAbilityScript.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_95/A8CB60", func_802417C8_A8E248);
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_95/A8CB60", func_8024181C_A8E29C);
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_95/A8CB60", func_80241898_A8E318);
-
-INCLUDE_ASM(s32, "world/area_kpa/kpa_95/A8CB60", func_802418CC_A8E34C);
+#include "world/common/GetPartnerCall800EB168.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_95/A8CB60", func_802418FC_A8E37C);

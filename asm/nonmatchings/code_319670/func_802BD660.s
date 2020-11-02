@@ -298,8 +298,8 @@ glabel func_802BD660
 /* 31A030 802BDAC0 0000282D */  daddu     $a1, $zero, $zero
 /* 31A034 802BDAC4 0C052742 */  jal       play_sound_at_npc
 /* 31A038 802BDAC8 2406FFFC */   addiu    $a2, $zero, -4
-/* 31A03C 802BDACC 3C038016 */  lui       $v1, 0x8016
-/* 31A040 802BDAD0 2463A550 */  addiu     $v1, $v1, -0x5ab0
+/* 31A03C 802BDACC 3C038016 */  lui       $v1, %hi(gCollisionStatus)
+/* 31A040 802BDAD0 2463A550 */  addiu     $v1, $v1, %lo(gCollisionStatus)
 /* 31A044 802BDAD4 2402FFFF */  addiu     $v0, $zero, -1
 /* 31A048 802BDAD8 A4620004 */  sh        $v0, 4($v1)
 /* 31A04C 802BDADC A4620002 */  sh        $v0, 2($v1)

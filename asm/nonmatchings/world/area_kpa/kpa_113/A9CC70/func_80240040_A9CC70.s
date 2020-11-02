@@ -10,8 +10,8 @@ glabel func_80240040_A9CC70
 /* A9CC84 80240054 0C0B1EAF */  jal       get_variable
 /* A9CC88 80240058 8C450000 */   lw       $a1, ($v0)
 /* A9CC8C 8024005C 0040302D */  daddu     $a2, $v0, $zero
-/* A9CC90 80240060 3C058016 */  lui       $a1, 0x8016
-/* A9CC94 80240064 84A5A550 */  lh        $a1, -0x5ab0($a1)
+/* A9CC90 80240060 3C058016 */  lui       $a1, %hi(gCollisionStatus)
+/* A9CC94 80240064 84A5A550 */  lh        $a1, %lo(gCollisionStatus)($a1)
 /* A9CC98 80240068 3C048011 */  lui       $a0, %hi(gPlayerStatus)
 /* A9CC9C 8024006C 2484EFC8 */  addiu     $a0, $a0, %lo(gPlayerStatus)
 /* A9CCA0 80240070 10A60004 */  beq       $a1, $a2, .L80240084

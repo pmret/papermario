@@ -379,8 +379,8 @@ glabel func_802BD638
 /* 31BBFC 802BDBDC 00000000 */  nop       
 /* 31BC00 802BDBE0 46800020 */  cvt.s.w   $f0, $f0
 /* 31BC04 802BDBE4 46001081 */  sub.s     $f2, $f2, $f0
-/* 31BC08 802BDBE8 3C028016 */  lui       $v0, 0x8016
-/* 31BC0C 802BDBEC 2442A550 */  addiu     $v0, $v0, -0x5ab0
+/* 31BC08 802BDBE8 3C028016 */  lui       $v0, %hi(gCollisionStatus)
+/* 31BC0C 802BDBEC 2442A550 */  addiu     $v0, $v0, %lo(gCollisionStatus)
 /* 31BC10 802BDBF0 A4430008 */  sh        $v1, 8($v0)
 /* 31BC14 802BDBF4 0C0AF451 */  jal       func_802BD144
 /* 31BC18 802BDBF8 E682002C */   swc1     $f2, 0x2c($s4)

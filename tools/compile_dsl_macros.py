@@ -8,11 +8,11 @@ import traceback
 def eprint(*args, **kwargs):
     print(*args, file=stderr, **kwargs)
 
-write_buf = ""
+#write_buf = ""
 def write(s):
-    global write_buf
-    write_buf += s
-    #print(s, end="")
+    #global write_buf
+    #write_buf += s
+    print(s, end="")
 
 ANSI_RED = "\033[1;31;40m"
 ANSI_RESET = "\u001b[0m"
@@ -29,17 +29,18 @@ script_parser = Lark(r"""
     block: "{" NEWLINE* (stmt STMT_SEP)* NEWLINE* "}"
 
     ?stmt: call
-         | label ":"            -> label_decl
+         | label ":" [stmt]     -> label_decl
          | "goto" label         -> label_goto
          | if_stmt
          | "return"             -> return_stmt
          | "break"              -> break_stmt
          | "sleep" expr         -> sleep_stmt
+         | "sleep" expr "secs"  -> sleep_secs_stmt
          | "spawn" expr         -> spawn_stmt
          | "await" expr         -> await_stmt
          | lhs "=" "spawn" expr -> spawn_set_stmt
          | lhs set_op expr      -> set_stmt
-         | lhs ":=" expr        -> set_const_stmt
+         | "const" lhs set_op expr -> set_const_stmt
          | bind_stmt
          | bind_set_stmt
          | "unbind"             -> unbind_stmt
@@ -49,12 +50,19 @@ script_parser = Lark(r"""
          | kill_stmt
          | loop_stmt
          | loop_until_stmt
+         | ["await"] block     -> block_stmt
+         | "spawn" block       -> spawn_block_stmt
+         | "parallel" block    -> parallel_block_stmt
 
     call: CNAME "(" [expr ("," expr)* [","]] ")"
 
     if_stmt: "if" expr if_op expr block ["else" block]
     ?if_op: "==" -> if_op_eq
           | "!=" -> if_op_ne
+          | ">" -> if_op_gt
+          | "<" -> if_op_lt
+          | ">=" -> if_op_ge
+          | "<=" -> if_op_le
 
     suspend_stmt: "suspend" control_type expr ("," control_type expr)* [","]
     resume_stmt: "resume" control_type expr ("," control_type expr)* [","]
@@ -84,6 +92,11 @@ script_parser = Lark(r"""
            | "*=" -> set_op_mul
            | "/=" -> set_op_div
            | "%=" -> set_op_mod
+           | "&=" -> set_op_and
+           | "|=" -> set_op_or
+           | ":=" -> set_op_eq_const
+           | ":&=" -> set_op_and_const
+           | ":|=" -> set_op_or_const
 
     c_const_expr: c_const_expr_internal
     c_const_expr_internal: "(" (c_const_expr_internal | NOT_PARENS)+ ")"
@@ -175,6 +188,22 @@ class LoopUntilCtx(CmdCtx):
     def break_opcode(self, meta):
         raise CompileError("breaking out of a loop..until is not supported (hint: use a label)", meta)
 
+class LabelCtx(CmdCtx):
+    def __init__(self, label):
+        super().__init__()
+        self.label = label
+
+    # TODO: implement break_opcode so you can do lbl: loop { break lbl }
+
+class BlockCtx(CmdCtx):
+    pass
+
+class SpawnCtx(CmdCtx):
+    pass
+
+class ParallelCtx(CmdCtx):
+    pass
+
 class CompileError(Exception):
     def __init__(self, message, meta):
         super().__init__(message)
@@ -255,6 +284,10 @@ class Compile(Transformer):
         return [ Cmd(op, a, b, meta=tree.meta), *block, Cmd(0x13) ]
     def if_op_eq(self, tree): return 0x0A
     def if_op_ne(self, tree): return 0x0B
+    def if_op_lt(self, tree): return 0x0C
+    def if_op_gt(self, tree): return 0x0D
+    def if_op_le(self, tree): return 0x0E
+    def if_op_ge(self, tree): return 0x0F
 
     def loop_stmt(self, tree):
         expr = tree.children.pop(0) if len(tree.children) > 1 else 0
@@ -336,6 +369,8 @@ class Compile(Transformer):
 
     def sleep_stmt(self, tree):
         return Cmd(0x08, tree.children[0], meta=tree.meta)
+    def sleep_secs_stmt(self, tree):
+        return Cmd(0x09, tree.children[0], meta=tree.meta)
 
     def bind_stmt(self, tree):
         script, trigger, target = tree.children
@@ -366,12 +401,16 @@ class Compile(Transformer):
                 raise CompileError(f"operation `{opcodes['__op__']}' not supported for ints", tree.meta)
         return Cmd(opcode, lhs, rhs)
     def set_const_stmt(self, tree):
-        lhs, rhs = tree.children
-        return Cmd(0x25, lhs, rhs)
+        lhs, opcodes, rhs = tree.children
+        opcode = opcodes.get("const", None)
+        if not opcode:
+            raise CompileError(f"operation `{opcodes['__op__']}' not supported for consts", tree.meta)
+        return Cmd(opcode, lhs, rhs)
     def set_op_eq(self, tree):
         return {
             "__op__": "=",
             "int": 0x24,
+            "const": 0x25,
             "float": 0x26,
         }
     def set_op_add(self, tree):
@@ -403,10 +442,37 @@ class Compile(Transformer):
             "__op__": "%",
             "int": 0x2B,
         }
+    def set_op_and(self, tree):
+        return {
+            "__op__": "&",
+            "int": 0x3F,
+            "const": 0x41,
+        }
+    def set_op_or(self, tree):
+        return {
+            "__op__": "|",
+            "int": 0x40,
+            "const": 0x42,
+        }
 
     def label_decl(self, tree):
-        label = tree.children[0]
-        return Cmd(0x03, label, meta=tree.meta)
+        if len(tree.children) == 0:
+            label = tree.children[0]
+            return Cmd(0x03, label, meta=tree.meta)
+        else:
+            label, cmd_or_block = tree.children
+
+            if type(cmd_or_block) is not list:
+                cmd_or_block = [cmd_or_block]
+
+            for cmd in cmd_or_block:
+                if isinstance(cmd, BaseCmd):
+                    cmd.add_context(LabelCtx(label))
+
+            return [
+                Cmd(0x03, label, meta=tree.meta),
+                *cmd_or_block
+            ]
     def label_goto(self, tree):
         label = tree.children[0]
         return Cmd(0x04, label, meta=tree.meta)
@@ -415,6 +481,25 @@ class Compile(Transformer):
         if name in self.alloc.labels:
             return self.alloc.labels.index(name)
         raise CompileError(f"label `{name}' is undeclared", tree.meta)
+
+    def block_stmt(self, tree):
+        block, = tree.children
+        for cmd in block:
+            if isinstance(cmd, BaseCmd):
+                cmd.add_context(BlockCtx())
+        return block
+    def spawn_block_stmt(self, tree):
+        block, = tree.children
+        for cmd in block:
+            if isinstance(cmd, BaseCmd):
+                cmd.add_context(SpawnCtx())
+        return [ Cmd(0x56, meta=tree.meta), *block, Cmd(0x57) ]
+    def parallel_block_stmt(self, tree):
+        block, = tree.children
+        for cmd in block:
+            if isinstance(cmd, BaseCmd):
+                cmd.add_context(ParallelCtx())
+        return [ Cmd(0x58, meta=tree.meta), *block, Cmd(0x59) ]
 
 def compile_script(s):
     tree = script_parser.parse(s)
@@ -436,7 +521,7 @@ def read_until_closing_paren(depth=1, lex_strings=False):
     string_escape = False
 
     while True:
-        char = f.read(1)
+        char = stdin.read(1)
 
         if len(char) == 0:
             # EOF
@@ -463,7 +548,7 @@ def read_line():
     line = ""
 
     while True:
-        char = f.read(1)
+        char = stdin.read(1)
 
         if len(char) == 0:
             # EOF
@@ -501,115 +586,107 @@ if __name__ == "__main__":
     file_info = []
     error = False
 
-    num_scripts = int(stdin.read())
-    if num_scripts == 0:
-        exit(0)
-    print(f"compiling {num_scripts} scripts")
+    macro_name = "" # captures recent UPPER_CASE identifier
+    prev_char = ""
+    while True:
+        char = stdin.read(1)
 
-    with open(argv[1], 'r') as f:
-        macro_name = "" # captures recent UPPER_CASE identifier
-        prev_char = ""
-        while True:
-            char = f.read(1)
+        if len(char) == 0:
+            # EOF
+            write(macro_name)
+            break
 
-            if len(char) == 0:
-                # EOF
-                write(macro_name)
-                break
+        if char == "#" and (prev_char == "\n" or prev_char == ""):
+            # cpp line/file marker
+            line = read_line()
+            line_split = line[1:].split(" ")
 
-            if char == "#" and (prev_char == "\n" or prev_char == ""):
-                # cpp line/file marker
-                line = read_line()
-                line_split = line[1:].split(" ")
+            line_no = int(line_split[0])
+            file_info = line_split[1:]
 
-                line_no = int(line_split[0])
-                file_info = line_split[1:]
+            write("#" + line + "\n")
+        elif char == "(":
+            filename = file_info[0][1:-1]
 
-                write("#" + line + "\n")
-            elif char == "(":
-                filename = file_info[0][1:-1]
+            # SCRIPT(...)
+            if macro_name == "SCRIPT":
+                script_source, line_map = gen_line_map(read_until_closing_paren(lex_strings=True), source_line_no=line_no)
 
-                # SCRIPT(...)
-                if macro_name == "SCRIPT":
-                    script_source, line_map = gen_line_map(read_until_closing_paren(lex_strings=True), source_line_no=line_no)
+                try:
+                    commands = compile_script(script_source)
 
-                    try:
-                        commands = compile_script(script_source)
+                    write("{\n")
+                    for command in commands:
+                        if command.meta:
+                            write(f"# {line_map[command.meta.line]} {file_info[0]}\n")
+                        write("    ")
+                        for word in command.to_bytecode():
+                            if type(word) == str:
+                                write(word)
+                            elif type(word) == int:
+                                write(f"0x{word & 0xFFFFFFFF:X}")
+                            else:
+                                raise Exception(f"{command}.to_bytecode() gave {type(word)} {word}")
+                            write(", ")
+                        write("\n")
+                    write("}")
+                except exceptions.UnexpectedEOF as e:
+                    eprint(f"{filename}:{line_no}: {ANSI_RED}error{ANSI_RESET}: unterminated SCRIPT(...) macro")
+                    error = True
+                except exceptions.UnexpectedCharacters as e:
+                    line = line_map[e.line]
+                    char = script_source[e.pos_in_stream]
+                    allowed = e.allowed
 
-                        write("{\n")
-                        for command in commands:
-                            if command.meta:
-                                write(f"# {line_map[command.meta.line]} {file_info[0]}\n")
-                            write("    ")
-                            for word in command.to_bytecode():
-                                if type(word) == str:
-                                    write(word)
-                                elif type(word) == int:
-                                    write(f"0x{word & 0xFFFFFFFF:X}")
-                                else:
-                                    raise Exception(f"{command}.to_bytecode() gave {type(word)} {word}")
-                                write(", ")
-                            write("\n")
-                        write("}")
-                    except exceptions.UnexpectedEOF as e:
-                        eprint(f"{filename}:{line_no}: {ANSI_RED}error{ANSI_RESET}: unterminated SCRIPT(...) macro")
-                        error = True
-                    except exceptions.UnexpectedCharacters as e:
-                        line = line_map[e.line]
-                        char = script_source[e.pos_in_stream]
-                        allowed = e.allowed
+                    eprint(f"{filename}:{line}: {ANSI_RED}script parse error{ANSI_RESET}: unexpected `{char}', expected {' or '.join(allowed)}")
+                    eprint(e.get_context(script_source))
 
-                        eprint(f"{filename}:{line}: {ANSI_RED}script parse error{ANSI_RESET}: unexpected `{char}', expected {' or '.join(allowed)}")
-                        eprint(e.get_context(script_source))
+                    error = True
+                except exceptions.UnexpectedToken as e:
+                    line = line_map[e.line]
 
-                        error = True
-                    except exceptions.UnexpectedToken as e:
-                        line = line_map[e.line]
+                    eprint(f"{filename}:{line}: {ANSI_RED}script parse error{ANSI_RESET}: unexpected `{e.token}'")
+                    eprint(e.get_context(script_source))
 
-                        eprint(f"{filename}:{line}: {ANSI_RED}script parse error{ANSI_RESET}: unexpected `{e.token}'")
-                        eprint(e.get_context(script_source))
-
-                        error = True
-                    except exceptions.VisitError as e:
-                        if type(e.orig_exc) == CompileError:
-                            line = line_map[e.orig_exc.meta.line]
-                            eprint(f"{filename}:{line}: {ANSI_RED}script compile error{ANSI_RESET}: {e.orig_exc}")
-                        else:
-                            eprint(f"{filename}:{line_no}: {ANSI_RED}internal script transform error{ANSI_RESET}")
-                            traceback.print_exc()
-                        error = True
-                    except CompileError as e:
-                        line = line_map[e.meta.line]
-                        eprint(f"{filename}:{line}: {ANSI_RED}script compile error{ANSI_RESET}: {e}")
-                        error = True
-                    except Exception as e:
-                        eprint(f"{filename}:{line_no}: {ANSI_RED}internal script compilation error{ANSI_RESET}")
+                    error = True
+                except exceptions.VisitError as e:
+                    if type(e.orig_exc) == CompileError:
+                        line = line_map[e.orig_exc.meta.line]
+                        eprint(f"{filename}:{line}: {ANSI_RED}script compile error{ANSI_RESET}: {e.orig_exc}")
+                    else:
+                        eprint(f"{filename}:{line_no}: {ANSI_RED}internal script transform error{ANSI_RESET}")
                         traceback.print_exc()
-                        error = True
+                    error = True
+                except CompileError as e:
+                    line = line_map[e.meta.line]
+                    eprint(f"{filename}:{line}: {ANSI_RED}script compile error{ANSI_RESET}: {e}")
+                    error = True
+                except Exception as e:
+                    eprint(f"{filename}:{line_no}: {ANSI_RED}internal script compilation error{ANSI_RESET}")
+                    traceback.print_exc()
+                    error = True
 
-                    line_no += script_source.count("\n")
-                    write(f"\n# {line_no} {file_info[0]}\n")
-                else:
-                    # leave non-macro in source
-                    write(macro_name + char)
-
-                macro_name = ""
-            elif char == "_" or (char >= 'A' and char <= 'Z'):
-                macro_name += char
+                line_no += script_source.count("\n")
+                write(f"\n# {line_no} {file_info[0]}\n")
             else:
+                # leave non-macro in source
                 write(macro_name + char)
-                macro_name = ""
 
-                if char == "\n":
-                    char_no = 0
-                    line_no += 1
+            macro_name = ""
+        elif char == "_" or (char >= 'A' and char <= 'Z'):
+            macro_name += char
+        else:
+            write(macro_name + char)
+            macro_name = ""
 
-            char_no += 1
-            prev_char = char
+            if char == "\n":
+                char_no = 0
+                line_no += 1
+
+        char_no += 1
+        prev_char = char
 
     if error:
         exit(1)
     else:
-        with open(argv[1], "w") as f:
-            f.write(write_buf)
         exit(0)

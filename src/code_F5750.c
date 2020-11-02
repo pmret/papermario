@@ -122,7 +122,32 @@ ApiStatus SetPlayerAnimationSpeed(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_F5750", PlayerMoveTo, ScriptInstance* script, s32 isInitialCall);
+ApiStatus PlayerMoveTo(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    PlayerStatus* playerStatus = PLAYER_STATUS;
+
+    if (isInitialCall) {
+        f32 targetX = get_variable(script, *args++);
+        f32 targetZ = get_variable(script, *args++);
+        f32 moveSpeed;
+
+        script->functionTemp[0].s = get_variable(script, *args++);
+        playerStatus->targetYaw = atan2(playerStatus->position.x, playerStatus->position.z, targetX, targetZ);
+
+        if (script->functionTemp[0].s == 0) {
+            script->functionTemp[0].s = dist2D(playerStatus->position.x, playerStatus->position.z, targetX,
+                                               targetZ) / gPlayerNpcPtr->moveSpeed;
+            moveSpeed = gPlayerNpcPtr->moveSpeed;
+        } else {
+            moveSpeed = dist2D(playerStatus->position.x, playerStatus->position.z, targetX, targetZ) / script->functionTemp[0].s;
+        }
+        move_player(script->functionTemp[0].s, playerStatus->targetYaw, moveSpeed);
+    }
+
+    // functionTemp 0 is the time left
+    script->functionTemp[0].s--;
+    return script->functionTemp[0].s < 0;
+}
 
 INCLUDE_ASM(s32, "code_F5750", func_802D1270);
 
@@ -142,7 +167,49 @@ void PlayerJump2(ScriptInstance* script, s32 isInitialCall) {
     player_jump(script, isInitialCall, 2);
 }
 
-INCLUDE_ASM(s32, "code_F5750", InterpPlayerYaw, ScriptInstance* script, s32 isInitialCall);
+ApiStatus InterpPlayerYaw(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    PlayerStatus* playerStatus = PLAYER_STATUS;
+    f32* initialYaw = &script->functionTemp[1].f;
+    f32* deltaYaw = &script->functionTemp[2].f;
+    s32* time = &script->functionTemp[3].s;
+
+    if (isInitialCall) {
+        Npc** player = &gPlayerNpcPtr;
+
+        (*player)->yaw = playerStatus->targetYaw;
+        *initialYaw = (*player)->yaw;
+        *deltaYaw = get_float_variable(script, *args++) - *initialYaw;
+        *time = get_variable(script, *args++);
+        (*player)->duration = 0;
+
+        if (*deltaYaw < -180.0f) {
+            *deltaYaw += 360.0f;
+        }
+        if (*deltaYaw > 180.0f) {
+            *deltaYaw -= 360.0f;
+        }
+    }
+
+    if (*time > 0) {
+        Npc** player = &gPlayerNpcPtr;
+
+        (*player)->duration++;
+        (*player)->yaw = *initialYaw + ((*deltaYaw * (*player)->duration) / *time);
+        (*player)->yaw = clamp_angle((*player)->yaw);
+        playerStatus->targetYaw = (*player)->yaw;
+
+        return !((*player)->duration < *time);
+    } else {
+        Npc** player = &gPlayerNpcPtr;
+
+        (*player)->yaw += *deltaYaw;
+        (*player)->yaw = clamp_angle((*player)->yaw);
+        playerStatus->targetYaw = (*player)->yaw;
+
+        return ApiStatus_DONE2;
+    }
+}
 
 INCLUDE_ASM(s32, "code_F5750", PlayerFaceNpc, ScriptInstance* script, s32 isInitialCall);
 
@@ -236,9 +303,20 @@ INCLUDE_ASM(s32, "code_F5750", func_802D244C);
 
 INCLUDE_ASM(s32, "code_F5750", func_802D2484);
 
-INCLUDE_ASM(s32, "code_F5750", func_802D249C);
+ApiStatus func_802D249C(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 val = 0;
+    if (gCollisionStatus.currentFloor >= 0) {
+        val = func_802D23F8() != 0;
+    }
+    set_variable(script, *args, val);
 
-INCLUDE_ASM(s32, "code_F5750", func_802D24F4);
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_802D24F4(ScriptInstance* script, s32 isInitialCall) {
+    return (gPlayerStatus.moveFrames == 0) * ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_F5750", func_802D2508);
 

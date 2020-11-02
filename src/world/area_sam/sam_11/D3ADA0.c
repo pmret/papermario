@@ -4,15 +4,13 @@ INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_802407D0_D3ADA0);
 
 #include "world/common/GetItemName.inc.c"
 
-INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_802408E8_D3AEB8);
-
-INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_802408FC_D3AECC);
+#include "world/common/Set80151310.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_8024090C_D3AEDC);
 
 INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_80240B30_D3B100);
 
-INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_80240B7C_D3B14C);
+#include "world/common/GetNpcUnsafeOwner2.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_80240B9C_D3B16C);
 
@@ -36,19 +34,17 @@ INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_802412D8_D3B8A8);
 
 INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_802412F4_D3B8C4);
 
-INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_8024130C_D3B8DC);
+#include "world/common/GetGameStatus75.inc.c"
 
-INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_8024133C_D3B90C);
+#include "world/common/SetCamVfov.inc.c"
 
-INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_802413B0_D3B980);
+#include "world/common/GetCamVfov.inc.c"
 
-INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_80241450_D3BA20);
+#include "world/common/UnkCameraFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_802415EC_D3BBBC);
+#include "world/common/UnkRotatePlayer.inc.c"
 
-INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_80241650_D3BC20);
-
-INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_802416E0_D3BCB0);
+#include "world/common/UnkPartnerFuncs.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_802417C8_D3BD98);
 

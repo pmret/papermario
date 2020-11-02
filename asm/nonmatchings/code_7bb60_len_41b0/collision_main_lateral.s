@@ -7,8 +7,8 @@ glabel collision_main_lateral
 /* 7CAF4 800E3644 3C118011 */  lui       $s1, %hi(gPlayerStatus)
 /* 7CAF8 800E3648 2631EFC8 */  addiu     $s1, $s1, %lo(gPlayerStatus)
 /* 7CAFC 800E364C AFB40068 */  sw        $s4, 0x68($sp)
-/* 7CB00 800E3650 3C148016 */  lui       $s4, 0x8016
-/* 7CB04 800E3654 2694A550 */  addiu     $s4, $s4, -0x5ab0
+/* 7CB00 800E3650 3C148016 */  lui       $s4, %hi(gCollisionStatus)
+/* 7CB04 800E3654 2694A550 */  addiu     $s4, $s4, %lo(gCollisionStatus)
 /* 7CB08 800E3658 AFBF006C */  sw        $ra, 0x6c($sp)
 /* 7CB0C 800E365C AFB30064 */  sw        $s3, 0x64($sp)
 /* 7CB10 800E3660 AFB20060 */  sw        $s2, 0x60($sp)

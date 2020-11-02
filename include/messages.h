@@ -34,6 +34,7 @@ typedef s32 MessageID;
 // 18 Gossip Bulletin
 
 // 19 Map Tattles
+#define MessageID_TATTLE_KMR_03 MESSAGE_ID(0x19, 0x3B)
 #define MessageID_TATTLE_KMR_12 MESSAGE_ID(0x19, 0x40)
 
 // 1A NPC Tattles

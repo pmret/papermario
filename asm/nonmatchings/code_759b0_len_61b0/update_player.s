@@ -10,8 +10,8 @@ glabel update_player
 /* 78C04 800DF754 3C108011 */  lui       $s0, %hi(gPlayerStatus)
 /* 78C08 800DF758 2610EFC8 */  addiu     $s0, $s0, %lo(gPlayerStatus)
 /* 78C0C 800DF75C 860200C0 */  lh        $v0, 0xc0($s0)
-/* 78C10 800DF760 3C118016 */  lui       $s1, 0x8016
-/* 78C14 800DF764 2631A550 */  addiu     $s1, $s1, -0x5ab0
+/* 78C10 800DF760 3C118016 */  lui       $s1, %hi(gCollisionStatus)
+/* 78C14 800DF764 2631A550 */  addiu     $s1, $s1, %lo(gCollisionStatus)
 /* 78C18 800DF768 28420065 */  slti      $v0, $v0, 0x65
 /* 78C1C 800DF76C 10400009 */  beqz      $v0, .L800DF794
 /* 78C20 800DF770 00000000 */   nop      
