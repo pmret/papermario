@@ -58,7 +58,7 @@ segments:
     - [0x2d9a0, "c", "code_2d9a0_len_890"]
     - [0x2e230, "c", "code_2e230_len_2190"]
     - [0x303c0, "c", "code_303c0_len_3e10"]
-    - [0x341d0, "c", "code_341d0_len_20d0"]
+    - [0x341d0, "c", "world/world"]
     - [0x362a0, "c", "code_362a0_len_2f70"]
     - [0x39210, "c", "code_39210_len_aa0"]
     - [0x39cb0, "c", "os/code_39cb0_len_100"]
@@ -197,7 +197,11 @@ segments:
     - [0x4a360, "c", "os/code_4a360_len_930"]
     - [0x4ac90, "c", "os/code_4ac90_len_3910"]
     - [0x4E5A0, "bin"]
-  - [0x6E8F0, "bin", "world/area_table"]
+    - [0x52D50, "bin"]
+    - [0x6B450, ".data", "world/world"]
+    - [0x6EAC0, "bin"] # has scripts
+    - [0x73DA0, ".rodata", "world/world"]
+    - [0x74EA0, "bin"]
   - type: code
     start: 0x759B0
     vram: 0x800DC500
@@ -883,11 +887,13 @@ segments:
     files:
     - [0x415D90, "c"]
   - [0x4200C0, "bin"] # todo split this further
-  - type: code
+  - name: world/script_api/
+    ld_name: world_script_api
+    type: code
     start: 0x7E0E80
     vram: 0x80280000
     files:
-    - [0x7e0e80, "c", "code_7e0e80"]
+    - [0x7e0e80, "c"]
     - [0x7E2AA0, "c"]
     - [0x7E3700, "c"]
     - [0x7e4d00, "bin"]
@@ -4943,7 +4949,7 @@ segments:
       - [0xC047F0, "bin"]
       - [0xC20C70, "bin"] # rodata
       - [0xC20CF8, "bin"] # rodata
-      - [0xC20F40, "bin"] # rodata
+  - [0xC20F40, "bin"]
   - name: world/area_dgb/dgb_02/
     type: code
     overlay: True
@@ -6564,7 +6570,7 @@ segments:
     files:
       - [0xE1E460, "c"]
       - [0xE1EC20, "bin"]
-      - [0xE20110, "bin"]
+  - [0xE20110, "bin"]
   - type: code
     overlay: True
     start: 0xE20EB0

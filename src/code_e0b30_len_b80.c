@@ -4,7 +4,7 @@
 void transition_music_volume_to(s16 volume);
 
 /// If the given song ID is present in gSongsUsingVariationFlag, returns the current
-/// map's `flags2 & 1` value. Otherwise, returns -1.
+/// map's `songVariation & 1` value. Otherwise, returns -1.
 ///
 /// @see gSongsUsingVariationFlag
 /// @returns -1: no override; 0: override to variation 0; 1 override to variation 1
@@ -17,7 +17,7 @@ s32 get_song_variation_override_for_cur_map(SongID songID) {
         if (allowed[i] == songID) {
             Map* map = &areas[GAME_STATUS->areaID].maps[GAME_STATUS->mapID];
 
-            return map->flags2 & 1;
+            return map->songVariation & 1;
         }
     }
 
