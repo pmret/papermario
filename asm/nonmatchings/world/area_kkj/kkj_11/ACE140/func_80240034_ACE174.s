@@ -11,8 +11,8 @@ glabel func_80240034_ACE174
 /* ACE18C 8024004C 4600008D */  trunc.w.s $f2, $f0
 /* ACE190 80240050 44021000 */  mfc1      $v0, $f2
 /* ACE194 80240054 00000000 */  nop       
-/* ACE198 80240058 3C018011 */  lui       $at, 0x8011
-/* ACE19C 8024005C A022EFD5 */  sb        $v0, -0x102b($at)
+/* ACE198 80240058 3C018011 */  lui       $at, %hi(gPlayerStatus+0xD)
+/* ACE19C 8024005C A022EFD5 */  sb        $v0, %lo(gPlayerStatus+0xD)($at)
 /* ACE1A0 80240060 24020002 */  addiu     $v0, $zero, 2
 /* ACE1A4 80240064 03E00008 */  jr        $ra
 /* ACE1A8 80240068 27BD0018 */   addiu    $sp, $sp, 0x18

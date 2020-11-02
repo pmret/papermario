@@ -74,10 +74,6 @@ gBattleState = 0x800DC068;
 gBattleStatus = 0x800DC070;
 gPauseMenuStrings = 0x8026F778;
 
-mapScriptLibStart = 0x7E0E80;
-mapScriptLibEnd = 0x7E73A0;
-mapScriptLibVram = 0x80280000;
-
 D_000759B0 = 0x000759B0;
 D_000759B0_end = 0x000A5DD0;
 D_000A5DD0 = 0x000A5DD0;
@@ -277,5 +273,4 @@ EnemyNpcDefeat = 0x8007809C;
 D_80078DB0 = 0x80078DB0;
 D_80078DB4 = 0x80078DB4;
 
-gAreas = 0x800934F0;
 gSongsUsingVariationFlag = 0x8014F720;

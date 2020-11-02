@@ -99,7 +99,7 @@ submodules:
 
 split:
 	rm -rf bin img
-	$(SPLAT) --modes ld bin Yay0 PaperMarioMapFS rgba16 rgba32 ia4 ia8 ia16 i4 i8 ci4 ci8
+	$(SPLAT) --modes ld bin Yay0 PaperMarioMapFS img
 
 split-%:
 	$(SPLAT) --modes ld $*
@@ -132,12 +132,12 @@ $(BUILD_DIR)/%.Yay0.o: $(BUILD_DIR)/%.bin.Yay0
 # Compile C files
 $(BUILD_DIR)/%.c.o: %.c $(MDEPS)
 	@mkdir -p $(shell dirname $@)
-	$(CPP) $(CPPFLAGS) -o - $< $(CPPMFLAGS) | $(CC) $(CFLAGS) -o - | $(OLD_AS) $(OLDASFLAGS) -o $@ -
+	$(CPP) $(CPPFLAGS) -o - $(CPPMFLAGS) $< | iconv --from UTF-8 --to SHIFT-JIS | $(CC) $(CFLAGS) -o - | $(OLD_AS) $(OLDASFLAGS) -o $@ -
 
 # Compile C files (with DSL macros)
 $(foreach cfile, $(DSL_C_FILES), $(BUILD_DIR)/$(cfile).o): $(BUILD_DIR)/%.c.o: %.c $(MDEPS) tools/compile_dsl_macros.py
 	@mkdir -p $(shell dirname $@)
-	$(CPP) $(CPPFLAGS) -o - $< $(CPPMFLAGS) | $(PYTHON) tools/compile_dsl_macros.py | $(CC) $(CFLAGS) -o - | $(OLD_AS) $(OLDASFLAGS) -o $@ -
+	$(CPP) $(CPPFLAGS) -o - $< $(CPPMFLAGS) | $(PYTHON) tools/compile_dsl_macros.py | iconv --from UTF-8 --to SHIFT-JIS | $(CC) $(CFLAGS) -o - | $(OLD_AS) $(OLDASFLAGS) -o $@ -
 
 # Assemble handwritten ASM
 $(BUILD_DIR)/%.s.o: %.s
@@ -156,15 +156,12 @@ $(BUILD_DIR)/%.rgba32.png: %.png
 $(BUILD_DIR)/%.ci8.png: %.png
 	@mkdir -p $(shell dirname $@)
 	$(PYTHON) tools/convert_image.py ci8 $< $@ $(IMG_FLAGS)
-$(BUILD_DIR)/%.ci8palette.png: %.png
-	@mkdir -p $(shell dirname $@)
-	$(PYTHON) tools/convert_image.py ci8palette $< $@ $(IMG_FLAGS)
 $(BUILD_DIR)/%.ci4.png: %.png
 	@mkdir -p $(shell dirname $@)
 	$(PYTHON) tools/convert_image.py ci4 $< $@ $(IMG_FLAGS)
-$(BUILD_DIR)/%.ci4palette.png: %.png
+$(BUILD_DIR)/%.palette.png: %.png
 	@mkdir -p $(shell dirname $@)
-	$(PYTHON) tools/convert_image.py ci4palette $< $@ $(IMG_FLAGS)
+	$(PYTHON) tools/convert_image.py palette $< $@ $(IMG_FLAGS)
 $(BUILD_DIR)/%.ia4.png: %.png
 	@mkdir -p $(shell dirname $@)
 	$(PYTHON) tools/convert_image.py ia4 $< $@ $(IMG_FLAGS)

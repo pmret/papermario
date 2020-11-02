@@ -12,8 +12,8 @@ glabel func_80240200_CD2030
 /* CD204C 8024021C AFB50024 */  sw        $s5, 0x24($sp)
 /* CD2050 80240220 0200A82D */  daddu     $s5, $s0, $zero
 /* CD2054 80240224 AFB10014 */  sw        $s1, 0x14($sp)
-/* CD2058 80240228 3C118011 */  lui       $s1, 0x8011
-/* CD205C 8024022C 2631F298 */  addiu     $s1, $s1, -0xd68
+/* CD2058 80240228 3C118011 */  lui       $s1, %hi(gPlayerData+0x8)
+/* CD205C 8024022C 2631F298 */  addiu     $s1, $s1, %lo(gPlayerData+0x8)
 /* CD2060 80240230 AFBF0028 */  sw        $ra, 0x28($sp)
 /* CD2064 80240234 AFB20018 */  sw        $s2, 0x18($sp)
 /* CD2068 80240238 8E6200B4 */  lw        $v0, 0xb4($s3)

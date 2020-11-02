@@ -12,8 +12,8 @@ glabel func_802408B0_DDD0E0
 /* DDD0FC 802408CC AFB50024 */  sw        $s5, 0x24($sp)
 /* DDD100 802408D0 0200A82D */  daddu     $s5, $s0, $zero
 /* DDD104 802408D4 AFB10014 */  sw        $s1, 0x14($sp)
-/* DDD108 802408D8 3C118011 */  lui       $s1, 0x8011
-/* DDD10C 802408DC 2631F298 */  addiu     $s1, $s1, -0xd68
+/* DDD108 802408D8 3C118011 */  lui       $s1, %hi(gPlayerData+0x8)
+/* DDD10C 802408DC 2631F298 */  addiu     $s1, $s1, %lo(gPlayerData+0x8)
 /* DDD110 802408E0 AFBF0028 */  sw        $ra, 0x28($sp)
 /* DDD114 802408E4 AFB20018 */  sw        $s2, 0x18($sp)
 /* DDD118 802408E8 8E6200B4 */  lw        $v0, 0xb4($s3)

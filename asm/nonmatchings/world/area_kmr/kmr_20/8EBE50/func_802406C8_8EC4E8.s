@@ -51,8 +51,8 @@ glabel func_802406C8_8EC4E8
 /* 8EC590 80240770 2402FFFF */  addiu     $v0, $zero, -1
 /* 8EC594 80240774 1602001F */  bne       $s0, $v0, .L802407F4
 /* 8EC598 80240778 0000202D */   daddu    $a0, $zero, $zero
-/* 8EC59C 8024077C 3C028011 */  lui       $v0, 0x8011
-/* 8EC5A0 80240780 9442F552 */  lhu       $v0, -0xaae($v0)
+/* 8EC59C 8024077C 3C028011 */  lui       $v0, %hi(gPlayerData+0x2C2)
+/* 8EC5A0 80240780 9442F552 */  lhu       $v0, %lo(gPlayerData+0x2C2)($v0)
 /* 8EC5A4 80240784 10400021 */  beqz      $v0, .L8024080C
 /* 8EC5A8 80240788 00000000 */   nop      
 /* 8EC5AC 8024078C 08090203 */  j         .L8024080C

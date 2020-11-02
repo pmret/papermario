@@ -8,8 +8,8 @@ glabel func_8024030C_AF2FAC
 /* AF2FB8 80240318 306300FE */  andi      $v1, $v1, 0xfe
 /* AF2FBC 8024031C A043007E */  sb        $v1, 0x7e($v0)
 /* AF2FC0 80240320 90820087 */  lbu       $v0, 0x87($a0)
-/* AF2FC4 80240324 3C018011 */  lui       $at, 0x8011
-/* AF2FC8 80240328 A022F2A2 */  sb        $v0, -0xd5e($at)
+/* AF2FC4 80240324 3C018011 */  lui       $at, %hi(gPlayerData+0x12)
+/* AF2FC8 80240328 A022F2A2 */  sb        $v0, %lo(gPlayerData+0x12)($at)
 /* AF2FCC 8024032C 03E00008 */  jr        $ra
 /* AF2FD0 80240330 24020002 */   addiu    $v0, $zero, 2
 /* AF2FD4 80240334 00000000 */  nop       

@@ -5,8 +5,8 @@ glabel func_802406E8_AD4778
 /* AD4778 802406E8 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* AD477C 802406EC AFBF0010 */  sw        $ra, 0x10($sp)
 /* AD4780 802406F0 8C82000C */  lw        $v0, 0xc($a0)
-/* AD4784 802406F4 3C068011 */  lui       $a2, 0x8011
-/* AD4788 802406F8 80C6EFD4 */  lb        $a2, -0x102c($a2)
+/* AD4784 802406F4 3C068011 */  lui       $a2, %hi(gPlayerStatus+0xC)
+/* AD4788 802406F8 80C6EFD4 */  lb        $a2, %lo(gPlayerStatus+0xC)($a2)
 /* AD478C 802406FC 0C0B2026 */  jal       set_variable
 /* AD4790 80240700 8C450000 */   lw       $a1, ($v0)
 /* AD4794 80240704 8FBF0010 */  lw        $ra, 0x10($sp)

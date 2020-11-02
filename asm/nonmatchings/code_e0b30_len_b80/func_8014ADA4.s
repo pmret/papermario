@@ -7,8 +7,8 @@ glabel func_8014ADA4
 /* E14AC 8014ADAC 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* E14B0 8014ADB0 AFBF0018 */  sw        $ra, 0x18($sp)
 /* E14B4 8014ADB4 80420071 */  lb        $v0, 0x71($v0)
-/* E14B8 8014ADB8 3C068016 */  lui       $a2, 0x8016
-/* E14BC 8014ADBC 24C69AF0 */  addiu     $a2, $a2, -0x6510
+/* E14B8 8014ADB8 3C068016 */  lui       $a2, %hi(gMusicPlayers)
+/* E14BC 8014ADBC 24C69AF0 */  addiu     $a2, $a2, %lo(gMusicPlayers)
 /* E14C0 8014ADC0 1440000A */  bnez      $v0, .L8014ADEC
 /* E14C4 8014ADC4 24030008 */   addiu    $v1, $zero, 8
 /* E14C8 8014ADC8 94C20000 */  lhu       $v0, ($a2)

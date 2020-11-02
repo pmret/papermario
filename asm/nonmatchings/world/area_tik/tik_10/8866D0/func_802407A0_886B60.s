@@ -12,8 +12,8 @@ glabel func_802407A0_886B60
 /* 886B7C 802407BC AFB50024 */  sw        $s5, 0x24($sp)
 /* 886B80 802407C0 0200A82D */  daddu     $s5, $s0, $zero
 /* 886B84 802407C4 AFB10014 */  sw        $s1, 0x14($sp)
-/* 886B88 802407C8 3C118011 */  lui       $s1, 0x8011
-/* 886B8C 802407CC 2631F298 */  addiu     $s1, $s1, -0xd68
+/* 886B88 802407C8 3C118011 */  lui       $s1, %hi(gPlayerData+0x8)
+/* 886B8C 802407CC 2631F298 */  addiu     $s1, $s1, %lo(gPlayerData+0x8)
 /* 886B90 802407D0 AFBF0028 */  sw        $ra, 0x28($sp)
 /* 886B94 802407D4 AFB20018 */  sw        $s2, 0x18($sp)
 /* 886B98 802407D8 8E6200B4 */  lw        $v0, 0xb4($s3)

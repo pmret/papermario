@@ -12,8 +12,8 @@ glabel func_80240120_D2FDA0
 /* D2FDBC 8024013C AFB50024 */  sw        $s5, 0x24($sp)
 /* D2FDC0 80240140 0200A82D */  daddu     $s5, $s0, $zero
 /* D2FDC4 80240144 AFB10014 */  sw        $s1, 0x14($sp)
-/* D2FDC8 80240148 3C118011 */  lui       $s1, 0x8011
-/* D2FDCC 8024014C 2631F298 */  addiu     $s1, $s1, -0xd68
+/* D2FDC8 80240148 3C118011 */  lui       $s1, %hi(gPlayerData+0x8)
+/* D2FDCC 8024014C 2631F298 */  addiu     $s1, $s1, %lo(gPlayerData+0x8)
 /* D2FDD0 80240150 AFBF0028 */  sw        $ra, 0x28($sp)
 /* D2FDD4 80240154 AFB20018 */  sw        $s2, 0x18($sp)
 /* D2FDD8 80240158 8E6200B4 */  lw        $v0, 0xb4($s3)

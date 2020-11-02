@@ -8,8 +8,8 @@ glabel func_802407C0_A0C4B0
 /* A0C4BC 802407CC 0C0B1EAF */  jal       get_variable
 /* A0C4C0 802407D0 8C450000 */   lw       $a1, ($v0)
 /* A0C4C4 802407D4 8FBF0010 */  lw        $ra, 0x10($sp)
-/* A0C4C8 802407D8 3C018011 */  lui       $at, 0x8011
-/* A0C4CC 802407DC A022F2A2 */  sb        $v0, -0xd5e($at)
+/* A0C4C8 802407D8 3C018011 */  lui       $at, %hi(gPlayerData+0x12)
+/* A0C4CC 802407DC A022F2A2 */  sb        $v0, %lo(gPlayerData+0x12)($at)
 /* A0C4D0 802407E0 24020002 */  addiu     $v0, $zero, 2
 /* A0C4D4 802407E4 03E00008 */  jr        $ra
 /* A0C4D8 802407E8 27BD0018 */   addiu    $sp, $sp, 0x18
