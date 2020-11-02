@@ -84,7 +84,7 @@ class Converter():
                     for a, b in iter_in_groups(row, 2):
                         byte = (a << 4) | b
                         f.write(byte.to_bytes(1, byteorder="big"))
-        elif self.mode == "ci8palette" or self.mode == "ci4palette":
+        elif self.mode == "palette":
             img.preamble(True)
             palette = img.palette(alpha="force")
 

@@ -99,7 +99,7 @@ submodules:
 
 split:
 	rm -rf bin img
-	$(SPLAT) --modes ld bin Yay0 PaperMarioMapFS rgba16 rgba32 ia4 ia8 ia16 i4 i8 ci4 ci8
+	$(SPLAT) --modes ld bin Yay0 PaperMarioMapFS img
 
 split-%:
 	$(SPLAT) --modes ld $*
@@ -156,15 +156,12 @@ $(BUILD_DIR)/%.rgba32.png: %.png
 $(BUILD_DIR)/%.ci8.png: %.png
 	@mkdir -p $(shell dirname $@)
 	$(PYTHON) tools/convert_image.py ci8 $< $@ $(IMG_FLAGS)
-$(BUILD_DIR)/%.ci8palette.png: %.png
-	@mkdir -p $(shell dirname $@)
-	$(PYTHON) tools/convert_image.py ci8palette $< $@ $(IMG_FLAGS)
 $(BUILD_DIR)/%.ci4.png: %.png
 	@mkdir -p $(shell dirname $@)
 	$(PYTHON) tools/convert_image.py ci4 $< $@ $(IMG_FLAGS)
-$(BUILD_DIR)/%.ci4palette.png: %.png
+$(BUILD_DIR)/%.palette.png: %.png
 	@mkdir -p $(shell dirname $@)
-	$(PYTHON) tools/convert_image.py ci4palette $< $@ $(IMG_FLAGS)
+	$(PYTHON) tools/convert_image.py palette $< $@ $(IMG_FLAGS)
 $(BUILD_DIR)/%.ia4.png: %.png
 	@mkdir -p $(shell dirname $@)
 	$(PYTHON) tools/convert_image.py ia4 $< $@ $(IMG_FLAGS)
