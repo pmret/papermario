@@ -1,20 +1,16 @@
 #include "kpa_03.h"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_03/A48720", func_80240160_A48720);
+#include "world/common/set_script_owner_npc_anim.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_03/A48720", func_802401DC_A4879C);
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_03/A48720", func_80240310_A488D0);
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_03/A48720", func_80240474_A48A34);
+#include "world/common/set_script_owner_npc_col_height.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_03/A48720", func_802404F4_A48AB4);
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_03/A48720", func_80240934_A48EF4);
-
 #include "world/common/AwaitPlayerNearNpc.inc.c"
-
-INCLUDE_ASM(s32, "world/area_kpa/kpa_03/A48720", func_802409D4_A48F94);
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_03/A48720", func_80240A48_A49008);
 
