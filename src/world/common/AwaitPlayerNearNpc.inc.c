@@ -25,12 +25,12 @@ static ApiStatus func_802408B4_97BEE4(ScriptInstance* script, s32 isInitialCall)
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_safe(script->owner2.npcID);
 
-    if (isInitialCall != 0) {
+    if (isInitialCall) {
         npc->unk_AB = 0;
     }
 
     if (npc->flags & 0x1000) {
-        currentEncounter->enounterList[enemy->encounterIndex]->battle = (u16) enemy->varTable[0];
+        currentEncounter->enounterList[enemy->encounterIndex]->battle = enemy->varTable[0];
         return ApiStatus_DONE2;
     }
 

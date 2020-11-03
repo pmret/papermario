@@ -1,12 +1,12 @@
 #include "kzn_03.h"
 
-#include "world/common/SetNpcAnim.inc.c"
+#include "world/common/set_script_owner_npc_anim.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_8024038C_C6109C);
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_802404C0_C611D0);
 
-#include "world/common/SetNpcColHeight.inc.c"
+#include "world/common/set_script_owner_npc_col_height.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_802406A4_C613B4);
 

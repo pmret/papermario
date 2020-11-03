@@ -1,6 +1,6 @@
 #include "common.h"
 
-static void SetNpcAnim(ScriptInstance* script) {
+static void set_script_owner_npc_anim(ScriptInstance* script) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 

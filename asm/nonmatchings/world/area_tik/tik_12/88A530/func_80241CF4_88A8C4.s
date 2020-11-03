@@ -232,7 +232,7 @@ glabel func_80241CF4_88A8C4
 .L80242044:
 /* 88AC14 80242044 0260202D */  daddu     $a0, $s3, $zero
 /* 88AC18 80242048 0280282D */  daddu     $a1, $s4, $zero
-/* 88AC1C 8024204C 0C090658 */  jal       SetNpcAnim
+/* 88AC1C 8024204C 0C090658 */  jal       set_script_owner_npc_anim
 /* 88AC20 80242050 02A0302D */   daddu    $a2, $s5, $zero
 /* 88AC24 80242054 0260202D */  daddu     $a0, $s3, $zero
 .L80242058:
@@ -250,7 +250,7 @@ glabel func_80241CF4_88A8C4
 /* 88AC50 80242080 00000000 */   nop      
 .L80242084:
 /* 88AC54 80242084 0280282D */  daddu     $a1, $s4, $zero
-/* 88AC58 80242088 0C09071D */  jal       SetNpcColHeight
+/* 88AC58 80242088 0C09071D */  jal       set_script_owner_npc_col_height
 /* 88AC5C 8024208C 02A0302D */   daddu    $a2, $s5, $zero
 /* 88AC60 80242090 08090828 */  j         .L802420A0
 /* 88AC64 80242094 00000000 */   nop      

@@ -1,10 +1,11 @@
 #include "common.h"
 
-static void SetNpcColHeight(ScriptInstance* script) {
+static void set_script_owner_npc_col_height(ScriptInstance* script) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
-    if (npc->duration++ == 2) {
+    npc->duration++;
+    if (npc->duration == 3) {
         npc->collisionHeight = enemy->varTable[6];
     }
 
@@ -12,6 +13,6 @@ static void SetNpcColHeight(ScriptInstance* script) {
         return;
     }
 
-    npc->collisionHeight =  enemy->varTable[6];
+    npc->collisionHeight = enemy->varTable[6];
     script->functionTemp[0].s = 0;
 }
