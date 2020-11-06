@@ -14,6 +14,22 @@ INCLUDE_ASM(s32, "code_25f00_len_940", nuAuCleanDMABuffers);
 
 INCLUDE_ASM(s32, "code_25f00_len_940", func_8004B328);
 
-INCLUDE_ASM(void, "code_25f00_len_940", alLink, ALLink* element, ALLink* after);
+void alLink(ALLink *element, ALLink *after) {
+    element->next = after->next;
+    element->prev = after;
 
-INCLUDE_ASM(void, "code_25f00_len_940", alUnlink, ALLink* element);
+    if (after->next != NULL) {
+        after->next->prev = element;
+    }
+    after->next = element;
+}
+
+void alUnlink(ALLink *element) {
+    if (element->next != NULL) {
+        element->next->prev = element->prev;
+    }
+
+    if (element->prev != NULL) {
+        element->prev->next = element->next;
+    }
+}

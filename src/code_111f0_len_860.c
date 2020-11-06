@@ -1,16 +1,39 @@
 #include "common.h"
 
+void func_80035E54(void);
+
 void func_80035DF0(s16 arg0) {
     s16* tempPtr = &D_800A0942;
 
     *tempPtr = arg0;
 }
 
-INCLUDE_ASM(s32, "code_111f0_len_860", func_80035E00);
+void func_80035E00(void) {
+    D_800A0948 = 0;
+    func_80035E54();
+}
 
-INCLUDE_ASM(s32, "code_111f0_len_860", func_80035E24);
+void func_80035E24(void) {
+    D_800A0948 = 1;
+    set_map_transition_effect(8);
+    func_80035E54();
+}
 
-INCLUDE_ASM(s32, "code_111f0_len_860", func_80035E54);
+void func_80035E54(void) {
+    u16 *mapTransitonAlpha;
+    GameStatus** gameStatus = gGameStatusPtr; // :/
+
+    D_800A0944 = 0;
+    D_800A0946 = 4;
+    (*gameStatus)->exitAngle = 0.0f;
+    mapTransitonAlpha = &gMapTransitionAlpha;
+    *mapTransitonAlpha = 0xFF;
+    nuContRmbForceStopEnd();
+    func_801382AC(mapTransitonAlpha);
+    D_8009A650[0] |= 8;
+    set_variable(0, SI_SAVE_VAR(1), (*gameStatus)->unk_A9);
+    D_8009A5D8 = 0;
+}
 
 INCLUDE_ASM(s32, "code_111f0_len_860", func_80035EEC);
 

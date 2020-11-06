@@ -11,7 +11,7 @@ static ApiStatus SomeXYZFuncTodoRename(ScriptInstance* script, s32 isInitialStat
     f32 z = (f32)get_variable(script, zVar);
     f32 cameraYaw;
 
-    cameraYaw = gCameras[gCurrentCameraID].currentYaw;
+    cameraYaw = CURRENT_CAM->currentYaw;
 
     if (playerStatus->spriteFacingAngle == 0.0f) {
         cameraYaw -= 100.0f;

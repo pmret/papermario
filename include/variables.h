@@ -96,6 +96,8 @@ extern TriggerList* gCurrentTriggerListPtr;
 extern u16 gMapTransitionAlpha;
 extern s16 D_800A0942;
 extern s16 D_800A0944;
+extern s16 D_800A0946;
+extern s16 D_800A0948;
 extern s16 D_800A0954;
 extern s16 D_800A0956;
 extern s16 D_800A0958;
