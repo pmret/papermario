@@ -20,7 +20,7 @@ void func_80035E24(void) {
 }
 
 void func_80035E54(void) {
-    u16 *mapTransitonAlpha;
+    u16* mapTransitonAlpha;
     GameStatus** gameStatus = gGameStatusPtr; // :/
 
     D_800A0944 = 0;

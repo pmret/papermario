@@ -180,7 +180,7 @@ f32 dist3D(f32 ax, f32 ay, f32 az, f32 bx, f32 by, f32 bz) {
     return sqrtf(SQ(xDiff) + SQ(yDiff) + SQ(zDiff));
 }
 
-void add_vec2D_polar(f32 *x, f32 *y, f32 r, f32 theta) {
+void add_vec2D_polar(f32* x, f32* y, f32 r, f32 theta) {
     f32 sinTheta;
     f32 cosTheta;
 
