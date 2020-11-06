@@ -73,15 +73,15 @@ ApiStatus func_802CA988(ScriptInstance* script, s32 isInitialCall) {
     CAM(id)->unk_1C = -round(CAM(id)->currentPitch);
     CAM(id)->unk_1E = -CAM(id)->currentBlendedYawNegated;
 
-    temp1 = CAM(id)->lookAt_obj[0] - CAM(id)->lookAt_eye[0];
-    temp2 = CAM(id)->lookAt_obj[1] - CAM(id)->lookAt_eye[1];
-    temp3 = CAM(id)->lookAt_obj[2] - CAM(id)->lookAt_eye[2];
+    temp1 = CAM(id)->lookAt_obj.x - CAM(id)->lookAt_eye[0];
+    temp2 = CAM(id)->lookAt_obj.y - CAM(id)->lookAt_eye[1];
+    temp3 = CAM(id)->lookAt_obj.z - CAM(id)->lookAt_eye[2];
 
     CAM(id)->unk_20 = round(sqrtf((temp1 * temp1) + (temp2 * temp2) + (temp3 * temp3)));
     CAM(id)->unk_22 = 0;
-    CAM(id)->unk_54 = CAM(id)->lookAt_obj[0];
-    CAM(id)->unk_58 = CAM(id)->lookAt_obj[1];
-    CAM(id)->unk_5C = CAM(id)->lookAt_obj[2];
+    CAM(id)->unk_54 = CAM(id)->lookAt_obj.x;
+    CAM(id)->unk_58 = CAM(id)->lookAt_obj.y;
+    CAM(id)->unk_5C = CAM(id)->lookAt_obj.z;
 
     set_variable(script, outVar1, CAM(id)->unk_1C);
     set_variable(script, outVar2, CAM(id)->unk_1E);

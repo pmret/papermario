@@ -432,7 +432,7 @@ typedef struct Camera {
     /* 0x038 */ s16 perspNorm;
     /* 0x03A */ char unk_3A[2];
     /* 0x03C */ f32 lookAt_eye[3];
-    /* 0x048 */ f32 lookAt_obj[3];
+    /* 0x048 */ Vec3f lookAt_obj;
     /* 0x054 */ f32 unk_54;
     /* 0x058 */ f32 unk_58;
     /* 0x05C */ f32 unk_5C;
