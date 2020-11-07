@@ -713,13 +713,13 @@ if __name__ == "__main__":
                             message.bytes += [0x90]
                         elif command == "star":
                             message.bytes += [0x91]
-                        elif command == "up":
+                        elif command == "arrow-up":
                             message.bytes += [0x92]
-                        elif command == "down":
+                        elif command == "arrow-down":
                             message.bytes += [0x93]
-                        elif command == "left":
+                        elif command == "arrow-left":
                             message.bytes += [0x94]
-                        elif command == "right":
+                        elif command == "arrow-right":
                             message.bytes += [0x95]
                         elif command == "circle":
                             message.bytes += [0x96]
