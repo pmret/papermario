@@ -17,7 +17,7 @@ s32 func_800EA524(void) {
 
 INCLUDE_ASM(s32, "code_838b0_len_5900", func_800EA52C);
 
-INCLUDE_ASM(s32, "code_838b0_len_5900", is_current_partner_flying);
+INCLUDE_ASM(s32, "code_838b0_len_5900", is_current_partner_flying, void);
 
 INCLUDE_ASM(s32, "code_838b0_len_5900", func_800EA5B8);
 

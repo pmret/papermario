@@ -38,10 +38,10 @@ def script_lib():
         # symbol_addrs.txt
         with open(Path(path.dirname(__file__), "symbol_addrs.txt"), "r") as file:
             for line in file.readlines():
-                s = line.split(";")
-                name = s[0]
-                addr = s[1]
-                _script_lib[int(addr, 16)] = name
+                s = line.split("=")
+                name = s[0].strip()
+                addr = int(s[1].strip()[0:10], 0)
+                _script_lib[addr] = name
 
     return _script_lib
 

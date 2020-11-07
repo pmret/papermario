@@ -1,6 +1,13 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "world/script_api/7E3700", func_80282880);
+ApiStatus func_80282880(ScriptInstance* script, s32 isInitialCall) {
+    PlayerStatus* playerStatus = PLAYER_STATUS;
+
+    playerStatus->position.x += (script->varTable[0] - playerStatus->position.x) / 2;
+    playerStatus->position.z += (script->varTable[2] - playerStatus->position.z) / 2;
+
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "world/script_api/7E3700", func_802828DC);
 
@@ -33,19 +40,98 @@ INCLUDE_ASM(s32, "world/script_api/7E3700", GetGridIndexFromPos);
 
 INCLUDE_ASM(s32, "world/script_api/7E3700", SetPushBlockFallEffect);
 
-INCLUDE_ASM(s32, "world/script_api/7E3700", func_80283810);
+ApiStatus func_80283810(ScriptInstance* script, s32 isInitialCall) {
+    PlayerStatus* playerStatus = PLAYER_STATUS;
 
-INCLUDE_ASM(s32, "world/script_api/7E3700", TeleportPartnerToPlayer);
+    script->varTable[10] = 0;
+    if (partner_get_ride_script() != NULL) {
+        if (D_8010EBB0[0] == 0) {
+            script->varTable[10] = 0;
+        } else {
+            script->varTable[10] = 1;
+            script->varTable[11] = partner_get_ride_script();
+            script->varTable[13] = playerStatus->targetYaw;
+        }
+    }
 
+    return ApiStatus_DONE2;
+}
+
+ApiStatus TeleportPartnerToPlayer(ScriptInstance* script, s32 isInitialCall) {
+    PlayerStatus* playerStatus = PLAYER_STATUS;
+    PlayerStatus* playerStatus2 = PLAYER_STATUS;
+    Npc *partner;
+
+    if (PLAYER_DATA->currentPartner == PartnerId_NONE) {
+        return ApiStatus_DONE2;
+    }
+
+    partner = get_npc_unsafe(NpcId_PARTNER);
+    partner->pos.x = playerStatus->position.x;
+    partner->pos.z = playerStatus->position.z;
+
+    if (is_current_partner_flying()) {
+        partner->pos.y = playerStatus->position.y;
+    }
+
+    set_npc_yaw(partner, playerStatus2->targetYaw);
+    clear_partner_move_history(partner);
+    return ApiStatus_DONE2;
+}
+
+#ifdef NON_MATCHING
+ApiStatus func_80283908(ScriptInstance* script, s32 isInitialCall) {
+    PlayerStatus* playerStatus = PLAYER_STATUS;
+    Camera* camera = CURRENT_CAM;
+
+    playerStatus->position.x = GAME_STATUS->savedPos.x;
+    playerStatus->position.y = GAME_STATUS->savedPos.y;
+    playerStatus->position.z = GAME_STATUS->savedPos.z;
+
+    if (PLAYER_DATA->currentPartner != PartnerId_NONE) {
+        Npc* partner = get_npc_unsafe(NpcId_PARTNER);
+        f32 angle = clamp_angle(playerStatus->spriteFacingAngle < 180.0f ? 90.0f : -90.0f);
+
+        partner->pos.x = playerStatus->position.x;
+        partner->pos.y = playerStatus->position.y;
+        partner->pos.z = playerStatus->position.z;
+
+        add_vec2D_polar(&partner->pos, &partner->pos.z, playerStatus->colliderDiameter + 5, angle);
+        enable_partner_ai();
+    }
+
+    camera->unk_08 = 1;
+
+    return ApiStatus_DONE2;
+}
+#else
 INCLUDE_ASM(s32, "world/script_api/7E3700", func_80283908);
+#endif
 
 INCLUDE_ASM(s32, "world/script_api/7E3700", func_80283A50);
 
-INCLUDE_ASM(s32, "world/script_api/7E3700", func_80283B88);
+ApiStatus func_80283B88(ScriptInstance* script, s32 isInitialCall) {
+    func_800EF394(20.0f);
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "world/script_api/7E3700", func_80283BB0);
+ApiStatus func_80283BB0(ScriptInstance* script, s32 isInitialCall) {
+    func_800EF3A4();
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "world/script_api/7E3700", func_80283BD0);
+ApiStatus func_80283BD0(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    PlayerStatus* playerStatus = PLAYER_STATUS;
+
+    if (isInitialCall) {
+        script->functionTemp[0].s = get_variable(script, *args++);
+        move_player(script->functionTemp[0].s, playerStatus->targetYaw, playerStatus->runSpeed);
+    }
+
+    script->functionTemp[0].s--;
+    return script->functionTemp[0].s < 0;
+}
 
 INCLUDE_ASM(s32, "world/script_api/7E3700", func_80283C34);
 

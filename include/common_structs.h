@@ -934,7 +934,7 @@ typedef struct GameStatus {
     /* 0x158 */ UNK_PTR backgroundPalette;
     /* 0x15C */ s16 unk_15C;
     /* 0x15E */ char unk_15E[0x2];
-    /* 0x160 */ s16 savedPos[3];
+    /* 0x160 */ Vec3s savedPos;
     /* 0x166 */ u8 saveSlot;
     /* 0x167 */ u8 loadType; /* (0 = from map, 1 = from main menu) */
     /* 0x168 */ s32 saveCount;
@@ -1129,7 +1129,8 @@ typedef struct DecorationTable {
 } DecorationTable; // size = 0x8E8
 
 typedef struct Shop {
-    /* 0x000 */ char unk_00[20];
+    /* 0x000 */ char unk_00[16];
+    /* 0x010 */ UNK_PTR owner;
     /* 0x014 */ UNK_PTR staticItemPositions;
     /* 0x018 */ UNK_PTR staticInventory;
     /* 0x01C */ UNK_PTR staticPriceList;

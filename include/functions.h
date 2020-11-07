@@ -84,6 +84,7 @@ void func_800EBB40(Npc* partner);
 void enable_partner_walking(Npc* partner, s32 val);
 void enable_partner_flying(Npc* partner, s32 val);
 void update_player_move_history(Npc* partner);
+s32 is_current_partner_flying(void);
 void func_800ED5D0(Npc* partner);
 
 s32 func_800EF394(f32);
@@ -121,6 +122,7 @@ f32 dist2D(f32 ax, f32 ay, f32 bx, f32 by);
 f32 dist3D(f32 ax, f32 ay, f32 az, f32 bx, f32 by, f32 bz);
 void add_vec2D_polar(f32* x, f32* y, f32 r, f32 theta);
 
+s32 func_801499EC(s32 soundID, s32 arg1, f32 arg2, f32 arg3, f32 arg4);
 s32 play_sound_at_position(s32 soundID, s32 value2, f32 posX, f32 posY, f32 posZ);
 s32 set_music_track(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s16 volume);
 

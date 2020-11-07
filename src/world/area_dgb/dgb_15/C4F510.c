@@ -38,4 +38,4 @@ INCLUDE_ASM(s32, "world/area_dgb/dgb_15/C4F510", func_802413A4_C508B4);
 
 INCLUDE_ASM(s32, "world/area_dgb/dgb_15/C4F510", func_80241464_C50974);
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_15/C4F510", func_80241760_C50C70);
+#include "world/common/UnkFunc1.inc.c"

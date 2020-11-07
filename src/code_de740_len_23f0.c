@@ -34,7 +34,7 @@ INCLUDE_ASM(s32, "code_de740_len_23f0", func_80149908);
 
 INCLUDE_ASM(s32, "code_de740_len_23f0", func_80149974);
 
-INCLUDE_ASM(s32, "code_de740_len_23f0", func_801499EC);
+INCLUDE_ASM(s32, "code_de740_len_23f0", func_801499EC, s32 soundID, s32 arg1, f32 arg2, f32 arg3, f32 arg4);
 
 INCLUDE_ASM(s32, "code_de740_len_23f0", func_80149A6C);
 

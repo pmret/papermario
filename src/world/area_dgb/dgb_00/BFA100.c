@@ -1,3 +1,8 @@
 #include "dgb_00.h"
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_00/BFA100", func_80240060_BFA100);
+ApiStatus func_80240060_BFA100(ScriptInstance* script, s32 isInitialCall) {
+    Npc* npc = get_npc_unsafe(get_enemy(6)->npcID);
+
+    func_801499EC(0x32E, 0, npc->pos.x, npc->pos.y, npc->pos.z);
+    return ApiStatus_DONE2;
+}
