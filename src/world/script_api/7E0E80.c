@@ -12,7 +12,7 @@ INCLUDE_ASM(s32, "world/script_api/7E0E80", func_802802D0);
 
 INCLUDE_ASM(s32, "world/script_api/7E0E80", func_8028035C);
 
-ApiStatus func_802803C8(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus func_802803C8(ScriptInstance* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = PLAYER_STATUS;
 
     script->varTable[2] = FALSE;
@@ -51,7 +51,7 @@ INCLUDE_ASM(s32, "world/script_api/7E0E80", draw_shop_items);
 
 INCLUDE_ASM(s32, "world/script_api/7E0E80", MakeShop);
 
-ApiStatus MakeShopOwner(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus MakeShopOwner(ScriptInstance* script, s32 isInitialCall) {
     Shop* mapShop = GAME_STATUS->mapShop;
 
     mapShop->owner = get_variable(script, *script->ptrReadPos);

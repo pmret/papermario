@@ -60,7 +60,7 @@ ApiStatus func_80283810(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus TeleportPartnerToPlayer(ScriptInstance* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = PLAYER_STATUS;
     PlayerStatus* playerStatus2 = PLAYER_STATUS;
-    Npc *partner;
+    Npc* partner;
 
     if (PLAYER_DATA->currentPartner == PartnerId_NONE) {
         return ApiStatus_DONE2;
