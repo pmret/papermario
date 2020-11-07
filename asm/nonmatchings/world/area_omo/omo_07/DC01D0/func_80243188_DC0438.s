@@ -11,9 +11,9 @@ glabel func_80243188_DC0438
 /* DC0450 802431A0 8C450000 */   lw       $a1, ($v0)
 /* DC0454 802431A4 00021140 */  sll       $v0, $v0, 5
 /* DC0458 802431A8 AE000084 */  sw        $zero, 0x84($s0)
-/* DC045C 802431AC 3C018008 */  lui       $at, 0x8008
+/* DC045C 802431AC 3C018008 */  lui       $at, %hi(gItemTable+0x18)
 /* DC0460 802431B0 00220821 */  addu      $at, $at, $v0
-/* DC0464 802431B4 942278F8 */  lhu       $v0, 0x78f8($at)
+/* DC0464 802431B4 942278F8 */  lhu       $v0, %lo(gItemTable+0x18)($at)
 /* DC0468 802431B8 30420040 */  andi      $v0, $v0, 0x40
 /* DC046C 802431BC 10400002 */  beqz      $v0, .L802431C8
 /* DC0470 802431C0 24020001 */   addiu    $v0, $zero, 1

@@ -112,7 +112,7 @@ typedef struct Npc {
     /* 0x0A6 */ s16 collisionRadius;
     /* 0x0A8 */ s16 collisionHeight;
     /* 0x0AA */ u8 renderMode;
-    /* 0x0AB */ char unk_AB;
+    /* 0x0AB */ u8 unk_AB;
     /* 0x0AC */ u8 unk_AC;
     /* 0x0AD */ char unk_AD[659];
 } Npc; // size = 0x340
@@ -271,7 +271,8 @@ typedef struct Entity {
     /* 0x07 */ char unk_08[4];
     /* 0x0B */ u8 alpha; /* reported by rain */
     /* 0x0C */ s16 aabb[3];
-    /* 0x12 */ char unk_12[4];
+    /* 0x12 */ char unk_12[2];
+    /* 0x14 */ s16 unk_14;
     /* 0x16 */ s16 shadowIndex;
     /* 0x18 */ char unk_18[16];
     /* 0x28 */ Bytecode* boundScript;
@@ -1138,7 +1139,6 @@ typedef struct Shop {
 typedef struct Encounter {
     /* 0x00 */ s32 count;
     /* 0x04 */ struct Enemy* enemy[16];
-    /* 0x08 */ char unk_08[60];
     /* 0x44 */ s16 battle;
     /* 0x46 */ s16 stage;
     /* 0x48 */ s16 encounterID;

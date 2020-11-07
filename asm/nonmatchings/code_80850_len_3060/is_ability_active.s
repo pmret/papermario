@@ -36,9 +36,9 @@ glabel is_ability_active
 /* 8326C 800E9DBC 84430208 */  lh        $v1, 0x208($v0)
 /* 83270 800E9DC0 10600004 */  beqz      $v1, .L800E9DD4
 /* 83274 800E9DC4 00031140 */   sll      $v0, $v1, 5
-/* 83278 800E9DC8 3C038008 */  lui       $v1, 0x8008
+/* 83278 800E9DC8 3C038008 */  lui       $v1, %hi(gItemTable+0x1A)
 /* 8327C 800E9DCC 00621821 */  addu      $v1, $v1, $v0
-/* 83280 800E9DD0 906378FA */  lbu       $v1, 0x78fa($v1)
+/* 83280 800E9DD0 906378FA */  lbu       $v1, %lo(gItemTable+0x1A)($v1)
 .L800E9DD4:
 /* 83284 800E9DD4 2D220038 */  sltiu     $v0, $t1, 0x38
 /* 83288 800E9DD8 504000A9 */  beql      $v0, $zero, .L800EA080

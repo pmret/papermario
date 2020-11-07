@@ -9,9 +9,9 @@ glabel kill_encounter
 /* 19B40 8003E740 AFB00010 */  sw        $s0, 0x10($sp)
 /* 19B44 8003E744 80820004 */  lb        $v0, 4($a0)
 /* 19B48 8003E748 00021080 */  sll       $v0, $v0, 2
-/* 19B4C 8003E74C 3C12800B */  lui       $s2, 0x800b
+/* 19B4C 8003E74C 3C12800B */  lui       $s2, %hi(gCurrentEncounter+0x28)
 /* 19B50 8003E750 02429021 */  addu      $s2, $s2, $v0
-/* 19B54 8003E754 8E520F38 */  lw        $s2, 0xf38($s2)
+/* 19B54 8003E754 8E520F38 */  lw        $s2, %lo(gCurrentEncounter+0x28)($s2)
 /* 19B58 8003E758 8E420000 */  lw        $v0, ($s2)
 /* 19B5C 8003E75C 1840000D */  blez      $v0, .L8003E794
 /* 19B60 8003E760 0000882D */   daddu    $s1, $zero, $zero

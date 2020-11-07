@@ -673,9 +673,9 @@ glabel func_802471EC
 /* 168448 80247BE8 2C820005 */  sltiu     $v0, $a0, 5
 /* 16844C 80247BEC 10400043 */  beqz      $v0, .L80247CFC
 /* 168450 80247BF0 00041080 */   sll      $v0, $a0, 2
-/* 168454 80247BF4 3C018025 */  lui       $at, 0x8025
+/* 168454 80247BF4 3C018025 */  lui       $at, %hi(pause_partners_draw_movelist_title)
 /* 168458 80247BF8 00220821 */  addu      $at, $at, $v0
-/* 16845C 80247BFC 8C22C048 */  lw        $v0, -0x3fb8($at)
+/* 16845C 80247BFC 8C22C048 */  lw        $v0, %lo(pause_partners_draw_movelist_title)($at)
 /* 168460 80247C00 00400008 */  jr        $v0
 /* 168464 80247C04 00000000 */   nop      
 /* 168468 80247C08 3C018025 */  lui       $at, 0x8025
