@@ -92,7 +92,7 @@ clean:
 clean-code:
 	rm -rf $(BUILD_DIR)/src
 
-setup: clean submodules split
+setup: clean submodules split $(LD_SCRIPT)
 	make -C tools
 
 submodules:
