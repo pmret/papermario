@@ -707,6 +707,24 @@ if __name__ == "__main__":
                         elif command == "start":
                             color_code = color_to_code(named_args.get("color", "red"), named_args.get("ctx", "button"))
                             message.bytes += [0xFF, 0x24, 0xFF, 0x05, color_code, 0xA1, 0xFF, 0x25]
+                        elif command == "note":
+                            message.bytes += [0x00]
+                        elif command == "heart":
+                            message.bytes += [0x90]
+                        elif command == "star":
+                            message.bytes += [0x91]
+                        elif command == "up":
+                            message.bytes += [0x92]
+                        elif command == "down":
+                            message.bytes += [0x93]
+                        elif command == "left":
+                            message.bytes += [0x94]
+                        elif command == "right":
+                            message.bytes += [0x95]
+                        elif command == "circle":
+                            message.bytes += [0x96]
+                        elif command == "cross":
+                            message.bytes += [0x97]
                         elif command == "wait":
                             print(f"{filename}:{lineno}: unknown command 'wait' (hint: did you mean 'prompt'?)")
                             exit(1)
