@@ -6978,6 +6978,57 @@ segments:
   - [0x1B81E88, "Yay0"]
   - [0x1B82058, "Yay0"]
   - [0x1B82202, "bin"]
-  - [0x1E40000, "PaperMarioMapFS"]
+  - start: 0x1B83000
+    type: PaperMarioMessages
+    files:
+      - intro
+      - end/postgame
+      - toad_town/gate
+      - toad_town/castle
+      - toad_town/bridge
+      - toad_town/train
+      - toad_town/warehouse
+      - toad_town/docks
+      - toad_town/minigames
+      - castle_grounds
+      - shooting_star_summit
+      - prologue
+      - chapter1
+      - chapter2
+      - chapter3
+      - chapter4
+      - chapter5
+      - chapter6
+      - chapter7
+      - chapter8
+      - peach_interludes
+      - koopa_koot_quests
+      - advice/russ_t
+      - toad_town/bulletin_news
+      - toad_town/bulletin_gossip
+      - world/map_tattles
+      - world/npc_tattles
+      - world/entity_tattles
+      - battle/enemy_tattles
+      - ui/misc
+      - ui/choices
+      - ui/pause
+      - diary_letters
+      - advice/merlon
+      - advice/merluvlee
+      - item/descriptions_23 # TODO: difference between 23,24,25
+      - item/descriptions_24
+      - item/descriptions_25
+      - item/names
+      - shops
+      - partner_descriptions
+      - battle/enemy_names
+      - battle/mario_moves
+      - battle/partner_moves
+      - quiz/questions
+      - quiz/options
+      - end/credits
+  - [0x1C84D30, bin]
+  - [0x1E40000, PaperMarioMapFS]
   - [0x27FEE22, "bin"]
   - [0x2800000]

@@ -34,7 +34,8 @@ ELF := $(BUILD_DIR)/$(TARGET).elf
 LD_SCRIPT := $(TARGET).ld
 LD_MAP := $(BUILD_DIR)/$(TARGET).map
 ASSETS_BIN := $(BUILD_DIR)/bin/assets/assets.bin
-
+MSG_BIN := $(BUILD_DIR)/msg/messages.bin
+GENERATED_HEADERS := include/ld_addrs.h
 
 ### Tools ###
 
@@ -61,6 +62,7 @@ ASFLAGS    := -EB -Iinclude -march=vr4300 -mtune=vr4300
 OLDASFLAGS := -EB -Iinclude -G 0
 CFLAGS     := -O2 -quiet -G 0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wimplicit -Wuninitialized -Wshadow
 LDFLAGS    := -T undefined_syms.txt -T undefined_funcs.txt -T $(BUILD_DIR)/$(LD_SCRIPT) -Map $(LD_MAP) --no-check-sections
+MSGFLAGS   := -Iinclude -Imsg
 
 ifeq ($(WATCH_INCLUDES),1)
 CPPMFLAGS   = -MP -MD -MF $@.mk -MT $(BUILD_DIR)/$*.d
@@ -69,6 +71,7 @@ endif
 
 ifeq ($(NON_MATCHING),1)
 CPPFLAGS += -DNON_MATCHING
+MSGFLAGS += -DNON_MATCHING
 endif
 
 
@@ -99,10 +102,10 @@ submodules:
 
 split:
 	rm -rf bin img
-	$(SPLAT) --modes ld bin Yay0 PaperMarioMapFS img
+	$(SPLAT) --modes bin Yay0 PaperMarioMapFS img
 
 split-%:
-	$(SPLAT) --modes ld $*
+	$(SPLAT) --modes $* --verbose
 
 split-all:
 	rm -rf bin img
@@ -130,7 +133,7 @@ $(BUILD_DIR)/%.Yay0.o: $(BUILD_DIR)/%.bin.Yay0
 	$(LD) -r -b binary -o $@ $<
 
 # Compile C files
-$(BUILD_DIR)/%.c.o: %.c $(MDEPS) | include/ld_addrs.h
+$(BUILD_DIR)/%.c.o: %.c $(MDEPS) | $(GENERATED_HEADERS)
 	@mkdir -p $(shell dirname $@)
 	$(CPP) $(CPPFLAGS) -o - $(CPPMFLAGS) $< | iconv --from UTF-8 --to SHIFT-JIS | $(CC) $(CFLAGS) -o - | $(OLD_AS) $(OLDASFLAGS) -o $@ -
 
@@ -178,22 +181,30 @@ $(BUILD_DIR)/%.i8.png: %.png
 	@mkdir -p $(shell dirname $@)
 	$(PYTHON) tools/convert_image.py i8 $< $@ $(IMG_FLAGS)
 
+# Assets
 ASSET_FILES := $(foreach asset, $(ASSETS), $(BUILD_DIR)/bin/assets/$(asset))
 YAY0_ASSET_FILES := $(foreach asset, $(filter-out %_tex, $(ASSET_FILES)), $(asset).Yay0)
-
 $(BUILD_DIR)/bin/assets/%: bin/assets/%.bin
 	@mkdir -p $(shell dirname $@)
 	@cp $< $@
-
 $(ASSETS_BIN): $(ASSET_FILES) $(YAY0_ASSET_FILES) sources.mk
 	@mkdir -p $(shell dirname $@)
 	@echo "building $@"
 	@$(PYTHON) tools/build_assets_bin.py $@ $(ASSET_FILES)
-
 $(ASSETS_BIN:.bin=.o): $(ASSETS_BIN)
 	$(LD) -r -b binary -o $@ $<
 
+# Messages
+$(MSG_BIN): $(MESSAGES)
+	@mkdir -p $(shell dirname $@)
+	@echo "building $@"
+	@$(PYTHON) tools/compile_messages.py $@ /dev/null $(MESSAGES)
+$(MSG_BIN:.bin=.o): $(MSG_BIN)
+	@mkdir -p $(shell dirname $@)
+	$(LD) -r -b binary -o $@ $<
+
 $(LD_SCRIPT): $(SPLAT_YAML)
+	@mkdir -p $(shell dirname $@)
 	$(SPLAT) --modes ld
 
 $(BUILD_DIR)/$(LD_SCRIPT): $(LD_SCRIPT)
