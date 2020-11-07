@@ -101,6 +101,7 @@ INCLUDE_ASM(s32, "code_20ec0_len_5040", func_8004824C);
 
 INCLUDE_ASM(s32, "code_20ec0_len_5040", spawn_drops);
 
+// The issues here are only in the beginning where max and min are flipped
 #ifdef NON_MATCHING
 s32 get_coin_drop_amount(Enemy* enemy) {
     EncounterStatus* currentEncounter = &gCurrentEncounter;
