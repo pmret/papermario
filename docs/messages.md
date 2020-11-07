@@ -2,13 +2,15 @@
 
 ## Character Set
 
-`[font=normal]`: 𝅘𝅥𝅮!#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ\[¥]^_`abcdefghijklmnopqrstuvwxyz{|}~°ÀÁÂÄÇÈÉÊËÌÍÎÏÑÒÓÔÖÙÚÛÜßàáâäçèéêëìíîïñòóôöùúûü¡¿ª♥★↑↓←→●✖“”‘’ ⒶⒷⓈ⬆⬇⬅➡ⓁⓇⓏ
+`[font=normal]`: 𝅘𝅥𝅮!#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ\[¥]^_`abcdefghijklmnopqrstuvwxyz{|}~°ÀÁÂÄÇÈÉÊËÌÍÎÏÑÒÓÔÖÙÚÛÜßàáâäçèéêëìíîïñòóôöùúûü¡¿ª♥★↑↓←→●✖“”‘’ ⒶⒷⓈ▲▼◀▶ⓁⓇⓏ
 
 `[font=title]` and `[font=subtitle]`: ABCDEFGHIJKLMNOPQRSTUVWXYZ'.,0123456789©&
 
 ## Tags
 
 Similar to BBCode, tags begin with `[` and end with `]`. They may take positional arguments (`value`) and named arguments (`arg=value`). The order of named arguments does not matter. Values are parsed as integers if possible, and hexidecimal integers are supported. Tag names and argument names are case-insensitive.
+
+To write a literal `[` character (and not start a tag), prefix it with a backslash; i.e. `\[`.
 
 ### `[message name section= index=]...[/message]`
 
@@ -53,7 +55,7 @@ Resets the color to what it was before the most recent `[color=]` tag. The defau
 
 ### `[a]` `[b]` `[l]` `[r] `[z]` `[start]` `[c-up]` `[c-down]` `[c-left]` `[c-right]`
 
-Shorthand for the button prompt characters ⒶⒷⓁⓇⓏⓈ⬆⬇⬅➡ respectively. You can override the color used with a named parameter `[a color=]`.
+Shorthand for the button prompt characters ⒶⒷⓁⓇⓏⓈ▲▼◀▶ respectively. You can override the color used with a named parameter `[a color=]`.
 
 Supported color names: blue green red yellow gray grey
 
