@@ -34,7 +34,7 @@ ELF := $(BUILD_DIR)/$(TARGET).elf
 LD_SCRIPT := $(TARGET).ld
 LD_MAP := $(BUILD_DIR)/$(TARGET).map
 ASSETS_BIN := $(BUILD_DIR)/bin/assets/assets.bin
-MSG_BIN := $(BUILD_DIR)/msg/messages.bin
+MSG_BIN := $(BUILD_DIR)/msg.bin
 GENERATED_HEADERS := include/ld_addrs.h
 
 ### Tools ###
