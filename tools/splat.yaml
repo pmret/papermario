@@ -2033,10 +2033,9 @@ segments:
     files:
       - [0x929A90, "c"]
       - [0x929AD0, "c"]
-      - [0x929AF0, "bin"]
-      - [0x929E00, "bin"]
-      - [0x92A290, "bin"] # rodata
-      - [0x92A2B0, "bin"] # rodata
+      - [0x929AF0, ".data", "world/area_sbk/sbk_01/929A90"]
+      - [0x929E00, ".data", "world/area_sbk/sbk_01/929AD0"]
+      - [0x92A290, ".rodata", "world/area_sbk/sbk_01/929A90"]
   - name: world/area_sbk/sbk_02/
     type: code
     overlay: True
