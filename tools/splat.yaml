@@ -199,10 +199,12 @@ segments:
     - [0x4ac90, "c", "os/code_4ac90_len_3910"]
     - [0x4E5A0, "bin"]
     - [0x52D50, "bin"]
-    - [0x6B450, ".data", "world/world"]
-    - [0x6EAC0, "bin"] # has scripts
-    - [0x73DA0, ".rodata", "world/world"]
-    - [0x74EA0, "bin"]
+    - [0x6B450, .data, world/world]
+    - [0x6EAC0, bin] # has scripts
+    - [0x70E30, bin, battle/battle]
+    - [0x71430, bin]
+    - [0x73DA0, .rodata, world/world]
+    - [0x74EA0, bin]
   - type: code
     start: 0x759B0
     vram: 0x800DC500
@@ -888,6 +890,283 @@ segments:
     files:
     - [0x415D90, "c"]
   - [0x4200C0, "bin"] # todo split this further
+  - name: battle/section_0/
+    type: code
+    start: 0x4309A0
+    vram: 0x80218000
+    files:
+    - [0x4309A0, bin]
+  - name: battle/section_1/
+    type: code
+    start: 0x439A90
+    vram: 0x80218000
+    files:
+    - [0x439A90, bin]
+  - name: battle/section_2/
+    type: code
+    start: 0x447440
+    vram: 0x80218000
+    files:
+    - [0x447440, bin]
+  - name: battle/section_3/
+    type: code
+    start: 0x464490
+    vram: 0x80218000
+    files:
+    - [0x464490, bin]
+  - name: battle/section_4/
+    type: code
+    start: 0x47F0B0
+    vram: 0x80218000
+    files:
+    - [0x47F0B0, bin]
+  - name: battle/section_5/
+    type: code
+    start: 0x48D1A0
+    vram: 0x80218000
+    files:
+    - [0x48D1A0, bin]
+  - name: battle/section_6/
+    type: code
+    start: 0x4A10A0
+    vram: 0x80218000
+    files:
+    - [0x4A10A0, bin]
+  - name: battle/section_7/
+    type: code
+    start: 0x4B11F0
+    vram: 0x80218000
+    files:
+    - [0x4B11F0, bin]
+  - name: battle/section_8/
+    type: code
+    start: 0x4CF1B0
+    vram: 0x80218000
+    files:
+    - [0x4CF1B0, bin]
+  - name: battle/section_9/
+    type: code
+    start: 0x4D01F0
+    vram: 0x80218000
+    files:
+    - [0x4D01F0, bin]
+  - name: battle/section_10/
+    type: code
+    start: 0x4DA5E0
+    vram: 0x80218000
+    files:
+    - [0x4DA5E0, bin]
+  - name: battle/section_11/
+    type: code
+    start: 0x4E2740
+    vram: 0x80218000
+    files:
+    - [0x4E2740, bin]
+  - name: battle/section_12/
+    type: code
+    start: 0x4EF4A0
+    vram: 0x80218000
+    files:
+    - [0x4EF4A0, bin]
+  - name: battle/section_13/
+    type: code
+    start: 0x4F7BE0
+    vram: 0x80218000
+    files:
+    - [0x4F7BE0, bin]
+  - name: battle/section_14/
+    type: code
+    start: 0x4FEA50
+    vram: 0x80218000
+    files:
+    - [0x4FEA50, bin]
+  - name: battle/section_15/
+    type: code
+    start: 0x50F020
+    vram: 0x80218000
+    files:
+    - [0x50F020, bin]
+  - name: battle/section_16/
+    type: code
+    start: 0x5125D0
+    vram: 0x80218000
+    files:
+    - [0x5125D0, bin]
+  - name: battle/section_17/
+    type: code
+    start: 0x52B6A0
+    vram: 0x80218000
+    files:
+    - [0x52B6A0, bin]
+  - name: battle/section_41/
+    type: code
+    start: 0x543570
+    vram: 0x80231000
+    files:
+    - [0x543570, bin]
+  - name: battle/section_42/
+    type: code
+    start: 0x5483E0
+    vram: 0x80231000
+    files:
+    - [0x5483E0, bin]
+  - name: battle/section_43/
+    type: code
+    start: 0x54CC70
+    vram: 0x80231000
+    files:
+    - [0x54CC70, bin]
+  - name: battle/section_44/
+    type: code
+    start: 0x552440
+    vram: 0x80231000
+    files:
+    - [0x552440, bin]
+  - name: battle/section_45/
+    type: code
+    start: 0x552BB0
+    vram: 0x80231000
+    files:
+    - [0x552BB0, bin]
+  - name: battle/section_46/
+    type: code
+    start: 0x556C90
+    vram: 0x80231000
+    files:
+    - [0x556C90, bin]
+  - name: battle/section_18/
+    type: code
+    start: 0x5573E0
+    vram: 0x80218000
+    files:
+    - [0x5573E0, bin]
+  - name: battle/section_19/
+    type: code
+    start: 0x56E2A0
+    vram: 0x80218000
+    files:
+    - [0x56E2A0, bin]
+  - name: battle/section_20/
+    type: code
+    start: 0x573920
+    vram: 0x80218000
+    files:
+    - [0x573920, bin]
+  - name: battle/section_21/
+    type: code
+    start: 0x584940
+    vram: 0x80218000
+    files:
+    - [0x584940, bin]
+  - name: battle/section_22/
+    type: code
+    start: 0x58C2F0
+    vram: 0x80218000
+    files:
+    - [0x58C2F0, bin]
+  - name: battle/section_23/
+    type: code
+    start: 0x59E6E0
+    vram: 0x80218000
+    files:
+    - [0x59E6E0, bin]
+  - name: battle/section_24/
+    type: code
+    start: 0x5B14B0
+    vram: 0x80218000
+    files:
+    - [0x5B14B0, bin]
+  - name: battle/section_25/
+    type: code
+    start: 0x5CE690
+    vram: 0x80218000
+    files:
+    - [0x5CE690, bin]
+  - name: battle/section_26/
+    type: code
+    start: 0x5EC490
+    vram: 0x80218000
+    files:
+    - [0x5EC490, bin]
+  - name: battle/section_27/
+    type: code
+    start: 0x608AB0
+    vram: 0x80218000
+    files:
+    - [0x608AB0, bin]
+  - name: battle/section_28/
+    type: code
+    start: 0x6186F0
+    vram: 0x80218000
+    files:
+    - [0x6186F0, bin]
+  - name: battle/section_29/
+    type: code
+    start: 0x623BA0
+    vram: 0x80218000
+    files:
+    - [0x623BA0, bin]
+  - name: battle/section_30/
+    type: code
+    start: 0x63D1E0
+    vram: 0x80218000
+    files:
+    - [0x63D1E0, bin]
+  - name: battle/section_31/
+    type: code
+    start: 0x648E10
+    vram: 0x80218000
+    files:
+    - [0x648E10, bin]
+  - name: battle/section_32/
+    type: code
+    start: 0x660750
+    vram: 0x80218000
+    files:
+    - [0x660750, bin]
+  - name: battle/section_33/
+    type: code
+    start: 0x669D80
+    vram: 0x80218000
+    files:
+    - [0x669D80, bin]
+  - name: battle/section_34/
+    type: code
+    start: 0x684A30
+    vram: 0x80218000
+    files:
+    - [0x684A30, bin]
+  - name: battle/section_35/
+    type: code
+    start: 0x69F200
+    vram: 0x80218000
+    files:
+    - [0x69F200, bin]
+  - name: battle/section_36/
+    type: code
+    start: 0x6BBB90
+    vram: 0x80218000
+    files:
+    - [0x6BBB90, bin]
+  - name: battle/section_37/
+    type: code
+    start: 0x6CC070
+    vram: 0x80218000
+    files:
+    - [0x6CC070, bin]
+  - name: battle/section_38/
+    type: code
+    start: 0x6DBDA0
+    vram: 0x80218000
+    files:
+    - [0x6DBDA0, bin]
+  - name: battle/section_39/
+    type: code
+    start: 0x6DDDC0
+    vram: 0x80218000
+    files:
+    - [0x6DDDC0, bin]
+  - [0x6F0B30, bin]
   - name: world/script_api/
     ld_name: world_script_api
     type: code
@@ -6979,6 +7258,57 @@ segments:
   - [0x1B81E88, "Yay0"]
   - [0x1B82058, "Yay0"]
   - [0x1B82202, "bin"]
-  - [0x1E40000, "PaperMarioMapFS"]
+  - start: 0x1B83000
+    type: PaperMarioMessages
+    files:
+      - intro
+      - end/postgame
+      - toad_town/gate
+      - toad_town/castle
+      - toad_town/bridge
+      - toad_town/train
+      - toad_town/warehouse
+      - toad_town/docks
+      - toad_town/minigames
+      - castle_grounds
+      - shooting_star_summit
+      - prologue
+      - chapter1
+      - chapter2
+      - chapter3
+      - chapter4
+      - chapter5
+      - chapter6
+      - chapter7
+      - chapter8
+      - peach_interludes
+      - koopa_koot_quests
+      - advice/russ_t
+      - toad_town/bulletin_news
+      - toad_town/bulletin_gossip
+      - world/map_tattles
+      - world/npc_tattles
+      - world/entity_tattles
+      - battle/enemy_tattles
+      - ui/misc
+      - ui/choices
+      - ui/pause
+      - diary_letters
+      - advice/merlon
+      - advice/merluvlee
+      - item/descriptions_23 # TODO: difference between 23,24,25
+      - item/descriptions_24
+      - item/descriptions_25
+      - item/names
+      - shops
+      - partner_descriptions
+      - battle/enemy_names
+      - battle/mario_moves
+      - battle/partner_moves
+      - quiz/questions
+      - quiz/options
+      - end/credits
+  - [0x1C84D30, bin]
+  - [0x1E40000, PaperMarioMapFS]
   - [0x27FEE22, "bin"]
   - [0x2800000]

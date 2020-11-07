@@ -9,17 +9,17 @@ venv/
 ctx.c
 expected/
 settings.mk
+.vscode/launch.json
 
 # Build artifacts
 *.ld
 *.z64
-*.bin
-*.i
 *.Yay0
-bin/
-img/
-build/
-docs/doxygen/
-include/ld_addrs.h
+/build/
+/docs/doxygen/
+/include/ld_addrs.h
 
-.vscode/launch.json
+# Assets
+/bin
+/img
+/msg
