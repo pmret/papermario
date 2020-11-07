@@ -83,10 +83,9 @@ INCLUDE_ASM(s32, "code_1a1f0_len_5390", func_8003F0C4);
 INCLUDE_ASM(s32, "code_1a1f0_len_5390", func_8003F384);
 
 ApiStatus GetCamLookAtObjVector(ScriptInstance* script, s32 isInitialCall) {
-    // Almost certainly a CURRENT_CAM macro
-    script->varTable[0] = (&gCameras[gCurrentCameraID])->lookAt_obj[0];
-    script->varTable[1] = (&gCameras[gCurrentCameraID])->lookAt_obj[1];
-    script->varTable[2] = (&gCameras[gCurrentCameraID])->lookAt_obj[2];
+    script->varTable[0] = CURRENT_CAM->lookAt_obj.x;
+    script->varTable[1] = CURRENT_CAM->lookAt_obj.y;
+    script->varTable[2] = CURRENT_CAM->lookAt_obj.z;
 
     return ApiStatus_DONE2;
 }

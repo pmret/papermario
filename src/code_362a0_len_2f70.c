@@ -50,4 +50,6 @@ INCLUDE_ASM(s32, "code_362a0_len_2f70", func_8005DB00);
 
 INCLUDE_ASM(s32, "code_362a0_len_2f70", func_8005DD54);
 
-INCLUDE_ASM(s32, "code_362a0_len_2f70", func_8005DDF0);
+s32 func_8005DDF0(void) {
+    return ~gCurrentEncounter.unk_08 != 0;
+}

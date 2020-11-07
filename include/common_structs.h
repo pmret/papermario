@@ -432,7 +432,7 @@ typedef struct Camera {
     /* 0x038 */ s16 perspNorm;
     /* 0x03A */ char unk_3A[2];
     /* 0x03C */ f32 lookAt_eye[3];
-    /* 0x048 */ f32 lookAt_obj[3];
+    /* 0x048 */ Vec3f lookAt_obj;
     /* 0x054 */ f32 unk_54;
     /* 0x058 */ f32 unk_58;
     /* 0x05C */ f32 unk_5C;
@@ -1447,7 +1447,8 @@ typedef struct EncounterStatus {
     /* 0x04 */ u8 eFirstStrike; /* 0 = none, 1 = player, 2 = enemy */
     /* 0x05 */ s8 hitType; /* 1 = none/enemy, 2 = jump */
     /* 0x06 */ s8 hitTier; /* 0 = normal, 1 = super, 2 = ultra */
-    /* 0x07 */ char unk_07[2];
+    /* 0x07 */ char unk_07;
+    /* 0x08 */ s8 unk_08;
     /* 0x09 */ s8 battleOutcome; /* 0 = won, 1 = lost */
     /* 0x0A */ char unk_0A;
     /* 0x0B */ s8 merleeCoinBonus; /* triple coins when != 0 */

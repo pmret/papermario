@@ -30,7 +30,7 @@ void player_enter_blue_pipe(Entity* bluePipe) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Trigger* pipeTrigger = bluePipe->trigger;
 
-    playerStatus->targetYaw = gCameras[gCurrentCameraID].currentYaw + 180.0f;
+    playerStatus->targetYaw = CURRENT_CAM->currentYaw + 180.0f;
     pipeTrigger->params1 = 0x19;
     playerStatus->renderMode = 0xD;
 

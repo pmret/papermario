@@ -6,9 +6,9 @@ ApiStatus SetCamEnabled(ScriptInstance* script, s32 isInitialCall) {
     s32 enabled = get_variable(script, *args++);
 
     if (!enabled) {
-        (&gCameras[id])->flags |= 0x2;
+        CAM(id)->flags |= 0x2;
     } else {
-        (&gCameras[id])->flags &= ~0x2;
+        CAM(id)->flags &= ~0x2;
     }
     return ApiStatus_DONE2;
 }
@@ -19,9 +19,9 @@ ApiStatus SetCamFlag80(ScriptInstance* script, s32 isInitialCall) {
     s32 enabled = get_variable(script, *args++);
 
     if (!enabled) {
-        (&gCameras[id])->flags |= 0x80;
+        CAM(id)->flags |= 0x80;
     } else {
-        (&gCameras[id])->flags &= ~0x80;
+        CAM(id)->flags &= ~0x80;
     }
     return ApiStatus_DONE2;
 }
@@ -68,25 +68,25 @@ ApiStatus func_802CA988(ScriptInstance* script, s32 isInitialCall) {
     Bytecode outVar4 = *ptrReadPos++;
     f32 temp1, temp2, temp3;
 
-    (&gCameras[id])->mode = 2;
-    (&gCameras[id])->unk_06 = 0;
-    (&gCameras[id])->unk_1C = -round((&gCameras[id])->currentPitch);
-    (&gCameras[id])->unk_1E = -(&gCameras[id])->currentBlendedYawNegated;
+    CAM(id)->mode = 2;
+    CAM(id)->unk_06 = 0;
+    CAM(id)->unk_1C = -round(CAM(id)->currentPitch);
+    CAM(id)->unk_1E = -CAM(id)->currentBlendedYawNegated;
 
-    temp1 = (&gCameras[id])->lookAt_obj[0] - (&gCameras[id])->lookAt_eye[0];
-    temp2 = (&gCameras[id])->lookAt_obj[1] - (&gCameras[id])->lookAt_eye[1];
-    temp3 = (&gCameras[id])->lookAt_obj[2] - (&gCameras[id])->lookAt_eye[2];
+    temp1 = CAM(id)->lookAt_obj.x - CAM(id)->lookAt_eye[0];
+    temp2 = CAM(id)->lookAt_obj.y - CAM(id)->lookAt_eye[1];
+    temp3 = CAM(id)->lookAt_obj.z - CAM(id)->lookAt_eye[2];
 
-    (&gCameras[id])->unk_20 = round(sqrtf((temp1 * temp1) + (temp2 * temp2) + (temp3 * temp3)));
-    (&gCameras[id])->unk_22 = 0;
-    (&gCameras[id])->unk_54 = (&gCameras[id])->lookAt_obj[0];
-    (&gCameras[id])->unk_58 = (&gCameras[id])->lookAt_obj[1];
-    (&gCameras[id])->unk_5C = (&gCameras[id])->lookAt_obj[2];
+    CAM(id)->unk_20 = round(sqrtf((temp1 * temp1) + (temp2 * temp2) + (temp3 * temp3)));
+    CAM(id)->unk_22 = 0;
+    CAM(id)->unk_54 = CAM(id)->lookAt_obj.x;
+    CAM(id)->unk_58 = CAM(id)->lookAt_obj.y;
+    CAM(id)->unk_5C = CAM(id)->lookAt_obj.z;
 
-    set_variable(script, outVar1, (&gCameras[id])->unk_1C);
-    set_variable(script, outVar2, (&gCameras[id])->unk_1E);
-    set_variable(script, outVar3, (&gCameras[id])->unk_20);
-    set_variable(script, outVar4, (&gCameras[id])->unk_22);
+    set_variable(script, outVar1, CAM(id)->unk_1C);
+    set_variable(script, outVar2, CAM(id)->unk_1E);
+    set_variable(script, outVar3, CAM(id)->unk_20);
+    set_variable(script, outVar4, CAM(id)->unk_22);
     return ApiStatus_DONE2;
 }
 */
