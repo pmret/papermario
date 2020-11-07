@@ -53,7 +53,7 @@ To use other colors, provide `color` as an integer (e.g. `[color=0x10]`). Here a
 ### `[/color]`
 Resets the color to what it was before the most recent `[color=]` tag. The default color at the start of the message is assumed to be `[color=normal]`, which is true for most messages.
 
-### `[a]` `[b]` `[l]` `[r] `[z]` `[start]` `[c-up]` `[c-down]` `[c-left]` `[c-right]`
+### `[a]` `[b]` `[l]` `[r]` `[z]` `[start]` `[c-up]` `[c-down]` `[c-left]` `[c-right]`
 
 Shorthand for the button prompt characters ⒶⒷⓁⓇⓏⓈ▲▼◀▶ respectively. You can override the color used with a named parameter `[a color=]`.
 
