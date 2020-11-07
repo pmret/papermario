@@ -100,7 +100,7 @@ submodules:
 
 split:
 	rm -rf bin img
-	$(SPLAT) --modes bin Yay0 PaperMarioMapFS img
+	$(SPLAT) --modes bin Yay0 PaperMarioMapFS PaperMarioMessages img
 
 split-%:
 	$(SPLAT) --modes $* --verbose
