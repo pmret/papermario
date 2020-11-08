@@ -239,6 +239,7 @@ class LabelAllocation(Visitor):
         self.labels = []
 
     def label_decl(self, tree):
+        # TODO: int labels
         name = tree.children[0].children[0]
         if name in self.labels:
             raise CompileError(f"label `{name}' already declared", tree.meta)

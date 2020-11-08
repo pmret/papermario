@@ -78,12 +78,15 @@ class ScriptDisassembler:
             if self.done:
                 return self.prefix + self.out
 
-    def write_line(self, line):
+    def write(self, line):
         if self.indent < 0: self.indent = 0
         if self.indent > 1: self.indent_used = True
 
         self.out += "    " * self.indent
         self.out += line
+
+    def write_line(self, line):
+        self.write(line)
         self.out += "\n"
 
     def prefix_line(self, line):
@@ -329,7 +332,17 @@ class ScriptDSLDisassembler(ScriptDisassembler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.in_case = False
+        # False: not in case
+        # True: in case block
+        # CASES: in condition, but { not written yet
+        # MULTI: in ',' condition(s), but { not written yet
+        self.case_stack = []
+
+        self.was_multi_case = False
+
+    @property
+    def in_case(self):
+        return self.case_stack[-1] if self.case_stack else False
 
     def var(self, arg):
         if arg in self.symbol_map:
@@ -366,6 +379,27 @@ class ScriptDSLDisassembler(ScriptDisassembler):
         return var
 
     def disassemble_command(self, opcode, argc, argv):
+        # write case block braces
+        if self.in_case == "CASES" or self.in_case == "MULTI":
+            if opcode == 0x1D: # multi case
+                pass
+            elif 0x16 <= opcode <= 0x21: # standard case conditions
+                # open and close empty case
+                self.case_stack.pop()
+                self.case_stack.append(False)
+            else:
+                # open case
+                self.out += " {\n"
+                self.was_multi_case = self.in_case == "MULTI"
+
+                self.case_stack.pop()
+                self.case_stack.append(True)
+        elif self.in_case is True and 0x16 <= opcode <= 0x21: # new case
+            self.case_stack.pop()
+            self.indent -= 1
+            self.write_line("}")
+            self.indent += 1
+
         if opcode == 0x01:
             if self.out.endswith("return\n"):
                 # implicit return; break
@@ -380,8 +414,8 @@ class ScriptDSLDisassembler(ScriptDisassembler):
 
             self.done = True
         elif opcode == 0x02: self.write_line(f"return")
-        elif opcode == 0x03: self.write_line(f"lbl{self.var(argv[0])}:")
-        elif opcode == 0x04: self.write_line(f"goto lbl{self.var(argv[0])}")
+        elif opcode == 0x03: self.write_line(f"{self.var(argv[0])}:")
+        elif opcode == 0x04: self.write_line(f"goto {self.var(argv[0])}")
         elif opcode == 0x05:
             if argv[0] == 0:
                 self.write_line("loop {")
@@ -412,6 +446,9 @@ class ScriptDSLDisassembler(ScriptDisassembler):
         elif opcode == 0x0F:
             self.write_line(f"if {self.var(argv[0])} >= {self.var(argv[1])} {{")
             self.indent += 1
+        elif opcode == 0x10:
+            self.write_line(f"if {self.var(argv[0])} ? {self.var(argv[1])} {{")
+            self.indent += 1
         elif opcode == 0x12:
             self.indent -= 1
             self.write_line("} else {")
@@ -422,65 +459,61 @@ class ScriptDSLDisassembler(ScriptDisassembler):
         elif opcode == 0x14:
             self.write_line(f"match {self.var(argv[0])} {{")
             self.indent += 2
-            self.in_case = False
+            self.case_stack.append(False)
         # elif opcode == 0x15:
         #     self.write_line(f"SI_SWITCH_CONST(0x{argv[0]:X}),")
         #     self.indent += 2
         elif opcode == 0x16:
             self.indent -= 1
-            if self.in_case: self.write_line("}")
-            self.in_case = True
-            self.write_line(f"{self.var(argv[0])} {{")
+            self.case_stack.append("CASES")
+            self.write(f"== {self.var(argv[0])}")
             self.indent += 1
         elif opcode == 0x17:
             self.indent -= 1
-            if self.in_case: self.write_line("}")
-            self.in_case = True
-            self.write_line(f"!= {self.var(argv[0])} {{")
+            self.case_stack.append("CASES")
+            self.write(f"!= {self.var(argv[0])}")
             self.indent += 1
         elif opcode == 0x18:
             self.indent -= 1
-            if self.in_case: self.write_line("}")
-            self.in_case = True
-            self.write_line(f"< {self.var(argv[0])} {{")
+            self.case_stack.append("CASES")
+            self.write(f"< {self.var(argv[0])}")
             self.indent += 1
         elif opcode == 0x19:
             self.indent -= 1
-            if self.in_case: self.write_line("}")
-            self.in_case = True
-            self.write_line(f"> {self.var(argv[0])} {{")
+            self.case_stack.append("CASES")
+            self.write(f"> {self.var(argv[0])}")
             self.indent += 1
         elif opcode == 0x1A:
             self.indent -= 1
-            if self.in_case: self.write_line("}")
-            self.in_case = True
-            self.write_line(f"<= {self.var(argv[0])} {{")
+            self.case_stack.append("CASES")
+            self.write(f"<= {self.var(argv[0])}")
             self.indent += 1
         elif opcode == 0x1B:
             self.indent -= 1
-            if self.in_case: self.write_line("}")
-            self.in_case = True
-            self.write_line(f">= {self.var(argv[0])} {{")
+            self.case_stack.append("CASES")
+            self.write(f">= {self.var(argv[0])}")
             self.indent += 1
         elif opcode == 0x1C:
             self.indent -= 1
-            if self.in_case: self.write_line("}")
-            self.in_case = True
-            self.write_line(f"else {{")
+            self.case_stack.append("CASES")
+            self.write(f"else")
             self.indent += 1
-        # elif opcode == 0x1D:
-        #     self.indent -= 1
-        #     self.write_line(f"SI_CASE_OR_EQ({self.var(argv[0])}),")
-        #     self.indent += 1
+        elif opcode == 0x1D:
+            self.indent -= 1
+            if self.in_case == "CASES" or self.in_case == "MULTI":
+                self.out += f", {self.var(argv[0])}"
+            else:
+                self.write(f"{self.var(argv[0])}")
+            self.case_stack.append("MULTI")
+            self.indent += 1
         # opcode 0x1E?
         elif opcode == 0x1F:
             self.indent -= 1
             self.write_line(f"? {self.var(argv[0])}")
             self.indent += 1
-        # elif opcode == 0x20:
-        #     self.indent -= 1
-        #     self.write_line(f"SI_END_MULTI_CASE(),")
-        #     self.indent += 1
+        elif opcode == 0x20 and self.was_multi_case:
+            self.indent -= 1
+            self.indent += 1
         elif opcode == 0x21:
             self.indent -= 1
             self.write_line(f"{self.var(argv[0])}..{self.var(argv[1])} {{")
@@ -488,8 +521,10 @@ class ScriptDSLDisassembler(ScriptDisassembler):
         elif opcode == 0x22: self.write_line("break")
         elif opcode == 0x23:
             self.indent -= 1
-            if self.in_case: self.write_line("}")
-            self.in_case = False
+            if self.in_case:
+                self.write_line("}")
+                self.case_stack.pop()
+            self.case_stack.pop()
             self.indent -= 1
             self.write_line("}")
         elif opcode == 0x24: self.write_line(f"{self.var(argv[0])} = {self.var(argv[1])}")
@@ -542,7 +577,7 @@ class ScriptDSLDisassembler(ScriptDisassembler):
             self.indent -= 1
             self.write_line("}")
         else:
-            raise UnsupportedScript(f"DSL does not support script opcode {opcode:X}")
+            raise UnsupportedScript(f"DSL does not support script opcode 0x{opcode:X}")
 
 if __name__ == "__main__":
     if len(sys.argv) <= 1:
