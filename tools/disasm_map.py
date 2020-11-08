@@ -16,8 +16,6 @@ def disassemble(bytes, offset, midx, symbol_map = {}, map_name = "map"):
         struct = midx.pop(0)
         name = struct["name"]
 
-        print(name)
-
         if name == "Script_Main": name = f"M(Main)"
 
         #print(f"{offset:X} ({name}, start = {struct['start']:X}, len = {struct['length']:X})")
@@ -35,6 +33,8 @@ def disassemble(bytes, offset, midx, symbol_map = {}, map_name = "map"):
                 try:
                     out += disasm_script.ScriptDSLDisassembler(bytes, f"M({name})", symbol_map).disassemble()
                 except disasm_script.UnsupportedScript as e:
+                    print(f"Unable to use DSL for {struct['name']}: {e}")
+
                     bytes.seek(pos)
                     out += disasm_script.ScriptDisassembler(bytes, f"M({name})", symbol_map).disassemble()
             elif struct["type"] == "Padding":
@@ -222,6 +222,8 @@ if __name__ == "__main__":
 
         if filetype == "bin":
             with open(f"{bin_dir}/{rom_addr:X}.bin", "rb") as bytes:
+                print(f"Disassembling {rom_addr:X}")
+
                 disasm = disassemble(bytes, rom_addr - rom_start, midx, symbol_map, map_name)
 
                 if len(disasm.strip()) > 0:
