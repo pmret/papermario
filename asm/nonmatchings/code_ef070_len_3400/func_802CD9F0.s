@@ -29,7 +29,7 @@ glabel func_802CD9F0
 /* F2400 802CDA50 02238821 */  addu      $s1, $s1, $v1
 /* F2404 802CDA54 8E230000 */  lw        $v1, ($s1)
 /* F2408 802CDA58 8C640000 */  lw        $a0, ($v1)
-/* F240C 802CDA5C 0C047FF8 */  jal       func_8011FFE0
+/* F240C 802CDA5C 0C047FF8 */  jal       get_anim_mesh
 /* F2410 802CDA60 0040802D */   daddu    $s0, $v0, $zero
 /* F2414 802CDA64 0040202D */  daddu     $a0, $v0, $zero
 /* F2418 802CDA68 0C047FE6 */  jal       func_8011FF98
@@ -53,6 +53,6 @@ glabel func_802CD9F0
 /* F2458 802CDAA8 24020002 */  addiu     $v0, $zero, 2
 /* F245C 802CDAAC 03E00008 */  jr        $ra
 /* F2460 802CDAB0 27BD0028 */   addiu    $sp, $sp, 0x28
-/* F2464 802CDAB4 00000000 */  nop       
-/* F2468 802CDAB8 00000000 */  nop       
-/* F246C 802CDABC 00000000 */  nop       
+/* F2464 802CDAB4 00000000 */  nop
+/* F2468 802CDAB8 00000000 */  nop
+/* F246C 802CDABC 00000000 */  nop

@@ -387,7 +387,9 @@ INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8011FF98);
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8011FFB4);
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8011FFE0);
+AnimatedMesh* get_anim_mesh(s32 animModelID) {
+    return (*gCurrentAnimMeshListPtr)[animModelID & ~0x800];
+}
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_80120000);
 

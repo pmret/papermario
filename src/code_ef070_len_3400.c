@@ -489,9 +489,53 @@ ApiStatus func_802CCCB0(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_ef070_len_3400", LoadModelAnimation);
+ApiStatus LoadModelAnimation(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 index = get_variable(script, *args++);
+    s32 var1 = get_variable(script, *args++);
+    AnimatedModel* animModel = (*gCurrentMeshAnimationListPtr)[index];
+    s32 animModelID = func_8011E4B8(0);
 
-INCLUDE_ASM(s32, "code_ef070_len_3400", func_802CCDAC);
+    func_801203AC(animModelID, var1);
+    animModel->animModelID = animModelID;
+    animModel->pos.x = 0;
+    animModel->pos.y = 0;
+    animModel->pos.z = 0;
+    animModel->rot.x = 0;
+    animModel->rot.y = 0;
+    animModel->rot.z = 0;
+    animModel->scale.x = 1.0f;
+    animModel->scale.y = 1.0f;
+    animModel->scale.z = 1.0f;
+    animModel->currentAnimData = NULL;
+    guMtxIdent(&animModel->mtx);
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_802CCDAC(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 index = get_variable(script, *args++);
+    s32 var1 = get_variable(script, *args++);
+    AnimatedModel* animModel = (*gCurrentMeshAnimationListPtr)[index];
+    s32 animModelID = func_8011E4B8(0);
+
+    func_80120474(animModelID, var1);
+    animModel->animModelID = animModelID;
+    animModel->pos.x = 0;
+    animModel->pos.y = 0;
+    animModel->pos.z = 0;
+    animModel->rot.x = 0;
+    animModel->rot.y = 0;
+    animModel->rot.z = 0;
+    animModel->scale.x = 1.0f;
+    animModel->scale.y = 1.0f;
+    animModel->scale.z = 1.0f;
+    animModel->currentAnimData = NULL;
+    guMtxIdent(&animModel->mtx);
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus PlayModelAnimation(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -563,7 +607,20 @@ ApiStatus GetAnimModelPosition(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_ef070_len_3400", AddAnimModelPosition);
+ApiStatus AddAnimModelPosition(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 index = get_variable(script, *args++);
+    f32 x = get_float_variable(script, *args++);
+    f32 y = get_float_variable(script, *args++);
+    f32 z = get_float_variable(script, *args++);
+    AnimatedModel* model = (*gCurrentMeshAnimationListPtr)[index];
+
+    model->pos.x += x;
+    model->pos.y += y;
+    model->pos.z += z;
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus SetAnimModelRotation(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -595,17 +652,38 @@ ApiStatus SetAnimModelScale(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_ef070_len_3400", func_802CD348);
+ApiStatus func_802CD348(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 index = get_variable(script, *args++);
+    s32 renderMode = get_float_variable(script, *args++);
+
+    get_anim_mesh((*gCurrentMeshAnimationListPtr)[index]->animModelID)->renderMode = renderMode;
+    return ApiStatus_DONE2;
+}
 
 ApiStatus func_802CD3C0(ScriptInstance* script, s32 isInitialCall) {
     AnimatedModel* model = (*gCurrentMeshAnimationListPtr)[get_variable(script, *script->ptrReadPos)];
 
-    func_8011E438(func_8011FFE0(model->animModelID));
+    func_8011E438(get_anim_mesh(model->animModelID));
     model->animModelID = -1;
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_ef070_len_3400", func_802CD418);
+ApiStatus func_802CD418(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 index = get_variable(script, *args++);
+    s32 a1 = *args++;
+    s32 var2 = get_variable(script, *args++);
+    AnimatedMesh* animMesh = get_anim_mesh((*gCurrentMeshAnimationListPtr)[index]->animModelID);
+
+    if (var2) {
+        animMesh->flags |= a1;
+    } else {
+        animMesh->flags &= ~a1;
+    }
+
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_ef070_len_3400", func_802CD4B4);
 

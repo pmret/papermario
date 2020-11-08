@@ -768,6 +768,7 @@ set_aux_pan_v = 0x8011BC64;
 set_background_color_blend = 0x8011BE5C;
 get_background_color_blend = 0x8011BE80;
 queue_render_task = 0x8011D910;
+get_anim_mesh = 8011FFE0;
 play_model_animation = 0x80120148;
 clear_virtual_models = 0x80120BB0;
 init_virtual_models = 0x80120C58;

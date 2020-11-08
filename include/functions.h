@@ -93,6 +93,7 @@ ScriptInstance* start_script(Bytecode* initialLine, s32 priority, s32 initialSta
 ScriptInstance* start_script_in_group(Bytecode* initialLine, u8 priority, u8 initialState, u8 groupFlags);
 
 void func_8011B7C0(u16, s32, s32);
+AnimatedMesh* get_anim_mesh(s32 arg0);
 void func_80137D88(s32, f32);
 void func_80137DA4(s32, f32);
 s32 func_80137E10(s32, u8, u8, u8);

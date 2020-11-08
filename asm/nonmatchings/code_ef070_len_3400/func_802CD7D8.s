@@ -30,7 +30,7 @@ glabel func_802CD7D8
 /* F21EC 802CD83C 8E330000 */  lw        $s3, ($s1)
 /* F21F0 802CD840 8E100004 */  lw        $s0, 4($s0)
 /* F21F4 802CD844 8E640000 */  lw        $a0, ($s3)
-/* F21F8 802CD848 0C047FF8 */  jal       func_8011FFE0
+/* F21F8 802CD848 0C047FF8 */  jal       get_anim_mesh
 /* F21FC 802CD84C 0040882D */   daddu    $s1, $v0, $zero
 /* F2200 802CD850 0040202D */  daddu     $a0, $v0, $zero
 /* F2204 802CD854 0C047FDD */  jal       func_8011FF74
