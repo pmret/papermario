@@ -5,7 +5,7 @@ from lark import Lark, exceptions, Tree, Transformer, Visitor, v_args, Token
 from lark.visitors import Discard
 import traceback
 
-DEBUG_OUTPUT = None
+DEBUG_OUTPUT = "debug.i"
 
 def eprint(*args, **kwargs):
     print(*args, file=stderr, **kwargs)
@@ -64,7 +64,7 @@ script_parser = Lark(r"""
          | "spawn" block       -> spawn_block_stmt
          | "parallel" block    -> parallel_block_stmt
 
-    call: CNAME "(" [expr ("," expr)* [","]] ")"
+    call: (CNAME | HEX_INT) "(" [expr ("," expr)* [","]] ")"
 
     if_stmt: "if" expr cond_op expr block ["else" block]
 
@@ -102,7 +102,7 @@ script_parser = Lark(r"""
     ?expr: c_const_expr
          | ESCAPED_STRING
          | SIGNED_INT
-         | DECIMAL
+         | SIGNED_DECIMAL
          | HEX_INT
          | CNAME
 
@@ -131,6 +131,7 @@ script_parser = Lark(r"""
     %import common.HEXDIGIT
     %import common.ESCAPED_STRING
 
+    SIGNED_DECIMAL: ["+"|"-"] DECIMAL
     HEX_INT: ["+"|"-"] "0x" HEXDIGIT+
 
     LINE_COMMENT: "//" /[^\n]*/ NEWLINE
@@ -190,18 +191,18 @@ class CmdCtx():
 
 class RootCtx(CmdCtx):
     def break_opcode(self, meta):
-        return 0x01
+        return "ScriptOpcode_END"
 
 class IfCtx(CmdCtx):
     pass
 
 class MatchCtx(CmdCtx):
     def break_opcode(self, meta):
-        return 0x22
+        return "ScriptOpcode_BREAK_MATCH"
 
 class LoopCtx(CmdCtx):
     def break_opcode(self, meta):
-        return 0x07
+        return "ScriptOpcode_BREAK_LOOP"
 
 class LoopUntilCtx(CmdCtx):
     def break_opcode(self, meta):
@@ -282,7 +283,7 @@ class Compile(Transformer):
     def c_const_expr(self, tree):
         return f"(Bytecode){tree.children[0]}"
 
-    def DECIMAL(self, v):
+    def SIGNED_DECIMAL(self, v):
         # fixed-point
         return int((float(v) * 1024) - 230000000)
 
@@ -307,22 +308,32 @@ class Compile(Transformer):
 
     def call(self, tree):
         # TODO: type checking etc
-        return Cmd(0x43, *tree.children, meta=tree.meta)
+        return Cmd("ScriptOpcode_CALL", *tree.children, meta=tree.meta)
 
     def if_stmt(self, tree):
-        a, op, b, block = tree.children
-        for cmd in block:
-            if isinstance(cmd, BaseCmd):
-                cmd.add_context(IfCtx())
-        return [ Cmd(op["if"], a, b, meta=tree.meta), *block, Cmd(0x13) ]
+        if len(tree.children) == 4: # no else
+            a, op, b, block = tree.children
+            for cmd in block:
+                if isinstance(cmd, BaseCmd):
+                    cmd.add_context(IfCtx())
+            return [ Cmd(op["if"], a, b, meta=tree.meta), *block, Cmd("ScriptOpcode_END_IF") ]
+        else:
+            a, op, b, block, else_block = tree.children
+            for cmd in block:
+                if isinstance(cmd, BaseCmd):
+                    cmd.add_context(IfCtx())
+            for cmd in else_block:
+                if isinstance(cmd, BaseCmd):
+                    cmd.add_context(IfCtx())
+            return [ Cmd(op["if"], a, b, meta=tree.meta), *block, Cmd("ScriptOpcode_ELSE"), *else_block, Cmd("ScriptOpcode_END_IF") ]
 
-    def cond_op_eq(self, tree): return { "if": 0x0A, "case": 0x16 }
-    def cond_op_ne(self, tree): return { "if": 0x0B, "case": 0x17 }
-    def cond_op_lt(self, tree): return { "if": 0x0C, "case": 0x18 }
-    def cond_op_gt(self, tree): return { "if": 0x0D, "case": 0x19 }
-    def cond_op_le(self, tree): return { "if": 0x0E, "case": 0x1A }
-    def cond_op_ge(self, tree): return { "if": 0x0F, "case": 0x1B }
-    def cond_op_flag(self, tree): return { "if": 0x10, "case": 0x1F }
+    def cond_op_eq(self, tree): return { "if": "ScriptOpcode_IF_EQ", "case": "ScriptOpcode_CASE_EQ" }
+    def cond_op_ne(self, tree): return { "if": "ScriptOpcode_IF_NE", "case": "ScriptOpcode_CASE_NE" }
+    def cond_op_lt(self, tree): return { "if": "ScriptOpcode_IF_LT", "case": "ScriptOpcode_CASE_LT" }
+    def cond_op_gt(self, tree): return { "if": "ScriptOpcode_IF_GT", "case": "ScriptOpcode_CASE_GT" }
+    def cond_op_le(self, tree): return { "if": "ScriptOpcode_IF_LE", "case": "ScriptOpcode_CASE_LE" }
+    def cond_op_ge(self, tree): return { "if": "ScriptOpcode_IF_GE", "case": "ScriptOpcode_CASE_GE" }
+    def cond_op_flag(self, tree): return { "if": "ScriptOpcode_IF_FLAG", "case": "ScriptOpcode_CASE_FLAG" }
 
     def match_stmt(self, tree):
         expr = tree.children[0]
@@ -331,7 +342,6 @@ class Compile(Transformer):
         for node in tree.children[1:]:
             if type(node) is list:
                 for el in node:
-                    eprint(el)
                     if type(el) is list:
                         cases += el
                     else:
@@ -344,13 +354,13 @@ class Compile(Transformer):
                 raise Exception(f"uncompiled match case: {cmd}")
 
         return [
-            Cmd(0x14, expr, meta=tree.meta),
+            Cmd("ScriptOpcode_MATCH", expr, meta=tree.meta),
             *cases,
-            Cmd(0x24),
+            Cmd("ScriptOpcode_END_MATCH"),
         ]
     def match_const_stmt(self, tree):
         commands = self.match_stmt(tree)
-        commands[0].opcode = 0x15
+        commands[0].opcode = "ScriptOpcode_MATCH_CONST"
         return commands
     def match_cases(self, tree):
         if len(tree.children) == 1:
@@ -359,27 +369,27 @@ class Compile(Transformer):
             return [tree.children[0], *tree.children[2]]
 
     def case_else(self, tree):
-        return [Cmd(0x1C), *tree.children[0]]
+        return [Cmd("ScriptOpcode_ELSE"), *tree.children[0]]
     def case_op(self, tree):
         if len(tree.children) == 4:
             op, expr, multi_case, block = tree.children
-            return [Cmd(op["case"], expr), *multi_case, *block, Cmd(0x20)]
+            return [Cmd(op["case"], expr), *multi_case, *block, Cmd("ScriptOpcode_END_CASE_MULTI")]
         else:
             op, expr, block = tree.children
             return [Cmd(op["case"], expr), *block]
     def case_range(self, tree):
         if len(tree.children) == 4:
             a, b, multi_case, block = tree.children
-            return [Cmd(0x21, a, b), *multi_case, *block, Cmd(0x20)]
+            return [Cmd("ScriptOpcode_CASE_RANGE", a, b), *multi_case, *block, Cmd("ScriptOpcode_END_CASE_MULTI")]
         else:
             a, b, block = tree.children
-            return [Cmd(0x21, a, b), *block]
+            return [Cmd("ScriptOpcode_CASE_RANGE", a, b), *block]
     def case_multi(self, tree):
         multi_case, block = tree.children
-        return [*multi_case, *block, Cmd(0x20)]
+        return [*multi_case, *block, Cmd("ScriptOpcode_END_CASE_MULTI")]
 
     def multi_case(self, tree):
-        return [Cmd(0x1D, expr) for expr in tree.children]
+        return [Cmd("ScriptOpcode_CASE_MULTI_EQ", expr) for expr in tree.children]
 
     def loop_stmt(self, tree):
         expr = tree.children.pop(0) if len(tree.children) > 1 else 0
@@ -389,7 +399,7 @@ class Compile(Transformer):
             if isinstance(cmd, BaseCmd):
                 cmd.add_context(LoopCtx())
 
-        return [ Cmd(0x05, expr, meta=tree.meta), *block, Cmd(0x06) ]
+        return [ Cmd("ScriptOpcode_LOOP", expr, meta=tree.meta), *block, Cmd("ScriptOpcode_END_LOOP") ]
 
     # loop..until pseudoinstruction
     def loop_until_stmt(self, tree):
@@ -402,21 +412,21 @@ class Compile(Transformer):
         label = self.alloc.gen_label()
 
         return [
-            Cmd(0x03, label, meta=tree.meta), # label:
+            Cmd("ScriptOpcode_LABEL", label, meta=tree.meta),
             *block,
-            Cmd(op["if"], a, b, meta=tree.meta), # if a op b
-            Cmd(0x04, label, meta=tree.meta), # goto label
-            Cmd(0x13, meta=tree.meta), # end if
+            Cmd(op["if"], a, b, meta=tree.meta),
+            Cmd("ScriptOpcode_GOTO", label, meta=tree.meta),
+            Cmd("ScriptOpcode_END_IF", meta=tree.meta),
         ]
 
     def return_stmt(self, tree):
-        return Cmd(0x02, meta=tree.meta)
+        return Cmd("ScriptOpcode_RETURN", meta=tree.meta)
 
     def break_stmt(self, tree):
         return BreakCmd(meta=tree.meta)
 
     def set_group(self, tree):
-        return Cmd(0x4D, tree.children[0], meta=tree.meta)
+        return Cmd("ScriptOpcode_SET_GROUP", tree.children[0], meta=tree.meta)
 
     def suspend_stmt(self, tree):
         commands = []
@@ -442,44 +452,44 @@ class Compile(Transformer):
     def control_type_group(self, tree):
         return {
             "__control_type__": "group",
-            "suspend": 0x4F,
-            "resume": 0x50,
+            "suspend": "ScriptOpcode_SUSPEND_GROUP",
+            "resume": "ScriptOpcode_RESUME_GROUP",
         }
     def control_type_others(self, tree):
         return {
             "__control_type__": "others",
-            "suspend": 0x51,
-            "resume": 0x52,
+            "suspend": "ScriptOpcode_SUSPEND_OTHERS",
+            "resume": "ScriptOpcode_RESUME_OTHERS",
         }
     def control_type_script(self, tree):
         return {
             "__control_type__": "script",
-            "suspend": 0x53,
-            "resume": 0x54,
-            "kill": 0x49,
+            "suspend": "ScriptOpcode_SUSPEND_SCRIPT",
+            "resume": "ScriptOpcode_RESUME_SCRIPT",
+            "kill": "ScriptOpcode_KILL_SCRIPT",
         }
 
     def sleep_stmt(self, tree):
-        return Cmd(0x08, tree.children[0], meta=tree.meta)
+        return Cmd("ScriptOpcode_SLEEP_FRAMES", tree.children[0], meta=tree.meta)
     def sleep_secs_stmt(self, tree):
-        return Cmd(0x09, tree.children[0], meta=tree.meta)
+        return Cmd("ScriptOpcode_SLEEP_SECS", tree.children[0], meta=tree.meta)
 
     def bind_stmt(self, tree):
         script, trigger, target = tree.children
-        return Cmd(0x47, script, trigger, target, 1, 0, meta=tree.meta)
+        return Cmd("ScriptOpcode_BIND_TRIGGER", script, trigger, target, 1, 0, meta=tree.meta)
     def bind_set_stmt(self, tree):
         ret, script, trigger, target = tree.children
-        return Cmd(0x47, script, trigger, target, 1, ret, meta=tree.meta)
+        return Cmd("ScriptOpcode_BIND_TRIGGER", script, trigger, target, 1, ret, meta=tree.meta)
     def unbind_stmt(self, tree):
-        return Cmd(0x48, meta=tree.meta)
+        return Cmd("ScriptOpcode_UNBIND", meta=tree.meta)
 
     def spawn_stmt(self, tree):
-        return Cmd(0x44, tree.children[0], meta=tree.meta)
+        return Cmd("ScriptOpcode_SPAWN_SCRIPT", tree.children[0], meta=tree.meta)
     def spawn_set_stmt(self, tree):
         lhs, script = tree.children
-        return Cmd(0x45, script, lhs, meta=tree.meta)
+        return Cmd("ScriptOpcode_SPAWN_SCRIPT_GET_ID", script, lhs, meta=tree.meta)
     def await_stmt(self, tree):
-        return Cmd(0x46, tree.children[0], meta=tree.meta)
+        return Cmd("ScriptOpcode_AWAIT_SCRIPT", tree.children[0], meta=tree.meta)
 
     def set_stmt(self, tree):
         lhs, opcodes, rhs = tree.children
@@ -507,56 +517,56 @@ class Compile(Transformer):
     def set_op_eq(self, tree):
         return {
             "__op__": "=",
-            "int": 0x24,
-            "const": 0x25,
-            "float": 0x26,
+            "int": "ScriptOpcode_SET",
+            "const": "ScriptOpcode_SET_CONST",
+            "float": "ScriptOpcode_SET_F",
         }
     def set_op_add(self, tree):
         return {
             "__op__": "+",
-            "int": 0x27,
-            "float": 0x2C,
+            "int": "ScriptOpcode_ADD",
+            "float": "ScriptOpcode_ADD_F",
         }
     def set_op_sub(self, tree):
         return {
             "__op__": "-",
-            "int": 0x28,
-            "float": 0x2D,
+            "int": "ScriptOpcode_SUB",
+            "float": "ScriptOpcode_SUB_F",
         }
     def set_op_mul(self, tree):
         return {
             "__op__": "*",
-            "int": 0x29,
-            "float": 0x2E,
+            "int": "ScriptOpcode_MUL",
+            "float": "ScriptOpcode_MUL_F",
         }
     def set_op_div(self, tree):
         return {
             "__op__": "/",
-            "int": 0x2A,
-            "float": 0x2F,
+            "int": "ScriptOpcode_DIV",
+            "float": "ScriptOpcode_DIV_F",
         }
     def set_op_mod(self, tree):
         return {
             "__op__": "%",
-            "int": 0x2B,
+            "int": "ScriptOpcode_MOD",
         }
     def set_op_and(self, tree):
         return {
             "__op__": "&",
-            "int": 0x3F,
-            "const": 0x41,
+            "int": "ScriptOpcode_AND",
+            "const": "ScriptOpcode_AND_CONST",
         }
     def set_op_or(self, tree):
         return {
             "__op__": "|",
-            "int": 0x40,
-            "const": 0x42,
+            "int": "ScriptOpcode_OR",
+            "const": "ScriptOpcode_OR_CONST",
         }
 
     def label_decl(self, tree):
         if len(tree.children) == 1:
             label = tree.children[0]
-            return Cmd(0x03, label, meta=tree.meta)
+            return Cmd("ScriptOpcode_LABEL", label, meta=tree.meta)
         else:
             label, cmd_or_block = tree.children
 
@@ -568,12 +578,12 @@ class Compile(Transformer):
                     cmd.add_context(LabelCtx(label))
 
             return [
-                Cmd(0x03, label, meta=tree.meta),
+                Cmd("ScriptOpcode_LABEL", label, meta=tree.meta),
                 *cmd_or_block
             ]
     def label_goto(self, tree):
         label = tree.children[0]
-        return Cmd(0x04, label, meta=tree.meta)
+        return Cmd("ScriptOpcode_GOTO", label, meta=tree.meta)
     def label(self, tree):
         name = tree.children[0]
         if name in self.alloc.labels:
@@ -591,13 +601,13 @@ class Compile(Transformer):
         for cmd in block:
             if isinstance(cmd, BaseCmd):
                 cmd.add_context(SpawnCtx())
-        return [ Cmd(0x56, meta=tree.meta), *block, Cmd(0x57) ]
+        return [ Cmd("ScriptOpcode_SPAWN_THREAD", meta=tree.meta), *block, Cmd("ScriptOpcode_END_SPAWN_THREAD") ]
     def parallel_block_stmt(self, tree):
         block, = tree.children
         for cmd in block:
             if isinstance(cmd, BaseCmd):
                 cmd.add_context(ParallelCtx())
-        return [ Cmd(0x58, meta=tree.meta), *block, Cmd(0x59) ]
+        return [ Cmd("ScriptOpcode_PARALLEL_THREAD", meta=tree.meta), *block, Cmd("ScriptOpcode_END_PARALLEL_THREAD") ]
 
 def compile_script(s):
     tree = script_parser.parse(s)
@@ -607,8 +617,8 @@ def compile_script(s):
     commands = Compile().transform(tree)
 
     # add RETURN END if no explicit END (top-level `break') was given
-    if next((cmd for cmd in commands if cmd.opcode() == 0x01), None) == None:
-        commands += (Cmd(0x02), Cmd(0x01))
+    if next((cmd for cmd in commands if cmd.opcode() == "ScriptOpcode_END"), None) == None:
+        commands += (Cmd("ScriptOpcode_RETURN"), Cmd("ScriptOpcode_END"))
 
     return commands
 

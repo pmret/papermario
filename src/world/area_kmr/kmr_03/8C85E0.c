@@ -1,90 +1,86 @@
 #include "kmr_03.h"
 
-// *INDENT-OFF*
-Script M(script_80242340) = {
-    SI_CALL(0x802CB860, 0, 0xFFFFFEF2, 20, 0xFFFFFFB0),
-    SI_CALL(0x802CBE2C, 0, 0xFFFFFEF2, 20, 0xFFFFFFB0),
-    SI_CALL(0x802CBBE4, 0, SI_FIXED(700.0f)),
-    SI_CALL(0x802CBEF0, 0, SI_FIXED(90.0f)),
-    SI_CALL(0x802CB79C, 0, 0, 1),
-    SI_IF_GE(SI_SAVE_VAR(0), 0xFFFFFF89),
-        SI_CALL(0x802D0EF0, 0, 0xFFFFFC18, 0),
-        SI_CALL(0x802D0E28, 1),
-        SI_CALL(0x802D0EF0, 0xFFFFFF20, 20, 0xFFFFFFB0),
-        SI_CALL(0x802CDCB0, 0xFFFFFFFC, 0xFFFFFF20, 20, 0xFFFFFFB0),
-        SI_WAIT_FRAMES(20),
-        SI_CALL(0x802CBEF0, 0, SI_FIXED(3.0f)),
-        SI_CALL(0x802D1DFC, SI_VAR(0), SI_VAR(1), SI_VAR(2)),
-        SI_CALL(0x802CB860, 0, SI_VAR(0), SI_VAR(1), SI_VAR(2)),
-        SI_CALL(0x802CBE2C, 0, SI_VAR(0), SI_VAR(1), SI_VAR(2)),
-        SI_CALL(0x802CB79C, 0, 0, 1),
-        SI_CALL(0x802CC354, 0, SI_FIXED(1.0f)),
-        SI_CALL(0x802CB79C, 0, 0, 0),
-        SI_CALL(0x802D0E28, 0),
-        SI_RETURN(),
-    SI_END_IF(),
-    SI_CALL(0x802D0E28, 1),
-    SI_CALL(0x802D0DE4, 1),
-    SI_CALL(0x802D1DFC, SI_VAR(0), SI_VAR(1), SI_VAR(2)),
-    SI_CALL(0x802D0EF0, SI_VAR(0), 0xFFFFFC18, SI_VAR(2)),
-    SI_WAIT_FRAMES(30),
-    SI_CALL(0x802CBBE4, 0, 220),
-    SI_CALL(0x802CBEF0, 0, SI_FIXED(1.0f)),
-    SI_CALL(0x802CB79C, 0, 0, 1),
-    SI_CALL(0x802CC354, 0, SI_FIXED(1.0f)),
-    SI_THREAD(),
-        SI_WAIT_FRAMES(18),
-        SI_CALL(0x802D2CD8, 373, 0),
-        SI_WAIT_FRAMES(30),
-        SI_CALL(0x802D2CD8, 374, 0),
-        SI_WAIT_FRAMES(28),
-        SI_CALL(0x802D2CD8, 373, 0),
-    SI_END_THREAD(),
-    SI_CALL(0x802D0DA0, 1),
-    SI_CALL(0x802D1084, 0x10002),
-    SI_CALL(0x802D0EF0, 0xFFFFFF20, 120, 0xFFFFFFB0),
-    SI_CALL(0x802D193C, 90, 0),
-    SI_LABEL(0),
-    SI_WAIT_FRAMES(1),
-    SI_CALL(0x802D1DFC, SI_VAR(0), SI_VAR(1), SI_VAR(2)),
-    SI_ADD(SI_VAR(1), 0xFFFFFFFE),
-    SI_CALL(0x802D0EF0, SI_VAR(0), SI_VAR(1), SI_VAR(2)),
-    SI_IF_GT(SI_VAR(1), 86),
-        SI_GOTO(0),
-    SI_END_IF(),
-    SI_CALL(0x802D0EF0, 0xFFFFFECA, 20, 0xFFFFFFB0),
-    SI_THREAD(),
-        SI_WAIT_FRAMES(20),
-        SI_CALL(0x802CBE2C, 0, 0xFFFFFECA, 20, 0xFFFFFFB0),
-        SI_CALL(0x802CBEF0, 0, SI_FIXED(0.2)),
-        SI_CALL(0x802CB79C, 0, 0, 1),
-    SI_END_THREAD(),
-    SI_CALL(0x802D286C, 0x2800),
-    SI_CALL(0x802D2520, 0x10002, 5, 5, 1, 1, 0),
-    SI_WAIT_FRAMES(100),
-    SI_CALL(0x802CC354, 0, SI_FIXED(1.0f)),
-    SI_CALL(0x802D2520, 0x10002, 0, 0, 0, 0, 0),
-    SI_CALL(0x802D0DA0, 0),
-    SI_CALL(0x802D1084, 0x10006),
-    SI_WAIT_FRAMES(10),
-    SI_CALL(0x802D1084, 0x10007),
-    SI_CALL(0x802D1DFC, SI_VAR(0), SI_VAR(1), SI_VAR(2)),
-    SI_CALL(0x802D1054, SI_FIXED(1.0f)),
-    SI_CALL(0x802D18E8, SI_VAR(0), SI_VAR(1), SI_VAR(2), 10),
-    SI_CALL(0x802D1084, 0x10002),
-    SI_THREAD(),
-        SI_CALL(0x802CBEF0, 0, SI_FIXED(3.0f)),
-        SI_CALL(0x802D1DFC, SI_VAR(0), SI_VAR(1), SI_VAR(2)),
-        SI_CALL(0x802CB860, 0, SI_VAR(0), SI_VAR(1), SI_VAR(2)),
-        SI_CALL(0x802CBE2C, 0, SI_VAR(0), SI_VAR(1), SI_VAR(2)),
-        SI_CALL(0x802CB79C, 0, 0, 1),
-        SI_CALL(0x802CC354, 0, SI_FIXED(1.0f)),
-        SI_CALL(0x802CB79C, 0, 0, 0),
-    SI_END_THREAD(),
-    SI_WAIT_FRAMES(30),
-    SI_CALL(0x802D0DE4, 0),
-    SI_CALL(0x802D0E28, 0),
-    SI_RETURN(),
-    SI_END(),
-};
-// *INDENT-ON*
+Script M(Script_80242340) = SCRIPT({
+    UseSettingsFrom(0, 0xFFFFFEF2, 20, 0xFFFFFFB0)
+    SetPanTarget(0, 0xFFFFFEF2, 20, 0xFFFFFFB0)
+    SetCamDistance(0, 700.0)
+    SetCamSpeed(0, 90.0)
+    PanToTarget(0, 0, 1)
+    if SI_SAVE_VAR(0) >= 0xFFFFFF89 {
+        SetPlayerPos(0, 0xFFFFFC18, 0)
+        DisablePlayerInput(1)
+        SetPlayerPos(0xFFFFFF20, 20, 0xFFFFFFB0)
+        SetNpcPos(0xFFFFFFFC, 0xFFFFFF20, 20, 0xFFFFFFB0)
+        sleep 20
+        SetCamSpeed(0, 3.0)
+        GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2))
+        UseSettingsFrom(0, SI_VAR(0), SI_VAR(1), SI_VAR(2))
+        SetPanTarget(0, SI_VAR(0), SI_VAR(1), SI_VAR(2))
+        PanToTarget(0, 0, 1)
+        WaitForCam(0, 1.0)
+        PanToTarget(0, 0, 0)
+        DisablePlayerInput(0)
+        return
+    }
+    DisablePlayerInput(1)
+    DisablePlayerPhysics(1)
+    GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2))
+    SetPlayerPos(SI_VAR(0), 0xFFFFFC18, SI_VAR(2))
+    sleep 30
+    SetCamDistance(0, 220)
+    SetCamSpeed(0, 1.0)
+    PanToTarget(0, 0, 1)
+    WaitForCam(0, 1.0)
+    spawn {
+        sleep 18
+        PlaySoundAtPlayer(373, 0)
+        sleep 30
+        PlaySoundAtPlayer(374, 0)
+        sleep 28
+        PlaySoundAtPlayer(373, 0)
+    }
+    HidePlayerShadow(1)
+    SetPlayerAnimation(0x10002)
+    SetPlayerPos(0xFFFFFF20, 120, 0xFFFFFFB0)
+    InterpPlayerYaw(90, 0)
+    0:
+    sleep 1
+    GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2))
+    SI_VAR(1) += 0xFFFFFFFE
+    SetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2))
+    if SI_VAR(1) > 86 {
+        goto 0
+    }
+    SetPlayerPos(0xFFFFFECA, 20, 0xFFFFFFB0)
+    spawn {
+        sleep 20
+        SetPanTarget(0, 0xFFFFFECA, 20, 0xFFFFFFB0)
+        SetCamSpeed(0, 0.2001953125)
+        PanToTarget(0, 0, 1)
+    }
+    0x802D286C(0x2800)
+    0x802D2520(0x10002, 5, 5, 1, 1, 0)
+    sleep 100
+    WaitForCam(0, 1.0)
+    0x802D2520(0x10002, 0, 0, 0, 0, 0)
+    HidePlayerShadow(0)
+    SetPlayerAnimation(0x10006)
+    sleep 10
+    SetPlayerAnimation(0x10007)
+    GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2))
+    SetPlayerJumpscale(1.0)
+    PlayerJump(SI_VAR(0), SI_VAR(1), SI_VAR(2), 10)
+    SetPlayerAnimation(0x10002)
+    spawn {
+        SetCamSpeed(0, 3.0)
+        GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2))
+        UseSettingsFrom(0, SI_VAR(0), SI_VAR(1), SI_VAR(2))
+        SetPanTarget(0, SI_VAR(0), SI_VAR(1), SI_VAR(2))
+        PanToTarget(0, 0, 1)
+        WaitForCam(0, 1.0)
+        PanToTarget(0, 0, 0)
+    }
+    sleep 30
+    DisablePlayerPhysics(0)
+    DisablePlayerInput(0)
+});

@@ -6,6 +6,99 @@
 typedef s32 Bytecode;
 typedef s32 ScriptID;
 
+typedef enum ScriptOpcode {
+    ScriptOpcode_END = 0x01,
+    ScriptOpcode_RETURN,
+    ScriptOpcode_LABEL, ///< Args: index
+    ScriptOpcode_GOTO, ///< Args: index
+    ScriptOpcode_LOOP, ///< Args: number of repeats (0 = infinite)
+    ScriptOpcode_END_LOOP,
+    ScriptOpcode_BREAK_LOOP,
+    ScriptOpcode_SLEEP_FRAMES,
+    ScriptOpcode_SLEEP_SECS,
+    ScriptOpcode_IF_EQ, ///< Args: a, b
+    ScriptOpcode_IF_NE, ///< Args: a, b
+    ScriptOpcode_IF_LT, ///< Args: a, b
+    ScriptOpcode_IF_GT, ///< Args: a, b
+    ScriptOpcode_IF_LE, ///< Args: a, b
+    ScriptOpcode_IF_GE, ///< Args: a, b
+    ScriptOpcode_IF_FLAG, ///< Args: a, b
+    ScriptOpcode_IF_NOT_FLAG, ///< Args: a, b
+    ScriptOpcode_ELSE,
+    ScriptOpcode_END_IF,
+    ScriptOpcode_MATCH, ///< Args: expression to test against
+    ScriptOpcode_MATCH_CONST, ///< Args: value to test against
+    ScriptOpcode_CASE_EQ, ///< Args: expression to test for
+    ScriptOpcode_CASE_NE, ///< Args: expression to test for
+    ScriptOpcode_CASE_LT, ///< Args: expression to test for
+    ScriptOpcode_CASE_GT, ///< Args: expression to test for
+    ScriptOpcode_CASE_LE, ///< Args: expression to test for
+    ScriptOpcode_CASE_GE, ///< Args: expression to test for
+    ScriptOpcode_CASE_ELSE,
+    ScriptOpcode_CASE_MULTI_EQ, ///< Args: expression to test for
+    ScriptOpcode_CASE_MULTI_NE, ///< Args: expression to test for
+    ScriptOpcode_CASE_FLAG, ///< Args: expression to test for
+    ScriptOpcode_END_CASE_MULTI, ///< Ends the case block of ScriptOpcode_CASE_MULTI_OR_EQ condition(s).
+    ScriptOpcode_CASE_RANGE, ///< Args: from, to
+    ScriptOpcode_BREAK_MATCH,
+    ScriptOpcode_END_MATCH,
+    ScriptOpcode_SET, ///< Args: container, expression
+    ScriptOpcode_SET_CONST, ///< Args: container, value
+    ScriptOpcode_SET_F, ///< Args: container, expression
+    ScriptOpcode_ADD, ///< Args: container, expression to increment by
+    ScriptOpcode_SUB, ///< Args: container, expression to decrement by
+    ScriptOpcode_MUL, ///< Args: container, expression to multiply by
+    ScriptOpcode_DIV, ///< Integer division. Args: container, expression to divide by
+    ScriptOpcode_MOD, ///< Args: container, expression to divide by
+    ScriptOpcode_ADD_F, ///< Args: container, expression to increment by
+    ScriptOpcode_SUB_F, ///< Args: container, expression to decrement by
+    ScriptOpcode_MUL_F, ///< Args: container, expression to multiply by
+    ScriptOpcode_DIV_F, ///< Args: container, expression to divide by
+    ScriptOpcode_USE_BUFFER, ///< Args: s32*
+    ScriptOpcode_BUFFER_READ_1, /// Args: container
+    ScriptOpcode_BUFFER_READ_2, /// Args: container, container
+    ScriptOpcode_BUFFER_READ_3, /// Args: container, container, container
+    ScriptOpcode_BUFFER_READ_4, /// Args: container, container, container, container
+    ScriptOpcode_BUFFER_PEEK, ///< Args: index, container
+    ScriptOpcode_USE_BUFFER_F, ///< Identical to USE_BUFFER. Args: f32*
+    ScriptOpcode_BUFFER_READ_1_F, /// Args: container
+    ScriptOpcode_BUFFER_READ_2_F, /// Args: container, container
+    ScriptOpcode_BUFFER_READ_3_F, /// Args: container, container, container
+    ScriptOpcode_BUFFER_READ_4_F, /// Args: container, container, container, container
+    ScriptOpcode_BUFFER_PEEK_F, ///< Args: index, container
+    ScriptOpcode_USE_ARRAY, ///< Args: *s32
+    ScriptOpcode_USE_FLAGS, ///< Args: *s32
+    ScriptOpcode_NEW_ARRAY, ///< Allocates a new array. Args: length, s32*
+    ScriptOpcode_AND, ///< Args: container, expression to bitwise AND with
+    ScriptOpcode_AND_CONST, ///< Args: container, value to bitwise AND with
+    ScriptOpcode_OR, ///< Args: container, expression to bitwise OR with
+    ScriptOpcode_OR_CONST, ///< Args: container, value to bitwise OR with
+    ScriptOpcode_CALL, ///< Args: *function, ...
+    ScriptOpcode_SPAWN_SCRIPT, ///< Args: Script*
+    ScriptOpcode_SPAWN_SCRIPT_GET_ID, ///< Args: Script*, container
+    ScriptOpcode_AWAIT_SCRIPT, ///< Spawns a script and waits for it to return before continuing. Args: Script*
+    ScriptOpcode_BIND_TRIGGER, ///< Args: Script*, trigger flags, s32 target, 1, Trigger*
+    ScriptOpcode_UNBIND, ///< Unbinds any triggers bound to this script.
+    ScriptOpcode_KILL_SCRIPT, ///< Args: ScriptID
+    ScriptOpcode_JUMP, ///< Args: Script*
+    ScriptOpcode_SET_PRIORITY, ///< Args: priority
+    ScriptOpcode_SET_TIMESCALE, ///< Args: timescale
+    ScriptOpcode_SET_GROUP, ///< Args: group
+    ScriptOpcode_BIND_PADLOCK, ///< Args: Script*, trigger flags, s32 target, ItemList*, 0, 1
+    ScriptOpcode_SUSPEND_GROUP, ///< Args: group
+    ScriptOpcode_RESUME_GROUP, ///< Args: group
+    ScriptOpcode_SUSPEND_OTHERS, ///< Args: group
+    ScriptOpcode_RESUME_OTHERS, ///< Args: group
+    ScriptOpcode_SUSPEND_SCRIPT, ///< Args: ScriptID
+    ScriptOpcode_RESUME_SCRIPT, ///< Args: ScriptID
+    ScriptOpcode_SCRIPT_EXISTS, ///< Args: ScriptID, container
+    ScriptOpcode_SPAWN_THREAD,
+    ScriptOpcode_END_SPAWN_THREAD,
+    ScriptOpcode_PARALLEL_THREAD, ///< Parallel threads are killed as soon as the parent script returns.
+    ScriptOpcode_END_PARALLEL_THREAD,
+    ScriptOpcode_DEBUG_PRINT = 0x5B, ///< Args: expression
+} ScriptOpcode;
+
 #define SI_VAR(v) (v - 30000000)
 #define SI_MAP_VAR(v) (v - 50000000)
 #define SI_FLAG(v) (v - 70000000)
@@ -35,111 +128,6 @@ typedef s32 ApiStatus;
     opcode, \
     /* argc */ (sizeof((Bytecode[]){argv})/sizeof(Bytecode)), \
     ##argv
-
-#define SI_END() SI_CMD(0x01)
-#define SI_RETURN() SI_CMD(0x02)
-
-#define SI_LABEL(i) SI_CMD(0x03, i)
-#define SI_GOTO(i) SI_CMD(0x04, i)
-
-#define SI_LOOP(i) SI_CMD(0x05, i)
-#define SI_END_LOOP() SI_CMD(0x06)
-#define SI_BREAK_LOOP() SI_CMD(0x07)
-
-#define SI_WAIT_FRAMES(i) SI_CMD(0x08, i)
-#define SI_WAIT_SECS(i) SI_CMD(0x09, i)
-
-#define SI_IF_EQ(a, b) SI_CMD(0x0A, a, b)
-#define SI_IF_NE(a, b) SI_CMD(0x0B, a, b)
-#define SI_IF_LT(a, b) SI_CMD(0x0C, a, b)
-#define SI_IF_GT(a, b) SI_CMD(0x0D, a, b)
-#define SI_IF_LE(a, b) SI_CMD(0x0E, a, b)
-#define SI_IF_GE(a, b) SI_CMD(0x0F, a, b)
-#define SI_IF_BITS_ON(a, b) SI_CMD(0x10, a, b)
-#define SI_IF_BITS_OFF(a, b) SI_CMD(0x11, a, b)
-#define SI_ELSE() SI_CMD(0x12)
-#define SI_END_IF() SI_CMD(0x13)
-
-#define SI_SWITCH(a) SI_CMD(0x14, a)
-#define SI_SWITCH_CONST(a) SI_CMD(0x15, a) // Does not get_variable
-#define SI_CASE_EQ(b) SI_CMD(0x16, b)
-#define SI_CASE_NE(b) SI_CMD(0x17, b)
-#define SI_CASE_LT(b) SI_CMD(0x18, b)
-#define SI_CASE_GT(b) SI_CMD(0x19, b)
-#define SI_CASE_LE(b) SI_CMD(0x1A, b)
-#define SI_CASE_GE(b) SI_CMD(0x1B, b)
-#define SI_CASE_DEFAULT() SI_CMD(0x1C)
-#define SI_CASE_OR_EQ(b) SI_CMD(0x1D, b)
-#define SI_CASE_BITS_ON(b) SI_CMD(0x1F, b)
-#define SI_END_MULTI_CASE() SI_CMD(0x20)
-#define SI_CASE_RANGE(from, to) SI_CMD(0x21, from, to)
-#define SI_BREAK_CASE() SI_CMD(0x22)
-#define SI_END_SWITCH() SI_CMD(0x23)
-
-#define SI_SET(varA, varB) SI_CMD(0x24, varA, varB)
-#define SI_SET_CONST(var, value) SI_CMD(0x25, var, value) // Does not get_variable
-#define SI_ADD(a, b) SI_CMD(0x27, a, b) // +=
-#define SI_SUB(a, b) SI_CMD(0x28, a, b) // -=
-#define SI_MUL(a, b) SI_CMD(0x29, a, b) // *=
-#define SI_DIV(a, b) SI_CMD(0x2A, a, b) // /=
-#define SI_MOD(a, b) SI_CMD(0x2B, a, b) // %=
-
-#define SI_SET_F(var, value) SI_CMD(0x26, var, value)
-#define SI_ADD_F(a, b) SI_CMD(0x2C, a, b) // +=
-#define SI_SUB_F(a, b) SI_CMD(0x2D, a, b) // -=
-#define SI_MUL_F(a, b) SI_CMD(0x2E, a, b) // *=
-#define SI_DIV_F(a, b) SI_CMD(0x2F, a, b) // /=
-
-// BUF_READ and BUF_READ_F take 1..4 args only
-#define SI_USE_BUFFER(buf_ptr) SI_CMD(0x30, buf_ptr)
-#define SI_BUF_READ(vars...) SI_CMD( \
-    0x30 + (sizeof((Bytecode[]){vars})/sizeof(Bytecode)), \
-    vars)
-#define SI_BUF_PEEK(n, var) SI_CMD(0x35, n, var)
-#define SI_USE_BUFFER_F(buf_ptr) SI_CMD(0x36, buf_ptr)
-#define SI_BUF_READ_F(vars...) SI_CMD( \
-    0x36 + (sizeof((Bytecode[]){vars})/sizeof(Bytecode)), \
-    vars)
-#define SI_BUF_PEEK_F(n, var) SI_CMD(0x3B, n, var)
-
-#define SI_USE_ARRAY(arrPtr) SI_CMD(0x3C, arrPtr)
-#define SI_NEW_ARRAY(len, arrPtr) SI_CMD(0x3D, len, arrPtr)
-#define SI_USE_FLAGS(arrPtr) SI_CMD(0x3E, arrPtr)
-
-#define SI_AND(varA, varB) SI_CMD(0x3F, varA, varB) // &=
-#define SI_AND_CONST(var, value) SI_CMD(0x40, var, value) // &=
-#define SI_OR(varA, varB) SI_CMD(0x41, varA, varB) // |=
-#define SI_OR_CONST(var, value) SI_CMD(0x41, var, value) // |=
-
-#define SI_CALL(func, argv...) SI_CMD(0x43, func, ##argv)
-#define SI_EXEC(script) SI_CMD(0x44, script)
-#define SI_EXEC_GET_ID(script, outScriptID) SI_CMD(0x45, script, outScriptID)
-#define SI_EXEC_WAIT(script) SI_CMD(0x46, script)
-#define SI_JUMP(script) SI_CMD(0x4A, script)
-
-#define SI_BIND(script, trigger, target, outTriggerPtr) SI_CMD(0x47, script, trigger, target, 1, outTriggerPtr)
-#define SI_BIND_PADLOCK(script, trigger, target, itemList) SI_CMD(0x4E, script, trigger, target, itemList, 0, 1)
-#define SI_UNBIND_ME() SI_CMD(0x48)
-
-#define SI_PRIORITY(p) SI_CMD(0x4B, p)
-#define SI_TIMESCALE(t) SI_CMD(0x4C, t)
-#define SI_GROUP(g) SI_CMD(0x4D, g)
-
-#define SI_SUSPEND_GROUP(group) SI_CMD(0x4F, group)
-#define SI_RESUME_GROUP(group) SI_CMD(0x50, group)
-#define SI_SUSPEND_GROUP_NOT_ME(group) SI_CMD(0x51, group)
-#define SI_RESUME_GROUP_NOT_ME(group) SI_CMD(0x52, group)
-
-#define SI_KILL(scriptID) SI_CMD(0x49, scriptID)
-#define SI_SUSPEND(scriptID) SI_CMD(0x53, scriptID)
-#define SI_RESUME(scriptID) SI_CMD(0x54, scriptID)
-#define SI_EXISTS(scriptID) SI_CMD(0x55, scriptID)
-
-#define SI_THREAD() SI_CMD(0x56)
-#define SI_END_THREAD() SI_CMD(0x57)
-
-#define SI_CHILD_THREAD() SI_CMD(0x58)
-#define SI_END_CHILD_THREAD() SI_CMD(0x59)
 
 #define EXIT_WALK_SCRIPT(walkDistance, exitIdx, map, entryIdx) \
     SCRIPT({ \
