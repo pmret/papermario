@@ -2,7 +2,28 @@
 
 void fio_serialize_state(void);
 
-INCLUDE_ASM(s32, "code_6240_len_c00", get_spirits_rescued);
+s32 get_spirits_rescued(void) {
+    s32 storyProgress = get_variable(NULL, SI_SAVE_VAR(0));
+    s32 ret = 7;
+
+    if (storyProgress < get_variable(NULL, -0x4D)) {
+        ret = 0;
+    } else if (storyProgress < get_variable(NULL, -0x37)) {
+        ret = 1;
+    } else if (storyProgress < get_variable(NULL, -0xF)) {
+        ret = 2;
+    } else if (storyProgress < get_variable(NULL, 5)) {
+        ret = 3;
+    } else if (storyProgress < get_variable(NULL, 0x25)) {
+        ret = 4;
+    } else if (storyProgress < get_variable(NULL, 0x39)) {
+        ret = 5;
+    } else if (storyProgress < get_variable(NULL, 0x57)) {
+        ret = 6;
+    }
+
+    return ret;
+}
 
 INCLUDE_ASM(s32, "code_6240_len_c00", fio_calc_header_checksum);
 

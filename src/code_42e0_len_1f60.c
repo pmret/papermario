@@ -1,5 +1,10 @@
 #include "common.h"
 
+void sin_cos_rad(f32 rad, f32* outSinTheta, f32* outCosTheta);
+void func_80029860(s32 romStart, s32 vramDest, s32 length);
+
+#define ROM_CHUNK_SIZE 0x2000
+
 void poll_rumble(void) {
     // TODO: replace with defines
     nuContRmbCheck(0);
@@ -53,11 +58,39 @@ void copy_matrix(Matrix4f* src, Matrix4f* dest) {
     bcopy(src, dest, sizeof(Matrix4f));
 }
 
-INCLUDE_ASM(void, "code_42e0_len_1f60", dma_copy, void* romStart, void* romEnd, void* vramDest);
+s32 dma_copy(s32 romStart, s32 romEnd, void* vramDest) {
+    u32 length = romEnd - romStart;
+    s32 i;
 
-INCLUDE_ASM(s32, "code_42e0_len_1f60", func_800297D4);
+    osInvalICache(vramDest, length);
 
-INCLUDE_ASM(s32, "code_42e0_len_1f60", func_80029860);
+    for (i = 0; i + ROM_CHUNK_SIZE < length; i += ROM_CHUNK_SIZE) {
+        nuPiReadRom(romStart + i, vramDest + i, ROM_CHUNK_SIZE);
+    }
+
+    if (i != length) {
+        nuPiReadRom(romStart + i, vramDest + i, length - i);
+    }
+
+    return length;
+}
+
+s32 func_800297D4(s32 romStart, s32 romEnd, void* vramDest) {
+    u32 length = romEnd - romStart;
+    s32 i;
+
+    for (i = 0; i + ROM_CHUNK_SIZE < length; i += ROM_CHUNK_SIZE) {
+        func_80029860(romStart + i, vramDest + i, ROM_CHUNK_SIZE);
+    }
+
+    if (i != length) {
+        func_80029860(romStart + i, vramDest + i, length - i);
+    }
+
+    return length;
+}
+
+INCLUDE_ASM(void, "code_42e0_len_1f60", func_80029860, s32 romStart, s32 vramDest, s32 length);
 
 s32 _advance_rng(void) {
     s32* rngVal = &gRandSeed;
@@ -69,7 +102,22 @@ s32 _advance_rng(void) {
 
 INCLUDE_ASM(s32, "code_42e0_len_1f60", func_80029934);
 
-INCLUDE_ASM(s32, "code_42e0_len_1f60", func_80029994);
+s32 func_80029994(s32 arg0) {
+    u32 div = -1;
+    s32 plusOne = arg0 + 1;
+    u32 result;
+
+    div /= plusOne;
+    if (div == 0) {
+        div = 1;
+    }
+
+    do  {
+        result = _advance_rng() / div;
+    } while (result >= plusOne);
+
+    return result;
+}
 
 INCLUDE_ASM(s32, "code_42e0_len_1f60", rand_int, s32 arg0);
 
@@ -109,7 +157,13 @@ f32 get_player_normal_yaw(void) {
     return atan2(0, 0, GAME_STATUS->playerTraceNormal.x, GAME_STATUS->playerTraceNormal.z);
 }
 
-INCLUDE_ASM(s32, "code_42e0_len_1f60", get_player_normal_pitch);
+f32 get_player_normal_pitch(void) {
+    f32 traceNormalX = GAME_STATUS->playerTraceNormal.x;
+    f32 traceNormalZ = GAME_STATUS->playerTraceNormal.z;
+    f32 sqrt = sqrtf(SQ(traceNormalX) + SQ(traceNormalZ));
+
+    return atan2(0.0f, 0.0f, sqrt, -GAME_STATUS->playerTraceNormal.y);
+}
 
 f32 dist2D(f32 ax, f32 ay, f32 bx, f32 by) {
     f32 xDiff = bx - ax;
@@ -126,11 +180,18 @@ f32 dist3D(f32 ax, f32 ay, f32 az, f32 bx, f32 by, f32 bz) {
     return sqrtf(SQ(xDiff) + SQ(yDiff) + SQ(zDiff));
 }
 
-INCLUDE_ASM(void, "code_42e0_len_1f60", add_vec2D_polar, f32* x, f32* y, f32 r, f32 theta);
+void add_vec2D_polar(f32* x, f32* y, f32 r, f32 theta) {
+    f32 sinTheta;
+    f32 cosTheta;
+
+    sin_cos_rad((theta * 6.28318f) / 360.0f, &sinTheta, &cosTheta);
+    *x += r * sinTheta;
+    *y -= r * cosTheta;
+}
 
 INCLUDE_ASM(s32, "code_42e0_len_1f60", _wrap_trig_lookup_value);
 
-INCLUDE_ASM(s32, "code_42e0_len_1f60", sin_cos_rad);
+INCLUDE_ASM(void, "code_42e0_len_1f60", sin_cos_rad, f32 rad, f32* outSinTheta, f32* outCosTheta);
 
 INCLUDE_ASM(f32, "code_42e0_len_1f60", sin_rad, f32 angle);
 

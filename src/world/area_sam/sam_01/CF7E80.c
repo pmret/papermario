@@ -84,4 +84,4 @@ INCLUDE_ASM(s32, "world/area_sam/sam_01/CF7E80", func_80241D44_CF98B4);
 
 #include "world/common/SomeItemEntityFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_sam/sam_01/CF7E80", func_80241EF8_CF9A68);
+#include "world/common/CheckItemFlags40.inc.c"

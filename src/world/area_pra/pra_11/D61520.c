@@ -32,4 +32,4 @@ INCLUDE_ASM(s32, "world/area_pra/pra_11/D61520", func_80240F20_D62420);
 
 #include "world/common/SomeItemEntityFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_pra/pra_11/D61520", func_80241188_D62688);
+#include "world/common/CheckItemFlags40.inc.c"

@@ -56,5 +56,7 @@ ASSETS := \
 	title_data \
 	party_kurio party_kameki party_pinki party_pareta party_resa party_akari party_opuku party_pokopi
 
+MESSAGES := $(shell find msg -type f -name "*.msg")
+
 # Image settings
 $(BUILD_DIR)/img/battle/text_action_command_ratings.ia4.png: IMG_FLAGS = --flip-y

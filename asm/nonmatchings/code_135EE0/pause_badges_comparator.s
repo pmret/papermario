@@ -8,9 +8,9 @@ glabel pause_badges_comparator
 /* 13A32C 80246FEC 08091C00 */  j         .L80247000
 /* 13A330 80246FF0 24037FFF */   addiu    $v1, $zero, 0x7fff
 .L80246FF4:
-/* 13A334 80246FF4 3C038008 */  lui       $v1, 0x8008
+/* 13A334 80246FF4 3C038008 */  lui       $v1, %hi(gItemTable+0x6)
 /* 13A338 80246FF8 00621821 */  addu      $v1, $v1, $v0
-/* 13A33C 80246FFC 946378E6 */  lhu       $v1, 0x78e6($v1)
+/* 13A33C 80246FFC 946378E6 */  lhu       $v1, %lo(gItemTable+0x6)($v1)
 .L80247000:
 /* 13A340 80247000 84A20000 */  lh        $v0, ($a1)
 /* 13A344 80247004 14400003 */  bnez      $v0, .L80247014
@@ -18,9 +18,9 @@ glabel pause_badges_comparator
 /* 13A34C 8024700C 08091C08 */  j         .L80247020
 /* 13A350 80247010 24047FFF */   addiu    $a0, $zero, 0x7fff
 .L80247014:
-/* 13A354 80247014 3C048008 */  lui       $a0, 0x8008
+/* 13A354 80247014 3C048008 */  lui       $a0, %hi(gItemTable+0x6)
 /* 13A358 80247018 00822021 */  addu      $a0, $a0, $v0
-/* 13A35C 8024701C 948478E6 */  lhu       $a0, 0x78e6($a0)
+/* 13A35C 8024701C 948478E6 */  lhu       $a0, %lo(gItemTable+0x6)($a0)
 .L80247020:
 /* 13A360 80247020 00031400 */  sll       $v0, $v1, 0x10
 /* 13A364 80247024 00021C03 */  sra       $v1, $v0, 0x10

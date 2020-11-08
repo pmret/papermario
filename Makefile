@@ -34,7 +34,8 @@ ELF := $(BUILD_DIR)/$(TARGET).elf
 LD_SCRIPT := $(TARGET).ld
 LD_MAP := $(BUILD_DIR)/$(TARGET).map
 ASSETS_BIN := $(BUILD_DIR)/bin/assets/assets.bin
-
+MSG_BIN := $(BUILD_DIR)/msg.bin
+GENERATED_HEADERS := include/ld_addrs.h
 
 ### Tools ###
 
@@ -91,7 +92,7 @@ clean:
 clean-code:
 	rm -rf $(BUILD_DIR)/src
 
-setup: clean submodules split
+setup: clean submodules split $(LD_SCRIPT)
 	make -C tools
 
 submodules:
@@ -99,10 +100,10 @@ submodules:
 
 split:
 	rm -rf bin img
-	$(SPLAT) --modes ld bin Yay0 PaperMarioMapFS img
+	$(SPLAT) --modes bin Yay0 PaperMarioMapFS PaperMarioMessages img
 
 split-%:
-	$(SPLAT) --modes ld $*
+	$(SPLAT) --modes $* --verbose
 
 split-all:
 	rm -rf bin img
@@ -130,12 +131,12 @@ $(BUILD_DIR)/%.Yay0.o: $(BUILD_DIR)/%.bin.Yay0
 	$(LD) -r -b binary -o $@ $<
 
 # Compile C files
-$(BUILD_DIR)/%.c.o: %.c $(MDEPS)
+$(BUILD_DIR)/%.c.o: %.c $(MDEPS) | $(GENERATED_HEADERS)
 	@mkdir -p $(shell dirname $@)
 	$(CPP) $(CPPFLAGS) -o - $(CPPMFLAGS) $< | iconv --from UTF-8 --to SHIFT-JIS | $(CC) $(CFLAGS) -o - | $(OLD_AS) $(OLDASFLAGS) -o $@ -
 
 # Compile C files (with DSL macros)
-$(foreach cfile, $(DSL_C_FILES), $(BUILD_DIR)/$(cfile).o): $(BUILD_DIR)/%.c.o: %.c $(MDEPS) tools/compile_dsl_macros.py
+$(foreach cfile, $(DSL_C_FILES), $(BUILD_DIR)/$(cfile).o): $(BUILD_DIR)/%.c.o: %.c $(MDEPS) tools/compile_dsl_macros.py | include/ld_addrs.h
 	@mkdir -p $(shell dirname $@)
 	$(CPP) $(CPPFLAGS) -o - $< $(CPPMFLAGS) | $(PYTHON) tools/compile_dsl_macros.py | iconv --from UTF-8 --to SHIFT-JIS | $(CC) $(CFLAGS) -o - | $(OLD_AS) $(OLDASFLAGS) -o $@ -
 
@@ -178,23 +179,30 @@ $(BUILD_DIR)/%.i8.png: %.png
 	@mkdir -p $(shell dirname $@)
 	$(PYTHON) tools/convert_image.py i8 $< $@ $(IMG_FLAGS)
 
-
+# Assets
 ASSET_FILES := $(foreach asset, $(ASSETS), $(BUILD_DIR)/bin/assets/$(asset))
 YAY0_ASSET_FILES := $(foreach asset, $(filter-out %_tex, $(ASSET_FILES)), $(asset).Yay0)
-
 $(BUILD_DIR)/bin/assets/%: bin/assets/%.bin
 	@mkdir -p $(shell dirname $@)
 	@cp $< $@
-
 $(ASSETS_BIN): $(ASSET_FILES) $(YAY0_ASSET_FILES) sources.mk
 	@mkdir -p $(shell dirname $@)
 	@echo "building $@"
 	@$(PYTHON) tools/build_assets_bin.py $@ $(ASSET_FILES)
-
 $(ASSETS_BIN:.bin=.o): $(ASSETS_BIN)
 	$(LD) -r -b binary -o $@ $<
 
+# Messages
+$(MSG_BIN): $(MESSAGES)
+	@mkdir -p $(shell dirname $@)
+	@echo "building $@"
+	@$(PYTHON) tools/compile_messages.py $@ /dev/null $(MESSAGES)
+$(MSG_BIN:.bin=.o): $(MSG_BIN)
+	@mkdir -p $(shell dirname $@)
+	$(LD) -r -b binary -o $@ $<
+
 $(LD_SCRIPT): $(SPLAT_YAML)
+	@mkdir -p $(shell dirname $@)
 	$(SPLAT) --modes ld
 
 $(BUILD_DIR)/$(LD_SCRIPT): $(LD_SCRIPT)
@@ -213,6 +221,8 @@ $(BUILD_DIR)/$(TARGET).elf: $(BUILD_DIR)/$(LD_SCRIPT) $(OBJECTS)
 $(BUILD_DIR)/$(TARGET).bin: $(BUILD_DIR)/$(TARGET).elf
 	$(OBJCOPY) $< $@ -O binary
 
+include/ld_addrs.h: $(BUILD_DIR)/$(LD_SCRIPT)
+	grep -E "[^ ]+ =" $< -o | sed 's/^/extern void* /; s/ =/;/' > $@
 
 ### Make Settings ###
 

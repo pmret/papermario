@@ -881,9 +881,9 @@ glabel update_partner_menu
 /* 41DC4C 802A8EBC A682017A */  sh        $v0, 0x17a($s4)
 /* 41DC50 802A8EC0 00021400 */  sll       $v0, $v0, 0x10
 /* 41DC54 802A8EC4 000212C3 */  sra       $v0, $v0, 0xb
-/* 41DC58 802A8EC8 3C038008 */  lui       $v1, 0x8008
+/* 41DC58 802A8EC8 3C038008 */  lui       $v1, %hi(gItemTable+0x8)
 /* 41DC5C 802A8ECC 00621821 */  addu      $v1, $v1, $v0
-/* 41DC60 802A8ED0 8C6378E8 */  lw        $v1, 0x78e8($v1)
+/* 41DC60 802A8ED0 8C6378E8 */  lw        $v1, %lo(gItemTable+0x8)($v1)
 /* 41DC64 802A8ED4 9242032D */  lbu       $v0, 0x32d($s2)
 /* 41DC68 802A8ED8 AE800188 */  sw        $zero, 0x188($s4)
 /* 41DC6C 802A8EDC 2442FFFF */  addiu     $v0, $v0, -1

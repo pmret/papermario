@@ -112,7 +112,7 @@ typedef struct Npc {
     /* 0x0A6 */ s16 collisionRadius;
     /* 0x0A8 */ s16 collisionHeight;
     /* 0x0AA */ u8 renderMode;
-    /* 0x0AB */ char unk_AB;
+    /* 0x0AB */ u8 unk_AB;
     /* 0x0AC */ u8 unk_AC;
     /* 0x0AD */ char unk_AD[659];
 } Npc; // size = 0x340
@@ -449,7 +449,7 @@ typedef struct Camera {
     /* 0x038 */ s16 perspNorm;
     /* 0x03A */ char unk_3A[2];
     /* 0x03C */ f32 lookAt_eye[3];
-    /* 0x048 */ f32 lookAt_obj[3];
+    /* 0x048 */ Vec3f lookAt_obj;
     /* 0x054 */ f32 unk_54;
     /* 0x058 */ f32 unk_58;
     /* 0x05C */ f32 unk_5C;
@@ -1159,7 +1159,6 @@ typedef struct Shop {
 typedef struct Encounter {
     /* 0x00 */ s32 count;
     /* 0x04 */ struct Enemy* enemy[16];
-    /* 0x08 */ char unk_08[60];
     /* 0x44 */ s16 battle;
     /* 0x46 */ s16 stage;
     /* 0x48 */ s16 encounterID;
@@ -1468,7 +1467,8 @@ typedef struct EncounterStatus {
     /* 0x04 */ u8 eFirstStrike; /* 0 = none, 1 = player, 2 = enemy */
     /* 0x05 */ s8 hitType; /* 1 = none/enemy, 2 = jump */
     /* 0x06 */ s8 hitTier; /* 0 = normal, 1 = super, 2 = ultra */
-    /* 0x07 */ char unk_07[2];
+    /* 0x07 */ char unk_07;
+    /* 0x08 */ s8 unk_08;
     /* 0x09 */ s8 battleOutcome; /* 0 = won, 1 = lost */
     /* 0x0A */ char unk_0A;
     /* 0x0B */ s8 merleeCoinBonus; /* triple coins when != 0 */

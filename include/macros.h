@@ -20,6 +20,8 @@
 #define GAME_STATUS (*gGameStatusPtr)
 #define PLAYER_STATUS (&gPlayerStatus)
 #define PLAYER_DATA (&gPlayerData)
+#define CAM(id) (&gCameras[id])
+#define CURRENT_CAM (&gCameras[gCurrentCameraID])
 
 #define MAX_MAPVARS 16
 #define MAX_MAPFLAGS 3

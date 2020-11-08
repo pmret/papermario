@@ -25,4 +25,5 @@ INCLUDE_ASM(s32, "code_10400_len_d30", func_80035B40);
 void func_80035D18(void) {
 }
 
-INCLUDE_ASM(s32, "code_10400_len_d30", func_80035D20);
+void func_80035D20(void) {
+}

@@ -193,7 +193,7 @@ typedef struct StaticNPC {
 
 typedef struct Enemy {
     /* 0x00 */ s32 flags;
-    /* 0x04 */ u8 encounterIndex;
+    /* 0x04 */ s8 encounterIndex;
     /* 0x05 */ s8 encountered;
     /* 0x06 */ u8 scriptGroup; /* scripts launched for this npc controller will be assigned this group */
     /* 0x07 */ s8 unk_07;

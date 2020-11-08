@@ -1524,9 +1524,9 @@ glabel update_player_menu
 /* 41BD14 802A6F84 A6C2017A */  sh        $v0, 0x17a($s6)
 /* 41BD18 802A6F88 00021400 */  sll       $v0, $v0, 0x10
 /* 41BD1C 802A6F8C 000212C3 */  sra       $v0, $v0, 0xb
-/* 41BD20 802A6F90 3C038008 */  lui       $v1, 0x8008
+/* 41BD20 802A6F90 3C038008 */  lui       $v1, %hi(gItemTable+0x8)
 /* 41BD24 802A6F94 00621821 */  addu      $v1, $v1, $v0
-/* 41BD28 802A6F98 8C6378E8 */  lw        $v1, 0x78e8($v1)
+/* 41BD28 802A6F98 8C6378E8 */  lw        $v1, %lo(gItemTable+0x8)($v1)
 /* 41BD2C 802A6F9C 3C02802B */  lui       $v0, 0x802b
 /* 41BD30 802A6FA0 9042CFFD */  lbu       $v0, -0x3003($v0)
 /* 41BD34 802A6FA4 AEC00188 */  sw        $zero, 0x188($s6)
@@ -1698,9 +1698,9 @@ glabel update_player_menu
 /* 41BFAC 802A721C 24030034 */  addiu     $v1, $zero, 0x34
 /* 41BFB0 802A7220 A6C3017C */  sh        $v1, 0x17c($s6)
 /* 41BFB4 802A7224 00021140 */  sll       $v0, $v0, 5
-/* 41BFB8 802A7228 3C038008 */  lui       $v1, 0x8008
+/* 41BFB8 802A7228 3C038008 */  lui       $v1, %hi(gItemTable+0x8)
 /* 41BFBC 802A722C 00621821 */  addu      $v1, $v1, $v0
-/* 41BFC0 802A7230 8C6378E8 */  lw        $v1, 0x78e8($v1)
+/* 41BFC0 802A7230 8C6378E8 */  lw        $v1, %lo(gItemTable+0x8)($v1)
 /* 41BFC4 802A7234 3C02802B */  lui       $v0, 0x802b
 /* 41BFC8 802A7238 9042CFFD */  lbu       $v0, -0x3003($v0)
 /* 41BFCC 802A723C AEC00188 */  sw        $zero, 0x188($s6)
@@ -2116,9 +2116,9 @@ glabel update_player_menu
 /* 41C5DC 802A784C A6C2017A */  sh        $v0, 0x17a($s6)
 /* 41C5E0 802A7850 00021400 */  sll       $v0, $v0, 0x10
 /* 41C5E4 802A7854 000212C3 */  sra       $v0, $v0, 0xb
-/* 41C5E8 802A7858 3C038008 */  lui       $v1, 0x8008
+/* 41C5E8 802A7858 3C038008 */  lui       $v1, %hi(gItemTable+0x8)
 /* 41C5EC 802A785C 00621821 */  addu      $v1, $v1, $v0
-/* 41C5F0 802A7860 8C6378E8 */  lw        $v1, 0x78e8($v1)
+/* 41C5F0 802A7860 8C6378E8 */  lw        $v1, %lo(gItemTable+0x8)($v1)
 /* 41C5F4 802A7864 3C02802B */  lui       $v0, 0x802b
 /* 41C5F8 802A7868 9042CFFD */  lbu       $v0, -0x3003($v0)
 /* 41C5FC 802A786C AEC00188 */  sw        $zero, 0x188($s6)
