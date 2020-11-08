@@ -81,6 +81,7 @@ PlayerData* get_player_data(void);
 // Partner
 void func_800EBA3C(Npc* partner);
 void func_800EBB40(Npc* partner);
+void enable_partner_ai(void);
 void enable_partner_walking(Npc* partner, s32 val);
 void enable_partner_flying(Npc* partner, s32 val);
 void update_player_move_history(Npc* partner);
