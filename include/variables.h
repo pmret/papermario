@@ -86,6 +86,9 @@ extern PrintContext* gCurrentPrintContext;
 extern s32 D_802DB264;
 extern PrintContext* D_802DB268;
 
+// Animation related
+extern PartnerAnimations gPartnerAnimations[12];
+
 // Triggers
 extern s16 gTriggerCount;
 extern TriggerList gTriggerList1;
