@@ -10,7 +10,7 @@ Npc* resolve_npc(ScriptInstance* script, NpcId npcIdOrPtr) {
     }
 }
 
-INCLUDE_ASM(s32, "code_f2470_len_27f0", set_npc_animation);
+INCLUDE_ASM(void, "code_f2470_len_27f0", set_npc_animation, Npc* npc, u32 arg1);
 
 INCLUDE_ASM(s32, "code_f2470_len_27f0", CreateNpc);
 
