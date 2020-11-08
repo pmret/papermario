@@ -83,9 +83,9 @@ glabel enable_partner_walking
 /* 84E78 800EB9C8 000310C0 */  sll       $v0, $v1, 3
 /* 84E7C 800EB9CC 00431021 */  addu      $v0, $v0, $v1
 /* 84E80 800EB9D0 00021080 */  sll       $v0, $v0, 2
-/* 84E84 800EB9D4 3C038010 */  lui       $v1, 0x8010
+/* 84E84 800EB9D4 3C038010 */  lui       $v1, %hi(gPartnerAnimations+0x14)
 /* 84E88 800EB9D8 00621821 */  addu      $v1, $v1, $v0
-/* 84E8C 800EB9DC 8C63835C */  lw        $v1, -0x7ca4($v1)
+/* 84E8C 800EB9DC 8C63835C */  lw        $v1, %lo(gPartnerAnimations+0x14)($v1)
 /* 84E90 800EB9E0 24020010 */  addiu     $v0, $zero, 0x10
 /* 84E94 800EB9E4 3C018010 */  lui       $at, 0x8010
 /* 84E98 800EB9E8 AC22802C */  sw        $v0, -0x7fd4($at)
