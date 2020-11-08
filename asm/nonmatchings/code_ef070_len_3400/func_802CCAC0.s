@@ -7,8 +7,8 @@ glabel func_802CCAC0
 /* F1478 802CCAC8 0000802D */  daddu     $s0, $zero, $zero
 /* F147C 802CCACC AFBF0014 */  sw        $ra, 0x14($sp)
 .L802CCAD0:
-/* F1480 802CCAD0 3C03802E */  lui       $v1, %hi(gAnimatedMeshesPtr)
-/* F1484 802CCAD4 8C63AE30 */  lw        $v1, %lo(gAnimatedMeshesPtr)($v1)
+/* F1480 802CCAD0 3C03802E */  lui       $v1, %hi(gMeshAnimationsPtr)
+/* F1484 802CCAD4 8C63AE30 */  lw        $v1, %lo(gMeshAnimationsPtr)($v1)
 /* F1488 802CCAD8 00101080 */  sll       $v0, $s0, 2
 /* F148C 802CCADC 00431021 */  addu      $v0, $v0, $v1
 /* F1490 802CCAE0 8C420000 */  lw        $v0, ($v0)

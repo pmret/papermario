@@ -493,7 +493,13 @@ INCLUDE_ASM(s32, "code_ef070_len_3400", SetAnimModelScale);
 
 INCLUDE_ASM(s32, "code_ef070_len_3400", func_802CD348);
 
-INCLUDE_ASM(s32, "code_ef070_len_3400", func_802CD3C0);
+ApiStatus func_802CD3C0(ScriptInstance* script, s32 isInitialCall) {
+    AnimatedModel* model = gMeshAnimationsPtr[get_variable(script, *script->ptrReadPos)];
+
+    func_8011E438(func_8011FFE0(model->animModelID));
+    model->animModelID = -1;
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_ef070_len_3400", func_802CD418);
 

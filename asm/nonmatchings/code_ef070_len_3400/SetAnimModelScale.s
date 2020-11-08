@@ -28,8 +28,8 @@ glabel SetAnimModelScale
 /* F1CA8 802CD2F8 8E050000 */  lw        $a1, ($s0)
 /* F1CAC 802CD2FC 0C0B210B */  jal       get_float_variable
 /* F1CB0 802CD300 46000506 */   mov.s    $f20, $f0
-/* F1CB4 802CD304 3C02802E */  lui       $v0, %hi(gAnimatedMeshesPtr)
-/* F1CB8 802CD308 8C42AE30 */  lw        $v0, %lo(gAnimatedMeshesPtr)($v0)
+/* F1CB4 802CD304 3C02802E */  lui       $v0, %hi(gMeshAnimationsPtr)
+/* F1CB8 802CD308 8C42AE30 */  lw        $v0, %lo(gMeshAnimationsPtr)($v0)
 /* F1CBC 802CD30C 00118880 */  sll       $s1, $s1, 2
 /* F1CC0 802CD310 02228821 */  addu      $s1, $s1, $v0
 /* F1CC4 802CD314 8E230000 */  lw        $v1, ($s1)

@@ -17,8 +17,8 @@ glabel func_802CD418
 /* F1DF8 802CD448 8E120000 */  lw        $s2, ($s0)
 /* F1DFC 802CD44C 0C0B1EAF */  jal       get_variable
 /* F1E00 802CD450 0040882D */   daddu    $s1, $v0, $zero
-/* F1E04 802CD454 3C03802E */  lui       $v1, %hi(gAnimatedMeshesPtr)
-/* F1E08 802CD458 8C63AE30 */  lw        $v1, %lo(gAnimatedMeshesPtr)($v1)
+/* F1E04 802CD454 3C03802E */  lui       $v1, %hi(gMeshAnimationsPtr)
+/* F1E08 802CD458 8C63AE30 */  lw        $v1, %lo(gMeshAnimationsPtr)($v1)
 /* F1E0C 802CD45C 00118880 */  sll       $s1, $s1, 2
 /* F1E10 802CD460 02238821 */  addu      $s1, $s1, $v1
 /* F1E14 802CD464 8E230000 */  lw        $v1, ($s1)

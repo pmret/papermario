@@ -23,8 +23,8 @@ glabel func_802CD9F0
 /* F23E8 802CDA38 8E130000 */  lw        $s3, ($s0)
 /* F23EC 802CDA3C 0C0B1EAF */  jal       get_variable
 /* F23F0 802CDA40 0040902D */   daddu    $s2, $v0, $zero
-/* F23F4 802CDA44 3C03802E */  lui       $v1, %hi(gAnimatedMeshesPtr)
-/* F23F8 802CDA48 8C63AE30 */  lw        $v1, %lo(gAnimatedMeshesPtr)($v1)
+/* F23F4 802CDA44 3C03802E */  lui       $v1, %hi(gMeshAnimationsPtr)
+/* F23F8 802CDA48 8C63AE30 */  lw        $v1, %lo(gMeshAnimationsPtr)($v1)
 /* F23FC 802CDA4C 00118880 */  sll       $s1, $s1, 2
 /* F2400 802CDA50 02238821 */  addu      $s1, $s1, $v1
 /* F2404 802CDA54 8E230000 */  lw        $v1, ($s1)

@@ -15,8 +15,8 @@ glabel ChangeModelAnimation
 /* F1944 802CCF94 8E050000 */  lw        $a1, ($s0)
 /* F1948 802CCF98 0C0B1EAF */  jal       get_variable
 /* F194C 802CCF9C 0040802D */   daddu    $s0, $v0, $zero
-/* F1950 802CCFA0 3C03802E */  lui       $v1, %hi(gAnimatedMeshesPtr)
-/* F1954 802CCFA4 8C63AE30 */  lw        $v1, %lo(gAnimatedMeshesPtr)($v1)
+/* F1950 802CCFA0 3C03802E */  lui       $v1, %hi(gMeshAnimationsPtr)
+/* F1954 802CCFA4 8C63AE30 */  lw        $v1, %lo(gMeshAnimationsPtr)($v1)
 /* F1958 802CCFA8 00108080 */  sll       $s0, $s0, 2
 /* F195C 802CCFAC 02038021 */  addu      $s0, $s0, $v1
 /* F1960 802CCFB0 8E100000 */  lw        $s0, ($s0)

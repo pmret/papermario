@@ -7,16 +7,16 @@ glabel func_802CD57C
 /* F1F34 802CD584 80420070 */  lb        $v0, 0x70($v0)
 /* F1F38 802CD588 14400007 */  bnez      $v0, .L802CD5A8
 /* F1F3C 802CD58C 00000000 */   nop      
-/* F1F40 802CD590 3C02802E */  lui       $v0, 0x802e
-/* F1F44 802CD594 2442ADF0 */  addiu     $v0, $v0, -0x5210
-/* F1F48 802CD598 3C01802E */  lui       $at, %hi(gAnimatedMeshesPtr)
-/* F1F4C 802CD59C AC22AE30 */  sw        $v0, %lo(gAnimatedMeshesPtr)($at)
+/* F1F40 802CD590 3C02802E */  lui       $v0, %hi(gWorldMeshAnimations)
+/* F1F44 802CD594 2442ADF0 */  addiu     $v0, $v0, %lo(gWorldMeshAnimations)
+/* F1F48 802CD598 3C01802E */  lui       $at, %hi(gMeshAnimationsPtr)
+/* F1F4C 802CD59C AC22AE30 */  sw        $v0, %lo(gMeshAnimationsPtr)($at)
 /* F1F50 802CD5A0 03E00008 */  jr        $ra
 /* F1F54 802CD5A4 00000000 */   nop      
 .L802CD5A8:
-/* F1F58 802CD5A8 3C02802E */  lui       $v0, 0x802e
-/* F1F5C 802CD5AC 2442ADB0 */  addiu     $v0, $v0, -0x5250
-/* F1F60 802CD5B0 3C01802E */  lui       $at, %hi(gAnimatedMeshesPtr)
-/* F1F64 802CD5B4 AC22AE30 */  sw        $v0, %lo(gAnimatedMeshesPtr)($at)
+/* F1F58 802CD5A8 3C02802E */  lui       $v0, %hi(gBattleMeshAnimations)
+/* F1F5C 802CD5AC 2442ADB0 */  addiu     $v0, $v0, %lo(gBattleMeshAnimations)
+/* F1F60 802CD5B0 3C01802E */  lui       $at, %hi(gMeshAnimationsPtr)
+/* F1F64 802CD5B4 AC22AE30 */  sw        $v0, %lo(gMeshAnimationsPtr)($at)
 /* F1F68 802CD5B8 03E00008 */  jr        $ra
 /* F1F6C 802CD5BC 00000000 */   nop      

@@ -23,8 +23,8 @@ glabel func_802CD5C0
 /* F1FB8 802CD608 00118880 */  sll       $s1, $s1, 2
 /* F1FBC 802CD60C 8E140000 */  lw        $s4, ($s0)
 /* F1FC0 802CD610 26100004 */  addiu     $s0, $s0, 4
-/* F1FC4 802CD614 3C03802E */  lui       $v1, %hi(gAnimatedMeshesPtr)
-/* F1FC8 802CD618 8C63AE30 */  lw        $v1, %lo(gAnimatedMeshesPtr)($v1)
+/* F1FC4 802CD614 3C03802E */  lui       $v1, %hi(gMeshAnimationsPtr)
+/* F1FC8 802CD618 8C63AE30 */  lw        $v1, %lo(gMeshAnimationsPtr)($v1)
 /* F1FCC 802CD61C 8E150000 */  lw        $s5, ($s0)
 /* F1FD0 802CD620 02238821 */  addu      $s1, $s1, $v1
 /* F1FD4 802CD624 8E330000 */  lw        $s3, ($s1)

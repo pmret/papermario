@@ -15,8 +15,8 @@ glabel PlayModelAnimation
 /* F1844 802CCE94 8E050000 */  lw        $a1, ($s0)
 /* F1848 802CCE98 0C0B1EAF */  jal       get_variable
 /* F184C 802CCE9C 0040802D */   daddu    $s0, $v0, $zero
-/* F1850 802CCEA0 3C03802E */  lui       $v1, %hi(gAnimatedMeshesPtr)
-/* F1854 802CCEA4 8C63AE30 */  lw        $v1, %lo(gAnimatedMeshesPtr)($v1)
+/* F1850 802CCEA0 3C03802E */  lui       $v1, %hi(gMeshAnimationsPtr)
+/* F1854 802CCEA4 8C63AE30 */  lw        $v1, %lo(gMeshAnimationsPtr)($v1)
 /* F1858 802CCEA8 00108080 */  sll       $s0, $s0, 2
 /* F185C 802CCEAC 02038021 */  addu      $s0, $s0, $v1
 /* F1860 802CCEB0 8E030000 */  lw        $v1, ($s0)
