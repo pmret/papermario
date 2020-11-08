@@ -54,7 +54,7 @@ s32 func_80145CE8(s32 arg0) {
 
         if ((trigger != NULL) &&
             (trigger->unk_30 != 0) &&
-            (trigger->params2.params == arg0) &&
+            (trigger->params2 == arg0) &&
             (trigger->flags.flags & 0x100)) {
             return 1;
         }

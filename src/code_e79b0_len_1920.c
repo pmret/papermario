@@ -580,8 +580,8 @@ Trigger* bind_trigger(Bytecode* script, s32 flags, s32 triggerFlagIndex, s32 tri
     trigger->scriptStart = script;
     trigger->runningScript = NULL;
     trigger->priority = priority;
-    trigger->scriptVars.w[0] = triggerVar0;
-    trigger->scriptVars.w[1] = triggerVar1;
+    trigger->scriptVars[0] = triggerVar0;
+    trigger->scriptVars[1] = triggerVar1;
     return trigger;
 }
 

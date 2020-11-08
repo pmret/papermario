@@ -58,7 +58,7 @@ ShadowList* get_shadow_list(void) {
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_80110678);
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", get_entity_type);
+INCLUDE_ASM(u32, "code_a5dd0_len_114e0", get_entity_type, s32 arg0);
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", delete_entity);
 
@@ -100,7 +100,7 @@ INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_80111790);
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_801117DC);
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", create_entity);
+INCLUDE_ASM(void, "code_a5dd0_len_114e0", create_entity, void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5);
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", create_shadow_from_data);
 

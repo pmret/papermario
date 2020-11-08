@@ -258,14 +258,6 @@ void func_802E2EB0(struct802E176C* arg0) {
 INCLUDE_ASM(void, "code_102c80", func_802E2EB0, struct802E176C* arg0);
 #endif
 
-s32 D_802E9C8C = 0 ; // TODO: correct data here.
-s32 D_802E9CF8 = 0 ; // TODO: correct data here.
-s32 D_802E9CB0 = 0 ; // TODO: correct data here.
-s32 D_802E9D1C = 0 ; // TODO: correct data here.
-s32 D_802E9CD4 = 0 ; // TODO: correct data here.
-s32 D_802E9D40 = 0 ; // TODO: correct data here.
-s32 D_802E9D64 = 0 ; // TODO: correct data here.
-
 #ifdef NON_MATCHING
 //Needs rodata support
 void func_802E2FD0(struct802E176C* arg0) {
@@ -276,25 +268,25 @@ void func_802E2FD0(struct802E176C* arg0) {
 
     switch(type) {
         case 21:
-            addr = D_802E9C8C;
+            addr = &D_802E9C8C;
             break;
         case 24:
-            addr = D_802E9CF8;
+            addr = &D_802E9CF8;
             break;
         case 22:
-            addr = D_802E9CB0;
+            addr = &D_802E9CB0;
             break;
         case 25:
-            addr = D_802E9D1C;
+            addr = &D_802E9D1C;
             break;
         case 23:
-            addr = D_802E9CD4;
+            addr = &D_802E9CD4;
             break;
         case 26:
-            addr = D_802E9D40;
+            addr = &D_802E9D40;
             break;
         case 13:
-            addr = D_802E9D64;
+            addr = &D_802E9D64;
             break;
         case 14:
         case 15:

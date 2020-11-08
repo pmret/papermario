@@ -102,5 +102,5 @@ void func_802E13B8(Entity *entity) {
     trigger = entity->trigger;
     entity_init_Hammer23Block_normal();
     entity->unk_3C = func_802E0DE0;
-    trigger->params1.bytes.unkParams = 8;
+    trigger->params1.s = 8;
 }
