@@ -13,11 +13,9 @@ MapConfig M(config) = {
     .tattle = MessageID_TATTLE_KMR_12,
 };
 
-Script M(PlayMusic) = {
-    SI_CALL(SetMusicTrack, 0, Song_PLEASANT_PATH, 0, 8),
-    SI_RETURN(),
-    SI_END(),
-};
+Script M(PlayMusic) = SCRIPT({
+    SetMusicTrack(0, Song_PLEASANT_PATH, 0, 8)
+});
 
 ApiStatus GetGoomba(ScriptInstance* script, s32 isInitialCall) {
     script->varTable[0] = get_enemy_safe(NpcId_GOOMBA);

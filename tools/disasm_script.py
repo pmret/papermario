@@ -326,6 +326,11 @@ class UnsupportedScript(Exception):
     pass
 
 class ScriptDSLDisassembler(ScriptDisassembler):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.in_case = False
+
     def var(self, arg):
         if arg in self.symbol_map:
             return self.symbol_map[arg]
@@ -414,63 +419,81 @@ class ScriptDSLDisassembler(ScriptDisassembler):
         elif opcode == 0x13:
             self.indent -= 1
             self.write_line("}")
-        # elif opcode == 0x14:
-        #     self.write_line(f"SI_SWITCH({self.var(argv[0])}),")
-        #     self.indent += 2
+        elif opcode == 0x14:
+            self.write_line(f"match {self.var(argv[0])} {{")
+            self.indent += 2
+            self.in_case = False
         # elif opcode == 0x15:
         #     self.write_line(f"SI_SWITCH_CONST(0x{argv[0]:X}),")
         #     self.indent += 2
-        # elif opcode == 0x16:
-        #     self.indent -= 1
-        #     self.write_line(f"SI_CASE_EQ({self.var(argv[0])}),")
-        #     self.indent += 1
-        # elif opcode == 0x17:
-        #     self.indent -= 1
-        #     self.write_line(f"SI_CASE_NE({self.var(argv[0])}),")
-        #     self.indent += 1
-        # elif opcode == 0x18:
-        #     self.indent -= 1
-        #     self.write_line(f"SI_CASE_LT({self.var(argv[0])}),")
-        #     self.indent += 1
-        # elif opcode == 0x19:
-        #     self.indent -= 1
-        #     self.write_line(f"SI_CASE_GT({self.var(argv[0])}),")
-        #     self.indent += 1
-        # elif opcode == 0x1A:
-        #     self.indent -= 1
-        #     self.write_line(f"SI_CASE_LE({self.var(argv[0])}),")
-        #     self.indent += 1
-        # elif opcode == 0x1B:
-        #     self.indent -= 1
-        #     self.write_line(f"SI_CASE_GE({self.var(argv[0])}),")
-        #     self.indent += 1
-        # elif opcode == 0x1C:
-        #     self.indent -= 1
-        #     self.write_line(f"SI_CASE_DEFAULT(),")
-        #     self.indent += 1
+        elif opcode == 0x16:
+            self.indent -= 1
+            if self.in_case: self.write_line("}")
+            self.in_case = True
+            self.write_line(f"{self.var(argv[0])} {{")
+            self.indent += 1
+        elif opcode == 0x17:
+            self.indent -= 1
+            if self.in_case: self.write_line("}")
+            self.in_case = True
+            self.write_line(f"!= {self.var(argv[0])} {{")
+            self.indent += 1
+        elif opcode == 0x18:
+            self.indent -= 1
+            if self.in_case: self.write_line("}")
+            self.in_case = True
+            self.write_line(f"< {self.var(argv[0])} {{")
+            self.indent += 1
+        elif opcode == 0x19:
+            self.indent -= 1
+            if self.in_case: self.write_line("}")
+            self.in_case = True
+            self.write_line(f"> {self.var(argv[0])} {{")
+            self.indent += 1
+        elif opcode == 0x1A:
+            self.indent -= 1
+            if self.in_case: self.write_line("}")
+            self.in_case = True
+            self.write_line(f"<= {self.var(argv[0])} {{")
+            self.indent += 1
+        elif opcode == 0x1B:
+            self.indent -= 1
+            if self.in_case: self.write_line("}")
+            self.in_case = True
+            self.write_line(f">= {self.var(argv[0])} {{")
+            self.indent += 1
+        elif opcode == 0x1C:
+            self.indent -= 1
+            if self.in_case: self.write_line("}")
+            self.in_case = True
+            self.write_line(f"else {{")
+            self.indent += 1
         # elif opcode == 0x1D:
         #     self.indent -= 1
         #     self.write_line(f"SI_CASE_OR_EQ({self.var(argv[0])}),")
         #     self.indent += 1
-        # # opcode 0x1E?
-        # elif opcode == 0x1F:
-        #     self.indent -= 1
-        #     self.write_line(f"SI_CASE_BITS_ON({self.var(argv[0])}),")
-        #     self.indent += 1
+        # opcode 0x1E?
+        elif opcode == 0x1F:
+            self.indent -= 1
+            self.write_line(f"& {self.var(argv[0])}")
+            self.indent += 1
         # elif opcode == 0x20:
         #     self.indent -= 1
         #     self.write_line(f"SI_END_MULTI_CASE(),")
         #     self.indent += 1
-        # elif opcode == 0x21:
-        #     self.indent -= 1
-        #     self.write_line(f"case {self.var(argv[0])}..{self.var(argv[1])}:")
-        #     self.indent += 1
-        # elif opcode == 0x22: self.write_line("break")
-        # elif opcode == 0x23:
-        #     self.indent -= 2
-        #     self.write_line("}")
+        elif opcode == 0x21:
+            self.indent -= 1
+            self.write_line(f"{self.var(argv[0])}..{self.var(argv[1])} {{")
+            self.indent += 1
+        elif opcode == 0x22: self.write_line("break")
+        elif opcode == 0x23:
+            self.indent -= 1
+            if self.in_case: self.write_line("}")
+            self.in_case = False
+            self.indent -= 1
+            self.write_line("}")
         elif opcode == 0x24: self.write_line(f"{self.var(argv[0])} = {self.var(argv[1])}")
-        elif opcode == 0x25: self.write_line(f"const {self.var(argv[0])} = 0x{argv[1]:X}")
+        #elif opcode == 0x25: self.write_line(f"{self.var(argv[0])} #= 0x{argv[1]:X}")
         elif opcode == 0x26: self.write_line(f"{self.var(argv[0])} = {self.verify_float(self.var(argv[1]))}")
         elif opcode == 0x27: self.write_line(f"{self.var(argv[0])} += {self.var(argv[1])}")
         elif opcode == 0x28: self.write_line(f"{self.var(argv[0])} -= {self.var(argv[1])}")
@@ -483,8 +506,8 @@ class ScriptDSLDisassembler(ScriptDisassembler):
         elif opcode == 0x2F: self.write_line(f"{self.var(argv[0])} /= {self.verify_float(self.var(argv[1]))}")
         elif opcode == 0x3F: self.write_line(f"{self.var(argv[0])} &= {self.var(argv[1])}")
         elif opcode == 0x40: self.write_line(f"{self.var(argv[0])} |= {self.var(argv[1])}")
-        elif opcode == 0x41: self.write_line(f"const {self.var(argv[0])} &= {argv[1]:X})")
-        elif opcode == 0x42: self.write_line(f"const {self.var(argv[0])} |= {argv[1]:X})")
+        #elif opcode == 0x41: self.write_line(f"{self.var(argv[0])} #&= {argv[1]:X})")
+        #elif opcode == 0x42: self.write_line(f"{self.var(argv[0])} #|= {argv[1]:X})")
         elif opcode == 0x43:
             argv_str = ", ".join(self.var(arg) for arg in argv[1:])
             self.write_line(f"{self.addr_ref(argv[0])}({argv_str})")

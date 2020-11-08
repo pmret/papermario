@@ -5,6 +5,8 @@ from lark import Lark, exceptions, Tree, Transformer, Visitor, v_args, Token
 from lark.visitors import Discard
 import traceback
 
+DEBUG_OUTPUT = None
+
 def eprint(*args, **kwargs):
     print(*args, file=stderr, **kwargs)
 
@@ -13,6 +15,9 @@ def write(s):
     #global write_buf
     #write_buf += s
     print(s, end="")
+
+    if DEBUG_OUTPUT:
+        print(s, file=DEBUG_OUTPUT, end="")
 
 ANSI_RED = "\033[1;31;40m"
 ANSI_RESET = "\u001b[0m"
@@ -26,12 +31,16 @@ def pairs(seq):
 
 script_parser = Lark(r"""
 
-    block: "{" NEWLINE* (stmt STMT_SEP)* NEWLINE* "}"
+    block: "{" NEWLINE* (_block STMT_SEP*)? "}"
+
+    _block: stmt STMT_SEP _block
+          | stmt
 
     ?stmt: call
          | label ":" [stmt]     -> label_decl
          | "goto" label         -> label_goto
          | if_stmt
+         | match_stmt
          | "return"             -> return_stmt
          | "break"              -> break_stmt
          | "sleep" expr         -> sleep_stmt
@@ -40,7 +49,6 @@ script_parser = Lark(r"""
          | "await" expr         -> await_stmt
          | lhs "=" "spawn" expr -> spawn_set_stmt
          | lhs set_op expr      -> set_stmt
-         | "const" lhs set_op expr -> set_const_stmt
          | bind_stmt
          | bind_set_stmt
          | "unbind"             -> unbind_stmt
@@ -63,6 +71,18 @@ script_parser = Lark(r"""
           | "<" -> if_op_lt
           | ">=" -> if_op_ge
           | "<=" -> if_op_le
+
+    match_stmt: "match" expr "{" NEWLINE* (match_block STMT_SEP*)? "}"
+    match_block: match_case STMT_SEP match_block
+               | match_case
+    match_case: "else" block -> case_else
+              | "=="? expr block -> case_eq
+              | "!=" expr block -> case_ne
+              | ">" expr block -> case_gt
+              | "<" expr block -> case_lt
+              | ">=" expr block -> case_gt
+              | "<=" expr block -> case_lt
+              | "?" expr block -> case_flag
 
     suspend_stmt: "suspend" control_type expr ("," control_type expr)* [","]
     resume_stmt: "resume" control_type expr ("," control_type expr)* [","]
@@ -94,9 +114,6 @@ script_parser = Lark(r"""
            | "%=" -> set_op_mod
            | "&=" -> set_op_and
            | "|=" -> set_op_or
-           | ":=" -> set_op_eq_const
-           | ":&=" -> set_op_and_const
-           | ":|=" -> set_op_or_const
 
     c_const_expr: c_const_expr_internal
     c_const_expr_internal: "(" (c_const_expr_internal | NOT_PARENS)+ ")"
@@ -176,7 +193,7 @@ class RootCtx(CmdCtx):
 class IfCtx(CmdCtx):
     pass
 
-class SwitchCtx(CmdCtx):
+class MatchCtx(CmdCtx):
     def break_opcode(self, meta):
         return 0x22
 
@@ -262,7 +279,7 @@ class Compile(Transformer):
         # flatten children list
         flat = []
         for node in tree.children:
-            if type(node) == list:
+            if type(node) is list:
                 flat += node
             elif isinstance(node, BaseCmd):
                 flat.append(node)
@@ -271,6 +288,11 @@ class Compile(Transformer):
             else:
                 raise Exception(f"block statment {type(node)} is not a BaseCmd: {node}")
         return flat
+    def _block(self, tree):
+        if len(tree.children) == 1:
+            return [tree.children[0]]
+        else:
+            return [tree.children[0], *tree.children[2]]
 
     def call(self, tree):
         # TODO: type checking etc
@@ -288,6 +310,43 @@ class Compile(Transformer):
     def if_op_gt(self, tree): return 0x0D
     def if_op_le(self, tree): return 0x0E
     def if_op_ge(self, tree): return 0x0F
+
+    def match_stmt(self, tree):
+        expr = tree.children[0]
+
+        cases = []
+        for node in tree.children[1:]:
+            if type(node) is list:
+                for el in node:
+                    if type(el) is list:
+                        cases += el
+                    else:
+                        cases.append(el)
+
+        for cmd in cases:
+            if isinstance(cmd, BaseCmd):
+                cmd.add_context(MatchCtx())
+            else:
+                raise Exception(f"uncompiled match case: {cmd}")
+
+        return [
+            Cmd(0x14, expr, meta=tree.meta),
+            *cases,
+            Cmd(0x24),
+        ]
+    def match_block(self, tree):
+        if len(tree.children) == 1:
+            return [tree.children[0]]
+        else:
+            return [tree.children[0], *tree.children[2]]
+    def case_eq(self, tree): return [Cmd(0x16, tree.children[0]), *tree.children[1]]
+    def case_ne(self, tree): return [Cmd(0x17, tree.children[0]), *tree.children[1]]
+    def case_lt(self, tree): return [Cmd(0x18, tree.children[0]), *tree.children[1]]
+    def case_gt(self, tree): return [Cmd(0x19, tree.children[0]), *tree.children[1]]
+    def case_le(self, tree): return [Cmd(0x1A, tree.children[0]), *tree.children[1]]
+    def case_ge(self, tree): return [Cmd(0x1B, tree.children[0]), *tree.children[1]]
+    def case_else(self, tree): return [Cmd(0x1C), *tree.children[0]]
+    def case_flag(self, tree): return [Cmd(0x1F, tree.children[0]), *tree.children[1]]
 
     def loop_stmt(self, tree):
         expr = tree.children.pop(0) if len(tree.children) > 1 else 0
@@ -400,12 +459,12 @@ class Compile(Transformer):
             if not opcode:
                 raise CompileError(f"operation `{opcodes['__op__']}' not supported for ints", tree.meta)
         return Cmd(opcode, lhs, rhs)
-    def set_const_stmt(self, tree):
-        lhs, opcodes, rhs = tree.children
-        opcode = opcodes.get("const", None)
-        if not opcode:
-            raise CompileError(f"operation `{opcodes['__op__']}' not supported for consts", tree.meta)
-        return Cmd(opcode, lhs, rhs)
+    # def set_const_stmt(self, tree):
+    #     lhs, opcodes, rhs = tree.children
+    #     opcode = opcodes.get("const", None)
+    #     if not opcode:
+    #         raise CompileError(f"operation `{opcodes['__op__']}' not supported for consts", tree.meta)
+    #     return Cmd(opcode, lhs, rhs)
     def set_op_eq(self, tree):
         return {
             "__op__": "=",
@@ -581,6 +640,9 @@ def gen_line_map(source, source_line_no = 1):
 
 # Expects output from C preprocessor on argv
 if __name__ == "__main__":
+    if DEBUG_OUTPUT is not None:
+        DEBUG_OUTPUT = open(DEBUG_OUTPUT, "w")
+
     line_no = 1
     char_no = 1
     file_info = []
