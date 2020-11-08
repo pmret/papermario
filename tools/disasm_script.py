@@ -475,7 +475,7 @@ class ScriptDSLDisassembler(ScriptDisassembler):
         # opcode 0x1E?
         elif opcode == 0x1F:
             self.indent -= 1
-            self.write_line(f"& {self.var(argv[0])}")
+            self.write_line(f"? {self.var(argv[0])}")
             self.indent += 1
         # elif opcode == 0x20:
         #     self.indent -= 1

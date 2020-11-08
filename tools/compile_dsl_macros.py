@@ -64,25 +64,24 @@ script_parser = Lark(r"""
 
     call: CNAME "(" [expr ("," expr)* [","]] ")"
 
-    if_stmt: "if" expr if_op expr block ["else" block]
-    ?if_op: "==" -> if_op_eq
-          | "!=" -> if_op_ne
-          | ">" -> if_op_gt
-          | "<" -> if_op_lt
-          | ">=" -> if_op_ge
-          | "<=" -> if_op_le
+    if_stmt: "if" expr cond_op expr block ["else" block]
 
-    match_stmt: "match" expr "{" NEWLINE* (match_block STMT_SEP*)? "}"
-    match_block: match_case STMT_SEP match_block
+    ?cond_op: "==" -> cond_op_eq
+           | "!=" -> cond_op_ne
+           | ">" -> cond_op_gt
+           | "<" -> cond_op_lt
+           | ">=" -> cond_op_ge
+           | "<=" -> cond_op_le
+           | "?" -> cond_op_flag
+
+    match_stmt: "match" expr "{" NEWLINE* (match_cases STMT_SEP*)? "}"
+    match_cases: match_case STMT_SEP* match_cases
                | match_case
-    match_case: "else" block -> case_else
-              | "=="? expr block -> case_eq
-              | "!=" expr block -> case_ne
-              | ">" expr block -> case_gt
-              | "<" expr block -> case_lt
-              | ">=" expr block -> case_gt
-              | "<=" expr block -> case_lt
-              | "?" expr block -> case_flag
+    ?match_case: "else" block -> case_else
+               | cond_op expr ["," multi_case] block -> case_op
+               | expr ".." expr ["," multi_case] block -> case_range
+               | multi_case block -> case_multi
+    multi_case: expr ("," expr)*
 
     suspend_stmt: "suspend" control_type expr ("," control_type expr)* [","]
     resume_stmt: "resume" control_type expr ("," control_type expr)* [","]
@@ -95,7 +94,7 @@ script_parser = Lark(r"""
     bind_set_stmt: lhs "=" "bind" expr "to" expr expr
 
     loop_stmt: "loop" [expr] block
-    loop_until_stmt: "loop" block "until" expr if_op expr
+    loop_until_stmt: "loop" block "until" expr cond_op expr
 
     ?expr: c_const_expr
          | ESCAPED_STRING
@@ -303,13 +302,15 @@ class Compile(Transformer):
         for cmd in block:
             if isinstance(cmd, BaseCmd):
                 cmd.add_context(IfCtx())
-        return [ Cmd(op, a, b, meta=tree.meta), *block, Cmd(0x13) ]
-    def if_op_eq(self, tree): return 0x0A
-    def if_op_ne(self, tree): return 0x0B
-    def if_op_lt(self, tree): return 0x0C
-    def if_op_gt(self, tree): return 0x0D
-    def if_op_le(self, tree): return 0x0E
-    def if_op_ge(self, tree): return 0x0F
+        return [ Cmd(op["if"], a, b, meta=tree.meta), *block, Cmd(0x13) ]
+
+    def cond_op_eq(self, tree): return { "if": 0x0A, "case": 0x16 }
+    def cond_op_ne(self, tree): return { "if": 0x0B, "case": 0x17 }
+    def cond_op_lt(self, tree): return { "if": 0x0C, "case": 0x18 }
+    def cond_op_gt(self, tree): return { "if": 0x0D, "case": 0x19 }
+    def cond_op_le(self, tree): return { "if": 0x0E, "case": 0x1A }
+    def cond_op_ge(self, tree): return { "if": 0x0F, "case": 0x1B }
+    def cond_op_flag(self, tree): return { "if": 0x10, "case": 0x1F }
 
     def match_stmt(self, tree):
         expr = tree.children[0]
@@ -318,6 +319,7 @@ class Compile(Transformer):
         for node in tree.children[1:]:
             if type(node) is list:
                 for el in node:
+                    eprint(el)
                     if type(el) is list:
                         cases += el
                     else:
@@ -334,19 +336,34 @@ class Compile(Transformer):
             *cases,
             Cmd(0x24),
         ]
-    def match_block(self, tree):
+    def match_cases(self, tree):
         if len(tree.children) == 1:
             return [tree.children[0]]
         else:
             return [tree.children[0], *tree.children[2]]
-    def case_eq(self, tree): return [Cmd(0x16, tree.children[0]), *tree.children[1]]
-    def case_ne(self, tree): return [Cmd(0x17, tree.children[0]), *tree.children[1]]
-    def case_lt(self, tree): return [Cmd(0x18, tree.children[0]), *tree.children[1]]
-    def case_gt(self, tree): return [Cmd(0x19, tree.children[0]), *tree.children[1]]
-    def case_le(self, tree): return [Cmd(0x1A, tree.children[0]), *tree.children[1]]
-    def case_ge(self, tree): return [Cmd(0x1B, tree.children[0]), *tree.children[1]]
-    def case_else(self, tree): return [Cmd(0x1C), *tree.children[0]]
-    def case_flag(self, tree): return [Cmd(0x1F, tree.children[0]), *tree.children[1]]
+
+    def case_else(self, tree):
+        return [Cmd(0x1C), *tree.children[0]]
+    def case_op(self, tree):
+        if len(tree.children) == 4:
+            op, expr, multi_case, block = tree.children
+            return [Cmd(op["case"], expr), *multi_case, *block, Cmd(0x20)]
+        else:
+            op, expr, block = tree.children
+            return [Cmd(op["case"], expr), *block]
+    def case_range(self, tree):
+        if len(tree.children) == 4:
+            a, b, multi_case, block = tree.children
+            return [Cmd(0x21, a, b), *multi_case, *block, Cmd(0x20)]
+        else:
+            a, b, block = tree.children
+            return [Cmd(0x21, a, b), *block]
+    def case_multi(self, tree):
+        multi_case, block = tree.children
+        return [*multi_case, *block, Cmd(0x20)]
+
+    def multi_case(self, tree):
+        return [Cmd(0x1D, expr) for expr in tree.children]
 
     def loop_stmt(self, tree):
         expr = tree.children.pop(0) if len(tree.children) > 1 else 0
@@ -371,7 +388,7 @@ class Compile(Transformer):
         return [
             Cmd(0x03, label, meta=tree.meta), # label:
             *block,
-            Cmd(op, a, b, meta=tree.meta), # if a op b
+            Cmd(op["if"], a, b, meta=tree.meta), # if a op b
             Cmd(0x04, label, meta=tree.meta), # goto label
             Cmd(0x13, meta=tree.meta), # end if
         ]
