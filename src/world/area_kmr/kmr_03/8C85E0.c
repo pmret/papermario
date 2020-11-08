@@ -43,7 +43,7 @@ Script M(Script_80242340) = SCRIPT({
     SetPlayerAnimation(0x10002)
     SetPlayerPos(0xFFFFFF20, 120, 0xFFFFFFB0)
     InterpPlayerYaw(90, 0)
-    0:
+0:
     sleep 1
     GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2))
     SI_VAR(1) += 0xFFFFFFFE

@@ -15,25 +15,9 @@ ApiStatus func_802401B0_8C8140(ScriptInstance* script, s32 isInitialCall) {
 #include "world/common/UnkPositionFunc.inc.c"
 
 // 8C8680
-Script M(ExitWalk_802406F0) = /*{
-    SI_GROUP(27),
-    SI_CALL(0x802D216C, 60, 0),
-    SI_EXEC(0x80285CF4),
-    SI_CALL(0x802CA400, "kmr_04", 0),
-    SI_WAIT_FRAMES(100),
-    SI_RETURN(),
-    SI_END(),
-};*/EXIT_WALK_SCRIPT(60, 0, "kmr_04", 0);
+Script M(ExitWalk_802406F0) = EXIT_WALK_SCRIPT(60, 0, "kmr_04", 0);
 
-Script M(ExitWalk_8024074C) = /*{
-    SI_GROUP(27),
-    SI_CALL(0x802D216C, 60, 1),
-    SI_EXEC(0x80285CF4),
-    SI_CALL(0x802CA400, "kmr_05", 0),
-    SI_WAIT_FRAMES(100),
-    SI_RETURN(),
-    SI_END(),
-};*/EXIT_WALK_SCRIPT(60, 1, "kmr_05", 0);
+Script M(ExitWalk_8024074C) = EXIT_WALK_SCRIPT(60, 1, "kmr_05", 0);
 
 Script M(Script_802407A8) = SCRIPT({
     bind M(ExitWalk_802406F0) to 0x80000 3
@@ -73,9 +57,9 @@ s32 M(npcSettings_80240950)[] = {
 };
 
 Script M(Script_8024097C) = SCRIPT({
-    1:
+1:
     if SI_AREA_FLAG(8) == 1 {
-        100:
+100:
         AwaitPlayerLeave(294, 123, 170)
         EnableNpcAI(0, 0)
         DisablePlayerInput(1)
@@ -102,10 +86,10 @@ Script M(Script_8024097C) = SCRIPT({
 });
 
 Script M(NpcAI_80240B50) = SCRIPT({
-    1:
+1:
     match SI_SAVE_VAR(0) {
         == 0xFFFFFF86 {
-            89:
+89:
             UnkPositionFunc(0xFFFFFF8A, 86, 0xFFFFFFBA, 0xFFFFFFF1)
             sleep 1
             if SI_VAR(0) == 0 {
@@ -246,7 +230,7 @@ Script M(Script_802414A8) = SCRIPT({
 });
 
 Script M(Script_802414C8) = SCRIPT({
-    0:
+0:
     GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2))
     SetCamTarget(0, SI_VAR(0), SI_VAR(1), SI_VAR(2))
     sleep 1
