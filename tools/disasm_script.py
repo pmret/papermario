@@ -38,7 +38,9 @@ def script_lib():
         # symbol_addrs.txt
         with open(Path(path.dirname(__file__), "symbol_addrs.txt"), "r") as file:
             for line in file.readlines():
-                s = line.split(";")
+                line = line.split(";")[0]
+
+                s = [s.strip() for s in line.split("=", 1)]
                 name = s[0]
                 addr = s[1]
                 _script_lib[int(addr, 16)] = name
