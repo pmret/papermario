@@ -716,6 +716,8 @@ typedef struct AnimatedMesh {
     /* 0x2D0 */ char unk_2D0[16];
 } AnimatedMesh; // size = 0x2E0
 
+typedef AnimatedMesh* AnimatedMeshList[MAX_ANIMATED_MESHES];
+
 typedef struct PrintHandle {
     /* 0x000 */ char unk_00[16];
     /* 0x010 */ s8* printbuf; /* Created by retype action */
@@ -1169,6 +1171,8 @@ typedef struct AnimatedModel {
     /* 0x68 */ u32 currentAnimData;
     /* 0x6C */ char unk_6C[4];
 } AnimatedModel; // size = 0x70
+
+typedef AnimatedModel* AnimatedModelList[MAX_ANIMATED_MODELS];
 
 typedef struct CollisionHeader {
     /* 0x00 */ s16 numColliders;

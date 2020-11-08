@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel func_8011E5E0
-/* B4CE0 8011E5E0 3C038015 */  lui       $v1, 0x8015
-/* B4CE4 8011E5E4 8C633A40 */  lw        $v1, 0x3a40($v1)
+/* B4CE0 8011E5E0 3C038015 */  lui       $v1, %hi(gCurrentAnimMeshListPtr)
+/* B4CE4 8011E5E4 8C633A40 */  lw        $v1, %lo(gCurrentAnimMeshListPtr)($v1)
 /* B4CE8 8011E5E8 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* B4CEC 8011E5EC AFB10014 */  sw        $s1, 0x14($sp)
 /* B4CF0 8011E5F0 0080882D */  daddu     $s1, $a0, $zero
@@ -31,8 +31,8 @@ glabel func_8011E5E0
 /* B4D38 8011E638 0C00AB39 */  jal       heap_malloc
 /* B4D3C 8011E63C 240402E0 */   addiu    $a0, $zero, 0x2e0
 /* B4D40 8011E640 00102080 */  sll       $a0, $s0, 2
-/* B4D44 8011E644 3C038015 */  lui       $v1, 0x8015
-/* B4D48 8011E648 8C633A40 */  lw        $v1, 0x3a40($v1)
+/* B4D44 8011E644 3C038015 */  lui       $v1, %hi(gCurrentAnimMeshListPtr)
+/* B4D48 8011E648 8C633A40 */  lw        $v1, %lo(gCurrentAnimMeshListPtr)($v1)
 /* B4D4C 8011E64C 3C058015 */  lui       $a1, 0x8015
 /* B4D50 8011E650 24A512D4 */  addiu     $a1, $a1, 0x12d4
 /* B4D54 8011E654 00832021 */  addu      $a0, $a0, $v1

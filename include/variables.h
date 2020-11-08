@@ -87,10 +87,13 @@ extern s32 D_802DB264;
 extern PrintContext* D_802DB268;
 
 // Animation related
+extern AnimatedMeshList* gCurrentAnimMeshListPtr;
+
 extern PartnerAnimations gPartnerAnimations[12];
-extern AnimatedModel* gBattleMeshAnimations[16];
-extern AnimatedModel* gWorldMeshAnimations[16];
-extern AnimatedModel** gMeshAnimationsPtr;
+
+extern AnimatedModelList gBattleMeshAnimationList;
+extern AnimatedModelList gWorldMeshAnimationList;
+extern AnimatedModelList* gCurrentMeshAnimationListPtr;
 
 // Triggers
 extern s16 gTriggerCount;

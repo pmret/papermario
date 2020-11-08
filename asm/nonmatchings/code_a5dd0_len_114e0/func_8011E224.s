@@ -9,8 +9,8 @@ glabel func_8011E224
 /* B4934 8011E234 2404FFFF */   addiu    $a0, $zero, -1
 /* B4938 8011E238 3C028015 */  lui       $v0, 0x8015
 /* B493C 8011E23C 244239C0 */  addiu     $v0, $v0, 0x39c0
-/* B4940 8011E240 3C018015 */  lui       $at, 0x8015
-/* B4944 8011E244 AC223A40 */  sw        $v0, 0x3a40($at)
+/* B4940 8011E240 3C018015 */  lui       $at, %hi(gCurrentAnimMeshListPtr)
+/* B4944 8011E244 AC223A40 */  sw        $v0, %lo(gCurrentAnimMeshListPtr)($at)
 /* B4948 8011E248 2403005F */  addiu     $v1, $zero, 0x5f
 /* B494C 8011E24C 3C028015 */  lui       $v0, 0x8015
 /* B4950 8011E250 244236B8 */  addiu     $v0, $v0, 0x36b8
@@ -33,11 +33,11 @@ glabel func_8011E224
 .L8011E28C:
 /* B498C 8011E28C 3C028015 */  lui       $v0, 0x8015
 /* B4990 8011E290 24423A00 */  addiu     $v0, $v0, 0x3a00
-/* B4994 8011E294 3C018015 */  lui       $at, 0x8015
-/* B4998 8011E298 AC223A40 */  sw        $v0, 0x3a40($at)
+/* B4994 8011E294 3C018015 */  lui       $at, %hi(gCurrentAnimMeshListPtr)
+/* B4998 8011E298 AC223A40 */  sw        $v0, %lo(gCurrentAnimMeshListPtr)($at)
 .L8011E29C:
-/* B499C 8011E29C 3C028015 */  lui       $v0, 0x8015
-/* B49A0 8011E2A0 8C423A40 */  lw        $v0, 0x3a40($v0)
+/* B499C 8011E29C 3C028015 */  lui       $v0, %hi(gCurrentAnimMeshListPtr)
+/* B49A0 8011E2A0 8C423A40 */  lw        $v0, %lo(gCurrentAnimMeshListPtr)($v0)
 /* B49A4 8011E2A4 2403000F */  addiu     $v1, $zero, 0xf
 /* B49A8 8011E2A8 2442003C */  addiu     $v0, $v0, 0x3c
 .L8011E2AC:

@@ -194,9 +194,11 @@ gWorldModelList = 0x80151770;
 gBattleModelList = 0x80151B70;
 gCurrentModelListPtr = 0x801512CC;
 
-gWorldModelSpecialDls = 0x8015F90;
-gBattleModelSpecialDls = 0x80152010;
+gCurrentAnimMeshListPtr = 0x80153A40;
+
 gCurrentModelSpecialDlsPtr = 0x801512E8;
+gWorldModelSpecialDls = 0x80151F90;
+gBattleModelSpecialDls = 0x80152010;
 
 gWorldEntityList = 0x80151380;
 gBattleEntityList = 0x801513F8;
@@ -230,9 +232,9 @@ gCurrentSaveFile = 0x800DACC0;
 gMapFlags = 0x802DA480;
 gMapVars = 0x802DA484;
 
-gBattleMeshAnimations = 0x802DADB0;
-gWorldMeshAnimations = 0x802DADF0;
-gMeshAnimationsPtr = 0x802DAE30;
+gBattleMeshAnimationList = 0x802DADB0;
+gWorldMeshAnimationList = 0x802DADF0;
+gCurrentMeshAnimationListPtr = 0x802DAE30;
 
 gEffectTable = 0x8007F214;
 

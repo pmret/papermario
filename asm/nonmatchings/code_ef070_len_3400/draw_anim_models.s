@@ -28,8 +28,8 @@ glabel draw_anim_models
 /* F1524 802CCB74 AFB00220 */  sw        $s0, 0x220($sp)
 /* F1528 802CCB78 AFA80218 */  sw        $t0, 0x218($sp)
 .L802CCB7C:
-/* F152C 802CCB7C 3C02802E */  lui       $v0, %hi(gMeshAnimationsPtr)
-/* F1530 802CCB80 8C42AE30 */  lw        $v0, %lo(gMeshAnimationsPtr)($v0)
+/* F152C 802CCB7C 3C02802E */  lui       $v0, %hi(gCurrentMeshAnimationListPtr)
+/* F1530 802CCB80 8C42AE30 */  lw        $v0, %lo(gCurrentMeshAnimationListPtr)($v0)
 /* F1534 802CCB84 00131880 */  sll       $v1, $s3, 2
 /* F1538 802CCB88 00621821 */  addu      $v1, $v1, $v0
 /* F153C 802CCB8C 8C710000 */  lw        $s1, ($v1)

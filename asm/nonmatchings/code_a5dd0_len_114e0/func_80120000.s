@@ -4,8 +4,8 @@
 glabel func_80120000
 /* B6700 80120000 2402F7FF */  addiu     $v0, $zero, -0x801
 /* B6704 80120004 00822024 */  and       $a0, $a0, $v0
-/* B6708 80120008 3C028015 */  lui       $v0, 0x8015
-/* B670C 8012000C 8C423A40 */  lw        $v0, 0x3a40($v0)
+/* B6708 80120008 3C028015 */  lui       $v0, %hi(gCurrentAnimMeshListPtr)
+/* B670C 8012000C 8C423A40 */  lw        $v0, %lo(gCurrentAnimMeshListPtr)($v0)
 /* B6710 80120010 00042080 */  sll       $a0, $a0, 2
 /* B6714 80120014 00822021 */  addu      $a0, $a0, $v0
 /* B6718 80120018 8C820000 */  lw        $v0, ($a0)
