@@ -95,6 +95,15 @@ extern s32 D_802E99DC;
 extern f64 D_802EB000;
 extern f64 D_802EB008;
 
+extern UNK_TYPE D_0A0031E0;
+extern UNK_TYPE D_0A001508;
+extern UNK_TYPE D_0A0031B0;
+extern UNK_TYPE D_0A0014D8;
+extern UNK_TYPE D_0A002F78;
+extern UNK_TYPE D_0A001218;
+extern UNK_TYPE D_0A003F70;
+extern UNK_TYPE D_0A002318;
+
 // Triggers
 extern s16 gTriggerCount;
 extern TriggerList gTriggerList1;

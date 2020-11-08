@@ -208,13 +208,13 @@ typedef union {
 
 typedef struct Trigger {
     /* 0x00 */ TriggerFlags flags;
-    /* 0x04 */ TriggerParams params1;
+    /* 0x04 */ TriggerParams params1; // TODO: remove TriggerParams
     /* 0x08 */ TriggerParams params2;
     /* 0x0C */ UNK_FUN_PTR(functionHandler);
     /* 0x10 */ Bytecode* scriptStart;
     /* 0x14 */ struct ScriptInstance* runningScript;
     /* 0x18 */ s32 priority;
-    /* 0x1C */ ScriptVariables scriptVars;
+    /* 0x1C */ ScriptVariables scriptVars; // TODO: remove ScriptVariables
     /* 0x28 */ char unk_2C[8];
     /* 0x30 */ u8 unk_30;
     /* 0x31 */ char unk_31[3];
