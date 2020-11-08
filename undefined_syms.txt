@@ -229,6 +229,7 @@ gCurrentSaveFile = 0x800DACC0;
 
 gMapFlags = 0x802DA480;
 gMapVars = 0x802DA484;
+gAnimatedMeshesPtr = 0x802DAE30;
 
 gEffectTable = 0x8007F214;
 

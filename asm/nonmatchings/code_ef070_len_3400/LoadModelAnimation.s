@@ -17,8 +17,8 @@ glabel LoadModelAnimation
 /* F16CC 802CCD1C 0C0B1EAF */  jal       get_variable
 /* F16D0 802CCD20 0040802D */   daddu    $s0, $v0, $zero
 /* F16D4 802CCD24 0040902D */  daddu     $s2, $v0, $zero
-/* F16D8 802CCD28 3C02802E */  lui       $v0, 0x802e
-/* F16DC 802CCD2C 8C42AE30 */  lw        $v0, -0x51d0($v0)
+/* F16D8 802CCD28 3C02802E */  lui       $v0, %hi(gAnimatedMeshesPtr)
+/* F16DC 802CCD2C 8C42AE30 */  lw        $v0, %lo(gAnimatedMeshesPtr)($v0)
 /* F16E0 802CCD30 00108080 */  sll       $s0, $s0, 2
 /* F16E4 802CCD34 02028021 */  addu      $s0, $s0, $v0
 /* F16E8 802CCD38 8E100000 */  lw        $s0, ($s0)

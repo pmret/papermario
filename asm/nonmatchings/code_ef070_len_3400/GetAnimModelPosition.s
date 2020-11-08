@@ -15,8 +15,8 @@ glabel GetAnimModelPosition
 /* F1A68 802CD0B8 26100004 */   addiu    $s0, $s0, 4
 /* F1A6C 802CD0BC 8E050000 */  lw        $a1, ($s0)
 /* F1A70 802CD0C0 26100004 */  addiu     $s0, $s0, 4
-/* F1A74 802CD0C4 3C03802E */  lui       $v1, 0x802e
-/* F1A78 802CD0C8 8C63AE30 */  lw        $v1, -0x51d0($v1)
+/* F1A74 802CD0C4 3C03802E */  lui       $v1, %hi(gAnimatedMeshesPtr)
+/* F1A78 802CD0C8 8C63AE30 */  lw        $v1, %lo(gAnimatedMeshesPtr)($v1)
 /* F1A7C 802CD0CC 00021080 */  sll       $v0, $v0, 2
 /* F1A80 802CD0D0 00431021 */  addu      $v0, $v0, $v1
 /* F1A84 802CD0D4 8C510000 */  lw        $s1, ($v0)

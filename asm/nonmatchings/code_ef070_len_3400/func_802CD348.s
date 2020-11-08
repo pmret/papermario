@@ -15,8 +15,8 @@ glabel func_802CD348
 /* F1D20 802CD370 8E050000 */  lw        $a1, ($s0)
 /* F1D24 802CD374 0C0B210B */  jal       get_float_variable
 /* F1D28 802CD378 0040802D */   daddu    $s0, $v0, $zero
-/* F1D2C 802CD37C 3C02802E */  lui       $v0, 0x802e
-/* F1D30 802CD380 8C42AE30 */  lw        $v0, -0x51d0($v0)
+/* F1D2C 802CD37C 3C02802E */  lui       $v0, %hi(gAnimatedMeshesPtr)
+/* F1D30 802CD380 8C42AE30 */  lw        $v0, %lo(gAnimatedMeshesPtr)($v0)
 /* F1D34 802CD384 00108080 */  sll       $s0, $s0, 2
 /* F1D38 802CD388 02028021 */  addu      $s0, $s0, $v0
 /* F1D3C 802CD38C 8E020000 */  lw        $v0, ($s0)

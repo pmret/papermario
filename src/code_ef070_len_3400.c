@@ -57,15 +57,13 @@ ApiStatus func_802CA90C(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_ef070_len_3400", func_802CA988, ScriptInstance* script, s32 isInitialCall);
-/*
 ApiStatus func_802CA988(ScriptInstance* script, s32 isInitialCall) {
-    Bytecode* ptrReadPos = script->ptrReadPos;
-    Bytecode id = get_variable(script, *ptrReadPos++);
-    Bytecode outVar1 = *ptrReadPos++;
-    Bytecode outVar2 = *ptrReadPos++;
-    Bytecode outVar3 = *ptrReadPos++;
-    Bytecode outVar4 = *ptrReadPos++;
+    Bytecode* args = script->ptrReadPos;
+    Bytecode id = get_variable(script, *args++);
+    Bytecode outVar1 = *args++;
+    Bytecode outVar2 = *args++;
+    Bytecode outVar3 = *args++;
+    Bytecode outVar4 = *args++;
     f32 temp1, temp2, temp3;
 
     CAM(id)->mode = 2;
@@ -77,7 +75,7 @@ ApiStatus func_802CA988(ScriptInstance* script, s32 isInitialCall) {
     temp2 = CAM(id)->lookAt_obj.y - CAM(id)->lookAt_eye[1];
     temp3 = CAM(id)->lookAt_obj.z - CAM(id)->lookAt_eye[2];
 
-    CAM(id)->unk_20 = round(sqrtf((temp1 * temp1) + (temp2 * temp2) + (temp3 * temp3)));
+    CAM(id)->unk_20 = round(sqrtf(SQ(temp1) + SQ(temp2) + SQ(temp3)));
     CAM(id)->unk_22 = 0;
     CAM(id)->unk_54 = CAM(id)->lookAt_obj.x;
     CAM(id)->unk_58 = CAM(id)->lookAt_obj.y;
@@ -89,7 +87,6 @@ ApiStatus func_802CA988(ScriptInstance* script, s32 isInitialCall) {
     set_variable(script, outVar4, CAM(id)->unk_22);
     return ApiStatus_DONE2;
 }
-*/
 
 ApiStatus SetCamViewport(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

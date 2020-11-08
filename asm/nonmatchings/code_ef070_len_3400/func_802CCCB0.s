@@ -15,7 +15,7 @@ glabel func_802CCCB0
 /* F1684 802CCCD4 3C02802E */  lui       $v0, 0x802e
 /* F1688 802CCCD8 2442ADB0 */  addiu     $v0, $v0, -0x5250
 .L802CCCDC:
-/* F168C 802CCCDC 3C01802E */  lui       $at, 0x802e
-/* F1690 802CCCE0 AC22AE30 */  sw        $v0, -0x51d0($at)
+/* F168C 802CCCDC 3C01802E */  lui       $at, %hi(gAnimatedMeshesPtr)
+/* F1690 802CCCE0 AC22AE30 */  sw        $v0, %lo(gAnimatedMeshesPtr)($at)
 /* F1694 802CCCE4 03E00008 */  jr        $ra
 /* F1698 802CCCE8 24020002 */   addiu    $v0, $zero, 2

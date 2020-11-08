@@ -8,8 +8,8 @@ glabel func_802CD3C0
 /* F1D7C 802CD3CC 8C82000C */  lw        $v0, 0xc($a0)
 /* F1D80 802CD3D0 0C0B1EAF */  jal       get_variable
 /* F1D84 802CD3D4 8C450000 */   lw       $a1, ($v0)
-/* F1D88 802CD3D8 3C03802E */  lui       $v1, 0x802e
-/* F1D8C 802CD3DC 8C63AE30 */  lw        $v1, -0x51d0($v1)
+/* F1D88 802CD3D8 3C03802E */  lui       $v1, %hi(gAnimatedMeshesPtr)
+/* F1D8C 802CD3DC 8C63AE30 */  lw        $v1, %lo(gAnimatedMeshesPtr)($v1)
 /* F1D90 802CD3E0 00021080 */  sll       $v0, $v0, 2
 /* F1D94 802CD3E4 00431021 */  addu      $v0, $v0, $v1
 /* F1D98 802CD3E8 8C500000 */  lw        $s0, ($v0)

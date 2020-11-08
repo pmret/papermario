@@ -21,8 +21,8 @@ glabel func_802CCEDC
 /* F18CC 802CCF1C 8E050000 */  lw        $a1, ($s0)
 /* F18D0 802CCF20 0C0B1EAF */  jal       get_variable
 /* F18D4 802CCF24 0040802D */   daddu    $s0, $v0, $zero
-/* F18D8 802CCF28 3C03802E */  lui       $v1, 0x802e
-/* F18DC 802CCF2C 8C63AE30 */  lw        $v1, -0x51d0($v1)
+/* F18D8 802CCF28 3C03802E */  lui       $v1, %hi(gAnimatedMeshesPtr)
+/* F18DC 802CCF2C 8C63AE30 */  lw        $v1, %lo(gAnimatedMeshesPtr)($v1)
 /* F18E0 802CCF30 00118880 */  sll       $s1, $s1, 2
 /* F18E4 802CCF34 02238821 */  addu      $s1, $s1, $v1
 /* F18E8 802CCF38 8E230000 */  lw        $v1, ($s1)
