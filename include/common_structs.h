@@ -201,16 +201,21 @@ typedef union {
     s32 params;
 } TriggerParams;
 
+typedef union {
+    u16 s[6];
+    s32 w[3];
+} ScriptVariables;
+
 typedef struct Trigger {
     /* 0x00 */ TriggerFlags flags;
     /* 0x04 */ TriggerParams params1;
-    /* 0x08 */ s32 params2;
+    /* 0x08 */ TriggerParams params2;
     /* 0x0C */ UNK_FUN_PTR(functionHandler);
     /* 0x10 */ Bytecode* scriptStart;
     /* 0x14 */ struct ScriptInstance* runningScript;
     /* 0x18 */ s32 priority;
-    /* 0x1C */ s32 scriptVars[3];
-    /* 0x28 */ char unk_28[8];
+    /* 0x1C */ ScriptVariables scriptVars;
+    /* 0x28 */ char unk_2C[8];
     /* 0x30 */ u8 unk_30;
     /* 0x31 */ char unk_31[3];
     /* 0x34 */ ScriptID runningScriptID;

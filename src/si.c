@@ -977,9 +977,9 @@ s32 _bound_script_trigger_handler(Trigger* trigger) {
         script = start_script(scriptStart, trigger->priority, 0x20);
         trigger->runningScript = script;
         trigger->runningScriptID = script->id;
-        script->varTable[0] = trigger->scriptVars[0];
-        script->varTable[1] = trigger->scriptVars[1];
-        script->varTable[2] = trigger->scriptVars[2];
+        script->varTable[0] = trigger->scriptVars.w[0];
+        script->varTable[1] = trigger->scriptVars.w[1];
+        script->varTable[2] = trigger->scriptVars.w[2];
         script->owner2.trigger = trigger;
     }
 
@@ -1012,9 +1012,9 @@ ApiStatus si_handle_bind(ScriptInstance* script) {
     trigger->scriptStart = triggerScript;
     trigger->runningScript = NULL;
     trigger->priority = script->priority;
-    trigger->scriptVars[0] = get_variable(script, script->varTable[0]);
-    trigger->scriptVars[1] = get_variable(script, script->varTable[1]);
-    trigger->scriptVars[2] = get_variable(script, script->varTable[2]);
+    trigger->scriptVars.w[0] = get_variable(script, script->varTable[0]);
+    trigger->scriptVars.w[1] = get_variable(script, script->varTable[1]);
+    trigger->scriptVars.w[2] = get_variable(script, script->varTable[2]);
 
     if (triggerOut != 0) {
         set_variable(script, triggerOut, trigger);
@@ -1097,9 +1097,9 @@ void si_standard_trigger_executor(Trigger* trigger) {
         ScriptInstance* newScript = start_script(trigger->scriptStart, trigger->priority, 0x20);
         trigger->runningScript = newScript;
         trigger->runningScriptID = newScript->id;
-        newScript->varTable[0] = trigger->scriptVars[0];
-        newScript->varTable[1] = trigger->scriptVars[1];
-        newScript->varTable[2] = trigger->scriptVars[2];
+        newScript->varTable[0] = trigger->scriptVars.w[0];
+        newScript->varTable[1] = trigger->scriptVars.w[1];
+        newScript->varTable[2] = trigger->scriptVars.w[2];
         newScript->owner2.trigger = trigger;
     }
 
@@ -1132,9 +1132,9 @@ ApiStatus si_handle_bind_lock(ScriptInstance* script) {
     trigger->scriptStart = triggerScript;
     trigger->runningScript = NULL;
     trigger->priority = script->priority;
-    trigger->scriptVars[0] = get_variable(script, script->varTable[0]);
-    trigger->scriptVars[1] = get_variable(script, script->varTable[1]);
-    trigger->scriptVars[2] = get_variable(script, script->varTable[2]);
+    trigger->scriptVars.w[0] = get_variable(script, script->varTable[0]);
+    trigger->scriptVars.w[1] = get_variable(script, script->varTable[1]);
+    trigger->scriptVars.w[2] = get_variable(script, script->varTable[2]);
 
     return ApiStatus_DONE2;
 }

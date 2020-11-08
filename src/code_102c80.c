@@ -1,41 +1,282 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "code_102c80", func_802E1400);
+typedef struct substruct802E176C {
+    /* 0x00 */ Vec3f unk_00;
+    /* 0x0C */ char unk_0C[4];
+    /* 0x10 */ s8 unk_10;
+    /* 0x11 */ s8 unk_11;
+    /* 0x14 */ Vec3f unk_14;
+    /* 0x20 */ u16 unk_20;
+    /* 0x22 */ char unk_22[6];
+    /* 0x28 */ struct struct802E176C* unk_28;
+    /* 0x2C */ char unk_2C[12];
+    /* 0x38 */ f32 unk_38;
+} substruct802E176C;
 
-INCLUDE_ASM(s32, "code_102c80", func_802E1460);
+typedef struct struct802E176C {
+    /* 0x00 */ s32 flags;
+    /* 0x04 */ u8 unk_04;
+    /* 0x05 */ char unk_05[0x3B];
+    /* 0x40 */ substruct802E176C* unk_40;
+    /* 0x44 */ char unk_44[4];
+    /* 0x48 */ Vec3f unk_48;
+    /* 0x54 */ Vec3f unk_54;
+} struct802E176C;
 
-INCLUDE_ASM(s32, "code_102c80", func_802E14D8);
+void func_802E1400(Entity* entity) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    Trigger* trigger = entity->trigger;
+
+    if (entity->unk_06 & 1) {
+        if ((playerStatus->actionState == ActionState_GROUND_POUND) || (playerStatus->actionState == ActionState_ULTRA_POUND)) {
+            func_8010FD68();
+            trigger->scriptVars.s[3] = 8;
+        }
+    }
+}
+
+void func_802E1460(Entity* entity) {
+    Trigger* trigger = entity->trigger;
+    u16 var = trigger->scriptVars.s[3]--;
+
+    if (var) {
+        entity->position.y -= D_802EB000;
+        return;
+    }
+    func_80110678(entity);
+    func_8010FD68(entity);
+    trigger->scriptVars.s[3] = 8;
+}
+
+void func_802E14D8(Entity* entity) {
+    Trigger* trigger = entity->trigger;
+    u16 var = trigger->scriptVars.s[3]--;
+
+    if (var) {
+        entity->position.y += D_802EB008;
+        return;
+    }
+    func_8010FD68(entity);
+    trigger->scriptVars.s[3] = 8;
+}
 
 INCLUDE_ASM(s32, "code_102c80", func_802E153C);
 
-INCLUDE_ASM(s32, "code_102c80", func_802E1614);
+void func_802E1614(Entity* entity) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+
+    if (entity->unk_06 & 1) {
+        if ((playerStatus->actionState == ActionState_GROUND_POUND) || (playerStatus->actionState == ActionState_ULTRA_POUND)) {
+            func_8010FD68();
+        }
+    }
+}
 
 INCLUDE_ASM(s32, "code_102c80", func_802E1660);
 
-INCLUDE_ASM(s32, "code_102c80", func_802E1740);
+void func_802E1740(Entity* entity) {
+    if (!(entity->unk_06 & 1)) {
+        func_8010FD68();
+    }
+}
 
-INCLUDE_ASM(s32, "code_102c80", func_802E176C);
+void func_802E176C(struct802E176C* arg0) {
+    substruct802E176C* temp = arg0->unk_40;
+
+    temp->unk_00.x = 1.0f;
+    temp->unk_00.y = 0.1f;
+    temp->unk_00.z = -0.1f;
+    temp->unk_10 = 0;
+    temp->unk_11 = 0;
+}
 
 INCLUDE_ASM(s32, "code_102c80", func_802E17A8);
 
-INCLUDE_ASM(s32, "code_102c80", func_802E1EA8);
+void func_802E1EA8(struct802E176C* arg0) {
+    set_area_flag(arg0->unk_40->unk_20);
+    func_80110678(arg0);
+}
 
 INCLUDE_ASM(s32, "code_102c80", func_802E1EDC);
 
-INCLUDE_ASM(s32, "code_102c80", func_802E234C);
+//INCLUDE_ASM(s32, "code_102c80", func_802E234C);
+void func_802E234C(struct802E176C* arg0) {
+    PlayerStatus* playerStatus = &gPlayerStatus; 
+    substruct802E176C* temp = arg0->unk_40;
 
-INCLUDE_ASM(s32, "code_102c80", entity_init_BlueSwitch);
+    playerStatus->animFlags |= 0x1000000;
+    temp->unk_14.x = 1.0f;
+    temp->unk_14.y = 1.0f;
+    temp->unk_14.z = 1.0f;
+}
 
-INCLUDE_ASM(s32, "code_102c80", entity_init_HugeBlueSwitch);
+extern struct802E176C* D_802EB3A0;
+extern s32 D_8015C7D0;
 
-INCLUDE_ASM(s32, "code_102c80", func_802E2450);
+void entity_init_BlueSwitch(struct802E176C* arg0) {
+    struct802E176C* temp_v0_2;
+    substruct802E176C* temp = arg0->unk_40;
 
-INCLUDE_ASM(s32, "code_102c80", func_802E246C);
+    func_802E234C(arg0);
+    if (D_8015C7D0 == 2) {
+        D_802EB3A0 = arg0;
+        return;
+    }
+    if (D_8015C7D0 == 1) {
+        temp_v0_2 = D_802EB3A0;
+        if (temp_v0_2 != NULL) {
+            temp->unk_28 = temp_v0_2;
+            arg0->flags |= 1;
+            return;
+        }
+    } else {
+        D_802EB3A0 = NULL;
+    }
+}
+
+void entity_init_HugeBlueSwitch(struct802E176C* arg0) {
+    substruct802E176C* temp_v0;
+
+    func_802E234C(arg0);
+    temp_v0 = arg0->unk_40;
+    arg0->unk_54.x = 3.0f;
+    arg0->unk_54.y = 3.0f;
+    arg0->unk_54.z = 3.0f;
+    temp_v0->unk_14.x = 3.0f;
+    temp_v0->unk_14.y = 3.0f;
+    temp_v0->unk_14.z = 3.0f;
+}
+
+void func_802E2450(void) {
+    func_802E3650();
+}
+
+void func_802E246C(struct802E176C* arg0, void* arg1, void* arg2);
+
+INCLUDE_ASM(void, "code_102c80", func_802E246C, struct802E176C* arg0, void* arg1, void* arg2);
 
 INCLUDE_ASM(s32, "code_102c80", func_802E263C);
 
 INCLUDE_ASM(s32, "code_102c80", func_802E2BA4);
 
-INCLUDE_ASM(s32, "code_102c80", func_802E2EB0);
+extern UNK_TYPE D_0A0031E0;
+extern UNK_TYPE D_0A001508;
+extern UNK_TYPE D_0A0031B0;
+extern UNK_TYPE D_0A0014D8;
+extern UNK_TYPE D_0A002F78;
+extern UNK_TYPE D_0A001218;
+extern UNK_TYPE D_0A003F70;
+extern UNK_TYPE D_0A002318;
 
+#ifdef NON_MATCHING
+// Needs rodata support
+void func_802E2EB0(struct802E176C* arg0) {
+    u32 type;
+    void* a2 = NULL;
+    void* a1 = NULL;
+
+    arg0->unk_40->unk_38 = arg0->unk_48.y;
+    type = get_entity_type(arg0->unk_04);
+
+    if((type - 24) < 3) {
+        arg0->unk_54.x = 0.5f;
+        arg0->unk_54.y = 0.5f;
+        arg0->unk_54.z = 0.5f;
+    }
+
+    switch(type) {
+        case 21:
+        case 24:
+            a1 = &D_0A0031E0;
+            a2 = &D_0A001508;
+            break;
+        case 22:
+        case 25:
+            a1 = &D_0A0031B0;
+            a2 = &D_0A0014D8;
+            break;
+        case 23:
+        case 26:
+            a1 = &D_0A002F78;
+            a2 = &D_0A001218;
+            break;
+        case 13:
+            play_sound_at_position(0x158, 0, arg0->unk_48.x, arg0->unk_48.y, arg0->unk_48.z);
+            a1 = &D_0A003F70;
+            a2 = &D_0A002318;
+            break;
+        case 14:
+        case 15:
+        case 16:
+        case 17:
+        case 18:
+        case 19:
+            break;
+    }
+
+    if(a2 == NULL) {
+        return;
+    }
+
+    func_802E246C(arg0, a1, a2);
+}
+#else
+INCLUDE_ASM(void, "code_102c80", func_802E2EB0, struct802E176C* arg0);
+#endif
+
+s32 D_802E9C8C[1] = { 0 }; // TODO: correct data here.
+s32 D_802E9CF8[1] = { 0 }; // TODO: correct data here.
+s32 D_802E9CB0[1] = { 0 }; // TODO: correct data here.
+s32 D_802E9D1C[1] = { 0 }; // TODO: correct data here.
+s32 D_802E9CD4[1] = { 0 }; // TODO: correct data here.
+s32 D_802E9D40[1] = { 0 }; // TODO: correct data here.
+s32 D_802E9D64[1] = { 0 }; // TODO: correct data here.
+
+#ifdef NON_MATCHING
+//Needs rodata support
+void func_802E2FD0(struct802E176C* arg0) {
+    u32 type;
+    void *addr = NULL;
+
+    type = get_entity_type(arg0->unk_04);
+
+    switch(type) {
+        case 21:
+            addr = D_802E9C8C;
+            break;
+        case 24:
+            addr = D_802E9CF8;
+            break;
+        case 22:
+            addr = D_802E9CB0;
+            break;
+        case 25:
+            addr = D_802E9D1C;
+            break;
+        case 23:
+            addr = D_802E9CD4;
+            break;
+        case 26:
+            addr = D_802E9D40;
+            break;
+        case 13:
+            addr = D_802E9D64;
+            break;
+        case 14:
+        case 15:
+        case 16:
+        case 17:
+        case 18:
+        case 19:
+            break;
+    }
+
+    if(addr == NULL) {
+        return;
+    }
+
+    create_entity(addr, arg0->unk_48.x, arg0->unk_48.y, arg0->unk_48.z, 0, 0x80000000);
+}
+#else
 INCLUDE_ASM(s32, "code_102c80", func_802E2FD0);
+#endif

@@ -22,6 +22,9 @@ void render_player_model();
 
 f32 integrate_gravity(void);
 
+u32 get_entity_type(s32 arg0);
+void create_entity(void*, s32, s32, s32, s32, s32); // TODO: not entirely fleshed out.
+
 // Text
 PrintContext* load_string(s32 stringID, s32* a1);
 void get_screen_coords(Cam camID, f32 x, f32 y, f32 z, f32* outX, f32* outY, f32* outZ);
