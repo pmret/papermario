@@ -154,7 +154,7 @@ class BaseCmd():
         self.context.insert(0, ctx)
 
     # must be overloaded
-    def opcode():
+    def opcode(self):
         raise Exception()
 
     def to_bytecode(self):
@@ -242,11 +242,19 @@ class LabelAllocation(Visitor):
         self.labels = []
 
     def label_decl(self, tree):
-        # TODO: int labels
         name = tree.children[0].children[0]
         if name in self.labels:
             raise CompileError(f"label `{name}' already declared", tree.meta)
-        self.labels.append(name)
+
+        try:
+            label_idx = int(name, base=0)
+
+            while len(self.labels) < label_idx:
+                self.labels.append(None)
+
+            self.labels.insert(label_idx, name)
+        except ValueError:
+            self.labels.append(name)
 
     def gen_label(self):
         self.labels.append("$generated")
@@ -546,7 +554,7 @@ class Compile(Transformer):
         }
 
     def label_decl(self, tree):
-        if len(tree.children) == 0:
+        if len(tree.children) == 1:
             label = tree.children[0]
             return Cmd(0x03, label, meta=tree.meta)
         else:
