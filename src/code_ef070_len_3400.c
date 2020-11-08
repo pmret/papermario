@@ -673,10 +673,10 @@ ApiStatus func_802CD418(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 index = get_variable(script, *args++);
     s32 a1 = *args++;
-    s32 var2 = get_variable(script, *args++);
+    s32 enable = get_variable(script, *args++);
     AnimatedMesh* animMesh = get_anim_mesh((*gCurrentMeshAnimationListPtr)[index]->animModelID);
 
-    if (var2) {
+    if (enable) {
         animMesh->flags |= a1;
     } else {
         animMesh->flags &= ~a1;

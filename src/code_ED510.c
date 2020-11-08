@@ -135,10 +135,10 @@ ApiStatus SetTexPanner(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus SetModelFlag10(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* thisPos = script->ptrReadPos;
     Bytecode treeIndex = get_variable(script, *thisPos++);
-    Bytecode var2 = get_variable(script, *thisPos++);
+    Bytecode enable = get_variable(script, *thisPos++);
     Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(treeIndex));
 
-    if (var2 != 0) {
+    if (enable) {
         model->flags |= 0x10;
     } else {
         model->flags &= ~0x10;
@@ -254,10 +254,10 @@ ApiStatus SetModelFlags(ScriptInstance* script, s32 isInitialCall) {
     s32 treeIndex = get_variable(script, *args++);
     s32 listIndex = get_model_list_index_from_tree_index(treeIndex);
     s32 a1 = *args++;
-    s32 var2 = get_variable(script, *args++);
+    s32 enable = get_variable(script, *args++);
     Model* model = get_model_from_list_index(listIndex);
 
-    if (var2) {
+    if (enable) {
         model->flags |= a1;
     } else {
         model->flags &= ~a1;

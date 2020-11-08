@@ -17,7 +17,8 @@ ApiStatus func_802803C8(ScriptInstance* script, s32 isInitialCall) {
 
     script->varTable[2] = FALSE;
 
-    if (playerStatus->actionState == 4 || playerStatus->actionState == 8) {
+    if (playerStatus->actionState == ActionState_BOUNCE ||
+        playerStatus->actionState == ActionState_FALLING) {
         return ApiStatus_DONE2;
     }
 

@@ -944,7 +944,7 @@ typedef struct GameStatus {
 } GameStatus; // size = 0x178
 
 typedef struct PartnerAnimations {
-    /* 0x00 */ UNK_PTR standard; // should be "default" but that's a keyword
+    /* 0x00 */ UNK_PTR still;
     /* 0x04 */ UNK_PTR walk;
     /* 0x08 */ UNK_PTR jump;
     /* 0x0C */ UNK_PTR fall;

@@ -246,14 +246,14 @@ ApiStatus SetNpcFlagBits(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     NpcId npcID = get_variable(script, *args++);
     s32 flagBits = *args++;
-    s32 var1 = get_variable(script, *args++);
+    s32 enable = get_variable(script, *args++);
     Npc* npc = resolve_npc(script, npcID);
 
     if (npc == NULL) {
         return ApiStatus_DONE2;
     }
 
-    if (var1) {
+    if (enable) {
         npc->flags |= flagBits;
     } else {
         npc->flags &= ~flagBits;
