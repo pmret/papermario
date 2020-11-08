@@ -235,11 +235,11 @@ class ScriptDisassembler:
             self.indent += 1
         elif opcode == 0x1D:
             self.indent -= 1
-            self.write_line(f"SI_CMD(ScriptOpcode_CASE_MULTI_EQ, {self.var(argv[0])}),")
+            self.write_line(f"SI_CMD(ScriptOpcode_CASE_MULTI_OR_EQ, {self.var(argv[0])}),")
             self.indent += 1
         elif opcode == 0x1E:
             self.indent -= 1
-            self.write_line(f"SI_CMD(ScriptOpcode_CASE_MULTI_NE, {self.var(argv[0])}),")
+            self.write_line(f"SI_CMD(ScriptOpcode_CASE_MULTI_AND_EQ, {self.var(argv[0])}),")
             self.indent += 1
         elif opcode == 0x1F:
             self.indent -= 1

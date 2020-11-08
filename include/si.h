@@ -35,8 +35,8 @@ typedef enum ScriptOpcode {
     ScriptOpcode_CASE_LE, ///< Args: expression to test for
     ScriptOpcode_CASE_GE, ///< Args: expression to test for
     ScriptOpcode_CASE_ELSE,
-    ScriptOpcode_CASE_MULTI_EQ, ///< Args: expression to test for
-    ScriptOpcode_CASE_MULTI_NE, ///< Args: expression to test for
+    ScriptOpcode_CASE_MULTI_OR_EQ, ///< Args: expression to test for
+    ScriptOpcode_CASE_MULTI_AND_EQ, ///< Args: expression to test for
     ScriptOpcode_CASE_FLAG, ///< Args: expression to test for
     ScriptOpcode_END_CASE_MULTI, ///< Ends the case block of ScriptOpcode_CASE_MULTI_OR_EQ condition(s).
     ScriptOpcode_CASE_RANGE, ///< Args: from, to

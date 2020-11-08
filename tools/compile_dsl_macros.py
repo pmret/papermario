@@ -5,7 +5,7 @@ from lark import Lark, exceptions, Tree, Transformer, Visitor, v_args, Token
 from lark.visitors import Discard
 import traceback
 
-DEBUG_OUTPUT = "debug.i"
+DEBUG_OUTPUT = None
 
 def eprint(*args, **kwargs):
     print(*args, file=stderr, **kwargs)
@@ -389,7 +389,7 @@ class Compile(Transformer):
         return [*multi_case, *block, Cmd("ScriptOpcode_END_CASE_MULTI")]
 
     def multi_case(self, tree):
-        return [Cmd("ScriptOpcode_CASE_MULTI_EQ", expr) for expr in tree.children]
+        return [Cmd("ScriptOpcode_CASE_MULTI_OR_EQ", expr) for expr in tree.children]
 
     def loop_stmt(self, tree):
         expr = tree.children.pop(0) if len(tree.children) > 1 else 0
