@@ -64,8 +64,6 @@ MapConfig M(config) = {
     .tattle = MessageID_TATTLE_KMR_03,
 };
 
-Script M(script_802406C0) = {
-    SI_CALL(SetMusicTrack, 0, 17, 0, 8),
-    SI_RETURN(),
-    SI_END(),
-};
+Script M(Script_802406C0) = SCRIPT({
+    SetMusicTrack(0, 17, 0, 8)
+});

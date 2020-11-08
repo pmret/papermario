@@ -25,9 +25,10 @@ astyle ${FILES} \
     --style=attach \
     --align-pointer=type --align-reference=name \
     --indent-switches \
-    --indent-labels \
     --pad-oper --pad-comma --pad-header --unpad-paren \
     --attach-return-type \
+    --keep-one-line-blocks \
+    --keep-one-line-statements
 
 # add newline at eof
 find ${FILES} -exec sed -i -e '$a\' {} \;

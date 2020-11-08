@@ -5,4 +5,4 @@
 
 ApiStatus func_80240000_8C7F90(ScriptInstance* script, s32 isInitialCall);
 Script M(Main);
-Script M(script_802406C0);
+Script M(Script_802406C0);
