@@ -332,10 +332,10 @@ class ScriptDSLDisassembler(ScriptDisassembler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        # False: not in case
-        # True: in case block
-        # CASES: in condition, but { not written yet
-        # MULTI: in ',' condition(s), but { not written yet
+        # True: case block
+        # CASE: single condition
+        # MULTI: multi-condition(s)
+        # MATCH: match block
         self.case_stack = []
 
         self.was_multi_case = False
@@ -369,36 +369,40 @@ class ScriptDSLDisassembler(ScriptDisassembler):
         else:
             return f"{arg}"
 
-    def verify_float(self, var):
+    def is_float(self, var):
         try:
             float(var)
+            return True
         except Exception:
-            # not a float!
-            raise UnsupportedScript("non-float used in float command")
-
-        return var
+            return False
 
     def disassemble_command(self, opcode, argc, argv):
         # write case block braces
-        if self.in_case == "CASES" or self.in_case == "MULTI":
+        if self.in_case == "CASE" or self.in_case == "MULTI":
             if opcode == 0x1D: # multi case
                 pass
             elif 0x16 <= opcode <= 0x21: # standard case conditions
                 # open and close empty case
+                self.out += " {}\n"
+
                 self.case_stack.pop()
-                self.case_stack.append(False)
+                assert self.in_case == "MATCH"
+
+                self.was_multi_case = False
             else:
                 # open case
                 self.out += " {\n"
-                self.was_multi_case = self.in_case == "MULTI"
 
-                self.case_stack.pop()
                 self.case_stack.append(True)
-        elif self.in_case is True and 0x16 <= opcode <= 0x21: # new case
-            self.case_stack.pop()
+
+                self.indent += 1
+        elif self.in_case != "MATCH" and 0x16 <= opcode <= 0x21: # new case, not including the first
+            assert self.case_stack.pop() == True
+            self.was_multi_case = self.case_stack.pop() == "MULTI"
+            assert self.in_case == "MATCH"
+
             self.indent -= 1
             self.write_line("}")
-            self.indent += 1
 
         if opcode == 0x01:
             if self.out.endswith("return\n"):
@@ -458,91 +462,109 @@ class ScriptDSLDisassembler(ScriptDisassembler):
             self.write_line("}")
         elif opcode == 0x14:
             self.write_line(f"match {self.var(argv[0])} {{")
-            self.indent += 2
-            self.case_stack.append(False)
-        # elif opcode == 0x15:
-        #     self.write_line(f"SI_SWITCH_CONST(0x{argv[0]:X}),")
-        #     self.indent += 2
+            self.indent += 1
+            self.case_stack.append("MATCH")
+        elif opcode == 0x15:
+            self.write_line(f"matchc {self.var(argv[0])} {{")
+            self.indent += 1
+            self.case_stack.append("MATCH")
         elif opcode == 0x16:
-            self.indent -= 1
-            self.case_stack.append("CASES")
+            self.case_stack.append("CASE")
             self.write(f"== {self.var(argv[0])}")
-            self.indent += 1
         elif opcode == 0x17:
-            self.indent -= 1
-            self.case_stack.append("CASES")
+            self.case_stack.append("CASE")
             self.write(f"!= {self.var(argv[0])}")
-            self.indent += 1
         elif opcode == 0x18:
-            self.indent -= 1
-            self.case_stack.append("CASES")
+            self.case_stack.append("CASE")
             self.write(f"< {self.var(argv[0])}")
-            self.indent += 1
         elif opcode == 0x19:
-            self.indent -= 1
-            self.case_stack.append("CASES")
+            self.case_stack.append("CASE")
             self.write(f"> {self.var(argv[0])}")
-            self.indent += 1
         elif opcode == 0x1A:
-            self.indent -= 1
-            self.case_stack.append("CASES")
+            self.case_stack.append("CASE")
             self.write(f"<= {self.var(argv[0])}")
-            self.indent += 1
         elif opcode == 0x1B:
-            self.indent -= 1
-            self.case_stack.append("CASES")
+            self.case_stack.append("CASE")
             self.write(f">= {self.var(argv[0])}")
-            self.indent += 1
         elif opcode == 0x1C:
-            self.indent -= 1
-            self.case_stack.append("CASES")
+            self.case_stack.append("CASE")
             self.write(f"else")
-            self.indent += 1
         elif opcode == 0x1D:
-            self.indent -= 1
-            if self.in_case == "CASES" or self.in_case == "MULTI":
+            if self.in_case == "CASE" or self.in_case == "MULTI":
                 self.out += f", {self.var(argv[0])}"
+
+                # replace(!) CASE with MULTI
+                self.case_stack.pop()
+                self.case_stack.append("MULTI")
             else:
                 self.write(f"{self.var(argv[0])}")
-            self.case_stack.append("MULTI")
-            self.indent += 1
+                self.case_stack.append("MULTI")
         # opcode 0x1E?
         elif opcode == 0x1F:
-            self.indent -= 1
+            self.case_stack.append("CASE")
             self.write_line(f"? {self.var(argv[0])}")
-            self.indent += 1
-        elif opcode == 0x20 and self.was_multi_case:
-            self.indent -= 1
-            self.indent += 1
+        elif opcode == 0x20:
+            if not self.was_multi_case:
+                raise UnsupportedScript("unexpected SI_END_MULTI_CASE")
         elif opcode == 0x21:
             self.indent -= 1
-            self.write_line(f"{self.var(argv[0])}..{self.var(argv[1])} {{")
+            self.write_line(f"{self.var(argv[0])}..{self.var(argv[1])}")
             self.indent += 1
         elif opcode == 0x22: self.write_line("break")
         elif opcode == 0x23:
-            self.indent -= 1
-            if self.in_case:
+            # close open case if needed
+            if self.in_case != "MATCH":
+                self.case_stack.pop() == True
+                self.case_stack.pop() in ["MULTI", "CASE"]
+
+                self.indent -= 1
                 self.write_line("}")
-                self.case_stack.pop()
-            self.case_stack.pop()
+
+            assert self.case_stack.pop() == "MATCH"
+
             self.indent -= 1
             self.write_line("}")
         elif opcode == 0x24: self.write_line(f"{self.var(argv[0])} = {self.var(argv[1])}")
-        #elif opcode == 0x25: self.write_line(f"{self.var(argv[0])} #= 0x{argv[1]:X}")
-        elif opcode == 0x26: self.write_line(f"{self.var(argv[0])} = {self.verify_float(self.var(argv[1]))}")
+        elif opcode == 0x25: self.write_line(f"{self.var(argv[0])} =c 0x{argv[1]:X}")
+        elif opcode == 0x26:
+            lhs = self.var(argv[1])
+            if self.is_float(lhs):
+                self.write_line(f"{self.var(argv[0])} = {lhs}")
+            else:
+                self.write_line(f"{self.var(argv[0])} =f {lhs}")
         elif opcode == 0x27: self.write_line(f"{self.var(argv[0])} += {self.var(argv[1])}")
         elif opcode == 0x28: self.write_line(f"{self.var(argv[0])} -= {self.var(argv[1])}")
         elif opcode == 0x29: self.write_line(f"{self.var(argv[0])} *= {self.var(argv[1])}")
         elif opcode == 0x2A: self.write_line(f"{self.var(argv[0])} /= {self.var(argv[1])}")
         elif opcode == 0x2B: self.write_line(f"{self.var(argv[0])} %= {self.var(argv[1])}")
-        elif opcode == 0x2C: self.write_line(f"{self.var(argv[0])} += {self.verify_float(self.var(argv[1]))}")
-        elif opcode == 0x2D: self.write_line(f"{self.var(argv[0])} -= {self.verify_float(self.var(argv[1]))}")
-        elif opcode == 0x2E: self.write_line(f"{self.var(argv[0])} *= {self.verify_float(self.var(argv[1]))}")
-        elif opcode == 0x2F: self.write_line(f"{self.var(argv[0])} /= {self.verify_float(self.var(argv[1]))}")
+        elif opcode == 0x2C:
+            lhs = self.var(argv[1])
+            if self.is_float(lhs):
+                self.write_line(f"{self.var(argv[0])} += {lhs}")
+            else:
+                self.write_line(f"{self.var(argv[0])} +=f {lhs}")
+        elif opcode == 0x2D:
+            lhs = self.var(argv[1])
+            if self.is_float(lhs):
+                self.write_line(f"{self.var(argv[0])} -= {lhs}")
+            else:
+                self.write_line(f"{self.var(argv[0])} -=f {lhs}")
+        elif opcode == 0x2E:
+            lhs = self.var(argv[1])
+            if self.is_float(lhs):
+                self.write_line(f"{self.var(argv[0])} *= {lhs}")
+            else:
+                self.write_line(f"{self.var(argv[0])} *=f {lhs}")
+        elif opcode == 0x2F:
+            lhs = self.var(argv[1])
+            if self.is_float(lhs):
+                self.write_line(f"{self.var(argv[0])} /= {lhs}")
+            else:
+                self.write_line(f"{self.var(argv[0])} /=f {lhs}")
         elif opcode == 0x3F: self.write_line(f"{self.var(argv[0])} &= {self.var(argv[1])}")
         elif opcode == 0x40: self.write_line(f"{self.var(argv[0])} |= {self.var(argv[1])}")
-        #elif opcode == 0x41: self.write_line(f"{self.var(argv[0])} #&= {argv[1]:X})")
-        #elif opcode == 0x42: self.write_line(f"{self.var(argv[0])} #|= {argv[1]:X})")
+        elif opcode == 0x41: self.write_line(f"{self.var(argv[0])} &=c {argv[1]:X}")
+        elif opcode == 0x42: self.write_line(f"{self.var(argv[0])} |=c {argv[1]:X}")
         elif opcode == 0x43:
             argv_str = ", ".join(self.var(arg) for arg in argv[1:])
             self.write_line(f"{self.addr_ref(argv[0])}({argv_str})")

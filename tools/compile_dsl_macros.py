@@ -49,6 +49,8 @@ script_parser = Lark(r"""
          | "await" expr         -> await_stmt
          | lhs "=" "spawn" expr -> spawn_set_stmt
          | lhs set_op expr      -> set_stmt
+         | lhs set_op "f" expr  -> set_float_stmt
+         | lhs set_op "c" expr  -> set_const_stmt
          | bind_stmt
          | bind_set_stmt
          | "unbind"             -> unbind_stmt
@@ -75,6 +77,7 @@ script_parser = Lark(r"""
            | "?" -> cond_op_flag
 
     match_stmt: "match" expr "{" NEWLINE* (match_cases STMT_SEP*)? "}"
+    match_const_stmt: "matchc" expr "{" NEWLINE* (match_cases STMT_SEP*)? "}"
     match_cases: match_case STMT_SEP* match_cases
                | match_case
     ?match_case: "else" block -> case_else
@@ -337,6 +340,10 @@ class Compile(Transformer):
             *cases,
             Cmd(0x24),
         ]
+    def match_const_stmt(self, tree):
+        commands = self.match_stmt(tree)
+        commands[0].opcode = 0x15
+        return commands
     def match_cases(self, tree):
         if len(tree.children) == 1:
             return [tree.children[0]]
@@ -471,18 +478,24 @@ class Compile(Transformer):
         if is_fixed_var(rhs):
             opcode = opcodes.get("float", None)
             if not opcode:
-                raise CompileError(f"operation `{opcodes['__op__']}' not supported for floats", tree.meta)
+                raise CompileError(f"float operation `{opcodes['__op__']}' not supported", tree.meta)
         else:
             opcode = opcodes.get("int", None)
             if not opcode:
-                raise CompileError(f"operation `{opcodes['__op__']}' not supported for ints", tree.meta)
+                raise CompileError(f"int operation `{opcodes['__op__']}' not supported", tree.meta)
         return Cmd(opcode, lhs, rhs)
-    # def set_const_stmt(self, tree):
-    #     lhs, opcodes, rhs = tree.children
-    #     opcode = opcodes.get("const", None)
-    #     if not opcode:
-    #         raise CompileError(f"operation `{opcodes['__op__']}' not supported for consts", tree.meta)
-    #     return Cmd(opcode, lhs, rhs)
+    def set_float_stmt(self, tree):
+        lhs, opcodes, rhs = tree.children
+        opcode = opcodes.get("float", None)
+        if not opcode:
+            raise CompileError(f"float operation `{opcodes['__op__']}' not supported", tree.meta)
+        return Cmd(opcode, lhs, rhs)
+    def set_const_stmt(self, tree):
+        lhs, opcodes, rhs = tree.children
+        opcode = opcodes.get("const", None)
+        if not opcode:
+            raise CompileError(f"const operation `{opcodes['__op__']}' not supported", tree.meta)
+        return Cmd(opcode, lhs, rhs)
     def set_op_eq(self, tree):
         return {
             "__op__": "=",
