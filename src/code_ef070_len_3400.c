@@ -465,31 +465,136 @@ INCLUDE_ASM(s32, "code_ef070_len_3400", AdjustCam, ScriptInstance* script, s32 i
 
 INCLUDE_ASM(s32, "code_ef070_len_3400", ResetCam, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "code_ef070_len_3400", func_802CCAC0);
+void func_802CCAC0(void) {
+    s32 i;
+
+    //todo fix type
+    for (i = 0; i < 0x10; i++) {
+        AnimatedModel* anim = gMeshAnimationsPtr[i];
+
+        if (anim->animModelID >= 0) {
+            func_8011EA54(anim->animModelID, &anim->mtx);
+        }
+    }
+}
 
 INCLUDE_ASM(s32, "code_ef070_len_3400", draw_anim_models);
 
-INCLUDE_ASM(s32, "code_ef070_len_3400", func_802CCCB0);
+ApiStatus func_802CCCB0(ScriptInstance* script, s32 isInitialCall) {
+    if (!GAME_STATUS->isBattle) {
+        gMeshAnimationsPtr = &gWorldMeshAnimations;
+    } else {
+        gMeshAnimationsPtr = &gBattleMeshAnimations;
+    }
+
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_ef070_len_3400", LoadModelAnimation);
 
 INCLUDE_ASM(s32, "code_ef070_len_3400", func_802CCDAC);
 
-INCLUDE_ASM(s32, "code_ef070_len_3400", PlayModelAnimation);
+ApiStatus PlayModelAnimation(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 index = get_variable(script, *args++);
+    s32 var2 = get_variable(script, *args++);
+    AnimatedModel* model = gMeshAnimationsPtr[index];
 
-INCLUDE_ASM(s32, "code_ef070_len_3400", func_802CCEDC);
+    model->currentAnimData = var2;
+    play_model_animation(model->animModelID, var2);
 
-INCLUDE_ASM(s32, "code_ef070_len_3400", ChangeModelAnimation);
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "code_ef070_len_3400", SetAnimModelPosition);
+ApiStatus func_802CCEDC(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 index = get_variable(script, *args++);
+    s32 var2 = get_variable(script, *args++);
+    s32 var3 = get_variable(script, *args++);
+    AnimatedModel* model = gMeshAnimationsPtr[index];
 
-INCLUDE_ASM(s32, "code_ef070_len_3400", GetAnimModelPosition);
+    model->currentAnimData = var2;
+    func_80120198(model->animModelID, var2, var3);
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus ChangeModelAnimation(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 index = get_variable(script, *args++);
+    s32 var2 = get_variable(script, *args++);
+    AnimatedModel* model = gMeshAnimationsPtr[index];
+
+    if (model->currentAnimData == var2) {
+        return ApiStatus_DONE2;
+    }
+
+    model->currentAnimData = var2;
+    play_model_animation(model->animModelID, var2);
+    return ApiStatus_DONE2;
+}
+
+ApiStatus SetAnimModelPosition(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 index = get_variable(script, *args++);
+    f32 x = get_float_variable(script, *args++);
+    f32 y = get_float_variable(script, *args++);
+    f32 z = get_float_variable(script, *args++);
+    AnimatedModel* model = gMeshAnimationsPtr[index];
+
+    model->pos.x = x;
+    model->pos.y = y;
+    model->pos.z = z;
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus GetAnimModelPosition(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 index = get_variable(script, *args++);
+    s32 outX = *args++;
+    s32 outY = *args++;
+    s32 outZ = *args++;
+    AnimatedModel* model = gMeshAnimationsPtr[index];
+
+    set_float_variable(script, outX, model->pos.x);
+    set_float_variable(script, outY, model->pos.y);
+    set_float_variable(script, outZ, model->pos.z);
+
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_ef070_len_3400", AddAnimModelPosition);
 
-INCLUDE_ASM(s32, "code_ef070_len_3400", SetAnimModelRotation);
+ApiStatus SetAnimModelRotation(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 index = get_variable(script, *args++);
+    f32 x = get_float_variable(script, *args++);
+    f32 y = get_float_variable(script, *args++);
+    f32 z = get_float_variable(script, *args++);
+    AnimatedModel* model = gMeshAnimationsPtr[index];
 
-INCLUDE_ASM(s32, "code_ef070_len_3400", SetAnimModelScale);
+    model->rot.x = x;
+    model->rot.y = y;
+    model->rot.z = z;
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus SetAnimModelScale(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 index = get_variable(script, *args++);
+    f32 x = get_float_variable(script, *args++);
+    f32 y = get_float_variable(script, *args++);
+    f32 z = get_float_variable(script, *args++);
+    AnimatedModel* model = gMeshAnimationsPtr[index];
+
+    model->scale.x = x;
+    model->scale.y = y;
+    model->scale.z = z;
+
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_ef070_len_3400", func_802CD348);
 
@@ -505,7 +610,13 @@ INCLUDE_ASM(s32, "code_ef070_len_3400", func_802CD418);
 
 INCLUDE_ASM(s32, "code_ef070_len_3400", func_802CD4B4);
 
-INCLUDE_ASM(s32, "code_ef070_len_3400", func_802CD57C);
+void func_802CD57C(void) {
+    if (!GAME_STATUS->isBattle) {
+        gMeshAnimationsPtr = &gWorldMeshAnimations;
+    } else {
+        gMeshAnimationsPtr = &gBattleMeshAnimations;
+    }
+}
 
 INCLUDE_ASM(s32, "code_ef070_len_3400", func_802CD5C0);
 
