@@ -10,7 +10,7 @@ Npc* resolve_npc(ScriptInstance* script, NpcId npcIdOrPtr) {
     }
 }
 
-INCLUDE_ASM(s32, "code_f2470_len_27f0", set_npc_animation);
+INCLUDE_ASM(void, "code_f2470_len_27f0", set_npc_animation, Npc* npc, u32 arg1);
 
 INCLUDE_ASM(s32, "code_f2470_len_27f0", CreateNpc);
 
@@ -242,7 +242,25 @@ INCLUDE_ASM(s32, "code_f2470_len_27f0", NpcFacePlayer, ScriptInstance* script, s
 
 INCLUDE_ASM(s32, "code_f2470_len_27f0", NpcFaceNpc, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "code_f2470_len_27f0", SetNpcFlagBits, ScriptInstance* script, s32 isInitialCall);
+ApiStatus SetNpcFlagBits(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    NpcId npcID = get_variable(script, *args++);
+    s32 flagBits = *args++;
+    s32 enable = get_variable(script, *args++);
+    Npc* npc = resolve_npc(script, npcID);
+
+    if (npc == NULL) {
+        return ApiStatus_DONE2;
+    }
+
+    if (enable) {
+        npc->flags |= flagBits;
+    } else {
+        npc->flags &= ~flagBits;
+    }
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus GetNpcPos(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

@@ -94,9 +94,9 @@ glabel enable_partner_flying
 /* 86908 800ED458 000310C0 */  sll       $v0, $v1, 3
 /* 8690C 800ED45C 00431021 */  addu      $v0, $v0, $v1
 /* 86910 800ED460 00021080 */  sll       $v0, $v0, 2
-/* 86914 800ED464 3C038010 */  lui       $v1, 0x8010
+/* 86914 800ED464 3C038010 */  lui       $v1, %hi(gPartnerAnimations+0x14)
 /* 86918 800ED468 00621821 */  addu      $v1, $v1, $v0
-/* 8691C 800ED46C 8C63835C */  lw        $v1, -0x7ca4($v1)
+/* 8691C 800ED46C 8C63835C */  lw        $v1, %lo(gPartnerAnimations+0x14)($v1)
 /* 86920 800ED470 24020010 */  addiu     $v0, $zero, 0x10
 /* 86924 800ED474 3C018010 */  lui       $at, 0x8010
 /* 86928 800ED478 AC22802C */  sw        $v0, -0x7fd4($at)

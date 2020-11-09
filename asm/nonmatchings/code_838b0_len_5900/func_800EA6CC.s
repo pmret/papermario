@@ -537,9 +537,9 @@ glabel func_800EA6CC
 /* 84374 800EAEC4 00431021 */  addu      $v0, $v0, $v1
 /* 84378 800EAEC8 00021080 */  sll       $v0, $v0, 2
 /* 8437C 800EAECC 8CA30000 */  lw        $v1, ($a1)
-/* 84380 800EAED0 3C018010 */  lui       $at, 0x8010
+/* 84380 800EAED0 3C018010 */  lui       $at, %hi(gPartnerAnimations+0x10)
 /* 84384 800EAED4 00220821 */  addu      $at, $at, $v0
-/* 84388 800EAED8 8C228358 */  lw        $v0, -0x7ca8($at)
+/* 84388 800EAED8 8C228358 */  lw        $v0, %lo(gPartnerAnimations+0x10)($at)
 /* 8438C 800EAEDC 3C018011 */  lui       $at, 0x8011
 /* 84390 800EAEE0 AC30CD30 */  sw        $s0, -0x32d0($at)
 /* 84394 800EAEE4 0C038069 */  jal       enable_player_input

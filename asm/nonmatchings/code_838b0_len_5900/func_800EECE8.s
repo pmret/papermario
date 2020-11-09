@@ -263,9 +263,9 @@ glabel func_800EECE8
 /* 88580 800EF0D0 00021080 */  sll       $v0, $v0, 2
 /* 88584 800EF0D4 46040003 */  div.s     $f0, $f0, $f4
 /* 88588 800EF0D8 E600001C */  swc1      $f0, 0x1c($s0)
-/* 8858C 800EF0DC 3C038010 */  lui       $v1, 0x8010
+/* 8858C 800EF0DC 3C038010 */  lui       $v1, %hi(gPartnerAnimations+0x8)
 /* 88590 800EF0E0 00621821 */  addu      $v1, $v1, $v0
-/* 88594 800EF0E4 8C638350 */  lw        $v1, -0x7cb0($v1)
+/* 88594 800EF0E4 8C638350 */  lw        $v1, %lo(gPartnerAnimations+0x8)($v1)
 /* 88598 800EF0E8 24020001 */  addiu     $v0, $zero, 1
 /* 8859C 800EF0EC 3C018011 */  lui       $at, 0x8011
 /* 885A0 800EF0F0 A422CFC8 */  sh        $v0, -0x3038($at)
@@ -307,9 +307,9 @@ glabel func_800EECE8
 /* 88628 800EF178 000218C0 */  sll       $v1, $v0, 3
 /* 8862C 800EF17C 00621821 */  addu      $v1, $v1, $v0
 /* 88630 800EF180 00031880 */  sll       $v1, $v1, 2
-/* 88634 800EF184 3C028010 */  lui       $v0, 0x8010
+/* 88634 800EF184 3C028010 */  lui       $v0, %hi(gPartnerAnimations+0xC)
 /* 88638 800EF188 00431021 */  addu      $v0, $v0, $v1
-/* 8863C 800EF18C 8C428354 */  lw        $v0, -0x7cac($v0)
+/* 8863C 800EF18C 8C428354 */  lw        $v0, %lo(gPartnerAnimations+0xC)($v0)
 /* 88640 800EF190 AE020028 */  sw        $v0, 0x28($s0)
 .L800EF194:
 /* 88644 800EF194 8E050018 */  lw        $a1, 0x18($s0)

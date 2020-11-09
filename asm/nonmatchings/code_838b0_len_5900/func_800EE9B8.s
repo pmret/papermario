@@ -113,9 +113,9 @@ glabel func_800EE9B8
 /* 88010 800EEB60 E6040018 */  swc1      $f4, 0x18($s0)
 /* 88014 800EEB64 4606A503 */  div.s     $f20, $f20, $f6
 /* 88018 800EEB68 E614001C */  swc1      $f20, 0x1c($s0)
-/* 8801C 800EEB6C 3C018010 */  lui       $at, 0x8010
+/* 8801C 800EEB6C 3C018010 */  lui       $at, %hi(gPartnerAnimations+0x8)
 /* 88020 800EEB70 00220821 */  addu      $at, $at, $v0
-/* 88024 800EEB74 8C228350 */  lw        $v0, -0x7cb0($at)
+/* 88024 800EEB74 8C228350 */  lw        $v0, %lo(gPartnerAnimations+0x8)($at)
 /* 88028 800EEB78 0200202D */  daddu     $a0, $s0, $zero
 /* 8802C 800EEB7C 0C00EB49 */  jal       enable_npc_blur
 /* 88030 800EEB80 AC820028 */   sw       $v0, 0x28($a0)
@@ -140,9 +140,9 @@ glabel func_800EE9B8
 /* 88078 800EEBC8 000218C0 */  sll       $v1, $v0, 3
 /* 8807C 800EEBCC 00621821 */  addu      $v1, $v1, $v0
 /* 88080 800EEBD0 00031880 */  sll       $v1, $v1, 2
-/* 88084 800EEBD4 3C028010 */  lui       $v0, 0x8010
+/* 88084 800EEBD4 3C028010 */  lui       $v0, %hi(gPartnerAnimations+0xC)
 /* 88088 800EEBD8 00431021 */  addu      $v0, $v0, $v1
-/* 8808C 800EEBDC 8C428354 */  lw        $v0, -0x7cac($v0)
+/* 8808C 800EEBDC 8C428354 */  lw        $v0, %lo(gPartnerAnimations+0xC)($v0)
 /* 88090 800EEBE0 AE020028 */  sw        $v0, 0x28($s0)
 .L800EEBE4:
 /* 88094 800EEBE4 8E06000C */  lw        $a2, 0xc($s0)
@@ -181,9 +181,9 @@ glabel func_800EE9B8
 /* 88110 800EEC60 000310C0 */  sll       $v0, $v1, 3
 /* 88114 800EEC64 00431021 */  addu      $v0, $v0, $v1
 /* 88118 800EEC68 00021080 */  sll       $v0, $v0, 2
-/* 8811C 800EEC6C 3C018010 */  lui       $at, 0x8010
+/* 8811C 800EEC6C 3C018010 */  lui       $at, %hi(gPartnerAnimations+0x10)
 /* 88120 800EEC70 00220821 */  addu      $at, $at, $v0
-/* 88124 800EEC74 8C228358 */  lw        $v0, -0x7ca8($at)
+/* 88124 800EEC74 8C228358 */  lw        $v0, %lo(gPartnerAnimations+0x10)($at)
 /* 88128 800EEC78 AC80001C */  sw        $zero, 0x1c($a0)
 /* 8812C 800EEC7C E480003C */  swc1      $f0, 0x3c($a0)
 /* 88130 800EEC80 0C00EB6B */  jal       disable_npc_blur

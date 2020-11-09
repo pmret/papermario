@@ -15,8 +15,8 @@ glabel init_model_data
 /* AC710 80116010 24421F70 */  addiu     $v0, $v0, 0x1f70
 /* AC714 80116014 3C018015 */  lui       $at, 0x8015
 /* AC718 80116018 AC2212E0 */  sw        $v0, 0x12e0($at)
-/* AC71C 8011601C 3C028015 */  lui       $v0, 0x8015
-/* AC720 80116020 24421F90 */  addiu     $v0, $v0, 0x1f90
+/* AC71C 8011601C 3C028015 */  lui       $v0, %hi(gWorldModelSpecialDls)
+/* AC720 80116020 24421F90 */  addiu     $v0, $v0, %lo(gWorldModelSpecialDls)
 /* AC724 80116024 3C018015 */  lui       $at, %hi(gCurrentModelSpecialDlsPtr)
 /* AC728 80116028 AC2212E8 */  sw        $v0, %lo(gCurrentModelSpecialDlsPtr)($at)
 /* AC72C 8011602C 3C028015 */  lui       $v0, 0x8015

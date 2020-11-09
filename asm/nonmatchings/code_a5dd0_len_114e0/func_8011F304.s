@@ -15,8 +15,8 @@ glabel func_8011F304
 .L8011F32C:
 /* B5A2C 8011F32C 2402F7FF */  addiu     $v0, $zero, -0x801
 /* B5A30 8011F330 00822024 */  and       $a0, $a0, $v0
-/* B5A34 8011F334 3C038015 */  lui       $v1, 0x8015
-/* B5A38 8011F338 8C633A40 */  lw        $v1, 0x3a40($v1)
+/* B5A34 8011F334 3C038015 */  lui       $v1, %hi(gCurrentAnimMeshListPtr)
+/* B5A38 8011F338 8C633A40 */  lw        $v1, %lo(gCurrentAnimMeshListPtr)($v1)
 /* B5A3C 8011F33C 00041080 */  sll       $v0, $a0, 2
 /* B5A40 8011F340 00431021 */  addu      $v0, $v0, $v1
 /* B5A44 8011F344 8C470000 */  lw        $a3, ($v0)

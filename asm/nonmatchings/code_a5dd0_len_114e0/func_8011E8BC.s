@@ -17,8 +17,8 @@ glabel func_8011E8BC
 .L8011E8EC:
 /* B4FEC 8011E8EC 2402F7FF */  addiu     $v0, $zero, -0x801
 /* B4FF0 8011E8F0 00822024 */  and       $a0, $a0, $v0
-/* B4FF4 8011E8F4 3C038015 */  lui       $v1, 0x8015
-/* B4FF8 8011E8F8 8C633A40 */  lw        $v1, 0x3a40($v1)
+/* B4FF4 8011E8F4 3C038015 */  lui       $v1, %hi(gCurrentAnimMeshListPtr)
+/* B4FF8 8011E8F8 8C633A40 */  lw        $v1, %lo(gCurrentAnimMeshListPtr)($v1)
 /* B4FFC 8011E8FC 00041080 */  sll       $v0, $a0, 2
 /* B5000 8011E900 00431021 */  addu      $v0, $v0, $v1
 /* B5004 8011E904 8C500000 */  lw        $s0, ($v0)

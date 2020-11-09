@@ -21,9 +21,9 @@ INCLUDE_ASM(s32, "code_102610_len_2330", func_802E117C);
 void save_game_at_player_position(void) {
     GameStatus* gameStatus = GAME_STATUS;
 
-    gameStatus->savedPos[0] = gPlayerStatusPtr->position.x;
-    gameStatus->savedPos[1] = gPlayerStatusPtr->position.y;
-    gameStatus->savedPos[2] = gPlayerStatusPtr->position.z;
+    gameStatus->savedPos.x = gPlayerStatusPtr->position.x;
+    gameStatus->savedPos.y = gPlayerStatusPtr->position.y;
+    gameStatus->savedPos.z = gPlayerStatusPtr->position.z;
     fio_save_game(gameStatus->saveSlot);
 }
 

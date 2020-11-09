@@ -108,9 +108,9 @@ glabel PutPartnerAway
 /* F44D0 802CFB20 00021080 */  sll       $v0, $v0, 2
 /* F44D4 802CFB24 46040003 */  div.s     $f0, $f0, $f4
 /* F44D8 802CFB28 E620001C */  swc1      $f0, 0x1c($s1)
-/* F44DC 802CFB2C 3C038010 */  lui       $v1, 0x8010
+/* F44DC 802CFB2C 3C038010 */  lui       $v1, %hi(gPartnerAnimations+0x4)
 /* F44E0 802CFB30 00621821 */  addu      $v1, $v1, $v0
-/* F44E4 802CFB34 8C63834C */  lw        $v1, -0x7cb4($v1)
+/* F44E4 802CFB34 8C63834C */  lw        $v1, %lo(gPartnerAnimations+0x4)($v1)
 /* F44E8 802CFB38 0000102D */  daddu     $v0, $zero, $zero
 /* F44EC 802CFB3C 080B3F12 */  j         .L802CFC48
 /* F44F0 802CFB40 AE230028 */   sw       $v1, 0x28($s1)
@@ -131,9 +131,9 @@ glabel PutPartnerAway
 /* F4528 802CFB78 000218C0 */  sll       $v1, $v0, 3
 /* F452C 802CFB7C 00621821 */  addu      $v1, $v1, $v0
 /* F4530 802CFB80 00031880 */  sll       $v1, $v1, 2
-/* F4534 802CFB84 3C028010 */  lui       $v0, 0x8010
+/* F4534 802CFB84 3C028010 */  lui       $v0, %hi(gPartnerAnimations+0x8)
 /* F4538 802CFB88 00431021 */  addu      $v0, $v0, $v1
-/* F453C 802CFB8C 8C428350 */  lw        $v0, -0x7cb0($v0)
+/* F453C 802CFB8C 8C428350 */  lw        $v0, %lo(gPartnerAnimations+0x8)($v0)
 /* F4540 802CFB90 AE220028 */  sw        $v0, 0x28($s1)
 .L802CFB94:
 /* F4544 802CFB94 8E26000C */  lw        $a2, 0xc($s1)
@@ -170,9 +170,9 @@ glabel PutPartnerAway
 /* F45BC 802CFC0C 000310C0 */  sll       $v0, $v1, 3
 /* F45C0 802CFC10 00431021 */  addu      $v0, $v0, $v1
 /* F45C4 802CFC14 00021080 */  sll       $v0, $v0, 2
-/* F45C8 802CFC18 3C018010 */  lui       $at, 0x8010
+/* F45C8 802CFC18 3C018010 */  lui       $at, %hi(gPartnerAnimations+0xC)
 /* F45CC 802CFC1C 00220821 */  addu      $at, $at, $v0
-/* F45D0 802CFC20 8C228354 */  lw        $v0, -0x7cac($at)
+/* F45D0 802CFC20 8C228354 */  lw        $v0, %lo(gPartnerAnimations+0xC)($at)
 /* F45D4 802CFC24 E634001C */  swc1      $f20, 0x1c($s1)
 /* F45D8 802CFC28 E620003C */  swc1      $f0, 0x3c($s1)
 /* F45DC 802CFC2C 0C00E228 */  jal       free_npc_by_index
