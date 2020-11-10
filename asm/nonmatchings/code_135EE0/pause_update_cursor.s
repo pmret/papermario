@@ -10,8 +10,8 @@ glabel pause_update_cursor
 /* 136830 802434F0 AFBF001C */  sw        $ra, 0x1c($sp)
 /* 136834 802434F4 0C090B9B */  jal       pause_interp_cursor
 /* 136838 802434F8 AFB00010 */   sw       $s0, 0x10($sp)
-/* 13683C 802434FC 3C058025 */  lui       $a1, 0x8025
-/* 136840 80243500 8CA5EFA4 */  lw        $a1, -0x105c($a1)
+/* 13683C 802434FC 3C058025 */  lui       $a1, %hi(gPauseMenuCursorOpacity)
+/* 136840 80243500 8CA5EFA4 */  lw        $a1, %lo(gPauseMenuCursorOpacity)($a1)
 /* 136844 80243504 18A00012 */  blez      $a1, .L80243550
 /* 136848 80243508 28A20100 */   slti     $v0, $a1, 0x100
 /* 13684C 8024350C 50400001 */  beql      $v0, $zero, .L80243514
@@ -22,8 +22,8 @@ glabel pause_update_cursor
 /* 13685C 8024351C 0C0513AC */  jal       icon_set_opacity
 /* 136860 80243520 8E040000 */   lw       $a0, ($s0)
 /* 136864 80243524 8E040000 */  lw        $a0, ($s0)
-/* 136868 80243528 3C058025 */  lui       $a1, 0x8025
-/* 13686C 8024352C 8CA5EF9C */  lw        $a1, -0x1064($a1)
+/* 136868 80243528 3C058025 */  lui       $a1, %hi(gPauseMenuCursorPos)
+/* 13686C 8024352C 8CA5EF9C */  lw        $a1, %lo(gPauseMenuCursorPos)($a1)
 /* 136870 80243530 3C068025 */  lui       $a2, 0x8025
 /* 136874 80243534 8CC6EFA0 */  lw        $a2, -0x1060($a2)
 /* 136878 80243538 02252821 */  addu      $a1, $s1, $a1

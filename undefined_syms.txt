@@ -146,8 +146,17 @@ D_8010F6D0 = 0x8010F6D0;
 
 gBackgroundImage = 0x80200000;
 
+gPauseMenuIconScripts = 0x8024EF60;
+gPauseMenuTabs = 0x8024EF80;
+gPauseMenuCursorPos = 0x8024EF9C;
+gPauseMenuCursorOpacity = 0x8024EFA4;
+gPauseMenuTargetPos = 0x8024EFA8;
 gPauseMenuCursorTargetOpacity = 0x8024EFB0;
 
+gPauseMenuTextScrollInterpEasingLUT = 0x8024F0AC;
+gPauseMenuPageScrollInterpEasingLUT = 0x8024F0BC;
+
+gPauseMenuTabIconIDs = 0x80270130;
 gStatsMenuIconIDs = 0x80270150;
 gBadgeMenuItemIDs = 0x80270180;
 gBadgeMenuCurrentPage = 0x80270280;

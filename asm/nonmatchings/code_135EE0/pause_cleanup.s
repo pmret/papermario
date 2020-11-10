@@ -33,8 +33,8 @@ glabel pause_cleanup
 /* 137AB0 80244770 1440FFFA */  bnez      $v0, .L8024475C
 /* 137AB4 80244774 00000000 */   nop      
 .L80244778:
-/* 137AB8 80244778 3C118025 */  lui       $s1, 0x8025
-/* 137ABC 8024477C 2631EF80 */  addiu     $s1, $s1, -0x1080
+/* 137AB8 80244778 3C118025 */  lui       $s1, %hi(gPauseMenuTabs)
+/* 137ABC 8024477C 2631EF80 */  addiu     $s1, $s1, %lo(gPauseMenuTabs)
 /* 137AC0 80244780 0000802D */  daddu     $s0, $zero, $zero
 .L80244784:
 /* 137AC4 80244784 8E240000 */  lw        $a0, ($s1)

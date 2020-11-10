@@ -80,10 +80,10 @@ glabel func_80242BAC
 /* 135FFC 80242CBC 14400009 */  bnez      $v0, .L80242CE4
 /* 136000 80242CC0 00000000 */   nop      
 .L80242CC4:
-/* 136004 80242CC4 3C018025 */  lui       $at, 0x8025
-/* 136008 80242CC8 AC31EFA8 */  sw        $s1, -0x1058($at)
-/* 13600C 80242CCC 3C018025 */  lui       $at, 0x8025
-/* 136010 80242CD0 AC31EF9C */  sw        $s1, -0x1064($at)
+/* 136004 80242CC4 3C018025 */  lui       $at, %hi(gPauseMenuTargetPos)
+/* 136008 80242CC8 AC31EFA8 */  sw        $s1, %lo(gPauseMenuTargetPos)($at)
+/* 13600C 80242CCC 3C018025 */  lui       $at, %hi(gPauseMenuCursorPos)
+/* 136010 80242CD0 AC31EF9C */  sw        $s1, %lo(gPauseMenuCursorPos)($at)
 /* 136014 80242CD4 3C018025 */  lui       $at, 0x8025
 /* 136018 80242CD8 AC33EFAC */  sw        $s3, -0x1054($at)
 /* 13601C 80242CDC 3C018025 */  lui       $at, 0x8025

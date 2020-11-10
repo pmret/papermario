@@ -2,10 +2,10 @@
 .set noreorder # don't insert nops after branches
 
 glabel pause_interp_cursor
-/* 1361AC 80242E6C 3C0A8025 */  lui       $t2, 0x8025
-/* 1361B0 80242E70 254AEF9C */  addiu     $t2, $t2, -0x1064
-/* 1361B4 80242E74 3C058025 */  lui       $a1, 0x8025
-/* 1361B8 80242E78 8CA5EFA8 */  lw        $a1, -0x1058($a1)
+/* 1361AC 80242E6C 3C0A8025 */  lui       $t2, %hi(gPauseMenuCursorPos)
+/* 1361B0 80242E70 254AEF9C */  addiu     $t2, $t2, %lo(gPauseMenuCursorPos)
+/* 1361B4 80242E74 3C058025 */  lui       $a1, %hi(gPauseMenuTargetPos)
+/* 1361B8 80242E78 8CA5EFA8 */  lw        $a1, %lo(gPauseMenuTargetPos)($a1)
 /* 1361BC 80242E7C 8D430000 */  lw        $v1, ($t2)
 /* 1361C0 80242E80 3C013FE0 */  lui       $at, 0x3fe0
 /* 1361C4 80242E84 44812800 */  mtc1      $at, $f5
@@ -43,8 +43,8 @@ glabel pause_interp_cursor
 /* 136240 80242F00 AD450000 */  sw        $a1, ($t2)
 /* 136244 80242F04 AD240000 */  sw        $a0, ($t1)
 .L80242F08:
-/* 136248 80242F08 3C038025 */  lui       $v1, 0x8025
-/* 13624C 80242F0C 2463EF9C */  addiu     $v1, $v1, -0x1064
+/* 136248 80242F08 3C038025 */  lui       $v1, %hi(gPauseMenuCursorPos)
+/* 13624C 80242F0C 2463EF9C */  addiu     $v1, $v1, %lo(gPauseMenuCursorPos)
 /* 136250 80242F10 8C620000 */  lw        $v0, ($v1)
 /* 136254 80242F14 00471021 */  addu      $v0, $v0, $a3
 /* 136258 80242F18 AC620000 */  sw        $v0, ($v1)
@@ -56,8 +56,8 @@ glabel pause_interp_cursor
 /* 136270 80242F30 00481021 */  addu      $v0, $v0, $t0
 /* 136274 80242F34 14800009 */  bnez      $a0, .L80242F5C
 /* 136278 80242F38 AC620000 */   sw       $v0, ($v1)
-/* 13627C 80242F3C 3C038025 */  lui       $v1, 0x8025
-/* 136280 80242F40 2463EFA4 */  addiu     $v1, $v1, -0x105c
+/* 13627C 80242F3C 3C038025 */  lui       $v1, %hi(gPauseMenuCursorOpacity)
+/* 136280 80242F40 2463EFA4 */  addiu     $v1, $v1, %lo(gPauseMenuCursorOpacity)
 /* 136284 80242F44 8C620000 */  lw        $v0, ($v1)
 /* 136288 80242F48 2442FF80 */  addiu     $v0, $v0, -0x80
 /* 13628C 80242F4C 0441000C */  bgez      $v0, .L80242F80
@@ -65,8 +65,8 @@ glabel pause_interp_cursor
 /* 136294 80242F54 08090BE0 */  j         .L80242F80
 /* 136298 80242F58 AC600000 */   sw       $zero, ($v1)
 .L80242F5C:
-/* 13629C 80242F5C 3C038025 */  lui       $v1, 0x8025
-/* 1362A0 80242F60 2463EFA4 */  addiu     $v1, $v1, -0x105c
+/* 13629C 80242F5C 3C038025 */  lui       $v1, %hi(gPauseMenuCursorOpacity)
+/* 1362A0 80242F60 2463EFA4 */  addiu     $v1, $v1, %lo(gPauseMenuCursorOpacity)
 /* 1362A4 80242F64 8C620000 */  lw        $v0, ($v1)
 /* 1362A8 80242F68 24420020 */  addiu     $v0, $v0, 0x20
 /* 1362AC 80242F6C AC620000 */  sw        $v0, ($v1)

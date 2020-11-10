@@ -1542,4 +1542,13 @@ typedef struct {
     /* 0x08 */ s32 count;
 } PauseItemPage; // size = 0xC
 
+typedef struct {
+    /* 0x00 */ char unk_00[8];
+    /* 0x08 */ s8* unk_08;
+    /* 0x0C */ void* fpInit;
+    /* 0x10 */ void* fpHandleInput;
+    /* 0x14 */ void* fpUpdate;
+    /* 0x18 */ void* fpCleanup;
+} MenuTab; // size = 0x1C
+
 #endif

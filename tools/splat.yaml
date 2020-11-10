@@ -301,6 +301,7 @@ segments:
     vram: 0x80242BA0
     files:
     - [0x135EE0, c]
+    - [0x138CC0, c]
     - [0x13CAF0, c]
     - [0x13FD40, c]
     - [0x140C70, c]

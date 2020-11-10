@@ -120,9 +120,17 @@ extern s32 D_800A0960;
 extern s32 D_800A0964;
 
 // Pause
+extern s32 gPauseMenuTabIconIDs[6];
 extern PauseItemPage gItemMenuPages[20];
 extern s32 gPauseMenuStrings[348];
+extern s32 gPauseMenuIconScripts[8];
+extern MenuTab* gPauseMenuTabs[7];
+extern s32 gPauseMenuCursorPos[2];
+extern s32 gPauseMenuCursorOpacity;
+extern s32 gPauseMenuTargetPos[2];
 extern s32 gPauseMenuCursorTargetOpacity;
+extern s8 gPauseMenuTextScrollInterpEasingLUT[16];
+extern s8 gPauseMenuPageScrollInterpEasingLUT[16];
 
 // Badges
 extern PauseItemPage gBadgeMenuPages[20];

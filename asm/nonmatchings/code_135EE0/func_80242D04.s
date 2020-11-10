@@ -66,10 +66,10 @@ glabel func_80242D04
 /* 136120 80242DE0 3C018025 */  lui       $at, 0x8025
 /* 136124 80242DE4 AC20EFB4 */  sw        $zero, -0x104c($at)
 .L80242DE8:
-/* 136128 80242DE8 3C018025 */  lui       $at, 0x8025
-/* 13612C 80242DEC AC32EFA8 */  sw        $s2, -0x1058($at)
-/* 136130 80242DF0 3C018025 */  lui       $at, 0x8025
-/* 136134 80242DF4 AC32EF9C */  sw        $s2, -0x1064($at)
+/* 136128 80242DE8 3C018025 */  lui       $at, %hi(gPauseMenuTargetPos)
+/* 13612C 80242DEC AC32EFA8 */  sw        $s2, %lo(gPauseMenuTargetPos)($at)
+/* 136130 80242DF0 3C018025 */  lui       $at, %hi(gPauseMenuCursorPos)
+/* 136134 80242DF4 AC32EF9C */  sw        $s2, %lo(gPauseMenuCursorPos)($at)
 /* 136138 80242DF8 3C018025 */  lui       $at, 0x8025
 /* 13613C 80242DFC AC33EFAC */  sw        $s3, -0x1054($at)
 /* 136140 80242E00 3C018025 */  lui       $at, 0x8025
@@ -89,8 +89,8 @@ glabel func_80242D04
 /* 136174 80242E34 14400005 */  bnez      $v0, .L80242E4C
 /* 136178 80242E38 00000000 */   nop      
 .L80242E3C:
-/* 13617C 80242E3C 3C018025 */  lui       $at, 0x8025
-/* 136180 80242E40 AC32EFA8 */  sw        $s2, -0x1058($at)
+/* 13617C 80242E3C 3C018025 */  lui       $at, %hi(gPauseMenuTargetPos)
+/* 136180 80242E40 AC32EFA8 */  sw        $s2, %lo(gPauseMenuTargetPos)($at)
 /* 136184 80242E44 3C018025 */  lui       $at, 0x8025
 /* 136188 80242E48 AC33EFAC */  sw        $s3, -0x1054($at)
 .L80242E4C:

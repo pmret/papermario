@@ -23,9 +23,9 @@ glabel pause_interp_vertical_scroll
 /* 1367F0 802434B0 08090D32 */  j         .L802434C8
 /* 1367F4 802434B4 00830018 */   mult     $a0, $v1
 .L802434B8:
-/* 1367F8 802434B8 3C048025 */  lui       $a0, 0x8025
+/* 1367F8 802434B8 3C048025 */  lui       $a0, %hi(gPauseMenuPageScrollInterpEasingLUT)
 /* 1367FC 802434BC 00902021 */  addu      $a0, $a0, $s0
-/* 136800 802434C0 9084F0BC */  lbu       $a0, -0xf44($a0)
+/* 136800 802434C0 9084F0BC */  lbu       $a0, %lo(gPauseMenuPageScrollInterpEasingLUT)($a0)
 .L802434C4:
 /* 136804 802434C4 00830018 */  mult      $a0, $v1
 .L802434C8:
