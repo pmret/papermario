@@ -46,7 +46,7 @@ void pause_interp_cursor(void) {
     }
 
     if (gPauseMenuCursorTargetOpacity == 0) {
-        opacity= &gPauseMenuCursorOpacity;
+        opacity = &gPauseMenuCursorOpacity;
 
         *opacity -= 128;
         if (*opacity < 0) {

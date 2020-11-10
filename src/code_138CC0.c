@@ -52,7 +52,8 @@ s32 pause_badges_get_pos_x(s32 page, s32 itemIndex) {
 }
 
 s32 pause_badges_get_pos_y(s32 page, s32 itemIndex) {
-    return ((page + 1) * 11) + (BADGE_MENU_PAGE(page)->listStart * 16) + ((itemIndex / BADGE_MENU_PAGE(page)->numCols) * 16);
+    return ((page + 1) * 11) + (BADGE_MENU_PAGE(page)->listStart * 16) + ((itemIndex / BADGE_MENU_PAGE(
+                page)->numCols) * 16);
 }
 
 s32 pause_badges_get_column(s32 page, s32 itemIdx) {
