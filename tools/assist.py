@@ -34,6 +34,10 @@ def get_all_s_files():
     return ret
 
 
+def get_symbol_length(sym_name):
+    return map_offsets[sym_name]["end"] - map_offsets[sym_name]["start"]
+
+
 def get_symbol_bytes(offsets, func):
     if func not in offsets or "start" not in offsets[func] or "end" not in offsets[func]:
         return None
@@ -171,6 +175,18 @@ def do_query(query):
         i += 1
     print()
 
+
+def do_cross_query():
+    clusters = []
+
+    for sym_name in map_syms:
+        sym = map_syms[sym_name]
+        if get_symbol_length(sym_name) > 8:
+            cluster_match = False
+            for cluster in clusters:
+                pass # todo do
+
+
 parser = argparse.ArgumentParser(description="Tools to assist with decomp")
 parser.add_argument("query", help="function or file")
 parser.add_argument("--threshold", help="score threshold between 0 and 1 (higher is more restrictive)", type=float, default=0.95, required=False)
@@ -191,4 +207,6 @@ if query_dir is not None:
     for f_name in files:
         do_query(f_name[:-2])
 else:
+    if args.query == "cross":
+        do_cross_query()
     do_query(args.query)

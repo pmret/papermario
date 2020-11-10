@@ -17,7 +17,7 @@ f32 fixed_var_to_float(Bytecode scriptVar) {
 }
 
 Bytecode float_to_fixed_var(f32 value) {
-    return (s32)(value * 1024.0f) - 230000000;
+    return (s32)(value * 1024.0f) + -230000000;
 }
 
 ApiStatus si_handle_return(ScriptInstance* script) {
