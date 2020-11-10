@@ -66,15 +66,15 @@ glabel func_80242D04
 /* 136120 80242DE0 3C018025 */  lui       $at, 0x8025
 /* 136124 80242DE4 AC20EFB4 */  sw        $zero, -0x104c($at)
 .L80242DE8:
-/* 136128 80242DE8 3C018025 */  lui       $at, %hi(gPauseMenuTargetPos)
-/* 13612C 80242DEC AC32EFA8 */  sw        $s2, %lo(gPauseMenuTargetPos)($at)
-/* 136130 80242DF0 3C018025 */  lui       $at, %hi(gPauseMenuCursorPos)
-/* 136134 80242DF4 AC32EF9C */  sw        $s2, %lo(gPauseMenuCursorPos)($at)
-/* 136138 80242DF8 3C018025 */  lui       $at, 0x8025
-/* 13613C 80242DFC AC33EFAC */  sw        $s3, -0x1054($at)
-/* 136140 80242E00 3C018025 */  lui       $at, 0x8025
+/* 136128 80242DE8 3C018025 */  lui       $at, %hi(gPauseMenuTargetPosX)
+/* 13612C 80242DEC AC32EFA8 */  sw        $s2, %lo(gPauseMenuTargetPosX)($at)
+/* 136130 80242DF0 3C018025 */  lui       $at, %hi(gPauseMenuCursorPosX)
+/* 136134 80242DF4 AC32EF9C */  sw        $s2, %lo(gPauseMenuCursorPosX)($at)
+/* 136138 80242DF8 3C018025 */  lui       $at, %hi(gPauseMenuTargetPosY)
+/* 13613C 80242DFC AC33EFAC */  sw        $s3, %lo(gPauseMenuTargetPosY)($at)
+/* 136140 80242E00 3C018025 */  lui       $at, %hi(gPauseMenuCursorPosY)
 /* 136144 80242E04 08090B93 */  j         .L80242E4C
-/* 136148 80242E08 AC33EFA0 */   sw       $s3, -0x1060($at)
+/* 136148 80242E08 AC33EFA0 */   sw       $s3, %lo(gPauseMenuCursorPosY)($at)
 .L80242E0C:
 /* 13614C 80242E0C 92020000 */  lbu       $v0, ($s0)
 /* 136150 80242E10 30420008 */  andi      $v0, $v0, 8
@@ -89,10 +89,10 @@ glabel func_80242D04
 /* 136174 80242E34 14400005 */  bnez      $v0, .L80242E4C
 /* 136178 80242E38 00000000 */   nop      
 .L80242E3C:
-/* 13617C 80242E3C 3C018025 */  lui       $at, %hi(gPauseMenuTargetPos)
-/* 136180 80242E40 AC32EFA8 */  sw        $s2, %lo(gPauseMenuTargetPos)($at)
-/* 136184 80242E44 3C018025 */  lui       $at, 0x8025
-/* 136188 80242E48 AC33EFAC */  sw        $s3, -0x1054($at)
+/* 13617C 80242E3C 3C018025 */  lui       $at, %hi(gPauseMenuTargetPosX)
+/* 136180 80242E40 AC32EFA8 */  sw        $s2, %lo(gPauseMenuTargetPosX)($at)
+/* 136184 80242E44 3C018025 */  lui       $at, %hi(gPauseMenuTargetPosY)
+/* 136188 80242E48 AC33EFAC */  sw        $s3, %lo(gPauseMenuTargetPosY)($at)
 .L80242E4C:
 /* 13618C 80242E4C 8FBF0024 */  lw        $ra, 0x24($sp)
 /* 136190 80242E50 8FB40020 */  lw        $s4, 0x20($sp)

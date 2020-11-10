@@ -13,47 +13,58 @@ INCLUDE_ASM(s32, "code_135EE0", func_80242BAC);
 
 INCLUDE_ASM(s32, "code_135EE0", func_80242D04);
 
+// Delay slot issue with gPauseMenuCursorTargetOpacity (needs .data)
+#ifdef NON_MATCHING
+void pause_interp_cursor(void) {
+    s32* posX = &gPauseMenuCursorPosX;
+    s32* posY = &gPauseMenuCursorPosY;
+    s32* targetPosX = &gPauseMenuTargetPosX;
+    s32* targetPosY = &gPauseMenuTargetPosY;
+    s32 xDelta;
+    s32 yDelta;
+    s32* opacity;
+
+    xDelta = (*targetPosX - *posX) * 0.5;
+    yDelta = (*targetPosY - *posY) * 0.5;
+
+    if ((*targetPosX != *posX) || (*targetPosY != *posY)) {
+        if ((xDelta == 0) && (yDelta == 0)) {
+            *posX = *targetPosX;
+            *posY = *targetPosY;
+        }
+    }
+
+    // Macros? something strange
+    {
+        s32* posX = &gPauseMenuCursorPosX;
+        *posX += xDelta;
+    }
+
+    {
+        s32* posY = &gPauseMenuCursorPosY;
+        *posY += yDelta;
+    }
+
+    if (gPauseMenuCursorTargetOpacity == 0) {
+        opacity= &gPauseMenuCursorOpacity;
+
+        *opacity -= 128;
+        if (*opacity < 0) {
+            *opacity = 0;
+        }
+    } else {
+        opacity = &gPauseMenuCursorOpacity;
+
+        *opacity += 32;
+        if (*opacity > 255) {
+            *opacity = 255;
+        }
+    }
+    gPauseMenuCursorTargetOpacity = 255;
+}
+#else
 INCLUDE_ASM(s32, "code_135EE0", pause_interp_cursor);
-// void pause_interp_cursor(void) {
-//     s32 targetPosX;
-//     s32 posX;
-//     s32 targetPosY;
-//     s32 posY;
-//     s32 xDelta;
-//     s32 yDelta;
-//     s32 temp_v0;
-//     s32 temp_v0_2;
-
-//     targetPosX = gPauseMenuTargetPos[0];
-//     posX = gPauseMenuCursorPos[0];
-//     targetPosY = gPauseMenuTargetPos[1];
-//     posY = gPauseMenuCursorPos[1];
-//     xDelta = (targetPosX - posX) * 0.5;
-//     yDelta = (targetPosY - posY) * 0.5;
-
-//     if ((targetPosX != posX) || (targetPosY != posY)) {
-//         if ((xDelta == 0) && (yDelta == 0)) {
-//             gPauseMenuCursorPos[0] = targetPosX;
-//             gPauseMenuCursorPos[1] = targetPosY;
-//         }
-//     }
-
-//     gPauseMenuCursorPos[0] += xDelta;
-//     gPauseMenuCursorPos[1] += yDelta;
-
-//     if (gPauseMenuCursorTargetOpacity == 0) {
-//         gPauseMenuCursorOpacity -= 128;
-//         if (gPauseMenuCursorOpacity < 0) {
-//             gPauseMenuCursorOpacity = 0;
-//         }
-//     } else {
-//         gPauseMenuCursorOpacity += 32;
-//         if (gPauseMenuCursorOpacity > 255) {
-//             gPauseMenuCursorOpacity = 255;
-//         }
-//     }
-//     gPauseMenuCursorTargetOpacity = 255;
-// }
+#endif
 
 INCLUDE_ASM(s32, "code_135EE0", func_80242F90);
 
@@ -106,8 +117,8 @@ s32 pause_interp_vertical_scroll(s32 deltaBefore) {
 INCLUDE_ASM(s32, "code_135EE0", pause_interp_vertical_scroll);
 #endif
 
-INCLUDE_ASM(s32, "code_135EE0", pause_update_cursor);
-/*void pause_update_cursor(s32 arg0, s32 offsetX, s32 offsetY) {
+//INCLUDE_ASM(s32, "code_135EE0", pause_update_cursor);
+void pause_update_cursor(s32 arg0, s32 offsetX, s32 offsetY) {
     s32 opacity;
 
     pause_interp_cursor();
@@ -117,10 +128,10 @@ INCLUDE_ASM(s32, "code_135EE0", pause_update_cursor);
             opacity = 255;
         }
         icon_set_opacity(gPauseMenuCommonIconIDs[0], opacity);
-        set_icon_render_pos(gPauseMenuCommonIconIDs[0], offsetX + gPauseMenuCursorPos[0], offsetY + gPauseMenuCursorPos[1]);
+        set_icon_render_pos(gPauseMenuCommonIconIDs[0], offsetX + gPauseMenuCursorPosX, offsetY + gPauseMenuCursorPosY);
         draw_icon_2(gPauseMenuCommonIconIDs[0]);
     }
-}*/
+}
 
 void func_80243568(void) {
 }
