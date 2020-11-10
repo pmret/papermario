@@ -148,6 +148,11 @@ gBackgroundImage = 0x80200000;
 
 gPauseMenuCursorTargetOpacity = 0x8024EFB0;
 
+gBadgeMenuPages = 0x80270288;
+gBadgeMenuCurrentScrollPos = 0x8027038C;
+gBadgeMenuTargetScrollPos = 0x80270390;
+gPauseItemPages = 0x802704D0;
+
 D_802C3000 = 0x802C3000;
 D_802DBD40 = 0x802DBD40;
 gCurrentPrintContext = 0x802DB260;

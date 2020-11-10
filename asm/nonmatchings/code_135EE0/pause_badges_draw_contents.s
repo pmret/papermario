@@ -1524,10 +1524,10 @@ glabel pause_badges_draw_contents
 /* 13BED8 80248B98 50400001 */  beql      $v0, $zero, .L80248BA0
 /* 13BEDC 80248B9C 24060070 */   addiu    $a2, $zero, 0x70
 .L80248BA0:
-/* 13BEE0 80248BA0 3C038027 */  lui       $v1, 0x8027
-/* 13BEE4 80248BA4 8C63038C */  lw        $v1, 0x38c($v1)
-/* 13BEE8 80248BA8 3C028027 */  lui       $v0, 0x8027
-/* 13BEEC 80248BAC 8C420390 */  lw        $v0, 0x390($v0)
+/* 13BEE0 80248BA0 3C038027 */  lui       $v1, %hi(gBadgeMenuCurrentScrollPos)
+/* 13BEE4 80248BA4 8C63038C */  lw        $v1, %lo(gBadgeMenuCurrentScrollPos)($v1)
+/* 13BEE8 80248BA8 3C028027 */  lui       $v0, %hi(gBadgeMenuTargetScrollPos)
+/* 13BEEC 80248BAC 8C420390 */  lw        $v0, %lo(gBadgeMenuTargetScrollPos)($v0)
 /* 13BEF0 80248BB0 1062000A */  beq       $v1, $v0, .L80248BDC
 /* 13BEF4 80248BB4 24040020 */   addiu    $a0, $zero, 0x20
 /* 13BEF8 80248BB8 2605005D */  addiu     $a1, $s0, 0x5d

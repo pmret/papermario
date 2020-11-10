@@ -120,8 +120,14 @@ extern s32 D_800A0960;
 extern s32 D_800A0964;
 
 // Pause
+extern PauseItemPage gItemMenuPages[20];
 extern s32 gPauseMenuStrings[348];
 extern s32 gPauseMenuCursorTargetOpacity;
+
+// Badges
+extern PauseItemPage gBadgeMenuPages[20];
+extern s32 gBadgeMenuCurrentScrollPos;
+extern s32 gBadgeMenuTargetScrollPos;
 
 extern s32 gGameState;
 extern s32 D_8009A650[1];

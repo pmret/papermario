@@ -1,6 +1,13 @@
 #include "common.h"
 
+// Need data segment and vars declared above
+#ifdef NON_MATCHING
+void pause_set_cursor_opacity(s32 val) {
+    gPauseMenuCursorTargetOpacity = val;
+}
+#else
 INCLUDE_ASM(s32, "code_135EE0", pause_set_cursor_opacity);
+#endif
 
 INCLUDE_ASM(s32, "code_135EE0", func_80242BAC);
 
@@ -100,9 +107,17 @@ INCLUDE_ASM(s32, "code_135EE0", pause_badges_get_column);
 
 INCLUDE_ASM(s32, "code_135EE0", pause_badges_get_row);
 
-INCLUDE_ASM(s32, "code_135EE0", pause_badges_is_visible);
+s32 pause_badges_is_visible(s32 y) {
+    if (y < gBadgeMenuCurrentScrollPos - 32) {
+        return FALSE;
+    } else {
+        return y < gBadgeMenuCurrentScrollPos + 128;
+    }
+}
 
-INCLUDE_ASM(s32, "code_135EE0", pause_badges_scroll_offset_y);
+s32 pause_badges_scroll_offset_y(s32 offset) {
+    return offset - gBadgeMenuCurrentScrollPos;
+}
 
 s32 pause_badges_scroll_offset_x(s32 x) {
     return x;

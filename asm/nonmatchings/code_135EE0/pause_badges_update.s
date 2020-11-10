@@ -74,11 +74,11 @@ glabel pause_badges_update
 /* 13CA54 80249714 00002812 */  mflo      $a1
 /* 13CA58 80249718 0C091C5A */  jal       pause_badges_get_pos_y
 /* 13CA5C 8024971C 00000000 */   nop      
-/* 13CA60 80249720 3C108027 */  lui       $s0, 0x8027
-/* 13CA64 80249724 2610038C */  addiu     $s0, $s0, 0x38c
+/* 13CA60 80249720 3C108027 */  lui       $s0, %hi(gBadgeMenuCurrentScrollPos)
+/* 13CA64 80249724 2610038C */  addiu     $s0, $s0, %lo(gBadgeMenuCurrentScrollPos)
 /* 13CA68 80249728 8E040000 */  lw        $a0, ($s0)
-/* 13CA6C 8024972C 3C018027 */  lui       $at, 0x8027
-/* 13CA70 80249730 AC220390 */  sw        $v0, 0x390($at)
+/* 13CA6C 8024972C 3C018027 */  lui       $at, %hi(gBadgeMenuTargetScrollPos)
+/* 13CA70 80249730 AC220390 */  sw        $v0, %lo(gBadgeMenuTargetScrollPos)($at)
 /* 13CA74 80249734 0C090D1B */  jal       pause_interp_vertical_scroll
 /* 13CA78 80249738 00442023 */   subu     $a0, $v0, $a0
 /* 13CA7C 8024973C 8E030000 */  lw        $v1, ($s0)

@@ -153,9 +153,9 @@ glabel pause_badges_load_badges
 /* 13C2DC 80248F9C 8FBF0018 */  lw        $ra, 0x18($sp)
 /* 13C2E0 80248FA0 8FB10014 */  lw        $s1, 0x14($sp)
 /* 13C2E4 80248FA4 8FB00010 */  lw        $s0, 0x10($sp)
-/* 13C2E8 80248FA8 3C018027 */  lui       $at, 0x8027
-/* 13C2EC 80248FAC AC22038C */  sw        $v0, 0x38c($at)
-/* 13C2F0 80248FB0 3C018027 */  lui       $at, 0x8027
-/* 13C2F4 80248FB4 AC220390 */  sw        $v0, 0x390($at)
+/* 13C2E8 80248FA8 3C018027 */  lui       $at, %hi(gBadgeMenuCurrentScrollPos)
+/* 13C2EC 80248FAC AC22038C */  sw        $v0, %lo(gBadgeMenuCurrentScrollPos)($at)
+/* 13C2F0 80248FB0 3C018027 */  lui       $at, %hi(gBadgeMenuTargetScrollPos)
+/* 13C2F4 80248FB4 AC220390 */  sw        $v0, %lo(gBadgeMenuTargetScrollPos)($at)
 /* 13C2F8 80248FB8 03E00008 */  jr        $ra
 /* 13C2FC 80248FBC 27BD0020 */   addiu    $sp, $sp, 0x20
