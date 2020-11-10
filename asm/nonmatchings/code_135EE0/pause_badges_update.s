@@ -5,8 +5,8 @@ glabel pause_badges_update
 /* 13C95C 8024961C 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 13C960 80249620 3C038027 */  lui       $v1, 0x8027
 /* 13C964 80249624 8C630280 */  lw        $v1, 0x280($v1)
-/* 13C968 80249628 3C048027 */  lui       $a0, 0x8027
-/* 13C96C 8024962C 24840288 */  addiu     $a0, $a0, 0x288
+/* 13C968 80249628 3C048027 */  lui       $a0, %hi(gBadgeMenuPages)
+/* 13C96C 8024962C 24840288 */  addiu     $a0, $a0, %lo(gBadgeMenuPages)
 /* 13C970 80249630 AFBF0014 */  sw        $ra, 0x14($sp)
 /* 13C974 80249634 AFB00010 */  sw        $s0, 0x10($sp)
 /* 13C978 80249638 00031040 */  sll       $v0, $v1, 1

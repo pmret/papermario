@@ -79,8 +79,8 @@ glabel pause_items_load_items
 /* 13D920 8024A5E0 1440FFFC */  bnez      $v0, .L8024A5D4
 /* 13D924 8024A5E4 24630002 */   addiu    $v1, $v1, 2
 .L8024A5E8:
-/* 13D928 8024A5E8 3C058027 */  lui       $a1, 0x8027
-/* 13D92C 8024A5EC 24A504D0 */  addiu     $a1, $a1, 0x4d0
+/* 13D928 8024A5E8 3C058027 */  lui       $a1, %hi(gPauseItemPages)
+/* 13D92C 8024A5EC 24A504D0 */  addiu     $a1, $a1, %lo(gPauseItemPages)
 /* 13D930 8024A5F0 0000202D */  daddu     $a0, $zero, $zero
 /* 13D934 8024A5F4 3C078027 */  lui       $a3, 0x8027
 /* 13D938 8024A5F8 24E705CC */  addiu     $a3, $a3, 0x5cc

@@ -76,8 +76,8 @@ glabel pause_badges_load_badges
 /* 13C1C8 80248E88 1440FFFC */  bnez      $v0, .L80248E7C
 /* 13C1CC 80248E8C 24630002 */   addiu    $v1, $v1, 2
 .L80248E90:
-/* 13C1D0 80248E90 3C058027 */  lui       $a1, 0x8027
-/* 13C1D4 80248E94 24A50288 */  addiu     $a1, $a1, 0x288
+/* 13C1D0 80248E90 3C058027 */  lui       $a1, %hi(gBadgeMenuPages)
+/* 13C1D4 80248E94 24A50288 */  addiu     $a1, $a1, %lo(gBadgeMenuPages)
 /* 13C1D8 80248E98 0000202D */  daddu     $a0, $zero, $zero
 /* 13C1DC 80248E9C 3C078027 */  lui       $a3, 0x8027
 /* 13C1E0 80248EA0 24E70384 */  addiu     $a3, $a3, 0x384

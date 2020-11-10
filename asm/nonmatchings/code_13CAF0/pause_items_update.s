@@ -5,8 +5,8 @@ glabel pause_items_update
 /* 13DF94 8024AC54 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 13DF98 8024AC58 3C038027 */  lui       $v1, 0x8027
 /* 13DF9C 8024AC5C 8C6304C8 */  lw        $v1, 0x4c8($v1)
-/* 13DFA0 8024AC60 3C048027 */  lui       $a0, 0x8027
-/* 13DFA4 8024AC64 248404D0 */  addiu     $a0, $a0, 0x4d0
+/* 13DFA0 8024AC60 3C048027 */  lui       $a0, %hi(gPauseItemPages)
+/* 13DFA4 8024AC64 248404D0 */  addiu     $a0, $a0, %lo(gPauseItemPages)
 /* 13DFA8 8024AC68 AFBF0014 */  sw        $ra, 0x14($sp)
 /* 13DFAC 8024AC6C AFB00010 */  sw        $s0, 0x10($sp)
 /* 13DFB0 8024AC70 00031040 */  sll       $v0, $v1, 1

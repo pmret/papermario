@@ -201,8 +201,8 @@ glabel pause_badges_handle_input
 /* 13C6B0 80249370 3C068027 */  lui       $a2, 0x8027
 /* 13C6B4 80249374 24C60280 */  addiu     $a2, $a2, 0x280
 /* 13C6B8 80249378 8CC40000 */  lw        $a0, ($a2)
-/* 13C6BC 8024937C 3C078027 */  lui       $a3, 0x8027
-/* 13C6C0 80249380 24E70288 */  addiu     $a3, $a3, 0x288
+/* 13C6BC 8024937C 3C078027 */  lui       $a3, %hi(gBadgeMenuPages)
+/* 13C6C0 80249380 24E70288 */  addiu     $a3, $a3, %lo(gBadgeMenuPages)
 /* 13C6C4 80249384 00041040 */  sll       $v0, $a0, 1
 /* 13C6C8 80249388 00441021 */  addu      $v0, $v0, $a0
 /* 13C6CC 8024938C 00021080 */  sll       $v0, $v0, 2
@@ -229,8 +229,8 @@ glabel pause_badges_handle_input
 /* 13C71C 802493DC 3C068027 */  lui       $a2, 0x8027
 /* 13C720 802493E0 24C60280 */  addiu     $a2, $a2, 0x280
 /* 13C724 802493E4 8CC70000 */  lw        $a3, ($a2)
-/* 13C728 802493E8 3C048027 */  lui       $a0, 0x8027
-/* 13C72C 802493EC 24840288 */  addiu     $a0, $a0, 0x288
+/* 13C728 802493E8 3C048027 */  lui       $a0, %hi(gBadgeMenuPages)
+/* 13C72C 802493EC 24840288 */  addiu     $a0, $a0, %lo(gBadgeMenuPages)
 /* 13C730 802493F0 24E30001 */  addiu     $v1, $a3, 1
 /* 13C734 802493F4 00031040 */  sll       $v0, $v1, 1
 /* 13C738 802493F8 00431021 */  addu      $v0, $v0, $v1

@@ -74,8 +74,8 @@ glabel pause_items_draw_contents
 /* 13CDBC 80249A7C AFAA005C */  sw        $t2, 0x5c($sp)
 /* 13CDC0 80249A80 0C03D4B8 */  jal       draw_box
 /* 13CDC4 80249A84 AFAB0058 */   sw       $t3, 0x58($sp)
-/* 13CDC8 80249A88 3C108027 */  lui       $s0, 0x8027
-/* 13CDCC 80249A8C 261004D0 */  addiu     $s0, $s0, 0x4d0
+/* 13CDC8 80249A88 3C108027 */  lui       $s0, %hi(gPauseItemPages)
+/* 13CDCC 80249A8C 261004D0 */  addiu     $s0, $s0, %lo(gPauseItemPages)
 /* 13CDD0 80249A90 8FAB00B0 */  lw        $t3, 0xb0($sp)
 /* 13CDD4 80249A94 8FAA00AC */  lw        $t2, 0xac($sp)
 /* 13CDD8 80249A98 25660007 */  addiu     $a2, $t3, 7
@@ -169,8 +169,8 @@ glabel pause_items_draw_contents
 /* 13CF28 80249BE8 ACA20004 */  sw        $v0, 4($a1)
 .L80249BEC:
 /* 13CF2C 80249BEC 0000F02D */  daddu     $fp, $zero, $zero
-/* 13CF30 80249BF0 3C0B8027 */  lui       $t3, 0x8027
-/* 13CF34 80249BF4 256B04D0 */  addiu     $t3, $t3, 0x4d0
+/* 13CF30 80249BF0 3C0B8027 */  lui       $t3, %hi(gPauseItemPages)
+/* 13CF34 80249BF4 256B04D0 */  addiu     $t3, $t3, %lo(gPauseItemPages)
 /* 13CF38 80249BF8 AFAB007C */  sw        $t3, 0x7c($sp)
 .L80249BFC:
 /* 13CF3C 80249BFC 8FAA007C */  lw        $t2, 0x7c($sp)
@@ -541,9 +541,9 @@ glabel pause_items_draw_contents
 /* 13D4A0 8024A160 00021840 */  sll       $v1, $v0, 1
 /* 13D4A4 8024A164 00621821 */  addu      $v1, $v1, $v0
 /* 13D4A8 8024A168 00031880 */  sll       $v1, $v1, 2
-/* 13D4AC 8024A16C 3C028027 */  lui       $v0, 0x8027
+/* 13D4AC 8024A16C 3C028027 */  lui       $v0, %hi(gPauseItemPages)
 /* 13D4B0 8024A170 00431021 */  addu      $v0, $v0, $v1
-/* 13D4B4 8024A174 904204D0 */  lbu       $v0, 0x4d0($v0)
+/* 13D4B4 8024A174 904204D0 */  lbu       $v0, %lo(gPauseItemPages)($v0)
 /* 13D4B8 8024A178 1040000C */  beqz      $v0, .L8024A1AC
 /* 13D4BC 8024A17C 00000000 */   nop      
 /* 13D4C0 8024A180 3C108027 */  lui       $s0, 0x8027
@@ -698,8 +698,8 @@ glabel pause_items_draw_contents
 /* 13D6E4 8024A3A4 3C118027 */  lui       $s1, 0x8027
 /* 13D6E8 8024A3A8 263104C8 */  addiu     $s1, $s1, 0x4c8
 /* 13D6EC 8024A3AC 8E240000 */  lw        $a0, ($s1)
-/* 13D6F0 8024A3B0 3C128027 */  lui       $s2, 0x8027
-/* 13D6F4 8024A3B4 265204D0 */  addiu     $s2, $s2, 0x4d0
+/* 13D6F0 8024A3B0 3C128027 */  lui       $s2, %hi(gPauseItemPages)
+/* 13D6F4 8024A3B4 265204D0 */  addiu     $s2, $s2, %lo(gPauseItemPages)
 /* 13D6F8 8024A3B8 00041040 */  sll       $v0, $a0, 1
 /* 13D6FC 8024A3BC 00441021 */  addu      $v0, $v0, $a0
 /* 13D700 8024A3C0 00021080 */  sll       $v0, $v0, 2

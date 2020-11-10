@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel pause_badges_get_pos_y
-/* 13A4A8 80247168 3C028027 */  lui       $v0, 0x8027
-/* 13A4AC 8024716C 24420288 */  addiu     $v0, $v0, 0x288
+/* 13A4A8 80247168 3C028027 */  lui       $v0, %hi(gBadgeMenuPages)
+/* 13A4AC 8024716C 24420288 */  addiu     $v0, $v0, %lo(gBadgeMenuPages)
 /* 13A4B0 80247170 00041840 */  sll       $v1, $a0, 1
 /* 13A4B4 80247174 00641821 */  addu      $v1, $v1, $a0
 /* 13A4B8 80247178 00031880 */  sll       $v1, $v1, 2

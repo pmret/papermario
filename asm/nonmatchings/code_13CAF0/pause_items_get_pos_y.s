@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel pause_items_get_pos_y
-/* 13CB68 80249828 3C028027 */  lui       $v0, 0x8027
-/* 13CB6C 8024982C 244204D0 */  addiu     $v0, $v0, 0x4d0
+/* 13CB68 80249828 3C028027 */  lui       $v0, %hi(gPauseItemPages)
+/* 13CB6C 8024982C 244204D0 */  addiu     $v0, $v0, %lo(gPauseItemPages)
 /* 13CB70 80249830 00041840 */  sll       $v1, $a0, 1
 /* 13CB74 80249834 00641821 */  addu      $v1, $v1, $a0
 /* 13CB78 80249838 00031880 */  sll       $v1, $v1, 2
