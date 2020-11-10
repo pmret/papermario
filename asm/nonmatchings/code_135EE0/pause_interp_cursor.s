@@ -51,8 +51,8 @@ glabel pause_interp_cursor
 /* 13625C 80242F1C 3C038025 */  lui       $v1, 0x8025
 /* 136260 80242F20 2463EFA0 */  addiu     $v1, $v1, -0x1060
 /* 136264 80242F24 8C620000 */  lw        $v0, ($v1)
-/* 136268 80242F28 3C048025 */  lui       $a0, 0x8025
-/* 13626C 80242F2C 8C84EFB0 */  lw        $a0, -0x1050($a0)
+/* 136268 80242F28 3C048025 */  lui       $a0, %hi(gPauseMenuCursorTargetOpacity)
+/* 13626C 80242F2C 8C84EFB0 */  lw        $a0, %lo(gPauseMenuCursorTargetOpacity)($a0)
 /* 136270 80242F30 00481021 */  addu      $v0, $v0, $t0
 /* 136274 80242F34 14800009 */  bnez      $a0, .L80242F5C
 /* 136278 80242F38 AC620000 */   sw       $v0, ($v1)
@@ -77,6 +77,6 @@ glabel pause_interp_cursor
 .L80242F80:
 /* 1362C0 80242F80 240200FF */  addiu     $v0, $zero, 0xff
 .L80242F84:
-/* 1362C4 80242F84 3C018025 */  lui       $at, 0x8025
+/* 1362C4 80242F84 3C018025 */  lui       $at, %hi(gPauseMenuCursorTargetOpacity)
 /* 1362C8 80242F88 03E00008 */  jr        $ra
-/* 1362CC 80242F8C AC22EFB0 */   sw       $v0, -0x1050($at)
+/* 1362CC 80242F8C AC22EFB0 */   sw       $v0, %lo(gPauseMenuCursorTargetOpacity)($at)

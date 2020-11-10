@@ -53,6 +53,6 @@ glabel func_802CD9F0
 /* F2458 802CDAA8 24020002 */  addiu     $v0, $zero, 2
 /* F245C 802CDAAC 03E00008 */  jr        $ra
 /* F2460 802CDAB0 27BD0028 */   addiu    $sp, $sp, 0x28
-/* F2464 802CDAB4 00000000 */  nop
-/* F2468 802CDAB8 00000000 */  nop
-/* F246C 802CDABC 00000000 */  nop
+/* F2464 802CDAB4 00000000 */  nop       
+/* F2468 802CDAB8 00000000 */  nop       
+/* F246C 802CDABC 00000000 */  nop       

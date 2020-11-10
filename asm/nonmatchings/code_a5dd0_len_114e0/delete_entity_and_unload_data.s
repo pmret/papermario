@@ -11,18 +11,18 @@ glabel delete_entity_and_unload_data
 /* A6EA8 801107A8 0040882D */  daddu     $s1, $v0, $zero
 /* A6EAC 801107AC 8E240040 */  lw        $a0, 0x40($s1)
 /* A6EB0 801107B0 10800003 */  beqz      $a0, .L801107C0
-/* A6EB4 801107B4 00000000 */   nop
+/* A6EB4 801107B4 00000000 */   nop      
 /* A6EB8 801107B8 0C00AB4B */  jal       heap_free
-/* A6EBC 801107BC 00000000 */   nop
+/* A6EBC 801107BC 00000000 */   nop      
 .L801107C0:
 /* A6EC0 801107C0 8E220000 */  lw        $v0, ($s1)
 /* A6EC4 801107C4 30420008 */  andi      $v0, $v0, 8
 /* A6EC8 801107C8 14400005 */  bnez      $v0, .L801107E0
-/* A6ECC 801107CC 00000000 */   nop
+/* A6ECC 801107CC 00000000 */   nop      
 /* A6ED0 801107D0 0C048B7F */  jal       func_80122DFC
 /* A6ED4 801107D4 86240014 */   lh       $a0, 0x14($s1)
 /* A6ED8 801107D8 080441FC */  j         .L801107F0
-/* A6EDC 801107DC 00000000 */   nop
+/* A6EDC 801107DC 00000000 */   nop      
 .L801107E0:
 /* A6EE0 801107E0 0C047FF8 */  jal       get_anim_mesh
 /* A6EE4 801107E4 86240014 */   lh       $a0, 0x14($s1)
@@ -31,12 +31,12 @@ glabel delete_entity_and_unload_data
 .L801107F0:
 /* A6EF0 801107F0 8E240038 */  lw        $a0, 0x38($s1)
 /* A6EF4 801107F4 0C0445F7 */  jal       func_801117DC
-/* A6EF8 801107F8 00000000 */   nop
+/* A6EF8 801107F8 00000000 */   nop      
 /* A6EFC 801107FC 86240016 */  lh        $a0, 0x16($s1)
 /* A6F00 80110800 04800007 */  bltz      $a0, .L80110820
-/* A6F04 80110804 00000000 */   nop
+/* A6F04 80110804 00000000 */   nop      
 /* A6F08 80110808 0C044181 */  jal       get_shadow_by_index
-/* A6F0C 8011080C 00000000 */   nop
+/* A6F0C 8011080C 00000000 */   nop      
 /* A6F10 80110810 8C430000 */  lw        $v1, ($v0)
 /* A6F14 80110814 3C041000 */  lui       $a0, 0x1000
 /* A6F18 80110818 00641825 */  or        $v1, $v1, $a0
