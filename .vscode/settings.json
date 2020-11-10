@@ -15,5 +15,4 @@
         "build": true,
         "docs/doxygen": true,
     },
-    "python.pythonPath": "/usr/bin/python3",
 }
