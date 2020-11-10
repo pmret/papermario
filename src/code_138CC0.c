@@ -17,19 +17,51 @@ void pause_stats_cleanup(void) {
 
 INCLUDE_ASM(s32, "code_138CC0", pause_badges_comparator);
 
-INCLUDE_ASM(s32, "code_138CC0", pause_badges_count_all);
+s32 pause_badges_count_all(void) {
+    PlayerData* playerData = PLAYER_DATA;
+    s32 i;
 
-INCLUDE_ASM(s32, "code_138CC0", pause_badges_count_equipped);
+    pause_sort_item_list(playerData->badges, ARRAY_COUNT(playerData->badges), &pause_badges_comparator);
 
-INCLUDE_ASM(s32, "code_138CC0", pause_badges_get_pos_x);
+    for (i = 0; i < ARRAY_COUNT(playerData->badges); i++) {
+        if (playerData->badges[i] == 0) {
+            break;
+        }
+    }
 
-INCLUDE_ASM(s32, "code_138CC0", pause_badges_get_pos_y);
-
-s32 pause_badges_get_column(s32 page, s32 itemIdx) {
-    return itemIdx % gBadgeMenuPages[page].numCols;
+    return i;
 }
 
-INCLUDE_ASM(s32, "code_138CC0", pause_badges_get_row);
+s32 pause_badges_count_equipped(void) {
+    PlayerData* playerData = PLAYER_DATA;
+    s32 i;
+
+    pause_sort_item_list(playerData->equippedBadges, ARRAY_COUNT(playerData->equippedBadges), &pause_badges_comparator);
+
+    for (i = 0; i < ARRAY_COUNT(playerData->equippedBadges); i++) {
+        if (playerData->equippedBadges[i] == 0) {
+            break;
+        }
+    }
+
+    return i;
+}
+
+s32 pause_badges_get_pos_x(s32 page, s32 itemIndex) {
+    return (itemIndex % BADGE_MENU_PAGE(page)->numCols) * 141;
+}
+
+s32 pause_badges_get_pos_y(s32 page, s32 itemIndex) {
+    return ((page + 1) * 11) + (BADGE_MENU_PAGE(page)->listStart * 16) + ((itemIndex / BADGE_MENU_PAGE(page)->numCols) * 16);
+}
+
+s32 pause_badges_get_column(s32 page, s32 itemIdx) {
+    return itemIdx % BADGE_MENU_PAGE(page)->numCols;
+}
+
+s32 pause_badges_get_row(s32 page, s32 itemIdx) {
+    return BADGE_MENU_PAGE(page)->listStart + (itemIdx / BADGE_MENU_PAGE(page)->numCols);
+}
 
 s32 pause_badges_is_visible(s32 y) {
     if (y < gBadgeMenuCurrentScrollPos - 32) {

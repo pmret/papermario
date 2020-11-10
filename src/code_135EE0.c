@@ -117,7 +117,6 @@ s32 pause_interp_vertical_scroll(s32 deltaBefore) {
 INCLUDE_ASM(s32, "code_135EE0", pause_interp_vertical_scroll);
 #endif
 
-//INCLUDE_ASM(s32, "code_135EE0", pause_update_cursor);
 void pause_update_cursor(s32 arg0, s32 offsetX, s32 offsetY) {
     s32 opacity;
 
