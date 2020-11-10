@@ -17,8 +17,8 @@ glabel pause_update_cursor
 /* 13684C 8024350C 50400001 */  beql      $v0, $zero, .L80243514
 /* 136850 80243510 240500FF */   addiu    $a1, $zero, 0xff
 .L80243514:
-/* 136854 80243514 3C108027 */  lui       $s0, 0x8027
-/* 136858 80243518 261000E8 */  addiu     $s0, $s0, 0xe8
+/* 136854 80243514 3C108027 */  lui       $s0, %hi(gPauseMenuCommonIconIDs)
+/* 136858 80243518 261000E8 */  addiu     $s0, $s0, %lo(gPauseMenuCommonIconIDs)
 /* 13685C 8024351C 0C0513AC */  jal       icon_set_opacity
 /* 136860 80243520 8E040000 */   lw       $a0, ($s0)
 /* 136864 80243524 8E040000 */  lw        $a0, ($s0)

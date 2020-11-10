@@ -1130,8 +1130,8 @@ glabel pause_stats_draw_contents
 /* 139D84 80246A44 080919BF */  j         .L802466FC
 /* 139D88 80246A48 26100014 */   addiu    $s0, $s0, 0x14
 .L80246A4C:
-/* 139D8C 80246A4C 3C038027 */  lui       $v1, 0x8027
-/* 139D90 80246A50 806300D4 */  lb        $v1, 0xd4($v1)
+/* 139D8C 80246A4C 3C038027 */  lui       $v1, %hi(gPauseMenuCurrentTab)
+/* 139D90 80246A50 806300D4 */  lb        $v1, %lo(gPauseMenuCurrentTab)($v1)
 /* 139D94 80246A54 24020001 */  addiu     $v0, $zero, 1
 /* 139D98 80246A58 1462000F */  bne       $v1, $v0, .L80246A98
 /* 139D9C 80246A5C 2404001F */   addiu    $a0, $zero, 0x1f

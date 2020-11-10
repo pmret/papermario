@@ -55,8 +55,8 @@ glabel pause_tabs_draw_stats
 /* 137F98 80244C58 8E040000 */  lw        $a0, ($s0)
 /* 137F9C 80244C5C 0C0511F8 */  jal       draw_icon_2
 /* 137FA0 80244C60 00000000 */   nop      
-/* 137FA4 80244C64 3C028027 */  lui       $v0, 0x8027
-/* 137FA8 80244C68 804200D4 */  lb        $v0, 0xd4($v0)
+/* 137FA4 80244C64 3C028027 */  lui       $v0, %hi(gPauseMenuCurrentTab)
+/* 137FA8 80244C68 804200D4 */  lb        $v0, %lo(gPauseMenuCurrentTab)($v0)
 /* 137FAC 80244C6C 1440000C */  bnez      $v0, .L80244CA0
 /* 137FB0 80244C70 00000000 */   nop      
 /* 137FB4 80244C74 82830001 */  lb        $v1, 1($s4)

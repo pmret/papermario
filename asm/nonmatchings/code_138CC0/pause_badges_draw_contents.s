@@ -248,8 +248,8 @@ glabel pause_badges_draw_contents
 /* 13ABEC 802478AC 1440FFFB */  bnez      $v0, .L8024789C
 /* 13ABF0 802478B0 26520002 */   addiu    $s2, $s2, 2
 .L802478B4:
-/* 13ABF4 802478B4 3C038027 */  lui       $v1, 0x8027
-/* 13ABF8 802478B8 806300D4 */  lb        $v1, 0xd4($v1)
+/* 13ABF4 802478B4 3C038027 */  lui       $v1, %hi(gPauseMenuCurrentTab)
+/* 13ABF8 802478B8 806300D4 */  lb        $v1, %lo(gPauseMenuCurrentTab)($v1)
 /* 13ABFC 802478BC 24020002 */  addiu     $v0, $zero, 2
 /* 13AC00 802478C0 14620029 */  bne       $v1, $v0, .L80247968
 /* 13AC04 802478C4 24020001 */   addiu    $v0, $zero, 1
@@ -518,8 +518,8 @@ glabel pause_badges_draw_contents
 /* 13AFEC 80247CAC 000210C0 */  sll       $v0, $v0, 3
 /* 13AFF0 80247CB0 004A1021 */  addu      $v0, $v0, $t2
 /* 13AFF4 80247CB4 8C420000 */  lw        $v0, ($v0)
-/* 13AFF8 80247CB8 3C018027 */  lui       $at, 0x8027
-/* 13AFFC 80247CBC AC2200CC */  sw        $v0, 0xcc($at)
+/* 13AFF8 80247CB8 3C018027 */  lui       $at, %hi(gPauseMenuCurrentDescIconScript)
+/* 13AFFC 80247CBC AC2200CC */  sw        $v0, %lo(gPauseMenuCurrentDescIconScript)($at)
 .L80247CC0:
 /* 13B000 80247CC0 8FAB0084 */  lw        $t3, 0x84($sp)
 /* 13B004 80247CC4 1560000F */  bnez      $t3, .L80247D04
@@ -935,8 +935,8 @@ glabel pause_badges_draw_contents
 /* 13B608 802482C8 00000000 */  nop       
 /* 13B60C 802482CC 30630FFF */  andi      $v1, $v1, 0xfff
 /* 13B610 802482D0 00431025 */  or        $v0, $v0, $v1
-/* 13B614 802482D4 3C038027 */  lui       $v1, 0x8027
-/* 13B618 802482D8 806300D4 */  lb        $v1, 0xd4($v1)
+/* 13B614 802482D4 3C038027 */  lui       $v1, %hi(gPauseMenuCurrentTab)
+/* 13B618 802482D8 806300D4 */  lb        $v1, %lo(gPauseMenuCurrentTab)($v1)
 /* 13B61C 802482DC ACA20004 */  sw        $v0, 4($a1)
 /* 13B620 802482E0 24020002 */  addiu     $v0, $zero, 2
 /* 13B624 802482E4 1462002A */  bne       $v1, $v0, .L80248390
@@ -1460,8 +1460,8 @@ glabel pause_badges_draw_contents
 /* 13BDE0 80248AA0 AFA00010 */  sw        $zero, 0x10($sp)
 /* 13BDE4 80248AA4 0C04993B */  jal       draw_string
 /* 13BDE8 80248AA8 AFB00014 */   sw       $s0, 0x14($sp)
-/* 13BDEC 80248AAC 3C038027 */  lui       $v1, 0x8027
-/* 13BDF0 80248AB0 806300D4 */  lb        $v1, 0xd4($v1)
+/* 13BDEC 80248AAC 3C038027 */  lui       $v1, %hi(gPauseMenuCurrentTab)
+/* 13BDF0 80248AB0 806300D4 */  lb        $v1, %lo(gPauseMenuCurrentTab)($v1)
 /* 13BDF4 80248AB4 24020002 */  addiu     $v0, $zero, 2
 /* 13BDF8 80248AB8 14620050 */  bne       $v1, $v0, .L80248BFC
 /* 13BDFC 80248ABC 00000000 */   nop      

@@ -234,27 +234,27 @@ glabel pause_map_handle_input
 /* 141F1C 8024EBDC 45030001 */  bc1tl     .L8024EBE4
 /* 141F20 8024EBE0 E4A20000 */   swc1     $f2, ($a1)
 .L8024EBE4:
-/* 141F24 8024EBE4 3C028027 */  lui       $v0, 0x8027
-/* 141F28 8024EBE8 8C4200C4 */  lw        $v0, 0xc4($v0)
+/* 141F24 8024EBE4 3C028027 */  lui       $v0, %hi(gPauseMenuPressedButtons)
+/* 141F28 8024EBE8 8C4200C4 */  lw        $v0, %lo(gPauseMenuPressedButtons)($v0)
 /* 141F2C 8024EBEC 30424000 */  andi      $v0, $v0, 0x4000
 /* 141F30 8024EBF0 10400007 */  beqz      $v0, .L8024EC10
 /* 141F34 8024EBF4 2402FFFF */   addiu    $v0, $zero, -1
 /* 141F38 8024EBF8 0C05272D */  jal       play_sound
 /* 141F3C 8024EBFC 240400CA */   addiu    $a0, $zero, 0xca
-/* 141F40 8024EC00 3C018027 */  lui       $at, 0x8027
-/* 141F44 8024EC04 A02000D4 */  sb        $zero, 0xd4($at)
+/* 141F40 8024EC00 3C018027 */  lui       $at, %hi(gPauseMenuCurrentTab)
+/* 141F44 8024EC04 A02000D4 */  sb        $zero, %lo(gPauseMenuCurrentTab)($at)
 /* 141F48 8024EC08 08093B27 */  j         .L8024EC9C
 /* 141F4C 8024EC0C 00000000 */   nop      
 .L8024EC10:
 /* 141F50 8024EC10 3C118027 */  lui       $s1, 0x8027
 /* 141F54 8024EC14 2631071C */  addiu     $s1, $s1, 0x71c
-/* 141F58 8024EC18 3C018027 */  lui       $at, 0x8027
-/* 141F5C 8024EC1C AC2000CC */  sw        $zero, 0xcc($at)
+/* 141F58 8024EC18 3C018027 */  lui       $at, %hi(gPauseMenuCurrentDescIconScript)
+/* 141F5C 8024EC1C AC2000CC */  sw        $zero, %lo(gPauseMenuCurrentDescIconScript)($at)
 /* 141F60 8024EC20 8E260000 */  lw        $a2, ($s1)
 /* 141F64 8024EC24 14C20005 */  bne       $a2, $v0, .L8024EC3C
 /* 141F68 8024EC28 3C03001D */   lui      $v1, 0x1d
-/* 141F6C 8024EC2C 3C018027 */  lui       $at, 0x8027
-/* 141F70 8024EC30 AC2000C8 */  sw        $zero, 0xc8($at)
+/* 141F6C 8024EC2C 3C018027 */  lui       $at, %hi(gPauseMenuCurrentDescString)
+/* 141F70 8024EC30 AC2000C8 */  sw        $zero, %lo(gPauseMenuCurrentDescString)($at)
 /* 141F74 8024EC34 08093B27 */  j         .L8024EC9C
 /* 141F78 8024EC38 00000000 */   nop      
 .L8024EC3C:
@@ -262,8 +262,8 @@ glabel pause_map_handle_input
 /* 141F80 8024EC40 0000202D */  daddu     $a0, $zero, $zero
 /* 141F84 8024EC44 3C05F5DE */  lui       $a1, 0xf5de
 /* 141F88 8024EC48 34A50180 */  ori       $a1, $a1, 0x180
-/* 141F8C 8024EC4C 3C108027 */  lui       $s0, 0x8027
-/* 141F90 8024EC50 261000C8 */  addiu     $s0, $s0, 0xc8
+/* 141F8C 8024EC4C 3C108027 */  lui       $s0, %hi(gPauseMenuCurrentDescString)
+/* 141F90 8024EC50 261000C8 */  addiu     $s0, $s0, %lo(gPauseMenuCurrentDescString)
 /* 141F94 8024EC54 00061040 */  sll       $v0, $a2, 1
 /* 141F98 8024EC58 00461021 */  addu      $v0, $v0, $a2
 /* 141F9C 8024EC5C 00431021 */  addu      $v0, $v0, $v1

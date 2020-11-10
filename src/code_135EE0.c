@@ -37,7 +37,34 @@ INCLUDE_ASM(s32, "code_135EE0", func_80243388);
 
 INCLUDE_ASM(s32, "code_135EE0", pause_interp_text_scroll);
 
+// Slight ordering issue with the sign flip at the beginning
+#ifdef NON_MATCHING
+s32 pause_interp_vertical_scroll(s32 deltaBefore) {
+    s32 val;
+    s32 s;
+    s32 db;
+
+    db = deltaBefore;
+    if (deltaBefore < 0) {
+        db = -deltaBefore;
+    }
+
+    s = sign(deltaBefore);
+
+    if (db >= 16) {
+        val = db / 2;
+        if (val > 20) {
+            val = 20;
+        }
+    } else {
+        val = gPauseMenuPageScrollInterpEasingLUT[db];
+    }
+
+    return val * s;
+}
+#else
 INCLUDE_ASM(s32, "code_135EE0", pause_interp_vertical_scroll);
+#endif
 
 INCLUDE_ASM(s32, "code_135EE0", pause_update_cursor);
 

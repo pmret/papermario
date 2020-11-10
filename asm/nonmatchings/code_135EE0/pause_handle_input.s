@@ -8,12 +8,12 @@ glabel pause_handle_input
 /* 137770 80244430 AFB60048 */  sw        $s6, 0x48($sp)
 /* 137774 80244434 00A0B02D */  daddu     $s6, $a1, $zero
 /* 137778 80244438 0000202D */  daddu     $a0, $zero, $zero
-/* 13777C 8024443C 3C028027 */  lui       $v0, 0x8027
-/* 137780 80244440 804200D4 */  lb        $v0, 0xd4($v0)
+/* 13777C 8024443C 3C028027 */  lui       $v0, %hi(gPauseMenuCurrentTab)
+/* 137780 80244440 804200D4 */  lb        $v0, %lo(gPauseMenuCurrentTab)($v0)
 /* 137784 80244444 3C05F840 */  lui       $a1, 0xf840
 /* 137788 80244448 AFB3003C */  sw        $s3, 0x3c($sp)
-/* 13778C 8024444C 3C138027 */  lui       $s3, 0x8027
-/* 137790 80244450 8E7300C8 */  lw        $s3, 0xc8($s3)
+/* 13778C 8024444C 3C138027 */  lui       $s3, %hi(gPauseMenuCurrentDescString)
+/* 137790 80244450 8E7300C8 */  lw        $s3, %lo(gPauseMenuCurrentDescString)($s3)
 /* 137794 80244454 AFBF004C */  sw        $ra, 0x4c($sp)
 /* 137798 80244458 AFB40040 */  sw        $s4, 0x40($sp)
 /* 13779C 8024445C AFB20038 */  sw        $s2, 0x38($sp)
@@ -46,10 +46,10 @@ glabel pause_handle_input
 /* 137800 802444C0 0000202D */  daddu     $a0, $zero, $zero
 /* 137804 802444C4 3C05F840 */  lui       $a1, 0xf840
 /* 137808 802444C8 34A55BDE */  ori       $a1, $a1, 0x5bde
-/* 13780C 802444CC 3C108027 */  lui       $s0, 0x8027
-/* 137810 802444D0 261000C4 */  addiu     $s0, $s0, 0xc4
-/* 137814 802444D4 3C118027 */  lui       $s1, 0x8027
-/* 137818 802444D8 263100C0 */  addiu     $s1, $s1, 0xc0
+/* 13780C 802444CC 3C108027 */  lui       $s0, %hi(gPauseMenuPressedButtons)
+/* 137810 802444D0 261000C4 */  addiu     $s0, $s0, %lo(gPauseMenuPressedButtons)
+/* 137814 802444D4 3C118027 */  lui       $s1, %hi(gPauseMenuHeldButtons)
+/* 137818 802444D8 263100C0 */  addiu     $s1, $s1, %lo(gPauseMenuHeldButtons)
 /* 13781C 802444DC AE150000 */  sw        $s5, ($s0)
 /* 137820 802444E0 0C0B1EAF */  jal       get_variable
 /* 137824 802444E4 AE360000 */   sw       $s6, ($s1)
@@ -62,8 +62,8 @@ glabel pause_handle_input
 /* 13783C 802444FC 30821000 */  andi      $v0, $a0, 0x1000
 /* 137840 80244500 14400007 */  bnez      $v0, .L80244520
 /* 137844 80244504 00000000 */   nop      
-/* 137848 80244508 3C028027 */  lui       $v0, 0x8027
-/* 13784C 8024450C 804200D4 */  lb        $v0, 0xd4($v0)
+/* 137848 80244508 3C028027 */  lui       $v0, %hi(gPauseMenuCurrentTab)
+/* 13784C 8024450C 804200D4 */  lb        $v0, %lo(gPauseMenuCurrentTab)($v0)
 /* 137850 80244510 1440000B */  bnez      $v0, .L80244540
 /* 137854 80244514 30824000 */   andi     $v0, $a0, 0x4000
 /* 137858 80244518 10400009 */  beqz      $v0, .L80244540
@@ -80,8 +80,8 @@ glabel pause_handle_input
 .L80244540:
 /* 137880 80244540 3C048027 */  lui       $a0, 0x8027
 /* 137884 80244544 24840118 */  addiu     $a0, $a0, 0x118
-/* 137888 80244548 3C038027 */  lui       $v1, 0x8027
-/* 13788C 8024454C 8C6300CC */  lw        $v1, 0xcc($v1)
+/* 137888 80244548 3C038027 */  lui       $v1, %hi(gPauseMenuCurrentDescIconScript)
+/* 13788C 8024454C 8C6300CC */  lw        $v1, %lo(gPauseMenuCurrentDescIconScript)($v1)
 /* 137890 80244550 8C820000 */  lw        $v0, ($a0)
 /* 137894 80244554 54620001 */  bnel      $v1, $v0, .L8024455C
 /* 137898 80244558 AC830000 */   sw       $v1, ($a0)
@@ -125,8 +125,8 @@ glabel pause_handle_input
 /* 137924 802445E4 3C018027 */  lui       $at, 0x8027
 /* 137928 802445E8 AC20010C */  sw        $zero, 0x10c($at)
 .L802445EC:
-/* 13792C 802445EC 3C028027 */  lui       $v0, 0x8027
-/* 137930 802445F0 8C4200C0 */  lw        $v0, 0xc0($v0)
+/* 13792C 802445EC 3C028027 */  lui       $v0, %hi(gPauseMenuHeldButtons)
+/* 137930 802445F0 8C4200C0 */  lw        $v0, %lo(gPauseMenuHeldButtons)($v0)
 /* 137934 802445F4 30420008 */  andi      $v0, $v0, 8
 /* 137938 802445F8 10400008 */  beqz      $v0, .L8024461C
 /* 13793C 802445FC 00000000 */   nop      
@@ -138,8 +138,8 @@ glabel pause_handle_input
 /* 137954 80244614 AC620000 */   sw       $v0, ($v1)
 /* 137958 80244618 AC600000 */  sw        $zero, ($v1)
 .L8024461C:
-/* 13795C 8024461C 3C028027 */  lui       $v0, 0x8027
-/* 137960 80244620 8C4200C0 */  lw        $v0, 0xc0($v0)
+/* 13795C 8024461C 3C028027 */  lui       $v0, %hi(gPauseMenuHeldButtons)
+/* 137960 80244620 8C4200C0 */  lw        $v0, %lo(gPauseMenuHeldButtons)($v0)
 /* 137964 80244624 30420004 */  andi      $v0, $v0, 4
 /* 137968 80244628 1040000B */  beqz      $v0, .L80244658
 /* 13796C 8024462C 00000000 */   nop      

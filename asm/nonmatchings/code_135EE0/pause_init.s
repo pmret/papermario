@@ -22,8 +22,8 @@ glabel pause_init
 /* 1373E4 802440A4 26731ECC */  addiu     $s3, $s3, 0x1ecc
 /* 1373E8 802440A8 3C108025 */  lui       $s0, %hi(gPauseMenuIconScripts)
 /* 1373EC 802440AC 2610EF60 */  addiu     $s0, $s0, %lo(gPauseMenuIconScripts)
-/* 1373F0 802440B0 3C128027 */  lui       $s2, 0x8027
-/* 1373F4 802440B4 265200E8 */  addiu     $s2, $s2, 0xe8
+/* 1373F0 802440B0 3C128027 */  lui       $s2, %hi(gPauseMenuCommonIconIDs)
+/* 1373F4 802440B4 265200E8 */  addiu     $s2, $s2, %lo(gPauseMenuCommonIconIDs)
 .L802440B8:
 /* 1373F8 802440B8 0C050529 */  jal       create_icon
 /* 1373FC 802440BC 8E040000 */   lw       $a0, ($s0)
@@ -46,8 +46,8 @@ glabel pause_init
 /* 13743C 802440FC 24050004 */  addiu     $a1, $zero, 4
 /* 137440 80244100 3C108025 */  lui       $s0, %hi(gPauseMenuTabs)
 /* 137444 80244104 2610EF80 */  addiu     $s0, $s0, %lo(gPauseMenuTabs)
-/* 137448 80244108 3C028027 */  lui       $v0, 0x8027
-/* 13744C 8024410C 8C4200E8 */  lw        $v0, 0xe8($v0)
+/* 137448 80244108 3C028027 */  lui       $v0, %hi(gPauseMenuCommonIconIDs)
+/* 13744C 8024410C 8C4200E8 */  lw        $v0, %lo(gPauseMenuCommonIconIDs)($v0)
 /* 137450 80244110 3C018027 */  lui       $at, 0x8027
 /* 137454 80244114 AC2200D0 */  sw        $v0, 0xd0($at)
 /* 137458 80244118 0C051FCC */  jal       func_80147F30
@@ -62,12 +62,12 @@ glabel pause_init
 /* 13747C 8024413C AC20010C */  sw        $zero, 0x10c($at)
 /* 137480 80244140 3C018027 */  lui       $at, 0x8027
 /* 137484 80244144 AC200118 */  sw        $zero, 0x118($at)
-/* 137488 80244148 3C018027 */  lui       $at, 0x8027
-/* 13748C 8024414C AC2000C8 */  sw        $zero, 0xc8($at)
-/* 137490 80244150 3C018027 */  lui       $at, 0x8027
-/* 137494 80244154 AC2000CC */  sw        $zero, 0xcc($at)
-/* 137498 80244158 3C018027 */  lui       $at, 0x8027
-/* 13749C 8024415C A02000D4 */  sb        $zero, 0xd4($at)
+/* 137488 80244148 3C018027 */  lui       $at, %hi(gPauseMenuCurrentDescString)
+/* 13748C 8024414C AC2000C8 */  sw        $zero, %lo(gPauseMenuCurrentDescString)($at)
+/* 137490 80244150 3C018027 */  lui       $at, %hi(gPauseMenuCurrentDescIconScript)
+/* 137494 80244154 AC2000CC */  sw        $zero, %lo(gPauseMenuCurrentDescIconScript)($at)
+/* 137498 80244158 3C018027 */  lui       $at, %hi(gPauseMenuCurrentTab)
+/* 13749C 8024415C A02000D4 */  sb        $zero, %lo(gPauseMenuCurrentTab)($at)
 .L80244160:
 /* 1374A0 80244160 8E040000 */  lw        $a0, ($s0)
 /* 1374A4 80244164 8C82000C */  lw        $v0, 0xc($a0)

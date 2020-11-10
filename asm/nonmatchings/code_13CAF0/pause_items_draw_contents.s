@@ -212,8 +212,8 @@ glabel pause_items_draw_contents
 /* 13CFC8 80249C88 AFA20068 */   sw       $v0, 0x68($sp)
 /* 13CFCC 80249C8C 0040B82D */  daddu     $s7, $v0, $zero
 /* 13CFD0 80249C90 3A027FFE */  xori      $v0, $s0, 0x7ffe
-/* 13CFD4 80249C94 3C038027 */  lui       $v1, 0x8027
-/* 13CFD8 80249C98 806300D4 */  lb        $v1, 0xd4($v1)
+/* 13CFD4 80249C94 3C038027 */  lui       $v1, %hi(gPauseMenuCurrentTab)
+/* 13CFD8 80249C98 806300D4 */  lb        $v1, %lo(gPauseMenuCurrentTab)($v1)
 /* 13CFDC 80249C9C 2C420001 */  sltiu     $v0, $v0, 1
 /* 13CFE0 80249CA0 AFA20074 */  sw        $v0, 0x74($sp)
 /* 13CFE4 80249CA4 24020003 */  addiu     $v0, $zero, 3
@@ -348,8 +348,8 @@ glabel pause_items_draw_contents
 /* 13D1CC 80249E8C 000210C0 */  sll       $v0, $v0, 3
 /* 13D1D0 80249E90 004B1021 */  addu      $v0, $v0, $t3
 /* 13D1D4 80249E94 8C420000 */  lw        $v0, ($v0)
-/* 13D1D8 80249E98 3C018027 */  lui       $at, 0x8027
-/* 13D1DC 80249E9C AC2200CC */  sw        $v0, 0xcc($at)
+/* 13D1D8 80249E98 3C018027 */  lui       $at, %hi(gPauseMenuCurrentDescIconScript)
+/* 13D1DC 80249E9C AC2200CC */  sw        $v0, %lo(gPauseMenuCurrentDescIconScript)($at)
 .L80249EA0:
 /* 13D1E0 80249EA0 00161400 */  sll       $v0, $s6, 0x10
 /* 13D1E4 80249EA4 000212C3 */  sra       $v0, $v0, 0xb
@@ -509,8 +509,8 @@ glabel pause_items_draw_contents
 /* 13D424 8024A0E4 00000000 */  nop       
 /* 13D428 8024A0E8 30630FFF */  andi      $v1, $v1, 0xfff
 /* 13D42C 8024A0EC 00431025 */  or        $v0, $v0, $v1
-/* 13D430 8024A0F0 3C038027 */  lui       $v1, 0x8027
-/* 13D434 8024A0F4 806300D4 */  lb        $v1, 0xd4($v1)
+/* 13D430 8024A0F0 3C038027 */  lui       $v1, %hi(gPauseMenuCurrentTab)
+/* 13D434 8024A0F4 806300D4 */  lb        $v1, %lo(gPauseMenuCurrentTab)($v1)
 /* 13D438 8024A0F8 ACA20004 */  sw        $v0, 4($a1)
 /* 13D43C 8024A0FC 24020003 */  addiu     $v0, $zero, 3
 /* 13D440 8024A100 1462002A */  bne       $v1, $v0, .L8024A1AC
@@ -678,8 +678,8 @@ glabel pause_items_draw_contents
 /* 13D698 8024A358 AFA00010 */  sw        $zero, 0x10($sp)
 /* 13D69C 8024A35C 0C04993B */  jal       draw_string
 /* 13D6A0 8024A360 AFA80014 */   sw       $t0, 0x14($sp)
-/* 13D6A4 8024A364 3C038027 */  lui       $v1, 0x8027
-/* 13D6A8 8024A368 806300D4 */  lb        $v1, 0xd4($v1)
+/* 13D6A4 8024A364 3C038027 */  lui       $v1, %hi(gPauseMenuCurrentTab)
+/* 13D6A8 8024A368 806300D4 */  lb        $v1, %lo(gPauseMenuCurrentTab)($v1)
 /* 13D6AC 8024A36C 24020003 */  addiu     $v0, $zero, 3
 /* 13D6B0 8024A370 1462004E */  bne       $v1, $v0, .L8024A4AC
 /* 13D6B4 8024A374 00000000 */   nop      

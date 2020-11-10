@@ -9,8 +9,8 @@ glabel pause_map_draw_title
 /* 14189C 8024E55C 00C0A02D */  daddu     $s4, $a2, $zero
 /* 1418A0 8024E560 AFB20020 */  sw        $s2, 0x20($sp)
 /* 1418A4 8024E564 00E0902D */  daddu     $s2, $a3, $zero
-/* 1418A8 8024E568 3C038027 */  lui       $v1, 0x8027
-/* 1418AC 8024E56C 806300D4 */  lb        $v1, 0xd4($v1)
+/* 1418A8 8024E568 3C038027 */  lui       $v1, %hi(gPauseMenuCurrentTab)
+/* 1418AC 8024E56C 806300D4 */  lb        $v1, %lo(gPauseMenuCurrentTab)($v1)
 /* 1418B0 8024E570 24020006 */  addiu     $v0, $zero, 6
 /* 1418B4 8024E574 AFBF002C */  sw        $ra, 0x2c($sp)
 /* 1418B8 8024E578 AFB1001C */  sw        $s1, 0x1c($sp)
