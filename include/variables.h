@@ -128,6 +128,12 @@ extern s32 gPauseMenuCursorTargetOpacity;
 extern PauseItemPage gBadgeMenuPages[20];
 extern s32 gBadgeMenuCurrentScrollPos;
 extern s32 gBadgeMenuTargetScrollPos;
+extern ItemId gBadgeMenuItemIDs[128];
+extern s32 gBadgeMenuCurrentPage;
+
+// Stats
+extern s32 gStatsMenuIconIDs[12];
+
 
 extern s32 gGameState;
 extern s32 D_8009A650[1];

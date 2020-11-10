@@ -1536,7 +1536,7 @@ typedef struct {
 typedef struct {
     /* 0x00 */ s8 enabled;
     /* 0x01 */ s8 listStart;
-    /* 0x02 */ s8 numCols;
+    /* 0x02 */ u8 numCols;
     /* 0x03 */ s8 numRows;
     /* 0x04 */ s32 startIndex;
     /* 0x08 */ s32 count;

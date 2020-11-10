@@ -103,7 +103,9 @@ INCLUDE_ASM(s32, "code_135EE0", pause_badges_get_pos_x);
 
 INCLUDE_ASM(s32, "code_135EE0", pause_badges_get_pos_y);
 
-INCLUDE_ASM(s32, "code_135EE0", pause_badges_get_column);
+s32 pause_badges_get_column(s32 page, s32 itemIdx) {
+    return itemIdx % gBadgeMenuPages[page].numCols;
+}
 
 INCLUDE_ASM(s32, "code_135EE0", pause_badges_get_row);
 

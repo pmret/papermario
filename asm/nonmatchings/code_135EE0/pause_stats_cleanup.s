@@ -6,8 +6,8 @@ glabel pause_stats_cleanup
 /* 13A2D8 80246F98 AFB10014 */  sw        $s1, 0x14($sp)
 /* 13A2DC 80246F9C 0000882D */  daddu     $s1, $zero, $zero
 /* 13A2E0 80246FA0 AFB00010 */  sw        $s0, 0x10($sp)
-/* 13A2E4 80246FA4 3C108027 */  lui       $s0, 0x8027
-/* 13A2E8 80246FA8 26100150 */  addiu     $s0, $s0, 0x150
+/* 13A2E4 80246FA4 3C108027 */  lui       $s0, %hi(gStatsMenuIconIDs)
+/* 13A2E8 80246FA8 26100150 */  addiu     $s0, $s0, %lo(gStatsMenuIconIDs)
 /* 13A2EC 80246FAC AFBF0018 */  sw        $ra, 0x18($sp)
 .L80246FB0:
 /* 13A2F0 80246FB0 8E040000 */  lw        $a0, ($s0)

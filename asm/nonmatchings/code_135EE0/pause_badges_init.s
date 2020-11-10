@@ -18,8 +18,8 @@ glabel pause_badges_init
 /* 13C334 80248FF4 AC2003A0 */  sw        $zero, 0x3a0($at)
 /* 13C338 80248FF8 0C092363 */  jal       pause_badges_load_badges
 /* 13C33C 80248FFC 0000202D */   daddu    $a0, $zero, $zero
-/* 13C340 80249000 3C038027 */  lui       $v1, 0x8027
-/* 13C344 80249004 84630180 */  lh        $v1, 0x180($v1)
+/* 13C340 80249000 3C038027 */  lui       $v1, %hi(gBadgeMenuItemIDs)
+/* 13C344 80249004 84630180 */  lh        $v1, %lo(gBadgeMenuItemIDs)($v1)
 /* 13C348 80249008 24027FFE */  addiu     $v0, $zero, 0x7ffe
 /* 13C34C 8024900C 14620003 */  bne       $v1, $v0, .L8024901C
 /* 13C350 80249010 0000802D */   daddu    $s0, $zero, $zero

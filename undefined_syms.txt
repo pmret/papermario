@@ -148,6 +148,9 @@ gBackgroundImage = 0x80200000;
 
 gPauseMenuCursorTargetOpacity = 0x8024EFB0;
 
+gStatsMenuIconIDs = 0x80270150;
+gBadgeMenuItemIDs = 0x80270180;
+gBadgeMenuCurrentPage = 0x80270280;
 gBadgeMenuPages = 0x80270288;
 gBadgeMenuCurrentScrollPos = 0x8027038C;
 gBadgeMenuTargetScrollPos = 0x80270390;

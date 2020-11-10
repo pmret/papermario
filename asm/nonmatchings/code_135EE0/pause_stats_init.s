@@ -8,8 +8,8 @@ glabel pause_stats_init
 /* 139E14 80246AD4 AFB00010 */  sw        $s0, 0x10($sp)
 /* 139E18 80246AD8 0000802D */  daddu     $s0, $zero, $zero
 /* 139E1C 80246ADC AFB20018 */  sw        $s2, 0x18($sp)
-/* 139E20 80246AE0 3C128027 */  lui       $s2, 0x8027
-/* 139E24 80246AE4 26520150 */  addiu     $s2, $s2, 0x150
+/* 139E20 80246AE0 3C128027 */  lui       $s2, %hi(gStatsMenuIconIDs)
+/* 139E24 80246AE4 26520150 */  addiu     $s2, $s2, %lo(gStatsMenuIconIDs)
 /* 139E28 80246AE8 AFB10014 */  sw        $s1, 0x14($sp)
 /* 139E2C 80246AEC 3C118025 */  lui       $s1, 0x8025
 /* 139E30 80246AF0 2631F330 */  addiu     $s1, $s1, -0xcd0
