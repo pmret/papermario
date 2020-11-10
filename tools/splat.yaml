@@ -24,179 +24,181 @@ segments:
     start: 0x1000
     vram: 0x80025C00
     files:
-    - [0x1000, "c", "code_1000_len_60"]
-    - [0x1060, "c", "code_1060_len_310"]
-    - [0x1370, "c", "code_1370_len_7d0"]
-    - [0x1b40, "c", "code_1b40_len_20b0"]
-    - [0x3bf0, "c", "code_3bf0_len_6f0"]
-    - [0x42e0, "c", "code_42e0_len_1f60"]
-    - [0x6000, "c", "code_6000"]
-    - [0x6240, "c", "code_6240_len_c00"]
-    - [0x6e40, "c", "code_6e40_len_500"]
-    - [0x7340, "c", "code_7340_len_b00"]
-    - [0x7e40, "c", "os/code_7e40_len_3f0"]
-    - [0x8230, "c", "os/nusys/nuSiMgr"]
-    - [0x8560, "c"]
-    - [0x9d10, "c", "code_9d10_len_1080"]
-    - [0xad90, "c", "code_ad90_len_2880"]
-    - [0xd610, "c", "code_d610_len_1330"]
-    - [0xe940, "c", "code_e940_len_290"]
-    - [0xebd0, "c", "code_ebd0_len_6a0"]
-    - [0xf270, "c", "code_f270_len_1190"]
-    - [0x10400, "c", "code_10400_len_d30"]
-    - [0x11130, "c", "code_11130_len_c0"]
-    - [0x111f0, "c", "code_111f0_len_860"]
-    - [0x11a50, "c", "code_11a50_len_7a0"]
-    - [0x121f0, "c", "code_121f0_len_1290"]
-    - [0x13480, "c", "code_13480_len_3f0"]
-    - [0x13870, "c", "code_13870_len_6980"]
-    - [0x1a1f0, "c", "code_1a1f0_len_5390"]
-    - [0x1f580, "c", "code_1f580_len_1940"]
-    - [0x20ec0, "c", "code_20ec0_len_5040"]
-    - [0x25f00, "c", "code_25f00_len_940"]
-    - [0x26840, "c", "code_26840_len_20d0"]
-    - [0x28910, "c", "code_28910_len_5090"]
-    - [0x2d9a0, "c", "code_2d9a0_len_890"]
-    - [0x2e230, "c", "code_2e230_len_2190"]
-    - [0x303c0, "c", "code_303c0_len_3e10"]
-    - [0x341d0, "c", "world/world"]
-    - [0x362a0, "c", "code_362a0_len_2f70"]
-    - [0x39210, "c", "code_39210_len_aa0"]
-    - [0x39cb0, "c", "os/code_39cb0_len_100"]
-    - [0x39db0, "c", "os/nusys/nuSched"]
-    - [0x3a650, "c", "os/nusys/nuGfxFuncSet"]
-    - [0x3a690, "c", "os/nusys/nuGfxPreNMIFuncSet"]
-    - [0x3a6d0, "c", "os/nusys/nuGfxTaskAllEndWait"]
-    - [0x3a6f0, "c", "os/nusys/nuGfxSetCfb"]
-    - [0x3a800, "c", "os/nusys/nuGfxDisplayOff"]
-    - [0x3a830, "c", "os/nusys/nuGfxDisplayOn"]
-    - [0x3a850, "c", "os/nusys/nuPiInit"]
-    - [0x3a890, "c", "os/nusys/nuPiReadRom"]
-    - [0x3a960, "c", "os/nusys/nuGfxInit"]
-    - [0x3aa10, "c", "os/nusys/nuContInit"]
-    - [0x3aa50, "c", "os/nusys/nuContDataGet"]
-    - [0x3aab0, "c", "os/nusys/nuContPakMgr"]
-    - [0x3af10, "c", "os/nusys/nuContRmbMgr"]
-    - [0x3b290, "c", "os/nusys/nuContRmbStart"]
-    - [0x3b2f0, "c", "os/nusys/nuContRmbCheck"]
-    - [0x3b390, "c", "os/code_3b390_len_110"]
-    - [0x3b4a0, "c", "os/code_3b4a0_len_270"]
-    - [0x3b710, "c", "os/code_3b710_len_40"]
-    - [0x3b750, "c", "code_3b750_len_20"]
-    - [0x3b770, "c", "os/code_3b770_len_80"]
-    - [0x3b7f0, "c", "os/code_3b7f0_len_120"]
-    - [0x3b910, "c", "os/code_3b910_len_410"]
-    - [0x3bd20, "c", "os/code_3bd20_len_c0"]
-    - [0x3bde0, "c", "os/code_3bde0_len_3e0"]
-    - [0x3c1c0, "c", "os/code_3c1c0_len_60"]
-    - [0x3c220, "c", "os/code_3c220_len_a0"]
-    - [0x3c2c0, "c", "os/code_3c2c0_len_50"]
-    - [0x3c310, "c", "os/code_3c310_len_180"]
-    - [0x3c490, "c", "os/code_3c490_len_3c0"]
-    - [0x3c850, "c", "os/code_3c850_len_f0"]
-    - [0x3c940, "c", "os/code_3c940_len_140"]
-    - [0x3ca80, "c", "os/code_3ca80_len_a0"]
-    - [0x3cb20, "c", "os/code_3cb20_len_130"]
-    - [0x3cc50, "c", "os/code_3cc50_len_80"]
-    - [0x3ccd0, "c", "os/code_3ccd0_len_30"]
-    - [0x3cd00, "c", "os/code_3cd00_len_5f0"]
-    - [0x3d2f0, "c", "os/code_3d2f0_len_10"]
-    - [0x3d300, "c", "os/code_3d300_len_30"]
-    - [0x3d330, "c", "os/code_3d330_len_990"]
-    - [0x3dcc0, "c", "os/code_3dcc0_len_a60"]
-    - [0x3e720, "c", "os/code_3e720_len_5f0"]
-    - [0x3ed10, "c", "guOrtho"]
-    - [0x3ef90, "c", "os/code_3ef90_len_600"]
-    - [0x3f310, "c", "os/code_3f310_len_3c0"]
-    - [0x3f6d0, "c", "os/code_3f6d0_len_320"]
-    - [0x3f9f0, "c", "os/code_3f9f0_len_60"]
-    - [0x3fa50, "c", "os/code_3fa50_len_f60"]
-    - [0x409b0, "c", "os/code_409b0_len_140"]
-    - [0x40af0, "c", "os/code_40af0_len_130"]
-    - [0x40c20, "c", "os/code_40c20_len_1f0"]
-    - [0x40e10, "c", "os/code_40e10_len_240"]
-    - [0x41050, "c", "os/code_41050_len_120"]
-    - [0x41170, "c", "os/code_41170_len_f0"]
-    - [0x41260, "c", "os/osCreateThread"]
-    - [0x41330, "c", "os/osGetThreadPri"]
-    - [0x41350, "c", "os/code_41350_len_d0"]
-    - [0x41420, "c", "os/code_41420_len_120"]
-    - [0x41540, "c", "os/code_41540_len_c0"]
-    - [0x41600, "c", "os/code_41600_len_40"]
-    - [0x41640, "c", "os/code_41640_len_50"]
-    - [0x41690, "c", "os/code_41690_len_10"]
-    - [0x416a0, "c", "os/code_416a0_len_90"]
-    - [0x41730, "c", "os/code_41730_len_20"]
-    - [0x41750, "c", "os/code_41750_len_450"]
-    - [0x41ba0, "c", "os/code_41ba0_len_c0"]
-    - [0x41c60, "c", "os/code_41c60_len_c0"]
-    - [0x41d20, "c", "os/code_41d20_len_40"]
-    - [0x41d60, "c", "os/code_41d60_len_50"]
-    - [0x41db0, "c", "os/code_41db0_len_40"]
-    - [0x41df0, "c", "os/code_41df0_len_40"]
-    - [0x41e30, "c", "os/code_41e30_len_40"]
-    - [0x41e70, "c", "os/code_41e70_len_340"]
-    - [0x421b0, "c", "os/code_421b0_len_60"]
-    - [0x42210, "c", "os/code_42210_len_50"]
-    - [0x42260, "c", "os/code_42260_len_170"]
-    - [0x423d0, "c", "os/code_423d0_len_50"]
-    - [0x42420, "c", "os/code_42420_len_50"]
-    - [0x42470, "c", "os/code_42470_len_310"]
-    - [0x42780, "c", "os/code_42780_len_120"]
-    - [0x428a0, "c", "os/guMtxIdentF"]
-    - [0x42900, "c", "os/code_42900_len_80"]
-    - [0x42980, "c", "os/code_42980_len_80"]
-    - [0x42a00, "c", "os/code_42a00_len_100"]
-    - [0x42b00, "c", "os/code_42b00_len_c0"]
-    - [0x42bc0, "c", "os/code_42bc0_len_60"]
-    - [0x42c20, "c", "os/code_42c20_len_e0"]
-    - [0x42d00, "c", "os/code_42d00_len_60"]
-    - [0x42d60, "c", "os/code_42d60_len_80"]
-    - [0x42de0, "c", "os/code_42de0_len_90"]
-    - [0x42e70, "c", "os/code_42e70_len_390"]
-    - [0x43200, "c", "os/code_43200_len_7c0"]
-    - [0x439c0, "c", "os/code_439c0_len_220"]
-    - [0x43be0, "c", "os/code_43be0_len_5e0"]
-    - [0x441c0, "c", "os/code_441c0_len_1c0"]
-    - [0x44380, "c", "os/code_44380_len_4e0"]
-    - [0x44860, "c", "os/code_44860_len_60"]
-    - [0x448c0, "c", "os/code_448c0_len_210"]
-    - [0x44ad0, "c", "os/code_44ad0_len_70"]
-    - [0x44b40, "c", "os/code_44b40_len_a90"]
-    - [0x455d0, "c", "os/code_455d0_len_1f0"]
-    - [0x457c0, "c", "os/code_457c0_len_270"]
-    - [0x45a30, "c", "os/code_45a30_len_20"]
-    - [0x45a50, "c", "os/code_45a50_len_3a0"]
-    - [0x45df0, "hasm", "os/code_45df0_len_970"]
-    - [0x46760, "c", "os/code_46760_len_90"]
-    - [0x467f0, "c", "os/code_467f0_len_90"]
-    - [0x46880, "c", "os/code_46880_len_260"]
-    - [0x46ae0, "c", "os/code_46ae0_len_170"]
-    - [0x46c50, "c", "os/code_46c50_len_20"]
-    - [0x46c70, "c", "os/code_46c70_len_e00"]
-    - [0x47a70, "c", "os/code_47a70_len_10"]
-    - [0x47a80, "c", "os/code_47a80_len_10"]
-    - [0x47a90, "c", "os/code_47a90_len_50"]
-    - [0x47ae0, "c", "os/code_47ae0_len_e0"]
-    - [0x47bc0, "c", "os/code_47bc0_len_50"]
-    - [0x47c10, "c", "os/code_47c10_len_50"]
-    - [0x47c60, "c", "os/code_47c60_len_f0"]
-    - [0x47d50, "c", "os/code_47d50_len_e0"]
-    - [0x47e30, "c", "os/code_47e30_len_60"]
-    - [0x47e90, "c", "os/code_47e90_len_110"]
-    - [0x47fa0, "c", "os/code_47fa0_len_20"]
-    - [0x47fc0, "c", "os/code_47fc0_len_60"]
-    - [0x48020, "c", "os/code_48020_len_a00"]
-    - [0x48a20, "c", "os/code_48a20_len_1c0"]
-    - [0x48be0, "c", "os/code_48be0_len_20"]
-    - [0x48c00, "c", "os/code_48c00_len_5c0"]
-    - [0x491c0, "c", "os/code_491c0_len_f80"]
-    - [0x49C70, "c", "os/code_49C70"]
-    - [0x4a140, "c", "os/code_4a140_len_70"]
-    - [0x4a1b0, "c", "os/code_4a1b0_len_40"]
-    - [0x4a1f0, "c", "os/code_4a1f0_len_170"]
-    - [0x4a360, "c", "os/code_4a360_len_930"]
-    - [0x4ac90, "c", "os/code_4ac90_len_3910"]
+    - [0x1000, c, "code_1000_len_60"]
+    - [0x1060, c, "code_1060_len_310"]
+    - [0x1370, c, "code_1370_len_7d0"]
+    - [0x1b40, c, "code_1b40_len_20b0"]
+    - [0x3bf0, c, "code_3bf0_len_6f0"]
+    - [0x42e0, c, "code_42e0_len_1f60"]
+    - [0x6000, c, "code_6000"]
+    - [0x6240, c, "code_6240_len_c00"]
+    - [0x6e40, c, "code_6e40_len_500"]
+    - [0x7340, c, "code_7340_len_b00"]
+    - [0x7e40, c, "os/code_7e40_len_3f0"]
+    - [0x8230, c, "os/nusys/nuSiMgr"]
+    - [0x8560, c]
+    - [0x9d10, c, "code_9d10_len_1080"]
+    - [0xad90, c, "code_ad90_len_2880"]
+    - [0xd610, c, "code_d610_len_1330"]
+    - [0xe940, c, "code_e940_len_290"]
+    - [0xebd0, c, "code_ebd0_len_6a0"]
+    - [0xf270, c, "code_f270_len_1190"]
+    - [0x10400, c, "code_10400_len_d30"]
+    - [0x11130, c, "code_11130_len_c0"]
+    - [0x111f0, c, "code_111f0_len_860"]
+    - [0x11a50, c, "code_11a50_len_7a0"]
+    - [0x121f0, c, "code_121f0_len_1290"]
+    - [0x13480, c, "code_13480_len_3f0"]
+    - [0x13870, c, "code_13870_len_6980"]
+    - [0x1a1f0, c, "code_1a1f0_len_5390"]
+    - [0x1f580, c, "code_1f580_len_1940"]
+    - [0x20ec0, c, "code_20ec0_len_5040"]
+    - [0x25f00, c, "code_25f00_len_940"]
+    - [0x26840, c, "code_26840_len_20d0"]
+    - [0x28910, c, "code_28910_len_5090"]
+    - [0x2d9a0, c, "code_2d9a0_len_890"]
+    - [0x2e230, c, "code_2e230_len_2190"]
+    - [0x303c0, c, "code_303c0_len_3e10"]
+    - [0x341d0, c, "world/world"]
+    - [0x362a0, c, "code_362a0_len_2f70"]
+    - [0x39210, c, "code_39210_len_aa0"]
+    - [0x39cb0, c, "os/code_39cb0_len_100"]
+    - [0x39db0, c, "os/nusys/nuSched"]
+    - [0x3a650, c, "os/nusys/nuGfxFuncSet"]
+    - [0x3a690, c, "os/nusys/nuGfxPreNMIFuncSet"]
+    - [0x3a6d0, c, "os/nusys/nuGfxTaskAllEndWait"]
+    - [0x3a6f0, c, "os/nusys/nuGfxSetCfb"]
+    - [0x3a800, c, "os/nusys/nuGfxDisplayOff"]
+    - [0x3a830, c, "os/nusys/nuGfxDisplayOn"]
+    - [0x3a850, c, "os/nusys/nuPiInit"]
+    - [0x3a890, c, "os/nusys/nuPiReadRom"]
+    - [0x3a960, c, "os/nusys/nuGfxInit"]
+    - [0x3aa10, c, "os/nusys/nuContInit"]
+    - [0x3aa50, c, "os/nusys/nuContDataGet"]
+    - [0x3aab0, c, "os/nusys/nuContPakMgr"]
+    - [0x3af10, c, "os/nusys/nuContRmbMgr"]
+    - [0x3b290, c, "os/nusys/nuContRmbStart"]
+    - [0x3b2f0, c, "os/nusys/nuContRmbCheck"]
+    - [0x3b390, c, "os/code_3b390_len_110"]
+    - [0x3b4a0, c, "os/code_3b4a0_len_270"]
+    - [0x3b710, c, "os/code_3b710_len_40"]
+    - [0x3b750, c, "code_3b750_len_20"]
+    - [0x3b770, c, "os/code_3b770_len_80"]
+    - [0x3b7f0, c, "os/code_3b7f0_len_120"]
+    - [0x3b910, c, "os/code_3b910_len_410"]
+    - [0x3bd20, c, "os/code_3bd20_len_c0"]
+    - [0x3BD40, hasm, os/osSetIntMask]
+    - [0x3bde0, c, "os/code_3bde0_len_3e0"]
+    - [0x3C160, c, os/osEPiWriteIo]
+    - [0x3c1c0, c, "os/code_3c1c0_len_60"]
+    - [0x3c220, c, "os/code_3c220_len_a0"]
+    - [0x3c2c0, c, "os/code_3c2c0_len_50"]
+    - [0x3c310, c, "os/code_3c310_len_180"]
+    - [0x3c490, c, "os/code_3c490_len_3c0"]
+    - [0x3c850, c, "os/code_3c850_len_f0"]
+    - [0x3c940, c, "os/code_3c940_len_140"]
+    - [0x3ca80, c, "os/code_3ca80_len_a0"]
+    - [0x3cb20, c, "os/code_3cb20_len_130"]
+    - [0x3cc50, c, "os/code_3cc50_len_80"]
+    - [0x3ccd0, c, "os/code_3ccd0_len_30"]
+    - [0x3cd00, c, "os/code_3cd00_len_5f0"]
+    - [0x3d2f0, c, "os/code_3d2f0_len_10"]
+    - [0x3d300, c, "os/code_3d300_len_30"]
+    - [0x3d330, c, "os/code_3d330_len_990"]
+    - [0x3dcc0, c, "os/code_3dcc0_len_a60"]
+    - [0x3e720, c, "os/code_3e720_len_5f0"]
+    - [0x3ed10, c, "guOrtho"]
+    - [0x3ef90, c, "os/code_3ef90_len_600"]
+    - [0x3f310, c, "os/code_3f310_len_3c0"]
+    - [0x3f6d0, c, "os/code_3f6d0_len_320"]
+    - [0x3f9f0, c, "os/code_3f9f0_len_60"]
+    - [0x3fa50, c, "os/code_3fa50_len_f60"]
+    - [0x409b0, c, "os/code_409b0_len_140"]
+    - [0x40af0, c, "os/code_40af0_len_130"]
+    - [0x40c20, c, "os/code_40c20_len_1f0"]
+    - [0x40e10, c, "os/code_40e10_len_240"]
+    - [0x41050, c, "os/code_41050_len_120"]
+    - [0x41170, c, "os/code_41170_len_f0"]
+    - [0x41260, c, "os/osCreateThread"]
+    - [0x41330, c, "os/osGetThreadPri"]
+    - [0x41350, c, "os/code_41350_len_d0"]
+    - [0x41420, c, "os/code_41420_len_120"]
+    - [0x41540, c, "os/code_41540_len_c0"]
+    - [0x41600, c, "os/code_41600_len_40"]
+    - [0x41640, c, "os/code_41640_len_50"]
+    - [0x41690, c, "os/code_41690_len_10"]
+    - [0x416a0, c, "os/code_416a0_len_90"]
+    - [0x41730, c, "os/code_41730_len_20"]
+    - [0x41750, c, "os/code_41750_len_450"]
+    - [0x41ba0, c, "os/code_41ba0_len_c0"]
+    - [0x41c60, c, "os/code_41c60_len_c0"]
+    - [0x41d20, c, "os/code_41d20_len_40"]
+    - [0x41d60, c, "os/code_41d60_len_50"]
+    - [0x41db0, c, "os/code_41db0_len_40"]
+    - [0x41df0, c, "os/code_41df0_len_40"]
+    - [0x41e30, c, "os/code_41e30_len_40"]
+    - [0x41e70, c, "os/code_41e70_len_340"]
+    - [0x421b0, c, "os/code_421b0_len_60"]
+    - [0x42210, c, "os/code_42210_len_50"]
+    - [0x42260, c, "os/code_42260_len_170"]
+    - [0x423d0, c, "os/code_423d0_len_50"]
+    - [0x42420, c, "os/code_42420_len_50"]
+    - [0x42470, c, "os/code_42470_len_310"]
+    - [0x42780, c, "os/code_42780_len_120"]
+    - [0x428a0, c, "os/guMtxIdentF"]
+    - [0x42900, c, "os/code_42900_len_80"]
+    - [0x42980, c, "os/code_42980_len_80"]
+    - [0x42a00, c, "os/code_42a00_len_100"]
+    - [0x42b00, c, "os/code_42b00_len_c0"]
+    - [0x42bc0, c, "os/code_42bc0_len_60"]
+    - [0x42c20, c, "os/code_42c20_len_e0"]
+    - [0x42d00, c, "os/code_42d00_len_60"]
+    - [0x42d60, c, "os/code_42d60_len_80"]
+    - [0x42de0, c, "os/code_42de0_len_90"]
+    - [0x42e70, c, "os/code_42e70_len_390"]
+    - [0x43200, c, "os/code_43200_len_7c0"]
+    - [0x439c0, c, "os/code_439c0_len_220"]
+    - [0x43be0, c, "os/code_43be0_len_5e0"]
+    - [0x441c0, c, "os/code_441c0_len_1c0"]
+    - [0x44380, c, "os/code_44380_len_4e0"]
+    - [0x44860, c, "os/code_44860_len_60"]
+    - [0x448c0, c, "os/code_448c0_len_210"]
+    - [0x44ad0, c, "os/code_44ad0_len_70"]
+    - [0x44b40, c, "os/code_44b40_len_a90"]
+    - [0x455d0, c, "os/code_455d0_len_1f0"]
+    - [0x457c0, c, "os/code_457c0_len_270"]
+    - [0x45a30, c, "os/code_45a30_len_20"]
+    - [0x45a50, c, "os/code_45a50_len_3a0"]
+    - [0x45df0, hasm, "os/code_45df0_len_970"]
+    - [0x46760, c, "os/code_46760_len_90"]
+    - [0x467f0, c, "os/code_467f0_len_90"]
+    - [0x46880, c, "os/code_46880_len_260"]
+    - [0x46ae0, c, "os/code_46ae0_len_170"]
+    - [0x46c50, c, "os/code_46c50_len_20"]
+    - [0x46c70, c, "os/code_46c70_len_e00"]
+    - [0x47a70, c, "os/code_47a70_len_10"]
+    - [0x47a80, c, "os/code_47a80_len_10"]
+    - [0x47a90, c, "os/code_47a90_len_50"]
+    - [0x47ae0, c, "os/code_47ae0_len_e0"]
+    - [0x47bc0, c, "os/code_47bc0_len_50"]
+    - [0x47c10, c, "os/code_47c10_len_50"]
+    - [0x47c60, c, "os/code_47c60_len_f0"]
+    - [0x47d50, c, "os/code_47d50_len_e0"]
+    - [0x47e30, c, "os/code_47e30_len_60"]
+    - [0x47e90, c, "os/code_47e90_len_110"]
+    - [0x47fa0, c, "os/code_47fa0_len_20"]
+    - [0x47fc0, c, "os/code_47fc0_len_60"]
+    - [0x48020, c, "os/code_48020_len_a00"]
+    - [0x48a20, c, "os/code_48a20_len_1c0"]
+    - [0x48be0, c, "os/code_48be0_len_20"]
+    - [0x48c00, c, "os/code_48c00_len_5c0"]
+    - [0x491c0, c, "os/code_491c0_len_f80"]
+    - [0x49C70, c, "os/code_49C70"]
+    - [0x4a140, c, "os/code_4a140_len_70"]
+    - [0x4a1b0, c, "os/code_4a1b0_len_40"]
+    - [0x4a1f0, c, "os/code_4a1f0_len_170"]
+    - [0x4a360, c, "os/code_4a360_len_930"]
+    - [0x4ac90, c, "os/code_4ac90_len_3910"]
     - [0x4E5A0, "bin"]
     - [0x52D50, "bin"]
     - [0x6B450, .data, world/world]
@@ -209,15 +211,15 @@ segments:
     start: 0x759B0
     vram: 0x800DC500
     files:
-    - [0x759b0, "c", "code_759b0_len_61b0"]
-    - [0x7bb60, "c", "code_7bb60_len_41b0"]
-    - [0x7fd10, "c", "code_7fd10_len_b40"]
-    - [0x80850, "c", "code_80850_len_3060"]
-    - [0x838b0, "c", "code_838b0_len_5900"]
-    - [0x891b0, "c", "code_891b0_len_fb0"]
-    - [0x8a160, "c", "code_8a160_len_700"]
-    - [0x8a860, "c", "code_8a860_len_3f30"]
-    - [0x8e790, "c", "code_8e790_len_2850"]
+    - [0x759b0, c, "code_759b0_len_61b0"]
+    - [0x7bb60, c, "code_7bb60_len_41b0"]
+    - [0x7fd10, c, "code_7fd10_len_b40"]
+    - [0x80850, c, "code_80850_len_3060"]
+    - [0x838b0, c, "code_838b0_len_5900"]
+    - [0x891b0, c, "code_891b0_len_fb0"]
+    - [0x8a160, c, "code_8a160_len_700"]
+    - [0x8a860, c, "code_8a860_len_3f30"]
+    - [0x8e790, c, "code_8e790_len_2850"]
     - [0x90fe0, "bin"]
   - [0x93CD0, ci4,     ui/hammer, 32, 32]
   - [0x93ED0, palette, ui/hammer]
@@ -231,18 +233,18 @@ segments:
     start: 0xA5DD0
     vram: 0x8010F6D0
     files:
-    - [0xa5dd0, "c", "code_a5dd0_len_114e0"]
-    - [0xb72b0, "c", "code_b72b0_len_15ed0"]
-    - [0xcd180, "c", "code_cd180_len_38f0"]
-    - [0xd0a70, "c", "code_d0a70_len_4fe0"]
-    - [0xd5a50, "c", "code_d5a50_len_5fd0"]
-    - [0xdba20, "c", "code_dba20_len_350"]
-    - [0xdbd70, "c", "code_dbd70_len_700"]
-    - [0xdc470, "c", "code_dc470_len_14c0"]
-    - [0xdd930, "c", "code_dd930_len_1c0"]
-    - [0xddaf0, "c", "code_ddaf0_len_c50"]
-    - [0xde740, "c", "code_de740_len_23f0"]
-    - [0xe0b30, "c", "code_e0b30_len_b80"]
+    - [0xa5dd0, c, "code_a5dd0_len_114e0"]
+    - [0xb72b0, c, "code_b72b0_len_15ed0"]
+    - [0xcd180, c, "code_cd180_len_38f0"]
+    - [0xd0a70, c, "code_d0a70_len_4fe0"]
+    - [0xd5a50, c, "code_d5a50_len_5fd0"]
+    - [0xdba20, c, "code_dba20_len_350"]
+    - [0xdbd70, c, "code_dbd70_len_700"]
+    - [0xdc470, c, "code_dc470_len_14c0"]
+    - [0xdd930, c, "code_dd930_len_1c0"]
+    - [0xddaf0, c, "code_ddaf0_len_c50"]
+    - [0xde740, c, "code_de740_len_23f0"]
+    - [0xe0b30, c, "code_e0b30_len_b80"]
     - [0xe16b0, "bin"]
     - [0xE5820, ".data", "code_dc470_len_14c0"]
     - [0xE5830, "bin"]
@@ -250,17 +252,17 @@ segments:
     start: 0xE79B0
     vram: 0x802C3000
     files:
-    - [0xe79b0, "c", "code_e79b0_len_1920"]
-    - [0xe92d0, "c", "si"]
-    - [0xED510, "c", "code_ED510"]
-    - [0xef070, "c", "code_ef070_len_3400"]
-    - [0xf2470, "c", "code_f2470_len_27f0"]
-    - [0xf4c60, "c", "code_f4c60_len_4300"]
-    - [0xf5750, "c", "code_F5750"]
-    - [0xf8f60, "c", "code_f8f60_len_1560"]
-    - [0xfa4c0, "c", "code_fa4c0_len_3bf0"]
-    - [0xFBE10, "c"]
-    - [0xfe0b0, "c", "code_fe0b0_len_5a0"]
+    - [0xe79b0, c, "code_e79b0_len_1920"]
+    - [0xe92d0, c, "si"]
+    - [0xED510, c, "code_ED510"]
+    - [0xef070, c, "code_ef070_len_3400"]
+    - [0xf2470, c, "code_f2470_len_27f0"]
+    - [0xf4c60, c, "code_f4c60_len_4300"]
+    - [0xf5750, c, "code_F5750"]
+    - [0xf8f60, c, "code_f8f60_len_1560"]
+    - [0xfa4c0, c, "code_fa4c0_len_3bf0"]
+    - [0xFBE10, c]
+    - [0xfe0b0, c, "code_fe0b0_len_5a0"]
     - [0xFE650, ".data", "code_e79b0_len_1920"]
     - [0xFE660, "bin"]
     - [0xFE730, ".rodata", "code_e79b0_len_1920"]
@@ -269,20 +271,20 @@ segments:
     start: 0xFEE30
     vram: 0x802DBD40
     files:
-    - [0xfee30, "c", "code_fee30_len_2d60"]
-    - [0x101b90, "c", "code_101b90_len_8f0"]
+    - [0xfee30, c, "code_fee30_len_2d60"]
+    - [0x101b90, c, "code_101b90_len_8f0"]
     - [0x102480, "bin"]
   - type: code
     start: 0x102610
     vram: 0x802E0D90
     files:
-    - [0x102610, "c", "code_102610_len_2330"]
-    - [0x104940, "c", "code_104940_len_dc0"]
-    - [0x105700, "c", "code_105700_len_2130"]
-    - [0x107830, "c", "code_107830_len_e70"]
-    - [0x1086a0, "c", "code_1086a0_len_fc0"]
-    - [0x109660, "c", "code_109660_len_1270"]
-    - [0x10A8D0, "c", "code_10A8D0"]
+    - [0x102610, c, "code_102610_len_2330"]
+    - [0x104940, c, "code_104940_len_dc0"]
+    - [0x105700, c, "code_105700_len_2130"]
+    - [0x107830, c, "code_107830_len_e70"]
+    - [0x1086a0, c, "code_1086a0_len_fc0"]
+    - [0x109660, c, "code_109660_len_1270"]
+    - [0x10A8D0, c, "code_10A8D0"]
   - [0x10A9F0, i4,      shadow/square, 16, 16]
   - [0x10AA70, i4,      shadow/circle, 16, 16]
   - [0x10AAF0, bin]
@@ -298,11 +300,11 @@ segments:
     start: 0x135EE0
     vram: 0x80242BA0
     files:
-    - [0x135EE0, "c"]
-    - [0x13CAF0, "c"]
-    - [0x13FD40, "c"]
-    - [0x140C70, "c"]
-    - [0x1421C0, "c"]
+    - [0x135EE0, c]
+    - [0x13CAF0, c]
+    - [0x13FD40, c]
+    - [0x140C70, c]
+    - [0x1421C0, c]
     - [0x1422A0, "bin"]
   - [0x1443F0, ci8,        pause/world_map, 320, 320]
   - [0x15D3F0, palette,    pause/world_map]
@@ -330,33 +332,33 @@ segments:
     start: 0x163400
     vram: 0x80242BA0
     files:
-    - [0x163400, "c"]
-    - [0x165490, "c"]
-    - [0x167570, "c"]
-    - [0x168590, "c"]
-    - [0x169BE0, "c"]
+    - [0x163400, c]
+    - [0x165490, c]
+    - [0x167570, c]
+    - [0x168590, c]
+    - [0x169BE0, c]
     - [0x16A3E0, "bin"]
   - type: code
     start: 0x16C8E0
     vram: 0x8023E000
     files:
-    - [0x16C8E0, "c", "code_16c8e0"]
-    - [0x16F740, "c"]
-    - [0x1776B0, "c"]
-    - [0x17D6A0, "c"]
-    - [0x17FEB0, "c"]
-    - [0x181810, "c"]
-    - [0x182B30, "c"]
-    - [0x18C790, "c"]
-    - [0x18F340, "c"]
-    - [0x190B20, "c"]
-    - [0x1967B0, "c"]
-    - [0x196AA0, "c"]
-    - [0x197F40, "c"]
-    - [0x1A5830, "c"]
-    - [0x1AC760, "c"]
-    - [0x1AF120, "c"]
-    - [0x1AF230, "c"]
+    - [0x16C8E0, c, "code_16c8e0"]
+    - [0x16F740, c]
+    - [0x1776B0, c]
+    - [0x17D6A0, c]
+    - [0x17FEB0, c]
+    - [0x181810, c]
+    - [0x182B30, c]
+    - [0x18C790, c]
+    - [0x18F340, c]
+    - [0x190B20, c]
+    - [0x1967B0, c]
+    - [0x196AA0, c]
+    - [0x197F40, c]
+    - [0x1A5830, c]
+    - [0x1AC760, c]
+    - [0x1AF120, c]
+    - [0x1AF230, c]
     - [0x1AF2D0, "bin"]
   - [0x1CC310, "bin"] # icon images and palettes, vram unknown
   - [0x1FE1B0, rgba16,  title/logo_n64, 128, 112]
@@ -378,117 +380,117 @@ segments:
     start: 0x3169F0
     vram: 0x80200000
     files:
-    - [0x3169f0, "c", "code_3169f0"]
-    - [0x316a70, "c", "code_316a70"]
+    - [0x3169f0, c, "code_3169f0"]
+    - [0x316a70, c, "code_316a70"]
   - [0x316c00, "bin"] # 0x802AE000
   - type: code
     start: 0x316D90
     vram: 0x802AE000
     files:
-    - [0x316d90, "c", "code_316d90"]
+    - [0x316d90, c, "code_316d90"]
   - type: code
     start: 0x316f30
     vram: 0x802B2000
     files:
-    - [0x316f30, "c", "code_316f30"]
+    - [0x316f30, c, "code_316f30"]
   - type: code
     start: 0x317020
     vram: 0x802BD100
     files:
-      - [0x317020, "c"]
+      - [0x317020, c]
       - [0x317b60, "bin"]
   - type: code
     start: 0x317e50
     vram: 0x802BD100
     files:
-      - [0x317e50, "c"]
+      - [0x317e50, c]
       - [0x3195d0, "bin"]
   - type: code
     start: 0x319670
     vram: 0x802BD100
     files:
-      - [0x319670, "c"]
+      - [0x319670, c]
       - [0x31b000, "bin"]
   - type: code
     start: 0x31b120
     vram: 0x802BD100
     files:
-      - [0x31b120, "c"]
+      - [0x31b120, c]
       - [0x31cb60, "bin"]
   - type: code
     start: 0x31cc70
     vram: 0x802BD100
     files:
-      - [0x31cc70, "c"]
+      - [0x31cc70, c]
       - [0x31ddc0, "bin"]
   - type: code
     start: 0x31de70
     vram: 0x802BD100
     files:
-      - [0x31de70, "c"]
+      - [0x31de70, c]
       - [0x320b20, "bin"]
   - type: code
     start: 0x320c50
     vram: 0x802BD100
     files:
-      - [0x320c50, "c"]
+      - [0x320c50, c]
       - [0x3239b0, "bin"]
   - type: code
     start: 0x323A50
     vram: 0x802BD100
     files:
-      - [0x323A50, "c"]
+      - [0x323A50, c]
       - [0x324930, "bin"]
   - type: code
     start: 0x324a10
     vram: 0x802BD100
     files:
-      - [0x324a10, "c", "world_goompa"]
+      - [0x324a10, c, "world_goompa"]
       - [0x324e80, "bin"]
   - type: code
     start: 0x324f10
     vram: 0x802BD100
     files:
-      - [0x324f10, "c", "world_goombaria"]
+      - [0x324f10, c, "world_goombaria"]
       - [0x325000, "bin"]
   - type: code
     start: 0x325070
     vram: 0x802BD100
     files:
-      - [0x325070, "c", "world_twink"]
+      - [0x325070, c, "world_twink"]
       - [0x325160, "bin"]
   - type: code
     start: 0x3251d0
     vram: 0x802BD100
     files:
-      - [0x3251d0, "c"]
+      - [0x3251d0, c]
       - [0x3255e0, "bin"]
   - type: code
     start: 0x325ad0
     vram: 0xE0200000
     files:
-      - [0x325ad0, "c"]
-      - [0x325ee0, "c"]
+      - [0x325ad0, c]
+      - [0x325ee0, c]
       - [0x326160, "bin"]
   - [0x326410, "bin"]
   - type: code
     start: 0x3278f0
     vram: 0xE0002000
     files:
-      - [0x3278f0, "c"]
+      - [0x3278f0, c]
       - [0x328050, "bin"]
   - type: code
     start: 0x328110
     vram: 0xE000C000
     files:
-      - [0x328110, "c"]
+      - [0x328110, c]
       - [0x328d20, "bin"]
   - [0x328EA0, "bin"]
   - type: code
     start: 0x32C110
     vram: 0xE000E000
     files:
-      - [0x32C110, "c"]
+      - [0x32C110, c]
       - [0x32c770, "bin"]
   - [0x32c7a0, "bin"] # code, unknown VRAM addr. Leaving as bin for now.
   - [0x32ceb0, "bin"] # data/rodata section for above.
@@ -506,156 +508,156 @@ segments:
     start: 0x331940
     vram: 0xE001E000
     files:
-      - [0x331940, "c"]
+      - [0x331940, c]
       - [0x332690, "bin"]
   - [0x3326A0, "bin"]
   - type: code
     start: 0x333ec0
     vram: 0xE0020000
     files:
-      - [0x333ec0, "c"]
+      - [0x333ec0, c]
       - [0x334b50, "bin"]
   - [0x334C70, "bin"]
   - type: code
     start: 0x337240
     vram: 0xE0022000
     files:
-      - [0x337240, "c"]
+      - [0x337240, c]
       - [0x337f10, "bin"]
   - [0x337FC0, "bin"]
   - type: code
     start: 0x339250
     vram: 0xE0024000
     files:
-      - [0x339250, "c"]
+      - [0x339250, c]
       - [0x339f10, "bin"]
   - [0x339F60, "bin"]
   - type: code
     start: 0x33B180
     vram: 0xE0026000
     files:
-      - [0x33B180, "c"]
+      - [0x33B180, c]
       - [0x33bb70, "bin"]
   - [0x33BBD0, "bin"]
   - type: code
     start: 0x33CDF0
     vram: 0xE0028000
     files:
-      - [0x33CDF0, "c"]
+      - [0x33CDF0, c]
       - [0x33d5d0, "bin"]
   - [0x33D610, "bin"]
   - type: code
     start: 0x33E8C0
     vram: 0xE002A000
     files:
-      - [0x33E8C0, "c"]
+      - [0x33E8C0, c]
       - [0x33efe0, "bin"]
   - type: code
     start: 0x33FE80
     vram: 0xE002C000
     files:
-      - [0x33FE80, "c"]
+      - [0x33FE80, c]
       - [0x3407c0, "bin"]
   - [0x340880, "bin"]
   - type: code
     start: 0x3419E0
     vram: 0xE002E000
     files:
-      - [0x3419E0, "c"]
+      - [0x3419E0, c]
       - [0x342120, "bin"]
   - type: code
     start: 0x342140
     vram: 0xE0030000
     files:
-      - [0x342140, "c"]
+      - [0x342140, c]
       - [0x342fd0, "bin"]
   - [0x343040, "bin"]
   - type: code
     start: 0x343680
     vram: 0xE0032000
     files:
-      - [0x343680, "c"]
+      - [0x343680, c]
       - [0x343f30, "bin"]
   - [0x343F70, "bin"]
   - type: code
     start: 0x344a10
     vram: 0xE0034000
     files:
-      - [0x344a10, "c"]
+      - [0x344a10, c]
       - [0x345190, "bin"]
   - [0x3451E0, "bin"]
   - type: code
     start: 0x3454E0
     vram: 0xE0036000
     files:
-      - [0x3454E0, "c"]
+      - [0x3454E0, c]
       - [0x345b10, "bin"]
   - [0x345B40, "bin"]
   - type: code
     start: 0x34EC80
     vram: 0xE003A000
     files:
-      - [0x34EC80, "c"]
+      - [0x34EC80, c]
       - [0x34f480, "bin"]
   - type: code
     start: 0x34F4C0
     vram: 0xE003C000
     files:
-      - [0x34F4C0, "c"]
+      - [0x34F4C0, c]
       - [0x350160, "bin"]
   - [0x350220, "bin"]
   - type: code
     start: 0x352440
     vram: 0xE003E000
     files:
-      - [0x352440, "c"]
+      - [0x352440, c]
       - [0x352cb0, "bin"]
   - [0x352CE0, "bin"]
   - type: code
     start: 0x354F60
     vram: 0xE0044000
     files:
-      - [0x354F60, "c"]
+      - [0x354F60, c]
       - [0x355d10, "bin"]
   - type: code
     start: 0x355EE0
     vram: 0xE0046000
     files:
-      - [0x355EE0, "c"]
+      - [0x355EE0, c]
       - [0x3564e0, "bin"]
   - [0x356530, "bin"]
   - type: code
     start: 0x356980
     vram: 0xE0048000
     files:
-      - [0x356980, "c"]
+      - [0x356980, c]
       - [0x357380, "bin"]
   - [0x3573A0, "bin"]
   - type: code
     start: 0x3584C0
     vram: 0xE004A000
     files:
-      - [0x3584C0, "c"]
+      - [0x3584C0, c]
       - [0x359320, "bin"]
   - [0x3593B0, "bin"]
   - type: code
     start: 0x35B9D0
     vram: 0xE004E000
     files:
-      - [0x35B9D0, "c"]
+      - [0x35B9D0, c]
       - [0x35bfb0, "bin"]
   - type: code
     start: 0x35BFD0
     vram: 0xE0050000
     files:
-      - [0x35BFD0, "c"]
+      - [0x35BFD0, c]
       - [0x35c530, "bin"]
   - [0x35C550, "bin"]
   - type: code
     start: 0x3602C0
     vram: 0xE005A000
     files:
-      - [0x3602C0, "c"]
+      - [0x3602C0, c]
       - [0x360a10, "bin"]
   - [0x360A30, "bin"]
   - [0x360f40, "bin"] # code, unknown VRAM addr. Leaving as bin for now.
@@ -672,68 +674,68 @@ segments:
     start: 0x366030
     vram: 0xE0066000
     files:
-      - [0x366030, "c"]
+      - [0x366030, c]
       - [0x366c80, "bin"]
   - [0x366D60, "bin"]
   - type: code
     start: 0x36A8D0
     vram: 0xE0068000
     files:
-      - [0x36A8D0, "c"]
+      - [0x36A8D0, c]
       - [0x36ae80, "bin"]
   - [0x36AEE0, "bin"]
   - type: code
     start: 0x36D020
     vram: 0xE006A000
     files:
-      - [0x36D020, "c"]
+      - [0x36D020, c]
       - [0x36de10, "bin"]
   - [0x36DF90, "bin"]
   - type: code
     start: 0x36E1D0
     vram: 0xE006C000
     files:
-      - [0x36E1D0, "c"]
+      - [0x36E1D0, c]
       - [0x36ed30, "bin"]
   - [0x36ED60, "bin"]
   - type: code
     start: 0x372790
     vram: 0xE006E000
     files:
-      - [0x372790, "c"]
+      - [0x372790, c]
       - [0x373390, "bin"]
   - [0x3733E0, "bin"]
   - type: code
     start: 0x3740B0
     vram: 0xE0070000
     files:
-      - [0x3740B0, "c"]
+      - [0x3740B0, c]
       - [0x374d80, "bin"]
   - type: code
     start: 0x374E50
     vram: 0xE0072000
     files:
-      - [0x374E50, "c"]
+      - [0x374E50, c]
       - [0x375500, "bin"]
   - [0x375510, "bin"]
   - type: code
     start: 0x376460
     vram: 0xE0074000
     files:
-      - [0x376460, "c"]
+      - [0x376460, c]
       - [0x376fc0, "bin"]
   - type: code
     start: 0x377070
     vram: 0xE0076000
     files:
-      - [0x377070, "c"]
+      - [0x377070, c]
       - [0x377f00, "bin"]
   - [0x377F80, "bin"]
   - type: code
     start: 0x37A3F0
     vram: 0xE0078000
     files:
-      - [0x37A3F0, "c"]
+      - [0x37A3F0, c]
       - [0x37acf0, "bin"]
   - [0x37ADD0, "bin"]
   - [0x37D9D0, "bin"]
@@ -741,55 +743,55 @@ segments:
     start: 0x37F720
     vram: 0xE007E000
     files:
-      - [0x37F720, "c"]
+      - [0x37F720, c]
       - [0x380350, "bin"]
   - [0x3803A0, "bin"]
   - type: code
     start: 0x3812C0
     vram: 0xE0080000
     files:
-      - [0x3812C0, "c"]
+      - [0x3812C0, c]
       - [0x381d80, "bin"]
   - [0x381E00, "bin"]
   - type: code
     start: 0x385640
     vram: 0xE0082000
     files:
-      - [0x385640, "c"]
+      - [0x385640, c]
       - [0x386340, "bin"]
   - [0x3863B0, "bin"]
   - type: code
     start: 0x3889D0
     vram: 0xE0084000
     files:
-      - [0x3889D0, "c"]
+      - [0x3889D0, c]
       - [0x3897e0, "bin"]
   - type: code
     start: 0x389850
     vram: 0xE0086000
     files:
-      - [0x389850, "c"]
+      - [0x389850, c]
       - [0x38a2f0, "bin"]
   - [0x38A350, "bin"]
   - type: code
     start: 0x38ADF0
     vram: 0xE0088000
     files:
-      - [0x38ADF0, "c"]
+      - [0x38ADF0, c]
       - [0x38bab0, "bin"]
   - [0x38BBA0, "bin"]
   - type: code
     start: 0x38EE60
     vram: 0xE008E000
     files:
-      - [0x38EE60, "c"]
+      - [0x38EE60, c]
       - [0x38f6f0, "bin"]
   - [0x38F710, "bin"]
   - type: code
     start: 0x38F900
     vram: 0xE0090000
     files:
-      - [0x38F900, "c"]
+      - [0x38F900, c]
       - [0x390340, "bin"]
   - [0x3903D0, "bin"]
   - start: 0x390810
@@ -803,14 +805,14 @@ segments:
     start: 0x391D30
     vram: 0xE0092000
     files:
-      - [0x391D30, "c"]
+      - [0x391D30, c]
       - [0x3923c0, "bin"]
   - [0x392440, "bin"]
   - type: code
     start: 0x3928D0
     vram: 0xE0094000
     files:
-      - [0x3928D0, "c"]
+      - [0x3928D0, c]
       - [0x393080, "bin"]
   - [0x3930A0, "bin"]
   - [0x394280, "bin"] # code, unknown VRAM addr. Leaving as bin for now.
@@ -831,55 +833,55 @@ segments:
     start: 0x3A37E0
     vram: 0xE00A4000
     files:
-      - [0x3A37E0, "c"]
+      - [0x3A37E0, c]
       - [0x3a42b0, "bin"]
   - [0x3A4320, "bin"]
   - type: code
     start: 0x3A70F0
     vram: 0xE00A8000
     files:
-      - [0x3A70F0, "c"]
+      - [0x3A70F0, c]
       - [0x3A7710, "bin"]
   - [0x3A77A0, "bin"] # split further
   - type: code
     start: 0x3AA920
     vram: 0xE00AA000
     files:
-    - [0x3AA920, "c"]
+    - [0x3AA920, c]
     - [0x3AAFE0, "bin"]
   - [0x3AB030, "bin"] # todo split this further
   - type: code
     start: 0x3AEE20
     vram: 0xE00AC000
     files:
-    - [0x3AEE20, "c"]
+    - [0x3AEE20, c]
     - [0x3AF5D0, "bin"]
   - [0x3AF700, "bin"] # todo split this further
   - type: code
     start: 0x3B2350
     vram: 0xE00AE000
     files:
-    - [0x3B2350, "c"]
+    - [0x3B2350, c]
   - [0x3B2D90, "bin"] # todo split this further
   - type: code
     start: 0x3B3EB0
     vram: 0xE00B0000
     files:
-    - [0x3B3EB0, "c"]
+    - [0x3B3EB0, c]
     - [0x3B4690, "bin"]
   - [0x3B46A0, "bin"] # todo split this further
   - type: code
     start: 0x3B7B80
     vram: 0xE00B8000
     files:
-    - [0x3B7B80, "c"]
+    - [0x3B7B80, c]
     - [0x3B8470, "bin"]
   - [0x3B8860, "bin"] # todo split this further
   - type: code
     start: 0x3BA030
     vram: 0xE00BC000
     files:
-    - [0x3BA030, "c"]
+    - [0x3BA030, c]
     - [0x3BAC60, "bin"]
   - [0x3BAEA0, "bin"] # todo split this further ADD STUFF AFTER HERE
   - [0x3ED4E0, "ia8", "world/text_chapter", 128, 38]
@@ -888,7 +890,7 @@ segments:
     start: 0x415D90
     vram: 0x802A1000
     files:
-    - [0x415D90, "c"]
+    - [0x415D90, c]
   - [0x4200C0, "bin"] # todo split this further
   - name: battle/section_0/
     type: code
@@ -1173,9 +1175,9 @@ segments:
     start: 0x7E0E80
     vram: 0x80280000
     files:
-    - [0x7e0e80, "c"]
-    - [0x7E2AA0, "c"]
-    - [0x7E3700, "c"]
+    - [0x7e0e80, c]
+    - [0x7E2AA0, c]
+    - [0x7E3700, c]
     - [0x7e4d00, "bin"]
   - name: world/area_mac/machi/
     type: code
@@ -1183,9 +1185,9 @@ segments:
     start: 0x7E73A0
     vram: 0x80240000
     files:
-      - [0x7E73A0, "c"]
-      - [0x7E7550, "c"]
-      - [0x7E7850, "c"]
+      - [0x7E73A0, c]
+      - [0x7E7550, c]
+      - [0x7E7850, c]
       - [0x7E7A30, "bin"]
       - [0x7E8470, "bin"]
       - [0x7EA340, "bin"]
@@ -1198,10 +1200,10 @@ segments:
     start: 0x7EAD10
     vram: 0x80240000
     files:
-      - [0x7EAD10, "c"]
-      - [0x7EB340, "c"]
-      - [0x7ECFD0, "c"]
-      - [0x7ED280, "c"]
+      - [0x7EAD10, c]
+      - [0x7EB340, c]
+      - [0x7ECFD0, c]
+      - [0x7ED280, c]
       - [0x7EE870, "bin"]
       - [0x7F0A20, "bin"]
       - [0x7F8F20, "bin"]
@@ -1222,12 +1224,12 @@ segments:
     start: 0x800880
     vram: 0x80240000
     files:
-      - [0x800880, "c"]
-      - [0x800C40, "c"]
-      - [0x801700, "c"]
-      - [0x8017D0, "c"]
-      - [0x805DD0, "c"]
-      - [0x806D10, "c"]
+      - [0x800880, c]
+      - [0x800C40, c]
+      - [0x801700, c]
+      - [0x8017D0, c]
+      - [0x805DD0, c]
+      - [0x806D10, c]
       - [0x806F50, "bin"]
       - [0x807C00, "bin"]
       - [0x808680, "bin"]
@@ -1244,11 +1246,11 @@ segments:
     start: 0x8232C0
     vram: 0x80240000
     files:
-      - [0x8232C0, "c"]
-      - [0x8238B0, "c"]
-      - [0x823970, "c"]
-      - [0x823BB0, "c"]
-      - [0x823BF0, "c"]
+      - [0x8232C0, c]
+      - [0x8238B0, c]
+      - [0x823970, c]
+      - [0x823BB0, c]
+      - [0x823BF0, c]
       - [0x8267E0, "bin"]
       - [0x8268F0, "bin"]
       - [0x827E70, "bin"]
@@ -1262,10 +1264,10 @@ segments:
     start: 0x831800
     vram: 0x80240000
     files:
-      - [0x831800, "c"]
-      - [0x831B20, "c"]
-      - [0x833500, "c"]
-      - [0x833740, "c"]
+      - [0x831800, c]
+      - [0x831B20, c]
+      - [0x833500, c]
+      - [0x833740, c]
       - [0x834070, "bin"]
       - [0x834170, "bin"]
       - [0x835370, "bin"]
@@ -1280,13 +1282,13 @@ segments:
     start: 0x842BD0
     vram: 0x80240000
     files:
-      - [0x842BD0, "c"]
-      - [0x842C20, "c"]
-      - [0x842D90, "c"]
-      - [0x842DF0, "c"]
-      - [0x843030, "c"]
-      - [0x844860, "c"]
-      - [0x844AC0, "c"]
+      - [0x842BD0, c]
+      - [0x842C20, c]
+      - [0x842D90, c]
+      - [0x842DF0, c]
+      - [0x843030, c]
+      - [0x844860, c]
+      - [0x844AC0, c]
       - [0x844BF0, "bin"]
       - [0x844D50, "bin"]
       - [0x845280, "bin"]
@@ -1305,9 +1307,9 @@ segments:
     start: 0x852170
     vram: 0x80240000
     files:
-      - [0x852170, "c"]
-      - [0x855560, "c"]
-      - [0x855F20, "c"]
+      - [0x852170, c]
+      - [0x855560, c]
+      - [0x855F20, c]
       - [0x8562D0, "bin"]
       - [0x8564E0, "bin"]
       - [0x856650, "bin"]
@@ -1324,9 +1326,9 @@ segments:
     start: 0x864B40
     vram: 0x80240000
     files:
-      - [0x864B40, "c"]
-      - [0x865000, "c"]
-      - [0x8659C0, "c"]
+      - [0x864B40, c]
+      - [0x865000, c]
+      - [0x8659C0, c]
       - [0x8661D0, "bin"]
       - [0x8666A0, "bin"]
       - [0x867EF0, "bin"]
@@ -1338,9 +1340,9 @@ segments:
     start: 0x8694B0
     vram: 0x80240000
     files:
-      - [0x8694B0, "c"]
-      - [0x869AA0, "c"]
-      - [0x869EE0, "c"]
+      - [0x8694B0, c]
+      - [0x869AA0, c]
+      - [0x869EE0, c]
       - [0x869F40, "bin"]
       - [0x86A030, "bin"]
       - [0x86B350, "bin"]
@@ -1353,9 +1355,9 @@ segments:
     start: 0x86C740
     vram: 0x80240000
     files:
-      - [0x86C740, "c"]
-      - [0x86CA50, "c"]
-      - [0x86CD10, "c"]
+      - [0x86C740, c]
+      - [0x86CA50, c]
+      - [0x86CD10, c]
       - [0x86D0E0, "bin"]
       - [0x86D190, "bin"]
       - [0x86D800, "bin"]
@@ -1368,8 +1370,8 @@ segments:
     start: 0x86EB00
     vram: 0x80240000
     files:
-      - [0x86EB00, "c"]
-      - [0x86F0F0, "c"]
+      - [0x86EB00, c]
+      - [0x86F0F0, c]
       - [0x86F5D0, "bin"]
       - [0x86F670, "bin"]
       - [0x870B60, "bin"]
@@ -1384,8 +1386,8 @@ segments:
     start: 0x871A30
     vram: 0x80240000
     files:
-      - [0x871A30, "c"]
-      - [0x872020, "c"]
+      - [0x871A30, c]
+      - [0x872020, c]
       - [0x8726A0, "bin"]
       - [0x872750, "bin"]
       - [0x8739F0, "bin"]
@@ -1398,8 +1400,8 @@ segments:
     start: 0x874DC0
     vram: 0x80240000
     files:
-      - [0x874DC0, "c"]
-      - [0x8750D0, "c"]
+      - [0x874DC0, c]
+      - [0x8750D0, c]
       - [0x875810, "bin"]
       - [0x8758C0, "bin"]
       - [0x875D10, "bin"]
@@ -1413,8 +1415,8 @@ segments:
     start: 0x876EE0
     vram: 0x80240000
     files:
-      - [0x876EE0, "c"]
-      - [0x8774D0, "c"]
+      - [0x876EE0, c]
+      - [0x8774D0, c]
       - [0x877840, "bin"]
       - [0x8778F0, "bin"]
       - [0x878F90, "bin"]
@@ -1427,8 +1429,8 @@ segments:
     start: 0x879BE0
     vram: 0x80240000
     files:
-      - [0x879BE0, "c"]
-      - [0x87AC00, "c"]
+      - [0x879BE0, c]
+      - [0x87AC00, c]
       - [0x87C4D0, "bin"]
       - [0x87C570, "bin"]
       - [0x87D5D0, "bin"]
@@ -1442,9 +1444,9 @@ segments:
     start: 0x87EDF0
     vram: 0x80240000
     files:
-      - [0x87EDF0, "c"]
-      - [0x87F3E0, "c"]
-      - [0x87F820, "c"]
+      - [0x87EDF0, c]
+      - [0x87F3E0, c]
+      - [0x87F820, c]
       - [0x87F8B0, "bin"]
       - [0x87F9A0, "bin"]
       - [0x881770, "bin"]
@@ -1456,9 +1458,9 @@ segments:
     start: 0x8821C0
     vram: 0x80240000
     files:
-      - [0x8821C0, "c"]
-      - [0x8827B0, "c"]
-      - [0x882BF0, "c"]
+      - [0x8821C0, c]
+      - [0x8827B0, c]
+      - [0x882BF0, c]
       - [0x883460, "bin"]
       - [0x883500, "bin"]
       - [0x8856E0, "bin"]
@@ -1472,8 +1474,8 @@ segments:
     start: 0x8863C0
     vram: 0x80240000
     files:
-      - [0x8863C0, "c"]
-      - [0x8866D0, "c"]
+      - [0x8863C0, c]
+      - [0x8866D0, c]
       - [0x887780, "bin"]
       - [0x887800, "bin"]
       - [0x887B20, "bin"]
@@ -1486,9 +1488,9 @@ segments:
     start: 0x888BD0
     vram: 0x80240000
     files:
-      - [0x888BD0, "c"]
-      - [0x8891C0, "c"]
-      - [0x88A530, "c"]
+      - [0x888BD0, c]
+      - [0x8891C0, c]
+      - [0x88A530, c]
       - [0x88AE20, "bin"]
       - [0x88AEA0, "bin"]
       - [0x88BF60, "bin"]
@@ -1502,8 +1504,8 @@ segments:
     start: 0x88D600
     vram: 0x80240000
     files:
-      - [0x88D600, "c"]
-      - [0x88DBF0, "c"]
+      - [0x88D600, c]
+      - [0x88DBF0, c]
       - [0x88DF60, "bin"]
       - [0x88DFF0, "bin"]
       - [0x88F180, "bin"]
@@ -1515,8 +1517,8 @@ segments:
     start: 0x88FBA0
     vram: 0x80240000
     files:
-      - [0x88FBA0, "c"]
-      - [0x890190, "c"]
+      - [0x88FBA0, c]
+      - [0x890190, c]
       - [0x8906B0, "bin"]
       - [0x890740, "bin"]
       - [0x891890, "bin"]
@@ -1528,9 +1530,9 @@ segments:
     start: 0x892A20
     vram: 0x80240000
     files:
-      - [0x892A20, "c"]
-      - [0x892A50, "c"]
-      - [0x893790, "c"]
+      - [0x892A20, c]
+      - [0x892A50, c]
+      - [0x893790, c]
       - [0x893D80, "bin"]
       - [0x893E40, "bin"]
       - [0x8944F0, "bin"]
@@ -1542,8 +1544,8 @@ segments:
     start: 0x8956E0
     vram: 0x80240000
     files:
-      - [0x8956E0, "c"]
-      - [0x8959F0, "c"]
+      - [0x8956E0, c]
+      - [0x8959F0, c]
       - [0x895D90, "bin"]
       - [0x895E20, "bin"]
       - [0x896CA0, "bin"]
@@ -1555,8 +1557,8 @@ segments:
     start: 0x8975E0
     vram: 0x80240000
     files:
-      - [0x8975E0, "c"]
-      - [0x897BD0, "c"]
+      - [0x8975E0, c]
+      - [0x897BD0, c]
       - [0x898910, "bin"]
       - [0x898990, "bin"]
       - [0x899C90, "bin"]
@@ -1568,8 +1570,8 @@ segments:
     start: 0x89A350
     vram: 0x80240000
     files:
-      - [0x89A350, "c"]
-      - [0x89ACB0, "c"]
+      - [0x89A350, c]
+      - [0x89ACB0, c]
       - [0x89B490, "bin"]
       - [0x89B530, "bin"]
       - [0x89D200, "bin"]
@@ -1582,7 +1584,7 @@ segments:
     start: 0x89D7A0
     vram: 0x80240000
     files:
-      - [0x89D7A0, "c"]
+      - [0x89D7A0, c]
       - [0x89E100, "bin"]
       - [0x89E1A0, "bin"]
       - [0x89FD70, "bin"]
@@ -1594,8 +1596,8 @@ segments:
     start: 0x89FEC0
     vram: 0x80240000
     files:
-      - [0x89FEC0, "c"]
-      - [0x89FEF0, "c"]
+      - [0x89FEC0, c]
+      - [0x89FEF0, c]
       - [0x8A0870, "bin"]
       - [0x8A0930, "bin"]
       - [0x8A23C0, "bin"] # rodata
@@ -1605,8 +1607,8 @@ segments:
     start: 0x8A23D0
     vram: 0x80240000
     files:
-      - [0x8A23D0, "c"]
-      - [0x8A2D30, "c"]
+      - [0x8A23D0, c]
+      - [0x8A2D30, c]
       - [0x8A3510, "bin"]
       - [0x8A35A0, "bin"]
       - [0x8A5340, "bin"]
@@ -1618,9 +1620,9 @@ segments:
     start: 0x8A5A80
     vram: 0x80240000
     files:
-      - [0x8A5A80, "c"]
-      - [0x8A5AD0, "c"]
-      - [0x8A5DE0, "c"]
+      - [0x8A5A80, c]
+      - [0x8A5AD0, c]
+      - [0x8A5DE0, c]
       - [0x8A6930, "bin"]
       - [0x8A69C0, "bin"]
       - [0x8A7810, "bin"]
@@ -1634,8 +1636,8 @@ segments:
     start: 0x8A7F80
     vram: 0x80240000
     files:
-      - [0x8A7F80, "c"]
-      - [0x8A8600, "c"]
+      - [0x8A7F80, c]
+      - [0x8A8600, c]
       - [0x8A8740, "bin"]
       - [0x8A8800, "bin"]
       - [0x8A93D0, "bin"]
@@ -1647,8 +1649,8 @@ segments:
     start: 0x8A9A10
     vram: 0x80240000
     files:
-      - [0x8A9A10, "c"]
-      - [0x8A9B70, "c"]
+      - [0x8A9A10, c]
+      - [0x8A9B70, c]
       - [0x8A9F30, "bin"]
       - [0x8AA1D0, "bin"]
       - [0x8AA310, "bin"]
@@ -1659,9 +1661,9 @@ segments:
     start: 0x8AA450
     vram: 0x80240000
     files:
-      - [0x8AA450, "c"]
-      - [0x8AA5B0, "c"]
-      - [0x8AAB80, "c"]
+      - [0x8AA450, c]
+      - [0x8AA5B0, c]
+      - [0x8AAB80, c]
       - [0x8AABD0, "bin"]
       - [0x8AADC0, "bin"]
       - [0x8ABE60, "bin"]
@@ -1672,7 +1674,7 @@ segments:
     start: 0x8ABF90
     vram: 0x80240000
     files:
-      - [0x8ABF90, "c"]
+      - [0x8ABF90, c]
       - [0x8ACD00, "bin"]
       - [0x8ACDB0, "bin"]
       - [0x8ACFE0, "bin"]
@@ -1685,11 +1687,11 @@ segments:
     start: 0x8B0070
     vram: 0x80240000
     files:
-      - [0x8B0070, "c"]
-      - [0x8B30E0, "c"]
-      - [0x8B36B0, "c"]
-      - [0x8B37D0, "c"]
-      - [0x8B3A10, "c"]
+      - [0x8B0070, c]
+      - [0x8B30E0, c]
+      - [0x8B36B0, c]
+      - [0x8B37D0, c]
+      - [0x8B3A10, c]
       - [0x8B3AB0, "bin"]
       - [0x8B3D10, "bin"]
       - [0x8B5640, "bin"]
@@ -1707,11 +1709,11 @@ segments:
     start: 0x8C7F90
     vram: 0x80240000
     files:
-      - [0x8C7F90, "c"]
-      - [0x8C8140, "c"]
-      - [0x8C82B0, "c"]
-      - [0x8C83A0, "c"]
-      - [0x8C85E0, "c"]
+      - [0x8C7F90, c]
+      - [0x8C8140, c]
+      - [0x8C82B0, c]
+      - [0x8C83A0, c]
+      - [0x8C85E0, c]
       - [0x8C85E0, ".data", "world/area_kmr/kmr_03/8C7F90"]
       - [0x8C8680, ".data", "world/area_kmr/kmr_03/8C8140"]
       - [0x8C88E0, ".data", "world/area_kmr/kmr_03/8C82B0"]
@@ -1725,8 +1727,8 @@ segments:
     start: 0x8CA900
     vram: 0x80240000
     files:
-      - [0x8CA900, "c"]
-      - [0x8CA960, "c"]
+      - [0x8CA900, c]
+      - [0x8CA960, c]
       - [0x8CAD70, "bin"]
       - [0x8CAF00, "bin"]
       - [0x8CB160, "bin"]
@@ -1740,8 +1742,8 @@ segments:
     start: 0x8CE070
     vram: 0x80240000
     files:
-      - [0x8CE070, "c"]
-      - [0x8CF570, "c"]
+      - [0x8CE070, c]
+      - [0x8CF570, c]
       - [0x8CF7F0, "bin"]
       - [0x8CF880, "bin"]
       - [0x8D0900, "bin"]
@@ -1754,8 +1756,8 @@ segments:
     start: 0x8D1510
     vram: 0x80240000
     files:
-      - [0x8D1510, "c"]
-      - [0x8D2A10, "c"]
+      - [0x8D1510, c]
+      - [0x8D2A10, c]
       - [0x8D32B0, "bin"]
       - [0x8D3340, "bin"]
       - [0x8D3AC0, "bin"]
@@ -1768,7 +1770,7 @@ segments:
     start: 0x8D3DC0
     vram: 0x80240000
     files:
-      - [0x8D3DC0, "c"]
+      - [0x8D3DC0, c]
       - [0x8D4880, "bin"]
       - [0x8D49A0, "bin"]
       - [0x8D5C40, "bin"] # rodata
@@ -1779,7 +1781,7 @@ segments:
     start: 0x8D5E00
     vram: 0x80240000
     files:
-      - [0x8D5E00, "c"]
+      - [0x8D5E00, c]
       - [0x8D7330, "bin"]
       - [0x8D73C0, "bin"]
       - [0x8D83B0, "bin"]
@@ -1791,8 +1793,8 @@ segments:
     start: 0x8D84D0
     vram: 0x80240000
     files:
-      - [0x8D84D0, "c"]
-      - [0x8D88A0, "c"]
+      - [0x8D84D0, c]
+      - [0x8D88A0, c]
       - [0x8D8AE0, "bin"]
       - [0x8D8B80, "bin"]
       - [0x8D8E60, "bin"]
@@ -1804,10 +1806,10 @@ segments:
     start: 0x8DA100
     vram: 0x80240000
     files:
-      - [0x8DA100, "c"]
-      - [0x8DA3A0, "c"]
-      - [0x8DAFC0, "c"]
-      - [0x8DB020, "c"]
+      - [0x8DA100, c]
+      - [0x8DA3A0, c]
+      - [0x8DAFC0, c]
+      - [0x8DB020, c]
       - [0x8DB260, "bin"]
       - [0x8DB2F0, "bin"]
       - [0x8DC270, "bin"]
@@ -1824,7 +1826,7 @@ segments:
     start: 0x8EB360
     vram: 0x80240000
     files:
-      - [0x8EB360, "c", "world/area_kmr/kmr_12/header"]
+      - [0x8EB360, c, "world/area_kmr/kmr_12/header"]
       - [0x8EB390, ".data", "world/area_kmr/kmr_12/header"]
       - [0x8EB420, ".data", "world/area_kmr/kmr_12/events"]
       - [0x8EBE10, ".rodata", "world/area_kmr/kmr_12/events"]
@@ -1834,16 +1836,16 @@ segments:
     start: 0x8EBE20
     vram: 0x80240000
     files:
-      - [0x8EBE20, "c"]
-      - [0x8EBE50, "c"]
-      - [0x8ECBF0, "c"]
-      - [0x8ECC40, "c"]
-      - [0x8ECE80, "c"]
-      - [0x8ED0C0, "c"]
-      - [0x8ED440, "c"]
-      - [0x8ED5A0, "c"]
-      - [0x8EDB70, "c"]
-      - [0x8EDFC0, "c"]
+      - [0x8EBE20, c]
+      - [0x8EBE50, c]
+      - [0x8ECBF0, c]
+      - [0x8ECC40, c]
+      - [0x8ECE80, c]
+      - [0x8ED0C0, c]
+      - [0x8ED440, c]
+      - [0x8ED5A0, c]
+      - [0x8EDB70, c]
+      - [0x8EDFC0, c]
       - [0x8EE9D0, "bin"]
       - [0x8EEBC0, "bin"]
       - [0x8EFDA0, "bin"]
@@ -1864,8 +1866,8 @@ segments:
     start: 0x8FEE80
     vram: 0x80240000
     files:
-      - [0x8FEE80, "c"]
-      - [0x8FEE90, "c"]
+      - [0x8FEE80, c]
+      - [0x8FEE90, c]
       - [0x8FF160, "bin"]
       - [0x8FF650, "bin"] # rodata
       - [0x8FF670, "bin"] # rodata
@@ -1875,9 +1877,9 @@ segments:
     start: 0x8FF670
     vram: 0x80240000
     files:
-      - [0x8FF670, "c"]
-      - [0x8FF680, "c"]
-      - [0x8FF8B0, "c"]
+      - [0x8FF670, c]
+      - [0x8FF680, c]
+      - [0x8FF8B0, c]
       - [0x900380, "bin"]
       - [0x900A80, "bin"]
       - [0x9079D0, "bin"] # rodata
@@ -1889,8 +1891,8 @@ segments:
     start: 0x907A30
     vram: 0x80240000
     files:
-      - [0x907A30, "c"]
-      - [0x907A40, "c"]
+      - [0x907A30, c]
+      - [0x907A40, c]
       - [0x908B00, "bin"]
       - [0x90B210, "bin"] # rodata
       - [0x90B240, "bin"] # rodata
@@ -1900,8 +1902,8 @@ segments:
     start: 0x90B240
     vram: 0x80240000
     files:
-      - [0x90B240, "c"]
-      - [0x90B250, "c"]
+      - [0x90B240, c]
+      - [0x90B250, c]
       - [0x90B350, "bin"]
       - [0x90B6C0, "bin"] # rodata
       - [0x90B6D0, "bin"] # rodata
@@ -1911,8 +1913,8 @@ segments:
     start: 0x90B6D0
     vram: 0x80240000
     files:
-      - [0x90B6D0, "c"]
-      - [0x90B9E0, "c"]
+      - [0x90B6D0, c]
+      - [0x90B9E0, c]
       - [0x90BBB0, "bin"]
       - [0x90BDB0, "bin"]
       - [0x90BFF0, "bin"]
@@ -1922,8 +1924,8 @@ segments:
     start: 0x90CC40
     vram: 0x80240000
     files:
-      - [0x90CC40, "c"]
-      - [0x90CEF0, "c"]
+      - [0x90CC40, c]
+      - [0x90CEF0, c]
       - [0x90CF20, "bin"]
       - [0x90F6A0, "bin"] # rodata
   - name: world/area_iwa/iwa_01/
@@ -1932,9 +1934,9 @@ segments:
     start: 0x90F6B0
     vram: 0x80240000
     files:
-      - [0x90F6B0, "c"]
-      - [0x90FBD0, "c"]
-      - [0x912960, "c"]
+      - [0x90F6B0, c]
+      - [0x90FBD0, c]
+      - [0x912960, c]
       - [0x912990, "bin"]
       - [0x913070, "bin"]
       - [0x9135D0, "bin"]
@@ -1949,7 +1951,7 @@ segments:
     start: 0x915D70
     vram: 0x80240000
     files:
-      - [0x915D70, "c"]
+      - [0x915D70, c]
       - [0x916E70, "bin"]
       - [0x917170, "bin"]
       - [0x917220, "bin"]
@@ -1961,8 +1963,8 @@ segments:
     start: 0x918BB0
     vram: 0x80240000
     files:
-      - [0x918BB0, "c"]
-      - [0x918EF0, "c"]
+      - [0x918BB0, c]
+      - [0x918EF0, c]
       - [0x919F00, "bin"]
       - [0x91A6B0, "bin"]
       - [0x91B510, "bin"]
@@ -1975,7 +1977,7 @@ segments:
     start: 0x91B8E0
     vram: 0x80240000
     files:
-      - [0x91B8E0, "c"]
+      - [0x91B8E0, c]
       - [0x91C9C0, "bin"]
       - [0x91CA50, "bin"]
       - [0x91CFA0, "bin"]
@@ -1987,12 +1989,12 @@ segments:
     start: 0x91E570
     vram: 0x80240000
     files:
-      - [0x91E570, "c"]
-      - [0x91E5B0, "c"]
-      - [0x91E6D0, "c"]
-      - [0x91F5A0, "c"]
-      - [0x91FA80, "c"]
-      - [0x91FB20, "c"]
+      - [0x91E570, c]
+      - [0x91E5B0, c]
+      - [0x91E6D0, c]
+      - [0x91F5A0, c]
+      - [0x91FA80, c]
+      - [0x91FB20, c]
       - [0x91FD60, "bin"]
       - [0x91FE80, "bin"]
       - [0x920280, "bin"]
@@ -2006,9 +2008,9 @@ segments:
     start: 0x9269F0
     vram: 0x80240000
     files:
-      - [0x9269F0, "c"]
-      - [0x926A10, "c"]
-      - [0x926C70, "c"]
+      - [0x9269F0, c]
+      - [0x926A10, c]
+      - [0x926C70, c]
       - [0x926D00, "bin"]
       - [0x926D90, "bin"]
       - [0x927030, "bin"]
@@ -2020,8 +2022,8 @@ segments:
     start: 0x929270
     vram: 0x80240000
     files:
-      - [0x929270, "c"]
-      - [0x9292B0, "c"]
+      - [0x929270, c]
+      - [0x9292B0, c]
       - [0x9292D0, ".data", "world/area_sbk/sbk_00/929270"]
       - [0x929A00, ".data", "world/area_sbk/sbk_00/9292B0"]
       - [0x929A80, ".rodata", "world/area_sbk/sbk_00/929270"]
@@ -2031,8 +2033,8 @@ segments:
     start: 0x929A90
     vram: 0x80240000
     files:
-      - [0x929A90, "c"]
-      - [0x929AD0, "c"]
+      - [0x929A90, c]
+      - [0x929AD0, c]
       - [0x929AF0, ".data", "world/area_sbk/sbk_01/929A90"]
       - [0x929E00, ".data", "world/area_sbk/sbk_01/929AD0"]
       - [0x92A290, ".rodata", "world/area_sbk/sbk_01/929A90"]
@@ -2042,8 +2044,8 @@ segments:
     start: 0x92A2B0
     vram: 0x80240000
     files:
-      - [0x92A2B0, "c"]
-      - [0x92A9A0, "c"]
+      - [0x92A2B0, c]
+      - [0x92A9A0, c]
       - [0x92AEB0, "bin"]
       - [0x92AFF0, "bin"]
       - [0x92B500, "bin"]
@@ -2057,8 +2059,8 @@ segments:
     start: 0x92F8B0
     vram: 0x80240000
     files:
-      - [0x92F8B0, "c"]
-      - [0x92F8F0, "c"]
+      - [0x92F8B0, c]
+      - [0x92F8F0, c]
       - [0x92F910, "bin"]
       - [0x92FC20, "bin"]
       - [0x9304B0, "bin"] # rodata
@@ -2069,8 +2071,8 @@ segments:
     start: 0x9304D0
     vram: 0x80240000
     files:
-      - [0x9304D0, "c"]
-      - [0x930510, "c"]
+      - [0x9304D0, c]
+      - [0x930510, c]
       - [0x930530, "bin"]
       - [0x930840, "bin"]
       - [0x930CD0, "bin"] # rodata
@@ -2081,8 +2083,8 @@ segments:
     start: 0x930CF0
     vram: 0x80240000
     files:
-      - [0x930CF0, "c"]
-      - [0x930D30, "c"]
+      - [0x930CF0, c]
+      - [0x930D30, c]
       - [0x930D50, "bin"]
       - [0x9310F0, "bin"]
       - [0x931130, "bin"]
@@ -2094,8 +2096,8 @@ segments:
     start: 0x9325C0
     vram: 0x80240000
     files:
-      - [0x9325C0, "c"]
-      - [0x932600, "c"]
+      - [0x9325C0, c]
+      - [0x932600, c]
       - [0x932940, "bin"]
       - [0x932BF0, "bin"]
       - [0x933160, "bin"]
@@ -2106,7 +2108,7 @@ segments:
     start: 0x933C80
     vram: 0x80240000
     files:
-      - [0x933C80, "c"]
+      - [0x933C80, c]
       - [0x933CC0, "bin"]
       - [0x933FD0, "bin"]
       - [0x934020, "bin"] # rodata
@@ -2117,8 +2119,8 @@ segments:
     start: 0x934040
     vram: 0x80240000
     files:
-      - [0x934040, "c"]
-      - [0x934080, "c"]
+      - [0x934040, c]
+      - [0x934080, c]
       - [0x9341A0, "bin"]
       - [0x934530, "bin"]
       - [0x934D20, "bin"] # rodata
@@ -2128,8 +2130,8 @@ segments:
     start: 0x934D40
     vram: 0x80240000
     files:
-      - [0x934D40, "c"]
-      - [0x934D80, "c"]
+      - [0x934D40, c]
+      - [0x934D80, c]
       - [0x934DA0, "bin"]
       - [0x935130, "bin"]
       - [0x9357C0, "bin"] # rodata
@@ -2139,8 +2141,8 @@ segments:
     start: 0x9357E0
     vram: 0x80240000
     files:
-      - [0x9357E0, "c"]
-      - [0x935820, "c"]
+      - [0x9357E0, c]
+      - [0x935820, c]
       - [0x935940, "bin"]
       - [0x935CD0, "bin"]
       - [0x9366C0, "bin"] # rodata
@@ -2150,7 +2152,7 @@ segments:
     start: 0x9366E0
     vram: 0x80240000
     files:
-      - [0x9366E0, "c"]
+      - [0x9366E0, c]
       - [0x936720, "bin"]
       - [0x936B20, "bin"]
       - [0x936CA0, "bin"] # rodata
@@ -2161,8 +2163,8 @@ segments:
     start: 0x936CD0
     vram: 0x80240000
     files:
-      - [0x936CD0, "c"]
-      - [0x936D10, "c"]
+      - [0x936CD0, c]
+      - [0x936D10, c]
       - [0x936D30, "bin"]
       - [0x9370C0, "bin"]
       - [0x937550, "bin"] # rodata
@@ -2172,8 +2174,8 @@ segments:
     start: 0x937570
     vram: 0x80240000
     files:
-      - [0x937570, "c"]
-      - [0x9375B0, "c"]
+      - [0x937570, c]
+      - [0x9375B0, c]
       - [0x9377F0, "bin"]
       - [0x937B00, "bin"]
       - [0x938570, "bin"] # rodata
@@ -2184,8 +2186,8 @@ segments:
     start: 0x938590
     vram: 0x80240000
     files:
-      - [0x938590, "c"]
-      - [0x9385D0, "c"]
+      - [0x938590, c]
+      - [0x9385D0, c]
       - [0x9386D0, "bin"]
       - [0x9389F0, "bin"]
       - [0x938DD0, "bin"]
@@ -2197,7 +2199,7 @@ segments:
     start: 0x939560
     vram: 0x80240000
     files:
-      - [0x939560, "c"]
+      - [0x939560, c]
       - [0x9395A0, "bin"]
       - [0x939910, "bin"] # rodata
   - name: world/area_sbk/sbk_22/
@@ -2206,8 +2208,8 @@ segments:
     start: 0x939930
     vram: 0x80240000
     files:
-      - [0x939930, "c"]
-      - [0x939970, "c"]
+      - [0x939930, c]
+      - [0x939970, c]
       - [0x939A90, "bin"]
       - [0x93A610, "bin"]
       - [0x93A740, "bin"] # rodata
@@ -2217,7 +2219,7 @@ segments:
     start: 0x93A760
     vram: 0x80240000
     files:
-      - [0x93A760, "c"]
+      - [0x93A760, c]
       - [0x93A7A0, "bin"]
       - [0x93AB20, "bin"]
       - [0x93AC00, "bin"] # rodata
@@ -2228,8 +2230,8 @@ segments:
     start: 0x93AC30
     vram: 0x80240000
     files:
-      - [0x93AC30, "c"]
-      - [0x93AC70, "c"]
+      - [0x93AC30, c]
+      - [0x93AC70, c]
       - [0x93AFB0, "bin"]
       - [0x93B3C0, "bin"]
       - [0x93B770, "bin"]
@@ -2240,8 +2242,8 @@ segments:
     start: 0x93C280
     vram: 0x80240000
     files:
-      - [0x93C280, "c"]
-      - [0x93C2C0, "c"]
+      - [0x93C280, c]
+      - [0x93C2C0, c]
       - [0x93C600, "bin"]
       - [0x93C9A0, "bin"]
       - [0x93D110, "bin"]
@@ -2253,9 +2255,9 @@ segments:
     start: 0x93DCD0
     vram: 0x80240000
     files:
-      - [0x93DCD0, "c"]
-      - [0x93DD10, "c"]
-      - [0x93DE30, "c"]
+      - [0x93DCD0, c]
+      - [0x93DD10, c]
+      - [0x93DE30, c]
       - [0x93E070, "bin"]
       - [0x93E390, "bin"]
       - [0x93EB80, "bin"]
@@ -2267,7 +2269,7 @@ segments:
     start: 0x93F5B0
     vram: 0x80240000
     files:
-      - [0x93F5B0, "c"]
+      - [0x93F5B0, c]
       - [0x940DC0, "bin"]
       - [0x943E20, "bin"] # rodata
       - [0x943E50, "bin"] # rodata
@@ -2278,8 +2280,8 @@ segments:
     start: 0x944000
     vram: 0x80240000
     files:
-      - [0x944000, "c"]
-      - [0x944040, "c"]
+      - [0x944000, c]
+      - [0x944040, c]
       - [0x944140, "bin"]
       - [0x9444D0, "bin"]
       - [0x944A40, "bin"] # rodata
@@ -2289,8 +2291,8 @@ segments:
     start: 0x944A60
     vram: 0x80240000
     files:
-      - [0x944A60, "c"]
-      - [0x944AA0, "c"]
+      - [0x944A60, c]
+      - [0x944AA0, c]
       - [0x944BC0, "bin"]
       - [0x9459B0, "bin"] # rodata
   - name: world/area_sbk/sbk_33/
@@ -2299,7 +2301,7 @@ segments:
     start: 0x9459D0
     vram: 0x80240000
     files:
-      - [0x9459D0, "c"]
+      - [0x9459D0, c]
       - [0x945A10, "bin"]
       - [0x945BA0, "bin"]
       - [0x945EA0, "bin"] # rodata
@@ -2310,9 +2312,9 @@ segments:
     start: 0x945ED0
     vram: 0x80240000
     files:
-      - [0x945ED0, "c"]
-      - [0x945F10, "c"]
-      - [0x946670, "c"]
+      - [0x945ED0, c]
+      - [0x945F10, c]
+      - [0x946670, c]
       - [0x9468B0, "bin"]
       - [0x947C80, "bin"]
       - [0x948690, "bin"] # rodata
@@ -2322,8 +2324,8 @@ segments:
     start: 0x9486B0
     vram: 0x80240000
     files:
-      - [0x9486B0, "c"]
-      - [0x9486F0, "c"]
+      - [0x9486B0, c]
+      - [0x9486F0, c]
       - [0x948A30, "bin"]
       - [0x949330, "bin"]
       - [0x949E40, "bin"] # rodata
@@ -2333,8 +2335,8 @@ segments:
     start: 0x949E60
     vram: 0x80240000
     files:
-      - [0x949E60, "c"]
-      - [0x949EA0, "c"]
+      - [0x949E60, c]
+      - [0x949EA0, c]
       - [0x94A0E0, "bin"]
       - [0x94A470, "bin"]
       - [0x94B380, "bin"] # rodata
@@ -2344,8 +2346,8 @@ segments:
     start: 0x94B3A0
     vram: 0x80240000
     files:
-      - [0x94B3A0, "c"]
-      - [0x94B3E0, "c"]
+      - [0x94B3A0, c]
+      - [0x94B3E0, c]
       - [0x94B4E0, "bin"]
       - [0x94B800, "bin"]
       - [0x94BF70, "bin"]
@@ -2357,7 +2359,7 @@ segments:
     start: 0x94C040
     vram: 0x80240000
     files:
-      - [0x94C040, "c"]
+      - [0x94C040, c]
       - [0x94C080, "bin"]
       - [0x94C400, "bin"]
       - [0x94C4E0, "bin"] # rodata
@@ -2368,8 +2370,8 @@ segments:
     start: 0x94C510
     vram: 0x80240000
     files:
-      - [0x94C510, "c"]
-      - [0x94C550, "c"]
+      - [0x94C510, c]
+      - [0x94C550, c]
       - [0x94C650, "bin"]
       - [0x94C9E0, "bin"]
       - [0x94D150, "bin"] # rodata
@@ -2379,7 +2381,7 @@ segments:
     start: 0x94D170
     vram: 0x80240000
     files:
-      - [0x94D170, "c"]
+      - [0x94D170, c]
       - [0x94D1B0, "bin"]
       - [0x94D530, "bin"]
       - [0x94D580, "bin"] # rodata
@@ -2389,8 +2391,8 @@ segments:
     start: 0x94D5A0
     vram: 0x80240000
     files:
-      - [0x94D5A0, "c"]
-      - [0x94D5E0, "c"]
+      - [0x94D5A0, c]
+      - [0x94D5E0, c]
       - [0x94D700, "bin"]
       - [0x94DA90, "bin"]
       - [0x94E480, "bin"] # rodata
@@ -2400,7 +2402,7 @@ segments:
     start: 0x94E4A0
     vram: 0x80240000
     files:
-      - [0x94E4A0, "c"]
+      - [0x94E4A0, c]
       - [0x94E4E0, "bin"]
       - [0x94E8E0, "bin"]
       - [0x94E980, "bin"] # rodata
@@ -2410,9 +2412,9 @@ segments:
     start: 0x94E9A0
     vram: 0x80240000
     files:
-      - [0x94E9A0, "c"]
-      - [0x94E9E0, "c"]
-      - [0x94EB00, "c"]
+      - [0x94E9A0, c]
+      - [0x94E9E0, c]
+      - [0x94EB00, c]
       - [0x94ED40, "bin"]
       - [0x94F070, "bin"]
       - [0x94FA60, "bin"]
@@ -2425,7 +2427,7 @@ segments:
     start: 0x950610
     vram: 0x80240000
     files:
-      - [0x950610, "c"]
+      - [0x950610, c]
       - [0x950650, "bin"]
       - [0x950950, "bin"] # rodata
       - [0x950970, "bin"] # rodata
@@ -2435,8 +2437,8 @@ segments:
     start: 0x950970
     vram: 0x80240000
     files:
-      - [0x950970, "c"]
-      - [0x9509B0, "c"]
+      - [0x950970, c]
+      - [0x9509B0, c]
       - [0x950AD0, "bin"]
       - [0x950E60, "bin"]
       - [0x951650, "bin"] # rodata
@@ -2446,7 +2448,7 @@ segments:
     start: 0x951670
     vram: 0x80240000
     files:
-      - [0x951670, "c"]
+      - [0x951670, c]
       - [0x9516B0, "bin"]
       - [0x951A30, "bin"]
       - [0x951AC0, "bin"] # rodata
@@ -2456,8 +2458,8 @@ segments:
     start: 0x951AE0
     vram: 0x80240000
     files:
-      - [0x951AE0, "c"]
-      - [0x951B20, "c"]
+      - [0x951AE0, c]
+      - [0x951B20, c]
       - [0x951B40, "bin"]
       - [0x951ED0, "bin"]
       - [0x952560, "bin"] # rodata
@@ -2467,7 +2469,7 @@ segments:
     start: 0x952580
     vram: 0x80240000
     files:
-      - [0x952580, "c"]
+      - [0x952580, c]
       - [0x9525C0, "bin"]
       - [0x952940, "bin"]
       - [0x952A20, "bin"] # rodata
@@ -2478,9 +2480,9 @@ segments:
     start: 0x952A50
     vram: 0x80240000
     files:
-      - [0x952A50, "c"]
-      - [0x952A90, "c"]
-      - [0x952AB0, "c"]
+      - [0x952A50, c]
+      - [0x952A90, c]
+      - [0x952AB0, c]
       - [0x952CF0, "bin"]
       - [0x953090, "bin"]
       - [0x953520, "bin"]
@@ -2491,8 +2493,8 @@ segments:
     start: 0x953FC0
     vram: 0x80240000
     files:
-      - [0x953FC0, "c"]
-      - [0x954D80, "c"]
+      - [0x953FC0, c]
+      - [0x954D80, c]
       - [0x954FC0, "bin"]
       - [0x9553F0, "bin"]
       - [0x9569D0, "bin"] # rodata
@@ -2503,8 +2505,8 @@ segments:
     start: 0x9569F0
     vram: 0x80240000
     files:
-      - [0x9569F0, "c"]
-      - [0x956A30, "c"]
+      - [0x9569F0, c]
+      - [0x956A30, c]
       - [0x956A50, "bin"]
       - [0x956CF0, "bin"]
       - [0x956F80, "bin"] # rodata
@@ -2514,7 +2516,7 @@ segments:
     start: 0x956F90
     vram: 0x80240000
     files:
-      - [0x956F90, "c"]
+      - [0x956F90, c]
       - [0x956FD0, "bin"]
       - [0x9572E0, "bin"]
       - [0x957330, "bin"] # rodata
@@ -2525,8 +2527,8 @@ segments:
     start: 0x957350
     vram: 0x80240000
     files:
-      - [0x957350, "c"]
-      - [0x957390, "c"]
+      - [0x957350, c]
+      - [0x957390, c]
       - [0x9573B0, "bin"]
       - [0x9576C0, "bin"]
       - [0x957D50, "bin"] # rodata
@@ -2537,8 +2539,8 @@ segments:
     start: 0x957D70
     vram: 0x80240000
     files:
-      - [0x957D70, "c"]
-      - [0x957DB0, "c"]
+      - [0x957D70, c]
+      - [0x957DB0, c]
       - [0x957DD0, "bin"]
       - [0x9580E0, "bin"]
       - [0x958570, "bin"] # rodata
@@ -2549,7 +2551,7 @@ segments:
     start: 0x958590
     vram: 0x80240000
     files:
-      - [0x958590, "c"]
+      - [0x958590, c]
       - [0x9585D0, "bin"]
       - [0x9588E0, "bin"]
       - [0x958930, "bin"] # rodata
@@ -2560,7 +2562,7 @@ segments:
     start: 0x958950
     vram: 0x80240000
     files:
-      - [0x958950, "c"]
+      - [0x958950, c]
       - [0x958990, "bin"]
       - [0x958C90, "bin"] # rodata
       - [0x958CB0, "bin"] # rodata
@@ -2570,8 +2572,8 @@ segments:
     start: 0x958CB0
     vram: 0x80240000
     files:
-      - [0x958CB0, "c"]
-      - [0x958CF0, "c"]
+      - [0x958CB0, c]
+      - [0x958CF0, c]
       - [0x959030, "bin"]
       - [0x9592E0, "bin"]
       - [0x95A240, "bin"]
@@ -2592,10 +2594,10 @@ segments:
     start: 0x95B200
     vram: 0x80240000
     files:
-      - [0x95B200, "c"]
-      - [0x95B7E0, "c"]
-      - [0x95E660, "c"]
-      - [0x95E7A0, "c"]
+      - [0x95B200, c]
+      - [0x95B7E0, c]
+      - [0x95E660, c]
+      - [0x95E7A0, c]
       - [0x95ECC0, "bin"]
       - [0x960210, "bin"]
       - [0x966CA0, "bin"]
@@ -2611,8 +2613,8 @@ segments:
     start: 0x9691C0
     vram: 0x80240000
     files:
-      - [0x9691C0, "c"]
-      - [0x9694C0, "c"]
+      - [0x9691C0, c]
+      - [0x9694C0, c]
       - [0x96CC30, "bin"]
       - [0x96CD90, "bin"]
       - [0x96CE00, "bin"]
@@ -2635,9 +2637,9 @@ segments:
     start: 0x978710
     vram: 0x80240000
     files:
-      - [0x978710, "c"]
-      - [0x978750, "c"]
-      - [0x978800, "c"]
+      - [0x978710, c]
+      - [0x978750, c]
+      - [0x978800, c]
       - [0x978820, "bin"]
       - [0x978B80, "bin"]
       - [0x978DE0, "bin"]
@@ -2660,9 +2662,9 @@ segments:
     start: 0x97B630
     vram: 0x80240000
     files:
-      - [0x97B630, "c"]
-      - [0x97B670, "c"]
-      - [0x97BF60, "c"]
+      - [0x97B630, c]
+      - [0x97B670, c]
+      - [0x97BF60, c]
       - [0x97C0A0, "bin"]
       - [0x97C300, "bin"]
       - [0x97CA70, "bin"]
@@ -2677,7 +2679,7 @@ segments:
     start: 0x97DAD0
     vram: 0x80240000
     files:
-      - [0x97DAD0, "c"]
+      - [0x97DAD0, c]
       - [0x97F990, "bin"]
       - [0x97FCE0, "bin"]
       - [0x97FE50, "bin"]
@@ -2703,9 +2705,9 @@ segments:
     start: 0x982440
     vram: 0x80240000
     files:
-      - [0x982440, "c"]
-      - [0x9824F0, "c"]
-      - [0x982530, "c"]
+      - [0x982440, c]
+      - [0x9824F0, c]
+      - [0x982530, c]
       - [0x982550, "bin"]
       - [0x982860, "bin"]
       - [0x982CA0, "bin"]
@@ -2719,7 +2721,7 @@ segments:
     start: 0x984E30
     vram: 0x80240000
     files:
-      - [0x984E30, "c"]
+      - [0x984E30, c]
       - [0x985720, "bin"]
       - [0x985B00, "bin"]
       - [0x986090, "bin"]
@@ -2731,8 +2733,8 @@ segments:
     start: 0x9864E0
     vram: 0x80240000
     files:
-      - [0x9864E0, "c"]
-      - [0x9867D0, "c"]
+      - [0x9864E0, c]
+      - [0x9867D0, c]
       - [0x986810, "bin"]
       - [0x986A60, "bin"]
       - [0x986BD0, "bin"]
@@ -2746,7 +2748,7 @@ segments:
     start: 0x988B60
     vram: 0x80240000
     files:
-      - [0x988B60, "c"]
+      - [0x988B60, c]
       - [0x989910, "bin"]
       - [0x98A580, "bin"]
       - [0x98A9E0, "bin"] # rodata
@@ -2757,9 +2759,9 @@ segments:
     start: 0x98AA10
     vram: 0x80240000
     files:
-      - [0x98AA10, "c"]
-      - [0x98AAC0, "c"]
-      - [0x98AB30, "c"]
+      - [0x98AA10, c]
+      - [0x98AAC0, c]
+      - [0x98AB30, c]
       - [0x98AB70, "bin"]
       - [0x98ADB0, "bin"]
       - [0x98B330, "bin"]
@@ -2785,7 +2787,7 @@ segments:
     start: 0x98F7E0
     vram: 0x80240000
     files:
-      - [0x98F7E0, "c"]
+      - [0x98F7E0, c]
       - [0x991850, "bin"]
       - [0x991A90, "bin"]
       - [0x992680, "bin"] # rodata
@@ -2799,7 +2801,7 @@ segments:
     start: 0x992730
     vram: 0x80240000
     files:
-      - [0x992730, "c"]
+      - [0x992730, c]
       - [0x994490, "bin"]
       - [0x9946D0, "bin"]
       - [0x994860, "bin"]
@@ -2813,8 +2815,8 @@ segments:
     start: 0x9951F0
     vram: 0x80240000
     files:
-      - [0x9951F0, "c"]
-      - [0x9959F0, "c"]
+      - [0x9951F0, c]
+      - [0x9959F0, c]
       - [0x995CF0, "bin"]
       - [0x996410, "bin"]
       - [0x996C40, "bin"]
@@ -2827,7 +2829,7 @@ segments:
     start: 0x997F70
     vram: 0x80240000
     files:
-      - [0x997F70, "c"]
+      - [0x997F70, c]
       - [0x998860, "bin"]
       - [0x998B90, "bin"]
       - [0x999520, "bin"]
@@ -2849,9 +2851,9 @@ segments:
     start: 0x999C70
     vram: 0x80240000
     files:
-      - [0x999C70, "c"]
-      - [0x999F80, "c"]
-      - [0x99A240, "c"]
+      - [0x999C70, c]
+      - [0x999F80, c]
+      - [0x99A240, c]
       - [0x99A2A0, "bin"]
       - [0x99A410, "bin"]
       - [0x99AFB0, "bin"]
@@ -2864,9 +2866,9 @@ segments:
     start: 0x99C990
     vram: 0x80240000
     files:
-      - [0x99C990, "c"]
-      - [0x99CCA0, "c"]
-      - [0x99CD80, "c"]
+      - [0x99C990, c]
+      - [0x99CCA0, c]
+      - [0x99CD80, c]
       - [0x99E050, "bin"]
       - [0x99E110, "bin"]
       - [0x99F960, "bin"]
@@ -2881,8 +2883,8 @@ segments:
     start: 0x9A0FE0
     vram: 0x80240000
     files:
-      - [0x9A0FE0, "c"]
-      - [0x9A10C0, "c"]
+      - [0x9A0FE0, c]
+      - [0x9A10C0, c]
       - [0x9A2A30, "bin"]
       - [0x9A2B00, "bin"]
       - [0x9A3870, "bin"]
@@ -2895,9 +2897,9 @@ segments:
     start: 0x9A4650
     vram: 0x80240000
     files:
-      - [0x9A4650, "c"]
-      - [0x9A46F0, "c"]
-      - [0x9A4ED0, "c"]
+      - [0x9A4650, c]
+      - [0x9A46F0, c]
+      - [0x9A4ED0, c]
       - [0x9A5040, "bin"]
       - [0x9A51A0, "bin"]
       - [0x9A5FF0, "bin"]
@@ -2910,9 +2912,9 @@ segments:
     start: 0x9A83F0
     vram: 0x80240000
     files:
-      - [0x9A83F0, "c"]
-      - [0x9A8700, "c"]
-      - [0x9A88A0, "c"]
+      - [0x9A83F0, c]
+      - [0x9A8700, c]
+      - [0x9A88A0, c]
       - [0x9ABC90, "bin"]
       - [0x9ABD70, "bin"]
       - [0x9AD960, "bin"]
@@ -2926,8 +2928,8 @@ segments:
     start: 0x9AE700
     vram: 0x80240000
     files:
-      - [0x9AE700, "c"]
-      - [0x9AEE20, "c"]
+      - [0x9AE700, c]
+      - [0x9AEE20, c]
       - [0x9AEE70, "bin"]
       - [0x9AEFC0, "bin"]
       - [0x9AF7C0, "bin"]
@@ -2940,10 +2942,10 @@ segments:
     start: 0x9B1790
     vram: 0x80240000
     files:
-      - [0x9B1790, "c"]
-      - [0x9B1AA0, "c"]
-      - [0x9B2280, "c"]
-      - [0x9B2410, "c"]
+      - [0x9B1790, c]
+      - [0x9B1AA0, c]
+      - [0x9B2280, c]
+      - [0x9B2410, c]
       - [0x9B24B0, "bin"]
       - [0x9B2610, "bin"]
       - [0x9B5FC0, "bin"]
@@ -2955,8 +2957,8 @@ segments:
     start: 0x9B6980
     vram: 0x80240000
     files:
-      - [0x9B6980, "c"]
-      - [0x9B6C90, "c"]
+      - [0x9B6980, c]
+      - [0x9B6C90, c]
       - [0x9B9270, "bin"]
       - [0x9B9310, "bin"]
       - [0x9B9760, "bin"]
@@ -2971,8 +2973,8 @@ segments:
     start: 0x9BB2A0
     vram: 0x80240000
     files:
-      - [0x9BB2A0, "c"]
-      - [0x9BB5B0, "c"]
+      - [0x9BB2A0, c]
+      - [0x9BB5B0, c]
       - [0x9BBCC0, "bin"]
       - [0x9BBD50, "bin"]
       - [0x9BC1A0, "bin"]
@@ -2984,8 +2986,8 @@ segments:
     start: 0x9BD660
     vram: 0x80240000
     files:
-      - [0x9BD660, "c"]
-      - [0x9BD720, "c"]
+      - [0x9BD660, c]
+      - [0x9BD720, c]
       - [0x9BD830, "bin"]
       - [0x9BD960, "bin"]
       - [0x9BDD80, "bin"]
@@ -2999,8 +3001,8 @@ segments:
     start: 0x9C2910
     vram: 0x80240000
     files:
-      - [0x9C2910, "c"]
-      - [0x9C3130, "c"]
+      - [0x9C2910, c]
+      - [0x9C3130, c]
       - [0x9C3160, "bin"]
       - [0x9C3A30, "bin"]
       - [0x9C4FC0, "bin"]
@@ -3012,8 +3014,8 @@ segments:
     start: 0x9C53E0
     vram: 0x80240000
     files:
-      - [0x9C53E0, "c"]
-      - [0x9C7D10, "c"]
+      - [0x9C53E0, c]
+      - [0x9C7D10, c]
       - [0x9C7F50, "bin"]
       - [0x9C8350, "bin"]
       - [0x9C8920, "bin"]
@@ -3031,12 +3033,12 @@ segments:
     start: 0x9D7020
     vram: 0x80240000
     files:
-      - [0x9D7020, "c"]
-      - [0x9D7770, "c"]
-      - [0x9D7990, "c"]
-      - [0x9D7AA0, "c"]
-      - [0x9DA8F0, "c"]
-      - [0x9DB380, "c"]
+      - [0x9D7020, c]
+      - [0x9D7770, c]
+      - [0x9D7990, c]
+      - [0x9D7AA0, c]
+      - [0x9DA8F0, c]
+      - [0x9DB380, c]
       - [0x9DB5C0, "bin"]
       - [0x9DB6C0, "bin"]
       - [0x9DCD20, "bin"]
@@ -3055,7 +3057,7 @@ segments:
     start: 0x9EB7F0
     vram: 0x80240000
     files:
-      - [0x9EB7F0, "c"]
+      - [0x9EB7F0, c]
       - [0x9EC610, "bin"]
       - [0x9EC700, "bin"]
       - [0x9ECBD0, "bin"]
@@ -3067,8 +3069,8 @@ segments:
     start: 0x9EDBF0
     vram: 0x80240000
     files:
-      - [0x9EDBF0, "c"]
-      - [0x9EEA80, "c"]
+      - [0x9EDBF0, c]
+      - [0x9EEA80, c]
       - [0x9EEB20, "bin"]
       - [0x9EEC40, "bin"]
       - [0x9EEEB0, "bin"]
@@ -3082,7 +3084,7 @@ segments:
     start: 0x9F4A40
     vram: 0x80240000
     files:
-      - [0x9F4A40, "c"]
+      - [0x9F4A40, c]
       - [0x9F6990, "bin"]
       - [0x9F6A50, "bin"]
       - [0x9F7180, "bin"]
@@ -3095,12 +3097,12 @@ segments:
     start: 0x9FA7F0
     vram: 0x80240000
     files:
-      - [0x9FA7F0, "c"]
-      - [0x9FA970, "c"]
-      - [0x9FAAE0, "c"]
-      - [0x9FAB20, "c"]
-      - [0x9FAD60, "c"]
-      - [0x9FC6D0, "c"]
+      - [0x9FA7F0, c]
+      - [0x9FA970, c]
+      - [0x9FAAE0, c]
+      - [0x9FAB20, c]
+      - [0x9FAD60, c]
+      - [0x9FC6D0, c]
       - [0x9FC8B0, "bin"]
       - [0x9FC970, "bin"]
       - [0x9FD410, "bin"]
@@ -3115,8 +3117,8 @@ segments:
     start: 0xA00600
     vram: 0x80240000
     files:
-      - [0xA00600, "c"]
-      - [0xA01420, "c"]
+      - [0xA00600, c]
+      - [0xA01420, c]
       - [0xA01A90, "bin"]
       - [0xA01B40, "bin"]
       - [0xA02040, "bin"]
@@ -3132,9 +3134,9 @@ segments:
     start: 0xA02840
     vram: 0x80240000
     files:
-      - [0xA02840, "c"]
-      - [0xA029C0, "c"]
-      - [0xA02A00, "c"]
+      - [0xA02840, c]
+      - [0xA029C0, c]
+      - [0xA02A00, c]
       - [0xA04C60, "bin"]
       - [0xA04D00, "bin"]
       - [0xA052F0, "bin"]
@@ -3150,8 +3152,8 @@ segments:
     start: 0xA06F00
     vram: 0x80240000
     files:
-      - [0xA06F00, "c"]
-      - [0xA09440, "c"]
+      - [0xA06F00, c]
+      - [0xA09440, c]
       - [0xA09680, "bin"]
       - [0xA09750, "bin"]
       - [0xA0AB50, "bin"]
@@ -3167,11 +3169,11 @@ segments:
     start: 0xA0BCF0
     vram: 0x80240000
     files:
-      - [0xA0BCF0, "c"]
-      - [0xA0BD40, "c"]
-      - [0xA0C4B0, "c"]
-      - [0xA0C4E0, "c"]
-      - [0xA0C930, "c"]
+      - [0xA0BCF0, c]
+      - [0xA0BD40, c]
+      - [0xA0C4B0, c]
+      - [0xA0C4E0, c]
+      - [0xA0C930, c]
       - [0xA0CA00, "bin"]
       - [0xA0D720, "bin"]
       - [0xA0D7A0, "bin"]
@@ -3187,9 +3189,9 @@ segments:
     start: 0xA10880
     vram: 0x80240000
     files:
-      - [0xA10880, "c"]
-      - [0xA11020, "c"]
-      - [0xA11650, "c"]
+      - [0xA10880, c]
+      - [0xA11020, c]
+      - [0xA11650, c]
       - [0xA116A0, "bin"]
       - [0xA11760, "bin"]
       - [0xA12E00, "bin"]
@@ -3202,8 +3204,8 @@ segments:
     start: 0xA16220
     vram: 0x80240000
     files:
-      - [0xA16220, "c"]
-      - [0xA17210, "c"]
+      - [0xA16220, c]
+      - [0xA17210, c]
       - [0xA18D00, "bin"]
       - [0xA18E50, "bin"]
       - [0xA19530, "bin"]
@@ -3218,10 +3220,10 @@ segments:
     start: 0xA1B100
     vram: 0x80240000
     files:
-      - [0xA1B100, "c"]
-      - [0xA1B130, "c"]
-      - [0xA1BB70, "c"]
-      - [0xA1BDB0, "c"]
+      - [0xA1B100, c]
+      - [0xA1B130, c]
+      - [0xA1BB70, c]
+      - [0xA1BDB0, c]
       - [0xA1E640, "bin"]
       - [0xA1E790, "bin"]
       - [0xA1EC30, "bin"]
@@ -3238,11 +3240,11 @@ segments:
     start: 0xA26ED0
     vram: 0x80240000
     files:
-      - [0xA26ED0, "c"]
-      - [0xA27490, "c"]
-      - [0xA274B0, "c"]
-      - [0xA27A30, "c"]
-      - [0xA27AA0, "c"]
+      - [0xA26ED0, c]
+      - [0xA27490, c]
+      - [0xA274B0, c]
+      - [0xA27A30, c]
+      - [0xA27AA0, c]
       - [0xA27D60, "bin"]
       - [0xA27F20, "bin"]
       - [0xA285C0, "bin"]
@@ -3261,11 +3263,11 @@ segments:
     start: 0xA2A240
     vram: 0x80240000
     files:
-      - [0xA2A240, "c"]
-      - [0xA2AA70, "c"]
-      - [0xA2AAC0, "c"]
-      - [0xA2EC30, "c"]
-      - [0xA2EF00, "c"]
+      - [0xA2A240, c]
+      - [0xA2AA70, c]
+      - [0xA2AAC0, c]
+      - [0xA2EC30, c]
+      - [0xA2EF00, c]
       - [0xA2FAA0, "bin"]
       - [0xA2FCD0, "bin"]
       - [0xA30810, "bin"]
@@ -3282,11 +3284,11 @@ segments:
     start: 0xA394E0
     vram: 0x80240000
     files:
-      - [0xA394E0, "c"]
-      - [0xA397F0, "c"]
-      - [0xA3A210, "c"]
-      - [0xA3A230, "c"]
-      - [0xA3B4B0, "c"]
+      - [0xA394E0, c]
+      - [0xA397F0, c]
+      - [0xA3A210, c]
+      - [0xA3A230, c]
+      - [0xA3B4B0, c]
       - [0xA3BA40, "bin"]
       - [0xA3BAE0, "bin"]
       - [0xA3C090, "bin"]
@@ -3299,10 +3301,10 @@ segments:
     start: 0xA3F740
     vram: 0x80240000
     files:
-      - [0xA3F740, "c"]
-      - [0xA3F760, "c"]
-      - [0xA3FBA0, "c"]
-      - [0xA3FEB0, "c"]
+      - [0xA3F740, c]
+      - [0xA3F760, c]
+      - [0xA3FBA0, c]
+      - [0xA3FEB0, c]
       - [0xA403C0, "bin"]
       - [0xA40540, "bin"]
       - [0xA42DA0, "bin"]
@@ -3315,8 +3317,8 @@ segments:
     start: 0xA45930
     vram: 0x80240000
     files:
-      - [0xA45930, "c"]
-      - [0xA45C40, "c"]
+      - [0xA45930, c]
+      - [0xA45C40, c]
       - [0xA45C90, "bin"]
       - [0xA46350, "bin"]
       - [0xA46F40, "bin"] # rodata
@@ -3326,8 +3328,8 @@ segments:
     start: 0xA46F60
     vram: 0x80240000
     files:
-      - [0xA46F60, "c"]
-      - [0xA470C0, "c"]
+      - [0xA46F60, c]
+      - [0xA470C0, c]
       - [0xA479B0, "bin"]
       - [0xA47A60, "bin"]
       - [0xA47D70, "bin"]
@@ -3340,9 +3342,9 @@ segments:
     start: 0xA485C0
     vram: 0x80240000
     files:
-      - [0xA485C0, "c"]
-      - [0xA48720, "c"]
-      - [0xA4A410, "c"]
+      - [0xA485C0, c]
+      - [0xA48720, c]
+      - [0xA4A410, c]
       - [0xA4A480, "bin"]
       - [0xA4A520, "bin"]
       - [0xA4A750, "bin"]
@@ -3356,7 +3358,7 @@ segments:
     start: 0xA4BF60
     vram: 0x80240000
     files:
-      - [0xA4BF60, "c"]
+      - [0xA4BF60, c]
       - [0xA4C0D0, "bin"]
       - [0xA4C1A0, "bin"]
       - [0xA4CA10, "bin"] # rodata
@@ -3366,8 +3368,8 @@ segments:
     start: 0xA4CA20
     vram: 0x80240000
     files:
-      - [0xA4CA20, "c"]
-      - [0xA4CAC0, "c"]
+      - [0xA4CA20, c]
+      - [0xA4CAC0, c]
       - [0xA4DEC0, "bin"]
       - [0xA4DF90, "bin"]
       - [0xA4E250, "bin"]
@@ -3381,8 +3383,8 @@ segments:
     start: 0xA4F000
     vram: 0x80240000
     files:
-      - [0xA4F000, "c"]
-      - [0xA4F0A0, "c"]
+      - [0xA4F000, c]
+      - [0xA4F0A0, c]
       - [0xA502F0, "bin"]
       - [0xA503C0, "bin"]
       - [0xA506D0, "bin"]
@@ -3395,7 +3397,7 @@ segments:
     start: 0xA51980
     vram: 0x80240000
     files:
-      - [0xA51980, "c"]
+      - [0xA51980, c]
       - [0xA51C90, "bin"]
       - [0xA51D90, "bin"]
       - [0xA528A0, "bin"] # rodata
@@ -3406,8 +3408,8 @@ segments:
     start: 0xA528C0
     vram: 0x80240000
     files:
-      - [0xA528C0, "c"]
-      - [0xA52BD0, "c"]
+      - [0xA528C0, c]
+      - [0xA52BD0, c]
       - [0xA533B0, "bin"]
       - [0xA534C0, "bin"]
       - [0xA53D80, "bin"]
@@ -3421,9 +3423,9 @@ segments:
     start: 0xA54950
     vram: 0x80240000
     files:
-      - [0xA54950, "c"]
-      - [0xA54990, "c"]
-      - [0xA54CA0, "c"]
+      - [0xA54950, c]
+      - [0xA54990, c]
+      - [0xA54CA0, c]
       - [0xA54DC0, "bin"]
       - [0xA55620, "bin"]
       - [0xA55F00, "bin"] # rodata
@@ -3434,9 +3436,9 @@ segments:
     start: 0xA55F20
     vram: 0x80240000
     files:
-      - [0xA55F20, "c"]
-      - [0xA55F60, "c"]
-      - [0xA56270, "c"]
+      - [0xA55F20, c]
+      - [0xA55F60, c]
+      - [0xA56270, c]
       - [0xA56390, "bin"]
       - [0xA56BD0, "bin"]
       - [0xA56CA0, "bin"]
@@ -3448,9 +3450,9 @@ segments:
     start: 0xA574B0
     vram: 0x80240000
     files:
-      - [0xA574B0, "c"]
-      - [0xA574F0, "c"]
-      - [0xA57830, "c"]
+      - [0xA574B0, c]
+      - [0xA574F0, c]
+      - [0xA57830, c]
       - [0xA57D20, "bin"]
       - [0xA57E40, "bin"]
       - [0xA58DB0, "bin"]
@@ -3463,8 +3465,8 @@ segments:
     start: 0xA59390
     vram: 0x80240000
     files:
-      - [0xA59390, "c"]
-      - [0xA596A0, "c"]
+      - [0xA59390, c]
+      - [0xA596A0, c]
       - [0xA59960, "bin"]
       - [0xA59E30, "bin"]
       - [0xA5A020, "bin"] # rodata
@@ -3475,8 +3477,8 @@ segments:
     start: 0xA5A030
     vram: 0x80240000
     files:
-      - [0xA5A030, "c"]
-      - [0xA5A340, "c"]
+      - [0xA5A030, c]
+      - [0xA5A340, c]
       - [0xA5A3D0, "bin"]
       - [0xA5B180, "bin"]
       - [0xA5CA10, "bin"] # rodata
@@ -3498,7 +3500,7 @@ segments:
     start: 0xA5E0C0
     vram: 0x80240000
     files:
-      - [0xA5E0C0, "c"]
+      - [0xA5E0C0, c]
       - [0xA5E3D0, "bin"]
       - [0xA5E4C0, "bin"]
       - [0xA5E500, "bin"]
@@ -3509,7 +3511,7 @@ segments:
     start: 0xA5F080
     vram: 0x80240000
     files:
-      - [0xA5F080, "c"]
+      - [0xA5F080, c]
       - [0xA5F390, "bin"]
       - [0xA5F480, "bin"]
       - [0xA5F4C0, "bin"]
@@ -3540,7 +3542,7 @@ segments:
     start: 0xA609D0
     vram: 0x80240000
     files:
-      - [0xA609D0, "c"]
+      - [0xA609D0, c]
       - [0xA623F0, "bin"]
       - [0xA624D0, "bin"]
       - [0xA63E60, "bin"] # rodata
@@ -3551,8 +3553,8 @@ segments:
     start: 0xA64090
     vram: 0x80240000
     files:
-      - [0xA64090, "c"]
-      - [0xA640E0, "c"]
+      - [0xA64090, c]
+      - [0xA640E0, c]
       - [0xA65CB0, "bin"]
       - [0xA65D80, "bin"]
       - [0xA660E0, "bin"]
@@ -3567,8 +3569,8 @@ segments:
     start: 0xA67100
     vram: 0x80240000
     files:
-      - [0xA67100, "c"]
-      - [0xA671E0, "c"]
+      - [0xA67100, c]
+      - [0xA671E0, c]
       - [0xA68430, "bin"]
       - [0xA68510, "bin"]
       - [0xA68710, "bin"]
@@ -3582,7 +3584,7 @@ segments:
     start: 0xA6ACA0
     vram: 0x80240000
     files:
-      - [0xA6ACA0, "c"]
+      - [0xA6ACA0, c]
       - [0xA6AE10, "bin"]
       - [0xA6AEE0, "bin"]
       - [0xA6B270, "bin"]
@@ -3596,8 +3598,8 @@ segments:
     start: 0xA6CB00
     vram: 0x80240000
     files:
-      - [0xA6CB00, "c"]
-      - [0xA6CBE0, "c"]
+      - [0xA6CB00, c]
+      - [0xA6CBE0, c]
       - [0xA6CEF0, "bin"]
       - [0xA6E3A0, "bin"] # rodata
       - [0xA6E3E0, "bin"] # rodata
@@ -3607,8 +3609,8 @@ segments:
     start: 0xA6E3E0
     vram: 0x80240000
     files:
-      - [0xA6E3E0, "c"]
-      - [0xA6E6F0, "c"]
+      - [0xA6E3E0, c]
+      - [0xA6E6F0, c]
       - [0xA70720, "bin"]
       - [0xA707F0, "bin"]
       - [0xA70FE0, "bin"]
@@ -3623,8 +3625,8 @@ segments:
     start: 0xA72220
     vram: 0x80240000
     files:
-      - [0xA72220, "c"]
-      - [0xA72300, "c"]
+      - [0xA72220, c]
+      - [0xA72300, c]
       - [0xA72610, "bin"]
       - [0xA72740, "bin"]
       - [0xA73590, "bin"] # rodata
@@ -3634,7 +3636,7 @@ segments:
     start: 0xA735B0
     vram: 0x80240000
     files:
-      - [0xA735B0, "c"]
+      - [0xA735B0, c]
       - [0xA73740, "bin"]
       - [0xA738E0, "bin"]
       - [0xA73920, "bin"]
@@ -3646,8 +3648,8 @@ segments:
     start: 0xA74870
     vram: 0x80240000
     files:
-      - [0xA74870, "c"]
-      - [0xA74B80, "c"]
+      - [0xA74870, c]
+      - [0xA74B80, c]
       - [0xA75360, "bin"]
       - [0xA75440, "bin"]
       - [0xA75B70, "bin"]
@@ -3659,8 +3661,8 @@ segments:
     start: 0xA784C0
     vram: 0x80240000
     files:
-      - [0xA784C0, "c"]
-      - [0xA78510, "c"]
+      - [0xA784C0, c]
+      - [0xA78510, c]
       - [0xA78900, "bin"]
       - [0xA789F0, "bin"]
       - [0xA79200, "bin"]
@@ -3672,8 +3674,8 @@ segments:
     start: 0xA7A500
     vram: 0x80240000
     files:
-      - [0xA7A500, "c"]
-      - [0xA7A550, "c"]
+      - [0xA7A500, c]
+      - [0xA7A550, c]
       - [0xA7A940, "bin"]
       - [0xA7AA10, "bin"]
       - [0xA7AF80, "bin"]
@@ -3685,8 +3687,8 @@ segments:
     start: 0xA83490
     vram: 0x80240000
     files:
-      - [0xA83490, "c"]
-      - [0xA834E0, "c"]
+      - [0xA83490, c]
+      - [0xA834E0, c]
       - [0xA83500, "bin"]
       - [0xA835D0, "bin"]
       - [0xA83AC0, "bin"]
@@ -3707,8 +3709,8 @@ segments:
     start: 0xA86A50
     vram: 0x80240000
     files:
-      - [0xA86A50, "c"]
-      - [0xA88280, "c"]
+      - [0xA86A50, c]
+      - [0xA88280, c]
       - [0xA88360, "bin"]
       - [0xA88420, "bin"]
       - [0xA88730, "bin"]
@@ -3731,8 +3733,8 @@ segments:
     start: 0xA8CA80
     vram: 0x80240000
     files:
-      - [0xA8CA80, "c"]
-      - [0xA8CB60, "c"]
+      - [0xA8CA80, c]
+      - [0xA8CB60, c]
       - [0xA8E390, "bin"]
       - [0xA8E450, "bin"]
       - [0xA8E690, "bin"]
@@ -3746,7 +3748,7 @@ segments:
     start: 0xA927C0
     vram: 0x80240000
     files:
-      - [0xA927C0, "c"]
+      - [0xA927C0, c]
       - [0xA927F0, "bin"]
       - [0xA928B0, "bin"]
       - [0xA93150, "bin"] # rodata
@@ -3757,7 +3759,7 @@ segments:
     start: 0xA93160
     vram: 0x80240000
     files:
-      - [0xA93160, "c"]
+      - [0xA93160, c]
       - [0xA931B0, "bin"]
       - [0xA93270, "bin"]
       - [0xA933D0, "bin"]
@@ -3769,7 +3771,7 @@ segments:
     start: 0xA93440
     vram: 0x80240000
     files:
-      - [0xA93440, "c"]
+      - [0xA93440, c]
       - [0xA93490, "bin"]
       - [0xA93550, "bin"]
       - [0xA936D0, "bin"]
@@ -3781,8 +3783,8 @@ segments:
     start: 0xA93740
     vram: 0x80240000
     files:
-      - [0xA93740, "c"]
-      - [0xA93A50, "c"]
+      - [0xA93740, c]
+      - [0xA93A50, c]
       - [0xA96CD0, "bin"]
       - [0xA96DA0, "bin"]
       - [0xA97690, "bin"]
@@ -3796,7 +3798,7 @@ segments:
     start: 0xA99590
     vram: 0x80240000
     files:
-      - [0xA99590, "c"]
+      - [0xA99590, c]
       - [0xA9A950, "bin"]
       - [0xA9AA20, "bin"]
       - [0xA9ACF0, "bin"]
@@ -3818,8 +3820,8 @@ segments:
     start: 0xA9CC30
     vram: 0x80240000
     files:
-      - [0xA9CC30, "c"]
-      - [0xA9CC70, "c"]
+      - [0xA9CC30, c]
+      - [0xA9CC70, c]
       - [0xA9D6D0, "bin"]
       - [0xA9D7B0, "bin"]
       - [0xA9DA60, "bin"]
@@ -3833,7 +3835,7 @@ segments:
     start: 0xA9E980
     vram: 0x80240000
     files:
-      - [0xA9E980, "c"]
+      - [0xA9E980, c]
       - [0xA9E9D0, "bin"]
       - [0xA9EAA0, "bin"]
       - [0xA9ED10, "bin"] # rodata
@@ -3844,7 +3846,7 @@ segments:
     start: 0xA9ED40
     vram: 0x80240000
     files:
-      - [0xA9ED40, "c"]
+      - [0xA9ED40, c]
       - [0xAA0100, "bin"]
       - [0xAA01E0, "bin"]
       - [0xAA0430, "bin"]
@@ -3906,7 +3908,7 @@ segments:
     start: 0xAA2D20
     vram: 0x80240000
     files:
-      - [0xAA2D20, "c"]
+      - [0xAA2D20, c]
       - [0xAA3460, "bin"]
       - [0xAA3530, "bin"]
       - [0xAA3870, "bin"]
@@ -3917,8 +3919,8 @@ segments:
     start: 0xAA7480
     vram: 0x80240000
     files:
-      - [0xAA7480, "c"]
-      - [0xAA7790, "c"]
+      - [0xAA7480, c]
+      - [0xAA7790, c]
       - [0xAA78F0, "bin"]
       - [0xAA79E0, "bin"]
       - [0xAA8290, "bin"]
@@ -3931,9 +3933,9 @@ segments:
     start: 0xAA8FA0
     vram: 0x80240000
     files:
-      - [0xAA8FA0, "c"]
-      - [0xAA92B0, "c"]
-      - [0xAA94B0, "c"]
+      - [0xAA8FA0, c]
+      - [0xAA92B0, c]
+      - [0xAA94B0, c]
       - [0xAA96A0, "bin"]
       - [0xAA9790, "bin"]
       - [0xAAA060, "bin"]
@@ -3946,8 +3948,8 @@ segments:
     start: 0xAAC830
     vram: 0x80240000
     files:
-      - [0xAAC830, "c"]
-      - [0xAACBB0, "c"]
+      - [0xAAC830, c]
+      - [0xAACBB0, c]
       - [0xAACFC0, "bin"]
       - [0xAAD790, "bin"]
       - [0xAAFFD0, "bin"] # rodata
@@ -3957,9 +3959,9 @@ segments:
     start: 0xAAFFF0
     vram: 0x80240000
     files:
-      - [0xAAFFF0, "c"]
-      - [0xAB0040, "c"]
-      - [0xAB0350, "c"]
+      - [0xAAFFF0, c]
+      - [0xAB0040, c]
+      - [0xAB0350, c]
       - [0xAB0AB0, "bin"]
       - [0xAB0C10, "bin"]
       - [0xAB1150, "bin"]
@@ -3970,10 +3972,10 @@ segments:
     start: 0xAB2170
     vram: 0x80240000
     files:
-      - [0xAB2170, "c"]
-      - [0xAB2190, "c"]
-      - [0xAB21D0, "c"]
-      - [0xAB2290, "c"]
+      - [0xAB2170, c]
+      - [0xAB2190, c]
+      - [0xAB21D0, c]
+      - [0xAB2290, c]
       - [0xAB22C0, "bin"]
       - [0xAB2B00, "bin"]
       - [0xAB2BB0, "bin"]
@@ -3986,8 +3988,8 @@ segments:
     start: 0xAB6290
     vram: 0x80240000
     files:
-      - [0xAB6290, "c"]
-      - [0xAB62B0, "c"]
+      - [0xAB6290, c]
+      - [0xAB62B0, c]
       - [0xAB6610, "bin"]
       - [0xAB6DB0, "bin"]
       - [0xAB7E20, "bin"]
@@ -4001,7 +4003,7 @@ segments:
     start: 0xAB92B0
     vram: 0x80240000
     files:
-      - [0xAB92B0, "c"]
+      - [0xAB92B0, c]
       - [0xAB9370, "bin"]
       - [0xAB95D0, "bin"]
       - [0xABB260, "bin"] # rodata
@@ -4012,8 +4014,8 @@ segments:
     start: 0xABB290
     vram: 0x80240000
     files:
-      - [0xABB290, "c"]
-      - [0xABB340, "c"]
+      - [0xABB290, c]
+      - [0xABB340, c]
       - [0xABC250, "bin"]
       - [0xABC3D0, "bin"]
       - [0xABEC70, "bin"]
@@ -4027,7 +4029,7 @@ segments:
     start: 0xAC5170
     vram: 0x80240000
     files:
-      - [0xAC5170, "c"]
+      - [0xAC5170, c]
       - [0xAC6000, "bin"]
       - [0xAC6140, "bin"]
       - [0xAC67E0, "bin"]
@@ -4049,8 +4051,8 @@ segments:
     start: 0xAC9710
     vram: 0x80240000
     files:
-      - [0xAC9710, "c"]
-      - [0xAC9730, "c"]
+      - [0xAC9710, c]
+      - [0xAC9730, c]
       - [0xAC9A40, "bin"]
       - [0xAC9C00, "bin"]
       - [0xACA010, "bin"]
@@ -4063,10 +4065,10 @@ segments:
     start: 0xACAB20
     vram: 0x80240000
     files:
-      - [0xACAB20, "c"]
-      - [0xACAB90, "c"]
-      - [0xACABD0, "c"]
-      - [0xACB3C0, "c"]
+      - [0xACAB20, c]
+      - [0xACAB90, c]
+      - [0xACABD0, c]
+      - [0xACB3C0, c]
       - [0xACBBF0, "bin"]
       - [0xACC510, "bin"]
       - [0xACC700, "bin"]
@@ -4077,10 +4079,10 @@ segments:
     start: 0xACE140
     vram: 0x80240000
     files:
-      - [0xACE140, "c"]
-      - [0xACE1B0, "c"]
-      - [0xACE1F0, "c"]
-      - [0xACE9E0, "c"]
+      - [0xACE140, c]
+      - [0xACE1B0, c]
+      - [0xACE1F0, c]
+      - [0xACE9E0, c]
       - [0xACF210, "bin"]
       - [0xACFD40, "bin"]
       - [0xACFF30, "bin"]
@@ -4093,8 +4095,8 @@ segments:
     start: 0xAD4090
     vram: 0x80240000
     files:
-      - [0xAD4090, "c"]
-      - [0xAD4100, "c"]
+      - [0xAD4090, c]
+      - [0xAD4100, c]
       - [0xAD4940, "bin"]
       - [0xAD5EA0, "bin"] # rodata
   - name: world/area_kkj/kkj_13/
@@ -4103,9 +4105,9 @@ segments:
     start: 0xAD5ED0
     vram: 0x80240000
     files:
-      - [0xAD5ED0, "c"]
-      - [0xAD5EF0, "c"]
-      - [0xAD6200, "c"]
+      - [0xAD5ED0, c]
+      - [0xAD5EF0, c]
+      - [0xAD6200, c]
       - [0xAD6630, "bin"]
       - [0xAD6780, "bin"]
       - [0xAD6820, "bin"]
@@ -4119,8 +4121,8 @@ segments:
     start: 0xADAEA0
     vram: 0x80240000
     files:
-      - [0xADAEA0, "c"]
-      - [0xADAEF0, "c"]
+      - [0xADAEA0, c]
+      - [0xADAEF0, c]
       - [0xADB360, "bin"]
       - [0xADB5C0, "bin"]
       - [0xADC0F0, "bin"]
@@ -4142,10 +4144,10 @@ segments:
     start: 0xAE5590
     vram: 0x80240000
     files:
-      - [0xAE5590, "c"]
-      - [0xAE58D0, "c"]
-      - [0xAE5A90, "c"]
-      - [0xAE5B60, "c"]
+      - [0xAE5590, c]
+      - [0xAE58D0, c]
+      - [0xAE5A90, c]
+      - [0xAE5B60, c]
       - [0xAE5BA0, "bin"]
       - [0xAE5CE0, "bin"]
       - [0xAE5D80, "bin"]
@@ -4164,8 +4166,8 @@ segments:
     start: 0xAED410
     vram: 0x80240000
     files:
-      - [0xAED410, "c"]
-      - [0xAEDC60, "c"]
+      - [0xAED410, c]
+      - [0xAEDC60, c]
       - [0xAEE490, "bin"]
       - [0xAEE7F0, "bin"]
       - [0xAF09D0, "bin"]
@@ -4177,7 +4179,7 @@ segments:
     start: 0xAF1C60
     vram: 0x80240000
     files:
-      - [0xAF1C60, "c"]
+      - [0xAF1C60, c]
       - [0xAF2200, "bin"]
       - [0xAF2440, "bin"]
       - [0xAF2520, "bin"]
@@ -4189,8 +4191,8 @@ segments:
     start: 0xAF2CA0
     vram: 0x80240000
     files:
-      - [0xAF2CA0, "c"]
-      - [0xAF2FE0, "c"]
+      - [0xAF2CA0, c]
+      - [0xAF2FE0, c]
       - [0xAF34C0, "bin"]
       - [0xAF3560, "bin"]
       - [0xAF3600, "bin"]
@@ -4205,8 +4207,8 @@ segments:
     start: 0xAF7950
     vram: 0x80240000
     files:
-      - [0xAF7950, "c"]
-      - [0xAF7C00, "c"]
+      - [0xAF7950, c]
+      - [0xAF7C00, c]
       - [0xAF8660, "bin"]
       - [0xAF8808, "bin"]
       - [0xAF8B40, "bin"]
@@ -4220,8 +4222,8 @@ segments:
     start: 0xAFDB40
     vram: 0x80240000
     files:
-      - [0xAFDB40, "c"]
-      - [0xAFDE00, "c"]
+      - [0xAFDB40, c]
+      - [0xAFDE00, c]
       - [0xAFE130, "bin"]
       - [0xAFE1E0, "bin"]
       - [0xAFE3C0, "bin"]
@@ -4252,9 +4254,9 @@ segments:
     start: 0xB02880
     vram: 0x80240000
     files:
-      - [0xB02880, "c"]
-      - [0xB028A0, "c"]
-      - [0xB03190, "c"]
+      - [0xB02880, c]
+      - [0xB028A0, c]
+      - [0xB03190, c]
       - [0xB03250, "bin"]
       - [0xB03300, "bin"]
       - [0xB036B0, "bin"]
@@ -4268,7 +4270,7 @@ segments:
     start: 0xB06570
     vram: 0x80240000
     files:
-      - [0xB06570, "c"]
+      - [0xB06570, c]
       - [0xB06590, "bin"]
       - [0xB06640, "bin"]
       - [0xB069B0, "bin"]
@@ -4279,11 +4281,11 @@ segments:
     start: 0xB06A00
     vram: 0x80240000
     files:
-      - [0xB06A00, "c"]
-      - [0xB06A20, "c"]
-      - [0xB06A50, "c"]
-      - [0xB06A80, "c"]
-      - [0xB06D10, "c"]
+      - [0xB06A00, c]
+      - [0xB06A20, c]
+      - [0xB06A50, c]
+      - [0xB06A80, c]
+      - [0xB06D10, c]
       - [0xB07940, "bin"]
       - [0xB081C0, "bin"]
       - [0xB0B310, "bin"]
@@ -4296,7 +4298,7 @@ segments:
     start: 0xB13120
     vram: 0x80240000
     files:
-      - [0xB13120, "c"]
+      - [0xB13120, c]
       - [0xB13150, "bin"]
       - [0xB13500, "bin"]
       - [0xB13A40, "bin"]
@@ -4307,8 +4309,8 @@ segments:
     start: 0xB13D70
     vram: 0x80240000
     files:
-      - [0xB13D70, "c"]
-      - [0xB14080, "c"]
+      - [0xB13D70, c]
+      - [0xB14080, c]
       - [0xB14210, "bin"]
       - [0xB14340, "bin"]
       - [0xB143E0, "bin"]
@@ -4328,8 +4330,8 @@ segments:
     start: 0xB150B0
     vram: 0x80240000
     files:
-      - [0xB150B0, "c"]
-      - [0xB150E0, "c"]
+      - [0xB150B0, c]
+      - [0xB150E0, c]
       - [0xB15120, "bin"]
       - [0xB15410, "bin"]
       - [0xB15DA0, "bin"]
@@ -4367,8 +4369,8 @@ segments:
     start: 0xB1B570
     vram: 0x80240000
     files:
-      - [0xB1B570, "c"]
-      - [0xB1BBD0, "c"]
+      - [0xB1B570, c]
+      - [0xB1BBD0, c]
       - [0xB1BC00, "bin"]
       - [0xB1C1E0, "bin"]
       - [0xB1C220, "bin"]
@@ -4391,7 +4393,7 @@ segments:
     start: 0xB1CA50
     vram: 0x80240000
     files:
-      - [0xB1CA50, "c"]
+      - [0xB1CA50, c]
       - [0xB1D1C0, "bin"]
       - [0xB1D2A0, "bin"]
       - [0xB1D2F0, "bin"]
@@ -4409,7 +4411,7 @@ segments:
     start: 0xB1D760
     vram: 0x80240000
     files:
-      - [0xB1D760, "c"]
+      - [0xB1D760, c]
       - [0xB1DB20, "bin"]
       - [0xB20460, "bin"] # rodata
       - [0xB20470, "bin"] # rodata
@@ -4426,9 +4428,9 @@ segments:
     start: 0xB20540
     vram: 0x80240000
     files:
-      - [0xB20540, "c"]
-      - [0xB216E0, "c"]
-      - [0xB21EA0, "c"]
+      - [0xB20540, c]
+      - [0xB216E0, c]
+      - [0xB21EA0, c]
       - [0xB220E0, "bin"]
       - [0xB22190, "bin"]
       - [0xB226D0, "bin"]
@@ -4442,8 +4444,8 @@ segments:
     start: 0xB28030
     vram: 0x80240000
     files:
-      - [0xB28030, "c"]
-      - [0xB291C0, "c"]
+      - [0xB28030, c]
+      - [0xB291C0, c]
       - [0xB29400, "bin"]
       - [0xB294A0, "bin"]
       - [0xB299B0, "bin"]
@@ -4457,10 +4459,10 @@ segments:
     start: 0xB2C470
     vram: 0x80240000
     files:
-      - [0xB2C470, "c"]
-      - [0xB2C4A0, "c"]
-      - [0xB2C8A0, "c"]
-      - [0xB2EB50, "c"]
+      - [0xB2C470, c]
+      - [0xB2C4A0, c]
+      - [0xB2C8A0, c]
+      - [0xB2EB50, c]
       - [0xB2ED90, "bin"]
       - [0xB2EEA0, "bin"]
       - [0xB2F410, "bin"]
@@ -4473,9 +4475,9 @@ segments:
     start: 0xB34BD0
     vram: 0x80240000
     files:
-      - [0xB34BD0, "c"]
-      - [0xB37B70, "c"]
-      - [0xB37C20, "c"]
+      - [0xB34BD0, c]
+      - [0xB37B70, c]
+      - [0xB37C20, c]
       - [0xB37E60, "bin"]
       - [0xB39530, "bin"]
       - [0xB435D0, "bin"]
@@ -4490,14 +4492,14 @@ segments:
     start: 0xB44770
     vram: 0x80240000
     files:
-      - [0xB44770, "c"]
-      - [0xB447B0, "c"]
-      - [0xB44AC0, "c"]
-      - [0xB44D80, "c"]
-      - [0xB44F10, "c"]
-      - [0xB45150, "c"]
-      - [0xB451F0, "c"]
-      - [0xB45730, "c"]
+      - [0xB44770, c]
+      - [0xB447B0, c]
+      - [0xB44AC0, c]
+      - [0xB44D80, c]
+      - [0xB44F10, c]
+      - [0xB45150, c]
+      - [0xB451F0, c]
+      - [0xB45730, c]
       - [0xB45860, "bin"]
       - [0xB45A20, "bin"]
       - [0xB461B0, "bin"]
@@ -4516,11 +4518,11 @@ segments:
     start: 0xB4AA70
     vram: 0x80240000
     files:
-      - [0xB4AA70, "c"]
-      - [0xB4AAB0, "c"]
-      - [0xB4ADC0, "c"]
-      - [0xB4AF10, "c"]
-      - [0xB4B260, "c"]
+      - [0xB4AA70, c]
+      - [0xB4AAB0, c]
+      - [0xB4ADC0, c]
+      - [0xB4AF10, c]
+      - [0xB4B260, c]
       - [0xB4D140, "bin"]
       - [0xB4D200, "bin"]
       - [0xB4D7A0, "bin"]
@@ -4538,11 +4540,11 @@ segments:
     start: 0xB52830
     vram: 0x80240000
     files:
-      - [0xB52830, "c"]
-      - [0xB52B40, "c"]
-      - [0xB52BE0, "c"]
-      - [0xB52D30, "c"]
-      - [0xB52F70, "c"]
+      - [0xB52830, c]
+      - [0xB52B40, c]
+      - [0xB52BE0, c]
+      - [0xB52D30, c]
+      - [0xB52F70, c]
       - [0xB54E10, "bin"]
       - [0xB55860, "bin"]
       - [0xB55F40, "bin"]
@@ -4559,9 +4561,9 @@ segments:
     start: 0xB59870
     vram: 0x80240000
     files:
-      - [0xB59870, "c"]
-      - [0xB5A610, "c"]
-      - [0xB5A850, "c"]
+      - [0xB59870, c]
+      - [0xB5A610, c]
+      - [0xB5A850, c]
       - [0xB5AA90, "bin"]
       - [0xB5AB20, "bin"]
       - [0xB5ACA0, "bin"]
@@ -4575,11 +4577,11 @@ segments:
     start: 0xB5E2B0
     vram: 0x80240000
     files:
-      - [0xB5E2B0, "c"]
-      - [0xB5E5C0, "c"]
-      - [0xB5E910, "c"]
-      - [0xB5F650, "c"]
-      - [0xB604A0, "c"]
+      - [0xB5E2B0, c]
+      - [0xB5E5C0, c]
+      - [0xB5E910, c]
+      - [0xB5F650, c]
+      - [0xB604A0, c]
       - [0xB606E0, "bin"]
       - [0xB60790, "bin"]
       - [0xB620B0, "bin"]
@@ -4594,10 +4596,10 @@ segments:
     start: 0xB65AB0
     vram: 0x80240000
     files:
-      - [0xB65AB0, "c"]
-      - [0xB660A0, "c"]
-      - [0xB663F0, "c"]
-      - [0xB67190, "c"]
+      - [0xB65AB0, c]
+      - [0xB660A0, c]
+      - [0xB663F0, c]
+      - [0xB67190, c]
       - [0xB673D0, "bin"]
       - [0xB687D0, "bin"]
       - [0xB6B400, "bin"]
@@ -4610,11 +4612,11 @@ segments:
     start: 0xB6C390
     vram: 0x80240000
     files:
-      - [0xB6C390, "c"]
-      - [0xB6C6A0, "c"]
-      - [0xB6D4C0, "c"]
-      - [0xB6D610, "c"]
-      - [0xB6D890, "c"]
+      - [0xB6C390, c]
+      - [0xB6C6A0, c]
+      - [0xB6D4C0, c]
+      - [0xB6D610, c]
+      - [0xB6D890, c]
       - [0xB6DAD0, "bin"]
       - [0xB6DB60, "bin"]
       - [0xB6F1D0, "bin"]
@@ -4629,8 +4631,8 @@ segments:
     start: 0xB70860
     vram: 0x80240000
     files:
-      - [0xB70860, "c"]
-      - [0xB71010, "c"]
+      - [0xB70860, c]
+      - [0xB71010, c]
       - [0xB71060, "bin"]
       - [0xB710F0, "bin"]
       - [0xB728B0, "bin"]
@@ -4642,8 +4644,8 @@ segments:
     start: 0xB730B0
     vram: 0x80240000
     files:
-      - [0xB730B0, "c"]
-      - [0xB73570, "c"]
+      - [0xB730B0, c]
+      - [0xB73570, c]
       - [0xB74310, "bin"]
       - [0xB75250, "bin"]
       - [0xB75D30, "bin"]
@@ -4655,7 +4657,7 @@ segments:
     start: 0xB767B0
     vram: 0x80240000
     files:
-      - [0xB767B0, "c"]
+      - [0xB767B0, c]
       - [0xB76D80, "bin"]
       - [0xB77000, "bin"]
       - [0xB794C0, "bin"]
@@ -4667,8 +4669,8 @@ segments:
     start: 0xB7A050
     vram: 0x80240000
     files:
-      - [0xB7A050, "c"]
-      - [0xB7A510, "c"]
+      - [0xB7A050, c]
+      - [0xB7A510, c]
       - [0xB7B330, "bin"]
       - [0xB7B5C0, "bin"]
       - [0xB7C630, "bin"]
@@ -4682,8 +4684,8 @@ segments:
     start: 0xB7D920
     vram: 0x80240000
     files:
-      - [0xB7D920, "c"]
-      - [0xB7D9E0, "c"]
+      - [0xB7D920, c]
+      - [0xB7D9E0, c]
       - [0xB7DC20, "bin"]
       - [0xB7DEE0, "bin"]
       - [0xB7F4A0, "bin"]
@@ -4695,8 +4697,8 @@ segments:
     start: 0xB80000
     vram: 0x80240000
     files:
-      - [0xB80000, "c"]
-      - [0xB80300, "c"]
+      - [0xB80000, c]
+      - [0xB80300, c]
       - [0xB80540, "bin"]
       - [0xB82C70, "bin"]
       - [0xB82CD0, "bin"]
@@ -4708,7 +4710,7 @@ segments:
     start: 0xB837C0
     vram: 0x80240000
     files:
-      - [0xB837C0, "c"]
+      - [0xB837C0, c]
       - [0xB837E0, "bin"]
       - [0xB838C0, "bin"]
       - [0xB83B20, "bin"]
@@ -4728,7 +4730,7 @@ segments:
     start: 0xB83E60
     vram: 0x80240000
     files:
-      - [0xB83E60, "c"]
+      - [0xB83E60, c]
       - [0xB83E80, "bin"]
       - [0xB84110, "bin"]
       - [0xB84170, "bin"] # rodata
@@ -4738,9 +4740,9 @@ segments:
     start: 0xB84180
     vram: 0x80240000
     files:
-      - [0xB84180, "c"]
-      - [0xB851A0, "c"]
-      - [0xB858A0, "c"]
+      - [0xB84180, c]
+      - [0xB851A0, c]
+      - [0xB858A0, c]
       - [0xB85AE0, "bin"]
       - [0xB8D910, "bin"]
       - [0xB8E200, "bin"]
@@ -4762,9 +4764,9 @@ segments:
     start: 0xB93440
     vram: 0x80240000
     files:
-      - [0xB93440, "c"]
-      - [0xB934B0, "c"]
-      - [0xB93940, "c"]
+      - [0xB93440, c]
+      - [0xB934B0, c]
+      - [0xB93940, c]
       - [0xB952F0, "bin"]
       - [0xB953B0, "bin"]
       - [0xB957E0, "bin"]
@@ -4778,8 +4780,8 @@ segments:
     start: 0xB97C00
     vram: 0x80240000
     files:
-      - [0xB97C00, "c"]
-      - [0xB97C70, "c"]
+      - [0xB97C00, c]
+      - [0xB97C70, c]
       - [0xB98DE0, "bin"]
       - [0xB98EA0, "bin"]
       - [0xB9A390, "bin"]
@@ -4792,7 +4794,7 @@ segments:
     start: 0xB9B480
     vram: 0x80240000
     files:
-      - [0xB9B480, "c"]
+      - [0xB9B480, c]
       - [0xB9B9B0, "bin"]
       - [0xB9BA70, "bin"]
       - [0xB9BE30, "bin"]
@@ -4805,9 +4807,9 @@ segments:
     start: 0xB9D960
     vram: 0x80240000
     files:
-      - [0xB9D960, "c"]
-      - [0xB9D9D0, "c"]
-      - [0xB9DB60, "c"]
+      - [0xB9D960, c]
+      - [0xB9D9D0, c]
+      - [0xB9DB60, c]
       - [0xB9EA90, "bin"]
       - [0xB9EB50, "bin"]
       - [0xB9F020, "bin"]
@@ -4821,8 +4823,8 @@ segments:
     start: 0xBA0730
     vram: 0x80240000
     files:
-      - [0xBA0730, "c"]
-      - [0xBA07A0, "c"]
+      - [0xBA0730, c]
+      - [0xBA07A0, c]
       - [0xBA2150, "bin"]
       - [0xBA2210, "bin"]
       - [0xBA3A80, "bin"]
@@ -4834,9 +4836,9 @@ segments:
     start: 0xBA4780
     vram: 0x80240000
     files:
-      - [0xBA4780, "c"]
-      - [0xBA47F0, "c"]
-      - [0xBA4CF0, "c"]
+      - [0xBA4780, c]
+      - [0xBA47F0, c]
+      - [0xBA4CF0, c]
       - [0xBA74B0, "bin"]
       - [0xBA7570, "bin"]
       - [0xBA82F0, "bin"]
@@ -4850,9 +4852,9 @@ segments:
     start: 0xBAA140
     vram: 0x80240000
     files:
-      - [0xBAA140, "c"]
-      - [0xBAA1B0, "c"]
-      - [0xBAA3B0, "c"]
+      - [0xBAA140, c]
+      - [0xBAA1B0, c]
+      - [0xBAA3B0, c]
       - [0xBAB1D0, "bin"]
       - [0xBAB2C0, "bin"]
       - [0xBAB6D0, "bin"]
@@ -4867,7 +4869,7 @@ segments:
     start: 0xBAD940
     vram: 0x80240000
     files:
-      - [0xBAD940, "c"]
+      - [0xBAD940, c]
       - [0xBB0880, "bin"]
       - [0xBB0940, "bin"]
       - [0xBB0E30, "bin"]
@@ -4881,7 +4883,7 @@ segments:
     start: 0xBB2E00
     vram: 0x80240000
     files:
-      - [0xBB2E00, "c"]
+      - [0xBB2E00, c]
       - [0xBB3CC0, "bin"]
       - [0xBB3D80, "bin"]
       - [0xBB4130, "bin"]
@@ -4895,7 +4897,7 @@ segments:
     start: 0xBB59E0
     vram: 0x80240000
     files:
-      - [0xBB59E0, "c"]
+      - [0xBB59E0, c]
       - [0xBB5B70, "bin"]
       - [0xBB5EB0, "bin"]
       - [0xBB5EF0, "bin"]
@@ -4908,9 +4910,9 @@ segments:
     start: 0xBB7070
     vram: 0x80240000
     files:
-      - [0xBB7070, "c"]
-      - [0xBB7940, "c"]
-      - [0xBB79F0, "c"]
+      - [0xBB7070, c]
+      - [0xBB7940, c]
+      - [0xBB79F0, c]
       - [0xBB7C30, "bin"]
       - [0xBBA180, "bin"]
       - [0xBBA2E0, "bin"]
@@ -4922,7 +4924,7 @@ segments:
     start: 0xBBB380
     vram: 0x80240000
     files:
-      - [0xBBB380, "c"]
+      - [0xBBB380, c]
       - [0xBBB960, "bin"]
       - [0xBBBB90, "bin"]
       - [0xBBBE60, "bin"]
@@ -4934,8 +4936,8 @@ segments:
     start: 0xBBD1A0
     vram: 0x80240000
     files:
-      - [0xBBD1A0, "c"]
-      - [0xBBD980, "c"]
+      - [0xBBD1A0, c]
+      - [0xBBD980, c]
       - [0xBBE2E0, "bin"]
       - [0xBBE410, "bin"]
       - [0xBC0100, "bin"]
@@ -4947,8 +4949,8 @@ segments:
     start: 0xBC2A90
     vram: 0x80240000
     files:
-      - [0xBC2A90, "c"]
-      - [0xBC2CD0, "c"]
+      - [0xBC2A90, c]
+      - [0xBC2CD0, c]
       - [0xBC2D40, "bin"]
       - [0xBC2E20, "bin"]
       - [0xBC3720, "bin"]
@@ -4962,9 +4964,9 @@ segments:
     start: 0xBC4280
     vram: 0x80240000
     files:
-      - [0xBC4280, "c"]
-      - [0xBC43F0, "c"]
-      - [0xBC4B50, "c"]
+      - [0xBC4280, c]
+      - [0xBC43F0, c]
+      - [0xBC4B50, c]
       - [0xBC5270, "bin"]
       - [0xBC5350, "bin"]
       - [0xBC5770, "bin"]
@@ -4979,8 +4981,8 @@ segments:
     start: 0xBC7E60
     vram: 0x80240000
     files:
-      - [0xBC7E60, "c"]
-      - [0xBC7EB0, "c"]
+      - [0xBC7E60, c]
+      - [0xBC7EB0, c]
       - [0xBC8CE0, "bin"]
       - [0xBC8DE0, "bin"]
       - [0xBC9020, "bin"]
@@ -4994,8 +4996,8 @@ segments:
     start: 0xBCD060
     vram: 0x80240000
     files:
-      - [0xBCD060, "c"]
-      - [0xBCD7D0, "c"]
+      - [0xBCD060, c]
+      - [0xBCD7D0, c]
       - [0xBCDA40, "bin"]
       - [0xBCDB00, "bin"]
       - [0xBCDFF0, "bin"]
@@ -5018,9 +5020,9 @@ segments:
     start: 0xBCEBF0
     vram: 0x80240000
     files:
-      - [0xBCEBF0, "c"]
-      - [0xBCEEB0, "c"]
-      - [0xBCF0F0, "c"]
+      - [0xBCEBF0, c]
+      - [0xBCEEB0, c]
+      - [0xBCF0F0, c]
       - [0xBD0780, "bin"]
       - [0xBD0840, "bin"]
       - [0xBD0BA0, "bin"]
@@ -5035,10 +5037,10 @@ segments:
     start: 0xBD3870
     vram: 0x80240000
     files:
-      - [0xBD3870, "c"]
-      - [0xBD40B0, "c"]
-      - [0xBD4110, "c"]
-      - [0xBD4A90, "c"]
+      - [0xBD3870, c]
+      - [0xBD40B0, c]
+      - [0xBD4110, c]
+      - [0xBD4A90, c]
       - [0xBD5010, "bin"]
       - [0xBD50D0, "bin"]
       - [0xBD64D0, "bin"]
@@ -5051,10 +5053,10 @@ segments:
     start: 0xBDA7B0
     vram: 0x80240000
     files:
-      - [0xBDA7B0, "c"]
-      - [0xBDA940, "c"]
-      - [0xBDAB00, "c"]
-      - [0xBDABA0, "c"]
+      - [0xBDA7B0, c]
+      - [0xBDA940, c]
+      - [0xBDAB00, c]
+      - [0xBDABA0, c]
       - [0xBDABE0, "bin"]
       - [0xBDB140, "bin"]
       - [0xBDCE10, "bin"]
@@ -5066,7 +5068,7 @@ segments:
     start: 0xBDD1B0
     vram: 0x80240000
     files:
-      - [0xBDD1B0, "c"]
+      - [0xBDD1B0, c]
       - [0xBDE190, "bin"]
       - [0xBDE2A0, "bin"]
       - [0xBDE480, "bin"]
@@ -5078,7 +5080,7 @@ segments:
     start: 0xBDED90
     vram: 0x80240000
     files:
-      - [0xBDED90, "c"]
+      - [0xBDED90, c]
       - [0xBE04B0, "bin"]
       - [0xBE05C0, "bin"]
       - [0xBE0950, "bin"]
@@ -5091,7 +5093,7 @@ segments:
     start: 0xBE37B0
     vram: 0x80240000
     files:
-      - [0xBE37B0, "c"]
+      - [0xBE37B0, c]
       - [0xBE6B20, "bin"]
       - [0xBE6C30, "bin"]
       - [0xBE6E10, "bin"]
@@ -5105,7 +5107,7 @@ segments:
     start: 0xBE7BE0
     vram: 0x80240000
     files:
-      - [0xBE7BE0, "c"]
+      - [0xBE7BE0, c]
       - [0xBE8EE0, "bin"]
       - [0xBE9290, "bin"]
       - [0xBECBE0, "bin"]
@@ -5117,10 +5119,10 @@ segments:
     start: 0xBECDF0
     vram: 0x80240000
     files:
-      - [0xBECDF0, "c"]
-      - [0xBED5F0, "c"]
-      - [0xBED660, "c"]
-      - [0xBED740, "c"]
+      - [0xBECDF0, c]
+      - [0xBED5F0, c]
+      - [0xBED660, c]
+      - [0xBED740, c]
       - [0xBEEC80, "bin"]
       - [0xBEEE30, "bin"]
       - [0xBF0580, "bin"]
@@ -5134,8 +5136,8 @@ segments:
     start: 0xBF47A0
     vram: 0x80240000
     files:
-      - [0xBF47A0, "c"]
-      - [0xBF4860, "c"]
+      - [0xBF47A0, c]
+      - [0xBF4860, c]
       - [0xBF4A30, "bin"]
       - [0xBF4B50, "bin"]
       - [0xBF5210, "bin"]
@@ -5151,7 +5153,7 @@ segments:
     start: 0xBF6060
     vram: 0x80240000
     files:
-      - [0xBF6060, "c"]
+      - [0xBF6060, c]
       - [0xBF60A0, "bin"]
       - [0xBF61A0, "bin"]
       - [0xBF6400, "bin"]
@@ -5206,8 +5208,8 @@ segments:
     start: 0xBFA0A0
     vram: 0x80240000
     files:
-      - [0xBFA0A0, "c"]
-      - [0xBFA100, "c"]
+      - [0xBFA0A0, c]
+      - [0xBFA100, c]
       - [0xBFA150, "bin"]
       - [0xBFA260, "bin"]
       - [0xBFD800, "bin"]
@@ -5219,9 +5221,9 @@ segments:
     start: 0xBFD880
     vram: 0x80240000
     files:
-      - [0xBFD880, "c"]
-      - [0xBFD8C0, "c"]
-      - [0xBFD9A0, "c"]
+      - [0xBFD880, c]
+      - [0xBFD8C0, c]
+      - [0xBFD9A0, c]
       - [0xC00C70, "bin"]
       - [0xC00DD0, "bin"]
       - [0xC01770, "bin"]
@@ -5235,7 +5237,7 @@ segments:
     start: 0xC2EBA0
     vram: 0x80240000
     files:
-      - [0xC2EBA0, "c"]
+      - [0xC2EBA0, c]
       - [0xC2FFD0, "bin"]
       - [0xC300F0, "bin"]
       - [0xC30650, "bin"]
@@ -5246,8 +5248,8 @@ segments:
     start: 0xC314E0
     vram: 0x80240000
     files:
-      - [0xC314E0, "c"]
-      - [0xC31730, "c"]
+      - [0xC314E0, c]
+      - [0xC31730, c]
       - [0xC33CB0, "bin"]
       - [0xC33DF0, "bin"]
       - [0xC345C0, "bin"]
@@ -5260,7 +5262,7 @@ segments:
     start: 0xC36530
     vram: 0x80240000
     files:
-      - [0xC36530, "c"]
+      - [0xC36530, c]
       - [0xC39640, "bin"]
       - [0xC39740, "bin"]
       - [0xC39A90, "bin"]
@@ -5272,7 +5274,7 @@ segments:
     start: 0xC3AA10
     vram: 0x80240000
     files:
-      - [0xC3AA10, "c"]
+      - [0xC3AA10, c]
       - [0xC3BEA0, "bin"]
       - [0xC3BF90, "bin"]
       - [0xC3C200, "bin"]
@@ -5285,7 +5287,7 @@ segments:
     start: 0xC3D080
     vram: 0x80240000
     files:
-      - [0xC3D080, "c"]
+      - [0xC3D080, c]
       - [0xC3D340, "bin"]
       - [0xC3D440, "bin"]
       - [0xC3D8C0, "bin"]
@@ -5297,7 +5299,7 @@ segments:
     start: 0xC3DBF0
     vram: 0x80240000
     files:
-      - [0xC3DBF0, "c"]
+      - [0xC3DBF0, c]
       - [0xC3F020, "bin"]
       - [0xC3F120, "bin"]
       - [0xC3F3E0, "bin"]
@@ -5309,7 +5311,7 @@ segments:
     start: 0xC3FDB0
     vram: 0x80240000
     files:
-      - [0xC3FDB0, "c"]
+      - [0xC3FDB0, c]
       - [0xC43A40, "bin"]
       - [0xC43B40, "bin"]
       - [0xC43EB0, "bin"]
@@ -5323,7 +5325,7 @@ segments:
     start: 0xC46BE0
     vram: 0x80240000
     files:
-      - [0xC46BE0, "c"]
+      - [0xC46BE0, c]
       - [0xC4A3E0, "bin"]
       - [0xC4A500, "bin"]
       - [0xC4AA30, "bin"]
@@ -5336,7 +5338,7 @@ segments:
     start: 0xC4C390
     vram: 0x80240000
     files:
-      - [0xC4C390, "c"]
+      - [0xC4C390, c]
       - [0xC4C580, "bin"]
       - [0xC4C680, "bin"]
       - [0xC4CA00, "bin"]
@@ -5348,7 +5350,7 @@ segments:
     start: 0xC4D3E0
     vram: 0x80240000
     files:
-      - [0xC4D3E0, "c"]
+      - [0xC4D3E0, c]
       - [0xC4D430, "bin"]
       - [0xC4D550, "bin"]
       - [0xC4D950, "bin"]
@@ -5359,7 +5361,7 @@ segments:
     start: 0xC4DEF0
     vram: 0x80240000
     files:
-      - [0xC4DEF0, "c"]
+      - [0xC4DEF0, c]
       - [0xC4E1B0, "bin"]
       - [0xC4E2A0, "bin"]
       - [0xC4E760, "bin"]
@@ -5392,8 +5394,8 @@ segments:
     start: 0xC4F510
     vram: 0x80240000
     files:
-      - [0xC4F510, "c"]
-      - [0xC50CA0, "c"]
+      - [0xC4F510, c]
+      - [0xC50CA0, c]
       - [0xC50D80, "bin"]
       - [0xC50ED0, "bin"]
       - [0xC513B0, "bin"]
@@ -5406,7 +5408,7 @@ segments:
     start: 0xC52540
     vram: 0x80240000
     files:
-      - [0xC52540, "c"]
+      - [0xC52540, c]
       - [0xC53970, "bin"]
       - [0xC53A60, "bin"]
       - [0xC53CC0, "bin"]
@@ -5428,8 +5430,8 @@ segments:
     start: 0xC55F40
     vram: 0x80240000
     files:
-      - [0xC55F40, "c"]
-      - [0xC56EF0, "c"]
+      - [0xC55F40, c]
+      - [0xC56EF0, c]
       - [0xC571B0, "bin"]
       - [0xC572A0, "bin"]
       - [0xC574C0, "bin"]
@@ -5443,7 +5445,7 @@ segments:
     start: 0xC599D0
     vram: 0x80240000
     files:
-      - [0xC599D0, "c"]
+      - [0xC599D0, c]
       - [0xC59CE0, "bin"]
       - [0xC5A730, "bin"] # rodata
   - name: world/area_kzn/kzn_02/
@@ -5452,10 +5454,10 @@ segments:
     start: 0xC5A740
     vram: 0x80240000
     files:
-      - [0xC5A740, "c"]
-      - [0xC5AA50, "c"]
-      - [0xC5AC20, "c"]
-      - [0xC5CE70, "c"]
+      - [0xC5A740, c]
+      - [0xC5AA50, c]
+      - [0xC5AC20, c]
+      - [0xC5CE70, c]
       - [0xC5CF60, "bin"]
       - [0xC5D9B0, "bin"]
       - [0xC609C0, "bin"]
@@ -5469,9 +5471,9 @@ segments:
     start: 0xC60D10
     vram: 0x80240000
     files:
-      - [0xC60D10, "c"]
-      - [0xC61020, "c"]
-      - [0xC63A10, "c"]
+      - [0xC60D10, c]
+      - [0xC61020, c]
+      - [0xC63A10, c]
       - [0xC63DA0, "bin"]
       - [0xC647B0, "bin"]
       - [0xC66FC0, "bin"]
@@ -5486,9 +5488,9 @@ segments:
     start: 0xC68130
     vram: 0x80240000
     files:
-      - [0xC68130, "c"]
-      - [0xC68440, "c"]
-      - [0xC69180, "c"]
+      - [0xC68130, c]
+      - [0xC68440, c]
+      - [0xC69180, c]
       - [0xC69890, "bin"]
       - [0xC69D70, "bin"]
       - [0xC6A420, "bin"]
@@ -5500,7 +5502,7 @@ segments:
     start: 0xC6C0D0
     vram: 0x80240000
     files:
-      - [0xC6C0D0, "c"]
+      - [0xC6C0D0, c]
       - [0xC6C3E0, "bin"]
       - [0xC6C910, "bin"] # rodata
   - name: world/area_kzn/kzn_06/
@@ -5509,9 +5511,9 @@ segments:
     start: 0xC6C920
     vram: 0x80240000
     files:
-      - [0xC6C920, "c"]
-      - [0xC6CC30, "c"]
-      - [0xC6CD10, "c"]
+      - [0xC6C920, c]
+      - [0xC6CC30, c]
+      - [0xC6CD10, c]
       - [0xC6D390, "bin"]
       - [0xC6E300, "bin"] # rodata
       - [0xC6E320, "bin"] # rodata
@@ -5522,8 +5524,8 @@ segments:
     start: 0xC6E330
     vram: 0x80240000
     files:
-      - [0xC6E330, "c"]
-      - [0xC6EA50, "c"]
+      - [0xC6E330, c]
+      - [0xC6EA50, c]
       - [0xC70640, "bin"]
       - [0xC70710, "bin"]
       - [0xC70C60, "bin"]
@@ -5537,9 +5539,9 @@ segments:
     start: 0xC71480
     vram: 0x80240000
     files:
-      - [0xC71480, "c"]
-      - [0xC71C10, "c"]
-      - [0xC71ED0, "c"]
+      - [0xC71480, c]
+      - [0xC71C10, c]
+      - [0xC71ED0, c]
       - [0xC755A0, "bin"]
       - [0xC76030, "bin"]
       - [0xC76A50, "bin"] # rodata
@@ -5551,9 +5553,9 @@ segments:
     start: 0xC76CE0
     vram: 0x80240000
     files:
-      - [0xC76CE0, "c"]
-      - [0xC77A20, "c"]
-      - [0xC77D00, "c"]
+      - [0xC76CE0, c]
+      - [0xC77A20, c]
+      - [0xC77D00, c]
       - [0xC7A6F0, "bin"]
       - [0xC7A9E0, "bin"]
       - [0xC7B0D0, "bin"]
@@ -5565,8 +5567,8 @@ segments:
     start: 0xC7E180
     vram: 0x80240000
     files:
-      - [0xC7E180, "c"]
-      - [0xC7E4B0, "c"]
+      - [0xC7E180, c]
+      - [0xC7E4B0, c]
       - [0xC7E850, "bin"]
       - [0xC7EE90, "bin"]
       - [0xC80170, "bin"] # rodata
@@ -5577,9 +5579,9 @@ segments:
     start: 0xC801A0
     vram: 0x80240000
     files:
-      - [0xC801A0, "c"]
-      - [0xC804B0, "c"]
-      - [0xC80600, "c"]
+      - [0xC801A0, c]
+      - [0xC804B0, c]
+      - [0xC80600, c]
       - [0xC82800, "bin"]
       - [0xC83180, "bin"]
       - [0xC83870, "bin"]
@@ -5592,9 +5594,9 @@ segments:
     start: 0xC85AB0
     vram: 0x80240000
     files:
-      - [0xC85AB0, "c"]
-      - [0xC85DC0, "c"]
-      - [0xC887B0, "c"]
+      - [0xC85AB0, c]
+      - [0xC85DC0, c]
+      - [0xC887B0, c]
       - [0xC88B50, "bin"]
       - [0xC89450, "bin"]
       - [0xC8BE40, "bin"] # rodata
@@ -5605,9 +5607,9 @@ segments:
     start: 0xC8C0A0
     vram: 0x80240000
     files:
-      - [0xC8C0A0, "c"]
-      - [0xC8C0E0, "c"]
-      - [0xC8C3F0, "c"]
+      - [0xC8C0A0, c]
+      - [0xC8C0E0, c]
+      - [0xC8C3F0, c]
       - [0xC8C460, "bin"]
       - [0xC8DBA0, "bin"] # rodata
   - name: world/area_kzn/kzn_19/
@@ -5616,7 +5618,7 @@ segments:
     start: 0xC8DBB0
     vram: 0x80240000
     files:
-      - [0xC8DBB0, "c"]
+      - [0xC8DBB0, c]
       - [0xC8F8E0, "bin"]
       - [0xC8FA40, "bin"]
       - [0xC90B10, "bin"]
@@ -5632,8 +5634,8 @@ segments:
     start: 0xC95F30
     vram: 0x80240000
     files:
-      - [0xC95F30, "c"]
-      - [0xC96240, "c"]
+      - [0xC95F30, c]
+      - [0xC96240, c]
       - [0xC969F0, "bin"]
       - [0xC97600, "bin"]
       - [0xC9A1F0, "bin"] # rodata
@@ -5643,8 +5645,8 @@ segments:
     start: 0xC9A200
     vram: 0x80240000
     files:
-      - [0xC9A200, "c"]
-      - [0xC9A540, "c"]
+      - [0xC9A200, c]
+      - [0xC9A540, c]
       - [0xC9A590, "bin"]
       - [0xC9A650, "bin"]
       - [0xC9B120, "bin"]
@@ -5655,8 +5657,8 @@ segments:
     start: 0xC9C300
     vram: 0x80240000
     files:
-      - [0xC9C300, "c"]
-      - [0xC9C610, "c"]
+      - [0xC9C300, c]
+      - [0xC9C610, c]
       - [0xC9C920, "bin"]
       - [0xC9C9B0, "bin"]
       - [0xC9D020, "bin"]
@@ -5667,9 +5669,9 @@ segments:
     start: 0xC9DF20
     vram: 0x80240000
     files:
-      - [0xC9DF20, "c"]
-      - [0xC9DF60, "c"]
-      - [0xC9EE30, "c"]
+      - [0xC9DF20, c]
+      - [0xC9DF60, c]
+      - [0xC9EE30, c]
       - [0xC9F300, "bin"]
       - [0xC9F5E0, "bin"]
       - [0xCA3D50, "bin"]
@@ -5684,8 +5686,8 @@ segments:
     start: 0xCA72A0
     vram: 0x80240000
     files:
-      - [0xCA72A0, "c"]
-      - [0xCA72E0, "c"]
+      - [0xCA72A0, c]
+      - [0xCA72E0, c]
       - [0xCA78D0, "bin"]
       - [0xCA8150, "bin"]
       - [0xCAC170, "bin"]
@@ -5696,8 +5698,8 @@ segments:
     start: 0xCAC1F0
     vram: 0x80240000
     files:
-      - [0xCAC1F0, "c"]
-      - [0xCAC5D0, "c"]
+      - [0xCAC1F0, c]
+      - [0xCAC5D0, c]
       - [0xCAC930, "bin"]
       - [0xCACAC0, "bin"]
       - [0xCAD410, "bin"]
@@ -5709,10 +5711,10 @@ segments:
     start: 0xCAED40
     vram: 0x80240000
     files:
-      - [0xCAED40, "c"]
-      - [0xCAFA80, "c"]
-      - [0xCAFAC0, "c"]
-      - [0xCB0B80, "c"]
+      - [0xCAED40, c]
+      - [0xCAFA80, c]
+      - [0xCAFAC0, c]
+      - [0xCB0B80, c]
       - [0xCB0C20, "bin"]
       - [0xCB1BF0, "bin"]
       - [0xCB3C80, "bin"]
@@ -5724,10 +5726,10 @@ segments:
     start: 0xCB5000
     vram: 0x80240000
     files:
-      - [0xCB5000, "c"]
-      - [0xCB5040, "c"]
-      - [0xCB50E0, "c"]
-      - [0xCB5320, "c"]
+      - [0xCB5000, c]
+      - [0xCB5040, c]
+      - [0xCB50E0, c]
+      - [0xCB5320, c]
       - [0xCB6820, "bin"]
       - [0xCB7010, "bin"]
       - [0xCB7880, "bin"]
@@ -5739,11 +5741,11 @@ segments:
     start: 0xCB9200
     vram: 0x80240000
     files:
-      - [0xCB9200, "c"]
-      - [0xCB9240, "c"]
-      - [0xCB9280, "c"]
-      - [0xCB96B0, "c"]
-      - [0xCBA430, "c"]
+      - [0xCB9200, c]
+      - [0xCB9240, c]
+      - [0xCB9280, c]
+      - [0xCB96B0, c]
+      - [0xCBA430, c]
       - [0xCBA670, "bin"]
       - [0xCBA830, "bin"]
       - [0xCBA880, "bin"]
@@ -5759,7 +5761,7 @@ segments:
     start: 0xCBDCD0
     vram: 0x80240000
     files:
-      - [0xCBDCD0, "c"]
+      - [0xCBDCD0, c]
       - [0xCBDFF0, "bin"]
       - [0xCBF790, "bin"]
       - [0xCC0DC0, "bin"]
@@ -5771,8 +5773,8 @@ segments:
     start: 0xCC0E30
     vram: 0x80240000
     files:
-      - [0xCC0E30, "c"]
-      - [0xCC0E70, "c"]
+      - [0xCC0E30, c]
+      - [0xCC0E70, c]
       - [0xCC1520, "bin"]
       - [0xCC16A0, "bin"]
       - [0xCC1C60, "bin"]
@@ -5783,9 +5785,9 @@ segments:
     start: 0xCC3810
     vram: 0x80240000
     files:
-      - [0xCC3810, "c"]
-      - [0xCC3850, "c"]
-      - [0xCC6DE0, "c"]
+      - [0xCC3810, c]
+      - [0xCC3850, c]
+      - [0xCC6DE0, c]
       - [0xCC6E80, "bin"]
       - [0xCC7160, "bin"]
       - [0xCC7250, "bin"]
@@ -5798,9 +5800,9 @@ segments:
     start: 0xCCB310
     vram: 0x80240000
     files:
-      - [0xCCB310, "c"]
-      - [0xCCBE20, "c"]
-      - [0xCCD670, "c"]
+      - [0xCCB310, c]
+      - [0xCCBE20, c]
+      - [0xCCD670, c]
       - [0xCCD6A0, "bin"]
       - [0xCCDF10, "bin"]
       - [0xCCF7D0, "bin"]
@@ -5826,11 +5828,11 @@ segments:
     start: 0xCD1E30
     vram: 0x80240000
     files:
-      - [0xCD1E30, "c"]
-      - [0xCD1E70, "c"]
-      - [0xCD1F10, "c"]
-      - [0xCD2C80, "c"]
-      - [0xCD4770, "c"]
+      - [0xCD1E30, c]
+      - [0xCD1E70, c]
+      - [0xCD1F10, c]
+      - [0xCD2C80, c]
+      - [0xCD4770, c]
       - [0xCD47A0, "bin"]
       - [0xCD5530, "bin"]
       - [0xCD5E40, "bin"]
@@ -5844,9 +5846,9 @@ segments:
     start: 0xCD72E0
     vram: 0x80240000
     files:
-      - [0xCD72E0, "c"]
-      - [0xCD7320, "c"]
-      - [0xCD7350, "c"]
+      - [0xCD72E0, c]
+      - [0xCD7320, c]
+      - [0xCD7350, c]
       - [0xCDA500, "bin"]
       - [0xCDB2B0, "bin"]
       - [0xCDC560, "bin"]
@@ -5859,9 +5861,9 @@ segments:
     start: 0xCDC6A0
     vram: 0x80240000
     files:
-      - [0xCDC6A0, "c"]
-      - [0xCDCBD0, "c"]
-      - [0xCDCC30, "c"]
+      - [0xCDC6A0, c]
+      - [0xCDCBD0, c]
+      - [0xCDCC30, c]
       - [0xCDCE70, "bin"]
       - [0xCDCF60, "bin"]
       - [0xCDD530, "bin"]
@@ -5873,7 +5875,7 @@ segments:
     start: 0xCE36F0
     vram: 0x80240000
     files:
-      - [0xCE36F0, "c"]
+      - [0xCE36F0, c]
       - [0xCE4030, "bin"]
       - [0xCE41B0, "bin"]
       - [0xCE41F0, "bin"]
@@ -5886,8 +5888,8 @@ segments:
     start: 0xCE6700
     vram: 0x80240000
     files:
-      - [0xCE6700, "c"]
-      - [0xCE7240, "c"]
+      - [0xCE6700, c]
+      - [0xCE7240, c]
       - [0xCE73F0, "bin"]
       - [0xCE7EC0, "bin"]
       - [0xCEC210, "bin"] # rodata
@@ -5898,9 +5900,9 @@ segments:
     start: 0xCEC240
     vram: 0x80240000
     files:
-      - [0xCEC240, "c"]
-      - [0xCEC280, "c"]
-      - [0xCEC290, "c"]
+      - [0xCEC240, c]
+      - [0xCEC280, c]
+      - [0xCEC290, c]
       - [0xCEC4D0, "bin"]
       - [0xCEC760, "bin"]
       - [0xCED050, "bin"]
@@ -5913,8 +5915,8 @@ segments:
     start: 0xCEE260
     vram: 0x80240000
     files:
-      - [0xCEE260, "c"]
-      - [0xCEE2A0, "c"]
+      - [0xCEE260, c]
+      - [0xCEE2A0, c]
       - [0xCEEF30, "bin"]
       - [0xCEF540, "bin"]
       - [0xCF0800, "bin"]
@@ -5926,9 +5928,9 @@ segments:
     start: 0xCF0940
     vram: 0x80240000
     files:
-      - [0xCF0940, "c"]
-      - [0xCF0980, "c"]
-      - [0xCF0BC0, "c"]
+      - [0xCF0940, c]
+      - [0xCF0980, c]
+      - [0xCF0BC0, c]
       - [0xCF0ED0, "bin"]
       - [0xCF1680, "bin"]
       - [0xCF2AF0, "bin"]
@@ -5940,10 +5942,10 @@ segments:
     start: 0xCF2BD0
     vram: 0x80240000
     files:
-      - [0xCF2BD0, "c"]
-      - [0xCF2C10, "c"]
-      - [0xCF4BC0, "c"]
-      - [0xCF4E00, "c"]
+      - [0xCF2BD0, c]
+      - [0xCF2C10, c]
+      - [0xCF4BC0, c]
+      - [0xCF4E00, c]
       - [0xCF4EA0, "bin"]
       - [0xCF6860, "bin"]
       - [0xCF68B0, "bin"]
@@ -5957,8 +5959,8 @@ segments:
     start: 0xCF7B70
     vram: 0x80240000
     files:
-      - [0xCF7B70, "c"]
-      - [0xCF7E80, "c"]
+      - [0xCF7B70, c]
+      - [0xCF7E80, c]
       - [0xCF9AC0, "bin"]
       - [0xCF9BC0, "bin"]
       - [0xD01D90, "bin"]
@@ -5971,8 +5973,8 @@ segments:
     start: 0xD05730
     vram: 0x80240000
     files:
-      - [0xD05730, "c"]
-      - [0xD05F60, "c"]
+      - [0xD05730, c]
+      - [0xD05F60, c]
       - [0xD072F0, "bin"]
       - [0xD07440, "bin"]
       - [0xD09570, "bin"]
@@ -5987,7 +5989,7 @@ segments:
     start: 0xD110C0
     vram: 0x80240000
     files:
-      - [0xD110C0, "c"]
+      - [0xD110C0, c]
       - [0xD119E0, "bin"]
       - [0xD11A70, "bin"]
       - [0xD11D40, "bin"]
@@ -5999,9 +6001,9 @@ segments:
     start: 0xD135D0
     vram: 0x80240000
     files:
-      - [0xD135D0, "c"]
-      - [0xD13810, "c"]
-      - [0xD138E0, "c"]
+      - [0xD135D0, c]
+      - [0xD13810, c]
+      - [0xD138E0, c]
       - [0xD13CD0, "bin"]
       - [0xD13D80, "bin"]
       - [0xD15010, "bin"]
@@ -6015,7 +6017,7 @@ segments:
     start: 0xD187E0
     vram: 0x80240000
     files:
-      - [0xD187E0, "c"]
+      - [0xD187E0, c]
       - [0xD1A520, "bin"]
       - [0xD1A5B0, "bin"]
       - [0xD1A890, "bin"]
@@ -6029,8 +6031,8 @@ segments:
     start: 0xD1FE90
     vram: 0x80240000
     files:
-      - [0xD1FE90, "c"]
-      - [0xD203E0, "c"]
+      - [0xD1FE90, c]
+      - [0xD203E0, c]
       - [0xD224B0, "bin"]
       - [0xD22560, "bin"]
       - [0xD23E50, "bin"]
@@ -6044,7 +6046,7 @@ segments:
     start: 0xD2BD30
     vram: 0x80240000
     files:
-      - [0xD2BD30, "c"]
+      - [0xD2BD30, c]
       - [0xD2DD30, "bin"]
       - [0xD2DDC0, "bin"]
       - [0xD2E0B0, "bin"]
@@ -6058,8 +6060,8 @@ segments:
     start: 0xD2FC80
     vram: 0x80240000
     files:
-      - [0xD2FC80, "c"]
-      - [0xD309C0, "c"]
+      - [0xD2FC80, c]
+      - [0xD309C0, c]
       - [0xD31430, "bin"]
       - [0xD314C0, "bin"]
       - [0xD31E80, "bin"]
@@ -6072,7 +6074,7 @@ segments:
     start: 0xD362F0
     vram: 0x80240000
     files:
-      - [0xD362F0, "c"]
+      - [0xD362F0, c]
       - [0xD366F0, "bin"]
       - [0xD36780, "bin"]
       - [0xD369A0, "bin"]
@@ -6083,8 +6085,8 @@ segments:
     start: 0xD37800
     vram: 0x80240000
     files:
-      - [0xD37800, "c"]
-      - [0xD37BD0, "c"]
+      - [0xD37800, c]
+      - [0xD37BD0, c]
       - [0xD384A0, "bin"]
       - [0xD38550, "bin"]
       - [0xD38840, "bin"]
@@ -6097,11 +6099,11 @@ segments:
     start: 0xD3A5D0
     vram: 0x80240000
     files:
-      - [0xD3A5D0, "c"]
-      - [0xD3A610, "c"]
-      - [0xD3A850, "c"]
-      - [0xD3A930, "c"]
-      - [0xD3ADA0, "c"]
+      - [0xD3A5D0, c]
+      - [0xD3A610, c]
+      - [0xD3A850, c]
+      - [0xD3A930, c]
+      - [0xD3ADA0, c]
       - [0xD3C740, "bin"]
       - [0xD3C850, "bin"]
       - [0xD3D900, "bin"]
@@ -6116,8 +6118,8 @@ segments:
     start: 0xD4BA20
     vram: 0x80240000
     files:
-      - [0xD4BA20, "c"]
-      - [0xD4BAB0, "c"]
+      - [0xD4BA20, c]
+      - [0xD4BAB0, c]
       - [0xD4BDC0, "bin"]
       - [0xD4BE40, "bin"]
       - [0xD4BFE0, "bin"]
@@ -6131,8 +6133,8 @@ segments:
     start: 0xD4D040
     vram: 0x80240000
     files:
-      - [0xD4D040, "c"]
-      - [0xD4D060, "c"]
+      - [0xD4D040, c]
+      - [0xD4D060, c]
       - [0xD4E3F0, "bin"]
       - [0xD4E500, "bin"]
       - [0xD4EF50, "bin"]
@@ -6145,8 +6147,8 @@ segments:
     start: 0xD4FFF0
     vram: 0x80240000
     files:
-      - [0xD4FFF0, "c"]
-      - [0xD50010, "c"]
+      - [0xD4FFF0, c]
+      - [0xD50010, c]
       - [0xD51650, "bin"]
       - [0xD51720, "bin"]
       - [0xD52A80, "bin"]
@@ -6159,8 +6161,8 @@ segments:
     start: 0xD53CB0
     vram: 0x80240000
     files:
-      - [0xD53CB0, "c"]
-      - [0xD53CD0, "c"]
+      - [0xD53CB0, c]
+      - [0xD53CD0, c]
       - [0xD53E60, "bin"]
       - [0xD53F10, "bin"]
       - [0xD543C0, "bin"]
@@ -6172,9 +6174,9 @@ segments:
     start: 0xD54690
     vram: 0x80240000
     files:
-      - [0xD54690, "c"]
-      - [0xD546B0, "c"]
-      - [0xD54840, "c"]
+      - [0xD54690, c]
+      - [0xD546B0, c]
+      - [0xD54840, c]
       - [0xD54FD0, "bin"]
       - [0xD55080, "bin"]
       - [0xD554E0, "bin"]
@@ -6187,8 +6189,8 @@ segments:
     start: 0xD55BB0
     vram: 0x80240000
     files:
-      - [0xD55BB0, "c"]
-      - [0xD55BD0, "c"]
+      - [0xD55BB0, c]
+      - [0xD55BD0, c]
       - [0xD56D90, "bin"]
       - [0xD56E20, "bin"]
       - [0xD57420, "bin"] # rodata
@@ -6199,7 +6201,7 @@ segments:
     start: 0xD57430
     vram: 0x80240000
     files:
-      - [0xD57430, "c"]
+      - [0xD57430, c]
       - [0xD58380, "bin"]
       - [0xD58410, "bin"]
       - [0xD58860, "bin"] # rodata
@@ -6210,8 +6212,8 @@ segments:
     start: 0xD58890
     vram: 0x80240000
     files:
-      - [0xD58890, "c"]
-      - [0xD588B0, "c"]
+      - [0xD58890, c]
+      - [0xD588B0, c]
       - [0xD59EE0, "bin"]
       - [0xD59F80, "bin"]
       - [0xD5F2A0, "bin"] # rodata
@@ -6221,8 +6223,8 @@ segments:
     start: 0xD5F2B0
     vram: 0x80240000
     files:
-      - [0xD5F2B0, "c"]
-      - [0xD5F2D0, "c"]
+      - [0xD5F2B0, c]
+      - [0xD5F2D0, c]
       - [0xD60960, "bin"]
       - [0xD60A00, "bin"]
       - [0xD614A0, "bin"] # rodata
@@ -6232,8 +6234,8 @@ segments:
     start: 0xD61500
     vram: 0x80240000
     files:
-      - [0xD61500, "c"]
-      - [0xD61520, "c"]
+      - [0xD61500, c]
+      - [0xD61520, c]
       - [0xD626E0, "bin"]
       - [0xD62770, "bin"]
       - [0xD62B10, "bin"]
@@ -6245,7 +6247,7 @@ segments:
     start: 0xD62D10
     vram: 0x80240000
     files:
-      - [0xD62D10, "c"]
+      - [0xD62D10, c]
       - [0xD63F20, "bin"]
       - [0xD63FB0, "bin"]
       - [0xD645B0, "bin"] # rodata
@@ -6256,8 +6258,8 @@ segments:
     start: 0xD645E0
     vram: 0x80240000
     files:
-      - [0xD645E0, "c"]
-      - [0xD64600, "c"]
+      - [0xD645E0, c]
+      - [0xD64600, c]
       - [0xD65BC0, "bin"]
       - [0xD65C70, "bin"]
       - [0xD66880, "bin"]
@@ -6268,8 +6270,8 @@ segments:
     start: 0xD67D00
     vram: 0x80240000
     files:
-      - [0xD67D00, "c"]
-      - [0xD67D20, "c"]
+      - [0xD67D00, c]
+      - [0xD67D20, c]
       - [0xD68EE0, "bin"]
       - [0xD68F80, "bin"]
       - [0xD69630, "bin"]
@@ -6281,8 +6283,8 @@ segments:
     start: 0xD69810
     vram: 0x80240000
     files:
-      - [0xD69810, "c"]
-      - [0xD69830, "c"]
+      - [0xD69810, c]
+      - [0xD69830, c]
       - [0xD69850, "bin"]
       - [0xD698E0, "bin"]
       - [0xD69AD0, "bin"]
@@ -6294,8 +6296,8 @@ segments:
     start: 0xD69B20
     vram: 0x80240000
     files:
-      - [0xD69B20, "c"]
-      - [0xD69B40, "c"]
+      - [0xD69B20, c]
+      - [0xD69B40, c]
       - [0xD6AA40, "bin"]
       - [0xD6AAF0, "bin"]
       - [0xD6B610, "bin"] # rodata
@@ -6305,8 +6307,8 @@ segments:
     start: 0xD6B620
     vram: 0x80240000
     files:
-      - [0xD6B620, "c"]
-      - [0xD6B640, "c"]
+      - [0xD6B620, c]
+      - [0xD6B640, c]
       - [0xD6C540, "bin"]
       - [0xD6C5F0, "bin"]
       - [0xD6CF60, "bin"]
@@ -6317,8 +6319,8 @@ segments:
     start: 0xD6E9B0
     vram: 0x80240000
     files:
-      - [0xD6E9B0, "c"]
-      - [0xD6E9D0, "c"]
+      - [0xD6E9B0, c]
+      - [0xD6E9D0, c]
       - [0xD70360, "bin"]
       - [0xD70400, "bin"]
       - [0xD70A70, "bin"]
@@ -6329,8 +6331,8 @@ segments:
     start: 0xD763A0
     vram: 0x80240000
     files:
-      - [0xD763A0, "c"]
-      - [0xD763C0, "c"]
+      - [0xD763A0, c]
+      - [0xD763C0, c]
       - [0xD772C0, "bin"]
       - [0xD77390, "bin"]
       - [0xD77F00, "bin"] # rodata
@@ -6340,8 +6342,8 @@ segments:
     start: 0xD77F20
     vram: 0x80240000
     files:
-      - [0xD77F20, "c"]
-      - [0xD77F40, "c"]
+      - [0xD77F20, c]
+      - [0xD77F40, c]
       - [0xD78040, "bin"]
       - [0xD780E0, "bin"]
       - [0xD78540, "bin"]
@@ -6352,8 +6354,8 @@ segments:
     start: 0xD78880
     vram: 0x80240000
     files:
-      - [0xD78880, "c"]
-      - [0xD788A0, "c"]
+      - [0xD78880, c]
+      - [0xD788A0, c]
       - [0xD78B50, "bin"]
       - [0xD78BF0, "bin"]
       - [0xD796B0, "bin"]
@@ -6364,7 +6366,7 @@ segments:
     start: 0xD799F0
     vram: 0x80240000
     files:
-      - [0xD799F0, "c"]
+      - [0xD799F0, c]
       - [0xD7AC00, "bin"]
       - [0xD7AC90, "bin"]
       - [0xD7B080, "bin"]
@@ -6376,7 +6378,7 @@ segments:
     start: 0xD7B2A0
     vram: 0x80240000
     files:
-      - [0xD7B2A0, "c"]
+      - [0xD7B2A0, c]
       - [0xD7C4B0, "bin"]
       - [0xD7C540, "bin"]
       - [0xD7C930, "bin"]
@@ -6388,8 +6390,8 @@ segments:
     start: 0xD7CB50
     vram: 0x80240000
     files:
-      - [0xD7CB50, "c"]
-      - [0xD7CB70, "c"]
+      - [0xD7CB50, c]
+      - [0xD7CB70, c]
       - [0xD7DDD0, "bin"]
       - [0xD7DE90, "bin"]
       - [0xD7E9B0, "bin"]
@@ -6400,9 +6402,9 @@ segments:
     start: 0xD7ED60
     vram: 0x80240000
     files:
-      - [0xD7ED60, "c"]
-      - [0xD7ED80, "c"]
-      - [0xD7F270, "c"]
+      - [0xD7ED60, c]
+      - [0xD7ED80, c]
+      - [0xD7F270, c]
       - [0xD7FE10, "bin"]
       - [0xD7FEC0, "bin"]
       - [0xD80E20, "bin"]
@@ -6415,8 +6417,8 @@ segments:
     start: 0xD86A00
     vram: 0x80240000
     files:
-      - [0xD86A00, "c"]
-      - [0xD86A20, "c"]
+      - [0xD86A00, c]
+      - [0xD86A20, c]
       - [0xD87240, "bin"]
       - [0xD87DF0, "bin"]
       - [0xD896B0, "bin"] # rodata
@@ -6427,8 +6429,8 @@ segments:
     start: 0xD896E0
     vram: 0x80240000
     files:
-      - [0xD896E0, "c"]
-      - [0xD89700, "c"]
+      - [0xD896E0, c]
+      - [0xD89700, c]
       - [0xD8A770, "bin"]
       - [0xD8A820, "bin"]
       - [0xD8B060, "bin"]
@@ -6439,8 +6441,8 @@ segments:
     start: 0xD8B3B0
     vram: 0x80240000
     files:
-      - [0xD8B3B0, "c"]
-      - [0xD8B3D0, "c"]
+      - [0xD8B3B0, c]
+      - [0xD8B3D0, c]
       - [0xD8C3B0, "bin"]
       - [0xD8C470, "bin"]
       - [0xD8D130, "bin"]
@@ -6451,9 +6453,9 @@ segments:
     start: 0xD8D250
     vram: 0x80240000
     files:
-      - [0xD8D250, "c"]
-      - [0xD8D270, "c"]
-      - [0xD8FBA0, "c"]
+      - [0xD8D250, c]
+      - [0xD8D270, c]
+      - [0xD8FBA0, c]
       - [0xD8FE60, "bin"]
       - [0xD8FF10, "bin"]
       - [0xD90700, "bin"]
@@ -6466,7 +6468,7 @@ segments:
     start: 0xD91700
     vram: 0x80240000
     files:
-      - [0xD91700, "c"]
+      - [0xD91700, c]
       - [0xD92650, "bin"]
       - [0xD926F0, "bin"]
       - [0xD92F10, "bin"] # rodata
@@ -6477,7 +6479,7 @@ segments:
     start: 0xD92F40
     vram: 0x80240000
     files:
-      - [0xD92F40, "c"]
+      - [0xD92F40, c]
       - [0xD94760, "bin"]
       - [0xD94800, "bin"]
       - [0xD95420, "bin"] # rodata
@@ -6489,7 +6491,7 @@ segments:
     start: 0xD955F0
     vram: 0x80240000
     files:
-      - [0xD955F0, "c"]
+      - [0xD955F0, c]
       - [0xD96CD0, "bin"]
       - [0xD96D70, "bin"]
       - [0xD97810, "bin"] # rodata
@@ -6500,7 +6502,7 @@ segments:
     start: 0xD97890
     vram: 0x80240000
     files:
-      - [0xD97890, "c"]
+      - [0xD97890, c]
       - [0xD98F70, "bin"]
       - [0xD99010, "bin"]
       - [0xD99930, "bin"] # rodata
@@ -6511,8 +6513,8 @@ segments:
     start: 0xD999B0
     vram: 0x80240000
     files:
-      - [0xD999B0, "c"]
-      - [0xD999D0, "c"]
+      - [0xD999B0, c]
+      - [0xD999D0, c]
       - [0xD9A8D0, "bin"]
       - [0xD9A970, "bin"]
       - [0xD9AE80, "bin"]
@@ -6523,8 +6525,8 @@ segments:
     start: 0xD9AEF0
     vram: 0x80240000
     files:
-      - [0xD9AEF0, "c"]
-      - [0xD9B150, "c"]
+      - [0xD9AEF0, c]
+      - [0xD9B150, c]
       - [0xD9BB20, "bin"]
       - [0xD9BBA0, "bin"]
       - [0xD9BD50, "bin"]
@@ -6538,8 +6540,8 @@ segments:
     start: 0xD9D4D0
     vram: 0x80240000
     files:
-      - [0xD9D4D0, "c"]
-      - [0xD9D510, "c"]
+      - [0xD9D4D0, c]
+      - [0xD9D510, c]
       - [0xDA0080, "bin"]
       - [0xDA0110, "bin"]
       - [0xDA0300, "bin"]
@@ -6553,8 +6555,8 @@ segments:
     start: 0xDA5240
     vram: 0x80240000
     files:
-      - [0xDA5240, "c"]
-      - [0xDA5260, "c"]
+      - [0xDA5240, c]
+      - [0xDA5260, c]
       - [0xDA5AD0, "bin"]
       - [0xDA6050, "bin"]
       - [0xDA8190, "bin"]
@@ -6565,8 +6567,8 @@ segments:
     start: 0xDAD400
     vram: 0x80240000
     files:
-      - [0xDAD400, "c"]
-      - [0xDAF240, "c"]
+      - [0xDAD400, c]
+      - [0xDAF240, c]
       - [0xDAF320, "bin"]
       - [0xDAF3E0, "bin"]
       - [0xDB20A0, "bin"] # rodata
@@ -6580,7 +6582,7 @@ segments:
     start: 0xDB22C0
     vram: 0x80240000
     files:
-      - [0xDB22C0, "c"]
+      - [0xDB22C0, c]
       - [0xDB46C0, "bin"]
       - [0xDB4770, "bin"]
       - [0xDB7410, "bin"]
@@ -6593,8 +6595,8 @@ segments:
     start: 0xDB7910
     vram: 0x80240000
     files:
-      - [0xDB7910, "c"]
-      - [0xDB8180, "c"]
+      - [0xDB7910, c]
+      - [0xDB8180, c]
       - [0xDB8440, "bin"]
       - [0xDB88E0, "bin"]
       - [0xDB9060, "bin"]
@@ -6607,9 +6609,9 @@ segments:
     start: 0xDBD2B0
     vram: 0x80240000
     files:
-      - [0xDBD2B0, "c"]
-      - [0xDC01D0, "c"]
-      - [0xDC04D0, "c"]
+      - [0xDBD2B0, c]
+      - [0xDC01D0, c]
+      - [0xDC04D0, c]
       - [0xDC05B0, "bin"]
       - [0xDC0670, "bin"]
       - [0xDC0910, "bin"]
@@ -6626,8 +6628,8 @@ segments:
     start: 0xDC43D0
     vram: 0x80240000
     files:
-      - [0xDC43D0, "c"]
-      - [0xDC4C40, "c"]
+      - [0xDC43D0, c]
+      - [0xDC4C40, c]
       - [0xDC51B0, "bin"]
       - [0xDC52F0, "bin"]
       - [0xDC8100, "bin"]
@@ -6639,12 +6641,12 @@ segments:
     start: 0xDCCCD0
     vram: 0x80240000
     files:
-      - [0xDCCCD0, "c"]
-      - [0xDCCFA0, "c"]
-      - [0xDCD3B0, "c"]
-      - [0xDCD3F0, "c"]
-      - [0xDCD6B0, "c"]
-      - [0xDD02E0, "c"]
+      - [0xDCCCD0, c]
+      - [0xDCCFA0, c]
+      - [0xDCD3B0, c]
+      - [0xDCD3F0, c]
+      - [0xDCD6B0, c]
+      - [0xDD02E0, c]
       - [0xDD03C0, "bin"]
       - [0xDD0480, "bin"]
       - [0xDD0750, "bin"]
@@ -6662,7 +6664,7 @@ segments:
     start: 0xDD79B0
     vram: 0x80240000
     files:
-      - [0xDD79B0, "c"]
+      - [0xDD79B0, c]
       - [0xDD8220, "bin"]
       - [0xDD8640, "bin"]
       - [0xDD8A60, "bin"]
@@ -6675,8 +6677,8 @@ segments:
     start: 0xDDC830
     vram: 0x80240000
     files:
-      - [0xDDC830, "c"]
-      - [0xDDCFC0, "c"]
+      - [0xDDC830, c]
+      - [0xDDCFC0, c]
       - [0xDDDD00, "bin"]
       - [0xDDDD90, "bin"]
       - [0xDDEE80, "bin"]
@@ -6687,8 +6689,8 @@ segments:
     start: 0xDDF310
     vram: 0x80240000
     files:
-      - [0xDDF310, "c"]
-      - [0xDDF730, "c"]
+      - [0xDDF310, c]
+      - [0xDDF730, c]
       - [0xDDF7D0, "bin"]
       - [0xDDF960, "bin"]
       - [0xDDFB60, "bin"]
@@ -6699,9 +6701,9 @@ segments:
     start: 0xDE2490
     vram: 0x80240000
     files:
-      - [0xDE2490, "c"]
-      - [0xDE2710, "c"]
-      - [0xDE36C0, "c"]
+      - [0xDE2490, c]
+      - [0xDE2710, c]
+      - [0xDE36C0, c]
       - [0xDE3980, "bin"]
       - [0xDE3A10, "bin"]
       - [0xDE3F70, "bin"]
@@ -6713,8 +6715,8 @@ segments:
     start: 0xDE56B0
     vram: 0x80240000
     files:
-      - [0xDE56B0, "c"]
-      - [0xDE5810, "c"]
+      - [0xDE56B0, c]
+      - [0xDE5810, c]
       - [0xDE5C70, "bin"]
       - [0xDE5D00, "bin"]
       - [0xDE5FA0, "bin"]
@@ -6725,7 +6727,7 @@ segments:
     start: 0xDE8770
     vram: 0x80240000
     files:
-      - [0xDE8770, "c"]
+      - [0xDE8770, c]
       - [0xDE8F70, "bin"]
       - [0xDE9670, "bin"]
       - [0xDEBEA0, "bin"] # rodata
@@ -6736,7 +6738,7 @@ segments:
     start: 0xDEBED0
     vram: 0x80240000
     files:
-      - [0xDEBED0, "c"]
+      - [0xDEBED0, c]
       - [0xDEC4D0, "bin"]
       - [0xDEC600, "bin"]
       - [0xDEEC30, "bin"]
@@ -6747,8 +6749,8 @@ segments:
     start: 0xDEEEA0
     vram: 0x80240000
     files:
-      - [0xDEEEA0, "c"]
-      - [0xDEF400, "c"]
+      - [0xDEEEA0, c]
+      - [0xDEF400, c]
       - [0xDF25B0, "bin"]
       - [0xDF29A0, "bin"]
       - [0xDF2C90, "bin"]
@@ -6764,10 +6766,10 @@ segments:
     start: 0xDF6A00
     vram: 0x80240000
     files:
-      - [0xDF6A00, "c"]
-      - [0xDF6A20, "c"]
-      - [0xDF9300, "c"]
-      - [0xDF9510, "c"]
+      - [0xDF6A00, c]
+      - [0xDF6A20, c]
+      - [0xDF9300, c]
+      - [0xDF9510, c]
       - [0xDF9540, "bin"]
       - [0xDFB0B0, "bin"]
       - [0xDFE5B0, "bin"]
@@ -6781,11 +6783,11 @@ segments:
     start: 0xE05360
     vram: 0x80240000
     files:
-      - [0xE05360, "c"]
-      - [0xE05370, "c"]
-      - [0xE05390, "c"]
-      - [0xE07C20, "c"]
-      - [0xE08050, "c"]
+      - [0xE05360, c]
+      - [0xE05370, c]
+      - [0xE05390, c]
+      - [0xE07C20, c]
+      - [0xE08050, c]
       - [0xE08350, "bin"]
       - [0xE08470, "bin"]
       - [0xE0B5F0, "bin"]
@@ -6799,8 +6801,8 @@ segments:
     start: 0xE0E7A0
     vram: 0x80240000
     files:
-      - [0xE0E7A0, "c"]
-      - [0xE0F980, "c"]
+      - [0xE0E7A0, c]
+      - [0xE0F980, c]
       - [0xE0FF60, "bin"]
       - [0xE111A0, "bin"]
       - [0xE123E0, "bin"]
@@ -6813,8 +6815,8 @@ segments:
     start: 0xE12760
     vram: 0x80240000
     files:
-      - [0xE12760, "c"]
-      - [0xE12930, "c"]
+      - [0xE12760, c]
+      - [0xE12930, c]
       - [0xE13F10, "bin"]
       - [0xE141D0, "bin"]
       - [0xE15440, "bin"]
@@ -6826,8 +6828,8 @@ segments:
     start: 0xE15D80
     vram: 0x80240000
     files:
-      - [0xE15D80, "c"]
-      - [0xE18150, "c"]
+      - [0xE15D80, c]
+      - [0xE18150, c]
       - [0xE18180, "bin"]
       - [0xE183D0, "bin"]
       - [0xE1E020, "bin"]
@@ -6847,7 +6849,7 @@ segments:
     start: 0xE1E460
     vram: 0x80240000
     files:
-      - [0xE1E460, "c"]
+      - [0xE1E460, c]
       - [0xE1EC20, "bin"]
   - [0xE20110, "bin"]
   - type: code
@@ -6855,14 +6857,14 @@ segments:
     start: 0xE20EB0
     vram: 0x802B7000
     files:
-    - [0xe20eb0, "c", "code_e20eb0"]
+    - [0xe20eb0, c, "code_e20eb0"]
     - [0xE215C0, "bin"]
   - type: code
     overlay: True
     start: 0xE21870
     vram: 0x802B7000
     files:
-    - [0xE21870, "c"]
+    - [0xE21870, c]
     - [0xE21EB0, "bin"]
   - [0xE225B0, "bin"]
   - [0xF007C0, "bin", "Battle_Fanfare_02"] # BGM start

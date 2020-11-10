@@ -713,7 +713,10 @@ typedef struct AnimatedMesh {
     /* 0x098 */ struct Matrix4s mtx;
     /* 0x0D8 */ char unk_D8[500];
     /* 0x2CC */ s32 time;
-    /* 0x2D0 */ char unk_2D0[16];
+    /* 0x2D0 */ char unk_2D0[4];
+    /* 0x2D4 */ s32 unk_2D4;
+    /* 0x2D8 */ s32 unk_2D8;
+    /* 0x2DC */ char unk_2DC[4];
 } AnimatedMesh; // size = 0x2E0
 
 typedef AnimatedMesh* AnimatedMeshList[MAX_ANIMATED_MESHES];
