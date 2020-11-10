@@ -14,6 +14,46 @@ INCLUDE_ASM(s32, "code_135EE0", func_80242BAC);
 INCLUDE_ASM(s32, "code_135EE0", func_80242D04);
 
 INCLUDE_ASM(s32, "code_135EE0", pause_interp_cursor);
+// void pause_interp_cursor(void) {
+//     s32 targetPosX;
+//     s32 posX;
+//     s32 targetPosY;
+//     s32 posY;
+//     s32 xDelta;
+//     s32 yDelta;
+//     s32 temp_v0;
+//     s32 temp_v0_2;
+
+//     targetPosX = gPauseMenuTargetPos[0];
+//     posX = gPauseMenuCursorPos[0];
+//     targetPosY = gPauseMenuTargetPos[1];
+//     posY = gPauseMenuCursorPos[1];
+//     xDelta = (targetPosX - posX) * 0.5;
+//     yDelta = (targetPosY - posY) * 0.5;
+
+//     if ((targetPosX != posX) || (targetPosY != posY)) {
+//         if ((xDelta == 0) && (yDelta == 0)) {
+//             gPauseMenuCursorPos[0] = targetPosX;
+//             gPauseMenuCursorPos[1] = targetPosY;
+//         }
+//     }
+
+//     gPauseMenuCursorPos[0] += xDelta;
+//     gPauseMenuCursorPos[1] += yDelta;
+
+//     if (gPauseMenuCursorTargetOpacity == 0) {
+//         gPauseMenuCursorOpacity -= 128;
+//         if (gPauseMenuCursorOpacity < 0) {
+//             gPauseMenuCursorOpacity = 0;
+//         }
+//     } else {
+//         gPauseMenuCursorOpacity += 32;
+//         if (gPauseMenuCursorOpacity > 255) {
+//             gPauseMenuCursorOpacity = 255;
+//         }
+//     }
+//     gPauseMenuCursorTargetOpacity = 255;
+// }
 
 INCLUDE_ASM(s32, "code_135EE0", func_80242F90);
 
@@ -67,6 +107,20 @@ INCLUDE_ASM(s32, "code_135EE0", pause_interp_vertical_scroll);
 #endif
 
 INCLUDE_ASM(s32, "code_135EE0", pause_update_cursor);
+/*void pause_update_cursor(s32 arg0, s32 offsetX, s32 offsetY) {
+    s32 opacity;
+
+    pause_interp_cursor();
+    opacity = gPauseMenuCursorOpacity;
+    if (opacity > 0) {
+        if (opacity > 255) {
+            opacity = 255;
+        }
+        icon_set_opacity(gPauseMenuCommonIconIDs[0], opacity);
+        set_icon_render_pos(gPauseMenuCommonIconIDs[0], offsetX + gPauseMenuCursorPos[0], offsetY + gPauseMenuCursorPos[1]);
+        draw_icon_2(gPauseMenuCommonIconIDs[0]);
+    }
+}*/
 
 void func_80243568(void) {
 }
