@@ -6,6 +6,7 @@ options:
   mnemonic_ljust: 10
   ld_o_replace_extension: False
   ld_addrs_header: include/ld_addrs.h
+  extensions: splat_ext
 segments:
   - name: header
     type: header
