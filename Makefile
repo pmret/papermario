@@ -35,7 +35,8 @@ LD_SCRIPT := $(TARGET).ld
 LD_MAP := $(BUILD_DIR)/$(TARGET).map
 ASSETS_BIN := $(BUILD_DIR)/bin/assets/assets.bin
 MSG_BIN := $(BUILD_DIR)/msg.bin
-GENERATED_HEADERS := include/ld_addrs.h
+NPC_BIN := $(BUILD_DIR)/sprite/npc.bin
+GENERATED_HEADERS := include/ld_addrs.h include/npc_animations.h
 
 ### Tools ###
 
@@ -99,14 +100,14 @@ submodules:
 	git submodule update --init --recursive
 
 split:
-	rm -rf bin img
-	$(SPLAT) --modes bin Yay0 PaperMarioMapFS PaperMarioMessages img
+	rm -rf bin msg img sprite
+	$(SPLAT) --modes ld bin Yay0 PaperMarioMapFS PaperMarioMessages img PaperMarioNpcSprites
 
 split-%:
-	$(SPLAT) --modes $* --verbose
+	$(SPLAT) --modes ld $* --verbose
 
 split-all:
-	rm -rf bin img
+	rm -rf bin msg img sprite
 	$(SPLAT) --modes all
 
 test: $(ROM)
@@ -198,11 +199,24 @@ $(MSG_BIN): $(MESSAGES)
 	@echo "building $@"
 	@$(PYTHON) tools/compile_messages.py $@ /dev/null $(MESSAGES)
 $(MSG_BIN:.bin=.o): $(MSG_BIN)
-	@mkdir -p $(shell dirname $@)
 	$(LD) -r -b binary -o $@ $<
 
-$(LD_SCRIPT): $(SPLAT_YAML)
+# Sprites
+$(foreach npc, $(NPC_SPRITES), $(eval sprite/npc/$(npc): $(shell find sprite/npc/$(npc) -type f))) # dependencies
+NPC_DIRS := $(foreach npc, $(NPC_SPRITES), $(BUILD_DIR)/sprite/npc/$(npc))
+$(BUILD_DIR)/sprite/npc/%: sprite/npc/%
 	@mkdir -p $(shell dirname $@)
+	$(PYTHON) tools/compile_npc_sprite.py $@ $<
+$(NPC_BIN): $(foreach dir, $(NPC_DIRS), $(dir).Yay0) tools/compile_npc_sprites.py
+	@mkdir -p $(shell dirname $@)
+	@echo "building $@"
+	@$(PYTHON) tools/compile_npc_sprites.py $@ $(foreach dir, $(NPC_DIRS), $(dir).Yay0)
+$(NPC_BIN:.bin=.o): $(NPC_BIN)
+	$(LD) -r -b binary -o $@ $<
+include/npc_animations.h: $(NPC_DIRS)
+	@echo "TODO"
+
+$(LD_SCRIPT): $(SPLAT_YAML)
 	$(SPLAT) --modes ld
 
 $(BUILD_DIR)/$(LD_SCRIPT): $(LD_SCRIPT)

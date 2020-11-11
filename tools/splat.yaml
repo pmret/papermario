@@ -7022,241 +7022,277 @@ segments:
   - [0x19E5758, "Yay0"]
   - [0x19E5950, "Yay0"]
   - [0x19E62A0, "Yay0"]
-  - [0x19E67B2, "bin"]
-  - [0x19E6B60, "Yay0"]
-  - [0x19E7528, "Yay0"]
-  - [0x19E9778, "Yay0"]
-  - [0x19EAF38, "Yay0"]
-  - [0x19EC4E0, "Yay0"]
-  - [0x19EDD30, "Yay0"]
-  - [0x19EEB18, "Yay0"]
-  - [0x19F0070, "Yay0"]
-  - [0x19F15A0, "Yay0"]
-  - [0x19F26D8, "Yay0"]
-  - [0x19F5390, "Yay0"]
-  - [0x19F7398, "Yay0"]
-  - [0x19FA128, "Yay0"]
-  - [0x19FCAE8, "Yay0"]
-  - [0x19FED70, "Yay0"]
-  - [0x1A00958, "Yay0"]
-  - [0x1A02D00, "Yay0"]
-  - [0x1A04400, "Yay0"]
-  - [0x1A05550, "Yay0"]
-  - [0x1A06390, "Yay0"]
-  - [0x1A06F98, "Yay0"]
-  - [0x1A07B68, "Yay0"]
-  - [0x1A0A0A0, "Yay0"]
-  - [0x1A0ACC8, "Yay0"]
-  - [0x1A0B780, "Yay0"]
-  - [0x1A0BBE0, "Yay0"]
-  - [0x1A0C000, "Yay0"]
-  - [0x1A0C438, "Yay0"]
-  - [0x1A0C860, "Yay0"]
-  - [0x1A0D1E8, "Yay0"]
-  - [0x1A0D5B0, "Yay0"]
-  - [0x1A0D970, "Yay0"]
-  - [0x1A0EF00, "Yay0"]
-  - [0x1A13920, "Yay0"]
-  - [0x1A15850, "Yay0"]
-  - [0x1A183F8, "Yay0"]
-  - [0x1A1A608, "Yay0"]
-  - [0x1A1C5E8, "Yay0"]
-  - [0x1A1D6D0, "Yay0"]
-  - [0x1A1E478, "Yay0"]
-  - [0x1A1F370, "Yay0"]
-  - [0x1A226B0, "Yay0"]
-  - [0x1A249B8, "Yay0"]
-  - [0x1A25E78, "Yay0"]
-  - [0x1A27FF0, "Yay0"]
-  - [0x1A28BE0, "Yay0"]
-  - [0x1A29680, "Yay0"]
-  - [0x1A2BC68, "Yay0"]
-  - [0x1A2E120, "Yay0"]
-  - [0x1A2F3F8, "Yay0"]
-  - [0x1A31D18, "Yay0"]
-  - [0x1A33AB0, "Yay0"]
-  - [0x1A35BB8, "Yay0"]
-  - [0x1A369A8, "Yay0"]
-  - [0x1A39600, "Yay0"]
-  - [0x1A3B018, "Yay0"]
-  - [0x1A3C310, "Yay0"]
-  - [0x1A3FCC8, "Yay0"]
-  - [0x1A423D8, "Yay0"]
-  - [0x1A449C0, "Yay0"]
-  - [0x1A46568, "Yay0"]
-  - [0x1A49340, "Yay0"]
-  - [0x1A4AC88, "Yay0"]
-  - [0x1A4D7E8, "Yay0"]
-  - [0x1A4E028, "Yay0"]
-  - [0x1A4FA60, "Yay0"]
-  - [0x1A531D0, "Yay0"]
-  - [0x1A53D48, "Yay0"]
-  - [0x1A56C80, "Yay0"]
-  - [0x1A58F58, "Yay0"]
-  - [0x1A5A5A8, "Yay0"]
-  - [0x1A62B40, "Yay0"]
-  - [0x1A641F8, "Yay0"]
-  - [0x1A666F0, "Yay0"]
-  - [0x1A68870, "Yay0"]
-  - [0x1A6C630, "Yay0"]
-  - [0x1A6D5A0, "Yay0"]
-  - [0x1A6EF50, "Yay0"]
-  - [0x1A70FF0, "Yay0"]
-  - [0x1A74FC0, "Yay0"]
-  - [0x1A78A40, "Yay0"]
-  - [0x1A79900, "Yay0"]
-  - [0x1A7D798, "Yay0"]
-  - [0x1A7EEA0, "Yay0"]
-  - [0x1A7EFD8, "Yay0"]
-  - [0x1A83450, "Yay0"]
-  - [0x1A85668, "Yay0"]
-  - [0x1A87958, "Yay0"]
-  - [0x1A8BF98, "Yay0"]
-  - [0x1A8FE28, "Yay0"]
-  - [0x1A93EA0, "Yay0"]
-  - [0x1A94188, "Yay0"]
-  - [0x1A94480, "Yay0"]
-  - [0x1A946A8, "Yay0"]
-  - [0x1A94A00, "Yay0"]
-  - [0x1A94C58, "Yay0"]
-  - [0x1A98D98, "Yay0"]
-  - [0x1A9BA80, "Yay0"]
-  - [0x1A9DB68, "Yay0"]
-  - [0x1AA0048, "Yay0"]
-  - [0x1AA0698, "Yay0"]
-  - [0x1AA1008, "Yay0"]
-  - [0x1AA6D58, "Yay0"]
-  - [0x1AAD600, "Yay0"]
-  - [0x1AB1BF0, "Yay0"]
-  - [0x1AB2368, "Yay0"]
-  - [0x1ABA290, "Yay0"]
-  - [0x1AC14A8, "Yay0"]
-  - [0x1AC3910, "Yay0"]
-  - [0x1ACBC98, "Yay0"]
-  - [0x1ACE058, "Yay0"]
-  - [0x1ACF910, "Yay0"]
-  - [0x1AD06D8, "Yay0"]
-  - [0x1AD0B98, "Yay0"]
-  - [0x1AD1E90, "Yay0"]
-  - [0x1AD2348, "Yay0"]
-  - [0x1AD27F8, "Yay0"]
-  - [0x1AD28A8, "Yay0"]
-  - [0x1AD44F0, "Yay0"]
-  - [0x1AD4758, "Yay0"]
-  - [0x1AD57C0, "Yay0"]
-  - [0x1AD9D50, "Yay0"]
-  - [0x1ADA498, "Yay0"]
-  - [0x1ADCFC0, "Yay0"]
-  - [0x1AE2168, "Yay0"]
-  - [0x1AE2EA0, "Yay0"]
-  - [0x1AE6A58, "Yay0"]
-  - [0x1AEB778, "Yay0"]
-  - [0x1AF4958, "Yay0"]
-  - [0x1AFCB18, "Yay0"]
-  - [0x1AFF748, "Yay0"]
-  - [0x1B00640, "Yay0"]
-  - [0x1B01390, "Yay0"]
-  - [0x1B01C08, "Yay0"]
-  - [0x1B02128, "Yay0"]
-  - [0x1B02970, "Yay0"]
-  - [0x1B03118, "Yay0"]
-  - [0x1B03C18, "Yay0"]
-  - [0x1B045E8, "Yay0"]
-  - [0x1B04FC0, "Yay0"]
-  - [0x1B05998, "Yay0"]
-  - [0x1B06C88, "Yay0"]
-  - [0x1B07C48, "Yay0"]
-  - [0x1B09440, "Yay0"]
-  - [0x1B0B290, "Yay0"]
-  - [0x1B0B9A0, "Yay0"]
-  - [0x1B0C548, "Yay0"]
-  - [0x1B0CAC0, "Yay0"]
-  - [0x1B0D130, "Yay0"]
-  - [0x1B0EB80, "Yay0"]
-  - [0x1B10CC0, "Yay0"]
-  - [0x1B129A0, "Yay0"]
-  - [0x1B13548, "Yay0"]
-  - [0x1B16420, "Yay0"]
-  - [0x1B17128, "Yay0"]
-  - [0x1B17840, "Yay0"]
-  - [0x1B19318, "Yay0"]
-  - [0x1B1A030, "Yay0"]
-  - [0x1B1B8C8, "Yay0"]
-  - [0x1B1BC88, "Yay0"]
-  - [0x1B1C7A0, "Yay0"]
-  - [0x1B1CD28, "Yay0"]
-  - [0x1B21C48, "Yay0"]
-  - [0x1B23290, "Yay0"]
-  - [0x1B253E0, "Yay0"]
-  - [0x1B26660, "Yay0"]
-  - [0x1B283F8, "Yay0"]
-  - [0x1B29C60, "Yay0"]
-  - [0x1B2A688, "Yay0"]
-  - [0x1B2B3E8, "Yay0"]
-  - [0x1B2C8D8, "Yay0"]
-  - [0x1B2D7B0, "Yay0"]
-  - [0x1B2E328, "Yay0"]
-  - [0x1B2ED60, "Yay0"]
-  - [0x1B2FA18, "Yay0"]
-  - [0x1B31A18, "Yay0"]
-  - [0x1B33000, "Yay0"]
-  - [0x1B34098, "Yay0"]
-  - [0x1B34928, "Yay0"]
-  - [0x1B34C00, "Yay0"]
-  - [0x1B35480, "Yay0"]
-  - [0x1B36440, "Yay0"]
-  - [0x1B38748, "Yay0"]
-  - [0x1B39A98, "Yay0"]
-  - [0x1B3A2E8, "Yay0"]
-  - [0x1B3A818, "Yay0"]
-  - [0x1B3C488, "Yay0"]
-  - [0x1B3CAC8, "Yay0"]
-  - [0x1B3D0A0, "Yay0"]
-  - [0x1B3D920, "Yay0"]
-  - [0x1B3F060, "Yay0"]
-  - [0x1B40048, "Yay0"]
-  - [0x1B40720, "Yay0"]
-  - [0x1B49570, "Yay0"]
-  - [0x1B4C3E8, "Yay0"]
-  - [0x1B4DEA0, "Yay0"]
-  - [0x1B4FD98, "Yay0"]
-  - [0x1B50CD8, "Yay0"]
-  - [0x1B51B08, "Yay0"]
-  - [0x1B54258, "Yay0"]
-  - [0x1B580A0, "Yay0"]
-  - [0x1B5A248, "Yay0"]
-  - [0x1B5BB88, "Yay0"]
-  - [0x1B5CC90, "Yay0"]
-  - [0x1B5E968, "Yay0"]
-  - [0x1B5ED88, "Yay0"]
-  - [0x1B608C0, "Yay0"]
-  - [0x1B625F8, "Yay0"]
-  - [0x1B633D0, "Yay0"]
-  - [0x1B64878, "Yay0"]
-  - [0x1B657E0, "Yay0"]
-  - [0x1B65A08, "Yay0"]
-  - [0x1B65E50, "Yay0"]
-  - [0x1B66238, "Yay0"]
-  - [0x1B69580, "Yay0"]
-  - [0x1B6C318, "Yay0"]
-  - [0x1B6DD98, "Yay0"]
-  - [0x1B6F150, "Yay0"]
-  - [0x1B71618, "Yay0"]
-  - [0x1B72890, "Yay0"]
-  - [0x1B73B08, "Yay0"]
-  - [0x1B747B8, "Yay0"]
-  - [0x1B76E30, "Yay0"]
-  - [0x1B78EC0, "Yay0"]
-  - [0x1B79A20, "Yay0"]
-  - [0x1B79F08, "Yay0"]
-  - [0x1B7AA08, "Yay0"]
-  - [0x1B7B008, "Yay0"]
-  - [0x1B7BB50, "Yay0"]
-  - [0x1B7EC68, "Yay0"]
-  - [0x1B7FF48, "Yay0"]
-  - [0x1B81E88, "Yay0"]
-  - [0x1B82058, "Yay0"]
-  - [0x1B82202, "bin"]
+  - start: 0x19E67B8
+    type: PaperMarioNpcSprites
+    files:
+      - name: world_goombario
+        frames:
+          - walk1
+          - still
+          - walk2
+          - pain
+          - headbonk
+          - still_copy1
+          - still_copy2
+          - jump
+          - talk1
+          - talk2
+          - jump_copy
+          - fall
+          - happy1
+          - happy2
+          - read_paper
+        palettes:
+          - default
+          - poisoned
+          - inactive
+          - electrified
+          - burnt
+        animations:
+          - still
+          - idle
+          - walk
+          - run
+          - jump
+          - fall
+          - headbonk # centered at 0,0,0 rather than at base of sprite
+          - pain
+          - talk
+          - celebrate
+          - read_paper
+      - world_kooper
+      - world_bombette
+      - world_parakarry
+      - world_bow
+      - world_watt
+      - world_sushi
+      - world_lakilester
+      - battle_goombario
+      - battle_kooper
+      - battle_bombette
+      - battle_parakarry
+      - battle_bow
+      - battle_watt
+      - battle_sushi
+      - battle_lakilester
+      - kooper_without_shell
+      - world_eldstar
+      - world_mamar
+      - world_skolar
+      - world_muskular
+      - world_misstar
+      - world_klevar
+      - world_kalmar
+      - battle_eldstar
+      - battle_mamar
+      - battle_skolar
+      - battle_muskular
+      - battle_misstar
+      - battle_klevar
+      - battle_kalmar
+      - twink
+      - jr_troopa
+      - spiked_jr_troopa
+      - spiked_para_jr_troopa
+      - mage_jr_troopa
+      - para_jr_troopa
+      - goomba
+      - spiked_goomba
+      - paragoomba
+      - koopa_troopa
+      - para_troopa
+      - fuzzy
+      - bob_omb
+      - bullet_bill
+      - bill_blaster
+      - monty_mole
+      - cleft
+      - pokey
+      - battle_bandit
+      - buzzy_beetle
+      - swooper
+      - stone_chomp
+      - putrid_piranha
+      - piranha_plant
+      - sentinel
+      - world_clubba
+      - battle_clubba
+      - shy_guy
+      - groove_guy
+      - sky_guy
+      - pyro_guy
+      - spy_guy
+      - medi_guy
+      - fuzzipede
+      - jungle_guy
+      - heart_plant
+      - hurt_plant
+      - m_bush
+      - bubble
+      - kent_c_koopa
+      - dayzee
+      - lakitu
+      - spiny
+      - bzzap
+      - ruff_puff
+      - spike_top
+      - duplighost
+      - albino_dino
+      - blooper
+      - baby_blooper
+      - gulpit
+      - dry_bones
+      - thrown_bone
+      - bony_beetle
+      - magikoopa
+      - flying_magikoopa
+      - world_koopatrol
+      - koopatrol
+      - hammer_bros
+      - bush_basic
+      - bush_blocky
+      - bush_dry
+      - bush_leafy
+      - bush_matted
+      - world_kammy
+      - battle_kammy
+      - goomba_bros
+      - goomba_king
+      - spiky_goomnut
+      - dark_toad
+      - koopa_bros
+      - buzzar
+      - tutankoopa
+      - chain_chomp
+      - world_tubba
+      - battle_tubba
+      - tubbas_heart
+      - big_lantern_ghost
+      - shy_squad_guy
+      - marshal_guy
+      - stilt_guy
+      - stilt_guy_unfold
+      - shy_stack_guy
+      - shy_stack_unfold
+      - shy_stack_damage
+      - shy_stack_rock
+      - general_guy
+      - general_guy_bomb
+      - tank_guy
+      - lava_piranha_head
+      - petit_piranha
+      - lava_bud
+      - huff_n_puff
+      - tuff_puff
+      - monstar
+      - crystal_king
+      - world_bowser
+      - battle_bowser
+      - luigi
+      - toad
+      - three_sisters
+      - vanna_t
+      - toad_kid
+      - toad_guard
+      - harry_t
+      - toad_minister
+      - postmaster
+      - conductor_toad
+      - train_station_toad
+      - fishmael
+      - artist_toad
+      - koopa
+      - koopa_without_shell
+      - world_bob_omb
+      - whacka
+      - dryite
+      - mouser
+      - boo
+      - yoshi
+      - yoshi_kid
+      - raven
+      - bubulb
+      - penguin
+      - shiver_toad
+      - world_bandit
+      - goompapa
+      - goombaria
+      - goomama
+      - goompa
+      - goomma
+      - the_master
+      - chan
+      - lee
+      - merlon
+      - chet_rippo
+      - rowf
+      - minh_t
+      - russ_t
+      - tayce_t
+      - fice_t
+      - bartender
+      - chanterelle
+      - rip_cheato
+      - chuck_quizmo
+      - merluvlee
+      - merlar
+      - merlow
+      - star_kid
+      - kolorado_wife
+      - koopa_koot
+      - kolorado
+      - battle_kolorado
+      - archeologist
+      - nomadimouse
+      - world_merlee
+      - battle_merlee
+      - disguised_moustafa
+      - moustafa
+      - oaklie
+      - bootler
+      - yakkey
+      - gourmet_guy
+      - village_leader
+      - leaders_friend
+      - rafael_raven
+      - tolielup
+      - gate_flower
+      - petunia
+      - posie
+      - lily
+      - rosie
+      - sun
+      - lakilulu
+      - ninji
+      - mayor_penguin
+      - mayor_penguin_wife
+      - penguin_patrol
+      - herringway
+      - merle
+      - star_rod
+      - fire
+      - coin
+      - parade_peach
+      - parade_koopas
+      - parade_burnt_bowser
+      - parade_luigi
+      - parade_partners
+      - parade_yoshis
+      - parada_kolorados
+      - parade_chicks
+      - parade_ice_show
+      - parade_toads
+      - parade_batons
+      - parade_drums
+      - parade_flags
+      - parade_horns
+      - parade_tubba_balloon
+      - parade_wizards
+      - parade_mario
+      - parade_shy_guys
+      - parade_twink
+      - leaf
+  - [0x1B82208, bin]
   - start: 0x1B83000
     type: PaperMarioMessages
     files:
