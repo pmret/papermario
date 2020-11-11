@@ -23,8 +23,6 @@ if __name__ == "__main__":
             while f.tell() % 8 != 0:
                 f.write(bytes([0]))
 
-        print(f"{0x19E67B8 + f.tell():X}")
-
         offsets.append(f.tell())
 
         f.seek(0)

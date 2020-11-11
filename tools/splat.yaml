@@ -7043,7 +7043,7 @@ segments:
           - happy2
           - read_paper
         palettes:
-          - default
+          - normal
           - poisoned
           - inactive
           - electrified
@@ -7096,7 +7096,68 @@ segments:
       - spiked_para_jr_troopa
       - mage_jr_troopa
       - para_jr_troopa
-      - goomba
+      - name: goomba
+        frames:
+          - still
+          - lean_left
+          - lean_right
+          - pain1
+          - pain2
+          - jump
+          - open_mouth
+          - open_mouth_wide
+          - sleep
+          - dizzy1
+          - dizzy2
+          - dizzy3
+          - dizzy4
+          - burn_pain1
+          - burn_pain2
+          - burn_dead
+          - tense
+          - fake_plant
+          - fake_mushroom
+          - electrocute
+        palettes:
+          - normal
+          - red # unused
+          - hyper
+          - blue # unused
+          - gloomba
+          - poisoned
+          - poisoned
+          - poisoned
+          - poisoned
+          - poisoned
+          - unk_purple_status
+          - unk_purple_status
+          - unk_purple_status
+          - unk_purple_status
+          - unk_purple_status
+          - electrified
+          - electrified
+          - electrified
+          - electrified
+          - electrified
+          - burnt
+          - fake_mushroom
+          - fake_plant
+        animations:
+          - still
+          - idle
+          - walk
+          - run
+          - headbonk # centered at 0,0,0 rather than at base of sprite
+          - pain
+          - dead
+          - dizzy
+          - asleep
+          - burn_pain
+          - burn_dead
+          - pre_headbonk # centered at 0,0,0 rather than at base of sprite
+          - fake_plant
+          - fake_mushroom
+          - electrocute
       - spiked_goomba
       - paragoomba
       - koopa_troopa
