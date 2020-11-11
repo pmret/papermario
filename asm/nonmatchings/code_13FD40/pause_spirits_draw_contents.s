@@ -525,8 +525,8 @@ glabel pause_spirits_draw_contents
 /* 140538 8024D1F8 AFB80044 */  sw        $t8, 0x44($sp)
 /* 14053C 8024D1FC 0C03D4B8 */  jal       draw_box
 /* 140540 8024D200 AFA20048 */   sw       $v0, 0x48($sp)
-/* 140544 8024D204 3C038027 */  lui       $v1, 0x8027
-/* 140548 8024D208 806300D4 */  lb        $v1, 0xd4($v1)
+/* 140544 8024D204 3C038027 */  lui       $v1, %hi(gPauseMenuCurrentTab)
+/* 140548 8024D208 806300D4 */  lb        $v1, %lo(gPauseMenuCurrentTab)($v1)
 /* 14054C 8024D20C 24020005 */  addiu     $v0, $zero, 5
 /* 140550 8024D210 1462000E */  bne       $v1, $v0, .L8024D24C
 /* 140554 8024D214 24040027 */   addiu    $a0, $zero, 0x27

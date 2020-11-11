@@ -14,8 +14,8 @@ glabel pause_spirits_draw_title
 /* 1405F8 8024D2B8 0C039D59 */  jal       get_player_data
 /* 1405FC 8024D2BC 00E0882D */   daddu    $s1, $a3, $zero
 /* 140600 8024D2C0 0040202D */  daddu     $a0, $v0, $zero
-/* 140604 8024D2C4 3C038027 */  lui       $v1, 0x8027
-/* 140608 8024D2C8 806300D4 */  lb        $v1, 0xd4($v1)
+/* 140604 8024D2C4 3C038027 */  lui       $v1, %hi(gPauseMenuCurrentTab)
+/* 140608 8024D2C8 806300D4 */  lb        $v1, %lo(gPauseMenuCurrentTab)($v1)
 /* 14060C 8024D2CC 24020005 */  addiu     $v0, $zero, 5
 /* 140610 8024D2D0 1462001C */  bne       $v1, $v0, .L8024D344
 /* 140614 8024D2D4 00000000 */   nop      

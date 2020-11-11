@@ -5,8 +5,8 @@ glabel pause_stats_handle_input
 /* 139EB4 80246B74 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 139EB8 80246B78 AFB00010 */  sw        $s0, 0x10($sp)
 /* 139EBC 80246B7C 0080802D */  daddu     $s0, $a0, $zero
-/* 139EC0 80246B80 3C028027 */  lui       $v0, 0x8027
-/* 139EC4 80246B84 8C4200C0 */  lw        $v0, 0xc0($v0)
+/* 139EC0 80246B80 3C028027 */  lui       $v0, %hi(gPauseMenuHeldButtons)
+/* 139EC4 80246B84 8C4200C0 */  lw        $v0, %lo(gPauseMenuHeldButtons)($v0)
 /* 139EC8 80246B88 3C030004 */  lui       $v1, 4
 /* 139ECC 80246B8C AFBF0018 */  sw        $ra, 0x18($sp)
 /* 139ED0 80246B90 AFB10014 */  sw        $s1, 0x14($sp)
@@ -43,8 +43,8 @@ glabel pause_stats_handle_input
 /* 139F48 80246C08 1082FFE6 */  beq       $a0, $v0, .L80246BA4
 /* 139F4C 80246C0C 00000000 */   nop      
 .L80246C10:
-/* 139F50 80246C10 3C028027 */  lui       $v0, 0x8027
-/* 139F54 80246C14 8C4200C0 */  lw        $v0, 0xc0($v0)
+/* 139F50 80246C10 3C028027 */  lui       $v0, %hi(gPauseMenuHeldButtons)
+/* 139F54 80246C14 8C4200C0 */  lw        $v0, %lo(gPauseMenuHeldButtons)($v0)
 /* 139F58 80246C18 3C030008 */  lui       $v1, 8
 /* 139F5C 80246C1C 00431024 */  and       $v0, $v0, $v1
 /* 139F60 80246C20 1040001E */  beqz      $v0, .L80246C9C
@@ -80,8 +80,8 @@ glabel pause_stats_handle_input
 /* 139FD4 80246C94 1082FFE6 */  beq       $a0, $v0, .L80246C30
 /* 139FD8 80246C98 00000000 */   nop      
 .L80246C9C:
-/* 139FDC 80246C9C 3C028027 */  lui       $v0, 0x8027
-/* 139FE0 80246CA0 8C4200C0 */  lw        $v0, 0xc0($v0)
+/* 139FDC 80246C9C 3C028027 */  lui       $v0, %hi(gPauseMenuHeldButtons)
+/* 139FE0 80246CA0 8C4200C0 */  lw        $v0, %lo(gPauseMenuHeldButtons)($v0)
 /* 139FE4 80246CA4 3C030001 */  lui       $v1, 1
 /* 139FE8 80246CA8 00431024 */  and       $v0, $v0, $v1
 /* 139FEC 80246CAC 1040001D */  beqz      $v0, .L80246D24
@@ -116,8 +116,8 @@ glabel pause_stats_handle_input
 /* 13A05C 80246D1C 1082FFE5 */  beq       $a0, $v0, .L80246CB4
 /* 13A060 80246D20 00000000 */   nop      
 .L80246D24:
-/* 13A064 80246D24 3C028027 */  lui       $v0, 0x8027
-/* 13A068 80246D28 8C4200C0 */  lw        $v0, 0xc0($v0)
+/* 13A064 80246D24 3C028027 */  lui       $v0, %hi(gPauseMenuHeldButtons)
+/* 13A068 80246D28 8C4200C0 */  lw        $v0, %lo(gPauseMenuHeldButtons)($v0)
 /* 13A06C 80246D2C 3C030002 */  lui       $v1, 2
 /* 13A070 80246D30 00431024 */  and       $v0, $v0, $v1
 /* 13A074 80246D34 10400020 */  beqz      $v0, .L80246DB8
@@ -268,19 +268,19 @@ glabel pause_stats_handle_input
 /* 13A280 80246F40 8C84F3B8 */  lw        $a0, -0xc48($a0)
 /* 13A284 80246F44 0C093BA0 */  jal       pause_get_menu_string
 /* 13A288 80246F48 00912021 */   addu     $a0, $a0, $s1
-/* 13A28C 80246F4C 3C038027 */  lui       $v1, 0x8027
-/* 13A290 80246F50 8C6300C4 */  lw        $v1, 0xc4($v1)
-/* 13A294 80246F54 3C018027 */  lui       $at, 0x8027
-/* 13A298 80246F58 AC2200C8 */  sw        $v0, 0xc8($at)
-/* 13A29C 80246F5C 3C018027 */  lui       $at, 0x8027
-/* 13A2A0 80246F60 AC2000CC */  sw        $zero, 0xcc($at)
+/* 13A28C 80246F4C 3C038027 */  lui       $v1, %hi(gPauseMenuPressedButtons)
+/* 13A290 80246F50 8C6300C4 */  lw        $v1, %lo(gPauseMenuPressedButtons)($v1)
+/* 13A294 80246F54 3C018027 */  lui       $at, %hi(gPauseMenuCurrentDescString)
+/* 13A298 80246F58 AC2200C8 */  sw        $v0, %lo(gPauseMenuCurrentDescString)($at)
+/* 13A29C 80246F5C 3C018027 */  lui       $at, %hi(gPauseMenuCurrentDescIconScript)
+/* 13A2A0 80246F60 AC2000CC */  sw        $zero, %lo(gPauseMenuCurrentDescIconScript)($at)
 /* 13A2A4 80246F64 30634000 */  andi      $v1, $v1, 0x4000
 /* 13A2A8 80246F68 10600005 */  beqz      $v1, .L80246F80
 /* 13A2AC 80246F6C 00000000 */   nop      
 /* 13A2B0 80246F70 0C05272D */  jal       play_sound
 /* 13A2B4 80246F74 240400CA */   addiu    $a0, $zero, 0xca
-/* 13A2B8 80246F78 3C018027 */  lui       $at, 0x8027
-/* 13A2BC 80246F7C A02000D4 */  sb        $zero, 0xd4($at)
+/* 13A2B8 80246F78 3C018027 */  lui       $at, %hi(gPauseMenuCurrentTab)
+/* 13A2BC 80246F7C A02000D4 */  sb        $zero, %lo(gPauseMenuCurrentTab)($at)
 .L80246F80:
 /* 13A2C0 80246F80 8FBF0018 */  lw        $ra, 0x18($sp)
 /* 13A2C4 80246F84 8FB10014 */  lw        $s1, 0x14($sp)

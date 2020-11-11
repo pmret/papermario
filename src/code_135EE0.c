@@ -1,12 +1,70 @@
 #include "common.h"
 
+// Need data segment and vars declared above
+#ifdef NON_MATCHING
+void pause_set_cursor_opacity(s32 val) {
+    gPauseMenuCursorTargetOpacity = val;
+}
+#else
 INCLUDE_ASM(s32, "code_135EE0", pause_set_cursor_opacity);
+#endif
 
 INCLUDE_ASM(s32, "code_135EE0", func_80242BAC);
 
 INCLUDE_ASM(s32, "code_135EE0", func_80242D04);
 
+// Delay slot issue with gPauseMenuCursorTargetOpacity (needs .data)
+#ifdef NON_MATCHING
+void pause_interp_cursor(void) {
+    s32* posX = &gPauseMenuCursorPosX;
+    s32* posY = &gPauseMenuCursorPosY;
+    s32* targetPosX = &gPauseMenuTargetPosX;
+    s32* targetPosY = &gPauseMenuTargetPosY;
+    s32 xDelta;
+    s32 yDelta;
+    s32* opacity;
+
+    xDelta = (*targetPosX - *posX) * 0.5;
+    yDelta = (*targetPosY - *posY) * 0.5;
+
+    if ((*targetPosX != *posX) || (*targetPosY != *posY)) {
+        if ((xDelta == 0) && (yDelta == 0)) {
+            *posX = *targetPosX;
+            *posY = *targetPosY;
+        }
+    }
+
+    // Macros? something strange
+    {
+        s32* posX = &gPauseMenuCursorPosX;
+        *posX += xDelta;
+    }
+
+    {
+        s32* posY = &gPauseMenuCursorPosY;
+        *posY += yDelta;
+    }
+
+    if (gPauseMenuCursorTargetOpacity == 0) {
+        opacity = &gPauseMenuCursorOpacity;
+
+        *opacity -= 128;
+        if (*opacity < 0) {
+            *opacity = 0;
+        }
+    } else {
+        opacity = &gPauseMenuCursorOpacity;
+
+        *opacity += 32;
+        if (*opacity > 255) {
+            *opacity = 255;
+        }
+    }
+    gPauseMenuCursorTargetOpacity = 255;
+}
+#else
 INCLUDE_ASM(s32, "code_135EE0", pause_interp_cursor);
+#endif
 
 INCLUDE_ASM(s32, "code_135EE0", func_80242F90);
 
@@ -30,9 +88,49 @@ INCLUDE_ASM(s32, "code_135EE0", func_80243388);
 
 INCLUDE_ASM(s32, "code_135EE0", pause_interp_text_scroll);
 
-INCLUDE_ASM(s32, "code_135EE0", pause_interp_vertical_scroll);
+// Slight ordering issue with the sign flip at the beginning
+#ifdef NON_MATCHING
+s32 pause_interp_vertical_scroll(s32 deltaBefore) {
+    s32 val;
+    s32 s;
+    s32 db;
 
-INCLUDE_ASM(s32, "code_135EE0", pause_update_cursor);
+    db = deltaBefore;
+    if (deltaBefore < 0) {
+        db = -deltaBefore;
+    }
+
+    s = sign(deltaBefore);
+
+    if (db >= 16) {
+        val = db / 2;
+        if (val > 20) {
+            val = 20;
+        }
+    } else {
+        val = gPauseMenuPageScrollInterpEasingLUT[db];
+    }
+
+    return val * s;
+}
+#else
+INCLUDE_ASM(s32, "code_135EE0", pause_interp_vertical_scroll);
+#endif
+
+void pause_update_cursor(s32 arg0, s32 offsetX, s32 offsetY) {
+    s32 opacity;
+
+    pause_interp_cursor();
+    opacity = gPauseMenuCursorOpacity;
+    if (opacity > 0) {
+        if (opacity > 255) {
+            opacity = 255;
+        }
+        icon_set_opacity(gPauseMenuCommonIconIDs[0], opacity);
+        set_icon_render_pos(gPauseMenuCommonIconIDs[0], offsetX + gPauseMenuCursorPosX, offsetY + gPauseMenuCursorPosY);
+        draw_icon_2(gPauseMenuCommonIconIDs[0]);
+    }
+}
 
 void func_80243568(void) {
 }
@@ -76,52 +174,11 @@ INCLUDE_ASM(s32, "code_135EE0", pause_tabs_handle_input);
 
 INCLUDE_ASM(s32, "code_135EE0", pause_tabs_update);
 
-INCLUDE_ASM(s32, "code_135EE0", pause_tabs_cleanup);
+void pause_tabs_cleanup(void) {
+    s32* iconIDs = gPauseMenuTabIconIDs;
+    s32 i;
 
-INCLUDE_ASM(s32, "code_135EE0", pause_stats_draw_contents);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_stats_init);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_stats_handle_input);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_stats_cleanup);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_badges_comparator);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_badges_count_all);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_badges_count_equipped);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_badges_get_pos_x);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_badges_get_pos_y);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_badges_get_column);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_badges_get_row);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_badges_is_visible);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_badges_scroll_offset_y);
-
-s32 pause_badges_scroll_offset_x(s32 x) {
-    return x;
+    for (i = 0; i < ARRAY_COUNT(gPauseMenuTabIconIDs); i++) {
+        free_icon(iconIDs[i]);
+    }
 }
-
-INCLUDE_ASM(s32, "code_135EE0", pause_badges_try_remove);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_badges_try_equip);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_badges_draw_bp_orbs);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_badges_draw_contents);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_badges_load_badges);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_badges_init);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_badges_handle_input);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_badges_update);
-
-INCLUDE_ASM(s32, "code_135EE0", pause_badges_cleanup);

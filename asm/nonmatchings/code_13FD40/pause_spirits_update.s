@@ -27,8 +27,8 @@ glabel pause_spirits_update
 /* 140B94 8024D854 0242102A */  slt       $v0, $s2, $v0
 /* 140B98 8024D858 1040000B */  beqz      $v0, .L8024D888
 /* 140B9C 8024D85C 00000000 */   nop      
-/* 140BA0 8024D860 3C028027 */  lui       $v0, 0x8027
-/* 140BA4 8024D864 804200D4 */  lb        $v0, 0xd4($v0)
+/* 140BA0 8024D860 3C028027 */  lui       $v0, %hi(gPauseMenuCurrentTab)
+/* 140BA4 8024D864 804200D4 */  lb        $v0, %lo(gPauseMenuCurrentTab)($v0)
 /* 140BA8 8024D868 14540007 */  bne       $v0, $s4, .L8024D888
 /* 140BAC 8024D86C 00000000 */   nop      
 /* 140BB0 8024D870 92A20003 */  lbu       $v0, 3($s5)

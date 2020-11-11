@@ -366,8 +366,8 @@ glabel pause_partners_draw_contents
 /* 13E7A8 8024B468 2463A66C */  addiu     $v1, $v1, -0x5994
 /* 13E7AC 8024B46C 34A50002 */  ori       $a1, $a1, 2
 /* 13E7B0 8024B470 8C620000 */  lw        $v0, ($v1)
-/* 13E7B4 8024B474 3C128027 */  lui       $s2, 0x8027
-/* 13E7B8 8024B478 265200D4 */  addiu     $s2, $s2, 0xd4
+/* 13E7B4 8024B474 3C128027 */  lui       $s2, %hi(gPauseMenuCurrentTab)
+/* 13E7B8 8024B478 265200D4 */  addiu     $s2, $s2, %lo(gPauseMenuCurrentTab)
 /* 13E7BC 8024B47C 0040202D */  daddu     $a0, $v0, $zero
 /* 13E7C0 8024B480 24420008 */  addiu     $v0, $v0, 8
 /* 13E7C4 8024B484 AC620000 */  sw        $v0, ($v1)

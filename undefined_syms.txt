@@ -145,6 +145,35 @@ D_800DC500 = 0x800DC500;
 D_8010F6D0 = 0x8010F6D0;
 
 gBackgroundImage = 0x80200000;
+
+gPauseMenuIconScripts = 0x8024EF60;
+gPauseMenuTabs = 0x8024EF80;
+gPauseMenuCursorPosX = 0x8024EF9C;
+gPauseMenuCursorPosY = 0x8024EFA0;
+gPauseMenuCursorOpacity = 0x8024EFA4;
+gPauseMenuTargetPosX = 0x8024EFA8;
+gPauseMenuTargetPosY = 0x8024EFAC;
+gPauseMenuCursorTargetOpacity = 0x8024EFB0;
+
+gPauseMenuTextScrollInterpEasingLUT = 0x8024F0AC;
+gPauseMenuPageScrollInterpEasingLUT = 0x8024F0BC;
+
+gPauseMenuHeldButtons = 0x802700C0;
+gPauseMenuPressedButtons = 0x802700C4;
+gPauseMenuCurrentDescString = 0x802700C8;
+gPauseMenuCurrentDescIconScript = 0x802700CC;
+gPauseMenuCurrentTab = 0x802700D4;
+gPauseMenuCommonIconIDs = 0x802700E8;
+
+gPauseMenuTabIconIDs = 0x80270130;
+gStatsMenuIconIDs = 0x80270150;
+gBadgeMenuItemIDs = 0x80270180;
+gBadgeMenuCurrentPage = 0x80270280;
+gBadgeMenuPages = 0x80270288;
+gBadgeMenuCurrentScrollPos = 0x8027038C;
+gBadgeMenuTargetScrollPos = 0x80270390;
+gPauseItemPages = 0x802704D0;
+
 D_802C3000 = 0x802C3000;
 D_802DBD40 = 0x802DBD40;
 gCurrentPrintContext = 0x802DB260;

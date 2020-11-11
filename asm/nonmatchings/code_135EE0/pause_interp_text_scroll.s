@@ -15,9 +15,9 @@ glabel pause_interp_text_scroll
 /* 13677C 8024343C 2A020010 */  slti      $v0, $s0, 0x10
 /* 136780 80243440 10400004 */  beqz      $v0, .L80243454
 /* 136784 80243444 24020008 */   addiu    $v0, $zero, 8
-/* 136788 80243448 3C028025 */  lui       $v0, 0x8025
+/* 136788 80243448 3C028025 */  lui       $v0, %hi(gPauseMenuTextScrollInterpEasingLUT)
 /* 13678C 8024344C 00501021 */  addu      $v0, $v0, $s0
-/* 136790 80243450 9042F0AC */  lbu       $v0, -0xf54($v0)
+/* 136790 80243450 9042F0AC */  lbu       $v0, %lo(gPauseMenuTextScrollInterpEasingLUT)($v0)
 .L80243454:
 /* 136794 80243454 00430018 */  mult      $v0, $v1
 /* 136798 80243458 8FBF0014 */  lw        $ra, 0x14($sp)

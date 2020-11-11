@@ -14,8 +14,8 @@ glabel pause_tabs_draw_party
 /* 138274 80244F34 AFBF0024 */  sw        $ra, 0x24($sp)
 /* 138278 80244F38 12200016 */  beqz      $s1, .L80244F94
 /* 13827C 80244F3C AFB00010 */   sw       $s0, 0x10($sp)
-/* 138280 80244F40 3C108027 */  lui       $s0, 0x8027
-/* 138284 80244F44 26100130 */  addiu     $s0, $s0, 0x130
+/* 138280 80244F40 3C108027 */  lui       $s0, %hi(gPauseMenuTabIconIDs)
+/* 138284 80244F44 26100130 */  addiu     $s0, $s0, %lo(gPauseMenuTabIconIDs)
 /* 138288 80244F48 8E04000C */  lw        $a0, 0xc($s0)
 /* 13828C 80244F4C 0C051280 */  jal       set_icon_flags
 /* 138290 80244F50 24050020 */   addiu    $a1, $zero, 0x20
@@ -36,8 +36,8 @@ glabel pause_tabs_draw_party
 /* 1382CC 80244F8C 080913EC */  j         .L80244FB0
 /* 1382D0 80244F90 00000000 */   nop      
 .L80244F94:
-/* 1382D4 80244F94 3C108027 */  lui       $s0, 0x8027
-/* 1382D8 80244F98 26100130 */  addiu     $s0, $s0, 0x130
+/* 1382D4 80244F94 3C108027 */  lui       $s0, %hi(gPauseMenuTabIconIDs)
+/* 1382D8 80244F98 26100130 */  addiu     $s0, $s0, %lo(gPauseMenuTabIconIDs)
 /* 1382DC 80244F9C 8E04000C */  lw        $a0, 0xc($s0)
 /* 1382E0 80244FA0 0C05128B */  jal       clear_icon_flags
 /* 1382E4 80244FA4 24050020 */   addiu    $a1, $zero, 0x20
@@ -47,16 +47,16 @@ glabel pause_tabs_draw_party
 /* 1382F0 80244FB0 0C0513AC */  jal       icon_set_opacity
 /* 1382F4 80244FB4 00000000 */   nop      
 /* 1382F8 80244FB8 26450016 */  addiu     $a1, $s2, 0x16
-/* 1382FC 80244FBC 3C108027 */  lui       $s0, 0x8027
-/* 138300 80244FC0 26100130 */  addiu     $s0, $s0, 0x130
+/* 1382FC 80244FBC 3C108027 */  lui       $s0, %hi(gPauseMenuTabIconIDs)
+/* 138300 80244FC0 26100130 */  addiu     $s0, $s0, %lo(gPauseMenuTabIconIDs)
 /* 138304 80244FC4 8E04000C */  lw        $a0, 0xc($s0)
 /* 138308 80244FC8 0C051261 */  jal       set_icon_render_pos
 /* 13830C 80244FCC 26660007 */   addiu    $a2, $s3, 7
 /* 138310 80244FD0 8E04000C */  lw        $a0, 0xc($s0)
 /* 138314 80244FD4 0C0511F8 */  jal       draw_icon_2
 /* 138318 80244FD8 00000000 */   nop      
-/* 13831C 80244FDC 3C028027 */  lui       $v0, 0x8027
-/* 138320 80244FE0 804200D4 */  lb        $v0, 0xd4($v0)
+/* 13831C 80244FDC 3C028027 */  lui       $v0, %hi(gPauseMenuCurrentTab)
+/* 138320 80244FE0 804200D4 */  lb        $v0, %lo(gPauseMenuCurrentTab)($v0)
 /* 138324 80244FE4 1440000C */  bnez      $v0, .L80245018
 /* 138328 80244FE8 00000000 */   nop      
 /* 13832C 80244FEC 82830001 */  lb        $v1, 1($s4)

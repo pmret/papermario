@@ -175,8 +175,8 @@ glabel pause_partners_draw_movelist
 /* 13F2FC 8024BFBC 2A420004 */  slti      $v0, $s2, 4
 /* 13F300 8024BFC0 1440FF8B */  bnez      $v0, .L8024BDF0
 /* 13F304 8024BFC4 26730001 */   addiu    $s3, $s3, 1
-/* 13F308 8024BFC8 3C038027 */  lui       $v1, 0x8027
-/* 13F30C 8024BFCC 806300D4 */  lb        $v1, 0xd4($v1)
+/* 13F308 8024BFC8 3C038027 */  lui       $v1, %hi(gPauseMenuCurrentTab)
+/* 13F30C 8024BFCC 806300D4 */  lb        $v1, %lo(gPauseMenuCurrentTab)($v1)
 /* 13F310 8024BFD0 24020004 */  addiu     $v0, $zero, 4
 /* 13F314 8024BFD4 14620010 */  bne       $v1, $v0, .L8024C018
 /* 13F318 8024BFD8 24020001 */   addiu    $v0, $zero, 1

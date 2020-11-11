@@ -3,10 +3,10 @@
 
 glabel pause_badges_update
 /* 13C95C 8024961C 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* 13C960 80249620 3C038027 */  lui       $v1, 0x8027
-/* 13C964 80249624 8C630280 */  lw        $v1, 0x280($v1)
-/* 13C968 80249628 3C048027 */  lui       $a0, 0x8027
-/* 13C96C 8024962C 24840288 */  addiu     $a0, $a0, 0x288
+/* 13C960 80249620 3C038027 */  lui       $v1, %hi(gBadgeMenuCurrentPage)
+/* 13C964 80249624 8C630280 */  lw        $v1, %lo(gBadgeMenuCurrentPage)($v1)
+/* 13C968 80249628 3C048027 */  lui       $a0, %hi(gBadgeMenuPages)
+/* 13C96C 8024962C 24840288 */  addiu     $a0, $a0, %lo(gBadgeMenuPages)
 /* 13C970 80249630 AFBF0014 */  sw        $ra, 0x14($sp)
 /* 13C974 80249634 AFB00010 */  sw        $s0, 0x10($sp)
 /* 13C978 80249638 00031040 */  sll       $v0, $v1, 1
@@ -69,16 +69,16 @@ glabel pause_badges_update
 /* 13CA40 80249700 3C058027 */  lui       $a1, 0x8027
 /* 13CA44 80249704 8CA50394 */  lw        $a1, 0x394($a1)
 /* 13CA48 80249708 00A20018 */  mult      $a1, $v0
-/* 13CA4C 8024970C 3C048027 */  lui       $a0, 0x8027
-/* 13CA50 80249710 8C840280 */  lw        $a0, 0x280($a0)
+/* 13CA4C 8024970C 3C048027 */  lui       $a0, %hi(gBadgeMenuCurrentPage)
+/* 13CA50 80249710 8C840280 */  lw        $a0, %lo(gBadgeMenuCurrentPage)($a0)
 /* 13CA54 80249714 00002812 */  mflo      $a1
 /* 13CA58 80249718 0C091C5A */  jal       pause_badges_get_pos_y
 /* 13CA5C 8024971C 00000000 */   nop      
-/* 13CA60 80249720 3C108027 */  lui       $s0, 0x8027
-/* 13CA64 80249724 2610038C */  addiu     $s0, $s0, 0x38c
+/* 13CA60 80249720 3C108027 */  lui       $s0, %hi(gBadgeMenuCurrentScrollPos)
+/* 13CA64 80249724 2610038C */  addiu     $s0, $s0, %lo(gBadgeMenuCurrentScrollPos)
 /* 13CA68 80249728 8E040000 */  lw        $a0, ($s0)
-/* 13CA6C 8024972C 3C018027 */  lui       $at, 0x8027
-/* 13CA70 80249730 AC220390 */  sw        $v0, 0x390($at)
+/* 13CA6C 8024972C 3C018027 */  lui       $at, %hi(gBadgeMenuTargetScrollPos)
+/* 13CA70 80249730 AC220390 */  sw        $v0, %lo(gBadgeMenuTargetScrollPos)($at)
 /* 13CA74 80249734 0C090D1B */  jal       pause_interp_vertical_scroll
 /* 13CA78 80249738 00442023 */   subu     $a0, $v0, $a0
 /* 13CA7C 8024973C 8E030000 */  lw        $v1, ($s0)

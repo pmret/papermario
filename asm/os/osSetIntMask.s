@@ -1,5 +1,11 @@
+.include "macro.inc"
+
+# assembler directives
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
+.set gp=64     # allow use of 64-bit general purpose registers
+
+.section .text, "ax"
 
 glabel osSetIntMask
 /* 3BD40 80060940 400C6000 */  mfc0      $t4, $12
@@ -39,7 +45,7 @@ glabel osSetIntMask
 /* 3BDC4 800609C4 01816024 */  and       $t4, $t4, $at
 /* 3BDC8 800609C8 01886025 */  or        $t4, $t4, $t0
 /* 3BDCC 800609CC 408C6000 */  mtc0      $t4, $12
-/* 3BDD0 800609D0 00000000 */  nop       
-/* 3BDD4 800609D4 00000000 */  nop       
+/* 3BDD0 800609D0 00000000 */  nop
+/* 3BDD4 800609D4 00000000 */  nop
 /* 3BDD8 800609D8 03E00008 */  jr        $ra
-/* 3BDDC 800609DC 00000000 */   nop      
+/* 3BDDC 800609DC 00000000 */   nop

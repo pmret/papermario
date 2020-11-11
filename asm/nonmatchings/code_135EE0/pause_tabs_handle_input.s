@@ -6,8 +6,8 @@ glabel pause_tabs_handle_input
 /* 138698 80245358 AFB00010 */  sw        $s0, 0x10($sp)
 /* 13869C 8024535C 0080802D */  daddu     $s0, $a0, $zero
 /* 1386A0 80245360 3C030004 */  lui       $v1, 4
-/* 1386A4 80245364 3C028027 */  lui       $v0, 0x8027
-/* 1386A8 80245368 8C4200C0 */  lw        $v0, 0xc0($v0)
+/* 1386A4 80245364 3C028027 */  lui       $v0, %hi(gPauseMenuHeldButtons)
+/* 1386A8 80245368 8C4200C0 */  lw        $v0, %lo(gPauseMenuHeldButtons)($v0)
 /* 1386AC 8024536C 34632000 */  ori       $v1, $v1, 0x2000
 /* 1386B0 80245370 AFBF0018 */  sw        $ra, 0x18($sp)
 /* 1386B4 80245374 00431024 */  and       $v0, $v0, $v1
@@ -16,8 +16,8 @@ glabel pause_tabs_handle_input
 /* 1386C0 80245380 24070005 */  addiu     $a3, $zero, 5
 /* 1386C4 80245384 3C048027 */  lui       $a0, 0x8027
 /* 1386C8 80245388 2484014C */  addiu     $a0, $a0, 0x14c
-/* 1386CC 8024538C 3C068025 */  lui       $a2, 0x8025
-/* 1386D0 80245390 24C6EF80 */  addiu     $a2, $a2, -0x1080
+/* 1386CC 8024538C 3C068025 */  lui       $a2, %hi(gPauseMenuTabs)
+/* 1386D0 80245390 24C6EF80 */  addiu     $a2, $a2, %lo(gPauseMenuTabs)
 /* 1386D4 80245394 3C058025 */  lui       $a1, 0x8025
 /* 1386D8 80245398 24A5F1D0 */  addiu     $a1, $a1, -0xe30
 .L8024539C:
@@ -45,16 +45,16 @@ glabel pause_tabs_handle_input
 /* 13872C 802453EC 00000000 */   nop      
 .L802453F0:
 /* 138730 802453F0 3C030008 */  lui       $v1, 8
-/* 138734 802453F4 3C028027 */  lui       $v0, 0x8027
-/* 138738 802453F8 8C4200C0 */  lw        $v0, 0xc0($v0)
+/* 138734 802453F4 3C028027 */  lui       $v0, %hi(gPauseMenuHeldButtons)
+/* 138738 802453F8 8C4200C0 */  lw        $v0, %lo(gPauseMenuHeldButtons)($v0)
 /* 13873C 802453FC 34630010 */  ori       $v1, $v1, 0x10
 /* 138740 80245400 00431024 */  and       $v0, $v0, $v1
 /* 138744 80245404 1040001D */  beqz      $v0, .L8024547C
 /* 138748 80245408 00000000 */   nop      
 /* 13874C 8024540C 3C038027 */  lui       $v1, 0x8027
 /* 138750 80245410 2463014C */  addiu     $v1, $v1, 0x14c
-/* 138754 80245414 3C058025 */  lui       $a1, 0x8025
-/* 138758 80245418 24A5EF80 */  addiu     $a1, $a1, -0x1080
+/* 138754 80245414 3C058025 */  lui       $a1, %hi(gPauseMenuTabs)
+/* 138758 80245418 24A5EF80 */  addiu     $a1, $a1, %lo(gPauseMenuTabs)
 /* 13875C 8024541C 3C048025 */  lui       $a0, 0x8025
 /* 138760 80245420 2484F1D0 */  addiu     $a0, $a0, -0xe30
 .L80245424:
@@ -122,8 +122,8 @@ glabel pause_tabs_handle_input
 /* 138850 80245510 0C05272D */  jal       play_sound
 /* 138854 80245514 AE220000 */   sw       $v0, ($s1)
 .L80245518:
-/* 138858 80245518 3C028027 */  lui       $v0, 0x8027
-/* 13885C 8024551C 8C4200C4 */  lw        $v0, 0xc4($v0)
+/* 138858 80245518 3C028027 */  lui       $v0, %hi(gPauseMenuPressedButtons)
+/* 13885C 8024551C 8C4200C4 */  lw        $v0, %lo(gPauseMenuPressedButtons)($v0)
 /* 138860 80245520 30428000 */  andi      $v0, $v0, 0x8000
 /* 138864 80245524 10400016 */  beqz      $v0, .L80245580
 /* 138868 80245528 00000000 */   nop      
@@ -132,9 +132,9 @@ glabel pause_tabs_handle_input
 /* 138874 80245534 00220821 */  addu      $at, $at, $v0
 /* 138878 80245538 9022F1D0 */  lbu       $v0, -0xe30($at)
 /* 13887C 8024553C 00021080 */  sll       $v0, $v0, 2
-/* 138880 80245540 3C018025 */  lui       $at, 0x8025
+/* 138880 80245540 3C018025 */  lui       $at, %hi(gPauseMenuTabs)
 /* 138884 80245544 00220821 */  addu      $at, $at, $v0
-/* 138888 80245548 8C22EF80 */  lw        $v0, -0x1080($at)
+/* 138888 80245548 8C22EF80 */  lw        $v0, %lo(gPauseMenuTabs)($at)
 /* 13888C 8024554C 3C118025 */  lui       $s1, 0x8025
 /* 138890 80245550 2631F1D0 */  addiu     $s1, $s1, -0xe30
 /* 138894 80245554 90430000 */  lbu       $v1, ($v0)
@@ -146,8 +146,8 @@ glabel pause_tabs_handle_input
 /* 1388AC 8024556C 82020001 */  lb        $v0, 1($s0)
 /* 1388B0 80245570 00511021 */  addu      $v0, $v0, $s1
 /* 1388B4 80245574 90420000 */  lbu       $v0, ($v0)
-/* 1388B8 80245578 3C018027 */  lui       $at, 0x8027
-/* 1388BC 8024557C A02200D4 */  sb        $v0, 0xd4($at)
+/* 1388B8 80245578 3C018027 */  lui       $at, %hi(gPauseMenuCurrentTab)
+/* 1388BC 8024557C A02200D4 */  sb        $v0, %lo(gPauseMenuCurrentTab)($at)
 .L80245580:
 /* 1388C0 80245580 82020001 */  lb        $v0, 1($s0)
 /* 1388C4 80245584 00021080 */  sll       $v0, $v0, 2
@@ -158,9 +158,9 @@ glabel pause_tabs_handle_input
 /* 1388D8 80245598 8FBF0018 */  lw        $ra, 0x18($sp)
 /* 1388DC 8024559C 8FB10014 */  lw        $s1, 0x14($sp)
 /* 1388E0 802455A0 8FB00010 */  lw        $s0, 0x10($sp)
-/* 1388E4 802455A4 3C018027 */  lui       $at, 0x8027
-/* 1388E8 802455A8 AC2200C8 */  sw        $v0, 0xc8($at)
-/* 1388EC 802455AC 3C018027 */  lui       $at, 0x8027
-/* 1388F0 802455B0 AC2000CC */  sw        $zero, 0xcc($at)
+/* 1388E4 802455A4 3C018027 */  lui       $at, %hi(gPauseMenuCurrentDescString)
+/* 1388E8 802455A8 AC2200C8 */  sw        $v0, %lo(gPauseMenuCurrentDescString)($at)
+/* 1388EC 802455AC 3C018027 */  lui       $at, %hi(gPauseMenuCurrentDescIconScript)
+/* 1388F0 802455B0 AC2000CC */  sw        $zero, %lo(gPauseMenuCurrentDescIconScript)($at)
 /* 1388F4 802455B4 03E00008 */  jr        $ra
 /* 1388F8 802455B8 27BD0020 */   addiu    $sp, $sp, 0x20

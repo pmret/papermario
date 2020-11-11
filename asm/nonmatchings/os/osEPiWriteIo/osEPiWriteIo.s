@@ -24,5 +24,5 @@ glabel osEPiWriteIo
 /* 3C1AC 80060DAC 8FB00010 */  lw        $s0, 0x10($sp)
 /* 3C1B0 80060DB0 03E00008 */  jr        $ra
 /* 3C1B4 80060DB4 27BD0020 */   addiu    $sp, $sp, 0x20
-/* 3C1B8 80060DB8 00000000 */  nop       
-/* 3C1BC 80060DBC 00000000 */  nop       
+/* 3C1B8 80060DB8 00000000 */  nop
+/* 3C1BC 80060DBC 00000000 */  nop

@@ -713,7 +713,10 @@ typedef struct AnimatedMesh {
     /* 0x098 */ struct Matrix4s mtx;
     /* 0x0D8 */ char unk_D8[500];
     /* 0x2CC */ s32 time;
-    /* 0x2D0 */ char unk_2D0[16];
+    /* 0x2D0 */ char unk_2D0[4];
+    /* 0x2D4 */ s32 unk_2D4;
+    /* 0x2D8 */ s32 unk_2D8;
+    /* 0x2DC */ char unk_2DC[4];
 } AnimatedMesh; // size = 0x2E0
 
 typedef AnimatedMesh* AnimatedMeshList[MAX_ANIMATED_MESHES];
@@ -1529,5 +1532,23 @@ typedef struct {
     /* 0x14 */ s32 timeLeft;
     /* 0x18 */ s32 easingType;
 } Path; // size = 0x1C
+
+typedef struct {
+    /* 0x00 */ s8 enabled;
+    /* 0x01 */ u8 listStart;
+    /* 0x02 */ u8 numCols;
+    /* 0x03 */ s8 numRows;
+    /* 0x04 */ s32 startIndex;
+    /* 0x08 */ s32 count;
+} PauseItemPage; // size = 0xC
+
+typedef struct {
+    /* 0x00 */ char unk_00[8];
+    /* 0x08 */ s8* unk_08;
+    /* 0x0C */ void* fpInit;
+    /* 0x10 */ void* fpHandleInput;
+    /* 0x14 */ void* fpUpdate;
+    /* 0x18 */ void* fpCleanup;
+} MenuTab; // size = 0x1C
 
 #endif

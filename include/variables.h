@@ -120,7 +120,36 @@ extern s32 D_800A0960;
 extern s32 D_800A0964;
 
 // Pause
+extern s32 gPauseMenuHeldButtons;
+extern s32 gPauseMenuPressedButtons;
+extern s32 gPauseMenuCurrentDescString;
+extern Bytecode* gPauseMenuCurrentDescIconScript;
+extern s8 gPauseMenuCurrentTab;
+extern s32 gPauseMenuCommonIconIDs[8];
+extern s32 gPauseMenuTabIconIDs[6];
+extern PauseItemPage gItemMenuPages[20];
 extern s32 gPauseMenuStrings[348];
+extern s32 gPauseMenuIconScripts[8];
+extern MenuTab* gPauseMenuTabs[7];
+extern s32 gPauseMenuCursorPosX;
+extern s32 gPauseMenuCursorPosY;
+extern s32 gPauseMenuCursorOpacity;
+extern s32 gPauseMenuTargetPosX;
+extern s32 gPauseMenuTargetPosY;
+extern s32 gPauseMenuCursorTargetOpacity;
+extern u8 gPauseMenuTextScrollInterpEasingLUT[16];
+extern u8 gPauseMenuPageScrollInterpEasingLUT[16];
+
+// Badges
+extern PauseItemPage gBadgeMenuPages[20];
+extern s32 gBadgeMenuCurrentScrollPos;
+extern s32 gBadgeMenuTargetScrollPos;
+extern ItemId gBadgeMenuItemIDs[128];
+extern s32 gBadgeMenuCurrentPage;
+
+// Stats
+extern s32 gStatsMenuIconIDs[12];
+
 
 extern s32 gGameState;
 extern s32 D_8009A650[1];
