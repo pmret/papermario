@@ -3,10 +3,10 @@
 
 glabel pause_items_update
 /* 13DF94 8024AC54 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* 13DF98 8024AC58 3C038027 */  lui       $v1, 0x8027
-/* 13DF9C 8024AC5C 8C6304C8 */  lw        $v1, 0x4c8($v1)
-/* 13DFA0 8024AC60 3C048027 */  lui       $a0, %hi(gPauseItemPages)
-/* 13DFA4 8024AC64 248404D0 */  addiu     $a0, $a0, %lo(gPauseItemPages)
+/* 13DF98 8024AC58 3C038027 */  lui       $v1, %hi(gItemMenuCurrentPage)
+/* 13DF9C 8024AC5C 8C6304C8 */  lw        $v1, %lo(gItemMenuCurrentPage)($v1)
+/* 13DFA0 8024AC60 3C048027 */  lui       $a0, %hi(gItemMenuPages)
+/* 13DFA4 8024AC64 248404D0 */  addiu     $a0, $a0, %lo(gItemMenuPages)
 /* 13DFA8 8024AC68 AFBF0014 */  sw        $ra, 0x14($sp)
 /* 13DFAC 8024AC6C AFB00010 */  sw        $s0, 0x10($sp)
 /* 13DFB0 8024AC70 00031040 */  sll       $v0, $v1, 1
@@ -14,8 +14,8 @@ glabel pause_items_update
 /* 13DFB8 8024AC78 00021080 */  sll       $v0, $v0, 2
 /* 13DFBC 8024AC7C 00443021 */  addu      $a2, $v0, $a0
 /* 13DFC0 8024AC80 90C30002 */  lbu       $v1, 2($a2)
-/* 13DFC4 8024AC84 3C028027 */  lui       $v0, 0x8027
-/* 13DFC8 8024AC88 8C4205C0 */  lw        $v0, 0x5c0($v0)
+/* 13DFC4 8024AC84 3C028027 */  lui       $v0, %hi(gItemMenuSelectedIndex)
+/* 13DFC8 8024AC88 8C4205C0 */  lw        $v0, %lo(gItemMenuSelectedIndex)($v0)
 /* 13DFCC 8024AC8C 14600002 */  bnez      $v1, .L8024AC98
 /* 13DFD0 8024AC90 0043001A */   div      $zero, $v0, $v1
 /* 13DFD4 8024AC94 0007000D */  break     7
@@ -38,8 +38,8 @@ glabel pause_items_update
 /* 13E010 8024ACD0 10400005 */  beqz      $v0, .L8024ACE8
 /* 13E014 8024ACD4 00000000 */   nop      
 .L8024ACD8:
-/* 13E018 8024ACD8 3C018027 */  lui       $at, 0x8027
-/* 13E01C 8024ACDC AC2005DC */  sw        $zero, 0x5dc($at)
+/* 13E018 8024ACD8 3C018027 */  lui       $at, %hi(D_802705DC)
+/* 13E01C 8024ACDC AC2005DC */  sw        $zero, %lo(D_802705DC)($at)
 /* 13E020 8024ACE0 08092B4D */  j         .L8024AD34
 /* 13E024 8024ACE4 00000000 */   nop      
 .L8024ACE8:
@@ -48,13 +48,13 @@ glabel pause_items_update
 /* 13E030 8024ACF0 0082102A */  slt       $v0, $a0, $v0
 /* 13E034 8024ACF4 14400005 */  bnez      $v0, .L8024AD0C
 /* 13E038 8024ACF8 2462FFF8 */   addiu    $v0, $v1, -8
-/* 13E03C 8024ACFC 3C018027 */  lui       $at, 0x8027
-/* 13E040 8024AD00 AC2205DC */  sw        $v0, 0x5dc($at)
+/* 13E03C 8024ACFC 3C018027 */  lui       $at, %hi(D_802705DC)
+/* 13E040 8024AD00 AC2205DC */  sw        $v0, %lo(D_802705DC)($at)
 /* 13E044 8024AD04 08092B4D */  j         .L8024AD34
 /* 13E048 8024AD08 00000000 */   nop      
 .L8024AD0C:
-/* 13E04C 8024AD0C 3C058027 */  lui       $a1, 0x8027
-/* 13E050 8024AD10 24A505DC */  addiu     $a1, $a1, 0x5dc
+/* 13E04C 8024AD0C 3C058027 */  lui       $a1, %hi(D_802705DC)
+/* 13E050 8024AD10 24A505DC */  addiu     $a1, $a1, %lo(D_802705DC)
 /* 13E054 8024AD14 8CA20000 */  lw        $v0, ($a1)
 /* 13E058 8024AD18 00821823 */  subu      $v1, $a0, $v0
 /* 13E05C 8024AD1C 28620007 */  slti      $v0, $v1, 7
@@ -66,19 +66,19 @@ glabel pause_items_update
 /* 13E070 8024AD30 ACA20000 */  sw        $v0, ($a1)
 .L8024AD34:
 /* 13E074 8024AD34 90C20002 */  lbu       $v0, 2($a2)
-/* 13E078 8024AD38 3C058027 */  lui       $a1, 0x8027
-/* 13E07C 8024AD3C 8CA505DC */  lw        $a1, 0x5dc($a1)
+/* 13E078 8024AD38 3C058027 */  lui       $a1, %hi(D_802705DC)
+/* 13E07C 8024AD3C 8CA505DC */  lw        $a1, %lo(D_802705DC)($a1)
 /* 13E080 8024AD40 00A20018 */  mult      $a1, $v0
-/* 13E084 8024AD44 3C048027 */  lui       $a0, 0x8027
-/* 13E088 8024AD48 8C8404C8 */  lw        $a0, 0x4c8($a0)
+/* 13E084 8024AD44 3C048027 */  lui       $a0, %hi(gItemMenuCurrentPage)
+/* 13E088 8024AD48 8C8404C8 */  lw        $a0, %lo(gItemMenuCurrentPage)($a0)
 /* 13E08C 8024AD4C 00002812 */  mflo      $a1
 /* 13E090 8024AD50 0C09260A */  jal       pause_items_get_pos_y
 /* 13E094 8024AD54 00000000 */   nop      
-/* 13E098 8024AD58 3C108027 */  lui       $s0, 0x8027
-/* 13E09C 8024AD5C 261005D4 */  addiu     $s0, $s0, 0x5d4
+/* 13E098 8024AD58 3C108027 */  lui       $s0, %hi(gItemMenuCurrentScrollPos)
+/* 13E09C 8024AD5C 261005D4 */  addiu     $s0, $s0, %lo(gItemMenuCurrentScrollPos)
 /* 13E0A0 8024AD60 8E040000 */  lw        $a0, ($s0)
-/* 13E0A4 8024AD64 3C018027 */  lui       $at, 0x8027
-/* 13E0A8 8024AD68 AC2205D8 */  sw        $v0, 0x5d8($at)
+/* 13E0A4 8024AD64 3C018027 */  lui       $at, %hi(gItemMenuTargetScrollPos)
+/* 13E0A8 8024AD68 AC2205D8 */  sw        $v0, %lo(gItemMenuTargetScrollPos)($at)
 /* 13E0AC 8024AD6C 0C090D1B */  jal       pause_interp_vertical_scroll
 /* 13E0B0 8024AD70 00442023 */   subu     $a0, $v0, $a0
 /* 13E0B4 8024AD74 8E030000 */  lw        $v1, ($s0)

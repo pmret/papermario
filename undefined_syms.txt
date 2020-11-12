@@ -183,7 +183,19 @@ gBadgeMenuBShowNotEnoughBP = 0x802703A0;
 D_802703A4 = 0x802703A4;
 D_802703A8 = 0x802703A8;
 
-gPauseItemPages = 0x802704D0;
+gItemMenuItemIDs = 0x80270400;
+gItemMenuCurrentPage = 0x802704C8;
+gItemMenuPages = 0x802704D0;
+gItemMenuSelectedIndex = 0x802705C0;
+gItemMenuSelectedItemID = 0x802705C8;
+gItemMenuNumItems = 0x802705CC;
+D_802705D0 = 0x802705D0;
+gItemMenuCurrentScrollPos = 0x802705D4;
+gItemMenuTargetScrollPos = 0x802705D8;
+D_802705DC = 0x802705DC;
+gItemMenuLevel = 0x802705E0;
+gItemMenuCurrentTab = 0x802705E4;
+gItemMenuScrollUpIcon = 0x80270628;
 
 D_802C3000 = 0x802C3000;
 D_802DBD40 = 0x802DBD40;

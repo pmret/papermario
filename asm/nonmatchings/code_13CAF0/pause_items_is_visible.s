@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel pause_items_is_visible
-/* 13CC70 80249930 3C038027 */  lui       $v1, 0x8027
-/* 13CC74 80249934 8C6305D4 */  lw        $v1, 0x5d4($v1)
+/* 13CC70 80249930 3C038027 */  lui       $v1, %hi(gItemMenuCurrentScrollPos)
+/* 13CC74 80249934 8C6305D4 */  lw        $v1, %lo(gItemMenuCurrentScrollPos)($v1)
 /* 13CC78 80249938 2462FFE0 */  addiu     $v0, $v1, -0x20
 /* 13CC7C 8024993C 0082102A */  slt       $v0, $a0, $v0
 /* 13CC80 80249940 14400003 */  bnez      $v0, .L80249950

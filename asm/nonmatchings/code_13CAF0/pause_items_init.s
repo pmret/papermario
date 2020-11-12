@@ -9,10 +9,10 @@ glabel pause_items_init
 /* 13DA64 8024A724 AFB20018 */  sw        $s2, 0x18($sp)
 /* 13DA68 8024A728 AFB10014 */  sw        $s1, 0x14($sp)
 /* 13DA6C 8024A72C AFB00010 */  sw        $s0, 0x10($sp)
-/* 13DA70 8024A730 3C018027 */  lui       $at, 0x8027
-/* 13DA74 8024A734 AC2005E0 */  sw        $zero, 0x5e0($at)
-/* 13DA78 8024A738 3C018027 */  lui       $at, 0x8027
-/* 13DA7C 8024A73C AC2005E4 */  sw        $zero, 0x5e4($at)
+/* 13DA70 8024A730 3C018027 */  lui       $at, %hi(gItemMenuLevel)
+/* 13DA74 8024A734 AC2005E0 */  sw        $zero, %lo(gItemMenuLevel)($at)
+/* 13DA78 8024A738 3C018027 */  lui       $at, %hi(gItemMenuCurrentTab)
+/* 13DA7C 8024A73C AC2005E4 */  sw        $zero, %lo(gItemMenuCurrentTab)($at)
 /* 13DA80 8024A740 0C092937 */  jal       pause_items_load_items
 /* 13DA84 8024A744 0000202D */   daddu    $a0, $zero, $zero
 /* 13DA88 8024A748 0000802D */  daddu     $s0, $zero, $zero
