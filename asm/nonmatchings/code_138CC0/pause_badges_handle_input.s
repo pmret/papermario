@@ -4,8 +4,8 @@
 glabel pause_badges_handle_input
 /* 13C3E8 802490A8 3C038027 */  lui       $v1, %hi(gBadgeMenuCurrentPage)
 /* 13C3EC 802490AC 8C630280 */  lw        $v1, %lo(gBadgeMenuCurrentPage)($v1)
-/* 13C3F0 802490B0 3C098027 */  lui       $t1, 0x8027
-/* 13C3F4 802490B4 8D290378 */  lw        $t1, 0x378($t1)
+/* 13C3F0 802490B0 3C098027 */  lui       $t1, %hi(gBadgeMenuSelectedIndex)
+/* 13C3F4 802490B4 8D290378 */  lw        $t1, %lo(gBadgeMenuSelectedIndex)($t1)
 /* 13C3F8 802490B8 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 13C3FC 802490BC AFBF001C */  sw        $ra, 0x1c($sp)
 /* 13C400 802490C0 AFB20018 */  sw        $s2, 0x18($sp)
@@ -115,8 +115,8 @@ glabel pause_badges_handle_input
 /* 13C574 80249234 3C018027 */  lui       $at, 0x8027
 /* 13C578 80249238 AC2003A0 */  sw        $zero, 0x3a0($at)
 .L8024923C:
-/* 13C57C 8024923C 3C028027 */  lui       $v0, 0x8027
-/* 13C580 80249240 84420384 */  lh        $v0, 0x384($v0)
+/* 13C57C 8024923C 3C028027 */  lui       $v0, %hi(gBadgeMenuNumItems)
+/* 13C580 80249240 84420384 */  lh        $v0, %lo(gBadgeMenuNumItems)($v0)
 /* 13C584 80249244 104000B1 */  beqz      $v0, .L8024950C
 /* 13C588 80249248 00000000 */   nop      
 /* 13C58C 8024924C 3C028027 */  lui       $v0, 0x8027
@@ -292,8 +292,8 @@ glabel pause_badges_handle_input
 /* 13C804 802494C4 00220821 */  addu      $at, $at, $v0
 /* 13C808 802494C8 9022028A */  lbu       $v0, 0x28a($at)
 /* 13C80C 802494CC 00A20018 */  mult      $a1, $v0
-/* 13C810 802494D0 3C108027 */  lui       $s0, 0x8027
-/* 13C814 802494D4 26100378 */  addiu     $s0, $s0, 0x378
+/* 13C810 802494D0 3C108027 */  lui       $s0, %hi(gBadgeMenuSelectedIndex)
+/* 13C814 802494D4 26100378 */  addiu     $s0, $s0, %lo(gBadgeMenuSelectedIndex)
 /* 13C818 802494D8 00005012 */  mflo      $t2
 /* 13C81C 802494DC 010A1021 */  addu      $v0, $t0, $t2
 /* 13C820 802494E0 10490003 */  beq       $v0, $t1, .L802494F0
@@ -306,16 +306,16 @@ glabel pause_badges_handle_input
 /* 13C838 802494F8 3C018027 */  lui       $at, %hi(gBadgeMenuItemIDs)
 /* 13C83C 802494FC 00220821 */  addu      $at, $at, $v0
 /* 13C840 80249500 84220180 */  lh        $v0, %lo(gBadgeMenuItemIDs)($at)
-/* 13C844 80249504 3C018027 */  lui       $at, 0x8027
-/* 13C848 80249508 AC220380 */  sw        $v0, 0x380($at)
+/* 13C844 80249504 3C018027 */  lui       $at, %hi(gBadgeMenuSelectedItemID)
+/* 13C848 80249508 AC220380 */  sw        $v0, %lo(gBadgeMenuSelectedItemID)($at)
 .L8024950C:
 /* 13C84C 8024950C 3C038027 */  lui       $v1, 0x8027
 /* 13C850 80249510 8C630398 */  lw        $v1, 0x398($v1)
 /* 13C854 80249514 24020001 */  addiu     $v0, $zero, 1
 /* 13C858 80249518 14620014 */  bne       $v1, $v0, .L8024956C
 /* 13C85C 8024951C 00000000 */   nop      
-/* 13C860 80249520 3C038027 */  lui       $v1, 0x8027
-/* 13C864 80249524 8C630380 */  lw        $v1, 0x380($v1)
+/* 13C860 80249520 3C038027 */  lui       $v1, %hi(gBadgeMenuSelectedItemID)
+/* 13C864 80249524 8C630380 */  lw        $v1, %lo(gBadgeMenuSelectedItemID)($v1)
 /* 13C868 80249528 24628002 */  addiu     $v0, $v1, -0x7ffe
 /* 13C86C 8024952C 2C420002 */  sltiu     $v0, $v0, 2
 /* 13C870 80249530 1440000A */  bnez      $v0, .L8024955C

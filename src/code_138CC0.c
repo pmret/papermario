@@ -15,13 +15,36 @@ void pause_stats_cleanup(void) {
     }
 }
 
-INCLUDE_ASM(s32, "code_138CC0", pause_badges_comparator);
+s32 pause_badges_comparator(s16* a, s16* b) {
+    s16 aVal;
+    s16 bVal;
+
+    if (*a == 0) {
+        aVal = ~0x8000;
+    } else {
+        aVal = gItemTable[*a].badgeSortPriority;
+    }
+
+    if (*b == 0) {
+        bVal = ~0x8000;
+    } else {
+        bVal = gItemTable[*b].badgeSortPriority;
+    }
+
+    if (aVal == bVal) {
+        return 0;
+    } else if (aVal < bVal) {
+        return -1;
+    } else {
+        return 1;
+    }
+}
 
 s32 pause_badges_count_all(void) {
     PlayerData* playerData = PLAYER_DATA;
     s32 i;
 
-    pause_sort_item_list(playerData->badges, ARRAY_COUNT(playerData->badges), &pause_badges_comparator);
+    pause_sort_item_list(playerData->badges, ARRAY_COUNT(playerData->badges), pause_badges_comparator);
 
     for (i = 0; i < ARRAY_COUNT(playerData->badges); i++) {
         if (playerData->badges[i] == 0) {
@@ -94,6 +117,31 @@ INCLUDE_ASM(s32, "code_138CC0", pause_badges_init);
 
 INCLUDE_ASM(s32, "code_138CC0", pause_badges_handle_input);
 
-INCLUDE_ASM(s32, "code_138CC0", pause_badges_update);
+void pause_badges_update(void) {
+    PauseItemPage* menuPages = gBadgeMenuPages;
+    PauseItemPage* currentMenuPage = &menuPages[gBadgeMenuCurrentPage];
+    s32 temp = (gBadgeMenuSelectedIndex / currentMenuPage->numCols) - currentMenuPage->listStart;
+    s32* currentScrollPos;
+
+    if ((temp < 2) || currentMenuPage->numRows < 9) {
+        D_80270394 = 0;
+    } else if (temp >= currentMenuPage->numRows - 2) {
+        D_80270394 = currentMenuPage->numRows - 8;
+    } else {
+        s32* unkSym = &D_80270394;
+
+        if (temp - *unkSym >= 7) {
+            *unkSym = temp - 6;
+        } else {
+            if (temp - *unkSym <= 0) {
+                *unkSym = temp - 1;
+            }
+        }
+    }
+
+    currentScrollPos = &gBadgeMenuCurrentScrollPos;
+    gBadgeMenuTargetScrollPos = pause_badges_get_pos_y(gBadgeMenuCurrentPage, D_80270394 * currentMenuPage->numCols);
+    *currentScrollPos += pause_interp_vertical_scroll(gBadgeMenuTargetScrollPos - *currentScrollPos);
+}
 
 INCLUDE_ASM(s32, "code_138CC0", pause_badges_cleanup);

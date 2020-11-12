@@ -141,11 +141,21 @@ extern u8 gPauseMenuTextScrollInterpEasingLUT[16];
 extern u8 gPauseMenuPageScrollInterpEasingLUT[16];
 
 // Badges
-extern PauseItemPage gBadgeMenuPages[20];
 extern s32 gBadgeMenuCurrentScrollPos;
 extern s32 gBadgeMenuTargetScrollPos;
 extern ItemId gBadgeMenuItemIDs[128];
 extern s32 gBadgeMenuCurrentPage;
+extern PauseItemPage gBadgeMenuPages[20];
+extern s32 gBadgeMenuSelectedIndex;
+extern s32 gBadgeMenuSelectedItemID;
+extern s16 gBadgeMenuNumItems;
+extern s32 D_80270388;
+extern s32 D_80270394;
+extern s32 gBadgeMenuLevel;
+extern s32 gBadgeMenuCurrentTab;
+extern s32 gBadgeMenuBShowNotEnoughBP;
+extern s32 D_802703A4;
+extern s32 D_802703A8;
 
 // Stats
 extern s32 gStatsMenuIconIDs[12];

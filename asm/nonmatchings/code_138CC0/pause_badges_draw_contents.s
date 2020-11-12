@@ -42,8 +42,8 @@ glabel pause_badges_draw_contents
 /* 13A8DC 8024759C AFA30044 */  sw        $v1, 0x44($sp)
 /* 13A8E0 802475A0 240300F0 */  addiu     $v1, $zero, 0xf0
 /* 13A8E4 802475A4 AFA30048 */  sw        $v1, 0x48($sp)
-/* 13A8E8 802475A8 3C038027 */  lui       $v1, 0x8027
-/* 13A8EC 802475AC 8C630378 */  lw        $v1, 0x378($v1)
+/* 13A8E8 802475A8 3C038027 */  lui       $v1, %hi(gBadgeMenuSelectedIndex)
+/* 13A8EC 802475AC 8C630378 */  lw        $v1, %lo(gBadgeMenuSelectedIndex)($v1)
 /* 13A8F0 802475B0 AFAB0018 */  sw        $t3, 0x18($sp)
 /* 13A8F4 802475B4 15200002 */  bnez      $t1, .L802475C0
 /* 13A8F8 802475B8 0069001A */   div      $zero, $v1, $t1
@@ -1490,8 +1490,8 @@ glabel pause_badges_draw_contents
 /* 13BE54 80248B14 90430001 */  lbu       $v1, 1($v0)
 /* 13BE58 80248B18 90420002 */  lbu       $v0, 2($v0)
 /* 13BE5C 80248B1C 00620018 */  mult      $v1, $v0
-/* 13BE60 80248B20 3C108027 */  lui       $s0, 0x8027
-/* 13BE64 80248B24 26100378 */  addiu     $s0, $s0, 0x378
+/* 13BE60 80248B20 3C108027 */  lui       $s0, %hi(gBadgeMenuSelectedIndex)
+/* 13BE64 80248B24 26100378 */  addiu     $s0, $s0, %lo(gBadgeMenuSelectedIndex)
 /* 13BE68 80248B28 8E050000 */  lw        $a1, ($s0)
 /* 13BE6C 80248B2C 00005012 */  mflo      $t2
 /* 13BE70 80248B30 0C091C43 */  jal       pause_badges_get_pos_x

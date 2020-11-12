@@ -79,6 +79,10 @@ s32 func_800EB168(s32);
 
 PlayerData* get_player_data(void);
 
+// Pause
+s32 pause_interp_vertical_scroll(s32 deltaBefore);
+void pause_draw_rect(s32 ulx, s32 uly, s32 lrx, s32 lry, s32 tileDescriptor, s32 uls, s32 ult, s32 dsdx, s32 dtdy);
+
 // Partner
 void func_800EBA3C(Npc* partner);
 void func_800EBB40(Npc* partner);
