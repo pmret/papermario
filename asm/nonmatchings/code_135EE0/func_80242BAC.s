@@ -8,8 +8,8 @@ glabel func_80242BAC
 /* 135EF8 80242BB8 AFB3001C */  sw        $s3, 0x1c($sp)
 /* 135EFC 80242BBC 00C0982D */  daddu     $s3, $a2, $zero
 /* 135F00 80242BC0 AFB40020 */  sw        $s4, 0x20($sp)
-/* 135F04 80242BC4 3C148016 */  lui       $s4, %hi(D_80159D50)
-/* 135F08 80242BC8 26949D50 */  addiu     $s4, $s4, %lo(D_80159D50)
+/* 135F04 80242BC4 3C148016 */  lui       $s4, %hi(gUIPanels)
+/* 135F08 80242BC8 26949D50 */  addiu     $s4, $s4, %lo(gUIPanels)
 /* 135F0C 80242BCC 00042140 */  sll       $a0, $a0, 5
 /* 135F10 80242BD0 AFB20018 */  sw        $s2, 0x18($sp)
 /* 135F14 80242BD4 3C128025 */  lui       $s2, 0x8025

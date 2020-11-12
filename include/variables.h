@@ -119,6 +119,8 @@ extern u8 D_800A095F;
 extern s32 D_800A0960;
 extern s32 D_800A0964;
 
+extern UIPanel gUIPanels[64];
+
 // Pause
 extern s32 gPauseMenuHeldButtons;
 extern s32 gPauseMenuPressedButtons;
