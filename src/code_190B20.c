@@ -93,7 +93,6 @@ INCLUDE_ASM(s32, "code_190B20", func_80265CE8);
 
 INCLUDE_ASM(s32, "code_190B20", func_80265D44);
 
-#ifdef NON_MATCHING
 typedef struct {
     Element element;
     s32 defense;
@@ -103,22 +102,20 @@ s32 lookup_defense(DefenseTableEntry* defenseTable, Element elementKey) {
     DefenseTableEntry* row;
     s32 normalDefense = 0;
 
-    for (row = defenseTable; row->element != Element_END; row++) {
+    for (row = defenseTable; row->element != Element_END; row++, defenseTable++) {
         if (row->element == Element_NORMAL) {
-            normalDefense = row->defense;
+            normalDefense = defenseTable->defense;
         }
 
         if (row->element == elementKey) {
-            return row->defense;
+            normalDefense = defenseTable->defense;
+            break;
         }
     }
 
     // Fall back to normal defense if given element is not specified in table
     return normalDefense;
 }
-#else
-INCLUDE_ASM(s32, "code_190B20", lookup_defense);
-#endif
 
 INCLUDE_ASM(s32, "code_190B20", lookup_status_chance); // exactly (?) the same as lookup_defense
 
@@ -284,23 +281,19 @@ INCLUDE_ASM(s32, "code_190B20", func_8026709C);
 
 INCLUDE_ASM(s32, "code_190B20", func_802670C8);
 
-#ifdef NON_MATCHING
-// Register allocation issues (decorationIndex is placed in s2 for seemingly no reason?).
-// Should be easy to clean up once DecorationTable is more understood
 void add_part_decoration(ActorPart* part, s32 decorationIndex, DecorationId decorationType) {
-    if (part->idleAnimations && (part->flags & 2) == 0) {
-        DecorationTable* decoration = &part->decorationTable->unk_00[decorationIndex];
+    if ((part->idleAnimations) && !(part->flags & 2)) {
+        char* decorationTable = part->decorationTable->unk_00;
+        DecorationTable* decoration;
+
         _remove_part_decoration(part, decorationIndex);
+        decoration = decorationTable + decorationIndex;
         decoration->decorationType[0] = decorationType;
         decoration->unk_8BA = 1;
         decoration->unk_8BC = 0;
         func_8025CEC8(part);
     }
 }
-#else
-INCLUDE_ASM(void, "code_190B20", add_part_decoration, ActorPart* part, s32 decorationIndex,
-            DecorationId decorationType);
-#endif
 
 void add_actor_decoration(Actor* actor, s32 decorationIndex, DecorationId decorationType) {
     ActorPart* part;
