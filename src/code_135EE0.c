@@ -149,7 +149,8 @@ INCLUDE_ASM(s32, "code_135EE0", pause_cleanup);
 
 INCLUDE_ASM(s32, "code_135EE0", pause_get_total_equipped_bp_cost);
 
-INCLUDE_ASM(void, "code_135EE0", pause_draw_rect, s32 ulx, s32 uly, s32 lrx, s32 lry, s32 tileDescriptor, s32 uls, s32 ult, s32 dsdx, s32 dtdy);
+INCLUDE_ASM(void, "code_135EE0", pause_draw_rect, s32 ulx, s32 uly, s32 lrx, s32 lry, s32 tileDescriptor, s32 uls,
+            s32 ult, s32 dsdx, s32 dtdy);
 
 INCLUDE_ASM(s32, "code_135EE0", pause_sort_item_list);
 

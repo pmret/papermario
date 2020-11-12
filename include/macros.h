@@ -24,6 +24,7 @@
 #define CURRENT_CAM (&gCameras[gCurrentCameraID])
 
 #define BADGE_MENU_PAGE(index) (&gBadgeMenuPages[index])
+#define ITEM_MENU_PAGE(index) (&gItemMenuPages[index])
 
 #define MAX_MAPVARS 16
 #define MAX_MAPFLAGS 3

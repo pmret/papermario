@@ -1,18 +1,39 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "code_13CAF0", pause_items_comparator);
+s32 pause_items_comparator(s16* a, s16* b) {
+    if (*a > *b) {
+        return 1;
+    } else {
+        return -1;
+    }
+}
 
-INCLUDE_ASM(s32, "code_13CAF0", pause_items_get_pos_x);
+s32 pause_items_get_pos_x(s32 page, s32 itemIndex) {
+    return (itemIndex % ITEM_MENU_PAGE(page)->numCols) * 98;
+}
 
-INCLUDE_ASM(s32, "code_13CAF0", pause_items_get_pos_y);
+s32 pause_items_get_pos_y(s32 page, s32 itemIndex) {
+    return ((page + 1) * 11) + (ITEM_MENU_PAGE(page)->listStart * 16) + ((itemIndex / ITEM_MENU_PAGE(page)->numCols) * 16);
+}
 
-INCLUDE_ASM(s32, "code_13CAF0", pause_items_get_column);
+s32 pause_items_get_column(s32 page, s32 itemIdx) {
+    return itemIdx % ITEM_MENU_PAGE(page)->numCols;
+}
 
-INCLUDE_ASM(s32, "code_13CAF0", pause_items_get_row);
+s32 pause_items_get_row(s32 page, s32 itemIdx) {
+    return ITEM_MENU_PAGE(page)->listStart + (itemIdx / ITEM_MENU_PAGE(page)->numCols);
+}
 
-INCLUDE_ASM(s32, "code_13CAF0", pause_items_is_visible);
+s32 pause_items_is_visible(s32 y) {
+    if (y < gItemMenuCurrentScrollPos - 32) {
+        return FALSE;
+    }
+    return y < gItemMenuCurrentScrollPos + 128;
+}
 
-INCLUDE_ASM(s32, "code_13CAF0", pause_items_scroll_offset_y);
+s32 pause_items_scroll_offset_y(s32 beforeY) {
+    return beforeY - gItemMenuCurrentScrollPos;
+}
 
 s32 pause_items_scroll_offset_x(s32 beforeX) {
     return beforeX;
