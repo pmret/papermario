@@ -287,7 +287,7 @@ void add_part_decoration(ActorPart* part, s32 decorationIndex, DecorationId deco
         DecorationTable* decoration;
 
         _remove_part_decoration(part, decorationIndex);
-        decoration = decorationTable + decorationIndex;
+        decoration = &decorationTable[decorationIndex];
         decoration->decorationType[0] = decorationType;
         decoration->unk_8BA = 1;
         decoration->unk_8BC = 0;
