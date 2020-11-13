@@ -192,7 +192,7 @@ segments:
     - [0x47fc0, c, "os/code_47fc0_len_60"]
     - [0x48020, c, "os/code_48020_len_a00"]
     - [0x48a20, c, "os/ldiv"]
-    - [0x48be0, c, "os/code_48be0_len_20"]
+    - [0x48be0, c, "os/osSiDeviceBusy"]
     - [0x48c00, c, "os/code_48c00_len_5c0"]
     - [0x491c0, c, "os/code_491c0_len_f80"]
     - [0x49C70, c, "os/code_49C70"]
