@@ -25,7 +25,7 @@ void func_80147264(void) {
         case 1: // fading out
             if (temp->fadeFlags & 1) {
                 s32 phi_v0;
-                if (temp->fadeOutTime < 0xFA) {
+                if (temp->fadeOutTime < 250) {
                     phi_v0 = func_800554A4(0, temp->fadeOutTime);
                 } else {
                     phi_v0 = func_800554E8(0, temp->fadeOutTime);
