@@ -1554,7 +1554,7 @@ typedef struct {
 typedef struct {
     /* 0x00 */ s8 flags;
     /* 0x01 */ char unk_01;
-    /* 0x02 */ char unk_02; // related to heirarchy somehow - sibling? group?
+    /* 0x02 */ s8 unk_02; // related to heirarchy somehow - sibling? group?
     /* 0x03 */ s8 parent; // ?
     /* 0x04 */ s32 unk_04;
     /* 0x08 */ UNK_PTR unk_08;
