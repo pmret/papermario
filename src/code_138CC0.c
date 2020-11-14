@@ -132,10 +132,8 @@ void pause_badges_update(void) {
 
         if (temp - *unkSym >= 7) {
             *unkSym = temp - 6;
-        } else {
-            if (temp - *unkSym <= 0) {
-                *unkSym = temp - 1;
-            }
+        } else if (temp - *unkSym <= 0) {
+            *unkSym = temp - 1;
         }
     }
 
