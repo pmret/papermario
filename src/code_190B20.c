@@ -283,14 +283,12 @@ INCLUDE_ASM(s32, "code_190B20", func_802670C8);
 
 void add_part_decoration(ActorPart* part, s32 decorationIndex, DecorationId decorationType) {
     if ((part->idleAnimations) && !(part->flags & 2)) {
-        char* decorationTable = part->decorationTable->unk_00;
-        DecorationTable* decoration;
+        DecorationTable* decorationTable = part->decorationTable;
 
         _remove_part_decoration(part, decorationIndex);
-        decoration = &decorationTable[decorationIndex];
-        decoration->decorationType[0] = decorationType;
-        decoration->unk_8BA = 1;
-        decoration->unk_8BC = 0;
+        decorationTable->decorationType[decorationIndex] = decorationType;
+        decorationTable->unk_8BA[decorationIndex] = 1;
+        decorationTable->unk_8BC[decorationIndex] = 0;
         func_8025CEC8(part);
     }
 }
