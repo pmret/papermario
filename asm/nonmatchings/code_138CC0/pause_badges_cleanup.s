@@ -6,8 +6,8 @@ glabel pause_badges_cleanup
 /* 13CA9C 8024975C AFB10014 */  sw        $s1, 0x14($sp)
 /* 13CAA0 80249760 0000882D */  daddu     $s1, $zero, $zero
 /* 13CAA4 80249764 AFB00010 */  sw        $s0, 0x10($sp)
-/* 13CAA8 80249768 3C108027 */  lui       $s0, 0x8027
-/* 13CAAC 8024976C 261003A8 */  addiu     $s0, $s0, 0x3a8
+/* 13CAA8 80249768 3C108027 */  lui       $s0, %hi(D_802703A8)
+/* 13CAAC 8024976C 261003A8 */  addiu     $s0, $s0, %lo(D_802703A8)
 /* 13CAB0 80249770 AFBF0018 */  sw        $ra, 0x18($sp)
 .L80249774:
 /* 13CAB4 80249774 8E040000 */  lw        $a0, ($s0)

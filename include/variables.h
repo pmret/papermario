@@ -119,6 +119,8 @@ extern u8 D_800A095F;
 extern s32 D_800A0960;
 extern s32 D_800A0964;
 
+extern UIPanel gUIPanels[64];
+
 // Pause
 extern s32 gPauseMenuHeldButtons;
 extern s32 gPauseMenuPressedButtons;
@@ -127,7 +129,6 @@ extern Bytecode* gPauseMenuCurrentDescIconScript;
 extern s8 gPauseMenuCurrentTab;
 extern s32 gPauseMenuCommonIconIDs[8];
 extern s32 gPauseMenuTabIconIDs[6];
-extern PauseItemPage gItemMenuPages[20];
 extern s32 gPauseMenuStrings[348];
 extern s32 gPauseMenuIconScripts[8];
 extern MenuTab* gPauseMenuTabs[7];
@@ -141,11 +142,36 @@ extern u8 gPauseMenuTextScrollInterpEasingLUT[16];
 extern u8 gPauseMenuPageScrollInterpEasingLUT[16];
 
 // Badges
-extern PauseItemPage gBadgeMenuPages[20];
 extern s32 gBadgeMenuCurrentScrollPos;
 extern s32 gBadgeMenuTargetScrollPos;
 extern ItemId gBadgeMenuItemIDs[128];
 extern s32 gBadgeMenuCurrentPage;
+extern PauseItemPage gBadgeMenuPages[20];
+extern s32 gBadgeMenuSelectedIndex;
+extern s32 gBadgeMenuSelectedItemID;
+extern s16 gBadgeMenuNumItems;
+extern s32 D_80270388;
+extern s32 D_80270394;
+extern s32 gBadgeMenuLevel;
+extern s32 gBadgeMenuCurrentTab;
+extern s32 gBadgeMenuBShowNotEnoughBP;
+extern s32 D_802703A4;
+extern s32 D_802703A8;
+
+// Items
+extern s16 gItemMenuItemIDs[100];
+extern s32 gItemMenuCurrentPage;
+extern PauseItemPage gItemMenuPages[20];
+extern s32 gItemMenuSelectedIndex;
+extern s32 gItemMenuSelectedItemID;
+extern s16 gItemMenuNumItems;
+extern s32 D_802705D0;
+extern s32 gItemMenuCurrentScrollPos;
+extern s32 gItemMenuTargetScrollPos;
+extern s32 D_802705DC;
+extern s32 gItemMenuLevel;
+extern s32 gItemMenuCurrentTab;
+extern s32 gItemMenuScrollUpIcon;
 
 // Stats
 extern s32 gStatsMenuIconIDs[12];

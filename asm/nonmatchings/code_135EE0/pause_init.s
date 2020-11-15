@@ -81,8 +81,8 @@ glabel pause_init
 /* 1374C0 80244180 26100004 */   addiu    $s0, $s0, 4
 /* 1374C4 80244184 241400E1 */  addiu     $s4, $zero, 0xe1
 /* 1374C8 80244188 24110006 */  addiu     $s1, $zero, 6
-/* 1374CC 8024418C 3C158016 */  lui       $s5, %hi(D_80159D50)
-/* 1374D0 80244190 26B59D50 */  addiu     $s5, $s5, %lo(D_80159D50)
+/* 1374CC 8024418C 3C158016 */  lui       $s5, %hi(gUIPanels)
+/* 1374D0 80244190 26B59D50 */  addiu     $s5, $s5, %lo(gUIPanels)
 /* 1374D4 80244194 241303C0 */  addiu     $s3, $zero, 0x3c0
 /* 1374D8 80244198 2412001E */  addiu     $s2, $zero, 0x1e
 /* 1374DC 8024419C 3C108025 */  lui       $s0, 0x8025

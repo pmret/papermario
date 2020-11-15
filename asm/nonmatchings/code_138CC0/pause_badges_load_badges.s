@@ -8,8 +8,8 @@ glabel pause_badges_load_badges
 /* 13C0D8 80248D98 3C118011 */  lui       $s1, %hi(gPlayerData)
 /* 13C0DC 80248D9C 2631F290 */  addiu     $s1, $s1, %lo(gPlayerData)
 /* 13C0E0 80248DA0 AFBF0018 */  sw        $ra, 0x18($sp)
-/* 13C0E4 80248DA4 3C018027 */  lui       $at, 0x8027
-/* 13C0E8 80248DA8 AC200388 */  sw        $zero, 0x388($at)
+/* 13C0E4 80248DA4 3C018027 */  lui       $at, %hi(D_80270388)
+/* 13C0E8 80248DA8 AC200388 */  sw        $zero, %lo(D_80270388)($at)
 /* 13C0EC 80248DAC 14800014 */  bnez      $a0, .L80248E00
 /* 13C0F0 80248DB0 0000802D */   daddu    $s0, $zero, $zero
 /* 13C0F4 80248DB4 0200202D */  daddu     $a0, $s0, $zero
@@ -59,8 +59,8 @@ glabel pause_badges_load_badges
 /* 13C18C 80248E4C A4220180 */  sh        $v0, %lo(gBadgeMenuItemIDs)($at)
 /* 13C190 80248E50 24100001 */  addiu     $s0, $zero, 1
 .L80248E54:
-/* 13C194 80248E54 3C018027 */  lui       $at, 0x8027
-/* 13C198 80248E58 A4300384 */  sh        $s0, 0x384($at)
+/* 13C194 80248E54 3C018027 */  lui       $at, %hi(gBadgeMenuNumItems)
+/* 13C198 80248E58 A4300384 */  sh        $s0, %lo(gBadgeMenuNumItems)($at)
 /* 13C19C 80248E5C 0200202D */  daddu     $a0, $s0, $zero
 /* 13C1A0 80248E60 28820080 */  slti      $v0, $a0, 0x80
 /* 13C1A4 80248E64 1040000A */  beqz      $v0, .L80248E90
@@ -79,20 +79,20 @@ glabel pause_badges_load_badges
 /* 13C1D0 80248E90 3C058027 */  lui       $a1, %hi(gBadgeMenuPages)
 /* 13C1D4 80248E94 24A50288 */  addiu     $a1, $a1, %lo(gBadgeMenuPages)
 /* 13C1D8 80248E98 0000202D */  daddu     $a0, $zero, $zero
-/* 13C1DC 80248E9C 3C078027 */  lui       $a3, 0x8027
-/* 13C1E0 80248EA0 24E70384 */  addiu     $a3, $a3, 0x384
+/* 13C1DC 80248E9C 3C078027 */  lui       $a3, %hi(gBadgeMenuNumItems)
+/* 13C1E0 80248EA0 24E70384 */  addiu     $a3, $a3, %lo(gBadgeMenuNumItems)
 /* 13C1E4 80248EA4 24060001 */  addiu     $a2, $zero, 1
 /* 13C1E8 80248EA8 24090008 */  addiu     $t1, $zero, 8
 /* 13C1EC 80248EAC 24080008 */  addiu     $t0, $zero, 8
 /* 13C1F0 80248EB0 00A81821 */  addu      $v1, $a1, $t0
-/* 13C1F4 80248EB4 3C018027 */  lui       $at, 0x8027
-/* 13C1F8 80248EB8 AC200378 */  sw        $zero, 0x378($at)
-/* 13C1FC 80248EBC 3C018027 */  lui       $at, 0x8027
-/* 13C200 80248EC0 AC200380 */  sw        $zero, 0x380($at)
+/* 13C1F4 80248EB4 3C018027 */  lui       $at, %hi(gBadgeMenuSelectedIndex)
+/* 13C1F8 80248EB8 AC200378 */  sw        $zero, %lo(gBadgeMenuSelectedIndex)($at)
+/* 13C1FC 80248EBC 3C018027 */  lui       $at, %hi(gBadgeMenuSelectedItemID)
+/* 13C200 80248EC0 AC200380 */  sw        $zero, %lo(gBadgeMenuSelectedItemID)($at)
 /* 13C204 80248EC4 3C018027 */  lui       $at, 0x8027
 /* 13C208 80248EC8 AC20037C */  sw        $zero, 0x37c($at)
-/* 13C20C 80248ECC 3C018027 */  lui       $at, 0x8027
-/* 13C210 80248ED0 AC200394 */  sw        $zero, 0x394($at)
+/* 13C20C 80248ECC 3C018027 */  lui       $at, %hi(D_80270394)
+/* 13C210 80248ED0 AC200394 */  sw        $zero, %lo(D_80270394)($at)
 /* 13C214 80248ED4 3C018027 */  lui       $at, %hi(gBadgeMenuCurrentPage)
 /* 13C218 80248ED8 AC200280 */  sw        $zero, %lo(gBadgeMenuCurrentPage)($at)
 .L80248EDC:

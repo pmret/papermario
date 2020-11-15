@@ -1537,7 +1537,7 @@ typedef struct {
     /* 0x00 */ s8 enabled;
     /* 0x01 */ u8 listStart;
     /* 0x02 */ u8 numCols;
-    /* 0x03 */ s8 numRows;
+    /* 0x03 */ u8 numRows;
     /* 0x04 */ s32 startIndex;
     /* 0x08 */ s32 count;
 } PauseItemPage; // size = 0xC
@@ -1550,5 +1550,22 @@ typedef struct {
     /* 0x14 */ void* fpUpdate;
     /* 0x18 */ void* fpCleanup;
 } MenuTab; // size = 0x1C
+
+typedef struct {
+    /* 0x00 */ s8 flags;
+    /* 0x01 */ char unk_01;
+    /* 0x02 */ s8 unk_02; // related to heirarchy somehow - sibling? group?
+    /* 0x03 */ s8 parent; // ?
+    /* 0x04 */ s32 unk_04;
+    /* 0x08 */ UNK_PTR unk_08;
+    /* 0x0C */ s16 posX;
+    /* 0x0E */ s16 posY;
+    /* 0x10 */ s16 width;
+    /* 0x12 */ s16 height;
+    /* 0x14 */ UNK_PTR fpDrawContents;
+    /* 0x18 */ s32 unk_18; // MenuTab pointer for pause menu tabs
+    /* 0x1C */ s8 unk_1C;
+    /* 0x1D */ char unk_1D[3];
+} UIPanel; // size = 0x20
 
 #endif

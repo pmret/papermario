@@ -1,5 +1,11 @@
+.include "macro.inc"
+
+# assembler directives
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
+.set gp=64     # allow use of 64-bit general purpose registers
+
+.section .text, "ax"
 
 glabel __osDisableInt
 /* 46760 8006B360 3C0A8009 */  lui       $t2, 0x8009
@@ -26,8 +32,8 @@ glabel __osDisableInt
 /* 467B4 8006B3B4 2401FFFE */  addiu     $at, $zero, -2
 /* 467B8 8006B3B8 01214824 */  and       $t1, $t1, $at
 /* 467BC 8006B3BC 40896000 */  mtc0      $t1, $12
-/* 467C0 8006B3C0 00000000 */  nop       
-/* 467C4 8006B3C4 00000000 */  nop       
+/* 467C0 8006B3C0 00000000 */  nop
+/* 467C4 8006B3C4 00000000 */  nop
 .L8006B3C8:
 /* 467C8 8006B3C8 03E00008 */  jr        $ra
-/* 467CC 8006B3CC 00000000 */   nop      
+/* 467CC 8006B3CC 00000000 */   nop

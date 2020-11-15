@@ -227,8 +227,8 @@ glabel func_80248BF4
 /* 16978C 80248F2C 24A53CCC */  addiu     $a1, $a1, 0x3ccc
 /* 169790 80248F30 0C051F9F */  jal       func_80147E7C
 /* 169794 80248F34 24040032 */   addiu    $a0, $zero, 0x32
-/* 169798 80248F38 3C048016 */  lui       $a0, %hi(D_80159D50)
-/* 16979C 80248F3C 24849D50 */  addiu     $a0, $a0, %lo(D_80159D50)
+/* 169798 80248F38 3C048016 */  lui       $a0, %hi(gUIPanels)
+/* 16979C 80248F3C 24849D50 */  addiu     $a0, $a0, %lo(gUIPanels)
 /* 1697A0 80248F40 24020079 */  addiu     $v0, $zero, 0x79
 /* 1697A4 80248F44 A482064E */  sh        $v0, 0x64e($a0)
 /* 1697A8 80248F48 24020045 */  addiu     $v0, $zero, 0x45
@@ -251,8 +251,8 @@ glabel func_80248BF4
 /* 1697EC 80248F8C 2463FFDE */   addiu    $v1, $v1, -0x22
 .L80248F90:
 /* 1697F0 80248F90 2403007E */  addiu     $v1, $zero, 0x7e
-/* 1697F4 80248F94 3C048016 */  lui       $a0, %hi(D_80159D50)
-/* 1697F8 80248F98 24849D50 */  addiu     $a0, $a0, %lo(D_80159D50)
+/* 1697F4 80248F94 3C048016 */  lui       $a0, %hi(gUIPanels)
+/* 1697F8 80248F98 24849D50 */  addiu     $a0, $a0, %lo(gUIPanels)
 .L80248F9C:
 /* 1697FC 80248F9C 2402FFBA */  addiu     $v0, $zero, -0x46
 /* 169800 80248FA0 A4A30000 */  sh        $v1, ($a1)
@@ -429,8 +429,8 @@ glabel func_80248BF4
 /* 169A7C 8024921C 24A53CCC */  addiu     $a1, $a1, 0x3ccc
 /* 169A80 80249220 0C051F9F */  jal       func_80147E7C
 /* 169A84 80249224 24040032 */   addiu    $a0, $zero, 0x32
-/* 169A88 80249228 3C048016 */  lui       $a0, %hi(D_80159D50)
-/* 169A8C 8024922C 24849D50 */  addiu     $a0, $a0, %lo(D_80159D50)
+/* 169A88 80249228 3C048016 */  lui       $a0, %hi(gUIPanels)
+/* 169A8C 8024922C 24849D50 */  addiu     $a0, $a0, %lo(gUIPanels)
 /* 169A90 80249230 24020079 */  addiu     $v0, $zero, 0x79
 /* 169A94 80249234 A482064E */  sh        $v0, 0x64e($a0)
 /* 169A98 80249238 24020045 */  addiu     $v0, $zero, 0x45
@@ -453,8 +453,8 @@ glabel func_80248BF4
 /* 169ADC 8024927C 2463FFDE */   addiu    $v1, $v1, -0x22
 .L80249280:
 /* 169AE0 80249280 2403007E */  addiu     $v1, $zero, 0x7e
-/* 169AE4 80249284 3C048016 */  lui       $a0, %hi(D_80159D50)
-/* 169AE8 80249288 24849D50 */  addiu     $a0, $a0, %lo(D_80159D50)
+/* 169AE4 80249284 3C048016 */  lui       $a0, %hi(gUIPanels)
+/* 169AE8 80249288 24849D50 */  addiu     $a0, $a0, %lo(gUIPanels)
 .L8024928C:
 /* 169AEC 8024928C 2402FFBA */  addiu     $v0, $zero, -0x46
 /* 169AF0 80249290 A4A30000 */  sh        $v1, ($a1)
