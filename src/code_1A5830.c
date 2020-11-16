@@ -1,12 +1,51 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "code_1A5830", func_80276F50);
+void dispatch_event_actor(Actor* actor, Event event);
 
-INCLUDE_ASM(s32, "code_1A5830", dispatch_event_general);
+s32 func_80276F50(Actor* actor) {
+    ActorPart* partIt = actor->partsTable;
+    s32 ret = FALSE;
+
+    while (partIt != NULL) {
+        if (partIt->eventFlags & 0xC0000) {
+            ret = TRUE;
+            break;
+        } else {
+            partIt = partIt->nextPart;
+        }
+    }
+    return ret;
+}
+
+void dispatch_event_general(Actor* actor, Event event);
+INCLUDE_ASM(void, "code_1A5830", dispatch_event_general, Actor* actor, Event event);
 
 INCLUDE_ASM(s32, "code_1A5830", play_hit_sound);
 
-INCLUDE_ASM(s32, "code_1A5830", dispatch_event_actor);
+void dispatch_event_actor(Actor* actor, Event event) {
+    ScriptInstance* onHitScript = actor->onHitScript;
+    ScriptID onHitID = actor->onHitID;
+
+    if (actor->onHitCode != NULL) {
+        ScriptInstance* newScript;
+
+        actor->lastEventType = event;
+        newScript = start_script(actor->onHitCode, 0xA, 0x20);
+        actor->onHitScript = newScript;
+        actor->onHitID = newScript->id;
+        newScript->owner1.actorID = actor->actorID;
+    }
+
+    if (actor->takeTurnScript != NULL) {
+        get_script_by_index(actor->takeTurnID);
+        kill_script_by_ID(actor->takeTurnID);
+        actor->takeTurnScript = NULL;
+    }
+
+    if (onHitScript != NULL) {
+        kill_script_by_ID(onHitID);
+    }
+}
 
 INCLUDE_ASM(s32, "code_1A5830", calc_enemy_test_target);
 
@@ -229,7 +268,27 @@ INCLUDE_ASM(s32, "code_1A5830", EnemyFollowupAfflictTarget);
 
 INCLUDE_ASM(s32, "code_1A5830", EnemyTestTarget);
 
-INCLUDE_ASM(s32, "code_1A5830", DispatchDamageEvent);
+ApiStatus DispatchDamageEvent(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    ActorId actorID = get_variable(script, *args++);
+    Actor* actor;
+    s32 damageAmount;
+    s32 scriptExists;
+
+    if (actorID == ActorId_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    actor = get_actor(actorID);
+    damageAmount = get_variable(script, *args++);
+
+    if (dispatch_damage_event_actor_0(actor, damageAmount, get_variable(script, *args++)) < 0) {
+        return ApiStatus_BLOCK;
+    }
+
+    scriptExists = does_script_exist_by_ref(script) != 0;
+    return scriptExists * ApiStatus_DONE2;
+}
 
 ApiStatus DispatchEvent(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -267,7 +326,21 @@ ApiStatus func_8027D32C(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "code_1A5830", SetTargetOffset);
 
-INCLUDE_ASM(s32, "code_1A5830", func_8027D434);
+ApiStatus func_8027D434(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    ActorId actorID = get_variable(script, *args++);
+    s32 partIndex;
+    ActorPart* part;
+
+    if (actorID == ActorId_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    partIndex = get_variable(script, *args++);
+    part = get_actor_part(get_actor(actorID), partIndex);
+    part->unk_70 = get_variable(script, *args++);
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_1A5830", func_8027D4C8);
 
@@ -392,7 +465,19 @@ ApiStatus GetLastDamage(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "code_1A5830", EnableActorGlow);
 
+// Cannot get gBattleStatus to load via lui+addiu no matter what I do
+#ifdef NON_MATCHING
+ApiStatus WasStatusInflicted(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+
+    get_variable(script, *args++);
+    set_variable(script, *args++, gBattleStatus.wasStatusInflicted);
+
+    return ApiStatus_DONE2;
+}
+#else
 INCLUDE_ASM(s32, "code_1A5830", WasStatusInflicted);
+#endif
 
 INCLUDE_ASM(s32, "code_1A5830", CopyStatusEffects);
 

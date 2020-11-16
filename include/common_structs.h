@@ -581,7 +581,7 @@ typedef struct BattleStatus {
     /* 0x196 */ char unk_196;
     /* 0x197 */ u8 targetHomeIndex; /* some sort of home idnex used for target list construction */
     /* 0x198 */ u8 powerBounceCounter;
-    /* 0x199 */ u8 wasStatusInflicted; /* during last attack */
+    /* 0x199 */ s8 wasStatusInflicted; /* during last attack */
     /* 0x19A */ s8 unk_19A;
     /* 0x19B */ char unk_19B[5];
     /* 0x1A0 */ s16 currentTargetID; /* selected? */
@@ -1034,7 +1034,7 @@ typedef struct ActorPart {
     /* 0x64 */ f32 yaw;
     /* 0x68 */ s16 unkOffset[2];
     /* 0x6C */ s16 targetOffset[2];
-    /* 0x70 */ s16 unk;
+    /* 0x70 */ s16 unk_70;
     /* 0x72 */ u8 size[2];
     /* 0x74 */ u8 verticalStretch;
     /* 0x75 */ char unk_75[3];
