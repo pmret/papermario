@@ -1,3 +1,7 @@
 #include "dgb_01.h"
+#include "ld_addrs.h"
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_01/BFD880", func_80240000_BFD880);
+ApiStatus func_80240000_BFD880(void) {
+    dma_copy(&data_C20F40_ROM_START, &data_C20F40_ROM_END, &gBackgroundImage);
+    return ApiStatus_DONE2;
+}

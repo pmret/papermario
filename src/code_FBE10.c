@@ -65,7 +65,36 @@ ApiStatus func_802D7B74(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_FBE10", func_802D7BA4);
+ApiStatus func_802D7BA4(ScriptInstance* script, s32 isInitialCall) {
+    s32 var1 = script->varTable[1];
+    s32 var2 = script->varTable[2];
+    s32 var3 = script->varTable[3];
+    s32 var4 = script->varTable[4];
+    s32 var5 = script->varTable[5];
+    s32 var6 = script->varTable[6];
+    s32 temp;
+    s32 t0;
+    f32 t1;
+
+    if (isInitialCall) {
+        script->functionTemp[0].s = var6;
+        func_80137DC0(1, &t0, &t1);
+        script->functionTemp[1].s = t1;
+        func_80137E4C(1, 0, var1, var2);
+        func_80137E4C(1, 1, var3, var4);
+    }
+
+    func_80137DC0(1, &t0, &t1);
+    temp = (script->functionTemp[1].s - var5) * script->functionTemp[0].s;
+    func_80137DA4(12, (temp / var6) + var5);
+
+    script->functionTemp[0].s--;
+    if (script->functionTemp[0].s < 0) {
+        func_80137DA4(12, var5);
+        return ApiStatus_DONE2;
+    }
+    return ApiStatus_BLOCK;
+}
 
 ApiStatus Spawn802D9D50(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

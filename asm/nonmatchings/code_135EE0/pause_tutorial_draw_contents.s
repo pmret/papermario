@@ -460,9 +460,9 @@ glabel pause_tutorial_draw_contents
 /* 13723C 80243EFC 8C42F090 */  lw        $v0, -0xf70($v0)
 /* 137240 80243F00 8FAE0128 */  lw        $t6, 0x128($sp)
 /* 137244 80243F04 00021080 */  sll       $v0, $v0, 2
-/* 137248 80243F08 3C048027 */  lui       $a0, 0x8027
+/* 137248 80243F08 3C048027 */  lui       $a0, %hi(gPauseMenuCommonIconIDs)
 /* 13724C 80243F0C 00822021 */  addu      $a0, $a0, $v0
-/* 137250 80243F10 8C8400E8 */  lw        $a0, 0xe8($a0)
+/* 137250 80243F10 8C8400E8 */  lw        $a0, %lo(gPauseMenuCommonIconIDs)($a0)
 /* 137254 80243F14 0C051261 */  jal       set_icon_render_pos
 /* 137258 80243F18 25C60034 */   addiu    $a2, $t6, 0x34
 /* 13725C 80243F1C 8EA20000 */  lw        $v0, ($s5)
@@ -471,9 +471,9 @@ glabel pause_tutorial_draw_contents
 /* 137268 80243F28 00220821 */  addu      $at, $at, $v0
 /* 13726C 80243F2C 8C22F090 */  lw        $v0, -0xf70($at)
 /* 137270 80243F30 00021080 */  sll       $v0, $v0, 2
-/* 137274 80243F34 3C048027 */  lui       $a0, 0x8027
+/* 137274 80243F34 3C048027 */  lui       $a0, %hi(gPauseMenuCommonIconIDs)
 /* 137278 80243F38 00822021 */  addu      $a0, $a0, $v0
-/* 13727C 80243F3C 8C8400E8 */  lw        $a0, 0xe8($a0)
+/* 13727C 80243F3C 8C8400E8 */  lw        $a0, %lo(gPauseMenuCommonIconIDs)($a0)
 /* 137280 80243F40 0C051280 */  jal       set_icon_flags
 /* 137284 80243F44 34058000 */   ori      $a1, $zero, 0x8000
 /* 137288 80243F48 8EA20000 */  lw        $v0, ($s5)
@@ -483,9 +483,9 @@ glabel pause_tutorial_draw_contents
 /* 137298 80243F58 8C22F090 */  lw        $v0, -0xf70($at)
 /* 13729C 80243F5C 3C053F00 */  lui       $a1, 0x3f00
 /* 1372A0 80243F60 00021080 */  sll       $v0, $v0, 2
-/* 1372A4 80243F64 3C048027 */  lui       $a0, 0x8027
+/* 1372A4 80243F64 3C048027 */  lui       $a0, %hi(gPauseMenuCommonIconIDs)
 /* 1372A8 80243F68 00822021 */  addu      $a0, $a0, $v0
-/* 1372AC 80243F6C 8C8400E8 */  lw        $a0, 0xe8($a0)
+/* 1372AC 80243F6C 8C8400E8 */  lw        $a0, %lo(gPauseMenuCommonIconIDs)($a0)
 /* 1372B0 80243F70 0C051308 */  jal       func_80144C20
 /* 1372B4 80243F74 00000000 */   nop      
 /* 1372B8 80243F78 8EA20000 */  lw        $v0, ($s5)
@@ -494,14 +494,14 @@ glabel pause_tutorial_draw_contents
 /* 1372C4 80243F84 00220821 */  addu      $at, $at, $v0
 /* 1372C8 80243F88 8C22F090 */  lw        $v0, -0xf70($at)
 /* 1372CC 80243F8C 00021080 */  sll       $v0, $v0, 2
-/* 1372D0 80243F90 3C048027 */  lui       $a0, 0x8027
+/* 1372D0 80243F90 3C048027 */  lui       $a0, %hi(gPauseMenuCommonIconIDs)
 /* 1372D4 80243F94 00822021 */  addu      $a0, $a0, $v0
-/* 1372D8 80243F98 8C8400E8 */  lw        $a0, 0xe8($a0)
+/* 1372D8 80243F98 8C8400E8 */  lw        $a0, %lo(gPauseMenuCommonIconIDs)($a0)
 /* 1372DC 80243F9C 0C0511F8 */  jal       draw_icon_2
 /* 1372E0 80243FA0 00000000 */   nop      
 /* 1372E4 80243FA4 8EA20000 */  lw        $v0, ($s5)
-/* 1372E8 80243FA8 3C108027 */  lui       $s0, 0x8027
-/* 1372EC 80243FAC 261000E8 */  addiu     $s0, $s0, 0xe8
+/* 1372E8 80243FA8 3C108027 */  lui       $s0, %hi(gPauseMenuCommonIconIDs)
+/* 1372EC 80243FAC 261000E8 */  addiu     $s0, $s0, %lo(gPauseMenuCommonIconIDs)
 /* 1372F0 80243FB0 00021080 */  sll       $v0, $v0, 2
 /* 1372F4 80243FB4 3C038025 */  lui       $v1, 0x8025
 /* 1372F8 80243FB8 00621821 */  addu      $v1, $v1, $v0

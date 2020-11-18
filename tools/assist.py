@@ -110,9 +110,9 @@ def diff_syms(qb, tb):
     else:
         larger = tb
         smaller = qb
-    
+
     len_ratio = len(smaller) / len(larger)
-    
+
     if abs(len(larger) - len(smaller)) < 16 and is_zeros(larger[len(smaller):]):
         len_ratio = 1
 

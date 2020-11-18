@@ -414,8 +414,8 @@ glabel pause_map_draw_contents
 /* 14148C 8024E14C 8E040000 */  lw        $a0, ($s0)
 /* 141490 8024E150 0C0511F8 */  jal       draw_icon_2
 /* 141494 8024E154 00000000 */   nop      
-/* 141498 8024E158 3C138027 */  lui       $s3, 0x8027
-/* 14149C 8024E15C 267300D4 */  addiu     $s3, $s3, 0xd4
+/* 141498 8024E158 3C138027 */  lui       $s3, %hi(gPauseMenuCurrentTab)
+/* 14149C 8024E15C 267300D4 */  addiu     $s3, $s3, %lo(gPauseMenuCurrentTab)
 /* 1414A0 8024E160 82700000 */  lb        $s0, ($s3)
 /* 1414A4 8024E164 24020006 */  addiu     $v0, $zero, 6
 /* 1414A8 8024E168 16020081 */  bne       $s0, $v0, .L8024E370

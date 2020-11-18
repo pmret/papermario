@@ -24,7 +24,7 @@ glabel delete_entity_and_unload_data
 /* A6ED8 801107D8 080441FC */  j         .L801107F0
 /* A6EDC 801107DC 00000000 */   nop      
 .L801107E0:
-/* A6EE0 801107E0 0C047FF8 */  jal       func_8011FFE0
+/* A6EE0 801107E0 0C047FF8 */  jal       get_anim_mesh
 /* A6EE4 801107E4 86240014 */   lh       $a0, 0x14($s1)
 /* A6EE8 801107E8 0C04790E */  jal       func_8011E438
 /* A6EEC 801107EC 0040202D */   daddu    $a0, $v0, $zero

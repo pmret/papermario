@@ -6,8 +6,8 @@ glabel func_80120198
 /* B689C 8012019C 2402F7FF */  addiu     $v0, $zero, -0x801
 /* B68A0 801201A0 AFB10014 */  sw        $s1, 0x14($sp)
 /* B68A4 801201A4 00828824 */  and       $s1, $a0, $v0
-/* B68A8 801201A8 3C038015 */  lui       $v1, 0x8015
-/* B68AC 801201AC 8C633A40 */  lw        $v1, 0x3a40($v1)
+/* B68A8 801201A8 3C038015 */  lui       $v1, %hi(gCurrentAnimMeshListPtr)
+/* B68AC 801201AC 8C633A40 */  lw        $v1, %lo(gCurrentAnimMeshListPtr)($v1)
 /* B68B0 801201B0 00111080 */  sll       $v0, $s1, 2
 /* B68B4 801201B4 AFBF001C */  sw        $ra, 0x1c($sp)
 /* B68B8 801201B8 AFB20018 */  sw        $s2, 0x18($sp)

@@ -17,7 +17,7 @@ gPlayerNpcPtr = 0x802D9D20;
 D_80147574 = 0x80147574;
 D_8010EBB0 = 0x8010EBB0;
 D_8010F250 = 0x8010F250;
-D_80159D50 = 0x80159D50;
+gUIPanels = 0x80159D50;
 
 D_802EB390 = 0x802EB390;
 D_802EB394 = 0x802EB394;
@@ -50,6 +50,9 @@ D_800A0963 = 0x800A0963;
 D_800A0964 = 0x800A0964;
 
 D_800E92D8 = 0x800E92D8;
+
+gPartnerAnimations = 0x800F8348;
+
 D_80147474 = 0x80147474;
 D_80109270 = 0x80109270;
 D_80108558 = 0x80108558;
@@ -148,6 +151,58 @@ D_800DC500 = 0x800DC500;
 D_8010F6D0 = 0x8010F6D0;
 
 gBackgroundImage = 0x80200000;
+
+gPauseMenuIconScripts = 0x8024EF60;
+gPauseMenuTabs = 0x8024EF80;
+gPauseMenuCursorPosX = 0x8024EF9C;
+gPauseMenuCursorPosY = 0x8024EFA0;
+gPauseMenuCursorOpacity = 0x8024EFA4;
+gPauseMenuTargetPosX = 0x8024EFA8;
+gPauseMenuTargetPosY = 0x8024EFAC;
+gPauseMenuCursorTargetOpacity = 0x8024EFB0;
+
+gPauseMenuTextScrollInterpEasingLUT = 0x8024F0AC;
+gPauseMenuPageScrollInterpEasingLUT = 0x8024F0BC;
+
+gPauseMenuHeldButtons = 0x802700C0;
+gPauseMenuPressedButtons = 0x802700C4;
+gPauseMenuCurrentDescString = 0x802700C8;
+gPauseMenuCurrentDescIconScript = 0x802700CC;
+gPauseMenuCurrentTab = 0x802700D4;
+gPauseMenuCommonIconIDs = 0x802700E8;
+
+gPauseMenuTabIconIDs = 0x80270130;
+gStatsMenuIconIDs = 0x80270150;
+gBadgeMenuItemIDs = 0x80270180;
+gBadgeMenuCurrentPage = 0x80270280;
+gBadgeMenuPages = 0x80270288;
+gBadgeMenuSelectedIndex = 0x80270378;
+gBadgeMenuSelectedItemID = 0x80270380;
+gBadgeMenuNumItems = 0x80270384;
+D_80270388 = 0x80270388;
+gBadgeMenuCurrentScrollPos = 0x8027038C;
+gBadgeMenuTargetScrollPos = 0x80270390;
+D_80270394 = 0x80270394;
+gBadgeMenuLevel = 0x80270398;
+gBadgeMenuCurrentTab = 0x8027039C;
+gBadgeMenuBShowNotEnoughBP = 0x802703A0;
+D_802703A4 = 0x802703A4;
+D_802703A8 = 0x802703A8;
+
+gItemMenuItemIDs = 0x80270400;
+gItemMenuCurrentPage = 0x802704C8;
+gItemMenuPages = 0x802704D0;
+gItemMenuSelectedIndex = 0x802705C0;
+gItemMenuSelectedItemID = 0x802705C8;
+gItemMenuNumItems = 0x802705CC;
+D_802705D0 = 0x802705D0;
+gItemMenuCurrentScrollPos = 0x802705D4;
+gItemMenuTargetScrollPos = 0x802705D8;
+D_802705DC = 0x802705DC;
+gItemMenuLevel = 0x802705E0;
+gItemMenuCurrentTab = 0x802705E4;
+gItemMenuScrollUpIcon = 0x80270628;
+
 D_802C3000 = 0x802C3000;
 D_802DBD40 = 0x802DBD40;
 gCurrentPrintContext = 0x802DB260;
@@ -197,9 +252,11 @@ gWorldModelList = 0x80151770;
 gBattleModelList = 0x80151B70;
 gCurrentModelListPtr = 0x801512CC;
 
-gWorldModelSpecialDls = 0x8015F90;
-gBattleModelSpecialDls = 0x80152010;
+gCurrentAnimMeshListPtr = 0x80153A40;
+
 gCurrentModelSpecialDlsPtr = 0x801512E8;
+gWorldModelSpecialDls = 0x80151F90;
+gBattleModelSpecialDls = 0x80152010;
 
 gWorldEntityList = 0x80151380;
 gBattleEntityList = 0x801513F8;
@@ -232,6 +289,10 @@ gCurrentSaveFile = 0x800DACC0;
 
 gMapFlags = 0x802DA480;
 gMapVars = 0x802DA484;
+
+gBattleMeshAnimationList = 0x802DADB0;
+gWorldMeshAnimationList = 0x802DADF0;
+gCurrentMeshAnimationListPtr = 0x802DAE30;
 
 gEffectTable = 0x8007F214;
 

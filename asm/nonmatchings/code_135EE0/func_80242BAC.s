@@ -8,8 +8,8 @@ glabel func_80242BAC
 /* 135EF8 80242BB8 AFB3001C */  sw        $s3, 0x1c($sp)
 /* 135EFC 80242BBC 00C0982D */  daddu     $s3, $a2, $zero
 /* 135F00 80242BC0 AFB40020 */  sw        $s4, 0x20($sp)
-/* 135F04 80242BC4 3C148016 */  lui       $s4, %hi(D_80159D50)
-/* 135F08 80242BC8 26949D50 */  addiu     $s4, $s4, %lo(D_80159D50)
+/* 135F04 80242BC4 3C148016 */  lui       $s4, %hi(gUIPanels)
+/* 135F08 80242BC8 26949D50 */  addiu     $s4, $s4, %lo(gUIPanels)
 /* 135F0C 80242BCC 00042140 */  sll       $a0, $a0, 5
 /* 135F10 80242BD0 AFB20018 */  sw        $s2, 0x18($sp)
 /* 135F14 80242BD4 3C128025 */  lui       $s2, 0x8025
@@ -80,14 +80,14 @@ glabel func_80242BAC
 /* 135FFC 80242CBC 14400009 */  bnez      $v0, .L80242CE4
 /* 136000 80242CC0 00000000 */   nop      
 .L80242CC4:
-/* 136004 80242CC4 3C018025 */  lui       $at, 0x8025
-/* 136008 80242CC8 AC31EFA8 */  sw        $s1, -0x1058($at)
-/* 13600C 80242CCC 3C018025 */  lui       $at, 0x8025
-/* 136010 80242CD0 AC31EF9C */  sw        $s1, -0x1064($at)
-/* 136014 80242CD4 3C018025 */  lui       $at, 0x8025
-/* 136018 80242CD8 AC33EFAC */  sw        $s3, -0x1054($at)
-/* 13601C 80242CDC 3C018025 */  lui       $at, 0x8025
-/* 136020 80242CE0 AC33EFA0 */  sw        $s3, -0x1060($at)
+/* 136004 80242CC4 3C018025 */  lui       $at, %hi(gPauseMenuTargetPosX)
+/* 136008 80242CC8 AC31EFA8 */  sw        $s1, %lo(gPauseMenuTargetPosX)($at)
+/* 13600C 80242CCC 3C018025 */  lui       $at, %hi(gPauseMenuCursorPosX)
+/* 136010 80242CD0 AC31EF9C */  sw        $s1, %lo(gPauseMenuCursorPosX)($at)
+/* 136014 80242CD4 3C018025 */  lui       $at, %hi(gPauseMenuTargetPosY)
+/* 136018 80242CD8 AC33EFAC */  sw        $s3, %lo(gPauseMenuTargetPosY)($at)
+/* 13601C 80242CDC 3C018025 */  lui       $at, %hi(gPauseMenuCursorPosY)
+/* 136020 80242CE0 AC33EFA0 */  sw        $s3, %lo(gPauseMenuCursorPosY)($at)
 .L80242CE4:
 /* 136024 80242CE4 8FBF0024 */  lw        $ra, 0x24($sp)
 /* 136028 80242CE8 8FB40020 */  lw        $s4, 0x20($sp)

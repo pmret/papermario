@@ -23,14 +23,14 @@ glabel func_802CD8F8
 /* F22F0 802CD940 00118880 */  sll       $s1, $s1, 2
 /* F22F4 802CD944 8E130000 */  lw        $s3, ($s0)
 /* F22F8 802CD948 26100004 */  addiu     $s0, $s0, 4
-/* F22FC 802CD94C 3C03802E */  lui       $v1, 0x802e
-/* F2300 802CD950 8C63AE30 */  lw        $v1, -0x51d0($v1)
+/* F22FC 802CD94C 3C03802E */  lui       $v1, %hi(gCurrentMeshAnimationListPtr)
+/* F2300 802CD950 8C63AE30 */  lw        $v1, %lo(gCurrentMeshAnimationListPtr)($v1)
 /* F2304 802CD954 8E140000 */  lw        $s4, ($s0)
 /* F2308 802CD958 02238821 */  addu      $s1, $s1, $v1
 /* F230C 802CD95C 8E230000 */  lw        $v1, ($s1)
 /* F2310 802CD960 8E150004 */  lw        $s5, 4($s0)
 /* F2314 802CD964 8C640000 */  lw        $a0, ($v1)
-/* F2318 802CD968 0C047FF8 */  jal       func_8011FFE0
+/* F2318 802CD968 0C047FF8 */  jal       get_anim_mesh
 /* F231C 802CD96C 0040882D */   daddu    $s1, $v0, $zero
 /* F2320 802CD970 0040202D */  daddu     $a0, $v0, $zero
 /* F2324 802CD974 0C047FDD */  jal       func_8011FF74

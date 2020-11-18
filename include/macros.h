@@ -24,9 +24,14 @@
 #define CURRENT_CAM (&gCameras[gCurrentCameraID])
 #define GET_MAP_ENTRY(cfg, idx) (&(*cfg->entryList)[idx])
 
+#define BADGE_MENU_PAGE(index) (&gBadgeMenuPages[index])
+#define ITEM_MENU_PAGE(index) (&gItemMenuPages[index])
+
 #define MAX_MAPVARS 16
 #define MAX_MAPFLAGS 3
 
+#define MAX_ANIMATED_MODELS 16
+#define MAX_ANIMATED_MESHES 16
 #define MAX_MODELS 256
 #define MAX_SCRIPTS 128
 #define MAX_NPCS 64

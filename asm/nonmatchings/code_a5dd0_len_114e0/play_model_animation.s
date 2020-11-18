@@ -4,8 +4,8 @@
 glabel play_model_animation
 /* B6848 80120148 2402F7FF */  addiu     $v0, $zero, -0x801
 /* B684C 8012014C 00822024 */  and       $a0, $a0, $v0
-/* B6850 80120150 3C028015 */  lui       $v0, 0x8015
-/* B6854 80120154 8C423A40 */  lw        $v0, 0x3a40($v0)
+/* B6850 80120150 3C028015 */  lui       $v0, %hi(gCurrentAnimMeshListPtr)
+/* B6854 80120154 8C423A40 */  lw        $v0, %lo(gCurrentAnimMeshListPtr)($v0)
 /* B6858 80120158 00042080 */  sll       $a0, $a0, 2
 /* B685C 8012015C 00822021 */  addu      $a0, $a0, $v0
 /* B6860 80120160 8C840000 */  lw        $a0, ($a0)

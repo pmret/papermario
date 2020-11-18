@@ -10,7 +10,7 @@ glabel func_802E46BC
 /* 105F50 802E46D0 86040014 */  lh        $a0, 0x14($s0)
 /* 105F54 802E46D4 3C02802E */  lui       $v0, 0x802e
 /* 105F58 802E46D8 2442455C */  addiu     $v0, $v0, 0x455c
-/* 105F5C 802E46DC 0C047FF8 */  jal       func_8011FFE0
+/* 105F5C 802E46DC 0C047FF8 */  jal       get_anim_mesh
 /* 105F60 802E46E0 AE02003C */   sw       $v0, 0x3c($s0)
 /* 105F64 802E46E4 24030011 */  addiu     $v1, $zero, 0x11
 /* 105F68 802E46E8 A0430004 */  sb        $v1, 4($v0)

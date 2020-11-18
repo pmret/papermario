@@ -723,8 +723,13 @@ typedef struct AnimatedMesh {
     /* 0x098 */ struct Matrix4s mtx;
     /* 0x0D8 */ char unk_D8[500];
     /* 0x2CC */ s32 time;
-    /* 0x2D0 */ char unk_2D0[16];
+    /* 0x2D0 */ char unk_2D0[4];
+    /* 0x2D4 */ s32 unk_2D4;
+    /* 0x2D8 */ s32 unk_2D8;
+    /* 0x2DC */ char unk_2DC[4];
 } AnimatedMesh; // size = 0x2E0
+
+typedef AnimatedMesh* AnimatedMeshList[MAX_ANIMATED_MESHES];
 
 typedef struct PrintHandle {
     /* 0x000 */ char unk_00[16];
@@ -951,7 +956,7 @@ typedef struct GameStatus {
     /* 0x158 */ UNK_PTR backgroundPalette;
     /* 0x15C */ s16 unk_15C;
     /* 0x15E */ char unk_15E[0x2];
-    /* 0x160 */ s16 savedPos[3];
+    /* 0x160 */ Vec3s savedPos;
     /* 0x166 */ u8 saveSlot;
     /* 0x167 */ u8 loadType; /* (0 = from map, 1 = from main menu) */
     /* 0x168 */ s32 saveCount;
@@ -959,7 +964,15 @@ typedef struct GameStatus {
 } GameStatus; // size = 0x178
 
 typedef struct PartnerAnimations {
-    /* 0x00 */ char unk_00[36];
+    /* 0x00 */ UNK_PTR still;
+    /* 0x04 */ UNK_PTR walk;
+    /* 0x08 */ UNK_PTR jump;
+    /* 0x0C */ UNK_PTR fall;
+    /* 0x10 */ UNK_PTR fly;
+    /* 0x14 */ UNK_PTR idle;
+    /* 0x18 */ UNK_PTR run;
+    /* 0x1C */ UNK_PTR talk;
+    /* 0x20 */ UNK_PTR hurt;
 } PartnerAnimations; // size = 0x24
 
 typedef struct Shadow {
@@ -1141,14 +1154,14 @@ typedef struct DecorationTable {
     /* 0x8AC */ u8 effectType; /* 0 =  blur, 14 = none? */
     /* 0x8AD */ char unk_8AD[11];
     /* 0x8B8 */ u8 decorationType[2];
-    /* 0x8BA */ u8 unk_8BA;
-    /* 0x8BB */ u8 unk_8BB;
-    /* 0x8BC */ u8 unk_8BC;
-    /* 0x8BD */ char unk_8BD[43];
+    /* 0x8BA */ u8 unk_8BA[2];
+    /* 0x8BC */ u8 unk_8BC[2];
+    /* 0x8BD */ char unk_8BD[42];
 } DecorationTable; // size = 0x8E8
 
 typedef struct Shop {
-    /* 0x000 */ char unk_00[20];
+    /* 0x000 */ char unk_00[16];
+    /* 0x010 */ UNK_PTR owner;
     /* 0x014 */ UNK_PTR staticItemPositions;
     /* 0x018 */ UNK_PTR staticInventory;
     /* 0x01C */ UNK_PTR staticPriceList;
@@ -1179,6 +1192,8 @@ typedef struct AnimatedModel {
     /* 0x68 */ u32 currentAnimData;
     /* 0x6C */ char unk_6C[4];
 } AnimatedModel; // size = 0x70
+
+typedef AnimatedModel* AnimatedModelList[MAX_ANIMATED_MODELS];
 
 typedef struct CollisionHeader {
     /* 0x00 */ s16 numColliders;
@@ -1535,5 +1550,40 @@ typedef struct {
     /* 0x14 */ s32 timeLeft;
     /* 0x18 */ s32 easingType;
 } Path; // size = 0x1C
+
+typedef struct {
+    /* 0x00 */ s8 enabled;
+    /* 0x01 */ u8 listStart;
+    /* 0x02 */ u8 numCols;
+    /* 0x03 */ u8 numRows;
+    /* 0x04 */ s32 startIndex;
+    /* 0x08 */ s32 count;
+} PauseItemPage; // size = 0xC
+
+typedef struct {
+    /* 0x00 */ char unk_00[8];
+    /* 0x08 */ s8* unk_08;
+    /* 0x0C */ void* fpInit;
+    /* 0x10 */ void* fpHandleInput;
+    /* 0x14 */ void* fpUpdate;
+    /* 0x18 */ void* fpCleanup;
+} MenuTab; // size = 0x1C
+
+typedef struct {
+    /* 0x00 */ s8 flags;
+    /* 0x01 */ char unk_01;
+    /* 0x02 */ s8 unk_02; // related to heirarchy somehow - sibling? group?
+    /* 0x03 */ s8 parent; // ?
+    /* 0x04 */ s32 unk_04;
+    /* 0x08 */ UNK_PTR unk_08;
+    /* 0x0C */ s16 posX;
+    /* 0x0E */ s16 posY;
+    /* 0x10 */ s16 width;
+    /* 0x12 */ s16 height;
+    /* 0x14 */ UNK_PTR fpDrawContents;
+    /* 0x18 */ s32 unk_18; // MenuTab pointer for pause menu tabs
+    /* 0x1C */ s8 unk_1C;
+    /* 0x1D */ char unk_1D[3];
+} UIPanel; // size = 0x20
 
 #endif

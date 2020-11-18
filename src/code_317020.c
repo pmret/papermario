@@ -2,7 +2,10 @@
 
 INCLUDE_ASM(s32, "code_317020", func_802BD100);
 
-INCLUDE_ASM(s32, "code_317020", func_802BD174);
+void func_802BD174(Npc* npc) {
+    npc->collisionHeight = 24;
+    npc->collisionRadius = 20;
+}
 
 INCLUDE_ASM(s32, "code_317020", func_802BD188);
 

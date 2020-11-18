@@ -18,9 +18,9 @@ glabel set_npc_animation
 /* F24F0 802CDB40 00431021 */  addu      $v0, $v0, $v1
 /* F24F4 802CDB44 00441021 */  addu      $v0, $v0, $a0
 /* F24F8 802CDB48 00021080 */  sll       $v0, $v0, 2
-/* F24FC 802CDB4C 3C018010 */  lui       $at, 0x8010
+/* F24FC 802CDB4C 3C018010 */  lui       $at, %hi(gPartnerAnimations)
 /* F2500 802CDB50 00220821 */  addu      $at, $at, $v0
-/* F2504 802CDB54 8C228348 */  lw        $v0, -0x7cb8($at)
+/* F2504 802CDB54 8C228348 */  lw        $v0, %lo(gPartnerAnimations)($at)
 /* F2508 802CDB58 080B36E4 */  j         .L802CDB90
 /* F250C 802CDB5C AE220028 */   sw       $v0, 0x28($s1)
 .L802CDB60:

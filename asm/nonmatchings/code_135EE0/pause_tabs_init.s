@@ -8,8 +8,8 @@ glabel pause_tabs_init
 /* 1385D4 80245294 AFB00010 */  sw        $s0, 0x10($sp)
 /* 1385D8 80245298 0000802D */  daddu     $s0, $zero, $zero
 /* 1385DC 8024529C AFB20018 */  sw        $s2, 0x18($sp)
-/* 1385E0 802452A0 3C128027 */  lui       $s2, 0x8027
-/* 1385E4 802452A4 26520130 */  addiu     $s2, $s2, 0x130
+/* 1385E0 802452A0 3C128027 */  lui       $s2, %hi(gPauseMenuTabIconIDs)
+/* 1385E4 802452A4 26520130 */  addiu     $s2, $s2, %lo(gPauseMenuTabIconIDs)
 /* 1385E8 802452A8 AFB10014 */  sw        $s1, 0x14($sp)
 /* 1385EC 802452AC 3C118025 */  lui       $s1, 0x8025
 /* 1385F0 802452B0 2631F1B0 */  addiu     $s1, $s1, -0xe50

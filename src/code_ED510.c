@@ -1,10 +1,81 @@
 #include "common.h"
 
+// Works to set model->flags & 0x400 to modelListIndex, but that seems wrong and misleading (fake match)
+#ifdef NON_MATCHING
+ApiStatus TranslateModel(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 var1 = get_variable(script, *args++);
+    s32 modelListIndex = get_model_list_index_from_tree_index(var1);
+    f32 x = get_float_variable(script, *args++);
+    f32 y = get_float_variable(script, *args++);
+    f32 z = get_float_variable(script, *args++);
+    Model* model = get_model_from_list_index(modelListIndex);
+
+    if ((model->flags & 0x400) == 0) {
+        guTranslateF(&model->transformMatrix, x, y, z);
+        model->flags |= 0x1400;
+    } else {
+        Matrix4f mtx;
+
+        guTranslateF(&mtx, x, y, z);
+        guMtxCatF(&mtx, &model->transformMatrix, &model->transformMatrix);
+    }
+
+    return ApiStatus_DONE2;
+}
+#else
 INCLUDE_ASM(s32, "code_ED510", TranslateModel, ScriptInstance* script, s32 isInitialCall);
+#endif
 
-INCLUDE_ASM(s32, "code_ED510", RotateModel, ScriptInstance* script, s32 isInitialCall);
+ApiStatus RotateModel(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 var1 = get_variable(script, *args++);
+    s32 modelListIndex = get_model_list_index_from_tree_index(var1);
+    f32 a = get_float_variable(script, *args++);
+    f32 x = get_float_variable(script, *args++);
+    f32 y = get_float_variable(script, *args++);
+    f32 z = get_float_variable(script, *args++);
+    Model* model = get_model_from_list_index(modelListIndex);
 
+    if ((model->flags & 0x400) == 0) {
+        guRotateF(&model->transformMatrix, a, x, y, z);
+        model->flags |= 0x1400;
+    } else {
+        Matrix4f mtx;
+
+        guRotateF(&mtx, a, x, y, z);
+        guMtxCatF(&mtx, &model->transformMatrix, &model->transformMatrix);
+    }
+
+    return ApiStatus_DONE2;
+}
+
+// Same as TranslateModel above
+#ifdef NON_MATCHING
+ApiStatus ScaleModel(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 var1 = get_variable(script, *args++);
+    s32 modelListIndex = get_model_list_index_from_tree_index(var1);
+    f32 x = get_float_variable(script, *args++);
+    f32 y = get_float_variable(script, *args++);
+    f32 z = get_float_variable(script, *args++);
+    Model* model = get_model_from_list_index(modelListIndex);
+
+    if ((model->flags & 0x400) == 0) {
+        guScaleF(&model->transformMatrix, x, y, z);
+        model->flags |= 0x1400;
+    } else {
+        Matrix4f mtx;
+
+        guScaleF(&mtx, x, y, z);
+        guMtxCatF(&mtx, &model->transformMatrix, &model->transformMatrix);
+    }
+
+    return ApiStatus_DONE2;
+}
+#else
 INCLUDE_ASM(s32, "code_ED510", ScaleModel, ScriptInstance* script, s32 isInitialCall);
+#endif
 
 ApiStatus GetModelIndex(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* thisPos = script->ptrReadPos;
@@ -64,10 +135,10 @@ ApiStatus SetTexPanner(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus SetModelFlag10(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* thisPos = script->ptrReadPos;
     Bytecode treeIndex = get_variable(script, *thisPos++);
-    Bytecode var2 = get_variable(script, *thisPos++);
+    Bytecode enable = get_variable(script, *thisPos++);
     Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(treeIndex));
 
-    if (var2 != 0) {
+    if (enable) {
         model->flags |= 0x10;
     } else {
         model->flags &= ~0x10;
@@ -139,7 +210,23 @@ ApiStatus SetGroupEnabled(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_ED510", SetTexPanOffset, ScriptInstance* script, s32 isInitialCall);
+ApiStatus SetTexPanOffset(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* thisPos = script->ptrReadPos;
+    Bytecode var1 = get_variable(script, *thisPos++);
+    Bytecode var2 = get_variable(script, *thisPos++);
+    Bytecode var3 = get_variable(script, *thisPos++);
+    Bytecode var4 = get_variable(script, *thisPos++);
+
+    if (var2 == 0) {
+        set_main_pan_u(var1, var3);
+        set_main_pan_v(var1, var4);
+    } else {
+        set_aux_pan_u(var1, var3);
+        set_aux_pan_v(var1, var4);
+    }
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus func_802C9428(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* thisPos = script->ptrReadPos;
@@ -167,13 +254,10 @@ ApiStatus SetModelFlags(ScriptInstance* script, s32 isInitialCall) {
     s32 treeIndex = get_variable(script, *args++);
     s32 listIndex = get_model_list_index_from_tree_index(treeIndex);
     s32 a1 = *args++;
-    s32 var2;
-    Model* model;
+    s32 enable = get_variable(script, *args++);
+    Model* model = get_model_from_list_index(listIndex);
 
-    var2 = get_variable(script, *args);
-    model = get_model_from_list_index(listIndex);
-
-    if (var2 != 0) {
+    if (enable) {
         model->flags |= a1;
     } else {
         model->flags &= ~a1;
@@ -241,9 +325,7 @@ INCLUDE_ASM(s32, "code_ED510", ResetFromLava, ScriptInstance* script, s32 isInit
 INCLUDE_ASM(s32, "code_ED510", func_802C9FD4);
 
 ApiStatus GetColliderCenter(ScriptInstance* script, s32 initialCall) {
-    f32 x;
-    f32 y;
-    f32 z;
+    f32 x, y, z;
 
     get_collider_center(get_variable(script, *script->ptrReadPos), &x, &y, &z);
 
@@ -315,6 +397,29 @@ ApiStatus SetRenderMode(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_ED510", PlaySoundAtModel, ScriptInstance* script, s32 isInitialCall);
+ApiStatus PlaySoundAtModel(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 modelID = get_variable(script, *args++);
+    SoundId soundID = get_variable(script, *args++);
+    s32 var3 = get_variable(script, *args++);
+    f32 x, y, z;
+    f32 n1, n2, n3;
 
-INCLUDE_ASM(s32, "code_ED510", PlaySoundAtCollider, ScriptInstance* script, s32 isInitialCall);
+    get_model_center_and_size((u16)modelID, &x, &y, &z, &n1, &n2, &n3);
+    play_sound_at_position(soundID, var3, x, y, z);
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus PlaySoundAtCollider(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 colliderID = get_variable(script, *args++);
+    SoundId soundID = get_variable(script, *args++);
+    s32 var3 = get_variable(script, *args++);
+    f32 x, y, z;
+
+    get_collider_center(colliderID, &x, &y, &z);
+    play_sound_at_position(soundID, var3, x, y, z);
+
+    return ApiStatus_DONE2;
+}

@@ -12,24 +12,24 @@ glabel func_802CD4B4
 /* F1E80 802CD4D0 80420070 */  lb        $v0, 0x70($v0)
 /* F1E84 802CD4D4 14400005 */  bnez      $v0, .L802CD4EC
 /* F1E88 802CD4D8 00000000 */   nop      
-/* F1E8C 802CD4DC 3C02802E */  lui       $v0, 0x802e
-/* F1E90 802CD4E0 2442ADF0 */  addiu     $v0, $v0, -0x5210
+/* F1E8C 802CD4DC 3C02802E */  lui       $v0, %hi(gWorldMeshAnimationList)
+/* F1E90 802CD4E0 2442ADF0 */  addiu     $v0, $v0, %lo(gWorldMeshAnimationList)
 /* F1E94 802CD4E4 080B353D */  j         .L802CD4F4
 /* F1E98 802CD4E8 00000000 */   nop      
 .L802CD4EC:
-/* F1E9C 802CD4EC 3C02802E */  lui       $v0, 0x802e
-/* F1EA0 802CD4F0 2442ADB0 */  addiu     $v0, $v0, -0x5250
+/* F1E9C 802CD4EC 3C02802E */  lui       $v0, %hi(gBattleMeshAnimationList)
+/* F1EA0 802CD4F0 2442ADB0 */  addiu     $v0, $v0, %lo(gBattleMeshAnimationList)
 .L802CD4F4:
-/* F1EA4 802CD4F4 3C01802E */  lui       $at, 0x802e
-/* F1EA8 802CD4F8 AC22AE30 */  sw        $v0, -0x51d0($at)
+/* F1EA4 802CD4F4 3C01802E */  lui       $at, %hi(gCurrentMeshAnimationListPtr)
+/* F1EA8 802CD4F8 AC22AE30 */  sw        $v0, %lo(gCurrentMeshAnimationListPtr)($at)
 /* F1EAC 802CD4FC 0000882D */  daddu     $s1, $zero, $zero
 /* F1EB0 802CD500 2412FFFF */  addiu     $s2, $zero, -1
 /* F1EB4 802CD504 0220802D */  daddu     $s0, $s1, $zero
 .L802CD508:
 /* F1EB8 802CD508 0C00AB39 */  jal       heap_malloc
 /* F1EBC 802CD50C 24040070 */   addiu    $a0, $zero, 0x70
-/* F1EC0 802CD510 3C03802E */  lui       $v1, 0x802e
-/* F1EC4 802CD514 8C63AE30 */  lw        $v1, -0x51d0($v1)
+/* F1EC0 802CD510 3C03802E */  lui       $v1, %hi(gCurrentMeshAnimationListPtr)
+/* F1EC4 802CD514 8C63AE30 */  lw        $v1, %lo(gCurrentMeshAnimationListPtr)($v1)
 /* F1EC8 802CD518 02031821 */  addu      $v1, $s0, $v1
 /* F1ECC 802CD51C 14400003 */  bnez      $v0, .L802CD52C
 /* F1ED0 802CD520 AC620000 */   sw       $v0, ($v1)
@@ -37,8 +37,8 @@ glabel func_802CD4B4
 /* F1ED4 802CD524 080B3549 */  j         .L802CD524
 /* F1ED8 802CD528 00000000 */   nop      
 .L802CD52C:
-/* F1EDC 802CD52C 3C02802E */  lui       $v0, 0x802e
-/* F1EE0 802CD530 8C42AE30 */  lw        $v0, -0x51d0($v0)
+/* F1EDC 802CD52C 3C02802E */  lui       $v0, %hi(gCurrentMeshAnimationListPtr)
+/* F1EE0 802CD530 8C42AE30 */  lw        $v0, %lo(gCurrentMeshAnimationListPtr)($v0)
 /* F1EE4 802CD534 26310001 */  addiu     $s1, $s1, 1
 /* F1EE8 802CD538 02021021 */  addu      $v0, $s0, $v0
 /* F1EEC 802CD53C 8C420000 */  lw        $v0, ($v0)
