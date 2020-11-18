@@ -52,8 +52,6 @@ void sort_scripts(void) {
 INCLUDE_ASM(s32, "code_e79b0_len_1920", sort_scripts);
 #endif
 
-#ifdef NON_MATCHING
-// Very close. Reordering/branch likely issues
 void find_script_labels(ScriptInstance* script) {
     Bytecode* curLine;
     s32 type;
@@ -69,7 +67,7 @@ void find_script_labels(ScriptInstance* script) {
 
     j = 0;
     curLine = script->ptrNextLine;
-    for (j = 0; j < ARRAY_COUNT(script->labelIndices); j++) {
+    while (j < ARRAY_COUNT(script->labelIndices)) {
         type = *curLine++;
         numArgs = *curLine++;
         label = *curLine;
@@ -82,13 +80,11 @@ void find_script_labels(ScriptInstance* script) {
         if (type == 3) {
             script->labelIndices[j] = label;
             script->labelPositions[j] = curLine;
+            j++;
         }
     }
     PANIC();
 }
-#else
-INCLUDE_ASM(void, "code_e79b0_len_1920", find_script_labels);
-#endif
 
 void clear_script_list(void) {
     s32 i;
