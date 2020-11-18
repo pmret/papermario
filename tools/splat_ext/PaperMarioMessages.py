@@ -1,6 +1,8 @@
 from segtypes.segment import N64Segment
 from pathlib import Path
 
+import vmprof
+
 CHARSET = {
     0x00: "𝅘𝅥𝅮",
     0x01: "!",
@@ -349,6 +351,9 @@ class N64SegPaperMarioMessages(N64Segment):
             section_offsets.append(offset)
             pos += 4
 
+        log = open("lol.bin", "w+b")
+        #vmprof.enable(log.fileno(), lines=True)
+
         for i, section_offset in enumerate(section_offsets):
             name = f"{i:02X}"
             if len(self.files) >= i:
@@ -376,6 +381,8 @@ class N64SegPaperMarioMessages(N64Segment):
                     f.write(f"[message section=0x{i:02X} index={j}]\n")
                     self.write_message_markup(data[msg_offset:], f)
                     f.write("\n[/message]\n")
+        #vmprof.disable()
+        log.close()
 
     def get_ld_files(self):
         return [("", self.name, ".data")]
@@ -400,31 +407,35 @@ class N64SegPaperMarioMessages(N64Segment):
                 font = CHARSET
 
     def char_to_markup(self, data, charset=CHARSET):
-        value = None
-        char = int(data[0])
+        pos = 0
+        markup = []
 
-        if char in charset:
-            value = charset[char]
-        elif None in charset:
-            value = charset[None]
+        while True:
+            char = data[pos]
 
-        if type(value) is str:
-            return value, 1
-        if callable(value):
-            return value(data)
-        if type(value) is dict:
-            markup, delta = self.char_to_markup(data[1:], charset=value)
+            if char in charset:
+                value = charset[char]
+            elif None in charset:
+                value = charset[None]
 
-            if markup is None:
+            if value is None:
+                value = fallback
+
+            if isinstance(value, str):
+                markup.append(value)
+                pos += 1
+                break
+            elif callable(value):
+                more_markup, delta = value(data[1:])
+                markup.append(more_markup)
+                pos += delta
+                break
+            elif isinstance(value, dict):
                 if None in charset:
-                    value = charset[None]
-
-                    if callable(value):
-                        return value(data)
-
-                    return value, 1
+                    fallback = charset[None]
+                charset = value
+                pos += 1
             else:
-                return markup, delta + 1
+                raise ValueError(value)
 
-
-        return None, 0
+        return "".join(markup), pos # this is quicker than string appends
