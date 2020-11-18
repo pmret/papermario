@@ -1,8 +1,6 @@
 from segtypes.segment import N64Segment
 from pathlib import Path
 
-import vmprof
-
 CHARSET = {
     0x00: "𝅘𝅥𝅮",
     0x01: "!",
@@ -351,9 +349,6 @@ class N64SegPaperMarioMessages(N64Segment):
             section_offsets.append(offset)
             pos += 4
 
-        log = open("lol.bin", "w+b")
-        #vmprof.enable(log.fileno(), lines=True)
-
         for i, section_offset in enumerate(section_offsets):
             name = f"{i:02X}"
             if len(self.files) >= i:
@@ -381,8 +376,6 @@ class N64SegPaperMarioMessages(N64Segment):
                     self.f.write(f"[message section=0x{i:02X} index={j}]\n")
                     self.write_message_markup(data[msg_offset:])
                     self.f.write("\n[/message]\n")
-        #vmprof.disable()
-        log.close()
 
     def get_ld_files(self):
         return [("", self.name, ".data")]
