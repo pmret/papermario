@@ -22,6 +22,7 @@
 #define PLAYER_DATA (&gPlayerData)
 #define CAM(id) (&gCameras[id])
 #define CURRENT_CAM (&gCameras[gCurrentCameraID])
+#define GET_MAP_ENTRY(cfg, idx) (&(*cfg->entryList)[idx])
 
 #define MAX_MAPVARS 16
 #define MAX_MAPFLAGS 3

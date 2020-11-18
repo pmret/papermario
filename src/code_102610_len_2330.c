@@ -1,5 +1,7 @@
 #include "common.h"
 
+void func_8010FD68(Entity* entity);
+
 void create_shadow_callback(Shadow* shadow) {
     shadow->scale.x = 0.1f;
     shadow->scale.y = 0.1f;
@@ -17,7 +19,18 @@ s32 func_802E0DB0(Shadow* shadow) {
 
 INCLUDE_ASM(s32, "code_102610_len_2330", func_802E0DE0);
 
-INCLUDE_ASM(s32, "code_102610_len_2330", func_802E10F4);
+typedef struct struct802E10F4 {
+    char unk_0[4];
+    Vec3s angle; // TODO: could be wrong, but based on the single usage, seems right to me.
+} struct802E10F4;
+
+void func_802E10F4(Entity* entity) {
+    struct802E10F4* temp;
+
+    temp = (struct802E10F4*)entity->dataBuf;
+    temp->angle.x = clamp_angle(temp->angle.x + 6);
+    func_802E3650(entity);
+}
 
 void func_802E114C(void) {
 
@@ -40,25 +53,25 @@ void save_game_at_player_position(void) {
     fio_save_game(gameStatus->saveSlot);
 }
 
-void func_802E1204(s32 arg0) {
+void func_802E1204(Entity* entity) {
 
     if (get_global_flag(0xF8405BDF) == 0) {
-        s32 *temp = &D_802EB390;
+        s32* temp = &D_802EB390;
         *temp = 0;
         load_string(0x1D0000, temp);
         set_global_flag(0xF8405BDF);
         return;
     }
 
-    func_8010FD68(arg0);
-    func_8010FD68(arg0);
+    func_8010FD68(entity);
+    func_8010FD68(entity);
 }
 
-void func_802E1270(void) {
+void func_802E1270(Entity* entity) {
     s32* temp = &D_802EB390;
 
     if (*temp != 0) {
-        func_8010FD68();
+        func_8010FD68(entity);
     }
 }
 
@@ -76,31 +89,30 @@ void func_802E12F8(void) {
     play_sound(0x10);
 }
 
-void func_802E1328(void) {
+void func_802E1328(Entity* entity) {
     s32* temp = &D_802EB394;
 
     if (*temp != 0) {
-        func_8010FD68();
+        func_8010FD68(entity);
     }
 }
 
-void func_802E1350(s32 arg0) {
+void func_802E1350(Entity* entity) {
     s32* temp = &D_802EB390;
     if (*temp != 0) {
         if (D_802EB398->unk_4E8 == 1) {
-            func_8010FBC0(arg0, &D_802E99DC);
+            func_8010FBC0(entity, &D_802E99DC);
         } else {
-            func_8010FD68();
+            func_8010FD68(entity);
         }
         close_message(D_802EB39C);
     }
 }
 
 void func_802E13B8(Entity *entity) {
-    Trigger* trigger;
+    Trigger* trigger = (Trigger*)entity->dataBuf; // TODO: Fix this
 
-    trigger = entity->trigger;
-    entity_init_Hammer23Block_normal();
+    entity_init_Hammer23Block_normal(entity);
     entity->unk_3C = func_802E0DE0;
     trigger->params1.s = 8;
 }

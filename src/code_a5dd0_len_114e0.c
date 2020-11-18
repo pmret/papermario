@@ -100,7 +100,7 @@ INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_80111790);
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_801117DC);
 
-INCLUDE_ASM(void, "code_a5dd0_len_114e0", create_entity, void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5);
+INCLUDE_ASM(s32, "code_a5dd0_len_114e0", create_entity, void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5);
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", create_shadow_from_data);
 
@@ -121,7 +121,7 @@ ApiStatus AssignFlag(ScriptInstance* script, s32 isInitialCall) {
     Trigger* trigger;
 
     if (isInitialCall == TRUE) {
-        trigger = get_entity_by_index(gLastCreatedEntityIndex)->trigger;
+        trigger = (Trigger*)get_entity_by_index(gLastCreatedEntityIndex)->dataBuf;
         trigger->flags.bytes.genericFlagIndex = get_variable_index(script, *args);
         return ApiStatus_DONE2;
     }

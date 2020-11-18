@@ -271,10 +271,11 @@ typedef ScriptInstance* ScriptList[MAX_SCRIPTS];
 
 typedef struct Entity {
     /* 0x00 */ s32 flags;
-    /* 0x04 */ s8 listIndex;
+    /* 0x04 */ u8 listIndex;
     /* 0x05 */ char unk_05;
-    /* 0x06 */ s8 unk_06;
-    /* 0x07 */ char unk_07[4];
+    /* 0x06 */ u8 unk_06;
+    /* 0x07 */ char unk_07[3];
+    /* 0x0A */ u8 unk_0A;
     /* 0x0B */ u8 alpha; /* reported by rain */
     /* 0x0C */ s16 aabb[3];
     /* 0x12 */ char unk_12[2];
@@ -287,8 +288,8 @@ typedef struct Entity {
     /* 0x2C */ char unk_2C[12];
     /* 0x38 */ struct StaticEntityData* static_data;
     /* 0x3C */ UNK_PTR unk_3C;
-    /* 0x40 */ struct Trigger* trigger;
-    /* 0x44 */ s32* vertexData;
+    /* 0x40 */ void* dataBuf;
+    /* 0x44 */ Mtx* vertexData;
     /* 0x48 */ Vec3f position;
     /* 0x54 */ Vec3f scale;
     /* 0x60 */ Vec3f rotation;
@@ -901,11 +902,16 @@ typedef struct GameStatus {
     /* 0x078 */ s8 disableScripts;
     /* 0x079 */ char unk_79;
     /* 0x07A */ s8 musicEnabled;
-    /* 0x07B */ char unk_7B[2];
+    /* 0x07B */ char unk_7B;
+    /* 0x07C */ s8 unk_7C;
     /* 0x07D */ s8 unk_7D;
     /* 0x07E */ u8 peachFlags; /* (1 = isPeach, 2 = isTransformed, 4 = hasUmbrella) */
     /* 0x07F */ u8 peachDisguise; /* (1 = koopatrol, 2 = hammer bros, 3 = clubba) */
-    /* 0x080 */ char unk_80[6];
+    /* 0x080 */ char unk_80;
+    /* 0x081 */ s8 unk_81;
+    /* 0x082 */ s8 unk_82;
+    /* 0x083 */ s8 unk_83;
+    /* 0x085 */ char unk_84[2];
     /* 0x086 */ s16 areaID; /* Created by retype action */
     /* 0x088 */ s16 prevArea;
     /* 0x08A */ s16 changedArea; /* (1 = yes) */
@@ -931,7 +937,8 @@ typedef struct GameStatus {
     /* 0x134 */ u16 frameCounter;
     /* 0x136 */ char unk_136[2];
     /* 0x138 */ s32 nextRNG;
-    /* 0x13C */ char unk_13C[4];
+    /* 0x13C */ s16 unk_13C;
+    /* 0x13E */ char unk_13E[2];
     /* 0x140 */ s32* shopItemData;
     /* 0x144 */ struct Shop* mapShop;
     /* 0x148 */ s16 enableBackground; /* (bit 2 is also used for something) */
