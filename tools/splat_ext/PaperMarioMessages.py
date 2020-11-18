@@ -386,9 +386,10 @@ class N64SegPaperMarioMessages(N64Segment):
 
     def write_message_markup(self, data):
         pos = 0
+        self.root_charset = CHARSET
 
         while data[pos] != 0xFD:
-            self.charset = CHARSET
+            self.charset = self.root_charset
 
             while True:
                 char = data[pos]
@@ -422,6 +423,6 @@ class N64SegPaperMarioMessages(N64Segment):
         self.f.write(markup)
 
         if markup == "[font=title]\n" or markup == "[font=subtitle]\n":
-            self.charset = CHARSET_CREDITS
+            self.root_charset = CHARSET_CREDITS
         elif markup == "[font=normal]":
-            self.charset = CHARSET
+            self.root_charset = CHARSET
