@@ -198,7 +198,12 @@ INCLUDE_ASM(s32, "code_181810", save_tattle_flags);
 
 INCLUDE_ASM(s32, "code_181810", load_tattle_flags);
 
-INCLUDE_ASM(s32, "code_181810", func_80253FB0);
+ApiStatus func_80253FB0(ScriptInstance* script, s32 isInitialCall) {
+    gCurrentEncounter.battleOutcome = 3;
+    func_80241190(0x20);
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus MultiplyByActorScale(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

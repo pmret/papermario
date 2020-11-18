@@ -1203,9 +1203,7 @@ typedef struct Actor {
     /* 0x000 */ s32 flags;
     /* 0x004 */ char unk_04[4];
     /* 0x008 */ struct StaticActorData* staticActorData;
-    /* 0x00C */ Vec3f moveCurrentPos;
-    /* 0x018 */ Vec3f moveGoalPos;
-    /* 0x024 */ Vec3f moveEndPos; /* where other actors should target this one at. saved before partner switching */
+    /* 0x00C */ Vec3f movePos[3]; // current, goal, end
     /* 0x030 */ char unk_30[24];
     /* 0x048 */ f32 jumpAccel;
     /* 0x04C */ f32 moveSpeed;
