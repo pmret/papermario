@@ -600,8 +600,8 @@ typedef struct BattleStatus {
     /* 0x210 */ s32 currentButtonsDown;
     /* 0x214 */ s32 currentButtonsPressed;
     /* 0x218 */ s32 currentButtonsHeld;
-    /* 0x21C */ f32 stickX;
-    /* 0x220 */ f32 stickY;
+    /* 0x21C */ s32 stickX;
+    /* 0x220 */ s32 stickY;
     /* 0x224 */ s32 inputBitmask;
     /* 0x228 */ s32 dpadX; /* 0-360 */
     /* 0x22C */ s32 dpadY; /* 0-60 */
@@ -1281,7 +1281,9 @@ typedef struct Actor {
     /* 0x1F8 */ s16 lastDamageTaken;
     /* 0x1FA */ s16 hpChangeCounter;
     /* 0x1FC */ s16 damageCounter;
-    /* 0x1FE */ char unk_1FE[9];
+    /* 0x1FE */ char unk_1FE[2];
+    /* 0x200 */ s32** unk_200; // Probably a struct but not sure what yet
+    /* 0x204 */ char unk_204[3];
     /* 0x207 */ u8 extraCoinBonus;
     /* 0x208 */ s8 unk_208;
     /* 0x209 */ char unk_209[3];
