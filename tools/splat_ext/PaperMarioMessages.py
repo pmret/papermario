@@ -407,7 +407,7 @@ class N64SegPaperMarioMessages(N64Segment):
                     pos += 1
                     break
                 elif callable(value):
-                    markup, delta = value(data[1:])
+                    markup, delta = value(data[pos:])
                     self.write_markup(markup)
                     pos += delta
                     break
