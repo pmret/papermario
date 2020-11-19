@@ -156,7 +156,8 @@ ApiStatus CountPlayerTargets(ScriptInstance* script, s32 isInitialCall) {
     }
 
     actor = get_actor(actorID);
-    set_variable(script, outVar, count_targets(actor, get_nearest_home_index(actor->currentPos.x, actor->currentPos.y, actor->currentPos.z), targetSelectionFlags));
+    set_variable(script, outVar, count_targets(actor, get_nearest_home_index(actor->currentPos.x, actor->currentPos.y,
+                 actor->currentPos.z), targetSelectionFlags));
 
     return ApiStatus_DONE2;
 }
@@ -522,7 +523,7 @@ INCLUDE_ASM(s32, "code_197F40", ChooseNextTarget);
 
 INCLUDE_ASM(s32, "code_197F40", func_8026E558);
 
-ApiStatus GetTargetListLength(ScriptInstance *script) {
+ApiStatus GetTargetListLength(ScriptInstance* script) {
     Bytecode* args = script->ptrReadPos;
 
     set_variable(script, *args, get_actor(script->owner1.actorID)->targetListLength);
