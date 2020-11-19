@@ -8,7 +8,7 @@ Vec4f M(entryList)[] = {
 MapConfig M(config) = {
     .main = M(Main),
     .entryList = M(entryList),
-    .entryCount = ENTRY_COUNT(M(entryList)),
+    .entryCount = ARRAY_COUNT(M(entryList)),
     .background = &gBackgroundImage,
     .tattle = MessageID_TATTLE_KMR_12,
 };

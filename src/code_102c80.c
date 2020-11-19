@@ -184,8 +184,8 @@ void entity_init_HugeBlueSwitch(Entity* entity) {
     temp->unk_14.z = 3.0f;
 }
 
-void func_802E2450(void) {
-    func_802E3650();
+void func_802E2450(Entity* entity) {
+    func_802E3650(entity);
 }
 
 

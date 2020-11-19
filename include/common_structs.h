@@ -287,7 +287,7 @@ typedef struct Entity {
     /* 0x28 */ Bytecode* boundScript;
     /* 0x2C */ char unk_2C[12];
     /* 0x38 */ struct StaticEntityData* static_data;
-    /* 0x3C */ UNK_PTR unk_3C;
+    /* 0x3C */ UNK_PTR unk_3C; // pointer to draw func(?)
     /* 0x40 */ void* dataBuf;
     /* 0x44 */ Mtx* vertexData;
     /* 0x48 */ Vec3f position;
@@ -1585,5 +1585,26 @@ typedef struct {
     /* 0x1C */ s8 unk_1C;
     /* 0x1D */ char unk_1D[3];
 } UIPanel; // size = 0x20
+
+// BEGIN ENTITY-SPECIFIC STRUCTS
+
+// from code_104940_len_dc0
+// appears to belong to the hammer blocks(?)
+typedef struct struct802E3650 {
+    /* 0x00 */ char unk_00[3];
+    /* 0x03 */ s8 unk_03;
+    /* 0x04 */ s16 unk_04;
+    /* 0x06 */ s16 unk_06;
+    /* 0x08 */ char unk_08[2];
+    /* 0x0A */ u16 unk_0A;
+    /* 0x0C */ char unk_0C[2];
+    /* 0x0E */ s16 unk_0E;
+    /* 0x10 */ s16 unk_10;
+    /* 0x12 */ char unk_12[2];
+    /* 0x14 */ f32 unk_14;
+    /* 0x18 */ f32 unk_18;
+} struct802E3650;
+
+// END ENTITY-SPECIFIC STRUCTS
 
 #endif

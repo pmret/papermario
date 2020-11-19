@@ -101,7 +101,7 @@ void func_802E8E10(Entity* entity) {
 
     D_8009A650[0] &= ~0x40;
     entity->boundScript = triggerScriptStart;
-    func_80110678();
+    func_80110678(entity);
 }
 
 INCLUDE_ASM(s32, "code_109660_len_1270", push_entity_matrix);

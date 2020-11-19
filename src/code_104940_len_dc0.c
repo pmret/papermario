@@ -49,21 +49,6 @@ void func_802E328C(Entity* entity) {
 
 INCLUDE_ASM(s32, "code_104940_len_dc0", func_802E3370);
 
-typedef struct struct802E3650 {
-    /* 0x00 */ char unk_00[3];
-    /* 0x03 */ s8 unk_03;
-    /* 0x04 */ s16 unk_04;
-    /* 0x06 */ s16 unk_06;
-    /* 0x08 */ char unk_08[2];
-    /* 0x0A */ u16 unk_0A;
-    /* 0x0C */ char unk_0C[2];
-    /* 0x0E */ s16 unk_0E;
-    /* 0x10 */ s16 unk_10;
-    /* 0x12 */ char unk_12[2];
-    /* 0x14 */ f32 unk_14;
-    /* 0x18 */ f32 unk_18;
-} struct802E3650;
-
 s32 func_802E3650(Entity* entity) {
     struct802E3650* temp = (struct802E3650*)entity->dataBuf;
     s32 ret = 0;
@@ -210,31 +195,6 @@ void func_802E3B08(Entity* entity) {
 }
 
 INCLUDE_ASM(s32, "code_104940_len_dc0", func_802E3BA4);
-/*s32 func_802E3BA4(Entity* entity) {
-    PlayerStatus* playerStatus = &gPlayerStatus;
-
-    if((entity->alpha != 0) || ((entity->unk_06 & 1) == 0)) {
-        if(entity->unk_06 & 4) {
-            s32 type = get_entity_type(entity->listIndex);
-            if(type == 12) {
-                return 0;
-            } else if((type < 12) || (type >= 0x1B) || (type < 0x15)) {
-                if((playerStatus->flags & 2) != 0) {
-                    func_8010FD68(entity);
-                    return 1;
-                }
-                return 1;
-            } else {
-                return 0;
-            }
-            if((type & 1) ==)
-
-        }
-
-    } else {
-        return 0;
-    }
-}*/
 
 void entity_init_Hammer1Block_normal(Entity* entity) {
     entity_init_Hammer23Block_normal(entity);
