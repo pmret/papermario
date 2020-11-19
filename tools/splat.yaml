@@ -7411,6 +7411,7 @@ segments:
       - quiz/options
       - end/credits
   - [0x1C84D30, bin]
+  - [0x1E00000, bin] # sprites here; Star Rod considers this a copy of sprite/npc.bin, but that doesnt appear to be true
   - [0x1E40000, PaperMarioMapFS]
   - [0x27FEE22, "bin"]
   - [0x2800000]
