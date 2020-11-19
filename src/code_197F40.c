@@ -1,6 +1,6 @@
 #include "common.h"
 
-s8 count_targets(Actor* actor, s32 targetHomeIndex, s32 targetSelectionFlags) {
+s32 count_targets(Actor* actor, s32 targetHomeIndex, s32 targetSelectionFlags) {
     BattleStatus* battleStatus = &gBattleStatus;
 
     battleStatus->targetHomeIndex = targetHomeIndex;
@@ -9,17 +9,56 @@ s8 count_targets(Actor* actor, s32 targetHomeIndex, s32 targetSelectionFlags) {
     return actor->targetListLength;
 }
 
-INCLUDE_ASM(s32, "code_197F40", get_nearest_home_index);
+s32 get_nearest_home_index(f32 x, f32 y, f32 z) {
+    s32 xVal;
+    s32 yVal;
 
-INCLUDE_ASM(s32, "code_197F40", set_goal_pos_to_part);
+    xVal = 0;
+    if (!(y < 40.0f)) {
+        xVal = 1;
+        if (!(y < 85.0f)) {
+            xVal = 3;
+            if (y < 100.0f) {
+                xVal = 2;
+            }
+        }
+    }
+
+    yVal = 0;
+    if (!(x < 25.0f)) {
+        yVal = 1;
+        if (!(x < 65.0f)) {
+            yVal = 3;
+            if (x < 105.0f) {
+                yVal = 2;
+            }
+        }
+    }
+
+    return yVal | (xVal * 4);
+}
+
+INCLUDE_ASM(void, "code_197F40", set_goal_pos_to_part, f32* goalPos, ActorId target, s32 partIndex);
 
 INCLUDE_ASM(s32, "code_197F40", set_part_goal_to_actor_part);
 
-INCLUDE_ASM(s32, "code_197F40", set_actor_current_position);
+void set_actor_current_position(ActorId actorID, f32 x, f32 y, f32 z) {
+    Actor* actor = get_actor(actorID);
+
+    actor->currentPos.x = x;
+    actor->currentPos.y = y;
+    actor->currentPos.z = z;
+}
 
 INCLUDE_ASM(s32, "code_197F40", set_part_absolute_position);
 
-INCLUDE_ASM(s32, "code_197F40", set_actor_home_position);
+void set_actor_home_position(ActorId actorID, f32 x, f32 y, f32 z) {
+    Actor* actor = get_actor(actorID);
+
+    actor->homePos.x = x;
+    actor->homePos.y = y;
+    actor->homePos.z = z;
+}
 
 INCLUDE_ASM(Actor*, "code_197F40", get_actor, s32 actorID);
 
@@ -39,23 +78,150 @@ INCLUDE_ASM(s32, "code_197F40", func_80269E80);
 
 INCLUDE_ASM(s32, "code_197F40", func_80269EAC);
 
-INCLUDE_ASM(s32, "code_197F40", SetGoalToHome);
+ApiStatus SetGoalToHome(ScriptInstance* script, s32 isInitialCall) {
+    ActorId actorID = get_variable(script, *script->ptrReadPos);
+    Actor* actor;
 
-INCLUDE_ASM(s32, "code_197F40", SetIdleGoalToHome);
+    if (actorID == ActorId_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    actor = get_actor(actorID);
+    actor->movePos[1].x = actor->homePos.x;
+    actor->movePos[1].y = actor->homePos.y;
+    actor->movePos[1].z = actor->homePos.z;
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus SetIdleGoalToHome(ScriptInstance* script, s32 isInitialCall) {
+    ActorId actorID = get_variable(script, *script->ptrReadPos);
+    Actor* actor;
+
+    if (actorID == ActorId_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    actor = get_actor(actorID);
+    actor->flyGoalPos.x = actor->homePos.x;
+    actor->flyGoalPos.y = actor->homePos.y;
+    actor->flyGoalPos.z = actor->homePos.z;
+
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_197F40", SetGoalToIndex);
 
-INCLUDE_ASM(s32, "code_197F40", GetIndexFromPos);
+ApiStatus GetIndexFromPos(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    ActorId actorID = get_variable(script, *args++);
+    s32 a1 = *args++;
+    Actor* actor;
 
-INCLUDE_ASM(s32, "code_197F40", GetIndexFromHome);
+    if (actorID == ActorId_SELF) {
+        actorID = script->owner1.actorID;
+    }
 
-INCLUDE_ASM(s32, "code_197F40", CountPlayerTargets);
+    actor = get_actor(actorID);
+    set_variable(script, a1, get_nearest_home_index(actor->currentPos.x, actor->currentPos.y, actor->currentPos.z));
 
-INCLUDE_ASM(s32, "code_197F40", ForceHomePos);
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "code_197F40", SetHomePos);
+ApiStatus GetIndexFromHome(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    ActorId actorID = get_variable(script, *args++);
+    s32 a1 = *args++;
+    Actor* actor;
 
-INCLUDE_ASM(s32, "code_197F40", SetGoalToTarget);
+    if (actorID == ActorId_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    actor = get_actor(actorID);
+    set_variable(script, a1, get_nearest_home_index(actor->homePos.x, actor->homePos.y, actor->homePos.z));
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus CountPlayerTargets(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    ActorId actorID = get_variable(script, *args++);
+    s32 targetSelectionFlags = *args++;
+    s32 outVar = *args++;
+    Actor* actor;
+
+    if (actorID == ActorId_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    actor = get_actor(actorID);
+    set_variable(script, outVar, count_targets(actor, get_nearest_home_index(actor->currentPos.x, actor->currentPos.y, actor->currentPos.z), targetSelectionFlags));
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus ForceHomePos(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    ActorId actorID = get_variable(script, *args++);
+    f32 x, y, z;
+    Actor* actor;
+
+    if (actorID == ActorId_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    x = get_variable(script, *args++);
+    y = get_variable(script, *args++);
+    z = get_variable(script, *args++);
+
+    actor = get_actor(actorID);
+    actor->homePos.x = x;
+    actor->currentPos.x = x;
+    actor->homePos.y = y;
+    actor->currentPos.y = y;
+    actor->homePos.z = z;
+    actor->currentPos.z = z;
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus SetHomePos(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    ActorId actorID = get_variable(script, *args++);
+    f32 x, y, z;
+    Actor* actor;
+
+    if (actorID == ActorId_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    x = get_variable(script, *args++);
+    y = get_variable(script, *args++);
+    z = get_variable(script, *args++);
+
+    actor = get_actor(actorID);
+    actor->homePos.x = x;
+    actor->homePos.y = y;
+    actor->homePos.z = z;
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus SetGoalToTarget(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    ActorId actorID = get_variable(script, *args++);
+    Actor* actor;
+
+    if (actorID == ActorId_SELF) {
+        actorID = script->owner1.actorID;
+    }
+    actor = get_actor(actorID);
+
+    set_goal_pos_to_part(&actor->movePos, actor->targetActorID, actor->targetPartIndex);
+
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_197F40", SetPartGoalToTarget);
 
@@ -356,7 +522,12 @@ INCLUDE_ASM(s32, "code_197F40", ChooseNextTarget);
 
 INCLUDE_ASM(s32, "code_197F40", func_8026E558);
 
-INCLUDE_ASM(s32, "code_197F40", GetTargetListLength);
+ApiStatus GetTargetListLength(ScriptInstance *script) {
+    Bytecode* args = script->ptrReadPos;
+
+    set_variable(script, *args, get_actor(script->owner1.actorID)->targetListLength);
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_197F40", GetOwnerTarget);
 
