@@ -2,7 +2,7 @@
 
 HitResult calc_item_check_hit(void) {
     BattleStatus* battleStatus = BATTLE_STATUS;
-    f32* pos = &battleStatus->playerActor->movePos;
+    ActorMovePos* movePos = &battleStatus->playerActor->movePos;
     s32 actorID = battleStatus->currentTargetID;
     s8 currentTargetPartS8;
     u32 currentTargetPart;
@@ -23,11 +23,11 @@ HitResult calc_item_check_hit(void) {
                 return HitResult_MISS;
             }
             if (actor->stoneStatus == 0xC) {
-                play_sound_at_position(0x10C, 0, pos[3], pos[4], pos[5]);
+                play_sound_at_position(0x10C, 0, movePos->goal.x, movePos->goal.y, movePos->goal.z);
                 return HitResult_IMMUNE;
             }
             if ((battleStatus->currentAttackElement & 0x80) && (actorPart->eventFlags & 0x10)) {
-                play_sound_at_position(0xE9, 0, pos[3], pos[4], pos[5]);
+                play_sound_at_position(0xE9, 0, movePos->goal.x, movePos->goal.y, movePos->goal.z);
                 return HitResult_LANDED_ON_SPIKE;
             }
         } else {

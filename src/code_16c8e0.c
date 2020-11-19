@@ -6,7 +6,7 @@ void get_dpad_input_radial(f32* angle, f32* magnitude) {
     f32 stickX;
     f32 stickY;
     f32 mag;
-    f32 sixty = 60.0f;
+    f32 maxMagnitude = 60.0f;
 
     stickX = battleStatus->stickX;
     stickY = battleStatus->stickY;
@@ -16,22 +16,22 @@ void get_dpad_input_radial(f32* angle, f32* magnitude) {
         stickY = 0.0f;
         stickX = 0.0f;
         if (currentButtonsDown & 0x800) {
-            stickY = sixty;
+            stickY = maxMagnitude;
         }
         if (currentButtonsDown & 0x400) {
-            stickY = -sixty;
+            stickY = -maxMagnitude;
         }
         if (currentButtonsDown & 0x200) {
-            stickX = -sixty;
+            stickX = -maxMagnitude;
         }
         if (currentButtonsDown & 0x100) {
-            stickX = sixty;
+            stickX = maxMagnitude;
         }
     }
 
     mag = dist2D(0.0f, 0.0f, stickX, -stickY);
-    if (mag >= sixty) {
-        mag = sixty;
+    if (mag >= maxMagnitude) {
+        mag = maxMagnitude;
     }
 
     *angle = atan2(0.0f, 0.0f, stickX, -stickY);
@@ -79,10 +79,10 @@ INCLUDE_ASM(s32, "code_16c8e0", func_80240AA8);
 INCLUDE_ASM(s32, "code_16c8e0", delete_actor);
 
 void delete_player_actor(Actor* player) {
-    s32 i;
     struct ActorPart* partsTable;
     struct ActorPartMovement* movement;
     struct DecorationTable* decorationTable;
+    s32 i;
 
     for (i = 0; i < 2; i++) {
         remove_actor_decoration(player, i);

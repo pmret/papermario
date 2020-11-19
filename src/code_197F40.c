@@ -35,7 +35,7 @@ s32 get_nearest_home_index(f32 x, f32 y, f32 z) {
         }
     }
 
-    return yVal | (xVal * 4);
+    return yVal | (xVal << 2);
 }
 
 INCLUDE_ASM(void, "code_197F40", set_goal_pos_to_part, f32* goalPos, ActorId target, s32 partIndex);
@@ -87,9 +87,9 @@ ApiStatus SetGoalToHome(ScriptInstance* script, s32 isInitialCall) {
     }
 
     actor = get_actor(actorID);
-    actor->movePos[1].x = actor->homePos.x;
-    actor->movePos[1].y = actor->homePos.y;
-    actor->movePos[1].z = actor->homePos.z;
+    actor->movePos.goal.x = actor->homePos.x;
+    actor->movePos.goal.y = actor->homePos.y;
+    actor->movePos.goal.z = actor->homePos.z;
 
     return ApiStatus_DONE2;
 }

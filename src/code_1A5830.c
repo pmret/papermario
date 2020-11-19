@@ -14,6 +14,7 @@ s32 func_80276F50(Actor* actor) {
             partIt = partIt->nextPart;
         }
     }
+
     return ret;
 }
 

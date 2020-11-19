@@ -1198,11 +1198,17 @@ typedef struct Zone {
     /* 0x28 */ s32 flag;
 } Zone; // size = 0x2C
 
+typedef struct ActorMovePos {
+    /* 0x00 */ Vec3f current;
+    /* 0x0C */ Vec3f goal;
+    /* 0x18 */ Vec3f end;
+} ActorMovePos; // size = 0x20;
+
 typedef struct Actor {
     /* 0x000 */ s32 flags;
     /* 0x004 */ char unk_04[4];
     /* 0x008 */ struct StaticActorData* staticActorData;
-    /* 0x00C */ Vec3f movePos[3]; // current, goal, end
+    /* 0x00C */ ActorMovePos movePos;
     /* 0x030 */ char unk_30[24];
     /* 0x048 */ f32 jumpAccel;
     /* 0x04C */ f32 moveSpeed;
