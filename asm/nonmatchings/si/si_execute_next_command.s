@@ -16,7 +16,7 @@ glabel si_execute_next_command
 /* EBDDC 802C742C 00220821 */  addu      $at, $at, $v0
 /* EBDE0 802C7430 8C229F20 */  lw        $v0, -0x60e0($at)
 /* EBDE4 802C7434 00400008 */  jr        $v0
-/* EBDE8 802C7438 00000000 */   nop
+/* EBDE8 802C7438 00000000 */   nop      
 /* EBDEC 802C743C 8E030008 */  lw        $v1, 8($s0)
 /* EBDF0 802C7440 24050003 */  addiu     $a1, $zero, 3
 /* EBDF4 802C7444 0060102D */  daddu     $v0, $v1, $zero
@@ -407,7 +407,7 @@ glabel si_execute_next_command
 /* EC3F8 802C7A48 0040282D */   daddu    $a1, $v0, $zero
 .L802C7A4C:
 /* EC3FC 802C7A4C 080B1E93 */  j         .L802C7A4C
-/* EC400 802C7A50 00000000 */   nop
+/* EC400 802C7A50 00000000 */   nop      
 .L802C7A54:
 /* EC404 802C7A54 24020003 */  addiu     $v0, $zero, 3
 /* EC408 802C7A58 10A2FE6E */  beq       $a1, $v0, .L802C7414
@@ -424,13 +424,13 @@ glabel si_execute_next_command
 /* EC434 802C7A84 A2000002 */   sb       $zero, 2($s0)
 .L802C7A88:
 /* EC438 802C7A88 14A2FE62 */  bne       $a1, $v0, .L802C7414
-/* EC43C 802C7A8C 00000000 */   nop
+/* EC43C 802C7A8C 00000000 */   nop      
 /* EC440 802C7A90 A2000002 */  sb        $zero, 2($s0)
 /* EC444 802C7A94 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
 /* EC448 802C7A98 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* EC44C 802C7A9C 80420078 */  lb        $v0, 0x78($v0)
 /* EC450 802C7AA0 1445FE5C */  bne       $v0, $a1, .L802C7414
-/* EC454 802C7AA4 00000000 */   nop
+/* EC454 802C7AA4 00000000 */   nop      
 .L802C7AA8:
 /* EC458 802C7AA8 0000102D */  daddu     $v0, $zero, $zero
 .L802C7AAC:

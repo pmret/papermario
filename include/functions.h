@@ -61,6 +61,7 @@ f32 cos_rad(f32 x);
 s16 round(f32);
 f32 atan2(f32 startX, f32 startZ, f32 endX, f32 endZ);
 f32 clamp_angle(f32 theta);
+s32 sign(s32 value);
 s32 func_80055448(s32);
 s32 func_80055464(s32, s32);
 s32 func_800554A4(s32, s32);
@@ -77,6 +78,10 @@ f32 func_800E0088(f32, f32);
 s32 func_800EB168(s32);
 
 PlayerData* get_player_data(void);
+
+// Pause
+s32 pause_interp_vertical_scroll(s32 deltaBefore);
+void pause_draw_rect(s32 ulx, s32 uly, s32 lrx, s32 lry, s32 tileDescriptor, s32 uls, s32 ult, s32 dsdx, s32 dtdy);
 
 // Partner
 void func_800EBA3C(Npc* partner);

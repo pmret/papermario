@@ -14,7 +14,10 @@ INCLUDE_ASM(s32, "code_de740_len_23f0", func_801491E4);
 
 INCLUDE_ASM(s32, "code_de740_len_23f0", func_80149250);
 
-INCLUDE_ASM(s32, "code_de740_len_23f0", func_80149600);
+void func_80149600(void) {
+    gCurrentDoorSoundsSet = 0;
+    D_80151308 = 0;
+}
 
 INCLUDE_ASM(s32, "code_de740_len_23f0", func_80149618);
 

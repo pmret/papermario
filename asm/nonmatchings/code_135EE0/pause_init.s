@@ -20,10 +20,10 @@ glabel pause_init
 /* 1373DC 8024409C 0000882D */  daddu     $s1, $zero, $zero
 /* 1373E0 802440A0 3C138024 */  lui       $s3, 0x8024
 /* 1373E4 802440A4 26731ECC */  addiu     $s3, $s3, 0x1ecc
-/* 1373E8 802440A8 3C108025 */  lui       $s0, 0x8025
-/* 1373EC 802440AC 2610EF60 */  addiu     $s0, $s0, -0x10a0
-/* 1373F0 802440B0 3C128027 */  lui       $s2, 0x8027
-/* 1373F4 802440B4 265200E8 */  addiu     $s2, $s2, 0xe8
+/* 1373E8 802440A8 3C108025 */  lui       $s0, %hi(gPauseMenuIconScripts)
+/* 1373EC 802440AC 2610EF60 */  addiu     $s0, $s0, %lo(gPauseMenuIconScripts)
+/* 1373F0 802440B0 3C128027 */  lui       $s2, %hi(gPauseMenuCommonIconIDs)
+/* 1373F4 802440B4 265200E8 */  addiu     $s2, $s2, %lo(gPauseMenuCommonIconIDs)
 .L802440B8:
 /* 1373F8 802440B8 0C050529 */  jal       create_icon
 /* 1373FC 802440BC 8E040000 */   lw       $a0, ($s0)
@@ -44,10 +44,10 @@ glabel pause_init
 /* 137434 802440F4 3C048025 */  lui       $a0, 0x8025
 /* 137438 802440F8 2484F114 */  addiu     $a0, $a0, -0xeec
 /* 13743C 802440FC 24050004 */  addiu     $a1, $zero, 4
-/* 137440 80244100 3C108025 */  lui       $s0, 0x8025
-/* 137444 80244104 2610EF80 */  addiu     $s0, $s0, -0x1080
-/* 137448 80244108 3C028027 */  lui       $v0, 0x8027
-/* 13744C 8024410C 8C4200E8 */  lw        $v0, 0xe8($v0)
+/* 137440 80244100 3C108025 */  lui       $s0, %hi(gPauseMenuTabs)
+/* 137444 80244104 2610EF80 */  addiu     $s0, $s0, %lo(gPauseMenuTabs)
+/* 137448 80244108 3C028027 */  lui       $v0, %hi(gPauseMenuCommonIconIDs)
+/* 13744C 8024410C 8C4200E8 */  lw        $v0, %lo(gPauseMenuCommonIconIDs)($v0)
 /* 137450 80244110 3C018027 */  lui       $at, 0x8027
 /* 137454 80244114 AC2200D0 */  sw        $v0, 0xd0($at)
 /* 137458 80244118 0C051FCC */  jal       func_80147F30
@@ -62,12 +62,12 @@ glabel pause_init
 /* 13747C 8024413C AC20010C */  sw        $zero, 0x10c($at)
 /* 137480 80244140 3C018027 */  lui       $at, 0x8027
 /* 137484 80244144 AC200118 */  sw        $zero, 0x118($at)
-/* 137488 80244148 3C018027 */  lui       $at, 0x8027
-/* 13748C 8024414C AC2000C8 */  sw        $zero, 0xc8($at)
-/* 137490 80244150 3C018027 */  lui       $at, 0x8027
-/* 137494 80244154 AC2000CC */  sw        $zero, 0xcc($at)
-/* 137498 80244158 3C018027 */  lui       $at, 0x8027
-/* 13749C 8024415C A02000D4 */  sb        $zero, 0xd4($at)
+/* 137488 80244148 3C018027 */  lui       $at, %hi(gPauseMenuCurrentDescString)
+/* 13748C 8024414C AC2000C8 */  sw        $zero, %lo(gPauseMenuCurrentDescString)($at)
+/* 137490 80244150 3C018027 */  lui       $at, %hi(gPauseMenuCurrentDescIconScript)
+/* 137494 80244154 AC2000CC */  sw        $zero, %lo(gPauseMenuCurrentDescIconScript)($at)
+/* 137498 80244158 3C018027 */  lui       $at, %hi(gPauseMenuCurrentTab)
+/* 13749C 8024415C A02000D4 */  sb        $zero, %lo(gPauseMenuCurrentTab)($at)
 .L80244160:
 /* 1374A0 80244160 8E040000 */  lw        $a0, ($s0)
 /* 1374A4 80244164 8C82000C */  lw        $v0, 0xc($a0)
@@ -81,8 +81,8 @@ glabel pause_init
 /* 1374C0 80244180 26100004 */   addiu    $s0, $s0, 4
 /* 1374C4 80244184 241400E1 */  addiu     $s4, $zero, 0xe1
 /* 1374C8 80244188 24110006 */  addiu     $s1, $zero, 6
-/* 1374CC 8024418C 3C158016 */  lui       $s5, %hi(D_80159D50)
-/* 1374D0 80244190 26B59D50 */  addiu     $s5, $s5, %lo(D_80159D50)
+/* 1374CC 8024418C 3C158016 */  lui       $s5, %hi(gUIPanels)
+/* 1374D0 80244190 26B59D50 */  addiu     $s5, $s5, %lo(gUIPanels)
 /* 1374D4 80244194 241303C0 */  addiu     $s3, $zero, 0x3c0
 /* 1374D8 80244198 2412001E */  addiu     $s2, $zero, 0x1e
 /* 1374DC 8024419C 3C108025 */  lui       $s0, 0x8025
@@ -107,8 +107,8 @@ glabel pause_init
 /* 13751C 802441DC 2631FFFF */  addiu     $s1, $s1, -1
 /* 137520 802441E0 1E20FFF0 */  bgtz      $s1, .L802441A4
 /* 137524 802441E4 2610FFFC */   addiu    $s0, $s0, -4
-/* 137528 802441E8 3C028025 */  lui       $v0, 0x8025
-/* 13752C 802441EC 8C42EF80 */  lw        $v0, -0x1080($v0)
+/* 137528 802441E8 3C028025 */  lui       $v0, %hi(gPauseMenuTabs)
+/* 13752C 802441EC 8C42EF80 */  lw        $v0, %lo(gPauseMenuTabs)($v0)
 /* 137530 802441F0 0000202D */  daddu     $a0, $zero, $zero
 /* 137534 802441F4 80420001 */  lb        $v0, 1($v0)
 /* 137538 802441F8 3C05F840 */  lui       $a1, 0xf840
