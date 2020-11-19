@@ -13,26 +13,24 @@ s32 get_nearest_home_index(f32 x, f32 y, f32 z) {
     s32 xVal;
     s32 yVal;
 
-    xVal = 0;
-    if (!(y < 40.0f)) {
+    if (y < 40.0f) {
+        xVal = 0;
+    } else if (y < 85.0f) {
         xVal = 1;
-        if (!(y < 85.0f)) {
-            xVal = 3;
-            if (y < 100.0f) {
-                xVal = 2;
-            }
-        }
+    } else if (y < 100.0f) {
+        xVal = 2;
+    } else {
+        xVal = 3;
     }
 
-    yVal = 0;
-    if (!(x < 25.0f)) {
+    if (x < 25.0f) {
+        yVal = 0;
+    } else if (x < 65.0f) {
         yVal = 1;
-        if (!(x < 65.0f)) {
-            yVal = 3;
-            if (x < 105.0f) {
-                yVal = 2;
-            }
-        }
+    } else if (x < 105.0f) {
+        yVal = 2;
+    } else {
+        yVal = 3;
     }
 
     return yVal | (xVal << 2);
