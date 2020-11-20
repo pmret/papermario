@@ -1204,6 +1204,12 @@ typedef struct ActorMovePos {
     /* 0x18 */ Vec3f end;
 } ActorMovePos; // size = 0x20;
 
+typedef struct ActorFlyPos {
+    /* 0x00 */ Vec3f current;
+    /* 0x0C */ Vec3f goal;
+    /* 0x18 */ Vec3f temp; /* used for start in fly functions, end in flyrun functions */
+} ActorFlyPos; // size = 0x20;
+
 typedef struct Actor {
     /* 0x000 */ s32 flags;
     /* 0x004 */ char unk_04[4];
@@ -1226,9 +1232,7 @@ typedef struct Actor {
     /* 0x077 */ u8 jumpPartIndex;
     /* 0x078 */ char unk_78[16];
     /* 0x088 */ s32 varTable[16];
-    /* 0x0C8 */ Vec3f flyCurrentPos;
-    /* 0x0D4 */ Vec3f flyGoalPos;
-    /* 0x0E0 */ Vec3f flyTempPos; /* used for start in fly functions, end in flyrun functions */
+    /* 0x0C8 */ ActorFlyPos flyPos;
     /* 0x0EC */ char unk_EC[24];
     /* 0x104 */ f32 flyJumpAccel;
     /* 0x108 */ f32 flySpeed;
@@ -1312,7 +1316,7 @@ typedef struct Actor {
     /* 0x225 */ char unk_225[7];
     /* 0x22C */ struct SelectableTarget targetData[24];
     /* 0x40C */ s8 targetListLength;
-    /* 0x40D */ u8 targetIndexList[24]; /* into targetData */
+    /* 0x40D */ s8 targetIndexList[24]; /* into targetData */
     /* 0x425 */ u8 selectedTargetIndex; /* into target index list */
     /* 0x426 */ s8 targetPartIndex;
     /* 0x427 */ char unk_427;

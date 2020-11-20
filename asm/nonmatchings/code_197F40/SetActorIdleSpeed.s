@@ -16,7 +16,7 @@ glabel SetActorIdleSpeed
 /* 199FDC 8026B6FC 0040802D */  daddu     $s0, $v0, $zero
 /* 199FE0 8026B700 2402FF81 */  addiu     $v0, $zero, -0x7f
 /* 199FE4 8026B704 16020002 */  bne       $s0, $v0, .L8026B710
-/* 199FE8 8026B708 00000000 */   nop      
+/* 199FE8 8026B708 00000000 */   nop
 /* 199FEC 8026B70C 8E500148 */  lw        $s0, 0x148($s2)
 .L8026B710:
 /* 199FF0 8026B710 8E250000 */  lw        $a1, ($s1)
