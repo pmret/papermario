@@ -1,7 +1,7 @@
 #include "common.h"
 
 void get_dpad_input_radial(f32* angle, f32* magnitude) {
-    BattleStatus* battleStatus = &gBattleStatus;
+    BattleStatus* battleStatus = BATTLE_STATUS;
     u16 currentButtonsDown;
     f32 stickX;
     f32 stickY;

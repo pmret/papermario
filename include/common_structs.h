@@ -1008,7 +1008,7 @@ typedef struct SelectableTarget {
 
 typedef struct ActorPartMovement {
     /* 0x00 */ char unk_00[12];
-    /* 0x0C */ f32 goalPos[3];
+    /* 0x0C */ Vec3f goalPos;
     /* 0x18 */ char unk_18[12];
     /* 0x24 */ f32 jumpScale;
     /* 0x28 */ f32 moveSpeed;

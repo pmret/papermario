@@ -1,7 +1,7 @@
 #include "common.h"
 
 s32 count_targets(Actor* actor, s32 targetHomeIndex, s32 targetSelectionFlags) {
-    BattleStatus* battleStatus = &gBattleStatus;
+    BattleStatus* battleStatus = BATTLE_STATUS;
 
     battleStatus->targetHomeIndex = targetHomeIndex;
     battleStatus->currentTargetListFlags = targetSelectionFlags;
@@ -338,7 +338,6 @@ ApiStatus AddGoalPos(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     ActorID actorID = get_variable(script, *args++);
     Actor* actor;
-    SelectableTarget* target;
     f32 x, y, z;
 
     if (actorID == ActorID_SELF) {
@@ -357,13 +356,121 @@ ApiStatus AddGoalPos(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_197F40", GetGoalPos);
+ApiStatus GetGoalPos(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    ActorID actorID = get_variable(script, *args++);
+    Actor* actor;
+    s32 outX, outY, outZ;
+    s32 x, y, z;
 
-INCLUDE_ASM(s32, "code_197F40", GetIdleGoal);
+    if (actorID == ActorID_SELF) {
+        actorID = script->owner1.actorID;
+    }
 
-INCLUDE_ASM(s32, "code_197F40", GetPartTarget);
+    actor = get_actor(actorID);
 
-INCLUDE_ASM(s32, "code_197F40", GetActorPos);
+    outX = *args++;
+    outY = *args++;
+    outZ = *args++;
+
+    x = actor->movePos.goal.x;
+    y = actor->movePos.goal.y;
+    z = actor->movePos.goal.z;
+
+    set_variable(script, outX, x);
+    set_variable(script, outY, y);
+    set_variable(script, outZ, z);
+
+    return ApiStatus_DONE2;
+}
+
+// should this be renamed to GetFlyGoal ?
+ApiStatus GetIdleGoal(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    ActorID actorID = get_variable(script, *args++);
+    Actor* actor;
+    s32 outX, outY, outZ;
+    s32 x, y, z;
+
+    if (actorID == ActorID_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    actor = get_actor(actorID);
+
+    outX = *args++;
+    outY = *args++;
+    outZ = *args++;
+
+    x = actor->flyPos.goal.x;
+    y = actor->flyPos.goal.y;
+    z = actor->flyPos.goal.z;
+
+    set_variable(script, outX, x);
+    set_variable(script, outY, y);
+    set_variable(script, outZ, z);
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus GetPartTarget(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    ActorID actorID = get_variable(script, *args++);
+    s32 partIndex = get_variable(script, *args++);
+    Actor* actor;
+    ActorPart* actorPart;
+    s32 outX, outY, outZ;
+    s32 x, y, z;
+
+    if (actorID == ActorID_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    actor = get_actor(actorID);
+    actorPart = get_actor_part(actor, partIndex);
+
+    outX = *args++;
+    outY = *args++;
+    outZ = *args++;
+
+    x = actorPart->movement->goalPos.x;
+    y = actorPart->movement->goalPos.y;
+    z = actorPart->movement->goalPos.z;
+
+    set_variable(script, outX, x);
+    set_variable(script, outY, y);
+    set_variable(script, outZ, z);
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus GetActorPos(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    ActorID actorID = get_variable(script, *args++);
+    Actor* actor;
+    s32 outX, outY, outZ;
+    s32 x, y, z;
+
+    if (actorID == ActorID_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    actor = get_actor(actorID);
+
+    outX = *args++;
+    outY = *args++;
+    outZ = *args++;
+
+    x = actor->currentPos.x;
+    y = actor->currentPos.y;
+    z = actor->currentPos.z;
+
+    set_variable(script, outX, x);
+    set_variable(script, outY, y);
+    set_variable(script, outZ, z);
+
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_197F40", GetPartOffset);
 
@@ -563,7 +670,7 @@ ApiStatus SetBattleInputMask(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus SetBattleInputButtons(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    BattleStatus* battleStatus = &gBattleStatus;
+    BattleStatus* battleStatus = BATTLE_STATUS;
     s32 currentButtonsDown = *args++;
     s32 currentButtonsPressed = *args++;
     s32 currentButtonsHeld = *args;
@@ -762,7 +869,7 @@ INCLUDE_ASM(s32, "code_197F40", calc_player_damage_enemy);
 INCLUDE_ASM(s32, "code_197F40", dispatch_damage_event_player);
 
 void dispatch_damage_event_player_0(s32 damageAmount, Event event) {
-    BattleStatus* battleStatus = &gBattleStatus;
+    BattleStatus* battleStatus = BATTLE_STATUS;
 
     battleStatus->currentAttackElement = Element_END;
     battleStatus->unk_19A = 0;
