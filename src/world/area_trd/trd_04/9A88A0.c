@@ -22,7 +22,7 @@ INCLUDE_ASM(s32, "world/area_trd/trd_04/9A88A0", func_80241300_9A96F0);
 
 INCLUDE_ASM(s32, "world/area_trd/trd_04/9A88A0", func_802413B4_9A97A4);
 
-INCLUDE_ASM(s32, "world/area_trd/trd_04/9A88A0", func_80241428_9A9818);
+# include "world/common/NpcJumpFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_trd/trd_04/9A88A0", func_802414A0_9A9890);
 

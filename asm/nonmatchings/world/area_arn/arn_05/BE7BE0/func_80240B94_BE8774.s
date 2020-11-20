@@ -161,7 +161,7 @@ glabel func_80240B94_BE8774
 /* BE89CC 80240DEC 02A0302D */   daddu    $a2, $s5, $zero
 /* BE89D0 80240DF0 0280202D */  daddu     $a0, $s4, $zero
 /* BE89D4 80240DF4 0260282D */  daddu     $a1, $s3, $zero
-/* BE89D8 80240DF8 0C0901E9 */  jal       func_802407A4_BE8384
+/* BE89D8 80240DF8 0C0901E9 */  jal       NpcJumpFunc
 /* BE89DC 80240DFC 02A0302D */   daddu    $a2, $s5, $zero
 /* BE89E0 80240E00 0809039A */  j         .L80240E68
 /* BE89E4 80240E04 00000000 */   nop      

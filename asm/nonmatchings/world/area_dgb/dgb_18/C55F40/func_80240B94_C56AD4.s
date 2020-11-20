@@ -161,7 +161,7 @@ glabel func_80240B94_C56AD4
 /* C56D2C 80240DEC 02A0302D */   daddu    $a2, $s5, $zero
 /* C56D30 80240DF0 0280202D */  daddu     $a0, $s4, $zero
 /* C56D34 80240DF4 0260282D */  daddu     $a1, $s3, $zero
-/* C56D38 80240DF8 0C0901E9 */  jal       func_802407A4_C566E4
+/* C56D38 80240DF8 0C0901E9 */  jal       NpcJumpFunc
 /* C56D3C 80240DFC 02A0302D */   daddu    $a2, $s5, $zero
 /* C56D40 80240E00 0809039A */  j         .L80240E68
 /* C56D44 80240E04 00000000 */   nop      

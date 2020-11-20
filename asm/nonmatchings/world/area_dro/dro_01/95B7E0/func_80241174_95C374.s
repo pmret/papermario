@@ -161,7 +161,7 @@ glabel func_80241174_95C374
 /* 95C5CC 802413CC 02A0302D */   daddu    $a2, $s5, $zero
 /* 95C5D0 802413D0 0280202D */  daddu     $a0, $s4, $zero
 /* 95C5D4 802413D4 0260282D */  daddu     $a1, $s3, $zero
-/* 95C5D8 802413D8 0C090361 */  jal       func_80240D84_95BF84
+/* 95C5D8 802413D8 0C090361 */  jal       NpcJumpFunc
 /* 95C5DC 802413DC 02A0302D */   daddu    $a2, $s5, $zero
 /* 95C5E0 802413E0 08090512 */  j         .L80241448
 /* 95C5E4 802413E4 00000000 */   nop      

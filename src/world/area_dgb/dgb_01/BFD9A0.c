@@ -57,7 +57,7 @@ INCLUDE_ASM(s32, "world/area_dgb/dgb_01/BFD9A0", func_80242BA8_C00428);
 
 INCLUDE_ASM(s32, "world/area_dgb/dgb_01/BFD9A0", func_80242C5C_C004DC);
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_01/BFD9A0", func_80242CD0_C00550);
+# include "world/common/NpcJumpFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_dgb/dgb_01/BFD9A0", func_80242D48_C005C8);
 

@@ -161,7 +161,7 @@ glabel func_80241AE0_DCE7B0
 /* DCEA08 80241D38 02A0302D */   daddu    $a2, $s5, $zero
 /* DCEA0C 80241D3C 0280202D */  daddu     $a0, $s4, $zero
 /* DCEA10 80241D40 0260282D */  daddu     $a1, $s3, $zero
-/* DCEA14 80241D44 0C0905BC */  jal       func_802416F0_DCE3C0
+/* DCEA14 80241D44 0C0905BC */  jal       NpcJumpFunc
 /* DCEA18 80241D48 02A0302D */   daddu    $a2, $s5, $zero
 /* DCEA1C 80241D4C 0809076D */  j         .L80241DB4
 /* DCEA20 80241D50 00000000 */   nop      

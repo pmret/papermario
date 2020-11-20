@@ -161,7 +161,7 @@ glabel func_802416B4_C32B94
 /* C32DEC 8024190C 02A0302D */   daddu    $a2, $s5, $zero
 /* C32DF0 80241910 0280202D */  daddu     $a0, $s4, $zero
 /* C32DF4 80241914 0260282D */  daddu     $a1, $s3, $zero
-/* C32DF8 80241918 0C0904B1 */  jal       func_802412C4_C327A4
+/* C32DF8 80241918 0C0904B1 */  jal       NpcJumpFunc
 /* C32DFC 8024191C 02A0302D */   daddu    $a2, $s5, $zero
 /* C32E00 80241920 08090662 */  j         .L80241988
 /* C32E04 80241924 00000000 */   nop      

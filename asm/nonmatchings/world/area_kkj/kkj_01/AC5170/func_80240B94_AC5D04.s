@@ -161,7 +161,7 @@ glabel func_80240B94_AC5D04
 /* AC5F5C 80240DEC 02A0302D */   daddu    $a2, $s5, $zero
 /* AC5F60 80240DF0 0280202D */  daddu     $a0, $s4, $zero
 /* AC5F64 80240DF4 0260282D */  daddu     $a1, $s3, $zero
-/* AC5F68 80240DF8 0C0901E9 */  jal       func_802407A4_AC5914
+/* AC5F68 80240DF8 0C0901E9 */  jal       NpcJumpFunc
 /* AC5F6C 80240DFC 02A0302D */   daddu    $a2, $s5, $zero
 /* AC5F70 80240E00 0809039A */  j         .L80240E68
 /* AC5F74 80240E04 00000000 */   nop      
