@@ -106,4 +106,4 @@ INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_80243380_826640);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_802433C4_826684);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_802433F0_8266B0);
+#include "world/common/UnkMusicFunc.inc.c"
