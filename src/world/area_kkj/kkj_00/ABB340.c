@@ -18,7 +18,7 @@ INCLUDE_ASM(s32, "world/area_kkj/kkj_00/ABB340", func_802408CC_ABBB5C);
 
 INCLUDE_ASM(s32, "world/area_kkj/kkj_00/ABB340", func_802409FC_ABBC8C);
 
-INCLUDE_ASM(s32, "world/area_kkj/kkj_00/ABB340", func_80240B1C_ABBDAC);
+#include "world/common/UnkNpcDurationFlagFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kkj/kkj_00/ABB340", func_80240B84_ABBE14);
 

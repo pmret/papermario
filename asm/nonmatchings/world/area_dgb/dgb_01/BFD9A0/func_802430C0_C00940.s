@@ -177,7 +177,7 @@ glabel func_802430C0_C00940
 /* C00BD8 80243358 00000000 */   nop      
 /* C00BDC 8024335C 0280202D */  daddu     $a0, $s4, $zero
 /* C00BE0 80243360 0260282D */  daddu     $a1, $s3, $zero
-/* C00BE4 80243364 0C090BE6 */  jal       func_80242F98_C00818
+/* C00BE4 80243364 0C090BE6 */  jal       UnkNpcDurationFlagFunc
 /* C00BE8 80243368 02A0302D */   daddu    $a2, $s5, $zero
 /* C00BEC 8024336C 08090CE5 */  j         .L80243394
 /* C00BF0 80243370 00000000 */   nop      

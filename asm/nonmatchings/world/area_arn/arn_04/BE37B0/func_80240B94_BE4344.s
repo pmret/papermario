@@ -177,7 +177,7 @@ glabel func_80240B94_BE4344
 /* BE45DC 80240E2C 00000000 */   nop      
 /* BE45E0 80240E30 0280202D */  daddu     $a0, $s4, $zero
 /* BE45E4 80240E34 0260282D */  daddu     $a1, $s3, $zero
-/* BE45E8 80240E38 0C09029B */  jal       func_80240A6C_BE421C
+/* BE45E8 80240E38 0C09029B */  jal       UnkNpcDurationFlagFunc
 /* BE45EC 80240E3C 02A0302D */   daddu    $a2, $s5, $zero
 /* BE45F0 80240E40 0809039A */  j         .L80240E68
 /* BE45F4 80240E44 00000000 */   nop      

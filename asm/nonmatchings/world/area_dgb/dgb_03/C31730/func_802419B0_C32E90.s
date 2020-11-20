@@ -153,7 +153,7 @@ glabel func_802419B0_C32E90
 /* C330C8 80241BE8 00000000 */   nop      
 /* C330CC 80241BEC 0240202D */  daddu     $a0, $s2, $zero
 /* C330D0 80241BF0 0260282D */  daddu     $a1, $s3, $zero
-/* C330D4 80241BF4 0C090563 */  jal       func_8024158C_C32A6C
+/* C330D4 80241BF4 0C090563 */  jal       UnkNpcDurationFlagFunc
 /* C330D8 80241BF8 0280302D */   daddu    $a2, $s4, $zero
 /* C330DC 80241BFC 08090715 */  j         .L80241C54
 /* C330E0 80241C00 00000000 */   nop      

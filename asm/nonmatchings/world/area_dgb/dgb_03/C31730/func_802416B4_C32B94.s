@@ -177,7 +177,7 @@ glabel func_802416B4_C32B94
 /* C32E2C 8024194C 00000000 */   nop      
 /* C32E30 80241950 0280202D */  daddu     $a0, $s4, $zero
 /* C32E34 80241954 0260282D */  daddu     $a1, $s3, $zero
-/* C32E38 80241958 0C090563 */  jal       func_8024158C_C32A6C
+/* C32E38 80241958 0C090563 */  jal       UnkNpcDurationFlagFunc
 /* C32E3C 8024195C 02A0302D */   daddu    $a2, $s5, $zero
 /* C32E40 80241960 08090662 */  j         .L80241988
 /* C32E44 80241964 00000000 */   nop      

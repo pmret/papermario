@@ -20,7 +20,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_8024189C_80211C);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802419CC_80224C);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80241AEC_80236C);
+#include "world/common/UnkNpcDurationFlagFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80241B54_8023D4);
 
