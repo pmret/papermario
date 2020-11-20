@@ -22,4 +22,4 @@ INCLUDE_ASM(s32, "world/area_kpa/kpa_111/A99590", func_80240C08_A9A198);
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_111/A99590", func_80241064_A9A5F4);
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_111/A99590", func_80241384_A9A914);
+#include "world/common/GetEncounterEnemyIsOwner.inc.c"

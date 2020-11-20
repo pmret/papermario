@@ -56,4 +56,4 @@ INCLUDE_ASM(s32, "world/area_omo/omo_02/D9D510", func_8024283C_D9FD0C);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_02/D9D510", func_80242B5C_DA002C);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_02/D9D510", func_80242B70_DA0040);
+#include "world/common/GetEncounterEnemyIsOwner.inc.c"

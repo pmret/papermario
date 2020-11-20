@@ -38,6 +38,6 @@ INCLUDE_ASM(s32, "world/area_kpa/kpa_61/A6E6F0", func_80241F4C_A7032C);
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_61/A6E6F0", update_heroes_start_turn_A70404);
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_61/A6E6F0", func_802422B8_A70698);
+#include "world/common/GetEncounterEnemyIsOwner.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_61/A6E6F0", func_802422F0_A706D0);
