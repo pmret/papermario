@@ -97,7 +97,7 @@ glabel func_80241C64_CD8F44
 .L80241DC0:
 /* CD90A0 80241DC0 0280202D */  daddu     $a0, $s4, $zero
 /* CD90A4 80241DC4 02C0282D */  daddu     $a1, $s6, $zero
-/* CD90A8 80241DC8 0C090212 */  jal       func_80240848_CD7B28
+/* CD90A8 80241DC8 0C090212 */  jal       UnkNpcAIFunc1
 /* CD90AC 80241DCC 02A0302D */   daddu    $a2, $s5, $zero
 /* CD90B0 80241DD0 0280202D */  daddu     $a0, $s4, $zero
 .L80241DD4:

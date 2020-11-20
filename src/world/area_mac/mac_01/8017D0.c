@@ -6,7 +6,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80241080_801900);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802411D8_801A58);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80241480_801D00);
+#include "world/common/UnkNpcAIFunc1.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80241540_801DC0);
 

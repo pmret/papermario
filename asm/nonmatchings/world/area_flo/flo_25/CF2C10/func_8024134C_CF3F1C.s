@@ -83,7 +83,7 @@ glabel func_8024134C_CF3F1C
 /* CF404C 8024147C 0000102D */   daddu    $v0, $zero, $zero
 /* CF4050 80241480 0280202D */  daddu     $a0, $s4, $zero
 /* CF4054 80241484 0200282D */  daddu     $a1, $s0, $zero
-/* CF4058 80241488 0C090206 */  jal       func_80240818_CF33E8
+/* CF4058 80241488 0C090206 */  jal       UnkNpcAIFunc1
 /* CF405C 8024148C 0260302D */   daddu    $a2, $s3, $zero
 /* CF4060 80241490 0280202D */  daddu     $a0, $s4, $zero
 /* CF4064 80241494 0200282D */  daddu     $a1, $s0, $zero

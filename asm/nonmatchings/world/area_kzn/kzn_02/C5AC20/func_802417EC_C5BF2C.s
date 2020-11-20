@@ -83,7 +83,7 @@ glabel func_802417EC_C5BF2C
 /* C5C05C 8024191C 0000102D */   daddu    $v0, $zero, $zero
 /* C5C060 80241920 0280202D */  daddu     $a0, $s4, $zero
 /* C5C064 80241924 0200282D */  daddu     $a1, $s0, $zero
-/* C5C068 80241928 0C09032E */  jal       func_80240CB8_C5B3F8
+/* C5C068 80241928 0C09032E */  jal       UnkNpcAIFunc1
 /* C5C06C 8024192C 0260302D */   daddu    $a2, $s3, $zero
 /* C5C070 80241930 0280202D */  daddu     $a0, $s4, $zero
 /* C5C074 80241934 0200282D */  daddu     $a1, $s0, $zero

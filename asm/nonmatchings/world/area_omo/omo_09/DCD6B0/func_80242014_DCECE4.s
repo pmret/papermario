@@ -141,7 +141,7 @@ glabel func_80242014_DCECE4
 /* DCEEEC 8024221C 00000000 */   nop      
 /* DCEEF0 80242220 0260202D */  daddu     $a0, $s3, $zero
 /* DCEEF4 80242224 0280282D */  daddu     $a1, $s4, $zero
-/* DCEEF8 80242228 0C0904D3 */  jal       func_8024134C_DCE01C
+/* DCEEF8 80242228 0C0904D3 */  jal       UnkNpcAIFunc1
 /* DCEEFC 8024222C 02A0302D */   daddu    $a2, $s5, $zero
 /* DCEF00 80242230 0260202D */  daddu     $a0, $s3, $zero
 /* DCEF04 80242234 0280282D */  daddu     $a1, $s4, $zero

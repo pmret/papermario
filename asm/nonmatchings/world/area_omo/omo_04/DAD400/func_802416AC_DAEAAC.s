@@ -83,7 +83,7 @@ glabel func_802416AC_DAEAAC
 /* DAEBDC 802417DC 0000102D */   daddu    $v0, $zero, $zero
 /* DAEBE0 802417E0 0280202D */  daddu     $a0, $s4, $zero
 /* DAEBE4 802417E4 0200282D */  daddu     $a1, $s0, $zero
-/* DAEBE8 802417E8 0C0902DE */  jal       func_80240B78_DADF78
+/* DAEBE8 802417E8 0C0902DE */  jal       UnkNpcAIFunc1
 /* DAEBEC 802417EC 0260302D */   daddu    $a2, $s3, $zero
 /* DAEBF0 802417F0 0280202D */  daddu     $a0, $s4, $zero
 /* DAEBF4 802417F4 0200282D */  daddu     $a1, $s0, $zero

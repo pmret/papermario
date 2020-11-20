@@ -117,7 +117,7 @@ glabel func_802423CC_D8F61C
 /* D8F7C4 80242574 00000000 */   nop      
 /* D8F7C8 80242578 0240202D */  daddu     $a0, $s2, $zero
 /* D8F7CC 8024257C 0260282D */  daddu     $a1, $s3, $zero
-/* D8F7D0 80242580 0C0904C8 */  jal       func_80241320_D8E570
+/* D8F7D0 80242580 0C0904C8 */  jal       UnkNpcAIFunc1
 /* D8F7D4 80242584 0280302D */   daddu    $a2, $s4, $zero
 /* D8F7D8 80242588 0240202D */  daddu     $a0, $s2, $zero
 /* D8F7DC 8024258C 0260282D */  daddu     $a1, $s3, $zero

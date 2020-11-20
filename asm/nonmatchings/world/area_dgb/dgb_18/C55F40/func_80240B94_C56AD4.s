@@ -141,7 +141,7 @@ glabel func_80240B94_C56AD4
 /* C56CDC 80240D9C 00000000 */   nop      
 /* C56CE0 80240DA0 0280202D */  daddu     $a0, $s4, $zero
 /* C56CE4 80240DA4 0260282D */  daddu     $a1, $s3, $zero
-/* C56CE8 80240DA8 0C090100 */  jal       func_80240400_C56340
+/* C56CE8 80240DA8 0C090100 */  jal       UnkNpcAIFunc1
 /* C56CEC 80240DAC 02A0302D */   daddu    $a2, $s5, $zero
 /* C56CF0 80240DB0 0280202D */  daddu     $a0, $s4, $zero
 /* C56CF4 80240DB4 0260282D */  daddu     $a1, $s3, $zero

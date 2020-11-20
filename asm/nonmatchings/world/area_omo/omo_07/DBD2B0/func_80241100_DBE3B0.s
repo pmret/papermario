@@ -141,7 +141,7 @@ glabel func_80241100_DBE3B0
 /* DBE5B8 80241308 00000000 */   nop      
 /* DBE5BC 8024130C 0280202D */  daddu     $a0, $s4, $zero
 /* DBE5C0 80241310 0260282D */  daddu     $a1, $s3, $zero
-/* DBE5C4 80241314 0C09025B */  jal       func_8024096C_DBDC1C
+/* DBE5C4 80241314 0C09025B */  jal       UnkNpcAIFunc1
 /* DBE5C8 80241318 02A0302D */   daddu    $a2, $s5, $zero
 /* DBE5CC 8024131C 0280202D */  daddu     $a0, $s4, $zero
 /* DBE5D0 80241320 0260282D */  daddu     $a1, $s3, $zero

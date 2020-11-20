@@ -86,7 +86,7 @@ glabel func_80240F3C_99366C
 /* 9937AC 8024107C 00000000 */   nop      
 /* 9937B0 80241080 0280202D */  daddu     $a0, $s4, $zero
 /* 9937B4 80241084 0200282D */  daddu     $a1, $s0, $zero
-/* 9937B8 80241088 0C09015A */  jal       func_80240568_992C98
+/* 9937B8 80241088 0C09015A */  jal       UnkNpcAIFunc1
 /* 9937BC 8024108C 0260302D */   daddu    $a2, $s3, $zero
 /* 9937C0 80241090 0280202D */  daddu     $a0, $s4, $zero
 /* 9937C4 80241094 0200282D */  daddu     $a1, $s0, $zero

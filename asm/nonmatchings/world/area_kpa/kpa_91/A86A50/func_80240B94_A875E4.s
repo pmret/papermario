@@ -141,7 +141,7 @@ glabel func_80240B94_A875E4
 /* A877EC 80240D9C 00000000 */   nop      
 /* A877F0 80240DA0 0280202D */  daddu     $a0, $s4, $zero
 /* A877F4 80240DA4 0260282D */  daddu     $a1, $s3, $zero
-/* A877F8 80240DA8 0C090100 */  jal       func_80240400_A86E50
+/* A877F8 80240DA8 0C090100 */  jal       UnkNpcAIFunc1
 /* A877FC 80240DAC 02A0302D */   daddu    $a2, $s5, $zero
 /* A87800 80240DB0 0280202D */  daddu     $a0, $s4, $zero
 /* A87804 80240DB4 0260282D */  daddu     $a1, $s3, $zero

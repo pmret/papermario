@@ -105,7 +105,7 @@ glabel func_80240E60_BAAFA0
 /* BAB128 80240FE8 0000102D */   daddu    $v0, $zero, $zero
 /* BAB12C 80240FEC 0260202D */  daddu     $a0, $s3, $zero
 /* BAB130 80240FF0 0280282D */  daddu     $a1, $s4, $zero
-/* BAB134 80240FF4 0C0901F6 */  jal       func_802407D8_BAA918
+/* BAB134 80240FF4 0C0901F6 */  jal       UnkNpcAIFunc1
 /* BAB138 80240FF8 0200302D */   daddu    $a2, $s0, $zero
 /* BAB13C 80240FFC 8E630070 */  lw        $v1, 0x70($s3)
 /* BAB140 80241000 24020003 */  addiu     $v0, $zero, 3

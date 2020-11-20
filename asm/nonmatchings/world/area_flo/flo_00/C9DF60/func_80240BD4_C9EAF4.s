@@ -141,7 +141,7 @@ glabel func_80240BD4_C9EAF4
 /* C9ECFC 80240DDC 00000000 */   nop      
 /* C9ED00 80240DE0 0280202D */  daddu     $a0, $s4, $zero
 /* C9ED04 80240DE4 0260282D */  daddu     $a1, $s3, $zero
-/* C9ED08 80240DE8 0C090110 */  jal       func_80240440_C9E360
+/* C9ED08 80240DE8 0C090110 */  jal       UnkNpcAIFunc1
 /* C9ED0C 80240DEC 02A0302D */   daddu    $a2, $s5, $zero
 /* C9ED10 80240DF0 0280202D */  daddu     $a0, $s4, $zero
 /* C9ED14 80240DF4 0260282D */  daddu     $a1, $s3, $zero

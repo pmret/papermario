@@ -55,6 +55,7 @@ typedef struct Area {
     /* 0x08 */ char* id; ///< "area_xxx"
     /* 0x0C */ char* name; ///< JP debug name.
 } Area; // size = 0x10
+
 typedef struct NpcAISettings {
     /* 0x00 */ f32 moveSpeed;
     /* 0x04 */ s32 moveTime;

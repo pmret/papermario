@@ -105,7 +105,7 @@ glabel func_80240C60_B98860
 /* B989E8 80240DE8 0000102D */   daddu    $v0, $zero, $zero
 /* B989EC 80240DEC 0260202D */  daddu     $a0, $s3, $zero
 /* B989F0 80240DF0 0280282D */  daddu     $a1, $s4, $zero
-/* B989F4 80240DF4 0C090176 */  jal       func_802405D8_B981D8
+/* B989F4 80240DF4 0C090176 */  jal       UnkNpcAIFunc1
 /* B989F8 80240DF8 0200302D */   daddu    $a2, $s0, $zero
 /* B989FC 80240DFC 8E630070 */  lw        $v1, 0x70($s3)
 /* B98A00 80240E00 24020003 */  addiu     $v0, $zero, 3

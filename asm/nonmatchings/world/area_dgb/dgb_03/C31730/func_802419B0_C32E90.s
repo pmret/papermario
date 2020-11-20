@@ -117,7 +117,7 @@ glabel func_802419B0_C32E90
 /* C33038 80241B58 00000000 */   nop      
 /* C3303C 80241B5C 0240202D */  daddu     $a0, $s2, $zero
 /* C33040 80241B60 0260282D */  daddu     $a1, $s3, $zero
-/* C33044 80241B64 0C0903C8 */  jal       func_80240F20_C32400
+/* C33044 80241B64 0C0903C8 */  jal       UnkNpcAIFunc1
 /* C33048 80241B68 0280302D */   daddu    $a2, $s4, $zero
 /* C3304C 80241B6C 0240202D */  daddu     $a0, $s2, $zero
 /* C33050 80241B70 0260282D */  daddu     $a1, $s3, $zero

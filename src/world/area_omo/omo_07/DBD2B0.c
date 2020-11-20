@@ -14,7 +14,7 @@ INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_8024056C_DBD81C);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_802406C4_DBD974);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_8024096C_DBDC1C);
+#include "world/common/UnkNpcAIFunc1.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_80240A2C_DBDCDC);
 
@@ -48,6 +48,7 @@ INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_80241978_DBEC28);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_80241B28_DBEDD8);
 
+// Should be #include "world/common/UnkNpcAIFunc1.inc.c"
 INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_80242150_DBF400);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_80242210_DBF4C0);

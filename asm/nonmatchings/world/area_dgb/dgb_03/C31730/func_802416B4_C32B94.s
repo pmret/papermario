@@ -141,7 +141,7 @@ glabel func_802416B4_C32B94
 /* C32D9C 802418BC 00000000 */   nop      
 /* C32DA0 802418C0 0280202D */  daddu     $a0, $s4, $zero
 /* C32DA4 802418C4 0260282D */  daddu     $a1, $s3, $zero
-/* C32DA8 802418C8 0C0903C8 */  jal       func_80240F20_C32400
+/* C32DA8 802418C8 0C0903C8 */  jal       UnkNpcAIFunc1
 /* C32DAC 802418CC 02A0302D */   daddu    $a2, $s5, $zero
 /* C32DB0 802418D0 0280202D */  daddu     $a0, $s4, $zero
 /* C32DB4 802418D4 0260282D */  daddu     $a1, $s3, $zero

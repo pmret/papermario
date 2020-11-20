@@ -88,7 +88,7 @@ glabel func_8024231C_9B8C9C
 /* 9B8DE0 80242460 0000102D */   daddu    $v0, $zero, $zero
 /* 9B8DE4 80242464 0260202D */  daddu     $a0, $s3, $zero
 /* 9B8DE8 80242468 0200282D */  daddu     $a1, $s0, $zero
-/* 9B8DEC 8024246C 0C0904AF */  jal       func_802412BC_9B7C3C
+/* 9B8DEC 8024246C 0C0904AF */  jal       UnkNpcAIFunc1
 /* 9B8DF0 80242470 0280302D */   daddu    $a2, $s4, $zero
 /* 9B8DF4 80242474 0260202D */  daddu     $a0, $s3, $zero
 /* 9B8DF8 80242478 0200282D */  daddu     $a1, $s0, $zero

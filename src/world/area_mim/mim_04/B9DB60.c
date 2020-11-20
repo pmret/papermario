@@ -4,7 +4,7 @@ INCLUDE_ASM(s32, "world/area_mim/mim_04/B9DB60", func_80240200_B9DB60);
 
 INCLUDE_ASM(s32, "world/area_mim/mim_04/B9DB60", func_80240430_B9DD90);
 
-INCLUDE_ASM(s32, "world/area_mim/mim_04/B9DB60", func_80240768_B9E0C8);
+#include "world/common/UnkNpcAIFunc1.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mim/mim_04/B9DB60", func_80240828_B9E188);
 

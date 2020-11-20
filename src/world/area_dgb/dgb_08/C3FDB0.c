@@ -4,7 +4,7 @@ INCLUDE_ASM(s32, "world/area_dgb/dgb_08/C3FDB0", func_80240000_C3FDB0);
 
 INCLUDE_ASM(s32, "world/area_dgb/dgb_08/C3FDB0", func_80240158_C3FF08);
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_08/C3FDB0", func_80240400_C401B0);
+#include "world/common/UnkNpcAIFunc1.inc.c"
 
 INCLUDE_ASM(s32, "world/area_dgb/dgb_08/C3FDB0", func_802404C0_C40270);
 
@@ -42,6 +42,7 @@ INCLUDE_ASM(s32, "world/area_dgb/dgb_08/C3FDB0", func_80241760_C41510);
 
 INCLUDE_ASM(s32, "world/area_dgb/dgb_08/C3FDB0", func_80241910_C416C0);
 
+// should be #include "world/common/UnkNpcAIFunc1.inc.c"
 INCLUDE_ASM(s32, "world/area_dgb/dgb_08/C3FDB0", func_80241F38_C41CE8);
 
 INCLUDE_ASM(s32, "world/area_dgb/dgb_08/C3FDB0", func_80241FF8_C41DA8);
