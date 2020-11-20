@@ -44,7 +44,7 @@ INCLUDE_ASM(s32, "world/area_omo/omo_17/DEF400", func_8024269C_DF153C);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_17/DEF400", func_802427E0_DF1680);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_17/DEF400", func_802428E0_DF1780);
+#include "world/common/UnkSetDurationFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_17/DEF400", func_80242924_DF17C4);
 

@@ -6,7 +6,7 @@ INCLUDE_ASM(s32, "world/area_kpa/kpa_52/A671E0", func_802402D0_A673D0);
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_52/A671E0", func_80240414_A67514);
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_52/A671E0", func_80240514_A67614);
+#include "world/common/UnkSetDurationFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_52/A671E0", func_80240558_A67658);
 

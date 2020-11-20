@@ -6,7 +6,7 @@ INCLUDE_ASM(s32, "world/area_iwa/iwa_01/90FBD0", func_80240710_90FDC0);
 
 INCLUDE_ASM(s32, "world/area_iwa/iwa_01/90FBD0", func_80240854_90FF04);
 
-INCLUDE_ASM(s32, "world/area_iwa/iwa_01/90FBD0", func_80240954_910004);
+#include "world/common/UnkSetDurationFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_iwa/iwa_01/90FBD0", func_80240998_910048);
 

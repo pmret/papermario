@@ -186,7 +186,7 @@ glabel func_8024283C_D9FD0C
 /* D9FFC0 80242AF0 0260202D */   daddu    $a0, $s3, $zero
 /* D9FFC4 80242AF4 08090ACD */  j         .L80242B34
 /* D9FFC8 80242AF8 00000000 */   nop      
-/* D9FFCC 80242AFC 0C09075F */  jal       func_80241D7C_D9F24C
+/* D9FFCC 80242AFC 0C09075F */  jal       UnkSetDurationFunc
 /* D9FFD0 80242B00 0260202D */   daddu    $a0, $s3, $zero
 /* D9FFD4 80242B04 08090ACD */  j         .L80242B34
 /* D9FFD8 80242B08 00000000 */   nop      

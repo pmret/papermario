@@ -50,7 +50,7 @@ INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_80242548_DCF218);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_8024268C_DCF35C);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_8024278C_DCF45C);
+#include "world/common/UnkSetDurationFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_802427D0_DCF4A0);
 
