@@ -10,7 +10,7 @@ INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_80240AA0_95BCA0);
 
 INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_80240C5C_95BE5C);
 
-INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_80240D10_95BF10);
+#include "world/common/NpcJumpFunc2.inc.c"
 
 # include "world/common/NpcJumpFunc.inc.c"
 

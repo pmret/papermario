@@ -10,7 +10,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_80240DF0_8240B0);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_80240FAC_82426C);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_80241060_824320);
+#include "world/common/NpcJumpFunc2.inc.c"
 
 # include "world/common/NpcJumpFunc.inc.c"
 

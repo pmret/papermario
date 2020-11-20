@@ -157,7 +157,7 @@ glabel func_80241818_9A9C08
 /* 9A9E50 80241A60 00000000 */   nop      
 /* 9A9E54 80241A64 0280202D */  daddu     $a0, $s4, $zero
 /* 9A9E58 80241A68 0260282D */  daddu     $a1, $s3, $zero
-/* 9A9E5C 80241A6C 0C0904ED */  jal       func_802413B4_9A97A4
+/* 9A9E5C 80241A6C 0C0904ED */  jal       NpcJumpFunc2
 /* 9A9E60 80241A70 02A0302D */   daddu    $a2, $s5, $zero
 /* 9A9E64 80241A74 0280202D */  daddu     $a0, $s4, $zero
 /* 9A9E68 80241A78 0260282D */  daddu     $a1, $s3, $zero

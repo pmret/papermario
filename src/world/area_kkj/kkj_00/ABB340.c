@@ -10,7 +10,7 @@ INCLUDE_ASM(s32, "world/area_kkj/kkj_00/ABB340", func_80240570_ABB800);
 
 INCLUDE_ASM(s32, "world/area_kkj/kkj_00/ABB340", func_8024072C_ABB9BC);
 
-INCLUDE_ASM(s32, "world/area_kkj/kkj_00/ABB340", func_802407E0_ABBA70);
+#include "world/common/NpcJumpFunc2.inc.c"
 
 # include "world/common/NpcJumpFunc.inc.c"
 

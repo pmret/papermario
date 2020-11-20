@@ -133,7 +133,7 @@ glabel func_802419B0_C32E90
 /* C33078 80241B98 00000000 */   nop      
 /* C3307C 80241B9C 0240202D */  daddu     $a0, $s2, $zero
 /* C33080 80241BA0 0260282D */  daddu     $a1, $s3, $zero
-/* C33084 80241BA4 0C090494 */  jal       func_80241250_C32730
+/* C33084 80241BA4 0C090494 */  jal       NpcJumpFunc2
 /* C33088 80241BA8 0280302D */   daddu    $a2, $s4, $zero
 /* C3308C 80241BAC 0240202D */  daddu     $a0, $s2, $zero
 /* C33090 80241BB0 0260282D */  daddu     $a1, $s3, $zero
