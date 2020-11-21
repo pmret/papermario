@@ -51,7 +51,7 @@ void func_802E40A0(Entity* entity) {
     UNK_PTR ptr;
 
     entityType = get_entity_type(entity->listIndex);
-    if ((entityType == 0x12) || (entityType == 0x14) ){
+    if ((entityType == 0x12) || (entityType == 0x14)) {
         play_model_animation(entity->virtualModelIndex, &D_00000094);
     } else {
         play_model_animation(entity->virtualModelIndex, &D_00000094_2);
@@ -105,7 +105,8 @@ void func_802E421C(Entity* entity) {
             phi_a0 = &D_802EA0A0;
         }
     }
-    temp_s2 = create_entity(phi_a0, entity->position.x, entity->position.y, entity->position.z, entity->rotation.y, 0x80000000);
+    temp_s2 = create_entity(phi_a0, entity->position.x, entity->position.y, entity->position.z, entity->rotation.y,
+                            0x80000000);
     entityTemp = get_entity_by_index(temp_s2);
     entityTemp->flags |= 1;
 
@@ -128,7 +129,8 @@ void func_802E421C(Entity* entity) {
     } else {
         phi_a0 = &D_802EA63C;
     }
-    entityTemp = get_entity_by_index(create_entity(phi_a0, entity->position.x, entity->position.y, entity->position.z, entity->rotation.y, 0x80000000));
+    entityTemp = get_entity_by_index(create_entity(phi_a0, entity->position.x, entity->position.y, entity->position.z,
+                                     entity->rotation.y, 0x80000000));
     entityTemp->alpha = entity->alpha;
     if (((entity->flags & 1) != 0) || ((u32) entity->alpha < 0xFF)) {
         entityTemp->alpha = 0x20;

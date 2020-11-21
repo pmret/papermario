@@ -10,7 +10,7 @@ void create_shadow_callback(Shadow* shadow) {
 
 //TODO: make sure this is the right struct for this.
 s32 func_802E0DB0(Shadow* shadow) {
-    
+
     if (((shadow->unk_06 & 4) != 0) && (gPlayerStatus.flags & 2) != 0) {
         return 1;
     }
@@ -109,7 +109,7 @@ void func_802E1350(Entity* entity) {
     }
 }
 
-void func_802E13B8(Entity *entity) {
+void func_802E13B8(Entity* entity) {
     Trigger* trigger = (Trigger*)entity->dataBuf; // TODO: Fix this
 
     entity_init_Hammer23Block_normal(entity);

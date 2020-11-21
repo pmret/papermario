@@ -62,7 +62,7 @@ s32 func_802E3650(Entity* entity) {
                 itemEntity->position.y = entity->position.y + 4.0f;
             }
         }
-    } 
+    }
 
     return ret;
 }
@@ -144,7 +144,8 @@ void func_802E38D8(Entity* entity) {
 
     if ((temp->unk_04 == 0) || (temp->unk_06 == 0)) {
         temp->unk_03 = 1;
-        func_8010FBC0(get_entity_by_index(create_entity(&D_802EA07C, entity->position.x, entity->position.y, entity->position.z, entity->rotation.y, 0x80000000)), &D_802E9E54);
+        func_8010FBC0(get_entity_by_index(create_entity(&D_802EA07C, entity->position.x, entity->position.y, entity->position.z,
+                                          entity->rotation.y, 0x80000000)), &D_802E9E54);
         entity->flags |= 0x20000020;
     }
 }

@@ -28,7 +28,7 @@ typedef struct struct802E8BC0 {
     /* 0x00 */ char unk_00[4];
     /* 0x04 */ s32 unk_04;
     /* 0x08 */ char unk_08[4];
-    /* 0x0C */ s32 unk_0C; 
+    /* 0x0C */ s32 unk_0C;
 } struct802E8BC0;
 
 MapConfig* get_current_map_header(void);
@@ -36,9 +36,9 @@ void disable_player_input(void);
 void disable_player_static_collisions(void);
 void move_player(s32, f32, f32);
 
-void func_802E8BC0(Entity *entity) {
-    PlayerStatus *playerStatus = &gPlayerStatus;
-    PlayerStatus *playerStatus2 = &gPlayerStatus;
+void func_802E8BC0(Entity* entity) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    PlayerStatus* playerStatus2 = &gPlayerStatus;
     struct802E8BC0* temp = (struct802E8BC0*)entity->dataBuf;
     MapConfig* mapConfig = get_current_map_header();
     f32 temp_f20;

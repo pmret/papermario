@@ -73,14 +73,14 @@ void func_802E1660(Entity* entity) {
 
     func_802E153C(entity);
 
-    if(entity->unk_06 & 0x40) {
-        if(playerStatus->actionState == ActionState_HAMMER) {
-            if(gPlayerData.hammerLevel < 0) {
+    if (entity->unk_06 & 0x40) {
+        if (playerStatus->actionState == ActionState_HAMMER) {
+            if (gPlayerData.hammerLevel < 0) {
                 return;
             }
             func_8010FD68(entity);
 
-            if(temp->attachedEntity == NULL) {
+            if (temp->attachedEntity == NULL) {
                 return;
             }
 
@@ -89,25 +89,25 @@ void func_802E1660(Entity* entity) {
         }
     }
 
-    if(playerStatus->actionState == ActionState_SPIN_JUMP) {
+    if (playerStatus->actionState == ActionState_SPIN_JUMP) {
         return;
     }
 
-    if(temp2[3] == 4) {
-        if(temp2[0] != 0) {
+    if (temp2[3] == 4) {
+        if (temp2[0] != 0) {
             return;
         }
     }
 
-    if(!(entity->unk_06 & 1)) {
-        if(!(entity->unk_06 & 0x80)) {
+    if (!(entity->unk_06 & 1)) {
+        if (!(entity->unk_06 & 0x80)) {
             return;
         }
     }
 
     func_8010FD68(entity);
 
-    if(temp->attachedEntity == NULL) {
+    if (temp->attachedEntity == NULL) {
         return;
     }
 
@@ -141,7 +141,7 @@ void func_802E1EA8(Entity* entity) {
 INCLUDE_ASM(s32, "code_102c80", func_802E1EDC);
 
 void func_802E234C(Entity* entity) {
-    PlayerStatus* playerStatus = &gPlayerStatus; 
+    PlayerStatus* playerStatus = &gPlayerStatus;
     struct802E1400* temp = (struct802E1400*)entity->dataBuf;
 
     playerStatus->animFlags |= 0x1000000;
@@ -205,13 +205,13 @@ void func_802E2EB0(Entity* entity) {
     ((struct802E1400*)entity->dataBuf)->unk_38 = entity->position.y;
     type = get_entity_type((u8)entity->listIndex);
 
-    if((type - 24) < 3) {
+    if ((type - 24) < 3) {
         entity->scale.x = 0.5f;
         entity->scale.y = 0.5f;
         entity->scale.z = 0.5f;
     }
 
-    switch(type) {
+    switch (type) {
         case 21:
         case 24:
             a1 = &D_0A0031E0;
@@ -241,7 +241,7 @@ void func_802E2EB0(Entity* entity) {
             break;
     }
 
-    if(a2 == NULL) {
+    if (a2 == NULL) {
         return;
     }
 
@@ -255,11 +255,11 @@ INCLUDE_ASM(void, "code_102c80", func_802E2EB0, Entity* entity);
 //Needs rodata support
 void func_802E2FD0(Entity* entity) {
     u32 type;
-    void *addr = NULL;
+    void* addr = NULL;
 
     type = get_entity_type(entity->listIndex);
 
-    switch(type) {
+    switch (type) {
         case 21:
             addr = &D_802E9C8C;
             break;
@@ -290,7 +290,7 @@ void func_802E2FD0(Entity* entity) {
             break;
     }
 
-    if(addr == NULL) {
+    if (addr == NULL) {
         return;
     }
 
