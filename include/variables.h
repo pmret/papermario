@@ -252,6 +252,8 @@ extern UNK_TYPE D_802EA63C;
 extern UNK_TYPE D_802EA660;
 extern s16 D_8015C7D2;
 
+extern UNK_TYPE D_0A000808;
+
 // Scripts
 extern Bytecode* SCRIPT_NpcDefeat;
 extern Bytecode* ShakeCam1;

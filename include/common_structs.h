@@ -1588,7 +1588,7 @@ typedef struct {
 
 // BEGIN ENTITY-SPECIFIC STRUCTS
 
-// from code_104940_len_dc0
+// from code_104940_len_dc0, size unknown
 // appears to belong to the hammer blocks(?)
 typedef struct struct802E3650 {
     /* 0x00 */ char unk_00[3];

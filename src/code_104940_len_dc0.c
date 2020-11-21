@@ -123,7 +123,7 @@ void func_802E3898(Entity* entity) {
 }
 
 extern s32 D_802E9E54;
-extern s32 D_802EA07C;
+extern StaticEntityData D_802EA07C;
 
 void func_802E38D8(Entity* entity) {
     struct802E3650* temp = (struct802E3650*)entity->dataBuf;

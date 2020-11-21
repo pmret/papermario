@@ -100,7 +100,7 @@ INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_80111790);
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_801117DC);
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", create_entity, void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5);
+INCLUDE_ASM(s32, "code_a5dd0_len_114e0", create_entity, StaticEntityData* data, s32 x, s32 y, s32 z, s32 arg4, s32 flags);
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", create_shadow_from_data);
 
