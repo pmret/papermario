@@ -245,13 +245,17 @@ extern UNK_TYPE D_802EB3B0;
 extern UNK_TYPE D_00000094;
 extern UNK_TYPE D_00000094_2; // two symbols resolve to the same addr. Required for matching
 extern UNK_TYPE D_802EA0A0;
-extern UNK_TYPE D_802EA07C;
+extern StaticEntityData D_802EA07C;
 extern UNK_TYPE D_802EA310;
 extern UNK_TYPE D_802EA618;
 extern UNK_TYPE D_802EA63C;
 extern UNK_TYPE D_802EA660;
 extern s16 D_8015C7D2;
 
+extern UNK_TYPE D_0A000328;
+extern UNK_TYPE D_0A000380;
+extern UNK_TYPE D_0A000750;
+extern UNK_TYPE D_0A000800;
 extern UNK_TYPE D_0A000808;
 
 // Scripts

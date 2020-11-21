@@ -1597,19 +1597,35 @@ typedef struct {
 // from code_104940_len_dc0, size unknown
 // appears to belong to the hammer blocks(?)
 typedef struct struct802E3650 {
-    /* 0x00 */ char unk_00[3];
-    /* 0x03 */ s8 unk_03;
-    /* 0x04 */ s16 unk_04;
-    /* 0x06 */ s16 unk_06;
-    /* 0x08 */ char unk_08[2];
-    /* 0x0A */ u16 unk_0A;
-    /* 0x0C */ char unk_0C[2];
-    /* 0x0E */ s16 unk_0E;
-    /* 0x10 */ s16 unk_10;
-    /* 0x12 */ char unk_12[2];
-    /* 0x14 */ f32 unk_14;
-    /* 0x18 */ f32 unk_18;
+    /* 0x000 */ u8 unk_00;
+    /* 0x001 */ char unk_01[2];
+    /* 0x003 */ s8 unk_03;
+    /* 0x004 */ s16 unk_04;
+    /* 0x006 */ s16 unk_06;
+    /* 0x008 */ char unk_08[2];
+    /* 0x00A */ u16 unk_0A;
+    /* 0x00C */ char unk_0C[2];
+    /* 0x00E */ s16 unk_0E;
+    /* 0x010 */ s16 unk_10;
+    /* 0x012 */ s16 unk_12;
+    /* 0x014 */ f32 unk_14;
+    /* 0x018 */ f32 unk_18;
+    /* 0x01C */ char unk_1C[0x10C];
+    /* 0x128 */ UNK_PTR unk_128;
+    /* 0x12C */ UNK_PTR unk_12C;
 } struct802E3650;
+
+// size unknown
+typedef struct struct802E4B10 {
+    /* 0x00 */ u8 unk_00;
+    /* 0x01 */ u8 unk_01;
+    /* 0x02 */ char unk_02[7];
+    /* 0x09 */ u8 unk_09;
+    /* 0x0A */ u8 unk_0A;
+    /* 0x0B */ char unk_0B; // padding?
+    /* 0x0C */ s32 unk_0C;
+    /* 0x10 */ s32 unk_10;
+} struct802E4B10;
 
 // END ENTITY-SPECIFIC STRUCTS
 

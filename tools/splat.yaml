@@ -285,6 +285,7 @@ segments:
     - [0x104940, c, code_104940_len_dc0]
     - [0x105700, c, code_105700_len_2130]
     - [0x105F90, c, code_105f90]
+    - [0x106EF0, c, code_106ef0]
     - [0x107830, c, code_107830_len_e70]
     - [0x1086a0, c, code_1086a0_len_fc0]
     - [0x109660, c, code_109660_len_1270]

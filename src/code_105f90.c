@@ -1,16 +1,5 @@
 #include "common.h"
 
-typedef struct struct802E4B10 {
-    /* 0x00 */ u8 unk_00;
-    /* 0x01 */ u8 unk_01;
-    /* 0x02 */ char unk_02[7];
-    /* 0x09 */ u8 unk_09;
-    /* 0x0A */ u8 unk_0A;
-    /* 0x0B */ char unk_0B; // padding?
-    /* 0x0C */ s32 unk_0C;
-    /* 0x10 */ s32 unk_10;
-} struct802E4B10;
-
 INCLUDE_ASM(s32, "code_105f90", func_802E4710);
 
 INCLUDE_ASM(s32, "code_105f90", func_802E4730);
@@ -109,7 +98,7 @@ void func_802E54A8(Entity* entity) {
 extern UNK_TYPE D_802EB3C0;
 
 void func_802E54CC(Entity* entity) {
-    if ((gPlayerData.partners[2].enabled == 0) && (get_global_flag(0xF8405BE0) == 0)) {
+    if ((gPlayerData.partners[1].enabled == 0) && (get_global_flag(0xF8405BE0) == 0)) {
         UNK_TYPE* ptr = &D_802EB3C0;
         *ptr = 0;
         load_string(0x1D0001, ptr);
@@ -131,16 +120,10 @@ void func_802E555C(Entity* entity) {
     }
 }
 
-typedef struct struct802E55A8 {
-    /* 0x00 */ u8 unk_00;
-    /* 0x01 */ char unk_01[9];
-    /* 0x0A */ u8 unk_0A;
-} struct802E55A8;
-
 s8 func_802E55A8(Entity* entity, StaticEntityData* data) {
     s32 temp_s2;
     Entity* someEntity;
-    struct802E55A8* temp_v1;
+    struct802E4B10* temp_v1;
     s8 phi_v0;
 
     temp_s2 = D_8015C7D0;
@@ -155,32 +138,8 @@ s8 func_802E55A8(Entity* entity, StaticEntityData* data) {
     }
 }
 
-StaticEntityData D_802EA7BC;
+extern StaticEntityData D_802EA7BC;
+
 void func_802E5648(Entity* entity) {
     func_802E55A8(entity, &D_802EA7BC);
 }
-
-// FILE SPLIT
-INCLUDE_ASM(s32, "code_105f90", func_802E5670);
-
-INCLUDE_ASM(s32, "code_105f90", func_802E5690);
-
-INCLUDE_ASM(s32, "code_105f90", func_802E56D0);
-
-INCLUDE_ASM(s32, "code_105f90", func_802E56EC);
-
-INCLUDE_ASM(s32, "code_105f90", func_802E578C);
-
-INCLUDE_ASM(s32, "code_105f90", func_802E57E4);
-
-INCLUDE_ASM(s32, "code_105f90", func_802E5800);
-
-INCLUDE_ASM(s32, "code_105f90", func_802E581C);
-
-INCLUDE_ASM(s32, "code_105f90", func_802E586C);
-
-INCLUDE_ASM(s32, "code_105f90", func_802E5E50);
-
-INCLUDE_ASM(s32, "code_105f90", func_802E5F50);
-
-INCLUDE_ASM(s32, "code_105f90", func_802E5F7C);
