@@ -524,10 +524,10 @@ s32 does_script_exist(s32 id) {
     for (i = 0; i < MAX_SCRIPTS; i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
         if (scriptContextPtr != NULL && scriptContextPtr->id == id) {
-            return 1;
+            return TRUE;
         }
     }
-    return 0;
+    return FALSE;
 }
 
 s32 does_script_exist_by_ref(ScriptInstance* script) {
@@ -535,10 +535,10 @@ s32 does_script_exist_by_ref(ScriptInstance* script) {
 
     for (i = 0; i < MAX_SCRIPTS; i++) {
         if (script == (*gCurrentScriptListPtr)[i]) {
-            return 1;
+            return TRUE;
         }
     }
-    return 0;
+    return FALSE;
 }
 
 void set_script_priority(ScriptInstance* script, s8 priority) {

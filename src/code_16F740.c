@@ -50,7 +50,10 @@ INCLUDE_ASM(s32, "code_16F740", func_802439D8);
 void func_80243FD4(void) {
 }
 
-INCLUDE_ASM(s32, "code_16F740", func_80243FDC);
+void func_80243FDC(void) {
+    func_8024E40C(2);
+    func_80241190(12);
+}
 
 void func_80244000(void) {
 }
@@ -84,9 +87,15 @@ INCLUDE_ASM(s32, "code_16F740", func_80245440);
 void func_802456B0(void) {
 }
 
-INCLUDE_ASM(s32, "code_16F740", EnablePartnerBlur);
+ApiStatus EnablePartnerBlur(ScriptInstance* script, s32 isInitialCall) {
+    enable_partner_blur();
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "code_16F740", DisablePartnerBlur);
+ApiStatus DisablePartnerBlur(ScriptInstance* script, s32 isInitialCall) {
+    disable_partner_blur();
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_16F740", update_swap_partner);
 

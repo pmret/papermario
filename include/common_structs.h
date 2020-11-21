@@ -581,7 +581,7 @@ typedef struct BattleStatus {
     /* 0x196 */ char unk_196;
     /* 0x197 */ u8 targetHomeIndex; /* some sort of home idnex used for target list construction */
     /* 0x198 */ u8 powerBounceCounter;
-    /* 0x199 */ u8 wasStatusInflicted; /* during last attack */
+    /* 0x199 */ s8 wasStatusInflicted; /* during last attack */
     /* 0x19A */ s8 unk_19A;
     /* 0x19B */ char unk_19B[5];
     /* 0x1A0 */ s16 currentTargetID; /* selected? */
@@ -600,8 +600,8 @@ typedef struct BattleStatus {
     /* 0x210 */ s32 currentButtonsDown;
     /* 0x214 */ s32 currentButtonsPressed;
     /* 0x218 */ s32 currentButtonsHeld;
-    /* 0x21C */ f32 stickX;
-    /* 0x220 */ f32 stickY;
+    /* 0x21C */ s32 stickX;
+    /* 0x220 */ s32 stickY;
     /* 0x224 */ s32 inputBitmask;
     /* 0x228 */ s32 dpadX; /* 0-360 */
     /* 0x22C */ s32 dpadY; /* 0-60 */
@@ -1034,7 +1034,7 @@ typedef struct ActorPart {
     /* 0x64 */ f32 yaw;
     /* 0x68 */ s16 unkOffset[2];
     /* 0x6C */ s16 targetOffset[2];
-    /* 0x70 */ s16 unk;
+    /* 0x70 */ s16 unk_70;
     /* 0x72 */ u8 size[2];
     /* 0x74 */ u8 verticalStretch;
     /* 0x75 */ char unk_75[3];
@@ -1198,13 +1198,17 @@ typedef struct Zone {
     /* 0x28 */ s32 flag;
 } Zone; // size = 0x2C
 
+typedef struct ActorMovePos {
+    /* 0x00 */ Vec3f current;
+    /* 0x0C */ Vec3f goal;
+    /* 0x18 */ Vec3f end;
+} ActorMovePos; // size = 0x20;
+
 typedef struct Actor {
     /* 0x000 */ s32 flags;
     /* 0x004 */ char unk_04[4];
     /* 0x008 */ struct StaticActorData* staticActorData;
-    /* 0x00C */ Vec3f moveCurrentPos;
-    /* 0x018 */ Vec3f moveGoalPos;
-    /* 0x024 */ Vec3f moveEndPos; /* where other actors should target this one at. saved before partner switching */
+    /* 0x00C */ ActorMovePos movePos;
     /* 0x030 */ char unk_30[24];
     /* 0x048 */ f32 jumpAccel;
     /* 0x04C */ f32 moveSpeed;
@@ -1280,7 +1284,9 @@ typedef struct Actor {
     /* 0x1F8 */ s16 lastDamageTaken;
     /* 0x1FA */ s16 hpChangeCounter;
     /* 0x1FC */ s16 damageCounter;
-    /* 0x1FE */ char unk_1FE[9];
+    /* 0x1FE */ char unk_1FE[2];
+    /* 0x200 */ s32** unk_200; // Probably a struct but not sure what yet
+    /* 0x204 */ char unk_204[3];
     /* 0x207 */ u8 extraCoinBonus;
     /* 0x208 */ s8 unk_208;
     /* 0x209 */ char unk_209[3];
@@ -1305,10 +1311,10 @@ typedef struct Actor {
     /* 0x224 */ u8 chillOutTurns;
     /* 0x225 */ char unk_225[7];
     /* 0x22C */ struct SelectableTarget targetData[24];
-    /* 0x40C */ u8 targetListLength;
+    /* 0x40C */ s8 targetListLength;
     /* 0x40D */ u8 targetIndexList[24]; /* into targetData */
     /* 0x425 */ u8 selectedTargetIndex; /* into target index list */
-    /* 0x426 */ u8 targetPartIndex;
+    /* 0x426 */ s8 targetPartIndex;
     /* 0x427 */ char unk_427;
     /* 0x428 */ s16 targetActorID;
     /* 0x42A */ char unk_42A[2];
