@@ -16,7 +16,7 @@ INCLUDE_ASM(s32, "world/area_hos/hos_06/A397F0", func_802406E0_A39BC0);
 
 #include "world/common/SetManyVars.inc.c"
 
-INCLUDE_ASM(s32, "world/area_hos/hos_06/A397F0", func_8024086C_A39D4C);
+#include "world/common/UnkYawFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_hos/hos_06/A397F0", func_802409F8_A39ED8);
 

@@ -86,7 +86,7 @@ INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80242C5C_9D9C7C);
 
 #include "world/common/SetManyVars.inc.c"
 
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80242DE8_9D9E08);
+#include "world/common/UnkYawFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80242F74_9D9F94);
 

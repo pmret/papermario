@@ -24,7 +24,7 @@ INCLUDE_ASM(s32, "world/area_jan/jan_00/B20540", func_802407C4_B20D04);
 
 #include "world/common/SetManyVars.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_00/B20540", func_80240950_B20E90);
+#include "world/common/UnkYawFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_jan/jan_00/B20540", func_80240ADC_B2101C);
 

@@ -60,7 +60,7 @@ INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80242244_D220D4);
 
 #include "world/common/SetManyVars.inc.c"
 
-INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_8024233C_D221CC);
+#include "world/common/UnkYawFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_802424C8_D22358);
 

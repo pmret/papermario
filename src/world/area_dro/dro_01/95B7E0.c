@@ -88,7 +88,7 @@ INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_80242858_95DA58);
 
 #include "world/common/SetManyVars.inc.c"
 
-INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_80242E88_95E088);
+#include "world/common/UnkYawFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_80243014_95E214);
 

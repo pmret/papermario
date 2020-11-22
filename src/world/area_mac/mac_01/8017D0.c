@@ -124,7 +124,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80243D60_8045E0);
 
 #include "world/common/SetManyVars.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80243EEC_80476C);
+#include "world/common/UnkYawFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80244078_8048F8);
 

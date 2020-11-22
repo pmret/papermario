@@ -48,7 +48,7 @@ INCLUDE_ASM(s32, "world/area_kzn/kzn_19/C8DBB0", func_80241838_C8F3E8);
 
 #include "world/common/SetManyVars.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_19/C8DBB0", func_802419C4_C8F574);
+#include "world/common/UnkYawFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_19/C8DBB0", func_80241B50_C8F700);
 
