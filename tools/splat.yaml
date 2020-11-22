@@ -6869,400 +6869,497 @@ segments:
     vram: 0x802B7000
     files:
     - [0xE21870, c]
-    - [0xE21EB0, bin]
-  - [0xE225B0, bin]
-  - [0xF007C0, bin, Battle_Fanfare_02] # BGM start
-  - [0xF02160, bin, Hey_You_03]
-  - [0xF03740, bin, The_Goomba_King_s_Decree_07]
-  - [0xF043F0, bin, Attack_of_the_Koopa_Bros_08]
-  - [0xF073C0, bin, Trojan_Bowser_09]
-  - [0xF08D40, bin, Chomp_Attack_0A]
-  - [0xF09600, bin, Ghost_Gulping_0B]
-  - [0xF0A550, bin, Keeping_Pace_0C]
-  - [0xF0BAE0, bin, Go_Mario_Go_0D]
-  - [0xF0DEC0, bin, Huffin_and_Puffin_0E]
-  - [0xF0FD20, bin, Freeze_0F]
-  - [0xF110D0, bin, Winning_a_Battle_8B]
-  - [0xF116C0, bin, Winning_a_Battle_and_Level_Up_8E]
-  - [0xF12320, bin, Jr_Troopa_Battle_04]
-  - [0xF13C20, bin, Final_Bowser_Battle_interlude_05]
-  - [0xF15F40, bin, Master_Battle_2C]
-  - [0xF16F80, bin, Game_Over_87]
-  - [0xF171D0, bin, Resting_at_the_Toad_House_88]
-  - [0xF17370, bin, Running_around_the_Heart_Pillar_in_Ch1_84]
-  - [0xF17570, bin, Tutankoopa_s_Warning_45]
-  - [0xF18940, bin, Kammy_Koopa_s_Theme_46]
-  - [0xF193D0, bin, Jr_Troopa_s_Theme_47]
-  - [0xF19BC0, bin, Goomba_King_s_Theme_50]
-  - [0xF1A6F0, bin, Koopa_Bros_Defeated_51]
-  - [0xF1ABD0, bin, Koopa_Bros_Theme_52]
-  - [0xF1C810, bin, Tutankoopa_s_Warning_2_53]
-  - [0xF1DBF0, bin, Tutankoopa_s_Theme_54]
-  - [0xF1F2E0, bin, Tubba_Blubba_s_Theme_55]
-  - [0xF20FF0, bin, General_Guy_s_Theme_56]
-  - [0xF21780, bin, Lava_Piranha_s_Theme_57]
-  - [0xF22A00, bin, Huff_N_Puff_s_Theme_58]
-  - [0xF23A00, bin, Crystal_King_s_Theme_59]
-  - [0xF24810, bin, Blooper_s_Theme_5A]
-  - [0xF25240, bin, Midboss_Theme_5B]
-  - [0xF26260, bin, Monstar_s_Theme_5C]
-  - [0xF27840, bin, Moustafa_s_Theme_86]
-  - [0xF27E20, bin, Fuzzy_Searching_Minigame_85]
-  - [0xF28E20, bin, Phonograph_in_Mansion_44]
-  - [0xF29AC0, bin, Toad_Town_00]
-  - [0xF2E130, bin, Bill_Blaster_Theme_48]
-  - [0xF2EF90, bin, Monty_Mole_Theme_in_Flower_Fields_49]
-  - [0xF30590, bin, Shy_Guys_in_Toad_Town_4A]
-  - [0xF318B0, bin, Whale_s_Problem_4C]
-  - [0xF32220, bin, Toad_Town_Sewers_4B]
-  - [0xF33060, bin, Unused_Theme_4D]
-  - [0xF33AA0, bin, Mario_s_House_Prologue_3E]
-  - [0xF33F10, bin, Peach_s_Party_3F]
-  - [0xF354E0, bin, Goomba_Village_01]
-  - [0xF35ED0, bin, Pleasant_Path_11]
-  - [0xF36690, bin, Fuzzy_s_Took_My_Shell_12]
-  - [0xF379E0, bin, Koopa_Village_13]
-  - [0xF38570, bin, Koopa_Bros_Fortress_14]
-  - [0xF39160, bin, Dry_Dry_Ruins_18]
-  - [0xF3A0D0, bin, Dry_Dry_Ruins_Mystery_19]
-  - [0xF3A450, bin, Mt_Rugged_16]
-  - [0xF3AF20, bin, Dry_Dry_Desert_Oasis_17]
-  - [0xF3C130, bin, Dry_Dry_Outpost_15]
-  - [0xF3CCC0, bin, Forever_Forest_1A]
-  - [0xF3E130, bin, Boo_s_Mansion_1B]
-  - [0xF3F3E0, bin, Bow_s_Theme_1C]
-  - [0xF40F00, bin, Gusty_Gulch_Adventure_1D]
-  - [0xF42F30, bin, Tubba_Blubba_s_Castle_1E]
-  - [0xF45500, bin, The_Castle_Crumbles_1F]
-  - [0xF465E0, bin, Shy_Guy_s_Toy_Box_20]
-  - [0xF474A0, bin, Toy_Train_Travel_21]
-  - [0xF47E10, bin, Big_Lantern_Ghost_s_Theme_22]
-  - [0xF48410, bin, Jade_Jungle_24]
-  - [0xF4A880, bin, Deep_Jungle_25]
-  - [0xF4BC00, bin, Lavalava_Island_26]
-  - [0xF4E690, bin, Search_for_the_Fearsome_5_27]
-  - [0xF50A00, bin, Raphael_the_Raven_28]
-  - [0xF52520, bin, Hot_Times_in_Mt_Lavalava_29]
-  - [0xF55C80, bin, Escape_from_Mt_Lavalava_2A]
-  - [0xF58ED0, bin, Cloudy_Climb_32]
-  - [0xF592B0, bin, Puff_Puff_Machine_33]
-  - [0xF5AFF0, bin, Flower_Fields_30]
-  - [0xF5C8D0, bin, Flower_Fields_Sunny_31]
-  - [0xF5DF40, bin, Sun_s_Tower_34]
-  - [0xF5F500, bin, Sun_s_Celebration_35]
-  - [0xF61700, bin, Shiver_City_38]
-  - [0xF62E50, bin, Detective_Mario_39]
-  - [0xF64220, bin, Snow_Road_3A]
-  - [0xF64CB0, bin, Over_Shiver_Mountain_3B]
-  - [0xF65B30, bin, Starborn_Valley_3C]
-  - [0xF66690, bin, Sanctuary_3D]
-  - [0xF66B70, bin, Crystal_Palace_37]
-  - [0xF67F80, bin, Star_Haven_60]
-  - [0xF69640, bin, Shooting_Star_Summit_61]
-  - [0xF6A050, bin, Legendary_Star_Ship_62]
-  - [0xF6C270, bin, Star_Sanctuary_63]
-  - [0xF6CED0, bin, Bowser_s_Castle_-_Caves_65]
-  - [0xF6EE40, bin, Bowser_s_Castle_64]
-  - [0xF73390, bin, Star_Elevator_2B]
-  - [0xF751F0, bin, Goomba_Bros_Defeated_7E]
-  - [0xF759C0, bin, Farewell_Twink_70]
-  - [0xF77200, bin, Peach_Cooking_71]
-  - [0xF77680, bin, Gourmet_Guy_72]
-  - [0xF78600, bin, Hope_on_the_Balcony_Peach_1_73]
-  - [0xF79070, bin, Peach_s_Theme_2_74]
-  - [0xF7A0C0, bin, Peach_Sneaking_75]
-  - [0xF7AA40, bin, Peach_Captured_76]
-  - [0xF7AD90, bin, Quiz_Show_Intro_77]
-  - [0xF7BEA0, bin, Unconscious_Mario_78]
-  - [0xF7C780, bin, Petunia_s_Theme_89]
-  - [0xF7DC00, bin, Flower_Fields_Door_appears_8A]
-  - [0xF7E190, bin, Beanstalk_7B]
-  - [0xF7EE20, bin, Lakilester_s_Theme_7D]
-  - [0xF80230, bin, The_Sun_s_Back_7F]
-  - [0xF81260, bin, Shiver_City_in_Crisis_79]
-  - [0xF82460, bin, Solved_Shiver_City_Mystery_7A]
-  - [0xF82D00, bin, Merlon_s_Spell_7C]
-  - [0xF83DC0, bin, Bowser_s_Theme_66]
-  - [0xF85590, bin, Train_Travel_80]
-  - [0xF860E0, bin, Whale_Trip_81]
-  - [0xF87000, bin, Chanterelle_s_Song_8C]
-  - [0xF87610, bin, Boo_s_Game_8D]
-  - [0xF88B30, bin, Dry_Dry_Ruins_rises_up_83]
-  - [0xF89570, bin, End_of_Chapter_40]
-  - [0xF8AAF0, bin, Beginning_of_Chapter_41]
-  - [0xF8B820, bin, Hammer_and_Jump_Upgrade_42]
-  - [0xF8BD90, bin, Found_Baby_Yoshi_s_4E]
-  - [0xF8C360, bin, New_Partner_JAP_96]
-  - [0xF8D110, bin, Unused_YI_Fanfare_4F]
-  - [0xF8D3E0, bin, Unused_YI_Fanfare_2_5D]
-  - [0xF90880, bin, Peach_s_Castle_inside_Bubble_5E]
-  - [0xF92A50, bin, Angry_Bowser_67]
-  - [0xF95510, bin, Bowser_s_Castle_explodes_5F]
-  - [0xF96280, bin, Peach_s_Wish_68]
-  - [0xF98520, bin, File_Select_69]
-  - [0xF98F90, bin, Title_Screen_6A]
-  - [0xF9B830, bin, Peach_s_Castle_in_Crisis_6B]
-  - [0xF9D3B0, bin, Mario_falls_from_Bowser_s_Castle_6C]
-  - [0xF9D690, bin, Peach_s_Arrival_6D]
-  - [0xF9EF30, bin, Star_Rod_Recovered_6F]
-  - [0xF9FA30, bin, Mario_s_House_94]
-  - [0xFA08A0, bin, Bowser_s_Attacks_95]
-  - [0xFA3C60, bin, End_Parade_1_90]
-  - [0xFA85F0, bin, End_Parade_2_91]
-  - [0xFABE90, bin, The_End_6E]
-  - [0xFACC80, bin, Koopa_Radio_Station_2D]
-  - [0xFAD210, bin, The_End_Low_Frequency__2E]
-  - [0xFAD8F0, bin, SMW_Remix_2F]
-  - [0xFADE70, bin, New_Partner_82] # BGM end
-  - [0xFAE860, bin]
-  - [0x19E09A8, Yay0]
-  - [0x19E1390, Yay0]
-  - [0x19E1888, Yay0]
-  - [0x19E2330, Yay0]
-  - [0x19E2DE0, Yay0]
-  - [0x19E3208, Yay0]
-  - [0x19E3BA8, Yay0]
-  - [0x19E3FD8, Yay0]
-  - [0x19E4828, Yay0]
-  - [0x19E4BE0, Yay0]
-  - [0x19E5758, Yay0]
-  - [0x19E5950, Yay0]
-  - [0x19E62A0, Yay0]
-  - [0x19E67B2, bin]
-  - [0x19E6B60, Yay0]
-  - [0x19E7528, Yay0]
-  - [0x19E9778, Yay0]
-  - [0x19EAF38, Yay0]
-  - [0x19EC4E0, Yay0]
-  - [0x19EDD30, Yay0]
-  - [0x19EEB18, Yay0]
-  - [0x19F0070, Yay0]
-  - [0x19F15A0, Yay0]
-  - [0x19F26D8, Yay0]
-  - [0x19F5390, Yay0]
-  - [0x19F7398, Yay0]
-  - [0x19FA128, Yay0]
-  - [0x19FCAE8, Yay0]
-  - [0x19FED70, Yay0]
-  - [0x1A00958, Yay0]
-  - [0x1A02D00, Yay0]
-  - [0x1A04400, Yay0]
-  - [0x1A05550, Yay0]
-  - [0x1A06390, Yay0]
-  - [0x1A06F98, Yay0]
-  - [0x1A07B68, Yay0]
-  - [0x1A0A0A0, Yay0]
-  - [0x1A0ACC8, Yay0]
-  - [0x1A0B780, Yay0]
-  - [0x1A0BBE0, Yay0]
-  - [0x1A0C000, Yay0]
-  - [0x1A0C438, Yay0]
-  - [0x1A0C860, Yay0]
-  - [0x1A0D1E8, Yay0]
-  - [0x1A0D5B0, Yay0]
-  - [0x1A0D970, Yay0]
-  - [0x1A0EF00, Yay0]
-  - [0x1A13920, Yay0]
-  - [0x1A15850, Yay0]
-  - [0x1A183F8, Yay0]
-  - [0x1A1A608, Yay0]
-  - [0x1A1C5E8, Yay0]
-  - [0x1A1D6D0, Yay0]
-  - [0x1A1E478, Yay0]
-  - [0x1A1F370, Yay0]
-  - [0x1A226B0, Yay0]
-  - [0x1A249B8, Yay0]
-  - [0x1A25E78, Yay0]
-  - [0x1A27FF0, Yay0]
-  - [0x1A28BE0, Yay0]
-  - [0x1A29680, Yay0]
-  - [0x1A2BC68, Yay0]
-  - [0x1A2E120, Yay0]
-  - [0x1A2F3F8, Yay0]
-  - [0x1A31D18, Yay0]
-  - [0x1A33AB0, Yay0]
-  - [0x1A35BB8, Yay0]
-  - [0x1A369A8, Yay0]
-  - [0x1A39600, Yay0]
-  - [0x1A3B018, Yay0]
-  - [0x1A3C310, Yay0]
-  - [0x1A3FCC8, Yay0]
-  - [0x1A423D8, Yay0]
-  - [0x1A449C0, Yay0]
-  - [0x1A46568, Yay0]
-  - [0x1A49340, Yay0]
-  - [0x1A4AC88, Yay0]
-  - [0x1A4D7E8, Yay0]
-  - [0x1A4E028, Yay0]
-  - [0x1A4FA60, Yay0]
-  - [0x1A531D0, Yay0]
-  - [0x1A53D48, Yay0]
-  - [0x1A56C80, Yay0]
-  - [0x1A58F58, Yay0]
-  - [0x1A5A5A8, Yay0]
-  - [0x1A62B40, Yay0]
-  - [0x1A641F8, Yay0]
-  - [0x1A666F0, Yay0]
-  - [0x1A68870, Yay0]
-  - [0x1A6C630, Yay0]
-  - [0x1A6D5A0, Yay0]
-  - [0x1A6EF50, Yay0]
-  - [0x1A70FF0, Yay0]
-  - [0x1A74FC0, Yay0]
-  - [0x1A78A40, Yay0]
-  - [0x1A79900, Yay0]
-  - [0x1A7D798, Yay0]
-  - [0x1A7EEA0, Yay0]
-  - [0x1A7EFD8, Yay0]
-  - [0x1A83450, Yay0]
-  - [0x1A85668, Yay0]
-  - [0x1A87958, Yay0]
-  - [0x1A8BF98, Yay0]
-  - [0x1A8FE28, Yay0]
-  - [0x1A93EA0, Yay0]
-  - [0x1A94188, Yay0]
-  - [0x1A94480, Yay0]
-  - [0x1A946A8, Yay0]
-  - [0x1A94A00, Yay0]
-  - [0x1A94C58, Yay0]
-  - [0x1A98D98, Yay0]
-  - [0x1A9BA80, Yay0]
-  - [0x1A9DB68, Yay0]
-  - [0x1AA0048, Yay0]
-  - [0x1AA0698, Yay0]
-  - [0x1AA1008, Yay0]
-  - [0x1AA6D58, Yay0]
-  - [0x1AAD600, Yay0]
-  - [0x1AB1BF0, Yay0]
-  - [0x1AB2368, Yay0]
-  - [0x1ABA290, Yay0]
-  - [0x1AC14A8, Yay0]
-  - [0x1AC3910, Yay0]
-  - [0x1ACBC98, Yay0]
-  - [0x1ACE058, Yay0]
-  - [0x1ACF910, Yay0]
-  - [0x1AD06D8, Yay0]
-  - [0x1AD0B98, Yay0]
-  - [0x1AD1E90, Yay0]
-  - [0x1AD2348, Yay0]
-  - [0x1AD27F8, Yay0]
-  - [0x1AD28A8, Yay0]
-  - [0x1AD44F0, Yay0]
-  - [0x1AD4758, Yay0]
-  - [0x1AD57C0, Yay0]
-  - [0x1AD9D50, Yay0]
-  - [0x1ADA498, Yay0]
-  - [0x1ADCFC0, Yay0]
-  - [0x1AE2168, Yay0]
-  - [0x1AE2EA0, Yay0]
-  - [0x1AE6A58, Yay0]
-  - [0x1AEB778, Yay0]
-  - [0x1AF4958, Yay0]
-  - [0x1AFCB18, Yay0]
-  - [0x1AFF748, Yay0]
-  - [0x1B00640, Yay0]
-  - [0x1B01390, Yay0]
-  - [0x1B01C08, Yay0]
-  - [0x1B02128, Yay0]
-  - [0x1B02970, Yay0]
-  - [0x1B03118, Yay0]
-  - [0x1B03C18, Yay0]
-  - [0x1B045E8, Yay0]
-  - [0x1B04FC0, Yay0]
-  - [0x1B05998, Yay0]
-  - [0x1B06C88, Yay0]
-  - [0x1B07C48, Yay0]
-  - [0x1B09440, Yay0]
-  - [0x1B0B290, Yay0]
-  - [0x1B0B9A0, Yay0]
-  - [0x1B0C548, Yay0]
-  - [0x1B0CAC0, Yay0]
-  - [0x1B0D130, Yay0]
-  - [0x1B0EB80, Yay0]
-  - [0x1B10CC0, Yay0]
-  - [0x1B129A0, Yay0]
-  - [0x1B13548, Yay0]
-  - [0x1B16420, Yay0]
-  - [0x1B17128, Yay0]
-  - [0x1B17840, Yay0]
-  - [0x1B19318, Yay0]
-  - [0x1B1A030, Yay0]
-  - [0x1B1B8C8, Yay0]
-  - [0x1B1BC88, Yay0]
-  - [0x1B1C7A0, Yay0]
-  - [0x1B1CD28, Yay0]
-  - [0x1B21C48, Yay0]
-  - [0x1B23290, Yay0]
-  - [0x1B253E0, Yay0]
-  - [0x1B26660, Yay0]
-  - [0x1B283F8, Yay0]
-  - [0x1B29C60, Yay0]
-  - [0x1B2A688, Yay0]
-  - [0x1B2B3E8, Yay0]
-  - [0x1B2C8D8, Yay0]
-  - [0x1B2D7B0, Yay0]
-  - [0x1B2E328, Yay0]
-  - [0x1B2ED60, Yay0]
-  - [0x1B2FA18, Yay0]
-  - [0x1B31A18, Yay0]
-  - [0x1B33000, Yay0]
-  - [0x1B34098, Yay0]
-  - [0x1B34928, Yay0]
-  - [0x1B34C00, Yay0]
-  - [0x1B35480, Yay0]
-  - [0x1B36440, Yay0]
-  - [0x1B38748, Yay0]
-  - [0x1B39A98, Yay0]
-  - [0x1B3A2E8, Yay0]
-  - [0x1B3A818, Yay0]
-  - [0x1B3C488, Yay0]
-  - [0x1B3CAC8, Yay0]
-  - [0x1B3D0A0, Yay0]
-  - [0x1B3D920, Yay0]
-  - [0x1B3F060, Yay0]
-  - [0x1B40048, Yay0]
-  - [0x1B40720, Yay0]
-  - [0x1B49570, Yay0]
-  - [0x1B4C3E8, Yay0]
-  - [0x1B4DEA0, Yay0]
-  - [0x1B4FD98, Yay0]
-  - [0x1B50CD8, Yay0]
-  - [0x1B51B08, Yay0]
-  - [0x1B54258, Yay0]
-  - [0x1B580A0, Yay0]
-  - [0x1B5A248, Yay0]
-  - [0x1B5BB88, Yay0]
-  - [0x1B5CC90, Yay0]
-  - [0x1B5E968, Yay0]
-  - [0x1B5ED88, Yay0]
-  - [0x1B608C0, Yay0]
-  - [0x1B625F8, Yay0]
-  - [0x1B633D0, Yay0]
-  - [0x1B64878, Yay0]
-  - [0x1B657E0, Yay0]
-  - [0x1B65A08, Yay0]
-  - [0x1B65E50, Yay0]
-  - [0x1B66238, Yay0]
-  - [0x1B69580, Yay0]
-  - [0x1B6C318, Yay0]
-  - [0x1B6DD98, Yay0]
-  - [0x1B6F150, Yay0]
-  - [0x1B71618, Yay0]
-  - [0x1B72890, Yay0]
-  - [0x1B73B08, Yay0]
-  - [0x1B747B8, Yay0]
-  - [0x1B76E30, Yay0]
-  - [0x1B78EC0, Yay0]
-  - [0x1B79A20, Yay0]
-  - [0x1B79F08, Yay0]
-  - [0x1B7AA08, Yay0]
-  - [0x1B7B008, Yay0]
-  - [0x1B7BB50, Yay0]
-  - [0x1B7EC68, Yay0]
-  - [0x1B7FF48, Yay0]
-  - [0x1B81E88, Yay0]
-  - [0x1B82058, Yay0]
-  - [0x1B82202, bin]
+    - [0xE21EB0, "bin"]
+  - [0xE225B0, "bin"]
+  - [0xF007C0, "bin", "Battle_Fanfare_02"] # BGM start
+  - [0xF02160, "bin", "Hey_You_03"]
+  - [0xF03740, "bin", "The_Goomba_King_s_Decree_07"]
+  - [0xF043F0, "bin", "Attack_of_the_Koopa_Bros_08"]
+  - [0xF073C0, "bin", "Trojan_Bowser_09"]
+  - [0xF08D40, "bin", "Chomp_Attack_0A"]
+  - [0xF09600, "bin", "Ghost_Gulping_0B"]
+  - [0xF0A550, "bin", "Keeping_Pace_0C"]
+  - [0xF0BAE0, "bin", "Go_Mario_Go_0D"]
+  - [0xF0DEC0, "bin", "Huffin_and_Puffin_0E"]
+  - [0xF0FD20, "bin", "Freeze_0F"]
+  - [0xF110D0, "bin", "Winning_a_Battle_8B"]
+  - [0xF116C0, "bin", "Winning_a_Battle_and_Level_Up_8E"]
+  - [0xF12320, "bin", "Jr_Troopa_Battle_04"]
+  - [0xF13C20, "bin", "Final_Bowser_Battle_interlude_05"]
+  - [0xF15F40, "bin", "Master_Battle_2C"]
+  - [0xF16F80, "bin", "Game_Over_87"]
+  - [0xF171D0, "bin", "Resting_at_the_Toad_House_88"]
+  - [0xF17370, "bin", "Running_around_the_Heart_Pillar_in_Ch1_84"]
+  - [0xF17570, "bin", "Tutankoopa_s_Warning_45"]
+  - [0xF18940, "bin", "Kammy_Koopa_s_Theme_46"]
+  - [0xF193D0, "bin", "Jr_Troopa_s_Theme_47"]
+  - [0xF19BC0, "bin", "Goomba_King_s_Theme_50"]
+  - [0xF1A6F0, "bin", "Koopa_Bros_Defeated_51"]
+  - [0xF1ABD0, "bin", "Koopa_Bros_Theme_52"]
+  - [0xF1C810, "bin", "Tutankoopa_s_Warning_2_53"]
+  - [0xF1DBF0, "bin", "Tutankoopa_s_Theme_54"]
+  - [0xF1F2E0, "bin", "Tubba_Blubba_s_Theme_55"]
+  - [0xF20FF0, "bin", "General_Guy_s_Theme_56"]
+  - [0xF21780, "bin", "Lava_Piranha_s_Theme_57"]
+  - [0xF22A00, "bin", "Huff_N_Puff_s_Theme_58"]
+  - [0xF23A00, "bin", "Crystal_King_s_Theme_59"]
+  - [0xF24810, "bin", "Blooper_s_Theme_5A"]
+  - [0xF25240, "bin", "Midboss_Theme_5B"]
+  - [0xF26260, "bin", "Monstar_s_Theme_5C"]
+  - [0xF27840, "bin", "Moustafa_s_Theme_86"]
+  - [0xF27E20, "bin", "Fuzzy_Searching_Minigame_85"]
+  - [0xF28E20, "bin", "Phonograph_in_Mansion_44"]
+  - [0xF29AC0, "bin", "Toad_Town_00"]
+  - [0xF2E130, "bin", "Bill_Blaster_Theme_48"]
+  - [0xF2EF90, "bin", "Monty_Mole_Theme_in_Flower_Fields_49"]
+  - [0xF30590, "bin", "Shy_Guys_in_Toad_Town_4A"]
+  - [0xF318B0, "bin", "Whale_s_Problem_4C"]
+  - [0xF32220, "bin", "Toad_Town_Sewers_4B"]
+  - [0xF33060, "bin", "Unused_Theme_4D"]
+  - [0xF33AA0, "bin", "Mario_s_House_Prologue_3E"]
+  - [0xF33F10, "bin", "Peach_s_Party_3F"]
+  - [0xF354E0, "bin", "Goomba_Village_01"]
+  - [0xF35ED0, "bin", "Pleasant_Path_11"]
+  - [0xF36690, "bin", "Fuzzy_s_Took_My_Shell_12"]
+  - [0xF379E0, "bin", "Koopa_Village_13"]
+  - [0xF38570, "bin", "Koopa_Bros_Fortress_14"]
+  - [0xF39160, "bin", "Dry_Dry_Ruins_18"]
+  - [0xF3A0D0, "bin", "Dry_Dry_Ruins_Mystery_19"]
+  - [0xF3A450, "bin", "Mt_Rugged_16"]
+  - [0xF3AF20, "bin", "Dry_Dry_Desert_Oasis_17"]
+  - [0xF3C130, "bin", "Dry_Dry_Outpost_15"]
+  - [0xF3CCC0, "bin", "Forever_Forest_1A"]
+  - [0xF3E130, "bin", "Boo_s_Mansion_1B"]
+  - [0xF3F3E0, "bin", "Bow_s_Theme_1C"]
+  - [0xF40F00, "bin", "Gusty_Gulch_Adventure_1D"]
+  - [0xF42F30, "bin", "Tubba_Blubba_s_Castle_1E"]
+  - [0xF45500, "bin", "The_Castle_Crumbles_1F"]
+  - [0xF465E0, "bin", "Shy_Guy_s_Toy_Box_20"]
+  - [0xF474A0, "bin", "Toy_Train_Travel_21"]
+  - [0xF47E10, "bin", "Big_Lantern_Ghost_s_Theme_22"]
+  - [0xF48410, "bin", "Jade_Jungle_24"]
+  - [0xF4A880, "bin", "Deep_Jungle_25"]
+  - [0xF4BC00, "bin", "Lavalava_Island_26"]
+  - [0xF4E690, "bin", "Search_for_the_Fearsome_5_27"]
+  - [0xF50A00, "bin", "Raphael_the_Raven_28"]
+  - [0xF52520, "bin", "Hot_Times_in_Mt_Lavalava_29"]
+  - [0xF55C80, "bin", "Escape_from_Mt_Lavalava_2A"]
+  - [0xF58ED0, "bin", "Cloudy_Climb_32"]
+  - [0xF592B0, "bin", "Puff_Puff_Machine_33"]
+  - [0xF5AFF0, "bin", "Flower_Fields_30"]
+  - [0xF5C8D0, "bin", "Flower_Fields_Sunny_31"]
+  - [0xF5DF40, "bin", "Sun_s_Tower_34"]
+  - [0xF5F500, "bin", "Sun_s_Celebration_35"]
+  - [0xF61700, "bin", "Shiver_City_38"]
+  - [0xF62E50, "bin", "Detective_Mario_39"]
+  - [0xF64220, "bin", "Snow_Road_3A"]
+  - [0xF64CB0, "bin", "Over_Shiver_Mountain_3B"]
+  - [0xF65B30, "bin", "Starborn_Valley_3C"]
+  - [0xF66690, "bin", "Sanctuary_3D"]
+  - [0xF66B70, "bin", "Crystal_Palace_37"]
+  - [0xF67F80, "bin", "Star_Haven_60"]
+  - [0xF69640, "bin", "Shooting_Star_Summit_61"]
+  - [0xF6A050, "bin", "Legendary_Star_Ship_62"]
+  - [0xF6C270, "bin", "Star_Sanctuary_63"]
+  - [0xF6CED0, "bin", "Bowser_s_Castle_-_Caves_65"]
+  - [0xF6EE40, "bin", "Bowser_s_Castle_64"]
+  - [0xF73390, "bin", "Star_Elevator_2B"]
+  - [0xF751F0, "bin", "Goomba_Bros_Defeated_7E"]
+  - [0xF759C0, "bin", "Farewell_Twink_70"]
+  - [0xF77200, "bin", "Peach_Cooking_71"]
+  - [0xF77680, "bin", "Gourmet_Guy_72"]
+  - [0xF78600, "bin", "Hope_on_the_Balcony_Peach_1_73"]
+  - [0xF79070, "bin", "Peach_s_Theme_2_74"]
+  - [0xF7A0C0, "bin", "Peach_Sneaking_75"]
+  - [0xF7AA40, "bin", "Peach_Captured_76"]
+  - [0xF7AD90, "bin", "Quiz_Show_Intro_77"]
+  - [0xF7BEA0, "bin", "Unconscious_Mario_78"]
+  - [0xF7C780, "bin", "Petunia_s_Theme_89"]
+  - [0xF7DC00, "bin", "Flower_Fields_Door_appears_8A"]
+  - [0xF7E190, "bin", "Beanstalk_7B"]
+  - [0xF7EE20, "bin", "Lakilester_s_Theme_7D"]
+  - [0xF80230, "bin", "The_Sun_s_Back_7F"]
+  - [0xF81260, "bin", "Shiver_City_in_Crisis_79"]
+  - [0xF82460, "bin", "Solved_Shiver_City_Mystery_7A"]
+  - [0xF82D00, "bin", "Merlon_s_Spell_7C"]
+  - [0xF83DC0, "bin", "Bowser_s_Theme_66"]
+  - [0xF85590, "bin", "Train_Travel_80"]
+  - [0xF860E0, "bin", "Whale_Trip_81"]
+  - [0xF87000, "bin", "Chanterelle_s_Song_8C"]
+  - [0xF87610, "bin", "Boo_s_Game_8D"]
+  - [0xF88B30, "bin", "Dry_Dry_Ruins_rises_up_83"]
+  - [0xF89570, "bin", "End_of_Chapter_40"]
+  - [0xF8AAF0, "bin", "Beginning_of_Chapter_41"]
+  - [0xF8B820, "bin", "Hammer_and_Jump_Upgrade_42"]
+  - [0xF8BD90, "bin", "Found_Baby_Yoshi_s_4E"]
+  - [0xF8C360, "bin", "New_Partner_JAP_96"]
+  - [0xF8D110, "bin", "Unused_YI_Fanfare_4F"]
+  - [0xF8D3E0, "bin", "Unused_YI_Fanfare_2_5D"]
+  - [0xF90880, "bin", "Peach_s_Castle_inside_Bubble_5E"]
+  - [0xF92A50, "bin", "Angry_Bowser_67"]
+  - [0xF95510, "bin", "Bowser_s_Castle_explodes_5F"]
+  - [0xF96280, "bin", "Peach_s_Wish_68"]
+  - [0xF98520, "bin", "File_Select_69"]
+  - [0xF98F90, "bin", "Title_Screen_6A"]
+  - [0xF9B830, "bin", "Peach_s_Castle_in_Crisis_6B"]
+  - [0xF9D3B0, "bin", "Mario_falls_from_Bowser_s_Castle_6C"]
+  - [0xF9D690, "bin", "Peach_s_Arrival_6D"]
+  - [0xF9EF30, "bin", "Star_Rod_Recovered_6F"]
+  - [0xF9FA30, "bin", "Mario_s_House_94"]
+  - [0xFA08A0, "bin", "Bowser_s_Attacks_95"]
+  - [0xFA3C60, "bin", "End_Parade_1_90"]
+  - [0xFA85F0, "bin", "End_Parade_2_91"]
+  - [0xFABE90, "bin", "The_End_6E"]
+  - [0xFACC80, "bin", "Koopa_Radio_Station_2D"]
+  - [0xFAD210, "bin", "The_End_Low_Frequency__2E"]
+  - [0xFAD8F0, "bin", "SMW_Remix_2F"]
+  - [0xFADE70, "bin", "New_Partner_82"] # BGM end
+  - [0xFAE860, "bin"]
+  - [0x19E09A8, "Yay0"]
+  - [0x19E1390, "Yay0"]
+  - [0x19E1888, "Yay0"]
+  - [0x19E2330, "Yay0"]
+  - [0x19E2DE0, "Yay0"]
+  - [0x19E3208, "Yay0"]
+  - [0x19E3BA8, "Yay0"]
+  - [0x19E3FD8, "Yay0"]
+  - [0x19E4828, "Yay0"]
+  - [0x19E4BE0, "Yay0"]
+  - [0x19E5758, "Yay0"]
+  - [0x19E5950, "Yay0"]
+  - [0x19E62A0, "Yay0"]
+  - start: 0x19E67B8
+    type: PaperMarioNpcSprites
+    files:
+      - name: world_goombario
+        frames:
+          - walk1
+          - still
+          - walk2
+          - pain
+          - headbonk
+          - still_copy1
+          - still_copy2
+          - jump
+          - talk1
+          - talk2
+          - jump_copy
+          - fall
+          - happy1
+          - happy2
+          - read_paper
+        palettes:
+          - normal
+          - poisoned
+          - inactive
+          - electrified
+          - burnt
+        animations:
+          - still
+          - idle
+          - walk
+          - run
+          - jump
+          - fall
+          - headbonk # centered at 0,0,0 rather than at base of sprite
+          - pain
+          - talk
+          - celebrate
+          - read_paper
+      - world_kooper
+      - world_bombette
+      - world_parakarry
+      - world_bow
+      - world_watt
+      - world_sushi
+      - world_lakilester
+      - battle_goombario
+      - battle_kooper
+      - battle_bombette
+      - battle_parakarry
+      - battle_bow
+      - battle_watt
+      - battle_sushi
+      - battle_lakilester
+      - kooper_without_shell
+      - world_eldstar
+      - world_mamar
+      - world_skolar
+      - world_muskular
+      - world_misstar
+      - world_klevar
+      - world_kalmar
+      - battle_eldstar
+      - battle_mamar
+      - battle_skolar
+      - battle_muskular
+      - battle_misstar
+      - battle_klevar
+      - battle_kalmar
+      - twink
+      - jr_troopa
+      - spiked_jr_troopa
+      - spiked_para_jr_troopa
+      - mage_jr_troopa
+      - para_jr_troopa
+      - name: goomba
+        frames:
+          - still
+          - lean_left
+          - lean_right
+          - pain1
+          - pain2
+          - jump
+          - open_mouth
+          - open_mouth_wide
+          - sleep
+          - dizzy1
+          - dizzy2
+          - dizzy3
+          - dizzy4
+          - burn_pain1
+          - burn_pain2
+          - burn_dead
+          - tense
+          - fake_plant
+          - fake_mushroom
+          - electrocute
+        palettes:
+          - normal
+          - red # unused
+          - hyper
+          - blue # unused
+          - gloomba
+          - poisoned
+          - poisoned
+          - poisoned
+          - poisoned
+          - poisoned
+          - unk_purple_status
+          - unk_purple_status
+          - unk_purple_status
+          - unk_purple_status
+          - unk_purple_status
+          - electrified
+          - electrified
+          - electrified
+          - electrified
+          - electrified
+          - burnt
+          - fake_mushroom
+          - fake_plant
+        animations:
+          - still
+          - idle
+          - walk
+          - run
+          - headbonk # centered at 0,0,0 rather than at base of sprite
+          - pain
+          - dead
+          - dizzy
+          - asleep
+          - burn_pain
+          - burn_dead
+          - pre_headbonk # centered at 0,0,0 rather than at base of sprite
+          - fake_plant
+          - fake_mushroom
+          - electrocute
+      - spiked_goomba
+      - paragoomba
+      - koopa_troopa
+      - para_troopa
+      - fuzzy
+      - bob_omb
+      - bullet_bill
+      - bill_blaster
+      - monty_mole
+      - cleft
+      - pokey
+      - battle_bandit
+      - buzzy_beetle
+      - swooper
+      - stone_chomp
+      - putrid_piranha
+      - piranha_plant
+      - sentinel
+      - world_clubba
+      - battle_clubba
+      - shy_guy
+      - groove_guy
+      - sky_guy
+      - pyro_guy
+      - spy_guy
+      - medi_guy
+      - fuzzipede
+      - jungle_guy
+      - heart_plant
+      - hurt_plant
+      - m_bush
+      - bubble
+      - kent_c_koopa
+      - dayzee
+      - lakitu
+      - spiny
+      - bzzap
+      - ruff_puff
+      - spike_top
+      - duplighost
+      - albino_dino
+      - blooper
+      - baby_blooper
+      - gulpit
+      - dry_bones
+      - thrown_bone
+      - bony_beetle
+      - magikoopa
+      - flying_magikoopa
+      - world_koopatrol
+      - koopatrol
+      - hammer_bros
+      - bush_basic
+      - bush_blocky
+      - bush_dry
+      - bush_leafy
+      - bush_matted
+      - world_kammy
+      - battle_kammy
+      - goomba_bros
+      - goomba_king
+      - spiky_goomnut
+      - dark_toad
+      - koopa_bros
+      - buzzar
+      - tutankoopa
+      - chain_chomp
+      - world_tubba
+      - battle_tubba
+      - tubbas_heart
+      - big_lantern_ghost
+      - shy_squad_guy
+      - marshal_guy
+      - stilt_guy
+      - stilt_guy_unfold
+      - shy_stack_guy
+      - shy_stack_unfold
+      - shy_stack_damage
+      - shy_stack_rock
+      - general_guy
+      - general_guy_bomb
+      - tank_guy
+      - lava_piranha_head
+      - petit_piranha
+      - lava_bud
+      - huff_n_puff
+      - tuff_puff
+      - monstar
+      - crystal_king
+      - world_bowser
+      - battle_bowser
+      - luigi
+      - toad
+      - three_sisters
+      - vanna_t
+      - toad_kid
+      - toad_guard
+      - harry_t
+      - toad_minister
+      - postmaster
+      - conductor_toad
+      - train_station_toad
+      - fishmael
+      - artist_toad
+      - koopa
+      - koopa_without_shell
+      - world_bob_omb
+      - whacka
+      - dryite
+      - mouser
+      - boo
+      - yoshi
+      - yoshi_kid
+      - raven
+      - bubulb
+      - penguin
+      - shiver_toad
+      - world_bandit
+      - goompapa
+      - goombaria
+      - goomama
+      - goompa
+      - goomma
+      - the_master
+      - chan
+      - lee
+      - merlon
+      - chet_rippo
+      - rowf
+      - minh_t
+      - russ_t
+      - tayce_t
+      - fice_t
+      - bartender
+      - chanterelle
+      - rip_cheato
+      - chuck_quizmo
+      - merluvlee
+      - merlar
+      - merlow
+      - star_kid
+      - kolorado_wife
+      - koopa_koot
+      - kolorado
+      - battle_kolorado
+      - archeologist
+      - nomadimouse
+      - world_merlee
+      - battle_merlee
+      - disguised_moustafa
+      - moustafa
+      - oaklie
+      - bootler
+      - yakkey
+      - gourmet_guy
+      - village_leader
+      - leaders_friend
+      - rafael_raven
+      - tolielup
+      - gate_flower
+      - petunia
+      - posie
+      - lily
+      - rosie
+      - sun
+      - lakilulu
+      - ninji
+      - mayor_penguin
+      - mayor_penguin_wife
+      - penguin_patrol
+      - herringway
+      - merle
+      - star_rod
+      - fire
+      - coin
+      - parade_peach
+      - parade_koopas
+      - parade_burnt_bowser
+      - parade_luigi
+      - parade_partners
+      - parade_yoshis
+      - parada_kolorados
+      - parade_chicks
+      - parade_ice_show
+      - parade_toads
+      - parade_batons
+      - parade_drums
+      - parade_flags
+      - parade_horns
+      - parade_tubba_balloon
+      - parade_wizards
+      - parade_mario
+      - parade_shy_guys
+      - parade_twink
+      - leaf
+  - [0x1B82208, bin]
   - start: 0x1B83000
     type: PaperMarioMessages
     files:
@@ -7314,6 +7411,7 @@ segments:
       - quiz/options
       - end/credits
   - [0x1C84D30, bin]
+  - [0x1E00000, bin] # sprites here; Star Rod considers this a copy of sprite/npc.bin, but that doesnt appear to be true
   - [0x1E40000, PaperMarioMapFS]
   - [0x27FEE22, bin]
   - [0x2800000]

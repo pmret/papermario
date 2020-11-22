@@ -13,4 +13,7 @@
 typedef s32 FormationID;
 #define FORMATION_ID(section, stage, index) ((section << 16) + (stage << 8) + index)
 
+typedef s32 NpcAnimID;
+#define NPC_ANIM(sprite, palette, anim) ((_NPC_SPRITE_##sprite << 16) + (_NPC_PALETTE_##sprite##_##palette << 8) + _NPC_ANIM_##sprite##_##anim)
+
 #endif

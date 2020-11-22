@@ -1,4 +1,5 @@
 #include "kmr_12.h"
+#include "sprite/npc/goomba.h"
 
 Script M(ExitWest) = EXIT_WALK_SCRIPT(60, 0, "kmr_07", 1);
 Script M(ExitEast) = EXIT_WALK_SCRIPT(60, 1, "kmr_11", 0);
@@ -85,7 +86,7 @@ Script M(GoombaIdle) = SCRIPT({
     sleep 1
 
     SetSelfVar(0, FALSE)
-    SetNpcAnimation(NpcId_SELF, ANIMATION(SpriteId_GOOMBA, 0, 13))
+    SetNpcAnimation(NpcId_SELF, NPC_ANIM(goomba, normal, fake_mushroom)) // TODO: work out why palette 0 is used here
     EnableNpcShadow(NpcId_SELF, FALSE)
     SetSelfEnemyFlagBits(0x00000020, TRUE)
 
@@ -104,15 +105,15 @@ Script M(GoombaIdle) = SCRIPT({
         SetNpcRotation(NpcId_SELF, 0, SI_VAR(0), 0)
         sleep 1
     }
-    SetNpcAnimation(NpcId_SELF, ANIMATION(SpriteId_GOOMBA, 0, 0))
+    SetNpcAnimation(NpcId_SELF, NPC_ANIM(goomba, normal, still))
     loop 9 {
         SI_VAR(0) += 10.0
         SetNpcRotation(NpcId_SELF, 0, SI_VAR(0), 0)
         sleep 1
     }
-    SetNpcAnimation(NpcId_SELF, ANIMATION(SpriteId_GOOMBA, 0, 7))
+    SetNpcAnimation(NpcId_SELF, NPC_ANIM(goomba, normal, dizzy))
     sleep 20
-    SetNpcAnimation(NpcId_SELF, ANIMATION(SpriteId_GOOMBA, 0, 1))
+    SetNpcAnimation(NpcId_SELF, NPC_ANIM(goomba, normal, idle))
     PlaySoundAtNpc(NpcId_SELF, 248, 0)
     func_802CFE2C(NpcId_SELF, 8192)
     func_802CFD30(NpcId_SELF, 5, 6, 1, 1, 0)
@@ -166,22 +167,22 @@ StaticNpc M(goombaNpc) = {
         /* flying? */ TRUE,
     },
     .animations = {
-        ANIMATION(SpriteId_GOOMBA, 0, 1),
-        ANIMATION(SpriteId_GOOMBA, 0, 2),
-        ANIMATION(SpriteId_GOOMBA, 0, 3),
-        ANIMATION(SpriteId_GOOMBA, 0, 3),
-        ANIMATION(SpriteId_GOOMBA, 0, 1),
-        ANIMATION(SpriteId_GOOMBA, 0, 1),
-        ANIMATION(SpriteId_GOOMBA, 0, 5),
-        ANIMATION(SpriteId_GOOMBA, 0, 5),
-        ANIMATION(SpriteId_GOOMBA, 0, 3),
-        ANIMATION(SpriteId_GOOMBA, 0, 3),
-        ANIMATION(SpriteId_GOOMBA, 0, 3),
-        ANIMATION(SpriteId_GOOMBA, 0, 3),
-        ANIMATION(SpriteId_GOOMBA, 0, 3),
-        ANIMATION(SpriteId_GOOMBA, 0, 3),
-        ANIMATION(SpriteId_GOOMBA, 0, 3),
-        ANIMATION(SpriteId_GOOMBA, 0, 3),
+        NPC_ANIM(goomba, normal, idle),
+        NPC_ANIM(goomba, normal, walk),
+        NPC_ANIM(goomba, normal, run),
+        NPC_ANIM(goomba, normal, run),
+        NPC_ANIM(goomba, normal, idle),
+        NPC_ANIM(goomba, normal, idle),
+        NPC_ANIM(goomba, normal, pain),
+        NPC_ANIM(goomba, normal, pain),
+        NPC_ANIM(goomba, normal, run),
+        NPC_ANIM(goomba, normal, run),
+        NPC_ANIM(goomba, normal, run),
+        NPC_ANIM(goomba, normal, run),
+        NPC_ANIM(goomba, normal, run),
+        NPC_ANIM(goomba, normal, run),
+        NPC_ANIM(goomba, normal, run),
+        NPC_ANIM(goomba, normal, run),
     },
 };
 

@@ -18,8 +18,10 @@ settings.mk
 /build/
 /docs/doxygen/
 /include/ld_addrs.h
+/include/sprite/
 
 # Assets
 /bin
 /img
 /msg
+/sprite
