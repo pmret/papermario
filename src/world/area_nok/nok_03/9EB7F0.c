@@ -12,6 +12,6 @@ INCLUDE_ASM(s32, "world/area_nok/nok_03/9EB7F0", func_802407CC_9EBFBC);
 
 INCLUDE_ASM(s32, "world/area_nok/nok_03/9EB7F0", func_802408AC_9EC09C);
 
-INCLUDE_ASM(s32, "world/area_nok/nok_03/9EB7F0", func_80240BAC_9EC39C);
+#include "world/common/UnkDurationCheck.inc.c"
 
 INCLUDE_ASM(s32, "world/area_nok/nok_03/9EB7F0", func_80240BF0_9EC3E0);

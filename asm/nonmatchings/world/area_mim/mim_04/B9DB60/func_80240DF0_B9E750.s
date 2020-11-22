@@ -129,7 +129,7 @@ glabel func_80240DF0_B9E750
 /* B9E938 80240FD8 0000102D */   daddu    $v0, $zero, $zero
 /* B9E93C 80240FDC 0260202D */  daddu     $a0, $s3, $zero
 /* B9E940 80240FE0 0280282D */  daddu     $a1, $s4, $zero
-/* B9E944 80240FE4 0C09036B */  jal       func_80240DAC_B9E70C
+/* B9E944 80240FE4 0C09036B */  jal       UnkDurationCheck
 /* B9E948 80240FE8 0200302D */   daddu    $a2, $s0, $zero
 .L80240FEC:
 /* B9E94C 80240FEC 0000102D */  daddu     $v0, $zero, $zero

@@ -129,7 +129,7 @@ glabel func_80241330_B53B60
 /* B53D48 80241518 0000102D */   daddu    $v0, $zero, $zero
 /* B53D4C 8024151C 0260202D */  daddu     $a0, $s3, $zero
 /* B53D50 80241520 0280282D */  daddu     $a1, $s4, $zero
-/* B53D54 80241524 0C0904BB */  jal       func_802412EC_B53B1C
+/* B53D54 80241524 0C0904BB */  jal       UnkDurationCheck
 /* B53D58 80241528 0200302D */   daddu    $a2, $s0, $zero
 .L8024152C:
 /* B53D5C 8024152C 0000102D */  daddu     $v0, $zero, $zero

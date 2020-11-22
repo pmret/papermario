@@ -194,7 +194,7 @@ glabel func_80240EF4_A618C4
 /* A61B98 802411C8 0260202D */   daddu    $a0, $s3, $zero
 /* A61B9C 802411CC 0809047B */  j         .L802411EC
 /* A61BA0 802411D0 00000000 */   nop      
-/* A61BA4 802411D4 0C090146 */  jal       func_80240518_A60EE8
+/* A61BA4 802411D4 0C090146 */  jal       UnkDurationCheck
 /* A61BA8 802411D8 0260202D */   daddu    $a0, $s3, $zero
 /* A61BAC 802411DC 0809047B */  j         .L802411EC
 /* A61BB0 802411E0 00000000 */   nop      

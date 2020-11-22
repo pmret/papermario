@@ -207,7 +207,7 @@ glabel func_80240C90_BDDE40
 /* BDE154 80240FA4 0000102D */   daddu    $v0, $zero, $zero
 /* BDE158 80240FA8 0260202D */  daddu     $a0, $s3, $zero
 /* BDE15C 80240FAC 0280282D */  daddu     $a1, $s4, $zero
-/* BDE160 80240FB0 0C090313 */  jal       func_80240C4C_BDDDFC
+/* BDE160 80240FB0 0C090313 */  jal       UnkDurationCheck
 /* BDE164 80240FB4 0200302D */   daddu    $a2, $s0, $zero
 .L80240FB8:
 /* BDE168 80240FB8 0000102D */  daddu     $v0, $zero, $zero

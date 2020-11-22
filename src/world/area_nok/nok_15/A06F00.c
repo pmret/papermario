@@ -50,6 +50,6 @@ INCLUDE_ASM(s32, "world/area_nok/nok_15/A06F00", func_802420D4_A08FD4);
 
 INCLUDE_ASM(s32, "world/area_nok/nok_15/A06F00", func_80242190_A09090);
 
-INCLUDE_ASM(s32, "world/area_nok/nok_15/A06F00", func_802422A8_A091A8);
+#include "world/common/UnkDurationCheck.inc.c"
 
 INCLUDE_ASM(s32, "world/area_nok/nok_15/A06F00", func_802422EC_A091EC);

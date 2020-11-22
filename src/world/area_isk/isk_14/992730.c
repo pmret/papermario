@@ -12,7 +12,7 @@ INCLUDE_ASM(s32, "world/area_isk/isk_14/992730", func_802407CC_992EFC);
 
 INCLUDE_ASM(s32, "world/area_isk/isk_14/992730", func_802408AC_992FDC);
 
-INCLUDE_ASM(s32, "world/area_isk/isk_14/992730", func_80240BAC_9932DC);
+#include "world/common/UnkDurationCheck.inc.c"
 
 INCLUDE_ASM(s32, "world/area_isk/isk_14/992730", func_80240BF0_993320);
 

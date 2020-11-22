@@ -194,7 +194,7 @@ glabel func_80241204_A94944
 /* A94C18 802414D8 0260202D */   daddu    $a0, $s3, $zero
 /* A94C1C 802414DC 0809053F */  j         .L802414FC
 /* A94C20 802414E0 00000000 */   nop      
-/* A94C24 802414E4 0C09020A */  jal       func_80240828_A93F68
+/* A94C24 802414E4 0C09020A */  jal       UnkDurationCheck
 /* A94C28 802414E8 0260202D */   daddu    $a0, $s3, $zero
 /* A94C2C 802414EC 0809053F */  j         .L802414FC
 /* A94C30 802414F0 00000000 */   nop      

@@ -129,7 +129,7 @@ glabel func_80240E60_BAAFA0
 /* BAB188 80241048 0000102D */   daddu    $v0, $zero, $zero
 /* BAB18C 8024104C 0260202D */  daddu     $a0, $s3, $zero
 /* BAB190 80241050 0280282D */  daddu     $a1, $s4, $zero
-/* BAB194 80241054 0C090387 */  jal       func_80240E1C_BAAF5C
+/* BAB194 80241054 0C090387 */  jal       UnkDurationCheck
 /* BAB198 80241058 0200302D */   daddu    $a2, $s0, $zero
 .L8024105C:
 /* BAB19C 8024105C 0000102D */  daddu     $v0, $zero, $zero

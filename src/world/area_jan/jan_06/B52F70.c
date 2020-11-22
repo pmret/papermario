@@ -12,7 +12,7 @@ INCLUDE_ASM(s32, "world/area_jan/jan_06/B52F70", func_80240F0C_B5373C);
 
 INCLUDE_ASM(s32, "world/area_jan/jan_06/B52F70", func_80240FEC_B5381C);
 
-INCLUDE_ASM(s32, "world/area_jan/jan_06/B52F70", func_802412EC_B53B1C);
+#include "world/common/UnkDurationCheck.inc.c"
 
 INCLUDE_ASM(s32, "world/area_jan/jan_06/B52F70", func_80241330_B53B60);
 
