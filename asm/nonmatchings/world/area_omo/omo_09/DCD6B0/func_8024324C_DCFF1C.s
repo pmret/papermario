@@ -190,7 +190,7 @@ glabel func_8024324C_DCFF1C
 /* DD01E0 80243510 0260202D */   daddu    $a0, $s3, $zero
 /* DD01E4 80243514 08090D51 */  j         .L80243544
 /* DD01E8 80243518 00000000 */   nop      
-/* DD01EC 8024351C 0C0909F4 */  jal       func_802427D0_DCF4A0
+/* DD01EC 8024351C 0C0909F4 */  jal       UnkNpcAIFunc9
 /* DD01F0 80243520 0260202D */   daddu    $a0, $s3, $zero
 /* DD01F4 80243524 08090D51 */  j         .L80243544
 /* DD01F8 80243528 00000000 */   nop      

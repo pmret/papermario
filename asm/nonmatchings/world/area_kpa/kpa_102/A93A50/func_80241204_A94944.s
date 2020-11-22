@@ -190,7 +190,7 @@ glabel func_80241204_A94944
 /* A94C08 802414C8 0260202D */   daddu    $a0, $s3, $zero
 /* A94C0C 802414CC 0809053F */  j         .L802414FC
 /* A94C10 802414D0 00000000 */   nop      
-/* A94C14 802414D4 0C0901E2 */  jal       func_80240788_A93EC8
+/* A94C14 802414D4 0C0901E2 */  jal       UnkNpcAIFunc9
 /* A94C18 802414D8 0260202D */   daddu    $a0, $s3, $zero
 /* A94C1C 802414DC 0809053F */  j         .L802414FC
 /* A94C20 802414E0 00000000 */   nop      

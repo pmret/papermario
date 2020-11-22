@@ -8,7 +8,7 @@ INCLUDE_ASM(s32, "world/area_kpa/kpa_52/A671E0", func_80240414_A67514);
 
 #include "world/common/UnkSetDurationFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_52/A671E0", func_80240558_A67658);
+#include "world/common/UnkNpcAIFunc9.inc.c"
 
 #include "world/common/UnkDurationCheck.inc.c"
 

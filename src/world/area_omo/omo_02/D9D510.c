@@ -44,7 +44,7 @@ INCLUDE_ASM(s32, "world/area_omo/omo_02/D9D510", func_80241C7C_D9F14C);
 
 #include "world/common/UnkSetDurationFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_02/D9D510", func_80241DC0_D9F290);
+#include "world/common/UnkNpcAIFunc9.inc.c"
 
 #include "world/common/UnkDurationCheck.inc.c"
 
