@@ -1,6 +1,6 @@
 #include "jan_07.h"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_07/B59870", func_80240000_B59870);
+#include "world/common/UnkNpcAIFunc4.inc.c"
 
 INCLUDE_ASM(s32, "world/area_jan/jan_07/B59870", func_80240050_B598C0);
 

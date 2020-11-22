@@ -18,7 +18,7 @@ INCLUDE_ASM(s32, "world/area_jan/jan_05/B4B260", func_80241150_B4BBC0);
 
 INCLUDE_ASM(s32, "world/area_jan/jan_05/B4B260", func_80241494_B4BF04);
 
-INCLUDE_ASM(s32, "world/area_jan/jan_05/B4B260", func_802416B8_B4C128);
+#include "world/common/UnkNpcAIFunc4.inc.c"
 
 INCLUDE_ASM(s32, "world/area_jan/jan_05/B4B260", func_80241708_B4C178);
 
@@ -40,5 +40,11 @@ INCLUDE_ASM(s32, "world/area_jan/jan_05/B4B260", func_8024219C_B4CC0C);
 
 #include "world/common/SomeMatrixOperations.inc.c"
 
-
-INCLUDE_ASM(s32, "world/area_jan/jan_05/B4B260", func_8024268C_B4D0FC);
+ApiStatus func_8024268C_B4D0FC(ScriptInstance* script) {
+    if (get_enemy_safe(0) == NULL) {
+        script->varTable[0] = FALSE;
+    } else {
+        script->varTable[0] = TRUE;
+    }
+    return ApiStatus_DONE2;
+}

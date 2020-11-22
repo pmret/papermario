@@ -192,7 +192,7 @@ def do_cross_query():
     for sym_name in map_syms:
         if not sym_name.startswith("_binary"):
             sym = map_syms[sym_name]
-            if get_symbol_length(sym_name) > 8:
+            if get_symbol_length(sym_name) > 16:
                 query_bytes = get_symbol_bytes(map_offsets, sym_name)
                 cluster_match = False
                 for cluster in clusters:
