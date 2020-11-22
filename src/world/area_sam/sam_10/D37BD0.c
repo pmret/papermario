@@ -4,7 +4,7 @@
 
 #include "world/common/UnkNpcAIFunc7.inc.c"
 
-INCLUDE_ASM(s32, "world/area_sam/sam_10/D37BD0", func_802404AC_D37CAC);
+#include "world/common/UnkNpcAIFunc8.inc.c"
 
 #include "world/common/UnkNpcAIFunc5.inc.c"
 

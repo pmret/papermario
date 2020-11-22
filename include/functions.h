@@ -73,6 +73,7 @@ void set_curtain_scale_goal(f32 scale);
 void set_curtain_fade(f32 scale);
 
 void fx_walk_normal(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4, s32 arg5);
+void fx_emote(s32, Npc*, s32, f32, f32, f32, f32, s32, s32*);
 
 f32 func_800E0088(f32, f32);
 s32 func_800EB168(s32);

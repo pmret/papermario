@@ -159,7 +159,7 @@ glabel func_80241C84_B5FF34
 /* B60184 80241ED4 24020020 */  addiu     $v0, $zero, 0x20
 /* B60188 80241ED8 1462000D */  bne       $v1, $v0, .L80241F10
 /* B6018C 80241EDC 00000000 */   nop      
-/* B60190 80241EE0 0C0905D1 */  jal       func_80241744_B5F9F4
+/* B60190 80241EE0 0C0905D1 */  jal       UnkNpcAIFunc8
 /* B60194 80241EE4 0240202D */   daddu    $a0, $s2, $zero
 /* B60198 80241EE8 8E430070 */  lw        $v1, 0x70($s2)
 /* B6019C 80241EEC 24020021 */  addiu     $v0, $zero, 0x21

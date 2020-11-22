@@ -180,7 +180,7 @@ glabel func_80240E80_C3B890
 /* C3BB34 80241124 24020020 */  addiu     $v0, $zero, 0x20
 /* C3BB38 80241128 1462001F */  bne       $v1, $v0, .L802411A8
 /* C3BB3C 8024112C 00000000 */   nop      
-/* C3BB40 80241130 0C09004F */  jal       func_8024013C_C3AB4C
+/* C3BB40 80241130 0C09004F */  jal       UnkNpcAIFunc8
 /* C3BB44 80241134 0240202D */   daddu    $a0, $s2, $zero
 /* C3BB48 80241138 0809046A */  j         .L802411A8
 /* C3BB4C 8024113C 00000000 */   nop      

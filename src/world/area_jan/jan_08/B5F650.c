@@ -10,7 +10,7 @@ INCLUDE_ASM(s32, "world/area_jan/jan_08/B5F650", func_802414A4_B5F754);
 
 #include "world/common/UnkNpcAIFunc7.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_08/B5F650", func_80241744_B5F9F4);
+#include "world/common/UnkNpcAIFunc8.inc.c"
 
 #include "world/common/UnkNpcAIFunc5.inc.c"
 
