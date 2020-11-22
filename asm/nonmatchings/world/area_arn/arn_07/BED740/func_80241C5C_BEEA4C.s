@@ -93,7 +93,7 @@ glabel func_80241C5C_BEEA4C
 /* BEEBA4 80241DB4 0000102D */   daddu    $v0, $zero, $zero
 /* BEEBA8 80241DB8 0280202D */  daddu     $a0, $s4, $zero
 /* BEEBAC 80241DBC 0200282D */  daddu     $a1, $s0, $zero
-/* BEEBB0 80241DC0 0C09054B */  jal       func_8024152C_BEE31C
+/* BEEBB0 80241DC0 0C09054B */  jal       UnkNpcAIFunc2
 /* BEEBB4 80241DC4 0260302D */   daddu    $a2, $s3, $zero
 /* BEEBB8 80241DC8 0280202D */  daddu     $a0, $s4, $zero
 /* BEEBBC 80241DCC 0200282D */  daddu     $a1, $s0, $zero

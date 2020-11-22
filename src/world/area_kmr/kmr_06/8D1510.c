@@ -8,7 +8,7 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_06/8D1510", func_802401B0_8D16C0);
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_06/8D1510", func_80240898_8D1DA8);
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_06/8D1510", func_80240BDC_8D20EC);
+#include "world/common/UnkNpcAIFunc2.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_06/8D1510", func_80240C54_8D2164);
 

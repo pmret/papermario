@@ -94,7 +94,7 @@ glabel func_80242354_C737D4
 /* C73930 802424B0 0000102D */   daddu    $v0, $zero, $zero
 /* C73934 802424B4 0280202D */  daddu     $a0, $s4, $zero
 /* C73938 802424B8 0200282D */  daddu     $a1, $s0, $zero
-/* C7393C 802424BC 0C09058B */  jal       func_8024162C_C72AAC
+/* C7393C 802424BC 0C09058B */  jal       UnkNpcAIFunc2
 /* C73940 802424C0 0260302D */   daddu    $a2, $s3, $zero
 /* C73944 802424C4 0280202D */  daddu     $a0, $s4, $zero
 /* C73948 802424C8 0200282D */  daddu     $a1, $s0, $zero

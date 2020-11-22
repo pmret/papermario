@@ -94,7 +94,7 @@ glabel func_80241944_CF4514
 /* CF4670 80241AA0 0000102D */   daddu    $v0, $zero, $zero
 /* CF4674 80241AA4 0280202D */  daddu     $a0, $s4, $zero
 /* CF4678 80241AA8 0200282D */  daddu     $a1, $s0, $zero
-/* CF467C 80241AAC 0C090307 */  jal       func_80240C1C_CF37EC
+/* CF467C 80241AAC 0C090307 */  jal       UnkNpcAIFunc2
 /* CF4680 80241AB0 0260302D */   daddu    $a2, $s3, $zero
 /* CF4684 80241AB4 0280202D */  daddu     $a0, $s4, $zero
 /* CF4688 80241AB8 0200282D */  daddu     $a1, $s0, $zero

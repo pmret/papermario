@@ -197,7 +197,7 @@ INCLUDE_ASM(s32, "code_20ec0_len_5040", func_800495A0);
 INCLUDE_ASM(s32, "code_20ec0_len_5040", func_800496B8);
 
 // Same as UnkNpcAIFunc1
-void func_80049B44(ScriptInstance *script, NpcAISettings *aiSettings) {
+void func_80049B44(ScriptInstance* script, NpcAISettings* aiSettings) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 

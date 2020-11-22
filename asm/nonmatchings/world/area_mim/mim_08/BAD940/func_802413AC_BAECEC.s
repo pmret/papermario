@@ -93,7 +93,7 @@ glabel func_802413AC_BAECEC
 /* BAEE44 80241504 0000102D */   daddu    $v0, $zero, $zero
 /* BAEE48 80241508 0280202D */  daddu     $a0, $s4, $zero
 /* BAEE4C 8024150C 0200282D */  daddu     $a1, $s0, $zero
-/* BAEE50 80241510 0C09031F */  jal       func_80240C7C_BAE5BC
+/* BAEE50 80241510 0C09031F */  jal       UnkNpcAIFunc2
 /* BAEE54 80241514 0260302D */   daddu    $a2, $s3, $zero
 /* BAEE58 80241518 0280202D */  daddu     $a0, $s4, $zero
 /* BAEE5C 8024151C 0200282D */  daddu     $a1, $s0, $zero

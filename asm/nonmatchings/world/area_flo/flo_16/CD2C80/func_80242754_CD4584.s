@@ -94,7 +94,7 @@ glabel func_80242754_CD4584
 /* CD46E0 802428B0 0000102D */   daddu    $v0, $zero, $zero
 /* CD46E4 802428B4 0280202D */  daddu     $a0, $s4, $zero
 /* CD46E8 802428B8 0200282D */  daddu     $a1, $s0, $zero
-/* CD46EC 802428BC 0C09068B */  jal       func_80241A2C_CD385C
+/* CD46EC 802428BC 0C09068B */  jal       UnkNpcAIFunc2
 /* CD46F0 802428C0 0260302D */   daddu    $a2, $s3, $zero
 /* CD46F4 802428C4 0280202D */  daddu     $a0, $s4, $zero
 /* CD46F8 802428C8 0200282D */  daddu     $a1, $s0, $zero

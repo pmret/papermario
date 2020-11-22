@@ -12,7 +12,7 @@ INCLUDE_ASM(s32, "world/area_tik/tik_07/87AC00", func_802415A0_87B180);
 
 INCLUDE_ASM(s32, "world/area_tik/tik_07/87AC00", func_80241C88_87B868);
 
-INCLUDE_ASM(s32, "world/area_tik/tik_07/87AC00", func_80241FCC_87BBAC);
+#include "world/common/UnkNpcAIFunc2.inc.c"
 
 INCLUDE_ASM(s32, "world/area_tik/tik_07/87AC00", func_80242044_87BC24);
 

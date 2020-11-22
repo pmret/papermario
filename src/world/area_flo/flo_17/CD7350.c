@@ -8,7 +8,7 @@ INCLUDE_ASM(s32, "world/area_flo/flo_17/CD7350", func_80240220_CD7500);
 
 INCLUDE_ASM(s32, "world/area_flo/flo_17/CD7350", func_80240908_CD7BE8);
 
-INCLUDE_ASM(s32, "world/area_flo/flo_17/CD7350", func_80240C4C_CD7F2C);
+#include "world/common/UnkNpcAIFunc2.inc.c"
 
 INCLUDE_ASM(s32, "world/area_flo/flo_17/CD7350", func_80240CC4_CD7FA4);
 
