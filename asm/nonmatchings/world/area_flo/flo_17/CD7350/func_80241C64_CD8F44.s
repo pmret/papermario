@@ -160,7 +160,7 @@ glabel func_80241C64_CD8F44
 .L80241EA0:
 /* CD9180 80241EA0 0280202D */  daddu     $a0, $s4, $zero
 /* CD9184 80241EA4 02C0282D */  daddu     $a1, $s6, $zero
-/* CD9188 80241EA8 0C090399 */  jal       func_80240E64_CD8144
+/* CD9188 80241EA8 0C090399 */  jal       UnkNpcAIFunc3
 /* CD918C 80241EAC 02A0302D */   daddu    $a2, $s5, $zero
 /* CD9190 80241EB0 080907B1 */  j         .L80241EC4
 /* CD9194 80241EB4 00000000 */   nop      

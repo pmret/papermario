@@ -102,7 +102,7 @@ typedef struct Npc {
     /* 0x084 */ char unk_84[4];
     /* 0x088 */ s16 isFacingAway;
     /* 0x08A */ s16 yawCamOffset;
-    /* 0x08C */ char unk_8C[2];
+    /* 0x08C */ s16 unk_8C;
     /* 0x08E */ s16 duration; /* formerly interp_counter */
     /* 0x090 */ Vec3s homePos;
     /* 0x096 */ char unk_96[12];

@@ -18,7 +18,7 @@ INCLUDE_ASM(s32, "world/area_tik/tik_07/87AC00", func_80242044_87BC24);
 
 INCLUDE_ASM(s32, "world/area_tik/tik_07/87AC00", func_802420B0_87BC90);
 
-INCLUDE_ASM(s32, "world/area_tik/tik_07/87AC00", func_802421E4_87BDC4);
+#include "world/common/UnkNpcAIFunc3.inc.c"
 
 INCLUDE_ASM(s32, "world/area_tik/tik_07/87AC00", func_80242248_87BE28);
 

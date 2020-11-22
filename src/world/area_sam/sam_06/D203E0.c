@@ -14,7 +14,7 @@ INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_802411A4_D21034);
 
 INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80241210_D210A0);
 
-INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80241344_D211D4);
+#include "world/common/UnkNpcAIFunc3.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_802413A8_D21238);
 

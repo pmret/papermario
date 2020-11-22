@@ -109,7 +109,7 @@ glabel func_80241E1C_CCD12C
 /* CCD2C4 80241FB4 0000102D */   daddu    $v0, $zero, $zero
 /* CCD2C8 80241FB8 0280202D */  daddu     $a0, $s4, $zero
 /* CCD2CC 80241FBC 0200282D */  daddu     $a1, $s0, $zero
-/* CCD2D0 80241FC0 0C090641 */  jal       func_80241904_CCCC14
+/* CCD2D0 80241FC0 0C090641 */  jal       UnkNpcAIFunc3
 /* CCD2D4 80241FC4 0260302D */   daddu    $a2, $s3, $zero
 /* CCD2D8 80241FC8 080907F9 */  j         .L80241FE4
 /* CCD2DC 80241FCC 0000102D */   daddu    $v0, $zero, $zero

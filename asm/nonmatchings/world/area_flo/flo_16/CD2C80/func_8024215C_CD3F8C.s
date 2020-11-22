@@ -109,7 +109,7 @@ glabel func_8024215C_CD3F8C
 /* CD4124 802422F4 0000102D */   daddu    $v0, $zero, $zero
 /* CD4128 802422F8 0280202D */  daddu     $a0, $s4, $zero
 /* CD412C 802422FC 0200282D */  daddu     $a1, $s0, $zero
-/* CD4130 80242300 0C090711 */  jal       func_80241C44_CD3A74
+/* CD4130 80242300 0C090711 */  jal       UnkNpcAIFunc3
 /* CD4134 80242304 0260302D */   daddu    $a2, $s3, $zero
 /* CD4138 80242308 080908C9 */  j         .L80242324
 /* CD413C 8024230C 0000102D */   daddu    $v0, $zero, $zero
