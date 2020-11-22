@@ -119,7 +119,7 @@ glabel func_80240B64_940114
 /* 9402C8 80240D18 00000000 */   nop      
 /* 9402CC 80240D1C 0280202D */  daddu     $a0, $s4, $zero
 /* 9402D0 80240D20 0260282D */  daddu     $a1, $s3, $zero
-/* 9402D4 80240D24 0C090151 */  jal       func_80240544_93FAF4
+/* 9402D4 80240D24 0C090151 */  jal       NpcJumpFunc3
 /* 9402D8 80240D28 02A0302D */   daddu    $a2, $s5, $zero
 /* 9402DC 80240D2C 0280202D */  daddu     $a0, $s4, $zero
 /* 9402E0 80240D30 0260282D */  daddu     $a1, $s3, $zero

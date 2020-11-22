@@ -70,7 +70,7 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80241424_8B1494);
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_802414D8_8B1548);
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_802415F8_8B1668);
+# include "world/common/NpcJumpFunc3.inc.c"
 
 # include "world/common/NpcJumpFunc.inc.c"
 

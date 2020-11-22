@@ -119,7 +119,7 @@ glabel func_802407F4_9C5BD4
 /* 9C5D88 802409A8 00000000 */   nop      
 /* 9C5D8C 802409AC 0280202D */  daddu     $a0, $s4, $zero
 /* 9C5D90 802409B0 0260282D */  daddu     $a1, $s3, $zero
-/* 9C5D94 802409B4 0C090075 */  jal       func_802401D4_9C55B4
+/* 9C5D94 802409B4 0C090075 */  jal       NpcJumpFunc3
 /* 9C5D98 802409B8 02A0302D */   daddu    $a2, $s5, $zero
 /* 9C5D9C 802409BC 0280202D */  daddu     $a0, $s4, $zero
 /* 9C5DA0 802409C0 0260282D */  daddu     $a1, $s3, $zero
