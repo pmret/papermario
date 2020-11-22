@@ -52,9 +52,17 @@ INCLUDE_ASM(s32, "code_17D6A0", ShowMessageBox);
 
 INCLUDE_ASM(s32, "code_17D6A0", ShowVariableMessageBox);
 
-INCLUDE_ASM(s32, "code_17D6A0", IsMessageBoxDisplayed);
+ApiStatus IsMessageBoxDisplayed(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 outVar = *args++;
 
-INCLUDE_ASM(s32, "code_17D6A0", WaitForMessageBoxDone);
+    set_variable(script, outVar, is_popup_displayed());
+    return ApiStatus_DONE2;
+}
+
+ApiStatus WaitForMessageBoxDone(ScriptInstance* script, s32 isInitialCall) {
+    return !is_popup_displayed() * ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_17D6A0", ForceCloseMessageBox);
 

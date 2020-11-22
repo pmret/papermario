@@ -95,6 +95,7 @@ void func_800ED5D0(Npc* partner);
 
 s32 func_800EF394(f32);
 s32 does_script_exist(s32 id);
+s32 does_script_exist_by_ref(ScriptInstance* script);
 ScriptInstance* start_script(Bytecode* initialLine, s32 priority, s32 initialState);
 ScriptInstance* start_script_in_group(Bytecode* initialLine, u8 priority, u8 initialState, u8 groupFlags);
 

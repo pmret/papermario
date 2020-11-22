@@ -369,13 +369,13 @@ class N64SegPaperMarioMessages(N64Segment):
 
             path = Path(base_path, self.name, name + ".msg")
             path.parent.mkdir(parents=True, exist_ok=True)
-            with open(path, "w") as f:
+            with open(path, "w") as self.f:
                 for j, msg_offset in enumerate(msg_offsets):
                     if j != 0:
-                        f.write("\n")
-                    f.write(f"[message section=0x{i:02X} index={j}]\n")
-                    self.write_message_markup(data[msg_offset:], f)
-                    f.write("\n[/message]\n")
+                        self.f.write("\n")
+                    self.f.write(f"[message section=0x{i:02X} index={j}]\n")
+                    self.write_message_markup(data[msg_offset:])
+                    self.f.write("\n[/message]\n")
 
     def get_ld_files(self):
         return [("", self.name, ".data")]
@@ -384,47 +384,45 @@ class N64SegPaperMarioMessages(N64Segment):
     def get_default_name(addr):
         return "msg"
 
-    def write_message_markup(self, data, f):
+    def write_message_markup(self, data):
         pos = 0
-        font = CHARSET
+        self.root_charset = CHARSET
 
         while data[pos] != 0xFD:
-            markup, delta = self.char_to_markup(data[pos:], charset=font)
+            self.charset = self.root_charset
 
-            f.write(markup)
-            pos += delta
+            while True:
+                char = data[pos]
 
-            if markup == "[font=title]\n" or markup == "[font=subtitle]\n":
-                font = CHARSET_CREDITS
-            elif markup == "[font=normal]":
-                font = CHARSET
+                if char in self.charset:
+                    value = self.charset[char]
+                elif None in self.charset:
+                    value = self.charset[None]
 
-    def char_to_markup(self, data, charset=CHARSET):
-        value = None
-        char = int(data[0])
+                if value is None:
+                    value = fallback
 
-        if char in charset:
-            value = charset[char]
-        elif None in charset:
-            value = charset[None]
+                if isinstance(value, str):
+                    self.write_markup(value)
+                    pos += 1
+                    break
+                elif callable(value):
+                    markup, delta = value(data[pos:])
+                    self.write_markup(markup)
+                    pos += delta
+                    break
+                elif isinstance(value, dict):
+                    if None in self.charset:
+                        fallback = self.charset[None]
+                    self.charset = value
+                    pos += 1
+                else:
+                    raise ValueError(value)
 
-        if type(value) is str:
-            return value, 1
-        if callable(value):
-            return value(data)
-        if type(value) is dict:
-            markup, delta = self.char_to_markup(data[1:], charset=value)
+    def write_markup(self, markup):
+        self.f.write(markup)
 
-            if markup is None:
-                if None in charset:
-                    value = charset[None]
-
-                    if callable(value):
-                        return value(data)
-
-                    return value, 1
-            else:
-                return markup, delta + 1
-
-
-        return None, 0
+        if markup == "[font=title]\n" or markup == "[font=subtitle]\n":
+            self.root_charset = CHARSET_CREDITS
+        elif markup == "[font=normal]":
+            self.root_charset = CHARSET
