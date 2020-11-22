@@ -184,7 +184,7 @@ glabel func_802410D4_C2FC74
 /* C2FF28 80241388 0240202D */   daddu    $a0, $s2, $zero
 /* C2FF2C 8024138C 080904FF */  j         .L802413FC
 /* C2FF30 80241390 00000000 */   nop      
-/* C2FF34 80241394 0C09006D */  jal       func_802401B4_C2ED54
+/* C2FF34 80241394 0C09006D */  jal       UnkNpcAIFunc5
 /* C2FF38 80241398 0240202D */   daddu    $a0, $s2, $zero
 /* C2FF3C 8024139C 080904FF */  j         .L802413FC
 /* C2FF40 802413A0 00000000 */   nop      

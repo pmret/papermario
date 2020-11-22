@@ -6,7 +6,7 @@ INCLUDE_ASM(s32, "world/area_dgb/dgb_15/C4F510", func_8024006C_C4F57C);
 
 INCLUDE_ASM(s32, "world/area_dgb/dgb_15/C4F510", func_802400DC_C4F5EC);
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_15/C4F510", func_802401B4_C4F6C4);
+#include "world/common/UnkNpcAIFunc5.inc.c"
 
 INCLUDE_ASM(s32, "world/area_dgb/dgb_15/C4F510", func_80240208_C4F718);
 

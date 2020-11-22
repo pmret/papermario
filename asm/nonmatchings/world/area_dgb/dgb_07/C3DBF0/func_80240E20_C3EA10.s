@@ -184,7 +184,7 @@ glabel func_80240E20_C3EA10
 /* C3ECC4 802410D4 0240202D */   daddu    $a0, $s2, $zero
 /* C3ECC8 802410D8 08090452 */  j         .L80241148
 /* C3ECCC 802410DC 00000000 */   nop      
-/* C3ECD0 802410E0 0C09006D */  jal       func_802401B4_C3DDA4
+/* C3ECD0 802410E0 0C09006D */  jal       UnkNpcAIFunc5
 /* C3ECD4 802410E4 0240202D */   daddu    $a0, $s2, $zero
 /* C3ECD8 802410E8 08090452 */  j         .L80241148
 /* C3ECDC 802410EC 00000000 */   nop      

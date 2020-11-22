@@ -165,7 +165,7 @@ glabel func_80242B58_C73FD8
 /* C74240 80242DC0 24020021 */  addiu     $v0, $zero, 0x21
 /* C74244 80242DC4 14620007 */  bne       $v1, $v0, .L80242DE4
 /* C74248 80242DC8 00000000 */   nop      
-/* C7424C 80242DCC 0C0909BC */  jal       func_802426F0_C73B70
+/* C7424C 80242DCC 0C0909BC */  jal       UnkNpcAIFunc5
 /* C74250 80242DD0 0240202D */   daddu    $a0, $s2, $zero
 /* C74254 80242DD4 08090B79 */  j         .L80242DE4
 /* C74258 80242DD8 00000000 */   nop      

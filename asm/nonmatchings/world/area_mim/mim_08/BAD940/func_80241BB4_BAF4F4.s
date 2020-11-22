@@ -165,7 +165,7 @@ glabel func_80241BB4_BAF4F4
 /* BAF75C 80241E1C 24020021 */  addiu     $v0, $zero, 0x21
 /* BAF760 80241E20 14620007 */  bne       $v1, $v0, .L80241E40
 /* BAF764 80241E24 00000000 */   nop      
-/* BAF768 80241E28 0C0905D3 */  jal       func_8024174C_BAF08C
+/* BAF768 80241E28 0C0905D3 */  jal       UnkNpcAIFunc5
 /* BAF76C 80241E2C 0240202D */   daddu    $a0, $s2, $zero
 /* BAF770 80241E30 08090790 */  j         .L80241E40
 /* BAF774 80241E34 00000000 */   nop      

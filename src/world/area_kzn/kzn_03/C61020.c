@@ -18,7 +18,7 @@ INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_80240C64_C61974);
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_80240CD4_C619E4);
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_80240DAC_C61ABC);
+#include "world/common/UnkNpcAIFunc5.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_80240E00_C61B10);
 

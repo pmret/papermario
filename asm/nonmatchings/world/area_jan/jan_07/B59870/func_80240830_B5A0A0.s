@@ -165,7 +165,7 @@ glabel func_80240830_B5A0A0
 /* B5A308 80240A98 24020021 */  addiu     $v0, $zero, 0x21
 /* B5A30C 80240A9C 14620007 */  bne       $v1, $v0, .L80240ABC
 /* B5A310 80240AA0 00000000 */   nop      
-/* B5A314 80240AA4 0C0900F2 */  jal       func_802403C8_B59C38
+/* B5A314 80240AA4 0C0900F2 */  jal       UnkNpcAIFunc5
 /* B5A318 80240AA8 0240202D */   daddu    $a0, $s2, $zero
 /* B5A31C 80240AAC 080902AF */  j         .L80240ABC
 /* B5A320 80240AB0 00000000 */   nop      
