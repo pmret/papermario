@@ -168,7 +168,7 @@ glabel func_80240E80_C3B890
 /* C3BB04 802410F4 24020003 */  addiu     $v0, $zero, 3
 /* C3BB08 802410F8 0809046A */  j         .L802411A8
 /* C3BB0C 802410FC AE420070 */   sw       $v0, 0x70($s2)
-/* C3BB10 80241100 0C090018 */  jal       func_80240060_C3AA70
+/* C3BB10 80241100 0C090018 */  jal       UnkNpcAIFunc6
 /* C3BB14 80241104 0240202D */   daddu    $a0, $s2, $zero
 /* C3BB18 80241108 8E430070 */  lw        $v1, 0x70($s2)
 /* C3BB1C 8024110C 2402001F */  addiu     $v0, $zero, 0x1f

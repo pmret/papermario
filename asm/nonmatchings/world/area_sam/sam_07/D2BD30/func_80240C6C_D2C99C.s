@@ -151,7 +151,7 @@ glabel func_80240C6C_D2C99C
 /* D2CBCC 80240E9C 0280302D */   daddu    $a2, $s4, $zero
 /* D2CBD0 80240EA0 080903BE */  j         .L80240EF8
 /* D2CBD4 80240EA4 00000000 */   nop      
-/* D2CBD8 80240EA8 0C090194 */  jal       func_80240650_D2C380
+/* D2CBD8 80240EA8 0C090194 */  jal       UnkNpcAIFunc6
 /* D2CBDC 80240EAC 0240202D */   daddu    $a0, $s2, $zero
 /* D2CBE0 80240EB0 0C0901AF */  jal       func_802406BC_D2C3EC
 /* D2CBE4 80240EB4 0240202D */   daddu    $a0, $s2, $zero

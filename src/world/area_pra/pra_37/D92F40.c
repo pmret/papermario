@@ -28,7 +28,7 @@ INCLUDE_ASM(s32, "world/area_pra/pra_37/D92F40", func_80240EE8_D93E28);
 
 INCLUDE_ASM(s32, "world/area_pra/pra_37/D92F40", func_80240F1C_D93E5C);
 
-INCLUDE_ASM(s32, "world/area_pra/pra_37/D92F40", func_80240F50_D93E90);
+#include "world/common/UnkNpcAIFunc6.inc.c"
 
 INCLUDE_ASM(s32, "world/area_pra/pra_37/D92F40", func_80240FBC_D93EFC);
 

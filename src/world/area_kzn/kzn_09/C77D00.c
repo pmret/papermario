@@ -1,6 +1,6 @@
 #include "kzn_09.h"
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C77D00", func_80241020_C77D00);
+#include "world/common/UnkNpcAIFunc6.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C77D00", func_8024108C_C77D6C);
 

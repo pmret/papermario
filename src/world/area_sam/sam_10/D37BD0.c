@@ -1,6 +1,6 @@
 #include "sam_10.h"
 
-INCLUDE_ASM(s32, "world/area_sam/sam_10/D37BD0", func_802403D0_D37BD0);
+#include "world/common/UnkNpcAIFunc6.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_10/D37BD0", func_8024043C_D37C3C);
 

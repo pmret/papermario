@@ -168,7 +168,7 @@ glabel func_80242480_C33960
 /* C33BD4 802426F4 24020003 */  addiu     $v0, $zero, 3
 /* C33BD8 802426F8 080909EA */  j         .L802427A8
 /* C33BDC 802426FC AE420070 */   sw       $v0, 0x70($s2)
-/* C33BE0 80242700 0C090094 */  jal       func_80240250_C31730
+/* C33BE0 80242700 0C090094 */  jal       UnkNpcAIFunc6
 /* C33BE4 80242704 0240202D */   daddu    $a0, $s2, $zero
 /* C33BE8 80242708 8E430070 */  lw        $v1, 0x70($s2)
 /* C33BEC 8024270C 2402001F */  addiu     $v0, $zero, 0x1f

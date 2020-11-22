@@ -1,6 +1,6 @@
 #include "dgb_15.h"
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_15/C4F510", func_80240000_C4F510);
+#include "world/common/UnkNpcAIFunc6.inc.c"
 
 INCLUDE_ASM(s32, "world/area_dgb/dgb_15/C4F510", func_8024006C_C4F57C);
 
