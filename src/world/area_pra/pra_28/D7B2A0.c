@@ -2,7 +2,7 @@
 
 INCLUDE_ASM(s32, "world/area_pra/pra_28/D7B2A0", func_80240000_D7B2A0);
 
-INCLUDE_ASM(s32, "world/area_pra/pra_28/D7B2A0", func_80240050_D7B2F0);
+#include "world/common/UnkFunc2.inc.c"
 
 INCLUDE_ASM(s32, "world/area_pra/pra_28/D7B2A0", func_80240084_D7B324);
 

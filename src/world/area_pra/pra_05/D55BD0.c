@@ -1,6 +1,6 @@
 #include "pra_05.h"
 
-INCLUDE_ASM(s32, "world/area_pra/pra_05/D55BD0", func_80240020_D55BD0);
+#include "world/common/UnkFunc2.inc.c"
 
 INCLUDE_ASM(s32, "world/area_pra/pra_05/D55BD0", func_80240054_D55C04);
 
