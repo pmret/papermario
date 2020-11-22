@@ -24,11 +24,14 @@ INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_80240D3C_D4DD7C);
 
 INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_80240EB8_D4DEF8);
 
-INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_80240EEC_D4DF2C);
+#include "world/common/SetPartnerFlags20000.inc.c"
 
 INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_80240F20_D4DF60);
 
-INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_80240F60_D4DFA0);
+ApiStatus func_80240F60_D4DFA0(ScriptInstance* script, s32 isInitialCall) {
+    D_8009A650[0] &= ~0x80;
+    return ApiStatus_DONE2;
+}
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 
