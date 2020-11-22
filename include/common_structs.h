@@ -902,7 +902,9 @@ typedef struct GameStatus {
     /* 0x07D */ s8 unk_7D;
     /* 0x07E */ u8 peachFlags; /* (1 = isPeach, 2 = isTransformed, 4 = hasUmbrella) */
     /* 0x07F */ u8 peachDisguise; /* (1 = koopatrol, 2 = hammer bros, 3 = clubba) */
-    /* 0x080 */ char unk_80[6];
+    /* 0x080 */ char unk_80[4];
+    /* 0x084 */ s8 unk_84;
+    /* 0x085 */ char unk_85;
     /* 0x086 */ s16 areaID; /* Created by retype action */
     /* 0x088 */ s16 prevArea;
     /* 0x08A */ s16 changedArea; /* (1 = yes) */
