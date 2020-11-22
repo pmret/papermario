@@ -22,6 +22,6 @@ INCLUDE_ASM(s32, "world/area_pra/pra_40/D999D0", func_80240D3C_D9A6EC);
 
 #include "world/common/SetPartnerFlagsA0000.inc.c"
 
-INCLUDE_ASM(s32, "world/area_pra/pra_40/D999D0", func_80240EB8_D9A868);
+#include "world/common/SetPartnerFlags80000.inc.c"
 
 INCLUDE_ASM(s32, "world/area_pra/pra_40/D999D0", func_80240EEC_D9A89C);
