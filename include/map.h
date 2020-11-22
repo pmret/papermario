@@ -249,6 +249,8 @@ typedef struct {
 Enemy* get_enemy(NpcId npcId);
 MapConfig* get_current_map_header(void);
 
+s32 func_800490B4(s32 arg0, Enemy* arg1, f32 arg2, s32 arg3, s32 arg4);
+
 /// Zero-terminated.
 Area gAreas[29];
 

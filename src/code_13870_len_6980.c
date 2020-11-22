@@ -52,7 +52,7 @@ INCLUDE_ASM(s32, "code_13870_len_6980", appendGfx_npc);
 
 INCLUDE_ASM(s32, "code_13870_len_6980", render_npcs);
 
-INCLUDE_ASM(s32, "code_13870_len_6980", npc_move_heading);
+INCLUDE_ASM(void, "code_13870_len_6980", npc_move_heading, Npc* npc, f32 speed, f32 yaw);
 
 INCLUDE_ASM(Npc*, "code_13870_len_6980", get_npc_unsafe, NpcId npcId);
 

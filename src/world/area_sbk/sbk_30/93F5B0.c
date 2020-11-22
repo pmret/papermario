@@ -18,7 +18,7 @@ INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_80240424_93F9D4);
 
 INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_8024061C_93FBCC);
 
-INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_8024074C_93FCFC);
+# include "world/common/UnkNpcAIFunc11.inc.c"
 
 # include "world/common/UnkNpcAIFunc10.inc.c"
 
