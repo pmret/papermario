@@ -174,7 +174,7 @@ glabel func_802410D4_C47CB4
 /* C47F40 80241360 2402001F */  addiu     $v0, $zero, 0x1f
 /* C47F44 80241364 14620025 */  bne       $v1, $v0, .L802413FC
 /* C47F48 80241368 00000000 */   nop      
-/* C47F4C 8024136C 0C09001B */  jal       func_8024006C_C46C4C
+/* C47F4C 8024136C 0C09001B */  jal       UnkNpcAIFunc7
 /* C47F50 80241370 0240202D */   daddu    $a0, $s2, $zero
 /* C47F54 80241374 8E430070 */  lw        $v1, 0x70($s2)
 /* C47F58 80241378 24020020 */  addiu     $v0, $zero, 0x20

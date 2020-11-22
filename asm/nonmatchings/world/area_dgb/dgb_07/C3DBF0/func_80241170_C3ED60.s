@@ -153,7 +153,7 @@ glabel func_80241170_C3ED60
 /* C3EF98 802413A8 00000000 */   nop      
 /* C3EF9C 802413AC 0C090000 */  jal       UnkNpcAIFunc6
 /* C3EFA0 802413B0 0240202D */   daddu    $a0, $s2, $zero
-/* C3EFA4 802413B4 0C09001B */  jal       func_8024006C_C3DC5C
+/* C3EFA4 802413B4 0C09001B */  jal       UnkNpcAIFunc7
 /* C3EFA8 802413B8 0240202D */   daddu    $a0, $s2, $zero
 /* C3EFAC 802413BC 8E430070 */  lw        $v1, 0x70($s2)
 /* C3EFB0 802413C0 24020020 */  addiu     $v0, $zero, 0x20

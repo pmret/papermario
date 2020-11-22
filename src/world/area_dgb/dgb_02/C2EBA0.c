@@ -2,7 +2,7 @@
 
 #include "world/common/UnkNpcAIFunc6.inc.c"
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_02/C2EBA0", func_8024006C_C2EC0C);
+#include "world/common/UnkNpcAIFunc7.inc.c"
 
 INCLUDE_ASM(s32, "world/area_dgb/dgb_02/C2EBA0", func_802400DC_C2EC7C);
 

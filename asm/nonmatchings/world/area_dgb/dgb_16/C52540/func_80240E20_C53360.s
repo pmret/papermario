@@ -174,7 +174,7 @@ glabel func_80240E20_C53360
 /* C535EC 802410AC 2402001F */  addiu     $v0, $zero, 0x1f
 /* C535F0 802410B0 14620025 */  bne       $v1, $v0, .L80241148
 /* C535F4 802410B4 00000000 */   nop      
-/* C535F8 802410B8 0C09001B */  jal       func_8024006C_C525AC
+/* C535F8 802410B8 0C09001B */  jal       UnkNpcAIFunc7
 /* C535FC 802410BC 0240202D */   daddu    $a0, $s2, $zero
 /* C53600 802410C0 8E430070 */  lw        $v1, 0x70($s2)
 /* C53604 802410C4 24020020 */  addiu     $v0, $zero, 0x20

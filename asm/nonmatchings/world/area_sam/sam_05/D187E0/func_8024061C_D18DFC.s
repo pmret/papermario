@@ -153,7 +153,7 @@ glabel func_8024061C_D18DFC
 /* D19034 80240854 00000000 */   nop      
 /* D19038 80240858 0C090000 */  jal       UnkNpcAIFunc6
 /* D1903C 8024085C 0240202D */   daddu    $a0, $s2, $zero
-/* D19040 80240860 0C09001B */  jal       func_8024006C_D1884C
+/* D19040 80240860 0C09001B */  jal       UnkNpcAIFunc7
 /* D19044 80240864 0240202D */   daddu    $a0, $s2, $zero
 /* D19048 80240868 8E430070 */  lw        $v1, 0x70($s2)
 /* D1904C 8024086C 24020020 */  addiu     $v0, $zero, 0x20
