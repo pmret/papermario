@@ -35,7 +35,8 @@ LD_SCRIPT := $(TARGET).ld
 LD_MAP := $(BUILD_DIR)/$(TARGET).map
 ASSETS_BIN := $(BUILD_DIR)/bin/assets/assets.bin
 MSG_BIN := $(BUILD_DIR)/msg.bin
-GENERATED_HEADERS := include/ld_addrs.h
+NPC_BIN := $(BUILD_DIR)/sprite/npc.bin
+GENERATED_HEADERS := include/ld_addrs.h include/sprite
 
 ### Tools ###
 
@@ -99,14 +100,14 @@ submodules:
 	git submodule update --init --recursive
 
 split:
-	rm -rf bin img
-	$(SPLAT) --modes bin Yay0 PaperMarioMapFS PaperMarioMessages img
+	rm -rf bin msg img sprite
+	$(SPLAT) --modes ld bin Yay0 PaperMarioMapFS PaperMarioMessages img PaperMarioNpcSprites
 
 split-%:
-	$(SPLAT) --modes $* --verbose
+	$(SPLAT) --modes ld $* --verbose
 
 split-all:
-	rm -rf bin img
+	rm -rf bin msg img sprite
 	$(SPLAT) --modes all
 
 test: $(ROM)
@@ -136,7 +137,7 @@ $(BUILD_DIR)/%.c.o: %.c $(MDEPS) | $(GENERATED_HEADERS)
 	$(CPP) $(CPPFLAGS) -o - $(CPPMFLAGS) $< | iconv --from UTF-8 --to SHIFT-JIS | $(CC) $(CFLAGS) -o - | $(OLD_AS) $(OLDASFLAGS) -o $@ -
 
 # Compile C files (with DSL macros)
-$(foreach cfile, $(DSL_C_FILES), $(BUILD_DIR)/$(cfile).o): $(BUILD_DIR)/%.c.o: %.c $(MDEPS) tools/compile_dsl_macros.py | include/ld_addrs.h
+$(foreach cfile, $(DSL_C_FILES), $(BUILD_DIR)/$(cfile).o): $(BUILD_DIR)/%.c.o: %.c $(MDEPS) tools/compile_dsl_macros.py | $(GENERATED_HEADERS)
 	@mkdir -p $(shell dirname $@)
 	$(CPP) $(CPPFLAGS) -o - $< $(CPPMFLAGS) | $(PYTHON) tools/compile_dsl_macros.py | iconv --from UTF-8 --to SHIFT-JIS | $(CC) $(CFLAGS) -o - | $(OLD_AS) $(OLDASFLAGS) -o $@ -
 
@@ -198,11 +199,28 @@ $(MSG_BIN): $(MESSAGES)
 	@echo "building $@"
 	@$(PYTHON) tools/compile_messages.py $@ /dev/null $(MESSAGES)
 $(MSG_BIN:.bin=.o): $(MSG_BIN)
-	@mkdir -p $(shell dirname $@)
 	$(LD) -r -b binary -o $@ $<
 
-$(LD_SCRIPT): $(SPLAT_YAML)
+# Sprites
+$(foreach npc, $(NPC_SPRITES), $(eval $(BUILD_DIR)/sprite/npc/$(npc):: $(shell find sprite/npc/$(npc) -type f))) # dependencies
+NPC_DIRS := $(foreach npc, $(NPC_SPRITES), sprite/npc/$(npc))
+NPC_YAY0 := $(foreach npc, $(NPC_SPRITES), $(BUILD_DIR)/sprite/npc/$(npc).Yay0)
+$(BUILD_DIR)/sprite/npc/%:: sprite/npc/% tools/compile_npc_sprite.py
 	@mkdir -p $(shell dirname $@)
+	$(PYTHON) tools/compile_npc_sprite.py $@ $<
+$(NPC_BIN): $(NPC_YAY0) tools/compile_npc_sprites.py
+	@mkdir -p $(shell dirname $@)
+	@echo "building $@"
+	@$(PYTHON) tools/compile_npc_sprites.py $@ $(NPC_YAY0)
+$(NPC_BIN:.bin=.o): $(NPC_BIN)
+	$(LD) -r -b binary -o $@ $<
+include/sprite/npc/%.h: sprite/npc/%/SpriteSheet.xml tools/gen_sprite_animations_h.py
+	@mkdir -p $(shell dirname $@)
+	@echo "building $@"
+	@$(PYTHON) tools/gen_sprite_animations_h.py $@ sprite/npc/$* $(NPC_DIRS)
+include/sprite: $(foreach dir, $(NPC_DIRS), include/$(dir).h)
+
+$(LD_SCRIPT): $(SPLAT_YAML)
 	$(SPLAT) --modes ld
 
 $(BUILD_DIR)/$(LD_SCRIPT): $(LD_SCRIPT)
@@ -226,7 +244,7 @@ include/ld_addrs.h: $(BUILD_DIR)/$(LD_SCRIPT)
 
 ### Make Settings ###
 
-.PHONY: clean test setup submodules split $(ROM)
+.PHONY: clean test setup submodules split $(ROM) include/sprite
 .DELETE_ON_ERROR:
 .SECONDARY:
 .PRECIOUS: $(ROM) %.Yay0

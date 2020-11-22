@@ -10,9 +10,15 @@
         "-D_LANGUAGE_C",
         "-DSCRIPT(...)={}",
     ],
+    "clang-tidy.blacklist": [
+        "include/PR"
+    ],
     "git.ignoreLimitWarning": true,
     "search.exclude": {
         "build": true,
         "docs/doxygen": true,
     },
+    "python.autoComplete.extraPaths": [
+        "./tools"
+    ],
 }
