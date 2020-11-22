@@ -6,7 +6,7 @@
 
 INCLUDE_ASM(s32, "world/area_mgm/mgm_00/E0E7A0", func_80240034_E0E7D4);
 
-INCLUDE_ASM(s32, "world/area_mgm/mgm_00/E0E7A0", func_802400F0_E0E890);
+#include "world/common/GetEntryPos.inc.c"
 
 #include "world/common/GetCurrentCameraYawClamped180.inc.c"
 

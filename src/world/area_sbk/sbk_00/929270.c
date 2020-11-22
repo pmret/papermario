@@ -5,7 +5,7 @@
 Script M(Main);
 s32 M(npcGroupList_80240768)[];
 
-EntryList M(entryList) = {
+Vec4f M(entryList)[] = {
     { -475.0f, 0.0f, 0.0f, 90.0f },
     { 475.0f, 0.0f, 0.0f, 270.0f },
     { 0.0f, 0.0f, -475.0f, 180.0f },

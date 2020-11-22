@@ -68,7 +68,7 @@ INCLUDE_ASM(s32, "world/world", load_map_by_IDs);
 
 INCLUDE_ASM(s32, "world/world", get_current_map_config);
 
-INCLUDE_ASM(s32, "world/world", get_current_map_header);
+INCLUDE_ASM(MapConfig*, "world/world", get_current_map_header);
 
 INCLUDE_ASM(s32, "world/world", get_map_IDs_by_name);
 

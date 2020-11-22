@@ -11,7 +11,7 @@
 
 #define ENTRY_COUNT(entryList) (sizeof(entryList) / sizeof(Vec4f))
 
-typedef Vec4f EntryList[];
+typedef Vec4f EntryList[0];
 
 /// Fields other than main, entryList, entryCount, background, and tattle are initialised when the map loads.
 typedef struct MapConfig {
@@ -249,6 +249,7 @@ typedef struct {
 #define NPC_GROUP_LIST_END() { 0, 0, 0 }
 
 Enemy* get_enemy(NpcId npcId);
+MapConfig* get_current_map_header(void);
 
 /// Zero-terminated.
 Area gAreas[29];
