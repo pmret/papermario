@@ -46,6 +46,7 @@ void get_collider_center(s32 colliderID, f32* x, f32* y, f32* z);
 s32 is_trigger_bound(Trigger*, Bytecode* script);
 Trigger* create_trigger(TriggerDefinition* def);
 s32 _bound_script_trigger_handler(Trigger* trigger);
+Trigger* get_trigger_by_id(s32 triggerID);
 
 Actor* get_actor(s32 actorID);
 ActorPart* get_actor_part(Actor* actor, s32 partIndex);
@@ -96,6 +97,7 @@ void enable_partner_flying(Npc* partner, s32 val);
 void update_player_move_history(Npc* partner);
 s32 is_current_partner_flying(void);
 void func_800ED5D0(Npc* partner);
+void clear_partner_move_history(Npc* partner);
 
 s32 func_800EF394(f32);
 s32 does_script_exist(s32 id);
@@ -130,6 +132,7 @@ Npc* get_npc_unsafe(NpcId npcId);
 Npc* resolve_npc(ScriptInstance* script, NpcId npcIdOrPtr);
 void set_npc_yaw(Npc* npcPtr, f32 angle);
 void npc_move_heading(Npc* npc, f32 speed, f32 yaw);
+void disable_npc_blur(Npc* npc);
 
 f32 dist2D(f32 ax, f32 ay, f32 bx, f32 by);
 f32 dist3D(f32 ax, f32 ay, f32 az, f32 bx, f32 by, f32 bz);
