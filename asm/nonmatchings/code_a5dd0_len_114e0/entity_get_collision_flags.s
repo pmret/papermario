@@ -14,8 +14,8 @@ glabel entity_get_collision_flags
 /* A6FDC 801108DC 00621024 */  and       $v0, $v1, $v0
 /* A6FE0 801108E0 AC820000 */  sw        $v0, ($a0)
 .L801108E4:
-/* A6FE4 801108E4 3C038016 */  lui       $v1, 0x8016
-/* A6FE8 801108E8 8463A552 */  lh        $v1, -0x5aae($v1)
+/* A6FE4 801108E4 3C038016 */  lui       $v1, %hi(gCollisionStatus+0x2)
+/* A6FE8 801108E8 8463A552 */  lh        $v1, %lo(gCollisionStatus+0x2)($v1)
 /* A6FEC 801108EC 2402FFFF */  addiu     $v0, $zero, -1
 /* A6FF0 801108F0 10620005 */  beq       $v1, $v0, .L80110908
 /* A6FF4 801108F4 30624000 */   andi     $v0, $v1, 0x4000
@@ -24,8 +24,8 @@ glabel entity_get_collision_flags
 /* A7000 80110900 50C20001 */  beql      $a2, $v0, .L80110908
 /* A7004 80110904 34A50001 */   ori      $a1, $a1, 1
 .L80110908:
-/* A7008 80110908 3C038016 */  lui       $v1, 0x8016
-/* A700C 8011090C 8463A554 */  lh        $v1, -0x5aac($v1)
+/* A7008 80110908 3C038016 */  lui       $v1, %hi(gCollisionStatus+0x4)
+/* A700C 8011090C 8463A554 */  lh        $v1, %lo(gCollisionStatus+0x4)($v1)
 /* A7010 80110910 2402FFFF */  addiu     $v0, $zero, -1
 /* A7014 80110914 10620005 */  beq       $v1, $v0, .L8011092C
 /* A7018 80110918 30624000 */   andi     $v0, $v1, 0x4000
@@ -34,8 +34,8 @@ glabel entity_get_collision_flags
 /* A7024 80110924 50C20001 */  beql      $a2, $v0, .L8011092C
 /* A7028 80110928 34A50100 */   ori      $a1, $a1, 0x100
 .L8011092C:
-/* A702C 8011092C 3C038016 */  lui       $v1, 0x8016
-/* A7030 80110930 8463A558 */  lh        $v1, -0x5aa8($v1)
+/* A702C 8011092C 3C038016 */  lui       $v1, %hi(gCollisionStatus+0x8)
+/* A7030 80110930 8463A558 */  lh        $v1, %lo(gCollisionStatus+0x8)($v1)
 /* A7034 80110934 2402FFFF */  addiu     $v0, $zero, -1
 /* A7038 80110938 10620005 */  beq       $v1, $v0, .L80110950
 /* A703C 8011093C 30624000 */   andi     $v0, $v1, 0x4000
@@ -54,8 +54,8 @@ glabel entity_get_collision_flags
 /* A706C 8011096C 50C20001 */  beql      $a2, $v0, .L80110974
 /* A7070 80110970 34A50010 */   ori      $a1, $a1, 0x10
 .L80110974:
-/* A7074 80110974 3C038016 */  lui       $v1, 0x8016
-/* A7078 80110978 8463A564 */  lh        $v1, -0x5a9c($v1)
+/* A7074 80110974 3C038016 */  lui       $v1, %hi(gCollisionStatus+0x14)
+/* A7078 80110978 8463A564 */  lh        $v1, %lo(gCollisionStatus+0x14)($v1)
 /* A707C 8011097C 2402FFFF */  addiu     $v0, $zero, -1
 /* A7080 80110980 10620005 */  beq       $v1, $v0, .L80110998
 /* A7084 80110984 30624000 */   andi     $v0, $v1, 0x4000
@@ -64,8 +64,8 @@ glabel entity_get_collision_flags
 /* A7090 80110990 50C20001 */  beql      $a2, $v0, .L80110998
 /* A7094 80110994 34A50040 */   ori      $a1, $a1, 0x40
 .L80110998:
-/* A7098 80110998 3C038016 */  lui       $v1, 0x8016
-/* A709C 8011099C 8463A562 */  lh        $v1, -0x5a9e($v1)
+/* A7098 80110998 3C038016 */  lui       $v1, %hi(gCollisionStatus+0x12)
+/* A709C 8011099C 8463A562 */  lh        $v1, %lo(gCollisionStatus+0x12)($v1)
 /* A70A0 801109A0 2402FFFF */  addiu     $v0, $zero, -1
 /* A70A4 801109A4 1062000B */  beq       $v1, $v0, .L801109D4
 /* A70A8 801109A8 30624000 */   andi     $v0, $v1, 0x4000

@@ -16,7 +16,7 @@ glabel SetActorIdleJumpGravity
 /* 199EE4 8026B604 0040802D */  daddu     $s0, $v0, $zero
 /* 199EE8 8026B608 2402FF81 */  addiu     $v0, $zero, -0x7f
 /* 199EEC 8026B60C 16020002 */  bne       $s0, $v0, .L8026B618
-/* 199EF0 8026B610 00000000 */   nop
+/* 199EF0 8026B610 00000000 */   nop      
 /* 199EF4 8026B614 8E500148 */  lw        $s0, 0x148($s2)
 .L8026B618:
 /* 199EF8 8026B618 8E250000 */  lw        $a1, ($s1)
