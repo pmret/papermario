@@ -1619,12 +1619,16 @@ typedef struct struct802E3650 {
 typedef struct struct802E4B10 {
     /* 0x00 */ u8 unk_00;
     /* 0x01 */ u8 unk_01;
-    /* 0x02 */ char unk_02[7];
+    /* 0x02 */ s8 unk_02;
+    /* 0x03 */ char unk_03[6];
     /* 0x09 */ u8 unk_09;
     /* 0x0A */ u8 unk_0A;
     /* 0x0B */ char unk_0B; // padding?
     /* 0x0C */ s32 unk_0C;
     /* 0x10 */ s32 unk_10;
+    /* 0x14 */ char unk_14[0xBC];
+    /* 0xD0 */ u16 unk_D0;
+    /* 0xD4 */ f32 unk_D4[0];
 } struct802E4B10;
 
 // END ENTITY-SPECIFIC STRUCTS

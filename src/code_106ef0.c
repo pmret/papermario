@@ -1,6 +1,14 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "code_106ef0", func_802E5670);
+f32 func_802E5670(struct802E4B10* arg0, s32 arg1) {
+    s32 temp_v0;
+
+    temp_v0 = arg0->unk_D0 - arg1;
+    if (arg0->unk_D0 - arg1 < 0) {
+        temp_v0 += 0x14;
+    }
+    return arg0->unk_D4[temp_v0];
+}
 
 void func_802E5690(s32 entityIndex) {
     s16 temp_a0;
@@ -73,7 +81,31 @@ void func_802E581C(Entity* entity) {
 // display list func
 INCLUDE_ASM(s32, "code_106ef0", func_802E586C);
 
-INCLUDE_ASM(s32, "code_106ef0", func_802E5E50);
+void func_802E5E50(Entity* entity) {
+    f32 clampedAngle;
+    struct802E4B10* temp_s0 = entity->dataBuf;
+
+    func_802E581C(entity);
+    if (temp_s0->unk_0A != 0) {
+        entity->unk_3C = NULL;
+    }
+
+    clampedAngle = clamp_angle(entity->rotation.y + 3.0);
+    entity->rotation.y = clampedAngle;
+    temp_s0->unk_D4[temp_s0->unk_D0] = clampedAngle;
+    if (++temp_s0->unk_D0 >= 0x15) {
+        temp_s0->unk_D0 = 0;
+    }
+
+    if (temp_s0->unk_0A == 0) {
+        if (D_8009A650[0] == 0) {
+            if (--temp_s0->unk_02 <= 0) {
+                temp_s0->unk_02 = 0x32;
+                func_80070550(3, entity->position.x, entity->position.y, entity->position.z, 22.0f, 8.0f, 4, 0x14);
+            }
+        }
+    }
+}
 
 void func_802E5F50(Entity* entity) {
     struct802E3650* temp;
