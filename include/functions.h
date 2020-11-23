@@ -33,7 +33,10 @@ s32 get_model_list_index_from_tree_index(s32 treeIndex);
 void get_model_center_and_size(s32 modelID, f32* centerX, f32* centerY, f32* centerZ, f32* sizeX, f32* sizeY,
                                f32* sizeZ);
 
+void func_80027088(s32);
+
 void func_8006FEF0(s32, f32, f32, f32, f32);
+void func_80071090(s32, f32, f32, f32, s32);
 void func_80071750(s32, f32, f32, f32, f32, s32);
 void func_80072950(s32, f32, f32, f32, f32, s32 time);
 
