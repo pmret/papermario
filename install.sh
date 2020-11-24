@@ -59,7 +59,7 @@ if cat /etc/os-release | grep ID=arch &> /dev/null; then
 fi
 
 # openSUSE (zypper)
-if command -v zypper &> /dev/null; then
+if cat /etc/os-release | grep ID=opensuse &> /dev/null; then
     echo "Installing packages for openSUSE (zypper)"
 
     sudo zypper -n install git python3 python3-devel python3-pip python3-setuptools gcc gcc-c++ glibc-devel make cross-mips-binutils zlib-devel libyaml-devel
@@ -94,7 +94,7 @@ if command -v zypper &> /dev/null; then
 fi
 
 # Alpine Linux (apk)
-if command -v apk &> /dev/null; then
+if cat /etc/os-release | grep ID=alpine &> /dev/null; then
     echo "Installing packages for Alpine Linux (apk)"
 
     # If the edge/community repo isn't present, it needs to be for astyle
