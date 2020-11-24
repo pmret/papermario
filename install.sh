@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Ubuntu (apt)
-if command -v apt &> /dev/null; then
+if cat /etc/os-release | grep ID=ubuntu &> /dev/null; then
     echo "Installing packages for Ubuntu (apt)"
 
     sudo apt install -y git python3 python3-pip python3-setuptools build-essential binutils-mips-linux-gnu zlib1g-dev libyaml-dev || exit 1
@@ -18,7 +18,7 @@ if command -v apt &> /dev/null; then
 fi
 
 # Arch Linux (pacman)
-if command -v pacman &> /dev/null; then
+if cat /etc/os-release | grep ID=arch &> /dev/null; then
     echo "Installing packages for Arch Linux (pacman)"
 
     # Upgrade existing packages (note: no --noconfirm)
