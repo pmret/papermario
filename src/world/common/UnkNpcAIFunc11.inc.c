@@ -16,7 +16,7 @@ static void UnkNpcAIFunc11(ScriptInstance* script, NpcAISettings* aiSettings, s3
         npc_move_heading(npc, npc->moveSpeed, npc->yaw);
         func_8003D660(npc, 1);
         npc->duration--;
-        if ((npc->duration << 0x10) == 0) {
+        if (npc->duration == 0) {
             script->functionTemp[0].s = 12;
         }
     }

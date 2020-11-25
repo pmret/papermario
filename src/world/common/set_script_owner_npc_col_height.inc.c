@@ -1,4 +1,5 @@
 #include "common.h"
+#include "map.h"
 
 static void set_script_owner_npc_col_height(ScriptInstance* script) {
     Enemy* enemy = script->owner1.enemy;

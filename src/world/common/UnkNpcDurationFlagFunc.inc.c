@@ -6,7 +6,7 @@ static void UnkNpcDurationFlagFunc(ScriptInstance* script) {
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
     npc->duration--;
-    if ((npc->duration << 0x10) == 0) {
+    if (npc->duration == 0) {
         if (enemy->unk_B0 & 0x80) {
             script->functionTemp[0].s = 15;
         } else {

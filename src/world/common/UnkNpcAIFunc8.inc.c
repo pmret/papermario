@@ -6,7 +6,7 @@ static void UnkNpcAIFunc8(ScriptInstance* script) {
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
     npc->duration--;
-    if ((npc->duration << 0x10) <= 0) {
+    if (npc->duration <= 0) {
         enemy->varTable[0] = 4;
         npc->currentAnim = enemy->animList[0];
         npc->duration = enemy->varTable[3];
