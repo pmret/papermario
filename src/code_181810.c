@@ -191,7 +191,28 @@ ApiStatus func_80253734(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_181810", func_802537C0);
+ApiStatus func_802537C0(ScriptInstance *script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 a0 = *args++;
+    s32 a1 = *args++;
+    f32 t1;
+    f32 t2;
+    s32 t3;
+
+    // While loop may not be necessary in the future
+    do { func_80137DC0(1, &t1, &t2); } while (0);
+
+    if (t2 < 128.0f) {
+        t3 = 0;
+    } else {
+        t3 = 1;
+    }
+
+    set_variable(script, a0, 1);
+    set_variable(script, a1, t3);
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus PlaySoundAtActor(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -209,9 +230,40 @@ ApiStatus PlaySoundAtActor(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_181810", PlaySoundAtPart);
+ApiStatus PlaySoundAtPart(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    ActorID actorID = get_variable(script, *args++);
+    s32 partIndex = get_variable(script, *args++);
+    Bytecode soundID = *args++;
+    ActorPart* part;
 
-INCLUDE_ASM(s32, "code_181810", PlayLoopingSoundAtActor);
+    if (actorID == ActorID_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    part = get_actor_part(get_actor(actorID), partIndex);
+    play_sound_at_position(soundID, 0, part->currentPos.x, part->currentPos.y, part->currentPos.z);
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus PlayLoopingSoundAtActor(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    ActorID actorID = get_variable(script, *args++);
+    s32 idx = get_variable(script, *args++);
+    Bytecode soundID = *args++;
+    Actor* actor;
+
+    if (actorID == ActorID_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    actor = get_actor(actorID);
+    actor->x[idx] = soundID;
+    play_sound_at_position(soundID, 0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus StopLoopingSoundAtActor(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

@@ -109,6 +109,7 @@ void func_8011B7C0(u16, s32, s32);
 AnimatedMesh* get_anim_mesh(s32 arg0);
 void func_80137D88(s32, f32);
 void func_80137DA4(s32, f32);
+void func_80137DC0(s32, f32*, f32*);
 s32 func_80137E10(s32, u8, u8, u8);
 void func_80137E4C(s32, s32, s32, s32);
 s32 rand_int(s32);
