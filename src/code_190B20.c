@@ -124,9 +124,9 @@ INCLUDE_ASM(s32, "code_190B20", lookup_status_duration_mod); // exactly (?) the 
 INCLUDE_ASM(s32, "code_190B20", inflict_status);
 
 s32 inflict_partner_ko(Actor* target, s32 statusTypeKey, s32 duration) {
-    if (statusTypeKey == Status_DAZE) {
+    if (statusTypeKey == Debuff_DAZE) {
         if (statusTypeKey != target->koStatus) {
-            inflict_status(target, Status_DAZE);
+            inflict_status(target, Debuff_DAZE);
             play_sound(0x2107);
         } else {
             target->koDuration += duration;

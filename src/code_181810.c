@@ -190,9 +190,32 @@ ApiStatus func_80253B30(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "code_181810", MakeStatusField);
 
-INCLUDE_ASM(s32, "code_181810", is_actor_hp_bar_visible);
+s32 is_actor_hp_bar_visible(Actor* actor) {
+    BattleStatus* battleStatus = BATTLE_STATUS;
+    s32 flags;
 
-INCLUDE_ASM(s32, "code_181810", is_actortype_hpbar_visible);
+    if (is_ability_active(Ability_PEEKABOO)) {
+        return TRUE;
+    }
+
+    flags = get_global_byte((actor->actorType >> 3) + 365);
+    if (actor->flags & 0x1000) {
+        flags |= battleStatus->tattleFlags[actor->actorType >> 3];
+    }
+    return (flags >> (actor->actorType & 7)) & 1;
+}
+
+s32 is_actortype_hpbar_visible(s32 actorType) {
+    BattleStatus* battleStatus = BATTLE_STATUS;
+    s32 idx;
+
+    if (is_ability_active(Ability_PEEKABOO)) {
+        return TRUE;
+    }
+
+    idx = actorType / 8;
+    return ((get_global_byte(idx + 365) | battleStatus->tattleFlags[idx]) >> (actorType - (idx * 8))) & 1;
+}
 
 INCLUDE_ASM(s32, "code_181810", save_tattle_flags);
 
@@ -217,7 +240,18 @@ INCLUDE_ASM(s32, "code_181810", MultiplyVec2ByActorScale);
 
 INCLUDE_ASM(s32, "code_181810", MultiplyVec3ByActorScale);
 
-INCLUDE_ASM(s32, "code_181810", ApplyShrinkFromOwner);
+ApiStatus ApplyShrinkFromOwner(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Actor* actor = get_actor(script->owner1.actorID);
+    s32 amt = get_variable(script, *args);
+
+    if (actor->debuff == Debuff_SHRINK && amt > 0) {
+        amt /= 2;
+    }
+
+    set_variable(script, *args, amt);
+    return ApiStatus_DONE2;
+}
 
 ApiStatus StartRumble(ScriptInstance* script, s32 isInitialCall) {
     start_rumble_type(get_variable(script, *script->ptrReadPos));
