@@ -1,6 +1,6 @@
 #include "kmr_12.h"
 
-EntryList M(entryList) = {
+Vec4f M(entryList)[] = {
     { -126.0f, 0.0f, 12.0f, 90.0f }, // west, towards Red/Blue Goomba miniboss room
     { 471.0f, 0.0f, 12.0f, 270.0f }, // east, towards Goomba King's Fortress
 };

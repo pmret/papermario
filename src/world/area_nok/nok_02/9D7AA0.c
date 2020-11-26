@@ -4,21 +4,21 @@ INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80240A80_9D7AA0);
 
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80240BD8_9D7BF8);
 
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80240E80_9D7EA0);
+#include "world/common/UnkNpcAIFunc1.inc.c"
 
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80240F40_9D7F60);
 
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_802410FC_9D811C);
 
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_802411B0_9D81D0);
+#include "world/common/NpcJumpFunc2.inc.c"
 
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80241224_9D8244);
+# include "world/common/NpcJumpFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_8024129C_9D82BC);
 
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_802413CC_9D83EC);
 
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_802414EC_9D850C);
+#include "world/common/UnkNpcDurationFlagFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80241554_9D8574);
 
@@ -86,7 +86,7 @@ INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80242C5C_9D9C7C);
 
 #include "world/common/SetManyVars.inc.c"
 
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80242DE8_9D9E08);
+#include "world/common/UnkYawFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80242F74_9D9F94);
 

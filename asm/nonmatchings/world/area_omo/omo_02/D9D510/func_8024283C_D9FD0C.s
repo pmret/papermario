@@ -186,15 +186,15 @@ glabel func_8024283C_D9FD0C
 /* D9FFC0 80242AF0 0260202D */   daddu    $a0, $s3, $zero
 /* D9FFC4 80242AF4 08090ACD */  j         .L80242B34
 /* D9FFC8 80242AF8 00000000 */   nop      
-/* D9FFCC 80242AFC 0C09075F */  jal       func_80241D7C_D9F24C
+/* D9FFCC 80242AFC 0C09075F */  jal       UnkSetDurationFunc
 /* D9FFD0 80242B00 0260202D */   daddu    $a0, $s3, $zero
 /* D9FFD4 80242B04 08090ACD */  j         .L80242B34
 /* D9FFD8 80242B08 00000000 */   nop      
-/* D9FFDC 80242B0C 0C090770 */  jal       func_80241DC0_D9F290
+/* D9FFDC 80242B0C 0C090770 */  jal       UnkNpcAIFunc9
 /* D9FFE0 80242B10 0260202D */   daddu    $a0, $s3, $zero
 /* D9FFE4 80242B14 08090ACD */  j         .L80242B34
 /* D9FFE8 80242B18 00000000 */   nop      
-/* D9FFEC 80242B1C 0C090798 */  jal       func_80241E60_D9F330
+/* D9FFEC 80242B1C 0C090798 */  jal       UnkDurationCheck
 /* D9FFF0 80242B20 0260202D */   daddu    $a0, $s3, $zero
 /* D9FFF4 80242B24 08090ACD */  j         .L80242B34
 /* D9FFF8 80242B28 00000000 */   nop      

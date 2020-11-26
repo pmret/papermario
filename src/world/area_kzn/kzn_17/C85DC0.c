@@ -1,12 +1,12 @@
 #include "kzn_17.h"
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_17/C85DC0", func_80240310_C85DC0);
+#include "world/common/UnkNpcAIFunc6.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_17/C85DC0", func_8024037C_C85E2C);
+#include "world/common/UnkNpcAIFunc7.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_17/C85DC0", func_802403EC_C85E9C);
+#include "world/common/UnkNpcAIFunc8.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_17/C85DC0", func_802404C4_C85F74);
+#include "world/common/UnkNpcAIFunc5.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_17/C85DC0", func_80240518_C85FC8);
 
@@ -58,7 +58,7 @@ INCLUDE_ASM(s32, "world/area_kzn/kzn_17/C85DC0", func_8024296C_C8841C);
 
 #include "world/common/SetManyVars.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_17/C85DC0", func_80242AF8_C885A8);
+#include "world/common/UnkYawFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_17/C85DC0", func_80242C84_C88734);
 

@@ -4,21 +4,21 @@ INCLUDE_ASM(s32, "world/area_flo/flo_00/C9DF60", func_80240040_C9DF60);
 
 INCLUDE_ASM(s32, "world/area_flo/flo_00/C9DF60", func_80240198_C9E0B8);
 
-INCLUDE_ASM(s32, "world/area_flo/flo_00/C9DF60", func_80240440_C9E360);
+#include "world/common/UnkNpcAIFunc1.inc.c"
 
 INCLUDE_ASM(s32, "world/area_flo/flo_00/C9DF60", func_80240500_C9E420);
 
 INCLUDE_ASM(s32, "world/area_flo/flo_00/C9DF60", func_802406BC_C9E5DC);
 
-INCLUDE_ASM(s32, "world/area_flo/flo_00/C9DF60", func_80240770_C9E690);
+#include "world/common/NpcJumpFunc2.inc.c"
 
-INCLUDE_ASM(s32, "world/area_flo/flo_00/C9DF60", func_802407E4_C9E704);
+# include "world/common/NpcJumpFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_flo/flo_00/C9DF60", func_8024085C_C9E77C);
 
 INCLUDE_ASM(s32, "world/area_flo/flo_00/C9DF60", func_8024098C_C9E8AC);
 
-INCLUDE_ASM(s32, "world/area_flo/flo_00/C9DF60", func_80240AAC_C9E9CC);
+#include "world/common/UnkNpcDurationFlagFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_flo/flo_00/C9DF60", func_80240B14_C9EA34);
 

@@ -33,7 +33,10 @@ s32 get_model_list_index_from_tree_index(s32 treeIndex);
 void get_model_center_and_size(s32 modelID, f32* centerX, f32* centerY, f32* centerZ, f32* sizeX, f32* sizeY,
                                f32* sizeZ);
 
+void func_80027088(s32);
+
 void func_8006FEF0(s32, f32, f32, f32, f32);
+void func_80071090(s32, f32, f32, f32, s32);
 void func_80071750(s32, f32, f32, f32, f32, s32);
 void func_80072950(s32, f32, f32, f32, f32, s32 time);
 
@@ -43,6 +46,7 @@ void get_collider_center(s32 colliderID, f32* x, f32* y, f32* z);
 s32 is_trigger_bound(Trigger*, Bytecode* script);
 Trigger* create_trigger(TriggerDefinition* def);
 s32 _bound_script_trigger_handler(Trigger* trigger);
+Trigger* get_trigger_by_id(s32 triggerID);
 
 Actor* get_actor(s32 actorID);
 ActorPart* get_actor_part(Actor* actor, s32 partIndex);
@@ -73,6 +77,7 @@ void set_curtain_scale_goal(f32 scale);
 void set_curtain_fade(f32 scale);
 
 void fx_walk_normal(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4, s32 arg5);
+void fx_emote(s32, Npc*, s32, f32, f32, f32, f32, s32, s32*);
 
 f32 func_800E0088(f32, f32);
 s32 func_800EB168(s32);
@@ -92,6 +97,7 @@ void enable_partner_flying(Npc* partner, s32 val);
 void update_player_move_history(Npc* partner);
 s32 is_current_partner_flying(void);
 void func_800ED5D0(Npc* partner);
+void clear_partner_move_history(Npc* partner);
 
 s32 func_800EF394(f32);
 s32 does_script_exist(s32 id);
@@ -125,6 +131,8 @@ Npc* get_npc_safe(NpcId npcId);
 Npc* get_npc_unsafe(NpcId npcId);
 Npc* resolve_npc(ScriptInstance* script, NpcId npcIdOrPtr);
 void set_npc_yaw(Npc* npcPtr, f32 angle);
+void npc_move_heading(Npc* npc, f32 speed, f32 yaw);
+void disable_npc_blur(Npc* npc);
 
 f32 dist2D(f32 ax, f32 ay, f32 bx, f32 by);
 f32 dist3D(f32 ax, f32 ay, f32 az, f32 bx, f32 by, f32 bz);
@@ -133,6 +141,7 @@ void add_vec2D_polar(f32* x, f32* y, f32 r, f32 theta);
 s32 func_801499EC(s32 soundID, s32 arg1, f32 arg2, f32 arg3, f32 arg4);
 s32 play_sound_at_position(s32 soundID, s32 value2, f32 posX, f32 posY, f32 posZ);
 s32 set_music_track(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s16 volume);
+s32 func_8014AA54(s32 playerIndex, s32 arg1, s16 arg2);
 
 ScriptInstance* get_script_by_index(s32 index);
 

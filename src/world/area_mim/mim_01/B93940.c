@@ -1,12 +1,12 @@
 #include "mim_01.h"
 
-INCLUDE_ASM(s32, "world/area_mim/mim_01/B93940", func_80240500_B93940);
+#include "world/common/UnkNpcAIFunc6.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mim/mim_01/B93940", func_8024056C_B939AC);
+#include "world/common/UnkNpcAIFunc7.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mim/mim_01/B93940", func_802405DC_B93A1C);
+#include "world/common/UnkNpcAIFunc8.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mim/mim_01/B93940", func_802406B4_B93AF4);
+#include "world/common/UnkNpcAIFunc5.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mim/mim_01/B93940", func_80240708_B93B48);
 

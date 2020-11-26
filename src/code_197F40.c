@@ -1,7 +1,7 @@
 #include "common.h"
 
 s32 count_targets(Actor* actor, s32 targetHomeIndex, s32 targetSelectionFlags) {
-    BattleStatus* battleStatus = &gBattleStatus;
+    BattleStatus* battleStatus = BATTLE_STATUS;
 
     battleStatus->targetHomeIndex = targetHomeIndex;
     battleStatus->currentTargetListFlags = targetSelectionFlags;
@@ -36,11 +36,11 @@ s32 get_nearest_home_index(f32 x, f32 y, f32 z) {
     return yVal | (xVal << 2);
 }
 
-INCLUDE_ASM(void, "code_197F40", set_goal_pos_to_part, f32* goalPos, ActorId target, s32 partIndex);
+INCLUDE_ASM(void, "code_197F40", set_goal_pos_to_part, f32* goalPos, ActorID target, s32 partIndex);
 
 INCLUDE_ASM(s32, "code_197F40", set_part_goal_to_actor_part);
 
-void set_actor_current_position(ActorId actorID, f32 x, f32 y, f32 z) {
+void set_actor_current_position(ActorID actorID, f32 x, f32 y, f32 z) {
     Actor* actor = get_actor(actorID);
 
     actor->currentPos.x = x;
@@ -50,7 +50,7 @@ void set_actor_current_position(ActorId actorID, f32 x, f32 y, f32 z) {
 
 INCLUDE_ASM(s32, "code_197F40", set_part_absolute_position);
 
-void set_actor_home_position(ActorId actorID, f32 x, f32 y, f32 z) {
+void set_actor_home_position(ActorID actorID, f32 x, f32 y, f32 z) {
     Actor* actor = get_actor(actorID);
 
     actor->homePos.x = x;
@@ -77,10 +77,10 @@ INCLUDE_ASM(s32, "code_197F40", func_80269E80);
 INCLUDE_ASM(s32, "code_197F40", func_80269EAC);
 
 ApiStatus SetGoalToHome(ScriptInstance* script, s32 isInitialCall) {
-    ActorId actorID = get_variable(script, *script->ptrReadPos);
+    ActorID actorID = get_variable(script, *script->ptrReadPos);
     Actor* actor;
 
-    if (actorID == ActorId_SELF) {
+    if (actorID == ActorID_SELF) {
         actorID = script->owner1.actorID;
     }
 
@@ -93,17 +93,17 @@ ApiStatus SetGoalToHome(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus SetIdleGoalToHome(ScriptInstance* script, s32 isInitialCall) {
-    ActorId actorID = get_variable(script, *script->ptrReadPos);
+    ActorID actorID = get_variable(script, *script->ptrReadPos);
     Actor* actor;
 
-    if (actorID == ActorId_SELF) {
+    if (actorID == ActorID_SELF) {
         actorID = script->owner1.actorID;
     }
 
     actor = get_actor(actorID);
-    actor->flyGoalPos.x = actor->homePos.x;
-    actor->flyGoalPos.y = actor->homePos.y;
-    actor->flyGoalPos.z = actor->homePos.z;
+    actor->flyPos.goal.x = actor->homePos.x;
+    actor->flyPos.goal.y = actor->homePos.y;
+    actor->flyPos.goal.z = actor->homePos.z;
 
     return ApiStatus_DONE2;
 }
@@ -112,11 +112,11 @@ INCLUDE_ASM(s32, "code_197F40", SetGoalToIndex);
 
 ApiStatus GetIndexFromPos(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorId actorID = get_variable(script, *args++);
+    ActorID actorID = get_variable(script, *args++);
     s32 a1 = *args++;
     Actor* actor;
 
-    if (actorID == ActorId_SELF) {
+    if (actorID == ActorID_SELF) {
         actorID = script->owner1.actorID;
     }
 
@@ -128,11 +128,11 @@ ApiStatus GetIndexFromPos(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus GetIndexFromHome(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorId actorID = get_variable(script, *args++);
+    ActorID actorID = get_variable(script, *args++);
     s32 a1 = *args++;
     Actor* actor;
 
-    if (actorID == ActorId_SELF) {
+    if (actorID == ActorID_SELF) {
         actorID = script->owner1.actorID;
     }
 
@@ -144,12 +144,12 @@ ApiStatus GetIndexFromHome(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus CountPlayerTargets(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorId actorID = get_variable(script, *args++);
+    ActorID actorID = get_variable(script, *args++);
     s32 targetSelectionFlags = *args++;
     s32 outVar = *args++;
     Actor* actor;
 
-    if (actorID == ActorId_SELF) {
+    if (actorID == ActorID_SELF) {
         actorID = script->owner1.actorID;
     }
 
@@ -162,11 +162,11 @@ ApiStatus CountPlayerTargets(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus ForceHomePos(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorId actorID = get_variable(script, *args++);
+    ActorID actorID = get_variable(script, *args++);
     f32 x, y, z;
     Actor* actor;
 
-    if (actorID == ActorId_SELF) {
+    if (actorID == ActorID_SELF) {
         actorID = script->owner1.actorID;
     }
 
@@ -187,11 +187,11 @@ ApiStatus ForceHomePos(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus SetHomePos(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorId actorID = get_variable(script, *args++);
+    ActorID actorID = get_variable(script, *args++);
     f32 x, y, z;
     Actor* actor;
 
-    if (actorID == ActorId_SELF) {
+    if (actorID == ActorID_SELF) {
         actorID = script->owner1.actorID;
     }
 
@@ -209,10 +209,10 @@ ApiStatus SetHomePos(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus SetGoalToTarget(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorId actorID = get_variable(script, *args++);
+    ActorID actorID = get_variable(script, *args++);
     Actor* actor;
 
-    if (actorID == ActorId_SELF) {
+    if (actorID == ActorID_SELF) {
         actorID = script->owner1.actorID;
     }
     actor = get_actor(actorID);
@@ -222,23 +222,255 @@ ApiStatus SetGoalToTarget(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_197F40", SetPartGoalToTarget);
+ApiStatus SetPartGoalToTarget(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    ActorID actorID = get_variable(script, *args++);
+    s32 partIndex = get_variable(script, *args++);
+    Actor* actor;
 
-INCLUDE_ASM(s32, "code_197F40", SetGoalToFirstTarget);
+    if (actorID == ActorID_SELF) {
+        actorID = script->owner1.actorID;
+    }
+    actor = get_actor(actorID);
 
-INCLUDE_ASM(s32, "code_197F40", SetGoalPos);
+    set_part_goal_to_actor_part(get_actor_part(actor, partIndex)->movement, actor->targetActorID, actor->targetPartIndex);
 
-INCLUDE_ASM(s32, "code_197F40", SetIdleGoal);
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "code_197F40", AddGoalPos);
+ApiStatus SetGoalToFirstTarget(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    ActorID actorID = get_variable(script, *args++);
+    Actor* actor;
+    SelectableTarget* target;
 
-INCLUDE_ASM(s32, "code_197F40", GetGoalPos);
+    if (actorID == ActorID_SELF) {
+        actorID = script->owner1.actorID;
+    }
+    actor = get_actor(actorID);
 
-INCLUDE_ASM(s32, "code_197F40", GetIdleGoal);
+    target = &actor->targetData[actor->targetIndexList[0]];
+    set_goal_pos_to_part(&actor->movePos, target->actorID, target->partID);
 
-INCLUDE_ASM(s32, "code_197F40", GetPartTarget);
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "code_197F40", GetActorPos);
+ApiStatus SetGoalPos(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    ActorID actorID = get_variable(script, *args++);
+    Actor* actor;
+    ActorMovePos* movePos;
+    f32 x, y, z;
+
+    if (actorID == ActorID_SELF) {
+        actorID = script->owner1.actorID;
+    }
+    actor = get_actor(actorID);
+    movePos = &actor->movePos;
+
+    if (*args == -12345678) {
+        x = actor->movePos.goal.x;
+    } else {
+        x = get_variable(script, *args);
+    }
+
+    *args++;
+    if (*args == -12345678) {
+        y = movePos->goal.y;
+    } else {
+        y = get_variable(script, *args);
+    }
+
+    *args++;
+    if (*args == -12345678) {
+        z = movePos->goal.z;
+    } else {
+        z = get_variable(script, *args);
+    }
+
+    movePos->goal.x = x;
+    movePos->goal.y = y;
+    movePos->goal.z = z;
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus SetIdleGoal(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    ActorID actorID = get_variable(script, *args++);
+    Actor* actor;
+    ActorFlyPos* flyPos;
+    f32 x, y, z;
+
+    if (actorID == ActorID_SELF) {
+        actorID = script->owner1.actorID;
+    }
+    actor = get_actor(actorID);
+    flyPos = &actor->flyPos;
+
+    if (*args == -12345678) {
+        x = actor->flyPos.goal.x;
+    } else {
+        x = get_variable(script, *args);
+    }
+
+    *args++;
+    if (*args == -12345678) {
+        y = flyPos->goal.y;
+    } else {
+        y = get_variable(script, *args);
+    }
+
+    *args++;
+    if (*args == -12345678) {
+        z = flyPos->goal.z;
+    } else {
+        z = get_variable(script, *args);
+    }
+
+    flyPos->goal.x = x;
+    flyPos->goal.y = y;
+    flyPos->goal.z = z;
+    return ApiStatus_DONE2;
+}
+
+ApiStatus AddGoalPos(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    ActorID actorID = get_variable(script, *args++);
+    Actor* actor;
+    f32 x, y, z;
+
+    if (actorID == ActorID_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    x = get_float_variable(script, *args++);
+    y = get_float_variable(script, *args++);
+    z = get_float_variable(script, *args++);
+
+    actor = get_actor(actorID);
+    actor->movePos.goal.x += x;
+    actor->movePos.goal.y += y;
+    actor->movePos.goal.z += z;
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus GetGoalPos(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    ActorID actorID = get_variable(script, *args++);
+    Actor* actor;
+    s32 outX, outY, outZ;
+    s32 x, y, z;
+
+    if (actorID == ActorID_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    actor = get_actor(actorID);
+
+    outX = *args++;
+    outY = *args++;
+    outZ = *args++;
+
+    x = actor->movePos.goal.x;
+    y = actor->movePos.goal.y;
+    z = actor->movePos.goal.z;
+
+    set_variable(script, outX, x);
+    set_variable(script, outY, y);
+    set_variable(script, outZ, z);
+
+    return ApiStatus_DONE2;
+}
+
+// should this be renamed to GetFlyGoal ?
+ApiStatus GetIdleGoal(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    ActorID actorID = get_variable(script, *args++);
+    Actor* actor;
+    s32 outX, outY, outZ;
+    s32 x, y, z;
+
+    if (actorID == ActorID_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    actor = get_actor(actorID);
+
+    outX = *args++;
+    outY = *args++;
+    outZ = *args++;
+
+    x = actor->flyPos.goal.x;
+    y = actor->flyPos.goal.y;
+    z = actor->flyPos.goal.z;
+
+    set_variable(script, outX, x);
+    set_variable(script, outY, y);
+    set_variable(script, outZ, z);
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus GetPartTarget(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    ActorID actorID = get_variable(script, *args++);
+    s32 partIndex = get_variable(script, *args++);
+    Actor* actor;
+    ActorPart* actorPart;
+    s32 outX, outY, outZ;
+    s32 x, y, z;
+
+    if (actorID == ActorID_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    actor = get_actor(actorID);
+    actorPart = get_actor_part(actor, partIndex);
+
+    outX = *args++;
+    outY = *args++;
+    outZ = *args++;
+
+    x = actorPart->movement->goalPos.x;
+    y = actorPart->movement->goalPos.y;
+    z = actorPart->movement->goalPos.z;
+
+    set_variable(script, outX, x);
+    set_variable(script, outY, y);
+    set_variable(script, outZ, z);
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus GetActorPos(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    ActorID actorID = get_variable(script, *args++);
+    Actor* actor;
+    s32 outX, outY, outZ;
+    s32 x, y, z;
+
+    if (actorID == ActorID_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    actor = get_actor(actorID);
+
+    outX = *args++;
+    outY = *args++;
+    outZ = *args++;
+
+    x = actor->currentPos.x;
+    y = actor->currentPos.y;
+    z = actor->currentPos.z;
+
+    set_variable(script, outX, x);
+    set_variable(script, outY, y);
+    set_variable(script, outZ, z);
+
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_197F40", GetPartOffset);
 
@@ -405,14 +637,14 @@ ApiStatus ActorExists(ScriptInstance* script, s32 isInitialCall) {
     Bytecode isExist;
     Actor* partner = gBattleStatus.partnerActor;
     Bytecode* args = script->ptrReadPos;
-    ActorId actorID = get_variable(script, *args++);
+    ActorID actorID = get_variable(script, *args++);
 
-    if (actorID == ActorId_SELF) {
+    if (actorID == ActorID_SELF) {
         actorID = script->owner1.actorID;
     }
 
     isExist = get_actor(actorID) != NULL;
-    if ((actorID == ActorId_PARTNER) && (partner == NULL)) {
+    if ((actorID == ActorID_PARTNER) && (partner == NULL)) {
         isExist = FALSE;
     }
 
@@ -438,7 +670,7 @@ ApiStatus SetBattleInputMask(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus SetBattleInputButtons(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    BattleStatus* battleStatus = &gBattleStatus;
+    BattleStatus* battleStatus = BATTLE_STATUS;
     s32 currentButtonsDown = *args++;
     s32 currentButtonsPressed = *args++;
     s32 currentButtonsHeld = *args;
@@ -637,7 +869,7 @@ INCLUDE_ASM(s32, "code_197F40", calc_player_damage_enemy);
 INCLUDE_ASM(s32, "code_197F40", dispatch_damage_event_player);
 
 void dispatch_damage_event_player_0(s32 damageAmount, Event event) {
-    BattleStatus* battleStatus = &gBattleStatus;
+    BattleStatus* battleStatus = BATTLE_STATUS;
 
     battleStatus->currentAttackElement = Element_END;
     battleStatus->unk_19A = 0;

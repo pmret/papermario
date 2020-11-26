@@ -1,6 +1,6 @@
 #include "pra_05.h"
 
-INCLUDE_ASM(s32, "world/area_pra/pra_05/D55BD0", func_80240020_D55BD0);
+#include "world/common/UnkFunc2.inc.c"
 
 INCLUDE_ASM(s32, "world/area_pra/pra_05/D55BD0", func_80240054_D55C04);
 
@@ -20,11 +20,11 @@ INCLUDE_ASM(s32, "world/area_pra/pra_05/D55BD0", func_80240870_D56420);
 
 INCLUDE_ASM(s32, "world/area_pra/pra_05/D55BD0", func_80240D3C_D568EC);
 
-INCLUDE_ASM(s32, "world/area_pra/pra_05/D55BD0", func_80240E84_D56A34);
+#include "world/common/SetPartnerFlagsA0000.inc.c"
 
-INCLUDE_ASM(s32, "world/area_pra/pra_05/D55BD0", func_80240EB8_D56A68);
+#include "world/common/SetPartnerFlags80000.inc.c"
 
-INCLUDE_ASM(s32, "world/area_pra/pra_05/D55BD0", func_80240EEC_D56A9C);
+#include "world/common/SetPartnerFlags20000.inc.c"
 
 INCLUDE_ASM(s32, "world/area_pra/pra_05/D55BD0", func_80240F20_D56AD0);
 

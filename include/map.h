@@ -11,7 +11,7 @@
 
 #define ENTRY_COUNT(entryList) (sizeof(entryList) / sizeof(Vec4f))
 
-typedef Vec4f EntryList[];
+typedef Vec4f EntryList[0];
 
 /// Fields other than main, entryList, entryCount, background, and tattle are initialised when the map loads.
 typedef struct MapConfig {
@@ -55,6 +55,7 @@ typedef struct Area {
     /* 0x08 */ char* id; ///< "area_xxx"
     /* 0x0C */ char* name; ///< JP debug name.
 } Area; // size = 0x10
+
 typedef struct NpcAISettings {
     /* 0x00 */ f32 moveSpeed;
     /* 0x04 */ s32 moveTime;
@@ -220,7 +221,9 @@ typedef struct Enemy {
     /* 0x60 */ ScriptID defeatScriptID;
     /* 0x64 */ char unk_64[8];
     /* 0x6C */ s32 varTable[16];
-    /* 0xAC */ char unk_AC[9];
+    /* 0xAC */ char unk_AC[4];
+    /* 0xB0 */ s32 unk_B0;
+    /* 0xB4 */ char unk_B4;
     /* 0xB5 */ s8 unk_B5;
     /* 0xB6 */ char unk_B6[2];
     /* 0xB8 */ s32 unkSettings24;
@@ -244,6 +247,9 @@ typedef struct {
 #define NPC_GROUP_LIST_END() { 0, 0, 0 }
 
 Enemy* get_enemy(NpcId npcId);
+MapConfig* get_current_map_header(void);
+
+s32 func_800490B4(s32 arg0, Enemy* arg1, f32 arg2, s32 arg3, s32 arg4);
 
 /// Zero-terminated.
 Area gAreas[29];

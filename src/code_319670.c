@@ -2,7 +2,14 @@
 
 INCLUDE_ASM(s32, "code_319670", func_802BD100_319670);
 
-INCLUDE_ASM(s32, "code_319670", func_802BD148);
+ApiStatus func_802BD148(ScriptInstance* script, s32 isInitialCall) {
+    s32 unk = script->owner2.npc; // todo what is this
+
+    if (isInitialCall) {
+        func_800EECC4(unk);
+    }
+    return func_800EECE8(unk) != 0;
+}
 
 INCLUDE_ASM(s32, "code_319670", func_802BD180);
 
@@ -12,7 +19,14 @@ INCLUDE_ASM(s32, "code_319670", func_802BD558);
 
 INCLUDE_ASM(s32, "code_319670", func_802BD660);
 
-INCLUDE_ASM(s32, "code_319670", func_802BE8D4);
+ApiStatus func_802BE8D4(ScriptInstance* script, s32 isInitialCall) {
+    s32 unk = script->owner2.npc; // todo what is this
+
+    if (isInitialCall) {
+        func_800EE994(unk);
+    }
+    return func_800EE9B8(unk) != 0;
+}
 
 INCLUDE_ASM(s32, "code_319670", func_802BE90C);
 

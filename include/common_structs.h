@@ -102,7 +102,7 @@ typedef struct Npc {
     /* 0x084 */ char unk_84[4];
     /* 0x088 */ s16 isFacingAway;
     /* 0x08A */ s16 yawCamOffset;
-    /* 0x08C */ char unk_8C[2];
+    /* 0x08C */ s16 unk_8C;
     /* 0x08E */ s16 duration; /* formerly interp_counter */
     /* 0x090 */ Vec3s homePos;
     /* 0x096 */ char unk_96[12];
@@ -202,13 +202,19 @@ typedef struct Trigger {
     /* 0x14 */ struct ScriptInstance* runningScript;
     /* 0x18 */ s32 priority;
     /* 0x1C */ s32 scriptVars[3];
-    /* 0x28 */ char unk_28[8];
+    /* 0x28 */ char unk_28[4];
+    /* 0x2C */ s32 unk_2C;
     /* 0x30 */ u8 unk_30;
     /* 0x31 */ char unk_31[3];
     /* 0x34 */ ScriptID runningScriptID;
 } Trigger; // size = 0x38
 
 typedef Trigger* TriggerList[MAX_TRIGGERS];
+
+typedef union X32 {
+    s32 s;
+    f32 f;
+} X32;
 
 typedef struct ScriptInstance {
     /* 0x000 */ u8 state;
@@ -227,10 +233,7 @@ typedef struct ScriptInstance {
     /* 0x064 */ struct ScriptInstance* blockingParent; /* parent? */
     /* 0x068 */ struct ScriptInstance* childScript;
     /* 0x06C */ struct ScriptInstance* parentScript; /* brother? */
-    /* 0x070 */ union {
-        s32 s;
-        f32 f;
-    } functionTemp[4];
+    /* 0x070 */ X32 functionTemp[4];
     /* 0x080 */ ApiFunc callFunction;
     /* 0x084 */ s32 varTable[16];
     /* 0x0C4 */ s32 varFlags[3];
@@ -900,7 +903,9 @@ typedef struct GameStatus {
     /* 0x07D */ s8 unk_7D;
     /* 0x07E */ u8 peachFlags; /* (1 = isPeach, 2 = isTransformed, 4 = hasUmbrella) */
     /* 0x07F */ u8 peachDisguise; /* (1 = koopatrol, 2 = hammer bros, 3 = clubba) */
-    /* 0x080 */ char unk_80[6];
+    /* 0x080 */ char unk_80[4];
+    /* 0x084 */ s8 unk_84;
+    /* 0x085 */ char unk_85;
     /* 0x086 */ s16 areaID; /* Created by retype action */
     /* 0x088 */ s16 prevArea;
     /* 0x08A */ s16 changedArea; /* (1 = yes) */
@@ -1008,7 +1013,7 @@ typedef struct SelectableTarget {
 
 typedef struct ActorPartMovement {
     /* 0x00 */ char unk_00[12];
-    /* 0x0C */ f32 goalPos[3];
+    /* 0x0C */ Vec3f goalPos;
     /* 0x18 */ char unk_18[12];
     /* 0x24 */ f32 jumpScale;
     /* 0x28 */ f32 moveSpeed;
@@ -1204,6 +1209,12 @@ typedef struct ActorMovePos {
     /* 0x18 */ Vec3f end;
 } ActorMovePos; // size = 0x20;
 
+typedef struct ActorFlyPos {
+    /* 0x00 */ Vec3f current;
+    /* 0x0C */ Vec3f goal;
+    /* 0x18 */ Vec3f temp; /* used for start in fly functions, end in flyrun functions */
+} ActorFlyPos; // size = 0x20;
+
 typedef struct Actor {
     /* 0x000 */ s32 flags;
     /* 0x004 */ char unk_04[4];
@@ -1226,9 +1237,7 @@ typedef struct Actor {
     /* 0x077 */ u8 jumpPartIndex;
     /* 0x078 */ char unk_78[16];
     /* 0x088 */ s32 varTable[16];
-    /* 0x0C8 */ Vec3f flyCurrentPos;
-    /* 0x0D4 */ Vec3f flyGoalPos;
-    /* 0x0E0 */ Vec3f flyTempPos; /* used for start in fly functions, end in flyrun functions */
+    /* 0x0C8 */ ActorFlyPos flyPos;
     /* 0x0EC */ char unk_EC[24];
     /* 0x104 */ f32 flyJumpAccel;
     /* 0x108 */ f32 flySpeed;
@@ -1312,7 +1321,7 @@ typedef struct Actor {
     /* 0x225 */ char unk_225[7];
     /* 0x22C */ struct SelectableTarget targetData[24];
     /* 0x40C */ s8 targetListLength;
-    /* 0x40D */ u8 targetIndexList[24]; /* into targetData */
+    /* 0x40D */ s8 targetIndexList[24]; /* into targetData */
     /* 0x425 */ u8 selectedTargetIndex; /* into target index list */
     /* 0x426 */ s8 targetPartIndex;
     /* 0x427 */ char unk_427;
@@ -1439,7 +1448,8 @@ typedef struct PlayerStatus {
     /* 0x0BE */ u8 renderMode;
     /* 0x0BF */ s8 unk_BF;
     /* 0x0C0 */ u32* decorationList;
-    /* 0x0C4 */ char unk_C4[4];
+    /* 0x0C4 */ char unk_C4[2];
+    /* 0x0C6 */ s16 unk_C6;
     /* 0x0C8 */ UNK_PTR unk_C8;
     /* 0x0CC */ s32 shadowID;
     /* 0x0D0 */ char unk_D0[8];

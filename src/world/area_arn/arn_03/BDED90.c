@@ -4,21 +4,21 @@ INCLUDE_ASM(s32, "world/area_arn/arn_03/BDED90", func_80240000_BDED90);
 
 INCLUDE_ASM(s32, "world/area_arn/arn_03/BDED90", func_80240158_BDEEE8);
 
-INCLUDE_ASM(s32, "world/area_arn/arn_03/BDED90", func_80240400_BDF190);
+#include "world/common/UnkNpcAIFunc1.inc.c"
 
 INCLUDE_ASM(s32, "world/area_arn/arn_03/BDED90", func_802404C0_BDF250);
 
 INCLUDE_ASM(s32, "world/area_arn/arn_03/BDED90", func_8024067C_BDF40C);
 
-INCLUDE_ASM(s32, "world/area_arn/arn_03/BDED90", func_80240730_BDF4C0);
+#include "world/common/NpcJumpFunc2.inc.c"
 
-INCLUDE_ASM(s32, "world/area_arn/arn_03/BDED90", func_802407A4_BDF534);
+# include "world/common/NpcJumpFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_arn/arn_03/BDED90", func_8024081C_BDF5AC);
 
 INCLUDE_ASM(s32, "world/area_arn/arn_03/BDED90", func_8024094C_BDF6DC);
 
-INCLUDE_ASM(s32, "world/area_arn/arn_03/BDED90", func_80240A6C_BDF7FC);
+#include "world/common/UnkNpcDurationFlagFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_arn/arn_03/BDED90", func_80240AD4_BDF864);
 

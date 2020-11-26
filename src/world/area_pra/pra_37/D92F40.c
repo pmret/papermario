@@ -2,7 +2,7 @@
 
 INCLUDE_ASM(s32, "world/area_pra/pra_37/D92F40", func_80240000_D92F40);
 
-INCLUDE_ASM(s32, "world/area_pra/pra_37/D92F40", func_80240050_D92F90);
+#include "world/common/UnkFunc2.inc.c"
 
 INCLUDE_ASM(s32, "world/area_pra/pra_37/D92F40", func_80240084_D92FC4);
 
@@ -22,19 +22,19 @@ INCLUDE_ASM(s32, "world/area_pra/pra_37/D92F40", func_802408A0_D937E0);
 
 INCLUDE_ASM(s32, "world/area_pra/pra_37/D92F40", func_80240D6C_D93CAC);
 
-INCLUDE_ASM(s32, "world/area_pra/pra_37/D92F40", func_80240EB4_D93DF4);
+#include "world/common/SetPartnerFlagsA0000.inc.c"
 
-INCLUDE_ASM(s32, "world/area_pra/pra_37/D92F40", func_80240EE8_D93E28);
+#include "world/common/SetPartnerFlags80000.inc.c"
 
 INCLUDE_ASM(s32, "world/area_pra/pra_37/D92F40", func_80240F1C_D93E5C);
 
-INCLUDE_ASM(s32, "world/area_pra/pra_37/D92F40", func_80240F50_D93E90);
+#include "world/common/UnkNpcAIFunc6.inc.c"
 
-INCLUDE_ASM(s32, "world/area_pra/pra_37/D92F40", func_80240FBC_D93EFC);
+#include "world/common/UnkNpcAIFunc7.inc.c"
 
-INCLUDE_ASM(s32, "world/area_pra/pra_37/D92F40", func_8024102C_D93F6C);
+#include "world/common/UnkNpcAIFunc8.inc.c"
 
-INCLUDE_ASM(s32, "world/area_pra/pra_37/D92F40", func_80241104_D94044);
+#include "world/common/UnkNpcAIFunc5.inc.c"
 
 INCLUDE_ASM(s32, "world/area_pra/pra_37/D92F40", func_80241158_D94098);
 

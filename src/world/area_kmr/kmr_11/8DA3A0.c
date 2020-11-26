@@ -8,15 +8,15 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_11/8DA3A0", func_80240370_8DA470);
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_11/8DA3A0", func_80240424_8DA524);
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_11/8DA3A0", func_80240544_8DA644);
+# include "world/common/NpcJumpFunc3.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_11/8DA3A0", func_802405A4_8DA6A4);
+# include "world/common/NpcJumpFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_11/8DA3A0", func_8024061C_8DA71C);
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_11/8DA3A0", func_8024074C_8DA84C);
+# include "world/common/UnkNpcAIFunc11.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_11/8DA3A0", func_80240868_8DA968);
+# include "world/common/UnkNpcAIFunc10.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_11/8DA3A0", func_802408B0_8DA9B0);
 

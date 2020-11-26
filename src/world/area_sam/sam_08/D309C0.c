@@ -1,12 +1,12 @@
 #include "sam_08.h"
 
-INCLUDE_ASM(s32, "world/area_sam/sam_08/D309C0", func_80240D40_D309C0);
+#include "world/common/UnkNpcAIFunc6.inc.c"
 
-INCLUDE_ASM(s32, "world/area_sam/sam_08/D309C0", func_80240DAC_D30A2C);
+#include "world/common/UnkNpcAIFunc7.inc.c"
 
-INCLUDE_ASM(s32, "world/area_sam/sam_08/D309C0", func_80240E1C_D30A9C);
+#include "world/common/UnkNpcAIFunc8.inc.c"
 
-INCLUDE_ASM(s32, "world/area_sam/sam_08/D309C0", func_80240EF4_D30B74);
+#include "world/common/UnkNpcAIFunc5.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_08/D309C0", func_80240F48_D30BC8);
 

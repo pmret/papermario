@@ -4,21 +4,21 @@ INCLUDE_ASM(s32, "world/area_kpa/kpa_91/A86A50", func_80240000_A86A50);
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_91/A86A50", func_80240158_A86BA8);
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_91/A86A50", func_80240400_A86E50);
+#include "world/common/UnkNpcAIFunc1.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_91/A86A50", func_802404C0_A86F10);
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_91/A86A50", func_8024067C_A870CC);
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_91/A86A50", func_80240730_A87180);
+#include "world/common/NpcJumpFunc2.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_91/A86A50", func_802407A4_A871F4);
+# include "world/common/NpcJumpFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_91/A86A50", func_8024081C_A8726C);
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_91/A86A50", func_8024094C_A8739C);
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_91/A86A50", func_80240A6C_A874BC);
+#include "world/common/UnkNpcDurationFlagFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_91/A86A50", func_80240AD4_A87524);
 

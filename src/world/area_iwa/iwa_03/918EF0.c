@@ -28,7 +28,7 @@ INCLUDE_ASM(s32, "world/area_iwa/iwa_03/918EF0", func_80240EA8_919A58);
 
 INCLUDE_ASM(s32, "world/area_iwa/iwa_03/918EF0", func_80240F24_919AD4);
 
-INCLUDE_ASM(s32, "world/area_iwa/iwa_03/918EF0", func_80240F8C_919B3C);
+#include "world/common/UnkDurationCheck.inc.c"
 
 INCLUDE_ASM(s32, "world/area_iwa/iwa_03/918EF0", func_80240FD0_919B80);
 

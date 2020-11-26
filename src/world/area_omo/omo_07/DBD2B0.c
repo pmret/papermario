@@ -14,21 +14,21 @@ INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_8024056C_DBD81C);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_802406C4_DBD974);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_8024096C_DBDC1C);
+#include "world/common/UnkNpcAIFunc1.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_80240A2C_DBDCDC);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_80240BE8_DBDE98);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_80240C9C_DBDF4C);
+#include "world/common/NpcJumpFunc2.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_80240D10_DBDFC0);
+# include "world/common/NpcJumpFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_80240D88_DBE038);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_80240EB8_DBE168);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_80240FD8_DBE288);
+#include "world/common/UnkNpcDurationFlagFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_80241040_DBE2F0);
 
@@ -48,17 +48,18 @@ INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_80241978_DBEC28);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_80241B28_DBEDD8);
 
+// Should be #include "world/common/UnkNpcAIFunc1.inc.c"
 INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_80242150_DBF400);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_80242210_DBF4C0);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_80242554_DBF804);
+#include "world/common/UnkNpcAIFunc2.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_802425CC_DBF87C);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_80242638_DBF8E8);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_8024276C_DBFA1C);
+#include "world/common/UnkNpcAIFunc3.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_802427D0_DBFA80);
 

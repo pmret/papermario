@@ -28,6 +28,6 @@ INCLUDE_ASM(s32, "world/area_arn/arn_02/BDD1B0", func_80240B68_BDDD18);
 
 INCLUDE_ASM(s32, "world/area_arn/arn_02/BDD1B0", func_80240BE4_BDDD94);
 
-INCLUDE_ASM(s32, "world/area_arn/arn_02/BDD1B0", func_80240C4C_BDDDFC);
+#include "world/common/UnkDurationCheck.inc.c"
 
 INCLUDE_ASM(s32, "world/area_arn/arn_02/BDD1B0", func_80240C90_BDDE40);

@@ -104,8 +104,8 @@ glabel update_player_shadow
 /* 7B1FC 800E1D4C AFA20024 */   sw       $v0, 0x24($sp)
 /* 7B200 800E1D50 C7A00038 */  lwc1      $f0, 0x38($sp)
 /* 7B204 800E1D54 C7A2003C */  lwc1      $f2, 0x3c($sp)
-/* 7B208 800E1D58 3C018016 */  lui       $at, 0x8016
-/* 7B20C 800E1D5C A422A556 */  sh        $v0, -0x5aaa($at)
+/* 7B208 800E1D58 3C018016 */  lui       $at, %hi(gCollisionStatus+0x6)
+/* 7B20C 800E1D5C A422A556 */  sh        $v0, %lo(gCollisionStatus+0x6)($at)
 /* 7B210 800E1D60 E6000028 */  swc1      $f0, 0x28($s0)
 /* 7B214 800E1D64 E6020030 */  swc1      $f2, 0x30($s0)
 /* 7B218 800E1D68 C62C006C */  lwc1      $f12, 0x6c($s1)

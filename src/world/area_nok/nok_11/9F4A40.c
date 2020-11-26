@@ -14,17 +14,17 @@ INCLUDE_ASM(s32, "world/area_nok/nok_11/9F4A40", func_802407D4_9F5214);
 
 INCLUDE_ASM(s32, "world/area_nok/nok_11/9F4A40", func_80240984_9F53C4);
 
-INCLUDE_ASM(s32, "world/area_nok/nok_11/9F4A40", func_80240FAC_9F59EC);
+#include "world/common/UnkNpcAIFunc1.inc.c"
 
 INCLUDE_ASM(s32, "world/area_nok/nok_11/9F4A40", func_8024106C_9F5AAC);
 
-INCLUDE_ASM(s32, "world/area_nok/nok_11/9F4A40", func_802413B0_9F5DF0);
+#include "world/common/UnkNpcAIFunc2.inc.c"
 
 INCLUDE_ASM(s32, "world/area_nok/nok_11/9F4A40", func_80241428_9F5E68);
 
 INCLUDE_ASM(s32, "world/area_nok/nok_11/9F4A40", func_80241494_9F5ED4);
 
-INCLUDE_ASM(s32, "world/area_nok/nok_11/9F4A40", func_802415C8_9F6008);
+#include "world/common/UnkNpcAIFunc3.inc.c"
 
 INCLUDE_ASM(s32, "world/area_nok/nok_11/9F4A40", func_8024162C_9F606C);
 

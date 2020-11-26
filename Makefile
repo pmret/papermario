@@ -78,6 +78,10 @@ endif
 
 include sources.mk
 
+ifeq ($(PERMUTER),1)
+override OBJECTS:=$(filter %.c.o, $(OBJECTS))
+endif
+
 %.d: ;
 
 ifeq ($(WATCH_INCLUDES),1)

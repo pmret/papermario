@@ -33,7 +33,7 @@ ApiStatus ActorSpeak(ScriptInstance* script, s32 isInitialCall) {
         gSpeakingActorIdleAnim = get_variable(script, *args++);
         stringID2 = stringID;
 
-        if (actorID == ActorId_SELF) {
+        if (actorID == ActorID_SELF) {
             actorID = script->owner1.actorID;
         }
 
@@ -140,11 +140,11 @@ INCLUDE_ASM(s32, "code_181810", func_802537C0);
 
 ApiStatus PlaySoundAtActor(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorId actorID = get_variable(script, *args++);
+    ActorID actorID = get_variable(script, *args++);
     Bytecode soundID = *args++;
     Actor* actor;
 
-    if (actorID == ActorId_SELF) {
+    if (actorID == ActorID_SELF) {
         actorID = script->owner1.actorID;
     }
 

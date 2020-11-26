@@ -14,4 +14,4 @@ INCLUDE_ASM(s32, "world/area_tst/tst_11/B1CA50", func_802403B8_B1CE08);
 
 INCLUDE_ASM(s32, "world/area_tst/tst_11/B1CA50", func_802406D4_B1D124);
 
-INCLUDE_ASM(s32, "world/area_tst/tst_11/B1CA50", func_80240730_B1D180);
+#include "world/common/SetPartnerFlagsA0000.inc.c"

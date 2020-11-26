@@ -64,7 +64,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80241A18_7EC728);
 
 #include "world/common/SetManyVars.inc.c"
 
-INCLUDE_ASM(ApiStatus, "world/area_mac/mac_00/7EB340", func_80241BA4_7EC8B4, ScriptInstance* script, s32 isInitialCall);
+#include "world/common/UnkYawFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80241D30_7ECA40);
 
@@ -84,7 +84,11 @@ INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80242178_7ECE88);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_802421D0_7ECEE0);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80242224_7ECF34);
+ApiStatus func_80242224_7ECF34(ScriptInstance* script, s32 isInitialCall) {
+    gPlayerData.curHP = 1;
+    sync_status_menu();
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80242250_7ECF60);
 

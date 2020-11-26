@@ -4,17 +4,17 @@ INCLUDE_ASM(s32, "world/area_dgb/dgb_01/BFD9A0", func_80240120_BFD9A0);
 
 INCLUDE_ASM(s32, "world/area_dgb/dgb_01/BFD9A0", func_802402D0_BFDB50);
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_01/BFD9A0", func_802408F8_BFE178);
+#include "world/common/UnkNpcAIFunc1.inc.c"
 
 INCLUDE_ASM(s32, "world/area_dgb/dgb_01/BFD9A0", func_802409B8_BFE238);
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_01/BFD9A0", func_80240CFC_BFE57C);
+#include "world/common/UnkNpcAIFunc2.inc.c"
 
 INCLUDE_ASM(s32, "world/area_dgb/dgb_01/BFD9A0", func_80240D74_BFE5F4);
 
 INCLUDE_ASM(s32, "world/area_dgb/dgb_01/BFD9A0", func_80240DE0_BFE660);
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_01/BFD9A0", func_80240F14_BFE794);
+#include "world/common/UnkNpcAIFunc3.inc.c"
 
 INCLUDE_ASM(s32, "world/area_dgb/dgb_01/BFD9A0", func_80240F78_BFE7F8);
 
@@ -48,21 +48,22 @@ INCLUDE_ASM(s32, "world/area_dgb/dgb_01/BFD9A0", func_8024252C_BFFDAC);
 
 INCLUDE_ASM(s32, "world/area_dgb/dgb_01/BFD9A0", func_80242684_BFFF04);
 
+// should be #include "world/common/UnkNpcAIFunc1.inc.c"
 INCLUDE_ASM(s32, "world/area_dgb/dgb_01/BFD9A0", func_8024292C_C001AC);
 
 INCLUDE_ASM(s32, "world/area_dgb/dgb_01/BFD9A0", func_802429EC_C0026C);
 
 INCLUDE_ASM(s32, "world/area_dgb/dgb_01/BFD9A0", func_80242BA8_C00428);
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_01/BFD9A0", func_80242C5C_C004DC);
+#include "world/common/NpcJumpFunc2.inc.c"
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_01/BFD9A0", func_80242CD0_C00550);
+# include "world/common/NpcJumpFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_dgb/dgb_01/BFD9A0", func_80242D48_C005C8);
 
 INCLUDE_ASM(s32, "world/area_dgb/dgb_01/BFD9A0", func_80242E78_C006F8);
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_01/BFD9A0", func_80242F98_C00818);
+#include "world/common/UnkNpcDurationFlagFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_dgb/dgb_01/BFD9A0", func_80243000_C00880);
 

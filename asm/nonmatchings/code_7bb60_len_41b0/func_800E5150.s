@@ -7,7 +7,7 @@ glabel func_800E5150
 /* 7E608 800E5158 0C03945D */  jal       func_800E5174
 /* 7E60C 800E515C 00000000 */   nop      
 /* 7E610 800E5160 8FBF0010 */  lw        $ra, 0x10($sp)
-/* 7E614 800E5164 3C018016 */  lui       $at, 0x8016
-/* 7E618 800E5168 A422A55A */  sh        $v0, -0x5aa6($at)
+/* 7E614 800E5164 3C018016 */  lui       $at, %hi(gCollisionStatus+0xA)
+/* 7E618 800E5168 A422A55A */  sh        $v0, %lo(gCollisionStatus+0xA)($at)
 /* 7E61C 800E516C 03E00008 */  jr        $ra
 /* 7E620 800E5170 27BD0018 */   addiu    $sp, $sp, 0x18

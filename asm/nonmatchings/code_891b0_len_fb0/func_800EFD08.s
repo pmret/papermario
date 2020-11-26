@@ -16,8 +16,8 @@ glabel func_800EFD08
 /* 891E4 800EFD34 3C108011 */  lui       $s0, 0x8011
 /* 891E8 800EFD38 8E109480 */  lw        $s0, -0x6b80($s0)
 .L800EFD3C:
-/* 891EC 800EFD3C 3C048016 */  lui       $a0, 0x8016
-/* 891F0 800EFD40 9484A552 */  lhu       $a0, -0x5aae($a0)
+/* 891EC 800EFD3C 3C048016 */  lui       $a0, %hi(gCollisionStatus+0x2)
+/* 891F0 800EFD40 9484A552 */  lhu       $a0, %lo(gCollisionStatus+0x2)($a0)
 /* 891F4 800EFD44 0C016F6A */  jal       get_collider_type_by_id
 /* 891F8 800EFD48 00000000 */   nop      
 /* 891FC 800EFD4C 822300B4 */  lb        $v1, 0xb4($s1)

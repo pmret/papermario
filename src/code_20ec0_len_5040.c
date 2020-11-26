@@ -184,7 +184,7 @@ s32 is_point_within_region(s32 shape, f32 pointX, f32 pointY, f32 centerX, f32 c
     }
 }
 
-INCLUDE_ASM(s32, "code_20ec0_len_5040", func_800490B4);
+INCLUDE_ASM(s32, "code_20ec0_len_5040", func_800490B4, s32 arg0, Enemy* arg1, f32 arg2, s32 arg3, s32 arg4);
 
 INCLUDE_ASM(s32, "code_20ec0_len_5040", func_800493EC);
 
@@ -196,7 +196,16 @@ INCLUDE_ASM(s32, "code_20ec0_len_5040", func_800495A0);
 
 INCLUDE_ASM(s32, "code_20ec0_len_5040", func_800496B8);
 
-INCLUDE_ASM(s32, "code_20ec0_len_5040", func_80049B44);
+// Same as UnkNpcAIFunc1
+void func_80049B44(ScriptInstance* script, NpcAISettings* aiSettings) {
+    Enemy* enemy = script->owner1.enemy;
+    Npc* npc = get_npc_unsafe(enemy->npcID);
+
+    npc->duration = (aiSettings->waitTime / 2) + rand_int((aiSettings->waitTime / 2) + 1);
+    npc->yaw = clamp_angle(npc->yaw + rand_int(180) - 90.0f);
+    npc->currentAnim = *enemy->animList;
+    script->functionTemp[0].s = 3;
+}
 
 INCLUDE_ASM(s32, "code_20ec0_len_5040", func_80049C04);
 

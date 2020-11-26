@@ -772,14 +772,14 @@ glabel func_802BD660
 /* 31A764 802BE1F4 AC620000 */  sw        $v0, ($v1)
 /* 31A768 802BE1F8 2402FFFF */  addiu     $v0, $zero, -1
 /* 31A76C 802BE1FC E6020064 */  swc1      $f2, 0x64($s0)
-/* 31A770 802BE200 3C018016 */  lui       $at, 0x8016
-/* 31A774 802BE204 A422A552 */  sh        $v0, -0x5aae($at)
+/* 31A770 802BE200 3C018016 */  lui       $at, %hi(gCollisionStatus+0x2)
+/* 31A774 802BE204 A422A552 */  sh        $v0, %lo(gCollisionStatus+0x2)($at)
 /* 31A778 802BE208 080AF9E3 */  j         .L802BE78C
 /* 31A77C 802BE20C 00000000 */   nop      
 /* 31A780 802BE210 0C0AF556 */  jal       func_802BD558
 /* 31A784 802BE214 24150015 */   addiu    $s5, $zero, 0x15
-/* 31A788 802BE218 3C018016 */  lui       $at, 0x8016
-/* 31A78C 802BE21C A422A552 */  sh        $v0, -0x5aae($at)
+/* 31A788 802BE218 3C018016 */  lui       $at, %hi(gCollisionStatus+0x2)
+/* 31A78C 802BE21C A422A552 */  sh        $v0, %lo(gCollisionStatus+0x2)($at)
 /* 31A790 802BE220 822300B4 */  lb        $v1, 0xb4($s1)
 /* 31A794 802BE224 10750156 */  beq       $v1, $s5, .L802BE780
 /* 31A798 802BE228 24020017 */   addiu    $v0, $zero, 0x17

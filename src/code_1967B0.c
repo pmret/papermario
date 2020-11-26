@@ -5,7 +5,7 @@ INCLUDE_ASM(s32, "code_1967B0", LoadItemScript);
 INCLUDE_ASM(s32, "code_1967B0", LoadFreeItemScript);
 
 ApiStatus LoadMoveScript(ScriptInstance* script, s32 isInitialCall) {
-    BattleStatus* battleStatus = &gBattleStatus;
+    BattleStatus* battleStatus = BATTLE_STATUS;
     s32* moveScript = gMoveScriptTable[battleStatus->selectedMoveID];
 
     dma_copy(moveScript[0], moveScript[1], moveScript[2]);

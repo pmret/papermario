@@ -10,11 +10,11 @@ INCLUDE_ASM(s32, "world/area_kpa/kpa_115/A9ED40", func_80240360_A9F0A0);
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_115/A9ED40", func_802404A4_A9F1E4);
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_115/A9ED40", func_802405A4_A9F2E4);
+#include "world/common/UnkSetDurationFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_115/A9ED40", func_802405E8_A9F328);
+#include "world/common/UnkNpcAIFunc9.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_115/A9ED40", func_80240688_A9F3C8);
+#include "world/common/UnkDurationCheck.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_115/A9ED40", func_802406CC_A9F40C);
 
@@ -22,4 +22,4 @@ INCLUDE_ASM(s32, "world/area_kpa/kpa_115/A9ED40", func_80240C08_A9F948);
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_115/A9ED40", func_80241064_A9FDA4);
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_115/A9ED40", func_80241384_AA00C4);
+#include "world/common/GetEncounterEnemyIsOwner.inc.c"

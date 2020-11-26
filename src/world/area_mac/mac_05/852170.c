@@ -12,21 +12,21 @@ INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80240490_852600);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_802405E8_852758);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80240890_852A00);
+#include "world/common/UnkNpcAIFunc1.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80240950_852AC0);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80240B0C_852C7C);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80240BC0_852D30);
+#include "world/common/NpcJumpFunc2.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80240C34_852DA4);
+# include "world/common/NpcJumpFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80240CAC_852E1C);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80240DDC_852F4C);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80240EFC_85306C);
+#include "world/common/UnkNpcDurationFlagFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80240F64_8530D4);
 
@@ -96,7 +96,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80242708_854878);
 
 #include "world/common/SetManyVars.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80242894_854A04);
+#include "world/common/UnkYawFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80242A20_854B90);
 

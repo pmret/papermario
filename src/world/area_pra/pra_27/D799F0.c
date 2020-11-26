@@ -2,7 +2,7 @@
 
 INCLUDE_ASM(s32, "world/area_pra/pra_27/D799F0", func_80240000_D799F0);
 
-INCLUDE_ASM(s32, "world/area_pra/pra_27/D799F0", func_80240050_D79A40);
+#include "world/common/UnkFunc2.inc.c"
 
 INCLUDE_ASM(s32, "world/area_pra/pra_27/D799F0", func_80240084_D79A74);
 
@@ -22,11 +22,11 @@ INCLUDE_ASM(s32, "world/area_pra/pra_27/D799F0", func_802408A0_D7A290);
 
 INCLUDE_ASM(s32, "world/area_pra/pra_27/D799F0", func_80240D6C_D7A75C);
 
-INCLUDE_ASM(s32, "world/area_pra/pra_27/D799F0", func_80240EB4_D7A8A4);
+#include "world/common/SetPartnerFlagsA0000.inc.c"
 
-INCLUDE_ASM(s32, "world/area_pra/pra_27/D799F0", func_80240EE8_D7A8D8);
+#include "world/common/SetPartnerFlags80000.inc.c"
 
-INCLUDE_ASM(s32, "world/area_pra/pra_27/D799F0", func_80240F1C_D7A90C);
+#include "world/common/SetPartnerFlags20000.inc.c"
 
 INCLUDE_ASM(s32, "world/area_pra/pra_27/D799F0", func_80240F50_D7A940);
 

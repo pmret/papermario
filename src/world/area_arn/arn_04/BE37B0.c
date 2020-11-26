@@ -4,21 +4,21 @@ INCLUDE_ASM(s32, "world/area_arn/arn_04/BE37B0", func_80240000_BE37B0);
 
 INCLUDE_ASM(s32, "world/area_arn/arn_04/BE37B0", func_80240158_BE3908);
 
-INCLUDE_ASM(s32, "world/area_arn/arn_04/BE37B0", func_80240400_BE3BB0);
+#include "world/common/UnkNpcAIFunc1.inc.c"
 
 INCLUDE_ASM(s32, "world/area_arn/arn_04/BE37B0", func_802404C0_BE3C70);
 
 INCLUDE_ASM(s32, "world/area_arn/arn_04/BE37B0", func_8024067C_BE3E2C);
 
-INCLUDE_ASM(s32, "world/area_arn/arn_04/BE37B0", func_80240730_BE3EE0);
+#include "world/common/NpcJumpFunc2.inc.c"
 
-INCLUDE_ASM(s32, "world/area_arn/arn_04/BE37B0", func_802407A4_BE3F54);
+# include "world/common/NpcJumpFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_arn/arn_04/BE37B0", func_8024081C_BE3FCC);
 
 INCLUDE_ASM(s32, "world/area_arn/arn_04/BE37B0", func_8024094C_BE40FC);
 
-INCLUDE_ASM(s32, "world/area_arn/arn_04/BE37B0", func_80240A6C_BE421C);
+#include "world/common/UnkNpcDurationFlagFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_arn/arn_04/BE37B0", func_80240AD4_BE4284);
 
@@ -28,17 +28,18 @@ INCLUDE_ASM(s32, "world/area_arn/arn_04/BE37B0", func_80240E90_BE4640);
 
 INCLUDE_ASM(s32, "world/area_arn/arn_04/BE37B0", func_80241040_BE47F0);
 
+// should be #include "world/common/UnkNpcAIFunc1.inc.c", probably missing file split
 INCLUDE_ASM(s32, "world/area_arn/arn_04/BE37B0", func_80241668_BE4E18);
 
 INCLUDE_ASM(s32, "world/area_arn/arn_04/BE37B0", func_80241728_BE4ED8);
 
-INCLUDE_ASM(s32, "world/area_arn/arn_04/BE37B0", func_80241A6C_BE521C);
+#include "world/common/UnkNpcAIFunc2.inc.c"
 
 INCLUDE_ASM(s32, "world/area_arn/arn_04/BE37B0", func_80241AE4_BE5294);
 
 INCLUDE_ASM(s32, "world/area_arn/arn_04/BE37B0", func_80241B50_BE5300);
 
-INCLUDE_ASM(s32, "world/area_arn/arn_04/BE37B0", func_80241C84_BE5434);
+#include "world/common/UnkNpcAIFunc3.inc.c"
 
 INCLUDE_ASM(s32, "world/area_arn/arn_04/BE37B0", func_80241CE8_BE5498);
 
@@ -74,6 +75,6 @@ INCLUDE_ASM(s32, "world/area_arn/arn_04/BE37B0", func_80242EF0_BE66A0);
 
 INCLUDE_ASM(s32, "world/area_arn/arn_04/BE37B0", func_80242F6C_BE671C);
 
-INCLUDE_ASM(s32, "world/area_arn/arn_04/BE37B0", func_80242FD4_BE6784);
+#include "world/common/UnkDurationCheck.inc.c"
 
 INCLUDE_ASM(s32, "world/area_arn/arn_04/BE37B0", func_80243018_BE67C8);
