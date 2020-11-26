@@ -1,6 +1,7 @@
 #include "common.h"
 
 extern PrintContext* gSpeakingActorPrintCtx;
+extern PrintContext* D_8029FA64;
 extern s32 gSpeakingActorPrintIsDone; // unk_08
 extern s32 gSpeakingActorTalkAnim;
 extern s32 gSpeakingActorIdleAnim;
@@ -114,7 +115,27 @@ INCLUDE_ASM(s32, "code_181810", ActorSpeak);
 
 INCLUDE_ASM(s32, "code_181810", EndActorSpeech);
 
-INCLUDE_ASM(s32, "code_181810", ShowBattleChoice);
+ApiStatus ShowBattleChoice(ScriptInstance *script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+
+    if (isInitialCall) {
+        s32 stringID = get_variable(script, *args);
+
+        script->functionTemp[1].s = 0;
+        D_8029FA64 = load_string(stringID, &script->functionTemp[1].s);
+    }
+
+    if (script->functionTemp[1].s == 1) {
+        u8 unk_4E8 = D_8029FA64->unk_4E8;
+
+        gSpeakingActorPrintCtx->unk_4E8 = D_8029FA64->unk_4E8;
+        script->varTable[0] = unk_4E8;
+
+        return ApiStatus_DONE1;
+    }
+
+    return ApiStatus_BLOCK;
+}
 
 ApiStatus func_802535B4(ScriptInstance* script, s32 isInitialCall) {
     if (get_variable(script, *script->ptrReadPos)) {
@@ -132,9 +153,43 @@ ApiStatus OverrideBattleDmaDest(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "code_181810", LoadBattleDmaData);
 
-INCLUDE_ASM(s32, "code_181810", func_802536A8);
+ApiStatus func_802536A8(ScriptInstance* script, s32 isInitialCall) {
+    BattleStatus* battleStatus = BATTLE_STATUS;
+    BattleStatus* battleStatus2 = battleStatus;
 
-INCLUDE_ASM(s32, "code_181810", func_80253734);
+    if (get_variable(script, *script->ptrReadPos) != 0) {
+        battleStatus2->unk_92 |= 1;
+        D_8009A650[0] |= 0x80;
+    } else {
+        battleStatus2->unk_92 &= ~1;
+        D_8009A650[0] &= ~0x80;
+    }
+
+    return ApiStatus_DONE2;
+}
+
+
+ApiStatus func_80253734(ScriptInstance* script, s32 isInitialCall) {
+    BattleStatus* battleStatus = BATTLE_STATUS;
+    s32 val = get_variable(script, *script->ptrReadPos);
+
+    switch (val) {
+        case 0:
+            battleStatus->unk_432 = -1;
+            break;
+        case 1:
+            battleStatus->unk_432 = 1;
+            break;
+        case 2:
+            battleStatus->unk_432 = -2;
+            break;
+        case 3:
+            battleStatus->unk_432 = 1;
+            break;
+    }
+
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_181810", func_802537C0);
 
@@ -158,7 +213,26 @@ INCLUDE_ASM(s32, "code_181810", PlaySoundAtPart);
 
 INCLUDE_ASM(s32, "code_181810", PlayLoopingSoundAtActor);
 
-INCLUDE_ASM(s32, "code_181810", StopLoopingSoundAtActor);
+ApiStatus StopLoopingSoundAtActor(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    ActorID actorID = get_variable(script, *args++);
+    s32 idx = get_variable(script, *args++);
+    Actor* actor;
+
+    if (actorID == ActorID_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    actor = get_actor(actorID);
+
+    if (actor->x[idx] == 0) {
+        return ApiStatus_DONE2;
+    }
+
+    stop_sound(actor->x[idx]);
+    actor->x[idx] = 0;
+    return ApiStatus_DONE2;
+}
 
 ApiStatus SetForegroundModelsVisibleUnsafe(ScriptInstance* script, s32 isInitialCall) {
     if (get_variable(script, *script->ptrReadPos)) {
@@ -188,7 +262,16 @@ ApiStatus func_80253B30(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_181810", MakeStatusField);
+ApiStatus MakeStatusField(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 outVar = *args++;
+    s32 a = *args++;
+    s32 b = get_variable(script, *args++);
+    s32 c = get_variable(script, *args++);
+
+    set_variable(script, outVar, a | 0x80000000 | (c << 8) | b);
+    return ApiStatus_DONE2;
+}
 
 s32 is_actor_hp_bar_visible(Actor* actor) {
     BattleStatus* battleStatus = BATTLE_STATUS;
@@ -232,13 +315,30 @@ ApiStatus MultiplyByActorScale(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Actor* actor = get_actor(script->owner1.actorID);
 
-    set_float_variable(script, *args, get_float_variable(script, *args) * actor->scalingFactor);
+    set_float_variable(script, args[0], get_float_variable(script, args[0]) * actor->scalingFactor);
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_181810", MultiplyVec2ByActorScale);
+ApiStatus MultiplyVec2ByActorScale(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Actor* actor = get_actor(script->owner1.actorID);
 
-INCLUDE_ASM(s32, "code_181810", MultiplyVec3ByActorScale);
+    set_float_variable(script, args[0], get_float_variable(script, args[0]) * actor->scalingFactor);
+    set_float_variable(script, args[1], get_float_variable(script, args[1]) * actor->scalingFactor);
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus MultiplyVec3yActorScale(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Actor* actor = get_actor(script->owner1.actorID);
+
+    set_float_variable(script, args[0], get_float_variable(script, args[0]) * actor->scalingFactor);
+    set_float_variable(script, args[1], get_float_variable(script, args[1]) * actor->scalingFactor);
+    set_float_variable(script, args[2], get_float_variable(script, args[2]) * actor->scalingFactor);
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus ApplyShrinkFromOwner(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

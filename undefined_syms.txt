@@ -61,6 +61,7 @@ D_8010F094 = 0x8010F094;
 D_800D9620 = 0x800D9620;
 
 gSpeakingActorPrintCtx = 0x8029FA60;
+D_8029FA64 = 0x8029FA64;
 gSpeakingActorPrintIsDone = 0x8029FA68;
 gSpeakingActorTalkAnim = 0x8029FA6C;
 gSpeakingActorIdleAnim = 0x8029FA70;

@@ -533,7 +533,9 @@ typedef struct BattleStatus {
     /* 0x08B */ u8 hustleTurns; /* numTurns from hustle drink, normally 0 */
     /* 0x08C */ char unk_8C[2];
     /* 0x08E */ u8 initialEnemyCount; /* used for SP award bonus */
-    /* 0x08F */ char unk_8F[7];
+    /* 0x08F */ char unk_8F[3];
+    /* 0x092 */ s8 unk_92;
+    /* 0x093 */ char unk_93[3];
     /* 0x096 */ s8 hammerCharge;
     /* 0x097 */ s8 jumpCharge;
     /* 0x098 */ char unk_98;
@@ -612,7 +614,8 @@ typedef struct BattleStatus {
     /* 0x330 */ s32 pushInputBuffer[64];
     /* 0x430 */ u8 holdInputBufferPos;
     /* 0x431 */ u8 inputBufferPos;
-    /* 0x432 */ char unk_432[2];
+    /* 0x432 */ s8 unk_432;
+    /* 0x433 */ char unk_433;
     /* 0x434 */ s32 unk_434;
     /* 0x438 */ FGModelData* foregroundModelData;
     /* 0x43C */ BattleStatusUnk* unk_43C;
