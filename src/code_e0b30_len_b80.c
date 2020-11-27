@@ -213,8 +213,6 @@ void transition_music_volume_to(s16 volume) {
 
 INCLUDE_ASM(s32, "code_e0b30_len_b80", func_8014AC94);
 
-s32 func_800559FC(s32);
-
 INCLUDE_ASM(s32, "code_e0b30_len_b80", func_8014AD40);
 
 void func_8014ADA4(void) {
