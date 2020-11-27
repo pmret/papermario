@@ -71,6 +71,7 @@ s32 func_80055464(s32, s32);
 s32 func_800554A4(s32, s32);
 s32 func_800554E8(s32, s32);
 s32 func_800555E4(s32);
+void func_800561A4(s16);
 s32 osGetId();
 
 void set_curtain_scale_goal(f32 scale);

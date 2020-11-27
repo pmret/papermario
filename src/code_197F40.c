@@ -48,7 +48,25 @@ void set_actor_current_position(ActorID actorID, f32 x, f32 y, f32 z) {
     actor->currentPos.z = z;
 }
 
-INCLUDE_ASM(s32, "code_197F40", set_part_absolute_position);
+void set_part_absolute_position(s32 actorID, s32 partIndex, f32 x, f32 y, f32 z) {
+    Actor* actor = get_actor(actorID);
+    ActorPart* actorPart;
+
+    switch (actorID & 0x700) {
+        case 0:
+            actor->currentPos.x = x;
+            actor->currentPos.y = y;
+            actor->currentPos.z = z;
+            break;
+        case 0x100:
+        case 0x200:
+            actorPart = get_actor_part(actor, partIndex);
+            actorPart->absolutePosition.x = x;
+            actorPart->absolutePosition.y = y;
+            actorPart->absolutePosition.z = z;
+            break;
+    }
+}
 
 void set_actor_home_position(ActorID actorID, f32 x, f32 y, f32 z) {
     Actor* actor = get_actor(actorID);
