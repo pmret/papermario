@@ -12,8 +12,8 @@ glabel func_80261FB4
 /* 1908B0 80261FD0 8E4400AC */  lw        $a0, 0xac($s2)
 /* 1908B4 80261FD4 0C04C3D6 */  jal       get_item_entity
 /* 1908B8 80261FD8 00A0802D */   daddu    $s0, $a1, $zero
-/* 1908BC 80261FDC 3C04800E */  lui       $a0, 0x800e
-/* 1908C0 80261FE0 8C84C148 */  lw        $a0, -0x3eb8($a0)
+/* 1908BC 80261FDC 3C04800E */  lui       $a0, %hi(gBattleStatus+0xD8)
+/* 1908C0 80261FE0 8C84C148 */  lw        $a0, %lo(gBattleStatus+0xD8)($a0)
 /* 1908C4 80261FE4 12000004 */  beqz      $s0, .L80261FF8
 /* 1908C8 80261FE8 0040882D */   daddu    $s1, $v0, $zero
 /* 1908CC 80261FEC 2402000A */  addiu     $v0, $zero, 0xa

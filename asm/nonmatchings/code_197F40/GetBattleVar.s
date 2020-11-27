@@ -13,9 +13,9 @@ glabel GetBattleVar
 /* 19DF94 8026F6B4 26100004 */   addiu    $s0, $s0, 4
 /* 19DF98 8026F6B8 00021080 */  sll       $v0, $v0, 2
 /* 19DF9C 8026F6BC 8E050000 */  lw        $a1, ($s0)
-/* 19DFA0 8026F6C0 3C06800E */  lui       $a2, 0x800e
+/* 19DFA0 8026F6C0 3C06800E */  lui       $a2, %hi(gBattleStatus+0x8)
 /* 19DFA4 8026F6C4 00C23021 */  addu      $a2, $a2, $v0
-/* 19DFA8 8026F6C8 8CC6C078 */  lw        $a2, -0x3f88($a2)
+/* 19DFA8 8026F6C8 8CC6C078 */  lw        $a2, %lo(gBattleStatus+0x8)($a2)
 /* 19DFAC 8026F6CC 0C0B2026 */  jal       set_variable
 /* 19DFB0 8026F6D0 0220202D */   daddu    $a0, $s1, $zero
 /* 19DFB4 8026F6D4 8FBF0018 */  lw        $ra, 0x18($sp)

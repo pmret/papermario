@@ -59,11 +59,11 @@ glabel step_battle
 /* EDB4 800339B4 0C05259C */  jal       func_80149670
 /* EDB8 800339B8 0000202D */   daddu    $a0, $zero, $zero
 /* EDBC 800339BC 8E100000 */  lw        $s0, ($s0)
-/* EDC0 800339C0 3C03800E */  lui       $v1, 0x800e
-/* EDC4 800339C4 9063C4EA */  lbu       $v1, -0x3b16($v1)
+/* EDC0 800339C0 3C03800E */  lui       $v1, %hi(gBattleStatus+0x47A)
+/* EDC4 800339C4 9063C4EA */  lbu       $v1, %lo(gBattleStatus+0x47A)($v1)
 /* EDC8 800339C8 9205007E */  lbu       $a1, 0x7e($s0)
-/* EDCC 800339CC 3C04800E */  lui       $a0, 0x800e
-/* EDD0 800339D0 9084C4EB */  lbu       $a0, -0x3b15($a0)
+/* EDCC 800339CC 3C04800E */  lui       $a0, %hi(gBattleStatus+0x47B)
+/* EDD0 800339D0 9084C4EB */  lbu       $a0, %lo(gBattleStatus+0x47B)($a0)
 /* EDD4 800339D4 30A20001 */  andi      $v0, $a1, 1
 /* EDD8 800339D8 14400007 */  bnez      $v0, .L800339F8
 /* EDDC 800339DC 34A20001 */   ori      $v0, $a1, 1

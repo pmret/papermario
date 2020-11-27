@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel func_8025E190
-/* 18CA70 8025E190 3C03800E */  lui       $v1, 0x800e
-/* 18CA74 8025E194 8C63C4DC */  lw        $v1, -0x3b24($v1)
+/* 18CA70 8025E190 3C03800E */  lui       $v1, %hi(gBattleStatus+0x46C)
+/* 18CA74 8025E194 8C63C4DC */  lw        $v1, %lo(gBattleStatus+0x46C)($v1)
 /* 18CA78 8025E198 27BDFF98 */  addiu     $sp, $sp, -0x68
 /* 18CA7C 8025E19C AFBE0060 */  sw        $fp, 0x60($sp)
 /* 18CA80 8025E1A0 3C1E800E */  lui       $fp, %hi(gBattleStatus)
@@ -86,8 +86,8 @@ glabel func_8025E190
 /* 18CBAC 8025E2CC AC20FB54 */  sw        $zero, -0x4ac($at)
 /* 18CBB0 8025E2D0 3C01802A */  lui       $at, 0x802a
 /* 18CBB4 8025E2D4 AC24FB4C */  sw        $a0, -0x4b4($at)
-/* 18CBB8 8025E2D8 3C01800E */  lui       $at, 0x800e
-/* 18CBBC 8025E2DC AC24C4DC */  sw        $a0, -0x3b24($at)
+/* 18CBB8 8025E2D8 3C01800E */  lui       $at, %hi(gBattleStatus+0x46C)
+/* 18CBBC 8025E2DC AC24C4DC */  sw        $a0, %lo(gBattleStatus+0x46C)($at)
 /* 18CBC0 8025E2E0 00641825 */  or        $v1, $v1, $a0
 /* 18CBC4 8025E2E4 08097FD2 */  j         .L8025FF48
 /* 18CBC8 8025E2E8 AC430004 */   sw       $v1, 4($v0)
@@ -141,8 +141,8 @@ glabel func_8025E190
 /* 18CC7C 8025E39C AE020000 */  sw        $v0, ($s0)
 /* 18CC80 8025E3A0 8CA30144 */  lw        $v1, 0x144($a1)
 /* 18CC84 8025E3A4 24020002 */  addiu     $v0, $zero, 2
-/* 18CC88 8025E3A8 3C01800E */  lui       $at, 0x800e
-/* 18CC8C 8025E3AC AC22C4DC */  sw        $v0, -0x3b24($at)
+/* 18CC88 8025E3A8 3C01800E */  lui       $at, %hi(gBattleStatus+0x46C)
+/* 18CC8C 8025E3AC AC22C4DC */  sw        $v0, %lo(gBattleStatus+0x46C)($at)
 /* 18CC90 8025E3B0 AE2301E4 */  sw        $v1, 0x1e4($s1)
 /* 18CC94 8025E3B4 ACA00148 */  sw        $zero, 0x148($a1)
 /* 18CC98 8025E3B8 3C01802A */  lui       $at, 0x802a
@@ -321,8 +321,8 @@ glabel func_8025E190
 /* 18CF30 8025E650 3C01802A */  lui       $at, 0x802a
 /* 18CF34 8025E654 AC22FB7C */  sw        $v0, -0x484($at)
 /* 18CF38 8025E658 24020006 */  addiu     $v0, $zero, 6
-/* 18CF3C 8025E65C 3C01800E */  lui       $at, 0x800e
-/* 18CF40 8025E660 AC22C4DC */  sw        $v0, -0x3b24($at)
+/* 18CF3C 8025E65C 3C01800E */  lui       $at, %hi(gBattleStatus+0x46C)
+/* 18CF40 8025E660 AC22C4DC */  sw        $v0, %lo(gBattleStatus+0x46C)($at)
 /* 18CF44 8025E664 3C01802A */  lui       $at, 0x802a
 /* 18CF48 8025E668 AC23FB80 */  sw        $v1, -0x480($at)
 /* 18CF4C 8025E66C 0C04760B */  jal       func_8011D82C
@@ -1659,8 +1659,8 @@ glabel func_8025E190
 /* 18E374 8025FA94 24020100 */  addiu     $v0, $zero, 0x100
 /* 18E378 8025FA98 ACA20148 */  sw        $v0, 0x148($a1)
 .L8025FA9C:
-/* 18E37C 8025FA9C 3C02800E */  lui       $v0, 0x800e
-/* 18E380 8025FAA0 8C42C074 */  lw        $v0, -0x3f8c($v0)
+/* 18E37C 8025FA9C 3C02800E */  lui       $v0, %hi(gBattleStatus+0x4)
+/* 18E380 8025FAA0 8C42C074 */  lw        $v0, %lo(gBattleStatus+0x4)($v0)
 /* 18E384 8025FAA4 3C030200 */  lui       $v1, 0x200
 /* 18E388 8025FAA8 00431024 */  and       $v0, $v0, $v1
 /* 18E38C 8025FAAC 14400007 */  bnez      $v0, .L8025FACC
@@ -1873,8 +1873,8 @@ glabel func_8025E190
 /* 18E67C 8025FD9C 28420063 */  slti      $v0, $v0, 0x63
 /* 18E680 8025FDA0 14400069 */  bnez      $v0, .L8025FF48
 /* 18E684 8025FDA4 3C030200 */   lui      $v1, 0x200
-/* 18E688 8025FDA8 3C02800E */  lui       $v0, 0x800e
-/* 18E68C 8025FDAC 8C42C074 */  lw        $v0, -0x3f8c($v0)
+/* 18E688 8025FDA8 3C02800E */  lui       $v0, %hi(gBattleStatus+0x4)
+/* 18E68C 8025FDAC 8C42C074 */  lw        $v0, %lo(gBattleStatus+0x4)($v0)
 /* 18E690 8025FDB0 00431024 */  and       $v0, $v0, $v1
 /* 18E694 8025FDB4 14400009 */  bnez      $v0, .L8025FDDC
 /* 18E698 8025FDB8 24040001 */   addiu    $a0, $zero, 1
@@ -1984,8 +1984,8 @@ glabel func_8025E190
 /* 18E818 8025FF38 24040020 */   addiu    $a0, $zero, 0x20
 /* 18E81C 8025FF3C 24020002 */  addiu     $v0, $zero, 2
 .L8025FF40:
-/* 18E820 8025FF40 3C01800E */  lui       $at, 0x800e
-/* 18E824 8025FF44 AC22C4DC */  sw        $v0, -0x3b24($at)
+/* 18E820 8025FF40 3C01800E */  lui       $at, %hi(gBattleStatus+0x46C)
+/* 18E824 8025FF44 AC22C4DC */  sw        $v0, %lo(gBattleStatus+0x46C)($at)
 .L8025FF48:
 /* 18E828 8025FF48 3C03802A */  lui       $v1, 0x802a
 /* 18E82C 8025FF4C 2463FB84 */  addiu     $v1, $v1, -0x47c

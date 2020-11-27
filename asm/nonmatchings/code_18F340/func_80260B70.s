@@ -6,8 +6,8 @@ glabel func_80260B70
 /* 18F454 80260B74 AFB1001C */  sw        $s1, 0x1c($sp)
 /* 18F458 80260B78 0080882D */  daddu     $s1, $a0, $zero
 /* 18F45C 80260B7C AFB00018 */  sw        $s0, 0x18($sp)
-/* 18F460 80260B80 3C10800E */  lui       $s0, 0x800e
-/* 18F464 80260B84 8E10C148 */  lw        $s0, -0x3eb8($s0)
+/* 18F460 80260B80 3C10800E */  lui       $s0, %hi(gBattleStatus+0xD8)
+/* 18F464 80260B84 8E10C148 */  lw        $s0, %lo(gBattleStatus+0xD8)($s0)
 /* 18F468 80260B88 3C0141A0 */  lui       $at, 0x41a0
 /* 18F46C 80260B8C 44811000 */  mtc1      $at, $f2
 /* 18F470 80260B90 24040002 */  addiu     $a0, $zero, 2

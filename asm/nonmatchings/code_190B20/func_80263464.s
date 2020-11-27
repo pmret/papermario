@@ -9,12 +9,12 @@ glabel func_80263464
 /* 191D54 80263474 AFBF0010 */   sw       $ra, 0x10($sp)
 /* 191D58 80263478 3C02800E */  lui       $v0, %hi(gBattleState)
 /* 191D5C 8026347C 8C42C068 */  lw        $v0, %lo(gBattleState)($v0)
-/* 191D60 80263480 3C03800E */  lui       $v1, 0x800e
-/* 191D64 80263484 8C63C4DC */  lw        $v1, -0x3b24($v1)
-/* 191D68 80263488 3C01800E */  lui       $at, 0x800e
-/* 191D6C 8026348C AC22C4E4 */  sw        $v0, -0x3b1c($at)
-/* 191D70 80263490 3C01800E */  lui       $at, 0x800e
-/* 191D74 80263494 AC23C4D8 */  sw        $v1, -0x3b28($at)
+/* 191D60 80263480 3C03800E */  lui       $v1, %hi(gBattleStatus+0x46C)
+/* 191D64 80263484 8C63C4DC */  lw        $v1, %lo(gBattleStatus+0x46C)($v1)
+/* 191D68 80263488 3C01800E */  lui       $at, %hi(gBattleStatus+0x474)
+/* 191D6C 8026348C AC22C4E4 */  sw        $v0, %lo(gBattleStatus+0x474)($at)
+/* 191D70 80263490 3C01800E */  lui       $at, %hi(gBattleStatus+0x468)
+/* 191D74 80263494 AC23C4D8 */  sw        $v1, %lo(gBattleStatus+0x468)($at)
 /* 191D78 80263498 0C090464 */  jal       func_80241190
 /* 191D7C 8026349C 2404001B */   addiu    $a0, $zero, 0x1b
 /* 191D80 802634A0 08098D2B */  j         .L802634AC

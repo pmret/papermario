@@ -8,8 +8,8 @@ glabel LoadBattleDmaData
 /* 181F10 80253630 0C0B1EAF */  jal       get_variable
 /* 181F14 80253634 8C450000 */   lw       $a1, ($v0)
 /* 181F18 80253638 00021840 */  sll       $v1, $v0, 1
-/* 181F1C 8025363C 3C04800E */  lui       $a0, 0x800e
-/* 181F20 80253640 9084C4EA */  lbu       $a0, -0x3b16($a0)
+/* 181F1C 8025363C 3C04800E */  lui       $a0, %hi(gBattleStatus+0x47A)
+/* 181F20 80253640 9084C4EA */  lbu       $a0, %lo(gBattleStatus+0x47A)($a0)
 /* 181F24 80253644 00621821 */  addu      $v1, $v1, $v0
 /* 181F28 80253648 00042140 */  sll       $a0, $a0, 5
 /* 181F2C 8025364C 3C028009 */  lui       $v0, 0x8009

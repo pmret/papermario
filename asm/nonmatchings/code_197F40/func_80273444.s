@@ -4,8 +4,8 @@
 glabel func_80273444
 /* 1A1D24 80273444 27BDFFA0 */  addiu     $sp, $sp, -0x60
 /* 1A1D28 80273448 AFB20020 */  sw        $s2, 0x20($sp)
-/* 1A1D2C 8027344C 3C12800E */  lui       $s2, 0x800e
-/* 1A1D30 80273450 8E52C148 */  lw        $s2, -0x3eb8($s2)
+/* 1A1D2C 8027344C 3C12800E */  lui       $s2, %hi(gBattleStatus+0xD8)
+/* 1A1D30 80273450 8E52C148 */  lw        $s2, %lo(gBattleStatus+0xD8)($s2)
 /* 1A1D34 80273454 AFB30024 */  sw        $s3, 0x24($sp)
 /* 1A1D38 80273458 0080982D */  daddu     $s3, $a0, $zero
 /* 1A1D3C 8027345C AFBF0028 */  sw        $ra, 0x28($sp)

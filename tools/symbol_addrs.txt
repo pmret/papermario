@@ -568,6 +568,7 @@ gItemTable = 0x800878E0; // size:0x2D80
 gAreas = 0x800934F0;
 gCurrentEncounter = 0x800B0F10; // size:0xB0
 gBattleState = 0x800DC068;
+gBattleStatus = 0x800DC070; // size:0x490
 test_below_player = 0x800DDFD0;
 trace_below_player = 0x800DE54C;
 collision_check_above = 0x800DE7E4;

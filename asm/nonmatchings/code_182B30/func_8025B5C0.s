@@ -44,8 +44,8 @@ glabel func_8025B5C0
 /* 189F38 8025B658 1444FFF8 */  bne       $v0, $a0, .L8025B63C
 /* 189F3C 8025B65C 00000000 */   nop      
 .L8025B660:
-/* 189F40 8025B660 3C02800E */  lui       $v0, 0x800e
-/* 189F44 8025B664 8C42C074 */  lw        $v0, -0x3f8c($v0)
+/* 189F40 8025B660 3C02800E */  lui       $v0, %hi(gBattleStatus+0x4)
+/* 189F44 8025B664 8C42C074 */  lw        $v0, %lo(gBattleStatus+0x4)($v0)
 /* 189F48 8025B668 30420040 */  andi      $v0, $v0, 0x40
 /* 189F4C 8025B66C 14400019 */  bnez      $v0, .L8025B6D4
 /* 189F50 8025B670 24020004 */   addiu    $v0, $zero, 4

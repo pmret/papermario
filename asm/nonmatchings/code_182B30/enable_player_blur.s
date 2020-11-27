@@ -4,8 +4,8 @@
 glabel enable_player_blur
 /* 182FB4 802546D4 27BDFFC0 */  addiu     $sp, $sp, -0x40
 /* 182FB8 802546D8 AFB10014 */  sw        $s1, 0x14($sp)
-/* 182FBC 802546DC 3C11800E */  lui       $s1, 0x800e
-/* 182FC0 802546E0 8E31C148 */  lw        $s1, -0x3eb8($s1)
+/* 182FBC 802546DC 3C11800E */  lui       $s1, %hi(gBattleStatus+0xD8)
+/* 182FC0 802546E0 8E31C148 */  lw        $s1, %lo(gBattleStatus+0xD8)($s1)
 /* 182FC4 802546E4 AFB40020 */  sw        $s4, 0x20($sp)
 /* 182FC8 802546E8 0000A02D */  daddu     $s4, $zero, $zero
 /* 182FCC 802546EC AFB50024 */  sw        $s5, 0x24($sp)

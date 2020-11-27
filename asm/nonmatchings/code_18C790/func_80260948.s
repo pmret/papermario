@@ -3,8 +3,8 @@
 
 glabel func_80260948
 /* 18F228 80260948 27BDFFE0 */  addiu     $sp, $sp, -0x20
-/* 18F22C 8026094C 3C03800E */  lui       $v1, 0x800e
-/* 18F230 80260950 8C63C4DC */  lw        $v1, -0x3b24($v1)
+/* 18F22C 8026094C 3C03800E */  lui       $v1, %hi(gBattleStatus+0x46C)
+/* 18F230 80260950 8C63C4DC */  lw        $v1, %lo(gBattleStatus+0x46C)($v1)
 /* 18F234 80260954 24020008 */  addiu     $v0, $zero, 8
 /* 18F238 80260958 10620008 */  beq       $v1, $v0, .L8026097C
 /* 18F23C 8026095C AFBF0018 */   sw       $ra, 0x18($sp)

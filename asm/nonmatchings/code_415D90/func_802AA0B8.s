@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel func_802AA0B8
-/* 41EE48 802AA0B8 3C03800E */  lui       $v1, 0x800e
-/* 41EE4C 802AA0BC 8C63C4DC */  lw        $v1, -0x3b24($v1)
+/* 41EE48 802AA0B8 3C03800E */  lui       $v1, %hi(gBattleStatus+0x46C)
+/* 41EE4C 802AA0BC 8C63C4DC */  lw        $v1, %lo(gBattleStatus+0x46C)($v1)
 /* 41EE50 802AA0C0 27BDFFC8 */  addiu     $sp, $sp, -0x38
 /* 41EE54 802AA0C4 AFB20018 */  sw        $s2, 0x18($sp)
 /* 41EE58 802AA0C8 3C12800E */  lui       $s2, %hi(gBattleStatus)
@@ -82,8 +82,8 @@ glabel func_802AA0B8
 /* 41EF5C 802AA1CC E6000018 */  swc1      $f0, 0x18($s0)
 /* 41EF60 802AA1D0 C6200140 */  lwc1      $f0, 0x140($s1)
 /* 41EF64 802AA1D4 2402000A */  addiu     $v0, $zero, 0xa
-/* 41EF68 802AA1D8 3C01800E */  lui       $at, 0x800e
-/* 41EF6C 802AA1DC AC22C4DC */  sw        $v0, -0x3b24($at)
+/* 41EF68 802AA1D8 3C01800E */  lui       $at, %hi(gBattleStatus+0x46C)
+/* 41EF6C 802AA1DC AC22C4DC */  sw        $v0, %lo(gBattleStatus+0x46C)($at)
 /* 41EF70 802AA1E0 A6120070 */  sh        $s2, 0x70($s0)
 /* 41EF74 802AA1E4 AE000054 */  sw        $zero, 0x54($s0)
 /* 41EF78 802AA1E8 080AA987 */  j         .L802AA61C
@@ -331,8 +331,8 @@ glabel func_802AA0B8
 /* 41F324 802AA594 0C0A8414 */  jal       func_802A1050
 /* 41F328 802AA598 00000000 */   nop      
 /* 41F32C 802AA59C 24020001 */  addiu     $v0, $zero, 1
-/* 41F330 802AA5A0 3C01800E */  lui       $at, 0x800e
-/* 41F334 802AA5A4 AC22C4DC */  sw        $v0, -0x3b24($at)
+/* 41F330 802AA5A0 3C01800E */  lui       $at, %hi(gBattleStatus+0x46C)
+/* 41F334 802AA5A4 AC22C4DC */  sw        $v0, %lo(gBattleStatus+0x46C)($at)
 /* 41F338 802AA5A8 0C0AA82E */  jal       func_802AA0B8
 /* 41F33C 802AA5AC 00000000 */   nop      
 /* 41F340 802AA5B0 0C0AA82E */  jal       func_802AA0B8
@@ -361,8 +361,8 @@ glabel func_802AA0B8
 /* 41F39C 802AA60C 3C01802B */  lui       $at, 0x802b
 /* 41F3A0 802AA610 AC20CC60 */  sw        $zero, -0x33a0($at)
 .L802AA614:
-/* 41F3A4 802AA614 3C01800E */  lui       $at, 0x800e
-/* 41F3A8 802AA618 AC22C4DC */  sw        $v0, -0x3b24($at)
+/* 41F3A4 802AA614 3C01800E */  lui       $at, %hi(gBattleStatus+0x46C)
+/* 41F3A8 802AA618 AC22C4DC */  sw        $v0, %lo(gBattleStatus+0x46C)($at)
 .L802AA61C:
 /* 41F3AC 802AA61C 8FBF001C */  lw        $ra, 0x1c($sp)
 /* 41F3B0 802AA620 8FB20018 */  lw        $s2, 0x18($sp)

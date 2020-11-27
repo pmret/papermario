@@ -5,8 +5,8 @@ glabel dispatch_event_partner_continue_turn
 /* 1AC7EC 8027DF0C 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 1AC7F0 8027DF10 2405000A */  addiu     $a1, $zero, 0xa
 /* 1AC7F4 8027DF14 AFB00010 */  sw        $s0, 0x10($sp)
-/* 1AC7F8 8027DF18 3C10800E */  lui       $s0, 0x800e
-/* 1AC7FC 8027DF1C 8E10C14C */  lw        $s0, -0x3eb4($s0)
+/* 1AC7F8 8027DF18 3C10800E */  lui       $s0, %hi(gBattleStatus+0xDC)
+/* 1AC7FC 8027DF1C 8E10C14C */  lw        $s0, %lo(gBattleStatus+0xDC)($s0)
 /* 1AC800 8027DF20 AFBF001C */  sw        $ra, 0x1c($sp)
 /* 1AC804 8027DF24 AFB20018 */  sw        $s2, 0x18($sp)
 /* 1AC808 8027DF28 AFB10014 */  sw        $s1, 0x14($sp)

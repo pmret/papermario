@@ -174,8 +174,8 @@ glabel initialize_battle
 /* 16CC90 8023E3B0 24620001 */   addiu    $v0, $v1, 1
 /* 16CC94 8023E3B4 A66202A2 */  sh        $v0, 0x2a2($s3)
 .L8023E3B8:
-/* 16CC98 8023E3B8 3C02800E */  lui       $v0, 0x800e
-/* 16CC9C 8023E3BC 8C42C074 */  lw        $v0, -0x3f8c($v0)
+/* 16CC98 8023E3B8 3C02800E */  lui       $v0, %hi(gBattleStatus+0x4)
+/* 16CC9C 8023E3BC 8C42C074 */  lw        $v0, %lo(gBattleStatus+0x4)($v0)
 /* 16CCA0 8023E3C0 82630012 */  lb        $v1, 0x12($s3)
 /* 16CCA4 8023E3C4 30420040 */  andi      $v0, $v0, 0x40
 /* 16CCA8 8023E3C8 3C01802A */  lui       $at, 0x802a
