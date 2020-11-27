@@ -22,6 +22,11 @@ typedef struct Vec3f {
     /* 0x08 */ f32 z;
 } Vec3f; // size = 0x0C
 
+typedef struct Vec2s {
+    /* 0x00 */ s16 x;
+    /* 0x02 */ s16 y;
+} Vec2s; // size = 0x04
+
 typedef struct Vec3s {
     /* 0x00 */ s16 x;
     /* 0x02 */ s16 y;
@@ -247,7 +252,7 @@ typedef struct ScriptInstance {
     /* 0x144 */ ScriptID id;
     /* 0x148 */ union {
         s32 enemyID;
-        s32 actorID;
+        ActorID actorID;
         struct Enemy* enemy; ///< For overworld scripts owned by an Npc
         struct Actor* actor; ///< For battle scripts
     } owner1;                ///< Initially -1
@@ -514,7 +519,9 @@ typedef struct BattleStatus {
     /* 0x048 */ u8 currentSubmenu;
     /* 0x049 */ char unk_49[10];
     /* 0x053 */ u8 stratsLastCursorPos;
-    /* 0x054 */ char unk_54[32];
+    /* 0x054 */ char unk_54[28];
+    /* 0x070 */ s16 unk_70;
+    /* 0x072 */ char unk_72[2];
     /* 0x074 */ s32 unk_74;
     /* 0x078 */ u8 totalStarPoints;
     /* 0x079 */ u8 pendingStarPoints; /* how many to add */
@@ -533,7 +540,8 @@ typedef struct BattleStatus {
     /* 0x089 */ u8 hpDrainCount;
     /* 0x08A */ char unk_8A;
     /* 0x08B */ u8 hustleTurns; /* numTurns from hustle drink, normally 0 */
-    /* 0x08C */ char unk_8C[2];
+    /* 0x08C */ char unk_8C;
+    /* 0x08D */ s8 unk_8D;
     /* 0x08E */ u8 initialEnemyCount; /* used for SP award bonus */
     /* 0x08F */ char unk_8F[3];
     /* 0x092 */ s8 unk_92;
@@ -589,7 +597,7 @@ typedef struct BattleStatus {
     /* 0x197 */ u8 targetHomeIndex; /* some sort of home idnex used for target list construction */
     /* 0x198 */ u8 powerBounceCounter;
     /* 0x199 */ s8 wasStatusInflicted; /* during last attack */
-    /* 0x19A */ s8 unk_19A;
+    /* 0x19A */ u8 unk_19A;
     /* 0x19B */ char unk_19B[5];
     /* 0x1A0 */ s16 currentTargetID; /* selected? */
     /* 0x1A2 */ u8 currentTargetPart; /* selected? */
@@ -1032,18 +1040,18 @@ typedef struct ActorPart {
     /* 0x08 */ struct StaticActorPart* staticData;
     /* 0x0C */ struct ActorPart* nextPart;
     /* 0x10 */ struct ActorPartMovement* movement;
-    /* 0x14 */ s16 partOffset[3];
-    /* 0x1A */ s16 visualOffset[3];
+    /* 0x14 */ Vec3s partOffset;
+    /* 0x1A */ Vec3s visualOffset;
     /* 0x20 */ Vec3f partOffsetFloat;
     /* 0x2C */ Vec3f absolutePosition;
     /* 0x38 */ Vec3f rotation;
-    /* 0x44 */ s16 rotationPivotOffset[3];
+    /* 0x44 */ Vec3s rotationPivotOffset;
     /* 0x4A */ char unk_4A[2];
     /* 0x4C */ f32 scale[3];
     /* 0x58 */ Vec3f currentPos;
     /* 0x64 */ f32 yaw;
     /* 0x68 */ s16 unkOffset[2];
-    /* 0x6C */ s16 targetOffset[2];
+    /* 0x6C */ Vec2s targetOffset;
     /* 0x70 */ s16 unk_70;
     /* 0x72 */ u8 size[2];
     /* 0x74 */ u8 verticalStretch;

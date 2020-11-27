@@ -17,7 +17,7 @@ ApiStatus ActorSpeak(ScriptInstance* script, s32 isInitialCall) {
     Actor* actor;
     ActorPart* part;
     s32 stringID;
-    s32 actorID;
+    ActorID actorID;
     s32 partIndex;
     PrintContext** printContext;
     s32 anim;

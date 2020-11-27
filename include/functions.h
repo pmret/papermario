@@ -48,7 +48,7 @@ Trigger* create_trigger(TriggerDefinition* def);
 s32 _bound_script_trigger_handler(Trigger* trigger);
 Trigger* get_trigger_by_id(s32 triggerID);
 
-Actor* get_actor(s32 actorID);
+Actor* get_actor(ActorID actorID);
 ActorPart* get_actor_part(Actor* actor, s32 partIndex);
 
 s32 func_800494C0(Npc* npc, s32 arg1, s32 arg2);
@@ -106,6 +106,7 @@ s32 does_script_exist_by_ref(ScriptInstance* script);
 ScriptInstance* start_script(Bytecode* initialLine, s32 priority, s32 initialState);
 ScriptInstance* start_script_in_group(Bytecode* initialLine, u8 priority, u8 initialState, u8 groupFlags);
 
+void set_animation_rate(ActorID actorID, s32 partIndex, f32 rate);
 void func_8011B7C0(u16, s32, s32);
 AnimatedMesh* get_anim_mesh(s32 arg0);
 void func_80137D88(s32, f32);
