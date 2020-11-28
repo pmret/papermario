@@ -1494,7 +1494,20 @@ ApiStatus GetBattleFlags2(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_197F40", SetBattleFlagBits2);
+ApiStatus SetBattleFlagBits2(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Bytecode a0 = *args++;
+
+    if (get_variable(script, *args)) {
+        BattleStatus* battleStatus = BATTLE_STATUS;
+        battleStatus->flags2 |= a0;
+    } else {
+        BattleStatus* battleStatus = BATTLE_STATUS;
+        battleStatus->flags2 &= ~a0;
+    }
+
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_197F40", SetActorFlags);
 

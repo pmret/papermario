@@ -115,7 +115,7 @@ INCLUDE_ASM(s32, "code_181810", ActorSpeak);
 
 INCLUDE_ASM(s32, "code_181810", EndActorSpeech);
 
-ApiStatus ShowBattleChoice(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus ShowBattleChoice(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall) {
@@ -191,7 +191,7 @@ ApiStatus func_80253734(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802537C0(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus func_802537C0(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 a0 = *args++;
     s32 a1 = *args++;
