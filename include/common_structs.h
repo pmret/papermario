@@ -1047,7 +1047,7 @@ typedef struct ActorPart {
     /* 0x38 */ Vec3f rotation;
     /* 0x44 */ Vec3s rotationPivotOffset;
     /* 0x4A */ char unk_4A[2];
-    /* 0x4C */ f32 scale[3];
+    /* 0x4C */ Vec3f scale;
     /* 0x58 */ Vec3f currentPos;
     /* 0x64 */ f32 yaw;
     /* 0x68 */ s16 unkOffset[2];
@@ -1269,11 +1269,11 @@ typedef struct Actor {
     /* 0x144 */ Vec3f currentPos;
     /* 0x150 */ Vec3s headOffset;
     /* 0x156 */ s16 healthBarPosition[3];
-    /* 0x15C */ f32 rotation[3];
-    /* 0x168 */ s16 rotationPivotOffset[3];
+    /* 0x15C */ Vec3f rotation;
+    /* 0x168 */ Vec3s rotationPivotOffset;
     /* 0x16E */ char unk_16E[2];
-    /* 0x170 */ f32 scale[3];
-    /* 0x17C */ f32 scaleModifier[3]; /* multiplies normal scale factors componentwise */
+    /* 0x170 */ Vec3f scale;
+    /* 0x17C */ Vec3f scaleModifier; /* multiplies normal scale factors componentwise */
     /* 0x188 */ f32 scalingFactor;
     /* 0x18C */ f32 yaw;
     /* 0x190 */ Vec2b size;
