@@ -270,7 +270,7 @@ segments:
     - [0xFE650, .data, code_e79b0_len_1920]
     - [0xFE660, data, si]
     - [0xFE730, .rodata, code_e79b0_len_1920]
-  - [0xFE748, bin] # rodata chunk for above overlay; here to avoid the 0x10 alignment
+    - [0xFE748, bin] # rodata chunk for above overlay; here to avoid the 0x10 alignment
   - type: code
     start: 0xFEE30
     vram: 0x802DBD40
