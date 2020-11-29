@@ -7,6 +7,7 @@ options:
   ld_o_replace_extension: False
   ld_addrs_header: include/ld_addrs.h
   extensions: splat_ext
+  symbol_debug_info: False
 segments:
   - name: header
     type: header
