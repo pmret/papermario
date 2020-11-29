@@ -1880,6 +1880,7 @@ GetItemPower = 0x802D732C;
 ShowGotItem = 0x802D73A4;
 ShowEmote = 0x802D78A0;
 RemoveEffect = 0x802D7AE4;
+func_802D7BA4 = 0x802D7BA4;
 ShowSleepBubble = 0x802D8028;
 PlayEffect = 0x802D829C;
 SetSpriteShading = 0x802D9700;

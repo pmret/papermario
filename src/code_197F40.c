@@ -1807,7 +1807,7 @@ ApiStatus func_8026D5A4(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus HPBarToHome(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus HPBarToHome(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     ActorID actorID = get_variable(script, *args++);
     Actor* actor;
@@ -1830,7 +1830,7 @@ ApiStatus HPBarToHome(ScriptInstance *script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus HPBarToCurrent(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus HPBarToCurrent(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     ActorID actorID = get_variable(script, *args++);
     Actor* actor;
@@ -1853,7 +1853,7 @@ ApiStatus HPBarToCurrent(ScriptInstance *script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8026D8EC(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus func_8026D8EC(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     ActorID actorID = get_variable(script, *args++);
 
@@ -1866,7 +1866,7 @@ ApiStatus func_8026D8EC(ScriptInstance *script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8026D940(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus func_8026D940(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     ActorID actorID = get_variable(script, *args++);
     Actor* actor;
@@ -1894,7 +1894,7 @@ ApiStatus func_8026D940(ScriptInstance *script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8026DA94(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus func_8026DA94(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     ActorID actorID = get_variable(script, *args++);
     Actor* actor;
