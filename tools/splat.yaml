@@ -8,6 +8,7 @@ options:
   ld_addrs_header: include/ld_addrs.h
   extensions: splat_ext
   symbol_debug_info: False
+  create_detected_syms: True
 segments:
   - name: header
     type: header
