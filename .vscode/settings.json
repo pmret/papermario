@@ -21,4 +21,7 @@
     "python.autoComplete.extraPaths": [
         "./tools"
     ],
+    "python.analysis.extraPaths": [
+        "./tools"
+    ],
 }

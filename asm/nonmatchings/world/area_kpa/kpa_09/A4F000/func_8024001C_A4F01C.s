@@ -16,8 +16,8 @@ glabel func_8024001C_A4F01C
 /* A4F048 80240048 0C0B1EAF */  jal       get_variable
 /* A4F04C 8024004C 0040802D */   daddu    $s0, $v0, $zero
 /* A4F050 80240050 0040182D */  daddu     $v1, $v0, $zero
-/* A4F054 80240054 3C028016 */  lui       $v0, 0x8016
-/* A4F058 80240058 8442A552 */  lh        $v0, -0x5aae($v0)
+/* A4F054 80240054 3C028016 */  lui       $v0, %hi(gCollisionStatus+0x2)
+/* A4F058 80240058 8442A552 */  lh        $v0, %lo(gCollisionStatus+0x2)($v0)
 /* A4F05C 8024005C 16020009 */  bne       $s0, $v0, .L80240084
 /* A4F060 80240060 00000000 */   nop      
 /* A4F064 80240064 8E220084 */  lw        $v0, 0x84($s1)

@@ -7,8 +7,8 @@ glabel func_802402F0_9867D0
 /* 9867D8 802402F8 8C82000C */  lw        $v0, 0xc($a0)
 /* 9867DC 802402FC 0C0B1EAF */  jal       get_variable
 /* 9867E0 80240300 8C450000 */   lw       $a1, ($v0)
-/* 9867E4 80240304 3C038016 */  lui       $v1, 0x8016
-/* 9867E8 80240308 8463A552 */  lh        $v1, -0x5aae($v1)
+/* 9867E4 80240304 3C038016 */  lui       $v1, %hi(gCollisionStatus+0x2)
+/* 9867E8 80240308 8463A552 */  lh        $v1, %lo(gCollisionStatus+0x2)($v1)
 /* 9867EC 8024030C 8FBF0010 */  lw        $ra, 0x10($sp)
 /* 9867F0 80240310 00621826 */  xor       $v1, $v1, $v0
 /* 9867F4 80240314 0003182B */  sltu      $v1, $zero, $v1
