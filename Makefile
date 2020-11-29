@@ -155,6 +155,11 @@ $(BUILD_DIR)/data/%.data.o: asm/data/%.data.s
 	@mkdir -p $(shell dirname $@)
 	$(AS) $(ASFLAGS) -o $@ $<
 
+# Rodata
+$(BUILD_DIR)/rodata/%.rodata.o: asm/data/%.rodata.s
+	@mkdir -p $(shell dirname $@)
+	$(AS) $(ASFLAGS) -o $@ $<
+
 # Images
 $(BUILD_DIR)/%.png.o: $(BUILD_DIR)/%.png
 	$(LD) -r -b binary -o $@ $<
