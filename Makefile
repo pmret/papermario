@@ -62,7 +62,7 @@ CPPFLAGS   := -Iinclude -Isrc -D _LANGUAGE_C -ffreestanding -DF3DEX_GBI_2 -D_MIP
 ASFLAGS    := -EB -Iinclude -march=vr4300 -mtune=vr4300
 OLDASFLAGS := -EB -Iinclude -G 0
 CFLAGS     := -O2 -quiet -G 0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wimplicit -Wuninitialized -Wshadow
-LDFLAGS    := -T undefined_syms.txt -T undefined_funcs.txt -T $(BUILD_DIR)/$(LD_SCRIPT) -Map $(LD_MAP) --no-check-sections
+LDFLAGS    := -T undefined_syms.txt -T undefined_funcs.txt -T undefined_funcs_auto.txt -T $(BUILD_DIR)/$(LD_SCRIPT) -Map $(LD_MAP) --no-check-sections
 
 ifeq ($(WATCH_INCLUDES),1)
 CPPMFLAGS   = -MP -MD -MF $@.mk -MT $(BUILD_DIR)/$*.d

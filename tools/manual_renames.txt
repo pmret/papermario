@@ -588,3 +588,5 @@
 [-UnkNpcAIFunc1-]{+func_802412BC_9B7C3C+}
 [-UnkNpcAIFunc2-]{+func_802416C0_9B8040+}
 [-UnkDurationCheck-]{+func_802422D8_9B8C58+}
+[-set_script_owner_npc_col_height-]{+func_80241C74_88A844+}
+[-set_script_owner_npc_anim-]{+func_80241960_88A530+}
