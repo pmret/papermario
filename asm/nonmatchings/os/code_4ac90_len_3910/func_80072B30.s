@@ -24,10 +24,10 @@ glabel func_80072B30
 /* 4DF7C 80072B7C AC20C4F8 */  sw        $zero, %lo(gBattleStatus+0x488)($at)
 /* 4DF80 80072B80 3C01800E */  lui       $at, %hi(gBattleStatus+0x478)
 /* 4DF84 80072B84 AC20C4E8 */  sw        $zero, %lo(gBattleStatus+0x478)($at)
-/* 4DF88 80072B88 3C01800E */  lui       $at, 0x800e
-/* 4DF8C 80072B8C AC20C064 */  sw        $zero, -0x3f9c($at)
-/* 4DF90 80072B90 3C01800E */  lui       $at, 0x800e
-/* 4DF94 80072B94 AC20C060 */  sw        $zero, -0x3fa0($at)
+/* 4DF88 80072B88 3C01800E */  lui       $at, %hi(D_800DC064)
+/* 4DF8C 80072B8C AC20C064 */  sw        $zero, %lo(D_800DC064)($at)
+/* 4DF90 80072B90 3C01800E */  lui       $at, %hi(D_800DC060)
+/* 4DF94 80072B94 AC20C060 */  sw        $zero, %lo(D_800DC060)($at)
 /* 4DF98 80072B98 3C01800E */  lui       $at, %hi(gBattleStatus+0x47C)
 /* 4DF9C 80072B9C AC20C4EC */  sw        $zero, %lo(gBattleStatus+0x47C)($at)
 /* 4DFA0 80072BA0 3C01800E */  lui       $at, %hi(gBattleStatus+0x484)

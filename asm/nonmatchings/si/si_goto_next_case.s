@@ -4,8 +4,8 @@
 glabel si_goto_next_case
 /* ED410 802C8A60 24050001 */  addiu     $a1, $zero, 1
 /* ED414 802C8A64 8C860008 */  lw        $a2, 8($a0)
-/* ED418 802C8A68 3C08802E */  lui       $t0, 0x802e
-/* ED41C 802C8A6C 2508A140 */  addiu     $t0, $t0, -0x5ec0
+/* ED418 802C8A68 3C08802E */  lui       $t0, %hi(D_802DA140)
+/* ED41C 802C8A6C 2508A140 */  addiu     $t0, $t0, %lo(D_802DA140)
 /* ED420 802C8A70 00A0382D */  daddu     $a3, $a1, $zero
 .L802C8A74:
 /* ED424 802C8A74 00C0202D */  daddu     $a0, $a2, $zero

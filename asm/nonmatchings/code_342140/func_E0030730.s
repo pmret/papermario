@@ -40,14 +40,14 @@ glabel func_E0030730
 /* 3428F8 E00307B8 2662FFFA */  addiu     $v0, $s3, -6
 /* 3428FC E00307BC 2C55000E */  sltiu     $s5, $v0, 0xe
 /* 342900 E00307C0 2630001C */  addiu     $s0, $s1, 0x1c
-/* 342904 E00307C4 3C01E003 */  lui       $at, 0xe003
-/* 342908 E00307C8 D43A0ED8 */  ldc1      $f26, 0xed8($at)
-/* 34290C E00307CC 3C01E003 */  lui       $at, 0xe003
-/* 342910 E00307D0 D4340EE0 */  ldc1      $f20, 0xee0($at)
-/* 342914 E00307D4 3C01E003 */  lui       $at, 0xe003
-/* 342918 E00307D8 D4380EE8 */  ldc1      $f24, 0xee8($at)
-/* 34291C E00307DC 3C01E003 */  lui       $at, 0xe003
-/* 342920 E00307E0 D4360EF0 */  ldc1      $f22, 0xef0($at)
+/* 342904 E00307C4 3C01E003 */  lui       $at, %hi(D_E0030ED8)
+/* 342908 E00307C8 D43A0ED8 */  ldc1      $f26, %lo(D_E0030ED8)($at)
+/* 34290C E00307CC 3C01E003 */  lui       $at, %hi(D_E0030EE0)
+/* 342910 E00307D0 D4340EE0 */  ldc1      $f20, %lo(D_E0030EE0)($at)
+/* 342914 E00307D4 3C01E003 */  lui       $at, %hi(D_E0030EE8)
+/* 342918 E00307D8 D4380EE8 */  ldc1      $f24, %lo(D_E0030EE8)($at)
+/* 34291C E00307DC 3C01E003 */  lui       $at, %hi(D_E0030EF0)
+/* 342920 E00307E0 D4360EF0 */  ldc1      $f22, %lo(D_E0030EF0)($at)
 .LE00307E4:
 /* 342924 E00307E4 8E230000 */  lw        $v1, ($s1)
 /* 342928 E00307E8 24020002 */  addiu     $v0, $zero, 2

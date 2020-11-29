@@ -16,14 +16,14 @@ glabel func_E000E000
 /* 32C13C E000E02C 27A40010 */  addiu     $a0, $sp, 0x10
 /* 32C140 E000E030 F7B40040 */  sdc1      $f20, 0x40($sp)
 /* 32C144 E000E034 C7B4007C */  lwc1      $f20, 0x7c($sp)
-/* 32C148 E000E038 3C02E001 */  lui       $v0, 0xe001
-/* 32C14C E000E03C 2442E16C */  addiu     $v0, $v0, -0x1e94
+/* 32C148 E000E038 3C02E001 */  lui       $v0, %hi(D_E000E16C)
+/* 32C14C E000E03C 2442E16C */  addiu     $v0, $v0, %lo(D_E000E16C)
 /* 32C150 E000E040 AFA20018 */  sw        $v0, 0x18($sp)
-/* 32C154 E000E044 3C02E001 */  lui       $v0, 0xe001
-/* 32C158 E000E048 2442E174 */  addiu     $v0, $v0, -0x1e8c
+/* 32C154 E000E044 3C02E001 */  lui       $v0, %hi(D_E000E174)
+/* 32C158 E000E048 2442E174 */  addiu     $v0, $v0, %lo(D_E000E174)
 /* 32C15C E000E04C AFA2001C */  sw        $v0, 0x1c($sp)
-/* 32C160 E000E050 3C02E001 */  lui       $v0, 0xe001
-/* 32C164 E000E054 2442E244 */  addiu     $v0, $v0, -0x1dbc
+/* 32C160 E000E050 3C02E001 */  lui       $v0, %hi(D_E000E244)
+/* 32C164 E000E054 2442E244 */  addiu     $v0, $v0, %lo(D_E000E244)
 /* 32C168 E000E058 AFA20020 */  sw        $v0, 0x20($sp)
 /* 32C16C E000E05C 24020007 */  addiu     $v0, $zero, 7
 /* 32C170 E000E060 AFBF0038 */  sw        $ra, 0x38($sp)

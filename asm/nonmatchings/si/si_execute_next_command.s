@@ -12,9 +12,9 @@ glabel si_execute_next_command
 /* EBDCC 802C741C 1040018B */  beqz      $v0, .L802C7A4C
 /* EBDD0 802C7420 24050002 */   addiu    $a1, $zero, 2
 /* EBDD4 802C7424 00A31004 */  sllv      $v0, $v1, $a1
-/* EBDD8 802C7428 3C01802E */  lui       $at, 0x802e
+/* EBDD8 802C7428 3C01802E */  lui       $at, %hi(D_802D9F20)
 /* EBDDC 802C742C 00220821 */  addu      $at, $at, $v0
-/* EBDE0 802C7430 8C229F20 */  lw        $v0, -0x60e0($at)
+/* EBDE0 802C7430 8C229F20 */  lw        $v0, %lo(D_802D9F20)($at)
 /* EBDE4 802C7434 00400008 */  jr        $v0
 /* EBDE8 802C7438 00000000 */   nop      
 /* EBDEC 802C743C 8E030008 */  lw        $v1, 8($s0)

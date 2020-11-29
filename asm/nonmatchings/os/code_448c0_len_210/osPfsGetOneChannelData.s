@@ -4,8 +4,8 @@
 glabel osPfsGetOneChannelData
 /* 44A44 80069644 27BDFFF0 */  addiu     $sp, $sp, -0x10
 /* 44A48 80069648 00A03821 */  addu      $a3, $a1, $zero
-/* 44A4C 8006964C 3C06800E */  lui       $a2, 0x800e
-/* 44A50 80069650 24C6A000 */  addiu     $a2, $a2, -0x6000
+/* 44A4C 8006964C 3C06800E */  lui       $a2, %hi(D_800DA000)
+/* 44A50 80069650 24C6A000 */  addiu     $a2, $a2, %lo(D_800DA000)
 /* 44A54 80069654 18800005 */  blez      $a0, .L8006966C
 /* 44A58 80069658 00001821 */   addu     $v1, $zero, $zero
 .L8006965C:

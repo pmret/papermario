@@ -4,8 +4,8 @@
 glabel func_802D417C
 /* F8B2C 802D417C 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* F8B30 802D4180 AFB20018 */  sw        $s2, 0x18($sp)
-/* F8B34 802D4184 3C12802E */  lui       $s2, 0x802e
-/* F8B38 802D4188 2652B7C0 */  addiu     $s2, $s2, -0x4840
+/* F8B34 802D4184 3C12802E */  lui       $s2, %hi(D_802DB7C0)
+/* F8B38 802D4188 2652B7C0 */  addiu     $s2, $s2, %lo(D_802DB7C0)
 /* F8B3C 802D418C AFB10014 */  sw        $s1, 0x14($sp)
 /* F8B40 802D4190 00048880 */  sll       $s1, $a0, 2
 /* F8B44 802D4194 AFBF001C */  sw        $ra, 0x1c($sp)

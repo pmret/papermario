@@ -20,8 +20,8 @@ glabel func_8013AF70
 /* D16AC 8013AFAC 00628021 */   addu     $s0, $v1, $v0
 /* D16B0 8013AFB0 8E020014 */  lw        $v0, 0x14($s0)
 /* D16B4 8013AFB4 A2080000 */  sb        $t0, ($s0)
-/* D16B8 8013AFB8 3C038015 */  lui       $v1, 0x8015
-/* D16BC 8013AFBC 8C63EE10 */  lw        $v1, -0x11f0($v1)
+/* D16B8 8013AFB8 3C038015 */  lui       $v1, %hi(D_8014EE10)
+/* D16BC 8013AFBC 8C63EE10 */  lw        $v1, %lo(D_8014EE10)($v1)
 /* D16C0 8013AFC0 00461025 */  or        $v0, $v0, $a2
 /* D16C4 8013AFC4 AE020014 */  sw        $v0, 0x14($s0)
 /* D16C8 8013AFC8 8CA20000 */  lw        $v0, ($a1)

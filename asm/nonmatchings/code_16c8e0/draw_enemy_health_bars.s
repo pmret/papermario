@@ -122,15 +122,15 @@ glabel draw_enemy_health_bars
 /* 16EA38 80240158 0C00B94E */  jal       get_screen_coords
 /* 16EA3C 8024015C AFA20018 */   sw       $v0, 0x18($sp)
 /* 16EA40 80240160 2405000A */  addiu     $a1, $zero, 0xa
-/* 16EA44 80240164 3C10802A */  lui       $s0, 0x802a
-/* 16EA48 80240168 8E10EFBC */  lw        $s0, -0x1044($s0)
+/* 16EA44 80240164 3C10802A */  lui       $s0, %hi(D_8029EFBC)
+/* 16EA48 80240168 8E10EFBC */  lw        $s0, %lo(D_8029EFBC)($s0)
 /* 16EA4C 8024016C 8FA20024 */  lw        $v0, 0x24($sp)
 /* 16EA50 80240170 0200202D */  daddu     $a0, $s0, $zero
 /* 16EA54 80240174 24420010 */  addiu     $v0, $v0, 0x10
 /* 16EA58 80240178 0C051277 */  jal       func_801449DC
 /* 16EA5C 8024017C AFA20024 */   sw       $v0, 0x24($sp)
-/* 16EA60 80240180 3C058029 */  lui       $a1, 0x8029
-/* 16EA64 80240184 24A51F80 */  addiu     $a1, $a1, 0x1f80
+/* 16EA60 80240180 3C058029 */  lui       $a1, %hi(D_80291F80)
+/* 16EA64 80240184 24A51F80 */  addiu     $a1, $a1, %lo(D_80291F80)
 /* 16EA68 80240188 0C0511FF */  jal       set_menu_icon_script
 /* 16EA6C 8024018C 0200202D */   daddu    $a0, $s0, $zero
 /* 16EA70 80240190 8FA50020 */  lw        $a1, 0x20($sp)
@@ -151,13 +151,13 @@ glabel draw_enemy_health_bars
 /* 16EAAC 802401CC 00021040 */  sll       $v0, $v0, 1
 /* 16EAB0 802401D0 1A200021 */  blez      $s1, .L80240258
 /* 16EAB4 802401D4 0282A023 */   subu     $s4, $s4, $v0
-/* 16EAB8 802401D8 3C10802A */  lui       $s0, 0x802a
-/* 16EABC 802401DC 8E10EFBC */  lw        $s0, -0x1044($s0)
+/* 16EAB8 802401D8 3C10802A */  lui       $s0, %hi(D_8029EFBC)
+/* 16EABC 802401DC 8E10EFBC */  lw        $s0, %lo(D_8029EFBC)($s0)
 /* 16EAC0 802401E0 2405000A */  addiu     $a1, $zero, 0xa
 /* 16EAC4 802401E4 0C051277 */  jal       func_801449DC
 /* 16EAC8 802401E8 0200202D */   daddu    $a0, $s0, $zero
-/* 16EACC 802401EC 3C088028 */  lui       $t0, 0x8028
-/* 16EAD0 802401F0 250809FC */  addiu     $t0, $t0, 0x9fc
+/* 16EACC 802401EC 3C088028 */  lui       $t0, %hi(D_802809FC)
+/* 16EAD0 802401F0 250809FC */  addiu     $t0, $t0, %lo(D_802809FC)
 /* 16EAD4 802401F4 02481021 */  addu      $v0, $s2, $t0
 /* 16EAD8 802401F8 8C450000 */  lw        $a1, ($v0)
 /* 16EADC 802401FC 0C0511FF */  jal       set_menu_icon_script
@@ -184,14 +184,14 @@ glabel draw_enemy_health_bars
 /* 16EB30 80240250 0C0511F1 */  jal       draw_icon_1
 /* 16EB34 80240254 0200202D */   daddu    $a0, $s0, $zero
 .L80240258:
-/* 16EB38 80240258 3C10802A */  lui       $s0, 0x802a
-/* 16EB3C 8024025C 8E10EFBC */  lw        $s0, -0x1044($s0)
+/* 16EB38 80240258 3C10802A */  lui       $s0, %hi(D_8029EFBC)
+/* 16EB3C 8024025C 8E10EFBC */  lw        $s0, %lo(D_8029EFBC)($s0)
 /* 16EB40 80240260 2405000A */  addiu     $a1, $zero, 0xa
 /* 16EB44 80240264 0C051277 */  jal       func_801449DC
 /* 16EB48 80240268 0200202D */   daddu    $a0, $s0, $zero
 /* 16EB4C 8024026C 00141080 */  sll       $v0, $s4, 2
-/* 16EB50 80240270 3C088028 */  lui       $t0, 0x8028
-/* 16EB54 80240274 250809FC */  addiu     $t0, $t0, 0x9fc
+/* 16EB50 80240270 3C088028 */  lui       $t0, %hi(D_802809FC)
+/* 16EB54 80240274 250809FC */  addiu     $t0, $t0, %lo(D_802809FC)
 /* 16EB58 80240278 00481021 */  addu      $v0, $v0, $t0
 /* 16EB5C 8024027C 8C450000 */  lw        $a1, ($v0)
 /* 16EB60 80240280 0C0511FF */  jal       set_menu_icon_script

@@ -11,8 +11,8 @@ glabel func_800557CC
 /* 30BE4 800557E4 0000802D */  daddu     $s0, $zero, $zero
 /* 30BE8 800557E8 AFBF001C */  sw        $ra, 0x1c($sp)
 .L800557EC:
-/* 30BEC 800557EC 3C028008 */  lui       $v0, 0x8008
-/* 30BF0 800557F0 94428DB6 */  lhu       $v0, -0x724a($v0)
+/* 30BEC 800557EC 3C028008 */  lui       $v0, %hi(D_80078DB6)
+/* 30BF0 800557F0 94428DB6 */  lhu       $v0, %lo(D_80078DB6)($v0)
 /* 30BF4 800557F4 16020005 */  bne       $s0, $v0, .L8005580C
 /* 30BF8 800557F8 0200202D */   daddu    $a0, $s0, $zero
 /* 30BFC 800557FC 0C01553A */  jal       func_800554E8

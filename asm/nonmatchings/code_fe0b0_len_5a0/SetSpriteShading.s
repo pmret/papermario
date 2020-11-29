@@ -28,8 +28,8 @@ glabel SetSpriteShading
 /* FE10C 802D975C 00D02021 */  addu      $a0, $a2, $s0
 /* FE110 802D9760 26050008 */  addiu     $a1, $s0, 8
 /* FE114 802D9764 00C52821 */  addu      $a1, $a2, $a1
-/* FE118 802D9768 3C11802E */  lui       $s1, 0x802e
-/* FE11C 802D976C 2631BB60 */  addiu     $s1, $s1, -0x44a0
+/* FE118 802D9768 3C11802E */  lui       $s1, %hi(D_802DBB60)
+/* FE11C 802D976C 2631BB60 */  addiu     $s1, $s1, %lo(D_802DBB60)
 /* FE120 802D9770 0C00A5CF */  jal       dma_copy
 /* FE124 802D9774 0220302D */   daddu    $a2, $s1, $zero
 /* FE128 802D9778 0220302D */  daddu     $a2, $s1, $zero
@@ -39,8 +39,8 @@ glabel SetSpriteShading
 /* FE138 802D9788 8E300000 */  lw        $s0, ($s1)
 /* FE13C 802D978C 0C00A5CF */  jal       dma_copy
 /* FE140 802D9790 24850004 */   addiu    $a1, $a0, 4
-/* FE144 802D9794 3C12802E */  lui       $s2, 0x802e
-/* FE148 802D9798 2652BB68 */  addiu     $s2, $s2, -0x4498
+/* FE144 802D9794 3C12802E */  lui       $s2, %hi(D_802DBB68)
+/* FE148 802D9798 2652BB68 */  addiu     $s2, $s2, %lo(D_802DBB68)
 /* FE14C 802D979C 0240302D */  daddu     $a2, $s2, $zero
 /* FE150 802D97A0 8E220000 */  lw        $v0, ($s1)
 /* FE154 802D97A4 3C030031 */  lui       $v1, 0x31

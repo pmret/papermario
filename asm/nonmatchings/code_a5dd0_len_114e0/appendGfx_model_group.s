@@ -5,8 +5,8 @@ glabel appendGfx_model_group
 /* AE394 80117C94 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* AE398 80117C98 AFBF0010 */  sw        $ra, 0x10($sp)
 /* AE39C 80117C9C 94820002 */  lhu       $v0, 2($a0)
-/* AE3A0 80117CA0 3C05800A */  lui       $a1, 0x800a
-/* AE3A4 80117CA4 8CA5A5F4 */  lw        $a1, -0x5a0c($a1)
+/* AE3A0 80117CA0 3C05800A */  lui       $a1, %hi(D_8009A5F4)
+/* AE3A4 80117CA4 8CA5A5F4 */  lw        $a1, %lo(D_8009A5F4)($a1)
 /* AE3A8 80117CA8 2443FFFF */  addiu     $v1, $v0, -1
 /* AE3AC 80117CAC 00021080 */  sll       $v0, $v0, 2
 /* AE3B0 80117CB0 00451021 */  addu      $v0, $v0, $a1
@@ -25,8 +25,8 @@ glabel appendGfx_model_group
 .L80117CE0:
 /* AE3E0 80117CE0 24620001 */  addiu     $v0, $v1, 1
 .L80117CE4:
-/* AE3E4 80117CE4 3C018015 */  lui       $at, 0x8015
-/* AE3E8 80117CE8 AC223224 */  sw        $v0, 0x3224($at)
+/* AE3E4 80117CE4 3C018015 */  lui       $at, %hi(D_80153224)
+/* AE3E8 80117CE8 AC223224 */  sw        $v0, %lo(D_80153224)($at)
 /* AE3EC 80117CEC 0C045F40 */  jal       func_80117D00
 /* AE3F0 80117CF0 00000000 */   nop      
 /* AE3F4 80117CF4 8FBF0010 */  lw        $ra, 0x10($sp)

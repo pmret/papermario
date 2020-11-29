@@ -129,10 +129,10 @@ glabel func_802BFBA0
 /* 3238C8 802BFD78 C6000000 */  lwc1      $f0, ($s0)
 /* 3238CC 802BFD7C 24020001 */  addiu     $v0, $zero, 1
 /* 3238D0 802BFD80 AE200014 */  sw        $zero, 0x14($s1)
-/* 3238D4 802BFD84 3C01802C */  lui       $at, 0x802c
-/* 3238D8 802BFD88 AC20FF10 */  sw        $zero, -0xf0($at)
-/* 3238DC 802BFD8C 3C01802C */  lui       $at, 0x802c
-/* 3238E0 802BFD90 AC20FF18 */  sw        $zero, -0xe8($at)
+/* 3238D4 802BFD84 3C01802C */  lui       $at, %hi(D_802BFF10)
+/* 3238D8 802BFD88 AC20FF10 */  sw        $zero, %lo(D_802BFF10)($at)
+/* 3238DC 802BFD8C 3C01802C */  lui       $at, %hi(D_802BFF18)
+/* 3238E0 802BFD90 AC20FF18 */  sw        $zero, %lo(D_802BFF18)($at)
 /* 3238E4 802BFD94 E6200018 */  swc1      $f0, 0x18($s1)
 /* 3238E8 802BFD98 080AFF8C */  j         .L802BFE30
 /* 3238EC 802BFD9C AE620070 */   sw       $v0, 0x70($s3)

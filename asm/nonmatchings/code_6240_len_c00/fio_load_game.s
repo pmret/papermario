@@ -17,13 +17,13 @@ glabel fio_load_game
 /* 6700 8002B300 2631ACC0 */  addiu     $s1, $s1, %lo(gCurrentSaveFile)
 /* 6704 8002B304 0220282D */  daddu     $a1, $s1, $zero
 /* 6708 8002B308 001080C0 */  sll       $s0, $s0, 3
-/* 670C 8002B30C 3C04800A */  lui       $a0, 0x800a
+/* 670C 8002B30C 3C04800A */  lui       $a0, %hi(D_8009BA30)
 /* 6710 8002B310 00902021 */  addu      $a0, $a0, $s0
-/* 6714 8002B314 8C84BA30 */  lw        $a0, -0x45d0($a0)
+/* 6714 8002B314 8C84BA30 */  lw        $a0, %lo(D_8009BA30)($a0)
 /* 6718 8002B318 0C00AE1A */  jal       fio_read_flash
 /* 671C 8002B31C 24061380 */   addiu    $a2, $zero, 0x1380
-/* 6720 8002B320 3C058007 */  lui       $a1, 0x8007
-/* 6724 8002B324 24A545D0 */  addiu     $a1, $a1, 0x45d0
+/* 6720 8002B320 3C058007 */  lui       $a1, %hi(D_800745D0)
+/* 6724 8002B324 24A545D0 */  addiu     $a1, $a1, %lo(D_800745D0)
 /* 6728 8002B328 0C01BB5C */  jal       strcmp
 /* 672C 8002B32C 0220202D */   daddu    $a0, $s1, $zero
 /* 6730 8002B330 1440000A */  bnez      $v0, .L8002B35C

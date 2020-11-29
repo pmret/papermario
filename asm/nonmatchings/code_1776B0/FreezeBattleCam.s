@@ -8,8 +8,8 @@ glabel FreezeBattleCam
 /* 17D664 8024ED84 0C0B1EAF */  jal       get_variable
 /* 17D668 8024ED88 8C450000 */   lw       $a1, ($v0)
 /* 17D66C 8024ED8C 8FBF0010 */  lw        $ra, 0x10($sp)
-/* 17D670 8024ED90 3C018028 */  lui       $at, 0x8028
-/* 17D674 8024ED94 A0220CE0 */  sb        $v0, 0xce0($at)
+/* 17D670 8024ED90 3C018028 */  lui       $at, %hi(D_80280CE0)
+/* 17D674 8024ED94 A0220CE0 */  sb        $v0, %lo(D_80280CE0)($at)
 /* 17D678 8024ED98 24020002 */  addiu     $v0, $zero, 2
 /* 17D67C 8024ED9C 03E00008 */  jr        $ra
 /* 17D680 8024EDA0 27BD0018 */   addiu    $sp, $sp, 0x18

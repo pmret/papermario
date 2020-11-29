@@ -10,8 +10,8 @@ glabel func_802BFAA8
 /* 32360C 802BFABC 82020001 */  lb        $v0, 1($s0)
 /* 323610 802BFAC0 1040001C */  beqz      $v0, .L802BFB34
 /* 323614 802BFAC4 00000000 */   nop      
-/* 323618 802BFAC8 3C02802C */  lui       $v0, 0x802c
-/* 32361C 802BFACC 8C42FF0C */  lw        $v0, -0xf4($v0)
+/* 323618 802BFAC8 3C02802C */  lui       $v0, %hi(D_802BFF0C)
+/* 32361C 802BFACC 8C42FF0C */  lw        $v0, %lo(D_802BFF0C)($v0)
 /* 323620 802BFAD0 10400018 */  beqz      $v0, .L802BFB34
 /* 323624 802BFAD4 26020018 */   addiu    $v0, $s0, 0x18
 /* 323628 802BFAD8 26030358 */  addiu     $v1, $s0, 0x358

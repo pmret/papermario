@@ -5,8 +5,8 @@ glabel func_E00681D8
 /* 36AAA8 E00681D8 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* 36AAAC E00681DC AFBF0020 */  sw        $ra, 0x20($sp)
 /* 36AAB0 E00681E0 8C83000C */  lw        $v1, 0xc($a0)
-/* 36AAB4 E00681E4 3C02E007 */  lui       $v0, 0xe007
-/* 36AAB8 E00681E8 24428234 */  addiu     $v0, $v0, -0x7dcc
+/* 36AAB4 E00681E4 3C02E007 */  lui       $v0, %hi(D_E0068234)
+/* 36AAB8 E00681E8 24428234 */  addiu     $v0, $v0, %lo(D_E0068234)
 /* 36AABC E00681EC AFA2001C */  sw        $v0, 0x1c($sp)
 /* 36AAC0 E00681F0 2402000A */  addiu     $v0, $zero, 0xa
 /* 36AAC4 E00681F4 AFA40018 */  sw        $a0, 0x18($sp)

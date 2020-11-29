@@ -17,8 +17,8 @@ glabel func_800E45E0
 /* 7DAC0 800E4610 14620028 */  bne       $v1, $v0, .L800E46B4
 /* 7DAC4 800E4614 0000282D */   daddu    $a1, $zero, $zero
 /* 7DAC8 800E4618 C4800030 */  lwc1      $f0, 0x30($a0)
-/* 7DACC 800E461C 3C018011 */  lui       $at, 0x8011
-/* 7DAD0 800E4620 D422BEE0 */  ldc1      $f2, -0x4120($at)
+/* 7DACC 800E461C 3C018011 */  lui       $at, %hi(D_8010BEE0)
+/* 7DAD0 800E4620 D422BEE0 */  ldc1      $f2, %lo(D_8010BEE0)($at)
 /* 7DAD4 800E4624 46000021 */  cvt.d.s   $f0, $f0
 /* 7DAD8 800E4628 46220000 */  add.d     $f0, $f0, $f2
 /* 7DADC 800E462C 44801000 */  mtc1      $zero, $f2

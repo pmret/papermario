@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel func_80114B58
-/* AB258 80114B58 3C028015 */  lui       $v0, 0x8015
-/* AB25C 80114B5C 8C423368 */  lw        $v0, 0x3368($v0)
+/* AB258 80114B58 3C028015 */  lui       $v0, %hi(D_80153368)
+/* AB25C 80114B5C 8C423368 */  lw        $v0, %lo(D_80153368)($v0)
 /* AB260 80114B60 27BDFFB0 */  addiu     $sp, $sp, -0x50
 /* AB264 80114B64 AFB1002C */  sw        $s1, 0x2c($sp)
 /* AB268 80114B68 0080882D */  daddu     $s1, $a0, $zero
@@ -30,8 +30,8 @@ glabel func_80114B58
 /* AB2B8 80114BB8 AE400038 */  sw        $zero, 0x38($s2)
 .L80114BBC:
 /* AB2BC 80114BBC 0220202D */  daddu     $a0, $s1, $zero
-/* AB2C0 80114BC0 3C108015 */  lui       $s0, 0x8015
-/* AB2C4 80114BC4 26103368 */  addiu     $s0, $s0, 0x3368
+/* AB2C0 80114BC0 3C108015 */  lui       $s0, %hi(D_80153368)
+/* AB2C4 80114BC4 26103368 */  addiu     $s0, $s0, %lo(D_80153368)
 /* AB2C8 80114BC8 02342821 */  addu      $a1, $s1, $s4
 /* AB2CC 80114BCC 8E060000 */  lw        $a2, ($s0)
 /* AB2D0 80114BD0 0C00A5CF */  jal       dma_copy
@@ -51,8 +51,8 @@ glabel func_80114B58
 /* AB304 80114C04 AE400040 */  sw        $zero, 0x40($s2)
 .L80114C08:
 /* AB308 80114C08 0220202D */  daddu     $a0, $s1, $zero
-/* AB30C 80114C0C 3C108015 */  lui       $s0, 0x8015
-/* AB310 80114C10 26103368 */  addiu     $s0, $s0, 0x3368
+/* AB30C 80114C0C 3C108015 */  lui       $s0, %hi(D_80153368)
+/* AB310 80114C10 26103368 */  addiu     $s0, $s0, %lo(D_80153368)
 /* AB314 80114C14 00952821 */  addu      $a1, $a0, $s5
 /* AB318 80114C18 8E060000 */  lw        $a2, ($s0)
 /* AB31C 80114C1C 0C00A5CF */  jal       dma_copy
@@ -69,8 +69,8 @@ glabel func_80114B58
 /* AB340 80114C40 26450004 */  addiu     $a1, $s2, 4
 /* AB344 80114C44 02E0202D */  daddu     $a0, $s7, $zero
 /* AB348 80114C48 02E51025 */  or        $v0, $s7, $a1
-/* AB34C 80114C4C 3C038015 */  lui       $v1, 0x8015
-/* AB350 80114C50 8C633368 */  lw        $v1, 0x3368($v1)
+/* AB34C 80114C4C 3C038015 */  lui       $v1, %hi(D_80153368)
+/* AB350 80114C50 8C633368 */  lw        $v1, %lo(D_80153368)($v1)
 /* AB354 80114C54 30420003 */  andi      $v0, $v0, 3
 /* AB358 80114C58 10400017 */  beqz      $v0, .L80114CB8
 /* AB35C 80114C5C AE430000 */   sw       $v1, ($s2)
@@ -116,8 +116,8 @@ glabel func_80114B58
 /* AB3EC 80114CEC 02E0202D */  daddu     $a0, $s7, $zero
 /* AB3F0 80114CF0 AFA20010 */  sw        $v0, 0x10($sp)
 /* AB3F4 80114CF4 8E420040 */  lw        $v0, 0x40($s2)
-/* AB3F8 80114CF8 3C108015 */  lui       $s0, 0x8015
-/* AB3FC 80114CFC 26103368 */  addiu     $s0, $s0, 0x3368
+/* AB3F8 80114CF8 3C108015 */  lui       $s0, %hi(D_80153368)
+/* AB3FC 80114CFC 26103368 */  addiu     $s0, $s0, %lo(D_80153368)
 /* AB400 80114D00 AFA00018 */  sw        $zero, 0x18($sp)
 /* AB404 80114D04 AFA0001C */  sw        $zero, 0x1c($sp)
 /* AB408 80114D08 AFA00020 */  sw        $zero, 0x20($sp)

@@ -19,8 +19,8 @@ glabel guRotateF
 /* 42F58 80067B58 F7B60020 */  sdc1      $f22, 0x20($sp)
 /* 42F5C 80067B5C 0C01B2F0 */  jal       guNormalize
 /* 42F60 80067B60 AFA70054 */   sw       $a3, 0x54($sp)
-/* 42F64 80067B64 3C018009 */  lui       $at, 0x8009
-/* 42F68 80067B68 C42058C0 */  lwc1      $f0, 0x58c0($at)
+/* 42F64 80067B64 3C018009 */  lui       $at, %hi(D_800958C0)
+/* 42F68 80067B68 C42058C0 */  lwc1      $f0, %lo(D_800958C0)($at)
 /* 42F6C 80067B6C 4600A502 */  mul.s     $f20, $f20, $f0
 /* 42F70 80067B70 0C00A85B */  jal       sin_rad
 /* 42F74 80067B74 4600A306 */   mov.s    $f12, $f20

@@ -5,8 +5,8 @@ glabel fio_has_valid_backup
 /* 63D8 8002AFD8 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 63DC 8002AFDC 24040006 */  addiu     $a0, $zero, 6
 /* 63E0 8002AFE0 AFB00010 */  sw        $s0, 0x10($sp)
-/* 63E4 8002AFE4 3C10800E */  lui       $s0, 0x800e
-/* 63E8 8002AFE8 261095E8 */  addiu     $s0, $s0, -0x6a18
+/* 63E4 8002AFE4 3C10800E */  lui       $s0, %hi(D_800D95E8)
+/* 63E8 8002AFE8 261095E8 */  addiu     $s0, $s0, %lo(D_800D95E8)
 /* 63EC 8002AFEC 0200282D */  daddu     $a1, $s0, $zero
 /* 63F0 8002AFF0 AFBF0014 */  sw        $ra, 0x14($sp)
 /* 63F4 8002AFF4 0C00AE1A */  jal       fio_read_flash

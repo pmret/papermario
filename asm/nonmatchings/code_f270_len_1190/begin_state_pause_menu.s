@@ -4,10 +4,10 @@
 glabel begin_state_pause_menu
 /* FD40 80034940 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* FD44 80034944 AFBF0010 */  sw        $ra, 0x10($sp)
-/* FD48 80034948 3C01800A */  lui       $at, 0x800a
-/* FD4C 8003494C A0200921 */  sb        $zero, 0x921($at)
-/* FD50 80034950 3C01800A */  lui       $at, 0x800a
-/* FD54 80034954 A4200922 */  sh        $zero, 0x922($at)
+/* FD48 80034948 3C01800A */  lui       $at, %hi(D_800A0921)
+/* FD4C 8003494C A0200921 */  sb        $zero, %lo(D_800A0921)($at)
+/* FD50 80034950 3C01800A */  lui       $at, %hi(D_800A0922)
+/* FD54 80034954 A4200922 */  sh        $zero, %lo(D_800A0922)($at)
 /* FD58 80034958 0C03805E */  jal       disable_player_input
 /* FD5C 8003495C 00000000 */   nop      
 /* FD60 80034960 0C009C22 */  jal       func_80027088

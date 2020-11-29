@@ -9,8 +9,8 @@ glabel func_E002C23C
 /* 3400CC E002C24C 1440001A */  bnez      $v0, .LE002C2B8
 /* 3400D0 E002C250 00000000 */   nop      
 /* 3400D4 E002C254 C4A00014 */  lwc1      $f0, 0x14($a1)
-/* 3400D8 E002C258 3C01E003 */  lui       $at, 0xe003
-/* 3400DC E002C25C D422C9D8 */  ldc1      $f2, -0x3628($at)
+/* 3400D8 E002C258 3C01E003 */  lui       $at, %hi(D_E002C9D8)
+/* 3400DC E002C25C D422C9D8 */  ldc1      $f2, %lo(D_E002C9D8)($at)
 /* 3400E0 E002C260 C4A6002C */  lwc1      $f6, 0x2c($a1)
 /* 3400E4 E002C264 46000021 */  cvt.d.s   $f0, $f0
 /* 3400E8 E002C268 46220000 */  add.d     $f0, $f0, $f2
@@ -50,8 +50,8 @@ glabel func_E002C23C
 /* 340168 E002C2E8 2842000A */  slti      $v0, $v0, 0xa
 /* 34016C E002C2EC 10400009 */  beqz      $v0, .LE002C314
 /* 340170 E002C2F0 00000000 */   nop      
-/* 340174 E002C2F4 3C01E003 */  lui       $at, 0xe003
-/* 340178 E002C2F8 D422C9E0 */  ldc1      $f2, -0x3620($at)
+/* 340174 E002C2F4 3C01E003 */  lui       $at, %hi(D_E002C9E0)
+/* 340178 E002C2F8 D422C9E0 */  ldc1      $f2, %lo(D_E002C9E0)($at)
 /* 34017C E002C2FC C4A00028 */  lwc1      $f0, 0x28($a1)
 /* 340180 E002C300 46800021 */  cvt.d.w   $f0, $f0
 /* 340184 E002C304 46220002 */  mul.d     $f0, $f0, $f2
@@ -65,10 +65,10 @@ glabel func_E002C23C
 /* 3401A0 E002C320 10400028 */  beqz      $v0, .LE002C3C4
 /* 3401A4 E002C324 24A50040 */   addiu    $a1, $a1, 0x40
 /* 3401A8 E002C328 24A30034 */  addiu     $v1, $a1, 0x34
-/* 3401AC E002C32C 3C01E003 */  lui       $at, 0xe003
-/* 3401B0 E002C330 D428C9E8 */  ldc1      $f8, -0x3618($at)
-/* 3401B4 E002C334 3C01E003 */  lui       $at, 0xe003
-/* 3401B8 E002C338 D426C9F0 */  ldc1      $f6, -0x3610($at)
+/* 3401AC E002C32C 3C01E003 */  lui       $at, %hi(D_E002C9E8)
+/* 3401B0 E002C330 D428C9E8 */  ldc1      $f8, %lo(D_E002C9E8)($at)
+/* 3401B4 E002C334 3C01E003 */  lui       $at, %hi(D_E002C9F0)
+/* 3401B8 E002C338 D426C9F0 */  ldc1      $f6, %lo(D_E002C9F0)($at)
 /* 3401BC E002C33C 3C014120 */  lui       $at, 0x4120
 /* 3401C0 E002C340 44816000 */  mtc1      $at, $f12
 /* 3401C4 E002C344 3C0141A0 */  lui       $at, 0x41a0

@@ -3,8 +3,8 @@
 
 glabel nuGfxTaskStart
 /* 80C4 8002CCC4 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* 80C8 8002CCC8 3C0A800A */  lui       $t2, 0x800a
-/* 80CC 8002CCCC 254AC510 */  addiu     $t2, $t2, -0x3af0
+/* 80C8 8002CCC8 3C0A800A */  lui       $t2, %hi(D_8009C510)
+/* 80CC 8002CCCC 254AC510 */  addiu     $t2, $t2, %lo(D_8009C510)
 /* 80D0 8002CCD0 00071402 */  srl       $v0, $a3, 0x10
 /* 80D4 8002CCD4 AFBF0014 */  sw        $ra, 0x14($sp)
 /* 80D8 8002CCD8 AFB00010 */  sw        $s0, 0x10($sp)
@@ -13,14 +13,14 @@ glabel nuGfxTaskStart
 /* 80E4 8002CCE4 AD020014 */  sw        $v0, 0x14($t0)
 /* 80E8 8002CCE8 3C02800A */  lui       $v0, %hi(D_8009A610)
 /* 80EC 8002CCEC 8C42A610 */  lw        $v0, %lo(D_8009A610)($v0)
-/* 80F0 8002CCF0 3C0B800A */  lui       $t3, 0x800a
-/* 80F4 8002CCF4 256BA64C */  addiu     $t3, $t3, -0x59b4
+/* 80F0 8002CCF0 3C0B800A */  lui       $t3, %hi(D_8009A64C)
+/* 80F4 8002CCF4 256BA64C */  addiu     $t3, $t3, %lo(D_8009A64C)
 /* 80F8 8002CCF8 AD040040 */  sw        $a0, 0x40($t0)
 /* 80FC 8002CCFC AD050044 */  sw        $a1, 0x44($t0)
 /* 8100 8002CD00 00C23021 */  addu      $a2, $a2, $v0
 /* 8104 8002CD04 8CC20000 */  lw        $v0, ($a2)
-/* 8108 8002CD08 3C098007 */  lui       $t1, 0x8007
-/* 810C 8002CD0C 252973FC */  addiu     $t1, $t1, 0x73fc
+/* 8108 8002CD08 3C098007 */  lui       $t1, %hi(D_800773FC)
+/* 810C 8002CD0C 252973FC */  addiu     $t1, $t1, %lo(D_800773FC)
 /* 8110 8002CD10 AD020020 */  sw        $v0, 0x20($t0)
 /* 8114 8002CD14 8CC40004 */  lw        $a0, 4($a2)
 /* 8118 8002CD18 8D630000 */  lw        $v1, ($t3)
@@ -40,11 +40,11 @@ glabel nuGfxTaskStart
 /* 814C 8002CD4C 30E20001 */  andi      $v0, $a3, 1
 /* 8150 8002CD50 10400017 */  beqz      $v0, .L8002CDB0
 /* 8154 8002CD54 A5270000 */   sh       $a3, ($t1)
-/* 8158 8002CD58 3C05800A */  lui       $a1, 0x800a
-/* 815C 8002CD5C 24A5A5F0 */  addiu     $a1, $a1, -0x5a10
+/* 8158 8002CD58 3C05800A */  lui       $a1, %hi(D_8009A5F0)
+/* 815C 8002CD5C 24A5A5F0 */  addiu     $a1, $a1, %lo(D_8009A5F0)
 /* 8160 8002CD60 8CA20000 */  lw        $v0, ($a1)
-/* 8164 8002CD64 3C038007 */  lui       $v1, 0x8007
-/* 8168 8002CD68 8C6373F0 */  lw        $v1, 0x73f0($v1)
+/* 8164 8002CD64 3C038007 */  lui       $v1, %hi(D_800773F0)
+/* 8168 8002CD68 8C6373F0 */  lw        $v1, %lo(D_800773F0)($v1)
 /* 816C 8002CD6C 24420001 */  addiu     $v0, $v0, 1
 /* 8170 8002CD70 14600002 */  bnez      $v1, .L8002CD7C
 /* 8174 8002CD74 0043001B */   divu     $zero, $v0, $v1
@@ -52,11 +52,11 @@ glabel nuGfxTaskStart
 .L8002CD7C:
 /* 817C 8002CD7C 00002010 */   mfhi     $a0
 /* 8180 8002CD80 8D430000 */  lw        $v1, ($t2)
-/* 8184 8002CD84 3C02800A */  lui       $v0, 0x800a
-/* 8188 8002CD88 2442C516 */  addiu     $v0, $v0, -0x3aea
+/* 8184 8002CD84 3C02800A */  lui       $v0, %hi(D_8009C516)
+/* 8188 8002CD88 2442C516 */  addiu     $v0, $v0, %lo(D_8009C516)
 /* 818C 8002CD8C AC620054 */  sw        $v0, 0x54($v1)
-/* 8190 8002CD90 3C03800A */  lui       $v1, 0x800a
-/* 8194 8002CD94 8C63A658 */  lw        $v1, -0x59a8($v1)
+/* 8190 8002CD90 3C03800A */  lui       $v1, %hi(D_8009A658)
+/* 8194 8002CD94 8C63A658 */  lw        $v1, %lo(D_8009A658)($v1)
 /* 8198 8002CD98 00041080 */  sll       $v0, $a0, 2
 /* 819C 8002CD9C 00431021 */  addu      $v0, $v0, $v1
 /* 81A0 8002CDA0 8C420000 */  lw        $v0, ($v0)
@@ -65,8 +65,8 @@ glabel nuGfxTaskStart
 /* 81AC 8002CDAC AD620000 */   sw       $v0, ($t3)
 .L8002CDB0:
 /* 81B0 8002CDB0 8D430000 */  lw        $v1, ($t2)
-/* 81B4 8002CDB4 3C02800A */  lui       $v0, 0x800a
-/* 81B8 8002CDB8 2442C514 */  addiu     $v0, $v0, -0x3aec
+/* 81B4 8002CDB4 3C02800A */  lui       $v0, %hi(D_8009C514)
+/* 81B8 8002CDB8 2442C514 */  addiu     $v0, $v0, %lo(D_8009C514)
 /* 81BC 8002CDBC AC620054 */  sw        $v0, 0x54($v1)
 .L8002CDC0:
 /* 81C0 8002CDC0 0C018250 */  jal       osSetIntMask
@@ -80,10 +80,10 @@ glabel nuGfxTaskStart
 /* 81E0 8002CDE0 ACA30000 */   sw       $v1, ($a1)
 /* 81E4 8002CDE4 0C018634 */  jal       osWritebackDCacheAll
 /* 81E8 8002CDE8 00000000 */   nop      
-/* 81EC 8002CDEC 3C04800E */  lui       $a0, 0x800e
-/* 81F0 8002CDF0 2484A47C */  addiu     $a0, $a0, -0x5b84
-/* 81F4 8002CDF4 3C10800A */  lui       $s0, 0x800a
-/* 81F8 8002CDF8 2610C510 */  addiu     $s0, $s0, -0x3af0
+/* 81EC 8002CDEC 3C04800E */  lui       $a0, %hi(D_800DA47C)
+/* 81F0 8002CDF0 2484A47C */  addiu     $a0, $a0, %lo(D_800DA47C)
+/* 81F4 8002CDF4 3C10800A */  lui       $s0, %hi(D_8009C510)
+/* 81F8 8002CDF8 2610C510 */  addiu     $s0, $s0, %lo(D_8009C510)
 /* 81FC 8002CDFC 8E050000 */  lw        $a1, ($s0)
 /* 8200 8002CE00 0C019608 */  jal       osSendMesg
 /* 8204 8002CE04 24060001 */   addiu    $a2, $zero, 1

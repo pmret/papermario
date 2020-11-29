@@ -77,25 +77,25 @@ glabel fio_deserialize_state
 /* 69A4 8002B5A4 8CEA12F0 */  lw        $t2, 0x12f0($a3)
 /* 69A8 8002B5A8 8CEB12F4 */  lw        $t3, 0x12f4($a3)
 /* 69AC 8002B5AC 8CEC12F8 */  lw        $t4, 0x12f8($a3)
-/* 69B0 8002B5B0 3C018007 */  lui       $at, 0x8007
+/* 69B0 8002B5B0 3C018007 */  lui       $at, %hi(D_800779C4)
 /* 69B4 8002B5B4 00220821 */  addu      $at, $at, $v0
-/* 69B8 8002B5B8 AC2979C4 */  sw        $t1, 0x79c4($at)
-/* 69BC 8002B5BC 3C018007 */  lui       $at, 0x8007
+/* 69B8 8002B5B8 AC2979C4 */  sw        $t1, %lo(D_800779C4)($at)
+/* 69BC 8002B5BC 3C018007 */  lui       $at, %hi(D_800779C8)
 /* 69C0 8002B5C0 00220821 */  addu      $at, $at, $v0
-/* 69C4 8002B5C4 AC2A79C8 */  sw        $t2, 0x79c8($at)
-/* 69C8 8002B5C8 3C018007 */  lui       $at, 0x8007
+/* 69C4 8002B5C4 AC2A79C8 */  sw        $t2, %lo(D_800779C8)($at)
+/* 69C8 8002B5C8 3C018007 */  lui       $at, %hi(D_800779CC)
 /* 69CC 8002B5CC 00220821 */  addu      $at, $at, $v0
-/* 69D0 8002B5D0 AC2B79CC */  sw        $t3, 0x79cc($at)
-/* 69D4 8002B5D4 3C018007 */  lui       $at, 0x8007
+/* 69D0 8002B5D0 AC2B79CC */  sw        $t3, %lo(D_800779CC)($at)
+/* 69D4 8002B5D4 3C018007 */  lui       $at, %hi(D_800779D0)
 /* 69D8 8002B5D8 00220821 */  addu      $at, $at, $v0
-/* 69DC 8002B5DC AC2C79D0 */  sw        $t4, 0x79d0($at)
+/* 69DC 8002B5DC AC2C79D0 */  sw        $t4, %lo(D_800779D0)($at)
 /* 69E0 8002B5E0 8CE912FC */  lw        $t1, 0x12fc($a3)
 /* 69E4 8002B5E4 8CEA1300 */  lw        $t2, 0x1300($a3)
-/* 69E8 8002B5E8 3C018007 */  lui       $at, 0x8007
+/* 69E8 8002B5E8 3C018007 */  lui       $at, %hi(D_800779D4)
 /* 69EC 8002B5EC 00220821 */  addu      $at, $at, $v0
-/* 69F0 8002B5F0 AC2979D4 */  sw        $t1, 0x79d4($at)
-/* 69F4 8002B5F4 3C018007 */  lui       $at, 0x8007
+/* 69F0 8002B5F0 AC2979D4 */  sw        $t1, %lo(D_800779D4)($at)
+/* 69F4 8002B5F4 3C018007 */  lui       $at, %hi(D_800779D8)
 /* 69F8 8002B5F8 00220821 */  addu      $at, $at, $v0
-/* 69FC 8002B5FC AC2A79D8 */  sw        $t2, 0x79d8($at)
+/* 69FC 8002B5FC AC2A79D8 */  sw        $t2, %lo(D_800779D8)($at)
 /* 6A00 8002B600 03E00008 */  jr        $ra
 /* 6A04 8002B604 00000000 */   nop      

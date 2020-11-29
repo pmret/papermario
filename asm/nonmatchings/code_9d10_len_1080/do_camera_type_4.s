@@ -46,8 +46,8 @@ glabel do_camera_type_4
 /* 9DA8 8002E9A8 46000206 */   mov.s    $f8, $f0
 .L8002E9AC:
 /* 9DAC 8002E9AC 86020020 */  lh        $v0, 0x20($s0)
-/* 9DB0 8002E9B0 3C01800A */  lui       $at, 0x800a
-/* 9DB4 8002E9B4 C424A5EC */  lwc1      $f4, -0x5a14($at)
+/* 9DB0 8002E9B0 3C01800A */  lui       $at, %hi(D_8009A5EC)
+/* 9DB4 8002E9B4 C424A5EC */  lwc1      $f4, %lo(D_8009A5EC)($at)
 /* 9DB8 8002E9B8 AE000070 */  sw        $zero, 0x70($s0)
 /* 9DBC 8002E9BC 44821000 */  mtc1      $v0, $f2
 /* 9DC0 8002E9C0 00000000 */  nop       

@@ -2,17 +2,17 @@
 .set noreorder # don't insert nops after branches
 
 glabel clear_partner_move_history
-/* 8890C 800EF45C 3C058011 */  lui       $a1, 0x8011
-/* 88910 800EF460 24A5CD38 */  addiu     $a1, $a1, -0x32c8
+/* 8890C 800EF45C 3C058011 */  lui       $a1, %hi(D_8010CD38)
+/* 88910 800EF460 24A5CD38 */  addiu     $a1, $a1, %lo(D_8010CD38)
 /* 88914 800EF464 0000302D */  daddu     $a2, $zero, $zero
-/* 88918 800EF468 3C028010 */  lui       $v0, 0x8010
-/* 8891C 800EF46C 2442833C */  addiu     $v0, $v0, -0x7cc4
+/* 88918 800EF468 3C028010 */  lui       $v0, %hi(D_800F833C)
+/* 8891C 800EF46C 2442833C */  addiu     $v0, $v0, %lo(D_800F833C)
 /* 88920 800EF470 0040482D */  daddu     $t1, $v0, $zero
-/* 88924 800EF474 3C028010 */  lui       $v0, 0x8010
-/* 88928 800EF478 24428340 */  addiu     $v0, $v0, -0x7cc0
+/* 88924 800EF474 3C028010 */  lui       $v0, %hi(D_800F8340)
+/* 88928 800EF478 24428340 */  addiu     $v0, $v0, %lo(D_800F8340)
 /* 8892C 800EF47C 0040402D */  daddu     $t0, $v0, $zero
-/* 88930 800EF480 3C028010 */  lui       $v0, 0x8010
-/* 88934 800EF484 24428344 */  addiu     $v0, $v0, -0x7cbc
+/* 88930 800EF480 3C028010 */  lui       $v0, %hi(D_800F8344)
+/* 88934 800EF484 24428344 */  addiu     $v0, $v0, %lo(D_800F8344)
 /* 88938 800EF488 0040382D */  daddu     $a3, $v0, $zero
 /* 8893C 800EF48C C4800038 */  lwc1      $f0, 0x38($a0)
 /* 88940 800EF490 C482003C */  lwc1      $f2, 0x3c($a0)

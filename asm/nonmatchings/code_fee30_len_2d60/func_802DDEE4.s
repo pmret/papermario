@@ -18,9 +18,9 @@ glabel func_802DDEE4
 /* 101008 802DDF18 AFB10024 */  sw        $s1, 0x24($sp)
 /* 10100C 802DDF1C AFB00020 */  sw        $s0, 0x20($sp)
 /* 101010 802DDF20 AFA70054 */  sw        $a3, 0x54($sp)
-/* 101014 802DDF24 3C01802E */  lui       $at, 0x802e
+/* 101014 802DDF24 3C01802E */  lui       $at, %hi(D_802DF588)
 /* 101018 802DDF28 00220821 */  addu      $at, $at, $v0
-/* 10101C 802DDF2C 8C22F588 */  lw        $v0, -0xa78($at)
+/* 10101C 802DDF2C 8C22F588 */  lw        $v0, %lo(D_802DF588)($at)
 /* 101020 802DDF30 8FBE0064 */  lw        $fp, 0x64($sp)
 /* 101024 802DDF34 10400024 */  beqz      $v0, .L802DDFC8
 /* 101028 802DDF38 00C0A82D */   daddu    $s5, $a2, $zero

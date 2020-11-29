@@ -174,8 +174,8 @@ glabel func_8011C80C
 /* B31A8 8011CAA8 00000000 */  nop       
 /* B31AC 8011CAAC 4500012D */  bc1f      .L8011CF64
 /* B31B0 8011CAB0 3C05FD10 */   lui      $a1, 0xfd10
-/* B31B4 8011CAB4 3C11800A */  lui       $s1, 0x800a
-/* B31B8 8011CAB8 2631A66C */  addiu     $s1, $s1, -0x5994
+/* B31B4 8011CAB4 3C11800A */  lui       $s1, %hi(D_8009A66C)
+/* B31B8 8011CAB8 2631A66C */  addiu     $s1, $s1, %lo(D_8009A66C)
 /* B31BC 8011CABC 34A5013F */  ori       $a1, $a1, 0x13f
 /* B31C0 8011CAC0 4600158D */  trunc.w.s $f22, $f2
 /* B31C4 8011CAC4 4402B000 */  mfc1      $v0, $f22
@@ -230,8 +230,8 @@ glabel func_8011C80C
 /* B3288 8011CB88 3C190400 */  lui       $t9, 0x400
 /* B328C 8011CB8C AFA80038 */  sw        $t0, 0x38($sp)
 /* B3290 8011CB90 8E300000 */  lw        $s0, ($s1)
-/* B3294 8011CB94 3C148015 */  lui       $s4, 0x8015
-/* B3298 8011CB98 26943380 */  addiu     $s4, $s4, 0x3380
+/* B3294 8011CB94 3C148015 */  lui       $s4, %hi(D_80153380)
+/* B3298 8011CB98 26943380 */  addiu     $s4, $s4, %lo(D_80153380)
 /* B329C 8011CB9C AE420004 */  sw        $v0, 4($s2)
 /* B32A0 8011CBA0 3C12ED00 */  lui       $s2, 0xed00
 /* B32A4 8011CBA4 0200102D */  daddu     $v0, $s0, $zero
@@ -375,8 +375,8 @@ glabel func_8011C80C
 /* B34CC 8011CDCC AE02008C */  sw        $v0, 0x8c($s0)
 /* B34D0 8011CDD0 3C02F100 */  lui       $v0, 0xf100
 /* B34D4 8011CDD4 AE0200A0 */  sw        $v0, 0xa0($s0)
-/* B34D8 8011CDD8 3C04800A */  lui       $a0, 0x800a
-/* B34DC 8011CDDC 8C84A64C */  lw        $a0, -0x59b4($a0)
+/* B34D8 8011CDD8 3C04800A */  lui       $a0, %hi(D_8009A64C)
+/* B34DC 8011CDDC 8C84A64C */  lw        $a0, %lo(D_8009A64C)($a0)
 /* B34E0 8011CDE0 260200B0 */  addiu     $v0, $s0, 0xb0
 /* B34E4 8011CDE4 AE1900A4 */  sw        $t9, 0xa4($s0)
 /* B34E8 8011CDE8 AE220000 */  sw        $v0, ($s1)
@@ -453,8 +453,8 @@ glabel func_8011C80C
 /* B3604 8011CF04 94420000 */  lhu       $v0, ($v0)
 /* B3608 8011CF08 24840008 */  addiu     $a0, $a0, 8
 /* B360C 8011CF0C AE240000 */  sw        $a0, ($s1)
-/* B3610 8011CF10 3C048015 */  lui       $a0, 0x8015
-/* B3614 8011CF14 2484B7A8 */  addiu     $a0, $a0, -0x4858
+/* B3610 8011CF10 3C048015 */  lui       $a0, %hi(D_8014B7A8)
+/* B3614 8011CF14 2484B7A8 */  addiu     $a0, $a0, %lo(D_8014B7A8)
 /* B3618 8011CF18 C7A20030 */  lwc1      $f2, 0x30($sp)
 /* B361C 8011CF1C 00021B42 */  srl       $v1, $v0, 0xd
 /* B3620 8011CF20 30421FFF */  andi      $v0, $v0, 0x1fff

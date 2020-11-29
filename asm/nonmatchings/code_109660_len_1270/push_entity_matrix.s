@@ -4,8 +4,8 @@
 glabel push_entity_matrix
 /* 10A6CC 802E8E4C 27BDFF58 */  addiu     $sp, $sp, -0xa8
 /* 10A6D0 802E8E50 AFB3009C */  sw        $s3, 0x9c($sp)
-/* 10A6D4 802E8E54 3C13800A */  lui       $s3, 0x800a
-/* 10A6D8 802E8E58 2673A66C */  addiu     $s3, $s3, -0x5994
+/* 10A6D4 802E8E54 3C13800A */  lui       $s3, %hi(D_8009A66C)
+/* 10A6D8 802E8E58 2673A66C */  addiu     $s3, $s3, %lo(D_8009A66C)
 /* 10A6DC 802E8E5C AFBF00A4 */  sw        $ra, 0xa4($sp)
 /* 10A6E0 802E8E60 AFB400A0 */  sw        $s4, 0xa0($sp)
 /* 10A6E4 802E8E64 AFB20098 */  sw        $s2, 0x98($sp)
@@ -37,10 +37,10 @@ glabel push_entity_matrix
 /* 10A74C 802E8ECC 0C019D80 */  jal       guMtxCatF
 /* 10A750 802E8ED0 0200302D */   daddu    $a2, $s0, $zero
 /* 10A754 802E8ED4 0200202D */  daddu     $a0, $s0, $zero
-/* 10A758 802E8ED8 3C108007 */  lui       $s0, 0x8007
-/* 10A75C 802E8EDC 261041F0 */  addiu     $s0, $s0, 0x41f0
-/* 10A760 802E8EE0 3C12800A */  lui       $s2, 0x800a
-/* 10A764 802E8EE4 2652A674 */  addiu     $s2, $s2, -0x598c
+/* 10A758 802E8ED8 3C108007 */  lui       $s0, %hi(D_800741F0)
+/* 10A75C 802E8EDC 261041F0 */  addiu     $s0, $s0, %lo(D_800741F0)
+/* 10A760 802E8EE0 3C12800A */  lui       $s2, %hi(D_8009A674)
+/* 10A764 802E8EE4 2652A674 */  addiu     $s2, $s2, %lo(D_8009A674)
 /* 10A768 802E8EE8 96050000 */  lhu       $a1, ($s0)
 /* 10A76C 802E8EEC 8E420000 */  lw        $v0, ($s2)
 /* 10A770 802E8EF0 00052980 */  sll       $a1, $a1, 6
@@ -67,11 +67,11 @@ glabel push_entity_matrix
 /* 10A7C4 802E8F44 8E430000 */  lw        $v1, ($s2)
 /* 10A7C8 802E8F48 00541021 */  addu      $v0, $v0, $s4
 /* 10A7CC 802E8F4C 00621821 */  addu      $v1, $v1, $v0
-/* 10A7D0 802E8F50 3C02DE00 */  lui       $v0, 0xde00
+/* 10A7D0 802E8F50 3C02DE00 */  lui       $v0, %hi(D_DE000680)
 /* 10A7D4 802E8F54 AC830004 */  sw        $v1, 4($a0)
 /* 10A7D8 802E8F58 ACA20000 */  sw        $v0, ($a1)
 /* 10A7DC 802E8F5C 3C020A00 */  lui       $v0, 0xa00
-/* 10A7E0 802E8F60 24420680 */  addiu     $v0, $v0, 0x680
+/* 10A7E0 802E8F60 24420680 */  addiu     $v0, $v0, %lo(D_DE000680)
 /* 10A7E4 802E8F64 ACA20004 */  sw        $v0, 4($a1)
 /* 10A7E8 802E8F68 24020040 */  addiu     $v0, $zero, 0x40
 /* 10A7EC 802E8F6C ACC70000 */  sw        $a3, ($a2)

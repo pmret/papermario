@@ -13,8 +13,8 @@ glabel FadeBackgroundToBlack
 /* 1A320 8003EF20 0080282D */  daddu     $a1, $a0, $zero
 /* 1A324 8003EF24 0080302D */  daddu     $a2, $a0, $zero
 /* 1A328 8003EF28 0080382D */  daddu     $a3, $a0, $zero
-/* 1A32C 8003EF2C 3C028015 */  lui       $v0, 0x8015
-/* 1A330 8003EF30 8C4212F0 */  lw        $v0, 0x12f0($v0)
+/* 1A32C 8003EF2C 3C028015 */  lui       $v0, %hi(D_801512F0)
+/* 1A330 8003EF30 8C4212F0 */  lw        $v0, %lo(D_801512F0)($v0)
 /* 1A334 8003EF34 24030001 */  addiu     $v1, $zero, 1
 /* 1A338 8003EF38 0C046F97 */  jal       set_background_color_blend
 /* 1A33C 8003EF3C A0430000 */   sb       $v1, ($v0)

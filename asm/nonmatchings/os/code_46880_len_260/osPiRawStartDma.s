@@ -29,8 +29,8 @@ glabel osPiRawStartDma
 /* 468D8 8006B4D8 3C06A460 */  lui       $a2, 0xa460
 /* 468DC 8006B4DC 34C60004 */  ori       $a2, $a2, 4
 /* 468E0 8006B4E0 3C051FFF */  lui       $a1, 0x1fff
-/* 468E4 8006B4E4 3C038000 */  lui       $v1, 0x8000
-/* 468E8 8006B4E8 8C630308 */  lw        $v1, 0x308($v1)
+/* 468E4 8006B4E4 3C038000 */  lui       $v1, %hi(D_80000308)
+/* 468E8 8006B4E8 8C630308 */  lw        $v1, %lo(D_80000308)($v1)
 /* 468EC 8006B4EC 34A5FFFF */  ori       $a1, $a1, 0xffff
 /* 468F0 8006B4F0 3C04A460 */  lui       $a0, 0xa460
 /* 468F4 8006B4F4 AC820000 */  sw        $v0, ($a0)

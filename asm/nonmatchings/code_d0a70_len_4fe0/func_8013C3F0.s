@@ -132,16 +132,16 @@ glabel func_8013C3F0
 /* D2CD4 8013C5D4 96620008 */  lhu       $v0, 8($s3)
 /* D2CD8 8013C5D8 104001EE */  beqz      $v0, .L8013CD94
 /* D2CDC 8013C5DC 46020103 */   div.s    $f4, $f0, $f2
-/* D2CE0 8013C5E0 3C098007 */  lui       $t1, 0x8007
-/* D2CE4 8013C5E4 252941F4 */  addiu     $t1, $t1, 0x41f4
-/* D2CE8 8013C5E8 3C0B8015 */  lui       $t3, 0x8015
-/* D2CEC 8013C5EC 256BEE10 */  addiu     $t3, $t3, -0x11f0
+/* D2CE0 8013C5E0 3C098007 */  lui       $t1, %hi(D_800741F4)
+/* D2CE4 8013C5E4 252941F4 */  addiu     $t1, $t1, %lo(D_800741F4)
+/* D2CE8 8013C5E8 3C0B8015 */  lui       $t3, %hi(D_8014EE10)
+/* D2CEC 8013C5EC 256BEE10 */  addiu     $t3, $t3, %lo(D_8014EE10)
 /* D2CF0 8013C5F0 3C0C8000 */  lui       $t4, 0x8000
 /* D2CF4 8013C5F4 03C0302D */  daddu     $a2, $fp, $zero
 /* D2CF8 8013C5F8 0140382D */  daddu     $a3, $t2, $zero
 /* D2CFC 8013C5FC 02E0402D */  daddu     $t0, $s7, $zero
-/* D2D00 8013C600 3C018015 */  lui       $at, 0x8015
-/* D2D04 8013C604 D42610E8 */  ldc1      $f6, 0x10e8($at)
+/* D2D00 8013C600 3C018015 */  lui       $at, %hi(D_801510E8)
+/* D2D04 8013C604 D42610E8 */  ldc1      $f6, %lo(D_801510E8)($at)
 /* D2D08 8013C608 3C0141E0 */  lui       $at, 0x41e0
 /* D2D0C 8013C60C 44814800 */  mtc1      $at, $f9
 /* D2D10 8013C610 44804000 */  mtc1      $zero, $f8
@@ -393,8 +393,8 @@ glabel func_8013C3F0
 .L8013C9DC:
 /* D30DC 8013C9DC 90C30006 */  lbu       $v1, 6($a2)
 /* D30E0 8013C9E0 90C20007 */  lbu       $v0, 7($a2)
-/* D30E4 8013C9E4 3C018015 */  lui       $at, 0x8015
-/* D30E8 8013C9E8 D42210F0 */  ldc1      $f2, 0x10f0($at)
+/* D30E4 8013C9E4 3C018015 */  lui       $at, %hi(D_801510F0)
+/* D30E8 8013C9E8 D42210F0 */  ldc1      $f2, %lo(D_801510F0)($at)
 /* D30EC 8013C9EC 00621821 */  addu      $v1, $v1, $v0
 /* D30F0 8013C9F0 44830000 */  mtc1      $v1, $f0
 /* D30F4 8013C9F4 00000000 */  nop       
@@ -530,8 +530,8 @@ glabel func_8013C3F0
 .L8013CBF0:
 /* D32F0 8013CBF0 90C30006 */  lbu       $v1, 6($a2)
 /* D32F4 8013CBF4 90C20007 */  lbu       $v0, 7($a2)
-/* D32F8 8013CBF8 3C018015 */  lui       $at, 0x8015
-/* D32FC 8013CBFC D42210F8 */  ldc1      $f2, 0x10f8($at)
+/* D32F8 8013CBF8 3C018015 */  lui       $at, %hi(D_801510F8)
+/* D32FC 8013CBFC D42210F8 */  ldc1      $f2, %lo(D_801510F8)($at)
 /* D3300 8013CC00 00621821 */  addu      $v1, $v1, $v0
 /* D3304 8013CC04 44830000 */  mtc1      $v1, $f0
 /* D3308 8013CC08 00000000 */  nop       

@@ -8,8 +8,8 @@ glabel func_E004E214
 /* 35BBF0 E004E220 34E70024 */  ori       $a3, $a3, 0x24
 /* 35BBF4 E004E224 27A40020 */  addiu     $a0, $sp, 0x20
 /* 35BBF8 E004E228 AFB700BC */  sw        $s7, 0xbc($sp)
-/* 35BBFC E004E22C 3C17800A */  lui       $s7, 0x800a
-/* 35BC00 E004E230 26F7A66C */  addiu     $s7, $s7, -0x5994
+/* 35BBFC E004E22C 3C17800A */  lui       $s7, %hi(D_8009A66C)
+/* 35BC00 E004E230 26F7A66C */  addiu     $s7, $s7, %lo(D_8009A66C)
 /* 35BC04 E004E234 AFB600B8 */  sw        $s6, 0xb8($sp)
 /* 35BC08 E004E238 3C160001 */  lui       $s6, 1
 /* 35BC0C E004E23C 36D61630 */  ori       $s6, $s6, 0x1630
@@ -25,8 +25,8 @@ glabel func_E004E214
 /* 35BC34 E004E264 8EE80000 */  lw        $t0, ($s7)
 /* 35BC38 E004E268 8CD1000C */  lw        $s1, 0xc($a2)
 /* 35BC3C E004E26C 4480A000 */  mtc1      $zero, $f20
-/* 35BC40 E004E270 3C09E005 */  lui       $t1, 0xe005
-/* 35BC44 E004E274 8D29E5EC */  lw        $t1, -0x1a14($t1)
+/* 35BC40 E004E270 3C09E005 */  lui       $t1, %hi(D_E004E5EC)
+/* 35BC44 E004E274 8D29E5EC */  lw        $t1, %lo(D_E004E5EC)($t1)
 /* 35BC48 E004E278 3C014380 */  lui       $at, 0x4380
 /* 35BC4C E004E27C 44812000 */  mtc1      $at, $f4
 /* 35BC50 E004E280 0100182D */  daddu     $v1, $t0, $zero
@@ -35,9 +35,9 @@ glabel func_E004E214
 /* 35BC5C E004E28C 4405A000 */  mfc1      $a1, $f20
 /* 35BC60 E004E290 C6260020 */  lwc1      $f6, 0x20($s1)
 /* 35BC64 E004E294 00021080 */  sll       $v0, $v0, 2
-/* 35BC68 E004E298 3C1EE005 */  lui       $fp, 0xe005
+/* 35BC68 E004E298 3C1EE005 */  lui       $fp, %hi(D_E004E5E0)
 /* 35BC6C E004E29C 03C2F021 */  addu      $fp, $fp, $v0
-/* 35BC70 E004E2A0 8FDEE5E0 */  lw        $fp, -0x1a20($fp)
+/* 35BC70 E004E2A0 8FDEE5E0 */  lw        $fp, %lo(D_E004E5E0)($fp)
 /* 35BC74 E004E2A4 3C02E700 */  lui       $v0, 0xe700
 /* 35BC78 E004E2A8 4600328D */  trunc.w.s $f10, $f6
 /* 35BC7C E004E2AC 44145000 */  mfc1      $s4, $f10
@@ -69,9 +69,9 @@ glabel func_E004E214
 /* 35BCE4 E004E314 00431021 */  addu      $v0, $v0, $v1
 /* 35BCE8 E004E318 000210C0 */  sll       $v0, $v0, 3
 /* 35BCEC E004E31C AD060004 */  sw        $a2, 4($t0)
-/* 35BCF0 E004E320 3C01800B */  lui       $at, 0x800b
+/* 35BCF0 E004E320 3C01800B */  lui       $at, %hi(D_800B1DEC)
 /* 35BCF4 E004E324 00220821 */  addu      $at, $at, $v0
-/* 35BCF8 E004E328 C4281DEC */  lwc1      $f8, 0x1dec($at)
+/* 35BCF8 E004E328 C4281DEC */  lwc1      $f8, %lo(D_800B1DEC)($at)
 /* 35BCFC E004E32C C6200010 */  lwc1      $f0, 0x10($s1)
 /* 35BD00 E004E330 25020008 */  addiu     $v0, $t0, 8
 /* 35BD04 E004E334 AEE80000 */  sw        $t0, ($s7)
@@ -106,10 +106,10 @@ glabel func_E004E214
 /* 35BD78 E004E3A8 0C080114 */  jal       func_E0200450
 /* 35BD7C E004E3AC 00A0302D */   daddu    $a2, $a1, $zero
 /* 35BD80 E004E3B0 27A40020 */  addiu     $a0, $sp, 0x20
-/* 35BD84 E004E3B4 3C108007 */  lui       $s0, 0x8007
-/* 35BD88 E004E3B8 261041F0 */  addiu     $s0, $s0, 0x41f0
-/* 35BD8C E004E3BC 3C12800A */  lui       $s2, 0x800a
-/* 35BD90 E004E3C0 2652A674 */  addiu     $s2, $s2, -0x598c
+/* 35BD84 E004E3B4 3C108007 */  lui       $s0, %hi(D_800741F0)
+/* 35BD88 E004E3B8 261041F0 */  addiu     $s0, $s0, %lo(D_800741F0)
+/* 35BD8C E004E3BC 3C12800A */  lui       $s2, %hi(D_8009A674)
+/* 35BD90 E004E3C0 2652A674 */  addiu     $s2, $s2, %lo(D_8009A674)
 /* 35BD94 E004E3C4 96050000 */  lhu       $a1, ($s0)
 /* 35BD98 E004E3C8 8E420000 */  lw        $v0, ($s2)
 /* 35BD9C E004E3CC 00052980 */  sll       $a1, $a1, 6
@@ -213,8 +213,8 @@ glabel func_E004E214
 /* 35BF1C E004E54C 3C06E200 */  lui       $a2, 0xe200
 /* 35BF20 E004E550 34C61E01 */  ori       $a2, $a2, 0x1e01
 /* 35BF24 E004E554 3C07D838 */  lui       $a3, 0xd838
-/* 35BF28 E004E558 3C04800A */  lui       $a0, 0x800a
-/* 35BF2C E004E55C 2484A66C */  addiu     $a0, $a0, -0x5994
+/* 35BF28 E004E558 3C04800A */  lui       $a0, %hi(D_8009A66C)
+/* 35BF2C E004E55C 2484A66C */  addiu     $a0, $a0, %lo(D_8009A66C)
 /* 35BF30 E004E560 34E70002 */  ori       $a3, $a3, 2
 /* 35BF34 E004E564 8C820000 */  lw        $v0, ($a0)
 /* 35BF38 E004E568 3C03DE00 */  lui       $v1, 0xde00

@@ -4,8 +4,8 @@
 glabel func_8005BDD8
 /* 371D8 8005BDD8 000410C0 */  sll       $v0, $a0, 3
 /* 371DC 8005BDDC 00441023 */  subu      $v0, $v0, $a0
-/* 371E0 8005BDE0 3C03800B */  lui       $v1, 0x800b
-/* 371E4 8005BDE4 8C6342E4 */  lw        $v1, 0x42e4($v1)
+/* 371E0 8005BDE0 3C03800B */  lui       $v1, %hi(D_800B42E4)
+/* 371E4 8005BDE4 8C6342E4 */  lw        $v1, %lo(D_800B42E4)($v1)
 /* 371E8 8005BDE8 00021080 */  sll       $v0, $v0, 2
 /* 371EC 8005BDEC 00431021 */  addu      $v0, $v0, $v1
 /* 371F0 8005BDF0 8C42000C */  lw        $v0, 0xc($v0)

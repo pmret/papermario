@@ -29,12 +29,12 @@ glabel func_800F0B3C
 /* 8A048 800F0B98 04400004 */  bltz      $v0, .L800F0BAC
 /* 8A04C 800F0B9C 24020004 */   addiu    $v0, $zero, 4
 .L800F0BA0:
-/* 8A050 800F0BA0 3C018011 */  lui       $at, 0x8011
+/* 8A050 800F0BA0 3C018011 */  lui       $at, %hi(D_801094AE)
 /* 8A054 800F0BA4 0803C323 */  j         .L800F0C8C
-/* 8A058 800F0BA8 A42294AE */   sh       $v0, -0x6b52($at)
+/* 8A058 800F0BA8 A42294AE */   sh       $v0, %lo(D_801094AE)($at)
 .L800F0BAC:
-/* 8A05C 800F0BAC 3C048011 */  lui       $a0, 0x8011
-/* 8A060 800F0BB0 248494AE */  addiu     $a0, $a0, -0x6b52
+/* 8A05C 800F0BAC 3C048011 */  lui       $a0, %hi(D_801094AE)
+/* 8A060 800F0BB0 248494AE */  addiu     $a0, $a0, %lo(D_801094AE)
 /* 8A064 800F0BB4 94820000 */  lhu       $v0, ($a0)
 /* 8A068 800F0BB8 24430001 */  addiu     $v1, $v0, 1
 /* 8A06C 800F0BBC 00021400 */  sll       $v0, $v0, 0x10

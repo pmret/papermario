@@ -6,8 +6,8 @@ glabel func_802D42AC
 /* F8C60 802D42B0 AFB10014 */  sw        $s1, 0x14($sp)
 /* F8C64 802D42B4 0000882D */  daddu     $s1, $zero, $zero
 /* F8C68 802D42B8 AFB20018 */  sw        $s2, 0x18($sp)
-/* F8C6C 802D42BC 3C12802E */  lui       $s2, 0x802e
-/* F8C70 802D42C0 2652B7C0 */  addiu     $s2, $s2, -0x4840
+/* F8C6C 802D42BC 3C12802E */  lui       $s2, %hi(D_802DB7C0)
+/* F8C70 802D42C0 2652B7C0 */  addiu     $s2, $s2, %lo(D_802DB7C0)
 /* F8C74 802D42C4 AFBF001C */  sw        $ra, 0x1c($sp)
 /* F8C78 802D42C8 AFB00010 */  sw        $s0, 0x10($sp)
 /* F8C7C 802D42CC 8E430000 */  lw        $v1, ($s2)

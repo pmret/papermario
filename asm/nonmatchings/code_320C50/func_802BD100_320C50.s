@@ -33,8 +33,8 @@ glabel func_802BD100_320C50
 /* 320CBC 802BD16C E600000C */  swc1      $f0, 0xc($s0)
 .L802BD170:
 /* 320CC0 802BD170 26240028 */  addiu     $a0, $s1, 0x28
-/* 320CC4 802BD174 3C02802C */  lui       $v0, 0x802c
-/* 320CC8 802BD178 8C42FF18 */  lw        $v0, -0xe8($v0)
+/* 320CC4 802BD174 3C02802C */  lui       $v0, %hi(D_802BFF18)
+/* 320CC8 802BD178 8C42FF18 */  lw        $v0, %lo(D_802BFF18)($v0)
 /* 320CCC 802BD17C 3C013EAE */  lui       $at, 0x3eae
 /* 320CD0 802BD180 3421147B */  ori       $at, $at, 0x147b
 /* 320CD4 802BD184 44810000 */  mtc1      $at, $f0
@@ -66,9 +66,9 @@ glabel func_802BD100_320C50
 /* 320D38 802BD1E8 C6000040 */  lwc1      $f0, 0x40($s0)
 /* 320D3C 802BD1EC 000210C0 */  sll       $v0, $v0, 3
 /* 320D40 802BD1F0 E6200030 */  swc1      $f0, 0x30($s1)
-/* 320D44 802BD1F4 3C07800B */  lui       $a3, 0x800b
+/* 320D44 802BD1F4 3C07800B */  lui       $a3, %hi(D_800B1DEC)
 /* 320D48 802BD1F8 00E23821 */  addu      $a3, $a3, $v0
-/* 320D4C 802BD1FC 8CE71DEC */  lw        $a3, 0x1dec($a3)
+/* 320D4C 802BD1FC 8CE71DEC */  lw        $a3, %lo(D_800B1DEC)($a3)
 /* 320D50 802BD200 0C00A7E7 */  jal       add_vec2D_polar
 /* 320D54 802BD204 26250030 */   addiu    $a1, $s1, 0x30
 /* 320D58 802BD208 8FBF0018 */  lw        $ra, 0x18($sp)

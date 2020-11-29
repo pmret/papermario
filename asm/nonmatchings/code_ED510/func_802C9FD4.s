@@ -8,13 +8,13 @@ glabel func_802C9FD4
 /* EE990 802C9FE0 AFB10014 */  sw        $s1, 0x14($sp)
 /* EE994 802C9FE4 00A0882D */  daddu     $s1, $a1, $zero
 /* EE998 802C9FE8 AFB20018 */  sw        $s2, 0x18($sp)
-/* EE99C 802C9FEC 3C04802E */  lui       $a0, 0x802e
-/* EE9A0 802C9FF0 2484ADA4 */  addiu     $a0, $a0, -0x525c
+/* EE99C 802C9FEC 3C04802E */  lui       $a0, %hi(D_802DADA4)
+/* EE9A0 802C9FF0 2484ADA4 */  addiu     $a0, $a0, %lo(D_802DADA4)
 /* EE9A4 802C9FF4 2402FFFF */  addiu     $v0, $zero, -1
 /* EE9A8 802C9FF8 AFBF001C */  sw        $ra, 0x1c($sp)
 /* EE9AC 802C9FFC 8C830000 */  lw        $v1, ($a0)
-/* EE9B0 802CA000 3C05802E */  lui       $a1, 0x802e
-/* EE9B4 802CA004 8CA5ADA0 */  lw        $a1, -0x5260($a1)
+/* EE9B0 802CA000 3C05802E */  lui       $a1, %hi(D_802DADA0)
+/* EE9B4 802CA004 8CA5ADA0 */  lw        $a1, %lo(D_802DADA0)($a1)
 /* EE9B8 802CA008 14620018 */  bne       $v1, $v0, .L802CA06C
 /* EE9BC 802CA00C 00C0902D */   daddu    $s2, $a2, $zero
 /* EE9C0 802CA010 0C016AFA */  jal       get_current_map_header

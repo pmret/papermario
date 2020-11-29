@@ -10,8 +10,8 @@ glabel func_800E24F8
 /* 7B9BC 800E250C 0C044181 */  jal       get_shadow_by_index
 /* 7B9C0 800E2510 8E0400CC */   lw       $a0, 0xcc($s0)
 /* 7B9C4 800E2514 C4400028 */  lwc1      $f0, 0x28($v0)
-/* 7B9C8 800E2518 3C018011 */  lui       $at, 0x8011
-/* 7B9CC 800E251C D424BD30 */  ldc1      $f4, -0x42d0($at)
+/* 7B9C8 800E2518 3C018011 */  lui       $at, %hi(D_8010BD30)
+/* 7B9CC 800E251C D424BD30 */  ldc1      $f4, %lo(D_8010BD30)($at)
 /* 7B9D0 800E2520 C4420030 */  lwc1      $f2, 0x30($v0)
 /* 7B9D4 800E2524 46000021 */  cvt.d.s   $f0, $f0
 /* 7B9D8 800E2528 46240000 */  add.d     $f0, $f0, $f4
@@ -37,9 +37,9 @@ glabel func_800E24F8
 /* 7BA24 800E2574 2C620011 */  sltiu     $v0, $v1, 0x11
 /* 7BA28 800E2578 1040002D */  beqz      $v0, .L800E2630
 /* 7BA2C 800E257C 00031080 */   sll      $v0, $v1, 2
-/* 7BA30 800E2580 3C018011 */  lui       $at, 0x8011
+/* 7BA30 800E2580 3C018011 */  lui       $at, %hi(D_8010BD38)
 /* 7BA34 800E2584 00220821 */  addu      $at, $at, $v0
-/* 7BA38 800E2588 8C22BD38 */  lw        $v0, -0x42c8($at)
+/* 7BA38 800E2588 8C22BD38 */  lw        $v0, %lo(D_8010BD38)($at)
 /* 7BA3C 800E258C 00400008 */  jr        $v0
 /* 7BA40 800E2590 00000000 */   nop      
 /* 7BA44 800E2594 3C014200 */  lui       $at, 0x4200
@@ -55,8 +55,8 @@ glabel func_800E24F8
 /* 7BA6C 800E25BC 080389A5 */  j         .L800E2694
 /* 7BA70 800E25C0 E4A0049C */   swc1     $f0, 0x49c($a1)
 .L800E25C4:
-/* 7BA74 800E25C4 3C048011 */  lui       $a0, 0x8011
-/* 7BA78 800E25C8 2484C9A0 */  addiu     $a0, $a0, -0x3660
+/* 7BA74 800E25C4 3C048011 */  lui       $a0, %hi(D_8010C9A0)
+/* 7BA78 800E25C8 2484C9A0 */  addiu     $a0, $a0, %lo(D_8010C9A0)
 /* 7BA7C 800E25CC 8C820000 */  lw        $v0, ($a0)
 /* 7BA80 800E25D0 3C014040 */  lui       $at, 0x4040
 /* 7BA84 800E25D4 44812000 */  mtc1      $at, $f4
@@ -89,8 +89,8 @@ glabel func_800E24F8
 /* 7BAE8 800E2638 44811000 */  mtc1      $at, $f2
 /* 7BAEC 800E263C 3C014040 */  lui       $at, 0x4040
 /* 7BAF0 800E2640 44812000 */  mtc1      $at, $f4
-/* 7BAF4 800E2644 3C018011 */  lui       $at, 0x8011
-/* 7BAF8 800E2648 AC20C9A0 */  sw        $zero, -0x3660($at)
+/* 7BAF4 800E2644 3C018011 */  lui       $at, %hi(D_8010C9A0)
+/* 7BAF8 800E2648 AC20C9A0 */  sw        $zero, %lo(D_8010C9A0)($at)
 /* 7BAFC 800E264C 08038982 */  j         .L800E2608
 /* 7BB00 800E2650 46020001 */   sub.s    $f0, $f0, $f2
 .L800E2654:

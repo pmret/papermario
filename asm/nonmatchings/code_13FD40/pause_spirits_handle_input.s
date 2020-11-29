@@ -238,9 +238,9 @@ glabel pause_spirits_handle_input
 /* 140AEC 8024D7AC 92030003 */  lbu       $v1, 3($s0)
 /* 140AF0 8024D7B0 8042028E */  lb        $v0, 0x28e($v0)
 /* 140AF4 8024D7B4 00031880 */  sll       $v1, $v1, 2
-/* 140AF8 8024D7B8 3C018027 */  lui       $at, 0x8027
+/* 140AF8 8024D7B8 3C018027 */  lui       $at, %hi(D_802706E0)
 /* 140AFC 8024D7BC 00230821 */  addu      $at, $at, $v1
-/* 140B00 8024D7C0 8C2306E0 */  lw        $v1, 0x6e0($at)
+/* 140B00 8024D7C0 8C2306E0 */  lw        $v1, %lo(D_802706E0)($at)
 /* 140B04 8024D7C4 0062102A */  slt       $v0, $v1, $v0
 /* 140B08 8024D7C8 14400005 */  bnez      $v0, .L8024D7E0
 /* 140B0C 8024D7CC 3C02001D */   lui      $v0, 0x1d

@@ -23,8 +23,8 @@ glabel ModifyColliderFlags
 /* EE7C4 802C9E14 0040802D */   daddu    $s0, $v0, $zero
 /* EE7C8 802C9E18 001018C0 */  sll       $v1, $s0, 3
 /* EE7CC 802C9E1C 00701823 */  subu      $v1, $v1, $s0
-/* EE7D0 802C9E20 3C04800B */  lui       $a0, 0x800b
-/* EE7D4 802C9E24 8C8442E4 */  lw        $a0, 0x42e4($a0)
+/* EE7D0 802C9E20 3C04800B */  lui       $a0, %hi(D_800B42E4)
+/* EE7D4 802C9E24 8C8442E4 */  lw        $a0, %lo(D_800B42E4)($a0)
 /* EE7D8 802C9E28 00031880 */  sll       $v1, $v1, 2
 /* EE7DC 802C9E2C 00838021 */  addu      $s0, $a0, $v1
 /* EE7E0 802C9E30 86040006 */  lh        $a0, 6($s0)

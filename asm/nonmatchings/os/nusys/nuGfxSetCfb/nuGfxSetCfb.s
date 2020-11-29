@@ -7,15 +7,15 @@ glabel nuGfxSetCfb
 /* 3A6F8 8005F2F8 00A0882D */  daddu     $s1, $a1, $zero
 /* 3A6FC 8005F2FC AFBF0018 */  sw        $ra, 0x18($sp)
 /* 3A700 8005F300 AFB00010 */  sw        $s0, 0x10($sp)
-/* 3A704 8005F304 3C01800A */  lui       $at, 0x800a
-/* 3A708 8005F308 AC24A658 */  sw        $a0, -0x59a8($at)
-/* 3A70C 8005F30C 3C018007 */  lui       $at, 0x8007
-/* 3A710 8005F310 AC3173F0 */  sw        $s1, 0x73f0($at)
-/* 3A714 8005F314 3C01800A */  lui       $at, 0x800a
-/* 3A718 8005F318 AC20A5F0 */  sw        $zero, -0x5a10($at)
+/* 3A704 8005F304 3C01800A */  lui       $at, %hi(D_8009A658)
+/* 3A708 8005F308 AC24A658 */  sw        $a0, %lo(D_8009A658)($at)
+/* 3A70C 8005F30C 3C018007 */  lui       $at, %hi(D_800773F0)
+/* 3A710 8005F310 AC3173F0 */  sw        $s1, %lo(D_800773F0)($at)
+/* 3A714 8005F314 3C01800A */  lui       $at, %hi(D_8009A5F0)
+/* 3A718 8005F318 AC20A5F0 */  sw        $zero, %lo(D_8009A5F0)($at)
 /* 3A71C 8005F31C 8C820000 */  lw        $v0, ($a0)
-/* 3A720 8005F320 3C01800A */  lui       $at, 0x800a
-/* 3A724 8005F324 AC22A64C */  sw        $v0, -0x59b4($at)
+/* 3A720 8005F320 3C01800A */  lui       $at, %hi(D_8009A64C)
+/* 3A724 8005F324 AC22A64C */  sw        $v0, %lo(D_8009A64C)($at)
 /* 3A728 8005F328 0C0180DC */  jal       nuGfxRetraceWait
 /* 3A72C 8005F32C 24040001 */   addiu    $a0, $zero, 1
 /* 3A730 8005F330 0C017BE4 */  jal       nuScSetFrameBufferNum
@@ -25,8 +25,8 @@ glabel nuGfxSetCfb
 /* 3A740 8005F340 2625FFFF */   addiu    $a1, $s1, -1
 /* 3A744 8005F344 10A0000B */  beqz      $a1, .L8005F374
 /* 3A748 8005F348 0000802D */   daddu    $s0, $zero, $zero
-/* 3A74C 8005F34C 3C04800A */  lui       $a0, 0x800a
-/* 3A750 8005F350 8C84A658 */  lw        $a0, -0x59a8($a0)
+/* 3A74C 8005F34C 3C04800A */  lui       $a0, %hi(D_8009A658)
+/* 3A750 8005F350 8C84A658 */  lw        $a0, %lo(D_8009A658)($a0)
 .L8005F354:
 /* 3A754 8005F354 8C830000 */  lw        $v1, ($a0)
 /* 3A758 8005F358 8C820004 */  lw        $v0, 4($a0)
@@ -47,10 +47,10 @@ glabel nuGfxSetCfb
 /* 3A78C 8005F38C 00000000 */   nop      
 .L8005F390:
 /* 3A790 8005F390 8C820000 */  lw        $v0, ($a0)
-/* 3A794 8005F394 3C01800A */  lui       $at, 0x800a
-/* 3A798 8005F398 AC30A5F0 */  sw        $s0, -0x5a10($at)
-/* 3A79C 8005F39C 3C01800A */  lui       $at, 0x800a
-/* 3A7A0 8005F3A0 AC22A64C */  sw        $v0, -0x59b4($at)
+/* 3A794 8005F394 3C01800A */  lui       $at, %hi(D_8009A5F0)
+/* 3A798 8005F398 AC30A5F0 */  sw        $s0, %lo(D_8009A5F0)($at)
+/* 3A79C 8005F39C 3C01800A */  lui       $at, %hi(D_8009A64C)
+/* 3A7A0 8005F3A0 AC22A64C */  sw        $v0, %lo(D_8009A64C)($at)
 /* 3A7A4 8005F3A4 08017CFA */  j         .L8005F3E8
 /* 3A7A8 8005F3A8 00000000 */   nop      
 .L8005F3AC:
@@ -59,8 +59,8 @@ glabel nuGfxSetCfb
 .L8005F3B4:
 /* 3A7B4 8005F3B4 0C019A6C */  jal       osViGetCurrentFramebuffer
 /* 3A7B8 8005F3B8 00000000 */   nop      
-/* 3A7BC 8005F3BC 3C03800A */  lui       $v1, 0x800a
-/* 3A7C0 8005F3C0 8C63A658 */  lw        $v1, -0x59a8($v1)
+/* 3A7BC 8005F3BC 3C03800A */  lui       $v1, %hi(D_8009A658)
+/* 3A7C0 8005F3C0 8C63A658 */  lw        $v1, %lo(D_8009A658)($v1)
 /* 3A7C4 8005F3C4 00102080 */  sll       $a0, $s0, 2
 /* 3A7C8 8005F3C8 00832021 */  addu      $a0, $a0, $v1
 /* 3A7CC 8005F3CC 8C830000 */  lw        $v1, ($a0)

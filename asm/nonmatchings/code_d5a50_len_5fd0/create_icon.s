@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel create_icon
-/* D7BA4 801414A4 3C038015 */  lui       $v1, 0x8015
-/* D7BA8 801414A8 8C637960 */  lw        $v1, 0x7960($v1)
+/* D7BA4 801414A4 3C038015 */  lui       $v1, %hi(D_80157960)
+/* D7BA8 801414A8 8C637960 */  lw        $v1, %lo(D_80157960)($v1)
 /* D7BAC 801414AC 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* D7BB0 801414B0 AFB20018 */  sw        $s2, 0x18($sp)
 /* D7BB4 801414B4 0080902D */  daddu     $s2, $a0, $zero
@@ -30,10 +30,10 @@ glabel create_icon
 /* D7BF8 801414F8 0C00AB39 */  jal       heap_malloc
 /* D7BFC 801414FC 24040054 */   addiu    $a0, $zero, 0x54
 /* D7C00 80141500 00112080 */  sll       $a0, $s1, 2
-/* D7C04 80141504 3C038015 */  lui       $v1, 0x8015
-/* D7C08 80141508 8C637960 */  lw        $v1, 0x7960($v1)
-/* D7C0C 8014150C 3C058015 */  lui       $a1, 0x8015
-/* D7C10 80141510 24A512B4 */  addiu     $a1, $a1, 0x12b4
+/* D7C04 80141504 3C038015 */  lui       $v1, %hi(D_80157960)
+/* D7C08 80141508 8C637960 */  lw        $v1, %lo(D_80157960)($v1)
+/* D7C0C 8014150C 3C058015 */  lui       $a1, %hi(D_801512B4)
+/* D7C10 80141510 24A512B4 */  addiu     $a1, $a1, %lo(D_801512B4)
 /* D7C14 80141514 00832021 */  addu      $a0, $a0, $v1
 /* D7C18 80141518 8CA30000 */  lw        $v1, ($a1)
 /* D7C1C 8014151C 0040802D */  daddu     $s0, $v0, $zero
@@ -49,8 +49,8 @@ glabel create_icon
 /* D7C3C 8014153C AE030000 */  sw        $v1, ($s0)
 /* D7C40 80141540 16400004 */  bnez      $s2, .L80141554
 /* D7C44 80141544 AE120004 */   sw       $s2, 4($s0)
-/* D7C48 80141548 3C028015 */  lui       $v0, 0x8015
-/* D7C4C 8014154C 2442EFC8 */  addiu     $v0, $v0, -0x1038
+/* D7C48 80141548 3C028015 */  lui       $v0, %hi(D_8014EFC8)
+/* D7C4C 8014154C 2442EFC8 */  addiu     $v0, $v0, %lo(D_8014EFC8)
 /* D7C50 80141550 AE020004 */  sw        $v0, 4($s0)
 .L80141554:
 /* D7C54 80141554 A2030047 */  sb        $v1, 0x47($s0)

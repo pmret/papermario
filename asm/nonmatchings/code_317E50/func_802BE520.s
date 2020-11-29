@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel func_802BE520
-/* 319270 802BE520 3C02802C */  lui       $v0, 0x802c
-/* 319274 802BE524 8C42E928 */  lw        $v0, -0x16d8($v0)
+/* 319270 802BE520 3C02802C */  lui       $v0, %hi(D_802BE928)
+/* 319274 802BE524 8C42E928 */  lw        $v0, %lo(D_802BE928)($v0)
 /* 319278 802BE528 27BDFF90 */  addiu     $sp, $sp, -0x70
 /* 31927C 802BE52C AFB00030 */  sw        $s0, 0x30($sp)
 /* 319280 802BE530 AFBF0038 */  sw        $ra, 0x38($sp)
@@ -29,8 +29,8 @@ glabel func_802BE520
 /* 3192CC 802BE57C 46201082 */  mul.d     $f2, $f2, $f0
 /* 3192D0 802BE580 00000000 */  nop       
 /* 3192D4 802BE584 84A200A6 */  lh        $v0, 0xa6($a1)
-/* 3192D8 802BE588 3C01802C */  lui       $at, 0x802c
-/* 3192DC 802BE58C D420E910 */  ldc1      $f0, -0x16f0($at)
+/* 3192D8 802BE588 3C01802C */  lui       $at, %hi(D_802BE910)
+/* 3192DC 802BE58C D420E910 */  ldc1      $f0, %lo(D_802BE910)($at)
 /* 3192E0 802BE590 44823000 */  mtc1      $v0, $f6
 /* 3192E4 802BE594 00000000 */  nop       
 /* 3192E8 802BE598 468031A1 */  cvt.d.w   $f6, $f6

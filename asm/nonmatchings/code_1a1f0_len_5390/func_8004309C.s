@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel func_8004309C
-/* 1E49C 8004309C 3C03800A */  lui       $v1, 0x800a
-/* 1E4A0 800430A0 8C63A5D0 */  lw        $v1, -0x5a30($v1)
+/* 1E49C 8004309C 3C03800A */  lui       $v1, %hi(D_8009A5D0)
+/* 1E4A0 800430A0 8C63A5D0 */  lw        $v1, %lo(D_8009A5D0)($v1)
 /* 1E4A4 800430A4 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 1E4A8 800430A8 AFB10014 */  sw        $s1, 0x14($sp)
 /* 1E4AC 800430AC 3C11800B */  lui       $s1, %hi(gCurrentEncounter)
@@ -39,8 +39,8 @@ glabel func_8004309C
 .L8004311C:
 /* 1E51C 8004311C 16200028 */  bnez      $s1, .L800431C0
 /* 1E520 80043120 24020001 */   addiu    $v0, $zero, 1
-/* 1E524 80043124 3C01800A */  lui       $at, 0x800a
-/* 1E528 80043128 AC22A5D0 */  sw        $v0, -0x5a30($at)
+/* 1E524 80043124 3C01800A */  lui       $at, %hi(D_8009A5D0)
+/* 1E528 80043128 AC22A5D0 */  sw        $v0, %lo(D_8009A5D0)($at)
 /* 1E52C 8004312C 08010C70 */  j         .L800431C0
 /* 1E530 80043130 00000000 */   nop      
 .L80043134:
@@ -77,10 +77,10 @@ glabel func_8004309C
 /* 1E5A4 800431A4 3C01800A */  lui       $at, %hi(gGameState)
 /* 1E5A8 800431A8 AC22A600 */  sw        $v0, %lo(gGameState)($at)
 /* 1E5AC 800431AC 24020001 */  addiu     $v0, $zero, 1
-/* 1E5B0 800431B0 3C01800A */  lui       $at, 0x800a
-/* 1E5B4 800431B4 AC22A678 */  sw        $v0, -0x5988($at)
-/* 1E5B8 800431B8 3C01800A */  lui       $at, 0x800a
-/* 1E5BC 800431BC AC20A5D0 */  sw        $zero, -0x5a30($at)
+/* 1E5B0 800431B0 3C01800A */  lui       $at, %hi(D_8009A678)
+/* 1E5B4 800431B4 AC22A678 */  sw        $v0, %lo(D_8009A678)($at)
+/* 1E5B8 800431B8 3C01800A */  lui       $at, %hi(D_8009A5D0)
+/* 1E5BC 800431BC AC20A5D0 */  sw        $zero, %lo(D_8009A5D0)($at)
 .L800431C0:
 /* 1E5C0 800431C0 8FBF0018 */  lw        $ra, 0x18($sp)
 /* 1E5C4 800431C4 8FB10014 */  lw        $s1, 0x14($sp)

@@ -8,8 +8,8 @@ glabel func_80052660
 /* 2DA6C 8005266C AFB20018 */  sw        $s2, 0x18($sp)
 /* 2DA70 80052670 0000902D */  daddu     $s2, $zero, $zero
 /* 2DA74 80052674 AFB50024 */  sw        $s5, 0x24($sp)
-/* 2DA78 80052678 3C158008 */  lui       $s5, 0x8008
-/* 2DA7C 8005267C 26B585A0 */  addiu     $s5, $s5, -0x7a60
+/* 2DA78 80052678 3C158008 */  lui       $s5, %hi(D_800785A0)
+/* 2DA7C 8005267C 26B585A0 */  addiu     $s5, $s5, %lo(D_800785A0)
 /* 2DA80 80052680 AFB3001C */  sw        $s3, 0x1c($sp)
 /* 2DA84 80052684 241300B8 */  addiu     $s3, $zero, 0xb8
 /* 2DA88 80052688 AFB40020 */  sw        $s4, 0x20($sp)

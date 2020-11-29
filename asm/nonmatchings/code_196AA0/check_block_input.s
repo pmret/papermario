@@ -14,8 +14,8 @@ glabel check_block_input
 /* 1977D0 80268EF0 3C158011 */  lui       $s5, %hi(gPlayerData)
 /* 1977D4 80268EF4 26B5F290 */  addiu     $s5, $s5, %lo(gPlayerData)
 /* 1977D8 80268EF8 AFB60028 */  sw        $s6, 0x28($sp)
-/* 1977DC 80268EFC 3C16802A */  lui       $s6, 0x802a
-/* 1977E0 80268F00 26D6FBE0 */  addiu     $s6, $s6, -0x420
+/* 1977DC 80268EFC 3C16802A */  lui       $s6, %hi(D_8029FBE0)
+/* 1977E0 80268F00 26D6FBE0 */  addiu     $s6, $s6, %lo(D_8029FBE0)
 /* 1977E4 80268F04 AFBF0030 */  sw        $ra, 0x30($sp)
 /* 1977E8 80268F08 AFB3001C */  sw        $s3, 0x1c($sp)
 /* 1977EC 80268F0C AFB20018 */  sw        $s2, 0x18($sp)

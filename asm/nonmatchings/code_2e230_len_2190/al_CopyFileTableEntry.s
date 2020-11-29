@@ -3,8 +3,8 @@
 
 glabel al_CopyFileTableEntry
 /* 2F87C 8005447C 27BDFFF8 */  addiu     $sp, $sp, -8
-/* 2F880 80054480 3C07800A */  lui       $a3, 0x800a
-/* 2F884 80054484 8CE7A5C0 */  lw        $a3, -0x5a40($a3)
+/* 2F880 80054480 3C07800A */  lui       $a3, %hi(D_8009A5C0)
+/* 2F884 80054484 8CE7A5C0 */  lw        $a3, %lo(D_8009A5C0)($a3)
 /* 2F888 80054488 00A0482D */  daddu     $t1, $a1, $zero
 /* 2F88C 8005448C 8CE20024 */  lw        $v0, 0x24($a3)
 /* 2F890 80054490 0082102B */  sltu      $v0, $a0, $v0

@@ -65,8 +65,8 @@ glabel free_npc
 /* 13EA4 80038AA4 24630004 */   addiu    $v1, $v1, 4
 /* 13EA8 80038AA8 00101080 */  sll       $v0, $s0, 2
 .L80038AAC:
-/* 13EAC 80038AAC 3C04800A */  lui       $a0, 0x800a
-/* 13EB0 80038AB0 2484A604 */  addiu     $a0, $a0, -0x59fc
+/* 13EAC 80038AAC 3C04800A */  lui       $a0, %hi(D_8009A604)
+/* 13EB0 80038AB0 2484A604 */  addiu     $a0, $a0, %lo(D_8009A604)
 /* 13EB4 80038AB4 94830000 */  lhu       $v1, ($a0)
 /* 13EB8 80038AB8 00451021 */  addu      $v0, $v0, $a1
 /* 13EBC 80038ABC AC400000 */  sw        $zero, ($v0)

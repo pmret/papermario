@@ -438,8 +438,8 @@ glabel func_80115498
 .L80115A84:
 /* AC184 80115A84 26D60044 */  addiu     $s6, $s6, 0x44
 /* AC188 80115A88 26A40030 */  addiu     $a0, $s5, 0x30
-/* AC18C 80115A8C 3C058016 */  lui       $a1, 0x8016
-/* AC190 80115A90 24A5A590 */  addiu     $a1, $a1, -0x5a70
+/* AC18C 80115A8C 3C058016 */  lui       $a1, %hi(D_8015A590)
+/* AC190 80115A90 24A5A590 */  addiu     $a1, $a1, %lo(D_8015A590)
 /* AC194 80115A94 02C52821 */  addu      $a1, $s6, $a1
 /* AC198 80115A98 0260302D */  daddu     $a2, $s3, $zero
 /* AC19C 80115A9C 0240382D */  daddu     $a3, $s2, $zero

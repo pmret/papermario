@@ -6,8 +6,8 @@ glabel func_8024EE48
 /* 17D72C 8024EE4C AFB10014 */  sw        $s1, 0x14($sp)
 /* 17D730 8024EE50 0000882D */  daddu     $s1, $zero, $zero
 /* 17D734 8024EE54 AFB00010 */  sw        $s0, 0x10($sp)
-/* 17D738 8024EE58 3C10802A */  lui       $s0, 0x802a
-/* 17D73C 8024EE5C 2610F2C0 */  addiu     $s0, $s0, -0xd40
+/* 17D738 8024EE58 3C10802A */  lui       $s0, %hi(D_8029F2C0)
+/* 17D73C 8024EE5C 2610F2C0 */  addiu     $s0, $s0, %lo(D_8029F2C0)
 /* 17D740 8024EE60 AFBF0018 */  sw        $ra, 0x18($sp)
 .L8024EE64:
 /* 17D744 8024EE64 86020010 */  lh        $v0, 0x10($s0)

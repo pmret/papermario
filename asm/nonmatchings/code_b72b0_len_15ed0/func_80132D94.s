@@ -11,11 +11,11 @@ glabel func_80132D94
 /* C94AC 80132DAC 14400024 */  bnez      $v0, .L80132E40
 /* C94B0 80132DB0 AFB00010 */   sw       $s0, 0x10($sp)
 /* C94B4 80132DB4 0000802D */  daddu     $s0, $zero, $zero
-/* C94B8 80132DB8 3C118015 */  lui       $s1, 0x8015
-/* C94BC 80132DBC 26310CC8 */  addiu     $s1, $s1, 0xcc8
+/* C94B8 80132DB8 3C118015 */  lui       $s1, %hi(D_80150CC8)
+/* C94BC 80132DBC 26310CC8 */  addiu     $s1, $s1, %lo(D_80150CC8)
 .L80132DC0:
-/* C94C0 80132DC0 3C038015 */  lui       $v1, 0x8015
-/* C94C4 80132DC4 8C6365A0 */  lw        $v1, 0x65a0($v1)
+/* C94C0 80132DC0 3C038015 */  lui       $v1, %hi(D_801565A0)
+/* C94C4 80132DC4 8C6365A0 */  lw        $v1, %lo(D_801565A0)($v1)
 /* C94C8 80132DC8 00101080 */  sll       $v0, $s0, 2
 /* C94CC 80132DCC 00431021 */  addu      $v0, $v0, $v1
 /* C94D0 80132DD0 8C440000 */  lw        $a0, ($v0)

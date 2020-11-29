@@ -6,8 +6,8 @@ glabel pause_partners_cleanup
 /* 13FCC8 8024C988 AFB00010 */  sw        $s0, 0x10($sp)
 /* 13FCCC 8024C98C 0000802D */  daddu     $s0, $zero, $zero
 /* 13FCD0 8024C990 AFB10014 */  sw        $s1, 0x14($sp)
-/* 13FCD4 8024C994 3C118027 */  lui       $s1, 0x8027
-/* 13FCD8 8024C998 26310640 */  addiu     $s1, $s1, 0x640
+/* 13FCD4 8024C994 3C118027 */  lui       $s1, %hi(D_80270640)
+/* 13FCD8 8024C998 26310640 */  addiu     $s1, $s1, %lo(D_80270640)
 /* 13FCDC 8024C99C AFBF0018 */  sw        $ra, 0x18($sp)
 .L8024C9A0:
 /* 13FCE0 8024C9A0 8E240000 */  lw        $a0, ($s1)
@@ -18,8 +18,8 @@ glabel pause_partners_cleanup
 /* 13FCF4 8024C9B4 1440FFFA */  bnez      $v0, .L8024C9A0
 /* 13FCF8 8024C9B8 00000000 */   nop      
 /* 13FCFC 8024C9BC 0000802D */  daddu     $s0, $zero, $zero
-/* 13FD00 8024C9C0 3C118027 */  lui       $s1, 0x8027
-/* 13FD04 8024C9C4 26310660 */  addiu     $s1, $s1, 0x660
+/* 13FD00 8024C9C0 3C118027 */  lui       $s1, %hi(D_80270660)
+/* 13FD04 8024C9C4 26310660 */  addiu     $s1, $s1, %lo(D_80270660)
 .L8024C9C8:
 /* 13FD08 8024C9C8 8E240000 */  lw        $a0, ($s1)
 /* 13FD0C 8024C9CC 26310004 */  addiu     $s1, $s1, 4

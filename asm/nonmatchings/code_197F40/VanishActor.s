@@ -55,8 +55,8 @@ glabel VanishActor
 /* 19EFB4 802706D4 0000202D */   daddu    $a0, $zero, $zero
 /* 19EFB8 802706D8 24020001 */  addiu     $v0, $zero, 1
 .L802706DC:
-/* 19EFBC 802706DC 3C01802A */  lui       $at, 0x802a
-/* 19EFC0 802706E0 A022FBD4 */  sb        $v0, -0x42c($at)
+/* 19EFBC 802706DC 3C01802A */  lui       $at, %hi(D_8029FBD4)
+/* 19EFC0 802706E0 A022FBD4 */  sb        $v0, %lo(D_8029FBD4)($at)
 /* 19EFC4 802706E4 24020005 */  addiu     $v0, $zero, 5
 /* 19EFC8 802706E8 AE42007C */  sw        $v0, 0x7c($s2)
 /* 19EFCC 802706EC 24020001 */  addiu     $v0, $zero, 1
@@ -132,9 +132,9 @@ glabel VanishActor
 /* 19F0D4 802707F4 10400052 */  beqz      $v0, .L80270940
 /* 19F0D8 802707F8 46020080 */   add.s    $f2, $f0, $f2
 /* 19F0DC 802707FC 00031080 */  sll       $v0, $v1, 2
-/* 19F0E0 80270800 3C01802A */  lui       $at, 0x802a
+/* 19F0E0 80270800 3C01802A */  lui       $at, %hi(D_8029D838)
 /* 19F0E4 80270804 00220821 */  addu      $at, $at, $v0
-/* 19F0E8 80270808 8C22D838 */  lw        $v0, -0x27c8($at)
+/* 19F0E8 80270808 8C22D838 */  lw        $v0, %lo(D_8029D838)($at)
 /* 19F0EC 8027080C 00400008 */  jr        $v0
 /* 19F0F0 80270810 00000000 */   nop      
 /* 19F0F4 80270814 8E42007C */  lw        $v0, 0x7c($s2)
@@ -211,8 +211,8 @@ glabel VanishActor
 /* 19F208 80270928 14400006 */  bnez      $v0, .L80270944
 /* 19F20C 8027092C 0000102D */   daddu    $v0, $zero, $zero
 .L80270930:
-/* 19F210 80270930 3C01802A */  lui       $at, 0x802a
-/* 19F214 80270934 A020FBD4 */  sb        $zero, -0x42c($at)
+/* 19F210 80270930 3C01802A */  lui       $at, %hi(D_8029FBD4)
+/* 19F214 80270934 A020FBD4 */  sb        $zero, %lo(D_8029FBD4)($at)
 /* 19F218 80270938 0809C251 */  j         .L80270944
 /* 19F21C 8027093C 24020002 */   addiu    $v0, $zero, 2
 .L80270940:

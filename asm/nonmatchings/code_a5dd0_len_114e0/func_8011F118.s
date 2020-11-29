@@ -25,15 +25,15 @@ glabel func_8011F118
 /* B5868 8011F168 C66C00A4 */  lwc1      $f12, 0xa4($s3)
 /* B586C 8011F16C 0C00A6C9 */  jal       clamp_angle
 /* B5870 8011F170 46000506 */   mov.s    $f20, $f0
-/* B5874 8011F174 3C128015 */  lui       $s2, 0x8015
-/* B5878 8011F178 26523A68 */  addiu     $s2, $s2, 0x3a68
+/* B5874 8011F174 3C128015 */  lui       $s2, %hi(D_80153A68)
+/* B5878 8011F178 26523A68 */  addiu     $s2, $s2, %lo(D_80153A68)
 /* B587C 8011F17C 4405B000 */  mfc1      $a1, $f22
 /* B5880 8011F180 4406A000 */  mfc1      $a2, $f20
 /* B5884 8011F184 44070000 */  mfc1      $a3, $f0
 /* B5888 8011F188 0C0190B4 */  jal       guRotateAnglesF
 /* B588C 8011F18C 0240202D */   daddu    $a0, $s2, $zero
-/* B5890 8011F190 3C108015 */  lui       $s0, 0x8015
-/* B5894 8011F194 26103AA8 */  addiu     $s0, $s0, 0x3aa8
+/* B5890 8011F190 3C108015 */  lui       $s0, %hi(D_80153AA8)
+/* B5894 8011F194 26103AA8 */  addiu     $s0, $s0, %lo(D_80153AA8)
 /* B5898 8011F198 8E6500A8 */  lw        $a1, 0xa8($s3)
 /* B589C 8011F19C 8E6600AC */  lw        $a2, 0xac($s3)
 /* B58A0 8011F1A0 8E6700B0 */  lw        $a3, 0xb0($s3)
@@ -50,15 +50,15 @@ glabel func_8011F118
 /* B58CC 8011F1CC 44061000 */  mfc1      $a2, $f2
 /* B58D0 8011F1D0 C662008C */  lwc1      $f2, 0x8c($s3)
 /* B58D4 8011F1D4 46001080 */  add.s     $f2, $f2, $f0
-/* B58D8 8011F1D8 3C118015 */  lui       $s1, 0x8015
-/* B58DC 8011F1DC 26313AE8 */  addiu     $s1, $s1, 0x3ae8
+/* B58D8 8011F1D8 3C118015 */  lui       $s1, %hi(D_80153AE8)
+/* B58DC 8011F1DC 26313AE8 */  addiu     $s1, $s1, %lo(D_80153AE8)
 /* B58E0 8011F1E0 44071000 */  mfc1      $a3, $f2
 /* B58E4 8011F1E4 0C019E40 */  jal       guTranslateF
 /* B58E8 8011F1E8 0220202D */   daddu    $a0, $s1, $zero
 /* B58EC 8011F1EC 0200202D */  daddu     $a0, $s0, $zero
 /* B58F0 8011F1F0 0240282D */  daddu     $a1, $s2, $zero
-/* B58F4 8011F1F4 3C108015 */  lui       $s0, 0x8015
-/* B58F8 8011F1F8 26103B28 */  addiu     $s0, $s0, 0x3b28
+/* B58F4 8011F1F4 3C108015 */  lui       $s0, %hi(D_80153B28)
+/* B58F8 8011F1F8 26103B28 */  addiu     $s0, $s0, %lo(D_80153B28)
 /* B58FC 8011F1FC 0C019D80 */  jal       guMtxCatF
 /* B5900 8011F200 0200302D */   daddu    $a2, $s0, $zero
 /* B5904 8011F204 0200202D */  daddu     $a0, $s0, $zero

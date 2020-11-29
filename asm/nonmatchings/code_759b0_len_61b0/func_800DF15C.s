@@ -54,8 +54,8 @@ glabel func_800DF15C
 /* 786D0 800DF220 C6020000 */  lwc1      $f2, ($s0)
 /* 786D4 800DF224 2413FFFF */  addiu     $s3, $zero, -1
 /* 786D8 800DF228 E7A00018 */  swc1      $f0, 0x18($sp)
-/* 786DC 800DF22C 3C018011 */  lui       $at, 0x8011
-/* 786E0 800DF230 D420BC50 */  ldc1      $f0, -0x43b0($at)
+/* 786DC 800DF22C 3C018011 */  lui       $at, %hi(D_8010BC50)
+/* 786E0 800DF230 D420BC50 */  ldc1      $f0, %lo(D_8010BC50)($at)
 /* 786E4 800DF234 27A20040 */  addiu     $v0, $sp, 0x40
 /* 786E8 800DF238 AFA2001C */  sw        $v0, 0x1c($sp)
 /* 786EC 800DF23C 27A20044 */  addiu     $v0, $sp, 0x44

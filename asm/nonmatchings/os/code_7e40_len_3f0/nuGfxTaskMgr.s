@@ -3,10 +3,10 @@
 
 glabel nuGfxTaskMgr
 /* 7E40 8002CA40 27BDFFD0 */  addiu     $sp, $sp, -0x30
-/* 7E44 8002CA44 3C04800E */  lui       $a0, 0x800e
-/* 7E48 8002CA48 2484AC90 */  addiu     $a0, $a0, -0x5370
-/* 7E4C 8002CA4C 3C05800A */  lui       $a1, 0x800a
-/* 7E50 8002CA50 24A5E6D0 */  addiu     $a1, $a1, -0x1930
+/* 7E44 8002CA44 3C04800E */  lui       $a0, %hi(D_800DAC90)
+/* 7E48 8002CA48 2484AC90 */  addiu     $a0, $a0, %lo(D_800DAC90)
+/* 7E4C 8002CA4C 3C05800A */  lui       $a1, %hi(D_8009E6D0)
+/* 7E50 8002CA50 24A5E6D0 */  addiu     $a1, $a1, %lo(D_8009E6D0)
 /* 7E54 8002CA54 24060008 */  addiu     $a2, $zero, 8
 /* 7E58 8002CA58 AFBF0028 */  sw        $ra, 0x28($sp)
 /* 7E5C 8002CA5C AFB30024 */  sw        $s3, 0x24($sp)
@@ -21,8 +21,8 @@ glabel nuGfxTaskMgr
 /* 7E80 8002CA80 3C10800A */  lui       $s0, %hi(nuGfxTaskSpool)
 /* 7E84 8002CA84 2610A618 */  addiu     $s0, $s0, %lo(nuGfxTaskSpool)
 .L8002CA88:
-/* 7E88 8002CA88 3C04800E */  lui       $a0, 0x800e
-/* 7E8C 8002CA8C 2484AC90 */  addiu     $a0, $a0, -0x5370
+/* 7E88 8002CA88 3C04800E */  lui       $a0, %hi(D_800DAC90)
+/* 7E8C 8002CA8C 2484AC90 */  addiu     $a0, $a0, %lo(D_800DAC90)
 /* 7E90 8002CA90 27A50010 */  addiu     $a1, $sp, 0x10
 /* 7E94 8002CA94 0C0195BC */  jal       osRecvMesg
 /* 7E98 8002CA98 24060001 */   addiu    $a2, $zero, 1
@@ -36,8 +36,8 @@ glabel nuGfxTaskMgr
 /* 7EB8 8002CAB8 0800B2A2 */  j         .L8002CA88
 /* 7EBC 8002CABC 00000000 */   nop      
 .L8002CAC0:
-/* 7EC0 8002CAC0 3C028007 */  lui       $v0, 0x8007
-/* 7EC4 8002CAC4 8C4273F4 */  lw        $v0, 0x73f4($v0)
+/* 7EC0 8002CAC0 3C028007 */  lui       $v0, %hi(D_800773F4)
+/* 7EC4 8002CAC4 8C4273F4 */  lw        $v0, %lo(D_800773F4)($v0)
 /* 7EC8 8002CAC8 10400003 */  beqz      $v0, .L8002CAD8
 /* 7ECC 8002CACC 00000000 */   nop      
 /* 7ED0 8002CAD0 0040F809 */  jalr      $v0
@@ -53,8 +53,8 @@ glabel nuGfxTaskMgr
 /* 7EF4 8002CAF4 0800B2C5 */  j         .L8002CB14
 /* 7EF8 8002CAF8 AE220000 */   sw       $v0, ($s1)
 .L8002CAFC:
-/* 7EFC 8002CAFC 3C028007 */  lui       $v0, 0x8007
-/* 7F00 8002CB00 8C4273F8 */  lw        $v0, 0x73f8($v0)
+/* 7EFC 8002CAFC 3C028007 */  lui       $v0, %hi(D_800773F8)
+/* 7F00 8002CB00 8C4273F8 */  lw        $v0, %lo(D_800773F8)($v0)
 /* 7F04 8002CB04 10400003 */  beqz      $v0, .L8002CB14
 /* 7F08 8002CB08 00000000 */   nop      
 /* 7F0C 8002CB0C 0040F809 */  jalr      $v0

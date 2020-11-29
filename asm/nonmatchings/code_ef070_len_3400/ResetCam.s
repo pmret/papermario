@@ -71,8 +71,8 @@ glabel ResetCam
 /* F1380 802CC9D0 0460001A */  bltz      $v1, .L802CCA3C
 /* F1384 802CC9D4 000310C0 */   sll      $v0, $v1, 3
 /* F1388 802CC9D8 00431023 */  subu      $v0, $v0, $v1
-/* F138C 802CC9DC 3C03800E */  lui       $v1, 0x800e
-/* F1390 802CC9E0 8C6391D4 */  lw        $v1, -0x6e2c($v1)
+/* F138C 802CC9DC 3C03800E */  lui       $v1, %hi(D_800D91D4)
+/* F1390 802CC9E0 8C6391D4 */  lw        $v1, %lo(D_800D91D4)($v1)
 /* F1394 802CC9E4 00021080 */  sll       $v0, $v0, 2
 /* F1398 802CC9E8 00431021 */  addu      $v0, $v0, $v1
 /* F139C 802CC9EC 8C420010 */  lw        $v0, 0x10($v0)

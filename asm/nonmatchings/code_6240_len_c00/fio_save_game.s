@@ -16,8 +16,8 @@ glabel fio_save_game
 /* 67A0 8002B3A0 A0520166 */   sb       $s2, 0x166($v0)
 /* 67A4 8002B3A4 3C10800E */  lui       $s0, %hi(gCurrentSaveFile)
 /* 67A8 8002B3A8 2610ACC0 */  addiu     $s0, $s0, %lo(gCurrentSaveFile)
-/* 67AC 8002B3AC 3C058007 */  lui       $a1, 0x8007
-/* 67B0 8002B3B0 24A545D0 */  addiu     $a1, $a1, 0x45d0
+/* 67AC 8002B3AC 3C058007 */  lui       $a1, %hi(D_800745D0)
+/* 67B0 8002B3B0 24A545D0 */  addiu     $a1, $a1, %lo(D_800745D0)
 /* 67B4 8002B3B4 0C01BB50 */  jal       strcpy
 /* 67B8 8002B3B8 0200202D */   daddu    $a0, $s0, $zero
 /* 67BC 8002B3BC 8E230000 */  lw        $v1, ($s1)
@@ -31,8 +31,8 @@ glabel fio_save_game
 /* 67DC 8002B3DC AE000030 */  sw        $zero, 0x30($s0)
 /* 67E0 8002B3E0 0C00AC34 */  jal       fio_calc_file_checksum
 /* 67E4 8002B3E4 AE020034 */   sw       $v0, 0x34($s0)
-/* 67E8 8002B3E8 3C11800A */  lui       $s1, 0x800a
-/* 67EC 8002B3EC 2631BA80 */  addiu     $s1, $s1, -0x4580
+/* 67E8 8002B3E8 3C11800A */  lui       $s1, %hi(D_8009BA80)
+/* 67EC 8002B3EC 2631BA80 */  addiu     $s1, $s1, %lo(D_8009BA80)
 /* 67F0 8002B3F0 8E240000 */  lw        $a0, ($s1)
 /* 67F4 8002B3F4 AE020030 */  sw        $v0, 0x30($s0)
 /* 67F8 8002B3F8 00021027 */  nor       $v0, $zero, $v0

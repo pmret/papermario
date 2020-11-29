@@ -27,9 +27,9 @@ glabel make_item_entity
 /* C7B48 80131448 2E620017 */   sltiu    $v0, $s3, 0x17
 /* C7B4C 8013144C 1040000A */  beqz      $v0, .L80131478
 /* C7B50 80131450 00131080 */   sll      $v0, $s3, 2
-/* C7B54 80131454 3C018015 */  lui       $at, 0x8015
+/* C7B54 80131454 3C018015 */  lui       $at, %hi(D_80150A98)
 /* C7B58 80131458 00220821 */  addu      $at, $at, $v0
-/* C7B5C 8013145C 8C220A98 */  lw        $v0, 0xa98($at)
+/* C7B5C 8013145C 8C220A98 */  lw        $v0, %lo(D_80150A98)($at)
 /* C7B60 80131460 00400008 */  jr        $v0
 /* C7B64 80131464 00000000 */   nop      
 /* C7B68 80131468 0C05152F */  jal       get_global_flag
@@ -38,8 +38,8 @@ glabel make_item_entity
 /* C7B74 80131474 2402FFFF */   addiu    $v0, $zero, -1
 .L80131478:
 /* C7B78 80131478 0000182D */  daddu     $v1, $zero, $zero
-/* C7B7C 8013147C 3C048015 */  lui       $a0, 0x8015
-/* C7B80 80131480 8C8465A0 */  lw        $a0, 0x65a0($a0)
+/* C7B7C 8013147C 3C048015 */  lui       $a0, %hi(D_801565A0)
+/* C7B80 80131480 8C8465A0 */  lw        $a0, %lo(D_801565A0)($a0)
 .L80131484:
 /* C7B84 80131484 8C820000 */  lw        $v0, ($a0)
 /* C7B88 80131488 10400006 */  beqz      $v0, .L801314A4
@@ -59,10 +59,10 @@ glabel make_item_entity
 /* C7BB4 801314B4 0C00AB39 */  jal       heap_malloc
 /* C7BB8 801314B8 0060A02D */   daddu    $s4, $v1, $zero
 /* C7BBC 801314BC 00142080 */  sll       $a0, $s4, 2
-/* C7BC0 801314C0 3C038015 */  lui       $v1, 0x8015
-/* C7BC4 801314C4 8C6365A0 */  lw        $v1, 0x65a0($v1)
-/* C7BC8 801314C8 3C058015 */  lui       $a1, 0x8015
-/* C7BCC 801314CC 24A512F8 */  addiu     $a1, $a1, 0x12f8
+/* C7BC0 801314C0 3C038015 */  lui       $v1, %hi(D_801565A0)
+/* C7BC4 801314C4 8C6365A0 */  lw        $v1, %lo(D_801565A0)($v1)
+/* C7BC8 801314C8 3C058015 */  lui       $a1, %hi(D_801512F8)
+/* C7BCC 801314CC 24A512F8 */  addiu     $a1, $a1, %lo(D_801512F8)
 /* C7BD0 801314D0 00832021 */  addu      $a0, $a0, $v1
 /* C7BD4 801314D4 8CA30000 */  lw        $v1, ($a1)
 /* C7BD8 801314D8 0040802D */  daddu     $s0, $v0, $zero
@@ -120,8 +120,8 @@ glabel make_item_entity
 /* C7C9C 8013159C 00220821 */  addu      $at, $at, $v0
 /* C7CA0 801315A0 942278F8 */  lhu       $v0, %lo(gItemTable+0x18)($at)
 /* C7CA4 801315A4 2403001E */  addiu     $v1, $zero, 0x1e
-/* C7CA8 801315A8 3C018015 */  lui       $at, 0x8015
-/* C7CAC 801315AC A42365A6 */  sh        $v1, 0x65a6($at)
+/* C7CA8 801315A8 3C018015 */  lui       $at, %hi(D_801565A6)
+/* C7CAC 801315AC A42365A6 */  sh        $v1, %lo(D_801565A6)($at)
 /* C7CB0 801315B0 30421000 */  andi      $v0, $v0, 0x1000
 /* C7CB4 801315B4 10400005 */  beqz      $v0, .L801315CC
 /* C7CB8 801315B8 3C020004 */   lui      $v0, 4
@@ -130,8 +130,8 @@ glabel make_item_entity
 /* C7CC4 801315C4 00431024 */  and       $v0, $v0, $v1
 /* C7CC8 801315C8 AE020000 */  sw        $v0, ($s0)
 .L801315CC:
-/* C7CCC 801315CC 3C048015 */  lui       $a0, 0x8015
-/* C7CD0 801315D0 24845D84 */  addiu     $a0, $a0, 0x5d84
+/* C7CCC 801315CC 3C048015 */  lui       $a0, %hi(D_80155D84)
+/* C7CD0 801315D0 24845D84 */  addiu     $a0, $a0, %lo(D_80155D84)
 /* C7CD4 801315D4 8C820000 */  lw        $v0, ($a0)
 /* C7CD8 801315D8 10400005 */  beqz      $v0, .L801315F0
 /* C7CDC 801315DC 3C030002 */   lui      $v1, 2
@@ -147,9 +147,9 @@ glabel make_item_entity
 /* C7D00 80131600 2C62001C */  sltiu     $v0, $v1, 0x1c
 /* C7D04 80131604 104000C1 */  beqz      $v0, .L8013190C
 /* C7D08 80131608 00031080 */   sll      $v0, $v1, 2
-/* C7D0C 8013160C 3C018015 */  lui       $at, 0x8015
+/* C7D0C 8013160C 3C018015 */  lui       $at, %hi(D_80150AF8)
 /* C7D10 80131610 00220821 */  addu      $at, $at, $v0
-/* C7D14 80131614 8C220AF8 */  lw        $v0, 0xaf8($at)
+/* C7D14 80131614 8C220AF8 */  lw        $v0, %lo(D_80150AF8)($at)
 /* C7D18 80131618 00400008 */  jr        $v0
 /* C7D1C 8013161C 00000000 */   nop      
 /* C7D20 80131620 8E020000 */  lw        $v0, ($s0)
@@ -350,9 +350,9 @@ glabel make_item_entity
 /* C800C 8013190C 2C620015 */  sltiu     $v0, $v1, 0x15
 /* C8010 80131910 1040003E */  beqz      $v0, .L80131A0C
 /* C8014 80131914 00031080 */   sll      $v0, $v1, 2
-/* C8018 80131918 3C018015 */  lui       $at, 0x8015
+/* C8018 80131918 3C018015 */  lui       $at, %hi(D_80150B68)
 /* C801C 8013191C 00220821 */  addu      $at, $at, $v0
-/* C8020 80131920 8C220B68 */  lw        $v0, 0xb68($at)
+/* C8020 80131920 8C220B68 */  lw        $v0, %lo(D_80150B68)($at)
 /* C8024 80131924 00400008 */  jr        $v0
 /* C8028 80131928 00000000 */   nop      
 /* C802C 8013192C 8E050008 */  lw        $a1, 8($s0)
@@ -425,8 +425,8 @@ glabel make_item_entity
 /* C812C 80131A2C 24020157 */  addiu     $v0, $zero, 0x157
 /* C8130 80131A30 14620009 */  bne       $v1, $v0, .L80131A58
 /* C8134 80131A34 2402015C */   addiu    $v0, $zero, 0x15c
-/* C8138 80131A38 3C058010 */  lui       $a1, 0x8010
-/* C813C 80131A3C 24A54AC0 */  addiu     $a1, $a1, 0x4ac0
+/* C8138 80131A38 3C058010 */  lui       $a1, %hi(D_80104AC0)
+/* C813C 80131A3C 24A54AC0 */  addiu     $a1, $a1, %lo(D_80104AC0)
 /* C8140 80131A40 0C04C27C */  jal       func_801309F0
 /* C8144 80131A44 0200202D */   daddu    $a0, $s0, $zero
 /* C8148 80131A48 0C04C2B3 */  jal       func_80130ACC

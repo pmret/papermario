@@ -18,8 +18,8 @@ glabel func_801203AC
 /* B6AE0 801203E0 1040000B */  beqz      $v0, .L80120410
 /* B6AE4 801203E4 0200282D */   daddu    $a1, $s0, $zero
 /* B6AE8 801203E8 0000302D */  daddu     $a2, $zero, $zero
-/* B6AEC 801203EC 3C018015 */  lui       $at, 0x8015
-/* B6AF0 801203F0 AC233B68 */  sw        $v1, 0x3b68($at)
+/* B6AEC 801203EC 3C018015 */  lui       $at, %hi(D_80153B68)
+/* B6AF0 801203F0 AC233B68 */  sw        $v1, %lo(D_80153B68)($at)
 /* B6AF4 801203F4 8C640000 */  lw        $a0, ($v1)
 /* B6AF8 801203F8 0C04808D */  jal       func_80120234
 /* B6AFC 801203FC 27A70010 */   addiu    $a3, $sp, 0x10

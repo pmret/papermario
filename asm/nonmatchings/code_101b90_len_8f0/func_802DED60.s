@@ -10,22 +10,22 @@ glabel func_802DED60
 /* 101E64 802DED74 3C040194 */  lui       $a0, 0x194
 /* 101E68 802DED78 34843010 */  ori       $a0, $a0, 0x3010
 /* 101E6C 802DED7C AFB00010 */  sw        $s0, 0x10($sp)
-/* 101E70 802DED80 3C10802E */  lui       $s0, 0x802e
-/* 101E74 802DED84 26100C60 */  addiu     $s0, $s0, 0xc60
+/* 101E70 802DED80 3C10802E */  lui       $s0, %hi(D_802E0C60)
+/* 101E74 802DED84 26100C60 */  addiu     $s0, $s0, %lo(D_802E0C60)
 /* 101E78 802DED88 0200282D */  daddu     $a1, $s0, $zero
 /* 101E7C 802DED8C AFBF001C */  sw        $ra, 0x1c($sp)
 /* 101E80 802DED90 0C017D24 */  jal       nuPiReadRom
 /* 101E84 802DED94 2406000C */   addiu    $a2, $zero, 0xc
 /* 101E88 802DED98 3C060194 */  lui       $a2, 0x194
 /* 101E8C 802DED9C 34C63010 */  ori       $a2, $a2, 0x3010
-/* 101E90 802DEDA0 3C048035 */  lui       $a0, 0x8035
-/* 101E94 802DEDA4 2484F800 */  addiu     $a0, $a0, -0x800
+/* 101E90 802DEDA0 3C048035 */  lui       $a0, %hi(D_8034F800)
+/* 101E94 802DEDA4 2484F800 */  addiu     $a0, $a0, %lo(D_8034F800)
 /* 101E98 802DEDA8 8E020000 */  lw        $v0, ($s0)
 /* 101E9C 802DEDAC 02510018 */  mult      $s2, $s1
-/* 101EA0 802DEDB0 3C01802E */  lui       $at, 0x802e
-/* 101EA4 802DEDB4 AC310C58 */  sw        $s1, 0xc58($at)
-/* 101EA8 802DEDB8 3C11802E */  lui       $s1, 0x802e
-/* 101EAC 802DEDBC 26310C5C */  addiu     $s1, $s1, 0xc5c
+/* 101EA0 802DEDB0 3C01802E */  lui       $at, %hi(D_802E0C58)
+/* 101EA4 802DEDB4 AC310C58 */  sw        $s1, %lo(D_802E0C58)($at)
+/* 101EA8 802DEDB8 3C11802E */  lui       $s1, %hi(D_802E0C5C)
+/* 101EAC 802DEDBC 26310C5C */  addiu     $s1, $s1, %lo(D_802E0C5C)
 /* 101EB0 802DEDC0 AE320000 */  sw        $s2, ($s1)
 /* 101EB4 802DEDC4 8E030008 */  lw        $v1, 8($s0)
 /* 101EB8 802DEDC8 00461021 */  addu      $v0, $v0, $a2
@@ -40,8 +40,8 @@ glabel func_802DED60
 /* 101EDC 802DEDEC 0040282D */  daddu     $a1, $v0, $zero
 /* 101EE0 802DEDF0 0000202D */  daddu     $a0, $zero, $zero
 /* 101EE4 802DEDF4 240600FF */  addiu     $a2, $zero, 0xff
-/* 101EE8 802DEDF8 3C03802E */  lui       $v1, 0x802e
-/* 101EEC 802DEDFC 24630C70 */  addiu     $v1, $v1, 0xc70
+/* 101EE8 802DEDF8 3C03802E */  lui       $v1, %hi(D_802E0C70)
+/* 101EEC 802DEDFC 24630C70 */  addiu     $v1, $v1, %lo(D_802E0C70)
 /* 101EF0 802DEE00 8E310000 */  lw        $s1, ($s1)
 .L802DEE04:
 /* 101EF4 802DEE04 AC65000C */  sw        $a1, 0xc($v1)
@@ -54,25 +54,25 @@ glabel func_802DED60
 /* 101F10 802DEE20 1440FFF8 */  bnez      $v0, .L802DEE04
 /* 101F14 802DEE24 24630010 */   addiu    $v1, $v1, 0x10
 /* 101F18 802DEE28 2404000C */  addiu     $a0, $zero, 0xc
-/* 101F1C 802DEE2C 3C02802E */  lui       $v0, 0x802e
-/* 101F20 802DEE30 24420080 */  addiu     $v0, $v0, 0x80
+/* 101F1C 802DEE2C 3C02802E */  lui       $v0, %hi(D_802E0080)
+/* 101F20 802DEE30 24420080 */  addiu     $v0, $v0, %lo(D_802E0080)
 .L802DEE34:
 /* 101F24 802DEE34 AC400000 */  sw        $zero, ($v0)
 /* 101F28 802DEE38 2484FFFF */  addiu     $a0, $a0, -1
 /* 101F2C 802DEE3C 0481FFFD */  bgez      $a0, .L802DEE34
 /* 101F30 802DEE40 2442FFFC */   addiu    $v0, $v0, -4
-/* 101F34 802DEE44 3C11802E */  lui       $s1, 0x802e
-/* 101F38 802DEE48 26310C10 */  addiu     $s1, $s1, 0xc10
+/* 101F34 802DEE44 3C11802E */  lui       $s1, %hi(D_802E0C10)
+/* 101F38 802DEE48 26310C10 */  addiu     $s1, $s1, %lo(D_802E0C10)
 /* 101F3C 802DEE4C 0220282D */  daddu     $a1, $s1, $zero
-/* 101F40 802DEE50 3C10802E */  lui       $s0, 0x802e
-/* 101F44 802DEE54 26100C60 */  addiu     $s0, $s0, 0xc60
+/* 101F40 802DEE50 3C10802E */  lui       $s0, %hi(D_802E0C60)
+/* 101F44 802DEE54 26100C60 */  addiu     $s0, $s0, %lo(D_802E0C60)
 /* 101F48 802DEE58 8E040000 */  lw        $a0, ($s0)
-/* 101F4C 802DEE5C 3C01802E */  lui       $at, 0x802e
-/* 101F50 802DEE60 AC20004C */  sw        $zero, 0x4c($at)
+/* 101F4C 802DEE5C 3C01802E */  lui       $at, %hi(D_802E004C)
+/* 101F50 802DEE60 AC20004C */  sw        $zero, %lo(D_802E004C)($at)
 /* 101F54 802DEE64 0C017D24 */  jal       nuPiReadRom
 /* 101F58 802DEE68 2406000C */   addiu    $a2, $zero, 0xc
-/* 101F5C 802DEE6C 3C05802E */  lui       $a1, 0x802e
-/* 101F60 802DEE70 24A50C20 */  addiu     $a1, $a1, 0xc20
+/* 101F5C 802DEE6C 3C05802E */  lui       $a1, %hi(D_802E0C20)
+/* 101F60 802DEE70 24A50C20 */  addiu     $a1, $a1, %lo(D_802E0C20)
 /* 101F64 802DEE74 8E020000 */  lw        $v0, ($s0)
 /* 101F68 802DEE78 8E240000 */  lw        $a0, ($s1)
 /* 101F6C 802DEE7C 24060038 */  addiu     $a2, $zero, 0x38

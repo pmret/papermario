@@ -21,8 +21,8 @@ glabel set_message_string
 .L80125B7C:
 /* BC27C 80125B7C 0000282D */  daddu     $a1, $zero, $zero
 /* BC280 80125B80 240600FD */  addiu     $a2, $zero, 0xfd
-/* BC284 80125B84 3C038015 */  lui       $v1, 0x8015
-/* BC288 80125B88 24635C38 */  addiu     $v1, $v1, 0x5c38
+/* BC284 80125B84 3C038015 */  lui       $v1, %hi(D_80155C38)
+/* BC288 80125B88 24635C38 */  addiu     $v1, $v1, %lo(D_80155C38)
 /* BC28C 80125B8C 00121140 */  sll       $v0, $s2, 5
 /* BC290 80125B90 00432021 */  addu      $a0, $v0, $v1
 .L80125B94:

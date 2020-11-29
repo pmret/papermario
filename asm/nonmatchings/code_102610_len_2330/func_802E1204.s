@@ -11,8 +11,8 @@ glabel func_802E1204
 /* 102A9C 802E121C 34845BDF */   ori      $a0, $a0, 0x5bdf
 /* 102AA0 802E1220 1440000B */  bnez      $v0, .L802E1250
 /* 102AA4 802E1224 00000000 */   nop      
-/* 102AA8 802E1228 3C05802F */  lui       $a1, 0x802f
-/* 102AAC 802E122C 24A5B390 */  addiu     $a1, $a1, -0x4c70
+/* 102AA8 802E1228 3C05802F */  lui       $a1, %hi(D_802EB390)
+/* 102AAC 802E122C 24A5B390 */  addiu     $a1, $a1, %lo(D_802EB390)
 /* 102AB0 802E1230 ACA00000 */  sw        $zero, ($a1)
 /* 102AB4 802E1234 0C049640 */  jal       load_string
 /* 102AB8 802E1238 3C04001D */   lui      $a0, 0x1d

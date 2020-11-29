@@ -5,8 +5,8 @@ glabel set_zone_enabled
 /* EEB68 802CA1B8 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* EEB6C 802CA1BC 000410C0 */  sll       $v0, $a0, 3
 /* EEB70 802CA1C0 00441023 */  subu      $v0, $v0, $a0
-/* EEB74 802CA1C4 3C03800E */  lui       $v1, 0x800e
-/* EEB78 802CA1C8 8C6391D4 */  lw        $v1, -0x6e2c($v1)
+/* EEB74 802CA1C4 3C03800E */  lui       $v1, %hi(D_800D91D4)
+/* EEB78 802CA1C8 8C6391D4 */  lw        $v1, %lo(D_800D91D4)($v1)
 /* EEB7C 802CA1CC 00021080 */  sll       $v0, $v0, 2
 /* EEB80 802CA1D0 AFBF0018 */  sw        $ra, 0x18($sp)
 /* EEB84 802CA1D4 AFB10014 */  sw        $s1, 0x14($sp)

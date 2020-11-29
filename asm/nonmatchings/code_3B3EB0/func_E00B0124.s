@@ -34,8 +34,8 @@ glabel func_E00B0124
 /* 3B403C E00B018C 1080000E */  beqz      $a0, .LE00B01C8
 /* 3B4040 E00B0190 24020008 */   addiu    $v0, $zero, 8
 /* 3B4044 E00B0194 00461023 */  subu      $v0, $v0, $a2
-/* 3B4048 E00B0198 3C01E00B */  lui       $at, 0xe00b
-/* 3B404C E00B019C D42007E0 */  ldc1      $f0, 0x7e0($at)
+/* 3B4048 E00B0198 3C01E00B */  lui       $at, %hi(D_E00B07E0)
+/* 3B404C E00B019C D42007E0 */  ldc1      $f0, %lo(D_E00B07E0)($at)
 /* 3B4050 E00B01A0 44821000 */  mtc1      $v0, $f2
 /* 3B4054 E00B01A4 00000000 */  nop       
 /* 3B4058 E00B01A8 468010A1 */  cvt.d.w   $f2, $f2

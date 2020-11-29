@@ -8,15 +8,15 @@ glabel partner_use_ability
 /* 847D0 800EB320 00000000 */   nop      
 /* 847D4 800EB324 1440002B */  bnez      $v0, .L800EB3D4
 /* 847D8 800EB328 0000102D */   daddu    $v0, $zero, $zero
-/* 847DC 800EB32C 3C028011 */  lui       $v0, 0x8011
-/* 847E0 800EB330 8C42CFEC */  lw        $v0, -0x3014($v0)
+/* 847DC 800EB32C 3C028011 */  lui       $v0, %hi(D_8010CFEC)
+/* 847E0 800EB330 8C42CFEC */  lw        $v0, %lo(D_8010CFEC)($v0)
 /* 847E4 800EB334 50400027 */  beql      $v0, $zero, .L800EB3D4
 /* 847E8 800EB338 0000102D */   daddu    $v0, $zero, $zero
 /* 847EC 800EB33C 8C42002C */  lw        $v0, 0x2c($v0)
 /* 847F0 800EB340 10400007 */  beqz      $v0, .L800EB360
 /* 847F4 800EB344 00000000 */   nop      
-/* 847F8 800EB348 3C048011 */  lui       $a0, 0x8011
-/* 847FC 800EB34C 8C84C930 */  lw        $a0, -0x36d0($a0)
+/* 847F8 800EB348 3C048011 */  lui       $a0, %hi(D_8010C930)
+/* 847FC 800EB34C 8C84C930 */  lw        $a0, %lo(D_8010C930)($a0)
 /* 84800 800EB350 0040F809 */  jalr      $v0
 /* 84804 800EB354 00000000 */   nop      
 /* 84808 800EB358 1040001E */  beqz      $v0, .L800EB3D4
@@ -38,15 +38,15 @@ glabel partner_use_ability
 /* 84844 800EB394 0803ACF5 */  j         .L800EB3D4
 /* 84848 800EB398 0000102D */   daddu    $v0, $zero, $zero
 .L800EB39C:
-/* 8484C 800EB39C 3C028011 */  lui       $v0, 0x8011
-/* 84850 800EB3A0 8C42CFD8 */  lw        $v0, -0x3028($v0)
+/* 8484C 800EB39C 3C028011 */  lui       $v0, %hi(D_8010CFD8)
+/* 84850 800EB3A0 8C42CFD8 */  lw        $v0, %lo(D_8010CFD8)($v0)
 /* 84854 800EB3A4 1040000A */  beqz      $v0, .L800EB3D0
 /* 84858 800EB3A8 24020001 */   addiu    $v0, $zero, 1
-/* 8485C 800EB3AC 3C018011 */  lui       $at, 0x8011
-/* 84860 800EB3B0 AC22CFE0 */  sw        $v0, -0x3020($at)
+/* 8485C 800EB3AC 3C018011 */  lui       $at, %hi(D_8010CFE0)
+/* 84860 800EB3B0 AC22CFE0 */  sw        $v0, %lo(D_8010CFE0)($at)
 /* 84864 800EB3B4 24020008 */  addiu     $v0, $zero, 8
-/* 84868 800EB3B8 3C018011 */  lui       $at, 0x8011
-/* 8486C 800EB3BC AC22CFE8 */  sw        $v0, -0x3018($at)
+/* 84868 800EB3B8 3C018011 */  lui       $at, %hi(D_8010CFE8)
+/* 8486C 800EB3BC AC22CFE8 */  sw        $v0, %lo(D_8010CFE8)($at)
 /* 84870 800EB3C0 0C03A9B3 */  jal       func_800EA6CC
 /* 84874 800EB3C4 00000000 */   nop      
 /* 84878 800EB3C8 0803ACF5 */  j         .L800EB3D4

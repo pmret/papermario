@@ -4,8 +4,8 @@
 glabel icon_set_opacity
 /* DB5B0 80144EB0 2402F7FF */  addiu     $v0, $zero, -0x801
 /* DB5B4 80144EB4 00822024 */  and       $a0, $a0, $v0
-/* DB5B8 80144EB8 3C028015 */  lui       $v0, 0x8015
-/* DB5BC 80144EBC 8C427960 */  lw        $v0, 0x7960($v0)
+/* DB5B8 80144EB8 3C028015 */  lui       $v0, %hi(D_80157960)
+/* DB5BC 80144EBC 8C427960 */  lw        $v0, %lo(D_80157960)($v0)
 /* DB5C0 80144EC0 00042080 */  sll       $a0, $a0, 2
 /* DB5C4 80144EC4 00822021 */  addu      $a0, $a0, $v0
 /* DB5C8 80144EC8 8C840000 */  lw        $a0, ($a0)

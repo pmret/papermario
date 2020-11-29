@@ -18,9 +18,9 @@ glabel render_sprite
 /* 100D64 802DDC74 AFB10024 */  sw        $s1, 0x24($sp)
 /* 100D68 802DDC78 AFB00020 */  sw        $s0, 0x20($sp)
 /* 100D6C 802DDC7C F7B40048 */  sdc1      $f20, 0x48($sp)
-/* 100D70 802DDC80 3C09802E */  lui       $t1, 0x802e
+/* 100D70 802DDC80 3C09802E */  lui       $t1, %hi(D_802DF58C)
 /* 100D74 802DDC84 01224821 */  addu      $t1, $t1, $v0
-/* 100D78 802DDC88 8D29F58C */  lw        $t1, -0xa74($t1)
+/* 100D78 802DDC88 8D29F58C */  lw        $t1, %lo(D_802DF58C)($t1)
 /* 100D7C 802DDC8C 8FB70060 */  lw        $s7, 0x60($sp)
 /* 100D80 802DDC90 11230080 */  beq       $t1, $v1, .L802DDE94
 /* 100D84 802DDC94 0000102D */   daddu    $v0, $zero, $zero
@@ -28,11 +28,11 @@ glabel render_sprite
 /* 100D8C 802DDC9C 304200FF */  andi      $v0, $v0, 0xff
 /* 100D90 802DDCA0 2443FFFF */  addiu     $v1, $v0, -1
 /* 100D94 802DDCA4 00031080 */  sll       $v0, $v1, 2
-/* 100D98 802DDCA8 3C08802E */  lui       $t0, 0x802e
+/* 100D98 802DDCA8 3C08802E */  lui       $t0, %hi(D_802DF548)
 /* 100D9C 802DDCAC 01024021 */  addu      $t0, $t0, $v0
-/* 100DA0 802DDCB0 8D08F548 */  lw        $t0, -0xab8($t0)
-/* 100DA4 802DDCB4 3C01802E */  lui       $at, 0x802e
-/* 100DA8 802DDCB8 AC23F57C */  sw        $v1, -0xa84($at)
+/* 100DA0 802DDCB0 8D08F548 */  lw        $t0, %lo(D_802DF548)($t0)
+/* 100DA4 802DDCB4 3C01802E */  lui       $at, %hi(D_802DF57C)
+/* 100DA8 802DDCB8 AC23F57C */  sw        $v1, %lo(D_802DF57C)($at)
 /* 100DAC 802DDCBC 11000053 */  beqz      $t0, .L802DDE0C
 /* 100DB0 802DDCC0 312200FF */   andi     $v0, $t1, 0xff
 /* 100DB4 802DDCC4 8D140000 */  lw        $s4, ($t0)
@@ -59,11 +59,11 @@ glabel render_sprite
 .L802DDD14:
 /* 100E04 802DDD14 24630001 */  addiu     $v1, $v1, 1
 /* 100E08 802DDD18 00031080 */  sll       $v0, $v1, 2
-/* 100E0C 802DDD1C 3C14802E */  lui       $s4, 0x802e
+/* 100E0C 802DDD1C 3C14802E */  lui       $s4, %hi(D_802DF548)
 /* 100E10 802DDD20 0282A021 */  addu      $s4, $s4, $v0
-/* 100E14 802DDD24 8E94F548 */  lw        $s4, -0xab8($s4)
-/* 100E18 802DDD28 3C01802E */  lui       $at, 0x802e
-/* 100E1C 802DDD2C AC23F57C */  sw        $v1, -0xa84($at)
+/* 100E14 802DDD24 8E94F548 */  lw        $s4, %lo(D_802DF548)($s4)
+/* 100E18 802DDD28 3C01802E */  lui       $at, %hi(D_802DF57C)
+/* 100E1C 802DDD2C AC23F57C */  sw        $v1, %lo(D_802DF57C)($at)
 /* 100E20 802DDD30 8E940000 */  lw        $s4, ($s4)
 .L802DDD34:
 /* 100E24 802DDD34 3C024000 */  lui       $v0, 0x4000
@@ -72,8 +72,8 @@ glabel render_sprite
 .L802DDD3C:
 /* 100E2C 802DDD3C 14400019 */  bnez      $v0, .L802DDDA4
 /* 100E30 802DDD40 24A2FFA5 */   addiu    $v0, $a1, -0x5b
-/* 100E34 802DDD44 3C03800A */  lui       $v1, 0x800a
-/* 100E38 802DDD48 8463A634 */  lh        $v1, -0x59cc($v1)
+/* 100E34 802DDD44 3C03800A */  lui       $v1, %hi(D_8009A634)
+/* 100E38 802DDD48 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
 /* 100E3C 802DDD4C 00031080 */  sll       $v0, $v1, 2
 /* 100E40 802DDD50 00431021 */  addu      $v0, $v0, $v1
 /* 100E44 802DDD54 00021080 */  sll       $v0, $v0, 2
@@ -81,9 +81,9 @@ glabel render_sprite
 /* 100E4C 802DDD5C 000218C0 */  sll       $v1, $v0, 3
 /* 100E50 802DDD60 00431021 */  addu      $v0, $v0, $v1
 /* 100E54 802DDD64 000210C0 */  sll       $v0, $v0, 3
-/* 100E58 802DDD68 3C01800B */  lui       $at, 0x800b
+/* 100E58 802DDD68 3C01800B */  lui       $at, %hi(D_800B1DEC)
 /* 100E5C 802DDD6C 00220821 */  addu      $at, $at, $v0
-/* 100E60 802DDD70 C4201DEC */  lwc1      $f0, 0x1dec($at)
+/* 100E60 802DDD70 C4201DEC */  lwc1      $f0, %lo(D_800B1DEC)($at)
 /* 100E64 802DDD74 46000007 */  neg.s     $f0, $f0
 /* 100E68 802DDD78 4600008D */  trunc.w.s $f2, $f0
 /* 100E6C 802DDD7C 44021000 */  mfc1      $v0, $f2
@@ -121,8 +121,8 @@ glabel render_sprite
 /* 100ED4 802DDDE4 00000000 */  nop       
 /* 100ED8 802DDDE8 46140501 */  sub.s     $f20, $f0, $f20
 .L802DDDEC:
-/* 100EDC 802DDDEC 3C02802E */  lui       $v0, 0x802e
-/* 100EE0 802DDDF0 2442FEA0 */  addiu     $v0, $v0, -0x160
+/* 100EDC 802DDDEC 3C02802E */  lui       $v0, %hi(D_802DFEA0)
+/* 100EE0 802DDDF0 2442FEA0 */  addiu     $v0, $v0, %lo(D_802DFEA0)
 /* 100EE4 802DDDF4 AC400000 */  sw        $zero, ($v0)
 /* 100EE8 802DDDF8 AC450004 */  sw        $a1, 4($v0)
 /* 100EEC 802DDDFC 04810005 */  bgez      $a0, .L802DDE14
@@ -138,9 +138,9 @@ glabel render_sprite
 /* 100F08 802DDE18 000A1040 */  sll       $v0, $t2, 1
 /* 100F0C 802DDE1C 004A1021 */  addu      $v0, $v0, $t2
 /* 100F10 802DDE20 00021080 */  sll       $v0, $v0, 2
-/* 100F14 802DDE24 3C10802E */  lui       $s0, 0x802e
+/* 100F14 802DDE24 3C10802E */  lui       $s0, %hi(D_802DF588)
 /* 100F18 802DDE28 02028021 */  addu      $s0, $s0, $v0
-/* 100F1C 802DDE2C 8E10F588 */  lw        $s0, -0xa78($s0)
+/* 100F1C 802DDE2C 8E10F588 */  lw        $s0, %lo(D_802DF588)($s0)
 /* 100F20 802DDE30 3C022000 */  lui       $v0, 0x2000
 /* 100F24 802DDE34 00821024 */  and       $v0, $a0, $v0
 /* 100F28 802DDE38 54400001 */  bnel      $v0, $zero, .L802DDE40

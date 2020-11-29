@@ -6,13 +6,13 @@ glabel func_802DEFB4
 /* 1020A8 802DEFB8 AFBF0010 */  sw        $ra, 0x10($sp)
 /* 1020AC 802DEFBC 0C04E934 */  jal       func_8013A4D0
 /* 1020B0 802DEFC0 00000000 */   nop      
-/* 1020B4 802DEFC4 3C02802E */  lui       $v0, 0x802e
-/* 1020B8 802DEFC8 8C420C58 */  lw        $v0, 0xc58($v0)
+/* 1020B4 802DEFC4 3C02802E */  lui       $v0, %hi(D_802E0C58)
+/* 1020B8 802DEFC8 8C420C58 */  lw        $v0, %lo(D_802E0C58)($v0)
 /* 1020BC 802DEFCC 1840000C */  blez      $v0, .L802DF000
 /* 1020C0 802DEFD0 0000202D */   daddu    $a0, $zero, $zero
 /* 1020C4 802DEFD4 0040282D */  daddu     $a1, $v0, $zero
-/* 1020C8 802DEFD8 3C03802E */  lui       $v1, 0x802e
-/* 1020CC 802DEFDC 24630C70 */  addiu     $v1, $v1, 0xc70
+/* 1020C8 802DEFD8 3C03802E */  lui       $v1, %hi(D_802E0C70)
+/* 1020CC 802DEFDC 24630C70 */  addiu     $v1, $v1, %lo(D_802E0C70)
 .L802DEFE0:
 /* 1020D0 802DEFE0 8C620000 */  lw        $v0, ($v1)
 /* 1020D4 802DEFE4 10400003 */  beqz      $v0, .L802DEFF4

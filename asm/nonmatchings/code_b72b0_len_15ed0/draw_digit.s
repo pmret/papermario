@@ -2,10 +2,10 @@
 .set noreorder # don't insert nops after branches
 
 glabel draw_digit
-/* BDBC0 801274C0 3C0A800A */  lui       $t2, 0x800a
-/* BDBC4 801274C4 254AA66C */  addiu     $t2, $t2, -0x5994
-/* BDBC8 801274C8 3C028015 */  lui       $v0, 0x8015
-/* BDBCC 801274CC 2442C340 */  addiu     $v0, $v0, -0x3cc0
+/* BDBC0 801274C0 3C0A800A */  lui       $t2, %hi(D_8009A66C)
+/* BDBC4 801274C4 254AA66C */  addiu     $t2, $t2, %lo(D_8009A66C)
+/* BDBC8 801274C8 3C028015 */  lui       $v0, %hi(D_8014C340)
+/* BDBCC 801274CC 2442C340 */  addiu     $v0, $v0, %lo(D_8014C340)
 /* BDBD0 801274D0 00054880 */  sll       $t1, $a1, 2
 /* BDBD4 801274D4 01254821 */  addu      $t1, $t1, $a1
 /* BDBD8 801274D8 00094880 */  sll       $t1, $t1, 2

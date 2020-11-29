@@ -4,8 +4,8 @@
 glabel func_8013A650
 /* D0D50 8013A650 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* D0D54 8013A654 AFB00010 */  sw        $s0, 0x10($sp)
-/* D0D58 8013A658 3C108015 */  lui       $s0, 0x8015
-/* D0D5C 8013A65C 26106F20 */  addiu     $s0, $s0, 0x6f20
+/* D0D58 8013A658 3C108015 */  lui       $s0, %hi(D_80156F20)
+/* D0D5C 8013A65C 26106F20 */  addiu     $s0, $s0, %lo(D_80156F20)
 /* D0D60 8013A660 AFB10014 */  sw        $s1, 0x14($sp)
 /* D0D64 8013A664 26110040 */  addiu     $s1, $s0, 0x40
 /* D0D68 8013A668 AFBF0018 */  sw        $ra, 0x18($sp)

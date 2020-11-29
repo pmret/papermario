@@ -12,11 +12,11 @@ glabel func_802BD20C
 /* 31DF98 802BD228 3C038011 */  lui       $v1, %hi(D_8010EBB0)
 /* 31DF9C 802BD22C 2463EBB0 */  addiu     $v1, $v1, %lo(D_8010EBB0)
 /* 31DFA0 802BD230 AFB00010 */  sw        $s0, 0x10($sp)
-/* 31DFA4 802BD234 3C10802C */  lui       $s0, 0x802c
-/* 31DFA8 802BD238 2610FDB0 */  addiu     $s0, $s0, -0x250
+/* 31DFA4 802BD234 3C10802C */  lui       $s0, %hi(D_802BFDB0)
+/* 31DFA8 802BD238 2610FDB0 */  addiu     $s0, $s0, %lo(D_802BFDB0)
 /* 31DFAC 802BD23C AFB10014 */  sw        $s1, 0x14($sp)
-/* 31DFB0 802BD240 3C11802C */  lui       $s1, 0x802c
-/* 31DFB4 802BD244 2631FDB4 */  addiu     $s1, $s1, -0x24c
+/* 31DFB0 802BD240 3C11802C */  lui       $s1, %hi(D_802BFDB4)
+/* 31DFB4 802BD244 2631FDB4 */  addiu     $s1, $s1, %lo(D_802BFDB4)
 /* 31DFB8 802BD248 AFBF0020 */  sw        $ra, 0x20($sp)
 /* 31DFBC 802BD24C F7B60030 */  sdc1      $f22, 0x30($sp)
 /* 31DFC0 802BD250 84620006 */  lh        $v0, 6($v1)
@@ -35,8 +35,8 @@ glabel func_802BD20C
 /* 31DFF4 802BD284 AE060000 */  sw        $a2, ($s0)
 /* 31DFF8 802BD288 0C00A720 */  jal       atan2
 /* 31DFFC 802BD28C E6220000 */   swc1     $f2, ($s1)
-/* 31E000 802BD290 3C01800B */  lui       $at, 0x800b
-/* 31E004 802BD294 C42C1DEC */  lwc1      $f12, 0x1dec($at)
+/* 31E000 802BD290 3C01800B */  lui       $at, %hi(D_800B1DEC)
+/* 31E004 802BD294 C42C1DEC */  lwc1      $f12, %lo(D_800B1DEC)($at)
 /* 31E008 802BD298 0C00A6C9 */  jal       clamp_angle
 /* 31E00C 802BD29C 460C0300 */   add.s    $f12, $f0, $f12
 /* 31E010 802BD2A0 4600A306 */  mov.s     $f12, $f20
@@ -70,8 +70,8 @@ glabel func_802BD20C
 /* 31E080 802BD310 00000000 */  nop       
 /* 31E084 802BD314 45000007 */  bc1f      .L802BD334
 /* 31E088 802BD318 00000000 */   nop      
-/* 31E08C 802BD31C 3C02802C */  lui       $v0, 0x802c
-/* 31E090 802BD320 8C42FEE4 */  lw        $v0, -0x11c($v0)
+/* 31E08C 802BD31C 3C02802C */  lui       $v0, %hi(D_802BFEE4)
+/* 31E090 802BD320 8C42FEE4 */  lw        $v0, %lo(D_802BFEE4)($v0)
 /* 31E094 802BD324 3C014080 */  lui       $at, 0x4080
 /* 31E098 802BD328 4481A000 */  mtc1      $at, $f20
 /* 31E09C 802BD32C 50400004 */  beql      $v0, $zero, .L802BD340

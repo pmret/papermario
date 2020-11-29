@@ -46,10 +46,10 @@ glabel make_npcs
 /* 19B0C 8003E70C 24020001 */   addiu    $v0, $zero, 1
 /* 19B10 8003E710 3C01800A */  lui       $at, %hi(gGameState)
 /* 19B14 8003E714 AC22A600 */  sw        $v0, %lo(gGameState)($at)
-/* 19B18 8003E718 3C01800A */  lui       $at, 0x800a
-/* 19B1C 8003E71C AC22A678 */  sw        $v0, -0x5988($at)
-/* 19B20 8003E720 3C01800A */  lui       $at, 0x800a
-/* 19B24 8003E724 AC20A5D0 */  sw        $zero, -0x5a30($at)
+/* 19B18 8003E718 3C01800A */  lui       $at, %hi(D_8009A678)
+/* 19B1C 8003E71C AC22A678 */  sw        $v0, %lo(D_8009A678)($at)
+/* 19B20 8003E720 3C01800A */  lui       $at, %hi(D_8009A5D0)
+/* 19B24 8003E724 AC20A5D0 */  sw        $zero, %lo(D_8009A5D0)($at)
 .L8003E728:
 /* 19B28 8003E728 03E00008 */  jr        $ra
 /* 19B2C 8003E72C 00000000 */   nop      

@@ -12,13 +12,13 @@ glabel osPfsGetStatus
 /* 448DC 800694DC AFBF0030 */  sw        $ra, 0x30($sp)
 /* 448E0 800694E0 AFB10024 */  sw        $s1, 0x24($sp)
 /* 448E4 800694E4 AFB00020 */  sw        $s0, 0x20($sp)
-/* 448E8 800694E8 3C018009 */  lui       $at, 0x8009
-/* 448EC 800694EC A02258D4 */  sb        $v0, 0x58d4($at)
+/* 448E8 800694E8 3C018009 */  lui       $at, %hi(D_800958D4)
+/* 448EC 800694EC A02258D4 */  sb        $v0, %lo(D_800958D4)($at)
 /* 448F0 800694F0 0C01A56C */  jal       osPfsRequestOneChannel
 /* 448F4 800694F4 00002821 */   addu     $a1, $zero, $zero
 /* 448F8 800694F8 24040001 */  addiu     $a0, $zero, 1
-/* 448FC 800694FC 3C11800E */  lui       $s1, 0x800e
-/* 44900 80069500 2631A000 */  addiu     $s1, $s1, -0x6000
+/* 448FC 800694FC 3C11800E */  lui       $s1, %hi(D_800DA000)
+/* 44900 80069500 2631A000 */  addiu     $s1, $s1, %lo(D_800DA000)
 /* 44904 80069504 0C019730 */  jal       osSiRawStartDma
 /* 44908 80069508 02202821 */   addu     $a1, $s1, $zero
 /* 4490C 8006950C 02402021 */  addu      $a0, $s2, $zero

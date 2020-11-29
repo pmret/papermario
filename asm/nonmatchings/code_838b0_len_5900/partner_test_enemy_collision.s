@@ -3,18 +3,18 @@
 
 glabel partner_test_enemy_collision
 /* 84A94 800EB5E4 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* 84A98 800EB5E8 3C028011 */  lui       $v0, 0x8011
-/* 84A9C 800EB5EC 8C42CFD8 */  lw        $v0, -0x3028($v0)
+/* 84A98 800EB5E8 3C028011 */  lui       $v0, %hi(D_8010CFD8)
+/* 84A9C 800EB5EC 8C42CFD8 */  lw        $v0, %lo(D_8010CFD8)($v0)
 /* 84AA0 800EB5F0 0080282D */  daddu     $a1, $a0, $zero
 /* 84AA4 800EB5F4 1040000C */  beqz      $v0, .L800EB628
 /* 84AA8 800EB5F8 AFBF0010 */   sw       $ra, 0x10($sp)
-/* 84AAC 800EB5FC 3C028011 */  lui       $v0, 0x8011
-/* 84AB0 800EB600 8C42CFEC */  lw        $v0, -0x3014($v0)
+/* 84AAC 800EB5FC 3C028011 */  lui       $v0, %hi(D_8010CFEC)
+/* 84AB0 800EB600 8C42CFEC */  lw        $v0, %lo(D_8010CFEC)($v0)
 /* 84AB4 800EB604 8C420028 */  lw        $v0, 0x28($v0)
 /* 84AB8 800EB608 50400008 */  beql      $v0, $zero, .L800EB62C
 /* 84ABC 800EB60C 0000102D */   daddu    $v0, $zero, $zero
-/* 84AC0 800EB610 3C048011 */  lui       $a0, 0x8011
-/* 84AC4 800EB614 8C84C930 */  lw        $a0, -0x36d0($a0)
+/* 84AC0 800EB610 3C048011 */  lui       $a0, %hi(D_8010C930)
+/* 84AC4 800EB614 8C84C930 */  lw        $a0, %lo(D_8010C930)($a0)
 /* 84AC8 800EB618 0040F809 */  jalr      $v0
 /* 84ACC 800EB61C 00000000 */   nop      
 /* 84AD0 800EB620 0803AD8B */  j         .L800EB62C

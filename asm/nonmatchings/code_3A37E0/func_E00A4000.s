@@ -16,14 +16,14 @@ glabel func_E00A4000
 /* 3A380C E00A402C 27A40010 */  addiu     $a0, $sp, 0x10
 /* 3A3810 E00A4030 AFB20030 */  sw        $s2, 0x30($sp)
 /* 3A3814 E00A4034 8FB2006C */  lw        $s2, 0x6c($sp)
-/* 3A3818 E00A4038 3C02E00A */  lui       $v0, 0xe00a
-/* 3A381C E00A403C 244241A4 */  addiu     $v0, $v0, 0x41a4
+/* 3A3818 E00A4038 3C02E00A */  lui       $v0, %hi(D_E00A41A4)
+/* 3A381C E00A403C 244241A4 */  addiu     $v0, $v0, %lo(D_E00A41A4)
 /* 3A3820 E00A4040 AFA20018 */  sw        $v0, 0x18($sp)
-/* 3A3824 E00A4044 3C02E00A */  lui       $v0, 0xe00a
-/* 3A3828 E00A4048 244241AC */  addiu     $v0, $v0, 0x41ac
+/* 3A3824 E00A4044 3C02E00A */  lui       $v0, %hi(D_E00A41AC)
+/* 3A3828 E00A4048 244241AC */  addiu     $v0, $v0, %lo(D_E00A41AC)
 /* 3A382C E00A404C AFA2001C */  sw        $v0, 0x1c($sp)
-/* 3A3830 E00A4050 3C02E00A */  lui       $v0, 0xe00a
-/* 3A3834 E00A4054 244245DC */  addiu     $v0, $v0, 0x45dc
+/* 3A3830 E00A4050 3C02E00A */  lui       $v0, %hi(D_E00A45DC)
+/* 3A3834 E00A4054 244245DC */  addiu     $v0, $v0, %lo(D_E00A45DC)
 /* 3A3838 E00A4058 AFA20020 */  sw        $v0, 0x20($sp)
 /* 3A383C E00A405C 24020052 */  addiu     $v0, $zero, 0x52
 /* 3A3840 E00A4060 AFBF0034 */  sw        $ra, 0x34($sp)
@@ -62,9 +62,9 @@ glabel func_E00A4000
 /* 3A38B4 E00A40D4 1040001B */  beqz      $v0, .LE00A4144
 /* 3A38B8 E00A40D8 AC600018 */   sw       $zero, 0x18($v1)
 /* 3A38BC E00A40DC 00111080 */  sll       $v0, $s1, 2
-/* 3A38C0 E00A40E0 3C01E00A */  lui       $at, 0xe00a
+/* 3A38C0 E00A40E0 3C01E00A */  lui       $at, %hi(D_E00A4AD0)
 /* 3A38C4 E00A40E4 00220821 */  addu      $at, $at, $v0
-/* 3A38C8 E00A40E8 8C224AD0 */  lw        $v0, 0x4ad0($at)
+/* 3A38C8 E00A40E8 8C224AD0 */  lw        $v0, %lo(D_E00A4AD0)($at)
 /* 3A38CC E00A40EC 00400008 */  jr        $v0
 /* 3A38D0 E00A40F0 00000000 */   nop      
 /* 3A38D4 E00A40F4 0802905E */  j         .LE00A4178
@@ -89,8 +89,8 @@ glabel func_E00A4000
 /* 3A3920 E00A4140 AC62001C */   sw       $v0, 0x1c($v1)
 .LE00A4144:
 /* 3A3924 E00A4144 2402000A */  addiu     $v0, $zero, 0xa
-/* 3A3928 E00A4148 3C01E00A */  lui       $at, 0xe00a
-/* 3A392C E00A414C D4224AF0 */  ldc1      $f2, 0x4af0($at)
+/* 3A3928 E00A4148 3C01E00A */  lui       $at, %hi(D_E00A4AF0)
+/* 3A392C E00A414C D4224AF0 */  ldc1      $f2, %lo(D_E00A4AF0)($at)
 /* 3A3930 E00A4150 4600A021 */  cvt.d.s   $f0, $f20
 /* 3A3934 E00A4154 46220001 */  sub.d     $f0, $f0, $f2
 /* 3A3938 E00A4158 AC62001C */  sw        $v0, 0x1c($v1)

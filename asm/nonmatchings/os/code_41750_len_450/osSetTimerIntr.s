@@ -22,8 +22,8 @@ glabel osSetTimerIntr
 /* 41A4C 8006664C 00000000 */   nop      
 /* 41A50 80066650 0C019680 */  jal       osGetCount
 /* 41A54 80066654 00408021 */   addu     $s0, $v0, $zero
-/* 41A58 80066658 3C01800A */  lui       $at, 0x800a
-/* 41A5C 8006665C AC22A62C */  sw        $v0, -0x59d4($at)
+/* 41A58 80066658 3C01800A */  lui       $at, %hi(D_8009A62C)
+/* 41A5C 8006665C AC22A62C */  sw        $v0, %lo(D_8009A62C)($at)
 /* 41A60 80066660 00402821 */  addu      $a1, $v0, $zero
 /* 41A64 80066664 00002021 */  addu      $a0, $zero, $zero
 /* 41A68 80066668 0C01B1A0 */  jal       osSetCompare

@@ -14,8 +14,8 @@ glabel show_variable_battle_message
 /* 17E308 8024FA28 0040182D */  daddu     $v1, $v0, $zero
 /* 17E30C 8024FA2C 1060001B */  beqz      $v1, .L8024FA9C
 /* 17E310 8024FA30 00000000 */   nop      
-/* 17E314 8024FA34 3C028025 */  lui       $v0, 0x8025
-/* 17E318 8024FA38 2442FB3C */  addiu     $v0, $v0, -0x4c4
+/* 17E314 8024FA34 3C028025 */  lui       $v0, %hi(D_8024FB3C)
+/* 17E318 8024FA38 2442FB3C */  addiu     $v0, $v0, %lo(D_8024FB3C)
 /* 17E31C 8024FA3C AC620004 */  sw        $v0, 4($v1)
 /* 17E320 8024FA40 3C028025 */  lui       $v0, %hi(show_message_popup)
 /* 17E324 8024FA44 24420EA4 */  addiu     $v0, $v0, %lo(show_message_popup)
@@ -28,18 +28,18 @@ glabel show_variable_battle_message
 /* 17E340 8024FA60 A0600016 */  sb        $zero, 0x16($v1)
 /* 17E344 8024FA64 A0620017 */  sb        $v0, 0x17($v1)
 /* 17E348 8024FA68 AC600018 */  sw        $zero, 0x18($v1)
-/* 17E34C 8024FA6C 3C01802A */  lui       $at, 0x802a
-/* 17E350 8024FA70 A432F640 */  sh        $s2, -0x9c0($at)
-/* 17E354 8024FA74 3C018028 */  lui       $at, 0x8028
-/* 17E358 8024FA78 AC2338F8 */  sw        $v1, 0x38f8($at)
-/* 17E35C 8024FA7C 3C01802A */  lui       $at, 0x802a
-/* 17E360 8024FA80 A420F64A */  sh        $zero, -0x9b6($at)
-/* 17E364 8024FA84 3C01802A */  lui       $at, 0x802a
-/* 17E368 8024FA88 A420F64C */  sh        $zero, -0x9b4($at)
-/* 17E36C 8024FA8C 3C01802A */  lui       $at, 0x802a
-/* 17E370 8024FA90 A420F64E */  sh        $zero, -0x9b2($at)
-/* 17E374 8024FA94 3C01802A */  lui       $at, 0x802a
-/* 17E378 8024FA98 A420F650 */  sh        $zero, -0x9b0($at)
+/* 17E34C 8024FA6C 3C01802A */  lui       $at, %hi(D_8029F640)
+/* 17E350 8024FA70 A432F640 */  sh        $s2, %lo(D_8029F640)($at)
+/* 17E354 8024FA74 3C018028 */  lui       $at, %hi(D_802838F8)
+/* 17E358 8024FA78 AC2338F8 */  sw        $v1, %lo(D_802838F8)($at)
+/* 17E35C 8024FA7C 3C01802A */  lui       $at, %hi(D_8029F64A)
+/* 17E360 8024FA80 A420F64A */  sh        $zero, %lo(D_8029F64A)($at)
+/* 17E364 8024FA84 3C01802A */  lui       $at, %hi(D_8029F64C)
+/* 17E368 8024FA88 A420F64C */  sh        $zero, %lo(D_8029F64C)($at)
+/* 17E36C 8024FA8C 3C01802A */  lui       $at, %hi(D_8029F64E)
+/* 17E370 8024FA90 A420F64E */  sh        $zero, %lo(D_8029F64E)($at)
+/* 17E374 8024FA94 3C01802A */  lui       $at, %hi(D_8029F650)
+/* 17E378 8024FA98 A420F650 */  sh        $zero, %lo(D_8029F650)($at)
 .L8024FA9C:
 /* 17E37C 8024FA9C 8FBF001C */  lw        $ra, 0x1c($sp)
 /* 17E380 8024FAA0 8FB20018 */  lw        $s2, 0x18($sp)

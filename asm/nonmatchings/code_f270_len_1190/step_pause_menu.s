@@ -4,8 +4,8 @@
 glabel step_pause_menu
 /* FD7C 8003497C 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* FD80 80034980 AFB00010 */  sw        $s0, 0x10($sp)
-/* FD84 80034984 3C10800A */  lui       $s0, 0x800a
-/* FD88 80034988 26100921 */  addiu     $s0, $s0, 0x921
+/* FD84 80034984 3C10800A */  lui       $s0, %hi(D_800A0921)
+/* FD88 80034988 26100921 */  addiu     $s0, $s0, %lo(D_800A0921)
 /* FD8C 8003498C AFBF0018 */  sw        $ra, 0x18($sp)
 /* FD90 80034990 AFB10014 */  sw        $s1, 0x14($sp)
 /* FD94 80034994 82110000 */  lb        $s1, ($s0)
@@ -24,15 +24,15 @@ glabel step_pause_menu
 /* FDC4 800349C4 00000000 */   nop      
 /* FDC8 800349C8 0C016754 */  jal       func_80059D50
 /* FDCC 800349CC 00000000 */   nop      
-/* FDD0 800349D0 3C02800A */  lui       $v0, 0x800a
-/* FDD4 800349D4 8C42A658 */  lw        $v0, -0x59a8($v0)
+/* FDD0 800349D0 3C02800A */  lui       $v0, %hi(D_8009A658)
+/* FDD4 800349D4 8C42A658 */  lw        $v0, %lo(D_8009A658)($v0)
 /* FDD8 800349D8 8C430004 */  lw        $v1, 4($v0)
-/* FDDC 800349DC 3C02800A */  lui       $v0, 0x800a
-/* FDE0 800349E0 8C42A64C */  lw        $v0, -0x59b4($v0)
+/* FDDC 800349DC 3C02800A */  lui       $v0, %hi(D_8009A64C)
+/* FDE0 800349E0 8C42A64C */  lw        $v0, %lo(D_8009A64C)($v0)
 /* FDE4 800349E4 1462007E */  bne       $v1, $v0, .L80034BE0
 /* FDE8 800349E8 24020004 */   addiu    $v0, $zero, 4
-/* FDEC 800349EC 3C01800A */  lui       $at, 0x800a
-/* FDF0 800349F0 A0220920 */  sb        $v0, 0x920($at)
+/* FDEC 800349EC 3C01800A */  lui       $at, %hi(D_800A0920)
+/* FDF0 800349F0 A0220920 */  sb        $v0, %lo(D_800A0920)($at)
 /* FDF4 800349F4 24020002 */  addiu     $v0, $zero, 2
 /* FDF8 800349F8 3C04800A */  lui       $a0, %hi(D_8009A650)
 /* FDFC 800349FC 2484A650 */  addiu     $a0, $a0, %lo(D_8009A650)
@@ -48,8 +48,8 @@ glabel step_pause_menu
 /* FE24 80034A24 0800D2F8 */  j         .L80034BE0
 /* FE28 80034A28 A4A30148 */   sh       $v1, 0x148($a1)
 .L80034A2C:
-/* FE2C 80034A2C 3C06800A */  lui       $a2, 0x800a
-/* FE30 80034A30 24C60920 */  addiu     $a2, $a2, 0x920
+/* FE2C 80034A2C 3C06800A */  lui       $a2, %hi(D_800A0920)
+/* FE30 80034A30 24C60920 */  addiu     $a2, $a2, %lo(D_800A0920)
 /* FE34 80034A34 80C30000 */  lb        $v1, ($a2)
 /* FE38 80034A38 04600056 */  bltz      $v1, .L80034B94
 /* FE3C 80034A3C 90C20000 */   lbu      $v0, ($a2)
@@ -60,8 +60,8 @@ glabel step_pause_menu
 /* FE50 80034A50 1440004C */  bnez      $v0, .L80034B84
 /* FE54 80034A54 00000000 */   nop      
 .L80034A58:
-/* FE58 80034A58 3C048007 */  lui       $a0, 0x8007
-/* FE5C 80034A5C 24847950 */  addiu     $a0, $a0, 0x7950
+/* FE58 80034A58 3C048007 */  lui       $a0, %hi(D_80077950)
+/* FE5C 80034A5C 24847950 */  addiu     $a0, $a0, %lo(D_80077950)
 /* FE60 80034A60 24050002 */  addiu     $a1, $zero, 2
 /* FE64 80034A64 2402FFFF */  addiu     $v0, $zero, -1
 /* FE68 80034A68 0C017CBC */  jal       nuGfxSetCfb
@@ -118,15 +118,15 @@ glabel step_pause_menu
 /* FF34 80034B34 00000000 */   nop      
 /* FF38 80034B38 0C05260A */  jal       func_80149828
 /* FF3C 80034B3C 00000000 */   nop      
-/* FF40 80034B40 3C01800A */  lui       $at, 0x800a
-/* FF44 80034B44 AC220924 */  sw        $v0, 0x924($at)
+/* FF40 80034B40 3C01800A */  lui       $at, %hi(D_800A0924)
+/* FF44 80034B44 AC220924 */  sw        $v0, %lo(D_800A0924)($at)
 /* FF48 80034B48 0C0525FF */  jal       func_801497FC
 /* FF4C 80034B4C 0000202D */   daddu    $a0, $zero, $zero
 /* FF50 80034B50 0C052B17 */  jal       func_8014AC5C
 /* FF54 80034B54 00000000 */   nop      
-/* FF58 80034B58 3C048007 */  lui       $a0, 0x8007
+/* FF58 80034B58 3C048007 */  lui       $a0, %hi(D_8007795C)
 /* FF5C 80034B5C 0C018038 */  jal       nuPiReadRomOverlay
-/* FF60 80034B60 2484795C */   addiu    $a0, $a0, 0x795c
+/* FF60 80034B60 2484795C */   addiu    $a0, $a0, %lo(D_8007795C)
 /* FF64 80034B64 0C091018 */  jal       pause_init
 /* FF68 80034B68 00000000 */   nop      
 /* FF6C 80034B6C 3C04800A */  lui       $a0, %hi(D_8009A650)
@@ -136,13 +136,13 @@ glabel step_pause_menu
 /* FF7C 80034B7C 00431024 */  and       $v0, $v0, $v1
 /* FF80 80034B80 AC820000 */  sw        $v0, ($a0)
 .L80034B84:
-/* FF84 80034B84 3C02800A */  lui       $v0, 0x800a
-/* FF88 80034B88 80420920 */  lb        $v0, 0x920($v0)
+/* FF84 80034B84 3C02800A */  lui       $v0, %hi(D_800A0920)
+/* FF88 80034B88 80420920 */  lb        $v0, %lo(D_800A0920)($v0)
 /* FF8C 80034B8C 04410014 */  bgez      $v0, .L80034BE0
 /* FF90 80034B90 00000000 */   nop      
 .L80034B94:
-/* FF94 80034B94 3C10800A */  lui       $s0, 0x800a
-/* FF98 80034B98 26100920 */  addiu     $s0, $s0, 0x920
+/* FF94 80034B94 3C10800A */  lui       $s0, %hi(D_800A0920)
+/* FF98 80034B98 26100920 */  addiu     $s0, $s0, %lo(D_800A0920)
 /* FF9C 80034B9C 82020000 */  lb        $v0, ($s0)
 /* FFA0 80034BA0 2842FFF6 */  slti      $v0, $v0, -0xa
 /* FFA4 80034BA4 14400007 */  bnez      $v0, .L80034BC4
@@ -160,8 +160,8 @@ glabel step_pause_menu
 /* FFD0 80034BD0 0C091109 */  jal       pause_handle_input
 /* FFD4 80034BD4 8C450020 */   lw       $a1, 0x20($v0)
 .L80034BD8:
-/* FFD8 80034BD8 3C01800A */  lui       $at, 0x800a
-/* FFDC 80034BDC A4200922 */  sh        $zero, 0x922($at)
+/* FFD8 80034BD8 3C01800A */  lui       $at, %hi(D_800A0922)
+/* FFDC 80034BDC A4200922 */  sh        $zero, %lo(D_800A0922)($at)
 .L80034BE0:
 /* FFE0 80034BE0 8FBF0018 */  lw        $ra, 0x18($sp)
 /* FFE4 80034BE4 8FB10014 */  lw        $s1, 0x14($sp)

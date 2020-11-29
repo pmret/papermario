@@ -17,9 +17,9 @@ glabel set_npc_yaw
 /* 16770 8003B370 00431021 */  addu      $v0, $v0, $v1
 /* 16774 8003B374 000210C0 */  sll       $v0, $v0, 3
 /* 16778 8003B378 E60E000C */  swc1      $f14, 0xc($s0)
-/* 1677C 8003B37C 3C01800B */  lui       $at, 0x800b
+/* 1677C 8003B37C 3C01800B */  lui       $at, %hi(D_800B1DEC)
 /* 16780 8003B380 00220821 */  addu      $at, $at, $v0
-/* 16784 8003B384 C42C1DEC */  lwc1      $f12, 0x1dec($at)
+/* 16784 8003B384 C42C1DEC */  lwc1      $f12, %lo(D_800B1DEC)($at)
 /* 16788 8003B388 0C00A70A */  jal       get_clamped_angle_diff
 /* 1678C 8003B38C 00000000 */   nop      
 /* 16790 8003B390 44801000 */  mtc1      $zero, $f2

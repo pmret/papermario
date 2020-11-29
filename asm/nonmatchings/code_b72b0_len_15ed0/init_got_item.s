@@ -12,8 +12,8 @@ glabel init_got_item
 /* C821C 80131B1C AFB20030 */  sw        $s2, 0x30($sp)
 /* C8220 80131B20 3C128011 */  lui       $s2, %hi(gPlayerStatus)
 /* C8224 80131B24 2652EFC8 */  addiu     $s2, $s2, %lo(gPlayerStatus)
-/* C8228 80131B28 3C048015 */  lui       $a0, 0x8015
-/* C822C 80131B2C 8C8465A0 */  lw        $a0, 0x65a0($a0)
+/* C8228 80131B28 3C048015 */  lui       $a0, %hi(D_801565A0)
+/* C822C 80131B2C 8C8465A0 */  lw        $a0, %lo(D_801565A0)($a0)
 /* C8230 80131B30 0000182D */  daddu     $v1, $zero, $zero
 /* C8234 80131B34 AFBF0040 */  sw        $ra, 0x40($sp)
 /* C8238 80131B38 AFB5003C */  sw        $s5, 0x3c($sp)
@@ -37,10 +37,10 @@ glabel init_got_item
 /* C8270 80131B70 0C00AB39 */  jal       heap_malloc
 /* C8274 80131B74 0060A82D */   daddu    $s5, $v1, $zero
 /* C8278 80131B78 00152080 */  sll       $a0, $s5, 2
-/* C827C 80131B7C 3C038015 */  lui       $v1, 0x8015
-/* C8280 80131B80 8C6365A0 */  lw        $v1, 0x65a0($v1)
-/* C8284 80131B84 3C058015 */  lui       $a1, 0x8015
-/* C8288 80131B88 24A512F8 */  addiu     $a1, $a1, 0x12f8
+/* C827C 80131B7C 3C038015 */  lui       $v1, %hi(D_801565A0)
+/* C8280 80131B80 8C6365A0 */  lw        $v1, %lo(D_801565A0)($v1)
+/* C8284 80131B84 3C058015 */  lui       $a1, %hi(D_801512F8)
+/* C8288 80131B88 24A512F8 */  addiu     $a1, $a1, %lo(D_801512F8)
 /* C828C 80131B8C 00832021 */  addu      $a0, $a0, $v1
 /* C8290 80131B90 8CA30000 */  lw        $v1, ($a1)
 /* C8294 80131B94 0040882D */  daddu     $s1, $v0, $zero
@@ -104,8 +104,8 @@ glabel init_got_item
 /* C8370 80131C70 00431024 */  and       $v0, $v0, $v1
 /* C8374 80131C74 AE220000 */  sw        $v0, ($s1)
 .L80131C78:
-/* C8378 80131C78 3C088015 */  lui       $t0, 0x8015
-/* C837C 80131C7C 25085D84 */  addiu     $t0, $t0, 0x5d84
+/* C8378 80131C78 3C088015 */  lui       $t0, %hi(D_80155D84)
+/* C837C 80131C7C 25085D84 */  addiu     $t0, $t0, %lo(D_80155D84)
 /* C8380 80131C80 8D020000 */  lw        $v0, ($t0)
 /* C8384 80131C84 10400004 */  beqz      $v0, .L80131C98
 /* C8388 80131C88 3C030002 */   lui      $v1, 2
@@ -176,8 +176,8 @@ glabel init_got_item
 /* C8488 80131D88 24020157 */  addiu     $v0, $zero, 0x157
 /* C848C 80131D8C 14620008 */  bne       $v1, $v0, .L80131DB0
 /* C8490 80131D90 02A0102D */   daddu    $v0, $s5, $zero
-/* C8494 80131D94 3C058010 */  lui       $a1, 0x8010
-/* C8498 80131D98 24A54AC0 */  addiu     $a1, $a1, 0x4ac0
+/* C8494 80131D94 3C058010 */  lui       $a1, %hi(D_80104AC0)
+/* C8498 80131D98 24A54AC0 */  addiu     $a1, $a1, %lo(D_80104AC0)
 /* C849C 80131D9C 0C04C27C */  jal       func_801309F0
 /* C84A0 80131DA0 0220202D */   daddu    $a0, $s1, $zero
 /* C84A4 80131DA4 0C04C2B3 */  jal       func_80130ACC

@@ -8,10 +8,10 @@ glabel osFlashWriteBuffer
 /* 4A95C 8006F55C AFA50024 */  sw        $a1, 0x24($sp)
 /* 4A960 8006F560 AFA60028 */  sw        $a2, 0x28($sp)
 /* 4A964 8006F564 AFA7002C */  sw        $a3, 0x2c($sp)
-/* 4A968 8006F568 3C04800B */  lui       $a0, 0x800b
-/* 4A96C 8006F56C 24840C70 */  addiu     $a0, $a0, 0xc70
-/* 4A970 8006F570 3C05800B */  lui       $a1, 0x800b
-/* 4A974 8006F574 8CA50C7C */  lw        $a1, 0xc7c($a1)
+/* 4A968 8006F568 3C04800B */  lui       $a0, %hi(D_800B0C70)
+/* 4A96C 8006F56C 24840C70 */  addiu     $a0, $a0, %lo(D_800B0C70)
+/* 4A970 8006F570 3C05800B */  lui       $a1, %hi(D_800B0C7C)
+/* 4A974 8006F574 8CA50C7C */  lw        $a1, %lo(D_800B0C7C)($a1)
 /* 4A978 8006F578 3C010001 */  lui       $at, 1
 /* 4A97C 8006F57C 00A17025 */  or        $t6, $a1, $at
 /* 4A980 8006F580 01C02825 */  or        $a1, $t6, $zero
@@ -37,8 +37,8 @@ glabel osFlashWriteBuffer
 /* 4A9D0 8006F5D0 8FAD0020 */  lw        $t5, 0x20($sp)
 /* 4A9D4 8006F5D4 00000000 */  nop       
 /* 4A9D8 8006F5D8 ADAC0010 */  sw        $t4, 0x10($t5)
-/* 4A9DC 8006F5DC 3C04800B */  lui       $a0, 0x800b
-/* 4A9E0 8006F5E0 24840C70 */  addiu     $a0, $a0, 0xc70
+/* 4A9DC 8006F5DC 3C04800B */  lui       $a0, %hi(D_800B0C70)
+/* 4A9E0 8006F5E0 24840C70 */  addiu     $a0, $a0, %lo(D_800B0C70)
 /* 4A9E4 8006F5E4 8FA50020 */  lw        $a1, 0x20($sp)
 /* 4A9E8 8006F5E8 24060001 */  addiu     $a2, $zero, 1
 /* 4A9EC 8006F5EC 0C018388 */  jal       osEPiStartDma

@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel SetBattleCamZoom
-/* 17D54C 8024EC6C 3C028028 */  lui       $v0, 0x8028
-/* 17D550 8024EC70 80420CE0 */  lb        $v0, 0xce0($v0)
+/* 17D54C 8024EC6C 3C028028 */  lui       $v0, %hi(D_80280CE0)
+/* 17D550 8024EC70 80420CE0 */  lb        $v0, %lo(D_80280CE0)($v0)
 /* 17D554 8024EC74 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 17D558 8024EC78 AFBF0010 */  sw        $ra, 0x10($sp)
 /* 17D55C 8024EC7C 8C85000C */  lw        $a1, 0xc($a0)
@@ -12,8 +12,8 @@ glabel SetBattleCamZoom
 /* 17D568 8024EC88 8CA50000 */  lw        $a1, ($a1)
 /* 17D56C 8024EC8C 0C0B1EAF */  jal       get_variable
 /* 17D570 8024EC90 00000000 */   nop      
-/* 17D574 8024EC94 3C01802A */  lui       $at, 0x802a
-/* 17D578 8024EC98 A422F280 */  sh        $v0, -0xd80($at)
+/* 17D574 8024EC94 3C01802A */  lui       $at, %hi(D_8029F280)
+/* 17D578 8024EC98 A422F280 */  sh        $v0, %lo(D_8029F280)($at)
 /* 17D57C 8024EC9C 24020002 */  addiu     $v0, $zero, 2
 .L8024ECA0:
 /* 17D580 8024ECA0 8FBF0010 */  lw        $ra, 0x10($sp)

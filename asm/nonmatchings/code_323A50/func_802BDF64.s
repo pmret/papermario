@@ -5,8 +5,8 @@ glabel func_802BDF64
 /* 3248B4 802BDF64 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 3248B8 802BDF68 AFB00010 */  sw        $s0, 0x10($sp)
 /* 3248BC 802BDF6C AFB20018 */  sw        $s2, 0x18($sp)
-/* 3248C0 802BDF70 3C12802C */  lui       $s2, 0x802c
-/* 3248C4 802BDF74 2652E0C0 */  addiu     $s2, $s2, -0x1f40
+/* 3248C0 802BDF70 3C12802C */  lui       $s2, %hi(D_802BE0C0)
+/* 3248C4 802BDF74 2652E0C0 */  addiu     $s2, $s2, %lo(D_802BE0C0)
 /* 3248C8 802BDF78 AFBF001C */  sw        $ra, 0x1c($sp)
 /* 3248CC 802BDF7C AFB10014 */  sw        $s1, 0x14($sp)
 /* 3248D0 802BDF80 8E420000 */  lw        $v0, ($s2)

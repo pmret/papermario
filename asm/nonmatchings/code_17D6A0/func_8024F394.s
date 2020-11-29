@@ -59,8 +59,8 @@ glabel func_8024F394
 /* 17DD40 8024F460 E604FFF8 */  swc1      $f4, -8($s0)
 /* 17DD44 8024F464 E602FFFC */  swc1      $f2, -4($s0)
 .L8024F468:
-/* 17DD48 8024F468 3C01800B */  lui       $at, 0x800b
-/* 17DD4C 8024F46C C4202344 */  lwc1      $f0, 0x2344($at)
+/* 17DD48 8024F468 3C01800B */  lui       $at, %hi(D_800B2344)
+/* 17DD4C 8024F46C C4202344 */  lwc1      $f0, %lo(D_800B2344)($at)
 /* 17DD50 8024F470 3C014334 */  lui       $at, 0x4334
 /* 17DD54 8024F474 44816000 */  mtc1      $at, $f12
 /* 17DD58 8024F478 0C00A6C9 */  jal       clamp_angle
@@ -72,8 +72,8 @@ glabel func_8024F394
 /* 17DD70 8024F490 0C00A6C9 */  jal       clamp_angle
 /* 17DD74 8024F494 E60CFFE4 */   swc1     $f12, -0x1c($s0)
 /* 17DD78 8024F498 C602FFE8 */  lwc1      $f2, -0x18($s0)
-/* 17DD7C 8024F49C 3C01802A */  lui       $at, 0x802a
-/* 17DD80 8024F4A0 D424CD90 */  ldc1      $f4, -0x3270($at)
+/* 17DD7C 8024F49C 3C01802A */  lui       $at, %hi(D_8029CD90)
+/* 17DD80 8024F4A0 D424CD90 */  ldc1      $f4, %lo(D_8029CD90)($at)
 /* 17DD84 8024F4A4 460010A1 */  cvt.d.s   $f2, $f2
 /* 17DD88 8024F4A8 46241082 */  mul.d     $f2, $f2, $f4
 /* 17DD8C 8024F4AC 00000000 */  nop       

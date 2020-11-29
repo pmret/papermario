@@ -80,9 +80,9 @@ glabel func_800E5174
 /* 7E750 800E52A0 44811000 */  mtc1      $at, $f2
 /* 7E754 800E52A4 000210C0 */  sll       $v0, $v0, 3
 /* 7E758 800E52A8 46020001 */  sub.s     $f0, $f0, $f2
-/* 7E75C 800E52AC 3C01800B */  lui       $at, 0x800b
+/* 7E75C 800E52AC 3C01800B */  lui       $at, %hi(D_800B1DEC)
 /* 7E760 800E52B0 00220821 */  addu      $at, $at, $v0
-/* 7E764 800E52B4 C4221DEC */  lwc1      $f2, 0x1dec($at)
+/* 7E764 800E52B4 C4221DEC */  lwc1      $f2, %lo(D_800B1DEC)($at)
 /* 7E768 800E52B8 C4840030 */  lwc1      $f4, 0x30($a0)
 /* 7E76C 800E52BC 46020200 */  add.s     $f8, $f0, $f2
 /* 7E770 800E52C0 E7A40020 */  swc1      $f4, 0x20($sp)

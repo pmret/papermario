@@ -36,8 +36,8 @@ glabel _create_npc
 /* 13A04 80038604 00112080 */  sll       $a0, $s1, 2
 /* 13A08 80038608 3C03800A */  lui       $v1, %hi(gCurrentNpcListPtr)
 /* 13A0C 8003860C 8C630B90 */  lw        $v1, %lo(gCurrentNpcListPtr)($v1)
-/* 13A10 80038610 3C05800A */  lui       $a1, 0x800a
-/* 13A14 80038614 24A5A604 */  addiu     $a1, $a1, -0x59fc
+/* 13A10 80038610 3C05800A */  lui       $a1, %hi(D_8009A604)
+/* 13A14 80038614 24A5A604 */  addiu     $a1, $a1, %lo(D_8009A604)
 /* 13A18 80038618 00832021 */  addu      $a0, $a0, $v1
 /* 13A1C 8003861C 94A30000 */  lhu       $v1, ($a1)
 /* 13A20 80038620 0040802D */  daddu     $s0, $v0, $zero

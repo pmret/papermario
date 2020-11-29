@@ -13,16 +13,16 @@ glabel update_item_entity_static
 /* CBD78 80135678 00000000 */   nop      
 /* CBD7C 8013567C 1040000D */  beqz      $v0, .L801356B4
 /* CBD80 80135680 24020001 */   addiu    $v0, $zero, 1
-/* CBD84 80135684 3C018015 */  lui       $at, 0x8015
-/* CBD88 80135688 A42265A4 */  sh        $v0, 0x65a4($at)
+/* CBD84 80135684 3C018015 */  lui       $at, %hi(D_801565A4)
+/* CBD88 80135688 A42265A4 */  sh        $v0, %lo(D_801565A4)($at)
 /* CBD8C 8013568C 2402001C */  addiu     $v0, $zero, 0x1c
 /* CBD90 80135690 3C03800A */  lui       $v1, %hi(D_8009A650)
 /* CBD94 80135694 2463A650 */  addiu     $v1, $v1, %lo(D_8009A650)
 /* CBD98 80135698 A202001B */  sb        $v0, 0x1b($s0)
 /* CBD9C 8013569C A200001A */  sb        $zero, 0x1a($s0)
 /* CBDA0 801356A0 8C620000 */  lw        $v0, ($v1)
-/* CBDA4 801356A4 3C018015 */  lui       $at, 0x8015
-/* CBDA8 801356A8 A42065A8 */  sh        $zero, 0x65a8($at)
+/* CBDA4 801356A4 3C018015 */  lui       $at, %hi(D_801565A8)
+/* CBDA8 801356A8 A42065A8 */  sh        $zero, %lo(D_801565A8)($at)
 /* CBDAC 801356AC 34420040 */  ori       $v0, $v0, 0x40
 /* CBDB0 801356B0 AC620000 */  sw        $v0, ($v1)
 .L801356B4:

@@ -9,8 +9,8 @@ glabel func_802BDF08
 /* 324868 802BDF18 8C90014C */   lw       $s0, 0x14c($a0)
 /* 32486C 802BDF1C 0C03BA65 */  jal       func_800EE994
 /* 324870 802BDF20 0200202D */   daddu    $a0, $s0, $zero
-/* 324874 802BDF24 3C02802C */  lui       $v0, 0x802c
-/* 324878 802BDF28 8C42E0C0 */  lw        $v0, -0x1f40($v0)
+/* 324874 802BDF24 3C02802C */  lui       $v0, %hi(D_802BE0C0)
+/* 324878 802BDF28 8C42E0C0 */  lw        $v0, %lo(D_802BE0C0)($v0)
 /* 32487C 802BDF2C 10400004 */  beqz      $v0, .L802BDF40
 /* 324880 802BDF30 2404200F */   addiu    $a0, $zero, 0x200f
 /* 324884 802BDF34 0000282D */  daddu     $a1, $zero, $zero

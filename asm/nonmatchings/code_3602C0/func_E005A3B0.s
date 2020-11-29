@@ -3,8 +3,8 @@
 
 glabel func_E005A3B0
 /* 360670 E005A3B0 27BDFFD8 */  addiu     $sp, $sp, -0x28
-/* 360674 E005A3B4 3C02E006 */  lui       $v0, 0xe006
-/* 360678 E005A3B8 2442A3F4 */  addiu     $v0, $v0, -0x5c0c
+/* 360674 E005A3B4 3C02E006 */  lui       $v0, %hi(D_E005A3F4)
+/* 360678 E005A3B8 2442A3F4 */  addiu     $v0, $v0, %lo(D_E005A3F4)
 /* 36067C E005A3BC AFA2001C */  sw        $v0, 0x1c($sp)
 /* 360680 E005A3C0 24020028 */  addiu     $v0, $zero, 0x28
 /* 360684 E005A3C4 AFA40018 */  sw        $a0, 0x18($sp)

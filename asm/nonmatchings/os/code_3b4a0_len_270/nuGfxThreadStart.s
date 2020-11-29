@@ -4,11 +4,11 @@
 glabel nuGfxThreadStart
 /* 3B5F0 800601F0 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 3B5F4 800601F4 AFB00018 */  sw        $s0, 0x18($sp)
-/* 3B5F8 800601F8 3C10800B */  lui       $s0, 0x800b
-/* 3B5FC 800601FC 26101B90 */  addiu     $s0, $s0, 0x1b90
+/* 3B5F8 800601F8 3C10800B */  lui       $s0, %hi(D_800B1B90)
+/* 3B5FC 800601FC 26101B90 */  addiu     $s0, $s0, %lo(D_800B1B90)
 /* 3B600 80060200 0200202D */  daddu     $a0, $s0, $zero
-/* 3B604 80060204 3C02800B */  lui       $v0, 0x800b
-/* 3B608 80060208 2442E6D0 */  addiu     $v0, $v0, -0x1930
+/* 3B604 80060204 3C02800B */  lui       $v0, %hi(D_800AE6D0)
+/* 3B608 80060208 2442E6D0 */  addiu     $v0, $v0, %lo(D_800AE6D0)
 /* 3B60C 8006020C AFA20010 */  sw        $v0, 0x10($sp)
 /* 3B610 80060210 24020032 */  addiu     $v0, $zero, 0x32
 /* 3B614 80060214 24050004 */  addiu     $a1, $zero, 4

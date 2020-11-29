@@ -28,8 +28,8 @@ glabel func_802D36E0
 /* F80EC 802D373C 8E050000 */  lw        $a1, ($s0)
 /* F80F0 802D3740 0C0B210B */  jal       get_float_variable
 /* F80F4 802D3744 46000506 */   mov.s    $f20, $f0
-/* F80F8 802D3748 3C02802E */  lui       $v0, 0x802e
-/* F80FC 802D374C 8C42B7C0 */  lw        $v0, -0x4840($v0)
+/* F80F8 802D3748 3C02802E */  lui       $v0, %hi(D_802DB7C0)
+/* F80FC 802D374C 8C42B7C0 */  lw        $v0, %lo(D_802DB7C0)($v0)
 /* F8100 802D3750 00118880 */  sll       $s1, $s1, 2
 /* F8104 802D3754 02228821 */  addu      $s1, $s1, $v0
 /* F8108 802D3758 8E230000 */  lw        $v1, ($s1)

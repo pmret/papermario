@@ -8,7 +8,7 @@ glabel func_802BD200
 /* 31B22C 802BD20C A48200A6 */  sh        $v0, 0xa6($a0)
 /* 31B230 802BD210 3C020001 */  lui       $v0, 1
 /* 31B234 802BD214 AC820080 */  sw        $v0, 0x80($a0)
-/* 31B238 802BD218 3C01802C */  lui       $at, 0x802c
-/* 31B23C 802BD21C AC20EC54 */  sw        $zero, -0x13ac($at)
+/* 31B238 802BD218 3C01802C */  lui       $at, %hi(D_802BEC54)
+/* 31B23C 802BD21C AC20EC54 */  sw        $zero, %lo(D_802BEC54)($at)
 /* 31B240 802BD220 03E00008 */  jr        $ra
 /* 31B244 802BD224 00000000 */   nop      

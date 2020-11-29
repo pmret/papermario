@@ -6,8 +6,8 @@ glabel setup_item_popup
 /* 800F8 800E6C48 0100302D */  daddu     $a2, $t0, $zero
 /* 800FC 800E6C4C 3C0B8008 */  lui       $t3, %hi(gItemTable)
 /* 80100 800E6C50 256B78E0 */  addiu     $t3, $t3, %lo(gItemTable)
-/* 80104 800E6C54 3C0A8009 */  lui       $t2, 0x8009
-/* 80108 800E6C58 254AA680 */  addiu     $t2, $t2, -0x5980
+/* 80104 800E6C54 3C0A8009 */  lui       $t2, %hi(D_8008A680)
+/* 80108 800E6C58 254AA680 */  addiu     $t2, $t2, %lo(D_8008A680)
 /* 8010C 800E6C5C 24090001 */  addiu     $t1, $zero, 1
 /* 80110 800E6C60 3C078011 */  lui       $a3, %hi(gPlayerData)
 /* 80114 800E6C64 24E7F290 */  addiu     $a3, $a3, %lo(gPlayerData)

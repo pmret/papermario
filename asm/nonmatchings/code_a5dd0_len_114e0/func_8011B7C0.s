@@ -3,8 +3,8 @@
 
 glabel func_8011B7C0
 /* B1EC0 8011B7C0 3084FFFF */  andi      $a0, $a0, 0xffff
-/* B1EC4 8011B7C4 3C0A800A */  lui       $t2, 0x800a
-/* B1EC8 8011B7C8 8D4AA5F4 */  lw        $t2, -0x5a0c($t2)
+/* B1EC4 8011B7C4 3C0A800A */  lui       $t2, %hi(D_8009A5F4)
+/* B1EC8 8011B7C8 8D4AA5F4 */  lw        $t2, %lo(D_8009A5F4)($t2)
 /* B1ECC 8011B7CC 00041080 */  sll       $v0, $a0, 2
 /* B1ED0 8011B7D0 004A3821 */  addu      $a3, $v0, $t2
 /* B1ED4 8011B7D4 90E30000 */  lbu       $v1, ($a3)

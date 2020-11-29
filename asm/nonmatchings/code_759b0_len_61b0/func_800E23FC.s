@@ -43,8 +43,8 @@ glabel func_800E23FC
 /* 7B940 800E2490 4407C000 */  mfc1      $a3, $f24
 /* 7B944 800E2494 0C00A720 */  jal       atan2
 /* 7B948 800E2498 4600D386 */   mov.s    $f14, $f26
-/* 7B94C 800E249C 3C01800B */  lui       $at, 0x800b
-/* 7B950 800E24A0 C42C1DEC */  lwc1      $f12, 0x1dec($at)
+/* 7B94C 800E249C 3C01800B */  lui       $at, %hi(D_800B1DEC)
+/* 7B950 800E24A0 C42C1DEC */  lwc1      $f12, %lo(D_800B1DEC)($at)
 /* 7B954 800E24A4 0C00A6C9 */  jal       clamp_angle
 /* 7B958 800E24A8 460C0300 */   add.s    $f12, $f0, $f12
 /* 7B95C 800E24AC 461AA032 */  c.eq.s    $f20, $f26

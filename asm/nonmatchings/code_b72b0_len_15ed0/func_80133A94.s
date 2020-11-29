@@ -3,8 +3,8 @@
 
 glabel func_80133A94
 /* CA194 80133A94 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* CA198 80133A98 3C028015 */  lui       $v0, 0x8015
-/* CA19C 80133A9C 8C4265A0 */  lw        $v0, 0x65a0($v0)
+/* CA198 80133A98 3C028015 */  lui       $v0, %hi(D_801565A0)
+/* CA19C 80133A9C 8C4265A0 */  lw        $v0, %lo(D_801565A0)($v0)
 /* CA1A0 80133AA0 00042080 */  sll       $a0, $a0, 2
 /* CA1A4 80133AA4 AFBF0010 */  sw        $ra, 0x10($sp)
 /* CA1A8 80133AA8 00822021 */  addu      $a0, $a0, $v0

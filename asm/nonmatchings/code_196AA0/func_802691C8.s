@@ -12,8 +12,8 @@ glabel func_802691C8
 /* 197AC4 802691E4 8E050000 */  lw        $a1, ($s0)
 /* 197AC8 802691E8 0C0B1EAF */  jal       get_variable
 /* 197ACC 802691EC 26100004 */   addiu    $s0, $s0, 4
-/* 197AD0 802691F0 3C11802A */  lui       $s1, 0x802a
-/* 197AD4 802691F4 2631FBE0 */  addiu     $s1, $s1, -0x420
+/* 197AD0 802691F0 3C11802A */  lui       $s1, %hi(D_8029FBE0)
+/* 197AD4 802691F4 2631FBE0 */  addiu     $s1, $s1, %lo(D_8029FBE0)
 /* 197AD8 802691F8 A2220080 */  sb        $v0, 0x80($s1)
 /* 197ADC 802691FC 8E050000 */  lw        $a1, ($s0)
 /* 197AE0 80269200 26100004 */  addiu     $s0, $s0, 4

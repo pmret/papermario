@@ -41,9 +41,9 @@ glabel draw_main_battle_ui
 /* 16D3E0 8023EB00 2C620023 */  sltiu     $v0, $v1, 0x23
 /* 16D3E4 8023EB04 1040008C */  beqz      $v0, .L8023ED38
 /* 16D3E8 8023EB08 00031080 */   sll      $v0, $v1, 2
-/* 16D3EC 8023EB0C 3C01802A */  lui       $at, 0x802a
+/* 16D3EC 8023EB0C 3C01802A */  lui       $at, %hi(D_8029C9F8)
 /* 16D3F0 8023EB10 00220821 */  addu      $at, $at, $v0
-/* 16D3F4 8023EB14 8C22C9F8 */  lw        $v0, -0x3608($at)
+/* 16D3F4 8023EB14 8C22C9F8 */  lw        $v0, %lo(D_8029C9F8)($at)
 /* 16D3F8 8023EB18 00400008 */  jr        $v0
 /* 16D3FC 8023EB1C 00000000 */   nop      
 /* 16D400 8023EB20 0C0906AE */  jal       func_80241AB8

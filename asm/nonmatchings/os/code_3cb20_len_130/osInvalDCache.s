@@ -41,13 +41,13 @@ glabel osInvalDCache
 /* 3CBA4 800617A4 03E00008 */  jr        $ra
 /* 3CBA8 800617A8 00000000 */   nop      
 .L800617AC:
-/* 3CBAC 800617AC 3C088000 */  lui       $t0, 0x8000
+/* 3CBAC 800617AC 3C088000 */  lui       $t0, %hi(D_80000010)
 /* 3CBB0 800617B0 010B4821 */  addu      $t1, $t0, $t3
 /* 3CBB4 800617B4 2529FFF0 */  addiu     $t1, $t1, -0x10
 .L800617B8:
 /* 3CBB8 800617B8 BD010000 */  cache     1, ($t0)
 /* 3CBBC 800617BC 0109082B */  sltu      $at, $t0, $t1
 /* 3CBC0 800617C0 1420FFFD */  bnez      $at, .L800617B8
-/* 3CBC4 800617C4 25080010 */   addiu    $t0, $t0, 0x10
+/* 3CBC4 800617C4 25080010 */   addiu    $t0, $t0, %lo(D_80000010)
 /* 3CBC8 800617C8 03E00008 */  jr        $ra
 /* 3CBCC 800617CC 00000000 */   nop      

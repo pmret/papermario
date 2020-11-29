@@ -12,17 +12,17 @@ glabel func_E00AC000
 /* 3AEE3C E00AC01C 27A40010 */  addiu     $a0, $sp, 0x10
 /* 3AEE40 E00AC020 F7B80048 */  sdc1      $f24, 0x48($sp)
 /* 3AEE44 E00AC024 4487C000 */  mtc1      $a3, $f24
-/* 3AEE48 E00AC028 3C02E00B */  lui       $v0, 0xe00b
-/* 3AEE4C E00AC02C 2442C11C */  addiu     $v0, $v0, -0x3ee4
+/* 3AEE48 E00AC028 3C02E00B */  lui       $v0, %hi(D_E00AC11C)
+/* 3AEE4C E00AC02C 2442C11C */  addiu     $v0, $v0, %lo(D_E00AC11C)
 /* 3AEE50 E00AC030 AFA20018 */  sw        $v0, 0x18($sp)
-/* 3AEE54 E00AC034 3C02E00B */  lui       $v0, 0xe00b
-/* 3AEE58 E00AC038 2442C124 */  addiu     $v0, $v0, -0x3edc
+/* 3AEE54 E00AC034 3C02E00B */  lui       $v0, %hi(D_E00AC124)
+/* 3AEE58 E00AC038 2442C124 */  addiu     $v0, $v0, %lo(D_E00AC124)
 /* 3AEE5C E00AC03C AFA2001C */  sw        $v0, 0x1c($sp)
-/* 3AEE60 E00AC040 3C02E00B */  lui       $v0, 0xe00b
-/* 3AEE64 E00AC044 2442C280 */  addiu     $v0, $v0, -0x3d80
+/* 3AEE60 E00AC040 3C02E00B */  lui       $v0, %hi(D_E00AC280)
+/* 3AEE64 E00AC044 2442C280 */  addiu     $v0, $v0, %lo(D_E00AC280)
 /* 3AEE68 E00AC048 AFA20020 */  sw        $v0, 0x20($sp)
-/* 3AEE6C E00AC04C 3C02E00B */  lui       $v0, 0xe00b
-/* 3AEE70 E00AC050 2442C288 */  addiu     $v0, $v0, -0x3d78
+/* 3AEE6C E00AC04C 3C02E00B */  lui       $v0, %hi(D_E00AC288)
+/* 3AEE70 E00AC050 2442C288 */  addiu     $v0, $v0, %lo(D_E00AC288)
 /* 3AEE74 E00AC054 AFA20024 */  sw        $v0, 0x24($sp)
 /* 3AEE78 E00AC058 24020056 */  addiu     $v0, $zero, 0x56
 /* 3AEE7C E00AC05C AFBF0030 */  sw        $ra, 0x30($sp)
@@ -47,8 +47,8 @@ glabel func_E00AC000
 /* 3AEEC0 E00AC0A0 E4960008 */  swc1      $f22, 8($a0)
 /* 3AEEC4 E00AC0A4 E498000C */  swc1      $f24, 0xc($a0)
 /* 3AEEC8 E00AC0A8 8FA20064 */  lw        $v0, 0x64($sp)
-/* 3AEECC E00AC0AC 3C03E00B */  lui       $v1, 0xe00b
-/* 3AEED0 E00AC0B0 2463C880 */  addiu     $v1, $v1, -0x3780
+/* 3AEECC E00AC0AC 3C03E00B */  lui       $v1, %hi(D_E00AC880)
+/* 3AEED0 E00AC0B0 2463C880 */  addiu     $v1, $v1, %lo(D_E00AC880)
 /* 3AEED4 E00AC0B4 AC800018 */  sw        $zero, 0x18($a0)
 /* 3AEED8 E00AC0B8 AC820014 */  sw        $v0, 0x14($a0)
 /* 3AEEDC E00AC0BC C7A00060 */  lwc1      $f0, 0x60($sp)

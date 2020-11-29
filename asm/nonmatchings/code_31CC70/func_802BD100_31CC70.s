@@ -9,8 +9,8 @@ glabel func_802BD100_31CC70
 /* 31CC80 802BD110 30420002 */  andi      $v0, $v0, 2
 /* 31CC84 802BD114 14400016 */  bnez      $v0, .L802BD170
 /* 31CC88 802BD118 00000000 */   nop      
-/* 31CC8C 802BD11C 3C10802C */  lui       $s0, 0x802c
-/* 31CC90 802BD120 2610E310 */  addiu     $s0, $s0, -0x1cf0
+/* 31CC8C 802BD11C 3C10802C */  lui       $s0, %hi(D_802BE310)
+/* 31CC90 802BD120 2610E310 */  addiu     $s0, $s0, %lo(D_802BE310)
 /* 31CC94 802BD124 8E020000 */  lw        $v0, ($s0)
 /* 31CC98 802BD128 14400011 */  bnez      $v0, .L802BD170
 /* 31CC9C 802BD12C 24020005 */   addiu    $v0, $zero, 5

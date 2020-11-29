@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel func_802E6574
-/* 107DF4 802E6574 3C01800B */  lui       $at, 0x800b
-/* 107DF8 802E6578 C4201DEC */  lwc1      $f0, 0x1dec($at)
+/* 107DF4 802E6574 3C01800B */  lui       $at, %hi(D_800B1DEC)
+/* 107DF8 802E6578 C4201DEC */  lwc1      $f0, %lo(D_800B1DEC)($at)
 /* 107DFC 802E657C 3C014234 */  lui       $at, 0x4234
 /* 107E00 802E6580 44816000 */  mtc1      $at, $f12
 /* 107E04 802E6584 27BDFFC8 */  addiu     $sp, $sp, -0x38
@@ -50,9 +50,9 @@ glabel func_802E6574
 /* 107E9C 802E661C 2C62000D */  sltiu     $v0, $v1, 0xd
 /* 107EA0 802E6620 1040012C */  beqz      $v0, .L802E6AD4
 /* 107EA4 802E6624 00031080 */   sll      $v0, $v1, 2
-/* 107EA8 802E6628 3C01802F */  lui       $at, 0x802f
+/* 107EA8 802E6628 3C01802F */  lui       $at, %hi(D_802EB2B0)
 /* 107EAC 802E662C 00220821 */  addu      $at, $at, $v0
-/* 107EB0 802E6630 8C22B2B0 */  lw        $v0, -0x4d50($at)
+/* 107EB0 802E6630 8C22B2B0 */  lw        $v0, %lo(D_802EB2B0)($at)
 /* 107EB4 802E6634 00400008 */  jr        $v0
 /* 107EB8 802E6638 00000000 */   nop      
 /* 107EBC 802E663C 0C05272D */  jal       play_sound
