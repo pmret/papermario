@@ -5,8 +5,8 @@ glabel func_80241390_87AF70
 /* 87AF70 80241390 3C088011 */  lui       $t0, %hi(gPlayerStatus)
 /* 87AF74 80241394 2508EFC8 */  addiu     $t0, $t0, %lo(gPlayerStatus)
 /* 87AF78 80241398 0000202D */  daddu     $a0, $zero, $zero
-/* 87AF7C 8024139C 3C058016 */  lui       $a1, 0x8016
-/* 87AF80 802413A0 84A5A552 */  lh        $a1, -0x5aae($a1)
+/* 87AF7C 8024139C 3C058016 */  lui       $a1, %hi(gCollisionStatus+0x2)
+/* 87AF80 802413A0 84A5A552 */  lh        $a1, %lo(gCollisionStatus+0x2)($a1)
 /* 87AF84 802413A4 2407000E */  addiu     $a3, $zero, 0xe
 /* 87AF88 802413A8 24060010 */  addiu     $a2, $zero, 0x10
 /* 87AF8C 802413AC 3C038024 */  lui       $v1, 0x8024

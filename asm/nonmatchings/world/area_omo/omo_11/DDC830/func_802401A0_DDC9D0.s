@@ -243,13 +243,13 @@ glabel func_802401A0_DDC9D0
 /* DDCD64 80240534 27A20128 */  addiu     $v0, $sp, 0x128
 /* DDCD68 80240538 0C019E9C */  jal       guMtxXFMF
 /* DDCD6C 8024053C AFA20018 */   sw       $v0, 0x18($sp)
-/* DDCD70 80240540 3C028016 */  lui       $v0, 0x8016
-/* DDCD74 80240544 8442A552 */  lh        $v0, -0x5aae($v0)
+/* DDCD70 80240540 3C028016 */  lui       $v0, %hi(gCollisionStatus+0x2)
+/* DDCD74 80240544 8442A552 */  lh        $v0, %lo(gCollisionStatus+0x2)($v0)
 /* DDCD78 80240548 8E630000 */  lw        $v1, ($s3)
 /* DDCD7C 8024054C 10430005 */  beq       $v0, $v1, .L80240564
 /* DDCD80 80240550 00000000 */   nop      
-/* DDCD84 80240554 3C028016 */  lui       $v0, 0x8016
-/* DDCD88 80240558 8442A554 */  lh        $v0, -0x5aac($v0)
+/* DDCD84 80240554 3C028016 */  lui       $v0, %hi(gCollisionStatus+0x4)
+/* DDCD88 80240558 8442A554 */  lh        $v0, %lo(gCollisionStatus+0x4)($v0)
 /* DDCD8C 8024055C 1443000D */  bne       $v0, $v1, .L80240594
 /* DDCD90 80240560 00000000 */   nop      
 .L80240564:
@@ -346,8 +346,8 @@ glabel func_802401A0_DDC9D0
 /* DDCEF4 802406C4 24070010 */  addiu     $a3, $zero, 0x10
 /* DDCEF8 802406C8 3C038024 */  lui       $v1, 0x8024
 /* DDCEFC 802406CC 24631778 */  addiu     $v1, $v1, 0x1778
-/* DDCF00 802406D0 3C068016 */  lui       $a2, 0x8016
-/* DDCF04 802406D4 84C6A552 */  lh        $a2, -0x5aae($a2)
+/* DDCF00 802406D0 3C068016 */  lui       $a2, %hi(gCollisionStatus+0x2)
+/* DDCF04 802406D4 84C6A552 */  lh        $a2, %lo(gCollisionStatus+0x2)($a2)
 .L802406D8:
 /* DDCF08 802406D8 8C620000 */  lw        $v0, ($v1)
 /* DDCF0C 802406DC 54C20012 */  bnel      $a2, $v0, .L80240728

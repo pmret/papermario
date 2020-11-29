@@ -6,8 +6,8 @@ glabel func_80240C40_A0C930
 /* A0C934 80240C44 240201F4 */  addiu     $v0, $zero, 0x1f4
 /* A0C938 80240C48 0000202D */  daddu     $a0, $zero, $zero
 /* A0C93C 80240C4C 0000282D */  daddu     $a1, $zero, $zero
-/* A0C940 80240C50 3C018011 */  lui       $at, 0x8011
-/* A0C944 80240C54 C420EFF0 */  lwc1      $f0, -0x1010($at)
+/* A0C940 80240C50 3C018011 */  lui       $at, %hi(gPlayerStatus+0x28)
+/* A0C944 80240C54 C420EFF0 */  lwc1      $f0, %lo(gPlayerStatus+0x28)($at)
 /* A0C948 80240C58 3C014348 */  lui       $at, 0x4348
 /* A0C94C 80240C5C 44811000 */  mtc1      $at, $f2
 /* A0C950 80240C60 3C064358 */  lui       $a2, 0x4358

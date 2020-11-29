@@ -13,8 +13,8 @@ glabel func_802430B4_855224
 /* 855244 802430D4 0C00EAD2 */  jal       get_npc_safe
 /* 855248 802430D8 2404FFFC */   addiu    $a0, $zero, -4
 /* 85524C 802430DC 2410FFFF */  addiu     $s0, $zero, -1
-/* 855250 802430E0 3C038016 */  lui       $v1, 0x8016
-/* 855254 802430E4 8463A568 */  lh        $v1, -0x5a98($v1)
+/* 855250 802430E0 3C038016 */  lui       $v1, %hi(gCollisionStatus+0x18)
+/* 855254 802430E4 8463A568 */  lh        $v1, %lo(gCollisionStatus+0x18)($v1)
 /* 855258 802430E8 04600025 */  bltz      $v1, .L80243180
 /* 85525C 802430EC 0040202D */   daddu    $a0, $v0, $zero
 /* 855260 802430F0 3C014130 */  lui       $at, 0x4130

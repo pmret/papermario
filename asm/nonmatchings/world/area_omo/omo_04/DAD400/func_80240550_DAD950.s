@@ -131,8 +131,8 @@ glabel func_80240550_DAD950
 /* DADB3C 8024073C C7A4002C */  lwc1      $f4, 0x2c($sp)
 /* DADB40 80240740 461A2100 */  add.s     $f4, $f4, $f26
 /* DADB44 80240744 46142081 */  sub.s     $f2, $f4, $f20
-/* DADB48 80240748 3C018024 */  lui       $at, 0x8024
-/* DADB4C 8024074C D4204CC0 */  ldc1      $f0, 0x4cc0($at)
+/* DADB48 80240748 3C018024 */  lui       $at, %hi(pause_tabs_draw_badges)
+/* DADB4C 8024074C D4204CC0 */  ldc1      $f0, %lo(pause_tabs_draw_badges)($at)
 /* DADB50 80240750 460010A1 */  cvt.d.s   $f2, $f2
 /* DADB54 80240754 46201082 */  mul.d     $f2, $f2, $f0
 /* DADB58 80240758 00000000 */  nop       
