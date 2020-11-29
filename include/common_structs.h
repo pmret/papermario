@@ -12,9 +12,14 @@ struct ScriptInstance;
 typedef ApiStatus(*ApiFunc)(struct ScriptInstance*, s32);
 
 typedef struct Vec2b {
+    /* 0x00 */ s8 x;
+    /* 0x01 */ s8 y;
+} Vec2b; // size = 0x02
+
+typedef struct Vec2bu {
     /* 0x00 */ u8 x;
     /* 0x01 */ u8 y;
-} Vec2b; // size = 0x02
+} Vec2bu; // size = 0x02
 
 typedef struct Vec3f {
     /* 0x00 */ f32 x;
@@ -673,7 +678,7 @@ typedef struct StaticActorData {
     /* 0x1E */ u8 powerBounceChance;
     /* 0x1F */ u8 coinReward;
     /* 0x20 */ u8 size[2];
-    /* 0x22 */ u8 hpBarOffset[2];
+    /* 0x22 */ Vec2b hpBarOffset;
     /* 0x24 */ u8 statusIconOffset[2];
     /* 0x26 */ u8 statusMessageOffset[2];
 } StaticActorData; // size = 0x28
@@ -1059,9 +1064,9 @@ typedef struct ActorPart {
     /* 0x78 */ u32* defenseTable;
     /* 0x7C */ s32 eventFlags;
     /* 0x80 */ s32 partFlags3;
-    /* 0x84 */ char unk_84[4];
+    /* 0x84 */ s32 unk_84;
     /* 0x88 */ s32 currentAnimation;
-    /* 0x8C */ char unk_8C[4];
+    /* 0x8C */ s32 unk_8C;
     /* 0x90 */ f32 animationRate;
     /* 0x94 */ u32* idleAnimations;
     /* 0x98 */ s16 opacity;
@@ -1268,7 +1273,7 @@ typedef struct Actor {
     /* 0x138 */ Vec3f homePos;
     /* 0x144 */ Vec3f currentPos;
     /* 0x150 */ Vec3s headOffset;
-    /* 0x156 */ s16 healthBarPosition[3];
+    /* 0x156 */ Vec3s healthBarPosition;
     /* 0x15C */ Vec3f rotation;
     /* 0x168 */ Vec3s rotationPivotOffset;
     /* 0x16E */ char unk_16E[2];
@@ -1276,12 +1281,17 @@ typedef struct Actor {
     /* 0x17C */ Vec3f scaleModifier; /* multiplies normal scale factors componentwise */
     /* 0x188 */ f32 scalingFactor;
     /* 0x18C */ f32 yaw;
-    /* 0x190 */ Vec2b size;
+    /* 0x190 */ Vec2bu size;
     /* 0x192 */ s16 actorID;
-    /* 0x194 */ char unk_194[8];
+    /* 0x194 */ s8 unk_194;
+    /* 0x195 */ s8 unk_195;
+    /* 0x196 */ s8 unk_196;
+    /* 0x197 */ s8 unk_197;
+    /* 0x198 */ Vec2b unk_198;
+    /* 0x19A */ char unk_19A[2];
     /* 0x19C */ s32 actorTypeData1[6]; /* 4 = jump sound */
     /* 0x1B4 */ s16 actorTypeData1b[2];
-    /* 0x1B8 */ u8 currentHP;
+    /* 0x1B8 */ s8 currentHP;
     /* 0x1B9 */ s8 maxHP;
     /* 0x1BA */ char unk_1BA[2];
     /* 0x1BC */ u8 hpFraction; /* used to render HP bar */
