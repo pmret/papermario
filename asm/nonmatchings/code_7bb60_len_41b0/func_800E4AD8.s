@@ -4,8 +4,8 @@
 glabel func_800E4AD8
 /* 7DF88 800E4AD8 3C038007 */  lui       $v1, %hi(gCurrentCameraID)
 /* 7DF8C 800E4ADC 8C637410 */  lw        $v1, %lo(gCurrentCameraID)($v1)
-/* 7DF90 800E4AE0 3C018011 */  lui       $at, 0x8011
-/* 7DF94 800E4AE4 C422F070 */  lwc1      $f2, -0xf90($at)
+/* 7DF90 800E4AE0 3C018011 */  lui       $at, %hi(gPlayerStatus+0xA8)
+/* 7DF94 800E4AE4 C422F070 */  lwc1      $f2, %lo(gPlayerStatus+0xA8)($at)
 /* 7DF98 800E4AE8 3C0142B4 */  lui       $at, 0x42b4
 /* 7DF9C 800E4AEC 44810000 */  mtc1      $at, $f0
 /* 7DFA0 800E4AF0 27BDFFE8 */  addiu     $sp, $sp, -0x18

@@ -84,8 +84,8 @@ glabel start_child_script
 /* E829C 802C38EC AE000160 */  sw        $zero, 0x160($s0)
 /* E82A0 802C38F0 A2020004 */  sb        $v0, 4($s0)
 /* E82A4 802C38F4 8E22013C */  lw        $v0, 0x13c($s1)
-/* E82A8 802C38F8 3C01802E */  lui       $at, 0x802e
-/* E82AC 802C38FC C4209CA8 */  lwc1      $f0, -0x6358($at)
+/* E82A8 802C38F8 3C01802E */  lui       $at, %hi(gGlobalTimeSpace)
+/* E82AC 802C38FC C4209CA8 */  lwc1      $f0, %lo(gGlobalTimeSpace)($at)
 /* E82B0 802C3900 0200202D */  daddu     $a0, $s0, $zero
 /* E82B4 802C3904 AE02013C */  sw        $v0, 0x13c($s0)
 /* E82B8 802C3908 8E220140 */  lw        $v0, 0x140($s1)

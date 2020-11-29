@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel render_curtains
-/* 6E80 8002BA80 3C01800A */  lui       $at, 0x800a
-/* 6E84 8002BA84 C420BA94 */  lwc1      $f0, -0x456c($at)
+/* 6E80 8002BA80 3C01800A */  lui       $at, %hi(gCurtainScaleGoal)
+/* 6E84 8002BA84 C420BA94 */  lwc1      $f0, %lo(gCurtainScaleGoal)($at)
 /* 6E88 8002BA88 27BDFF78 */  addiu     $sp, $sp, -0x88
 /* 6E8C 8002BA8C AFB20068 */  sw        $s2, 0x68($sp)
 /* 6E90 8002BA90 3C12800A */  lui       $s2, %hi(gCurtainScale)
@@ -33,8 +33,8 @@ glabel render_curtains
 .L8002BAF0:
 /* 6EF0 8002BAF0 3C13800A */  lui       $s3, %hi(gCurtainFade)
 /* 6EF4 8002BAF4 2673BA98 */  addiu     $s3, $s3, %lo(gCurtainFade)
-/* 6EF8 8002BAF8 3C01800A */  lui       $at, 0x800a
-/* 6EFC 8002BAFC C420BA9C */  lwc1      $f0, -0x4564($at)
+/* 6EF8 8002BAF8 3C01800A */  lui       $at, %hi(gCurtainFadeGoal)
+/* 6EFC 8002BAFC C420BA9C */  lwc1      $f0, %lo(gCurtainFadeGoal)($at)
 /* 6F00 8002BB00 C6640000 */  lwc1      $f4, ($s3)
 /* 6F04 8002BB04 46040032 */  c.eq.s    $f0, $f4
 /* 6F08 8002BB08 00000000 */  nop       
