@@ -3,8 +3,8 @@
 
 glabel func_80240D54_A2AF94
 /* A2AF94 80240D54 44852000 */  mtc1      $a1, $f4
-/* A2AF98 80240D58 3C018025 */  lui       $at, 0x8025
-/* A2AF9C 80240D5C D422F1E0 */  ldc1      $f2, -0xe20($at)
+/* A2AF98 80240D58 3C018025 */  lui       $at, %hi(D_8024F1E0)
+/* A2AF9C 80240D5C D422F1E0 */  ldc1      $f2, %lo(D_8024F1E0)($at)
 /* A2AFA0 80240D60 46002021 */  cvt.d.s   $f0, $f4
 /* A2AFA4 80240D64 46220002 */  mul.d     $f0, $f0, $f2
 /* A2AFA8 80240D68 00000000 */  nop       
@@ -16,8 +16,8 @@ glabel func_80240D54_A2AF94
 /* A2AFC0 80240D80 00431021 */  addu      $v0, $v0, $v1
 /* A2AFC4 80240D84 000210C0 */  sll       $v0, $v0, 3
 /* A2AFC8 80240D88 46200020 */  cvt.s.d   $f0, $f0
-/* A2AFCC 80240D8C 3C01800B */  lui       $at, 0x800b
+/* A2AFCC 80240D8C 3C01800B */  lui       $at, %hi(D_800B1D98)
 /* A2AFD0 80240D90 00220821 */  addu      $at, $at, $v0
-/* A2AFD4 80240D94 E4201D98 */  swc1      $f0, 0x1d98($at)
+/* A2AFD4 80240D94 E4201D98 */  swc1      $f0, %lo(D_800B1D98)($at)
 /* A2AFD8 80240D98 03E00008 */  jr        $ra
 /* A2AFDC 80240D9C 00000000 */   nop      

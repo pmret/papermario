@@ -15,9 +15,9 @@ glabel func_80242178_7ECE88
 /* 7ECEB0 802421A0 3C04800B */  lui       $a0, %hi(gCurrentEncounter+0x28)
 /* 7ECEB4 802421A4 00832021 */  addu      $a0, $a0, $v1
 /* 7ECEB8 802421A8 8C840F38 */  lw        $a0, %lo(gCurrentEncounter+0x28)($a0)
-/* 7ECEBC 802421AC 3C038025 */  lui       $v1, 0x8025
+/* 7ECEBC 802421AC 3C038025 */  lui       $v1, %hi(D_8024A632)
 /* 7ECEC0 802421B0 00621821 */  addu      $v1, $v1, $v0
-/* 7ECEC4 802421B4 9463A632 */  lhu       $v1, -0x59ce($v1)
+/* 7ECEC4 802421B4 9463A632 */  lhu       $v1, %lo(D_8024A632)($v1)
 /* 7ECEC8 802421B8 A4830044 */  sh        $v1, 0x44($a0)
 /* 7ECECC 802421BC 8FBF0014 */  lw        $ra, 0x14($sp)
 /* 7ECED0 802421C0 8FB00010 */  lw        $s0, 0x10($sp)

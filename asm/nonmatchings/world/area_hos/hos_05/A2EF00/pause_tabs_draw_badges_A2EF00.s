@@ -71,8 +71,8 @@ glabel pause_tabs_draw_badges_A2EF00
 /* A2EFF4 80244DB4 08091365 */  j         .L80244D94
 /* A2EFF8 80244DB8 00000000 */   nop      
 .L80244DBC:
-/* A2EFFC 80244DBC 3C028015 */  lui       $v0, 0x8015
-/* A2F000 80244DC0 8C4212F0 */  lw        $v0, 0x12f0($v0)
+/* A2EFFC 80244DBC 3C028015 */  lui       $v0, %hi(D_801512F0)
+/* A2F000 80244DC0 8C4212F0 */  lw        $v0, %lo(D_801512F0)($v0)
 /* A2F004 80244DC4 A0510000 */  sb        $s1, ($v0)
 .L80244DC8:
 /* A2F008 80244DC8 24020002 */  addiu     $v0, $zero, 2

@@ -4,8 +4,8 @@
 glabel delete_player_actor_9C6148
 /* 9C6148 80240D68 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 9C614C 80240D6C AFB00010 */  sw        $s0, 0x10($sp)
-/* 9C6150 80240D70 3C108024 */  lui       $s0, 0x8024
-/* 9C6154 80240D74 26105F44 */  addiu     $s0, $s0, 0x5f44
+/* 9C6150 80240D70 3C108024 */  lui       $s0, %hi(D_80245F44)
+/* 9C6154 80240D74 26105F44 */  addiu     $s0, $s0, %lo(D_80245F44)
 /* 9C6158 80240D78 AFBF0018 */  sw        $ra, 0x18($sp)
 /* 9C615C 80240D7C AFB10014 */  sw        $s1, 0x14($sp)
 /* 9C6160 80240D80 8E020000 */  lw        $v0, ($s0)
@@ -39,8 +39,8 @@ glabel delete_player_actor_9C6148
 /* 9C61C4 80240DE4 28620010 */  slti      $v0, $v1, 0x10
 /* 9C61C8 80240DE8 1440FFFA */  bnez      $v0, .L80240DD4
 /* 9C61CC 80240DEC 24840004 */   addiu    $a0, $a0, 4
-/* 9C61D0 80240DF0 3C108024 */  lui       $s0, 0x8024
-/* 9C61D4 80240DF4 26105F44 */  addiu     $s0, $s0, 0x5f44
+/* 9C61D0 80240DF0 3C108024 */  lui       $s0, %hi(D_80245F44)
+/* 9C61D4 80240DF4 26105F44 */  addiu     $s0, $s0, %lo(D_80245F44)
 /* 9C61D8 80240DF8 0C00AB4B */  jal       heap_free
 /* 9C61DC 80240DFC 8E040000 */   lw       $a0, ($s0)
 /* 9C61E0 80240E00 AE000000 */  sw        $zero, ($s0)

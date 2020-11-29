@@ -3,8 +3,8 @@
 
 glabel func_8028035C
 /* 7E11DC 8028035C 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* 7E11E0 80280360 3C048028 */  lui       $a0, 0x8028
-/* 7E11E4 80280364 24843F2C */  addiu     $a0, $a0, 0x3f2c
+/* 7E11E0 80280360 3C048028 */  lui       $a0, %hi(D_80283F2C)
+/* 7E11E4 80280364 24843F2C */  addiu     $a0, $a0, %lo(D_80283F2C)
 /* 7E11E8 80280368 24050001 */  addiu     $a1, $zero, 1
 /* 7E11EC 8028036C 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
 /* 7E11F0 80280370 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)

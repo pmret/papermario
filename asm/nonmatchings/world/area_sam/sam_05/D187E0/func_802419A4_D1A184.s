@@ -217,8 +217,8 @@ glabel func_802419A4_D1A184
 /* D1A4A8 80241CC8 AFA20018 */  sw        $v0, 0x18($sp)
 .L80241CCC:
 /* D1A4AC 80241CCC 8EC40024 */  lw        $a0, 0x24($s6)
-/* D1A4B0 80241CD0 3C078024 */  lui       $a3, 0x8024
-/* D1A4B4 80241CD4 24E72F90 */  addiu     $a3, $a3, 0x2f90
+/* D1A4B0 80241CD0 3C078024 */  lui       $a3, %hi(D_80242F90)
+/* D1A4B4 80241CD4 24E72F90 */  addiu     $a3, $a3, %lo(D_80242F90)
 .L80241CD8:
 /* D1A4B8 80241CD8 0C0B79E0 */  jal       func_802DE780
 /* D1A4BC 80241CDC 00000000 */   nop      

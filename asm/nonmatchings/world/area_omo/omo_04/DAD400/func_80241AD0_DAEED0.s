@@ -124,9 +124,9 @@ glabel func_80241AD0_DAEED0
 /* DAF094 80241C94 2C620064 */  sltiu     $v0, $v1, 0x64
 /* DAF098 80241C98 10400050 */  beqz      $v0, .L80241DDC
 /* DAF09C 80241C9C 00031080 */   sll      $v0, $v1, 2
-/* DAF0A0 80241CA0 3C018024 */  lui       $at, 0x8024
+/* DAF0A0 80241CA0 3C018024 */  lui       $at, %hi(D_80244D18)
 /* DAF0A4 80241CA4 00220821 */  addu      $at, $at, $v0
-/* DAF0A8 80241CA8 8C224D18 */  lw        $v0, 0x4d18($at)
+/* DAF0A8 80241CA8 8C224D18 */  lw        $v0, %lo(D_80244D18)($at)
 /* DAF0AC 80241CAC 00400008 */  jr        $v0
 /* DAF0B0 80241CB0 00000000 */   nop      
 /* DAF0B4 80241CB4 0260202D */  daddu     $a0, $s3, $zero

@@ -22,12 +22,12 @@ glabel func_8024095C_DDD18C
 /* DDD1D0 802409A0 0040982D */  daddu     $s3, $v0, $zero
 /* DDD1D4 802409A4 0000B02D */  daddu     $s6, $zero, $zero
 /* DDD1D8 802409A8 02C0902D */  daddu     $s2, $s6, $zero
-/* DDD1DC 802409AC 3C148024 */  lui       $s4, 0x8024
-/* DDD1E0 802409B0 26941E48 */  addiu     $s4, $s4, 0x1e48
+/* DDD1DC 802409AC 3C148024 */  lui       $s4, %hi(D_80241E48)
+/* DDD1E0 802409B0 26941E48 */  addiu     $s4, $s4, %lo(D_80241E48)
 /* DDD1E4 802409B4 0260882D */  daddu     $s1, $s3, $zero
 /* DDD1E8 802409B8 8EA200B4 */  lw        $v0, 0xb4($s5)
-/* DDD1EC 802409BC 3C038024 */  lui       $v1, 0x8024
-/* DDD1F0 802409C0 24631E40 */  addiu     $v1, $v1, 0x1e40
+/* DDD1EC 802409BC 3C038024 */  lui       $v1, %hi(D_80241E40)
+/* DDD1F0 802409C0 24631E40 */  addiu     $v1, $v1, %lo(D_80241E40)
 /* DDD1F4 802409C4 AEB30078 */  sw        $s3, 0x78($s5)
 /* DDD1F8 802409C8 00021027 */  nor       $v0, $zero, $v0
 /* DDD1FC 802409CC 0002BFC2 */  srl       $s7, $v0, 0x1f
@@ -42,8 +42,8 @@ glabel func_8024095C_DDD18C
 /* DDD21C 802409EC 5040002E */  beql      $v0, $zero, .L80240AA8
 /* DDD220 802409F0 26520001 */   addiu    $s2, $s2, 1
 /* DDD224 802409F4 00101100 */  sll       $v0, $s0, 4
-/* DDD228 802409F8 3C068009 */  lui       $a2, 0x8009
-/* DDD22C 802409FC 24C6EF20 */  addiu     $a2, $a2, -0x10e0
+/* DDD228 802409F8 3C068009 */  lui       $a2, %hi(D_8008EF20)
+/* DDD22C 802409FC 24C6EF20 */  addiu     $a2, $a2, %lo(D_8008EF20)
 /* DDD230 80240A00 00461021 */  addu      $v0, $v0, $a2
 /* DDD234 80240A04 0200202D */  daddu     $a0, $s0, $zero
 /* DDD238 80240A08 AE300108 */  sw        $s0, 0x108($s1)
@@ -54,15 +54,15 @@ glabel func_8024095C_DDD18C
 /* DDD24C 80240A1C 0040202D */  daddu     $a0, $v0, $zero
 /* DDD250 80240A20 04800011 */  bltz      $a0, .L80240A68
 /* DDD254 80240A24 00101080 */   sll      $v0, $s0, 2
-/* DDD258 80240A28 3C06800F */  lui       $a2, 0x800f
-/* DDD25C 80240A2C 24C67F00 */  addiu     $a2, $a2, 0x7f00
+/* DDD258 80240A28 3C06800F */  lui       $a2, %hi(D_800F7F00)
+/* DDD25C 80240A2C 24C67F00 */  addiu     $a2, $a2, %lo(D_800F7F00)
 /* DDD260 80240A30 00461021 */  addu      $v0, $v0, $a2
 /* DDD264 80240A34 8C430000 */  lw        $v1, ($v0)
 /* DDD268 80240A38 24020001 */  addiu     $v0, $zero, 1
 /* DDD26C 80240A3C AE22018C */  sw        $v0, 0x18c($s1)
 /* DDD270 80240A40 00041080 */  sll       $v0, $a0, 2
-/* DDD274 80240A44 3C068024 */  lui       $a2, 0x8024
-/* DDD278 80240A48 24C61E58 */  addiu     $a2, $a2, 0x1e58
+/* DDD274 80240A44 3C068024 */  lui       $a2, %hi(D_80241E58)
+/* DDD278 80240A48 24C61E58 */  addiu     $a2, $a2, %lo(D_80241E58)
 /* DDD27C 80240A4C AE230000 */  sw        $v1, ($s1)
 /* DDD280 80240A50 001218C0 */  sll       $v1, $s2, 3
 /* DDD284 80240A54 00431021 */  addu      $v0, $v0, $v1
@@ -71,8 +71,8 @@ glabel func_8024095C_DDD18C
 /* DDD290 80240A60 080902A3 */  j         .L80240A8C
 /* DDD294 80240A64 AE220294 */   sw       $v0, 0x294($s1)
 .L80240A68:
-/* DDD298 80240A68 3C06800F */  lui       $a2, 0x800f
-/* DDD29C 80240A6C 24C67F40 */  addiu     $a2, $a2, 0x7f40
+/* DDD298 80240A68 3C06800F */  lui       $a2, %hi(D_800F7F40)
+/* DDD29C 80240A6C 24C67F40 */  addiu     $a2, $a2, %lo(D_800F7F40)
 /* DDD2A0 80240A70 00461021 */  addu      $v0, $v0, $a2
 /* DDD2A4 80240A74 8C420000 */  lw        $v0, ($v0)
 /* DDD2A8 80240A78 AE20018C */  sw        $zero, 0x18c($s1)
@@ -130,9 +130,9 @@ glabel func_8024095C_DDD18C
 /* DDD360 80240B30 02621021 */  addu      $v0, $s3, $v0
 /* DDD364 80240B34 8C420108 */  lw        $v0, 0x108($v0)
 /* DDD368 80240B38 00021100 */  sll       $v0, $v0, 4
-/* DDD36C 80240B3C 3C038009 */  lui       $v1, 0x8009
+/* DDD36C 80240B3C 3C038009 */  lui       $v1, %hi(D_8008EF20)
 /* DDD370 80240B40 00621821 */  addu      $v1, $v1, $v0
-/* DDD374 80240B44 8C63EF20 */  lw        $v1, -0x10e0($v1)
+/* DDD374 80240B44 8C63EF20 */  lw        $v1, %lo(D_8008EF20)($v1)
 /* DDD378 80240B48 8EA20074 */  lw        $v0, 0x74($s5)
 /* DDD37C 80240B4C 2442FFFF */  addiu     $v0, $v0, -1
 /* DDD380 80240B50 00021080 */  sll       $v0, $v0, 2

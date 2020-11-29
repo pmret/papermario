@@ -33,8 +33,8 @@ glabel func_8024072C_ABB9BC
 /* ABBA28 80240798 080901F0 */  j         .L802407C0
 /* ABBA2C 8024079C E4A00018 */   swc1     $f0, 0x18($a1)
 .L802407A0:
-/* ABBA30 802407A0 3C018025 */  lui       $at, 0x8025
-/* ABBA34 802407A4 D4229D38 */  ldc1      $f2, -0x62c8($at)
+/* ABBA30 802407A0 3C018025 */  lui       $at, %hi(D_80249D38)
+/* ABBA34 802407A4 D4229D38 */  ldc1      $f2, %lo(D_80249D38)($at)
 /* ABBA38 802407A8 44820000 */  mtc1      $v0, $f0
 /* ABBA3C 802407AC 00000000 */  nop       
 /* ABBA40 802407B0 46800021 */  cvt.d.w   $f0, $f0

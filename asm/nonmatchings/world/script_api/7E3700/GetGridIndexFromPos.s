@@ -27,9 +27,9 @@ glabel GetGridIndexFromPos
 /* 7E4590 80283710 0C0B1EAF */  jal       get_variable
 /* 7E4594 80283714 0260202D */   daddu    $a0, $s3, $zero
 /* 7E4598 80283718 00118880 */  sll       $s1, $s1, 2
-/* 7E459C 8028371C 3C04802E */  lui       $a0, 0x802e
+/* 7E459C 8028371C 3C04802E */  lui       $a0, %hi(D_802DBC88)
 /* 7E45A0 80283720 00912021 */  addu      $a0, $a0, $s1
-/* 7E45A4 80283724 8C84BC88 */  lw        $a0, -0x4378($a0)
+/* 7E45A4 80283724 8C84BC88 */  lw        $a0, %lo(D_802DBC88)($a0)
 /* 7E45A8 80283728 3C0651EB */  lui       $a2, 0x51eb
 /* 7E45AC 8028372C 8C830008 */  lw        $v1, 8($a0)
 /* 7E45B0 80283730 34C6851F */  ori       $a2, $a2, 0x851f

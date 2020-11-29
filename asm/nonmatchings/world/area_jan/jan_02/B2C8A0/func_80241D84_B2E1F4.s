@@ -38,8 +38,8 @@ glabel func_80241D84_B2E1F4
 /* B2E278 80241E08 0220202D */  daddu     $a0, $s1, $zero
 /* B2E27C 80241E0C 3C05F4AC */  lui       $a1, 0xf4ac
 /* B2E280 80241E10 34A5D481 */  ori       $a1, $a1, 0xd481
-/* B2E284 80241E14 3C108025 */  lui       $s0, 0x8025
-/* B2E288 80241E18 26108940 */  addiu     $s0, $s0, -0x76c0
+/* B2E284 80241E14 3C108025 */  lui       $s0, %hi(D_80248940)
+/* B2E288 80241E18 26108940 */  addiu     $s0, $s0, %lo(D_80248940)
 /* B2E28C 80241E1C 0C0B1EAF */  jal       get_variable
 /* B2E290 80241E20 AE020000 */   sw       $v0, ($s0)
 /* B2E294 80241E24 0220202D */  daddu     $a0, $s1, $zero
@@ -66,8 +66,8 @@ glabel func_80241D84_B2E1F4
 /* B2E2E8 80241E78 0000202D */   daddu    $a0, $zero, $zero
 /* B2E2EC 80241E7C 0220202D */  daddu     $a0, $s1, $zero
 /* B2E2F0 80241E80 3C05F4AC */  lui       $a1, 0xf4ac
-/* B2E2F4 80241E84 3C018025 */  lui       $at, 0x8025
-/* B2E2F8 80241E88 AC228944 */  sw        $v0, -0x76bc($at)
+/* B2E2F4 80241E84 3C018025 */  lui       $at, %hi(D_80248944)
+/* B2E2F8 80241E88 AC228944 */  sw        $v0, %lo(D_80248944)($at)
 /* B2E2FC 80241E8C 0C0B1EAF */  jal       get_variable
 /* B2E300 80241E90 34A5D481 */   ori      $a1, $a1, 0xd481
 /* B2E304 80241E94 0220202D */  daddu     $a0, $s1, $zero
@@ -98,16 +98,16 @@ glabel func_80241D84_B2E1F4
 /* B2E368 80241EF8 E7A00010 */   swc1     $f0, 0x10($sp)
 /* B2E36C 80241EFC 8E030000 */  lw        $v1, ($s0)
 /* B2E370 80241F00 8C64000C */  lw        $a0, 0xc($v1)
-/* B2E374 80241F04 3C018025 */  lui       $at, 0x8025
-/* B2E378 80241F08 AC228948 */  sw        $v0, -0x76b8($at)
+/* B2E374 80241F04 3C018025 */  lui       $at, %hi(D_80248948)
+/* B2E378 80241F08 AC228948 */  sw        $v0, %lo(D_80248948)($at)
 /* B2E37C 80241F0C AC800018 */  sw        $zero, 0x18($a0)
 /* B2E380 80241F10 AC800020 */  sw        $zero, 0x20($a0)
 /* B2E384 80241F14 AC800024 */  sw        $zero, 0x24($a0)
 /* B2E388 80241F18 AC800028 */  sw        $zero, 0x28($a0)
 /* B2E38C 80241F1C AC80001C */  sw        $zero, 0x1c($a0)
 .L80241F20:
-/* B2E390 80241F20 3C028025 */  lui       $v0, 0x8025
-/* B2E394 80241F24 8C428940 */  lw        $v0, -0x76c0($v0)
+/* B2E390 80241F20 3C028025 */  lui       $v0, %hi(D_80248940)
+/* B2E394 80241F24 8C428940 */  lw        $v0, %lo(D_80248940)($v0)
 /* B2E398 80241F28 8C44000C */  lw        $a0, 0xc($v0)
 /* B2E39C 80241F2C 8C820020 */  lw        $v0, 0x20($a0)
 /* B2E3A0 80241F30 8C830028 */  lw        $v1, 0x28($a0)

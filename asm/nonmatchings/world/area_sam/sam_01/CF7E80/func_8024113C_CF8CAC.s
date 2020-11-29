@@ -7,8 +7,8 @@ glabel func_8024113C_CF8CAC
 /* CF8CB4 80241144 8C82000C */  lw        $v0, 0xc($a0)
 /* CF8CB8 80241148 0C0B1EAF */  jal       get_variable
 /* CF8CBC 8024114C 8C450000 */   lw       $a1, ($v0)
-/* CF8CC0 80241150 3C038025 */  lui       $v1, 0x8025
-/* CF8CC4 80241154 8C63DF18 */  lw        $v1, -0x20e8($v1)
+/* CF8CC0 80241150 3C038025 */  lui       $v1, %hi(D_8024DF18)
+/* CF8CC4 80241154 8C63DF18 */  lw        $v1, %lo(D_8024DF18)($v1)
 /* CF8CC8 80241158 8C63000C */  lw        $v1, 0xc($v1)
 /* CF8CCC 8024115C AC620034 */  sw        $v0, 0x34($v1)
 /* CF8CD0 80241160 8FBF0010 */  lw        $ra, 0x10($sp)

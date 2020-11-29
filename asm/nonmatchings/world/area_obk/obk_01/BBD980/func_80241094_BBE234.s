@@ -13,9 +13,9 @@ glabel func_80241094_BBE234
 /* BBE254 802410B4 0C00A67F */  jal       rand_int
 /* BBE258 802410B8 24040003 */   addiu    $a0, $zero, 3
 /* BBE25C 802410BC 00021040 */  sll       $v0, $v0, 1
-/* BBE260 802410C0 3C018024 */  lui       $at, 0x8024
+/* BBE260 802410C0 3C018024 */  lui       $at, %hi(D_80244A54)
 /* BBE264 802410C4 00220821 */  addu      $at, $at, $v0
-/* BBE268 802410C8 84224A54 */  lh        $v0, 0x4a54($at)
+/* BBE268 802410C8 84224A54 */  lh        $v0, %lo(D_80244A54)($at)
 /* BBE26C 802410CC 24040032 */  addiu     $a0, $zero, 0x32
 /* BBE270 802410D0 0C00A67F */  jal       rand_int
 /* BBE274 802410D4 AE220078 */   sw       $v0, 0x78($s1)

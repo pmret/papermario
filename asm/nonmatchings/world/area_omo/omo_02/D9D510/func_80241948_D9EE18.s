@@ -13,8 +13,8 @@ glabel func_80241948_D9EE18
 /* D9EE38 80241968 AFB00010 */  sw        $s0, 0x10($sp)
 /* D9EE3C 8024196C F7B40028 */  sdc1      $f20, 0x28($sp)
 /* D9EE40 80241970 8E330148 */  lw        $s3, 0x148($s1)
-/* D9EE44 80241974 3C03800A */  lui       $v1, 0x800a
-/* D9EE48 80241978 8463A634 */  lh        $v1, -0x59cc($v1)
+/* D9EE44 80241974 3C03800A */  lui       $v1, %hi(D_8009A634)
+/* D9EE48 80241978 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
 /* D9EE4C 8024197C 8E30000C */  lw        $s0, 0xc($s1)
 /* D9EE50 80241980 00031080 */  sll       $v0, $v1, 2
 /* D9EE54 80241984 00431021 */  addu      $v0, $v0, $v1
@@ -45,8 +45,8 @@ glabel func_80241948_D9EE18
 /* D9EEB8 802419E8 00000000 */   nop      
 /* D9EEBC 802419EC 0C00A6C9 */  jal       clamp_angle
 /* D9EEC0 802419F0 46000306 */   mov.s    $f12, $f0
-/* D9EEC4 802419F4 3C018024 */  lui       $at, 0x8024
-/* D9EEC8 802419F8 D4227BB8 */  ldc1      $f2, 0x7bb8($at)
+/* D9EEC4 802419F4 3C018024 */  lui       $at, %hi(D_80247BB8)
+/* D9EEC8 802419F8 D4227BB8 */  ldc1      $f2, %lo(D_80247BB8)($at)
 /* D9EECC 802419FC 46000021 */  cvt.d.s   $f0, $f0
 /* D9EED0 80241A00 4622003C */  c.lt.d    $f0, $f2
 /* D9EED4 80241A04 00000000 */  nop       
@@ -67,8 +67,8 @@ glabel func_80241948_D9EE18
 /* D9EF0C 80241A3C 0C00A70A */  jal       get_clamped_angle_diff
 /* D9EF10 80241A40 46000386 */   mov.s    $f14, $f0
 /* D9EF14 80241A44 46000005 */  abs.s     $f0, $f0
-/* D9EF18 80241A48 3C018024 */  lui       $at, 0x8024
-/* D9EF1C 80241A4C D4227BC0 */  ldc1      $f2, 0x7bc0($at)
+/* D9EF18 80241A48 3C018024 */  lui       $at, %hi(D_80247BC0)
+/* D9EF1C 80241A4C D4227BC0 */  ldc1      $f2, %lo(D_80247BC0)($at)
 /* D9EF20 80241A50 46000021 */  cvt.d.s   $f0, $f0
 /* D9EF24 80241A54 4620103C */  c.lt.d    $f2, $f0
 /* D9EF28 80241A58 00000000 */  nop       
@@ -89,8 +89,8 @@ glabel func_80241948_D9EE18
 /* D9EF64 80241A94 00000000 */  nop       
 /* D9EF68 80241A98 4501001F */  bc1t      .L80241B18
 /* D9EF6C 80241A9C 2402FFFF */   addiu    $v0, $zero, -1
-/* D9EF70 80241AA0 3C038011 */  lui       $v1, 0x8011
-/* D9EF74 80241AA4 8063EBB3 */  lb        $v1, -0x144d($v1)
+/* D9EF70 80241AA0 3C038011 */  lui       $v1, %hi(D_8010EBB3)
+/* D9EF74 80241AA4 8063EBB3 */  lb        $v1, %lo(D_8010EBB3)($v1)
 /* D9EF78 80241AA8 24020009 */  addiu     $v0, $zero, 9
 /* D9EF7C 80241AAC 10620019 */  beq       $v1, $v0, .L80241B14
 /* D9EF80 80241AB0 24020007 */   addiu    $v0, $zero, 7

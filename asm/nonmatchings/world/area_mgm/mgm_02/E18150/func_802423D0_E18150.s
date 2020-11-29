@@ -3,8 +3,8 @@
 
 glabel func_802423D0_E18150
 /* E18150 802423D0 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* E18154 802423D4 3C048025 */  lui       $a0, 0x8025
-/* E18158 802423D8 248484C0 */  addiu     $a0, $a0, -0x7b40
+/* E18154 802423D4 3C048025 */  lui       $a0, %hi(D_802484C0)
+/* E18158 802423D8 248484C0 */  addiu     $a0, $a0, %lo(D_802484C0)
 /* E1815C 802423DC AFBF0010 */  sw        $ra, 0x10($sp)
 /* E18160 802423E0 0C0496CB */  jal       set_message_images
 /* E18164 802423E4 00000000 */   nop      

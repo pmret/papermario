@@ -4,14 +4,14 @@
 glabel func_80243FC4_A2E204
 /* A2E204 80243FC4 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* A2E208 80243FC8 0000202D */  daddu     $a0, $zero, $zero
-/* A2E20C 80243FCC 3C058024 */  lui       $a1, 0x8024
-/* A2E210 80243FD0 24A53CC0 */  addiu     $a1, $a1, 0x3cc0
+/* A2E20C 80243FCC 3C058024 */  lui       $a1, %hi(D_80243CC0)
+/* A2E210 80243FD0 24A53CC0 */  addiu     $a1, $a1, %lo(D_80243CC0)
 /* A2E214 80243FD4 AFBF0014 */  sw        $ra, 0x14($sp)
 /* A2E218 80243FD8 0C048C8F */  jal       bind_dynamic_entity_7
 /* A2E21C 80243FDC AFB00010 */   sw       $s0, 0x10($sp)
 /* A2E220 80243FE0 3C040001 */  lui       $a0, 1
-/* A2E224 80243FE4 3C108025 */  lui       $s0, 0x8025
-/* A2E228 80243FE8 2610AA20 */  addiu     $s0, $s0, -0x55e0
+/* A2E224 80243FE4 3C108025 */  lui       $s0, %hi(D_8024AA20)
+/* A2E228 80243FE8 2610AA20 */  addiu     $s0, $s0, %lo(D_8024AA20)
 /* A2E22C 80243FEC 8E030000 */  lw        $v1, ($s0)
 /* A2E230 80243FF0 3484D420 */  ori       $a0, $a0, 0xd420
 /* A2E234 80243FF4 0C0475F9 */  jal       func_8011D7E4

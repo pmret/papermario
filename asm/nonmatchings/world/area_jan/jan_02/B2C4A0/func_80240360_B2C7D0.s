@@ -4,8 +4,8 @@
 glabel func_80240360_B2C7D0
 /* B2C7D0 80240360 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* B2C7D4 80240364 AFB00010 */  sw        $s0, 0x10($sp)
-/* B2C7D8 80240368 3C108024 */  lui       $s0, 0x8024
-/* B2C7DC 8024036C 26102BD8 */  addiu     $s0, $s0, 0x2bd8
+/* B2C7D8 80240368 3C108024 */  lui       $s0, %hi(D_80242BD8)
+/* B2C7DC 8024036C 26102BD8 */  addiu     $s0, $s0, %lo(D_80242BD8)
 /* B2C7E0 80240370 AFBF0014 */  sw        $ra, 0x14($sp)
 /* B2C7E4 80240374 8E020000 */  lw        $v0, ($s0)
 /* B2C7E8 80240378 3C038016 */  lui       $v1, %hi(gCollisionStatus+0x2)

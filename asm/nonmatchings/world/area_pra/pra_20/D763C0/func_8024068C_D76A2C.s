@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel func_8024068C_D76A2C
-/* D76A2C 8024068C 3C03800A */  lui       $v1, 0x800a
-/* D76A30 80240690 8463A634 */  lh        $v1, -0x59cc($v1)
+/* D76A2C 8024068C 3C03800A */  lui       $v1, %hi(D_8009A634)
+/* D76A30 80240690 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
 /* D76A34 80240694 3C07BF80 */  lui       $a3, 0xbf80
 /* D76A38 80240698 27BDFEC0 */  addiu     $sp, $sp, -0x140
 /* D76A3C 8024069C F7B40128 */  sdc1      $f20, 0x128($sp)
@@ -22,9 +22,9 @@ glabel func_8024068C_D76A2C
 /* D76A70 802406D0 000218C0 */  sll       $v1, $v0, 3
 /* D76A74 802406D4 00431021 */  addu      $v0, $v0, $v1
 /* D76A78 802406D8 000210C0 */  sll       $v0, $v0, 3
-/* D76A7C 802406DC 3C01800B */  lui       $at, 0x800b
+/* D76A7C 802406DC 3C01800B */  lui       $at, %hi(D_800B1DEC)
 /* D76A80 802406E0 00220821 */  addu      $at, $at, $v0
-/* D76A84 802406E4 C4361DEC */  lwc1      $f22, 0x1dec($at)
+/* D76A84 802406E4 C4361DEC */  lwc1      $f22, %lo(D_800B1DEC)($at)
 /* D76A88 802406E8 4406A000 */  mfc1      $a2, $f20
 /* D76A8C 802406EC 4600B587 */  neg.s     $f22, $f22
 /* D76A90 802406F0 4405B000 */  mfc1      $a1, $f22

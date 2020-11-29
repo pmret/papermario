@@ -4,14 +4,14 @@
 glabel func_80242F74_A2D1B4
 /* A2D1B4 80242F74 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* A2D1B8 80242F78 AFB1001C */  sw        $s1, 0x1c($sp)
-/* A2D1BC 80242F7C 3C118025 */  lui       $s1, 0x8025
-/* A2D1C0 80242F80 2631A9C8 */  addiu     $s1, $s1, -0x5638
+/* A2D1BC 80242F7C 3C118025 */  lui       $s1, %hi(D_8024A9C8)
+/* A2D1C0 80242F80 2631A9C8 */  addiu     $s1, $s1, %lo(D_8024A9C8)
 /* A2D1C4 80242F84 3C028007 */  lui       $v0, %hi(gCurrentCameraID)
 /* A2D1C8 80242F88 8C427410 */  lw        $v0, %lo(gCurrentCameraID)($v0)
-/* A2D1CC 80242F8C 3C018025 */  lui       $at, 0x8025
-/* A2D1D0 80242F90 C42C987C */  lwc1      $f12, -0x6784($at)
-/* A2D1D4 80242F94 3C018025 */  lui       $at, 0x8025
-/* A2D1D8 80242F98 C42E98A8 */  lwc1      $f14, -0x6758($at)
+/* A2D1CC 80242F8C 3C018025 */  lui       $at, %hi(D_8024987C)
+/* A2D1D0 80242F90 C42C987C */  lwc1      $f12, %lo(D_8024987C)($at)
+/* A2D1D4 80242F94 3C018025 */  lui       $at, %hi(D_802498A8)
+/* A2D1D8 80242F98 C42E98A8 */  lwc1      $f14, %lo(D_802498A8)($at)
 /* A2D1DC 80242F9C 3C03800B */  lui       $v1, %hi(gCameras)
 /* A2D1E0 80242FA0 24631D80 */  addiu     $v1, $v1, %lo(gCameras)
 /* A2D1E4 80242FA4 AFBF0020 */  sw        $ra, 0x20($sp)

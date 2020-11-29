@@ -38,8 +38,8 @@ glabel func_80242C14_A1DD14
 /* A1DD98 80242C98 0220202D */  daddu     $a0, $s1, $zero
 /* A1DD9C 80242C9C 3C05F4AC */  lui       $a1, 0xf4ac
 /* A1DDA0 80242CA0 34A5D481 */  ori       $a1, $a1, 0xd481
-/* A1DDA4 80242CA4 3C108025 */  lui       $s0, 0x8025
-/* A1DDA8 80242CA8 2610BDF0 */  addiu     $s0, $s0, -0x4210
+/* A1DDA4 80242CA4 3C108025 */  lui       $s0, %hi(D_8024BDF0)
+/* A1DDA8 80242CA8 2610BDF0 */  addiu     $s0, $s0, %lo(D_8024BDF0)
 /* A1DDAC 80242CAC 0C0B1EAF */  jal       get_variable
 /* A1DDB0 80242CB0 AE020000 */   sw       $v0, ($s0)
 /* A1DDB4 80242CB4 0220202D */  daddu     $a0, $s1, $zero
@@ -66,8 +66,8 @@ glabel func_80242C14_A1DD14
 /* A1DE08 80242D08 0000202D */   daddu    $a0, $zero, $zero
 /* A1DE0C 80242D0C 0220202D */  daddu     $a0, $s1, $zero
 /* A1DE10 80242D10 3C05F4AC */  lui       $a1, 0xf4ac
-/* A1DE14 80242D14 3C018025 */  lui       $at, 0x8025
-/* A1DE18 80242D18 AC22BDF4 */  sw        $v0, -0x420c($at)
+/* A1DE14 80242D14 3C018025 */  lui       $at, %hi(D_8024BDF4)
+/* A1DE18 80242D18 AC22BDF4 */  sw        $v0, %lo(D_8024BDF4)($at)
 /* A1DE1C 80242D1C 0C0B1EAF */  jal       get_variable
 /* A1DE20 80242D20 34A5D481 */   ori      $a1, $a1, 0xd481
 /* A1DE24 80242D24 0220202D */  daddu     $a0, $s1, $zero
@@ -98,16 +98,16 @@ glabel func_80242C14_A1DD14
 /* A1DE88 80242D88 E7A00010 */   swc1     $f0, 0x10($sp)
 /* A1DE8C 80242D8C 8E030000 */  lw        $v1, ($s0)
 /* A1DE90 80242D90 8C64000C */  lw        $a0, 0xc($v1)
-/* A1DE94 80242D94 3C018025 */  lui       $at, 0x8025
-/* A1DE98 80242D98 AC22BDF8 */  sw        $v0, -0x4208($at)
+/* A1DE94 80242D94 3C018025 */  lui       $at, %hi(D_8024BDF8)
+/* A1DE98 80242D98 AC22BDF8 */  sw        $v0, %lo(D_8024BDF8)($at)
 /* A1DE9C 80242D9C AC800018 */  sw        $zero, 0x18($a0)
 /* A1DEA0 80242DA0 AC800020 */  sw        $zero, 0x20($a0)
 /* A1DEA4 80242DA4 AC800024 */  sw        $zero, 0x24($a0)
 /* A1DEA8 80242DA8 AC800028 */  sw        $zero, 0x28($a0)
 /* A1DEAC 80242DAC AC80001C */  sw        $zero, 0x1c($a0)
 .L80242DB0:
-/* A1DEB0 80242DB0 3C028025 */  lui       $v0, 0x8025
-/* A1DEB4 80242DB4 8C42BDF0 */  lw        $v0, -0x4210($v0)
+/* A1DEB0 80242DB0 3C028025 */  lui       $v0, %hi(D_8024BDF0)
+/* A1DEB4 80242DB4 8C42BDF0 */  lw        $v0, %lo(D_8024BDF0)($v0)
 /* A1DEB8 80242DB8 8C44000C */  lw        $a0, 0xc($v0)
 /* A1DEBC 80242DBC 8C820020 */  lw        $v0, 0x20($a0)
 /* A1DEC0 80242DC0 8C830028 */  lw        $v1, 0x28($a0)

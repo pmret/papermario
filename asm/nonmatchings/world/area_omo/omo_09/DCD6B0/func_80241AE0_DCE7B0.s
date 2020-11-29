@@ -124,9 +124,9 @@ glabel func_80241AE0_DCE7B0
 /* DCE974 80241CA4 2C620064 */  sltiu     $v0, $v1, 0x64
 /* DCE978 80241CA8 10400042 */  beqz      $v0, .L80241DB4
 /* DCE97C 80241CAC 00031080 */   sll      $v0, $v1, 2
-/* DCE980 80241CB0 3C018025 */  lui       $at, 0x8025
+/* DCE980 80241CB0 3C018025 */  lui       $at, %hi(D_8024A7E0)
 /* DCE984 80241CB4 00220821 */  addu      $at, $at, $v0
-/* DCE988 80241CB8 8C22A7E0 */  lw        $v0, -0x5820($at)
+/* DCE988 80241CB8 8C22A7E0 */  lw        $v0, %lo(D_8024A7E0)($at)
 /* DCE98C 80241CBC 00400008 */  jr        $v0
 /* DCE990 80241CC0 00000000 */   nop      
 /* DCE994 80241CC4 0280202D */  daddu     $a0, $s4, $zero

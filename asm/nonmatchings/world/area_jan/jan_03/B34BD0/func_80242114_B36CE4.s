@@ -49,8 +49,8 @@ glabel func_80242114_B36CE4
 /* B36D88 802421B8 2413FFFC */  addiu     $s3, $zero, -4
 /* B36D8C 802421BC 24120011 */  addiu     $s2, $zero, 0x11
 /* B36D90 802421C0 3C11FF7F */  lui       $s1, 0xff7f
-/* B36D94 802421C4 3C028015 */  lui       $v0, 0x8015
-/* B36D98 802421C8 8C4212F0 */  lw        $v0, 0x12f0($v0)
+/* B36D94 802421C4 3C028015 */  lui       $v0, %hi(D_801512F0)
+/* B36D98 802421C8 8C4212F0 */  lw        $v0, %lo(D_801512F0)($v0)
 /* B36D9C 802421CC 3631FFFF */  ori       $s1, $s1, 0xffff
 /* B36DA0 802421D0 A0400000 */  sb        $zero, ($v0)
 .L802421D4:

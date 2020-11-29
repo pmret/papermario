@@ -13,9 +13,9 @@ glabel func_8024116C_BD49DC
 /* BD49FC 8024118C 0C00A67F */  jal       rand_int
 /* BD4A00 80241190 24040003 */   addiu    $a0, $zero, 3
 /* BD4A04 80241194 00021040 */  sll       $v0, $v0, 1
-/* BD4A08 80241198 3C018024 */  lui       $at, 0x8024
+/* BD4A08 80241198 3C018024 */  lui       $at, %hi(D_80244FEC)
 /* BD4A0C 8024119C 00220821 */  addu      $at, $at, $v0
-/* BD4A10 802411A0 84224FEC */  lh        $v0, 0x4fec($at)
+/* BD4A10 802411A0 84224FEC */  lh        $v0, %lo(D_80244FEC)($at)
 /* BD4A14 802411A4 24040032 */  addiu     $a0, $zero, 0x32
 /* BD4A18 802411A8 0C00A67F */  jal       rand_int
 /* BD4A1C 802411AC AE220078 */   sw       $v0, 0x78($s1)

@@ -7,12 +7,12 @@ glabel func_802417C4_832FC4
 /* 832FCC 802417CC 8C82000C */  lw        $v0, 0xc($a0)
 /* 832FD0 802417D0 0C0B1EAF */  jal       get_variable
 /* 832FD4 802417D4 8C450000 */   lw       $a1, ($v0)
-/* 832FD8 802417D8 3C018025 */  lui       $at, 0x8025
-/* 832FDC 802417DC AC228C70 */  sw        $v0, -0x7390($at)
+/* 832FD8 802417D8 3C018025 */  lui       $at, %hi(D_80248C70)
+/* 832FDC 802417DC AC228C70 */  sw        $v0, %lo(D_80248C70)($at)
 /* 832FE0 802417E0 24020002 */  addiu     $v0, $zero, 2
 /* 832FE4 802417E4 8FBF0010 */  lw        $ra, 0x10($sp)
 /* 832FE8 802417E8 24030001 */  addiu     $v1, $zero, 1
-/* 832FEC 802417EC 3C018025 */  lui       $at, 0x8025
-/* 832FF0 802417F0 AC238C6C */  sw        $v1, -0x7394($at)
+/* 832FEC 802417EC 3C018025 */  lui       $at, %hi(D_80248C6C)
+/* 832FF0 802417F0 AC238C6C */  sw        $v1, %lo(D_80248C6C)($at)
 /* 832FF4 802417F4 03E00008 */  jr        $ra
 /* 832FF8 802417F8 27BD0018 */   addiu    $sp, $sp, 0x18

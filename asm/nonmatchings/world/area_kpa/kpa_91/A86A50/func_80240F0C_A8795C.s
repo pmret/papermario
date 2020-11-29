@@ -55,8 +55,8 @@ glabel func_80240F0C_A8795C
 /* A87A18 80240FC8 8C470030 */   lw       $a3, 0x30($v0)
 /* A87A1C 80240FCC C6020018 */  lwc1      $f2, 0x18($s0)
 /* A87A20 80240FD0 46020003 */  div.s     $f0, $f0, $f2
-/* A87A24 80240FD4 3C018024 */  lui       $at, 0x8024
-/* A87A28 80240FD8 D4225BD0 */  ldc1      $f2, 0x5bd0($at)
+/* A87A24 80240FD4 3C018024 */  lui       $at, %hi(D_80245BD0)
+/* A87A28 80240FD8 D4225BD0 */  ldc1      $f2, %lo(D_80245BD0)($at)
 /* A87A2C 80240FDC 46000021 */  cvt.d.s   $f0, $f0
 /* A87A30 80240FE0 46220000 */  add.d     $f0, $f0, $f2
 /* A87A34 80240FE4 4620010D */  trunc.w.d $f4, $f0

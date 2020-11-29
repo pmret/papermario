@@ -94,8 +94,8 @@ glabel func_8024036C_ACE4AC
 /* ACE60C 802404CC 3C014059 */  lui       $at, 0x4059
 /* ACE610 802404D0 44811800 */  mtc1      $at, $f3
 /* ACE614 802404D4 44801000 */  mtc1      $zero, $f2
-/* ACE618 802404D8 3C018024 */  lui       $at, 0x8024
-/* ACE61C 802404DC D4245F20 */  ldc1      $f4, 0x5f20($at)
+/* ACE618 802404D8 3C018024 */  lui       $at, %hi(D_80245F20)
+/* ACE61C 802404DC D4245F20 */  ldc1      $f4, %lo(D_80245F20)($at)
 /* ACE620 802404E0 46220003 */  div.d     $f0, $f0, $f2
 /* ACE624 802404E4 46240000 */  add.d     $f0, $f0, $f4
 /* ACE628 802404E8 C7A20020 */  lwc1      $f2, 0x20($sp)

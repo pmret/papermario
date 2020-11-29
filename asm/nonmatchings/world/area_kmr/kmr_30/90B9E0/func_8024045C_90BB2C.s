@@ -8,8 +8,8 @@ glabel func_8024045C_90BB2C
 /* 90BB38 80240468 0C0B1EAF */  jal       get_variable
 /* 90BB3C 8024046C 8C450000 */   lw       $a1, ($v0)
 /* 90BB40 80240470 8FBF0010 */  lw        $ra, 0x10($sp)
-/* 90BB44 80240474 3C018024 */  lui       $at, 0x8024
-/* 90BB48 80240478 AC220C0C */  sw        $v0, 0xc0c($at)
+/* 90BB44 80240474 3C018024 */  lui       $at, %hi(D_80240C0C)
+/* 90BB48 80240478 AC220C0C */  sw        $v0, %lo(D_80240C0C)($at)
 /* 90BB4C 8024047C 24020002 */  addiu     $v0, $zero, 2
 /* 90BB50 80240480 03E00008 */  jr        $ra
 /* 90BB54 80240484 27BD0018 */   addiu    $sp, $sp, 0x18

@@ -15,7 +15,7 @@ glabel func_80240A48_AB0A38
 /* AB0A60 80240A70 8FBF0014 */  lw        $ra, 0x14($sp)
 /* AB0A64 80240A74 8FB00010 */  lw        $s0, 0x10($sp)
 /* AB0A68 80240A78 24020002 */  addiu     $v0, $zero, 2
-/* AB0A6C 80240A7C 3C018024 */  lui       $at, 0x8024
-/* AB0A70 80240A80 AC232344 */  sw        $v1, 0x2344($at)
+/* AB0A6C 80240A7C 3C018024 */  lui       $at, %hi(D_80242344)
+/* AB0A70 80240A80 AC232344 */  sw        $v1, %lo(D_80242344)($at)
 /* AB0A74 80240A84 03E00008 */  jr        $ra
 /* AB0A78 80240A88 27BD0018 */   addiu    $sp, $sp, 0x18

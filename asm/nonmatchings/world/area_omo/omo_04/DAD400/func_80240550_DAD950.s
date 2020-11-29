@@ -104,8 +104,8 @@ glabel func_80240550_DAD950
 /* DADAD4 802406D4 1040000A */  beqz      $v0, .L80240700
 /* DADAD8 802406D8 4600C106 */   mov.s    $f4, $f24
 /* DADADC 802406DC 4614C081 */  sub.s     $f2, $f24, $f20
-/* DADAE0 802406E0 3C018024 */  lui       $at, 0x8024
-/* DADAE4 802406E4 D4204CB8 */  ldc1      $f0, 0x4cb8($at)
+/* DADAE0 802406E0 3C018024 */  lui       $at, %hi(D_80244CB8)
+/* DADAE4 802406E4 D4204CB8 */  ldc1      $f0, %lo(D_80244CB8)($at)
 /* DADAE8 802406E8 460010A1 */  cvt.d.s   $f2, $f2
 /* DADAEC 802406EC 46201082 */  mul.d     $f2, $f2, $f0
 /* DADAF0 802406F0 00000000 */  nop       

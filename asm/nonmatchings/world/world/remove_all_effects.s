@@ -6,8 +6,8 @@ glabel remove_all_effects
 /* 358E4 8005A4E4 AFB20018 */  sw        $s2, 0x18($sp)
 /* 358E8 8005A4E8 0000902D */  daddu     $s2, $zero, $zero
 /* 358EC 8005A4EC AFB10014 */  sw        $s1, 0x14($sp)
-/* 358F0 8005A4F0 3C11800B */  lui       $s1, 0x800b
-/* 358F4 8005A4F4 26314398 */  addiu     $s1, $s1, 0x4398
+/* 358F0 8005A4F0 3C11800B */  lui       $s1, %hi(D_800B4398)
+/* 358F4 8005A4F4 26314398 */  addiu     $s1, $s1, %lo(D_800B4398)
 /* 358F8 8005A4F8 AFBF001C */  sw        $ra, 0x1c($sp)
 /* 358FC 8005A4FC AFB00010 */  sw        $s0, 0x10($sp)
 .L8005A500:

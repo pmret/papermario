@@ -2,12 +2,12 @@
 .set noreorder # don't insert nops after branches
 
 glabel func_80240448_B141B8
-/* B141B8 80240448 3C068024 */  lui       $a2, 0x8024
-/* B141BC 8024044C 8CC60B00 */  lw        $a2, 0xb00($a2)
+/* B141B8 80240448 3C068024 */  lui       $a2, %hi(D_80240B00)
+/* B141BC 8024044C 8CC60B00 */  lw        $a2, %lo(D_80240B00)($a2)
 /* B141C0 80240450 18C00011 */  blez      $a2, .L80240498
 /* B141C4 80240454 3C02FC12 */   lui      $v0, 0xfc12
-/* B141C8 80240458 3C04800A */  lui       $a0, 0x800a
-/* B141CC 8024045C 2484A66C */  addiu     $a0, $a0, -0x5994
+/* B141C8 80240458 3C04800A */  lui       $a0, %hi(D_8009A66C)
+/* B141CC 8024045C 2484A66C */  addiu     $a0, $a0, %lo(D_8009A66C)
 /* B141D0 80240460 8C830000 */  lw        $v1, ($a0)
 /* B141D4 80240464 34427E24 */  ori       $v0, $v0, 0x7e24
 /* B141D8 80240468 0060282D */  daddu     $a1, $v1, $zero

@@ -100,9 +100,9 @@ glabel func_8024061C_C4FB2C
 /* C4FC90 80240780 2C620064 */  sltiu     $v0, $v1, 0x64
 /* C4FC94 80240784 10400048 */  beqz      $v0, .L802408A8
 /* C4FC98 80240788 00031080 */   sll      $v0, $v1, 2
-/* C4FC9C 8024078C 3C018024 */  lui       $at, 0x8024
+/* C4FC9C 8024078C 3C018024 */  lui       $at, %hi(D_80242CF8)
 /* C4FCA0 80240790 00220821 */  addu      $at, $at, $v0
-/* C4FCA4 80240794 8C222CF8 */  lw        $v0, 0x2cf8($at)
+/* C4FCA4 80240794 8C222CF8 */  lw        $v0, %lo(D_80242CF8)($at)
 /* C4FCA8 80240798 00400008 */  jr        $v0
 /* C4FCAC 8024079C 00000000 */   nop      
 /* C4FCB0 802407A0 0240202D */  daddu     $a0, $s2, $zero

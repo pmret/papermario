@@ -5,8 +5,8 @@ glabel func_802400EC_D7648C
 /* D7648C 802400EC 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* D76490 802400F0 AFB00010 */  sw        $s0, 0x10($sp)
 /* D76494 802400F4 0080802D */  daddu     $s0, $a0, $zero
-/* D76498 802400F8 3C058024 */  lui       $a1, 0x8024
-/* D7649C 802400FC 24A50128 */  addiu     $a1, $a1, 0x128
+/* D76498 802400F8 3C058024 */  lui       $a1, %hi(D_80240128)
+/* D7649C 802400FC 24A50128 */  addiu     $a1, $a1, %lo(D_80240128)
 /* D764A0 80240100 AFBF0014 */  sw        $ra, 0x14($sp)
 /* D764A4 80240104 0C048C56 */  jal       bind_dynamic_entity_3
 /* D764A8 80240108 0000202D */   daddu    $a0, $zero, $zero

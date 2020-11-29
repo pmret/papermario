@@ -3,8 +3,8 @@
 
 glabel func_80241780_E13EE0
 /* E13EE0 80241780 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* E13EE4 80241784 3C048024 */  lui       $a0, 0x8024
-/* E13EE8 80241788 24843560 */  addiu     $a0, $a0, 0x3560
+/* E13EE4 80241784 3C048024 */  lui       $a0, %hi(D_80243560)
+/* E13EE8 80241788 24843560 */  addiu     $a0, $a0, %lo(D_80243560)
 /* E13EEC 8024178C AFBF0010 */  sw        $ra, 0x10($sp)
 /* E13EF0 80241790 0C0496CB */  jal       set_message_images
 /* E13EF4 80241794 00000000 */   nop      

@@ -108,9 +108,9 @@ glabel func_80240E20_C3EA10
 /* C3EB94 80240FA4 2C620064 */  sltiu     $v0, $v1, 0x64
 /* C3EB98 80240FA8 10400067 */  beqz      $v0, .L80241148
 /* C3EB9C 80240FAC 00031080 */   sll      $v0, $v1, 2
-/* C3EBA0 80240FB0 3C018024 */  lui       $at, 0x8024
+/* C3EBA0 80240FB0 3C018024 */  lui       $at, %hi(D_80241EA0)
 /* C3EBA4 80240FB4 00220821 */  addu      $at, $at, $v0
-/* C3EBA8 80240FB8 8C221EA0 */  lw        $v0, 0x1ea0($at)
+/* C3EBA8 80240FB8 8C221EA0 */  lw        $v0, %lo(D_80241EA0)($at)
 /* C3EBAC 80240FBC 00400008 */  jr        $v0
 /* C3EBB0 80240FC0 00000000 */   nop      
 /* C3EBB4 80240FC4 0240202D */  daddu     $a0, $s2, $zero

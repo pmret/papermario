@@ -124,9 +124,9 @@ glabel func_80240C18_DCD8E8
 /* DCDAAC 80240DDC 2C620064 */  sltiu     $v0, $v1, 0x64
 /* DCDAB0 80240DE0 10400050 */  beqz      $v0, .L80240F24
 /* DCDAB4 80240DE4 00031080 */   sll      $v0, $v1, 2
-/* DCDAB8 80240DE8 3C018025 */  lui       $at, 0x8025
+/* DCDAB8 80240DE8 3C018025 */  lui       $at, %hi(D_8024A640)
 /* DCDABC 80240DEC 00220821 */  addu      $at, $at, $v0
-/* DCDAC0 80240DF0 8C22A640 */  lw        $v0, -0x59c0($at)
+/* DCDAC0 80240DF0 8C22A640 */  lw        $v0, %lo(D_8024A640)($at)
 /* DCDAC4 80240DF4 00400008 */  jr        $v0
 /* DCDAC8 80240DF8 00000000 */   nop      
 /* DCDACC 80240DFC 0260202D */  daddu     $a0, $s3, $zero

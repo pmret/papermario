@@ -3,8 +3,8 @@
 
 glabel func_802405E8_800E68
 /* 800E68 802405E8 3C05D9FB */  lui       $a1, 0xd9fb
-/* 800E6C 802405EC 3C04800A */  lui       $a0, 0x800a
-/* 800E70 802405F0 2484A66C */  addiu     $a0, $a0, -0x5994
+/* 800E6C 802405EC 3C04800A */  lui       $a0, %hi(D_8009A66C)
+/* 800E70 802405F0 2484A66C */  addiu     $a0, $a0, %lo(D_8009A66C)
 /* 800E74 802405F4 8C820000 */  lw        $v0, ($a0)
 /* 800E78 802405F8 34A5FFFF */  ori       $a1, $a1, 0xffff
 /* 800E7C 802405FC 0040182D */  daddu     $v1, $v0, $zero

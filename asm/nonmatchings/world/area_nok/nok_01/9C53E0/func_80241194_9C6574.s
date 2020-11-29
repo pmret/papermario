@@ -21,8 +21,8 @@ glabel func_80241194_9C6574
 /* 9C65B4 802411D4 2414FFFC */  addiu     $s4, $zero, -4
 /* 9C65B8 802411D8 2413000F */  addiu     $s3, $zero, 0xf
 /* 9C65BC 802411DC 3C120080 */  lui       $s2, 0x80
-/* 9C65C0 802411E0 3C038015 */  lui       $v1, 0x8015
-/* 9C65C4 802411E4 8C6312F0 */  lw        $v1, 0x12f0($v1)
+/* 9C65C0 802411E0 3C038015 */  lui       $v1, %hi(D_801512F0)
+/* 9C65C4 802411E4 8C6312F0 */  lw        $v1, %lo(D_801512F0)($v1)
 /* 9C65C8 802411E8 24020001 */  addiu     $v0, $zero, 1
 /* 9C65CC 802411EC 0C046F97 */  jal       set_background_color_blend
 /* 9C65D0 802411F0 A0620000 */   sb       $v0, ($v1)

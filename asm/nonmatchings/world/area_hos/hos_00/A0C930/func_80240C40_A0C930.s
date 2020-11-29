@@ -32,8 +32,8 @@ glabel func_80240C40_A0C930
 /* A0C994 80240CA4 3C07FCFF */  lui       $a3, 0xfcff
 /* A0C998 80240CA8 34E7C7FF */  ori       $a3, $a3, 0xc7ff
 /* A0C99C 80240CAC 3C06FF8E */  lui       $a2, 0xff8e
-/* A0C9A0 80240CB0 3C04800A */  lui       $a0, 0x800a
-/* A0C9A4 80240CB4 2484A66C */  addiu     $a0, $a0, -0x5994
+/* A0C9A0 80240CB0 3C04800A */  lui       $a0, %hi(D_8009A66C)
+/* A0C9A4 80240CB4 2484A66C */  addiu     $a0, $a0, %lo(D_8009A66C)
 /* A0C9A8 80240CB8 8C820000 */  lw        $v0, ($a0)
 /* A0C9AC 80240CBC 34C67F3F */  ori       $a2, $a2, 0x7f3f
 /* A0C9B0 80240CC0 0040182D */  daddu     $v1, $v0, $zero

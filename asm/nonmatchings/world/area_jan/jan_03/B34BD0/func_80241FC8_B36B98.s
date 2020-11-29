@@ -21,8 +21,8 @@ glabel func_80241FC8_B36B98
 /* B36BD8 80242008 2414FFFC */  addiu     $s4, $zero, -4
 /* B36BDC 8024200C 24130011 */  addiu     $s3, $zero, 0x11
 /* B36BE0 80242010 3C120080 */  lui       $s2, 0x80
-/* B36BE4 80242014 3C038015 */  lui       $v1, 0x8015
-/* B36BE8 80242018 8C6312F0 */  lw        $v1, 0x12f0($v1)
+/* B36BE4 80242014 3C038015 */  lui       $v1, %hi(D_801512F0)
+/* B36BE8 80242018 8C6312F0 */  lw        $v1, %lo(D_801512F0)($v1)
 /* B36BEC 8024201C 24020001 */  addiu     $v0, $zero, 1
 /* B36BF0 80242020 0C046F97 */  jal       set_background_color_blend
 /* B36BF4 80242024 A0620000 */   sb       $v0, ($v1)

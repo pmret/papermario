@@ -4,8 +4,8 @@
 glabel func_80240F20_D56AD0
 /* D56AD0 80240F20 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* D56AD4 80240F24 AFB00010 */  sw        $s0, 0x10($sp)
-/* D56AD8 80240F28 3C108024 */  lui       $s0, 0x8024
-/* D56ADC 80240F2C 26101680 */  addiu     $s0, $s0, 0x1680
+/* D56AD8 80240F28 3C108024 */  lui       $s0, %hi(D_80241680)
+/* D56ADC 80240F2C 26101680 */  addiu     $s0, $s0, %lo(D_80241680)
 /* D56AE0 80240F30 AFBF0018 */  sw        $ra, 0x18($sp)
 /* D56AE4 80240F34 AFB10014 */  sw        $s1, 0x14($sp)
 /* D56AE8 80240F38 8E020000 */  lw        $v0, ($s0)
@@ -39,8 +39,8 @@ glabel func_80240F20_D56AD0
 /* D56B4C 80240F9C 28620010 */  slti      $v0, $v1, 0x10
 /* D56B50 80240FA0 1440FFFA */  bnez      $v0, .L80240F8C
 /* D56B54 80240FA4 24840004 */   addiu    $a0, $a0, 4
-/* D56B58 80240FA8 3C108024 */  lui       $s0, 0x8024
-/* D56B5C 80240FAC 26101680 */  addiu     $s0, $s0, 0x1680
+/* D56B58 80240FA8 3C108024 */  lui       $s0, %hi(D_80241680)
+/* D56B5C 80240FAC 26101680 */  addiu     $s0, $s0, %lo(D_80241680)
 /* D56B60 80240FB0 0C00AB4B */  jal       heap_free
 /* D56B64 80240FB4 8E040000 */   lw       $a0, ($s0)
 /* D56B68 80240FB8 AE000000 */  sw        $zero, ($s0)

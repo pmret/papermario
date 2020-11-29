@@ -3,8 +3,8 @@
 
 glabel func_8024349C_A1E59C
 /* A1E59C 8024349C 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* A1E5A0 802434A0 3C058025 */  lui       $a1, 0x8025
-/* A1E5A4 802434A4 8CA5BDE8 */  lw        $a1, -0x4218($a1)
+/* A1E5A0 802434A0 3C058025 */  lui       $a1, %hi(D_8024BDE8)
+/* A1E5A4 802434A4 8CA5BDE8 */  lw        $a1, %lo(D_8024BDE8)($a1)
 /* A1E5A8 802434A8 AFBF0010 */  sw        $ra, 0x10($sp)
 /* A1E5AC 802434AC 0C0B1EAF */  jal       get_variable
 /* A1E5B0 802434B0 0000202D */   daddu    $a0, $zero, $zero

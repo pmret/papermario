@@ -27,8 +27,8 @@ glabel func_80240994_A0C684
 /* A0C6DC 802409EC 8E060038 */  lw        $a2, 0x38($s0)
 /* A0C6E0 802409F0 0C00A720 */  jal       atan2
 /* A0C6E4 802409F4 8E070040 */   lw       $a3, 0x40($s0)
-/* A0C6E8 802409F8 3C138024 */  lui       $s3, 0x8024
-/* A0C6EC 802409FC 26732B9C */  addiu     $s3, $s3, 0x2b9c
+/* A0C6E8 802409F8 3C138024 */  lui       $s3, %hi(D_80242B9C)
+/* A0C6EC 802409FC 26732B9C */  addiu     $s3, $s3, %lo(D_80242B9C)
 /* A0C6F0 80240A00 3C128024 */  lui       $s2, %hi(pause_set_cursor_opacity)
 /* A0C6F4 80240A04 26522BA0 */  addiu     $s2, $s2, %lo(pause_set_cursor_opacity)
 /* A0C6F8 80240A08 C66C0000 */  lwc1      $f12, ($s3)

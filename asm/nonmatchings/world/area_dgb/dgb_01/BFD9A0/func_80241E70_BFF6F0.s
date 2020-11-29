@@ -18,8 +18,8 @@ glabel func_80241E70_BFF6F0
 /* BFF724 80241EA4 28420003 */  slti      $v0, $v0, 3
 /* BFF728 80241EA8 1440000D */  bnez      $v0, .L80241EE0
 /* BFF72C 80241EAC 24020009 */   addiu    $v0, $zero, 9
-/* BFF730 80241EB0 3C038011 */  lui       $v1, 0x8011
-/* BFF734 80241EB4 8063EBB3 */  lb        $v1, -0x144d($v1)
+/* BFF730 80241EB0 3C038011 */  lui       $v1, %hi(D_8010EBB3)
+/* BFF734 80241EB4 8063EBB3 */  lb        $v1, %lo(D_8010EBB3)($v1)
 /* BFF738 80241EB8 10620003 */  beq       $v1, $v0, .L80241EC8
 /* BFF73C 80241EBC 24020064 */   addiu    $v0, $zero, 0x64
 /* BFF740 80241EC0 080907B7 */  j         .L80241EDC

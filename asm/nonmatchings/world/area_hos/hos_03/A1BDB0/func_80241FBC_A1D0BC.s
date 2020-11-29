@@ -66,9 +66,9 @@ glabel func_80241FBC_A1D0BC
 /* A1D1A8 802420A8 2C62000F */  sltiu     $v0, $v1, 0xf
 /* A1D1AC 802420AC 10400034 */  beqz      $v0, .L80242180
 /* A1D1B0 802420B0 00031080 */   sll      $v0, $v1, 2
-/* A1D1B4 802420B4 3C018025 */  lui       $at, 0x8025
+/* A1D1B4 802420B4 3C018025 */  lui       $at, %hi(D_8024BD88)
 /* A1D1B8 802420B8 00220821 */  addu      $at, $at, $v0
-/* A1D1BC 802420BC 8C22BD88 */  lw        $v0, -0x4278($at)
+/* A1D1BC 802420BC 8C22BD88 */  lw        $v0, %lo(D_8024BD88)($at)
 /* A1D1C0 802420C0 00400008 */  jr        $v0
 /* A1D1C4 802420C4 00000000 */   nop      
 /* A1D1C8 802420C8 0280202D */  daddu     $a0, $s4, $zero

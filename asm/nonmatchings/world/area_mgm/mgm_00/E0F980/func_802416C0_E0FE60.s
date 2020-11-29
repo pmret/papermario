@@ -5,8 +5,8 @@ glabel func_802416C0_E0FE60
 /* E0FE60 802416C0 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* E0FE64 802416C4 2402002D */  addiu     $v0, $zero, 0x2d
 /* E0FE68 802416C8 AFA20010 */  sw        $v0, 0x10($sp)
-/* E0FE6C 802416CC 3C028024 */  lui       $v0, 0x8024
-/* E0FE70 802416D0 24421540 */  addiu     $v0, $v0, 0x1540
+/* E0FE6C 802416CC 3C028024 */  lui       $v0, %hi(D_80241540)
+/* E0FE70 802416D0 24421540 */  addiu     $v0, $v0, %lo(D_80241540)
 /* E0FE74 802416D4 27A40010 */  addiu     $a0, $sp, 0x10
 /* E0FE78 802416D8 AFBF0020 */  sw        $ra, 0x20($sp)
 /* E0FE7C 802416DC AFA00018 */  sw        $zero, 0x18($sp)

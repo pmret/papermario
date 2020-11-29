@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel func_802402F0_D55EA0
-/* D55EA0 802402F0 3C03800A */  lui       $v1, 0x800a
-/* D55EA4 802402F4 8463A634 */  lh        $v1, -0x59cc($v1)
+/* D55EA0 802402F0 3C03800A */  lui       $v1, %hi(D_8009A634)
+/* D55EA4 802402F4 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
 /* D55EA8 802402F8 3C07BF80 */  lui       $a3, 0xbf80
 /* D55EAC 802402FC 27BDFEC0 */  addiu     $sp, $sp, -0x140
 /* D55EB0 80240300 F7B40128 */  sdc1      $f20, 0x128($sp)
@@ -22,9 +22,9 @@ glabel func_802402F0_D55EA0
 /* D55EE4 80240334 000218C0 */  sll       $v1, $v0, 3
 /* D55EE8 80240338 00431021 */  addu      $v0, $v0, $v1
 /* D55EEC 8024033C 000210C0 */  sll       $v0, $v0, 3
-/* D55EF0 80240340 3C01800B */  lui       $at, 0x800b
+/* D55EF0 80240340 3C01800B */  lui       $at, %hi(D_800B1DEC)
 /* D55EF4 80240344 00220821 */  addu      $at, $at, $v0
-/* D55EF8 80240348 C4361DEC */  lwc1      $f22, 0x1dec($at)
+/* D55EF8 80240348 C4361DEC */  lwc1      $f22, %lo(D_800B1DEC)($at)
 /* D55EFC 8024034C 4406A000 */  mfc1      $a2, $f20
 /* D55F00 80240350 4600B587 */  neg.s     $f22, $f22
 /* D55F04 80240354 4405B000 */  mfc1      $a1, $f22

@@ -66,9 +66,9 @@ glabel func_80241B2C_C6FE5C
 /* C6FF48 80241C18 2C62000F */  sltiu     $v0, $v1, 0xf
 /* C6FF4C 80241C1C 10400034 */  beqz      $v0, .L80241CF0
 /* C6FF50 80241C20 00031080 */   sll      $v0, $v1, 2
-/* C6FF54 80241C24 3C018024 */  lui       $at, 0x8024
+/* C6FF54 80241C24 3C018024 */  lui       $at, %hi(D_802430A8)
 /* C6FF58 80241C28 00220821 */  addu      $at, $at, $v0
-/* C6FF5C 80241C2C 8C2230A8 */  lw        $v0, 0x30a8($at)
+/* C6FF5C 80241C2C 8C2230A8 */  lw        $v0, %lo(D_802430A8)($at)
 /* C6FF60 80241C30 00400008 */  jr        $v0
 /* C6FF64 80241C34 00000000 */   nop      
 /* C6FF68 80241C38 0280202D */  daddu     $a0, $s4, $zero

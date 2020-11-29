@@ -66,9 +66,9 @@ glabel func_802413AC_BAECEC
 /* BAEDD8 80241498 2C62000F */  sltiu     $v0, $v1, 0xf
 /* BAEDDC 8024149C 10400034 */  beqz      $v0, .L80241570
 /* BAEDE0 802414A0 00031080 */   sll      $v0, $v1, 2
-/* BAEDE4 802414A4 3C018024 */  lui       $at, 0x8024
+/* BAEDE4 802414A4 3C018024 */  lui       $at, %hi(D_802452B8)
 /* BAEDE8 802414A8 00220821 */  addu      $at, $at, $v0
-/* BAEDEC 802414AC 8C2252B8 */  lw        $v0, 0x52b8($at)
+/* BAEDEC 802414AC 8C2252B8 */  lw        $v0, %lo(D_802452B8)($at)
 /* BAEDF0 802414B0 00400008 */  jr        $v0
 /* BAEDF4 802414B4 00000000 */   nop      
 /* BAEDF8 802414B8 0280202D */  daddu     $a0, $s4, $zero

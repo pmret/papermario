@@ -8,8 +8,8 @@ glabel func_80242F14_A1E014
 /* A1E020 80242F20 0C0B1EAF */  jal       get_variable
 /* A1E024 80242F24 8C450000 */   lw       $a1, ($v0)
 /* A1E028 80242F28 0040202D */  daddu     $a0, $v0, $zero
-/* A1E02C 80242F2C 3C028025 */  lui       $v0, 0x8025
-/* A1E030 80242F30 8C42BDF0 */  lw        $v0, -0x4210($v0)
+/* A1E02C 80242F2C 3C028025 */  lui       $v0, %hi(D_8024BDF0)
+/* A1E030 80242F30 8C42BDF0 */  lw        $v0, %lo(D_8024BDF0)($v0)
 /* A1E034 80242F34 24030001 */  addiu     $v1, $zero, 1
 /* A1E038 80242F38 8C45000C */  lw        $a1, 0xc($v0)
 /* A1E03C 80242F3C 1083000D */  beq       $a0, $v1, .L80242F74

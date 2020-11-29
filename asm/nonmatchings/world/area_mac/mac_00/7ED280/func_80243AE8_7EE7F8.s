@@ -15,7 +15,7 @@ glabel func_80243AE8_7EE7F8
 /* 7EE820 80243B10 8FBF0014 */  lw        $ra, 0x14($sp)
 /* 7EE824 80243B14 8FB00010 */  lw        $s0, 0x10($sp)
 /* 7EE828 80243B18 24020002 */  addiu     $v0, $zero, 2
-/* 7EE82C 80243B1C 3C018025 */  lui       $at, 0x8025
-/* 7EE830 80243B20 AC2360A4 */  sw        $v1, 0x60a4($at)
+/* 7EE82C 80243B1C 3C018025 */  lui       $at, %hi(D_802560A4)
+/* 7EE830 80243B20 AC2360A4 */  sw        $v1, %lo(D_802560A4)($at)
 /* 7EE834 80243B24 03E00008 */  jr        $ra
 /* 7EE838 80243B28 27BD0018 */   addiu    $sp, $sp, 0x18

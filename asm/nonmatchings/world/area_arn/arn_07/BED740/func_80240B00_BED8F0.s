@@ -104,8 +104,8 @@ glabel func_80240B00_BED8F0
 /* BEDA74 80240C84 1040000A */  beqz      $v0, .L80240CB0
 /* BEDA78 80240C88 4600C106 */   mov.s    $f4, $f24
 /* BEDA7C 80240C8C 4614C081 */  sub.s     $f2, $f24, $f20
-/* BEDA80 80240C90 3C018024 */  lui       $at, 0x8024
-/* BEDA84 80240C94 D4207958 */  ldc1      $f0, 0x7958($at)
+/* BEDA80 80240C90 3C018024 */  lui       $at, %hi(D_80247958)
+/* BEDA84 80240C94 D4207958 */  ldc1      $f0, %lo(D_80247958)($at)
 /* BEDA88 80240C98 460010A1 */  cvt.d.s   $f2, $f2
 /* BEDA8C 80240C9C 46201082 */  mul.d     $f2, $f2, $f0
 /* BEDA90 80240CA0 00000000 */  nop       
@@ -131,8 +131,8 @@ glabel func_80240B00_BED8F0
 /* BEDADC 80240CEC C7A4002C */  lwc1      $f4, 0x2c($sp)
 /* BEDAE0 80240CF0 461A2100 */  add.s     $f4, $f4, $f26
 /* BEDAE4 80240CF4 46142081 */  sub.s     $f2, $f4, $f20
-/* BEDAE8 80240CF8 3C018024 */  lui       $at, 0x8024
-/* BEDAEC 80240CFC D4207960 */  ldc1      $f0, 0x7960($at)
+/* BEDAE8 80240CF8 3C018024 */  lui       $at, %hi(D_80247960)
+/* BEDAEC 80240CFC D4207960 */  ldc1      $f0, %lo(D_80247960)($at)
 /* BEDAF0 80240D00 460010A1 */  cvt.d.s   $f2, $f2
 /* BEDAF4 80240D04 46201082 */  mul.d     $f2, $f2, $f0
 /* BEDAF8 80240D08 00000000 */  nop       

@@ -38,8 +38,8 @@ glabel func_8024230C_B36EDC
 /* B36F60 80242390 0220202D */  daddu     $a0, $s1, $zero
 /* B36F64 80242394 3C05F4AC */  lui       $a1, 0xf4ac
 /* B36F68 80242398 34A5D481 */  ori       $a1, $a1, 0xd481
-/* B36F6C 8024239C 3C108025 */  lui       $s0, 0x8025
-/* B36F70 802423A0 2610FEF8 */  addiu     $s0, $s0, -0x108
+/* B36F6C 8024239C 3C108025 */  lui       $s0, %hi(D_8024FEF8)
+/* B36F70 802423A0 2610FEF8 */  addiu     $s0, $s0, %lo(D_8024FEF8)
 /* B36F74 802423A4 0C0B1EAF */  jal       get_variable
 /* B36F78 802423A8 AE020000 */   sw       $v0, ($s0)
 /* B36F7C 802423AC 0220202D */  daddu     $a0, $s1, $zero
@@ -66,8 +66,8 @@ glabel func_8024230C_B36EDC
 /* B36FD0 80242400 0000202D */   daddu    $a0, $zero, $zero
 /* B36FD4 80242404 0220202D */  daddu     $a0, $s1, $zero
 /* B36FD8 80242408 3C05F4AC */  lui       $a1, 0xf4ac
-/* B36FDC 8024240C 3C018025 */  lui       $at, 0x8025
-/* B36FE0 80242410 AC22FEFC */  sw        $v0, -0x104($at)
+/* B36FDC 8024240C 3C018025 */  lui       $at, %hi(D_8024FEFC)
+/* B36FE0 80242410 AC22FEFC */  sw        $v0, %lo(D_8024FEFC)($at)
 /* B36FE4 80242414 0C0B1EAF */  jal       get_variable
 /* B36FE8 80242418 34A5D481 */   ori      $a1, $a1, 0xd481
 /* B36FEC 8024241C 0220202D */  daddu     $a0, $s1, $zero
@@ -98,16 +98,16 @@ glabel func_8024230C_B36EDC
 /* B37050 80242480 E7A00010 */   swc1     $f0, 0x10($sp)
 /* B37054 80242484 8E030000 */  lw        $v1, ($s0)
 /* B37058 80242488 8C64000C */  lw        $a0, 0xc($v1)
-/* B3705C 8024248C 3C018025 */  lui       $at, 0x8025
-/* B37060 80242490 AC22FF00 */  sw        $v0, -0x100($at)
+/* B3705C 8024248C 3C018025 */  lui       $at, %hi(D_8024FF00)
+/* B37060 80242490 AC22FF00 */  sw        $v0, %lo(D_8024FF00)($at)
 /* B37064 80242494 AC800018 */  sw        $zero, 0x18($a0)
 /* B37068 80242498 AC800020 */  sw        $zero, 0x20($a0)
 /* B3706C 8024249C AC800024 */  sw        $zero, 0x24($a0)
 /* B37070 802424A0 AC800028 */  sw        $zero, 0x28($a0)
 /* B37074 802424A4 AC80001C */  sw        $zero, 0x1c($a0)
 .L802424A8:
-/* B37078 802424A8 3C028025 */  lui       $v0, 0x8025
-/* B3707C 802424AC 8C42FEF8 */  lw        $v0, -0x108($v0)
+/* B37078 802424A8 3C028025 */  lui       $v0, %hi(D_8024FEF8)
+/* B3707C 802424AC 8C42FEF8 */  lw        $v0, %lo(D_8024FEF8)($v0)
 /* B37080 802424B0 8C44000C */  lw        $a0, 0xc($v0)
 /* B37084 802424B4 8C820020 */  lw        $v0, 0x20($a0)
 /* B37088 802424B8 8C830028 */  lw        $v1, 0x28($a0)

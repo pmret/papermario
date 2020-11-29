@@ -3,8 +3,8 @@
 
 glabel func_802416F8_CF9268
 /* CF9268 802416F8 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* CF926C 802416FC 3C058025 */  lui       $a1, 0x8025
-/* CF9270 80241700 8CA5DF10 */  lw        $a1, -0x20f0($a1)
+/* CF926C 802416FC 3C058025 */  lui       $a1, %hi(D_8024DF10)
+/* CF9270 80241700 8CA5DF10 */  lw        $a1, %lo(D_8024DF10)($a1)
 /* CF9274 80241704 AFBF0010 */  sw        $ra, 0x10($sp)
 /* CF9278 80241708 0C0B1EAF */  jal       get_variable
 /* CF927C 8024170C 0000202D */   daddu    $a0, $zero, $zero

@@ -30,9 +30,9 @@ glabel func_80240600_CAF340
 /* CAF3A4 80240664 000320C0 */  sll       $a0, $v1, 3
 /* CAF3A8 80240668 00641821 */  addu      $v1, $v1, $a0
 /* CAF3AC 8024066C 000318C0 */  sll       $v1, $v1, 3
-/* CAF3B0 80240670 3C01800B */  lui       $at, 0x800b
+/* CAF3B0 80240670 3C01800B */  lui       $at, %hi(D_800B1DEC)
 /* CAF3B4 80240674 00230821 */  addu      $at, $at, $v1
-/* CAF3B8 80240678 C42C1DEC */  lwc1      $f12, 0x1dec($at)
+/* CAF3B8 80240678 C42C1DEC */  lwc1      $f12, %lo(D_800B1DEC)($at)
 /* CAF3BC 8024067C 0C00A88D */  jal       sin_cos_deg
 /* CAF3C0 80240680 0040A82D */   daddu    $s5, $v0, $zero
 /* CAF3C4 80240684 1200005D */  beqz      $s0, .L802407FC
@@ -79,8 +79,8 @@ glabel func_80240600_CAF340
 /* CAF464 80240724 26100004 */   addiu    $s0, $s0, 4
 /* CAF468 80240728 0000882D */  daddu     $s1, $zero, $zero
 /* CAF46C 8024072C 0240802D */  daddu     $s0, $s2, $zero
-/* CAF470 80240730 3C148024 */  lui       $s4, 0x8024
-/* CAF474 80240734 26942008 */  addiu     $s4, $s4, 0x2008
+/* CAF470 80240730 3C148024 */  lui       $s4, %hi(D_80242008)
+/* CAF474 80240734 26942008 */  addiu     $s4, $s4, %lo(D_80242008)
 /* CAF478 80240738 3C014248 */  lui       $at, 0x4248
 /* CAF47C 8024073C 4481A000 */  mtc1      $at, $f20
 /* CAF480 80240740 24130044 */  addiu     $s3, $zero, 0x44
@@ -150,8 +150,8 @@ glabel func_80240600_CAF340
 /* CAF574 80240834 00000000 */   nop      
 .L80240838:
 /* CAF578 80240838 0000882D */  daddu     $s1, $zero, $zero
-/* CAF57C 8024083C 3C148024 */  lui       $s4, 0x8024
-/* CAF580 80240840 26942008 */  addiu     $s4, $s4, 0x2008
+/* CAF57C 8024083C 3C148024 */  lui       $s4, %hi(D_80242008)
+/* CAF580 80240840 26942008 */  addiu     $s4, $s4, %lo(D_80242008)
 /* CAF584 80240844 24130020 */  addiu     $s3, $zero, 0x20
 /* CAF588 80240848 3C064248 */  lui       $a2, 0x4248
 /* CAF58C 8024084C 44800000 */  mtc1      $zero, $f0
@@ -197,8 +197,8 @@ glabel func_80240600_CAF340
 /* CAF628 802408E8 AE400060 */   sw       $zero, 0x60($s2)
 .L802408EC:
 /* CAF62C 802408EC 0000882D */  daddu     $s1, $zero, $zero
-/* CAF630 802408F0 3C148024 */  lui       $s4, 0x8024
-/* CAF634 802408F4 26942008 */  addiu     $s4, $s4, 0x2008
+/* CAF630 802408F0 3C148024 */  lui       $s4, %hi(D_80242008)
+/* CAF634 802408F4 26942008 */  addiu     $s4, $s4, %lo(D_80242008)
 /* CAF638 802408F8 24130020 */  addiu     $s3, $zero, 0x20
 /* CAF63C 802408FC 0240802D */  daddu     $s0, $s2, $zero
 /* CAF640 80240900 3C014248 */  lui       $at, 0x4248

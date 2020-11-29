@@ -319,8 +319,8 @@ glabel func_80240A98_CB9C98
 /* CBA13C 80240F3C 00000000 */  nop       
 /* CBA140 80240F40 3C04800A */  lui       $a0, %hi(nuGfxZBuffer)
 /* CBA144 80240F44 8C84A5DC */  lw        $a0, %lo(nuGfxZBuffer)($a0)
-/* CBA148 80240F48 3C12800A */  lui       $s2, 0x800a
-/* CBA14C 80240F4C 2652A66C */  addiu     $s2, $s2, -0x5994
+/* CBA148 80240F48 3C12800A */  lui       $s2, %hi(D_8009A66C)
+/* CBA14C 80240F4C 2652A66C */  addiu     $s2, $s2, %lo(D_8009A66C)
 /* CBA150 80240F50 AFB8003C */  sw        $t8, 0x3c($sp)
 /* CBA154 80240F54 8E510000 */  lw        $s1, ($s2)
 /* CBA158 80240F58 4604B002 */  mul.s     $f0, $f22, $f4
@@ -360,8 +360,8 @@ glabel func_80240A98_CB9C98
 /* CBA1E0 80240FE0 34A5F000 */  ori       $a1, $a1, 0xf000
 /* CBA1E4 80240FE4 AE22000C */  sw        $v0, 0xc($s1)
 /* CBA1E8 80240FE8 3C11E700 */  lui       $s1, 0xe700
-/* CBA1EC 80240FEC 3C04800A */  lui       $a0, 0x800a
-/* CBA1F0 80240FF0 8C84A64C */  lw        $a0, -0x59b4($a0)
+/* CBA1EC 80240FEC 3C04800A */  lui       $a0, %hi(D_8009A64C)
+/* CBA1F0 80240FF0 8C84A64C */  lw        $a0, %lo(D_8009A64C)($a0)
 /* CBA1F4 80240FF4 0200102D */  daddu     $v0, $s0, $zero
 /* CBA1F8 80240FF8 26100008 */  addiu     $s0, $s0, 8
 /* CBA1FC 80240FFC AE500000 */  sw        $s0, ($s2)

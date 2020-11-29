@@ -14,8 +14,8 @@ glabel func_802400A0_B9B520
 /* B9B544 802400C4 AFB20030 */  sw        $s2, 0x30($sp)
 /* B9B548 802400C8 0080902D */  daddu     $s2, $a0, $zero
 /* B9B54C 802400CC AFB1002C */  sw        $s1, 0x2c($sp)
-/* B9B550 802400D0 3C118024 */  lui       $s1, 0x8024
-/* B9B554 802400D4 263124E0 */  addiu     $s1, $s1, 0x24e0
+/* B9B550 802400D0 3C118024 */  lui       $s1, %hi(D_802424E0)
+/* B9B554 802400D4 263124E0 */  addiu     $s1, $s1, %lo(D_802424E0)
 /* B9B558 802400D8 AFBF0040 */  sw        $ra, 0x40($sp)
 /* B9B55C 802400DC AFB00028 */  sw        $s0, 0x28($sp)
 /* B9B560 802400E0 F7BE0070 */  sdc1      $f30, 0x70($sp)

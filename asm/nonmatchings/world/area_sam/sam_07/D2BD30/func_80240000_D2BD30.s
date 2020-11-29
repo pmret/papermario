@@ -24,8 +24,8 @@ glabel func_80240000_D2BD30
 /* D2BD7C 8024004C 0000982D */  daddu     $s3, $zero, $zero
 /* D2BD80 80240050 AEE20070 */  sw        $v0, 0x70($s7)
 /* D2BD84 80240054 0040882D */  daddu     $s1, $v0, $zero
-/* D2BD88 80240058 3C148024 */  lui       $s4, 0x8024
-/* D2BD8C 8024005C 269424C0 */  addiu     $s4, $s4, 0x24c0
+/* D2BD88 80240058 3C148024 */  lui       $s4, %hi(D_802424C0)
+/* D2BD8C 8024005C 269424C0 */  addiu     $s4, $s4, %lo(D_802424C0)
 /* D2BD90 80240060 2630003C */  addiu     $s0, $s1, 0x3c
 /* D2BD94 80240064 AEE00074 */  sw        $zero, 0x74($s7)
 .L80240068:
@@ -130,10 +130,10 @@ glabel func_80240000_D2BD30
 /* D2BF14 802401E4 26300024 */  addiu     $s0, $s1, 0x24
 /* D2BF18 802401E8 00131080 */  sll       $v0, $s3, 2
 .L802401EC:
-/* D2BF1C 802401EC 3C048024 */  lui       $a0, 0x8024
+/* D2BF1C 802401EC 3C048024 */  lui       $a0, %hi(D_802424C0)
 /* D2BF20 802401F0 00822021 */  addu      $a0, $a0, $v0
 /* D2BF24 802401F4 0C046C04 */  jal       get_model_list_index_from_tree_index
-/* D2BF28 802401F8 8C8424C0 */   lw       $a0, 0x24c0($a0)
+/* D2BF28 802401F8 8C8424C0 */   lw       $a0, %lo(D_802424C0)($a0)
 /* D2BF2C 802401FC 0C046B4C */  jal       get_model_from_list_index
 /* D2BF30 80240200 0040202D */   daddu    $a0, $v0, $zero
 /* D2BF34 80240204 8E230000 */  lw        $v1, ($s1)

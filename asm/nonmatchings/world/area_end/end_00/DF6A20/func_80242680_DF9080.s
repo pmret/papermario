@@ -11,8 +11,8 @@ glabel func_80242680_DF9080
 /* DF9098 80242698 8C450000 */   lw       $a1, ($v0)
 /* DF909C 8024269C 24030100 */  addiu     $v1, $zero, 0x100
 /* DF90A0 802426A0 0040882D */  daddu     $s1, $v0, $zero
-/* DF90A4 802426A4 3C028024 */  lui       $v0, 0x8024
-/* DF90A8 802426A8 24424D74 */  addiu     $v0, $v0, 0x4d74
+/* DF90A4 802426A4 3C028024 */  lui       $v0, %hi(D_80244D74)
+/* DF90A8 802426A8 24424D74 */  addiu     $v0, $v0, %lo(D_80244D74)
 /* DF90AC 802426AC 00118040 */  sll       $s0, $s1, 1
 /* DF90B0 802426B0 02118021 */  addu      $s0, $s0, $s1
 /* DF90B4 802426B4 001080C0 */  sll       $s0, $s0, 3
@@ -24,8 +24,8 @@ glabel func_80242680_DF9080
 /* DF90CC 802426CC AFA20014 */  sw        $v0, 0x14($sp)
 /* DF90D0 802426D0 8E050004 */  lw        $a1, 4($s0)
 /* DF90D4 802426D4 24020001 */  addiu     $v0, $zero, 1
-/* DF90D8 802426D8 3C01802E */  lui       $at, 0x802e
-/* DF90DC 802426DC AC22F524 */  sw        $v0, -0xadc($at)
+/* DF90D8 802426D8 3C01802E */  lui       $at, %hi(D_802DF524)
+/* DF90DC 802426DC AC22F524 */  sw        $v0, %lo(D_802DF524)($at)
 /* DF90E0 802426E0 0C00E219 */  jal       create_standard_npc
 /* DF90E4 802426E4 27A40010 */   addiu    $a0, $sp, 0x10
 /* DF90E8 802426E8 0C00E2B7 */  jal       get_npc_by_index

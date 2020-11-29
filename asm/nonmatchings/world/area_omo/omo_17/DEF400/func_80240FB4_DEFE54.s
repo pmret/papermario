@@ -87,8 +87,8 @@ glabel func_80240FB4_DEFE54
 /* DEFF94 802410F4 08090447 */  j         .L8024111C
 /* DEFF98 802410F8 E6000018 */   swc1     $f0, 0x18($s0)
 .L802410FC:
-/* DEFF9C 802410FC 3C018024 */  lui       $at, 0x8024
-/* DEFFA0 80241100 D4227950 */  ldc1      $f2, 0x7950($at)
+/* DEFF9C 802410FC 3C018024 */  lui       $at, %hi(D_80247950)
+/* DEFFA0 80241100 D4227950 */  ldc1      $f2, %lo(D_80247950)($at)
 /* DEFFA4 80241104 44820000 */  mtc1      $v0, $f0
 /* DEFFA8 80241108 00000000 */  nop       
 /* DEFFAC 8024110C 46800021 */  cvt.d.w   $f0, $f0

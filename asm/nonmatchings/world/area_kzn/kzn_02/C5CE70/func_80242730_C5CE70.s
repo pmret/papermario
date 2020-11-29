@@ -3,8 +3,8 @@
 
 glabel func_80242730_C5CE70
 /* C5CE70 80242730 27BDFFD8 */  addiu     $sp, $sp, -0x28
-/* C5CE74 80242734 3C048024 */  lui       $a0, 0x8024
-/* C5CE78 80242738 248464A4 */  addiu     $a0, $a0, 0x64a4
+/* C5CE74 80242734 3C048024 */  lui       $a0, %hi(D_802464A4)
+/* C5CE78 80242738 248464A4 */  addiu     $a0, $a0, %lo(D_802464A4)
 /* C5CE7C 8024273C AFBF0018 */  sw        $ra, 0x18($sp)
 /* C5CE80 80242740 AFB10014 */  sw        $s1, 0x14($sp)
 /* C5CE84 80242744 AFB00010 */  sw        $s0, 0x10($sp)
@@ -34,8 +34,8 @@ glabel func_80242730_C5CE70
 /* C5CED8 80242798 08090A01 */  j         .L80242804
 /* C5CEDC 8024279C AC820000 */   sw       $v0, ($a0)
 .L802427A0:
-/* C5CEE0 802427A0 3C108011 */  lui       $s0, 0x8011
-/* C5CEE4 802427A4 2610C930 */  addiu     $s0, $s0, -0x36d0
+/* C5CEE0 802427A0 3C108011 */  lui       $s0, %hi(D_8010C930)
+/* C5CEE4 802427A4 2610C930 */  addiu     $s0, $s0, %lo(D_8010C930)
 /* C5CEE8 802427A8 0C03BD17 */  jal       clear_partner_move_history
 /* C5CEEC 802427AC 8E040000 */   lw       $a0, ($s0)
 /* C5CEF0 802427B0 C6200028 */  lwc1      $f0, 0x28($s1)
