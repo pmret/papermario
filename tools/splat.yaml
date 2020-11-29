@@ -277,7 +277,7 @@ segments:
     files:
     - [0xfee30, c, code_fee30_len_2d60]
     - [0x101b90, c, code_101b90_len_8f0]
-    - [0x102480, bin]
+    - [0x102480, data, code_fee30_len_2d60]
   - type: code
     start: 0x102610
     vram: 0x802E0D90
