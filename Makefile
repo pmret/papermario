@@ -97,8 +97,10 @@ clean:
 clean-code:
 	rm -rf $(BUILD_DIR)/src
 
-setup: clean submodules split $(LD_SCRIPT)
+tools:
 	make -C tools
+
+setup: clean submodules tools split $(LD_SCRIPT)
 
 submodules:
 	git submodule update --init --recursive
@@ -258,7 +260,7 @@ include/ld_addrs.h: $(BUILD_DIR)/$(LD_SCRIPT)
 
 ### Make Settings ###
 
-.PHONY: clean test setup submodules split $(ROM) include/sprite
+.PHONY: clean tools test setup submodules split $(ROM) include/sprite
 .DELETE_ON_ERROR:
 .SECONDARY:
 .PRECIOUS: $(ROM) %.Yay0
