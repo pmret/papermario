@@ -21,9 +21,9 @@ typedef struct UnkAl48 {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ s32 unk_04;
     /* 0x08 */ char unk_08[4];
-    /* 0x0C */ u16 unk_0C;
-    /* 0x0E */ s8 unk_0E;
-    /* 0x0F */ s8 unk_0F;
+    /* 0x0C */ s16 unk_0C;
+    /* 0x0E */ u8 unk_0E;
+    /* 0x0F */ u8 unk_0F;
     /* 0x10 */ s8 unk_10;
     /* 0x11 */ char unk_11[0x31];
     /* 0x42 */ s8 unk_42;
@@ -34,9 +34,9 @@ typedef struct UnkAl48 {
 } UnkAl48; // size = 0x48
 
 typedef struct UnkAl19E0Sub {
-    /* 0x0 */ s16 unk_0;
-    /* 0x2 */ s16 unk_2;
-    /* 0x4 */ s16 unk_4;
+    /* 0x0 */ u16 unk_0;
+    /* 0x2 */ u16 unk_2;
+    /* 0x4 */ u16 unk_4;
 } UnkAl19E0Sub;
 
 typedef struct UnkAl19E0 {
@@ -90,8 +90,8 @@ typedef struct UnkAl19E0 {
     /* 0x1304 */ s32* unk_1304;
     /* 0x1308 */ s32* unk_1308;
     /* 0x130C */ char unk_130C[0x4];
-    /* 0x1310 */ s32** unk_1310;
-    /* 0x1314 */ char unk_1314[0xC];
+    /* 0x1310 */ s32* unk_1310[3];
+    /* 0x131C */ char unk_131C[4];
     /* 0x1320 */ UnkAl48 unk_1320[24];
 } UnkAl19E0; // size = 0x19E0
 
@@ -114,7 +114,7 @@ void func_800532F4(s32);
 void func_80053370(s32);
 void func_800533A8(alUnk2*);
 void al_LoadINIT(UnkAl19E0*, s32, ALHeap*);
-s32 al_CopyFileTableEntry(s16 arg0, s32 arg1, s32* arg2);
+s32 al_CopyFileTableEntry(u16 arg0, s32 arg1, s32* arg2);
 void al_LoadPER(UnkAl19E0*, s32*);
 void al_LoadPRG(UnkAl19E0*, s32*);
 void al_DmaCopy(s32*, s32*, s32);
@@ -138,6 +138,8 @@ void func_80052E5C(s32 arg0) {
     UnkAl48* temp5;
     u8 temp6[4];
     u8* temp7;
+    s32** temp8;
+
 
     alHeap = D_80078E54->unk_18;
     *temp_s4 = alHeapAlloc(alHeap, 1, 0x19E0);
@@ -185,20 +187,20 @@ void func_80052E5C(s32 arg0) {
         temp4->unk_40[i * 4 + 1] = 0;
     }
 
-    temp5 = temp4->unk_1320;
-    for (i = 0; i < 24u; i++) {
-        func_80056EC0(i, 0);
-        func_80057224(i, temp4->unk_04);
-        temp5[i].unk_00 = 0;
-        temp5[i].unk_04 = 0;
-        temp5[i].unk_0C = -1;
-        temp5[i].unk_0E = 0xFF;
-        temp5[i].unk_0F = 0xFF;
-        temp5[i].unk_10 = 0;
-        temp5[i].unk_42 = 0;
-        temp5[i].unk_43 = 0;
-        temp5[i].unk_44 = 0;
-        temp5[i].unk_45 = 0;
+    for (i = 0; i < 24; i++) {
+        func_80056EC0((u8)i, 0);
+        func_80057224((u8)i, temp4->unk_04);
+        temp5 = &temp4->unk_1320[i];
+        temp5->unk_00 = 0;
+        temp5->unk_04 = 0;
+        temp5->unk_0C = -1;
+        temp5->unk_0E = 0xFF;
+        temp5->unk_0F = 0xFF;
+        temp5->unk_10 = 0;
+        temp5->unk_42 = 0;
+        temp5->unk_43 = 0;
+        temp5->unk_44 = 0;
+        temp5->unk_45 = 0;
     }
 
     al_LoadINIT(temp4, 0xF00000, alHeap);
@@ -227,8 +229,8 @@ void func_80052E5C(s32 arg0) {
     func_80050B90(D_8009A628, 6, 1, temp4);
     func_80052614(temp4);
     al_LoadBKHeaders(temp4, alHeap);
-    if (al_CopyFileTableEntry(temp4->unk_3C->unk_0, 0x20, &subroutine_arg6) == 0) {
-        al_DmaCopy(&subroutine_arg6, temp4->unk_A0, (s32)(&subroutine_arg7) & 0xFFFFFF);
+    if (al_CopyFileTableEntry(temp4->unk_3C->unk_0, 0x20, &subroutine_arg7) == 0) {
+        al_DmaCopy(&subroutine_arg6, temp4->unk_A0, ((s32)&subroutine_arg8 & 0xFFFFFF));
     }
     func_8004B62C((*temp2_1));
     if (al_CopyFileTableEntry(temp4->unk_3C->unk_2, 0x40, &subroutine_arg6) == 0) {
@@ -238,14 +240,14 @@ void func_80052E5C(s32 arg0) {
         al_LoadPRG(temp4, subroutine_arg6);
     }
 
-    temp4->unk_12F0 = temp4->unk_5EC;
-    temp4->unk_12F4 = temp4->unk_AC;
-    temp4->unk_12F8 = temp4->unk_EC;
-    temp4->unk_12FC = temp4->unk_9EC;
-    temp4->unk_1300 = temp4->unk_DEC;
-    temp4->unk_12EC = temp4->unk_4EC;
-    temp4->unk_1304 = temp4->unk_11EC;
-    temp4->unk_1308 = temp4->unk_4EC;
+    temp4->unk_12EC = &temp4->unk_4EC;
+    temp4->unk_12F0 = &temp4->unk_5EC;
+    temp4->unk_12F4 = &temp4->unk_AC;
+    temp4->unk_12F8 = &temp4->unk_EC;
+    temp4->unk_12FC = &temp4->unk_9EC;
+    temp4->unk_1300 = &temp4->unk_DEC;
+    temp4->unk_1304 = &temp4->unk_11EC;
+    temp4->unk_1308 = &temp4->unk_4EC;
     temp4->unk_53 = 0;
     temp4->unk_52 = 0;
     temp4->unk_51 = 0;
@@ -335,7 +337,7 @@ INCLUDE_ASM(s32, "code_2e230_len_2190", func_80054248);
 
 INCLUDE_ASM(void, "code_2e230_len_2190", al_LoadINIT, UnkAl19E0* arg0, s32 arg1, ALHeap* arg2);
 
-INCLUDE_ASM(s32, "code_2e230_len_2190", al_CopyFileTableEntry, s16 arg0, s32 arg1, s32* arg2);
+INCLUDE_ASM(s32, "code_2e230_len_2190", al_CopyFileTableEntry, u16 arg0, s32 arg1, s32* arg2);
 
 INCLUDE_ASM(void, "code_2e230_len_2190", al_LoadPER, UnkAl19E0* arg0, s32* arg1);
 
