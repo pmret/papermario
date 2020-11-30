@@ -120,117 +120,129 @@ void al_LoadPRG(UnkAl19E0*, s32*);
 void al_DmaCopy(s32*, s32*, s32);
 s32* alHeapAlloc(ALHeap*, s32, s32);
 
-INCLUDE_ASM(s32, "code_2e230_len_2190", func_80052E5C);
-/*void func_80052E5C(s32 arg0) {
-    UnkAl19E0* temp_s4;
+//INCLUDE_ASM(s32, "code_2e230_len_2190", func_80052E5C);
+void func_80052E5C(s32 arg0) {
+    UnkAl19E0** temp_s4 = &D_8009A5C0;
+    UnkAl19E0* temp4;
     s32* temp_v0_2;
     ALHeap* alHeap;
     s32 i;
     s32* subroutine_arg6;
     s32* subroutine_arg7;
     s32* subroutine_arg8;
+    UnkAlA9C** temp1 = &D_8009A664;
+    UnkAl6CC** temp2 = &D_8009A640;
+    UnkAl6CC** temp2_1;
+    UnkAlA9C** temp3;
+    UnkAl48* temp5;
+
+
 
     alHeap = D_80078E54->unk_18;
-    D_8009A5C0 = alHeapAlloc(alHeap, 1, 0x19E0);
-    temp_s4 = D_8009A5C0;
+    *temp_s4 = alHeapAlloc(alHeap, 1, 0x19E0);
 
-    D_8009A664 = alHeapAlloc(alHeap, 1, 0xA9C);
+    (*temp1) = alHeapAlloc(alHeap, 1, 0xA9C);
     D_8009A5FC = alHeapAlloc(alHeap, 1, 0xA9C);
     D_8009A5CC = alHeapAlloc(alHeap, 1, 0xA9C);
-    D_8009A640 = alHeapAlloc(alHeap, 1, 0x6CC);
+    (*temp2) = alHeapAlloc(alHeap, 1, 0x6CC);
     D_8009A628 = alHeapAlloc(alHeap, 1, 0x834);
-    D_8009A628->unk_00 = D_8009A5C0;
-    D_8009A664->unk_04 = D_8009A640;
+    D_8009A628->unk_00 = *(temp_s4);
+    (*temp1)->unk_04 = (*temp2);
+
 
     temp_v0_2 = alHeapAlloc(alHeap, 1, 0x8000);
-    temp_s4->unk_5C = temp_v0_2[0];
-    temp_s4->unk_60 = temp_v0_2[0x1400];
-    temp_s4->unk_64 = temp_v0_2[0x1C00];
-    temp_s4->unk_68 = temp_v0_2[0x1400];
+    temp4 = *temp_s4;
+    temp4->unk_5C = temp_v0_2[0];
+    temp4->unk_60 = temp_v0_2[0x1400];
+    temp4->unk_64 = temp_v0_2[0x1C00];
+    temp4->unk_68 = temp_v0_2[0x1400];
 
     for (i = 0; i < 1; i++) {
-        temp_s4->unk_6C = alHeapAlloc(alHeap, 1, 0xA9C);
+        (*temp_s4)->unk_6C = alHeapAlloc(alHeap, 1, 0xA9C);
     }
 
-    temp_s4->unk_A0 = alHeapAlloc(alHeap, 1, 0x5200);
-    temp_s4->unk_04 = alHeapAlloc(alHeap, 1, 0x30);
-    temp_s4->unk_54 = alHeapAlloc(alHeap, 1, 0x360);
-    temp_s4->unk_58 = alHeapAlloc(alHeap, 1, 0x200);
-    temp_s4->unk_94 = alHeapAlloc(alHeap, 1, 0x40);
-    temp_s4->unk_00 = arg0;
-    func_800532F4(temp_s4->unk_04);
-    func_80053370(temp_s4->unk_08);
-    func_800533A8(temp_s4->unk_14);
+    temp4->unk_A0 = alHeapAlloc(alHeap, 1, 0x5200);
+    temp4->unk_04 = alHeapAlloc(alHeap, 1, 0x30);
+    temp4->unk_54 = alHeapAlloc(alHeap, 1, 0x360);
+    temp4->unk_58 = alHeapAlloc(alHeap, 1, 0x200);
+    temp4->unk_94 = alHeapAlloc(alHeap, 1, 0x40);
+    temp4->unk_00 = arg0;
+    func_800532F4((*temp_s4)->unk_04);
+    func_80053370((*temp_s4)->unk_08);
+    func_800533A8((*temp_s4)->unk_14);
     func_8005610C();
-    temp_s4->unk_A4 = 0;
-    temp_s4->unk_A8 = 0;
+    temp4->unk_A4 = 0;
+    temp4->unk_A8 = 0;
 
     for (i = 0; i < 1; i++) {
-        temp_s4->unk_70 = 0;
-        temp_s4->unk_71 = 0;
+        temp4->unk_70 = 0;
+        temp4->unk_71 = 0;
     }
 
     for (i = 0; i < 4; i++) {
-        temp_s4->unk_40[i * 4 + 0] = 0;
-        temp_s4->unk_40[i * 4 + 1] = 0;
+        temp4->unk_40[i * 4 + 0] = 0;
+        temp4->unk_40[i * 4 + 1] = 0;
     }
 
+    temp5 = temp4->unk_1320;
     for (i = 0; i < 24; i++) {
         func_80056EC0(i, 0);
-        func_80057224(i, temp_s4->unk_04);
-        temp_s4->unk_1320[i].unk_00 = 0;
-        temp_s4->unk_1320[i].unk_04 = 0;
-        temp_s4->unk_1320[i].unk_0C = -1;
-        temp_s4->unk_1320[i].unk_0E = 0xFF;
-        temp_s4->unk_1320[i].unk_0F = 0xFF;
-        temp_s4->unk_1320[i].unk_10 = 0;
-        temp_s4->unk_1320[i].unk_42 = 0;
-        temp_s4->unk_1320[i].unk_43 = 0;
-        temp_s4->unk_1320[i].unk_44 = 0;
-        temp_s4->unk_1320[i].unk_45 = 0;
+        func_80057224(i, temp4->unk_04);
+        temp5[i].unk_00 = 0;
+        temp5[i].unk_04 = 0;
+        temp5[i].unk_0C = -1;
+        temp5[i].unk_0E = 0xFF;
+        temp5[i].unk_0F = 0xFF;
+        temp5[i].unk_10 = 0;
+        temp5[i].unk_42 = 0;
+        temp5[i].unk_43 = 0;
+        temp5[i].unk_44 = 0;
+        temp5[i].unk_45 = 0;
     }
 
-    al_LoadINIT(temp_s4, 0xF00000, alHeap);
+    al_LoadINIT((*temp_s4), 0xF00000, alHeap);
 
     for (i = 0; i < 3; i++) {
-        temp_s4->unk_1310[i] = alHeapAlloc(alHeap, 1, 0x840);
+        (*temp_s4)->unk_1310[i] = alHeapAlloc(alHeap, 1, 0x840);
     }
 
-    func_8004E158(D_8009A664, 1, 0, temp_s4);
-    func_8004E344(D_8009A664, &subroutine_arg8, 0, 3, 0xFF, 0xFF);
-    func_8004E158(D_8009A5FC, 2, 2, temp_s4);
-    func_8004E344(D_8009A5FC, &subroutine_arg8, 2, 0xFF, 0xFF, 0xFF);
-    func_8004B440(D_8009A640, 4, 1, temp_s4, 0x10);
-    func_80050B90(D_8009A628, 6, 1, temp_s4);
-    func_80052614(temp_s4);
-    al_LoadBKHeaders(temp_s4, alHeap);
-    if (al_CopyFileTableEntry(temp_s4->unk_3C->unk_0, 0x20, &subroutine_arg6) == 0) {
-        al_DmaCopy(subroutine_arg6, temp_s4->unk_A0, *subroutine_arg7 & 0xFFFFFF);
+    temp2_1 = &D_8009A640;
+    temp3 = &D_8009A5FC;
+    func_8004E158((*temp1), 1, 0, (*temp_s4));
+    func_8004E344((*temp1), &subroutine_arg8, 0, 3, 0xFF, 0xFF);
+    func_8004E158((*temp3), 2, 2, (*temp_s4));
+    func_8004E344((*temp3), &subroutine_arg8, 2, 0xFF, 0xFF, 0xFF);
+    func_8004B440((*temp2_1), 4, 1, (*temp_s4), 0x10);
+    func_80050B90(D_8009A628, 6, 1, (*temp_s4));
+    func_80052614((*temp_s4));
+    al_LoadBKHeaders((*temp_s4), alHeap);
+    if (al_CopyFileTableEntry((*temp_s4)->unk_3C->unk_0, 0x20, &subroutine_arg6) == 0) {
+        al_DmaCopy(subroutine_arg6, (*temp_s4)->unk_A0, *subroutine_arg7 & 0xFFFFFF);
     }
-    func_8004B62C(D_8009A640);
-    if (al_CopyFileTableEntry(temp_s4->unk_3C->unk_2, 0x40, &subroutine_arg6) == 0) {
-        al_LoadPER(temp_s4, subroutine_arg6);
+    func_8004B62C((*temp2_1));
+    if (al_CopyFileTableEntry((*temp_s4)->unk_3C->unk_2, 0x40, &subroutine_arg6) == 0) {
+        al_LoadPER((*temp_s4), subroutine_arg6);
     }
-    if (al_CopyFileTableEntry(temp_s4->unk_3C->unk_4, 0x40, &subroutine_arg6) == 0) {
-        al_LoadPRG(temp_s4, subroutine_arg6);
+    if (al_CopyFileTableEntry((*temp_s4)->unk_3C->unk_4, 0x40, &subroutine_arg6) == 0) {
+        al_LoadPRG((*temp_s4), subroutine_arg6);
     }
 
-    temp_s4->unk_12F0 = temp_s4->unk_5EC;
-    temp_s4->unk_12F4 = temp_s4->unk_AC;
-    temp_s4->unk_12F8 = temp_s4->unk_EC;
-    temp_s4->unk_12FC = temp_s4->unk_9EC;
-    temp_s4->unk_1300 = temp_s4->unk_DEC;
-    temp_s4->unk_12EC = temp_s4->unk_4EC;
-    temp_s4->unk_1304 = temp_s4->unk_11EC;
-    temp_s4->unk_1308 = temp_s4->unk_4EC;
-    temp_s4->unk_53 = 0;
-    temp_s4->unk_52 = 0;
-    temp_s4->unk_51 = 0;
-    temp_s4->unk_50 = 0;
+    temp4->unk_12F0 = temp4->unk_5EC;
+    temp4->unk_12F4 = temp4->unk_AC;
+    temp4->unk_12F8 = temp4->unk_EC;
+    temp4->unk_12FC = temp4->unk_9EC;
+    temp4->unk_1300 = temp4->unk_DEC;
+    temp4->unk_12EC = temp4->unk_4EC;
+    temp4->unk_1304 = temp4->unk_11EC;
+    temp4->unk_1308 = temp4->unk_4EC;
+    temp4->unk_53 = 0;
+    temp4->unk_52 = 0;
+    temp4->unk_51 = 0;
+    temp4->unk_50 = 0;
 
     func_80057ED0(0);
     func_80055050(alHeap);
-}*/
+}
 
 INCLUDE_ASM(void, "code_2e230_len_2190", func_800532F4, s32 arg0);
 
