@@ -152,10 +152,10 @@ void func_80052E5C(s32 arg0) {
 
     temp_v0_2 = alHeapAlloc(alHeap, 1, 0x8000);
     temp4 = *temp_s4;
-    temp4->unk_5C = temp_v0_2[0];
-    temp4->unk_60 = temp_v0_2[0x1400];
-    temp4->unk_64 = temp_v0_2[0x1C00];
-    temp4->unk_68 = temp_v0_2[0x1400];
+    temp4->unk_5C = &temp_v0_2[0];
+    temp4->unk_60 = &temp_v0_2[0x1400];
+    temp4->unk_64 = &temp_v0_2[0x1C00];
+    temp4->unk_68 = &temp_v0_2[0x1400];
 
     for (i = 0; i < 1; i++) {
         (*temp_s4)->unk_6C = alHeapAlloc(alHeap, 1, 0xA9C);
