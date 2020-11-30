@@ -167,9 +167,9 @@ void func_80052E5C(s32 arg0) {
     temp4->unk_58 = alHeapAlloc(alHeap, 1, 0x200);
     temp4->unk_94 = alHeapAlloc(alHeap, 1, 0x40);
     temp4->unk_00 = arg0;
-    func_800532F4((*temp_s4)->unk_04);
-    func_80053370((*temp_s4)->unk_08);
-    func_800533A8((*temp_s4)->unk_14);
+    func_800532F4(temp4->unk_04);
+    func_80053370(temp4->unk_08);
+    func_800533A8(temp4->unk_14);
     func_8005610C();
     temp4->unk_A4 = 0;
     temp4->unk_A8 = 0;
@@ -200,31 +200,31 @@ void func_80052E5C(s32 arg0) {
         temp5[i].unk_45 = 0;
     }
 
-    al_LoadINIT((*temp_s4), 0xF00000, alHeap);
+    al_LoadINIT(temp4, 0xF00000, alHeap);
 
     for (i = 0; i < 3; i++) {
-        (*temp_s4)->unk_1310[i] = alHeapAlloc(alHeap, 1, 0x840);
+        temp4->unk_1310[i] = alHeapAlloc(alHeap, 1, 0x840);
     }
 
     temp2_1 = &D_8009A640;
     temp3 = &D_8009A5FC;
-    func_8004E158((*temp1), 1, 0, (*temp_s4));
+    func_8004E158((*temp1), 1, 0, temp4);
     func_8004E344((*temp1), &subroutine_arg8, 0, 3, 0xFF, 0xFF);
-    func_8004E158((*temp3), 2, 2, (*temp_s4));
+    func_8004E158((*temp3), 2, 2, temp4);
     func_8004E344((*temp3), &subroutine_arg8, 2, 0xFF, 0xFF, 0xFF);
-    func_8004B440((*temp2_1), 4, 1, (*temp_s4), 0x10);
-    func_80050B90(D_8009A628, 6, 1, (*temp_s4));
-    func_80052614((*temp_s4));
-    al_LoadBKHeaders((*temp_s4), alHeap);
-    if (al_CopyFileTableEntry((*temp_s4)->unk_3C->unk_0, 0x20, &subroutine_arg6) == 0) {
-        al_DmaCopy(subroutine_arg6, (*temp_s4)->unk_A0, *subroutine_arg7 & 0xFFFFFF);
+    func_8004B440((*temp2_1), 4, 1, temp4, 0x10);
+    func_80050B90(D_8009A628, 6, 1, temp4);
+    func_80052614(temp4);
+    al_LoadBKHeaders(temp4, alHeap);
+    if (al_CopyFileTableEntry(temp4->unk_3C->unk_0, 0x20, &subroutine_arg6) == 0) {
+        al_DmaCopy(subroutine_arg6, temp4->unk_A0, *subroutine_arg7 & 0xFFFFFF);
     }
     func_8004B62C((*temp2_1));
-    if (al_CopyFileTableEntry((*temp_s4)->unk_3C->unk_2, 0x40, &subroutine_arg6) == 0) {
-        al_LoadPER((*temp_s4), subroutine_arg6);
+    if (al_CopyFileTableEntry(temp4->unk_3C->unk_2, 0x40, &subroutine_arg6) == 0) {
+        al_LoadPER(temp4, subroutine_arg6);
     }
-    if (al_CopyFileTableEntry((*temp_s4)->unk_3C->unk_4, 0x40, &subroutine_arg6) == 0) {
-        al_LoadPRG((*temp_s4), subroutine_arg6);
+    if (al_CopyFileTableEntry(temp4->unk_3C->unk_4, 0x40, &subroutine_arg6) == 0) {
+        al_LoadPRG(temp4, subroutine_arg6);
     }
 
     temp4->unk_12F0 = temp4->unk_5EC;
