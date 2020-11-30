@@ -137,9 +137,7 @@ void func_80052E5C(s32 arg0) {
     s32* temp_v0_2;
     ALHeap* alHeap;
     u32 i;
-    s32 subroutine_arg6[1];
     s32 subroutine_arg7[2];
-    s32 subroutine_arg8[1];
     u8 temp6[4];
     UnkAlA9C** temp1 = &D_8009A664;
     UnkAlA9C** temp1_1;
