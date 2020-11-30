@@ -161,7 +161,7 @@ void func_80052E5C(s32 arg0) {
     temp4->unk_68 = &temp_v0_2[0x1400];
 
     for (i = 0; i < 1; i++) {
-        (*temp_s4)->unk_6C = alHeapAlloc(alHeap, 1, 0xA9C);
+        temp4->unk_6C = alHeapAlloc(alHeap, 1, 0xA9C);
     }
 
     temp4->unk_A0 = alHeapAlloc(alHeap, 1, 0x5200);
