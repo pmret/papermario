@@ -39,6 +39,18 @@ typedef struct UnkAl19E0Sub {
     /* 0x4 */ u16 unk_4;
 } UnkAl19E0Sub;
 
+typedef struct UnkAl19E0Sub2 {
+    /* 0x0 */ u8 unk_00;
+    /* 0x1 */ u8 unk_01;
+    /* 0x2 */ char unk_02[2];
+} UnkAl19E0Sub2;
+
+typedef struct UnkAl19E0Sub3 {
+    /* 0x00 */ UnkAlA9C* unk_0;
+    /* 0x04 */ s8 unk_4;
+    /* 0x05 */ s8 unk_5;
+} UnkAl19E0Sub3;
+
 typedef struct UnkAl19E0 {
     /* 0x0000 */ f32 unk_00;
     /* 0x0004 */ s32* unk_04;
@@ -47,7 +59,7 @@ typedef struct UnkAl19E0 {
     /* 0x0014 */ alUnk2* unk_14;
     /* 0x0018 */ char unk_18[0x24];
     /* 0x003C */ UnkAl19E0Sub* unk_3C;
-    /* 0x0040 */ s8 unk_40[16];
+    /* 0x0040 */ UnkAl19E0Sub2 unk_40[4];
     /* 0x0050 */ s8 unk_50;
     /* 0x0051 */ s8 unk_51;
     /* 0x0052 */ s8 unk_52;
@@ -58,10 +70,8 @@ typedef struct UnkAl19E0 {
     /* 0x0060 */ s32* unk_60;
     /* 0x0064 */ s32* unk_64;
     /* 0x0068 */ s32* unk_68;
-    /* 0x006C */ UnkAlA9C* unk_6C;
-    /* 0x0070 */ s8 unk_70;
-    /* 0x0071 */ s8 unk_71;
-    /* 0x0072 */ char unk_72[0x22];
+    /* 0x006C */ UnkAl19E0Sub3 unk_6C[1];
+    /* 0x0074 */ char unk_74[0x20];
     /* 0x0094 */ s32* unk_94;
     /* 0x0098 */ char unk_98[0x8];
     /* 0x00A0 */ s32* unk_A0;
@@ -140,7 +150,6 @@ void func_80052E5C(s32 arg0) {
     u8* temp7;
     s32** temp8;
 
-
     alHeap = D_80078E54->unk_18;
     *temp_s4 = alHeapAlloc(alHeap, 1, 0x19E0);
 
@@ -149,8 +158,8 @@ void func_80052E5C(s32 arg0) {
     D_8009A5CC = alHeapAlloc(alHeap, 1, 0xA9C);
     (*temp2) = alHeapAlloc(alHeap, 1, 0x6CC);
     D_8009A628 = alHeapAlloc(alHeap, 1, 0x834);
-    D_8009A628->unk_00 = *(temp_s4);
     (*temp1)->unk_04 = (*temp2);
+    D_8009A628->unk_00 = *(temp_s4);
 
 
     temp4 = *temp_s4;
@@ -161,7 +170,7 @@ void func_80052E5C(s32 arg0) {
     temp4->unk_68 = &temp_v0_2[0x1400];
 
     for (i = 0; i < 1; i++) {
-        temp4->unk_6C = alHeapAlloc(alHeap, 1, 0xA9C);
+        temp4->unk_6C[i].unk_0 = alHeapAlloc(alHeap, 1, 0xA9C);
     }
 
     temp4->unk_A0 = alHeapAlloc(alHeap, 1, 0x5200);
@@ -178,13 +187,13 @@ void func_80052E5C(s32 arg0) {
     temp4->unk_A8 = 0;
 
     for (i = 0; i < 1; i++) {
-        temp4->unk_70 = 0;
-        temp4->unk_71 = 0;
+        temp4->unk_6C[i].unk_4 = 0;
+        temp4->unk_6C[i].unk_5 = 0;
     }
 
     for (i = 0; i < 4; i++) {
-        temp4->unk_40[i * 4 + 0] = 0;
-        temp4->unk_40[i * 4 + 1] = 0;
+        temp4->unk_40[i].unk_00 = 0;
+        temp4->unk_40[i].unk_01 = 0;
     }
 
     for (i = 0; i < 24; i++) {
@@ -324,9 +333,9 @@ INCLUDE_ASM(s32, "code_2e230_len_2190", func_80053CF8);
 
 INCLUDE_ASM(s32, "code_2e230_len_2190", func_80053E58);
 
-s32 func_80053F64(s32 arg0) {
+UnkAlA9C* func_80053F64(s32 arg0) {
     if (arg0 == 0) {
-        return D_8009A5C0->unk_6C; // 0x6C
+        return D_8009A5C0->unk_6C[0].unk_0; // 0x6C
     }
     return 0;
 }
