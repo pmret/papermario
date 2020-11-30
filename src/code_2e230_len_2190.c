@@ -137,16 +137,16 @@ void func_80052E5C(s32 arg0) {
     s32* temp_v0_2;
     ALHeap* alHeap;
     u32 i;
-    s32* subroutine_arg6;
-    s32* subroutine_arg7;
-    s32* subroutine_arg8;
+    s32 subroutine_arg6[1];
+    s32 subroutine_arg7[2];
+    s32 subroutine_arg8[1];
+    u8 temp6[4];
     UnkAlA9C** temp1 = &D_8009A664;
     UnkAlA9C** temp1_1;
     UnkAl6CC** temp2 = &D_8009A640;
     UnkAl6CC** temp2_1;
     UnkAlA9C** temp3;
     UnkAl48* temp5;
-    u8 temp6[4];
     u8* temp7;
     s32** temp8;
 
@@ -239,14 +239,14 @@ void func_80052E5C(s32 arg0) {
     func_80052614(temp4);
     al_LoadBKHeaders(temp4, alHeap);
     if (al_CopyFileTableEntry(temp4->unk_3C->unk_0, 0x20, &subroutine_arg7) == 0) {
-        al_DmaCopy(&subroutine_arg6, temp4->unk_A0, ((s32)&subroutine_arg8 & 0xFFFFFF));
+        al_DmaCopy(subroutine_arg7[0], temp4->unk_A0, subroutine_arg7[1] & 0xFFFFFF);
     }
     func_8004B62C((*temp2_1));
-    if (al_CopyFileTableEntry(temp4->unk_3C->unk_2, 0x40, &subroutine_arg6) == 0) {
-        al_LoadPER(temp4, subroutine_arg6);
+    if (al_CopyFileTableEntry(temp4->unk_3C->unk_2, 0x40, subroutine_arg7) == 0) {
+        al_LoadPER(temp4, subroutine_arg7[0]);
     }
-    if (al_CopyFileTableEntry(temp4->unk_3C->unk_4, 0x40, &subroutine_arg6) == 0) {
-        al_LoadPRG(temp4, subroutine_arg6);
+    if (al_CopyFileTableEntry(temp4->unk_3C->unk_4, 0x40, &subroutine_arg7) == 0) {
+        al_LoadPRG(temp4, subroutine_arg7[0]);
     }
 
     temp4->unk_12EC = &temp4->unk_4EC;
