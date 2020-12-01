@@ -6,8 +6,8 @@ glabel nuBoot
 /* 39CB4 8005E8B4 AFBF001C */  sw        $ra, 0x1c($sp)
 /* 39CB8 8005E8B8 0C01A9C2 */  jal       osInitialize
 /* 39CBC 8005E8BC AFB00018 */   sw       $s0, 0x18($sp)
-/* 39CC0 8005E8C0 3C10800A */  lui       $s0, 0x800a
-/* 39CC4 8005E8C4 26104270 */  addiu     $s0, $s0, 0x4270
+/* 39CC0 8005E8C0 3C10800A */  lui       $s0, %hi(D_800A4270)
+/* 39CC4 8005E8C4 26104270 */  addiu     $s0, $s0, %lo(D_800A4270)
 /* 39CC8 8005E8C8 0200202D */  daddu     $a0, $s0, $zero
 /* 39CCC 8005E8CC 3C02800A */  lui       $v0, %hi(nuScStack)
 /* 39CD0 8005E8D0 244265D0 */  addiu     $v0, $v0, %lo(nuScStack)

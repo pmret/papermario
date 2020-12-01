@@ -16,15 +16,15 @@ glabel contReadData
 /* 3BB64 80060764 2484AC78 */  addiu     $a0, $a0, %lo(nuSiMesgQ)
 /* 3BB68 80060768 0C0195BC */  jal       osRecvMesg
 /* 3BB6C 8006076C 24060001 */   addiu    $a2, $zero, 1
-/* 3BB70 80060770 3C04800E */  lui       $a0, 0x800e
-/* 3BB74 80060774 2484C040 */  addiu     $a0, $a0, -0x3fc0
+/* 3BB70 80060770 3C04800E */  lui       $a0, %hi(D_800DC040)
+/* 3BB74 80060774 2484C040 */  addiu     $a0, $a0, %lo(D_800DC040)
 /* 3BB78 80060778 0000282D */  daddu     $a1, $zero, $zero
 /* 3BB7C 8006077C 0C019608 */  jal       osSendMesg
 /* 3BB80 80060780 24060001 */   addiu    $a2, $zero, 1
 /* 3BB84 80060784 0C01868A */  jal       osContGetReadData
 /* 3BB88 80060788 0200202D */   daddu    $a0, $s0, $zero
-/* 3BB8C 8006078C 3C04800E */  lui       $a0, 0x800e
-/* 3BB90 80060790 2484C040 */  addiu     $a0, $a0, -0x3fc0
+/* 3BB8C 8006078C 3C04800E */  lui       $a0, %hi(D_800DC040)
+/* 3BB90 80060790 2484C040 */  addiu     $a0, $a0, %lo(D_800DC040)
 /* 3BB94 80060794 0000282D */  daddu     $a1, $zero, $zero
 /* 3BB98 80060798 0C0195BC */  jal       osRecvMesg
 /* 3BB9C 8006079C 24060001 */   addiu    $a2, $zero, 1

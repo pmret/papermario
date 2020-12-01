@@ -24,14 +24,14 @@ glabel func_E00AC124
 /* 3AEF8C E00AC16C 28C20021 */   slti     $v0, $a2, 0x21
 /* 3AEF90 E00AC170 10400019 */  beqz      $v0, .LE00AC1D8
 /* 3AEF94 E00AC174 00061040 */   sll      $v0, $a2, 1
-/* 3AEF98 E00AC178 3C03E00B */  lui       $v1, 0xe00b
-/* 3AEF9C E00AC17C 2463C83C */  addiu     $v1, $v1, -0x37c4
+/* 3AEF98 E00AC178 3C03E00B */  lui       $v1, %hi(D_E00AC83C)
+/* 3AEF9C E00AC17C 2463C83C */  addiu     $v1, $v1, %lo(D_E00AC83C)
 /* 3AEFA0 E00AC180 00431021 */  addu      $v0, $v0, $v1
 /* 3AEFA4 E00AC184 90430000 */  lbu       $v1, ($v0)
 /* 3AEFA8 E00AC188 ACA30024 */  sw        $v1, 0x24($a1)
 /* 3AEFAC E00AC18C 90420001 */  lbu       $v0, 1($v0)
-/* 3AEFB0 E00AC190 3C01E00B */  lui       $at, 0xe00b
-/* 3AEFB4 E00AC194 D422C8D0 */  ldc1      $f2, -0x3730($at)
+/* 3AEFB0 E00AC190 3C01E00B */  lui       $at, %hi(D_E00AC8D0)
+/* 3AEFB4 E00AC194 D422C8D0 */  ldc1      $f2, %lo(D_E00AC8D0)($at)
 /* 3AEFB8 E00AC198 44820000 */  mtc1      $v0, $f0
 /* 3AEFBC E00AC19C 00000000 */  nop       
 /* 3AEFC0 E00AC1A0 46800020 */  cvt.s.w   $f0, $f0
@@ -55,14 +55,14 @@ glabel func_E00AC124
 /* 3AF000 E00AC1E0 0802B08F */  j         .LE00AC23C
 /* 3AF004 E00AC1E4 ACA0002C */   sw       $zero, 0x2c($a1)
 .LE00AC1E8:
-/* 3AF008 E00AC1E8 3C03E00B */  lui       $v1, 0xe00b
-/* 3AF00C E00AC1EC 2463C7F8 */  addiu     $v1, $v1, -0x3808
+/* 3AF008 E00AC1E8 3C03E00B */  lui       $v1, %hi(D_E00AC7F8)
+/* 3AF00C E00AC1EC 2463C7F8 */  addiu     $v1, $v1, %lo(D_E00AC7F8)
 /* 3AF010 E00AC1F0 00431021 */  addu      $v0, $v0, $v1
 /* 3AF014 E00AC1F4 90430000 */  lbu       $v1, ($v0)
 /* 3AF018 E00AC1F8 ACA30024 */  sw        $v1, 0x24($a1)
 /* 3AF01C E00AC1FC 90420001 */  lbu       $v0, 1($v0)
-/* 3AF020 E00AC200 3C01E00B */  lui       $at, 0xe00b
-/* 3AF024 E00AC204 D422C8D8 */  ldc1      $f2, -0x3728($at)
+/* 3AF020 E00AC200 3C01E00B */  lui       $at, %hi(D_E00AC8D8)
+/* 3AF024 E00AC204 D422C8D8 */  ldc1      $f2, %lo(D_E00AC8D8)($at)
 /* 3AF028 E00AC208 44820000 */  mtc1      $v0, $f0
 /* 3AF02C E00AC20C 00000000 */  nop       
 /* 3AF030 E00AC210 46800020 */  cvt.s.w   $f0, $f0

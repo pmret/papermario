@@ -7,8 +7,8 @@ glabel modify_collider_family_flags
 /* EE6A0 802C9CF0 00A0902D */  daddu     $s2, $a1, $zero
 /* EE6A4 802C9CF4 000410C0 */  sll       $v0, $a0, 3
 /* EE6A8 802C9CF8 00441023 */  subu      $v0, $v0, $a0
-/* EE6AC 802C9CFC 3C03800B */  lui       $v1, 0x800b
-/* EE6B0 802C9D00 8C6342E4 */  lw        $v1, 0x42e4($v1)
+/* EE6AC 802C9CFC 3C03800B */  lui       $v1, %hi(D_800B42E4)
+/* EE6B0 802C9D00 8C6342E4 */  lw        $v1, %lo(D_800B42E4)($v1)
 /* EE6B4 802C9D04 00021080 */  sll       $v0, $v0, 2
 /* EE6B8 802C9D08 AFBF001C */  sw        $ra, 0x1c($sp)
 /* EE6BC 802C9D0C AFB10014 */  sw        $s1, 0x14($sp)

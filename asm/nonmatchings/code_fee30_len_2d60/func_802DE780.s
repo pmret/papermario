@@ -18,9 +18,9 @@ glabel func_802DE780
 /* 1018A4 802DE7B4 AFB10024 */  sw        $s1, 0x24($sp)
 /* 1018A8 802DE7B8 AFB00020 */  sw        $s0, 0x20($sp)
 /* 1018AC 802DE7BC AFA70054 */  sw        $a3, 0x54($sp)
-/* 1018B0 802DE7C0 3C01802E */  lui       $at, 0x802e
+/* 1018B0 802DE7C0 3C01802E */  lui       $at, %hi(D_802DFA4C)
 /* 1018B4 802DE7C4 00220821 */  addu      $at, $at, $v0
-/* 1018B8 802DE7C8 8C22FA4C */  lw        $v0, -0x5b4($at)
+/* 1018B8 802DE7C8 8C22FA4C */  lw        $v0, %lo(D_802DFA4C)($at)
 /* 1018BC 802DE7CC 8FBE0064 */  lw        $fp, 0x64($sp)
 /* 1018C0 802DE7D0 10400024 */  beqz      $v0, .L802DE864
 /* 1018C4 802DE7D4 00C0A82D */   daddu    $s5, $a2, $zero

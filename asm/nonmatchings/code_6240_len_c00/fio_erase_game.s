@@ -10,8 +10,8 @@ glabel fio_erase_game
 /* 6840 8002B440 0C00AC55 */  jal       fio_fetch_saved_file_info
 /* 6844 8002B444 AFB00010 */   sw       $s0, 0x10($sp)
 /* 6848 8002B448 0000802D */  daddu     $s0, $zero, $zero
-/* 684C 8002B44C 3C11800A */  lui       $s1, 0x800a
-/* 6850 8002B450 2631BA50 */  addiu     $s1, $s1, -0x45b0
+/* 684C 8002B44C 3C11800A */  lui       $s1, %hi(D_8009BA50)
+/* 6850 8002B450 2631BA50 */  addiu     $s1, $s1, %lo(D_8009BA50)
 .L8002B454:
 /* 6854 8002B454 8E220000 */  lw        $v0, ($s1)
 /* 6858 8002B458 54520004 */  bnel      $v0, $s2, .L8002B46C

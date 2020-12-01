@@ -10,8 +10,8 @@ glabel func_802414BC_D65A9C
 /* D65AB0 802414D0 0C00E769 */  jal       func_80039DA4
 /* D65AB4 802414D4 0080882D */   daddu    $s1, $a0, $zero
 /* D65AB8 802414D8 44800000 */  mtc1      $zero, $f0
-/* D65ABC 802414DC 3C03800A */  lui       $v1, 0x800a
-/* D65AC0 802414E0 8463A634 */  lh        $v1, -0x59cc($v1)
+/* D65ABC 802414DC 3C03800A */  lui       $v1, %hi(D_8009A634)
+/* D65AC0 802414E0 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
 /* D65AC4 802414E4 C6220034 */  lwc1      $f2, 0x34($s1)
 /* D65AC8 802414E8 00031080 */  sll       $v0, $v1, 2
 /* D65ACC 802414EC 00431021 */  addu      $v0, $v0, $v1
@@ -21,9 +21,9 @@ glabel func_802414BC_D65A9C
 /* D65ADC 802414FC 00431021 */  addu      $v0, $v0, $v1
 /* D65AE0 80241500 000210C0 */  sll       $v0, $v0, 3
 /* D65AE4 80241504 44060000 */  mfc1      $a2, $f0
-/* D65AE8 80241508 3C01800B */  lui       $at, 0x800b
+/* D65AE8 80241508 3C01800B */  lui       $at, %hi(D_800B1DEC)
 /* D65AEC 8024150C 00220821 */  addu      $at, $at, $v0
-/* D65AF0 80241510 C4201DEC */  lwc1      $f0, 0x1dec($at)
+/* D65AF0 80241510 C4201DEC */  lwc1      $f0, %lo(D_800B1DEC)($at)
 /* D65AF4 80241514 3C013F80 */  lui       $at, 0x3f80
 /* D65AF8 80241518 4481A000 */  mtc1      $at, $f20
 /* D65AFC 8024151C 46001080 */  add.s     $f2, $f2, $f0

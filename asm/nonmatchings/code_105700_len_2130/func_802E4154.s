@@ -17,13 +17,13 @@ glabel func_802E4154
 /* 105A04 802E4184 00000000 */   nop      
 /* 105A08 802E4188 0C0441A9 */  jal       get_entity_type
 /* 105A0C 802E418C 92040004 */   lbu      $a0, 4($s0)
-/* 105A10 802E4190 3C04802F */  lui       $a0, 0x802f
-/* 105A14 802E4194 2484A0A0 */  addiu     $a0, $a0, -0x5f60
+/* 105A10 802E4190 3C04802F */  lui       $a0, %hi(D_802EA0A0)
+/* 105A14 802E4194 2484A0A0 */  addiu     $a0, $a0, %lo(D_802EA0A0)
 /* 105A18 802E4198 24030014 */  addiu     $v1, $zero, 0x14
 /* 105A1C 802E419C 10430003 */  beq       $v0, $v1, .L802E41AC
 /* 105A20 802E41A0 00000000 */   nop      
-/* 105A24 802E41A4 3C04802F */  lui       $a0, 0x802f
-/* 105A28 802E41A8 2484A07C */  addiu     $a0, $a0, -0x5f84
+/* 105A24 802E41A4 3C04802F */  lui       $a0, %hi(D_802EA07C)
+/* 105A28 802E41A8 2484A07C */  addiu     $a0, $a0, %lo(D_802EA07C)
 .L802E41AC:
 /* 105A2C 802E41AC C6020048 */  lwc1      $f2, 0x48($s0)
 /* 105A30 802E41B0 C604004C */  lwc1      $f4, 0x4c($s0)
@@ -41,8 +41,8 @@ glabel func_802E4154
 /* 105A60 802E41E0 44074000 */  mfc1      $a3, $f8
 /* 105A64 802E41E4 0C044631 */  jal       create_entity
 /* 105A68 802E41E8 00000000 */   nop      
-/* 105A6C 802E41EC 3C05802F */  lui       $a1, 0x802f
-/* 105A70 802E41F0 24A5A310 */  addiu     $a1, $a1, -0x5cf0
+/* 105A6C 802E41EC 3C05802F */  lui       $a1, %hi(D_802EA310)
+/* 105A70 802E41F0 24A5A310 */  addiu     $a1, $a1, %lo(D_802EA310)
 /* 105A74 802E41F4 0C043EF0 */  jal       func_8010FBC0
 /* 105A78 802E41F8 0200202D */   daddu    $a0, $s0, $zero
 /* 105A7C 802E41FC 080B9083 */  j         .L802E420C

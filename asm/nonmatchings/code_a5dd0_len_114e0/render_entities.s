@@ -67,8 +67,8 @@ glabel render_entities
 /* A6698 8010FF98 30620008 */  andi      $v0, $v1, 8
 /* A669C 8010FF9C 1040001F */  beqz      $v0, .L8011001C
 /* A66A0 8010FFA0 00000000 */   nop      
-/* A66A4 8010FFA4 3C028015 */  lui       $v0, 0x8015
-/* A66A8 8010FFA8 8C42AFB0 */  lw        $v0, -0x5050($v0)
+/* A66A4 8010FFA4 3C028015 */  lui       $v0, %hi(D_8014AFB0)
+/* A66A8 8010FFA8 8C42AFB0 */  lw        $v0, %lo(D_8014AFB0)($v0)
 /* A66AC 8010FFAC 14520007 */  bne       $v0, $s2, .L8010FFCC
 /* A66B0 8010FFB0 00000000 */   nop      
 /* A66B4 8010FFB4 8E06003C */  lw        $a2, 0x3c($s0)
@@ -80,8 +80,8 @@ glabel render_entities
 .L8010FFCC:
 /* A66CC 8010FFCC 86040014 */  lh        $a0, 0x14($s0)
 /* A66D0 8010FFD0 92050004 */  lbu       $a1, 4($s0)
-/* A66D4 8010FFD4 3C068011 */  lui       $a2, 0x8011
-/* A66D8 8010FFD8 24C6FE44 */  addiu     $a2, $a2, -0x1bc
+/* A66D4 8010FFD4 3C068011 */  lui       $a2, %hi(D_8010FE44)
+/* A66D8 8010FFD8 24C6FE44 */  addiu     $a2, $a2, %lo(D_8010FE44)
 .L8010FFDC:
 /* A66DC 8010FFDC 0C048000 */  jal       func_80120000
 /* A66E0 8010FFE0 00000000 */   nop      
@@ -102,8 +102,8 @@ glabel render_entities
 /* A6714 80110014 08044028 */  j         .L801100A0
 /* A6718 80110018 26310001 */   addiu    $s1, $s1, 1
 .L8011001C:
-/* A671C 8011001C 3C028015 */  lui       $v0, 0x8015
-/* A6720 80110020 8C42AFB0 */  lw        $v0, -0x5050($v0)
+/* A671C 8011001C 3C028015 */  lui       $v0, %hi(D_8014AFB0)
+/* A6720 80110020 8C42AFB0 */  lw        $v0, %lo(D_8014AFB0)($v0)
 /* A6724 80110024 1452000B */  bne       $v0, $s2, .L80110054
 /* A6728 80110028 00000000 */   nop      
 /* A672C 8011002C 8E06003C */  lw        $a2, 0x3c($s0)
@@ -120,8 +120,8 @@ glabel render_entities
 .L80110054:
 /* A6754 80110054 86040014 */  lh        $a0, 0x14($s0)
 /* A6758 80110058 92050004 */  lbu       $a1, 4($s0)
-/* A675C 8011005C 3C068011 */  lui       $a2, 0x8011
-/* A6760 80110060 24C6FE44 */  addiu     $a2, $a2, -0x1bc
+/* A675C 8011005C 3C068011 */  lui       $a2, %hi(D_8010FE44)
+/* A6760 80110060 24C6FE44 */  addiu     $a2, $a2, %lo(D_8010FE44)
 .L80110064:
 /* A6764 80110064 0C048BD9 */  jal       func_80122F64
 /* A6768 80110068 00000000 */   nop      

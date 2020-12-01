@@ -23,8 +23,8 @@ glabel is_ability_active
 /* 8323C 800E9D8C 144000C7 */  bnez      $v0, .L800EA0AC
 /* 83240 800E9D90 0000102D */   daddu    $v0, $zero, $zero
 /* 83244 800E9D94 0000382D */  daddu     $a3, $zero, $zero
-/* 83248 800E9D98 3C038011 */  lui       $v1, 0x8011
-/* 8324C 800E9D9C 2463BF60 */  addiu     $v1, $v1, -0x40a0
+/* 83248 800E9D98 3C038011 */  lui       $v1, %hi(D_8010BF60)
+/* 8324C 800E9D9C 2463BF60 */  addiu     $v1, $v1, %lo(D_8010BF60)
 /* 83250 800E9DA0 00091080 */  sll       $v0, $t1, 2
 /* 83254 800E9DA4 00435021 */  addu      $t2, $v0, $v1
 /* 83258 800E9DA8 27A30010 */  addiu     $v1, $sp, 0x10

@@ -9,8 +9,8 @@ glabel func_802403F8_ADB298
 /* ADB2A8 80240408 3C060C18 */  lui       $a2, 0xc18
 /* ADB2AC 8024040C 34C649D8 */  ori       $a2, $a2, 0x49d8
 /* ADB2B0 80240410 3C08FC11 */  lui       $t0, 0xfc11
-/* ADB2B4 80240414 3C04800A */  lui       $a0, 0x800a
-/* ADB2B8 80240418 2484A66C */  addiu     $a0, $a0, -0x5994
+/* ADB2B4 80240414 3C04800A */  lui       $a0, %hi(D_8009A66C)
+/* ADB2B8 80240418 2484A66C */  addiu     $a0, $a0, %lo(D_8009A66C)
 /* ADB2BC 8024041C 8C830000 */  lw        $v1, ($a0)
 /* ADB2C0 80240420 350815FF */  ori       $t0, $t0, 0x15ff
 /* ADB2C4 80240424 0060282D */  daddu     $a1, $v1, $zero
@@ -30,8 +30,8 @@ glabel func_802403F8_ADB298
 /* ADB2FC 8024045C 24620018 */  addiu     $v0, $v1, 0x18
 /* ADB300 80240460 AC680008 */  sw        $t0, 8($v1)
 /* ADB304 80240464 AC820000 */  sw        $v0, ($a0)
-/* ADB308 80240468 3C048024 */  lui       $a0, 0x8024
-/* ADB30C 8024046C 90841D3B */  lbu       $a0, 0x1d3b($a0)
+/* ADB308 80240468 3C048024 */  lui       $a0, %hi(D_80241D3B)
+/* ADB30C 8024046C 90841D3B */  lbu       $a0, %lo(D_80241D3B)($a0)
 /* ADB310 80240470 3C02FA00 */  lui       $v0, 0xfa00
 /* ADB314 80240474 AC620010 */  sw        $v0, 0x10($v1)
 /* ADB318 80240478 03E00008 */  jr        $ra

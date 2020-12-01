@@ -18,8 +18,8 @@ glabel func_E002A28C
 /* 33EB7C E002A2BC 28420018 */  slti      $v0, $v0, 0x18
 /* 33EB80 E002A2C0 10400009 */  beqz      $v0, .LE002A2E8
 /* 33EB84 E002A2C4 00000000 */   nop      
-/* 33EB88 E002A2C8 3C01E003 */  lui       $at, 0xe003
-/* 33EB8C E002A2CC D422A730 */  ldc1      $f2, -0x58d0($at)
+/* 33EB88 E002A2C8 3C01E003 */  lui       $at, %hi(D_E002A730)
+/* 33EB8C E002A2CC D422A730 */  ldc1      $f2, %lo(D_E002A730)($at)
 /* 33EB90 E002A2D0 C4600018 */  lwc1      $f0, 0x18($v1)
 /* 33EB94 E002A2D4 46800021 */  cvt.d.w   $f0, $f0
 /* 33EB98 E002A2D8 46220002 */  mul.d     $f0, $f0, $f2
@@ -33,8 +33,8 @@ glabel func_E002A28C
 /* 33EBB4 E002A2F4 1040001F */  beqz      $v0, .LE002A374
 /* 33EBB8 E002A2F8 24630048 */   addiu    $v1, $v1, 0x48
 /* 33EBBC E002A2FC 28C60002 */  slti      $a2, $a2, 2
-/* 33EBC0 E002A300 3C01E003 */  lui       $at, 0xe003
-/* 33EBC4 E002A304 D426A738 */  ldc1      $f6, -0x58c8($at)
+/* 33EBC0 E002A300 3C01E003 */  lui       $at, %hi(D_E002A738)
+/* 33EBC4 E002A304 D426A738 */  ldc1      $f6, %lo(D_E002A738)($at)
 /* 33EBC8 E002A308 24630020 */  addiu     $v1, $v1, 0x20
 .LE002A30C:
 /* 33EBCC E002A30C C460FFF0 */  lwc1      $f0, -0x10($v1)

@@ -3,8 +3,8 @@
 
 glabel func_802422DC_802B5C
 /* 802B5C 802422DC 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* 802B60 802422E0 3C03800A */  lui       $v1, 0x800a
-/* 802B64 802422E4 8463A634 */  lh        $v1, -0x59cc($v1)
+/* 802B60 802422E0 3C03800A */  lui       $v1, %hi(D_8009A634)
+/* 802B64 802422E4 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
 /* 802B68 802422E8 3C05800B */  lui       $a1, %hi(gCameras)
 /* 802B6C 802422EC 24A51D80 */  addiu     $a1, $a1, %lo(gCameras)
 /* 802B70 802422F0 AFBF0010 */  sw        $ra, 0x10($sp)

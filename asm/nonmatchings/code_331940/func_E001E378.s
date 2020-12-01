@@ -97,15 +97,15 @@ glabel func_E001E378
 /* 331E24 E001E4E4 45000045 */  bc1f      .LE001E5FC
 /* 331E28 E001E4E8 24040006 */   addiu    $a0, $zero, 6
 /* 331E2C E001E4EC C6040014 */  lwc1      $f4, 0x14($s0)
-/* 331E30 E001E4F0 3C01E002 */  lui       $at, 0xe002
-/* 331E34 E001E4F4 D420ED50 */  ldc1      $f0, -0x12b0($at)
+/* 331E30 E001E4F0 3C01E002 */  lui       $at, %hi(D_E001ED50)
+/* 331E34 E001E4F4 D420ED50 */  ldc1      $f0, %lo(D_E001ED50)($at)
 /* 331E38 E001E4F8 46002107 */  neg.s     $f4, $f4
 /* 331E3C E001E4FC 46002121 */  cvt.d.s   $f4, $f4
 /* 331E40 E001E500 46202102 */  mul.d     $f4, $f4, $f0
 /* 331E44 E001E504 00000000 */  nop       
 /* 331E48 E001E508 C6060010 */  lwc1      $f6, 0x10($s0)
-/* 331E4C E001E50C 3C01E002 */  lui       $at, 0xe002
-/* 331E50 E001E510 D428ED58 */  ldc1      $f8, -0x12a8($at)
+/* 331E4C E001E50C 3C01E002 */  lui       $at, %hi(D_E001ED58)
+/* 331E50 E001E510 D428ED58 */  ldc1      $f8, %lo(D_E001ED58)($at)
 /* 331E54 E001E514 460031A1 */  cvt.d.s   $f6, $f6
 /* 331E58 E001E518 46283182 */  mul.d     $f6, $f6, $f8
 /* 331E5C E001E51C 00000000 */  nop       

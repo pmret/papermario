@@ -51,15 +51,15 @@ glabel func_802400B0_ACABD0
 /* ACAC88 80240168 0C00A7B5 */  jal       dist2D
 /* ACAC8C 8024016C 46000506 */   mov.s    $f20, $f0
 /* ACAC90 80240170 C604000C */  lwc1      $f4, 0xc($s0)
-/* ACAC94 80240174 3C018024 */  lui       $at, 0x8024
-/* ACAC98 80240178 D42235E0 */  ldc1      $f2, 0x35e0($at)
+/* ACAC94 80240174 3C018024 */  lui       $at, %hi(D_802435E0)
+/* ACAC98 80240178 D42235E0 */  ldc1      $f2, %lo(D_802435E0)($at)
 /* ACAC9C 8024017C 46002121 */  cvt.d.s   $f4, $f4
 /* ACACA0 80240180 46222032 */  c.eq.d    $f4, $f2
 /* ACACA4 80240184 00000000 */  nop       
 /* ACACA8 80240188 45010007 */  bc1t      .L802401A8
 /* ACACAC 8024018C 46000086 */   mov.s    $f2, $f0
-/* ACACB0 80240190 3C018024 */  lui       $at, 0x8024
-/* ACACB4 80240194 D42035E8 */  ldc1      $f0, 0x35e8($at)
+/* ACACB0 80240190 3C018024 */  lui       $at, %hi(D_802435E8)
+/* ACACB4 80240194 D42035E8 */  ldc1      $f0, %lo(D_802435E8)($at)
 /* ACACB8 80240198 46202032 */  c.eq.d    $f4, $f0
 /* ACACBC 8024019C 00000000 */  nop       
 /* ACACC0 802401A0 45000008 */  bc1f      .L802401C4

@@ -62,7 +62,7 @@ CPPFLAGS   := -Iinclude -Isrc -D _LANGUAGE_C -ffreestanding -DF3DEX_GBI_2 -D_MIP
 ASFLAGS    := -EB -Iinclude -march=vr4300 -mtune=vr4300
 OLDASFLAGS := -EB -Iinclude -G 0
 CFLAGS     := -O2 -quiet -G 0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wimplicit -Wuninitialized -Wshadow
-LDFLAGS    := -T undefined_syms.txt -T undefined_funcs.txt -T undefined_funcs_auto.txt -T $(BUILD_DIR)/$(LD_SCRIPT) -Map $(LD_MAP) --no-check-sections
+LDFLAGS    := -T undefined_syms.txt -T undefined_syms_auto.txt -T undefined_funcs.txt -T undefined_funcs_auto.txt -T $(BUILD_DIR)/$(LD_SCRIPT) -Map $(LD_MAP) --no-check-sections
 
 ifeq ($(WATCH_INCLUDES),1)
 CPPMFLAGS   = -MP -MD -MF $@.mk -MT $(BUILD_DIR)/$*.d
@@ -97,8 +97,10 @@ clean:
 clean-code:
 	rm -rf $(BUILD_DIR)/src
 
-setup: clean submodules split $(LD_SCRIPT)
+tools:
 	make -C tools
+
+setup: clean submodules tools split $(LD_SCRIPT)
 
 submodules:
 	git submodule update --init --recursive
@@ -152,6 +154,11 @@ $(BUILD_DIR)/%.s.o: %.s
 
 # Data
 $(BUILD_DIR)/data/%.data.o: asm/data/%.data.s
+	@mkdir -p $(shell dirname $@)
+	$(AS) $(ASFLAGS) -o $@ $<
+
+# Rodata
+$(BUILD_DIR)/rodata/%.rodata.o: asm/data/%.rodata.s
 	@mkdir -p $(shell dirname $@)
 	$(AS) $(ASFLAGS) -o $@ $<
 
@@ -249,11 +256,11 @@ $(BUILD_DIR)/$(TARGET).bin: $(BUILD_DIR)/$(TARGET).elf
 	$(OBJCOPY) $< $@ -O binary
 
 include/ld_addrs.h: $(BUILD_DIR)/$(LD_SCRIPT)
-	grep -E "[^ ]+ =" $< -o | sed 's/^/extern void* /; s/ =/;/' > $@
+	grep -E "[^\. ]+ =" $< -o | sed 's/^/extern void* /; s/ =/;/' > $@
 
 ### Make Settings ###
 
-.PHONY: clean test setup submodules split $(ROM) include/sprite
+.PHONY: clean tools test setup submodules split $(ROM) include/sprite
 .DELETE_ON_ERROR:
 .SECONDARY:
 .PRECIOUS: $(ROM) %.Yay0

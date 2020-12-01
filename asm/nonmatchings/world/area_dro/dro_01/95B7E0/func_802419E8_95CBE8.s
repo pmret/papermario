@@ -49,8 +49,8 @@ glabel func_802419E8_95CBE8
 /* 95CC8C 80241A8C 2413FFFC */  addiu     $s3, $zero, -4
 /* 95CC90 80241A90 2412000A */  addiu     $s2, $zero, 0xa
 /* 95CC94 80241A94 3C11FF7F */  lui       $s1, 0xff7f
-/* 95CC98 80241A98 3C028015 */  lui       $v0, 0x8015
-/* 95CC9C 80241A9C 8C4212F0 */  lw        $v0, 0x12f0($v0)
+/* 95CC98 80241A98 3C028015 */  lui       $v0, %hi(D_801512F0)
+/* 95CC9C 80241A9C 8C4212F0 */  lw        $v0, %lo(D_801512F0)($v0)
 /* 95CCA0 80241AA0 3631FFFF */  ori       $s1, $s1, 0xffff
 /* 95CCA4 80241AA4 A0400000 */  sb        $zero, ($v0)
 .L80241AA8:

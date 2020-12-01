@@ -3,8 +3,8 @@
 
 glabel func_80240ACC_CF863C
 /* CF863C 80240ACC 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* CF8640 80240AD0 3C03800A */  lui       $v1, 0x800a
-/* CF8644 80240AD4 8463A634 */  lh        $v1, -0x59cc($v1)
+/* CF8640 80240AD0 3C03800A */  lui       $v1, %hi(D_8009A634)
+/* CF8644 80240AD4 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
 /* CF8648 80240AD8 3C05800B */  lui       $a1, %hi(gCameras)
 /* CF864C 80240ADC 24A51D80 */  addiu     $a1, $a1, %lo(gCameras)
 /* CF8650 80240AE0 AFBF0010 */  sw        $ra, 0x10($sp)

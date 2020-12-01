@@ -14,8 +14,8 @@ glabel al_LoadBank
 /* 2FBEC 800547EC AFB1005C */  sw        $s1, 0x5c($sp)
 /* 2FBF0 800547F0 27B10018 */  addiu     $s1, $sp, 0x18
 /* 2FBF4 800547F4 0220282D */  daddu     $a1, $s1, $zero
-/* 2FBF8 800547F8 3C028008 */  lui       $v0, 0x8008
-/* 2FBFC 800547FC 8C428E54 */  lw        $v0, -0x71ac($v0)
+/* 2FBF8 800547F8 3C028008 */  lui       $v0, %hi(D_80078E54)
+/* 2FBFC 800547FC 8C428E54 */  lw        $v0, %lo(D_80078E54)($v0)
 /* 2FC00 80054800 24060040 */  addiu     $a2, $zero, 0x40
 /* 2FC04 80054804 AFB30064 */  sw        $s3, 0x64($sp)
 /* 2FC08 80054808 2413000B */  addiu     $s3, $zero, 0xb

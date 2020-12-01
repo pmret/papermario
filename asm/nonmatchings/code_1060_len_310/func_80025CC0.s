@@ -8,8 +8,8 @@ glabel func_80025CC0
 /* 10CC 80025CCC AFA7000C */  sw        $a3, 0xc($sp)
 /* 10D0 80025CD0 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 10D4 80025CD4 0080302D */  daddu     $a2, $a0, $zero
-/* 10D8 80025CD8 3C048002 */  lui       $a0, 0x8002
-/* 10DC 80025CDC 24845D74 */  addiu     $a0, $a0, 0x5d74
+/* 10D8 80025CD8 3C048002 */  lui       $a0, %hi(D_80025D74)
+/* 10DC 80025CDC 24845D74 */  addiu     $a0, $a0, %lo(D_80025D74)
 /* 10E0 80025CE0 0000282D */  daddu     $a1, $zero, $zero
 /* 10E4 80025CE4 AFBF0010 */  sw        $ra, 0x10($sp)
 /* 10E8 80025CE8 0C0192A8 */  jal       _Printf

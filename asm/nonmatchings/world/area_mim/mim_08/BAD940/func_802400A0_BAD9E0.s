@@ -87,8 +87,8 @@ glabel func_802400A0_BAD9E0
 /* BADB20 802401E0 08090082 */  j         .L80240208
 /* BADB24 802401E4 E6000018 */   swc1     $f0, 0x18($s0)
 .L802401E8:
-/* BADB28 802401E8 3C018024 */  lui       $at, 0x8024
-/* BADB2C 802401EC D42252A0 */  ldc1      $f2, 0x52a0($at)
+/* BADB28 802401E8 3C018024 */  lui       $at, %hi(D_802452A0)
+/* BADB2C 802401EC D42252A0 */  ldc1      $f2, %lo(D_802452A0)($at)
 /* BADB30 802401F0 44820000 */  mtc1      $v0, $f0
 /* BADB34 802401F4 00000000 */  nop       
 /* BADB38 802401F8 46800021 */  cvt.d.w   $f0, $f0

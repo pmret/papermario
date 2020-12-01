@@ -301,8 +301,8 @@ glabel func_80242A6C_CC627C
 /* CC66C0 80242EB0 0C00EABB */  jal       get_npc_unsafe
 /* CC66C4 80242EB4 84440008 */   lh       $a0, 8($v0)
 /* CC66C8 80242EB8 C440000C */  lwc1      $f0, 0xc($v0)
-/* CC66CC 80242EBC 3C018024 */  lui       $at, 0x8024
-/* CC66D0 80242EC0 D4227AE8 */  ldc1      $f2, 0x7ae8($at)
+/* CC66CC 80242EBC 3C018024 */  lui       $at, %hi(D_80247AE8)
+/* CC66D0 80242EC0 D4227AE8 */  ldc1      $f2, %lo(D_80247AE8)($at)
 /* CC66D4 80242EC4 46000021 */  cvt.d.s   $f0, $f0
 /* CC66D8 80242EC8 4622003C */  c.lt.d    $f0, $f2
 /* CC66DC 80242ECC 00000000 */  nop       

@@ -13,9 +13,9 @@ glabel func_802401AC_CE68AC
 /* CE68CC 802401CC 2C620005 */  sltiu     $v0, $v1, 5
 /* CE68D0 802401D0 1040008A */  beqz      $v0, .L802403FC
 /* CE68D4 802401D4 00031080 */   sll      $v0, $v1, 2
-/* CE68D8 802401D8 3C018024 */  lui       $at, 0x8024
+/* CE68D8 802401D8 3C018024 */  lui       $at, %hi(D_80245B10)
 /* CE68DC 802401DC 00220821 */  addu      $at, $at, $v0
-/* CE68E0 802401E0 8C225B10 */  lw        $v0, 0x5b10($at)
+/* CE68E0 802401E0 8C225B10 */  lw        $v0, %lo(D_80245B10)($at)
 /* CE68E4 802401E4 00400008 */  jr        $v0
 /* CE68E8 802401E8 00000000 */   nop      
 /* CE68EC 802401EC 8E22003C */  lw        $v0, 0x3c($s1)

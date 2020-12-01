@@ -4,8 +4,8 @@
 glabel nuScExecuteGraphics
 /* 3A114 8005ED14 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* 3A118 8005ED18 AFB00018 */  sw        $s0, 0x18($sp)
-/* 3A11C 8005ED1C 3C10800E */  lui       $s0, 0x800e
-/* 3A120 8005ED20 2610A47C */  addiu     $s0, $s0, -0x5b84
+/* 3A11C 8005ED1C 3C10800E */  lui       $s0, %hi(D_800DA47C)
+/* 3A120 8005ED20 2610A47C */  addiu     $s0, $s0, %lo(D_800DA47C)
 /* 3A124 8005ED24 AFB1001C */  sw        $s1, 0x1c($sp)
 /* 3A128 8005ED28 27B10014 */  addiu     $s1, $sp, 0x14
 /* 3A12C 8005ED2C AFBF0020 */  sw        $ra, 0x20($sp)

@@ -8,8 +8,8 @@ glabel osCreatePiManager
 /* 3BDEC 800609EC AFB5002C */  sw        $s5, 0x2c($sp)
 /* 3BDF0 800609F0 00A0A821 */  addu      $s5, $a1, $zero
 /* 3BDF4 800609F4 AFB40028 */  sw        $s4, 0x28($sp)
-/* 3BDF8 800609F8 3C148009 */  lui       $s4, 0x8009
-/* 3BDFC 800609FC 26943D50 */  addiu     $s4, $s4, 0x3d50
+/* 3BDF8 800609F8 3C148009 */  lui       $s4, %hi(D_80093D50)
+/* 3BDFC 800609FC 26943D50 */  addiu     $s4, $s4, %lo(D_80093D50)
 /* 3BE00 80060A00 AFBF0030 */  sw        $ra, 0x30($sp)
 /* 3BE04 80060A04 AFB30024 */  sw        $s3, 0x24($sp)
 /* 3BE08 80060A08 AFB20020 */  sw        $s2, 0x20($sp)
@@ -20,15 +20,15 @@ glabel osCreatePiManager
 /* 3BE1C 80060A1C 00E03021 */   addu     $a2, $a3, $zero
 /* 3BE20 80060A20 0C019560 */  jal       osCreateMesgQueue
 /* 3BE24 80060A24 02A02021 */   addu     $a0, $s5, $zero
-/* 3BE28 80060A28 3C13800B */  lui       $s3, 0x800b
-/* 3BE2C 80060A2C 2673F890 */  addiu     $s3, $s3, -0x770
+/* 3BE28 80060A28 3C13800B */  lui       $s3, %hi(D_800AF890)
+/* 3BE2C 80060A2C 2673F890 */  addiu     $s3, $s3, %lo(D_800AF890)
 /* 3BE30 80060A30 02602021 */  addu      $a0, $s3, $zero
-/* 3BE34 80060A34 3C05800B */  lui       $a1, 0x800b
-/* 3BE38 80060A38 24A5F8A8 */  addiu     $a1, $a1, -0x758
+/* 3BE34 80060A34 3C05800B */  lui       $a1, %hi(D_800AF8A8)
+/* 3BE38 80060A38 24A5F8A8 */  addiu     $a1, $a1, %lo(D_800AF8A8)
 /* 3BE3C 80060A3C 0C019560 */  jal       osCreateMesgQueue
 /* 3BE40 80060A40 24060001 */   addiu    $a2, $zero, 1
-/* 3BE44 80060A44 3C028009 */  lui       $v0, 0x8009
-/* 3BE48 80060A48 8C423D90 */  lw        $v0, 0x3d90($v0)
+/* 3BE44 80060A44 3C028009 */  lui       $v0, %hi(D_80093D90)
+/* 3BE48 80060A48 8C423D90 */  lw        $v0, %lo(D_80093D90)($v0)
 /* 3BE4C 80060A4C 54400004 */  bnel      $v0, $zero, .L80060A60
 /* 3BE50 80060A50 24040008 */   addiu    $a0, $zero, 8
 /* 3BE54 80060A54 0C018514 */  jal       osPiCreateAccessQueue
@@ -53,37 +53,37 @@ glabel osCreatePiManager
 .L80060A9C:
 /* 3BE9C 80060A9C 0C01ACD8 */  jal       __osDisableInt
 /* 3BEA0 80060AA0 00000000 */   nop      
-/* 3BEA4 80060AA4 3C11800B */  lui       $s1, 0x800b
-/* 3BEA8 80060AA8 2631E6E0 */  addiu     $s1, $s1, -0x1920
+/* 3BEA4 80060AA4 3C11800B */  lui       $s1, %hi(D_800AE6E0)
+/* 3BEA8 80060AA8 2631E6E0 */  addiu     $s1, $s1, %lo(D_800AE6E0)
 /* 3BEAC 80060AAC 02202021 */  addu      $a0, $s1, $zero
 /* 3BEB0 80060AB0 00002821 */  addu      $a1, $zero, $zero
 /* 3BEB4 80060AB4 3C068006 */  lui       $a2, %hi(osDevMgrMain)
 /* 3BEB8 80060AB8 24C61090 */  addiu     $a2, $a2, %lo(osDevMgrMain)
 /* 3BEBC 80060ABC 24030001 */  addiu     $v1, $zero, 1
 /* 3BEC0 80060AC0 AE830000 */  sw        $v1, ($s4)
-/* 3BEC4 80060AC4 3C03800B */  lui       $v1, 0x800b
-/* 3BEC8 80060AC8 24634380 */  addiu     $v1, $v1, 0x4380
-/* 3BECC 80060ACC 3C018009 */  lui       $at, 0x8009
-/* 3BED0 80060AD0 AC233D60 */  sw        $v1, 0x3d60($at)
+/* 3BEC4 80060AC4 3C03800B */  lui       $v1, %hi(D_800B4380)
+/* 3BEC8 80060AC8 24634380 */  addiu     $v1, $v1, %lo(D_800B4380)
+/* 3BECC 80060ACC 3C018009 */  lui       $at, %hi(D_80093D60)
+/* 3BED0 80060AD0 AC233D60 */  sw        $v1, %lo(D_80093D60)($at)
 /* 3BED4 80060AD4 3C038007 */  lui       $v1, %hi(osPiRawStartDma)
 /* 3BED8 80060AD8 2463B480 */  addiu     $v1, $v1, %lo(osPiRawStartDma)
-/* 3BEDC 80060ADC 3C018009 */  lui       $at, 0x8009
-/* 3BEE0 80060AE0 AC233D64 */  sw        $v1, 0x3d64($at)
+/* 3BEDC 80060ADC 3C018009 */  lui       $at, %hi(D_80093D64)
+/* 3BEE0 80060AE0 AC233D64 */  sw        $v1, %lo(D_80093D64)($at)
 /* 3BEE4 80060AE4 3C038006 */  lui       $v1, %hi(osEPiRawStartDma)
 /* 3BEE8 80060AE8 24630B70 */  addiu     $v1, $v1, %lo(osEPiRawStartDma)
-/* 3BEEC 80060AEC 3C018009 */  lui       $at, 0x8009
-/* 3BEF0 80060AF0 AC233D68 */  sw        $v1, 0x3d68($at)
-/* 3BEF4 80060AF4 3C03800B */  lui       $v1, 0x800b
-/* 3BEF8 80060AF8 2463F890 */  addiu     $v1, $v1, -0x770
+/* 3BEEC 80060AEC 3C018009 */  lui       $at, %hi(D_80093D68)
+/* 3BEF0 80060AF0 AC233D68 */  sw        $v1, %lo(D_80093D68)($at)
+/* 3BEF4 80060AF4 3C03800B */  lui       $v1, %hi(D_800AF890)
+/* 3BEF8 80060AF8 2463F890 */  addiu     $v1, $v1, %lo(D_800AF890)
 /* 3BEFC 80060AFC AFB00014 */  sw        $s0, 0x14($sp)
 /* 3BF00 80060B00 00408021 */  addu      $s0, $v0, $zero
 /* 3BF04 80060B04 02803821 */  addu      $a3, $s4, $zero
-/* 3BF08 80060B08 3C018009 */  lui       $at, 0x8009
-/* 3BF0C 80060B0C AC313D54 */  sw        $s1, 0x3d54($at)
-/* 3BF10 80060B10 3C018009 */  lui       $at, 0x8009
-/* 3BF14 80060B14 AC353D58 */  sw        $s5, 0x3d58($at)
-/* 3BF18 80060B18 3C018009 */  lui       $at, 0x8009
-/* 3BF1C 80060B1C AC333D5C */  sw        $s3, 0x3d5c($at)
+/* 3BF08 80060B08 3C018009 */  lui       $at, %hi(D_80093D54)
+/* 3BF0C 80060B0C AC313D54 */  sw        $s1, %lo(D_80093D54)($at)
+/* 3BF10 80060B10 3C018009 */  lui       $at, %hi(D_80093D58)
+/* 3BF14 80060B14 AC353D58 */  sw        $s5, %lo(D_80093D58)($at)
+/* 3BF18 80060B18 3C018009 */  lui       $at, %hi(D_80093D5C)
+/* 3BF1C 80060B1C AC333D5C */  sw        $s3, %lo(D_80093D5C)($at)
 /* 3BF20 80060B20 0C019798 */  jal       osCreateThread
 /* 3BF24 80060B24 AFA30010 */   sw       $v1, 0x10($sp)
 /* 3BF28 80060B28 0C019808 */  jal       osStartThread

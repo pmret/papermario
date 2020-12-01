@@ -378,7 +378,7 @@ class N64SegPaperMarioMessages(N64Segment):
                     self.f.write("\n[/message]\n")
 
     def get_ld_files(self):
-        return [("", self.name, ".data")]
+        return [("", self.name, ".data", self.rom_start)]
 
     @staticmethod
     def get_default_name(addr):

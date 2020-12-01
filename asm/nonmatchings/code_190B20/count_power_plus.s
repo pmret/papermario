@@ -14,8 +14,8 @@ glabel count_power_plus
 /* 192410 80263B30 00E0302D */  daddu     $a2, $a3, $zero
 /* 192414 80263B34 3C0C8008 */  lui       $t4, %hi(gItemTable)
 /* 192418 80263B38 258C78E0 */  addiu     $t4, $t4, %lo(gItemTable)
-/* 19241C 80263B3C 3C0B8009 */  lui       $t3, 0x8009
-/* 192420 80263B40 256BF060 */  addiu     $t3, $t3, -0xfa0
+/* 19241C 80263B3C 3C0B8009 */  lui       $t3, %hi(D_8008F060)
+/* 192420 80263B40 256BF060 */  addiu     $t3, $t3, %lo(D_8008F060)
 /* 192424 80263B44 240A0007 */  addiu     $t2, $zero, 7
 /* 192428 80263B48 2409003B */  addiu     $t1, $zero, 0x3b
 /* 19242C 80263B4C 3C08800E */  lui       $t0, %hi(gBattleStatus)

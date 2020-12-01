@@ -5,8 +5,8 @@ glabel func_80240AA8
 /* 16F388 80240AA8 3C088011 */  lui       $t0, %hi(gPlayerStatus)
 /* 16F38C 80240AAC 2508EFC8 */  addiu     $t0, $t0, %lo(gPlayerStatus)
 /* 16F390 80240AB0 0000382D */  daddu     $a3, $zero, $zero
-/* 16F394 80240AB4 3C04802A */  lui       $a0, 0x802a
-/* 16F398 80240AB8 2484DA50 */  addiu     $a0, $a0, -0x25b0
+/* 16F394 80240AB4 3C04802A */  lui       $a0, %hi(D_8029DA50)
+/* 16F398 80240AB8 2484DA50 */  addiu     $a0, $a0, %lo(D_8029DA50)
 /* 16F39C 80240ABC 3C06800B */  lui       $a2, %hi(gCameras)
 /* 16F3A0 80240AC0 24C61D80 */  addiu     $a2, $a2, %lo(gCameras)
 .L80240AC4:
@@ -34,14 +34,14 @@ glabel func_80240AA8
 /* 16F3F4 80240B14 28E20004 */  slti      $v0, $a3, 4
 /* 16F3F8 80240B18 1440FFEA */  bnez      $v0, .L80240AC4
 /* 16F3FC 80240B1C 24C60558 */   addiu    $a2, $a2, 0x558
-/* 16F400 80240B20 3C01802A */  lui       $at, 0x802a
-/* 16F404 80240B24 C420EFB0 */  lwc1      $f0, -0x1050($at)
-/* 16F408 80240B28 3C01802A */  lui       $at, 0x802a
-/* 16F40C 80240B2C C422EFB4 */  lwc1      $f2, -0x104c($at)
-/* 16F410 80240B30 3C01802A */  lui       $at, 0x802a
-/* 16F414 80240B34 C424EFB8 */  lwc1      $f4, -0x1048($at)
-/* 16F418 80240B38 3C02802A */  lui       $v0, 0x802a
-/* 16F41C 80240B3C 8C42DA34 */  lw        $v0, -0x25cc($v0)
+/* 16F400 80240B20 3C01802A */  lui       $at, %hi(D_8029EFB0)
+/* 16F404 80240B24 C420EFB0 */  lwc1      $f0, %lo(D_8029EFB0)($at)
+/* 16F408 80240B28 3C01802A */  lui       $at, %hi(D_8029EFB4)
+/* 16F40C 80240B2C C422EFB4 */  lwc1      $f2, %lo(D_8029EFB4)($at)
+/* 16F410 80240B30 3C01802A */  lui       $at, %hi(D_8029EFB8)
+/* 16F414 80240B34 C424EFB8 */  lwc1      $f4, %lo(D_8029EFB8)($at)
+/* 16F418 80240B38 3C02802A */  lui       $v0, %hi(D_8029DA34)
+/* 16F41C 80240B3C 8C42DA34 */  lw        $v0, %lo(D_8029DA34)($v0)
 /* 16F420 80240B40 3C018007 */  lui       $at, %hi(gCurrentCameraID)
 /* 16F424 80240B44 AC207410 */  sw        $zero, %lo(gCurrentCameraID)($at)
 /* 16F428 80240B48 30420080 */  andi      $v0, $v0, 0x80
@@ -68,8 +68,8 @@ glabel func_80240AA8
 /* 16F474 80240B94 30420040 */  andi      $v0, $v0, 0x40
 /* 16F478 80240B98 10400006 */  beqz      $v0, .L80240BB4
 /* 16F47C 80240B9C 00000000 */   nop      
-/* 16F480 80240BA0 3C03802A */  lui       $v1, 0x802a
-/* 16F484 80240BA4 9063DA33 */  lbu       $v1, -0x25cd($v1)
+/* 16F480 80240BA0 3C03802A */  lui       $v1, %hi(D_8029DA33)
+/* 16F484 80240BA4 9063DA33 */  lbu       $v1, %lo(D_8029DA33)($v1)
 /* 16F488 80240BA8 3C028011 */  lui       $v0, %hi(gPlayerData)
 /* 16F48C 80240BAC 2442F290 */  addiu     $v0, $v0, %lo(gPlayerData)
 /* 16F490 80240BB0 A0430012 */  sb        $v1, 0x12($v0)

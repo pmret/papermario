@@ -13,16 +13,16 @@ glabel func_80147574
 /* DDC94 80147594 28C2000A */  slti      $v0, $a2, 0xa
 /* DDC98 80147598 10400022 */  beqz      $v0, .L80147624
 /* DDC9C 8014759C 00000000 */   nop      
-/* DDCA0 801475A0 3C038015 */  lui       $v1, 0x8015
-/* DDCA4 801475A4 2463F2A8 */  addiu     $v1, $v1, -0xd58
-/* DDCA8 801475A8 3C028015 */  lui       $v0, 0x8015
+/* DDCA0 801475A0 3C038015 */  lui       $v1, %hi(D_8014F2A8)
+/* DDCA4 801475A4 2463F2A8 */  addiu     $v1, $v1, %lo(D_8014F2A8)
+/* DDCA8 801475A8 3C028015 */  lui       $v0, %hi(D_8014F2B4)
 /* DDCAC 801475AC 00461021 */  addu      $v0, $v0, $a2
-/* DDCB0 801475B0 9042F2B4 */  lbu       $v0, -0xd4c($v0)
+/* DDCB0 801475B0 9042F2B4 */  lbu       $v0, %lo(D_8014F2B4)($v0)
 /* DDCB4 801475B4 00C31821 */  addu      $v1, $a2, $v1
 /* DDCB8 801475B8 ACA20000 */  sw        $v0, ($a1)
 /* DDCBC 801475BC 90620000 */  lbu       $v0, ($v1)
-/* DDCC0 801475C0 3C018015 */  lui       $at, 0x8015
-/* DDCC4 801475C4 D4221248 */  ldc1      $f2, 0x1248($at)
+/* DDCC0 801475C0 3C018015 */  lui       $at, %hi(D_80151248)
+/* DDCC4 801475C4 D4221248 */  ldc1      $f2, %lo(D_80151248)($at)
 /* DDCC8 801475C8 44820000 */  mtc1      $v0, $f0
 /* DDCCC 801475CC 00000000 */  nop       
 /* DDCD0 801475D0 46800020 */  cvt.s.w   $f0, $f0
@@ -47,8 +47,8 @@ glabel func_80147574
 /* DDD1C 8014761C 03E00008 */  jr        $ra
 /* DDD20 80147620 E5200000 */   swc1     $f0, ($t1)
 .L80147624:
-/* DDD24 80147624 3C028015 */  lui       $v0, 0x8015
-/* DDD28 80147628 9042F2BD */  lbu       $v0, -0xd43($v0)
+/* DDD24 80147624 3C028015 */  lui       $v0, %hi(D_8014F2BD)
+/* DDD28 80147628 9042F2BD */  lbu       $v0, %lo(D_8014F2BD)($v0)
 /* DDD2C 8014762C ACA20000 */  sw        $v0, ($a1)
 /* DDD30 80147630 ACE00000 */  sw        $zero, ($a3)
 /* DDD34 80147634 AD000000 */  sw        $zero, ($t0)

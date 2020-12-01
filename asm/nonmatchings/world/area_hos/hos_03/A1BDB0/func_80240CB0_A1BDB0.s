@@ -87,8 +87,8 @@ glabel func_80240CB0_A1BDB0
 /* A1BEF0 80240DF0 08090386 */  j         .L80240E18
 /* A1BEF4 80240DF4 E6000018 */   swc1     $f0, 0x18($s0)
 .L80240DF8:
-/* A1BEF8 80240DF8 3C018025 */  lui       $at, 0x8025
-/* A1BEFC 80240DFC D422BD70 */  ldc1      $f2, -0x4290($at)
+/* A1BEF8 80240DF8 3C018025 */  lui       $at, %hi(D_8024BD70)
+/* A1BEFC 80240DFC D422BD70 */  ldc1      $f2, %lo(D_8024BD70)($at)
 /* A1BF00 80240E00 44820000 */  mtc1      $v0, $f0
 /* A1BF04 80240E04 00000000 */  nop       
 /* A1BF08 80240E08 46800021 */  cvt.d.w   $f0, $f0

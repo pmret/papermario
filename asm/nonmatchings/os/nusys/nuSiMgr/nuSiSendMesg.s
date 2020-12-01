@@ -13,8 +13,8 @@ glabel nuSiSendMesg
 /* 8348 8002CF48 AFBF0044 */  sw        $ra, 0x44($sp)
 /* 834C 8002CF4C 0C019560 */  jal       osCreateMesgQueue
 /* 8350 8002CF50 AFB0002C */   sw       $s0, 0x2c($sp)
-/* 8354 8002CF54 3C04800E */  lui       $a0, 0x800e
-/* 8358 8002CF58 248491F8 */  addiu     $a0, $a0, -0x6e08
+/* 8354 8002CF54 3C04800E */  lui       $a0, %hi(D_800D91F8)
+/* 8358 8002CF58 248491F8 */  addiu     $a0, $a0, %lo(D_800D91F8)
 /* 835C 8002CF5C 27A50028 */  addiu     $a1, $sp, 0x28
 /* 8360 8002CF60 0C019608 */  jal       osSendMesg
 /* 8364 8002CF64 24060001 */   addiu    $a2, $zero, 1

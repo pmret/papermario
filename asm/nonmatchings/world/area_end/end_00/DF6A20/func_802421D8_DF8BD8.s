@@ -8,21 +8,21 @@ glabel func_802421D8_DF8BD8
 /* DF8BE4 802421E4 AFB40030 */  sw        $s4, 0x30($sp)
 /* DF8BE8 802421E8 0000A02D */  daddu     $s4, $zero, $zero
 /* DF8BEC 802421EC AFB10024 */  sw        $s1, 0x24($sp)
-/* DF8BF0 802421F0 3C11800A */  lui       $s1, 0x800a
-/* DF8BF4 802421F4 2631A66C */  addiu     $s1, $s1, -0x5994
+/* DF8BF0 802421F0 3C11800A */  lui       $s1, %hi(D_8009A66C)
+/* DF8BF4 802421F4 2631A66C */  addiu     $s1, $s1, %lo(D_8009A66C)
 /* DF8BF8 802421F8 AFB3002C */  sw        $s3, 0x2c($sp)
 /* DF8BFC 802421FC 24130004 */  addiu     $s3, $zero, 4
-/* DF8C00 80242200 3C028025 */  lui       $v0, 0x8025
-/* DF8C04 80242204 24420EF0 */  addiu     $v0, $v0, 0xef0
+/* DF8C00 80242200 3C028025 */  lui       $v0, %hi(D_80250EF0)
+/* DF8C04 80242204 24420EF0 */  addiu     $v0, $v0, %lo(D_80250EF0)
 /* DF8C08 80242208 AFBF0038 */  sw        $ra, 0x38($sp)
 /* DF8C0C 8024220C AFB50034 */  sw        $s5, 0x34($sp)
 /* DF8C10 80242210 AFB20028 */  sw        $s2, 0x28($sp)
 /* DF8C14 80242214 AFB00020 */  sw        $s0, 0x20($sp)
 /* DF8C18 80242218 8E230000 */  lw        $v1, ($s1)
-/* DF8C1C 8024221C 3C108007 */  lui       $s0, 0x8007
-/* DF8C20 80242220 8E1041F4 */  lw        $s0, 0x41f4($s0)
-/* DF8C24 80242224 3C158025 */  lui       $s5, 0x8025
-/* DF8C28 80242228 8EB5F7E4 */  lw        $s5, -0x81c($s5)
+/* DF8C1C 8024221C 3C108007 */  lui       $s0, %hi(D_800741F4)
+/* DF8C20 80242220 8E1041F4 */  lw        $s0, %lo(D_800741F4)($s0)
+/* DF8C24 80242224 3C158025 */  lui       $s5, %hi(D_8024F7E4)
+/* DF8C28 80242228 8EB5F7E4 */  lw        $s5, %lo(D_8024F7E4)($s5)
 /* DF8C2C 8024222C 44800000 */  mtc1      $zero, $f0
 /* DF8C30 80242230 3C01C2C8 */  lui       $at, 0xc2c8
 /* DF8C34 80242234 44811000 */  mtc1      $at, $f2
@@ -41,8 +41,8 @@ glabel func_802421D8_DF8BD8
 /* DF8C68 80242268 AE230000 */  sw        $v1, ($s1)
 /* DF8C6C 8024226C AD050000 */  sw        $a1, ($t0)
 /* DF8C70 80242270 44050000 */  mfc1      $a1, $f0
-/* DF8C74 80242274 3C028024 */  lui       $v0, 0x8024
-/* DF8C78 80242278 24422D60 */  addiu     $v0, $v0, 0x2d60
+/* DF8C74 80242274 3C028024 */  lui       $v0, %hi(D_80242D60)
+/* DF8C78 80242278 24422D60 */  addiu     $v0, $v0, %lo(D_80242D60)
 /* DF8C7C 8024227C AD020004 */  sw        $v0, 4($t0)
 /* DF8C80 80242280 E7A20014 */  swc1      $f2, 0x14($sp)
 /* DF8C84 80242284 E7A40018 */  swc1      $f4, 0x18($sp)

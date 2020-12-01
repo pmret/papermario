@@ -3,8 +3,8 @@
 
 glabel fio_calc_header_checksum
 /* 6340 8002AF40 0000282D */  daddu     $a1, $zero, $zero
-/* 6344 8002AF44 3C04800E */  lui       $a0, 0x800e
-/* 6348 8002AF48 248495E8 */  addiu     $a0, $a0, -0x6a18
+/* 6344 8002AF44 3C04800E */  lui       $a0, %hi(D_800D95E8)
+/* 6348 8002AF48 248495E8 */  addiu     $a0, $a0, %lo(D_800D95E8)
 /* 634C 8002AF4C 00A0182D */  daddu     $v1, $a1, $zero
 .L8002AF50:
 /* 6350 8002AF50 24630001 */  addiu     $v1, $v1, 1

@@ -11,8 +11,8 @@ glabel func_802413FC_DBE6AC
 /* DBE6C4 80241414 0C00EABB */  jal       get_npc_unsafe
 /* DBE6C8 80241418 86040008 */   lh       $a0, 8($s0)
 /* DBE6CC 8024141C C4400018 */  lwc1      $f0, 0x18($v0)
-/* DBE6D0 80241420 3C018024 */  lui       $at, 0x8024
-/* DBE6D4 80241424 D4226F10 */  ldc1      $f2, 0x6f10($at)
+/* DBE6D0 80241420 3C018024 */  lui       $at, %hi(D_80246F10)
+/* DBE6D4 80241424 D4226F10 */  ldc1      $f2, %lo(D_80246F10)($at)
 /* DBE6D8 80241428 46000021 */  cvt.d.s   $f0, $f0
 /* DBE6DC 8024142C 46220002 */  mul.d     $f0, $f0, $f2
 /* DBE6E0 80241430 00000000 */  nop       

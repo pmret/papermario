@@ -29,21 +29,21 @@ glabel make_disguise_npc
 /* 7FA88 800E65D8 00031040 */  sll       $v0, $v1, 1
 /* 7FA8C 800E65DC 00431021 */  addu      $v0, $v0, $v1
 /* 7FA90 800E65E0 000210C0 */  sll       $v0, $v0, 3
-/* 7FA94 800E65E4 3C01800F */  lui       $at, 0x800f
+/* 7FA94 800E65E4 3C01800F */  lui       $at, %hi(D_800F7C1C)
 /* 7FA98 800E65E8 00220821 */  addu      $at, $at, $v0
-/* 7FA9C 800E65EC 8C227C1C */  lw        $v0, 0x7c1c($at)
+/* 7FA9C 800E65EC 8C227C1C */  lw        $v0, %lo(D_800F7C1C)($at)
 /* 7FAA0 800E65F0 00031880 */  sll       $v1, $v1, 2
 /* 7FAA4 800E65F4 AFA00018 */  sw        $zero, 0x18($sp)
 /* 7FAA8 800E65F8 AFA0001C */  sw        $zero, 0x1c($sp)
 /* 7FAAC 800E65FC AFA20014 */  sw        $v0, 0x14($sp)
-/* 7FAB0 800E6600 3C05800F */  lui       $a1, 0x800f
+/* 7FAB0 800E6600 3C05800F */  lui       $a1, %hi(D_800F7C7C)
 /* 7FAB4 800E6604 00A32821 */  addu      $a1, $a1, $v1
-/* 7FAB8 800E6608 8CA57C7C */  lw        $a1, 0x7c7c($a1)
+/* 7FAB8 800E6608 8CA57C7C */  lw        $a1, %lo(D_800F7C7C)($a1)
 /* 7FABC 800E660C 0C00E219 */  jal       create_standard_npc
 /* 7FAC0 800E6610 00C0202D */   daddu    $a0, $a2, $zero
 /* 7FAC4 800E6614 0040202D */  daddu     $a0, $v0, $zero
-/* 7FAC8 800E6618 3C018011 */  lui       $at, 0x8011
-/* 7FACC 800E661C AC24C96C */  sw        $a0, -0x3694($at)
+/* 7FAC8 800E6618 3C018011 */  lui       $at, %hi(D_8010C96C)
+/* 7FACC 800E661C AC24C96C */  sw        $a0, %lo(D_8010C96C)($at)
 /* 7FAD0 800E6620 0C00E2B7 */  jal       get_npc_by_index
 /* 7FAD4 800E6624 00000000 */   nop      
 /* 7FAD8 800E6628 0040802D */  daddu     $s0, $v0, $zero

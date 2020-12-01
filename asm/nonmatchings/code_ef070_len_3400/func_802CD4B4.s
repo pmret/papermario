@@ -46,8 +46,8 @@ glabel func_802CD4B4
 /* F1EF4 802CD544 2A220010 */  slti      $v0, $s1, 0x10
 /* F1EF8 802CD548 1440FFEF */  bnez      $v0, .L802CD508
 /* F1EFC 802CD54C 26100004 */   addiu    $s0, $s0, 4
-/* F1F00 802CD550 3C04802D */  lui       $a0, 0x802d
-/* F1F04 802CD554 2484CAC0 */  addiu     $a0, $a0, -0x3540
+/* F1F00 802CD550 3C04802D */  lui       $a0, %hi(D_802CCAC0)
+/* F1F04 802CD554 2484CAC0 */  addiu     $a0, $a0, %lo(D_802CCAC0)
 /* F1F08 802CD558 3C05802D */  lui       $a1, %hi(draw_anim_models)
 /* F1F0C 802CD55C 0C048C56 */  jal       bind_dynamic_entity_3
 /* F1F10 802CD560 24A5CB18 */   addiu    $a1, $a1, %lo(draw_anim_models)

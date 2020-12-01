@@ -4,8 +4,8 @@
 glabel func_80240940_BC87A0
 /* BC87A0 80240940 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* BC87A4 80240944 AFB00010 */  sw        $s0, 0x10($sp)
-/* BC87A8 80240948 3C108024 */  lui       $s0, 0x8024
-/* BC87AC 8024094C 26103A10 */  addiu     $s0, $s0, 0x3a10
+/* BC87A8 80240948 3C108024 */  lui       $s0, %hi(D_80243A10)
+/* BC87AC 8024094C 26103A10 */  addiu     $s0, $s0, %lo(D_80243A10)
 /* BC87B0 80240950 AFBF0018 */  sw        $ra, 0x18($sp)
 /* BC87B4 80240954 AFB10014 */  sw        $s1, 0x14($sp)
 /* BC87B8 80240958 8E020000 */  lw        $v0, ($s0)
@@ -39,8 +39,8 @@ glabel func_80240940_BC87A0
 /* BC881C 802409BC 28620010 */  slti      $v0, $v1, 0x10
 /* BC8820 802409C0 1440FFFA */  bnez      $v0, .L802409AC
 /* BC8824 802409C4 24840004 */   addiu    $a0, $a0, 4
-/* BC8828 802409C8 3C108024 */  lui       $s0, 0x8024
-/* BC882C 802409CC 26103A10 */  addiu     $s0, $s0, 0x3a10
+/* BC8828 802409C8 3C108024 */  lui       $s0, %hi(D_80243A10)
+/* BC882C 802409CC 26103A10 */  addiu     $s0, $s0, %lo(D_80243A10)
 /* BC8830 802409D0 0C00AB4B */  jal       heap_free
 /* BC8834 802409D4 8E040000 */   lw       $a0, ($s0)
 /* BC8838 802409D8 AE000000 */  sw        $zero, ($s0)

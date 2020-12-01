@@ -47,9 +47,9 @@ glabel get_map_IDs_by_name
 /* 36094 8005AC94 26310020 */   addiu    $s1, $s1, 0x20
 .L8005AC98:
 /* 36098 8005AC98 26520010 */  addiu     $s2, $s2, 0x10
-/* 3609C 8005AC9C 3C048009 */  lui       $a0, 0x8009
+/* 3609C 8005AC9C 3C048009 */  lui       $a0, %hi(D_800934F4)
 /* 360A0 8005ACA0 00922021 */  addu      $a0, $a0, $s2
-/* 360A4 8005ACA4 8C8434F4 */  lw        $a0, 0x34f4($a0)
+/* 360A4 8005ACA4 8C8434F4 */  lw        $a0, %lo(D_800934F4)($a0)
 /* 360A8 8005ACA8 3C028009 */  lui       $v0, %hi(gAreas)
 /* 360AC 8005ACAC 244234F0 */  addiu     $v0, $v0, %lo(gAreas)
 /* 360B0 8005ACB0 1480FFE4 */  bnez      $a0, .L8005AC44

@@ -4,8 +4,8 @@
 glabel nuScEventHandler
 /* 3A3A8 8005EFA8 27BDFFD0 */  addiu     $sp, $sp, -0x30
 /* 3A3AC 8005EFAC AFB1001C */  sw        $s1, 0x1c($sp)
-/* 3A3B0 8005EFB0 3C11800E */  lui       $s1, 0x800e
-/* 3A3B4 8005EFB4 2631A4B4 */  addiu     $s1, $s1, -0x5b4c
+/* 3A3B0 8005EFB0 3C11800E */  lui       $s1, %hi(D_800DA4B4)
+/* 3A3B4 8005EFB4 2631A4B4 */  addiu     $s1, $s1, %lo(D_800DA4B4)
 /* 3A3B8 8005EFB8 AFB40028 */  sw        $s4, 0x28($sp)
 /* 3A3BC 8005EFBC 2414029A */  addiu     $s4, $zero, 0x29a
 /* 3A3C0 8005EFC0 AFB30024 */  sw        $s3, 0x24($sp)
@@ -14,8 +14,8 @@ glabel nuScEventHandler
 /* 3A3CC 8005EFCC 24120001 */  addiu     $s2, $zero, 1
 /* 3A3D0 8005EFD0 AFBF002C */  sw        $ra, 0x2c($sp)
 /* 3A3D4 8005EFD4 AFB00018 */  sw        $s0, 0x18($sp)
-/* 3A3D8 8005EFD8 3C018009 */  lui       $at, 0x8009
-/* 3A3DC 8005EFDC AC203B94 */  sw        $zero, 0x3b94($at)
+/* 3A3D8 8005EFD8 3C018009 */  lui       $at, %hi(D_80093B94)
+/* 3A3DC 8005EFDC AC203B94 */  sw        $zero, %lo(D_80093B94)($at)
 .L8005EFE0:
 /* 3A3E0 8005EFE0 0220202D */  daddu     $a0, $s1, $zero
 .L8005EFE4:
@@ -31,11 +31,11 @@ glabel nuScEventHandler
 /* 3A404 8005F004 08017BFA */  j         .L8005EFE8
 /* 3A408 8005F008 27A50010 */   addiu    $a1, $sp, 0x10
 .L8005F00C:
-/* 3A40C 8005F00C 3C028009 */  lui       $v0, 0x8009
-/* 3A410 8005F010 8C423B94 */  lw        $v0, 0x3b94($v0)
+/* 3A40C 8005F00C 3C028009 */  lui       $v0, %hi(D_80093B94)
+/* 3A410 8005F010 8C423B94 */  lw        $v0, %lo(D_80093B94)($v0)
 /* 3A414 8005F014 24420001 */  addiu     $v0, $v0, 1
-/* 3A418 8005F018 3C018009 */  lui       $at, 0x8009
-/* 3A41C 8005F01C AC223B94 */  sw        $v0, 0x3b94($at)
+/* 3A418 8005F018 3C018009 */  lui       $at, %hi(D_80093B94)
+/* 3A41C 8005F01C AC223B94 */  sw        $v0, %lo(D_80093B94)($at)
 /* 3A420 8005F020 0C017C30 */  jal       nuScEventBroadcast
 /* 3A424 8005F024 2624FF8C */   addiu    $a0, $s1, -0x74
 /* 3A428 8005F028 3C02800A */  lui       $v0, %hi(D_8009A5B0)
@@ -63,8 +63,8 @@ glabel nuScEventHandler
 /* 3A478 8005F078 A032A5B0 */  sb        $s2, %lo(D_8009A5B0)($at)
 /* 3A47C 8005F07C 0C017C30 */  jal       nuScEventBroadcast
 /* 3A480 8005F080 2624FF8E */   addiu    $a0, $s1, -0x72
-/* 3A484 8005F084 3C028009 */  lui       $v0, 0x8009
-/* 3A488 8005F088 8C423B80 */  lw        $v0, 0x3b80($v0)
+/* 3A484 8005F084 3C028009 */  lui       $v0, %hi(D_80093B80)
+/* 3A488 8005F088 8C423B80 */  lw        $v0, %lo(D_80093B80)($v0)
 /* 3A48C 8005F08C 10400003 */  beqz      $v0, .L8005F09C
 /* 3A490 8005F090 00000000 */   nop      
 /* 3A494 8005F094 0040F809 */  jalr      $v0

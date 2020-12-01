@@ -83,8 +83,8 @@ glabel func_80240970_B531A0
 /* B532CC 80240A9C 27A5002C */   addiu    $a1, $sp, 0x2c
 /* B532D0 80240AA0 C6000038 */  lwc1      $f0, 0x38($s0)
 /* B532D4 80240AA4 860200A6 */  lh        $v0, 0xa6($s0)
-/* B532D8 80240AA8 3C018024 */  lui       $at, 0x8024
-/* B532DC 80240AAC D4226CB0 */  ldc1      $f2, 0x6cb0($at)
+/* B532D8 80240AA8 3C018024 */  lui       $at, %hi(D_80246CB0)
+/* B532DC 80240AAC D4226CB0 */  ldc1      $f2, %lo(D_80246CB0)($at)
 /* B532E0 80240AB0 27A60030 */  addiu     $a2, $sp, 0x30
 /* B532E4 80240AB4 E7A0002C */  swc1      $f0, 0x2c($sp)
 /* B532E8 80240AB8 44820000 */  mtc1      $v0, $f0

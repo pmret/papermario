@@ -5,8 +5,8 @@ glabel set_menu_icon_script
 /* DAEFC 801447FC 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* DAF00 80144800 2402F7FF */  addiu     $v0, $zero, -0x801
 /* DAF04 80144804 00822024 */  and       $a0, $a0, $v0
-/* DAF08 80144808 3C028015 */  lui       $v0, 0x8015
-/* DAF0C 8014480C 8C427960 */  lw        $v0, 0x7960($v0)
+/* DAF08 80144808 3C028015 */  lui       $v0, %hi(D_80157960)
+/* DAF0C 8014480C 8C427960 */  lw        $v0, %lo(D_80157960)($v0)
 /* DAF10 80144810 00042080 */  sll       $a0, $a0, 2
 /* DAF14 80144814 AFBF0014 */  sw        $ra, 0x14($sp)
 /* DAF18 80144818 AFB00010 */  sw        $s0, 0x10($sp)
@@ -14,8 +14,8 @@ glabel set_menu_icon_script
 /* DAF20 80144820 8C900000 */  lw        $s0, ($a0)
 /* DAF24 80144824 14A00003 */  bnez      $a1, .L80144834
 /* DAF28 80144828 0200202D */   daddu    $a0, $s0, $zero
-/* DAF2C 8014482C 3C058015 */  lui       $a1, 0x8015
-/* DAF30 80144830 24A5EFC8 */  addiu     $a1, $a1, -0x1038
+/* DAF2C 8014482C 3C058015 */  lui       $a1, %hi(D_8014EFC8)
+/* DAF30 80144830 24A5EFC8 */  addiu     $a1, $a1, %lo(D_8014EFC8)
 .L80144834:
 /* DAF34 80144834 24020001 */  addiu     $v0, $zero, 1
 /* DAF38 80144838 A2020047 */  sb        $v0, 0x47($s0)

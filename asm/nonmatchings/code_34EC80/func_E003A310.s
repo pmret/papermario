@@ -3,8 +3,8 @@
 
 glabel func_E003A310
 /* 34EF90 E003A310 27BDFFD8 */  addiu     $sp, $sp, -0x28
-/* 34EF94 E003A314 3C02E004 */  lui       $v0, 0xe004
-/* 34EF98 E003A318 2442A354 */  addiu     $v0, $v0, -0x5cac
+/* 34EF94 E003A314 3C02E004 */  lui       $v0, %hi(D_E003A354)
+/* 34EF98 E003A318 2442A354 */  addiu     $v0, $v0, %lo(D_E003A354)
 /* 34EF9C E003A31C AFA2001C */  sw        $v0, 0x1c($sp)
 /* 34EFA0 E003A320 24020028 */  addiu     $v0, $zero, 0x28
 /* 34EFA4 E003A324 AFA40018 */  sw        $a0, 0x18($sp)

@@ -6,8 +6,8 @@ glabel func_802BD99C
 /* 3214F0 802BD9A0 AFB1004C */  sw        $s1, 0x4c($sp)
 /* 3214F4 802BD9A4 0080882D */  daddu     $s1, $a0, $zero
 /* 3214F8 802BD9A8 AFB00048 */  sw        $s0, 0x48($sp)
-/* 3214FC 802BD9AC 3C10802C */  lui       $s0, 0x802c
-/* 321500 802BD9B0 2610FF24 */  addiu     $s0, $s0, -0xdc
+/* 3214FC 802BD9AC 3C10802C */  lui       $s0, %hi(D_802BFF24)
+/* 321500 802BD9B0 2610FF24 */  addiu     $s0, $s0, %lo(D_802BFF24)
 /* 321504 802BD9B4 3C048011 */  lui       $a0, %hi(gPlayerStatus)
 /* 321508 802BD9B8 2484EFC8 */  addiu     $a0, $a0, %lo(gPlayerStatus)
 /* 32150C 802BD9BC 27A20034 */  addiu     $v0, $sp, 0x34

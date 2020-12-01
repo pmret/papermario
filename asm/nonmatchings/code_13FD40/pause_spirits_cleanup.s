@@ -6,8 +6,8 @@ glabel pause_spirits_cleanup
 /* 140C1C 8024D8DC AFB10014 */  sw        $s1, 0x14($sp)
 /* 140C20 8024D8E0 0000882D */  daddu     $s1, $zero, $zero
 /* 140C24 8024D8E4 AFB00010 */  sw        $s0, 0x10($sp)
-/* 140C28 8024D8E8 3C108027 */  lui       $s0, 0x8027
-/* 140C2C 8024D8EC 261006C0 */  addiu     $s0, $s0, 0x6c0
+/* 140C28 8024D8E8 3C108027 */  lui       $s0, %hi(D_802706C0)
+/* 140C2C 8024D8EC 261006C0 */  addiu     $s0, $s0, %lo(D_802706C0)
 /* 140C30 8024D8F0 AFBF0018 */  sw        $ra, 0x18($sp)
 .L8024D8F4:
 /* 140C34 8024D8F4 8E040000 */  lw        $a0, ($s0)

@@ -124,9 +124,9 @@ glabel func_80240B94_BDF924
 /* BDFAE8 80240D58 2C620064 */  sltiu     $v0, $v1, 0x64
 /* BDFAEC 80240D5C 10400042 */  beqz      $v0, .L80240E68
 /* BDFAF0 80240D60 00031080 */   sll      $v0, $v1, 2
-/* BDFAF4 80240D64 3C018024 */  lui       $at, 0x8024
+/* BDFAF4 80240D64 3C018024 */  lui       $at, %hi(D_80244870)
 /* BDFAF8 80240D68 00220821 */  addu      $at, $at, $v0
-/* BDFAFC 80240D6C 8C224870 */  lw        $v0, 0x4870($at)
+/* BDFAFC 80240D6C 8C224870 */  lw        $v0, %lo(D_80244870)($at)
 /* BDFB00 80240D70 00400008 */  jr        $v0
 /* BDFB04 80240D74 00000000 */   nop      
 /* BDFB08 80240D78 0280202D */  daddu     $a0, $s4, $zero

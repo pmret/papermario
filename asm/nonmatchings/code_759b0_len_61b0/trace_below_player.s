@@ -108,8 +108,8 @@ glabel trace_below_player
 /* 77B8C 800DE6DC E442012C */  swc1      $f2, 0x12c($v0)
 /* 77B90 800DE6E0 0C00A788 */  jal       get_player_normal_yaw
 /* 77B94 800DE6E4 E4440130 */   swc1     $f4, 0x130($v0)
-/* 77B98 800DE6E8 3C018011 */  lui       $at, 0x8011
-/* 77B9C 800DE6EC E420C938 */  swc1      $f0, -0x36c8($at)
+/* 77B98 800DE6E8 3C018011 */  lui       $at, %hi(D_8010C938)
+/* 77B9C 800DE6EC E420C938 */  swc1      $f0, %lo(D_8010C938)($at)
 /* 77BA0 800DE6F0 0C00A794 */  jal       get_player_normal_pitch
 /* 77BA4 800DE6F4 00000000 */   nop      
 /* 77BA8 800DE6F8 C7A40050 */  lwc1      $f4, 0x50($sp)
@@ -124,8 +124,8 @@ glabel trace_below_player
 /* 77BCC 800DE71C 46341082 */  mul.d     $f2, $f2, $f20
 /* 77BD0 800DE720 00000000 */  nop       
 /* 77BD4 800DE724 4480B000 */  mtc1      $zero, $f22
-/* 77BD8 800DE728 3C018011 */  lui       $at, 0x8011
-/* 77BDC 800DE72C E420C990 */  swc1      $f0, -0x3670($at)
+/* 77BD8 800DE728 3C018011 */  lui       $at, %hi(D_8010C990)
+/* 77BDC 800DE72C E420C990 */  swc1      $f0, %lo(D_8010C990)($at)
 /* 77BE0 800DE730 4600B306 */  mov.s     $f12, $f22
 /* 77BE4 800DE734 46202120 */  cvt.s.d   $f4, $f4
 /* 77BE8 800DE738 462010A0 */  cvt.s.d   $f2, $f2

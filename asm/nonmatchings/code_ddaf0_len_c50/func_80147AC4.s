@@ -56,12 +56,12 @@ glabel func_80147AC4
 /* DE284 80147B84 35EF001C */  ori       $t7, $t7, 0x1c
 /* DE288 80147B88 3C12FF10 */  lui       $s2, 0xff10
 /* DE28C 80147B8C 3652013F */  ori       $s2, $s2, 0x13f
-/* DE290 80147B90 3C11800A */  lui       $s1, 0x800a
-/* DE294 80147B94 2631A66C */  addiu     $s1, $s1, -0x5994
+/* DE290 80147B90 3C11800A */  lui       $s1, %hi(D_8009A66C)
+/* DE294 80147B94 2631A66C */  addiu     $s1, $s1, %lo(D_8009A66C)
 /* DE298 80147B98 3C02D900 */  lui       $v0, 0xd900
 /* DE29C 80147B9C 8E300000 */  lw        $s0, ($s1)
-/* DE2A0 80147BA0 3C04800A */  lui       $a0, 0x800a
-/* DE2A4 80147BA4 8C84A64C */  lw        $a0, -0x59b4($a0)
+/* DE2A0 80147BA0 3C04800A */  lui       $a0, %hi(D_8009A64C)
+/* DE2A4 80147BA4 8C84A64C */  lw        $a0, %lo(D_8009A64C)($a0)
 /* DE2A8 80147BA8 0200182D */  daddu     $v1, $s0, $zero
 /* DE2AC 80147BAC 26100008 */  addiu     $s0, $s0, 8
 /* DE2B0 80147BB0 AE300000 */  sw        $s0, ($s1)

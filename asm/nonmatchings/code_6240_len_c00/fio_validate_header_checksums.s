@@ -3,12 +3,12 @@
 
 glabel fio_validate_header_checksums
 /* 6370 8002AF70 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* 6374 8002AF74 3C02800E */  lui       $v0, 0x800e
-/* 6378 8002AF78 244295E8 */  addiu     $v0, $v0, -0x6a18
+/* 6374 8002AF74 3C02800E */  lui       $v0, %hi(D_800D95E8)
+/* 6378 8002AF78 244295E8 */  addiu     $v0, $v0, %lo(D_800D95E8)
 /* 637C 8002AF7C AFB00010 */  sw        $s0, 0x10($sp)
 /* 6380 8002AF80 0040802D */  daddu     $s0, $v0, $zero
-/* 6384 8002AF84 3C058007 */  lui       $a1, 0x8007
-/* 6388 8002AF88 24A545D0 */  addiu     $a1, $a1, 0x45d0
+/* 6384 8002AF84 3C058007 */  lui       $a1, %hi(D_800745D0)
+/* 6388 8002AF88 24A545D0 */  addiu     $a1, $a1, %lo(D_800745D0)
 /* 638C 8002AF8C AFBF0014 */  sw        $ra, 0x14($sp)
 /* 6390 8002AF90 0C01BB5C */  jal       strcmp
 /* 6394 8002AF94 0200202D */   daddu    $a0, $s0, $zero

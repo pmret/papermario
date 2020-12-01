@@ -15,9 +15,9 @@ glabel func_80241764_CCCA74
 /* CCCA9C 8024178C 00031C00 */  sll       $v1, $v1, 0x10
 /* CCCAA0 80241790 00031B83 */  sra       $v1, $v1, 0xe
 /* CCCAA4 80241794 A444008E */  sh        $a0, 0x8e($v0)
-/* CCCAA8 80241798 3C018024 */  lui       $at, 0x8024
+/* CCCAA8 80241798 3C018024 */  lui       $at, %hi(D_802444C0)
 /* CCCAAC 8024179C 00230821 */  addu      $at, $at, $v1
-/* CCCAB0 802417A0 C42244C0 */  lwc1      $f2, 0x44c0($at)
+/* CCCAB0 802417A0 C42244C0 */  lwc1      $f2, %lo(D_802444C0)($at)
 /* CCCAB4 802417A4 8443008E */  lh        $v1, 0x8e($v0)
 /* CCCAB8 802417A8 46020000 */  add.s     $f0, $f0, $f2
 /* CCCABC 802417AC 28630005 */  slti      $v1, $v1, 5

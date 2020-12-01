@@ -15,7 +15,7 @@ glabel func_802439FC_96CBBC
 /* 96CBE4 80243A24 8FBF0014 */  lw        $ra, 0x14($sp)
 /* 96CBE8 80243A28 8FB00010 */  lw        $s0, 0x10($sp)
 /* 96CBEC 80243A2C 24020002 */  addiu     $v0, $zero, 2
-/* 96CBF0 80243A30 3C018025 */  lui       $at, 0x8025
-/* 96CBF4 80243A34 AC23F3B8 */  sw        $v1, -0xc48($at)
+/* 96CBF0 80243A30 3C018025 */  lui       $at, %hi(D_8024F3B8)
+/* 96CBF4 80243A34 AC23F3B8 */  sw        $v1, %lo(D_8024F3B8)($at)
 /* 96CBF8 80243A38 03E00008 */  jr        $ra
 /* 96CBFC 80243A3C 27BD0018 */   addiu    $sp, $sp, 0x18

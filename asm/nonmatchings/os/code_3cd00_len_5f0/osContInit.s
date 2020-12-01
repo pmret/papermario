@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel osContInit
-/* 3CF80 80061B80 3C028009 */  lui       $v0, 0x8009
-/* 3CF84 80061B84 8C423DB0 */  lw        $v0, 0x3db0($v0)
+/* 3CF80 80061B80 3C028009 */  lui       $v0, %hi(D_80093DB0)
+/* 3CF84 80061B84 8C423DB0 */  lw        $v0, %lo(D_80093DB0)($v0)
 /* 3CF88 80061B88 27BDFF80 */  addiu     $sp, $sp, -0x80
 /* 3CF8C 80061B8C AFB40070 */  sw        $s4, 0x70($sp)
 /* 3CF90 80061B90 0080A021 */  addu      $s4, $a0, $zero
@@ -21,9 +21,9 @@ glabel osContInit
 /* 3CFC0 80061BC0 00001021 */   addu     $v0, $zero, $zero
 .L80061BC4:
 /* 3CFC4 80061BC4 24020001 */  addiu     $v0, $zero, 1
-/* 3CFC8 80061BC8 3C018009 */  lui       $at, 0x8009
+/* 3CFC8 80061BC8 3C018009 */  lui       $at, %hi(D_80093DB0)
 /* 3CFCC 80061BCC 0C0198A8 */  jal       osGetTime
-/* 3CFD0 80061BD0 AC223DB0 */   sw       $v0, 0x3db0($at)
+/* 3CFD0 80061BD0 AC223DB0 */   sw       $v0, %lo(D_80093DB0)($at)
 /* 3CFD4 80061BD4 00409021 */  addu      $s2, $v0, $zero
 /* 3CFD8 80061BD8 00609821 */  addu      $s3, $v1, $zero
 /* 3CFDC 80061BDC 56400022 */  bnel      $s2, $zero, .L80061C68
@@ -63,13 +63,13 @@ glabel osContInit
 /* 3D060 80061C60 24060001 */   addiu    $a2, $zero, 1
 /* 3D064 80061C64 24020004 */  addiu     $v0, $zero, 4
 .L80061C68:
-/* 3D068 80061C68 3C01800A */  lui       $at, 0x800a
-/* 3D06C 80061C6C A022A606 */  sb        $v0, -0x59fa($at)
+/* 3D068 80061C68 3C01800A */  lui       $at, %hi(D_8009A606)
+/* 3D06C 80061C6C A022A606 */  sb        $v0, %lo(D_8009A606)($at)
 /* 3D070 80061C70 0C018774 */  jal       osPackRequestData
 /* 3D074 80061C74 00002021 */   addu     $a0, $zero, $zero
 /* 3D078 80061C78 24040001 */  addiu     $a0, $zero, 1
-/* 3D07C 80061C7C 3C11800B */  lui       $s1, 0x800b
-/* 3D080 80061C80 26310ED0 */  addiu     $s1, $s1, 0xed0
+/* 3D07C 80061C7C 3C11800B */  lui       $s1, %hi(D_800B0ED0)
+/* 3D080 80061C80 26310ED0 */  addiu     $s1, $s1, %lo(D_800B0ED0)
 /* 3D084 80061C84 0C019730 */  jal       osSiRawStartDma
 /* 3D088 80061C88 02202821 */   addu     $a1, $s1, $zero
 /* 3D08C 80061C8C 02802021 */  addu      $a0, $s4, $zero
@@ -88,13 +88,13 @@ glabel osContInit
 /* 3D0C0 80061CC0 02A02021 */  addu      $a0, $s5, $zero
 /* 3D0C4 80061CC4 0C018747 */  jal       osContGetInitData
 /* 3D0C8 80061CC8 02C02821 */   addu     $a1, $s6, $zero
-/* 3D0CC 80061CCC 3C01800A */  lui       $at, 0x800a
+/* 3D0CC 80061CCC 3C01800A */  lui       $at, %hi(D_8009A61C)
 /* 3D0D0 80061CD0 0C01975C */  jal       osSiCreateAccessQueue
-/* 3D0D4 80061CD4 A020A61C */   sb       $zero, -0x59e4($at)
-/* 3D0D8 80061CD8 3C04800E */  lui       $a0, 0x800e
-/* 3D0DC 80061CDC 2484AAC0 */  addiu     $a0, $a0, -0x5540
-/* 3D0E0 80061CE0 3C05800A */  lui       $a1, 0x800a
-/* 3D0E4 80061CE4 24A5A620 */  addiu     $a1, $a1, -0x59e0
+/* 3D0D4 80061CD4 A020A61C */   sb       $zero, %lo(D_8009A61C)($at)
+/* 3D0D8 80061CD8 3C04800E */  lui       $a0, %hi(D_800DAAC0)
+/* 3D0DC 80061CDC 2484AAC0 */  addiu     $a0, $a0, %lo(D_800DAAC0)
+/* 3D0E0 80061CE0 3C05800A */  lui       $a1, %hi(D_8009A620)
+/* 3D0E4 80061CE4 24A5A620 */  addiu     $a1, $a1, %lo(D_8009A620)
 /* 3D0E8 80061CE8 0C019560 */  jal       osCreateMesgQueue
 /* 3D0EC 80061CEC 24060001 */   addiu    $a2, $zero, 1
 /* 3D0F0 80061CF0 02001021 */  addu      $v0, $s0, $zero

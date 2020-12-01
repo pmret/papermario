@@ -30,9 +30,9 @@ glabel func_80240C60_B5EF10
 /* B5EF74 80240CC4 000320C0 */  sll       $a0, $v1, 3
 /* B5EF78 80240CC8 00641821 */  addu      $v1, $v1, $a0
 /* B5EF7C 80240CCC 000318C0 */  sll       $v1, $v1, 3
-/* B5EF80 80240CD0 3C01800B */  lui       $at, 0x800b
+/* B5EF80 80240CD0 3C01800B */  lui       $at, %hi(D_800B1DEC)
 /* B5EF84 80240CD4 00230821 */  addu      $at, $at, $v1
-/* B5EF88 80240CD8 C42C1DEC */  lwc1      $f12, 0x1dec($at)
+/* B5EF88 80240CD8 C42C1DEC */  lwc1      $f12, %lo(D_800B1DEC)($at)
 /* B5EF8C 80240CDC 0C00A88D */  jal       sin_cos_deg
 /* B5EF90 80240CE0 0040A82D */   daddu    $s5, $v0, $zero
 /* B5EF94 80240CE4 1200005D */  beqz      $s0, .L80240E5C
@@ -79,8 +79,8 @@ glabel func_80240C60_B5EF10
 /* B5F034 80240D84 26100004 */   addiu    $s0, $s0, 4
 /* B5F038 80240D88 0000882D */  daddu     $s1, $zero, $zero
 /* B5F03C 80240D8C 0240802D */  daddu     $s0, $s2, $zero
-/* B5F040 80240D90 3C148024 */  lui       $s4, 0x8024
-/* B5F044 80240D94 26943E58 */  addiu     $s4, $s4, 0x3e58
+/* B5F040 80240D90 3C148024 */  lui       $s4, %hi(D_80243E58)
+/* B5F044 80240D94 26943E58 */  addiu     $s4, $s4, %lo(D_80243E58)
 /* B5F048 80240D98 3C014248 */  lui       $at, 0x4248
 /* B5F04C 80240D9C 4481A000 */  mtc1      $at, $f20
 /* B5F050 80240DA0 24130044 */  addiu     $s3, $zero, 0x44
@@ -150,8 +150,8 @@ glabel func_80240C60_B5EF10
 /* B5F144 80240E94 00000000 */   nop      
 .L80240E98:
 /* B5F148 80240E98 0000882D */  daddu     $s1, $zero, $zero
-/* B5F14C 80240E9C 3C148024 */  lui       $s4, 0x8024
-/* B5F150 80240EA0 26943E58 */  addiu     $s4, $s4, 0x3e58
+/* B5F14C 80240E9C 3C148024 */  lui       $s4, %hi(D_80243E58)
+/* B5F150 80240EA0 26943E58 */  addiu     $s4, $s4, %lo(D_80243E58)
 /* B5F154 80240EA4 24130020 */  addiu     $s3, $zero, 0x20
 /* B5F158 80240EA8 3C064248 */  lui       $a2, 0x4248
 /* B5F15C 80240EAC 44800000 */  mtc1      $zero, $f0
@@ -197,8 +197,8 @@ glabel func_80240C60_B5EF10
 /* B5F1F8 80240F48 AE400060 */   sw       $zero, 0x60($s2)
 .L80240F4C:
 /* B5F1FC 80240F4C 0000882D */  daddu     $s1, $zero, $zero
-/* B5F200 80240F50 3C148024 */  lui       $s4, 0x8024
-/* B5F204 80240F54 26943E58 */  addiu     $s4, $s4, 0x3e58
+/* B5F200 80240F50 3C148024 */  lui       $s4, %hi(D_80243E58)
+/* B5F204 80240F54 26943E58 */  addiu     $s4, $s4, %lo(D_80243E58)
 /* B5F208 80240F58 24130020 */  addiu     $s3, $zero, 0x20
 /* B5F20C 80240F5C 0240802D */  daddu     $s0, $s2, $zero
 /* B5F210 80240F60 3C014248 */  lui       $at, 0x4248

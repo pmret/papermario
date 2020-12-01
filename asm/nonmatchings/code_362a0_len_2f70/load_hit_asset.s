@@ -8,8 +8,8 @@ glabel load_hit_asset
 /* 363CC 8005AFCC AFB1001C */  sw        $s1, 0x1c($sp)
 /* 363D0 8005AFD0 0C016AFA */  jal       get_current_map_header
 /* 363D4 8005AFD4 AFB00018 */   sw       $s0, 0x18($sp)
-/* 363D8 8005AFD8 3C04800E */  lui       $a0, 0x800e
-/* 363DC 8005AFDC 248491E0 */  addiu     $a0, $a0, -0x6e20
+/* 363D8 8005AFD8 3C04800E */  lui       $a0, %hi(D_800D91E0)
+/* 363DC 8005AFDC 248491E0 */  addiu     $a0, $a0, %lo(D_800D91E0)
 /* 363E0 8005AFE0 27A50010 */  addiu     $a1, $sp, 0x10
 /* 363E4 8005AFE4 0C016B3A */  jal       load_asset_by_name
 /* 363E8 8005AFE8 0040902D */   daddu    $s2, $v0, $zero

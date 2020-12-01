@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel func_80047608
-/* 22A08 80047608 3C04800A */  lui       $a0, 0x800a
-/* 22A0C 8004760C 8C840F44 */  lw        $a0, 0xf44($a0)
+/* 22A08 80047608 3C04800A */  lui       $a0, %hi(D_800A0F44)
+/* 22A0C 8004760C 8C840F44 */  lw        $a0, %lo(D_800A0F44)($a0)
 /* 22A10 80047610 0000282D */  daddu     $a1, $zero, $zero
 .L80047614:
 /* 22A14 80047614 8C820000 */  lw        $v0, ($a0)

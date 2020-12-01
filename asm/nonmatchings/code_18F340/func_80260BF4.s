@@ -6,8 +6,8 @@ glabel func_80260BF4
 /* 18F4D8 80260BF8 AFB20018 */  sw        $s2, 0x18($sp)
 /* 18F4DC 80260BFC 0080902D */  daddu     $s2, $a0, $zero
 /* 18F4E0 80260C00 AFB00010 */  sw        $s0, 0x10($sp)
-/* 18F4E4 80260C04 3C108028 */  lui       $s0, 0x8028
-/* 18F4E8 80260C08 26100FC0 */  addiu     $s0, $s0, 0xfc0
+/* 18F4E4 80260C04 3C108028 */  lui       $s0, %hi(D_80280FC0)
+/* 18F4E8 80260C08 26100FC0 */  addiu     $s0, $s0, %lo(D_80280FC0)
 /* 18F4EC 80260C0C AFBF001C */  sw        $ra, 0x1c($sp)
 /* 18F4F0 80260C10 AFB10014 */  sw        $s1, 0x14($sp)
 /* 18F4F4 80260C14 86020000 */  lh        $v0, ($s0)

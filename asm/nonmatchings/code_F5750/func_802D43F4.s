@@ -3,8 +3,8 @@
 
 glabel func_802D43F4
 /* F8DA4 802D43F4 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* F8DA8 802D43F8 3C02802E */  lui       $v0, 0x802e
-/* F8DAC 802D43FC 8C42B7C0 */  lw        $v0, -0x4840($v0)
+/* F8DA8 802D43F8 3C02802E */  lui       $v0, %hi(D_802DB7C0)
+/* F8DAC 802D43FC 8C42B7C0 */  lw        $v0, %lo(D_802DB7C0)($v0)
 /* F8DB0 802D4400 00042080 */  sll       $a0, $a0, 2
 /* F8DB4 802D4404 AFBF0014 */  sw        $ra, 0x14($sp)
 /* F8DB8 802D4408 AFB00010 */  sw        $s0, 0x10($sp)

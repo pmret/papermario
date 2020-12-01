@@ -3,9 +3,9 @@
 
 glabel func_802DEA6C
 /* 101B5C 802DEA6C 00042080 */  sll       $a0, $a0, 2
-/* 101B60 802DEA70 3C02802E */  lui       $v0, 0x802e
+/* 101B60 802DEA70 3C02802E */  lui       $v0, %hi(D_802DF5B0)
 /* 101B64 802DEA74 00441021 */  addu      $v0, $v0, $a0
-/* 101B68 802DEA78 8C42F5B0 */  lw        $v0, -0xa50($v0)
+/* 101B68 802DEA78 8C42F5B0 */  lw        $v0, %lo(D_802DF5B0)($v0)
 /* 101B6C 802DEA7C 14400003 */  bnez      $v0, .L802DEA8C
 /* 101B70 802DEA80 00000000 */   nop      
 /* 101B74 802DEA84 03E00008 */  jr        $ra

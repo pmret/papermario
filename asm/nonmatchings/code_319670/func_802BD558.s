@@ -58,8 +58,8 @@ glabel func_802BD558
 /* 319B9C 802BD62C A20200BF */  sb        $v0, 0xbf($s0)
 /* 319BA0 802BD630 8E020000 */  lw        $v0, ($s0)
 /* 319BA4 802BD634 24030015 */  addiu     $v1, $zero, 0x15
-/* 319BA8 802BD638 3C01802C */  lui       $at, 0x802c
-/* 319BAC 802BD63C AC23EBC0 */  sw        $v1, -0x1440($at)
+/* 319BA8 802BD638 3C01802C */  lui       $at, %hi(D_802BEBC0)
+/* 319BAC 802BD63C AC23EBC0 */  sw        $v1, %lo(D_802BEBC0)($at)
 /* 319BB0 802BD640 34420800 */  ori       $v0, $v0, 0x800
 /* 319BB4 802BD644 AE020000 */  sw        $v0, ($s0)
 .L802BD648:

@@ -101,9 +101,9 @@ glabel start_battle
 /* 1FC1C 8004481C 3C01800A */  lui       $at, %hi(gGameState)
 /* 1FC20 80044820 AC22A600 */  sw        $v0, %lo(gGameState)($at)
 /* 1FC24 80044824 24020001 */  addiu     $v0, $zero, 1
-/* 1FC28 80044828 3C01800A */  lui       $at, 0x800a
-/* 1FC2C 8004482C AC22A678 */  sw        $v0, -0x5988($at)
-/* 1FC30 80044830 3C01800A */  lui       $at, 0x800a
-/* 1FC34 80044834 AC20A5D0 */  sw        $zero, -0x5a30($at)
+/* 1FC28 80044828 3C01800A */  lui       $at, %hi(D_8009A678)
+/* 1FC2C 8004482C AC22A678 */  sw        $v0, %lo(D_8009A678)($at)
+/* 1FC30 80044830 3C01800A */  lui       $at, %hi(D_8009A5D0)
+/* 1FC34 80044834 AC20A5D0 */  sw        $zero, %lo(D_8009A5D0)($at)
 /* 1FC38 80044838 03E00008 */  jr        $ra
 /* 1FC3C 8004483C 27BD0030 */   addiu    $sp, $sp, 0x30

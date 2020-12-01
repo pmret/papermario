@@ -2,18 +2,18 @@
 .set noreorder # don't insert nops after branches
 
 glabel osTimerServicesInit
-/* 41880 80066480 3C028009 */  lui       $v0, 0x8009
-/* 41884 80066484 8C424670 */  lw        $v0, 0x4670($v0)
+/* 41880 80066480 3C028009 */  lui       $v0, %hi(D_80094670)
+/* 41884 80066484 8C424670 */  lw        $v0, %lo(D_80094670)($v0)
 /* 41888 80066488 00002021 */  addu      $a0, $zero, $zero
 /* 4188C 8006648C 00002821 */  addu      $a1, $zero, $zero
-/* 41890 80066490 3C01800A */  lui       $at, 0x800a
-/* 41894 80066494 AC24A608 */  sw        $a0, -0x59f8($at)
-/* 41898 80066498 3C01800A */  lui       $at, 0x800a
-/* 4189C 8006649C AC25A60C */  sw        $a1, -0x59f4($at)
-/* 418A0 800664A0 3C01800A */  lui       $at, 0x800a
-/* 418A4 800664A4 AC20A5C8 */  sw        $zero, -0x5a38($at)
-/* 418A8 800664A8 3C01800A */  lui       $at, 0x800a
-/* 418AC 800664AC AC20A5E4 */  sw        $zero, -0x5a1c($at)
+/* 41890 80066490 3C01800A */  lui       $at, %hi(D_8009A608)
+/* 41894 80066494 AC24A608 */  sw        $a0, %lo(D_8009A608)($at)
+/* 41898 80066498 3C01800A */  lui       $at, %hi(D_8009A60C)
+/* 4189C 8006649C AC25A60C */  sw        $a1, %lo(D_8009A60C)($at)
+/* 418A0 800664A0 3C01800A */  lui       $at, %hi(D_8009A5C8)
+/* 418A4 800664A4 AC20A5C8 */  sw        $zero, %lo(D_8009A5C8)($at)
+/* 418A8 800664A8 3C01800A */  lui       $at, %hi(D_8009A5E4)
+/* 418AC 800664AC AC20A5E4 */  sw        $zero, %lo(D_8009A5E4)($at)
 /* 418B0 800664B0 AC440010 */  sw        $a0, 0x10($v0)
 /* 418B4 800664B4 AC450014 */  sw        $a1, 0x14($v0)
 /* 418B8 800664B8 AC440008 */  sw        $a0, 8($v0)

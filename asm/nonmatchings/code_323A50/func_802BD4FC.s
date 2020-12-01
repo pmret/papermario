@@ -3,14 +3,14 @@
 
 glabel func_802BD4FC
 /* 323E4C 802BD4FC 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* 323E50 802BD500 3C058011 */  lui       $a1, 0x8011
-/* 323E54 802BD504 24A5C954 */  addiu     $a1, $a1, -0x36ac
+/* 323E50 802BD500 3C058011 */  lui       $a1, %hi(D_8010C954)
+/* 323E54 802BD504 24A5C954 */  addiu     $a1, $a1, %lo(D_8010C954)
 /* 323E58 802BD508 AFBF0010 */  sw        $ra, 0x10($sp)
 /* 323E5C 802BD50C 8CA20000 */  lw        $v0, ($a1)
 /* 323E60 802BD510 10400008 */  beqz      $v0, .L802BD534
 /* 323E64 802BD514 00000000 */   nop      
-/* 323E68 802BD518 3C03802C */  lui       $v1, 0x802c
-/* 323E6C 802BD51C 8C63DFFC */  lw        $v1, -0x2004($v1)
+/* 323E68 802BD518 3C03802C */  lui       $v1, %hi(D_802BDFFC)
+/* 323E6C 802BD51C 8C63DFFC */  lw        $v1, %lo(D_802BDFFC)($v1)
 /* 323E70 802BD520 8C620008 */  lw        $v0, 8($v1)
 /* 323E74 802BD524 ACA00000 */  sw        $zero, ($a1)
 /* 323E78 802BD528 AC820000 */  sw        $v0, ($a0)

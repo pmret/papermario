@@ -15,7 +15,7 @@ glabel func_80243994_C7A674
 /* C7A69C 802439BC 8FBF0014 */  lw        $ra, 0x14($sp)
 /* C7A6A0 802439C0 8FB00010 */  lw        $s0, 0x10($sp)
 /* C7A6A4 802439C4 24020002 */  addiu     $v0, $zero, 2
-/* C7A6A8 802439C8 3C018024 */  lui       $at, 0x8024
-/* C7A6AC 802439CC AC237664 */  sw        $v1, 0x7664($at)
+/* C7A6A8 802439C8 3C018024 */  lui       $at, %hi(D_80247664)
+/* C7A6AC 802439CC AC237664 */  sw        $v1, %lo(D_80247664)($at)
 /* C7A6B0 802439D0 03E00008 */  jr        $ra
 /* C7A6B4 802439D4 27BD0018 */   addiu    $sp, $sp, 0x18

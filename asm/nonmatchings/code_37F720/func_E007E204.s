@@ -25,9 +25,9 @@ glabel func_E007E204
 /* 37F970 E007E250 2CA20007 */  sltiu     $v0, $a1, 7
 /* 37F974 E007E254 10400075 */  beqz      $v0, .LE007E42C
 /* 37F978 E007E258 00051080 */   sll      $v0, $a1, 2
-/* 37F97C E007E25C 3C01E008 */  lui       $at, 0xe008
+/* 37F97C E007E25C 3C01E008 */  lui       $at, %hi(D_E007EC48)
 /* 37F980 E007E260 00220821 */  addu      $at, $at, $v0
-/* 37F984 E007E264 8C22EC48 */  lw        $v0, -0x13b8($at)
+/* 37F984 E007E264 8C22EC48 */  lw        $v0, %lo(D_E007EC48)($at)
 /* 37F988 E007E268 00400008 */  jr        $v0
 /* 37F98C E007E26C 00000000 */   nop      
 /* 37F990 E007E270 0C080150 */  jal       func_E0200540
@@ -57,11 +57,11 @@ glabel func_E007E204
 /* 37F9F0 E007E2D0 0801F909 */  j         .LE007E424
 /* 37F9F4 E007E2D4 AE000040 */   sw       $zero, 0x40($s0)
 .LE007E2D8:
-/* 37F9F8 E007E2D8 3C02E008 */  lui       $v0, 0xe008
+/* 37F9F8 E007E2D8 3C02E008 */  lui       $v0, %hi(D_E007EC2F)
 /* 37F9FC E007E2DC 00431021 */  addu      $v0, $v0, $v1
-/* 37FA00 E007E2E0 8042EC2F */  lb        $v0, -0x13d1($v0)
-/* 37FA04 E007E2E4 3C01E008 */  lui       $at, 0xe008
-/* 37FA08 E007E2E8 D422EC68 */  ldc1      $f2, -0x1398($at)
+/* 37FA00 E007E2E0 8042EC2F */  lb        $v0, %lo(D_E007EC2F)($v0)
+/* 37FA04 E007E2E4 3C01E008 */  lui       $at, %hi(D_E007EC68)
+/* 37FA08 E007E2E8 D422EC68 */  ldc1      $f2, %lo(D_E007EC68)($at)
 /* 37FA0C E007E2EC 44820000 */  mtc1      $v0, $f0
 /* 37FA10 E007E2F0 00000000 */  nop       
 /* 37FA14 E007E2F4 46800021 */  cvt.d.w   $f0, $f0
@@ -127,8 +127,8 @@ glabel func_E007E204
 /* 37FAF0 E007E3D0 44810000 */  mtc1      $at, $f0
 /* 37FAF4 E007E3D4 00000000 */  nop       
 /* 37FAF8 E007E3D8 46002100 */  add.s     $f4, $f4, $f0
-/* 37FAFC E007E3DC 3C01E008 */  lui       $at, 0xe008
-/* 37FB00 E007E3E0 D422EC70 */  ldc1      $f2, -0x1390($at)
+/* 37FAFC E007E3DC 3C01E008 */  lui       $at, %hi(D_E007EC70)
+/* 37FB00 E007E3E0 D422EC70 */  ldc1      $f2, %lo(D_E007EC70)($at)
 /* 37FB04 E007E3E4 C600003C */  lwc1      $f0, 0x3c($s0)
 /* 37FB08 E007E3E8 46800021 */  cvt.d.w   $f0, $f0
 /* 37FB0C E007E3EC 46220002 */  mul.d     $f0, $f0, $f2

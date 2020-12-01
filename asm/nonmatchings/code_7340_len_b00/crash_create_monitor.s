@@ -6,8 +6,8 @@ glabel crash_create_monitor
 /* 7CB4 8002C8B4 3C07FFFD */  lui       $a3, 0xfffd
 /* 7CB8 8002C8B8 34E7A800 */  ori       $a3, $a3, 0xa800
 /* 7CBC 8002C8BC AFB00018 */  sw        $s0, 0x18($sp)
-/* 7CC0 8002C8C0 3C10800A */  lui       $s0, 0x800a
-/* 7CC4 8002C8C4 2610BB30 */  addiu     $s0, $s0, -0x44d0
+/* 7CC0 8002C8C0 3C10800A */  lui       $s0, %hi(D_8009BB30)
+/* 7CC4 8002C8C4 2610BB30 */  addiu     $s0, $s0, %lo(D_8009BB30)
 /* 7CC8 8002C8C8 AFB1001C */  sw        $s1, 0x1c($sp)
 /* 7CCC 8002C8CC 261109B0 */  addiu     $s1, $s0, 0x9b0
 /* 7CD0 8002C8D0 0220202D */  daddu     $a0, $s1, $zero
@@ -18,8 +18,8 @@ glabel crash_create_monitor
 /* 7CE4 8002C8E4 A60209D0 */  sh        $v0, 0x9d0($s0)
 /* 7CE8 8002C8E8 24020010 */  addiu     $v0, $zero, 0x10
 /* 7CEC 8002C8EC A60209D2 */  sh        $v0, 0x9d2($s0)
-/* 7CF0 8002C8F0 3C028000 */  lui       $v0, 0x8000
-/* 7CF4 8002C8F4 8C420318 */  lw        $v0, 0x318($v0)
+/* 7CF0 8002C8F0 3C028000 */  lui       $v0, %hi(D_80000318)
+/* 7CF4 8002C8F4 8C420318 */  lw        $v0, %lo(D_80000318)($v0)
 /* 7CF8 8002C8F8 3C03A000 */  lui       $v1, 0xa000
 /* 7CFC 8002C8FC 00431025 */  or        $v0, $v0, $v1
 /* 7D00 8002C900 00471021 */  addu      $v0, $v0, $a3

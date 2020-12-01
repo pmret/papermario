@@ -5,8 +5,8 @@ glabel func_802DBDBC
 /* FEEAC 802DBDBC 0080382D */  daddu     $a3, $a0, $zero
 /* FEEB0 802DBDC0 00A0402D */  daddu     $t0, $a1, $zero
 /* FEEB4 802DBDC4 00E0182D */  daddu     $v1, $a3, $zero
-/* FEEB8 802DBDC8 3C02802E */  lui       $v0, 0x802e
-/* FEEBC 802DBDCC 2442F390 */  addiu     $v0, $v0, -0xc70
+/* FEEB8 802DBDC8 3C02802E */  lui       $v0, %hi(D_802DF390)
+/* FEEBC 802DBDCC 2442F390 */  addiu     $v0, $v0, %lo(D_802DF390)
 /* FEEC0 802DBDD0 24440040 */  addiu     $a0, $v0, 0x40
 .L802DBDD4:
 /* FEEC4 802DBDD4 8C490000 */  lw        $t1, ($v0)

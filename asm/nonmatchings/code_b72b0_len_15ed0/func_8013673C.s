@@ -23,9 +23,9 @@ glabel func_8013673C
 /* CCE84 80136784 1040008B */  beqz      $v0, .L801369B4
 /* CCE88 80136788 00C0982D */   daddu    $s3, $a2, $zero
 /* CCE8C 8013678C 00031080 */  sll       $v0, $v1, 2
-/* CCE90 80136790 3C018015 */  lui       $at, 0x8015
+/* CCE90 80136790 3C018015 */  lui       $at, %hi(D_80150E60)
 /* CCE94 80136794 00220821 */  addu      $at, $at, $v0
-/* CCE98 80136798 8C220E60 */  lw        $v0, 0xe60($at)
+/* CCE98 80136798 8C220E60 */  lw        $v0, %lo(D_80150E60)($at)
 /* CCE9C 8013679C 00400008 */  jr        $v0
 /* CCEA0 801367A0 00000000 */   nop      
 /* CCEA4 801367A4 94820018 */  lhu       $v0, 0x18($a0)
@@ -105,9 +105,9 @@ glabel func_8013673C
 /* CCFA0 801368A0 3C048008 */  lui       $a0, %hi(gItemTable+0x18)
 /* CCFA4 801368A4 00832021 */  addu      $a0, $a0, $v1
 /* CCFA8 801368A8 948478F8 */  lhu       $a0, %lo(gItemTable+0x18)($a0)
-/* CCFAC 801368AC 3C068015 */  lui       $a2, 0x8015
+/* CCFAC 801368AC 3C068015 */  lui       $a2, %hi(D_8014C6E4)
 /* CCFB0 801368B0 00C23021 */  addu      $a2, $a2, $v0
-/* CCFB4 801368B4 84C6C6E4 */  lh        $a2, -0x391c($a2)
+/* CCFB4 801368B4 84C6C6E4 */  lh        $a2, %lo(D_8014C6E4)($a2)
 /* CCFB8 801368B8 30830040 */  andi      $v1, $a0, 0x40
 /* CCFBC 801368BC 5460000E */  bnel      $v1, $zero, .L801368F8
 /* CCFC0 801368C0 0200202D */   daddu    $a0, $s0, $zero
@@ -148,8 +148,8 @@ glabel func_8013673C
 /* CD040 80136940 26450014 */   addiu    $a1, $s2, 0x14
 /* CD044 80136944 0804DA65 */  j         .L80136994
 /* CD048 80136948 00000000 */   nop      
-/* CD04C 8013694C 3C028015 */  lui       $v0, 0x8015
-/* CD050 80136950 8C4268EC */  lw        $v0, 0x68ec($v0)
+/* CD04C 8013694C 3C028015 */  lui       $v0, %hi(D_801568EC)
+/* CD050 80136950 8C4268EC */  lw        $v0, %lo(D_801568EC)($v0)
 /* CD054 80136954 00021140 */  sll       $v0, $v0, 5
 /* CD058 80136958 3C048008 */  lui       $a0, %hi(gItemTable)
 /* CD05C 8013695C 00822021 */  addu      $a0, $a0, $v0
@@ -167,8 +167,8 @@ glabel func_8013673C
 /* CD08C 8013698C AFA00014 */   sw       $zero, 0x14($sp)
 /* CD090 80136990 26450014 */  addiu     $a1, $s2, 0x14
 .L80136994:
-/* CD094 80136994 3C108015 */  lui       $s0, 0x8015
-/* CD098 80136998 261068E0 */  addiu     $s0, $s0, 0x68e0
+/* CD094 80136994 3C108015 */  lui       $s0, %hi(D_801568E0)
+/* CD098 80136998 261068E0 */  addiu     $s0, $s0, %lo(D_801568E0)
 /* CD09C 8013699C 8E040000 */  lw        $a0, ($s0)
 /* CD0A0 801369A0 0C051261 */  jal       set_icon_render_pos
 /* CD0A4 801369A4 26660014 */   addiu    $a2, $s3, 0x14

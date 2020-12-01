@@ -42,13 +42,13 @@ glabel _show_message
 /* F4D64 802D03B4 26100004 */  addiu     $s0, $s0, 4
 /* F4D68 802D03B8 0C0B1EAF */  jal       get_variable
 /* F4D6C 802D03BC 0240202D */   daddu    $a0, $s2, $zero
-/* F4D70 802D03C0 3C14802E */  lui       $s4, 0x802e
-/* F4D74 802D03C4 2694AE54 */  addiu     $s4, $s4, -0x51ac
+/* F4D70 802D03C0 3C14802E */  lui       $s4, %hi(D_802DAE54)
+/* F4D74 802D03C4 2694AE54 */  addiu     $s4, $s4, %lo(D_802DAE54)
 /* F4D78 802D03C8 AE420074 */  sw        $v0, 0x74($s2)
 /* F4D7C 802D03CC AE800000 */  sw        $zero, ($s4)
 /* F4D80 802D03D0 8E420074 */  lw        $v0, 0x74($s2)
-/* F4D84 802D03D4 3C11802E */  lui       $s1, 0x802e
-/* F4D88 802D03D8 2631AE50 */  addiu     $s1, $s1, -0x51b0
+/* F4D84 802D03D4 3C11802E */  lui       $s1, %hi(D_802DAE50)
+/* F4D88 802D03D8 2631AE50 */  addiu     $s1, $s1, %lo(D_802DAE50)
 /* F4D8C 802D03DC 30420100 */  andi      $v0, $v0, 0x100
 /* F4D90 802D03E0 1040000B */  beqz      $v0, .L802D0410
 /* F4D94 802D03E4 AE200000 */   sw       $zero, ($s1)
@@ -181,11 +181,11 @@ glabel _show_message
 /* F4F68 802D05B8 3C04802E */  lui       $a0, %hi(gCurrentPrintContext)
 /* F4F6C 802D05BC 8C84B260 */  lw        $a0, %lo(gCurrentPrintContext)($a0)
 /* F4F70 802D05C0 8FA30020 */  lw        $v1, 0x20($sp)
-/* F4F74 802D05C4 3C05802E */  lui       $a1, 0x802e
-/* F4F78 802D05C8 8CA5AE50 */  lw        $a1, -0x51b0($a1)
+/* F4F74 802D05C4 3C05802E */  lui       $a1, %hi(D_802DAE50)
+/* F4F78 802D05C8 8CA5AE50 */  lw        $a1, %lo(D_802DAE50)($a1)
 /* F4F7C 802D05CC 8FA20024 */  lw        $v0, 0x24($sp)
-/* F4F80 802D05D0 3C06802E */  lui       $a2, 0x802e
-/* F4F84 802D05D4 8CC6AE54 */  lw        $a2, -0x51ac($a2)
+/* F4F80 802D05D0 3C06802E */  lui       $a2, %hi(D_802DAE54)
+/* F4F84 802D05D4 8CC6AE54 */  lw        $a2, %lo(D_802DAE54)($a2)
 /* F4F88 802D05D8 00652821 */  addu      $a1, $v1, $a1
 /* F4F8C 802D05DC 0C0496AE */  jal       clamp_printer_coords
 /* F4F90 802D05E0 00463021 */   addu     $a2, $v0, $a2
@@ -219,9 +219,9 @@ glabel _show_message
 /* F4FF8 802D0648 2C620006 */  sltiu     $v0, $v1, 6
 /* F4FFC 802D064C 10400013 */  beqz      $v0, .L802D069C
 /* F5000 802D0650 00031080 */   sll      $v0, $v1, 2
-/* F5004 802D0654 3C01802E */  lui       $at, 0x802e
+/* F5004 802D0654 3C01802E */  lui       $at, %hi(D_802DA1F0)
 /* F5008 802D0658 00220821 */  addu      $at, $at, $v0
-/* F500C 802D065C 8C22A1F0 */  lw        $v0, -0x5e10($at)
+/* F500C 802D065C 8C22A1F0 */  lw        $v0, %lo(D_802DA1F0)($at)
 /* F5010 802D0660 00400008 */  jr        $v0
 /* F5014 802D0664 00000000 */   nop      
 /* F5018 802D0668 E614000C */  swc1      $f20, 0xc($s0)
@@ -317,11 +317,11 @@ glabel _show_message
 /* F516C 802D07BC 3C04802E */  lui       $a0, %hi(gCurrentPrintContext)
 /* F5170 802D07C0 8C84B260 */  lw        $a0, %lo(gCurrentPrintContext)($a0)
 /* F5174 802D07C4 8FA30020 */  lw        $v1, 0x20($sp)
-/* F5178 802D07C8 3C05802E */  lui       $a1, 0x802e
-/* F517C 802D07CC 8CA5AE50 */  lw        $a1, -0x51b0($a1)
+/* F5178 802D07C8 3C05802E */  lui       $a1, %hi(D_802DAE50)
+/* F517C 802D07CC 8CA5AE50 */  lw        $a1, %lo(D_802DAE50)($a1)
 /* F5180 802D07D0 8FA20024 */  lw        $v0, 0x24($sp)
-/* F5184 802D07D4 3C06802E */  lui       $a2, 0x802e
-/* F5188 802D07D8 8CC6AE54 */  lw        $a2, -0x51ac($a2)
+/* F5184 802D07D4 3C06802E */  lui       $a2, %hi(D_802DAE54)
+/* F5188 802D07D8 8CC6AE54 */  lw        $a2, %lo(D_802DAE54)($a2)
 /* F518C 802D07DC 00652821 */  addu      $a1, $v1, $a1
 /* F5190 802D07E0 0C0496AE */  jal       clamp_printer_coords
 /* F5194 802D07E4 00463021 */   addu     $a2, $v0, $a2

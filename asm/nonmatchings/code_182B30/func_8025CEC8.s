@@ -14,8 +14,8 @@ glabel func_8025CEC8
 /* 18B7CC 8025CEEC 1440004C */  bnez      $v0, .L8025D020
 /* 18B7D0 8025CEF0 0000802D */   daddu    $s0, $zero, $zero
 /* 18B7D4 8025CEF4 8E3200C0 */  lw        $s2, 0xc0($s1)
-/* 18B7D8 8025CEF8 3C13802A */  lui       $s3, 0x802a
-/* 18B7DC 8025CEFC 2673D488 */  addiu     $s3, $s3, -0x2b78
+/* 18B7D8 8025CEF8 3C13802A */  lui       $s3, %hi(D_8029D488)
+/* 18B7DC 8025CEFC 2673D488 */  addiu     $s3, $s3, %lo(D_8029D488)
 /* 18B7E0 8025CF00 02501021 */  addu      $v0, $s2, $s0
 .L8025CF04:
 /* 18B7E4 8025CF04 804308B8 */  lb        $v1, 0x8b8($v0)

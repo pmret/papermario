@@ -5,8 +5,8 @@ glabel func_80263CC4
 /* 1925A4 80263CC4 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 1925A8 80263CC8 AFB00010 */  sw        $s0, 0x10($sp)
 /* 1925AC 80263CCC 0080802D */  daddu     $s0, $a0, $zero
-/* 1925B0 80263CD0 3C048029 */  lui       $a0, 0x8029
-/* 1925B4 80263CD4 24843820 */  addiu     $a0, $a0, 0x3820
+/* 1925B0 80263CD0 3C048029 */  lui       $a0, %hi(D_80293820)
+/* 1925B4 80263CD4 24843820 */  addiu     $a0, $a0, %lo(D_80293820)
 /* 1925B8 80263CD8 2405000A */  addiu     $a1, $zero, 0xa
 /* 1925BC 80263CDC AFBF0014 */  sw        $ra, 0x14($sp)
 /* 1925C0 80263CE0 0C0B0CF8 */  jal       start_script

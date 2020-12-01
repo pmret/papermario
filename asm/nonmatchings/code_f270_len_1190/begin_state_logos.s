@@ -30,21 +30,21 @@ glabel begin_state_logos
 /* F2D4 80033ED4 0200202D */  daddu     $a0, $s0, $zero
 /* F2D8 80033ED8 0220282D */  daddu     $a1, $s1, $zero
 /* F2DC 80033EDC 0040302D */  daddu     $a2, $v0, $zero
-/* F2E0 80033EE0 3C10800A */  lui       $s0, 0x800a
-/* F2E4 80033EE4 26100910 */  addiu     $s0, $s0, 0x910
+/* F2E0 80033EE0 3C10800A */  lui       $s0, %hi(D_800A0910)
+/* F2E4 80033EE4 26100910 */  addiu     $s0, $s0, %lo(D_800A0910)
 /* F2E8 80033EE8 0C00A5CF */  jal       dma_copy
 /* F2EC 80033EEC AE060000 */   sw       $a2, ($s0)
 /* F2F0 80033EF0 3C040001 */  lui       $a0, 1
 /* F2F4 80033EF4 8E020000 */  lw        $v0, ($s0)
 /* F2F8 80033EF8 34845000 */  ori       $a0, $a0, 0x5000
 /* F2FC 80033EFC 24437000 */  addiu     $v1, $v0, 0x7000
-/* F300 80033F00 3C01800A */  lui       $at, 0x800a
-/* F304 80033F04 AC220918 */  sw        $v0, 0x918($at)
+/* F300 80033F00 3C01800A */  lui       $at, %hi(D_800A0918)
+/* F304 80033F04 AC220918 */  sw        $v0, %lo(D_800A0918)($at)
 /* F308 80033F08 00441021 */  addu      $v0, $v0, $a0
-/* F30C 80033F0C 3C01800A */  lui       $at, 0x800a
-/* F310 80033F10 AC230914 */  sw        $v1, 0x914($at)
-/* F314 80033F14 3C01800A */  lui       $at, 0x800a
-/* F318 80033F18 AC22091C */  sw        $v0, 0x91c($at)
+/* F30C 80033F0C 3C01800A */  lui       $at, %hi(D_800A0914)
+/* F310 80033F10 AC230914 */  sw        $v1, %lo(D_800A0914)($at)
+/* F314 80033F14 3C01800A */  lui       $at, %hi(D_800A091C)
+/* F318 80033F18 AC22091C */  sw        $v0, %lo(D_800A091C)($at)
 /* F31C 80033F1C 0C018028 */  jal       nuContRmbForceStop
 /* F320 80033F20 00000000 */   nop      
 /* F324 80033F24 0C00B7BD */  jal       create_cameras_a

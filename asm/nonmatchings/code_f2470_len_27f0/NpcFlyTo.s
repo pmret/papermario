@@ -166,8 +166,8 @@ glabel NpcFlyTo
 /* F3318 802CE968 46001003 */  div.s     $f0, $f2, $f0
 /* F331C 802CE96C 46000021 */  cvt.d.s   $f0, $f0
 /* F3320 802CE970 46206301 */  sub.d     $f12, $f12, $f0
-/* F3324 802CE974 3C01802E */  lui       $at, 0x802e
-/* F3328 802CE978 D420A1E0 */  ldc1      $f0, -0x5e20($at)
+/* F3324 802CE974 3C01802E */  lui       $at, %hi(D_802DA1E0)
+/* F3328 802CE978 D420A1E0 */  ldc1      $f0, %lo(D_802DA1E0)($at)
 /* F332C 802CE97C 46206302 */  mul.d     $f12, $f12, $f0
 /* F3330 802CE980 00000000 */  nop       
 /* F3334 802CE984 0C00A8BB */  jal       sin_deg

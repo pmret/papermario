@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel func_801385D4
-/* CECD4 801385D4 3C038015 */  lui       $v1, 0x8015
-/* CECD8 801385D8 8C63C6F0 */  lw        $v1, -0x3910($v1)
+/* CECD4 801385D4 3C038015 */  lui       $v1, %hi(D_8014C6F0)
+/* CECD8 801385D8 8C63C6F0 */  lw        $v1, %lo(D_8014C6F0)($v1)
 /* CECDC 801385DC 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* CECE0 801385E0 AFB20018 */  sw        $s2, 0x18($sp)
 /* CECE4 801385E4 0080902D */  daddu     $s2, $a0, $zero
@@ -17,9 +17,9 @@ glabel func_801385D4
 /* CED04 80138604 10400030 */  beqz      $v0, .L801386C8
 /* CED08 80138608 AFBF0020 */   sw       $ra, 0x20($sp)
 /* CED0C 8013860C 00031080 */  sll       $v0, $v1, 2
-/* CED10 80138610 3C018015 */  lui       $at, 0x8015
+/* CED10 80138610 3C018015 */  lui       $at, %hi(D_80150F38)
 /* CED14 80138614 00220821 */  addu      $at, $at, $v0
-/* CED18 80138618 8C220F38 */  lw        $v0, 0xf38($at)
+/* CED18 80138618 8C220F38 */  lw        $v0, %lo(D_80150F38)($at)
 /* CED1C 8013861C 00400008 */  jr        $v0
 /* CED20 80138620 00000000 */   nop      
 /* CED24 80138624 0000202D */  daddu     $a0, $zero, $zero
@@ -64,8 +64,8 @@ glabel func_801385D4
 /* CEDC0 801386C0 0C04DF62 */  jal       func_80137D88
 /* CEDC4 801386C4 24100002 */   addiu    $s0, $zero, 2
 .L801386C8:
-/* CEDC8 801386C8 3C038015 */  lui       $v1, 0x8015
-/* CEDCC 801386CC 8C63C6F0 */  lw        $v1, -0x3910($v1)
+/* CEDC8 801386C8 3C038015 */  lui       $v1, %hi(D_8014C6F0)
+/* CEDCC 801386CC 8C63C6F0 */  lw        $v1, %lo(D_8014C6F0)($v1)
 /* CEDD0 801386D0 24020010 */  addiu     $v0, $zero, 0x10
 /* CEDD4 801386D4 10620008 */  beq       $v1, $v0, .L801386F8
 /* CEDD8 801386D8 00000000 */   nop      

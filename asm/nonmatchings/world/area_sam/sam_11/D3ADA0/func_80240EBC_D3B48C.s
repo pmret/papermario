@@ -19,9 +19,9 @@ glabel func_80240EBC_D3B48C
 /* D3B4C0 80240EF0 34A502E0 */  ori       $a1, $a1, 0x2e0
 /* D3B4C4 80240EF4 0C0B1EAF */  jal       get_variable
 /* D3B4C8 80240EF8 0000202D */   daddu    $a0, $zero, $zero
-/* D3B4CC 80240EFC 3C038024 */  lui       $v1, 0x8024
+/* D3B4CC 80240EFC 3C038024 */  lui       $v1, %hi(D_80244FDC)
 /* D3B4D0 80240F00 00621821 */  addu      $v1, $v1, $v0
-/* D3B4D4 80240F04 90634FDC */  lbu       $v1, 0x4fdc($v1)
+/* D3B4D4 80240F04 90634FDC */  lbu       $v1, %lo(D_80244FDC)($v1)
 /* D3B4D8 80240F08 8E220084 */  lw        $v0, 0x84($s1)
 /* D3B4DC 80240F0C 54430006 */  bnel      $v0, $v1, .L80240F28
 /* D3B4E0 80240F10 AE200084 */   sw       $zero, 0x84($s1)

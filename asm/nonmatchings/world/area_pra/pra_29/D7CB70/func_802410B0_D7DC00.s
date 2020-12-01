@@ -60,8 +60,8 @@ glabel func_802410B0_D7DC00
 /* D7DCD8 80241188 0C0903C8 */  jal       func_80240F20_D7DA70
 /* D7DCDC 8024118C AFA20010 */   sw       $v0, 0x10($sp)
 .L80241190:
-/* D7DCE0 80241190 3C03800A */  lui       $v1, 0x800a
-/* D7DCE4 80241194 2463A66C */  addiu     $v1, $v1, -0x5994
+/* D7DCE0 80241190 3C03800A */  lui       $v1, %hi(D_8009A66C)
+/* D7DCE4 80241194 2463A66C */  addiu     $v1, $v1, %lo(D_8009A66C)
 /* D7DCE8 80241198 8C620000 */  lw        $v0, ($v1)
 /* D7DCEC 8024119C 0220202D */  daddu     $a0, $s1, $zero
 /* D7DCF0 802411A0 0040802D */  daddu     $s0, $v0, $zero

@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel func_80120DE4
-/* B74E4 80120DE4 3C038015 */  lui       $v1, 0x8015
-/* B74E8 80120DE8 8C634370 */  lw        $v1, 0x4370($v1)
+/* B74E4 80120DE4 3C038015 */  lui       $v1, %hi(D_80154370)
+/* B74E8 80120DE8 8C634370 */  lw        $v1, %lo(D_80154370)($v1)
 /* B74EC 80120DEC 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* B74F0 80120DF0 AFB20018 */  sw        $s2, 0x18($sp)
 /* B74F4 80120DF4 0080902D */  daddu     $s2, $a0, $zero
@@ -30,10 +30,10 @@ glabel func_80120DE4
 /* B7538 80120E38 0C00AB39 */  jal       heap_malloc
 /* B753C 80120E3C 24040068 */   addiu    $a0, $zero, 0x68
 /* B7540 80120E40 00112080 */  sll       $a0, $s1, 2
-/* B7544 80120E44 3C038015 */  lui       $v1, 0x8015
-/* B7548 80120E48 8C634370 */  lw        $v1, 0x4370($v1)
-/* B754C 80120E4C 3C058015 */  lui       $a1, 0x8015
-/* B7550 80120E50 24A51318 */  addiu     $a1, $a1, 0x1318
+/* B7544 80120E44 3C038015 */  lui       $v1, %hi(D_80154370)
+/* B7548 80120E48 8C634370 */  lw        $v1, %lo(D_80154370)($v1)
+/* B754C 80120E4C 3C058015 */  lui       $a1, %hi(D_80151318)
+/* B7550 80120E50 24A51318 */  addiu     $a1, $a1, %lo(D_80151318)
 /* B7554 80120E54 00832021 */  addu      $a0, $a0, $v1
 /* B7558 80120E58 8CA30000 */  lw        $v1, ($a1)
 /* B755C 80120E5C 0040802D */  daddu     $s0, $v0, $zero
@@ -63,8 +63,8 @@ glabel func_80120DE4
 /* B75AC 80120EAC E6000008 */  swc1      $f0, 8($s0)
 /* B75B0 80120EB0 16400004 */  bnez      $s2, .L80120EC4
 /* B75B4 80120EB4 E600000C */   swc1     $f0, 0xc($s0)
-/* B75B8 80120EB8 3C028015 */  lui       $v0, 0x8015
-/* B75BC 80120EBC 2442C260 */  addiu     $v0, $v0, -0x3da0
+/* B75B8 80120EB8 3C028015 */  lui       $v0, %hi(D_8014C260)
+/* B75BC 80120EBC 2442C260 */  addiu     $v0, $v0, %lo(D_8014C260)
 /* B75C0 80120EC0 AE020010 */  sw        $v0, 0x10($s0)
 .L80120EC4:
 /* B75C4 80120EC4 8E020010 */  lw        $v0, 0x10($s0)

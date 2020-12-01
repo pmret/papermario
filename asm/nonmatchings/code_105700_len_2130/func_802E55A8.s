@@ -7,8 +7,8 @@ glabel func_802E55A8
 /* 106E30 802E55B0 0080802D */  daddu     $s0, $a0, $zero
 /* 106E34 802E55B4 AFB1001C */  sw        $s1, 0x1c($sp)
 /* 106E38 802E55B8 AFB20020 */  sw        $s2, 0x20($sp)
-/* 106E3C 802E55BC 3C128016 */  lui       $s2, 0x8016
-/* 106E40 802E55C0 8E52C7D0 */  lw        $s2, -0x3830($s2)
+/* 106E3C 802E55BC 3C128016 */  lui       $s2, %hi(D_8015C7D0)
+/* 106E40 802E55C0 8E52C7D0 */  lw        $s2, %lo(D_8015C7D0)($s2)
 /* 106E44 802E55C4 AFBF0024 */  sw        $ra, 0x24($sp)
 /* 106E48 802E55C8 0C0B8DB9 */  jal       entity_init_Hammer23Block_normal
 /* 106E4C 802E55CC 00A0882D */   daddu    $s1, $a1, $zero

@@ -11,11 +11,11 @@ glabel func_80240000_ADAEA0
 /* ADAEB8 80240018 2403FF80 */  addiu     $v1, $zero, -0x80
 /* ADAEBC 8024001C 14430006 */  bne       $v0, $v1, .L80240038
 /* ADAEC0 80240020 00000000 */   nop      
-/* ADAEC4 80240024 3C04800E */  lui       $a0, 0x800e
-/* ADAEC8 80240028 24849668 */  addiu     $a0, $a0, -0x6998
-/* ADAECC 8024002C 3C058025 */  lui       $a1, 0x8025
+/* ADAEC4 80240024 3C04800E */  lui       $a0, %hi(D_800D9668)
+/* ADAEC8 80240028 24849668 */  addiu     $a0, $a0, %lo(D_800D9668)
+/* ADAECC 8024002C 3C058025 */  lui       $a1, %hi(D_8024A6B0)
 /* ADAED0 80240030 0C01953C */  jal       sprintf
-/* ADAED4 80240034 24A5A6B0 */   addiu    $a1, $a1, -0x5950
+/* ADAED4 80240034 24A5A6B0 */   addiu    $a1, $a1, %lo(D_8024A6B0)
 .L80240038:
 /* ADAED8 80240038 8FBF0010 */  lw        $ra, 0x10($sp)
 /* ADAEDC 8024003C 0000102D */  daddu     $v0, $zero, $zero

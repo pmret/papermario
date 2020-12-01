@@ -5,8 +5,8 @@ glabel gfxPreNMI_Callback
 /* 1B0C 8002670C 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 1B10 80026710 24020001 */  addiu     $v0, $zero, 1
 /* 1B14 80026714 AFBF0010 */  sw        $ra, 0x10($sp)
-/* 1B18 80026718 3C018007 */  lui       $at, 0x8007
-/* 1B1C 8002671C AC223E00 */  sw        $v0, 0x3e00($at)
+/* 1B18 80026718 3C018007 */  lui       $at, %hi(D_80073E00)
+/* 1B1C 8002671C AC223E00 */  sw        $v0, %lo(D_80073E00)($at)
 /* 1B20 80026720 0C018028 */  jal       nuContRmbForceStop
 /* 1B24 80026724 00000000 */   nop      
 /* 1B28 80026728 8FBF0010 */  lw        $ra, 0x10($sp)

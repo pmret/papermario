@@ -192,10 +192,10 @@ glabel func_800E4744
 /* 7DEAC 800E49FC 24040022 */   addiu    $a0, $zero, 0x22
 /* 7DEB0 800E4A00 C7A0002C */  lwc1      $f0, 0x2c($sp)
 /* 7DEB4 800E4A04 C6020080 */  lwc1      $f2, 0x80($s0)
-/* 7DEB8 800E4A08 3C018011 */  lui       $at, 0x8011
-/* 7DEBC 800E4A0C E420C928 */  swc1      $f0, -0x36d8($at)
-/* 7DEC0 800E4A10 3C018011 */  lui       $at, 0x8011
-/* 7DEC4 800E4A14 E422C984 */  swc1      $f2, -0x367c($at)
+/* 7DEB8 800E4A08 3C018011 */  lui       $at, %hi(D_8010C928)
+/* 7DEBC 800E4A0C E420C928 */  swc1      $f0, %lo(D_8010C928)($at)
+/* 7DEC0 800E4A10 3C018011 */  lui       $at, %hi(D_8010C984)
+/* 7DEC4 800E4A14 E422C984 */  swc1      $f2, %lo(D_8010C984)($at)
 /* 7DEC8 800E4A18 0803928A */  j         .L800E4A28
 /* 7DECC 800E4A1C 00000000 */   nop      
 .L800E4A20:

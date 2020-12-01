@@ -4,8 +4,8 @@
 glabel func_802E6ED8
 /* 108758 802E6ED8 27BDFF48 */  addiu     $sp, $sp, -0xb8
 /* 10875C 802E6EDC AFB500AC */  sw        $s5, 0xac($sp)
-/* 108760 802E6EE0 3C15800A */  lui       $s5, 0x800a
-/* 108764 802E6EE4 26B5A66C */  addiu     $s5, $s5, -0x5994
+/* 108760 802E6EE0 3C15800A */  lui       $s5, %hi(D_8009A66C)
+/* 108764 802E6EE4 26B5A66C */  addiu     $s5, $s5, %lo(D_8009A66C)
 /* 108768 802E6EE8 AFBF00B0 */  sw        $ra, 0xb0($sp)
 /* 10876C 802E6EEC AFB400A8 */  sw        $s4, 0xa8($sp)
 /* 108770 802E6EF0 AFB300A4 */  sw        $s3, 0xa4($sp)
@@ -39,10 +39,10 @@ glabel func_802E6ED8
 /* 1087E0 802E6F60 0C019D80 */  jal       guMtxCatF
 /* 1087E4 802E6F64 00A0302D */   daddu    $a2, $a1, $zero
 /* 1087E8 802E6F68 27A40018 */  addiu     $a0, $sp, 0x18
-/* 1087EC 802E6F6C 3C118007 */  lui       $s1, 0x8007
-/* 1087F0 802E6F70 263141F0 */  addiu     $s1, $s1, 0x41f0
-/* 1087F4 802E6F74 3C13800A */  lui       $s3, 0x800a
-/* 1087F8 802E6F78 2673A674 */  addiu     $s3, $s3, -0x598c
+/* 1087EC 802E6F6C 3C118007 */  lui       $s1, %hi(D_800741F0)
+/* 1087F0 802E6F70 263141F0 */  addiu     $s1, $s1, %lo(D_800741F0)
+/* 1087F4 802E6F74 3C13800A */  lui       $s3, %hi(D_8009A674)
+/* 1087F8 802E6F78 2673A674 */  addiu     $s3, $s3, %lo(D_8009A674)
 /* 1087FC 802E6F7C 96250000 */  lhu       $a1, ($s1)
 /* 108800 802E6F80 8E620000 */  lw        $v0, ($s3)
 /* 108804 802E6F84 00052980 */  sll       $a1, $a1, 6
@@ -70,10 +70,10 @@ glabel func_802E6ED8
 /* 10885C 802E6FDC 00621821 */  addu      $v1, $v1, $v0
 /* 108860 802E6FE0 AC830004 */  sw        $v1, 4($a0)
 /* 108864 802E6FE4 8E430044 */  lw        $v1, 0x44($s2)
-/* 108868 802E6FE8 3C02DE00 */  lui       $v0, 0xde00
+/* 108868 802E6FE8 3C02DE00 */  lui       $v0, %hi(D_DE000DC0)
 /* 10886C 802E6FEC ACA20000 */  sw        $v0, ($a1)
 /* 108870 802E6FF0 3C020A00 */  lui       $v0, 0xa00
-/* 108874 802E6FF4 24420DC0 */  addiu     $v0, $v0, 0xdc0
+/* 108874 802E6FF4 24420DC0 */  addiu     $v0, $v0, %lo(D_DE000DC0)
 /* 108878 802E6FF8 3042FFFF */  andi      $v0, $v0, 0xffff
 /* 10887C 802E6FFC 00621821 */  addu      $v1, $v1, $v0
 /* 108880 802E7000 24020040 */  addiu     $v0, $zero, 0x40

@@ -7,18 +7,18 @@ glabel update_entities
 /* A5DD8 8010F6D8 0000882D */  daddu     $s1, $zero, $zero
 /* A5DDC 8010F6DC AFB3001C */  sw        $s3, 0x1c($sp)
 /* A5DE0 8010F6E0 3C130200 */  lui       $s3, 0x200
-/* A5DE4 8010F6E4 3C038015 */  lui       $v1, 0x8015
-/* A5DE8 8010F6E8 24631330 */  addiu     $v1, $v1, 0x1330
+/* A5DE4 8010F6E4 3C038015 */  lui       $v1, %hi(D_80151330)
+/* A5DE8 8010F6E8 24631330 */  addiu     $v1, $v1, %lo(D_80151330)
 /* A5DEC 8010F6EC AFBF0020 */  sw        $ra, 0x20($sp)
 /* A5DF0 8010F6F0 AFB20018 */  sw        $s2, 0x18($sp)
 /* A5DF4 8010F6F4 AFB00010 */  sw        $s0, 0x10($sp)
 /* A5DF8 8010F6F8 8C620000 */  lw        $v0, ($v1)
 /* A5DFC 8010F6FC 3C12800B */  lui       $s2, %hi(gCameras)
 /* A5E00 8010F700 26521D80 */  addiu     $s2, $s2, %lo(gCameras)
-/* A5E04 8010F704 3C018015 */  lui       $at, 0x8015
-/* A5E08 8010F708 AC2012BC */  sw        $zero, 0x12bc($at)
-/* A5E0C 8010F70C 3C018015 */  lui       $at, 0x8015
-/* A5E10 8010F710 AC2012C0 */  sw        $zero, 0x12c0($at)
+/* A5E04 8010F704 3C018015 */  lui       $at, %hi(D_801512BC)
+/* A5E08 8010F708 AC2012BC */  sw        $zero, %lo(D_801512BC)($at)
+/* A5E0C 8010F70C 3C018015 */  lui       $at, %hi(D_801512C0)
+/* A5E10 8010F710 AC2012C0 */  sw        $zero, %lo(D_801512C0)($at)
 /* A5E14 8010F714 24420001 */  addiu     $v0, $v0, 1
 /* A5E18 8010F718 AC620000 */  sw        $v0, ($v1)
 .L8010F71C:
@@ -27,8 +27,8 @@ glabel update_entities
 /* A5E24 8010F724 0040802D */  daddu     $s0, $v0, $zero
 /* A5E28 8010F728 520000CD */  beql      $s0, $zero, .L8010FA60
 /* A5E2C 8010F72C 26310001 */   addiu    $s1, $s1, 1
-/* A5E30 8010F730 3C028015 */  lui       $v0, 0x8015
-/* A5E34 8010F734 244212C0 */  addiu     $v0, $v0, 0x12c0
+/* A5E30 8010F730 3C028015 */  lui       $v0, %hi(D_801512C0)
+/* A5E34 8010F734 244212C0 */  addiu     $v0, $v0, %lo(D_801512C0)
 /* A5E38 8010F738 8C430000 */  lw        $v1, ($v0)
 /* A5E3C 8010F73C 24630001 */  addiu     $v1, $v1, 1
 /* A5E40 8010F740 AC430000 */  sw        $v1, ($v0)
@@ -263,7 +263,7 @@ glabel update_entities
 /* A617C 8010FA7C 8FB20018 */  lw        $s2, 0x18($sp)
 /* A6180 8010FA80 8FB10014 */  lw        $s1, 0x14($sp)
 /* A6184 8010FA84 8FB00010 */  lw        $s0, 0x10($sp)
-/* A6188 8010FA88 3C018016 */  lui       $at, 0x8016
-/* A618C 8010FA8C A020A578 */  sb        $zero, -0x5a88($at)
+/* A6188 8010FA88 3C018016 */  lui       $at, %hi(D_8015A578)
+/* A618C 8010FA8C A020A578 */  sb        $zero, %lo(D_8015A578)($at)
 /* A6190 8010FA90 03E00008 */  jr        $ra
 /* A6194 8010FA94 27BD0028 */   addiu    $sp, $sp, 0x28

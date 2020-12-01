@@ -15,7 +15,7 @@ glabel func_802426B4_C5CDF4
 /* C5CE1C 802426DC 8FBF0014 */  lw        $ra, 0x14($sp)
 /* C5CE20 802426E0 8FB00010 */  lw        $s0, 0x10($sp)
 /* C5CE24 802426E4 24020002 */  addiu     $v0, $zero, 2
-/* C5CE28 802426E8 3C018024 */  lui       $at, 0x8024
-/* C5CE2C 802426EC AC236794 */  sw        $v1, 0x6794($at)
+/* C5CE28 802426E8 3C018024 */  lui       $at, %hi(D_80246794)
+/* C5CE2C 802426EC AC236794 */  sw        $v1, %lo(D_80246794)($at)
 /* C5CE30 802426F0 03E00008 */  jr        $ra
 /* C5CE34 802426F4 27BD0018 */   addiu    $sp, $sp, 0x18

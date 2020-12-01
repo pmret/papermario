@@ -9,8 +9,8 @@ glabel get_model_list_index_from_tree_index
 /* B1720 8011B020 AFBF0018 */  sw        $ra, 0x18($sp)
 /* B1724 8011B024 10400009 */  beqz      $v0, .L8011B04C
 /* B1728 8011B028 AFB00010 */   sw       $s0, 0x10($sp)
-/* B172C 8011B02C 3C02800A */  lui       $v0, 0x800a
-/* B1730 8011B030 8C42A5F4 */  lw        $v0, -0x5a0c($v0)
+/* B172C 8011B02C 3C02800A */  lui       $v0, %hi(D_8009A5F4)
+/* B1730 8011B030 8C42A5F4 */  lw        $v0, %lo(D_8009A5F4)($v0)
 /* B1734 8011B034 00111880 */  sll       $v1, $s1, 2
 /* B1738 8011B038 00621821 */  addu      $v1, $v1, $v0
 /* B173C 8011B03C 90630000 */  lbu       $v1, ($v1)

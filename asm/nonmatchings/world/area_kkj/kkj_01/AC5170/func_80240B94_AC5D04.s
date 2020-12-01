@@ -124,9 +124,9 @@ glabel func_80240B94_AC5D04
 /* AC5EC8 80240D58 2C620064 */  sltiu     $v0, $v1, 0x64
 /* AC5ECC 80240D5C 10400042 */  beqz      $v0, .L80240E68
 /* AC5ED0 80240D60 00031080 */   sll      $v0, $v1, 2
-/* AC5ED4 80240D64 3C018024 */  lui       $at, 0x8024
+/* AC5ED4 80240D64 3C018024 */  lui       $at, %hi(D_80243A20)
 /* AC5ED8 80240D68 00220821 */  addu      $at, $at, $v0
-/* AC5EDC 80240D6C 8C223A20 */  lw        $v0, 0x3a20($at)
+/* AC5EDC 80240D6C 8C223A20 */  lw        $v0, %lo(D_80243A20)($at)
 /* AC5EE0 80240D70 00400008 */  jr        $v0
 /* AC5EE4 80240D74 00000000 */   nop      
 /* AC5EE8 80240D78 0280202D */  daddu     $a0, $s4, $zero

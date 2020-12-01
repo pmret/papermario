@@ -26,8 +26,8 @@ glabel update_component
 /* 100260 802DD170 4481A000 */  mtc1      $at, $f20
 /* 100264 802DD174 8E300008 */  lw        $s0, 8($s1)
 /* 100268 802DD178 C620000C */  lwc1      $f0, 0xc($s1)
-/* 10026C 802DD17C 3C01802E */  lui       $at, 0x802e
-/* 100270 802DD180 C422F4C0 */  lwc1      $f2, -0xb40($at)
+/* 10026C 802DD17C 3C01802E */  lui       $at, %hi(D_802DF4C0)
+/* 100270 802DD180 C422F4C0 */  lwc1      $f2, %lo(D_802DF4C0)($at)
 /* 100274 802DD184 4600A786 */  mov.s     $f30, $f20
 /* 100278 802DD188 46020001 */  sub.s     $f0, $f0, $f2
 /* 10027C 802DD18C 44801000 */  mtc1      $zero, $f2
@@ -175,8 +175,8 @@ glabel update_component
 /* 100478 802DD388 3484FFFF */  ori       $a0, $a0, 0xffff
 /* 10047C 802DD38C 8E230004 */  lw        $v1, 4($s1)
 /* 100480 802DD390 30A200FF */  andi      $v0, $a1, 0xff
-/* 100484 802DD394 3C01802E */  lui       $at, 0x802e
-/* 100488 802DD398 AC22FEAC */  sw        $v0, -0x154($at)
+/* 100484 802DD394 3C01802E */  lui       $at, %hi(D_802DFEAC)
+/* 100488 802DD398 AC22FEAC */  sw        $v0, %lo(D_802DFEAC)($at)
 /* 10048C 802DD39C 00021400 */  sll       $v0, $v0, 0x10
 /* 100490 802DD3A0 00641824 */  and       $v1, $v1, $a0
 /* 100494 802DD3A4 00621825 */  or        $v1, $v1, $v0

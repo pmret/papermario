@@ -7,8 +7,8 @@ glabel func_802D4434
 /* F8DEC 802D443C 0080282D */  daddu     $a1, $a0, $zero
 /* F8DF0 802D4440 0000202D */  daddu     $a0, $zero, $zero
 .L802D4444:
-/* F8DF4 802D4444 3C02802E */  lui       $v0, 0x802e
-/* F8DF8 802D4448 8C42B7C0 */  lw        $v0, -0x4840($v0)
+/* F8DF4 802D4444 3C02802E */  lui       $v0, %hi(D_802DB7C0)
+/* F8DF8 802D4448 8C42B7C0 */  lw        $v0, %lo(D_802DB7C0)($v0)
 /* F8DFC 802D444C 00041880 */  sll       $v1, $a0, 2
 /* F8E00 802D4450 00621821 */  addu      $v1, $v1, $v0
 /* F8E04 802D4454 8C620000 */  lw        $v0, ($v1)

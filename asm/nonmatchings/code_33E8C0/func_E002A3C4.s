@@ -6,8 +6,8 @@ glabel func_E002A3C4
 /* 33EC88 E002A3C8 3C02DB06 */  lui       $v0, 0xdb06
 /* 33EC8C E002A3CC 34420024 */  ori       $v0, $v0, 0x24
 /* 33EC90 E002A3D0 AFB200E8 */  sw        $s2, 0xe8($sp)
-/* 33EC94 E002A3D4 3C12800A */  lui       $s2, 0x800a
-/* 33EC98 E002A3D8 2652A66C */  addiu     $s2, $s2, -0x5994
+/* 33EC94 E002A3D4 3C12800A */  lui       $s2, %hi(D_8009A66C)
+/* 33EC98 E002A3D8 2652A66C */  addiu     $s2, $s2, %lo(D_8009A66C)
 /* 33EC9C E002A3DC AFBF0104 */  sw        $ra, 0x104($sp)
 /* 33ECA0 E002A3E0 AFBE0100 */  sw        $fp, 0x100($sp)
 /* 33ECA4 E002A3E4 AFB700FC */  sw        $s7, 0xfc($sp)
@@ -87,9 +87,9 @@ glabel func_E002A3C4
 /* 33EDC8 E002A508 00431021 */  addu      $v0, $v0, $v1
 /* 33EDCC E002A50C 000210C0 */  sll       $v0, $v0, 3
 /* 33EDD0 E002A510 44060000 */  mfc1      $a2, $f0
-/* 33EDD4 E002A514 3C01800B */  lui       $at, 0x800b
+/* 33EDD4 E002A514 3C01800B */  lui       $at, %hi(D_800B1DEC)
 /* 33EDD8 E002A518 00220821 */  addu      $at, $at, $v0
-/* 33EDDC E002A51C C4201DEC */  lwc1      $f0, 0x1dec($at)
+/* 33EDDC E002A51C C4201DEC */  lwc1      $f0, %lo(D_800B1DEC)($at)
 /* 33EDE0 E002A520 3C073F80 */  lui       $a3, 0x3f80
 /* 33EDE4 E002A524 46000007 */  neg.s     $f0, $f0
 /* 33EDE8 E002A528 44050000 */  mfc1      $a1, $f0
@@ -108,10 +108,10 @@ glabel func_E002A3C4
 /* 33EE1C E002A55C 0262102A */  slt       $v0, $s3, $v0
 /* 33EE20 E002A560 10400061 */  beqz      $v0, .LE002A6E8
 /* 33EE24 E002A564 26100048 */   addiu    $s0, $s0, 0x48
-/* 33EE28 E002A568 3C17800A */  lui       $s7, 0x800a
-/* 33EE2C E002A56C 26F7A674 */  addiu     $s7, $s7, -0x598c
-/* 33EE30 E002A570 3C148007 */  lui       $s4, 0x8007
-/* 33EE34 E002A574 269441F0 */  addiu     $s4, $s4, 0x41f0
+/* 33EE28 E002A568 3C17800A */  lui       $s7, %hi(D_8009A674)
+/* 33EE2C E002A56C 26F7A674 */  addiu     $s7, $s7, %lo(D_8009A674)
+/* 33EE30 E002A570 3C148007 */  lui       $s4, %hi(D_800741F0)
+/* 33EE34 E002A574 269441F0 */  addiu     $s4, $s4, %lo(D_800741F0)
 /* 33EE38 E002A578 3C150001 */  lui       $s5, 1
 /* 33EE3C E002A57C 36B51630 */  ori       $s5, $s5, 0x1630
 /* 33EE40 E002A580 0220B02D */  daddu     $s6, $s1, $zero

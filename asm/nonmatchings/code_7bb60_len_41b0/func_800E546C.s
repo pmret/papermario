@@ -22,8 +22,8 @@ glabel func_800E546C
 /* 7E960 800E54B0 3C014334 */  lui       $at, 0x4334
 /* 7E964 800E54B4 44811000 */  mtc1      $at, $f2
 .L800E54B8:
-/* 7E968 800E54B8 3C01800B */  lui       $at, 0x800b
-/* 7E96C 800E54BC C42C1DEC */  lwc1      $f12, 0x1dec($at)
+/* 7E968 800E54B8 3C01800B */  lui       $at, %hi(D_800B1DEC)
+/* 7E96C 800E54BC C42C1DEC */  lwc1      $f12, %lo(D_800B1DEC)($at)
 /* 7E970 800E54C0 460C1300 */  add.s     $f12, $f2, $f12
 /* 7E974 800E54C4 3C0142B4 */  lui       $at, 0x42b4
 /* 7E978 800E54C8 44810000 */  mtc1      $at, $f0

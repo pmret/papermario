@@ -2,14 +2,14 @@
 .set noreorder # don't insert nops after branches
 
 glabel func_8024E820
-/* 17D100 8024E820 3C028028 */  lui       $v0, 0x8028
-/* 17D104 8024E824 80420CE0 */  lb        $v0, 0xce0($v0)
+/* 17D100 8024E820 3C028028 */  lui       $v0, %hi(D_80280CE0)
+/* 17D104 8024E824 80420CE0 */  lb        $v0, %lo(D_80280CE0)($v0)
 /* 17D108 8024E828 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 17D10C 8024E82C AFB10014 */  sw        $s1, 0x14($sp)
 /* 17D110 8024E830 0080882D */  daddu     $s1, $a0, $zero
 /* 17D114 8024E834 AFB20018 */  sw        $s2, 0x18($sp)
-/* 17D118 8024E838 3C12800B */  lui       $s2, 0x800b
-/* 17D11C 8024E83C 265222D8 */  addiu     $s2, $s2, 0x22d8
+/* 17D118 8024E838 3C12800B */  lui       $s2, %hi(D_800B22D8)
+/* 17D11C 8024E83C 265222D8 */  addiu     $s2, $s2, %lo(D_800B22D8)
 /* 17D120 8024E840 AFBF001C */  sw        $ra, 0x1c($sp)
 /* 17D124 8024E844 AFB00010 */  sw        $s0, 0x10($sp)
 /* 17D128 8024E848 8E30000C */  lw        $s0, 0xc($s1)

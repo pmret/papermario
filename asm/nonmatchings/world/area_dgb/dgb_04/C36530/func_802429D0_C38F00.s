@@ -30,9 +30,9 @@ glabel func_802429D0_C38F00
 /* C38F64 80242A34 000320C0 */  sll       $a0, $v1, 3
 /* C38F68 80242A38 00641821 */  addu      $v1, $v1, $a0
 /* C38F6C 80242A3C 000318C0 */  sll       $v1, $v1, 3
-/* C38F70 80242A40 3C01800B */  lui       $at, 0x800b
+/* C38F70 80242A40 3C01800B */  lui       $at, %hi(D_800B1DEC)
 /* C38F74 80242A44 00230821 */  addu      $at, $at, $v1
-/* C38F78 80242A48 C42C1DEC */  lwc1      $f12, 0x1dec($at)
+/* C38F78 80242A48 C42C1DEC */  lwc1      $f12, %lo(D_800B1DEC)($at)
 /* C38F7C 80242A4C 0C00A88D */  jal       sin_cos_deg
 /* C38F80 80242A50 0040A82D */   daddu    $s5, $v0, $zero
 /* C38F84 80242A54 1200005D */  beqz      $s0, .L80242BCC
@@ -79,8 +79,8 @@ glabel func_802429D0_C38F00
 /* C39024 80242AF4 26100004 */   addiu    $s0, $s0, 4
 /* C39028 80242AF8 0000882D */  daddu     $s1, $zero, $zero
 /* C3902C 80242AFC 0240802D */  daddu     $s0, $s2, $zero
-/* C39030 80242B00 3C148024 */  lui       $s4, 0x8024
-/* C39034 80242B04 26943D88 */  addiu     $s4, $s4, 0x3d88
+/* C39030 80242B00 3C148024 */  lui       $s4, %hi(D_80243D88)
+/* C39034 80242B04 26943D88 */  addiu     $s4, $s4, %lo(D_80243D88)
 /* C39038 80242B08 3C014248 */  lui       $at, 0x4248
 /* C3903C 80242B0C 4481A000 */  mtc1      $at, $f20
 /* C39040 80242B10 24130044 */  addiu     $s3, $zero, 0x44
@@ -150,8 +150,8 @@ glabel func_802429D0_C38F00
 /* C39134 80242C04 00000000 */   nop      
 .L80242C08:
 /* C39138 80242C08 0000882D */  daddu     $s1, $zero, $zero
-/* C3913C 80242C0C 3C148024 */  lui       $s4, 0x8024
-/* C39140 80242C10 26943D88 */  addiu     $s4, $s4, 0x3d88
+/* C3913C 80242C0C 3C148024 */  lui       $s4, %hi(D_80243D88)
+/* C39140 80242C10 26943D88 */  addiu     $s4, $s4, %lo(D_80243D88)
 /* C39144 80242C14 24130020 */  addiu     $s3, $zero, 0x20
 /* C39148 80242C18 3C064248 */  lui       $a2, 0x4248
 /* C3914C 80242C1C 44800000 */  mtc1      $zero, $f0
@@ -197,8 +197,8 @@ glabel func_802429D0_C38F00
 /* C391E8 80242CB8 AE400060 */   sw       $zero, 0x60($s2)
 .L80242CBC:
 /* C391EC 80242CBC 0000882D */  daddu     $s1, $zero, $zero
-/* C391F0 80242CC0 3C148024 */  lui       $s4, 0x8024
-/* C391F4 80242CC4 26943D88 */  addiu     $s4, $s4, 0x3d88
+/* C391F0 80242CC0 3C148024 */  lui       $s4, %hi(D_80243D88)
+/* C391F4 80242CC4 26943D88 */  addiu     $s4, $s4, %lo(D_80243D88)
 /* C391F8 80242CC8 24130020 */  addiu     $s3, $zero, 0x20
 /* C391FC 80242CCC 0240802D */  daddu     $s0, $s2, $zero
 /* C39200 80242CD0 3C014248 */  lui       $at, 0x4248

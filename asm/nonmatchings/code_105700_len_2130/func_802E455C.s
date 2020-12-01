@@ -4,8 +4,8 @@
 glabel func_802E455C
 /* 105DDC 802E455C 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 105DE0 802E4560 AFB00010 */  sw        $s0, 0x10($sp)
-/* 105DE4 802E4564 3C10800A */  lui       $s0, 0x800a
-/* 105DE8 802E4568 8E10A66C */  lw        $s0, -0x5994($s0)
+/* 105DE4 802E4564 3C10800A */  lui       $s0, %hi(D_8009A66C)
+/* 105DE8 802E4568 8E10A66C */  lw        $s0, %lo(D_8009A66C)($s0)
 /* 105DEC 802E456C AFBF0014 */  sw        $ra, 0x14($sp)
 /* 105DF0 802E4570 0C04417A */  jal       get_entity_by_index
 /* 105DF4 802E4574 00000000 */   nop      
@@ -59,8 +59,8 @@ glabel func_802E455C
 .L802E4630:
 /* 105EB0 802E4630 AC620004 */  sw        $v0, 4($v1)
 /* 105EB4 802E4634 8FBF0014 */  lw        $ra, 0x14($sp)
-/* 105EB8 802E4638 3C01800A */  lui       $at, 0x800a
-/* 105EBC 802E463C AC30A66C */  sw        $s0, -0x5994($at)
+/* 105EB8 802E4638 3C01800A */  lui       $at, %hi(D_8009A66C)
+/* 105EBC 802E463C AC30A66C */  sw        $s0, %lo(D_8009A66C)($at)
 /* 105EC0 802E4640 8FB00010 */  lw        $s0, 0x10($sp)
 /* 105EC4 802E4644 03E00008 */  jr        $ra
 /* 105EC8 802E4648 27BD0018 */   addiu    $sp, $sp, 0x18

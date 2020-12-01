@@ -11,8 +11,8 @@ glabel func_80241898_DAEC98
 /* DAECB0 802418B0 0C00EABB */  jal       get_npc_unsafe
 /* DAECB4 802418B4 86040008 */   lh       $a0, 8($s0)
 /* DAECB8 802418B8 C4400018 */  lwc1      $f0, 0x18($v0)
-/* DAECBC 802418BC 3C018024 */  lui       $at, 0x8024
-/* DAECC0 802418C0 D4224D08 */  ldc1      $f2, 0x4d08($at)
+/* DAECBC 802418BC 3C018024 */  lui       $at, %hi(D_80244D08)
+/* DAECC0 802418C0 D4224D08 */  ldc1      $f2, %lo(D_80244D08)($at)
 /* DAECC4 802418C4 46000021 */  cvt.d.s   $f0, $f0
 /* DAECC8 802418C8 46220002 */  mul.d     $f0, $f0, $f2
 /* DAECCC 802418CC 00000000 */  nop       

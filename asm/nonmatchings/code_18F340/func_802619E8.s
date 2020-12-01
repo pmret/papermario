@@ -50,15 +50,15 @@ glabel func_802619E8
 /* 19037C 80261A9C 2442FFED */  addiu     $v0, $v0, -0x13
 /* 190380 80261AA0 1860000F */  blez      $v1, .L80261AE0
 /* 190384 80261AA4 AFA20024 */   sw       $v0, 0x24($sp)
-/* 190388 80261AA8 3C048011 */  lui       $a0, 0x8011
-/* 19038C 80261AAC 24848AD4 */  addiu     $a0, $a0, -0x752c
+/* 190388 80261AA8 3C048011 */  lui       $a0, %hi(D_80108AD4)
+/* 19038C 80261AAC 24848AD4 */  addiu     $a0, $a0, %lo(D_80108AD4)
 /* 190390 80261AB0 0C050529 */  jal       create_icon
 /* 190394 80261AB4 00000000 */   nop      
 /* 190398 80261AB8 8FA50020 */  lw        $a1, 0x20($sp)
 /* 19039C 80261ABC 8FA60024 */  lw        $a2, 0x24($sp)
 /* 1903A0 80261AC0 0040202D */  daddu     $a0, $v0, $zero
-/* 1903A4 80261AC4 3C01802A */  lui       $at, 0x802a
-/* 1903A8 80261AC8 AC24FBAC */  sw        $a0, -0x454($at)
+/* 1903A4 80261AC4 3C01802A */  lui       $at, %hi(D_8029FBAC)
+/* 1903A8 80261AC8 AC24FBAC */  sw        $a0, %lo(D_8029FBAC)($at)
 /* 1903AC 80261ACC 0C051261 */  jal       set_icon_render_pos
 /* 1903B0 80261AD0 00000000 */   nop      
 /* 1903B4 80261AD4 8FA20024 */  lw        $v0, 0x24($sp)
@@ -72,15 +72,15 @@ glabel func_802619E8
 /* 1903D0 80261AF0 1840000C */  blez      $v0, .L80261B24
 /* 1903D4 80261AF4 00000000 */   nop      
 .L80261AF8:
-/* 1903D8 80261AF8 3C048011 */  lui       $a0, 0x8011
-/* 1903DC 80261AFC 24848AAC */  addiu     $a0, $a0, -0x7554
+/* 1903D8 80261AF8 3C048011 */  lui       $a0, %hi(D_80108AAC)
+/* 1903DC 80261AFC 24848AAC */  addiu     $a0, $a0, %lo(D_80108AAC)
 /* 1903E0 80261B00 0C050529 */  jal       create_icon
 /* 1903E4 80261B04 00000000 */   nop      
 /* 1903E8 80261B08 8FA50020 */  lw        $a1, 0x20($sp)
 /* 1903EC 80261B0C 8FA60024 */  lw        $a2, 0x24($sp)
 /* 1903F0 80261B10 0040202D */  daddu     $a0, $v0, $zero
-/* 1903F4 80261B14 3C01802A */  lui       $at, 0x802a
-/* 1903F8 80261B18 AC24FBA8 */  sw        $a0, -0x458($at)
+/* 1903F4 80261B14 3C01802A */  lui       $at, %hi(D_8029FBA8)
+/* 1903F8 80261B18 AC24FBA8 */  sw        $a0, %lo(D_8029FBA8)($at)
 /* 1903FC 80261B1C 0C051261 */  jal       set_icon_render_pos
 /* 190400 80261B20 00000000 */   nop      
 .L80261B24:

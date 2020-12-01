@@ -124,9 +124,9 @@ glabel func_802418D8_9FC0C8
 /* 9FC28C 80241A9C 2C620064 */  sltiu     $v0, $v1, 0x64
 /* 9FC290 80241AA0 10400042 */  beqz      $v0, .L80241BAC
 /* 9FC294 80241AA4 00031080 */   sll      $v0, $v1, 2
-/* 9FC298 80241AA8 3C018024 */  lui       $at, 0x8024
+/* 9FC298 80241AA8 3C018024 */  lui       $at, %hi(D_80245AE0)
 /* 9FC29C 80241AAC 00220821 */  addu      $at, $at, $v0
-/* 9FC2A0 80241AB0 8C225AE0 */  lw        $v0, 0x5ae0($at)
+/* 9FC2A0 80241AB0 8C225AE0 */  lw        $v0, %lo(D_80245AE0)($at)
 /* 9FC2A4 80241AB4 00400008 */  jr        $v0
 /* 9FC2A8 80241AB8 00000000 */   nop      
 /* 9FC2AC 80241ABC 0280202D */  daddu     $a0, $s4, $zero

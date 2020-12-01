@@ -13,8 +13,8 @@ glabel func_80261530
 /* 18FE30 80261550 0080282D */  daddu     $a1, $a0, $zero
 /* 18FE34 80261554 0080302D */  daddu     $a2, $a0, $zero
 /* 18FE38 80261558 0080382D */  daddu     $a3, $a0, $zero
-/* 18FE3C 8026155C 3C028015 */  lui       $v0, 0x8015
-/* 18FE40 80261560 8C4212F0 */  lw        $v0, 0x12f0($v0)
+/* 18FE3C 8026155C 3C028015 */  lui       $v0, %hi(D_801512F0)
+/* 18FE40 80261560 8C4212F0 */  lw        $v0, %lo(D_801512F0)($v0)
 /* 18FE44 80261564 24030001 */  addiu     $v1, $zero, 1
 /* 18FE48 80261568 0C046F97 */  jal       set_background_color_blend
 /* 18FE4C 8026156C A0430000 */   sb       $v1, ($v0)

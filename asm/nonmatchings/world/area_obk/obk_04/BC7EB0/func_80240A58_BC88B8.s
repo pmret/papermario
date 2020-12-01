@@ -41,9 +41,9 @@ glabel func_80240A58_BC88B8
 /* BC8948 80240AE8 2C620008 */  sltiu     $v0, $v1, 8
 /* BC894C 80240AEC 10400039 */  beqz      $v0, .L80240BD4
 /* BC8950 80240AF0 00031080 */   sll      $v0, $v1, 2
-/* BC8954 80240AF4 3C018024 */  lui       $at, 0x8024
+/* BC8954 80240AF4 3C018024 */  lui       $at, %hi(D_802451D8)
 /* BC8958 80240AF8 00220821 */  addu      $at, $at, $v0
-/* BC895C 80240AFC 8C2251D8 */  lw        $v0, 0x51d8($at)
+/* BC895C 80240AFC 8C2251D8 */  lw        $v0, %lo(D_802451D8)($at)
 /* BC8960 80240B00 00400008 */  jr        $v0
 /* BC8964 80240B04 00000000 */   nop      
 /* BC8968 80240B08 0000202D */  daddu     $a0, $zero, $zero

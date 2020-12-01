@@ -13,8 +13,8 @@ glabel do_camera_type_2
 /* A118 8002ED18 F7B60020 */  sdc1      $f22, 0x20($sp)
 /* A11C 8002ED1C F7B40018 */  sdc1      $f20, 0x18($sp)
 /* A120 8002ED20 86020020 */  lh        $v0, 0x20($s0)
-/* A124 8002ED24 3C01800A */  lui       $at, 0x800a
-/* A128 8002ED28 C426A5EC */  lwc1      $f6, -0x5a14($at)
+/* A124 8002ED24 3C01800A */  lui       $at, %hi(D_8009A5EC)
+/* A128 8002ED28 C426A5EC */  lwc1      $f6, %lo(D_8009A5EC)($at)
 /* A12C 8002ED2C 86030022 */  lh        $v1, 0x22($s0)
 /* A130 8002ED30 44822000 */  mtc1      $v0, $f4
 /* A134 8002ED34 00000000 */  nop       

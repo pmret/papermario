@@ -22,8 +22,8 @@ glabel func_800E63A4
 /* 7F894 800E63E4 9082007E */  lbu       $v0, 0x7e($a0)
 /* 7F898 800E63E8 304200FD */  andi      $v0, $v0, 0xfd
 /* 7F89C 800E63EC A082007E */  sb        $v0, 0x7e($a0)
-/* 7F8A0 800E63F0 3C048011 */  lui       $a0, 0x8011
-/* 7F8A4 800E63F4 8C84C96C */  lw        $a0, -0x3694($a0)
+/* 7F8A0 800E63F0 3C048011 */  lui       $a0, %hi(D_8010C96C)
+/* 7F8A4 800E63F4 8C84C96C */  lw        $a0, %lo(D_8010C96C)($a0)
 /* 7F8A8 800E63F8 0C00E228 */  jal       free_npc_by_index
 /* 7F8AC 800E63FC A200000C */   sb       $zero, 0xc($s0)
 /* 7F8B0 800E6400 0C039769 */  jal       set_action_state

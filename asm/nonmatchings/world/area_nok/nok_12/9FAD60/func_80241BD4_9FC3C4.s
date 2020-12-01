@@ -134,9 +134,9 @@ glabel func_80241BD4_9FC3C4
 /* 9FC5B0 80241DC0 2C620064 */  sltiu     $v0, $v1, 0x64
 /* 9FC5B4 80241DC4 1040003A */  beqz      $v0, .L80241EB0
 /* 9FC5B8 80241DC8 00031080 */   sll      $v0, $v1, 2
-/* 9FC5BC 80241DCC 3C018024 */  lui       $at, 0x8024
+/* 9FC5BC 80241DCC 3C018024 */  lui       $at, %hi(D_80245C70)
 /* 9FC5C0 80241DD0 00220821 */  addu      $at, $at, $v0
-/* 9FC5C4 80241DD4 8C225C70 */  lw        $v0, 0x5c70($at)
+/* 9FC5C4 80241DD4 8C225C70 */  lw        $v0, %lo(D_80245C70)($at)
 /* 9FC5C8 80241DD8 00400008 */  jr        $v0
 /* 9FC5CC 80241DDC 00000000 */   nop      
 /* 9FC5D0 80241DE0 0260202D */  daddu     $a0, $s3, $zero

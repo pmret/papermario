@@ -57,12 +57,12 @@ static const s32 rodata_73DA0[] = {
     0x83438369, 0x838B837B, 0x83808377, 0x83430000,
     0x83748340, 0x83438369, 0x838B834E, 0x838A8357,
     0x83430000, 0X82C282A4, 0x82B682E5, 0x82A40000,
-
-    // These string literals belong to load_map_by_IDs
-    0x25735F73, 0x68617065, 0x00000000, // "%_shape"
-    0x25735F68, 0x69740000, // "%s_hit"
-    0x25735F74, 0x65780000, // "%s_tex"
 };
+
+// These string literals belong to load_map_by_IDs
+static const char D_80098A10[] = "%s_shape";
+static const char D_80098A1C[] = "%s_hit";
+static const char D_80098A24[] = "%s_tex";
 
 INCLUDE_ASM(s32, "world/world", load_map_by_IDs);
 

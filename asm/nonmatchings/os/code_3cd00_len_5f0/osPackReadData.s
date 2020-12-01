@@ -3,8 +3,8 @@
 
 glabel osPackReadData
 /* 3CEC4 80061AC4 27BDFFF0 */  addiu     $sp, $sp, -0x10
-/* 3CEC8 80061AC8 3C07800B */  lui       $a3, 0x800b
-/* 3CECC 80061ACC 24E70ED0 */  addiu     $a3, $a3, 0xed0
+/* 3CEC8 80061AC8 3C07800B */  lui       $a3, %hi(D_800B0ED0)
+/* 3CECC 80061ACC 24E70ED0 */  addiu     $a3, $a3, %lo(D_800B0ED0)
 /* 3CED0 80061AD0 2406000E */  addiu     $a2, $zero, 0xe
 /* 3CED4 80061AD4 24E20038 */  addiu     $v0, $a3, 0x38
 .L80061AD8:
@@ -13,11 +13,11 @@ glabel osPackReadData
 /* 3CEE0 80061AE0 04C1FFFD */  bgez      $a2, .L80061AD8
 /* 3CEE4 80061AE4 2442FFFC */   addiu    $v0, $v0, -4
 /* 3CEE8 80061AE8 24020001 */  addiu     $v0, $zero, 1
-/* 3CEEC 80061AEC 3C04800A */  lui       $a0, 0x800a
-/* 3CEF0 80061AF0 9084A606 */  lbu       $a0, -0x59fa($a0)
+/* 3CEEC 80061AEC 3C04800A */  lui       $a0, %hi(D_8009A606)
+/* 3CEF0 80061AF0 9084A606 */  lbu       $a0, %lo(D_8009A606)($a0)
 /* 3CEF4 80061AF4 00003021 */  addu      $a2, $zero, $zero
-/* 3CEF8 80061AF8 3C01800B */  lui       $at, 0x800b
-/* 3CEFC 80061AFC AC220F0C */  sw        $v0, 0xf0c($at)
+/* 3CEF8 80061AF8 3C01800B */  lui       $at, %hi(D_800B0F0C)
+/* 3CEFC 80061AFC AC220F0C */  sw        $v0, %lo(D_800B0F0C)($at)
 /* 3CF00 80061B00 240200FF */  addiu     $v0, $zero, 0xff
 /* 3CF04 80061B04 24030001 */  addiu     $v1, $zero, 1
 /* 3CF08 80061B08 A3A20000 */  sb        $v0, ($sp)
@@ -40,8 +40,8 @@ glabel osPackReadData
 /* 3CF48 80061B48 B8E20003 */  swr       $v0, 3($a3)
 /* 3CF4C 80061B4C A8E30004 */  swl       $v1, 4($a3)
 /* 3CF50 80061B50 B8E30007 */  swr       $v1, 7($a3)
-/* 3CF54 80061B54 3C02800A */  lui       $v0, 0x800a
-/* 3CF58 80061B58 9042A606 */  lbu       $v0, -0x59fa($v0)
+/* 3CF54 80061B54 3C02800A */  lui       $v0, %hi(D_8009A606)
+/* 3CF58 80061B58 9042A606 */  lbu       $v0, %lo(D_8009A606)($v0)
 /* 3CF5C 80061B5C 24C60001 */  addiu     $a2, $a2, 1
 /* 3CF60 80061B60 00C2102A */  slt       $v0, $a2, $v0
 /* 3CF64 80061B64 1440FFF3 */  bnez      $v0, .L80061B34

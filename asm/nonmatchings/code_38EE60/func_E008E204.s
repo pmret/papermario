@@ -123,8 +123,8 @@ glabel func_E008E204
 /* 38F220 E008E3C0 44811000 */  mtc1      $at, $f2
 /* 38F224 E008E3C4 24420002 */  addiu     $v0, $v0, 2
 /* 38F228 E008E3C8 46020003 */  div.s     $f0, $f0, $f2
-/* 38F22C E008E3CC 3C01E009 */  lui       $at, 0xe009
-/* 38F230 E008E3D0 D422E8A0 */  ldc1      $f2, -0x1760($at)
+/* 38F22C E008E3CC 3C01E009 */  lui       $at, %hi(D_E008E8A0)
+/* 38F230 E008E3D0 D422E8A0 */  ldc1      $f2, %lo(D_E008E8A0)($at)
 /* 38F234 E008E3D4 46000021 */  cvt.d.s   $f0, $f0
 /* 38F238 E008E3D8 46220000 */  add.d     $f0, $f0, $f2
 /* 38F23C E008E3DC C6040008 */  lwc1      $f4, 8($s0)

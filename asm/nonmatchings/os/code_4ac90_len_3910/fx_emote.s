@@ -22,7 +22,7 @@ glabel fx_emote
 /* 4B2D4 8006FED4 C7B00028 */  lwc1      $f16, 0x28($sp)
 /* 4B2D8 8006FED8 8FBF002C */  lw        $ra, 0x2c($sp)
 /* 4B2DC 8006FEDC 27BD0030 */  addiu     $sp, $sp, 0x30
-/* 4B2E0 8006FEE0 3C018008 */  lui       $at, 0x8008
-/* 4B2E4 8006FEE4 8C21F390 */  lw        $at, -0xc70($at)
+/* 4B2E0 8006FEE0 3C018008 */  lui       $at, %hi(D_8007F390)
+/* 4B2E4 8006FEE4 8C21F390 */  lw        $at, %lo(D_8007F390)($at)
 /* 4B2E8 8006FEE8 00200008 */  jr        $at
 /* 4B2EC 8006FEEC 00000000 */   nop      

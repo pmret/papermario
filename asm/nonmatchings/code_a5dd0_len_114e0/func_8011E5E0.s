@@ -33,8 +33,8 @@ glabel func_8011E5E0
 /* B4D40 8011E640 00102080 */  sll       $a0, $s0, 2
 /* B4D44 8011E644 3C038015 */  lui       $v1, %hi(gCurrentAnimMeshListPtr)
 /* B4D48 8011E648 8C633A40 */  lw        $v1, %lo(gCurrentAnimMeshListPtr)($v1)
-/* B4D4C 8011E64C 3C058015 */  lui       $a1, 0x8015
-/* B4D50 8011E650 24A512D4 */  addiu     $a1, $a1, 0x12d4
+/* B4D4C 8011E64C 3C058015 */  lui       $a1, %hi(D_801512D4)
+/* B4D50 8011E650 24A512D4 */  addiu     $a1, $a1, %lo(D_801512D4)
 /* B4D54 8011E654 00832021 */  addu      $a0, $a0, $v1
 /* B4D58 8011E658 8CA30000 */  lw        $v1, ($a1)
 /* B4D5C 8011E65C 0040302D */  daddu     $a2, $v0, $zero

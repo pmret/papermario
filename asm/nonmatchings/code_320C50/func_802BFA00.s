@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel func_802BFA00
-/* 323550 802BFA00 3C02802C */  lui       $v0, 0x802c
-/* 323554 802BFA04 8C42FF0C */  lw        $v0, -0xf4($v0)
+/* 323550 802BFA00 3C02802C */  lui       $v0, %hi(D_802BFF0C)
+/* 323554 802BFA04 8C42FF0C */  lw        $v0, %lo(D_802BFF0C)($v0)
 /* 323558 802BFA08 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 32355C 802BFA0C AFB00010 */  sw        $s0, 0x10($sp)
 /* 323560 802BFA10 0080802D */  daddu     $s0, $a0, $zero
@@ -42,7 +42,7 @@ glabel func_802BFA00
 /* 3235DC 802BFA8C 8FBF0018 */  lw        $ra, 0x18($sp)
 /* 3235E0 802BFA90 8FB10014 */  lw        $s1, 0x14($sp)
 /* 3235E4 802BFA94 8FB00010 */  lw        $s0, 0x10($sp)
-/* 3235E8 802BFA98 3C01802C */  lui       $at, 0x802c
-/* 3235EC 802BFA9C AC20FF18 */  sw        $zero, -0xe8($at)
+/* 3235E8 802BFA98 3C01802C */  lui       $at, %hi(D_802BFF18)
+/* 3235EC 802BFA9C AC20FF18 */  sw        $zero, %lo(D_802BFF18)($at)
 /* 3235F0 802BFAA0 03E00008 */  jr        $ra
 /* 3235F4 802BFAA4 27BD0020 */   addiu    $sp, $sp, 0x20

@@ -16,9 +16,9 @@ glabel func_80240AF0_BD4360
 /* BD438C 80240B1C 2C62000E */  sltiu     $v0, $v1, 0xe
 /* BD4390 80240B20 10400058 */  beqz      $v0, .L80240C84
 /* BD4394 80240B24 00031080 */   sll      $v0, $v1, 2
-/* BD4398 80240B28 3C018024 */  lui       $at, 0x8024
+/* BD4398 80240B28 3C018024 */  lui       $at, %hi(D_80246EC8)
 /* BD439C 80240B2C 00220821 */  addu      $at, $at, $v0
-/* BD43A0 80240B30 8C226EC8 */  lw        $v0, 0x6ec8($at)
+/* BD43A0 80240B30 8C226EC8 */  lw        $v0, %lo(D_80246EC8)($at)
 /* BD43A4 80240B34 00400008 */  jr        $v0
 /* BD43A8 80240B38 00000000 */   nop      
 /* BD43AC 80240B3C 0220202D */  daddu     $a0, $s1, $zero

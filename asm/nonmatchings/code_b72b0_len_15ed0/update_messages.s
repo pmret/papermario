@@ -3,8 +3,8 @@
 
 glabel update_messages
 /* B9ED8 801237D8 27BDFFE0 */  addiu     $sp, $sp, -0x20
-/* B9EDC 801237DC 3C038015 */  lui       $v1, 0x8015
-/* B9EE0 801237E0 246312E4 */  addiu     $v1, $v1, 0x12e4
+/* B9EDC 801237DC 3C038015 */  lui       $v1, %hi(D_801512E4)
+/* B9EE0 801237E0 246312E4 */  addiu     $v1, $v1, %lo(D_801512E4)
 /* B9EE4 801237E4 AFBF0018 */  sw        $ra, 0x18($sp)
 /* B9EE8 801237E8 AFB10014 */  sw        $s1, 0x14($sp)
 /* B9EEC 801237EC AFB00010 */  sw        $s0, 0x10($sp)
@@ -17,8 +17,8 @@ glabel update_messages
 /* B9F08 80123808 A4600000 */   sh       $zero, ($v1)
 .L8012380C:
 /* B9F0C 8012380C 0000882D */  daddu     $s1, $zero, $zero
-/* B9F10 80123810 3C108015 */  lui       $s0, 0x8015
-/* B9F14 80123814 26104C30 */  addiu     $s0, $s0, 0x4c30
+/* B9F10 80123810 3C108015 */  lui       $s0, %hi(D_80154C30)
+/* B9F14 80123814 26104C30 */  addiu     $s0, $s0, %lo(D_80154C30)
 .L80123818:
 /* B9F18 80123818 8E0204FC */  lw        $v0, 0x4fc($s0)
 /* B9F1C 8012381C 30420002 */  andi      $v0, $v0, 2
@@ -31,10 +31,10 @@ glabel update_messages
 /* B9F34 80123834 2A220003 */  slti      $v0, $s1, 3
 /* B9F38 80123838 1440FFF7 */  bnez      $v0, .L80123818
 /* B9F3C 8012383C 26100558 */   addiu    $s0, $s0, 0x558
-/* B9F40 80123840 3C048015 */  lui       $a0, 0x8015
-/* B9F44 80123844 248412D8 */  addiu     $a0, $a0, 0x12d8
-/* B9F48 80123848 3C068015 */  lui       $a2, 0x8015
-/* B9F4C 8012384C 24C6130C */  addiu     $a2, $a2, 0x130c
+/* B9F40 80123840 3C048015 */  lui       $a0, %hi(D_801512D8)
+/* B9F44 80123844 248412D8 */  addiu     $a0, $a0, %lo(D_801512D8)
+/* B9F48 80123848 3C068015 */  lui       $a2, %hi(D_8015130C)
+/* B9F4C 8012384C 24C6130C */  addiu     $a2, $a2, %lo(D_8015130C)
 /* B9F50 80123850 8C850000 */  lw        $a1, ($a0)
 /* B9F54 80123854 8CC70000 */  lw        $a3, ($a2)
 /* B9F58 80123858 24A2000C */  addiu     $v0, $a1, 0xc

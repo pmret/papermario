@@ -8,8 +8,8 @@ glabel func_80241170_CF8CE0
 /* CF8CEC 8024117C 0C0B1EAF */  jal       get_variable
 /* CF8CF0 80241180 8C450000 */   lw       $a1, ($v0)
 /* CF8CF4 80241184 0040202D */  daddu     $a0, $v0, $zero
-/* CF8CF8 80241188 3C028025 */  lui       $v0, 0x8025
-/* CF8CFC 8024118C 8C42DF18 */  lw        $v0, -0x20e8($v0)
+/* CF8CF8 80241188 3C028025 */  lui       $v0, %hi(D_8024DF18)
+/* CF8CFC 8024118C 8C42DF18 */  lw        $v0, %lo(D_8024DF18)($v0)
 /* CF8D00 80241190 24030001 */  addiu     $v1, $zero, 1
 /* CF8D04 80241194 8C45000C */  lw        $a1, 0xc($v0)
 /* CF8D08 80241198 1083000D */  beq       $a0, $v1, .L802411D0

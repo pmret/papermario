@@ -8,6 +8,7 @@ options:
   ld_addrs_header: include/ld_addrs.h
   extensions: splat_ext
   symbol_debug_info: False
+  create_detected_syms: True
 segments:
   - name: header
     type: header
@@ -269,14 +270,14 @@ segments:
     - [0xFE650, .data, code_e79b0_len_1920]
     - [0xFE660, data, si]
     - [0xFE730, .rodata, code_e79b0_len_1920]
-  - [0xFE748, bin] # rodata chunk for above overlay; here to avoid the 0x10 alignment
+    - [0xFE748, rodata, si]
   - type: code
     start: 0xFEE30
     vram: 0x802DBD40
     files:
     - [0xfee30, c, code_fee30_len_2d60]
     - [0x101b90, c, code_101b90_len_8f0]
-    - [0x102480, bin]
+    - [0x102480, data, code_fee30_len_2d60]
   - type: code
     start: 0x102610
     vram: 0x802E0D90

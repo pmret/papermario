@@ -6,8 +6,8 @@ glabel func_80241DA0_7ECAB0
 /* 7ECAB4 80241DA4 AFB20018 */  sw        $s2, 0x18($sp)
 /* 7ECAB8 80241DA8 0080902D */  daddu     $s2, $a0, $zero
 /* 7ECABC 80241DAC AFB10014 */  sw        $s1, 0x14($sp)
-/* 7ECAC0 80241DB0 3C118025 */  lui       $s1, 0x8025
-/* 7ECAC4 80241DB4 26318F18 */  addiu     $s1, $s1, -0x70e8
+/* 7ECAC0 80241DB0 3C118025 */  lui       $s1, %hi(D_80248F18)
+/* 7ECAC4 80241DB4 26318F18 */  addiu     $s1, $s1, %lo(D_80248F18)
 /* 7ECAC8 80241DB8 AFB00010 */  sw        $s0, 0x10($sp)
 /* 7ECACC 80241DBC 0000802D */  daddu     $s0, $zero, $zero
 /* 7ECAD0 80241DC0 AFBF001C */  sw        $ra, 0x1c($sp)

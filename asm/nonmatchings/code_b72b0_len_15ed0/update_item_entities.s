@@ -15,8 +15,8 @@ glabel update_item_entities
 /* C8614 80131F14 0000982D */  daddu     $s3, $zero, $zero
 /* C8618 80131F18 0260902D */  daddu     $s2, $s3, $zero
 .L80131F1C:
-/* C861C 80131F1C 3C028015 */  lui       $v0, 0x8015
-/* C8620 80131F20 8C4265A0 */  lw        $v0, 0x65a0($v0)
+/* C861C 80131F1C 3C028015 */  lui       $v0, %hi(D_801565A0)
+/* C8620 80131F20 8C4265A0 */  lw        $v0, %lo(D_801565A0)($v0)
 /* C8624 80131F24 02421021 */  addu      $v0, $s2, $v0
 /* C8628 80131F28 8C510000 */  lw        $s1, ($v0)
 /* C862C 80131F2C 52200093 */  beql      $s1, $zero, .L8013217C
@@ -32,23 +32,23 @@ glabel update_item_entities
 /* C8654 80131F54 2842005B */  slti      $v0, $v0, 0x5b
 /* C8658 80131F58 14400012 */  bnez      $v0, .L80131FA4
 /* C865C 80131F5C 00000000 */   nop      
-/* C8660 80131F60 3C058010 */  lui       $a1, 0x8010
-/* C8664 80131F64 24A54AC0 */  addiu     $a1, $a1, 0x4ac0
+/* C8660 80131F60 3C058010 */  lui       $a1, %hi(D_80104AC0)
+/* C8664 80131F64 24A54AC0 */  addiu     $a1, $a1, %lo(D_80104AC0)
 /* C8668 80131F68 0C04C27C */  jal       func_801309F0
 /* C866C 80131F6C 0220202D */   daddu    $a0, $s1, $zero
 /* C8670 80131F70 0C00A67F */  jal       rand_int
 /* C8674 80131F74 24040010 */   addiu    $a0, $zero, 0x10
 /* C8678 80131F78 2442FFF8 */  addiu     $v0, $v0, -8
-/* C867C 80131F7C 3C018015 */  lui       $at, 0x8015
-/* C8680 80131F80 A4225D8C */  sh        $v0, 0x5d8c($at)
+/* C867C 80131F7C 3C018015 */  lui       $at, %hi(D_80155D8C)
+/* C8680 80131F80 A4225D8C */  sh        $v0, %lo(D_80155D8C)($at)
 /* C8684 80131F84 0C00A67F */  jal       rand_int
 /* C8688 80131F88 24040010 */   addiu    $a0, $zero, 0x10
 /* C868C 80131F8C 2442FFF8 */  addiu     $v0, $v0, -8
-/* C8690 80131F90 3C018015 */  lui       $at, 0x8015
-/* C8694 80131F94 A4225D8E */  sh        $v0, 0x5d8e($at)
+/* C8690 80131F90 3C018015 */  lui       $at, %hi(D_80155D8E)
+/* C8694 80131F94 A4225D8E */  sh        $v0, %lo(D_80155D8E)($at)
 /* C8698 80131F98 24020005 */  addiu     $v0, $zero, 5
-/* C869C 80131F9C 3C018015 */  lui       $at, 0x8015
-/* C86A0 80131FA0 A4225D90 */  sh        $v0, 0x5d90($at)
+/* C869C 80131F9C 3C018015 */  lui       $at, %hi(D_80155D90)
+/* C86A0 80131FA0 A4225D90 */  sh        $v0, %lo(D_80155D90)($at)
 .L80131FA4:
 /* C86A4 80131FA4 0C04C2B3 */  jal       func_80130ACC
 /* C86A8 80131FA8 0220202D */   daddu    $a0, $s1, $zero
@@ -59,9 +59,9 @@ glabel update_item_entities
 /* C86B8 80131FB8 2C62001D */  sltiu     $v0, $v1, 0x1d
 /* C86BC 80131FBC 10400014 */  beqz      $v0, .L80132010
 /* C86C0 80131FC0 00031080 */   sll      $v0, $v1, 2
-/* C86C4 80131FC4 3C018015 */  lui       $at, 0x8015
+/* C86C4 80131FC4 3C018015 */  lui       $at, %hi(D_80150BD8)
 /* C86C8 80131FC8 00220821 */  addu      $at, $at, $v0
-/* C86CC 80131FCC 8C220BD8 */  lw        $v0, 0xbd8($at)
+/* C86CC 80131FCC 8C220BD8 */  lw        $v0, %lo(D_80150BD8)($at)
 /* C86D0 80131FD0 00400008 */  jr        $v0
 /* C86D4 80131FD4 00000000 */   nop      
 /* C86D8 80131FD8 0C04D596 */  jal       update_item_entity_static
@@ -79,8 +79,8 @@ glabel update_item_entities
 /* C8708 80132008 0C04D5B7 */  jal       update_item_entity_temp
 /* C870C 8013200C 0220202D */   daddu    $a0, $s1, $zero
 .L80132010:
-/* C8710 80132010 3C028015 */  lui       $v0, 0x8015
-/* C8714 80132014 8C4265A0 */  lw        $v0, 0x65a0($v0)
+/* C8710 80132010 3C028015 */  lui       $v0, %hi(D_801565A0)
+/* C8714 80132014 8C4265A0 */  lw        $v0, %lo(D_801565A0)($v0)
 /* C8718 80132018 02421021 */  addu      $v0, $s2, $v0
 /* C871C 8013201C 8C510000 */  lw        $s1, ($v0)
 /* C8720 80132020 52200056 */  beql      $s1, $zero, .L8013217C
@@ -89,9 +89,9 @@ glabel update_item_entities
 /* C872C 8013202C 2C62001D */  sltiu     $v0, $v1, 0x1d
 /* C8730 80132030 10400043 */  beqz      $v0, .L80132140
 /* C8734 80132034 00031080 */   sll      $v0, $v1, 2
-/* C8738 80132038 3C018015 */  lui       $at, 0x8015
+/* C8738 80132038 3C018015 */  lui       $at, %hi(D_80150C50)
 /* C873C 8013203C 00220821 */  addu      $at, $at, $v0
-/* C8740 80132040 8C220C50 */  lw        $v0, 0xc50($at)
+/* C8740 80132040 8C220C50 */  lw        $v0, %lo(D_80150C50)($at)
 /* C8744 80132044 00400008 */  jr        $v0
 /* C8748 80132048 00000000 */   nop      
 /* C874C 8013204C C6200008 */  lwc1      $f0, 8($s1)

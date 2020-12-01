@@ -6,8 +6,8 @@ glabel osViGetCurrentMode
 /* 41E34 80066A34 AFBF0014 */  sw        $ra, 0x14($sp)
 /* 41E38 80066A38 0C01ACD8 */  jal       __osDisableInt
 /* 41E3C 80066A3C AFB00010 */   sw       $s0, 0x10($sp)
-/* 41E40 80066A40 3C038009 */  lui       $v1, 0x8009
-/* 41E44 80066A44 8C6359D0 */  lw        $v1, 0x59d0($v1)
+/* 41E40 80066A40 3C038009 */  lui       $v1, %hi(D_800959D0)
+/* 41E44 80066A44 8C6359D0 */  lw        $v1, %lo(D_800959D0)($v1)
 /* 41E48 80066A48 8C630008 */  lw        $v1, 8($v1)
 /* 41E4C 80066A4C 90700000 */  lbu       $s0, ($v1)
 /* 41E50 80066A50 0C01ACF4 */  jal       __osRestoreInt

@@ -45,9 +45,9 @@ glabel func_802BD7DC
 /* 3213C8 802BD878 000218C0 */  sll       $v1, $v0, 3
 /* 3213CC 802BD87C 00431021 */  addu      $v0, $v0, $v1
 /* 3213D0 802BD880 000210C0 */  sll       $v0, $v0, 3
-/* 3213D4 802BD884 3C07800B */  lui       $a3, 0x800b
+/* 3213D4 802BD884 3C07800B */  lui       $a3, %hi(D_800B1DEC)
 /* 3213D8 802BD888 00E23821 */  addu      $a3, $a3, $v0
-/* 3213DC 802BD88C 8CE71DEC */  lw        $a3, 0x1dec($a3)
+/* 3213DC 802BD88C 8CE71DEC */  lw        $a3, %lo(D_800B1DEC)($a3)
 /* 3213E0 802BD890 0200282D */  daddu     $a1, $s0, $zero
 /* 3213E4 802BD894 E7B40034 */  swc1      $f20, 0x34($sp)
 /* 3213E8 802BD898 C6400064 */  lwc1      $f0, 0x64($s2)

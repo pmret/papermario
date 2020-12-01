@@ -15,7 +15,7 @@ glabel func_80242C84_C88734
 /* C8875C 80242CAC 8FBF0014 */  lw        $ra, 0x14($sp)
 /* C88760 80242CB0 8FB00010 */  lw        $s0, 0x10($sp)
 /* C88764 80242CB4 24020002 */  addiu     $v0, $zero, 2
-/* C88768 80242CB8 3C018024 */  lui       $at, 0x8024
-/* C8876C 80242CBC AC2367B4 */  sw        $v1, 0x67b4($at)
+/* C88768 80242CB8 3C018024 */  lui       $at, %hi(D_802467B4)
+/* C8876C 80242CBC AC2367B4 */  sw        $v1, %lo(D_802467B4)($at)
 /* C88770 80242CC0 03E00008 */  jr        $ra
 /* C88774 80242CC4 27BD0018 */   addiu    $sp, $sp, 0x18

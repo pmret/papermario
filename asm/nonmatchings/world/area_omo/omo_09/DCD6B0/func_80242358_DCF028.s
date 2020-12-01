@@ -13,8 +13,8 @@ glabel func_80242358_DCF028
 /* DCF048 80242378 AFB00010 */  sw        $s0, 0x10($sp)
 /* DCF04C 8024237C F7B40028 */  sdc1      $f20, 0x28($sp)
 /* DCF050 80242380 8E330148 */  lw        $s3, 0x148($s1)
-/* DCF054 80242384 3C03800A */  lui       $v1, 0x800a
-/* DCF058 80242388 8463A634 */  lh        $v1, -0x59cc($v1)
+/* DCF054 80242384 3C03800A */  lui       $v1, %hi(D_8009A634)
+/* DCF058 80242388 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
 /* DCF05C 8024238C 8E30000C */  lw        $s0, 0xc($s1)
 /* DCF060 80242390 00031080 */  sll       $v0, $v1, 2
 /* DCF064 80242394 00431021 */  addu      $v0, $v0, $v1
@@ -45,8 +45,8 @@ glabel func_80242358_DCF028
 /* DCF0C8 802423F8 00000000 */   nop      
 /* DCF0CC 802423FC 0C00A6C9 */  jal       clamp_angle
 /* DCF0D0 80242400 46000306 */   mov.s    $f12, $f0
-/* DCF0D4 80242404 3C018025 */  lui       $at, 0x8025
-/* DCF0D8 80242408 D422AB10 */  ldc1      $f2, -0x54f0($at)
+/* DCF0D4 80242404 3C018025 */  lui       $at, %hi(D_8024AB10)
+/* DCF0D8 80242408 D422AB10 */  ldc1      $f2, %lo(D_8024AB10)($at)
 /* DCF0DC 8024240C 46000021 */  cvt.d.s   $f0, $f0
 /* DCF0E0 80242410 4622003C */  c.lt.d    $f0, $f2
 /* DCF0E4 80242414 00000000 */  nop       
@@ -67,8 +67,8 @@ glabel func_80242358_DCF028
 /* DCF11C 8024244C 0C00A70A */  jal       get_clamped_angle_diff
 /* DCF120 80242450 46000386 */   mov.s    $f14, $f0
 /* DCF124 80242454 46000005 */  abs.s     $f0, $f0
-/* DCF128 80242458 3C018025 */  lui       $at, 0x8025
-/* DCF12C 8024245C D422AB18 */  ldc1      $f2, -0x54e8($at)
+/* DCF128 80242458 3C018025 */  lui       $at, %hi(D_8024AB18)
+/* DCF12C 8024245C D422AB18 */  ldc1      $f2, %lo(D_8024AB18)($at)
 /* DCF130 80242460 46000021 */  cvt.d.s   $f0, $f0
 /* DCF134 80242464 4620103C */  c.lt.d    $f2, $f0
 /* DCF138 80242468 00000000 */  nop       
@@ -89,8 +89,8 @@ glabel func_80242358_DCF028
 /* DCF174 802424A4 00000000 */  nop       
 /* DCF178 802424A8 4501001F */  bc1t      .L80242528
 /* DCF17C 802424AC 2402FFFF */   addiu    $v0, $zero, -1
-/* DCF180 802424B0 3C038011 */  lui       $v1, 0x8011
-/* DCF184 802424B4 8063EBB3 */  lb        $v1, -0x144d($v1)
+/* DCF180 802424B0 3C038011 */  lui       $v1, %hi(D_8010EBB3)
+/* DCF184 802424B4 8063EBB3 */  lb        $v1, %lo(D_8010EBB3)($v1)
 /* DCF188 802424B8 24020009 */  addiu     $v0, $zero, 9
 /* DCF18C 802424BC 10620019 */  beq       $v1, $v0, .L80242524
 /* DCF190 802424C0 24020007 */   addiu    $v0, $zero, 7

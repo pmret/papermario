@@ -7,8 +7,8 @@ glabel remove_effect
 /* 35858 8005A458 0080882D */  daddu     $s1, $a0, $zero
 /* 3585C 8005A45C AFB00010 */  sw        $s0, 0x10($sp)
 /* 35860 8005A460 0000802D */  daddu     $s0, $zero, $zero
-/* 35864 8005A464 3C03800B */  lui       $v1, 0x800b
-/* 35868 8005A468 24634398 */  addiu     $v1, $v1, 0x4398
+/* 35864 8005A464 3C03800B */  lui       $v1, %hi(D_800B4398)
+/* 35868 8005A468 24634398 */  addiu     $v1, $v1, %lo(D_800B4398)
 /* 3586C 8005A46C AFBF0018 */  sw        $ra, 0x18($sp)
 .L8005A470:
 /* 35870 8005A470 8C620000 */  lw        $v0, ($v1)
@@ -35,9 +35,9 @@ glabel remove_effect
 /* 358B4 8005A4B4 0C00AB1E */  jal       general_heap_free
 /* 358B8 8005A4B8 0220202D */   daddu    $a0, $s1, $zero
 /* 358BC 8005A4BC 00101080 */  sll       $v0, $s0, 2
-/* 358C0 8005A4C0 3C01800B */  lui       $at, 0x800b
+/* 358C0 8005A4C0 3C01800B */  lui       $at, %hi(D_800B4398)
 /* 358C4 8005A4C4 00220821 */  addu      $at, $at, $v0
-/* 358C8 8005A4C8 AC204398 */  sw        $zero, 0x4398($at)
+/* 358C8 8005A4C8 AC204398 */  sw        $zero, %lo(D_800B4398)($at)
 /* 358CC 8005A4CC 8FBF0018 */  lw        $ra, 0x18($sp)
 /* 358D0 8005A4D0 8FB10014 */  lw        $s1, 0x14($sp)
 /* 358D4 8005A4D4 8FB00010 */  lw        $s0, 0x10($sp)

@@ -12,12 +12,12 @@ glabel func_80240F90_E136F0
 /* E1370C 80240FAC 0C00FB3A */  jal       get_enemy
 /* E13710 80240FB0 AFB00018 */   sw       $s0, 0x18($sp)
 /* E13714 80240FB4 0000802D */  daddu     $s0, $zero, $zero
-/* E13718 80240FB8 3C148024 */  lui       $s4, 0x8024
-/* E1371C 80240FBC 26941AC8 */  addiu     $s4, $s4, 0x1ac8
-/* E13720 80240FC0 3C138024 */  lui       $s3, 0x8024
-/* E13724 80240FC4 26731AD4 */  addiu     $s3, $s3, 0x1ad4
-/* E13728 80240FC8 3C128024 */  lui       $s2, 0x8024
-/* E1372C 80240FCC 26521AE0 */  addiu     $s2, $s2, 0x1ae0
+/* E13718 80240FB8 3C148024 */  lui       $s4, %hi(D_80241AC8)
+/* E1371C 80240FBC 26941AC8 */  addiu     $s4, $s4, %lo(D_80241AC8)
+/* E13720 80240FC0 3C138024 */  lui       $s3, %hi(D_80241AD4)
+/* E13724 80240FC4 26731AD4 */  addiu     $s3, $s3, %lo(D_80241AD4)
+/* E13728 80240FC8 3C128024 */  lui       $s2, %hi(D_80241AE0)
+/* E1372C 80240FCC 26521AE0 */  addiu     $s2, $s2, %lo(D_80241AE0)
 /* E13730 80240FD0 8C510080 */  lw        $s1, 0x80($v0)
 .L80240FD4:
 /* E13734 80240FD4 8E220088 */  lw        $v0, 0x88($s1)

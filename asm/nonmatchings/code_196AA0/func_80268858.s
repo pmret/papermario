@@ -4,8 +4,8 @@
 glabel func_80268858
 /* 197138 80268858 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 19713C 8026885C AFB00010 */  sw        $s0, 0x10($sp)
-/* 197140 80268860 3C10802A */  lui       $s0, 0x802a
-/* 197144 80268864 2610FBE0 */  addiu     $s0, $s0, -0x420
+/* 197140 80268860 3C10802A */  lui       $s0, %hi(D_8029FBE0)
+/* 197144 80268864 2610FBE0 */  addiu     $s0, $s0, %lo(D_8029FBE0)
 /* 197148 80268868 AFB20018 */  sw        $s2, 0x18($sp)
 /* 19714C 8026886C 3C12800E */  lui       $s2, %hi(gBattleStatus)
 /* 197150 80268870 2652C070 */  addiu     $s2, $s2, %lo(gBattleStatus)

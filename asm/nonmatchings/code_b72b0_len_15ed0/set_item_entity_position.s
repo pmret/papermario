@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel set_item_entity_position
-/* CA90C 8013420C 3C028015 */  lui       $v0, 0x8015
-/* CA910 80134210 8C4265A0 */  lw        $v0, 0x65a0($v0)
+/* CA90C 8013420C 3C028015 */  lui       $v0, %hi(D_801565A0)
+/* CA910 80134210 8C4265A0 */  lw        $v0, %lo(D_801565A0)($v0)
 /* CA914 80134214 00042080 */  sll       $a0, $a0, 2
 /* CA918 80134218 00822021 */  addu      $a0, $a0, $v0
 /* CA91C 8013421C 8C820000 */  lw        $v0, ($a0)

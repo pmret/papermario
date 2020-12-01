@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel func_802BE90C
-/* 31AE7C 802BE90C 3C02802C */  lui       $v0, 0x802c
-/* 31AE80 802BE910 8C42EBB0 */  lw        $v0, -0x1450($v0)
+/* 31AE7C 802BE90C 3C02802C */  lui       $v0, %hi(D_802BEBB0)
+/* 31AE80 802BE910 8C42EBB0 */  lw        $v0, %lo(D_802BEBB0)($v0)
 /* 31AE84 802BE914 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 31AE88 802BE918 AFB00010 */  sw        $s0, 0x10($sp)
 /* 31AE8C 802BE91C 0080802D */  daddu     $s0, $a0, $zero
@@ -12,15 +12,15 @@ glabel func_802BE90C
 /* 31AE98 802BE928 2631EBB0 */  addiu     $s1, $s1, %lo(D_8010EBB0)
 /* 31AE9C 802BE92C 10400021 */  beqz      $v0, .L802BE9B4
 /* 31AEA0 802BE930 AFBF0018 */   sw       $ra, 0x18($sp)
-/* 31AEA4 802BE934 3C02802C */  lui       $v0, 0x802c
-/* 31AEA8 802BE938 8C42EBB8 */  lw        $v0, -0x1448($v0)
+/* 31AEA4 802BE934 3C02802C */  lui       $v0, %hi(D_802BEBB8)
+/* 31AEA8 802BE938 8C42EBB8 */  lw        $v0, %lo(D_802BEBB8)($v0)
 /* 31AEAC 802BE93C 10400003 */  beqz      $v0, .L802BE94C
 /* 31AEB0 802BE940 00000000 */   nop      
 /* 31AEB4 802BE944 0C038050 */  jal       enable_player_static_collisions
 /* 31AEB8 802BE948 00000000 */   nop      
 .L802BE94C:
-/* 31AEBC 802BE94C 3C02802C */  lui       $v0, 0x802c
-/* 31AEC0 802BE950 8C42EBB4 */  lw        $v0, -0x144c($v0)
+/* 31AEBC 802BE94C 3C02802C */  lui       $v0, %hi(D_802BEBB4)
+/* 31AEC0 802BE950 8C42EBB4 */  lw        $v0, %lo(D_802BEBB4)($v0)
 /* 31AEC4 802BE954 10400003 */  beqz      $v0, .L802BE964
 /* 31AEC8 802BE958 00000000 */   nop      
 /* 31AECC 802BE95C 0C038069 */  jal       enable_player_input

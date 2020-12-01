@@ -100,9 +100,9 @@ glabel func_80240C6C_D2C99C
 /* D2CB00 80240DD0 2C620064 */  sltiu     $v0, $v1, 0x64
 /* D2CB04 80240DD4 10400048 */  beqz      $v0, .L80240EF8
 /* D2CB08 80240DD8 00031080 */   sll      $v0, $v1, 2
-/* D2CB0C 80240DDC 3C018024 */  lui       $at, 0x8024
+/* D2CB0C 80240DDC 3C018024 */  lui       $at, %hi(D_80243D88)
 /* D2CB10 80240DE0 00220821 */  addu      $at, $at, $v0
-/* D2CB14 80240DE4 8C223D88 */  lw        $v0, 0x3d88($at)
+/* D2CB14 80240DE4 8C223D88 */  lw        $v0, %lo(D_80243D88)($at)
 /* D2CB18 80240DE8 00400008 */  jr        $v0
 /* D2CB1C 80240DEC 00000000 */   nop      
 /* D2CB20 80240DF0 0240202D */  daddu     $a0, $s2, $zero

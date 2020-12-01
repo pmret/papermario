@@ -3,8 +3,8 @@
 
 glabel update_shadows
 /* A6198 8010FA98 27BDFFD8 */  addiu     $sp, $sp, -0x28
-/* A619C 8010FA9C 3C028015 */  lui       $v0, 0x8015
-/* A61A0 8010FAA0 24421324 */  addiu     $v0, $v0, 0x1324
+/* A619C 8010FA9C 3C028015 */  lui       $v0, %hi(D_80151324)
+/* A61A0 8010FAA0 24421324 */  addiu     $v0, $v0, %lo(D_80151324)
 /* A61A4 8010FAA4 AFB10014 */  sw        $s1, 0x14($sp)
 /* A61A8 8010FAA8 0000882D */  daddu     $s1, $zero, $zero
 /* A61AC 8010FAAC AFB20018 */  sw        $s2, 0x18($sp)

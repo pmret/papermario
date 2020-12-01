@@ -32,16 +32,16 @@ glabel func_80240B64_A4D584
 /* A4D5E8 80240BC8 240300FF */   addiu    $v1, $zero, 0xff
 .L80240BCC:
 /* A4D5EC 80240BCC 8602008E */  lh        $v0, 0x8e($s0)
-/* A4D5F0 80240BD0 3C018024 */  lui       $at, 0x8024
-/* A4D5F4 80240BD4 D4222560 */  ldc1      $f2, 0x2560($at)
+/* A4D5F0 80240BD0 3C018024 */  lui       $at, %hi(D_80242560)
+/* A4D5F4 80240BD4 D4222560 */  ldc1      $f2, %lo(D_80242560)($at)
 /* A4D5F8 80240BD8 44820000 */  mtc1      $v0, $f0
 /* A4D5FC 80240BDC 00000000 */  nop       
 /* A4D600 80240BE0 46800020 */  cvt.s.w   $f0, $f0
 /* A4D604 80240BE4 46000021 */  cvt.d.s   $f0, $f0
 /* A4D608 80240BE8 46220002 */  mul.d     $f0, $f0, $f2
 /* A4D60C 80240BEC 00000000 */  nop       
-/* A4D610 80240BF0 3C018024 */  lui       $at, 0x8024
-/* A4D614 80240BF4 D4222568 */  ldc1      $f2, 0x2568($at)
+/* A4D610 80240BF0 3C018024 */  lui       $at, %hi(D_80242568)
+/* A4D614 80240BF4 D4222568 */  ldc1      $f2, %lo(D_80242568)($at)
 /* A4D618 80240BF8 46220000 */  add.d     $f0, $f0, $f2
 /* A4D61C 80240BFC A20300AC */  sb        $v1, 0xac($s0)
 /* A4D620 80240C00 3C013FF0 */  lui       $at, 0x3ff0

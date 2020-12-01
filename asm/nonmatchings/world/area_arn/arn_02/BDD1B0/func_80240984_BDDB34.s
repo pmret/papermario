@@ -30,8 +30,8 @@ glabel func_80240984_BDDB34
 /* BDDB98 802409E8 08090284 */  j         .L80240A10
 /* BDDB9C 802409EC E4600018 */   swc1     $f0, 0x18($v1)
 .L802409F0:
-/* BDDBA0 802409F0 3C018024 */  lui       $at, 0x8024
-/* BDDBA4 802409F4 D4221B00 */  ldc1      $f2, 0x1b00($at)
+/* BDDBA0 802409F0 3C018024 */  lui       $at, %hi(D_80241B00)
+/* BDDBA4 802409F4 D4221B00 */  ldc1      $f2, %lo(D_80241B00)($at)
 /* BDDBA8 802409F8 44820000 */  mtc1      $v0, $f0
 /* BDDBAC 802409FC 00000000 */  nop       
 /* BDDBB0 80240A00 46800021 */  cvt.d.w   $f0, $f0

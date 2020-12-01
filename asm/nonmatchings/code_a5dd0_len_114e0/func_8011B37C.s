@@ -3,32 +3,32 @@
 
 glabel func_8011B37C
 /* B1A7C 8011B37C 27BDFFC0 */  addiu     $sp, $sp, -0x40
-/* B1A80 8011B380 3C038015 */  lui       $v1, 0x8015
-/* B1A84 8011B384 8C6312FC */  lw        $v1, 0x12fc($v1)
+/* B1A80 8011B380 3C038015 */  lui       $v1, %hi(D_801512FC)
+/* B1A84 8011B384 8C6312FC */  lw        $v1, %lo(D_801512FC)($v1)
 /* B1A88 8011B388 0080102D */  daddu     $v0, $a0, $zero
 /* B1A8C 8011B38C AFB00030 */  sw        $s0, 0x30($sp)
-/* B1A90 8011B390 3C108015 */  lui       $s0, 0x8015
-/* B1A94 8011B394 26103370 */  addiu     $s0, $s0, 0x3370
+/* B1A90 8011B390 3C108015 */  lui       $s0, %hi(D_80153370)
+/* B1A94 8011B394 26103370 */  addiu     $s0, $s0, %lo(D_80153370)
 /* B1A98 8011B398 AFBF003C */  sw        $ra, 0x3c($sp)
 /* B1A9C 8011B39C AFB20038 */  sw        $s2, 0x38($sp)
 /* B1AA0 8011B3A0 AFB10034 */  sw        $s1, 0x34($sp)
-/* B1AA4 8011B3A4 3C018015 */  lui       $at, 0x8015
-/* B1AA8 8011B3A8 AC203224 */  sw        $zero, 0x3224($at)
+/* B1AA4 8011B3A4 3C018015 */  lui       $at, %hi(D_80153224)
+/* B1AA8 8011B3A8 AC203224 */  sw        $zero, %lo(D_80153224)($at)
 /* B1AAC 8011B3AC AE000000 */  sw        $zero, ($s0)
-/* B1AB0 8011B3B0 3C018015 */  lui       $at, 0x8015
-/* B1AB4 8011B3B4 A422336E */  sh        $v0, 0x336e($at)
-/* B1AB8 8011B3B8 3C018015 */  lui       $at, 0x8015
-/* B1ABC 8011B3BC A4203376 */  sh        $zero, 0x3376($at)
-/* B1AC0 8011B3C0 3C018015 */  lui       $at, 0x8015
-/* B1AC4 8011B3C4 A4203374 */  sh        $zero, 0x3374($at)
+/* B1AB0 8011B3B0 3C018015 */  lui       $at, %hi(D_8015336E)
+/* B1AB4 8011B3B4 A422336E */  sh        $v0, %lo(D_8015336E)($at)
+/* B1AB8 8011B3B8 3C018015 */  lui       $at, %hi(D_80153376)
+/* B1ABC 8011B3BC A4203376 */  sh        $zero, %lo(D_80153376)($at)
+/* B1AC0 8011B3C0 3C018015 */  lui       $at, %hi(D_80153374)
+/* B1AC4 8011B3C4 A4203374 */  sh        $zero, %lo(D_80153374)($at)
 /* B1AC8 8011B3C8 8C640000 */  lw        $a0, ($v1)
 /* B1ACC 8011B3CC 0C046C76 */  jal       func_8011B1D8
 /* B1AD0 8011B3D0 0040902D */   daddu    $s2, $v0, $zero
 /* B1AD4 8011B3D4 8E020000 */  lw        $v0, ($s0)
 /* B1AD8 8011B3D8 10400077 */  beqz      $v0, .L8011B5B8
 /* B1ADC 8011B3DC 0000802D */   daddu    $s0, $zero, $zero
-/* B1AE0 8011B3E0 3C118015 */  lui       $s1, 0x8015
-/* B1AE4 8011B3E4 263112E0 */  addiu     $s1, $s1, 0x12e0
+/* B1AE0 8011B3E0 3C118015 */  lui       $s1, %hi(D_801512E0)
+/* B1AE4 8011B3E4 263112E0 */  addiu     $s1, $s1, %lo(D_801512E0)
 /* B1AE8 8011B3E8 8E230000 */  lw        $v1, ($s1)
 .L8011B3EC:
 /* B1AEC 8011B3EC 8C620000 */  lw        $v0, ($v1)
@@ -45,22 +45,22 @@ glabel func_8011B37C
 /* B1B14 8011B414 0040802D */  daddu     $s0, $v0, $zero
 /* B1B18 8011B418 24020001 */  addiu     $v0, $zero, 1
 /* B1B1C 8011B41C 8E250000 */  lw        $a1, ($s1)
-/* B1B20 8011B420 3C048015 */  lui       $a0, 0x8015
-/* B1B24 8011B424 94843374 */  lhu       $a0, 0x3374($a0)
+/* B1B20 8011B420 3C048015 */  lui       $a0, %hi(D_80153374)
+/* B1B24 8011B424 94843374 */  lhu       $a0, %lo(D_80153374)($a0)
 /* B1B28 8011B428 00651821 */  addu      $v1, $v1, $a1
 /* B1B2C 8011B42C AC700000 */  sw        $s0, ($v1)
 /* B1B30 8011B430 A6020000 */  sh        $v0, ($s0)
 /* B1B34 8011B434 0C046C04 */  jal       get_model_list_index_from_tree_index
 /* B1B38 8011B438 A6120002 */   sh       $s2, 2($s0)
 /* B1B3C 8011B43C A202009C */  sb        $v0, 0x9c($s0)
-/* B1B40 8011B440 3C048015 */  lui       $a0, 0x8015
-/* B1B44 8011B444 94843376 */  lhu       $a0, 0x3376($a0)
+/* B1B40 8011B440 3C048015 */  lui       $a0, %hi(D_80153376)
+/* B1B44 8011B444 94843376 */  lhu       $a0, %lo(D_80153376)($a0)
 /* B1B48 8011B448 0C046C04 */  jal       get_model_list_index_from_tree_index
 /* B1B4C 8011B44C 00000000 */   nop      
 /* B1B50 8011B450 A202009D */  sb        $v0, 0x9d($s0)
 /* B1B54 8011B454 A200009F */  sb        $zero, 0x9f($s0)
-/* B1B58 8011B458 3C028015 */  lui       $v0, 0x8015
-/* B1B5C 8011B45C 8C423370 */  lw        $v0, 0x3370($v0)
+/* B1B58 8011B458 3C028015 */  lui       $v0, %hi(D_80153370)
+/* B1B5C 8011B45C 8C423370 */  lw        $v0, %lo(D_80153370)($v0)
 /* B1B60 8011B460 26040010 */  addiu     $a0, $s0, 0x10
 /* B1B64 8011B464 AE000004 */  sw        $zero, 4($s0)
 /* B1B68 8011B468 0C019D10 */  jal       guMtxIdent

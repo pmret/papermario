@@ -15,7 +15,7 @@ glabel func_80242EAC_B37A7C
 /* B37AA4 80242ED4 8FBF0014 */  lw        $ra, 0x14($sp)
 /* B37AA8 80242ED8 8FB00010 */  lw        $s0, 0x10($sp)
 /* B37AAC 80242EDC 24020002 */  addiu     $v0, $zero, 2
-/* B37AB0 80242EE0 3C018025 */  lui       $at, 0x8025
-/* B37AB4 80242EE4 AC23FF04 */  sw        $v1, -0xfc($at)
+/* B37AB0 80242EE0 3C018025 */  lui       $at, %hi(D_8024FF04)
+/* B37AB4 80242EE4 AC23FF04 */  sw        $v1, %lo(D_8024FF04)($at)
 /* B37AB8 80242EE8 03E00008 */  jr        $ra
 /* B37ABC 80242EEC 27BD0018 */   addiu    $sp, $sp, 0x18

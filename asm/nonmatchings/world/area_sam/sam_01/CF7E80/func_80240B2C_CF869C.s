@@ -21,8 +21,8 @@ glabel func_80240B2C_CF869C
 /* CF86DC 80240B6C 2414FFFC */  addiu     $s4, $zero, -4
 /* CF86E0 80240B70 2413000E */  addiu     $s3, $zero, 0xe
 /* CF86E4 80240B74 3C120080 */  lui       $s2, 0x80
-/* CF86E8 80240B78 3C038015 */  lui       $v1, 0x8015
-/* CF86EC 80240B7C 8C6312F0 */  lw        $v1, 0x12f0($v1)
+/* CF86E8 80240B78 3C038015 */  lui       $v1, %hi(D_801512F0)
+/* CF86EC 80240B7C 8C6312F0 */  lw        $v1, %lo(D_801512F0)($v1)
 /* CF86F0 80240B80 24020001 */  addiu     $v0, $zero, 1
 /* CF86F4 80240B84 0C046F97 */  jal       set_background_color_blend
 /* CF86F8 80240B88 A0620000 */   sb       $v0, ($v1)

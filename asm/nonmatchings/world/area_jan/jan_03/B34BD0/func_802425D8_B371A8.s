@@ -7,8 +7,8 @@ glabel func_802425D8_B371A8
 /* B371B0 802425E0 8C82000C */  lw        $v0, 0xc($a0)
 /* B371B4 802425E4 0C0B1EAF */  jal       get_variable
 /* B371B8 802425E8 8C450000 */   lw       $a1, ($v0)
-/* B371BC 802425EC 3C038025 */  lui       $v1, 0x8025
-/* B371C0 802425F0 8C63FEF8 */  lw        $v1, -0x108($v1)
+/* B371BC 802425EC 3C038025 */  lui       $v1, %hi(D_8024FEF8)
+/* B371C0 802425F0 8C63FEF8 */  lw        $v1, %lo(D_8024FEF8)($v1)
 /* B371C4 802425F4 8C63000C */  lw        $v1, 0xc($v1)
 /* B371C8 802425F8 AC620034 */  sw        $v0, 0x34($v1)
 /* B371CC 802425FC 8FBF0010 */  lw        $ra, 0x10($sp)

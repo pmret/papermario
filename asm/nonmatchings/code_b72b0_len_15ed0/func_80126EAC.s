@@ -3,8 +3,8 @@
 
 glabel func_80126EAC
 /* BD5AC 80126EAC 27BDFFC0 */  addiu     $sp, $sp, -0x40
-/* BD5B0 80126EB0 3C058015 */  lui       $a1, 0x8015
-/* BD5B4 80126EB4 24A54C30 */  addiu     $a1, $a1, 0x4c30
+/* BD5B0 80126EB0 3C058015 */  lui       $a1, %hi(D_80154C30)
+/* BD5B4 80126EB4 24A54C30 */  addiu     $a1, $a1, %lo(D_80154C30)
 /* BD5B8 80126EB8 00041080 */  sll       $v0, $a0, 2
 /* BD5BC 80126EBC 00441021 */  addu      $v0, $v0, $a0
 /* BD5C0 80126EC0 00021080 */  sll       $v0, $v0, 2
@@ -19,10 +19,10 @@ glabel func_80126EAC
 /* BD5E4 80126EE4 28420006 */  slti      $v0, $v0, 6
 /* BD5E8 80126EE8 10400017 */  beqz      $v0, .L80126F48
 /* BD5EC 80126EEC 24050018 */   addiu    $a1, $zero, 0x18
-/* BD5F0 80126EF0 3C02802F */  lui       $v0, 0x802f
-/* BD5F4 80126EF4 2442D670 */  addiu     $v0, $v0, -0x2990
-/* BD5F8 80126EF8 3C04802F */  lui       $a0, 0x802f
-/* BD5FC 80126EFC 2484D550 */  addiu     $a0, $a0, -0x2ab0
+/* BD5F0 80126EF0 3C02802F */  lui       $v0, %hi(D_802ED670)
+/* BD5F4 80126EF4 2442D670 */  addiu     $v0, $v0, %lo(D_802ED670)
+/* BD5F8 80126EF8 3C04802F */  lui       $a0, %hi(D_802ED550)
+/* BD5FC 80126EFC 2484D550 */  addiu     $a0, $a0, %lo(D_802ED550)
 /* BD600 80126F00 00A0302D */  daddu     $a2, $a1, $zero
 /* BD604 80126F04 AFA00010 */  sw        $zero, 0x10($sp)
 /* BD608 80126F08 AFA20014 */  sw        $v0, 0x14($sp)

@@ -8,7 +8,7 @@ glabel func_800EF414
 /* 888D0 800EF420 00000000 */   nop      
 /* 888D4 800EF424 8FBF0010 */  lw        $ra, 0x10($sp)
 /* 888D8 800EF428 24020014 */  addiu     $v0, $zero, 0x14
-/* 888DC 800EF42C 3C018011 */  lui       $at, 0x8011
-/* 888E0 800EF430 A422CFC8 */  sh        $v0, -0x3038($at)
+/* 888DC 800EF42C 3C018011 */  lui       $at, %hi(D_8010CFC8)
+/* 888E0 800EF430 A422CFC8 */  sh        $v0, %lo(D_8010CFC8)($at)
 /* 888E4 800EF434 03E00008 */  jr        $ra
 /* 888E8 800EF438 27BD0018 */   addiu    $sp, $sp, 0x18

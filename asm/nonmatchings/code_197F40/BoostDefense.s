@@ -58,8 +58,8 @@ glabel BoostDefense
 /* 19EB20 80270240 0000202D */   daddu    $a0, $zero, $zero
 /* 19EB24 80270244 24020001 */  addiu     $v0, $zero, 1
 .L80270248:
-/* 19EB28 80270248 3C01802A */  lui       $at, 0x802a
-/* 19EB2C 8027024C A022FBD4 */  sb        $v0, -0x42c($at)
+/* 19EB28 80270248 3C01802A */  lui       $at, %hi(D_8029FBD4)
+/* 19EB2C 8027024C A022FBD4 */  sb        $v0, %lo(D_8029FBD4)($at)
 /* 19EB30 80270250 24020005 */  addiu     $v0, $zero, 5
 /* 19EB34 80270254 AE42007C */  sw        $v0, 0x7c($s2)
 /* 19EB38 80270258 24020001 */  addiu     $v0, $zero, 1
@@ -201,9 +201,9 @@ glabel BoostDefense
 /* 19ED3C 8027045C 10400063 */  beqz      $v0, .L802705EC
 /* 19ED40 80270460 46020580 */   add.s    $f22, $f0, $f2
 /* 19ED44 80270464 00031080 */  sll       $v0, $v1, 2
-/* 19ED48 80270468 3C01802A */  lui       $at, 0x802a
+/* 19ED48 80270468 3C01802A */  lui       $at, %hi(D_8029D820)
 /* 19ED4C 8027046C 00220821 */  addu      $at, $at, $v0
-/* 19ED50 80270470 8C22D820 */  lw        $v0, -0x27e0($at)
+/* 19ED50 80270470 8C22D820 */  lw        $v0, %lo(D_8029D820)($at)
 /* 19ED54 80270474 00400008 */  jr        $v0
 /* 19ED58 80270478 00000000 */   nop      
 /* 19ED5C 8027047C 8E42007C */  lw        $v0, 0x7c($s2)
@@ -298,8 +298,8 @@ glabel BoostDefense
 /* 19EEB4 802705D4 14400006 */  bnez      $v0, .L802705F0
 /* 19EEB8 802705D8 0000102D */   daddu    $v0, $zero, $zero
 .L802705DC:
-/* 19EEBC 802705DC 3C01802A */  lui       $at, 0x802a
-/* 19EEC0 802705E0 A020FBD4 */  sb        $zero, -0x42c($at)
+/* 19EEBC 802705DC 3C01802A */  lui       $at, %hi(D_8029FBD4)
+/* 19EEC0 802705E0 A020FBD4 */  sb        $zero, %lo(D_8029FBD4)($at)
 /* 19EEC4 802705E4 0809C17C */  j         .L802705F0
 /* 19EEC8 802705E8 24020002 */   addiu    $v0, $zero, 2
 .L802705EC:

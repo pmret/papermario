@@ -6,8 +6,8 @@ glabel func_802426F8_C5CE38
 /* C5CE3C 802426FC AFBF0010 */  sw        $ra, 0x10($sp)
 /* C5CE40 80242700 0C00EABB */  jal       get_npc_unsafe
 /* C5CE44 80242704 8C84008C */   lw       $a0, 0x8c($a0)
-/* C5CE48 80242708 3C038024 */  lui       $v1, 0x8024
-/* C5CE4C 8024270C 8C636794 */  lw        $v1, 0x6794($v1)
+/* C5CE48 80242708 3C038024 */  lui       $v1, %hi(D_80246794)
+/* C5CE4C 8024270C 8C636794 */  lw        $v1, %lo(D_80246794)($v1)
 /* C5CE50 80242710 AC430028 */  sw        $v1, 0x28($v0)
 /* C5CE54 80242714 8FBF0010 */  lw        $ra, 0x10($sp)
 /* C5CE58 80242718 24020002 */  addiu     $v0, $zero, 2

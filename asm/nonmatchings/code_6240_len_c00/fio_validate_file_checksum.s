@@ -4,8 +4,8 @@
 glabel fio_validate_file_checksum
 /* 64F8 8002B0F8 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 64FC 8002B0FC AFB00010 */  sw        $s0, 0x10($sp)
-/* 6500 8002B100 3C058007 */  lui       $a1, 0x8007
-/* 6504 8002B104 24A545D0 */  addiu     $a1, $a1, 0x45d0
+/* 6500 8002B100 3C058007 */  lui       $a1, %hi(D_800745D0)
+/* 6504 8002B104 24A545D0 */  addiu     $a1, $a1, %lo(D_800745D0)
 /* 6508 8002B108 AFBF0014 */  sw        $ra, 0x14($sp)
 /* 650C 8002B10C 0C01BB5C */  jal       strcmp
 /* 6510 8002B110 0080802D */   daddu    $s0, $a0, $zero

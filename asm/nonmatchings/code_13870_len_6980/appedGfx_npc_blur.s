@@ -6,8 +6,8 @@ glabel appedGfx_npc_blur
 /* 1623C 8003AE3C F7BC00E8 */  sdc1      $f28, 0xe8($sp)
 /* 16240 8003AE40 4480E000 */  mtc1      $zero, $f28
 /* 16244 8003AE44 F7BA00E0 */  sdc1      $f26, 0xe0($sp)
-/* 16248 8003AE48 3C01800A */  lui       $at, 0x800a
-/* 1624C 8003AE4C D43A84C0 */  ldc1      $f26, -0x7b40($at)
+/* 16248 8003AE48 3C01800A */  lui       $at, %hi(D_800984C0)
+/* 1624C 8003AE4C D43A84C0 */  ldc1      $f26, %lo(D_800984C0)($at)
 /* 16250 8003AE50 AFB000A0 */  sw        $s0, 0xa0($sp)
 /* 16254 8003AE54 0080802D */  daddu     $s0, $a0, $zero
 /* 16258 8003AE58 AFB300AC */  sw        $s3, 0xac($sp)

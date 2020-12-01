@@ -25,10 +25,10 @@ glabel func_80240AD0_A39FB0
 /* A3A000 80240B20 0280902D */  daddu     $s2, $s4, $zero
 /* A3A004 80240B24 3C17F840 */  lui       $s7, 0xf840
 /* A3A008 80240B28 36F7626B */  ori       $s7, $s7, 0x626b
-/* A3A00C 80240B2C 3C1E8009 */  lui       $fp, 0x8009
-/* A3A010 80240B30 27DEA680 */  addiu     $fp, $fp, -0x5980
-/* A3A014 80240B34 3C118024 */  lui       $s1, 0x8024
-/* A3A018 80240B38 263135EC */  addiu     $s1, $s1, 0x35ec
+/* A3A00C 80240B2C 3C1E8009 */  lui       $fp, %hi(D_8008A680)
+/* A3A010 80240B30 27DEA680 */  addiu     $fp, $fp, %lo(D_8008A680)
+/* A3A014 80240B34 3C118024 */  lui       $s1, %hi(D_802435EC)
+/* A3A018 80240B38 263135EC */  addiu     $s1, $s1, %lo(D_802435EC)
 /* A3A01C 80240B3C 02A0802D */  daddu     $s0, $s5, $zero
 .L80240B40:
 /* A3A020 80240B40 0000202D */  daddu     $a0, $zero, $zero
@@ -111,8 +111,8 @@ glabel func_80240AD0_A39FB0
 /* A3A13C 80240C5C 00021080 */  sll       $v0, $v0, 2
 /* A3A140 80240C60 02A21021 */  addu      $v0, $s5, $v0
 /* A3A144 80240C64 8C520108 */  lw        $s2, 0x108($v0)
-/* A3A148 80240C68 3C028024 */  lui       $v0, 0x8024
-/* A3A14C 80240C6C 244235EC */  addiu     $v0, $v0, 0x35ec
+/* A3A148 80240C68 3C028024 */  lui       $v0, %hi(D_802435EC)
+/* A3A14C 80240C6C 244235EC */  addiu     $v0, $v0, %lo(D_802435EC)
 /* A3A150 80240C70 00121840 */  sll       $v1, $s2, 1
 /* A3A154 80240C74 00721821 */  addu      $v1, $v1, $s2
 /* A3A158 80240C78 00031880 */  sll       $v1, $v1, 2
@@ -136,9 +136,9 @@ glabel func_80240AD0_A39FB0
 /* A3A1A0 80240CC0 00031080 */  sll       $v0, $v1, 2
 /* A3A1A4 80240CC4 00431021 */  addu      $v0, $v0, $v1
 /* A3A1A8 80240CC8 00021080 */  sll       $v0, $v0, 2
-/* A3A1AC 80240CCC 3C018009 */  lui       $at, 0x8009
+/* A3A1AC 80240CCC 3C018009 */  lui       $at, %hi(D_8008F072)
 /* A3A1B0 80240CD0 00220821 */  addu      $at, $at, $v0
-/* A3A1B4 80240CD4 8022F072 */  lb        $v0, -0xf8e($at)
+/* A3A1B4 80240CD4 8022F072 */  lb        $v0, %lo(D_8008F072)($at)
 /* A3A1B8 80240CD8 0809033A */  j         .L80240CE8
 /* A3A1BC 80240CDC AE620098 */   sw       $v0, 0x98($s3)
 .L80240CE0:

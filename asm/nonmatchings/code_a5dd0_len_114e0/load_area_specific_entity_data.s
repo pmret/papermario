@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel load_area_specific_entity_data
-/* A7314 80110C14 3C028015 */  lui       $v0, 0x8015
-/* A7318 80110C18 8C42132C */  lw        $v0, 0x132c($v0)
+/* A7314 80110C14 3C028015 */  lui       $v0, %hi(D_8015132C)
+/* A7318 80110C18 8C42132C */  lw        $v0, %lo(D_8015132C)($v0)
 /* A731C 80110C1C 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* A7320 80110C20 14400022 */  bnez      $v0, .L80110CAC
 /* A7324 80110C24 AFBF0010 */   sw       $ra, 0x10($sp)
@@ -43,8 +43,8 @@ glabel load_area_specific_entity_data
 /* A7398 80110C98 0C00A5CF */  jal       dma_copy
 /* A739C 80110C9C 34C6AE00 */   ori      $a2, $a2, 0xae00
 /* A73A0 80110CA0 24020001 */  addiu     $v0, $zero, 1
-/* A73A4 80110CA4 3C018015 */  lui       $at, 0x8015
-/* A73A8 80110CA8 AC22132C */  sw        $v0, 0x132c($at)
+/* A73A4 80110CA4 3C018015 */  lui       $at, %hi(D_8015132C)
+/* A73A8 80110CA8 AC22132C */  sw        $v0, %lo(D_8015132C)($at)
 .L80110CAC:
 /* A73AC 80110CAC 8FBF0010 */  lw        $ra, 0x10($sp)
 /* A73B0 80110CB0 03E00008 */  jr        $ra

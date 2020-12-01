@@ -103,8 +103,8 @@ glabel func_800DD8FC
 /* 76F34 800DDA84 46040000 */  add.s     $f0, $f0, $f4
 /* 76F38 800DDA88 0040902D */  daddu     $s2, $v0, $zero
 /* 76F3C 800DDA8C E6800000 */  swc1      $f0, ($s4)
-/* 76F40 800DDA90 3C018011 */  lui       $at, 0x8011
-/* 76F44 800DDA94 AC32C978 */  sw        $s2, -0x3688($at)
+/* 76F40 800DDA90 3C018011 */  lui       $at, %hi(D_8010C978)
+/* 76F44 800DDA94 AC32C978 */  sw        $s2, %lo(D_8010C978)($at)
 .L800DDA98:
 /* 76F48 800DDA98 C6600000 */  lwc1      $f0, ($s3)
 /* 76F4C 800DDA9C 461A0000 */  add.s     $f0, $f0, $f26

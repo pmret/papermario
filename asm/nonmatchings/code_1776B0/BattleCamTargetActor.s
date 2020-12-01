@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel BattleCamTargetActor
-/* 17D404 8024EB24 3C028028 */  lui       $v0, 0x8028
-/* 17D408 8024EB28 80420CE0 */  lb        $v0, 0xce0($v0)
+/* 17D404 8024EB24 3C028028 */  lui       $v0, %hi(D_80280CE0)
+/* 17D408 8024EB28 80420CE0 */  lb        $v0, %lo(D_80280CE0)($v0)
 /* 17D40C 8024EB2C 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 17D410 8024EB30 AFB00010 */  sw        $s0, 0x10($sp)
 /* 17D414 8024EB34 0080802D */  daddu     $s0, $a0, $zero

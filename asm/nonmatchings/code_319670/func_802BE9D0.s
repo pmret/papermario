@@ -11,15 +11,15 @@ glabel func_802BE9D0
 /* 31AF58 802BE9E8 82020001 */  lb        $v0, 1($s0)
 /* 31AF5C 802BE9EC 10400023 */  beqz      $v0, .L802BEA7C
 /* 31AF60 802BE9F0 0080882D */   daddu    $s1, $a0, $zero
-/* 31AF64 802BE9F4 3C02802C */  lui       $v0, 0x802c
-/* 31AF68 802BE9F8 8C42EBB8 */  lw        $v0, -0x1448($v0)
+/* 31AF64 802BE9F4 3C02802C */  lui       $v0, %hi(D_802BEBB8)
+/* 31AF68 802BE9F8 8C42EBB8 */  lw        $v0, %lo(D_802BEBB8)($v0)
 /* 31AF6C 802BE9FC 10400003 */  beqz      $v0, .L802BEA0C
 /* 31AF70 802BEA00 00000000 */   nop      
 /* 31AF74 802BEA04 0C038045 */  jal       disable_player_static_collisions
 /* 31AF78 802BEA08 00000000 */   nop      
 .L802BEA0C:
-/* 31AF7C 802BEA0C 3C02802C */  lui       $v0, 0x802c
-/* 31AF80 802BEA10 8C42EBB4 */  lw        $v0, -0x144c($v0)
+/* 31AF7C 802BEA0C 3C02802C */  lui       $v0, %hi(D_802BEBB4)
+/* 31AF80 802BEA10 8C42EBB4 */  lw        $v0, %lo(D_802BEBB4)($v0)
 /* 31AF84 802BEA14 10400003 */  beqz      $v0, .L802BEA24
 /* 31AF88 802BEA18 00000000 */   nop      
 /* 31AF8C 802BEA1C 0C03805E */  jal       disable_player_input

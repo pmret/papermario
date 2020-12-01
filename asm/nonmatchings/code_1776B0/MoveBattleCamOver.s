@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel MoveBattleCamOver
-/* 17D4E8 8024EC08 3C028028 */  lui       $v0, 0x8028
-/* 17D4EC 8024EC0C 80420CE0 */  lb        $v0, 0xce0($v0)
+/* 17D4E8 8024EC08 3C028028 */  lui       $v0, %hi(D_80280CE0)
+/* 17D4EC 8024EC0C 80420CE0 */  lb        $v0, %lo(D_80280CE0)($v0)
 /* 17D4F0 8024EC10 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 17D4F4 8024EC14 AFBF0010 */  sw        $ra, 0x10($sp)
 /* 17D4F8 8024EC18 8C85000C */  lw        $a1, 0xc($a0)
@@ -15,10 +15,10 @@ glabel MoveBattleCamOver
 /* 17D510 8024EC30 3C03800E */  lui       $v1, %hi(gBattleStatus)
 /* 17D514 8024EC34 2463C070 */  addiu     $v1, $v1, %lo(gBattleStatus)
 /* 17D518 8024EC38 8C6400C4 */  lw        $a0, 0xc4($v1)
-/* 17D51C 8024EC3C 3C01802A */  lui       $at, 0x802a
-/* 17D520 8024EC40 A422F29E */  sh        $v0, -0xd62($at)
-/* 17D524 8024EC44 3C018028 */  lui       $at, 0x8028
-/* 17D528 8024EC48 AC200CE4 */  sw        $zero, 0xce4($at)
+/* 17D51C 8024EC3C 3C01802A */  lui       $at, %hi(D_8029F29E)
+/* 17D520 8024EC40 A422F29E */  sh        $v0, %lo(D_8029F29E)($at)
+/* 17D524 8024EC44 3C018028 */  lui       $at, %hi(D_80280CE4)
+/* 17D528 8024EC48 AC200CE4 */  sw        $zero, %lo(D_80280CE4)($at)
 /* 17D52C 8024EC4C 10800004 */  beqz      $a0, .L8024EC60
 /* 17D530 8024EC50 24020002 */   addiu    $v0, $zero, 2
 /* 17D534 8024EC54 0C0B0F41 */  jal       restart_script

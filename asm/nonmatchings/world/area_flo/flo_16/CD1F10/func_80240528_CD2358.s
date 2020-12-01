@@ -7,9 +7,9 @@ glabel func_80240528_CD2358
 /* CD2360 80240530 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* CD2364 80240534 AFBF0010 */  sw        $ra, 0x10($sp)
 /* CD2368 80240538 00021100 */  sll       $v0, $v0, 4
-/* CD236C 8024053C 3C048009 */  lui       $a0, 0x8009
+/* CD236C 8024053C 3C048009 */  lui       $a0, %hi(D_8008EF20)
 /* CD2370 80240540 00822021 */  addu      $a0, $a0, $v0
-/* CD2374 80240544 8C84EF20 */  lw        $a0, -0x10e0($a0)
+/* CD2374 80240544 8C84EF20 */  lw        $a0, %lo(D_8008EF20)($a0)
 /* CD2378 80240548 0C0496CF */  jal       set_message_string
 /* CD237C 8024054C 0000282D */   daddu    $a1, $zero, $zero
 /* CD2380 80240550 8FBF0010 */  lw        $ra, 0x10($sp)

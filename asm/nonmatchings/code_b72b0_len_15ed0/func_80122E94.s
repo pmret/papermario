@@ -4,8 +4,8 @@
 glabel func_80122E94
 /* B9594 80122E94 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* B9598 80122E98 0080282D */  daddu     $a1, $a0, $zero
-/* B959C 80122E9C 3C038015 */  lui       $v1, 0x8015
-/* B95A0 80122EA0 8C634370 */  lw        $v1, 0x4370($v1)
+/* B959C 80122E9C 3C038015 */  lui       $v1, %hi(D_80154370)
+/* B95A0 80122EA0 8C634370 */  lw        $v1, %lo(D_80154370)($v1)
 /* B95A4 80122EA4 0000202D */  daddu     $a0, $zero, $zero
 /* B95A8 80122EA8 AFBF0010 */  sw        $ra, 0x10($sp)
 .L80122EAC:

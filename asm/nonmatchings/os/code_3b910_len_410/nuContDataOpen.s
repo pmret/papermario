@@ -3,8 +3,8 @@
 
 glabel nuContDataOpen
 /* 3BA34 80060634 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* 3BA38 80060638 3C04800E */  lui       $a0, 0x800e
-/* 3BA3C 8006063C 2484C040 */  addiu     $a0, $a0, -0x3fc0
+/* 3BA38 80060638 3C04800E */  lui       $a0, %hi(D_800DC040)
+/* 3BA3C 8006063C 2484C040 */  addiu     $a0, $a0, %lo(D_800DC040)
 /* 3BA40 80060640 0000282D */  daddu     $a1, $zero, $zero
 /* 3BA44 80060644 AFBF0010 */  sw        $ra, 0x10($sp)
 /* 3BA48 80060648 0C0195BC */  jal       osRecvMesg

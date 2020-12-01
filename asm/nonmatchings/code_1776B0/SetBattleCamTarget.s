@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel SetBattleCamTarget
-/* 17D1EC 8024E90C 3C028028 */  lui       $v0, 0x8028
-/* 17D1F0 8024E910 80420CE0 */  lb        $v0, 0xce0($v0)
+/* 17D1EC 8024E90C 3C028028 */  lui       $v0, %hi(D_80280CE0)
+/* 17D1F0 8024E910 80420CE0 */  lb        $v0, %lo(D_80280CE0)($v0)
 /* 17D1F4 8024E914 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 17D1F8 8024E918 AFB10014 */  sw        $s1, 0x14($sp)
 /* 17D1FC 8024E91C 0080882D */  daddu     $s1, $a0, $zero
@@ -18,8 +18,8 @@ glabel SetBattleCamTarget
 /* 17D220 8024E940 44820000 */  mtc1      $v0, $f0
 /* 17D224 8024E944 00000000 */  nop       
 /* 17D228 8024E948 46800020 */  cvt.s.w   $f0, $f0
-/* 17D22C 8024E94C 3C01802A */  lui       $at, 0x802a
-/* 17D230 8024E950 E420F270 */  swc1      $f0, -0xd90($at)
+/* 17D22C 8024E94C 3C01802A */  lui       $at, %hi(D_8029F270)
+/* 17D230 8024E950 E420F270 */  swc1      $f0, %lo(D_8029F270)($at)
 /* 17D234 8024E954 8E050000 */  lw        $a1, ($s0)
 /* 17D238 8024E958 26100004 */  addiu     $s0, $s0, 4
 /* 17D23C 8024E95C 0C0B1EAF */  jal       get_variable
@@ -27,16 +27,16 @@ glabel SetBattleCamTarget
 /* 17D244 8024E964 44820000 */  mtc1      $v0, $f0
 /* 17D248 8024E968 00000000 */  nop       
 /* 17D24C 8024E96C 46800020 */  cvt.s.w   $f0, $f0
-/* 17D250 8024E970 3C01802A */  lui       $at, 0x802a
-/* 17D254 8024E974 E420F274 */  swc1      $f0, -0xd8c($at)
+/* 17D250 8024E970 3C01802A */  lui       $at, %hi(D_8029F274)
+/* 17D254 8024E974 E420F274 */  swc1      $f0, %lo(D_8029F274)($at)
 /* 17D258 8024E978 8E050000 */  lw        $a1, ($s0)
 /* 17D25C 8024E97C 0C0B1EAF */  jal       get_variable
 /* 17D260 8024E980 0220202D */   daddu    $a0, $s1, $zero
 /* 17D264 8024E984 44820000 */  mtc1      $v0, $f0
 /* 17D268 8024E988 00000000 */  nop       
 /* 17D26C 8024E98C 46800020 */  cvt.s.w   $f0, $f0
-/* 17D270 8024E990 3C01802A */  lui       $at, 0x802a
-/* 17D274 8024E994 E420F278 */  swc1      $f0, -0xd88($at)
+/* 17D270 8024E990 3C01802A */  lui       $at, %hi(D_8029F278)
+/* 17D274 8024E994 E420F278 */  swc1      $f0, %lo(D_8029F278)($at)
 /* 17D278 8024E998 24020002 */  addiu     $v0, $zero, 2
 .L8024E99C:
 /* 17D27C 8024E99C 8FBF0018 */  lw        $ra, 0x18($sp)

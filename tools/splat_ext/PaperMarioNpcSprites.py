@@ -294,7 +294,7 @@ class N64SegPaperMarioNpcSprites(N64Segment):
             sprite.write_to_dir(sprite_dir)
 
     def get_ld_files(self):
-        return [("sprite", self.name, ".data")]
+        return [("sprite", self.name, ".data", self.rom_start)]
 
     @staticmethod
     def get_default_name(addr):

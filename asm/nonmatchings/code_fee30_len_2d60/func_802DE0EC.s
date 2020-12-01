@@ -11,8 +11,8 @@ glabel func_802DE0EC
 /* 1011F4 802DE104 000437C2 */  srl       $a2, $a0, 0x1f
 /* 1011F8 802DE108 0000202D */  daddu     $a0, $zero, $zero
 /* 1011FC 802DE10C AFB3001C */  sw        $s3, 0x1c($sp)
-/* 101200 802DE110 3C13802E */  lui       $s3, 0x802e
-/* 101204 802DE114 2673FA48 */  addiu     $s3, $s3, -0x5b8
+/* 101200 802DE110 3C13802E */  lui       $s3, %hi(D_802DFA48)
+/* 101204 802DE114 2673FA48 */  addiu     $s3, $s3, %lo(D_802DFA48)
 /* 101208 802DE118 0260182D */  daddu     $v1, $s3, $zero
 /* 10120C 802DE11C AFBF0028 */  sw        $ra, 0x28($sp)
 /* 101210 802DE120 AFB20018 */  sw        $s2, 0x18($sp)
@@ -27,8 +27,8 @@ glabel func_802DE0EC
 /* 101230 802DE140 1440FFFA */  bnez      $v0, .L802DE12C
 /* 101234 802DE144 24630014 */   addiu    $v1, $v1, 0x14
 .L802DE148:
-/* 101238 802DE148 3C03802E */  lui       $v1, 0x802e
-/* 10123C 802DE14C 2463F530 */  addiu     $v1, $v1, -0xad0
+/* 101238 802DE148 3C03802E */  lui       $v1, %hi(D_802DF530)
+/* 10123C 802DE14C 2463F530 */  addiu     $v1, $v1, %lo(D_802DF530)
 /* 101240 802DE150 8C620000 */  lw        $v0, ($v1)
 /* 101244 802DE154 0044102A */  slt       $v0, $v0, $a0
 /* 101248 802DE158 54400001 */  bnel      $v0, $zero, .L802DE160
@@ -40,14 +40,14 @@ glabel func_802DE0EC
 /* 10125C 802DE16C 080B78A2 */  j         .L802DE288
 /* 101260 802DE170 2402FFFF */   addiu    $v0, $zero, -1
 .L802DE174:
-/* 101264 802DE174 3C02802E */  lui       $v0, 0x802e
-/* 101268 802DE178 2442F5B0 */  addiu     $v0, $v0, -0xa50
+/* 101264 802DE174 3C02802E */  lui       $v0, %hi(D_802DF5B0)
+/* 101268 802DE178 2442F5B0 */  addiu     $v0, $v0, %lo(D_802DF5B0)
 /* 10126C 802DE17C 00628821 */  addu      $s1, $v1, $v0
 /* 101270 802DE180 8E220000 */  lw        $v0, ($s1)
 /* 101274 802DE184 1040000E */  beqz      $v0, .L802DE1C0
 /* 101278 802DE188 0080902D */   daddu    $s2, $a0, $zero
-/* 10127C 802DE18C 3C03802E */  lui       $v1, 0x802e
-/* 101280 802DE190 2463F958 */  addiu     $v1, $v1, -0x6a8
+/* 10127C 802DE18C 3C03802E */  lui       $v1, %hi(D_802DF958)
+/* 101280 802DE190 2463F958 */  addiu     $v1, $v1, %lo(D_802DF958)
 /* 101284 802DE194 02831821 */  addu      $v1, $s4, $v1
 /* 101288 802DE198 90620000 */  lbu       $v0, ($v1)
 /* 10128C 802DE19C 24420001 */  addiu     $v0, $v0, 1
@@ -62,9 +62,9 @@ glabel func_802DE0EC
 .L802DE1C0:
 /* 1012B0 802DE1C0 2684FFFF */  addiu     $a0, $s4, -1
 /* 1012B4 802DE1C4 24020001 */  addiu     $v0, $zero, 1
-/* 1012B8 802DE1C8 3C01802E */  lui       $at, 0x802e
+/* 1012B8 802DE1C8 3C01802E */  lui       $at, %hi(D_802DF958)
 /* 1012BC 802DE1CC 00340821 */  addu      $at, $at, $s4
-/* 1012C0 802DE1D0 A022F958 */  sb        $v0, -0x6a8($at)
+/* 1012C0 802DE1D0 A022F958 */  sb        $v0, %lo(D_802DF958)($at)
 /* 1012C4 802DE1D4 0C0B7AC3 */  jal       load_sprite
 /* 1012C8 802DE1D8 0000282D */   daddu    $a1, $zero, $zero
 /* 1012CC 802DE1DC 0040802D */  daddu     $s0, $v0, $zero
@@ -86,9 +86,9 @@ glabel func_802DE0EC
 /* 101308 802DE218 00121080 */  sll       $v0, $s2, 2
 /* 10130C 802DE21C 00521021 */  addu      $v0, $v0, $s2
 /* 101310 802DE220 00021080 */  sll       $v0, $v0, 2
-/* 101314 802DE224 3C01802E */  lui       $at, 0x802e
+/* 101314 802DE224 3C01802E */  lui       $at, %hi(D_802DFA4C)
 /* 101318 802DE228 00220821 */  addu      $at, $at, $v0
-/* 10131C 802DE22C AC31FA4C */  sw        $s1, -0x5b4($at)
+/* 10131C 802DE22C AC31FA4C */  sw        $s1, %lo(D_802DFA4C)($at)
 /* 101320 802DE230 8E230000 */  lw        $v1, ($s1)
 /* 101324 802DE234 2402FFFF */  addiu     $v0, $zero, -1
 /* 101328 802DE238 10620009 */  beq       $v1, $v0, .L802DE260
@@ -104,8 +104,8 @@ glabel func_802DE0EC
 /* 10134C 802DE25C 00000000 */   nop      
 .L802DE260:
 /* 101350 802DE260 0240102D */  daddu     $v0, $s2, $zero
-/* 101354 802DE264 3C03802E */  lui       $v1, 0x802e
-/* 101358 802DE268 2463FA48 */  addiu     $v1, $v1, -0x5b8
+/* 101354 802DE264 3C03802E */  lui       $v1, %hi(D_802DFA48)
+/* 101358 802DE268 2463FA48 */  addiu     $v1, $v1, %lo(D_802DFA48)
 /* 10135C 802DE26C 00022080 */  sll       $a0, $v0, 2
 /* 101360 802DE270 00822021 */  addu      $a0, $a0, $v0
 /* 101364 802DE274 00042080 */  sll       $a0, $a0, 2

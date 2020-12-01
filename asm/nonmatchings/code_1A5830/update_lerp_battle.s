@@ -17,9 +17,9 @@ glabel update_lerp_battle
 /* 1A99EC 8027B10C 1040013B */  beqz      $v0, .L8027B5FC
 /* 1A99F0 8027B110 00E0882D */   daddu    $s1, $a3, $zero
 /* 1A99F4 8027B114 00041080 */  sll       $v0, $a0, 2
-/* 1A99F8 8027B118 3C01802A */  lui       $at, 0x802a
+/* 1A99F8 8027B118 3C01802A */  lui       $at, %hi(D_8029D9A8)
 /* 1A99FC 8027B11C 00220821 */  addu      $at, $at, $v0
-/* 1A9A00 8027B120 8C22D9A8 */  lw        $v0, -0x2658($at)
+/* 1A9A00 8027B120 8C22D9A8 */  lw        $v0, %lo(D_8029D9A8)($at)
 /* 1A9A04 8027B124 00400008 */  jr        $v0
 /* 1A9A08 8027B128 00000000 */   nop      
 /* 1A9A0C 8027B12C 4618D001 */  sub.s     $f0, $f26, $f24
@@ -87,8 +87,8 @@ glabel update_lerp_battle
 /* 1A9AF8 8027B218 00000000 */  nop       
 /* 1A9AFC 8027B21C 4680B5A0 */  cvt.s.w   $f22, $f22
 /* 1A9B00 8027B220 46166303 */  div.s     $f12, $f12, $f22
-/* 1A9B04 8027B224 3C01802A */  lui       $at, 0x802a
-/* 1A9B08 8027B228 D420D9E0 */  ldc1      $f0, -0x2620($at)
+/* 1A9B04 8027B224 3C01802A */  lui       $at, %hi(D_8029D9E0)
+/* 1A9B08 8027B228 D420D9E0 */  ldc1      $f0, %lo(D_8029D9E0)($at)
 /* 1A9B0C 8027B22C 46006321 */  cvt.d.s   $f12, $f12
 /* 1A9B10 8027B230 46206302 */  mul.d     $f12, $f12, $f0
 /* 1A9B14 8027B234 00000000 */  nop       
@@ -104,8 +104,8 @@ glabel update_lerp_battle
 /* 1A9B3C 8027B25C 4490B000 */  mtc1      $s0, $f22
 /* 1A9B40 8027B260 00000000 */  nop       
 /* 1A9B44 8027B264 4680B5A0 */  cvt.s.w   $f22, $f22
-/* 1A9B48 8027B268 3C01802A */  lui       $at, 0x802a
-/* 1A9B4C 8027B26C D420D9E8 */  ldc1      $f0, -0x2618($at)
+/* 1A9B48 8027B268 3C01802A */  lui       $at, %hi(D_8029D9E8)
+/* 1A9B4C 8027B26C D420D9E8 */  ldc1      $f0, %lo(D_8029D9E8)($at)
 /* 1A9B50 8027B270 00001812 */  mflo      $v1
 /* 1A9B54 8027B274 44836000 */  mtc1      $v1, $f12
 /* 1A9B58 8027B278 00000000 */  nop       
@@ -211,8 +211,8 @@ glabel update_lerp_battle
 /* 1A9CDC 8027B3FC 4490A000 */  mtc1      $s0, $f20
 /* 1A9CE0 8027B400 00000000 */  nop       
 /* 1A9CE4 8027B404 4680A520 */  cvt.s.w   $f20, $f20
-/* 1A9CE8 8027B408 3C01802A */  lui       $at, 0x802a
-/* 1A9CEC 8027B40C D420D9F0 */  ldc1      $f0, -0x2610($at)
+/* 1A9CE8 8027B408 3C01802A */  lui       $at, %hi(D_8029D9F0)
+/* 1A9CEC 8027B40C D420D9F0 */  ldc1      $f0, %lo(D_8029D9F0)($at)
 /* 1A9CF0 8027B410 00001812 */  mflo      $v1
 /* 1A9CF4 8027B414 44836000 */  mtc1      $v1, $f12
 /* 1A9CF8 8027B418 00000000 */  nop       
@@ -259,8 +259,8 @@ glabel update_lerp_battle
 /* 1A9D98 8027B4B8 44916000 */  mtc1      $s1, $f12
 /* 1A9D9C 8027B4BC 00000000 */  nop       
 /* 1A9DA0 8027B4C0 46806320 */  cvt.s.w   $f12, $f12
-/* 1A9DA4 8027B4C4 3C01802A */  lui       $at, 0x802a
-/* 1A9DA8 8027B4C8 D420D9F8 */  ldc1      $f0, -0x2608($at)
+/* 1A9DA4 8027B4C4 3C01802A */  lui       $at, %hi(D_8029D9F8)
+/* 1A9DA8 8027B4C8 D420D9F8 */  ldc1      $f0, %lo(D_8029D9F8)($at)
 /* 1A9DAC 8027B4CC 46006321 */  cvt.d.s   $f12, $f12
 /* 1A9DB0 8027B4D0 46206302 */  mul.d     $f12, $f12, $f0
 /* 1A9DB4 8027B4D4 00000000 */  nop       
@@ -292,8 +292,8 @@ glabel update_lerp_battle
 /* 1A9E1C 8027B53C 44916000 */  mtc1      $s1, $f12
 /* 1A9E20 8027B540 00000000 */  nop       
 /* 1A9E24 8027B544 46806320 */  cvt.s.w   $f12, $f12
-/* 1A9E28 8027B548 3C01802A */  lui       $at, 0x802a
-/* 1A9E2C 8027B54C D420DA00 */  ldc1      $f0, -0x2600($at)
+/* 1A9E28 8027B548 3C01802A */  lui       $at, %hi(D_8029DA00)
+/* 1A9E2C 8027B54C D420DA00 */  ldc1      $f0, %lo(D_8029DA00)($at)
 /* 1A9E30 8027B550 46006321 */  cvt.d.s   $f12, $f12
 /* 1A9E34 8027B554 46206302 */  mul.d     $f12, $f12, $f0
 /* 1A9E38 8027B558 00000000 */  nop       
@@ -312,8 +312,8 @@ glabel update_lerp_battle
 /* 1A9E6C 8027B58C 44916000 */  mtc1      $s1, $f12
 /* 1A9E70 8027B590 00000000 */  nop       
 /* 1A9E74 8027B594 46806320 */  cvt.s.w   $f12, $f12
-/* 1A9E78 8027B598 3C01802A */  lui       $at, 0x802a
-/* 1A9E7C 8027B59C D420DA08 */  ldc1      $f0, -0x25f8($at)
+/* 1A9E78 8027B598 3C01802A */  lui       $at, %hi(D_8029DA08)
+/* 1A9E7C 8027B59C D420DA08 */  ldc1      $f0, %lo(D_8029DA08)($at)
 /* 1A9E80 8027B5A0 46006321 */  cvt.d.s   $f12, $f12
 /* 1A9E84 8027B5A4 46206302 */  mul.d     $f12, $f12, $f0
 /* 1A9E88 8027B5A8 00000000 */  nop       

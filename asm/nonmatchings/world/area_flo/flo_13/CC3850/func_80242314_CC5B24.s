@@ -55,8 +55,8 @@ glabel func_80242314_CC5B24
 /* CC5BE0 802423D0 8C470030 */   lw       $a3, 0x30($v0)
 /* CC5BE4 802423D4 C6020018 */  lwc1      $f2, 0x18($s0)
 /* CC5BE8 802423D8 46020003 */  div.s     $f0, $f0, $f2
-/* CC5BEC 802423DC 3C018024 */  lui       $at, 0x8024
-/* CC5BF0 802423E0 D4227A88 */  ldc1      $f2, 0x7a88($at)
+/* CC5BEC 802423DC 3C018024 */  lui       $at, %hi(D_80247A88)
+/* CC5BF0 802423E0 D4227A88 */  ldc1      $f2, %lo(D_80247A88)($at)
 /* CC5BF4 802423E4 46000021 */  cvt.d.s   $f0, $f0
 /* CC5BF8 802423E8 46220000 */  add.d     $f0, $f0, $f2
 /* CC5BFC 802423EC 4620010D */  trunc.w.d $f4, $f0

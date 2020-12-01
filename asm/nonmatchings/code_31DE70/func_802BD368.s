@@ -35,12 +35,12 @@ glabel func_802BD368
 /* 31E150 802BD3E0 080AF500 */  j         .L802BD400
 /* 31E154 802BD3E4 A6020002 */   sh       $v0, 2($s0)
 .L802BD3E8:
-/* 31E158 802BD3E8 3C028011 */  lui       $v0, 0x8011
-/* 31E15C 802BD3EC 9442C97A */  lhu       $v0, -0x3686($v0)
+/* 31E158 802BD3E8 3C028011 */  lui       $v0, %hi(D_8010C97A)
+/* 31E15C 802BD3EC 9442C97A */  lhu       $v0, %lo(D_8010C97A)($v0)
 /* 31E160 802BD3F0 A6220002 */  sh        $v0, 2($s1)
 /* 31E164 802BD3F4 C7A00040 */  lwc1      $f0, 0x40($sp)
-/* 31E168 802BD3F8 3C01802C */  lui       $at, 0x802c
-/* 31E16C 802BD3FC E420FEE0 */  swc1      $f0, -0x120($at)
+/* 31E168 802BD3F8 3C01802C */  lui       $at, %hi(D_802BFEE0)
+/* 31E16C 802BD3FC E420FEE0 */  swc1      $f0, %lo(D_802BFEE0)($at)
 .L802BD400:
 /* 31E170 802BD400 8FBF0030 */  lw        $ra, 0x30($sp)
 /* 31E174 802BD404 8FB1002C */  lw        $s1, 0x2c($sp)

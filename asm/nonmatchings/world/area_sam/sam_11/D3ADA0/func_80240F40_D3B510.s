@@ -38,8 +38,8 @@ glabel func_80240F40_D3B510
 /* D3B594 80240FC4 0220202D */  daddu     $a0, $s1, $zero
 /* D3B598 80240FC8 3C05F4AC */  lui       $a1, 0xf4ac
 /* D3B59C 80240FCC 34A5D481 */  ori       $a1, $a1, 0xd481
-/* D3B5A0 80240FD0 3C108025 */  lui       $s0, 0x8025
-/* D3B5A4 80240FD4 26101470 */  addiu     $s0, $s0, 0x1470
+/* D3B5A0 80240FD0 3C108025 */  lui       $s0, %hi(D_80251470)
+/* D3B5A4 80240FD4 26101470 */  addiu     $s0, $s0, %lo(D_80251470)
 /* D3B5A8 80240FD8 0C0B1EAF */  jal       get_variable
 /* D3B5AC 80240FDC AE020000 */   sw       $v0, ($s0)
 /* D3B5B0 80240FE0 0220202D */  daddu     $a0, $s1, $zero
@@ -66,8 +66,8 @@ glabel func_80240F40_D3B510
 /* D3B604 80241034 0000202D */   daddu    $a0, $zero, $zero
 /* D3B608 80241038 0220202D */  daddu     $a0, $s1, $zero
 /* D3B60C 8024103C 3C05F4AC */  lui       $a1, 0xf4ac
-/* D3B610 80241040 3C018025 */  lui       $at, 0x8025
-/* D3B614 80241044 AC221474 */  sw        $v0, 0x1474($at)
+/* D3B610 80241040 3C018025 */  lui       $at, %hi(D_80251474)
+/* D3B614 80241044 AC221474 */  sw        $v0, %lo(D_80251474)($at)
 /* D3B618 80241048 0C0B1EAF */  jal       get_variable
 /* D3B61C 8024104C 34A5D481 */   ori      $a1, $a1, 0xd481
 /* D3B620 80241050 0220202D */  daddu     $a0, $s1, $zero
@@ -98,16 +98,16 @@ glabel func_80240F40_D3B510
 /* D3B684 802410B4 E7A00010 */   swc1     $f0, 0x10($sp)
 /* D3B688 802410B8 8E030000 */  lw        $v1, ($s0)
 /* D3B68C 802410BC 8C64000C */  lw        $a0, 0xc($v1)
-/* D3B690 802410C0 3C018025 */  lui       $at, 0x8025
-/* D3B694 802410C4 AC221478 */  sw        $v0, 0x1478($at)
+/* D3B690 802410C0 3C018025 */  lui       $at, %hi(D_80251478)
+/* D3B694 802410C4 AC221478 */  sw        $v0, %lo(D_80251478)($at)
 /* D3B698 802410C8 AC800018 */  sw        $zero, 0x18($a0)
 /* D3B69C 802410CC AC800020 */  sw        $zero, 0x20($a0)
 /* D3B6A0 802410D0 AC800024 */  sw        $zero, 0x24($a0)
 /* D3B6A4 802410D4 AC800028 */  sw        $zero, 0x28($a0)
 /* D3B6A8 802410D8 AC80001C */  sw        $zero, 0x1c($a0)
 .L802410DC:
-/* D3B6AC 802410DC 3C028025 */  lui       $v0, 0x8025
-/* D3B6B0 802410E0 8C421470 */  lw        $v0, 0x1470($v0)
+/* D3B6AC 802410DC 3C028025 */  lui       $v0, %hi(D_80251470)
+/* D3B6B0 802410E0 8C421470 */  lw        $v0, %lo(D_80251470)($v0)
 /* D3B6B4 802410E4 8C44000C */  lw        $a0, 0xc($v0)
 /* D3B6B8 802410E8 8C820020 */  lw        $v0, 0x20($a0)
 /* D3B6BC 802410EC 8C830028 */  lw        $v1, 0x28($a0)

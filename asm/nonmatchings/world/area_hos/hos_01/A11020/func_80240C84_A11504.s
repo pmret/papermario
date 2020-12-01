@@ -8,8 +8,8 @@ glabel func_80240C84_A11504
 /* A11510 80240C90 0C0B1EAF */  jal       get_variable
 /* A11514 80240C94 8C450000 */   lw       $a1, ($v0)
 /* A11518 80240C98 8FBF0010 */  lw        $ra, 0x10($sp)
-/* A1151C 80240C9C 3C018024 */  lui       $at, 0x8024
-/* A11520 80240CA0 AC221C30 */  sw        $v0, 0x1c30($at)
+/* A1151C 80240C9C 3C018024 */  lui       $at, %hi(D_80241C30)
+/* A11520 80240CA0 AC221C30 */  sw        $v0, %lo(D_80241C30)($at)
 /* A11524 80240CA4 24020002 */  addiu     $v0, $zero, 2
 /* A11528 80240CA8 03E00008 */  jr        $ra
 /* A1152C 80240CAC 27BD0018 */   addiu    $sp, $sp, 0x18

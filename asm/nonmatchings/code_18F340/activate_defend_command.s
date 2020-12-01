@@ -19,8 +19,8 @@ glabel activate_defend_command
 /* 18F41C 80260B3C 0080282D */  daddu     $a1, $a0, $zero
 /* 18F420 80260B40 00431025 */  or        $v0, $v0, $v1
 /* 18F424 80260B44 AE020000 */  sw        $v0, ($s0)
-/* 18F428 80260B48 3C028028 */  lui       $v0, 0x8028
-/* 18F42C 80260B4C 244232D4 */  addiu     $v0, $v0, 0x32d4
+/* 18F428 80260B48 3C028028 */  lui       $v0, %hi(D_802832D4)
+/* 18F42C 80260B4C 244232D4 */  addiu     $v0, $v0, %lo(D_802832D4)
 /* 18F430 80260B50 0C098F3F */  jal       set_animation
 /* 18F434 80260B54 AE220094 */   sw       $v0, 0x94($s1)
 /* 18F438 80260B58 8FBF0018 */  lw        $ra, 0x18($sp)

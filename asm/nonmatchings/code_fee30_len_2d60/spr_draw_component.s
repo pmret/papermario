@@ -21,8 +21,8 @@ glabel spr_draw_component
 /* 10000C 802DCF1C 2402FFFF */  addiu     $v0, $zero, -1
 /* 100010 802DCF20 10620064 */  beq       $v1, $v0, .L802DD0B4
 /* 100014 802DCF24 00000000 */   nop      
-/* 100018 802DCF28 3C02802E */  lui       $v0, 0x802e
-/* 10001C 802DCF2C 2442FEA0 */  addiu     $v0, $v0, -0x160
+/* 100018 802DCF28 3C02802E */  lui       $v0, %hi(D_802DFEA0)
+/* 10001C 802DCF2C 2442FEA0 */  addiu     $v0, $v0, %lo(D_802DFEA0)
 /* 100020 802DCF30 C4540000 */  lwc1      $f20, ($v0)
 /* 100024 802DCF34 4680A520 */  cvt.s.w   $f20, $f20
 /* 100028 802DCF38 4600A20D */  trunc.w.s $f8, $f20
@@ -75,8 +75,8 @@ glabel spr_draw_component
 /* 1000E4 802DCFF4 8E300018 */  lw        $s0, 0x18($s1)
 /* 1000E8 802DCFF8 10600007 */  beqz      $v1, .L802DD018
 /* 1000EC 802DCFFC 00101880 */   sll      $v1, $s0, 2
-/* 1000F0 802DD000 3C05802E */  lui       $a1, 0x802e
-/* 1000F4 802DD004 8CA5F57C */  lw        $a1, -0xa84($a1)
+/* 1000F0 802DD000 3C05802E */  lui       $a1, %hi(D_802DF57C)
+/* 1000F4 802DD004 8CA5F57C */  lw        $a1, %lo(D_802DF57C)($a1)
 /* 1000F8 802DD008 0C0B7BA8 */  jal       func_802DEEA0
 /* 1000FC 802DD00C 30840FFF */   andi     $a0, $a0, 0xfff
 /* 100100 802DD010 AE420000 */  sw        $v0, ($s2)
@@ -109,8 +109,8 @@ glabel spr_draw_component
 /* 100168 802DD078 C6200044 */  lwc1      $f0, 0x44($s1)
 /* 10016C 802DD07C E7A00020 */  swc1      $f0, 0x20($sp)
 /* 100170 802DD080 C6200048 */  lwc1      $f0, 0x48($s1)
-/* 100174 802DD084 3C10802E */  lui       $s0, 0x802e
-/* 100178 802DD088 2610F540 */  addiu     $s0, $s0, -0xac0
+/* 100174 802DD084 3C10802E */  lui       $s0, %hi(D_802DF540)
+/* 100178 802DD088 2610F540 */  addiu     $s0, $s0, %lo(D_802DF540)
 /* 10017C 802DD08C AE020000 */  sw        $v0, ($s0)
 /* 100180 802DD090 8FA20090 */  lw        $v0, 0x90($sp)
 /* 100184 802DD094 0240202D */  daddu     $a0, $s2, $zero

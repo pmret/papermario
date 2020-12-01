@@ -94,8 +94,8 @@ glabel AdjustCam
 /* F1174 802CC7C4 0460001A */  bltz      $v1, .L802CC830
 /* F1178 802CC7C8 000310C0 */   sll      $v0, $v1, 3
 /* F117C 802CC7CC 00431023 */  subu      $v0, $v0, $v1
-/* F1180 802CC7D0 3C03800E */  lui       $v1, 0x800e
-/* F1184 802CC7D4 8C6391D4 */  lw        $v1, -0x6e2c($v1)
+/* F1180 802CC7D0 3C03800E */  lui       $v1, %hi(D_800D91D4)
+/* F1184 802CC7D4 8C6391D4 */  lw        $v1, %lo(D_800D91D4)($v1)
 /* F1188 802CC7D8 00021080 */  sll       $v0, $v0, 2
 /* F118C 802CC7DC 00431021 */  addu      $v0, $v0, $v1
 /* F1190 802CC7E0 8C420010 */  lw        $v0, 0x10($v0)

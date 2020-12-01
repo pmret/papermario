@@ -99,8 +99,8 @@ glabel SetCamProperties
 /* F0F14 802CC564 0460001A */  bltz      $v1, .L802CC5D0
 /* F0F18 802CC568 000310C0 */   sll      $v0, $v1, 3
 /* F0F1C 802CC56C 00431023 */  subu      $v0, $v0, $v1
-/* F0F20 802CC570 3C03800E */  lui       $v1, 0x800e
-/* F0F24 802CC574 8C6391D4 */  lw        $v1, -0x6e2c($v1)
+/* F0F20 802CC570 3C03800E */  lui       $v1, %hi(D_800D91D4)
+/* F0F24 802CC574 8C6391D4 */  lw        $v1, %lo(D_800D91D4)($v1)
 /* F0F28 802CC578 00021080 */  sll       $v0, $v0, 2
 /* F0F2C 802CC57C 00431021 */  addu      $v0, $v0, $v1
 /* F0F30 802CC580 8C420010 */  lw        $v0, 0x10($v0)

@@ -7,8 +7,8 @@ glabel LoadActionCommand
 /* 196AA8 802681C8 8C82000C */  lw        $v0, 0xc($a0)
 /* 196AAC 802681CC 0C0B1EAF */  jal       get_variable
 /* 196AB0 802681D0 8C450000 */   lw       $a1, ($v0)
-/* 196AB4 802681D4 3C068029 */  lui       $a2, 0x8029
-/* 196AB8 802681D8 24C644C0 */  addiu     $a2, $a2, 0x44c0
+/* 196AB4 802681D4 3C068029 */  lui       $a2, %hi(D_802944C0)
+/* 196AB8 802681D8 24C644C0 */  addiu     $a2, $a2, %lo(D_802944C0)
 /* 196ABC 802681DC 00021840 */  sll       $v1, $v0, 1
 /* 196AC0 802681E0 00621821 */  addu      $v1, $v1, $v0
 /* 196AC4 802681E4 00031080 */  sll       $v0, $v1, 2

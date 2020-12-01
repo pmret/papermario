@@ -22,14 +22,14 @@ glabel func_E002A000
 /* 33E904 E002A044 AFB00028 */   sw       $s0, 0x28($sp)
 /* 33E908 E002A048 24120005 */  addiu     $s2, $zero, 5
 .LE002A04C:
-/* 33E90C E002A04C 3C02E003 */  lui       $v0, 0xe003
-/* 33E910 E002A050 2442A284 */  addiu     $v0, $v0, -0x5d7c
+/* 33E90C E002A04C 3C02E003 */  lui       $v0, %hi(D_E002A284)
+/* 33E910 E002A050 2442A284 */  addiu     $v0, $v0, %lo(D_E002A284)
 /* 33E914 E002A054 AFA20018 */  sw        $v0, 0x18($sp)
-/* 33E918 E002A058 3C02E003 */  lui       $v0, 0xe003
-/* 33E91C E002A05C 2442A28C */  addiu     $v0, $v0, -0x5d74
+/* 33E918 E002A058 3C02E003 */  lui       $v0, %hi(D_E002A28C)
+/* 33E91C E002A05C 2442A28C */  addiu     $v0, $v0, %lo(D_E002A28C)
 /* 33E920 E002A060 AFA2001C */  sw        $v0, 0x1c($sp)
-/* 33E924 E002A064 3C02E003 */  lui       $v0, 0xe003
-/* 33E928 E002A068 2442A380 */  addiu     $v0, $v0, -0x5c80
+/* 33E924 E002A064 3C02E003 */  lui       $v0, %hi(D_E002A380)
+/* 33E928 E002A068 2442A380 */  addiu     $v0, $v0, %lo(D_E002A380)
 /* 33E92C E002A06C AFA20020 */  sw        $v0, 0x20($sp)
 /* 33E930 E002A070 24020015 */  addiu     $v0, $zero, 0x15
 /* 33E934 E002A074 AFA00010 */  sw        $zero, 0x10($sp)
@@ -72,8 +72,8 @@ glabel func_E002A000
 /* 33E9C0 E002A100 24900008 */  addiu     $s0, $a0, 8
 /* 33E9C4 E002A104 3C013F80 */  lui       $at, 0x3f80
 /* 33E9C8 E002A108 4481C000 */  mtc1      $at, $f24
-/* 33E9CC E002A10C 3C01E003 */  lui       $at, 0xe003
-/* 33E9D0 E002A110 D434A720 */  ldc1      $f20, -0x58e0($at)
+/* 33E9CC E002A10C 3C01E003 */  lui       $at, %hi(D_E002A720)
+/* 33E9D0 E002A110 D434A720 */  ldc1      $f20, %lo(D_E002A720)($at)
 /* 33E9D4 E002A114 3C013ECC */  lui       $at, 0x3ecc
 /* 33E9D8 E002A118 3421CCCD */  ori       $at, $at, 0xcccd
 /* 33E9DC E002A11C 4481B000 */  mtc1      $at, $f22
@@ -124,8 +124,8 @@ glabel func_E002A000
 /* 33EA88 E002A1C8 0800A87A */  j         .LE002A1E8
 /* 33EA8C E002A1CC 46200020 */   cvt.s.d  $f0, $f0
 .LE002A1D0:
-/* 33EA90 E002A1D0 3C01E003 */  lui       $at, 0xe003
-/* 33EA94 E002A1D4 D422A728 */  ldc1      $f2, -0x58d8($at)
+/* 33EA90 E002A1D0 3C01E003 */  lui       $at, %hi(D_E002A728)
+/* 33EA94 E002A1D4 D422A728 */  ldc1      $f2, %lo(D_E002A728)($at)
 /* 33EA98 E002A1D8 46000021 */  cvt.d.s   $f0, $f0
 /* 33EA9C E002A1DC 46220002 */  mul.d     $f0, $f0, $f2
 /* 33EAA0 E002A1E0 00000000 */  nop       

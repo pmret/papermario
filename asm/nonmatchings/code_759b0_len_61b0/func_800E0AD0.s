@@ -10,8 +10,8 @@ glabel func_800E0AD0
 /* 79F94 800E0AE4 30420010 */  andi      $v0, $v0, 0x10
 /* 79F98 800E0AE8 10400007 */  beqz      $v0, .L800E0B08
 /* 79F9C 800E0AEC 00000000 */   nop      
-/* 79FA0 800E0AF0 3C028011 */  lui       $v0, 0x8011
-/* 79FA4 800E0AF4 8C42C958 */  lw        $v0, -0x36a8($v0)
+/* 79FA0 800E0AF0 3C028011 */  lui       $v0, %hi(D_8010C958)
+/* 79FA4 800E0AF4 8C42C958 */  lw        $v0, %lo(D_8010C958)($v0)
 /* 79FA8 800E0AF8 10400003 */  beqz      $v0, .L800E0B08
 /* 79FAC 800E0AFC 00000000 */   nop      
 /* 79FB0 800E0B00 0C0ADC7A */  jal       func_802B71E8

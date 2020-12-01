@@ -66,9 +66,9 @@ glabel func_80241E1C_CCD12C
 /* CCD218 80241F08 2C62000F */  sltiu     $v0, $v1, 0xf
 /* CCD21C 80241F0C 10400034 */  beqz      $v0, .L80241FE0
 /* CCD220 80241F10 00031080 */   sll      $v0, $v1, 2
-/* CCD224 80241F14 3C018024 */  lui       $at, 0x8024
+/* CCD224 80241F14 3C018024 */  lui       $at, %hi(D_80245368)
 /* CCD228 80241F18 00220821 */  addu      $at, $at, $v0
-/* CCD22C 80241F1C 8C225368 */  lw        $v0, 0x5368($at)
+/* CCD22C 80241F1C 8C225368 */  lw        $v0, %lo(D_80245368)($at)
 /* CCD230 80241F20 00400008 */  jr        $v0
 /* CCD234 80241F24 00000000 */   nop      
 /* CCD238 80241F28 0280202D */  daddu     $a0, $s4, $zero

@@ -3,10 +3,10 @@
 
 glabel func_8011D7E4
 /* B3EE4 8011D7E4 3C030002 */  lui       $v1, 2
-/* B3EE8 8011D7E8 3C028015 */  lui       $v0, 0x8015
-/* B3EEC 8011D7EC 8C423368 */  lw        $v0, 0x3368($v0)
-/* B3EF0 8011D7F0 3C058015 */  lui       $a1, 0x8015
-/* B3EF4 8011D7F4 8CA5B748 */  lw        $a1, -0x48b8($a1)
+/* B3EE8 8011D7E8 3C028015 */  lui       $v0, %hi(D_80153368)
+/* B3EEC 8011D7EC 8C423368 */  lw        $v0, %lo(D_80153368)($v0)
+/* B3EF0 8011D7F0 3C058015 */  lui       $a1, %hi(D_8014B748)
+/* B3EF4 8011D7F4 8CA5B748 */  lw        $a1, %lo(D_8014B748)($a1)
 /* B3EF8 8011D7F8 34638000 */  ori       $v1, $v1, 0x8000
 /* B3EFC 8011D7FC 00451023 */  subu      $v0, $v0, $a1
 /* B3F00 8011D800 2442003F */  addiu     $v0, $v0, 0x3f

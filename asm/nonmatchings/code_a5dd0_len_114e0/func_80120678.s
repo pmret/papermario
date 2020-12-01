@@ -10,8 +10,8 @@ glabel func_80120678
 /* B6D8C 8012068C 24040079 */  addiu     $a0, $zero, 0x79
 /* B6D90 80120690 8E0202C8 */  lw        $v0, 0x2c8($s0)
 /* B6D94 80120694 27A301F4 */  addiu     $v1, $sp, 0x1f4
-/* B6D98 80120698 3C018015 */  lui       $at, 0x8015
-/* B6D9C 8012069C AC223B68 */  sw        $v0, 0x3b68($at)
+/* B6D98 80120698 3C018015 */  lui       $at, %hi(D_80153B68)
+/* B6D9C 8012069C AC223B68 */  sw        $v0, %lo(D_80153B68)($at)
 .L801206A0:
 /* B6DA0 801206A0 AC600000 */  sw        $zero, ($v1)
 /* B6DA4 801206A4 2484FFFF */  addiu     $a0, $a0, -1

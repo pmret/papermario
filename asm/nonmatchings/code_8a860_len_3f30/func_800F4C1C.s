@@ -7,8 +7,8 @@ glabel func_800F4C1C
 /* 8E0D4 800F4C24 34840069 */  ori       $a0, $a0, 0x69
 /* 8E0D8 800F4C28 24A5000B */  addiu     $a1, $a1, 0xb
 /* 8E0DC 800F4C2C 24C60008 */  addiu     $a2, $a2, 8
-/* 8E0E0 800F4C30 3C038011 */  lui       $v1, 0x8011
-/* 8E0E4 800F4C34 8063D699 */  lb        $v1, -0x2967($v1)
+/* 8E0E0 800F4C30 3C038011 */  lui       $v1, %hi(D_8010D699)
+/* 8E0E4 800F4C34 8063D699 */  lb        $v1, %lo(D_8010D699)($v1)
 /* 8E0E8 800F4C38 24020001 */  addiu     $v0, $zero, 1
 /* 8E0EC 800F4C3C 14620003 */  bne       $v1, $v0, .L800F4C4C
 /* 8E0F0 800F4C40 AFBF0018 */   sw       $ra, 0x18($sp)

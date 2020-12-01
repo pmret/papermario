@@ -102,9 +102,9 @@ glabel func_80240B64_8DAC64
 /* 8DADD4 80240CD4 2C620064 */  sltiu     $v0, $v1, 0x64
 /* 8DADD8 80240CD8 10400036 */  beqz      $v0, .L80240DB4
 /* 8DADDC 80240CDC 00031080 */   sll      $v0, $v1, 2
-/* 8DADE0 80240CE0 3C018025 */  lui       $at, 0x8025
+/* 8DADE0 80240CE0 3C018025 */  lui       $at, %hi(D_802510C8)
 /* 8DADE4 80240CE4 00220821 */  addu      $at, $at, $v0
-/* 8DADE8 80240CE8 8C2210C8 */  lw        $v0, 0x10c8($at)
+/* 8DADE8 80240CE8 8C2210C8 */  lw        $v0, %lo(D_802510C8)($at)
 /* 8DADEC 80240CEC 00400008 */  jr        $v0
 /* 8DADF0 80240CF0 00000000 */   nop      
 /* 8DADF4 80240CF4 0280202D */  daddu     $a0, $s4, $zero

@@ -6,8 +6,8 @@ glabel func_80242A64_854BD4
 /* 854BD8 80242A68 AFBF0010 */  sw        $ra, 0x10($sp)
 /* 854BDC 80242A6C 0C00EABB */  jal       get_npc_unsafe
 /* 854BE0 80242A70 8C84008C */   lw       $a0, 0x8c($a0)
-/* 854BE4 80242A74 3C038025 */  lui       $v1, 0x8025
-/* 854BE8 80242A78 8C632D38 */  lw        $v1, 0x2d38($v1)
+/* 854BE4 80242A74 3C038025 */  lui       $v1, %hi(D_80252D38)
+/* 854BE8 80242A78 8C632D38 */  lw        $v1, %lo(D_80252D38)($v1)
 /* 854BEC 80242A7C AC430028 */  sw        $v1, 0x28($v0)
 /* 854BF0 80242A80 8FBF0010 */  lw        $ra, 0x10($sp)
 /* 854BF4 80242A84 24020002 */  addiu     $v0, $zero, 2

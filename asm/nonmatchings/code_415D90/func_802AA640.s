@@ -10,9 +10,9 @@ glabel func_802AA640
 /* 41F3E4 802AA654 10400009 */  beqz      $v0, .L802AA67C
 /* 41F3E8 802AA658 AFBF0010 */   sw       $ra, 0x10($sp)
 /* 41F3EC 802AA65C 00031080 */  sll       $v0, $v1, 2
-/* 41F3F0 802AA660 3C01802B */  lui       $at, 0x802b
+/* 41F3F0 802AA660 3C01802B */  lui       $at, %hi(D_802ACC38)
 /* 41F3F4 802AA664 00220821 */  addu      $at, $at, $v0
-/* 41F3F8 802AA668 8C22CC38 */  lw        $v0, -0x33c8($at)
+/* 41F3F8 802AA668 8C22CC38 */  lw        $v0, %lo(D_802ACC38)($at)
 /* 41F3FC 802AA66C 00400008 */  jr        $v0
 /* 41F400 802AA670 00000000 */   nop      
 /* 41F404 802AA674 0C0A8715 */  jal       draw_battle_wheel

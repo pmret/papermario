@@ -24,8 +24,8 @@ glabel func_80240098_BBD238
 /* BBD284 802400E4 0000982D */  daddu     $s3, $zero, $zero
 /* BBD288 802400E8 AE910074 */  sw        $s1, 0x74($s4)
 /* BBD28C 802400EC 8E050000 */  lw        $a1, ($s0)
-/* BBD290 802400F0 3C108024 */  lui       $s0, 0x8024
-/* BBD294 802400F4 26101C58 */  addiu     $s0, $s0, 0x1c58
+/* BBD290 802400F0 3C108024 */  lui       $s0, %hi(D_80241C58)
+/* BBD294 802400F4 26101C58 */  addiu     $s0, $s0, %lo(D_80241C58)
 /* BBD298 802400F8 0C0B1EAF */  jal       get_variable
 /* BBD29C 802400FC 0220902D */   daddu    $s2, $s1, $zero
 /* BBD2A0 80240100 AE220008 */  sw        $v0, 8($s1)
@@ -77,9 +77,9 @@ glabel func_80240098_BBD238
 /* BBD34C 802401AC 2C62000C */  sltiu     $v0, $v1, 0xc
 /* BBD350 802401B0 10400076 */  beqz      $v0, .L8024038C
 /* BBD354 802401B4 00031080 */   sll      $v0, $v1, 2
-/* BBD358 802401B8 3C018024 */  lui       $at, 0x8024
+/* BBD358 802401B8 3C018024 */  lui       $at, %hi(D_802458C0)
 /* BBD35C 802401BC 00220821 */  addu      $at, $at, $v0
-/* BBD360 802401C0 8C2258C0 */  lw        $v0, 0x58c0($at)
+/* BBD360 802401C0 8C2258C0 */  lw        $v0, %lo(D_802458C0)($at)
 /* BBD364 802401C4 00400008 */  jr        $v0
 /* BBD368 802401C8 00000000 */   nop      
 /* BBD36C 802401CC 8E220008 */  lw        $v0, 8($s1)

@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel guRotateAngles
-/* 3F858 80064458 3C018009 */  lui       $at, 0x8009
-/* 3F85C 8006445C C4203DD0 */  lwc1      $f0, 0x3dd0($at)
+/* 3F858 80064458 3C018009 */  lui       $at, %hi(D_80093DD0)
+/* 3F85C 8006445C C4203DD0 */  lwc1      $f0, %lo(D_80093DD0)($at)
 /* 3F860 80064460 44854000 */  mtc1      $a1, $f8
 /* 3F864 80064464 27BDFF68 */  addiu     $sp, $sp, -0x98
 /* 3F868 80064468 F7B40068 */  sdc1      $f20, 0x68($sp)

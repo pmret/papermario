@@ -18,8 +18,8 @@ glabel func_80027BAC
 /* 2FE0 80027BE0 3C0CE300 */  lui       $t4, 0xe300
 /* 2FE4 80027BE4 358C1201 */  ori       $t4, $t4, 0x1201
 /* 2FE8 80027BE8 0000C82D */  daddu     $t9, $zero, $zero
-/* 2FEC 80027BEC 3C02800A */  lui       $v0, 0x800a
-/* 2FF0 80027BF0 2442A66C */  addiu     $v0, $v0, -0x5994
+/* 2FEC 80027BEC 3C02800A */  lui       $v0, %hi(D_8009A66C)
+/* 2FF0 80027BF0 2442A66C */  addiu     $v0, $v0, %lo(D_8009A66C)
 /* 2FF4 80027BF4 0040682D */  daddu     $t5, $v0, $zero
 /* 2FF8 80027BF8 AFB5001C */  sw        $s5, 0x1c($sp)
 /* 2FFC 80027BFC 3C15FD10 */  lui       $s5, 0xfd10

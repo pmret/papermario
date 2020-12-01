@@ -4,8 +4,8 @@
 glabel nuSiMgrThread
 /* 83D0 8002CFD0 27BDFFA8 */  addiu     $sp, $sp, -0x58
 /* 83D4 8002CFD4 AFB00048 */  sw        $s0, 0x48($sp)
-/* 83D8 8002CFD8 3C10800E */  lui       $s0, 0x800e
-/* 83DC 8002CFDC 261091F8 */  addiu     $s0, $s0, -0x6e08
+/* 83D8 8002CFD8 3C10800E */  lui       $s0, %hi(D_800D91F8)
+/* 83DC 8002CFDC 261091F8 */  addiu     $s0, $s0, %lo(D_800D91F8)
 /* 83E0 8002CFE0 0200202D */  daddu     $a0, $s0, $zero
 /* 83E4 8002CFE4 27A50020 */  addiu     $a1, $sp, 0x20
 /* 83E8 8002CFE8 24060008 */  addiu     $a2, $zero, 8
@@ -17,14 +17,14 @@ glabel nuSiMgrThread
 /* 8400 8002D000 0C017B8C */  jal       nuScAddClient
 /* 8404 8002D004 24060001 */   addiu    $a2, $zero, 1
 .L8002D008:
-/* 8408 8002D008 3C04800E */  lui       $a0, 0x800e
-/* 840C 8002D00C 248491F8 */  addiu     $a0, $a0, -0x6e08
+/* 8408 8002D008 3C04800E */  lui       $a0, %hi(D_800D91F8)
+/* 840C 8002D00C 248491F8 */  addiu     $a0, $a0, %lo(D_800D91F8)
 /* 8410 8002D010 27A50040 */  addiu     $a1, $sp, 0x40
 /* 8414 8002D014 0C0195BC */  jal       osRecvMesg
 /* 8418 8002D018 24060001 */   addiu    $a2, $zero, 1
 /* 841C 8002D01C 8FA40040 */  lw        $a0, 0x40($sp)
-/* 8420 8002D020 3C108007 */  lui       $s0, 0x8007
-/* 8424 8002D024 26107400 */  addiu     $s0, $s0, 0x7400
+/* 8420 8002D020 3C108007 */  lui       $s0, %hi(D_80077400)
+/* 8424 8002D024 26107400 */  addiu     $s0, $s0, %lo(D_80077400)
 /* 8428 8002D028 84830000 */  lh        $v1, ($a0)
 /* 842C 8002D02C 24020001 */  addiu     $v0, $zero, 1
 /* 8430 8002D030 10620005 */  beq       $v1, $v0, .L8002D048

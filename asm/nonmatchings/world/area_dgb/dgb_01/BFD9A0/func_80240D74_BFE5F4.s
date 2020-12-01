@@ -15,9 +15,9 @@ glabel func_80240D74_BFE5F4
 /* BFE61C 80240D9C 00031C00 */  sll       $v1, $v1, 0x10
 /* BFE620 80240DA0 00031B83 */  sra       $v1, $v1, 0xe
 /* BFE624 80240DA4 A444008E */  sh        $a0, 0x8e($v0)
-/* BFE628 80240DA8 3C018024 */  lui       $at, 0x8024
+/* BFE628 80240DA8 3C018024 */  lui       $at, %hi(D_80244CD0)
 /* BFE62C 80240DAC 00230821 */  addu      $at, $at, $v1
-/* BFE630 80240DB0 C4224CD0 */  lwc1      $f2, 0x4cd0($at)
+/* BFE630 80240DB0 C4224CD0 */  lwc1      $f2, %lo(D_80244CD0)($at)
 /* BFE634 80240DB4 8443008E */  lh        $v1, 0x8e($v0)
 /* BFE638 80240DB8 46020000 */  add.s     $f0, $f0, $f2
 /* BFE63C 80240DBC 28630005 */  slti      $v1, $v1, 5

@@ -169,10 +169,10 @@ glabel func_80240AE8_DF74E8
 /* DF7764 80240D64 0C019D80 */  jal       guMtxCatF
 /* DF7768 80240D68 0220302D */   daddu    $a2, $s1, $zero
 /* DF776C 80240D6C 0220202D */  daddu     $a0, $s1, $zero
-/* DF7770 80240D70 3C108007 */  lui       $s0, 0x8007
-/* DF7774 80240D74 261041F0 */  addiu     $s0, $s0, 0x41f0
-/* DF7778 80240D78 3C13800A */  lui       $s3, 0x800a
-/* DF777C 80240D7C 2673A674 */  addiu     $s3, $s3, -0x598c
+/* DF7770 80240D70 3C108007 */  lui       $s0, %hi(D_800741F0)
+/* DF7774 80240D74 261041F0 */  addiu     $s0, $s0, %lo(D_800741F0)
+/* DF7778 80240D78 3C13800A */  lui       $s3, %hi(D_8009A674)
+/* DF777C 80240D7C 2673A674 */  addiu     $s3, $s3, %lo(D_8009A674)
 /* DF7780 80240D80 96050000 */  lhu       $a1, ($s0)
 /* DF7784 80240D84 8E620000 */  lw        $v0, ($s3)
 /* DF7788 80240D88 00052980 */  sll       $a1, $a1, 6
@@ -181,8 +181,8 @@ glabel func_80240AE8_DF74E8
 /* DF7794 80240D94 00452821 */   addu     $a1, $v0, $a1
 /* DF7798 80240D98 3C02DA38 */  lui       $v0, 0xda38
 /* DF779C 80240D9C 34420002 */  ori       $v0, $v0, 2
-/* DF77A0 80240DA0 3C12800A */  lui       $s2, 0x800a
-/* DF77A4 80240DA4 2652A66C */  addiu     $s2, $s2, -0x5994
+/* DF77A0 80240DA0 3C12800A */  lui       $s2, %hi(D_8009A66C)
+/* DF77A4 80240DA4 2652A66C */  addiu     $s2, $s2, %lo(D_8009A66C)
 /* DF77A8 80240DA8 8E440000 */  lw        $a0, ($s2)
 /* DF77AC 80240DAC 96050000 */  lhu       $a1, ($s0)
 /* DF77B0 80240DB0 0080302D */  daddu     $a2, $a0, $zero

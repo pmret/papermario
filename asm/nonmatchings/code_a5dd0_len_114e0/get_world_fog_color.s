@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel get_world_fog_color
-/* B22D8 8011BBD8 3C038015 */  lui       $v1, 0x8015
-/* B22DC 8011BBDC 24633264 */  addiu     $v1, $v1, 0x3264
+/* B22D8 8011BBD8 3C038015 */  lui       $v1, %hi(D_80153264)
+/* B22DC 8011BBDC 24633264 */  addiu     $v1, $v1, %lo(D_80153264)
 /* B22E0 8011BBE0 8C620000 */  lw        $v0, ($v1)
 /* B22E4 8011BBE4 8C420004 */  lw        $v0, 4($v0)
 /* B22E8 8011BBE8 AC820000 */  sw        $v0, ($a0)

@@ -71,8 +71,8 @@ glabel func_8025DBD0
 /* 18C5B0 8025DCD0 46002103 */  div.s     $f4, $f4, $f0
 /* 18C5B4 8025DCD4 E444001C */  swc1      $f4, 0x1c($v0)
 /* 18C5B8 8025DCD8 848208C8 */  lh        $v0, 0x8c8($a0)
-/* 18C5BC 8025DCDC 3C01802A */  lui       $at, 0x802a
-/* 18C5C0 8025DCE0 D422D4E8 */  ldc1      $f2, -0x2b18($at)
+/* 18C5BC 8025DCDC 3C01802A */  lui       $at, %hi(D_8029D4E8)
+/* 18C5C0 8025DCE0 D422D4E8 */  ldc1      $f2, %lo(D_8029D4E8)($at)
 /* 18C5C4 8025DCE4 44822000 */  mtc1      $v0, $f4
 /* 18C5C8 8025DCE8 00000000 */  nop       
 /* 18C5CC 8025DCEC 46802120 */  cvt.s.w   $f4, $f4

@@ -3,14 +3,14 @@
 
 glabel func_802403E0_8CACE0
 /* 8CACE0 802403E0 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* 8CACE4 802403E4 3C048024 */  lui       $a0, 0x8024
-/* 8CACE8 802403E8 24843770 */  addiu     $a0, $a0, 0x3770
-/* 8CACEC 802403EC 3C028024 */  lui       $v0, 0x8024
-/* 8CACF0 802403F0 24421BF0 */  addiu     $v0, $v0, 0x1bf0
+/* 8CACE4 802403E4 3C048024 */  lui       $a0, %hi(D_80243770)
+/* 8CACE8 802403E8 24843770 */  addiu     $a0, $a0, %lo(D_80243770)
+/* 8CACEC 802403EC 3C028024 */  lui       $v0, %hi(D_80241BF0)
+/* 8CACF0 802403F0 24421BF0 */  addiu     $v0, $v0, %lo(D_80241BF0)
 /* 8CACF4 802403F4 AFBF0010 */  sw        $ra, 0x10($sp)
 /* 8CACF8 802403F8 AC820000 */  sw        $v0, ($a0)
-/* 8CACFC 802403FC 3C028024 */  lui       $v0, 0x8024
-/* 8CAD00 80240400 24422070 */  addiu     $v0, $v0, 0x2070
+/* 8CACFC 802403FC 3C028024 */  lui       $v0, %hi(D_80242070)
+/* 8CAD00 80240400 24422070 */  addiu     $v0, $v0, %lo(D_80242070)
 /* 8CAD04 80240404 AC820004 */  sw        $v0, 4($a0)
 /* 8CAD08 80240408 24020030 */  addiu     $v0, $zero, 0x30
 /* 8CAD0C 8024040C A4820008 */  sh        $v0, 8($a0)

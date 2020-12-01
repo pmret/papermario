@@ -4,8 +4,8 @@
 glabel func_8004C2A4
 /* 276A4 8004C2A4 0000382D */  daddu     $a3, $zero, $zero
 /* 276A8 8004C2A8 30A523FF */  andi      $a1, $a1, 0x23ff
-/* 276AC 8004C2AC 3C0A8008 */  lui       $t2, 0x8008
-/* 276B0 8004C2B0 254A8464 */  addiu     $t2, $t2, -0x7b9c
+/* 276AC 8004C2AC 3C0A8008 */  lui       $t2, %hi(D_80078464)
+/* 276B0 8004C2B0 254A8464 */  addiu     $t2, $t2, %lo(D_80078464)
 /* 276B4 8004C2B4 24090001 */  addiu     $t1, $zero, 1
 /* 276B8 8004C2B8 24080001 */  addiu     $t0, $zero, 1
 /* 276BC 8004C2BC 2406016C */  addiu     $a2, $zero, 0x16c

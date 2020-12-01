@@ -65,8 +65,8 @@ glabel clear_encounter_status
 /* 198DC 8003E4DC A0E00012 */  sb        $zero, 0x12($a3)
 /* 198E0 8003E4E0 0C0116B0 */  jal       func_80045AC0
 /* 198E4 8003E4E4 A0E2001F */   sb       $v0, 0x1f($a3)
-/* 198E8 8003E4E8 3C058004 */  lui       $a1, 0x8004
-/* 198EC 8003E4EC 24A5E670 */  addiu     $a1, $a1, -0x1990
+/* 198E8 8003E4E8 3C058004 */  lui       $a1, %hi(D_8003E670)
+/* 198EC 8003E4EC 24A5E670 */  addiu     $a1, $a1, %lo(D_8003E670)
 /* 198F0 8003E4F0 3C01800A */  lui       $at, %hi(gGameState)
 /* 198F4 8003E4F4 AC20A600 */  sw        $zero, %lo(gGameState)($at)
 /* 198F8 8003E4F8 0C048C56 */  jal       bind_dynamic_entity_3

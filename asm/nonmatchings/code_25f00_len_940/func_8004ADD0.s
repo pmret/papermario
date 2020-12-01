@@ -8,8 +8,8 @@ glabel func_8004ADD0
 /* 261DC 8004ADDC AFBF0014 */  sw        $ra, 0x14($sp)
 /* 261E0 8004ADE0 0C018250 */  jal       osSetIntMask
 /* 261E4 8004ADE4 24040001 */   addiu    $a0, $zero, 1
-/* 261E8 8004ADE8 3C018008 */  lui       $at, 0x8008
-/* 261EC 8004ADEC AC308174 */  sw        $s0, -0x7e8c($at)
+/* 261E8 8004ADE8 3C018008 */  lui       $at, %hi(D_80078174)
+/* 261EC 8004ADEC AC308174 */  sw        $s0, %lo(D_80078174)($at)
 /* 261F0 8004ADF0 0C018250 */  jal       osSetIntMask
 /* 261F4 8004ADF4 0040202D */   daddu    $a0, $v0, $zero
 /* 261F8 8004ADF8 8FBF0014 */  lw        $ra, 0x14($sp)

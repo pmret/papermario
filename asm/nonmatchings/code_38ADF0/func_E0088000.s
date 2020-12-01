@@ -48,8 +48,8 @@ glabel func_E0088000
 /* 38AE9C E00880AC 44811000 */  mtc1      $at, $f2
 /* 38AEA0 E00880B0 00000000 */  nop       
 /* 38AEA4 E00880B4 46020001 */  sub.s     $f0, $f0, $f2
-/* 38AEA8 E00880B8 3C01E009 */  lui       $at, 0xe009
-/* 38AEAC E00880BC D4228D10 */  ldc1      $f2, -0x72f0($at)
+/* 38AEA8 E00880B8 3C01E009 */  lui       $at, %hi(D_E0088D10)
+/* 38AEAC E00880BC D4228D10 */  ldc1      $f2, %lo(D_E0088D10)($at)
 /* 38AEB0 E00880C0 46000021 */  cvt.d.s   $f0, $f0
 /* 38AEB4 E00880C4 46220002 */  mul.d     $f0, $f0, $f2
 /* 38AEB8 E00880C8 00000000 */  nop       
@@ -62,13 +62,13 @@ glabel func_E0088000
 /* 38AED4 E00880E4 46800020 */  cvt.s.w   $f0, $f0
 /* 38AED8 E00880E8 46140002 */  mul.s     $f0, $f0, $f20
 /* 38AEDC E00880EC 00000000 */  nop       
-/* 38AEE0 E00880F0 3C01E009 */  lui       $at, 0xe009
-/* 38AEE4 E00880F4 D4228D18 */  ldc1      $f2, -0x72e8($at)
+/* 38AEE0 E00880F0 3C01E009 */  lui       $at, %hi(D_E0088D18)
+/* 38AEE4 E00880F4 D4228D18 */  ldc1      $f2, %lo(D_E0088D18)($at)
 /* 38AEE8 E00880F8 46000021 */  cvt.d.s   $f0, $f0
 /* 38AEEC E00880FC 46220002 */  mul.d     $f0, $f0, $f2
 /* 38AEF0 E0088100 00000000 */  nop       
-/* 38AEF4 E0088104 3C01E009 */  lui       $at, 0xe009
-/* 38AEF8 E0088108 D4228D20 */  ldc1      $f2, -0x72e0($at)
+/* 38AEF4 E0088104 3C01E009 */  lui       $at, %hi(D_E0088D20)
+/* 38AEF8 E0088108 D4228D20 */  ldc1      $f2, %lo(D_E0088D20)($at)
 /* 38AEFC E008810C 46201081 */  sub.d     $f2, $f2, $f0
 /* 38AF00 E0088110 240400C8 */  addiu     $a0, $zero, 0xc8
 /* 38AF04 E0088114 462010A0 */  cvt.s.d   $f2, $f2
@@ -83,8 +83,8 @@ glabel func_E0088000
 /* 38AF28 E0088138 44811000 */  mtc1      $at, $f2
 /* 38AF2C E008813C 00000000 */  nop       
 /* 38AF30 E0088140 46020001 */  sub.s     $f0, $f0, $f2
-/* 38AF34 E0088144 3C01E009 */  lui       $at, 0xe009
-/* 38AF38 E0088148 D4228D28 */  ldc1      $f2, -0x72d8($at)
+/* 38AF34 E0088144 3C01E009 */  lui       $at, %hi(D_E0088D28)
+/* 38AF38 E0088148 D4228D28 */  ldc1      $f2, %lo(D_E0088D28)($at)
 /* 38AF3C E008814C 46000021 */  cvt.d.s   $f0, $f0
 /* 38AF40 E0088150 46220002 */  mul.d     $f0, $f0, $f2
 /* 38AF44 E0088154 00000000 */  nop       
