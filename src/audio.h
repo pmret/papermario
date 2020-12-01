@@ -5,15 +5,6 @@
 
 #undef alHeapAlloc
 
-// Probably some libultra audio thing
-typedef struct UnkStructFor80053A18 {
-    /* 0x00 */ UNK_TYPE unk_00;
-    /* 0x04 */ s32 unk_04;
-    /* 0x08 */ char unk_08[2];
-    /* 0x0A */ u16 unk_0A;
-    /* 0x0C */ s32 unk_0C;
-} UnkStructFor80053A18; // size unknown
-
 typedef struct UnkAl1 {
     /* 0x00 */ s16 unk_00;
     /* 0x02 */ char unk_02[2];
@@ -68,7 +59,7 @@ typedef struct UnkAlA9C {
     /* 0x018 */ s32 unk_18;
     /* 0x01C */ s32 unk_1C;
     /* 0x020 */ char unk_20[0xC];
-    /* 0x02C */ s32 unk_2C;
+    /* 0x02C */ s32* unk_2C;
     /* 0x030 */ char unk_30[0x6];
     /* 0x036 */ s16 unk_36;
     /* 0x038 */ char unk_38[0xE];
@@ -92,7 +83,7 @@ typedef struct UnkAl48 {
     /* 0x42 */ s8 unk_42;
     /* 0x43 */ s8 unk_43;
     /* 0x44 */ s8 unk_44;
-    /* 0x45 */ s8 unk_45;
+    /* 0x45 */ u8 unk_45;
     /* 0x46 */ char unk_46[2];
 } UnkAl48; // size = 0x48
 
@@ -225,6 +216,15 @@ typedef struct UnkAl834 {
     /* 0x10 */ char unk_10[0x824];
 } UnkAl834;
 
+// Probably some libultra audio thing
+typedef struct UnkStructFor80053A18 {
+    /* 0x00 */ UNK_TYPE unk_00;
+    /* 0x04 */ s32 unk_04;
+    /* 0x08 */ char unk_08[2];
+    /* 0x0A */ u16 unk_0A;
+    /* 0x0C */ s32 unk_0C;
+} UnkStructFor80053A18; // size unknown
+
 typedef struct {
     /* 0x000 */ char unk_000[8];
     /* 0x008 */ s32 unk_008;
@@ -261,8 +261,10 @@ void func_80053654(UnkAl19E0*);
 void func_80053A18(UnkStructFor80053A18* arg0);
 void func_80053A28(s32);
 void func_80053A98(s16 arg0, s32 arg1, s32 arg2);
-void func_80053BA8(s32);
+void func_80053BA8(UnkAl1*);
 void func_8005610C(void);
+void func_80056D78(u8, u16);
+void func_800576EC(u8, s32, s32);
 
 void al_LoadINIT(UnkAl19E0*, s32, ALHeap*);
 s32 al_CopyFileTableEntry(u16 arg0, s32 arg1, s32* arg2);

@@ -277,9 +277,21 @@ void func_800535C0(void) {
 
 INCLUDE_ASM(void, "code_2e230_len_2190", func_80053654, UnkAl19E0* arg0);
 
-INCLUDE_ASM(s32, "code_2e230_len_2190", func_80053888);
+void func_80053888(UnkAl48* arg0, s32 arg1) { // type may be wrong but it seems good
+    if (arg0->unk_45 != 0) {
+        arg0->unk_1C = 0;
+        arg0->unk_42 = 1;
+        arg0->unk_43 = 0;
+        func_800576EC(arg1, 0, 0xB8);
+    }
+}
 
-INCLUDE_ASM(s32, "code_2e230_len_2190", func_800538C4);
+void func_800538C4(UnkAl48* arg0, s32 arg1) { // type may be wrong but it seems good
+    arg0->unk_1C = 0;
+    arg0->unk_42 = 1;
+    arg0->unk_43 = 0;
+    func_800576EC(arg1, 0, 0xB8);
+}
 
 INCLUDE_ASM(s32, "code_2e230_len_2190", func_800538F8);
 
@@ -293,7 +305,9 @@ void func_80053A18(UnkStructFor80053A18* arg0) {
 
 INCLUDE_ASM(void, "code_2e230_len_2190", func_80053A28, s32 arg0);
 
-INCLUDE_ASM(void, "code_2e230_len_2190", func_80053A98, s16 arg0, s32 arg1, s32 arg2);
+void func_80053A98(s16 arg0, s32 arg1, s32 arg2) {
+    func_80056D78(arg0, (u32) ((u16)arg1 * arg2) >> 15);
+}
 
 void func_80053AC8(UnkAl1* arg0) {
     if (arg0->unk_0A == 0) {
@@ -310,9 +324,33 @@ void func_80053AEC(UnkAl1* arg0, s16 arg1) {
     arg0->unk_14 = 0;
 }
 
-INCLUDE_ASM(s32, "code_2e230_len_2190", func_80053B04);
+void func_80053B04(UnkAl1 *arg0, u32 arg1, s16 arg2) {
+    s16 temp_a0;
+    s32 temp_v1;
 
-INCLUDE_ASM(void, "code_2e230_len_2190", func_80053BA8, s32 arg0);
+    if (arg1 - 250 <= 99750) {
+        temp_a0 = (s32)(arg1 * 1000) / 5750;
+        temp_v1 = (arg2 << 16) - arg0->unk_10;
+
+        arg0->unk_18 = arg2;
+        arg0->unk_1A = temp_a0;
+        arg0->unk_14 = temp_v1 / temp_a0;
+    } else {
+        arg0->unk_1A = 0;
+        arg0->unk_14 = 0;
+    }
+}
+
+void func_80053BA8(UnkAl1 *arg0) {
+    arg0->unk_1A--;
+
+    if (arg0->unk_1A != 0) {
+        arg0->unk_10 += arg0->unk_14;
+    } else {
+        arg0->unk_14 = 0;
+        arg0->unk_10 = arg0->unk_18 << 16;
+    }
+}
 
 INCLUDE_ASM(s32, "code_2e230_len_2190", func_80053BE8);
 
@@ -364,7 +402,10 @@ INCLUDE_ASM(s32, "code_2e230_len_2190", func_800549F8);
 
 INCLUDE_ASM(s32, "code_2e230_len_2190", func_80054AA0);
 
-INCLUDE_ASM(s32, "code_2e230_len_2190", func_80054C4C);
+s32 func_80054C4C(s32 arg0, s32 arg1) {
+    al_LoadBank(arg0, D_8009A5C0->unk_1310[arg1], arg1, 1);
+    return 0;
+}
 
 INCLUDE_ASM(s32, "code_2e230_len_2190", func_80054C84);
 
