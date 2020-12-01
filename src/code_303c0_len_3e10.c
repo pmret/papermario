@@ -227,11 +227,10 @@ INCLUDE_ASM(s32, "code_303c0_len_3e10", func_80057F20);
 
 void* alHeapAlloc(ALHeap *heap, s32 arg1, s32 size) {
     void* ret = NULL;
-    u8* prevCur = heap->cur;
-    u8* newCur = &prevCur[ALIGN16(arg1 * size)];
+    u8* newCur = &heap->cur[ALIGN16(arg1 * size)];
 
     if (&heap->base[heap->len] >= newCur) {
-        ret = prevCur;
+        ret = heap->cur;
         heap->cur = newCur;
     }
     return ret;
