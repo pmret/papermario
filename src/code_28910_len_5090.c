@@ -1,4 +1,4 @@
-#include "code_28910_len_5090.h"
+#include "audio.h"
 
 INCLUDE_ASM(s32, "code_28910_len_5090", func_8004D510);
 
