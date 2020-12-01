@@ -328,7 +328,7 @@ void func_80053B04(UnkAl1 *arg0, u32 arg1, s16 arg2) {
     s16 temp_a0;
     s32 temp_v1;
 
-    if (arg1 - 250 <= 99750) {
+    if (arg1 >= 250 && arg1 <= 100000) {
         temp_a0 = (s32)(arg1 * 1000) / 5750;
         temp_v1 = (arg2 << 16) - arg0->unk_10;
 
