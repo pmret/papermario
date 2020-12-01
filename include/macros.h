@@ -10,6 +10,8 @@
 #define INCLUDE_ASM(TYPE, FOLDER, NAME, ARGS...)
 #endif
 
+#define ALIGN16(val) (((val) + 0xF) & ~0xF)
+
 #define ARRAY_COUNT(arr) (s32)(sizeof(arr) / sizeof(arr[0]))
 #define ARRAY_COUNTU(arr) (u32)(sizeof(arr) / sizeof(arr[0]))
 

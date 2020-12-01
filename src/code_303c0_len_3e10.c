@@ -1,7 +1,8 @@
 #include "common.h"
 
+#include "audio.h"
+
 // TODO: rodata
-extern s32 D_80078DB0;
 extern u16 D_80078DB4;
 
 INCLUDE_ASM(s32, "code_303c0_len_3e10", al_LoadBKHeaders);
@@ -224,8 +225,17 @@ INCLUDE_ASM(s32, "code_303c0_len_3e10", func_80057ED0);
 
 INCLUDE_ASM(s32, "code_303c0_len_3e10", func_80057F20);
 
-#undef alHeapAlloc
-INCLUDE_ASM(void, "code_303c0_len_3e10", alHeapAlloc, u8* file, s32 line, ALHeap* hp, s32 num, s32 size);
+void* alHeapAlloc(ALHeap *heap, s32 arg1, s32 size) {
+    void* ret = NULL;
+    u8* prevCur = heap->cur;
+    u8* newCur = &prevCur[ALIGN16(arg1 * size)];
+
+    if (&heap->base[heap->len] >= newCur) {
+        ret = prevCur;
+        heap->cur = newCur;
+    }
+    return ret;
+}
 
 INCLUDE_ASM(s32, "code_303c0_len_3e10", func_80057FD8);
 
