@@ -7,6 +7,7 @@ options:
   ld_o_replace_extension: False
   ld_addrs_header: include/ld_addrs.h
   extensions: splat_ext
+  symbol_debug_info: False
 segments:
   - name: header
     type: header
@@ -266,7 +267,7 @@ segments:
     - [0xFBE10, c]
     - [0xfe0b0, c, code_fe0b0_len_5a0]
     - [0xFE650, .data, code_e79b0_len_1920]
-    - [0xFE660, bin]
+    - [0xFE660, data, si]
     - [0xFE730, .rodata, code_e79b0_len_1920]
   - [0xFE748, bin] # rodata chunk for above overlay; here to avoid the 0x10 alignment
   - type: code

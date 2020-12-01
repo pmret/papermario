@@ -62,8 +62,8 @@ glabel func_80240610_A16830
 /* A16910 802406F0 24637FFF */  addiu     $v1, $v1, 0x7fff
 .L802406F4:
 /* A16914 802406F4 000313C3 */  sra       $v0, $v1, 0xf
-/* A16918 802406F8 3C018024 */  lui       $at, 0x8024
-/* A1691C 802406FC D4224DE8 */  ldc1      $f2, 0x4de8($at)
+/* A16918 802406F8 3C018024 */  lui       $at, %hi(pause_tabs_draw_items)
+/* A1691C 802406FC D4224DE8 */  ldc1      $f2, %lo(pause_tabs_draw_items)($at)
 /* A16920 80240700 44820000 */  mtc1      $v0, $f0
 /* A16924 80240704 00000000 */  nop       
 /* A16928 80240708 46800021 */  cvt.d.w   $f0, $f0

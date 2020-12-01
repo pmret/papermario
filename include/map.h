@@ -257,5 +257,6 @@ Area gAreas[29];
 /// Lists the songs that are forced to use the variation determined by `map.songVariation & 1`.
 /// @see get_song_variation_override_for_cur_map
 extern SongID gSongsUsingVariationFlag[6];
+extern s16 D_8014F738;
 
 #endif

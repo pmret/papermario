@@ -12,7 +12,7 @@ glabel func_80242E84_C88934
 /* C88950 80242EA0 46800020 */  cvt.s.w   $f0, $f0
 /* C88954 80242EA4 8FBF0010 */  lw        $ra, 0x10($sp)
 /* C88958 80242EA8 24020002 */  addiu     $v0, $zero, 2
-/* C8895C 80242EAC 3C018011 */  lui       $at, 0x8011
-/* C88960 80242EB0 E420F054 */  swc1      $f0, -0xfac($at)
+/* C8895C 80242EAC 3C018011 */  lui       $at, %hi(gPlayerStatus+0x8C)
+/* C88960 80242EB0 E420F054 */  swc1      $f0, %lo(gPlayerStatus+0x8C)($at)
 /* C88964 80242EB4 03E00008 */  jr        $ra
 /* C88968 80242EB8 27BD0018 */   addiu    $sp, $sp, 0x18

@@ -10,8 +10,8 @@ glabel switch_to_player
 /* 1713BC 80242ADC AFB20018 */  sw        $s2, 0x18($sp)
 /* 1713C0 80242AE0 AFB10014 */  sw        $s1, 0x14($sp)
 /* 1713C4 80242AE4 8E1200D8 */  lw        $s2, 0xd8($s0)
-/* 1713C8 80242AE8 3C02800E */  lui       $v0, 0x800e
-/* 1713CC 80242AEC 8C42C4DC */  lw        $v0, -0x3b24($v0)
+/* 1713C8 80242AE8 3C02800E */  lui       $v0, %hi(gBattleStatus+0x46C)
+/* 1713CC 80242AEC 8C42C4DC */  lw        $v0, %lo(gBattleStatus+0x46C)($v0)
 /* 1713D0 80242AF0 8E1100DC */  lw        $s1, 0xdc($s0)
 /* 1713D4 80242AF4 14400026 */  bnez      $v0, .L80242B90
 /* 1713D8 80242AF8 3C03FFF7 */   lui      $v1, 0xfff7

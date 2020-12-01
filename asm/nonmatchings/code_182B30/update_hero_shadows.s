@@ -3,8 +3,8 @@
 
 glabel update_hero_shadows
 /* 18488C 80255FAC 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* 184890 80255FB0 3C05800E */  lui       $a1, 0x800e
-/* 184894 80255FB4 8CA5C14C */  lw        $a1, -0x3eb4($a1)
+/* 184890 80255FB0 3C05800E */  lui       $a1, %hi(gBattleStatus+0xDC)
+/* 184894 80255FB4 8CA5C14C */  lw        $a1, %lo(gBattleStatus+0xDC)($a1)
 /* 184898 80255FB8 AFBF0010 */  sw        $ra, 0x10($sp)
 /* 18489C 80255FBC 0C09566F */  jal       update_actor_shadow
 /* 1848A0 80255FC0 24040001 */   addiu    $a0, $zero, 1

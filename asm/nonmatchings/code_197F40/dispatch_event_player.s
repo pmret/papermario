@@ -5,8 +5,8 @@ glabel dispatch_event_player
 /* 19FF38 80271658 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 19FF3C 8027165C 2405000A */  addiu     $a1, $zero, 0xa
 /* 19FF40 80271660 AFB00010 */  sw        $s0, 0x10($sp)
-/* 19FF44 80271664 3C10800E */  lui       $s0, 0x800e
-/* 19FF48 80271668 8E10C148 */  lw        $s0, -0x3eb8($s0)
+/* 19FF44 80271664 3C10800E */  lui       $s0, %hi(gBattleStatus+0xD8)
+/* 19FF48 80271668 8E10C148 */  lw        $s0, %lo(gBattleStatus+0xD8)($s0)
 /* 19FF4C 8027166C AFBF001C */  sw        $ra, 0x1c($sp)
 /* 19FF50 80271670 AFB20018 */  sw        $s2, 0x18($sp)
 /* 19FF54 80271674 AFB10014 */  sw        $s1, 0x14($sp)

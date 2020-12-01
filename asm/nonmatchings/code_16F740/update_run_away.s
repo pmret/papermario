@@ -10,8 +10,8 @@ glabel update_run_away
 /* 1737F4 80244F14 3C158011 */  lui       $s5, %hi(gPlayerData)
 /* 1737F8 80244F18 26B5F290 */  addiu     $s5, $s5, %lo(gPlayerData)
 /* 1737FC 80244F1C AFB40028 */  sw        $s4, 0x28($sp)
-/* 173800 80244F20 3C14800E */  lui       $s4, 0x800e
-/* 173804 80244F24 2694C4DC */  addiu     $s4, $s4, -0x3b24
+/* 173800 80244F20 3C14800E */  lui       $s4, %hi(gBattleStatus+0x46C)
+/* 173804 80244F24 2694C4DC */  addiu     $s4, $s4, %lo(gBattleStatus+0x46C)
 /* 173808 80244F28 AFBF0030 */  sw        $ra, 0x30($sp)
 /* 17380C 80244F2C AFB30024 */  sw        $s3, 0x24($sp)
 /* 173810 80244F30 AFB20020 */  sw        $s2, 0x20($sp)
@@ -121,8 +121,8 @@ glabel update_run_away
 .L802450BC:
 /* 17399C 802450BC 24020002 */  addiu     $v0, $zero, 2
 .L802450C0:
-/* 1739A0 802450C0 3C01800E */  lui       $at, 0x800e
-/* 1739A4 802450C4 AC22C4DC */  sw        $v0, -0x3b24($at)
+/* 1739A0 802450C0 3C01800E */  lui       $at, %hi(gBattleStatus+0x46C)
+/* 1739A4 802450C4 AC22C4DC */  sw        $v0, %lo(gBattleStatus+0x46C)($at)
 /* 1739A8 802450C8 0809146D */  j         .L802451B4
 /* 1739AC 802450CC 00000000 */   nop      
 .L802450D0:
@@ -188,8 +188,8 @@ glabel update_run_away
 /* 173A8C 802451AC 3C01802A */  lui       $at, 0x802a
 /* 173A90 802451B0 AC24F260 */  sw        $a0, -0xda0($at)
 .L802451B4:
-/* 173A94 802451B4 3C03800E */  lui       $v1, 0x800e
-/* 173A98 802451B8 8C63C4DC */  lw        $v1, -0x3b24($v1)
+/* 173A94 802451B4 3C03800E */  lui       $v1, %hi(gBattleStatus+0x46C)
+/* 173A98 802451B8 8C63C4DC */  lw        $v1, %lo(gBattleStatus+0x46C)($v1)
 /* 173A9C 802451BC 2402000A */  addiu     $v0, $zero, 0xa
 /* 173AA0 802451C0 14620043 */  bne       $v1, $v0, .L802452D0
 /* 173AA4 802451C4 2402000B */   addiu    $v0, $zero, 0xb
@@ -258,11 +258,11 @@ glabel update_run_away
 /* 173B90 802452B0 0C08F847 */  jal       func_8023E11C
 /* 173B94 802452B4 00000000 */   nop      
 /* 173B98 802452B8 2402000B */  addiu     $v0, $zero, 0xb
-/* 173B9C 802452BC 3C01800E */  lui       $at, 0x800e
-/* 173BA0 802452C0 AC22C4DC */  sw        $v0, -0x3b24($at)
+/* 173B9C 802452BC 3C01800E */  lui       $at, %hi(gBattleStatus+0x46C)
+/* 173BA0 802452C0 AC22C4DC */  sw        $v0, %lo(gBattleStatus+0x46C)($at)
 .L802452C4:
-/* 173BA4 802452C4 3C03800E */  lui       $v1, 0x800e
-/* 173BA8 802452C8 8C63C4DC */  lw        $v1, -0x3b24($v1)
+/* 173BA4 802452C4 3C03800E */  lui       $v1, %hi(gBattleStatus+0x46C)
+/* 173BA8 802452C8 8C63C4DC */  lw        $v1, %lo(gBattleStatus+0x46C)($v1)
 /* 173BAC 802452CC 2402000B */  addiu     $v0, $zero, 0xb
 .L802452D0:
 /* 173BB0 802452D0 14620011 */  bne       $v1, $v0, .L80245318
@@ -270,8 +270,8 @@ glabel update_run_away
 /* 173BB8 802452D8 96A202A8 */  lhu       $v0, 0x2a8($s5)
 /* 173BBC 802452DC 24420001 */  addiu     $v0, $v0, 1
 /* 173BC0 802452E0 A6A202A8 */  sh        $v0, 0x2a8($s5)
-/* 173BC4 802452E4 3C02800E */  lui       $v0, 0x800e
-/* 173BC8 802452E8 8C42C074 */  lw        $v0, -0x3f8c($v0)
+/* 173BC4 802452E4 3C02800E */  lui       $v0, %hi(gBattleStatus+0x4)
+/* 173BC8 802452E8 8C42C074 */  lw        $v0, %lo(gBattleStatus+0x4)($v0)
 /* 173BCC 802452EC 00431024 */  and       $v0, $v0, $v1
 /* 173BD0 802452F0 14400007 */  bnez      $v0, .L80245310
 /* 173BD4 802452F4 24020008 */   addiu    $v0, $zero, 8
@@ -285,8 +285,8 @@ glabel update_run_away
 /* 173BF0 80245310 0C090464 */  jal       func_80241190
 /* 173BF4 80245314 24040020 */   addiu    $a0, $zero, 0x20
 .L80245318:
-/* 173BF8 80245318 3C03800E */  lui       $v1, 0x800e
-/* 173BFC 8024531C 8C63C4DC */  lw        $v1, -0x3b24($v1)
+/* 173BF8 80245318 3C03800E */  lui       $v1, %hi(gBattleStatus+0x46C)
+/* 173BFC 8024531C 8C63C4DC */  lw        $v1, %lo(gBattleStatus+0x46C)($v1)
 /* 173C00 80245320 24020003 */  addiu     $v0, $zero, 3
 /* 173C04 80245324 10620005 */  beq       $v1, $v0, .L8024533C
 /* 173C08 80245328 24020004 */   addiu    $v0, $zero, 4
@@ -324,8 +324,8 @@ glabel update_run_away
 .L802453A4:
 /* 173C84 802453A4 24020004 */  addiu     $v0, $zero, 4
 .L802453A8:
-/* 173C88 802453A8 3C01800E */  lui       $at, 0x800e
-/* 173C8C 802453AC AC22C4DC */  sw        $v0, -0x3b24($at)
+/* 173C88 802453A8 3C01800E */  lui       $at, %hi(gBattleStatus+0x46C)
+/* 173C8C 802453AC AC22C4DC */  sw        $v0, %lo(gBattleStatus+0x46C)($at)
 /* 173C90 802453B0 08091505 */  j         .L80245414
 /* 173C94 802453B4 00000000 */   nop      
 .L802453B8:

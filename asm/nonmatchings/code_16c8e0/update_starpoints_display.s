@@ -316,8 +316,8 @@ glabel update_starpoints_display
 /* 16F128 80240848 3C01802A */  lui       $at, 0x802a
 /* 16F12C 8024084C C422DA44 */  lwc1      $f2, -0x25bc($at)
 /* 16F130 80240850 468010A0 */  cvt.s.w   $f2, $f2
-/* 16F134 80240854 3C02800E */  lui       $v0, 0x800e
-/* 16F138 80240858 8C42C074 */  lw        $v0, -0x3f8c($v0)
+/* 16F134 80240854 3C02800E */  lui       $v0, %hi(gBattleStatus+0x4)
+/* 16F138 80240858 8C42C074 */  lw        $v0, %lo(gBattleStatus+0x4)($v0)
 /* 16F13C 8024085C 46001080 */  add.s     $f2, $f2, $f0
 /* 16F140 80240860 3C12802A */  lui       $s2, 0x802a
 /* 16F144 80240864 8E52DA40 */  lw        $s2, -0x25c0($s2)

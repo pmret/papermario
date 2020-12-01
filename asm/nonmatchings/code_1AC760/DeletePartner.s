@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel DeletePartner
-/* 1AF088 802807A8 3C04800E */  lui       $a0, 0x800e
-/* 1AF08C 802807AC 8C84C14C */  lw        $a0, -0x3eb4($a0)
+/* 1AF088 802807A8 3C04800E */  lui       $a0, %hi(gBattleStatus+0xDC)
+/* 1AF08C 802807AC 8C84C14C */  lw        $a0, %lo(gBattleStatus+0xDC)($a0)
 /* 1AF090 802807B0 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 1AF094 802807B4 AFBF0010 */  sw        $ra, 0x10($sp)
 /* 1AF098 802807B8 0C0902EF */  jal       delete_actor

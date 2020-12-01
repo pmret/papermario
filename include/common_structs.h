@@ -12,15 +12,25 @@ struct ScriptInstance;
 typedef ApiStatus(*ApiFunc)(struct ScriptInstance*, s32);
 
 typedef struct Vec2b {
+    /* 0x00 */ s8 x;
+    /* 0x01 */ s8 y;
+} Vec2b; // size = 0x02
+
+typedef struct Vec2bu {
     /* 0x00 */ u8 x;
     /* 0x01 */ u8 y;
-} Vec2b; // size = 0x02
+} Vec2bu; // size = 0x02
 
 typedef struct Vec3f {
     /* 0x00 */ f32 x;
     /* 0x04 */ f32 y;
     /* 0x08 */ f32 z;
 } Vec3f; // size = 0x0C
+
+typedef struct Vec2s {
+    /* 0x00 */ s16 x;
+    /* 0x02 */ s16 y;
+} Vec2s; // size = 0x04
 
 typedef struct Vec3s {
     /* 0x00 */ s16 x;
@@ -247,7 +257,7 @@ typedef struct ScriptInstance {
     /* 0x144 */ ScriptID id;
     /* 0x148 */ union {
         s32 enemyID;
-        s32 actorID;
+        ActorID actorID;
         struct Enemy* enemy; ///< For overworld scripts owned by an Npc
         struct Actor* actor; ///< For battle scripts
     } owner1;                ///< Initially -1
@@ -322,7 +332,9 @@ typedef struct MusicPlayer {
     /* 0x18 */ s32 unk_18;
     /* 0x1C */ s32 unk_1C;
     /* 0x20 */ s32 unk_20;
-    /* 0x24 */ char unk_24[12];
+    /* 0x24 */ s32 unk_24;
+    /* 0x28 */ s32 unk_28;
+    /* 0x2C */ s32 unk_2C;
 } MusicPlayer; // size = 0x30
 
 typedef struct MenuIcon {
@@ -512,7 +524,9 @@ typedef struct BattleStatus {
     /* 0x048 */ u8 currentSubmenu;
     /* 0x049 */ char unk_49[10];
     /* 0x053 */ u8 stratsLastCursorPos;
-    /* 0x054 */ char unk_54[32];
+    /* 0x054 */ char unk_54[28];
+    /* 0x070 */ s16 unk_70;
+    /* 0x072 */ char unk_72[2];
     /* 0x074 */ s32 unk_74;
     /* 0x078 */ u8 totalStarPoints;
     /* 0x079 */ u8 pendingStarPoints; /* how many to add */
@@ -531,9 +545,12 @@ typedef struct BattleStatus {
     /* 0x089 */ u8 hpDrainCount;
     /* 0x08A */ char unk_8A;
     /* 0x08B */ u8 hustleTurns; /* numTurns from hustle drink, normally 0 */
-    /* 0x08C */ char unk_8C[2];
+    /* 0x08C */ char unk_8C;
+    /* 0x08D */ s8 unk_8D;
     /* 0x08E */ u8 initialEnemyCount; /* used for SP award bonus */
-    /* 0x08F */ char unk_8F[7];
+    /* 0x08F */ char unk_8F[3];
+    /* 0x092 */ s8 unk_92;
+    /* 0x093 */ char unk_93[3];
     /* 0x096 */ s8 hammerCharge;
     /* 0x097 */ s8 jumpCharge;
     /* 0x098 */ char unk_98;
@@ -585,7 +602,7 @@ typedef struct BattleStatus {
     /* 0x197 */ u8 targetHomeIndex; /* some sort of home idnex used for target list construction */
     /* 0x198 */ u8 powerBounceCounter;
     /* 0x199 */ s8 wasStatusInflicted; /* during last attack */
-    /* 0x19A */ s8 unk_19A;
+    /* 0x19A */ u8 unk_19A;
     /* 0x19B */ char unk_19B[5];
     /* 0x1A0 */ s16 currentTargetID; /* selected? */
     /* 0x1A2 */ u8 currentTargetPart; /* selected? */
@@ -612,7 +629,8 @@ typedef struct BattleStatus {
     /* 0x330 */ s32 pushInputBuffer[64];
     /* 0x430 */ u8 holdInputBufferPos;
     /* 0x431 */ u8 inputBufferPos;
-    /* 0x432 */ char unk_432[2];
+    /* 0x432 */ s8 unk_432;
+    /* 0x433 */ char unk_433;
     /* 0x434 */ s32 unk_434;
     /* 0x438 */ FGModelData* foregroundModelData;
     /* 0x43C */ BattleStatusUnk* unk_43C;
@@ -660,7 +678,7 @@ typedef struct StaticActorData {
     /* 0x1E */ u8 powerBounceChance;
     /* 0x1F */ u8 coinReward;
     /* 0x20 */ u8 size[2];
-    /* 0x22 */ u8 hpBarOffset[2];
+    /* 0x22 */ Vec2b hpBarOffset;
     /* 0x24 */ u8 statusIconOffset[2];
     /* 0x26 */ u8 statusMessageOffset[2];
 } StaticActorData; // size = 0x28
@@ -1027,18 +1045,18 @@ typedef struct ActorPart {
     /* 0x08 */ struct StaticActorPart* staticData;
     /* 0x0C */ struct ActorPart* nextPart;
     /* 0x10 */ struct ActorPartMovement* movement;
-    /* 0x14 */ s16 partOffset[3];
-    /* 0x1A */ s16 visualOffset[3];
+    /* 0x14 */ Vec3s partOffset;
+    /* 0x1A */ Vec3s visualOffset;
     /* 0x20 */ Vec3f partOffsetFloat;
     /* 0x2C */ Vec3f absolutePosition;
     /* 0x38 */ Vec3f rotation;
-    /* 0x44 */ s16 rotationPivotOffset[3];
+    /* 0x44 */ Vec3s rotationPivotOffset;
     /* 0x4A */ char unk_4A[2];
-    /* 0x4C */ f32 scale[3];
+    /* 0x4C */ Vec3f scale;
     /* 0x58 */ Vec3f currentPos;
     /* 0x64 */ f32 yaw;
     /* 0x68 */ s16 unkOffset[2];
-    /* 0x6C */ s16 targetOffset[2];
+    /* 0x6C */ Vec2s targetOffset;
     /* 0x70 */ s16 unk_70;
     /* 0x72 */ u8 size[2];
     /* 0x74 */ u8 verticalStretch;
@@ -1046,9 +1064,9 @@ typedef struct ActorPart {
     /* 0x78 */ u32* defenseTable;
     /* 0x7C */ s32 eventFlags;
     /* 0x80 */ s32 partFlags3;
-    /* 0x84 */ char unk_84[4];
+    /* 0x84 */ s32 unk_84;
     /* 0x88 */ s32 currentAnimation;
-    /* 0x8C */ char unk_8C[4];
+    /* 0x8C */ s32 unk_8C;
     /* 0x90 */ f32 animationRate;
     /* 0x94 */ u32* idleAnimations;
     /* 0x98 */ s16 opacity;
@@ -1255,20 +1273,25 @@ typedef struct Actor {
     /* 0x138 */ Vec3f homePos;
     /* 0x144 */ Vec3f currentPos;
     /* 0x150 */ Vec3s headOffset;
-    /* 0x156 */ s16 healthBarPosition[3];
-    /* 0x15C */ f32 rotation[3];
-    /* 0x168 */ s16 rotationPivotOffset[3];
+    /* 0x156 */ Vec3s healthBarPosition;
+    /* 0x15C */ Vec3f rotation;
+    /* 0x168 */ Vec3s rotationPivotOffset;
     /* 0x16E */ char unk_16E[2];
-    /* 0x170 */ f32 scale[3];
-    /* 0x17C */ f32 scaleModifier[3]; /* multiplies normal scale factors componentwise */
+    /* 0x170 */ Vec3f scale;
+    /* 0x17C */ Vec3f scaleModifier; /* multiplies normal scale factors componentwise */
     /* 0x188 */ f32 scalingFactor;
     /* 0x18C */ f32 yaw;
-    /* 0x190 */ Vec2b size;
+    /* 0x190 */ Vec2bu size;
     /* 0x192 */ s16 actorID;
-    /* 0x194 */ char unk_194[8];
+    /* 0x194 */ s8 unk_194;
+    /* 0x195 */ s8 unk_195;
+    /* 0x196 */ s8 unk_196;
+    /* 0x197 */ s8 unk_197;
+    /* 0x198 */ Vec2b unk_198;
+    /* 0x19A */ char unk_19A[2];
     /* 0x19C */ s32 actorTypeData1[6]; /* 4 = jump sound */
     /* 0x1B4 */ s16 actorTypeData1b[2];
-    /* 0x1B8 */ u8 currentHP;
+    /* 0x1B8 */ s8 currentHP;
     /* 0x1B9 */ s8 maxHP;
     /* 0x1BA */ char unk_1BA[2];
     /* 0x1BC */ u8 hpFraction; /* used to render HP bar */
@@ -1300,7 +1323,7 @@ typedef struct Actor {
     /* 0x208 */ s8 unk_208;
     /* 0x209 */ char unk_209[3];
     /* 0x20C */ u32* statusTable;
-    /* 0x210 */ u8 debuff;
+    /* 0x210 */ Debuff debuff;
     /* 0x211 */ s8 debuffDuration;
     /* 0x212 */ s8 staticStatus; /* 0B = yes */
     /* 0x213 */ s8 staticDuration;

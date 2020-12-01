@@ -6,7 +6,7 @@ INCLUDE_ASM(void, "code_cd180_len_38f0", func_80137D88, s32 arg0, f32 arg1);
 
 INCLUDE_ASM(void, "code_cd180_len_38f0", func_80137DA4, s32 arg0, f32 arg1);
 
-INCLUDE_ASM(s32, "code_cd180_len_38f0", func_80137DC0);
+INCLUDE_ASM(void, "code_cd180_len_38f0", func_80137DC0, s32 arg0, f32* arg1, f32* arg2);
 
 INCLUDE_ASM(s32, "code_cd180_len_38f0", func_80137E10, s32 arg0, u8 arg1, u8 arg2, u8 arg3);
 

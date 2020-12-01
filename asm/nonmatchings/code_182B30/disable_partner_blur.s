@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel disable_partner_blur
-/* 182F48 80254668 3C04800E */  lui       $a0, 0x800e
-/* 182F4C 8025466C 8C84C14C */  lw        $a0, -0x3eb4($a0)
+/* 182F48 80254668 3C04800E */  lui       $a0, %hi(gBattleStatus+0xDC)
+/* 182F4C 8025466C 8C84C14C */  lw        $a0, %lo(gBattleStatus+0xDC)($a0)
 /* 182F50 80254670 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 182F54 80254674 AFBF0010 */  sw        $ra, 0x10($sp)
 /* 182F58 80254678 0C095157 */  jal       disable_actor_blur

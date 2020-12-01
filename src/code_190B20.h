@@ -7,8 +7,8 @@
 void player_create_target_list(Actor* actor);
 void enemy_create_target_list(Actor* actor);
 
-void set_actor_yaw(s32 actorId, s32 yaw);
-void set_part_yaw(s32 actorID, s32 partIndex, s32 value);
+void set_actor_yaw(ActorID actorID, s32 yaw);
+void set_part_yaw(ActorID actorID, s32 partIndex, s32 value);
 
 ActorPart* get_actor_part(Actor* actor, s32 partIndex);
 
@@ -19,8 +19,8 @@ void remove_actor_decoration(Actor* actor, s32 decorationIndex);
 
 s32 heroes_is_ability_active(Actor* actor, Ability ability);
 
-void create_part_shadow(s32 actorId, s32 partIndex);
-void remove_part_shadow(s32 actorId, s32 partIndex);
+void create_part_shadow(ActorID actorID, s32 partIndex);
+void remove_part_shadow(ActorID actorID, s32 partIndex);
 void create_part_shadow_by_ref(UNK_TYPE arg0, ActorPart* part); // arg0 unused
 
 #endif

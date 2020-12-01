@@ -44,13 +44,13 @@ INCLUDE_ASM(s32, "code_190B20", set_animation);
 
 INCLUDE_ASM(s32, "code_190B20", func_80263E08);
 
-INCLUDE_ASM(s32, "code_190B20", set_animation_rate);
+INCLUDE_ASM(void, "code_190B20", set_animation_rate, ActorID actorID, s32 partIndex, f32 rate);
 
-void set_actor_yaw(s32 actorId, s32 yaw) {
-    get_actor(actorId)->yaw = yaw;
+void set_actor_yaw(ActorID actorID, s32 yaw) {
+    get_actor(actorID)->yaw = yaw;
 }
 
-void set_part_yaw(s32 actorID, s32 partIndex, s32 value) {
+void set_part_yaw(ActorID actorID, s32 partIndex, s32 value) {
     get_actor_part(get_actor(actorID), partIndex)->yaw = value;
 }
 
@@ -124,9 +124,9 @@ INCLUDE_ASM(s32, "code_190B20", lookup_status_duration_mod); // exactly (?) the 
 INCLUDE_ASM(s32, "code_190B20", inflict_status);
 
 s32 inflict_partner_ko(Actor* target, s32 statusTypeKey, s32 duration) {
-    if (statusTypeKey == Status_DAZE) {
+    if (statusTypeKey == Debuff_DAZE) {
         if (statusTypeKey != target->koStatus) {
-            inflict_status(target, Status_DAZE);
+            inflict_status(target, Debuff_DAZE);
             play_sound(0x2107);
         } else {
             target->koDuration += duration;
@@ -333,16 +333,16 @@ s32 heroes_is_ability_active(Actor* actor, Ability ability) {
     return hasAbility;
 }
 
-void create_part_shadow(s32 actorId, s32 partIndex) {
-    ActorPart* part = get_actor_part(get_actor(actorId), partIndex);
+void create_part_shadow(ActorID actorID, s32 partIndex) {
+    ActorPart* part = get_actor_part(get_actor(actorID), partIndex);
 
     part->flags &= ~4;
     part->shadow = create_shadow_type(0, part->currentPos.x, part->currentPos.y, part->currentPos.z);
     part->shadowScale = part->size[0] / 24.0;
 }
 
-void remove_part_shadow(s32 actorId, s32 partIndex) {
-    ActorPart* part = get_actor_part(get_actor(actorId), partIndex);
+void remove_part_shadow(ActorID actorID, s32 partIndex) {
+    ActorPart* part = get_actor_part(get_actor(actorID), partIndex);
 
     part->flags |= 4;
     func_80112328(part->shadow);

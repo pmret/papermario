@@ -13,8 +13,8 @@ glabel func_80242074_D3C644
 /* D3C664 80242094 0C00EAD2 */  jal       get_npc_safe
 /* D3C668 80242098 2404FFFC */   addiu    $a0, $zero, -4
 /* D3C66C 8024209C 2410FFFF */  addiu     $s0, $zero, -1
-/* D3C670 802420A0 3C038016 */  lui       $v1, 0x8016
-/* D3C674 802420A4 8463A568 */  lh        $v1, -0x5a98($v1)
+/* D3C670 802420A0 3C038016 */  lui       $v1, %hi(gCollisionStatus+0x18)
+/* D3C674 802420A4 8463A568 */  lh        $v1, %lo(gCollisionStatus+0x18)($v1)
 /* D3C678 802420A8 04600025 */  bltz      $v1, .L80242140
 /* D3C67C 802420AC 0040202D */   daddu    $a0, $v0, $zero
 /* D3C680 802420B0 3C014130 */  lui       $at, 0x4130

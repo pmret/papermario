@@ -9,8 +9,8 @@ glabel draw_main_battle_ui
 /* 16D36C 8023EA8C AFB00010 */  sw        $s0, 0x10($sp)
 /* 16D370 8023EA90 3C10800E */  lui       $s0, %hi(gBattleState)
 /* 16D374 8023EA94 8E10C068 */  lw        $s0, %lo(gBattleState)($s0)
-/* 16D378 8023EA98 3C04800E */  lui       $a0, 0x800e
-/* 16D37C 8023EA9C 2484C4D0 */  addiu     $a0, $a0, -0x3b30
+/* 16D378 8023EA98 3C04800E */  lui       $a0, %hi(gBattleStatus+0x460)
+/* 16D37C 8023EA9C 2484C4D0 */  addiu     $a0, $a0, %lo(gBattleStatus+0x460)
 /* 16D380 8023EAA0 8C820000 */  lw        $v0, ($a0)
 /* 16D384 8023EAA4 12020005 */  beq       $s0, $v0, .L8023EABC
 /* 16D388 8023EAA8 0200182D */   daddu    $v1, $s0, $zero

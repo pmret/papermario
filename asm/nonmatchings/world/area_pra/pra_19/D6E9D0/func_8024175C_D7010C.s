@@ -22,8 +22,8 @@ glabel func_8024175C_D7010C
 /* D70150 802417A0 24040004 */  addiu     $a0, $zero, 4
 /* D70154 802417A4 0C00EABB */  jal       get_npc_unsafe
 /* D70158 802417A8 0040982D */   daddu    $s3, $v0, $zero
-/* D7015C 802417AC 3C018011 */  lui       $at, 0x8011
-/* D70160 802417B0 C422EFF0 */  lwc1      $f2, -0x1010($at)
+/* D7015C 802417AC 3C018011 */  lui       $at, %hi(gPlayerStatus+0x28)
+/* D70160 802417B0 C422EFF0 */  lwc1      $f2, %lo(gPlayerStatus+0x28)($at)
 /* D70164 802417B4 C6000038 */  lwc1      $f0, 0x38($s0)
 /* D70168 802417B8 4602003C */  c.lt.s    $f0, $f2
 /* D7016C 802417BC 00000000 */  nop       
