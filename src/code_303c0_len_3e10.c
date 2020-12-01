@@ -134,7 +134,7 @@ INCLUDE_ASM(s32, "code_303c0_len_3e10", func_800560A8);
 
 INCLUDE_ASM(s32, "code_303c0_len_3e10", func_800560BC);
 
-INCLUDE_ASM(s32, "code_303c0_len_3e10", func_8005610C);
+INCLUDE_ASM(void, "code_303c0_len_3e10", func_8005610C, void);
 
 INCLUDE_ASM(s32, "code_303c0_len_3e10", func_80056144);
 

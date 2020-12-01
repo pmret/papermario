@@ -1,4 +1,5 @@
 #include "common.h"
+#include "audio.h"
 
 INCLUDE_ASM(s32, "code_26840_len_20d0", func_8004B440);
 
@@ -8,7 +9,7 @@ INCLUDE_ASM(s32, "code_26840_len_20d0", func_8004B698);
 
 INCLUDE_ASM(s32, "code_26840_len_20d0", func_8004B6D8);
 
-INCLUDE_ASM(s32, "code_26840_len_20d0", func_8004B748);
+INCLUDE_ASM(void, "code_26840_len_20d0", func_8004B748, UnkAl6CC* arg0);
 
 INCLUDE_ASM(s32, "code_26840_len_20d0", func_8004B9E4);
 

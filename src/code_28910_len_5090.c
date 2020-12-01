@@ -1,6 +1,6 @@
 #include "audio.h"
 
-INCLUDE_ASM(s32, "code_28910_len_5090", func_8004D510);
+INCLUDE_ASM(void, "code_28910_len_5090", func_8004D510, UnkAlA9C* arg0);
 
 INCLUDE_ASM(s32, "code_28910_len_5090", func_8004D794);
 
