@@ -68,9 +68,6 @@ f32 clamp_angle(f32 theta);
 s32 sign(s32 value);
 s32 func_80055448(s32);
 s32 func_80055464(s32, s32);
-s32 func_800554A4(s32, s32);
-s32 func_800554E8(s32, s32);
-s32 func_800555E4(s32);
 void func_800561A4(s32);
 s32 osGetId();
 

@@ -33,7 +33,13 @@ INCLUDE_ASM(s16, "code_31650", func_80056D50);
 
 INCLUDE_ASM(s32, "code_31650", func_80056D5C);
 
+#ifdef NON_MATCHING
+void func_80056D78(u8 arg0, u16 arg1) {
+    D_80078E54->unk_20[arg0].unk_00 = arg1 & 0x7FFF;
+}
+#else
 INCLUDE_ASM(void, "code_31650", func_80056D78, u8 arg0, u16 arg1);
+#endif
 
 INCLUDE_ASM(s32, "code_31650", func_80056DA4);
 
@@ -85,7 +91,7 @@ INCLUDE_ASM(s32, "code_31650", func_80057E08);
 
 INCLUDE_ASM(s32, "code_31650", func_80057E5C);
 
-INCLUDE_ASM(s32, "code_31650", func_80057EB0);
+INCLUDE_ASM(void, "code_31650", func_80057EB0, void);
 
 INCLUDE_ASM(s32, "code_31650", func_80057ED0);
 

@@ -25,9 +25,20 @@ typedef struct UnkAl2 {
     /* 0x06 */ s8 unk_06;
 } UnkAl2;
 
+typedef struct UnkLen18 {
+    /* 0x00 */ s16 unk_00;
+    /* 0x02 */ char unk_02[0x2];
+    /* 0x04 */ s32 unk_04;
+    /* 0x08 */ s32 unk_08;
+    /* 0x0C */ s8 unk_0C;
+    /* 0x0D */ char unk_0D[0xB];
+} UnkLen18;
+
 typedef struct UnkAl0 {
     /* 0x00 */ char unk_00[0x18];
     /* 0x18 */ ALHeap* unk_18;
+    /* 0x1C */ char unk_1C[0x4];
+    /* 0x20 */ UnkLen18 unk_20[1]; // amt unknown
 } UnkAl0;
 
 typedef struct UnkAl6CC {
@@ -72,16 +83,18 @@ typedef struct UnkAlA9C {
 typedef struct UnkAl48 {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ s32 unk_04;
-    /* 0x08 */ char unk_08[4];
+    /* 0x08 */ s32 unk_08;
     /* 0x0C */ s16 unk_0C;
     /* 0x0E */ u8 unk_0E;
     /* 0x0F */ u8 unk_0F;
-    /* 0x10 */ s8 unk_10;
-    /* 0x11 */ char unk_11[0xB];
+    /* 0x10 */ u8 unk_10;
+    /* 0x11 */ char unk_11[0x3];
+    /* 0x14 */ s32 unk_14;
+    /* 0x18 */ char unk_18[0x4];
     /* 0x1C */ s32 unk_1C;
     /* 0x20 */ char unk_20[0x22];
-    /* 0x42 */ s8 unk_42;
-    /* 0x43 */ s8 unk_43;
+    /* 0x42 */ u8 unk_42;
+    /* 0x43 */ u8 unk_43;
     /* 0x44 */ s8 unk_44;
     /* 0x45 */ u8 unk_45;
     /* 0x46 */ char unk_46[2];
@@ -161,10 +174,10 @@ typedef struct UnkAl19E0 {
     /* 0x0038 */ s32 unk_38;
     /* 0x003C */ UnkAl19E0Sub* unk_3C;
     /* 0x0040 */ UnkAl19E0Sub2 unk_40[4];
-    /* 0x0050 */ s8 unk_50;
-    /* 0x0051 */ s8 unk_51;
-    /* 0x0052 */ s8 unk_52;
-    /* 0x0053 */ s8 unk_53;
+    /* 0x0050 */ u8 unk_50;
+    /* 0x0051 */ u8 unk_51;
+    /* 0x0052 */ u8 unk_52;
+    /* 0x0053 */ u8 unk_53;
     /* 0x0054 */ s32* unk_54;
     /* 0x0058 */ s32* unk_58;
     /* 0x005C */ s32* unk_5C;
@@ -211,11 +224,13 @@ typedef struct UnkAl19E0 {
 } UnkAl19E0; // size = 0x19E0
 
 typedef struct UnkAl834 {
-    /* 0x00 */ UnkAl19E0* unk_00;
-    /* 0x04 */ s32 unk_04;
-    /* 0x08 */ s32 unk_08;
-    /* 0x0C */ s32 unk_0C;
-    /* 0x10 */ char unk_10[0x824];
+    /* 0x000 */ UnkAl19E0* unk_00;
+    /* 0x004 */ s32 unk_04;
+    /* 0x008 */ s32 unk_08;
+    /* 0x00C */ s32 unk_0C;
+    /* 0x010 */ char unk_10[0x10];
+    /* 0x020 */ u8 unk_20;
+    /* 0x021 */ char unk_21[0x813];
 } UnkAl834;
 
 // Probably some libultra audio thing
@@ -241,13 +256,16 @@ typedef struct {
 } UnkStructFor8004DAA8; // size unknown
 
 extern UnkAl0* D_80078E54;
+extern s8 D_80078181;
 extern s32* D_80078190;
 extern s32* D_800781D0;
 extern s32* D_80078544;
 extern s32* D_80078DB0;
+extern u16 D_80078DB6;
 
 extern s8 D_80078E58;
 extern s16 D_80078E5A;
+extern s8 D_80078E5C;
 
 extern UnkAl19E0* D_8009A5C0;
 extern UnkAlA9C* D_8009A5CC;
@@ -259,10 +277,12 @@ extern UnkAlA9C* D_8009A664;
 
 void al_LoadBKHeaders(UnkAl19E0* arg0, ALHeap* arg1);
 
+void func_8004B6D8(UnkAl6CC*, s32, s16, s16, u8);
 void func_8004B748(UnkAl6CC*);
 void func_8004BA54(UnkAl6CC* arg0, s32 arg1);
 void func_8004D510(UnkAlA9C*);
 void func_8004DAA8(UnkStructFor8004DAA8* arg0);
+s32 func_80050C30(u32 arg0);
 void func_800532F4(UnkAl30*);
 void func_80053370(UnkAl12*);
 void func_800533A8(UnkAl2*);

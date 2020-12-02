@@ -30,41 +30,135 @@ INCLUDE_ASM(s32, "code_303c0_len_3e10", func_800552D0);
 
 INCLUDE_ASM(s32, "code_303c0_len_3e10", func_80055330);
 
-INCLUDE_ASM(s32, "code_303c0_len_3e10", func_800553C0);
+void func_800553C0(s32 arg0) {
+    func_8004B6D8(D_8009A640, arg0 | 0x8000, 0, 0, 0);
+}
 
 void func_800553F4(void) {
     D_8009A640->unk_168 = 1;
 }
 
-INCLUDE_ASM(s32, "code_303c0_len_3e10", func_80055408);
+void func_80055408(s32 arg0, s16 arg1, s16 arg2, s32 arg3) {
+    func_8004B6D8(D_8009A640, arg0, arg1, arg2, arg3);
+}
 
-INCLUDE_ASM(s32, "code_303c0_len_3e10", func_80055448, s32 arg0);
+s32 func_80055448(s32 arg0) {
+    return func_80053F80(arg0);
+}
 
-INCLUDE_ASM(s32, "code_303c0_len_3e10", func_80055464, s32 arg0, s32 arg1);
+s32 func_80055464(s32 arg0, s32 arg1) {
+    if (func_80050C30(arg0) == 0) {
+        func_80050CA0(arg0, arg1);
+    }
+}
 
-INCLUDE_ASM(s32, "code_303c0_len_3e10", func_800554A4, s32 arg0, s32 arg1);
+s32 func_800554A4(s32 arg0, s32 arg1) {
+    s32 ret = func_80050C30(arg0);
 
-INCLUDE_ASM(s32, "code_303c0_len_3e10", func_800554E8, s32 arg0, s32 arg1);
+    if (ret == 0) {
+        func_80050EF0(arg0);
+    }
 
-INCLUDE_ASM(s32, "code_303c0_len_3e10", func_8005553C);
+    return ret;
+}
 
-INCLUDE_ASM(s32, "code_303c0_len_3e10", func_80055590);
+s32 func_800554E8(s32 arg0, s32 arg1) {
+    s32 ret = func_80050C30(arg0);
 
-INCLUDE_ASM(s32, "code_303c0_len_3e10", func_800555E4, s32 arg0);
+    if (ret == 0) {
+        func_80050F64(arg0, arg1);
+    }
 
-INCLUDE_ASM(s32, "code_303c0_len_3e10", func_80055618);
+    return ret;
+}
 
-INCLUDE_ASM(s32, "code_303c0_len_3e10", func_8005566C);
+s32 func_8005553C(s32 arg0, s32 arg1) {
+    s32 ret = func_80050C30(arg0);
 
-INCLUDE_ASM(s32, "code_303c0_len_3e10", func_800556D0);
+    if (ret == 0) {
+        func_80050E18(arg0, arg1);
+    }
 
-INCLUDE_ASM(s32, "code_303c0_len_3e10", func_80055718);
+    return ret;
+}
 
-INCLUDE_ASM(s32, "code_303c0_len_3e10", func_80055760);
+
+s32 func_80055590(s32 arg0, s32 arg1) {
+    s32 ret = func_80050C30(arg0);
+
+    if (ret == 0) {
+        func_80050E84(arg0, arg1);
+    }
+
+    return ret;
+}
+
+void func_800555E4(s32 arg0) {
+    if (func_80050C30(arg0) == 0) {
+        func_80051050(arg0);
+    }
+}
+
+s32 func_80055618(s32 arg0, s32 arg1) {
+    s32 ret = func_80050C30(arg0);
+
+    if (ret == 0) {
+        func_80050C54(arg0, arg1);
+    }
+
+    return ret;
+}
+
+s32 func_8005566C(s32 arg0, s32 arg1, s32 arg2) {
+    s32 ret = func_80050C30(arg0);
+
+    if (ret == 0) {
+        func_80050FD0(arg0, arg1, arg2);
+    }
+
+    return ret;
+}
+
+s32 func_800556D0(s32 arg0) {
+    s32 ret = func_80050C30(arg0);
+
+    if (ret == 0) {
+        func_80050C64(arg0, 1);
+    }
+
+    return ret;
+}
+
+s32 func_80055718(s32 arg0) {
+    s32 ret  = func_80050C30(arg0);
+
+    if (ret == 0) {
+        func_80050C64(arg0, 0);
+    }
+
+    return ret;
+}
+
+void func_80055848(s32);
+
+void func_80055760(s32 arg0) {
+    u32 i;
+    s32 lim = 4;
+
+    D_80078DB6 = 0xFF;
+
+    for (i = 0; i < lim; i++) {
+        if (func_80055464(i, 0) != 0) {
+            return;
+        }
+    }
+
+    func_80055848(arg0);
+}
 
 INCLUDE_ASM(s32, "code_303c0_len_3e10", func_800557CC);
 
-INCLUDE_ASM(s32, "code_303c0_len_3e10", func_80055848);
+INCLUDE_ASM(void, "code_303c0_len_3e10", func_80055848, s32 arg1);
 
 INCLUDE_ASM(s32, "code_303c0_len_3e10", func_800558D4);
 
@@ -76,9 +170,13 @@ s32 func_800559C4(UNK_TYPE arg0) {
     return func_8004DA0C(arg0);
 }
 
-INCLUDE_ASM(s32, "code_303c0_len_3e10", func_800559E0);
+void func_800559E0(void) {
+    func_8004DA74();
+}
 
-INCLUDE_ASM(s32, "code_303c0_len_3e10", func_800559FC);
+void func_800559FC(void) {
+    func_8004DAE0();
+}
 
 INCLUDE_ASM(s32, "code_303c0_len_3e10", func_80055A18);
 

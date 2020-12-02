@@ -7,7 +7,7 @@ INCLUDE_ASM(s32, "code_26840_len_20d0", func_8004B62C);
 
 INCLUDE_ASM(s32, "code_26840_len_20d0", func_8004B698);
 
-INCLUDE_ASM(s32, "code_26840_len_20d0", func_8004B6D8);
+INCLUDE_ASM(void, "code_26840_len_20d0", func_8004B6D8, UnkAl6CC* arg0, s32 arg1, s16 arg2, s16 arg3, u8 arg4);
 
 INCLUDE_ASM(void, "code_26840_len_20d0", func_8004B748, UnkAl6CC* arg0);
 

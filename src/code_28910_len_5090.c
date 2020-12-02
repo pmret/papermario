@@ -169,7 +169,13 @@ INCLUDE_ASM(s32, "code_28910_len_5090", func_80050970);
 
 INCLUDE_ASM(s32, "code_28910_len_5090", func_80050B90);
 
-INCLUDE_ASM(s32, "code_28910_len_5090", func_80050C30);
+s32 func_80050C30(u32 arg0) {
+    if (D_8009A628->unk_20 <= arg0) {
+        return 3;
+    } else {
+        return 0;
+    }
+}
 
 INCLUDE_ASM(s32, "code_28910_len_5090", func_80050C54);
 

@@ -275,7 +275,83 @@ void func_800535C0(void) {
     func_8004B748(temp_s2);
 }
 
-INCLUDE_ASM(void, "code_2e230_len_2190", func_80053654, UnkAl19E0* arg0);
+//INCLUDE_ASM(void, "code_2e230_len_2190", func_80053654, UnkAl19E0* arg0);
+void func_80053654(UnkAl19E0 *arg0) {
+    u32 i;
+
+    if (arg0->unk_130C == 2) {
+        arg0->unk_130C = 1;
+        func_80057EB0();
+    }
+
+    if ((arg0->unk_50 != 0) && (arg0->unk_130C == 0)) {
+        switch (arg0->unk_53) {
+            case 1:
+                func_80057DC8(arg0->unk_52);
+                func_80057E08(arg0->unk_51);
+                arg0->unk_50 = 0;
+                break;
+            case 2:
+                func_80057DC8(arg0->unk_52);
+                func_80057E5C(arg0->unk_51);
+                arg0->unk_50 = 0;
+                break;
+            default:
+                func_80057EB0();
+                arg0->unk_50 = 0;
+                break;
+        }
+    }
+
+    if (arg0->unk_40[0].unk_01 != 0) {
+        func_80056DCC(0, arg0->unk_40[0].unk_00);
+        arg0->unk_40[0].unk_01 = 0;
+    }
+    if (arg0->unk_40[1].unk_01 != 0) {
+        func_80056DCC(1, arg0->unk_40[1].unk_00);
+        arg0->unk_40[1].unk_01 = 0;
+
+    }if (arg0->unk_40[2].unk_01 != 0) {
+        func_80056DCC(2, arg0->unk_40[2].unk_00);
+        arg0->unk_40[2].unk_01 = 0;
+    }
+    if (arg0->unk_40[3].unk_01 != 0) {
+        func_80056DCC(3, arg0->unk_40[3].unk_00);
+        arg0->unk_40[3].unk_01 = 0;
+    }
+
+    for (i = 0; i < ARRAY_COUNT(arg0->unk_1320); i++) {
+        UnkAl48* it = &arg0->unk_1320[i];
+        s8 unk_43 = it->unk_43;
+
+        if (it->unk_42 != 0) {
+            func_80056EE8((u8)i); // todo add decl
+            it->unk_42 = 0;
+            it->unk_1C = 0;
+            it->unk_45 = 0;
+        }
+
+        if (unk_43 & 2) {
+            func_80052BF8(it, &it->unk_14);
+            func_80056FA4((u8)i, it->unk_10, it->unk_00, it->unk_04, it->unk_0C, it->unk_0E, it->unk_0F, it->unk_08);
+            it->unk_45 = it->unk_44;
+        } else {
+            if (unk_43 & 8) {
+                func_80057344((u8)i, it->unk_04);
+            }
+
+            if (unk_43 & 4) {
+                func_8005736C((u8)i, it->unk_0C, it->unk_08, it->unk_0E, it->unk_0F);
+            } else if (unk_43 & 0x10) {
+                func_80057548((u8)i, it->unk_0E, it->unk_0F);
+            }
+        }
+        it->unk_43 = 0;
+    }
+}
+
+
+
 
 void func_80053888(UnkAl48* arg0, s32 arg1) { // type may be wrong but it seems good
     if (arg0->unk_45 != 0) {
