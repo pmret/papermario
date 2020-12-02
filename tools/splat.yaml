@@ -207,10 +207,11 @@ segments:
     - [0x52D50, bin]
     - [0x6B450, .data, world/world]
     - [0x6EAC0, bin] # has scripts
-    - [0x70E30, bin, battle/battle]
+    - [0x70E30, .data, battle/battle]
     - [0x71430, bin]
     - [0x73DA0, .rodata, world/world]
     - [0x74EA0, bin]
+    - [0x75570, .rodata, battle/battle] # help
   - type: code
     start: 0x759B0
     vram: 0x800DC500
