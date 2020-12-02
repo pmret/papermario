@@ -289,7 +289,7 @@ void func_800533A8(UnkAl2*);
 void func_80053654(UnkAl19E0*);
 void func_80053A18(UnkStructFor80053A18* arg0);
 void func_80053A28(s32);
-void func_80053A98(s16 arg0, s32 arg1, s32 arg2);
+void func_80053A98(u8 arg0, u16 arg1, s32 arg2);
 void func_80053BA8(UnkAl1*);
 void func_80054CE0(s32, s32);
 void func_8005610C(void);

@@ -82,7 +82,6 @@ s32 func_8005553C(s32 arg0, s32 arg1) {
     return ret;
 }
 
-
 s32 func_80055590(s32 arg0, s32 arg1) {
     s32 ret = func_80050C30(arg0);
 

@@ -21,8 +21,6 @@ void func_80052E5C(s32 arg0) {
     UnkAl6CC** temp2_1;
     UnkAlA9C** temp3;
     UnkAl48* temp5;
-    u8* temp7;
-    s32** temp8;
 
     alHeap = D_80078E54->unk_18;
     *temp_s4 = alHeapAlloc(alHeap, 1, 0x19E0);
@@ -95,31 +93,31 @@ void func_80052E5C(s32 arg0) {
     temp2_1 = &D_8009A640;
     temp3 = &D_8009A5FC;
     temp1_1 = &D_8009A664;
-    func_8004E158((*temp1_1), 1, 0, temp4);
+
+    func_8004E158(*temp1_1, 1, 0, temp4);
     temp6[0] = 0;
     temp6[1] = 3;
     temp6[2] = 0xff;
     temp6[3] = 0xff;
-    temp7 = &temp6[0];
-    func_8004E344((*temp1_1), temp7);
-    func_8004E158((*temp3), 2, 2, temp4);
+    func_8004E344(*temp1_1, &temp6);
+    func_8004E158(*temp3, 2, 2, temp4);
     temp6[0] = 2;
     temp6[1] = 0xff;
     temp6[2] = 0xff;
     temp6[3] = 0xff;
-    func_8004E344((*temp3), temp7);
-    func_8004B440((*temp2_1), 4, 1, temp4, 0x10);
+    func_8004E344(*temp3, &temp6);
+    func_8004B440(*temp2_1, 4, 1, temp4, 0x10);
     func_80050B90(D_8009A628, 6, 1, temp4);
     func_80052614(temp4);
     al_LoadBKHeaders(temp4, alHeap);
-    if (al_CopyFileTableEntry(temp4->unk_3C->unk_0, 0x20, &subroutine_arg7) == 0) {
+    if (al_CopyFileTableEntry(temp4->unk_3C->unk_0, 0x20, subroutine_arg7) == 0) {
         al_DmaCopy(subroutine_arg7[0], temp4->unk_A0, subroutine_arg7[1] & 0xFFFFFF);
     }
     func_8004B62C((*temp2_1));
     if (al_CopyFileTableEntry(temp4->unk_3C->unk_2, 0x40, subroutine_arg7) == 0) {
         al_LoadPER(temp4, subroutine_arg7[0]);
     }
-    if (al_CopyFileTableEntry(temp4->unk_3C->unk_4, 0x40, &subroutine_arg7) == 0) {
+    if (al_CopyFileTableEntry(temp4->unk_3C->unk_4, 0x40, subroutine_arg7) == 0) {
         al_LoadPRG(temp4, subroutine_arg7[0]);
     }
 
@@ -380,8 +378,8 @@ void func_80053A18(UnkStructFor80053A18* arg0) {
 
 INCLUDE_ASM(void, "code_2e230_len_2190", func_80053A28, s32 arg0);
 
-void func_80053A98(s16 arg0, s32 arg1, s32 arg2) {
-    func_80056D78(arg0, (u32) ((u16)arg1 * arg2) >> 15);
+void func_80053A98(u8 arg0, u16 arg1, s32 arg2) {
+    func_80056D78(arg0, (u32) (arg1 * arg2) >> 15);
 }
 
 void func_80053AC8(UnkAl1* arg0) {
@@ -439,7 +437,7 @@ INCLUDE_ASM(s32, "code_2e230_len_2190", func_80053E58);
 
 UnkAlA9C* func_80053F64(s32 arg0) {
     if (arg0 == 0) {
-        return D_8009A5C0->unk_6C[0].unk_0; // 0x6C
+        return D_8009A5C0->unk_6C[0].unk_0;
     }
     return NULL;
 }
