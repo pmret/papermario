@@ -218,7 +218,7 @@ $(MSG_BIN:.bin=.o): $(MSG_BIN)
 	$(LD) -r -b binary -o $@ $<
 
 # Sprites
-$(foreach npc, $(NPC_SPRITES), $(eval $(BUILD_DIR)/sprite/npc/$(npc):: $(shell find sprite/npc/$(npc) -type f))) # dependencies
+$(foreach npc, $(NPC_SPRITES), $(eval $(BUILD_DIR)/sprite/npc/$(npc):: $(shell find sprite/npc/$(npc) -type f 2> /dev/null))) # dependencies
 NPC_DIRS := $(foreach npc, $(NPC_SPRITES), sprite/npc/$(npc))
 NPC_YAY0 := $(foreach npc, $(NPC_SPRITES), $(BUILD_DIR)/sprite/npc/$(npc).Yay0)
 $(BUILD_DIR)/sprite/npc/%:: sprite/npc/% tools/compile_npc_sprite.py
