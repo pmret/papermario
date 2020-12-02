@@ -308,7 +308,7 @@ void al_LoadINIT(UnkAl19E0*, s32, ALHeap*);
 s32 al_CopyFileTableEntry(u16 arg0, s32 arg1, s32* arg2);
 void al_LoadPER(UnkAl19E0*, s32*);
 void al_LoadPRG(UnkAl19E0*, s32*);
-void al_DmaCopy(s32*, s32*, s32);
+void al_DmaCopy(s32, s32*, s32);
 
 #undef alHeapAlloc
 void* alHeapAlloc(ALHeap *heap, s32 arg1, s32 size);

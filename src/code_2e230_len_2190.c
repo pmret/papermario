@@ -493,7 +493,7 @@ s32 func_80054D74(s32 arg0) {
 
 INCLUDE_ASM(s32, "code_2e230_len_2190", func_80054DA8);
 
-INCLUDE_ASM(void, "code_2e230_len_2190", al_DmaCopy, s32* arg0, s32* arg1, s32 arg2);
+INCLUDE_ASM(void, "code_2e230_len_2190", al_DmaCopy, s32 arg0, s32* arg1, s32 arg2);
 
 INCLUDE_ASM(s32, "code_2e230_len_2190", func_80054E90);
 
