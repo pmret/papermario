@@ -409,7 +409,7 @@ s32 func_80054C4C(s32 arg0, s32 arg1) {
 
 INCLUDE_ASM(s32, "code_2e230_len_2190", func_80054C84);
 
-INCLUDE_ASM(s32, "code_2e230_len_2190", func_80054CE0);
+INCLUDE_ASM(void, "code_2e230_len_2190", func_80054CE0, s32 arg0, s32 arg1);
 
 s32 func_80054D74(s32 arg0) {
     if (arg0 & 0x10) {

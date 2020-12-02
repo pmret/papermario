@@ -62,6 +62,7 @@ segments:
     - [0x2d9a0, c, code_2d9a0_len_890]
     - [0x2e230, c, code_2e230_len_2190]
     - [0x303c0, c, code_303c0_len_3e10]
+    - [0x31650, c, code_31650]
     - [0x341d0, c, world/world]
     - [0x362a0, c, code_362a0_len_2f70]
     - [0x39210, c, code_39210_len_aa0]
