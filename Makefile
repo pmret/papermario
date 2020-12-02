@@ -97,6 +97,9 @@ clean:
 clean-code:
 	rm -rf $(BUILD_DIR)/src
 
+clean-split:
+	rm -rf bin msg img sprite .splat_cache
+
 tools:
 	make -C tools
 
@@ -106,15 +109,13 @@ submodules:
 	git submodule update --init --recursive
 
 split:
-	rm -rf bin msg img sprite
-	$(SPLAT) --modes ld bin Yay0 PaperMarioMapFS PaperMarioMessages img PaperMarioNpcSprites
+	$(SPLAT) --modes ld bin Yay0 PaperMarioMapFS PaperMarioMessages img PaperMarioNpcSprites --new
 
 split-%:
-	$(SPLAT) --modes ld $* --verbose
+	$(SPLAT) --modes ld $* --verbose --new
 
 split-all:
-	rm -rf bin msg img sprite
-	$(SPLAT) --modes all
+	$(SPLAT) --modes all --new
 
 test: $(ROM)
 	$(EMULATOR) $<
@@ -218,7 +219,7 @@ $(MSG_BIN:.bin=.o): $(MSG_BIN)
 	$(LD) -r -b binary -o $@ $<
 
 # Sprites
-$(foreach npc, $(NPC_SPRITES), $(eval $(BUILD_DIR)/sprite/npc/$(npc):: $(shell find sprite/npc/$(npc) -type f))) # dependencies
+$(foreach npc, $(NPC_SPRITES), $(eval $(BUILD_DIR)/sprite/npc/$(npc):: $(shell find sprite/npc/$(npc) -type f 2> /dev/null))) # dependencies
 NPC_DIRS := $(foreach npc, $(NPC_SPRITES), sprite/npc/$(npc))
 NPC_YAY0 := $(foreach npc, $(NPC_SPRITES), $(BUILD_DIR)/sprite/npc/$(npc).Yay0)
 $(BUILD_DIR)/sprite/npc/%:: sprite/npc/% tools/compile_npc_sprite.py
