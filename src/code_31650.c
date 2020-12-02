@@ -43,13 +43,13 @@ INCLUDE_ASM(void, "code_31650", func_80056D78, u8 arg0, u16 arg1);
 
 INCLUDE_ASM(s32, "code_31650", func_80056DA4);
 
-INCLUDE_ASM(s32, "code_31650", func_80056DCC);
+INCLUDE_ASM(void, "code_31650", func_80056DCC, u8 arg0, u8 arg1);
 
 INCLUDE_ASM(s32, "code_31650", func_80056E34);
 
 INCLUDE_ASM(s32, "code_31650", func_80056EC0);
 
-INCLUDE_ASM(s32, "code_31650", func_80056EE8);
+INCLUDE_ASM(void, "code_31650", func_80056EE8, u8 arg0);
 
 INCLUDE_ASM(s32, "code_31650", func_80056F78);
 
@@ -61,7 +61,7 @@ INCLUDE_ASM(s32, "code_31650", func_80057344);
 
 INCLUDE_ASM(s32, "code_31650", func_8005736C);
 
-INCLUDE_ASM(s32, "code_31650", func_80057548);
+INCLUDE_ASM(void, "code_31650", func_80057548, u8 arg0, u8 arg1, u8 arg2);
 
 INCLUDE_ASM(void, "code_31650", func_800576EC, u8 arg0, s32 arg1, s32 arg2);
 
@@ -85,11 +85,11 @@ INCLUDE_ASM(s32, "code_31650", func_80057C54);
 
 INCLUDE_ASM(s32, "code_31650", func_80057D0C);
 
-INCLUDE_ASM(s32, "code_31650", func_80057DC8);
+INCLUDE_ASM(void, "code_31650", func_80057DC8, u8 arg0);
 
-INCLUDE_ASM(s32, "code_31650", func_80057E08);
+INCLUDE_ASM(void, "code_31650", func_80057E08, u8 arg0);
 
-INCLUDE_ASM(s32, "code_31650", func_80057E5C);
+INCLUDE_ASM(void, "code_31650", func_80057E5C, u8 arg0);
 
 INCLUDE_ASM(void, "code_31650", func_80057EB0, void);
 

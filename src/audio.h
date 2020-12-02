@@ -295,7 +295,14 @@ void func_80054CE0(s32, s32);
 void func_8005610C(void);
 s16 func_80056D50(void);
 void func_80056D78(u8, u16);
+void func_80056DCC(u8, u8);
+void func_80056EE8(u8);
 void func_800576EC(u8, s32, s32);
+void func_80057DC8(u8);
+void func_80057E08(u8);
+void func_80057548(u8, u8, u8);
+void func_80057E5C(u8);
+void func_80057EB0(void);
 
 void al_LoadINIT(UnkAl19E0*, s32, ALHeap*);
 s32 al_CopyFileTableEntry(u16 arg0, s32 arg1, s32* arg2);

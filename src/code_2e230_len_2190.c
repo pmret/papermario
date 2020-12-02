@@ -275,7 +275,6 @@ void func_800535C0(void) {
     func_8004B748(temp_s2);
 }
 
-//INCLUDE_ASM(void, "code_2e230_len_2190", func_80053654, UnkAl19E0* arg0);
 void func_80053654(UnkAl19E0 *arg0) {
     u32 i;
 
@@ -322,10 +321,10 @@ void func_80053654(UnkAl19E0 *arg0) {
 
     for (i = 0; i < ARRAY_COUNT(arg0->unk_1320); i++) {
         UnkAl48* it = &arg0->unk_1320[i];
-        s8 unk_43 = it->unk_43;
+        u8 unk_43 = it->unk_43;
 
         if (it->unk_42 != 0) {
-            func_80056EE8((u8)i); // todo add decl
+            func_80056EE8(i); // todo add decl
             it->unk_42 = 0;
             it->unk_1C = 0;
             it->unk_45 = 0;
@@ -343,7 +342,7 @@ void func_80053654(UnkAl19E0 *arg0) {
             if (unk_43 & 4) {
                 func_8005736C((u8)i, it->unk_0C, it->unk_08, it->unk_0E, it->unk_0F);
             } else if (unk_43 & 0x10) {
-                func_80057548((u8)i, it->unk_0E, it->unk_0F);
+                func_80057548(i, it->unk_0E, it->unk_0F);
             }
         }
         it->unk_43 = 0;
