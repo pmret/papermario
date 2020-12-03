@@ -102,7 +102,10 @@ ApiStatus func_8003F084(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "code_1a1f0_len_5390", func_8003F0C4);
 
-INCLUDE_ASM(s32, "code_1a1f0_len_5390", func_8003F384);
+ApiStatus func_8003F384() {
+    D_800A0BB8 = 1;
+    return ApiStatus_DONE2;
+}
 
 ApiStatus GetCamLookAtObjVector(ScriptInstance* script, s32 isInitialCall) {
     script->varTable[0] = CURRENT_CAM->lookAt_obj.x;
@@ -122,8 +125,34 @@ ApiStatus HasMerleeCasts(ScriptInstance* script, s32 isInitialCall) {
 }
 
 INCLUDE_ASM(s32, "code_1a1f0_len_5390", func_8003F414);
+/*
+matches, but another function has the same name causing issues
+ApiStatus func_8003F414(ScriptInstance* script, s32 isInitialCall) {
+    s32 tempVar0;
+    s32 tempVar1;
+    s32 tempVar2;
+    Bytecode* args = script->ptrReadPos;
 
-INCLUDE_ASM(s32, "code_1a1f0_len_5390", func_8003F4CC);
+    tempVar0 = get_variable(script, *args++);
+    tempVar1 = get_variable(script, *args++);
+    tempVar2 = get_variable(script, *args++);
+    func_800720B0(6, tempVar0, tempVar1, tempVar2, 1.2f, 0x1E);
+    return ApiStatus_DONE2;
+}
+*/
+
+ApiStatus func_8003F4CC(ScriptInstance* script, s32 isInitialCall) {
+    s32 tempVar0;
+    s32 tempVar1;
+    s32 tempVar2;
+    Bytecode* args = script->ptrReadPos;
+
+    tempVar0 = get_variable(script, *args++);
+    tempVar1 = get_variable(script, *args++);
+    tempVar2 = get_variable(script, *args++);
+    func_80071750(9, tempVar0, tempVar1, tempVar2, 5.0f, 0xF);
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_1a1f0_len_5390", OnDefeatEnemy, ScriptInstance* script, s32 isInitialCall);
 
