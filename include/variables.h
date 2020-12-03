@@ -71,9 +71,11 @@ extern Npc* gPlayerNpcPtr;
 
 extern s8 D_800A0900;
 extern EncounterStatus gCurrentEncounter;
+extern s8* D_801512F0;
 extern s16 D_80151308;
 extern s32 D_80151310;
 extern s16* D_80151328;
+
 extern s16 D_8010CD10;
 extern s16 D_8010CD12;
 extern s32 D_8010CD20;

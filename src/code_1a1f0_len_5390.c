@@ -41,7 +41,19 @@ ApiStatus func_8003EECC(ScriptInstance* script, s32 isInitialCall) {
     return (func_80045FA4() == 0) * ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_1a1f0_len_5390", FadeBackgroundToBlack);
+ApiStatus FadeBackgroundToBlack(ScriptInstance* script, s32 isInitialCall) {
+    if (isInitialCall) {
+        func_8011D82C(1);
+        *D_801512F0 = 1;
+        set_background_color_blend(0, 0, 0, 0);
+        script->functionTemp[0].s = 25;
+    }
+
+    set_background_color_blend(0, 0, 0, ((25 - script->functionTemp[0].s) * 10) & 254);
+    script->functionTemp[0].s--;
+    do {} while(0);
+    return (script->functionTemp[0].s == 0) * ApiStatus_DONE2;
+}
 
 ApiStatus UnfadeBackgroundFromBlack(ScriptInstance* script, s32 isInitialCall) {
     if (isInitialCall) {
@@ -76,7 +88,17 @@ ApiStatus func_8003F018(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-INCLUDE_ASM(s32, "code_1a1f0_len_5390", func_8003F084);
+ApiStatus func_8003F084(ScriptInstance* script, s32 isInitialCall) {
+    Npc* npc = get_npc_unsafe(-0xA);
+
+    npc->unk_AC -= 17;
+    if (npc->unk_AC == 0) {
+        npc->unk_AC = 0;
+        return ApiStatus_DONE1;
+    }
+
+    return ApiStatus_BLOCK;
+}
 
 INCLUDE_ASM(s32, "code_1a1f0_len_5390", func_8003F0C4);
 
