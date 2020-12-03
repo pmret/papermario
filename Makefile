@@ -92,13 +92,10 @@ endif
 ### Targets ###
 
 clean:
-	rm -rf $(BUILD_DIR)
+	rm -rf $(BUILD_DIR) bin msg img sprite .splat_cache
 
 clean-code:
 	rm -rf $(BUILD_DIR)/src
-
-clean-split:
-	rm -rf bin msg img sprite .splat_cache
 
 tools:
 	make -C tools
@@ -115,7 +112,7 @@ split-%:
 	$(SPLAT) --modes ld $* --verbose --new
 
 split-all:
-	$(SPLAT) --modes all --new
+	$(SPLAT) --modes all
 
 test: $(ROM)
 	$(EMULATOR) $<
