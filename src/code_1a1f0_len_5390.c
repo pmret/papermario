@@ -51,7 +51,7 @@ ApiStatus FadeBackgroundToBlack(ScriptInstance* script, s32 isInitialCall) {
 
     set_background_color_blend(0, 0, 0, ((25 - script->functionTemp[0].s) * 10) & 254);
     script->functionTemp[0].s--;
-    do {} while(0);
+    do {} while (0);
     return (script->functionTemp[0].s == 0) * ApiStatus_DONE2;
 }
 
