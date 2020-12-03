@@ -1,4 +1,5 @@
 #include "common.h"
+#include "functions.h"
 
 s32 get_defeated(s32 mapID, s32 encounterID) {
     EncounterStatus* currentEncounter = &gCurrentEncounter;
@@ -124,22 +125,21 @@ ApiStatus HasMerleeCasts(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_1a1f0_len_5390", func_8003F414);
-/*
-matches, but another function has the same name causing issues
 ApiStatus func_8003F414(ScriptInstance* script, s32 isInitialCall) {
     s32 tempVar0;
     s32 tempVar1;
     s32 tempVar2;
+    s32 tempConst0 = 6;
+    f32 tempConst1 = 1.2;
+    s32 tempConst2 = 30;
     Bytecode* args = script->ptrReadPos;
 
     tempVar0 = get_variable(script, *args++);
     tempVar1 = get_variable(script, *args++);
     tempVar2 = get_variable(script, *args++);
-    func_800720B0(6, tempVar0, tempVar1, tempVar2, 1.2f, 0x1E);
+    func_800720B0(tempConst0, tempVar0, tempVar1, tempVar2, tempConst1, tempConst2);
     return ApiStatus_DONE2;
 }
-*/
 
 ApiStatus func_8003F4CC(ScriptInstance* script, s32 isInitialCall) {
     s32 tempVar0;
