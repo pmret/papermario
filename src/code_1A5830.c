@@ -101,7 +101,7 @@ ApiStatus ResumeTakeTurn(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus BindIdle(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     ActorID actorID = get_variable(script, *args++);
-    s32 var0;
+    Bytecode* idleCode;
     Actor* actor;
     ScriptInstance* newScriptContext;
 
@@ -109,15 +109,16 @@ ApiStatus BindIdle(ScriptInstance* script, s32 isInitialCall) {
         actorID = script->owner1.actorID;
     }
 
-    var0 = get_variable(script, *args++);
+    idleCode = get_variable(script, *args++);
     actor = get_actor(actorID);
+    
     if (actor->idleScript != 0) {
         kill_script_by_ID(actor->idleScriptID);
         actor->idleScript = 0;
     }
 
-    actor->idleCode = var0;
-    newScriptContext = start_script(var0, 10, 0);
+    actor->idleCode = idleCode;
+    newScriptContext = start_script(idleCode, 10, 0);
     actor->idleScript = newScriptContext;
     actor->idleScriptID = newScriptContext->id;
     newScriptContext->owner1.enemyID = actorID;
