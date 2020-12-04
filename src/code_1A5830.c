@@ -98,7 +98,32 @@ ApiStatus ResumeTakeTurn(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_1A5830", BindIdle);
+ApiStatus BindIdle(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    ActorID actorID = get_variable(script, *args++);
+    Bytecode* idleCode;
+    Actor* actor;
+    ScriptInstance* newScriptContext;
+
+    if (actorID == ActorID_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    idleCode = get_variable(script, *args++);
+    actor = get_actor(actorID);
+
+    if (actor->idleScript != 0) {
+        kill_script_by_ID(actor->idleScriptID);
+        actor->idleScript = 0;
+    }
+
+    actor->idleCode = idleCode;
+    newScriptContext = start_script(idleCode, 10, 0);
+    actor->idleScript = newScriptContext;
+    actor->idleScriptID = newScriptContext->id;
+    newScriptContext->owner1.actorID = actorID;
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_1A5830", EnableIdleScript);
 
