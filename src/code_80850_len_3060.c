@@ -268,13 +268,13 @@ void enforce_hpfp_limits(void) {
     }
 }
 
-//INCLUDE_ASM(s32, "code_80850_len_3060", initialize_status_menu);
 void initialize_status_menu() {
     UiStatus* uiStatus = &gUIStatus;
     PlayerData* playerData = &gPlayerData;
     s32 var0;
     s32 var1;
     s32 new_var;
+
     uiStatus->drawPosX = 0x0C;
     D_8010CD10 = 0;
     D_8010CD12 = 0;
