@@ -1,5 +1,4 @@
 #include "common.h"
-#include "functions.h"
 
 s32 get_defeated(s32 mapID, s32 encounterID) {
     EncounterStatus* currentEncounter = &gCurrentEncounter;
