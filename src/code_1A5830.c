@@ -121,7 +121,7 @@ ApiStatus BindIdle(ScriptInstance* script, s32 isInitialCall) {
     newScriptContext = start_script(idleCode, 10, 0);
     actor->idleScript = newScriptContext;
     actor->idleScriptID = newScriptContext->id;
-    newScriptContext->owner1.enemyID = actorID;
+    newScriptContext->owner1.actorID = actorID;
     return ApiStatus_DONE2;
 }
 
