@@ -111,7 +111,7 @@ ApiStatus BindIdle(ScriptInstance* script, s32 isInitialCall) {
 
     idleCode = get_variable(script, *args++);
     actor = get_actor(actorID);
-    
+
     if (actor->idleScript != 0) {
         kill_script_by_ID(actor->idleScriptID);
         actor->idleScript = 0;

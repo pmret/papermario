@@ -130,7 +130,7 @@ ApiStatus func_8003F414(ScriptInstance* script, s32 isInitialCall) {
     s32 var0 = get_variable(script, *args++);
     s32 var1 = get_variable(script, *args++);
     s32 var2 = get_variable(script, *args++);
-    
+
     func_800720B0(6, var0, var1, var2, 1.2f, 30);
     return ApiStatus_DONE2;
 }
