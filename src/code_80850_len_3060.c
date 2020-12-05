@@ -269,18 +269,17 @@ void enforce_hpfp_limits(void) {
 }
 
 void initialize_status_menu() {
-    UiStatus* uiStatus = &gUIStatus;
-    PlayerData* playerData = &gPlayerData;
-    s32 var0;
-    s32 var1;
-    s32 new_var;
+    UiStatus* uiStatus = UI_STATUS;
+    PlayerData* playerData = PLAYER_DATA;
+    s32 iconIndex;
+    s32 newVar;
 
-    uiStatus->drawPosX = 0x0C;
+    uiStatus->drawPosX = 12;
     D_8010CD10 = 0;
     D_8010CD12 = 0;
-    uiStatus->drawPosY = -0x64;
+    uiStatus->drawPosY = -100;
     uiStatus->hidden = 0;
-    uiStatus->showTimer = 0xD2;
+    uiStatus->showTimer = 210;
     uiStatus->unk_3B[0] = 0;
     uiStatus->ignoreChanges = 0;
     uiStatus->unk_45[0] = 0;
@@ -313,61 +312,75 @@ void initialize_status_menu() {
     uiStatus->unk_6C[0] = 0;
     uiStatus->unk_6C[1] = 0;
     uiStatus->iconIndex12 = -1;
+
     func_800E97B8();
-    var0 = create_icon(&D_80108248);
-    uiStatus->hpIconIndexes[0] = var0;
-    set_icon_flags(var0, 0x80);
-    clear_icon_flags(var0, 0x8000);
-    var0 = create_icon(&D_80108518);
-    uiStatus->hpIconIndexes[1] = var0;
-    set_icon_flags(var0, 0x80);
-    clear_icon_flags(var0, 0x8000);
-    var0 = create_icon(&D_80108270);
-    uiStatus->fpIconIndexes[0] = var0;
-    set_icon_flags(var0, 0x80);
-    clear_icon_flags(var0, 0x8000);
-    var0 = create_icon(&D_80108538);
-    uiStatus->fpIconIndexes[1] = var0;
-    set_icon_flags(var0, 0x80);
-    clear_icon_flags(var0, 0x8000);
-    var0 = create_icon(&D_80108558);
-    uiStatus->coinIconIndex = var0;
-    set_icon_flags(var0, 0x80);
-    clear_icon_flags(var0, 0x8000);
-    var0 = create_icon(&D_80080FC4);
-    uiStatus->coinIconIndex2 = var0;
-    set_icon_flags(var0, 0x80);
-    clear_icon_flags(var0, 0x8000);
-    var0 = create_icon(&D_801086AC);
-    uiStatus->starpointsIconIndex = var0;
-    set_icon_flags(var0, 0x80);
-    clear_icon_flags(var0, 0x8000);
-    var0 = create_icon(&D_80104BEC);
-    uiStatus->starpointsIconIndex2 = var0;
-    set_icon_flags(var0, 0x80);
-    clear_icon_flags(var0, 0x8000);
-    var1 = &D_80108068;
-    new_var = create_icon(&D_80108068);
-    var0 = new_var;
-    uiStatus->iconIndex8 = var0;
-    set_icon_flags(var0, 0x82);
-    clear_icon_flags(var0, 0x8000);
-    var0 = create_icon(&D_80108068);
-    uiStatus->iconIndex9 = var0;
-    set_icon_flags(var0, 0x82);
-    clear_icon_flags(var0, 0x8000);
-    var0 = create_icon(var1);
-    uiStatus->iconIndexA = var0;
-    set_icon_flags(var0, 0x82);
-    clear_icon_flags(var0, 0x8000);
-    var0 = create_icon(var1);
-    uiStatus->iconIndexB = var0;
-    set_icon_flags(var0, 0x82);
-    clear_icon_flags(var0, 0x8000);
-    var0 = create_icon(&D_801083D8);
-    uiStatus->iconIndexC = var0;
-    set_icon_flags(var0, 0x80);
-    clear_icon_flags(var0, 0x8000);
+
+    iconIndex = create_icon(&D_80108248);
+    uiStatus->hpIconIndexes[0] = iconIndex;
+    set_icon_flags(iconIndex, 0x80);
+    clear_icon_flags(iconIndex, 0x8000);
+
+    iconIndex = create_icon(&D_80108518);
+    uiStatus->hpIconIndexes[1] = iconIndex;
+    set_icon_flags(iconIndex, 0x80);
+    clear_icon_flags(iconIndex, 0x8000);
+
+    iconIndex = create_icon(&D_80108270);
+    uiStatus->fpIconIndexes[0] = iconIndex;
+    set_icon_flags(iconIndex, 0x80);
+    clear_icon_flags(iconIndex, 0x8000);
+
+    iconIndex = create_icon(&D_80108538);
+    uiStatus->fpIconIndexes[1] = iconIndex;
+    set_icon_flags(iconIndex, 0x80);
+    clear_icon_flags(iconIndex, 0x8000);
+
+    iconIndex = create_icon(&D_80108558);
+    uiStatus->coinIconIndex = iconIndex;
+    set_icon_flags(iconIndex, 0x80);
+    clear_icon_flags(iconIndex, 0x8000);
+
+    iconIndex = create_icon(&D_80080FC4);
+    uiStatus->coinIconIndex2 = iconIndex;
+    set_icon_flags(iconIndex, 0x80);
+    clear_icon_flags(iconIndex, 0x8000);
+
+    iconIndex = create_icon(&D_801086AC);
+    uiStatus->starpointsIconIndex = iconIndex;
+    set_icon_flags(iconIndex, 0x80);
+    clear_icon_flags(iconIndex, 0x8000);
+
+    iconIndex = create_icon(&D_80104BEC);
+    uiStatus->starpointsIconIndex2 = iconIndex;
+    set_icon_flags(iconIndex, 0x80);
+    clear_icon_flags(iconIndex, 0x8000);
+
+    newVar = create_icon(&D_80108068);
+    iconIndex = newVar;
+    uiStatus->iconIndex8 = iconIndex;
+    set_icon_flags(iconIndex, 0x82);
+    clear_icon_flags(iconIndex, 0x8000);
+
+    iconIndex = create_icon(&D_80108068);
+    uiStatus->iconIndex9 = iconIndex;
+    set_icon_flags(iconIndex, 0x82);
+    clear_icon_flags(iconIndex, 0x8000);
+
+    iconIndex = create_icon(&D_80108068);
+    uiStatus->iconIndexA = iconIndex;
+    set_icon_flags(iconIndex, 0x82);
+    clear_icon_flags(iconIndex, 0x8000);
+
+    iconIndex = create_icon(&D_80108068);
+    uiStatus->iconIndexB = iconIndex;
+    set_icon_flags(iconIndex, 0x82);
+    clear_icon_flags(iconIndex, 0x8000);
+
+    iconIndex = create_icon(&D_801083D8);
+    uiStatus->iconIndexC = iconIndex;
+    set_icon_flags(iconIndex, 0x80);
+    clear_icon_flags(iconIndex, 0x8000);
+
     func_800F0D5C();
 }
 
