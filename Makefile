@@ -54,7 +54,7 @@ CROSS := mips-linux-gnu-
 AS := $(CROSS)as
 OLD_AS := tools/mips-nintendo-nu64-as
 CC := tools/cc1
-CPP := cpp-10
+CPP := cpp
 LD := $(CROSS)ld
 OBJCOPY := $(CROSS)objcopy
 
