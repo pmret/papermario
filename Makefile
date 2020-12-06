@@ -58,8 +58,6 @@ CPP := cpp
 LD := $(CROSS)ld
 OBJCOPY := $(CROSS)objcopy
 
--include cpp.mk # Used to specify alternate CPP if `cpp` is the clang one on MacOS
-
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
 	OS=linux
