@@ -205,7 +205,7 @@ segments:
     - [0x4a1f0, c, os/code_4a1f0_len_170]
     - [0x4a360, c, os/code_4a360_len_930]
     - [0x4ac90, c, os/code_4ac90_len_3910]
-    - [0x4E5A0, bin]
+    - [0x4E5A0, data, code_1000_len_60]
     - [0x52D50, bin]
     - [0x6B450, .data, world/world]
     - [0x6EAC0, bin] # has scripts
