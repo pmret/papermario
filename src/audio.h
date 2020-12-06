@@ -273,7 +273,7 @@ typedef struct {
 } UnkStructFor8004DAA8; // size unknown
 
 extern UnkAl0* D_80078E54;
-extern s8 D_80078181;
+extern s8* D_80078181;
 extern s32* D_80078190;
 extern s32* D_800781D0;
 extern s32* D_80078544;
@@ -291,6 +291,11 @@ extern UnkFuncAl D_8009A5E8;
 extern UnkAl834* D_8009A628;
 extern UnkAl6CC* D_8009A640;
 extern UnkAlA9C* D_8009A664;
+
+extern s32 D_800A3FE8;
+extern s8 D_800A3FEC;
+extern s16 D_800A3FEE;
+extern s32 D_800A3FF0;
 
 void al_LoadBKHeaders(UnkAl19E0* arg0, ALHeap* arg1);
 

@@ -121,9 +121,6 @@ INCLUDE_ASM(s32, "code_31650", func_80057C54);
 
 INCLUDE_ASM(s32, "code_31650", func_80057D0C);
 
-extern s16 D_800A3FEE;
-extern s32 D_800A3FF0;
-
 void func_80057DC8(s32 arg0) {
     s32* sym;
     if (arg0 < 2) {
@@ -142,7 +139,11 @@ INCLUDE_ASM(void, "code_31650", func_80057E08, u8 arg0);
 
 INCLUDE_ASM(void, "code_31650", func_80057E5C, u8 arg0);
 
-INCLUDE_ASM(void, "code_31650", func_80057EB0, void);
+void func_80057EB0(void) {
+    D_800A3FEC = 0;
+    D_800A3FEE = 0;
+    D_800A3FE8 = 0;
+}
 
 INCLUDE_ASM(s32, "code_31650", func_80057ED0);
 
