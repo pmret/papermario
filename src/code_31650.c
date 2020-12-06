@@ -47,17 +47,29 @@ INCLUDE_ASM(void, "code_31650", func_80056DCC, u8 arg0, u8 arg1);
 
 INCLUDE_ASM(s32, "code_31650", func_80056E34);
 
-INCLUDE_ASM(s32, "code_31650", func_80056EC0);
+void func_80056EC0(u8 arg0, s8 arg1) {
+    UnkAl7C* al7C = &D_80078E54->unk_1C[arg0];
+
+    al7C->unk_78 = arg1;
+}
 
 INCLUDE_ASM(void, "code_31650", func_80056EE8, u8 arg0);
 
-INCLUDE_ASM(s32, "code_31650", func_80056F78);
+void func_80056F78(u8 arg0) {
+    UnkAl7C* al7C = &D_80078E54->unk_1C[arg0];
+
+    al7C->unk_70 = 1;
+}
 
 INCLUDE_ASM(s32, "code_31650", func_80056FA4);
 
 INCLUDE_ASM(s32, "code_31650", func_80057224);
 
-INCLUDE_ASM(s32, "code_31650", func_80057344);
+void func_80057344(u8 arg0, f32 arg1) {
+    UnkAl7C* al7C = &D_80078E54->unk_1C[arg0];
+
+    al7C->unk_3C = arg1;
+}
 
 INCLUDE_ASM(s32, "code_31650", func_8005736C);
 
@@ -69,23 +81,62 @@ INCLUDE_ASM(s32, "code_31650", func_80057874);
 
 INCLUDE_ASM(s32, "code_31650", func_800579D8);
 
-INCLUDE_ASM(s32, "code_31650", func_80057B64);
+s32 func_80057B64(u8 arg0) {
+    UnkAl7C* al7C = &D_80078E54->unk_1C[arg0];
 
-INCLUDE_ASM(s32, "code_31650", func_80057B8C);
+    return al7C->unk_70;
+}
 
-INCLUDE_ASM(s32, "code_31650", func_80057BB4);
+s32 func_80057B8C(u8 arg0) {
+    UnkAl7C* al7C = &D_80078E54->unk_1C[arg0];
 
-INCLUDE_ASM(s32, "code_31650", func_80057BDC);
+    return al7C->unk_78;
+}
 
-INCLUDE_ASM(s32, "code_31650", func_80057C04);
+f32 func_80057BB4(u8 arg0) {
+    UnkAl7C* al7C = &D_80078E54->unk_1C[arg0];
 
-INCLUDE_ASM(s32, "code_31650", func_80057C2C);
+    return al7C->unk_3C;
+}
+
+u8 func_80057BDC(u8 arg0) {
+    UnkAl7C* al7C = &D_80078E54->unk_1C[arg0];
+
+    return al7C->unk_4D;
+}
+
+s16 func_80057C04(u8 arg0) {
+    UnkAl7C* al7C = &D_80078E54->unk_1C[arg0];
+
+    return al7C->unk_54;
+}
+
+s16 func_80057C2C(u8 arg0) {
+    UnkAl7C* al7C = &D_80078E54->unk_1C[arg0];
+
+    return al7C->unk_56;
+}
 
 INCLUDE_ASM(s32, "code_31650", func_80057C54);
 
 INCLUDE_ASM(s32, "code_31650", func_80057D0C);
 
-INCLUDE_ASM(void, "code_31650", func_80057DC8, u8 arg0);
+extern s16 D_800A3FEE;
+extern s32 D_800A3FF0;
+
+void func_80057DC8(s32 arg0) {
+    s32* sym;
+    if (arg0 < 2) {
+        D_800A3FF0 = 0;
+        D_800A3FEE = 0;
+    }
+
+    sym = &D_800A3FF0;
+    *sym = arg0;
+    if (arg0 >= 5) {
+        *sym = 4;
+    }
+}
 
 INCLUDE_ASM(void, "code_31650", func_80057E08, u8 arg0);
 

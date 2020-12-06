@@ -13,7 +13,13 @@ INCLUDE_ASM(void, "code_26840_len_20d0", func_8004B748, UnkAl6CC* arg0);
 
 INCLUDE_ASM(s32, "code_26840_len_20d0", func_8004B9E4);
 
-INCLUDE_ASM(void, "code_26840_len_20d0", func_8004BA54, UnkAl6CC* arg0, s32 arg1);
+void func_8004BA54(UnkAl6CC* arg0, s32 arg1) {
+    if (arg1 == 0) {
+        arg0->unk_C0 = 0;
+    } else if (arg1 == 1) {
+        arg0->unk_C0 = 1;
+    }
+}
 
 INCLUDE_ASM(s32, "code_26840_len_20d0", func_8004BA74);
 
