@@ -41,7 +41,19 @@ ApiStatus func_8003EECC(ScriptInstance* script, s32 isInitialCall) {
     return (func_80045FA4() == 0) * ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_1a1f0_len_5390", FadeBackgroundToBlack);
+ApiStatus FadeBackgroundToBlack(ScriptInstance* script, s32 isInitialCall) {
+    if (isInitialCall) {
+        func_8011D82C(1);
+        *D_801512F0 = 1;
+        set_background_color_blend(0, 0, 0, 0);
+        script->functionTemp[0].s = 25;
+    }
+
+    set_background_color_blend(0, 0, 0, ((25 - script->functionTemp[0].s) * 10) & 254);
+    script->functionTemp[0].s--;
+    do {} while (0);
+    return (script->functionTemp[0].s == 0) * ApiStatus_DONE2;
+}
 
 ApiStatus UnfadeBackgroundFromBlack(ScriptInstance* script, s32 isInitialCall) {
     if (isInitialCall) {
@@ -76,11 +88,24 @@ ApiStatus func_8003F018(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-INCLUDE_ASM(s32, "code_1a1f0_len_5390", func_8003F084);
+ApiStatus func_8003F084(ScriptInstance* script, s32 isInitialCall) {
+    Npc* npc = get_npc_unsafe(-0xA);
+
+    npc->unk_AC -= 17;
+    if (npc->unk_AC == 0) {
+        npc->unk_AC = 0;
+        return ApiStatus_DONE1;
+    }
+
+    return ApiStatus_BLOCK;
+}
 
 INCLUDE_ASM(s32, "code_1a1f0_len_5390", func_8003F0C4);
 
-INCLUDE_ASM(s32, "code_1a1f0_len_5390", func_8003F384);
+ApiStatus func_8003F384(ScriptInstance* script, s32 isInitialCall) {
+    D_800A0BB8 = 1;
+    return ApiStatus_DONE2;
+}
 
 ApiStatus GetCamLookAtObjVector(ScriptInstance* script, s32 isInitialCall) {
     script->varTable[0] = CURRENT_CAM->lookAt_obj.x;
@@ -99,9 +124,25 @@ ApiStatus HasMerleeCasts(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_1a1f0_len_5390", func_8003F414);
+ApiStatus func_8003F414(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 var0 = get_variable(script, *args++);
+    s32 var1 = get_variable(script, *args++);
+    s32 var2 = get_variable(script, *args++);
 
-INCLUDE_ASM(s32, "code_1a1f0_len_5390", func_8003F4CC);
+    func_800720B0(6, var0, var1, var2, 1.2f, 30);
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_8003F4CC(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 var0 = get_variable(script, *args++);
+    s32 var1 = get_variable(script, *args++);
+    s32 var2 = get_variable(script, *args++);
+
+    func_80071750(9, var0, var1, var2, 5.0f, 15);
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_1a1f0_len_5390", OnDefeatEnemy, ScriptInstance* script, s32 isInitialCall);
 

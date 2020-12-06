@@ -1,9 +1,11 @@
 Checks: '-*,clang-analyzer-core.*,clang-analyzer-deadcode.*,readability-*,-readability-magic-numbers,-readability-else-after-return,-readability-named-parameter,-readability-braces-around-statements,-readability-isolate-declaration,-readability-uppercase-literal-suffix,-readability-function-size,-readability-non-const-parameter,readability-identifier-naming'
 CheckOptions:
+  # TEMP: this only disabled because mips2c outputs snake_case
   #- key: readability-identifier-naming.LocalVariableCase
   #  value: camelBack
-  #- key: readability-identifier-naming.ParameterCase
-  #  value: camelBack
+
+  - key: readability-identifier-naming.ParameterCase
+    value: camelBack
 
   #- key: readability-identifier-naming.TypedefCase
   #  value: CamelCase

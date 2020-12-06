@@ -38,6 +38,7 @@ void func_80027088(s32);
 void func_8006FEF0(s32, f32, f32, f32, f32);
 void func_80071090(s32, f32, f32, f32, s32);
 void func_80071750(s32, f32, f32, f32, f32, s32);
+void func_800720B0(s32, f32, f32, f32, f32, s32);
 void func_80072950(s32, f32, f32, f32, f32, s32 time);
 
 void update_collider_transform(s16 colliderID);

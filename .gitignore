@@ -2,6 +2,7 @@
 __pycache__/
 venv/
 .lark_cache*
+.splat_cache
 
 # Misc
 .idea/
@@ -25,3 +26,6 @@ settings.mk
 /img
 /msg
 /sprite
+
+tools/Yay0compress
+cpp.mk
