@@ -20,6 +20,7 @@
 #define BATTLE_STATUS (&gBattleStatus)
 #define GAME_STATUS (*gGameStatusPtr)
 #define PLAYER_STATUS (&gPlayerStatus)
+#define UI_STATUS (&gUIStatus)
 #define PLAYER_DATA (&gPlayerData)
 #define CAM(id) (&gCameras[id])
 #define CURRENT_CAM (&gCameras[gCurrentCameraID])

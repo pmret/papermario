@@ -268,7 +268,121 @@ void enforce_hpfp_limits(void) {
     }
 }
 
-INCLUDE_ASM(s32, "code_80850_len_3060", initialize_status_menu);
+void initialize_status_menu(void) {
+    UiStatus* uiStatus = UI_STATUS;
+    PlayerData* playerData = PLAYER_DATA;
+    s32 iconIndex;
+    s32 newVar;
+
+    uiStatus->drawPosX = 12;
+    D_8010CD10 = 0;
+    D_8010CD12 = 0;
+    uiStatus->drawPosY = -100;
+    uiStatus->hidden = 0;
+    uiStatus->showTimer = 210;
+    uiStatus->unk_3B[0] = 0;
+    uiStatus->ignoreChanges = 0;
+    uiStatus->unk_45[0] = 0;
+    uiStatus->unk_45[1] = 0;
+    uiStatus->hpBlinking = 0;
+    uiStatus->hpBlinkCounter = 0;
+    uiStatus->hpBlinkTimer = 0;
+    uiStatus->fpBlinking = 0;
+    uiStatus->fpBlinkCounter = 0;
+    uiStatus->fpBlinkTimer = 0;
+    uiStatus->spBlinking = 0;
+    uiStatus->spBlinkCounter = 0;
+    uiStatus->coinsBlinking = 0;
+    uiStatus->coinsBlinkCounter = 0;
+    uiStatus->coinsBlinkTimer = 0;
+    uiStatus->disabled = 0;
+    uiStatus->starpointsBlinking = 0;
+    uiStatus->displayHP = playerData->curHP;
+    uiStatus->displayFP = playerData->curFP;
+    uiStatus->displayCoins = playerData->coins;
+    uiStatus->displayStarpoints = playerData->starPoints;
+    uiStatus->displaySP = playerData->specialBarsFilled;
+    uiStatus->starpointsBlinkCounter = 0;
+    uiStatus->unk_6C[2] = -1;
+    uiStatus->unk_3B[1] = 0;
+    uiStatus->unk_57[0] = 0;
+    uiStatus->unk_57[1] = 0;
+    uiStatus->unk_57[2] = 0;
+    uiStatus->unk_57[3] = 0;
+    uiStatus->unk_6C[0] = 0;
+    uiStatus->unk_6C[1] = 0;
+    uiStatus->iconIndex12 = -1;
+
+    func_800E97B8();
+
+    iconIndex = create_icon(&D_80108248);
+    uiStatus->hpIconIndexes[0] = iconIndex;
+    set_icon_flags(iconIndex, 0x80);
+    clear_icon_flags(iconIndex, 0x8000);
+
+    iconIndex = create_icon(&D_80108518);
+    uiStatus->hpIconIndexes[1] = iconIndex;
+    set_icon_flags(iconIndex, 0x80);
+    clear_icon_flags(iconIndex, 0x8000);
+
+    iconIndex = create_icon(&D_80108270);
+    uiStatus->fpIconIndexes[0] = iconIndex;
+    set_icon_flags(iconIndex, 0x80);
+    clear_icon_flags(iconIndex, 0x8000);
+
+    iconIndex = create_icon(&D_80108538);
+    uiStatus->fpIconIndexes[1] = iconIndex;
+    set_icon_flags(iconIndex, 0x80);
+    clear_icon_flags(iconIndex, 0x8000);
+
+    iconIndex = create_icon(&D_80108558);
+    uiStatus->coinIconIndex = iconIndex;
+    set_icon_flags(iconIndex, 0x80);
+    clear_icon_flags(iconIndex, 0x8000);
+
+    iconIndex = create_icon(&D_80080FC4);
+    uiStatus->coinIconIndex2 = iconIndex;
+    set_icon_flags(iconIndex, 0x80);
+    clear_icon_flags(iconIndex, 0x8000);
+
+    iconIndex = create_icon(&D_801086AC);
+    uiStatus->starpointsIconIndex = iconIndex;
+    set_icon_flags(iconIndex, 0x80);
+    clear_icon_flags(iconIndex, 0x8000);
+
+    iconIndex = create_icon(&D_80104BEC);
+    uiStatus->starpointsIconIndex2 = iconIndex;
+    set_icon_flags(iconIndex, 0x80);
+    clear_icon_flags(iconIndex, 0x8000);
+
+    newVar = create_icon(&D_80108068);
+    iconIndex = newVar;
+    uiStatus->iconIndex8 = iconIndex;
+    set_icon_flags(iconIndex, 0x82);
+    clear_icon_flags(iconIndex, 0x8000);
+
+    iconIndex = create_icon(&D_80108068);
+    uiStatus->iconIndex9 = iconIndex;
+    set_icon_flags(iconIndex, 0x82);
+    clear_icon_flags(iconIndex, 0x8000);
+
+    iconIndex = create_icon(&D_80108068);
+    uiStatus->iconIndexA = iconIndex;
+    set_icon_flags(iconIndex, 0x82);
+    clear_icon_flags(iconIndex, 0x8000);
+
+    iconIndex = create_icon(&D_80108068);
+    uiStatus->iconIndexB = iconIndex;
+    set_icon_flags(iconIndex, 0x82);
+    clear_icon_flags(iconIndex, 0x8000);
+
+    iconIndex = create_icon(&D_801083D8);
+    uiStatus->iconIndexC = iconIndex;
+    set_icon_flags(iconIndex, 0x80);
+    clear_icon_flags(iconIndex, 0x8000);
+
+    func_800F0D5C();
+}
 
 INCLUDE_ASM(s32, "code_80850_len_3060", status_menu_draw_number);
 
