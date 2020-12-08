@@ -212,7 +212,7 @@ void func_800533D0(void) {
     t1 = &D_80078DB0;
     if (t1[0] == 0) {
         temp_s0_2 = D_8009A5FC;
-        if (temp_s0_2->unk_36 != 0) {
+        if (temp_s0_2->unk_2C.unk_0A != 0) {
             func_8004E3A4(temp_s0_2);
         }
         if (temp_s0_2->unk_1C != 0) {
@@ -229,14 +229,14 @@ void func_800533D0(void) {
                 func_8004DFD4(temp_s2);
             }
             temp_s0_3 = D_8009A664;
-            if (temp_s0_3->unk_46 != 0) {
+            if (temp_s0_3->unk_2C.unk_1A != 0) {
                 func_80053BA8(&temp_s0_3->unk_2C);
-                if (temp_s0_3->unk_36 == 0) {
+                if (temp_s0_3->unk_2C.unk_0A == 0) {
                     func_8004E444(temp_s0_3);
                 } else {
                     func_8004E3A4(temp_s0_3);
                 }
-            } else if (temp_s0_3->unk_36 != 0) {
+            } else if (temp_s0_3->unk_2C.unk_0A != 0) {
                 func_8004E3A4(temp_s0_3);
             }
             if (temp_s0_3->unk_1C != 0) {
@@ -347,9 +347,6 @@ void func_80053654(UnkAl19E0 *arg0) {
     }
 }
 
-
-
-
 void func_80053888(UnkAl48* arg0, s32 arg1) { // type may be wrong but it seems good
     if (arg0->unk_45 != 0) {
         arg0->unk_1C = 0;
@@ -370,7 +367,7 @@ INCLUDE_ASM(s32, "code_2e230_len_2190", func_800538F8);
 
 INCLUDE_ASM(s32, "code_2e230_len_2190", func_80053974);
 
-void func_80053A18(UnkStructFor80053A18* arg0) {
+void func_80053A18(UnkAl1* arg0) {
     arg0->unk_0A = 0;
     arg0->unk_04 = 0;
     arg0->unk_0C = 0;

@@ -2,7 +2,12 @@
 
 INCLUDE_ASM(s32, "code_25f00_len_940", func_8004AB00);
 
-INCLUDE_ASM(s32, "code_25f00_len_940", func_8004ADD0);
+void func_8004ADD0(s32 arg0) {
+    OSIntMask osIntMask = osSetIntMask(OS_IM_NONE);
+
+    D_80078174 = arg0;
+    osSetIntMask(osIntMask);
+}
 
 INCLUDE_ASM(s32, "code_25f00_len_940", func_8004AE08);
 

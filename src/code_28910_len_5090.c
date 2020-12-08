@@ -10,7 +10,7 @@ s32 func_8004DA0C(UNK_TYPE arg0) {
     s32 ret = 0;
 
     if (arg0 != 0) {
-        UnkStructFor8004DAA8* unknown;
+        UnkAlA9C* unknown;
 
         do {
             unknown = func_8004D794();
@@ -19,7 +19,7 @@ s32 func_8004DA0C(UNK_TYPE arg0) {
         do {
             if (unknown == NULL) {
                 ret = 2;
-            } else if (arg0 == unknown->unk_01C) {
+            } else if (arg0 == unknown->unk_1C) {
                 func_8004DAA8(unknown);
                 ret = 0;
             }
@@ -33,12 +33,12 @@ s32 func_8004DA0C(UNK_TYPE arg0) {
 
 INCLUDE_ASM(s32, "code_28910_len_5090", func_8004DA74);
 
-void func_8004DAA8(UnkStructFor8004DAA8* arg0) {
+void func_8004DAA8(UnkAlA9C* arg0) {
     if (arg0->unk_221 != 0) {
         arg0->unk_221 = 4;
-        arg0->unk_010 = 1;
-        arg0->unk_008 = 1;
-        func_80053A18(&arg0->unk_02C);
+        arg0->unk_10 = 1;
+        arg0->unk_08 = 1;
+        func_80053A18(&arg0->unk_2C);
     }
 }
 
