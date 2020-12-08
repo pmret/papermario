@@ -18,7 +18,18 @@ INCLUDE_ASM(void, "code_303c0_len_3e10", func_80055050, void);
 
 INCLUDE_ASM(void, "code_303c0_len_3e10", func_80055068, u32 arg0);
 
-INCLUDE_ASM(s32, "code_303c0_len_3e10", func_80055110);
+void func_80055110(UnkAlA9C *arg0) {
+    s32 i;
+
+    for (i = 0; i < 8; i++) {
+        arg0->unk_238[i] = 0;
+    }
+
+    arg0->unk_25B = 0;
+    arg0->unk_25A = 0;
+    arg0->unk_259 = 0;
+    arg0->unk_258 = 0;
+}
 
 INCLUDE_ASM(s32, "code_303c0_len_3e10", func_8005513C);
 

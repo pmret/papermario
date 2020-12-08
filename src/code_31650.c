@@ -61,9 +61,9 @@ void func_80056F78(u8 arg0) {
     al7C->unk_70 = 1;
 }
 
-INCLUDE_ASM(s32, "code_31650", func_80056FA4);
+INCLUDE_ASM(void, "code_31650", func_80056FA4, u8 arg0, u8 arg1, s32 arg2, f32 arg3, s16 arg4, u8 arg5, u8 arg6, s32 arg7);
 
-INCLUDE_ASM(s32, "code_31650", func_80057224);
+INCLUDE_ASM(void, "code_31650", func_80057224, u8 arg0, UnkAl30* arg1);
 
 void func_80057344(u8 arg0, f32 arg1) {
     UnkAl7C* al7C = &D_80078E54->unk_1C[arg0];
@@ -71,7 +71,7 @@ void func_80057344(u8 arg0, f32 arg1) {
     al7C->unk_3C = arg1;
 }
 
-INCLUDE_ASM(s32, "code_31650", func_8005736C);
+INCLUDE_ASM(void, "code_31650", func_8005736C, u8 arg0, s16 arg1, s32 arg2, u8 arg3, u8 arg4);
 
 INCLUDE_ASM(void, "code_31650", func_80057548, u8 arg0, u8 arg1, u8 arg2);
 
@@ -157,6 +157,7 @@ void* alHeapAlloc(ALHeap *heap, s32 arg1, s32 size) {
         ret = heap->cur;
         heap->cur = newCur;
     }
+
     return ret;
 }
 

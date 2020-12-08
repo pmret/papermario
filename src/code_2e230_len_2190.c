@@ -69,8 +69,8 @@ void func_80052E5C(s32 arg0) {
     }
 
     for (i = 0; i < 24; i++) {
-        func_80056EC0((u8)i, 0);
-        func_80057224((u8)i, temp4->unk_04);
+        func_80056EC0(i, 0);
+        func_80057224(i, temp4->unk_04);
         temp5 = &temp4->unk_1320[i];
         temp5->unk_00 = 0;
         temp5->unk_04 = 0;
@@ -322,7 +322,7 @@ void func_80053654(UnkAl19E0 *arg0) {
         u8 unk_43 = it->unk_43;
 
         if (it->unk_42 != 0) {
-            func_80056EE8(i); // todo add decl
+            func_80056EE8(i);
             it->unk_42 = 0;
             it->unk_1C = 0;
             it->unk_45 = 0;
@@ -330,15 +330,15 @@ void func_80053654(UnkAl19E0 *arg0) {
 
         if (unk_43 & 2) {
             func_80052BF8(it, &it->unk_14);
-            func_80056FA4((u8)i, it->unk_10, it->unk_00, it->unk_04, it->unk_0C, it->unk_0E, it->unk_0F, it->unk_08);
+            func_80056FA4(i, it->unk_10, it->unk_00, it->unk_04, it->unk_0C, it->unk_0E, it->unk_0F, it->unk_08);
             it->unk_45 = it->unk_44;
         } else {
             if (unk_43 & 8) {
-                func_80057344((u8)i, it->unk_04);
+                func_80057344(i, it->unk_04);
             }
 
             if (unk_43 & 4) {
-                func_8005736C((u8)i, it->unk_0C, it->unk_08, it->unk_0E, it->unk_0F);
+                func_8005736C(i, it->unk_0C, it->unk_08, it->unk_0E, it->unk_0F);
             } else if (unk_43 & 0x10) {
                 func_80057548(i, it->unk_0E, it->unk_0F);
             }

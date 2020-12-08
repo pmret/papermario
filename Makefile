@@ -8,8 +8,6 @@ COMPARE = 1
 NON_MATCHING = 0
 WATCH_INCLUDES = 1
 
--include settings.mk
-
 # Fail early if baserom does not exist
 ifeq ($(wildcard $(BASEROM)),)
 $(error Baserom `$(BASEROM)' not found.)
@@ -54,7 +52,7 @@ CROSS := mips-linux-gnu-
 AS := $(CROSS)as
 OLD_AS := tools/mips-nintendo-nu64-as
 CC := tools/cc1
-CPP ?= cpp
+CPP := cpp
 LD := $(CROSS)ld
 OBJCOPY := $(CROSS)objcopy
 
@@ -86,6 +84,7 @@ ifeq ($(NON_MATCHING),1)
 CPPFLAGS += -DNON_MATCHING
 endif
 
+-include settings.mk
 
 ### Sources ###
 

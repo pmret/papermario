@@ -58,7 +58,7 @@ INCLUDE_ASM(s32, "code_28910_len_5090", func_8004DFD4);
 
 INCLUDE_ASM(s32, "code_28910_len_5090", func_8004E0F4);
 
-INCLUDE_ASM(s32, "code_28910_len_5090", func_8004E158);
+INCLUDE_ASM(void, "code_28910_len_5090", func_8004E158, UnkAlA9C* arg0, s32 arg1, s32 arg2, UnkAl19E0* arg3);
 
 INCLUDE_ASM(s32, "code_28910_len_5090", func_8004E344);
 
