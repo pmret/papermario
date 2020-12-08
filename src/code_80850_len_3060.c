@@ -268,7 +268,7 @@ void enforce_hpfp_limits(void) {
     }
 }
 
-void initialize_status_menu() {
+void initialize_status_menu(void) {
     UiStatus* uiStatus = UI_STATUS;
     PlayerData* playerData = PLAYER_DATA;
     s32 iconIndex;
