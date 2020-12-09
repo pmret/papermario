@@ -28,7 +28,7 @@ typedef struct UnkAl2 {
 } UnkAl2;
 
 typedef struct UnkLen18 {
-    /* 0x00 */ s16 unk_00;
+    /* 0x00 */ u16 unk_00;
     /* 0x02 */ char unk_02[0x2];
     /* 0x04 */ s32 unk_04;
     /* 0x08 */ s32 unk_08;
@@ -314,6 +314,7 @@ typedef struct UnkAl834 {
     /* 0x021 */ char unk_21[0x813];
 } UnkAl834;
 
+extern s32 D_80078E50;
 extern UnkAl0* D_80078E54;
 extern s8* D_80078181;
 extern s32* D_80078190;

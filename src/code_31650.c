@@ -3,7 +3,13 @@
 
 INCLUDE_ASM(s32, "code_31650", func_80056250);
 
-INCLUDE_ASM(s32, "code_31650", func_800565A4);
+void func_800565A4(void) {
+    s32 *sym = &D_80078E50;
+
+    if (*sym != 0) {
+        *sym = 0;
+    }
+}
 
 INCLUDE_ASM(Acmd*, "code_31650", alAudioFrame, Acmd* cmdList, s32* cmdLen, s16* outBuf, s32 outLen);
 
@@ -31,7 +37,14 @@ s16 func_80056D50(void) {
 INCLUDE_ASM(s16, "code_31650", func_80056D50);
 #endif
 
+#ifdef NON_MATCHING
+void func_80056D5C(s8 arg0) {
+    D_80078181 = arg0;
+    D_80078E5C = 1;
+}
+#else
 INCLUDE_ASM(s32, "code_31650", func_80056D5C);
+#endif
 
 #ifdef NON_MATCHING
 void func_80056D78(u8 arg0, u16 arg1) {
