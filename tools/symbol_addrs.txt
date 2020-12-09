@@ -563,6 +563,7 @@ load_demo_battle = 0x80072E14;
 EnemyNpcHit = 0x80077F70;
 EnemyNpcDefeat = 0x8007809C;
 nuAuPreNMIFunc = 0x80078174;
+nuAuFrameCounter = 0x8007817C;
 D_80078DB0 = 0x80078DB0;
 D_80078DB4 = 0x80078DB4;
 gEffectTable = 0x8007F214;

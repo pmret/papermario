@@ -303,14 +303,14 @@ glabel func_8025E190
 /* 18CEE8 8025E608 24C61000 */  addiu     $a2, $a2, %lo(D_802A1000)
 /* 18CEEC 8025E60C 0C00A5CF */  jal       dma_copy
 /* 18CEF0 8025E610 00000000 */   nop      
-/* 18CEF4 8025E614 3C048000 */  lui       $a0, %hi(D_80004880)
+/* 18CEF4 8025E614 3C048000 */  lui       $a0, 0x8000
 /* 18CEF8 8025E618 0C05272D */  jal       play_sound
 /* 18CEFC 8025E61C 34840008 */   ori      $a0, $a0, 8
 /* 18CF00 8025E620 24020005 */  addiu     $v0, $zero, 5
 /* 18CF04 8025E624 08097FD0 */  j         .L8025FF40
 /* 18CF08 8025E628 AE000000 */   sw       $zero, ($s0)
 /* 18CF0C 8025E62C 3C048028 */  lui       $a0, %hi(D_80284880)
-/* 18CF10 8025E630 24844880 */  addiu     $a0, $a0, %lo(D_80004880)
+/* 18CF10 8025E630 24844880 */  addiu     $a0, $a0, %lo(D_80284880)
 /* 18CF14 8025E634 2405000A */  addiu     $a1, $zero, 0xa
 /* 18CF18 8025E638 0C0B0CF8 */  jal       start_script
 /* 18CF1C 8025E63C 0000302D */   daddu    $a2, $zero, $zero
