@@ -260,7 +260,7 @@ glabel D_80078168
 glabel D_80078170
 .word 0x00000000
 
-glabel D_80078174
+glabel nuAuPreNMIFunc
 .word 0x00000000
 
 glabel D_80078178

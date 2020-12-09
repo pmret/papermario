@@ -1,21 +1,23 @@
 #include "common.h"
+#include "nu/nusys.h"
+#include "nu/nualsgi.h"
 
 INCLUDE_ASM(s32, "code_25f00_len_940", func_8004AB00);
 
-void func_8004ADD0(s32 arg0) {
-    OSIntMask osIntMask = osSetIntMask(OS_IM_NONE);
+void nuAuPreNMIFuncSet(NUAuPreNMIFunc func) {
+    OSIntMask mask = osSetIntMask(OS_IM_NONE);
 
-    D_80078174 = arg0;
-    osSetIntMask(osIntMask);
+    nuAuPreNMIFunc = func;
+    osSetIntMask(mask);
 }
 
 INCLUDE_ASM(s32, "code_25f00_len_940", func_8004AE08);
 
 INCLUDE_ASM(s32, "code_25f00_len_940", nuAuDmaCallBack);
 
-INCLUDE_ASM(s32, "code_25f00_len_940", nuAuDmaNew);
+INCLUDE_ASM(ALDMAproc, "code_25f00_len_940", nuAuDmaNew, NUDMAState **state);
 
-INCLUDE_ASM(s32, "code_25f00_len_940", nuAuCleanDMABuffers);
+INCLUDE_ASM(void, "code_25f00_len_940", nuAuCleanDMABuffers);
 
 INCLUDE_ASM(s32, "code_25f00_len_940", func_8004B328);
 
