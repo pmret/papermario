@@ -30,7 +30,43 @@ ALDMAproc nuAuDmaNew(NUDMAState **state) {
     return nuAuDmaCallBack;
 }
 
+// Some weird symbol loading shenanigans (addiu vs lw)
+#ifdef NON_MATCHING
+void nuAuCleanDMABuffers(void) {
+    NUDMABuffer* dmaPtr = nuAuDmaState.firstUsed;
+    NUDMABuffer* nextPtr;
+
+    while (dmaPtr != NULL) {
+        nextPtr = dmaPtr->node.next;
+        if (&nuAuDmaState) {
+
+        }
+
+        if (dmaPtr->frameCnt + 1 < nuAuFrameCounter) {
+            if (nuAuDmaState.firstUsed == dmaPtr) {
+                nuAuDmaState.firstUsed = nextPtr;
+            }
+
+            alUnlink(dmaPtr);
+
+            if (nuAuDmaState.firstFree != NULL) {
+                alLink(dmaPtr, nuAuDmaState.firstFree);
+            } else {
+                nuAuDmaState.firstFree = dmaPtr;
+                dmaPtr->node.next = NULL;
+                dmaPtr->node.prev = NULL;
+            }
+        }
+
+        dmaPtr = nextPtr;
+    }
+
+    nuAuDmaNext = 0;
+    nuAuFrameCounter += 1;
+}
+#else
 INCLUDE_ASM(void, "code_25f00_len_940", nuAuCleanDMABuffers);
+#endif
 
 INCLUDE_ASM(s32, "code_25f00_len_940", func_8004B328);
 
