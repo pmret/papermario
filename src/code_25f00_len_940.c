@@ -2,6 +2,9 @@
 #include "nu/nusys.h"
 #include "nu/nualsgi.h"
 
+extern NUDMAState nuAuDmaState;
+extern s32 nuAuDmaNext;
+
 INCLUDE_ASM(s32, "code_25f00_len_940", func_8004AB00);
 
 void nuAuPreNMIFuncSet(NUAuPreNMIFunc func) {
@@ -15,7 +18,17 @@ INCLUDE_ASM(s32, "code_25f00_len_940", func_8004AE08);
 
 INCLUDE_ASM(s32, "code_25f00_len_940", nuAuDmaCallBack);
 
-INCLUDE_ASM(ALDMAproc, "code_25f00_len_940", nuAuDmaNew, NUDMAState **state);
+ALDMAproc nuAuDmaNew(NUDMAState **state) {
+    if (!nuAuDmaState.initialized) {
+        nuAuDmaState.firstFree = &nuAuDmaBuf;
+        nuAuDmaState.firstUsed = NULL;
+        nuAuDmaState.initialized = TRUE;
+    }
+
+    nuAuDmaNext = 0;
+    *state = &nuAuDmaState;
+    return nuAuDmaCallBack;
+}
 
 INCLUDE_ASM(void, "code_25f00_len_940", nuAuCleanDMABuffers);
 

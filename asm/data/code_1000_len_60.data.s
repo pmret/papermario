@@ -263,7 +263,7 @@ glabel D_80078170
 glabel nuAuPreNMIFunc
 .word 0x00000000
 
-glabel D_80078178
+glabel nuAuDmaNext
 .word 0x00000000
 
 glabel nuAuFrameCounter
