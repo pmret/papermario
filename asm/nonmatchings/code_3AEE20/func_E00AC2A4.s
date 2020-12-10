@@ -293,13 +293,13 @@ glabel func_E00AC2A4
 /* 3AF530 E00AC710 2484A66C */  addiu     $a0, $a0, %lo(D_8009A66C)
 /* 3AF534 E00AC714 34C60002 */  ori       $a2, $a2, 2
 /* 3AF538 E00AC718 8C830000 */  lw        $v1, ($a0)
-/* 3AF53C E00AC71C 3C02DE00 */  lui       $v0, %hi(D_DE0028A0)
+/* 3AF53C E00AC71C 3C02DE00 */  lui       $v0, 0xde00
 /* 3AF540 E00AC720 0060282D */  daddu     $a1, $v1, $zero
 /* 3AF544 E00AC724 24630008 */  addiu     $v1, $v1, 8
 /* 3AF548 E00AC728 AC830000 */  sw        $v1, ($a0)
 /* 3AF54C E00AC72C ACA20000 */  sw        $v0, ($a1)
 /* 3AF550 E00AC730 3C020900 */  lui       $v0, 0x900
-/* 3AF554 E00AC734 244228A0 */  addiu     $v0, $v0, %lo(D_DE0028A0)
+/* 3AF554 E00AC734 244228A0 */  addiu     $v0, $v0, 0x28a0
 /* 3AF558 E00AC738 ACA20004 */  sw        $v0, 4($a1)
 /* 3AF55C E00AC73C 24620008 */  addiu     $v0, $v1, 8
 /* 3AF560 E00AC740 24050040 */  addiu     $a1, $zero, 0x40

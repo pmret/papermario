@@ -136,14 +136,14 @@ glabel pause_partners_init
 .L8024C2C8:
 /* 13F608 8024C2C8 2401FFFF */   addiu    $at, $zero, -1
 /* 13F60C 8024C2CC 14610004 */  bne       $v1, $at, .L8024C2E0
-/* 13F610 8024C2D0 3C018000 */   lui      $at, %hi(D_800006A4)
+/* 13F610 8024C2D0 3C018000 */   lui      $at, 0x8000
 /* 13F614 8024C2D4 14410002 */  bne       $v0, $at, .L8024C2E0
 /* 13F618 8024C2D8 00000000 */   nop      
 /* 13F61C 8024C2DC 0006000D */  break     6
 .L8024C2E0:
 /* 13F620 8024C2E0 00001012 */   mflo     $v0
 /* 13F624 8024C2E4 3C018027 */  lui       $at, %hi(D_802706A4)
-/* 13F628 8024C2E8 AC2006A4 */  sw        $zero, %lo(D_800006A4)($at)
+/* 13F628 8024C2E8 AC2006A4 */  sw        $zero, %lo(D_802706A4)($at)
 /* 13F62C 8024C2EC 3C018027 */  lui       $at, %hi(D_802706AC)
 /* 13F630 8024C2F0 AC2006AC */  sw        $zero, %lo(D_802706AC)($at)
 /* 13F634 8024C2F4 44820000 */  mtc1      $v0, $f0

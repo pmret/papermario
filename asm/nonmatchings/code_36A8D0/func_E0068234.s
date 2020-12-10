@@ -32,13 +32,13 @@ glabel func_E0068234
 /* 36AB70 E00682A0 3C17E007 */  lui       $s7, %hi(D_E00685F4)
 /* 36AB74 E00682A4 02E2B821 */  addu      $s7, $s7, $v0
 /* 36AB78 E00682A8 8EF785F4 */  lw        $s7, %lo(D_E00685F4)($s7)
-/* 36AB7C E00682AC 3C02E700 */  lui       $v0, %hi(D_E700001C)
+/* 36AB7C E00682AC 3C02E700 */  lui       $v0, 0xe700
 /* 36AB80 E00682B0 AC620000 */  sw        $v0, ($v1)
 /* 36AB84 E00682B4 AC600004 */  sw        $zero, 4($v1)
 /* 36AB88 E00682B8 ACC70000 */  sw        $a3, ($a2)
 /* 36AB8C E00682BC 8C820010 */  lw        $v0, 0x10($a0)
 /* 36AB90 E00682C0 3C048000 */  lui       $a0, 0x8000
-/* 36AB94 E00682C4 8C42001C */  lw        $v0, %lo(D_E700001C)($v0)
+/* 36AB94 E00682C4 8C42001C */  lw        $v0, 0x1c($v0)
 /* 36AB98 E00682C8 3C038007 */  lui       $v1, %hi(gCurrentCameraID)
 /* 36AB9C E00682CC 8C637410 */  lw        $v1, %lo(gCurrentCameraID)($v1)
 /* 36ABA0 E00682D0 00441021 */  addu      $v0, $v0, $a0

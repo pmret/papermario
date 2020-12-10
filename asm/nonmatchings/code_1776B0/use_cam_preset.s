@@ -321,14 +321,14 @@ glabel use_cam_preset
 /* 17BD00 8024D420 A0220CE0 */   sb       $v0, %lo(D_80280CE0)($at)
 /* 17BD04 8024D424 3C108028 */  lui       $s0, %hi(D_80280E00)
 /* 17BD08 8024D428 26100E00 */  addiu     $s0, $s0, %lo(D_80280E00)
-/* 17BD0C 8024D42C 3C01C2BE */  lui       $at, %hi(D_C2BDF280)
+/* 17BD0C 8024D42C 3C01C2BE */  lui       $at, 0xc2be
 /* 17BD10 8024D430 44816000 */  mtc1      $at, $f12
 /* 17BD14 8024D434 3C014190 */  lui       $at, 0x4190
 /* 17BD18 8024D438 44817000 */  mtc1      $at, $f14
 /* 17BD1C 8024D43C 3C064120 */  lui       $a2, 0x4120
 /* 17BD20 8024D440 240200FF */  addiu     $v0, $zero, 0xff
 /* 17BD24 8024D444 3C01802A */  lui       $at, %hi(D_8029F280)
-/* 17BD28 8024D448 A422F280 */  sh        $v0, %lo(D_C2BDF280)($at)
+/* 17BD28 8024D448 A422F280 */  sh        $v0, %lo(D_8029F280)($at)
 /* 17BD2C 8024D44C 24020008 */  addiu     $v0, $zero, 8
 /* 17BD30 8024D450 3C01802A */  lui       $at, %hi(D_8029F284)
 /* 17BD34 8024D454 A422F284 */  sh        $v0, %lo(D_8029F284)($at)
@@ -461,13 +461,13 @@ glabel use_cam_preset
 /* 17BF30 8024D650 00000000 */   nop      
 /* 17BF34 8024D654 3C108028 */  lui       $s0, %hi(D_80280D90)
 /* 17BF38 8024D658 26100D90 */  addiu     $s0, $s0, %lo(D_80280D90)
-/* 17BF3C 8024D65C 3C01C282 */  lui       $at, %hi(D_C281F280)
+/* 17BF3C 8024D65C 3C01C282 */  lui       $at, 0xc282
 /* 17BF40 8024D660 44810000 */  mtc1      $at, $f0
 /* 17BF44 8024D664 3C0141F0 */  lui       $at, 0x41f0
 /* 17BF48 8024D668 44811000 */  mtc1      $at, $f2
 /* 17BF4C 8024D66C 2402012C */  addiu     $v0, $zero, 0x12c
 /* 17BF50 8024D670 3C01802A */  lui       $at, %hi(D_8029F280)
-/* 17BF54 8024D674 A422F280 */  sh        $v0, %lo(D_C281F280)($at)
+/* 17BF54 8024D674 A422F280 */  sh        $v0, %lo(D_8029F280)($at)
 /* 17BF58 8024D678 24020008 */  addiu     $v0, $zero, 8
 /* 17BF5C 8024D67C 3C01802A */  lui       $at, %hi(D_8029F284)
 /* 17BF60 8024D680 A422F284 */  sh        $v0, %lo(D_8029F284)($at)
@@ -851,13 +851,13 @@ glabel use_cam_preset
 /* 17C534 8024DC54 00000000 */   nop      
 /* 17C538 8024DC58 3C108028 */  lui       $s0, %hi(D_80280D90)
 /* 17C53C 8024DC5C 26100D90 */  addiu     $s0, $s0, %lo(D_80280D90)
-/* 17C540 8024DC60 3C01C296 */  lui       $at, %hi(D_C295F280)
+/* 17C540 8024DC60 3C01C296 */  lui       $at, 0xc296
 /* 17C544 8024DC64 44810000 */  mtc1      $at, $f0
 /* 17C548 8024DC68 3C014316 */  lui       $at, 0x4316
 /* 17C54C 8024DC6C 44811000 */  mtc1      $at, $f2
 /* 17C550 8024DC70 240200A6 */  addiu     $v0, $zero, 0xa6
 /* 17C554 8024DC74 3C01802A */  lui       $at, %hi(D_8029F280)
-/* 17C558 8024DC78 A422F280 */  sh        $v0, %lo(D_C295F280)($at)
+/* 17C558 8024DC78 A422F280 */  sh        $v0, %lo(D_8029F280)($at)
 /* 17C55C 8024DC7C 24020008 */  addiu     $v0, $zero, 8
 /* 17C560 8024DC80 3C01802A */  lui       $at, %hi(D_8029F284)
 /* 17C564 8024DC84 A422F284 */  sh        $v0, %lo(D_8029F284)($at)
@@ -1046,13 +1046,13 @@ glabel use_cam_preset
 /* 17C838 8024DF58 00000000 */   nop      
 /* 17C83C 8024DF5C 3C108028 */  lui       $s0, %hi(D_80280D90)
 /* 17C840 8024DF60 26100D90 */  addiu     $s0, $s0, %lo(D_80280D90)
-/* 17C844 8024DF64 3C01C2BE */  lui       $at, %hi(D_C2BDF280)
+/* 17C844 8024DF64 3C01C2BE */  lui       $at, 0xc2be
 /* 17C848 8024DF68 44810000 */  mtc1      $at, $f0
 /* 17C84C 8024DF6C 3C0141B0 */  lui       $at, 0x41b0
 /* 17C850 8024DF70 44811000 */  mtc1      $at, $f2
 /* 17C854 8024DF74 240200D2 */  addiu     $v0, $zero, 0xd2
 /* 17C858 8024DF78 3C01802A */  lui       $at, %hi(D_8029F280)
-/* 17C85C 8024DF7C A422F280 */  sh        $v0, %lo(D_C2BDF280)($at)
+/* 17C85C 8024DF7C A422F280 */  sh        $v0, %lo(D_8029F280)($at)
 /* 17C860 8024DF80 24020008 */  addiu     $v0, $zero, 8
 /* 17C864 8024DF84 3C01802A */  lui       $at, %hi(D_8029F284)
 /* 17C868 8024DF88 A422F284 */  sh        $v0, %lo(D_8029F284)($at)

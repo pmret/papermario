@@ -93,13 +93,13 @@ glabel func_800F0490
 /* 89A90 800F05E0 46800020 */  cvt.s.w   $f0, $f0
 /* 89A94 800F05E4 46006307 */  neg.s     $f12, $f12
 /* 89A98 800F05E8 46006300 */  add.s     $f12, $f12, $f0
-/* 89A9C 800F05EC 3C01C000 */  lui       $at, %hi(D_BFFF949C)
+/* 89A9C 800F05EC 3C01C000 */  lui       $at, 0xc000
 /* 89AA0 800F05F0 4481A000 */  mtc1      $at, $f20
 /* 89AA4 800F05F4 3C0140A0 */  lui       $at, 0x40a0
 /* 89AA8 800F05F8 44810000 */  mtc1      $at, $f0
 /* 89AAC 800F05FC 46041080 */  add.s     $f2, $f2, $f4
 /* 89AB0 800F0600 3C018011 */  lui       $at, %hi(D_8010949C)
-/* 89AB4 800F0604 A420949C */  sh        $zero, %lo(D_BFFF949C)($at)
+/* 89AB4 800F0604 A420949C */  sh        $zero, %lo(D_8010949C)($at)
 /* 89AB8 800F0608 46001083 */  div.s     $f2, $f2, $f0
 /* 89ABC 800F060C 0C00A6C9 */  jal       clamp_angle
 /* 89AC0 800F0610 4602A501 */   sub.s    $f20, $f20, $f2

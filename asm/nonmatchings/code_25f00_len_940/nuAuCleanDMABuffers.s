@@ -14,8 +14,8 @@ glabel nuAuCleanDMABuffers
 /* 2668C 8004B28C 0040902D */   daddu    $s2, $v0, $zero
 .L8004B290:
 /* 26690 8004B290 8E02000C */  lw        $v0, 0xc($s0)
-/* 26694 8004B294 3C038008 */  lui       $v1, %hi(D_8007817C)
-/* 26698 8004B298 8C63817C */  lw        $v1, %lo(D_8007817C)($v1)
+/* 26694 8004B294 3C038008 */  lui       $v1, %hi(nuAuFrameCounter)
+/* 26698 8004B298 8C63817C */  lw        $v1, %lo(nuAuFrameCounter)($v1)
 /* 2669C 8004B29C 8E110000 */  lw        $s1, ($s0)
 /* 266A0 8004B2A0 24420001 */  addiu     $v0, $v0, 1
 /* 266A4 8004B2A4 0043102B */  sltu      $v0, $v0, $v1
@@ -40,10 +40,10 @@ glabel nuAuCleanDMABuffers
 /* 266E8 8004B2E8 0220802D */  daddu     $s0, $s1, $zero
 .L8004B2EC:
 /* 266EC 8004B2EC 1600FFE8 */  bnez      $s0, .L8004B290
-/* 266F0 8004B2F0 00000000 */   nop
+/* 266F0 8004B2F0 00000000 */   nop      
 .L8004B2F4:
-/* 266F4 8004B2F4 3C038008 */  lui       $v1, %hi(D_8007817C)
-/* 266F8 8004B2F8 2463817C */  addiu     $v1, $v1, %lo(D_8007817C)
+/* 266F4 8004B2F4 3C038008 */  lui       $v1, %hi(nuAuFrameCounter)
+/* 266F8 8004B2F8 2463817C */  addiu     $v1, $v1, %lo(nuAuFrameCounter)
 /* 266FC 8004B2FC 8C620000 */  lw        $v0, ($v1)
 /* 26700 8004B300 3C018008 */  lui       $at, %hi(nuAuDmaNext)
 /* 26704 8004B304 AC208178 */  sw        $zero, %lo(nuAuDmaNext)($at)

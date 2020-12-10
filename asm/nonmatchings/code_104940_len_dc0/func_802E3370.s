@@ -16,7 +16,7 @@ glabel func_802E3370
 /* 104C1C 802E339C 10400003 */  beqz      $v0, .L802E33AC
 /* 104C20 802E33A0 00A0902D */   daddu    $s2, $a1, $zero
 /* 104C24 802E33A4 080B8D29 */  j         .L802E34A4
-/* 104C28 802E33A8 3C03FFDF */   lui      $v1, %hi(D_FFDF0001)
+/* 104C28 802E33A8 3C03FFDF */   lui      $v1, 0xffdf
 .L802E33AC:
 /* 104C2C 802E33AC 8624000E */  lh        $a0, 0xe($s1)
 /* 104C30 802E33B0 9623000E */  lhu       $v1, 0xe($s1)
@@ -24,7 +24,7 @@ glabel func_802E3370
 /* 104C38 802E33B8 1440003F */  bnez      $v0, .L802E34B8
 /* 104C3C 802E33BC 28820096 */   slti     $v0, $a0, 0x96
 /* 104C40 802E33C0 1440009C */  bnez      $v0, .L802E3634
-/* 104C44 802E33C4 24620001 */   addiu    $v0, $v1, %lo(D_FFDF0001)
+/* 104C44 802E33C4 24620001 */   addiu    $v0, $v1, 1
 /* 104C48 802E33C8 C6220014 */  lwc1      $f2, 0x14($s1)
 /* 104C4C 802E33CC 3C0141C8 */  lui       $at, 0x41c8
 /* 104C50 802E33D0 44810000 */  mtc1      $at, $f0

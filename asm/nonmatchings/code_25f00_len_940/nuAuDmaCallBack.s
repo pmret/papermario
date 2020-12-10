@@ -12,9 +12,9 @@ glabel nuAuDmaCallBack
 /* 26490 8004B090 14E00005 */  bnez      $a3, .L8004B0A8
 /* 26494 8004B094 AFB00010 */   sw       $s0, 0x10($sp)
 /* 26498 8004B098 0C0187A4 */  jal       osVirtualToPhysical
-/* 2649C 8004B09C 00000000 */   nop
+/* 2649C 8004B09C 00000000 */   nop      
 /* 264A0 8004B0A0 08012C82 */  j         .L8004B208
-/* 264A4 8004B0A4 00000000 */   nop
+/* 264A4 8004B0A4 00000000 */   nop      
 .L8004B0A8:
 /* 264A8 8004B0A8 0000802D */  daddu     $s0, $zero, $zero
 /* 264AC 8004B0AC 3C11800A */  lui       $s1, %hi(D_800A3BD4)
@@ -31,7 +31,7 @@ glabel nuAuDmaCallBack
 /* 264D4 8004B0D4 0220802D */   daddu    $s0, $s1, $zero
 /* 264D8 8004B0D8 8E310000 */  lw        $s1, ($s1)
 /* 264DC 8004B0DC 1620FFF7 */  bnez      $s1, .L8004B0BC
-/* 264E0 8004B0E0 00000000 */   nop
+/* 264E0 8004B0E0 00000000 */   nop      
 .L8004B0E4:
 /* 264E4 8004B0E4 3C12800A */  lui       $s2, %hi(nuAuDmaState)
 /* 264E8 8004B0E8 26523BD0 */  addiu     $s2, $s2, %lo(nuAuDmaState)
@@ -40,9 +40,9 @@ glabel nuAuDmaCallBack
 /* 264F4 8004B0F4 0220202D */   daddu    $a0, $s1, $zero
 /* 264F8 8004B0F8 8E440004 */  lw        $a0, 4($s2)
 /* 264FC 8004B0FC 0C0187A4 */  jal       osVirtualToPhysical
-/* 26500 8004B100 00000000 */   nop
+/* 26500 8004B100 00000000 */   nop      
 /* 26504 8004B104 08012C82 */  j         .L8004B208
-/* 26508 8004B108 00000000 */   nop
+/* 26508 8004B108 00000000 */   nop      
 .L8004B10C:
 /* 2650C 8004B10C 8E220000 */  lw        $v0, ($s1)
 /* 26510 8004B110 0C012D03 */  jal       alUnlink
@@ -52,7 +52,7 @@ glabel nuAuDmaCallBack
 /* 26520 8004B120 0C012CFB */  jal       alLink
 /* 26524 8004B124 0200282D */   daddu    $a1, $s0, $zero
 /* 26528 8004B128 08012C61 */  j         .L8004B184
-/* 2652C 8004B12C 00000000 */   nop
+/* 2652C 8004B12C 00000000 */   nop      
 .L8004B130:
 /* 26530 8004B130 8E450004 */  lw        $a1, 4($s2)
 /* 26534 8004B134 10A00010 */  beqz      $a1, .L8004B178
@@ -65,14 +65,14 @@ glabel nuAuDmaCallBack
 .L8004B150:
 /* 26550 8004B150 8E240010 */  lw        $a0, 0x10($s1)
 /* 26554 8004B154 8E220008 */  lw        $v0, 8($s1)
-/* 26558 8004B158 3C038008 */  lui       $v1, %hi(D_8007817C)
-/* 2655C 8004B15C 8C63817C */  lw        $v1, %lo(D_8007817C)($v1)
+/* 26558 8004B158 3C038008 */  lui       $v1, %hi(nuAuFrameCounter)
+/* 2655C 8004B15C 8C63817C */  lw        $v1, %lo(nuAuFrameCounter)($v1)
 /* 26560 8004B160 00932021 */  addu      $a0, $a0, $s3
 /* 26564 8004B164 00822023 */  subu      $a0, $a0, $v0
 /* 26568 8004B168 0C0187A4 */  jal       osVirtualToPhysical
 /* 2656C 8004B16C AE23000C */   sw       $v1, 0xc($s1)
 /* 26570 8004B170 08012C82 */  j         .L8004B208
-/* 26574 8004B174 00000000 */   nop
+/* 26574 8004B174 00000000 */   nop      
 .L8004B178:
 /* 26578 8004B178 AE510004 */  sw        $s1, 4($s2)
 /* 2657C 8004B17C AE200000 */  sw        $zero, ($s1)
@@ -92,8 +92,8 @@ glabel nuAuDmaCallBack
 /* 265B0 8004B1B0 00A32821 */  addu      $a1, $a1, $v1
 /* 265B4 8004B1B4 000528C0 */  sll       $a1, $a1, 3
 /* 265B8 8004B1B8 00A22821 */  addu      $a1, $a1, $v0
-/* 265BC 8004B1BC 3C028008 */  lui       $v0, %hi(D_8007817C)
-/* 265C0 8004B1C0 8C42817C */  lw        $v0, %lo(D_8007817C)($v0)
+/* 265BC 8004B1BC 3C028008 */  lui       $v0, %hi(nuAuFrameCounter)
+/* 265C0 8004B1C0 8C42817C */  lw        $v0, %lo(nuAuFrameCounter)($v0)
 /* 265C4 8004B1C4 24630001 */  addiu     $v1, $v1, 1
 /* 265C8 8004B1C8 AE22000C */  sw        $v0, 0xc($s1)
 /* 265CC 8004B1CC AC830000 */  sw        $v1, ($a0)

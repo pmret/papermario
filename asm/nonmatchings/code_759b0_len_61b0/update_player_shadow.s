@@ -220,7 +220,7 @@ glabel update_player_shadow
 /* 7B3C0 800E1F10 A0830000 */   sb       $v1, ($a0)
 .L800E1F14:
 /* 7B3C4 800E1F14 46220001 */  sub.d     $f0, $f0, $f2
-/* 7B3C8 800E1F18 3C028000 */  lui       $v0, %hi(D_8000419C)
+/* 7B3C8 800E1F18 3C028000 */  lui       $v0, 0x8000
 /* 7B3CC 800E1F1C 4620028D */  trunc.w.d $f10, $f0
 /* 7B3D0 800E1F20 44035000 */  mfc1      $v1, $f10
 /* 7B3D4 800E1F24 00000000 */  nop       
@@ -228,7 +228,7 @@ glabel update_player_shadow
 /* 7B3DC 800E1F2C A0830000 */  sb        $v1, ($a0)
 .L800E1F30:
 /* 7B3E0 800E1F30 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
-/* 7B3E4 800E1F34 8C42419C */  lw        $v0, %lo(D_8000419C)($v0)
+/* 7B3E4 800E1F34 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 7B3E8 800E1F38 9042007E */  lbu       $v0, 0x7e($v0)
 /* 7B3EC 800E1F3C 30420001 */  andi      $v0, $v0, 1
 /* 7B3F0 800E1F40 14400006 */  bnez      $v0, .L800E1F5C

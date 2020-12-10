@@ -125,14 +125,14 @@ glabel func_8025E190
 .L8025E364:
 /* 18CC44 8025E364 2401FFFF */   addiu    $at, $zero, -1
 /* 18CC48 8025E368 14610004 */  bne       $v1, $at, .L8025E37C
-/* 18CC4C 8025E36C 3C018000 */   lui      $at, %hi(D_7FFFFB78)
+/* 18CC4C 8025E36C 3C018000 */   lui      $at, 0x8000
 /* 18CC50 8025E370 14810002 */  bne       $a0, $at, .L8025E37C
 /* 18CC54 8025E374 00000000 */   nop      
 /* 18CC58 8025E378 0006000D */  break     6
 .L8025E37C:
 /* 18CC5C 8025E37C 00002012 */   mflo     $a0
 /* 18CC60 8025E380 3C01802A */  lui       $at, %hi(D_8029FB78)
-/* 18CC64 8025E384 AC20FB78 */  sw        $zero, %lo(D_7FFFFB78)($at)
+/* 18CC64 8025E384 AC20FB78 */  sw        $zero, %lo(D_8029FB78)($at)
 /* 18CC68 8025E388 3C01802A */  lui       $at, %hi(D_8029FB54)
 /* 18CC6C 8025E38C AC23FB54 */  sw        $v1, %lo(D_8029FB54)($at)
 /* 18CC70 8025E390 0040282D */  daddu     $a1, $v0, $zero

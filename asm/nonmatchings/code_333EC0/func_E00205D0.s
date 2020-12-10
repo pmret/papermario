@@ -419,7 +419,7 @@ glabel func_E00205D0
 /* 334ADC E0020C1C ACA30004 */   sw       $v1, 4($a1)
 /* 334AE0 E0020C20 24C20008 */  addiu     $v0, $a2, 8
 /* 334AE4 E0020C24 ACE20000 */  sw        $v0, ($a3)
-/* 334AE8 E0020C28 3C02DE00 */  lui       $v0, %hi(D_DE000008)
+/* 334AE8 E0020C28 3C02DE00 */  lui       $v0, 0xde00
 /* 334AEC E0020C2C ACC20000 */  sw        $v0, ($a2)
 /* 334AF0 E0020C30 ACC80004 */  sw        $t0, 4($a2)
 .LE0020C34:
@@ -427,7 +427,7 @@ glabel func_E00205D0
 /* 334AF8 E0020C38 8CE20000 */  lw        $v0, ($a3)
 /* 334AFC E0020C3C 34840002 */  ori       $a0, $a0, 2
 /* 334B00 E0020C40 0040182D */  daddu     $v1, $v0, $zero
-/* 334B04 E0020C44 24420008 */  addiu     $v0, $v0, %lo(D_DE000008)
+/* 334B04 E0020C44 24420008 */  addiu     $v0, $v0, 8
 /* 334B08 E0020C48 ACE20000 */  sw        $v0, ($a3)
 /* 334B0C E0020C4C 24020040 */  addiu     $v0, $zero, 0x40
 /* 334B10 E0020C50 AC640000 */  sw        $a0, ($v1)
