@@ -5,7 +5,22 @@ INCLUDE_ASM(void, "code_26840_len_20d0", func_8004B440, UnkAl6CC* arg0, u8 arg1,
 
 INCLUDE_ASM(void, "code_26840_len_20d0", func_8004B62C, UnkAl6CC* arg0);
 
-INCLUDE_ASM(void, "code_26840_len_20d0", func_8004B698, UnkAl6CC* arg0);
+void func_8004B698(UnkAl6CC *arg0) {
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(arg0->unk_C2); i++) {
+        arg0->unk_C2[i].unk_00 = 0;
+        arg0->unk_C2[i].unk_02 = 0;
+        arg0->unk_C2[i].unk_04 = 0;
+        arg0->unk_C2[i].unk_06 = 0;
+        arg0->unk_C2[i].unk_08 = 0;
+    }
+
+    arg0->unk_165 = 0;
+    arg0->unk_164 = 0;
+    arg0->unk_163 = 0;
+    arg0->unk_162 = 0;
+}
 
 void func_8004B6D8(UnkAl6CC *arg0, s32 arg1, s16 arg2, s16 arg3, u8 arg4) {
     u8 temp_v1 = arg0->unk_164;

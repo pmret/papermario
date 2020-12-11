@@ -95,10 +95,11 @@ typedef struct UnkAl6CC {
     /* 0x0C0 */ s8 unk_C0;
     /* 0x0C1 */ char unk_C1[0x1];
     /* 0x0C2 */ UnkAlA unk_C2[16];
-    /* 0x162 */ char unk_162[0x1];
+    /* 0x162 */ s8 unk_162;
     /* 0x163 */ s8 unk_163;
     /* 0x164 */ s8 unk_164;
-    /* 0x165 */ char unk_165[0x3];
+    /* 0x165 */ s8 unk_165;
+    /* 0x166 */ char unk_166[0x2];
     /* 0x168 */ s32 unk_168;
     /* 0x16C */ char unk_16C[0x560];
 } UnkAl6CC;
