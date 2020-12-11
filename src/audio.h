@@ -3,6 +3,9 @@
 
 #include "common.h"
 
+struct UnkAlA9C;
+struct UnkAl19E0;
+
 typedef void (*UnkFuncAl)();
 
 typedef struct UnkAl1 {
@@ -59,7 +62,9 @@ typedef struct UnkAl0 {
 } UnkAl0;
 
 typedef struct UnkAl6CC {
-    /* 0x000 */ char unk_00[0x34];
+    /* 0x000 */ struct UnkAl19E0* unk_00;
+    /* 0x004 */ char unk_04[0x2C];
+    /* 0x030 */ s32 unk_30;
     /* 0x034 */ s32 unk_34;
     /* 0x038 */ s32 unk_38;
     /* 0x03C */ s32 unk_3C;
@@ -68,9 +73,20 @@ typedef struct UnkAl6CC {
     /* 0x04A */ s16 unk_4A;
     /* 0x04C */ char unk_4C[0x10];
     /* 0x05C */ s32 unk_5C;
-    /* 0x060 */ char unk_60[0x5A];
+    /* 0x060 */ s32 unk_60;
+    /* 0x064 */ char unk_64[0x20];
+    /* 0x084 */ s8 unk_84;
+    /* 0x085 */ s8 unk_85;
+    /* 0x086 */ s8 unk_86;
+    /* 0x087 */ s8 unk_87;
+    /* 0x088 */ s8 unk_88;
+    /* 0x089 */ s8 unk_89;
+    /* 0x08A */ s8 unk_8A;
+    /* 0x08B */ s8 unk_8B;
+    /* 0x08C */ char unk_8C[0x2E];
     /* 0x0BA */ s16 unk_BA;
-    /* 0x0BC */ char unk_BC[0x2];
+    /* 0x0BC */ u8 unk_BC;
+    /* 0x0BD */ u8 unk_BD;
     /* 0x0BE */ u8 unk_BE;
     /* 0x0BF */ char unk_BF[0x1];
     /* 0x0C0 */ s8 unk_C0;
@@ -165,8 +181,6 @@ typedef struct UnkAl19E0Sub2 {
     /* 0x1 */ u8 unk_01;
     /* 0x2 */ char unk_02[2];
 } UnkAl19E0Sub2;
-
-struct UnkAlA9C;
 
 typedef struct UnkAl19E0Sub3 {
     /* 0x00 */ struct UnkAlA9C* unk_0;
@@ -342,8 +356,12 @@ extern s32 D_800A3FF0;
 
 void al_LoadBKHeaders(UnkAl19E0* arg0, ALHeap* arg1);
 
+void func_8004B440(UnkAl6CC*, u8, u8, UnkAl19E0*, s32);
+void func_8004B62C(UnkAl6CC*);
+void func_8004B698(UnkAl6CC*);
 void func_8004B6D8(UnkAl6CC*, s32, s16, s16, u8);
 void func_8004B748(UnkAl6CC*);
+s32 func_8004B9E4(UnkAl6CC*, s32);
 void func_8004BA54(UnkAl6CC*, s32);
 void func_8004D510(UnkAlA9C*);
 void func_8004DAA8(UnkAlA9C*);
@@ -356,6 +374,7 @@ void func_800532F4(UnkAl30*);
 void func_80053370(UnkAl12*);
 void func_800533A8(UnkAl2*);
 void func_80053654(UnkAl19E0*);
+void func_80053974(s32*, s32, s32, s16);
 void func_80053A18(UnkAl1*);
 void func_80053A28(s32);
 void func_80053A98(u8, u16, s32);

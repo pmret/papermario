@@ -16,7 +16,8 @@ void nuAuPreNMIFuncSet(NUAuPreNMIFunc func) {
 
 INCLUDE_ASM(s32, "code_25f00_len_940", func_8004AE08);
 
-INCLUDE_ASM(s32, "code_25f00_len_940", nuAuDmaCallBack);
+s32 nuAuDmaCallBack(s32 addr, s32 len, void* state);
+INCLUDE_ASM(s32, "code_25f00_len_940", nuAuDmaCallBack, s32 addr, s32 len, void* state);
 
 ALDMAproc nuAuDmaNew(NUDMAState **state) {
     if (!nuAuDmaState.initialized) {
