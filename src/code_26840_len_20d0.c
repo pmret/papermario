@@ -7,11 +7,54 @@ INCLUDE_ASM(void, "code_26840_len_20d0", func_8004B62C, UnkAl6CC* arg0);
 
 INCLUDE_ASM(void, "code_26840_len_20d0", func_8004B698, UnkAl6CC* arg0);
 
-INCLUDE_ASM(void, "code_26840_len_20d0", func_8004B6D8, UnkAl6CC* arg0, s32 arg1, s16 arg2, s16 arg3, u8 arg4);
+void func_8004B6D8(UnkAl6CC *arg0, s32 arg1, s16 arg2, s16 arg3, u8 arg4) {
+    u8 temp_v1 = arg0->unk_164;
+    s32 temp_v0 = temp_v1 - (u8) arg0->unk_163;
+    u32 temp_t0;
+
+    if (temp_v0 < 0) {
+        temp_v0 += 0x10;
+    }
+
+    if (temp_v0 < 0x10) {
+        temp_t0 = temp_v1;
+
+        arg0->unk_C2[temp_v1].unk_00 = arg1 & 0xBFFF;
+        arg0->unk_C2[temp_v1].unk_02 = (((u32) arg1 >> 0x10) & 0x3FF);
+        arg0->unk_C2[temp_v1].unk_04 = arg2;
+        arg0->unk_C2[temp_v1].unk_06 = arg3;
+        arg0->unk_C2[temp_v1].unk_08 = arg4;
+
+        temp_t0++;
+        if (temp_t0 >= 0x10) {
+            temp_t0 = 0;
+        }
+
+        arg0->unk_164 = temp_t0;
+    }
+}
 
 INCLUDE_ASM(void, "code_26840_len_20d0", func_8004B748, UnkAl6CC* arg0);
 
-INCLUDE_ASM(s32, "code_26840_len_20d0", func_8004B9E4, UnkAl6CC* arg0, s32 arg1);
+s32 func_8004B9E4(UnkAl6CC *arg0, s32 arg1) {
+    s32 a1 = (u8) arg1;
+
+    if (a1 != 0xF0) {
+        if (a1 < 8) {
+            if (arg0->unk_8C != a1) {
+                arg0->unk_8C = a1;
+                arg0->unk_00->unk_40[1].unk_00 = 6;
+                arg0->unk_00->unk_40[1].unk_01 = 1;
+                D_8007F1F8 = arg0->unk_64[a1];
+            }
+            arg0->unk_8D = arg0->unk_84[a1];
+        } else {
+            arg0->unk_8C = 0xFF;
+            arg0->unk_8D = 0;
+        }
+    }
+    return arg0->unk_8C;
+}
 
 void func_8004BA54(UnkAl6CC* arg0, s32 arg1) {
     if (arg1 == 0) {

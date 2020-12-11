@@ -61,6 +61,14 @@ typedef struct UnkAl0 {
     /* 0x20 */ UnkLen18 unk_20[1]; // amt unknown
 } UnkAl0;
 
+typedef struct UnkAlA {
+    /* 0x0 */ s16 unk_00;
+    /* 0x2 */ s16 unk_02;
+    /* 0x4 */ s16 unk_04;
+    /* 0x6 */ s16 unk_06;
+    /* 0x8 */ s8 unk_08;
+} UnkAlA; // size = 0xA;
+
 typedef struct UnkAl6CC {
     /* 0x000 */ struct UnkAl19E0* unk_00;
     /* 0x004 */ char unk_04[0x2C];
@@ -74,25 +82,23 @@ typedef struct UnkAl6CC {
     /* 0x04C */ char unk_4C[0x10];
     /* 0x05C */ s32 unk_5C;
     /* 0x060 */ s32 unk_60;
-    /* 0x064 */ char unk_64[0x20];
-    /* 0x084 */ s8 unk_84;
-    /* 0x085 */ s8 unk_85;
-    /* 0x086 */ s8 unk_86;
-    /* 0x087 */ s8 unk_87;
-    /* 0x088 */ s8 unk_88;
-    /* 0x089 */ s8 unk_89;
-    /* 0x08A */ s8 unk_8A;
-    /* 0x08B */ s8 unk_8B;
-    /* 0x08C */ char unk_8C[0x2E];
+    /* 0x064 */ s32 unk_64[8];
+    /* 0x084 */ s8 unk_84[8];
+    /* 0x08C */ u8 unk_8C;
+    /* 0x08D */ s8 unk_8D;
+    /* 0x08E */ char unk_8E[0x2C];
     /* 0x0BA */ s16 unk_BA;
     /* 0x0BC */ u8 unk_BC;
     /* 0x0BD */ u8 unk_BD;
     /* 0x0BE */ u8 unk_BE;
     /* 0x0BF */ char unk_BF[0x1];
     /* 0x0C0 */ s8 unk_C0;
-    /* 0x0C1 */ char unk_C1[0xA2];
+    /* 0x0C1 */ char unk_C1[0x1];
+    /* 0x0C2 */ UnkAlA unk_C2[16];
+    /* 0x162 */ char unk_162[0x1];
     /* 0x163 */ s8 unk_163;
-    /* 0x164 */ s32 unk_164;
+    /* 0x164 */ s8 unk_164;
+    /* 0x165 */ char unk_165[0x3];
     /* 0x168 */ s32 unk_168;
     /* 0x16C */ char unk_16C[0x560];
 } UnkAl6CC;
@@ -340,6 +346,7 @@ extern u16 D_80078DB6;
 extern s8 D_80078E58;
 extern s16 D_80078E5A;
 extern s8 D_80078E5C;
+extern s32 D_8007F1F8;
 
 extern UnkAl19E0* D_8009A5C0;
 extern UnkAlA9C* D_8009A5CC;
@@ -361,7 +368,7 @@ void func_8004B62C(UnkAl6CC*);
 void func_8004B698(UnkAl6CC*);
 void func_8004B6D8(UnkAl6CC*, s32, s16, s16, u8);
 void func_8004B748(UnkAl6CC*);
-s32 func_8004B9E4(UnkAl6CC*, s32);
+//s32 func_8004B9E4(UnkAl6CC*, u8);
 void func_8004BA54(UnkAl6CC*, s32);
 void func_8004D510(UnkAlA9C*);
 void func_8004DAA8(UnkAlA9C*);
