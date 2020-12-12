@@ -376,13 +376,24 @@ INCLUDE_ASM(s32, "code_303c0_len_3e10", func_80055FF0);
 
 INCLUDE_ASM(s32, "code_303c0_len_3e10", func_8005600C);
 
-INCLUDE_ASM(s32, "code_303c0_len_3e10", func_80056028);
+void func_80056028(s32 arg0, u8 arg1) {
+    func_800506C8(arg0, arg1);
+}
 
-INCLUDE_ASM(s32, "code_303c0_len_3e10", func_80056044);
+void func_80056044(s32 arg0, u8 arg1) {
+    func_800506C8(arg0, arg1 | 0x57000000);
+}
 
-INCLUDE_ASM(s32, "code_303c0_len_3e10", func_80056068);
+void func_80056068(s32 arg0, u8 arg1) {
+    func_800506C8(arg0, arg1 | 0x7F000000);
+}
 
-INCLUDE_ASM(s32, "code_303c0_len_3e10", func_8005608C);
+void func_8005608C(s32 *arg0, s32 *arg1) {
+    UnkAl19E0 *temp_v0 = D_8009A5C0;
+
+    *arg0 = temp_v0->unk_94;
+    *arg1 = temp_v0->unk_98;
+}
 
 void func_800560A8(void) {
     D_8009A5C0->unk_9C = 1;
