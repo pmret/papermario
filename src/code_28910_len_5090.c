@@ -82,9 +82,9 @@ void func_8004E3A4(UnkAlA9C *arg0) {
     arg0->unk_2C.unk_0A--;
 
     if (arg0->unk_2C.unk_0A != 0) {
-        arg0->unk_2C.unk_00 += arg0->unk_2C.unk_04;
+        arg0->unk_2C.unk_00.s32 += arg0->unk_2C.unk_04;
     } else {
-        arg0->unk_2C.unk_00 = arg0->unk_2C.unk_08 << 0x10;
+        arg0->unk_2C.unk_00.s32 = arg0->unk_2C.unk_08 << 0x10;
 
         if (arg0->unk_2C.unk_0C != NULL) {
             arg0->unk_2C.unk_0C();
@@ -92,7 +92,7 @@ void func_8004E3A4(UnkAlA9C *arg0) {
 
         if (arg0->unk_20 != 0) {
             func_8004DC80(arg0->unk_20);
-        } else if (arg0->unk_2C.unk_00 == 0) {
+        } else if (arg0->unk_2C.unk_00.s32 == 0) {
             func_8004DAA8(arg0);
         }
     }

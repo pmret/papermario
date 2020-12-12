@@ -198,9 +198,9 @@ void func_800533D0(void) {
         func_800511BC(temp_s0);
     }
 
-    if (temp_s1->unk_4A != 0) {
+    if (temp_s1->unk_40.unk_0A != 0) {
         func_80053A28(&temp_s1->unk_40);
-        func_80053A98(temp_s1->unk_BE, temp_s1->unk_40, temp_s1->unk_5C);
+        func_80053A98(temp_s1->unk_BE, temp_s1->unk_40.unk_00.u16, temp_s1->unk_5C);
     }
 
     temp_s1->unk_3C -= temp_s1->unk_34;
@@ -373,7 +373,20 @@ void func_80053A18(UnkAl1* arg0) {
     arg0->unk_0C = 0;
 }
 
-INCLUDE_ASM(void, "code_2e230_len_2190", func_80053A28, s32 arg0);
+void func_80053A28(UnkAl1* arg0) {
+    arg0->unk_0A--;
+
+    if ((arg0->unk_0A << 0x10) != 0) {
+        arg0->unk_00.s32 += arg0->unk_04;
+    } else {
+        arg0->unk_00.s32 = arg0->unk_08 << 0x10;
+        if (arg0->unk_0C != 0) {
+            arg0->unk_0C();
+            arg0->unk_04 = 0;
+            arg0->unk_0C = NULL;
+        }
+    }
+}
 
 void func_80053A98(u8 arg0, u16 arg1, s32 arg2) {
     func_80056D78(arg0, (u32) (arg1 * arg2) >> 15);
@@ -383,7 +396,7 @@ void func_80053AC8(UnkAl1* arg0) {
     if (arg0->unk_0A == 0) {
         arg0->unk_0A = 1;
         arg0->unk_04 = 0;
-        arg0->unk_08 = arg0->unk_00;
+        arg0->unk_08 = arg0->unk_00.u16;
     }
 }
 
@@ -496,4 +509,18 @@ INCLUDE_ASM(s32, "code_2e230_len_2190", func_80054E90);
 
 INCLUDE_ASM(s32, "code_2e230_len_2190", func_80054F48);
 
-INCLUDE_ASM(s32, "code_2e230_len_2190", al_CopyWords);
+void al_CopyWords(s32* src, s32* dst, s32 num) {
+    num /= 4;
+
+    if (num > 0) {
+        if ((((s32) src | (s32) dst) & 3) == 0) {
+            s32* srcIt = src;
+            s32* dstIt = dst;
+
+            num--;
+            do {
+                *dstIt++ = *srcIt++;
+            } while (num-- != 0);
+        }
+    }
+}
