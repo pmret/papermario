@@ -274,7 +274,7 @@ void func_800535C0(void) {
     func_8004B748(temp_s2);
 }
 
-void func_80053654(UnkAl19E0 *arg0) {
+void func_80053654(UnkAl19E0* arg0) {
     u32 i;
 
     if (arg0->unk_130C == 2) {
@@ -309,7 +309,7 @@ void func_80053654(UnkAl19E0 *arg0) {
         func_80056DCC(1, arg0->unk_40[1].unk_00);
         arg0->unk_40[1].unk_01 = 0;
 
-    }if (arg0->unk_40[2].unk_01 != 0) {
+    } if (arg0->unk_40[2].unk_01 != 0) {
         func_80056DCC(2, arg0->unk_40[2].unk_00);
         arg0->unk_40[2].unk_01 = 0;
     }
@@ -390,7 +390,7 @@ void func_80053A28(UnkAl1* arg0) {
 }
 
 void func_80053A98(u8 arg0, u16 arg1, s32 arg2) {
-    func_80056D78(arg0, (u32) (arg1 * arg2) >> 15);
+    func_80056D78(arg0, (u32)(arg1 * arg2) >> 15);
 }
 
 void func_80053AC8(UnkAl1* arg0) {
@@ -408,7 +408,7 @@ void func_80053AEC(UnkAl1* arg0, s16 arg1) {
     arg0->unk_14 = 0;
 }
 
-void func_80053B04(UnkAl1 *arg0, u32 arg1, s16 arg2) {
+void func_80053B04(UnkAl1* arg0, u32 arg1, s16 arg2) {
     s16 temp_a0;
     s32 temp_v1;
 
@@ -425,7 +425,7 @@ void func_80053B04(UnkAl1 *arg0, u32 arg1, s16 arg2) {
     }
 }
 
-void func_80053BA8(UnkAl1 *arg0) {
+void func_80053BA8(UnkAl1* arg0) {
     arg0->unk_1A--;
 
     if (arg0->unk_1A != 0) {

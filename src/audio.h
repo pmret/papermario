@@ -382,8 +382,8 @@ void func_8004E158(UnkAlA9C*, s32, s32, UnkAl19E0*);
 void func_8004E3A4(UnkAlA9C*);
 void func_8004E444(UnkAlA9C*);
 s16 func_8004E4B8(UnkAlA9C*);
-void func_80056068(s32, u8);
-void func_800506C8(s32, s32);
+s32 func_80056068(s32, u8);
+s32 func_800506C8(s32, s32);
 s32 func_80050C30(u32);
 void func_800511BC(UnkAl834*);
 
@@ -404,9 +404,11 @@ void func_80054CE0(s32, s32);
 void func_8005610C(void);
 
 void func_80055110(UnkAlA9C*);
-void func_80056028(s32, u8);
-void func_80056044(s32, u8);
-void func_80056068(s32, u8);
+s32 func_80055FF0(s32, s32);
+s32 func_8005600C(s32, s32);
+s32 func_80056028(s32, u8);
+s32 func_80056044(s32, u8);
+s32 func_80056068(s32, u8);
 void func_8005608C(s32*, s32*);
 void func_800560A8(void);
 void func_8005610C(void);

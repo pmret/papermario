@@ -7,15 +7,16 @@ s8 D_80078E58 = 0;
 s16 D_80078E5A = 0x7FFF;
 s8 D_80078E5C = 0;
 s32 D_80078E60[] = { 0x7FFF7FFC, 0x7FF57FE8, 0x7FD77FC0, 0x7FA57F84, 0x7F5F7F34, 0x7F057ED0, 0x7E977E58, 0x7E157DCD,
-    0x7D7F7D2D, 0x7CD67C7A, 0x7C1A7BB4, 0x7B497ADA, 0x7A6679ED, 0x796F78ED, 0x786677DA, 0x774976B4, 0x761A757B,
-    0x74D87430, 0x738472D3, 0x721E7164, 0x70A66FE3, 0x6F1C6E51, 0x6D816CAD, 0x6BD56AF9, 0x6A186933, 0x684A675D,
-    0x666C6577, 0x647E6381, 0x6280617C, 0x60735F67, 0x5E575D43, 0x5C2C5B11, };
+                     0x7D7F7D2D, 0x7CD67C7A, 0x7C1A7BB4, 0x7B497ADA, 0x7A6679ED, 0x796F78ED, 0x786677DA, 0x774976B4, 0x761A757B,
+                     0x74D87430, 0x738472D3, 0x721E7164, 0x70A66FE3, 0x6F1C6E51, 0x6D816CAD, 0x6BD56AF9, 0x6A186933, 0x684A675D,
+                     0x666C6577, 0x647E6381, 0x6280617C, 0x60735F67, 0x5E575D43, 0x5C2C5B11,
+                   };
 
 
 INCLUDE_ASM(s32, "code_31650", func_80056250);
 
 void func_800565A4(void) {
-    s32 *sym = &D_80078E50;
+    s32* sym = &D_80078E50;
 
     if (*sym != 0) {
         *sym = 0;
@@ -73,7 +74,8 @@ void func_80056F78(u8 arg0) {
     al7C->unk_70 = 1;
 }
 
-INCLUDE_ASM(void, "code_31650", func_80056FA4, u8 arg0, u8 arg1, s32 arg2, f32 arg3, s16 arg4, u8 arg5, u8 arg6, s32 arg7);
+INCLUDE_ASM(void, "code_31650", func_80056FA4, u8 arg0, u8 arg1, s32 arg2, f32 arg3, s16 arg4, u8 arg5, u8 arg6,
+            s32 arg7);
 
 INCLUDE_ASM(void, "code_31650", func_80057224, u8 arg0, UnkAl30* arg1);
 
@@ -161,7 +163,7 @@ INCLUDE_ASM(s32, "code_31650", func_80057ED0);
 
 INCLUDE_ASM(s32, "code_31650", func_80057F20);
 
-void* alHeapAlloc(ALHeap *heap, s32 arg1, s32 size) {
+void* alHeapAlloc(ALHeap* heap, s32 arg1, s32 size) {
     void* ret = NULL;
     u8* newCur = &heap->cur[ALIGN16(arg1 * size)];
 

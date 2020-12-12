@@ -22,7 +22,7 @@ void func_80055050(void) {
 
 INCLUDE_ASM(void, "code_303c0_len_3e10", func_80055068, u32 arg0);
 
-void func_80055110(UnkAlA9C *arg0) {
+void func_80055110(UnkAlA9C* arg0) {
     s32 i;
 
     for (i = 0; i < 8; i++) {
@@ -335,7 +335,7 @@ INCLUDE_ASM(s32, "code_303c0_len_3e10", func_80055E48);
 s32* func_80055EB4(s32 arg0) {
     s32* ret = NULL;
 
-    switch(arg0) {
+    switch (arg0) {
         case 0:
             ret = &D_80078DB8;
             break;
@@ -368,28 +368,49 @@ s32* func_80055EB4(s32 arg0) {
 INCLUDE_ASM(s32, "code_303c0_len_3e10", func_80055EB4);
 #endif
 
-INCLUDE_ASM(s32, "code_303c0_len_3e10", func_80055F58);
+s32 func_80055F58(s32 arg0, u32 arg1, u32 arg2) {
+    s32* subroutine_arg4;
+    s32* subroutine_arg5;
+    s32 temp_s2 = func_80055CE8(arg0, &subroutine_arg4, &subroutine_arg5);
 
-INCLUDE_ASM(s32, "code_303c0_len_3e10", func_80055FD4);
-
-INCLUDE_ASM(s32, "code_303c0_len_3e10", func_80055FF0);
-
-INCLUDE_ASM(s32, "code_303c0_len_3e10", func_8005600C);
-
-void func_80056028(s32 arg0, u8 arg1) {
-    func_800506C8(arg0, arg1);
+    if (temp_s2 == 0) {
+        if (arg2 > 0x7F) {
+            arg2 = 0x7F;
+        }
+        if (arg1 > 0xF) {
+            arg1 = 0xF;
+        }
+        func_8005083C(subroutine_arg5, arg1, 0x60, (u8)arg2); // todo remove cast when func is defined
+    }
+    return temp_s2;
 }
 
-void func_80056044(s32 arg0, u8 arg1) {
-    func_800506C8(arg0, arg1 | 0x57000000);
+s32 func_80055FD4(s32 arg0, s32 arg1) {
+    return func_80055F58(arg0, arg1, 0);
 }
 
-void func_80056068(s32 arg0, u8 arg1) {
-    func_800506C8(arg0, arg1 | 0x7F000000);
+s32 func_80055FF0(s32 arg0, s32 arg1) {
+    return func_80055F58(arg0, arg1, 0x3F);
 }
 
-void func_8005608C(s32 *arg0, s32 *arg1) {
-    UnkAl19E0 *temp_v0 = D_8009A5C0;
+s32 func_8005600C(s32 arg0, s32 arg1) {
+    return func_80055F58(arg0, arg1, 0x7F);
+}
+
+s32 func_80056028(s32 arg0, u8 arg1) {
+    return func_800506C8(arg0, arg1);
+}
+
+s32 func_80056044(s32 arg0, u8 arg1) {
+    return func_800506C8(arg0, arg1 | 0x57000000);
+}
+
+s32 func_80056068(s32 arg0, u8 arg1) {
+    return func_800506C8(arg0, arg1 | 0x7F000000);
+}
+
+void func_8005608C(s32* arg0, s32* arg1) {
+    UnkAl19E0* temp_v0 = D_8009A5C0;
 
     *arg0 = temp_v0->unk_94;
     *arg1 = temp_v0->unk_98;
