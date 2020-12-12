@@ -206,6 +206,7 @@ segments:
     - [0x4a360, c, os/code_4a360_len_930]
     - [0x4ac90, c, os/code_4ac90_len_3910]
     - [0x4E5A0, data, code_1000_len_60] # data until world
+    - [0x541B0, .data, code_303c0_len_3e10]
     - [0x54250, .data, code_31650]
     - [0x542E0, data, code_31650]
     - [0x6B450, .data, world/world]
