@@ -1,7 +1,7 @@
 name: Paper Mario (North America)
 basename: papermario
 options:
-  find-file-boundaries: True
+  find_file_boundaries: True
   compiler: GCC
   mnemonic_ljust: 10
   ld_o_replace_extension: False
