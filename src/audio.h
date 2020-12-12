@@ -229,8 +229,7 @@ typedef struct UnkAl19E0 {
     /* 0x0098 */ char unk_98[0x4];
     /* 0x009C */ s32 unk_9C;
     /* 0x00A0 */ s32* unk_A0;
-    /* 0x00A4 */ UnkFuncAl unk_A4;
-    /* 0x00A8 */ s32 unk_A8;
+    /* 0x00A4 */ UnkFuncAl unk_A4[2];
     /* 0x00AC */ s32* unk_AC;
     /* 0x00B0 */ char unk_B0[0x3C];
     /* 0x00EC */ s32* unk_EC;

@@ -55,8 +55,9 @@ void func_80052E5C(s32 arg0) {
     func_80053370(&temp4->unk_08);
     func_800533A8(&temp4->unk_14);
     func_8005610C();
-    temp4->unk_A4 = 0;
-    temp4->unk_A8 = 0;
+
+    temp4->unk_A4[0] = NULL;
+    temp4->unk_A4[1] = NULL;
 
     for (i = 0; i < 1; i++) {
         temp4->unk_6C[i].unk_4 = 0;
@@ -262,7 +263,7 @@ void func_800535C0(void) {
         func_8005610C();
     }
 
-    D_8009A5E8 = temp_s1->unk_A4;
+    D_8009A5E8 = temp_s1->unk_A4[0];
     if (D_8009A5E8 != NULL) {
         D_8009A5E8();
     }

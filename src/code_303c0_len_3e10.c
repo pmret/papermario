@@ -37,7 +37,20 @@ void func_80055110(UnkAlA9C *arg0) {
 
 INCLUDE_ASM(s32, "code_303c0_len_3e10", func_8005513C);
 
-INCLUDE_ASM(s32, "code_303c0_len_3e10", func_800551E0);
+void func_800551E0(s32 arg0, u8 arg1, s8 arg2) {
+    UnkAl6CC* sym = D_8009A640;
+    s16 a1temp = arg1 * 256;
+
+    if (a1temp != 0) {
+        a1temp |= 0xFF;
+    }
+
+    if (arg2 < 0) {
+        arg2 = 0x7F;
+    }
+
+    func_8004B6D8(sym, arg0, a1temp, 0, arg2);
+}
 
 void func_80055240(s32 arg0, u8 arg1, s8 arg2, s16 arg3) {
     UnkAl6CC* sym = D_8009A640;
@@ -75,7 +88,26 @@ void func_800552D0(s32 arg0, u8 arg1, s8 arg2) {
     func_8004B6D8(sym, arg0 | 0x1000, a1temp, 0, arg2);
 }
 
-INCLUDE_ASM(s32, "code_303c0_len_3e10", func_80055330);
+void func_80055330(s32 arg0, u8 arg1, s8 arg2, s16 arg3) {
+    UnkAl6CC* sym = D_8009A640;
+    s16 a1temp = arg1 * 256;
+
+    if (a1temp != 0) {
+        a1temp |= 0xFF;
+    }
+
+    if (arg2 < 0) {
+        arg2 = 0x7F;
+    }
+
+    if (arg3 > 0x960) {
+        arg3 = 0x960;
+    } else if (arg3 < -0x960) {
+        arg3 = -0x960;
+    }
+
+    func_8004B6D8(sym, arg0 | 0x1000, a1temp, arg3, arg2);
+}
 
 void func_800553C0(s32 arg0) {
     func_8004B6D8(D_8009A640, arg0 | 0x8000, 0, 0, 0);
@@ -360,7 +392,9 @@ INCLUDE_ASM(s32, "code_303c0_len_3e10", func_800560BC);
 
 INCLUDE_ASM(void, "code_303c0_len_3e10", func_8005610C, void);
 
-INCLUDE_ASM(s32, "code_303c0_len_3e10", func_80056144);
+void func_80056144(UnkFuncAl arg0, s32 arg1) {
+    D_8009A5C0->unk_A4[arg1] = arg0;
+}
 
 void func_8005615C(void) {
     func_80056D5C(1);
