@@ -1,9 +1,11 @@
 #include "common.h"
 #include "audio.h"
 
-s32* D_80078DB0 = 0;
+s32 D_80078DB0 = 0;
 u16 D_80078DB4 = 0;
 u16 D_80078DB6 = 0;
+
+// chunks of data, not sure what
 s32 D_80078DB8[] = { 0x025E0350, 0x04640554, 0x00000000, };
 s32 D_80078DC4[] = { 0x0264036E, 0x045A0000, };
 s32 D_80078DCC[] = { 0x025F0000, };

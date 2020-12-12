@@ -341,7 +341,7 @@ extern s8* D_80078181;
 extern s32* D_80078190;
 extern s32* D_800781D0;
 extern s32* D_80078544;
-extern s32* D_80078DB0;
+extern s32 D_80078DB0;
 extern u16 D_80078DB6;
 
 extern s8 D_80078E58;

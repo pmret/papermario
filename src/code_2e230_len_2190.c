@@ -211,7 +211,7 @@ void func_800533D0(void) {
     }
 
     t1 = &D_80078DB0;
-    if (t1[0] == 0) {
+    if (*t1 == 0) {
         temp_s0_2 = D_8009A5FC;
         if (temp_s0_2->unk_2C.unk_0A != 0) {
             func_8004E3A4(temp_s0_2);
@@ -225,7 +225,7 @@ void func_800533D0(void) {
             temp_s0_2->unk_10 += temp_s0_2->unk_0C;
             temp_s0_2->unk_5C = func_8004E4B8(temp_s0_2);
         }
-        if (t1[0] == 0) {
+        if (*t1 == 0) {
             if (temp_s2->unk_80 != 0) {
                 func_8004DFD4(temp_s2);
             }
