@@ -162,7 +162,7 @@ typedef struct UnkAl48 {
     /* 0x14 */ s32 unk_14;
     /* 0x18 */ s32 unk_18;
     /* 0x1C */ s32* unk_1C;
-    /* 0x20 */ char unk_20[0x4];
+    /* 0x20 */ s32 unk_20;
     /* 0x24 */ s32 unk_24;
     /* 0x28 */ s32 unk_28;
     /* 0x2C */ f32 unk_2C;
@@ -172,7 +172,7 @@ typedef struct UnkAl48 {
     /* 0x39 */ u8 unk_39;
     /* 0x3A */ u8 unk_3A;
     /* 0x3B */ u8 unk_3B;
-    /* 0x3C */ char unk_3C[0x1];
+    /* 0x3C */ u8 unk_3C;
     /* 0x3D */ u8 unk_3D;
     /* 0x3E */ u8 unk_3E;
     /* 0x3F */ u8 unk_3F;
@@ -387,7 +387,7 @@ s16 func_8004C444(UnkAl6CC*);
 
 void func_8004D510(UnkAlA9C*);
 UnkAlA9C* func_8004D794(s32);
-s32 func_8004DA0C(UNK_TYPE arg0);
+s32 func_8004DA0C(UNK_TYPE);
 void func_8004DAA8(UnkAlA9C*);
 void func_8004DFD4(UnkAl19E0*);
 void func_8004E158(UnkAlA9C*, s32, s32, UnkAl19E0*);
@@ -397,7 +397,8 @@ s16 func_8004E4B8(UnkAlA9C*);
 s32 func_80050C30(u32);
 void func_800511BC(UnkAl834*);
 
-void func_80052BF8(UnkAl48* arg0, s32* arg1);
+void func_800525A0(UnkAl19E0*);
+void func_80052BF8(UnkAl48*, s32*);
 
 void func_800532F4(UnkAl30*);
 void func_80053370(UnkAl12*);
