@@ -56,7 +56,7 @@ typedef struct UnkAl7C {
     /* 0x3C */ f32 unk_3C;
     /* 0x40 */ s32 unk_40;
     /* 0x44 */ s32 unk_44;
-    /* 0x48 */ char unk_48[0x7];
+    /* 0x48 */ char unk_48[0x5];
     /* 0x4D */ u8 unk_4D;
     /* 0x4E */ s16 unk_4E;
     /* 0x50 */ char unk_50[0x4];
