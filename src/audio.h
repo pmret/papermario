@@ -44,14 +44,26 @@ typedef struct UnkLen18 {
 } UnkLen18;
 
 typedef struct UnkAl7C {
-    /* 0x00 */ char unk_00[0x3C];
+    /* 0x00 */ char unk_00[0x14];
+    /* 0x14 */ s32 unk_14;
+    /* 0x18 */ s32 unk_18;
+    /* 0x1C */ char unk_1C[0xC];
+    /* 0x28 */ s32 unk_28;
+    /* 0x2C */ s32 unk_2C;
+    /* 0x30 */ s32 unk_30;
+    /* 0x34 */ s32 unk_34;
+    /* 0x38 */ char unk_38[0x4];
     /* 0x3C */ f32 unk_3C;
-    /* 0x40 */ char unk_40[0xD];
+    /* 0x40 */ s32 unk_40;
+    /* 0x44 */ s32 unk_44;
+    /* 0x48 */ char unk_48[0x7];
     /* 0x4D */ u8 unk_4D;
-    /* 0x4E */ char unk_4E[0x6];
+    /* 0x4E */ s16 unk_4E;
+    /* 0x50 */ char unk_50[0x4];
     /* 0x54 */ s16 unk_54;
     /* 0x56 */ s16 unk_56;
-    /* 0x58 */ char unk_58[0x18];
+    /* 0x58 */ char unk_58[0x14];
+    /* 0x6C */ s32 unk_6C;
     /* 0x70 */ s32 unk_70;
     /* 0x74 */ char unk_74[0x4];
     /* 0x78 */ u8 unk_78;
@@ -357,6 +369,8 @@ extern UnkAl834* D_8009A628;
 extern UnkAl6CC* D_8009A640;
 extern UnkAlA9C* D_8009A664;
 
+extern s32* D_800A3FE0;
+extern s32* D_800A3FE4;
 extern s32 D_800A3FE8;
 extern s8 D_800A3FEC;
 extern s16 D_800A3FEE;
@@ -436,6 +450,7 @@ void func_80057DC8(s32);
 void func_80057E08(u8);
 void func_80057E5C(u8);
 void func_80057EB0(void);
+void func_80057ED0(s16);
 
 void al_LoadINIT(UnkAl19E0*, s32, ALHeap*);
 s32 al_CopyFileTableEntry(u16, s32, s32*);

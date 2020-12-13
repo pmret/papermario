@@ -149,9 +149,35 @@ void func_80057DC8(s32 arg0) {
     }
 }
 
-INCLUDE_ASM(void, "code_31650", func_80057E08, u8 arg0);
+void func_80057E08(u8 arg0) {
+    s32* phi_a1 = D_800A3FE0;
+    s32* phi_v1 = D_800A3FE4;
+    s32 i;
 
-INCLUDE_ASM(void, "code_31650", func_80057E5C, u8 arg0);
+    for (i = 0; i < 0x170; i++) {
+        *phi_a1++ = 0;
+        *phi_v1++ = 0;
+    }
+
+    D_800A3FEC = arg0;
+    D_800A3FEE = 1;
+    D_800A3FE8 = 0;
+}
+
+void func_80057E5C(u8 arg0) {
+    s32* phi_a1 = D_800A3FE0;
+    s32* phi_v1 = D_800A3FE4;
+    s32 i;
+
+    for (i = 0; i < 0x170; i++) {
+        *phi_a1++ = 0;
+        *phi_v1++ = 0;
+    }
+
+    D_800A3FEC = arg0;
+    D_800A3FEE = 2;
+    D_800A3FE8 = 0;
+}
 
 void func_80057EB0(void) {
     D_800A3FEC = 0;
@@ -159,7 +185,20 @@ void func_80057EB0(void) {
     D_800A3FE8 = 0;
 }
 
-INCLUDE_ASM(s32, "code_31650", func_80057ED0);
+void func_80057ED0(s16 arg0) {
+    s32* phi_a1 = D_800A3FE0;
+    s32* phi_v1 = D_800A3FE4;
+    s32 i;
+
+    for (i = 0; i < 0x170; i++) {
+        *phi_a1++ = 0;
+        *phi_v1++ = 0;
+    }
+
+    D_800A3FEC = 0;
+    D_800A3FEE = arg0;
+    D_800A3FE8 = 0;
+}
 
 INCLUDE_ASM(s32, "code_31650", func_80057F20);
 
@@ -175,7 +214,15 @@ void* alHeapAlloc(ALHeap* heap, s32 arg1, s32 size) {
     return ret;
 }
 
-INCLUDE_ASM(s32, "code_31650", func_80057FD8);
+void func_80057FD8(u8* src, u8* dst, s32 size) {
+    s32 i;
+    u8* srcIt = src;
+    u8* dstIt = dst;
+
+    for (i = 0; i < size; i++) {
+        *dstIt++ = *srcIt++;
+    }
+}
 
 INCLUDE_ASM(s32, "code_31650", func_80058004);
 
