@@ -1,7 +1,87 @@
 #include "common.h"
 #include "audio.h"
 
-INCLUDE_ASM(void, "code_26840_len_20d0", func_8004B440, UnkAl6CC* arg0, u8 arg1, u8 arg2, UnkAl19E0* arg3, s32 arg4);
+void func_8004B440(UnkAl6CC *arg0, u8 arg1, u8 arg2, UnkAl19E0 *arg3, u8 arg4) {
+    u32 i;
+    s32 c = 0x6A25E;
+
+    arg0->unk_00 = arg3;
+    arg0->unk_34 = 0x4C4B4;
+    arg0->unk_38 = arg0->unk_3C = c;
+    arg0->unk_BC = arg1;
+    arg0->unk_BE = arg2;
+
+    if (arg4 > 0x10) {
+        arg0->unk_BD = 0x10;
+    } else {
+        arg0->unk_BD = arg4;
+    }
+
+    arg0->unk_5C = 0x8000;
+    arg0->unk_B8 = 0x8000;
+    arg0->unk_30 = 0;
+    arg0->unk_60 = 0;
+
+    for (i = 0; i < ARRAY_COUNT(arg0->unk_16C); i++) {
+        UnkAlAC* sub = &arg0->unk_16C[i];
+
+        sub->unk_00 = 0;
+        sub->unk_5C = 0;
+        sub->unk_8E = 0;
+        sub->unk_90 = 0;
+        sub->unk_92 = 0;
+        sub->unk_94 = 0;
+        sub->unk_9B = 0;
+        sub->unk_9C = 0;
+        sub->unk_9D = 0;
+        sub->unk_9E = 0;
+        sub->unk_9F = 0;
+        sub->unk_99 = 0;
+        sub->unk_78 = 0;
+        sub->unk_79 = 0;
+        sub->unk_7A = 0;
+        sub->unk_7B = 0x40;
+        sub->unk_7C = 0;
+        sub->unk_7D = 0xB0;
+        sub->unk_7E = 0;
+        sub->unk_7F = 0;
+    }
+
+    for (i = 0; i < 4; i++) {
+        arg0->unk_90[i] = 0;
+    }
+
+    for (i = 0; i < 4; i++) {
+        arg0->unk_A0[i].x = 0;
+    }
+
+    arg0->unk_168 = 0;
+    func_8004BA54(arg0, 0);
+    func_8004B698(arg0);
+    func_80053974(&arg0->unk_40, 0, 0x7FFF, 0x7FFF);
+    func_80053A98(arg0->unk_BE, arg0->unk_40.unk_00.u16, arg0->unk_5C);
+    arg0->unk_8C = 0xFF;
+
+    arg0->unk_64[0] = &D_80078290;
+    arg0->unk_64[1] = &D_800782F8;
+    arg0->unk_64[2] = &D_80078320;
+    arg0->unk_64[3] = &D_80078348;
+    arg0->unk_64[4] = &D_80078348;
+    arg0->unk_64[5] = &D_80078348;
+    arg0->unk_64[6] = &D_80078348;
+    arg0->unk_64[7] = &D_80078348;
+
+    arg0->unk_84[0] = 0x10;
+    arg0->unk_84[1] = 0x20;
+    arg0->unk_84[2] = 0x20;
+    arg0->unk_84[3] = 0x20;
+    arg0->unk_84[4] = 0x20;
+    arg0->unk_84[5] = 0x30;
+    arg0->unk_84[6] = 0x40;
+    arg0->unk_84[7] = 0x50;
+
+    func_8004B9E4(arg0, 0);
+}
 
 INCLUDE_ASM(void, "code_26840_len_20d0", func_8004B62C, UnkAl6CC* arg0);
 

@@ -366,7 +366,7 @@ void func_800538C4(UnkAl48* arg0, s32 arg1) { // type may be wrong but it seems 
 
 INCLUDE_ASM(s32, "code_2e230_len_2190", func_800538F8);
 
-INCLUDE_ASM(void, "code_2e230_len_2190", func_80053974, s32* arg0, s32 arg1, s32 arg2, s16 arg3);
+INCLUDE_ASM(void, "code_2e230_len_2190", func_80053974, UnkAl1* arg0, s32 arg1, s32 arg2, s16 arg3);
 
 void func_80053A18(UnkAl1* arg0) {
     arg0->unk_0A = 0;
