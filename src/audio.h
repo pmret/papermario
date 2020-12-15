@@ -432,6 +432,7 @@ extern s32* D_800782F8;
 extern s32* D_80078348;
 extern s32* D_80078320;
 extern s32* D_80078544;
+extern s32* D_800785A0;
 extern s32 D_80078DB0;
 extern u16 D_80078DB6;
 
@@ -510,6 +511,9 @@ s32 func_80050C30(u32);
 void func_800511BC(UnkAl834*);
 
 void func_800525A0(UnkAl19E0*);
+void func_80052614(UnkAl19E0*);
+void func_80052660(UnkAl19E0*);
+void func_80052B44(UnkAl48*);
 void func_80052BF8(UnkAl48*, s32*);
 
 void func_800532F4(UnkAl30*);
