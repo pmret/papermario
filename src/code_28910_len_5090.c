@@ -204,8 +204,8 @@ INCLUDE_ASM(void, "code_28910_len_5090", func_8004FED0, UnkAlA9C* arg0, UnkAl3* 
 
 void func_8004FF3C(UnkAlA9C *arg0, UnkAl3 *arg1) {
     arg1->unk_4A = arg0->unk_D4.u8[0] & 0x7F;
-    arg1->unk_42 = 1;
     arg1->unk_57 = 0;
+    arg1->unk_42 = 1;
 }
 
 void func_8004FF58(UnkAlA9C *arg0, UnkAl3 *arg1) {
