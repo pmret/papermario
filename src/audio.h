@@ -33,14 +33,14 @@ typedef struct UnkAl1 {
     /* 0x1A */ s16 unk_1A;
 } UnkAl1; // size unknown (currently 0x1C)
 
-typedef struct UnkAl2 {
+typedef struct UnkAl4 { // maybe same as UnkAlC?
     /* 0x00 */ s16 unk_00;
     /* 0x02 */ u8 unk_02;
     /* 0x03 */ s8 unk_03;
     /* 0x04 */ s8 unk_04;
     /* 0x05 */ s8 unk_05;
     /* 0x06 */ s8 unk_06;
-} UnkAl2;
+} UnkAl4;
 
 typedef struct UnkAl3 {
     /* 0x00 */ u32 unk_00;
@@ -183,7 +183,7 @@ typedef struct UnkAl6CC {
     /* 0x16C */ UnkAlAC unk_16C[8];
 } UnkAl6CC;
 
-typedef struct UnkAl12 {
+typedef struct UnkAlC {
     /* 0x0 */ s16 unk_00;
     /* 0x2 */ s16 unk_02;
     /* 0x4 */ s8 unk_04;
@@ -193,7 +193,7 @@ typedef struct UnkAl12 {
     /* 0x8 */ s8 unk_08;
     /* 0x9 */ s8 unk_09;
     /* 0xA */ s8 unk_0A;
-} UnkAl12;
+} UnkAlC;
 
 typedef struct UnkAl30 {
     /* 0x00 */ s32* unk_00;
@@ -217,8 +217,8 @@ typedef struct UnkAl30 {
     /* 0x2C */ s32* unk_2C;
 } UnkAl30;
 
-typedef struct UnkAl48 {
-    /* 0x00 */ s32 unk_00;
+typedef struct UnkAl48 { // TRack?
+    /* 0x00 */ s32 unk_00; // pointer to something
     /* 0x04 */ f32 unk_04;
     /* 0x08 */ s32 unk_08;
     /* 0x0C */ s16 unk_0C;
@@ -277,10 +277,8 @@ typedef struct UnkAl19E0Sub3 {
 typedef struct UnkAl19E0 {
     /* 0x0000 */ f32 unk_00;
     /* 0x0004 */ UnkAl30* unk_04;
-    /* 0x0008 */ UnkAl12* unk_08;
-    /* 0x000C */ char unk_0C[0x8];
-    /* 0x0014 */ UnkAl2* unk_14;
-    /* 0x0018 */ char unk_18[0x4];
+    /* 0x0008 */ UnkAlC unk_08;
+    /* 0x0014 */ UnkAl4 unk_14;
     /* 0x001C */ s32 unk_1C;
     /* 0x0020 */ UnkTemp2* unk_20;
     /* 0x0024 */ s32 unk_24;
@@ -517,8 +515,8 @@ void func_80052B44(UnkAl48*);
 void func_80052BF8(UnkAl48*, s32*);
 
 void func_800532F4(UnkAl30*);
-void func_80053370(UnkAl12*);
-void func_800533A8(UnkAl2*);
+void func_80053370(UnkAlC*);
+void func_800533A8(UnkAl4*);
 void func_80053654(UnkAl19E0*);
 void func_80053974(UnkAl1*, s32, s32, s16);
 void func_80053A18(UnkAl1*);
