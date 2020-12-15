@@ -179,7 +179,18 @@ void func_8004FD04(UnkAlA9C *arg0, UnkAl3 *arg1) {
     arg0->unk_00->unk_40[arg0->unk_235].unk_01 = 1;
 }
 
-INCLUDE_ASM(void, "code_28910_len_5090", func_8004FD38, UnkAlA9C* arg0, UnkAl3* arg1);
+void func_8004FD38(UnkAlA9C *arg0, UnkAl3 *arg1) {
+    u8 unk_D4 = arg0->unk_D4.u8[0];
+    u32 temp_v1 = arg0->unk_4C[unk_D4];
+
+    if ((unk_D4 < 4) && (temp_v1 < 0x80)) {
+        if (arg0->unk_00->unk_40[temp_v1].unk_00 != arg0->unk_D4.u8[1]) {
+            arg0->unk_00->unk_40[temp_v1].unk_00 = arg0->unk_D4.u8[1];
+            arg0->unk_00->unk_40[temp_v1].unk_01 = 1;
+        }
+        arg0->unk_224[unk_D4] = arg0->unk_D4.u8[1];
+    }
+}
 
 INCLUDE_ASM(void, "code_28910_len_5090", func_8004FD94, UnkAlA9C* arg0, UnkAl3* arg1);
 
@@ -191,9 +202,16 @@ INCLUDE_ASM(void, "code_28910_len_5090", func_8004FEB0, UnkAlA9C* arg0, UnkAl3* 
 
 INCLUDE_ASM(void, "code_28910_len_5090", func_8004FED0, UnkAlA9C* arg0, UnkAl3* arg1);
 
-INCLUDE_ASM(void, "code_28910_len_5090", func_8004FF3C, UnkAlA9C* arg0, UnkAl3* arg1);
+void func_8004FF3C(UnkAlA9C *arg0, UnkAl3 *arg1) {
+    arg1->unk_4A = arg0->unk_D4.u8[0] & 0x7F;
+    arg1->unk_42 = 1;
+    arg1->unk_57 = 0;
+}
 
-INCLUDE_ASM(void, "code_28910_len_5090", func_8004FF58, UnkAlA9C* arg0, UnkAl3* arg1);
+void func_8004FF58(UnkAlA9C *arg0, UnkAl3 *arg1) {
+    arg1->unk_4B = arg0->unk_D4.u8[0] & 0x7F;
+    arg1->unk_43 = 1;
+}
 
 void func_8004FF70(UnkAlA9C *arg0, UnkAl3 *arg1) {
     arg1->unk_49 = arg0->unk_D4.u8[0] & 0x7F;
@@ -231,11 +249,23 @@ void func_8004FFFC(UnkAlA9C *arg0, UnkAl3 *arg1) {
     arg1->unk_56 = 0;
 }
 
-INCLUDE_ASM(void, "code_28910_len_5090", func_80050004, UnkAlA9C* arg0, UnkAl3* arg1);
+void func_80050004(UnkAlA9C *arg0, UnkAl3 *arg1) {
+    arg1->unk_4A = arg0->unk_D4.u8[0] & 0x7F;
+    arg1->unk_57 = arg0->unk_D4.u8[1] & 0x7F;
+}
 
 INCLUDE_ASM(void, "code_28910_len_5090", func_80050020, UnkAlA9C* arg0, UnkAl3* arg1);
 
-INCLUDE_ASM(void, "code_28910_len_5090", func_80050128, UnkAlA9C* arg0, UnkAl3* arg1);
+void func_80050128(UnkAlA9C *arg0, UnkAl3 *arg1) {
+    u8 temp_v0 = arg0->unk_D4.u8[0];
+    u8 temp_v1 = arg0->unk_4C[temp_v0];
+
+    if ((temp_v0 < 4) && ((s8)temp_v1 >= 0)) {
+        arg1->unk_5B = temp_v1;
+    } else {
+        arg1->unk_5B = arg0->unk_235;
+    }
+}
 
 INCLUDE_ASM(void, "code_28910_len_5090", func_8005015C, UnkAlA9C* arg0, UnkAl3* arg1);
 

@@ -43,19 +43,29 @@ typedef struct UnkAl2 {
 } UnkAl2;
 
 typedef struct UnkAl3 {
-    /* 0x00 */ char unk_00[0x38];
+    /* 0x00 */ u32 unk_00;
+    /* 0x04 */ u32 unk_04;
+    /* 0x08 */ char unk_08[0x30];
     /* 0x38 */ u16 unk_38;
     /* 0x3A */ s16 unk_3A;
-    /* 0x3C */ char unk_3C[0x4];
+    /* 0x3C */ char unk_3C[0x2];
+    /* 0x3E */ s16 unk_3E;
     /* 0x40 */ s8 unk_40;
     /* 0x41 */ s8 unk_41;
-    /* 0x42 */ char unk_42[0x4];
+    /* 0x42 */ s8 unk_42;
+    /* 0x43 */ s8 unk_43;
+    /* 0x44 */ char unk_44[0x2];
     /* 0x46 */ s16 unk_46;
     /* 0x48 */ s8 unk_48;
     /* 0x49 */ s8 unk_49;
-    /* 0x4A */ char unk_4A[0xB];
+    /* 0x4A */ s8 unk_4A;
+    /* 0x4B */ s8 unk_4B;
+    /* 0x4C */ char unk_4C[0x9];
     /* 0x55 */ s8 unk_55;
     /* 0x56 */ s8 unk_56;
+    /* 0x57 */ s8 unk_57;
+    /* 0x58 */ char unk_58[0x3];
+    /* 0x5B */ s8 unk_5B;
 } UnkAl3;
 
 typedef struct UnkLen18 {
@@ -340,11 +350,13 @@ typedef struct UnkAlA9C {
     /* 0x024 */ char unk_24[0x8];
     /* 0x02C */ UnkAl1 unk_2C;
     /* 0x048 */ s32 unk_48;
-    /* 0x04C */ char unk_4C[0xC];
+    /* 0x04C */ u8 unk_4C[0x1]; // not sure how long this is
+    /* 0x04D */ char unk_4D[0xB];
     /* 0x058 */ s16 unk_58;
     /* 0x05A */ s16 unk_5A;
     /* 0x05C */ s16 unk_5C;
-    /* 0x05E */ char unk_5E[0xA];
+    /* 0x05E */ char unk_5E[0x6];
+    /* 0x064 */ s32 unk_64;
     /* 0x068 */ s16 unk_68;
     /* 0x06A */ char unk_6A[0x2];
     /* 0x06C */ s32 unk_6C;
@@ -377,7 +389,8 @@ typedef struct UnkAlA9C {
     /* 0x221 */ u8 unk_221;
     /* 0x222 */ u8 unk_222;
     /* 0x223 */ u8 unk_223;
-    /* 0x224 */ char unk_224[0x6];
+    /* 0x224 */ u8 unk_224[3];
+    /* 0x227 */ char unk_227[0x3];
     /* 0x22A */ u8 unk_22A;
     /* 0x22B */ u8 unk_22B;
     /* 0x22C */ u8 unk_22C;
