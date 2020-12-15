@@ -158,7 +158,7 @@ typedef struct UnkAl6CC {
     /* 0x040 */ UnkAl1 unk_40;
     /* 0x05C */ s32 unk_5C;
     /* 0x060 */ s32 unk_60;
-    /* 0x064 */ s32 unk_64[8];
+    /* 0x064 */ s32* unk_64[8];
     /* 0x084 */ s8 unk_84[8];
     /* 0x08C */ u8 unk_8C;
     /* 0x08D */ s8 unk_8D;

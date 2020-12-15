@@ -253,7 +253,9 @@ segments:
     - [0xddaf0, c, code_ddaf0_len_c50]
     - [0xde740, c, code_de740_len_23f0]
     - [0xe0b30, c, code_e0b30_len_b80]
-    - [0xe16b0, bin]
+    - [0xE16B0, data, code_a5dd0_len_114e0]
+    - [0xE5510, .data, code_d0a70_len_4fe0]
+    - [0xE56C0, .data, code_d5a50_len_5fd0]
     - [0xE5820, .data, code_dc470_len_14c0]
     - [0xE5830, bin]
   - type: code
