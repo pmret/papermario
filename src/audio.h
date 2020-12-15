@@ -8,13 +8,21 @@ struct UnkAl19E0;
 
 typedef void (*UnkFuncAl)();
 
-typedef union UnkAl1U {
+typedef union UnkField {
+    u8 u8;
     u16 u16;
+    u32 u32;
+    s8 s8;
     s32 s32;
-} UnkAl1U;
+} UnkField;
+
+typedef union X16 {
+    u8 u8[2];
+    u16 u16;
+} X16;
 
 typedef struct UnkAl1 {
-    /* 0x00 */ UnkAl1U unk_00;
+    /* 0x00 */ UnkField unk_00;
     /* 0x04 */ s32 unk_04;
     /* 0x08 */ s16 unk_08;
     /* 0x0A */ s16 unk_0A;
@@ -33,6 +41,22 @@ typedef struct UnkAl2 {
     /* 0x05 */ s8 unk_05;
     /* 0x06 */ s8 unk_06;
 } UnkAl2;
+
+typedef struct UnkAl3 {
+    /* 0x00 */ char unk_00[0x38];
+    /* 0x38 */ u16 unk_38;
+    /* 0x3A */ s16 unk_3A;
+    /* 0x3C */ char unk_3C[0x4];
+    /* 0x40 */ s8 unk_40;
+    /* 0x41 */ s8 unk_41;
+    /* 0x42 */ char unk_42[0x4];
+    /* 0x46 */ s16 unk_46;
+    /* 0x48 */ s8 unk_48;
+    /* 0x49 */ s8 unk_49;
+    /* 0x4A */ char unk_4A[0xB];
+    /* 0x55 */ s8 unk_55;
+    /* 0x56 */ s8 unk_56;
+} UnkAl3;
 
 typedef struct UnkLen18 {
     /* 0x00 */ u16 unk_00;
@@ -335,14 +359,20 @@ typedef struct UnkAlA9C {
     /* 0x0C8 */ s32 unk_C8;
     /* 0x0CC */ s32 unk_CC;
     /* 0x0D0 */ f32 unk_D0;
-    /* 0x0D4 */ char unk_D4[0x94];
+    /* 0x0D4 */ X16 unk_D4;
+    /* 0x0D6 */ u8 unk_D6;
+    /* 0x0D7 */ char unk_D7;
+    /* 0x0D8 */ char unk_D8[0x90];
     /* 0x168 */ s32 unk_168;
     /* 0x16C */ char unk_16C[0x98];
     /* 0x204 */ s32 unk_204;
-    /* 0x208 */ char unk_208[0x4];
+    /* 0x208 */ s16 unk_208;
+    /* 0x20A */ s16 unk_20A;
     /* 0x20C */ s16 unk_20C;
     /* 0x20E */ s16 unk_20E;
-    /* 0x210 */ char unk_210[0x10];
+    /* 0x210 */ char unk_210[0xA];
+    /* 0x21A */ u8 unk_21A;
+    /* 0x21B */ char unk_21B[0x5];
     /* 0x220 */ u8 unk_220;
     /* 0x221 */ u8 unk_221;
     /* 0x222 */ u8 unk_222;
@@ -432,6 +462,35 @@ void func_8004E158(UnkAlA9C*, s32, s32, UnkAl19E0*);
 void func_8004E3A4(UnkAlA9C*);
 void func_8004E444(UnkAlA9C*);
 s16 func_8004E4B8(UnkAlA9C*);
+void func_8004FBBC(UnkAlA9C*, UnkAl3*);
+s32 func_8004FC08(UnkAlA9C*, u32);
+void func_8004FCB4(UnkAlA9C*, UnkAl3*);
+void func_8004FCE4(UnkAlA9C*, UnkAl3*);
+void func_8004FD04(UnkAlA9C*, UnkAl3*);
+void func_8004FD38(UnkAlA9C*, UnkAl3*);
+void func_8004FD94(UnkAlA9C*, UnkAl3*);
+void func_8004FE10(UnkAlA9C*, UnkAl3*);
+void func_8004FE6C(UnkAlA9C*, UnkAl3*);
+void func_8004FEB0(UnkAlA9C*, UnkAl3*);
+void func_8004FED0(UnkAlA9C*, UnkAl3*);
+void func_8004FF3C(UnkAlA9C*, UnkAl3*);
+void func_8004FF58(UnkAlA9C*, UnkAl3*);
+void func_8004FF70(UnkAlA9C*, UnkAl3*);
+void func_8004FF88(UnkAlA9C*, UnkAl3*);
+void func_8004FFA8(UnkAlA9C*, UnkAl3*);
+void func_8004FFB4(UnkAlA9C*, UnkAl3*);
+void func_8004FFC8(UnkAlA9C*, UnkAl3*);
+void func_8004FFE4(UnkAlA9C*, UnkAl3*);
+void func_8004FFF0(UnkAlA9C*, UnkAl3*);
+void func_8004FFFC(UnkAlA9C*, UnkAl3*);
+void func_80050004(UnkAlA9C*, UnkAl3*);
+void func_80050020(UnkAlA9C*, UnkAl3*);
+void func_80050128(UnkAlA9C*, UnkAl3*);
+void func_8005015C(UnkAlA9C*, UnkAl3*);
+void func_80050184(UnkAlA9C*, UnkAl3*);
+void func_800501A8(UnkAlA9C*, UnkAl3*);
+void func_800502F0(UnkAlA9C*, UnkAl3*);
+void func_80050560(UnkAlA9C*, UnkAl3*);
 s32 func_80056068(s32, u8);
 s32 func_800506C8(s32, s32);
 s32 func_80050C30(u32);
