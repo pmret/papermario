@@ -161,7 +161,7 @@ void func_800532F4(UnkAl30* arg0) {
     arg0->unk_20 = 0.5f;
 }
 
-void func_80053370(UnkAl12* arg0) {
+void func_80053370(UnkAlC* arg0) {
     arg0->unk_00 = 8208;
     arg0->unk_02 = 4800;
     arg0->unk_04 = ~0x80;
@@ -173,7 +173,7 @@ void func_80053370(UnkAl12* arg0) {
     arg0->unk_0A = 0;
 }
 
-void func_800533A8(UnkAl2* arg0) {
+void func_800533A8(UnkAl4* arg0) {
     arg0->unk_00 = 8208;
     arg0->unk_02 = ~0x80;
     arg0->unk_03 = 64;
