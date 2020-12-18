@@ -74,7 +74,7 @@ INCLUDE_ASM(void, "code_28910_len_5090", func_8004DFD4, UnkAl19E0* arg0);
 
 INCLUDE_ASM(s32, "code_28910_len_5090", func_8004E0F4);
 
-void func_8004E158(UnkAlA9C *arg0, s32 arg1, s32 arg2, UnkAl19E0 *arg3) {
+void func_8004E158(UnkAlA9C* arg0, s32 arg1, s32 arg2, UnkAl19E0* arg3) {
     s16 i;
 
     arg0->unk_00 = arg3;
@@ -196,7 +196,7 @@ INCLUDE_ASM(s32, "code_28910_len_5090", func_8004EC04);
 
 INCLUDE_ASM(s32, "code_28910_len_5090", func_8004EC68);
 
-void func_8004FBBC(UnkAlA9C* arg0, UnkAl3* arg1) {
+void func_8004FBBC(UnkAlA9C* arg0, UnkAl60* arg1) {
     u32 unk_D4 = arg0->unk_D4.u16;
     s32 temp_v0;
 
@@ -228,18 +228,14 @@ s32 func_8004FC08(UnkAlA9C* arg0, u32 arg1) {
     return ret * 100;
 }
 
-// todo clean the below
-void func_8004FCB4(UnkAlA9C* arg0, UnkAl3* arg1) {
-    s32 temp_v0;
-    s32 phi_v0;
+void func_8004FCB4(UnkAlA9C* arg0, UnkAl60* arg1) {
+    s32 unk_D4 = arg0->unk_D4.u8[0] & 0x7F;
 
-    temp_v0 = (u8) arg0->unk_D4.u8[0] & 0x7F;
-    phi_v0 = temp_v0;
-    if (temp_v0 != 0) {
-        phi_v0 = temp_v0 << 0x18;
+    if (unk_D4 != 0) {
+        unk_D4 = unk_D4 << 0x18;
     }
 
-    arg0->unk_C0 = phi_v0;
+    arg0->unk_C0 = unk_D4;
     arg0->unk_CC = 0;
     arg0->unk_C8 = 0;
     arg0->unk_C4 = 0;
@@ -247,16 +243,16 @@ void func_8004FCB4(UnkAlA9C* arg0, UnkAl3* arg1) {
     arg1->unk_41 = 1;
 }
 
-void func_8004FCE4(UnkAlA9C* arg0, UnkAl3* arg1) {
+void func_8004FCE4(UnkAlA9C* arg0, UnkAl60* arg1) {
     arg0->unk_20C = (s8)arg0->unk_D4.u8[0] * 100;
 }
 
-void func_8004FD04(UnkAlA9C* arg0, UnkAl3* arg1) {
+void func_8004FD04(UnkAlA9C* arg0, UnkAl60* arg1) {
     arg0->unk_00->unk_40[arg0->unk_235].unk_00 = arg0->unk_D4.u8[0];
     arg0->unk_00->unk_40[arg0->unk_235].unk_01 = 1;
 }
 
-void func_8004FD38(UnkAlA9C* arg0, UnkAl3* arg1) {
+void func_8004FD38(UnkAlA9C* arg0, UnkAl60* arg1) {
     u8 unk_D4 = arg0->unk_D4.u8[0];
     u32 temp_v1 = arg0->unk_4C[unk_D4];
 
@@ -269,71 +265,147 @@ void func_8004FD38(UnkAlA9C* arg0, UnkAl3* arg1) {
     }
 }
 
-INCLUDE_ASM(void, "code_28910_len_5090", func_8004FD94, UnkAlA9C* arg0, UnkAl3* arg1);
+void func_8004FD94(UnkAlA9C* arg0, UnkAl60* arg1) {
+    s32 unk_D4 = arg0->unk_D4.u16;
+    s32 temp_a0 = func_8004FC08(arg0, arg0->unk_D6.u16);
+    s32 temp_v0;
 
-INCLUDE_ASM(void, "code_28910_len_5090", func_8004FE10, UnkAlA9C* arg0, UnkAl3* arg1);
+    if (unk_D4 <= 0) {
+        unk_D4 = 1;
+    }
+    temp_v0 = (temp_a0 - arg0->unk_B0) / unk_D4;
 
-INCLUDE_ASM(void, "code_28910_len_5090", func_8004FE6C, UnkAlA9C* arg0, UnkAl3* arg1);
+    arg0->unk_BC = unk_D4;
+    arg0->unk_B8 = temp_a0;
+    arg0->unk_B4 = temp_v0;
+}
 
-INCLUDE_ASM(void, "code_28910_len_5090", func_8004FEB0, UnkAlA9C* arg0, UnkAl3* arg1);
+void func_8004FE10(UnkAlA9C* arg0, UnkAl60* arg1) {
+    s32 temp_a1;
+    s32 temp_a2;
 
-INCLUDE_ASM(void, "code_28910_len_5090", func_8004FED0, UnkAlA9C* arg0, UnkAl3* arg1);
+    temp_a1 = arg0->unk_D4.u16;
+    temp_a2 = arg0->unk_D6.u8[0] & 0x7F;
 
-void func_8004FF3C(UnkAlA9C* arg0, UnkAl3* arg1) {
+    if (temp_a2 != 0) {
+        temp_a2 = temp_a2 << 0x18;
+    }
+
+    if (temp_a1 <= 0) {
+        temp_a1 = 1;
+    }
+
+    arg0->unk_CC = temp_a1;
+    arg0->unk_C8 = temp_a2;
+    arg0->unk_C4 = (temp_a2 - arg0->unk_C0) / temp_a1;
+}
+
+// Not sure about types
+#ifdef NON_MATCHING
+void func_8004FE6C(UnkAlA9C* arg0, UnkAl60* arg1) {
+    u8 temp_v1 = arg0->unk_D4.u16;
+
+    arg1->unk_44 = temp_v1;
+    arg1->unk_0C = func_80053BE8(arg0->unk_00, arg0->unk_D4.u8[0], temp_v1, &arg1->unk_10);
+}
+#else
+INCLUDE_ASM(void, "code_28910_len_5090", func_8004FE6C, UnkAlA9C* arg0, UnkAl60* arg1);
+#endif
+
+void func_8004FEB0(UnkAlA9C* arg0, UnkAl60* arg1) {
+    u32 unk_D4 = arg0->unk_D4.u8[0] & 0x7F;
+
+    if (unk_D4 != 0) {
+        unk_D4 = unk_D4 << 0x18;
+    }
+
+    arg1->unk_18 = unk_D4;
+    arg1->unk_41 = 1;
+}
+
+// Type shenanigans
+#ifdef NON_MATCHING
+void func_8004FED0(UnkAlA9C* arg0, UnkAl60* arg1) {
+    s32 temp_a2 = arg0->unk_D4.u16;
+    s32 temp_a0 = arg0->unk_D6.u8[0] & 0x7F;
+    s32 phi_a2;
+
+    if (temp_a0 != 0) {
+        temp_a0 = temp_a0 << 0x18;
+    }
+
+    if (temp_a0 != arg1->unk_18) {
+
+
+        if (temp_a2 <= 0) {
+            phi_a2 = 1;
+        } else {
+            phi_a2 = temp_a2;
+        }
+        arg1->unk_24[0] = phi_a2;
+        arg1->unk_20 = temp_a0;
+        arg1->unk_1C = (temp_a0 - arg1->unk_18) / phi_a2;
+    }
+}
+#else
+INCLUDE_ASM(void, "code_28910_len_5090", func_8004FED0, UnkAlA9C* arg0, UnkAl60* arg1);
+#endif
+
+void func_8004FF3C(UnkAlA9C* arg0, UnkAl60* arg1) {
     arg1->unk_4A = arg0->unk_D4.u8[0] & 0x7F;
     arg1->unk_57 = 0;
     arg1->unk_42 = 1;
 }
 
-void func_8004FF58(UnkAlA9C* arg0, UnkAl3* arg1) {
+void func_8004FF58(UnkAlA9C* arg0, UnkAl60* arg1) {
     arg1->unk_4B = arg0->unk_D4.u8[0] & 0x7F;
     arg1->unk_43 = 1;
 }
 
-void func_8004FF70(UnkAlA9C* arg0, UnkAl3* arg1) {
+void func_8004FF70(UnkAlA9C* arg0, UnkAl60* arg1) {
     arg1->unk_49 = arg0->unk_D4.u8[0] & 0x7F;
     arg1->unk_41 = 1;
 }
 
-void func_8004FF88(UnkAlA9C* arg0, UnkAl3* arg1) {
+void func_8004FF88(UnkAlA9C* arg0, UnkAl60* arg1) {
     arg1->unk_46 = (s8)arg0->unk_D4.u8[0] * 100;
 }
 
-void func_8004FFA8(UnkAlA9C* arg0, UnkAl3* arg1) {
+void func_8004FFA8(UnkAlA9C* arg0, UnkAl60* arg1) {
     arg1->unk_48 = arg0->unk_D4.u8[0];
 }
 
-void func_8004FFB4(UnkAlA9C* arg0, UnkAl3* arg1) {
+void func_8004FFB4(UnkAlA9C* arg0, UnkAl60* arg1) {
     arg1->unk_38 = arg0->unk_D4.u16;
     arg1->unk_40 = 1;
 }
 
-void func_8004FFC8(UnkAlA9C* arg0, UnkAl3* arg1) {
+void func_8004FFC8(UnkAlA9C* arg0, UnkAl60* arg1) {
     arg1->unk_3A = arg0->unk_D4.u8[0];
     arg1->unk_55 = arg0->unk_D4.u8[1];
-    arg1->unk_56 = arg0->unk_D6;
+    arg1->unk_56 = arg0->unk_D6.u8[0];
 }
 
-void func_8004FFE4(UnkAlA9C* arg0, UnkAl3* arg1) {
+void func_8004FFE4(UnkAlA9C* arg0, UnkAl60* arg1) {
     arg1->unk_55 = arg0->unk_D4.u8[0];
 }
 
-void func_8004FFF0(UnkAlA9C* arg0, UnkAl3* arg1) {
+void func_8004FFF0(UnkAlA9C* arg0, UnkAl60* arg1) {
     arg1->unk_56 = arg0->unk_D4.u8[0];
 }
 
-void func_8004FFFC(UnkAlA9C* arg0, UnkAl3* arg1) {
+void func_8004FFFC(UnkAlA9C* arg0, UnkAl60* arg1) {
     arg1->unk_56 = 0;
 }
 
-void func_80050004(UnkAlA9C* arg0, UnkAl3* arg1) {
+void func_80050004(UnkAlA9C* arg0, UnkAl60* arg1) {
     arg1->unk_4A = arg0->unk_D4.u8[0] & 0x7F;
     arg1->unk_57 = arg0->unk_D4.u8[1] & 0x7F;
 }
 
-INCLUDE_ASM(void, "code_28910_len_5090", func_80050020, UnkAlA9C* arg0, UnkAl3* arg1);
+INCLUDE_ASM(void, "code_28910_len_5090", func_80050020, UnkAlA9C* arg0, UnkAl60* arg1);
 
-void func_80050128(UnkAlA9C* arg0, UnkAl3* arg1) {
+void func_80050128(UnkAlA9C* arg0, UnkAl60* arg1) {
     u8 temp_v0 = arg0->unk_D4.u8[0];
     u8 temp_v1 = arg0->unk_4C[temp_v0];
 
@@ -344,15 +416,28 @@ void func_80050128(UnkAlA9C* arg0, UnkAl3* arg1) {
     }
 }
 
-INCLUDE_ASM(void, "code_28910_len_5090", func_8005015C, UnkAlA9C* arg0, UnkAl3* arg1);
+// unk_D4 type shenanigans
+#ifdef NON_MATCHING
+void func_8005015C(UnkAlA9C* arg0, UnkAl60* arg1) {
+    func_800560BC(arg0->unk_234, arg1->unk_5C, arg0->unk_D4.u16 >> 8);
+}
+#else
+INCLUDE_ASM(void, "code_28910_len_5090", func_8005015C, UnkAlA9C* arg0, UnkAl60* arg1);
+#endif
 
-INCLUDE_ASM(void, "code_28910_len_5090", func_80050184, UnkAlA9C* arg0, UnkAl3* arg1);
+void func_80050184(UnkAlA9C* arg0, UnkAl60* arg1) {
+    s32 temp = arg0->unk_D4.u16 + arg0->unk_64;
 
-INCLUDE_ASM(void, "code_28910_len_5090", func_800501A8, UnkAlA9C* arg0, UnkAl3* arg1);
+    arg1->unk_3E = arg0->unk_D6.u8[0];
+    arg1->unk_04 = arg1->unk_00;
+    arg1->unk_00 = temp;
+}
 
-INCLUDE_ASM(void, "code_28910_len_5090", func_800502F0, UnkAlA9C* arg0, UnkAl3* arg1);
+INCLUDE_ASM(void, "code_28910_len_5090", func_800501A8, UnkAlA9C* arg0, UnkAl60* arg1);
 
-void func_80050560(UnkAlA9C* arg0, UnkAl3* arg1) {
+INCLUDE_ASM(void, "code_28910_len_5090", func_800502F0, UnkAlA9C* arg0, UnkAl60* arg1);
+
+void func_80050560(UnkAlA9C* arg0, UnkAl60* arg1) {
 }
 
 INCLUDE_ASM(s32, "code_28910_len_5090", func_80050568);
@@ -369,7 +454,15 @@ INCLUDE_ASM(s32, "code_28910_len_5090", func_80050770);
 
 INCLUDE_ASM(s32, "code_28910_len_5090", func_80050818);
 
-INCLUDE_ASM(s32, "code_28910_len_5090", func_8005083C);
+void func_8005083C(UnkAlA9C* arg0, s32 arg1, s16 arg2, s8 arg3) {
+    UnkAl60* temp_a1 = &arg0->unk_25C[arg1];
+
+    if (temp_a1->unk_00 != 0) {
+        arg0->unk_D4.u16 = arg2;
+        arg0->unk_D6.u8[0] = arg3;
+        func_8004FED0(arg0, temp_a1);
+    }
+}
 
 INCLUDE_ASM(s32, "code_28910_len_5090", func_8005087C);
 
@@ -389,7 +482,9 @@ s32 func_80050C30(u32 arg0) {
     }
 }
 
-INCLUDE_ASM(s32, "code_28910_len_5090", func_80050C54);
+void func_80050C54(s32 arg0, s8 arg1) {
+    D_8009A628->unk_21 = arg1;
+}
 
 INCLUDE_ASM(s32, "code_28910_len_5090", func_80050C64);
 

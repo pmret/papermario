@@ -436,7 +436,7 @@ void func_80053BA8(UnkAl1* arg0) {
     }
 }
 
-INCLUDE_ASM(s32, "code_2e230_len_2190", func_80053BE8);
+INCLUDE_ASM(s32, "code_2e230_len_2190", func_80053BE8, UnkAl19E0* arg0, s32 arg1, s32 arg2, s32* arg3);
 
 INCLUDE_ASM(s32, "code_2e230_len_2190", func_80053C58);
 

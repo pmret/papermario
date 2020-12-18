@@ -76,26 +76,37 @@ void nuAuCleanDMABuffers(void) {
     } while (0);
 }
 
+// Nop issue
+#ifdef NON_MATCHING
+void func_8004B328(s16 arg0, s32 arg1) {
+    s16 temp_a0_2;
+    s32 temp_s0;
+
+    switch (arg0) {
+        case 2:
+            D_800A0F50 = func_80056D50();
+            func_80056D34();
+            break;
+        case 1:
+            temp_a0_2 = D_800A0F50;
+            temp_s0 = temp_a0_2 - (temp_a0_2 / 20) * arg1;
+
+            if (temp_s0 < 0) {
+                temp_s0 = 0;
+            }
+
+            temp_s0 = (temp_s0 * temp_s0) >> 0xF;
+            func_80056D44(temp_s0);
+
+            if (temp_s0 == 0) {
+                D_80078180 = 0;
+            }
+            break;
+    }
+}
+#else
 INCLUDE_ASM(s32, "code_25f00_len_940", func_8004B328);
-// void func_8004B328(s16 arg0, s32 arg1) {
-//     s32 temp_s0;
-//     s32 temp_hi;
-
-//     switch (arg0) {
-//         case 2:
-//             D_800A0F50 = func_80056D50();
-//             func_80056D34();
-//             break;
-//         case 1:
-//             temp_s0 = D_800A0F50 -  D_800A0F50 * (s32)(0x66666667) * arg1;
-
-//             func_80056D44(temp_s0);
-//             if (temp_s0 == 0) {
-//                 D_80078180 = 0;
-//             }
-//             break;
-//     }
-// }
+#endif
 
 void alLink(ALLink* element, ALLink* after) {
     element->next = after->next;
