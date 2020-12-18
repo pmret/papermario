@@ -1,8 +1,8 @@
 #include "common.h"
 #include "audio.h"
 
-s32 D_80078E50 = 0;
-UnkAl0* D_80078E54 = 0;
+UnkAl0* D_80078E50 = NULL;
+UnkAl0* D_80078E54 = NULL;
 s8 D_80078E58 = 0;
 s16 D_80078E5A = 0x7FFF;
 s8 D_80078E5C = 0;
@@ -16,10 +16,10 @@ s32 D_80078E60[] = { 0x7FFF7FFC, 0x7FF57FE8, 0x7FD77FC0, 0x7FA57F84, 0x7F5F7F34,
 INCLUDE_ASM(s32, "code_31650", func_80056250);
 
 void func_800565A4(void) {
-    s32* sym = &D_80078E50;
+    UnkAl0** sym = &D_80078E50;
 
-    if (*sym != 0) {
-        *sym = 0;
+    if (*sym != NULL) {
+        *sym = NULL;
     }
 }
 
@@ -46,17 +46,25 @@ void func_80056D5C(s8 arg0) {
 INCLUDE_ASM(s32, "code_31650", func_80056D5C);
 #endif
 
-#ifdef NON_MATCHING
 void func_80056D78(u8 arg0, u16 arg1) {
-    D_80078E54->unk_20[arg0].unk_00 = arg1 & 0x7FFF;
+    UnkLen18* temp = &D_80078E54->unk_20[arg0];
+
+    temp->unk_00 = arg1 & 0x7FFF;
 }
-#else
-INCLUDE_ASM(void, "code_31650", func_80056D78, u8 arg0, u16 arg1);
-#endif
 
-INCLUDE_ASM(s32, "code_31650", func_80056DA4);
+u16 func_80056DA4(u8 arg0, u16 arg1) {
+    UnkLen18* temp = &D_80078E54->unk_20[arg0];
 
-INCLUDE_ASM(void, "code_31650", func_80056DCC, u8 arg0, u8 arg1);
+    return temp->unk_00;
+}
+
+void func_80056DCC(u8 arg0, u8 arg1) {
+    UnkLen18* temp = &D_80078E54->unk_20[arg0];
+
+    temp->unk_0C = arg1;
+    func_8005904C(temp->unk_04, arg1);
+    func_8005904C(temp->unk_08, arg1);
+}
 
 INCLUDE_ASM(s32, "code_31650", func_80056E34);
 

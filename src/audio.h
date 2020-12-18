@@ -71,16 +71,21 @@ typedef struct UnkAl3 {
 typedef struct UnkLen18 {
     /* 0x00 */ u16 unk_00;
     /* 0x02 */ char unk_02[0x2];
-    /* 0x04 */ s32 unk_04;
-    /* 0x08 */ s32 unk_08;
+    /* 0x04 */ s32* unk_04;
+    /* 0x08 */ s32* unk_08;
     /* 0x0C */ s8 unk_0C;
-    /* 0x0D */ char unk_0D[0xB];
+    /* 0x0D */ char unk_0D[0x3];
+    /* 0x10 */ s32* unk_10;
+    /* 0x14 */ s32* unk_14;
 } UnkLen18;
 
 typedef struct UnkAl7C {
-    /* 0x00 */ char unk_00[0x14];
-    /* 0x14 */ s32 unk_14;
-    /* 0x18 */ s32 unk_18;
+    /* 0x00 */ char unk_00[0x4];
+    /* 0x04 */ s32* unk_04;
+    /* 0x08 */ s32* unk_08;
+    /* 0x0C */ char unk_0C[0x8];
+    /* 0x14 */ s32* unk_14;
+    /* 0x18 */ s32* unk_18;
     /* 0x1C */ char unk_1C[0xC];
     /* 0x28 */ s32 unk_28;
     /* 0x2C */ s32 unk_2C;
@@ -105,10 +110,13 @@ typedef struct UnkAl7C {
 } UnkAl7C;
 
 typedef struct UnkAl0 {
-    /* 0x00 */ char unk_00[0x18];
+    /* 0x00 */ char unk_00[0x14];
+    /* 0x14 */ s32* unk_14; // pointer to nuAuDmaNew
     /* 0x18 */ ALHeap* unk_18;
-    /* 0x1C */ UnkAl7C* unk_1C;
-    /* 0x20 */ UnkLen18 unk_20[1]; // amt unknown
+    /* 0x1C */ UnkAl7C* unk_1C; // pointer to list of UnkAl7C
+    /* 0x20 */ UnkLen18* unk_20; // amt unknown
+    /* 0x24 */ s32* unk_24;
+    /* 0x28 */ s32* unk_28;
 } UnkAl0;
 
 typedef struct UnkAlA {
@@ -282,7 +290,9 @@ typedef struct UnkAl19E0 {
     /* 0x001C */ s32 unk_1C;
     /* 0x0020 */ UnkTemp2* unk_20;
     /* 0x0024 */ s32 unk_24;
-    /* 0x0028 */ char unk_28[0xC];
+    /* 0x0028 */ char unk_28[0x4];
+    /* 0x002C */ s32* unk_2C;
+    /* 0x0030 */ char unk_30[0x4];
     /* 0x0034 */ s32 unk_34;
     /* 0x0038 */ s32 unk_38;
     /* 0x003C */ UnkAl19E0Sub* unk_3C;
@@ -420,24 +430,24 @@ typedef struct UnkAl834 {
     /* 0x021 */ char unk_21[0x813];
 } UnkAl834;
 
-extern s32 D_80078E50;
-extern UnkAl0* D_80078E54;
-extern s8* D_80078181;
-extern s32* D_80078190;
-extern s32* D_800781D0;
-extern s32* D_80078290;
-extern s32* D_800782F8;
-extern s32* D_80078348;
-extern s32* D_80078320;
-extern s32* D_80078544;
-extern s32* D_800785A0;
+extern u8 D_80078181;
+extern s32 D_80078190;
+extern s32 D_800781D0;
+extern s32 D_80078290;
+extern s32 D_800782F8;
+extern s32 D_80078348;
+extern s32 D_80078320;
+extern s32 D_80078544;
+extern s32 D_800785A0;
 extern s32 D_80078DB0;
 extern u16 D_80078DB6;
 
+extern UnkAl0* D_80078E50;
+extern UnkAl0* D_80078E54;
 extern s8 D_80078E58;
 extern s16 D_80078E5A;
 extern s8 D_80078E5C;
-extern s32 D_8007F1F8;
+extern s32* D_8007F1F8; // points to 80078290
 
 extern UnkAl19E0* D_8009A5C0;
 extern UnkAlA9C* D_8009A5CC;
@@ -545,6 +555,7 @@ void func_800561E4(s32);
 void func_80056204(void);
 void func_80056228(void);
 
+void func_80056D44(s16);
 s16 func_80056D50(void);
 void func_80056D78(u8, u16);
 void func_80056DCC(u8, u8);
