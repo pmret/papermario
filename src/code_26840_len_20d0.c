@@ -1,7 +1,7 @@
 #include "common.h"
 #include "audio.h"
 
-void func_8004B440(UnkAl6CC *arg0, u8 arg1, u8 arg2, UnkAl19E0 *arg3, u8 arg4) {
+void func_8004B440(UnkAl6CC* arg0, u8 arg1, u8 arg2, UnkAl19E0* arg3, u8 arg4) {
     u32 i;
     s32 c = 0x6A25E;
 
