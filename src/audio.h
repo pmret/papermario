@@ -457,6 +457,8 @@ extern UnkAl834* D_8009A628;
 extern UnkAl6CC* D_8009A640;
 extern UnkAlA9C* D_8009A664;
 
+extern u16 D_800A0F50;
+
 extern s32* D_800A3FE0;
 extern s32* D_800A3FE4;
 extern s32 D_800A3FE8;

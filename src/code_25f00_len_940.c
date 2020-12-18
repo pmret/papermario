@@ -42,6 +42,7 @@ void nuAuCleanDMABuffers(void) {
     NUDMAState* state = &nuAuDmaState;
     NUDMABuffer* dmaPtr = state->firstUsed;
 
+    // A bit odd, this
     do {
         NUDMAState* state = &nuAuDmaState;
         NUDMABuffer* nextPtr;
@@ -49,11 +50,14 @@ void nuAuCleanDMABuffers(void) {
 
         while (dmaPtr != NULL) {
             nextPtr = dmaPtr->node.next;
-            if ((dmaPtr->frameCnt + 1) < nuAuFrameCounter) {
+
+            if (dmaPtr->frameCnt + 1 < nuAuFrameCounter) {
                 if (state->firstUsed == dmaPtr) {
                     state->firstUsed = nextPtr;
                 }
+
                 alUnlink(dmaPtr);
+
                 if (state->firstFree != 0) {
                     alLink(dmaPtr, state->firstFree);
                 } else {
@@ -62,6 +66,7 @@ void nuAuCleanDMABuffers(void) {
                     dmaPtr->node.prev = 0;
                 }
             }
+
             dmaPtr = nextPtr;
         }
 
@@ -70,8 +75,6 @@ void nuAuCleanDMABuffers(void) {
         *frameCounter += 1;
     } while (0);
 }
-
-extern u16 D_800A0F50;
 
 INCLUDE_ASM(s32, "code_25f00_len_940", func_8004B328);
 // void func_8004B328(s16 arg0, s32 arg1) {
