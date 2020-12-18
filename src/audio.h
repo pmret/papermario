@@ -158,7 +158,9 @@ typedef struct UnkAlAC {
 
 typedef struct UnkAl6CC {
     /* 0x000 */ struct UnkAl19E0* unk_00;
-    /* 0x004 */ char unk_04[0x2C];
+    /* 0x004 */ char unk_04[0x4];
+    /* 0x008 */ s32* unk_08;
+    /* 0x00C */ char unk_0C[0x24];
     /* 0x030 */ s32 unk_30;
     /* 0x034 */ s32 unk_34;
     /* 0x038 */ s32 unk_38;
@@ -345,6 +347,35 @@ typedef struct UnkAl19E0 {
     /* 0x1320 */ UnkAl48 unk_1320[24];
 } UnkAl19E0; // size = 0x19E0
 
+typedef struct UnkAl60 {
+    /* 0x00 */ char unk_00[0x18];
+    /* 0x18 */ s32 unk_18;
+    /* 0x1C */ char unk_1C[0x8];
+    /* 0x24 */ s32 unk_24[2];
+    /* 0x2C */ char unk_2C[0x18];
+    /* 0x44 */ u16 unk_44;
+    /* 0x46 */ u16 unk_46;
+    /* 0x48 */ u8 unk_48;
+    /* 0x49 */ u8 unk_49;
+    /* 0x4A */ u8 unk_4A;
+    /* 0x4B */ u8 unk_4B;
+    /* 0x4C */ u8 unk_4C;
+    /* 0x4D */ char unk_4D[0xB];
+    /* 0x58 */ u8 unk_58;
+    /* 0x59 */ char unk_59[0x7];
+} UnkAl60; // size = 0x60;
+
+typedef struct UnkAl24 {
+    /* 0x00 */ char unk_00[0x8];
+    /* 0x08 */ u16 unk_08;
+    /* 0x0A */ u16 unk_0A;
+    /* 0x0C */ s32 unk_0C;
+    /* 0x10 */ char unk_10[0x4];
+    /* 0x14 */ u16 unk_14;
+    /* 0x16 */ u8 unk_16;
+    /* 0x17 */ u8 unk_17;
+} UnkAl24; // size = 0x18;
+
 typedef struct UnkAlA9C {
     /* 0x000 */ UnkAl19E0* unk_00;
     /* 0x004 */ UnkAl6CC* unk_04;
@@ -365,8 +396,7 @@ typedef struct UnkAlA9C {
     /* 0x05C */ s16 unk_5C;
     /* 0x05E */ char unk_5E[0x6];
     /* 0x064 */ s32 unk_64;
-    /* 0x068 */ s16 unk_68;
-    /* 0x06A */ char unk_6A[0x2];
+    /* 0x068 */ s32 unk_68;
     /* 0x06C */ s32 unk_6C;
     /* 0x070 */ s32 unk_70;
     /* 0x074 */ char unk_74[0x3C];
@@ -417,7 +447,8 @@ typedef struct UnkAlA9C {
     /* 0x259 */ s8 unk_259;
     /* 0x25A */ s8 unk_25A;
     /* 0x25B */ s8 unk_25B;
-    /* 0x25C */ char unk_25C[0x840];
+    /* 0x25C */ UnkAl60 unk_25C[16];
+    /* 0x85C */ UnkAl24 unk_85C[24];
 } UnkAlA9C; // size = 0xA9C
 
 typedef struct UnkAl834 {

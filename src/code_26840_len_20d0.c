@@ -84,6 +84,42 @@ void func_8004B440(UnkAl6CC* arg0, u8 arg1, u8 arg2, UnkAl19E0* arg3, u8 arg4) {
 }
 
 INCLUDE_ASM(void, "code_26840_len_20d0", func_8004B62C, UnkAl6CC* arg0);
+// void func_8004B62C(UnkAl6CC *arg0) {
+//     s32 *temp_a1;
+//     u16 temp_v0;
+//     u16 temp_v0_2;
+//     u32 temp_a3;
+//     s32 *phi_v1;
+//     UnkAl6CC *phi_a2;
+//     u32 phi_a3;
+
+//     temp_a1 = arg0->unk_00->unk_A0;
+//     arg0->unk_08 = temp_a1;
+
+//     phi_v1 = temp_a1;
+//     phi_a2 = arg0;
+//     phi_a3 = 0U;
+// loop_1:
+//     temp_v0 = phi_v1->unk10;
+//     if (temp_v0 != 0) {
+//         phi_a2->unkC = (void *) (temp_v0 + temp_a1);
+//     }
+//     temp_a3 = phi_a3 + 1;
+//     phi_v1 = phi_v1 + 2;
+//     phi_a2 = phi_a2 + 4;
+//     phi_a3 = temp_a3;
+//     if (temp_a3 < 8U) {
+//         goto loop_1;
+//     }
+
+
+//     if (temp_a1->unkE == 1) {
+//         temp_v0_2 = ;
+//         if (temp_a1->unk_20 != 0) {
+//             arg0->unk_2C = (void *) (temp_v0_2 + temp_a1);
+//         }
+//     }
+// }
 
 void func_8004B698(UnkAl6CC* arg0) {
     s32 i;

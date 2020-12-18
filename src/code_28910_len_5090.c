@@ -74,7 +74,84 @@ INCLUDE_ASM(void, "code_28910_len_5090", func_8004DFD4, UnkAl19E0* arg0);
 
 INCLUDE_ASM(s32, "code_28910_len_5090", func_8004E0F4);
 
-INCLUDE_ASM(void, "code_28910_len_5090", func_8004E158, UnkAlA9C* arg0, s32 arg1, s32 arg2, UnkAl19E0* arg3);
+void func_8004E158(UnkAlA9C *arg0, s32 arg1, s32 arg2, UnkAl19E0 *arg3) {
+    s16 i;
+
+    arg0->unk_00 = arg3;
+    func_8004E880(arg0, 0x2625A, 0x30);
+    arg0->unk_48 = 0x8000;
+    arg0->unk_B0 = 0x3CF0;
+    arg0->unk_C0 = 0x7F000000;
+    arg0->unk_22B = 1;
+    arg0->unk_14 = 0;
+    arg0->unk_18 = 0;
+    arg0->unk_1C = 0;
+    arg0->unk_20 = 0;
+    arg0->unk_58 = 0;
+    arg0->unk_5A = 0;
+    arg0->unk_68 = 0;
+    arg0->unk_6C = 0;
+    arg0->unk_70 = 0;
+    arg0->unk_BC = 0;
+    arg0->unk_B8 = 0;
+    arg0->unk_B4 = 0;
+    arg0->unk_CC = 0;
+    arg0->unk_C8 = 0;
+    arg0->unk_C4 = 0;
+    arg0->unk_20C = 0;
+    arg0->unk_20E = 0;
+    arg0->unk_220 = 0;
+    arg0->unk_204 = 0;
+    arg0->unk_232 = 0;
+    arg0->unk_221 = 0;
+    arg0->unk_234 = arg1;
+    arg0->unk_235 = arg2;
+    arg0->unk_168 = 0;
+    arg0->unk_222 = 0;
+    arg0->unk_223 = 0;
+    arg0->unk_22A = 0;
+    arg0->unk_22C = 0;
+    arg0->unk_D0 = 1.0f;
+    arg0->unk_22D = 0;
+    arg0->unk_22F = 2;
+    arg0->unk_230 = 3;
+    arg0->unk_22E = 0;
+    arg0->unk_231 = 4;
+
+    for (i = 0; i < ARRAY_COUNT(arg0->unk_25C); i++) {
+        UnkAl60* temp = &arg0->unk_25C[i];
+
+        temp->unk_18 = 0;
+        temp->unk_24[1] = 0;
+        temp->unk_46 = 0;
+        temp->unk_48 = 0;
+        temp->unk_4A = 0;
+        temp->unk_4B = 0;
+        temp->unk_44 = 0;
+        temp->unk_58 = 0;
+        temp->unk_49 = 0x7F;
+        temp->unk_4C = 0;
+
+        if (i < ARRAY_COUNT(arg0->unk_238)) {
+            arg0->unk_238[i] = 0;
+        }
+    }
+
+    for (i = 0; i < ARRAY_COUNT(arg0->unk_85C); i++) {
+        UnkAl24* temp = &arg0->unk_85C[i];
+
+        temp->unk_08 = 0;
+        temp->unk_0A = 0;
+        temp->unk_0C = 0;
+        temp->unk_14 = 0;
+        temp->unk_16 = 0;
+        temp->unk_17 = 0;
+    }
+
+    func_80053AEC(&arg0->unk_2C, 0x7FFF);
+    func_80055110(arg0);
+}
+
 
 INCLUDE_ASM(s32, "code_28910_len_5090", func_8004E344);
 
