@@ -45,7 +45,9 @@ void func_80052B44(UnkAl48* arg0) {
     arg0->unk_43 |= 0x4;
 }
 
-INCLUDE_ASM(s32, "code_2d9a0_len_890", func_80052BC0);
+s32 func_80052BC0(s32 arg0) {
+    return (arg0 / 5750) * 0xB8;
+}
 
 INCLUDE_ASM(void, "code_2d9a0_len_890", func_80052BF8, UnkAl48* arg0, s32* arg1);
 

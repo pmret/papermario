@@ -201,7 +201,7 @@ typedef struct UnkAl30 {
     /* 0x2C */ s32* unk_2C;
 } UnkAl30;
 
-typedef struct UnkAl48 { // TRack?
+typedef struct UnkAl48 { // Track?
     /* 0x00 */ s32 unk_00; // pointer to something
     /* 0x04 */ f32 unk_04;
     /* 0x08 */ s32 unk_08;
