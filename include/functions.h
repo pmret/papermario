@@ -21,6 +21,7 @@ Shadow* get_shadow_by_index(s32 index);
 void render_player_model();
 
 f32 integrate_gravity(void);
+f32 get_clamped_angle_diff(f32, f32);
 
 // Text
 PrintContext* load_string(s32 stringID, s32* a1);

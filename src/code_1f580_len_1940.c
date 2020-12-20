@@ -37,7 +37,26 @@ ApiStatus func_80044290(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_1f580_len_1940", MakeNpcs, ScriptInstance* script, s32 isInitialCall);
+ApiStatus MakeNpcs(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+
+    if (isInitialCall) {
+        script->functionTemp[0].s = 0;
+    }
+
+    switch (script->functionTemp[0].s) {
+        case 0:
+            make_npcs(get_variable(script, *args++), GAME_STATUS->mapID, get_variable(script, *args++));
+            script->functionTemp[0].s = 1;
+            break;
+        case 1:
+            if (gGameState != script->functionTemp[0].s) {
+                return ApiStatus_DONE2;
+            }
+    }
+
+    return ApiStatus_BLOCK;
+}
 
 INCLUDE_ASM(s32, "code_1f580_len_1940", RemoveNpc, ScriptInstance* script, s32 isInitialCall);
 
@@ -504,7 +523,46 @@ ApiStatus func_800458CC(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
+// comments inline, WIP
+#ifdef NON_MATCHIING
+ApiStatus func_80045900(ScriptInstance* script) {
+    Enemy* enemy = script->owner1.enemy;
+    Npc* npc = get_npc_unsafe(enemy->npcID);
+    s32 var0 = get_variable(script, *script->ptrReadPos);
+
+    enemy->unk_B0 |= 4;
+
+    if (var0 == 0) {
+        // idk what these are supposed to be
+        f32 subroutine_argE;
+        f32 subroutine_argD;
+        f32 subroutine_argC;
+        f32 subroutine_argB;
+        s32 subroutine_argA;
+
+        if (!(enemy->unk_B0 & 0x10)) {
+            npc->currentAnim = *enemy->animList;
+        }
+
+        if (!(enemy->unk_B0 & 0x8)) {
+            fx_emote(2, npc, 0, npc->collisionHeight, 1.0f, 0.0f, -20.0f, 40, &subroutine_argA);
+        }
+
+        if ((npc->flags & 0xA08) == 0x808) {
+            // function decl needed
+            if (func_800DCB7C(npc->unk_80, &subroutine_argB, &subroutine_argC, &subroutine_argD, &subroutine_argE, npc->pos.x,
+                              npc->pos.y + npc->collisionHeight, npc->pos.z, 100.0f) != 0) {
+                npc->pos.y = subroutine_argC;
+            }
+            npc->flags &= ~0x800;
+        }
+    }
+
+    return ApiStatus_DONE2;
+}
+#else
 INCLUDE_ASM(s32, "code_1f580_len_1940", func_80045900);
+#endif
 
 ApiStatus SetTattleString(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

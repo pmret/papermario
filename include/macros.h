@@ -44,6 +44,7 @@
 
 // Alternative to libultra's M_PI: non-float version; more digits cause issues
 #define PI 3.141592f
+#define TAU 6.28318f
 
 //NOTE: SCRIPT_ALLOC is probably not quite correct, but this is the closest thing to matching for the functions its used in. Needs more work.
 #define SCRIPT_ALLOC(new, index) \
