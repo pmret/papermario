@@ -7,6 +7,7 @@ TARGET = papermario
 COMPARE = 1
 NON_MATCHING = 0
 WATCH_INCLUDES = 1
+WSL_ELEVATE_GUI = 1
 
 -include settings.mk
 
@@ -68,6 +69,15 @@ ifeq ($(UNAME_S),Darwin)
 	ICONV := tools/iconv.py UTF-8 SHIFT-JIS
 endif
 
+WSL := 0
+JAVA := java
+ifeq ($(findstring microsoft,$(shell cat /proc/sys/kernel/osrelease)),microsoft)
+	WSL := 1
+	ifeq ($(WSL_ELEVATE_GUI),1)
+		JAVA := powershell.exe -command java
+	endif
+endif
+
 OLD_AS=tools/$(OS)/mips-nintendo-nu64-as
 CC=tools/$(OS)/cc1
 
@@ -115,14 +125,16 @@ tools:
 
 setup: clean submodules tools split $(LD_SCRIPT)
 
+# tools/star-rod submodule intentionally omitted
 submodules:
+	git submodule init tools/n64splat
 	git submodule update --init --recursive
 
 split:
 	$(SPLAT) --modes ld bin Yay0 PaperMarioMapFS PaperMarioMessages img PaperMarioNpcSprites --new
 
 split-%:
-	$(SPLAT) --modes ld $* --verbose --new
+	$(SPLAT) --modes ld $* --verbose
 
 split-all:
 	$(SPLAT) --modes all
@@ -269,9 +281,25 @@ $(BUILD_DIR)/$(TARGET).bin: $(BUILD_DIR)/$(TARGET).elf
 include/ld_addrs.h: $(BUILD_DIR)/$(LD_SCRIPT)
 	grep -E "[^\. ]+ =" $< -o | sed 's/^/extern void* /; s/ =/;/' > $@
 
+
+### Star Rod (optional) ###
+
+STAR_ROD := cd tools/star-rod && $(JAVA) -jar StarRod.jar
+
+# lazily initialise the submodule
+tools/star-rod:
+	git submodule init tools/star-rod
+
+sprite/SpriteTable.xml: tools/star-rod sources.mk
+	$(PYTHON) tools/star-rod/spritetable.xml.py $(NPC_SPRITES) > $@
+
+editor: tools/star-rod sprite/SpriteTable.xml
+	$(STAR_ROD)
+
+
 ### Make Settings ###
 
-.PHONY: clean tools test setup submodules split $(ROM) include/sprite
+.PHONY: clean tools test setup submodules split editor $(ROM) include/sprite
 .DELETE_ON_ERROR:
 .SECONDARY:
 .PRECIOUS: $(ROM) %.Yay0

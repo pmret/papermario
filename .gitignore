@@ -27,4 +27,8 @@ settings.mk
 /msg
 /sprite
 
+# Star Rod
+/sprite/SpriteTable.xml
+/mod.cfg
+
 tools/Yay0compress
