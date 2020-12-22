@@ -7,6 +7,7 @@ TARGET = papermario
 COMPARE = 1
 NON_MATCHING = 0
 WATCH_INCLUDES = 1
+WSL_ELEVATE_GUI = 1
 
 -include settings.mk
 
@@ -72,7 +73,9 @@ WSL := 0
 JAVA := java
 ifeq ($(findstring microsoft,$(shell cat /proc/sys/kernel/osrelease)),microsoft)
 	WSL := 1
-	JAVA := powershell.exe -command java
+	ifeq ($(WSL_ELEVATE_GUI),1)
+		JAVA := powershell.exe -command java
+	endif
 endif
 
 OLD_AS=tools/$(OS)/mips-nintendo-nu64-as
