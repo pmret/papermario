@@ -46,9 +46,9 @@ if __name__ == "__main__":
 
                 f.write(offset.to_bytes(4, byteorder="big"))
                 f.write((len(comp.commands) * 2).to_bytes(2, byteorder="big"))
-                f.write(comp.x.to_bytes(2, byteorder="big"))
-                f.write(comp.y.to_bytes(2, byteorder="big"))
-                f.write(comp.z.to_bytes(2, byteorder="big"))
+                f.write(comp.x.to_bytes(2, byteorder="big", signed=True))
+                f.write(comp.y.to_bytes(2, byteorder="big", signed=True))
+                f.write(comp.z.to_bytes(2, byteorder="big", signed=True))
 
             next_anim = f.tell()
 

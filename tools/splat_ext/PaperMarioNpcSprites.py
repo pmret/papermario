@@ -241,9 +241,9 @@ class Component:
         commands_data = sprite_data[commands_offset : commands_offset + commands_size]
         self.commands = [int.from_bytes(d[0:2], byteorder="big") for d in iter_in_groups(commands_data, 2)]
 
-        self.x = int.from_bytes(data[6:8], byteorder="big")
-        self.y = int.from_bytes(data[8:10], byteorder="big")
-        self.z = int.from_bytes(data[10:12], byteorder="big")
+        self.x = int.from_bytes(data[6:8], byteorder="big", signed=True)
+        self.y = int.from_bytes(data[8:10], byteorder="big", signed=True)
+        self.z = int.from_bytes(data[10:12], byteorder="big", signed=True)
 
         return self
 
