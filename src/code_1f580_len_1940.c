@@ -364,15 +364,10 @@ ApiStatus SetNpcVar(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus GetNpcVar(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    Enemy* npc;
-    NpcId npcID;
-    s32 varIdx;
-    s32 var3;
-
-    npc = script->owner1.enemy;
-    npcID = get_variable(script, *args++);
-    varIdx = get_variable(script, *args++);
-    var3 = *args;
+    Enemy* npc = script->owner1.enemy;
+    NpcId npcID = get_variable(script, *args++);
+    s32 varIdx = get_variable(script, *args++);
+    s32 var3 = *args;
 
     if (npcID == NpcId_SELF) {
         npcID = npc->npcID;
@@ -439,8 +434,8 @@ ApiStatus ClearDefeatedEnemies(ScriptInstance* script, s32 isInitialCall) {
     s32 i;
     s32 j;
 
-    for (i = 0; i < 60; i++) {
-        for (j = 0; j < 12; j++) {
+    for (i = 0; i < ARRAY_COUNT(currentEncounter->defeatFlags); i++) {
+        for (j = 0; j < ARRAY_COUNT(currentEncounter->defeatFlags[0]); j++) {
             currentEncounter->defeatFlags[i][j] = 0;
         }
     }
