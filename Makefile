@@ -123,7 +123,7 @@ clean-code:
 tools:
 	make -C tools
 
-setup: clean submodules tools split $(LD_SCRIPT)
+setup: clean submodules tools $(LD_SCRIPT)
 
 # tools/star-rod submodule intentionally omitted
 submodules:
@@ -131,8 +131,7 @@ submodules:
 	git submodule update --recursive
 
 split:
-	$(SPLAT) --modes ld bin Yay0 PaperMarioMapFS PaperMarioMessages img PaperMarioNpcSprites --new
-	make $(GENERATED_HEADERS)
+	make $(LD_SCRIPT) -W $(SPLAT_YAML)
 
 split-%:
 	$(SPLAT) --modes ld $* --verbose
@@ -263,7 +262,8 @@ include/sprite/npc/%.h: sprite/npc/%/SpriteSheet.xml tools/gen_sprite_animations
 ### Linker ###
 
 $(LD_SCRIPT): $(SPLAT_YAML)
-	$(SPLAT) --modes ld > /dev/null
+	$(SPLAT) --modes ld bin Yay0 PaperMarioMapFS PaperMarioMessages img PaperMarioNpcSprites --new
+	make $(GENERATED_HEADERS)
 
 $(BUILD_DIR)/$(LD_SCRIPT): $(LD_SCRIPT)
 	@mkdir -p $(shell dirname $@)
