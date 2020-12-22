@@ -27,23 +27,6 @@ override WATCH_INCLUDES=0
 endif
 
 
-### Sources ###
-
-include sources.mk
-
-ifeq ($(PERMUTER),1)
-override OBJECTS:=$(filter %.c.o, $(OBJECTS))
-endif
-
-%.d: ;
-
-ifeq ($(WATCH_INCLUDES),1)
--include $(foreach obj, $(OBJECTS), $(obj).mk)
-endif
-
-NPC_DIRS := $(foreach npc, $(NPC_SPRITES), sprite/npc/$(npc))
-
-
 ### Output ###
 
 BUILD_DIR := build
@@ -54,7 +37,7 @@ LD_MAP := $(BUILD_DIR)/$(TARGET).map
 ASSETS_BIN := $(BUILD_DIR)/bin/assets/assets.bin
 MSG_BIN := $(BUILD_DIR)/msg.bin
 NPC_BIN := $(BUILD_DIR)/sprite/npc.bin
-GENERATED_HEADERS := include/ld_addrs.h $(foreach dir, $(NPC_DIRS), include/$(dir).h)
+
 
 ### Tools ###
 
@@ -114,10 +97,29 @@ CPPFLAGS += -DNON_MATCHING
 endif
 
 
+### Sources ###
+
+include sources.mk
+
+ifeq ($(PERMUTER),1)
+override OBJECTS:=$(filter %.c.o, $(OBJECTS))
+endif
+
+%.d: ;
+
+ifeq ($(WATCH_INCLUDES),1)
+-include $(foreach obj, $(OBJECTS), $(obj).mk)
+endif
+
+NPC_DIRS := $(foreach npc, $(NPC_SPRITES), sprite/npc/$(npc))
+
+GENERATED_HEADERS := include/ld_addrs.h $(foreach dir, $(NPC_DIRS), include/$(dir).h)
+
+
 ### Targets ###
 
 clean:
-	rm -rf $(BUILD_DIR) bin msg img sprite .splat_cache
+	rm -rf $(BUILD_DIR) bin msg img sprite .splat_cache $(LD_SCRIPT)
 
 clean-code:
 	rm -rf $(BUILD_DIR)/src

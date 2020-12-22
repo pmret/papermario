@@ -1,4 +1,4 @@
-OBJECTS := $(subst BUILD_DIR, $(BUILD_DIR), $(shell grep -E 'BUILD_DIR.+\.o' papermario.ld -o))
+OBJECTS = $(subst BUILD_DIR, $(BUILD_DIR), $(shell grep -E 'BUILD_DIR.+\.o' papermario.ld -o))
 
 DSL_C_FILES := $(shell grep -lrF "SCRIPT" src)
 
