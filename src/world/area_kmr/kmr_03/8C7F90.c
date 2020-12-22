@@ -1,4 +1,5 @@
 #include "kmr_03.h"
+#include "../../partners.h"
 
 Script M(Main);
 
@@ -6,11 +7,11 @@ ApiStatus func_80240000_8C7F90(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     PlayerData* playerData = PLAYER_DATA;
     NpcId npcID = get_variable(script, *args++);
-    PartnerId partnerID = get_variable(script, *args++);
+    PartnerID partnerID = get_variable(script, *args++);
     Npc* npc = get_npc_safe(npcID);
 
     if (isInitialCall) {
-        if (gPlayerData.currentPartner == PartnerId_NONE) {
+        if (gPlayerData.currentPartner == PartnerID_NONE) {
             script->functionTemp[0].s = 2;
         } else {
             script->functionTemp[0].s = 0;

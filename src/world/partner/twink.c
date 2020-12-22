@@ -1,4 +1,5 @@
 #include "common.h"
+#include "../partners.h"
 
 // Init
 void func_802BD100_325070(Npc* npc) {
@@ -25,7 +26,7 @@ ApiStatus func_802BD148_325070(ScriptInstance* script, s32 isInitialCall) {
 
     update_player_move_history(owner);
     func_800ED5D0(owner);
-    playerData->unk_2F4[PartnerId_TWINK]++;
+    playerData->unk_2F4[PartnerID_TWINK]++;
 
     return ApiStatus_BLOCK;
 }

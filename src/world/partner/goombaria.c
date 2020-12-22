@@ -1,4 +1,5 @@
 #include "common.h"
+#include "../partners.h"
 
 void func_802BD100_324F10(Npc* npc) {
     npc->collisionHeight = 24;
@@ -24,7 +25,7 @@ ApiStatus func_802BD14C_324F10(ScriptInstance* script, s32 isInitialCall) {
 
     func_800EBA3C(owner);
     func_800EBB40(owner);
-    playerData->unk_2F4[PartnerId_GOOMBARIA]++;
+    playerData->unk_2F4[PartnerID_GOOMBARIA]++;
 
     return ApiStatus_BLOCK;
 }

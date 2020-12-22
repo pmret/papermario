@@ -161,12 +161,12 @@ $(BUILD_DIR)/%.Yay0.o: $(BUILD_DIR)/%.bin.Yay0
 	$(LD) -r -b binary -o $@ $<
 
 # Compile C files
-$(BUILD_DIR)/%.c.o: %.c $(MDEPS) $(GENERATED_HEADERS)
+$(BUILD_DIR)/%.c.o: %.c $(MDEPS) $(GENERATED_HEADERS) | $(GENERATED_HEADERS)
 	@mkdir -p $(shell dirname $@)
 	$(CPP) $(CPPFLAGS) -o - $(CPPMFLAGS) $< | $(ICONV) | $(CC) $(CFLAGS) -o - | $(OLD_AS) $(OLDASFLAGS) -o $@ -
 
 # Compile C files (with DSL macros)
-$(foreach cfile, $(DSL_C_FILES), $(BUILD_DIR)/$(cfile).o): $(BUILD_DIR)/%.c.o: %.c $(MDEPS) tools/compile_dsl_macros.py $(GENERATED_HEADERS)
+$(foreach cfile, $(DSL_C_FILES), $(BUILD_DIR)/$(cfile).o): $(BUILD_DIR)/%.c.o: %.c $(MDEPS) tools/compile_dsl_macros.py $(GENERATED_HEADERS) | $(GENERATED_HEADERS)
 	@mkdir -p $(shell dirname $@)
 	$(CPP) $(CPPFLAGS) -o - $< $(CPPMFLAGS) | $(PYTHON) tools/compile_dsl_macros.py | $(ICONV) | $(CC) $(CFLAGS) -o - | $(OLD_AS) $(OLDASFLAGS) -o $@ -
 

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "../partners.h"
 
 ApiStatus func_80282880(ScriptInstance* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = PLAYER_STATUS;
@@ -62,7 +63,7 @@ ApiStatus TeleportPartnerToPlayer(ScriptInstance* script, s32 isInitialCall) {
     PlayerStatus* playerStatus2 = PLAYER_STATUS;
     Npc* partner;
 
-    if (PLAYER_DATA->currentPartner == PartnerId_NONE) {
+    if (PLAYER_DATA->currentPartner == PartnerID_NONE) {
         return ApiStatus_DONE2;
     }
 
@@ -91,7 +92,7 @@ ApiStatus func_80283908(ScriptInstance* script, s32 isInitialCall) {
     playerStatus->position.y = GAME_STATUS->savedPos.y;
     playerStatus->position.z = GAME_STATUS->savedPos.z;
 
-    if (currentPartner != PartnerId_NONE) {
+    if (currentPartner != PartnerID_NONE) {
         Npc* partner = get_npc_unsafe(NpcId_PARTNER);
         f32 angle = clamp_angle((playerStatus2->spriteFacingAngle < 180.0f) ? (90.0f) : (-90.0f));
         partner->pos.x = playerStatus2->position.x;

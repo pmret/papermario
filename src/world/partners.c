@@ -1,5 +1,6 @@
 #include "common.h"
 #include "ld_addrs.h"
+#include "partners.h"
 
 #include "partner/goombario.h"
 #include "sprite/npc/world_goombario.h"
@@ -25,28 +26,10 @@
 
 #include "sprite/npc/twink.h"
 
-typedef struct WorldPartner {
-    /* 0x00 */ void* dmaStart;
-    /* 0x04 */ void* dmaEnd;
-    /* 0x08 */ void* dmaDest; ///< Always `0x802BD100`
-    /* 0x10 */ s32 isFlying;
-    /* 0x14 */ void (*init)(Npc* partner);
-    /* 0x18 */ Bytecode* takeOut;
-    /* 0x1C */ Bytecode* useAbility;
-    /* 0x20 */ Bytecode* update;
-    /* 0x24 */ Bytecode* putAway;
-    /* 0x28 */ NpcAnimID idle;
-    /* 0x2C */ UNK_FUN_PTR(testFirstStrike);
-    /* 0x30 */ UNK_FUN_PTR(canUseAbility);
-    /* 0x34 */ UNK_FUN_PTR(canPlayerPause);
-    /* 0x38 */ void (*preBattle)(Npc* partner);
-    /* 0x3C */ UNK_FUN_PTR(postBattle);
-    /* 0x40 */ Bytecode* whileRiding;
-} WorldPartner; // size = 0x40
-
 static s32 _pad[] = { 0x00, 0x00, 0x00 };
 
 WorldPartner gWorldPartners[] = {
+    // XXX: it's possible that's there's a "none" entry here to match up with enum PartnerID
     {
         // Goombario
         .dmaStart = &world_partner_goombario_ROM_START,
