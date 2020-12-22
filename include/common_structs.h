@@ -1467,13 +1467,13 @@ typedef struct PlayerStatus {
     /* 0x0B6 */ u8 fallState;
     /* 0x0B7 */ char unk_B7;
     /* 0x0B8 */ s32 anim;
-    /* 0x0BC */ char unk_BC[2];
+    /* 0x0BC */ s16 unk_BC;
     /* 0x0BE */ u8 renderMode;
     /* 0x0BF */ s8 unk_BF;
     /* 0x0C0 */ u32* decorationList;
     /* 0x0C4 */ char unk_C4[2];
     /* 0x0C6 */ s16 unk_C6;
-    /* 0x0C8 */ UNK_PTR unk_C8;
+    /* 0x0C8 */ s32* unk_C8;
     /* 0x0CC */ s32 shadowID;
     /* 0x0D0 */ char unk_D0[8];
     /* 0x0D8 */ UNK_PTR** unk_D8;

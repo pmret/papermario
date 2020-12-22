@@ -80,6 +80,7 @@ void fx_walk_normal(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4, s32 arg5);
 void fx_emote(s32, Npc*, f32, f32, f32, f32, f32, s32, s32*);
 
 f32 func_800E0088(f32, f32);
+void func_800E06C0(s32);
 void func_800E97B8(void);
 s32 func_800EB168(s32);
 
