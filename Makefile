@@ -132,6 +132,7 @@ submodules:
 
 split:
 	$(SPLAT) --modes ld bin Yay0 PaperMarioMapFS PaperMarioMessages img PaperMarioNpcSprites --new
+	make $(GENERATED_HEADERS)
 
 split-%:
 	$(SPLAT) --modes ld $* --verbose
