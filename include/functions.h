@@ -154,6 +154,4 @@ ScriptInstance* get_script_by_index(s32 index);
 void suspend_all_group(s32 groupFlags);
 void kill_script(ScriptInstance* instanceToKill);
 
-void nuPiReadRom(u32 rom_addr, void* buf_ptr, u32 size);
-
 #endif
