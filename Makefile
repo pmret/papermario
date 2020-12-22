@@ -128,7 +128,7 @@ setup: clean submodules tools split $(LD_SCRIPT)
 # tools/star-rod submodule intentionally omitted
 submodules:
 	git submodule init tools/n64splat
-	git submodule update --init --recursive
+	git submodule update --recursive
 
 split:
 	$(SPLAT) --modes ld bin Yay0 PaperMarioMapFS PaperMarioMessages img PaperMarioNpcSprites --new

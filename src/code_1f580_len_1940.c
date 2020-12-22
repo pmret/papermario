@@ -84,11 +84,11 @@ ApiStatus GetOwnerEncounterTrigger(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus DoNpcDefeat(ScriptInstance* script, s32 isInitialCall) {
     Enemy* owner = script->owner1.enemy;
-    Npc* temp_s1 = get_npc_unsafe(owner->npcID);
+    Npc* npc = get_npc_unsafe(owner->npcID);
     ScriptInstance* newScript;
 
     kill_script(script);
-    temp_s1->currentAnim = owner->animList[6];
+    npc->currentAnim = owner->animList[6];
     newScript = start_script(&SCRIPT_NpcDefeat, 10, 0);
     owner->defeatScript = newScript;
     owner->defeatScriptID = newScript->id;
@@ -523,8 +523,6 @@ ApiStatus func_800458CC(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-// comments inline, WIP
-#ifdef NON_MATCHIING
 ApiStatus func_80045900(ScriptInstance* script) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -533,26 +531,24 @@ ApiStatus func_80045900(ScriptInstance* script) {
     enemy->unk_B0 |= 4;
 
     if (var0 == 0) {
-        // idk what these are supposed to be
-        f32 subroutine_argE;
-        f32 subroutine_argD;
-        f32 subroutine_argC;
-        f32 subroutine_argB;
-        s32 subroutine_argA;
+        s32 unk;
 
         if (!(enemy->unk_B0 & 0x10)) {
             npc->currentAnim = *enemy->animList;
         }
 
         if (!(enemy->unk_B0 & 0x8)) {
-            fx_emote(2, npc, 0, npc->collisionHeight, 1.0f, 0.0f, -20.0f, 40, &subroutine_argA);
+            fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 0.0f, -20.0f, 40, &unk);
         }
 
         if ((npc->flags & 0xA08) == 0x808) {
-            // function decl needed
-            if (func_800DCB7C(npc->unk_80, &subroutine_argB, &subroutine_argC, &subroutine_argD, &subroutine_argE, npc->pos.x,
-                              npc->pos.y + npc->collisionHeight, npc->pos.z, 100.0f) != 0) {
-                npc->pos.y = subroutine_argC;
+            f32 x = npc->pos.x;
+            f32 y = npc->pos.y + npc->collisionHeight;
+            f32 z = npc->pos.z;
+            f32 a = 100.0f;
+
+            if (func_800DCB7C(npc->unk_80, &x, &y, &z, &a) != 0) {
+                npc->pos.y = y;
             }
             npc->flags &= ~0x800;
         }
@@ -560,9 +556,6 @@ ApiStatus func_80045900(ScriptInstance* script) {
 
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(s32, "code_1f580_len_1940", func_80045900);
-#endif
 
 ApiStatus SetTattleString(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

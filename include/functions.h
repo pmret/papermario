@@ -77,7 +77,7 @@ void set_curtain_scale_goal(f32 scale);
 void set_curtain_fade(f32 scale);
 
 void fx_walk_normal(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4, s32 arg5);
-void fx_emote(s32, Npc*, s32, f32, f32, f32, f32, s32, s32*);
+void fx_emote(s32, Npc*, f32, f32, f32, f32, f32, s32, s32*);
 
 f32 func_800E0088(f32, f32);
 void func_800E97B8(void);
@@ -89,6 +89,8 @@ PlayerData* get_player_data(void);
 // Pause
 s32 pause_interp_vertical_scroll(s32 deltaBefore);
 void pause_draw_rect(s32 ulx, s32 uly, s32 lrx, s32 lry, s32 tileDescriptor, s32 uls, s32 ult, s32 dsdx, s32 dtdy);
+
+s32 func_800DCB7C(s32, f32*, f32*, f32*, f32*);
 
 // Partner
 void func_800EBA3C(Npc* partner);
