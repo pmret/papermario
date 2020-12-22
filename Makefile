@@ -37,7 +37,7 @@ LD_MAP := $(BUILD_DIR)/$(TARGET).map
 ASSETS_BIN := $(BUILD_DIR)/bin/assets/assets.bin
 MSG_BIN := $(BUILD_DIR)/msg.bin
 NPC_BIN := $(BUILD_DIR)/sprite/npc.bin
-GENERATED_HEADERS := include/ld_addrs.h include/sprite
+GENERATED_HEADERS := include/ld_addrs.h $(foreach dir, $(NPC_DIRS), include/$(dir).h)
 
 ### Tools ###
 
@@ -128,7 +128,7 @@ setup: clean submodules tools split $(LD_SCRIPT)
 # tools/star-rod submodule intentionally omitted
 submodules:
 	git submodule init tools/n64splat
-	git submodule update --init --recursive
+	git submodule update --recursive
 
 split:
 	$(SPLAT) --modes ld bin Yay0 PaperMarioMapFS PaperMarioMessages img PaperMarioNpcSprites --new
@@ -161,12 +161,12 @@ $(BUILD_DIR)/%.Yay0.o: $(BUILD_DIR)/%.bin.Yay0
 	$(LD) -r -b binary -o $@ $<
 
 # Compile C files
-$(BUILD_DIR)/%.c.o: %.c $(MDEPS) | $(GENERATED_HEADERS)
+$(BUILD_DIR)/%.c.o: %.c $(MDEPS) $(GENERATED_HEADERS)
 	@mkdir -p $(shell dirname $@)
 	$(CPP) $(CPPFLAGS) -o - $(CPPMFLAGS) $< | $(ICONV) | $(CC) $(CFLAGS) -o - | $(OLD_AS) $(OLDASFLAGS) -o $@ -
 
 # Compile C files (with DSL macros)
-$(foreach cfile, $(DSL_C_FILES), $(BUILD_DIR)/$(cfile).o): $(BUILD_DIR)/%.c.o: %.c $(MDEPS) tools/compile_dsl_macros.py | $(GENERATED_HEADERS)
+$(foreach cfile, $(DSL_C_FILES), $(BUILD_DIR)/$(cfile).o): $(BUILD_DIR)/%.c.o: %.c $(MDEPS) tools/compile_dsl_macros.py $(GENERATED_HEADERS)
 	@mkdir -p $(shell dirname $@)
 	$(CPP) $(CPPFLAGS) -o - $< $(CPPMFLAGS) | $(PYTHON) tools/compile_dsl_macros.py | $(ICONV) | $(CC) $(CFLAGS) -o - | $(OLD_AS) $(OLDASFLAGS) -o $@ -
 
@@ -257,10 +257,12 @@ include/sprite/npc/%.h: sprite/npc/%/SpriteSheet.xml tools/gen_sprite_animations
 	@mkdir -p $(shell dirname $@)
 	@echo "building $@"
 	@$(PYTHON) tools/gen_sprite_animations_h.py $@ sprite/npc/$* $(NPC_DIRS)
-include/sprite: $(foreach dir, $(NPC_DIRS), include/$(dir).h)
+
+
+### Linker ###
 
 $(LD_SCRIPT): $(SPLAT_YAML)
-	$(SPLAT) --modes ld
+	$(SPLAT) --modes ld > /dev/null
 
 $(BUILD_DIR)/$(LD_SCRIPT): $(LD_SCRIPT)
 	@mkdir -p $(shell dirname $@)
@@ -299,7 +301,7 @@ editor: tools/star-rod sprite/SpriteTable.xml
 
 ### Make Settings ###
 
-.PHONY: clean tools test setup submodules split editor $(ROM) include/sprite
+.PHONY: clean tools test setup submodules split editor $(ROM)
 .DELETE_ON_ERROR:
 .SECONDARY:
 .PRECIOUS: $(ROM) %.Yay0

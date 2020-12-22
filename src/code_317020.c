@@ -1,4 +1,7 @@
 #include "common.h"
+#include "world/partner/goombario.h"
+
+// TODO: move to world/partner/goombario.c
 
 s32 func_802BD100(s32 arg0) {
     s32 i;
@@ -13,7 +16,7 @@ s32 func_802BD100(s32 arg0) {
     return 0;
 }
 
-void func_802BD174(Npc* npc) {
+void world_goombario_init(Npc* npc) {
     npc->collisionHeight = 24;
     npc->collisionRadius = 20;
 }
@@ -42,7 +45,7 @@ ApiStatus func_802BDB84(ScriptInstance* script, s32 isInitialCall) {
 
 // Something is up with D_8010EBB0 I think. It might be a struct or something
 #ifdef NON_MATCHING
-void func_802BDBBC(s32 arg0) {
+void world_goombario_pre_battle(s32 arg0) {
     if (D_8010EBB0[0] != 0) {
         func_80027088(0);
         enable_player_input();
@@ -55,5 +58,5 @@ void func_802BDBBC(s32 arg0) {
     D_8010EBB0[3] = 1;
 }
 #else
-INCLUDE_ASM(s32, "code_317020", func_802BDBBC);
+INCLUDE_ASM(void, "code_317020", world_goombario_pre_battle, s32 arg0);
 #endif

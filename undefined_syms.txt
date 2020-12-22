@@ -332,3 +332,5 @@ D_80078DB4 = 0x80078DB4;
 
 gSongsUsingVariationFlag = 0x8014F720;
 D_8014F738 = 0x8014F738;
+
+world_goombario_take_out = 0x802BDD6C;

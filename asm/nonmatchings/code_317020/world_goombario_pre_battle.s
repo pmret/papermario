@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_802BDBBC
+glabel world_goombario_pre_battle
 /* 317ADC 802BDBBC 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 317AE0 802BDBC0 AFB10014 */  sw        $s1, 0x14($sp)
 /* 317AE4 802BDBC4 0080882D */  daddu     $s1, $a0, $zero
@@ -16,9 +16,9 @@ glabel func_802BDBBC
 /* 317B08 802BDBE8 0C009C22 */  jal       func_80027088
 /* 317B0C 802BDBEC 0000202D */   daddu    $a0, $zero, $zero
 /* 317B10 802BDBF0 0C038069 */  jal       enable_player_input
-/* 317B14 802BDBF4 00000000 */   nop      
+/* 317B14 802BDBF4 00000000 */   nop
 /* 317B18 802BDBF8 0C0B4312 */  jal       CancelMessageAndBlock
-/* 317B1C 802BDBFC 00000000 */   nop      
+/* 317B1C 802BDBFC 00000000 */   nop
 /* 317B20 802BDC00 0C03BD17 */  jal       clear_partner_move_history
 /* 317B24 802BDC04 0220202D */   daddu    $a0, $s1, $zero
 /* 317B28 802BDC08 0220202D */  daddu     $a0, $s1, $zero
@@ -34,5 +34,5 @@ glabel func_802BDBBC
 /* 317B4C 802BDC2C 8FB00010 */  lw        $s0, 0x10($sp)
 /* 317B50 802BDC30 03E00008 */  jr        $ra
 /* 317B54 802BDC34 27BD0020 */   addiu    $sp, $sp, 0x20
-/* 317B58 802BDC38 00000000 */  nop       
-/* 317B5C 802BDC3C 00000000 */  nop       
+/* 317B58 802BDC38 00000000 */  nop
+/* 317B5C 802BDC3C 00000000 */  nop
