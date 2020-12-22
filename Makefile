@@ -27,6 +27,23 @@ override WATCH_INCLUDES=0
 endif
 
 
+### Sources ###
+
+include sources.mk
+
+ifeq ($(PERMUTER),1)
+override OBJECTS:=$(filter %.c.o, $(OBJECTS))
+endif
+
+%.d: ;
+
+ifeq ($(WATCH_INCLUDES),1)
+-include $(foreach obj, $(OBJECTS), $(obj).mk)
+endif
+
+NPC_DIRS := $(foreach npc, $(NPC_SPRITES), sprite/npc/$(npc))
+
+
 ### Output ###
 
 BUILD_DIR := build
@@ -97,21 +114,6 @@ CPPFLAGS += -DNON_MATCHING
 endif
 
 
-### Sources ###
-
-include sources.mk
-
-ifeq ($(PERMUTER),1)
-override OBJECTS:=$(filter %.c.o, $(OBJECTS))
-endif
-
-%.d: ;
-
-ifeq ($(WATCH_INCLUDES),1)
--include $(foreach obj, $(OBJECTS), $(obj).mk)
-endif
-
-
 ### Targets ###
 
 clean:
@@ -161,12 +163,12 @@ $(BUILD_DIR)/%.Yay0.o: $(BUILD_DIR)/%.bin.Yay0
 	$(LD) -r -b binary -o $@ $<
 
 # Compile C files
-$(BUILD_DIR)/%.c.o: %.c $(MDEPS) $(GENERATED_HEADERS) | $(GENERATED_HEADERS)
+$(BUILD_DIR)/%.c.o: %.c $(MDEPS) | $(GENERATED_HEADERS)
 	@mkdir -p $(shell dirname $@)
 	$(CPP) $(CPPFLAGS) -o - $(CPPMFLAGS) $< | $(ICONV) | $(CC) $(CFLAGS) -o - | $(OLD_AS) $(OLDASFLAGS) -o $@ -
 
 # Compile C files (with DSL macros)
-$(foreach cfile, $(DSL_C_FILES), $(BUILD_DIR)/$(cfile).o): $(BUILD_DIR)/%.c.o: %.c $(MDEPS) tools/compile_dsl_macros.py $(GENERATED_HEADERS) | $(GENERATED_HEADERS)
+$(foreach cfile, $(DSL_C_FILES), $(BUILD_DIR)/$(cfile).o): $(BUILD_DIR)/%.c.o: %.c $(MDEPS) tools/compile_dsl_macros.py | $(GENERATED_HEADERS)
 	@mkdir -p $(shell dirname $@)
 	$(CPP) $(CPPFLAGS) -o - $< $(CPPMFLAGS) | $(PYTHON) tools/compile_dsl_macros.py | $(ICONV) | $(CC) $(CFLAGS) -o - | $(OLD_AS) $(OLDASFLAGS) -o $@ -
 
@@ -242,7 +244,6 @@ $(MSG_BIN:.bin=.o): $(MSG_BIN)
 
 # Sprites
 $(foreach npc, $(NPC_SPRITES), $(eval $(BUILD_DIR)/sprite/npc/$(npc):: $(shell find sprite/npc/$(npc) -type f 2> /dev/null))) # dependencies
-NPC_DIRS := $(foreach npc, $(NPC_SPRITES), sprite/npc/$(npc))
 NPC_YAY0 := $(foreach npc, $(NPC_SPRITES), $(BUILD_DIR)/sprite/npc/$(npc).Yay0)
 $(BUILD_DIR)/sprite/npc/%:: sprite/npc/% tools/compile_npc_sprite.py
 	@mkdir -p $(shell dirname $@)
