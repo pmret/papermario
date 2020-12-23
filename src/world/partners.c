@@ -28,6 +28,9 @@
 
 #include "sprite/npc/twink.h"
 
+s32 world_partner_can_use_ability_default(Npc* partner);
+s32 world_partner_can_player_pause_default(Npc* partner);
+
 static s32 _pad[] = { 0x00, 0x00, 0x00 };
 
 WorldPartner gWorldPartners[] = {
@@ -61,8 +64,8 @@ WorldPartner gWorldPartners[] = {
         .putAway = 0x802BEB9C,
         .idle = NPC_ANIM(world_kooper, Palette_00, Anim_3),
         .testFirstStrike = 0x802BE818,
-        .canUseAbility = 0x800EA514,
-        .canPlayerPause = 0x800EA514,
+        .canUseAbility = world_partner_can_use_ability_default,
+        .canPlayerPause = world_partner_can_use_ability_default,
         .preBattle = 0x802BEA24,
         .postBattle = 0x802BEB10,
     },
@@ -95,7 +98,7 @@ WorldPartner gWorldPartners[] = {
         .useAbility = 0x802BEACC,
         .putAway = 0x802BEAE8,
         .idle = NPC_ANIM(world_parakarry, Palette_00, Anim_1),
-        .canPlayerPause = 0x800EA514,
+        .canPlayerPause = world_partner_can_use_ability_default,
         .preBattle = 0x802BE90C,
         .postBattle = 0x802BE9D0,
     },
@@ -124,7 +127,7 @@ WorldPartner gWorldPartners[] = {
         .useAbility = 0x802BE298,
         .putAway = 0x802BE2B4,
         .idle = NPC_ANIM(world_watt, Palette_00, Anim_1),
-        .canPlayerPause = 0x800EA524,
+        .canPlayerPause = world_partner_can_player_pause_default,
         .preBattle = 0x802BDD9C,
         .postBattle = 0x802BDE10,
         .whileRiding = 0x802BE2D0,
@@ -141,7 +144,7 @@ WorldPartner gWorldPartners[] = {
         .useAbility = 0x802BFDC0,
         .putAway = 0x802BFE18,
         .idle = NPC_ANIM(world_sushie, Palette_00, Anim_1),
-        .canPlayerPause = 0x800EA524,
+        .canPlayerPause = world_partner_can_player_pause_default,
         .preBattle = 0x802BF9B8,
         .postBattle = 0x802BFA58,
         .whileRiding = 0x802BFE34,
@@ -158,7 +161,7 @@ WorldPartner gWorldPartners[] = {
         .useAbility = 0x802BFE9C,
         .putAway = 0x802BFEB8,
         .idle = NPC_ANIM(world_lakilester, Palette_00, Anim_1),
-        .canPlayerPause = 0x800EA524,
+        .canPlayerPause = world_partner_can_player_pause_default,
         .preBattle = 0x802BFA00,
         .postBattle = 0x802BFAA8,
         .whileRiding = 0x802BFED4,
@@ -175,8 +178,8 @@ WorldPartner gWorldPartners[] = {
         .useAbility = 0x802BE01C,
         .putAway = 0x802BE038,
         .idle = NPC_ANIM(world_bow, Palette_00, Anim_1),
-        .canUseAbility = 0x800EA514,
-        .canPlayerPause = 0x800EA524,
+        .canUseAbility = world_partner_can_use_ability_default,
+        .canPlayerPause = world_partner_can_player_pause_default,
         .preBattle = 0x802BDF64,
     },
     {
@@ -191,8 +194,8 @@ WorldPartner gWorldPartners[] = {
         .useAbility = world_goombaria_use_ability,
         .putAway = world_goombaria_put_away,
         .idle = NPC_ANIM(goombaria, Palette_00, Anim_1),
-        .canUseAbility = 0x800EA514,
-        .canPlayerPause = 0x800EA514,
+        .canUseAbility = world_partner_can_use_ability_default,
+        .canPlayerPause = world_partner_can_use_ability_default,
     },
     {
         // Twink
@@ -206,7 +209,7 @@ WorldPartner gWorldPartners[] = {
         .useAbility = 0x802BD228,
         .putAway = 0x802BD244,
         .idle = NPC_ANIM(twink, Palette_00, Anim_1),
-        .canUseAbility = 0x800EA514,
-        .canPlayerPause = 0x800EA514,
+        .canUseAbility = world_partner_can_use_ability_default,
+        .canPlayerPause = world_partner_can_use_ability_default,
     },
 };

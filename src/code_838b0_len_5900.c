@@ -9,10 +9,12 @@ void remove_consumable(void) {
 
 INCLUDE_ASM(s32, "code_838b0_len_5900", func_800EA4B0);
 
-INCLUDE_ASM(s32, "code_838b0_len_5900", func_800EA514);
+s32 world_partner_can_use_ability_default(Npc* partner) {
+    return D_8010EBB0[0] == 0;
+}
 
-s32 func_800EA524(void) {
-    return 1;
+s32 world_partner_can_player_pause_default(Npc* partner) {
+    return TRUE;
 }
 
 INCLUDE_ASM(s32, "code_838b0_len_5900", func_800EA52C);
