@@ -2,9 +2,9 @@
 #include "goombaria.h"
 #include "../partners.h"
 
-void world_goombaria_init(Npc* npc) {
-    npc->collisionHeight = 24;
-    npc->collisionRadius = 20;
+void world_goombaria_init(Npc* partner) {
+    partner->collisionHeight = 24;
+    partner->collisionRadius = 20;
 }
 
 ApiStatus GoombariaTakeOut(ScriptInstance* script, s32 isInitialCall) {

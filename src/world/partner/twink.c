@@ -2,9 +2,9 @@
 #include "../partners.h"
 #include "twink.h"
 
-void world_twink_init(Npc* npc) {
-    npc->collisionHeight = 20;
-    npc->collisionRadius = 20;
+void world_twink_init(Npc* partner) {
+    partner->collisionHeight = 20;
+    partner->collisionRadius = 20;
 }
 
 ApiStatus TwinkTakeOut(ScriptInstance* script, s32 isInitialCall) {

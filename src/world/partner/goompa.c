@@ -1,9 +1,9 @@
 #include "common.h"
 #include "goompa.h"
 
-void world_goompa_init(Npc* npc) {
-    npc->collisionHeight = 24;
-    npc->collisionRadius = 20;
+void world_goompa_init(Npc* partner) {
+    partner->collisionHeight = 24;
+    partner->collisionRadius = 20;
 }
 
 ApiStatus GoompaTakeOut(ScriptInstance* script, s32 isInitialCall) {
