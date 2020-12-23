@@ -2,8 +2,6 @@
 #include "sprite/npc/world_goombario.h"
 #include "goombario.h"
 
-extern s32** D_802BDF64;
-
 s32 func_802BD100(s32 arg0) {
     s32 i;
 
