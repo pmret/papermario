@@ -1,13 +1,13 @@
 #include "common.h"
 #include "../partners.h"
+#include "twink.h"
 
-// Init
-void func_802BD100_325070(Npc* npc) {
+void world_twink_init(Npc* npc) {
     npc->collisionHeight = 20;
     npc->collisionRadius = 20;
 }
 
-ApiStatus func_802BD110(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus TwinkTakeOut(ScriptInstance* script, s32 isInitialCall) {
     Npc* owner = script->owner2.npc;
 
     if (isInitialCall) {
@@ -16,7 +16,7 @@ ApiStatus func_802BD110(ScriptInstance* script, s32 isInitialCall) {
     return func_800EECE8(owner) != 0;
 }
 
-ApiStatus func_802BD148_325070(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus TwinkUpdate(ScriptInstance* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     Npc* owner = script->owner2.npc;
 
@@ -31,11 +31,11 @@ ApiStatus func_802BD148_325070(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus func_802BD1A8(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus TwinkUseAbility(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802BD1B0(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus TwinkPutAway(ScriptInstance* script, s32 isInitialCall) {
     Npc* owner = script->owner2.npc;
 
     if (isInitialCall) {
@@ -43,3 +43,19 @@ ApiStatus func_802BD1B0(ScriptInstance* script, s32 isInitialCall) {
     }
     return func_800EE9B8(owner) != 0;
 }
+
+Script world_twink_take_out = SCRIPT({
+    TwinkTakeOut()
+});
+
+Script world_twink_update = SCRIPT({
+    TwinkUpdate()
+});
+
+Script world_twink_use_ability = SCRIPT({
+    TwinkUseAbility()
+});
+
+Script world_twink_put_away = SCRIPT({
+    TwinkPutAway()
+});

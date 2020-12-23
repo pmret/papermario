@@ -26,6 +26,7 @@
 #include "partner/goombaria.h"
 #include "sprite/npc/goombaria.h"
 
+#include "partner/twink.h"
 #include "sprite/npc/twink.h"
 
 s32 world_partner_can_use_ability_default(Npc* partner);
@@ -203,11 +204,11 @@ WorldPartner gWorldPartners[] = {
         .dmaEnd = &world_partner_twink_ROM_END,
         .dmaDest = &world_partner_twink_VRAM,
         .isFlying = TRUE,
-        .init = 0x802BD100,
-        .takeOut = 0x802BD1F0,
-        .update = 0x802BD20C,
-        .useAbility = 0x802BD228,
-        .putAway = 0x802BD244,
+        .init = world_twink_init,
+        .takeOut = world_twink_take_out,
+        .update = world_twink_update,
+        .useAbility = world_twink_use_ability,
+        .putAway = world_twink_put_away,
         .idle = NPC_ANIM(twink, Palette_00, Anim_1),
         .canUseAbility = world_partner_can_use_ability_default,
         .canPlayerPause = world_partner_can_use_ability_default,

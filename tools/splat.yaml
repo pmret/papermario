@@ -484,7 +484,7 @@ segments:
     vram: 0x802BD100
     files:
       - [0x325070, c, world/partner/twink]
-      - [0x325160, bin]
+      - [0x325160, .data, world/partner/twink]
   - type: code
     start: 0x3251d0
     vram: 0x802BD100
