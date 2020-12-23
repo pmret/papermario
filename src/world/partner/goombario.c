@@ -1,4 +1,5 @@
 #include "common.h"
+#include "sprite/npc/world_goombario.h"
 #include "goombario.h"
 
 extern s32** D_802BDF64;
@@ -23,6 +24,7 @@ void world_goombario_init(Npc* npc) {
 
 INCLUDE_ASM(ApiStatus, "world/partner/goombario", func_802BD188, ScriptInstance* script, s32 isInitialCall);
 
+// uses rodata f64(?) at 802BDE80 = 0.8
 INCLUDE_ASM(ApiStatus, "world/partner/goombario", func_802BD1D0, ScriptInstance* script, s32 isInitialCall);
 
 INCLUDE_ASM(s32, "world/partner/goombario", func_802BD564);
@@ -44,7 +46,8 @@ s32 world_goombario_can_pause(Npc* partner) {
 INCLUDE_ASM(s32, "world/partner/goombario", world_goombario_can_pause, Npc* partner);
 #endif
 
-// Returns on SI_VAR(0)
+// get message for tattle routine
+// has big jumptable at rodata 802BDE88
 INCLUDE_ASM(ApiStatus, "world/partner/goombario", func_802BD5D8, ScriptInstance* script, s32 isInitialCall);
 
 INCLUDE_ASM(ApiStatus, "world/partner/goombario", func_802BDB30, ScriptInstance* script, s32 isInitialCall);
@@ -76,3 +79,51 @@ void world_goombario_pre_battle(s32 arg0) {
 #else
 INCLUDE_ASM(void, "world/partner/goombario", world_goombario_pre_battle, s32 arg0);
 #endif
+
+s32 func_802BD5D8_data[] = {
+    0x00000015, 0x001B0000, 0x00000018, 0x001B0000, 0x00000016, 0x001B0001, 0x00000019, 0x001B0001,
+	0x00000017, 0x001B0003, 0x0000001A, 0x001B0003, 0x0000000D, 0x001B0005, 0x0000000E, 0x001B0005,
+	0x0000000F, 0x001B0006, 0x00000010, 0x001B0006, 0x0000000B, 0x001B0007, 0x0000000C, 0x001B0008,
+	0x00000014, 0x001B0009, 0x0000002E, 0x001B000A, 0x0000002F, 0x001B000A, 0x00000007, 0x001B000B,
+	0x00000008, 0x001B000B, 0x00000009, 0x001B000C, 0x0000000A, 0x001B000E, 0x0000002B, 0x001B0010,
+	0x00000003, 0x001B0011, 0x00000004, 0x001B0011, 0x00000005, 0x001B0011, 0x00000006, 0x001B0011,
+	0x00000033, 0x001B0012, 0x00000034, 0x001B0013, 0x00000026, 0x001B0014, 0x00000032, 0x001B0015,
+	0x00000024, 0x001B0017, 0x00000025, 0x001B001A, 0x00000031, 0x001B001D, 0x00000035, 0x001B001F,
+	0x00000036, 0x001B0020, 0x00000038, 0x001B0021, 0x00000037, 0x001B0022, 0x0000003A, 0x001B0023,
+	0x00000039, 0x001B0024, 0xFFFFFFFF
+};
+
+Script world_goombario_take_out = SCRIPT({
+    func_802BD188()
+});
+
+s32 unk_802BDD88 = 0x802BDF40;
+
+Script world_goombario_update = SCRIPT({
+    func_802BD1D0()
+});
+
+Script world_goombario_use_ability = SCRIPT({
+    func_802BD5D8() // returns tattle message id on SI_VAR(0), and something else on SI_VAR(1)
+
+    if SI_VAR(0) == -1 {
+        return
+    }
+
+    if SI_VAR(0) == 0 {
+        func_802BDB30()
+        return
+    }
+
+    if SI_VAR(1) == 0 {
+        SpeakToPlayer(NpcId_PARTNER, NPC_ANIM(world_goombario, normal, talk), NPC_ANIM(world_goombario, normal, idle), 0, SI_VAR(0))
+    }
+
+    sleep 1
+
+    func_802BDB30()
+});
+
+Script world_goombario_put_away = SCRIPT({
+    func_802BDB84()
+});

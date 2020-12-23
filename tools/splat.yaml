@@ -412,7 +412,8 @@ segments:
     vram: 0x802BD100
     files:
       - [0x317020, c, world/partner/goombario]
-      - [0x317b60, bin]
+      - [0x317b60, .data, world/partner/goombario]
+      - [0x317DA0, bin, world/partner/goombario] # rodata containing a double and a jumptable
   - type: code
     ld_name: world_partner_bombette
     start: 0x317e50
