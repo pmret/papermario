@@ -477,7 +477,7 @@ segments:
     vram: 0x802BD100
     files:
       - [0x324f10, c, world/partner/goombaria]
-      - [0x325000, bin]
+      - [0x325000, .data, world/partner/goombaria]
   - type: code
     ld_name: world_partner_twink
     start: 0x325070

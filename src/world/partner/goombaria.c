@@ -1,12 +1,13 @@
 #include "common.h"
+#include "goombaria.h"
 #include "../partners.h"
 
-void func_802BD100_324F10(Npc* npc) {
+void world_goombaria_init(Npc* npc) {
     npc->collisionHeight = 24;
     npc->collisionRadius = 20;
 }
 
-ApiStatus func_802BD114_324F10(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus GoombariaTakeOut(ScriptInstance* script, s32 isInitialCall) {
     Npc* owner = script->owner2.npc;
 
     if (isInitialCall) {
@@ -15,7 +16,7 @@ ApiStatus func_802BD114_324F10(ScriptInstance* script, s32 isInitialCall) {
     return func_800EECE8(owner) != 0;
 }
 
-ApiStatus func_802BD14C_324F10(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus GoombariaUpdate(ScriptInstance* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     Npc* owner = script->owner2.npc;
 
@@ -30,11 +31,11 @@ ApiStatus func_802BD14C_324F10(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus func_802BD1AC_324F10(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus GoombariaUseAbility(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802BD1B4(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus GoombariaPutAway(ScriptInstance* script, s32 isInitialCall) {
     Npc* owner = script->owner2.npc;
 
     if (isInitialCall) {
@@ -42,3 +43,19 @@ ApiStatus func_802BD1B4(ScriptInstance* script, s32 isInitialCall) {
     }
     return func_800EE9B8(owner) != 0;
 }
+
+Script world_goombaria_take_out = SCRIPT({
+    GoombariaTakeOut()
+});
+
+Script world_goombaria_update = SCRIPT({
+    GoombariaUpdate()
+});
+
+Script world_goombaria_use_ability = SCRIPT({
+    GoombariaUseAbility()
+});
+
+Script world_goombaria_put_away = SCRIPT({
+    GoombariaPutAway()
+});

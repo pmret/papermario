@@ -23,6 +23,7 @@
 
 #include "sprite/npc/world_bow.h"
 
+#include "partner/goombaria.h"
 #include "sprite/npc/goombaria.h"
 
 #include "sprite/npc/twink.h"
@@ -184,11 +185,11 @@ WorldPartner gWorldPartners[] = {
         .dmaEnd = &world_partner_goombaria_ROM_END,
         .dmaDest = &world_partner_goombaria_VRAM,
         .isFlying = FALSE,
-        .init = 0x802BD100,
-        .takeOut = 0x802BD1F0,
-        .update = 0x802BD20C,
-        .useAbility = 0x802BD228,
-        .putAway = 0x802BD244,
+        .init = world_goombaria_init,
+        .takeOut = world_goombaria_take_out,
+        .update = world_goombaria_update,
+        .useAbility = world_goombaria_use_ability,
+        .putAway = world_goombaria_put_away,
         .idle = NPC_ANIM(goombaria, Palette_00, Anim_1),
         .canUseAbility = 0x800EA514,
         .canPlayerPause = 0x800EA514,
