@@ -10,8 +10,8 @@ typedef struct WorldPartner {
     /* 0x10 */ s32 isFlying;
     /* 0x14 */ void (*init)(Npc* partner);
     /* 0x18 */ Bytecode* takeOut;
-    /* 0x1C */ Bytecode* useAbility;
-    /* 0x20 */ Bytecode* update;
+    /* 0x1C */ Bytecode* update;
+    /* 0x20 */ Bytecode* useAbility;
     /* 0x24 */ Bytecode* putAway;
     /* 0x28 */ NpcAnimID idle;
     /* 0x2C */ UNK_FUN_PTR(testFirstStrike);
