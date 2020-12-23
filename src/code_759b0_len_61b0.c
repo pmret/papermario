@@ -20,7 +20,12 @@ INCLUDE_ASM(s32, "code_759b0_len_61b0", func_800DD228);
 
 INCLUDE_ASM(s32, "code_759b0_len_61b0", func_800DD44C);
 
-INCLUDE_ASM(s32, "code_759b0_len_61b0", func_800DD5B4);
+void func_800DD5B4(f32* arg0, f32* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5) {
+    f32 temp = (arg2 * arg4) + (arg3 * arg5);
+
+    *arg0 = (arg2 - (temp * arg4)) * 0.5f;
+    *arg1 = (arg3 - (temp * arg5)) * 0.5f;
+}
 
 INCLUDE_ASM(s32, "code_759b0_len_61b0", func_800DD618);
 
@@ -50,7 +55,12 @@ INCLUDE_ASM(s32, "code_759b0_len_61b0", func_800DEE5C);
 
 INCLUDE_ASM(s32, "code_759b0_len_61b0", func_800DF15C);
 
-INCLUDE_ASM(s32, "code_759b0_len_61b0", func_800DF3FC);
+void func_800DF3FC(f32* arg0, f32* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5) {
+    f32 temp = (arg2 * arg4) + (arg3 * arg5);
+
+    *arg0 = (arg2 - (temp * arg4)) * 0.5f;
+    *arg1 = (arg3 - (temp * arg5)) * 0.5f;
+}
 
 INCLUDE_ASM(s32, "code_759b0_len_61b0", test_player_lateral);
 
@@ -60,15 +70,45 @@ INCLUDE_ASM(s32, "code_759b0_len_61b0", check_input_use_partner);
 
 INCLUDE_ASM(s32, "code_759b0_len_61b0", func_800DFAAC);
 
-INCLUDE_ASM(s32, "code_759b0_len_61b0", func_800DFBE8);
+void func_800DFBE8(void) {
+    func_800E5A2C();
+    collision_main_lateral();
+    func_800E4BB8();
+
+    if (!(gPlayerStatusPtr->flags & 0x4000000)) {
+        Camera* camera = &gCameras[0];
+
+        camera->targetPos.x = gPlayerStatusPtr->position.x;
+        camera->targetPos.y = gPlayerStatusPtr->position.y;
+        camera->targetPos.z = gPlayerStatusPtr->position.z;
+    }
+}
 
 void clear_player_status(void) {
     mem_clear(&gPlayerStatus, sizeof(gPlayerStatus));
 }
 
-INCLUDE_ASM(s32, "code_759b0_len_61b0", func_800DFC74);
+void func_800DFC74(void) {
+    PlayerStatus* playerStatus = PLAYER_STATUS;
 
-INCLUDE_ASM(s32, "code_759b0_len_61b0", func_800DFCF4);
+    mem_clear(playerStatus, sizeof(PlayerStatus));
+    playerStatus->flags = 1;
+    func_800E205C();
+    playerStatus->shadowID = create_shadow_type(0, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z);
+    func_800E6B68();
+    func_800E0B14();
+    func_800E069C();
+    func_800E0514();
+    func_800E0374();
+    func_800E5520();
+}
+
+s32 func_800DFCF4(void) {
+    if (D_8010EBB0[0] == 1 && (D_8010EBB0[3] == 6 || D_8010EBB0[3] == 9 || D_8010EBB0[3] == 7 || D_8010EBB0[3] == 4 || D_8010EBB0[3] == 8)) {
+        return 0;
+    }
+    return 1;
+}
 
 INCLUDE_ASM(s32, "code_759b0_len_61b0", func_800DFD48);
 
@@ -163,7 +203,18 @@ void func_800E01DC(void) {
     }
 }
 
-INCLUDE_ASM(s32, "code_759b0_len_61b0", func_800E0208);
+s32 func_800E0208(void) {
+    GameStatus* gameStatus = GAME_STATUS;
+    s32 ret = 0;
+
+    if (gameStatus->disableScripts && (gameStatus->currentButtons & 0x10)) {
+        if (D_8010EBB0[0] == 0) {
+            set_action_state(ActionState_IDLE);
+        }
+        ret = 1;
+    }
+    return ret;
+}
 
 void func_800E0260(void) {
     func_800E0658();
@@ -243,7 +294,19 @@ void func_800E0B14(void) {
     gPlayerStatusPtr->animFlags &= ~0x10;
 }
 
-INCLUDE_ASM(s32, "code_759b0_len_61b0", func_800E0B38);
+void func_800E0B38(void) {
+    PlayerData* playerData = PLAYER_DATA;
+
+    if (!GAME_STATUS->isBattle) {
+        s32 i;
+
+        for (i = 1; i < ARRAY_COUNT(playerData->unk_2C4); i++) {
+            if (playerData->partners[i].enabled) {
+                playerData->unk_2C4[i] += 1;
+            }
+        }
+    }
+}
 
 INCLUDE_ASM(s32, "code_759b0_len_61b0", func_800E0B90);
 
