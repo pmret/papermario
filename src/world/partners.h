@@ -15,8 +15,8 @@ typedef struct WorldPartner {
     /* 0x24 */ Bytecode* putAway;
     /* 0x28 */ NpcAnimID idle;
     /* 0x2C */ UNK_FUN_PTR(testFirstStrike);
-    /* 0x30 */ UNK_FUN_PTR(canUseAbility);
-    /* 0x34 */ UNK_FUN_PTR(canPlayerPause);
+    /* 0x30 */ s32 (*canUseAbility)(Npc* partner);
+    /* 0x34 */ s32 (*canPlayerPause)(Npc* partner);
     /* 0x38 */ void (*preBattle)(Npc* partner);
     /* 0x3C */ UNK_FUN_PTR(postBattle);
     /* 0x40 */ Bytecode* whileRiding;

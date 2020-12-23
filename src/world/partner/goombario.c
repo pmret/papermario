@@ -1,7 +1,5 @@
 #include "common.h"
-#include "world/partner/goombario.h"
-
-// TODO: move to world/partner/goombario.c
+#include "goombario.h"
 
 s32 func_802BD100(s32 arg0) {
     s32 i;
@@ -27,7 +25,23 @@ INCLUDE_ASM(s32, "world/partner/goombario", func_802BD1D0);
 
 INCLUDE_ASM(s32, "world/partner/goombario", func_802BD564);
 
-INCLUDE_ASM(s32, "world/partner/goombario", func_802BD5A8);
+// Compiler is generating more efficient code than the original asm, using xori and sltiu instead of beq
+#ifdef NON_MATCHING
+s32 world_goombario_can_pause(Npc* partner) {
+    if (D_8010EBB0[0]) {
+        return FALSE;
+    }
+
+    if ((partner->flags & 0x1800) != 0x1000) {
+        return FALSE;
+    }
+
+    return TRUE;
+}
+#else
+INCLUDE_ASM(s32, "world/partner/goombario", world_goombario_can_pause, Npc* partner);
+#endif
+
 
 INCLUDE_ASM(s32, "world/partner/goombario", func_802BD5D8);
 

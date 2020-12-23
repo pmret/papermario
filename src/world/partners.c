@@ -42,8 +42,8 @@ WorldPartner gWorldPartners[] = {
         .useAbility = 0x802BDDA8,
         .putAway = 0x802BDE60,
         .idle = NPC_ANIM(world_goombario, normal, idle),
-        .canUseAbility = func_802BD5A8,
-        .canPlayerPause = func_802BD5A8,
+        .canUseAbility = world_goombario_can_pause,
+        .canPlayerPause = world_goombario_can_pause,
         .preBattle = world_goombario_pre_battle,
     },
     {
