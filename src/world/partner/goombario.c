@@ -1,6 +1,8 @@
 #include "common.h"
 #include "goombario.h"
 
+extern s32** D_802BDF64;
+
 s32 func_802BD100(s32 arg0) {
     s32 i;
 
@@ -19,9 +21,9 @@ void world_goombario_init(Npc* npc) {
     npc->collisionRadius = 20;
 }
 
-INCLUDE_ASM(s32, "world/partner/goombario", func_802BD188);
+INCLUDE_ASM(ApiStatus, "world/partner/goombario", func_802BD188, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "world/partner/goombario", func_802BD1D0);
+INCLUDE_ASM(ApiStatus, "world/partner/goombario", func_802BD1D0, ScriptInstance* script, s32 isInitialCall);
 
 INCLUDE_ASM(s32, "world/partner/goombario", func_802BD564);
 
@@ -42,10 +44,10 @@ s32 world_goombario_can_pause(Npc* partner) {
 INCLUDE_ASM(s32, "world/partner/goombario", world_goombario_can_pause, Npc* partner);
 #endif
 
+// Returns on SI_VAR(0)
+INCLUDE_ASM(ApiStatus, "world/partner/goombario", func_802BD5D8, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "world/partner/goombario", func_802BD5D8);
-
-INCLUDE_ASM(s32, "world/partner/goombario", func_802BDB30);
+INCLUDE_ASM(ApiStatus, "world/partner/goombario", func_802BDB30, ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus func_802BDB84(ScriptInstance* script, s32 isInitialCall) {
     s32 unk = script->owner2.npc; // todo what is this?
