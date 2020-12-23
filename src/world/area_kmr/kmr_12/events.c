@@ -192,8 +192,8 @@ NpcGroupList M(npcGroupList) = {
 };
 
 Script M(ReadEastSign) = SCRIPT({
-    func_800441F0(SI_VAR(0))
-    if SI_VAR(0) == 1 {
+    func_800441F0($a)
+    if $a == 1 {
         return
     }
 

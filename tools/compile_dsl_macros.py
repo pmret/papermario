@@ -64,7 +64,7 @@ script_parser = Lark(r"""
          | "spawn" block       -> spawn_block_stmt
          | "parallel" block    -> parallel_block_stmt
 
-    call: (CNAME | HEX_INT) "(" [expr ("," expr)* [","]] ")"
+    call: (c_identifier | HEX_INT) "(" [expr ("," expr)* [","]] ")"
 
     if_stmt: "if" expr cond_op expr block ["else" block]
 
@@ -104,9 +104,11 @@ script_parser = Lark(r"""
          | SIGNED_INT
          | SIGNED_DECIMAL
          | HEX_INT
-         | CNAME
+         | variable
+         | c_identifier
 
     ?lhs: c_const_expr
+        | variable
 
     ?set_op: "="  -> set_op_eq
            | "+=" -> set_op_add
@@ -116,6 +118,10 @@ script_parser = Lark(r"""
            | "%=" -> set_op_mod
            | "&=" -> set_op_and
            | "|=" -> set_op_or
+
+    variable: "$" CNAME
+
+    c_identifier: CNAME
 
     c_const_expr: c_const_expr_internal
     c_const_expr_internal: "(" (c_const_expr_internal | NOT_PARENS)+ ")"
@@ -162,7 +168,7 @@ class BaseCmd():
         return [ self.opcode(), len(self.args), *self.args ]
 
     def __str__(self):
-        return f"Cmd({self.opcode():02X}, {', '.join(map(str, self.args))})"
+        return f"Cmd({self.opcode()}, {', '.join(map(str, self.args))})"
 
 class Cmd(BaseCmd):
     def __init__(self, opcode, *args, **kwargs):
@@ -241,6 +247,7 @@ class LabelAllocation(Visitor):
     def __init__(self):
         super().__init__()
         self.labels = []
+        self.variables = []
 
     def label_decl(self, tree):
         name = tree.children[0].children[0]
@@ -257,6 +264,15 @@ class LabelAllocation(Visitor):
         except ValueError:
             self.labels.append(name)
 
+    def variable(self, tree):
+        name = tree.children[0]
+
+        if name not in self.variables:
+            self.variables.append(name)
+
+            if len(self.variables) > 16:
+                raise CompileError("too many variables (max 16)", tree.meta)
+
     def gen_label(self):
         self.labels.append("$generated")
         return len(self.labels) - 1
@@ -271,8 +287,8 @@ class Compile(Transformer):
         self.alloc.visit_topdown(tree)
         return super().transform(tree)
 
-    def CNAME(self, name):
-        return f"(Bytecode)(&{name})"
+    def c_identifier(self, tree):
+        return f"(Bytecode)(&{tree.children[0]})"
 
     def ESCAPED_STRING(self, str_with_quotes):
         return f"(Bytecode)({str_with_quotes})"
@@ -562,6 +578,37 @@ class Compile(Transformer):
             "int": "ScriptOpcode_OR",
             "const": "ScriptOpcode_OR_CONST",
         }
+
+    def label_decl(self, tree):
+        if len(tree.children) == 1:
+            label = tree.children[0]
+            return Cmd("ScriptOpcode_LABEL", label, meta=tree.meta)
+        else:
+            label, cmd_or_block = tree.children
+
+            if type(cmd_or_block) is not list:
+                cmd_or_block = [cmd_or_block]
+
+            for cmd in cmd_or_block:
+                if isinstance(cmd, BaseCmd):
+                    cmd.add_context(LabelCtx(label))
+
+            return [
+                Cmd("ScriptOpcode_LABEL", label, meta=tree.meta),
+                *cmd_or_block
+            ]
+    def label_goto(self, tree):
+        label = tree.children[0]
+        return Cmd("ScriptOpcode_GOTO", label, meta=tree.meta)
+    def label(self, tree):
+        name = tree.children[0]
+        if name in self.alloc.labels:
+            return self.alloc.labels.index(name)
+        raise CompileError(f"label `{name}' is undeclared", tree.meta)
+
+    def variable(self, tree):
+        name = tree.children[0]
+        return self.alloc.variables.index(name) - 30000000
 
     def label_decl(self, tree):
         if len(tree.children) == 1:
