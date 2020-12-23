@@ -469,7 +469,8 @@ segments:
     vram: 0x802BD100
     files:
       - [0x324a10, c, world/partner/goompa]
-      - [0x324e80, bin]
+      - [0x324e80, .data, world/partner/goompa]
+      - [0x324F00, bin, world/partner/goompa] # rodata with single f64 0.8
   - type: code
     ld_name: world_partner_goombaria
     start: 0x324f10

@@ -12,6 +12,7 @@
 
 #include "sprite/npc/world_parakarry.h"
 
+#include "partner/goompa.h"
 #include "sprite/npc/goompa.h"
 
 #include "sprite/npc/world_watt.h"
@@ -103,11 +104,11 @@ WorldPartner gWorldPartners[] = {
         .dmaEnd = &world_partner_goompa_ROM_END,
         .dmaDest = &world_partner_goompa_VRAM,
         .isFlying = FALSE,
-        .init = 0x802BD100,
-        .takeOut = 0x802BD570,
-        .update = 0x802BD590,
-        .useAbility = 0x802BD5AC,
-        .putAway = 0x802BD5C8,
+        .init = world_goompa_init,
+        .takeOut = world_goompa_take_out,
+        .update = world_goompa_update,
+        .useAbility = world_goompa_use_ability,
+        .putAway = world_goompa_put_away,
         .idle = NPC_ANIM(goompa, Palette_00, Anim_1),
     },
     {
