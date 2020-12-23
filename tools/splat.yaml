@@ -411,56 +411,56 @@ segments:
     start: 0x317020
     vram: 0x802BD100
     files:
-      - [0x317020, c]
+      - [0x317020, c, world/partner/goombario]
       - [0x317b60, bin]
   - type: code
     ld_name: world_partner_bombette
     start: 0x317e50
     vram: 0x802BD100
     files:
-      - [0x317e50, c]
+      - [0x317e50, c, world/partner/bombette]
       - [0x3195d0, bin]
   - type: code
     ld_name: world_partner_parakarry
     start: 0x319670
     vram: 0x802BD100
     files:
-      - [0x319670, c]
+      - [0x319670, c, world/partner/parakarry]
       - [0x31b000, bin]
   - type: code
     ld_name: world_partner_kooper
     start: 0x31b120
     vram: 0x802BD100
     files:
-      - [0x31b120, c]
+      - [0x31b120, c, world/partner/kooper]
       - [0x31cb60, bin]
   - type: code
     ld_name: world_partner_watt
     start: 0x31cc70
     vram: 0x802BD100
     files:
-      - [0x31cc70, c]
+      - [0x31cc70, c, world/partner/watt]
       - [0x31ddc0, bin]
   - type: code
     ld_name: world_partner_sushie
     start: 0x31de70
     vram: 0x802BD100
     files:
-      - [0x31de70, c]
+      - [0x31de70, c, world/partner/sushie]
       - [0x320b20, bin]
   - type: code
     ld_name: world_partner_lakilester
     start: 0x320c50
     vram: 0x802BD100
     files:
-      - [0x320c50, c]
+      - [0x320c50, c, world/partner/lakilester]
       - [0x3239b0, bin]
   - type: code
     ld_name: world_partner_bow
     start: 0x323A50
     vram: 0x802BD100
     files:
-      - [0x323A50, c]
+      - [0x323A50, c, world/partner/bow]
       - [0x324930, bin]
   - type: code
     ld_name: world_partner_goompa

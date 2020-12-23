@@ -21,17 +21,17 @@ void world_goombario_init(Npc* npc) {
     npc->collisionRadius = 20;
 }
 
-INCLUDE_ASM(s32, "code_317020", func_802BD188);
+INCLUDE_ASM(s32, "world/partner/goombario", func_802BD188);
 
-INCLUDE_ASM(s32, "code_317020", func_802BD1D0);
+INCLUDE_ASM(s32, "world/partner/goombario", func_802BD1D0);
 
-INCLUDE_ASM(s32, "code_317020", func_802BD564);
+INCLUDE_ASM(s32, "world/partner/goombario", func_802BD564);
 
-INCLUDE_ASM(s32, "code_317020", func_802BD5A8);
+INCLUDE_ASM(s32, "world/partner/goombario", func_802BD5A8);
 
-INCLUDE_ASM(s32, "code_317020", func_802BD5D8);
+INCLUDE_ASM(s32, "world/partner/goombario", func_802BD5D8);
 
-INCLUDE_ASM(s32, "code_317020", func_802BDB30);
+INCLUDE_ASM(s32, "world/partner/goombario", func_802BDB30);
 
 ApiStatus func_802BDB84(ScriptInstance* script, s32 isInitialCall) {
     s32 unk = script->owner2.npc; // todo what is this?
@@ -58,5 +58,5 @@ void world_goombario_pre_battle(s32 arg0) {
     D_8010EBB0[3] = 1;
 }
 #else
-INCLUDE_ASM(void, "code_317020", world_goombario_pre_battle, s32 arg0);
+INCLUDE_ASM(void, "world/partner/goombario", world_goombario_pre_battle, s32 arg0);
 #endif
