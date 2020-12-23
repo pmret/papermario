@@ -1,4 +1,4 @@
-#include "code_a5dd0_len_114e0.h"
+#include "common.h"
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", update_entities);
 
