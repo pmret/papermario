@@ -45,17 +45,17 @@ ApiStatus GoombariaPutAway(ScriptInstance* script, s32 isInitialCall) {
 }
 
 Script world_goombaria_take_out = SCRIPT({
-    GoombariaTakeOut()
+    GoombariaTakeOut();
 });
 
 Script world_goombaria_update = SCRIPT({
-    GoombariaUpdate()
+    GoombariaUpdate();
 });
 
 Script world_goombaria_use_ability = SCRIPT({
-    GoombariaUseAbility()
+    GoombariaUseAbility();
 });
 
 Script world_goombaria_put_away = SCRIPT({
-    GoombariaPutAway()
+    GoombariaPutAway();
 });

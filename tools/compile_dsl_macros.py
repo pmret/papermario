@@ -5,7 +5,7 @@ from lark import Lark, exceptions, Tree, Transformer, Visitor, v_args, Token
 from lark.visitors import Discard
 import traceback
 
-DEBUG_OUTPUT = None
+DEBUG_OUTPUT = None # "debug.i"
 
 def eprint(*args, **kwargs):
     print(*args, file=stderr, **kwargs)
@@ -31,16 +31,15 @@ def pairs(seq):
 
 script_parser = Lark(r"""
 
-    block: "{" NEWLINE* (_block STMT_SEP*)? "}"
+    block: "{" (_block SEMICOLON*)? "}"
 
-    _block: stmt STMT_SEP _block
-          | stmt
+    _block: stmt SEMICOLON _block
+          | stmt_no_semi SEMICOLON? _block
+          | stmt SEMICOLON
+          | stmt_no_semi
 
     ?stmt: call
-         | label ":" [stmt]     -> label_decl
          | "goto" label         -> label_goto
-         | if_stmt
-         | match_stmt
          | "return"             -> return_stmt
          | "break"              -> break_stmt
          | "sleep" expr         -> sleep_stmt
@@ -58,15 +57,19 @@ script_parser = Lark(r"""
          | suspend_stmt
          | resume_stmt
          | kill_stmt
-         | loop_stmt
-         | loop_until_stmt
-         | ["await"] block     -> block_stmt
-         | "spawn" block       -> spawn_block_stmt
-         | "parallel" block    -> parallel_block_stmt
+
+    ?stmt_no_semi: label ":" -> label_decl
+                 | if_stmt
+                 | match_stmt
+                 | loop_stmt
+                 | loop_until_stmt
+                 | ["await"] block     -> block_stmt
+                 | "spawn" block       -> spawn_block_stmt
+                 | "parallel" block    -> parallel_block_stmt
 
     call: (c_identifier | HEX_INT) "(" [expr ("," expr)* [","]] ")"
 
-    if_stmt: "if" expr cond_op expr block ["else" block]
+    if_stmt: "if" "(" expr cond_op expr ")" block ["else" block]
 
     ?cond_op: "==" -> cond_op_eq
            | "!=" -> cond_op_ne
@@ -76,9 +79,9 @@ script_parser = Lark(r"""
            | "<=" -> cond_op_le
            | "?" -> cond_op_flag
 
-    match_stmt: "match" expr "{" NEWLINE* (match_cases STMT_SEP*)? "}"
-    match_const_stmt: "matchc" expr "{" NEWLINE* (match_cases STMT_SEP*)? "}"
-    match_cases: match_case STMT_SEP* match_cases
+    match_stmt: "match" expr "{" (match_cases SEMICOLON*)? "}"
+    match_const_stmt: "matchc" expr "{" (match_cases SEMICOLON*)? "}"
+    match_cases: match_case SEMICOLON* match_cases
                | match_case
     ?match_case: "else" block -> case_else
                | cond_op expr ["," multi_case] block -> case_op
@@ -97,7 +100,7 @@ script_parser = Lark(r"""
     bind_set_stmt: lhs "=" "bind" expr "to" expr expr
 
     loop_stmt: "loop" [expr] block
-    loop_until_stmt: "loop" block "until" expr cond_op expr
+    loop_until_stmt: "loop" block "until" "(" expr cond_op expr ")"
 
     ?expr: c_const_expr
          | ESCAPED_STRING
@@ -123,11 +126,11 @@ script_parser = Lark(r"""
 
     c_identifier: CNAME
 
-    c_const_expr: c_const_expr_internal
+    c_const_expr: "(" c_const_expr_internal ")"
     c_const_expr_internal: "(" (c_const_expr_internal | NOT_PARENS)+ ")"
     NOT_PARENS: /[^()]+/
 
-    STMT_SEP: (NEWLINE+ | ";")
+    SEMICOLON: ";"
 
     label: /[a-zA-Z0-9_]+/
 
@@ -146,6 +149,7 @@ script_parser = Lark(r"""
     %import common.WS_INLINE
     %import common.NEWLINE
     %ignore WS_INLINE
+    %ignore NEWLINE
 
 """, start="block", propagate_positions=True)#, parser="lalr", cache=True)
 
@@ -382,7 +386,7 @@ class Compile(Transformer):
         if len(tree.children) == 1:
             return [tree.children[0]]
         else:
-            return [tree.children[0], *tree.children[2]]
+            return [tree.children[0], *tree.children[1]]
 
     def case_else(self, tree):
         return [Cmd("ScriptOpcode_ELSE"), *tree.children[0]]
@@ -746,7 +750,7 @@ if __name__ == "__main__":
 
     macro_name = "" # captures recent UPPER_CASE identifier
     prev_char = ""
-    while True:
+    while not error:
         char = stdin.read(1)
 
         if len(char) == 0:
@@ -845,6 +849,7 @@ if __name__ == "__main__":
         prev_char = char
 
     if error:
+        write("{ 1 / 0 };")
         exit(1)
     else:
         exit(0)

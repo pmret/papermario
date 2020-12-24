@@ -66,5 +66,5 @@ MapConfig M(config) = {
 };
 
 Script M(Script_802406C0) = SCRIPT({
-    SetMusicTrack(0, 17, 0, 8)
+    SetMusicTrack(0, 17, 0, 8);
 });

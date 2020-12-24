@@ -204,20 +204,20 @@ s32 M(treeEffectVectors_Tree1)[] = {
 };
 
 Script M(Tree1_Callback) = SCRIPT({
-    if SI_SAVE_FLAG(53) == 1 {
-        return
+    if (SI_SAVE_FLAG(53) == 1) {
+        return;
     }
-    if SI_MAP_FLAG(10) == 1 {
-        return
+    if (SI_MAP_FLAG(10) == 1) {
+        return;
     }
-    sleep 10
-    GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2))
-    if SI_VAR(0) < 0xFFFFFFE2 {
-        MakeItemEntity(138, 0xFFFFFFE9, 100, 35, 13, SI_SAVE_FLAG(53))
+    sleep 10;
+    GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    if (SI_VAR(0) < 0xFFFFFFE2) {
+        MakeItemEntity(138, 0xFFFFFFE9, 100, 35, 13, SI_SAVE_FLAG(53));
     } else {
-        MakeItemEntity(138, 0xFFFFFFAB, 100, 16, 13, SI_SAVE_FLAG(53))
+        MakeItemEntity(138, 0xFFFFFFAB, 100, 16, 13, SI_SAVE_FLAG(53));
     }
-    SI_MAP_FLAG(10) = 1
+    SI_MAP_FLAG(10) = 1;
 });
 
 s32 M(shakeTreeEvent_Tree1)[] = {
@@ -229,10 +229,10 @@ s32 M(triggerCoord_802422A8)[] = {
 };
 
 Script M(Script_802422B8) = SCRIPT({
-    SI_VAR(0) = M(searchBushEvent_Bush1)
-    bind M(SearchBush_802417F0) to TriggerFlag_WALL_INTERACT 53
-    SI_VAR(0) = M(shakeTreeEvent_Tree1)
-    bind M(ShakeTree_80241B50) to TriggerFlag_WALL_HAMMER 52
-    bind M(ShakeTree_80241B50) to TriggerFlag_BOMB M(triggerCoord_802422A8)
+    SI_VAR(0) = M(searchBushEvent_Bush1);
+    bind M(SearchBush_802417F0) to TriggerFlag_WALL_INTERACT 53;
+    SI_VAR(0) = M(shakeTreeEvent_Tree1);
+    bind M(ShakeTree_80241B50) to TriggerFlag_WALL_HAMMER 52;
+    bind M(ShakeTree_80241B50) to TriggerFlag_BOMB M(triggerCoord_802422A8);
 });
 

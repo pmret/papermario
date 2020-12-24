@@ -45,17 +45,17 @@ ApiStatus TwinkPutAway(ScriptInstance* script, s32 isInitialCall) {
 }
 
 Script world_twink_take_out = SCRIPT({
-    TwinkTakeOut()
+    TwinkTakeOut();
 });
 
 Script world_twink_update = SCRIPT({
-    TwinkUpdate()
+    TwinkUpdate();
 });
 
 Script world_twink_use_ability = SCRIPT({
-    TwinkUseAbility()
+    TwinkUseAbility();
 });
 
 Script world_twink_put_away = SCRIPT({
-    TwinkPutAway()
+    TwinkPutAway();
 });

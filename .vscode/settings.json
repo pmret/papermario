@@ -24,4 +24,7 @@
     "python.analysis.extraPaths": [
         "./tools"
     ],
+    "[c]": {
+        "editor.wordSeparators": "`~!@#%^&*()-=+[{]}\\|;:'\",.<>/?", // no $, for scripts
+    },
 }

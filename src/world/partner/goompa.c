@@ -33,19 +33,19 @@ ApiStatus GoompaPutAway(ScriptInstance* script, s32 isInitialCall) {
 }
 
 Script world_goompa_take_out = SCRIPT({
-    GoompaTakeOut()
+    GoompaTakeOut();
 });
 
 s32 unk = 0x802BD600;
 
 Script world_goompa_update = SCRIPT({
-    func_802BD14C()
+    func_802BD14C();
 });
 
 Script world_goompa_use_ability = SCRIPT({
-    GoompaUseAbility()
+    GoompaUseAbility();
 });
 
 Script world_goompa_put_away = SCRIPT({
-    GoompaPutAway()
+    GoompaPutAway();
 });

@@ -8,8 +8,8 @@ s32 M(aISettings_80240300)[] = {
 };
 
 Script M(NpcAI_80240330) = SCRIPT({
-    SetNpcB5_3()
-    DoBasicAI(M(aISettings_80240300))
+    SetNpcB5_3();
+    DoBasicAI(M(aISettings_80240300));
 });
 
 s32 M(npcSettings_8024035C)[] = {
@@ -63,8 +63,8 @@ s32 M(npcGroupList_80240768)[] = {
 static s32 padding = 0;
 
 Script M(MakeEntities) = SCRIPT({
-    MakeEntity(0x802EA564, 0xFFFFFF1A, 0, 155, 0, 152, 0x80000000)
-    AssignBlockFlag(SI_SAVE_FLAG(797))
-    MakeEntity(0x802EA564, 160, 0, 205, 0, 343, 0x80000000)
-    AssignBlockFlag(SI_SAVE_FLAG(798))
+    MakeEntity(0x802EA564, 0xFFFFFF1A, 0, 155, 0, 152, 0x80000000);
+    AssignBlockFlag(SI_SAVE_FLAG(797));
+    MakeEntity(0x802EA564, 160, 0, 205, 0, 343, 0x80000000);
+    AssignBlockFlag(SI_SAVE_FLAG(798));
 });

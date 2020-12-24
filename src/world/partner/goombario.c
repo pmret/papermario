@@ -92,36 +92,36 @@ s32 func_802BD5D8_data[] = {
 };
 
 Script world_goombario_take_out = SCRIPT({
-    func_802BD188()
+    func_802BD188();
 });
 
 s32 unk_802BDD88 = 0x802BDF40;
 
 Script world_goombario_update = SCRIPT({
-    func_802BD1D0()
+    func_802BD1D0();
 });
 
 Script world_goombario_use_ability = SCRIPT({
-    func_802BD5D8() // returns tattle message id on SI_VAR(0), and something else on SI_VAR(1)
+    func_802BD5D8(); // returns tattle message id on SI_VAR(0), and something else on SI_VAR(1)
 
-    if SI_VAR(0) == -1 {
-        return
+    if (SI_VAR(0) == -1) {
+        return;
     }
 
-    if SI_VAR(0) == 0 {
-        func_802BDB30()
-        return
+    if (SI_VAR(0) == 0) {
+        func_802BDB30();
+        return;
     }
 
-    if SI_VAR(1) == 0 {
-        SpeakToPlayer(NpcId_PARTNER, NPC_ANIM(world_goombario, normal, talk), NPC_ANIM(world_goombario, normal, idle), 0, SI_VAR(0))
+    if (SI_VAR(1) == 0) {
+        SpeakToPlayer(NpcId_PARTNER, NPC_ANIM(world_goombario, normal, talk), NPC_ANIM(world_goombario, normal, idle), 0, SI_VAR(0));
     }
 
-    sleep 1
+    sleep 1;
 
-    func_802BDB30()
+    func_802BDB30();
 });
 
 Script world_goombario_put_away = SCRIPT({
-    func_802BDB84()
+    func_802BDB84();
 });
