@@ -161,7 +161,7 @@ void func_8004E3A4(UnkAlA9C* arg0) {
     if (arg0->unk_2C.unk_0A != 0) {
         arg0->unk_2C.unk_00.s32 += arg0->unk_2C.unk_04;
     } else {
-        arg0->unk_2C.unk_00.s32 = arg0->unk_2C.unk_08 << 0x10;
+        arg0->unk_2C.unk_00.s32 = arg0->unk_2C.unk_08 << 16;
 
         if (arg0->unk_2C.unk_0C != NULL) {
             arg0->unk_2C.unk_0C();
@@ -210,17 +210,13 @@ void func_8004FBBC(UnkAlA9C* arg0, UnkAl60* arg1) {
 }
 
 s32 func_8004FC08(UnkAlA9C* arg0, u32 arg1) {
-    u32 t32;
-    u16 t16;
-    u32 ret;
+    u32 unk_20A = arg0->unk_20A;
+    u32 ret = arg1;
 
-    t32 = t16 = arg0->unk_20A;
-
-    ret = arg1;
     ret *= arg0->unk_D0;
 
-    if (t32 < ret) {
-        ret = t32;
+    if (unk_20A < ret) {
+        ret = unk_20A;
     } else if (ret == 0) {
         ret = 1;
     }

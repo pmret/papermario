@@ -410,7 +410,7 @@ typedef struct UnkAlA9C {
     /* 0x16C */ char unk_16C[0x98];
     /* 0x204 */ s32 unk_204;
     /* 0x208 */ s16 unk_208;
-    /* 0x20A */ s16 unk_20A;
+    /* 0x20A */ u16 unk_20A;
     /* 0x20C */ s16 unk_20C;
     /* 0x20E */ s16 unk_20E;
     /* 0x210 */ char unk_210[0xA];
