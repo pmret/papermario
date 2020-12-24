@@ -80,7 +80,7 @@ CC=tools/$(OS)/cc1
 
 ### Compiler Options ###
 
-CPPFLAGS   := -Iinclude -Isrc -D _LANGUAGE_C -ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -Wundef -Wcomment
+CPPFLAGS   := -Iinclude -Isrc -D _LANGUAGE_C -D _FINALROM -ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -Wundef -Wcomment
 ASFLAGS    := -EB -Iinclude -march=vr4300 -mtune=vr4300
 OLDASFLAGS := -EB -Iinclude -G 0
 CFLAGS     := -O2 -quiet -G 0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wimplicit -Wuninitialized -Wshadow
