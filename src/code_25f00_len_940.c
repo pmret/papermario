@@ -95,7 +95,7 @@ void func_8004B328(s16 arg0, s32 arg1) {
                 temp_s0 = 0;
             }
 
-            temp_s0 = (temp_s0 * temp_s0) >> 0xF;
+            temp_s0 = (temp_s0 * temp_s0) >> 15;
             func_80056D44(temp_s0);
 
             if (temp_s0 == 0) {
