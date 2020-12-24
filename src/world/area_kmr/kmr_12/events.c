@@ -94,7 +94,7 @@ Script M(GoombaIdle) = SCRIPT({
     loop {
         GetSelfVar(0, SI_VAR(0));
         sleep 1;
-    } until (SI_VAR(0) == FALSE)
+    } until(SI_VAR(0) == FALSE)
 
     // Peel and jump off the sign
     SetNpcFlagBits(NpcId_SELF, 0x00240000, TRUE);
