@@ -7,8 +7,8 @@ CheckOptions:
   - key: readability-identifier-naming.ParameterCase
     value: camelBack
 
-  - key: readability-identifier-naming.TypedefCase
-    value: CamelCase
+  #- key: readability-identifier-naming.TypedefCase
+  #  value: CamelCase
 
   # TODO: rename all unk_XXX members
   #- key: readability-identifier-naming.MemberCase

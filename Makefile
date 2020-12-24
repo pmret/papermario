@@ -9,8 +9,6 @@ NON_MATCHING = 0
 WATCH_INCLUDES = 1
 WSL_ELEVATE_GUI = 1
 
--include settings.mk
-
 # Fail early if baserom does not exist
 ifeq ($(wildcard $(BASEROM)),)
 $(error Baserom `$(BASEROM)' not found.)
@@ -49,8 +47,6 @@ YAY0COMPRESS = tools/Yay0compress
 EMULATOR = mupen64plus
 
 
-### Compiler Options ###
-
 CROSS := mips-linux-gnu-
 AS := $(CROSS)as
 OLD_AS := tools/mips-nintendo-nu64-as
@@ -59,27 +55,30 @@ CPP := cpp
 LD := $(CROSS)ld
 OBJCOPY := $(CROSS)objcopy
 
+WSL := 0
+JAVA := java
+
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
 	OS=linux
 	ICONV := iconv --from UTF-8 --to SHIFT-JIS
+
+	ifeq ($(findstring microsoft,$(shell cat /proc/sys/kernel/osrelease)),microsoft)
+	WSL := 1
+	ifeq ($(WSL_ELEVATE_GUI),1)
+		JAVA := powershell.exe -command java
+	endif
+endif
 endif
 ifeq ($(UNAME_S),Darwin)
 	OS=mac
 	ICONV := tools/iconv.py UTF-8 SHIFT-JIS
 endif
 
-WSL := 0
-JAVA := java
-ifeq ($(findstring microsoft,$(shell cat /proc/sys/kernel/osrelease)),microsoft)
-	WSL := 1
-	ifeq ($(WSL_ELEVATE_GUI),1)
-		JAVA := powershell.exe -command java
-	endif
-endif
-
 OLD_AS=tools/$(OS)/mips-nintendo-nu64-as
 CC=tools/$(OS)/cc1
+
+### Compiler Options ###
 
 CPPFLAGS   := -Iinclude -Isrc -D _LANGUAGE_C -ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -Wundef -Wcomment
 ASFLAGS    := -EB -Iinclude -march=vr4300 -mtune=vr4300
@@ -96,6 +95,7 @@ ifeq ($(NON_MATCHING),1)
 CPPFLAGS += -DNON_MATCHING
 endif
 
+-include settings.mk
 
 ### Sources ###
 
@@ -128,7 +128,7 @@ setup: clean submodules tools split $(LD_SCRIPT)
 # tools/star-rod submodule intentionally omitted
 submodules:
 	git submodule init tools/n64splat
-	git submodule update --init --recursive
+	git submodule update --recursive
 
 split:
 	$(SPLAT) --modes ld bin Yay0 PaperMarioMapFS PaperMarioMessages img PaperMarioNpcSprites --new

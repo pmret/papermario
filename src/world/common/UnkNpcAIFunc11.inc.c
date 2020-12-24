@@ -8,7 +8,7 @@ static void UnkNpcAIFunc11(ScriptInstance* script, NpcAISettings* aiSettings, s3
     if (func_800490B4(arg2, enemy, aiSettings->chaseSpeed, aiSettings->unk_1C, 1) == 0) {
         s32* something;
 
-        fx_emote(2, npc, 0, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &something);
+        fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &something);
         npc->currentAnim = enemy->animList[0];
         npc->duration = 25;
         script->functionTemp[0].s = 14;

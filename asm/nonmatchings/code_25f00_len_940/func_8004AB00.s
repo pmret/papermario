@@ -39,14 +39,14 @@ glabel func_8004AB00
 /* 25F88 8004AB88 26523510 */  addiu     $s2, $s2, %lo(D_800A3510)
 /* 25F8C 8004AB8C AFA20020 */  sw        $v0, 0x20($sp)
 /* 25F90 8004AB90 00001810 */  mfhi      $v1
-/* 25F94 8004AB94 3C02B216 */  lui       $v0, %hi(D_B215B224)
+/* 25F94 8004AB94 3C02B216 */  lui       $v0, 0xb216
 /* 25F98 8004AB98 344242C9 */  ori       $v0, $v0, 0x42c9
 /* 25F9C 8004AB9C 00031942 */  srl       $v1, $v1, 5
 /* 25FA0 8004ABA0 00620019 */  multu     $v1, $v0
 /* 25FA4 8004ABA4 A3A00024 */  sb        $zero, 0x24($sp)
 /* 25FA8 8004ABA8 AFB0002C */  sw        $s0, 0x2c($sp)
 /* 25FAC 8004ABAC 3C028005 */  lui       $v0, %hi(nuAuDmaNew)
-/* 25FB0 8004ABB0 2442B224 */  addiu     $v0, $v0, %lo(D_B215B224)
+/* 25FB0 8004ABB0 2442B224 */  addiu     $v0, $v0, %lo(nuAuDmaNew)
 /* 25FB4 8004ABB4 AFA20028 */  sw        $v0, 0x28($sp)
 /* 25FB8 8004ABB8 00001810 */  mfhi      $v1
 /* 25FBC 8004ABBC 000319C2 */  srl       $v1, $v1, 7
@@ -118,8 +118,8 @@ glabel func_8004AB00
 /* 260B8 8004ACB8 1440FFF6 */  bnez      $v0, .L8004AC94
 /* 260BC 8004ACBC 26100004 */   addiu    $s0, $s0, 4
 /* 260C0 8004ACC0 0000882D */  daddu     $s1, $zero, $zero
-/* 260C4 8004ACC4 3C02800A */  lui       $v0, %hi(D_800A3BE0)
-/* 260C8 8004ACC8 24423BE0 */  addiu     $v0, $v0, %lo(D_800A3BE0)
+/* 260C4 8004ACC4 3C02800A */  lui       $v0, %hi(nuAuDmaBuf)
+/* 260C8 8004ACC8 24423BE0 */  addiu     $v0, $v0, %lo(nuAuDmaBuf)
 /* 260CC 8004ACCC 0040802D */  daddu     $s0, $v0, $zero
 /* 260D0 8004ACD0 26120014 */  addiu     $s2, $s0, 0x14
 /* 260D4 8004ACD4 AE000004 */  sw        $zero, 4($s0)
@@ -158,8 +158,8 @@ glabel func_8004AB00
 /* 26154 8004AD54 248491A0 */  addiu     $a0, $a0, %lo(D_800B91A0)
 /* 26158 8004AD58 3C028005 */  lui       $v0, %hi(D_8004B328)
 /* 2615C 8004AD5C 2442B328 */  addiu     $v0, $v0, %lo(D_8004B328)
-/* 26160 8004AD60 3C018008 */  lui       $at, %hi(D_80078174)
-/* 26164 8004AD64 AC228174 */  sw        $v0, %lo(D_80078174)($at)
+/* 26160 8004AD60 3C018008 */  lui       $at, %hi(nuAuPreNMIFunc)
+/* 26164 8004AD64 AC228174 */  sw        $v0, %lo(nuAuPreNMIFunc)($at)
 /* 26168 8004AD68 0C015894 */  jal       func_80056250
 /* 2616C 8004AD6C 27A50018 */   addiu    $a1, $sp, 0x18
 /* 26170 8004AD70 8FA40020 */  lw        $a0, 0x20($sp)

@@ -28,7 +28,7 @@
 extern "C" {
 #endif
 
-/*----------------------------------------------------------------------*/    
+/*----------------------------------------------------------------------*/
 /*----------------------------------------------------------------------*/
 /*	DEFINE								*/
 /*----------------------------------------------------------------------*/
@@ -49,14 +49,14 @@ extern "C" {
 #define NU_RMON_THREAD_ID	2	/* no use */
 #define NU_MAIN_THREAD_ID	3
 
-									
+
 /*--------------------------------------*/
 /* NuSYS Thread Priority		*/
 /*--------------------------------------*/
 #define NU_IDLE_THREAD_PRI	OS_PRIORITY_IDLE	/* Idle thread	*/
 #define NU_RMON_THREAD_PRI	OS_PRIORITY_RMON	/* no use	*/
 #define NU_MAIN_THREAD_PRI	10			/* main thread	*/
-    
+
 /*--------------------------------------*/
 /* NUSYS STACK SIZE			*/
 /*--------------------------------------*/
@@ -77,13 +77,13 @@ extern "C" {
 #define	NU_SC_UCODE_XBUS	0x0004		/* XBUS Ucode		*/
 #define	NU_SC_TASK_YIELDED	(OS_TASK_YIELEDE<<16)
 #define	NU_SC_TASK_DP_WAIT	(OS_TASK_DP_WAIT<<16)	/* RDP WAIT	*/
-#define	NU_SC_TASK_LODABLE	(OS_TASK_LOADBLE<<16)	/* LOADABLE	*/     
+#define	NU_SC_TASK_LODABLE	(OS_TASK_LOADBLE<<16)	/* LOADABLE	*/
 #define	NU_SC_TASK_SP_ONLY	(OS_TASK_SP_ONLY<<16)	/* SP ONLY	*/
 
-							   
+
 #define NU_SC_RETRACE_MSG	0x0001		/* Retrace message */
 #define NU_SC_PRENMI_MSG	0x0002		/* NMI message */
-#define NU_SC_SWAPBUFFER_MSG	0x0004	/* Swap frame buffer message*/ 
+#define NU_SC_SWAPBUFFER_MSG	0x0004	/* Swap frame buffer message*/
 #define NU_SC_GTASKEND_MSG	0x0008	/* Task finished message */
 #define NU_SC_MAX_MESGS		8	/* Message buffer size */
 
@@ -92,7 +92,7 @@ extern "C" {
 #define NU_SC_GRAPHICS_PRI	100	/* GFX DISPATCHER THREAD PRORITY */
 #define NU_SC_HANDLER_THREAD_ID	19
 #define NU_SC_AUDIO_THREAD_ID	18
-#define NU_SC_GRAPHICS_THREAD_ID 17   
+#define NU_SC_GRAPHICS_THREAD_ID 17
 #define	NU_SC_PRENMI_YET	0	/* PRE NMI has not occurred. */
 #define	NU_SC_PRENMI_GET	1	/* PRE NMI received flag */
 #define	NU_SC_BEFORE_RESET 	2	/* Pre-RESET flag for frame before reset  */
@@ -100,7 +100,7 @@ extern "C" {
 /*----------------------------------------------------------------------*/
 /* GRAFIC THREAD DEFINE							*/
 /*----------------------------------------------------------------------*/
-#define NU_GFX_THREAD_ID	4	
+#define NU_GFX_THREAD_ID	4
 #define NU_GFX_TASKMGR_THREAD_ID 5
 #define NU_GFX_STACK_SIZE	0x2000			/* Thread stack size */
 #define	NU_GFX_MESGS		8		/* GFX message queue*/
@@ -119,7 +119,7 @@ extern "C" {
 #define	NU_GFX_UCODE_F3DLX2_REJ	3		/* F3DEX.ReJ microcode  */
 #define	NU_GFX_UCODE_L3DEX2	4		/* L3DEX microcode  */
 #define	NU_GFX_UCODE_S2DEX2	5		/* S2DEX microcode  */
-    
+
 #define	NU_GFX_UCODE_F3DEX	0		/*  For compatibility		*/
 #define	NU_GFX_UCODE_F3DEX_NON	1		/*  For compatibility		*/
 #define	NU_GFX_UCODE_F3DLX	0		/*  For compatibility		*/
@@ -130,7 +130,7 @@ extern "C" {
 #define	NU_GFX_UCODE_S2DEX	5		/*  For compatibility		*/
 #define	NU_GFX_UCODE_S2DEX_D	5		/*  For compatibility		*/
 
-#else    
+#else
 #define	NU_GFX_UCODE_F3DEX	0		/* F3DEX microcode  */
 #define	NU_GFX_UCODE_F3DEX_NON	1		/* F3DEX.NoN microcode  */
 #define	NU_GFX_UCODE_F3DLX	2		/* F3DLX microcode  */
@@ -142,7 +142,7 @@ extern "C" {
 #define	NU_GFX_UCODE_S2DEX_D	8		/* S2DEX microcode  */
 #endif /* F3DEX_GBI_2 */
 
-    
+
 /*----------------------------------------------*/
 /* The number of graphics task structures	*/
 /* should be set to a value at least as large as*/
@@ -173,15 +173,15 @@ extern "C" {
 /*--------------------------------------*/
 /* Default Z -buffer is located in		*/
 /* xxlow-order memory.xx	*/
-/*--------------------------------------*/    
+/*--------------------------------------*/
 #define NU_GFX_ZBUFFER_ADDR		0x80000400
-					   
-#define	NU_GFX_DISPLAY_OFF		0	/* No display */    
+
+#define	NU_GFX_DISPLAY_OFF		0	/* No display */
 #define	NU_GFX_DISPLAY_ON		1	/* Display */
 #define	NU_GFX_DISPLAY_ON_TRIGGER	0x80	/* Trigger		*/
 
 #define NU_GFX_YIELD_BUF_SIZE		(OS_YIELD_DATA_SIZE + 0x10)
-					   
+
 /*----------------------------------------------------------------------*/
 /* SI MANAGER DEFINE							*/
 /*----------------------------------------------------------------------*/
@@ -264,7 +264,7 @@ extern "C" {
 #define NU_CONT_RMB_RETRACE_MSG		(NU_CONT_RMB_MSG_BASE+0)
 #define NU_CONT_RMB_CHECK_MSG		(NU_CONT_RMB_MSG_BASE+1)
 #define NU_CONT_RMB_START_MSG		(NU_CONT_RMB_MSG_BASE+2)
-#define NU_CONT_RMB_STOP_MSG		(NU_CONT_RMB_MSG_BASE+3)	   
+#define NU_CONT_RMB_STOP_MSG		(NU_CONT_RMB_MSG_BASE+3)
 #define	NU_CONT_RMB_FORCESTOP_MSG	(NU_CONT_RMB_MSG_BASE+4)
 #define	NU_CONT_RMB_FORCESTOPEND_MSG	(NU_CONT_RMB_MSG_BASE+5)
 
@@ -289,7 +289,7 @@ extern "C" {
 #define NU_CONT_GBPAK_READID_MSG	(NU_CONT_GBPAK_MSG_BASE+4)
 #define NU_CONT_GBPAK_READWRITE_MSG	(NU_CONT_GBPAK_MSG_BASE+5)
 #define NU_CONT_GBPAK_CHECKCONNECTOR_MSG (NU_CONT_GBPAK_MSG_BASE+6)
-    
+
 #define NU_CONT_GBPAK_POWER_OFF		OS_GBPAK_POWER_OFF
 #define NU_CONT_GBPAK_POWER_ON		OS_GBPAK_POWER_ON
 #define	NU_CONT_GBPAK_MBC_RAM_ENABLE_CODE	0x0a
@@ -314,7 +314,7 @@ extern "C" {
 #define	NU_VRS_GET_READ_DATA_MSG	(NU_VRS_MSG_BASE+6)
 #define	NU_VRS_STOP_READ_DATA_MSG	(NU_VRS_MSG_BASE+7)
 #define	NU_VRS_CONTROL_GAIN_MSG		(NU_VRS_MSG_BASE+8)
-					   
+
 /*----------------------------------------------------------------------*/
 /* PI DEFINE								*/
 /*----------------------------------------------------------------------*/
@@ -373,8 +373,8 @@ extern "C" {
 #define NU_DEB_CON_SCROLL_ON		1
 #define NU_DEB_CON_SCROLL_OFF		0
 #define NU_DEB_CON_WINDOW_OFF		0
-#define NU_DEB_CON_WINDOW_ON		1    
-    
+#define NU_DEB_CON_WINDOW_ON		1
+
 #define NU_DEB_MARKER_NUM		10
 
 #if defined(_LANGUAGE_C) || defined(_LANGUAGE_C_PLUS_PLUS)
@@ -455,7 +455,7 @@ typedef struct st_Sched { /* Define the Scheduler structure. */
 /* ucode structure			*/
 /*--------------------------------------*/
 typedef struct  st_Ucode {
-    u64*	ucode;	
+    u64*	ucode;
     u64*	ucode_data;
 } NUUcode;
 
@@ -525,7 +525,7 @@ typedef struct st_ContQuery {
 
 
 typedef struct st_ContPakFile {
-    OSPfs	*pfs;    
+    OSPfs	*pfs;
     s32		file_no;
     s32		error;
     u32		type;
@@ -649,14 +649,14 @@ typedef struct st_DebConWindow {
     u16	winY;		/* y-coordinate of console window display	*/
     u16	winW;		/* Number of columns in console display	*/
     u16	winH;		/* Number of rows in console display 	*/
-    u16	text[NU_DEB_CON_TEXT_SIZE];	/* Character buffer*/    
+    u16	text[NU_DEB_CON_TEXT_SIZE];	/* Character buffer*/
 } NUDebConWindow;
 
 /*----------------------------------------------------------------------*/
 /*----------------------------------------------------------------------*/
 /* extern variables 							*/
 /*----------------------------------------------------------------------*/
-/*----------------------------------------------------------------------*/    
+/*----------------------------------------------------------------------*/
 
 extern u8	nuRDPOutputBuf[];
 extern u8	nuDramStack[];
@@ -715,7 +715,7 @@ extern NUCallBackList	nuContGBPakCallBack;
 /*  VRS Manager variables 		*/
 /*--------------------------------------*/
 extern NUCallBackList	nuVrsCallBack;
-					   
+
 /*--------------------------------------*/
 /*  si variables 			*/
 /*--------------------------------------*/
@@ -729,7 +729,7 @@ extern NUCallBackList*	nuSiCallBackList;/* Callback function list */
 extern OSPiHandle*	nuPiCartHandle;
 extern OSPiHandle*	nuPiSramHandle;
 extern OSPiHandle*	nuPiDDRomHandle;
-    
+
 /*--------------------------------------*/
 /* CALL BACK Function pointer 		*/
 /*--------------------------------------*/
@@ -753,7 +753,7 @@ extern volatile u32	nuDebTaskPerfCnt;
 extern volatile u32	nuDebTaskPerfEnd;
 
 
-/*----------------------------------------------------------------------*/    
+/*----------------------------------------------------------------------*/
 /*----------------------------------------------------------------------*/
 /* Global Function 							*/
 /*----------------------------------------------------------------------*/
@@ -774,7 +774,7 @@ extern OSMesgQueue* nuScGetGfxMQ(void);
 extern OSMesgQueue* nuScGetAudioMQ(void);
 extern void nuScSetFrameBufferNum(u8 frameBufferNum);
 extern s32 nuScGetFrameRate(void);
-					   
+
 /*--------------------------------------*/
 /* graphic(GFX)  Manager function	*/
 /*--------------------------------------*/
@@ -818,7 +818,7 @@ extern void nuContReadFuncSet(NUContReadFunc func);
 extern void nuContQueryRead(void);
 extern void nuContDataClose(void);
 extern void nuContDataOpen(void);
-    
+
 /*--------------------------------------*/
 /* controller pak function		*/
 /*--------------------------------------*/
@@ -885,7 +885,7 @@ extern void nuEepromMgrRemove(void);
 extern s32 nuEepromRead(u8 address, u8* buffer,u16 len);
 extern s32 nuEepromWrite(u8 address, u8* buffer,u16 len);
 
-    
+
 /*--------------------------------------*/
 /* pi functions				*/
 /*--------------------------------------*/
@@ -1077,13 +1077,13 @@ extern void nuDebConPrintf(u32 wndNo, const char* fmt, ...);
 /*----------------------------------------------------------------------*/
 #define nuPiReadSram(addr, buf_ptr, size)				\
 	nuPiReadWriteSram(addr, buf_ptr, size, OS_READ)
-    
+
 /*----------------------------------------------------------------------*/
 /*	nuPiWriteSram - Write to SRAM				*/
 /*----------------------------------------------------------------------*/
 #define nuPiWriteSram(addr, buf_ptr, size)				\
     nuPiReadWriteSram(addr, buf_ptr, size, OS_WRITE)
-	
+
 /*----------------------------------------------------------------------*/
 /*	Define voice recognition macros					*/
 /*----------------------------------------------------------------------*/

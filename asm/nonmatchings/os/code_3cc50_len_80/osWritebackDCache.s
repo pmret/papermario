@@ -25,14 +25,14 @@ glabel osWritebackDCache
 /* 3CC98 80061898 03E00008 */  jr        $ra
 /* 3CC9C 8006189C 00000000 */   nop      
 .L800618A0:
-/* 3CCA0 800618A0 3C088000 */  lui       $t0, %hi(D_80000010)
+/* 3CCA0 800618A0 3C088000 */  lui       $t0, 0x8000
 /* 3CCA4 800618A4 010B4821 */  addu      $t1, $t0, $t3
 /* 3CCA8 800618A8 2529FFF0 */  addiu     $t1, $t1, -0x10
 .L800618AC:
 /* 3CCAC 800618AC BD010000 */  cache     1, ($t0)
 /* 3CCB0 800618B0 0109082B */  sltu      $at, $t0, $t1
 /* 3CCB4 800618B4 1420FFFD */  bnez      $at, .L800618AC
-/* 3CCB8 800618B8 25080010 */   addiu    $t0, $t0, %lo(D_80000010)
+/* 3CCB8 800618B8 25080010 */   addiu    $t0, $t0, 0x10
 /* 3CCBC 800618BC 03E00008 */  jr        $ra
 /* 3CCC0 800618C0 00000000 */   nop      
 /* 3CCC4 800618C4 00000000 */  nop       

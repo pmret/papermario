@@ -75,13 +75,13 @@ glabel func_80037BC8
 /* 130C8 80037CC8 24A5A66C */  addiu     $a1, $a1, %lo(D_8009A66C)
 /* 130CC 80037CCC 35CE0400 */  ori       $t6, $t6, 0x400
 /* 130D0 80037CD0 8CA20000 */  lw        $v0, ($a1)
-/* 130D4 80037CD4 3C03DE00 */  lui       $v1, %hi(D_DE007A50)
+/* 130D4 80037CD4 3C03DE00 */  lui       $v1, 0xde00
 /* 130D8 80037CD8 0040202D */  daddu     $a0, $v0, $zero
 /* 130DC 80037CDC 24420008 */  addiu     $v0, $v0, 8
 /* 130E0 80037CE0 ACA20000 */  sw        $v0, ($a1)
 /* 130E4 80037CE4 AC830000 */  sw        $v1, ($a0)
 /* 130E8 80037CE8 3C038007 */  lui       $v1, %hi(D_80077A50)
-/* 130EC 80037CEC 24637A50 */  addiu     $v1, $v1, %lo(D_DE007A50)
+/* 130EC 80037CEC 24637A50 */  addiu     $v1, $v1, %lo(D_80077A50)
 /* 130F0 80037CF0 AC830004 */  sw        $v1, 4($a0)
 /* 130F4 80037CF4 24430008 */  addiu     $v1, $v0, 8
 /* 130F8 80037CF8 ACA30000 */  sw        $v1, ($a1)

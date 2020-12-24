@@ -171,14 +171,14 @@ glabel func_E00B0234
 /* 3B4378 E00B04C8 24840008 */  addiu     $a0, $a0, 8
 /* 3B437C E00B04CC AE440000 */  sw        $a0, ($s2)
 /* 3B4380 E00B04D0 96A20000 */  lhu       $v0, ($s5)
-/* 3B4384 E00B04D4 3C03DA38 */  lui       $v1, %hi(D_DA37A674)
+/* 3B4384 E00B04D4 3C03DA38 */  lui       $v1, 0xda38
 /* 3B4388 E00B04D8 ACA30000 */  sw        $v1, ($a1)
 /* 3B438C E00B04DC 24430001 */  addiu     $v1, $v0, 1
 /* 3B4390 E00B04E0 3042FFFF */  andi      $v0, $v0, 0xffff
 /* 3B4394 E00B04E4 00021180 */  sll       $v0, $v0, 6
 /* 3B4398 E00B04E8 A6A30000 */  sh        $v1, ($s5)
 /* 3B439C E00B04EC 3C03800A */  lui       $v1, %hi(D_8009A674)
-/* 3B43A0 E00B04F0 8C63A674 */  lw        $v1, %lo(D_DA37A674)($v1)
+/* 3B43A0 E00B04F0 8C63A674 */  lw        $v1, %lo(D_8009A674)($v1)
 /* 3B43A4 E00B04F4 005E1021 */  addu      $v0, $v0, $fp
 /* 3B43A8 E00B04F8 00621821 */  addu      $v1, $v1, $v0
 /* 3B43AC E00B04FC 24820008 */  addiu     $v0, $a0, 8

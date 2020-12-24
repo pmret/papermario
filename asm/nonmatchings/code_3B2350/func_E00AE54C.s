@@ -234,14 +234,14 @@ glabel func_E00AE54C
 /* 3B2C2C E00AE8DC 24840008 */  addiu     $a0, $a0, 8
 /* 3B2C30 E00AE8E0 AE240000 */  sw        $a0, ($s1)
 /* 3B2C34 E00AE8E4 96E20000 */  lhu       $v0, ($s7)
-/* 3B2C38 E00AE8E8 3C03DA38 */  lui       $v1, %hi(D_DA37A674)
+/* 3B2C38 E00AE8E8 3C03DA38 */  lui       $v1, 0xda38
 /* 3B2C3C E00AE8EC ACA30000 */  sw        $v1, ($a1)
 /* 3B2C40 E00AE8F0 24430001 */  addiu     $v1, $v0, 1
 /* 3B2C44 E00AE8F4 3042FFFF */  andi      $v0, $v0, 0xffff
 /* 3B2C48 E00AE8F8 00021180 */  sll       $v0, $v0, 6
 /* 3B2C4C E00AE8FC A6E30000 */  sh        $v1, ($s7)
 /* 3B2C50 E00AE900 3C03800A */  lui       $v1, %hi(D_8009A674)
-/* 3B2C54 E00AE904 8C63A674 */  lw        $v1, %lo(D_DA37A674)($v1)
+/* 3B2C54 E00AE904 8C63A674 */  lw        $v1, %lo(D_8009A674)($v1)
 /* 3B2C58 E00AE908 00541021 */  addu      $v0, $v0, $s4
 /* 3B2C5C E00AE90C 00621821 */  addu      $v1, $v1, $v0
 /* 3B2C60 E00AE910 24820008 */  addiu     $v0, $a0, 8

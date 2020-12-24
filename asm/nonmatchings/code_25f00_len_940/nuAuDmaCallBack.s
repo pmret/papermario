@@ -33,8 +33,8 @@ glabel nuAuDmaCallBack
 /* 264DC 8004B0DC 1620FFF7 */  bnez      $s1, .L8004B0BC
 /* 264E0 8004B0E0 00000000 */   nop      
 .L8004B0E4:
-/* 264E4 8004B0E4 3C12800A */  lui       $s2, %hi(D_800A3BD0)
-/* 264E8 8004B0E8 26523BD0 */  addiu     $s2, $s2, %lo(D_800A3BD0)
+/* 264E4 8004B0E4 3C12800A */  lui       $s2, %hi(nuAuDmaState)
+/* 264E8 8004B0E8 26523BD0 */  addiu     $s2, $s2, %lo(nuAuDmaState)
 /* 264EC 8004B0EC 8E510008 */  lw        $s1, 8($s2)
 /* 264F0 8004B0F0 16200006 */  bnez      $s1, .L8004B10C
 /* 264F4 8004B0F4 0220202D */   daddu    $a0, $s1, $zero
@@ -65,8 +65,8 @@ glabel nuAuDmaCallBack
 .L8004B150:
 /* 26550 8004B150 8E240010 */  lw        $a0, 0x10($s1)
 /* 26554 8004B154 8E220008 */  lw        $v0, 8($s1)
-/* 26558 8004B158 3C038008 */  lui       $v1, %hi(D_8007817C)
-/* 2655C 8004B15C 8C63817C */  lw        $v1, %lo(D_8007817C)($v1)
+/* 26558 8004B158 3C038008 */  lui       $v1, %hi(nuAuFrameCounter)
+/* 2655C 8004B15C 8C63817C */  lw        $v1, %lo(nuAuFrameCounter)($v1)
 /* 26560 8004B160 00932021 */  addu      $a0, $a0, $s3
 /* 26564 8004B164 00822023 */  subu      $a0, $a0, $v0
 /* 26568 8004B168 0C0187A4 */  jal       osVirtualToPhysical
@@ -78,8 +78,8 @@ glabel nuAuDmaCallBack
 /* 2657C 8004B17C AE200000 */  sw        $zero, ($s1)
 /* 26580 8004B180 AE200004 */  sw        $zero, 4($s1)
 .L8004B184:
-/* 26584 8004B184 3C048008 */  lui       $a0, %hi(D_80078178)
-/* 26588 8004B188 24848178 */  addiu     $a0, $a0, %lo(D_80078178)
+/* 26584 8004B184 3C048008 */  lui       $a0, %hi(nuAuDmaNext)
+/* 26588 8004B188 24848178 */  addiu     $a0, $a0, %lo(nuAuDmaNext)
 /* 2658C 8004B18C 32700001 */  andi      $s0, $s3, 1
 /* 26590 8004B190 02709823 */  subu      $s3, $s3, $s0
 /* 26594 8004B194 3C02800A */  lui       $v0, %hi(D_800A3720)
@@ -92,8 +92,8 @@ glabel nuAuDmaCallBack
 /* 265B0 8004B1B0 00A32821 */  addu      $a1, $a1, $v1
 /* 265B4 8004B1B4 000528C0 */  sll       $a1, $a1, 3
 /* 265B8 8004B1B8 00A22821 */  addu      $a1, $a1, $v0
-/* 265BC 8004B1BC 3C028008 */  lui       $v0, %hi(D_8007817C)
-/* 265C0 8004B1C0 8C42817C */  lw        $v0, %lo(D_8007817C)($v0)
+/* 265BC 8004B1BC 3C028008 */  lui       $v0, %hi(nuAuFrameCounter)
+/* 265C0 8004B1C0 8C42817C */  lw        $v0, %lo(nuAuFrameCounter)($v0)
 /* 265C4 8004B1C4 24630001 */  addiu     $v1, $v1, 1
 /* 265C8 8004B1C8 AE22000C */  sw        $v0, 0xc($s1)
 /* 265CC 8004B1CC AC830000 */  sw        $v1, ($a0)
