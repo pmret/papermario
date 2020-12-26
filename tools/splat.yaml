@@ -231,6 +231,12 @@ segments:
     - [0x8a860, c, code_8a860_len_3f30]
     - [0x8e790, c, code_8e790_len_2850]
     - [0x90fe0, bin]
+  - type: code
+    start: 0x91520 # section may start earlier
+    vram: 0 # TODO
+    files:
+      - [0x91520, .data, world/partners]
+  - [0x917EC, bin]
   - [0x93CD0, ci4,     ui/hammer, 32, 32]
   - [0x93ED0, palette, ui/hammer]
   - [0x93EF0, palette, ui/hammer.disabled]
@@ -408,71 +414,84 @@ segments:
     files:
     - [0x316f30, c, code_316f30]
   - type: code
+    ld_name: world_partner_goombario
     start: 0x317020
     vram: 0x802BD100
     files:
-      - [0x317020, c]
-      - [0x317b60, bin]
+      - [0x317020, c, world/partner/goombario]
+      - [0x317b60, .data, world/partner/goombario]
+      - [0x317DA0, bin, world/partner/goombario] # rodata containing a double and a jumptable
   - type: code
+    ld_name: world_partner_bombette
     start: 0x317e50
     vram: 0x802BD100
     files:
-      - [0x317e50, c]
+      - [0x317e50, c, world/partner/bombette]
       - [0x3195d0, bin]
   - type: code
+    ld_name: world_partner_parakarry
     start: 0x319670
     vram: 0x802BD100
     files:
-      - [0x319670, c]
+      - [0x319670, c, world/partner/parakarry]
       - [0x31b000, bin]
   - type: code
+    ld_name: world_partner_kooper
     start: 0x31b120
     vram: 0x802BD100
     files:
-      - [0x31b120, c]
+      - [0x31b120, c, world/partner/kooper]
       - [0x31cb60, bin]
   - type: code
+    ld_name: world_partner_watt
     start: 0x31cc70
     vram: 0x802BD100
     files:
-      - [0x31cc70, c]
+      - [0x31cc70, c, world/partner/watt]
       - [0x31ddc0, bin]
   - type: code
+    ld_name: world_partner_sushie
     start: 0x31de70
     vram: 0x802BD100
     files:
-      - [0x31de70, c]
+      - [0x31de70, c, world/partner/sushie]
       - [0x320b20, bin]
   - type: code
+    ld_name: world_partner_lakilester
     start: 0x320c50
     vram: 0x802BD100
     files:
-      - [0x320c50, c]
+      - [0x320c50, c, world/partner/lakilester]
       - [0x3239b0, bin]
   - type: code
+    ld_name: world_partner_bow
     start: 0x323A50
     vram: 0x802BD100
     files:
-      - [0x323A50, c]
+      - [0x323A50, c, world/partner/bow]
       - [0x324930, bin]
   - type: code
+    ld_name: world_partner_goompa
     start: 0x324a10
     vram: 0x802BD100
     files:
-      - [0x324a10, c, world_goompa]
-      - [0x324e80, bin]
+      - [0x324a10, c, world/partner/goompa]
+      - [0x324e80, .data, world/partner/goompa]
+      - [0x324F00, bin, world/partner/goompa] # rodata with single f64 0.8
   - type: code
+    ld_name: world_partner_goombaria
     start: 0x324f10
     vram: 0x802BD100
     files:
-      - [0x324f10, c, world_goombaria]
-      - [0x325000, bin]
+      - [0x324f10, c, world/partner/goombaria]
+      - [0x325000, .data, world/partner/goombaria]
   - type: code
+    ld_name: world_partner_twink
     start: 0x325070
     vram: 0x802BD100
     files:
-      - [0x325070, c, world_twink]
-      - [0x325160, bin]
+      - [0x325070, c, world/partner/twink]
+      - [0x325160, .data, world/partner/twink]
   - type: code
     start: 0x3251d0
     vram: 0x802BD100
@@ -7081,7 +7100,7 @@ segments:
       - world_parakarry
       - world_bow
       - world_watt
-      - world_sushi
+      - world_sushie
       - world_lakilester
       - battle_goombario
       - battle_kooper
@@ -7089,7 +7108,7 @@ segments:
       - battle_parakarry
       - battle_bow
       - battle_watt
-      - battle_sushi
+      - battle_sushie
       - battle_lakilester
       - kooper_without_shell
       - world_eldstar
@@ -7292,11 +7311,11 @@ segments:
       - penguin
       - shiver_toad
       - world_bandit
-      - goompapa
-      - goombaria
-      - goomama
       - goompa
-      - goomma
+      - goombaria
+      - gooma
+      - goompapa
+      - goomama
       - the_master
       - chan
       - lee

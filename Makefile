@@ -35,7 +35,7 @@ LD_MAP := $(BUILD_DIR)/$(TARGET).map
 ASSETS_BIN := $(BUILD_DIR)/bin/assets/assets.bin
 MSG_BIN := $(BUILD_DIR)/msg.bin
 NPC_BIN := $(BUILD_DIR)/sprite/npc.bin
-GENERATED_HEADERS := include/ld_addrs.h include/sprite
+
 
 ### Tools ###
 
@@ -111,11 +111,15 @@ ifeq ($(WATCH_INCLUDES),1)
 -include $(foreach obj, $(OBJECTS), $(obj).mk)
 endif
 
+NPC_DIRS := $(foreach npc, $(NPC_SPRITES), sprite/npc/$(npc))
+
+GENERATED_HEADERS := include/ld_addrs.h $(foreach dir, $(NPC_DIRS), include/$(dir).h)
+
 
 ### Targets ###
 
 clean:
-	rm -rf $(BUILD_DIR) bin msg img sprite .splat_cache
+	rm -rf $(BUILD_DIR) bin msg img sprite .splat_cache $(LD_SCRIPT)
 
 clean-code:
 	rm -rf $(BUILD_DIR)/src
@@ -123,7 +127,7 @@ clean-code:
 tools:
 	make -C tools
 
-setup: clean submodules tools split $(LD_SCRIPT)
+setup: clean submodules tools $(LD_SCRIPT)
 
 # tools/star-rod submodule intentionally omitted
 submodules:
@@ -131,7 +135,7 @@ submodules:
 	git submodule update --recursive
 
 split:
-	$(SPLAT) --modes ld bin Yay0 PaperMarioMapFS PaperMarioMessages img PaperMarioNpcSprites --new
+	make $(LD_SCRIPT) -W $(SPLAT_YAML)
 
 split-%:
 	$(SPLAT) --modes ld $* --verbose
@@ -242,7 +246,6 @@ $(MSG_BIN:.bin=.o): $(MSG_BIN)
 
 # Sprites
 $(foreach npc, $(NPC_SPRITES), $(eval $(BUILD_DIR)/sprite/npc/$(npc):: $(shell find sprite/npc/$(npc) -type f 2> /dev/null))) # dependencies
-NPC_DIRS := $(foreach npc, $(NPC_SPRITES), sprite/npc/$(npc))
 NPC_YAY0 := $(foreach npc, $(NPC_SPRITES), $(BUILD_DIR)/sprite/npc/$(npc).Yay0)
 $(BUILD_DIR)/sprite/npc/%:: sprite/npc/% tools/compile_npc_sprite.py
 	@mkdir -p $(shell dirname $@)
@@ -257,10 +260,13 @@ include/sprite/npc/%.h: sprite/npc/%/SpriteSheet.xml tools/gen_sprite_animations
 	@mkdir -p $(shell dirname $@)
 	@echo "building $@"
 	@$(PYTHON) tools/gen_sprite_animations_h.py $@ sprite/npc/$* $(NPC_DIRS)
-include/sprite: $(foreach dir, $(NPC_DIRS), include/$(dir).h)
+
+
+### Linker ###
 
 $(LD_SCRIPT): $(SPLAT_YAML)
-	$(SPLAT) --modes ld
+	$(SPLAT) --modes ld bin Yay0 PaperMarioMapFS PaperMarioMessages img PaperMarioNpcSprites --new
+	make $(GENERATED_HEADERS)
 
 $(BUILD_DIR)/$(LD_SCRIPT): $(LD_SCRIPT)
 	@mkdir -p $(shell dirname $@)
@@ -299,7 +305,7 @@ editor: tools/star-rod sprite/SpriteTable.xml
 
 ### Make Settings ###
 
-.PHONY: clean tools test setup submodules split editor $(ROM) include/sprite
+.PHONY: clean tools test setup submodules split editor $(ROM)
 .DELETE_ON_ERROR:
 .SECONDARY:
 .PRECIOUS: $(ROM) %.Yay0

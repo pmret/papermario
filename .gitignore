@@ -19,7 +19,9 @@ settings.mk
 /build/
 /docs/doxygen/
 /include/ld_addrs.h
+/include/message_ids.h
 /include/sprite/
+/include/map
 
 # Assets
 /bin

@@ -5,7 +5,7 @@ from lark import Lark, exceptions, Tree, Transformer, Visitor, v_args, Token
 from lark.visitors import Discard
 import traceback
 
-DEBUG_OUTPUT = None
+DEBUG_OUTPUT = None # "debug.i"
 
 def eprint(*args, **kwargs):
     print(*args, file=stderr, **kwargs)
@@ -31,16 +31,15 @@ def pairs(seq):
 
 script_parser = Lark(r"""
 
-    block: "{" NEWLINE* (_block STMT_SEP*)? "}"
+    block: "{" (_block SEMICOLON*)? "}"
 
-    _block: stmt STMT_SEP _block
-          | stmt
+    _block: stmt SEMICOLON _block
+          | stmt_no_semi SEMICOLON? _block
+          | stmt SEMICOLON
+          | stmt_no_semi
 
     ?stmt: call
-         | label ":" [stmt]     -> label_decl
          | "goto" label         -> label_goto
-         | if_stmt
-         | match_stmt
          | "return"             -> return_stmt
          | "break"              -> break_stmt
          | "sleep" expr         -> sleep_stmt
@@ -58,15 +57,19 @@ script_parser = Lark(r"""
          | suspend_stmt
          | resume_stmt
          | kill_stmt
-         | loop_stmt
-         | loop_until_stmt
-         | ["await"] block     -> block_stmt
-         | "spawn" block       -> spawn_block_stmt
-         | "parallel" block    -> parallel_block_stmt
 
-    call: (CNAME | HEX_INT) "(" [expr ("," expr)* [","]] ")"
+    ?stmt_no_semi: label ":" -> label_decl
+                 | if_stmt
+                 | match_stmt
+                 | loop_stmt
+                 | loop_until_stmt
+                 | ["await"] block     -> block_stmt
+                 | "spawn" block       -> spawn_block_stmt
+                 | "parallel" block    -> parallel_block_stmt
 
-    if_stmt: "if" expr cond_op expr block ["else" block]
+    call: (c_identifier | HEX_INT) "(" [expr ("," expr)* [","]] ")"
+
+    if_stmt: "if" "(" expr cond_op expr ")" block ["else" block]
 
     ?cond_op: "==" -> cond_op_eq
            | "!=" -> cond_op_ne
@@ -76,9 +79,9 @@ script_parser = Lark(r"""
            | "<=" -> cond_op_le
            | "?" -> cond_op_flag
 
-    match_stmt: "match" expr "{" NEWLINE* (match_cases STMT_SEP*)? "}"
-    match_const_stmt: "matchc" expr "{" NEWLINE* (match_cases STMT_SEP*)? "}"
-    match_cases: match_case STMT_SEP* match_cases
+    match_stmt: "match" expr "{" (match_cases SEMICOLON*)? "}"
+    match_const_stmt: "matchc" expr "{" (match_cases SEMICOLON*)? "}"
+    match_cases: match_case SEMICOLON* match_cases
                | match_case
     ?match_case: "else" block -> case_else
                | cond_op expr ["," multi_case] block -> case_op
@@ -97,16 +100,18 @@ script_parser = Lark(r"""
     bind_set_stmt: lhs "=" "bind" expr "to" expr expr
 
     loop_stmt: "loop" [expr] block
-    loop_until_stmt: "loop" block "until" expr cond_op expr
+    loop_until_stmt: "loop" block "until" "(" expr cond_op expr ")"
 
     ?expr: c_const_expr
          | ESCAPED_STRING
          | SIGNED_INT
          | SIGNED_DECIMAL
          | HEX_INT
-         | CNAME
+         | variable
+         | c_identifier
 
     ?lhs: c_const_expr
+        | variable
 
     ?set_op: "="  -> set_op_eq
            | "+=" -> set_op_add
@@ -117,11 +122,15 @@ script_parser = Lark(r"""
            | "&=" -> set_op_and
            | "|=" -> set_op_or
 
-    c_const_expr: c_const_expr_internal
+    variable: "$" CNAME
+
+    c_identifier: CNAME
+
+    c_const_expr: "(" c_const_expr_internal ")"
     c_const_expr_internal: "(" (c_const_expr_internal | NOT_PARENS)+ ")"
     NOT_PARENS: /[^()]+/
 
-    STMT_SEP: (NEWLINE+ | ";")
+    SEMICOLON: ";"
 
     label: /[a-zA-Z0-9_]+/
 
@@ -140,6 +149,7 @@ script_parser = Lark(r"""
     %import common.WS_INLINE
     %import common.NEWLINE
     %ignore WS_INLINE
+    %ignore NEWLINE
 
 """, start="block", propagate_positions=True)#, parser="lalr", cache=True)
 
@@ -162,7 +172,7 @@ class BaseCmd():
         return [ self.opcode(), len(self.args), *self.args ]
 
     def __str__(self):
-        return f"Cmd({self.opcode():02X}, {', '.join(map(str, self.args))})"
+        return f"Cmd({self.opcode()}, {', '.join(map(str, self.args))})"
 
 class Cmd(BaseCmd):
     def __init__(self, opcode, *args, **kwargs):
@@ -241,6 +251,7 @@ class LabelAllocation(Visitor):
     def __init__(self):
         super().__init__()
         self.labels = []
+        self.variables = []
 
     def label_decl(self, tree):
         name = tree.children[0].children[0]
@@ -257,6 +268,15 @@ class LabelAllocation(Visitor):
         except ValueError:
             self.labels.append(name)
 
+    def variable(self, tree):
+        name = tree.children[0]
+
+        if name not in self.variables:
+            self.variables.append(name)
+
+            if len(self.variables) > 16:
+                raise CompileError("too many variables (max 16)", tree.meta)
+
     def gen_label(self):
         self.labels.append("$generated")
         return len(self.labels) - 1
@@ -271,8 +291,8 @@ class Compile(Transformer):
         self.alloc.visit_topdown(tree)
         return super().transform(tree)
 
-    def CNAME(self, name):
-        return f"(Bytecode)(&{name})"
+    def c_identifier(self, tree):
+        return f"(Bytecode)(&{tree.children[0]})"
 
     def ESCAPED_STRING(self, str_with_quotes):
         return f"(Bytecode)({str_with_quotes})"
@@ -366,7 +386,7 @@ class Compile(Transformer):
         if len(tree.children) == 1:
             return [tree.children[0]]
         else:
-            return [tree.children[0], *tree.children[2]]
+            return [tree.children[0], *tree.children[1]]
 
     def case_else(self, tree):
         return [Cmd("ScriptOpcode_ELSE"), *tree.children[0]]
@@ -590,6 +610,37 @@ class Compile(Transformer):
             return self.alloc.labels.index(name)
         raise CompileError(f"label `{name}' is undeclared", tree.meta)
 
+    def variable(self, tree):
+        name = tree.children[0]
+        return self.alloc.variables.index(name) - 30000000
+
+    def label_decl(self, tree):
+        if len(tree.children) == 1:
+            label = tree.children[0]
+            return Cmd("ScriptOpcode_LABEL", label, meta=tree.meta)
+        else:
+            label, cmd_or_block = tree.children
+
+            if type(cmd_or_block) is not list:
+                cmd_or_block = [cmd_or_block]
+
+            for cmd in cmd_or_block:
+                if isinstance(cmd, BaseCmd):
+                    cmd.add_context(LabelCtx(label))
+
+            return [
+                Cmd("ScriptOpcode_LABEL", label, meta=tree.meta),
+                *cmd_or_block
+            ]
+    def label_goto(self, tree):
+        label = tree.children[0]
+        return Cmd("ScriptOpcode_GOTO", label, meta=tree.meta)
+    def label(self, tree):
+        name = tree.children[0]
+        if name in self.alloc.labels:
+            return self.alloc.labels.index(name)
+        raise CompileError(f"label `{name}' is undeclared", tree.meta)
+
     def block_stmt(self, tree):
         block, = tree.children
         for cmd in block:
@@ -699,7 +750,7 @@ if __name__ == "__main__":
 
     macro_name = "" # captures recent UPPER_CASE identifier
     prev_char = ""
-    while True:
+    while not error:
         char = stdin.read(1)
 
         if len(char) == 0:
@@ -798,6 +849,7 @@ if __name__ == "__main__":
         prev_char = char
 
     if error:
+        write("{ 1 / 0 };")
         exit(1)
     else:
         exit(0)
