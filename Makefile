@@ -7,6 +7,7 @@ TARGET = papermario
 COMPARE = 1
 NON_MATCHING = 0
 WATCH_INCLUDES = 1
+WSL_ELEVATE_GUI = 1
 
 -include settings.mk
 
@@ -58,6 +59,28 @@ CPP := cpp
 LD := $(CROSS)ld
 OBJCOPY := $(CROSS)objcopy
 
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Linux)
+	OS=linux
+	ICONV := iconv --from UTF-8 --to SHIFT-JIS
+endif
+ifeq ($(UNAME_S),Darwin)
+	OS=mac
+	ICONV := tools/iconv.py UTF-8 SHIFT-JIS
+endif
+
+WSL := 0
+JAVA := java
+ifeq ($(findstring microsoft,$(shell cat /proc/sys/kernel/osrelease)),microsoft)
+	WSL := 1
+	ifeq ($(WSL_ELEVATE_GUI),1)
+		JAVA := powershell.exe -command java
+	endif
+endif
+
+OLD_AS=tools/$(OS)/mips-nintendo-nu64-as
+CC=tools/$(OS)/cc1
+
 CPPFLAGS   := -Iinclude -Isrc -D _LANGUAGE_C -ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -Wundef -Wcomment
 ASFLAGS    := -EB -Iinclude -march=vr4300 -mtune=vr4300
 OLDASFLAGS := -EB -Iinclude -G 0
@@ -92,7 +115,7 @@ endif
 ### Targets ###
 
 clean:
-	rm -rf $(BUILD_DIR)
+	rm -rf $(BUILD_DIR) bin msg img sprite .splat_cache
 
 clean-code:
 	rm -rf $(BUILD_DIR)/src
@@ -102,18 +125,18 @@ tools:
 
 setup: clean submodules tools split $(LD_SCRIPT)
 
+# tools/star-rod submodule intentionally omitted
 submodules:
+	git submodule init tools/n64splat
 	git submodule update --init --recursive
 
 split:
-	rm -rf bin msg img sprite
-	$(SPLAT) --modes ld bin Yay0 PaperMarioMapFS PaperMarioMessages img PaperMarioNpcSprites
+	$(SPLAT) --modes ld bin Yay0 PaperMarioMapFS PaperMarioMessages img PaperMarioNpcSprites --new
 
 split-%:
 	$(SPLAT) --modes ld $* --verbose
 
 split-all:
-	rm -rf bin msg img sprite
 	$(SPLAT) --modes all
 
 test: $(ROM)
@@ -140,12 +163,12 @@ $(BUILD_DIR)/%.Yay0.o: $(BUILD_DIR)/%.bin.Yay0
 # Compile C files
 $(BUILD_DIR)/%.c.o: %.c $(MDEPS) | $(GENERATED_HEADERS)
 	@mkdir -p $(shell dirname $@)
-	$(CPP) $(CPPFLAGS) -o - $(CPPMFLAGS) $< | iconv --from UTF-8 --to SHIFT-JIS | $(CC) $(CFLAGS) -o - | $(OLD_AS) $(OLDASFLAGS) -o $@ -
+	$(CPP) $(CPPFLAGS) -o - $(CPPMFLAGS) $< | $(ICONV) | $(CC) $(CFLAGS) -o - | $(OLD_AS) $(OLDASFLAGS) -o $@ -
 
 # Compile C files (with DSL macros)
 $(foreach cfile, $(DSL_C_FILES), $(BUILD_DIR)/$(cfile).o): $(BUILD_DIR)/%.c.o: %.c $(MDEPS) tools/compile_dsl_macros.py | $(GENERATED_HEADERS)
 	@mkdir -p $(shell dirname $@)
-	$(CPP) $(CPPFLAGS) -o - $< $(CPPMFLAGS) | $(PYTHON) tools/compile_dsl_macros.py | iconv --from UTF-8 --to SHIFT-JIS | $(CC) $(CFLAGS) -o - | $(OLD_AS) $(OLDASFLAGS) -o $@ -
+	$(CPP) $(CPPFLAGS) -o - $< $(CPPMFLAGS) | $(PYTHON) tools/compile_dsl_macros.py | $(ICONV) | $(CC) $(CFLAGS) -o - | $(OLD_AS) $(OLDASFLAGS) -o $@ -
 
 # Assemble handwritten ASM
 $(BUILD_DIR)/%.s.o: %.s
@@ -258,9 +281,25 @@ $(BUILD_DIR)/$(TARGET).bin: $(BUILD_DIR)/$(TARGET).elf
 include/ld_addrs.h: $(BUILD_DIR)/$(LD_SCRIPT)
 	grep -E "[^\. ]+ =" $< -o | sed 's/^/extern void* /; s/ =/;/' > $@
 
+
+### Star Rod (optional) ###
+
+STAR_ROD := cd tools/star-rod && $(JAVA) -jar StarRod.jar
+
+# lazily initialise the submodule
+tools/star-rod:
+	git submodule init tools/star-rod
+
+sprite/SpriteTable.xml: tools/star-rod sources.mk
+	$(PYTHON) tools/star-rod/spritetable.xml.py $(NPC_SPRITES) > $@
+
+editor: tools/star-rod sprite/SpriteTable.xml
+	$(STAR_ROD)
+
+
 ### Make Settings ###
 
-.PHONY: clean tools test setup submodules split $(ROM) include/sprite
+.PHONY: clean tools test setup submodules split editor $(ROM) include/sprite
 .DELETE_ON_ERROR:
 .SECONDARY:
 .PRECIOUS: $(ROM) %.Yay0

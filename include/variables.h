@@ -71,9 +71,11 @@ extern Npc* gPlayerNpcPtr;
 
 extern s8 D_800A0900;
 extern EncounterStatus gCurrentEncounter;
+extern s8* D_801512F0;
 extern s16 D_80151308;
 extern s32 D_80151310;
 extern s16* D_80151328;
+
 extern s16 D_8010CD10;
 extern s16 D_8010CD12;
 extern s32 D_8010CD20;
@@ -118,6 +120,7 @@ extern s16 D_800A095E;
 extern u8 D_800A095F;
 extern s32 D_800A0960;
 extern s32 D_800A0964;
+extern s16 D_800A0BB8;
 
 extern UIPanel gUIPanels[64];
 
@@ -192,6 +195,15 @@ extern UNK_TYPE D_80147474;
 extern UNK_TYPE D_80147574;
 extern UNK_TYPE D_80109270;
 extern UNK_TYPE D_80108558;
+extern s32 D_80108248;
+extern s32 D_80108518;
+extern s32 D_80108270;
+extern s32 D_80108538;
+extern s32 D_80080FC4;
+extern s32 D_801086AC;
+extern s32 D_801083D8;
+extern s32 D_80108068;
+extern s32 D_80104BEC;
 extern UNK_TYPE D_8010F250; // play_sound state struct?
 extern s8 D_8010EBB0[];
 

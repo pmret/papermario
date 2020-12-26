@@ -38,6 +38,7 @@ void func_80027088(s32);
 void func_8006FEF0(s32, f32, f32, f32, f32);
 void func_80071090(s32, f32, f32, f32, s32);
 void func_80071750(s32, f32, f32, f32, f32, s32);
+void func_800720B0(s32, f32, f32, f32, f32, s32);
 void func_80072950(s32, f32, f32, f32, f32, s32 time);
 
 void update_collider_transform(s16 colliderID);
@@ -81,7 +82,9 @@ void fx_walk_normal(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4, s32 arg5);
 void fx_emote(s32, Npc*, s32, f32, f32, f32, f32, s32, s32*);
 
 f32 func_800E0088(f32, f32);
+void func_800E97B8(void);
 s32 func_800EB168(s32);
+
 
 PlayerData* get_player_data(void);
 

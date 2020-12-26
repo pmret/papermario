@@ -26,6 +26,7 @@ segments:
   - type: code
     start: 0x1000
     vram: 0x80025C00
+    subalign: 8
     files:
     - [0x1000, c, code_1000_len_60]
     - [0x1060, c, code_1060_len_310]
@@ -7396,7 +7397,7 @@ segments:
       - parade_luigi
       - parade_partners
       - parade_yoshis
-      - parada_kolorados
+      - parade_kolorados
       - parade_chicks
       - parade_ice_show
       - parade_toads

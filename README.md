@@ -42,6 +42,10 @@ $ make
 
 If you get `OK`, you're all set! Otherwise, please feel free to reach out to us in [our Discord channel](https://discord.gg/urUm3VG).
 
+## Star Rod GUI
+
+You can open [our modified version of Star Rod](https://github.com/nanaian/star-rod-for-decomp) with `make editor`.
+
 ## Contributing
 
 ### Dependencies
@@ -136,4 +140,4 @@ make: *** [verify] Error 1
 ```
 > 💡 Solution
 
-> Run `git checkout checksum.sha1` and retry building. Windows has different line endings than Linux, causing some of our tools to break. 
+> Run `git checkout checksum.sha1` and retry building. Windows has different line endings than Linux, causing some of our tools to break.
