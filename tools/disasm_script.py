@@ -433,11 +433,11 @@ class ScriptDSLDisassembler(ScriptDisassembler):
             self.write_line("}")
 
         if opcode == 0x01:
-            if self.out.endswith("return\n"):
+            if self.out.endswith("return;\n"):
                 # implicit return; break
-                self.out = self.out[:-7].rstrip() + "\n"
+                self.out = self.out[:-8].rstrip() + "\n"
             else:
-                self.write_line("break")
+                self.write_line("break;")
 
             self.indent -= 1
 
@@ -446,7 +446,10 @@ class ScriptDSLDisassembler(ScriptDisassembler):
 
             self.done = True
         elif opcode == 0x02: self.write_line(f"return;")
-        elif opcode == 0x03: self.write_line(f"{self.var(argv[0])}:")
+        elif opcode == 0x03:
+            self.indent -= 1
+            self.write_line(f"{self.var(argv[0])}:")
+            self.indent += 1
         elif opcode == 0x04: self.write_line(f"goto {self.var(argv[0])};")
         elif opcode == 0x05:
             if argv[0] == 0:
@@ -480,6 +483,9 @@ class ScriptDSLDisassembler(ScriptDisassembler):
             self.indent += 1
         elif opcode == 0x10:
             self.write_line(f"if ({self.var(argv[0])} ? {self.var(argv[1])}) {{")
+            self.indent += 1
+        elif opcode == 0x11:
+            self.write_line(f"if ({self.var(argv[0])} !? {self.var(argv[1])}) {{")
             self.indent += 1
         elif opcode == 0x12:
             self.indent -= 1
@@ -595,7 +601,7 @@ class ScriptDSLDisassembler(ScriptDisassembler):
         elif opcode == 0x42: self.write_line(f"{self.var(argv[0])} |=c {argv[1]:X};")
         elif opcode == 0x43:
             argv_str = ", ".join(self.var(arg) for arg in argv[1:])
-            self.write_line(f"{self.addr_ref(argv[0])}({argv_str})")
+            self.write_line(f"{self.addr_ref(argv[0])}({argv_str});")
         elif opcode == 0x44: self.write_line(f"spawn {self.addr_ref(argv[0])};")
         elif opcode == 0x45: self.write_line(f"{self.var(argv[1])} = spawn {self.addr_ref(argv[0])};")
         elif opcode == 0x46: self.write_line(f"await {self.addr_ref(argv[0])};")
