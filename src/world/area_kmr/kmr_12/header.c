@@ -14,7 +14,7 @@ MapConfig M(config) = {
 };
 
 Script M(PlayMusic) = SCRIPT({
-    SetMusicTrack(0, Song_PLEASANT_PATH, 0, 8)
+    SetMusicTrack(0, Song_PLEASANT_PATH, 0, 8);
 });
 
 ApiStatus GetGoomba(ScriptInstance* script, s32 isInitialCall) {

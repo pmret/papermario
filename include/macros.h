@@ -10,6 +10,8 @@
 #define INCLUDE_ASM(TYPE, FOLDER, NAME, ARGS...)
 #endif
 
+#define ALIGN16(val) (((val) + 0xF) & ~0xF)
+
 #define ARRAY_COUNT(arr) (s32)(sizeof(arr) / sizeof(arr[0]))
 #define ARRAY_COUNTU(arr) (u32)(sizeof(arr) / sizeof(arr[0]))
 
@@ -43,6 +45,7 @@
 
 // Alternative to libultra's M_PI: non-float version; more digits cause issues
 #define PI 3.141592f
+#define TAU 6.28318f
 
 //NOTE: SCRIPT_ALLOC is probably not quite correct, but this is the closest thing to matching for the functions its used in. Needs more work.
 #define SCRIPT_ALLOC(new, index) \

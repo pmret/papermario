@@ -38,13 +38,13 @@ glabel func_E0030A68
 /* 342C2C E0030AEC 3C020900 */  lui       $v0, 0x900
 /* 342C30 E0030AF0 244204C0 */  addiu     $v0, $v0, %lo(D_DE0004C0)
 /* 342C34 E0030AF4 AC82000C */  sw        $v0, 0xc($a0)
-/* 342C38 E0030AF8 3C028000 */  lui       $v0, %hi(D_7FFFFFFF)
+/* 342C38 E0030AF8 3C028000 */  lui       $v0, 0x8000
 /* 342C3C E0030AFC 00621821 */  addu      $v1, $v1, $v0
 /* 342C40 E0030B00 AC830004 */  sw        $v1, 4($a0)
 /* 342C44 E0030B04 8CE2002C */  lw        $v0, 0x2c($a3)
 /* 342C48 E0030B08 0000A82D */  daddu     $s5, $zero, $zero
 /* 342C4C E0030B0C AD240000 */  sw        $a0, ($t1)
-/* 342C50 E0030B10 2442FFFF */  addiu     $v0, $v0, %lo(D_7FFFFFFF)
+/* 342C50 E0030B10 2442FFFF */  addiu     $v0, $v0, -1
 /* 342C54 E0030B14 00021840 */  sll       $v1, $v0, 1
 /* 342C58 E0030B18 0062A021 */  addu      $s4, $v1, $v0
 /* 342C5C E0030B1C 24820008 */  addiu     $v0, $a0, 8

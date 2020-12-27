@@ -1,4 +1,5 @@
 #include "common.h"
+#include "world/partners.h"
 
 void func_800E26B0(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -91,7 +92,7 @@ INCLUDE_ASM(s32, "code_7bb60_len_41b0", func_800E4F10);
 
 INCLUDE_ASM(s32, "code_7bb60_len_41b0", check_input_midair_jump);
 
-PartnerId get_current_partner_id(void) {
+PartnerID get_current_partner_id(void) {
     return gPlayerData.currentPartner;
 }
 
@@ -159,7 +160,7 @@ void set_action_state(s32 actionState) {
 
         // Whilst Lakilester, Bow, or Parakarry's ability is active, hazards have no effect.
         partner = playerData->currentPartner;
-        if (((u8)(partner - 7) < 2) || (playerData->currentPartner == PartnerId_PARAKARRY)) {
+        if (((u8)(partner - 7) < 2) || (playerData->currentPartner == PartnerID_PARAKARRY)) {
             if (D_8010EBB0[0]) {
                 playerStatus->animFlags |= 0x4;
                 playerStatus->flags |= 0x800;
@@ -247,7 +248,7 @@ s32 check_input_hammer(void) {
 
     if (playerStatus->pressedButtons & Button_B) {
         if (!(playerStatus->flags & 4)) {
-            if (D_8010EBB0[0] != 1 || playerData->currentPartner != PartnerId_WATT) {
+            if (D_8010EBB0[0] != 1 || playerData->currentPartner != PartnerID_WATT) {
                 if (playerData->hammerLevel != -1) {
                     set_action_state(ActionState_HAMMER);
                     return TRUE;

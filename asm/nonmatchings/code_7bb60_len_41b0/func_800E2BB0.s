@@ -28,12 +28,12 @@ glabel func_800E2BB0
 /* 7C0BC 800E2C0C 00000000 */  nop       
 /* 7C0C0 800E2C10 45000004 */  bc1f      .L800E2C24
 /* 7C0C4 800E2C14 00000000 */   nop      
-/* 7C0C8 800E2C18 3C01BEF0 */  lui       $at, %hi(D_BEEFBD88)
+/* 7C0C8 800E2C18 3C01BEF0 */  lui       $at, 0xbef0
 /* 7C0CC 800E2C1C 3421A3D7 */  ori       $at, $at, 0xa3d7
 /* 7C0D0 800E2C20 44813000 */  mtc1      $at, $f6
 .L800E2C24:
 /* 7C0D4 800E2C24 3C018011 */  lui       $at, %hi(D_8010BD88)
-/* 7C0D8 800E2C28 D422BD88 */  ldc1      $f2, %lo(D_BEEFBD88)($at)
+/* 7C0D8 800E2C28 D422BD88 */  ldc1      $f2, %lo(D_8010BD88)($at)
 /* 7C0DC 800E2C2C 46003021 */  cvt.d.s   $f0, $f6
 /* 7C0E0 800E2C30 4620103C */  c.lt.d    $f2, $f0
 /* 7C0E4 800E2C34 00000000 */  nop       

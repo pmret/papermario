@@ -11,20 +11,6 @@ typedef UNK_TYPE EncounterTriggerFlags;
 #define EncounterTriggerFlags_HAMMER  0x00000004
 #define EncounterTriggerFlags_PARTNER 0x00000006
 
-typedef s8 PartnerId;
-#define PartnerId_NONE       0x00
-#define PartnerId_GOOMBARIO  0x01
-#define PartnerId_KOOPER     0x02
-#define PartnerId_BOMBETTE   0x03
-#define PartnerId_PARAKARRY  0x04
-#define PartnerId_GOOMPA     0x05
-#define PartnerId_WATT       0x06
-#define PartnerId_SUSHIE     0x07
-#define PartnerId_LAKILESTER 0x08
-#define PartnerId_BOW        0x09
-#define PartnerId_GOOMBARIA  0x0A
-#define PartnerId_TWINK      0x0B
-
 typedef s32 SongID;
 #define Song_TOAD_TOWN              0x00000000
 #define Song_NORMAL_BATTLE          0x00000002

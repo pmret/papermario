@@ -598,13 +598,13 @@ glabel func_80145EC0
 /* DCE9C 8014679C 254AA66C */  addiu     $t2, $t2, %lo(D_8009A66C)
 /* DCEA0 801467A0 2642FFFF */  addiu     $v0, $s2, -1
 /* DCEA4 801467A4 30420FFF */  andi      $v0, $v0, 0xfff
-/* DCEA8 801467A8 3C03FD48 */  lui       $v1, %hi(D_FD47FFFF)
+/* DCEA8 801467A8 3C03FD48 */  lui       $v1, 0xfd48
 /* DCEAC 801467AC 00431025 */  or        $v0, $v0, $v1
 /* DCEB0 801467B0 3C14F548 */  lui       $s4, 0xf548
 /* DCEB4 801467B4 36944A00 */  ori       $s4, $s4, 0x4a00
 /* DCEB8 801467B8 03191821 */  addu      $v1, $t8, $t9
 /* DCEBC 801467BC AFA2003C */  sw        $v0, 0x3c($sp)
-/* DCEC0 801467C0 2462FFFF */  addiu     $v0, $v1, %lo(D_FD47FFFF)
+/* DCEC0 801467C0 2462FFFF */  addiu     $v0, $v1, -1
 /* DCEC4 801467C4 00021080 */  sll       $v0, $v0, 2
 /* DCEC8 801467C8 30420FFF */  andi      $v0, $v0, 0xfff
 /* DCECC 801467CC 00021300 */  sll       $v0, $v0, 0xc

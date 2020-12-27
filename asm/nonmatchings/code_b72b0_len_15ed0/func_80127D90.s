@@ -2790,14 +2790,14 @@ glabel func_80127D90
 /* C0ECC 8012A7CC 00A0382D */  daddu     $a3, $a1, $zero
 /* C0ED0 8012A7D0 00431025 */  or        $v0, $v0, $v1
 /* C0ED4 8012A7D4 ACC20038 */  sw        $v0, 0x38($a2)
-/* C0ED8 8012A7D8 3C02FB00 */  lui       $v0, %hi(D_FB000002)
+/* C0ED8 8012A7D8 3C02FB00 */  lui       $v0, 0xfb00
 /* C0EDC 8012A7DC ACE20000 */  sw        $v0, ($a3)
 /* C0EE0 8012A7E0 8CC20020 */  lw        $v0, 0x20($a2)
 /* C0EE4 8012A7E4 8CC3004C */  lw        $v1, 0x4c($a2)
 /* C0EE8 8012A7E8 24A50008 */  addiu     $a1, $a1, 8
 /* C0EEC 8012A7EC AEE50000 */  sw        $a1, ($s7)
 /* C0EF0 8012A7F0 00431021 */  addu      $v0, $v0, $v1
-/* C0EF4 8012A7F4 90440002 */  lbu       $a0, %lo(D_FB000002)($v0)
+/* C0EF4 8012A7F4 90440002 */  lbu       $a0, 2($v0)
 /* C0EF8 8012A7F8 3508F279 */  ori       $t0, $t0, 0xf279
 /* C0EFC 8012A7FC 00041E00 */  sll       $v1, $a0, 0x18
 /* C0F00 8012A800 00041400 */  sll       $v0, $a0, 0x10

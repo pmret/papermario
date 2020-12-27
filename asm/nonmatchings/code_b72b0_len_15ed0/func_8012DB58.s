@@ -249,13 +249,13 @@ glabel func_8012DB58
 /* C45F0 8012DEF0 254AA66C */  addiu     $t2, $t2, %lo(D_8009A66C)
 /* C45F4 8012DEF4 3508C0FC */  ori       $t0, $t0, 0xc0fc
 /* C45F8 8012DEF8 8D490000 */  lw        $t1, ($t2)
-/* C45FC 8012DEFC 3C02FD90 */  lui       $v0, %hi(D_FD8FCD50)
+/* C45FC 8012DEFC 3C02FD90 */  lui       $v0, 0xfd90
 /* C4600 8012DF00 0120182D */  daddu     $v1, $t1, $zero
 /* C4604 8012DF04 25290008 */  addiu     $t1, $t1, 8
 /* C4608 8012DF08 AD490000 */  sw        $t1, ($t2)
 /* C460C 8012DF0C AC620000 */  sw        $v0, ($v1)
 /* C4610 8012DF10 3C02802F */  lui       $v0, %hi(D_802ECD50)
-/* C4614 8012DF14 2442CD50 */  addiu     $v0, $v0, %lo(D_FD8FCD50)
+/* C4614 8012DF14 2442CD50 */  addiu     $v0, $v0, %lo(D_802ECD50)
 /* C4618 8012DF18 AC620004 */  sw        $v0, 4($v1)
 /* C461C 8012DF1C 25220008 */  addiu     $v0, $t1, 8
 /* C4620 8012DF20 AD420000 */  sw        $v0, ($t2)

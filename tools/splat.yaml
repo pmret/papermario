@@ -1,7 +1,7 @@
 name: Paper Mario (North America)
 basename: papermario
 options:
-  find-file-boundaries: True
+  find_file_boundaries: True
   compiler: GCC
   mnemonic_ljust: 10
   ld_o_replace_extension: False
@@ -63,6 +63,7 @@ segments:
     - [0x2d9a0, c, code_2d9a0_len_890]
     - [0x2e230, c, code_2e230_len_2190]
     - [0x303c0, c, code_303c0_len_3e10]
+    - [0x31650, c, code_31650]
     - [0x341d0, c, world/world]
     - [0x362a0, c, code_362a0_len_2f70]
     - [0x39210, c, code_39210_len_aa0]
@@ -204,8 +205,12 @@ segments:
     - [0x4a1f0, c, os/code_4a1f0_len_170]
     - [0x4a360, c, os/code_4a360_len_930]
     - [0x4ac90, c, os/code_4ac90_len_3910]
-    - [0x4E5A0, bin]
-    - [0x52D50, bin]
+    - [0x4E5A0, data, code_1000_len_60]
+    - [0x53570, .data, code_25f00_len_940]
+    - [0x53590, data, code_26840_len_20d0]
+    - [0x541B0, .data, code_303c0_len_3e10]
+    - [0x54250, .data, code_31650]
+    - [0x542E0, data, code_31650]
     - [0x6B450, .data, world/world]
     - [0x6EAC0, bin] # has scripts
     - [0x70E30, .data, battle/battle]
@@ -227,6 +232,12 @@ segments:
     - [0x8a860, c, code_8a860_len_3f30]
     - [0x8e790, c, code_8e790_len_2850]
     - [0x90fe0, bin]
+  - type: code
+    start: 0x91520 # section may start earlier
+    vram: 0 # TODO
+    files:
+      - [0x91520, .data, world/partners]
+  - [0x917EC, bin]
   - [0x93CD0, ci4,     ui/hammer, 32, 32]
   - [0x93ED0, palette, ui/hammer]
   - [0x93EF0, palette, ui/hammer.disabled]
@@ -251,7 +262,9 @@ segments:
     - [0xddaf0, c, code_ddaf0_len_c50]
     - [0xde740, c, code_de740_len_23f0]
     - [0xe0b30, c, code_e0b30_len_b80]
-    - [0xe16b0, bin]
+    - [0xE16B0, data, code_a5dd0_len_114e0]
+    - [0xE5510, .data, code_d0a70_len_4fe0]
+    - [0xE56C0, .data, code_d5a50_len_5fd0]
     - [0xE5820, .data, code_dc470_len_14c0]
     - [0xE5830, bin]
   - type: code
@@ -402,71 +415,84 @@ segments:
     files:
     - [0x316f30, c, code_316f30]
   - type: code
+    ld_name: world_partner_goombario
     start: 0x317020
     vram: 0x802BD100
     files:
-      - [0x317020, c]
-      - [0x317b60, bin]
+      - [0x317020, c, world/partner/goombario]
+      - [0x317b60, .data, world/partner/goombario]
+      - [0x317DA0, bin, world/partner/goombario] # rodata containing a double and a jumptable
   - type: code
+    ld_name: world_partner_bombette
     start: 0x317e50
     vram: 0x802BD100
     files:
-      - [0x317e50, c]
+      - [0x317e50, c, world/partner/bombette]
       - [0x3195d0, bin]
   - type: code
+    ld_name: world_partner_parakarry
     start: 0x319670
     vram: 0x802BD100
     files:
-      - [0x319670, c]
+      - [0x319670, c, world/partner/parakarry]
       - [0x31b000, bin]
   - type: code
+    ld_name: world_partner_kooper
     start: 0x31b120
     vram: 0x802BD100
     files:
-      - [0x31b120, c]
+      - [0x31b120, c, world/partner/kooper]
       - [0x31cb60, bin]
   - type: code
+    ld_name: world_partner_watt
     start: 0x31cc70
     vram: 0x802BD100
     files:
-      - [0x31cc70, c]
+      - [0x31cc70, c, world/partner/watt]
       - [0x31ddc0, bin]
   - type: code
+    ld_name: world_partner_sushie
     start: 0x31de70
     vram: 0x802BD100
     files:
-      - [0x31de70, c]
+      - [0x31de70, c, world/partner/sushie]
       - [0x320b20, bin]
   - type: code
+    ld_name: world_partner_lakilester
     start: 0x320c50
     vram: 0x802BD100
     files:
-      - [0x320c50, c]
+      - [0x320c50, c, world/partner/lakilester]
       - [0x3239b0, bin]
   - type: code
+    ld_name: world_partner_bow
     start: 0x323A50
     vram: 0x802BD100
     files:
-      - [0x323A50, c]
+      - [0x323A50, c, world/partner/bow]
       - [0x324930, bin]
   - type: code
+    ld_name: world_partner_goompa
     start: 0x324a10
     vram: 0x802BD100
     files:
-      - [0x324a10, c, world_goompa]
-      - [0x324e80, bin]
+      - [0x324a10, c, world/partner/goompa]
+      - [0x324e80, .data, world/partner/goompa]
+      - [0x324F00, bin, world/partner/goompa] # rodata with single f64 0.8
   - type: code
+    ld_name: world_partner_goombaria
     start: 0x324f10
     vram: 0x802BD100
     files:
-      - [0x324f10, c, world_goombaria]
-      - [0x325000, bin]
+      - [0x324f10, c, world/partner/goombaria]
+      - [0x325000, .data, world/partner/goombaria]
   - type: code
+    ld_name: world_partner_twink
     start: 0x325070
     vram: 0x802BD100
     files:
-      - [0x325070, c, world_twink]
-      - [0x325160, bin]
+      - [0x325070, c, world/partner/twink]
+      - [0x325160, .data, world/partner/twink]
   - type: code
     start: 0x3251d0
     vram: 0x802BD100
@@ -7128,7 +7154,7 @@ segments:
       - world_parakarry
       - world_bow
       - world_watt
-      - world_sushi
+      - world_sushie
       - world_lakilester
       - battle_goombario
       - battle_kooper
@@ -7136,7 +7162,7 @@ segments:
       - battle_parakarry
       - battle_bow
       - battle_watt
-      - battle_sushi
+      - battle_sushie
       - battle_lakilester
       - kooper_without_shell
       - world_eldstar
@@ -7339,11 +7365,11 @@ segments:
       - penguin
       - shiver_toad
       - world_bandit
-      - goompapa
-      - goombaria
-      - goomama
       - goompa
-      - goomma
+      - goombaria
+      - gooma
+      - goompapa
+      - goomama
       - the_master
       - chan
       - lee

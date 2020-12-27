@@ -9,13 +9,13 @@ glabel func_8024140C_C8EFBC
 /* C8EFCC 8024141C 0C00AB39 */  jal       heap_malloc
 /* C8EFD0 80241420 24040780 */   addiu    $a0, $zero, 0x780
 /* C8EFD4 80241424 0200202D */  daddu     $a0, $s0, $zero
-/* C8EFD8 80241428 3C05FD05 */  lui       $a1, %hi(D_FD0513C0)
+/* C8EFD8 80241428 3C05FD05 */  lui       $a1, 0xfd05
 /* C8EFDC 8024142C 34A50F80 */  ori       $a1, $a1, 0xf80
 /* C8EFE0 80241430 0C0B2026 */  jal       set_variable
 /* C8EFE4 80241434 0040302D */   daddu    $a2, $v0, $zero
 /* C8EFE8 80241438 2402FFFF */  addiu     $v0, $zero, -1
 /* C8EFEC 8024143C 3C058024 */  lui       $a1, %hi(D_802413C0)
-/* C8EFF0 80241440 24A513C0 */  addiu     $a1, $a1, %lo(D_FD0513C0)
+/* C8EFF0 80241440 24A513C0 */  addiu     $a1, $a1, %lo(D_802413C0)
 /* C8EFF4 80241444 3C018025 */  lui       $at, %hi(D_80248380)
 /* C8EFF8 80241448 AC228380 */  sw        $v0, %lo(D_80248380)($at)
 /* C8EFFC 8024144C 0C048C56 */  jal       bind_dynamic_entity_3

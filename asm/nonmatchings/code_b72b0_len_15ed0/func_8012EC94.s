@@ -530,14 +530,14 @@ glabel func_8012EC94
 /* C5B78 8012F478 00151140 */  sll       $v0, $s5, 5
 /* C5B7C 8012F47C 3042FFE0 */  andi      $v0, $v0, 0xffe0
 /* C5B80 8012F480 00621825 */  or        $v1, $v1, $v0
-/* C5B84 8012F484 3C02F100 */  lui       $v0, %hi(D_F1000040)
+/* C5B84 8012F484 3C02F100 */  lui       $v0, 0xf100
 /* C5B88 8012F488 ACA20008 */  sw        $v0, 8($a1)
 /* C5B8C 8012F48C 31A200FF */  andi      $v0, $t5, 0xff
 /* C5B90 8012F490 14400007 */  bnez      $v0, .L8012F4B0
 /* C5B94 8012F494 ACA30004 */   sw       $v1, 4($a1)
 /* C5B98 8012F498 97A20000 */  lhu       $v0, ($sp)
 /* C5B9C 8012F49C 97A3000C */  lhu       $v1, 0xc($sp)
-/* C5BA0 8012F4A0 24420040 */  addiu     $v0, $v0, %lo(D_F1000040)
+/* C5BA0 8012F4A0 24420040 */  addiu     $v0, $v0, 0x40
 /* C5BA4 8012F4A4 A7A20000 */  sh        $v0, ($sp)
 /* C5BA8 8012F4A8 0804BBCD */  j         .L8012EF34
 /* C5BAC 8012F4AC A7A30008 */   sh       $v1, 8($sp)

@@ -9,8 +9,6 @@ NON_MATCHING = 0
 WATCH_INCLUDES = 1
 WSL_ELEVATE_GUI = 1
 
--include settings.mk
-
 # Fail early if baserom does not exist
 ifeq ($(wildcard $(BASEROM)),)
 $(error Baserom `$(BASEROM)' not found.)
@@ -37,7 +35,7 @@ LD_MAP := $(BUILD_DIR)/$(TARGET).map
 ASSETS_BIN := $(BUILD_DIR)/bin/assets/assets.bin
 MSG_BIN := $(BUILD_DIR)/msg.bin
 NPC_BIN := $(BUILD_DIR)/sprite/npc.bin
-GENERATED_HEADERS := include/ld_addrs.h include/sprite
+
 
 ### Tools ###
 
@@ -49,8 +47,6 @@ YAY0COMPRESS = tools/Yay0compress
 EMULATOR = mupen64plus
 
 
-### Compiler Options ###
-
 CROSS := mips-linux-gnu-
 AS := $(CROSS)as
 OLD_AS := tools/mips-nintendo-nu64-as
@@ -59,27 +55,30 @@ CPP := cpp
 LD := $(CROSS)ld
 OBJCOPY := $(CROSS)objcopy
 
+WSL := 0
+JAVA := java
+
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
 	OS=linux
 	ICONV := iconv --from UTF-8 --to SHIFT-JIS
+
+	ifeq ($(findstring microsoft,$(shell cat /proc/sys/kernel/osrelease)),microsoft)
+	WSL := 1
+	ifeq ($(WSL_ELEVATE_GUI),1)
+		JAVA := powershell.exe -command java
+	endif
+endif
 endif
 ifeq ($(UNAME_S),Darwin)
 	OS=mac
 	ICONV := tools/iconv.py UTF-8 SHIFT-JIS
 endif
 
-WSL := 0
-JAVA := java
-ifeq ($(findstring microsoft,$(shell cat /proc/sys/kernel/osrelease)),microsoft)
-	WSL := 1
-	ifeq ($(WSL_ELEVATE_GUI),1)
-		JAVA := powershell.exe -command java
-	endif
-endif
-
 OLD_AS=tools/$(OS)/mips-nintendo-nu64-as
 CC=tools/$(OS)/cc1
+
+### Compiler Options ###
 
 CPPFLAGS   := -Iinclude -Isrc -D _LANGUAGE_C -ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -Wundef -Wcomment
 ASFLAGS    := -EB -Iinclude -march=vr4300 -mtune=vr4300
@@ -96,6 +95,7 @@ ifeq ($(NON_MATCHING),1)
 CPPFLAGS += -DNON_MATCHING
 endif
 
+-include settings.mk
 
 ### Sources ###
 
@@ -111,11 +111,15 @@ ifeq ($(WATCH_INCLUDES),1)
 -include $(foreach obj, $(OBJECTS), $(obj).mk)
 endif
 
+NPC_DIRS := $(foreach npc, $(NPC_SPRITES), sprite/npc/$(npc))
+
+GENERATED_HEADERS := include/ld_addrs.h $(foreach dir, $(NPC_DIRS), include/$(dir).h)
+
 
 ### Targets ###
 
 clean:
-	rm -rf $(BUILD_DIR) bin msg img sprite .splat_cache
+	rm -rf $(BUILD_DIR) bin msg img sprite .splat_cache $(LD_SCRIPT)
 
 clean-code:
 	rm -rf $(BUILD_DIR)/src
@@ -123,15 +127,15 @@ clean-code:
 tools:
 	make -C tools
 
-setup: clean submodules tools split $(LD_SCRIPT)
+setup: clean submodules tools $(LD_SCRIPT)
 
 # tools/star-rod submodule intentionally omitted
 submodules:
 	git submodule init tools/n64splat
-	git submodule update --init --recursive
+	git submodule update --recursive
 
 split:
-	$(SPLAT) --modes ld bin Yay0 PaperMarioMapFS PaperMarioMessages img PaperMarioNpcSprites --new
+	make $(LD_SCRIPT) -W $(SPLAT_YAML)
 
 split-%:
 	$(SPLAT) --modes ld $* --verbose
@@ -242,7 +246,6 @@ $(MSG_BIN:.bin=.o): $(MSG_BIN)
 
 # Sprites
 $(foreach npc, $(NPC_SPRITES), $(eval $(BUILD_DIR)/sprite/npc/$(npc):: $(shell find sprite/npc/$(npc) -type f 2> /dev/null))) # dependencies
-NPC_DIRS := $(foreach npc, $(NPC_SPRITES), sprite/npc/$(npc))
 NPC_YAY0 := $(foreach npc, $(NPC_SPRITES), $(BUILD_DIR)/sprite/npc/$(npc).Yay0)
 $(BUILD_DIR)/sprite/npc/%:: sprite/npc/% tools/compile_npc_sprite.py
 	@mkdir -p $(shell dirname $@)
@@ -257,10 +260,13 @@ include/sprite/npc/%.h: sprite/npc/%/SpriteSheet.xml tools/gen_sprite_animations
 	@mkdir -p $(shell dirname $@)
 	@echo "building $@"
 	@$(PYTHON) tools/gen_sprite_animations_h.py $@ sprite/npc/$* $(NPC_DIRS)
-include/sprite: $(foreach dir, $(NPC_DIRS), include/$(dir).h)
+
+
+### Linker ###
 
 $(LD_SCRIPT): $(SPLAT_YAML)
-	$(SPLAT) --modes ld
+	$(SPLAT) --modes ld bin Yay0 PaperMarioMapFS PaperMarioMessages img PaperMarioNpcSprites --new
+	make $(GENERATED_HEADERS)
 
 $(BUILD_DIR)/$(LD_SCRIPT): $(LD_SCRIPT)
 	@mkdir -p $(shell dirname $@)
@@ -299,7 +305,7 @@ editor: tools/star-rod sprite/SpriteTable.xml
 
 ### Make Settings ###
 
-.PHONY: clean tools test setup submodules split editor $(ROM) include/sprite
+.PHONY: clean tools test setup submodules split editor $(ROM)
 .DELETE_ON_ERROR:
 .SECONDARY:
 .PRECIOUS: $(ROM) %.Yay0

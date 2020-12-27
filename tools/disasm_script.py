@@ -445,9 +445,9 @@ class ScriptDSLDisassembler(ScriptDisassembler):
             self.write_line("});")
 
             self.done = True
-        elif opcode == 0x02: self.write_line(f"return")
+        elif opcode == 0x02: self.write_line(f"return;")
         elif opcode == 0x03: self.write_line(f"{self.var(argv[0])}:")
-        elif opcode == 0x04: self.write_line(f"goto {self.var(argv[0])}")
+        elif opcode == 0x04: self.write_line(f"goto {self.var(argv[0])};")
         elif opcode == 0x05:
             if argv[0] == 0:
                 self.write_line("loop {")
@@ -457,29 +457,29 @@ class ScriptDSLDisassembler(ScriptDisassembler):
         elif opcode == 0x06:
             self.indent -= 1
             self.write_line("}")
-        elif opcode == 0x07: self.write_line(f"break")
-        elif opcode == 0x08: self.write_line(f"sleep {self.var(argv[0])}")
-        elif opcode == 0x09: self.write_line(f"sleep {self.var(argv[0])} secs")
+        elif opcode == 0x07: self.write_line(f"break;")
+        elif opcode == 0x08: self.write_line(f"sleep {self.var(argv[0])};")
+        elif opcode == 0x09: self.write_line(f"sleep {self.var(argv[0])} secs;")
         elif opcode == 0x0A:
-            self.write_line(f"if {self.var(argv[0])} == {self.var(argv[1])} {{")
+            self.write_line(f"if ({self.var(argv[0])} == {self.var(argv[1])}) {{")
             self.indent += 1
         elif opcode == 0x0B:
-            self.write_line(f"if {self.var(argv[0])} != {self.var(argv[1])} {{")
+            self.write_line(f"if ({self.var(argv[0])} != {self.var(argv[1])}) {{")
             self.indent += 1
         elif opcode == 0x0C:
-            self.write_line(f"if {self.var(argv[0])} < {self.var(argv[1])} {{")
+            self.write_line(f"if ({self.var(argv[0])} < {self.var(argv[1])}) {{")
             self.indent += 1
         elif opcode == 0x0D:
-            self.write_line(f"if {self.var(argv[0])} > {self.var(argv[1])} {{")
+            self.write_line(f"if ({self.var(argv[0])} > {self.var(argv[1])}) {{")
             self.indent += 1
         elif opcode == 0x0E:
-            self.write_line(f"if {self.var(argv[0])} <= {self.var(argv[1])} {{")
+            self.write_line(f"if ({self.var(argv[0])} <= {self.var(argv[1])}) {{")
             self.indent += 1
         elif opcode == 0x0F:
-            self.write_line(f"if {self.var(argv[0])} >= {self.var(argv[1])} {{")
+            self.write_line(f"if ({self.var(argv[0])} >= {self.var(argv[1])}) {{")
             self.indent += 1
         elif opcode == 0x10:
-            self.write_line(f"if {self.var(argv[0])} ? {self.var(argv[1])} {{")
+            self.write_line(f"if ({self.var(argv[0])} ? {self.var(argv[1])}) {{")
             self.indent += 1
         elif opcode == 0x12:
             self.indent -= 1
@@ -552,68 +552,68 @@ class ScriptDSLDisassembler(ScriptDisassembler):
 
             self.indent -= 1
             self.write_line("}")
-        elif opcode == 0x24: self.write_line(f"{self.var(argv[0])} = {self.var(argv[1])}")
-        elif opcode == 0x25: self.write_line(f"{self.var(argv[0])} =c 0x{argv[1]:X}")
+        elif opcode == 0x24: self.write_line(f"{self.var(argv[0])} = {self.var(argv[1])};")
+        elif opcode == 0x25: self.write_line(f"{self.var(argv[0])} =c 0x{argv[1]:X};")
         elif opcode == 0x26:
             lhs = self.var(argv[1])
             if self.is_float(lhs):
-                self.write_line(f"{self.var(argv[0])} = {lhs}")
+                self.write_line(f"{self.var(argv[0])} = {lhs};")
             else:
-                self.write_line(f"{self.var(argv[0])} =f {lhs}")
-        elif opcode == 0x27: self.write_line(f"{self.var(argv[0])} += {self.var(argv[1])}")
-        elif opcode == 0x28: self.write_line(f"{self.var(argv[0])} -= {self.var(argv[1])}")
-        elif opcode == 0x29: self.write_line(f"{self.var(argv[0])} *= {self.var(argv[1])}")
-        elif opcode == 0x2A: self.write_line(f"{self.var(argv[0])} /= {self.var(argv[1])}")
-        elif opcode == 0x2B: self.write_line(f"{self.var(argv[0])} %= {self.var(argv[1])}")
+                self.write_line(f"{self.var(argv[0])} =f {lhs};")
+        elif opcode == 0x27: self.write_line(f"{self.var(argv[0])} += {self.var(argv[1])};")
+        elif opcode == 0x28: self.write_line(f"{self.var(argv[0])} -= {self.var(argv[1])};")
+        elif opcode == 0x29: self.write_line(f"{self.var(argv[0])} *= {self.var(argv[1])};")
+        elif opcode == 0x2A: self.write_line(f"{self.var(argv[0])} /= {self.var(argv[1])};")
+        elif opcode == 0x2B: self.write_line(f"{self.var(argv[0])} %= {self.var(argv[1])};")
         elif opcode == 0x2C:
             lhs = self.var(argv[1])
             if self.is_float(lhs):
-                self.write_line(f"{self.var(argv[0])} += {lhs}")
+                self.write_line(f"{self.var(argv[0])} += {lhs};")
             else:
-                self.write_line(f"{self.var(argv[0])} +=f {lhs}")
+                self.write_line(f"{self.var(argv[0])} +=f {lhs};")
         elif opcode == 0x2D:
             lhs = self.var(argv[1])
             if self.is_float(lhs):
-                self.write_line(f"{self.var(argv[0])} -= {lhs}")
+                self.write_line(f"{self.var(argv[0])} -= {lhs};")
             else:
-                self.write_line(f"{self.var(argv[0])} -=f {lhs}")
+                self.write_line(f"{self.var(argv[0])} -=f {lhs};")
         elif opcode == 0x2E:
             lhs = self.var(argv[1])
             if self.is_float(lhs):
-                self.write_line(f"{self.var(argv[0])} *= {lhs}")
+                self.write_line(f"{self.var(argv[0])} *= {lhs};")
             else:
-                self.write_line(f"{self.var(argv[0])} *=f {lhs}")
+                self.write_line(f"{self.var(argv[0])} *=f {lhs};")
         elif opcode == 0x2F:
             lhs = self.var(argv[1])
             if self.is_float(lhs):
-                self.write_line(f"{self.var(argv[0])} /= {lhs}")
+                self.write_line(f"{self.var(argv[0])} /= {lhs};")
             else:
-                self.write_line(f"{self.var(argv[0])} /=f {lhs}")
-        elif opcode == 0x3F: self.write_line(f"{self.var(argv[0])} &= {self.var(argv[1])}")
-        elif opcode == 0x40: self.write_line(f"{self.var(argv[0])} |= {self.var(argv[1])}")
-        elif opcode == 0x41: self.write_line(f"{self.var(argv[0])} &=c {argv[1]:X}")
-        elif opcode == 0x42: self.write_line(f"{self.var(argv[0])} |=c {argv[1]:X}")
+                self.write_line(f"{self.var(argv[0])} /=f {lhs};")
+        elif opcode == 0x3F: self.write_line(f"{self.var(argv[0])} &= {self.var(argv[1])};")
+        elif opcode == 0x40: self.write_line(f"{self.var(argv[0])} |= {self.var(argv[1])};")
+        elif opcode == 0x41: self.write_line(f"{self.var(argv[0])} &=c {argv[1]:X};")
+        elif opcode == 0x42: self.write_line(f"{self.var(argv[0])} |=c {argv[1]:X};")
         elif opcode == 0x43:
             argv_str = ", ".join(self.var(arg) for arg in argv[1:])
             self.write_line(f"{self.addr_ref(argv[0])}({argv_str})")
-        elif opcode == 0x44: self.write_line(f"spawn {self.addr_ref(argv[0])}")
-        elif opcode == 0x45: self.write_line(f"{self.var(argv[1])} = spawn ({self.addr_ref(argv[0])}")
-        elif opcode == 0x46: self.write_line(f"await {self.addr_ref(argv[0])}")
+        elif opcode == 0x44: self.write_line(f"spawn {self.addr_ref(argv[0])};")
+        elif opcode == 0x45: self.write_line(f"{self.var(argv[1])} = spawn {self.addr_ref(argv[0])};")
+        elif opcode == 0x46: self.write_line(f"await {self.addr_ref(argv[0])};")
         elif opcode == 0x47:
             assert argv[3] == 1
             if argv[4] != 0:
-                self.write_line(f"{self.var(argv[4])} = bind {self.addr_ref(argv[0])} to {self.trigger(argv[1])} {self.var(argv[2])}")
+                self.write_line(f"{self.var(argv[4])} = bind {self.addr_ref(argv[0])} to {self.trigger(argv[1])} {self.var(argv[2])};")
             else:
-                self.write_line(f"bind {self.addr_ref(argv[0])} to {self.trigger(argv[1])} {self.var(argv[2])}")
-        elif opcode == 0x48: self.write_line(f"unbind")
-        elif opcode == 0x49: self.write_line(f"kill {self.var(argv[0])}")
-        elif opcode == 0x4D: self.write_line(f"group {self.var(argv[0])}")
-        elif opcode == 0x4F: self.write_line(f"suspend group {self.var(argv[0])}")
-        elif opcode == 0x50: self.write_line(f"resume group {self.var(argv[0])}")
-        elif opcode == 0x51: self.write_line(f"suspend others {self.var(argv[0])}")
-        elif opcode == 0x52: self.write_line(f"resume others {self.var(argv[0])}")
-        elif opcode == 0x53: self.write_line(f"suspend {self.var(argv[0])}")
-        elif opcode == 0x54: self.write_line(f"resume {self.var(argv[0])}")
+                self.write_line(f"bind {self.addr_ref(argv[0])} to {self.trigger(argv[1])} {self.var(argv[2])};")
+        elif opcode == 0x48: self.write_line(f"unbind;")
+        elif opcode == 0x49: self.write_line(f"kill {self.var(argv[0])};")
+        elif opcode == 0x4D: self.write_line(f"group {self.var(argv[0])};")
+        elif opcode == 0x4F: self.write_line(f"suspend group {self.var(argv[0])};")
+        elif opcode == 0x50: self.write_line(f"resume group {self.var(argv[0])};")
+        elif opcode == 0x51: self.write_line(f"suspend others {self.var(argv[0])};")
+        elif opcode == 0x52: self.write_line(f"resume others {self.var(argv[0])};")
+        elif opcode == 0x53: self.write_line(f"suspend {self.var(argv[0])};")
+        elif opcode == 0x54: self.write_line(f"resume {self.var(argv[0])};")
         elif opcode == 0x56:
             self.write_line("spawn {")
             self.indent += 1

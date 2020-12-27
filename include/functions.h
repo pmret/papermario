@@ -21,6 +21,7 @@ Shadow* get_shadow_by_index(s32 index);
 void render_player_model();
 
 f32 integrate_gravity(void);
+f32 get_clamped_angle_diff(f32, f32);
 
 // Text
 PrintContext* load_string(s32 stringID, s32* a1);
@@ -69,17 +70,14 @@ f32 clamp_angle(f32 theta);
 s32 sign(s32 value);
 s32 func_80055448(s32);
 s32 func_80055464(s32, s32);
-s32 func_800554A4(s32, s32);
-s32 func_800554E8(s32, s32);
-s32 func_800555E4(s32);
-void func_800561A4(s16);
+void func_800561A4(s32);
 s32 osGetId();
 
 void set_curtain_scale_goal(f32 scale);
 void set_curtain_fade(f32 scale);
 
 void fx_walk_normal(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4, s32 arg5);
-void fx_emote(s32, Npc*, s32, f32, f32, f32, f32, s32, s32*);
+void fx_emote(s32, Npc*, f32, f32, f32, f32, f32, s32, s32*);
 
 f32 func_800E0088(f32, f32);
 void func_800E97B8(void);
@@ -91,6 +89,8 @@ PlayerData* get_player_data(void);
 // Pause
 s32 pause_interp_vertical_scroll(s32 deltaBefore);
 void pause_draw_rect(s32 ulx, s32 uly, s32 lrx, s32 lry, s32 tileDescriptor, s32 uls, s32 ult, s32 dsdx, s32 dtdy);
+
+s32 func_800DCB7C(s32, f32*, f32*, f32*, f32*);
 
 // Partner
 void func_800EBA3C(Npc* partner);

@@ -99,6 +99,9 @@ nuContRmbCallBack = 0x80093D00;
 nuGfxFunc = 0x80093D10;
 nuGfxPreNMIFunc = 0x80093D14;
 
+nuAuDmaState = 0x800A3BD0;
+nuAuDmaBuf = 0x800A3BE0;
+
 osViModeTable = 0x800946A0;
 D_800959D4 = 0x800959D4;
 D_8009A5B0 = 0x8009A5B0;
@@ -332,3 +335,5 @@ D_80078DB4 = 0x80078DB4;
 
 gSongsUsingVariationFlag = 0x8014F720;
 D_8014F738 = 0x8014F738;
+
+D_802BDF64 = 0x802BDF64;

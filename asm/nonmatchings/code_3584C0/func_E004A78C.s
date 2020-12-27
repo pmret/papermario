@@ -288,14 +288,14 @@ glabel func_E004A78C
 /* 3590B0 E004ABF0 AC670018 */  sw        $a3, 0x18($v1)
 /* 3590B4 E004ABF4 00441021 */  addu      $v0, $v0, $a0
 /* 3590B8 E004ABF8 AC62000C */  sw        $v0, 0xc($v1)
-/* 3590BC E004ABFC 3C02DE00 */  lui       $v0, %hi(D_DE00007C)
+/* 3590BC E004ABFC 3C02DE00 */  lui       $v0, 0xde00
 /* 3590C0 E004AC00 AC620010 */  sw        $v0, 0x10($v1)
 /* 3590C4 E004AC04 24020040 */  addiu     $v0, $zero, 0x40
 /* 3590C8 E004AC08 AC62001C */  sw        $v0, 0x1c($v1)
 /* 3590CC E004AC0C 4600018D */  trunc.w.s $f6, $f0
 /* 3590D0 E004AC10 44023000 */  mfc1      $v0, $f6
 /* 3590D4 E004AC14 00000000 */  nop       
-/* 3590D8 E004AC18 2442007C */  addiu     $v0, $v0, %lo(D_DE00007C)
+/* 3590D8 E004AC18 2442007C */  addiu     $v0, $v0, 0x7c
 /* 3590DC E004AC1C 30420FFF */  andi      $v0, $v0, 0xfff
 /* 3590E0 E004AC20 00481025 */  or        $v0, $v0, $t0
 /* 3590E4 E004AC24 AC620004 */  sw        $v0, 4($v1)

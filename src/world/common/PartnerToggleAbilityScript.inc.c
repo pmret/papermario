@@ -1,7 +1,8 @@
 #include "common.h"
+#include "../partners.h"
 
 static ApiStatus PartnerSuspendAbilityScript(ScriptInstance* script, s32 isInitialCall) {
-    if (gPlayerData.currentPartner == PartnerId_NONE) {
+    if (gPlayerData.currentPartner == PartnerID_NONE) {
         return ApiStatus_DONE2;
     }
     partner_suspend_ability_script();

@@ -185,7 +185,7 @@ glabel func_E006E35C
 .LE006E618:
 /* 372DA8 E006E618 2401FFFF */   addiu    $at, $zero, -1
 /* 372DAC E006E61C 16410004 */  bne       $s2, $at, .LE006E630
-/* 372DB0 E006E620 3C018000 */   lui      $at, %hi(D_7FFFEC40)
+/* 372DB0 E006E620 3C018000 */   lui      $at, 0x8000
 /* 372DB4 E006E624 14410002 */  bne       $v0, $at, .LE006E630
 /* 372DB8 E006E628 00000000 */   nop      
 /* 372DBC E006E62C 0006000D */  break     6
@@ -193,7 +193,7 @@ glabel func_E006E35C
 /* 372DC0 E006E630 00001012 */   mflo     $v0
 /* 372DC4 E006E634 C6000038 */  lwc1      $f0, 0x38($s0)
 /* 372DC8 E006E638 3C01E007 */  lui       $at, %hi(D_E006EC40)
-/* 372DCC E006E63C D422EC40 */  ldc1      $f2, %lo(D_7FFFEC40)($at)
+/* 372DCC E006E63C D422EC40 */  ldc1      $f2, %lo(D_E006EC40)($at)
 /* 372DD0 E006E640 46000021 */  cvt.d.s   $f0, $f0
 /* 372DD4 E006E644 46201081 */  sub.d     $f2, $f2, $f0
 /* 372DD8 E006E648 3C01E007 */  lui       $at, %hi(D_E006EC48)

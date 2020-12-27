@@ -215,14 +215,14 @@ glabel func_80138E54
 /* CF894 80139194 00042180 */  sll       $a0, $a0, 6
 /* CF898 80139198 00912021 */  addu      $a0, $a0, $s1
 /* CF89C 8013919C 00442021 */  addu      $a0, $v0, $a0
-/* CF8A0 801391A0 3C02ED00 */  lui       $v0, %hi(D_ECFFED98)
+/* CF8A0 801391A0 3C02ED00 */  lui       $v0, 0xed00
 /* CF8A4 801391A4 AE430000 */  sw        $v1, ($s2)
 /* CF8A8 801391A8 AD020000 */  sw        $v0, ($t0)
 /* CF8AC 801391AC 24620008 */  addiu     $v0, $v1, 8
 /* CF8B0 801391B0 AD090004 */  sw        $t1, 4($t0)
 /* CF8B4 801391B4 AE420000 */  sw        $v0, ($s2)
 /* CF8B8 801391B8 3C028015 */  lui       $v0, %hi(D_8014ED98)
-/* CF8BC 801391BC 2442ED98 */  addiu     $v0, $v0, %lo(D_ECFFED98)
+/* CF8BC 801391BC 2442ED98 */  addiu     $v0, $v0, %lo(D_8014ED98)
 /* CF8C0 801391C0 AC620004 */  sw        $v0, 4($v1)
 /* CF8C4 801391C4 24620010 */  addiu     $v0, $v1, 0x10
 /* CF8C8 801391C8 AC6A0000 */  sw        $t2, ($v1)

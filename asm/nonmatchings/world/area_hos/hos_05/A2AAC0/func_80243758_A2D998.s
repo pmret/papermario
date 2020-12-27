@@ -350,7 +350,7 @@ glabel func_80243758_A2D998
 /* A2DEA4 80243C64 0040202D */  daddu     $a0, $v0, $zero
 /* A2DEA8 80243C68 24420008 */  addiu     $v0, $v0, 8
 /* A2DEAC 80243C6C AC620000 */  sw        $v0, ($v1)
-/* A2DEB0 80243C70 3C02F100 */  lui       $v0, %hi(D_F1000008)
+/* A2DEB0 80243C70 3C02F100 */  lui       $v0, 0xf100
 /* A2DEB4 80243C74 AC820000 */  sw        $v0, ($a0)
 /* A2DEB8 80243C78 AC850004 */  sw        $a1, 4($a0)
 .L80243C7C:
@@ -358,7 +358,7 @@ glabel func_80243758_A2D998
 /* A2DEC0 80243C80 2463A66C */  addiu     $v1, $v1, %lo(D_8009A66C)
 /* A2DEC4 80243C84 8C620000 */  lw        $v0, ($v1)
 /* A2DEC8 80243C88 0040202D */  daddu     $a0, $v0, $zero
-/* A2DECC 80243C8C 24420008 */  addiu     $v0, $v0, %lo(D_F1000008)
+/* A2DECC 80243C8C 24420008 */  addiu     $v0, $v0, 8
 /* A2DED0 80243C90 AC620000 */  sw        $v0, ($v1)
 /* A2DED4 80243C94 3C02E700 */  lui       $v0, 0xe700
 /* A2DED8 80243C98 AC820000 */  sw        $v0, ($a0)
