@@ -34,7 +34,12 @@ ApiStatus FadeInMusic(ScriptInstance* script, s32 isInitialCall) {
     return (func_8014A964(var0, var1, var2, var3, var4, var5) != 0) * ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D5EE0);
+ApiStatus func_802D5EE0(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+
+    (&gMusicPlayers[get_variable(script, *args++)])->flags |= 0x2;
+    return ApiStatus_DONE2;
+}
 
 ApiStatus func_802D5F28(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

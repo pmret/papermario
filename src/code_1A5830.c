@@ -18,8 +18,19 @@ s32 func_80276F50(Actor* actor) {
     return ret;
 }
 
-void dispatch_event_general(Actor* actor, Event event);
-INCLUDE_ASM(void, "code_1A5830", dispatch_event_general, Actor* actor, Event event);
+void dispatch_event_general(Actor* actor, Event event) {
+    switch (actor->actorID & 0x700) {
+        case 0:
+            dispatch_event_player(event);
+            break;
+        case 0x100:
+            dispatch_event_partner(event);
+            break;
+        case 0x200:
+            dispatch_event_actor(actor, event);
+            break;
+    }
+}
 
 INCLUDE_ASM(s32, "code_1A5830", play_hit_sound);
 
@@ -243,16 +254,16 @@ INCLUDE_ASM(s32, "code_1A5830", DropStarPoints);
 ApiStatus SetDefenseTable(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     ActorID actorID = get_variable(script, *args++);
-    s32 var1;
+    s32 partIndex;
     s32 var2;
 
     if (actorID == ActorID_SELF) {
         actorID = script->owner1.actorID;
     }
 
-    var1 = get_variable(script, *args++);
+    partIndex = get_variable(script, *args++);
     var2 = get_variable(script, *args++);
-    get_actor_part(get_actor(actorID), var1)->defenseTable = var2;
+    get_actor_part(get_actor(actorID), partIndex)->defenseTable = var2;
     return ApiStatus_DONE2;
 }
 
@@ -273,20 +284,37 @@ ApiStatus SetStatusTable(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus SetIdleAnimations(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     ActorID actorID = get_variable(script, *args++);
-    s32 var1;
+    s32 partIndex;
     s32 var2;
 
     if (actorID == ActorID_SELF) {
         actorID = script->owner1.actorID;
     }
 
-    var1 = get_variable(script, *args++);
+    partIndex = get_variable(script, *args++);
     var2 = get_variable(script, *args++);
-    get_actor_part(get_actor(actorID), var1)->idleAnimations = var2;
+    get_actor_part(get_actor(actorID), partIndex)->idleAnimations = var2;
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_1A5830", func_8027CC10);
+ApiStatus func_8027CC10(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    ActorID actorID = get_variable(script, *args++);
+    s32 partIndex;
+
+    if (actorID == ActorID_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    partIndex = get_variable(script, *args++);
+
+    // weirdly unused
+    get_variable(script, *args++);
+    get_variable(script, *args++);
+
+    get_actor_part(get_actor(actorID), partIndex);
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_1A5830", EnemyDamageTarget);
 

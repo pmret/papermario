@@ -117,7 +117,7 @@ typedef struct Npc {
     /* 0x090 */ Vec3s homePos;
     /* 0x096 */ char unk_96[12];
     /* 0x0A2 */ u16 unk_A2;
-    /* 0x0A4 */ u8 npcID;
+    /* 0x0A4 */ s8 npcID;
     /* 0x0A5 */ char unk_A5;
     /* 0x0A6 */ s16 collisionRadius;
     /* 0x0A8 */ s16 collisionHeight;
@@ -969,16 +969,19 @@ typedef struct GameStatus {
     /* 0x16C */ char unk_16C[12];
 } GameStatus; // size = 0x178
 
+/*
+still;
+walk;
+jump;
+fall;
+fly;
+idle;
+run;
+talk;
+hurt;
+*/
 typedef struct PartnerAnimations {
-    /* 0x00 */ UNK_PTR still;
-    /* 0x04 */ UNK_PTR walk;
-    /* 0x08 */ UNK_PTR jump;
-    /* 0x0C */ UNK_PTR fall;
-    /* 0x10 */ UNK_PTR fly;
-    /* 0x14 */ UNK_PTR idle;
-    /* 0x18 */ UNK_PTR run;
-    /* 0x1C */ UNK_PTR talk;
-    /* 0x20 */ UNK_PTR hurt;
+    /* 0x00 */ UNK_PTR anims[9];
 } PartnerAnimations; // size = 0x24
 
 typedef struct Shadow {

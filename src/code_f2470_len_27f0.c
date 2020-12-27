@@ -1,4 +1,5 @@
 #include "common.h"
+#include "map.h"
 
 Npc* resolve_npc(ScriptInstance* script, NpcId npcIdOrPtr) {
     if (npcIdOrPtr == NpcId_SELF) {
@@ -10,9 +11,19 @@ Npc* resolve_npc(ScriptInstance* script, NpcId npcIdOrPtr) {
     }
 }
 
-INCLUDE_ASM(void, "code_f2470_len_27f0", set_npc_animation, Npc* npc, u32 arg1);
+void set_npc_animation(Npc* npc, u32 arg1) {
+    PlayerData* playerData = PLAYER_DATA;
 
-INCLUDE_ASM(s32, "code_f2470_len_27f0", CreateNpc);
+    if (arg1 - 0x101 < 9) {
+        npc->currentAnim = gPartnerAnimations[playerData->currentPartner].anims[arg1 - 0x101];
+    } else if ((arg1 - 0x201) < 0x10) {
+        npc->currentAnim = get_enemy(npc->npcID)->animList[arg1 - 0x201];
+    } else {
+        npc->currentAnim = arg1;
+    }
+}
+
+INCLUDE_ASM(ApiStatus, "code_f2470_len_27f0", CreateNpc, ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus DeleteNpc(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -199,12 +210,12 @@ INCLUDE_ASM(s32, "code_f2470_len_27f0", NpcMoveTo, ScriptInstance* script, s32 i
 
 INCLUDE_ASM(s32, "code_f2470_len_27f0", _npc_jump_to);
 
-void NpcJump0(ScriptInstance* script, s32 isInitialCall) {
-    _npc_jump_to(script, isInitialCall, 0);
+ApiStatus NpcJump0(ScriptInstance* script, s32 isInitialCall) {
+    return _npc_jump_to(script, isInitialCall, 0);
 }
 
-void NpcJump1(ScriptInstance* script, s32 isInitialCall) {
-    _npc_jump_to(script, isInitialCall, 1);
+ApiStatus NpcJump1(ScriptInstance* script, s32 isInitialCall) {
+    return _npc_jump_to(script, isInitialCall, 1);
 }
 
 INCLUDE_ASM(s32, "code_f2470_len_27f0", NpcFlyTo, ScriptInstance* script, s32 isInitialCall);
@@ -420,9 +431,9 @@ ApiStatus func_802CF56C(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_f2470_len_27f0", BringPartnerOut);
+INCLUDE_ASM(ApiStatus, "code_f2470_len_27f0", BringPartnerOut, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "code_f2470_len_27f0", PutPartnerAway);
+INCLUDE_ASM(ApiStatus, "code_f2470_len_27f0", PutPartnerAway, ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus GetCurrentPartnerID(ScriptInstance* script, s32 isInitialCall) {
     set_variable(script, *script->ptrReadPos, gPlayerData.currentPartner);
