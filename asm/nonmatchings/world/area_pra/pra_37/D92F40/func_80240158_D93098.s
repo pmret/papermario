@@ -37,7 +37,7 @@ glabel func_80240158_D93098
 /* D93118 802401D8 0C00B94E */  jal       get_screen_coords
 /* D9311C 802401DC AFA20018 */   sw       $v0, 0x18($sp)
 /* D93120 802401E0 8E0400A4 */  lw        $a0, 0xa4($s0)
-/* D93124 802401E4 0C090014 */  jal       UnkFunc2
+/* D93124 802401E4 0C090014 */  jal       pra_37_UnkFunc2
 /* D93128 802401E8 00000000 */   nop      
 /* D9312C 802401EC C6020080 */  lwc1      $f2, 0x80($s0)
 /* D93130 802401F0 3C014307 */  lui       $at, 0x4307

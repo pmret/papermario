@@ -168,13 +168,13 @@ glabel func_802410D4_C2FC74
 /* C2FEE8 80241348 24020003 */  addiu     $v0, $zero, 3
 /* C2FEEC 8024134C 080904FF */  j         .L802413FC
 /* C2FEF0 80241350 AE420070 */   sw       $v0, 0x70($s2)
-/* C2FEF4 80241354 0C090000 */  jal       UnkNpcAIFunc6
+/* C2FEF4 80241354 0C090000 */  jal       dgb_02_UnkNpcAIFunc6
 /* C2FEF8 80241358 0240202D */   daddu    $a0, $s2, $zero
 /* C2FEFC 8024135C 8E430070 */  lw        $v1, 0x70($s2)
 /* C2FF00 80241360 2402001F */  addiu     $v0, $zero, 0x1f
 /* C2FF04 80241364 14620025 */  bne       $v1, $v0, .L802413FC
 /* C2FF08 80241368 00000000 */   nop
-/* C2FF0C 8024136C 0C09001B */  jal       UnkNpcAIFunc7
+/* C2FF0C 8024136C 0C09001B */  jal       dgb_02_UnkNpcAIFunc7
 /* C2FF10 80241370 0240202D */   daddu    $a0, $s2, $zero
 /* C2FF14 80241374 8E430070 */  lw        $v1, 0x70($s2)
 /* C2FF18 80241378 24020020 */  addiu     $v0, $zero, 0x20
@@ -184,7 +184,7 @@ glabel func_802410D4_C2FC74
 /* C2FF28 80241388 0240202D */   daddu    $a0, $s2, $zero
 /* C2FF2C 8024138C 080904FF */  j         .L802413FC
 /* C2FF30 80241390 00000000 */   nop
-/* C2FF34 80241394 0C09006D */  jal       UnkNpcAIFunc5
+/* C2FF34 80241394 0C09006D */  jal       dgb_02_UnkNpcAIFunc5
 /* C2FF38 80241398 0240202D */   daddu    $a0, $s2, $zero
 /* C2FF3C 8024139C 080904FF */  j         .L802413FC
 /* C2FF40 802413A0 00000000 */   nop

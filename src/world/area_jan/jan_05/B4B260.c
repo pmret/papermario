@@ -38,7 +38,9 @@ INCLUDE_ASM(s32, "world/area_jan/jan_05/B4B260", func_80241EE8_B4C958);
 
 INCLUDE_ASM(s32, "world/area_jan/jan_05/B4B260", func_8024219C_B4CC0C);
 
+#define MAP_NAME dup_jan_05
 #include "world/common/SomeMatrixOperations.inc.c"
+#define MAP_NAME jan_05
 
 ApiStatus func_8024268C_B4D0FC(ScriptInstance* script) {
     if (get_enemy_safe(0) == NULL) {

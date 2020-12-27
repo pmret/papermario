@@ -153,7 +153,7 @@ glabel func_80241B14_9A9F04
 /* 9AA13C 80241D4C 00000000 */   nop      
 /* 9AA140 80241D50 0260202D */  daddu     $a0, $s3, $zero
 /* 9AA144 80241D54 0280282D */  daddu     $a1, $s4, $zero
-/* 9AA148 80241D58 0C090421 */  jal       UnkNpcAIFunc1
+/* 9AA148 80241D58 0C090421 */  jal       trd_04_UnkNpcAIFunc1
 /* 9AA14C 80241D5C 02A0302D */   daddu    $a2, $s5, $zero
 /* 9AA150 80241D60 0260202D */  daddu     $a0, $s3, $zero
 /* 9AA154 80241D64 0280282D */  daddu     $a1, $s4, $zero

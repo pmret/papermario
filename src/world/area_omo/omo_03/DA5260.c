@@ -1,6 +1,8 @@
 #include "omo_03.h"
 
+#define MAP_NAME dup_omo_03
 #include "world/common/UnsetCamera0MoveFlag1.inc.c"
+#define MAP_NAME omo_03
 
 INCLUDE_ASM(s32, "world/area_omo/omo_03/DA5260", func_8024003C_DA527C);
 

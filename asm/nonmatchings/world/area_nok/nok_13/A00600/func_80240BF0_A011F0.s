@@ -105,7 +105,7 @@ glabel func_80240BF0_A011F0
 /* A01378 80240D78 0000102D */   daddu    $v0, $zero, $zero
 /* A0137C 80240D7C 0260202D */  daddu     $a0, $s3, $zero
 /* A01380 80240D80 0280282D */  daddu     $a1, $s4, $zero
-/* A01384 80240D84 0C09015A */  jal       UnkNpcAIFunc1
+/* A01384 80240D84 0C09015A */  jal       nok_13_UnkNpcAIFunc1
 /* A01388 80240D88 0200302D */   daddu    $a2, $s0, $zero
 /* A0138C 80240D8C 8E630070 */  lw        $v1, 0x70($s3)
 /* A01390 80240D90 24020003 */  addiu     $v0, $zero, 3
@@ -129,7 +129,7 @@ glabel func_80240BF0_A011F0
 /* A013D8 80240DD8 0000102D */   daddu    $v0, $zero, $zero
 /* A013DC 80240DDC 0260202D */  daddu     $a0, $s3, $zero
 /* A013E0 80240DE0 0280282D */  daddu     $a1, $s4, $zero
-/* A013E4 80240DE4 0C0902EB */  jal       UnkDurationCheck
+/* A013E4 80240DE4 0C0902EB */  jal       nok_13_UnkDurationCheck
 /* A013E8 80240DE8 0200302D */   daddu    $a2, $s0, $zero
 .L80240DEC:
 /* A013EC 80240DEC 0000102D */  daddu     $v0, $zero, $zero
