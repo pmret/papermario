@@ -64,7 +64,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80241848_844418);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_802418AC_84447C);
 
-static ApiStatus PostChapter4StatUpdate(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus PostChapter4StatUpdate(ScriptInstance* script, s32 isInitialCall) {
     PlayerData* playerData = PLAYER_DATA;
 
     set_max_SP(4);

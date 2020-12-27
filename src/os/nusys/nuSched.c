@@ -148,7 +148,7 @@ INCLUDE_ASM(s32, "os/nusys/nuSched", nuScGetFrameRate, void);
 
 INCLUDE_ASM(void, "os/nusys/nuSched", nuScEventHandler);
 
-static void nuScEventBroadcast(NUScMsg* msg) {
+void nuScEventBroadcast(NUScMsg* msg) {
     NUScClient* clientList = nusched.clientList;
 
     while (clientList != NULL) {

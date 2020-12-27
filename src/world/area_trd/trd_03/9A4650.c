@@ -16,7 +16,7 @@ ApiStatus func_80240000_9A4650(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-static ApiStatus GetFrameCounter(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus GetFrameCounter(ScriptInstance* script, s32 isInitialCall) {
     set_variable(script, *script->ptrReadPos, GAME_STATUS->frameCounter);
     return ApiStatus_DONE2;
 }
