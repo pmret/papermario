@@ -106,10 +106,10 @@ glabel func_E00BC374
 /* 3BA538 E00BC508 92A5004B */  lbu       $a1, 0x4b($s5)
 /* 3BA53C E00BC50C 24C30018 */  addiu     $v1, $a2, 0x18
 /* 3BA540 E00BC510 AE230000 */  sw        $v1, ($s1)
-/* 3BA544 E00BC514 3C03DE00 */  lui       $v1, %hi(D_DE001000)
+/* 3BA544 E00BC514 3C03DE00 */  lui       $v1, 0xde00
 /* 3BA548 E00BC518 ACC30010 */  sw        $v1, 0x10($a2)
 /* 3BA54C E00BC51C 3C030900 */  lui       $v1, 0x900
-/* 3BA550 E00BC520 24631000 */  addiu     $v1, $v1, %lo(D_DE001000)
+/* 3BA550 E00BC520 24631000 */  addiu     $v1, $v1, 0x1000
 /* 3BA554 E00BC524 ACC30014 */  sw        $v1, 0x14($a2)
 /* 3BA558 E00BC528 00021600 */  sll       $v0, $v0, 0x18
 /* 3BA55C E00BC52C 00042400 */  sll       $a0, $a0, 0x10

@@ -3041,10 +3041,10 @@ glabel func_80127D90
 /* C1290 8012AB90 AC400004 */  sw        $zero, 4($v0)
 /* C1294 8012AB94 24620008 */  addiu     $v0, $v1, 8
 /* C1298 8012AB98 AEE20000 */  sw        $v0, ($s7)
-/* C129C 8012AB9C 3C02DE00 */  lui       $v0, %hi(D_DDFFC500)
+/* C129C 8012AB9C 3C02DE00 */  lui       $v0, 0xde00
 /* C12A0 8012ABA0 AC620000 */  sw        $v0, ($v1)
 /* C12A4 8012ABA4 3C028015 */  lui       $v0, %hi(D_8014C500)
-/* C12A8 8012ABA8 2442C500 */  addiu     $v0, $v0, %lo(D_DDFFC500)
+/* C12A8 8012ABA8 2442C500 */  addiu     $v0, $v0, %lo(D_8014C500)
 /* C12AC 8012ABAC AC620004 */  sw        $v0, 4($v1)
 .L8012ABB0:
 /* C12B0 8012ABB0 3C058015 */  lui       $a1, %hi(D_80155D74)

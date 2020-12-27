@@ -256,12 +256,12 @@ glabel draw_box
 /* 8EB44 800F5694 8FAE01F0 */  lw        $t6, 0x1f0($sp)
 /* 8EB48 800F5698 31C20001 */  andi      $v0, $t6, 1
 /* 8EB4C 800F569C 1040000E */  beqz      $v0, .L800F56D8
-/* 8EB50 800F56A0 3C04E300 */   lui      $a0, %hi(D_E2FFD6B0)
+/* 8EB50 800F56A0 3C04E300 */   lui      $a0, 0xe300
 /* 8EB54 800F56A4 3C058011 */  lui       $a1, %hi(D_8010BBB0)
 /* 8EB58 800F56A8 24A5BBB0 */  addiu     $a1, $a1, %lo(D_8010BBB0)
 /* 8EB5C 800F56AC 8CA20000 */  lw        $v0, ($a1)
 /* 8EB60 800F56B0 3C048011 */  lui       $a0, %hi(D_8010D6B0)
-/* 8EB64 800F56B4 2484D6B0 */  addiu     $a0, $a0, %lo(D_E2FFD6B0)
+/* 8EB64 800F56B4 2484D6B0 */  addiu     $a0, $a0, %lo(D_8010D6B0)
 /* 8EB68 800F56B8 00021A00 */  sll       $v1, $v0, 8
 /* 8EB6C 800F56BC 24420001 */  addiu     $v0, $v0, 1
 /* 8EB70 800F56C0 ACA20000 */  sw        $v0, ($a1)

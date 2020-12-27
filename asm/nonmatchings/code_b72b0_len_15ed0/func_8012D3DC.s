@@ -399,10 +399,10 @@ glabel func_8012D3DC
 /* C40C0 8012D9C0 AD280000 */  sw        $t0, ($t1)
 /* C40C4 8012D9C4 AD200004 */  sw        $zero, 4($t1)
 /* C40C8 8012D9C8 AC620014 */  sw        $v0, 0x14($v1)
-/* C40CC 8012D9CC 3C02FA00 */  lui       $v0, %hi(D_F9FFBF70)
+/* C40CC 8012D9CC 3C02FA00 */  lui       $v0, 0xfa00
 /* C40D0 8012D9D0 AC620018 */  sw        $v0, 0x18($v1)
 /* C40D4 8012D9D4 3C02802F */  lui       $v0, %hi(D_802EBF70)
-/* C40D8 8012D9D8 2442BF70 */  addiu     $v0, $v0, %lo(D_F9FFBF70)
+/* C40D8 8012D9D8 2442BF70 */  addiu     $v0, $v0, %lo(D_802EBF70)
 /* C40DC 8012D9DC AC730000 */  sw        $s3, ($v1)
 /* C40E0 8012D9E0 AC6F0004 */  sw        $t7, 4($v1)
 /* C40E4 8012D9E4 AC6C0008 */  sw        $t4, 8($v1)

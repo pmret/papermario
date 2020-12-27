@@ -149,18 +149,18 @@ glabel spr_appendMDL_component
 /* FFC10 802DCB20 14620008 */  bne       $v1, $v0, .L802DCB44
 /* FFC14 802DCB24 24E20008 */   addiu    $v0, $a3, 8
 /* FFC18 802DCB28 AD020000 */  sw        $v0, ($t0)
-/* FFC1C 802DCB2C 3C02DE00 */  lui       $v0, %hi(D_DDFFF460)
+/* FFC1C 802DCB2C 3C02DE00 */  lui       $v0, 0xde00
 /* FFC20 802DCB30 ACE20000 */  sw        $v0, ($a3)
 /* FFC24 802DCB34 3C02802E */  lui       $v0, %hi(D_802DF460)
-/* FFC28 802DCB38 2442F460 */  addiu     $v0, $v0, %lo(D_DDFFF460)
+/* FFC28 802DCB38 2442F460 */  addiu     $v0, $v0, %lo(D_802DF460)
 /* FFC2C 802DCB3C 080B72EE */  j         .L802DCBB8
 /* FFC30 802DCB40 ACE20004 */   sw       $v0, 4($a3)
 .L802DCB44:
 /* FFC34 802DCB44 AD020000 */  sw        $v0, ($t0)
-/* FFC38 802DCB48 3C02DE00 */  lui       $v0, %hi(D_DDFFF490)
+/* FFC38 802DCB48 3C02DE00 */  lui       $v0, 0xde00
 /* FFC3C 802DCB4C ACE20000 */  sw        $v0, ($a3)
 /* FFC40 802DCB50 3C02802E */  lui       $v0, %hi(D_802DF490)
-/* FFC44 802DCB54 2442F490 */  addiu     $v0, $v0, %lo(D_DDFFF490)
+/* FFC44 802DCB54 2442F490 */  addiu     $v0, $v0, %lo(D_802DF490)
 /* FFC48 802DCB58 080B72EE */  j         .L802DCBB8
 /* FFC4C 802DCB5C ACE20004 */   sw       $v0, 4($a3)
 .L802DCB60:
@@ -169,10 +169,10 @@ glabel spr_appendMDL_component
 /* FFC58 802DCB68 14620008 */  bne       $v1, $v0, .L802DCB8C
 /* FFC5C 802DCB6C 24E20008 */   addiu    $v0, $a3, 8
 /* FFC60 802DCB70 AD020000 */  sw        $v0, ($t0)
-/* FFC64 802DCB74 3C02DE00 */  lui       $v0, %hi(D_DDFFF3F0)
+/* FFC64 802DCB74 3C02DE00 */  lui       $v0, 0xde00
 /* FFC68 802DCB78 ACE20000 */  sw        $v0, ($a3)
 /* FFC6C 802DCB7C 3C02802E */  lui       $v0, %hi(D_802DF3F0)
-/* FFC70 802DCB80 2442F3F0 */  addiu     $v0, $v0, %lo(D_DDFFF3F0)
+/* FFC70 802DCB80 2442F3F0 */  addiu     $v0, $v0, %lo(D_802DF3F0)
 /* FFC74 802DCB84 080B72EE */  j         .L802DCBB8
 /* FFC78 802DCB88 ACE20004 */   sw       $v0, 4($a3)
 .L802DCB8C:
@@ -182,10 +182,10 @@ glabel spr_appendMDL_component
 /* FFC88 802DCB98 24E20010 */  addiu     $v0, $a3, 0x10
 /* FFC8C 802DCB9C ACE30004 */  sw        $v1, 4($a3)
 /* FFC90 802DCBA0 AD020000 */  sw        $v0, ($t0)
-/* FFC94 802DCBA4 3C02DE00 */  lui       $v0, %hi(D_DDFFF428)
+/* FFC94 802DCBA4 3C02DE00 */  lui       $v0, 0xde00
 /* FFC98 802DCBA8 ACE20008 */  sw        $v0, 8($a3)
 /* FFC9C 802DCBAC 3C02802E */  lui       $v0, %hi(D_802DF428)
-/* FFCA0 802DCBB0 2442F428 */  addiu     $v0, $v0, %lo(D_DDFFF428)
+/* FFCA0 802DCBB0 2442F428 */  addiu     $v0, $v0, %lo(D_802DF428)
 /* FFCA4 802DCBB4 ACE2000C */  sw        $v0, 0xc($a3)
 .L802DCBB8:
 /* FFCA8 802DCBB8 92910004 */  lbu       $s1, 4($s4)

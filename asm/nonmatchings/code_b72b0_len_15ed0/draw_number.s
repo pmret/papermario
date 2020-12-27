@@ -57,10 +57,10 @@ glabel draw_number
 /* BDE60 80127760 0040202D */  daddu     $a0, $v0, $zero
 /* BDE64 80127764 24420008 */  addiu     $v0, $v0, 8
 /* BDE68 80127768 AC620000 */  sw        $v0, ($v1)
-/* BDE6C 8012776C 3C02DE00 */  lui       $v0, %hi(D_DDFFC368)
+/* BDE6C 8012776C 3C02DE00 */  lui       $v0, 0xde00
 /* BDE70 80127770 AC820000 */  sw        $v0, ($a0)
 /* BDE74 80127774 3C028015 */  lui       $v0, %hi(D_8014C368)
-/* BDE78 80127778 2442C368 */  addiu     $v0, $v0, %lo(D_DDFFC368)
+/* BDE78 80127778 2442C368 */  addiu     $v0, $v0, %lo(D_8014C368)
 /* BDE7C 8012777C AC820004 */  sw        $v0, 4($a0)
 /* BDE80 80127780 32220001 */  andi      $v0, $s1, 1
 /* BDE84 80127784 1040001E */  beqz      $v0, .L80127800

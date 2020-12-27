@@ -37,12 +37,12 @@ glabel func_802409F4
 /* 16F34C 80240A6C C5000028 */  lwc1      $f0, 0x28($t0)
 /* 16F350 80240A70 C502002C */  lwc1      $f2, 0x2c($t0)
 /* 16F354 80240A74 C5040030 */  lwc1      $f4, 0x30($t0)
-/* 16F358 80240A78 3C01C47A */  lui       $at, %hi(D_C479EFB0)
+/* 16F358 80240A78 3C01C47A */  lui       $at, 0xc47a
 /* 16F35C 80240A7C 44813000 */  mtc1      $at, $f6
 /* 16F360 80240A80 AD000028 */  sw        $zero, 0x28($t0)
 /* 16F364 80240A84 AD000030 */  sw        $zero, 0x30($t0)
 /* 16F368 80240A88 3C01802A */  lui       $at, %hi(D_8029EFB0)
-/* 16F36C 80240A8C E420EFB0 */  swc1      $f0, %lo(D_C479EFB0)($at)
+/* 16F36C 80240A8C E420EFB0 */  swc1      $f0, %lo(D_8029EFB0)($at)
 /* 16F370 80240A90 3C01802A */  lui       $at, %hi(D_8029EFB4)
 /* 16F374 80240A94 E422EFB4 */  swc1      $f2, %lo(D_8029EFB4)($at)
 /* 16F378 80240A98 3C01802A */  lui       $at, %hi(D_8029EFB8)

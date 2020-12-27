@@ -52,10 +52,10 @@ glabel pause_spirits_draw_contents
 /* 13FDFC 8024CABC 00761021 */  addu      $v0, $v1, $s6
 /* 13FE00 8024CAC0 AC650000 */  sw        $a1, ($v1)
 /* 13FE04 8024CAC4 AE220000 */  sw        $v0, ($s1)
-/* 13FE08 8024CAC8 3C02DE00 */  lui       $v0, %hi(D_DDFFF5A0)
+/* 13FE08 8024CAC8 3C02DE00 */  lui       $v0, 0xde00
 /* 13FE0C 8024CACC AC620008 */  sw        $v0, 8($v1)
 /* 13FE10 8024CAD0 3C028027 */  lui       $v0, %hi(D_8026F5A0)
-/* 13FE14 8024CAD4 2442F5A0 */  addiu     $v0, $v0, %lo(D_DDFFF5A0)
+/* 13FE14 8024CAD4 2442F5A0 */  addiu     $v0, $v0, %lo(D_8026F5A0)
 /* 13FE18 8024CAD8 AC62000C */  sw        $v0, 0xc($v1)
 .L8024CADC:
 /* 13FE1C 8024CADC 3C02FD48 */  lui       $v0, 0xfd48

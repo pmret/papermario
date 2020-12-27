@@ -150,11 +150,11 @@ glabel func_E007E54C
 /* 37FEB0 E007E790 8EE30000 */  lw        $v1, ($s7)
 /* 37FEB4 E007E794 00541021 */  addu      $v0, $v0, $s4
 /* 37FEB8 E007E798 00621821 */  addu      $v1, $v1, $v0
-/* 37FEBC E007E79C 3C02DE00 */  lui       $v0, %hi(D_DE000DE0)
+/* 37FEBC E007E79C 3C02DE00 */  lui       $v0, 0xde00
 /* 37FEC0 E007E7A0 ACA30004 */  sw        $v1, 4($a1)
 /* 37FEC4 E007E7A4 AC820000 */  sw        $v0, ($a0)
 /* 37FEC8 E007E7A8 3C020900 */  lui       $v0, 0x900
-/* 37FECC E007E7AC 24420DE0 */  addiu     $v0, $v0, %lo(D_DE000DE0)
+/* 37FECC E007E7AC 24420DE0 */  addiu     $v0, $v0, 0xde0
 /* 37FED0 E007E7B0 AC820004 */  sw        $v0, 4($a0)
 /* 37FED4 E007E7B4 8FB900E8 */  lw        $t9, 0xe8($sp)
 /* 37FED8 E007E7B8 2631004C */  addiu     $s1, $s1, 0x4c

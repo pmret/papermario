@@ -13,9 +13,9 @@ glabel func_8012C2E0
 /* C2A00 8012C300 24430008 */  addiu     $v1, $v0, 8
 /* C2A04 8012C304 ACA00004 */  sw        $zero, 4($a1)
 /* C2A08 8012C308 AC830000 */  sw        $v1, ($a0)
-/* C2A0C 8012C30C 3C03DE00 */  lui       $v1, %hi(D_DDFFC500)
+/* C2A0C 8012C30C 3C03DE00 */  lui       $v1, 0xde00
 /* C2A10 8012C310 AC430000 */  sw        $v1, ($v0)
 /* C2A14 8012C314 3C038015 */  lui       $v1, %hi(D_8014C500)
-/* C2A18 8012C318 2463C500 */  addiu     $v1, $v1, %lo(D_DDFFC500)
+/* C2A18 8012C318 2463C500 */  addiu     $v1, $v1, %lo(D_8014C500)
 /* C2A1C 8012C31C 03E00008 */  jr        $ra
 /* C2A20 8012C320 AC430004 */   sw       $v1, 4($v0)
