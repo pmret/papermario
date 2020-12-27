@@ -187,8 +187,8 @@ StaticNpc M(goombaNpc) = {
 };
 
 NpcGroupList M(npcGroupList) = {
-    NPC_GROUP(M(goombaNpc), FORMATION_ID(1, 0, 3)),
-    NPC_GROUP_LIST_END(),
+    NPC_GROUP(M(goombaNpc), BATTLE_ID(1, 0, 3)),
+    {},
 };
 
 Script M(ReadEastSign) = SCRIPT({
