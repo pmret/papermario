@@ -278,10 +278,10 @@ glabel func_E004A78C
 /* 359088 E004ABC8 005E1025 */  or        $v0, $v0, $fp
 /* 35908C E004ABCC AC620000 */  sw        $v0, ($v1)
 /* 359090 E004ABD0 C6000000 */  lwc1      $f0, ($s0)
-/* 359094 E004ABD4 3C02DA38 */  lui       $v0, %hi(D_DA37A674)
+/* 359094 E004ABD4 3C02DA38 */  lui       $v0, 0xda38
 /* 359098 E004ABD8 AC620008 */  sw        $v0, 8($v1)
 /* 35909C E004ABDC 3C02800A */  lui       $v0, %hi(D_8009A674)
-/* 3590A0 E004ABE0 8C42A674 */  lw        $v0, %lo(D_DA37A674)($v0)
+/* 3590A0 E004ABE0 8C42A674 */  lw        $v0, %lo(D_8009A674)($v0)
 /* 3590A4 E004ABE4 3C0F0900 */  lui       $t7, 0x900
 /* 3590A8 E004ABE8 25EF0940 */  addiu     $t7, $t7, 0x940
 /* 3590AC E004ABEC AC6F0014 */  sw        $t7, 0x14($v1)

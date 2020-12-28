@@ -34,10 +34,10 @@ glabel func_80126790
 /* BCF04 80126804 24620008 */  addiu     $v0, $v1, 8
 /* BCF08 80126808 ACC00004 */  sw        $zero, 4($a2)
 /* BCF0C 8012680C ACA20000 */  sw        $v0, ($a1)
-/* BCF10 80126810 3C02DE00 */  lui       $v0, %hi(D_DDFFC2D8)
+/* BCF10 80126810 3C02DE00 */  lui       $v0, 0xde00
 /* BCF14 80126814 AC620000 */  sw        $v0, ($v1)
 /* BCF18 80126818 3C028015 */  lui       $v0, %hi(D_8014C2D8)
-/* BCF1C 8012681C 2442C2D8 */  addiu     $v0, $v0, %lo(D_DDFFC2D8)
+/* BCF1C 8012681C 2442C2D8 */  addiu     $v0, $v0, %lo(D_8014C2D8)
 /* BCF20 80126820 3C058015 */  lui       $a1, %hi(D_80154C30)
 /* BCF24 80126824 24A54C30 */  addiu     $a1, $a1, %lo(D_80154C30)
 /* BCF28 80126828 AC620004 */  sw        $v0, 4($v1)

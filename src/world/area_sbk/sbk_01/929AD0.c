@@ -8,7 +8,7 @@ s32 M(aISettings_80240370)[] = {
 };
 
 Script M(NpcAI_802403A0) = SCRIPT({
-    SetNpcB5_3();
+    M(SetNpcB5_3)();
     DoBasicAI(M(aISettings_80240370));
 });
 

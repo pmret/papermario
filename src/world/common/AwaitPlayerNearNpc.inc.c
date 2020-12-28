@@ -1,6 +1,7 @@
 #include "common.h"
+#include "map.h"
 
-static ApiStatus func_80240814_97BE44(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus M(func_80240814_97BE44)(ScriptInstance* script, s32 isInitialCall) {
     Npc* npc = get_npc_safe(script->owner2.npcID);
 
     npc->unk_AB = npc->collisionHeight;
@@ -9,7 +10,7 @@ static ApiStatus func_80240814_97BE44(ScriptInstance* script, s32 isInitialCall)
     return ApiStatus_DONE2;
 }
 
-static ApiStatus AwaitPlayerNearNpc(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus M(AwaitPlayerNearNpc)(ScriptInstance* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = PLAYER_STATUS;
     Npc* npc = get_npc_safe(script->owner2.npcID);
 
@@ -20,7 +21,7 @@ static ApiStatus AwaitPlayerNearNpc(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-static ApiStatus func_802408B4_97BEE4(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus M(func_802408B4_97BEE4)(ScriptInstance* script, s32 isInitialCall) {
     EncounterStatus* currentEncounter = &gCurrentEncounter;
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_safe(script->owner2.npcID);

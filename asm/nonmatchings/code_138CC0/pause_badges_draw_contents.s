@@ -616,12 +616,12 @@ glabel pause_badges_draw_contents
 /* 13B150 80247E10 34841201 */  ori       $a0, $a0, 0x1201
 /* 13B154 80247E14 3C05800A */  lui       $a1, %hi(D_8009A66C)
 /* 13B158 80247E18 8CA5A66C */  lw        $a1, %lo(D_8009A66C)($a1)
-/* 13B15C 80247E1C 3C02DE00 */  lui       $v0, %hi(D_DDFFF348)
+/* 13B15C 80247E1C 3C02DE00 */  lui       $v0, 0xde00
 /* 13B160 80247E20 00A0182D */  daddu     $v1, $a1, $zero
 /* 13B164 80247E24 24A50008 */  addiu     $a1, $a1, 8
 /* 13B168 80247E28 AC620000 */  sw        $v0, ($v1)
 /* 13B16C 80247E2C 3C028027 */  lui       $v0, %hi(D_8026F348)
-/* 13B170 80247E30 2442F348 */  addiu     $v0, $v0, %lo(D_DDFFF348)
+/* 13B170 80247E30 2442F348 */  addiu     $v0, $v0, %lo(D_8026F348)
 /* 13B174 80247E34 AC620004 */  sw        $v0, 4($v1)
 /* 13B178 80247E38 24A20008 */  addiu     $v0, $a1, 8
 /* 13B17C 80247E3C 3C01800A */  lui       $at, %hi(D_8009A66C)

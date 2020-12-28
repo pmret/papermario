@@ -57,10 +57,10 @@ glabel decode_yay0
 /* 4A2A8 8006EEA8 30C600FF */  andi      $a2, $a2, 0xff
 /* 4A2AC 8006EEAC 30E700FF */  andi      $a3, $a3, 0xff
 /* 4A2B0 8006EEB0 8FAE0010 */  lw        $t6, 0x10($sp)
-/* 4A2B4 8006EEB4 3C01A000 */  lui       $at, %hi(D_A0000C7C)
+/* 4A2B4 8006EEB4 3C01A000 */  lui       $at, 0xa000
 /* 4A2B8 8006EEB8 01C17825 */  or        $t7, $t6, $at
 /* 4A2BC 8006EEBC 3C01800B */  lui       $at, %hi(D_800B0C7C)
-/* 4A2C0 8006EEC0 AC2F0C7C */  sw        $t7, %lo(D_A0000C7C)($at)
+/* 4A2C0 8006EEC0 AC2F0C7C */  sw        $t7, %lo(D_800B0C7C)($at)
 /* 4A2C4 8006EEC4 3C18800B */  lui       $t8, %hi(D_800B0C74)
 /* 4A2C8 8006EEC8 93180C74 */  lbu       $t8, %lo(D_800B0C74)($t8)
 /* 4A2CC 8006EECC 00000000 */  nop       

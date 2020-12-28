@@ -84,7 +84,7 @@ glabel func_80242754_CD4584
 /* CD46B8 80242888 0000102D */   daddu    $v0, $zero, $zero
 /* CD46BC 8024288C 0280202D */  daddu     $a0, $s4, $zero
 /* CD46C0 80242890 0200282D */  daddu     $a1, $s0, $zero
-/* CD46C4 80242894 0C09058A */  jal       UnkNpcAIFunc1
+/* CD46C4 80242894 0C09058A */  jal       flo_16_UnkNpcAIFunc1
 /* CD46C8 80242898 0260302D */   daddu    $a2, $s3, $zero
 /* CD46CC 8024289C 0280202D */  daddu     $a0, $s4, $zero
 /* CD46D0 802428A0 0200282D */  daddu     $a1, $s0, $zero
@@ -94,7 +94,7 @@ glabel func_80242754_CD4584
 /* CD46E0 802428B0 0000102D */   daddu    $v0, $zero, $zero
 /* CD46E4 802428B4 0280202D */  daddu     $a0, $s4, $zero
 /* CD46E8 802428B8 0200282D */  daddu     $a1, $s0, $zero
-/* CD46EC 802428BC 0C09068B */  jal       UnkNpcAIFunc2
+/* CD46EC 802428BC 0C09068B */  jal       flo_16_UnkNpcAIFunc2
 /* CD46F0 802428C0 0260302D */   daddu    $a2, $s3, $zero
 /* CD46F4 802428C4 0280202D */  daddu     $a0, $s4, $zero
 /* CD46F8 802428C8 0200282D */  daddu     $a1, $s0, $zero

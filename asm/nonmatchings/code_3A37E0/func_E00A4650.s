@@ -43,10 +43,10 @@ glabel func_E00A4650
 /* 3A3EC8 E00A46E8 24A20008 */  addiu     $v0, $a1, 8
 /* 3A3ECC E00A46EC AEA20000 */  sw        $v0, ($s5)
 /* 3A3ED0 E00A46F0 8C62001C */  lw        $v0, 0x1c($v1)
-/* 3A3ED4 E00A46F4 3C038000 */  lui       $v1, %hi(D_80001D80)
+/* 3A3ED4 E00A46F4 3C038000 */  lui       $v1, 0x8000
 /* 3A3ED8 E00A46F8 00431021 */  addu      $v0, $v0, $v1
 /* 3A3EDC E00A46FC 3C03800B */  lui       $v1, %hi(gCameras)
-/* 3A3EE0 E00A4700 24631D80 */  addiu     $v1, $v1, %lo(D_80001D80)
+/* 3A3EE0 E00A4700 24631D80 */  addiu     $v1, $v1, %lo(gCameras)
 /* 3A3EE4 E00A4704 ACA20004 */  sw        $v0, 4($a1)
 /* 3A3EE8 E00A4708 8E450004 */  lw        $a1, 4($s2)
 /* 3A3EEC E00A470C 8E460008 */  lw        $a2, 8($s2)

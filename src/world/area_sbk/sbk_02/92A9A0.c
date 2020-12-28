@@ -14,7 +14,7 @@ INCLUDE_ASM(s32, "world/area_sbk/sbk_02/92A9A0", func_80240A44_92ACF4);
 
 #include "world/common/GetItemName.inc.c"
 
-static ApiStatus PostChapter2StatUpdate(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus PostChapter2StatUpdate(ScriptInstance* script, s32 isInitialCall) {
     PlayerData* playerData = PLAYER_DATA;
 
     set_max_SP(2);
@@ -26,7 +26,7 @@ static ApiStatus PostChapter2StatUpdate(ScriptInstance* script, s32 isInitialCal
 
 INCLUDE_ASM(s32, "world/area_sbk/sbk_02/92A9A0", func_80240B98_92AE48);
 
-static ApiStatus GetItemCount(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus GetItemCount(ScriptInstance* script, s32 isInitialCall) {
     script->varTable[0] = get_item_count();
     return ApiStatus_DONE2;
 }

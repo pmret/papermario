@@ -9,7 +9,7 @@ void nuContPakMgrRemove(void) {
     nuSiCallBackRemove(&nuContCallBack);
 }
 
-static s32 contPakOpen(NUSiCommonMesg* mesg) {
+s32 contPakOpen(NUSiCommonMesg* mesg) {
     s32 err;
     NUContPakFile* file = (NUContPakFile*) mesg->dataPtr;
 
@@ -23,20 +23,20 @@ static s32 contPakOpen(NUSiCommonMesg* mesg) {
     return err;
 }
 
-static s32 contPakFree(NUSiCommonMesg* mesg) {
+s32 contPakFree(NUSiCommonMesg* mesg) {
     NUContPakFreeMesg* freeMesg = (NUContPakFreeMesg*) mesg->dataPtr;
 
     return osPfsFreeBlocks(freeMesg->file->pfs, &freeMesg->size);
 }
 
-static s32 contPakFileReadWrite(NUSiCommonMesg* mesg) {
+s32 contPakFileReadWrite(NUSiCommonMesg* mesg) {
     NUContPakFileRWMesg* rwMesg = (NUContPakFileRWMesg*) mesg->dataPtr;
 
     return osPfsReadWriteFile(rwMesg->file->pfs, rwMesg->file->file_no, rwMesg->mode, rwMesg->offset, rwMesg->size,
                               rwMesg->buf);
 }
 
-static s32 contPakFileOpen(NUSiCommonMesg* mesg) {
+s32 contPakFileOpen(NUSiCommonMesg* mesg) {
     NUContPakFileOpenMesg* openMesg = mesg->dataPtr;
     NUContPakFile* file = openMesg->file;
     s32 err;
@@ -52,26 +52,26 @@ static s32 contPakFileOpen(NUSiCommonMesg* mesg) {
     return err;
 }
 
-static s32 contPakFileDelete(NUSiCommonMesg* mesg) {
+s32 contPakFileDelete(NUSiCommonMesg* mesg) {
     NUContPakFileOpenMesg* openMesg = (NUContPakFileOpenMesg*) mesg->dataPtr;
 
     return osPfsDeleteFile(openMesg->file->pfs, nuContPakCompanyCode, nuContPakGameCode, openMesg->noteName,
                            openMesg->extName);
 }
 
-static s32 contPakFileState(NUSiCommonMesg* mesg) {
+s32 contPakFileState(NUSiCommonMesg* mesg) {
     NUContPakFileStateMesg* state = (NUContPakFileStateMesg*) mesg->dataPtr;
 
     return osPfsFileState(state->file->pfs, state->file->file_no, state->state);
 }
 
-static s32 contPakFileNum(NUSiCommonMesg* mesg) {
+s32 contPakFileNum(NUSiCommonMesg* mesg) {
     NUContPakFileNumMesg* fileNum = (NUContPakFileNumMesg*) mesg->dataPtr;
 
     return osPfsNumFiles(fileNum->file->pfs, fileNum->max_files, fileNum->used_files);
 }
 
-static s32 contPakRepairId(NUSiCommonMesg* mesg) {
+s32 contPakRepairId(NUSiCommonMesg* mesg) {
     NUContPakFile* file = (NUContPakFile*) mesg->dataPtr;
 
     return osPfsRepairId(file->pfs);

@@ -186,15 +186,15 @@ glabel func_80241F6C_91161C
 /* 9118D0 80242220 0260202D */   daddu    $a0, $s3, $zero
 /* 9118D4 80242224 08090899 */  j         .L80242264
 /* 9118D8 80242228 00000000 */   nop      
-/* 9118DC 8024222C 0C090255 */  jal       UnkSetDurationFunc
+/* 9118DC 8024222C 0C090255 */  jal       iwa_01_UnkSetDurationFunc
 /* 9118E0 80242230 0260202D */   daddu    $a0, $s3, $zero
 /* 9118E4 80242234 08090899 */  j         .L80242264
 /* 9118E8 80242238 00000000 */   nop      
-/* 9118EC 8024223C 0C090266 */  jal       UnkNpcAIFunc9
+/* 9118EC 8024223C 0C090266 */  jal       iwa_01_UnkNpcAIFunc9
 /* 9118F0 80242240 0260202D */   daddu    $a0, $s3, $zero
 /* 9118F4 80242244 08090899 */  j         .L80242264
 /* 9118F8 80242248 00000000 */   nop      
-/* 9118FC 8024224C 0C09028E */  jal       UnkDurationCheck
+/* 9118FC 8024224C 0C09028E */  jal       iwa_01_UnkDurationCheck
 /* 911900 80242250 0260202D */   daddu    $a0, $s3, $zero
 /* 911904 80242254 08090899 */  j         .L80242264
 /* 911908 80242258 00000000 */   nop      

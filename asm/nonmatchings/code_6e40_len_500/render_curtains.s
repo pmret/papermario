@@ -162,12 +162,12 @@ glabel render_curtains
 /* 70E8 8002BCE8 AC500004 */  sw        $s0, 4($v0)
 /* 70EC 8002BCEC 24A20008 */  addiu     $v0, $a1, 8
 /* 70F0 8002BCF0 AE220000 */  sw        $v0, ($s1)
-/* 70F4 8002BCF4 3C02FA00 */  lui       $v0, %hi(D_FA006078)
+/* 70F4 8002BCF4 3C02FA00 */  lui       $v0, 0xfa00
 /* 70F8 8002BCF8 ACA20000 */  sw        $v0, ($a1)
 /* 70FC 8002BCFC 24A20010 */  addiu     $v0, $a1, 0x10
 /* 7100 8002BD00 AE220000 */  sw        $v0, ($s1)
 /* 7104 8002BD04 3C028007 */  lui       $v0, %hi(D_80076078)
-/* 7108 8002BD08 24426078 */  addiu     $v0, $v0, %lo(D_FA006078)
+/* 7108 8002BD08 24426078 */  addiu     $v0, $v0, %lo(D_80076078)
 /* 710C 8002BD0C ACB40008 */  sw        $s4, 8($a1)
 /* 7110 8002BD10 ACA2000C */  sw        $v0, 0xc($a1)
 /* 7114 8002BD14 C6620000 */  lwc1      $f2, ($s3)

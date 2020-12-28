@@ -1,6 +1,7 @@
 #include "common.h"
+#include "map.h"
 
-static ApiStatus SomeItemEntityFunc(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus M(SomeItemEntityFunc)(ScriptInstance* script, s32 isInitialCall) {
     ItemEntity* itemEntity = get_item_entity(script->varTable[0]);
 
     if (isInitialCall) {
