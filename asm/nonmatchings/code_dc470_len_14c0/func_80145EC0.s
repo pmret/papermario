@@ -526,10 +526,10 @@ glabel func_80145EC0
 /* DCD90 80146690 3484C000 */  ori       $a0, $a0, 0xc000
 /* DCD94 80146694 25820040 */  addiu     $v0, $t4, 0x40
 /* DCD98 80146698 ADA20000 */  sw        $v0, ($t5)
-/* DCD9C 8014669C 3C02FD10 */  lui       $v0, %hi(D_FD0F93A0)
+/* DCD9C 8014669C 3C02FD10 */  lui       $v0, 0xfd10
 /* DCDA0 801466A0 AD820038 */  sw        $v0, 0x38($t4)
 /* DCDA4 801466A4 3C028016 */  lui       $v0, %hi(D_801593A0)
-/* DCDA8 801466A8 244293A0 */  addiu     $v0, $v0, %lo(D_FD0F93A0)
+/* DCDA8 801466A8 244293A0 */  addiu     $v0, $v0, %lo(D_801593A0)
 /* DCDAC 801466AC AD82003C */  sw        $v0, 0x3c($t4)
 /* DCDB0 801466B0 25820048 */  addiu     $v0, $t4, 0x48
 /* DCDB4 801466B4 ADA20000 */  sw        $v0, ($t5)

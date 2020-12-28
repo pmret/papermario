@@ -1,6 +1,7 @@
 #include "common.h"
+#include "map.h"
 
-static void SetPartnerFlags80000(void) {
+void M(SetPartnerFlags80000)(void) {
     Npc* partner = get_npc_safe(NpcId_PARTNER);
 
     if (partner != NULL) {

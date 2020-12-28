@@ -101,10 +101,10 @@ glabel func_E008E4E0
 /* 38F4C0 E008E660 24A20008 */  addiu     $v0, $a1, 8
 /* 38F4C4 E008E664 AC830004 */  sw        $v1, 4($a0)
 /* 38F4C8 E008E668 AE820000 */  sw        $v0, ($s4)
-/* 38F4CC E008E66C 3C02DE00 */  lui       $v0, %hi(D_DE000080)
+/* 38F4CC E008E66C 3C02DE00 */  lui       $v0, 0xde00
 /* 38F4D0 E008E670 ACA20000 */  sw        $v0, ($a1)
 /* 38F4D4 E008E674 3C020900 */  lui       $v0, 0x900
-/* 38F4D8 E008E678 24420080 */  addiu     $v0, $v0, %lo(D_DE000080)
+/* 38F4D8 E008E678 24420080 */  addiu     $v0, $v0, 0x80
 /* 38F4DC E008E67C ACA20004 */  sw        $v0, 4($a1)
 /* 38F4E0 E008E680 24A20010 */  addiu     $v0, $a1, 0x10
 /* 38F4E4 E008E684 AE820000 */  sw        $v0, ($s4)

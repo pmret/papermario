@@ -2,7 +2,9 @@
 
 INCLUDE_ASM(s32, "world/area_hos/hos_06/A3B4B0", func_80241FD0_A3B4B0);
 
+#define MAP_NAME dup_hos_06
 #include "world/common/GetItemName.inc.c"
+#define MAP_NAME hos_06
 
 #include "world/common/SomeItemEntityFunc.inc.c"
 

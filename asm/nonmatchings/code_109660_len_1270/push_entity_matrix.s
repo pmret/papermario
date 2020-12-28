@@ -67,11 +67,11 @@ glabel push_entity_matrix
 /* 10A7C4 802E8F44 8E430000 */  lw        $v1, ($s2)
 /* 10A7C8 802E8F48 00541021 */  addu      $v0, $v0, $s4
 /* 10A7CC 802E8F4C 00621821 */  addu      $v1, $v1, $v0
-/* 10A7D0 802E8F50 3C02DE00 */  lui       $v0, %hi(D_DE000680)
+/* 10A7D0 802E8F50 3C02DE00 */  lui       $v0, 0xde00
 /* 10A7D4 802E8F54 AC830004 */  sw        $v1, 4($a0)
 /* 10A7D8 802E8F58 ACA20000 */  sw        $v0, ($a1)
 /* 10A7DC 802E8F5C 3C020A00 */  lui       $v0, 0xa00
-/* 10A7E0 802E8F60 24420680 */  addiu     $v0, $v0, %lo(D_DE000680)
+/* 10A7E0 802E8F60 24420680 */  addiu     $v0, $v0, 0x680
 /* 10A7E4 802E8F64 ACA20004 */  sw        $v0, 4($a1)
 /* 10A7E8 802E8F68 24020040 */  addiu     $v0, $zero, 0x40
 /* 10A7EC 802E8F6C ACC70000 */  sw        $a3, ($a2)

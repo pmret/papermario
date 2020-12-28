@@ -8,5 +8,6 @@ INCLUDE_ASM(s32, "world/area_jan/jan_04/B451F0", func_80240BE8_B45358);
 
 INCLUDE_ASM(s32, "world/area_jan/jan_04/B451F0", func_80240D0C_B4547C);
 
+#define MAP_NAME dup_jan_04
 #include "world/common/SomeMatrixOperations.inc.c"
-
+#define MAP_NAME jan_04

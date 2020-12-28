@@ -141,7 +141,7 @@ glabel func_80240B94_BE8774
 /* BE897C 80240D9C 00000000 */   nop      
 /* BE8980 80240DA0 0280202D */  daddu     $a0, $s4, $zero
 /* BE8984 80240DA4 0260282D */  daddu     $a1, $s3, $zero
-/* BE8988 80240DA8 0C090100 */  jal       UnkNpcAIFunc1
+/* BE8988 80240DA8 0C090100 */  jal       arn_05_UnkNpcAIFunc1
 /* BE898C 80240DAC 02A0302D */   daddu    $a2, $s5, $zero
 /* BE8990 80240DB0 0280202D */  daddu     $a0, $s4, $zero
 /* BE8994 80240DB4 0260282D */  daddu     $a1, $s3, $zero
@@ -157,11 +157,11 @@ glabel func_80240B94_BE8774
 /* BE89BC 80240DDC 00000000 */   nop      
 /* BE89C0 80240DE0 0280202D */  daddu     $a0, $s4, $zero
 /* BE89C4 80240DE4 0260282D */  daddu     $a1, $s3, $zero
-/* BE89C8 80240DE8 0C0901CC */  jal       NpcJumpFunc2
+/* BE89C8 80240DE8 0C0901CC */  jal       arn_05_NpcJumpFunc2
 /* BE89CC 80240DEC 02A0302D */   daddu    $a2, $s5, $zero
 /* BE89D0 80240DF0 0280202D */  daddu     $a0, $s4, $zero
 /* BE89D4 80240DF4 0260282D */  daddu     $a1, $s3, $zero
-/* BE89D8 80240DF8 0C0901E9 */  jal       NpcJumpFunc
+/* BE89D8 80240DF8 0C0901E9 */  jal       arn_05_NpcJumpFunc
 /* BE89DC 80240DFC 02A0302D */   daddu    $a2, $s5, $zero
 /* BE89E0 80240E00 0809039A */  j         .L80240E68
 /* BE89E4 80240E04 00000000 */   nop      
@@ -177,7 +177,7 @@ glabel func_80240B94_BE8774
 /* BE8A0C 80240E2C 00000000 */   nop      
 /* BE8A10 80240E30 0280202D */  daddu     $a0, $s4, $zero
 /* BE8A14 80240E34 0260282D */  daddu     $a1, $s3, $zero
-/* BE8A18 80240E38 0C09029B */  jal       UnkNpcDurationFlagFunc
+/* BE8A18 80240E38 0C09029B */  jal       arn_05_UnkNpcDurationFlagFunc
 /* BE8A1C 80240E3C 02A0302D */   daddu    $a2, $s5, $zero
 /* BE8A20 80240E40 0809039A */  j         .L80240E68
 /* BE8A24 80240E44 00000000 */   nop      

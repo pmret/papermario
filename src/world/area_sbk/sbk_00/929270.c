@@ -53,7 +53,7 @@ Script M(Main) = SCRIPT({
     SetCamLeadPlayer(0, 0);
     MakeNpcs(0, M(npcGroupList_80240768));
     await M(MakeEntities);
-    SpawnSunEffect();
+    M(SpawnSunEffect)();
     SetMusicTrack(0, 23, 0, 8);
     SI_VAR(0) = M(Script_80240198);
     spawn EnterWalk;
