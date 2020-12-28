@@ -114,6 +114,7 @@ nuGfxZBuffer = 0x8009A5DC;
 nuGfxDisplay = 0x8009A5F8;
 gGameState = 0x8009A600;
 D_8009A610 = 0x8009A610;
+D_8009A630 = 0x8009A630;
 
 nuGfxTaskSpool = 0x8009A618;
 carthandle = 0x8009A638;
