@@ -1,4 +1,4 @@
 #include "common.h"
 #include "map.h"
 
-#define MAP_NAME mac_03
+#define NAMESPACE mac_03

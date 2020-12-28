@@ -1,4 +1,4 @@
 #include "common.h"
 #include "map.h"
 
-#define MAP_NAME pra_02
+#define NAMESPACE pra_02

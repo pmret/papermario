@@ -1,4 +1,4 @@
 #include "common.h"
 #include "map.h"
 
-#define MAP_NAME kmr_20
+#define NAMESPACE kmr_20

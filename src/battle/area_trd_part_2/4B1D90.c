@@ -1,6 +1,8 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "battle/area_trd_part_2/4B1D90", func_80218BA0_4B1D90);
+#define NAMESPACE b_area_trd_part_2
+
+#include "common/StartRumbleWithParams.inc.c"
 
 INCLUDE_ASM(s32, "battle/area_trd_part_2/4B1D90", func_80218BF8_4B1DE8);
 

@@ -1,5 +1,7 @@
 #include "common.h"
 
+#define NAMESPACE b_area_dig
+
 INCLUDE_ASM(s32, "battle/area_dig/6DDDC0", func_80218000_6DDDC0);
 
 INCLUDE_ASM(s32, "battle/area_dig/6DDDC0", func_802180D0_6DDE90);

@@ -1,7 +1,7 @@
 #include "common.h"
 #include "map.h"
 
-ApiStatus M(UnkFunc1)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(UnkFunc1)(ScriptInstance* script, s32 isInitialCall) {
     increment_status_menu_disabled();
     func_80137DA4(0, 255.0f);
     return ApiStatus_DONE2;

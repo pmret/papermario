@@ -1,6 +1,8 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "battle/area_flo2/5CE690", func_80218000_5CE690);
+#define NAMESPACE b_area_flo2
+
+#include "common/StartRumbleWithParams.inc.c"
 
 INCLUDE_ASM(s32, "battle/area_flo2/5CE690", func_80218058_5CE6E8);
 

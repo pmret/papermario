@@ -1,5 +1,7 @@
 #include "common.h"
 
+#define NAMESPACE b_area_flo
+
 INCLUDE_ASM(s32, "battle/area_flo/5B16A0", func_802181F0_5B16A0);
 
 INCLUDE_ASM(s32, "battle/area_flo/5B16A0", func_80218380_5B1830);
@@ -12,7 +14,7 @@ INCLUDE_ASM(s32, "battle/area_flo/5B16A0", func_802186B8_5B1B68);
 
 INCLUDE_ASM(s32, "battle/area_flo/5B16A0", func_802186E4_5B1B94);
 
-INCLUDE_ASM(s32, "battle/area_flo/5B16A0", func_802187B0_5B1C60);
+#include "common/StartRumbleWithParams.inc.c"
 
 INCLUDE_ASM(s32, "battle/area_flo/5B16A0", func_80218808_5B1CB8);
 
@@ -22,7 +24,9 @@ INCLUDE_ASM(s32, "battle/area_flo/5B16A0", func_80218A28_5B1ED8);
 
 INCLUDE_ASM(s32, "battle/area_flo/5B16A0", func_80218A54_5B1F04);
 
-INCLUDE_ASM(s32, "battle/area_flo/5B16A0", func_80218B20_5B1FD0);
+#define NAMESPACE dup_b_area_flo
+#include "common/StartRumbleWithParams.inc.c"
+#define NAMESPACE b_area_flo
 
 INCLUDE_ASM(s32, "battle/area_flo/5B16A0", func_80218B78_5B2028);
 
@@ -32,7 +36,9 @@ INCLUDE_ASM(s32, "battle/area_flo/5B16A0", func_80218D98_5B2248);
 
 INCLUDE_ASM(s32, "battle/area_flo/5B16A0", func_80218DC4_5B2274);
 
-INCLUDE_ASM(s32, "battle/area_flo/5B16A0", func_80218E90_5B2340);
+#define NAMESPACE dup2_b_area_flo
+#include "common/StartRumbleWithParams.inc.c"
+#define NAMESPACE b_area_flo
 
 INCLUDE_ASM(s32, "battle/area_flo/5B16A0", func_80218EE8_5B2398);
 
@@ -46,7 +52,9 @@ INCLUDE_ASM(s32, "battle/area_flo/5B16A0", func_80219208_5B26B8);
 
 INCLUDE_ASM(s32, "battle/area_flo/5B16A0", func_80219234_5B26E4);
 
-INCLUDE_ASM(s32, "battle/area_flo/5B16A0", func_80219300_5B27B0);
+#define NAMESPACE dup3_b_area_flo
+#include "common/StartRumbleWithParams.inc.c"
+#define NAMESPACE b_area_flo
 
 INCLUDE_ASM(s32, "battle/area_flo/5B16A0", func_80219358_5B2808);
 

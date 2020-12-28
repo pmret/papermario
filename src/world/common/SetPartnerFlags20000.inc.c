@@ -1,6 +1,6 @@
 #include "common.h"
 
-void M(SetPartnerFlags20000)(void) {
+void N(SetPartnerFlags20000)(void) {
     Npc* partner = get_npc_safe(NpcId_PARTNER);
 
     if (partner != NULL) {

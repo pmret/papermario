@@ -1,9 +1,9 @@
 #include "kmr_03.h"
 
-s32 M(npcGroupList_80241450)[];
-Script M(MakeEntities);
-Script M(Script_802422B8);
-Script M(Script_80242340);
+s32 N(npcGroupList_80241450)[];
+Script N(MakeEntities);
+Script N(Script_802422B8);
+Script N(Script_80242340);
 
 ApiStatus func_802401B0_8C8140(ScriptInstance* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(0);
@@ -15,16 +15,16 @@ ApiStatus func_802401B0_8C8140(ScriptInstance* script, s32 isInitialCall) {
 #include "world/common/UnkPositionFunc.inc.c"
 
 // 8C8680
-Script M(ExitWalk_802406F0) = EXIT_WALK_SCRIPT(60, 0, "kmr_04", 0);
+Script N(ExitWalk_802406F0) = EXIT_WALK_SCRIPT(60, 0, "kmr_04", 0);
 
-Script M(ExitWalk_8024074C) = EXIT_WALK_SCRIPT(60, 1, "kmr_05", 0);
+Script N(ExitWalk_8024074C) = EXIT_WALK_SCRIPT(60, 1, "kmr_05", 0);
 
-Script M(Script_802407A8) = SCRIPT({
-    bind M(ExitWalk_802406F0) to 0x80000 3;
-    bind M(ExitWalk_8024074C) to 0x80000 5;
+Script N(Script_802407A8) = SCRIPT({
+    bind N(ExitWalk_802406F0) to 0x80000 3;
+    bind N(ExitWalk_8024074C) to 0x80000 5;
 });
 
-Script M(Main) = SCRIPT({
+Script N(Main) = SCRIPT({
     SI_SAVE_VAR(425) = 30;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -32,18 +32,18 @@ Script M(Main) = SCRIPT({
     SetCamEnabled(0, 1);
     SetCamLeadPlayer(0, 0);
     SI_AREA_FLAG(8) = 0;
-    MakeNpcs(0, M(npcGroupList_80241450));
+    MakeNpcs(0, N(npcGroupList_80241450));
     ClearDefeatedEnemies();
-    await M(MakeEntities);
-    await M(Script_802422B8);
-    spawn M(Script_802406C0);
+    await N(MakeEntities);
+    await N(Script_802422B8);
+    spawn N(Script_802406C0);
     GetEntryID(SI_VAR(0));
     if (SI_VAR(0) != 2) {
-        SI_VAR(0) = M(Script_802407A8);
+        SI_VAR(0) = N(Script_802407A8);
         spawn EnterWalk;
     } else {
-        spawn M(Script_802407A8);
-        spawn M(Script_80242340);
+        spawn N(Script_802407A8);
+        spawn N(Script_80242340);
     }
     sleep 1;
 });
@@ -51,12 +51,12 @@ Script M(Main) = SCRIPT({
 s32 padding[] = {0, 0};
 
 // 8C88E0
-s32 M(npcSettings_80240950)[] = {
+s32 N(npcSettings_80240950)[] = {
     0x00000000, 0x00160018, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x00630010,
 };
 
-Script M(Script_8024097C) = SCRIPT({
+Script N(Script_8024097C) = SCRIPT({
 1:
     if (SI_AREA_FLAG(8) == 1) {
 100:
@@ -85,12 +85,12 @@ Script M(Script_8024097C) = SCRIPT({
     goto 1;
 });
 
-Script M(NpcAI_80240B50) = SCRIPT({
+Script N(NpcAI_80240B50) = SCRIPT({
 1:
     match SI_SAVE_VAR(0) {
         == 0xFFFFFF86 {
 89:
-            M(UnkPositionFunc)(0xFFFFFF8A, 86, 0xFFFFFFBA, 0xFFFFFFF1);
+            N(UnkPositionFunc)(0xFFFFFF8A, 86, 0xFFFFFFBA, 0xFFFFFFF1);
             sleep 1;
             if (SI_VAR(0) == 0) {
                 goto 89;
@@ -142,7 +142,7 @@ Script M(NpcAI_80240B50) = SCRIPT({
     }
 });
 
-Script M(Hit_80240F64) = SCRIPT({
+Script N(Hit_80240F64) = SCRIPT({
     SetNpcAnimation(-1, 0x9D0007);
     sleep 10;
     SetNpcAnimation(-1, 0x9D0001);
@@ -177,15 +177,15 @@ Script M(Hit_80240F64) = SCRIPT({
         SetNpcPos(0, 0, 0xFFFFFC18, 0);
         SetNpcFlagBits(0, 256, 0);
         EnablePartnerAI();
-        SetNpcAux(-1, M(Script_8024097C));
-        BindNpcAI(-1, M(NpcAI_80240B50));
+        SetNpcAux(-1, N(Script_8024097C));
+        BindNpcAI(-1, N(NpcAI_80240B50));
     }
 });
 
-Script M(Init_802411A8) = SCRIPT({
-    BindNpcIdle(-1, M(NpcAI_80240B50));
-    BindNpcAux(-1, M(Script_8024097C));
-    BindNpcHit(-1, M(Hit_80240F64));
+Script N(Init_802411A8) = SCRIPT({
+    BindNpcIdle(-1, N(NpcAI_80240B50));
+    BindNpcAux(-1, N(Script_8024097C));
+    BindNpcHit(-1, N(Hit_80240F64));
     match SI_SAVE_VAR(0) {
         >= 0xFFFFFF87 {
             SetNpcFlagBits(-1, 512, 0);
@@ -195,8 +195,8 @@ Script M(Init_802411A8) = SCRIPT({
     }
 });
 
-s32 M(npcGroup_80241260)[] = {
-    0x00000000, M(npcSettings_80240950), 0xC2480000, 0x00000000, 0x42A00000, 0x00400105, M(Init_802411A8), 0x00000000,
+s32 N(npcGroup_80241260)[] = {
+    0x00000000, N(npcSettings_80240950), 0xC2480000, 0x00000000, 0x42A00000, 0x00400105, N(Init_802411A8), 0x00000000,
     0x00000000, 0x0000002D, 0x80000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00007FFF, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
@@ -214,22 +214,22 @@ s32 M(npcGroup_80241260)[] = {
     0x00000000, 0x00000000, 0x00000000, 0x001A0063,
 };
 
-s32 M(npcGroupList_80241450)[] = {
-    0x00000001, M(npcGroup_80241260), 0x00020000, 0x00000000, 0x00000000, 0x00000000,
+s32 N(npcGroupList_80241450)[] = {
+    0x00000001, N(npcGroup_80241260), 0x00020000, 0x00000000, 0x00000000, 0x00000000,
 };
 
 s32 padding2[] = {0, 0};
 
-Script M(Script_80241470) = SCRIPT({
+Script N(Script_80241470) = SCRIPT({
     ModifyColliderFlags(0, 9, 0x7FFFFE00);
     SI_SAVE_VAR(0) = 0xFFFFFF8B;
 });
 
-Script M(Script_802414A8) = SCRIPT({
+Script N(Script_802414A8) = SCRIPT({
     SI_SAVE_FLAG(54) = 1;
 });
 
-Script M(Script_802414C8) = SCRIPT({
+Script N(Script_802414C8) = SCRIPT({
 0:
     GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SetCamTarget(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -237,16 +237,16 @@ Script M(Script_802414C8) = SCRIPT({
     goto 0;
 });
 
-Script M(MakeEntities) = SCRIPT({
+Script N(MakeEntities) = SCRIPT({
     if (SI_SAVE_VAR(0) < 0xFFFFFF8B) {
         MakeEntity(0x802EA10C, 45, 0, 70, 15, 0x80000000);
-        AssignScript(M(Script_80241470));
+        AssignScript(N(Script_80241470));
     } else {
         ModifyColliderFlags(0, 9, 0x7FFFFE00);
     }
     if (SI_SAVE_FLAG(54) == 0) {
         MakeEntity(0x802EA19C, 230, 0, 310, 15, 0x80000000);
-        AssignScript(M(Script_802414A8));
+        AssignScript(N(Script_802414A8));
     }
     MakeEntity(0x802EA588, 230, 60, 310, 15, 151, 0x80000000);
     AssignBlockFlag(SI_SAVE_FLAG(52));

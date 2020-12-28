@@ -1,5 +1,7 @@
 #include "common.h"
 
+#define NAMESPACE b_area_kzn
+
 INCLUDE_ASM(s32, "battle/area_kzn/58C670", func_80218380_58C670);
 
 INCLUDE_ASM(s32, "battle/area_kzn/58C670", func_80218450_58C740);
@@ -12,7 +14,7 @@ INCLUDE_ASM(s32, "battle/area_kzn/58C670", func_80218788_58CA78);
 
 INCLUDE_ASM(s32, "battle/area_kzn/58C670", func_802187B4_58CAA4);
 
-INCLUDE_ASM(s32, "battle/area_kzn/58C670", func_80218880_58CB70);
+#include "common/StartRumbleWithParams.inc.c"
 
 INCLUDE_ASM(s32, "battle/area_kzn/58C670", func_802188D8_58CBC8);
 
@@ -22,7 +24,9 @@ INCLUDE_ASM(s32, "battle/area_kzn/58C670", func_80218AF8_58CDE8);
 
 INCLUDE_ASM(s32, "battle/area_kzn/58C670", func_80218B24_58CE14);
 
-INCLUDE_ASM(s32, "battle/area_kzn/58C670", func_80218BF0_58CEE0);
+#define NAMESPACE dup_b_area_kzn
+#include "common/StartRumbleWithParams.inc.c"
+#define NAMESPACE b_area_kzn
 
 INCLUDE_ASM(s32, "battle/area_kzn/58C670", func_80218C48_58CF38);
 

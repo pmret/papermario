@@ -1102,6 +1102,7 @@ segments:
     overlay: True
     files:
     - [0x5125D0, c]
+    - [0x513380, c]
     - [0x5134B0, c]
     - [0x513790, c]
     - [0x5137E0, bin]
@@ -1287,6 +1288,7 @@ segments:
     overlay: True
     files:
     - [0x63D1E0, c]
+    - [0x63D710, c]
     - [0x63D9F0, c]
     - [0x63F040, bin]
   - name: battle/area_pra/

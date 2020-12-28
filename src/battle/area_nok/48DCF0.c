@@ -1,6 +1,10 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "battle/area_nok/48DCF0", func_80218B50_48DCF0);
+#define NAMESPACE b_area_nok
+
+#define NAMESPACE dup2_b_area_nok
+#include "common/StartRumbleWithParams.inc.c"
+#define NAMESPACE b_area_nok
 
 INCLUDE_ASM(s32, "battle/area_nok/48DCF0", func_80218BA8_48DD48);
 

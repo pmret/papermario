@@ -1,4 +1,4 @@
 #include "common.h"
 #include "map.h"
 
-#define MAP_NAME kkj_17
+#define NAMESPACE kkj_17

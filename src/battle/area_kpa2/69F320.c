@@ -1,6 +1,10 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_80218120_69F320);
+#define NAMESPACE b_area_kpa2
+
+#define NAMESPACE dup_b_area_kpa2
+#include "common/StartRumbleWithParams.inc.c"
+#define NAMESPACE b_area_kpa2
 
 INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_80218178_69F378);
 
@@ -16,7 +20,9 @@ INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_802186D0_69F8D0);
 
 INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_80218AA4_69FCA4);
 
-INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_80218F00_6A0100);
+#define NAMESPACE dup2_b_area_kpa2
+#include "common/StartRumbleWithParams.inc.c"
+#define NAMESPACE b_area_kpa2
 
 INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_80218F58_6A0158);
 
@@ -44,7 +50,9 @@ INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_8021A1B8_6A13B8);
 
 INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_8021A254_6A1454);
 
-INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_8021A2C0_6A14C0);
+#define NAMESPACE dup3_b_area_kpa2
+#include "common/StartRumbleWithParams.inc.c"
+#define NAMESPACE b_area_kpa2
 
 INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_8021A318_6A1518);
 

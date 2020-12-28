@@ -1,4 +1,4 @@
 #include "common.h"
 #include "map.h"
 
-#define MAP_NAME sbk_12
+#define NAMESPACE sbk_12

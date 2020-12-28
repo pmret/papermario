@@ -1,30 +1,30 @@
 #include "kmr_12.h"
 #include "sprite/npc/goomba.h"
 
-Script M(ExitWest) = EXIT_WALK_SCRIPT(60, 0, "kmr_07", 1);
-Script M(ExitEast) = EXIT_WALK_SCRIPT(60, 1, "kmr_11", 0);
+Script N(ExitWest) = EXIT_WALK_SCRIPT(60, 0, "kmr_07", 1);
+Script N(ExitEast) = EXIT_WALK_SCRIPT(60, 1, "kmr_11", 0);
 
-Script M(BindExits) = SCRIPT({
-    bind M(ExitWest) to TriggerFlag_FLOOR_ABOVE 0; // deili1
-    bind M(ExitEast) to TriggerFlag_FLOOR_ABOVE 3; // deili2
+Script N(BindExits) = SCRIPT({
+    bind N(ExitWest) to TriggerFlag_FLOOR_ABOVE 0; // deili1
+    bind N(ExitEast) to TriggerFlag_FLOOR_ABOVE 3; // deili2
 });
 
-Script M(Main) = SCRIPT({
+Script N(Main) = SCRIPT({
     SI_SAVE_VAR(425) = 31;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
     SetCamBGColor(0, 0, 0, 0);
     SetCamEnabled(0, 1);
-    MakeNpcs(0, M(npcGroupList));
-    await M(MakeEntities);
-    spawn M(PlayMusic);
-    SI_VAR(0) = M(BindExits);
+    MakeNpcs(0, N(npcGroupList));
+    await N(MakeEntities);
+    spawn N(PlayMusic);
+    SI_VAR(0) = N(BindExits);
     spawn EnterWalk;
     sleep 1;
-    bind M(ReadWestSign) to TriggerFlag_WALL_INTERACT 10;
+    bind N(ReadWestSign) to TriggerFlag_WALL_INTERACT 10;
 });
 
-NpcAISettings M(goombaAISettings) = {
+NpcAISettings N(goombaAISettings) = {
     .moveSpeed = 1.5f,
     .moveTime = 30,
     .waitTime = 30,
@@ -39,21 +39,21 @@ NpcAISettings M(goombaAISettings) = {
     .unk_2C = TRUE,
 };
 
-Script M(GoombaAI) = SCRIPT({
-    DoBasicAI(M(goombaAISettings));
+Script N(GoombaAI) = SCRIPT({
+    DoBasicAI(N(goombaAISettings));
 });
 
-NpcSettings M(goombaNpcSettings) = {
+NpcSettings N(goombaNpcSettings) = {
     .height = 20,
     .radius = 23,
-    .ai = &M(GoombaAI),
+    .ai = &N(GoombaAI),
     .onHit = &EnemyNpcHit,
     .onDefeat = &EnemyNpcDefeat,
     .level = 5,
 };
 
 /// @bug Never returns
-Script M(ReadWestSign) = SCRIPT({
+Script N(ReadWestSign) = SCRIPT({
     group 0;
 
     // "Eat a Mushroom to regain your energy!"
@@ -82,7 +82,7 @@ Script M(ReadWestSign) = SCRIPT({
     return;
 });
 
-Script M(GoombaIdle) = SCRIPT({
+Script N(GoombaIdle) = SCRIPT({
     sleep 1;
 
     SetSelfVar(0, FALSE);
@@ -130,22 +130,22 @@ Script M(GoombaIdle) = SCRIPT({
     SetSelfEnemyFlagBits(0x40000000, TRUE);
 
     // We're done jumping off; the player can read the sign again
-    bind M(ReadWestSign) to TriggerFlag_WALL_INTERACT 10;
+    bind N(ReadWestSign) to TriggerFlag_WALL_INTERACT 10;
 
     // Behave like a normal enemy from now on
-    BindNpcAI(NpcId_SELF, M(GoombaAI));
+    BindNpcAI(NpcId_SELF, N(GoombaAI));
 });
 
-Script M(GoombaInit) = SCRIPT({
-    BindNpcIdle(NpcId_SELF, M(GoombaIdle));
+Script N(GoombaInit) = SCRIPT({
+    BindNpcIdle(NpcId_SELF, N(GoombaIdle));
 });
 
-StaticNpc M(goombaNpc) = {
+StaticNpc N(goombaNpc) = {
     .id = NpcId_GOOMBA,
-    .settings = &M(goombaNpcSettings),
+    .settings = &N(goombaNpcSettings),
     .pos = { -33.0f, 30.0f, -25.0f },
     .flags = 0x00000C00,
-    .init = M(GoombaInit),
+    .init = N(GoombaInit),
     .yaw = 90,
     .dropFlags = 0x80,
     .itemDropChance = 5,
@@ -186,12 +186,12 @@ StaticNpc M(goombaNpc) = {
     },
 };
 
-NpcGroupList M(npcGroupList) = {
-    NPC_GROUP(M(goombaNpc), BATTLE_ID(1, 0, 3)),
+NpcGroupList N(npcGroupList) = {
+    NPC_GROUP(N(goombaNpc), BATTLE_ID(1, 0, 3)),
     {},
 };
 
-Script M(ReadEastSign) = SCRIPT({
+Script N(ReadEastSign) = SCRIPT({
     func_800441F0($a);
     if ($a == 1) {
         return;
@@ -206,7 +206,7 @@ Script M(ReadEastSign) = SCRIPT({
     func_802D5830(0);
 });
 
-Script M(MakeEntities) = SCRIPT({
+Script N(MakeEntities) = SCRIPT({
     MakeEntity(0x802EAFDC, 436, 0, -42, 0, 0x80000000);
-    AssignScript(M(ReadEastSign));
+    AssignScript(N(ReadEastSign));
 });

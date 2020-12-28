@@ -1,5 +1,7 @@
 #include "common.h"
 
+#define NAMESPACE b_area_isk_part_2
+
 INCLUDE_ASM(s32, "battle/area_isk_part_2/4EF4A0", func_80218000_4EF4A0);
 
 INCLUDE_ASM(s32, "battle/area_isk_part_2/4EF4A0", func_80218150_4EF5F0);

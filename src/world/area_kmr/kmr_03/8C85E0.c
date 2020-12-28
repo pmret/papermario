@@ -1,6 +1,6 @@
 #include "kmr_03.h"
 
-Script M(Script_80242340) = SCRIPT({
+Script N(Script_80242340) = SCRIPT({
     UseSettingsFrom(0, 0xFFFFFEF2, 20, 0xFFFFFFB0);
     SetPanTarget(0, 0xFFFFFEF2, 20, 0xFFFFFFB0);
     SetCamDistance(0, 700.0);

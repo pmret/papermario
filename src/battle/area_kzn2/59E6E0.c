@@ -1,6 +1,8 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "battle/area_kzn2/59E6E0", func_80218000_59E6E0);
+#define NAMESPACE b_area_kzn2
+
+#include "common/StartRumbleWithParams.inc.c"
 
 INCLUDE_ASM(s32, "battle/area_kzn2/59E6E0", func_80218058_59E738);
 

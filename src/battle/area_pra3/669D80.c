@@ -1,5 +1,7 @@
 #include "common.h"
 
+#define NAMESPACE b_area_pra3
+
 INCLUDE_ASM(s32, "battle/area_pra3/669D80", func_80218000_669D80);
 
 INCLUDE_ASM(s32, "battle/area_pra3/669D80", func_80218890_66A610);

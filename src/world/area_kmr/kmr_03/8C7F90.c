@@ -1,7 +1,7 @@
 #include "kmr_03.h"
 #include "../../partners.h"
 
-Script M(Main);
+Script N(Main);
 
 ApiStatus func_80240000_8C7F90(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -51,20 +51,20 @@ ApiStatus func_80240000_8C7F90(ScriptInstance* script, s32 isInitialCall) {
 #include "world/common/CheckPartnerFlags1000.inc.c"
 
 // 8C85E0
-Vec4f M(entryList)[] = {
+Vec4f N(entryList)[] = {
     { -340.0f, 0.0f, 348.0f, 48.0f },
     { 480.0f, 0.0f, 0.0f, 270.0f },
     { -310.0f, 20.0f, -80.0f, 135.0f },
 };
 
-MapConfig M(config) = {
-    .main = M(Main),
-    .entryList = M(entryList),
-    .entryCount = ENTRY_COUNT(M(entryList)),
+MapConfig N(config) = {
+    .main = N(Main),
+    .entryList = N(entryList),
+    .entryCount = ENTRY_COUNT(N(entryList)),
     .background = &gBackgroundImage,
     .tattle = MessageID_TATTLE_KMR_03,
 };
 
-Script M(Script_802406C0) = SCRIPT({
+Script N(Script_802406C0) = SCRIPT({
     SetMusicTrack(0, 17, 0, 8);
 });

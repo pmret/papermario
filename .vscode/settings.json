@@ -27,4 +27,8 @@
     "[c]": {
         "editor.wordSeparators": "`~!@#%^&*()-=+[{]}\\|;:'\",.<>/?", // no $, for scripts
     },
+    "files.associations": {
+        "*.tcc": "c",
+        "ratio": "c"
+    },
 }

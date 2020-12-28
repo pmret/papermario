@@ -495,13 +495,15 @@ void show_foreground_models(void) {
     }
 }
 
-ApiStatus StartRumbleWithParams(ScriptInstance* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
 
-    start_rumble(get_variable(script, *args++), get_variable(script, *args++));
+#include "common/StartRumbleWithParams.inc.c"
+// ApiStatus StartRumbleWithParams(ScriptInstance* script, s32 isInitialCall) {
+//     Bytecode* args = script->ptrReadPos;
 
-    return ApiStatus_DONE2;
-}
+//     start_rumble(get_variable(script, *args++), get_variable(script, *args++));
+
+//     return ApiStatus_DONE2;
+// }
 
 INCLUDE_ASM(s32, "code_190B20", start_rumble_type);
 

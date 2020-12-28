@@ -1,6 +1,10 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "battle/area_tik2/608CB0", func_80218200_608CB0);
+#define NAMESPACE b_area_tik2
+
+#define NAMESPACE dup_b_area_tik2
+#include "common/StartRumbleWithParams.inc.c"
+#define NAMESPACE b_area_tik2
 
 INCLUDE_ASM(s32, "battle/area_tik2/608CB0", func_80218258_608D08);
 
@@ -12,7 +16,9 @@ INCLUDE_ASM(s32, "battle/area_tik2/608CB0", func_80218404_608EB4);
 
 INCLUDE_ASM(s32, "battle/area_tik2/608CB0", func_802184E4_608F94);
 
-INCLUDE_ASM(s32, "battle/area_tik2/608CB0", func_80218680_609130);
+#define NAMESPACE dup2_b_area_tik2
+#include "common/StartRumbleWithParams.inc.c"
+#define NAMESPACE b_area_tik2
 
 INCLUDE_ASM(s32, "battle/area_tik2/608CB0", func_802186D8_609188);
 
@@ -22,7 +28,9 @@ INCLUDE_ASM(s32, "battle/area_tik2/608CB0", func_80218804_6092B4);
 
 INCLUDE_ASM(s32, "battle/area_tik2/608CB0", func_80218884_609334);
 
-INCLUDE_ASM(s32, "battle/area_tik2/608CB0", func_80218A20_6094D0);
+#define NAMESPACE dup3_b_area_tik2
+#include "common/StartRumbleWithParams.inc.c"
+#define NAMESPACE b_area_tik2
 
 INCLUDE_ASM(s32, "battle/area_tik2/608CB0", func_80218A78_609528);
 

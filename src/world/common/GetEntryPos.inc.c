@@ -1,7 +1,7 @@
 #include "common.h"
 #include "map.h"
 
-ApiStatus M(GetEntryPos)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(GetEntryPos)(ScriptInstance* script, s32 isInitialCall) {
     MapConfig* mapConfig = get_current_map_header();
     s32 index = get_variable(script, SI_VAR(0));
 

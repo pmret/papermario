@@ -1,5 +1,7 @@
 #include "common.h"
 
+#define NAMESPACE b_area_omo
+
 INCLUDE_ASM(s32, "battle/area_omo/5125D0", func_80218000_5125D0);
 
 INCLUDE_ASM(s32, "battle/area_omo/5125D0", func_802180D0_5126A0);
@@ -28,8 +30,4 @@ INCLUDE_ASM(s32, "battle/area_omo/5125D0", func_80218B38_513108);
 
 INCLUDE_ASM(s32, "battle/area_omo/5125D0", func_80218CF4_5132C4);
 
-INCLUDE_ASM(s32, "battle/area_omo/5125D0", func_80218D54_513324);
-
-INCLUDE_ASM(s32, "battle/area_omo/5125D0", func_80218DB0_513380);
-
-INCLUDE_ASM(s32, "battle/area_omo/5125D0", func_80218E08_5133D8);
+#include "common/StartRumbleWithParams.inc.c"

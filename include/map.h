@@ -7,7 +7,7 @@
 
 // TODO: consider moving Npc here
 
-#define M(sym) NAMESPACE(MAP_NAME, sym)
+#define N(sym) NS(NAMESPACE, sym)
 
 #define ENTRY_COUNT(entryList) (sizeof(entryList) / sizeof(Vec4f))
 

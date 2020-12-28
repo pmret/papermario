@@ -1,7 +1,7 @@
 #include "common.h"
 #include "map.h"
 
-void M(set_script_owner_npc_col_height)(ScriptInstance* script) {
+void N(set_script_owner_npc_col_height)(ScriptInstance* script) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
