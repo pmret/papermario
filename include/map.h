@@ -237,14 +237,14 @@ typedef struct Enemy {
     /* 0xDC */ char unk_DC[20];
 } Enemy; // size = 0xF0
 
+/// Zero-terminated.
 typedef struct {
     /* 0x00 */ s32 npcCount;
     /* 0x04 */ StaticNpc* npcs;
-    /* 0x08 */ FormationID formationID;
+    /* 0x08 */ BattleID battle;
 } NpcGroupList[]; // size = 0x0C
 
-#define NPC_GROUP(npcs, formationID) { sizeof(npcs) / sizeof(StaticNpc), &npcs, formationID }
-#define NPC_GROUP_LIST_END() { 0, 0, 0 }
+#define NPC_GROUP(npcs, battle) { sizeof(npcs) / sizeof(StaticNpc), &npcs, battle }
 
 Enemy* get_enemy(NpcId npcId);
 MapConfig* get_current_map_header(void);
