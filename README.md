@@ -24,6 +24,16 @@ $ ./install.sh
 
 Our install script does not yet support distros other than Ubuntu, Arch, and their derivatives. Please consider contributing to the script if you use another distro!
 
+##### Docker
+
+A Docker image containing all dependencies can be built and ran as follows:
+```sh
+# build image
+$ docker build . -t pm
+# spin up container, mounting current directory inside
+$ docker run --rm -ti -v $(pwd):/papermario pm
+```
+
 #### Base ROM
 
 You'll need a Paper Mario (USA) ROM to work on this project. Copy it into the root directory of the repository with the name `baserom.z64`.
