@@ -6898,8 +6898,15 @@ segments:
     vram: 0x802B7000
     files:
     - [0xE21870, c]
-    - [0xE21EB0, "bin"]
-  - [0xE225B0, "bin"]
+    - [0xE21EB0, bin]
+  - type: code
+    overlay: True
+    start: 0xE225B0
+    vram: 0x802B7000
+    files:
+      - [0xE225B0, c]
+      - [0xE22B30, bin]
+  - [0xE23260, "bin"]
   - [0xF007C0, "bin", "Battle_Fanfare_02"] # BGM start
   - [0xF02160, "bin", "Hey_You_03"]
   - [0xF03740, "bin", "The_Goomba_King_s_Decree_07"]

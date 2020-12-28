@@ -2,7 +2,6 @@
 #define _CODE_190B20_H_
 
 #include "common.h"
-#include "code_a5dd0_len_114e0.h"
 
 void player_create_target_list(Actor* actor);
 void enemy_create_target_list(Actor* actor);
