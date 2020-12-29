@@ -934,7 +934,8 @@ segments:
     files:
     - [0x4309A0, c]
     - [0x431B80, .data, battle/area_kmr_part_1/battles]
-    - [0x431FB0, bin, battle/area_kmr_part_1/goomba]
+    - [0x431FB0, .data, battle/actor/goomba]
+    - [0x433970, bin]
     - [0x4398A0, .rodata, battle/area_kmr_part_1/battles]
     - [0x439984, bin]
   - name: battle/area_kmr_part_2/

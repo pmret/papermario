@@ -11,7 +11,7 @@ import disasm_script
 
 DIR = os.path.dirname(__file__)
 
-def disassemble(bytes, midx, symbol_map={}, comments=True):
+def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
     out = ""
 
     entry_list_name = None
@@ -22,7 +22,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True):
         name = struct["name"]
 
         if comments:
-            out += f"// {struct['start']:X}-{struct['end']:X} (VRAM: {struct['vaddr']:X})\n"
+            out += f"// {romstart+struct['start']:X}-{romstart+struct['end']:X} (VRAM: {struct['vaddr']:X})\n"
 
         # format struct
         if struct["type"].startswith("Script"):
@@ -194,5 +194,5 @@ if __name__ == "__main__":
 
     with open(os.path.join(DIR, "../baserom.z64"), "rb") as romfile:
         romfile.seek(eval(args.offset))
-        disasm = disassemble(romfile, midx, symbol_map, args.comments)
+        disasm = disassemble(romfile, midx, symbol_map, args.comments, eval(args.offset))
         print(disasm.rstrip())

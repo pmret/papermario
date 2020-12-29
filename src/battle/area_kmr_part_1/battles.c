@@ -6,41 +6,41 @@
 #include "battle/actor/spiked_goomba.h"
 
 Formation formation0 = {
-    { goomba, .position = 1, .priority = 10 },
+    { &goomba, .position = 1, .priority = 10 },
 };
 
 Formation formation1 = {
-    { goomba, .position = 1, .priority = 10 },
-    { goomba, .position = 2, .priority = 9 },
+    { &goomba, .position = 1, .priority = 10 },
+    { &goomba, .position = 2, .priority = 9 },
 };
 
 Formation formation2 = {
-    { goomba, .position = 0, .priority = 10 },
-    { goomba, .position = 1, .priority = 9 },
-    { goomba, .position = 2, .priority = 8 },
+    { &goomba, .position = 0, .priority = 10 },
+    { &goomba, .position = 1, .priority = 9 },
+    { &goomba, .position = 2, .priority = 8 },
 };
 
 Formation formation3 = {
-    { goomba, .position = 1, .priority = 10 },
+    { &goomba, .position = 1, .priority = 10 },
     { paragoomba, .position = 6, .priority = 9 },
 };
 
 Formation formation4 = {
-    { goomba, .position = 0, .priority = 10 },
-    { goomba, .position = 1, .priority = 9 },
-    { goomba, .position = 2, .priority = 8 },
-    { goomba, .position = 3, .priority = 7 },
+    { &goomba, .position = 0, .priority = 10 },
+    { &goomba, .position = 1, .priority = 9 },
+    { &goomba, .position = 2, .priority = 8 },
+    { &goomba, .position = 3, .priority = 7 },
 };
 
 Formation formation5 = {
-    { goomba, .position = 1, .priority = 10 },
+    { &goomba, .position = 1, .priority = 10 },
     { spikedGoomba, .position = 2, .priority = 9 },
 };
 
 Formation formation6 = {
-    { goomba, .position = 0, .priority = 10 },
+    { &goomba, .position = 0, .priority = 10 },
     { paragoomba, .position = 5, .priority = 9 },
-    { goomba, .position = 2, .priority = 8 },
+    { &goomba, .position = 2, .priority = 8 },
     { paragoomba, .position = 7, .priority = 7 },
 };
 
@@ -65,7 +65,7 @@ Formation formation10 = {
 
 Formation formation11 = {
     { spikedGoomba, .position = 1, .priority = 10 },
-    { goomba, .position = 2, .priority = 9 },
+    { &goomba, .position = 2, .priority = 9 },
 };
 
 BattleList area_kmr_part_1_battles = {

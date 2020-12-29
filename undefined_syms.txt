@@ -324,6 +324,10 @@ DoShockHit = 0x8029A6FC;
 DoSleepHit = 0x802945E0;
 DoSpinSmashHit = 0x8029B998;
 DoStopHit = 0x80294650;
+DoAirLift = 0x8029C37C;
+DoBlowAway = 0x8029C4A8;
+DoBurnHit = 0x8029A0D0;
+DoDeath = 0x8029AEC0;
 ShakeCam1 = 0x802D9CB0;
 ShakeCamX = 0x802D9CE8;
 

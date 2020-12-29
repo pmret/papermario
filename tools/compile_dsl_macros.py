@@ -260,12 +260,12 @@ class LabelAllocation(Visitor):
             raise CompileError(f"label `{name}' already declared", tree.meta)
 
         try:
-            label_idx = int(name, base=0)
+            label_idx = int(name)
 
-            while len(self.labels) < label_idx:
+            while len(self.labels) <= label_idx:
                 self.labels.append(None)
 
-            self.labels.insert(label_idx, name)
+            self.labels[label_idx] = name
         except ValueError:
             self.labels.append(name)
 
@@ -391,7 +391,7 @@ class Compile(Transformer):
             return [tree.children[0], *tree.children[1]]
 
     def case_else(self, tree):
-        return [Cmd("ScriptOpcode_ELSE"), *tree.children[0]]
+        return [Cmd("ScriptOpcode_CASE_ELSE"), *tree.children[0]]
     def case_op(self, tree):
         if len(tree.children) == 4:
             op, expr, multi_case, block = tree.children
@@ -592,33 +592,6 @@ class Compile(Transformer):
             "int": "ScriptOpcode_OR",
             "const": "ScriptOpcode_OR_CONST",
         }
-
-    def label_decl(self, tree):
-        if len(tree.children) == 1:
-            label = tree.children[0]
-            return Cmd("ScriptOpcode_LABEL", label, meta=tree.meta)
-        else:
-            label, cmd_or_block = tree.children
-
-            if type(cmd_or_block) is not list:
-                cmd_or_block = [cmd_or_block]
-
-            for cmd in cmd_or_block:
-                if isinstance(cmd, BaseCmd):
-                    cmd.add_context(LabelCtx(label))
-
-            return [
-                Cmd("ScriptOpcode_LABEL", label, meta=tree.meta),
-                *cmd_or_block
-            ]
-    def label_goto(self, tree):
-        label = tree.children[0]
-        return Cmd("ScriptOpcode_GOTO", label, meta=tree.meta)
-    def label(self, tree):
-        name = tree.children[0]
-        if name in self.alloc.labels:
-            return self.alloc.labels.index(name)
-        raise CompileError(f"label `{name}' is undeclared", tree.meta)
 
     def variable(self, tree):
         name = tree.children[0]

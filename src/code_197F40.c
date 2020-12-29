@@ -1,4 +1,5 @@
 #include "common.h"
+#include "battle/battle.h"
 
 s32 count_targets(Actor* actor, s32 targetHomeIndex, s32 targetSelectionFlags) {
     BattleStatus* battleStatus = BATTLE_STATUS;

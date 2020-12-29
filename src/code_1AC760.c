@@ -1,4 +1,5 @@
 #include "common.h"
+#include "battle/battle.h"
 
 INCLUDE_ASM(s32, "code_1AC760", dispatch_event_partner);
 
