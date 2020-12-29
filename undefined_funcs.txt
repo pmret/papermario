@@ -61,3 +61,4 @@ func_802AA0D8 = 0x802AA0D8;
 func_802AB330 = 0x802AB330;
 func_802AB338 = 0x802AB338;
 func_802B71E8 = 0x802B71E8;
+__osInitialize_common = 0x8006A708;
