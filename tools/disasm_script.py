@@ -482,10 +482,10 @@ class ScriptDSLDisassembler(ScriptDisassembler):
             self.write_line(f"if ({self.var(argv[0])} >= {self.var(argv[1])}) {{")
             self.indent += 1
         elif opcode == 0x10:
-            self.write_line(f"if ({self.var(argv[0])} ? {self.var(argv[1])}) {{")
+            self.write_line(f"if ({self.var(argv[0])} & {self.var(argv[1])}) {{")
             self.indent += 1
         elif opcode == 0x11:
-            self.write_line(f"if ({self.var(argv[0])} !? {self.var(argv[1])}) {{")
+            self.write_line(f"if ({self.var(argv[0])} !& {self.var(argv[1])}) {{")
             self.indent += 1
         elif opcode == 0x12:
             self.indent -= 1

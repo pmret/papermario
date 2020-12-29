@@ -77,8 +77,8 @@ script_parser = Lark(r"""
            | "<" -> cond_op_lt
            | ">=" -> cond_op_ge
            | "<=" -> cond_op_le
-           | "?" -> cond_op_flag
-           | "!?" -> cond_op_not_flag
+           | "&" -> cond_op_flag
+           | "!&" -> cond_op_not_flag
 
     match_stmt: "match" expr "{" (match_cases SEMICOLON*)? "}"
     match_const_stmt: "matchc" expr "{" (match_cases SEMICOLON*)? "}"
@@ -354,8 +354,8 @@ class Compile(Transformer):
     def cond_op_gt(self, tree): return { "if": "ScriptOpcode_IF_GT", "case": "ScriptOpcode_CASE_GT" }
     def cond_op_le(self, tree): return { "if": "ScriptOpcode_IF_LE", "case": "ScriptOpcode_CASE_LE" }
     def cond_op_ge(self, tree): return { "if": "ScriptOpcode_IF_GE", "case": "ScriptOpcode_CASE_GE" }
-    def cond_op_flag(self, tree): return { "__op__": "!?", "if": "ScriptOpcode_IF_FLAG", "case": "ScriptOpcode_CASE_FLAG" }
-    def cond_op_not_flag(self, tree): return { "if": "ScriptOpcode_IF_NOT_FLAG" }
+    def cond_op_flag(self, tree): return { "__op__": "&", "if": "ScriptOpcode_IF_FLAG", "case": "ScriptOpcode_CASE_FLAG" }
+    def cond_op_not_flag(self, tree): return { "__op__": "!&", "if": "ScriptOpcode_IF_NOT_FLAG" }
 
     def match_stmt(self, tree):
         expr = tree.children[0]

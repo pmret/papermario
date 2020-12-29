@@ -108,9 +108,17 @@ s32 idleAnimations_80219714[] = {
 
 // 432100-43214C (VRAM: 80219760)
 s32 idleAnimations_80219760[] = {
-    0x00000001, 0x00260003, 0x0000000C, 0x00260000, 0x00000006, 0x00260008, 0x00000009, 0x00260001,
-    0x00000008, 0x00260000, 0x0000000B, 0x00260003, 0x00000005, 0x00260000, 0x00000004, 0x00260007,
-    0x00000003, 0x00260007, 0x00000000,
+    Debuff_NORMAL, NPC_ANIM(goomba, normal, run),
+    Debuff_STONE, NPC_ANIM(goomba, normal, still),
+    Debuff_SLEEP, NPC_ANIM(goomba, normal, asleep),
+    Debuff_POISON, NPC_ANIM(goomba, normal, idle),
+    Debuff_STOP, NPC_ANIM(goomba, normal, still),
+    Debuff_STATIC, NPC_ANIM(goomba, normal, run),
+    Debuff_PARALYZE, NPC_ANIM(goomba, normal, still),
+    Debuff_DIZZY, NPC_ANIM(goomba, normal, dizzy),
+    Debuff_FEAR, NPC_ANIM(goomba, normal, dizzy),
+
+    Debuff_END,
 };
 
 // 43214C-432198 (VRAM: 802197AC)
@@ -128,7 +136,7 @@ Script script_Idle_802197F8 = SCRIPT({
     loop SI_VAR(0) {
 0:
         GetStatusFlags(ActorID_SELF, SI_VAR(1));
-        if (SI_VAR(1) ? 0x35D000) {
+        if (SI_VAR(1) & 0x35D000) {
             sleep 1;
             goto 0;
         }
@@ -144,7 +152,7 @@ Script script_Idle_802197F8 = SCRIPT({
     loop 20 {
 1:
         GetStatusFlags(ActorID_SELF, SI_VAR(1));
-        if (SI_VAR(1) ? 0x35D000) {
+        if (SI_VAR(1) & 0x35D000) {
             sleep 1;
             goto 1;
         }
@@ -160,7 +168,7 @@ Script script_Idle_802197F8 = SCRIPT({
     loop 80 {
 2:
         GetStatusFlags(ActorID_SELF, SI_VAR(1));
-        if (SI_VAR(1) ? 0x35D000) {
+        if (SI_VAR(1) & 0x35D000) {
             sleep 1;
             goto 2;
         }
