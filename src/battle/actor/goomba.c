@@ -184,18 +184,18 @@ Script script_HandleEvent_80219AD4 = SCRIPT({
     SetActorScale(ActorID_SELF, 1.0, 1.0, 1.0);
     GetLastEvent(ActorID_SELF, SI_VAR(0));
     match SI_VAR(0) {
-        9, 10 {
+        Event_HIT_COMBO, Event_HIT {
             SI_VAR(0) = c 0x1;
             SI_VAR(1) = c NPC_ANIM(goomba, normal, pain);
             await DoNormalHit;
         }
-        == 14 {
+        == Event_BURN_HIT {
             SI_VAR(0) = c 0x1;
             SI_VAR(1) = c NPC_ANIM(goomba, normal, burn_pain);
             SI_VAR(2) = c NPC_ANIM(goomba, normal, burn_dead);
             await DoBurnHit;
         }
-        == 36 {
+        == Event_BURN_DEATH {
             SI_VAR(0) = c 0x1;
             SI_VAR(1) = c NPC_ANIM(goomba, normal, burn_pain);
             SI_VAR(2) = c NPC_ANIM(goomba, normal, burn_dead);
@@ -205,12 +205,12 @@ Script script_HandleEvent_80219AD4 = SCRIPT({
             await DoDeath;
             return;
         }
-        == 11 {
+        == Event_SPIN_SMASH_HIT {
             SI_VAR(0) = c 0x1;
             SI_VAR(1) = c NPC_ANIM(goomba, normal, pain);
             await DoSpinSmashHit;
         }
-        == 33 {
+        == Event_SPIN_SMASH_DEATH {
             SI_VAR(0) = c 0x1;
             SI_VAR(1) = c NPC_ANIM(goomba, normal, pain);
             await DoSpinSmashHit;
@@ -219,7 +219,7 @@ Script script_HandleEvent_80219AD4 = SCRIPT({
             await DoDeath;
             return;
         }
-        == 47 {
+        == Event_SHOCK_HIT {
             SI_VAR(0) = c 0x1;
             SI_VAR(1) = c NPC_ANIM(goomba, normal, electrocute);
             await DoShockHit;
@@ -238,7 +238,7 @@ Script script_HandleEvent_80219AD4 = SCRIPT({
             SetActorJumpGravity(ActorID_SELF, 1.6);
             JumpToGoal(ActorID_SELF, 5, 0, 1, 0);
         }
-        == 38 {
+        == Event_SHOCK_DEATH {
             SI_VAR(0) = c 0x1;
             SI_VAR(1) = c NPC_ANIM(goomba, normal, electrocute);
             await DoShockHit;
@@ -247,12 +247,12 @@ Script script_HandleEvent_80219AD4 = SCRIPT({
             await DoDeath;
             return;
         }
-        == 19, 23, 25, 31 {
+        == Event_STAR_BEAM, 23, Event_IMMUNE, Event_AIR_LIFT_FAILED {
             SI_VAR(0) = c 0x1;
             SI_VAR(1) = c NPC_ANIM(goomba, normal, idle);
             await DoImmune;
         }
-        == 32 {
+        == Event_DEATH {
             SI_VAR(0) = c 0x1;
             SI_VAR(1) = c NPC_ANIM(goomba, normal, pain);
             await DoNormalHit;
@@ -262,7 +262,7 @@ Script script_HandleEvent_80219AD4 = SCRIPT({
             await DoDeath;
             return;
         }
-        == 53 {
+        == Event_END_FIRST_STRIKE {
             SetAnimationRate(ActorID_SELF, 1, 2.0);
             SetAnimation(ActorID_SELF, 1, NPC_ANIM(goomba, normal, run));
             SetGoalToHome(ActorID_SELF);
@@ -271,24 +271,24 @@ Script script_HandleEvent_80219AD4 = SCRIPT({
             SetAnimationRate(ActorID_SELF, 1, 1.0);
             HPBarToHome(ActorID_SELF);
         }
-        == 49 {
+        == Event_RECOVER_STATUS {
             SI_VAR(0) = c 0x1;
             SI_VAR(1) = c NPC_ANIM(goomba, normal, idle);
             await DoRecover;
         }
-        == 57 {
+        == Event_SCARE_AWAY {
             SI_VAR(0) = c 0x1;
             SI_VAR(1) = c NPC_ANIM(goomba, normal, run);
             SI_VAR(2) = c NPC_ANIM(goomba, normal, pain);
             await DoScareAway;
             return;
         }
-        == 58 {
+        == Event_BEGIN_AIR_LIFT {
             SI_VAR(0) = c 0x1;
             SI_VAR(1) = c NPC_ANIM(goomba, normal, run);
             await DoAirLift;
         }
-        == 22 {
+        == Event_BLOW_AWAY {
             SI_VAR(0) = c 0x1;
             SI_VAR(1) = c NPC_ANIM(goomba, normal, pain);
             await DoBlowAway;
