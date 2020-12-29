@@ -87,7 +87,7 @@ Script script_Idle_802197F8 = SCRIPT({
     RandInt(80, SI_VAR(0));
     SI_VAR(0) += 80;
     loop SI_VAR(0) {
-    0:
+0:
         GetStatusFlags(0xFFFFFF81, SI_VAR(1));
         if (SI_VAR(1) ? 0x35D000) {
             sleep 1;
@@ -103,7 +103,7 @@ Script script_Idle_802197F8 = SCRIPT({
     IdleRunToGoal(0xFFFFFF81, 0);
     SetIdleAnimations(0xFFFFFF81, 1, idleAnimations_80219714);
     loop 20 {
-    1:
+1:
         GetStatusFlags(0xFFFFFF81, SI_VAR(1));
         if (SI_VAR(1) ? 0x35D000) {
             sleep 1;
@@ -119,7 +119,7 @@ Script script_Idle_802197F8 = SCRIPT({
     IdleRunToGoal(0xFFFFFF81, 0);
     SetIdleAnimations(0xFFFFFF81, 1, idleAnimations_80219714);
     loop 80 {
-    2:
+2:
         GetStatusFlags(0xFFFFFF81, SI_VAR(1));
         if (SI_VAR(1) ? 0x35D000) {
             sleep 1;
@@ -138,46 +138,46 @@ Script script_HandleEvent_80219AD4 = SCRIPT({
     GetLastEvent(0xFFFFFF81, SI_VAR(0));
     match SI_VAR(0) {
         9, 10 {
-            SI_VAR(0) =c 0x1;
-            SI_VAR(1) =c 0x260005;
+            SI_VAR(0) = c 0x1;
+            SI_VAR(1) = c 0x260005;
             await DoNormalHit;
         }
         == 14 {
-            SI_VAR(0) =c 0x1;
-            SI_VAR(1) =c 0x260009;
-            SI_VAR(2) =c 0x26000A;
+            SI_VAR(0) = c 0x1;
+            SI_VAR(1) = c 0x260009;
+            SI_VAR(2) = c 0x26000A;
             await DoBurnHit;
         }
         == 36 {
-            SI_VAR(0) =c 0x1;
-            SI_VAR(1) =c 0x260009;
-            SI_VAR(2) =c 0x26000A;
+            SI_VAR(0) = c 0x1;
+            SI_VAR(1) = c 0x260009;
+            SI_VAR(2) = c 0x26000A;
             await DoBurnHit;
-            SI_VAR(0) =c 0x1;
-            SI_VAR(1) =c 0x26000A;
+            SI_VAR(0) = c 0x1;
+            SI_VAR(1) = c 0x26000A;
             await DoDeath;
             return;
         }
         == 11 {
-            SI_VAR(0) =c 0x1;
-            SI_VAR(1) =c 0x260005;
+            SI_VAR(0) = c 0x1;
+            SI_VAR(1) = c 0x260005;
             await DoSpinSmashHit;
         }
         == 33 {
-            SI_VAR(0) =c 0x1;
-            SI_VAR(1) =c 0x260005;
+            SI_VAR(0) = c 0x1;
+            SI_VAR(1) = c 0x260005;
             await DoSpinSmashHit;
-            SI_VAR(0) =c 0x1;
-            SI_VAR(1) =c 0x260006;
+            SI_VAR(0) = c 0x1;
+            SI_VAR(1) = c 0x260006;
             await DoDeath;
             return;
         }
         == 47 {
-            SI_VAR(0) =c 0x1;
-            SI_VAR(1) =c 0x26000E;
+            SI_VAR(0) = c 0x1;
+            SI_VAR(1) = c 0x26000E;
             await DoShockHit;
-            SI_VAR(0) =c 0x1;
-            SI_VAR(1) =c 0x260005;
+            SI_VAR(0) = c 0x1;
+            SI_VAR(1) = c 0x260005;
             await DoJumpBack;
             JumpToGoal(0xFFFFFF81, 5, 0, 1, 0);
             SetAnimationRate(0xFFFFFF81, 1, 2.0);
@@ -192,26 +192,26 @@ Script script_HandleEvent_80219AD4 = SCRIPT({
             JumpToGoal(0xFFFFFF81, 5, 0, 1, 0);
         }
         == 38 {
-            SI_VAR(0) =c 0x1;
-            SI_VAR(1) =c 0x26000E;
+            SI_VAR(0) = c 0x1;
+            SI_VAR(1) = c 0x26000E;
             await DoShockHit;
-            SI_VAR(0) =c 0x1;
-            SI_VAR(1) =c 0x260006;
+            SI_VAR(0) = c 0x1;
+            SI_VAR(1) = c 0x260006;
             await DoDeath;
             return;
         }
         == 19, 23, 25, 31 {
-            SI_VAR(0) =c 0x1;
-            SI_VAR(1) =c 0x260001;
+            SI_VAR(0) = c 0x1;
+            SI_VAR(1) = c 0x260001;
             await DoImmune;
         }
         == 32 {
-            SI_VAR(0) =c 0x1;
-            SI_VAR(1) =c 0x260005;
+            SI_VAR(0) = c 0x1;
+            SI_VAR(1) = c 0x260005;
             await DoNormalHit;
             sleep 10;
-            SI_VAR(0) =c 0x1;
-            SI_VAR(1) =c 0x260006;
+            SI_VAR(0) = c 0x1;
+            SI_VAR(1) = c 0x260006;
             await DoDeath;
             return;
         }
@@ -225,29 +225,28 @@ Script script_HandleEvent_80219AD4 = SCRIPT({
             HPBarToHome(0xFFFFFF81);
         }
         == 49 {
-            SI_VAR(0) =c 0x1;
-            SI_VAR(1) =c 0x260001;
+            SI_VAR(0) = c 0x1;
+            SI_VAR(1) = c 0x260001;
             await DoRecover;
         }
         == 57 {
-            SI_VAR(0) =c 0x1;
-            SI_VAR(1) =c 0x260003;
-            SI_VAR(2) =c 0x260005;
+            SI_VAR(0) = c 0x1;
+            SI_VAR(1) = c 0x260003;
+            SI_VAR(2) = c 0x260005;
             await DoScareAway;
             return;
         }
         == 58 {
-            SI_VAR(0) =c 0x1;
-            SI_VAR(1) =c 0x260003;
+            SI_VAR(0) = c 0x1;
+            SI_VAR(1) = c 0x260003;
             await DoAirLift;
         }
         == 22 {
-            SI_VAR(0) =c 0x1;
-            SI_VAR(1) =c 0x260005;
+            SI_VAR(0) = c 0x1;
+            SI_VAR(1) = c 0x260005;
             await DoBlowAway;
             return;
-        }
-        else {
+        } else {
         }
     }
     SetAnimation(0xFFFFFF81, 1, 0x260001);
@@ -374,8 +373,7 @@ Script script_TakeTurn_8021A300 = SCRIPT({
             EnableIdleScript(0xFFFFFF81, 1);
             UseIdleAnimation(0xFFFFFF81, 1);
             return;
-        }
-        else {
+        } else {
             SetGoalToTarget(0xFFFFFF81);
             SetActorJumpGravity(0xFFFFFF81, 1.2001953125);
             spawn {
