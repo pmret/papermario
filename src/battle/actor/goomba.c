@@ -186,85 +186,85 @@ Script script_HandleEvent_80219AD4 = SCRIPT({
     match SI_VAR(0) {
         9, 10 {
             SI_VAR(0) = c 0x1;
-            SI_VAR(1) = c 0x260005;
+            SI_VAR(1) = c NPC_ANIM(goomba, normal, pain);
             await DoNormalHit;
         }
         == 14 {
             SI_VAR(0) = c 0x1;
-            SI_VAR(1) = c 0x260009;
-            SI_VAR(2) = c 0x26000A;
+            SI_VAR(1) = c NPC_ANIM(goomba, normal, burn_pain);
+            SI_VAR(2) = c NPC_ANIM(goomba, normal, burn_dead);
             await DoBurnHit;
         }
         == 36 {
             SI_VAR(0) = c 0x1;
-            SI_VAR(1) = c 0x260009;
-            SI_VAR(2) = c 0x26000A;
+            SI_VAR(1) = c NPC_ANIM(goomba, normal, burn_pain);
+            SI_VAR(2) = c NPC_ANIM(goomba, normal, burn_dead);
             await DoBurnHit;
             SI_VAR(0) = c 0x1;
-            SI_VAR(1) = c 0x26000A;
+            SI_VAR(1) = c NPC_ANIM(goomba, normal, burn_dead);
             await DoDeath;
             return;
         }
         == 11 {
             SI_VAR(0) = c 0x1;
-            SI_VAR(1) = c 0x260005;
+            SI_VAR(1) = c NPC_ANIM(goomba, normal, pain);
             await DoSpinSmashHit;
         }
         == 33 {
             SI_VAR(0) = c 0x1;
-            SI_VAR(1) = c 0x260005;
+            SI_VAR(1) = c NPC_ANIM(goomba, normal, pain);
             await DoSpinSmashHit;
             SI_VAR(0) = c 0x1;
-            SI_VAR(1) = c 0x260006;
+            SI_VAR(1) = c NPC_ANIM(goomba, normal, dead);
             await DoDeath;
             return;
         }
         == 47 {
             SI_VAR(0) = c 0x1;
-            SI_VAR(1) = c 0x26000E;
+            SI_VAR(1) = c NPC_ANIM(goomba, normal, electrocute);
             await DoShockHit;
             SI_VAR(0) = c 0x1;
-            SI_VAR(1) = c 0x260005;
+            SI_VAR(1) = c NPC_ANIM(goomba, normal, pain);
             await DoJumpBack;
             JumpToGoal(ActorID_SELF, 5, 0, 1, 0);
             SetAnimationRate(ActorID_SELF, 1, 2.0);
-            SetAnimation(ActorID_SELF, 1, 0x260007);
+            SetAnimation(ActorID_SELF, 1, NPC_ANIM(goomba, normal, dizzy));
             SetGoalToHome(ActorID_SELF);
             SetActorSpeed(ActorID_SELF, 8.0);
             RunToGoal(ActorID_SELF, 0, 0);
             SetAnimationRate(ActorID_SELF, 1, 1.0);
             sleep 5;
-            SetAnimation(ActorID_SELF, 1, 0x260001);
-            SetActorJumpGravity(ActorID_SELF, 1.6005859375);
+            SetAnimation(ActorID_SELF, 1, NPC_ANIM(goomba, normal, idle));
+            SetActorJumpGravity(ActorID_SELF, 1.6);
             JumpToGoal(ActorID_SELF, 5, 0, 1, 0);
         }
         == 38 {
             SI_VAR(0) = c 0x1;
-            SI_VAR(1) = c 0x26000E;
+            SI_VAR(1) = c NPC_ANIM(goomba, normal, electrocute);
             await DoShockHit;
             SI_VAR(0) = c 0x1;
-            SI_VAR(1) = c 0x260006;
+            SI_VAR(1) = c NPC_ANIM(goomba, normal, dead);
             await DoDeath;
             return;
         }
         == 19, 23, 25, 31 {
             SI_VAR(0) = c 0x1;
-            SI_VAR(1) = c 0x260001;
+            SI_VAR(1) = c NPC_ANIM(goomba, normal, idle);
             await DoImmune;
         }
         == 32 {
             SI_VAR(0) = c 0x1;
-            SI_VAR(1) = c 0x260005;
+            SI_VAR(1) = c NPC_ANIM(goomba, normal, pain);
             await DoNormalHit;
             sleep 10;
             SI_VAR(0) = c 0x1;
-            SI_VAR(1) = c 0x260006;
+            SI_VAR(1) = c NPC_ANIM(goomba, normal, dead);
             await DoDeath;
             return;
         }
         == 53 {
             SetAnimationRate(ActorID_SELF, 1, 2.0);
-            SetAnimation(ActorID_SELF, 1, 0x260003);
+            SetAnimation(ActorID_SELF, 1, NPC_ANIM(goomba, normal, run));
             SetGoalToHome(ActorID_SELF);
             SetActorSpeed(ActorID_SELF, 4.0);
             RunToGoal(ActorID_SELF, 0, 0);
@@ -273,30 +273,30 @@ Script script_HandleEvent_80219AD4 = SCRIPT({
         }
         == 49 {
             SI_VAR(0) = c 0x1;
-            SI_VAR(1) = c 0x260001;
+            SI_VAR(1) = c NPC_ANIM(goomba, normal, idle);
             await DoRecover;
         }
         == 57 {
             SI_VAR(0) = c 0x1;
-            SI_VAR(1) = c 0x260003;
-            SI_VAR(2) = c 0x260005;
+            SI_VAR(1) = c NPC_ANIM(goomba, normal, run);
+            SI_VAR(2) = c NPC_ANIM(goomba, normal, pain);
             await DoScareAway;
             return;
         }
         == 58 {
             SI_VAR(0) = c 0x1;
-            SI_VAR(1) = c 0x260003;
+            SI_VAR(1) = c NPC_ANIM(goomba, normal, run);
             await DoAirLift;
         }
         == 22 {
             SI_VAR(0) = c 0x1;
-            SI_VAR(1) = c 0x260005;
+            SI_VAR(1) = c NPC_ANIM(goomba, normal, pain);
             await DoBlowAway;
             return;
         } else {
         }
     }
-    SetAnimation(ActorID_SELF, 1, 0x260001);
+    SetAnimation(ActorID_SELF, 1, NPC_ANIM(goomba, normal, idle));
     EnableIdleScript(ActorID_SELF, 1);
     UseIdleAnimation(ActorID_SELF, 1);
 });
@@ -325,18 +325,18 @@ Script script_TakeTurn_8021A300 = SCRIPT({
     UseCamPreset(63);
     BattleCamTargetActor(ActorID_SELF);
     0x8024ECF8(-1, 1, 0);
-    SetAnimation(ActorID_SELF, 1, 0x260003);
+    SetAnimation(ActorID_SELF, 1, NPC_ANIM(goomba, normal, run));
     SetGoalToTarget(ActorID_SELF);
     AddGoalPos(ActorID_SELF, 50, 0, 0);
     SetActorSpeed(ActorID_SELF, 6.0);
     RunToGoal(ActorID_SELF, 0, 0);
-    SetAnimation(ActorID_SELF, 1, 0x260001);
+    SetAnimation(ActorID_SELF, 1, NPC_ANIM(goomba, normal, idle));
     SetActorDispOffset(ActorID_SELF, 0, -1, 0);
     sleep 1;
-    SetActorDispOffset(ActorID_SELF, 0, 0xFFFFFFFE, 0);
+    SetActorDispOffset(ActorID_SELF, 0, -2, 0);
     sleep 5;
     SetActorDispOffset(ActorID_SELF, 0, 0, 0);
-    SetAnimation(ActorID_SELF, 1, 0x260004);
+    SetAnimation(ActorID_SELF, 1, NPC_ANIM(goomba, normal, headbonk));
     EnemyTestTarget(ActorID_SELF, SI_VAR(0), 0, 0, 1, 16);
     match SI_VAR(0) {
         6, 5 {
@@ -347,7 +347,7 @@ Script script_TakeTurn_8021A300 = SCRIPT({
             SI_VAR(1) = 10;
             SI_VAR(2) += 3;
             SetGoalPos(ActorID_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-            SetActorJumpGravity(ActorID_SELF, 1.2001953125);
+            SetActorJumpGravity(ActorID_SELF, 1.2);
             spawn {
                 GetActorPos(ActorID_SELF, SI_VAR(1), SI_VAR(2), SI_VAR(0));
                 SI_VAR(0) = 0;
@@ -363,26 +363,26 @@ Script script_TakeTurn_8021A300 = SCRIPT({
             }
             spawn {
                 sleep 6;
-                SetAnimation(ActorID_SELF, 1, 0x260004);
+                SetAnimation(ActorID_SELF, 1, NPC_ANIM(goomba, normal, headbonk));
             }
             JumpToGoal(ActorID_SELF, 16, 0, 1, 0);
-            SetAnimation(ActorID_SELF, 1, 0x260008);
-            SetActorScale(ActorID_SELF, 1.1005859375, 0.80078125, 1.0);
+            SetAnimation(ActorID_SELF, 1, NPC_ANIM(goomba, normal, asleep));
+            SetActorScale(ActorID_SELF, 1.1, 0.8, 1.0);
             SetActorDispOffset(ActorID_SELF, 0, 5, 0);
             sleep 1;
-            SetActorScale(ActorID_SELF, 1.30078125, 0.5, 1.0);
-            SetActorDispOffset(ActorID_SELF, 0, 0xFFFFFFFE, 0);
+            SetActorScale(ActorID_SELF, 1.3, 0.5, 1.0);
+            SetActorDispOffset(ActorID_SELF, 0, -2, 0);
             sleep 1;
             SetActorScale(ActorID_SELF, 1.0, 1.0, 1.0);
             SetActorDispOffset(ActorID_SELF, 0, 7, 0);
-            SetAnimation(ActorID_SELF, 1, 0x260005);
+            SetAnimation(ActorID_SELF, 1, NPC_ANIM(goomba, normal, pain));
             sleep 5;
             if (SI_VAR(10) == 5) {
                 EnemyTestTarget(ActorID_SELF, SI_VAR(0), 0x80000000, 0, 0, 0);
             }
             sleep 5;
             SetActorDispOffset(ActorID_SELF, 0, 0, 0);
-            SetAnimation(ActorID_SELF, 1, 0x260004);
+            SetAnimation(ActorID_SELF, 1, NPC_ANIM(goomba, normal, headbonk));
             SetGoalToTarget(ActorID_SELF);
             GetGoalPos(ActorID_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
             SI_VAR(0) += 20;
@@ -397,10 +397,10 @@ Script script_TakeTurn_8021A300 = SCRIPT({
                     SetActorRotation(ActorID_SELF, 0, 0, SI_VAR(0));
                     sleep 1;
                 }
-                SetAnimation(ActorID_SELF, 1, 0x260004);
+                SetAnimation(ActorID_SELF, 1, NPC_ANIM(goomba, normal, headbonk));
             }
             JumpToGoal(ActorID_SELF, 15, 0, 1, 0);
-            SetAnimation(ActorID_SELF, 1, 0x260007);
+            SetAnimation(ActorID_SELF, 1, NPC_ANIM(goomba, normal, dizzy));
             sleep 5;
             UseCamPreset(2);
             YieldTurn();
@@ -413,8 +413,8 @@ Script script_TakeTurn_8021A300 = SCRIPT({
             SetAnimationRate(ActorID_SELF, 1, 1.0);
             SetActorYaw(ActorID_SELF, 0);
             sleep 5;
-            SetAnimation(ActorID_SELF, 1, 0x260001);
-            SetActorJumpGravity(ActorID_SELF, 1.6005859375);
+            SetAnimation(ActorID_SELF, 1, NPC_ANIM(goomba, normal, idle));
+            SetActorJumpGravity(ActorID_SELF, 1.6);
             JumpToGoal(ActorID_SELF, 5, 0, 1, 0);
             RemoveActorDecoration(ActorID_SELF, 1, 0);
             EnableIdleScript(ActorID_SELF, 1);
@@ -422,7 +422,7 @@ Script script_TakeTurn_8021A300 = SCRIPT({
             return;
         } else {
             SetGoalToTarget(ActorID_SELF);
-            SetActorJumpGravity(ActorID_SELF, 1.2001953125);
+            SetActorJumpGravity(ActorID_SELF, 1.2);
             spawn {
                 GetActorPos(ActorID_SELF, SI_VAR(1), SI_VAR(2), SI_VAR(0));
                 SI_VAR(0) = 0;
@@ -438,13 +438,13 @@ Script script_TakeTurn_8021A300 = SCRIPT({
             }
             spawn {
                 sleep 6;
-                SetAnimation(ActorID_SELF, 1, 0x260004);
+                SetAnimation(ActorID_SELF, 1, NPC_ANIM(goomba, normal, headbonk));
             }
             JumpToGoal(ActorID_SELF, 16, 0, 1, 0);
-            SetAnimation(ActorID_SELF, 1, 0x26000B);
-            SetActorScale(ActorID_SELF, 1.1005859375, 0.80078125, 1.0);
+            SetAnimation(ActorID_SELF, 1, NPC_ANIM(goomba, normal, pre_headbonk));
+            SetActorScale(ActorID_SELF, 1.1, 0.8, 1.0);
             sleep 1;
-            SetActorScale(ActorID_SELF, 1.30078125, 0.5, 1.0);
+            SetActorScale(ActorID_SELF, 1.3, 0.5, 1.0);
             sleep 1;
         }
     }
@@ -452,17 +452,17 @@ Script script_TakeTurn_8021A300 = SCRIPT({
     match SI_VAR(0) {
         0, 2 {
             UseCamPreset(2);
-            SetActorScale(ActorID_SELF, 1.1005859375, 0.80078125, 1.0);
+            SetActorScale(ActorID_SELF, 1.1, 0.8, 1.0);
             sleep 1;
             SetActorScale(ActorID_SELF, 1.0, 1.0, 1.0);
             sleep 1;
             SetActorRotation(ActorID_SELF, 0, 0, 0);
             SetActorDispOffset(ActorID_SELF, 0, 0, 0);
-            SetAnimation(ActorID_SELF, 1, 0x260001);
+            SetAnimation(ActorID_SELF, 1, NPC_ANIM(goomba, normal, idle));
             GetGoalPos(ActorID_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
             SI_VAR(0) += 40;
             SI_VAR(1) = 0;
-            SetActorJumpGravity(ActorID_SELF, 1.80078125);
+            SetActorJumpGravity(ActorID_SELF, 1.8);
             SetGoalPos(ActorID_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
             JumpToGoal(ActorID_SELF, 10, 0, 1, 0);
             SI_VAR(0) += 30;
@@ -471,11 +471,11 @@ Script script_TakeTurn_8021A300 = SCRIPT({
             SI_VAR(0) += 20;
             SetGoalPos(ActorID_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
             JumpToGoal(ActorID_SELF, 6, 0, 1, 0);
-            SetAnimation(ActorID_SELF, 1, 0x260001);
+            SetAnimation(ActorID_SELF, 1, NPC_ANIM(goomba, normal, idle));
             sleep 3;
             YieldTurn();
             SetAnimationRate(ActorID_SELF, 1, 2.0);
-            SetAnimation(ActorID_SELF, 1, 0x260003);
+            SetAnimation(ActorID_SELF, 1, NPC_ANIM(goomba, normal, run));
             SetGoalToHome(ActorID_SELF);
             SetActorSpeed(ActorID_SELF, 8.0);
             RunToGoal(ActorID_SELF, 0, 0);
