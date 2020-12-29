@@ -21,6 +21,12 @@ typedef struct Vec2bu {
     /* 0x01 */ u8 y;
 } Vec2bu; // size = 0x02
 
+typedef struct Vec3b {
+    /* 0x00 */ s8 x;
+    /* 0x01 */ s8 y;
+    /* 0x02 */ s8 z;
+} Vec3b; // size = 0x03
+
 typedef struct Vec3f {
     /* 0x00 */ f32 x;
     /* 0x04 */ f32 y;
@@ -1017,7 +1023,7 @@ typedef struct ActorPartMovement {
 typedef struct ActorPart {
     /* 0x00 */ s32 flags;
     /* 0x04 */ s32 targetFlags; /* initialized to 0 */
-    /* 0x08 */ struct StaticActorPart* staticData;
+    /* 0x08 */ struct ActorPartDesc* staticData;
     /* 0x0C */ struct ActorPart* nextPart;
     /* 0x10 */ struct ActorPartMovement* movement;
     /* 0x14 */ Vec3s partOffset;
@@ -1332,19 +1338,6 @@ typedef struct Actor {
     /* 0x438 */ s32 x[2]; /* ??? see FUN_80253974 */
     /* 0x440 */ struct MenuIcon* ptrDefuffIcon;
 } Actor; // size = 0x444
-
-typedef struct StaticActorPart {
-    /* 0x00 */ s32 flags;
-    /* 0x04 */ s8 index;
-    /* 0x05 */ u8 posOffset[3];
-    /* 0x08 */ u8 targetOffset[2];
-    /* 0x0A */ s16 opacity;
-    /* 0x0C */ u32* idleAnimations;
-    /* 0x10 */ u32* defenseTable;
-    /* 0x14 */ s32 eventFlags;
-    /* 0x18 */ s32 flags3;
-    /* 0x1C */ char unk_1C[8];
-} StaticActorPart; // size = 0x24
 
 typedef struct TileDescriptor {
     /* 0x00 */ s8 name[32];

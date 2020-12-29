@@ -11,7 +11,7 @@ typedef struct ActorDesc {
     /* 0x07 */ u8 maxHP;
     /* 0x08 */ s16 partCount;
     /* 0x0A */ char unk_0A[2];
-    /* 0x0C */ struct StaticActorPart** partsData;
+    /* 0x0C */ struct ActorPartDesc** partsData;
     /* 0x10 */ Bytecode* script;
     /* 0x14 */ s32* statusTable;
     /* 0x18 */ u8 escapeChance;
@@ -66,6 +66,10 @@ typedef struct Battle {
     /* 0x10 */ s32 unk_10;
 } BattleList[]; // size = 0x14 * n
 
+#define BATTLE(name, formation, stage) { name, ARRAY_COUNT(formation), formation, stage }
+
+// TODO: enum for home position (0..3 are floor, 4..7 are air, etc.)
+
 typedef struct {
     Element element;
     s32 defense;
@@ -73,8 +77,17 @@ typedef struct {
 
 typedef DefenseTableEntry DefenseTable[];
 
-#define BATTLE(name, formation, stage) { name, ARRAY_COUNT(formation), formation, stage }
-
-// TODO: enum for home position (0..3 are floor, 4..7 are air, etc.)
+typedef struct ActorPartDesc {
+    /* 0x00 */ s32 flags;
+    /* 0x04 */ s8 index;
+    /* 0x05 */ Vec3b posOffset;
+    /* 0x08 */ Vec2b targetOffset;
+    /* 0x0A */ s16 opacity;
+    /* 0x0C */ s32* idleAnimations;
+    /* 0x10 */ s32* defenseTable;
+    /* 0x14 */ s32 eventFlags;
+    /* 0x18 */ s32 elementImmunityFlags;
+    /* 0x1C */ char unk_1C[8];
+} ActorPartDesc; // size = 0x24
 
 #endif
