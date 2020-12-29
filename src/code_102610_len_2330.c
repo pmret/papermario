@@ -1,7 +1,5 @@
 #include "common.h"
 
-void func_8010FD68(Entity* entity);
-
 void create_shadow_callback(Shadow* shadow) {
     shadow->scale.x = 0.1f;
     shadow->scale.y = 0.1f;
@@ -21,14 +19,14 @@ INCLUDE_ASM(s32, "code_102610_len_2330", func_802E0DE0);
 
 typedef struct struct802E10F4 {
     char unk_0[4];
-    Vec3s angle; // TODO: could be wrong, but based on the single usage, seems right to me.
+    s16 angle;
 } struct802E10F4;
 
 void func_802E10F4(Entity* entity) {
     struct802E10F4* temp;
 
     temp = (struct802E10F4*)entity->dataBuf;
-    temp->angle.x = clamp_angle(temp->angle.x + 6);
+    temp->angle = clamp_angle(temp->angle + 6);
     func_802E3650(entity);
 }
 

@@ -8,7 +8,7 @@ INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8010FBC0);
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8010FBD8);
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8010FD68);
+INCLUDE_ASM(void, "code_a5dd0_len_114e0", func_8010FD68, Entity* entity);
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8010FD98);
 
