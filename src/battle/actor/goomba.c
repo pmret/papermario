@@ -5,26 +5,26 @@
 #include "goomba.h"
 
 ApiStatus func_8021818C_430B2C(ScriptInstance* script, s32 isInitialCall);
-s32 idleAnimations_80219760[];
-s32 idleAnimations_80219714[];
-s32 defenseTable_80219610[];
-s32 statusTable_8021961C[];
-s32 defenseTable_80219610[];
-ActorPartDesc partsTable_802196C8[];
-Script script_Init_802197AC;
-Script script_TakeTurn_8021A300;
-Script script_Idle_802197F8;
-Script script_HandleEvent_80219AD4;
+s32 goomba_anims_running[];
+s32 goomba_anims[];
+s32 goomba_defense_table[];
+s32 goomba_status_table[];
+s32 goomba_defense_table[];
+ActorPartDesc goomba_parts[];
+Script goomba_init;
+Script goomba_turn;
+Script goomba_idle;
+Script goomba_dispatch;
 
 // 431FB0-431FBC (VRAM: 80219610)
-s32 defenseTable_80219610[] = {
+s32 goomba_defense_table[] = {
     Element_NORMAL, 0,
 
     Element_END,
 };
 
 // 431FBC-432068 (VRAM: 8021961C)
-s32 statusTable_8021961C[] = {
+s32 goomba_status_table[] = {
     Debuff_NORMAL, 0,
     Debuff_DEFAULT, 0,
     Debuff_SLEEP, 100,
@@ -52,15 +52,15 @@ s32 statusTable_8021961C[] = {
 };
 
 // 432068-43208C (VRAM: 802196C8)
-ActorPartDesc partsTable_802196C8[] = {
+ActorPartDesc goomba_parts[] = {
     {
         .flags = 0x00800000,
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0x14 },
         .opacity = 0xFF,
-        .idleAnimations = idleAnimations_80219714,
-        .defenseTable = defenseTable_80219610,
+        .idleAnimations = goomba_anims,
+        .defenseTable = goomba_defense_table,
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         0x00, 0xF6,
@@ -74,9 +74,9 @@ ActorDesc goomba = {
     .level = 5,
     .maxHP = 2,
     .partCount = 1,
-    .partsData = &partsTable_802196C8,
-    .script = &script_Init_802197AC,
-    .statusTable = &statusTable_8021961C,
+    .partsData = &goomba_parts,
+    .script = &goomba_init,
+    .statusTable = &goomba_status_table,
     .escapeChance = 90,
     .airLiftChance = 100,
     .spookChance = 90,
@@ -92,7 +92,7 @@ ActorDesc goomba = {
 };
 
 // 4320B4-432100 (VRAM: 80219714)
-s32 idleAnimations_80219714[] = {
+s32 goomba_anims[] = {
     Debuff_NORMAL, NPC_ANIM(goomba, normal, idle),
     Debuff_STONE, NPC_ANIM(goomba, normal, still),
     Debuff_SLEEP, NPC_ANIM(goomba, normal, asleep),
@@ -107,7 +107,7 @@ s32 idleAnimations_80219714[] = {
 };
 
 // 432100-43214C (VRAM: 80219760)
-s32 idleAnimations_80219760[] = {
+s32 goomba_anims_running[] = {
     Debuff_NORMAL, NPC_ANIM(goomba, normal, run),
     Debuff_STONE, NPC_ANIM(goomba, normal, still),
     Debuff_SLEEP, NPC_ANIM(goomba, normal, asleep),
@@ -122,14 +122,14 @@ s32 idleAnimations_80219760[] = {
 };
 
 // 43214C-432198 (VRAM: 802197AC)
-Script script_Init_802197AC = SCRIPT({
-    BindTakeTurn(ActorID_SELF, script_TakeTurn_8021A300);
-    BindIdle(ActorID_SELF, script_Idle_802197F8);
-    BindHandleEvent(ActorID_SELF, script_HandleEvent_80219AD4);
+Script goomba_init = SCRIPT({
+    BindTakeTurn(ActorID_SELF, goomba_turn);
+    BindIdle(ActorID_SELF, goomba_idle);
+    BindHandleEvent(ActorID_SELF, goomba_dispatch);
 });
 
 // 432198-432474 (VRAM: 802197F8)
-Script script_Idle_802197F8 = SCRIPT({
+Script goomba_idle = SCRIPT({
 10:
     RandInt(80, SI_VAR(0));
     SI_VAR(0) += 80;
@@ -145,10 +145,10 @@ Script script_Idle_802197F8 = SCRIPT({
     GetActorPos(ActorID_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(0) += 5;
     SetActorIdleSpeed(ActorID_SELF, 1.0);
-    SetIdleAnimations(ActorID_SELF, 1, idleAnimations_80219760);
+    SetIdleAnimations(ActorID_SELF, 1, goomba_anims_running);
     SetIdleGoal(ActorID_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     IdleRunToGoal(ActorID_SELF, 0);
-    SetIdleAnimations(ActorID_SELF, 1, idleAnimations_80219714);
+    SetIdleAnimations(ActorID_SELF, 1, goomba_anims);
     loop 20 {
 1:
         GetStatusFlags(ActorID_SELF, SI_VAR(1));
@@ -161,10 +161,10 @@ Script script_Idle_802197F8 = SCRIPT({
     GetActorPos(ActorID_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(0) -= 5;
     SetActorIdleSpeed(ActorID_SELF, 1.0);
-    SetIdleAnimations(ActorID_SELF, 1, idleAnimations_80219760);
+    SetIdleAnimations(ActorID_SELF, 1, goomba_anims_running);
     SetIdleGoal(ActorID_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     IdleRunToGoal(ActorID_SELF, 0);
-    SetIdleAnimations(ActorID_SELF, 1, idleAnimations_80219714);
+    SetIdleAnimations(ActorID_SELF, 1, goomba_anims);
     loop 80 {
 2:
         GetStatusFlags(ActorID_SELF, SI_VAR(1));
@@ -178,7 +178,7 @@ Script script_Idle_802197F8 = SCRIPT({
 });
 
 // 432474-432B34 (VRAM: 80219AD4)
-Script script_HandleEvent_80219AD4 = SCRIPT({
+Script goomba_dispatch = SCRIPT({
     UseIdleAnimation(ActorID_SELF, 0);
     EnableIdleScript(ActorID_SELF, 0);
     SetActorScale(ActorID_SELF, 1.0, 1.0, 1.0);
@@ -302,7 +302,7 @@ Script script_HandleEvent_80219AD4 = SCRIPT({
 });
 
 // 432B34-432CA0 (VRAM: 8021A194)
-f32 floatTable_8021A194[] = {
+f32 float_table_for_func_80218000[] = {
     0.000000f, 0.017452f, 0.034899f, 0.052336f, 0.069756f, 0.087156f, 0.104528f, 0.121869f,
     0.139173f, 0.156434f, 0.173648f, 0.190809f, 0.207912f, 0.224951f, 0.241922f, 0.258819f,
     0.275637f, 0.292372f, 0.309017f, 0.325568f, 0.342020f, 0.358368f, 0.374607f, 0.390731f,
@@ -318,7 +318,7 @@ f32 floatTable_8021A194[] = {
 };
 
 // 432CA0-433968 (VRAM: 8021A300)
-Script script_TakeTurn_8021A300 = SCRIPT({
+Script goomba_turn = SCRIPT({
     UseIdleAnimation(ActorID_SELF, 0);
     EnableIdleScript(ActorID_SELF, 0);
     SetTargetActor(ActorID_SELF, 0);
