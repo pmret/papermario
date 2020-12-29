@@ -1,6 +1,7 @@
 #include "common.h"
+#include "map.h"
 
-static ApiStatus GetPlayerCoins(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus M(GetPlayerCoins)(ScriptInstance* script, s32 isInitialCall) {
     script->varTable[0] = gPlayerData.coins;
     return ApiStatus_DONE2;
 }

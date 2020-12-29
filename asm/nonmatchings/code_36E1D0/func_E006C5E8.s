@@ -42,10 +42,10 @@ glabel func_E006C5E8
 /* 36E84C E006C67C 24C20008 */  addiu     $v0, $a2, 8
 /* 36E850 E006C680 AE820000 */  sw        $v0, ($s4)
 /* 36E854 E006C684 8C62001C */  lw        $v0, 0x1c($v1)
-/* 36E858 E006C688 3C038000 */  lui       $v1, %hi(D_80007410)
+/* 36E858 E006C688 3C038000 */  lui       $v1, 0x8000
 /* 36E85C E006C68C 00431021 */  addu      $v0, $v0, $v1
 /* 36E860 E006C690 3C038007 */  lui       $v1, %hi(gCurrentCameraID)
-/* 36E864 E006C694 8C637410 */  lw        $v1, %lo(D_80007410)($v1)
+/* 36E864 E006C694 8C637410 */  lw        $v1, %lo(gCurrentCameraID)($v1)
 /* 36E868 E006C698 3C04800B */  lui       $a0, %hi(gCameras)
 /* 36E86C E006C69C 24841D80 */  addiu     $a0, $a0, %lo(gCameras)
 /* 36E870 E006C6A0 ACC20004 */  sw        $v0, 4($a2)

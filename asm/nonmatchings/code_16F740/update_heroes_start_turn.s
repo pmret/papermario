@@ -332,12 +332,12 @@ glabel update_heroes_start_turn
 /* 170DC8 802424E8 82230210 */  lb        $v1, 0x210($s1)
 /* 170DCC 802424EC 24020009 */  addiu     $v0, $zero, 9
 /* 170DD0 802424F0 1462000C */  bne       $v1, $v0, .L80242524
-/* 170DD4 802424F4 3C03F7FF */   lui      $v1, %hi(D_F7FEC070)
+/* 170DD4 802424F4 3C03F7FF */   lui      $v1, 0xf7ff
 /* 170DD8 802424F8 82220214 */  lb        $v0, 0x214($s1)
 /* 170DDC 802424FC 14400009 */  bnez      $v0, .L80242524
 /* 170DE0 80242500 24040001 */   addiu    $a0, $zero, 1
 /* 170DE4 80242504 3C03800E */  lui       $v1, %hi(gBattleStatus)
-/* 170DE8 80242508 2463C070 */  addiu     $v1, $v1, %lo(D_F7FEC070)
+/* 170DE8 80242508 2463C070 */  addiu     $v1, $v1, %lo(gBattleStatus)
 /* 170DEC 8024250C 8C620000 */  lw        $v0, ($v1)
 /* 170DF0 80242510 2405000A */  addiu     $a1, $zero, 0xa
 /* 170DF4 80242514 34420020 */  ori       $v0, $v0, 0x20

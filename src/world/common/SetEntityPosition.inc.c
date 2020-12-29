@@ -1,6 +1,7 @@
 #include "common.h"
+#include "map.h"
 
-static ApiStatus SetEntityPosition(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus M(SetEntityPosition)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 entityIndex = get_variable(script, *args++);
     s32 x = get_variable(script, *args++);

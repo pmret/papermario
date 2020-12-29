@@ -4,7 +4,7 @@ INCLUDE_ASM(s32, "world/area_sam/sam_11/D3A930", func_80240360_D3A930);
 
 INCLUDE_ASM(s32, "world/area_sam/sam_11/D3A930", func_8024052C_D3AAFC);
 
-static ApiStatus Set80151310_2(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus Set80151310_2(ScriptInstance* script, s32 isInitialCall) {
     D_80151310 = 2;
     return ApiStatus_DONE2;
 }

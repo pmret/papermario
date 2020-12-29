@@ -70,10 +70,10 @@ glabel func_802E6ED8
 /* 10885C 802E6FDC 00621821 */  addu      $v1, $v1, $v0
 /* 108860 802E6FE0 AC830004 */  sw        $v1, 4($a0)
 /* 108864 802E6FE4 8E430044 */  lw        $v1, 0x44($s2)
-/* 108868 802E6FE8 3C02DE00 */  lui       $v0, %hi(D_DE000DC0)
+/* 108868 802E6FE8 3C02DE00 */  lui       $v0, 0xde00
 /* 10886C 802E6FEC ACA20000 */  sw        $v0, ($a1)
 /* 108870 802E6FF0 3C020A00 */  lui       $v0, 0xa00
-/* 108874 802E6FF4 24420DC0 */  addiu     $v0, $v0, %lo(D_DE000DC0)
+/* 108874 802E6FF4 24420DC0 */  addiu     $v0, $v0, 0xdc0
 /* 108878 802E6FF8 3042FFFF */  andi      $v0, $v0, 0xffff
 /* 10887C 802E6FFC 00621821 */  addu      $v1, $v1, $v0
 /* 108880 802E7000 24020040 */  addiu     $v0, $zero, 0x40

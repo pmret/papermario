@@ -90,7 +90,7 @@ Script M(NpcAI_80240B50) = SCRIPT({
     match SI_SAVE_VAR(0) {
         == 0xFFFFFF86 {
 89:
-            UnkPositionFunc(0xFFFFFF8A, 86, 0xFFFFFFBA, 0xFFFFFFF1);
+            M(UnkPositionFunc)(0xFFFFFF8A, 86, 0xFFFFFFBA, 0xFFFFFFF1);
             sleep 1;
             if (SI_VAR(0) == 0) {
                 goto 89;

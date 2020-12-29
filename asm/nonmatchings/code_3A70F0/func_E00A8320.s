@@ -115,10 +115,10 @@ glabel func_E00A8320
 /* 3A75C8 E00A84D8 AC820004 */  sw        $v0, 4($a0)
 /* 3A75CC E00A84DC 24820010 */  addiu     $v0, $a0, 0x10
 /* 3A75D0 E00A84E0 AEA20000 */  sw        $v0, ($s5)
-/* 3A75D4 E00A84E4 3C02DE00 */  lui       $v0, %hi(D_DE003110)
+/* 3A75D4 E00A84E4 3C02DE00 */  lui       $v0, 0xde00
 /* 3A75D8 E00A84E8 AC820008 */  sw        $v0, 8($a0)
 /* 3A75DC E00A84EC 3C020900 */  lui       $v0, 0x900
-/* 3A75E0 E00A84F0 24423110 */  addiu     $v0, $v0, %lo(D_DE003110)
+/* 3A75E0 E00A84F0 24423110 */  addiu     $v0, $v0, 0x3110
 /* 3A75E4 E00A84F4 AC82000C */  sw        $v0, 0xc($a0)
 .LE00A84F8:
 /* 3A75E8 E00A84F8 27A40018 */  addiu     $a0, $sp, 0x18

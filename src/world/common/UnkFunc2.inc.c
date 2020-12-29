@@ -1,6 +1,7 @@
 #include "common.h"
+#include "map.h"
 
-static s32 UnkFunc2(s32 arg0) {
+s32 M(UnkFunc2)(s32 arg0) {
     u32 val;
 
     arg0 &= ~0x1000000;

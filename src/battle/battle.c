@@ -358,6 +358,8 @@ BattleArea gBattleAreas[0x30] = {
     {},
 };
 
+// possibly a jump table
+// vram 0x8009A578
 const s32 rodata_75978[] = {
     0x80072F38, 0x80072F4C,
     0x80072F64, 0x80072F90, 0x80072FA8, 0x00000000,

@@ -45,10 +45,10 @@ glabel pause_map_draw_contents
 /* 140EFC 8024DBBC 00031940 */  sll       $v1, $v1, 5
 /* 140F00 8024DBC0 AFA30058 */  sw        $v1, 0x58($sp)
 /* 140F04 8024DBC4 AE220000 */  sw        $v0, ($s1)
-/* 140F08 8024DBC8 3C02DE00 */  lui       $v0, %hi(D_DDFFF118)
+/* 140F08 8024DBC8 3C02DE00 */  lui       $v0, 0xde00
 /* 140F0C 8024DBCC AC820000 */  sw        $v0, ($a0)
 /* 140F10 8024DBD0 3C028027 */  lui       $v0, %hi(D_8026F118)
-/* 140F14 8024DBD4 2442F118 */  addiu     $v0, $v0, %lo(D_DDFFF118)
+/* 140F14 8024DBD4 2442F118 */  addiu     $v0, $v0, %lo(D_8026F118)
 /* 140F18 8024DBD8 AC820004 */  sw        $v0, 4($a0)
 .L8024DBDC:
 /* 140F1C 8024DBDC 2A42006F */  slti      $v0, $s2, 0x6f
@@ -153,10 +153,10 @@ glabel pause_map_draw_contents
 /* 1410A0 8024DD60 8FAF00A8 */  lw        $t7, 0xa8($sp)
 /* 1410A4 8024DD64 24A20008 */  addiu     $v0, $a1, 8
 /* 1410A8 8024DD68 AE220000 */  sw        $v0, ($s1)
-/* 1410AC 8024DD6C 3C02DE00 */  lui       $v0, %hi(D_DDFFF1B8)
+/* 1410AC 8024DD6C 3C02DE00 */  lui       $v0, 0xde00
 /* 1410B0 8024DD70 ACA20000 */  sw        $v0, ($a1)
 /* 1410B4 8024DD74 3C028027 */  lui       $v0, %hi(D_8026F1B8)
-/* 1410B8 8024DD78 2442F1B8 */  addiu     $v0, $v0, %lo(D_DDFFF1B8)
+/* 1410B8 8024DD78 2442F1B8 */  addiu     $v0, $v0, %lo(D_8026F1B8)
 /* 1410BC 8024DD7C ACA20004 */  sw        $v0, 4($a1)
 /* 1410C0 8024DD80 25E30016 */  addiu     $v1, $t7, 0x16
 /* 1410C4 8024DD84 1C800002 */  bgtz      $a0, .L8024DD90
@@ -473,10 +473,10 @@ glabel pause_map_draw_contents
 /* 141578 8024E238 3C118025 */  lui       $s1, %hi(D_80250560)
 /* 14157C 8024E23C 02238821 */  addu      $s1, $s1, $v1
 /* 141580 8024E240 8E310560 */  lw        $s1, %lo(D_80250560)($s1)
-/* 141584 8024E244 3C02DE00 */  lui       $v0, %hi(D_DDFFF2A0)
+/* 141584 8024E244 3C02DE00 */  lui       $v0, 0xde00
 /* 141588 8024E248 ACE20000 */  sw        $v0, ($a3)
 /* 14158C 8024E24C 3C028027 */  lui       $v0, %hi(D_8026F2A0)
-/* 141590 8024E250 2442F2A0 */  addiu     $v0, $v0, %lo(D_DDFFF2A0)
+/* 141590 8024E250 2442F2A0 */  addiu     $v0, $v0, %lo(D_8026F2A0)
 /* 141594 8024E254 ACE20004 */  sw        $v0, 4($a3)
 /* 141598 8024E258 0220282D */  daddu     $a1, $s1, $zero
 /* 14159C 8024E25C 0220902D */  daddu     $s2, $s1, $zero

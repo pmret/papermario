@@ -48,10 +48,10 @@ glabel func_E00AE54C
 /* 3B2948 E00AE5F8 24A20008 */  addiu     $v0, $a1, 8
 /* 3B294C E00AE5FC AE620000 */  sw        $v0, ($s3)
 /* 3B2950 E00AE600 8C62001C */  lw        $v0, 0x1c($v1)
-/* 3B2954 E00AE604 3C038000 */  lui       $v1, %hi(D_80001D80)
+/* 3B2954 E00AE604 3C038000 */  lui       $v1, 0x8000
 /* 3B2958 E00AE608 00431021 */  addu      $v0, $v0, $v1
 /* 3B295C E00AE60C 3C03800B */  lui       $v1, %hi(gCameras)
-/* 3B2960 E00AE610 24631D80 */  addiu     $v1, $v1, %lo(D_80001D80)
+/* 3B2960 E00AE610 24631D80 */  addiu     $v1, $v1, %lo(gCameras)
 /* 3B2964 E00AE614 ACA20004 */  sw        $v0, 4($a1)
 /* 3B2968 E00AE618 8E450004 */  lw        $a1, 4($s2)
 /* 3B296C E00AE61C 8E460008 */  lw        $a2, 8($s2)
@@ -118,10 +118,10 @@ glabel func_E00AE54C
 /* 3B2A60 E00AE710 9243002B */  lbu       $v1, 0x2b($s2)
 /* 3B2A64 E00AE714 9245002F */  lbu       $a1, 0x2f($s2)
 /* 3B2A68 E00AE718 92460033 */  lbu       $a2, 0x33($s2)
-/* 3B2A6C E00AE71C 3C02DE00 */  lui       $v0, %hi(D_DE001000)
+/* 3B2A6C E00AE71C 3C02DE00 */  lui       $v0, 0xde00
 /* 3B2A70 E00AE720 AC820010 */  sw        $v0, 0x10($a0)
 /* 3B2A74 E00AE724 3C020900 */  lui       $v0, 0x900
-/* 3B2A78 E00AE728 24421000 */  addiu     $v0, $v0, %lo(D_DE001000)
+/* 3B2A78 E00AE728 24421000 */  addiu     $v0, $v0, 0x1000
 /* 3B2A7C E00AE72C AC820014 */  sw        $v0, 0x14($a0)
 /* 3B2A80 E00AE730 00031E00 */  sll       $v1, $v1, 0x18
 /* 3B2A84 E00AE734 00052C00 */  sll       $a1, $a1, 0x10
@@ -266,10 +266,10 @@ glabel func_E00AE54C
 /* 3B2CAC E00AE95C 005E1025 */  or        $v0, $v0, $fp
 /* 3B2CB0 E00AE960 AC820008 */  sw        $v0, 8($a0)
 /* 3B2CB4 E00AE964 8FA900AC */  lw        $t1, 0xac($sp)
-/* 3B2CB8 E00AE968 3C02DE00 */  lui       $v0, %hi(D_DE0010F8)
+/* 3B2CB8 E00AE968 3C02DE00 */  lui       $v0, 0xde00
 /* 3B2CBC E00AE96C AC820010 */  sw        $v0, 0x10($a0)
 /* 3B2CC0 E00AE970 3C020900 */  lui       $v0, 0x900
-/* 3B2CC4 E00AE974 244210F8 */  addiu     $v0, $v0, %lo(D_DE0010F8)
+/* 3B2CC4 E00AE974 244210F8 */  addiu     $v0, $v0, 0x10f8
 /* 3B2CC8 E00AE978 AC820014 */  sw        $v0, 0x14($a0)
 /* 3B2CCC E00AE97C 24020040 */  addiu     $v0, $zero, 0x40
 /* 3B2CD0 E00AE980 AC870018 */  sw        $a3, 0x18($a0)
