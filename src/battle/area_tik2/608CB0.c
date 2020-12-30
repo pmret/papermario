@@ -34,6 +34,4 @@ INCLUDE_ASM(s32, "battle/area_tik2/608CB0", func_80218884_609334);
 
 #include "common/UnkBattleFunc2.inc.c"
 
-INCLUDE_ASM(s32, "battle/area_tik2/608CB0", func_80218B2C_6095DC);
-
 INCLUDE_ASM(s32, "battle/area_tik2/608CB0", func_80218BE0_609690);

@@ -45,5 +45,3 @@ INCLUDE_ASM(s32, "battle/area_pra3/669D80", func_80219524_66B2A4);
 #define NAMESPACE b_area_pra3
 
 #include "common/UnkBattleFunc2.inc.c"
-
-INCLUDE_ASM(s32, "battle/area_pra3/669D80", func_80219770_66B4F0);
