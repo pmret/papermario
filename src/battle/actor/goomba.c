@@ -16,14 +16,12 @@ Script goomba_turn;
 Script goomba_idle;
 Script goomba_dispatch;
 
-// 431FB0-431FBC (VRAM: 80219610)
 s32 goomba_defense_table[] = {
     Element_NORMAL, 0,
 
     Element_END,
 };
 
-// 431FBC-432068 (VRAM: 8021961C)
 s32 goomba_status_table[] = {
     Debuff_NORMAL, 0,
     Debuff_DEFAULT, 0,
@@ -51,7 +49,6 @@ s32 goomba_status_table[] = {
     Debuff_END,
 };
 
-// 432068-43208C (VRAM: 802196C8)
 ActorPartDesc goomba_parts[] = {
     {
         .flags = 0x00800000,
@@ -67,7 +64,6 @@ ActorPartDesc goomba_parts[] = {
     },
 };
 
-// 43208C-4320B4 (VRAM: 802196EC)
 ActorDesc goomba = {
     .flags = 0,
     .type = 7,
@@ -91,7 +87,6 @@ ActorDesc goomba = {
     .statusMessageOffset = { 10, 20 },
 };
 
-// 4320B4-432100 (VRAM: 80219714)
 s32 goomba_anims[] = {
     Debuff_NORMAL, NPC_ANIM(goomba, normal, idle),
     Debuff_STONE, NPC_ANIM(goomba, normal, still),
@@ -106,7 +101,6 @@ s32 goomba_anims[] = {
     Debuff_END,
 };
 
-// 432100-43214C (VRAM: 80219760)
 s32 goomba_anims_running[] = {
     Debuff_NORMAL, NPC_ANIM(goomba, normal, run),
     Debuff_STONE, NPC_ANIM(goomba, normal, still),
@@ -121,14 +115,12 @@ s32 goomba_anims_running[] = {
     Debuff_END,
 };
 
-// 43214C-432198 (VRAM: 802197AC)
 Script goomba_init = SCRIPT({
     BindTakeTurn(ActorID_SELF, goomba_turn);
     BindIdle(ActorID_SELF, goomba_idle);
     BindHandleEvent(ActorID_SELF, goomba_dispatch);
 });
 
-// 432198-432474 (VRAM: 802197F8)
 Script goomba_idle = SCRIPT({
 10:
     RandInt(80, SI_VAR(0));
@@ -177,7 +169,6 @@ Script goomba_idle = SCRIPT({
     goto 10;
 });
 
-// 432474-432B34 (VRAM: 80219AD4)
 Script goomba_dispatch = SCRIPT({
     UseIdleAnimation(ActorID_SELF, 0);
     EnableIdleScript(ActorID_SELF, 0);
@@ -301,7 +292,6 @@ Script goomba_dispatch = SCRIPT({
     UseIdleAnimation(ActorID_SELF, 1);
 });
 
-// 432B34-432CA0 (VRAM: 8021A194)
 f32 float_table_for_func_80218000[] = {
     0.000000f, 0.017452f, 0.034899f, 0.052336f, 0.069756f, 0.087156f, 0.104528f, 0.121869f,
     0.139173f, 0.156434f, 0.173648f, 0.190809f, 0.207912f, 0.224951f, 0.241922f, 0.258819f,
@@ -317,7 +307,6 @@ f32 float_table_for_func_80218000[] = {
     0.999391f, 0.999848f, 1.000000f,
 };
 
-// 432CA0-433968 (VRAM: 8021A300)
 Script goomba_turn = SCRIPT({
     UseIdleAnimation(ActorID_SELF, 0);
     EnableIdleScript(ActorID_SELF, 0);
