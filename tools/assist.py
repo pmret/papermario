@@ -195,14 +195,23 @@ def do_cross_query():
 
                 cluster_match = False
                 for cluster in clusters:
-                    cluster_score = get_pair_score(query_bytes, cluster[0])
+                    cluster_first = cluster[0]
+                    cluster_score = get_pair_score(query_bytes, cluster_first)
                     if cluster_score >= args.threshold:
-                        cluster.append(sym_name)
-                        ccount[cluster[0]] += 1
                         cluster_match = True
+                        if sym_name.startswith("func") and not cluster_first.startswith("func"):
+                            ccount[sym_name] = ccount[cluster_first]
+                            del ccount[cluster_first]
+                            cluster_first = sym_name
+                            cluster.insert(0, cluster_first)
+                        else:
+                            cluster.append(sym_name)
+
+                        if cluster_first.startswith("func"):
+                            ccount[cluster_first] += 1
 
                         if len(cluster) % 10 == 0 and len(cluster) >= 50:
-                            print(f"Cluster {cluster[0]} grew to size {len(cluster)}")
+                            print(f"Cluster {cluster_first} grew to size {len(cluster)}")
                         break
                 if not cluster_match:
                     clusters.append([sym_name])
