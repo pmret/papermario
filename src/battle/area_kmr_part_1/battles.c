@@ -22,7 +22,7 @@ Formation formation2 = {
 
 Formation formation3 = {
     { &goomba, .position = 1, .priority = 10 },
-    { paragoomba, .position = 6, .priority = 9 },
+    { &paragoomba, .position = 6, .priority = 9 },
 };
 
 Formation formation4 = {
@@ -34,37 +34,37 @@ Formation formation4 = {
 
 Formation formation5 = {
     { &goomba, .position = 1, .priority = 10 },
-    { spikedGoomba, .position = 2, .priority = 9 },
+    { &spiked_goomba, .position = 2, .priority = 9 },
 };
 
 Formation formation6 = {
     { &goomba, .position = 0, .priority = 10 },
-    { paragoomba, .position = 5, .priority = 9 },
+    { &paragoomba, .position = 5, .priority = 9 },
     { &goomba, .position = 2, .priority = 8 },
-    { paragoomba, .position = 7, .priority = 7 },
+    { &paragoomba, .position = 7, .priority = 7 },
 };
 
 Formation formation7 = {
-    { paragoomba, .position = 5, .priority = 10 },
+    { &paragoomba, .position = 5, .priority = 10 },
 };
 
 Formation formation8 = {
-    { paragoomba, .position = 5, .priority = 10 },
-    { paragoomba, .position = 6, .priority = 9 },
+    { &paragoomba, .position = 5, .priority = 10 },
+    { &paragoomba, .position = 6, .priority = 9 },
 };
 
 Formation formation9 = {
-    { paragoomba, .position = 4, .priority = 10 },
-    { paragoomba, .position = 5, .priority = 9 },
-    { paragoomba, .position = 6, .priority = 8 },
+    { &paragoomba, .position = 4, .priority = 10 },
+    { &paragoomba, .position = 5, .priority = 9 },
+    { &paragoomba, .position = 6, .priority = 8 },
 };
 
 Formation formation10 = {
-    { spikedGoomba, .position = 1, .priority = 10 },
+    { &spiked_goomba, .position = 1, .priority = 10 },
 };
 
 Formation formation11 = {
-    { spikedGoomba, .position = 1, .priority = 10 },
+    { &spiked_goomba, .position = 1, .priority = 10 },
     { &goomba, .position = 2, .priority = 9 },
 };
 
