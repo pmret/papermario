@@ -949,6 +949,7 @@ segments:
     files:
     - [0x439A90, c]
     - [0x43A5A0, c]
+    - [0x43A7E0, c]
     - [0x43AA50, c]
     - [0x43ACC0, c]
     - [0x43AF30, c]

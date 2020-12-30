@@ -48,8 +48,9 @@ INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_80241978_DBEC28);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_80241B28_DBEDD8);
 
-// Should be #include "world/common/UnkNpcAIFunc1.inc.c"
-INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_80242150_DBF400);
+#define NAMESPACE dup_omo_07
+#include "world/common/UnkNpcAIFunc1.inc.c"
+#define NAMESPACE omo_07
 
 INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_80242210_DBF4C0);
 

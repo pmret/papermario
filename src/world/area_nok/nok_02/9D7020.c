@@ -10,7 +10,7 @@ INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7020", func_80240034_9D7054);
 
 #include "world/common/GetCurrentCameraYawClamped180.inc.c"
 
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7020", func_8024023C_9D725C);
+#include "world/common/SomeXYZFunc2.inc.c"
 
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7020", func_802402E0_9D7300);
 

@@ -54,7 +54,7 @@ glabel func_8024219C_BE594C
 /* BE5A0C 8024225C 8E4300B0 */  lw        $v1, 0xb0($s2)
 /* BE5A10 80242260 30620004 */  andi      $v0, $v1, 4
 /* BE5A14 80242264 10400007 */  beqz      $v0, .L80242284
-/* BE5A18 80242268 00000000 */   nop      
+/* BE5A18 80242268 00000000 */   nop
 /* BE5A1C 8024226C 824200B4 */  lb        $v0, 0xb4($s2)
 /* BE5A20 80242270 1440003C */  bnez      $v0, .L80242364
 /* BE5A24 80242274 0000102D */   daddu    $v0, $zero, $zero
@@ -70,7 +70,7 @@ glabel func_8024219C_BE594C
 /* BE5A48 80242298 00220821 */  addu      $at, $at, $v0
 /* BE5A4C 8024229C 8C2242E8 */  lw        $v0, %lo(D_802442E8)($at)
 /* BE5A50 802422A0 00400008 */  jr        $v0
-/* BE5A54 802422A4 00000000 */   nop      
+/* BE5A54 802422A4 00000000 */   nop
 /* BE5A58 802422A8 0280202D */  daddu     $a0, $s4, $zero
 /* BE5A5C 802422AC 0200282D */  daddu     $a1, $s0, $zero
 /* BE5A60 802422B0 0C0903A4 */  jal       func_80240E90_BE4640
@@ -83,7 +83,7 @@ glabel func_8024219C_BE594C
 /* BE5A7C 802422CC 0000102D */   daddu    $v0, $zero, $zero
 /* BE5A80 802422D0 0280202D */  daddu     $a0, $s4, $zero
 /* BE5A84 802422D4 0200282D */  daddu     $a1, $s0, $zero
-/* BE5A88 802422D8 0C09059A */  jal       func_80241668_BE4E18
+/* BE5A88 802422D8 0C09059A */  jal       dup_arn_04_UnkNpcAIFunc1
 /* BE5A8C 802422DC 0260302D */   daddu    $a2, $s3, $zero
 /* BE5A90 802422E0 0280202D */  daddu     $a0, $s4, $zero
 /* BE5A94 802422E4 0200282D */  daddu     $a1, $s0, $zero

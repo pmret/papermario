@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 import argparse
-from collections import OrderedDict
+from collections import Counter, OrderedDict
 import os
 import sys
 
@@ -185,33 +185,28 @@ def do_query(query):
 
 
 def do_cross_query():
+    ccount = Counter()
     clusters = []
-    max_cluster = None
-    max_cluster_len = 0
 
     for sym_name in map_syms:
         if not sym_name.startswith("_binary"):
-            sym = map_syms[sym_name]
             if get_symbol_length(sym_name) > 16:
                 query_bytes = get_symbol_bytes(map_offsets, sym_name)
+
                 cluster_match = False
                 for cluster in clusters:
                     cluster_score = get_pair_score(query_bytes, cluster[0])
                     if cluster_score >= args.threshold:
                         cluster.append(sym_name)
+                        ccount[cluster[0]] += 1
                         cluster_match = True
 
-                        if len(cluster) > max_cluster_len:
-                            max_cluster_len = len(cluster)
-                            max_cluster = cluster
-
-                        if len(cluster) % 10 == 0:
-                            print("Cluster " + cluster[0] + " grew to size " + str(len(cluster)))
+                        if len(cluster) % 10 == 0 and len(cluster) >= 50:
+                            print(f"Cluster {cluster[0]} grew to size {len(cluster)}")
                         break
                 if not cluster_match:
                     clusters.append([sym_name])
-                    # print("Adding cluster for " + sym_name)
-    print(max_cluster[0])
+    print(ccount.most_common(100))
 
 
 parser = argparse.ArgumentParser(description="Tools to assist with decomp")

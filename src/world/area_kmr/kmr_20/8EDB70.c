@@ -18,7 +18,9 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8EDB70", func_80241D84_8EDBA4);
 #include "world/common/GetCurrentCameraYawClamped180.inc.c"
 #define NAMESPACE kmr_20
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8EDB70", func_80241F8C_8EDDAC);
+#define NAMESPACE dup2_kmr_20
+#include "world/common/SomeXYZFunc2.inc.c"
+#define NAMESPACE kmr_20
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8EDB70", func_80242030_8EDE50);
 

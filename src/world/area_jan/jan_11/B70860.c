@@ -12,6 +12,6 @@ INCLUDE_ASM(s32, "world/area_jan/jan_11/B70860", func_8024018C_B709EC);
 
 #include "world/common/GetCurrentCameraYawClamped180.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_11/B70860", func_80240394_B70BF4);
+#include "world/common/SomeXYZFunc2.inc.c"
 
 INCLUDE_ASM(s32, "world/area_jan/jan_11/B70860", func_80240438_B70C98);

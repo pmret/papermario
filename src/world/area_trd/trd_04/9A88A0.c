@@ -40,8 +40,9 @@ INCLUDE_ASM(s32, "world/area_trd/trd_04/9A88A0", func_80241E18_9AA208);
 
 INCLUDE_ASM(s32, "world/area_trd/trd_04/9A88A0", func_80241FC8_9AA3B8);
 
-// Should be #include "world/common/UnkNpcAIFunc1.inc.c"
-INCLUDE_ASM(s32, "world/area_trd/trd_04/9A88A0", func_802425F0_9AA9E0);
+#define NAMESPACE dup_trd_04
+#include "world/common/UnkNpcAIFunc1.inc.c"
+#define NAMESPACE trd_04
 
 INCLUDE_ASM(s32, "world/area_trd/trd_04/9A88A0", func_802426B0_9AAAA0);
 

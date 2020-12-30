@@ -28,8 +28,9 @@ INCLUDE_ASM(s32, "world/area_arn/arn_04/BE37B0", func_80240E90_BE4640);
 
 INCLUDE_ASM(s32, "world/area_arn/arn_04/BE37B0", func_80241040_BE47F0);
 
-// should be #include "world/common/UnkNpcAIFunc1.inc.c", probably missing file split
-INCLUDE_ASM(s32, "world/area_arn/arn_04/BE37B0", func_80241668_BE4E18);
+#define NAMESPACE dup_arn_04
+#include "world/common/UnkNpcAIFunc1.inc.c"
+#define NAMESPACE arn_04
 
 INCLUDE_ASM(s32, "world/area_arn/arn_04/BE37B0", func_80241728_BE4ED8);
 

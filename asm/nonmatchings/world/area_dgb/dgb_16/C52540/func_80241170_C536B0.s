@@ -117,7 +117,7 @@ glabel func_80241170_C536B0
 /* C53858 80241318 00000000 */   nop
 /* C5385C 8024131C 0240202D */  daddu     $a0, $s2, $zero
 /* C53860 80241320 0260282D */  daddu     $a1, $s3, $zero
-/* C53864 80241324 0C0126D1 */  jal       func_80049B44
+/* C53864 80241324 0C0126D1 */  jal       base_UnkNpcAIFunc1
 /* C53868 80241328 0280302D */   daddu    $a2, $s4, $zero
 /* C5386C 8024132C 0240202D */  daddu     $a0, $s2, $zero
 /* C53870 80241330 0260282D */  daddu     $a1, $s3, $zero
