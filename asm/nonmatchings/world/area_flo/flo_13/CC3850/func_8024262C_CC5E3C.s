@@ -232,7 +232,7 @@ glabel func_8024262C_CC5E3C
 .L8024297C:
 /* CC618C 8024297C 0260202D */  daddu     $a0, $s3, $zero
 /* CC6190 80242980 0280282D */  daddu     $a1, $s4, $zero
-/* CC6194 80242984 0C0908A6 */  jal       func_80242298_CC5AA8
+/* CC6194 80242984 0C0908A6 */  jal       flo_13_set_script_owner_npc_anim
 /* CC6198 80242988 02A0302D */   daddu    $a2, $s5, $zero
 /* CC619C 8024298C 0260202D */  daddu     $a0, $s3, $zero
 .L80242990:

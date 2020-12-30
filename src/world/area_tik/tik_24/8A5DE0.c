@@ -2,7 +2,7 @@
 
 INCLUDE_ASM(s32, "world/area_tik/tik_24/8A5DE0", func_80240360_8A5DE0);
 
-INCLUDE_ASM(s32, "world/area_tik/tik_24/8A5DE0", func_802406D0_8A6150);
+#include "world/common/set_script_owner_npc_anim.inc.c"
 
 INCLUDE_ASM(s32, "world/area_tik/tik_24/8A5DE0", func_8024074C_8A61CC);
 

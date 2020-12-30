@@ -1,6 +1,6 @@
 #include "tik_09.h"
 
-INCLUDE_ASM(s32, "world/area_tik/tik_09/882BF0", func_80240A30_882BF0);
+#include "world/common/set_script_owner_npc_anim.inc.c"
 
 INCLUDE_ASM(s32, "world/area_tik/tik_09/882BF0", func_80240AAC_882C6C);
 

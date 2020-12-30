@@ -268,7 +268,7 @@ glabel func_80242918_CD9BF8
 /* CD9FCC 80242CEC 00000000 */   nop
 .L80242CF0:
 /* CD9FD0 80242CF0 0260282D */  daddu     $a1, $s3, $zero
-/* CD9FD4 80242CF4 0C090851 */  jal       func_80242144_CD9424
+/* CD9FD4 80242CF4 0C090851 */  jal       flo_17_set_script_owner_npc_anim
 /* CD9FD8 80242CF8 0280302D */   daddu    $a2, $s4, $zero
 .L80242CFC:
 /* CD9FDC 80242CFC 02A0202D */  daddu     $a0, $s5, $zero

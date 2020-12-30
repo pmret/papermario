@@ -12,7 +12,7 @@ INCLUDE_ASM(s32, "world/area_nok/nok_15/A06F00", func_80240034_A06F34);
 
 #include "world/common/SomeXYZFunc2.inc.c"
 
-INCLUDE_ASM(s32, "world/area_nok/nok_15/A06F00", func_802402E0_A071E0);
+#include "world/common/set_script_owner_npc_anim.inc.c"
 
 INCLUDE_ASM(s32, "world/area_nok/nok_15/A06F00", func_8024035C_A0725C);
 

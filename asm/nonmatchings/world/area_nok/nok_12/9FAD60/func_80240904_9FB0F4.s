@@ -232,7 +232,7 @@ glabel func_80240904_9FB0F4
 .L80240C54:
 /* 9FB444 80240C54 0260202D */  daddu     $a0, $s3, $zero
 /* 9FB448 80240C58 0280282D */  daddu     $a1, $s4, $zero
-/* 9FB44C 80240C5C 0C09015C */  jal       func_80240570_9FAD60
+/* 9FB44C 80240C5C 0C09015C */  jal       nok_12_set_script_owner_npc_anim
 /* 9FB450 80240C60 02A0302D */   daddu    $a2, $s5, $zero
 /* 9FB454 80240C64 0260202D */  daddu     $a0, $s3, $zero
 .L80240C68:

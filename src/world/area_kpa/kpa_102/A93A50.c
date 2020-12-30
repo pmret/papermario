@@ -20,7 +20,7 @@ INCLUDE_ASM(s32, "world/area_kpa/kpa_102/A93A50", func_80241204_A94944);
 
 #include "world/common/GetEncounterEnemyIsOwner.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_102/A93A50", func_8024155C_A94C9C);
+#include "world/common/set_script_owner_npc_anim.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_102/A93A50", func_802415D8_A94D18);
 

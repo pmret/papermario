@@ -24,7 +24,7 @@ INCLUDE_ASM(s32, "world/area_kpa/kpa_91/A86A50", func_80240AD4_A87524);
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_91/A86A50", func_80240B94_A875E4);
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_91/A86A50", func_80240E90_A878E0);
+#include "world/common/set_script_owner_npc_anim.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_91/A86A50", func_80240F0C_A8795C);
 

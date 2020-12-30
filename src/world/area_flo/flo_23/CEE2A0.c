@@ -10,7 +10,7 @@ INCLUDE_ASM(s32, "world/area_flo/flo_23/CEE2A0", func_802402C0_CEE520);
 
 INCLUDE_ASM(s32, "world/area_flo/flo_23/CEE2A0", func_802402F8_CEE558);
 
-INCLUDE_ASM(s32, "world/area_flo/flo_23/CEE2A0", func_80240394_CEE5F4);
+#include "world/common/set_script_owner_npc_anim.inc.c"
 
 INCLUDE_ASM(s32, "world/area_flo/flo_23/CEE2A0", func_80240410_CEE670);
 

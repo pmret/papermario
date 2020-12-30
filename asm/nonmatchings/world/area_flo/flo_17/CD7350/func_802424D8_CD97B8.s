@@ -232,7 +232,7 @@ glabel func_802424D8_CD97B8
 .L80242828:
 /* CD9B08 80242828 0260202D */  daddu     $a0, $s3, $zero
 /* CD9B0C 8024282C 0280282D */  daddu     $a1, $s4, $zero
-/* CD9B10 80242830 0C090851 */  jal       func_80242144_CD9424
+/* CD9B10 80242830 0C090851 */  jal       flo_17_set_script_owner_npc_anim
 /* CD9B14 80242834 02A0302D */   daddu    $a2, $s5, $zero
 /* CD9B18 80242838 0260202D */  daddu     $a0, $s3, $zero
 .L8024283C:

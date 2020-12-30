@@ -268,7 +268,7 @@ glabel func_80242A6C_CC627C
 /* CC6650 80242E40 00000000 */   nop
 .L80242E44:
 /* CC6654 80242E44 0260282D */  daddu     $a1, $s3, $zero
-/* CC6658 80242E48 0C0908A6 */  jal       func_80242298_CC5AA8
+/* CC6658 80242E48 0C0908A6 */  jal       flo_13_set_script_owner_npc_anim
 /* CC665C 80242E4C 0280302D */   daddu    $a2, $s4, $zero
 .L80242E50:
 /* CC6660 80242E50 02A0202D */  daddu     $a0, $s5, $zero

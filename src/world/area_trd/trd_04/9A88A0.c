@@ -1,6 +1,6 @@
 #include "trd_04.h"
 
-INCLUDE_ASM(s32, "world/area_trd/trd_04/9A88A0", func_802404B0_9A88A0);
+#include "world/common/set_script_owner_npc_anim.inc.c"
 
 INCLUDE_ASM(s32, "world/area_trd/trd_04/9A88A0", func_8024052C_9A891C);
 
