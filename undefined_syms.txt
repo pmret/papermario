@@ -329,6 +329,10 @@ DoShockHit = 0x8029A6FC;
 DoSleepHit = 0x802945E0;
 DoSpinSmashHit = 0x8029B998;
 DoStopHit = 0x80294650;
+DoAirLift = 0x8029C37C;
+DoBlowAway = 0x8029C4A8;
+DoBurnHit = 0x8029A0D0;
+DoDeath = 0x8029AEC0;
 ShakeCam1 = 0x802D9CB0;
 ShakeCamX = 0x802D9CE8;
 
@@ -358,3 +362,6 @@ D_DE0079B8 = 0xDE0079B8;
 D_DE003E00 = 0xDE003E00;
 D_C1F06370 = 0xC1F06370;
 D_DE001F00 = 0xDE001F00;
+
+paragoomba = 0x8021CD00;
+spiked_goomba = 0x8021B0AC;

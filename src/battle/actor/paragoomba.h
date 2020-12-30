@@ -1,7 +1,9 @@
 #ifndef _BATTLE_ACTOR_PARAGOOMBA_
 #define _BATTLE_ACTOR_PARAGOOMBA_
 
+#include "battle/battle.h"
+
 // TODO: disasm
-#define paragoomba 0x8021CD00
+extern ActorDesc paragoomba;
 
 #endif
