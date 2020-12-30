@@ -6,6 +6,6 @@
 #include "common/UnkBattleFunc1.inc.c"
 #define NAMESPACE b_area_tik3
 
-INCLUDE_ASM(s32, "battle/area_tik3/6187C0", func_8021819C_61888C);
+#include "common/UnkBattleFunc2.inc.c"
 
 INCLUDE_ASM(s32, "battle/area_tik3/6187C0", func_80218250_618940);

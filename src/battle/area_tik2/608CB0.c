@@ -32,7 +32,7 @@ INCLUDE_ASM(s32, "battle/area_tik2/608CB0", func_80218884_609334);
 #include "common/StartRumbleWithParams.inc.c"
 #define NAMESPACE b_area_tik2
 
-INCLUDE_ASM(s32, "battle/area_tik2/608CB0", func_80218A78_609528);
+#include "common/UnkBattleFunc2.inc.c"
 
 INCLUDE_ASM(s32, "battle/area_tik2/608CB0", func_80218B2C_6095DC);
 

@@ -28,13 +28,13 @@ glabel func_80218184_6DDF44
 /* 6DDFA0 802181E0 0C0B1EAF */  jal       get_variable
 /* 6DDFA4 802181E4 0040802D */   daddu    $s0, $v0, $zero
 /* 6DDFA8 802181E8 44936000 */  mtc1      $s3, $f12
-/* 6DDFAC 802181EC 00000000 */  nop       
+/* 6DDFAC 802181EC 00000000 */  nop
 /* 6DDFB0 802181F0 46806320 */  cvt.s.w   $f12, $f12
 /* 6DDFB4 802181F4 44927000 */  mtc1      $s2, $f14
-/* 6DDFB8 802181F8 00000000 */  nop       
+/* 6DDFB8 802181F8 00000000 */  nop
 /* 6DDFBC 802181FC 468073A0 */  cvt.s.w   $f14, $f14
 /* 6DDFC0 80218200 44900000 */  mtc1      $s0, $f0
-/* 6DDFC4 80218204 00000000 */  nop       
+/* 6DDFC4 80218204 00000000 */  nop
 /* 6DDFC8 80218208 46800020 */  cvt.s.w   $f0, $f0
 /* 6DDFCC 8021820C 44060000 */  mfc1      $a2, $f0
 /* 6DDFD0 80218210 0C0B5D30 */  jal       func_802D74C0
@@ -47,5 +47,5 @@ glabel func_80218184_6DDF44
 /* 6DDFEC 8021822C 24020002 */  addiu     $v0, $zero, 2
 /* 6DDFF0 80218230 03E00008 */  jr        $ra
 /* 6DDFF4 80218234 27BD0028 */   addiu    $sp, $sp, 0x28
-/* 6DDFF8 80218238 00000000 */  nop       
-/* 6DDFFC 8021823C 00000000 */  nop       
+/* 6DDFF8 80218238 00000000 */  nop
+/* 6DDFFC 8021823C 00000000 */  nop

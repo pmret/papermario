@@ -2,6 +2,6 @@
 
 #define NAMESPACE b_area_dig
 
-INCLUDE_ASM(s32, "battle/area_dig/6DDE90", func_802180D0_6DDE90);
+#include "common/UnkBattleFunc2.inc.c"
 
 INCLUDE_ASM(s32, "battle/area_dig/6DDE90", func_80218184_6DDF44);
