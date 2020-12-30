@@ -2,4 +2,6 @@
 
 #define NAMESPACE b_area_iwa
 
-INCLUDE_ASM(s32, "battle/area_iwa/4D0310", func_80218120_4D0310);
+#define NAMESPACE dup_b_area_iwa
+#include "common/IsSaveVar123.inc.c"
+#define NAMESPACE b_area_iwa
