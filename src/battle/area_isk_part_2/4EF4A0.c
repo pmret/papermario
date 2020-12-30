@@ -12,6 +12,6 @@ INCLUDE_ASM(s32, "battle/area_isk_part_2/4EF4A0", func_8021825C_4EF6FC);
 
 INCLUDE_ASM(s32, "battle/area_isk_part_2/4EF4A0", func_8021866C_4EFB0C);
 
-INCLUDE_ASM(s32, "battle/area_isk_part_2/4EF4A0", func_80218690_4EFB30);
+#include "common/UnkBattleFunc1.inc.c"
 
 INCLUDE_ASM(s32, "battle/area_isk_part_2/4EF4A0", func_8021875C_4EFBFC);

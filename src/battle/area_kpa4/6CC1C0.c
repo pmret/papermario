@@ -8,7 +8,7 @@ INCLUDE_ASM(s32, "battle/area_kpa4/6CC1C0", func_802182A8_6CC318);
 
 INCLUDE_ASM(s32, "battle/area_kpa4/6CC1C0", func_80218438_6CC4A8);
 
-INCLUDE_ASM(s32, "battle/area_kpa4/6CC1C0", func_80218464_6CC4D4);
+#include "common/UnkBattleFunc1.inc.c"
 
 #include "common/StartRumbleWithParams.inc.c"
 

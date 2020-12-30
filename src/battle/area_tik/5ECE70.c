@@ -2,8 +2,6 @@
 
 #define NAMESPACE b_area_tik
 
-INCLUDE_ASM(s32, "battle/area_tik/5ECE70", func_802189E0_5ECE70);
-
-INCLUDE_ASM(s32, "battle/area_tik/5ECE70", func_80218AB0_5ECF40);
-
-INCLUDE_ASM(s32, "battle/area_tik/5ECE70", func_80218B80_5ED010);
+#define NAMESPACE dup2_b_area_tik
+#include "common/UnkBattleFunc1.inc.c"
+#define NAMESPACE b_area_tik

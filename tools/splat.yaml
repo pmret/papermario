@@ -962,6 +962,7 @@ segments:
     - [0x447440, c]
     - [0x4479A0, c]
     - [0x447C80, c]
+    - [0x447D50, c]
     - [0x448690, c]
     - [0x448900, c]
     - [0x448B70, c]
@@ -974,6 +975,7 @@ segments:
     overlay: True
     files:
     - [0x464490, c]
+    - [0x464560, c]
     - [0x465D90, c]
     - [0x4661E0, bin]
   - name: battle/area_hos/
@@ -993,6 +995,7 @@ segments:
     files:
     - [0x48D1A0, c]
     - [0x48D700, c]
+    - [0x48DA50, c]
     - [0x48DBC0, c]
     - [0x48DCF0, c]
     - [0x48DFC0, bin]
@@ -1003,6 +1006,7 @@ segments:
     overlay: True
     files:
     - [0x4A10A0, c]
+    - [0x4A1190, c]
     - [0x4A12C0, c]
     - [0x4A1530, bin]
   - name: battle/area_trd_part_2/
@@ -1055,6 +1059,9 @@ segments:
     overlay: True
     files:
     - [0x4E2740, c]
+    - [0x4E2810, c]
+    - [0x4E28E0, c]
+    - [0x4E29B0, c]
     - [0x4E3190, c]
     - [0x4E3350, bin]
   - name: battle/area_isk_part_2/
@@ -1102,8 +1109,15 @@ segments:
     overlay: True
     files:
     - [0x5125D0, c]
+    - [0x5126A0, c]
+    - [0x512770, c]
+    - [0x512840, c]
+    - [0x512910, c]
+    - [0x5129E0, c]
+    - [0x512AB0, c]
     - [0x513380, c]
     - [0x5134B0, c]
+    - [0x513580, c]
     - [0x513790, c]
     - [0x5137E0, bin]
   - name: battle/area_omo2/
@@ -1170,6 +1184,7 @@ segments:
     - [0x557A80, c]
     - [0x557AD0, c]
     - [0x557EC0, c]
+    - [0x557F90, c]
     - [0x5580C0, c]
     - [0x558190, bin]
   - name: battle/area_kgr/
@@ -1188,6 +1203,8 @@ segments:
     overlay: True
     files:
     - [0x573920, c]
+    - [0x5739F0, c]
+    - [0x573AC0, c]
     - [0x573C30, c]
     - [0x573EE0, bin]
   - name: battle/area_jan2/
@@ -1207,6 +1224,7 @@ segments:
     files:
     - [0x58C2F0, c]
     - [0x58C670, c]
+    - [0x58C740, c]
     - [0x58D100, bin]
   - name: battle/area_kzn2/
     type: code
@@ -1242,8 +1260,11 @@ segments:
     overlay: True
     files:
     - [0x5EC490, c]
+    - [0x5EC560, c]
     - [0x5EC690, c]
     - [0x5ECE70, c]
+    - [0x5ECF40, c]
+    - [0x5ED010, c]
     - [0x5ED4B0, c]
     - [0x5ED950, c]
     - [0x5EDDF0, c]
@@ -1267,6 +1288,7 @@ segments:
     overlay: True
     files:
     - [0x6186F0, c]
+    - [0x6187C0, c]
     - [0x618A00, c]
     - [0x618EA0, c]
     - [0x619340, c]
@@ -1324,6 +1346,7 @@ segments:
     overlay: True
     files:
     - [0x684A30, c]
+    - [0x684B00, c]
     - [0x684C30, c]
     - [0x685260, bin]
   - name: battle/area_kpa2/
@@ -1343,6 +1366,7 @@ segments:
     overlay: True
     files:
     - [0x6BBB90, c]
+    - [0x6BBC60, c]
     - [0x6BD250, bin]
   - name: battle/area_kpa4/
     type: code
@@ -1369,7 +1393,10 @@ segments:
     overlay: True
     files:
     - [0x6DDDC0, c]
+    - [0x6DDE90, c]
     - [0x6DE000, c]
+    - [0x6DE060, c]
+    - [0x6DE1A0, c]
     - [0x6DE1F0, c]
     - [0x6DE3A0, c]
     - [0x6DE3F0, c]

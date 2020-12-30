@@ -8,7 +8,9 @@ INCLUDE_ASM(s32, "battle/area_kpa/684C30", func_80218358_684D88);
 
 INCLUDE_ASM(s32, "battle/area_kpa/684C30", func_802184E8_684F18);
 
-INCLUDE_ASM(s32, "battle/area_kpa/684C30", func_80218514_684F44);
+#define NAMESPACE dup2_b_area_kpa
+#include "common/UnkBattleFunc1.inc.c"
+#define NAMESPACE b_area_kpa
 
 #define NAMESPACE dup_b_area_kpa
 #include "common/StartRumbleWithParams.inc.c"

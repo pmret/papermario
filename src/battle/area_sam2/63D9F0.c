@@ -6,7 +6,7 @@ INCLUDE_ASM(s32, "battle/area_sam2/63D9F0", func_80218810_63D9F0);
 
 INCLUDE_ASM(s32, "battle/area_sam2/63D9F0", func_80218968_63DB48);
 
-INCLUDE_ASM(s32, "battle/area_sam2/63D9F0", func_80218994_63DB74);
+#include "common/UnkBattleFunc1.inc.c"
 
 #define NAMESPACE dup2_b_area_sam2
 #include "common/StartRumbleWithParams.inc.c"

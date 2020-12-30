@@ -2,8 +2,10 @@
 
 #define NAMESPACE b_area_jan
 
-INCLUDE_ASM(s32, "battle/area_jan/573C30", func_80218310_573C30);
+#include "common/UnkBattleFunc1.inc.c"
 
 INCLUDE_ASM(s32, "battle/area_jan/573C30", func_802183DC_573CFC);
 
-INCLUDE_ASM(s32, "battle/area_jan/573C30", func_802184F0_573E10);
+#define NAMESPACE dup_b_area_jan
+#include "common/UnkBattleFunc1.inc.c"
+#define NAMESPACE b_area_jan

@@ -6,4 +6,6 @@
 #include "common/StartRumbleWithParams.inc.c"
 #define NAMESPACE b_area_omo
 
-INCLUDE_ASM(s32, "battle/area_omo/513380", func_80218E08_5133D8);
+#define NAMESPACE dup9_b_area_omo
+#include "common/UnkBattleFunc1.inc.c"
+#define NAMESPACE b_area_omo

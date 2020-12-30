@@ -2,7 +2,7 @@
 
 #define NAMESPACE b_area_kgr
 
-INCLUDE_ASM(s32, "battle/area_kgr/56E2A0", func_80218000_56E2A0);
+#include "common/UnkBattleFunc1.inc.c"
 
 INCLUDE_ASM(s32, "battle/area_kgr/56E2A0", func_802180CC_56E36C);
 

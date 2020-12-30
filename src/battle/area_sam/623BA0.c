@@ -14,7 +14,7 @@ INCLUDE_ASM(s32, "battle/area_sam/623BA0", func_80218AF4_624694);
 
 INCLUDE_ASM(s32, "battle/area_sam/623BA0", func_80218B2C_6246CC);
 
-INCLUDE_ASM(s32, "battle/area_sam/623BA0", func_80218B74_624714);
+#include "common/UnkBattleFunc1.inc.c"
 
 INCLUDE_ASM(s32, "battle/area_sam/623BA0", func_80218C40_6247E0);
 
@@ -38,6 +38,8 @@ INCLUDE_ASM(s32, "battle/area_sam/623BA0", func_802194B8_625058);
 
 INCLUDE_ASM(s32, "battle/area_sam/623BA0", func_80219524_6250C4);
 
-INCLUDE_ASM(s32, "battle/area_sam/623BA0", func_802195F0_625190);
+#define NAMESPACE dup_b_area_sam
+#include "common/UnkBattleFunc1.inc.c"
+#define NAMESPACE b_area_sam
 
 INCLUDE_ASM(s32, "battle/area_sam/623BA0", func_802196BC_62525C);

@@ -14,7 +14,9 @@ INCLUDE_ASM(s32, "battle/area_pra3/669D80", func_80218AF4_66A874);
 
 INCLUDE_ASM(s32, "battle/area_pra3/669D80", func_80218B2C_66A8AC);
 
-INCLUDE_ASM(s32, "battle/area_pra3/669D80", func_80218B74_66A8F4);
+#define NAMESPACE dup2_b_area_pra3
+#include "common/UnkBattleFunc1.inc.c"
+#define NAMESPACE b_area_pra3
 
 INCLUDE_ASM(s32, "battle/area_pra3/669D80", func_80218C40_66A9C0);
 
@@ -38,7 +40,9 @@ INCLUDE_ASM(s32, "battle/area_pra3/669D80", func_802194B8_66B238);
 
 INCLUDE_ASM(s32, "battle/area_pra3/669D80", func_80219524_66B2A4);
 
-INCLUDE_ASM(s32, "battle/area_pra3/669D80", func_802195F0_66B370);
+#define NAMESPACE dup3_b_area_pra3
+#include "common/UnkBattleFunc1.inc.c"
+#define NAMESPACE b_area_pra3
 
 INCLUDE_ASM(s32, "battle/area_pra3/669D80", func_802196BC_66B43C);
 

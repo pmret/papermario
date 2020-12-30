@@ -679,8 +679,8 @@ typedef struct StaticActorData {
     /* 0x1F */ u8 coinReward;
     /* 0x20 */ u8 size[2];
     /* 0x22 */ Vec2b hpBarOffset;
-    /* 0x24 */ u8 statusIconOffset[2];
-    /* 0x26 */ u8 statusMessageOffset[2];
+    /* 0x24 */ Vec2b statusIconOffset;
+    /* 0x26 */ Vec2b statusMessageOffset;
 } StaticActorData; // size = 0x28
 
 typedef struct StaticMove {
