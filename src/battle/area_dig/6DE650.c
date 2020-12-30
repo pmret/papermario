@@ -2,4 +2,6 @@
 
 #define NAMESPACE b_area_dig
 
-INCLUDE_ASM(s32, "battle/area_dig/6DE650", func_80218890_6DE650);
+#define NAMESPACE dup_b_area_dig
+#include "common/Set80218630_Var0.inc.c"
+#define NAMESPACE b_area_dig

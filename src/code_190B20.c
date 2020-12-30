@@ -1,4 +1,4 @@
-#include "code_190B20.h"
+#include "common.h"
 
 INCLUDE_ASM(s32, "code_190B20", create_target_list);
 
