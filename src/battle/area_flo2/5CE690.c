@@ -6,7 +6,7 @@
 
 INCLUDE_ASM(s32, "battle/area_flo2/5CE690", func_80218058_5CE6E8);
 
-INCLUDE_ASM(s32, "battle/area_flo2/5CE690", func_80218114_5CE7A4);
+#include "common/UnkFloatFunc.inc.c"
 
 INCLUDE_ASM(s32, "battle/area_flo2/5CE690", func_802182A4_5CE934);
 

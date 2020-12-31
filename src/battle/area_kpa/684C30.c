@@ -4,7 +4,7 @@
 
 INCLUDE_ASM(s32, "battle/area_kpa/684C30", func_80218200_684C30);
 
-INCLUDE_ASM(s32, "battle/area_kpa/684C30", func_80218358_684D88);
+#include "common/UnkFloatFunc.inc.c"
 
 INCLUDE_ASM(s32, "battle/area_kpa/684C30", func_802184E8_684F18);
 

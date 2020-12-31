@@ -6,7 +6,7 @@ INCLUDE_ASM(s32, "world/area_flo/flo_00/C9EE30", func_80240F80_C9EEA0);
 
 INCLUDE_ASM(s32, "world/area_flo/flo_00/C9EE30", func_802410B4_C9EFD4);
 
-INCLUDE_ASM(s32, "world/area_flo/flo_00/C9EE30", func_802411EC_C9F10C);
+#include "common/UnkFloatFunc.inc.c"
 
 #include "world/common/SyncStatusMenu.inc.c"
 

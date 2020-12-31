@@ -4,7 +4,7 @@
 
 #include "common/StartRumbleWithParams.inc.c"
 
-INCLUDE_ASM(s32, "battle/area_pra2/660750", func_80218058_6607A8);
+#include "common/UnkFloatFunc.inc.c"
 
 INCLUDE_ASM(s32, "battle/area_pra2/660750", func_802181E8_660938);
 

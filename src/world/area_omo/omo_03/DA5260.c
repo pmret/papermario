@@ -14,7 +14,7 @@ INCLUDE_ASM(s32, "world/area_omo/omo_03/DA5260", func_8024020C_DA544C);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_03/DA5260", func_802402B0_DA54F0);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_03/DA5260", func_802403A8_DA55E8);
+#include "common/UnkFloatFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_03/DA5260", func_80240538_DA5778);
 

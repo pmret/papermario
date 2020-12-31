@@ -2,7 +2,7 @@
 
 #define NAMESPACE b_area_flo
 
-INCLUDE_ASM(s32, "battle/area_flo/5B16A0", func_802181F0_5B16A0);
+#include "common/UnkFloatFunc.inc.c"
 
 #define NAMESPACE dup_b_area_flo
 #include "common/UnkBattleFunc1.inc.c"
@@ -82,9 +82,13 @@ INCLUDE_ASM(s32, "battle/area_flo/5B16A0", func_802197E0_5B2C90);
 
 INCLUDE_ASM(s32, "battle/area_flo/5B16A0", func_802198A0_5B2D50);
 
-INCLUDE_ASM(s32, "battle/area_flo/5B16A0", func_80219960_5B2E10);
+#define NAMESPACE dup_b_area_flo
+#include "common/UnkFloatFunc.inc.c"
+#define NAMESPACE b_area_flo
 
-INCLUDE_ASM(s32, "battle/area_flo/5B16A0", func_80219AF0_5B2FA0);
+#define NAMESPACE dup2_b_area_flo
+#include "common/UnkFloatFunc.inc.c"
+#define NAMESPACE b_area_flo
 
 INCLUDE_ASM(s32, "battle/area_flo/5B16A0", func_80219C80_5B3130);
 

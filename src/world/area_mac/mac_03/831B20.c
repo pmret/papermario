@@ -1,6 +1,6 @@
 #include "mac_03.h"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_03/831B20", func_80240320_831B20);
+#include "common/UnkFloatFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_03/831B20", func_802404B0_831CB0);
 
