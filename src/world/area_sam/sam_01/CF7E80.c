@@ -76,11 +76,9 @@ INCLUDE_ASM(s32, "world/area_sam/sam_01/CF7E80", func_80241B20_CF9690);
 
 INCLUDE_ASM(s32, "world/area_sam/sam_01/CF7E80", func_80241C90_CF9800);
 
-// Identical to GetItemName but since there is already one inclusion of it in this file,
-// we can't include it again. This makes me think there is an undetected file boundary here,
-// or there's something else about the area system we're not aware of
-//#include "world/common/GetItemName.inc.c"
-INCLUDE_ASM(s32, "world/area_sam/sam_01/CF7E80", func_80241D44_CF98B4);
+#define NAMESPACE dup_sam_01
+#include "world/common/GetItemName.inc.c"
+#define NAMESPACE sam_01
 
 #include "world/common/SomeItemEntityFunc.inc.c"
 
