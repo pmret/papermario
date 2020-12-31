@@ -250,7 +250,7 @@ glabel func_80240728_CEE988
 /* CEED14 80240AB4 00000000 */   nop
 .L80240AB8:
 /* CEED18 80240AB8 0280282D */  daddu     $a1, $s4, $zero
-/* CEED1C 80240ABC 0C0901AA */  jal       func_802406A8_CEE908
+/* CEED1C 80240ABC 0C0901AA */  jal       flo_23_set_script_owner_npc_col_height
 /* CEED20 80240AC0 02A0302D */   daddu    $a2, $s5, $zero
 /* CEED24 80240AC4 080902B5 */  j         .L80240AD4
 /* CEED28 80240AC8 00000000 */   nop

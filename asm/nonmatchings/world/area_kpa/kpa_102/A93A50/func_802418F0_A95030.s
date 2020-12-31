@@ -250,7 +250,7 @@ glabel func_802418F0_A95030
 /* A953BC 80241C7C 00000000 */   nop
 .L80241C80:
 /* A953C0 80241C80 0280282D */  daddu     $a1, $s4, $zero
-/* A953C4 80241C84 0C09061C */  jal       func_80241870_A94FB0
+/* A953C4 80241C84 0C09061C */  jal       kpa_102_set_script_owner_npc_col_height
 /* A953C8 80241C88 02A0302D */   daddu    $a2, $s5, $zero
 /* A953CC 80241C8C 08090727 */  j         .L80241C9C
 /* A953D0 80241C90 00000000 */   nop

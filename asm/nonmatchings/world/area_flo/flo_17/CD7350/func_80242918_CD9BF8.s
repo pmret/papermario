@@ -288,7 +288,7 @@ glabel func_80242918_CD9BF8
 .L80242D30:
 /* CDA010 80242D30 02A0202D */  daddu     $a0, $s5, $zero
 /* CDA014 80242D34 0260282D */  daddu     $a1, $s3, $zero
-/* CDA018 80242D38 0C090916 */  jal       func_80242458_CD9738
+/* CDA018 80242D38 0C090916 */  jal       flo_17_set_script_owner_npc_col_height
 /* CDA01C 80242D3C 0280302D */   daddu    $a2, $s4, $zero
 /* CDA020 80242D40 08090C79 */  j         .L802431E4
 /* CDA024 80242D44 00000000 */   nop

@@ -250,7 +250,7 @@ glabel func_80240CF4_89B044
 /* 89B3D0 80241080 00000000 */   nop
 .L80241084:
 /* 89B3D4 80241084 0280282D */  daddu     $a1, $s4, $zero
-/* 89B3D8 80241088 0C09031D */  jal       func_80240C74_89AFC4
+/* 89B3D8 80241088 0C09031D */  jal       tik_20_set_script_owner_npc_col_height
 /* 89B3DC 8024108C 02A0302D */   daddu    $a2, $s5, $zero
 /* 89B3E0 80241090 08090428 */  j         .L802410A0
 /* 89B3E4 80241094 00000000 */   nop

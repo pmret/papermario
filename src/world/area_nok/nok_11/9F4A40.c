@@ -6,7 +6,7 @@ INCLUDE_ASM(s32, "world/area_nok/nok_11/9F4A40", func_8024007C_9F4ABC);
 
 INCLUDE_ASM(s32, "world/area_nok/nok_11/9F4A40", func_802401B0_9F4BF0);
 
-INCLUDE_ASM(s32, "world/area_nok/nok_11/9F4A40", func_80240314_9F4D54);
+#include "world/common/set_script_owner_npc_col_height.inc.c"
 
 INCLUDE_ASM(s32, "world/area_nok/nok_11/9F4A40", func_80240394_9F4DD4);
 

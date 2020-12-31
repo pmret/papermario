@@ -250,7 +250,7 @@ glabel func_802406A4_A6EA84
 /* A6EE10 80240A30 00000000 */   nop
 .L80240A34:
 /* A6EE14 80240A34 0280282D */  daddu     $a1, $s4, $zero
-/* A6EE18 80240A38 0C090189 */  jal       func_80240624_A6EA04
+/* A6EE18 80240A38 0C090189 */  jal       kpa_61_set_script_owner_npc_col_height
 /* A6EE1C 80240A3C 02A0302D */   daddu    $a2, $s5, $zero
 /* A6EE20 80240A40 08090294 */  j         .L80240A50
 /* A6EE24 80240A44 00000000 */   nop

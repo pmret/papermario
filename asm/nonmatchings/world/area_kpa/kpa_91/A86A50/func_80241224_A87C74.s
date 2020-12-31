@@ -185,7 +185,7 @@ glabel func_80241224_A87C74
 /* A87F2C 802414DC 00000000 */   nop
 /* A87F30 802414E0 0260202D */  daddu     $a0, $s3, $zero
 /* A87F34 802414E4 0280282D */  daddu     $a1, $s4, $zero
-/* A87F38 802414E8 0C090469 */  jal       func_802411A4_A87BF4
+/* A87F38 802414E8 0C090469 */  jal       kpa_91_set_script_owner_npc_col_height
 /* A87F3C 802414EC 02A0302D */   daddu    $a2, $s5, $zero
 /* A87F40 802414F0 08090540 */  j         .L80241500
 /* A87F44 802414F4 00000000 */   nop

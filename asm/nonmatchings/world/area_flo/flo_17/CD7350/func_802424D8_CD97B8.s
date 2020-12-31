@@ -250,7 +250,7 @@ glabel func_802424D8_CD97B8
 /* CD9B44 80242864 00000000 */   nop
 .L80242868:
 /* CD9B48 80242868 0280282D */  daddu     $a1, $s4, $zero
-/* CD9B4C 8024286C 0C090916 */  jal       func_80242458_CD9738
+/* CD9B4C 8024286C 0C090916 */  jal       flo_17_set_script_owner_npc_col_height
 /* CD9B50 80242870 02A0302D */   daddu    $a2, $s5, $zero
 /* CD9B54 80242874 08090A21 */  j         .L80242884
 /* CD9B58 80242878 00000000 */   nop

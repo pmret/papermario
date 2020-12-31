@@ -8,6 +8,6 @@ INCLUDE_ASM(s32, "world/area_tik/tik_24/8A5DE0", func_8024074C_8A61CC);
 
 INCLUDE_ASM(s32, "world/area_tik/tik_24/8A5DE0", func_80240880_8A6300);
 
-INCLUDE_ASM(s32, "world/area_tik/tik_24/8A5DE0", func_802409E4_8A6464);
+#include "world/common/set_script_owner_npc_col_height.inc.c"
 
 INCLUDE_ASM(s32, "world/area_tik/tik_24/8A5DE0", func_80240A64_8A64E4);

@@ -185,7 +185,7 @@ glabel func_80241B14_9A9F04
 /* 9AA1BC 80241DCC 00000000 */   nop
 /* 9AA1C0 80241DD0 0260202D */  daddu     $a0, $s3, $zero
 /* 9AA1C4 80241DD4 0280282D */  daddu     $a1, $s4, $zero
-/* 9AA1C8 80241DD8 0C0901F1 */  jal       func_802407C4_9A8BB4
+/* 9AA1C8 80241DD8 0C0901F1 */  jal       trd_04_set_script_owner_npc_col_height
 /* 9AA1CC 80241DDC 02A0302D */   daddu    $a2, $s5, $zero
 /* 9AA1D0 80241DE0 0809077C */  j         .L80241DF0
 /* 9AA1D4 80241DE4 00000000 */   nop
