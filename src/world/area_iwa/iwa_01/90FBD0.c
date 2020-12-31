@@ -68,7 +68,8 @@ INCLUDE_ASM(s32, "world/area_iwa/iwa_01/90FBD0", func_80242E2C_9124DC);
 
 INCLUDE_ASM(s32, "world/area_iwa/iwa_01/90FBD0", func_80242EA8_912558);
 
-// Should be #include "world/common/UnkDurationCheck.inc.c"
-INCLUDE_ASM(s32, "world/area_iwa/iwa_01/90FBD0", func_80242F10_9125C0);
+#define NAMESPACE dup_iwa_01
+#include "world/common/UnkDurationCheck.inc.c"
+#define NAMESPACE iwa_01
 
 INCLUDE_ASM(s32, "world/area_iwa/iwa_01/90FBD0", func_80242F54_912604);
