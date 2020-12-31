@@ -2,7 +2,7 @@
 
 #include "world/common/UnkTexturePanFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_tik/tik_01/8694B0", func_80240124_8695D4);
+#include "world/common/UnkTexturePanFunc2.inc.c"
 
 #include "world/common/SetPlayerStatusAnimFlags100000.inc.c"
 
