@@ -1,4 +1,4 @@
-#include "common.h"
+#include "battle/battle.h"
 
 INCLUDE_ASM(s32, "code_190B20", create_target_list);
 
@@ -92,11 +92,6 @@ INCLUDE_ASM(s32, "code_190B20", create_actor);
 INCLUDE_ASM(s32, "code_190B20", func_80265CE8);
 
 INCLUDE_ASM(s32, "code_190B20", func_80265D44);
-
-typedef struct {
-    Element element;
-    s32 defense;
-} DefenseTableEntry;
 
 s32 lookup_defense(DefenseTableEntry* defenseTable, Element elementKey) {
     DefenseTableEntry* row;

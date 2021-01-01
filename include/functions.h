@@ -5,6 +5,11 @@
 #include "common_structs.h"
 #include "enums.h"
 
+
+void nuBoot(void);
+void boot_idle(void);
+void boot_main(void);
+
 void osCleanupThread(void);
 
 s32 heap_malloc(s32 size);

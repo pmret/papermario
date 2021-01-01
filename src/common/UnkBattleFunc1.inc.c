@@ -1,5 +1,4 @@
-#include "common.h"
-#include "map.h"
+#include "battle/battle.h"
 
 ApiStatus N(UnkBattleFunc1)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "battle/battle.h"
 
 void dispatch_event_actor(Actor* actor, Event event);
 
