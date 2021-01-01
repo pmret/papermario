@@ -1050,8 +1050,8 @@ segments:
     vram: 0x80218000
     overlay: True
     files:
-    - [0x4DA5E0, c] # 1 func
-    - [0x4DA6B0, c] # 2 funcs
+    - [0x4DA5E0, c]
+    - [0x4DA6B0, c]
     - [0x4DA860, bin] # data
     - [0x4E25E0, bin] # rodata
   - name: battle/area_isk_part_1/
