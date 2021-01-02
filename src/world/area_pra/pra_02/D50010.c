@@ -24,7 +24,7 @@ INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_80240D3C_D50D2C);
 
 #include "world/common/SetPartnerFlags80000.inc.c"
 
-INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_80240EEC_D50EDC);
+#include "world/common/SetPartnerFlags20000.inc.c"
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 
