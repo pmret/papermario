@@ -48,7 +48,6 @@ INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_802414A8_D51498);
 
 #include "world/common/SetEntityFlags100000.inc.c"
 
-// #include "world/common/GetEntityPosition.inc.c"
-// This is GetEntityPosition, but it alreaxy exists in this file.
-// This makes me think there's either a file split or something else we don't understand
-INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_802415BC_D515AC);
+#define NAMESPACE dup_pra_02
+#include "world/common/GetEntityPosition.inc.c"
+#define NAMESPACE pra_02
