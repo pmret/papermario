@@ -6,7 +6,7 @@ INCLUDE_ASM(s32, "battle/area_kkj/6DBDA0", func_80218000_6DBDA0);
 
 INCLUDE_ASM(s32, "battle/area_kkj/6DBDA0", func_802180B8_6DBE58);
 
-INCLUDE_ASM(s32, "battle/area_kkj/6DBDA0", func_80218180_6DBF20);
+#include "world/common/GetEntityPosition.inc.c"
 
 INCLUDE_ASM(s32, "battle/area_kkj/6DBDA0", func_80218220_6DBFC0);
 
