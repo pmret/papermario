@@ -14,7 +14,7 @@ INCLUDE_ASM(s32, "world/area_flo/flo_23/CEE2A0", func_802402F8_CEE558);
 
 INCLUDE_ASM(s32, "world/area_flo/flo_23/CEE2A0", func_80240410_CEE670);
 
-INCLUDE_ASM(s32, "world/area_flo/flo_23/CEE2A0", func_80240544_CEE7A4);
+#include "world/common/UnkNpcAIFunc12.inc.c"
 
 #include "world/common/set_script_owner_npc_col_height.inc.c"
 

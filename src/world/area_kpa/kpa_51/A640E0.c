@@ -40,7 +40,7 @@ INCLUDE_ASM(s32, "world/area_kpa/kpa_51/A640E0", func_80241404_A65494);
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_51/A640E0", func_802414C8_A65558);
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_51/A640E0", func_802415FC_A6568C);
+#include "world/common/UnkNpcAIFunc12.inc.c"
 
 #include "world/common/set_script_owner_npc_col_height.inc.c"
 

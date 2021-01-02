@@ -244,7 +244,7 @@ glabel func_80240A64_8A64E4
 .L80240DDC:
 /* 8A685C 80240DDC 0260202D */  daddu     $a0, $s3, $zero
 /* 8A6860 80240DE0 0280282D */  daddu     $a1, $s4, $zero
-/* 8A6864 80240DE4 0C090220 */  jal       func_80240880_8A6300
+/* 8A6864 80240DE4 0C090220 */  jal       tik_24_UnkNpcAIFunc12
 /* 8A6868 80240DE8 02A0302D */   daddu    $a2, $s5, $zero
 /* 8A686C 80240DEC 08090384 */  j         .L80240E10
 /* 8A6870 80240DF0 00000000 */   nop

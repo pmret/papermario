@@ -244,7 +244,7 @@ glabel func_802417E0_A65870
 .L80241B58:
 /* A65BE8 80241B58 0260202D */  daddu     $a0, $s3, $zero
 /* A65BEC 80241B5C 0280282D */  daddu     $a1, $s4, $zero
-/* A65BF0 80241B60 0C09057F */  jal       func_802415FC_A6568C
+/* A65BF0 80241B60 0C09057F */  jal       kpa_51_UnkNpcAIFunc12
 /* A65BF4 80241B64 02A0302D */   daddu    $a2, $s5, $zero
 /* A65BF8 80241B68 080906E3 */  j         .L80241B8C
 /* A65BFC 80241B6C 00000000 */   nop

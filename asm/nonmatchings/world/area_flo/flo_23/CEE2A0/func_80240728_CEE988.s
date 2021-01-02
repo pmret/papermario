@@ -244,7 +244,7 @@ glabel func_80240728_CEE988
 .L80240AA0:
 /* CEED00 80240AA0 0260202D */  daddu     $a0, $s3, $zero
 /* CEED04 80240AA4 0280282D */  daddu     $a1, $s4, $zero
-/* CEED08 80240AA8 0C090151 */  jal       func_80240544_CEE7A4
+/* CEED08 80240AA8 0C090151 */  jal       flo_23_UnkNpcAIFunc12
 /* CEED0C 80240AAC 02A0302D */   daddu    $a2, $s5, $zero
 /* CEED10 80240AB0 080902B5 */  j         .L80240AD4
 /* CEED14 80240AB4 00000000 */   nop

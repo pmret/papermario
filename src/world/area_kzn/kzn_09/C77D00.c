@@ -34,7 +34,7 @@ INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C77D00", func_80242774_C79454);
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C77D00", func_80242A40_C79720);
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C77D00", func_80242B74_C79854);
+#include "world/common/UnkNpcAIFunc12.inc.c"
 
 #include "world/common/set_script_owner_npc_col_height.inc.c"
 

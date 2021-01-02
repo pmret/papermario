@@ -179,7 +179,7 @@ glabel func_80241BD4_9FC3C4
 /* 9FC664 80241E74 00000000 */   nop
 /* 9FC668 80241E78 0260202D */  daddu     $a0, $s3, $zero
 /* 9FC66C 80241E7C 0280282D */  daddu     $a1, $s4, $zero
-/* 9FC670 80241E80 0C0901C8 */  jal       func_80240720_9FAF10
+/* 9FC670 80241E80 0C0901C8 */  jal       nok_12_UnkNpcAIFunc12
 /* 9FC674 80241E84 02A0302D */   daddu    $a2, $s5, $zero
 /* 9FC678 80241E88 080907AC */  j         .L80241EB0
 /* 9FC67C 80241E8C 00000000 */   nop

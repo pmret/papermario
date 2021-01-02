@@ -98,6 +98,7 @@ s32 pause_interp_vertical_scroll(s32 deltaBefore);
 void pause_draw_rect(s32 ulx, s32 uly, s32 lrx, s32 lry, s32 tileDescriptor, s32 uls, s32 ult, s32 dsdx, s32 dtdy);
 
 s32 func_800DCB7C(s32, f32*, f32*, f32*, f32*);
+s32 func_800DDC44(s32, f32*, f32*, f32*, f32, f32, f32, f32);
 
 // Partner
 void func_800EBA3C(Npc* partner);

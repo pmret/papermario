@@ -244,7 +244,7 @@ glabel func_802406A4_A74F14
 .L80240A1C:
 /* A7528C 80240A1C 0260202D */  daddu     $a0, $s3, $zero
 /* A75290 80240A20 0280282D */  daddu     $a1, $s4, $zero
-/* A75294 80240A24 0C090130 */  jal       func_802404C0_A74D30
+/* A75294 80240A24 0C090130 */  jal       kpa_70_UnkNpcAIFunc12
 /* A75298 80240A28 02A0302D */   daddu    $a2, $s5, $zero
 /* A7529C 80240A2C 08090294 */  j         .L80240A50
 /* A752A0 80240A30 00000000 */   nop

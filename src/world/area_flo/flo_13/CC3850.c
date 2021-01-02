@@ -36,7 +36,7 @@ INCLUDE_ASM(s32, "world/area_flo/flo_13/CC3850", func_80241DB8_CC55C8);
 
 INCLUDE_ASM(s32, "world/area_flo/flo_13/CC3850", func_80242314_CC5B24);
 
-INCLUDE_ASM(s32, "world/area_flo/flo_13/CC3850", func_80242448_CC5C58);
+#include "world/common/UnkNpcAIFunc12.inc.c"
 
 #include "world/common/set_script_owner_npc_col_height.inc.c"
 

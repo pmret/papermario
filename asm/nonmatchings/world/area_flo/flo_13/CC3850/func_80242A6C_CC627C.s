@@ -281,7 +281,7 @@ glabel func_80242A6C_CC627C
 .L80242E6C:
 /* CC667C 80242E6C 02A0202D */  daddu     $a0, $s5, $zero
 /* CC6680 80242E70 0260282D */  daddu     $a1, $s3, $zero
-/* CC6684 80242E74 0C090912 */  jal       func_80242448_CC5C58
+/* CC6684 80242E74 0C090912 */  jal       flo_13_UnkNpcAIFunc12
 /* CC6688 80242E78 0280302D */   daddu    $a2, $s4, $zero
 /* CC668C 80242E7C 08090CCE */  j         .L80243338
 /* CC6690 80242E80 00000000 */   nop

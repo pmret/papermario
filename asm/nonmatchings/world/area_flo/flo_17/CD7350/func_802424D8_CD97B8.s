@@ -244,7 +244,7 @@ glabel func_802424D8_CD97B8
 .L80242850:
 /* CD9B30 80242850 0260202D */  daddu     $a0, $s3, $zero
 /* CD9B34 80242854 0280282D */  daddu     $a1, $s4, $zero
-/* CD9B38 80242858 0C0908BD */  jal       func_802422F4_CD95D4
+/* CD9B38 80242858 0C0908BD */  jal       flo_17_UnkNpcAIFunc12
 /* CD9B3C 8024285C 02A0302D */   daddu    $a2, $s5, $zero
 /* CD9B40 80242860 08090A21 */  j         .L80242884
 /* CD9B44 80242864 00000000 */   nop

@@ -244,7 +244,7 @@ glabel func_802415E0_A61FB0
 .L80241958:
 /* A62328 80241958 0260202D */  daddu     $a0, $s3, $zero
 /* A6232C 8024195C 0280282D */  daddu     $a1, $s4, $zero
-/* A62330 80241960 0C0904FF */  jal       func_802413FC_A61DCC
+/* A62330 80241960 0C0904FF */  jal       kpa_50_UnkNpcAIFunc12
 /* A62334 80241964 02A0302D */   daddu    $a2, $s5, $zero
 /* A62338 80241968 08090663 */  j         .L8024198C
 /* A6233C 8024196C 00000000 */   nop

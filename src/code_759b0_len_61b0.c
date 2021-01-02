@@ -33,7 +33,7 @@ INCLUDE_ASM(s32, "code_759b0_len_61b0", func_800DD8FC);
 
 INCLUDE_ASM(s32, "code_759b0_len_61b0", func_800DDAE4);
 
-INCLUDE_ASM(s32, "code_759b0_len_61b0", func_800DDC44);
+INCLUDE_ASM(s32, "code_759b0_len_61b0", func_800DDC44, s32 arg0, f32* arg1, f32* arg2, f32* arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7);
 
 INCLUDE_ASM(s32, "code_759b0_len_61b0", func_800DDCEC);
 

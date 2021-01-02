@@ -6,7 +6,7 @@ INCLUDE_ASM(s32, "world/area_tik/tik_24/8A5DE0", func_80240360_8A5DE0);
 
 INCLUDE_ASM(s32, "world/area_tik/tik_24/8A5DE0", func_8024074C_8A61CC);
 
-INCLUDE_ASM(s32, "world/area_tik/tik_24/8A5DE0", func_80240880_8A6300);
+#include "world/common/UnkNpcAIFunc12.inc.c"
 
 #include "world/common/set_script_owner_npc_col_height.inc.c"
 
