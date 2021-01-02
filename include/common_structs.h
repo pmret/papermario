@@ -528,9 +528,13 @@ typedef struct BattleStatus {
     /* 0x004 */ s32 flags2;
     /* 0x008 */ s32 varTable[16];
     /* 0x048 */ u8 currentSubmenu;
-    /* 0x049 */ char unk_49[10];
+    /* 0x049 */ char unk_49[3];
+    /* 0x04C */ s8 unk_4C;
+    /* 0x04D */ char unk_4D[6];
     /* 0x053 */ u8 stratsLastCursorPos;
-    /* 0x054 */ char unk_54[28];
+    /* 0x054 */ char unk_54[8];
+    /* 0x05C */ s8 unk_5C;
+    /* 0x05D */ char unk_5D[19];
     /* 0x070 */ s16 unk_70;
     /* 0x072 */ char unk_72[2];
     /* 0x074 */ s32 unk_74;
@@ -1272,7 +1276,8 @@ typedef struct Actor {
     /* 0x196 */ s8 unk_196;
     /* 0x197 */ s8 unk_197;
     /* 0x198 */ Vec2b unk_198;
-    /* 0x19A */ char unk_19A[2];
+    /* 0x19A */ s8 unk_19A;
+    /* 0x019B */ char unk_19B[1];
     /* 0x19C */ s32 actorTypeData1[6]; /* 4 = jump sound */
     /* 0x1B4 */ s16 actorTypeData1b[2];
     /* 0x1B8 */ s8 currentHP;
