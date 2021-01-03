@@ -1123,7 +1123,8 @@ typedef struct CollisionStatus {
     /* 0x04 */ s16 lastTouchedFloor; /* valid after jump */
     /* 0x06 */ s16 floorBelow;
     /* 0x08 */ s16 currentCeiling; /* valid on touching with head */
-    /* 0x0A */ char unk_0A[8];
+    /* 0x0A */ s16 unk_0A;
+    /* 0x0C */ char unk_0C[0x6];
     /* 0x12 */ s16 currentWall;
     /* 0x14 */ s16 lastWallHammered; /* valid when smashing */
     /* 0x16 */ s16 touchingWallTrigger; /* 0/1 */
@@ -1411,7 +1412,10 @@ typedef struct PlayerStatus {
     /* 0x008 */ s16 framesOnGround; /* Number of frames since last jump landed */
     /* 0x00A */ char unk_0A[2];
     /* 0x00C */ u8 peachDisguise;
-    /* 0x00D */ char unk_0D[5];
+    /* 0x00D */ char unk_0D[1];
+    /* 0x00E */ u8 unk_0E;
+    /* 0x00F */ u8 unk_0F;
+    /* 0x010 */ char unk_10[0x2];
     /* 0x012 */ s16 moveFrames;
     /* 0x014 */ s8 enableCollisionOverlapsCheck;
     /* 0x015 */ s8 statusMenuCounterinputEnabledCounter; /* whether the C-up menu can appear */
