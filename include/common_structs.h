@@ -1335,7 +1335,7 @@ typedef struct Actor {
     /* 0x22C */ struct SelectableTarget targetData[24];
     /* 0x40C */ s8 targetListLength;
     /* 0x40D */ s8 targetIndexList[24]; /* into targetData */
-    /* 0x425 */ u8 selectedTargetIndex; /* into target index list */
+    /* 0x425 */ s8 selectedTargetIndex; /* into target index list */
     /* 0x426 */ s8 targetPartIndex;
     /* 0x427 */ char unk_427;
     /* 0x428 */ s16 targetActorID;

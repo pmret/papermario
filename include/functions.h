@@ -12,6 +12,9 @@ void boot_main(void);
 
 void osCleanupThread(void);
 
+void func_80070A90(s32, f32, f32, f32);
+void func_80070AF0(s32, f32, f32, f32);
+
 s32 heap_malloc(s32 size);
 HeapNode* _heap_create(void* addr, s32 size);
 s32 dma_copy(s32 romStart, s32 romEnd, void* vramDest);
