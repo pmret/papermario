@@ -14,6 +14,14 @@ pipeline {
                 sh 'make -j'
             }
         }
+        stage('Report Progress') {
+            when {
+                branch 'master'
+            }
+            steps {
+                sh 'python3 progress.py --csv >> /var/www/papermar.io/html/reports/progress.csv'
+            }
+        }
     }
     post {
         always {
