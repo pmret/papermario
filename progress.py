@@ -71,9 +71,6 @@ def main(args):
     funcs_matching_ratio = (len(matching_funcs) / len(all_funcs)) * 100
     matching_ratio = (matching_size / total_size) * 100
 
-    if matching_size + nonmatching_size != total_size:
-        print("Warning: category/total size mismatch!\n")
-
     if args.csv:
         version = 1
         git_object = git.Repo().head.object
@@ -83,6 +80,8 @@ def main(args):
                     str(len(matching_funcs)), str(total_size), str(nonmatching_size), str(matching_size)]
         print(",".join(csv_list))
     else:
+        if matching_size + nonmatching_size != total_size:
+            print("Warning: category/total size mismatch!\n")
         print(f"{len(matching_funcs)} matched functions / {len(all_funcs)} total ({funcs_matching_ratio:.2f}%)")
         print(f"{matching_size} matching bytes / {total_size} total ({matching_ratio:.2f}%)")
 
