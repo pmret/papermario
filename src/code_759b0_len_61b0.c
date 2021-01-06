@@ -33,7 +33,8 @@ INCLUDE_ASM(s32, "code_759b0_len_61b0", func_800DD8FC);
 
 INCLUDE_ASM(s32, "code_759b0_len_61b0", func_800DDAE4);
 
-INCLUDE_ASM(s32, "code_759b0_len_61b0", func_800DDC44, s32 arg0, f32* arg1, f32* arg2, f32* arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7);
+INCLUDE_ASM(s32, "code_759b0_len_61b0", func_800DDC44, s32 arg0, f32* arg1, f32* arg2, f32* arg3, f32 arg4, f32 arg5,
+            f32 arg6, f32 arg7);
 
 INCLUDE_ASM(s32, "code_759b0_len_61b0", func_800DDCEC);
 
@@ -94,7 +95,8 @@ void func_800DFC74(void) {
     mem_clear(playerStatus, sizeof(PlayerStatus));
     playerStatus->flags = 1;
     func_800E205C();
-    playerStatus->shadowID = create_shadow_type(0, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z);
+    playerStatus->shadowID = create_shadow_type(0, playerStatus->position.x, playerStatus->position.y,
+                             playerStatus->position.z);
     func_800E6B68();
     func_800E0B14();
     func_800E069C();
@@ -104,7 +106,8 @@ void func_800DFC74(void) {
 }
 
 s32 func_800DFCF4(void) {
-    if (D_8010EBB0[0] == 1 && (D_8010EBB0[3] == 6 || D_8010EBB0[3] == 9 || D_8010EBB0[3] == 7 || D_8010EBB0[3] == 4 || D_8010EBB0[3] == 8)) {
+    if (D_8010EBB0[0] == 1 && (D_8010EBB0[3] == 6 || D_8010EBB0[3] == 9 || D_8010EBB0[3] == 7 || D_8010EBB0[3] == 4
+                               || D_8010EBB0[3] == 8)) {
         return 0;
     }
     return 1;

@@ -252,6 +252,7 @@ segments:
     files:
     - [0xa5dd0, c, code_a5dd0_len_114e0]
     - [0xb72b0, c, code_b72b0_len_15ed0]
+    - [0xB9D60, c, code_B9D60]
     - [0xcd180, c, code_cd180_len_38f0]
     - [0xd0a70, c, code_d0a70_len_4fe0]
     - [0xd5a50, c, code_d5a50_len_5fd0]
