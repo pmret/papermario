@@ -1,9 +1,9 @@
 #include "common.h"
 
-extern s32 D_801512F4;
+extern s32 D_801512F4; // message images?
 extern s16 D_80155C98;
 extern s32 D_80155D88;
-ItemEntity** D_801565A0;
+ItemEntity** D_801565A0; // item entity list
 extern s16 D_801565A4;
 extern s16 D_801565A8;
 
@@ -142,8 +142,10 @@ INCLUDE_ASM(s32, "code_B9D60", init_item_entity_list);
 
 INCLUDE_ASM(s32, "code_B9D60", func_80131128);
 
-s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pickupDelay, s32 facingAngleSign, s32 pickupVar);
-INCLUDE_ASM(s32, "code_B9D60", make_item_entity, s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pickupDelay, s32 facingAngleSign, s32 pickupVar);
+s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pickupDelay, s32 facingAngleSign,
+                     s32 pickupVar);
+INCLUDE_ASM(s32, "code_B9D60", make_item_entity, s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pickupDelay,
+            s32 facingAngleSign, s32 pickupVar);
 
 s32 make_item_entity_nodelay(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pickupVar) {
     return make_item_entity(itemID, x, y, z, itemSpawnMode, 0, -1, pickupVar);
