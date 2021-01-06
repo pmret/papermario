@@ -86,7 +86,9 @@ INCLUDE_ASM(s32, "code_B9D60", draw_digit);
 
 INCLUDE_ASM(s32, "code_B9D60", draw_number);
 
-INCLUDE_ASM(s32, "code_B9D60", func_80127B70);
+void func_80127B70(s32 arg0) {
+    func_80127D90(arg0, 0, 0, 0, 0, 4, 0);
+}
 
 INCLUDE_ASM(s32, "code_B9D60", func_80127BA4);
 
@@ -140,14 +142,16 @@ INCLUDE_ASM(s32, "code_B9D60", init_item_entity_list);
 
 INCLUDE_ASM(s32, "code_B9D60", func_80131128);
 
-INCLUDE_ASM(s32, "code_B9D60", make_item_entity);
+s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pickupDelay, s32 facingAngleSign, s32 pickupVar);
+INCLUDE_ASM(s32, "code_B9D60", make_item_entity, s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pickupDelay, s32 facingAngleSign, s32 pickupVar);
 
-INCLUDE_ASM(s32, "code_B9D60", make_item_entity_nodelay, s32 itemID, f32 x, f32 y, f32 z,
-            ItemSpawnMode itemSpawnMode, s32 pickupVar);
+s32 make_item_entity_nodelay(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pickupVar) {
+    return make_item_entity(itemID, x, y, z, itemSpawnMode, 0, -1, pickupVar);
+}
 
-INCLUDE_ASM(void, "code_B9D60", make_item_entity_delayed, s32 itemID, f32 x, f32 y, f32 z, s32 unk1,
-            s32 unk2,
-            s32 unk3);
+s32 make_item_entity_delayed(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pickupDelay, s32 pickupVar) {
+    return make_item_entity(itemID, x, y, z, itemSpawnMode, pickupDelay, -1, pickupVar);
+}
 
 INCLUDE_ASM(s32, "code_B9D60", init_got_item);
 
@@ -173,11 +177,28 @@ INCLUDE_ASM(s32, "code_B9D60", test_item_player_collision);
 
 INCLUDE_ASM(s32, "code_B9D60", func_80133FC8);
 
-INCLUDE_ASM(void, "code_B9D60", set_item_entity_flags, s32 itemEntityIndex, s32 flag);
+void set_item_entity_flags(s32 index, s32 flags) {
+    ItemEntity* itemEntity = D_801565A0[index];
 
-INCLUDE_ASM(s32, "code_B9D60", clear_item_entity_flags);
+    itemEntity->flags |= flags;
+    if (itemEntity->flags & 0x200000) {
+        D_801565A8 = 1;
+    }
+}
 
-INCLUDE_ASM(s32, "code_B9D60", func_801341B0);
+void clear_item_entity_flags(s32 index, s32 flags) {
+    ItemEntity* itemEntity = D_801565A0[index];
+
+    itemEntity->flags &= ~flags;
+}
+
+void func_801341B0(s32 index) {
+    ItemEntity* itemEntity = D_801565A0[index];
+    s32* sym = D_8009A650;
+
+    sym[0] |= 0x40;
+    itemEntity->flags |= 0x100;
+}
 
 s32 func_801341E8(void) {
     s32 ret = D_801565A8 != 0;
