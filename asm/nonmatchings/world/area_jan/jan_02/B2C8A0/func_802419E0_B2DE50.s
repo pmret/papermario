@@ -3,8 +3,8 @@
 
 glabel func_802419E0_B2DE50
 /* B2DE50 802419E0 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* B2DE54 802419E4 3C03800A */  lui       $v1, 0x800a
-/* B2DE58 802419E8 8463A634 */  lh        $v1, -0x59cc($v1)
+/* B2DE54 802419E4 3C03800A */  lui       $v1, %hi(D_8009A634)
+/* B2DE58 802419E8 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
 /* B2DE5C 802419EC 3C05800B */  lui       $a1, %hi(gCameras)
 /* B2DE60 802419F0 24A51D80 */  addiu     $a1, $a1, %lo(gCameras)
 /* B2DE64 802419F4 AFBF0010 */  sw        $ra, 0x10($sp)

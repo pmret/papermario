@@ -2,17 +2,17 @@
 
 INCLUDE_ASM(s32, "world/area_jan/jan_08/B5F650", func_802413A0_B5F650);
 
-INCLUDE_ASM(s32, "world/area_jan/jan_08/B5F650", func_80241454_B5F704);
+#include "world/common/UnkNpcAIFunc4.inc.c"
 
 INCLUDE_ASM(s32, "world/area_jan/jan_08/B5F650", func_802414A4_B5F754);
 
-INCLUDE_ASM(s32, "world/area_jan/jan_08/B5F650", func_80241668_B5F918);
+#include "world/common/UnkNpcAIFunc6.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_08/B5F650", func_802416D4_B5F984);
+#include "world/common/UnkNpcAIFunc7.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_08/B5F650", func_80241744_B5F9F4);
+#include "world/common/UnkNpcAIFunc8.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_08/B5F650", func_8024181C_B5FACC);
+#include "world/common/UnkNpcAIFunc5.inc.c"
 
 INCLUDE_ASM(s32, "world/area_jan/jan_08/B5F650", func_80241870_B5FB20);
 

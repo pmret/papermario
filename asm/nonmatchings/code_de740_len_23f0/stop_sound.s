@@ -8,9 +8,9 @@ glabel stop_sound
 /* E0378 80149C78 0080102D */   daddu    $v0, $a0, $zero
 /* E037C 80149C7C 3082FFFF */  andi      $v0, $a0, 0xffff
 /* E0380 80149C80 00021080 */  sll       $v0, $v0, 2
-/* E0384 80149C84 3C048015 */  lui       $a0, 0x8015
+/* E0384 80149C84 3C048015 */  lui       $a0, %hi(D_8014F2D0)
 /* E0388 80149C88 00822021 */  addu      $a0, $a0, $v0
-/* E038C 80149C8C 8C84F2D0 */  lw        $a0, -0xd30($a0)
+/* E038C 80149C8C 8C84F2D0 */  lw        $a0, %lo(D_8014F2D0)($a0)
 /* E0390 80149C90 0C05269B */  jal       func_80149A6C
 /* E0394 80149C94 0000282D */   daddu    $a1, $zero, $zero
 /* E0398 80149C98 0805272A */  j         .L80149CA8

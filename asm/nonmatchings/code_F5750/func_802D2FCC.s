@@ -7,8 +7,8 @@ glabel func_802D2FCC
 /* F7984 802D2FD4 0000802D */  daddu     $s0, $zero, $zero
 /* F7988 802D2FD8 AFBF0014 */  sw        $ra, 0x14($sp)
 .L802D2FDC:
-/* F798C 802D2FDC 3C03802E */  lui       $v1, 0x802e
-/* F7990 802D2FE0 8C63B7C0 */  lw        $v1, -0x4840($v1)
+/* F798C 802D2FDC 3C03802E */  lui       $v1, %hi(D_802DB7C0)
+/* F7990 802D2FE0 8C63B7C0 */  lw        $v1, %lo(D_802DB7C0)($v1)
 /* F7994 802D2FE4 00101080 */  sll       $v0, $s0, 2
 /* F7998 802D2FE8 00431021 */  addu      $v0, $v0, $v1
 /* F799C 802D2FEC 8C420000 */  lw        $v0, ($v0)

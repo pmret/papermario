@@ -1,4 +1,5 @@
 #include "common.h"
+#include "battle/battle.h"
 
 INCLUDE_ASM(s32, "code_1AC760", dispatch_event_partner);
 
@@ -20,10 +21,10 @@ INCLUDE_ASM(s32, "code_1AC760", func_8027FC90);
 
 ApiStatus GetActorLevel(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 actorID = get_variable(script, *args++);
+    ActorID actorID = get_variable(script, *args++);
     Bytecode* outVar;
 
-    if (actorID == ActorId_SELF) {
+    if (actorID == ActorID_SELF) {
         actorID = script->owner1.enemyID;
     }
 

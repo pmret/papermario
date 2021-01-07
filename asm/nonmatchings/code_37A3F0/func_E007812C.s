@@ -48,8 +48,8 @@ glabel func_E007812C
 /* 37A5B4 E00781C4 30820001 */  andi      $v0, $a0, 1
 /* 37A5B8 E00781C8 10400009 */  beqz      $v0, .LE00781F0
 /* 37A5BC E00781CC 2882000F */   slti     $v0, $a0, 0xf
-/* 37A5C0 E00781D0 3C01E008 */  lui       $at, 0xe008
-/* 37A5C4 E00781D4 D42289D0 */  ldc1      $f2, -0x7630($at)
+/* 37A5C0 E00781D0 3C01E008 */  lui       $at, %hi(D_E00789D0)
+/* 37A5C4 E00781D4 D42289D0 */  ldc1      $f2, %lo(D_E00789D0)($at)
 /* 37A5C8 E00781D8 C4600010 */  lwc1      $f0, 0x10($v1)
 /* 37A5CC E00781DC 46800021 */  cvt.d.w   $f0, $f0
 /* 37A5D0 E00781E0 46220002 */  mul.d     $f0, $f0, $f2

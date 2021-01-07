@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel close_action_command_instruction_popup
-/* 17E3EC 8024FB0C 3C038028 */  lui       $v1, 0x8028
-/* 17E3F0 8024FB10 8C6338F8 */  lw        $v1, 0x38f8($v1)
+/* 17E3EC 8024FB0C 3C038028 */  lui       $v1, %hi(D_802838F8)
+/* 17E3F0 8024FB10 8C6338F8 */  lw        $v1, %lo(D_802838F8)($v1)
 /* 17E3F4 8024FB14 10600007 */  beqz      $v1, .L8024FB34
 /* 17E3F8 8024FB18 00000000 */   nop      
 /* 17E3FC 8024FB1C 84640012 */  lh        $a0, 0x12($v1)

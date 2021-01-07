@@ -99,17 +99,17 @@ typedef enum ScriptOpcode {
     ScriptOpcode_DEBUG_PRINT = 0x5B, ///< Args: expression
 } ScriptOpcode;
 
-#define SI_VAR(v) (v - 30000000)
-#define SI_MAP_VAR(v) (v - 50000000)
-#define SI_FLAG(v) (v - 70000000)
-#define SI_MAP_FLAG(v) (v - 90000000)
-#define SI_AREA_FLAG(v) (v - 110000000)
-#define SI_SAVE_FLAG(v) (v - 130000000)
-#define SI_AREA_VAR(v) (v - 150000000)
-#define SI_SAVE_VAR(v) (v - 170000000)
-#define SI_ARRAY(v) (v - 190000000)
-#define SI_ARRAY_FLAG(v) (v - 210000000)
-#define SI_FIXED(v) ((v * 1024.0f) + -230000000) // See float_to_fixed_var
+#define SI_VAR(v) ((v - 30000000))
+#define SI_MAP_VAR(v) ((v - 50000000))
+#define SI_FLAG(v) ((v - 70000000))
+#define SI_MAP_FLAG(v) ((v - 90000000))
+#define SI_AREA_FLAG(v) ((v - 110000000))
+#define SI_SAVE_FLAG(v) ((v - 130000000))
+#define SI_AREA_VAR(v) ((v - 150000000))
+#define SI_SAVE_VAR(v) ((v - 170000000))
+#define SI_ARRAY(v) ((v - 190000000))
+#define SI_ARRAY_FLAG(v) ((v - 210000000))
+#define SI_FIXED(v) (((v * 1024.0f) + -230000000)) // See float_to_fixed_var
 
 /* Return type of si_execute_next_command */
 #define SI_CONTINUE 0   /* Continue to next command */

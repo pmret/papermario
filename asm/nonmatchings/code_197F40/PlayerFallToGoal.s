@@ -4,8 +4,8 @@
 glabel PlayerFallToGoal
 /* 1A2174 80273894 27BDFFA8 */  addiu     $sp, $sp, -0x58
 /* 1A2178 80273898 AFB00018 */  sw        $s0, 0x18($sp)
-/* 1A217C 8027389C 3C10800E */  lui       $s0, 0x800e
-/* 1A2180 802738A0 8E10C148 */  lw        $s0, -0x3eb8($s0)
+/* 1A217C 8027389C 3C10800E */  lui       $s0, %hi(gBattleStatus+0xD8)
+/* 1A2180 802738A0 8E10C148 */  lw        $s0, %lo(gBattleStatus+0xD8)($s0)
 /* 1A2184 802738A4 AFB20020 */  sw        $s2, 0x20($sp)
 /* 1A2188 802738A8 0080902D */  daddu     $s2, $a0, $zero
 /* 1A218C 802738AC AFBF0024 */  sw        $ra, 0x24($sp)

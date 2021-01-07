@@ -4,8 +4,8 @@
 glabel func_80242F20_DC01D0
 /* DC01D0 80242F20 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* DC01D4 80242F24 AFB00010 */  sw        $s0, 0x10($sp)
-/* DC01D8 80242F28 3C108024 */  lui       $s0, 0x8024
-/* DC01DC 80242F2C 26105E00 */  addiu     $s0, $s0, 0x5e00
+/* DC01D8 80242F28 3C108024 */  lui       $s0, %hi(D_80245E00)
+/* DC01DC 80242F2C 26105E00 */  addiu     $s0, $s0, %lo(D_80245E00)
 /* DC01E0 80242F30 AFBF0018 */  sw        $ra, 0x18($sp)
 /* DC01E4 80242F34 AFB10014 */  sw        $s1, 0x14($sp)
 /* DC01E8 80242F38 8E020000 */  lw        $v0, ($s0)
@@ -39,8 +39,8 @@ glabel func_80242F20_DC01D0
 /* DC024C 80242F9C 28620010 */  slti      $v0, $v1, 0x10
 /* DC0250 80242FA0 1440FFFA */  bnez      $v0, .L80242F8C
 /* DC0254 80242FA4 24840004 */   addiu    $a0, $a0, 4
-/* DC0258 80242FA8 3C108024 */  lui       $s0, 0x8024
-/* DC025C 80242FAC 26105E00 */  addiu     $s0, $s0, 0x5e00
+/* DC0258 80242FA8 3C108024 */  lui       $s0, %hi(D_80245E00)
+/* DC025C 80242FAC 26105E00 */  addiu     $s0, $s0, %lo(D_80245E00)
 /* DC0260 80242FB0 0C00AB4B */  jal       heap_free
 /* DC0264 80242FB4 8E040000 */   lw       $a0, ($s0)
 /* DC0268 80242FB8 AE000000 */  sw        $zero, ($s0)

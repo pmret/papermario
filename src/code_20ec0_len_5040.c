@@ -184,7 +184,7 @@ s32 is_point_within_region(s32 shape, f32 pointX, f32 pointY, f32 centerX, f32 c
     }
 }
 
-INCLUDE_ASM(s32, "code_20ec0_len_5040", func_800490B4);
+INCLUDE_ASM(s32, "code_20ec0_len_5040", func_800490B4, s32 arg0, Enemy* arg1, f32 arg2, s32 arg3, s32 arg4);
 
 INCLUDE_ASM(s32, "code_20ec0_len_5040", func_800493EC);
 
@@ -196,7 +196,8 @@ INCLUDE_ASM(s32, "code_20ec0_len_5040", func_800495A0);
 
 INCLUDE_ASM(s32, "code_20ec0_len_5040", func_800496B8);
 
-INCLUDE_ASM(s32, "code_20ec0_len_5040", func_80049B44);
+#define NAMESPACE base
+#include "world/common/UnkNpcAIFunc1.inc.c"
 
 INCLUDE_ASM(s32, "code_20ec0_len_5040", func_80049C04);
 

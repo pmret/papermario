@@ -4,21 +4,21 @@
 glabel func_800F0D80
 /* 8A230 800F0D80 27BDFFA8 */  addiu     $sp, $sp, -0x58
 /* 8A234 800F0D84 F7B60040 */  sdc1      $f22, 0x40($sp)
-/* 8A238 800F0D88 3C018011 */  lui       $at, 0x8011
-/* 8A23C 800F0D8C D436C310 */  ldc1      $f22, -0x3cf0($at)
+/* 8A238 800F0D88 3C018011 */  lui       $at, %hi(D_8010C310)
+/* 8A23C 800F0D8C D436C310 */  ldc1      $f22, %lo(D_8010C310)($at)
 /* 8A240 800F0D90 F7B40038 */  sdc1      $f20, 0x38($sp)
-/* 8A244 800F0D94 3C018011 */  lui       $at, 0x8011
-/* 8A248 800F0D98 D434C318 */  ldc1      $f20, -0x3ce8($at)
+/* 8A244 800F0D94 3C018011 */  lui       $at, %hi(D_8010C318)
+/* 8A248 800F0D98 D434C318 */  ldc1      $f20, %lo(D_8010C318)($at)
 /* 8A24C 800F0D9C AFB40020 */  sw        $s4, 0x20($sp)
 /* 8A250 800F0DA0 0000A02D */  daddu     $s4, $zero, $zero
 /* 8A254 800F0DA4 AFBE0030 */  sw        $fp, 0x30($sp)
-/* 8A258 800F0DA8 3C1E8011 */  lui       $fp, 0x8011
-/* 8A25C 800F0DAC 27DE9820 */  addiu     $fp, $fp, -0x67e0
+/* 8A258 800F0DA8 3C1E8011 */  lui       $fp, %hi(D_80109820)
+/* 8A25C 800F0DAC 27DE9820 */  addiu     $fp, $fp, %lo(D_80109820)
 /* 8A260 800F0DB0 AFB60028 */  sw        $s6, 0x28($sp)
 /* 8A264 800F0DB4 2416007F */  addiu     $s6, $zero, 0x7f
 /* 8A268 800F0DB8 AFB7002C */  sw        $s7, 0x2c($sp)
-/* 8A26C 800F0DBC 3C178011 */  lui       $s7, 0x8011
-/* 8A270 800F0DC0 26F79800 */  addiu     $s7, $s7, -0x6800
+/* 8A26C 800F0DBC 3C178011 */  lui       $s7, %hi(D_80109800)
+/* 8A270 800F0DC0 26F79800 */  addiu     $s7, $s7, %lo(D_80109800)
 /* 8A274 800F0DC4 AFB3001C */  sw        $s3, 0x1c($sp)
 /* 8A278 800F0DC8 0280982D */  daddu     $s3, $s4, $zero
 /* 8A27C 800F0DCC AFBF0034 */  sw        $ra, 0x34($sp)
@@ -145,8 +145,8 @@ glabel func_800F0D80
 /* 8A448 800F0F98 E600FFF8 */  swc1      $f0, -8($s0)
 /* 8A44C 800F0F9C E602FFFC */  swc1      $f2, -4($s0)
 /* 8A450 800F0FA0 90420000 */  lbu       $v0, ($v0)
-/* 8A454 800F0FA4 3C018011 */  lui       $at, 0x8011
-/* 8A458 800F0FA8 D422C320 */  ldc1      $f2, -0x3ce0($at)
+/* 8A454 800F0FA4 3C018011 */  lui       $at, %hi(D_8010C320)
+/* 8A458 800F0FA8 D422C320 */  ldc1      $f2, %lo(D_8010C320)($at)
 /* 8A45C 800F0FAC 44820000 */  mtc1      $v0, $f0
 /* 8A460 800F0FB0 00000000 */  nop       
 /* 8A464 800F0FB4 46800020 */  cvt.s.w   $f0, $f0

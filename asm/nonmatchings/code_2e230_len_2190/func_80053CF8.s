@@ -4,8 +4,8 @@
 glabel func_80053CF8
 /* 2F0F8 80053CF8 27BDFFB8 */  addiu     $sp, $sp, -0x48
 /* 2F0FC 80053CFC AFB20028 */  sw        $s2, 0x28($sp)
-/* 2F100 80053D00 3C12800A */  lui       $s2, 0x800a
-/* 2F104 80053D04 8E52A5C0 */  lw        $s2, -0x5a40($s2)
+/* 2F100 80053D00 3C12800A */  lui       $s2, %hi(D_8009A5C0)
+/* 2F104 80053D04 8E52A5C0 */  lw        $s2, %lo(D_8009A5C0)($s2)
 /* 2F108 80053D08 AFB60038 */  sw        $s6, 0x38($sp)
 /* 2F10C 80053D0C 0080B02D */  daddu     $s6, $a0, $zero
 /* 2F110 80053D10 AFB3002C */  sw        $s3, 0x2c($sp)

@@ -1,6 +1,7 @@
 #include "common.h"
+#include "map.h"
 
-static ApiStatus UnkPositionFunc(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(UnkPositionFunc)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     PlayerStatus* playerStatus = PLAYER_STATUS;
     f32 var0 = get_variable(script, *args++);

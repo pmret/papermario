@@ -8,7 +8,7 @@ INCLUDE_ASM(s32, "world/area_mim/mim_09/BB2E00", func_802400A0_BB2EA0);
 
 INCLUDE_ASM(s32, "world/area_mim/mim_09/BB2E00", func_802402D0_BB30D0);
 
-INCLUDE_ASM(s32, "world/area_mim/mim_09/BB2E00", func_80240608_BB3408);
+#include "world/common/UnkNpcAIFunc1.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mim/mim_09/BB2E00", func_802406C8_BB34C8);
 
@@ -16,6 +16,6 @@ INCLUDE_ASM(s32, "world/area_mim/mim_09/BB2E00", func_8024086C_BB366C);
 
 INCLUDE_ASM(s32, "world/area_mim/mim_09/BB2E00", func_8024094C_BB374C);
 
-INCLUDE_ASM(s32, "world/area_mim/mim_09/BB2E00", func_80240C4C_BB3A4C);
+#include "world/common/UnkDurationCheck.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mim/mim_09/BB2E00", func_80240C90_BB3A90);

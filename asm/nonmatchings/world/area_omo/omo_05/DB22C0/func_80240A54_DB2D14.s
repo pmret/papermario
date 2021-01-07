@@ -87,8 +87,8 @@ glabel func_80240A54_DB2D14
 /* DB2E54 80240B94 080902EF */  j         .L80240BBC
 /* DB2E58 80240B98 E6000018 */   swc1     $f0, 0x18($s0)
 .L80240B9C:
-/* DB2E5C 80240B9C 3C018024 */  lui       $at, 0x8024
-/* DB2E60 80240BA0 D42255F0 */  ldc1      $f2, 0x55f0($at)
+/* DB2E5C 80240B9C 3C018024 */  lui       $at, %hi(D_802455F0)
+/* DB2E60 80240BA0 D42255F0 */  ldc1      $f2, %lo(D_802455F0)($at)
 /* DB2E64 80240BA4 44820000 */  mtc1      $v0, $f0
 /* DB2E68 80240BA8 00000000 */  nop       
 /* DB2E6C 80240BAC 46800021 */  cvt.d.w   $f0, $f0

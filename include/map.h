@@ -7,8 +7,6 @@
 
 // TODO: consider moving Npc here
 
-#define M(sym) NAMESPACE(MAP_NAME, sym)
-
 #define ENTRY_COUNT(entryList) (sizeof(entryList) / sizeof(Vec4f))
 
 typedef Vec4f EntryList[0];
@@ -55,6 +53,7 @@ typedef struct Area {
     /* 0x08 */ char* id; ///< "area_xxx"
     /* 0x0C */ char* name; ///< JP debug name.
 } Area; // size = 0x10
+
 typedef struct NpcAISettings {
     /* 0x00 */ f32 moveSpeed;
     /* 0x04 */ s32 moveTime;
@@ -163,8 +162,6 @@ typedef struct StatDrop {
     { F16(100), F16(30), attempts, F16(40) }, \
 }
 
-#define ANIMATION(sprite, palette, anim) ((sprite << 16) + (palette << 8) + anim)
-
 #define OVERRIDE_MOVEMENT_SPEED(speed) (speed * 32767)
 #define NO_OVERRIDE_MOVEMENT_SPEED OVERRIDE_MOVEMENT_SPEED(-1)
 
@@ -185,9 +182,9 @@ typedef struct StaticNPC {
     /* 0x0DC */ s16 maxCoinBonus;
     /* 0x0DE */ char unk_DE[2];
     /* 0x0E0 */ s32 movement[48]; // TODO: type
-    /* 0x1A0 */ s32 animations[16];
+    /* 0x1A0 */ NpcAnimID animations[16];
     /* 0x1E0 */ char unk_1E0[8];
-    /* 0x1E8 */ UNK_PTR extraAnimations;
+    /* 0x1E8 */ NpcAnimID* extraAnimations;
     /* 0x1EC */ MessageID tattle;
 } StaticNpc; // size = 0x1F0
 
@@ -222,7 +219,9 @@ typedef struct Enemy {
     /* 0x60 */ ScriptID defeatScriptID;
     /* 0x64 */ char unk_64[8];
     /* 0x6C */ s32 varTable[16];
-    /* 0xAC */ char unk_AC[9];
+    /* 0xAC */ char unk_AC[4];
+    /* 0xB0 */ s32 unk_B0;
+    /* 0xB4 */ char unk_B4;
     /* 0xB5 */ s8 unk_B5;
     /* 0xB6 */ char unk_B6[2];
     /* 0xB8 */ s32 unkSettings24;
@@ -236,16 +235,19 @@ typedef struct Enemy {
     /* 0xDC */ char unk_DC[20];
 } Enemy; // size = 0xF0
 
+/// Zero-terminated.
 typedef struct {
     /* 0x00 */ s32 npcCount;
     /* 0x04 */ StaticNpc* npcs;
-    /* 0x08 */ FormationID formationID;
+    /* 0x08 */ BattleID battle;
 } NpcGroupList[]; // size = 0x0C
 
-#define NPC_GROUP(npcs, formationID) { sizeof(npcs) / sizeof(StaticNpc), &npcs, formationID }
-#define NPC_GROUP_LIST_END() { 0, 0, 0 }
+#define NPC_GROUP(npcs, battle) { sizeof(npcs) / sizeof(StaticNpc), &npcs, battle }
 
 Enemy* get_enemy(NpcId npcId);
+MapConfig* get_current_map_header(void);
+
+s32 func_800490B4(s32 arg0, Enemy* arg1, f32 arg2, s32 arg3, s32 arg4);
 
 /// Zero-terminated.
 Area gAreas[29];
@@ -253,5 +255,6 @@ Area gAreas[29];
 /// Lists the songs that are forced to use the variation determined by `map.songVariation & 1`.
 /// @see get_song_variation_override_for_cur_map
 extern SongID gSongsUsingVariationFlag[6];
+extern s16 D_8014F738;
 
 #endif

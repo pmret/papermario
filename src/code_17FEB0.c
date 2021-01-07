@@ -3,7 +3,7 @@
 HitResult calc_item_check_hit(void) {
     BattleStatus* battleStatus = BATTLE_STATUS;
     ActorMovePos* movePos = &battleStatus->playerActor->movePos;
-    s32 actorID = battleStatus->currentTargetID;
+    ActorID actorID = battleStatus->currentTargetID;
     s8 currentTargetPartS8;
     u32 currentTargetPart;
     Actor* actor;
@@ -40,7 +40,7 @@ HitResult calc_item_check_hit(void) {
 INCLUDE_ASM(s32, "code_17FEB0", calc_item_damage_enemy);
 
 ApiStatus ItemDamageEnemy(ScriptInstance* script, s32 isInitialCall) {
-    BattleStatus* battleStatus = &gBattleStatus;
+    BattleStatus* battleStatus = BATTLE_STATUS;
     Bytecode* args = script->ptrReadPos;
     s32 itemDamageOut = *args++;
     s32 a5;
@@ -107,7 +107,7 @@ ApiStatus ItemDamageEnemy(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus ItemAfflictEnemy(ScriptInstance* script, s32 isInitialCall) {
-    BattleStatus* battleStatus = &gBattleStatus;
+    BattleStatus* battleStatus = BATTLE_STATUS;
     Bytecode* args = script->ptrReadPos;
     s32 itemDamageOut = *args++;
     s32 a5;
@@ -175,7 +175,7 @@ ApiStatus ItemAfflictEnemy(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus func_80252B3C(ScriptInstance* script, s32 isInitialCall) {
-    BattleStatus* battleStatus = &gBattleStatus;
+    BattleStatus* battleStatus = BATTLE_STATUS;
     Bytecode* args = script->ptrReadPos;
     s32 itemDamageOut = *args++;
     s32 a5;
@@ -242,7 +242,7 @@ ApiStatus func_80252B3C(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus ItemCheckHit(ScriptInstance* script, s32 isInitialCall) {
-    BattleStatus* battleStatus = &gBattleStatus;
+    BattleStatus* battleStatus = BATTLE_STATUS;
     Bytecode* args = script->ptrReadPos;
     s32 itemDamageOut = *args++;
     s32 a5;

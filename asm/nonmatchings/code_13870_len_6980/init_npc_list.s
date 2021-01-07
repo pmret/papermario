@@ -18,9 +18,9 @@ glabel init_npc_list
 /* 13958 80038558 3C01800A */  lui       $at, %hi(gCurrentNpcListPtr)
 /* 1395C 8003855C AC220B90 */  sw        $v0, %lo(gCurrentNpcListPtr)($at)
 /* 13960 80038560 24020001 */  addiu     $v0, $zero, 1
-/* 13964 80038564 3C01800A */  lui       $at, 0x800a
-/* 13968 80038568 A420A604 */  sh        $zero, -0x59fc($at)
-/* 1396C 8003856C 3C01800A */  lui       $at, 0x800a
-/* 13970 80038570 A0220B94 */  sb        $v0, 0xb94($at)
+/* 13964 80038564 3C01800A */  lui       $at, %hi(D_8009A604)
+/* 13968 80038568 A420A604 */  sh        $zero, %lo(D_8009A604)($at)
+/* 1396C 8003856C 3C01800A */  lui       $at, %hi(D_800A0B94)
+/* 13970 80038570 A0220B94 */  sb        $v0, %lo(D_800A0B94)($at)
 /* 13974 80038574 03E00008 */  jr        $ra
 /* 13978 80038578 00000000 */   nop      

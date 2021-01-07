@@ -9,8 +9,8 @@ glabel load_stage_collision
 /* 365B0 8005B1B0 AFB20020 */  sw        $s2, 0x20($sp)
 /* 365B4 8005B1B4 16000005 */  bnez      $s0, .L8005B1CC
 /* 365B8 8005B1B8 AFB1001C */   sw       $s1, 0x1c($sp)
-/* 365BC 8005B1BC 3C01800B */  lui       $at, 0x800b
-/* 365C0 8005B1C0 A42042EC */  sh        $zero, 0x42ec($at)
+/* 365BC 8005B1BC 3C01800B */  lui       $at, %hi(D_800B42EC)
+/* 365C0 8005B1C0 A42042EC */  sh        $zero, %lo(D_800B42EC)($at)
 /* 365C4 8005B1C4 08016C89 */  j         .L8005B224
 /* 365C8 8005B1C8 00000000 */   nop      
 .L8005B1CC:

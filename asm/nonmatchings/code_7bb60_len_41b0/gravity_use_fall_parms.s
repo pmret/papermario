@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel gravity_use_fall_parms
-/* 7C51C 800E306C 3C04800F */  lui       $a0, 0x800f
-/* 7C520 800E3070 24847B60 */  addiu     $a0, $a0, 0x7b60
+/* 7C51C 800E306C 3C04800F */  lui       $a0, %hi(D_800F7B60)
+/* 7C520 800E3070 24847B60 */  addiu     $a0, $a0, %lo(D_800F7B60)
 /* 7C524 800E3074 3C068011 */  lui       $a2, %hi(gPlayerStatus)
 /* 7C528 800E3078 24C6EFC8 */  addiu     $a2, $a2, %lo(gPlayerStatus)
 /* 7C52C 800E307C 8CC20000 */  lw        $v0, ($a2)

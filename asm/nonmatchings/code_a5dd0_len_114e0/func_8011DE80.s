@@ -12,8 +12,8 @@ glabel func_8011DE80
 /* B459C 8011DE9C AFB20018 */  sw        $s2, 0x18($sp)
 /* B45A0 8011DEA0 00E0902D */  daddu     $s2, $a3, $zero
 /* B45A4 8011DEA4 0000282D */  daddu     $a1, $zero, $zero
-/* B45A8 8011DEA8 3C038015 */  lui       $v1, 0x8015
-/* B45AC 8011DEAC 246333C0 */  addiu     $v1, $v1, 0x33c0
+/* B45A8 8011DEA8 3C038015 */  lui       $v1, %hi(D_801533C0)
+/* B45AC 8011DEAC 246333C0 */  addiu     $v1, $v1, %lo(D_801533C0)
 /* B45B0 8011DEB0 AFBF0024 */  sw        $ra, 0x24($sp)
 /* B45B4 8011DEB4 AFB10014 */  sw        $s1, 0x14($sp)
 /* B45B8 8011DEB8 000510C0 */  sll       $v0, $a1, 3

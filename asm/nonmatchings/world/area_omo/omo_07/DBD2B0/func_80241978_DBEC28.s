@@ -87,8 +87,8 @@ glabel func_80241978_DBEC28
 /* DBED68 80241AB8 080906B8 */  j         .L80241AE0
 /* DBED6C 80241ABC E6000018 */   swc1     $f0, 0x18($s0)
 .L80241AC0:
-/* DBED70 80241AC0 3C018024 */  lui       $at, 0x8024
-/* DBED74 80241AC4 D42270B0 */  ldc1      $f2, 0x70b0($at)
+/* DBED70 80241AC0 3C018024 */  lui       $at, %hi(pause_badges_count_equipped)
+/* DBED74 80241AC4 D42270B0 */  ldc1      $f2, %lo(pause_badges_count_equipped)($at)
 /* DBED78 80241AC8 44820000 */  mtc1      $v0, $f0
 /* DBED7C 80241ACC 00000000 */  nop       
 /* DBED80 80241AD0 46800021 */  cvt.d.w   $f0, $f0

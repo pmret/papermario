@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel guPosition
-/* 3F4E8 800640E8 3C018009 */  lui       $at, 0x8009
-/* 3F4EC 800640EC C4203DC0 */  lwc1      $f0, 0x3dc0($at)
+/* 3F4E8 800640E8 3C018009 */  lui       $at, %hi(D_80093DC0)
+/* 3F4EC 800640EC C4203DC0 */  lwc1      $f0, %lo(D_80093DC0)($at)
 /* 3F4F0 800640F0 44859000 */  mtc1      $a1, $f18
 /* 3F4F4 800640F4 27BDFF70 */  addiu     $sp, $sp, -0x90
 /* 3F4F8 800640F8 F7B40060 */  sdc1      $f20, 0x60($sp)

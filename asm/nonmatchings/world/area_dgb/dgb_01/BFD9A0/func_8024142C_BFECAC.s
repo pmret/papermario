@@ -66,9 +66,9 @@ glabel func_8024142C_BFECAC
 /* BFED98 80241518 2C62000F */  sltiu     $v0, $v1, 0xf
 /* BFED9C 8024151C 10400034 */  beqz      $v0, .L802415F0
 /* BFEDA0 80241520 00031080 */   sll      $v0, $v1, 2
-/* BFEDA4 80241524 3C018026 */  lui       $at, 0x8026
+/* BFEDA4 80241524 3C018026 */  lui       $at, %hi(D_80263438)
 /* BFEDA8 80241528 00220821 */  addu      $at, $at, $v0
-/* BFEDAC 8024152C 8C223438 */  lw        $v0, 0x3438($at)
+/* BFEDAC 8024152C 8C223438 */  lw        $v0, %lo(D_80263438)($at)
 /* BFEDB0 80241530 00400008 */  jr        $v0
 /* BFEDB4 80241534 00000000 */   nop      
 /* BFEDB8 80241538 0280202D */  daddu     $a0, $s4, $zero
@@ -83,7 +83,7 @@ glabel func_8024142C_BFECAC
 /* BFEDDC 8024155C 0000102D */   daddu    $v0, $zero, $zero
 /* BFEDE0 80241560 0280202D */  daddu     $a0, $s4, $zero
 /* BFEDE4 80241564 0200282D */  daddu     $a1, $s0, $zero
-/* BFEDE8 80241568 0C09023E */  jal       func_802408F8_BFE178
+/* BFEDE8 80241568 0C09023E */  jal       dgb_01_UnkNpcAIFunc1
 /* BFEDEC 8024156C 0260302D */   daddu    $a2, $s3, $zero
 /* BFEDF0 80241570 0280202D */  daddu     $a0, $s4, $zero
 /* BFEDF4 80241574 0200282D */  daddu     $a1, $s0, $zero
@@ -93,7 +93,7 @@ glabel func_8024142C_BFECAC
 /* BFEE04 80241584 0000102D */   daddu    $v0, $zero, $zero
 /* BFEE08 80241588 0280202D */  daddu     $a0, $s4, $zero
 /* BFEE0C 8024158C 0200282D */  daddu     $a1, $s0, $zero
-/* BFEE10 80241590 0C09033F */  jal       func_80240CFC_BFE57C
+/* BFEE10 80241590 0C09033F */  jal       dgb_01_UnkNpcAIFunc2
 /* BFEE14 80241594 0260302D */   daddu    $a2, $s3, $zero
 /* BFEE18 80241598 0280202D */  daddu     $a0, $s4, $zero
 /* BFEE1C 8024159C 0200282D */  daddu     $a1, $s0, $zero
@@ -109,7 +109,7 @@ glabel func_8024142C_BFECAC
 /* BFEE44 802415C4 0000102D */   daddu    $v0, $zero, $zero
 /* BFEE48 802415C8 0280202D */  daddu     $a0, $s4, $zero
 /* BFEE4C 802415CC 0200282D */  daddu     $a1, $s0, $zero
-/* BFEE50 802415D0 0C0903C5 */  jal       func_80240F14_BFE794
+/* BFEE50 802415D0 0C0903C5 */  jal       dgb_01_UnkNpcAIFunc3
 /* BFEE54 802415D4 0260302D */   daddu    $a2, $s3, $zero
 /* BFEE58 802415D8 0809057D */  j         .L802415F4
 /* BFEE5C 802415DC 0000102D */   daddu    $v0, $zero, $zero

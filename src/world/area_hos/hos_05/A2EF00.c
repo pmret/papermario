@@ -4,9 +4,11 @@ INCLUDE_ASM(s32, "world/area_hos/hos_05/A2EF00", pause_tabs_draw_badges_A2EF00);
 
 INCLUDE_ASM(s32, "world/area_hos/hos_05/A2EF00", func_80244DE4_A2F024);
 
+#define NAMESPACE dup_hos_05
 #include "world/common/UnkTexturePanFunc.inc.c"
 
 #include "world/common/UnkTexturePanFunc2.inc.c"
+#define NAMESPACE hos_05
 
 INCLUDE_ASM(s32, "world/area_hos/hos_05/A2EF00", func_802452C4_A2F504);
 

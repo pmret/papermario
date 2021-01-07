@@ -3,8 +3,8 @@
 
 glabel func_80240B9C_D3B16C
 /* D3B16C 80240B9C 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* D3B170 80240BA0 3C03800A */  lui       $v1, 0x800a
-/* D3B174 80240BA4 8463A634 */  lh        $v1, -0x59cc($v1)
+/* D3B170 80240BA0 3C03800A */  lui       $v1, %hi(D_8009A634)
+/* D3B174 80240BA4 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
 /* D3B178 80240BA8 3C05800B */  lui       $a1, %hi(gCameras)
 /* D3B17C 80240BAC 24A51D80 */  addiu     $a1, $a1, %lo(gCameras)
 /* D3B180 80240BB0 AFBF0010 */  sw        $ra, 0x10($sp)

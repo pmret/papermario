@@ -15,7 +15,7 @@ glabel func_80240EC8_BBE068
 /* BBE090 80240EF0 8FBF0014 */  lw        $ra, 0x14($sp)
 /* BBE094 80240EF4 8FB00010 */  lw        $s0, 0x10($sp)
 /* BBE098 80240EF8 24020002 */  addiu     $v0, $zero, 2
-/* BBE09C 80240EFC 3C018024 */  lui       $at, 0x8024
-/* BBE0A0 80240F00 AC235AB4 */  sw        $v1, 0x5ab4($at)
+/* BBE09C 80240EFC 3C018024 */  lui       $at, %hi(D_80245AB4)
+/* BBE0A0 80240F00 AC235AB4 */  sw        $v1, %lo(D_80245AB4)($at)
 /* BBE0A4 80240F04 03E00008 */  jr        $ra
 /* BBE0A8 80240F08 27BD0018 */   addiu    $sp, $sp, 0x18

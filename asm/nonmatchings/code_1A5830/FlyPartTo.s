@@ -340,8 +340,8 @@ glabel FlyPartTo
 /* 1AAD0C 8027C42C 46001003 */  div.s     $f0, $f2, $f0
 /* 1AAD10 8027C430 46000021 */  cvt.d.s   $f0, $f0
 /* 1AAD14 8027C434 46206301 */  sub.d     $f12, $f12, $f0
-/* 1AAD18 8027C438 3C01802A */  lui       $at, 0x802a
-/* 1AAD1C 8027C43C D420DA20 */  ldc1      $f0, -0x25e0($at)
+/* 1AAD18 8027C438 3C01802A */  lui       $at, %hi(D_8029DA20)
+/* 1AAD1C 8027C43C D420DA20 */  ldc1      $f0, %lo(D_8029DA20)($at)
 /* 1AAD20 8027C440 46206302 */  mul.d     $f12, $f12, $f0
 /* 1AAD24 8027C444 00000000 */  nop       
 /* 1AAD28 8027C448 0C00A8BB */  jal       sin_deg

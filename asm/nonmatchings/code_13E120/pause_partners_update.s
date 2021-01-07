@@ -2,14 +2,14 @@
 .set noreorder # don't insert nops after branches
 
 glabel pause_partners_update
-/* 13FAE4 8024C7A4 3C028027 */  lui       $v0, 0x8027
-/* 13FAE8 8024C7A8 8C4206A0 */  lw        $v0, 0x6a0($v0)
+/* 13FAE4 8024C7A4 3C028027 */  lui       $v0, %hi(D_802706A0)
+/* 13FAE8 8024C7A8 8C4206A0 */  lw        $v0, %lo(D_802706A0)($v0)
 /* 13FAEC 8024C7AC 00021840 */  sll       $v1, $v0, 1
 /* 13FAF0 8024C7B0 00621821 */  addu      $v1, $v1, $v0
 /* 13FAF4 8024C7B4 00031100 */  sll       $v0, $v1, 4
 /* 13FAF8 8024C7B8 00431023 */  subu      $v0, $v0, $v1
-/* 13FAFC 8024C7BC 3C038027 */  lui       $v1, 0x8027
-/* 13FB00 8024C7C0 8C6306B0 */  lw        $v1, 0x6b0($v1)
+/* 13FAFC 8024C7BC 3C038027 */  lui       $v1, %hi(D_802706B0)
+/* 13FB00 8024C7C0 8C6306B0 */  lw        $v1, %lo(D_802706B0)($v1)
 /* 13FB04 8024C7C4 000210C0 */  sll       $v0, $v0, 3
 /* 13FB08 8024C7C8 14600002 */  bnez      $v1, .L8024C7D4
 /* 13FB0C 8024C7CC 0043001A */   div      $zero, $v0, $v1
@@ -25,8 +25,8 @@ glabel pause_partners_update
 /* 13FB2C 8024C7EC 00001012 */   mflo     $v0
 /* 13FB30 8024C7F0 27BDFFD0 */  addiu     $sp, $sp, -0x30
 /* 13FB34 8024C7F4 AFB10014 */  sw        $s1, 0x14($sp)
-/* 13FB38 8024C7F8 3C118027 */  lui       $s1, 0x8027
-/* 13FB3C 8024C7FC 263106A8 */  addiu     $s1, $s1, 0x6a8
+/* 13FB38 8024C7F8 3C118027 */  lui       $s1, %hi(D_802706A8)
+/* 13FB3C 8024C7FC 263106A8 */  addiu     $s1, $s1, %lo(D_802706A8)
 /* 13FB40 8024C800 AFBF0020 */  sw        $ra, 0x20($sp)
 /* 13FB44 8024C804 AFB3001C */  sw        $s3, 0x1c($sp)
 /* 13FB48 8024C808 AFB20018 */  sw        $s2, 0x18($sp)
@@ -50,17 +50,17 @@ glabel pause_partners_update
 /* 13FB8C 8024C84C 2A020010 */  slti      $v0, $s0, 0x10
 /* 13FB90 8024C850 14400008 */  bnez      $v0, .L8024C874
 /* 13FB94 8024C854 00000000 */   nop      
-/* 13FB98 8024C858 3C018027 */  lui       $at, 0x8027
-/* 13FB9C 8024C85C D4220048 */  ldc1      $f2, 0x48($at)
+/* 13FB98 8024C858 3C018027 */  lui       $at, %hi(D_80270048)
+/* 13FB9C 8024C85C D4220048 */  ldc1      $f2, %lo(D_80270048)($at)
 /* 13FBA0 8024C860 4600A021 */  cvt.d.s   $f0, $f20
 /* 13FBA4 8024C864 46220002 */  mul.d     $f0, $f0, $f2
 /* 13FBA8 8024C868 00000000 */  nop       
 /* 13FBAC 8024C86C 0809322D */  j         .L8024C8B4
 /* 13FBB0 8024C870 462000A0 */   cvt.s.d  $f2, $f0
 .L8024C874:
-/* 13FBB4 8024C874 3C028025 */  lui       $v0, 0x8025
+/* 13FBB4 8024C874 3C028025 */  lui       $v0, %hi(D_8024F87C)
 /* 13FBB8 8024C878 00501021 */  addu      $v0, $v0, $s0
-/* 13FBBC 8024C87C 9042F87C */  lbu       $v0, -0x784($v0)
+/* 13FBBC 8024C87C 9042F87C */  lbu       $v0, %lo(D_8024F87C)($v0)
 /* 13FBC0 8024C880 C6200000 */  lwc1      $f0, ($s1)
 /* 13FBC4 8024C884 00620018 */  mult      $v1, $v0
 /* 13FBC8 8024C888 4600010D */  trunc.w.s $f4, $f0
@@ -75,24 +75,24 @@ glabel pause_partners_update
 /* 13FBEC 8024C8AC 00000000 */  nop       
 /* 13FBF0 8024C8B0 468010A0 */  cvt.s.w   $f2, $f2
 .L8024C8B4:
-/* 13FBF4 8024C8B4 3C028027 */  lui       $v0, 0x8027
-/* 13FBF8 8024C8B8 244206A8 */  addiu     $v0, $v0, 0x6a8
+/* 13FBF4 8024C8B4 3C028027 */  lui       $v0, %hi(D_802706A8)
+/* 13FBF8 8024C8B8 244206A8 */  addiu     $v0, $v0, %lo(D_802706A8)
 /* 13FBFC 8024C8BC C4400000 */  lwc1      $f0, ($v0)
 /* 13FC00 8024C8C0 46020000 */  add.s     $f0, $f0, $f2
-/* 13FC04 8024C8C4 3C038027 */  lui       $v1, 0x8027
-/* 13FC08 8024C8C8 8C6306B0 */  lw        $v1, 0x6b0($v1)
+/* 13FC04 8024C8C4 3C038027 */  lui       $v1, %hi(D_802706B0)
+/* 13FC08 8024C8C8 8C6306B0 */  lw        $v1, %lo(D_802706B0)($v1)
 /* 13FC0C 8024C8CC 0000882D */  daddu     $s1, $zero, $zero
 /* 13FC10 8024C8D0 18600024 */  blez      $v1, .L8024C964
 /* 13FC14 8024C8D4 E4400000 */   swc1     $f0, ($v0)
-/* 13FC18 8024C8D8 3C138027 */  lui       $s3, 0x8027
-/* 13FC1C 8024C8DC 26730660 */  addiu     $s3, $s3, 0x660
-/* 13FC20 8024C8E0 3C128025 */  lui       $s2, 0x8025
-/* 13FC24 8024C8E4 2652F630 */  addiu     $s2, $s2, -0x9d0
-/* 13FC28 8024C8E8 3C108027 */  lui       $s0, 0x8027
-/* 13FC2C 8024C8EC 26100680 */  addiu     $s0, $s0, 0x680
+/* 13FC18 8024C8D8 3C138027 */  lui       $s3, %hi(D_80270660)
+/* 13FC1C 8024C8DC 26730660 */  addiu     $s3, $s3, %lo(D_80270660)
+/* 13FC20 8024C8E0 3C128025 */  lui       $s2, %hi(D_8024F630)
+/* 13FC24 8024C8E4 2652F630 */  addiu     $s2, $s2, %lo(D_8024F630)
+/* 13FC28 8024C8E8 3C108027 */  lui       $s0, %hi(D_80270680)
+/* 13FC2C 8024C8EC 26100680 */  addiu     $s0, $s0, %lo(D_80270680)
 .L8024C8F0:
-/* 13FC30 8024C8F0 3C028027 */  lui       $v0, 0x8027
-/* 13FC34 8024C8F4 8C4206A0 */  lw        $v0, 0x6a0($v0)
+/* 13FC30 8024C8F0 3C028027 */  lui       $v0, %hi(D_802706A0)
+/* 13FC34 8024C8F4 8C4206A0 */  lw        $v0, %lo(D_802706A0)($v0)
 /* 13FC38 8024C8F8 1622000A */  bne       $s1, $v0, .L8024C924
 /* 13FC3C 8024C8FC 00000000 */   nop      
 /* 13FC40 8024C900 8E030000 */  lw        $v1, ($s0)
@@ -116,8 +116,8 @@ glabel pause_partners_update
 .L8024C944:
 /* 13FC84 8024C944 0C0B78AB */  jal       func_802DE2AC
 /* 13FC88 8024C948 26100004 */   addiu    $s0, $s0, 4
-/* 13FC8C 8024C94C 3C028027 */  lui       $v0, 0x8027
-/* 13FC90 8024C950 8C4206B0 */  lw        $v0, 0x6b0($v0)
+/* 13FC8C 8024C94C 3C028027 */  lui       $v0, %hi(D_802706B0)
+/* 13FC90 8024C950 8C4206B0 */  lw        $v0, %lo(D_802706B0)($v0)
 /* 13FC94 8024C954 26310001 */  addiu     $s1, $s1, 1
 /* 13FC98 8024C958 0222102A */  slt       $v0, $s1, $v0
 /* 13FC9C 8024C95C 1440FFE4 */  bnez      $v0, .L8024C8F0

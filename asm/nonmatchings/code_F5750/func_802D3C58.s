@@ -49,8 +49,8 @@ glabel func_802D3C58
 /* F86B4 802D3D04 8E250000 */  lw        $a1, ($s1)
 /* F86B8 802D3D08 0C0B1EAF */  jal       get_variable
 /* F86BC 802D3D0C 0240202D */   daddu    $a0, $s2, $zero
-/* F86C0 802D3D10 3C04802E */  lui       $a0, 0x802e
-/* F86C4 802D3D14 8C84B7C0 */  lw        $a0, -0x4840($a0)
+/* F86C0 802D3D10 3C04802E */  lui       $a0, %hi(D_802DB7C0)
+/* F86C4 802D3D14 8C84B7C0 */  lw        $a0, %lo(D_802DB7C0)($a0)
 /* F86C8 802D3D18 00101880 */  sll       $v1, $s0, 2
 /* F86CC 802D3D1C 00641821 */  addu      $v1, $v1, $a0
 /* F86D0 802D3D20 8C710000 */  lw        $s1, ($v1)
@@ -111,8 +111,8 @@ glabel func_802D3C58
 /* F87A4 802D3DF4 AE420070 */  sw        $v0, 0x70($s2)
 .L802D3DF8:
 /* F87A8 802D3DF8 8E420074 */  lw        $v0, 0x74($s2)
-/* F87AC 802D3DFC 3C03802E */  lui       $v1, 0x802e
-/* F87B0 802D3E00 8C63B7C0 */  lw        $v1, -0x4840($v1)
+/* F87AC 802D3DFC 3C03802E */  lui       $v1, %hi(D_802DB7C0)
+/* F87B0 802D3E00 8C63B7C0 */  lw        $v1, %lo(D_802DB7C0)($v1)
 /* F87B4 802D3E04 00021080 */  sll       $v0, $v0, 2
 /* F87B8 802D3E08 00431021 */  addu      $v0, $v0, $v1
 /* F87BC 802D3E0C 8C510000 */  lw        $s1, ($v0)

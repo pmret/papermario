@@ -6,8 +6,8 @@ glabel func_80045B10
 /* 20F14 80045B14 AFB10014 */  sw        $s1, 0x14($sp)
 /* 20F18 80045B18 0000882D */  daddu     $s1, $zero, $zero
 /* 20F1C 80045B1C AFB00010 */  sw        $s0, 0x10($sp)
-/* 20F20 80045B20 3C10800A */  lui       $s0, 0x800a
-/* 20F24 80045B24 26100BC0 */  addiu     $s0, $s0, 0xbc0
+/* 20F20 80045B20 3C10800A */  lui       $s0, %hi(D_800A0BC0)
+/* 20F24 80045B24 26100BC0 */  addiu     $s0, $s0, %lo(D_800A0BC0)
 /* 20F28 80045B28 AFBF0018 */  sw        $ra, 0x18($sp)
 .L80045B2C:
 /* 20F2C 80045B2C 8E040018 */  lw        $a0, 0x18($s0)

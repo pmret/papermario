@@ -3,13 +3,13 @@
 
 glabel osPfsRequestOneChannel
 /* 449B0 800695B0 27BDFFF0 */  addiu     $sp, $sp, -0x10
-/* 449B4 800695B4 3C03800E */  lui       $v1, 0x800e
-/* 449B8 800695B8 2463A03C */  addiu     $v1, $v1, -0x5fc4
+/* 449B4 800695B4 3C03800E */  lui       $v1, %hi(D_800DA03C)
+/* 449B8 800695B8 2463A03C */  addiu     $v1, $v1, %lo(D_800DA03C)
 /* 449BC 800695BC 2466FFC4 */  addiu     $a2, $v1, -0x3c
 /* 449C0 800695C0 00003821 */  addu      $a3, $zero, $zero
 /* 449C4 800695C4 240200FE */  addiu     $v0, $zero, 0xfe
-/* 449C8 800695C8 3C01800A */  lui       $at, 0x800a
-/* 449CC 800695CC A022A61C */  sb        $v0, -0x59e4($at)
+/* 449C8 800695C8 3C01800A */  lui       $at, %hi(D_8009A61C)
+/* 449CC 800695CC A022A61C */  sb        $v0, %lo(D_8009A61C)($at)
 /* 449D0 800695D0 24020001 */  addiu     $v0, $zero, 1
 /* 449D4 800695D4 AC620000 */  sw        $v0, ($v1)
 /* 449D8 800695D8 24020001 */  addiu     $v0, $zero, 1

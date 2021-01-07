@@ -4,17 +4,17 @@ INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80240550_D203E0);
 
 INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80240700_D20590);
 
-INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80240D28_D20BB8);
+#include "world/common/UnkNpcAIFunc1.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80240DE8_D20C78);
 
-INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_8024112C_D20FBC);
+#include "world/common/UnkNpcAIFunc2.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_802411A4_D21034);
 
 INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80241210_D210A0);
 
-INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80241344_D211D4);
+#include "world/common/UnkNpcAIFunc3.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_802413A8_D21238);
 
@@ -60,7 +60,7 @@ INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80242244_D220D4);
 
 #include "world/common/SetManyVars.inc.c"
 
-INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_8024233C_D221CC);
+#include "world/common/UnkYawFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_802424C8_D22358);
 

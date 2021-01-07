@@ -1,16 +1,16 @@
 #include "jan_12.h"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_12/B73570", func_802404C0_B73570);
+#include "world/common/UnkNpcAIFunc4.inc.c"
 
 INCLUDE_ASM(s32, "world/area_jan/jan_12/B73570", func_80240510_B735C0);
 
-INCLUDE_ASM(s32, "world/area_jan/jan_12/B73570", func_802406D4_B73784);
+#include "world/common/UnkNpcAIFunc6.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_12/B73570", func_80240740_B737F0);
+#include "world/common/UnkNpcAIFunc7.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_12/B73570", func_802407B0_B73860);
+#include "world/common/UnkNpcAIFunc8.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_12/B73570", func_80240888_B73938);
+#include "world/common/UnkNpcAIFunc5.inc.c"
 
 INCLUDE_ASM(s32, "world/area_jan/jan_12/B73570", func_802408DC_B7398C);
 

@@ -27,8 +27,8 @@ glabel func_802E8858
 /* 10A128 802E88A8 00000000 */   nop      
 /* 10A12C 802E88AC 0C0B9FDB */  jal       func_802E7F6C
 /* 10A130 802E88B0 0200202D */   daddu    $a0, $s0, $zero
-/* 10A134 802E88B4 3C05802F */  lui       $a1, 0x802f
-/* 10A138 802E88B8 24A5AE7C */  addiu     $a1, $a1, -0x5184
+/* 10A134 802E88B4 3C05802F */  lui       $a1, %hi(D_802EAE7C)
+/* 10A138 802E88B8 24A5AE7C */  addiu     $a1, $a1, %lo(D_802EAE7C)
 /* 10A13C 802E88BC 0C0442F3 */  jal       func_80110BCC
 /* 10A140 802E88C0 0200202D */   daddu    $a0, $s0, $zero
 /* 10A144 802E88C4 0C04419E */  jal       func_80110678

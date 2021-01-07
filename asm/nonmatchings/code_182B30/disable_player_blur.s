@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel disable_player_blur
-/* 1831F4 80254914 3C02800E */  lui       $v0, 0x800e
-/* 1831F8 80254918 8C42C148 */  lw        $v0, -0x3eb8($v0)
+/* 1831F4 80254914 3C02800E */  lui       $v0, %hi(gBattleStatus+0xD8)
+/* 1831F8 80254918 8C42C148 */  lw        $v0, %lo(gBattleStatus+0xD8)($v0)
 /* 1831FC 8025491C 8C4201F4 */  lw        $v0, 0x1f4($v0)
 /* 183200 80254920 8C4400C0 */  lw        $a0, 0xc0($v0)
 /* 183204 80254924 808207DB */  lb        $v0, 0x7db($a0)

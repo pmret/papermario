@@ -32,8 +32,8 @@ glabel func_80240E70_D7FBD0
 /* D7FC3C 80240EDC 0C0B2190 */  jal       set_float_variable
 /* D7FC40 80240EE0 34A53C81 */   ori      $a1, $a1, 0x3c81
 /* D7FC44 80240EE4 C60C0014 */  lwc1      $f12, 0x14($s0)
-/* D7FC48 80240EE8 3C018024 */  lui       $at, 0x8024
-/* D7FC4C 80240EEC D4207C90 */  ldc1      $f0, 0x7c90($at)
+/* D7FC48 80240EE8 3C018024 */  lui       $at, %hi(D_80247C90)
+/* D7FC4C 80240EEC D4207C90 */  ldc1      $f0, %lo(D_80247C90)($at)
 /* D7FC50 80240EF0 46006321 */  cvt.d.s   $f12, $f12
 /* D7FC54 80240EF4 46206300 */  add.d     $f12, $f12, $f0
 /* D7FC58 80240EF8 0C00A6C9 */  jal       clamp_angle

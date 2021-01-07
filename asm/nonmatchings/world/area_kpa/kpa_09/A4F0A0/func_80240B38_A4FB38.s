@@ -7,8 +7,8 @@ glabel func_80240B38_A4FB38
 /* A4FB40 80240B40 0080982D */  daddu     $s3, $a0, $zero
 /* A4FB44 80240B44 AFB40040 */  sw        $s4, 0x40($sp)
 /* A4FB48 80240B48 0000A02D */  daddu     $s4, $zero, $zero
-/* A4FB4C 80240B4C 3C03800A */  lui       $v1, 0x800a
-/* A4FB50 80240B50 8463A634 */  lh        $v1, -0x59cc($v1)
+/* A4FB4C 80240B4C 3C03800A */  lui       $v1, %hi(D_8009A634)
+/* A4FB50 80240B50 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
 /* A4FB54 80240B54 3C04800B */  lui       $a0, %hi(gCameras)
 /* A4FB58 80240B58 24841D80 */  addiu     $a0, $a0, %lo(gCameras)
 /* A4FB5C 80240B5C AFBF0044 */  sw        $ra, 0x44($sp)
@@ -80,12 +80,12 @@ glabel func_80240B38_A4FB38
 /* A4FC50 80240C50 C64C006C */  lwc1      $f12, 0x6c($s2)
 /* A4FC54 80240C54 0C00A6C9 */  jal       clamp_angle
 /* A4FC58 80240C58 00000000 */   nop      
-/* A4FC5C 80240C5C 3C018024 */  lui       $at, 0x8024
-/* A4FC60 80240C60 D43827D0 */  ldc1      $f24, 0x27d0($at)
+/* A4FC5C 80240C5C 3C018024 */  lui       $at, %hi(D_802427D0)
+/* A4FC60 80240C60 D43827D0 */  ldc1      $f24, %lo(D_802427D0)($at)
 /* A4FC64 80240C64 46000521 */  cvt.d.s   $f20, $f0
 /* A4FC68 80240C68 4638A300 */  add.d     $f12, $f20, $f24
-/* A4FC6C 80240C6C 3C018024 */  lui       $at, 0x8024
-/* A4FC70 80240C70 D43627D8 */  ldc1      $f22, 0x27d8($at)
+/* A4FC6C 80240C6C 3C018024 */  lui       $at, %hi(D_802427D8)
+/* A4FC70 80240C70 D43627D8 */  ldc1      $f22, %lo(D_802427D8)($at)
 /* A4FC74 80240C74 0C00A6C9 */  jal       clamp_angle
 /* A4FC78 80240C78 46206320 */   cvt.s.d  $f12, $f12
 /* A4FC7C 80240C7C 4636A500 */  add.d     $f20, $f20, $f22
@@ -113,8 +113,8 @@ glabel func_80240B38_A4FB38
 /* A4FCD4 80240CD4 E616000C */  swc1      $f22, 0xc($s0)
 .L80240CD8:
 /* A4FCD8 80240CD8 C6000018 */  lwc1      $f0, 0x18($s0)
-/* A4FCDC 80240CDC 3C018024 */  lui       $at, 0x8024
-/* A4FCE0 80240CE0 D42227E0 */  ldc1      $f2, 0x27e0($at)
+/* A4FCDC 80240CDC 3C018024 */  lui       $at, %hi(D_802427E0)
+/* A4FCE0 80240CE0 D42227E0 */  ldc1      $f2, %lo(D_802427E0)($at)
 /* A4FCE4 80240CE4 46000021 */  cvt.d.s   $f0, $f0
 /* A4FCE8 80240CE8 46220002 */  mul.d     $f0, $f0, $f2
 /* A4FCEC 80240CEC 00000000 */  nop       

@@ -1,6 +1,6 @@
 #include "iwa_10.h"
 
-INCLUDE_ASM(s32, "world/area_iwa/iwa_10/91E6D0", func_80240160_91E6D0);
+#include "common/UnkFloatFunc.inc.c"
 
 #include "world/common/Set8009A650_40.inc.c"
 

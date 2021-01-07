@@ -10,8 +10,8 @@ glabel func_8004E4B8
 /* 298CC 8004E4CC AFB20018 */  sw        $s2, 0x18($sp)
 /* 298D0 8004E4D0 0000902D */  daddu     $s2, $zero, $zero
 /* 298D4 8004E4D4 AFB40020 */  sw        $s4, 0x20($sp)
-/* 298D8 8004E4D8 3C14800A */  lui       $s4, 0x800a
-/* 298DC 8004E4DC 269488C0 */  addiu     $s4, $s4, -0x7740
+/* 298D8 8004E4D8 3C14800A */  lui       $s4, %hi(D_800988C0)
+/* 298DC 8004E4DC 269488C0 */  addiu     $s4, $s4, %lo(D_800988C0)
 /* 298E0 8004E4E0 AFB3001C */  sw        $s3, 0x1c($sp)
 /* 298E4 8004E4E4 24130001 */  addiu     $s3, $zero, 1
 /* 298E8 8004E4E8 AFBF0024 */  sw        $ra, 0x24($sp)

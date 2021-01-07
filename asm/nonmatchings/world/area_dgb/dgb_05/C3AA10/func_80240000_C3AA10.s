@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel func_80240000_C3AA10
-/* C3AA10 80240000 3C018011 */  lui       $at, 0x8011
-/* C3AA14 80240004 C422EFF4 */  lwc1      $f2, -0x100c($at)
+/* C3AA10 80240000 3C018011 */  lui       $at, %hi(gPlayerStatus+0x2C)
+/* C3AA14 80240004 C422EFF4 */  lwc1      $f2, %lo(gPlayerStatus+0x2C)($at)
 /* C3AA18 80240008 3C01C352 */  lui       $at, 0xc352
 /* C3AA1C 8024000C 44810000 */  mtc1      $at, $f0
 /* C3AA20 80240010 00000000 */  nop       

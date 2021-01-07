@@ -5,8 +5,8 @@ glabel DidActionSucceed
 /* 1A5794 80276EB4 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 1A5798 80276EB8 AFBF0010 */  sw        $ra, 0x10($sp)
 /* 1A579C 80276EBC 8C82000C */  lw        $v0, 0xc($a0)
-/* 1A57A0 80276EC0 3C03800E */  lui       $v1, 0x800e
-/* 1A57A4 80276EC4 8063C0F1 */  lb        $v1, -0x3f0f($v1)
+/* 1A57A0 80276EC0 3C03800E */  lui       $v1, %hi(gBattleStatus+0x81)
+/* 1A57A4 80276EC4 8063C0F1 */  lb        $v1, %lo(gBattleStatus+0x81)($v1)
 /* 1A57A8 80276EC8 8C450000 */  lw        $a1, ($v0)
 /* 1A57AC 80276ECC 04610002 */  bgez      $v1, .L80276ED8
 /* 1A57B0 80276ED0 0000302D */   daddu    $a2, $zero, $zero

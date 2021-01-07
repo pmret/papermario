@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel appendGfx_player
-/* 7A7A4 800E12F4 3C03800A */  lui       $v1, 0x800a
-/* 7A7A8 800E12F8 8463A634 */  lh        $v1, -0x59cc($v1)
+/* 7A7A4 800E12F4 3C03800A */  lui       $v1, %hi(D_8009A634)
+/* 7A7A8 800E12F8 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
 /* 7A7AC 800E12FC 27BDFEB0 */  addiu     $sp, $sp, -0x150
 /* 7A7B0 800E1300 AFB20128 */  sw        $s2, 0x128($sp)
 /* 7A7B4 800E1304 3C128011 */  lui       $s2, %hi(gPlayerStatus)
@@ -23,9 +23,9 @@ glabel appendGfx_player
 /* 7A7EC 800E133C 00431021 */  addu      $v0, $v0, $v1
 /* 7A7F0 800E1340 000210C0 */  sll       $v0, $v0, 3
 /* 7A7F4 800E1344 24030011 */  addiu     $v1, $zero, 0x11
-/* 7A7F8 800E1348 3C01800B */  lui       $at, 0x800b
+/* 7A7F8 800E1348 3C01800B */  lui       $at, %hi(D_800B1DEC)
 /* 7A7FC 800E134C 00220821 */  addu      $at, $at, $v0
-/* 7A800 800E1350 C4201DEC */  lwc1      $f0, 0x1dec($at)
+/* 7A800 800E1350 C4201DEC */  lwc1      $f0, %lo(D_800B1DEC)($at)
 /* 7A804 800E1354 824200B4 */  lb        $v0, 0xb4($s2)
 /* 7A808 800E1358 14430035 */  bne       $v0, $v1, .L800E1430
 /* 7A80C 800E135C 46000687 */   neg.s    $f26, $f0
@@ -249,8 +249,8 @@ glabel appendGfx_player
 .L800E16B4:
 /* 7AB64 800E16B4 0C0B7710 */  jal       render_sprite
 /* 7AB68 800E16B8 00000000 */   nop      
-/* 7AB6C 800E16BC 3C03800F */  lui       $v1, 0x800f
-/* 7AB70 800E16C0 24637B4C */  addiu     $v1, $v1, 0x7b4c
+/* 7AB6C 800E16BC 3C03800F */  lui       $v1, %hi(D_800F7B4C)
+/* 7AB70 800E16C0 24637B4C */  addiu     $v1, $v1, %lo(D_800F7B4C)
 /* 7AB74 800E16C4 8C620000 */  lw        $v0, ($v1)
 /* 7AB78 800E16C8 24420001 */  addiu     $v0, $v0, 1
 /* 7AB7C 800E16CC AC620000 */  sw        $v0, ($v1)

@@ -35,9 +35,9 @@ glabel func_8004CF3C
 /* 283B4 8004CFB4 90830025 */  lbu       $v1, 0x25($a0)
 /* 283B8 8004CFB8 00021080 */  sll       $v0, $v0, 2
 /* 283BC 8004CFBC A0A30045 */  sb        $v1, 0x45($a1)
-/* 283C0 8004CFC0 3C018008 */  lui       $at, 0x8008
+/* 283C0 8004CFC0 3C018008 */  lui       $at, %hi(D_800783C0)
 /* 283C4 8004CFC4 00220821 */  addu      $at, $at, $v0
-/* 283C8 8004CFC8 8C2283C0 */  lw        $v0, -0x7c40($at)
+/* 283C8 8004CFC8 8C2283C0 */  lw        $v0, %lo(D_800783C0)($at)
 /* 283CC 8004CFCC ACA2004C */  sw        $v0, 0x4c($a1)
 /* 283D0 8004CFD0 0040182D */  daddu     $v1, $v0, $zero
 /* 283D4 8004CFD4 24A20020 */  addiu     $v0, $a1, 0x20

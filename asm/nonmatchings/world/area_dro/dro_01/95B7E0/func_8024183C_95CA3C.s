@@ -3,8 +3,8 @@
 
 glabel func_8024183C_95CA3C
 /* 95CA3C 8024183C 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* 95CA40 80241840 3C03800A */  lui       $v1, 0x800a
-/* 95CA44 80241844 8463A634 */  lh        $v1, -0x59cc($v1)
+/* 95CA40 80241840 3C03800A */  lui       $v1, %hi(D_8009A634)
+/* 95CA44 80241844 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
 /* 95CA48 80241848 3C05800B */  lui       $a1, %hi(gCameras)
 /* 95CA4C 8024184C 24A51D80 */  addiu     $a1, $a1, %lo(gCameras)
 /* 95CA50 80241850 AFBF0010 */  sw        $ra, 0x10($sp)

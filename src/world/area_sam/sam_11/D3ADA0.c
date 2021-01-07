@@ -4,7 +4,9 @@ INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_802407D0_D3ADA0);
 
 #include "world/common/GetItemName.inc.c"
 
+#define NAMESPACE dup_sam_11
 #include "world/common/Set80151310.inc.c"
+#define NAMESPACE sam_11
 
 INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_8024090C_D3AEDC);
 

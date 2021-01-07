@@ -39,8 +39,8 @@ glabel check_input_use_partner
 /* 78F34 800DFA84 14620004 */  bne       $v1, $v0, .L800DFA98
 /* 78F38 800DFA88 00000000 */   nop      
 /* 78F3C 800DFA8C 84A200C6 */  lh        $v0, 0xc6($a1)
-/* 78F40 800DFA90 3C01802C */  lui       $at, 0x802c
-/* 78F44 800DFA94 AC22DF60 */  sw        $v0, -0x20a0($at)
+/* 78F40 800DFA90 3C01802C */  lui       $at, %hi(D_802BDF60)
+/* 78F44 800DFA94 AC22DF60 */  sw        $v0, %lo(D_802BDF60)($at)
 .L800DFA98:
 /* 78F48 800DFA98 0C03ACC5 */  jal       partner_use_ability
 /* 78F4C 800DFA9C 00000000 */   nop      

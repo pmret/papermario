@@ -1,7 +1,7 @@
 #include "common.h"
 #include "nu/nusys.h"
 
-static s32 contRmbControl(NUContRmbCtl* rmbCtl, u32 contNo) {
+s32 contRmbControl(NUContRmbCtl* rmbCtl, u32 contNo) {
     s32 ret = 0;
     u32 cnt;
 
@@ -48,7 +48,7 @@ static s32 contRmbControl(NUContRmbCtl* rmbCtl, u32 contNo) {
     return ret;
 }
 
-static s32 contRmbRetrace(NUSiCommonMesg* mesg) {
+s32 contRmbRetrace(NUSiCommonMesg* mesg) {
     u32 i;
     NUContRmbCtl* cont;
 
@@ -114,13 +114,13 @@ void nuContRmbMgrRemove(void) {
     nuSiCallBackRemove(&nuContRmbCallBack);
 }
 
-static s32 contRmbCheckMesg(NUSiCommonMesg* mesg) {
+s32 contRmbCheckMesg(NUSiCommonMesg* mesg) {
     NUContRmbMesg* rmbMesg = (NUContRmbMesg*) mesg->dataPtr;
 
     return osMotorInit(&nuSiMesgQ, &nuContPfs[rmbMesg->contNo], rmbMesg->contNo);
 }
 
-static s32 contRmbStartMesg(NUSiCommonMesg* mesg) {
+s32 contRmbStartMesg(NUSiCommonMesg* mesg) {
     NUContRmbMesg* rmbMesg = (NUContRmbMesg*) mesg->dataPtr;
     NUContRmbCtl* rmbCtl = (NUContRmbCtl*) rmbMesg->data;
 
@@ -131,7 +131,7 @@ static s32 contRmbStartMesg(NUSiCommonMesg* mesg) {
     return 0;
 }
 
-static s32 contRmbStopMesg(NUSiCommonMesg* mesg) {
+s32 contRmbStopMesg(NUSiCommonMesg* mesg) {
     NUContRmbMesg* rmbMesg = (NUContRmbMesg*) mesg->dataPtr;
 
     nuContRmbCtl[rmbMesg->contNo].frame = 0;
@@ -139,7 +139,7 @@ static s32 contRmbStopMesg(NUSiCommonMesg* mesg) {
     return 0;
 }
 
-static s32 contRmbForceStopMesg(NUSiCommonMesg* mesg) {
+s32 contRmbForceStopMesg(NUSiCommonMesg* mesg) {
     u32 i;
 
     for (i = 0; i < NU_CONT_MAXCONTROLLERS; i++) {

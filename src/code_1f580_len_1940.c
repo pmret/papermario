@@ -37,7 +37,26 @@ ApiStatus func_80044290(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_1f580_len_1940", MakeNpcs, ScriptInstance* script, s32 isInitialCall);
+ApiStatus MakeNpcs(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+
+    if (isInitialCall) {
+        script->functionTemp[0].s = 0;
+    }
+
+    switch (script->functionTemp[0].s) {
+        case 0:
+            make_npcs(get_variable(script, *args++), GAME_STATUS->mapID, get_variable(script, *args++));
+            script->functionTemp[0].s = 1;
+            break;
+        case 1:
+            if (gGameState != script->functionTemp[0].s) {
+                return ApiStatus_DONE2;
+            }
+    }
+
+    return ApiStatus_BLOCK;
+}
 
 INCLUDE_ASM(s32, "code_1f580_len_1940", RemoveNpc, ScriptInstance* script, s32 isInitialCall);
 
@@ -65,11 +84,11 @@ ApiStatus GetOwnerEncounterTrigger(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus DoNpcDefeat(ScriptInstance* script, s32 isInitialCall) {
     Enemy* owner = script->owner1.enemy;
-    Npc* temp_s1 = get_npc_unsafe(owner->npcID);
+    Npc* npc = get_npc_unsafe(owner->npcID);
     ScriptInstance* newScript;
 
     kill_script(script);
-    temp_s1->currentAnim = owner->animList[6];
+    npc->currentAnim = owner->animList[6];
     newScript = start_script(&SCRIPT_NpcDefeat, 10, 0);
     owner->defeatScript = newScript;
     owner->defeatScriptID = newScript->id;
@@ -345,15 +364,10 @@ ApiStatus SetNpcVar(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus GetNpcVar(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    Enemy* npc;
-    NpcId npcID;
-    s32 varIdx;
-    s32 var3;
-
-    npc = script->owner1.enemy;
-    npcID = get_variable(script, *args++);
-    varIdx = get_variable(script, *args++);
-    var3 = *args;
+    Enemy* npc = script->owner1.enemy;
+    NpcId npcID = get_variable(script, *args++);
+    s32 varIdx = get_variable(script, *args++);
+    s32 var3 = *args;
 
     if (npcID == NpcId_SELF) {
         npcID = npc->npcID;
@@ -420,8 +434,8 @@ ApiStatus ClearDefeatedEnemies(ScriptInstance* script, s32 isInitialCall) {
     s32 i;
     s32 j;
 
-    for (i = 0; i < 60; i++) {
-        for (j = 0; j < 12; j++) {
+    for (i = 0; i < ARRAY_COUNT(currentEncounter->defeatFlags); i++) {
+        for (j = 0; j < ARRAY_COUNT(currentEncounter->defeatFlags[0]); j++) {
             currentEncounter->defeatFlags[i][j] = 0;
         }
     }
@@ -504,7 +518,39 @@ ApiStatus func_800458CC(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_1f580_len_1940", func_80045900);
+ApiStatus func_80045900(ScriptInstance* script) {
+    Enemy* enemy = script->owner1.enemy;
+    Npc* npc = get_npc_unsafe(enemy->npcID);
+    s32 var0 = get_variable(script, *script->ptrReadPos);
+
+    enemy->unk_B0 |= 4;
+
+    if (var0 == 0) {
+        s32 unk;
+
+        if (!(enemy->unk_B0 & 0x10)) {
+            npc->currentAnim = *enemy->animList;
+        }
+
+        if (!(enemy->unk_B0 & 0x8)) {
+            fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 0.0f, -20.0f, 40, &unk);
+        }
+
+        if ((npc->flags & 0xA08) == 0x808) {
+            f32 x = npc->pos.x;
+            f32 y = npc->pos.y + npc->collisionHeight;
+            f32 z = npc->pos.z;
+            f32 a = 100.0f;
+
+            if (func_800DCB7C(npc->unk_80, &x, &y, &z, &a) != 0) {
+                npc->pos.y = y;
+            }
+            npc->flags &= ~0x800;
+        }
+    }
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus SetTattleString(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

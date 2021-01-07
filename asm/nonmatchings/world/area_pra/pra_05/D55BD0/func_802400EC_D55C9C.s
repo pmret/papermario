@@ -5,8 +5,8 @@ glabel func_802400EC_D55C9C
 /* D55C9C 802400EC 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* D55CA0 802400F0 AFB00010 */  sw        $s0, 0x10($sp)
 /* D55CA4 802400F4 0080802D */  daddu     $s0, $a0, $zero
-/* D55CA8 802400F8 3C058024 */  lui       $a1, 0x8024
-/* D55CAC 802400FC 24A50128 */  addiu     $a1, $a1, 0x128
+/* D55CA8 802400F8 3C058024 */  lui       $a1, %hi(D_80240128)
+/* D55CAC 802400FC 24A50128 */  addiu     $a1, $a1, %lo(D_80240128)
 /* D55CB0 80240100 AFBF0014 */  sw        $ra, 0x14($sp)
 /* D55CB4 80240104 0C048C56 */  jal       bind_dynamic_entity_3
 /* D55CB8 80240108 0000202D */   daddu    $a0, $zero, $zero

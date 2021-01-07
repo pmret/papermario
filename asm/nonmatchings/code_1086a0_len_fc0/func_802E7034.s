@@ -16,8 +16,8 @@ glabel func_802E7034
 /* 1088E0 802E7060 0060202D */   daddu    $a0, $v1, $zero
 /* 1088E4 802E7064 1040000D */  beqz      $v0, .L802E709C
 /* 1088E8 802E7068 0220202D */   daddu    $a0, $s1, $zero
-/* 1088EC 802E706C 3C05802F */  lui       $a1, 0x802f
-/* 1088F0 802E7070 24A5AD7C */  addiu     $a1, $a1, -0x5284
+/* 1088EC 802E706C 3C05802F */  lui       $a1, %hi(D_802EAD7C)
+/* 1088F0 802E7070 24A5AD7C */  addiu     $a1, $a1, %lo(D_802EAD7C)
 /* 1088F4 802E7074 8E220000 */  lw        $v0, ($s1)
 /* 1088F8 802E7078 3C01C1E5 */  lui       $at, 0xc1e5
 /* 1088FC 802E707C 3421999A */  ori       $at, $at, 0x999a

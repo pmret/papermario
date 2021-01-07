@@ -2,9 +2,13 @@
 
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9DA8F0", func_802438D0_9DA8F0);
 
+#define NAMESPACE dup2_nok_02
 #include "world/common/GetNpcCollisionHeight.inc.c"
+#define NAMESPACE nok_02
 
+#define NAMESPACE dup2_nok_02
 #include "world/common/SomeXYZFuncTodoRename.inc.c"
+#define NAMESPACE nok_02
 
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9DA8F0", func_80243BEC_9DAC0C);
 
@@ -16,7 +20,9 @@ INCLUDE_ASM(s32, "world/area_nok/nok_02/9DA8F0", func_80243D14_9DAD34);
 
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9DA8F0", func_80243DB0_9DADD0);
 
+#define NAMESPACE dup2_nok_02
 #include "world/common/GetItemName.inc.c"
+#define NAMESPACE nok_02
 
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9DA8F0", func_80243EC8_9DAEE8);
 

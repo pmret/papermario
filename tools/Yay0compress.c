@@ -32,7 +32,7 @@ int main(int argc, const char **argv, const char **envp)
 
 	if (argc < 3)
 	{
-		fprintf(stderr, "Yay0decompress [infile] [outfile]\n");
+		fprintf(stderr, "Yay0compress [infile] [outfile]\n");
 		return 1;
 	}
 	

@@ -14,21 +14,21 @@ INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_80240F4C_DCDC1C);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_802410A4_DCDD74);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_8024134C_DCE01C);
+#include "world/common/UnkNpcAIFunc1.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_8024140C_DCE0DC);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_802415C8_DCE298);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_8024167C_DCE34C);
+#include "world/common/NpcJumpFunc2.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_802416F0_DCE3C0);
+# include "world/common/NpcJumpFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_80241768_DCE438);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_80241898_DCE568);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_802419B8_DCE688);
+#include "world/common/UnkNpcDurationFlagFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_80241A20_DCE6F0);
 
@@ -50,11 +50,11 @@ INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_80242548_DCF218);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_8024268C_DCF35C);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_8024278C_DCF45C);
+#include "world/common/UnkSetDurationFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_802427D0_DCF4A0);
+#include "world/common/UnkNpcAIFunc9.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_80242870_DCF540);
+#include "world/common/UnkDurationCheck.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_802428B4_DCF584);
 
@@ -64,7 +64,7 @@ INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_8024324C_DCFF1C);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_8024356C_DD023C);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_80243580_DD0250);
+#include "world/common/GetEncounterEnemyIsOwner.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_802435B8_DD0288);
 

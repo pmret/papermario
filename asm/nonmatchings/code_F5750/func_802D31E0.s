@@ -29,8 +29,8 @@ glabel func_802D31E0
 /* F7BF0 802D3240 AFB00260 */  sw        $s0, 0x260($sp)
 /* F7BF4 802D3244 AFA80258 */  sw        $t0, 0x258($sp)
 .L802D3248:
-/* F7BF8 802D3248 3C03802E */  lui       $v1, 0x802e
-/* F7BFC 802D324C 8C63B7C0 */  lw        $v1, -0x4840($v1)
+/* F7BF8 802D3248 3C03802E */  lui       $v1, %hi(D_802DB7C0)
+/* F7BFC 802D324C 8C63B7C0 */  lw        $v1, %lo(D_802DB7C0)($v1)
 /* F7C00 802D3250 00121080 */  sll       $v0, $s2, 2
 /* F7C04 802D3254 00431021 */  addu      $v0, $v0, $v1
 /* F7C08 802D3258 8C500000 */  lw        $s0, ($v0)

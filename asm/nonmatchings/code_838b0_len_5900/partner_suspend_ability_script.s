@@ -2,14 +2,14 @@
 .set noreorder # don't insert nops after branches
 
 glabel partner_suspend_ability_script
-/* 84CC8 800EB818 3C028011 */  lui       $v0, 0x8011
-/* 84CCC 800EB81C 8C42CFD8 */  lw        $v0, -0x3028($v0)
+/* 84CC8 800EB818 3C028011 */  lui       $v0, %hi(D_8010CFD8)
+/* 84CCC 800EB81C 8C42CFD8 */  lw        $v0, %lo(D_8010CFD8)($v0)
 /* 84CD0 800EB820 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 84CD4 800EB824 AFBF0014 */  sw        $ra, 0x14($sp)
 /* 84CD8 800EB828 10400009 */  beqz      $v0, .L800EB850
 /* 84CDC 800EB82C AFB00010 */   sw       $s0, 0x10($sp)
-/* 84CE0 800EB830 3C108011 */  lui       $s0, 0x8011
-/* 84CE4 800EB834 2610CFDC */  addiu     $s0, $s0, -0x3024
+/* 84CE0 800EB830 3C108011 */  lui       $s0, %hi(D_8010CFDC)
+/* 84CE4 800EB834 2610CFDC */  addiu     $s0, $s0, %lo(D_8010CFDC)
 /* 84CE8 800EB838 0C0B1059 */  jal       does_script_exist
 /* 84CEC 800EB83C 8E040000 */   lw       $a0, ($s0)
 /* 84CF0 800EB840 10400003 */  beqz      $v0, .L800EB850

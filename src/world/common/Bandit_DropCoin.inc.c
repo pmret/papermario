@@ -1,6 +1,7 @@
 #include "common.h"
+#include "map.h"
 
-static ApiStatus Bandit_DropCoin(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(Bandit_DropCoin)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     NpcId npcID;
     Npc* npc;

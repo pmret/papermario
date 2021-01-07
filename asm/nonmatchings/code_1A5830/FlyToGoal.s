@@ -337,8 +337,8 @@ glabel FlyToGoal
 /* 1AA3EC 8027BB0C 46001003 */  div.s     $f0, $f2, $f0
 /* 1AA3F0 8027BB10 46000021 */  cvt.d.s   $f0, $f0
 /* 1AA3F4 8027BB14 46206301 */  sub.d     $f12, $f12, $f0
-/* 1AA3F8 8027BB18 3C01802A */  lui       $at, 0x802a
-/* 1AA3FC 8027BB1C D420DA10 */  ldc1      $f0, -0x25f0($at)
+/* 1AA3F8 8027BB18 3C01802A */  lui       $at, %hi(D_8029DA10)
+/* 1AA3FC 8027BB1C D420DA10 */  ldc1      $f0, %lo(D_8029DA10)($at)
 /* 1AA400 8027BB20 46206302 */  mul.d     $f12, $f12, $f0
 /* 1AA404 8027BB24 00000000 */  nop       
 /* 1AA408 8027BB28 0C00A8BB */  jal       sin_deg

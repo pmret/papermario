@@ -15,8 +15,8 @@ glabel func_802D3474
 /* F7E4C 802D349C 0C0B1EAF */  jal       get_variable
 /* F7E50 802D34A0 0000882D */   daddu    $s1, $zero, $zero
 /* F7E54 802D34A4 0040202D */  daddu     $a0, $v0, $zero
-/* F7E58 802D34A8 3C03802E */  lui       $v1, 0x802e
-/* F7E5C 802D34AC 8C63B7C0 */  lw        $v1, -0x4840($v1)
+/* F7E58 802D34A8 3C03802E */  lui       $v1, %hi(D_802DB7C0)
+/* F7E5C 802D34AC 8C63B7C0 */  lw        $v1, %lo(D_802DB7C0)($v1)
 .L802D34B0:
 /* F7E60 802D34B0 8C700000 */  lw        $s0, ($v1)
 /* F7E64 802D34B4 8E020000 */  lw        $v0, ($s0)

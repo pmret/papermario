@@ -4,12 +4,12 @@
 glabel func_80240360_B2C7D0
 /* B2C7D0 80240360 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* B2C7D4 80240364 AFB00010 */  sw        $s0, 0x10($sp)
-/* B2C7D8 80240368 3C108024 */  lui       $s0, 0x8024
-/* B2C7DC 8024036C 26102BD8 */  addiu     $s0, $s0, 0x2bd8
+/* B2C7D8 80240368 3C108024 */  lui       $s0, %hi(D_80242BD8)
+/* B2C7DC 8024036C 26102BD8 */  addiu     $s0, $s0, %lo(D_80242BD8)
 /* B2C7E0 80240370 AFBF0014 */  sw        $ra, 0x14($sp)
 /* B2C7E4 80240374 8E020000 */  lw        $v0, ($s0)
-/* B2C7E8 80240378 3C038016 */  lui       $v1, 0x8016
-/* B2C7EC 8024037C 9463A552 */  lhu       $v1, -0x5aae($v1)
+/* B2C7E8 80240378 3C038016 */  lui       $v1, %hi(gCollisionStatus+0x2)
+/* B2C7EC 8024037C 9463A552 */  lhu       $v1, %lo(gCollisionStatus+0x2)($v1)
 /* B2C7F0 80240380 1040000C */  beqz      $v0, .L802403B4
 /* B2C7F4 80240384 2402000A */   addiu    $v0, $zero, 0xa
 /* B2C7F8 80240388 3063FFFF */  andi      $v1, $v1, 0xffff

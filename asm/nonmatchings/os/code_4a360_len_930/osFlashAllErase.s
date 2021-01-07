@@ -4,20 +4,20 @@
 glabel osFlashAllErase
 /* 4A708 8006F308 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 4A70C 8006F30C AFBF0014 */  sw        $ra, 0x14($sp)
-/* 4A710 8006F310 3C04800B */  lui       $a0, 0x800b
-/* 4A714 8006F314 24840C70 */  addiu     $a0, $a0, 0xc70
-/* 4A718 8006F318 3C05800B */  lui       $a1, 0x800b
-/* 4A71C 8006F31C 8CA50C7C */  lw        $a1, 0xc7c($a1)
+/* 4A710 8006F310 3C04800B */  lui       $a0, %hi(D_800B0C70)
+/* 4A714 8006F314 24840C70 */  addiu     $a0, $a0, %lo(D_800B0C70)
+/* 4A718 8006F318 3C05800B */  lui       $a1, %hi(D_800B0C7C)
+/* 4A71C 8006F31C 8CA50C7C */  lw        $a1, %lo(D_800B0C7C)($a1)
 /* 4A720 8006F320 3C010001 */  lui       $at, 1
 /* 4A724 8006F324 00A17025 */  or        $t6, $a1, $at
 /* 4A728 8006F328 01C02825 */  or        $a1, $t6, $zero
 /* 4A72C 8006F32C 3C063C00 */  lui       $a2, 0x3c00
 /* 4A730 8006F330 0C018358 */  jal       osEPiWriteIo
 /* 4A734 8006F334 00000000 */   nop      
-/* 4A738 8006F338 3C04800B */  lui       $a0, 0x800b
-/* 4A73C 8006F33C 24840C70 */  addiu     $a0, $a0, 0xc70
-/* 4A740 8006F340 3C05800B */  lui       $a1, 0x800b
-/* 4A744 8006F344 8CA50C7C */  lw        $a1, 0xc7c($a1)
+/* 4A738 8006F338 3C04800B */  lui       $a0, %hi(D_800B0C70)
+/* 4A73C 8006F33C 24840C70 */  addiu     $a0, $a0, %lo(D_800B0C70)
+/* 4A740 8006F340 3C05800B */  lui       $a1, %hi(D_800B0C7C)
+/* 4A744 8006F344 8CA50C7C */  lw        $a1, %lo(D_800B0C7C)($a1)
 /* 4A748 8006F348 3C010001 */  lui       $at, 1
 /* 4A74C 8006F34C 00A17825 */  or        $t7, $a1, $at
 /* 4A750 8006F350 01E02825 */  or        $a1, $t7, $zero
@@ -25,10 +25,10 @@ glabel osFlashAllErase
 /* 4A758 8006F358 0C018358 */  jal       osEPiWriteIo
 /* 4A75C 8006F35C 00000000 */   nop      
 .L8006F360:
-/* 4A760 8006F360 3C04800B */  lui       $a0, 0x800b
-/* 4A764 8006F364 24840C70 */  addiu     $a0, $a0, 0xc70
-/* 4A768 8006F368 3C05800B */  lui       $a1, 0x800b
-/* 4A76C 8006F36C 8CA50C7C */  lw        $a1, 0xc7c($a1)
+/* 4A760 8006F360 3C04800B */  lui       $a0, %hi(D_800B0C70)
+/* 4A764 8006F364 24840C70 */  addiu     $a0, $a0, %lo(D_800B0C70)
+/* 4A768 8006F368 3C05800B */  lui       $a1, %hi(D_800B0C7C)
+/* 4A76C 8006F36C 8CA50C7C */  lw        $a1, %lo(D_800B0C7C)($a1)
 /* 4A770 8006F370 27A6001C */  addiu     $a2, $sp, 0x1c
 /* 4A774 8006F374 0C018370 */  jal       osEPiReadIo
 /* 4A778 8006F378 00000000 */   nop      
@@ -38,10 +38,10 @@ glabel osFlashAllErase
 /* 4A788 8006F388 24010002 */  addiu     $at, $zero, 2
 /* 4A78C 8006F38C 1321FFF4 */  beq       $t9, $at, .L8006F360
 /* 4A790 8006F390 00000000 */   nop      
-/* 4A794 8006F394 3C04800B */  lui       $a0, 0x800b
-/* 4A798 8006F398 24840C70 */  addiu     $a0, $a0, 0xc70
-/* 4A79C 8006F39C 3C05800B */  lui       $a1, 0x800b
-/* 4A7A0 8006F3A0 8CA50C7C */  lw        $a1, 0xc7c($a1)
+/* 4A794 8006F394 3C04800B */  lui       $a0, %hi(D_800B0C70)
+/* 4A798 8006F398 24840C70 */  addiu     $a0, $a0, %lo(D_800B0C70)
+/* 4A79C 8006F39C 3C05800B */  lui       $a1, %hi(D_800B0C7C)
+/* 4A7A0 8006F3A0 8CA50C7C */  lw        $a1, %lo(D_800B0C7C)($a1)
 /* 4A7A4 8006F3A4 27A6001C */  addiu     $a2, $sp, 0x1c
 /* 4A7A8 8006F3A8 0C018370 */  jal       osEPiReadIo
 /* 4A7AC 8006F3AC 00000000 */   nop      

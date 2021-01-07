@@ -3,8 +3,8 @@
 
 glabel nuScWaitTaskReady
 /* 3A520 8005F120 27BDFFC8 */  addiu     $sp, $sp, -0x38
-/* 3A524 8005F124 3C05800E */  lui       $a1, 0x800e
-/* 3A528 8005F128 24A5AABD */  addiu     $a1, $a1, -0x5543
+/* 3A524 8005F124 3C05800E */  lui       $a1, %hi(D_800DAABD)
+/* 3A528 8005F128 24A5AABD */  addiu     $a1, $a1, %lo(D_800DAABD)
 /* 3A52C 8005F12C 24030001 */  addiu     $v1, $zero, 1
 /* 3A530 8005F130 AFBF0034 */  sw        $ra, 0x34($sp)
 /* 3A534 8005F134 AFB40030 */  sw        $s4, 0x30($sp)
@@ -31,16 +31,16 @@ glabel nuScWaitTaskReady
 /* 3A580 8005F180 0C018250 */  jal       osSetIntMask
 /* 3A584 8005F184 24040001 */   addiu    $a0, $zero, 1
 /* 3A588 8005F188 AE340004 */  sw        $s4, 4($s1)
-/* 3A58C 8005F18C 3C03800E */  lui       $v1, 0x800e
-/* 3A590 8005F190 8C63AAA8 */  lw        $v1, -0x5558($v1)
+/* 3A58C 8005F18C 3C03800E */  lui       $v1, %hi(D_800DAAA8)
+/* 3A590 8005F190 8C63AAA8 */  lw        $v1, %lo(D_800DAAA8)($v1)
 /* 3A594 8005F194 AFA30010 */  sw        $v1, 0x10($sp)
 /* 3A598 8005F198 A6330008 */  sh        $s3, 8($s1)
-/* 3A59C 8005F19C 3C01800E */  lui       $at, 0x800e
-/* 3A5A0 8005F1A0 AC31AAA8 */  sw        $s1, -0x5558($at)
+/* 3A59C 8005F19C 3C01800E */  lui       $at, %hi(D_800DAAA8)
+/* 3A5A0 8005F1A0 AC31AAA8 */  sw        $s1, %lo(D_800DAAA8)($at)
 /* 3A5A4 8005F1A4 0C018250 */  jal       osSetIntMask
 /* 3A5A8 8005F1A8 0040202D */   daddu    $a0, $v0, $zero
-/* 3A5AC 8005F1AC 3C04800E */  lui       $a0, 0x800e
-/* 3A5B0 8005F1B0 2484A55C */  addiu     $a0, $a0, -0x5aa4
+/* 3A5AC 8005F1AC 3C04800E */  lui       $a0, %hi(D_800DA55C)
+/* 3A5B0 8005F1B0 2484A55C */  addiu     $a0, $a0, %lo(D_800DA55C)
 /* 3A5B4 8005F1B4 0000282D */  daddu     $a1, $zero, $zero
 /* 3A5B8 8005F1B8 0C0195BC */  jal       osRecvMesg
 /* 3A5BC 8005F1BC 24060001 */   addiu    $a2, $zero, 1
@@ -48,8 +48,8 @@ glabel nuScWaitTaskReady
 /* 3A5C4 8005F1C4 24040001 */   addiu    $a0, $zero, 1
 /* 3A5C8 8005F1C8 0000282D */  daddu     $a1, $zero, $zero
 /* 3A5CC 8005F1CC 27B00010 */  addiu     $s0, $sp, 0x10
-/* 3A5D0 8005F1D0 3C03800E */  lui       $v1, 0x800e
-/* 3A5D4 8005F1D4 8C63AAA8 */  lw        $v1, -0x5558($v1)
+/* 3A5D0 8005F1D0 3C03800E */  lui       $v1, %hi(D_800DAAA8)
+/* 3A5D4 8005F1D4 8C63AAA8 */  lw        $v1, %lo(D_800DAAA8)($v1)
 /* 3A5D8 8005F1D8 1060000C */  beqz      $v1, .L8005F20C
 /* 3A5DC 8005F1DC 0040202D */   daddu    $a0, $v0, $zero
 .L8005F1E0:
@@ -58,9 +58,9 @@ glabel nuScWaitTaskReady
 /* 3A5E8 8005F1E8 14A0000C */  bnez      $a1, .L8005F21C
 /* 3A5EC 8005F1EC 00000000 */   nop      
 /* 3A5F0 8005F1F0 8C620000 */  lw        $v0, ($v1)
-/* 3A5F4 8005F1F4 3C01800E */  lui       $at, 0x800e
+/* 3A5F4 8005F1F4 3C01800E */  lui       $at, %hi(D_800DAAA8)
 /* 3A5F8 8005F1F8 08017C83 */  j         .L8005F20C
-/* 3A5FC 8005F1FC AC22AAA8 */   sw       $v0, -0x5558($at)
+/* 3A5FC 8005F1FC AC22AAA8 */   sw       $v0, %lo(D_800DAAA8)($at)
 .L8005F200:
 /* 3A600 8005F200 8CA30000 */  lw        $v1, ($a1)
 /* 3A604 8005F204 1460FFF6 */  bnez      $v1, .L8005F1E0

@@ -5,19 +5,19 @@ glabel func_80242E2C_A1DF2C
 /* A1DF2C 80242E2C 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* A1DF30 80242E30 10A0000B */  beqz      $a1, .L80242E60
 /* A1DF34 80242E34 AFBF0010 */   sw       $ra, 0x10($sp)
-/* A1DF38 80242E38 3C038025 */  lui       $v1, 0x8025
-/* A1DF3C 80242E3C 8C63BDF4 */  lw        $v1, -0x420c($v1)
+/* A1DF38 80242E38 3C038025 */  lui       $v1, %hi(D_8024BDF4)
+/* A1DF3C 80242E3C 8C63BDF4 */  lw        $v1, %lo(D_8024BDF4)($v1)
 /* A1DF40 80242E40 8C620000 */  lw        $v0, ($v1)
-/* A1DF44 80242E44 3C048025 */  lui       $a0, 0x8025
-/* A1DF48 80242E48 8C84BDF8 */  lw        $a0, -0x4208($a0)
+/* A1DF44 80242E44 3C048025 */  lui       $a0, %hi(D_8024BDF8)
+/* A1DF48 80242E48 8C84BDF8 */  lw        $a0, %lo(D_8024BDF8)($a0)
 /* A1DF4C 80242E4C 34420010 */  ori       $v0, $v0, 0x10
 /* A1DF50 80242E50 AC620000 */  sw        $v0, ($v1)
 /* A1DF54 80242E54 8C820000 */  lw        $v0, ($a0)
 /* A1DF58 80242E58 34420010 */  ori       $v0, $v0, 0x10
 /* A1DF5C 80242E5C AC820000 */  sw        $v0, ($a0)
 .L80242E60:
-/* A1DF60 80242E60 3C048025 */  lui       $a0, 0x8025
-/* A1DF64 80242E64 8C84BDF0 */  lw        $a0, -0x4210($a0)
+/* A1DF60 80242E60 3C048025 */  lui       $a0, %hi(D_8024BDF0)
+/* A1DF64 80242E64 8C84BDF0 */  lw        $a0, %lo(D_8024BDF0)($a0)
 /* A1DF68 80242E68 8C85000C */  lw        $a1, 0xc($a0)
 /* A1DF6C 80242E6C 8CA20018 */  lw        $v0, 0x18($a1)
 /* A1DF70 80242E70 8CA30020 */  lw        $v1, 0x20($a1)
@@ -41,8 +41,8 @@ glabel func_80242E2C_A1DF2C
 .L80242EB8:
 /* A1DFB8 80242EB8 0C016914 */  jal       remove_effect
 /* A1DFBC 80242EBC ACA00018 */   sw       $zero, 0x18($a1)
-/* A1DFC0 80242EC0 3C048025 */  lui       $a0, 0x8025
-/* A1DFC4 80242EC4 8C84BDD0 */  lw        $a0, -0x4230($a0)
+/* A1DFC0 80242EC0 3C048025 */  lui       $a0, %hi(D_8024BDD0)
+/* A1DFC4 80242EC4 8C84BDD0 */  lw        $a0, %lo(D_8024BDD0)($a0)
 /* A1DFC8 80242EC8 0C048D70 */  jal       func_801235C0
 /* A1DFCC 80242ECC 00000000 */   nop      
 /* A1DFD0 80242ED0 24020002 */  addiu     $v0, $zero, 2

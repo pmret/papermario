@@ -4,8 +4,8 @@
 glabel func_802DBFC0
 /* FF0B0 802DBFC0 0000202D */  daddu     $a0, $zero, $zero
 /* FF0B4 802DBFC4 2405FFFF */  addiu     $a1, $zero, -1
-/* FF0B8 802DBFC8 3C03802E */  lui       $v1, 0x802e
-/* FF0BC 802DBFCC 2463FE48 */  addiu     $v1, $v1, -0x1b8
+/* FF0B8 802DBFC8 3C03802E */  lui       $v1, %hi(D_802DFE48)
+/* FF0BC 802DBFCC 2463FE48 */  addiu     $v1, $v1, %lo(D_802DFE48)
 .L802DBFD0:
 /* FF0C0 802DBFD0 8C620000 */  lw        $v0, ($v1)
 /* FF0C4 802DBFD4 50450007 */  beql      $v0, $a1, .L802DBFF4

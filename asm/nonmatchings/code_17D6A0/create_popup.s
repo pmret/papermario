@@ -4,8 +4,8 @@
 glabel create_popup
 /* 17D848 8024EF68 0000202D */  daddu     $a0, $zero, $zero
 /* 17D84C 8024EF6C 24050001 */  addiu     $a1, $zero, 1
-/* 17D850 8024EF70 3C03802A */  lui       $v1, 0x802a
-/* 17D854 8024EF74 2463F2C0 */  addiu     $v1, $v1, -0xd40
+/* 17D850 8024EF70 3C03802A */  lui       $v1, %hi(D_8029F2C0)
+/* 17D854 8024EF74 2463F2C0 */  addiu     $v1, $v1, %lo(D_8029F2C0)
 .L8024EF78:
 /* 17D858 8024EF78 84620010 */  lh        $v0, 0x10($v1)
 /* 17D85C 8024EF7C 14400004 */  bnez      $v0, .L8024EF90

@@ -59,7 +59,7 @@ class N64SegPaperMarioMapFS(N64Segment):
 
 
     def get_ld_files(self):
-        return [("bin/assets", self.name, ".data")]
+        return [("bin/assets", self.name, ".data", self.rom_start)]
 
 
     @staticmethod

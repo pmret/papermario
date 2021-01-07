@@ -6,11 +6,11 @@ INCLUDE_ASM(s32, "world/area_iwa/iwa_01/90FBD0", func_80240710_90FDC0);
 
 INCLUDE_ASM(s32, "world/area_iwa/iwa_01/90FBD0", func_80240854_90FF04);
 
-INCLUDE_ASM(s32, "world/area_iwa/iwa_01/90FBD0", func_80240954_910004);
+#include "world/common/UnkSetDurationFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_iwa/iwa_01/90FBD0", func_80240998_910048);
+#include "world/common/UnkNpcAIFunc9.inc.c"
 
-INCLUDE_ASM(s32, "world/area_iwa/iwa_01/90FBD0", func_80240A38_9100E8);
+#include "world/common/UnkDurationCheck.inc.c"
 
 INCLUDE_ASM(s32, "world/area_iwa/iwa_01/90FBD0", func_80240A7C_91012C);
 
@@ -38,7 +38,7 @@ INCLUDE_ASM(s32, "world/area_iwa/iwa_01/90FBD0", func_80241D70_911420);
 
 INCLUDE_ASM(s32, "world/area_iwa/iwa_01/90FBD0", func_80241F6C_91161C);
 
-INCLUDE_ASM(s32, "world/area_iwa/iwa_01/90FBD0", func_8024228C_91193C);
+#include "world/common/GetEncounterEnemyIsOwner.inc.c"
 
 INCLUDE_ASM(s32, "world/area_iwa/iwa_01/90FBD0", func_802422C4_911974);
 
@@ -68,6 +68,8 @@ INCLUDE_ASM(s32, "world/area_iwa/iwa_01/90FBD0", func_80242E2C_9124DC);
 
 INCLUDE_ASM(s32, "world/area_iwa/iwa_01/90FBD0", func_80242EA8_912558);
 
-INCLUDE_ASM(s32, "world/area_iwa/iwa_01/90FBD0", func_80242F10_9125C0);
+#define NAMESPACE dup_iwa_01
+#include "world/common/UnkDurationCheck.inc.c"
+#define NAMESPACE iwa_01
 
 INCLUDE_ASM(s32, "world/area_iwa/iwa_01/90FBD0", func_80242F54_912604);

@@ -24,8 +24,8 @@ glabel func_80241358_BCFF48
 /* BCFF94 802413A4 0C0B1EAF */  jal       get_variable
 /* BCFF98 802413A8 AE020050 */   sw       $v0, 0x50($s0)
 /* BCFF9C 802413AC AE020054 */  sw        $v0, 0x54($s0)
-/* BCFFA0 802413B0 3C038016 */  lui       $v1, 0x8016
-/* BCFFA4 802413B4 8C639B08 */  lw        $v1, -0x64f8($v1)
+/* BCFFA0 802413B0 3C038016 */  lui       $v1, %hi(D_80159B08)
+/* BCFFA4 802413B4 8C639B08 */  lw        $v1, %lo(D_80159B08)($v1)
 /* BCFFA8 802413B8 AE03000C */  sw        $v1, 0xc($s0)
 /* BCFFAC 802413BC 8FBF0014 */  lw        $ra, 0x14($sp)
 /* BCFFB0 802413C0 8FB00010 */  lw        $s0, 0x10($sp)

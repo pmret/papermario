@@ -3,8 +3,8 @@
 
 glabel func_80242B94_B37764
 /* B37764 80242B94 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* B37768 80242B98 3C058025 */  lui       $a1, 0x8025
-/* B3776C 80242B9C 8CA5FEF0 */  lw        $a1, -0x110($a1)
+/* B37768 80242B98 3C058025 */  lui       $a1, %hi(D_8024FEF0)
+/* B3776C 80242B9C 8CA5FEF0 */  lw        $a1, %lo(D_8024FEF0)($a1)
 /* B37770 80242BA0 AFBF0010 */  sw        $ra, 0x10($sp)
 /* B37774 80242BA4 0C0B1EAF */  jal       get_variable
 /* B37778 80242BA8 0000202D */   daddu    $a0, $zero, $zero

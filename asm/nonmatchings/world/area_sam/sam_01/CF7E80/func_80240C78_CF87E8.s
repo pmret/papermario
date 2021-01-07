@@ -49,8 +49,8 @@ glabel func_80240C78_CF87E8
 /* CF888C 80240D1C 2413FFFC */  addiu     $s3, $zero, -4
 /* CF8890 80240D20 2412000E */  addiu     $s2, $zero, 0xe
 /* CF8894 80240D24 3C11FF7F */  lui       $s1, 0xff7f
-/* CF8898 80240D28 3C028015 */  lui       $v0, 0x8015
-/* CF889C 80240D2C 8C4212F0 */  lw        $v0, 0x12f0($v0)
+/* CF8898 80240D28 3C028015 */  lui       $v0, %hi(D_801512F0)
+/* CF889C 80240D2C 8C4212F0 */  lw        $v0, %lo(D_801512F0)($v0)
 /* CF88A0 80240D30 3631FFFF */  ori       $s1, $s1, 0xffff
 /* CF88A4 80240D34 A0400000 */  sb        $zero, ($v0)
 .L80240D38:

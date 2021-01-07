@@ -83,9 +83,9 @@ glabel func_80241AB4_A4A074
 /* A4A1A0 80241BE0 2C620019 */  sltiu     $v0, $v1, 0x19
 /* A4A1A4 80241BE4 10400044 */  beqz      $v0, .L80241CF8
 /* A4A1A8 80241BE8 00031080 */   sll      $v0, $v1, 2
-/* A4A1AC 80241BEC 3C018024 */  lui       $at, 0x8024
+/* A4A1AC 80241BEC 3C018024 */  lui       $at, %hi(D_80243930)
 /* A4A1B0 80241BF0 00220821 */  addu      $at, $at, $v0
-/* A4A1B4 80241BF4 8C223930 */  lw        $v0, 0x3930($at)
+/* A4A1B4 80241BF4 8C223930 */  lw        $v0, %lo(D_80243930)($at)
 /* A4A1B8 80241BF8 00400008 */  jr        $v0
 /* A4A1BC 80241BFC 00000000 */   nop      
 /* A4A1C0 80241C00 02A0202D */  daddu     $a0, $s5, $zero

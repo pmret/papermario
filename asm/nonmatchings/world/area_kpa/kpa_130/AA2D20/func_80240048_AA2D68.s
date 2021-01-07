@@ -167,8 +167,8 @@ glabel func_80240048_AA2D68
 /* AA2FD0 802402B0 C620003C */  lwc1      $f0, 0x3c($s1)
 /* AA2FD4 802402B4 C442002C */  lwc1      $f2, 0x2c($v0)
 /* AA2FD8 802402B8 46020001 */  sub.s     $f0, $f0, $f2
-/* AA2FDC 802402BC 3C018024 */  lui       $at, 0x8024
-/* AA2FE0 802402C0 D4224750 */  ldc1      $f2, 0x4750($at)
+/* AA2FDC 802402BC 3C018024 */  lui       $at, %hi(D_80244750)
+/* AA2FE0 802402C0 D4224750 */  ldc1      $f2, %lo(D_80244750)($at)
 /* AA2FE4 802402C4 46000121 */  cvt.d.s   $f4, $f0
 /* AA2FE8 802402C8 4624103C */  c.lt.d    $f2, $f4
 /* AA2FEC 802402CC 00000000 */  nop       

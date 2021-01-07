@@ -10,8 +10,8 @@ glabel switch_to_partner
 /* 1717F4 80242F14 AFB20018 */  sw        $s2, 0x18($sp)
 /* 1717F8 80242F18 AFB10014 */  sw        $s1, 0x14($sp)
 /* 1717FC 80242F1C 8E1100D8 */  lw        $s1, 0xd8($s0)
-/* 171800 80242F20 3C02800E */  lui       $v0, 0x800e
-/* 171804 80242F24 8C42C4DC */  lw        $v0, -0x3b24($v0)
+/* 171800 80242F20 3C02800E */  lui       $v0, %hi(gBattleStatus+0x46C)
+/* 171804 80242F24 8C42C4DC */  lw        $v0, %lo(gBattleStatus+0x46C)($v0)
 /* 171808 80242F28 14400025 */  bnez      $v0, .L80242FC0
 /* 17180C 80242F2C 8E1200DC */   lw       $s2, 0xdc($s0)
 /* 171810 80242F30 0C098F18 */  jal       func_80263C60

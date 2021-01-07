@@ -11,11 +11,11 @@ glabel step_battle
 /* ECFC 800338FC 82020000 */  lb        $v0, ($s0)
 /* ED00 80033900 1443000F */  bne       $v0, $v1, .L80033940
 /* ED04 80033904 92040000 */   lbu      $a0, ($s0)
-/* ED08 80033908 3C02800A */  lui       $v0, 0x800a
-/* ED0C 8003390C 8C42A658 */  lw        $v0, -0x59a8($v0)
+/* ED08 80033908 3C02800A */  lui       $v0, %hi(D_8009A658)
+/* ED0C 8003390C 8C42A658 */  lw        $v0, %lo(D_8009A658)($v0)
 /* ED10 80033910 8C430004 */  lw        $v1, 4($v0)
-/* ED14 80033914 3C02800A */  lui       $v0, 0x800a
-/* ED18 80033918 8C42A64C */  lw        $v0, -0x59b4($v0)
+/* ED14 80033914 3C02800A */  lui       $v0, %hi(D_8009A64C)
+/* ED18 80033918 8C42A64C */  lw        $v0, %lo(D_8009A64C)($v0)
 /* ED1C 8003391C 14620089 */  bne       $v1, $v0, .L80033B44
 /* ED20 80033920 2484FFFF */   addiu    $a0, $a0, -1
 /* ED24 80033924 3C02800A */  lui       $v0, %hi(D_8009A650)
@@ -34,8 +34,8 @@ glabel step_battle
 /* ED54 80033954 0800CED1 */  j         .L80033B44
 /* ED58 80033958 A2020000 */   sb       $v0, ($s0)
 .L8003395C:
-/* ED5C 8003395C 3C048007 */  lui       $a0, 0x8007
-/* ED60 80033960 248478A0 */  addiu     $a0, $a0, 0x78a0
+/* ED5C 8003395C 3C048007 */  lui       $a0, %hi(D_800778A0)
+/* ED60 80033960 248478A0 */  addiu     $a0, $a0, %lo(D_800778A0)
 /* ED64 80033964 24050002 */  addiu     $a1, $zero, 2
 /* ED68 80033968 2402FFFF */  addiu     $v0, $zero, -1
 /* ED6C 8003396C 0C017CBC */  jal       nuGfxSetCfb
@@ -59,11 +59,11 @@ glabel step_battle
 /* EDB4 800339B4 0C05259C */  jal       func_80149670
 /* EDB8 800339B8 0000202D */   daddu    $a0, $zero, $zero
 /* EDBC 800339BC 8E100000 */  lw        $s0, ($s0)
-/* EDC0 800339C0 3C03800E */  lui       $v1, 0x800e
-/* EDC4 800339C4 9063C4EA */  lbu       $v1, -0x3b16($v1)
+/* EDC0 800339C0 3C03800E */  lui       $v1, %hi(gBattleStatus+0x47A)
+/* EDC4 800339C4 9063C4EA */  lbu       $v1, %lo(gBattleStatus+0x47A)($v1)
 /* EDC8 800339C8 9205007E */  lbu       $a1, 0x7e($s0)
-/* EDCC 800339CC 3C04800E */  lui       $a0, 0x800e
-/* EDD0 800339D0 9084C4EB */  lbu       $a0, -0x3b15($a0)
+/* EDCC 800339CC 3C04800E */  lui       $a0, %hi(gBattleStatus+0x47B)
+/* EDD0 800339D0 9084C4EB */  lbu       $a0, %lo(gBattleStatus+0x47B)($a0)
 /* EDD4 800339D4 30A20001 */  andi      $v0, $a1, 1
 /* EDD8 800339D8 14400007 */  bnez      $v0, .L800339F8
 /* EDDC 800339DC 34A20001 */   ori      $v0, $a1, 1
@@ -126,13 +126,13 @@ glabel step_battle
 /* EEB8 80033AB8 8C847B30 */  lw        $a0, %lo(gPlayerStatusPtr)($a0)
 /* EEBC 80033ABC 8C820004 */  lw        $v0, 4($a0)
 /* EEC0 80033AC0 2403FFBF */  addiu     $v1, $zero, -0x41
-/* EEC4 80033AC4 3C01800A */  lui       $at, 0x800a
-/* EEC8 80033AC8 AC220904 */  sw        $v0, 0x904($at)
+/* EEC4 80033AC4 3C01800A */  lui       $at, %hi(D_800A0904)
+/* EEC8 80033AC8 AC220904 */  sw        $v0, %lo(D_800A0904)($at)
 /* EECC 80033ACC 00431024 */  and       $v0, $v0, $v1
 /* EED0 80033AD0 0C009C64 */  jal       func_80027190
 /* EED4 80033AD4 AC820004 */   sw       $v0, 4($a0)
-/* EED8 80033AD8 3C01800A */  lui       $at, 0x800a
-/* EEDC 80033ADC AC220908 */  sw        $v0, 0x908($at)
+/* EED8 80033AD8 3C01800A */  lui       $at, %hi(D_800A0908)
+/* EEDC 80033ADC AC220908 */  sw        $v0, %lo(D_800A0908)($at)
 /* EEE0 80033AE0 0C009C22 */  jal       func_80027088
 /* EEE4 80033AE4 0000202D */   daddu    $a0, $zero, $zero
 /* EEE8 80033AE8 3C05800A */  lui       $a1, %hi(D_8009A650)

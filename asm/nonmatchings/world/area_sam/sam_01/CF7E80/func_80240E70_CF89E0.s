@@ -38,8 +38,8 @@ glabel func_80240E70_CF89E0
 /* CF8A64 80240EF4 0220202D */  daddu     $a0, $s1, $zero
 /* CF8A68 80240EF8 3C05F4AC */  lui       $a1, 0xf4ac
 /* CF8A6C 80240EFC 34A5D481 */  ori       $a1, $a1, 0xd481
-/* CF8A70 80240F00 3C108025 */  lui       $s0, 0x8025
-/* CF8A74 80240F04 2610DF18 */  addiu     $s0, $s0, -0x20e8
+/* CF8A70 80240F00 3C108025 */  lui       $s0, %hi(D_8024DF18)
+/* CF8A74 80240F04 2610DF18 */  addiu     $s0, $s0, %lo(D_8024DF18)
 /* CF8A78 80240F08 0C0B1EAF */  jal       get_variable
 /* CF8A7C 80240F0C AE020000 */   sw       $v0, ($s0)
 /* CF8A80 80240F10 0220202D */  daddu     $a0, $s1, $zero
@@ -66,8 +66,8 @@ glabel func_80240E70_CF89E0
 /* CF8AD4 80240F64 0000202D */   daddu    $a0, $zero, $zero
 /* CF8AD8 80240F68 0220202D */  daddu     $a0, $s1, $zero
 /* CF8ADC 80240F6C 3C05F4AC */  lui       $a1, 0xf4ac
-/* CF8AE0 80240F70 3C018025 */  lui       $at, 0x8025
-/* CF8AE4 80240F74 AC22DF1C */  sw        $v0, -0x20e4($at)
+/* CF8AE0 80240F70 3C018025 */  lui       $at, %hi(D_8024DF1C)
+/* CF8AE4 80240F74 AC22DF1C */  sw        $v0, %lo(D_8024DF1C)($at)
 /* CF8AE8 80240F78 0C0B1EAF */  jal       get_variable
 /* CF8AEC 80240F7C 34A5D481 */   ori      $a1, $a1, 0xd481
 /* CF8AF0 80240F80 0220202D */  daddu     $a0, $s1, $zero
@@ -98,16 +98,16 @@ glabel func_80240E70_CF89E0
 /* CF8B54 80240FE4 E7A00010 */   swc1     $f0, 0x10($sp)
 /* CF8B58 80240FE8 8E030000 */  lw        $v1, ($s0)
 /* CF8B5C 80240FEC 8C64000C */  lw        $a0, 0xc($v1)
-/* CF8B60 80240FF0 3C018025 */  lui       $at, 0x8025
-/* CF8B64 80240FF4 AC22DF20 */  sw        $v0, -0x20e0($at)
+/* CF8B60 80240FF0 3C018025 */  lui       $at, %hi(D_8024DF20)
+/* CF8B64 80240FF4 AC22DF20 */  sw        $v0, %lo(D_8024DF20)($at)
 /* CF8B68 80240FF8 AC800018 */  sw        $zero, 0x18($a0)
 /* CF8B6C 80240FFC AC800020 */  sw        $zero, 0x20($a0)
 /* CF8B70 80241000 AC800024 */  sw        $zero, 0x24($a0)
 /* CF8B74 80241004 AC800028 */  sw        $zero, 0x28($a0)
 /* CF8B78 80241008 AC80001C */  sw        $zero, 0x1c($a0)
 .L8024100C:
-/* CF8B7C 8024100C 3C028025 */  lui       $v0, 0x8025
-/* CF8B80 80241010 8C42DF18 */  lw        $v0, -0x20e8($v0)
+/* CF8B7C 8024100C 3C028025 */  lui       $v0, %hi(D_8024DF18)
+/* CF8B80 80241010 8C42DF18 */  lw        $v0, %lo(D_8024DF18)($v0)
 /* CF8B84 80241014 8C44000C */  lw        $a0, 0xc($v0)
 /* CF8B88 80241018 8C820020 */  lw        $v0, 0x20($a0)
 /* CF8B8C 8024101C 8C830028 */  lw        $v1, 0x28($a0)

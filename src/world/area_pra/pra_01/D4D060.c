@@ -1,6 +1,6 @@
 #include "pra_01.h"
 
-INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_80240020_D4D060);
+#include "world/common/UnkFunc2.inc.c"
 
 INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_80240054_D4D094);
 
@@ -20,15 +20,18 @@ INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_80240870_D4D8B0);
 
 INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_80240D3C_D4DD7C);
 
-INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_80240E84_D4DEC4);
+#include "world/common/SetPartnerFlagsA0000.inc.c"
 
-INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_80240EB8_D4DEF8);
+#include "world/common/SetPartnerFlags80000.inc.c"
 
-INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_80240EEC_D4DF2C);
+#include "world/common/SetPartnerFlags20000.inc.c"
 
 INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_80240F20_D4DF60);
 
-INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_80240F60_D4DFA0);
+ApiStatus func_80240F60_D4DFA0(ScriptInstance* script, s32 isInitialCall) {
+    D_8009A650[0] &= ~0x80;
+    return ApiStatus_DONE2;
+}
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 
@@ -42,7 +45,7 @@ INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_80241238_D4E278);
 
 INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_802412D4_D4E314);
 
-static ApiStatus PostChapter7StatUpdate(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus PostChapter7StatUpdate(ScriptInstance* script, s32 isInitialCall) {
     PlayerData* playerData = PLAYER_DATA;
 
     set_max_SP(7);

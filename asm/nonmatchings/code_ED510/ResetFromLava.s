@@ -11,13 +11,13 @@ glabel ResetFromLava
 /* EE8A0 802C9EF0 10A0001D */  beqz      $a1, .L802C9F68
 /* EE8A4 802C9EF4 8C82000C */   lw       $v0, 0xc($a0)
 /* EE8A8 802C9EF8 8C450000 */  lw        $a1, ($v0)
-/* EE8AC 802C9EFC 3C12800B */  lui       $s2, 0x800b
-/* EE8B0 802C9F00 265242E0 */  addiu     $s2, $s2, 0x42e0
+/* EE8AC 802C9EFC 3C12800B */  lui       $s2, %hi(D_800B42E0)
+/* EE8B0 802C9F00 265242E0 */  addiu     $s2, $s2, %lo(D_800B42E0)
 /* EE8B4 802C9F04 0C0B1EAF */  jal       get_variable
 /* EE8B8 802C9F08 2413FFFF */   addiu    $s3, $zero, -1
 /* EE8BC 802C9F0C 0040882D */  daddu     $s1, $v0, $zero
-/* EE8C0 802C9F10 3C01802E */  lui       $at, 0x802e
-/* EE8C4 802C9F14 AC31ADA0 */  sw        $s1, -0x5260($at)
+/* EE8C0 802C9F10 3C01802E */  lui       $at, %hi(D_802DADA0)
+/* EE8C4 802C9F14 AC31ADA0 */  sw        $s1, %lo(D_802DADA0)($at)
 .L802C9F18:
 /* EE8C8 802C9F18 8E230000 */  lw        $v1, ($s1)
 /* EE8CC 802C9F1C 1073000F */  beq       $v1, $s3, .L802C9F5C
@@ -39,8 +39,8 @@ glabel ResetFromLava
 /* EE908 802C9F58 AE020000 */   sw       $v0, ($s0)
 .L802C9F5C:
 /* EE90C 802C9F5C 2402FFFF */  addiu     $v0, $zero, -1
-/* EE910 802C9F60 3C01802E */  lui       $at, 0x802e
-/* EE914 802C9F64 AC22ADA4 */  sw        $v0, -0x525c($at)
+/* EE910 802C9F60 3C01802E */  lui       $at, %hi(D_802DADA4)
+/* EE914 802C9F64 AC22ADA4 */  sw        $v0, %lo(D_802DADA4)($at)
 .L802C9F68:
 /* EE918 802C9F68 3C028016 */  lui       $v0, %hi(gCollisionStatus)
 /* EE91C 802C9F6C 2442A550 */  addiu     $v0, $v0, %lo(gCollisionStatus)
@@ -52,16 +52,16 @@ glabel ResetFromLava
 /* EE934 802C9F84 00022403 */  sra       $a0, $v0, 0x10
 /* EE938 802C9F88 000410C0 */  sll       $v0, $a0, 3
 /* EE93C 802C9F8C 00441023 */  subu      $v0, $v0, $a0
-/* EE940 802C9F90 3C03800B */  lui       $v1, 0x800b
-/* EE944 802C9F94 8C6342E4 */  lw        $v1, 0x42e4($v1)
+/* EE940 802C9F90 3C03800B */  lui       $v1, %hi(D_800B42E4)
+/* EE944 802C9F94 8C6342E4 */  lw        $v1, %lo(D_800B42E4)($v1)
 /* EE948 802C9F98 00021080 */  sll       $v0, $v0, 2
 /* EE94C 802C9F9C 00628021 */  addu      $s0, $v1, $v0
 /* EE950 802C9FA0 8E020000 */  lw        $v0, ($s0)
 /* EE954 802C9FA4 30420100 */  andi      $v0, $v0, 0x100
 /* EE958 802C9FA8 10400003 */  beqz      $v0, .L802C9FB8
 /* EE95C 802C9FAC 0000102D */   daddu    $v0, $zero, $zero
-/* EE960 802C9FB0 3C01802E */  lui       $at, 0x802e
-/* EE964 802C9FB4 AC24ADA4 */  sw        $a0, -0x525c($at)
+/* EE960 802C9FB0 3C01802E */  lui       $at, %hi(D_802DADA4)
+/* EE964 802C9FB4 AC24ADA4 */  sw        $a0, %lo(D_802DADA4)($at)
 .L802C9FB8:
 /* EE968 802C9FB8 8FBF0020 */  lw        $ra, 0x20($sp)
 /* EE96C 802C9FBC 8FB3001C */  lw        $s3, 0x1c($sp)

@@ -7,8 +7,8 @@ glabel func_802405D0_E16350
 /* E16358 802405D8 AFBF002C */  sw        $ra, 0x2c($sp)
 /* E1635C 802405DC 0C00FB3A */  jal       get_enemy
 /* E16360 802405E0 AFB00028 */   sw       $s0, 0x28($sp)
-/* E16364 802405E4 3C04802F */  lui       $a0, 0x802f
-/* E16368 802405E8 2484AFDC */  addiu     $a0, $a0, -0x5024
+/* E16364 802405E4 3C04802F */  lui       $a0, %hi(D_802EAFDC)
+/* E16368 802405E8 2484AFDC */  addiu     $a0, $a0, %lo(D_802EAFDC)
 /* E1636C 802405EC 8C50006C */  lw        $s0, 0x6c($v0)
 /* E16370 802405F0 3C028000 */  lui       $v0, 0x8000
 /* E16374 802405F4 24050163 */  addiu     $a1, $zero, 0x163
@@ -23,8 +23,8 @@ glabel func_802405D0_E16350
 /* E16398 80240618 0040202D */  daddu     $a0, $v0, $zero
 /* E1639C 8024061C 0C04417A */  jal       get_entity_by_index
 /* E163A0 80240620 AE04001C */   sw       $a0, 0x1c($s0)
-/* E163A4 80240624 3C038024 */  lui       $v1, 0x8024
-/* E163A8 80240628 24632A3C */  addiu     $v1, $v1, 0x2a3c
+/* E163A4 80240624 3C038024 */  lui       $v1, %hi(D_80242A3C)
+/* E163A8 80240628 24632A3C */  addiu     $v1, $v1, %lo(D_80242A3C)
 /* E163AC 8024062C AC430028 */  sw        $v1, 0x28($v0)
 /* E163B0 80240630 8FBF002C */  lw        $ra, 0x2c($sp)
 /* E163B4 80240634 8FB00028 */  lw        $s0, 0x28($sp)

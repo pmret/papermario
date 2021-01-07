@@ -1,4 +1,4 @@
-#include "code_190B20.h"
+#include "battle/battle.h"
 
 INCLUDE_ASM(s32, "code_190B20", create_target_list);
 
@@ -44,13 +44,13 @@ INCLUDE_ASM(s32, "code_190B20", set_animation);
 
 INCLUDE_ASM(s32, "code_190B20", func_80263E08);
 
-INCLUDE_ASM(s32, "code_190B20", set_animation_rate);
+INCLUDE_ASM(void, "code_190B20", set_animation_rate, ActorID actorID, s32 partIndex, f32 rate);
 
-void set_actor_yaw(s32 actorId, s32 yaw) {
-    get_actor(actorId)->yaw = yaw;
+void set_actor_yaw(ActorID actorID, s32 yaw) {
+    get_actor(actorID)->yaw = yaw;
 }
 
-void set_part_yaw(s32 actorID, s32 partIndex, s32 value) {
+void set_part_yaw(ActorID actorID, s32 partIndex, s32 value) {
     get_actor_part(get_actor(actorID), partIndex)->yaw = value;
 }
 
@@ -93,11 +93,6 @@ INCLUDE_ASM(s32, "code_190B20", func_80265CE8);
 
 INCLUDE_ASM(s32, "code_190B20", func_80265D44);
 
-typedef struct {
-    Element element;
-    s32 defense;
-} DefenseTableEntry;
-
 s32 lookup_defense(DefenseTableEntry* defenseTable, Element elementKey) {
     DefenseTableEntry* row;
     s32 normalDefense = 0;
@@ -124,9 +119,9 @@ INCLUDE_ASM(s32, "code_190B20", lookup_status_duration_mod); // exactly (?) the 
 INCLUDE_ASM(s32, "code_190B20", inflict_status);
 
 s32 inflict_partner_ko(Actor* target, s32 statusTypeKey, s32 duration) {
-    if (statusTypeKey == Status_DAZE) {
+    if (statusTypeKey == Debuff_DAZE) {
         if (statusTypeKey != target->koStatus) {
-            inflict_status(target, Status_DAZE);
+            inflict_status(target, Debuff_DAZE);
             play_sound(0x2107);
         } else {
             target->koDuration += duration;
@@ -333,16 +328,16 @@ s32 heroes_is_ability_active(Actor* actor, Ability ability) {
     return hasAbility;
 }
 
-void create_part_shadow(s32 actorId, s32 partIndex) {
-    ActorPart* part = get_actor_part(get_actor(actorId), partIndex);
+void create_part_shadow(ActorID actorID, s32 partIndex) {
+    ActorPart* part = get_actor_part(get_actor(actorID), partIndex);
 
     part->flags &= ~4;
     part->shadow = create_shadow_type(0, part->currentPos.x, part->currentPos.y, part->currentPos.z);
     part->shadowScale = part->size[0] / 24.0;
 }
 
-void remove_part_shadow(s32 actorId, s32 partIndex) {
-    ActorPart* part = get_actor_part(get_actor(actorId), partIndex);
+void remove_part_shadow(ActorID actorID, s32 partIndex) {
+    ActorPart* part = get_actor_part(get_actor(actorID), partIndex);
 
     part->flags |= 4;
     func_80112328(part->shadow);
@@ -358,7 +353,7 @@ void func_80071A50(s32, f32 x, f32 y, f32 z, f32 scale /* maybe */, s32);
 void func_80071C30(s32, f32 x, f32 y, f32 z, f32 scale /* maybe */, s32);
 
 void remove_player_buffs(PlayerBuff buffs) {
-    BattleStatus* battleStatus = &gBattleStatus;
+    BattleStatus* battleStatus = BATTLE_STATUS;
     Actor* player = battleStatus->playerActor;
     Actor* partner = battleStatus->partnerActor;
     ActorPart* playerPartsTable = player->partsTable;
@@ -415,7 +410,7 @@ void remove_player_buffs(PlayerBuff buffs) {
     }
 
     if ((partner != NULL) && (buffs & 0x10000)) {
-        BattleStatus* bs = &gBattleStatus;
+        BattleStatus* bs = BATTLE_STATUS;
 
         partner->isGlowing = FALSE;
         bs->flags1 &= ~0x40000000;
@@ -495,13 +490,8 @@ void show_foreground_models(void) {
     }
 }
 
-ApiStatus StartRumbleWithParams(ScriptInstance* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
 
-    start_rumble(get_variable(script, *args++), get_variable(script, *args++));
-
-    return ApiStatus_DONE2;
-}
+#include "common/StartRumbleWithParams.inc.c"
 
 INCLUDE_ASM(s32, "code_190B20", start_rumble_type);
 

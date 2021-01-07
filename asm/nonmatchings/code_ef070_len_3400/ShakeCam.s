@@ -158,8 +158,8 @@ glabel ShakeCam
 /* EFE98 802CB4E8 10400009 */  beqz      $v0, .L802CB510
 /* EFE9C 802CB4EC 00000000 */   nop      
 /* EFEA0 802CB4F0 C6A0007C */  lwc1      $f0, 0x7c($s5)
-/* EFEA4 802CB4F4 3C01802E */  lui       $at, 0x802e
-/* EFEA8 802CB4F8 D422A1D0 */  ldc1      $f2, -0x5e30($at)
+/* EFEA4 802CB4F4 3C01802E */  lui       $at, %hi(D_802DA1D0)
+/* EFEA8 802CB4F8 D422A1D0 */  ldc1      $f2, %lo(D_802DA1D0)($at)
 /* EFEAC 802CB4FC 46000021 */  cvt.d.s   $f0, $f0
 /* EFEB0 802CB500 46220002 */  mul.d     $f0, $f0, $f2
 /* EFEB4 802CB504 00000000 */  nop       

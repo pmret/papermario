@@ -10,6 +10,10 @@
 #define INCLUDE_ASM(TYPE, FOLDER, NAME, ARGS...)
 #endif
 
+#define ALIGN16(val) (((val) + 0xF) & ~0xF)
+
+#define N(sym) NS(NAMESPACE, sym)
+
 #define ARRAY_COUNT(arr) (s32)(sizeof(arr) / sizeof(arr[0]))
 #define ARRAY_COUNTU(arr) (u32)(sizeof(arr) / sizeof(arr[0]))
 
@@ -20,6 +24,7 @@
 #define BATTLE_STATUS (&gBattleStatus)
 #define GAME_STATUS (*gGameStatusPtr)
 #define PLAYER_STATUS (&gPlayerStatus)
+#define UI_STATUS (&gUIStatus)
 #define PLAYER_DATA (&gPlayerData)
 #define CAM(id) (&gCameras[id])
 #define CURRENT_CAM (&gCameras[gCurrentCameraID])
@@ -43,6 +48,7 @@
 
 // Alternative to libultra's M_PI: non-float version; more digits cause issues
 #define PI 3.141592f
+#define TAU 6.28318f
 
 //NOTE: SCRIPT_ALLOC is probably not quite correct, but this is the closest thing to matching for the functions its used in. Needs more work.
 #define SCRIPT_ALLOC(new, index) \
@@ -69,7 +75,7 @@
 // Fixed-point short literal
 #define F16(f) (s16)(f * 327.67f)
 
-#define _NAMESPACE(x, y) x ## _ ## y
-#define NAMESPACE(x, y) _NAMESPACE(x, y)
+#define _NS(x, y) x ## _ ## y
+#define NS(x, y) _NS(x, y)
 
 #endif

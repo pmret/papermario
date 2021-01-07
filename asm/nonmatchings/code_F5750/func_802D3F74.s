@@ -9,8 +9,8 @@ glabel func_802D3F74
 /* F8934 802D3F84 8E050000 */  lw        $a1, ($s0)
 /* F8938 802D3F88 0C0B1EAF */  jal       get_variable
 /* F893C 802D3F8C 26100004 */   addiu    $s0, $s0, 4
-/* F8940 802D3F90 3C03802E */  lui       $v1, 0x802e
-/* F8944 802D3F94 8C63B7C0 */  lw        $v1, -0x4840($v1)
+/* F8940 802D3F90 3C03802E */  lui       $v1, %hi(D_802DB7C0)
+/* F8944 802D3F94 8C63B7C0 */  lw        $v1, %lo(D_802DB7C0)($v1)
 /* F8948 802D3F98 00021080 */  sll       $v0, $v0, 2
 /* F894C 802D3F9C 00431021 */  addu      $v0, $v0, $v1
 /* F8950 802D3FA0 8C420000 */  lw        $v0, ($v0)

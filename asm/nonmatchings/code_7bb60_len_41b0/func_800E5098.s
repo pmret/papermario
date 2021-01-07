@@ -22,8 +22,8 @@ glabel func_800E5098
 /* 7E584 800E50D4 00001810 */   mfhi     $v1
 /* 7E588 800E50D8 14600019 */  bnez      $v1, .L800E5140
 /* 7E58C 800E50DC 00000000 */   nop      
-/* 7E590 800E50E0 3C048016 */  lui       $a0, 0x8016
-/* 7E594 800E50E4 8484A552 */  lh        $a0, -0x5aae($a0)
+/* 7E590 800E50E0 3C048016 */  lui       $a0, %hi(gCollisionStatus+0x2)
+/* 7E594 800E50E4 8484A552 */  lh        $a0, %lo(gCollisionStatus+0x2)($a0)
 /* 7E598 800E50E8 0C016F6A */  jal       get_collider_type_by_id
 /* 7E59C 800E50EC 00000000 */   nop      
 /* 7E5A0 800E50F0 304300FF */  andi      $v1, $v0, 0xff
@@ -39,8 +39,8 @@ glabel func_800E5098
 .L800E5114:
 /* 7E5C4 800E5114 24030142 */  addiu     $v1, $zero, 0x142
 .L800E5118:
-/* 7E5C8 800E5118 3C10800F */  lui       $s0, 0x800f
-/* 7E5CC 800E511C 26107B80 */  addiu     $s0, $s0, 0x7b80
+/* 7E5C8 800E5118 3C10800F */  lui       $s0, %hi(D_800F7B80)
+/* 7E5CC 800E511C 26107B80 */  addiu     $s0, $s0, %lo(D_800F7B80)
 /* 7E5D0 800E5120 86020000 */  lh        $v0, ($s0)
 /* 7E5D4 800E5124 50400001 */  beql      $v0, $zero, .L800E512C
 /* 7E5D8 800E5128 0060202D */   daddu    $a0, $v1, $zero

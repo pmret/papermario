@@ -16,8 +16,8 @@ glabel func_80147F30
 /* DE65C 80147F5C 1A60002C */  blez      $s3, .L80148010
 /* DE660 80147F60 AFB00028 */   sw       $s0, 0x28($sp)
 /* DE664 80147F64 2416FFFF */  addiu     $s6, $zero, -1
-/* DE668 80147F68 3C158015 */  lui       $s5, 0x8015
-/* DE66C 80147F6C 26B5F150 */  addiu     $s5, $s5, -0xeb0
+/* DE668 80147F68 3C158015 */  lui       $s5, %hi(D_8014F150)
+/* DE66C 80147F6C 26B5F150 */  addiu     $s5, $s5, %lo(D_8014F150)
 /* DE670 80147F70 3C148016 */  lui       $s4, %hi(gUIPanels)
 /* DE674 80147F74 26949D50 */  addiu     $s4, $s4, %lo(gUIPanels)
 /* DE678 80147F78 2490001C */  addiu     $s0, $a0, 0x1c

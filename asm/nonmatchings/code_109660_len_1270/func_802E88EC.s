@@ -35,8 +35,8 @@ glabel func_802E88EC
 /* 10A1DC 802E895C AFA20010 */  sw        $v0, 0x10($sp)
 /* 10A1E0 802E8960 AFA00014 */  sw        $zero, 0x14($sp)
 /* 10A1E4 802E8964 96220004 */  lhu       $v0, 4($s1)
-/* 10A1E8 802E8968 3C01802F */  lui       $at, 0x802f
-/* 10A1EC 802E896C D420B370 */  ldc1      $f0, -0x4c90($at)
+/* 10A1E8 802E8968 3C01802F */  lui       $at, %hi(D_802EB370)
+/* 10A1EC 802E896C D420B370 */  ldc1      $f0, %lo(D_802EB370)($at)
 /* 10A1F0 802E8970 460010A1 */  cvt.d.s   $f2, $f2
 /* 10A1F4 802E8974 46201080 */  add.d     $f2, $f2, $f0
 /* 10A1F8 802E8978 AFA2001C */  sw        $v0, 0x1c($sp)

@@ -12,7 +12,7 @@ INCLUDE_ASM(s32, "world/area_omo/omo_16/DEBED0", func_802401EC_DEC0BC);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_16/DEBED0", func_80240290_DEC160);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_16/DEBED0", func_80240388_DEC258);
+#include "common/UnkFloatFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_16/DEBED0", func_80240518_DEC3E8);
 

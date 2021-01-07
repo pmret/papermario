@@ -15,7 +15,7 @@ glabel func_80241A10_CF9580
 /* CF95A8 80241A38 8FBF0014 */  lw        $ra, 0x14($sp)
 /* CF95AC 80241A3C 8FB00010 */  lw        $s0, 0x10($sp)
 /* CF95B0 80241A40 24020002 */  addiu     $v0, $zero, 2
-/* CF95B4 80241A44 3C018025 */  lui       $at, 0x8025
-/* CF95B8 80241A48 AC23DF24 */  sw        $v1, -0x20dc($at)
+/* CF95B4 80241A44 3C018025 */  lui       $at, %hi(D_8024DF24)
+/* CF95B8 80241A48 AC23DF24 */  sw        $v1, %lo(D_8024DF24)($at)
 /* CF95BC 80241A4C 03E00008 */  jr        $ra
 /* CF95C0 80241A50 27BD0018 */   addiu    $sp, $sp, 0x18

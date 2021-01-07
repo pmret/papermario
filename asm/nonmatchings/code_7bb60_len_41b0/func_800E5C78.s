@@ -12,10 +12,10 @@ glabel func_800E5C78
 /* 7F144 800E5C94 0C03893E */  jal       func_800E24F8
 /* 7F148 800E5C98 AFB10014 */   sw       $s1, 0x14($sp)
 /* 7F14C 800E5C9C 3C138000 */  lui       $s3, 0x8000
-/* 7F150 800E5CA0 3C11800F */  lui       $s1, 0x800f
-/* 7F154 800E5CA4 26317C8C */  addiu     $s1, $s1, 0x7c8c
-/* 7F158 800E5CA8 3C128011 */  lui       $s2, 0x8011
-/* 7F15C 800E5CAC 2652C924 */  addiu     $s2, $s2, -0x36dc
+/* 7F150 800E5CA0 3C11800F */  lui       $s1, %hi(D_800F7C8C)
+/* 7F154 800E5CA4 26317C8C */  addiu     $s1, $s1, %lo(D_800F7C8C)
+/* 7F158 800E5CA8 3C128011 */  lui       $s2, %hi(D_8010C924)
+/* 7F15C 800E5CAC 2652C924 */  addiu     $s2, $s2, %lo(D_8010C924)
 .L800E5CB0:
 /* 7F160 800E5CB0 8E020000 */  lw        $v0, ($s0)
 /* 7F164 800E5CB4 30420020 */  andi      $v0, $v0, 0x20

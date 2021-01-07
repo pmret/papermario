@@ -9,8 +9,8 @@ glabel func_800E46C8
 /* 7DB88 800E46D8 0C044181 */  jal       get_shadow_by_index
 /* 7DB8C 800E46DC 00000000 */   nop      
 /* 7DB90 800E46E0 C4400030 */  lwc1      $f0, 0x30($v0)
-/* 7DB94 800E46E4 3C018011 */  lui       $at, 0x8011
-/* 7DB98 800E46E8 D424BEE8 */  ldc1      $f4, -0x4118($at)
+/* 7DB94 800E46E4 3C018011 */  lui       $at, %hi(D_8010BEE8)
+/* 7DB98 800E46E8 D424BEE8 */  ldc1      $f4, %lo(D_8010BEE8)($at)
 /* 7DB9C 800E46EC C4420028 */  lwc1      $f2, 0x28($v0)
 /* 7DBA0 800E46F0 46000021 */  cvt.d.s   $f0, $f0
 /* 7DBA4 800E46F4 46240000 */  add.d     $f0, $f0, $f4

@@ -4,8 +4,8 @@
 glabel func_802407E0_BBD980
 /* BBD980 802407E0 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* BBD984 802407E4 AFB00010 */  sw        $s0, 0x10($sp)
-/* BBD988 802407E8 3C108024 */  lui       $s0, 0x8024
-/* BBD98C 802407EC 261040F0 */  addiu     $s0, $s0, 0x40f0
+/* BBD988 802407E8 3C108024 */  lui       $s0, %hi(D_802440F0)
+/* BBD98C 802407EC 261040F0 */  addiu     $s0, $s0, %lo(D_802440F0)
 /* BBD990 802407F0 AFBF0018 */  sw        $ra, 0x18($sp)
 /* BBD994 802407F4 AFB10014 */  sw        $s1, 0x14($sp)
 /* BBD998 802407F8 8E020000 */  lw        $v0, ($s0)
@@ -39,8 +39,8 @@ glabel func_802407E0_BBD980
 /* BBD9FC 8024085C 28620010 */  slti      $v0, $v1, 0x10
 /* BBDA00 80240860 1440FFFA */  bnez      $v0, .L8024084C
 /* BBDA04 80240864 24840004 */   addiu    $a0, $a0, 4
-/* BBDA08 80240868 3C108024 */  lui       $s0, 0x8024
-/* BBDA0C 8024086C 261040F0 */  addiu     $s0, $s0, 0x40f0
+/* BBDA08 80240868 3C108024 */  lui       $s0, %hi(D_802440F0)
+/* BBDA0C 8024086C 261040F0 */  addiu     $s0, $s0, %lo(D_802440F0)
 /* BBDA10 80240870 0C00AB4B */  jal       heap_free
 /* BBDA14 80240874 8E040000 */   lw       $a0, ($s0)
 /* BBDA18 80240878 AE000000 */  sw        $zero, ($s0)

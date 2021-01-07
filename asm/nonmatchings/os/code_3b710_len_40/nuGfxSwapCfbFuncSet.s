@@ -8,8 +8,8 @@ glabel nuGfxSwapCfbFuncSet
 /* 3B71C 8006031C AFBF0014 */  sw        $ra, 0x14($sp)
 /* 3B720 80060320 0C018250 */  jal       osSetIntMask
 /* 3B724 80060324 24040001 */   addiu    $a0, $zero, 1
-/* 3B728 80060328 3C018007 */  lui       $at, 0x8007
-/* 3B72C 8006032C AC3073F4 */  sw        $s0, 0x73f4($at)
+/* 3B728 80060328 3C018007 */  lui       $at, %hi(D_800773F4)
+/* 3B72C 8006032C AC3073F4 */  sw        $s0, %lo(D_800773F4)($at)
 /* 3B730 80060330 0C018250 */  jal       osSetIntMask
 /* 3B734 80060334 0040202D */   daddu    $a0, $v0, $zero
 /* 3B738 80060338 8FBF0014 */  lw        $ra, 0x14($sp)

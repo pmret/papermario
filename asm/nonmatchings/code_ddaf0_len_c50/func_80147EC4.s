@@ -5,8 +5,8 @@ glabel func_80147EC4
 /* DE5C4 80147EC4 3C068016 */  lui       $a2, %hi(gUIPanels)
 /* DE5C8 80147EC8 24C69D50 */  addiu     $a2, $a2, %lo(gUIPanels)
 /* DE5CC 80147ECC 0000282D */  daddu     $a1, $zero, $zero
-/* DE5D0 80147ED0 3C028015 */  lui       $v0, 0x8015
-/* DE5D4 80147ED4 2442F2C0 */  addiu     $v0, $v0, -0xd40
+/* DE5D0 80147ED0 3C028015 */  lui       $v0, %hi(D_8014F2C0)
+/* DE5D4 80147ED4 2442F2C0 */  addiu     $v0, $v0, %lo(D_8014F2C0)
 /* DE5D8 80147ED8 00042040 */  sll       $a0, $a0, 1
 /* DE5DC 80147EDC 00822021 */  addu      $a0, $a0, $v0
 /* DE5E0 80147EE0 90870000 */  lbu       $a3, ($a0)

@@ -4,8 +4,8 @@
 glabel nuSiCallBackAdd
 /* 3B7F0 800603F0 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 3B7F4 800603F4 AFB00010 */  sw        $s0, 0x10($sp)
-/* 3B7F8 800603F8 3C108007 */  lui       $s0, 0x8007
-/* 3B7FC 800603FC 26107400 */  addiu     $s0, $s0, 0x7400
+/* 3B7F8 800603F8 3C108007 */  lui       $s0, %hi(D_80077400)
+/* 3B7FC 800603FC 26107400 */  addiu     $s0, $s0, %lo(D_80077400)
 /* 3B800 80060400 AFBF001C */  sw        $ra, 0x1c($sp)
 /* 3B804 80060404 AFB20018 */  sw        $s2, 0x18($sp)
 /* 3B808 80060408 AFB10014 */  sw        $s1, 0x14($sp)

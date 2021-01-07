@@ -6,8 +6,8 @@ glabel pause_get_total_equipped_bp_cost
 /* 137B38 802447F8 00C0282D */  daddu     $a1, $a2, $zero
 /* 137B3C 802447FC 3C088008 */  lui       $t0, %hi(gItemTable)
 /* 137B40 80244800 250878E0 */  addiu     $t0, $t0, %lo(gItemTable)
-/* 137B44 80244804 3C078009 */  lui       $a3, 0x8009
-/* 137B48 80244808 24E7F060 */  addiu     $a3, $a3, -0xfa0
+/* 137B44 80244804 3C078009 */  lui       $a3, %hi(D_8008F060)
+/* 137B48 80244808 24E7F060 */  addiu     $a3, $a3, %lo(D_8008F060)
 /* 137B4C 8024480C 3C048011 */  lui       $a0, %hi(gPlayerData)
 /* 137B50 80244810 2484F290 */  addiu     $a0, $a0, %lo(gPlayerData)
 .L80244814:

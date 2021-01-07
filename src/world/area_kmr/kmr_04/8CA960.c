@@ -2,7 +2,9 @@
 
 #include "world/common/SomeMatrixOperations.inc.c"
 
+#define NAMESPACE dup_kmr_04
 #include "world/common/CheckPartnerFlags1000.inc.c"
+#define NAMESPACE kmr_04
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_04/8CA960", func_802402C8_8CABC8);
 

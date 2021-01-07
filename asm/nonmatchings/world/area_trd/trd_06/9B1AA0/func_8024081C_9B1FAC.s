@@ -4,8 +4,8 @@
 glabel func_8024081C_9B1FAC
 /* 9B1FAC 8024081C 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 9B1FB0 80240820 AFB00010 */  sw        $s0, 0x10($sp)
-/* 9B1FB4 80240824 3C108024 */  lui       $s0, 0x8024
-/* 9B1FB8 80240828 261051F0 */  addiu     $s0, $s0, 0x51f0
+/* 9B1FB4 80240824 3C108024 */  lui       $s0, %hi(D_802451F0)
+/* 9B1FB8 80240828 261051F0 */  addiu     $s0, $s0, %lo(D_802451F0)
 /* 9B1FBC 8024082C AFBF0014 */  sw        $ra, 0x14($sp)
 /* 9B1FC0 80240830 0C04EA15 */  jal       func_8013A854
 /* 9B1FC4 80240834 8E040004 */   lw       $a0, 4($s0)

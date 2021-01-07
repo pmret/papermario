@@ -4,8 +4,8 @@
 glabel PlayerRunToGoal
 /* 1A2544 80273C64 27BDFFB8 */  addiu     $sp, $sp, -0x48
 /* 1A2548 80273C68 AFB00018 */  sw        $s0, 0x18($sp)
-/* 1A254C 80273C6C 3C10800E */  lui       $s0, 0x800e
-/* 1A2550 80273C70 8E10C148 */  lw        $s0, -0x3eb8($s0)
+/* 1A254C 80273C6C 3C10800E */  lui       $s0, %hi(gBattleStatus+0xD8)
+/* 1A2550 80273C70 8E10C148 */  lw        $s0, %lo(gBattleStatus+0xD8)($s0)
 /* 1A2554 80273C74 AFB20020 */  sw        $s2, 0x20($sp)
 /* 1A2558 80273C78 0080902D */  daddu     $s2, $a0, $zero
 /* 1A255C 80273C7C AFBF0024 */  sw        $ra, 0x24($sp)

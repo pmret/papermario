@@ -424,7 +424,7 @@ if __name__ == "__main__":
                                         print(f"{filename}:{lineno}: 'choice' style requires parameters: x, y, w, h")
                                         exit(1)
 
-                                    message.bytes += [0x05, named_args["w"], named_args["x"], named_args["h"], named_args["y"]]
+                                    message.bytes += [0x05, named_args["x"], named_args["y"], named_args["w"], named_args["h"]]
                                 elif style == "inspect":
                                     message.bytes += [0x06]
                                 elif style == "sign":

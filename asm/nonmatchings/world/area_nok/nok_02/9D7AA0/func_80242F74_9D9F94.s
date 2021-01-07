@@ -15,7 +15,7 @@ glabel func_80242F74_9D9F94
 /* 9D9FBC 80242F9C 8FBF0014 */  lw        $ra, 0x14($sp)
 /* 9D9FC0 80242FA0 8FB00010 */  lw        $s0, 0x10($sp)
 /* 9D9FC4 80242FA4 24020002 */  addiu     $v0, $zero, 2
-/* 9D9FC8 80242FA8 3C018025 */  lui       $at, 0x8025
-/* 9D9FCC 80242FAC AC234B94 */  sw        $v1, 0x4b94($at)
+/* 9D9FC8 80242FA8 3C018025 */  lui       $at, %hi(D_80254B94)
+/* 9D9FCC 80242FAC AC234B94 */  sw        $v1, %lo(D_80254B94)($at)
 /* 9D9FD0 80242FB0 03E00008 */  jr        $ra
 /* 9D9FD4 80242FB4 27BD0018 */   addiu    $sp, $sp, 0x18

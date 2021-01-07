@@ -48,8 +48,8 @@ glabel _load_model_textures
 /* AC2E8 80115BE8 0C04535B */  jal       load_tile_header
 /* AC2EC 80115BEC 0280302D */   daddu    $a2, $s4, $zero
 .L80115BF0:
-/* AC2F0 80115BF0 3C038015 */  lui       $v1, 0x8015
-/* AC2F4 80115BF4 24633224 */  addiu     $v1, $v1, 0x3224
+/* AC2F0 80115BF0 3C038015 */  lui       $v1, %hi(D_80153224)
+/* AC2F4 80115BF4 24633224 */  addiu     $v1, $v1, %lo(D_80153224)
 /* AC2F8 80115BF8 8C620000 */  lw        $v0, ($v1)
 /* AC2FC 80115BFC 24420001 */  addiu     $v0, $v0, 1
 /* AC300 80115C00 AC620000 */  sw        $v0, ($v1)

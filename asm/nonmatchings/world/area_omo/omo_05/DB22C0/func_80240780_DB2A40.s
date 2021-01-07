@@ -124,9 +124,9 @@ glabel func_80240780_DB2A40
 /* DB2C04 80240944 2C620064 */  sltiu     $v0, $v1, 0x64
 /* DB2C08 80240948 10400038 */  beqz      $v0, .L80240A2C
 /* DB2C0C 8024094C 00031080 */   sll      $v0, $v1, 2
-/* DB2C10 80240950 3C018024 */  lui       $at, 0x8024
+/* DB2C10 80240950 3C018024 */  lui       $at, %hi(D_80245460)
 /* DB2C14 80240954 00220821 */  addu      $at, $at, $v0
-/* DB2C18 80240958 8C225460 */  lw        $v0, 0x5460($at)
+/* DB2C18 80240958 8C225460 */  lw        $v0, %lo(D_80245460)($at)
 /* DB2C1C 8024095C 00400008 */  jr        $v0
 /* DB2C20 80240960 00000000 */   nop      
 /* DB2C24 80240964 0260202D */  daddu     $a0, $s3, $zero
@@ -141,7 +141,7 @@ glabel func_80240780_DB2A40
 /* DB2C48 80240988 00000000 */   nop      
 /* DB2C4C 8024098C 0260202D */  daddu     $a0, $s3, $zero
 /* DB2C50 80240990 0280282D */  daddu     $a1, $s4, $zero
-/* DB2C54 80240994 0C09015B */  jal       func_8024056C_DB282C
+/* DB2C54 80240994 0C09015B */  jal       omo_05_UnkNpcAIFunc4
 /* DB2C58 80240998 02A0302D */   daddu    $a2, $s5, $zero
 /* DB2C5C 8024099C 0260202D */  daddu     $a0, $s3, $zero
 /* DB2C60 802409A0 0280282D */  daddu     $a1, $s4, $zero

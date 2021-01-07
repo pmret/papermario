@@ -5,8 +5,8 @@ glabel func_8010FE68
 /* A6568 8010FE68 3C07FCFF */  lui       $a3, 0xfcff
 /* A656C 8010FE6C 34E7B3FF */  ori       $a3, $a3, 0xb3ff
 /* A6570 8010FE70 3C06FF2F */  lui       $a2, 0xff2f
-/* A6574 8010FE74 3C05800A */  lui       $a1, 0x800a
-/* A6578 8010FE78 24A5A66C */  addiu     $a1, $a1, -0x5994
+/* A6574 8010FE74 3C05800A */  lui       $a1, %hi(D_8009A66C)
+/* A6578 8010FE78 24A5A66C */  addiu     $a1, $a1, %lo(D_8009A66C)
 /* A657C 8010FE7C 34C6FFFF */  ori       $a2, $a2, 0xffff
 /* A6580 8010FE80 8CA20000 */  lw        $v0, ($a1)
 /* A6584 8010FE84 308400FF */  andi      $a0, $a0, 0xff

@@ -52,7 +52,14 @@ INCLUDE_ASM(s32, "code_13870_len_6980", appendGfx_npc);
 
 INCLUDE_ASM(s32, "code_13870_len_6980", render_npcs);
 
-INCLUDE_ASM(s32, "code_13870_len_6980", npc_move_heading);
+void npc_move_heading(Npc* npc, f32 speed, f32 yaw) {
+    f32 angle = (yaw * TAU) / 360.0f;
+    f32 sin = sin_rad(angle);
+    f32 cos = cos_rad(angle);
+
+    npc->pos.x += speed * sin;
+    npc->pos.z += -speed * cos;
+}
 
 INCLUDE_ASM(Npc*, "code_13870_len_6980", get_npc_unsafe, NpcId npcId);
 
@@ -101,7 +108,17 @@ void func_8003B1A8(void) {
 
 INCLUDE_ASM(s32, "code_13870_len_6980", func_8003B1B0);
 
-INCLUDE_ASM(void, "code_13870_len_6980", set_npc_yaw, Npc* npcPtr, f32 angle);
+void set_npc_yaw(Npc* npc, f32 angle) {
+    npc->yaw = angle;
+
+    if (get_clamped_angle_diff(gCameras[gCurrentCameraID].currentYaw, angle) >= 0.0f) {
+        npc->yawCamOffset = 180;
+        npc->isFacingAway = TRUE;
+    } else {
+        npc->yawCamOffset = 0;
+        npc->isFacingAway = FALSE;
+    }
+}
 
 INCLUDE_ASM(s32, "code_13870_len_6980", func_8003B3D0);
 

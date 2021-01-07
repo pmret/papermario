@@ -18,8 +18,8 @@ glabel func_80241228_C77F08
 /* C77F3C 8024125C 0040802D */  daddu     $s0, $v0, $zero
 /* C77F40 80241260 3C05800B */  lui       $a1, %hi(gCameras)
 /* C77F44 80241264 24A51D80 */  addiu     $a1, $a1, %lo(gCameras)
-/* C77F48 80241268 3C03800A */  lui       $v1, 0x800a
-/* C77F4C 8024126C 8463A634 */  lh        $v1, -0x59cc($v1)
+/* C77F48 80241268 3C03800A */  lui       $v1, %hi(D_8009A634)
+/* C77F4C 8024126C 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
 /* C77F50 80241270 00912021 */  addu      $a0, $a0, $s1
 /* C77F54 80241274 00031080 */  sll       $v0, $v1, 2
 /* C77F58 80241278 00431021 */  addu      $v0, $v0, $v1
@@ -54,8 +54,8 @@ glabel func_80241228_C77F08
 /* C77FC8 802412E8 00000000 */   nop      
 /* C77FCC 802412EC 0C00A6C9 */  jal       clamp_angle
 /* C77FD0 802412F0 46000306 */   mov.s    $f12, $f0
-/* C77FD4 802412F4 3C018024 */  lui       $at, 0x8024
-/* C77FD8 802412F8 D4227270 */  ldc1      $f2, 0x7270($at)
+/* C77FD4 802412F4 3C018024 */  lui       $at, %hi(pause_badges_is_visible)
+/* C77FD8 802412F8 D4227270 */  ldc1      $f2, %lo(pause_badges_is_visible)($at)
 /* C77FDC 802412FC 46000021 */  cvt.d.s   $f0, $f0
 /* C77FE0 80241300 4622003C */  c.lt.d    $f0, $f2
 /* C77FE4 80241304 00000000 */  nop       
@@ -97,8 +97,8 @@ glabel func_80241228_C77F08
 /* C7806C 8024138C 45030001 */  bc1tl     .L80241394
 /* C78070 80241390 0000882D */   daddu    $s1, $zero, $zero
 .L80241394:
-/* C78074 80241394 3C038011 */  lui       $v1, 0x8011
-/* C78078 80241398 8063EBB3 */  lb        $v1, -0x144d($v1)
+/* C78074 80241394 3C038011 */  lui       $v1, %hi(D_8010EBB3)
+/* C78078 80241398 8063EBB3 */  lb        $v1, %lo(D_8010EBB3)($v1)
 /* C7807C 8024139C 24020009 */  addiu     $v0, $zero, 9
 /* C78080 802413A0 50620001 */  beql      $v1, $v0, .L802413A8
 /* C78084 802413A4 0000882D */   daddu    $s1, $zero, $zero

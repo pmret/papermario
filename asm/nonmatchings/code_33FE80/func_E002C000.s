@@ -10,14 +10,14 @@ glabel func_E002C000
 /* 33FE94 E002C014 27A40010 */  addiu     $a0, $sp, 0x10
 /* 33FE98 E002C018 F7B80060 */  sdc1      $f24, 0x60($sp)
 /* 33FE9C E002C01C 4487C000 */  mtc1      $a3, $f24
-/* 33FEA0 E002C020 3C02E003 */  lui       $v0, 0xe003
-/* 33FEA4 E002C024 2442C234 */  addiu     $v0, $v0, -0x3dcc
+/* 33FEA0 E002C020 3C02E003 */  lui       $v0, %hi(D_E002C234)
+/* 33FEA4 E002C024 2442C234 */  addiu     $v0, $v0, %lo(D_E002C234)
 /* 33FEA8 E002C028 AFA20018 */  sw        $v0, 0x18($sp)
-/* 33FEAC E002C02C 3C02E003 */  lui       $v0, 0xe003
-/* 33FEB0 E002C030 2442C23C */  addiu     $v0, $v0, -0x3dc4
+/* 33FEAC E002C02C 3C02E003 */  lui       $v0, %hi(D_E002C23C)
+/* 33FEB0 E002C030 2442C23C */  addiu     $v0, $v0, %lo(D_E002C23C)
 /* 33FEB4 E002C034 AFA2001C */  sw        $v0, 0x1c($sp)
-/* 33FEB8 E002C038 3C02E003 */  lui       $v0, 0xe003
-/* 33FEBC E002C03C 2442C3D0 */  addiu     $v0, $v0, -0x3c30
+/* 33FEB8 E002C038 3C02E003 */  lui       $v0, %hi(D_E002C3D0)
+/* 33FEBC E002C03C 2442C3D0 */  addiu     $v0, $v0, %lo(D_E002C3D0)
 /* 33FEC0 E002C040 AFA20020 */  sw        $v0, 0x20($sp)
 /* 33FEC4 E002C044 24020016 */  addiu     $v0, $zero, 0x16
 /* 33FEC8 E002C048 AFBF0048 */  sw        $ra, 0x48($sp)
@@ -86,15 +86,15 @@ glabel func_E002C000
 /* 33FFBC E002C13C E620003C */  swc1      $f0, 0x3c($s1)
 /* 33FFC0 E002C140 1040002E */  beqz      $v0, .LE002C1FC
 /* 33FFC4 E002C144 26310040 */   addiu    $s1, $s1, 0x40
-/* 33FFC8 E002C148 3C17E003 */  lui       $s7, 0xe003
-/* 33FFCC E002C14C 26F7C984 */  addiu     $s7, $s7, -0x367c
-/* 33FFD0 E002C150 3C16E003 */  lui       $s6, 0xe003
-/* 33FFD4 E002C154 26D6C964 */  addiu     $s6, $s6, -0x369c
+/* 33FFC8 E002C148 3C17E003 */  lui       $s7, %hi(D_E002C984)
+/* 33FFCC E002C14C 26F7C984 */  addiu     $s7, $s7, %lo(D_E002C984)
+/* 33FFD0 E002C150 3C16E003 */  lui       $s6, %hi(D_E002C964)
+/* 33FFD4 E002C154 26D6C964 */  addiu     $s6, $s6, %lo(D_E002C964)
 /* 33FFD8 E002C158 26300034 */  addiu     $s0, $s1, 0x34
 /* 33FFDC E002C15C 0000A02D */  daddu     $s4, $zero, $zero
 /* 33FFE0 E002C160 0280982D */  daddu     $s3, $s4, $zero
-/* 33FFE4 E002C164 3C01E003 */  lui       $at, 0xe003
-/* 33FFE8 E002C168 D436C9D0 */  ldc1      $f22, -0x3630($at)
+/* 33FFE4 E002C164 3C01E003 */  lui       $at, %hi(D_E002C9D0)
+/* 33FFE8 E002C168 D436C9D0 */  ldc1      $f22, %lo(D_E002C9D0)($at)
 /* 33FFEC E002C16C 3C013FF0 */  lui       $at, 0x3ff0
 /* 33FFF0 E002C170 4481A800 */  mtc1      $at, $f21
 /* 33FFF4 E002C174 4480A000 */  mtc1      $zero, $f20

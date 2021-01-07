@@ -7,8 +7,7 @@ TARGET = papermario
 COMPARE = 1
 NON_MATCHING = 0
 WATCH_INCLUDES = 1
-
--include settings.mk
+WSL_ELEVATE_GUI = 1
 
 # Fail early if baserom does not exist
 ifeq ($(wildcard $(BASEROM)),)
@@ -35,7 +34,8 @@ LD_SCRIPT := $(TARGET).ld
 LD_MAP := $(BUILD_DIR)/$(TARGET).map
 ASSETS_BIN := $(BUILD_DIR)/bin/assets/assets.bin
 MSG_BIN := $(BUILD_DIR)/msg.bin
-GENERATED_HEADERS := include/ld_addrs.h
+NPC_BIN := $(BUILD_DIR)/sprite/npc.bin
+
 
 ### Tools ###
 
@@ -47,8 +47,6 @@ YAY0COMPRESS = tools/Yay0compress
 EMULATOR = mupen64plus
 
 
-### Compiler Options ###
-
 CROSS := mips-linux-gnu-
 AS := $(CROSS)as
 OLD_AS := tools/mips-nintendo-nu64-as
@@ -57,11 +55,36 @@ CPP := cpp
 LD := $(CROSS)ld
 OBJCOPY := $(CROSS)objcopy
 
-CPPFLAGS   := -Iinclude -Isrc -D _LANGUAGE_C -ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -Wundef -Wcomment
+WSL := 0
+JAVA := java
+
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Linux)
+	OS=linux
+	ICONV := iconv --from UTF-8 --to SHIFT-JIS
+
+	ifeq ($(findstring microsoft,$(shell cat /proc/sys/kernel/osrelease)),microsoft)
+	WSL := 1
+	ifeq ($(WSL_ELEVATE_GUI),1)
+		JAVA := powershell.exe -command java
+	endif
+endif
+endif
+ifeq ($(UNAME_S),Darwin)
+	OS=mac
+	ICONV := tools/iconv.py UTF-8 SHIFT-JIS
+endif
+
+OLD_AS=tools/$(OS)/mips-nintendo-nu64-as
+CC=tools/$(OS)/cc1
+
+### Compiler Options ###
+
+CPPFLAGS   := -Iinclude -Isrc -D _LANGUAGE_C -D _FINALROM -ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -Wundef -Wcomment
 ASFLAGS    := -EB -Iinclude -march=vr4300 -mtune=vr4300
 OLDASFLAGS := -EB -Iinclude -G 0
 CFLAGS     := -O2 -quiet -G 0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wimplicit -Wuninitialized -Wshadow
-LDFLAGS    := -T undefined_syms.txt -T undefined_funcs.txt -T $(BUILD_DIR)/$(LD_SCRIPT) -Map $(LD_MAP) --no-check-sections
+LDFLAGS    := -T undefined_syms.txt -T undefined_syms_auto.txt -T undefined_funcs.txt -T undefined_funcs_auto.txt -T $(BUILD_DIR)/$(LD_SCRIPT) -Map $(LD_MAP) --no-check-sections
 
 ifeq ($(WATCH_INCLUDES),1)
 CPPMFLAGS   = -MP -MD -MF $@.mk -MT $(BUILD_DIR)/$*.d
@@ -72,10 +95,15 @@ ifeq ($(NON_MATCHING),1)
 CPPFLAGS += -DNON_MATCHING
 endif
 
+-include settings.mk
 
 ### Sources ###
 
 include sources.mk
+
+ifeq ($(PERMUTER),1)
+override OBJECTS:=$(filter %.c.o, $(OBJECTS))
+endif
 
 %.d: ;
 
@@ -83,30 +111,36 @@ ifeq ($(WATCH_INCLUDES),1)
 -include $(foreach obj, $(OBJECTS), $(obj).mk)
 endif
 
+NPC_DIRS := $(foreach npc, $(NPC_SPRITES), sprite/npc/$(npc))
+
+GENERATED_HEADERS := include/ld_addrs.h $(foreach dir, $(NPC_DIRS), include/$(dir).h)
+
 
 ### Targets ###
 
 clean:
-	rm -rf $(BUILD_DIR)
+	rm -rf $(BUILD_DIR) bin msg img sprite .splat_cache $(LD_SCRIPT)
 
 clean-code:
 	rm -rf $(BUILD_DIR)/src
 
-setup: clean submodules split $(LD_SCRIPT)
+tools:
 	make -C tools
 
+setup: clean submodules tools $(LD_SCRIPT)
+
+# tools/star-rod submodule intentionally omitted
 submodules:
-	git submodule update --init --recursive
+	git submodule init tools/n64splat
+	git submodule update --recursive
 
 split:
-	rm -rf bin img
-	$(SPLAT) --modes bin Yay0 PaperMarioMapFS PaperMarioMessages img
+	make $(LD_SCRIPT) -W $(SPLAT_YAML)
 
 split-%:
-	$(SPLAT) --modes $* --verbose
+	$(SPLAT) --modes ld $* --verbose
 
 split-all:
-	rm -rf bin img
 	$(SPLAT) --modes all
 
 test: $(ROM)
@@ -133,15 +167,25 @@ $(BUILD_DIR)/%.Yay0.o: $(BUILD_DIR)/%.bin.Yay0
 # Compile C files
 $(BUILD_DIR)/%.c.o: %.c $(MDEPS) | $(GENERATED_HEADERS)
 	@mkdir -p $(shell dirname $@)
-	$(CPP) $(CPPFLAGS) -o - $(CPPMFLAGS) $< | iconv --from UTF-8 --to SHIFT-JIS | $(CC) $(CFLAGS) -o - | $(OLD_AS) $(OLDASFLAGS) -o $@ -
+	$(CPP) $(CPPFLAGS) -o - $(CPPMFLAGS) $< | $(ICONV) | $(CC) $(CFLAGS) -o - | $(OLD_AS) $(OLDASFLAGS) -o $@ -
 
 # Compile C files (with DSL macros)
-$(foreach cfile, $(DSL_C_FILES), $(BUILD_DIR)/$(cfile).o): $(BUILD_DIR)/%.c.o: %.c $(MDEPS) tools/compile_dsl_macros.py | include/ld_addrs.h
+$(foreach cfile, $(DSL_C_FILES), $(BUILD_DIR)/$(cfile).o): $(BUILD_DIR)/%.c.o: %.c $(MDEPS) tools/compile_dsl_macros.py | $(GENERATED_HEADERS)
 	@mkdir -p $(shell dirname $@)
-	$(CPP) $(CPPFLAGS) -o - $< $(CPPMFLAGS) | $(PYTHON) tools/compile_dsl_macros.py | iconv --from UTF-8 --to SHIFT-JIS | $(CC) $(CFLAGS) -o - | $(OLD_AS) $(OLDASFLAGS) -o $@ -
+	$(CPP) $(CPPFLAGS) -o - $< $(CPPMFLAGS) | $(PYTHON) tools/compile_dsl_macros.py | $(ICONV) | $(CC) $(CFLAGS) -o - | $(OLD_AS) $(OLDASFLAGS) -o $@ -
 
 # Assemble handwritten ASM
 $(BUILD_DIR)/%.s.o: %.s
+	@mkdir -p $(shell dirname $@)
+	$(AS) $(ASFLAGS) -o $@ $<
+
+# Data
+$(BUILD_DIR)/data/%.data.o: asm/data/%.data.s
+	@mkdir -p $(shell dirname $@)
+	$(AS) $(ASFLAGS) -o $@ $<
+
+# Rodata
+$(BUILD_DIR)/rodata/%.rodata.o: asm/data/%.rodata.s
 	@mkdir -p $(shell dirname $@)
 	$(AS) $(ASFLAGS) -o $@ $<
 
@@ -198,12 +242,31 @@ $(MSG_BIN): $(MESSAGES)
 	@echo "building $@"
 	@$(PYTHON) tools/compile_messages.py $@ /dev/null $(MESSAGES)
 $(MSG_BIN:.bin=.o): $(MSG_BIN)
-	@mkdir -p $(shell dirname $@)
 	$(LD) -r -b binary -o $@ $<
 
-$(LD_SCRIPT): $(SPLAT_YAML)
+# Sprites
+$(foreach npc, $(NPC_SPRITES), $(eval $(BUILD_DIR)/sprite/npc/$(npc):: $(shell find sprite/npc/$(npc) -type f 2> /dev/null))) # dependencies
+NPC_YAY0 := $(foreach npc, $(NPC_SPRITES), $(BUILD_DIR)/sprite/npc/$(npc).Yay0)
+$(BUILD_DIR)/sprite/npc/%:: sprite/npc/% tools/compile_npc_sprite.py
 	@mkdir -p $(shell dirname $@)
-	$(SPLAT) --modes ld
+	$(PYTHON) tools/compile_npc_sprite.py $@ $<
+$(NPC_BIN): $(NPC_YAY0) tools/compile_npc_sprites.py
+	@mkdir -p $(shell dirname $@)
+	@echo "building $@"
+	@$(PYTHON) tools/compile_npc_sprites.py $@ $(NPC_YAY0)
+$(NPC_BIN:.bin=.o): $(NPC_BIN)
+	$(LD) -r -b binary -o $@ $<
+include/sprite/npc/%.h: sprite/npc/%/SpriteSheet.xml tools/gen_sprite_animations_h.py
+	@mkdir -p $(shell dirname $@)
+	@echo "building $@"
+	@$(PYTHON) tools/gen_sprite_animations_h.py $@ sprite/npc/$* $(NPC_DIRS)
+
+
+### Linker ###
+
+$(LD_SCRIPT): $(SPLAT_YAML)
+	$(SPLAT) --modes ld bin Yay0 PaperMarioMapFS PaperMarioMessages img PaperMarioNpcSprites --new
+	make $(GENERATED_HEADERS)
 
 $(BUILD_DIR)/$(LD_SCRIPT): $(LD_SCRIPT)
 	@mkdir -p $(shell dirname $@)
@@ -222,11 +285,27 @@ $(BUILD_DIR)/$(TARGET).bin: $(BUILD_DIR)/$(TARGET).elf
 	$(OBJCOPY) $< $@ -O binary
 
 include/ld_addrs.h: $(BUILD_DIR)/$(LD_SCRIPT)
-	grep -E "[^ ]+ =" $< -o | sed 's/^/extern void* /; s/ =/;/' > $@
+	grep -E "[^\. ]+ =" $< -o | sed 's/^/extern void* /; s/ =/;/' > $@
+
+
+### Star Rod (optional) ###
+
+STAR_ROD := cd tools/star-rod && $(JAVA) -jar StarRod.jar
+
+# lazily initialise the submodule
+tools/star-rod:
+	git submodule init tools/star-rod
+
+sprite/SpriteTable.xml: tools/star-rod sources.mk
+	$(PYTHON) tools/star-rod/spritetable.xml.py $(NPC_SPRITES) > $@
+
+editor: tools/star-rod sprite/SpriteTable.xml
+	$(STAR_ROD)
+
 
 ### Make Settings ###
 
-.PHONY: clean test setup submodules split $(ROM)
+.PHONY: clean tools test setup submodules split editor $(ROM)
 .DELETE_ON_ERROR:
 .SECONDARY:
 .PRECIOUS: $(ROM) %.Yay0

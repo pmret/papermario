@@ -1,10 +1,8 @@
 #!/usr/bin/python3
 
 import argparse
-from collections import OrderedDict
+from collections import Counter, OrderedDict
 import os
-import re
-import pickle
 import sys
 
 script_dir = os.path.dirname(os.path.realpath(__file__))
@@ -32,6 +30,12 @@ def get_all_s_files():
             if f.endswith(".s"):
                 ret.add(f[:-2])
     return ret
+
+
+def get_symbol_length(sym_name):
+    if "end" in map_offsets[sym_name] and "start" in map_offsets[sym_name]:
+        return map_offsets[sym_name]["end"] - map_offsets[sym_name]["start"]
+    return 0
 
 
 def get_symbol_bytes(offsets, func):
@@ -115,6 +119,8 @@ def diff_syms(qb, tb):
 
     if abs(len(larger) - len(smaller)) < 16 and is_zeros(larger[len(smaller):]):
         len_ratio = 1
+    elif len_ratio < args.threshold:
+        return 0
 
     n_bytes = len(smaller)
     matches = 0
@@ -131,6 +137,14 @@ def diff_syms(qb, tb):
     return score
 
 
+def get_pair_score(query_bytes, b):
+    b_bytes = get_symbol_bytes(map_offsets, b)
+
+    if query_bytes and b_bytes:
+        return diff_syms(query_bytes, b_bytes)
+    return 0
+
+
 def get_matches(query):
     query_bytes = get_symbol_bytes(map_offsets, query)
     if query_bytes is None:
@@ -139,11 +153,9 @@ def get_matches(query):
     ret = {}
     for symbol in map_offsets:
         if symbol is not None and query != symbol:
-            target_bytes = get_symbol_bytes(map_offsets, symbol)
-            if target_bytes is not None:
-                score = diff_syms(query_bytes, target_bytes)
-                if score >= args.threshold:
-                    ret[symbol] = score
+            score = get_pair_score(query_bytes, symbol)
+            if score >= args.threshold:
+                ret[symbol] = score
     return OrderedDict(sorted(ret.items(), key=lambda kv: kv[1], reverse=True))
 
 
@@ -171,6 +183,41 @@ def do_query(query):
         i += 1
     print()
 
+
+def do_cross_query():
+    ccount = Counter()
+    clusters = []
+
+    for sym_name in map_syms:
+        if not sym_name.startswith("_binary"):
+            if get_symbol_length(sym_name) > 16:
+                query_bytes = get_symbol_bytes(map_offsets, sym_name)
+
+                cluster_match = False
+                for cluster in clusters:
+                    cluster_first = cluster[0]
+                    cluster_score = get_pair_score(query_bytes, cluster_first)
+                    if cluster_score >= args.threshold:
+                        cluster_match = True
+                        if sym_name.startswith("func") and not cluster_first.startswith("func"):
+                            ccount[sym_name] = ccount[cluster_first]
+                            del ccount[cluster_first]
+                            cluster_first = sym_name
+                            cluster.insert(0, cluster_first)
+                        else:
+                            cluster.append(sym_name)
+
+                        if cluster_first.startswith("func"):
+                            ccount[cluster_first] += 1
+
+                        if len(cluster) % 10 == 0 and len(cluster) >= 50:
+                            print(f"Cluster {cluster_first} grew to size {len(cluster)}")
+                        break
+                if not cluster_match:
+                    clusters.append([sym_name])
+    print(ccount.most_common(100))
+
+
 parser = argparse.ArgumentParser(description="Tools to assist with decomp")
 parser.add_argument("query", help="function or file")
 parser.add_argument("--threshold", help="score threshold between 0 and 1 (higher is more restrictive)", type=float, default=0.95, required=False)
@@ -191,4 +238,8 @@ if query_dir is not None:
     for f_name in files:
         do_query(f_name[:-2])
 else:
-    do_query(args.query)
+    if args.query == "cross":
+        args.threshold = 1.0
+        do_cross_query()
+    else:
+        do_query(args.query)

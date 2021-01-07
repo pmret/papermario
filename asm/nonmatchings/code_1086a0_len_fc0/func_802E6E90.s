@@ -10,12 +10,12 @@ glabel func_802E6E90
 /* 108724 802E6EA4 2402000B */  addiu     $v0, $zero, 0xb
 /* 108728 802E6EA8 14620004 */  bne       $v1, $v0, .L802E6EBC
 /* 10872C 802E6EAC 2405000A */   addiu    $a1, $zero, 0xa
-/* 108730 802E6EB0 3C04802F */  lui       $a0, 0x802f
+/* 108730 802E6EB0 3C04802F */  lui       $a0, %hi(D_802EAC0C)
 /* 108734 802E6EB4 080B9BB1 */  j         .L802E6EC4
-/* 108738 802E6EB8 2484AC0C */   addiu    $a0, $a0, -0x53f4
+/* 108738 802E6EB8 2484AC0C */   addiu    $a0, $a0, %lo(D_802EAC0C)
 .L802E6EBC:
-/* 10873C 802E6EBC 3C04802F */  lui       $a0, 0x802f
-/* 108740 802E6EC0 2484ACC8 */  addiu     $a0, $a0, -0x5338
+/* 10873C 802E6EBC 3C04802F */  lui       $a0, %hi(D_802EACC8)
+/* 108740 802E6EC0 2484ACC8 */  addiu     $a0, $a0, %lo(D_802EACC8)
 .L802E6EC4:
 /* 108744 802E6EC4 0C0B0CF8 */  jal       start_script
 /* 108748 802E6EC8 24060020 */   addiu    $a2, $zero, 0x20

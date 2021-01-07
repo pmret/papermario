@@ -21,8 +21,8 @@ glabel func_80240254_91BB34
 /* 91BB74 80240294 8E420014 */  lw        $v0, 0x14($s2)
 /* 91BB78 80240298 AE620074 */  sw        $v0, 0x74($s3)
 /* 91BB7C 8024029C C640000C */  lwc1      $f0, 0xc($s2)
-/* 91BB80 802402A0 3C018024 */  lui       $at, 0x8024
-/* 91BB84 802402A4 D4222BA0 */  ldc1      $f2, 0x2ba0($at)
+/* 91BB80 802402A0 3C018024 */  lui       $at, %hi(pause_set_cursor_opacity)
+/* 91BB84 802402A4 D4222BA0 */  ldc1      $f2, %lo(pause_set_cursor_opacity)($at)
 /* 91BB88 802402A8 46000021 */  cvt.d.s   $f0, $f0
 /* 91BB8C 802402AC 46220002 */  mul.d     $f0, $f0, $f2
 /* 91BB90 802402B0 00000000 */  nop       

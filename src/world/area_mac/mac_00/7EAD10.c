@@ -33,11 +33,11 @@ ApiStatus func_80240034_7EAD44(ScriptInstance* script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "world/area_mac/mac_00/7EAD10", func_80240034_7EAD44);
 #endif
 
-INCLUDE_ASM(s32, "world/area_mac/mac_00/7EAD10", func_802400F0_7EAE00);
+#include "world/common/GetEntryPos.inc.c"
 
 #include "world/common/GetCurrentCameraYawClamped180.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_00/7EAD10", func_8024023C_7EAF4C);
+#include "world/common/SomeXYZFunc2.inc.c"
 
 #include "world/common/UnkTexturePanFunc.inc.c"
 

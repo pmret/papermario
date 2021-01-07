@@ -66,9 +66,9 @@ glabel func_8024162C_CB662C
 /* CB6718 80241718 2C62000F */  sltiu     $v0, $v1, 0xf
 /* CB671C 8024171C 10400034 */  beqz      $v0, .L802417F0
 /* CB6720 80241720 00031080 */   sll      $v0, $v1, 2
-/* CB6724 80241724 3C018024 */  lui       $at, 0x8024
+/* CB6724 80241724 3C018024 */  lui       $at, %hi(D_802441B8)
 /* CB6728 80241728 00220821 */  addu      $at, $at, $v0
-/* CB672C 8024172C 8C2241B8 */  lw        $v0, 0x41b8($at)
+/* CB672C 8024172C 8C2241B8 */  lw        $v0, %lo(D_802441B8)($at)
 /* CB6730 80241730 00400008 */  jr        $v0
 /* CB6734 80241734 00000000 */   nop      
 /* CB6738 80241738 0280202D */  daddu     $a0, $s4, $zero
@@ -83,7 +83,7 @@ glabel func_8024162C_CB662C
 /* CB675C 8024175C 0000102D */   daddu    $v0, $zero, $zero
 /* CB6760 80241760 0280202D */  daddu     $a0, $s4, $zero
 /* CB6764 80241764 0200282D */  daddu     $a1, $s0, $zero
-/* CB6768 80241768 0C0902BE */  jal       func_80240AF8_CB5AF8
+/* CB6768 80241768 0C0902BE */  jal       flo_09_UnkNpcAIFunc1
 /* CB676C 8024176C 0260302D */   daddu    $a2, $s3, $zero
 /* CB6770 80241770 0280202D */  daddu     $a0, $s4, $zero
 /* CB6774 80241774 0200282D */  daddu     $a1, $s0, $zero
@@ -93,7 +93,7 @@ glabel func_8024162C_CB662C
 /* CB6784 80241784 0000102D */   daddu    $v0, $zero, $zero
 /* CB6788 80241788 0280202D */  daddu     $a0, $s4, $zero
 /* CB678C 8024178C 0200282D */  daddu     $a1, $s0, $zero
-/* CB6790 80241790 0C0903BF */  jal       func_80240EFC_CB5EFC
+/* CB6790 80241790 0C0903BF */  jal       flo_09_UnkNpcAIFunc2
 /* CB6794 80241794 0260302D */   daddu    $a2, $s3, $zero
 /* CB6798 80241798 0280202D */  daddu     $a0, $s4, $zero
 /* CB679C 8024179C 0200282D */  daddu     $a1, $s0, $zero
@@ -109,7 +109,7 @@ glabel func_8024162C_CB662C
 /* CB67C4 802417C4 0000102D */   daddu    $v0, $zero, $zero
 /* CB67C8 802417C8 0280202D */  daddu     $a0, $s4, $zero
 /* CB67CC 802417CC 0200282D */  daddu     $a1, $s0, $zero
-/* CB67D0 802417D0 0C090445 */  jal       func_80241114_CB6114
+/* CB67D0 802417D0 0C090445 */  jal       flo_09_UnkNpcAIFunc3
 /* CB67D4 802417D4 0260302D */   daddu    $a2, $s3, $zero
 /* CB67D8 802417D8 080905FD */  j         .L802417F4
 /* CB67DC 802417DC 0000102D */   daddu    $v0, $zero, $zero

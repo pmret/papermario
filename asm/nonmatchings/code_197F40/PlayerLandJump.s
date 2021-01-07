@@ -4,8 +4,8 @@
 glabel PlayerLandJump
 /* 1A23E4 80273B04 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* 1A23E8 80273B08 AFB00018 */  sw        $s0, 0x18($sp)
-/* 1A23EC 80273B0C 3C10800E */  lui       $s0, 0x800e
-/* 1A23F0 80273B10 8E10C148 */  lw        $s0, -0x3eb8($s0)
+/* 1A23EC 80273B0C 3C10800E */  lui       $s0, %hi(gBattleStatus+0xD8)
+/* 1A23F0 80273B10 8E10C148 */  lw        $s0, %lo(gBattleStatus+0xD8)($s0)
 /* 1A23F4 80273B14 AFBF0020 */  sw        $ra, 0x20($sp)
 /* 1A23F8 80273B18 AFB1001C */  sw        $s1, 0x1c($sp)
 /* 1A23FC 80273B1C 10A00002 */  beqz      $a1, .L80273B28

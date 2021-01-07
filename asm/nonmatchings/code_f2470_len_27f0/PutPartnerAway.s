@@ -19,8 +19,8 @@ glabel PutPartnerAway
 /* F4370 802CF9C0 2484EFC8 */  addiu     $a0, $a0, %lo(gPlayerStatus)
 /* F4374 802CF9C4 1200005F */  beqz      $s0, .L802CFB44
 /* F4378 802CF9C8 0040882D */   daddu    $s1, $v0, $zero
-/* F437C 802CF9CC 3C10802E */  lui       $s0, 0x802e
-/* F4380 802CF9D0 2610AE40 */  addiu     $s0, $s0, -0x51c0
+/* F437C 802CF9CC 3C10802E */  lui       $s0, %hi(D_802DAE40)
+/* F4380 802CF9D0 2610AE40 */  addiu     $s0, $s0, %lo(D_802DAE40)
 /* F4384 802CF9D4 8E020000 */  lw        $v0, ($s0)
 /* F4388 802CF9D8 1040009A */  beqz      $v0, .L802CFC44
 /* F438C 802CF9DC 2403FDFF */   addiu    $v1, $zero, -0x201
@@ -126,8 +126,8 @@ glabel PutPartnerAway
 /* F4514 802CFB64 E620001C */  swc1      $f0, 0x1c($s1)
 /* F4518 802CFB68 4500000A */  bc1f      .L802CFB94
 /* F451C 802CFB6C E622003C */   swc1     $f2, 0x3c($s1)
-/* F4520 802CFB70 3C02802E */  lui       $v0, 0x802e
-/* F4524 802CFB74 8C42AE40 */  lw        $v0, -0x51c0($v0)
+/* F4520 802CFB70 3C02802E */  lui       $v0, %hi(D_802DAE40)
+/* F4524 802CFB74 8C42AE40 */  lw        $v0, %lo(D_802DAE40)($v0)
 /* F4528 802CFB78 000218C0 */  sll       $v1, $v0, 3
 /* F452C 802CFB7C 00621821 */  addu      $v1, $v1, $v0
 /* F4530 802CFB80 00031880 */  sll       $v1, $v1, 2
@@ -162,10 +162,10 @@ glabel PutPartnerAway
 /* F459C 802CFBEC 00021400 */  sll       $v0, $v0, 0x10
 /* F45A0 802CFBF0 04410015 */  bgez      $v0, .L802CFC48
 /* F45A4 802CFBF4 0000102D */   daddu    $v0, $zero, $zero
-/* F45A8 802CFBF8 3C03802E */  lui       $v1, 0x802e
-/* F45AC 802CFBFC 8C63AE40 */  lw        $v1, -0x51c0($v1)
-/* F45B0 802CFC00 3C04802E */  lui       $a0, 0x802e
-/* F45B4 802CFC04 8C84AE44 */  lw        $a0, -0x51bc($a0)
+/* F45A8 802CFBF8 3C03802E */  lui       $v1, %hi(D_802DAE40)
+/* F45AC 802CFBFC 8C63AE40 */  lw        $v1, %lo(D_802DAE40)($v1)
+/* F45B0 802CFC00 3C04802E */  lui       $a0, %hi(D_802DAE44)
+/* F45B4 802CFC04 8C84AE44 */  lw        $a0, %lo(D_802DAE44)($a0)
 /* F45B8 802CFC08 C6200064 */  lwc1      $f0, 0x64($s1)
 /* F45BC 802CFC0C 000310C0 */  sll       $v0, $v1, 3
 /* F45C0 802CFC10 00431021 */  addu      $v0, $v0, $v1

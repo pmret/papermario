@@ -30,9 +30,9 @@ glabel func_80240910_C68A40
 /* C68AA4 80240974 000320C0 */  sll       $a0, $v1, 3
 /* C68AA8 80240978 00641821 */  addu      $v1, $v1, $a0
 /* C68AAC 8024097C 000318C0 */  sll       $v1, $v1, 3
-/* C68AB0 80240980 3C01800B */  lui       $at, 0x800b
+/* C68AB0 80240980 3C01800B */  lui       $at, %hi(D_800B1DEC)
 /* C68AB4 80240984 00230821 */  addu      $at, $at, $v1
-/* C68AB8 80240988 C42C1DEC */  lwc1      $f12, 0x1dec($at)
+/* C68AB8 80240988 C42C1DEC */  lwc1      $f12, %lo(D_800B1DEC)($at)
 /* C68ABC 8024098C 0C00A88D */  jal       sin_cos_deg
 /* C68AC0 80240990 0040A82D */   daddu    $s5, $v0, $zero
 /* C68AC4 80240994 1200005D */  beqz      $s0, .L80240B0C
@@ -79,8 +79,8 @@ glabel func_80240910_C68A40
 /* C68B64 80240A34 26100004 */   addiu    $s0, $s0, 4
 /* C68B68 80240A38 0000882D */  daddu     $s1, $zero, $zero
 /* C68B6C 80240A3C 0240802D */  daddu     $s0, $s2, $zero
-/* C68B70 80240A40 3C148024 */  lui       $s4, 0x8024
-/* C68B74 80240A44 26941C98 */  addiu     $s4, $s4, 0x1c98
+/* C68B70 80240A40 3C148024 */  lui       $s4, %hi(D_80241C98)
+/* C68B74 80240A44 26941C98 */  addiu     $s4, $s4, %lo(D_80241C98)
 /* C68B78 80240A48 3C014248 */  lui       $at, 0x4248
 /* C68B7C 80240A4C 4481A000 */  mtc1      $at, $f20
 /* C68B80 80240A50 24130044 */  addiu     $s3, $zero, 0x44
@@ -150,8 +150,8 @@ glabel func_80240910_C68A40
 /* C68C74 80240B44 00000000 */   nop      
 .L80240B48:
 /* C68C78 80240B48 0000882D */  daddu     $s1, $zero, $zero
-/* C68C7C 80240B4C 3C148024 */  lui       $s4, 0x8024
-/* C68C80 80240B50 26941C98 */  addiu     $s4, $s4, 0x1c98
+/* C68C7C 80240B4C 3C148024 */  lui       $s4, %hi(D_80241C98)
+/* C68C80 80240B50 26941C98 */  addiu     $s4, $s4, %lo(D_80241C98)
 /* C68C84 80240B54 24130020 */  addiu     $s3, $zero, 0x20
 /* C68C88 80240B58 3C064248 */  lui       $a2, 0x4248
 /* C68C8C 80240B5C 44800000 */  mtc1      $zero, $f0
@@ -197,8 +197,8 @@ glabel func_80240910_C68A40
 /* C68D28 80240BF8 AE400060 */   sw       $zero, 0x60($s2)
 .L80240BFC:
 /* C68D2C 80240BFC 0000882D */  daddu     $s1, $zero, $zero
-/* C68D30 80240C00 3C148024 */  lui       $s4, 0x8024
-/* C68D34 80240C04 26941C98 */  addiu     $s4, $s4, 0x1c98
+/* C68D30 80240C00 3C148024 */  lui       $s4, %hi(D_80241C98)
+/* C68D34 80240C04 26941C98 */  addiu     $s4, $s4, %lo(D_80241C98)
 /* C68D38 80240C08 24130020 */  addiu     $s3, $zero, 0x20
 /* C68D3C 80240C0C 0240802D */  daddu     $s0, $s2, $zero
 /* C68D40 80240C10 3C014248 */  lui       $at, 0x4248

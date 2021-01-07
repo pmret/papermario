@@ -89,8 +89,8 @@ glabel func_802406A4_C52BE4
 /* C52D18 802407D8 E7A00028 */  swc1      $f0, 0x28($sp)
 /* C52D1C 802407DC 0C00A7E7 */  jal       add_vec2D_polar
 /* C52D20 802407E0 E7A2002C */   swc1     $f2, 0x2c($sp)
-/* C52D24 802407E4 3C028011 */  lui       $v0, 0x8011
-/* C52D28 802407E8 8C42C930 */  lw        $v0, -0x36d0($v0)
+/* C52D24 802407E4 3C028011 */  lui       $v0, %hi(D_8010C930)
+/* C52D28 802407E8 8C42C930 */  lw        $v0, %lo(D_8010C930)($v0)
 /* C52D2C 802407EC C7AC0028 */  lwc1      $f12, 0x28($sp)
 /* C52D30 802407F0 C7AE002C */  lwc1      $f14, 0x2c($sp)
 /* C52D34 802407F4 8C460038 */  lw        $a2, 0x38($v0)

@@ -8,17 +8,17 @@ INCLUDE_ASM(s32, "world/area_tik/tik_07/87AC00", func_802413F0_87AFD0);
 
 INCLUDE_ASM(s32, "world/area_tik/tik_07/87AC00", func_802415A0_87B180);
 
-INCLUDE_ASM(s32, "world/area_tik/tik_07/87AC00", func_80241BC8_87B7A8);
+#include "world/common/UnkNpcAIFunc1.inc.c"
 
 INCLUDE_ASM(s32, "world/area_tik/tik_07/87AC00", func_80241C88_87B868);
 
-INCLUDE_ASM(s32, "world/area_tik/tik_07/87AC00", func_80241FCC_87BBAC);
+#include "world/common/UnkNpcAIFunc2.inc.c"
 
 INCLUDE_ASM(s32, "world/area_tik/tik_07/87AC00", func_80242044_87BC24);
 
 INCLUDE_ASM(s32, "world/area_tik/tik_07/87AC00", func_802420B0_87BC90);
 
-INCLUDE_ASM(s32, "world/area_tik/tik_07/87AC00", func_802421E4_87BDC4);
+#include "world/common/UnkNpcAIFunc3.inc.c"
 
 INCLUDE_ASM(s32, "world/area_tik/tik_07/87AC00", func_80242248_87BE28);
 

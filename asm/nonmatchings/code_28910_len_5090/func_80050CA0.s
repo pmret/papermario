@@ -14,8 +14,8 @@ glabel func_80050CA0
 /* 2C0C4 80050CC4 00661821 */  addu      $v1, $v1, $a2
 /* 2C0C8 80050CC8 00031880 */  sll       $v1, $v1, 2
 /* 2C0CC 80050CCC 24630024 */  addiu     $v1, $v1, 0x24
-/* 2C0D0 80050CD0 3C04800A */  lui       $a0, 0x800a
-/* 2C0D4 80050CD4 8C84A628 */  lw        $a0, -0x59d8($a0)
+/* 2C0D0 80050CD0 3C04800A */  lui       $a0, %hi(D_8009A628)
+/* 2C0D4 80050CD4 8C84A628 */  lw        $a0, %lo(D_8009A628)($a0)
 /* 2C0D8 80050CD8 00061080 */  sll       $v0, $a2, 2
 /* 2C0DC 80050CDC AFBF001C */  sw        $ra, 0x1c($sp)
 /* 2C0E0 80050CE0 AFB00010 */  sw        $s0, 0x10($sp)

@@ -309,8 +309,8 @@ glabel func_8004BA74
 /* 272A4 8004BEA4 1260005D */  beqz      $s3, .L8004C01C
 /* 272A8 8004BEA8 00628804 */   sllv     $s1, $v0, $v1
 /* 272AC 8004BEAC 24100007 */  addiu     $s0, $zero, 7
-/* 272B0 8004BEB0 3C1E8008 */  lui       $fp, 0x8008
-/* 272B4 8004BEB4 27DE8464 */  addiu     $fp, $fp, -0x7b9c
+/* 272B0 8004BEB0 3C1E8008 */  lui       $fp, %hi(D_80078464)
+/* 272B4 8004BEB4 27DE8464 */  addiu     $fp, $fp, %lo(D_80078464)
 /* 272B8 8004BEB8 24130620 */  addiu     $s3, $zero, 0x620
 .L8004BEBC:
 /* 272BC 8004BEBC 96420000 */  lhu       $v0, ($s2)

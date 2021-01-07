@@ -124,9 +124,9 @@ glabel func_80241464_C50974
 /* C50B38 80241628 2C620064 */  sltiu     $v0, $v1, 0x64
 /* C50B3C 8024162C 10400042 */  beqz      $v0, .L80241738
 /* C50B40 80241630 00031080 */   sll      $v0, $v1, 2
-/* C50B44 80241634 3C018024 */  lui       $at, 0x8024
+/* C50B44 80241634 3C018024 */  lui       $at, %hi(D_80242E98)
 /* C50B48 80241638 00220821 */  addu      $at, $at, $v0
-/* C50B4C 8024163C 8C222E98 */  lw        $v0, 0x2e98($at)
+/* C50B4C 8024163C 8C222E98 */  lw        $v0, %lo(D_80242E98)($at)
 /* C50B50 80241640 00400008 */  jr        $v0
 /* C50B54 80241644 00000000 */   nop      
 /* C50B58 80241648 0280202D */  daddu     $a0, $s4, $zero
@@ -141,7 +141,7 @@ glabel func_80241464_C50974
 /* C50B7C 8024166C 00000000 */   nop      
 /* C50B80 80241670 0280202D */  daddu     $a0, $s4, $zero
 /* C50B84 80241674 0260282D */  daddu     $a1, $s3, $zero
-/* C50B88 80241678 0C090334 */  jal       func_80240CD0_C501E0
+/* C50B88 80241678 0C090334 */  jal       dgb_15_UnkNpcAIFunc1
 /* C50B8C 8024167C 02A0302D */   daddu    $a2, $s5, $zero
 /* C50B90 80241680 0280202D */  daddu     $a0, $s4, $zero
 /* C50B94 80241684 0260282D */  daddu     $a1, $s3, $zero
@@ -157,11 +157,11 @@ glabel func_80241464_C50974
 /* C50BBC 802416AC 00000000 */   nop      
 /* C50BC0 802416B0 0280202D */  daddu     $a0, $s4, $zero
 /* C50BC4 802416B4 0260282D */  daddu     $a1, $s3, $zero
-/* C50BC8 802416B8 0C090400 */  jal       func_80241000_C50510
+/* C50BC8 802416B8 0C090400 */  jal       dgb_15_NpcJumpFunc2
 /* C50BCC 802416BC 02A0302D */   daddu    $a2, $s5, $zero
 /* C50BD0 802416C0 0280202D */  daddu     $a0, $s4, $zero
 /* C50BD4 802416C4 0260282D */  daddu     $a1, $s3, $zero
-/* C50BD8 802416C8 0C09041D */  jal       func_80241074_C50584
+/* C50BD8 802416C8 0C09041D */  jal       dgb_15_NpcJumpFunc
 /* C50BDC 802416CC 02A0302D */   daddu    $a2, $s5, $zero
 /* C50BE0 802416D0 080905CE */  j         .L80241738
 /* C50BE4 802416D4 00000000 */   nop      
@@ -177,7 +177,7 @@ glabel func_80241464_C50974
 /* C50C0C 802416FC 00000000 */   nop      
 /* C50C10 80241700 0280202D */  daddu     $a0, $s4, $zero
 /* C50C14 80241704 0260282D */  daddu     $a1, $s3, $zero
-/* C50C18 80241708 0C0904CF */  jal       func_8024133C_C5084C
+/* C50C18 80241708 0C0904CF */  jal       dgb_15_UnkNpcDurationFlagFunc
 /* C50C1C 8024170C 02A0302D */   daddu    $a2, $s5, $zero
 /* C50C20 80241710 080905CE */  j         .L80241738
 /* C50C24 80241714 00000000 */   nop      

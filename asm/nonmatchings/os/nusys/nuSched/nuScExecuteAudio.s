@@ -4,8 +4,8 @@
 glabel nuScExecuteAudio
 /* 39FE0 8005EBE0 27BDFFC8 */  addiu     $sp, $sp, -0x38
 /* 39FE4 8005EBE4 AFB40028 */  sw        $s4, 0x28($sp)
-/* 39FE8 8005EBE8 3C14800E */  lui       $s4, 0x800e
-/* 39FEC 8005EBEC 2694A444 */  addiu     $s4, $s4, -0x5bbc
+/* 39FE8 8005EBE8 3C14800E */  lui       $s4, %hi(D_800DA444)
+/* 39FEC 8005EBEC 2694A444 */  addiu     $s4, $s4, %lo(D_800DA444)
 /* 39FF0 8005EBF0 AFB30024 */  sw        $s3, 0x24($sp)
 /* 39FF4 8005EBF4 2693066C */  addiu     $s3, $s4, 0x66c
 /* 39FF8 8005EBF8 AFB5002C */  sw        $s5, 0x2c($sp)

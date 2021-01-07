@@ -18,9 +18,9 @@ glabel update_fall_state
 /* 7C1FC 800E2D4C 2C620014 */  sltiu     $v0, $v1, 0x14
 /* 7C200 800E2D50 10400045 */  beqz      $v0, .L800E2E68
 /* 7C204 800E2D54 00031080 */   sll      $v0, $v1, 2
-/* 7C208 800E2D58 3C018011 */  lui       $at, 0x8011
+/* 7C208 800E2D58 3C018011 */  lui       $at, %hi(D_8010BD98)
 /* 7C20C 800E2D5C 00220821 */  addu      $at, $at, $v0
-/* 7C210 800E2D60 8C22BD98 */  lw        $v0, -0x4268($at)
+/* 7C210 800E2D60 8C22BD98 */  lw        $v0, %lo(D_8010BD98)($at)
 /* 7C214 800E2D64 00400008 */  jr        $v0
 /* 7C218 800E2D68 00000000 */   nop      
 /* 7C21C 800E2D6C 0C038AEC */  jal       func_800E2BB0

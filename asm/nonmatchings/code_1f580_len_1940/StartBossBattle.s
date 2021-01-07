@@ -105,9 +105,9 @@ glabel StartBossBattle
 /* 1FE14 80044A14 3C01800A */  lui       $at, %hi(gGameState)
 /* 1FE18 80044A18 AC23A600 */  sw        $v1, %lo(gGameState)($at)
 /* 1FE1C 80044A1C 0040182D */  daddu     $v1, $v0, $zero
-/* 1FE20 80044A20 3C01800A */  lui       $at, 0x800a
-/* 1FE24 80044A24 AC23A678 */  sw        $v1, -0x5988($at)
-/* 1FE28 80044A28 3C01800A */  lui       $at, 0x800a
-/* 1FE2C 80044A2C AC20A5D0 */  sw        $zero, -0x5a30($at)
+/* 1FE20 80044A20 3C01800A */  lui       $at, %hi(D_8009A678)
+/* 1FE24 80044A24 AC23A678 */  sw        $v1, %lo(D_8009A678)($at)
+/* 1FE28 80044A28 3C01800A */  lui       $at, %hi(D_8009A5D0)
+/* 1FE2C 80044A2C AC20A5D0 */  sw        $zero, %lo(D_8009A5D0)($at)
 /* 1FE30 80044A30 03E00008 */  jr        $ra
 /* 1FE34 80044A34 27BD0030 */   addiu    $sp, $sp, 0x30

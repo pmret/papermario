@@ -1,6 +1,6 @@
 #include "pra_02.h"
 
-INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_80240020_D50010);
+#include "world/common/UnkFunc2.inc.c"
 
 INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_80240054_D50044);
 
@@ -20,11 +20,11 @@ INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_80240870_D50860);
 
 INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_80240D3C_D50D2C);
 
-INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_80240E84_D50E74);
+#include "world/common/SetPartnerFlagsA0000.inc.c"
 
-INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_80240EB8_D50EA8);
+#include "world/common/SetPartnerFlags80000.inc.c"
 
-INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_80240EEC_D50EDC);
+#include "world/common/SetPartnerFlags20000.inc.c"
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 
@@ -48,7 +48,6 @@ INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_802414A8_D51498);
 
 #include "world/common/SetEntityFlags100000.inc.c"
 
-// #include "world/common/GetEntityPosition.inc.c"
-// This is GetEntityPosition, but it alreaxy exists in this file.
-// This makes me think there's either a file split or something else we don't understand
-INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_802415BC_D515AC);
+#define NAMESPACE dup_pra_02
+#include "world/common/GetEntityPosition.inc.c"
+#define NAMESPACE pra_02

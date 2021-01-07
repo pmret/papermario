@@ -15,9 +15,9 @@ glabel func_80240A5C_87F84C
 /* 87F874 80240A84 3C04800B */  lui       $a0, %hi(gCurrentEncounter+0x28)
 /* 87F878 80240A88 00832021 */  addu      $a0, $a0, $v1
 /* 87F87C 80240A8C 8C840F38 */  lw        $a0, %lo(gCurrentEncounter+0x28)($a0)
-/* 87F880 80240A90 3C038024 */  lui       $v1, 0x8024
+/* 87F880 80240A90 3C038024 */  lui       $v1, %hi(D_80242C0E)
 /* 87F884 80240A94 00621821 */  addu      $v1, $v1, $v0
-/* 87F888 80240A98 94632C0E */  lhu       $v1, 0x2c0e($v1)
+/* 87F888 80240A98 94632C0E */  lhu       $v1, %lo(D_80242C0E)($v1)
 /* 87F88C 80240A9C A4830044 */  sh        $v1, 0x44($a0)
 /* 87F890 80240AA0 8FBF0014 */  lw        $ra, 0x14($sp)
 /* 87F894 80240AA4 8FB00010 */  lw        $s0, 0x10($sp)

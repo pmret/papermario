@@ -66,9 +66,9 @@ glabel func_802422FC_A1851C
 /* A18608 802423E8 2C62000F */  sltiu     $v0, $v1, 0xf
 /* A1860C 802423EC 10400034 */  beqz      $v0, .L802424C0
 /* A18610 802423F0 00031080 */   sll      $v0, $v1, 2
-/* A18614 802423F4 3C018024 */  lui       $at, 0x8024
+/* A18614 802423F4 3C018024 */  lui       $at, %hi(D_80244E38)
 /* A18618 802423F8 00220821 */  addu      $at, $at, $v0
-/* A1861C 802423FC 8C224E38 */  lw        $v0, 0x4e38($at)
+/* A1861C 802423FC 8C224E38 */  lw        $v0, %lo(D_80244E38)($at)
 /* A18620 80242400 00400008 */  jr        $v0
 /* A18624 80242404 00000000 */   nop      
 /* A18628 80242408 0280202D */  daddu     $a0, $s4, $zero
@@ -83,7 +83,7 @@ glabel func_802422FC_A1851C
 /* A1864C 8024242C 0000102D */   daddu    $v0, $zero, $zero
 /* A18650 80242430 0280202D */  daddu     $a0, $s4, $zero
 /* A18654 80242434 0200282D */  daddu     $a1, $s0, $zero
-/* A18658 80242438 0C0905F2 */  jal       func_802417C8_A179E8
+/* A18658 80242438 0C0905F2 */  jal       hos_02_UnkNpcAIFunc1
 /* A1865C 8024243C 0260302D */   daddu    $a2, $s3, $zero
 /* A18660 80242440 0280202D */  daddu     $a0, $s4, $zero
 /* A18664 80242444 0200282D */  daddu     $a1, $s0, $zero
@@ -93,7 +93,7 @@ glabel func_802422FC_A1851C
 /* A18674 80242454 0000102D */   daddu    $v0, $zero, $zero
 /* A18678 80242458 0280202D */  daddu     $a0, $s4, $zero
 /* A1867C 8024245C 0200282D */  daddu     $a1, $s0, $zero
-/* A18680 80242460 0C0906F3 */  jal       func_80241BCC_A17DEC
+/* A18680 80242460 0C0906F3 */  jal       hos_02_UnkNpcAIFunc2
 /* A18684 80242464 0260302D */   daddu    $a2, $s3, $zero
 /* A18688 80242468 0280202D */  daddu     $a0, $s4, $zero
 /* A1868C 8024246C 0200282D */  daddu     $a1, $s0, $zero
@@ -109,7 +109,7 @@ glabel func_802422FC_A1851C
 /* A186B4 80242494 0000102D */   daddu    $v0, $zero, $zero
 /* A186B8 80242498 0280202D */  daddu     $a0, $s4, $zero
 /* A186BC 8024249C 0200282D */  daddu     $a1, $s0, $zero
-/* A186C0 802424A0 0C090779 */  jal       func_80241DE4_A18004
+/* A186C0 802424A0 0C090779 */  jal       hos_02_UnkNpcAIFunc3
 /* A186C4 802424A4 0260302D */   daddu    $a2, $s3, $zero
 /* A186C8 802424A8 08090931 */  j         .L802424C4
 /* A186CC 802424AC 0000102D */   daddu    $v0, $zero, $zero

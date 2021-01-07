@@ -168,7 +168,7 @@ CHARSET = {
         0x02: "[style=left]\n",
         0x03: "[style=center]\n",
         0x04: "[style=tattle]\n",
-        0x05: {None: lambda d: (f"[style=choice x={d[1]} y={d[3]} w={d[0]} h={d[2]}]\n", 4)},
+        0x05: {None: lambda d: (f"[style=choice x={d[0]} y={d[1]} w={d[2]} h={d[3]}]\n", 4)},
         0x06: "[style=inspect]\n",
         0x07: "[style=sign]\n",
         0x08: "[style=lamppost]\n",
@@ -378,7 +378,7 @@ class N64SegPaperMarioMessages(N64Segment):
                     self.f.write("\n[/message]\n")
 
     def get_ld_files(self):
-        return [("", self.name, ".data")]
+        return [("", self.name, ".data", self.rom_start)]
 
     @staticmethod
     def get_default_name(addr):

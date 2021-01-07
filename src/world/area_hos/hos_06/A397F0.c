@@ -2,11 +2,15 @@
 
 INCLUDE_ASM(s32, "world/area_hos/hos_06/A397F0", func_80240310_A397F0);
 
+#define NAMESPACE dup2_hos_06
 #include "world/common/GetItemName.inc.c"
+#define NAMESPACE hos_06
 
+#define NAMESPACE dup_hos_06
 #include "world/common/GetNpcCollisionHeight.inc.c"
 
 #include "world/common/SomeXYZFuncTodoRename.inc.c"
+#define NAMESPACE hos_06
 
 INCLUDE_ASM(s32, "world/area_hos/hos_06/A397F0", func_80240654_A39B34);
 
@@ -16,7 +20,7 @@ INCLUDE_ASM(s32, "world/area_hos/hos_06/A397F0", func_802406E0_A39BC0);
 
 #include "world/common/SetManyVars.inc.c"
 
-INCLUDE_ASM(s32, "world/area_hos/hos_06/A397F0", func_8024086C_A39D4C);
+#include "world/common/UnkYawFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_hos/hos_06/A397F0", func_802409F8_A39ED8);
 

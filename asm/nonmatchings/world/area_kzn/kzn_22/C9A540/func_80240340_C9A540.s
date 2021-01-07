@@ -5,8 +5,8 @@ glabel func_80240340_C9A540
 /* C9A540 80240340 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* C9A544 80240344 AFBF0010 */  sw        $ra, 0x10($sp)
 /* C9A548 80240348 8C82000C */  lw        $v0, 0xc($a0)
-/* C9A54C 8024034C 3C068016 */  lui       $a2, 0x8016
-/* C9A550 80240350 84C6A552 */  lh        $a2, -0x5aae($a2)
+/* C9A54C 8024034C 3C068016 */  lui       $a2, %hi(gCollisionStatus+0x2)
+/* C9A550 80240350 84C6A552 */  lh        $a2, %lo(gCollisionStatus+0x2)($a2)
 /* C9A554 80240354 0C0B2026 */  jal       set_variable
 /* C9A558 80240358 8C450000 */   lw       $a1, ($v0)
 /* C9A55C 8024035C 8FBF0010 */  lw        $ra, 0x10($sp)

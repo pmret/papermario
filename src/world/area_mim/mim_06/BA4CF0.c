@@ -1,12 +1,12 @@
 #include "mim_06.h"
 
-INCLUDE_ASM(s32, "world/area_mim/mim_06/BA4CF0", func_80240570_BA4CF0);
+#include "world/common/UnkNpcAIFunc6.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mim/mim_06/BA4CF0", func_802405DC_BA4D5C);
+#include "world/common/UnkNpcAIFunc7.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mim/mim_06/BA4CF0", func_8024064C_BA4DCC);
+#include "world/common/UnkNpcAIFunc8.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mim/mim_06/BA4CF0", func_80240724_BA4EA4);
+#include "world/common/UnkNpcAIFunc5.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mim/mim_06/BA4CF0", func_80240778_BA4EF8);
 
@@ -34,7 +34,7 @@ INCLUDE_ASM(s32, "world/area_mim/mim_06/BA4CF0", func_80241F14_BA6694);
 
 INCLUDE_ASM(s32, "world/area_mim/mim_06/BA4CF0", func_80242144_BA68C4);
 
-INCLUDE_ASM(s32, "world/area_mim/mim_06/BA4CF0", func_8024247C_BA6BFC);
+#include "world/common/UnkNpcAIFunc1.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mim/mim_06/BA4CF0", func_8024253C_BA6CBC);
 
@@ -42,6 +42,6 @@ INCLUDE_ASM(s32, "world/area_mim/mim_06/BA4CF0", func_802426E0_BA6E60);
 
 INCLUDE_ASM(s32, "world/area_mim/mim_06/BA4CF0", func_802427C0_BA6F40);
 
-INCLUDE_ASM(s32, "world/area_mim/mim_06/BA4CF0", func_80242AC0_BA7240);
+#include "world/common/UnkDurationCheck.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mim/mim_06/BA4CF0", func_80242B04_BA7284);

@@ -4,8 +4,8 @@
 glabel func_80240000_AFDB40
 /* AFDB40 80240000 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* AFDB44 80240004 AFB00010 */  sw        $s0, 0x10($sp)
-/* AFDB48 80240008 3C108024 */  lui       $s0, 0x8024
-/* AFDB4C 8024000C 26100880 */  addiu     $s0, $s0, 0x880
+/* AFDB48 80240008 3C108024 */  lui       $s0, %hi(D_80240880)
+/* AFDB4C 8024000C 26100880 */  addiu     $s0, $s0, %lo(D_80240880)
 /* AFDB50 80240010 AFBF0018 */  sw        $ra, 0x18($sp)
 /* AFDB54 80240014 AFB10014 */  sw        $s1, 0x14($sp)
 /* AFDB58 80240018 8E020000 */  lw        $v0, ($s0)
@@ -39,8 +39,8 @@ glabel func_80240000_AFDB40
 /* AFDBBC 8024007C 28620010 */  slti      $v0, $v1, 0x10
 /* AFDBC0 80240080 1440FFFA */  bnez      $v0, .L8024006C
 /* AFDBC4 80240084 24840004 */   addiu    $a0, $a0, 4
-/* AFDBC8 80240088 3C108024 */  lui       $s0, 0x8024
-/* AFDBCC 8024008C 26100880 */  addiu     $s0, $s0, 0x880
+/* AFDBC8 80240088 3C108024 */  lui       $s0, %hi(D_80240880)
+/* AFDBCC 8024008C 26100880 */  addiu     $s0, $s0, %lo(D_80240880)
 /* AFDBD0 80240090 0C00AB4B */  jal       heap_free
 /* AFDBD4 80240094 8E040000 */   lw       $a0, ($s0)
 /* AFDBD8 80240098 AE000000 */  sw        $zero, ($s0)

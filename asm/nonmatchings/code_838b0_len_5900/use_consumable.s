@@ -6,10 +6,10 @@ glabel use_consumable
 /* 838B4 800EA404 AFB10014 */  sw        $s1, 0x14($sp)
 /* 838B8 800EA408 0080882D */  daddu     $s1, $a0, $zero
 /* 838BC 800EA40C AFB00010 */  sw        $s0, 0x10($sp)
-/* 838C0 800EA410 3C108010 */  lui       $s0, 0x8010
-/* 838C4 800EA414 26108010 */  addiu     $s0, $s0, -0x7ff0
-/* 838C8 800EA418 3C06802C */  lui       $a2, 0x802c
-/* 838CC 800EA41C 24C60000 */  addiu     $a2, $a2, 0
+/* 838C0 800EA410 3C108010 */  lui       $s0, %hi(D_800F8010)
+/* 838C4 800EA414 26108010 */  addiu     $s0, $s0, %lo(D_800F8010)
+/* 838C8 800EA418 3C06802C */  lui       $a2, %hi(D_802C0000)
+/* 838CC 800EA41C 24C60000 */  addiu     $a2, $a2, %lo(D_802C0000)
 /* 838D0 800EA420 AFBF0018 */  sw        $ra, 0x18($sp)
 /* 838D4 800EA424 8E040000 */  lw        $a0, ($s0)
 /* 838D8 800EA428 8E050004 */  lw        $a1, 4($s0)

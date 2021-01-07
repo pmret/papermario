@@ -22,7 +22,7 @@ glabel func_80070C70
 /* 4C0B4 80070CB4 C7B00028 */  lwc1      $f16, 0x28($sp)
 /* 4C0B8 80070CB8 8FBF002C */  lw        $ra, 0x2c($sp)
 /* 4C0BC 80070CBC 27BD0030 */  addiu     $sp, $sp, 0x30
-/* 4C0C0 80070CC0 3C018008 */  lui       $at, 0x8008
-/* 4C0C4 80070CC4 8C21F708 */  lw        $at, -0x8f8($at)
+/* 4C0C0 80070CC0 3C018008 */  lui       $at, %hi(D_8007F708)
+/* 4C0C4 80070CC4 8C21F708 */  lw        $at, %lo(D_8007F708)($at)
 /* 4C0C8 80070CC8 00200008 */  jr        $at
 /* 4C0CC 80070CCC 00000000 */   nop      

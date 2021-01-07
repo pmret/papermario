@@ -57,9 +57,9 @@ glabel func_80240BB0_E16930
 /* E169FC 80240C7C 2C620042 */  sltiu     $v0, $v1, 0x42
 /* E16A00 80240C80 104003AD */  beqz      $v0, .L80241B38
 /* E16A04 80240C84 00031080 */   sll      $v0, $v1, 2
-/* E16A08 80240C88 3C018025 */  lui       $at, 0x8025
+/* E16A08 80240C88 3C018025 */  lui       $at, %hi(D_802484E8)
 /* E16A0C 80240C8C 00220821 */  addu      $at, $at, $v0
-/* E16A10 80240C90 8C2284E8 */  lw        $v0, -0x7b18($at)
+/* E16A10 80240C90 8C2284E8 */  lw        $v0, %lo(D_802484E8)($at)
 /* E16A14 80240C94 00400008 */  jr        $v0
 /* E16A18 80240C98 00000000 */   nop      
 /* E16A1C 80240C9C 240400D2 */  addiu     $a0, $zero, 0xd2
@@ -178,8 +178,8 @@ glabel func_80240BB0_E16930
 /* E16BD8 80240E58 08090547 */  j         .L8024151C
 /* E16BDC 80240E5C E660000C */   swc1     $f0, 0xc($s3)
 /* E16BE0 80240E60 8EA4000C */  lw        $a0, 0xc($s5)
-/* E16BE4 80240E64 3C058011 */  lui       $a1, 0x8011
-/* E16BE8 80240E68 24A58B28 */  addiu     $a1, $a1, -0x74d8
+/* E16BE4 80240E64 3C058011 */  lui       $a1, %hi(D_80108B28)
+/* E16BE8 80240E68 24A58B28 */  addiu     $a1, $a1, %lo(D_80108B28)
 /* E16BEC 80240E6C 0C0511FF */  jal       set_menu_icon_script
 /* E16BF0 80240E70 00000000 */   nop      
 /* E16BF4 80240E74 8EA4000C */  lw        $a0, 0xc($s5)
@@ -390,8 +390,8 @@ glabel func_80240BB0_E16930
 /* E16F28 802411A8 46200020 */  cvt.s.d   $f0, $f0
 /* E16F2C 802411AC E6600040 */  swc1      $f0, 0x40($s3)
 /* E16F30 802411B0 8EA4000C */  lw        $a0, 0xc($s5)
-/* E16F34 802411B4 3C058011 */  lui       $a1, 0x8011
-/* E16F38 802411B8 24A58B80 */  addiu     $a1, $a1, -0x7480
+/* E16F34 802411B4 3C058011 */  lui       $a1, %hi(D_80108B80)
+/* E16F38 802411B8 24A58B80 */  addiu     $a1, $a1, %lo(D_80108B80)
 /* E16F3C 802411BC 0C0511FF */  jal       set_menu_icon_script
 /* E16F40 802411C0 00000000 */   nop      
 /* E16F44 802411C4 8EA4000C */  lw        $a0, 0xc($s5)
@@ -437,8 +437,8 @@ glabel func_80240BB0_E16930
 /* E16FE0 80241260 2402000A */  addiu     $v0, $zero, 0xa
 /* E16FE4 80241264 A662008E */  sh        $v0, 0x8e($s3)
 /* E16FE8 80241268 8EA4000C */  lw        $a0, 0xc($s5)
-/* E16FEC 8024126C 3C058011 */  lui       $a1, 0x8011
-/* E16FF0 80241270 24A58B28 */  addiu     $a1, $a1, -0x74d8
+/* E16FEC 8024126C 3C058011 */  lui       $a1, %hi(D_80108B28)
+/* E16FF0 80241270 24A58B28 */  addiu     $a1, $a1, %lo(D_80108B28)
 /* E16FF4 80241274 0C0511FF */  jal       set_menu_icon_script
 /* E16FF8 80241278 2694001C */   addiu    $s4, $s4, 0x1c
 /* E16FFC 8024127C 8EA4000C */  lw        $a0, 0xc($s5)

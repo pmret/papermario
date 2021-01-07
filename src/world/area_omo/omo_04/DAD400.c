@@ -6,7 +6,7 @@ INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80240000_DAD400);
 
 #include "world/common/SomeItemEntityFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80240268_DAD668);
+#include "world/common/CheckItemFlags40.inc.c"
 
 #include "world/common/UnsetCamera0MoveFlag1.inc.c"
 
@@ -18,17 +18,17 @@ INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_802403A0_DAD7A0);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80240550_DAD950);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80240B78_DADF78);
+#include "world/common/UnkNpcAIFunc1.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80240C38_DAE038);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80240F7C_DAE37C);
+#include "world/common/UnkNpcAIFunc2.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80240FF4_DAE3F4);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80241060_DAE460);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80241194_DAE594);
+#include "world/common/UnkNpcAIFunc3.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_802411F8_DAE5F8);
 

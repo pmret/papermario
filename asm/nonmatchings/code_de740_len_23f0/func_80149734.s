@@ -4,8 +4,8 @@
 glabel func_80149734
 /* DFE34 80149734 27BDFFC8 */  addiu     $sp, $sp, -0x38
 /* DFE38 80149738 AFB10024 */  sw        $s1, 0x24($sp)
-/* DFE3C 8014973C 3C118016 */  lui       $s1, 0x8016
-/* DFE40 80149740 8E319AD0 */  lw        $s1, -0x6530($s1)
+/* DFE3C 8014973C 3C118016 */  lui       $s1, %hi(D_80159AD0)
+/* DFE40 80149740 8E319AD0 */  lw        $s1, %lo(D_80159AD0)($s1)
 /* DFE44 80149744 AFB20028 */  sw        $s2, 0x28($sp)
 /* DFE48 80149748 0000902D */  daddu     $s2, $zero, $zero
 /* DFE4C 8014974C AFB40030 */  sw        $s4, 0x30($sp)

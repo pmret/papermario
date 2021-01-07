@@ -17,8 +17,8 @@ glabel SetZoneEnabled
 /* EEC34 802CA284 0040802D */   daddu    $s0, $v0, $zero
 /* EEC38 802CA288 001018C0 */  sll       $v1, $s0, 3
 /* EEC3C 802CA28C 00701823 */  subu      $v1, $v1, $s0
-/* EEC40 802CA290 3C04800E */  lui       $a0, 0x800e
-/* EEC44 802CA294 8C8491D4 */  lw        $a0, -0x6e2c($a0)
+/* EEC40 802CA290 3C04800E */  lui       $a0, %hi(D_800D91D4)
+/* EEC44 802CA294 8C8491D4 */  lw        $a0, %lo(D_800D91D4)($a0)
 /* EEC48 802CA298 00031880 */  sll       $v1, $v1, 2
 /* EEC4C 802CA29C 00838821 */  addu      $s1, $a0, $v1
 /* EEC50 802CA2A0 86240006 */  lh        $a0, 6($s1)

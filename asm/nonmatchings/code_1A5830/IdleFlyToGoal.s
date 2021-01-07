@@ -196,8 +196,8 @@ glabel IdleFlyToGoal
 /* 1AA76C 8027BE8C 46001003 */  div.s     $f0, $f2, $f0
 /* 1AA770 8027BE90 46000021 */  cvt.d.s   $f0, $f0
 /* 1AA774 8027BE94 46206301 */  sub.d     $f12, $f12, $f0
-/* 1AA778 8027BE98 3C01802A */  lui       $at, 0x802a
-/* 1AA77C 8027BE9C D420DA18 */  ldc1      $f0, -0x25e8($at)
+/* 1AA778 8027BE98 3C01802A */  lui       $at, %hi(D_8029DA18)
+/* 1AA77C 8027BE9C D420DA18 */  ldc1      $f0, %lo(D_8029DA18)($at)
 /* 1AA780 8027BEA0 46206302 */  mul.d     $f12, $f12, $f0
 /* 1AA784 8027BEA4 00000000 */  nop       
 /* 1AA788 8027BEA8 0C00A8BB */  jal       sin_deg

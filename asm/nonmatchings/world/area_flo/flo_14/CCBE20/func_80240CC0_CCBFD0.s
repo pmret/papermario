@@ -104,8 +104,8 @@ glabel func_80240CC0_CCBFD0
 /* CCC154 80240E44 1040000A */  beqz      $v0, .L80240E70
 /* CCC158 80240E48 4600C106 */   mov.s    $f4, $f24
 /* CCC15C 80240E4C 4614C081 */  sub.s     $f2, $f24, $f20
-/* CCC160 80240E50 3C018024 */  lui       $at, 0x8024
-/* CCC164 80240E54 D4205358 */  ldc1      $f0, 0x5358($at)
+/* CCC160 80240E50 3C018024 */  lui       $at, %hi(D_80245358)
+/* CCC164 80240E54 D4205358 */  ldc1      $f0, %lo(D_80245358)($at)
 /* CCC168 80240E58 460010A1 */  cvt.d.s   $f2, $f2
 /* CCC16C 80240E5C 46201082 */  mul.d     $f2, $f2, $f0
 /* CCC170 80240E60 00000000 */  nop       
@@ -131,8 +131,8 @@ glabel func_80240CC0_CCBFD0
 /* CCC1BC 80240EAC C7A4002C */  lwc1      $f4, 0x2c($sp)
 /* CCC1C0 80240EB0 461A2100 */  add.s     $f4, $f4, $f26
 /* CCC1C4 80240EB4 46142081 */  sub.s     $f2, $f4, $f20
-/* CCC1C8 80240EB8 3C018024 */  lui       $at, 0x8024
-/* CCC1CC 80240EBC D4205360 */  ldc1      $f0, 0x5360($at)
+/* CCC1C8 80240EB8 3C018024 */  lui       $at, %hi(D_80245360)
+/* CCC1CC 80240EBC D4205360 */  ldc1      $f0, %lo(D_80245360)($at)
 /* CCC1D0 80240EC0 460010A1 */  cvt.d.s   $f2, $f2
 /* CCC1D4 80240EC4 46201082 */  mul.d     $f2, $f2, $f0
 /* CCC1D8 80240EC8 00000000 */  nop       

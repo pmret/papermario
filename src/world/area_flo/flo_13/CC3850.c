@@ -6,17 +6,17 @@ INCLUDE_ASM(s32, "world/area_flo/flo_13/CC3850", func_802401C4_CC39D4);
 
 INCLUDE_ASM(s32, "world/area_flo/flo_13/CC3850", func_80240374_CC3B84);
 
-INCLUDE_ASM(s32, "world/area_flo/flo_13/CC3850", func_8024099C_CC41AC);
+#include "world/common/UnkNpcAIFunc1.inc.c"
 
 INCLUDE_ASM(s32, "world/area_flo/flo_13/CC3850", func_80240A5C_CC426C);
 
-INCLUDE_ASM(s32, "world/area_flo/flo_13/CC3850", func_80240DA0_CC45B0);
+#include "world/common/UnkNpcAIFunc2.inc.c"
 
 INCLUDE_ASM(s32, "world/area_flo/flo_13/CC3850", func_80240E18_CC4628);
 
 INCLUDE_ASM(s32, "world/area_flo/flo_13/CC3850", func_80240E84_CC4694);
 
-INCLUDE_ASM(s32, "world/area_flo/flo_13/CC3850", func_80240FB8_CC47C8);
+#include "world/common/UnkNpcAIFunc3.inc.c"
 
 INCLUDE_ASM(s32, "world/area_flo/flo_13/CC3850", func_8024101C_CC482C);
 
@@ -32,13 +32,13 @@ INCLUDE_ASM(s32, "world/area_flo/flo_13/CC3850", func_80241B68_CC5378);
 
 INCLUDE_ASM(s32, "world/area_flo/flo_13/CC3850", func_80241DB8_CC55C8);
 
-INCLUDE_ASM(s32, "world/area_flo/flo_13/CC3850", func_80242298_CC5AA8);
+#include "world/common/set_script_owner_npc_anim.inc.c"
 
 INCLUDE_ASM(s32, "world/area_flo/flo_13/CC3850", func_80242314_CC5B24);
 
-INCLUDE_ASM(s32, "world/area_flo/flo_13/CC3850", func_80242448_CC5C58);
+#include "world/common/UnkNpcAIFunc12.inc.c"
 
-INCLUDE_ASM(s32, "world/area_flo/flo_13/CC3850", func_802425AC_CC5DBC);
+#include "world/common/set_script_owner_npc_col_height.inc.c"
 
 INCLUDE_ASM(s32, "world/area_flo/flo_13/CC3850", func_8024262C_CC5E3C);
 

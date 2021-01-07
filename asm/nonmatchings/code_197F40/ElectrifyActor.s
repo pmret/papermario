@@ -55,8 +55,8 @@ glabel ElectrifyActor
 /* 19F2FC 80270A1C 0000202D */   daddu    $a0, $zero, $zero
 /* 19F300 80270A20 24020001 */  addiu     $v0, $zero, 1
 .L80270A24:
-/* 19F304 80270A24 3C01802A */  lui       $at, 0x802a
-/* 19F308 80270A28 A022FBD4 */  sb        $v0, -0x42c($at)
+/* 19F304 80270A24 3C01802A */  lui       $at, %hi(D_8029FBD4)
+/* 19F308 80270A28 A022FBD4 */  sb        $v0, %lo(D_8029FBD4)($at)
 /* 19F30C 80270A2C 24020005 */  addiu     $v0, $zero, 5
 /* 19F310 80270A30 AE42007C */  sw        $v0, 0x7c($s2)
 /* 19F314 80270A34 24020001 */  addiu     $v0, $zero, 1
@@ -132,9 +132,9 @@ glabel ElectrifyActor
 /* 19F41C 80270B3C 10400052 */  beqz      $v0, .L80270C88
 /* 19F420 80270B40 46020080 */   add.s    $f2, $f0, $f2
 /* 19F424 80270B44 00031080 */  sll       $v0, $v1, 2
-/* 19F428 80270B48 3C01802A */  lui       $at, 0x802a
+/* 19F428 80270B48 3C01802A */  lui       $at, %hi(D_8029D850)
 /* 19F42C 80270B4C 00220821 */  addu      $at, $at, $v0
-/* 19F430 80270B50 8C22D850 */  lw        $v0, -0x27b0($at)
+/* 19F430 80270B50 8C22D850 */  lw        $v0, %lo(D_8029D850)($at)
 /* 19F434 80270B54 00400008 */  jr        $v0
 /* 19F438 80270B58 00000000 */   nop      
 /* 19F43C 80270B5C 8E42007C */  lw        $v0, 0x7c($s2)
@@ -211,8 +211,8 @@ glabel ElectrifyActor
 /* 19F550 80270C70 14400006 */  bnez      $v0, .L80270C8C
 /* 19F554 80270C74 0000102D */   daddu    $v0, $zero, $zero
 .L80270C78:
-/* 19F558 80270C78 3C01802A */  lui       $at, 0x802a
-/* 19F55C 80270C7C A020FBD4 */  sb        $zero, -0x42c($at)
+/* 19F558 80270C78 3C01802A */  lui       $at, %hi(D_8029FBD4)
+/* 19F55C 80270C7C A020FBD4 */  sb        $zero, %lo(D_8029FBD4)($at)
 /* 19F560 80270C80 0809C323 */  j         .L80270C8C
 /* 19F564 80270C84 24020002 */   addiu    $v0, $zero, 2
 .L80270C88:

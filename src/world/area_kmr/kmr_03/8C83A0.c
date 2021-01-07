@@ -3,7 +3,7 @@
 #include "world/common/SomeMatrixOperations.inc.c"
 
 // *INDENT-OFF*
-Script M(SearchBush_802417F0) = {
+Script N(SearchBush_802417F0) = {
     SI_CMD(ScriptOpcode_USE_BUFFER, SI_VAR(0)),
     SI_CMD(ScriptOpcode_BUFFER_READ_4, SI_VAR(1), SI_VAR(2), SI_VAR(3), SI_VAR(4)),
     SI_CMD(ScriptOpcode_CALL, GetPlayerPos, SI_VAR(5), SI_VAR(15), SI_VAR(7)),
@@ -15,7 +15,7 @@ Script M(SearchBush_802417F0) = {
                 SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(2)),
                 SI_CMD(ScriptOpcode_LOOP, SI_VAR(2)),
                     SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(3)),
-                    SI_CMD(ScriptOpcode_CALL, SomeMatrixOperation2, SI_VAR(3), SI_FIXED(0.1005859375), 1, SI_VAR(15), 0),
+                    SI_CMD(ScriptOpcode_CALL, N(SomeMatrixOperation2), SI_VAR(3), SI_FIXED(0.1005859375), 1, SI_VAR(15), 0),
                     SI_CMD(ScriptOpcode_IF_EQ, SI_FLAG(0), 0),
                         SI_CMD(ScriptOpcode_SET, SI_FLAG(0), 1),
                         SI_CMD(ScriptOpcode_CALL, PlaySoundAtModel, SI_VAR(3), 339, 0),
@@ -26,7 +26,7 @@ Script M(SearchBush_802417F0) = {
                 SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(2)),
                 SI_CMD(ScriptOpcode_LOOP, SI_VAR(2)),
                     SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(3)),
-                    SI_CMD(ScriptOpcode_CALL, SomeMatrixOperation2, SI_VAR(3), SI_FIXED(0.1005859375), -1, SI_VAR(15), 0),
+                    SI_CMD(ScriptOpcode_CALL, N(SomeMatrixOperation2), SI_VAR(3), SI_FIXED(0.1005859375), -1, SI_VAR(15), 0),
                 SI_CMD(ScriptOpcode_END_LOOP),
                 SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
             SI_CMD(ScriptOpcode_END_LOOP),
@@ -67,7 +67,7 @@ Script M(SearchBush_802417F0) = {
     SI_CMD(ScriptOpcode_END)
 };
 
-Script M(ShakeTree_80241B50) = {
+Script N(ShakeTree_80241B50) = {
     SI_CMD(ScriptOpcode_SET_TIMESCALE, SI_FIXED(2.0)),
     SI_CMD(ScriptOpcode_USE_BUFFER, SI_VAR(0)),
     SI_CMD(ScriptOpcode_BUFFER_READ_4, SI_VAR(1), SI_VAR(2), SI_VAR(3), SI_VAR(4)),
@@ -84,7 +84,7 @@ Script M(ShakeTree_80241B50) = {
                 SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(2)),
                 SI_CMD(ScriptOpcode_LOOP, SI_VAR(2)),
                     SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(3)),
-                    SI_CMD(ScriptOpcode_CALL, SomeMatrixOperation2, SI_VAR(3), SI_FIXED(0.1005859375), SI_FIXED(0.2001953125), SI_VAR(15), 0),
+                    SI_CMD(ScriptOpcode_CALL, N(SomeMatrixOperation2), SI_VAR(3), SI_FIXED(0.1005859375), SI_FIXED(0.2001953125), SI_VAR(15), 0),
                     SI_CMD(ScriptOpcode_IF_EQ, SI_FLAG(0), 0),
                         SI_CMD(ScriptOpcode_SET, SI_FLAG(0), 1),
                         SI_CMD(ScriptOpcode_CALL, PlaySoundAtModel, SI_VAR(3), 358, 0),
@@ -95,7 +95,7 @@ Script M(ShakeTree_80241B50) = {
                 SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(2)),
                 SI_CMD(ScriptOpcode_LOOP, SI_VAR(2)),
                     SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(3)),
-                    SI_CMD(ScriptOpcode_CALL, SomeMatrixOperation2, SI_VAR(3), SI_FIXED(0.1005859375), SI_FIXED(-0.19921875), SI_VAR(15), 0),
+                    SI_CMD(ScriptOpcode_CALL, N(SomeMatrixOperation2), SI_VAR(3), SI_FIXED(0.1005859375), SI_FIXED(-0.19921875), SI_VAR(15), 0),
                 SI_CMD(ScriptOpcode_END_LOOP),
                 SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
             SI_CMD(ScriptOpcode_END_LOOP),
@@ -116,7 +116,7 @@ Script M(ShakeTree_80241B50) = {
                 SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(3)),
                 SI_CMD(ScriptOpcode_LOOP, SI_VAR(3)),
                     SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(4)),
-                    SI_CMD(ScriptOpcode_CALL, SomeMatrixOperation2, SI_VAR(4), SI_FIXED(0.1005859375), SI_FIXED(0.2001953125), SI_VAR(15), 0),
+                    SI_CMD(ScriptOpcode_CALL, N(SomeMatrixOperation2), SI_VAR(4), SI_FIXED(0.1005859375), SI_FIXED(0.2001953125), SI_VAR(15), 0),
                     SI_CMD(ScriptOpcode_IF_EQ, SI_FLAG(0), 0),
                         SI_CMD(ScriptOpcode_SET, SI_FLAG(0), 1),
                         SI_CMD(ScriptOpcode_CALL, PlaySoundAtModel, SI_VAR(4), 357, 0),
@@ -127,7 +127,7 @@ Script M(ShakeTree_80241B50) = {
                 SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(3)),
                 SI_CMD(ScriptOpcode_LOOP, SI_VAR(3)),
                     SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(4)),
-                    SI_CMD(ScriptOpcode_CALL, SomeMatrixOperation2, SI_VAR(4), SI_FIXED(0.1005859375), SI_FIXED(-0.19921875), SI_VAR(15), 0),
+                    SI_CMD(ScriptOpcode_CALL, N(SomeMatrixOperation2), SI_VAR(4), SI_FIXED(0.1005859375), SI_FIXED(-0.19921875), SI_VAR(15), 0),
                 SI_CMD(ScriptOpcode_END_LOOP),
                 SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
             SI_CMD(ScriptOpcode_END_LOOP),
@@ -179,60 +179,60 @@ Script M(ShakeTree_80241B50) = {
 };
 // *INDENT-ON*
 
-s32 M(treeModelList_Bush1_Bush)[] = {
+s32 N(treeModelList_Bush1_Bush)[] = {
     0x00000001, 0x00000040,
 };
 
-s32 M(treeEffectVectors_Bush1)[] = {
+s32 N(treeEffectVectors_Bush1)[] = {
     0x00000001, 0x0000008F, 0x00000010, 0x000001CE,
 };
 
-s32 M(searchBushEvent_Bush1)[] = {
-    M(treeModelList_Bush1_Bush), 0x00000000, M(treeEffectVectors_Bush1), 0x00000000,
+s32 N(searchBushEvent_Bush1)[] = {
+    N(treeModelList_Bush1_Bush), 0x00000000, N(treeEffectVectors_Bush1), 0x00000000,
 };
 
-s32 M(treeModelList_Tree1_Leaves)[] = {
+s32 N(treeModelList_Tree1_Leaves)[] = {
     0x00000001, 0x0000003E,
 };
 
-s32 M(treeModelList_Tree1_Trunk)[] = {
+s32 N(treeModelList_Tree1_Trunk)[] = {
     0x00000001, 0x0000003D,
 };
 
-s32 M(treeEffectVectors_Tree1)[] = {
+s32 N(treeEffectVectors_Tree1)[] = {
     0x00000002, 0xFFFFFFB0, 0x00000082, 0x00000012, 0x0000001C, 0x00000082, 0x00000027,
 };
 
-Script M(Tree1_Callback) = SCRIPT({
-    if SI_SAVE_FLAG(53) == 1 {
-        return
+Script N(Tree1_Callback) = SCRIPT({
+    if (SI_SAVE_FLAG(53) == 1) {
+        return;
     }
-    if SI_MAP_FLAG(10) == 1 {
-        return
+    if (SI_MAP_FLAG(10) == 1) {
+        return;
     }
-    sleep 10
-    GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2))
-    if SI_VAR(0) < 0xFFFFFFE2 {
-        MakeItemEntity(138, 0xFFFFFFE9, 100, 35, 13, SI_SAVE_FLAG(53))
+    sleep 10;
+    GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    if (SI_VAR(0) < 0xFFFFFFE2) {
+        MakeItemEntity(138, 0xFFFFFFE9, 100, 35, 13, SI_SAVE_FLAG(53));
     } else {
-        MakeItemEntity(138, 0xFFFFFFAB, 100, 16, 13, SI_SAVE_FLAG(53))
+        MakeItemEntity(138, 0xFFFFFFAB, 100, 16, 13, SI_SAVE_FLAG(53));
     }
-    SI_MAP_FLAG(10) = 1
+    SI_MAP_FLAG(10) = 1;
 });
 
-s32 M(shakeTreeEvent_Tree1)[] = {
-    M(treeModelList_Tree1_Leaves), M(treeModelList_Tree1_Trunk), 0x00000000, M(treeEffectVectors_Tree1), M(Tree1_Callback),
+s32 N(shakeTreeEvent_Tree1)[] = {
+    N(treeModelList_Tree1_Leaves), N(treeModelList_Tree1_Trunk), 0x00000000, N(treeEffectVectors_Tree1), N(Tree1_Callback),
 };
 
-s32 M(triggerCoord_802422A8)[] = {
+s32 N(triggerCoord_802422A8)[] = {
     0xC2280000, 0x00000000, 0xC1500000, 0x00000000,
 };
 
-Script M(Script_802422B8) = SCRIPT({
-    SI_VAR(0) = M(searchBushEvent_Bush1)
-    bind M(SearchBush_802417F0) to TriggerFlag_WALL_INTERACT 53
-    SI_VAR(0) = M(shakeTreeEvent_Tree1)
-    bind M(ShakeTree_80241B50) to TriggerFlag_WALL_HAMMER 52
-    bind M(ShakeTree_80241B50) to TriggerFlag_BOMB M(triggerCoord_802422A8)
+Script N(Script_802422B8) = SCRIPT({
+    SI_VAR(0) = N(searchBushEvent_Bush1);
+    bind N(SearchBush_802417F0) to TriggerFlag_WALL_INTERACT 53;
+    SI_VAR(0) = N(shakeTreeEvent_Tree1);
+    bind N(ShakeTree_80241B50) to TriggerFlag_WALL_HAMMER 52;
+    bind N(ShakeTree_80241B50) to TriggerFlag_BOMB N(triggerCoord_802422A8);
 });
 

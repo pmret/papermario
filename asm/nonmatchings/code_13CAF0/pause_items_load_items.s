@@ -92,8 +92,8 @@ glabel pause_items_load_items
 /* 13D950 8024A610 AC2005C0 */  sw        $zero, %lo(gItemMenuSelectedIndex)($at)
 /* 13D954 8024A614 3C018027 */  lui       $at, %hi(gItemMenuSelectedItemID)
 /* 13D958 8024A618 AC2005C8 */  sw        $zero, %lo(gItemMenuSelectedItemID)($at)
-/* 13D95C 8024A61C 3C018027 */  lui       $at, 0x8027
-/* 13D960 8024A620 AC2005C4 */  sw        $zero, 0x5c4($at)
+/* 13D95C 8024A61C 3C018027 */  lui       $at, %hi(D_802705C4)
+/* 13D960 8024A620 AC2005C4 */  sw        $zero, %lo(D_802705C4)($at)
 /* 13D964 8024A624 3C018027 */  lui       $at, %hi(D_802705DC)
 /* 13D968 8024A628 AC2005DC */  sw        $zero, %lo(D_802705DC)($at)
 /* 13D96C 8024A62C 3C018027 */  lui       $at, %hi(gItemMenuCurrentPage)

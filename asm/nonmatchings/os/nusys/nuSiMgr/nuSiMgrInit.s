@@ -7,8 +7,8 @@ glabel nuSiMgrInit
 /* 8238 8002CE38 3C10800E */  lui       $s0, %hi(nuSiMesgQ)
 /* 823C 8002CE3C 2610AC78 */  addiu     $s0, $s0, %lo(nuSiMesgQ)
 /* 8240 8002CE40 0200202D */  daddu     $a0, $s0, $zero
-/* 8244 8002CE44 3C05800A */  lui       $a1, 0x800a
-/* 8248 8002CE48 24A5E6F0 */  addiu     $a1, $a1, -0x1910
+/* 8244 8002CE44 3C05800A */  lui       $a1, %hi(D_8009E6F0)
+/* 8248 8002CE48 24A5E6F0 */  addiu     $a1, $a1, %lo(D_8009E6F0)
 /* 824C 8002CE4C AFBF0034 */  sw        $ra, 0x34($sp)
 /* 8250 8002CE50 0C019560 */  jal       osCreateMesgQueue
 /* 8254 8002CE54 24060008 */   addiu    $a2, $zero, 8
@@ -46,14 +46,14 @@ glabel nuSiMgrInit
 /* 82CC 8002CECC 2C620004 */  sltiu     $v0, $v1, 4
 /* 82D0 8002CED0 1440FFED */  bnez      $v0, .L8002CE88
 /* 82D4 8002CED4 24840004 */   addiu    $a0, $a0, 4
-/* 82D8 8002CED8 3C10800A */  lui       $s0, 0x800a
-/* 82DC 8002CEDC 2610E710 */  addiu     $s0, $s0, -0x18f0
+/* 82D8 8002CED8 3C10800A */  lui       $s0, %hi(D_8009E710)
+/* 82DC 8002CEDC 2610E710 */  addiu     $s0, $s0, %lo(D_8009E710)
 /* 82E0 8002CEE0 0200202D */  daddu     $a0, $s0, $zero
 /* 82E4 8002CEE4 24050006 */  addiu     $a1, $zero, 6
 /* 82E8 8002CEE8 3C068003 */  lui       $a2, %hi(nuSiMgrThread)
 /* 82EC 8002CEEC 24C6CFD0 */  addiu     $a2, $a2, %lo(nuSiMgrThread)
-/* 82F0 8002CEF0 3C02800A */  lui       $v0, 0x800a
-/* 82F4 8002CEF4 244208C0 */  addiu     $v0, $v0, 0x8c0
+/* 82F0 8002CEF0 3C02800A */  lui       $v0, %hi(D_800A08C0)
+/* 82F4 8002CEF4 244208C0 */  addiu     $v0, $v0, %lo(D_800A08C0)
 /* 82F8 8002CEF8 AFA20010 */  sw        $v0, 0x10($sp)
 /* 82FC 8002CEFC 24020073 */  addiu     $v0, $zero, 0x73
 /* 8300 8002CF00 0000382D */  daddu     $a3, $zero, $zero

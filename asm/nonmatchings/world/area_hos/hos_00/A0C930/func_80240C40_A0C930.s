@@ -6,8 +6,8 @@ glabel func_80240C40_A0C930
 /* A0C934 80240C44 240201F4 */  addiu     $v0, $zero, 0x1f4
 /* A0C938 80240C48 0000202D */  daddu     $a0, $zero, $zero
 /* A0C93C 80240C4C 0000282D */  daddu     $a1, $zero, $zero
-/* A0C940 80240C50 3C018011 */  lui       $at, 0x8011
-/* A0C944 80240C54 C420EFF0 */  lwc1      $f0, -0x1010($at)
+/* A0C940 80240C50 3C018011 */  lui       $at, %hi(gPlayerStatus+0x28)
+/* A0C944 80240C54 C420EFF0 */  lwc1      $f0, %lo(gPlayerStatus+0x28)($at)
 /* A0C948 80240C58 3C014348 */  lui       $at, 0x4348
 /* A0C94C 80240C5C 44811000 */  mtc1      $at, $f2
 /* A0C950 80240C60 3C064358 */  lui       $a2, 0x4358
@@ -32,8 +32,8 @@ glabel func_80240C40_A0C930
 /* A0C994 80240CA4 3C07FCFF */  lui       $a3, 0xfcff
 /* A0C998 80240CA8 34E7C7FF */  ori       $a3, $a3, 0xc7ff
 /* A0C99C 80240CAC 3C06FF8E */  lui       $a2, 0xff8e
-/* A0C9A0 80240CB0 3C04800A */  lui       $a0, 0x800a
-/* A0C9A4 80240CB4 2484A66C */  addiu     $a0, $a0, -0x5994
+/* A0C9A0 80240CB0 3C04800A */  lui       $a0, %hi(D_8009A66C)
+/* A0C9A4 80240CB4 2484A66C */  addiu     $a0, $a0, %lo(D_8009A66C)
 /* A0C9A8 80240CB8 8C820000 */  lw        $v0, ($a0)
 /* A0C9AC 80240CBC 34C67F3F */  ori       $a2, $a2, 0x7f3f
 /* A0C9B0 80240CC0 0040182D */  daddu     $v1, $v0, $zero

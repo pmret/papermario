@@ -6,11 +6,11 @@
 
 INCLUDE_ASM(s32, "world/area_gv/gv_01/E1E460", func_80240034_E1E494);
 
-INCLUDE_ASM(s32, "world/area_gv/gv_01/E1E460", func_802400F0_E1E550);
+#include "world/common/GetEntryPos.inc.c"
 
 #include "world/common/GetCurrentCameraYawClamped180.inc.c"
 
-INCLUDE_ASM(s32, "world/area_gv/gv_01/E1E460", func_8024023C_E1E69C);
+#include "world/common/SomeXYZFunc2.inc.c"
 
 #include "world/common/UnkTexturePanFunc.inc.c"
 

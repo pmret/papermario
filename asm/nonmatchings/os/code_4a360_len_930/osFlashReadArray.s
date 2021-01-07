@@ -8,20 +8,20 @@ glabel osFlashReadArray
 /* 4AB68 8006F768 AFA50024 */  sw        $a1, 0x24($sp)
 /* 4AB6C 8006F76C AFA60028 */  sw        $a2, 0x28($sp)
 /* 4AB70 8006F770 AFA7002C */  sw        $a3, 0x2c($sp)
-/* 4AB74 8006F774 3C04800B */  lui       $a0, 0x800b
-/* 4AB78 8006F778 24840C70 */  addiu     $a0, $a0, 0xc70
-/* 4AB7C 8006F77C 3C05800B */  lui       $a1, 0x800b
-/* 4AB80 8006F780 8CA50C7C */  lw        $a1, 0xc7c($a1)
+/* 4AB74 8006F774 3C04800B */  lui       $a0, %hi(D_800B0C70)
+/* 4AB78 8006F778 24840C70 */  addiu     $a0, $a0, %lo(D_800B0C70)
+/* 4AB7C 8006F77C 3C05800B */  lui       $a1, %hi(D_800B0C7C)
+/* 4AB80 8006F780 8CA50C7C */  lw        $a1, %lo(D_800B0C7C)($a1)
 /* 4AB84 8006F784 3C010001 */  lui       $at, 1
 /* 4AB88 8006F788 00A17025 */  or        $t6, $a1, $at
 /* 4AB8C 8006F78C 01C02825 */  or        $a1, $t6, $zero
 /* 4AB90 8006F790 3C06F000 */  lui       $a2, 0xf000
 /* 4AB94 8006F794 0C018358 */  jal       osEPiWriteIo
 /* 4AB98 8006F798 00000000 */   nop      
-/* 4AB9C 8006F79C 3C04800B */  lui       $a0, 0x800b
-/* 4ABA0 8006F7A0 24840C70 */  addiu     $a0, $a0, 0xc70
-/* 4ABA4 8006F7A4 3C05800B */  lui       $a1, 0x800b
-/* 4ABA8 8006F7A8 8CA50C7C */  lw        $a1, 0xc7c($a1)
+/* 4AB9C 8006F79C 3C04800B */  lui       $a0, %hi(D_800B0C70)
+/* 4ABA0 8006F7A0 24840C70 */  addiu     $a0, $a0, %lo(D_800B0C70)
+/* 4ABA4 8006F7A4 3C05800B */  lui       $a1, %hi(D_800B0C7C)
+/* 4ABA8 8006F7A8 8CA50C7C */  lw        $a1, %lo(D_800B0C7C)($a1)
 /* 4ABAC 8006F7AC 27A60018 */  addiu     $a2, $sp, 0x18
 /* 4ABB0 8006F7B0 0C018370 */  jal       osEPiReadIo
 /* 4ABB4 8006F7B4 00000000 */   nop      
@@ -43,8 +43,8 @@ glabel osFlashReadArray
 /* 4ABF4 8006F7F4 8FAD0020 */  lw        $t5, 0x20($sp)
 /* 4ABF8 8006F7F8 00000000 */  nop       
 /* 4ABFC 8006F7FC ADAC0010 */  sw        $t4, 0x10($t5)
-/* 4AC00 8006F800 3C0E800B */  lui       $t6, 0x800b
-/* 4AC04 8006F804 8DCE0CE8 */  lw        $t6, 0xce8($t6)
+/* 4AC00 8006F800 3C0E800B */  lui       $t6, %hi(D_800B0CE8)
+/* 4AC04 8006F804 8DCE0CE8 */  lw        $t6, %lo(D_800B0CE8)($t6)
 /* 4AC08 8006F808 00000000 */  nop       
 /* 4AC0C 8006F80C 15C00009 */  bnez      $t6, .L8006F834
 /* 4AC10 8006F810 00000000 */   nop      
@@ -64,8 +64,8 @@ glabel osFlashReadArray
 /* 4AC44 8006F844 00000000 */  nop       
 /* 4AC48 8006F848 AD49000C */  sw        $t1, 0xc($t2)
 .L8006F84C:
-/* 4AC4C 8006F84C 3C04800B */  lui       $a0, 0x800b
-/* 4AC50 8006F850 24840C70 */  addiu     $a0, $a0, 0xc70
+/* 4AC4C 8006F84C 3C04800B */  lui       $a0, %hi(D_800B0C70)
+/* 4AC50 8006F850 24840C70 */  addiu     $a0, $a0, %lo(D_800B0C70)
 /* 4AC54 8006F854 8FA50020 */  lw        $a1, 0x20($sp)
 /* 4AC58 8006F858 00003025 */  or        $a2, $zero, $zero
 /* 4AC5C 8006F85C 0C018388 */  jal       osEPiStartDma

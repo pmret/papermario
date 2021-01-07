@@ -9,8 +9,8 @@ glabel draw_main_battle_ui
 /* 16D36C 8023EA8C AFB00010 */  sw        $s0, 0x10($sp)
 /* 16D370 8023EA90 3C10800E */  lui       $s0, %hi(gBattleState)
 /* 16D374 8023EA94 8E10C068 */  lw        $s0, %lo(gBattleState)($s0)
-/* 16D378 8023EA98 3C04800E */  lui       $a0, 0x800e
-/* 16D37C 8023EA9C 2484C4D0 */  addiu     $a0, $a0, -0x3b30
+/* 16D378 8023EA98 3C04800E */  lui       $a0, %hi(gBattleStatus+0x460)
+/* 16D37C 8023EA9C 2484C4D0 */  addiu     $a0, $a0, %lo(gBattleStatus+0x460)
 /* 16D380 8023EAA0 8C820000 */  lw        $v0, ($a0)
 /* 16D384 8023EAA4 12020005 */  beq       $s0, $v0, .L8023EABC
 /* 16D388 8023EAA8 0200182D */   daddu    $v1, $s0, $zero
@@ -41,9 +41,9 @@ glabel draw_main_battle_ui
 /* 16D3E0 8023EB00 2C620023 */  sltiu     $v0, $v1, 0x23
 /* 16D3E4 8023EB04 1040008C */  beqz      $v0, .L8023ED38
 /* 16D3E8 8023EB08 00031080 */   sll      $v0, $v1, 2
-/* 16D3EC 8023EB0C 3C01802A */  lui       $at, 0x802a
+/* 16D3EC 8023EB0C 3C01802A */  lui       $at, %hi(D_8029C9F8)
 /* 16D3F0 8023EB10 00220821 */  addu      $at, $at, $v0
-/* 16D3F4 8023EB14 8C22C9F8 */  lw        $v0, -0x3608($at)
+/* 16D3F4 8023EB14 8C22C9F8 */  lw        $v0, %lo(D_8029C9F8)($at)
 /* 16D3F8 8023EB18 00400008 */  jr        $v0
 /* 16D3FC 8023EB1C 00000000 */   nop      
 /* 16D400 8023EB20 0C0906AE */  jal       func_80241AB8

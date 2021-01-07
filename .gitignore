@@ -2,6 +2,7 @@
 __pycache__/
 venv/
 .lark_cache*
+.splat_cache
 
 # Misc
 .idea/
@@ -18,8 +19,18 @@ settings.mk
 /build/
 /docs/doxygen/
 /include/ld_addrs.h
+/include/message_ids.h
+/include/sprite/
+/include/map
 
 # Assets
 /bin
 /img
 /msg
+/sprite
+
+# Star Rod
+/sprite/SpriteTable.xml
+/mod.cfg
+
+tools/Yay0compress

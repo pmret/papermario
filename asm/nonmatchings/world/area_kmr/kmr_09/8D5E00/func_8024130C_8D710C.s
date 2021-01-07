@@ -66,9 +66,9 @@ glabel func_8024130C_8D710C
 /* 8D71F8 802413F8 2C62000F */  sltiu     $v0, $v1, 0xf
 /* 8D71FC 802413FC 10400034 */  beqz      $v0, .L802414D0
 /* 8D7200 80241400 00031080 */   sll      $v0, $v1, 2
-/* 8D7204 80241404 3C018024 */  lui       $at, 0x8024
+/* 8D7204 80241404 3C018024 */  lui       $at, %hi(D_80242688)
 /* 8D7208 80241408 00220821 */  addu      $at, $at, $v0
-/* 8D720C 8024140C 8C222688 */  lw        $v0, 0x2688($at)
+/* 8D720C 8024140C 8C222688 */  lw        $v0, %lo(D_80242688)($at)
 /* 8D7210 80241410 00400008 */  jr        $v0
 /* 8D7214 80241414 00000000 */   nop      
 /* 8D7218 80241418 0280202D */  daddu     $a0, $s4, $zero
@@ -83,7 +83,7 @@ glabel func_8024130C_8D710C
 /* 8D723C 8024143C 0000102D */   daddu    $v0, $zero, $zero
 /* 8D7240 80241440 0280202D */  daddu     $a0, $s4, $zero
 /* 8D7244 80241444 0200282D */  daddu     $a1, $s0, $zero
-/* 8D7248 80241448 0C0901F6 */  jal       func_802407D8_8D65D8
+/* 8D7248 80241448 0C0901F6 */  jal       kmr_09_UnkNpcAIFunc1
 /* 8D724C 8024144C 0260302D */   daddu    $a2, $s3, $zero
 /* 8D7250 80241450 0280202D */  daddu     $a0, $s4, $zero
 /* 8D7254 80241454 0200282D */  daddu     $a1, $s0, $zero
@@ -93,7 +93,7 @@ glabel func_8024130C_8D710C
 /* 8D7264 80241464 0000102D */   daddu    $v0, $zero, $zero
 /* 8D7268 80241468 0280202D */  daddu     $a0, $s4, $zero
 /* 8D726C 8024146C 0200282D */  daddu     $a1, $s0, $zero
-/* 8D7270 80241470 0C0902F7 */  jal       func_80240BDC_8D69DC
+/* 8D7270 80241470 0C0902F7 */  jal       kmr_09_UnkNpcAIFunc2
 /* 8D7274 80241474 0260302D */   daddu    $a2, $s3, $zero
 /* 8D7278 80241478 0280202D */  daddu     $a0, $s4, $zero
 /* 8D727C 8024147C 0200282D */  daddu     $a1, $s0, $zero
@@ -109,7 +109,7 @@ glabel func_8024130C_8D710C
 /* 8D72A4 802414A4 0000102D */   daddu    $v0, $zero, $zero
 /* 8D72A8 802414A8 0280202D */  daddu     $a0, $s4, $zero
 /* 8D72AC 802414AC 0200282D */  daddu     $a1, $s0, $zero
-/* 8D72B0 802414B0 0C09037D */  jal       func_80240DF4_8D6BF4
+/* 8D72B0 802414B0 0C09037D */  jal       kmr_09_UnkNpcAIFunc3
 /* 8D72B4 802414B4 0260302D */   daddu    $a2, $s3, $zero
 /* 8D72B8 802414B8 08090535 */  j         .L802414D4
 /* 8D72BC 802414BC 0000102D */   daddu    $v0, $zero, $zero

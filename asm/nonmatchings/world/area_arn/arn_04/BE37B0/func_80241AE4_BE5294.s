@@ -15,9 +15,9 @@ glabel func_80241AE4_BE5294
 /* BE52BC 80241B0C 00031C00 */  sll       $v1, $v1, 0x10
 /* BE52C0 80241B10 00031B83 */  sra       $v1, $v1, 0xe
 /* BE52C4 80241B14 A444008E */  sh        $a0, 0x8e($v0)
-/* BE52C8 80241B18 3C018024 */  lui       $at, 0x8024
+/* BE52C8 80241B18 3C018024 */  lui       $at, %hi(D_802436DC)
 /* BE52CC 80241B1C 00230821 */  addu      $at, $at, $v1
-/* BE52D0 80241B20 C42236DC */  lwc1      $f2, 0x36dc($at)
+/* BE52D0 80241B20 C42236DC */  lwc1      $f2, %lo(D_802436DC)($at)
 /* BE52D4 80241B24 8443008E */  lh        $v1, 0x8e($v0)
 /* BE52D8 80241B28 46020000 */  add.s     $f0, $f0, $f2
 /* BE52DC 80241B2C 28630005 */  slti      $v1, $v1, 5

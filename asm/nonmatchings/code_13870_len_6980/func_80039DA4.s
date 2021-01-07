@@ -5,8 +5,8 @@ glabel func_80039DA4
 /* 151A4 80039DA4 27BDFFD0 */  addiu     $sp, $sp, -0x30
 /* 151A8 80039DA8 AFB10014 */  sw        $s1, 0x14($sp)
 /* 151AC 80039DAC 0080882D */  daddu     $s1, $a0, $zero
-/* 151B0 80039DB0 3C03800A */  lui       $v1, 0x800a
-/* 151B4 80039DB4 8463A634 */  lh        $v1, -0x59cc($v1)
+/* 151B0 80039DB0 3C03800A */  lui       $v1, %hi(D_8009A634)
+/* 151B4 80039DB4 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
 /* 151B8 80039DB8 3C04800B */  lui       $a0, %hi(gCameras)
 /* 151BC 80039DBC 24841D80 */  addiu     $a0, $a0, %lo(gCameras)
 /* 151C0 80039DC0 AFBF0018 */  sw        $ra, 0x18($sp)

@@ -51,15 +51,15 @@ glabel func_802408A0_ACE9E0
 /* ACEA98 80240958 0C00A7B5 */  jal       dist2D
 /* ACEA9C 8024095C 46000506 */   mov.s    $f20, $f0
 /* ACEAA0 80240960 C604000C */  lwc1      $f4, 0xc($s0)
-/* ACEAA4 80240964 3C018024 */  lui       $at, 0x8024
-/* ACEAA8 80240968 D4225F30 */  ldc1      $f2, 0x5f30($at)
+/* ACEAA4 80240964 3C018024 */  lui       $at, %hi(D_80245F30)
+/* ACEAA8 80240968 D4225F30 */  ldc1      $f2, %lo(D_80245F30)($at)
 /* ACEAAC 8024096C 46002121 */  cvt.d.s   $f4, $f4
 /* ACEAB0 80240970 46222032 */  c.eq.d    $f4, $f2
 /* ACEAB4 80240974 00000000 */  nop       
 /* ACEAB8 80240978 45010007 */  bc1t      .L80240998
 /* ACEABC 8024097C 46000086 */   mov.s    $f2, $f0
-/* ACEAC0 80240980 3C018024 */  lui       $at, 0x8024
-/* ACEAC4 80240984 D4205F38 */  ldc1      $f0, 0x5f38($at)
+/* ACEAC0 80240980 3C018024 */  lui       $at, %hi(D_80245F38)
+/* ACEAC4 80240984 D4205F38 */  ldc1      $f0, %lo(D_80245F38)($at)
 /* ACEAC8 80240988 46202032 */  c.eq.d    $f4, $f0
 /* ACEACC 8024098C 00000000 */  nop       
 /* ACEAD0 80240990 45000008 */  bc1f      .L802409B4

@@ -66,9 +66,9 @@ glabel func_8024185C_D216EC
 /* D217D8 80241948 2C62000F */  sltiu     $v0, $v1, 0xf
 /* D217DC 8024194C 10400034 */  beqz      $v0, .L80241A20
 /* D217E0 80241950 00031080 */   sll      $v0, $v1, 2
-/* D217E4 80241954 3C018025 */  lui       $at, 0x8025
+/* D217E4 80241954 3C018025 */  lui       $at, %hi(D_8024BE58)
 /* D217E8 80241958 00220821 */  addu      $at, $at, $v0
-/* D217EC 8024195C 8C22BE58 */  lw        $v0, -0x41a8($at)
+/* D217EC 8024195C 8C22BE58 */  lw        $v0, %lo(D_8024BE58)($at)
 /* D217F0 80241960 00400008 */  jr        $v0
 /* D217F4 80241964 00000000 */   nop      
 /* D217F8 80241968 0280202D */  daddu     $a0, $s4, $zero
@@ -83,7 +83,7 @@ glabel func_8024185C_D216EC
 /* D2181C 8024198C 0000102D */   daddu    $v0, $zero, $zero
 /* D21820 80241990 0280202D */  daddu     $a0, $s4, $zero
 /* D21824 80241994 0200282D */  daddu     $a1, $s0, $zero
-/* D21828 80241998 0C09034A */  jal       func_80240D28_D20BB8
+/* D21828 80241998 0C09034A */  jal       sam_06_UnkNpcAIFunc1
 /* D2182C 8024199C 0260302D */   daddu    $a2, $s3, $zero
 /* D21830 802419A0 0280202D */  daddu     $a0, $s4, $zero
 /* D21834 802419A4 0200282D */  daddu     $a1, $s0, $zero
@@ -93,7 +93,7 @@ glabel func_8024185C_D216EC
 /* D21844 802419B4 0000102D */   daddu    $v0, $zero, $zero
 /* D21848 802419B8 0280202D */  daddu     $a0, $s4, $zero
 /* D2184C 802419BC 0200282D */  daddu     $a1, $s0, $zero
-/* D21850 802419C0 0C09044B */  jal       func_8024112C_D20FBC
+/* D21850 802419C0 0C09044B */  jal       sam_06_UnkNpcAIFunc2
 /* D21854 802419C4 0260302D */   daddu    $a2, $s3, $zero
 /* D21858 802419C8 0280202D */  daddu     $a0, $s4, $zero
 /* D2185C 802419CC 0200282D */  daddu     $a1, $s0, $zero
@@ -109,7 +109,7 @@ glabel func_8024185C_D216EC
 /* D21884 802419F4 0000102D */   daddu    $v0, $zero, $zero
 /* D21888 802419F8 0280202D */  daddu     $a0, $s4, $zero
 /* D2188C 802419FC 0200282D */  daddu     $a1, $s0, $zero
-/* D21890 80241A00 0C0904D1 */  jal       func_80241344_D211D4
+/* D21890 80241A00 0C0904D1 */  jal       sam_06_UnkNpcAIFunc3
 /* D21894 80241A04 0260302D */   daddu    $a2, $s3, $zero
 /* D21898 80241A08 08090689 */  j         .L80241A24
 /* D2189C 80241A0C 0000102D */   daddu    $v0, $zero, $zero

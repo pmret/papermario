@@ -13,9 +13,9 @@ glabel func_802401AC_9C2ABC
 /* 9C2ADC 802401CC 2C620005 */  sltiu     $v0, $v1, 5
 /* 9C2AE0 802401D0 1040008A */  beqz      $v0, .L802403FC
 /* 9C2AE4 802401D4 00031080 */   sll      $v0, $v1, 2
-/* 9C2AE8 802401D8 3C018024 */  lui       $at, 0x8024
+/* 9C2AE8 802401D8 3C018024 */  lui       $at, %hi(D_80242AA0)
 /* 9C2AEC 802401DC 00220821 */  addu      $at, $at, $v0
-/* 9C2AF0 802401E0 8C222AA0 */  lw        $v0, 0x2aa0($at)
+/* 9C2AF0 802401E0 8C222AA0 */  lw        $v0, %lo(D_80242AA0)($at)
 /* 9C2AF4 802401E4 00400008 */  jr        $v0
 /* 9C2AF8 802401E8 00000000 */   nop      
 /* 9C2AFC 802401EC 8E22003C */  lw        $v0, 0x3c($s1)

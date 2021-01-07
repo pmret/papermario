@@ -1,12 +1,12 @@
 #include "dgb_16.h"
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_16/C52540", func_80240000_C52540);
+#include "world/common/UnkNpcAIFunc6.inc.c"
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_16/C52540", func_8024006C_C525AC);
+#include "world/common/UnkNpcAIFunc7.inc.c"
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_16/C52540", func_802400DC_C5261C);
+#include "world/common/UnkNpcAIFunc8.inc.c"
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_16/C52540", func_802401B4_C526F4);
+#include "world/common/UnkNpcAIFunc5.inc.c"
 
 INCLUDE_ASM(s32, "world/area_dgb/dgb_16/C52540", func_80240208_C52748);
 

@@ -3,8 +3,8 @@
 
 glabel func_800549F8
 /* 2FDF8 800549F8 00A0582D */  daddu     $t3, $a1, $zero
-/* 2FDFC 800549FC 3C03800A */  lui       $v1, 0x800a
-/* 2FE00 80054A00 8C63A5C0 */  lw        $v1, -0x5a40($v1)
+/* 2FDFC 800549FC 3C03800A */  lui       $v1, %hi(D_8009A5C0)
+/* 2FE00 80054A00 8C63A5C0 */  lw        $v1, %lo(D_8009A5C0)($v1)
 /* 2FE04 80054A04 93AA0013 */  lbu       $t2, 0x13($sp)
 /* 2FE08 80054A08 9162000E */  lbu       $v0, 0xe($t3)
 /* 2FE0C 80054A0C 8C690004 */  lw        $t1, 4($v1)

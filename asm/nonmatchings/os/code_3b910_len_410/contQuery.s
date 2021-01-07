@@ -14,9 +14,9 @@ glabel contQuery
 /* 3BC94 80060894 0000282D */  daddu     $a1, $zero, $zero
 /* 3BC98 80060898 0C0195BC */  jal       osRecvMesg
 /* 3BC9C 8006089C 24060001 */   addiu    $a2, $zero, 1
-/* 3BCA0 800608A0 3C04800B */  lui       $a0, 0x800b
+/* 3BCA0 800608A0 3C04800B */  lui       $a0, %hi(D_800B1B7C)
 /* 3BCA4 800608A4 0C018660 */  jal       osContGetQuery
-/* 3BCA8 800608A8 24841B7C */   addiu    $a0, $a0, 0x1b7c
+/* 3BCA8 800608A8 24841B7C */   addiu    $a0, $a0, %lo(D_800B1B7C)
 /* 3BCAC 800608AC 0000102D */  daddu     $v0, $zero, $zero
 .L800608B0:
 /* 3BCB0 800608B0 8FBF0014 */  lw        $ra, 0x14($sp)

@@ -69,9 +69,9 @@ glabel render_shadows
 .L801101BC:
 /* A68BC 801101BC 86040008 */  lh        $a0, 8($s0)
 /* A68C0 801101C0 92050005 */  lbu       $a1, 5($s0)
-/* A68C4 801101C4 3C068011 */  lui       $a2, 0x8011
+/* A68C4 801101C4 3C068011 */  lui       $a2, %hi(D_8010FE68)
 /* A68C8 801101C8 0C048BD9 */  jal       func_80122F64
-/* A68CC 801101CC 24C6FE68 */   addiu    $a2, $a2, -0x198
+/* A68CC 801101CC 24C6FE68 */   addiu    $a2, $a2, %lo(D_8010FE68)
 /* A68D0 801101D0 8E07000C */  lw        $a3, 0xc($s0)
 /* A68D4 801101D4 14E00006 */  bnez      $a3, .L801101F0
 /* A68D8 801101D8 00000000 */   nop      

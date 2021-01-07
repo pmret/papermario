@@ -69,9 +69,9 @@ glabel func_802421CC_A04A0C
 /* A04B04 802422C4 2C620010 */  sltiu     $v0, $v1, 0x10
 /* A04B08 802422C8 1040004A */  beqz      $v0, .L802423F4
 /* A04B0C 802422CC 00031080 */   sll      $v0, $v1, 2
-/* A04B10 802422D0 3C018024 */  lui       $at, 0x8024
+/* A04B10 802422D0 3C018024 */  lui       $at, %hi(D_80244678)
 /* A04B14 802422D4 00220821 */  addu      $at, $at, $v0
-/* A04B18 802422D8 8C224678 */  lw        $v0, 0x4678($at)
+/* A04B18 802422D8 8C224678 */  lw        $v0, %lo(D_80244678)($at)
 /* A04B1C 802422DC 00400008 */  jr        $v0
 /* A04B20 802422E0 00000000 */   nop      
 /* A04B24 802422E4 0260202D */  daddu     $a0, $s3, $zero
@@ -88,7 +88,7 @@ glabel func_802421CC_A04A0C
 /* A04B50 80242310 0000102D */   daddu    $v0, $zero, $zero
 /* A04B54 80242314 0260202D */  daddu     $a0, $s3, $zero
 /* A04B58 80242318 0200282D */  daddu     $a1, $s0, $zero
-/* A04B5C 8024231C 0C09045B */  jal       func_8024116C_A039AC
+/* A04B5C 8024231C 0C09045B */  jal       nok_14_UnkNpcAIFunc1
 /* A04B60 80242320 0280302D */   daddu    $a2, $s4, $zero
 /* A04B64 80242324 0260202D */  daddu     $a0, $s3, $zero
 /* A04B68 80242328 0200282D */  daddu     $a1, $s0, $zero
@@ -100,7 +100,7 @@ glabel func_802421CC_A04A0C
 /* A04B80 80242340 0000102D */   daddu    $v0, $zero, $zero
 /* A04B84 80242344 0260202D */  daddu     $a0, $s3, $zero
 /* A04B88 80242348 0200282D */  daddu     $a1, $s0, $zero
-/* A04B8C 8024234C 0C09055C */  jal       func_80241570_A03DB0
+/* A04B8C 8024234C 0C09055C */  jal       nok_14_UnkNpcAIFunc2
 /* A04B90 80242350 0280302D */   daddu    $a2, $s4, $zero
 /* A04B94 80242354 8E630070 */  lw        $v1, 0x70($s3)
 /* A04B98 80242358 2402000B */  addiu     $v0, $zero, 0xb
@@ -140,7 +140,7 @@ glabel func_802421CC_A04A0C
 /* A04C20 802423E0 0000102D */   daddu    $v0, $zero, $zero
 /* A04C24 802423E4 0260202D */  daddu     $a0, $s3, $zero
 /* A04C28 802423E8 0200282D */  daddu     $a1, $s0, $zero
-/* A04C2C 802423EC 0C090862 */  jal       func_80242188_A049C8
+/* A04C2C 802423EC 0C090862 */  jal       nok_14_UnkDurationCheck
 /* A04C30 802423F0 0280302D */   daddu    $a2, $s4, $zero
 .L802423F4:
 /* A04C34 802423F4 0000102D */  daddu     $v0, $zero, $zero

@@ -17,9 +17,9 @@ glabel play_sound_at_position
 /* E048C 80149D8C AFB00020 */   sw       $s0, 0x20($sp)
 /* E0490 80149D90 3242FFFF */  andi      $v0, $s2, 0xffff
 /* E0494 80149D94 00021080 */  sll       $v0, $v0, 2
-/* E0498 80149D98 3C048015 */  lui       $a0, 0x8015
+/* E0498 80149D98 3C048015 */  lui       $a0, %hi(D_8014F2D0)
 /* E049C 80149D9C 00822021 */  addu      $a0, $a0, $v0
-/* E04A0 80149DA0 8C84F2D0 */  lw        $a0, -0xd30($a0)
+/* E04A0 80149DA0 8C84F2D0 */  lw        $a0, %lo(D_8014F2D0)($a0)
 /* E04A4 80149DA4 0C05265D */  jal       func_80149974
 /* E04A8 80149DA8 E7A00010 */   swc1     $f0, 0x10($sp)
 /* E04AC 80149DAC 0805277B */  j         .L80149DEC

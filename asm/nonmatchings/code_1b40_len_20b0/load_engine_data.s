@@ -24,24 +24,24 @@ glabel load_engine_data
 /* 2228 80026E28 248479B0 */  addiu     $a0, $a0, 0x79b0
 /* 222C 80026E2C 3C050010 */  lui       $a1, 0x10
 /* 2230 80026E30 24A5EE30 */  addiu     $a1, $a1, -0x11d0
-/* 2234 80026E34 3C06802C */  lui       $a2, %hi(D_802C3000)
-/* 2238 80026E38 24C63000 */  addiu     $a2, $a2, %lo(D_802C3000)
+/* 2234 80026E34 3C06802C */  lui       $a2, %hi(sort_scripts)
+/* 2238 80026E38 24C63000 */  addiu     $a2, $a2, %lo(sort_scripts)
 /* 223C 80026E3C 0C00A5CF */  jal       dma_copy
 /* 2240 80026E40 00000000 */   nop      
 /* 2244 80026E44 3C040010 */  lui       $a0, 0x10
 /* 2248 80026E48 24842610 */  addiu     $a0, $a0, 0x2610
 /* 224C 80026E4C 3C050011 */  lui       $a1, 0x11
 /* 2250 80026E50 24A5CC10 */  addiu     $a1, $a1, -0x33f0
-/* 2254 80026E54 3C06802E */  lui       $a2, %hi(D_802E0D90)
-/* 2258 80026E58 24C60D90 */  addiu     $a2, $a2, %lo(D_802E0D90)
+/* 2254 80026E54 3C06802E */  lui       $a2, %hi(create_shadow_callback)
+/* 2258 80026E58 24C60D90 */  addiu     $a2, $a2, %lo(create_shadow_callback)
 /* 225C 80026E5C 0C00A5CF */  jal       dma_copy
 /* 2260 80026E60 00000000 */   nop      
 /* 2264 80026E64 3C04000A */  lui       $a0, 0xa
 /* 2268 80026E68 24845DD0 */  addiu     $a0, $a0, 0x5dd0
 /* 226C 80026E6C 3C05000E */  lui       $a1, 0xe
 /* 2270 80026E70 24A579B0 */  addiu     $a1, $a1, 0x79b0
-/* 2274 80026E74 3C068011 */  lui       $a2, %hi(D_8010F6D0)
-/* 2278 80026E78 24C6F6D0 */  addiu     $a2, $a2, %lo(D_8010F6D0)
+/* 2274 80026E74 3C068011 */  lui       $a2, %hi(update_entities)
+/* 2278 80026E78 24C6F6D0 */  addiu     $a2, $a2, %lo(update_entities)
 /* 227C 80026E7C 0C00A5CF */  jal       dma_copy
 /* 2280 80026E80 00000000 */   nop      
 /* 2284 80026E84 3C040011 */  lui       $a0, 0x11

@@ -58,8 +58,8 @@ glabel BoostAttack
 /* 19E680 8026FDA0 0000202D */   daddu    $a0, $zero, $zero
 /* 19E684 8026FDA4 24020001 */  addiu     $v0, $zero, 1
 .L8026FDA8:
-/* 19E688 8026FDA8 3C01802A */  lui       $at, 0x802a
-/* 19E68C 8026FDAC A022FBD4 */  sb        $v0, -0x42c($at)
+/* 19E688 8026FDA8 3C01802A */  lui       $at, %hi(D_8029FBD4)
+/* 19E68C 8026FDAC A022FBD4 */  sb        $v0, %lo(D_8029FBD4)($at)
 /* 19E690 8026FDB0 24020005 */  addiu     $v0, $zero, 5
 /* 19E694 8026FDB4 AE42007C */  sw        $v0, 0x7c($s2)
 /* 19E698 8026FDB8 24020001 */  addiu     $v0, $zero, 1
@@ -201,9 +201,9 @@ glabel BoostAttack
 /* 19E89C 8026FFBC 10400063 */  beqz      $v0, .L8027014C
 /* 19E8A0 8026FFC0 46020580 */   add.s    $f22, $f0, $f2
 /* 19E8A4 8026FFC4 00031080 */  sll       $v0, $v1, 2
-/* 19E8A8 8026FFC8 3C01802A */  lui       $at, 0x802a
+/* 19E8A8 8026FFC8 3C01802A */  lui       $at, %hi(D_8029D808)
 /* 19E8AC 8026FFCC 00220821 */  addu      $at, $at, $v0
-/* 19E8B0 8026FFD0 8C22D808 */  lw        $v0, -0x27f8($at)
+/* 19E8B0 8026FFD0 8C22D808 */  lw        $v0, %lo(D_8029D808)($at)
 /* 19E8B4 8026FFD4 00400008 */  jr        $v0
 /* 19E8B8 8026FFD8 00000000 */   nop      
 /* 19E8BC 8026FFDC 8E42007C */  lw        $v0, 0x7c($s2)
@@ -298,8 +298,8 @@ glabel BoostAttack
 /* 19EA14 80270134 14400006 */  bnez      $v0, .L80270150
 /* 19EA18 80270138 0000102D */   daddu    $v0, $zero, $zero
 .L8027013C:
-/* 19EA1C 8027013C 3C01802A */  lui       $at, 0x802a
-/* 19EA20 80270140 A020FBD4 */  sb        $zero, -0x42c($at)
+/* 19EA1C 8027013C 3C01802A */  lui       $at, %hi(D_8029FBD4)
+/* 19EA20 80270140 A020FBD4 */  sb        $zero, %lo(D_8029FBD4)($at)
 /* 19EA24 80270144 0809C054 */  j         .L80270150
 /* 19EA28 80270148 24020002 */   addiu    $v0, $zero, 2
 .L8027014C:

@@ -1,26 +1,34 @@
 #include "mac_01.h"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80240F50_8017D0);
+#include "world/common/UnkMusicFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80241080_801900);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802411D8_801A58);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80241480_801D00);
+#define NAMESPACE dup_mac_01
+#include "world/common/UnkNpcAIFunc1.inc.c"
+#define NAMESPACE mac_01
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80241540_801DC0);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802416FC_801F7C);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802417B0_802030);
+#define NAMESPACE dup_mac_01
+#include "world/common/NpcJumpFunc2.inc.c"
+#define NAMESPACE mac_01
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80241824_8020A4);
+#define NAMESPACE dup_mac_01
+#include "world/common/NpcJumpFunc.inc.c"
+#define NAMESPACE mac_01
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_8024189C_80211C);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802419CC_80224C);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80241AEC_80236C);
+#define NAMESPACE dup_mac_01
+#include "world/common/UnkNpcDurationFlagFunc.inc.c"
+#define NAMESPACE mac_01
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80241B54_8023D4);
 
@@ -124,7 +132,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80243D60_8045E0);
 
 #include "world/common/SetManyVars.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80243EEC_80476C);
+#include "world/common/UnkYawFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80244078_8048F8);
 

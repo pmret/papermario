@@ -18,11 +18,11 @@ glabel load_data_for_models
 /* B147C 8011AD7C 0C045709 */  jal       load_model_textures
 /* B1480 8011AD80 0240302D */   daddu    $a2, $s2, $zero
 .L8011AD84:
-/* B1484 8011AD84 3C028015 */  lui       $v0, 0x8015
-/* B1488 8011AD88 8C4212FC */  lw        $v0, 0x12fc($v0)
+/* B1484 8011AD84 3C028015 */  lui       $v0, %hi(D_801512FC)
+/* B1488 8011AD88 8C4212FC */  lw        $v0, %lo(D_801512FC)($v0)
 /* B148C 8011AD8C AC500000 */  sw        $s0, ($v0)
-/* B1490 8011AD90 3C018015 */  lui       $at, 0x8015
-/* B1494 8011AD94 AC203224 */  sw        $zero, 0x3224($at)
+/* B1490 8011AD90 3C018015 */  lui       $at, %hi(D_80153224)
+/* B1494 8011AD94 AC203224 */  sw        $zero, %lo(D_80153224)($at)
 /* B1498 8011AD98 12000005 */  beqz      $s0, .L8011ADB0
 /* B149C 8011AD9C 0200202D */   daddu    $a0, $s0, $zero
 /* B14A0 8011ADA0 0000282D */  daddu     $a1, $zero, $zero

@@ -5,8 +5,8 @@ glabel func_80240350_A54CA0
 /* A54CA0 80240350 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* A54CA4 80240354 AFBF0010 */  sw        $ra, 0x10($sp)
 /* A54CA8 80240358 8C82000C */  lw        $v0, 0xc($a0)
-/* A54CAC 8024035C 3C068016 */  lui       $a2, 0x8016
-/* A54CB0 80240360 84C6A556 */  lh        $a2, -0x5aaa($a2)
+/* A54CAC 8024035C 3C068016 */  lui       $a2, %hi(gCollisionStatus+0x6)
+/* A54CB0 80240360 84C6A556 */  lh        $a2, %lo(gCollisionStatus+0x6)($a2)
 /* A54CB4 80240364 0C0B2026 */  jal       set_variable
 /* A54CB8 80240368 8C450000 */   lw       $a1, ($v0)
 /* A54CBC 8024036C 8FBF0010 */  lw        $ra, 0x10($sp)

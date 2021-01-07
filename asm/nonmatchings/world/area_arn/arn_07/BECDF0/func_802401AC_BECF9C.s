@@ -13,9 +13,9 @@ glabel func_802401AC_BECF9C
 /* BECFBC 802401CC 2C620005 */  sltiu     $v0, $v1, 5
 /* BECFC0 802401D0 1040008A */  beqz      $v0, .L802403FC
 /* BECFC4 802401D4 00031080 */   sll      $v0, $v1, 2
-/* BECFC8 802401D8 3C018024 */  lui       $at, 0x8024
+/* BECFC8 802401D8 3C018024 */  lui       $at, %hi(D_80247900)
 /* BECFCC 802401DC 00220821 */  addu      $at, $at, $v0
-/* BECFD0 802401E0 8C227900 */  lw        $v0, 0x7900($at)
+/* BECFD0 802401E0 8C227900 */  lw        $v0, %lo(D_80247900)($at)
 /* BECFD4 802401E4 00400008 */  jr        $v0
 /* BECFD8 802401E8 00000000 */   nop      
 /* BECFDC 802401EC 8E22003C */  lw        $v0, 0x3c($s1)

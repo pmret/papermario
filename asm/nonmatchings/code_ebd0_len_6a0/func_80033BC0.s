@@ -20,8 +20,8 @@ glabel func_80033BC0
 /* EFFC 80033BFC 00021600 */  sll       $v0, $v0, 0x18
 /* F000 80033C00 14400091 */  bnez      $v0, .L80033E48
 /* F004 80033C04 24050003 */   addiu    $a1, $zero, 3
-/* F008 80033C08 3C048007 */  lui       $a0, 0x8007
-/* F00C 80033C0C 248478A0 */  addiu     $a0, $a0, 0x78a0
+/* F008 80033C08 3C048007 */  lui       $a0, %hi(D_800778A0)
+/* F00C 80033C0C 248478A0 */  addiu     $a0, $a0, %lo(D_800778A0)
 /* F010 80033C10 2402FFFF */  addiu     $v0, $zero, -1
 /* F014 80033C14 0C017CBC */  jal       nuGfxSetCfb
 /* F018 80033C18 A0C20000 */   sb       $v0, ($a2)
@@ -43,9 +43,9 @@ glabel func_80033BC0
 /* F058 80033C58 84830086 */  lh        $v1, 0x86($a0)
 /* F05C 80033C5C 8482008C */  lh        $v0, 0x8c($a0)
 /* F060 80033C60 00031900 */  sll       $v1, $v1, 4
-/* F064 80033C64 3C018009 */  lui       $at, 0x8009
+/* F064 80033C64 3C018009 */  lui       $at, %hi(D_800934F4)
 /* F068 80033C68 00230821 */  addu      $at, $at, $v1
-/* F06C 80033C6C 8C2334F4 */  lw        $v1, 0x34f4($at)
+/* F06C 80033C6C 8C2334F4 */  lw        $v1, %lo(D_800934F4)($at)
 /* F070 80033C70 00021140 */  sll       $v0, $v0, 5
 /* F074 80033C74 0C0902AA */  jal       func_80240AA8
 /* F078 80033C78 00628821 */   addu     $s1, $v1, $v0
@@ -96,8 +96,8 @@ glabel func_80033BC0
 /* F12C 80033D2C 00000000 */   nop      
 /* F130 80033D30 0C00EC6C */  jal       func_8003B1B0
 /* F134 80033D34 00000000 */   nop      
-/* F138 80033D38 3C02800A */  lui       $v0, 0x800a
-/* F13C 80033D3C 8C420904 */  lw        $v0, 0x904($v0)
+/* F138 80033D38 3C02800A */  lui       $v0, %hi(D_800A0904)
+/* F13C 80033D3C 8C420904 */  lw        $v0, %lo(D_800A0904)($v0)
 /* F140 80033D40 24040011 */  addiu     $a0, $zero, 0x11
 /* F144 80033D44 0800CF90 */  j         .L80033E40
 /* F148 80033D48 AE620004 */   sw       $v0, 4($s3)
@@ -108,13 +108,13 @@ glabel func_80033BC0
 /* F158 80033D58 80440012 */   lb       $a0, 0x12($v0)
 /* F15C 80033D5C 0C0169B0 */  jal       load_world_script_api
 /* F160 80033D60 00000000 */   nop      
-/* F164 80033D64 3C04800E */  lui       $a0, 0x800e
-/* F168 80033D68 24849230 */  addiu     $a0, $a0, -0x6dd0
+/* F164 80033D64 3C04800E */  lui       $a0, %hi(D_800D9230)
+/* F168 80033D68 24849230 */  addiu     $a0, $a0, %lo(D_800D9230)
 /* F16C 80033D6C 0C016B3A */  jal       load_asset_by_name
 /* F170 80033D70 27A50010 */   addiu    $a1, $sp, 0x10
 /* F174 80033D74 0040802D */  daddu     $s0, $v0, $zero
-/* F178 80033D78 3C058021 */  lui       $a1, 0x8021
-/* F17C 80033D7C 24A50000 */  addiu     $a1, $a1, 0
+/* F178 80033D78 3C058021 */  lui       $a1, %hi(D_80210000)
+/* F17C 80033D7C 24A50000 */  addiu     $a1, $a1, %lo(D_80210000)
 /* F180 80033D80 0C01BB7C */  jal       decode_yay0
 /* F184 80033D84 0200202D */   daddu    $a0, $s0, $zero
 /* F188 80033D88 0C00AB1E */  jal       general_heap_free
@@ -145,8 +145,8 @@ glabel func_80033BC0
 /* F1E4 80033DE4 0C05179C */  jal       set_background_size
 /* F1E8 80033DE8 24070014 */   addiu    $a3, $zero, 0x14
 .L80033DEC:
-/* F1EC 80033DEC 3C04800B */  lui       $a0, 0x800b
-/* F1F0 80033DF0 24840CF0 */  addiu     $a0, $a0, 0xcf0
+/* F1EC 80033DEC 3C04800B */  lui       $a0, %hi(D_800B0CF0)
+/* F1F0 80033DF0 24840CF0 */  addiu     $a0, $a0, %lo(D_800B0CF0)
 /* F1F4 80033DF4 0C016B74 */  jal       get_asset_offset
 /* F1F8 80033DF8 27A50010 */   addiu    $a1, $sp, 0x10
 /* F1FC 80033DFC 8E440000 */  lw        $a0, ($s2)
@@ -157,10 +157,10 @@ glabel func_80033BC0
 /* F210 80033E10 00000000 */   nop      
 /* F214 80033E14 0C00EC6C */  jal       func_8003B1B0
 /* F218 80033E18 00000000 */   nop      
-/* F21C 80033E1C 3C02800A */  lui       $v0, 0x800a
-/* F220 80033E20 8C420904 */  lw        $v0, 0x904($v0)
-/* F224 80033E24 3C04800A */  lui       $a0, 0x800a
-/* F228 80033E28 8C840908 */  lw        $a0, 0x908($a0)
+/* F21C 80033E1C 3C02800A */  lui       $v0, %hi(D_800A0904)
+/* F220 80033E20 8C420904 */  lw        $v0, %lo(D_800A0904)($v0)
+/* F224 80033E24 3C04800A */  lui       $a0, %hi(D_800A0908)
+/* F228 80033E28 8C840908 */  lw        $a0, %lo(D_800A0908)($a0)
 /* F22C 80033E2C 10800003 */  beqz      $a0, .L80033E3C
 /* F230 80033E30 AE620004 */   sw       $v0, 4($s3)
 /* F234 80033E34 0C009C22 */  jal       func_80027088

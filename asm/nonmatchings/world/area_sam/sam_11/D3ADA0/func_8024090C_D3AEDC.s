@@ -90,8 +90,8 @@ glabel func_8024090C_D3AEDC
 /* D3B028 80240A58 0040802D */   daddu    $s0, $v0, $zero
 /* D3B02C 80240A5C 0040282D */  daddu     $a1, $v0, $zero
 /* D3B030 80240A60 0000182D */  daddu     $v1, $zero, $zero
-/* D3B034 80240A64 3C068024 */  lui       $a2, 0x8024
-/* D3B038 80240A68 24C6501C */  addiu     $a2, $a2, 0x501c
+/* D3B034 80240A64 3C068024 */  lui       $a2, %hi(D_8024501C)
+/* D3B038 80240A68 24C6501C */  addiu     $a2, $a2, %lo(D_8024501C)
 /* D3B03C 80240A6C 00C0202D */  daddu     $a0, $a2, $zero
 .L80240A70:
 /* D3B040 80240A70 8C820000 */  lw        $v0, ($a0)

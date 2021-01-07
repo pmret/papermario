@@ -9,8 +9,8 @@ glabel update_enemy_change_turn
 /* 175B9C 802472BC AFBF0018 */  sw        $ra, 0x18($sp)
 /* 175BA0 802472C0 AFB00010 */  sw        $s0, 0x10($sp)
 /* 175BA4 802472C4 8E2A00D8 */  lw        $t2, 0xd8($s1)
-/* 175BA8 802472C8 3C03800E */  lui       $v1, 0x800e
-/* 175BAC 802472CC 8C63C4DC */  lw        $v1, -0x3b24($v1)
+/* 175BA8 802472C8 3C03800E */  lui       $v1, %hi(gBattleStatus+0x46C)
+/* 175BAC 802472CC 8C63C4DC */  lw        $v1, %lo(gBattleStatus+0x46C)($v1)
 /* 175BB0 802472D0 8E2700DC */  lw        $a3, 0xdc($s1)
 /* 175BB4 802472D4 0460009F */  bltz      $v1, .L80247554
 /* 175BB8 802472D8 28620002 */   slti     $v0, $v1, 2
@@ -102,8 +102,8 @@ glabel update_enemy_change_turn
 .L80247400:
 /* 175CE0 80247400 10600005 */  beqz      $v1, .L80247418
 /* 175CE4 80247404 3C03FFFB */   lui      $v1, 0xfffb
-/* 175CE8 80247408 3C01800E */  lui       $at, 0x800e
-/* 175CEC 8024740C AC20C4DC */  sw        $zero, -0x3b24($at)
+/* 175CE8 80247408 3C01800E */  lui       $at, %hi(gBattleStatus+0x46C)
+/* 175CEC 8024740C AC20C4DC */  sw        $zero, %lo(gBattleStatus+0x46C)($at)
 /* 175CF0 80247410 08091D55 */  j         .L80247554
 /* 175CF4 80247414 00000000 */   nop      
 .L80247418:
@@ -142,8 +142,8 @@ glabel update_enemy_change_turn
 /* 175D74 80247494 ACA20004 */  sw        $v0, 4($a1)
 /* 175D78 80247498 92020134 */  lbu       $v0, 0x134($s0)
 /* 175D7C 8024749C 8E0301CC */  lw        $v1, 0x1cc($s0)
-/* 175D80 802474A0 3C01802A */  lui       $at, 0x802a
-/* 175D84 802474A4 A022F244 */  sb        $v0, -0xdbc($at)
+/* 175D80 802474A0 3C01802A */  lui       $at, %hi(D_8029F244)
+/* 175D84 802474A4 A022F244 */  sb        $v0, %lo(D_8029F244)($at)
 /* 175D88 802474A8 1060000A */  beqz      $v1, .L802474D4
 /* 175D8C 802474AC 2405000A */   addiu    $a1, $zero, 0xa
 /* 175D90 802474B0 A22B01A7 */  sb        $t3, 0x1a7($s1)
@@ -157,8 +157,8 @@ glabel update_enemy_change_turn
 /* 175DB0 802474D0 AC430148 */  sw        $v1, 0x148($v0)
 .L802474D4:
 /* 175DB4 802474D4 24020002 */  addiu     $v0, $zero, 2
-/* 175DB8 802474D8 3C01800E */  lui       $at, 0x800e
-/* 175DBC 802474DC AC22C4DC */  sw        $v0, -0x3b24($at)
+/* 175DB8 802474D8 3C01800E */  lui       $at, %hi(gBattleStatus+0x46C)
+/* 175DBC 802474DC AC22C4DC */  sw        $v0, %lo(gBattleStatus+0x46C)($at)
 /* 175DC0 802474E0 08091D55 */  j         .L80247554
 /* 175DC4 802474E4 00000000 */   nop      
 .L802474E8:
@@ -171,8 +171,8 @@ glabel update_enemy_change_turn
 /* 175DE0 80247500 12000012 */  beqz      $s0, .L8024754C
 /* 175DE4 80247504 24040014 */   addiu    $a0, $zero, 0x14
 /* 175DE8 80247508 92030134 */  lbu       $v1, 0x134($s0)
-/* 175DEC 8024750C 3C02802A */  lui       $v0, 0x802a
-/* 175DF0 80247510 9042F244 */  lbu       $v0, -0xdbc($v0)
+/* 175DEC 8024750C 3C02802A */  lui       $v0, %hi(D_8029F244)
+/* 175DF0 80247510 9042F244 */  lbu       $v0, %lo(D_8029F244)($v0)
 /* 175DF4 80247514 1462000D */  bne       $v1, $v0, .L8024754C
 /* 175DF8 80247518 00000000 */   nop      
 /* 175DFC 8024751C 8E0201CC */  lw        $v0, 0x1cc($s0)

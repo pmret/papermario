@@ -24,8 +24,8 @@ glabel func_80050970
 /* 2BDBC 800509BC 12200063 */  beqz      $s1, .L80050B4C
 /* 2BDC0 800509C0 02E0A82D */   daddu    $s5, $s7, $zero
 /* 2BDC4 800509C4 241E0001 */  addiu     $fp, $zero, 1
-/* 2BDC8 800509C8 3C168008 */  lui       $s6, 0x8008
-/* 2BDCC 800509CC 26D68554 */  addiu     $s6, $s6, -0x7aac
+/* 2BDC8 800509C8 3C168008 */  lui       $s6, %hi(D_80078554)
+/* 2BDCC 800509CC 26D68554 */  addiu     $s6, $s6, %lo(D_80078554)
 /* 2BDD0 800509D0 2414025C */  addiu     $s4, $zero, 0x25c
 .L800509D4:
 /* 2BDD4 800509D4 02349021 */  addu      $s2, $s1, $s4

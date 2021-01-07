@@ -28,8 +28,8 @@ glabel func_8011E438
 .L8011E48C:
 /* B4B8C 8011E48C 0C00AB4B */  jal       heap_free
 /* B4B90 8011E490 0200202D */   daddu    $a0, $s0, $zero
-/* B4B94 8011E494 3C038015 */  lui       $v1, 0x8015
-/* B4B98 8011E498 246312D4 */  addiu     $v1, $v1, 0x12d4
+/* B4B94 8011E494 3C038015 */  lui       $v1, %hi(D_801512D4)
+/* B4B98 8011E498 246312D4 */  addiu     $v1, $v1, %lo(D_801512D4)
 /* B4B9C 8011E49C 8C620000 */  lw        $v0, ($v1)
 /* B4BA0 8011E4A0 2442FFFF */  addiu     $v0, $v0, -1
 /* B4BA4 8011E4A4 AC620000 */  sw        $v0, ($v1)

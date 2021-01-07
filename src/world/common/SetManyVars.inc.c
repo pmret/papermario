@@ -1,6 +1,7 @@
 #include "common.h"
+#include "map.h"
 
-static ApiStatus SetManyVars(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(SetManyVars)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     script->varTable[2] = get_variable(script, *args++);

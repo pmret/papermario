@@ -1,6 +1,7 @@
 #include "common.h"
+#include "map.h"
 
-static ApiStatus CheckItemFlags40(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(CheckItemFlags40)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 itemIndex = get_variable(script, *args++);
 

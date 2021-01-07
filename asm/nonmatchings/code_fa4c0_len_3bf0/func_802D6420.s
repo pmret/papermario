@@ -9,8 +9,8 @@ glabel func_802D6420
 /* FADE0 802D6430 3C138011 */  lui       $s3, %hi(gPlayerData)
 /* FADE4 802D6434 2673F290 */  addiu     $s3, $s3, %lo(gPlayerData)
 /* FADE8 802D6438 AFB10014 */  sw        $s1, 0x14($sp)
-/* FADEC 802D643C 3C11802E */  lui       $s1, 0x802e
-/* FADF0 802D6440 2631B830 */  addiu     $s1, $s1, -0x47d0
+/* FADEC 802D643C 3C11802E */  lui       $s1, %hi(D_802DB830)
+/* FADF0 802D6440 2631B830 */  addiu     $s1, $s1, %lo(D_802DB830)
 /* FADF4 802D6444 AFBF0020 */  sw        $ra, 0x20($sp)
 /* FADF8 802D6448 AFB20018 */  sw        $s2, 0x18($sp)
 /* FADFC 802D644C 8E12014C */  lw        $s2, 0x14c($s0)
@@ -37,8 +37,8 @@ glabel func_802D6420
 /* FAE48 802D6498 0120402D */  daddu     $t0, $t1, $zero
 /* FAE4C 802D649C 3C0C8008 */  lui       $t4, %hi(gItemTable)
 /* FAE50 802D64A0 258C78E0 */  addiu     $t4, $t4, %lo(gItemTable)
-/* FAE54 802D64A4 3C0B8009 */  lui       $t3, 0x8009
-/* FAE58 802D64A8 256BA680 */  addiu     $t3, $t3, -0x5980
+/* FAE54 802D64A4 3C0B8009 */  lui       $t3, %hi(D_8008A680)
+/* FAE58 802D64A8 256BA680 */  addiu     $t3, $t3, %lo(D_8008A680)
 /* FAE5C 802D64AC 240A0001 */  addiu     $t2, $zero, 1
 /* FAE60 802D64B0 0260382D */  daddu     $a3, $s3, $zero
 /* FAE64 802D64B4 3C03800A */  lui       $v1, %hi(D_8009A650)

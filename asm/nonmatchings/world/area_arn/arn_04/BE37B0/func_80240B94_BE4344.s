@@ -124,9 +124,9 @@ glabel func_80240B94_BE4344
 /* BE4508 80240D58 2C620064 */  sltiu     $v0, $v1, 0x64
 /* BE450C 80240D5C 10400042 */  beqz      $v0, .L80240E68
 /* BE4510 80240D60 00031080 */   sll      $v0, $v1, 2
-/* BE4514 80240D64 3C018024 */  lui       $at, 0x8024
+/* BE4514 80240D64 3C018024 */  lui       $at, %hi(D_80244140)
 /* BE4518 80240D68 00220821 */  addu      $at, $at, $v0
-/* BE451C 80240D6C 8C224140 */  lw        $v0, 0x4140($at)
+/* BE451C 80240D6C 8C224140 */  lw        $v0, %lo(D_80244140)($at)
 /* BE4520 80240D70 00400008 */  jr        $v0
 /* BE4524 80240D74 00000000 */   nop      
 /* BE4528 80240D78 0280202D */  daddu     $a0, $s4, $zero
@@ -141,7 +141,7 @@ glabel func_80240B94_BE4344
 /* BE454C 80240D9C 00000000 */   nop      
 /* BE4550 80240DA0 0280202D */  daddu     $a0, $s4, $zero
 /* BE4554 80240DA4 0260282D */  daddu     $a1, $s3, $zero
-/* BE4558 80240DA8 0C090100 */  jal       func_80240400_BE3BB0
+/* BE4558 80240DA8 0C090100 */  jal       arn_04_UnkNpcAIFunc1
 /* BE455C 80240DAC 02A0302D */   daddu    $a2, $s5, $zero
 /* BE4560 80240DB0 0280202D */  daddu     $a0, $s4, $zero
 /* BE4564 80240DB4 0260282D */  daddu     $a1, $s3, $zero
@@ -157,11 +157,11 @@ glabel func_80240B94_BE4344
 /* BE458C 80240DDC 00000000 */   nop      
 /* BE4590 80240DE0 0280202D */  daddu     $a0, $s4, $zero
 /* BE4594 80240DE4 0260282D */  daddu     $a1, $s3, $zero
-/* BE4598 80240DE8 0C0901CC */  jal       func_80240730_BE3EE0
+/* BE4598 80240DE8 0C0901CC */  jal       arn_04_NpcJumpFunc2
 /* BE459C 80240DEC 02A0302D */   daddu    $a2, $s5, $zero
 /* BE45A0 80240DF0 0280202D */  daddu     $a0, $s4, $zero
 /* BE45A4 80240DF4 0260282D */  daddu     $a1, $s3, $zero
-/* BE45A8 80240DF8 0C0901E9 */  jal       func_802407A4_BE3F54
+/* BE45A8 80240DF8 0C0901E9 */  jal       arn_04_NpcJumpFunc
 /* BE45AC 80240DFC 02A0302D */   daddu    $a2, $s5, $zero
 /* BE45B0 80240E00 0809039A */  j         .L80240E68
 /* BE45B4 80240E04 00000000 */   nop      
@@ -177,7 +177,7 @@ glabel func_80240B94_BE4344
 /* BE45DC 80240E2C 00000000 */   nop      
 /* BE45E0 80240E30 0280202D */  daddu     $a0, $s4, $zero
 /* BE45E4 80240E34 0260282D */  daddu     $a1, $s3, $zero
-/* BE45E8 80240E38 0C09029B */  jal       func_80240A6C_BE421C
+/* BE45E8 80240E38 0C09029B */  jal       arn_04_UnkNpcDurationFlagFunc
 /* BE45EC 80240E3C 02A0302D */   daddu    $a2, $s5, $zero
 /* BE45F0 80240E40 0809039A */  j         .L80240E68
 /* BE45F4 80240E44 00000000 */   nop      

@@ -30,22 +30,22 @@ glabel func_E003C244
 /* 34F760 E003C2A0 286C0006 */  slti      $t4, $v1, 6
 /* 34F764 E003C2A4 286B0005 */  slti      $t3, $v1, 5
 /* 34F768 E003C2A8 28CA0009 */  slti      $t2, $a2, 9
-/* 34F76C E003C2AC 3C02E004 */  lui       $v0, 0xe004
-/* 34F770 E003C2B0 2442CD1C */  addiu     $v0, $v0, -0x32e4
+/* 34F76C E003C2AC 3C02E004 */  lui       $v0, %hi(D_E003CD1C)
+/* 34F770 E003C2B0 2442CD1C */  addiu     $v0, $v0, %lo(D_E003CD1C)
 /* 34F774 E003C2B4 00061880 */  sll       $v1, $a2, 2
 /* 34F778 E003C2B8 00624821 */  addu      $t1, $v1, $v0
 /* 34F77C E003C2BC 29080029 */  slti      $t0, $t0, 0x29
-/* 34F780 E003C2C0 3C02E004 */  lui       $v0, 0xe004
-/* 34F784 E003C2C4 2442CCD0 */  addiu     $v0, $v0, -0x3330
+/* 34F780 E003C2C0 3C02E004 */  lui       $v0, %hi(D_E003CCD0)
+/* 34F784 E003C2C4 2442CCD0 */  addiu     $v0, $v0, %lo(D_E003CCD0)
 /* 34F788 E003C2C8 00C21821 */  addu      $v1, $a2, $v0
 /* 34F78C E003C2CC 24A50038 */  addiu     $a1, $a1, 0x38
 /* 34F790 E003C2D0 3C013FE8 */  lui       $at, 0x3fe8
 /* 34F794 E003C2D4 44818800 */  mtc1      $at, $f17
 /* 34F798 E003C2D8 44808000 */  mtc1      $zero, $f16
-/* 34F79C E003C2DC 3C01E004 */  lui       $at, 0xe004
-/* 34F7A0 E003C2E0 D432CD40 */  ldc1      $f18, -0x32c0($at)
-/* 34F7A4 E003C2E4 3C01E004 */  lui       $at, 0xe004
-/* 34F7A8 E003C2E8 D42ECD48 */  ldc1      $f14, -0x32b8($at)
+/* 34F79C E003C2DC 3C01E004 */  lui       $at, %hi(D_E003CD40)
+/* 34F7A0 E003C2E0 D432CD40 */  ldc1      $f18, %lo(D_E003CD40)($at)
+/* 34F7A4 E003C2E4 3C01E004 */  lui       $at, %hi(D_E003CD48)
+/* 34F7A8 E003C2E8 D42ECD48 */  ldc1      $f14, %lo(D_E003CD48)($at)
 .LE003C2EC:
 /* 34F7AC E003C2EC 15800013 */  bnez      $t4, .LE003C33C
 /* 34F7B0 E003C2F0 00000000 */   nop      
@@ -127,8 +127,8 @@ glabel func_E003C244
 /* 34F8D4 E003C414 1100000D */  beqz      $t0, .LE003C44C
 /* 34F8D8 E003C418 E4A0FFE0 */   swc1     $f0, -0x20($a1)
 /* 34F8DC E003C41C 90620000 */  lbu       $v0, ($v1)
-/* 34F8E0 E003C420 3C01E004 */  lui       $at, 0xe004
-/* 34F8E4 E003C424 D422CD50 */  ldc1      $f2, -0x32b0($at)
+/* 34F8E0 E003C420 3C01E004 */  lui       $at, %hi(D_E003CD50)
+/* 34F8E4 E003C424 D422CD50 */  ldc1      $f2, %lo(D_E003CD50)($at)
 /* 34F8E8 E003C428 44820000 */  mtc1      $v0, $f0
 /* 34F8EC E003C42C 00000000 */  nop       
 /* 34F8F0 E003C430 46800020 */  cvt.s.w   $f0, $f0

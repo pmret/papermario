@@ -5,19 +5,19 @@ glabel func_80240FB8_7EBCC8
 /* 7EBCC8 80240FB8 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 7EBCCC 80240FBC 10A0000B */  beqz      $a1, .L80240FEC
 /* 7EBCD0 80240FC0 AFBF0010 */   sw       $ra, 0x10($sp)
-/* 7EBCD4 80240FC4 3C038025 */  lui       $v1, 0x8025
-/* 7EBCD8 80240FC8 8C635B94 */  lw        $v1, 0x5b94($v1)
+/* 7EBCD4 80240FC4 3C038025 */  lui       $v1, %hi(D_80255B94)
+/* 7EBCD8 80240FC8 8C635B94 */  lw        $v1, %lo(D_80255B94)($v1)
 /* 7EBCDC 80240FCC 8C620000 */  lw        $v0, ($v1)
-/* 7EBCE0 80240FD0 3C048025 */  lui       $a0, 0x8025
-/* 7EBCE4 80240FD4 8C845B98 */  lw        $a0, 0x5b98($a0)
+/* 7EBCE0 80240FD0 3C048025 */  lui       $a0, %hi(D_80255B98)
+/* 7EBCE4 80240FD4 8C845B98 */  lw        $a0, %lo(D_80255B98)($a0)
 /* 7EBCE8 80240FD8 34420010 */  ori       $v0, $v0, 0x10
 /* 7EBCEC 80240FDC AC620000 */  sw        $v0, ($v1)
 /* 7EBCF0 80240FE0 8C820000 */  lw        $v0, ($a0)
 /* 7EBCF4 80240FE4 34420010 */  ori       $v0, $v0, 0x10
 /* 7EBCF8 80240FE8 AC820000 */  sw        $v0, ($a0)
 .L80240FEC:
-/* 7EBCFC 80240FEC 3C048025 */  lui       $a0, 0x8025
-/* 7EBD00 80240FF0 8C845B90 */  lw        $a0, 0x5b90($a0)
+/* 7EBCFC 80240FEC 3C048025 */  lui       $a0, %hi(D_80255B90)
+/* 7EBD00 80240FF0 8C845B90 */  lw        $a0, %lo(D_80255B90)($a0)
 /* 7EBD04 80240FF4 8C85000C */  lw        $a1, 0xc($a0)
 /* 7EBD08 80240FF8 8CA20018 */  lw        $v0, 0x18($a1)
 /* 7EBD0C 80240FFC 8CA30020 */  lw        $v1, 0x20($a1)
@@ -41,8 +41,8 @@ glabel func_80240FB8_7EBCC8
 .L80241044:
 /* 7EBD54 80241044 0C016914 */  jal       remove_effect
 /* 7EBD58 80241048 ACA00018 */   sw       $zero, 0x18($a1)
-/* 7EBD5C 8024104C 3C048025 */  lui       $a0, 0x8025
-/* 7EBD60 80241050 8C845B70 */  lw        $a0, 0x5b70($a0)
+/* 7EBD5C 8024104C 3C048025 */  lui       $a0, %hi(D_80255B70)
+/* 7EBD60 80241050 8C845B70 */  lw        $a0, %lo(D_80255B70)($a0)
 /* 7EBD64 80241054 0C048D70 */  jal       func_801235C0
 /* 7EBD68 80241058 00000000 */   nop      
 /* 7EBD6C 8024105C 24020002 */  addiu     $v0, $zero, 2

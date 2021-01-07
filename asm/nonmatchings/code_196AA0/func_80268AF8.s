@@ -2,16 +2,16 @@
 .set noreorder # don't insert nops after branches
 
 glabel func_80268AF8
-/* 1973D8 80268AF8 3C03802A */  lui       $v1, 0x802a
-/* 1973DC 80268AFC 8463FC2A */  lh        $v1, -0x3d6($v1)
+/* 1973D8 80268AF8 3C03802A */  lui       $v1, %hi(D_8029FC2A)
+/* 1973DC 80268AFC 8463FC2A */  lh        $v1, %lo(D_8029FC2A)($v1)
 /* 1973E0 80268B00 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 1973E4 80268B04 2C620018 */  sltiu     $v0, $v1, 0x18
 /* 1973E8 80268B08 10400061 */  beqz      $v0, .L80268C90
 /* 1973EC 80268B0C AFBF0010 */   sw       $ra, 0x10($sp)
 /* 1973F0 80268B10 00031080 */  sll       $v0, $v1, 2
-/* 1973F4 80268B14 3C01802A */  lui       $at, 0x802a
+/* 1973F4 80268B14 3C01802A */  lui       $at, %hi(D_8029D700)
 /* 1973F8 80268B18 00220821 */  addu      $at, $at, $v0
-/* 1973FC 80268B1C 8C22D700 */  lw        $v0, -0x2900($at)
+/* 1973FC 80268B1C 8C22D700 */  lw        $v0, %lo(D_8029D700)($at)
 /* 197400 80268B20 00400008 */  jr        $v0
 /* 197404 80268B24 00000000 */   nop      
 /* 197408 80268B28 0C0AA551 */  jal       func_802A9544

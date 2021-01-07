@@ -54,9 +54,9 @@ glabel CreatePushBlockGrid
 /* 7E4224 802833A4 0040982D */   daddu    $s3, $v0, $zero
 /* 7E4228 802833A8 00129080 */  sll       $s2, $s2, 2
 /* 7E422C 802833AC 0040802D */  daddu     $s0, $v0, $zero
-/* 7E4230 802833B0 3C01802E */  lui       $at, 0x802e
+/* 7E4230 802833B0 3C01802E */  lui       $at, %hi(D_802DBC88)
 /* 7E4234 802833B4 00320821 */  addu      $at, $at, $s2
-/* 7E4238 802833B8 AC30BC88 */  sw        $s0, -0x4378($at)
+/* 7E4238 802833B8 AC30BC88 */  sw        $s0, %lo(D_802DBC88)($at)
 /* 7E423C 802833BC 0C00AB0A */  jal       general_heap_malloc
 /* 7E4240 802833C0 0220202D */   daddu    $a0, $s1, $zero
 /* 7E4244 802833C4 1660000D */  bnez      $s3, .L802833FC

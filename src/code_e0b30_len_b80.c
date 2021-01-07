@@ -215,16 +215,57 @@ INCLUDE_ASM(s32, "code_e0b30_len_b80", func_8014AC94);
 
 INCLUDE_ASM(s32, "code_e0b30_len_b80", func_8014AD40);
 
-INCLUDE_ASM(s32, "code_e0b30_len_b80", func_8014ADA4);
+void func_8014ADA4(void) {
+    MusicPlayer* musicPlayer = &gMusicPlayers[0];
 
-INCLUDE_ASM(s32, "code_e0b30_len_b80", func_8014ADF8);
+    if (GAME_STATUS->demoState == 0) {
+        musicPlayer->flags |= 8;
+        _set_music_track(0, musicPlayer->unk_24, musicPlayer->unk_28, 0, 8);
+    }
+}
 
-INCLUDE_ASM(s32, "code_e0b30_len_b80", func_8014AE6C);
+void func_8014ADF8(SongID songID, s32 variation) {
+    MusicPlayer* musicPlayer = &gMusicPlayers[0];
 
-INCLUDE_ASM(s32, "code_e0b30_len_b80", func_8014AEF8);
+    if (GAME_STATUS->demoState == 0) {
+        musicPlayer->unk_24 = musicPlayer->songID;
+        musicPlayer->unk_28 = musicPlayer->variation;
+        musicPlayer->unk_2C = musicPlayer->unk_18;
+        musicPlayer->flags |= 4;
+        set_music_track(0, songID, variation, 500, 8);
+    }
+}
+
+void func_8014AE6C(void) {
+    MusicPlayer* musicPlayer = &gMusicPlayers[0];
+
+    if (GAME_STATUS->demoState == 0) {
+        if (D_8009A650[0] & 0x20000) {
+            D_8009A650[0] &= ~0x20000;
+        } else {
+            musicPlayer->flags |= 8;
+            _set_music_track(0, musicPlayer->unk_24, musicPlayer->unk_28, 0, 8);
+            func_80055590(0, 250);
+        }
+    }
+}
+
+void func_8014AEF8(void) {
+    MusicPlayer* musicPlayer = &gMusicPlayers[0];
+
+    if (GAME_STATUS->demoState == 0 && !(D_8009A650[0] & 0x20000)) {
+        func_8005553C(0, 250);
+        musicPlayer->unk_24 = musicPlayer->songID;
+        musicPlayer->unk_28 = musicPlayer->variation;
+        musicPlayer->unk_2C = musicPlayer->unk_18;
+        musicPlayer->flags |= 4;
+        set_music_track(0, musicPlayer->unk_1C, musicPlayer->unk_20, 500, 8);
+    }
+}
 
 void func_8014AF8C(s32 arg0, s32 arg1) {
     MusicPlayer* musicPlayer = &gMusicPlayers[0];
+
     musicPlayer->unk_1C = arg0;
     musicPlayer->unk_20 = arg1;
 }

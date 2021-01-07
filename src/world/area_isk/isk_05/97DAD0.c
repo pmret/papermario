@@ -4,7 +4,7 @@ INCLUDE_ASM(s32, "world/area_isk/isk_05/97DAD0", func_80240000_97DAD0);
 
 INCLUDE_ASM(s32, "world/area_isk/isk_05/97DAD0", func_80240230_97DD00);
 
-INCLUDE_ASM(s32, "world/area_isk/isk_05/97DAD0", func_80240568_97E038);
+#include "world/common/UnkNpcAIFunc1.inc.c"
 
 INCLUDE_ASM(s32, "world/area_isk/isk_05/97DAD0", func_80240628_97E0F8);
 
@@ -12,7 +12,7 @@ INCLUDE_ASM(s32, "world/area_isk/isk_05/97DAD0", func_802407CC_97E29C);
 
 INCLUDE_ASM(s32, "world/area_isk/isk_05/97DAD0", func_802408AC_97E37C);
 
-INCLUDE_ASM(s32, "world/area_isk/isk_05/97DAD0", func_80240BAC_97E67C);
+#include "world/common/UnkDurationCheck.inc.c"
 
 INCLUDE_ASM(s32, "world/area_isk/isk_05/97DAD0", func_80240BF0_97E6C0);
 

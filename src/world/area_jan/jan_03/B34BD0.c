@@ -6,11 +6,11 @@
 
 INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80240034_B34C04);
 
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_802400F0_B34CC0);
+#include "world/common/GetEntryPos.inc.c"
 
 #include "world/common/GetCurrentCameraYawClamped180.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_8024023C_B34E0C);
+#include "world/common/SomeXYZFunc2.inc.c"
 
 #include "world/common/UnkTexturePanFunc.inc.c"
 
@@ -22,21 +22,21 @@ INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80240620_B351F0);
 
 INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80240778_B35348);
 
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80240A20_B355F0);
+#include "world/common/UnkNpcAIFunc1.inc.c"
 
 INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80240AE0_B356B0);
 
 INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80240C9C_B3586C);
 
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80240D50_B35920);
+#include "world/common/NpcJumpFunc2.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80240DC4_B35994);
+# include "world/common/NpcJumpFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80240E3C_B35A0C);
 
 INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80240F6C_B35B3C);
 
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_8024108C_B35C5C);
+#include "world/common/UnkNpcDurationFlagFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_802410F4_B35CC4);
 
@@ -126,7 +126,7 @@ INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80242C00_B377D0);
 
 #include "world/common/SetManyVars.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80242D20_B378F0);
+#include "world/common/UnkYawFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80242EAC_B37A7C);
 

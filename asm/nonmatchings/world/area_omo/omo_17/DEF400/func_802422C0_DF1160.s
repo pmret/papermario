@@ -66,9 +66,9 @@ glabel func_802422C0_DF1160
 /* DF124C 802423AC 2C62000F */  sltiu     $v0, $v1, 0xf
 /* DF1250 802423B0 10400034 */  beqz      $v0, .L80242484
 /* DF1254 802423B4 00031080 */   sll      $v0, $v1, 2
-/* DF1258 802423B8 3C018024 */  lui       $at, 0x8024
+/* DF1258 802423B8 3C018024 */  lui       $at, %hi(D_80247968)
 /* DF125C 802423BC 00220821 */  addu      $at, $at, $v0
-/* DF1260 802423C0 8C227968 */  lw        $v0, 0x7968($at)
+/* DF1260 802423C0 8C227968 */  lw        $v0, %lo(D_80247968)($at)
 /* DF1264 802423C4 00400008 */  jr        $v0
 /* DF1268 802423C8 00000000 */   nop      
 /* DF126C 802423CC 0280202D */  daddu     $a0, $s4, $zero
@@ -83,7 +83,7 @@ glabel func_802422C0_DF1160
 /* DF1290 802423F0 0000102D */   daddu    $v0, $zero, $zero
 /* DF1294 802423F4 0280202D */  daddu     $a0, $s4, $zero
 /* DF1298 802423F8 0200282D */  daddu     $a1, $s0, $zero
-/* DF129C 802423FC 0C0905E3 */  jal       func_8024178C_DF062C
+/* DF129C 802423FC 0C0905E3 */  jal       omo_17_UnkNpcAIFunc1
 /* DF12A0 80242400 0260302D */   daddu    $a2, $s3, $zero
 /* DF12A4 80242404 0280202D */  daddu     $a0, $s4, $zero
 /* DF12A8 80242408 0200282D */  daddu     $a1, $s0, $zero
@@ -93,7 +93,7 @@ glabel func_802422C0_DF1160
 /* DF12B8 80242418 0000102D */   daddu    $v0, $zero, $zero
 /* DF12BC 8024241C 0280202D */  daddu     $a0, $s4, $zero
 /* DF12C0 80242420 0200282D */  daddu     $a1, $s0, $zero
-/* DF12C4 80242424 0C0906E4 */  jal       func_80241B90_DF0A30
+/* DF12C4 80242424 0C0906E4 */  jal       omo_17_UnkNpcAIFunc2
 /* DF12C8 80242428 0260302D */   daddu    $a2, $s3, $zero
 /* DF12CC 8024242C 0280202D */  daddu     $a0, $s4, $zero
 /* DF12D0 80242430 0200282D */  daddu     $a1, $s0, $zero
@@ -109,7 +109,7 @@ glabel func_802422C0_DF1160
 /* DF12F8 80242458 0000102D */   daddu    $v0, $zero, $zero
 /* DF12FC 8024245C 0280202D */  daddu     $a0, $s4, $zero
 /* DF1300 80242460 0200282D */  daddu     $a1, $s0, $zero
-/* DF1304 80242464 0C09076A */  jal       func_80241DA8_DF0C48
+/* DF1304 80242464 0C09076A */  jal       omo_17_UnkNpcAIFunc3
 /* DF1308 80242468 0260302D */   daddu    $a2, $s3, $zero
 /* DF130C 8024246C 08090922 */  j         .L80242488
 /* DF1310 80242470 0000102D */   daddu    $v0, $zero, $zero

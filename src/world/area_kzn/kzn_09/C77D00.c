@@ -1,12 +1,12 @@
 #include "kzn_09.h"
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C77D00", func_80241020_C77D00);
+#include "world/common/UnkNpcAIFunc6.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C77D00", func_8024108C_C77D6C);
+#include "world/common/UnkNpcAIFunc7.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C77D00", func_802410FC_C77DDC);
+#include "world/common/UnkNpcAIFunc8.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C77D00", func_802411D4_C77EB4);
+#include "world/common/UnkNpcAIFunc5.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C77D00", func_80241228_C77F08);
 
@@ -34,7 +34,7 @@ INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C77D00", func_80242774_C79454);
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C77D00", func_80242A40_C79720);
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C77D00", func_80242B74_C79854);
+#include "world/common/UnkNpcAIFunc12.inc.c"
 
 #include "world/common/set_script_owner_npc_col_height.inc.c"
 
@@ -58,7 +58,7 @@ INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C77D00", func_8024367C_C7A35C);
 
 #include "world/common/SetManyVars.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C77D00", func_80243808_C7A4E8);
+#include "world/common/UnkYawFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C77D00", func_80243994_C7A674);
 

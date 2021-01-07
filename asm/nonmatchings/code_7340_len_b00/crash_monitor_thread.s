@@ -5,8 +5,8 @@ glabel crash_monitor_thread
 /* 7C1C 8002C81C 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 7C20 8002C820 2404000A */  addiu     $a0, $zero, 0xa
 /* 7C24 8002C824 AFB00018 */  sw        $s0, 0x18($sp)
-/* 7C28 8002C828 3C10800A */  lui       $s0, 0x800a
-/* 7C2C 8002C82C 2610C4E0 */  addiu     $s0, $s0, -0x3b20
+/* 7C28 8002C828 3C10800A */  lui       $s0, %hi(D_8009C4E0)
+/* 7C2C 8002C82C 2610C4E0 */  addiu     $s0, $s0, %lo(D_8009C4E0)
 /* 7C30 8002C830 0200282D */  daddu     $a1, $s0, $zero
 /* 7C34 8002C834 AFBF001C */  sw        $ra, 0x1c($sp)
 /* 7C38 8002C838 0C019654 */  jal       osSetEventMesg
@@ -16,8 +16,8 @@ glabel crash_monitor_thread
 /* 7C48 8002C848 0C019654 */  jal       osSetEventMesg
 /* 7C4C 8002C84C 24060002 */   addiu    $a2, $zero, 2
 .L8002C850:
-/* 7C50 8002C850 3C04800A */  lui       $a0, 0x800a
-/* 7C54 8002C854 2484C4E0 */  addiu     $a0, $a0, -0x3b20
+/* 7C50 8002C850 3C04800A */  lui       $a0, %hi(D_8009C4E0)
+/* 7C54 8002C854 2484C4E0 */  addiu     $a0, $a0, %lo(D_8009C4E0)
 /* 7C58 8002C858 27A50010 */  addiu     $a1, $sp, 0x10
 /* 7C5C 8002C85C 0C0195BC */  jal       osRecvMesg
 /* 7C60 8002C860 24060001 */   addiu    $a2, $zero, 1

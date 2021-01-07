@@ -26,9 +26,9 @@ glabel func_80240384_AFDEC4
 /* AFDF18 802403D8 000320C0 */  sll       $a0, $v1, 3
 /* AFDF1C 802403DC 00641821 */  addu      $v1, $v1, $a0
 /* AFDF20 802403E0 000318C0 */  sll       $v1, $v1, 3
-/* AFDF24 802403E4 3C01800B */  lui       $at, 0x800b
+/* AFDF24 802403E4 3C01800B */  lui       $at, %hi(D_800B1D98)
 /* AFDF28 802403E8 00230821 */  addu      $at, $at, $v1
-/* AFDF2C 802403EC E4201D98 */  swc1      $f0, 0x1d98($at)
+/* AFDF2C 802403EC E4201D98 */  swc1      $f0, %lo(D_800B1D98)($at)
 /* AFDF30 802403F0 8FBF0018 */  lw        $ra, 0x18($sp)
 /* AFDF34 802403F4 8FB10014 */  lw        $s1, 0x14($sp)
 /* AFDF38 802403F8 8FB00010 */  lw        $s0, 0x10($sp)

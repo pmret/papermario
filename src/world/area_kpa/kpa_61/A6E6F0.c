@@ -1,12 +1,12 @@
 #include "kpa_61.h"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_61/A6E6F0", func_80240310_A6E6F0);
+#include "world/common/set_script_owner_npc_anim.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_61/A6E6F0", func_8024038C_A6E76C);
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_61/A6E6F0", func_802404C0_A6E8A0);
+#include "world/common/UnkNpcAIFunc12.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_61/A6E6F0", func_80240624_A6EA04);
+#include "world/common/set_script_owner_npc_col_height.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_61/A6E6F0", func_802406A4_A6EA84);
 
@@ -38,6 +38,6 @@ INCLUDE_ASM(s32, "world/area_kpa/kpa_61/A6E6F0", func_80241F4C_A7032C);
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_61/A6E6F0", update_heroes_start_turn_A70404);
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_61/A6E6F0", func_802422B8_A70698);
+#include "world/common/GetEncounterEnemyIsOwner.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_61/A6E6F0", func_802422F0_A706D0);

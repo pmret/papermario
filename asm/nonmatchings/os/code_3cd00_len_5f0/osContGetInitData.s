@@ -6,10 +6,10 @@ glabel osContGetInitData
 /* 3D120 80061D20 00805821 */  addu      $t3, $a0, $zero
 /* 3D124 80061D24 00A04821 */  addu      $t1, $a1, $zero
 /* 3D128 80061D28 00005021 */  addu      $t2, $zero, $zero
-/* 3D12C 80061D2C 3C02800A */  lui       $v0, 0x800a
-/* 3D130 80061D30 9042A606 */  lbu       $v0, -0x59fa($v0)
-/* 3D134 80061D34 3C08800B */  lui       $t0, 0x800b
-/* 3D138 80061D38 25080ED0 */  addiu     $t0, $t0, 0xed0
+/* 3D12C 80061D2C 3C02800A */  lui       $v0, %hi(D_8009A606)
+/* 3D130 80061D30 9042A606 */  lbu       $v0, %lo(D_8009A606)($v0)
+/* 3D134 80061D34 3C08800B */  lui       $t0, %hi(D_800B0ED0)
+/* 3D138 80061D38 25080ED0 */  addiu     $t0, $t0, %lo(D_800B0ED0)
 /* 3D13C 80061D3C 18400021 */  blez      $v0, .L80061DC4
 /* 3D140 80061D40 00003821 */   addu     $a3, $zero, $zero
 /* 3D144 80061D44 240C0001 */  addiu     $t4, $zero, 1
@@ -40,8 +40,8 @@ glabel osContGetInitData
 .L80061DA4:
 /* 3D1A4 80061DA4 24E70001 */  addiu     $a3, $a3, 1
 /* 3D1A8 80061DA8 25080008 */  addiu     $t0, $t0, 8
-/* 3D1AC 80061DAC 3C02800A */  lui       $v0, 0x800a
-/* 3D1B0 80061DB0 9042A606 */  lbu       $v0, -0x59fa($v0)
+/* 3D1AC 80061DAC 3C02800A */  lui       $v0, %hi(D_8009A606)
+/* 3D1B0 80061DB0 9042A606 */  lbu       $v0, %lo(D_8009A606)($v0)
 /* 3D1B4 80061DB4 24C60004 */  addiu     $a2, $a2, 4
 /* 3D1B8 80061DB8 00E2102A */  slt       $v0, $a3, $v0
 /* 3D1BC 80061DBC 1440FFE3 */  bnez      $v0, .L80061D4C

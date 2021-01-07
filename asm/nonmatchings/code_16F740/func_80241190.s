@@ -2,15 +2,15 @@
 .set noreorder # don't insert nops after branches
 
 glabel func_80241190
-/* 16FA70 80241190 3C03800E */  lui       $v1, 0x800e
-/* 16FA74 80241194 8C63C074 */  lw        $v1, -0x3f8c($v1)
+/* 16FA70 80241190 3C03800E */  lui       $v1, %hi(gBattleStatus+0x4)
+/* 16FA74 80241194 8C63C074 */  lw        $v1, %lo(gBattleStatus+0x4)($v1)
 /* 16FA78 80241198 24020001 */  addiu     $v0, $zero, 1
 /* 16FA7C 8024119C 3C01800E */  lui       $at, %hi(gBattleState)
 /* 16FA80 802411A0 AC24C068 */  sw        $a0, %lo(gBattleState)($at)
-/* 16FA84 802411A4 3C01800E */  lui       $at, 0x800e
-/* 16FA88 802411A8 AC22C4E0 */  sw        $v0, -0x3b20($at)
-/* 16FA8C 802411AC 3C01800E */  lui       $at, 0x800e
-/* 16FA90 802411B0 AC20C4DC */  sw        $zero, -0x3b24($at)
+/* 16FA84 802411A4 3C01800E */  lui       $at, %hi(gBattleStatus+0x470)
+/* 16FA88 802411A8 AC22C4E0 */  sw        $v0, %lo(gBattleStatus+0x470)($at)
+/* 16FA8C 802411AC 3C01800E */  lui       $at, %hi(gBattleStatus+0x46C)
+/* 16FA90 802411B0 AC20C4DC */  sw        $zero, %lo(gBattleStatus+0x46C)($at)
 /* 16FA94 802411B4 30630040 */  andi      $v1, $v1, 0x40
 /* 16FA98 802411B8 10600015 */  beqz      $v1, .L80241210
 /* 16FA9C 802411BC 24020008 */   addiu    $v0, $zero, 8

@@ -4,21 +4,21 @@ INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_802405E0_95B7E0);
 
 INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_80240738_95B938);
 
-INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_802409E0_95BBE0);
+#include "world/common/UnkNpcAIFunc1.inc.c"
 
 INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_80240AA0_95BCA0);
 
 INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_80240C5C_95BE5C);
 
-INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_80240D10_95BF10);
+#include "world/common/NpcJumpFunc2.inc.c"
 
-INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_80240D84_95BF84);
+# include "world/common/NpcJumpFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_80240DFC_95BFFC);
 
 INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_80240F2C_95C12C);
 
-INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_8024104C_95C24C);
+#include "world/common/UnkNpcDurationFlagFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_802410B4_95C2B4);
 
@@ -88,7 +88,7 @@ INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_80242858_95DA58);
 
 #include "world/common/SetManyVars.inc.c"
 
-INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_80242E88_95E088);
+#include "world/common/UnkYawFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_80243014_95E214);
 

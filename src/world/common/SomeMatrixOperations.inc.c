@@ -1,13 +1,14 @@
 #include "common.h"
+#include "map.h"
 
-static void SomeMatrixOperation(Matrix4f* mtx, f32 arg1, f32 arg2, f32 arg3) {
+void N(SomeMatrixOperation)(Matrix4f* mtx, f32 arg1, f32 arg2, f32 arg3) {
     guMtxIdentF(mtx);
     mtx->mtx[1][0] = arg1 * arg2;
     mtx->mtx[1][1] = 1.0f;
     mtx->mtx[1][2] = arg1 * arg3;
 }
 
-static ApiStatus SomeMatrixOperation2(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(SomeMatrixOperation2)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 modelListIndex = get_model_list_index_from_tree_index(get_variable(script, *args++));
     f32 temp_f28 = get_float_variable(script, *args++);
@@ -19,7 +20,7 @@ static ApiStatus SomeMatrixOperation2(ScriptInstance* script, s32 isInitialCall)
 
     if (!(model->flags & 0x400)) {
         guTranslateF(&model->transformMatrix, 0.0f, temp_f22, 0.0f);
-        SomeMatrixOperation(&mtx, temp_f28, temp_f26, temp_f24);
+        N(SomeMatrixOperation)(&mtx, temp_f28, temp_f26, temp_f24);
         guMtxCatF(&mtx, &model->transformMatrix, &model->transformMatrix);
         guTranslateF(&mtx, 0.0f, -temp_f22, 0.0f);
         guMtxCatF(&mtx, &model->transformMatrix, &model->transformMatrix);
@@ -27,7 +28,7 @@ static ApiStatus SomeMatrixOperation2(ScriptInstance* script, s32 isInitialCall)
     } else {
         guTranslateF(&mtx, 0.0f, temp_f22, 0.0f);
         guMtxCatF(&mtx, &model->transformMatrix, &model->transformMatrix);
-        SomeMatrixOperation(&mtx, temp_f28, temp_f26, temp_f24);
+        N(SomeMatrixOperation)(&mtx, temp_f28, temp_f26, temp_f24);
         guMtxCatF(&mtx, &model->transformMatrix, &model->transformMatrix);
         guTranslateF(&mtx, 0.0f, -temp_f22, 0.0f);
         guMtxCatF(&mtx, &model->transformMatrix, &model->transformMatrix);

@@ -55,8 +55,8 @@ glabel func_802409DC_89AD2C
 /* 89ADE8 80240A98 8C470030 */   lw       $a3, 0x30($v0)
 /* 89ADEC 80240A9C C6020018 */  lwc1      $f2, 0x18($s0)
 /* 89ADF0 80240AA0 46020003 */  div.s     $f0, $f0, $f2
-/* 89ADF4 80240AA4 3C018024 */  lui       $at, 0x8024
-/* 89ADF8 80240AA8 D42233F0 */  ldc1      $f2, 0x33f0($at)
+/* 89ADF4 80240AA4 3C018024 */  lui       $at, %hi(D_802433F0)
+/* 89ADF8 80240AA8 D42233F0 */  ldc1      $f2, %lo(D_802433F0)($at)
 /* 89ADFC 80240AAC 46000021 */  cvt.d.s   $f0, $f0
 /* 89AE00 80240AB0 46220000 */  add.d     $f0, $f0, $f2
 /* 89AE04 80240AB4 4620010D */  trunc.w.d $f4, $f0

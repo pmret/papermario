@@ -35,10 +35,10 @@ glabel func_80240FEC_DF79EC
 /* DF7A64 80241064 0C019E40 */  jal       guTranslateF
 /* DF7A68 80241068 36B51630 */   ori      $s5, $s5, 0x1630
 /* DF7A6C 8024106C 0280202D */  daddu     $a0, $s4, $zero
-/* DF7A70 80241070 3C118007 */  lui       $s1, 0x8007
-/* DF7A74 80241074 263141F0 */  addiu     $s1, $s1, 0x41f0
-/* DF7A78 80241078 3C12800A */  lui       $s2, 0x800a
-/* DF7A7C 8024107C 2652A674 */  addiu     $s2, $s2, -0x598c
+/* DF7A70 80241070 3C118007 */  lui       $s1, %hi(D_800741F0)
+/* DF7A74 80241074 263141F0 */  addiu     $s1, $s1, %lo(D_800741F0)
+/* DF7A78 80241078 3C12800A */  lui       $s2, %hi(D_8009A674)
+/* DF7A7C 8024107C 2652A674 */  addiu     $s2, $s2, %lo(D_8009A674)
 /* DF7A80 80241080 96250000 */  lhu       $a1, ($s1)
 /* DF7A84 80241084 8E420000 */  lw        $v0, ($s2)
 /* DF7A88 80241088 00052980 */  sll       $a1, $a1, 6
@@ -47,8 +47,8 @@ glabel func_80240FEC_DF79EC
 /* DF7A94 80241094 00452821 */   addu     $a1, $v0, $a1
 /* DF7A98 80241098 3C02DA38 */  lui       $v0, 0xda38
 /* DF7A9C 8024109C 34420002 */  ori       $v0, $v0, 2
-/* DF7AA0 802410A0 3C13800A */  lui       $s3, 0x800a
-/* DF7AA4 802410A4 2673A66C */  addiu     $s3, $s3, -0x5994
+/* DF7AA0 802410A0 3C13800A */  lui       $s3, %hi(D_8009A66C)
+/* DF7AA4 802410A4 2673A66C */  addiu     $s3, $s3, %lo(D_8009A66C)
 /* DF7AA8 802410A8 8E680000 */  lw        $t0, ($s3)
 /* DF7AAC 802410AC 96290000 */  lhu       $t1, ($s1)
 /* DF7AB0 802410B0 0100202D */  daddu     $a0, $t0, $zero

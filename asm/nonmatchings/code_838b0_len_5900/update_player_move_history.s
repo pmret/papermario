@@ -21,10 +21,10 @@ glabel update_player_move_history
 /* 869A4 800ED4F4 00000000 */  nop       
 /* 869A8 800ED4F8 46802120 */  cvt.s.w   $f4, $f4
 .L800ED4FC:
-/* 869AC 800ED4FC 3C028011 */  lui       $v0, 0x8011
-/* 869B0 800ED500 8C42CFB8 */  lw        $v0, -0x3048($v0)
-/* 869B4 800ED504 3C038011 */  lui       $v1, 0x8011
-/* 869B8 800ED508 2463CD38 */  addiu     $v1, $v1, -0x32c8
+/* 869AC 800ED4FC 3C028011 */  lui       $v0, %hi(D_8010CFB8)
+/* 869B0 800ED500 8C42CFB8 */  lw        $v0, %lo(D_8010CFB8)($v0)
+/* 869B4 800ED504 3C038011 */  lui       $v1, %hi(D_8010CD38)
+/* 869B8 800ED508 2463CD38 */  addiu     $v1, $v1, %lo(D_8010CD38)
 /* 869BC 800ED50C 00021100 */  sll       $v0, $v0, 4
 /* 869C0 800ED510 00431821 */  addu      $v1, $v0, $v1
 /* 869C4 800ED514 80620000 */  lb        $v0, ($v1)
@@ -51,11 +51,11 @@ glabel update_player_move_history
 /* 86A14 800ED564 45010018 */  bc1t      .L800ED5C8
 /* 86A18 800ED568 00000000 */   nop      
 .L800ED56C:
-/* 86A1C 800ED56C 3C048011 */  lui       $a0, 0x8011
-/* 86A20 800ED570 2484CFB8 */  addiu     $a0, $a0, -0x3048
+/* 86A1C 800ED56C 3C048011 */  lui       $a0, %hi(D_8010CFB8)
+/* 86A20 800ED570 2484CFB8 */  addiu     $a0, $a0, %lo(D_8010CFB8)
 /* 86A24 800ED574 8C820000 */  lw        $v0, ($a0)
-/* 86A28 800ED578 3C038011 */  lui       $v1, 0x8011
-/* 86A2C 800ED57C 8C63CFBC */  lw        $v1, -0x3044($v1)
+/* 86A28 800ED578 3C038011 */  lui       $v1, %hi(D_8010CFBC)
+/* 86A2C 800ED57C 8C63CFBC */  lw        $v1, %lo(D_8010CFBC)($v1)
 /* 86A30 800ED580 24420001 */  addiu     $v0, $v0, 1
 /* 86A34 800ED584 10620010 */  beq       $v1, $v0, .L800ED5C8
 /* 86A38 800ED588 00000000 */   nop      
@@ -64,8 +64,8 @@ glabel update_player_move_history
 /* 86A44 800ED594 50400001 */  beql      $v0, $zero, .L800ED59C
 /* 86A48 800ED598 AC800000 */   sw       $zero, ($a0)
 .L800ED59C:
-/* 86A4C 800ED59C 3C038011 */  lui       $v1, 0x8011
-/* 86A50 800ED5A0 2463CD38 */  addiu     $v1, $v1, -0x32c8
+/* 86A4C 800ED59C 3C038011 */  lui       $v1, %hi(D_8010CD38)
+/* 86A50 800ED5A0 2463CD38 */  addiu     $v1, $v1, %lo(D_8010CD38)
 /* 86A54 800ED5A4 8C820000 */  lw        $v0, ($a0)
 /* 86A58 800ED5A8 C4A00028 */  lwc1      $f0, 0x28($a1)
 /* 86A5C 800ED5AC 00021100 */  sll       $v0, $v0, 4

@@ -4,8 +4,8 @@
 glabel si_skip_else
 /* ED328 802C8978 0000282D */  daddu     $a1, $zero, $zero
 /* ED32C 802C897C 8C840008 */  lw        $a0, 8($a0)
-/* ED330 802C8980 3C06802E */  lui       $a2, 0x802e
-/* ED334 802C8984 24C6A0F0 */  addiu     $a2, $a2, -0x5f10
+/* ED330 802C8980 3C06802E */  lui       $a2, %hi(D_802DA0F0)
+/* ED334 802C8984 24C6A0F0 */  addiu     $a2, $a2, %lo(D_802DA0F0)
 .L802C8988:
 /* ED338 802C8988 8C820000 */  lw        $v0, ($a0)
 /* ED33C 802C898C 24840004 */  addiu     $a0, $a0, 4

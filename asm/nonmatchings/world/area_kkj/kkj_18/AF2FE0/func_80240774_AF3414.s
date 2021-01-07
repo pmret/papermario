@@ -31,8 +31,8 @@ glabel func_80240774_AF3414
 /* AF3478 802407D8 0C019EC8 */  jal       guRotateF
 /* AF347C 802407DC 00C0382D */   daddu    $a3, $a2, $zero
 /* AF3480 802407E0 C6000070 */  lwc1      $f0, 0x70($s0)
-/* AF3484 802407E4 3C018024 */  lui       $at, 0x8024
-/* AF3488 802407E8 D4224CA0 */  ldc1      $f2, 0x4ca0($at)
+/* AF3484 802407E4 3C018024 */  lui       $at, %hi(D_80244CA0)
+/* AF3488 802407E8 D4224CA0 */  ldc1      $f2, %lo(D_80244CA0)($at)
 /* AF348C 802407EC 46000021 */  cvt.d.s   $f0, $f0
 /* AF3490 802407F0 4620103E */  c.le.d    $f2, $f0
 /* AF3494 802407F4 00000000 */  nop       

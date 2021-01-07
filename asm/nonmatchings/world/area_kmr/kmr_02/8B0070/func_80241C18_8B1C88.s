@@ -102,9 +102,9 @@ glabel func_80241C18_8B1C88
 /* 8B1DF8 80241D88 2C620064 */  sltiu     $v0, $v1, 0x64
 /* 8B1DFC 80241D8C 10400036 */  beqz      $v0, .L80241E68
 /* 8B1E00 80241D90 00031080 */   sll      $v0, $v1, 2
-/* 8B1E04 80241D94 3C018025 */  lui       $at, 0x8025
+/* 8B1E04 80241D94 3C018025 */  lui       $at, %hi(D_80257D58)
 /* 8B1E08 80241D98 00220821 */  addu      $at, $at, $v0
-/* 8B1E0C 80241D9C 8C227D58 */  lw        $v0, 0x7d58($at)
+/* 8B1E0C 80241D9C 8C227D58 */  lw        $v0, %lo(D_80257D58)($at)
 /* 8B1E10 80241DA0 00400008 */  jr        $v0
 /* 8B1E14 80241DA4 00000000 */   nop      
 /* 8B1E18 80241DA8 0280202D */  daddu     $a0, $s4, $zero
@@ -119,11 +119,11 @@ glabel func_80241C18_8B1C88
 /* 8B1E3C 80241DCC 00000000 */   nop      
 /* 8B1E40 80241DD0 0280202D */  daddu     $a0, $s4, $zero
 /* 8B1E44 80241DD4 0260282D */  daddu     $a1, $s3, $zero
-/* 8B1E48 80241DD8 0C09057E */  jal       func_802415F8_8B1668
+/* 8B1E48 80241DD8 0C09057E */  jal       kmr_02_NpcJumpFunc3
 /* 8B1E4C 80241DDC 02A0302D */   daddu    $a2, $s5, $zero
 /* 8B1E50 80241DE0 0280202D */  daddu     $a0, $s4, $zero
 /* 8B1E54 80241DE4 0260282D */  daddu     $a1, $s3, $zero
-/* 8B1E58 80241DE8 0C090596 */  jal       func_80241658_8B16C8
+/* 8B1E58 80241DE8 0C090596 */  jal       kmr_02_NpcJumpFunc
 /* 8B1E5C 80241DEC 02A0302D */   daddu    $a2, $s5, $zero
 /* 8B1E60 80241DF0 0809079A */  j         .L80241E68
 /* 8B1E64 80241DF4 00000000 */   nop      
@@ -133,13 +133,13 @@ glabel func_80241C18_8B1C88
 /* 8B1E74 80241E04 02A0302D */   daddu    $a2, $s5, $zero
 /* 8B1E78 80241E08 0280202D */  daddu     $a0, $s4, $zero
 /* 8B1E7C 80241E0C 0260282D */  daddu     $a1, $s3, $zero
-/* 8B1E80 80241E10 0C090600 */  jal       func_80241800_8B1870
+/* 8B1E80 80241E10 0C090600 */  jal       kmr_02_UnkNpcAIFunc11
 /* 8B1E84 80241E14 02A0302D */   daddu    $a2, $s5, $zero
 /* 8B1E88 80241E18 0809079A */  j         .L80241E68
 /* 8B1E8C 80241E1C 00000000 */   nop      
 /* 8B1E90 80241E20 0280202D */  daddu     $a0, $s4, $zero
 /* 8B1E94 80241E24 0260282D */  daddu     $a1, $s3, $zero
-/* 8B1E98 80241E28 0C090647 */  jal       func_8024191C_8B198C
+/* 8B1E98 80241E28 0C090647 */  jal       kmr_02_UnkNpcAIFunc10
 /* 8B1E9C 80241E2C 02A0302D */   daddu    $a2, $s5, $zero
 /* 8B1EA0 80241E30 0809079A */  j         .L80241E68
 /* 8B1EA4 80241E34 00000000 */   nop      

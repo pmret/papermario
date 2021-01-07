@@ -11,8 +11,8 @@ glabel func_E00A4650
 /* 3A3E48 E00A4668 3C170001 */  lui       $s7, 1
 /* 3A3E4C E00A466C 3C0AE300 */  lui       $t2, 0xe300
 /* 3A3E50 E00A4670 AFB500B4 */  sw        $s5, 0xb4($sp)
-/* 3A3E54 E00A4674 3C15800A */  lui       $s5, 0x800a
-/* 3A3E58 E00A4678 26B5A66C */  addiu     $s5, $s5, -0x5994
+/* 3A3E54 E00A4674 3C15800A */  lui       $s5, %hi(D_8009A66C)
+/* 3A3E58 E00A4678 26B5A66C */  addiu     $s5, $s5, %lo(D_8009A66C)
 /* 3A3E5C E00A467C AFBF00C4 */  sw        $ra, 0xc4($sp)
 /* 3A3E60 E00A4680 AFBE00C0 */  sw        $fp, 0xc0($sp)
 /* 3A3E64 E00A4684 AFB600B8 */  sw        $s6, 0xb8($sp)
@@ -73,10 +73,10 @@ glabel func_E00A4650
 /* 3A3F40 E00A4760 0C080114 */  jal       func_E0200450
 /* 3A3F44 E00A4764 00A0302D */   daddu    $a2, $a1, $zero
 /* 3A3F48 E00A4768 27A40018 */  addiu     $a0, $sp, 0x18
-/* 3A3F4C E00A476C 3C168007 */  lui       $s6, 0x8007
-/* 3A3F50 E00A4770 26D641F0 */  addiu     $s6, $s6, 0x41f0
-/* 3A3F54 E00A4774 3C1E800A */  lui       $fp, 0x800a
-/* 3A3F58 E00A4778 27DEA674 */  addiu     $fp, $fp, -0x598c
+/* 3A3F4C E00A476C 3C168007 */  lui       $s6, %hi(D_800741F0)
+/* 3A3F50 E00A4770 26D641F0 */  addiu     $s6, $s6, %lo(D_800741F0)
+/* 3A3F54 E00A4774 3C1E800A */  lui       $fp, %hi(D_8009A674)
+/* 3A3F58 E00A4778 27DEA674 */  addiu     $fp, $fp, %lo(D_8009A674)
 /* 3A3F5C E00A477C 96C50000 */  lhu       $a1, ($s6)
 /* 3A3F60 E00A4780 8FC20000 */  lw        $v0, ($fp)
 /* 3A3F64 E00A4784 00052980 */  sll       $a1, $a1, 6
@@ -258,8 +258,8 @@ glabel func_E00A4650
 /* 3A421C E00A4A3C 3C06E300 */  lui       $a2, 0xe300
 /* 3A4220 E00A4A40 34C61A01 */  ori       $a2, $a2, 0x1a01
 /* 3A4224 E00A4A44 3C07D838 */  lui       $a3, 0xd838
-/* 3A4228 E00A4A48 3C04800A */  lui       $a0, 0x800a
-/* 3A422C E00A4A4C 2484A66C */  addiu     $a0, $a0, -0x5994
+/* 3A4228 E00A4A48 3C04800A */  lui       $a0, %hi(D_8009A66C)
+/* 3A422C E00A4A4C 2484A66C */  addiu     $a0, $a0, %lo(D_8009A66C)
 /* 3A4230 E00A4A50 8C830000 */  lw        $v1, ($a0)
 /* 3A4234 E00A4A54 34E70002 */  ori       $a3, $a3, 2
 /* 3A4238 E00A4A58 0060282D */  daddu     $a1, $v1, $zero

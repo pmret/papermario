@@ -4,13 +4,13 @@ INCLUDE_ASM(s32, "world/area_dgb/dgb_05/C3AA10", func_80240000_C3AA10);
 
 INCLUDE_ASM(s32, "world/area_dgb/dgb_05/C3AA10", func_80240030_C3AA40);
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_05/C3AA10", func_80240060_C3AA70);
+#include "world/common/UnkNpcAIFunc6.inc.c"
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_05/C3AA10", func_802400CC_C3AADC);
+#include "world/common/UnkNpcAIFunc7.inc.c"
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_05/C3AA10", func_8024013C_C3AB4C);
+#include "world/common/UnkNpcAIFunc8.inc.c"
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_05/C3AA10", func_80240214_C3AC24);
+#include "world/common/UnkNpcAIFunc5.inc.c"
 
 INCLUDE_ASM(s32, "world/area_dgb/dgb_05/C3AA10", func_80240268_C3AC78);
 

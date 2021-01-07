@@ -2,14 +2,14 @@
 .set noreorder # don't insert nops after branches
 
 glabel func_8024E748
-/* 17D028 8024E748 3C028028 */  lui       $v0, 0x8028
-/* 17D02C 8024E74C 80420CE0 */  lb        $v0, 0xce0($v0)
+/* 17D028 8024E748 3C028028 */  lui       $v0, %hi(D_80280CE0)
+/* 17D02C 8024E74C 80420CE0 */  lb        $v0, %lo(D_80280CE0)($v0)
 /* 17D030 8024E750 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 17D034 8024E754 AFB20018 */  sw        $s2, 0x18($sp)
 /* 17D038 8024E758 0080902D */  daddu     $s2, $a0, $zero
 /* 17D03C 8024E75C AFB10014 */  sw        $s1, 0x14($sp)
-/* 17D040 8024E760 3C11800B */  lui       $s1, 0x800b
-/* 17D044 8024E764 263122D8 */  addiu     $s1, $s1, 0x22d8
+/* 17D040 8024E760 3C11800B */  lui       $s1, %hi(D_800B22D8)
+/* 17D044 8024E764 263122D8 */  addiu     $s1, $s1, %lo(D_800B22D8)
 /* 17D048 8024E768 AFBF001C */  sw        $ra, 0x1c($sp)
 /* 17D04C 8024E76C AFB00010 */  sw        $s0, 0x10($sp)
 /* 17D050 8024E770 8E50000C */  lw        $s0, 0xc($s2)
@@ -28,9 +28,9 @@ glabel func_8024E748
 /* 17D084 8024E7A4 2E020008 */  sltiu     $v0, $s0, 8
 /* 17D088 8024E7A8 10400016 */  beqz      $v0, .L8024E804
 /* 17D08C 8024E7AC 00101080 */   sll      $v0, $s0, 2
-/* 17D090 8024E7B0 3C01802A */  lui       $at, 0x802a
+/* 17D090 8024E7B0 3C01802A */  lui       $at, %hi(D_8029CD70)
 /* 17D094 8024E7B4 00220821 */  addu      $at, $at, $v0
-/* 17D098 8024E7B8 8C22CD70 */  lw        $v0, -0x3290($at)
+/* 17D098 8024E7B8 8C22CD70 */  lw        $v0, %lo(D_8029CD70)($at)
 /* 17D09C 8024E7BC 00400008 */  jr        $v0
 /* 17D0A0 8024E7C0 00000000 */   nop      
 /* 17D0A4 8024E7C4 08093A01 */  j         .L8024E804

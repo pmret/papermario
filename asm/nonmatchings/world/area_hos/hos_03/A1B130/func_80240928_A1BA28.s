@@ -4,8 +4,8 @@
 glabel func_80240928_A1BA28
 /* A1BA28 80240928 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* A1BA2C 8024092C AFB10014 */  sw        $s1, 0x14($sp)
-/* A1BA30 80240930 3C118024 */  lui       $s1, 0x8024
-/* A1BA34 80240934 26313BD4 */  addiu     $s1, $s1, 0x3bd4
+/* A1BA30 80240930 3C118024 */  lui       $s1, %hi(D_80243BD4)
+/* A1BA34 80240934 26313BD4 */  addiu     $s1, $s1, %lo(D_80243BD4)
 /* A1BA38 80240938 AFBF0020 */  sw        $ra, 0x20($sp)
 /* A1BA3C 8024093C AFB3001C */  sw        $s3, 0x1c($sp)
 /* A1BA40 80240940 AFB20018 */  sw        $s2, 0x18($sp)
@@ -31,15 +31,15 @@ glabel func_80240928_A1BA28
 /* A1BA90 80240990 36731630 */  ori       $s3, $s3, 0x1630
 /* A1BA94 80240994 46220002 */  mul.d     $f0, $f0, $f2
 /* A1BA98 80240998 00000000 */  nop       
-/* A1BA9C 8024099C 3C12800A */  lui       $s2, 0x800a
-/* A1BAA0 802409A0 2652A674 */  addiu     $s2, $s2, -0x598c
-/* A1BAA4 802409A4 3C108007 */  lui       $s0, 0x8007
-/* A1BAA8 802409A8 261041F0 */  addiu     $s0, $s0, 0x41f0
+/* A1BA9C 8024099C 3C12800A */  lui       $s2, %hi(D_8009A674)
+/* A1BAA0 802409A0 2652A674 */  addiu     $s2, $s2, %lo(D_8009A674)
+/* A1BAA4 802409A4 3C108007 */  lui       $s0, %hi(D_800741F0)
+/* A1BAA8 802409A8 261041F0 */  addiu     $s0, $s0, %lo(D_800741F0)
 /* A1BAAC 802409AC 96040000 */  lhu       $a0, ($s0)
 /* A1BAB0 802409B0 8E420000 */  lw        $v0, ($s2)
 /* A1BAB4 802409B4 00042180 */  sll       $a0, $a0, 6
-/* A1BAB8 802409B8 3C018025 */  lui       $at, 0x8025
-/* A1BABC 802409BC D422BD60 */  ldc1      $f2, -0x42a0($at)
+/* A1BAB8 802409B8 3C018025 */  lui       $at, %hi(D_8024BD60)
+/* A1BABC 802409BC D422BD60 */  ldc1      $f2, %lo(D_8024BD60)($at)
 /* A1BAC0 802409C0 00932021 */  addu      $a0, $a0, $s3
 /* A1BAC4 802409C4 46220000 */  add.d     $f0, $f0, $f2
 /* A1BAC8 802409C8 00442021 */  addu      $a0, $v0, $a0
@@ -52,8 +52,8 @@ glabel func_80240928_A1BA28
 /* A1BAE4 802409E4 0C019DC0 */  jal       guScale
 /* A1BAE8 802409E8 00A0382D */   daddu    $a3, $a1, $zero
 /* A1BAEC 802409EC 3C05DA38 */  lui       $a1, 0xda38
-/* A1BAF0 802409F0 3C04800A */  lui       $a0, 0x800a
-/* A1BAF4 802409F4 2484A66C */  addiu     $a0, $a0, -0x5994
+/* A1BAF0 802409F0 3C04800A */  lui       $a0, %hi(D_8009A66C)
+/* A1BAF4 802409F4 2484A66C */  addiu     $a0, $a0, %lo(D_8009A66C)
 /* A1BAF8 802409F8 34A50001 */  ori       $a1, $a1, 1
 /* A1BAFC 802409FC 8C830000 */  lw        $v1, ($a0)
 /* A1BB00 80240A00 96020000 */  lhu       $v0, ($s0)

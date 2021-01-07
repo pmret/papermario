@@ -66,9 +66,9 @@ glabel func_80241C5C_BEEA4C
 /* BEEB38 80241D48 2C62000F */  sltiu     $v0, $v1, 0xf
 /* BEEB3C 80241D4C 10400034 */  beqz      $v0, .L80241E20
 /* BEEB40 80241D50 00031080 */   sll      $v0, $v1, 2
-/* BEEB44 80241D54 3C018024 */  lui       $at, 0x8024
+/* BEEB44 80241D54 3C018024 */  lui       $at, %hi(D_80247968)
 /* BEEB48 80241D58 00220821 */  addu      $at, $at, $v0
-/* BEEB4C 80241D5C 8C227968 */  lw        $v0, 0x7968($at)
+/* BEEB4C 80241D5C 8C227968 */  lw        $v0, %lo(D_80247968)($at)
 /* BEEB50 80241D60 00400008 */  jr        $v0
 /* BEEB54 80241D64 00000000 */   nop      
 /* BEEB58 80241D68 0280202D */  daddu     $a0, $s4, $zero
@@ -83,7 +83,7 @@ glabel func_80241C5C_BEEA4C
 /* BEEB7C 80241D8C 0000102D */   daddu    $v0, $zero, $zero
 /* BEEB80 80241D90 0280202D */  daddu     $a0, $s4, $zero
 /* BEEB84 80241D94 0200282D */  daddu     $a1, $s0, $zero
-/* BEEB88 80241D98 0C09044A */  jal       func_80241128_BEDF18
+/* BEEB88 80241D98 0C09044A */  jal       arn_07_UnkNpcAIFunc1
 /* BEEB8C 80241D9C 0260302D */   daddu    $a2, $s3, $zero
 /* BEEB90 80241DA0 0280202D */  daddu     $a0, $s4, $zero
 /* BEEB94 80241DA4 0200282D */  daddu     $a1, $s0, $zero
@@ -93,7 +93,7 @@ glabel func_80241C5C_BEEA4C
 /* BEEBA4 80241DB4 0000102D */   daddu    $v0, $zero, $zero
 /* BEEBA8 80241DB8 0280202D */  daddu     $a0, $s4, $zero
 /* BEEBAC 80241DBC 0200282D */  daddu     $a1, $s0, $zero
-/* BEEBB0 80241DC0 0C09054B */  jal       func_8024152C_BEE31C
+/* BEEBB0 80241DC0 0C09054B */  jal       arn_07_UnkNpcAIFunc2
 /* BEEBB4 80241DC4 0260302D */   daddu    $a2, $s3, $zero
 /* BEEBB8 80241DC8 0280202D */  daddu     $a0, $s4, $zero
 /* BEEBBC 80241DCC 0200282D */  daddu     $a1, $s0, $zero
@@ -109,7 +109,7 @@ glabel func_80241C5C_BEEA4C
 /* BEEBE4 80241DF4 0000102D */   daddu    $v0, $zero, $zero
 /* BEEBE8 80241DF8 0280202D */  daddu     $a0, $s4, $zero
 /* BEEBEC 80241DFC 0200282D */  daddu     $a1, $s0, $zero
-/* BEEBF0 80241E00 0C0905D1 */  jal       func_80241744_BEE534
+/* BEEBF0 80241E00 0C0905D1 */  jal       arn_07_UnkNpcAIFunc3
 /* BEEBF4 80241E04 0260302D */   daddu    $a2, $s3, $zero
 /* BEEBF8 80241E08 08090789 */  j         .L80241E24
 /* BEEBFC 80241E0C 0000102D */   daddu    $v0, $zero, $zero
