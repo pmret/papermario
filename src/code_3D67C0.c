@@ -1,0 +1,19 @@
+#include "common.h"
+
+INCLUDE_ASM(s32, "code_3D67C0", func_E00D8000);
+
+INCLUDE_ASM(s32, "code_3D67C0", func_E00D8120);
+
+INCLUDE_ASM(s32, "code_3D67C0", func_E00D8128);
+
+INCLUDE_ASM(s32, "code_3D67C0", func_E00D825C);
+
+INCLUDE_ASM(s32, "code_3D67C0", func_E00D8264);
+
+INCLUDE_ASM(s32, "code_3D67C0", func_E00D8280);
+
+INCLUDE_ASM(s32, "code_3D67C0", func_E00D8288);
+
+INCLUDE_ASM(s32, "code_3D67C0", func_E00D8334);
+
+INCLUDE_ASM(s32, "code_3D67C0", func_E00D8630);

@@ -1,0 +1,17 @@
+#include "common.h"
+
+INCLUDE_ASM(s32, "code_404220", func_E011A000);
+
+INCLUDE_ASM(s32, "code_404220", func_E011A0FC);
+
+INCLUDE_ASM(s32, "code_404220", func_E011A104);
+
+INCLUDE_ASM(s32, "code_404220", func_E011A398);
+
+INCLUDE_ASM(s32, "code_404220", func_E011A3A0);
+
+INCLUDE_ASM(s32, "code_404220", func_E011A3BC);
+
+INCLUDE_ASM(s32, "code_404220", func_E011A48C);
+
+INCLUDE_ASM(s32, "code_404220", func_E011A700);
