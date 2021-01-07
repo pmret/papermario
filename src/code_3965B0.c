@@ -1,0 +1,11 @@
+#include "common.h"
+
+INCLUDE_ASM(s32, "code_3965B0", func_E009A000);
+
+INCLUDE_ASM(s32, "code_3965B0", func_E009A138);
+
+INCLUDE_ASM(s32, "code_3965B0", func_E009A140);
+
+INCLUDE_ASM(s32, "code_3965B0", func_E009A398);
+
+INCLUDE_ASM(s32, "code_3965B0", func_E009A3E0);
