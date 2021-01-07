@@ -1,4 +1,4 @@
 #include "common.h"
 #include "map.h"
 
-#define MAP_NAME iwa_11
+#define NAMESPACE iwa_11

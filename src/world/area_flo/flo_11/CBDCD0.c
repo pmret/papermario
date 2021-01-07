@@ -10,6 +10,6 @@ INCLUDE_ASM(s32, "world/area_flo/flo_11/CBDCD0", func_80240034_CBDD04);
 
 #include "world/common/GetCurrentCameraYawClamped180.inc.c"
 
-INCLUDE_ASM(s32, "world/area_flo/flo_11/CBDCD0", func_8024023C_CBDF0C);
+#include "world/common/SomeXYZFunc2.inc.c"
 
 INCLUDE_ASM(s32, "world/area_flo/flo_11/CBDCD0", func_802402E0_CBDFB0);

@@ -32,13 +32,13 @@ INCLUDE_ASM(s32, "world/area_flo/flo_13/CC3850", func_80241B68_CC5378);
 
 INCLUDE_ASM(s32, "world/area_flo/flo_13/CC3850", func_80241DB8_CC55C8);
 
-INCLUDE_ASM(s32, "world/area_flo/flo_13/CC3850", func_80242298_CC5AA8);
+#include "world/common/set_script_owner_npc_anim.inc.c"
 
 INCLUDE_ASM(s32, "world/area_flo/flo_13/CC3850", func_80242314_CC5B24);
 
-INCLUDE_ASM(s32, "world/area_flo/flo_13/CC3850", func_80242448_CC5C58);
+#include "world/common/UnkNpcAIFunc12.inc.c"
 
-INCLUDE_ASM(s32, "world/area_flo/flo_13/CC3850", func_802425AC_CC5DBC);
+#include "world/common/set_script_owner_npc_col_height.inc.c"
 
 INCLUDE_ASM(s32, "world/area_flo/flo_13/CC3850", func_8024262C_CC5E3C);
 

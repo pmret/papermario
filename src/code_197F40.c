@@ -1,6 +1,8 @@
 #include "common.h"
 #include "battle/battle.h"
 
+extern s8 D_8029FBD4;
+
 s32 count_targets(Actor* actor, s32 targetHomeIndex, s32 targetSelectionFlags) {
     BattleStatus* battleStatus = BATTLE_STATUS;
 
@@ -2077,7 +2079,16 @@ ApiStatus EnemyCreateTargetList(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_197F40", InitTargetIterator);
+ApiStatus InitTargetIterator(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Actor* actor = get_actor(script->owner1.actorID);
+    SelectableTarget* selectableTarget = &actor->targetData[actor->targetIndexList[actor->selectedTargetIndex]];
+
+    actor->targetActorID = selectableTarget->actorID;
+    actor->targetPartIndex = selectableTarget->partID;
+
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_197F40", SetOwnerTarget);
 
@@ -2147,7 +2158,16 @@ INCLUDE_ASM(s32, "code_197F40", SetBattleVar);
 
 INCLUDE_ASM(s32, "code_197F40", GetBattleVar);
 
-INCLUDE_ASM(s32, "code_197F40", ResetAllActorSounds);
+ApiStatus ResetAllActorSounds(ScriptInstance* script, s32 isInitialCall) {
+    ActorID actorID = get_variable(script, *script->ptrReadPos);
+
+    if (actorID == ActorID_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    reset_all_actor_sounds(get_actor(actorID));
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_197F40", SetActorSounds);
 
@@ -2157,7 +2177,16 @@ INCLUDE_ASM(s32, "code_197F40", SetPartSounds);
 
 INCLUDE_ASM(s32, "code_197F40", SetActorType);
 
-INCLUDE_ASM(s32, "code_197F40", ShowShockEffect);
+ApiStatus ShowShockEffect(ScriptInstance* script, s32 isInitialCall) {
+    ActorID actorID = get_variable(script, *script->ptrReadPos);
+
+    if (actorID == ActorID_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    func_80251474(get_actor(actorID));
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_197F40", GetActorAttackBoost);
 
@@ -2173,13 +2202,21 @@ INCLUDE_ASM(s32, "code_197F40", ElectrifyActor);
 
 INCLUDE_ASM(s32, "code_197F40", HealActor);
 
-INCLUDE_ASM(s32, "code_197F40", WaitForBuffDone);
+ApiStatus WaitForBuffDone(ScriptInstance* script, s32 isInitialCall) {
+    return (D_8029FBD4 == 0) * ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_197F40", CopyBuffs);
 
-INCLUDE_ASM(s32, "code_197F40", func_80271210);
+ApiStatus func_80271210(ScriptInstance* script, s32 isInitialCall) {
+    func_80070AF0(0, script->varTable[0], script->varTable[1], script->varTable[2]);
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "code_197F40", func_80271258);
+ApiStatus func_80271258(ScriptInstance* script, s32 isInitialCall) {
+    func_80070AF0(1, script->varTable[0], script->varTable[1], script->varTable[2]);
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_197F40", func_802712A0);
 
@@ -2187,7 +2224,10 @@ INCLUDE_ASM(s32, "code_197F40", func_80271328);
 
 INCLUDE_ASM(s32, "code_197F40", func_802713B0);
 
-INCLUDE_ASM(s32, "code_197F40", func_8027143C);
+ApiStatus func_8027143C(ScriptInstance* script, s32 isInitialCall) {
+    func_80070A90(0, script->varTable[0], script->varTable[1], script->varTable[2]);
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_197F40", func_80271484);
 

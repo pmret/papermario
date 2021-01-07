@@ -1,7 +1,7 @@
 #include "common.h"
 #include "map.h"
 
-ApiStatus M(UnkYawFunc)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(UnkYawFunc)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 a0 = *args++;
     f32 a = get_variable(script, a0);

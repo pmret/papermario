@@ -37,7 +37,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_00/7EAD10", func_80240034_7EAD44);
 
 #include "world/common/GetCurrentCameraYawClamped180.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_00/7EAD10", func_8024023C_7EAF4C);
+#include "world/common/SomeXYZFunc2.inc.c"
 
 #include "world/common/UnkTexturePanFunc.inc.c"
 

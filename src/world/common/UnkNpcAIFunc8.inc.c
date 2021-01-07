@@ -1,7 +1,7 @@
 #include "common.h"
 #include "map.h"
 
-void M(UnkNpcAIFunc8)(ScriptInstance* script) {
+void N(UnkNpcAIFunc8)(ScriptInstance* script) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 

@@ -110,7 +110,7 @@ INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_80242410_9C77F0);
 
 INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_8024243C_9C781C);
 
-INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_80242514_9C78F4);
+#include "common/UnkFloatFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_802426A4_9C7A84);
 

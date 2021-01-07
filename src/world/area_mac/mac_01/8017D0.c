@@ -6,29 +6,29 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80241080_801900);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802411D8_801A58);
 
-#define MAP_NAME dup_mac_01
+#define NAMESPACE dup_mac_01
 #include "world/common/UnkNpcAIFunc1.inc.c"
-#define MAP_NAME mac_01
+#define NAMESPACE mac_01
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80241540_801DC0);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802416FC_801F7C);
 
-#define MAP_NAME dup_mac_01
+#define NAMESPACE dup_mac_01
 #include "world/common/NpcJumpFunc2.inc.c"
-#define MAP_NAME mac_01
+#define NAMESPACE mac_01
 
-#define MAP_NAME dup_mac_01
+#define NAMESPACE dup_mac_01
 #include "world/common/NpcJumpFunc.inc.c"
-#define MAP_NAME mac_01
+#define NAMESPACE mac_01
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_8024189C_80211C);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802419CC_80224C);
 
-#define MAP_NAME dup_mac_01
+#define NAMESPACE dup_mac_01
 #include "world/common/UnkNpcDurationFlagFunc.inc.c"
-#define MAP_NAME mac_01
+#define NAMESPACE mac_01
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80241B54_8023D4);
 

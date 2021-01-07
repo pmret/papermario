@@ -5,6 +5,8 @@
 #include "battle/actor/paragoomba.h"
 #include "battle/actor/spiked_goomba.h"
 
+#define NAMESPACE b_area_kmr_part_1
+
 Formation formation0 = {
     { &goomba, .position = 1, .priority = 10 },
 };

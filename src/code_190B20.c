@@ -1,4 +1,3 @@
-#include "code_190B20.h"
 #include "battle/battle.h"
 
 INCLUDE_ASM(s32, "code_190B20", create_target_list);
@@ -491,13 +490,8 @@ void show_foreground_models(void) {
     }
 }
 
-ApiStatus StartRumbleWithParams(ScriptInstance* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
 
-    start_rumble(get_variable(script, *args++), get_variable(script, *args++));
-
-    return ApiStatus_DONE2;
-}
+#include "common/StartRumbleWithParams.inc.c"
 
 INCLUDE_ASM(s32, "code_190B20", start_rumble_type);
 

@@ -38,7 +38,7 @@ for root, dirs, files in os.walk(src_dir):
             out_lines.append("#include \"common.h\"")
             out_lines.append("#include \"map.h\"")
             out_lines.append("")
-            out_lines.append(f"#define MAP_NAME {dir_name}")
+            out_lines.append(f"#define NAMESPACE {dir_name}")
             out_lines.append("")
 
             # if len(common_funcs) > 0:

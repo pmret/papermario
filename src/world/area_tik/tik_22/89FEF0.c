@@ -2,7 +2,7 @@
 
 #include "world/common/UnkTexturePanFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_tik/tik_22/89FEF0", func_80240154_8A0014);
+#include "world/common/UnkTexturePanFunc2.inc.c"
 
 #include "world/common/SetPlayerStatusAnimFlags100000.inc.c"
 
@@ -14,7 +14,7 @@ INCLUDE_ASM(s32, "world/area_tik/tik_22/89FEF0", func_80240370_8A0230);
 
 #include "world/common/GetCurrentCameraYawClamped180.inc.c"
 
-INCLUDE_ASM(s32, "world/area_tik/tik_22/89FEF0", func_80240578_8A0438);
+#include "world/common/SomeXYZFunc2.inc.c"
 
 INCLUDE_ASM(s32, "world/area_tik/tik_22/89FEF0", func_8024061C_8A04DC);
 

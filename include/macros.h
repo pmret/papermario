@@ -12,6 +12,8 @@
 
 #define ALIGN16(val) (((val) + 0xF) & ~0xF)
 
+#define N(sym) NS(NAMESPACE, sym)
+
 #define ARRAY_COUNT(arr) (s32)(sizeof(arr) / sizeof(arr[0]))
 #define ARRAY_COUNTU(arr) (u32)(sizeof(arr) / sizeof(arr[0]))
 
@@ -72,7 +74,7 @@
 // Fixed-point short literal
 #define F16(f) (s16)(f * 327.67f)
 
-#define _NAMESPACE(x, y) x ## _ ## y
-#define NAMESPACE(x, y) _NAMESPACE(x, y)
+#define _NS(x, y) x ## _ ## y
+#define NS(x, y) _NS(x, y)
 
 #endif

@@ -2,7 +2,7 @@
 
 INCLUDE_ASM(s32, "world/area_nok/nok_04/9EDBF0", func_80240000_9EDBF0);
 
-INCLUDE_ASM(s32, "world/area_nok/nok_04/9EDBF0", func_80240184_9EDD74);
+#include "common/UnkFloatFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_nok/nok_04/9EDBF0", func_80240314_9EDF04);
 

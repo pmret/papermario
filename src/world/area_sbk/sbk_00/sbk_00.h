@@ -1,6 +1,6 @@
 #include "common.h"
 #include "map.h"
 
-#define MAP_NAME sbk_00
+#define NAMESPACE sbk_00
 
-Script M(MakeEntities);
+Script N(MakeEntities);

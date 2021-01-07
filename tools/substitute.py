@@ -3,6 +3,7 @@
 import argparse
 import os
 import re
+from pathlib import Path
 
 script_dir = os.path.dirname(os.path.realpath(__file__))
 root_dir = script_dir + "/../"
@@ -50,7 +51,7 @@ for root, dirs, files in os.walk(asm_dir):
 
             f_text = f_text_orig
             for func in from_funcs:
-                f_text = f_text.replace(func, func_name)
+                f_text = f_text.replace(func, Path(f_path).parent.parent.name + "_" + func_name)
             if f_text != f_text_orig:
                 with open(f_path, "w", newline="\n") as f:
                     f.write(f_text)

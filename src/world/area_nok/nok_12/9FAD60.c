@@ -1,12 +1,12 @@
 #include "nok_12.h"
 
-INCLUDE_ASM(s32, "world/area_nok/nok_12/9FAD60", func_80240570_9FAD60);
+#include "world/common/set_script_owner_npc_anim.inc.c"
 
 INCLUDE_ASM(s32, "world/area_nok/nok_12/9FAD60", func_802405EC_9FADDC);
 
-INCLUDE_ASM(s32, "world/area_nok/nok_12/9FAD60", func_80240720_9FAF10);
+#include "world/common/UnkNpcAIFunc12.inc.c"
 
-INCLUDE_ASM(s32, "world/area_nok/nok_12/9FAD60", func_80240884_9FB074);
+#include "world/common/set_script_owner_npc_col_height.inc.c"
 
 INCLUDE_ASM(s32, "world/area_nok/nok_12/9FAD60", func_80240904_9FB0F4);
 

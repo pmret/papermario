@@ -24,20 +24,4 @@ typedef struct WorldPartner {
 
 WorldPartner gWorldPartners[11];
 
-typedef s8 PartnerID;
-enum PartnerID {
-    PartnerID_NONE,
-    PartnerID_GOOMBARIO,
-    PartnerID_KOOPER,
-    PartnerID_BOMBETTE,
-    PartnerID_PARAKARRY,
-    PartnerID_GOOMPA,
-    PartnerID_WATT,
-    PartnerID_SUSHIE,
-    PartnerID_LAKILESTER,
-    PartnerID_BOW,
-    PartnerID_GOOMBARIA,
-    PartnerID_TWINK,
-};
-
 #endif

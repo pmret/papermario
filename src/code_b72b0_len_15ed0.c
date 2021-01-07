@@ -1,5 +1,14 @@
 #include "common.h"
 
+extern s32** D_80154370; // probably entities of some sort
+extern s32 D_80154378; // entity fog enabled
+extern s32 D_8015437C; // entity fog red
+extern s32 D_80154380; // entity fog green
+extern s32 D_80154384; // entity fog blue
+extern s32 D_80154388; // entity fog alpha
+extern s32 D_8015438C; // entity fog dist min
+extern s32 D_80154390; // entity fog dist max
+
 INCLUDE_ASM(s32, "code_b72b0_len_15ed0", clear_virtual_models);
 
 INCLUDE_ASM(s32, "code_b72b0_len_15ed0", init_virtual_models);
@@ -12,7 +21,13 @@ INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80120F04);
 
 INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80120FB8);
 
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80121140);
+void func_80121140(Matrix4f* arg0) {
+    guMtxIdentF(arg0->mtx);
+    arg0->mtx[0][0] = 1.0f;
+    arg0->mtx[1][1] = 1.0f;
+    arg0->mtx[2][2] = -1.0f;
+    arg0->mtx[3][3] = 1.0f;
+}
 
 INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80121184);
 
@@ -28,7 +43,9 @@ INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80122288);
 
 INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80122D7C);
 
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80122DDC);
+s32 func_80122DDC(s32 arg0) {
+    return D_80154370[arg0 & ~0x800];
+}
 
 INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80122DFC);
 
@@ -44,26 +61,54 @@ INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80122F8C);
 
 INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80122FB8);
 
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", enable_entity_fog);
+void enable_entity_fog(void) {
+    D_80154378 = 1;
+}
 
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", disable_entity_fog);
+void disable_entity_fog(void) {
+    D_80154378 = 0;
+}
 
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", set_entity_fog_dist);
+void set_entity_fog_dist(s32 min, s32 max) {
+    D_8015438C = min;
+    D_80154390 = max;
+}
 
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", set_entity_fog_color);
+void set_entity_fog_color(s32 r, s32 g, s32 b, s32 a) {
+    D_8015437C = r;
+    D_80154380 = g;
+    D_80154384 = b;
+    D_80154388 = a;
+}
 
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", is_entity_fog_enabled);
+s32 is_entity_fog_enabled(void) {
+    return D_80154378;
+}
 
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", get_entity_fog_distance);
+void get_entity_fog_distance(s32* start, s32* end) {
+    *start = D_8015438C;
+    *end = D_80154390;
+}
 
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", get_entity_fog_color);
+void get_entity_fog_color(s32* r, s32* g, s32* b, s32* a) {
+    *r = D_8015437C;
+    *g = D_80154380;
+    *b = D_80154384;
+    *a = D_80154388;
+}
 
 void stub_dynamic_entity_delegate(void) {
 }
 
 INCLUDE_ASM(s32, "code_b72b0_len_15ed0", clear_dynamic_entity_list);
 
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", init_dynamic_entity_list);
+void init_dynamic_entity_list(void) {
+    if (!GAME_STATUS->isBattle) {
+        gCurrentDynamicEntityListPtr = gWorldDynamicEntityList;
+    } else {
+        gCurrentDynamicEntityListPtr = gBattleDynamicEntityList;
+    }
+}
 
 INCLUDE_ASM(s32, "code_b72b0_len_15ed0", bind_dynamic_entity_3);
 
@@ -81,192 +126,6 @@ INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80123550);
 
 INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_801235C0);
 
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", get_dynamic_entity);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", clear_character_set);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", clear_printers);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", load_font_data);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", load_font);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", update_messages);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", _update_message);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", render_messages);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80124434);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80124570);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", initialize_printer);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", dma_load_string);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", load_message_to_buffer);
-
-INCLUDE_ASM(PrintContext*, "code_b72b0_len_15ed0", load_string, s32 stringId, s32* a1);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", _load_string);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", load_message_to_printer);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", clamp_printer_coords);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", cancel_message);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", set_message_images);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", set_message_string);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", set_message_value);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", close_message);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80125C84);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", get_char_width);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", get_string_properties);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", get_string_width);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_801264B0);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", draw_string);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80126790);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80126EAC);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80126F78);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", draw_digit);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", draw_number);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80127B70);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80127BA4);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80127D90);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_8012C2E0);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_8012C324);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_8012C9A8);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_8012CA08);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", _draw_message_box);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_8012D3DC);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_8012DB58);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_8012E8E0);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_8012E9A0);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_8012EC94);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_8012F500);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_8012FE10);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_8012FE78);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_801309F0);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80130A04);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80130ACC);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", draw_coin_sparkles);
-
-INCLUDE_ASM(ItemEntity*, "code_b72b0_len_15ed0", get_item_entity, s32 itemEntityIndex);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80130F70);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80130FAC);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", clear_item_entity_data);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", init_item_entity_list);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80131128);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", make_item_entity);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", make_item_entity_nodelay, s32 itemID, f32 x, f32 y, f32 z,
-            ItemSpawnMode itemSpawnMode, s32 pickupVar);
-
-INCLUDE_ASM(void, "code_b72b0_len_15ed0", make_item_entity_delayed, s32 itemID, f32 x, f32 y, f32 z, s32 unk1,
-            s32 unk2,
-            s32 unk3);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", init_got_item);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80131DD4);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", update_item_entities);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", appendGfx_item_entity);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", draw_item_entities);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80132D94);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", render_item_entities);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", remove_item_entity_by_reference);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", remove_item_entity_by_index);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80133A94);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", test_item_player_collision);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80133FC8);
-
-INCLUDE_ASM(void, "code_b72b0_len_15ed0", set_item_entity_flags, s32 itemEntityIndex, s32 flag);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", clear_item_entity_flags);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_801341B0);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_801341E8);
-
-INCLUDE_ASM(void, "code_b72b0_len_15ed0", set_item_entity_position, s32 itemEntityIndex, f32 x, f32 y, f32 z);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80134230);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80134240);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", update_item_entity_collectable);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_8013559C);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", update_item_entity_static);
-
-void func_801356C4(void) {
+s32 get_dynamic_entity(s32 arg0) {
+    return (*gCurrentDynamicEntityListPtr)[arg0 & ~0x800];
 }
-
-void func_801356CC(void) {
-}
-
-void func_801356D4(void) {
-}
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", update_item_entity_temp);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_801363A0);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_8013673C);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_801369D0);
-
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80136A08);

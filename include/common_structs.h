@@ -123,7 +123,7 @@ typedef struct Npc {
     /* 0x090 */ Vec3s homePos;
     /* 0x096 */ char unk_96[12];
     /* 0x0A2 */ u16 unk_A2;
-    /* 0x0A4 */ u8 npcID;
+    /* 0x0A4 */ s8 npcID;
     /* 0x0A5 */ char unk_A5;
     /* 0x0A6 */ s16 collisionRadius;
     /* 0x0A8 */ s16 collisionHeight;
@@ -528,9 +528,13 @@ typedef struct BattleStatus {
     /* 0x004 */ s32 flags2;
     /* 0x008 */ s32 varTable[16];
     /* 0x048 */ u8 currentSubmenu;
-    /* 0x049 */ char unk_49[10];
+    /* 0x049 */ char unk_49[3];
+    /* 0x04C */ s8 unk_4C;
+    /* 0x04D */ char unk_4D[6];
     /* 0x053 */ u8 stratsLastCursorPos;
-    /* 0x054 */ char unk_54[28];
+    /* 0x054 */ char unk_54[8];
+    /* 0x05C */ s8 unk_5C;
+    /* 0x05D */ char unk_5D[19];
     /* 0x070 */ s16 unk_70;
     /* 0x072 */ char unk_72[2];
     /* 0x074 */ s32 unk_74;
@@ -950,16 +954,19 @@ typedef struct GameStatus {
     /* 0x16C */ char unk_16C[12];
 } GameStatus; // size = 0x178
 
+/*
+still;
+walk;
+jump;
+fall;
+fly;
+idle;
+run;
+talk;
+hurt;
+*/
 typedef struct PartnerAnimations {
-    /* 0x00 */ UNK_PTR still;
-    /* 0x04 */ UNK_PTR walk;
-    /* 0x08 */ UNK_PTR jump;
-    /* 0x0C */ UNK_PTR fall;
-    /* 0x10 */ UNK_PTR fly;
-    /* 0x14 */ UNK_PTR idle;
-    /* 0x18 */ UNK_PTR run;
-    /* 0x1C */ UNK_PTR talk;
-    /* 0x20 */ UNK_PTR hurt;
+    /* 0x00 */ UNK_PTR anims[9];
 } PartnerAnimations; // size = 0x24
 
 typedef struct Shadow {
@@ -1116,7 +1123,8 @@ typedef struct CollisionStatus {
     /* 0x04 */ s16 lastTouchedFloor; /* valid after jump */
     /* 0x06 */ s16 floorBelow;
     /* 0x08 */ s16 currentCeiling; /* valid on touching with head */
-    /* 0x0A */ char unk_0A[8];
+    /* 0x0A */ s16 unk_0A;
+    /* 0x0C */ char unk_0C[0x6];
     /* 0x12 */ s16 currentWall;
     /* 0x14 */ s16 lastWallHammered; /* valid when smashing */
     /* 0x16 */ s16 touchingWallTrigger; /* 0/1 */
@@ -1269,7 +1277,8 @@ typedef struct Actor {
     /* 0x196 */ s8 unk_196;
     /* 0x197 */ s8 unk_197;
     /* 0x198 */ Vec2b unk_198;
-    /* 0x19A */ char unk_19A[2];
+    /* 0x19A */ s8 unk_19A;
+    /* 0x019B */ char unk_19B[1];
     /* 0x19C */ s32 actorTypeData1[6]; /* 4 = jump sound */
     /* 0x1B4 */ s16 actorTypeData1b[2];
     /* 0x1B8 */ s8 currentHP;
@@ -1326,7 +1335,7 @@ typedef struct Actor {
     /* 0x22C */ struct SelectableTarget targetData[24];
     /* 0x40C */ s8 targetListLength;
     /* 0x40D */ s8 targetIndexList[24]; /* into targetData */
-    /* 0x425 */ u8 selectedTargetIndex; /* into target index list */
+    /* 0x425 */ s8 selectedTargetIndex; /* into target index list */
     /* 0x426 */ s8 targetPartIndex;
     /* 0x427 */ char unk_427;
     /* 0x428 */ s16 targetActorID;
@@ -1403,7 +1412,10 @@ typedef struct PlayerStatus {
     /* 0x008 */ s16 framesOnGround; /* Number of frames since last jump landed */
     /* 0x00A */ char unk_0A[2];
     /* 0x00C */ u8 peachDisguise;
-    /* 0x00D */ char unk_0D[5];
+    /* 0x00D */ char unk_0D[1];
+    /* 0x00E */ u8 unk_0E;
+    /* 0x00F */ u8 unk_0F;
+    /* 0x010 */ char unk_10[0x2];
     /* 0x012 */ s16 moveFrames;
     /* 0x014 */ s8 enableCollisionOverlapsCheck;
     /* 0x015 */ s8 statusMenuCounterinputEnabledCounter; /* whether the C-up menu can appear */
@@ -1435,13 +1447,13 @@ typedef struct PlayerStatus {
     /* 0x0B6 */ u8 fallState;
     /* 0x0B7 */ char unk_B7;
     /* 0x0B8 */ s32 anim;
-    /* 0x0BC */ char unk_BC[2];
+    /* 0x0BC */ s16 unk_BC;
     /* 0x0BE */ u8 renderMode;
     /* 0x0BF */ s8 unk_BF;
     /* 0x0C0 */ u32* decorationList;
     /* 0x0C4 */ char unk_C4[2];
     /* 0x0C6 */ s16 unk_C6;
-    /* 0x0C8 */ UNK_PTR unk_C8;
+    /* 0x0C8 */ s32* unk_C8;
     /* 0x0CC */ s32 shadowID;
     /* 0x0D0 */ char unk_D0[8];
     /* 0x0D8 */ UNK_PTR** unk_D8;

@@ -1,4 +1,4 @@
 #include "common.h"
 #include "map.h"
 
-#define MAP_NAME dgb_07
+#define NAMESPACE dgb_07

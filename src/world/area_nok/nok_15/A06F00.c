@@ -10,15 +10,15 @@ INCLUDE_ASM(s32, "world/area_nok/nok_15/A06F00", func_80240034_A06F34);
 
 #include "world/common/GetCurrentCameraYawClamped180.inc.c"
 
-INCLUDE_ASM(s32, "world/area_nok/nok_15/A06F00", func_8024023C_A0713C);
+#include "world/common/SomeXYZFunc2.inc.c"
 
-INCLUDE_ASM(s32, "world/area_nok/nok_15/A06F00", func_802402E0_A071E0);
+#include "world/common/set_script_owner_npc_anim.inc.c"
 
 INCLUDE_ASM(s32, "world/area_nok/nok_15/A06F00", func_8024035C_A0725C);
 
-INCLUDE_ASM(s32, "world/area_nok/nok_15/A06F00", func_80240490_A07390);
+#include "world/common/UnkNpcAIFunc12.inc.c"
 
-INCLUDE_ASM(s32, "world/area_nok/nok_15/A06F00", func_802405F4_A074F4);
+#include "world/common/set_script_owner_npc_col_height.inc.c"
 
 INCLUDE_ASM(s32, "world/area_nok/nok_15/A06F00", func_80240674_A07574);
 

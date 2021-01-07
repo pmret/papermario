@@ -12,6 +12,9 @@ void boot_main(void);
 
 void osCleanupThread(void);
 
+void func_80070A90(s32, f32, f32, f32);
+void func_80070AF0(s32, f32, f32, f32);
+
 s32 heap_malloc(s32 size);
 HeapNode* _heap_create(void* addr, s32 size);
 s32 dma_copy(s32 romStart, s32 romEnd, void* vramDest);
@@ -85,9 +88,11 @@ void fx_walk_normal(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4, s32 arg5);
 void fx_emote(s32, Npc*, f32, f32, f32, f32, f32, s32, s32*);
 
 f32 func_800E0088(f32, f32);
+void func_800E06C0(s32);
 void func_800E97B8(void);
 s32 func_800EB168(s32);
 
+Shadow* create_shadow_type(s32 type, f32 x, f32 y, f32 z);
 
 PlayerData* get_player_data(void);
 
@@ -96,6 +101,9 @@ s32 pause_interp_vertical_scroll(s32 deltaBefore);
 void pause_draw_rect(s32 ulx, s32 uly, s32 lrx, s32 lry, s32 tileDescriptor, s32 uls, s32 ult, s32 dsdx, s32 dtdy);
 
 s32 func_800DCB7C(s32, f32*, f32*, f32*, f32*);
+s32 func_800DDC44(s32, f32*, f32*, f32*, f32, f32, f32, f32);
+
+Npc* get_npc_by_index(s32 listIndex);
 
 // Partner
 void func_800EBA3C(Npc* partner);
@@ -127,7 +135,7 @@ void sort_items(void);
 s32 is_ability_active(s32 arg0);
 f32 update_lerp(Easing easing, f32 start, f32 end, s32 elapsed, s32 duration);
 
-void make_item_entity_delayed(s32 itemID, f32 x, f32 y, f32 z, s32 unk1, s32 unk2, s32 unk3);
+s32 make_item_entity_delayed(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pickupDelay, s32 pickupVar);
 void set_item_entity_position(s32 itemEntityIndex, f32 x, f32 y, f32 z);
 ItemEntity* get_item_entity(s32 itemEntityIndex);
 s32 make_item_entity_nodelay(s32 itemID, f32 x, f32 y, f32 z, ItemSpawnMode itemSpawnMode, s32 pickupVar);
@@ -154,9 +162,31 @@ s32 play_sound_at_position(s32 soundID, s32 value2, f32 posX, f32 posY, f32 posZ
 s32 set_music_track(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s16 volume);
 s32 func_8014AA54(s32 playerIndex, s32 arg1, s16 arg2);
 
+void player_create_target_list(Actor* actor);
+void enemy_create_target_list(Actor* actor);
+
+void set_actor_yaw(ActorID actorID, s32 yaw);
+void set_part_yaw(ActorID actorID, s32 partIndex, s32 value);
+
+ActorPart* get_actor_part(Actor* actor, s32 partIndex);
+
+void add_part_decoration(ActorPart* part, s32 decorationIndex, DecorationId decorationType);
+void add_actor_decoration(Actor* actor, s32 decorationIndex, DecorationId decorationType);
+void remove_part_decoration(ActorPart* part, s32 decorationIndex);
+void remove_actor_decoration(Actor* actor, s32 decorationIndex);
+
+s32 heroes_is_ability_active(Actor* actor, Ability ability);
+
+void create_part_shadow(ActorID actorID, s32 partIndex);
+void remove_part_shadow(ActorID actorID, s32 partIndex);
+void create_part_shadow_by_ref(UNK_TYPE arg0, ActorPart* part); // arg0 unused
+
 ScriptInstance* get_script_by_index(s32 index);
 
 void suspend_all_group(s32 groupFlags);
 void kill_script(ScriptInstance* instanceToKill);
+
+void func_802D7460(f32 x, f32 y, f32 z, s32 arg3);
+void func_802D74C0(f32 x, f32 y, f32 z, s32 arg3);
 
 #endif

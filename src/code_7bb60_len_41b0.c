@@ -1,8 +1,11 @@
 #include "common.h"
 #include "world/partners.h"
 
+extern s32 D_8010C96C; // npc list index
+extern s16 D_8010C9B0;
+
 void func_800E26B0(void) {
-    PlayerStatus* playerStatus = &gPlayerStatus;
+    PlayerStatus* playerStatus = PLAYER_STATUS;
 
     playerStatus->jumpApexHeight = playerStatus->position.y;
 }
@@ -12,7 +15,7 @@ INCLUDE_ASM(s32, "code_7bb60_len_41b0", func_800E26C4);
 void set_action_state(s32 actionState);
 
 void move_player(s32 duration, f32 heading, f32 speed) {
-    PlayerStatus* playerStatus = &gPlayerStatus;
+    PlayerStatus* playerStatus = PLAYER_STATUS;
 
     playerStatus->flags |= 0x4000;
     playerStatus->heading = heading;
@@ -43,7 +46,7 @@ INCLUDE_ASM(s32, "code_7bb60_len_41b0", func_800E315C);
 INCLUDE_ASM(s32, "code_7bb60_len_41b0", phys_player_land);
 
 f32 integrate_gravity(void) {
-    PlayerStatus* playerStatus = &gPlayerStatus;
+    PlayerStatus* playerStatus = PLAYER_STATUS;
 
     if (playerStatus->flags & 0x40000) {
         playerStatus->gravityIntegrator[2] += playerStatus->gravityIntegrator[3] / 1.7f;
@@ -98,7 +101,9 @@ PartnerID get_current_partner_id(void) {
 
 INCLUDE_ASM(s32, "code_7bb60_len_41b0", func_800E5098);
 
-INCLUDE_ASM(s32, "code_7bb60_len_41b0", func_800E5150);
+void func_800E5150(void) {
+    gCollisionStatus.unk_0A = func_800E5174();
+}
 
 INCLUDE_ASM(s32, "code_7bb60_len_41b0", func_800E5174);
 
@@ -109,14 +114,16 @@ INCLUDE_ASM(s32, "code_7bb60_len_41b0", func_800E5348);
 INCLUDE_ASM(s32, "code_7bb60_len_41b0", func_800E546C);
 
 void save_ground_pos(void) {
-    PlayerStatus* playerStatus = &gPlayerStatus;
+    PlayerStatus* playerStatus = PLAYER_STATUS;
 
     playerStatus->lastGoodPosition.x = playerStatus->position.x;
     playerStatus->lastGoodPosition.y = playerStatus->position.y;
     playerStatus->lastGoodPosition.z = playerStatus->position.z;
 }
 
-INCLUDE_ASM(s32, "code_7bb60_len_41b0", func_800E5520);
+void func_800E5520(void) {
+    D_8010C9B0 = 0;
+}
 
 INCLUDE_ASM(s32, "code_7bb60_len_41b0", func_800E5530);
 
@@ -131,8 +138,8 @@ INCLUDE_ASM(s32, "code_7bb60_len_41b0", func_800E5A2C);
 INCLUDE_ASM(s32, "code_7bb60_len_41b0", func_800E5C78);
 
 void set_action_state(s32 actionState) {
-    PlayerStatus* playerStatus = &gPlayerStatus;
-    PlayerData* playerData = &gPlayerData;
+    PlayerStatus* playerStatus = PLAYER_STATUS;
+    PlayerData* playerData = PLAYER_DATA;
     UNK_TYPE* unknownStruct = &D_8010F250;
 
     if (playerStatus->flags & 0x200) {
@@ -204,7 +211,7 @@ void set_action_state(s32 actionState) {
 }
 
 void update_locomotion_state(void) {
-    PlayerStatus* playerStatus = (&gPlayerStatus);
+    PlayerStatus* playerStatus = PLAYER_STATUS;
     do { } while (0); // required to match
 
     set_action_state((!is_ability_active(Ability_SLOW_GO)
@@ -212,7 +219,7 @@ void update_locomotion_state(void) {
 }
 
 void start_falling(void) {
-    PlayerStatus* playerStatus = &gPlayerStatus;
+    PlayerStatus* playerStatus = PLAYER_STATUS;
 
     set_action_state(ActionState_FALLING);
     playerStatus->gravityIntegrator[0] = 0.1143f;
@@ -222,7 +229,7 @@ void start_falling(void) {
 }
 
 void start_bounce_a(void) {
-    PlayerStatus* playerStatus = &gPlayerStatus;
+    PlayerStatus* playerStatus = PLAYER_STATUS;
 
     set_action_state(ActionState_BOUNCE);
     playerStatus->gravityIntegrator[0] = 10.0f;
@@ -232,7 +239,7 @@ void start_bounce_a(void) {
 }
 
 void start_bounce_b(void) {
-    PlayerStatus* playerStatus = &gPlayerStatus;
+    PlayerStatus* playerStatus = PLAYER_STATUS;
 
     set_action_state(ActionState_BOUNCE);
     playerStatus->gravityIntegrator[0] = 8.0f;
@@ -243,8 +250,8 @@ void start_bounce_b(void) {
 }
 
 s32 check_input_hammer(void) {
-    PlayerStatus* playerStatus = &gPlayerStatus;
-    PlayerData* playerData = &gPlayerData;
+    PlayerStatus* playerStatus = PLAYER_STATUS;
+    PlayerData* playerData = PLAYER_DATA;
 
     if (playerStatus->pressedButtons & Button_B) {
         if (!(playerStatus->flags & 4)) {
@@ -264,7 +271,13 @@ INCLUDE_ASM(s32, "code_7bb60_len_41b0", check_input_jump);
 
 INCLUDE_ASM(s32, "code_7bb60_len_41b0", check_input_spin);
 
-INCLUDE_ASM(s32, "code_7bb60_len_41b0", func_800E636C);
+void func_800E636C(s32 arg0) {
+    s32 listIndex = D_8010C96C;
+
+    if (listIndex >= 0) {
+        get_npc_by_index(listIndex)->currentAnim = arg0;
+    }
+}
 
 INCLUDE_ASM(s32, "code_7bb60_len_41b0", func_800E63A4);
 

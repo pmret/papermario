@@ -10,21 +10,21 @@ INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7020", func_80240034_9D7054);
 
 #include "world/common/GetCurrentCameraYawClamped180.inc.c"
 
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7020", func_8024023C_9D725C);
+#include "world/common/SomeXYZFunc2.inc.c"
 
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7020", func_802402E0_9D7300);
 
-#define MAP_NAME dup_nok_02
+#define NAMESPACE dup_nok_02
 #include "world/common/GetItemName.inc.c"
-#define MAP_NAME nok_02
+#define NAMESPACE nok_02
 
-#define MAP_NAME dup_nok_02
+#define NAMESPACE dup_nok_02
 #include "world/common/GetNpcCollisionHeight.inc.c"
-#define MAP_NAME nok_02
+#define NAMESPACE nok_02
 
-#define MAP_NAME dup_nok_02
+#define NAMESPACE dup_nok_02
 #include "world/common/SomeXYZFuncTodoRename.inc.c"
-#define MAP_NAME nok_02
+#define NAMESPACE nok_02
 
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7020", func_80240624_9D7644);
 

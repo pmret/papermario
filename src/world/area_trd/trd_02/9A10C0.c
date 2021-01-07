@@ -1,12 +1,12 @@
 #include "trd_02.h"
 
-INCLUDE_ASM(s32, "world/area_trd/trd_02/9A10C0", func_802400E0_9A10C0);
+#include "world/common/set_script_owner_npc_anim.inc.c"
 
 INCLUDE_ASM(s32, "world/area_trd/trd_02/9A10C0", func_8024015C_9A113C);
 
-INCLUDE_ASM(s32, "world/area_trd/trd_02/9A10C0", func_80240290_9A1270);
+#include "world/common/UnkNpcAIFunc12.inc.c"
 
-INCLUDE_ASM(s32, "world/area_trd/trd_02/9A10C0", func_802403F4_9A13D4);
+#include "world/common/set_script_owner_npc_col_height.inc.c"
 
 INCLUDE_ASM(s32, "world/area_trd/trd_02/9A10C0", func_80240474_9A1454);
 

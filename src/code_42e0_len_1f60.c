@@ -44,6 +44,7 @@ s32 sign(s32 val) {
 
 INCLUDE_ASM(s32, "code_42e0_len_1f60", int_to_string);
 
+// should maybe be called bzero
 void mem_clear(s8* data, s32 numBytes) {
     while (numBytes > 0) {
         *data = 0;

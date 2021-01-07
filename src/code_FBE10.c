@@ -1,9 +1,7 @@
 #include "common.h"
 
-void func_802D7460(f32 x, f32 y, f32 z, s32 arg3);
 INCLUDE_ASM(void, "code_fa4c0_len_3bf0", func_802D7460, f32 x, f32 y, f32 z, s32 arg3);
 
-void func_802D74C0(f32 x, f32 y, f32 z, s32 arg3);
 INCLUDE_ASM(void, "code_fa4c0_len_3bf0", func_802D74C0, f32 x, f32 y, f32 z, s32 arg3);
 
 ApiStatus func_802D7520(ScriptInstance* script, s32 isInitialCall) {

@@ -1,7 +1,7 @@
 #include "common.h"
 #include "map.h"
 
-void M(UnkDurationCheck)(ScriptInstance* script) {
+void N(UnkDurationCheck)(ScriptInstance* script) {
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
 
     npc->duration--;

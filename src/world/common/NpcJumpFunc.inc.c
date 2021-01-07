@@ -1,7 +1,7 @@
 #include "common.h"
 #include "map.h"
 
-void M(NpcJumpFunc)(ScriptInstance* script) {
+void N(NpcJumpFunc)(ScriptInstance* script) {
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
 
     npc->pos.y += npc->jumpVelocity;

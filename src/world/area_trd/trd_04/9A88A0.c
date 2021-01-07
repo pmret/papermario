@@ -1,12 +1,12 @@
 #include "trd_04.h"
 
-INCLUDE_ASM(s32, "world/area_trd/trd_04/9A88A0", func_802404B0_9A88A0);
+#include "world/common/set_script_owner_npc_anim.inc.c"
 
 INCLUDE_ASM(s32, "world/area_trd/trd_04/9A88A0", func_8024052C_9A891C);
 
-INCLUDE_ASM(s32, "world/area_trd/trd_04/9A88A0", func_80240660_9A8A50);
+#include "world/common/UnkNpcAIFunc12.inc.c"
 
-INCLUDE_ASM(s32, "world/area_trd/trd_04/9A88A0", func_802407C4_9A8BB4);
+#include "world/common/set_script_owner_npc_col_height.inc.c"
 
 INCLUDE_ASM(s32, "world/area_trd/trd_04/9A88A0", func_80240844_9A8C34);
 
@@ -40,8 +40,9 @@ INCLUDE_ASM(s32, "world/area_trd/trd_04/9A88A0", func_80241E18_9AA208);
 
 INCLUDE_ASM(s32, "world/area_trd/trd_04/9A88A0", func_80241FC8_9AA3B8);
 
-// Should be #include "world/common/UnkNpcAIFunc1.inc.c"
-INCLUDE_ASM(s32, "world/area_trd/trd_04/9A88A0", func_802425F0_9AA9E0);
+#define NAMESPACE dup_trd_04
+#include "world/common/UnkNpcAIFunc1.inc.c"
+#define NAMESPACE trd_04
 
 INCLUDE_ASM(s32, "world/area_trd/trd_04/9A88A0", func_802426B0_9AAAA0);
 

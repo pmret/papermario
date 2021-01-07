@@ -48,8 +48,9 @@ INCLUDE_ASM(s32, "world/area_dgb/dgb_01/BFD9A0", func_8024252C_BFFDAC);
 
 INCLUDE_ASM(s32, "world/area_dgb/dgb_01/BFD9A0", func_80242684_BFFF04);
 
-// should be #include "world/common/UnkNpcAIFunc1.inc.c"
-INCLUDE_ASM(s32, "world/area_dgb/dgb_01/BFD9A0", func_8024292C_C001AC);
+#define NAMESPACE dup_dgb_01
+#include "world/common/UnkNpcAIFunc1.inc.c"
+#define NAMESPACE dgb_01
 
 INCLUDE_ASM(s32, "world/area_dgb/dgb_01/BFD9A0", func_802429EC_C0026C);
 
