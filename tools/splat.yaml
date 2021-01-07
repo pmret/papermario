@@ -9,6 +9,7 @@ options:
   extensions: splat_ext
   symbol_debug_info: False
   create_detected_syms: True
+  symbol_addrs: tools/symbol_addrs.txt
 segments:
   - name: header
     type: header
