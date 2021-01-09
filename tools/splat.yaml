@@ -218,7 +218,7 @@ segments:
     - [0x71430, bin]
     - [0x73DA0, .rodata, world/world]
     - [0x74EA0, bin]
-    - [0x75240, rodata, battle/battle] # ram 80099E40
+    - [0x75240, .rodata, battle/battle] # ram 80099E40
   - type: code
     start: 0x759B0
     vram: 0x800DC500
