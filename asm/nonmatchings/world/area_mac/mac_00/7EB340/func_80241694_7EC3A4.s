@@ -3,8 +3,8 @@
 
 glabel func_80241694_7EC3A4
 /* 7EC3A4 80241694 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* 7EC3A8 80241698 3C058024 */  lui       $a1, %hi(func_80241628_7EB2D4)
-/* 7EC3AC 8024169C 24A51628 */  addiu     $a1, $a1, %lo(func_80241628_7EB2D4)
+/* 7EC3A8 80241698 3C058024 */  lui       $a1, %hi(func_80241628_7EC338)
+/* 7EC3AC 8024169C 24A51628 */  addiu     $a1, $a1, %lo(func_80241628_7EC338)
 /* 7EC3B0 802416A0 AFBF0010 */  sw        $ra, 0x10($sp)
 /* 7EC3B4 802416A4 0C048C8F */  jal       bind_dynamic_entity_7
 /* 7EC3B8 802416A8 0000202D */   daddu    $a0, $zero, $zero

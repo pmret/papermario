@@ -157,11 +157,11 @@ glabel func_802460E4_806964
 /* 806BAC 8024632C 00000000 */   nop      
 /* 806BB0 80246330 0280202D */  daddu     $a0, $s4, $zero
 /* 806BB4 80246334 0260282D */  daddu     $a1, $s3, $zero
-/* 806BB8 80246338 0C091720 */  jal       func_80245C80_806500
+/* 806BB8 80246338 0C091720 */  jal       mac_01_NpcJumpFunc2
 /* 806BBC 8024633C 02A0302D */   daddu    $a2, $s5, $zero
 /* 806BC0 80246340 0280202D */  daddu     $a0, $s4, $zero
 /* 806BC4 80246344 0260282D */  daddu     $a1, $s3, $zero
-/* 806BC8 80246348 0C09173D */  jal       func_80245CF4_806574
+/* 806BC8 80246348 0C09173D */  jal       mac_01_NpcJumpFunc
 /* 806BCC 8024634C 02A0302D */   daddu    $a2, $s5, $zero
 /* 806BD0 80246350 080918EE */  j         .L802463B8
 /* 806BD4 80246354 00000000 */   nop      
@@ -177,7 +177,7 @@ glabel func_802460E4_806964
 /* 806BFC 8024637C 00000000 */   nop      
 /* 806C00 80246380 0280202D */  daddu     $a0, $s4, $zero
 /* 806C04 80246384 0260282D */  daddu     $a1, $s3, $zero
-/* 806C08 80246388 0C0917EF */  jal       func_80245FBC_80683C
+/* 806C08 80246388 0C0917EF */  jal       mac_01_UnkNpcDurationFlagFunc
 /* 806C0C 8024638C 02A0302D */   daddu    $a2, $s5, $zero
 /* 806C10 80246390 080918EE */  j         .L802463B8
 /* 806C14 80246394 00000000 */   nop      

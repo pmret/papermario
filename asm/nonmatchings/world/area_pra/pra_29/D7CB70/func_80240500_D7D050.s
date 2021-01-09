@@ -84,8 +84,8 @@ glabel func_80240500_D7D050
 /* D7D17C 8024062C A0209D71 */  sb        $zero, %lo(D_802D9D71)($at)
 .L80240630:
 /* D7D180 80240630 8FA20038 */  lw        $v0, 0x38($sp)
-/* D7D184 80240634 3C048024 */  lui       $a0, %hi(func_80240870_D7CEE0)
-/* D7D188 80240638 24840870 */  addiu     $a0, $a0, %lo(func_80240870_D7CEE0)
+/* D7D184 80240634 3C048024 */  lui       $a0, %hi(func_80240870_D7D3C0)
+/* D7D188 80240638 24840870 */  addiu     $a0, $a0, %lo(func_80240870_D7D3C0)
 /* D7D18C 8024063C AE320000 */  sw        $s2, ($s1)
 /* D7D190 80240640 AE300008 */  sw        $s0, 8($s1)
 /* D7D194 80240644 00021023 */  negu      $v0, $v0
@@ -95,8 +95,8 @@ glabel func_80240500_D7D050
 /* D7D1A4 80240654 00431024 */  and       $v0, $v0, $v1
 /* D7D1A8 80240658 54400004 */  bnel      $v0, $zero, .L8024066C
 /* D7D1AC 8024065C AE24000C */   sw       $a0, 0xc($s1)
-/* D7D1B0 80240660 3C048024 */  lui       $a0, %hi(func_8024068C_D7CCFC)
-/* D7D1B4 80240664 2484068C */  addiu     $a0, $a0, %lo(func_8024068C_D7CCFC)
+/* D7D1B0 80240660 3C048024 */  lui       $a0, %hi(func_8024068C_D7D1DC)
+/* D7D1B4 80240664 2484068C */  addiu     $a0, $a0, %lo(func_8024068C_D7D1DC)
 /* D7D1B8 80240668 AE24000C */  sw        $a0, 0xc($s1)
 .L8024066C:
 /* D7D1BC 8024066C 0C047644 */  jal       queue_render_task

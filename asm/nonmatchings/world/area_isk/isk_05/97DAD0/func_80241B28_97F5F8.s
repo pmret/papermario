@@ -49,8 +49,8 @@ glabel func_80241B28_97F5F8
 /* 97F6A8 80241BD8 3C013F36 */  lui       $at, 0x3f36
 /* 97F6AC 80241BDC 3421DB6E */  ori       $at, $at, 0xdb6e
 /* 97F6B0 80241BE0 44810000 */  mtc1      $at, $f0
-/* 97F6B4 80241BE4 3C058024 */  lui       $a1, %hi(func_80241610_97D5B8)
-/* 97F6B8 80241BE8 24A51610 */  addiu     $a1, $a1, %lo(func_80241610_97D5B8)
+/* 97F6B4 80241BE4 3C058024 */  lui       $a1, %hi(func_80241610_97F0E0)
+/* 97F6B8 80241BE8 24A51610 */  addiu     $a1, $a1, %lo(func_80241610_97F0E0)
 /* 97F6BC 80241BEC AE00001C */  sw        $zero, 0x1c($s0)
 /* 97F6C0 80241BF0 AE000020 */  sw        $zero, 0x20($s0)
 /* 97F6C4 80241BF4 AE000024 */  sw        $zero, 0x24($s0)

@@ -33,8 +33,8 @@ glabel func_80241530_D6FEE0
 /* D6FF50 802415A0 0220202D */  daddu     $a0, $s1, $zero
 /* D6FF54 802415A4 820500AA */  lb        $a1, 0xaa($s0)
 /* D6FF58 802415A8 8FA30038 */  lw        $v1, 0x38($sp)
-/* D6FF5C 802415AC 3C028024 */  lui       $v0, %hi(func_802415E0_D6EA80)
-/* D6FF60 802415B0 244215E0 */  addiu     $v0, $v0, %lo(func_802415E0_D6EA80)
+/* D6FF5C 802415AC 3C028024 */  lui       $v0, %hi(func_802415E0_D6FF90)
+/* D6FF60 802415B0 244215E0 */  addiu     $v0, $v0, %lo(func_802415E0_D6FF90)
 /* D6FF64 802415B4 AFB00028 */  sw        $s0, 0x28($sp)
 /* D6FF68 802415B8 AFA2002C */  sw        $v0, 0x2c($sp)
 /* D6FF6C 802415BC 00031823 */  negu      $v1, $v1

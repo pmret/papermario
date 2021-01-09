@@ -3,8 +3,8 @@
 
 glabel func_802401FC_AF7B4C
 /* AF7B4C 802401FC 27BDFFD8 */  addiu     $sp, $sp, -0x28
-/* AF7B50 80240200 3C048024 */  lui       $a0, %hi(func_80240068_AF77BC)
-/* AF7B54 80240204 24840068 */  addiu     $a0, $a0, %lo(func_80240068_AF77BC)
+/* AF7B50 80240200 3C048024 */  lui       $a0, %hi(func_80240068_AF79B8)
+/* AF7B54 80240204 24840068 */  addiu     $a0, $a0, %lo(func_80240068_AF79B8)
 /* AF7B58 80240208 AFBF0024 */  sw        $ra, 0x24($sp)
 /* AF7B5C 8024020C AFB20020 */  sw        $s2, 0x20($sp)
 /* AF7B60 80240210 AFB1001C */  sw        $s1, 0x1c($sp)

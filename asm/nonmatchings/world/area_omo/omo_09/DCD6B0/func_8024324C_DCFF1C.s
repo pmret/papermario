@@ -186,15 +186,15 @@ glabel func_8024324C_DCFF1C
 /* DD01D0 80243500 0260202D */   daddu    $a0, $s3, $zero
 /* DD01D4 80243504 08090D51 */  j         .L80243544
 /* DD01D8 80243508 00000000 */   nop      
-/* DD01DC 8024350C 0C0909E3 */  jal       func_8024278C_DCF45C
+/* DD01DC 8024350C 0C0909E3 */  jal       omo_09_UnkSetDurationFunc
 /* DD01E0 80243510 0260202D */   daddu    $a0, $s3, $zero
 /* DD01E4 80243514 08090D51 */  j         .L80243544
 /* DD01E8 80243518 00000000 */   nop      
-/* DD01EC 8024351C 0C0909F4 */  jal       func_802427D0_DCF4A0
+/* DD01EC 8024351C 0C0909F4 */  jal       omo_09_UnkNpcAIFunc9
 /* DD01F0 80243520 0260202D */   daddu    $a0, $s3, $zero
 /* DD01F4 80243524 08090D51 */  j         .L80243544
 /* DD01F8 80243528 00000000 */   nop      
-/* DD01FC 8024352C 0C090A1C */  jal       func_80242870_DCF540
+/* DD01FC 8024352C 0C090A1C */  jal       omo_09_UnkDurationCheck
 /* DD0200 80243530 0260202D */   daddu    $a0, $s3, $zero
 /* DD0204 80243534 08090D51 */  j         .L80243544
 /* DD0208 80243538 00000000 */   nop      

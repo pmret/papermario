@@ -12,8 +12,8 @@ glabel func_80242B04_8EE924
 /* 8EE940 80242B20 2404002C */   addiu    $a0, $zero, 0x2c
 /* 8EE944 80242B24 0040802D */  daddu     $s0, $v0, $zero
 /* 8EE948 80242B28 0000202D */  daddu     $a0, $zero, $zero
-/* 8EE94C 80242B2C 3C058024 */  lui       $a1, %hi(func_80242A04_8EDEC0)
-/* 8EE950 80242B30 24A52A04 */  addiu     $a1, $a1, %lo(func_80242A04_8EDEC0)
+/* 8EE94C 80242B2C 3C058024 */  lui       $a1, %hi(func_80242A04_8EE824)
+/* 8EE950 80242B30 24A52A04 */  addiu     $a1, $a1, %lo(func_80242A04_8EE824)
 /* 8EE954 80242B34 240200FF */  addiu     $v0, $zero, 0xff
 /* 8EE958 80242B38 AE300070 */  sw        $s0, 0x70($s1)
 /* 8EE95C 80242B3C A6000000 */  sh        $zero, ($s0)

@@ -9,8 +9,8 @@ glabel func_80241C70_9D8C90
 /* 9D8CA0 80241C80 8C84014C */   lw       $a0, 0x14c($a0)
 /* 9D8CA4 80241C84 24040008 */  addiu     $a0, $zero, 8
 /* 9D8CA8 80241C88 0040802D */  daddu     $s0, $v0, $zero
-/* 9D8CAC 80241C8C 3C028024 */  lui       $v0, %hi(func_80241CDC_9D7B0C)
-/* 9D8CB0 80241C90 24421CDC */  addiu     $v0, $v0, %lo(func_80241CDC_9D7B0C)
+/* 9D8CAC 80241C8C 3C028024 */  lui       $v0, %hi(func_80241CDC_9D8CFC)
+/* 9D8CB0 80241C90 24421CDC */  addiu     $v0, $v0, %lo(func_80241CDC_9D8CFC)
 /* 9D8CB4 80241C94 0C00AB39 */  jal       heap_malloc
 /* 9D8CB8 80241C98 AE020008 */   sw       $v0, 8($s0)
 /* 9D8CBC 80241C9C 0040182D */  daddu     $v1, $v0, $zero

@@ -39,8 +39,8 @@ glabel func_8024003C_B1CA8C
 /* B1CB14 802400C4 AFB00028 */  sw        $s0, 0x28($sp)
 /* B1CB18 802400C8 820500BE */  lb        $a1, 0xbe($s0)
 /* B1CB1C 802400CC 8FA30038 */  lw        $v1, 0x38($sp)
-/* B1CB20 802400D0 3C028024 */  lui       $v0, %hi(func_80240100_B1CB14)
-/* B1CB24 802400D4 24420100 */  addiu     $v0, $v0, %lo(func_80240100_B1CB14)
+/* B1CB20 802400D0 3C028024 */  lui       $v0, %hi(func_80240100_B1CB50)
+/* B1CB24 802400D4 24420100 */  addiu     $v0, $v0, %lo(func_80240100_B1CB50)
 /* B1CB28 802400D8 AFA2002C */  sw        $v0, 0x2c($sp)
 /* B1CB2C 802400DC 00031823 */  negu      $v1, $v1
 /* B1CB30 802400E0 AFA50020 */  sw        $a1, 0x20($sp)

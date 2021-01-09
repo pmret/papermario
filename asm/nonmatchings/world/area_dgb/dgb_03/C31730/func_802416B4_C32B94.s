@@ -141,7 +141,7 @@ glabel func_802416B4_C32B94
 /* C32D9C 802418BC 00000000 */   nop      
 /* C32DA0 802418C0 0280202D */  daddu     $a0, $s4, $zero
 /* C32DA4 802418C4 0260282D */  daddu     $a1, $s3, $zero
-/* C32DA8 802418C8 0C0903C8 */  jal       func_80240F20_C32400
+/* C32DA8 802418C8 0C0903C8 */  jal       dgb_03_UnkNpcAIFunc1
 /* C32DAC 802418CC 02A0302D */   daddu    $a2, $s5, $zero
 /* C32DB0 802418D0 0280202D */  daddu     $a0, $s4, $zero
 /* C32DB4 802418D4 0260282D */  daddu     $a1, $s3, $zero
@@ -157,11 +157,11 @@ glabel func_802416B4_C32B94
 /* C32DDC 802418FC 00000000 */   nop      
 /* C32DE0 80241900 0280202D */  daddu     $a0, $s4, $zero
 /* C32DE4 80241904 0260282D */  daddu     $a1, $s3, $zero
-/* C32DE8 80241908 0C090494 */  jal       func_80241250_C32730
+/* C32DE8 80241908 0C090494 */  jal       dgb_03_NpcJumpFunc2
 /* C32DEC 8024190C 02A0302D */   daddu    $a2, $s5, $zero
 /* C32DF0 80241910 0280202D */  daddu     $a0, $s4, $zero
 /* C32DF4 80241914 0260282D */  daddu     $a1, $s3, $zero
-/* C32DF8 80241918 0C0904B1 */  jal       func_802412C4_C327A4
+/* C32DF8 80241918 0C0904B1 */  jal       dgb_03_NpcJumpFunc
 /* C32DFC 8024191C 02A0302D */   daddu    $a2, $s5, $zero
 /* C32E00 80241920 08090662 */  j         .L80241988
 /* C32E04 80241924 00000000 */   nop      
@@ -177,7 +177,7 @@ glabel func_802416B4_C32B94
 /* C32E2C 8024194C 00000000 */   nop      
 /* C32E30 80241950 0280202D */  daddu     $a0, $s4, $zero
 /* C32E34 80241954 0260282D */  daddu     $a1, $s3, $zero
-/* C32E38 80241958 0C090563 */  jal       func_8024158C_C32A6C
+/* C32E38 80241958 0C090563 */  jal       dgb_03_UnkNpcDurationFlagFunc
 /* C32E3C 8024195C 02A0302D */   daddu    $a2, $s5, $zero
 /* C32E40 80241960 08090662 */  j         .L80241988
 /* C32E44 80241964 00000000 */   nop      

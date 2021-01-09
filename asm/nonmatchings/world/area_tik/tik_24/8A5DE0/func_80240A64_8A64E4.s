@@ -232,7 +232,7 @@ glabel func_80240A64_8A64E4
 .L80240DB4:
 /* 8A6834 80240DB4 0260202D */  daddu     $a0, $s3, $zero
 /* 8A6838 80240DB8 0280282D */  daddu     $a1, $s4, $zero
-/* 8A683C 80240DBC 0C0901B4 */  jal       func_802406D0_8A6150
+/* 8A683C 80240DBC 0C0901B4 */  jal       tik_24_set_script_owner_npc_anim
 /* 8A6840 80240DC0 02A0302D */   daddu    $a2, $s5, $zero
 /* 8A6844 80240DC4 0260202D */  daddu     $a0, $s3, $zero
 .L80240DC8:
@@ -244,13 +244,13 @@ glabel func_80240A64_8A64E4
 .L80240DDC:
 /* 8A685C 80240DDC 0260202D */  daddu     $a0, $s3, $zero
 /* 8A6860 80240DE0 0280282D */  daddu     $a1, $s4, $zero
-/* 8A6864 80240DE4 0C090220 */  jal       func_80240880_8A6300
+/* 8A6864 80240DE4 0C090220 */  jal       tik_24_UnkNpcAIFunc12
 /* 8A6868 80240DE8 02A0302D */   daddu    $a2, $s5, $zero
 /* 8A686C 80240DEC 08090384 */  j         .L80240E10
 /* 8A6870 80240DF0 00000000 */   nop      
 .L80240DF4:
 /* 8A6874 80240DF4 0280282D */  daddu     $a1, $s4, $zero
-/* 8A6878 80240DF8 0C090279 */  jal       func_802409E4_8A6464
+/* 8A6878 80240DF8 0C090279 */  jal       tik_24_set_script_owner_npc_col_height
 /* 8A687C 80240DFC 02A0302D */   daddu    $a2, $s5, $zero
 /* 8A6880 80240E00 08090384 */  j         .L80240E10
 /* 8A6884 80240E04 00000000 */   nop      

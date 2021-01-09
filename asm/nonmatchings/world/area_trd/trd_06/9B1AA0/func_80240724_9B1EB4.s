@@ -54,8 +54,8 @@ glabel func_80240724_9B1EB4
 /* 9B1F78 802407E8 0C04E9C1 */  jal       func_8013A704
 /* 9B1F7C 802407EC E6000018 */   swc1     $f0, 0x18($s0)
 /* 9B1F80 802407F0 0000202D */  daddu     $a0, $zero, $zero
-/* 9B1F84 802407F4 3C058024 */  lui       $a1, %hi(func_80240310_9B168C)
-/* 9B1F88 802407F8 24A50310 */  addiu     $a1, $a1, %lo(func_80240310_9B168C)
+/* 9B1F84 802407F4 3C058024 */  lui       $a1, %hi(func_80240310_9B1AA0)
+/* 9B1F88 802407F8 24A50310 */  addiu     $a1, $a1, %lo(func_80240310_9B1AA0)
 /* 9B1F8C 802407FC 0C048C56 */  jal       bind_dynamic_entity_3
 /* 9B1F90 80240800 AE020004 */   sw       $v0, 4($s0)
 /* 9B1F94 80240804 AE020008 */  sw        $v0, 8($s0)

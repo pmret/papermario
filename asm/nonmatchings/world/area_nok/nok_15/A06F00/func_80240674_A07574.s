@@ -244,13 +244,13 @@ glabel func_80240674_A07574
 .L802409EC:
 /* A078EC 802409EC 0260202D */  daddu     $a0, $s3, $zero
 /* A078F0 802409F0 0280282D */  daddu     $a1, $s4, $zero
-/* A078F4 802409F4 0C090124 */  jal       func_80240490_A07390
+/* A078F4 802409F4 0C090124 */  jal       nok_15_UnkNpcAIFunc12
 /* A078F8 802409F8 02A0302D */   daddu    $a2, $s5, $zero
 /* A078FC 802409FC 08090288 */  j         .L80240A20
 /* A07900 80240A00 00000000 */   nop      
 .L80240A04:
 /* A07904 80240A04 0280282D */  daddu     $a1, $s4, $zero
-/* A07908 80240A08 0C09017D */  jal       func_802405F4_A074F4
+/* A07908 80240A08 0C09017D */  jal       nok_15_set_script_owner_npc_col_height
 /* A0790C 80240A0C 02A0302D */   daddu    $a2, $s5, $zero
 /* A07910 80240A10 08090288 */  j         .L80240A20
 /* A07914 80240A14 00000000 */   nop      

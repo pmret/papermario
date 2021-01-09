@@ -18,8 +18,8 @@ glabel func_802416F8_E0FE98
 /* E0FECC 8024172C 24040018 */   addiu    $a0, $zero, 0x18
 /* E0FED0 80241730 0040802D */  daddu     $s0, $v0, $zero
 /* E0FED4 80241734 0000202D */  daddu     $a0, $zero, $zero
-/* E0FED8 80241738 3C058024 */  lui       $a1, %hi(func_802416C0_E0F948)
-/* E0FEDC 8024173C 24A516C0 */  addiu     $a1, $a1, %lo(func_802416C0_E0F948)
+/* E0FED8 80241738 3C058024 */  lui       $a1, %hi(func_802416C0_E0FE60)
+/* E0FEDC 8024173C 24A516C0 */  addiu     $a1, $a1, %lo(func_802416C0_E0FE60)
 /* E0FEE0 80241740 240200FF */  addiu     $v0, $zero, 0xff
 /* E0FEE4 80241744 AE300070 */  sw        $s0, 0x70($s1)
 /* E0FEE8 80241748 AE000000 */  sw        $zero, ($s0)

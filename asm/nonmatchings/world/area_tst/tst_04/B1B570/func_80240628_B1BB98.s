@@ -3,10 +3,10 @@
 
 glabel func_80240628_B1BB98
 /* B1BB98 80240628 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* B1BB9C 8024062C 3C048024 */  lui       $a0, %hi(func_802405B0_B1B4F8)
-/* B1BBA0 80240630 248405B0 */  addiu     $a0, $a0, %lo(func_802405B0_B1B4F8)
-/* B1BBA4 80240634 3C058024 */  lui       $a1, %hi(func_802405D4_B1B51C)
-/* B1BBA8 80240638 24A505D4 */  addiu     $a1, $a1, %lo(func_802405D4_B1B51C)
+/* B1BB9C 8024062C 3C048024 */  lui       $a0, %hi(func_802405B0_B1BB20)
+/* B1BBA0 80240630 248405B0 */  addiu     $a0, $a0, %lo(func_802405B0_B1BB20)
+/* B1BBA4 80240634 3C058024 */  lui       $a1, %hi(func_802405D4_B1BB44)
+/* B1BBA8 80240638 24A505D4 */  addiu     $a1, $a1, %lo(func_802405D4_B1BB44)
 /* B1BBAC 8024063C AFBF0010 */  sw        $ra, 0x10($sp)
 /* B1BBB0 80240640 0C048C56 */  jal       bind_dynamic_entity_3
 /* B1BBB4 80240644 00000000 */   nop      

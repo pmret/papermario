@@ -3,8 +3,8 @@
 
 glabel func_80240B00_900170
 /* 900170 80240B00 27BDFFD8 */  addiu     $sp, $sp, -0x28
-/* 900174 80240B04 3C028024 */  lui       $v0, %hi(func_8024056C_8FF31C)
-/* 900178 80240B08 2442056C */  addiu     $v0, $v0, %lo(func_8024056C_8FF31C)
+/* 900174 80240B04 3C028024 */  lui       $v0, %hi(func_8024056C_8FFBDC)
+/* 900178 80240B08 2442056C */  addiu     $v0, $v0, %lo(func_8024056C_8FFBDC)
 /* 90017C 80240B0C AFA2001C */  sw        $v0, 0x1c($sp)
 /* 900180 80240B10 2402000A */  addiu     $v0, $zero, 0xa
 /* 900184 80240B14 AFA20014 */  sw        $v0, 0x14($sp)

@@ -71,7 +71,7 @@ glabel func_8024113C_BDFECC
 /* BDFFD0 80241240 00000000 */   nop      
 /* BDFFD4 80241244 0280202D */  daddu     $a0, $s4, $zero
 /* BDFFD8 80241248 0200282D */  daddu     $a1, $s0, $zero
-/* BDFFDC 8024124C 0C090100 */  jal       func_80240400_BDF190
+/* BDFFDC 8024124C 0C090100 */  jal       arn_03_UnkNpcAIFunc1
 /* BDFFE0 80241250 0240302D */   daddu    $a2, $s2, $zero
 /* BDFFE4 80241254 0280202D */  daddu     $a0, $s4, $zero
 /* BDFFE8 80241258 0200282D */  daddu     $a1, $s0, $zero

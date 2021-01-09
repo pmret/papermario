@@ -7,12 +7,12 @@ glabel func_80241168_BCFD58
 /* BCFD60 80241170 AFB10014 */  sw        $s1, 0x14($sp)
 /* BCFD64 80241174 0C090150 */  jal       func_80240540_BCF130
 /* BCFD68 80241178 AFB00010 */   sw       $s0, 0x10($sp)
-/* BCFD6C 8024117C 3C048024 */  lui       $a0, %hi(func_80240A6C_BCE9F4)
-/* BCFD70 80241180 24840A6C */  addiu     $a0, $a0, %lo(func_80240A6C_BCE9F4)
+/* BCFD6C 8024117C 3C048024 */  lui       $a0, %hi(func_80240A6C_BCF65C)
+/* BCFD70 80241180 24840A6C */  addiu     $a0, $a0, %lo(func_80240A6C_BCF65C)
 /* BCFD74 80241184 3C06800A */  lui       $a2, %hi(D_8009A650)
 /* BCFD78 80241188 24C6A650 */  addiu     $a2, $a2, %lo(D_8009A650)
-/* BCFD7C 8024118C 3C058024 */  lui       $a1, %hi(func_802410C0_BCF048)
-/* BCFD80 80241190 24A510C0 */  addiu     $a1, $a1, %lo(func_802410C0_BCF048)
+/* BCFD7C 8024118C 3C058024 */  lui       $a1, %hi(func_802410C0_BCFCB0)
+/* BCFD80 80241190 24A510C0 */  addiu     $a1, $a1, %lo(func_802410C0_BCFCB0)
 /* BCFD84 80241194 8CC30000 */  lw        $v1, ($a2)
 /* BCFD88 80241198 0040882D */  daddu     $s1, $v0, $zero
 /* BCFD8C 8024119C 34630010 */  ori       $v1, $v1, 0x10
