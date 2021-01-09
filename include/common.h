@@ -10,5 +10,6 @@
 #include "enums.h"
 #include "si.h"
 #include "messages.h"
+#include "ld_addrs.h"
 
 #endif
