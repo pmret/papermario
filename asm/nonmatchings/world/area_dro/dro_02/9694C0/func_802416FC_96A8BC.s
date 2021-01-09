@@ -77,10 +77,10 @@ glabel func_802416FC_96A8BC
 /* 96A9DC 8024181C 34A5D483 */  ori       $a1, $a1, 0xd483
 /* 96A9E0 80241820 0C0B2026 */  jal       set_variable
 /* 96A9E4 80241824 0260302D */   daddu    $a2, $s3, $zero
-/* 96A9E8 80241828 3C048024 */  lui       $a0, %hi(D_8024240C)
-/* 96A9EC 8024182C 2484240C */  addiu     $a0, $a0, %lo(D_8024240C)
-/* 96A9F0 80241830 3C058024 */  lui       $a1, %hi(D_80242EAC)
-/* 96A9F4 80241834 24A52EAC */  addiu     $a1, $a1, %lo(D_80242EAC)
+/* 96A9E8 80241828 3C048024 */  lui       $a0, %hi(func_8024240C_96A1D0)
+/* 96A9EC 8024182C 2484240C */  addiu     $a0, $a0, %lo(func_8024240C_96A1D0)
+/* 96A9F0 80241830 3C058024 */  lui       $a1, %hi(func_80242EAC_96AC70)
+/* 96A9F4 80241834 24A52EAC */  addiu     $a1, $a1, %lo(func_80242EAC_96AC70)
 /* 96A9F8 80241838 0C048C56 */  jal       bind_dynamic_entity_3
 /* 96A9FC 8024183C 00000000 */   nop      
 /* 96AA00 80241840 0240202D */  daddu     $a0, $s2, $zero

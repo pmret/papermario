@@ -5,8 +5,8 @@ glabel func_802403C4_E12B24
 /* E12B24 802403C4 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* E12B28 802403C8 2402002D */  addiu     $v0, $zero, 0x2d
 /* E12B2C 802403CC AFA20010 */  sw        $v0, 0x10($sp)
-/* E12B30 802403D0 3C028024 */  lui       $v0, %hi(D_802401D0)
-/* E12B34 802403D4 244201D0 */  addiu     $v0, $v0, %lo(D_802401D0)
+/* E12B30 802403D0 3C028024 */  lui       $v0, %hi(func_802401D0_E1273C)
+/* E12B34 802403D4 244201D0 */  addiu     $v0, $v0, %lo(func_802401D0_E1273C)
 /* E12B38 802403D8 27A40010 */  addiu     $a0, $sp, 0x10
 /* E12B3C 802403DC AFBF0020 */  sw        $ra, 0x20($sp)
 /* E12B40 802403E0 AFA00018 */  sw        $zero, 0x18($sp)

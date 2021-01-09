@@ -9,7 +9,7 @@ glabel load_message_to_printer
 /* BC178 80125A78 04400003 */  bltz      $v0, .L80125A88
 /* BC17C 80125A7C AFBF0014 */   sw       $ra, 0x14($sp)
 /* BC180 80125A80 0C049623 */  jal       load_message_to_buffer
-/* BC184 80125A84 00000000 */   nop
+/* BC184 80125A84 00000000 */   nop      
 .L80125A88:
 /* BC188 80125A88 0040202D */  daddu     $a0, $v0, $zero
 /* BC18C 80125A8C 8E0304FC */  lw        $v1, 0x4fc($s0)

@@ -3,8 +3,8 @@
 
 glabel func_80241764_CF92D4
 /* CF92D4 80241764 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* CF92D8 80241768 3C058024 */  lui       $a1, %hi(D_802416F8)
-/* CF92DC 8024176C 24A516F8 */  addiu     $a1, $a1, %lo(D_802416F8)
+/* CF92D8 80241768 3C058024 */  lui       $a1, %hi(func_802416F8_CF7E14)
+/* CF92DC 8024176C 24A516F8 */  addiu     $a1, $a1, %lo(func_802416F8_CF7E14)
 /* CF92E0 80241770 AFBF0010 */  sw        $ra, 0x10($sp)
 /* CF92E4 80241774 0C048C8F */  jal       bind_dynamic_entity_7
 /* CF92E8 80241778 0000202D */   daddu    $a0, $zero, $zero

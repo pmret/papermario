@@ -68,8 +68,8 @@ glabel func_802E4E04
 /* 106780 802E4F00 AE220000 */  sw        $v0, ($s1)
 /* 106784 802E4F04 0C0442F3 */  jal       func_80110BCC
 /* 106788 802E4F08 E6000054 */   swc1     $f0, 0x54($s0)
-/* 10678C 802E4F0C 3C02802E */  lui       $v0, %hi(D_802E4AEC)
-/* 106790 802E4F10 24424AEC */  addiu     $v0, $v0, %lo(D_802E4AEC)
+/* 10678C 802E4F0C 3C02802E */  lui       $v0, %hi(func_802E4AEC)
+/* 106790 802E4F10 24424AEC */  addiu     $v0, $v0, %lo(func_802E4AEC)
 /* 106794 802E4F14 080B94BA */  j         .L802E52E8
 /* 106798 802E4F18 AE22003C */   sw       $v0, 0x3c($s1)
 /* 10679C 802E4F1C C60C0020 */  lwc1      $f12, 0x20($s0)

@@ -7,8 +7,8 @@ glabel func_802E7D54
 /* 1095DC 802E7D5C AFBF0014 */  sw        $ra, 0x14($sp)
 /* 1095E0 802E7D60 0C0B9F4E */  jal       func_802E7D38
 /* 1095E4 802E7D64 0080802D */   daddu    $s0, $a0, $zero
-/* 1095E8 802E7D68 3C02802E */  lui       $v0, %hi(D_802E6ED8)
-/* 1095EC 802E7D6C 24426ED8 */  addiu     $v0, $v0, %lo(D_802E6ED8)
+/* 1095E8 802E7D68 3C02802E */  lui       $v0, %hi(func_802E6ED8)
+/* 1095EC 802E7D6C 24426ED8 */  addiu     $v0, $v0, %lo(func_802E6ED8)
 /* 1095F0 802E7D70 AE02003C */  sw        $v0, 0x3c($s0)
 /* 1095F4 802E7D74 8FBF0014 */  lw        $ra, 0x14($sp)
 /* 1095F8 802E7D78 8FB00010 */  lw        $s0, 0x10($sp)

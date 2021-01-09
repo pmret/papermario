@@ -9,8 +9,8 @@ glabel func_80240A60_CF85D0
 /* CF85E0 80240A70 8C84014C */   lw       $a0, 0x14c($a0)
 /* CF85E4 80240A74 24040008 */  addiu     $a0, $zero, 8
 /* CF85E8 80240A78 0040802D */  daddu     $s0, $v0, $zero
-/* CF85EC 80240A7C 3C028024 */  lui       $v0, %hi(D_80240ACC)
-/* CF85F0 80240A80 24420ACC */  addiu     $v0, $v0, %lo(D_80240ACC)
+/* CF85EC 80240A7C 3C028024 */  lui       $v0, %hi(func_80240ACC_CF7EEC)
+/* CF85F0 80240A80 24420ACC */  addiu     $v0, $v0, %lo(func_80240ACC_CF7EEC)
 /* CF85F4 80240A84 0C00AB39 */  jal       heap_malloc
 /* CF85F8 80240A88 AE020008 */   sw       $v0, 8($s0)
 /* CF85FC 80240A8C 0040182D */  daddu     $v1, $v0, $zero

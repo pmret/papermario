@@ -3,8 +3,8 @@
 
 glabel func_E00DC2C0
 /* 3D7D30 E00DC2C0 27BDFFD8 */  addiu     $sp, $sp, -0x28
-/* 3D7D34 E00DC2C4 3C02E00E */  lui       $v0, %hi(D_E00DC304)
-/* 3D7D38 E00DC2C8 2442C304 */  addiu     $v0, $v0, %lo(D_E00DC304)
+/* 3D7D34 E00DC2C4 3C02E00E */  lui       $v0, %hi(func_E00DC304)
+/* 3D7D38 E00DC2C8 2442C304 */  addiu     $v0, $v0, %lo(func_E00DC304)
 /* 3D7D3C E00DC2CC AFA2001C */  sw        $v0, 0x1c($sp)
 /* 3D7D40 E00DC2D0 2402000A */  addiu     $v0, $zero, 0xa
 /* 3D7D44 E00DC2D4 AFA20014 */  sw        $v0, 0x14($sp)

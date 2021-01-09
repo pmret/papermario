@@ -13,8 +13,8 @@ glabel func_80240F8C_DE341C
 /* DE343C 80240FAC 8C620000 */  lw        $v0, ($v1)
 /* DE3440 80240FB0 5040000A */  beql      $v0, $zero, .L80240FDC
 /* DE3444 80240FB4 00041080 */   sll      $v0, $a0, 2
-/* DE3448 80240FB8 3C058024 */  lui       $a1, %hi(D_80243220)
-/* DE344C 80240FBC 24A53220 */  addiu     $a1, $a1, %lo(D_80243220)
+/* DE3448 80240FB8 3C058024 */  lui       $a1, %hi(func_80243220_DC04D0)
+/* DE344C 80240FBC 24A53220 */  addiu     $a1, $a1, %lo(func_80243220_DC04D0)
 .L80240FC0:
 /* DE3450 80240FC0 24630004 */  addiu     $v1, $v1, 4
 /* DE3454 80240FC4 24840001 */  addiu     $a0, $a0, 1
@@ -24,14 +24,14 @@ glabel func_80240F8C_DE341C
 /* DE3464 80240FD4 24A50004 */   addiu    $a1, $a1, 4
 /* DE3468 80240FD8 00041080 */  sll       $v0, $a0, 2
 .L80240FDC:
-/* DE346C 80240FDC 3C018024 */  lui       $at, %hi(D_80243220)
+/* DE346C 80240FDC 3C018024 */  lui       $at, %hi(func_80243220_DC04D0)
 /* DE3470 80240FE0 00220821 */  addu      $at, $at, $v0
-/* DE3474 80240FE4 AC203220 */  sw        $zero, %lo(D_80243220)($at)
+/* DE3474 80240FE4 AC203220 */  sw        $zero, %lo(func_80243220_DC04D0)($at)
 /* DE3478 80240FE8 08090406 */  j         .L80241018
 /* DE347C 80240FEC 00000000 */   nop      
 .L80240FF0:
-/* DE3480 80240FF0 3C038024 */  lui       $v1, %hi(D_80243220)
-/* DE3484 80240FF4 24633220 */  addiu     $v1, $v1, %lo(D_80243220)
+/* DE3480 80240FF0 3C038024 */  lui       $v1, %hi(func_80243220_DC04D0)
+/* DE3484 80240FF4 24633220 */  addiu     $v1, $v1, %lo(func_80243220_DC04D0)
 /* DE3488 80240FF8 0060282D */  daddu     $a1, $v1, $zero
 .L80240FFC:
 /* DE348C 80240FFC 24820080 */  addiu     $v0, $a0, 0x80

@@ -13,8 +13,8 @@ glabel partner_reset_data
 /* 84944 800EB494 AFBF0018 */  sw        $ra, 0x18($sp)
 /* 84948 800EB498 0C00A580 */  jal       mem_clear
 /* 8494C 800EB49C 24050360 */   addiu    $a1, $zero, 0x360
-/* 84950 800EB4A0 3C04800F */  lui       $a0, %hi(D_800EA6CC)
-/* 84954 800EB4A4 2484A6CC */  addiu     $a0, $a0, %lo(D_800EA6CC)
+/* 84950 800EB4A0 3C04800F */  lui       $a0, %hi(func_800EA6CC)
+/* 84954 800EB4A4 2484A6CC */  addiu     $a0, $a0, %lo(func_800EA6CC)
 /* 84958 800EB4A8 0C048C8F */  jal       bind_dynamic_entity_7
 /* 8495C 800EB4AC 0000282D */   daddu    $a1, $zero, $zero
 /* 84960 800EB4B0 0C048D8F */  jal       get_dynamic_entity

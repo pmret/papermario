@@ -44,14 +44,14 @@ glabel func_E000C160
 .LE000C1F0:
 /* 328300 E000C1F0 24130009 */  addiu     $s3, $zero, 9
 .LE000C1F4:
-/* 328304 E000C1F4 3C02E001 */  lui       $v0, %hi(D_E000C64C)
-/* 328308 E000C1F8 2442C64C */  addiu     $v0, $v0, %lo(D_E000C64C)
+/* 328304 E000C1F4 3C02E001 */  lui       $v0, %hi(func_E000C64C)
+/* 328308 E000C1F8 2442C64C */  addiu     $v0, $v0, %lo(func_E000C64C)
 /* 32830C E000C1FC AC820008 */  sw        $v0, 8($a0)
-/* 328310 E000C200 3C02E001 */  lui       $v0, %hi(D_E000C654)
-/* 328314 E000C204 2442C654 */  addiu     $v0, $v0, %lo(D_E000C654)
+/* 328310 E000C200 3C02E001 */  lui       $v0, %hi(func_E000C654)
+/* 328314 E000C204 2442C654 */  addiu     $v0, $v0, %lo(func_E000C654)
 /* 328318 E000C208 AC82000C */  sw        $v0, 0xc($a0)
-/* 32831C E000C20C 3C02E001 */  lui       $v0, %hi(D_E000C754)
-/* 328320 E000C210 2442C754 */  addiu     $v0, $v0, %lo(D_E000C754)
+/* 32831C E000C20C 3C02E001 */  lui       $v0, %hi(func_E000C754)
+/* 328320 E000C210 2442C754 */  addiu     $v0, $v0, %lo(func_E000C754)
 /* 328324 E000C214 AC820010 */  sw        $v0, 0x10($a0)
 /* 328328 E000C218 24020006 */  addiu     $v0, $zero, 6
 /* 32832C E000C21C AC800000 */  sw        $zero, ($a0)

@@ -12,14 +12,14 @@ glabel func_E00A8000
 /* 3A710C E00A801C 27A40010 */  addiu     $a0, $sp, 0x10
 /* 3A7110 E00A8020 F7B80048 */  sdc1      $f24, 0x48($sp)
 /* 3A7114 E00A8024 4487C000 */  mtc1      $a3, $f24
-/* 3A7118 E00A8028 3C02E00B */  lui       $v0, %hi(D_E00A80FC)
-/* 3A711C E00A802C 244280FC */  addiu     $v0, $v0, %lo(D_E00A80FC)
+/* 3A7118 E00A8028 3C02E00B */  lui       $v0, %hi(func_E00A80FC)
+/* 3A711C E00A802C 244280FC */  addiu     $v0, $v0, %lo(func_E00A80FC)
 /* 3A7120 E00A8030 AFA20018 */  sw        $v0, 0x18($sp)
-/* 3A7124 E00A8034 3C02E00B */  lui       $v0, %hi(D_E00A8104)
-/* 3A7128 E00A8038 24428104 */  addiu     $v0, $v0, %lo(D_E00A8104)
+/* 3A7124 E00A8034 3C02E00B */  lui       $v0, %hi(func_E00A8104)
+/* 3A7128 E00A8038 24428104 */  addiu     $v0, $v0, %lo(func_E00A8104)
 /* 3A712C E00A803C AFA2001C */  sw        $v0, 0x1c($sp)
-/* 3A7130 E00A8040 3C02E00B */  lui       $v0, %hi(D_E00A82D4)
-/* 3A7134 E00A8044 244282D4 */  addiu     $v0, $v0, %lo(D_E00A82D4)
+/* 3A7130 E00A8040 3C02E00B */  lui       $v0, %hi(func_E00A82D4)
+/* 3A7134 E00A8044 244282D4 */  addiu     $v0, $v0, %lo(func_E00A82D4)
 /* 3A7138 E00A8048 AFA20020 */  sw        $v0, 0x20($sp)
 /* 3A713C E00A804C 24020054 */  addiu     $v0, $zero, 0x54
 /* 3A7140 E00A8050 AFBF0030 */  sw        $ra, 0x30($sp)

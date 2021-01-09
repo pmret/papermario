@@ -5,8 +5,8 @@ glabel func_80242704_A2C944
 /* A2C944 80242704 27BDFFB8 */  addiu     $sp, $sp, -0x48
 /* A2C948 80242708 24040003 */  addiu     $a0, $zero, 3
 /* A2C94C 8024270C AFB1001C */  sw        $s1, 0x1c($sp)
-/* A2C950 80242710 3C118025 */  lui       $s1, %hi(D_80249AA4)
-/* A2C954 80242714 26319AA4 */  addiu     $s1, $s1, %lo(D_80249AA4)
+/* A2C950 80242710 3C118025 */  lui       $s1, %hi(func_80249AA4)
+/* A2C954 80242714 26319AA4 */  addiu     $s1, $s1, %lo(func_80249AA4)
 /* A2C958 80242718 AFBF0030 */  sw        $ra, 0x30($sp)
 /* A2C95C 8024271C AFB5002C */  sw        $s5, 0x2c($sp)
 /* A2C960 80242720 AFB40028 */  sw        $s4, 0x28($sp)

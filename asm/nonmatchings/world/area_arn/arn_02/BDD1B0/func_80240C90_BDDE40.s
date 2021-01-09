@@ -95,9 +95,9 @@ glabel func_80240C90_BDDE40
 /* BDDF94 80240DE4 2C620035 */  sltiu     $v0, $v1, 0x35
 /* BDDF98 80240DE8 10400073 */  beqz      $v0, .L80240FB8
 /* BDDF9C 80240DEC 00031080 */   sll      $v0, $v1, 2
-/* BDDFA0 80240DF0 3C018024 */  lui       $at, %hi(D_80241B08)
+/* BDDFA0 80240DF0 3C018024 */  lui       $at, %hi(func_80241B08_B94F48)
 /* BDDFA4 80240DF4 00220821 */  addu      $at, $at, $v0
-/* BDDFA8 80240DF8 8C221B08 */  lw        $v0, %lo(D_80241B08)($at)
+/* BDDFA8 80240DF8 8C221B08 */  lw        $v0, %lo(func_80241B08_B94F48)($at)
 /* BDDFAC 80240DFC 00400008 */  jr        $v0
 /* BDDFB0 80240E00 00000000 */   nop      
 /* BDDFB4 80240E04 0260202D */  daddu     $a0, $s3, $zero
@@ -207,7 +207,7 @@ glabel func_80240C90_BDDE40
 /* BDE154 80240FA4 0000102D */   daddu    $v0, $zero, $zero
 /* BDE158 80240FA8 0260202D */  daddu     $a0, $s3, $zero
 /* BDE15C 80240FAC 0280282D */  daddu     $a1, $s4, $zero
-/* BDE160 80240FB0 0C090313 */  jal       arn_02_UnkDurationCheck
+/* BDE160 80240FB0 0C090313 */  jal       func_80240C4C_BDDDFC
 /* BDE164 80240FB4 0200302D */   daddu    $a2, $s0, $zero
 .L80240FB8:
 /* BDE168 80240FB8 0000102D */  daddu     $v0, $zero, $zero

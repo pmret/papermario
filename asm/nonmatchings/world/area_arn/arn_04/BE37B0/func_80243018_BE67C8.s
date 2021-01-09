@@ -207,7 +207,7 @@ glabel func_80243018_BE67C8
 /* BE6ADC 8024332C 0000102D */   daddu    $v0, $zero, $zero
 /* BE6AE0 80243330 0260202D */  daddu     $a0, $s3, $zero
 /* BE6AE4 80243334 0280282D */  daddu     $a1, $s4, $zero
-/* BE6AE8 80243338 0C090BF5 */  jal       arn_04_UnkDurationCheck
+/* BE6AE8 80243338 0C090BF5 */  jal       func_80242FD4_BE6784
 /* BE6AEC 8024333C 0200302D */   daddu    $a2, $s0, $zero
 .L80243340:
 /* BE6AF0 80243340 0000102D */  daddu     $v0, $zero, $zero

@@ -7,8 +7,8 @@ glabel osCreateThread
 /* 41268 80065E68 00808021 */  addu      $s0, $a0, $zero
 /* 4126C 80065E6C 00E04821 */  addu      $t1, $a3, $zero
 /* 41270 80065E70 000747C3 */  sra       $t0, $a3, 0x1f
-/* 41274 80065E74 3C048007 */  lui       $a0, %hi(D_8006B350)
-/* 41278 80065E78 2484B350 */  addiu     $a0, $a0, %lo(D_8006B350)
+/* 41274 80065E74 3C048007 */  lui       $a0, %hi(osCleanupThread)
+/* 41278 80065E78 2484B350 */  addiu     $a0, $a0, %lo(osCleanupThread)
 /* 4127C 80065E7C 00801821 */  addu      $v1, $a0, $zero
 /* 41280 80065E80 000417C3 */  sra       $v0, $a0, 0x1f
 /* 41284 80065E84 8FA70028 */  lw        $a3, 0x28($sp)

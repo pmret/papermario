@@ -37,7 +37,7 @@ glabel func_80240128_D6EAD8
 /* D6EB58 802401A8 0C00B94E */  jal       get_screen_coords
 /* D6EB5C 802401AC AFA20018 */   sw       $v0, 0x18($sp)
 /* D6EB60 802401B0 8E0400A4 */  lw        $a0, 0xa4($s0)
-/* D6EB64 802401B4 0C090008 */  jal       pra_19_UnkFunc2
+/* D6EB64 802401B4 0C090008 */  jal       func_80240020_D6E9D0
 /* D6EB68 802401B8 00000000 */   nop      
 /* D6EB6C 802401BC C6020080 */  lwc1      $f2, 0x80($s0)
 /* D6EB70 802401C0 3C014307 */  lui       $at, 0x4307
@@ -110,8 +110,8 @@ glabel func_80240128_D6EAD8
 /* D6EC64 802402B4 AC910000 */  sw        $s1, ($a0)
 /* D6EC68 802402B8 AC900008 */  sw        $s0, 8($a0)
 /* D6EC6C 802402BC 8FA20038 */  lw        $v0, 0x38($sp)
-/* D6EC70 802402C0 3C038024 */  lui       $v1, %hi(D_802402F0)
-/* D6EC74 802402C4 246302F0 */  addiu     $v1, $v1, %lo(D_802402F0)
+/* D6EC70 802402C0 3C038024 */  lui       $v1, %hi(func_802402F0_D6EB98)
+/* D6EC74 802402C4 246302F0 */  addiu     $v1, $v1, %lo(func_802402F0_D6EB98)
 /* D6EC78 802402C8 AC83000C */  sw        $v1, 0xc($a0)
 /* D6EC7C 802402CC 00021023 */  negu      $v0, $v0
 /* D6EC80 802402D0 0C047644 */  jal       queue_render_task

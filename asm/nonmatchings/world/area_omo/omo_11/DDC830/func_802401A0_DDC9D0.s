@@ -43,8 +43,8 @@ glabel func_802401A0_DDC9D0
 /* DDCA68 80240238 3C0742FA */  lui       $a3, 0x42fa
 /* DDCA6C 8024023C 3C01C2C8 */  lui       $at, 0xc2c8
 /* DDCA70 80240240 44810000 */  mtc1      $at, $f0
-/* DDCA74 80240244 3C148024 */  lui       $s4, %hi(D_80241760)
-/* DDCA78 80240248 26941760 */  addiu     $s4, $s4, %lo(D_80241760)
+/* DDCA74 80240244 3C148024 */  lui       $s4, %hi(func_80241760_C50C70)
+/* DDCA78 80240248 26941760 */  addiu     $s4, $s4, %lo(func_80241760_C50C70)
 /* DDCA7C 8024024C 0C052757 */  jal       play_sound_at_position
 /* DDCA80 80240250 E7A00010 */   swc1     $f0, 0x10($sp)
 /* DDCA84 80240254 0C00AB39 */  jal       heap_malloc
@@ -93,8 +93,8 @@ glabel func_802401A0_DDC9D0
 /* DDCB24 802402F4 1440FFF4 */  bnez      $v0, .L802402C8
 /* DDCB28 802402F8 0000282D */   daddu    $a1, $zero, $zero
 /* DDCB2C 802402FC 26310058 */  addiu     $s1, $s1, 0x58
-/* DDCB30 80240300 3C098024 */  lui       $t1, %hi(D_80241760)
-/* DDCB34 80240304 25291760 */  addiu     $t1, $t1, %lo(D_80241760)
+/* DDCB30 80240300 3C098024 */  lui       $t1, %hi(func_80241760_C50C70)
+/* DDCB34 80240304 25291760 */  addiu     $t1, $t1, %lo(func_80241760_C50C70)
 /* DDCB38 80240308 02A91021 */  addu      $v0, $s5, $t1
 /* DDCB3C 8024030C 8C440000 */  lw        $a0, ($v0)
 /* DDCB40 80240310 0C046C04 */  jal       get_model_list_index_from_tree_index
@@ -148,10 +148,10 @@ glabel func_802401A0_DDC9D0
 /* DDCBF4 802403C4 26510014 */  addiu     $s1, $s2, 0x14
 .L802403C8:
 /* DDCBF8 802403C8 8FA90134 */  lw        $t1, 0x134($sp)
-/* DDCBFC 802403CC 3C048024 */  lui       $a0, %hi(D_80241760)
+/* DDCBFC 802403CC 3C048024 */  lui       $a0, %hi(func_80241760_C50C70)
 /* DDCC00 802403D0 00892021 */  addu      $a0, $a0, $t1
 /* DDCC04 802403D4 0C046C04 */  jal       get_model_list_index_from_tree_index
-/* DDCC08 802403D8 8C841760 */   lw       $a0, %lo(D_80241760)($a0)
+/* DDCC08 802403D8 8C841760 */   lw       $a0, %lo(func_80241760_C50C70)($a0)
 /* DDCC0C 802403DC 0C046B4C */  jal       get_model_from_list_index
 /* DDCC10 802403E0 0040202D */   daddu    $a0, $v0, $zero
 /* DDCC14 802403E4 0040802D */  daddu     $s0, $v0, $zero

@@ -18,9 +18,9 @@ glabel func_80242178_DB4438
 /* DB4468 802421A8 0000102D */   daddu    $v0, $zero, $zero
 .L802421AC:
 /* DB446C 802421AC 8CC50000 */  lw        $a1, ($a2)
-/* DB4470 802421B0 3C068024 */  lui       $a2, %hi(D_8024309C)
+/* DB4470 802421B0 3C068024 */  lui       $a2, %hi(func_8024309C_95E29C)
 /* DB4474 802421B4 0C0B2026 */  jal       set_variable
-/* DB4478 802421B8 8CC6309C */   lw       $a2, %lo(D_8024309C)($a2)
+/* DB4478 802421B8 8CC6309C */   lw       $a2, %lo(func_8024309C_95E29C)($a2)
 /* DB447C 802421BC 24020002 */  addiu     $v0, $zero, 2
 .L802421C0:
 /* DB4480 802421C0 8FBF0010 */  lw        $ra, 0x10($sp)

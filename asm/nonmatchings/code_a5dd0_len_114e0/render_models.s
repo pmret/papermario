@@ -1082,8 +1082,8 @@ glabel render_models
 /* AE318 80117C18 4404C000 */  mfc1      $a0, $f24
 /* AE31C 80117C1C 5440000C */  bnel      $v0, $zero, .L80117C50
 /* AE320 80117C20 26730001 */   addiu    $s3, $s3, 1
-/* AE324 80117C24 3C028012 */  lui       $v0, %hi(D_8011800C)
-/* AE328 80117C28 2442800C */  addiu     $v0, $v0, %lo(D_8011800C)
+/* AE324 80117C24 3C028012 */  lui       $v0, %hi(func_8011800C)
+/* AE328 80117C28 2442800C */  addiu     $v0, $v0, %lo(func_8011800C)
 /* AE32C 80117C2C AE22000C */  sw        $v0, 0xc($s1)
 /* AE330 80117C30 00041023 */  negu      $v0, $a0
 /* AE334 80117C34 AE300008 */  sw        $s0, 8($s1)

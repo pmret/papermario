@@ -124,9 +124,9 @@ glabel func_80240B94_A875E4
 /* A877A8 80240D58 2C620064 */  sltiu     $v0, $v1, 0x64
 /* A877AC 80240D5C 10400042 */  beqz      $v0, .L80240E68
 /* A877B0 80240D60 00031080 */   sll      $v0, $v1, 2
-/* A877B4 80240D64 3C018024 */  lui       $at, %hi(D_80245A40)
+/* A877B4 80240D64 3C018024 */  lui       $at, %hi(func_80245A40)
 /* A877B8 80240D68 00220821 */  addu      $at, $at, $v0
-/* A877BC 80240D6C 8C225A40 */  lw        $v0, %lo(D_80245A40)($at)
+/* A877BC 80240D6C 8C225A40 */  lw        $v0, %lo(func_80245A40)($at)
 /* A877C0 80240D70 00400008 */  jr        $v0
 /* A877C4 80240D74 00000000 */   nop      
 /* A877C8 80240D78 0280202D */  daddu     $a0, $s4, $zero
@@ -141,7 +141,7 @@ glabel func_80240B94_A875E4
 /* A877EC 80240D9C 00000000 */   nop      
 /* A877F0 80240DA0 0280202D */  daddu     $a0, $s4, $zero
 /* A877F4 80240DA4 0260282D */  daddu     $a1, $s3, $zero
-/* A877F8 80240DA8 0C090100 */  jal       kpa_91_UnkNpcAIFunc1
+/* A877F8 80240DA8 0C090100 */  jal       func_80240400_A86E50
 /* A877FC 80240DAC 02A0302D */   daddu    $a2, $s5, $zero
 /* A87800 80240DB0 0280202D */  daddu     $a0, $s4, $zero
 /* A87804 80240DB4 0260282D */  daddu     $a1, $s3, $zero
@@ -157,11 +157,11 @@ glabel func_80240B94_A875E4
 /* A8782C 80240DDC 00000000 */   nop      
 /* A87830 80240DE0 0280202D */  daddu     $a0, $s4, $zero
 /* A87834 80240DE4 0260282D */  daddu     $a1, $s3, $zero
-/* A87838 80240DE8 0C0901CC */  jal       kpa_91_NpcJumpFunc2
+/* A87838 80240DE8 0C0901CC */  jal       func_80240730_A87180
 /* A8783C 80240DEC 02A0302D */   daddu    $a2, $s5, $zero
 /* A87840 80240DF0 0280202D */  daddu     $a0, $s4, $zero
 /* A87844 80240DF4 0260282D */  daddu     $a1, $s3, $zero
-/* A87848 80240DF8 0C0901E9 */  jal       kpa_91_NpcJumpFunc
+/* A87848 80240DF8 0C0901E9 */  jal       func_802407A4_A871F4
 /* A8784C 80240DFC 02A0302D */   daddu    $a2, $s5, $zero
 /* A87850 80240E00 0809039A */  j         .L80240E68
 /* A87854 80240E04 00000000 */   nop      
@@ -177,7 +177,7 @@ glabel func_80240B94_A875E4
 /* A8787C 80240E2C 00000000 */   nop      
 /* A87880 80240E30 0280202D */  daddu     $a0, $s4, $zero
 /* A87884 80240E34 0260282D */  daddu     $a1, $s3, $zero
-/* A87888 80240E38 0C09029B */  jal       kpa_91_UnkNpcDurationFlagFunc
+/* A87888 80240E38 0C09029B */  jal       func_80240A6C_A874BC
 /* A8788C 80240E3C 02A0302D */   daddu    $a2, $s5, $zero
 /* A87890 80240E40 0809039A */  j         .L80240E68
 /* A87894 80240E44 00000000 */   nop      

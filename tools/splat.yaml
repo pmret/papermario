@@ -218,7 +218,7 @@ segments:
     - [0x71430, bin]
     - [0x73DA0, .rodata, world/world]
     - [0x74EA0, bin]
-    - [0x75240, .rodata, battle/battle] # ram 80099E40
+    - [0x75240, rodata, battle/battle] # ram 80099E40
   - type: code
     start: 0x759B0
     vram: 0x800DC500
@@ -420,6 +420,7 @@ segments:
     ld_name: world_partner_goombario
     start: 0x317020
     vram: 0x802BD100
+    overlay: True
     files:
     - [0x317020, c, world/partner/goombario]
     - [0x317b60, .data, world/partner/goombario]
@@ -428,6 +429,7 @@ segments:
     ld_name: world_partner_bombette
     start: 0x317e50
     vram: 0x802BD100
+    overlay: True
     files:
     - [0x317e50, c, world/partner/bombette]
     - [0x3195d0, bin]
@@ -435,6 +437,7 @@ segments:
     ld_name: world_partner_parakarry
     start: 0x319670
     vram: 0x802BD100
+    overlay: True
     files:
     - [0x319670, c, world/partner/parakarry]
     - [0x31b000, bin]
@@ -442,6 +445,7 @@ segments:
     ld_name: world_partner_kooper
     start: 0x31b120
     vram: 0x802BD100
+    overlay: True
     files:
     - [0x31b120, c, world/partner/kooper]
     - [0x31cb60, bin]
@@ -449,6 +453,7 @@ segments:
     ld_name: world_partner_watt
     start: 0x31cc70
     vram: 0x802BD100
+    overlay: True
     files:
     - [0x31cc70, c, world/partner/watt]
     - [0x31ddc0, bin]
@@ -456,6 +461,7 @@ segments:
     ld_name: world_partner_sushie
     start: 0x31de70
     vram: 0x802BD100
+    overlay: True
     files:
     - [0x31de70, c, world/partner/sushie]
     - [0x320b20, bin]
@@ -463,6 +469,7 @@ segments:
     ld_name: world_partner_lakilester
     start: 0x320c50
     vram: 0x802BD100
+    overlay: True
     files:
     - [0x320c50, c, world/partner/lakilester]
     - [0x3239b0, bin]
@@ -470,6 +477,7 @@ segments:
     ld_name: world_partner_bow
     start: 0x323A50
     vram: 0x802BD100
+    overlay: True
     files:
     - [0x323A50, c, world/partner/bow]
     - [0x324930, bin]
@@ -477,6 +485,7 @@ segments:
     ld_name: world_partner_goompa
     start: 0x324a10
     vram: 0x802BD100
+    overlay: True
     files:
     - [0x324a10, c, world/partner/goompa]
     - [0x324e80, .data, world/partner/goompa]
@@ -485,6 +494,7 @@ segments:
     ld_name: world_partner_goombaria
     start: 0x324f10
     vram: 0x802BD100
+    overlay: True
     files:
     - [0x324f10, c, world/partner/goombaria]
     - [0x325000, .data, world/partner/goombaria]
@@ -492,12 +502,14 @@ segments:
     ld_name: world_partner_twink
     start: 0x325070
     vram: 0x802BD100
+    overlay: True
     files:
     - [0x325070, c, world/partner/twink]
     - [0x325160, .data, world/partner/twink]
   - type: code
     start: 0x3251d0
     vram: 0x802BD100
+    overlay: True
     files:
     - [0x3251d0, c]
     - [0x3255e0, bin]

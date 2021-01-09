@@ -37,7 +37,7 @@ glabel func_80240128_D55CD8
 /* D55D58 802401A8 0C00B94E */  jal       get_screen_coords
 /* D55D5C 802401AC AFA20018 */   sw       $v0, 0x18($sp)
 /* D55D60 802401B0 8E0400A4 */  lw        $a0, 0xa4($s0)
-/* D55D64 802401B4 0C090008 */  jal       pra_05_UnkFunc2
+/* D55D64 802401B4 0C090008 */  jal       func_80240020_D55BD0
 /* D55D68 802401B8 00000000 */   nop      
 /* D55D6C 802401BC C6020080 */  lwc1      $f2, 0x80($s0)
 /* D55D70 802401C0 3C014307 */  lui       $at, 0x4307
@@ -110,8 +110,8 @@ glabel func_80240128_D55CD8
 /* D55E64 802402B4 AC910000 */  sw        $s1, ($a0)
 /* D55E68 802402B8 AC900008 */  sw        $s0, 8($a0)
 /* D55E6C 802402BC 8FA20038 */  lw        $v0, 0x38($sp)
-/* D55E70 802402C0 3C038024 */  lui       $v1, %hi(D_802402F0)
-/* D55E74 802402C4 246302F0 */  addiu     $v1, $v1, %lo(D_802402F0)
+/* D55E70 802402C0 3C038024 */  lui       $v1, %hi(func_802402F0_D55D98)
+/* D55E74 802402C4 246302F0 */  addiu     $v1, $v1, %lo(func_802402F0_D55D98)
 /* D55E78 802402C8 AC83000C */  sw        $v1, 0xc($a0)
 /* D55E7C 802402CC 00021023 */  negu      $v0, $v0
 /* D55E80 802402D0 0C047644 */  jal       queue_render_task

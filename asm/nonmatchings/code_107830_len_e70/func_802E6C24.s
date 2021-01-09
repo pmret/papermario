@@ -18,8 +18,8 @@ glabel func_802E6C24
 /* 1084D8 802E6C58 8E720040 */  lw        $s2, 0x40($s3)
 /* 1084DC 802E6C5C 0C00A580 */  jal       mem_clear
 /* 1084E0 802E6C60 24050010 */   addiu    $a1, $zero, 0x10
-/* 1084E4 802E6C64 3C02802E */  lui       $v0, %hi(D_802E61B0)
-/* 1084E8 802E6C68 244261B0 */  addiu     $v0, $v0, %lo(D_802E61B0)
+/* 1084E4 802E6C64 3C02802E */  lui       $v0, %hi(func_802E61B0)
+/* 1084E8 802E6C68 244261B0 */  addiu     $v0, $v0, %lo(func_802E61B0)
 /* 1084EC 802E6C6C AE62003C */  sw        $v0, 0x3c($s3)
 /* 1084F0 802E6C70 3402FFFF */  ori       $v0, $zero, 0xffff
 /* 1084F4 802E6C74 A6420006 */  sh        $v0, 6($s2)

@@ -119,10 +119,10 @@ glabel func_8024190C_96AACC
 .L80241AD0:
 /* 96AC90 80241AD0 24A20008 */  addiu     $v0, $a1, 8
 /* 96AC94 80241AD4 ACC20000 */  sw        $v0, ($a2)
-/* 96AC98 80241AD8 3C02DE00 */  lui       $v0, %hi(D_DE0079B8)
+/* 96AC98 80241AD8 3C02DE00 */  lui       $v0, 0xde00
 /* 96AC9C 80241ADC ACA20000 */  sw        $v0, ($a1)
 /* 96ACA0 80241AE0 3C028024 */  lui       $v0, %hi(D_802479B8)
-/* 96ACA4 80241AE4 244279B8 */  addiu     $v0, $v0, %lo(D_DE0079B8)
+/* 96ACA4 80241AE4 244279B8 */  addiu     $v0, $v0, %lo(D_802479B8)
 /* 96ACA8 80241AE8 ACA20004 */  sw        $v0, 4($a1)
 /* 96ACAC 80241AEC 8FAD0100 */  lw        $t5, 0x100($sp)
 /* 96ACB0 80241AF0 8DA30000 */  lw        $v1, ($t5)
@@ -313,10 +313,10 @@ glabel func_8024190C_96AACC
 /* 96AF8C 80241DCC 24820008 */  addiu     $v0, $a0, 8
 /* 96AF90 80241DD0 ACA30004 */  sw        $v1, 4($a1)
 /* 96AF94 80241DD4 AE020000 */  sw        $v0, ($s0)
-/* 96AF98 80241DD8 3C02DE00 */  lui       $v0, %hi(D_DE007A38)
+/* 96AF98 80241DD8 3C02DE00 */  lui       $v0, 0xde00
 /* 96AF9C 80241DDC AC820000 */  sw        $v0, ($a0)
 /* 96AFA0 80241DE0 3C028024 */  lui       $v0, %hi(D_80247A38)
-/* 96AFA4 80241DE4 24427A38 */  addiu     $v0, $v0, %lo(D_DE007A38)
+/* 96AFA4 80241DE4 24427A38 */  addiu     $v0, $v0, %lo(D_80247A38)
 /* 96AFA8 80241DE8 AC820004 */  sw        $v0, 4($a0)
 /* 96AFAC 80241DEC 24820010 */  addiu     $v0, $a0, 0x10
 /* 96AFB0 80241DF0 AE020000 */  sw        $v0, ($s0)

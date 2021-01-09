@@ -124,9 +124,9 @@ glabel func_80240B94_C56AD4
 /* C56C98 80240D58 2C620064 */  sltiu     $v0, $v1, 0x64
 /* C56C9C 80240D5C 10400042 */  beqz      $v0, .L80240E68
 /* C56CA0 80240D60 00031080 */   sll      $v0, $v1, 2
-/* C56CA4 80240D64 3C018024 */  lui       $at, %hi(D_802438F0)
+/* C56CA4 80240D64 3C018024 */  lui       $at, %hi(func_802438F0_C436A0)
 /* C56CA8 80240D68 00220821 */  addu      $at, $at, $v0
-/* C56CAC 80240D6C 8C2238F0 */  lw        $v0, %lo(D_802438F0)($at)
+/* C56CAC 80240D6C 8C2238F0 */  lw        $v0, %lo(func_802438F0_C436A0)($at)
 /* C56CB0 80240D70 00400008 */  jr        $v0
 /* C56CB4 80240D74 00000000 */   nop      
 /* C56CB8 80240D78 0280202D */  daddu     $a0, $s4, $zero
@@ -141,7 +141,7 @@ glabel func_80240B94_C56AD4
 /* C56CDC 80240D9C 00000000 */   nop      
 /* C56CE0 80240DA0 0280202D */  daddu     $a0, $s4, $zero
 /* C56CE4 80240DA4 0260282D */  daddu     $a1, $s3, $zero
-/* C56CE8 80240DA8 0C090100 */  jal       dgb_18_UnkNpcAIFunc1
+/* C56CE8 80240DA8 0C090100 */  jal       func_80240400_C56340
 /* C56CEC 80240DAC 02A0302D */   daddu    $a2, $s5, $zero
 /* C56CF0 80240DB0 0280202D */  daddu     $a0, $s4, $zero
 /* C56CF4 80240DB4 0260282D */  daddu     $a1, $s3, $zero
@@ -157,11 +157,11 @@ glabel func_80240B94_C56AD4
 /* C56D1C 80240DDC 00000000 */   nop      
 /* C56D20 80240DE0 0280202D */  daddu     $a0, $s4, $zero
 /* C56D24 80240DE4 0260282D */  daddu     $a1, $s3, $zero
-/* C56D28 80240DE8 0C0901CC */  jal       dgb_18_NpcJumpFunc2
+/* C56D28 80240DE8 0C0901CC */  jal       func_80240730_C56670
 /* C56D2C 80240DEC 02A0302D */   daddu    $a2, $s5, $zero
 /* C56D30 80240DF0 0280202D */  daddu     $a0, $s4, $zero
 /* C56D34 80240DF4 0260282D */  daddu     $a1, $s3, $zero
-/* C56D38 80240DF8 0C0901E9 */  jal       dgb_18_NpcJumpFunc
+/* C56D38 80240DF8 0C0901E9 */  jal       func_802407A4_C566E4
 /* C56D3C 80240DFC 02A0302D */   daddu    $a2, $s5, $zero
 /* C56D40 80240E00 0809039A */  j         .L80240E68
 /* C56D44 80240E04 00000000 */   nop      
@@ -177,7 +177,7 @@ glabel func_80240B94_C56AD4
 /* C56D6C 80240E2C 00000000 */   nop      
 /* C56D70 80240E30 0280202D */  daddu     $a0, $s4, $zero
 /* C56D74 80240E34 0260282D */  daddu     $a1, $s3, $zero
-/* C56D78 80240E38 0C09029B */  jal       dgb_18_UnkNpcDurationFlagFunc
+/* C56D78 80240E38 0C09029B */  jal       func_80240A6C_C569AC
 /* C56D7C 80240E3C 02A0302D */   daddu    $a2, $s5, $zero
 /* C56D80 80240E40 0809039A */  j         .L80240E68
 /* C56D84 80240E44 00000000 */   nop      

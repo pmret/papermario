@@ -107,8 +107,8 @@ glabel func_802404E0_AD63B0
 /* AD6544 80240674 2404000A */  addiu     $a0, $zero, 0xa
 /* AD6548 80240678 0C00A67F */  jal       rand_int
 /* AD654C 8024067C AC400044 */   sw       $zero, 0x44($v0)
-/* AD6550 80240680 3C018024 */  lui       $at, %hi(D_80244FB8)
-/* AD6554 80240684 D4224FB8 */  ldc1      $f2, %lo(D_80244FB8)($at)
+/* AD6550 80240680 3C018024 */  lui       $at, %hi(func_80244FB8_A2F1F8)
+/* AD6554 80240684 D4224FB8 */  ldc1      $f2, %lo(func_80244FB8_A2F1F8)($at)
 /* AD6558 80240688 44820000 */  mtc1      $v0, $f0
 /* AD655C 8024068C 00000000 */  nop       
 /* AD6560 80240690 46800021 */  cvt.d.w   $f0, $f0

@@ -39,8 +39,8 @@ glabel func_802402F4_B1CD44
 /* B1CDCC 8024037C AFB00028 */  sw        $s0, 0x28($sp)
 /* B1CDD0 80240380 820500BE */  lb        $a1, 0xbe($s0)
 /* B1CDD4 80240384 8FA30038 */  lw        $v1, 0x38($sp)
-/* B1CDD8 80240388 3C028024 */  lui       $v0, %hi(D_802403B8)
-/* B1CDDC 8024038C 244203B8 */  addiu     $v0, $v0, %lo(D_802403B8)
+/* B1CDD8 80240388 3C028024 */  lui       $v0, %hi(func_802403B8_B1CB14)
+/* B1CDDC 8024038C 244203B8 */  addiu     $v0, $v0, %lo(func_802403B8_B1CB14)
 /* B1CDE0 80240390 AFA2002C */  sw        $v0, 0x2c($sp)
 /* B1CDE4 80240394 00031823 */  negu      $v1, $v1
 /* B1CDE8 80240398 AFA50020 */  sw        $a1, 0x20($sp)

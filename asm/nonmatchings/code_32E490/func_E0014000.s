@@ -10,14 +10,14 @@ glabel func_E0014000
 /* 32E4A4 E0014014 27A40010 */  addiu     $a0, $sp, 0x10
 /* 32E4A8 E0014018 F7BE0068 */  sdc1      $f30, 0x68($sp)
 /* 32E4AC E001401C 4486F000 */  mtc1      $a2, $f30
-/* 32E4B0 E0014020 3C02E001 */  lui       $v0, %hi(D_E0014258)
-/* 32E4B4 E0014024 24424258 */  addiu     $v0, $v0, %lo(D_E0014258)
+/* 32E4B0 E0014020 3C02E001 */  lui       $v0, %hi(func_E0014258)
+/* 32E4B4 E0014024 24424258 */  addiu     $v0, $v0, %lo(func_E0014258)
 /* 32E4B8 E0014028 AFA20018 */  sw        $v0, 0x18($sp)
-/* 32E4BC E001402C 3C02E001 */  lui       $v0, %hi(D_E0014260)
-/* 32E4C0 E0014030 24424260 */  addiu     $v0, $v0, %lo(D_E0014260)
+/* 32E4BC E001402C 3C02E001 */  lui       $v0, %hi(func_E0014260)
+/* 32E4C0 E0014030 24424260 */  addiu     $v0, $v0, %lo(func_E0014260)
 /* 32E4C4 E0014034 AFA2001C */  sw        $v0, 0x1c($sp)
-/* 32E4C8 E0014038 3C02E001 */  lui       $v0, %hi(D_E001449C)
-/* 32E4CC E001403C 2442449C */  addiu     $v0, $v0, %lo(D_E001449C)
+/* 32E4C8 E0014038 3C02E001 */  lui       $v0, %hi(func_E001449C)
+/* 32E4CC E001403C 2442449C */  addiu     $v0, $v0, %lo(func_E001449C)
 /* 32E4D0 E0014040 AFA20020 */  sw        $v0, 0x20($sp)
 /* 32E4D4 E0014044 2402000A */  addiu     $v0, $zero, 0xa
 /* 32E4D8 E0014048 AFBF003C */  sw        $ra, 0x3c($sp)

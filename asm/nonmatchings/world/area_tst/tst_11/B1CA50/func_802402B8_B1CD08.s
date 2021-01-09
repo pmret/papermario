@@ -5,8 +5,8 @@ glabel func_802402B8_B1CD08
 /* B1CD08 802402B8 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* B1CD0C 802402BC AFB00010 */  sw        $s0, 0x10($sp)
 /* B1CD10 802402C0 0080802D */  daddu     $s0, $a0, $zero
-/* B1CD14 802402C4 3C058024 */  lui       $a1, %hi(D_802402F4)
-/* B1CD18 802402C8 24A502F4 */  addiu     $a1, $a1, %lo(D_802402F4)
+/* B1CD14 802402C4 3C058024 */  lui       $a1, %hi(func_802402F4_B1CA8C)
+/* B1CD18 802402C8 24A502F4 */  addiu     $a1, $a1, %lo(func_802402F4_B1CA8C)
 /* B1CD1C 802402CC AFBF0014 */  sw        $ra, 0x14($sp)
 /* B1CD20 802402D0 0C048C8F */  jal       bind_dynamic_entity_7
 /* B1CD24 802402D4 0000202D */   daddu    $a0, $zero, $zero

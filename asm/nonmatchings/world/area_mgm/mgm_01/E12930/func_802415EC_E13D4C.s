@@ -12,8 +12,8 @@ glabel func_802415EC_E13D4C
 /* E13D68 80241608 0C00AB0A */  jal       general_heap_malloc
 /* E13D6C 8024160C 0040882D */   daddu    $s1, $v0, $zero
 /* E13D70 80241610 0000202D */  daddu     $a0, $zero, $zero
-/* E13D74 80241614 3C058024 */  lui       $a1, %hi(D_802403C4)
-/* E13D78 80241618 24A503C4 */  addiu     $a1, $a1, %lo(D_802403C4)
+/* E13D74 80241614 3C058024 */  lui       $a1, %hi(func_802403C4_E11708)
+/* E13D78 80241618 24A503C4 */  addiu     $a1, $a1, %lo(func_802403C4_E11708)
 /* E13D7C 8024161C 0040802D */  daddu     $s0, $v0, $zero
 /* E13D80 80241620 0C048C56 */  jal       bind_dynamic_entity_3
 /* E13D84 80241624 AE300080 */   sw       $s0, 0x80($s1)

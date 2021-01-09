@@ -14,8 +14,8 @@ glabel func_80045AC0
 /* 20EE0 80045AE0 28820020 */  slti      $v0, $a0, 0x20
 /* 20EE4 80045AE4 1440FFFB */  bnez      $v0, .L80045AD4
 /* 20EE8 80045AE8 2463001C */   addiu    $v1, $v1, 0x1c
-/* 20EEC 80045AEC 3C058004 */  lui       $a1, %hi(D_80045BC8)
-/* 20EF0 80045AF0 24A55BC8 */  addiu     $a1, $a1, %lo(D_80045BC8)
+/* 20EEC 80045AEC 3C058004 */  lui       $a1, %hi(func_80045BC8)
+/* 20EF0 80045AF0 24A55BC8 */  addiu     $a1, $a1, %lo(func_80045BC8)
 /* 20EF4 80045AF4 0C048C56 */  jal       bind_dynamic_entity_3
 /* 20EF8 80045AF8 0000202D */   daddu    $a0, $zero, $zero
 /* 20EFC 80045AFC 0C0117ED */  jal       func_80045FB4

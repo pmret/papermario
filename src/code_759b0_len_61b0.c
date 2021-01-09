@@ -155,11 +155,11 @@ f32 func_800E0088(f32 x, f32 z) {
 }
 
 void enable_player_shadow(void) {
-    get_shadow_by_index(D_8010F094)->flags &= ~1;
+    get_shadow_by_index(PLAYER_STATUS->shadowID)->flags &= ~1;
 }
 
 void disable_player_shadow(void) {
-    get_shadow_by_index(D_8010F094)->flags |= 1;
+    get_shadow_by_index(PLAYER_STATUS->shadowID)->flags |= 1;
 }
 
 s32 disable_player_static_collisions(void) {

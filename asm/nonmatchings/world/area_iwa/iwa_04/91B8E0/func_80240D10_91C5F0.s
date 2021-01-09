@@ -207,7 +207,7 @@ glabel func_80240D10_91C5F0
 /* 91C904 80241024 0000102D */   daddu    $v0, $zero, $zero
 /* 91C908 80241028 0260202D */  daddu     $a0, $s3, $zero
 /* 91C90C 8024102C 0280282D */  daddu     $a1, $s4, $zero
-/* 91C910 80241030 0C090333 */  jal       iwa_04_UnkDurationCheck
+/* 91C910 80241030 0C090333 */  jal       func_80240CCC_91C5AC
 /* 91C914 80241034 0200302D */   daddu    $a2, $s0, $zero
 .L80241038:
 /* 91C918 80241038 0000102D */  daddu     $v0, $zero, $zero

@@ -9,8 +9,8 @@ glabel func_802E13B8
 /* 102C48 802E13C8 AFB10014 */  sw        $s1, 0x14($sp)
 /* 102C4C 802E13CC 0C0B8DB9 */  jal       entity_init_Hammer23Block_normal
 /* 102C50 802E13D0 8E110040 */   lw       $s1, 0x40($s0)
-/* 102C54 802E13D4 3C02802E */  lui       $v0, %hi(D_802E0DE0)
-/* 102C58 802E13D8 24420DE0 */  addiu     $v0, $v0, %lo(D_802E0DE0)
+/* 102C54 802E13D4 3C02802E */  lui       $v0, %hi(func_802E0DE0)
+/* 102C58 802E13D8 24420DE0 */  addiu     $v0, $v0, %lo(func_802E0DE0)
 /* 102C5C 802E13DC AE02003C */  sw        $v0, 0x3c($s0)
 /* 102C60 802E13E0 24020008 */  addiu     $v0, $zero, 8
 /* 102C64 802E13E4 A6220004 */  sh        $v0, 4($s1)

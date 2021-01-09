@@ -11,8 +11,8 @@ glabel func_8024049C_D5F74C
 /* D5F764 802404B4 28420002 */   slti     $v0, $v0, 2
 /* D5F768 802404B8 1040000C */  beqz      $v0, .L802404EC
 /* D5F76C 802404BC 00000000 */   nop      
-/* D5F770 802404C0 3C058024 */  lui       $a1, %hi(D_80240500)
-/* D5F774 802404C4 24A50500 */  addiu     $a1, $a1, %lo(D_80240500)
+/* D5F770 802404C0 3C058024 */  lui       $a1, %hi(func_80240500_D5F334)
+/* D5F774 802404C4 24A50500 */  addiu     $a1, $a1, %lo(func_80240500_D5F334)
 /* D5F778 802404C8 0C048C56 */  jal       bind_dynamic_entity_3
 /* D5F77C 802404CC 0000202D */   daddu    $a0, $zero, $zero
 /* D5F780 802404D0 8E03013C */  lw        $v1, 0x13c($s0)

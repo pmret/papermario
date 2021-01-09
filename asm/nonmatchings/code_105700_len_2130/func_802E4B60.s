@@ -5,8 +5,8 @@ glabel func_802E4B60
 /* 1063E0 802E4B60 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 1063E4 802E4B64 AFB10014 */  sw        $s1, 0x14($sp)
 /* 1063E8 802E4B68 0080882D */  daddu     $s1, $a0, $zero
-/* 1063EC 802E4B6C 3C02802E */  lui       $v0, %hi(D_802E4AEC)
-/* 1063F0 802E4B70 24424AEC */  addiu     $v0, $v0, %lo(D_802E4AEC)
+/* 1063EC 802E4B6C 3C02802E */  lui       $v0, %hi(func_802E4AEC)
+/* 1063F0 802E4B70 24424AEC */  addiu     $v0, $v0, %lo(func_802E4AEC)
 /* 1063F4 802E4B74 AFBF0018 */  sw        $ra, 0x18($sp)
 /* 1063F8 802E4B78 AFB00010 */  sw        $s0, 0x10($sp)
 /* 1063FC 802E4B7C AE22003C */  sw        $v0, 0x3c($s1)

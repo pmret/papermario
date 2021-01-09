@@ -35,8 +35,8 @@ glabel func_802B72C0_E22870
 /* E228E8 802B7338 AC820004 */  sw        $v0, 4($a0)
 /* E228EC 802B733C 8FBF0014 */  lw        $ra, 0x14($sp)
 /* E228F0 802B7340 8FB00010 */  lw        $s0, 0x10($sp)
-/* E228F4 802B7344 3C03802B */  lui       $v1, %hi(D_802B735C)
-/* E228F8 802B7348 2463735C */  addiu     $v1, $v1, %lo(D_802B735C)
+/* E228F4 802B7344 3C03802B */  lui       $v1, %hi(func_802B735C_E2264C)
+/* E228F8 802B7348 2463735C */  addiu     $v1, $v1, %lo(func_802B735C_E2264C)
 /* E228FC 802B734C 3C018011 */  lui       $at, %hi(D_8010C93C)
 /* E22900 802B7350 AC23C93C */  sw        $v1, %lo(D_8010C93C)($at)
 /* E22904 802B7354 03E00008 */  jr        $ra

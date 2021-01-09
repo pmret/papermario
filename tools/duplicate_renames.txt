@@ -1,0 +1,1 @@
+func_80049B44,base_UnkNpcAIFunc1

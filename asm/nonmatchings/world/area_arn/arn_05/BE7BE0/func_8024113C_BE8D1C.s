@@ -71,7 +71,7 @@ glabel func_8024113C_BE8D1C
 /* BE8E20 80241240 00000000 */   nop      
 /* BE8E24 80241244 0280202D */  daddu     $a0, $s4, $zero
 /* BE8E28 80241248 0200282D */  daddu     $a1, $s0, $zero
-/* BE8E2C 8024124C 0C090100 */  jal       arn_05_UnkNpcAIFunc1
+/* BE8E2C 8024124C 0C090100 */  jal       func_80240400_BE7FE0
 /* BE8E30 80241250 0240302D */   daddu    $a2, $s2, $zero
 /* BE8E34 80241254 0280202D */  daddu     $a0, $s4, $zero
 /* BE8E38 80241258 0200282D */  daddu     $a1, $s0, $zero
