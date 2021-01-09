@@ -468,7 +468,7 @@ void show_coin_counter(void) {
     }
 
     if (uiStatus->unk_6C[0] == 0) {
-        set_ui_panel_properties(0x14, 0x20, 0xa4, 0x40, 0x14, 0x15, &D_800E92D8, 0, -1);
+        set_ui_panel_properties(0x14, 0x20, 0xa4, 0x40, 0x14, 0x15, coin_counter_draw_content, 0, -1);
         func_80147E7C(0x14, &D_80147474);
         index = create_icon(&D_80109270);
         uiStatus->iconIndex10 = index;

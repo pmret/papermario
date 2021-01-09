@@ -12,7 +12,7 @@ glabel func_802405C0_AF3260
 /* AF327C 802405DC 24020002 */  addiu     $v0, $zero, 2
 /* AF3280 802405E0 8FBF0010 */  lw        $ra, 0x10($sp)
 /* AF3284 802405E4 24030001 */  addiu     $v1, $zero, 1
-/* AF3288 802405E8 3C018024 */  lui       $at, %hi(D_80241F10)
-/* AF328C 802405EC AC231F10 */  sw        $v1, %lo(D_80241F10)($at)
+/* AF3288 802405E8 3C018024 */  lui       $at, %hi(func_80241F10_802790)
+/* AF328C 802405EC AC231F10 */  sw        $v1, %lo(func_80241F10_802790)($at)
 /* AF3290 802405F0 03E00008 */  jr        $ra
 /* AF3294 802405F4 27BD0018 */   addiu    $sp, $sp, 0x18

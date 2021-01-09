@@ -46,8 +46,8 @@ glabel func_80241644_C69774
 /* C6980C 802416DC 2402000A */  addiu     $v0, $zero, 0xa
 /* C69810 802416E0 1462001B */  bne       $v1, $v0, .L80241750
 /* C69814 802416E4 E6000010 */   swc1     $f0, 0x10($s0)
-/* C69818 802416E8 3C048024 */  lui       $a0, %hi(D_8024231C)
-/* C6981C 802416EC 2484231C */  addiu     $a0, $a0, %lo(D_8024231C)
+/* C69818 802416E8 3C048024 */  lui       $a0, %hi(func_8024231C_A1D41C)
+/* C6981C 802416EC 2484231C */  addiu     $a0, $a0, %lo(func_8024231C_A1D41C)
 /* C69820 802416F0 24050001 */  addiu     $a1, $zero, 1
 /* C69824 802416F4 0C0B0CF8 */  jal       start_script
 /* C69828 802416F8 0000302D */   daddu    $a2, $zero, $zero

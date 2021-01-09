@@ -66,8 +66,8 @@ glabel func_80240F40_D3B510
 /* D3B604 80241034 0000202D */   daddu    $a0, $zero, $zero
 /* D3B608 80241038 0220202D */  daddu     $a0, $s1, $zero
 /* D3B60C 8024103C 3C05F4AC */  lui       $a1, 0xf4ac
-/* D3B610 80241040 3C018025 */  lui       $at, %hi(D_80251474)
-/* D3B614 80241044 AC221474 */  sw        $v0, %lo(D_80251474)($at)
+/* D3B610 80241040 3C018025 */  lui       $at, %hi(func_80251474)
+/* D3B614 80241044 AC221474 */  sw        $v0, %lo(func_80251474)($at)
 /* D3B618 80241048 0C0B1EAF */  jal       get_variable
 /* D3B61C 8024104C 34A5D481 */   ori      $a1, $a1, 0xd481
 /* D3B620 80241050 0220202D */  daddu     $a0, $s1, $zero

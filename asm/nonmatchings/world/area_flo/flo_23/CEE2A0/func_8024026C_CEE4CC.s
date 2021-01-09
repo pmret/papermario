@@ -6,11 +6,11 @@ glabel func_8024026C_CEE4CC
 /* CEE4D0 80240270 AFBF0010 */  sw        $ra, 0x10($sp)
 /* CEE4D4 80240274 10A00003 */  beqz      $a1, .L80240284
 /* CEE4D8 80240278 8C86000C */   lw       $a2, 0xc($a0)
-/* CEE4DC 8024027C 3C018024 */  lui       $at, %hi(D_8024130C)
-/* CEE4E0 80240280 AC20130C */  sw        $zero, %lo(D_8024130C)($at)
+/* CEE4DC 8024027C 3C018024 */  lui       $at, %hi(func_8024130C_C3783C)
+/* CEE4E0 80240280 AC20130C */  sw        $zero, %lo(func_8024130C_C3783C)($at)
 .L80240284:
-/* CEE4E4 80240284 3C038024 */  lui       $v1, %hi(D_8024130C)
-/* CEE4E8 80240288 2463130C */  addiu     $v1, $v1, %lo(D_8024130C)
+/* CEE4E4 80240284 3C038024 */  lui       $v1, %hi(func_8024130C_C3783C)
+/* CEE4E8 80240288 2463130C */  addiu     $v1, $v1, %lo(func_8024130C_C3783C)
 /* CEE4EC 8024028C 8C620000 */  lw        $v0, ($v1)
 /* CEE4F0 80240290 54400003 */  bnel      $v0, $zero, .L802402A0
 /* CEE4F4 80240294 AC600000 */   sw       $zero, ($v1)

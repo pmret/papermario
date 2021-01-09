@@ -3,8 +3,8 @@
 
 glabel func_802401FC_AF7B4C
 /* AF7B4C 802401FC 27BDFFD8 */  addiu     $sp, $sp, -0x28
-/* AF7B50 80240200 3C048024 */  lui       $a0, %hi(D_80240068)
-/* AF7B54 80240204 24840068 */  addiu     $a0, $a0, %lo(D_80240068)
+/* AF7B50 80240200 3C048024 */  lui       $a0, %hi(func_80240068_AF79B8)
+/* AF7B54 80240204 24840068 */  addiu     $a0, $a0, %lo(func_80240068_AF79B8)
 /* AF7B58 80240208 AFBF0024 */  sw        $ra, 0x24($sp)
 /* AF7B5C 8024020C AFB20020 */  sw        $s2, 0x20($sp)
 /* AF7B60 80240210 AFB1001C */  sw        $s1, 0x1c($sp)
@@ -13,8 +13,8 @@ glabel func_802401FC_AF7B4C
 /* AF7B6C 8024021C AC200E88 */  sw        $zero, %lo(D_80240E88)($at)
 /* AF7B70 80240220 3C018024 */  lui       $at, %hi(D_80240E8C)
 /* AF7B74 80240224 AC200E8C */  sw        $zero, %lo(D_80240E8C)($at)
-/* AF7B78 80240228 3C018024 */  lui       $at, %hi(D_80240E90)
-/* AF7B7C 8024022C AC200E90 */  sw        $zero, %lo(D_80240E90)($at)
+/* AF7B78 80240228 3C018024 */  lui       $at, %hi(func_80240E90_A878E0)
+/* AF7B7C 8024022C AC200E90 */  sw        $zero, %lo(func_80240E90_A878E0)($at)
 /* AF7B80 80240230 0C048C8F */  jal       bind_dynamic_entity_7
 /* AF7B84 80240234 0000282D */   daddu    $a1, $zero, $zero
 /* AF7B88 80240238 0C048D8F */  jal       get_dynamic_entity
@@ -28,8 +28,8 @@ glabel func_802401FC_AF7B4C
 /* AF7BA8 80240258 3C118024 */  lui       $s1, %hi(D_80240E10)
 /* AF7BAC 8024025C 26310E10 */  addiu     $s1, $s1, %lo(D_80240E10)
 .L80240260:
-/* AF7BB0 80240260 3C048024 */  lui       $a0, %hi(D_80240E94)
-/* AF7BB4 80240264 24840E94 */  addiu     $a0, $a0, %lo(D_80240E94)
+/* AF7BB0 80240260 3C048024 */  lui       $a0, %hi(func_80240E94_9C6274)
+/* AF7BB4 80240264 24840E94 */  addiu     $a0, $a0, %lo(func_80240E94_9C6274)
 /* AF7BB8 80240268 24050080 */  addiu     $a1, $zero, 0x80
 /* AF7BBC 8024026C AFA00010 */  sw        $zero, 0x10($sp)
 /* AF7BC0 80240270 AFB20014 */  sw        $s2, 0x14($sp)

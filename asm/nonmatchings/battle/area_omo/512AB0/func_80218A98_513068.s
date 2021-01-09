@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel area_omo_GetEntityPosition
+glabel func_80218A98_513068
 /* 513068 80218A98 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 51306C 80218A9C AFB20018 */  sw        $s2, 0x18($sp)
 /* 513070 80218AA0 0080902D */  daddu     $s2, $a0, $zero

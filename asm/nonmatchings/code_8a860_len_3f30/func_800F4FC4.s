@@ -87,8 +87,8 @@ glabel func_800F4FC4
 /* 8E5A8 800F50F8 3C018011 */  lui       $at, %hi(D_8010D650)
 /* 8E5AC 800F50FC AC22D650 */  sw        $v0, %lo(D_8010D650)($at)
 /* 8E5B0 800F5100 24020004 */  addiu     $v0, $zero, 4
-/* 8E5B4 800F5104 3C04800F */  lui       $a0, %hi(D_800F1A10)
-/* 8E5B8 800F5108 24841A10 */  addiu     $a0, $a0, %lo(D_800F1A10)
+/* 8E5B4 800F5104 3C04800F */  lui       $a0, %hi(func_800F1A10)
+/* 8E5B8 800F5108 24841A10 */  addiu     $a0, $a0, %lo(func_800F1A10)
 /* 8E5BC 800F510C 3C018011 */  lui       $at, %hi(D_8010D691)
 /* 8E5C0 800F5110 A022D691 */  sb        $v0, %lo(D_8010D691)($at)
 /* 8E5C4 800F5114 3C018011 */  lui       $at, %hi(D_8010D692)

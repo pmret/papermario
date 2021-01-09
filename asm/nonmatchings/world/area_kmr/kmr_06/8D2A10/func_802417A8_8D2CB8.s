@@ -5,8 +5,8 @@ glabel func_802417A8_8D2CB8
 /* 8D2CB8 802417A8 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* 8D2CBC 802417AC 2402000D */  addiu     $v0, $zero, 0xd
 /* 8D2CC0 802417B0 AFA20010 */  sw        $v0, 0x10($sp)
-/* 8D2CC4 802417B4 3C028024 */  lui       $v0, %hi(D_80241500)
-/* 8D2CC8 802417B8 24421500 */  addiu     $v0, $v0, %lo(D_80241500)
+/* 8D2CC4 802417B4 3C028024 */  lui       $v0, %hi(func_80241500_8D2A10)
+/* 8D2CC8 802417B8 24421500 */  addiu     $v0, $v0, %lo(func_80241500_8D2A10)
 /* 8D2CCC 802417BC 27A40010 */  addiu     $a0, $sp, 0x10
 /* 8D2CD0 802417C0 AFBF0020 */  sw        $ra, 0x20($sp)
 /* 8D2CD4 802417C4 AFA00018 */  sw        $zero, 0x18($sp)

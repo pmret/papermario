@@ -13,8 +13,8 @@ glabel entity_init_Chest
 /* 109624 802E7DA4 3C013F0F */  lui       $at, 0x3f0f
 /* 109628 802E7DA8 34215C29 */  ori       $at, $at, 0x5c29
 /* 10962C 802E7DAC 44810000 */  mtc1      $at, $f0
-/* 109630 802E7DB0 3C02802E */  lui       $v0, %hi(D_802E6ED8)
-/* 109634 802E7DB4 24426ED8 */  addiu     $v0, $v0, %lo(D_802E6ED8)
+/* 109630 802E7DB0 3C02802E */  lui       $v0, %hi(func_802E6ED8)
+/* 109634 802E7DB4 24426ED8 */  addiu     $v0, $v0, %lo(func_802E6ED8)
 /* 109638 802E7DB8 AE02003C */  sw        $v0, 0x3c($s0)
 /* 10963C 802E7DBC E6000054 */  swc1      $f0, 0x54($s0)
 /* 109640 802E7DC0 E6000058 */  swc1      $f0, 0x58($s0)

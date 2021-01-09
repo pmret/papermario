@@ -12,8 +12,8 @@ glabel show_battle_message
 /* 17E25C 8024F97C 0040182D */  daddu     $v1, $v0, $zero
 /* 17E260 8024F980 1060001B */  beqz      $v1, .L8024F9F0
 /* 17E264 8024F984 00000000 */   nop      
-/* 17E268 8024F988 3C028025 */  lui       $v0, %hi(D_8024FB3C)
-/* 17E26C 8024F98C 2442FB3C */  addiu     $v0, $v0, %lo(D_8024FB3C)
+/* 17E268 8024F988 3C028025 */  lui       $v0, %hi(func_8024FB3C)
+/* 17E26C 8024F98C 2442FB3C */  addiu     $v0, $v0, %lo(func_8024FB3C)
 /* 17E270 8024F990 AC620004 */  sw        $v0, 4($v1)
 /* 17E274 8024F994 3C028025 */  lui       $v0, %hi(show_message_popup)
 /* 17E278 8024F998 24420EA4 */  addiu     $v0, $v0, %lo(show_message_popup)

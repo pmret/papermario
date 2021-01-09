@@ -9,8 +9,8 @@ glabel crash_printf_string
 /* 7618 8002C218 0080902D */  daddu     $s2, $a0, $zero
 /* 761C 8002C21C AFB50124 */  sw        $s5, 0x124($sp)
 /* 7620 8002C220 00A0A82D */  daddu     $s5, $a1, $zero
-/* 7624 8002C224 3C048003 */  lui       $a0, %hi(D_8002C1D4)
-/* 7628 8002C228 2484C1D4 */  addiu     $a0, $a0, %lo(D_8002C1D4)
+/* 7624 8002C224 3C048003 */  lui       $a0, %hi(func_8002C1D4)
+/* 7628 8002C228 2484C1D4 */  addiu     $a0, $a0, %lo(func_8002C1D4)
 /* 762C 8002C22C 27A50010 */  addiu     $a1, $sp, 0x10
 /* 7630 8002C230 27A7013C */  addiu     $a3, $sp, 0x13c
 /* 7634 8002C234 AFBF0128 */  sw        $ra, 0x128($sp)

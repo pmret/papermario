@@ -61,8 +61,8 @@ glabel func_E001C200
 .LE001C2D0:
 /* 330BE0 E001C2D0 E4400008 */  swc1      $f0, 8($v0)
 .LE001C2D4:
-/* 330BE4 E001C2D4 3C02E002 */  lui       $v0, %hi(D_E001C30C)
-/* 330BE8 E001C2D8 2442C30C */  addiu     $v0, $v0, %lo(D_E001C30C)
+/* 330BE4 E001C2D4 3C02E002 */  lui       $v0, %hi(func_E001C30C)
+/* 330BE8 E001C2D8 2442C30C */  addiu     $v0, $v0, %lo(func_E001C30C)
 /* 330BEC E001C2DC AC82000C */  sw        $v0, 0xc($a0)
 /* 330BF0 E001C2E0 2402002D */  addiu     $v0, $zero, 0x2d
 /* 330BF4 E001C2E4 AC850008 */  sw        $a1, 8($a0)

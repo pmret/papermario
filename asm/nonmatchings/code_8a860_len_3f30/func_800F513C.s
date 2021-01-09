@@ -91,8 +91,8 @@ glabel func_800F513C
 /* 8E730 800F5280 3C018011 */  lui       $at, %hi(D_8010D691)
 /* 8E734 800F5284 A022D691 */  sb        $v0, %lo(D_8010D691)($at)
 /* 8E738 800F5288 24020002 */  addiu     $v0, $zero, 2
-/* 8E73C 800F528C 3C04800F */  lui       $a0, %hi(D_800F1A10)
-/* 8E740 800F5290 24841A10 */  addiu     $a0, $a0, %lo(D_800F1A10)
+/* 8E73C 800F528C 3C04800F */  lui       $a0, %hi(func_800F1A10)
+/* 8E740 800F5290 24841A10 */  addiu     $a0, $a0, %lo(func_800F1A10)
 /* 8E744 800F5294 3C018011 */  lui       $at, %hi(D_8010D692)
 /* 8E748 800F5298 A022D692 */  sb        $v0, %lo(D_8010D692)($at)
 /* 8E74C 800F529C 0C048C8F */  jal       bind_dynamic_entity_7

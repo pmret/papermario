@@ -232,7 +232,7 @@ glabel func_80240674_A07574
 .L802409C4:
 /* A078C4 802409C4 0260202D */  daddu     $a0, $s3, $zero
 /* A078C8 802409C8 0280282D */  daddu     $a1, $s4, $zero
-/* A078CC 802409CC 0C0900B8 */  jal       nok_15_set_script_owner_npc_anim
+/* A078CC 802409CC 0C0900B8 */  jal       func_802402E0_A071E0
 /* A078D0 802409D0 02A0302D */   daddu    $a2, $s5, $zero
 /* A078D4 802409D4 0260202D */  daddu     $a0, $s3, $zero
 .L802409D8:

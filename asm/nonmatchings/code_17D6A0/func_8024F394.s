@@ -132,7 +132,7 @@ glabel func_8024F394
 /* 17DE50 8024F570 0C00AB4B */  jal       heap_free
 /* 17DE54 8024F574 8E840018 */   lw       $a0, 0x18($s4)
 /* 17DE58 8024F578 0280202D */  daddu     $a0, $s4, $zero
-/* 17DE5C 8024F57C 0C093BE9 */  jal       func_8024EFA4
+/* 17DE5C 8024F57C 0C093BE9 */  jal       gPauseMenuCursorOpacity
 /* 17DE60 8024F580 AC800018 */   sw       $zero, 0x18($a0)
 .L8024F584:
 /* 17DE64 8024F584 8FBF0028 */  lw        $ra, 0x28($sp)

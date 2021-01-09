@@ -33,10 +33,10 @@ glabel func_80243164_A2D3A4
 /* A2D414 802431D4 AC400004 */  sw        $zero, 4($v0)
 /* A2D418 802431D8 24A20008 */  addiu     $v0, $a1, 8
 /* A2D41C 802431DC ACC20000 */  sw        $v0, ($a2)
-/* A2D420 802431E0 3C02DE00 */  lui       $v0, %hi(D_DDFFAA28)
+/* A2D420 802431E0 3C02DE00 */  lui       $v0, 0xde00
 /* A2D424 802431E4 ACA20000 */  sw        $v0, ($a1)
 /* A2D428 802431E8 3C028025 */  lui       $v0, %hi(D_8024AA28)
-/* A2D42C 802431EC 2442AA28 */  addiu     $v0, $v0, %lo(D_DDFFAA28)
+/* A2D42C 802431EC 2442AA28 */  addiu     $v0, $v0, %lo(D_8024AA28)
 /* A2D430 802431F0 12600023 */  beqz      $s3, .L80243280
 /* A2D434 802431F4 ACA20004 */   sw       $v0, 4($a1)
 /* A2D438 802431F8 3C03F500 */  lui       $v1, 0xf500

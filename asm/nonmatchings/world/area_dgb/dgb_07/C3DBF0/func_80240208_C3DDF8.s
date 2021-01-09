@@ -54,8 +54,8 @@ glabel func_80240208_C3DDF8
 /* C3DEB8 802402C8 00000000 */   nop      
 /* C3DEBC 802402CC 0C00A6C9 */  jal       clamp_angle
 /* C3DEC0 802402D0 46000306 */   mov.s    $f12, $f0
-/* C3DEC4 802402D4 3C018024 */  lui       $at, %hi(D_80241E90)
-/* C3DEC8 802402D8 D4221E90 */  ldc1      $f2, %lo(D_80241E90)($at)
+/* C3DEC4 802402D4 3C018024 */  lui       $at, %hi(func_80241E90_8B1F00)
+/* C3DEC8 802402D8 D4221E90 */  ldc1      $f2, %lo(func_80241E90_8B1F00)($at)
 /* C3DECC 802402DC 46000021 */  cvt.d.s   $f0, $f0
 /* C3DED0 802402E0 4622003C */  c.lt.d    $f0, $f2
 /* C3DED4 802402E4 00000000 */  nop       

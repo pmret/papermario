@@ -15,9 +15,9 @@ glabel func_80240FF4_DAE3F4
 /* DAE41C 8024101C 00031C00 */  sll       $v1, $v1, 0x10
 /* DAE420 80241020 00031B83 */  sra       $v1, $v1, 0xe
 /* DAE424 80241024 A444008E */  sh        $a0, 0x8e($v0)
-/* DAE428 80241028 3C018024 */  lui       $at, %hi(D_80242EF0)
+/* DAE428 80241028 3C018024 */  lui       $at, %hi(func_80242EF0_BE66A0)
 /* DAE42C 8024102C 00230821 */  addu      $at, $at, $v1
-/* DAE430 80241030 C4222EF0 */  lwc1      $f2, %lo(D_80242EF0)($at)
+/* DAE430 80241030 C4222EF0 */  lwc1      $f2, %lo(func_80242EF0_BE66A0)($at)
 /* DAE434 80241034 8443008E */  lh        $v1, 0x8e($v0)
 /* DAE438 80241038 46020000 */  add.s     $f0, $f0, $f2
 /* DAE43C 8024103C 28630005 */  slti      $v1, $v1, 5

@@ -134,8 +134,8 @@ glabel func_802A4A54
 /* 4199E0 802A4C50 2402000A */  addiu     $v0, $zero, 0xa
 /* 4199E4 802A4C54 3C01802B */  lui       $at, %hi(D_802AD614)
 /* 4199E8 802A4C58 A022D614 */  sb        $v0, %lo(D_802AD614)($at)
-/* 4199EC 802A4C5C 3C02802A */  lui       $v0, %hi(D_802A5290)
-/* 4199F0 802A4C60 24425290 */  addiu     $v0, $v0, %lo(D_802A5290)
+/* 4199EC 802A4C5C 3C02802A */  lui       $v0, %hi(func_802A5290)
+/* 4199F0 802A4C60 24425290 */  addiu     $v0, $v0, %lo(func_802A5290)
 /* 4199F4 802A4C64 2412FFFF */  addiu     $s2, $zero, -1
 /* 4199F8 802A4C68 AFA00014 */  sw        $zero, 0x14($sp)
 /* 4199FC 802A4C6C AFA20018 */  sw        $v0, 0x18($sp)
@@ -160,8 +160,8 @@ glabel func_802A4A54
 /* 419A48 802A4CB8 24020010 */  addiu     $v0, $zero, 0x10
 /* 419A4C 802A4CBC 24100001 */  addiu     $s0, $zero, 1
 /* 419A50 802A4CC0 AFA20010 */  sw        $v0, 0x10($sp)
-/* 419A54 802A4CC4 3C02802A */  lui       $v0, %hi(D_802A56F8)
-/* 419A58 802A4CC8 244256F8 */  addiu     $v0, $v0, %lo(D_802A56F8)
+/* 419A54 802A4CC4 3C02802A */  lui       $v0, %hi(func_802A56F8)
+/* 419A58 802A4CC8 244256F8 */  addiu     $v0, $v0, %lo(func_802A56F8)
 /* 419A5C 802A4CCC AFB00014 */  sw        $s0, 0x14($sp)
 /* 419A60 802A4CD0 AFA20018 */  sw        $v0, 0x18($sp)
 /* 419A64 802A4CD4 AFA0001C */  sw        $zero, 0x1c($sp)
@@ -174,8 +174,8 @@ glabel func_802A4A54
 /* 419A80 802A4CF0 24070118 */  addiu     $a3, $zero, 0x118
 /* 419A84 802A4CF4 24020020 */  addiu     $v0, $zero, 0x20
 /* 419A88 802A4CF8 AFA20010 */  sw        $v0, 0x10($sp)
-/* 419A8C 802A4CFC 3C02802A */  lui       $v0, %hi(D_802A5738)
-/* 419A90 802A4D00 24425738 */  addiu     $v0, $v0, %lo(D_802A5738)
+/* 419A8C 802A4CFC 3C02802A */  lui       $v0, %hi(func_802A5738)
+/* 419A90 802A4D00 24425738 */  addiu     $v0, $v0, %lo(func_802A5738)
 /* 419A94 802A4D04 AFB30014 */  sw        $s3, 0x14($sp)
 /* 419A98 802A4D08 AFA20018 */  sw        $v0, 0x18($sp)
 /* 419A9C 802A4D0C AFA0001C */  sw        $zero, 0x1c($sp)
@@ -491,8 +491,8 @@ glabel func_802A4A54
 /* 419F2C 802A519C AFA20010 */  sw        $v0, 0x10($sp)
 /* 419F30 802A51A0 24020014 */  addiu     $v0, $zero, 0x14
 /* 419F34 802A51A4 AFA20014 */  sw        $v0, 0x14($sp)
-/* 419F38 802A51A8 3C02802A */  lui       $v0, %hi(D_802A57C8)
-/* 419F3C 802A51AC 244257C8 */  addiu     $v0, $v0, %lo(D_802A57C8)
+/* 419F38 802A51A8 3C02802A */  lui       $v0, %hi(func_802A57C8)
+/* 419F3C 802A51AC 244257C8 */  addiu     $v0, $v0, %lo(func_802A57C8)
 /* 419F40 802A51B0 AFA20018 */  sw        $v0, 0x18($sp)
 /* 419F44 802A51B4 2402FFFF */  addiu     $v0, $zero, -1
 /* 419F48 802A51B8 AFA0001C */  sw        $zero, 0x1c($sp)

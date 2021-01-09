@@ -654,6 +654,8 @@ glabel osDispatchThread
 /* 46744 8006B344 00000000 */  nop       
 /* 46748 8006B348 00000000 */  nop       
 /* 4674C 8006B34C 42000018 */  eret      
+
+glabel osCleanupThread
 /* 46750 8006B350 00002021 */  addu      $a0, $zero, $zero
 /* 46754 8006B354 0C01B254 */  jal       osDestroyThread
 /* 46758 8006B358 00000000 */   nop      

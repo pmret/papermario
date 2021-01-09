@@ -38,8 +38,8 @@ glabel func_80240000_BDD1B0
 /* BDD234 80240084 0002802B */   sltu     $s0, $zero, $v0
 /* BDD238 80240088 0C00A6C9 */  jal       clamp_angle
 /* BDD23C 8024008C 46000306 */   mov.s    $f12, $f0
-/* BDD240 80240090 3C018024 */  lui       $at, %hi(D_80241AE0)
-/* BDD244 80240094 D4221AE0 */  ldc1      $f2, %lo(D_80241AE0)($at)
+/* BDD240 80240090 3C018024 */  lui       $at, %hi(func_80241AE0_9F6520)
+/* BDD244 80240094 D4221AE0 */  ldc1      $f2, %lo(func_80241AE0_9F6520)($at)
 /* BDD248 80240098 46000021 */  cvt.d.s   $f0, $f0
 /* BDD24C 8024009C 4622003C */  c.lt.d    $f0, $f2
 /* BDD250 802400A0 00000000 */  nop       

@@ -5,8 +5,8 @@ glabel func_E00BC2E8
 /* 3BA318 E00BC2E8 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* 3BA31C E00BC2EC AFBF0020 */  sw        $ra, 0x20($sp)
 /* 3BA320 E00BC2F0 8C85000C */  lw        $a1, 0xc($a0)
-/* 3BA324 E00BC2F4 3C02E00C */  lui       $v0, %hi(D_E00BC374)
-/* 3BA328 E00BC2F8 2442C374 */  addiu     $v0, $v0, %lo(D_E00BC374)
+/* 3BA324 E00BC2F4 3C02E00C */  lui       $v0, %hi(func_E00BC374)
+/* 3BA328 E00BC2F8 2442C374 */  addiu     $v0, $v0, %lo(func_E00BC374)
 /* 3BA32C E00BC2FC AFA2001C */  sw        $v0, 0x1c($sp)
 /* 3BA330 E00BC300 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
 /* 3BA334 E00BC304 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)

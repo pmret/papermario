@@ -3,8 +3,8 @@
 
 glabel func_80240C9C_CEEEFC
 /* CEEEFC 80240C9C 2404005A */  addiu     $a0, $zero, 0x5a
-/* CEEF00 80240CA0 3C038024 */  lui       $v1, %hi(D_802429B8)
-/* CEEF04 80240CA4 246329B8 */  addiu     $v1, $v1, %lo(D_802429B8)
+/* CEEF00 80240CA0 3C038024 */  lui       $v1, %hi(func_802429B8_B37588)
+/* CEEF04 80240CA4 246329B8 */  addiu     $v1, $v1, %lo(func_802429B8_B37588)
 /* CEEF08 80240CA8 240200DA */  addiu     $v0, $zero, 0xda
 .L80240CAC:
 /* CEEF0C 80240CAC AC620000 */  sw        $v0, ($v1)
