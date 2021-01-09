@@ -119,7 +119,7 @@ GENERATED_HEADERS := include/ld_addrs.h $(foreach dir, $(NPC_DIRS), include/$(di
 ### Targets ###
 
 clean:
-	rm -rf $(BUILD_DIR)
+	rm -rf $(BUILD_DIR) $(LD_SCRIPT)
 
 clean-all:
 	rm -rf $(BUILD_DIR) bin msg img sprite .splat_cache $(LD_SCRIPT)
@@ -149,6 +149,8 @@ split-all:
 
 test: $(ROM)
 	$(EMULATOR) $<
+
+%.bin: $(LD_SCRIPT)
 
 # Compressed files
 %.Yay0: %
