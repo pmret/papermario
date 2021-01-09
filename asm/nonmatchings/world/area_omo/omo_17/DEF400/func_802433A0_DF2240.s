@@ -186,7 +186,7 @@ glabel func_802433A0_DF2240
 /* DF24F4 80243654 0260202D */   daddu    $a0, $s3, $zero
 /* DF24F8 80243658 08090DA6 */  j         .L80243698
 /* DF24FC 8024365C 00000000 */   nop
-/* DF2500 80243660 0C090A38 */  jal       func_802428E0_DF1780
+/* DF2500 80243660 0C090A38 */  jal       omo_17_UnkSetDurationFunc
 /* DF2504 80243664 0260202D */   daddu    $a0, $s3, $zero
 /* DF2508 80243668 08090DA6 */  j         .L80243698
 /* DF250C 8024366C 00000000 */   nop
