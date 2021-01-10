@@ -1987,7 +1987,75 @@ segments:
     - [0x6DE4A0, c]
     - [0x6DE650, c]
     - [0x6DE670, bin]
-  - [0x6F0B30, bin] # what's this?
+  - type: code
+    start: 0x6F0B30
+    vram: 0x80238000
+    overlay: True
+    files:
+    - [0x6F0B30, bin]
+  - type: code
+    start: 0x6F10E0
+    vram: 0x80238000
+    overlay: True
+    files:
+    - [0x6F10E0, c]
+    - [0x6F2290, bin]
+  - type: code
+    start: 0x6F5E80
+    vram: 0x80238000
+    overlay: True
+    files:
+    - [0x6F5E80, c]
+    - [0x6F62B0, bin]
+  - type: code
+    start: 0x6FAD10
+    vram: 0x80238000
+    overlay: True
+    files:
+    - [0x6FAD10, c]
+    - [0x6FB350, bin]
+  - type: code
+    start: 0x6FFD80
+    vram: 0x80238000
+    overlay: True
+    files:
+    - [0x6FFD80, c]
+    - [0x701590, bin]
+  - type: code
+    start: 0x703AF0
+    vram: 0x80238000
+    overlay: True
+    files:
+    - [0x703AF0, c]
+    - [0x704A70, bin]
+  - type: code
+    start: 0x707CA0
+    vram: 0x80238000
+    overlay: True
+    files:
+    - [0x707CA0, c]
+    - [0x708B70, bin]
+  - type: code
+    start: 0x70BD10
+    vram: 0x80238000
+    overlay: True
+    files:
+    - [0x70BD10, c]
+    - [0x70DED0, bin]
+  - type: code
+    start: 0x710EF0
+    vram: 0x80238000
+    overlay: True
+    files:
+    - [0x710EF0, c]
+    - [0x7111F0, bin]
+  - type: code
+    start: 0x714CF0
+    vram: 0x80238000
+    overlay: True
+    files:
+    - [0x714CF0, c]
+    - [0x714DC0, bin]
   - name: world/script_api/
     ld_name: world_script_api
     type: code
@@ -7670,7 +7738,14 @@ segments:
     files:
     - [0xE1E460, c]
     - [0xE1EC20, bin]
-  - [0xE20110, bin]
+  - [0xE20110, bin] # replace with following commented out section once vram is discovered
+  # - type: code
+  #   overlay: True
+  #   start: 0xE20110
+  #   vram: 0 # unknown
+  #   files:
+  #   - [0xE20110, c]
+  #   - [0xE20B30, bin] # may or may not be part of this overlay, perhaps split further
   - type: code
     overlay: True
     start: 0xE20EB0
