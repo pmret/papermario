@@ -8420,7 +8420,14 @@ segments:
     files:
     - [0xE2A6B0, c]
     - [0xE2B420, bin]
-  - [0xE2B530, bin]
+  - [0xE2B530, bin] # code
+  - [0xE2BE40, bin] # code
+  - [0xE2C930, bin] # code
+  - [0xE2D410, bin] # data
+  - [0xE2D730, bin] # code
+  - [0xE2E5F0, bin] # code
+  - [0xE2EDE0, bin] # code
+  - [0xE31380, bin] # data
   - [0xEA0900, bin]
   - [0xF007C0, bin, Battle_Fanfare_02] # BGM start
   - [0xF02160, bin, Hey_You_03]
