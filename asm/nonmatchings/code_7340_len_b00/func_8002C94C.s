@@ -11,8 +11,8 @@ glabel func_8002C94C
 /* 7D64 8002C964 00A0802D */  daddu     $s0, $a1, $zero
 /* 7D68 8002C968 AFB3011C */  sw        $s3, 0x11c($sp)
 /* 7D6C 8002C96C 0240982D */  daddu     $s3, $s2, $zero
-/* 7D70 8002C970 3C048003 */  lui       $a0, %hi(D_8002C1D4)
-/* 7D74 8002C974 2484C1D4 */  addiu     $a0, $a0, %lo(D_8002C1D4)
+/* 7D70 8002C970 3C048003 */  lui       $a0, %hi(func_8002C1D4)
+/* 7D74 8002C974 2484C1D4 */  addiu     $a0, $a0, %lo(func_8002C1D4)
 /* 7D78 8002C978 27A50010 */  addiu     $a1, $sp, 0x10
 /* 7D7C 8002C97C 27A7013C */  addiu     $a3, $sp, 0x13c
 /* 7D80 8002C980 AFBF0128 */  sw        $ra, 0x128($sp)

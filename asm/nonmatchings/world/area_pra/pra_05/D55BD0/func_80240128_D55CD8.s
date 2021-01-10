@@ -110,8 +110,8 @@ glabel func_80240128_D55CD8
 /* D55E64 802402B4 AC910000 */  sw        $s1, ($a0)
 /* D55E68 802402B8 AC900008 */  sw        $s0, 8($a0)
 /* D55E6C 802402BC 8FA20038 */  lw        $v0, 0x38($sp)
-/* D55E70 802402C0 3C038024 */  lui       $v1, %hi(D_802402F0)
-/* D55E74 802402C4 246302F0 */  addiu     $v1, $v1, %lo(D_802402F0)
+/* D55E70 802402C0 3C038024 */  lui       $v1, %hi(func_802402F0_D55EA0)
+/* D55E74 802402C4 246302F0 */  addiu     $v1, $v1, %lo(func_802402F0_D55EA0)
 /* D55E78 802402C8 AC83000C */  sw        $v1, 0xc($a0)
 /* D55E7C 802402CC 00021023 */  negu      $v0, $v0
 /* D55E80 802402D0 0C047644 */  jal       queue_render_task

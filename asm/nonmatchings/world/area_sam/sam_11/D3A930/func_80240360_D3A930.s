@@ -58,8 +58,8 @@ glabel func_80240360_D3A930
 /* D3A9F0 80240420 0080302D */   daddu    $a2, $a0, $zero
 /* D3A9F4 80240424 240600FF */  addiu     $a2, $zero, 0xff
 /* D3A9F8 80240428 93A20013 */  lbu       $v0, 0x13($sp)
-/* D3A9FC 8024042C 3C038024 */  lui       $v1, %hi(D_80243CC0)
-/* D3AA00 80240430 8C633CC0 */  lw        $v1, %lo(D_80243CC0)($v1)
+/* D3A9FC 8024042C 3C038024 */  lui       $v1, %hi(func_80243CC0_A2DF00)
+/* D3AA00 80240430 8C633CC0 */  lw        $v1, %lo(func_80243CC0_A2DF00)($v1)
 /* D3AA04 80240434 00C23023 */  subu      $a2, $a2, $v0
 /* D3AA08 80240438 00660018 */  mult      $v1, $a2
 /* D3AA0C 8024043C 00001812 */  mflo      $v1

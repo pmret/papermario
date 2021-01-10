@@ -187,8 +187,8 @@ glabel MakeShop
 /* 7E299C 80281B1C 24070078 */  addiu     $a3, $zero, 0x78
 /* 7E29A0 80281B20 2402001C */  addiu     $v0, $zero, 0x1c
 /* 7E29A4 80281B24 AFA20010 */  sw        $v0, 0x10($sp)
-/* 7E29A8 80281B28 3C028028 */  lui       $v0, %hi(D_80281434)
-/* 7E29AC 80281B2C 24421434 */  addiu     $v0, $v0, %lo(D_80281434)
+/* 7E29A8 80281B28 3C028028 */  lui       $v0, %hi(func_80281434)
+/* 7E29AC 80281B2C 24421434 */  addiu     $v0, $v0, %lo(func_80281434)
 /* 7E29B0 80281B30 AFA00014 */  sw        $zero, 0x14($sp)
 /* 7E29B4 80281B34 AFA20018 */  sw        $v0, 0x18($sp)
 /* 7E29B8 80281B38 AFA0001C */  sw        $zero, 0x1c($sp)
@@ -202,8 +202,8 @@ glabel MakeShop
 /* 7E29D8 80281B58 AFA20010 */  sw        $v0, 0x10($sp)
 /* 7E29DC 80281B5C 24020001 */  addiu     $v0, $zero, 1
 /* 7E29E0 80281B60 AFA20014 */  sw        $v0, 0x14($sp)
-/* 7E29E4 80281B64 3C028028 */  lui       $v0, %hi(D_802814D0)
-/* 7E29E8 80281B68 244214D0 */  addiu     $v0, $v0, %lo(D_802814D0)
+/* 7E29E4 80281B64 3C028028 */  lui       $v0, %hi(func_802814D0)
+/* 7E29E8 80281B68 244214D0 */  addiu     $v0, $v0, %lo(func_802814D0)
 /* 7E29EC 80281B6C AFA20018 */  sw        $v0, 0x18($sp)
 /* 7E29F0 80281B70 AFA0001C */  sw        $zero, 0x1c($sp)
 /* 7E29F4 80281B74 0C051F32 */  jal       set_ui_panel_properties

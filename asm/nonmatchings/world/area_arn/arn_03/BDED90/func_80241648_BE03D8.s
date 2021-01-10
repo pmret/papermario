@@ -12,7 +12,7 @@ glabel func_80241648_BE03D8
 /* BE03F4 80241664 24020002 */  addiu     $v0, $zero, 2
 /* BE03F8 80241668 8FBF0010 */  lw        $ra, 0x10($sp)
 /* BE03FC 8024166C 24030001 */  addiu     $v1, $zero, 1
-/* BE0400 80241670 3C018024 */  lui       $at, %hi(D_80241CCC)
-/* BE0404 80241674 AC231CCC */  sw        $v1, %lo(D_80241CCC)($at)
+/* BE0400 80241670 3C018024 */  lui       $at, %hi(func_80241CCC_A3B1AC)
+/* BE0404 80241674 AC231CCC */  sw        $v1, %lo(func_80241CCC_A3B1AC)($at)
 /* BE0408 80241678 03E00008 */  jr        $ra
 /* BE040C 8024167C 27BD0018 */   addiu    $sp, $sp, 0x18

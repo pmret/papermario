@@ -5,8 +5,8 @@ glabel func_E006E6E4
 /* 372E74 E006E6E4 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* 372E78 E006E6E8 AFBF0020 */  sw        $ra, 0x20($sp)
 /* 372E7C E006E6EC 8C85000C */  lw        $a1, 0xc($a0)
-/* 372E80 E006E6F0 3C02E007 */  lui       $v0, %hi(D_E006E764)
-/* 372E84 E006E6F4 2442E764 */  addiu     $v0, $v0, %lo(D_E006E764)
+/* 372E80 E006E6F0 3C02E007 */  lui       $v0, %hi(func_E006E764)
+/* 372E84 E006E6F4 2442E764 */  addiu     $v0, $v0, %lo(func_E006E764)
 /* 372E88 E006E6F8 AFA2001C */  sw        $v0, 0x1c($sp)
 /* 372E8C E006E6FC 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
 /* 372E90 E006E700 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)

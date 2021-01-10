@@ -18,9 +18,9 @@ glabel func_80240574_9EE164
 /* 9EE198 802405A8 00028840 */  sll       $s1, $v0, 1
 /* 9EE19C 802405AC 02228821 */  addu      $s1, $s1, $v0
 /* 9EE1A0 802405B0 00111080 */  sll       $v0, $s1, 2
-/* 9EE1A4 802405B4 3C068024 */  lui       $a2, %hi(D_80241440)
+/* 9EE1A4 802405B4 3C068024 */  lui       $a2, %hi(func_80241440_8ED260)
 /* 9EE1A8 802405B8 00C23021 */  addu      $a2, $a2, $v0
-/* 9EE1AC 802405BC 8CC61440 */  lw        $a2, %lo(D_80241440)($a2)
+/* 9EE1AC 802405BC 8CC61440 */  lw        $a2, %lo(func_80241440_8ED260)($a2)
 /* 9EE1B0 802405C0 8E130000 */  lw        $s3, ($s0)
 /* 9EE1B4 802405C4 8E100004 */  lw        $s0, 4($s0)
 /* 9EE1B8 802405C8 0C0B2026 */  jal       set_variable
@@ -28,17 +28,17 @@ glabel func_80240574_9EE164
 /* 9EE1C0 802405D0 0240202D */  daddu     $a0, $s2, $zero
 /* 9EE1C4 802405D4 26220001 */  addiu     $v0, $s1, 1
 /* 9EE1C8 802405D8 00021080 */  sll       $v0, $v0, 2
-/* 9EE1CC 802405DC 3C068024 */  lui       $a2, %hi(D_80241440)
+/* 9EE1CC 802405DC 3C068024 */  lui       $a2, %hi(func_80241440_8ED260)
 /* 9EE1D0 802405E0 00C23021 */  addu      $a2, $a2, $v0
-/* 9EE1D4 802405E4 8CC61440 */  lw        $a2, %lo(D_80241440)($a2)
+/* 9EE1D4 802405E4 8CC61440 */  lw        $a2, %lo(func_80241440_8ED260)($a2)
 /* 9EE1D8 802405E8 0C0B2026 */  jal       set_variable
 /* 9EE1DC 802405EC 0260282D */   daddu    $a1, $s3, $zero
 /* 9EE1E0 802405F0 0240202D */  daddu     $a0, $s2, $zero
 /* 9EE1E4 802405F4 26310002 */  addiu     $s1, $s1, 2
 /* 9EE1E8 802405F8 00118880 */  sll       $s1, $s1, 2
-/* 9EE1EC 802405FC 3C068024 */  lui       $a2, %hi(D_80241440)
+/* 9EE1EC 802405FC 3C068024 */  lui       $a2, %hi(func_80241440_8ED260)
 /* 9EE1F0 80240600 00D13021 */  addu      $a2, $a2, $s1
-/* 9EE1F4 80240604 8CC61440 */  lw        $a2, %lo(D_80241440)($a2)
+/* 9EE1F4 80240604 8CC61440 */  lw        $a2, %lo(func_80241440_8ED260)($a2)
 /* 9EE1F8 80240608 0C0B2026 */  jal       set_variable
 /* 9EE1FC 8024060C 0200282D */   daddu    $a1, $s0, $zero
 /* 9EE200 80240610 8FBF0020 */  lw        $ra, 0x20($sp)

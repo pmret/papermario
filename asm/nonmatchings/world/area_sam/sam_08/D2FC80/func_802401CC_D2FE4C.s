@@ -26,8 +26,8 @@ glabel func_802401CC_D2FE4C
 /* D2FEA0 80240220 26941AE8 */  addiu     $s4, $s4, %lo(D_80241AE8)
 /* D2FEA4 80240224 0260882D */  daddu     $s1, $s3, $zero
 /* D2FEA8 80240228 8EA200B4 */  lw        $v0, 0xb4($s5)
-/* D2FEAC 8024022C 3C038024 */  lui       $v1, %hi(D_80241AE0)
-/* D2FEB0 80240230 24631AE0 */  addiu     $v1, $v1, %lo(D_80241AE0)
+/* D2FEAC 8024022C 3C038024 */  lui       $v1, %hi(func_80241AE0_9F6520)
+/* D2FEB0 80240230 24631AE0 */  addiu     $v1, $v1, %lo(func_80241AE0_9F6520)
 /* D2FEB4 80240234 AEB30078 */  sw        $s3, 0x78($s5)
 /* D2FEB8 80240238 00021027 */  nor       $v0, $zero, $v0
 /* D2FEBC 8024023C 0002BFC2 */  srl       $s7, $v0, 0x1f

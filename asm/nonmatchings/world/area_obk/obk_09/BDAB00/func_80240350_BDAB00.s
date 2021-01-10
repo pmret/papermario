@@ -12,16 +12,16 @@ glabel func_80240350_BDAB00
 /* BDAB1C 8024036C AFB00018 */   sw       $s0, 0x18($sp)
 /* BDAB20 80240370 0040802D */  daddu     $s0, $v0, $zero
 /* BDAB24 80240374 0200202D */  daddu     $a0, $s0, $zero
-/* BDAB28 80240378 3C118024 */  lui       $s1, %hi(D_80242A00)
-/* BDAB2C 8024037C 26312A00 */  addiu     $s1, $s1, %lo(D_80242A00)
+/* BDAB28 80240378 3C118024 */  lui       $s1, %hi(func_80242A00_9D9A20)
+/* BDAB2C 8024037C 26312A00 */  addiu     $s1, $s1, %lo(func_80242A00_9D9A20)
 /* BDAB30 80240380 0C01BB7C */  jal       decode_yay0
 /* BDAB34 80240384 0220282D */   daddu    $a1, $s1, $zero
 /* BDAB38 80240388 0C00AB1E */  jal       general_heap_free
 /* BDAB3C 8024038C 0200202D */   daddu    $a0, $s0, $zero
 /* BDAB40 80240390 3C048024 */  lui       $a0, %hi(D_80246990)
 /* BDAB44 80240394 24846990 */  addiu     $a0, $a0, %lo(D_80246990)
-/* BDAB48 80240398 3C028024 */  lui       $v0, %hi(D_80242C00)
-/* BDAB4C 8024039C 24422C00 */  addiu     $v0, $v0, %lo(D_80242C00)
+/* BDAB48 80240398 3C028024 */  lui       $v0, %hi(func_80242C00_BB0540)
+/* BDAB4C 8024039C 24422C00 */  addiu     $v0, $v0, %lo(func_80242C00_BB0540)
 /* BDAB50 802403A0 AC820000 */  sw        $v0, ($a0)
 /* BDAB54 802403A4 24020096 */  addiu     $v0, $zero, 0x96
 /* BDAB58 802403A8 A4820008 */  sh        $v0, 8($a0)

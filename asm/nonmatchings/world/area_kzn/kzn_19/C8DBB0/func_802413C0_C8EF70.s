@@ -3,8 +3,8 @@
 
 glabel func_802413C0_C8EF70
 /* C8EF70 802413C0 27BDFFD8 */  addiu     $sp, $sp, -0x28
-/* C8EF74 802413C4 3C028024 */  lui       $v0, %hi(D_80240E2C)
-/* C8EF78 802413C8 24420E2C */  addiu     $v0, $v0, %lo(D_80240E2C)
+/* C8EF74 802413C4 3C028024 */  lui       $v0, %hi(func_80240E2C_C8E9DC)
+/* C8EF78 802413C8 24420E2C */  addiu     $v0, $v0, %lo(func_80240E2C_C8E9DC)
 /* C8EF7C 802413CC AFA2001C */  sw        $v0, 0x1c($sp)
 /* C8EF80 802413D0 2402000A */  addiu     $v0, $zero, 0xa
 /* C8EF84 802413D4 AFA20014 */  sw        $v0, 0x14($sp)

@@ -8,8 +8,8 @@ glabel func_802E46BC
 /* 105F48 802E46C8 0C0B8DB9 */  jal       entity_init_Hammer23Block_normal
 /* 105F4C 802E46CC 0080802D */   daddu    $s0, $a0, $zero
 /* 105F50 802E46D0 86040014 */  lh        $a0, 0x14($s0)
-/* 105F54 802E46D4 3C02802E */  lui       $v0, %hi(D_802E455C)
-/* 105F58 802E46D8 2442455C */  addiu     $v0, $v0, %lo(D_802E455C)
+/* 105F54 802E46D4 3C02802E */  lui       $v0, %hi(func_802E455C)
+/* 105F58 802E46D8 2442455C */  addiu     $v0, $v0, %lo(func_802E455C)
 /* 105F5C 802E46DC 0C047FF8 */  jal       get_anim_mesh
 /* 105F60 802E46E0 AE02003C */   sw       $v0, 0x3c($s0)
 /* 105F64 802E46E4 24030011 */  addiu     $v1, $zero, 0x11

@@ -124,9 +124,9 @@ glabel func_80240B94_C56AD4
 /* C56C98 80240D58 2C620064 */  sltiu     $v0, $v1, 0x64
 /* C56C9C 80240D5C 10400042 */  beqz      $v0, .L80240E68
 /* C56CA0 80240D60 00031080 */   sll      $v0, $v1, 2
-/* C56CA4 80240D64 3C018024 */  lui       $at, %hi(D_802438F0)
+/* C56CA4 80240D64 3C018024 */  lui       $at, %hi(func_802438F0_C436A0)
 /* C56CA8 80240D68 00220821 */  addu      $at, $at, $v0
-/* C56CAC 80240D6C 8C2238F0 */  lw        $v0, %lo(D_802438F0)($at)
+/* C56CAC 80240D6C 8C2238F0 */  lw        $v0, %lo(func_802438F0_C436A0)($at)
 /* C56CB0 80240D70 00400008 */  jr        $v0
 /* C56CB4 80240D74 00000000 */   nop      
 /* C56CB8 80240D78 0280202D */  daddu     $a0, $s4, $zero

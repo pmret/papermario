@@ -250,7 +250,7 @@ glabel func_80242048_C87AF8
 /* C87E84 802423D4 00000000 */   nop
 .L802423D8:
 /* C87E88 802423D8 0280282D */  daddu     $a1, $s4, $zero
-/* C87E8C 802423DC 0C0907F2 */  jal       kzn_17_set_script_owner_npc_col_height
+/* C87E8C 802423DC 0C0907F2 */  jal       func_80241FC8_C87A78
 /* C87E90 802423E0 02A0302D */   daddu    $a2, $s5, $zero
 /* C87E94 802423E4 080908FD */  j         .L802423F4
 /* C87E98 802423E8 00000000 */   nop

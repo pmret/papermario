@@ -48,8 +48,8 @@ glabel func_8011F304
 /* B5AA8 8011F3A8 24A50010 */  addiu     $a1, $a1, 0x10
 /* B5AAC 8011F3AC 14A3FFF6 */  bne       $a1, $v1, .L8011F388
 /* B5AB0 8011F3B0 24420010 */   addiu    $v0, $v0, 0x10
-/* B5AB4 8011F3B4 3C028012 */  lui       $v0, %hi(D_8011F4D4)
-/* B5AB8 8011F3B8 2442F4D4 */  addiu     $v0, $v0, %lo(D_8011F4D4)
+/* B5AB4 8011F3B4 3C028012 */  lui       $v0, %hi(func_8011F4D4)
+/* B5AB8 8011F3B8 2442F4D4 */  addiu     $v0, $v0, %lo(func_8011F4D4)
 /* B5ABC 8011F3BC ACE000D8 */  sw        $zero, 0xd8($a3)
 /* B5AC0 8011F3C0 AD070008 */  sw        $a3, 8($t0)
 /* B5AC4 8011F3C4 AD02000C */  sw        $v0, 0xc($t0)

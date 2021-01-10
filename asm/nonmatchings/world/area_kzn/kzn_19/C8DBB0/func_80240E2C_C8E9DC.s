@@ -151,10 +151,10 @@ glabel func_80240E2C_C8E9DC
 /* C8EBEC 8024103C 24620008 */  addiu     $v0, $v1, 8
 /* C8EBF0 80241040 AC800004 */  sw        $zero, 4($a0)
 /* C8EBF4 80241044 AD020000 */  sw        $v0, ($t0)
-/* C8EBF8 80241048 3C02DE00 */  lui       $v0, %hi(D_DE003AD8)
+/* C8EBF8 80241048 3C02DE00 */  lui       $v0, 0xde00
 /* C8EBFC 8024104C AC620000 */  sw        $v0, ($v1)
 /* C8EC00 80241050 3C028024 */  lui       $v0, %hi(D_80243AD8)
-/* C8EC04 80241054 24423AD8 */  addiu     $v0, $v0, %lo(D_DE003AD8)
+/* C8EC04 80241054 24423AD8 */  addiu     $v0, $v0, %lo(D_80243AD8)
 /* C8EC08 80241058 AC620004 */  sw        $v0, 4($v1)
 .L8024105C:
 /* C8EC0C 8024105C 0000202D */  daddu     $a0, $zero, $zero

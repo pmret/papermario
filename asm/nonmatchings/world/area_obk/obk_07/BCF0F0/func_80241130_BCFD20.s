@@ -3,8 +3,8 @@
 
 glabel func_80241130_BCFD20
 /* BCFD20 80241130 0000302D */  daddu     $a2, $zero, $zero
-/* BCFD24 80241134 3C058024 */  lui       $a1, %hi(D_80243090)
-/* BCFD28 80241138 24A53090 */  addiu     $a1, $a1, %lo(D_80243090)
+/* BCFD24 80241134 3C058024 */  lui       $a1, %hi(func_80243090_8B3100)
+/* BCFD28 80241138 24A53090 */  addiu     $a1, $a1, %lo(func_80243090_8B3100)
 .L8024113C:
 /* BCFD2C 8024113C 8CA30000 */  lw        $v1, ($a1)
 /* BCFD30 80241140 50600006 */  beql      $v1, $zero, .L8024115C

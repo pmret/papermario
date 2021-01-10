@@ -30,9 +30,9 @@ glabel osInitialize
 /* 45B64 8006A764 0C01B204 */  jal       osSiRawWriteIo
 /* 45B68 8006A768 34A50008 */   ori      $a1, $a1, 8
 /* 45B6C 8006A76C 1440FFFA */  bnez      $v0, .L8006A758
-/* 45B70 8006A770 00000000 */   nop      
-/* 45B74 8006A774 3C028007 */  lui       $v0, %hi(D_8006A9F0)
-/* 45B78 8006A778 2442A9F0 */  addiu     $v0, $v0, %lo(D_8006A9F0)
+/* 45B70 8006A770 00000000 */   nop
+/* 45B74 8006A774 3C028007 */  lui       $v0, %hi(func_8006A9F0)
+/* 45B78 8006A778 2442A9F0 */  addiu     $v0, $v0, %lo(func_8006A9F0)
 /* 45B7C 8006A77C 3C068000 */  lui       $a2, 0x8000
 /* 45B80 8006A780 8C430000 */  lw        $v1, ($v0)
 /* 45B84 8006A784 8C440004 */  lw        $a0, 4($v0)
@@ -125,7 +125,7 @@ glabel osInitialize
 /* 45CE0 8006A8E0 0C019A58 */  jal       osUnmapTLBAll
 /* 45CE4 8006A8E4 A02A1B0F */   sb       $t2, %lo(D_800B1B0F)($at)
 /* 45CE8 8006A8E8 0C01B28C */  jal       osMapTLBRdb
-/* 45CEC 8006A8EC 00000000 */   nop      
+/* 45CEC 8006A8EC 00000000 */   nop
 /* 45CF0 8006A8F0 3C028009 */  lui       $v0, %hi(D_800958F0)
 /* 45CF4 8006A8F4 8C4258F0 */  lw        $v0, %lo(D_800958F0)($v0)
 /* 45CF8 8006A8F8 3C038009 */  lui       $v1, %hi(D_800958F4)
@@ -176,7 +176,7 @@ glabel osInitialize
 /* 45D9C 8006A99C 3C03A450 */   lui      $v1, 0xa450
 .L8006A9A0:
 /* 45DA0 8006A9A0 0801AA68 */  j         .L8006A9A0
-/* 45DA4 8006A9A4 00000000 */   nop      
+/* 45DA4 8006A9A4 00000000 */   nop
 .L8006A9A8:
 /* 45DA8 8006A9A8 34630008 */  ori       $v1, $v1, 8
 /* 45DAC 8006A9AC 3C04A450 */  lui       $a0, 0xa450
