@@ -2162,6 +2162,13 @@ segments:
     - [0x723780, c]
     - [0x723AB0, bin]
   - type: code
+    start: 0x724240
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x724240, c]
+    - [0x724570, bin]
+  - type: code
     start: 0x724CE0
     vram: 0x802A1000
     overlay: True
