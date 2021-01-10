@@ -405,10 +405,16 @@ segments:
     files:
     - [0x3169f0, c, code_3169f0]
     - [0x316a70, c, code_316a70]
-  - [0x316c00, bin] # 0x802AE000
+  - type: code
+    start: 0x316C00
+    vram: 0x802AE000
+    overlay: True
+    files:
+    - [0x316C00, c]
   - type: code
     start: 0x316D90
     vram: 0x802AE000
+    overlay: True
     files:
     - [0x316d90, c, code_316d90]
   - type: code
