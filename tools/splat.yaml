@@ -1349,9 +1349,164 @@ segments:
   - type: code
     start: 0x4219F0
     vram: 0x802A9000
+    overlay: True
     files:
     - [0x4219F0, c]
-    - [0x421FC0, bin] # todo split this further
+    - [0x421FC0, bin]
+  - type: code
+    start: 0x422000
+    vram: 0x802A9000
+    overlay: True
+    files:
+    - [0x422000, c]
+    - [0x422A90, bin]
+  - type: code
+    start: 0x422AD0
+    vram: 0x802A9000
+    overlay: True
+    files:
+    - [0x422AD0, c]
+    - [0x4233B0, bin]
+  - type: code
+    start: 0x4233F0
+    vram: 0x802A9000
+    overlay: True
+    files:
+    - [0x4233F0, c]
+    - [0x423C30, bin]
+  - type: code
+    start: 0x423C70
+    vram: 0x802A9000
+    overlay: True
+    files:
+    - [0x423C70, c]
+    - [0x424550, bin]
+  - type: code
+    start: 0x425590
+    vram: 0x802A9000
+    overlay: True
+    files:
+    - [0x425590, c]
+    - [0x425B10, bin]
+  - type: code
+    start: 0x425B50
+    vram: 0x802A9000
+    overlay: True
+    files:
+    - [0x425B50, c]
+    - [0x426130, bin]
+  - type: code
+    start: 0x426170
+    vram: 0x802A9000
+    overlay: True
+    files:
+    - [0x426170, c]
+    - [0x426970, bin]
+  - type: code
+    start: 0x4269D0
+    vram: 0x802A9000
+    overlay: True
+    files:
+    - [0x4269D0, c]
+    - [0x427320, bin]
+  - type: code
+    start: 0x4273B0
+    vram: 0x802A9000
+    overlay: True
+    files:
+    - [0x4273B0, c]
+    - [0x427A30, bin]
+  - type: code
+    start: 0x427A70
+    vram: 0x802A9000
+    overlay: True
+    files:
+    - [0x427A70, c]
+    - [0x428280, bin]
+  - type: code
+    start: 0x4282E0
+    vram: 0x802A9000
+    overlay: True
+    files:
+    - [0x4282E0, c]
+    - [0x428A30, bin]
+  - type: code
+    start: 0x428A70
+    vram: 0x802A9000
+    overlay: True
+    files:
+    - [0x428A70, c]
+    - [0x4292C0, bin]
+  - type: code
+    start: 0x429320
+    vram: 0x802A9000
+    overlay: True
+    files:
+    - [0x429320, c]
+    - [0x429C90, bin]
+  - type: code
+    start: 0x429D20
+    vram: 0x802A9000
+    overlay: True
+    files:
+    - [0x429D20, c]
+    - [0x42A480, bin]
+  - type: code
+    start: 0x42A4F0
+    vram: 0x802A9000
+    overlay: True
+    files:
+    - [0x42A4F0, c]
+    - [0x42B650, bin]
+  - type: code
+    start: 0x42C6F0
+    vram: 0x802A9000
+    overlay: True
+    files:
+    - [0x42C6F0, c]
+    - [0x42CEB0, bin]
+  - type: code
+    start: 0x42CF10
+    vram: 0x802A9000
+    overlay: True
+    files:
+    - [0x42CF10, c]
+    - [0x42D9B0, bin]
+  - type: code
+    start: 0x42DA10
+    vram: 0x802A9000
+    overlay: True
+    files:
+    - [0x42DA10, c]
+    - [0x42E330, bin]
+  - type: code
+    start: 0x42E3A0
+    vram: 0x802A9000
+    overlay: True
+    files:
+    - [0x42E3A0, c]
+    - [0x42ED70, bin]
+  - type: code
+    start: 0x42EE20
+    vram: 0x802A9000
+    overlay: True
+    files:
+    - [0x42EE20, c]
+    - [0x42F680, bin]
+  - type: code
+    start: 0x42F6E0
+    vram: 0x802A9000
+    overlay: True
+    files:
+    - [0x42F6E0, c]
+    - [0x42FFC0, bin]
+  - type: code
+    start: 0x430020
+    vram: 0x802A9000
+    overlay: True
+    files:
+    - [0x430020, c]
+    - [0x430940, bin]
   - name: battle/area_kmr_part_1/
     type: code
     start: 0x4309A0
