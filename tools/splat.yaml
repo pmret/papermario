@@ -1303,7 +1303,8 @@ segments:
     start: 0x406B40
     vram: 0xE011C000
     files:
-    - [0x406B40, bin]
+    - [0x406B40, c]
+    - [0x407040, bin]
   - type: code
     start: 0x409990
     vram: 0xE011E000
