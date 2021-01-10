@@ -2056,6 +2056,216 @@ segments:
     files:
     - [0x714CF0, c]
     - [0x714DC0, bin]
+  - type: code
+    start: 0x715850
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x715850, c]
+    - [0x715E50, bin]
+  - type: code
+    start: 0x716C60
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x716C60, c]
+    - [0x717060, bin]
+  - type: code
+    start: 0x7179D0
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x7179D0, c]
+    - [0x717C10, bin]
+  - type: code
+    start: 0x718850
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x718850, c]
+    - [0x718BF0, bin]
+  - type: code
+    start: 0x719970
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x719970, c]
+    - [0x719BB0, bin]
+  - type: code
+    start: 0x71A7F0
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x71A7F0, c]
+    - [0x71AA70, bin]
+  - type: code
+    start: 0x71B1A0
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x71B1A0, c]
+    - [0x71B640, bin]
+  - type: code
+    start: 0x71BE30
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x71BE30, c]
+    - [0x71C270, bin]
+  - type: code
+    start: 0x71CCE0
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x71CCE0, c]
+    - [0x71D010, bin]
+  - type: code
+    start: 0x71D770
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x71D770, c]
+    - [0x71DCC0, bin]
+  - type: code
+    start: 0x71E650
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x71E650, c]
+    - [0x71EFC0, bin]
+  - type: code
+    start: 0x7215A0
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x7215A0, c]
+    - [0x721970, bin]
+  - type: code
+    start: 0x722000
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x722000, c]
+    - [0x7222D0, bin]
+  - type: code
+    start: 0x722B40
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x722B40, c]
+    - [0x722FE0, bin]
+  - type: code
+    start: 0x723780
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x723780, c]
+    - [0x723AB0, bin]
+  - type: code
+    start: 0x724CE0
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x724CE0, c]
+    - [0x725210, bin]
+  - type: code
+    start: 0x725F60
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x725F60, c]
+    - [0x726240, bin]
+  - type: code
+    start: 0x726DD0
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x726DD0, c]
+    - [0x727120, bin]
+  - type: code
+    start: 0x727910
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x727910, c]
+    - [0x727CE0, bin]
+  - type: code
+    start: 0x7285E0
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x7285E0, c]
+    - [0x728820, bin]
+  - type: code
+    start: 0x728EC0
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x728EC0, c]
+    - [0x7291D0, bin]
+  - type: code
+    start: 0x72A750
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x72A750, c]
+    - [0x72AB70, bin]
+  - type: code
+    start: 0x72B910
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x72B910, c]
+    - [0x72BC60, bin]
+  - type: code
+    start: 0x72C5B0
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x72C5B0, c]
+    - [0x72CF00, bin]
+  - type: code
+    start: 0x72DB70
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x72DB70, c]
+    - [0x72DE00, bin]
+  - type: code
+    start: 0x72E530
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x72E530, c]
+    - [0x72EA20, bin]
+  - type: code
+    start: 0x72F720
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x72F720, c]
+    - [0x72F960, bin]
+  - type: code
+    start: 0x7305A0
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x7305A0, c]
+    - [0x730AE0, bin]
+  - type: code
+    start: 0x731300
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x731300, c]
+    - [0x731EA0, bin]
+  - type: code
+    start: 0x7330D0
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x7330D0, c]
+    - [0x733700, bin]
   - name: world/script_api/
     ld_name: world_script_api
     type: code
