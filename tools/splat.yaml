@@ -8270,14 +8270,13 @@ segments:
     files:
     - [0xE1E460, c]
     - [0xE1EC20, bin]
-  - [0xE20110, bin] # replace with following commented out section once vram is discovered
-  # - type: code
-  #   overlay: True
-  #   start: 0xE20110
-  #   vram: 0 # unknown
-  #   files:
-  #   - [0xE20110, c]
-  #   - [0xE20B30, bin] # may or may not be part of this overlay, perhaps split further
+  - type: code
+    overlay: True
+    start: 0xE20110
+    vram: 0x802B7000 # this is a guess, may be wrong
+    files:
+    - [0xE20110, c]
+    - [0xE20B30, bin]
   - type: code
     overlay: True
     start: 0xE20EB0
@@ -8421,6 +8420,7 @@ segments:
     files:
     - [0xE2A6B0, c]
     - [0xE2B420, bin]
+  - [0xE2B530, bin]
   - [0xEA0900, bin]
   - [0xF007C0, bin, Battle_Fanfare_02] # BGM start
   - [0xF02160, bin, Hey_You_03]
