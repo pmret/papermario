@@ -405,10 +405,16 @@ segments:
     files:
     - [0x3169f0, c, code_3169f0]
     - [0x316a70, c, code_316a70]
-  - [0x316c00, bin] # 0x802AE000
+  - type: code
+    start: 0x316C00
+    vram: 0x802AE000
+    overlay: True
+    files:
+    - [0x316C00, c]
   - type: code
     start: 0x316D90
     vram: 0x802AE000
+    overlay: True
     files:
     - [0x316d90, c, code_316d90]
   - type: code
@@ -540,17 +546,17 @@ segments:
     files:
     - [0x32C110, c]
     - [0x32c770, bin]
-  # - type: code # Weird VRAM address offset
-  #   start: 0x32C7A0
-  #   vram: 0xE00101E8
-  #   files:
-  #   - [0x32C7A0, c]
-  #   - [0x32CEB0, bin]
-  # - type: code # Weird VRAM address offset
-  #   start: 0x32DD10
-  #   vram: 0xE0012204
-  #   files:
-  #   - [0x32DD10, c]
+  - type: code
+    start: 0x32C7A0
+    vram: 0xE0010000
+    files:
+    - [0x32C7A0, c]
+    - [0x32CEB0, bin]
+  - type: code
+    start: 0x32DD10
+    vram: 0xE0012000
+    files:
+    - [0x32DD10, c]
   - type: code
     start: 0x32E490
     vram: 0xE0014000
@@ -563,11 +569,11 @@ segments:
     files:
     - [0x32EE30, c]
     - [0x32F550, bin]
-  # - type: code # Weird VRAM address offset
-  #   start: 0x32F580
-  #   vram: 0xE0018078
-  #   files:
-  #   - [0x32F580, c]
+  - type: code
+    start: 0x32F580
+    vram: 0xE0018000
+    files:
+    - [0x32F580, c]
   - [0x32fb50, bin] # data/rodata section for above.
   - type: code
     start: 0x32FE30
@@ -931,12 +937,12 @@ segments:
     - [0x38ADF0, c]
     - [0x38bab0, bin]
   - [0x38BBA0, bin]
-  # - type: code # Weird VRAM address offset
-  #   start: 0x38C5F0
-  #   vram: 0xE008A188
-  #   files:
-  #   - [0x38C5F0, c]
-  #   - [0x38D040, bin]
+  - type: code
+    start: 0x38C5F0
+    vram: 0xE008A000
+    files:
+    - [0x38C5F0, c]
+    - [0x38D040, bin]
   - type: code
     start: 0x38DE00
     vram: 0xE008C000
@@ -1249,12 +1255,12 @@ segments:
     files:
     - [0x3E54C0, c]
     - [0x3E5ED0, bin]
-  # - type: code # current issue with labels, probably because this starts at a non-0x10 ram offset?
-  #   start: 0x3EB4E0
-  #   vram: 0xE010E32C
-  #   files:
-  #   - [0x3EB4E0, c]
-  #   - [0x3EBC30, bin]
+  - type: code
+    start: 0x3EB4E0
+    vram: 0xE010E000
+    files:
+    - [0x3EB4E0, c]
+    - [0x3EBC30, bin]
   - [0x3ED4E0, ia8, world/text_chapter, 128, 38]
   - [0x3EE7E0, bin]
   - type: code
@@ -1293,11 +1299,12 @@ segments:
     files:
     - [0x404220, c]
     - [0x404E40, bin]
-  # - type: code
-  #   start: 0x406B40
-  #   vram: 0xE011C000
-  #   files:
-  #   - [0x406B40, c]
+  - type: code
+    start: 0x406B40
+    vram: 0xE011C000
+    files:
+    - [0x406B40, c]
+    - [0x407040, bin]
   - type: code
     start: 0x409990
     vram: 0xE011E000
@@ -1339,7 +1346,168 @@ segments:
     vram: 0x802A1000
     files:
     - [0x415D90, c]
-  - [0x4200C0, bin] # todo split this further
+    - [0x4200D0, bin]
+  - type: code
+    start: 0x4219F0
+    vram: 0x802A9000
+    overlay: True
+    files:
+    - [0x4219F0, c]
+    - [0x421FC0, bin]
+  - type: code
+    start: 0x422000
+    vram: 0x802A9000
+    overlay: True
+    files:
+    - [0x422000, c]
+    - [0x422A90, bin]
+  - type: code
+    start: 0x422AD0
+    vram: 0x802A9000
+    overlay: True
+    files:
+    - [0x422AD0, c]
+    - [0x4233B0, bin]
+  - type: code
+    start: 0x4233F0
+    vram: 0x802A9000
+    overlay: True
+    files:
+    - [0x4233F0, c]
+    - [0x423C30, bin]
+  - type: code
+    start: 0x423C70
+    vram: 0x802A9000
+    overlay: True
+    files:
+    - [0x423C70, c]
+    - [0x424550, bin]
+  - type: code
+    start: 0x425590
+    vram: 0x802A9000
+    overlay: True
+    files:
+    - [0x425590, c]
+    - [0x425B10, bin]
+  - type: code
+    start: 0x425B50
+    vram: 0x802A9000
+    overlay: True
+    files:
+    - [0x425B50, c]
+    - [0x426130, bin]
+  - type: code
+    start: 0x426170
+    vram: 0x802A9000
+    overlay: True
+    files:
+    - [0x426170, c]
+    - [0x426970, bin]
+  - type: code
+    start: 0x4269D0
+    vram: 0x802A9000
+    overlay: True
+    files:
+    - [0x4269D0, c]
+    - [0x427320, bin]
+  - type: code
+    start: 0x4273B0
+    vram: 0x802A9000
+    overlay: True
+    files:
+    - [0x4273B0, c]
+    - [0x427A30, bin]
+  - type: code
+    start: 0x427A70
+    vram: 0x802A9000
+    overlay: True
+    files:
+    - [0x427A70, c]
+    - [0x428280, bin]
+  - type: code
+    start: 0x4282E0
+    vram: 0x802A9000
+    overlay: True
+    files:
+    - [0x4282E0, c]
+    - [0x428A30, bin]
+  - type: code
+    start: 0x428A70
+    vram: 0x802A9000
+    overlay: True
+    files:
+    - [0x428A70, c]
+    - [0x4292C0, bin]
+  - type: code
+    start: 0x429320
+    vram: 0x802A9000
+    overlay: True
+    files:
+    - [0x429320, c]
+    - [0x429C90, bin]
+  - type: code
+    start: 0x429D20
+    vram: 0x802A9000
+    overlay: True
+    files:
+    - [0x429D20, c]
+    - [0x42A480, bin]
+  - type: code
+    start: 0x42A4F0
+    vram: 0x802A9000
+    overlay: True
+    files:
+    - [0x42A4F0, c]
+    - [0x42B650, bin]
+  - type: code
+    start: 0x42C6F0
+    vram: 0x802A9000
+    overlay: True
+    files:
+    - [0x42C6F0, c]
+    - [0x42CEB0, bin]
+  - type: code
+    start: 0x42CF10
+    vram: 0x802A9000
+    overlay: True
+    files:
+    - [0x42CF10, c]
+    - [0x42D9B0, bin]
+  - type: code
+    start: 0x42DA10
+    vram: 0x802A9000
+    overlay: True
+    files:
+    - [0x42DA10, c]
+    - [0x42E330, bin]
+  - type: code
+    start: 0x42E3A0
+    vram: 0x802A9000
+    overlay: True
+    files:
+    - [0x42E3A0, c]
+    - [0x42ED70, bin]
+  - type: code
+    start: 0x42EE20
+    vram: 0x802A9000
+    overlay: True
+    files:
+    - [0x42EE20, c]
+    - [0x42F680, bin]
+  - type: code
+    start: 0x42F6E0
+    vram: 0x802A9000
+    overlay: True
+    files:
+    - [0x42F6E0, c]
+    - [0x42FFC0, bin]
+  - type: code
+    start: 0x430020
+    vram: 0x802A9000
+    overlay: True
+    files:
+    - [0x430020, c]
+    - [0x430940, bin]
   - name: battle/area_kmr_part_1/
     type: code
     start: 0x4309A0
@@ -1819,7 +1987,607 @@ segments:
     - [0x6DE4A0, c]
     - [0x6DE650, c]
     - [0x6DE670, bin]
-  - [0x6F0B30, bin] # what's this?
+  - type: code
+    start: 0x6F0B30
+    vram: 0x80238000
+    overlay: True
+    files:
+    - [0x6F0B30, bin]
+  - type: code
+    start: 0x6F10E0
+    vram: 0x80238000
+    overlay: True
+    files:
+    - [0x6F10E0, c]
+    - [0x6F2290, bin]
+  - type: code
+    start: 0x6F5E80
+    vram: 0x80238000
+    overlay: True
+    files:
+    - [0x6F5E80, c]
+    - [0x6F62B0, bin]
+  - type: code
+    start: 0x6FAD10
+    vram: 0x80238000
+    overlay: True
+    files:
+    - [0x6FAD10, c]
+    - [0x6FB350, bin]
+  - type: code
+    start: 0x6FFD80
+    vram: 0x80238000
+    overlay: True
+    files:
+    - [0x6FFD80, c]
+    - [0x701590, bin]
+  - type: code
+    start: 0x703AF0
+    vram: 0x80238000
+    overlay: True
+    files:
+    - [0x703AF0, c]
+    - [0x704A70, bin]
+  - type: code
+    start: 0x707CA0
+    vram: 0x80238000
+    overlay: True
+    files:
+    - [0x707CA0, c]
+    - [0x708B70, bin]
+  - type: code
+    start: 0x70BD10
+    vram: 0x80238000
+    overlay: True
+    files:
+    - [0x70BD10, c]
+    - [0x70DED0, bin]
+  - type: code
+    start: 0x710EF0
+    vram: 0x80238000
+    overlay: True
+    files:
+    - [0x710EF0, c]
+    - [0x7111F0, bin]
+  - type: code
+    start: 0x714CF0
+    vram: 0x80238000
+    overlay: True
+    files:
+    - [0x714CF0, c]
+    - [0x714DC0, bin]
+  - type: code
+    start: 0x715850
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x715850, c]
+    - [0x715E50, bin]
+  - type: code
+    start: 0x716C60
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x716C60, c]
+    - [0x717060, bin]
+  - type: code
+    start: 0x7179D0
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x7179D0, c]
+    - [0x717C10, bin]
+  - type: code
+    start: 0x718850
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x718850, c]
+    - [0x718BF0, bin]
+  - type: code
+    start: 0x719970
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x719970, c]
+    - [0x719BB0, bin]
+  - type: code
+    start: 0x71A7F0
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x71A7F0, c]
+    - [0x71AA70, bin]
+  - type: code
+    start: 0x71B1A0
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x71B1A0, c]
+    - [0x71B640, bin]
+  - type: code
+    start: 0x71BE30
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x71BE30, c]
+    - [0x71C270, bin]
+  - type: code
+    start: 0x71CCE0
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x71CCE0, c]
+    - [0x71D010, bin]
+  - type: code
+    start: 0x71D770
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x71D770, c]
+    - [0x71DCC0, bin]
+  - type: code
+    start: 0x71E650
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x71E650, c]
+    - [0x71EFC0, bin]
+  - type: code
+    start: 0x7215A0
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x7215A0, c]
+    - [0x721970, bin]
+  - type: code
+    start: 0x722000
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x722000, c]
+    - [0x7222D0, bin]
+  - type: code
+    start: 0x722B40
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x722B40, c]
+    - [0x722FE0, bin]
+  - type: code
+    start: 0x723780
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x723780, c]
+    - [0x723AB0, bin]
+  - type: code
+    start: 0x724240
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x724240, c]
+    - [0x724570, bin]
+  - type: code
+    start: 0x724CE0
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x724CE0, c]
+    - [0x725210, bin]
+  - type: code
+    start: 0x725F60
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x725F60, c]
+    - [0x726240, bin]
+  - type: code
+    start: 0x726DD0
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x726DD0, c]
+    - [0x727120, bin]
+  - type: code
+    start: 0x727910
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x727910, c]
+    - [0x727CE0, bin]
+  - type: code
+    start: 0x7285E0
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x7285E0, c]
+    - [0x728820, bin]
+  - type: code
+    start: 0x728EC0
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x728EC0, c]
+    - [0x7291D0, bin]
+  - type: code
+    start: 0x72A750
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x72A750, c]
+    - [0x72AB70, bin]
+  - type: code
+    start: 0x72B910
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x72B910, c]
+    - [0x72BC60, bin]
+  - type: code
+    start: 0x72C5B0
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x72C5B0, c]
+    - [0x72CF00, bin]
+  - type: code
+    start: 0x72DB70
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x72DB70, c]
+    - [0x72DE00, bin]
+  - type: code
+    start: 0x72E530
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x72E530, c]
+    - [0x72EA20, bin]
+  - type: code
+    start: 0x72F720
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x72F720, c]
+    - [0x72F960, bin]
+  - type: code
+    start: 0x7305A0
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x7305A0, c]
+    - [0x730AE0, bin]
+  - type: code
+    start: 0x731300
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x731300, c]
+    - [0x731EA0, bin]
+  - type: code
+    start: 0x7330D0
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x7330D0, c]
+    - [0x733700, bin]
+  - type: code
+    start: 0x7345A0
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x7345A0, c]
+    - [0x734640, bin]
+  - type: code
+    start: 0x737890
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x737890, c]
+    - [0x737A20, bin]
+  - type: code
+    start: 0x73AED0
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x73AED0, c]
+    - [0x73AF70, bin]
+  - type: code
+    start: 0x73D860
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x73D860, c]
+    - [0x73D9A0, bin]
+  - type: code
+    start: 0x740CC0
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x740CC0, c]
+    - [0x740DA0, bin]
+  - type: code
+    start: 0x743DF0
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x743DF0, c]
+    - [0x743FE0, bin]
+  - type: code
+    start: 0x746E10
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x746E10, c]
+    - [0x746EF0, bin]
+  - type: code
+    start: 0x748DD0
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x748DD0, c]
+    - [0x748EB0, bin]
+  - type: code
+    start: 0x74AD90
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x74AD90, c]
+    - [0x74AF40, bin]
+  - type: code
+    start: 0x74D570
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x74D570, c]
+    - [0x74D850, bin]
+  - type: code
+    start: 0x74F130
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x74F130, c]
+    - [0x74F3D0, bin]
+  - type: code
+    start: 0x752450
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x752450, c]
+    - [0x7524F0, bin]
+  - type: code
+    start: 0x756780
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x756780, c]
+    - [0x756900, bin]
+  - type: code
+    start: 0x7595B0
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x7595B0, c]
+    - [0x7598D0, bin]
+  - type: code
+    start: 0x75C980
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x75C980, c]
+    - [0x75CCE0, bin]
+  - type: code
+    start: 0x75E5D0
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x75E5D0, c]
+    - [0x75E8F0, bin]
+  - type: code
+    start: 0x761920
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x761920, c]
+    - [0x761C80, bin]
+  - type: code
+    start: 0x763540
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x763540, c]
+    - [0x7635E0, bin]
+  - type: code
+    start: 0x765C20
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x765C20, c]
+    - [0x765D00, bin]
+  - type: code
+    start: 0x767C90
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x767C90, c]
+    - [0x767D30, bin]
+  - type: code
+    start: 0x76A830
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x76A830, c]
+    - [0x76A910, bin]
+  - type: code
+    start: 0x76D760
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x76D760, c]
+    - [0x76D840, bin]
+  - type: code
+    start: 0x76F330
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x76F330, c]
+    - [0x76F410, bin]
+  - type: code
+    start: 0x770F30
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x770F30, c]
+    - [0x771010, bin]
+  - type: code
+    start: 0x772BA0
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x772BA0, c]
+    - [0x772C40, bin]
+  - type: code
+    start: 0x775100
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x775100, c]
+    - [0x7751A0, bin]
+  - type: code
+    start: 0x777690
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x777690, c]
+    - [0x777730, bin]
+  - type: code
+    start: 0x779C90
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x779C90, c]
+    - [0x779E20, bin]
+  - type: code
+    start: 0x77CB80
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x77CB80, c]
+    - [0x77CC20, bin]
+  - type: code
+    start: 0x77F240
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x77F240, c]
+    - [0x77F3D0, bin]
+  - type: code
+    start: 0x781920
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x781920, c]
+    - [0x781AF0, bin]
+  - type: code
+    start: 0x783BA0
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x783BA0, c]
+    - [0x783C80, bin]
+  - type: code
+    start: 0x785B20
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x785B20, c]
+    - [0x785C10, bin]
+  - type: code
+    start: 0x789E60
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x789E60, c]
+    - [0x78A480, bin]
+  - type: code
+    start: 0x78B600
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x78B600, c]
+    - [0x78C070, bin]
+  - type: code
+    start: 0x78D150
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x78D150, c]
+    - [0x78D770, bin]
+  - type: code
+    start: 0x78E7D0
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x78E7D0, c]
+    - [0x78EEB0, bin]
+  - type: code
+    start: 0x7900D0
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x7900D0, c]
+    - [0x7909C0, bin]
+  - type: code
+    start: 0x791D90
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x791D90, c]
+    - [0x7923C0, bin]
+  - type: code
+    start: 0x793D20
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x793D20, c]
+    - [0x794240, bin]
+  - type: code
+    start: 0x7952E0
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x7952E0, c]
+    - [0x7959B0, bin]
+  - type: code
+    start: 0x796FC0
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x796FC0, c]
+    - [0x7984B0, bin]
+  - type: code
+    start: 0x7997B0
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x7997B0, c]
+    - [0x79ACA0, bin]
+  - type: code
+    start: 0x79BFA0
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x79BFA0, c]
+    - [0x79C4D0, bin]
+  - type: code
+    start: 0x79D8A0
+    vram: 0x802A1000
+    overlay: True
+    files:
+    - [0x79D8A0, c]
+    - [0x79DE50, bin]
   - name: world/script_api/
     ld_name: world_script_api
     type: code
@@ -7502,7 +8270,14 @@ segments:
     files:
     - [0xE1E460, c]
     - [0xE1EC20, bin]
-  - [0xE20110, bin]
+  - [0xE20110, bin] # replace with following commented out section once vram is discovered
+  # - type: code
+  #   overlay: True
+  #   start: 0xE20110
+  #   vram: 0 # unknown
+  #   files:
+  #   - [0xE20110, c]
+  #   - [0xE20B30, bin] # may or may not be part of this overlay, perhaps split further
   - type: code
     overlay: True
     start: 0xE20EB0
