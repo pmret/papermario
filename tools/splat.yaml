@@ -546,17 +546,17 @@ segments:
     files:
     - [0x32C110, c]
     - [0x32c770, bin]
-  # - type: code # Weird VRAM address offset
-  #   start: 0x32C7A0
-  #   vram: 0xE00101E8
-  #   files:
-  #   - [0x32C7A0, c]
-  #   - [0x32CEB0, bin]
-  # - type: code # Weird VRAM address offset
-  #   start: 0x32DD10
-  #   vram: 0xE0012204
-  #   files:
-  #   - [0x32DD10, c]
+  - type: code
+    start: 0x32C7A0
+    vram: 0xE0010000
+    files:
+    - [0x32C7A0, c]
+    - [0x32CEB0, bin]
+  - type: code
+    start: 0x32DD10
+    vram: 0xE0012000
+    files:
+    - [0x32DD10, c]
   - type: code
     start: 0x32E490
     vram: 0xE0014000
@@ -569,11 +569,11 @@ segments:
     files:
     - [0x32EE30, c]
     - [0x32F550, bin]
-  # - type: code # Weird VRAM address offset
-  #   start: 0x32F580
-  #   vram: 0xE0018078
-  #   files:
-  #   - [0x32F580, c]
+  - type: code
+    start: 0x32F580
+    vram: 0xE0018000
+    files:
+    - [0x32F580, c]
   - [0x32fb50, bin] # data/rodata section for above.
   - type: code
     start: 0x32FE30
@@ -937,12 +937,12 @@ segments:
     - [0x38ADF0, c]
     - [0x38bab0, bin]
   - [0x38BBA0, bin]
-  # - type: code # Weird VRAM address offset
-  #   start: 0x38C5F0
-  #   vram: 0xE008A188
-  #   files:
-  #   - [0x38C5F0, c]
-  #   - [0x38D040, bin]
+  - type: code
+    start: 0x38C5F0
+    vram: 0xE008A000
+    files:
+    - [0x38C5F0, c]
+    - [0x38D040, bin]
   - type: code
     start: 0x38DE00
     vram: 0xE008C000
@@ -1255,12 +1255,12 @@ segments:
     files:
     - [0x3E54C0, c]
     - [0x3E5ED0, bin]
-  # - type: code # current issue with labels, probably because this starts at a non-0x10 ram offset?
-  #   start: 0x3EB4E0
-  #   vram: 0xE010E32C
-  #   files:
-  #   - [0x3EB4E0, c]
-  #   - [0x3EBC30, bin]
+  - type: code
+    start: 0x3EB4E0
+    vram: 0xE010E000
+    files:
+    - [0x3EB4E0, c]
+    - [0x3EBC30, bin]
   - [0x3ED4E0, ia8, world/text_chapter, 128, 38]
   - [0x3EE7E0, bin]
   - type: code
@@ -1299,11 +1299,11 @@ segments:
     files:
     - [0x404220, c]
     - [0x404E40, bin]
-  # - type: code
-  #   start: 0x406B40
-  #   vram: 0xE011C000
-  #   files:
-  #   - [0x406B40, c]
+  - type: code
+    start: 0x406B40
+    vram: 0xE011C000
+    files:
+    - [0x406B40, bin]
   - type: code
     start: 0x409990
     vram: 0xE011E000
@@ -1345,7 +1345,13 @@ segments:
     vram: 0x802A1000
     files:
     - [0x415D90, c]
-  - [0x4200C0, bin] # todo split this further
+    - [0x4200C0, bin]
+  - type: code
+    start: 0x4219F0
+    vram: 0x802A9000
+    files:
+    - [0x4219F0, c]
+    - [0x421FC0, bin] # todo split this further
   - name: battle/area_kmr_part_1/
     type: code
     start: 0x4309A0
