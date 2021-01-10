@@ -16,6 +16,8 @@ os.chdir(root_dir)
 for f in Path(root_dir).rglob("*.bin"):
     if "papermario" in f.name:
         continue
+    if f.name in ["bin_11A440.bin", "code_71430.bin", "bootcode_font.bin", "bin_E20110.bin"]:
+        continue
 
     ras = []
     result = subprocess.run(["mips-linux-gnu-objdump", "-Dz",  "-bbinary", "-mmips", "-EB" , f], stdout=subprocess.PIPE)
@@ -26,7 +28,7 @@ for f in Path(root_dir).rglob("*.bin"):
             ras.append(line)
 
     if len(ras) > 0:
-        print(f"{f.name}: {len(ras)}")
+        print(f"{f.name} : {len(ras)}")
         for line in ras:
             print(line)
         print("")

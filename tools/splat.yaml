@@ -1346,7 +1346,7 @@ segments:
     vram: 0x802A1000
     files:
     - [0x415D90, c]
-    - [0x4200C0, bin]
+    - [0x4200D0, bin]
   - type: code
     start: 0x4219F0
     vram: 0x802A9000
