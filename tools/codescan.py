@@ -16,7 +16,7 @@ os.chdir(root_dir)
 for f in Path(root_dir).rglob("*.bin"):
     if "papermario" in f.name:
         continue
-    if f.name in ["bin_11A440.bin", "code_71430.bin", "bootcode_font.bin", "bin_E20110.bin"]:
+    if f.name in ["bin_11A440.bin", "code_71430.bin", "bootcode_font.bin"]:
         continue
 
     ras = []
