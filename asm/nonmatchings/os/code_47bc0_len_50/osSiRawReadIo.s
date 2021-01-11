@@ -22,4 +22,4 @@ glabel osSiRawReadIo
 /* 47C00 8006C800 8FB00010 */  lw        $s0, 0x10($sp)
 /* 47C04 8006C804 03E00008 */  jr        $ra
 /* 47C08 8006C808 27BD0020 */   addiu    $sp, $sp, 0x20
-/* 47C0C 8006C80C 00000000 */  nop       
+/* 47C0C 8006C80C 00000000 */  nop

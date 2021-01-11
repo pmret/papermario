@@ -14,7 +14,7 @@ glabel func_80240394_EDC374
 /* EDC398 802403B8 0C00F94D */  jal       func_8003E534
 /* EDC39C 802403BC 0040202D */   daddu    $a0, $v0, $zero
 /* EDC3A0 802403C0 10400005 */  beqz      $v0, .L802403D8
-/* EDC3A4 802403C4 00000000 */   nop      
+/* EDC3A4 802403C4 00000000 */   nop
 /* EDC3A8 802403C8 8E050000 */  lw        $a1, ($s0)
 /* EDC3AC 802403CC 844600A8 */  lh        $a2, 0xa8($v0)
 /* EDC3B0 802403D0 0C0B551A */  jal       func_802D5468

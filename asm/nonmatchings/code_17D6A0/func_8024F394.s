@@ -39,13 +39,13 @@ glabel func_8024F394
 /* 17DCF4 8024F414 0C0483C1 */  jal       func_80120F04
 /* 17DCF8 8024F418 0220202D */   daddu    $a0, $s1, $zero
 /* 17DCFC 8024F41C 08093D5A */  j         .L8024F568
-/* 17DD00 8024F420 00000000 */   nop      
+/* 17DD00 8024F420 00000000 */   nop
 .L8024F424:
 /* 17DD04 8024F424 0C0483C1 */  jal       func_80120F04
 /* 17DD08 8024F428 0220202D */   daddu    $a0, $s1, $zero
 /* 17DD0C 8024F42C 8E02FFDC */  lw        $v0, -0x24($s0)
 /* 17DD10 8024F430 0440000D */  bltz      $v0, .L8024F468
-/* 17DD14 8024F434 00000000 */   nop      
+/* 17DD14 8024F434 00000000 */   nop
 /* 17DD18 8024F438 C606FFF4 */  lwc1      $f6, -0xc($s0)
 /* 17DD1C 8024F43C C600FFD0 */  lwc1      $f0, -0x30($s0)
 /* 17DD20 8024F440 C604FFF8 */  lwc1      $f4, -8($s0)
@@ -76,7 +76,7 @@ glabel func_8024F394
 /* 17DD80 8024F4A0 D424CD90 */  ldc1      $f4, %lo(D_8029CD90)($at)
 /* 17DD84 8024F4A4 460010A1 */  cvt.d.s   $f2, $f2
 /* 17DD88 8024F4A8 46241082 */  mul.d     $f2, $f2, $f4
-/* 17DD8C 8024F4AC 00000000 */  nop       
+/* 17DD8C 8024F4AC 00000000 */  nop
 /* 17DD90 8024F4B0 8E02FFDC */  lw        $v0, -0x24($s0)
 /* 17DD94 8024F4B4 E600FFE4 */  swc1      $f0, -0x1c($s0)
 /* 17DD98 8024F4B8 2842000A */  slti      $v0, $v0, 0xa
@@ -86,15 +86,15 @@ glabel func_8024F394
 /* 17DDA8 8024F4C8 C604FFC4 */  lwc1      $f4, -0x3c($s0)
 /* 17DDAC 8024F4CC 46002121 */  cvt.d.s   $f4, $f4
 /* 17DDB0 8024F4D0 46342102 */  mul.d     $f4, $f4, $f20
-/* 17DDB4 8024F4D4 00000000 */  nop       
+/* 17DDB4 8024F4D4 00000000 */  nop
 /* 17DDB8 8024F4D8 C600FFCC */  lwc1      $f0, -0x34($s0)
 /* 17DDBC 8024F4DC 46000021 */  cvt.d.s   $f0, $f0
 /* 17DDC0 8024F4E0 46340002 */  mul.d     $f0, $f0, $f20
-/* 17DDC4 8024F4E4 00000000 */  nop       
+/* 17DDC4 8024F4E4 00000000 */  nop
 /* 17DDC8 8024F4E8 C602FFC8 */  lwc1      $f2, -0x38($s0)
 /* 17DDCC 8024F4EC 460010A1 */  cvt.d.s   $f2, $f2
 /* 17DDD0 8024F4F0 46341082 */  mul.d     $f2, $f2, $f20
-/* 17DDD4 8024F4F4 00000000 */  nop       
+/* 17DDD4 8024F4F4 00000000 */  nop
 /* 17DDD8 8024F4F8 46202120 */  cvt.s.d   $f4, $f4
 /* 17DDDC 8024F4FC 46200020 */  cvt.s.d   $f0, $f0
 /* 17DDE0 8024F500 E604FFC4 */  swc1      $f4, -0x3c($s0)
@@ -128,7 +128,7 @@ glabel func_8024F394
 /* 17DE44 8024F564 2652004C */   addiu    $s2, $s2, 0x4c
 .L8024F568:
 /* 17DE48 8024F568 16A00006 */  bnez      $s5, .L8024F584
-/* 17DE4C 8024F56C 00000000 */   nop      
+/* 17DE4C 8024F56C 00000000 */   nop
 /* 17DE50 8024F570 0C00AB4B */  jal       heap_free
 /* 17DE54 8024F574 8E840018 */   lw       $a0, 0x18($s4)
 /* 17DE58 8024F578 0280202D */  daddu     $a0, $s4, $zero

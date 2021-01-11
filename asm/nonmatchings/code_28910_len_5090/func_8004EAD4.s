@@ -82,4 +82,4 @@ glabel func_8004EAD4
 /* 29FF8 8004EBF8 A0800233 */  sb        $zero, 0x233($a0)
 .L8004EBFC:
 /* 29FFC 8004EBFC 03E00008 */  jr        $ra
-/* 2A000 8004EC00 00000000 */   nop      
+/* 2A000 8004EC00 00000000 */   nop

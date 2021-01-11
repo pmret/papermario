@@ -17,4 +17,4 @@ glabel osViGetCurrentMode
 /* 41E60 80066A60 8FB00010 */  lw        $s0, 0x10($sp)
 /* 41E64 80066A64 03E00008 */  jr        $ra
 /* 41E68 80066A68 27BD0018 */   addiu    $sp, $sp, 0x18
-/* 41E6C 80066A6C 00000000 */  nop       
+/* 41E6C 80066A6C 00000000 */  nop

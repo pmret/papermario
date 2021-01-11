@@ -16,4 +16,4 @@ glabel func_802BB6D4_E2BE04
 /* E2BE30 802BB700 24421B70 */  addiu     $v0, $v0, 0x1b70
 /* E2BE34 802BB704 03E00008 */  jr        $ra
 /* E2BE38 802BB708 AC820018 */   sw       $v0, 0x18($a0)
-/* E2BE3C 802BB70C 00000000 */  nop       
+/* E2BE3C 802BB70C 00000000 */  nop

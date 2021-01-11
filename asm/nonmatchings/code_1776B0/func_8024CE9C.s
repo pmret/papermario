@@ -20,17 +20,17 @@ glabel func_8024CE9C
 /* 17B7B8 8024CED8 3C018028 */  lui       $at, %hi(D_80280CE0)
 /* 17B7BC 8024CEDC A0200CE0 */  sb        $zero, %lo(D_80280CE0)($at)
 /* 17B7C0 8024CEE0 44830000 */  mtc1      $v1, $f0
-/* 17B7C4 8024CEE4 00000000 */  nop       
+/* 17B7C4 8024CEE4 00000000 */  nop
 /* 17B7C8 8024CEE8 46800020 */  cvt.s.w   $f0, $f0
 /* 17B7CC 8024CEEC 3C01802A */  lui       $at, %hi(D_8029F288)
 /* 17B7D0 8024CEF0 E420F288 */  swc1      $f0, %lo(D_8029F288)($at)
 /* 17B7D4 8024CEF4 44840000 */  mtc1      $a0, $f0
-/* 17B7D8 8024CEF8 00000000 */  nop       
+/* 17B7D8 8024CEF8 00000000 */  nop
 /* 17B7DC 8024CEFC 46800020 */  cvt.s.w   $f0, $f0
 /* 17B7E0 8024CF00 3C01802A */  lui       $at, %hi(D_8029F28C)
 /* 17B7E4 8024CF04 E420F28C */  swc1      $f0, %lo(D_8029F28C)($at)
 /* 17B7E8 8024CF08 44820000 */  mtc1      $v0, $f0
-/* 17B7EC 8024CF0C 00000000 */  nop       
+/* 17B7EC 8024CF0C 00000000 */  nop
 /* 17B7F0 8024CF10 46800020 */  cvt.s.w   $f0, $f0
 /* 17B7F4 8024CF14 3C01802A */  lui       $at, %hi(D_8029F294)
 /* 17B7F8 8024CF18 E420F294 */  swc1      $f0, %lo(D_8029F294)($at)

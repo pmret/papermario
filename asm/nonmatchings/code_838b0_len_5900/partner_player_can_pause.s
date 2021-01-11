@@ -13,7 +13,7 @@ glabel partner_player_can_pause
 /* 848B0 800EB400 3C048011 */  lui       $a0, %hi(D_8010C930)
 /* 848B4 800EB404 8C84C930 */  lw        $a0, %lo(D_8010C930)($a0)
 /* 848B8 800EB408 0040F809 */  jalr      $v0
-/* 848BC 800EB40C 00000000 */   nop      
+/* 848BC 800EB40C 00000000 */   nop
 /* 848C0 800EB410 0040182D */  daddu     $v1, $v0, $zero
 /* 848C4 800EB414 10600002 */  beqz      $v1, .L800EB420
 /* 848C8 800EB418 0000102D */   daddu    $v0, $zero, $zero

@@ -8,5 +8,5 @@ glabel osSpDeviceBusy
 /* 47ACC 8006C6CC 3042001C */  andi      $v0, $v0, 0x1c
 /* 47AD0 8006C6D0 03E00008 */  jr        $ra
 /* 47AD4 8006C6D4 0002102B */   sltu     $v0, $zero, $v0
-/* 47AD8 8006C6D8 00000000 */  nop       
-/* 47ADC 8006C6DC 00000000 */  nop       
+/* 47AD8 8006C6D8 00000000 */  nop
+/* 47ADC 8006C6DC 00000000 */  nop

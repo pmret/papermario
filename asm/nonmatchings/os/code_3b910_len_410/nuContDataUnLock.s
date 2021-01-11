@@ -13,4 +13,4 @@ glabel nuContDataUnLock
 /* 3BD10 80060910 8FBF0010 */  lw        $ra, 0x10($sp)
 /* 3BD14 80060914 03E00008 */  jr        $ra
 /* 3BD18 80060918 27BD0018 */   addiu    $sp, $sp, 0x18
-/* 3BD1C 8006091C 00000000 */  nop       
+/* 3BD1C 8006091C 00000000 */  nop

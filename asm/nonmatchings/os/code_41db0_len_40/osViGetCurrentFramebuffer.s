@@ -16,5 +16,5 @@ glabel osViGetCurrentFramebuffer
 /* 41DDC 800669DC 8FB00010 */  lw        $s0, 0x10($sp)
 /* 41DE0 800669E0 03E00008 */  jr        $ra
 /* 41DE4 800669E4 27BD0018 */   addiu    $sp, $sp, 0x18
-/* 41DE8 800669E8 00000000 */  nop       
-/* 41DEC 800669EC 00000000 */  nop       
+/* 41DE8 800669E8 00000000 */  nop
+/* 41DEC 800669EC 00000000 */  nop

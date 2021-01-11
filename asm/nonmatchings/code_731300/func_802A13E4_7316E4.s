@@ -22,7 +22,7 @@ glabel func_802A13E4_7316E4
 /* 731724 802A1424 00220821 */  addu      $at, $at, $v0
 /* 731728 802A1428 8C222DB0 */  lw        $v0, %lo(D_802A2DB0)($at)
 /* 73172C 802A142C 00400008 */  jr        $v0
-/* 731730 802A1430 00000000 */   nop      
+/* 731730 802A1430 00000000 */   nop
 /* 731734 802A1434 3C05802A */  lui       $a1, %hi(func_802A123C_73153C)
 /* 731738 802A1438 24A5123C */  addiu     $a1, $a1, %lo(func_802A123C_73153C)
 /* 73173C 802A143C 0C048C8F */  jal       bind_dynamic_entity_7
@@ -125,7 +125,7 @@ glabel func_802A13E4_7316E4
 /* 7318B0 802A15B0 00621823 */  subu      $v1, $v1, $v0
 /* 7318B4 802A15B4 2863000D */  slti      $v1, $v1, 0xd
 /* 7318B8 802A15B8 10600008 */  beqz      $v1, .L802A15DC
-/* 7318BC 802A15BC 00000000 */   nop      
+/* 7318BC 802A15BC 00000000 */   nop
 /* 7318C0 802A15C0 0C00A67F */  jal       rand_int
 /* 7318C4 802A15C4 24040064 */   addiu    $a0, $zero, 0x64
 /* 7318C8 802A15C8 28420050 */  slti      $v0, $v0, 0x50
@@ -277,7 +277,7 @@ glabel func_802A13E4_7316E4
 /* 731AE8 802A17E8 1440FFFA */  bnez      $v0, .L802A17D4
 /* 731AEC 802A17EC 24020002 */   addiu    $v0, $zero, 2
 /* 731AF0 802A17F0 080A85FF */  j         .L802A17FC
-/* 731AF4 802A17F4 00000000 */   nop      
+/* 731AF4 802A17F4 00000000 */   nop
 .L802A17F8:
 /* 731AF8 802A17F8 0000102D */  daddu     $v0, $zero, $zero
 .L802A17FC:

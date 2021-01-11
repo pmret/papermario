@@ -20,7 +20,7 @@ glabel fio_validate_header_checksums
 /* 63AC 8002AFAC 54620006 */  bnel      $v1, $v0, .L8002AFC8
 /* 63B0 8002AFB0 0000102D */   daddu    $v0, $zero, $zero
 /* 63B4 8002AFB4 0C00ABD0 */  jal       fio_calc_header_checksum
-/* 63B8 8002AFB8 00000000 */   nop      
+/* 63B8 8002AFB8 00000000 */   nop
 /* 63BC 8002AFBC 8E030030 */  lw        $v1, 0x30($s0)
 /* 63C0 8002AFC0 00431026 */  xor       $v0, $v0, $v1
 /* 63C4 8002AFC4 2C420001 */  sltiu     $v0, $v0, 1

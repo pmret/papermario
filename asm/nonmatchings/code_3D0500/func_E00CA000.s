@@ -41,7 +41,7 @@ glabel func_E00CA000
 /* 3D0590 E00CA090 AE42000C */   sw       $v0, 0xc($s2)
 .LE00CA094:
 /* 3D0594 E00CA094 08032825 */  j         .LE00CA094
-/* 3D0598 E00CA098 00000000 */   nop      
+/* 3D0598 E00CA098 00000000 */   nop
 .LE00CA09C:
 /* 3D059C E00CA09C AE110000 */  sw        $s1, ($s0)
 /* 3D05A0 E00CA0A0 1E600004 */  bgtz      $s3, .LE00CA0B4
@@ -145,7 +145,7 @@ glabel func_E00CA000
 /* 3D06F8 E00CA1F8 2443000A */  addiu     $v1, $v0, 0xa
 /* 3D06FC E00CA1FC 0240102D */  daddu     $v0, $s2, $zero
 /* 3D0700 E00CA200 44830000 */  mtc1      $v1, $f0
-/* 3D0704 E00CA204 00000000 */  nop       
+/* 3D0704 E00CA204 00000000 */  nop
 /* 3D0708 E00CA208 46800020 */  cvt.s.w   $f0, $f0
 /* 3D070C E00CA20C E6000044 */  swc1      $f0, 0x44($s0)
 /* 3D0710 E00CA210 AE000048 */  sw        $zero, 0x48($s0)

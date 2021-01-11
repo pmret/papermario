@@ -12,7 +12,7 @@ glabel bind_enemy_ai
 /* 19D68 8003E968 00A0882D */   daddu    $s1, $a1, $zero
 /* 19D6C 8003E96C 8C440144 */  lw        $a0, 0x144($v0)
 /* 19D70 8003E970 0C0B102B */  jal       kill_script_by_ID
-/* 19D74 8003E974 00000000 */   nop      
+/* 19D74 8003E974 00000000 */   nop
 .L8003E978:
 /* 19D78 8003E978 0220202D */  daddu     $a0, $s1, $zero
 /* 19D7C 8003E97C 2405000A */  addiu     $a1, $zero, 0xa

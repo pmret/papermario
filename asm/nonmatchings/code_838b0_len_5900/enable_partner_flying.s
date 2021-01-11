@@ -43,11 +43,11 @@ glabel enable_partner_flying
 /* 86854 800ED3A4 3C018011 */  lui       $at, %hi(D_8010CFBC)
 /* 86858 800ED3A8 AC20CFBC */  sw        $zero, %lo(D_8010CFBC)($at)
 /* 8685C 800ED3AC 14A00005 */  bnez      $a1, .L800ED3C4
-/* 86860 800ED3B0 00000000 */   nop      
+/* 86860 800ED3B0 00000000 */   nop
 /* 86864 800ED3B4 3C018011 */  lui       $at, %hi(D_8010CFC8)
 /* 86868 800ED3B8 A420CFC8 */  sh        $zero, %lo(D_8010CFC8)($at)
 /* 8686C 800ED3BC 0803B50B */  j         .L800ED42C
-/* 86870 800ED3C0 00000000 */   nop      
+/* 86870 800ED3C0 00000000 */   nop
 .L800ED3C4:
 /* 86874 800ED3C4 3C048011 */  lui       $a0, %hi(D_8010CFC4)
 /* 86878 800ED3C8 2484CFC4 */  addiu     $a0, $a0, %lo(D_8010CFC4)
@@ -61,7 +61,7 @@ glabel enable_partner_flying
 /* 86898 800ED3E8 3C018011 */  lui       $at, %hi(D_8010CFCA)
 /* 8689C 800ED3EC A422CFCA */  sh        $v0, %lo(D_8010CFCA)($at)
 /* 868A0 800ED3F0 0803B50D */  j         .L800ED434
-/* 868A4 800ED3F4 00000000 */   nop      
+/* 868A4 800ED3F4 00000000 */   nop
 .L800ED3F8:
 /* 868A8 800ED3F8 10620003 */  beq       $v1, $v0, .L800ED408
 /* 868AC 800ED3FC 24020003 */   addiu    $v0, $zero, 3
@@ -72,7 +72,7 @@ glabel enable_partner_flying
 /* 868BC 800ED40C 3C018011 */  lui       $at, %hi(D_8010CFC8)
 /* 868C0 800ED410 A420CFC8 */  sh        $zero, %lo(D_8010CFC8)($at)
 /* 868C4 800ED414 0803B50B */  j         .L800ED42C
-/* 868C8 800ED418 00000000 */   nop      
+/* 868C8 800ED418 00000000 */   nop
 .L800ED41C:
 /* 868CC 800ED41C 14620005 */  bne       $v1, $v0, .L800ED434
 /* 868D0 800ED420 24020032 */   addiu    $v0, $zero, 0x32

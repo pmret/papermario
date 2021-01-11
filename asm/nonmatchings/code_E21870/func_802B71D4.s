@@ -125,7 +125,7 @@ glabel func_802B71D4
 /* E21C20 802B73B0 00220821 */  addu      $at, $at, $v0
 /* E21C24 802B73B4 8C227D20 */  lw        $v0, 0x7d20($at)
 /* E21C28 802B73B8 00400008 */  jr        $v0
-/* E21C2C 802B73BC 00000000 */   nop      
+/* E21C2C 802B73BC 00000000 */   nop
 /* E21C30 802B73C0 080ADCFF */  j         .L802B73FC
 /* E21C34 802B73C4 24030004 */   addiu    $v1, $zero, 4
 /* E21C38 802B73C8 080ADCFF */  j         .L802B73FC
@@ -156,7 +156,7 @@ glabel func_802B71D4
 /* E21C94 802B7424 AC820020 */  sw        $v0, 0x20($a0)
 /* E21C98 802B7428 0043102A */  slt       $v0, $v0, $v1
 /* E21C9C 802B742C 14400005 */  bnez      $v0, .L802B7444
-/* E21CA0 802B7430 00000000 */   nop      
+/* E21CA0 802B7430 00000000 */   nop
 /* E21CA4 802B7434 AC800020 */  sw        $zero, 0x20($a0)
 /* E21CA8 802B7438 2404007D */  addiu     $a0, $zero, 0x7d
 /* E21CAC 802B743C 0C052736 */  jal       play_sound_at_player

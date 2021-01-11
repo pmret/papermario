@@ -20,13 +20,13 @@ glabel nuScWaitTaskReady
 /* 3A55C 8005F15C 0060982D */  daddu     $s3, $v1, $zero
 .L8005F160:
 /* 3A560 8005F160 0C019A6C */  jal       osViGetCurrentFramebuffer
-/* 3A564 8005F164 00000000 */   nop      
+/* 3A564 8005F164 00000000 */   nop
 /* 3A568 8005F168 10520005 */  beq       $v0, $s2, .L8005F180
-/* 3A56C 8005F16C 00000000 */   nop      
+/* 3A56C 8005F16C 00000000 */   nop
 /* 3A570 8005F170 0C019A7C */  jal       osViGetNextFramebuffer
-/* 3A574 8005F174 00000000 */   nop      
+/* 3A574 8005F174 00000000 */   nop
 /* 3A578 8005F178 1452002B */  bne       $v0, $s2, .L8005F228
-/* 3A57C 8005F17C 00000000 */   nop      
+/* 3A57C 8005F17C 00000000 */   nop
 .L8005F180:
 /* 3A580 8005F180 0C018250 */  jal       osSetIntMask
 /* 3A584 8005F184 24040001 */   addiu    $a0, $zero, 1
@@ -56,7 +56,7 @@ glabel nuScWaitTaskReady
 /* 3A5E0 8005F1E0 54700007 */  bnel      $v1, $s0, .L8005F200
 /* 3A5E4 8005F1E4 0060282D */   daddu    $a1, $v1, $zero
 /* 3A5E8 8005F1E8 14A0000C */  bnez      $a1, .L8005F21C
-/* 3A5EC 8005F1EC 00000000 */   nop      
+/* 3A5EC 8005F1EC 00000000 */   nop
 /* 3A5F0 8005F1F0 8C620000 */  lw        $v0, ($v1)
 /* 3A5F4 8005F1F4 3C01800E */  lui       $at, %hi(D_800DAAA8)
 /* 3A5F8 8005F1F8 08017C83 */  j         .L8005F20C
@@ -64,12 +64,12 @@ glabel nuScWaitTaskReady
 .L8005F200:
 /* 3A600 8005F200 8CA30000 */  lw        $v1, ($a1)
 /* 3A604 8005F204 1460FFF6 */  bnez      $v1, .L8005F1E0
-/* 3A608 8005F208 00000000 */   nop      
+/* 3A608 8005F208 00000000 */   nop
 .L8005F20C:
 /* 3A60C 8005F20C 0C018250 */  jal       osSetIntMask
-/* 3A610 8005F210 00000000 */   nop      
+/* 3A610 8005F210 00000000 */   nop
 /* 3A614 8005F214 08017C58 */  j         .L8005F160
-/* 3A618 8005F218 00000000 */   nop      
+/* 3A618 8005F218 00000000 */   nop
 .L8005F21C:
 /* 3A61C 8005F21C 8C620000 */  lw        $v0, ($v1)
 /* 3A620 8005F220 08017C83 */  j         .L8005F20C
@@ -83,5 +83,5 @@ glabel nuScWaitTaskReady
 /* 3A63C 8005F23C 8FB00020 */  lw        $s0, 0x20($sp)
 /* 3A640 8005F240 03E00008 */  jr        $ra
 /* 3A644 8005F244 27BD0038 */   addiu    $sp, $sp, 0x38
-/* 3A648 8005F248 00000000 */  nop       
-/* 3A64C 8005F24C 00000000 */  nop       
+/* 3A648 8005F248 00000000 */  nop
+/* 3A64C 8005F24C 00000000 */  nop

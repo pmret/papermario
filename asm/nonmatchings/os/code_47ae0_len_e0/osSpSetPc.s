@@ -15,4 +15,4 @@ glabel osSpSetPc
 /* 47B24 8006C724 2402FFFF */  addiu     $v0, $zero, -1
 .L8006C728:
 /* 47B28 8006C728 03E00008 */  jr        $ra
-/* 47B2C 8006C72C 00000000 */   nop      
+/* 47B2C 8006C72C 00000000 */   nop

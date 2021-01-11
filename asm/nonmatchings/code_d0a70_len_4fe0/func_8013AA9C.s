@@ -29,7 +29,7 @@ glabel func_8013AA9C
 /* D11FC 8013AAFC 00220821 */  addu      $at, $at, $v0
 /* D1200 8013AB00 8C220FB0 */  lw        $v0, %lo(D_80150FB0)($at)
 /* D1204 8013AB04 00400008 */  jr        $v0
-/* D1208 8013AB08 00000000 */   nop      
+/* D1208 8013AB08 00000000 */   nop
 /* D120C 8013AB0C 8E300014 */  lw        $s0, 0x14($s1)
 /* D1210 8013AB10 0C04EA4F */  jal       func_8013A93C
 /* D1214 8013AB14 0220202D */   daddu    $a0, $s1, $zero
@@ -65,7 +65,7 @@ glabel func_8013AA9C
 /* D1288 8013AB88 10800004 */  beqz      $a0, .L8013AB9C
 /* D128C 8013AB8C 00101080 */   sll      $v0, $s0, 2
 /* D1290 8013AB90 0C00AB4B */  jal       heap_free
-/* D1294 8013AB94 00000000 */   nop      
+/* D1294 8013AB94 00000000 */   nop
 /* D1298 8013AB98 00101080 */  sll       $v0, $s0, 2
 .L8013AB9C:
 /* D129C 8013AB9C A6220060 */  sh        $v0, 0x60($s1)
@@ -78,26 +78,26 @@ glabel func_8013AA9C
 /* D12B8 8013ABB8 24030005 */   addiu    $v1, $zero, 5
 /* D12BC 8013ABBC 8E22002C */  lw        $v0, 0x2c($s1)
 /* D12C0 8013ABC0 1602001E */  bne       $s0, $v0, .L8013AC3C
-/* D12C4 8013ABC4 00000000 */   nop      
+/* D12C4 8013ABC4 00000000 */   nop
 /* D12C8 8013ABC8 8E220030 */  lw        $v0, 0x30($s1)
 /* D12CC 8013ABCC 10E200CE */  beq       $a3, $v0, .L8013AF08
-/* D12D0 8013ABD0 00000000 */   nop      
+/* D12D0 8013ABD0 00000000 */   nop
 /* D12D4 8013ABD4 0804EB0F */  j         .L8013AC3C
-/* D12D8 8013ABD8 00000000 */   nop      
+/* D12D8 8013ABD8 00000000 */   nop
 /* D12DC 8013ABDC 82220005 */  lb        $v0, 5($s1)
 /* D12E0 8013ABE0 14450016 */  bne       $v0, $a1, .L8013AC3C
 /* D12E4 8013ABE4 24030005 */   addiu    $v1, $zero, 5
 /* D12E8 8013ABE8 8E22001C */  lw        $v0, 0x1c($s1)
 /* D12EC 8013ABEC 14500013 */  bne       $v0, $s0, .L8013AC3C
-/* D12F0 8013ABF0 00000000 */   nop      
+/* D12F0 8013ABF0 00000000 */   nop
 /* D12F4 8013ABF4 8E220020 */  lw        $v0, 0x20($s1)
 /* D12F8 8013ABF8 14470010 */  bne       $v0, $a3, .L8013AC3C
-/* D12FC 8013ABFC 00000000 */   nop      
+/* D12FC 8013ABFC 00000000 */   nop
 /* D1300 8013AC00 8E220024 */  lw        $v0, 0x24($s1)
 /* D1304 8013AC04 104800C0 */  beq       $v0, $t0, .L8013AF08
-/* D1308 8013AC08 00000000 */   nop      
+/* D1308 8013AC08 00000000 */   nop
 /* D130C 8013AC0C 0804EB0F */  j         .L8013AC3C
-/* D1310 8013AC10 00000000 */   nop      
+/* D1310 8013AC10 00000000 */   nop
 .L8013AC14:
 /* D1314 8013AC14 2403000D */  addiu     $v1, $zero, 0xd
 /* D1318 8013AC18 50A30008 */  beql      $a1, $v1, .L8013AC3C
@@ -130,7 +130,7 @@ glabel func_8013AA9C
 .L8013AC78:
 /* D1378 8013AC78 2C42000B */  sltiu     $v0, $v0, 0xb
 /* D137C 8013AC7C 10400006 */  beqz      $v0, .L8013AC98
-/* D1380 8013AC80 00000000 */   nop      
+/* D1380 8013AC80 00000000 */   nop
 /* D1384 8013AC84 A2250006 */  sb        $a1, 6($s1)
 /* D1388 8013AC88 AE30002C */  sw        $s0, 0x2c($s1)
 /* D138C 8013AC8C AE270030 */  sw        $a3, 0x30($s1)
@@ -153,7 +153,7 @@ glabel func_8013AA9C
 /* D13C8 8013ACC8 00220821 */  addu      $at, $at, $v0
 /* D13CC 8013ACCC 8C220FF8 */  lw        $v0, %lo(D_80150FF8)($at)
 /* D13D0 8013ACD0 00400008 */  jr        $v0
-/* D13D4 8013ACD4 00000000 */   nop      
+/* D13D4 8013ACD4 00000000 */   nop
 /* D13D8 8013ACD8 A2200001 */  sb        $zero, 1($s1)
 /* D13DC 8013ACDC 0804EBC2 */  j         .L8013AF08
 /* D13E0 8013ACE0 A2200002 */   sb       $zero, 2($s1)
@@ -165,7 +165,7 @@ glabel func_8013AA9C
 /* D13F8 8013ACF8 0C04FB92 */  jal       func_8013EE48
 /* D13FC 8013ACFC A0820001 */   sb       $v0, 1($a0)
 /* D1400 8013AD00 0804EBC2 */  j         .L8013AF08
-/* D1404 8013AD04 00000000 */   nop      
+/* D1404 8013AD04 00000000 */   nop
 /* D1408 8013AD08 8E230014 */  lw        $v1, 0x14($s1)
 /* D140C 8013AD0C 24020002 */  addiu     $v0, $zero, 2
 /* D1410 8013AD10 A2220001 */  sb        $v0, 1($s1)
@@ -213,10 +213,10 @@ glabel func_8013AA9C
 /* D14AC 8013ADAC 3C018015 */  lui       $at, %hi(D_80151030)
 /* D14B0 8013ADB0 D4221030 */  ldc1      $f2, %lo(D_80151030)($at)
 /* D14B4 8013ADB4 44860000 */  mtc1      $a2, $f0
-/* D14B8 8013ADB8 00000000 */  nop       
+/* D14B8 8013ADB8 00000000 */  nop
 /* D14BC 8013ADBC 46800021 */  cvt.d.w   $f0, $f0
 /* D14C0 8013ADC0 46220032 */  c.eq.d    $f0, $f2
-/* D14C4 8013ADC4 00000000 */  nop       
+/* D14C4 8013ADC4 00000000 */  nop
 /* D14C8 8013ADC8 45000003 */  bc1f      .L8013ADD8
 /* D14CC 8013ADCC 24020004 */   addiu    $v0, $zero, 4
 /* D14D0 8013ADD0 0804EBC2 */  j         .L8013AF08

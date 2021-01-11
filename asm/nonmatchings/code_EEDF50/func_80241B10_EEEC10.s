@@ -60,18 +60,18 @@ glabel func_80241B10_EEEC10
 /* EEECE8 80241BE8 C6200038 */  lwc1      $f0, 0x38($s1)
 /* EEECEC 80241BEC 4600018D */  trunc.w.s $f6, $f0
 /* EEECF0 80241BF0 44023000 */  mfc1      $v0, $f6
-/* EEECF4 80241BF4 00000000 */  nop       
+/* EEECF4 80241BF4 00000000 */  nop
 /* EEECF8 80241BF8 A6420010 */  sh        $v0, 0x10($s2)
 /* EEECFC 80241BFC C620003C */  lwc1      $f0, 0x3c($s1)
 /* EEED00 80241C00 4600018D */  trunc.w.s $f6, $f0
 /* EEED04 80241C04 44023000 */  mfc1      $v0, $f6
-/* EEED08 80241C08 00000000 */  nop       
+/* EEED08 80241C08 00000000 */  nop
 /* EEED0C 80241C0C A6420012 */  sh        $v0, 0x12($s2)
 /* EEED10 80241C10 C6200040 */  lwc1      $f0, 0x40($s1)
 /* EEED14 80241C14 A2430007 */  sb        $v1, 7($s2)
 /* EEED18 80241C18 4600018D */  trunc.w.s $f6, $f0
 /* EEED1C 80241C1C 44023000 */  mfc1      $v0, $f6
-/* EEED20 80241C20 00000000 */  nop       
+/* EEED20 80241C20 00000000 */  nop
 /* EEED24 80241C24 A6420014 */  sh        $v0, 0x14($s2)
 .L80241C28:
 /* EEED28 80241C28 8FBF0020 */  lw        $ra, 0x20($sp)

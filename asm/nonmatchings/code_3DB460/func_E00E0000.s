@@ -44,7 +44,7 @@ glabel func_E00E0000
 /* 3DB4FC E00E009C AE24000C */   sw       $a0, 0xc($s1)
 .LE00E00A0:
 /* 3DB500 E00E00A0 08038028 */  j         .LE00E00A0
-/* 3DB504 E00E00A4 00000000 */   nop      
+/* 3DB504 E00E00A4 00000000 */   nop
 .LE00E00A8:
 /* 3DB508 E00E00A8 AC930000 */  sw        $s3, ($a0)
 /* 3DB50C E00E00AC 1E400004 */  bgtz      $s2, .LE00E00C0
@@ -78,7 +78,7 @@ glabel func_E00E0000
 /* 3DB574 E00E0114 24030001 */  addiu     $v1, $zero, 1
 /* 3DB578 E00E0118 E480006C */  swc1      $f0, 0x6c($a0)
 /* 3DB57C E00E011C 44820000 */  mtc1      $v0, $f0
-/* 3DB580 E00E0120 00000000 */  nop       
+/* 3DB580 E00E0120 00000000 */  nop
 /* 3DB584 E00E0124 46800020 */  cvt.s.w   $f0, $f0
 /* 3DB588 E00E0128 46001083 */  div.s     $f2, $f2, $f0
 /* 3DB58C E00E012C 3C013FE0 */  lui       $at, 0x3fe0
@@ -86,7 +86,7 @@ glabel func_E00E0000
 /* 3DB594 E00E0134 44800000 */  mtc1      $zero, $f0
 /* 3DB598 E00E0138 460010A1 */  cvt.d.s   $f2, $f2
 /* 3DB59C E00E013C 46201082 */  mul.d     $f2, $f2, $f0
-/* 3DB5A0 E00E0140 00000000 */  nop       
+/* 3DB5A0 E00E0140 00000000 */  nop
 /* 3DB5A4 E00E0144 AC800024 */  sw        $zero, 0x24($a0)
 /* 3DB5A8 E00E0148 AC800028 */  sw        $zero, 0x28($a0)
 /* 3DB5AC E00E014C AC800038 */  sw        $zero, 0x38($a0)
@@ -98,15 +98,15 @@ glabel func_E00E0000
 /* 3DB5C4 E00E0164 462010A0 */   cvt.s.d  $f2, $f2
 .LE00E0168:
 /* 3DB5C8 E00E0168 44830000 */  mtc1      $v1, $f0
-/* 3DB5CC E00E016C 00000000 */  nop       
+/* 3DB5CC E00E016C 00000000 */  nop
 /* 3DB5D0 E00E0170 46800020 */  cvt.s.w   $f0, $f0
 /* 3DB5D4 E00E0174 46000007 */  neg.s     $f0, $f0
 /* 3DB5D8 E00E0178 46020002 */  mul.s     $f0, $f0, $f2
-/* 3DB5DC E00E017C 00000000 */  nop       
+/* 3DB5DC E00E017C 00000000 */  nop
 /* 3DB5E0 E00E0180 24630001 */  addiu     $v1, $v1, 1
 /* 3DB5E4 E00E0184 4600010D */  trunc.w.s $f4, $f0
 /* 3DB5E8 E00E0188 44022000 */  mfc1      $v0, $f4
-/* 3DB5EC E00E018C 00000000 */  nop       
+/* 3DB5EC E00E018C 00000000 */  nop
 /* 3DB5F0 E00E0190 2442FFFF */  addiu     $v0, $v0, -1
 /* 3DB5F4 E00E0194 AC820064 */  sw        $v0, 0x64($a0)
 /* 3DB5F8 E00E0198 0070102A */  slt       $v0, $v1, $s0

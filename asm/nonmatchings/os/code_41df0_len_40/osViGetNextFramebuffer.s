@@ -16,5 +16,5 @@ glabel osViGetNextFramebuffer
 /* 41E1C 80066A1C 8FB00010 */  lw        $s0, 0x10($sp)
 /* 41E20 80066A20 03E00008 */  jr        $ra
 /* 41E24 80066A24 27BD0018 */   addiu    $sp, $sp, 0x18
-/* 41E28 80066A28 00000000 */  nop       
-/* 41E2C 80066A2C 00000000 */  nop       
+/* 41E28 80066A28 00000000 */  nop
+/* 41E2C 80066A2C 00000000 */  nop

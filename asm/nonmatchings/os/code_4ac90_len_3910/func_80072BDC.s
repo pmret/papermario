@@ -18,7 +18,7 @@ glabel func_80072BDC
 /* 4E010 80072C10 3C10800E */  lui       $s0, %hi(gBattleStatus+0x47B)
 /* 4E014 80072C14 9210C4EB */  lbu       $s0, %lo(gBattleStatus+0x47B)($s0)
 /* 4E018 80072C18 0C00A5CF */  jal       dma_copy
-/* 4E01C 80072C1C 00000000 */   nop      
+/* 4E01C 80072C1C 00000000 */   nop
 /* 4E020 80072C20 00101880 */  sll       $v1, $s0, 2
 /* 4E024 80072C24 00701821 */  addu      $v1, $v1, $s0
 /* 4E028 80072C28 00031880 */  sll       $v1, $v1, 2
@@ -33,7 +33,7 @@ glabel func_80072BDC
 /* 4E04C 80072C4C 3C01800E */  lui       $at, %hi(D_800DC064)
 /* 4E050 80072C50 AC20C064 */  sw        $zero, %lo(D_800DC064)($at)
 /* 4E054 80072C54 0801CB1B */  j         .L80072C6C
-/* 4E058 80072C58 00000000 */   nop      
+/* 4E058 80072C58 00000000 */   nop
 .L80072C5C:
 /* 4E05C 80072C5C 8E220014 */  lw        $v0, 0x14($s1)
 /* 4E060 80072C60 00431021 */  addu      $v0, $v0, $v1

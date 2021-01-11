@@ -35,4 +35,4 @@ glabel func_802AA0D8_42B5C8
 /* 42B640 802AA150 8FB00010 */  lw        $s0, 0x10($sp)
 /* 42B644 802AA154 03E00008 */  jr        $ra
 /* 42B648 802AA158 27BD0018 */   addiu    $sp, $sp, 0x18
-/* 42B64C 802AA15C 00000000 */  nop       
+/* 42B64C 802AA15C 00000000 */  nop

@@ -17,11 +17,11 @@ glabel BattleCamTargetActor
 /* 17D434 8024EB54 0040202D */  daddu     $a0, $v0, $zero
 /* 17D438 8024EB58 2402FF81 */  addiu     $v0, $zero, -0x7f
 /* 17D43C 8024EB5C 14820002 */  bne       $a0, $v0, .L8024EB68
-/* 17D440 8024EB60 00000000 */   nop      
+/* 17D440 8024EB60 00000000 */   nop
 /* 17D444 8024EB64 8E040148 */  lw        $a0, 0x148($s0)
 .L8024EB68:
 /* 17D448 8024EB68 0C09390F */  jal       cam_target_actor
-/* 17D44C 8024EB6C 00000000 */   nop      
+/* 17D44C 8024EB6C 00000000 */   nop
 /* 17D450 8024EB70 24020002 */  addiu     $v0, $zero, 2
 .L8024EB74:
 /* 17D454 8024EB74 8FBF0014 */  lw        $ra, 0x14($sp)

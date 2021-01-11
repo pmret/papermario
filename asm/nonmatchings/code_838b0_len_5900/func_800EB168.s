@@ -13,7 +13,7 @@ glabel func_800EB168
 /* 84638 800EB188 3C018011 */  lui       $at, %hi(D_8010CFE4)
 /* 8463C 800EB18C AC24CFE4 */  sw        $a0, %lo(D_8010CFE4)($at)
 /* 84640 800EB190 10600008 */  beqz      $v1, .L800EB1B4
-/* 84644 800EB194 00000000 */   nop      
+/* 84644 800EB194 00000000 */   nop
 /* 84648 800EB198 10800009 */  beqz      $a0, .L800EB1C0
 /* 8464C 800EB19C 24020004 */   addiu    $v0, $zero, 4
 /* 84650 800EB1A0 24020003 */  addiu     $v0, $zero, 3
@@ -21,7 +21,7 @@ glabel func_800EB168
 /* 84658 800EB1A8 AC22CFE8 */  sw        $v0, %lo(D_8010CFE8)($at)
 .L800EB1AC:
 /* 8465C 800EB1AC 03E00008 */  jr        $ra
-/* 84660 800EB1B0 00000000 */   nop      
+/* 84660 800EB1B0 00000000 */   nop
 .L800EB1B4:
 /* 84664 800EB1B4 14800006 */  bnez      $a0, .L800EB1D0
 /* 84668 800EB1B8 24020006 */   addiu    $v0, $zero, 6
@@ -30,7 +30,7 @@ glabel func_800EB168
 /* 84670 800EB1C0 3C018011 */  lui       $at, %hi(D_8010CFE8)
 /* 84674 800EB1C4 AC22CFE8 */  sw        $v0, %lo(D_8010CFE8)($at)
 /* 84678 800EB1C8 03E00008 */  jr        $ra
-/* 8467C 800EB1CC 00000000 */   nop      
+/* 8467C 800EB1CC 00000000 */   nop
 .L800EB1D0:
 /* 84680 800EB1D0 C4A00028 */  lwc1      $f0, 0x28($a1)
 /* 84684 800EB1D4 C4A2002C */  lwc1      $f2, 0x2c($a1)

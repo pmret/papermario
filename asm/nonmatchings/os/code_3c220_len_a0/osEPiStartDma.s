@@ -23,18 +23,18 @@ glabel osEPiStartDma
 /* 3C25C 80060E5C 92030002 */  lbu       $v1, 2($s0)
 /* 3C260 80060E60 24020001 */  addiu     $v0, $zero, 1
 /* 3C264 80060E64 14620009 */  bne       $v1, $v0, .L80060E8C
-/* 3C268 80060E68 00000000 */   nop      
+/* 3C268 80060E68 00000000 */   nop
 /* 3C26C 80060E6C 0C01AD54 */  jal       osPiGetCmdQueue
-/* 3C270 80060E70 00000000 */   nop      
+/* 3C270 80060E70 00000000 */   nop
 /* 3C274 80060E74 00402021 */  addu      $a0, $v0, $zero
 /* 3C278 80060E78 02002821 */  addu      $a1, $s0, $zero
 /* 3C27C 80060E7C 0C01956C */  jal       osJamMesg
 /* 3C280 80060E80 00003021 */   addu     $a2, $zero, $zero
 /* 3C284 80060E84 080183A9 */  j         .L80060EA4
-/* 3C288 80060E88 00000000 */   nop      
+/* 3C288 80060E88 00000000 */   nop
 .L80060E8C:
 /* 3C28C 80060E8C 0C01AD54 */  jal       osPiGetCmdQueue
-/* 3C290 80060E90 00000000 */   nop      
+/* 3C290 80060E90 00000000 */   nop
 /* 3C294 80060E94 00402021 */  addu      $a0, $v0, $zero
 /* 3C298 80060E98 02002821 */  addu      $a1, $s0, $zero
 /* 3C29C 80060E9C 0C019608 */  jal       osSendMesg
@@ -44,6 +44,6 @@ glabel osEPiStartDma
 /* 3C2A8 80060EA8 8FB00010 */  lw        $s0, 0x10($sp)
 /* 3C2AC 80060EAC 03E00008 */  jr        $ra
 /* 3C2B0 80060EB0 27BD0018 */   addiu    $sp, $sp, 0x18
-/* 3C2B4 80060EB4 00000000 */  nop       
-/* 3C2B8 80060EB8 00000000 */  nop       
-/* 3C2BC 80060EBC 00000000 */  nop       
+/* 3C2B4 80060EB4 00000000 */  nop
+/* 3C2B8 80060EB8 00000000 */  nop
+/* 3C2BC 80060EBC 00000000 */  nop

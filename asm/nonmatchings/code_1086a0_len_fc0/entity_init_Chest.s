@@ -23,5 +23,5 @@ glabel entity_init_Chest
 /* 10964C 802E7DCC 8FB00010 */  lw        $s0, 0x10($sp)
 /* 109650 802E7DD0 03E00008 */  jr        $ra
 /* 109654 802E7DD4 27BD0018 */   addiu    $sp, $sp, 0x18
-/* 109658 802E7DD8 00000000 */  nop       
-/* 10965C 802E7DDC 00000000 */  nop       
+/* 109658 802E7DD8 00000000 */  nop
+/* 10965C 802E7DDC 00000000 */  nop

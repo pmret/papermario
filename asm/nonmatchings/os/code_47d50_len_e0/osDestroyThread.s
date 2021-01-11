@@ -17,7 +17,7 @@ glabel osDestroyThread
 /* 47D7C 8006C97C 96030010 */  lhu       $v1, 0x10($s0)
 /* 47D80 8006C980 24020001 */  addiu     $v0, $zero, 1
 /* 47D84 8006C984 10620004 */  beq       $v1, $v0, .L8006C998
-/* 47D88 8006C988 00000000 */   nop      
+/* 47D88 8006C988 00000000 */   nop
 /* 47D8C 8006C98C 8E040008 */  lw        $a0, 8($s0)
 /* 47D90 8006C990 0C019880 */  jal       osDequeueThread
 /* 47D94 8006C994 02002821 */   addu     $a1, $s0, $zero
@@ -38,23 +38,23 @@ glabel osDestroyThread
 /* 47DC4 8006C9C4 8C830004 */  lw        $v1, 4($a0)
 /* 47DC8 8006C9C8 2402FFFF */  addiu     $v0, $zero, -1
 /* 47DCC 8006C9CC 10620009 */  beq       $v1, $v0, .L8006C9F4
-/* 47DD0 8006C9D0 00000000 */   nop      
+/* 47DD0 8006C9D0 00000000 */   nop
 /* 47DD4 8006C9D4 2403FFFF */  addiu     $v1, $zero, -1
 .L8006C9D8:
 /* 47DD8 8006C9D8 8C82000C */  lw        $v0, 0xc($a0)
 /* 47DDC 8006C9DC 1050FFF6 */  beq       $v0, $s0, .L8006C9B8
-/* 47DE0 8006C9E0 00000000 */   nop      
+/* 47DE0 8006C9E0 00000000 */   nop
 /* 47DE4 8006C9E4 00402021 */  addu      $a0, $v0, $zero
 /* 47DE8 8006C9E8 8C820004 */  lw        $v0, 4($a0)
 /* 47DEC 8006C9EC 1443FFFA */  bne       $v0, $v1, .L8006C9D8
-/* 47DF0 8006C9F0 00000000 */   nop      
+/* 47DF0 8006C9F0 00000000 */   nop
 .L8006C9F4:
 /* 47DF4 8006C9F4 3C028009 */  lui       $v0, %hi(D_80094660)
 /* 47DF8 8006C9F8 8C424660 */  lw        $v0, %lo(D_80094660)($v0)
 /* 47DFC 8006C9FC 16020003 */  bne       $s0, $v0, .L8006CA0C
-/* 47E00 8006CA00 00000000 */   nop      
+/* 47E00 8006CA00 00000000 */   nop
 /* 47E04 8006CA04 0C01AC75 */  jal       osDispatchThread
-/* 47E08 8006CA08 00000000 */   nop      
+/* 47E08 8006CA08 00000000 */   nop
 .L8006CA0C:
 /* 47E0C 8006CA0C 0C01ACF4 */  jal       __osRestoreInt
 /* 47E10 8006CA10 02202021 */   addu     $a0, $s1, $zero
@@ -63,5 +63,5 @@ glabel osDestroyThread
 /* 47E1C 8006CA1C 8FB00010 */  lw        $s0, 0x10($sp)
 /* 47E20 8006CA20 03E00008 */  jr        $ra
 /* 47E24 8006CA24 27BD0020 */   addiu    $sp, $sp, 0x20
-/* 47E28 8006CA28 00000000 */  nop       
-/* 47E2C 8006CA2C 00000000 */  nop       
+/* 47E28 8006CA28 00000000 */  nop
+/* 47E2C 8006CA2C 00000000 */  nop

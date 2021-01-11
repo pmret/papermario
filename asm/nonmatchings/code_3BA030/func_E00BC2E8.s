@@ -18,7 +18,7 @@ glabel func_E00BC2E8
 /* 3BA34C E00BC31C C4A0000C */  lwc1      $f0, 0xc($a1)
 /* 3BA350 E00BC320 3C01447A */  lui       $at, 0x447a
 /* 3BA354 E00BC324 44811000 */  mtc1      $at, $f2
-/* 3BA358 E00BC328 00000000 */  nop       
+/* 3BA358 E00BC328 00000000 */  nop
 /* 3BA35C E00BC32C 46020000 */  add.s     $f0, $f0, $f2
 /* 3BA360 E00BC330 4600010D */  trunc.w.s $f4, $f0
 /* 3BA364 E00BC334 E7A40014 */  swc1      $f4, 0x14($sp)

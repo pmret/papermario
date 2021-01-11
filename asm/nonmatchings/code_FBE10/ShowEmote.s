@@ -82,7 +82,7 @@ glabel ShowEmote
 /* FC380 802D79D0 000217C3 */  sra       $v0, $v0, 0x1f
 /* FC384 802D79D4 00C31823 */  subu      $v1, $a2, $v1
 /* FC388 802D79D8 44832000 */  mtc1      $v1, $f4
-/* FC38C 802D79DC 00000000 */  nop       
+/* FC38C 802D79DC 00000000 */  nop
 /* FC390 802D79E0 46802120 */  cvt.s.w   $f4, $f4
 /* FC394 802D79E4 00004810 */  mfhi      $t1
 /* FC398 802D79E8 080B5E97 */  j         .L802D7A5C
@@ -111,7 +111,7 @@ glabel ShowEmote
 /* FC3F0 802D7A40 000217C3 */  sra       $v0, $v0, 0x1f
 /* FC3F4 802D7A44 00641823 */  subu      $v1, $v1, $a0
 /* FC3F8 802D7A48 44832000 */  mtc1      $v1, $f4
-/* FC3FC 802D7A4C 00000000 */  nop       
+/* FC3FC 802D7A4C 00000000 */  nop
 /* FC400 802D7A50 46802120 */  cvt.s.w   $f4, $f4
 /* FC404 802D7A54 00004010 */  mfhi      $t0
 /* FC408 802D7A58 01021023 */  subu      $v0, $t0, $v0
@@ -119,7 +119,7 @@ glabel ShowEmote
 /* FC40C 802D7A5C 00021400 */  sll       $v0, $v0, 0x10
 /* FC410 802D7A60 00021403 */  sra       $v0, $v0, 0x10
 /* FC414 802D7A64 44820000 */  mtc1      $v0, $f0
-/* FC418 802D7A68 00000000 */  nop       
+/* FC418 802D7A68 00000000 */  nop
 /* FC41C 802D7A6C 46800020 */  cvt.s.w   $f0, $f0
 /* FC420 802D7A70 080B5EA1 */  j         .L802D7A84
 /* FC424 802D7A74 02A0202D */   daddu    $a0, $s5, $zero

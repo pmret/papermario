@@ -19,7 +19,7 @@ glabel ActorAddMovePos
 /* 1AF198 802808B8 8E43000C */  lw        $v1, 0xc($s2)
 /* 1AF19C 802808BC C4600004 */  lwc1      $f0, 4($v1)
 /* 1AF1A0 802808C0 44821000 */  mtc1      $v0, $f2
-/* 1AF1A4 802808C4 00000000 */  nop       
+/* 1AF1A4 802808C4 00000000 */  nop
 /* 1AF1A8 802808C8 468010A0 */  cvt.s.w   $f2, $f2
 /* 1AF1AC 802808CC 46020000 */  add.s     $f0, $f0, $f2
 /* 1AF1B0 802808D0 26100004 */  addiu     $s0, $s0, 4
@@ -30,7 +30,7 @@ glabel ActorAddMovePos
 /* 1AF1C4 802808E4 8E43000C */  lw        $v1, 0xc($s2)
 /* 1AF1C8 802808E8 C4600008 */  lwc1      $f0, 8($v1)
 /* 1AF1CC 802808EC 44821000 */  mtc1      $v0, $f2
-/* 1AF1D0 802808F0 00000000 */  nop       
+/* 1AF1D0 802808F0 00000000 */  nop
 /* 1AF1D4 802808F4 468010A0 */  cvt.s.w   $f2, $f2
 /* 1AF1D8 802808F8 46020000 */  add.s     $f0, $f0, $f2
 /* 1AF1DC 802808FC 26100004 */  addiu     $s0, $s0, 4
@@ -41,7 +41,7 @@ glabel ActorAddMovePos
 /* 1AF1F0 80280910 8E43000C */  lw        $v1, 0xc($s2)
 /* 1AF1F4 80280914 C460000C */  lwc1      $f0, 0xc($v1)
 /* 1AF1F8 80280918 44821000 */  mtc1      $v0, $f2
-/* 1AF1FC 8028091C 00000000 */  nop       
+/* 1AF1FC 8028091C 00000000 */  nop
 /* 1AF200 80280920 468010A0 */  cvt.s.w   $f2, $f2
 /* 1AF204 80280924 46020000 */  add.s     $f0, $f0, $f2
 /* 1AF208 80280928 E460000C */  swc1      $f0, 0xc($v1)
@@ -52,5 +52,5 @@ glabel ActorAddMovePos
 /* 1AF21C 8028093C 24020002 */  addiu     $v0, $zero, 2
 /* 1AF220 80280940 03E00008 */  jr        $ra
 /* 1AF224 80280944 27BD0020 */   addiu    $sp, $sp, 0x20
-/* 1AF228 80280948 00000000 */  nop       
-/* 1AF22C 8028094C 00000000 */  nop       
+/* 1AF228 80280948 00000000 */  nop
+/* 1AF22C 8028094C 00000000 */  nop

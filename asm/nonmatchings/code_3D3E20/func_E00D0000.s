@@ -51,7 +51,7 @@ glabel func_E00D0000
 /* 3D3ED4 E00D00B4 AE23000C */   sw       $v1, 0xc($s1)
 .LE00D00B8:
 /* 3D3ED8 E00D00B8 0803402E */  j         .LE00D00B8
-/* 3D3EDC E00D00BC 00000000 */   nop      
+/* 3D3EDC E00D00BC 00000000 */   nop
 .LE00D00C0:
 /* 3D3EE0 E00D00C0 2402003C */  addiu     $v0, $zero, 0x3c
 /* 3D3EE4 E00D00C4 AC620028 */  sw        $v0, 0x28($v1)
@@ -82,7 +82,7 @@ glabel func_E00D0000
 /* 3D3F48 E00D0128 2405FFFF */  addiu     $a1, $zero, -1
 .LE00D012C:
 /* 3D3F4C E00D012C 44860000 */  mtc1      $a2, $f0
-/* 3D3F50 E00D0130 00000000 */  nop       
+/* 3D3F50 E00D0130 00000000 */  nop
 /* 3D3F54 E00D0134 46800020 */  cvt.s.w   $f0, $f0
 /* 3D3F58 E00D0138 24C6001E */  addiu     $a2, $a2, 0x1e
 /* 3D3F5C E00D013C AC65001C */  sw        $a1, 0x1c($v1)

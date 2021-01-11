@@ -9,4 +9,4 @@ glabel osSpTaskYield
 /* 41060 80065C60 8FBF0010 */  lw        $ra, 0x10($sp)
 /* 41064 80065C64 03E00008 */  jr        $ra
 /* 41068 80065C68 27BD0018 */   addiu    $sp, $sp, 0x18
-/* 4106C 80065C6C 00000000 */  nop       
+/* 4106C 80065C6C 00000000 */  nop

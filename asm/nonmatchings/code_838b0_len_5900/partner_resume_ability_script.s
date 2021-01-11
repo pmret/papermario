@@ -13,7 +13,7 @@ glabel partner_resume_ability_script
 /* 84D30 800EB880 0C0B1059 */  jal       does_script_exist
 /* 84D34 800EB884 8E040000 */   lw       $a0, ($s0)
 /* 84D38 800EB888 10400003 */  beqz      $v0, .L800EB898
-/* 84D3C 800EB88C 00000000 */   nop      
+/* 84D3C 800EB88C 00000000 */   nop
 /* 84D40 800EB890 0C0B1123 */  jal       resume_all_script
 /* 84D44 800EB894 8E040000 */   lw       $a0, ($s0)
 .L800EB898:

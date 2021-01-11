@@ -25,4 +25,4 @@ glabel fx_sweat
 /* 4BBE0 800707E0 3C018008 */  lui       $at, %hi(D_8007F5D0)
 /* 4BBE4 800707E4 8C21F5D0 */  lw        $at, %lo(D_8007F5D0)($at)
 /* 4BBE8 800707E8 00200008 */  jr        $at
-/* 4BBEC 800707EC 00000000 */   nop      
+/* 4BBEC 800707EC 00000000 */   nop

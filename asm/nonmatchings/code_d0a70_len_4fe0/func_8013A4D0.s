@@ -40,9 +40,9 @@ glabel func_8013A4D0
 /* D0C58 8013A558 26310001 */   addiu    $s1, $s1, 1
 /* D0C5C 8013A55C 80820005 */  lb        $v0, 5($a0)
 /* D0C60 8013A560 10520003 */  beq       $v0, $s2, .L8013A570
-/* D0C64 8013A564 00000000 */   nop      
+/* D0C64 8013A564 00000000 */   nop
 /* D0C68 8013A568 0C04EA4F */  jal       func_8013A93C
-/* D0C6C 8013A56C 00000000 */   nop      
+/* D0C6C 8013A56C 00000000 */   nop
 .L8013A570:
 /* D0C70 8013A570 2A22005A */  slti      $v0, $s1, 0x5a
 /* D0C74 8013A574 1440FFF2 */  bnez      $v0, .L8013A540
@@ -67,9 +67,9 @@ glabel func_8013A4D0
 /* D0CBC 8013A5BC 10540009 */  beq       $v0, $s4, .L8013A5E4
 /* D0CC0 8013A5C0 26310001 */   addiu    $s1, $s1, 1
 /* D0CC4 8013A5C4 10530007 */  beq       $v0, $s3, .L8013A5E4
-/* D0CC8 8013A5C8 00000000 */   nop      
+/* D0CC8 8013A5C8 00000000 */   nop
 /* D0CCC 8013A5CC 0C00AB1E */  jal       general_heap_free
-/* D0CD0 8013A5D0 00000000 */   nop      
+/* D0CD0 8013A5D0 00000000 */   nop
 /* D0CD4 8013A5D4 8E420000 */  lw        $v0, ($s2)
 /* D0CD8 8013A5D8 02021021 */  addu      $v0, $s0, $v0
 /* D0CDC 8013A5DC AC40005C */  sw        $zero, 0x5c($v0)

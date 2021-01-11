@@ -38,9 +38,9 @@ glabel guRotateF
 /* 42FA4 80067BA4 46000606 */  mov.s     $f24, $f0
 /* 42FA8 80067BA8 4618D301 */  sub.s     $f12, $f26, $f24
 /* 42FAC 80067BAC 460CE702 */  mul.s     $f28, $f28, $f12
-/* 42FB0 80067BB0 00000000 */  nop       
+/* 42FB0 80067BB0 00000000 */  nop
 /* 42FB4 80067BB4 460CB582 */  mul.s     $f22, $f22, $f12
-/* 42FB8 80067BB8 00000000 */  nop       
+/* 42FB8 80067BB8 00000000 */  nop
 /* 42FBC 80067BBC 460CA502 */  mul.s     $f20, $f20, $f12
 /* 42FC0 80067BC0 0C019D28 */  jal       guMtxIdentF
 /* 42FC4 80067BC4 02002021 */   addu     $a0, $s0, $zero
@@ -55,7 +55,7 @@ glabel guRotateF
 /* 42FE8 80067BE8 E6000000 */  swc1      $f0, ($s0)
 /* 42FEC 80067BEC C7A00054 */  lwc1      $f0, 0x54($sp)
 /* 42FF0 80067BF0 46000302 */  mul.s     $f12, $f0, $f0
-/* 42FF4 80067BF4 00000000 */  nop       
+/* 42FF4 80067BF4 00000000 */  nop
 /* 42FF8 80067BF8 461E1082 */  mul.s     $f2, $f2, $f30
 /* 42FFC 80067BFC 460CD181 */  sub.s     $f6, $f26, $f12
 /* 43000 80067C00 4604A000 */  add.s     $f0, $f20, $f4

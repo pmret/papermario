@@ -18,7 +18,7 @@ glabel func_E006E6E4
 /* 372EA8 E006E718 C4A00014 */  lwc1      $f0, 0x14($a1)
 /* 372EAC E006E71C 3C01447A */  lui       $at, 0x447a
 /* 372EB0 E006E720 44811000 */  mtc1      $at, $f2
-/* 372EB4 E006E724 00000000 */  nop       
+/* 372EB4 E006E724 00000000 */  nop
 /* 372EB8 E006E728 46020000 */  add.s     $f0, $f0, $f2
 /* 372EBC E006E72C 4600010D */  trunc.w.s $f4, $f0
 /* 372EC0 E006E730 E7A40014 */  swc1      $f4, 0x14($sp)

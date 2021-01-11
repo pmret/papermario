@@ -46,7 +46,7 @@ glabel func_8003E338
 /* 197CC 8003E3CC 04A1FFFD */  bgez      $a1, .L8003E3C4
 /* 197D0 8003E3D0 2442FFFE */   addiu    $v0, $v0, -2
 /* 197D4 8003E3D4 0C0116B0 */  jal       func_80045AC0
-/* 197D8 8003E3D8 00000000 */   nop      
+/* 197D8 8003E3D8 00000000 */   nop
 /* 197DC 8003E3DC 3C058004 */  lui       $a1, %hi(func_8003E670)
 /* 197E0 8003E3E0 24A5E670 */  addiu     $a1, $a1, %lo(func_8003E670)
 /* 197E4 8003E3E4 3C01800A */  lui       $at, %hi(gGameState)

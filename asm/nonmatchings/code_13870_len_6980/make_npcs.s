@@ -11,7 +11,7 @@ glabel make_npcs
 /* 19A90 8003E690 AD060024 */  sw        $a2, 0x24($t0)
 /* 19A94 8003E694 8442008A */  lh        $v0, 0x8a($v0)
 /* 19A98 8003E698 1040001B */  beqz      $v0, .L8003E708
-/* 19A9C 8003E69C 00000000 */   nop      
+/* 19A9C 8003E69C 00000000 */   nop
 /* 19AA0 8003E6A0 0000282D */  daddu     $a1, $zero, $zero
 /* 19AA4 8003E6A4 00A0382D */  daddu     $a3, $a1, $zero
 .L8003E6A8:
@@ -32,7 +32,7 @@ glabel make_npcs
 /* 19ADC 8003E6DC 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 19AE0 8003E6E0 8442008A */  lh        $v0, 0x8a($v0)
 /* 19AE4 8003E6E4 10400008 */  beqz      $v0, .L8003E708
-/* 19AE8 8003E6E8 00000000 */   nop      
+/* 19AE8 8003E6E8 00000000 */   nop
 /* 19AEC 8003E6EC 2403FFFF */  addiu     $v1, $zero, -1
 /* 19AF0 8003E6F0 24050001 */  addiu     $a1, $zero, 1
 /* 19AF4 8003E6F4 25020002 */  addiu     $v0, $t0, 2
@@ -52,4 +52,4 @@ glabel make_npcs
 /* 19B24 8003E724 AC20A5D0 */  sw        $zero, %lo(D_8009A5D0)($at)
 .L8003E728:
 /* 19B28 8003E728 03E00008 */  jr        $ra
-/* 19B2C 8003E72C 00000000 */   nop      
+/* 19B2C 8003E72C 00000000 */   nop

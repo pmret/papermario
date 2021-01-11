@@ -25,7 +25,7 @@ glabel nuScEventHandler
 /* 3A3EC 8005EFEC 24060001 */   addiu    $a2, $zero, 1
 /* 3A3F0 8005EFF0 8FA20010 */  lw        $v0, 0x10($sp)
 /* 3A3F4 8005EFF4 10540005 */  beq       $v0, $s4, .L8005F00C
-/* 3A3F8 8005EFF8 00000000 */   nop      
+/* 3A3F8 8005EFF8 00000000 */   nop
 /* 3A3FC 8005EFFC 1053001D */  beq       $v0, $s3, .L8005F074
 /* 3A400 8005F000 0220202D */   daddu    $a0, $s1, $zero
 /* 3A404 8005F004 08017BFA */  j         .L8005EFE8
@@ -53,7 +53,7 @@ glabel nuScEventHandler
 /* 3A454 8005F054 3C013F80 */  lui       $at, 0x3f80
 /* 3A458 8005F058 44816000 */  mtc1      $at, $f12
 /* 3A45C 8005F05C 0C019BF4 */  jal       osViSetYScale
-/* 3A460 8005F060 00000000 */   nop      
+/* 3A460 8005F060 00000000 */   nop
 /* 3A464 8005F064 0C019CE0 */  jal       osViBlack
 /* 3A468 8005F068 24040001 */   addiu    $a0, $zero, 1
 /* 3A46C 8005F06C 08017BF9 */  j         .L8005EFE4
@@ -66,9 +66,9 @@ glabel nuScEventHandler
 /* 3A484 8005F084 3C028009 */  lui       $v0, %hi(D_80093B80)
 /* 3A488 8005F088 8C423B80 */  lw        $v0, %lo(D_80093B80)($v0)
 /* 3A48C 8005F08C 10400003 */  beqz      $v0, .L8005F09C
-/* 3A490 8005F090 00000000 */   nop      
+/* 3A490 8005F090 00000000 */   nop
 /* 3A494 8005F094 0040F809 */  jalr      $v0
-/* 3A498 8005F098 00000000 */   nop      
+/* 3A498 8005F098 00000000 */   nop
 .L8005F09C:
 /* 3A49C 8005F09C 92220608 */  lbu       $v0, 0x608($s1)
 /* 3A4A0 8005F0A0 8E230604 */  lw        $v1, 0x604($s1)

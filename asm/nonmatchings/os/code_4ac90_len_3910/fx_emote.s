@@ -25,4 +25,4 @@ glabel fx_emote
 /* 4B2E0 8006FEE0 3C018008 */  lui       $at, %hi(D_8007F390)
 /* 4B2E4 8006FEE4 8C21F390 */  lw        $at, %lo(D_8007F390)($at)
 /* 4B2E8 8006FEE8 00200008 */  jr        $at
-/* 4B2EC 8006FEEC 00000000 */   nop      
+/* 4B2EC 8006FEEC 00000000 */   nop

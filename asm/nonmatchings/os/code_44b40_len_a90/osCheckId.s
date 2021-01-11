@@ -8,7 +8,7 @@ glabel osCheckId
 /* 451E0 80069DE0 AFBF0034 */  sw        $ra, 0x34($sp)
 /* 451E4 80069DE4 92020065 */  lbu       $v0, 0x65($s0)
 /* 451E8 80069DE8 1040000C */  beqz      $v0, .L80069E1C
-/* 451EC 80069DEC 00000000 */   nop      
+/* 451EC 80069DEC 00000000 */   nop
 /* 451F0 80069DF0 0C01A5B4 */  jal       osPfsSelectBank
 /* 451F4 80069DF4 00002821 */   addu     $a1, $zero, $zero
 /* 451F8 80069DF8 00401821 */  addu      $v1, $v0, $zero
@@ -39,7 +39,7 @@ glabel osCheckId
 /* 45254 80069E54 27A70010 */   addiu    $a3, $sp, 0x10
 /* 45258 80069E58 00401821 */  addu      $v1, $v0, $zero
 /* 4525C 80069E5C 14600007 */  bnez      $v1, .L80069E7C
-/* 45260 80069E60 00000000 */   nop      
+/* 45260 80069E60 00000000 */   nop
 .L80069E64:
 /* 45264 80069E64 2604000C */  addiu     $a0, $s0, 0xc
 /* 45268 80069E68 27A50010 */  addiu     $a1, $sp, 0x10

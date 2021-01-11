@@ -11,9 +11,9 @@ glabel osContStartReadData
 /* 3CDB8 800619B8 9063A61C */  lbu       $v1, %lo(D_8009A61C)($v1)
 /* 3CDBC 800619BC 24020001 */  addiu     $v0, $zero, 1
 /* 3CDC0 800619C0 1062000B */  beq       $v1, $v0, .L800619F0
-/* 3CDC4 800619C4 00000000 */   nop      
+/* 3CDC4 800619C4 00000000 */   nop
 /* 3CDC8 800619C8 0C0186B1 */  jal       osPackReadData
-/* 3CDCC 800619CC 00000000 */   nop      
+/* 3CDCC 800619CC 00000000 */   nop
 /* 3CDD0 800619D0 3C05800B */  lui       $a1, %hi(D_800B0ED0)
 /* 3CDD4 800619D4 24A50ED0 */  addiu     $a1, $a1, %lo(D_800B0ED0)
 /* 3CDD8 800619D8 0C019730 */  jal       osSiRawStartDma

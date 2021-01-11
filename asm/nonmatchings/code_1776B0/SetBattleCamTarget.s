@@ -16,7 +16,7 @@ glabel SetBattleCamTarget
 /* 17D218 8024E938 0C0B1EAF */  jal       get_variable
 /* 17D21C 8024E93C 26100004 */   addiu    $s0, $s0, 4
 /* 17D220 8024E940 44820000 */  mtc1      $v0, $f0
-/* 17D224 8024E944 00000000 */  nop       
+/* 17D224 8024E944 00000000 */  nop
 /* 17D228 8024E948 46800020 */  cvt.s.w   $f0, $f0
 /* 17D22C 8024E94C 3C01802A */  lui       $at, %hi(D_8029F270)
 /* 17D230 8024E950 E420F270 */  swc1      $f0, %lo(D_8029F270)($at)
@@ -25,7 +25,7 @@ glabel SetBattleCamTarget
 /* 17D23C 8024E95C 0C0B1EAF */  jal       get_variable
 /* 17D240 8024E960 0220202D */   daddu    $a0, $s1, $zero
 /* 17D244 8024E964 44820000 */  mtc1      $v0, $f0
-/* 17D248 8024E968 00000000 */  nop       
+/* 17D248 8024E968 00000000 */  nop
 /* 17D24C 8024E96C 46800020 */  cvt.s.w   $f0, $f0
 /* 17D250 8024E970 3C01802A */  lui       $at, %hi(D_8029F274)
 /* 17D254 8024E974 E420F274 */  swc1      $f0, %lo(D_8029F274)($at)
@@ -33,7 +33,7 @@ glabel SetBattleCamTarget
 /* 17D25C 8024E97C 0C0B1EAF */  jal       get_variable
 /* 17D260 8024E980 0220202D */   daddu    $a0, $s1, $zero
 /* 17D264 8024E984 44820000 */  mtc1      $v0, $f0
-/* 17D268 8024E988 00000000 */  nop       
+/* 17D268 8024E988 00000000 */  nop
 /* 17D26C 8024E98C 46800020 */  cvt.s.w   $f0, $f0
 /* 17D270 8024E990 3C01802A */  lui       $at, %hi(D_8029F278)
 /* 17D274 8024E994 E420F278 */  swc1      $f0, %lo(D_8029F278)($at)

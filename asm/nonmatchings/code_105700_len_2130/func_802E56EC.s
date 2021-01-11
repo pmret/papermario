@@ -11,7 +11,7 @@ glabel func_802E56EC
 /* 106F84 802E5704 9603000A */  lhu       $v1, 0xa($s0)
 /* 106F88 802E5708 3402FFFF */  ori       $v0, $zero, 0xffff
 /* 106F8C 802E570C 1062001A */  beq       $v1, $v0, .L802E5778
-/* 106F90 802E5710 00000000 */   nop      
+/* 106F90 802E5710 00000000 */   nop
 /* 106F94 802E5714 0C05152F */  jal       get_global_flag
 /* 106F98 802E5718 0060202D */   daddu    $a0, $v1, $zero
 /* 106F9C 802E571C 14400016 */  bnez      $v0, .L802E5778

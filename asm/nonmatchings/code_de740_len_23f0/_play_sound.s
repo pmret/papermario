@@ -40,7 +40,7 @@ glabel _play_sound
 /* E023C 80149B3C 0C052642 */  jal       func_80149908
 /* E0240 80149B40 00073C03 */   sra      $a3, $a3, 0x10
 /* E0244 80149B44 080526F6 */  j         .L80149BD8
-/* E0248 80149B48 00000000 */   nop      
+/* E0248 80149B48 00000000 */   nop
 .L80149B4C:
 /* E024C 80149B4C 3C028015 */  lui       $v0, %hi(gCurrentDoorSoundsSet)
 /* E0250 80149B50 94421340 */  lhu       $v0, %lo(gCurrentDoorSoundsSet)($v0)

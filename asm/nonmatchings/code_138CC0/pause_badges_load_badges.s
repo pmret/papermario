@@ -23,7 +23,7 @@ glabel pause_badges_load_badges
 /* 13C110 80248DD0 24840001 */   addiu    $a0, $a0, 1
 /* 13C114 80248DD4 28420155 */  slti      $v0, $v0, 0x155
 /* 13C118 80248DD8 10400019 */  beqz      $v0, .L80248E40
-/* 13C11C 80248DDC 00000000 */   nop      
+/* 13C11C 80248DDC 00000000 */   nop
 /* 13C120 80248DE0 A4A30000 */  sh        $v1, ($a1)
 /* 13C124 80248DE4 24A50002 */  addiu     $a1, $a1, 2
 /* 13C128 80248DE8 26100001 */  addiu     $s0, $s0, 1
@@ -32,10 +32,10 @@ glabel pause_badges_load_badges
 /* 13C130 80248DF0 1440FFF4 */  bnez      $v0, .L80248DC4
 /* 13C134 80248DF4 24C60002 */   addiu    $a2, $a2, 2
 /* 13C138 80248DF8 08092390 */  j         .L80248E40
-/* 13C13C 80248DFC 00000000 */   nop      
+/* 13C13C 80248DFC 00000000 */   nop
 .L80248E00:
 /* 13C140 80248E00 0C091C2C */  jal       pause_badges_count_equipped
-/* 13C144 80248E04 00000000 */   nop      
+/* 13C144 80248E04 00000000 */   nop
 /* 13C148 80248E08 26260208 */  addiu     $a2, $s1, 0x208
 /* 13C14C 80248E0C 0000202D */  daddu     $a0, $zero, $zero
 /* 13C150 80248E10 3C058027 */  lui       $a1, %hi(gBadgeMenuItemIDs)

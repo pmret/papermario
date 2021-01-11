@@ -49,7 +49,7 @@ glabel func_E00D6980
 /* 3D5A50 E00D6A30 3C088000 */  lui       $t0, 0x8000
 /* 3D5A54 E00D6A34 8D220010 */  lw        $v0, 0x10($t1)
 /* 3D5A58 E00D6A38 46020002 */  mul.s     $f0, $f0, $f2
-/* 3D5A5C E00D6A3C 00000000 */  nop       
+/* 3D5A5C E00D6A3C 00000000 */  nop
 /* 3D5A60 E00D6A40 8C42001C */  lw        $v0, 0x1c($v0)
 /* 3D5A64 E00D6A44 3C038007 */  lui       $v1, %hi(gCurrentCameraID)
 /* 3D5A68 E00D6A48 8C637410 */  lw        $v1, %lo(gCurrentCameraID)($v1)
@@ -219,7 +219,7 @@ glabel func_E00D6980
 /* 3D5CF4 E00D6CD4 3C020900 */  lui       $v0, 0x900
 /* 3D5CF8 E00D6CD8 24420688 */  addiu     $v0, $v0, 0x688
 /* 3D5CFC E00D6CDC 10620005 */  beq       $v1, $v0, .LE00D6CF4
-/* 3D5D00 E00D6CE0 00000000 */   nop      
+/* 3D5D00 E00D6CE0 00000000 */   nop
 /* 3D5D04 E00D6CE4 3C020900 */  lui       $v0, 0x900
 /* 3D5D08 E00D6CE8 24420808 */  addiu     $v0, $v0, 0x808
 /* 3D5D0C E00D6CEC 14620006 */  bne       $v1, $v0, .LE00D6D08
@@ -309,5 +309,5 @@ glabel func_E00D6980
 /* 3D5E4C E00D6E2C D7B400D8 */  ldc1      $f20, 0xd8($sp)
 /* 3D5E50 E00D6E30 03E00008 */  jr        $ra
 /* 3D5E54 E00D6E34 27BD00F8 */   addiu    $sp, $sp, 0xf8
-/* 3D5E58 E00D6E38 00000000 */  nop       
-/* 3D5E5C E00D6E3C 00000000 */  nop       
+/* 3D5E58 E00D6E38 00000000 */  nop
+/* 3D5E5C E00D6E3C 00000000 */  nop

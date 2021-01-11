@@ -35,7 +35,7 @@ glabel pause_badges_try_equip
 /* 13A6E4 802473A4 1440FFFB */  bnez      $v0, .L80247394
 /* 13A6E8 802473A8 24A50002 */   addiu    $a1, $a1, 2
 /* 13A6EC 802473AC 0C0911FD */  jal       pause_get_total_equipped_bp_cost
-/* 13A6F0 802473B0 00000000 */   nop      
+/* 13A6F0 802473B0 00000000 */   nop
 /* 13A6F4 802473B4 0040202D */  daddu     $a0, $v0, $zero
 /* 13A6F8 802473B8 00101400 */  sll       $v0, $s0, 0x10
 /* 13A6FC 802473BC 00021403 */  sra       $v0, $v0, 0x10

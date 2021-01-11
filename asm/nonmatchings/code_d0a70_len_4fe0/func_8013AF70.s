@@ -49,7 +49,7 @@ glabel func_8013AF70
 /* D171C 8013B01C 1040002D */  beqz      $v0, .L8013B0D4
 /* D1720 8013B020 0000102D */   daddu    $v0, $zero, $zero
 /* D1724 8013B024 1200002B */  beqz      $s0, .L8013B0D4
-/* D1728 8013B028 00000000 */   nop      
+/* D1728 8013B028 00000000 */   nop
 /* D172C 8013B02C 0C04EC3B */  jal       func_8013B0EC
 /* D1730 8013B030 0200202D */   daddu    $a0, $s0, $zero
 /* D1734 8013B034 0200202D */  daddu     $a0, $s0, $zero

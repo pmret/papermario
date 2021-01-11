@@ -51,4 +51,4 @@ glabel osPackReadData
 /* 3CF70 80061B70 A0E20000 */  sb        $v0, ($a3)
 /* 3CF74 80061B74 03E00008 */  jr        $ra
 /* 3CF78 80061B78 27BD0010 */   addiu    $sp, $sp, 0x10
-/* 3CF7C 80061B7C 00000000 */  nop       
+/* 3CF7C 80061B7C 00000000 */  nop
