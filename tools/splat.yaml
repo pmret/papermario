@@ -8423,12 +8423,25 @@ segments:
   - [0xE2B530, bin] # code
   - [0xE2BE40, bin] # code
   - [0xE2C930, bin] # code
-  - [0xE2D410, bin] # data
+  - [0xE2D410, bin] # data ___
   - [0xE2D730, bin] # code
   - [0xE2E5F0, bin] # code
   - [0xE2EDE0, bin] # code
-  - [0xE31380, bin] # data
-  - [0xEA0900, bin]
+  - [0xE31380, bin] # data ___
+  - [0xEA0900, bin] # code
+  - [0xEA0C10, bin] # code
+  - [0xEA36E0, bin] # code
+  - [0xEA3A80, bin] # data ___
+  - [0xEA6FD0, bin] # code
+  - [0xEA7010, bin] # code
+  - [0xEA7320, bin] # code
+  - [0xEA7390, bin] # data ___
+  - [0xEA8AE0, bin] # code
+  - [0xEAA810, bin] # data ___
+  - [0xEB0E60, bin] # code
+  - [0xEB1170, bin] # code
+  - [0xEB1920, bin] # data ___
+  - [0xEB5130, bin] # code
   - [0xF007C0, bin, Battle_Fanfare_02] # BGM start
   - [0xF02160, bin, Hey_You_03]
   - [0xF03740, bin, The_Goomba_King_s_Decree_07]
