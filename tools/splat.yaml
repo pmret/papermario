@@ -8273,7 +8273,7 @@ segments:
   - type: code
     overlay: True
     start: 0xE20110
-    vram: 0x802B7000 # this is a guess, may be wrong
+    vram: 0x802B7000
     files:
     - [0xE20110, c]
     - [0xE20B30, bin]
@@ -8621,7 +8621,7 @@ segments:
     overlay: True
     files:
     - [0xEFEB00, c]
-    - [0xEFF440, bin]
+    - [0xEFF440, bin] # some of this is audio-related and not part of this overlay
   - [0xF007C0, bin, Battle_Fanfare_02] # BGM start
   - [0xF02160, bin, Hey_You_03]
   - [0xF03740, bin, The_Goomba_King_s_Decree_07]
