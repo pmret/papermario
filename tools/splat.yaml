@@ -8765,7 +8765,7 @@ segments:
   - [0xFAD210, bin, The_End_Low_Frequency__2E]
   - [0xFAD8F0, bin, SMW_Remix_2F]
   - [0xFADE70, bin, New_Partner_82] # BGM end
-  - [0xFAE860, bin, sfx]
+  - [0xFAE860, bin] # sfx
   - [0x19E09A8, Yay0]
   - [0x19E1390, Yay0]
   - [0x19E1888, Yay0]
