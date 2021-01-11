@@ -205,9 +205,9 @@ glabel func_E00AE54C
 /* 3B2BB8 E00AE868 C602FFF4 */  lwc1      $f2, -0xc($s0)
 /* 3B2BBC E00AE86C 3C013D80 */  lui       $at, 0x3d80
 /* 3B2BC0 E00AE870 44810000 */  mtc1      $at, $f0
-/* 3B2BC4 E00AE874 00000000 */  nop
+/* 3B2BC4 E00AE874 00000000 */  nop       
 /* 3B2BC8 E00AE878 46001082 */  mul.s     $f2, $f2, $f0
-/* 3B2BCC E00AE87C 00000000 */  nop
+/* 3B2BCC E00AE87C 00000000 */  nop       
 /* 3B2BD0 E00AE880 0260202D */  daddu     $a0, $s3, $zero
 /* 3B2BD4 E00AE884 44051000 */  mfc1      $a1, $f2
 /* 3B2BD8 E00AE888 4407B000 */  mfc1      $a3, $f22
@@ -320,4 +320,4 @@ glabel func_E00AE54C
 /* 3B2D80 E00AEA30 D7B400D8 */  ldc1      $f20, 0xd8($sp)
 /* 3B2D84 E00AEA34 03E00008 */  jr        $ra
 /* 3B2D88 E00AEA38 27BD00E8 */   addiu    $sp, $sp, 0xe8
-/* 3B2D8C E00AEA3C 00000000 */  nop
+/* 3B2D8C E00AEA3C 00000000 */  nop       

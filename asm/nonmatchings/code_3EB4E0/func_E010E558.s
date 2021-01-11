@@ -36,7 +36,7 @@ glabel func_E010E558
 /* 3EBAB4 E010E5D4 00220821 */  addu      $at, $at, $v0
 /* 3EBAB8 E010E5D8 8C22E930 */  lw        $v0, %lo(D_E010E930)($at)
 /* 3EBABC E010E5DC 00400008 */  jr        $v0
-/* 3EBAC0 E010E5E0 00000000 */   nop
+/* 3EBAC0 E010E5E0 00000000 */   nop      
 /* 3EBAC4 E010E5E4 3C06E011 */  lui       $a2, %hi(D_E010E7FC)
 /* 3EBAC8 E010E5E8 24C6E7FC */  addiu     $a2, $a2, %lo(D_E010E7FC)
 /* 3EBACC E010E5EC 3C04E011 */  lui       $a0, %hi(D_E010E868)
@@ -129,6 +129,6 @@ glabel func_E010E558
 /* 3EBC18 E010E738 8FB00018 */  lw        $s0, 0x18($sp)
 /* 3EBC1C E010E73C 03E00008 */  jr        $ra
 /* 3EBC20 E010E740 27BD0028 */   addiu    $sp, $sp, 0x28
-/* 3EBC24 E010E744 00000000 */  nop
-/* 3EBC28 E010E748 00000000 */  nop
-/* 3EBC2C E010E74C 00000000 */  nop
+/* 3EBC24 E010E744 00000000 */  nop       
+/* 3EBC28 E010E748 00000000 */  nop       
+/* 3EBC2C E010E74C 00000000 */  nop       

@@ -258,7 +258,7 @@ glabel func_802DC008
 /* FF4D0 802DC3E0 0C052071 */  jal       func_801481C4
 /* FF4D4 802DC3E4 01A0382D */   daddu    $a3, $t5, $zero
 /* FF4D8 802DC3E8 080B71E2 */  j         .L802DC788
-/* FF4DC 802DC3EC 00000000 */   nop
+/* FF4DC 802DC3EC 00000000 */   nop      
 .L802DC3F0:
 /* FF4E0 802DC3F0 3C03070A */  lui       $v1, 0x70a
 /* FF4E4 802DC3F4 34630280 */  ori       $v1, $v1, 0x280
@@ -310,7 +310,7 @@ glabel func_802DC008
 /* FF58C 802DC49C 14A10004 */  bne       $a1, $at, .L802DC4B0
 /* FF590 802DC4A0 3C018000 */   lui      $at, 0x8000
 /* FF594 802DC4A4 14610002 */  bne       $v1, $at, .L802DC4B0
-/* FF598 802DC4A8 00000000 */   nop
+/* FF598 802DC4A8 00000000 */   nop      
 /* FF59C 802DC4AC 0006000D */  break     6
 .L802DC4B0:
 /* FF5A0 802DC4B0 00001012 */   mflo     $v0

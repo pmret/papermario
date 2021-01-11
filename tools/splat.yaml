@@ -8420,14 +8420,32 @@ segments:
     files:
     - [0xE2A6B0, c]
     - [0xE2B420, bin]
-  - [0xE2B530, bin] # code
-  - [0xE2BE40, bin] # code
-  - [0xE2C930, bin] # code
-  - [0xE2D410, bin] # data ___
-  - [0xE2D730, bin] # code
-  - [0xE2E5F0, bin] # code
-  - [0xE2EDE0, bin] # code
-  - [0xE31380, bin] # data ___
+  - type: code
+    start: 0xE2B530
+    vram: 0x802BAE00
+    overlay: True
+    files:
+    - [0xE2B530, c]
+    - [0xE2BE40, c]
+    - [0xE2C930, c]
+    - [0xE2D410, bin]
+  - type: code
+    start: 0xE2D730
+    vram: 0x802BAE00
+    overlay: True
+    files:
+    - [0xE2D730, c]
+    - [0xE2E5F0, c]
+    - [0xE2EDE0, c]
+    - [0xE2EFD0, bin]
+  - type: code
+    start: 0xE2F750
+    vram: 0x802BAE00
+    overlay: True
+    files:
+    - [0xE2F750, c]
+    - [0xE31380, bin]
+  - [0xE31530, bin] # unk data
   - [0xEA0900, bin] # code
   - [0xEA0C10, bin] # code
   - [0xEA36E0, bin] # code
@@ -8647,7 +8665,7 @@ segments:
   - [0xFAD210, bin, The_End_Low_Frequency__2E]
   - [0xFAD8F0, bin, SMW_Remix_2F]
   - [0xFADE70, bin, New_Partner_82] # BGM end
-  - [0xFAE860, bin]
+  - [0xFAE860, bin, sfx]
   - [0x19E09A8, Yay0]
   - [0x19E1390, Yay0]
   - [0x19E1888, Yay0]

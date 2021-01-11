@@ -104,7 +104,7 @@ glabel func_E0068234
 /* 36AC90 E00683C0 3C01E007 */  lui       $at, %hi(D_E0068600)
 /* 36AC94 E00683C4 D4208600 */  ldc1      $f0, %lo(D_E0068600)($at)
 /* 36AC98 E00683C8 46201002 */  mul.d     $f0, $f2, $f0
-/* 36AC9C E00683CC 00000000 */  nop
+/* 36AC9C E00683CC 00000000 */  nop       
 /* 36ACA0 E00683D0 4620010D */  trunc.w.d $f4, $f0
 /* 36ACA4 E00683D4 44092000 */  mfc1      $t1, $f4
 /* 36ACA8 E00683D8 0801A0FB */  j         .LE00683EC
@@ -227,4 +227,4 @@ glabel func_E0068234
 /* 36AE70 E00685A0 8FB00060 */  lw        $s0, 0x60($sp)
 /* 36AE74 E00685A4 03E00008 */  jr        $ra
 /* 36AE78 E00685A8 27BD0088 */   addiu    $sp, $sp, 0x88
-/* 36AE7C E00685AC 00000000 */  nop
+/* 36AE7C E00685AC 00000000 */  nop       

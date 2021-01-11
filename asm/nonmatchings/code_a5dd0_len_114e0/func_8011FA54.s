@@ -40,7 +40,7 @@ glabel func_8011FA54
 /* B61D8 8011FAD8 1440FFF2 */  bnez      $v0, .L8011FAA4
 /* B61DC 8011FADC 26100004 */   addiu    $s0, $s0, 4
 /* B61E0 8011FAE0 08047FD1 */  j         .L8011FF44
-/* B61E4 8011FAE4 00000000 */   nop
+/* B61E4 8011FAE4 00000000 */   nop      
 .L8011FAE8:
 /* B61E8 8011FAE8 26D000B4 */  addiu     $s0, $s6, 0xb4
 /* B61EC 8011FAEC 0200202D */  daddu     $a0, $s0, $zero
@@ -158,7 +158,7 @@ glabel func_8011FA54
 /* B63A0 8011FCA0 AE020000 */   sw       $v0, ($s0)
 /* B63A4 8011FCA4 8D4402D8 */  lw        $a0, 0x2d8($t2)
 /* B63A8 8011FCA8 0060F809 */  jalr      $v1
-/* B63AC 8011FCAC 00000000 */   nop
+/* B63AC 8011FCAC 00000000 */   nop      
 .L8011FCB0:
 /* B63B0 8011FCB0 8E040000 */  lw        $a0, ($s0)
 /* B63B4 8011FCB4 0080102D */  daddu     $v0, $a0, $zero
@@ -208,10 +208,10 @@ glabel func_8011FA54
 /* B6454 8011FD54 28620060 */  slti      $v0, $v1, 0x60
 .L8011FD58:
 /* B6458 8011FD58 14400003 */  bnez      $v0, .L8011FD68
-/* B645C 8011FD5C 00000000 */   nop
+/* B645C 8011FD5C 00000000 */   nop      
 .L8011FD60:
 /* B6460 8011FD60 08047F58 */  j         .L8011FD60
-/* B6464 8011FD64 00000000 */   nop
+/* B6464 8011FD64 00000000 */   nop      
 .L8011FD68:
 /* B6468 8011FD68 0C00AB0A */  jal       general_heap_malloc
 /* B646C 8011FD6C 000420C0 */   sll      $a0, $a0, 3
@@ -220,7 +220,7 @@ glabel func_8011FA54
 /* B6478 8011FD78 AEF30004 */   sw       $s3, 4($s7)
 .L8011FD7C:
 /* B647C 8011FD7C 08047F5F */  j         .L8011FD7C
-/* B6480 8011FD80 00000000 */   nop
+/* B6480 8011FD80 00000000 */   nop      
 .L8011FD84:
 /* B6484 8011FD84 0000A82D */  daddu     $s5, $zero, $zero
 /* B6488 8011FD88 24020003 */  addiu     $v0, $zero, 3

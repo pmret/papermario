@@ -139,7 +139,7 @@ glabel func_E011C1C4
 /* 406F1C E011C3DC 10620007 */  beq       $v1, $v0, .LE011C3FC
 /* 406F20 E011C3E0 28620002 */   slti     $v0, $v1, 2
 /* 406F24 E011C3E4 10400015 */  beqz      $v0, .LE011C43C
-/* 406F28 E011C3E8 00000000 */   nop
+/* 406F28 E011C3E8 00000000 */   nop      
 /* 406F2C E011C3EC 14600013 */  bnez      $v1, .LE011C43C
 /* 406F30 E011C3F0 0000282D */   daddu    $a1, $zero, $zero
 /* 406F34 E011C3F4 0804711B */  j         .LE011C46C
@@ -211,5 +211,5 @@ glabel func_E011C1C4
 /* 40702C E011C4EC D7B400B8 */  ldc1      $f20, 0xb8($sp)
 /* 407030 E011C4F0 03E00008 */  jr        $ra
 /* 407034 E011C4F4 27BD00C0 */   addiu    $sp, $sp, 0xc0
-/* 407038 E011C4F8 00000000 */  nop
-/* 40703C E011C4FC 00000000 */  nop
+/* 407038 E011C4F8 00000000 */  nop       
+/* 40703C E011C4FC 00000000 */  nop       

@@ -49,7 +49,7 @@ glabel func_E00BE5BC
 /* 3BC5CC E00BE66C 3C038000 */  lui       $v1, 0x8000
 /* 3BC5D0 E00BE670 8D820010 */  lw        $v0, 0x10($t4)
 /* 3BC5D4 E00BE674 449E2000 */  mtc1      $fp, $f4
-/* 3BC5D8 E00BE678 00000000 */  nop
+/* 3BC5D8 E00BE678 00000000 */  nop       
 /* 3BC5DC E00BE67C 46802120 */  cvt.s.w   $f4, $f4
 /* 3BC5E0 E00BE680 8C42001C */  lw        $v0, 0x1c($v0)
 /* 3BC5E4 E00BE684 44062000 */  mfc1      $a2, $f4
@@ -340,4 +340,4 @@ glabel func_E00BE5BC
 /* 3BCA40 E00BEAE0 8FB00098 */  lw        $s0, 0x98($sp)
 /* 3BCA44 E00BEAE4 03E00008 */  jr        $ra
 /* 3BCA48 E00BEAE8 27BD00C0 */   addiu    $sp, $sp, 0xc0
-/* 3BCA4C E00BEAEC 00000000 */  nop
+/* 3BCA4C E00BEAEC 00000000 */  nop       

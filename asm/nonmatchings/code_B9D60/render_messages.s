@@ -143,7 +143,7 @@ glabel render_messages
 /* BAB0C 8012440C 26310001 */  addiu     $s1, $s1, 1
 /* BAB10 80124410 2A220003 */  slti      $v0, $s1, 3
 /* BAB14 80124414 1440FFD4 */  bnez      $v0, .L80124368
-/* BAB18 80124418 00000000 */   nop
+/* BAB18 80124418 00000000 */   nop      
 /* BAB1C 8012441C 8FBF002C */  lw        $ra, 0x2c($sp)
 /* BAB20 80124420 8FB20028 */  lw        $s2, 0x28($sp)
 /* BAB24 80124424 8FB10024 */  lw        $s1, 0x24($sp)

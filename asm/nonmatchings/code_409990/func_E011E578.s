@@ -158,5 +158,5 @@ glabel func_E011E578
 /* 40A16C E011E7DC 8FB00090 */  lw        $s0, 0x90($sp)
 /* 40A170 E011E7E0 03E00008 */  jr        $ra
 /* 40A174 E011E7E4 27BD00B0 */   addiu    $sp, $sp, 0xb0
-/* 40A178 E011E7E8 00000000 */  nop
-/* 40A17C E011E7EC 00000000 */  nop
+/* 40A178 E011E7E8 00000000 */  nop       
+/* 40A17C E011E7EC 00000000 */  nop       

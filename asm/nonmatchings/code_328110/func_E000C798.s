@@ -195,7 +195,7 @@ glabel func_E000C798
 /* 328B8C E000CA7C ACA20004 */  sw        $v0, 4($a1)
 /* 328B90 E000CA80 24020002 */  addiu     $v0, $zero, 2
 /* 328B94 E000CA84 16A2000A */  bne       $s5, $v0, .LE000CAB0
-/* 328B98 E000CA88 00000000 */   nop
+/* 328B98 E000CA88 00000000 */   nop      
 /* 328B9C E000CA8C 3C03800A */  lui       $v1, %hi(gMasterGfxPos)
 /* 328BA0 E000CA90 2463A66C */  addiu     $v1, $v1, %lo(gMasterGfxPos)
 /* 328BA4 E000CA94 8C620000 */  lw        $v0, ($v1)
@@ -294,5 +294,5 @@ glabel func_E000C798
 /* 328D0C E000CBFC 8FB000E0 */  lw        $s0, 0xe0($sp)
 /* 328D10 E000CC00 03E00008 */  jr        $ra
 /* 328D14 E000CC04 27BD0108 */   addiu    $sp, $sp, 0x108
-/* 328D18 E000CC08 00000000 */  nop
-/* 328D1C E000CC0C 00000000 */  nop
+/* 328D18 E000CC08 00000000 */  nop       
+/* 328D1C E000CC0C 00000000 */  nop       

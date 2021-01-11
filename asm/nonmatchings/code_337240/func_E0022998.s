@@ -210,4 +210,4 @@ glabel func_E0022998
 /* 337F00 E0022CC0 8FB000D8 */  lw        $s0, 0xd8($sp)
 /* 337F04 E0022CC4 03E00008 */  jr        $ra
 /* 337F08 E0022CC8 27BD0100 */   addiu    $sp, $sp, 0x100
-/* 337F0C E0022CCC 00000000 */  nop
+/* 337F0C E0022CCC 00000000 */  nop       

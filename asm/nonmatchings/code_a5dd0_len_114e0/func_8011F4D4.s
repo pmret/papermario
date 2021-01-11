@@ -81,7 +81,7 @@ glabel func_8011F4D4
 /* B5CFC 8011F5FC 10820063 */  beq       $a0, $v0, .L8011F78C
 /* B5D00 8011F600 27A40010 */   addiu    $a0, $sp, 0x10
 /* B5D04 8011F604 08047E80 */  j         .L8011FA00
-/* B5D08 8011F608 00000000 */   nop
+/* B5D08 8011F608 00000000 */   nop      
 .L8011F60C:
 /* B5D0C 8011F60C 92020004 */  lbu       $v0, 4($s0)
 /* B5D10 8011F610 2442FFFF */  addiu     $v0, $v0, -1
@@ -94,7 +94,7 @@ glabel func_8011F4D4
 /* B5D2C 8011F62C 00220821 */  addu      $at, $at, $v0
 /* B5D30 8011F630 8C22FEE0 */  lw        $v0, %lo(D_8014FEE0)($at)
 /* B5D34 8011F634 00400008 */  jr        $v0
-/* B5D38 8011F638 00000000 */   nop
+/* B5D38 8011F638 00000000 */   nop      
 /* B5D3C 8011F63C 3C03800A */  lui       $v1, %hi(gMasterGfxPos)
 /* B5D40 8011F640 2463A66C */  addiu     $v1, $v1, %lo(gMasterGfxPos)
 /* B5D44 8011F644 8C620000 */  lw        $v0, ($v1)
@@ -191,7 +191,7 @@ glabel func_8011F4D4
 /* B5EAC 8011F7AC 00220821 */  addu      $at, $at, $v0
 /* B5EB0 8011F7B0 8C22FF78 */  lw        $v0, %lo(D_8014FF78)($at)
 /* B5EB4 8011F7B4 00400008 */  jr        $v0
-/* B5EB8 8011F7B8 00000000 */   nop
+/* B5EB8 8011F7B8 00000000 */   nop      
 /* B5EBC 8011F7BC 3C03800A */  lui       $v1, %hi(gMasterGfxPos)
 /* B5EC0 8011F7C0 2463A66C */  addiu     $v1, $v1, %lo(gMasterGfxPos)
 /* B5EC4 8011F7C4 8C620000 */  lw        $v0, ($v1)
@@ -291,7 +291,7 @@ glabel func_8011F4D4
 /* B6034 8011F934 14410004 */  bne       $v0, $at, .L8011F948
 /* B6038 8011F938 3C018000 */   lui      $at, 0x8000
 /* B603C 8011F93C 14E10002 */  bne       $a3, $at, .L8011F948
-/* B6040 8011F940 00000000 */   nop
+/* B6040 8011F940 00000000 */   nop      
 /* B6044 8011F944 0006000D */  break     6
 .L8011F948:
 /* B6048 8011F948 00003812 */   mflo     $a3
@@ -306,7 +306,7 @@ glabel func_8011F4D4
 /* B6068 8011F968 14410004 */  bne       $v0, $at, .L8011F97C
 /* B606C 8011F96C 3C018000 */   lui      $at, 0x8000
 /* B6070 8011F970 14A10002 */  bne       $a1, $at, .L8011F97C
-/* B6074 8011F974 00000000 */   nop
+/* B6074 8011F974 00000000 */   nop      
 /* B6078 8011F978 0006000D */  break     6
 .L8011F97C:
 /* B607C 8011F97C 00002812 */   mflo     $a1

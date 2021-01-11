@@ -42,10 +42,10 @@ glabel func_E00AA404
 /* 3AADB8 E00AA498 3421999A */  ori       $at, $at, 0x999a
 /* 3AADBC E00AA49C 44811000 */  mtc1      $at, $f2
 /* 3AADC0 E00AA4A0 44820000 */  mtc1      $v0, $f0
-/* 3AADC4 E00AA4A4 00000000 */  nop
+/* 3AADC4 E00AA4A4 00000000 */  nop       
 /* 3AADC8 E00AA4A8 46800020 */  cvt.s.w   $f0, $f0
 /* 3AADCC E00AA4AC 46020002 */  mul.s     $f0, $f0, $f2
-/* 3AADD0 E00AA4B0 00000000 */  nop
+/* 3AADD0 E00AA4B0 00000000 */  nop       
 /* 3AADD4 E00AA4B4 C6620010 */  lwc1      $f2, 0x10($s3)
 /* 3AADD8 E00AA4B8 46001080 */  add.s     $f2, $f2, $f0
 /* 3AADDC E00AA4BC 8E65000C */  lw        $a1, 0xc($s3)
@@ -174,6 +174,6 @@ glabel func_E00AA404
 /* 3AAFC8 E00AA6A8 8FB00098 */  lw        $s0, 0x98($sp)
 /* 3AAFCC E00AA6AC 03E00008 */  jr        $ra
 /* 3AAFD0 E00AA6B0 27BD00C0 */   addiu    $sp, $sp, 0xc0
-/* 3AAFD4 E00AA6B4 00000000 */  nop
-/* 3AAFD8 E00AA6B8 00000000 */  nop
-/* 3AAFDC E00AA6BC 00000000 */  nop
+/* 3AAFD4 E00AA6B4 00000000 */  nop       
+/* 3AAFD8 E00AA6B8 00000000 */  nop       
+/* 3AAFDC E00AA6BC 00000000 */  nop       

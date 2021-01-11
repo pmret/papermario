@@ -131,4 +131,4 @@ glabel func_E00183D8
 /* 32FB40 E00185C0 8FB00000 */  lw        $s0, ($sp)
 /* 32FB44 E00185C4 03E00008 */  jr        $ra
 /* 32FB48 E00185C8 27BD0020 */   addiu    $sp, $sp, 0x20
-/* 32FB4C E00185CC 00000000 */  nop
+/* 32FB4C E00185CC 00000000 */  nop       

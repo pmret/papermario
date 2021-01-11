@@ -268,5 +268,5 @@ glabel func_E0030A68
 /* 342FBC E0030E7C D7B400D0 */  ldc1      $f20, 0xd0($sp)
 /* 342FC0 E0030E80 03E00008 */  jr        $ra
 /* 342FC4 E0030E84 27BD00E0 */   addiu    $sp, $sp, 0xe0
-/* 342FC8 E0030E88 00000000 */  nop
-/* 342FCC E0030E8C 00000000 */  nop
+/* 342FC8 E0030E88 00000000 */  nop       
+/* 342FCC E0030E8C 00000000 */  nop       

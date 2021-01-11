@@ -111,4 +111,4 @@ glabel func_E00A0000
 /* 3A2430 E00A01A0 0000102D */  daddu     $v0, $zero, $zero
 /* 3A2434 E00A01A4 03E00008 */  jr        $ra
 /* 3A2438 E00A01A8 27BD0030 */   addiu    $sp, $sp, 0x30
-/* 3A243C E00A01AC 00000000 */  nop
+/* 3A243C E00A01AC 00000000 */  nop       

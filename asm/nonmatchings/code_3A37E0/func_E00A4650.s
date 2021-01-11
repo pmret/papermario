@@ -169,7 +169,7 @@ glabel func_E00A4650
 /* 3A40C0 E00A48E0 000A1023 */  negu      $v0, $t2
 /* 3A40C4 E00A48E4 000210C0 */  sll       $v0, $v0, 3
 /* 3A40C8 E00A48E8 44820000 */  mtc1      $v0, $f0
-/* 3A40CC E00A48EC 00000000 */  nop
+/* 3A40CC E00A48EC 00000000 */  nop       
 /* 3A40D0 E00A48F0 46800020 */  cvt.s.w   $f0, $f0
 /* 3A40D4 E00A48F4 0100482D */  daddu     $t1, $t0, $zero
 /* 3A40D8 E00A48F8 44050000 */  mfc1      $a1, $f0

@@ -26,7 +26,7 @@ glabel appendGfx_item_entity
 /* C88F8 801321F8 00540018 */  mult      $v0, $s4
 /* C88FC 801321FC 00001012 */  mflo      $v0
 /* C8900 80132200 34638081 */  ori       $v1, $v1, 0x8081
-/* C8904 80132204 00000000 */  nop
+/* C8904 80132204 00000000 */  nop       
 /* C8908 80132208 00430018 */  mult      $v0, $v1
 /* C890C 8013220C 00001810 */  mfhi      $v1
 /* C8910 80132210 00621821 */  addu      $v1, $v1, $v0
@@ -70,11 +70,11 @@ glabel appendGfx_item_entity
 /* C899C 8013229C 10620003 */  beq       $v1, $v0, .L801322AC
 /* C89A0 801322A0 24020156 */   addiu    $v0, $zero, 0x156
 /* C89A4 801322A4 14620005 */  bne       $v1, $v0, .L801322BC
-/* C89A8 801322A8 00000000 */   nop
+/* C89A8 801322A8 00000000 */   nop      
 .L801322AC:
 /* C89AC 801322AC 3C013F80 */  lui       $at, 0x3f80
 /* C89B0 801322B0 44810000 */  mtc1      $at, $f0
-/* C89B4 801322B4 00000000 */  nop
+/* C89B4 801322B4 00000000 */  nop       
 /* C89B8 801322B8 E6600030 */  swc1      $f0, 0x30($s3)
 .L801322BC:
 /* C89BC 801322BC 3C03800A */  lui       $v1, %hi(D_8009A634)
@@ -97,7 +97,7 @@ glabel appendGfx_item_entity
 /* C8A00 80132300 0240202D */  daddu     $a0, $s2, $zero
 /* C8A04 80132304 C664000C */  lwc1      $f4, 0xc($s3)
 /* C8A08 80132308 44901000 */  mtc1      $s0, $f2
-/* C8A0C 8013230C 00000000 */  nop
+/* C8A0C 8013230C 00000000 */  nop       
 /* C8A10 80132310 468010A0 */  cvt.s.w   $f2, $f2
 /* C8A14 80132314 46022100 */  add.s     $f4, $f4, $f2
 /* C8A18 80132318 8E650008 */  lw        $a1, 8($s3)
@@ -222,7 +222,7 @@ glabel appendGfx_item_entity
 /* C8BE4 801324E4 3C030808 */  lui       $v1, 0x808
 /* C8BE8 801324E8 00431024 */  and       $v0, $v0, $v1
 /* C8BEC 801324EC 10400025 */  beqz      $v0, .L80132584
-/* C8BF0 801324F0 00000000 */   nop
+/* C8BF0 801324F0 00000000 */   nop      
 /* C8BF4 801324F4 3C028015 */  lui       $v0, %hi(D_80151328)
 /* C8BF8 801324F8 8C421328 */  lw        $v0, %lo(D_80151328)($v0)
 /* C8BFC 801324FC 94420000 */  lhu       $v0, ($v0)
@@ -397,7 +397,7 @@ glabel appendGfx_item_entity
 /* C8E98 80132798 0C052479 */  jal       func_801491E4
 /* C8E9C 8013279C AFB40014 */   sw       $s4, 0x14($sp)
 /* C8EA0 801327A0 0804CA27 */  j         .L8013289C
-/* C8EA4 801327A4 00000000 */   nop
+/* C8EA4 801327A4 00000000 */   nop      
 .L801327A8:
 /* C8EA8 801327A8 0000282D */  daddu     $a1, $zero, $zero
 /* C8EAC 801327AC 00A0302D */  daddu     $a2, $a1, $zero
@@ -408,7 +408,7 @@ glabel appendGfx_item_entity
 /* C8EC0 801327C0 0C052479 */  jal       func_801491E4
 /* C8EC4 801327C4 AFA20014 */   sw       $v0, 0x14($sp)
 /* C8EC8 801327C8 0804CA27 */  j         .L8013289C
-/* C8ECC 801327CC 00000000 */   nop
+/* C8ECC 801327CC 00000000 */   nop      
 .L801327D0:
 /* C8ED0 801327D0 3C03FD48 */  lui       $v1, 0xfd48
 /* C8ED4 801327D4 3463000B */  ori       $v1, $v1, 0xb
@@ -606,7 +606,7 @@ glabel appendGfx_item_entity
 /* C91CC 80132ACC 0C052479 */  jal       func_801491E4
 /* C91D0 80132AD0 AFB40014 */   sw       $s4, 0x14($sp)
 /* C91D4 80132AD4 0804CAF4 */  j         .L80132BD0
-/* C91D8 80132AD8 00000000 */   nop
+/* C91D8 80132AD8 00000000 */   nop      
 .L80132ADC:
 /* C91DC 80132ADC 0000282D */  daddu     $a1, $zero, $zero
 /* C91E0 80132AE0 00A0302D */  daddu     $a2, $a1, $zero
@@ -617,7 +617,7 @@ glabel appendGfx_item_entity
 /* C91F4 80132AF4 0C052479 */  jal       func_801491E4
 /* C91F8 80132AF8 AFA20014 */   sw       $v0, 0x14($sp)
 /* C91FC 80132AFC 0804CAF4 */  j         .L80132BD0
-/* C9200 80132B00 00000000 */   nop
+/* C9200 80132B00 00000000 */   nop      
 .L80132B04:
 /* C9204 80132B04 3C03FD48 */  lui       $v1, 0xfd48
 /* C9208 80132B08 3463000F */  ori       $v1, $v1, 0xf
@@ -702,7 +702,7 @@ glabel appendGfx_item_entity
 /* C933C 80132C3C 86630018 */  lh        $v1, 0x18($s3)
 /* C9340 80132C40 24020157 */  addiu     $v0, $zero, 0x157
 /* C9344 80132C44 14620003 */  bne       $v1, $v0, .L80132C54
-/* C9348 80132C48 00000000 */   nop
+/* C9348 80132C48 00000000 */   nop      
 /* C934C 80132C4C 0C04C2C3 */  jal       draw_coin_sparkles
 /* C9350 80132C50 0260202D */   daddu    $a0, $s3, $zero
 .L80132C54:

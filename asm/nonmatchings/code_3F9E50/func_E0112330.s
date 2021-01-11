@@ -23,7 +23,7 @@ glabel func_E0112330
 /* 3FA1C8 E0112378 00230821 */  addu      $at, $at, $v1
 /* 3FA1CC E011237C C4261DEC */  lwc1      $f6, %lo(D_800B1DEC)($at)
 /* 3FA1D0 E0112380 080448E3 */  j         .LE011238C
-/* 3FA1D4 E0112384 00000000 */   nop
+/* 3FA1D4 E0112384 00000000 */   nop      
 .LE0112388:
 /* 3FA1D8 E0112388 44803000 */  mtc1      $zero, $f6
 .LE011238C:

@@ -131,7 +131,7 @@ glabel draw_number
 /* BDF68 80127868 32220004 */  andi      $v0, $s1, 4
 .L8012786C:
 /* BDF6C 8012786C 10400038 */  beqz      $v0, .L80127950
-/* BDF70 80127870 00000000 */   nop
+/* BDF70 80127870 00000000 */   nop      
 /* BDF74 80127874 1A600036 */  blez      $s3, .L80127950
 /* BDF78 80127878 0000802D */   daddu    $s0, $zero, $zero
 /* BDF7C 8012787C 3C11800A */  lui       $s1, %hi(gMasterGfxPos)

@@ -546,6 +546,6 @@ glabel func_E00BA620
 /* 3B9A38 E00BAE68 8FB000B0 */  lw        $s0, 0xb0($sp)
 /* 3B9A3C E00BAE6C 03E00008 */  jr        $ra
 /* 3B9A40 E00BAE70 27BD00D8 */   addiu    $sp, $sp, 0xd8
-/* 3B9A44 E00BAE74 00000000 */  nop
-/* 3B9A48 E00BAE78 00000000 */  nop
-/* 3B9A4C E00BAE7C 00000000 */  nop
+/* 3B9A44 E00BAE74 00000000 */  nop       
+/* 3B9A48 E00BAE78 00000000 */  nop       
+/* 3B9A4C E00BAE7C 00000000 */  nop       

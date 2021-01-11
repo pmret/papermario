@@ -142,5 +142,5 @@ glabel func_E003E638
 /* 352C9C E003E85C 8FB00090 */  lw        $s0, 0x90($sp)
 /* 352CA0 E003E860 03E00008 */  jr        $ra
 /* 352CA4 E003E864 27BD00B0 */   addiu    $sp, $sp, 0xb0
-/* 352CA8 E003E868 00000000 */  nop
-/* 352CAC E003E86C 00000000 */  nop
+/* 352CA8 E003E868 00000000 */  nop       
+/* 352CAC E003E86C 00000000 */  nop       
