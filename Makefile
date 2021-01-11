@@ -119,6 +119,9 @@ GENERATED_HEADERS := include/ld_addrs.h $(foreach dir, $(NPC_DIRS), include/$(di
 ### Targets ###
 
 clean:
+	rm -rf $(BUILD_DIR) $(LD_SCRIPT)
+
+clean-all:
 	rm -rf $(BUILD_DIR) bin msg img sprite .splat_cache $(LD_SCRIPT)
 
 clean-code:
@@ -127,7 +130,8 @@ clean-code:
 tools:
 	make -C tools
 
-setup: clean submodules tools $(LD_SCRIPT)
+setup: clean-all submodules tools
+	@make split
 
 # tools/star-rod submodule intentionally omitted
 submodules:
@@ -145,6 +149,8 @@ split-all:
 
 test: $(ROM)
 	$(EMULATOR) $<
+
+%.bin: $(LD_SCRIPT)
 
 # Compressed files
 %.Yay0: %
@@ -266,7 +272,6 @@ include/sprite/npc/%.h: sprite/npc/%/SpriteSheet.xml tools/gen_sprite_animations
 
 $(LD_SCRIPT): $(SPLAT_YAML)
 	$(SPLAT) --modes ld bin Yay0 PaperMarioMapFS PaperMarioMessages img PaperMarioNpcSprites --new
-	make $(GENERATED_HEADERS)
 
 $(BUILD_DIR)/$(LD_SCRIPT): $(LD_SCRIPT)
 	@mkdir -p $(shell dirname $@)

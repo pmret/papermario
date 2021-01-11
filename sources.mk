@@ -1,4 +1,4 @@
-OBJECTS = $(subst BUILD_DIR, $(BUILD_DIR), $(shell grep -E 'BUILD_DIR.+\.o' papermario.ld -o))
+OBJECTS := $(foreach OBJECT, $(shell $(PYTHON) tools/n64splat/list_objects.py $(SPLAT_YAML)), $(BUILD_DIR)/$(OBJECT))
 
 DSL_C_FILES := $(shell grep -lrF "SCRIPT" src)
 
