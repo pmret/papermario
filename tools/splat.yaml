@@ -8442,6 +8442,68 @@ segments:
   - [0xEB1170, bin] # code
   - [0xEB1920, bin] # data ___
   - [0xEB5130, bin] # code
+  - [0xEB5470, bin] # code
+  - [0xEB54C0, bin] # data ___
+  - [0xEB7230, bin] # code
+  - [0xEB7540, bin] # code
+  - [0xEB7850, bin] # data ___
+  - [0xEB8E50, bin] # code
+  - [0xEB8E90, bin] # code
+  - [0xEB9D90, bin] # code
+  - [0xEBA260, bin] # data ___
+  - [0xEC2200, bin] # code
+  - [0xEC2240, bin] # code
+  - [0xEC2610, bin] # code
+  - [0xEC2850, bin] # data ___
+  - [0xEC71B0, bin] # code
+  - [0xEC7590, bin] # code
+  - [0xEC78F0, bin] # data ___
+  - [0xEC9D00, bin] # code
+  - [0xECAA40, bin] # code
+  - [0xECAA80, bin] # code
+  - [0xECB930, bin] # code
+  - [0xECBB70, bin] # code
+  - [0xECBC10, bin] # data ___
+  - [0xECFFF0, bin] # code
+  - [0xED0030, bin] # code
+  - [0xED00D0, bin] # code
+  - [0xED0310, bin] # code
+  - [0xED1840, bin] # data ___
+  - [0xED4220, bin] # code
+  - [0xED4260, bin] # code
+  - [0xED42A0, bin] # code
+  - [0xED46D0, bin] # code
+  - [0xED5540, bin] # code
+  - [0xED5780, bin] # data ___
+  - [0xED8E20, bin] # code
+  - [0xED9170, bin] # data ___
+  - [0xEDBFE0, bin] # code
+  - [0xEDC020, bin] # code
+  - [0xEDC6D0, bin] # data ___
+  - [0xEDE9C0, bin] # code
+  - [0xEDEA00, bin] # code
+  - [0xEE2040, bin] # code
+  - [0xEE20E0, bin] # data ___
+  - [0xEE65B0, bin] # code
+  - [0xEE70C0, bin] # code
+  - [0xEE8940, bin] # code
+  - [0xEE8970, bin] # data ___
+  - [0xEED100, bin] # code
+  - [0xEED140, bin] # code
+  - [0xEED1E0, bin] # code
+  - [0xEEDF50, bin] # code
+  - [0xEEFAA0, bin] # code
+  - [0xEEFAD0, bin] # data ___
+  - [0xEF2610, bin] # code
+  - [0xEF2650, bin] # code
+  - [0xEF2680, bin] # code
+  - [0xEF58E0, bin] # data ___
+  - [0xEF7A80, bin] # code
+  - [0xEF7FB0, bin] # code
+  - [0xEF8010, bin] # code
+  - [0xEF8250, bin] # data ___
+  - [0xEFEB00, bin] # code
+  - [0xEFF440, bin] # data ___
   - [0xF007C0, bin, Battle_Fanfare_02] # BGM start
   - [0xF02160, bin, Hey_You_03]
   - [0xF03740, bin, The_Goomba_King_s_Decree_07]
