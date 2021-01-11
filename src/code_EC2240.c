@@ -1,0 +1,7 @@
+#include "common.h"
+
+INCLUDE_ASM(s32, "code_EC2240", func_80240040_EC2240);
+
+INCLUDE_ASM(s32, "code_EC2240", func_802400F4_EC22F4);
+
+INCLUDE_ASM(s32, "code_EC2240", func_80240158_EC2358);

@@ -8446,82 +8446,182 @@ segments:
     - [0xE2F750, c]
     - [0xE31380, bin]
   - [0xE31530, bin] # unk data
-  - [0xEA0900, bin] # code
-  - [0xEA0C10, bin] # code
-  - [0xEA36E0, bin] # code
-  - [0xEA3A80, bin] # data ___
-  - [0xEA6FD0, bin] # code
-  - [0xEA7010, bin] # code
-  - [0xEA7320, bin] # code
-  - [0xEA7390, bin] # data ___
-  - [0xEA8AE0, bin] # code
-  - [0xEAA810, bin] # data ___
-  - [0xEB0E60, bin] # code
-  - [0xEB1170, bin] # code
-  - [0xEB1920, bin] # data ___
-  - [0xEB5130, bin] # code
-  - [0xEB5470, bin] # code
-  - [0xEB54C0, bin] # data ___
-  - [0xEB7230, bin] # code
-  - [0xEB7540, bin] # code
-  - [0xEB7850, bin] # data ___
-  - [0xEB8E50, bin] # code
-  - [0xEB8E90, bin] # code
-  - [0xEB9D90, bin] # code
-  - [0xEBA260, bin] # data ___
-  - [0xEC2200, bin] # code
-  - [0xEC2240, bin] # code
-  - [0xEC2610, bin] # code
-  - [0xEC2850, bin] # data ___
-  - [0xEC71B0, bin] # code
-  - [0xEC7590, bin] # code
-  - [0xEC78F0, bin] # data ___
-  - [0xEC9D00, bin] # code
-  - [0xECAA40, bin] # code
-  - [0xECAA80, bin] # code
-  - [0xECB930, bin] # code
-  - [0xECBB70, bin] # code
-  - [0xECBC10, bin] # data ___
-  - [0xECFFF0, bin] # code
-  - [0xED0030, bin] # code
-  - [0xED00D0, bin] # code
-  - [0xED0310, bin] # code
-  - [0xED1840, bin] # data ___
-  - [0xED4220, bin] # code
-  - [0xED4260, bin] # code
-  - [0xED42A0, bin] # code
-  - [0xED46D0, bin] # code
-  - [0xED5540, bin] # code
-  - [0xED5780, bin] # data ___
-  - [0xED8E20, bin] # code
-  - [0xED9170, bin] # data ___
-  - [0xEDBFE0, bin] # code
-  - [0xEDC020, bin] # code
-  - [0xEDC6D0, bin] # data ___
-  - [0xEDE9C0, bin] # code
-  - [0xEDEA00, bin] # code
-  - [0xEE2040, bin] # code
-  - [0xEE20E0, bin] # data ___
-  - [0xEE65B0, bin] # code
-  - [0xEE70C0, bin] # code
-  - [0xEE8940, bin] # code
-  - [0xEE8970, bin] # data ___
-  - [0xEED100, bin] # code
-  - [0xEED140, bin] # code
-  - [0xEED1E0, bin] # code
-  - [0xEEDF50, bin] # code
-  - [0xEEFAA0, bin] # code
-  - [0xEEFAD0, bin] # data ___
-  - [0xEF2610, bin] # code
-  - [0xEF2650, bin] # code
-  - [0xEF2680, bin] # code
-  - [0xEF58E0, bin] # data ___
-  - [0xEF7A80, bin] # code
-  - [0xEF7FB0, bin] # code
-  - [0xEF8010, bin] # code
-  - [0xEF8250, bin] # data ___
-  - [0xEFEB00, bin] # code
-  - [0xEFF440, bin] # data ___
+  - type: code
+    start: 0xEA0900
+    vram: 0x80240000
+    overlay: True
+    files:
+    - [0xEA0900, c]
+    - [0xEA0C10, c]
+    - [0xEA36E0, c]
+    - [0xEA3A80, bin]
+  - type: code
+    start: 0xEA6FD0
+    vram: 0x80240000
+    overlay: True
+    files:
+    - [0xEA6FD0, c]
+    - [0xEA7010, c]
+    - [0xEA7320, c]
+    - [0xEA7390, bin]
+  - type: code
+    start: 0xEA8AE0
+    vram: 0x80240000
+    overlay: True
+    files:
+    - [0xEA8AE0, c]
+    - [0xEAA810, bin]
+  - type: code
+    start: 0xEB0E60
+    vram: 0x80240000
+    overlay: True
+    files:
+    - [0xEB0E60, c]
+    - [0xEB1170, c]
+    - [0xEB1920, bin]
+  - type: code
+    start: 0xEB5130
+    vram: 0x80240000
+    overlay: True
+    files:
+    - [0xEB5130, c]
+    - [0xEB5470, c]
+    - [0xEB54C0, bin]
+  - type: code
+    start: 0xEB7230
+    vram: 0x80240000
+    overlay: True
+    files:
+    - [0xEB7230, c]
+    - [0xEB7540, c]
+    - [0xEB7850, bin]
+  - type: code
+    start: 0xEB8E50
+    vram: 0x80240000
+    overlay: True
+    files:
+    - [0xEB8E50, c]
+    - [0xEB8E90, c]
+    - [0xEB9D90, c]
+    - [0xEBA260, bin]
+  - type: code
+    start: 0xEC2200
+    vram: 0x80240000
+    overlay: True
+    files:
+    - [0xEC2200, c]
+    - [0xEC2240, c]
+    - [0xEC2610, c]
+    - [0xEC2850, bin]
+  - type: code
+    start: 0xEC71B0
+    vram: 0x80240000
+    overlay: True
+    files:
+    - [0xEC71B0, c]
+    - [0xEC7590, c]
+    - [0xEC78F0, bin]
+  - type: code
+    start: 0xEC9D00
+    vram: 0x80240000
+    overlay: True
+    files:
+    - [0xEC9D00, c]
+    - [0xECAA40, c]
+    - [0xECAA80, c]
+    - [0xECB930, c]
+    - [0xECBB70, c]
+    - [0xECBC10, bin]
+  - type: code
+    start: 0xECFFF0
+    vram: 0x80240000
+    overlay: True
+    files:
+    - [0xECFFF0, c]
+    - [0xED0030, c]
+    - [0xED00D0, c]
+    - [0xED0310, c]
+    - [0xED1840, bin]
+  - type: code
+    start: 0xED4220
+    vram: 0x80240000
+    overlay: True
+    files:
+    - [0xED4220, c]
+    - [0xED4260, c]
+    - [0xED42A0, c]
+    - [0xED46D0, c]
+    - [0xED5540, c]
+    - [0xED5780, bin]
+  - type: code
+    start: 0xED8E20
+    vram: 0x80240000
+    overlay: True
+    files:
+    - [0xED8E20, c]
+    - [0xED9170, bin]
+  - type: code
+    start: 0xEDBFE0
+    vram: 0x80240000
+    overlay: True
+    files:
+    - [0xEDBFE0, c]
+    - [0xEDC020, c]
+    - [0xEDC6D0, bin]
+  - type: code
+    start: 0xEDE9C0
+    vram: 0x80240000
+    overlay: True
+    files:
+    - [0xEDE9C0, c]
+    - [0xEDEA00, c]
+    - [0xEE2040, c]
+    - [0xEE20E0, bin]
+  - type: code
+    start: 0xEE65B0
+    vram: 0x80240000
+    overlay: True
+    files:
+    - [0xEE65B0, c]
+    - [0xEE70C0, c]
+    - [0xEE8940, c]
+    - [0xEE8970, bin]
+  - type: code
+    start: 0xEED100
+    vram: 0x80240000
+    overlay: True
+    files:
+    - [0xEED100, c]
+    - [0xEED140, c]
+    - [0xEED1E0, c]
+    - [0xEEDF50, c]
+    - [0xEEFAA0, c]
+    - [0xEEFAD0, bin]
+  - type: code
+    start: 0xEF2610
+    vram: 0x80240000
+    overlay: True
+    files:
+    - [0xEF2610, c]
+    - [0xEF2650, c]
+    - [0xEF2680, c]
+    - [0xEF58E0, bin]
+  - type: code
+    start: 0xEF7A80
+    vram: 0x80240000
+    overlay: True
+    files:
+    - [0xEF7A80, c]
+    - [0xEF7FB0, c]
+    - [0xEF8010, c]
+    - [0xEF8250, bin]
+  - type: code
+    start: 0xEFEB00
+    vram: 0x80240000
+    overlay: True
+    files:
+    - [0xEFEB00, c]
+    - [0xEFF440, bin]
   - [0xF007C0, bin, Battle_Fanfare_02] # BGM start
   - [0xF02160, bin, Hey_You_03]
   - [0xF03740, bin, The_Goomba_King_s_Decree_07]
