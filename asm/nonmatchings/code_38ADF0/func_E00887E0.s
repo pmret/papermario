@@ -10,8 +10,8 @@ glabel func_E00887E0
 /* 38B5E4 E00887F4 AFB200B0 */  sw        $s2, 0xb0($sp)
 /* 38B5E8 E00887F8 3C120001 */  lui       $s2, 1
 /* 38B5EC E00887FC AFB500BC */  sw        $s5, 0xbc($sp)
-/* 38B5F0 E0088800 3C15800A */  lui       $s5, %hi(D_8009A66C)
-/* 38B5F4 E0088804 26B5A66C */  addiu     $s5, $s5, %lo(D_8009A66C)
+/* 38B5F0 E0088800 3C15800A */  lui       $s5, %hi(gMasterGfxPos)
+/* 38B5F4 E0088804 26B5A66C */  addiu     $s5, $s5, %lo(gMasterGfxPos)
 /* 38B5F8 E0088808 AFBF00CC */  sw        $ra, 0xcc($sp)
 /* 38B5FC E008880C AFBE00C8 */  sw        $fp, 0xc8($sp)
 /* 38B600 E0088810 AFB700C4 */  sw        $s7, 0xc4($sp)
@@ -86,10 +86,10 @@ glabel func_E00887E0
 /* 38B714 E0088924 0C080114 */  jal       func_E0200450
 /* 38B718 E0088928 00A0302D */   daddu    $a2, $a1, $zero
 /* 38B71C E008892C 27A40018 */  addiu     $a0, $sp, 0x18
-/* 38B720 E0088930 3C108007 */  lui       $s0, %hi(D_800741F0)
-/* 38B724 E0088934 261041F0 */  addiu     $s0, $s0, %lo(D_800741F0)
-/* 38B728 E0088938 3C11800A */  lui       $s1, %hi(D_8009A674)
-/* 38B72C E008893C 2631A674 */  addiu     $s1, $s1, %lo(D_8009A674)
+/* 38B720 E0088930 3C108007 */  lui       $s0, %hi(gMatrixListPos)
+/* 38B724 E0088934 261041F0 */  addiu     $s0, $s0, %lo(gMatrixListPos)
+/* 38B728 E0088938 3C11800A */  lui       $s1, %hi(gDisplayContext)
+/* 38B72C E008893C 2631A674 */  addiu     $s1, $s1, %lo(gDisplayContext)
 /* 38B730 E0088940 96050000 */  lhu       $a1, ($s0)
 /* 38B734 E0088944 8E220000 */  lw        $v0, ($s1)
 /* 38B738 E0088948 00052980 */  sll       $a1, $a1, 6
@@ -155,10 +155,10 @@ glabel func_E00887E0
 /* 38B824 E0088A34 0C080108 */  jal       func_E0200420
 /* 38B828 E0088A38 27A40018 */   addiu    $a0, $sp, 0x18
 /* 38B82C E0088A3C 27A40018 */  addiu     $a0, $sp, 0x18
-/* 38B830 E0088A40 3C058007 */  lui       $a1, %hi(D_800741F0)
-/* 38B834 E0088A44 94A541F0 */  lhu       $a1, %lo(D_800741F0)($a1)
-/* 38B838 E0088A48 3C02800A */  lui       $v0, %hi(D_8009A674)
-/* 38B83C E0088A4C 8C42A674 */  lw        $v0, %lo(D_8009A674)($v0)
+/* 38B830 E0088A40 3C058007 */  lui       $a1, %hi(gMatrixListPos)
+/* 38B834 E0088A44 94A541F0 */  lhu       $a1, %lo(gMatrixListPos)($a1)
+/* 38B838 E0088A48 3C02800A */  lui       $v0, %hi(gDisplayContext)
+/* 38B83C E0088A4C 8C42A674 */  lw        $v0, %lo(gDisplayContext)($v0)
 /* 38B840 E0088A50 00052980 */  sll       $a1, $a1, 6
 /* 38B844 E0088A54 00B72821 */  addu      $a1, $a1, $s7
 /* 38B848 E0088A58 0C080118 */  jal       func_E0200460
@@ -249,8 +249,8 @@ glabel func_E00887E0
 /* 38B980 E0088B90 00431025 */  or        $v0, $v0, $v1
 /* 38B984 E0088B94 ACA20004 */  sw        $v0, 4($a1)
 /* 38B988 E0088B98 24820008 */  addiu     $v0, $a0, 8
-/* 38B98C E0088B9C 3C058007 */  lui       $a1, %hi(D_800741F0)
-/* 38B990 E0088BA0 24A541F0 */  addiu     $a1, $a1, %lo(D_800741F0)
+/* 38B98C E0088B9C 3C058007 */  lui       $a1, %hi(gMatrixListPos)
+/* 38B990 E0088BA0 24A541F0 */  addiu     $a1, $a1, %lo(gMatrixListPos)
 /* 38B994 E0088BA4 AE220000 */  sw        $v0, ($s1)
 /* 38B998 E0088BA8 94A20000 */  lhu       $v0, ($a1)
 /* 38B99C E0088BAC 3C03DA38 */  lui       $v1, 0xda38
@@ -259,8 +259,8 @@ glabel func_E00887E0
 /* 38B9A8 E0088BB8 3042FFFF */  andi      $v0, $v0, 0xffff
 /* 38B9AC E0088BBC 00021180 */  sll       $v0, $v0, 6
 /* 38B9B0 E0088BC0 A4A30000 */  sh        $v1, ($a1)
-/* 38B9B4 E0088BC4 3C03800A */  lui       $v1, %hi(D_8009A674)
-/* 38B9B8 E0088BC8 8C63A674 */  lw        $v1, %lo(D_8009A674)($v1)
+/* 38B9B4 E0088BC4 3C03800A */  lui       $v1, %hi(gDisplayContext)
+/* 38B9B8 E0088BC8 8C63A674 */  lw        $v1, %lo(gDisplayContext)($v1)
 /* 38B9BC E0088BCC 00571021 */  addu      $v0, $v0, $s7
 /* 38B9C0 E0088BD0 00621821 */  addu      $v1, $v1, $v0
 /* 38B9C4 E0088BD4 24820010 */  addiu     $v0, $a0, 0x10
@@ -283,8 +283,8 @@ glabel func_E00887E0
 /* 38BA04 E0088C14 26520034 */   addiu    $s2, $s2, 0x34
 .LE0088C18:
 /* 38BA08 E0088C18 3C06D838 */  lui       $a2, 0xd838
-/* 38BA0C E0088C1C 3C05800A */  lui       $a1, %hi(D_8009A66C)
-/* 38BA10 E0088C20 24A5A66C */  addiu     $a1, $a1, %lo(D_8009A66C)
+/* 38BA0C E0088C1C 3C05800A */  lui       $a1, %hi(gMasterGfxPos)
+/* 38BA10 E0088C20 24A5A66C */  addiu     $a1, $a1, %lo(gMasterGfxPos)
 /* 38BA14 E0088C24 34C60002 */  ori       $a2, $a2, 2
 /* 38BA18 E0088C28 8CA30000 */  lw        $v1, ($a1)
 /* 38BA1C E0088C2C 3C02DF00 */  lui       $v0, 0xdf00

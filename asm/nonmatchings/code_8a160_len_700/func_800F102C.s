@@ -15,12 +15,12 @@ glabel func_800F102C
 /* 8A504 800F1054 0000B82D */  daddu     $s7, $zero, $zero
 /* 8A508 800F1058 AFB600B8 */  sw        $s6, 0xb8($sp)
 /* 8A50C 800F105C 27B60060 */  addiu     $s6, $sp, 0x60
-/* 8A510 800F1060 3C02800A */  lui       $v0, %hi(D_8009A674)
-/* 8A514 800F1064 2442A674 */  addiu     $v0, $v0, %lo(D_8009A674)
+/* 8A510 800F1060 3C02800A */  lui       $v0, %hi(gDisplayContext)
+/* 8A514 800F1064 2442A674 */  addiu     $v0, $v0, %lo(gDisplayContext)
 /* 8A518 800F1068 AFBE00C0 */  sw        $fp, 0xc0($sp)
 /* 8A51C 800F106C 0040F02D */  daddu     $fp, $v0, $zero
-/* 8A520 800F1070 3C028007 */  lui       $v0, %hi(D_800741F0)
-/* 8A524 800F1074 244241F0 */  addiu     $v0, $v0, %lo(D_800741F0)
+/* 8A520 800F1070 3C028007 */  lui       $v0, %hi(gMatrixListPos)
+/* 8A524 800F1074 244241F0 */  addiu     $v0, $v0, %lo(gMatrixListPos)
 /* 8A528 800F1078 AFB300AC */  sw        $s3, 0xac($sp)
 /* 8A52C 800F107C 0040982D */  daddu     $s3, $v0, $zero
 /* 8A530 800F1080 AFB500B4 */  sw        $s5, 0xb4($sp)
@@ -29,8 +29,8 @@ glabel func_800F102C
 /* 8A53C 800F108C AFB400B0 */  sw        $s4, 0xb0($sp)
 /* 8A540 800F1090 02E0A02D */  daddu     $s4, $s7, $zero
 /* 8A544 800F1094 AFB000A0 */  sw        $s0, 0xa0($sp)
-/* 8A548 800F1098 3C10800A */  lui       $s0, %hi(D_8009A66C)
-/* 8A54C 800F109C 2610A66C */  addiu     $s0, $s0, %lo(D_8009A66C)
+/* 8A548 800F1098 3C10800A */  lui       $s0, %hi(gMasterGfxPos)
+/* 8A54C 800F109C 2610A66C */  addiu     $s0, $s0, %lo(gMasterGfxPos)
 /* 8A550 800F10A0 3C02E700 */  lui       $v0, 0xe700
 /* 8A554 800F10A4 AFBF00C4 */  sw        $ra, 0xc4($sp)
 /* 8A558 800F10A8 AFB200A8 */  sw        $s2, 0xa8($sp)
@@ -120,8 +120,8 @@ glabel func_800F102C
 /* 8A6A4 800F11F4 26F70001 */   addiu    $s7, $s7, 1
 /* 8A6A8 800F11F8 C4740018 */  lwc1      $f20, 0x18($v1)
 /* 8A6AC 800F11FC 24120001 */  addiu     $s2, $zero, 1
-/* 8A6B0 800F1200 3C11800A */  lui       $s1, %hi(D_8009A66C)
-/* 8A6B4 800F1204 2631A66C */  addiu     $s1, $s1, %lo(D_8009A66C)
+/* 8A6B0 800F1200 3C11800A */  lui       $s1, %hi(gMasterGfxPos)
+/* 8A6B4 800F1204 2631A66C */  addiu     $s1, $s1, %lo(gMasterGfxPos)
 /* 8A6B8 800F1208 24700022 */  addiu     $s0, $v1, 0x22
 .L800F120C:
 /* 8A6BC 800F120C 82020001 */  lb        $v0, 1($s0)
@@ -134,12 +134,12 @@ glabel func_800F102C
 /* 8A6D8 800F1228 4406B000 */  mfc1      $a2, $f22
 /* 8A6DC 800F122C 94430134 */  lhu       $v1, 0x134($v0)
 /* 8A6E0 800F1230 46140002 */  mul.s     $f0, $f0, $f20
-/* 8A6E4 800F1234 00000000 */  nop       
+/* 8A6E4 800F1234 00000000 */  nop
 /* 8A6E8 800F1238 00031080 */  sll       $v0, $v1, 2
 /* 8A6EC 800F123C 00431021 */  addu      $v0, $v0, $v1
 /* 8A6F0 800F1240 00021040 */  sll       $v0, $v0, 1
 /* 8A6F4 800F1244 44823000 */  mtc1      $v0, $f6
-/* 8A6F8 800F1248 00000000 */  nop       
+/* 8A6F8 800F1248 00000000 */  nop
 /* 8A6FC 800F124C 468031A0 */  cvt.s.w   $f6, $f6
 /* 8A700 800F1250 44073000 */  mfc1      $a3, $f6
 /* 8A704 800F1254 E7A00010 */  swc1      $f0, 0x10($sp)
@@ -228,6 +228,6 @@ glabel func_800F102C
 /* 8A848 800F1398 D7B400C8 */  ldc1      $f20, 0xc8($sp)
 /* 8A84C 800F139C 03E00008 */  jr        $ra
 /* 8A850 800F13A0 27BD00D8 */   addiu    $sp, $sp, 0xd8
-/* 8A854 800F13A4 00000000 */  nop       
-/* 8A858 800F13A8 00000000 */  nop       
-/* 8A85C 800F13AC 00000000 */  nop       
+/* 8A854 800F13A4 00000000 */  nop
+/* 8A858 800F13A8 00000000 */  nop
+/* 8A85C 800F13AC 00000000 */  nop

@@ -27,8 +27,8 @@ glabel func_8011D72C
 /* B3E80 8011D780 24420010 */  addiu     $v0, $v0, 0x10
 /* B3E84 8011D784 1444FFF6 */  bne       $v0, $a0, .L8011D760
 /* B3E88 8011D788 24630010 */   addiu    $v1, $v1, 0x10
-/* B3E8C 8011D78C 3C10800A */  lui       $s0, %hi(D_8009A66C)
-/* B3E90 8011D790 2610A66C */  addiu     $s0, $s0, %lo(D_8009A66C)
+/* B3E8C 8011D78C 3C10800A */  lui       $s0, %hi(gMasterGfxPos)
+/* B3E90 8011D790 2610A66C */  addiu     $s0, $s0, %lo(gMasterGfxPos)
 /* B3E94 8011D794 8E420000 */  lw        $v0, ($s2)
 /* B3E98 8011D798 8E110000 */  lw        $s1, ($s0)
 /* B3E9C 8011D79C 50510001 */  beql      $v0, $s1, .L8011D7A4

@@ -5,8 +5,8 @@ glabel func_80240C34_A114B4
 /* A114B4 80240C34 3C06FC12 */  lui       $a2, 0xfc12
 /* A114B8 80240C38 34C61624 */  ori       $a2, $a2, 0x1624
 /* A114BC 80240C3C 3C05FF2F */  lui       $a1, 0xff2f
-/* A114C0 80240C40 3C04800A */  lui       $a0, %hi(D_8009A66C)
-/* A114C4 80240C44 2484A66C */  addiu     $a0, $a0, %lo(D_8009A66C)
+/* A114C0 80240C40 3C04800A */  lui       $a0, %hi(gMasterGfxPos)
+/* A114C4 80240C44 2484A66C */  addiu     $a0, $a0, %lo(gMasterGfxPos)
 /* A114C8 80240C48 8C820000 */  lw        $v0, ($a0)
 /* A114CC 80240C4C 34A5FFFF */  ori       $a1, $a1, 0xffff
 /* A114D0 80240C50 0040182D */  daddu     $v1, $v0, $zero

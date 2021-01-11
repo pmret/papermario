@@ -74,8 +74,8 @@ glabel func_80240070_B9D9D0
 /* B9DAC4 80240164 3C08E200 */  lui       $t0, 0xe200
 /* B9DAC8 80240168 3508001C */  ori       $t0, $t0, 0x1c
 /* B9DACC 8024016C 3C07C810 */  lui       $a3, 0xc810
-/* B9DAD0 80240170 3C05800A */  lui       $a1, %hi(D_8009A66C)
-/* B9DAD4 80240174 24A5A66C */  addiu     $a1, $a1, %lo(D_8009A66C)
+/* B9DAD0 80240170 3C05800A */  lui       $a1, %hi(gMasterGfxPos)
+/* B9DAD4 80240174 24A5A66C */  addiu     $a1, $a1, %lo(gMasterGfxPos)
 /* B9DAD8 80240178 8CA30000 */  lw        $v1, ($a1)
 /* B9DADC 8024017C 34E74DD8 */  ori       $a3, $a3, 0x4dd8
 /* B9DAE0 80240180 0060202D */  daddu     $a0, $v1, $zero

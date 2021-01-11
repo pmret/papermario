@@ -6,8 +6,8 @@ glabel func_E0038748
 /* 34E46C E003874C AFB700B4 */  sw        $s7, 0xb4($sp)
 /* 34E470 E0038750 0080B82D */  daddu     $s7, $a0, $zero
 /* 34E474 E0038754 3C02DB06 */  lui       $v0, 0xdb06
-/* 34E478 E0038758 3C06800A */  lui       $a2, %hi(D_8009A66C)
-/* 34E47C E003875C 24C6A66C */  addiu     $a2, $a2, %lo(D_8009A66C)
+/* 34E478 E0038758 3C06800A */  lui       $a2, %hi(gMasterGfxPos)
+/* 34E47C E003875C 24C6A66C */  addiu     $a2, $a2, %lo(gMasterGfxPos)
 /* 34E480 E0038760 34420024 */  ori       $v0, $v0, 0x24
 /* 34E484 E0038764 AFBF00BC */  sw        $ra, 0xbc($sp)
 /* 34E488 E0038768 AFBE00B8 */  sw        $fp, 0xb8($sp)
@@ -52,10 +52,10 @@ glabel func_E0038748
 /* 34E524 E0038804 27B10058 */  addiu     $s1, $sp, 0x58
 /* 34E528 E0038808 3C1E800B */  lui       $fp, %hi(gCameras)
 /* 34E52C E003880C 27DE1D80 */  addiu     $fp, $fp, %lo(gCameras)
-/* 34E530 E0038810 3C16800A */  lui       $s6, %hi(D_8009A674)
-/* 34E534 E0038814 26D6A674 */  addiu     $s6, $s6, %lo(D_8009A674)
-/* 34E538 E0038818 3C158007 */  lui       $s5, %hi(D_800741F0)
-/* 34E53C E003881C 26B541F0 */  addiu     $s5, $s5, %lo(D_800741F0)
+/* 34E530 E0038810 3C16800A */  lui       $s6, %hi(gDisplayContext)
+/* 34E534 E0038814 26D6A674 */  addiu     $s6, $s6, %lo(gDisplayContext)
+/* 34E538 E0038818 3C158007 */  lui       $s5, %hi(gMatrixListPos)
+/* 34E53C E003881C 26B541F0 */  addiu     $s5, $s5, %lo(gMatrixListPos)
 /* 34E540 E0038820 3C140001 */  lui       $s4, 1
 /* 34E544 E0038824 36941630 */  ori       $s4, $s4, 0x1630
 /* 34E548 E0038828 00C0982D */  daddu     $s3, $a2, $zero
@@ -171,6 +171,6 @@ glabel func_E0038748
 /* 34E6F8 E00389D8 D7B400C0 */  ldc1      $f20, 0xc0($sp)
 /* 34E6FC E00389DC 03E00008 */  jr        $ra
 /* 34E700 E00389E0 27BD00D0 */   addiu    $sp, $sp, 0xd0
-/* 34E704 E00389E4 00000000 */  nop       
-/* 34E708 E00389E8 00000000 */  nop       
-/* 34E70C E00389EC 00000000 */  nop       
+/* 34E704 E00389E4 00000000 */  nop
+/* 34E708 E00389E8 00000000 */  nop
+/* 34E70C E00389EC 00000000 */  nop

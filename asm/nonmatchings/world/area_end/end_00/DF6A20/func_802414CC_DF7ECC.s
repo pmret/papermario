@@ -63,10 +63,10 @@ glabel func_802414CC_DF7ECC
 /* DF7FB4 802415B4 4481C800 */  mtc1      $at, $f25
 /* DF7FB8 802415B8 4480C000 */  mtc1      $zero, $f24
 /* DF7FBC 802415BC 44820000 */  mtc1      $v0, $f0
-/* DF7FC0 802415C0 00000000 */  nop       
+/* DF7FC0 802415C0 00000000 */  nop
 /* DF7FC4 802415C4 46800021 */  cvt.d.w   $f0, $f0
 /* DF7FC8 802415C8 46380002 */  mul.d     $f0, $f0, $f24
-/* DF7FCC 802415CC 00000000 */  nop       
+/* DF7FCC 802415CC 00000000 */  nop
 /* DF7FD0 802415D0 3C140001 */  lui       $s4, 1
 /* DF7FD4 802415D4 36941630 */  ori       $s4, $s4, 0x1630
 /* DF7FD8 802415D8 4600A521 */  cvt.d.s   $f20, $f20
@@ -90,10 +90,10 @@ glabel func_802414CC_DF7ECC
 /* DF8020 80241620 0C019D80 */  jal       guMtxCatF
 /* DF8024 80241624 0220302D */   daddu    $a2, $s1, $zero
 /* DF8028 80241628 0220202D */  daddu     $a0, $s1, $zero
-/* DF802C 8024162C 3C128007 */  lui       $s2, %hi(D_800741F0)
-/* DF8030 80241630 265241F0 */  addiu     $s2, $s2, %lo(D_800741F0)
-/* DF8034 80241634 3C13800A */  lui       $s3, %hi(D_8009A674)
-/* DF8038 80241638 2673A674 */  addiu     $s3, $s3, %lo(D_8009A674)
+/* DF802C 8024162C 3C128007 */  lui       $s2, %hi(gMatrixListPos)
+/* DF8030 80241630 265241F0 */  addiu     $s2, $s2, %lo(gMatrixListPos)
+/* DF8034 80241634 3C13800A */  lui       $s3, %hi(gDisplayContext)
+/* DF8038 80241638 2673A674 */  addiu     $s3, $s3, %lo(gDisplayContext)
 /* DF803C 8024163C 96450000 */  lhu       $a1, ($s2)
 /* DF8040 80241640 8E620000 */  lw        $v0, ($s3)
 /* DF8044 80241644 00052980 */  sll       $a1, $a1, 6
@@ -105,8 +105,8 @@ glabel func_802414CC_DF7ECC
 /* DF805C 8024165C 0000202D */  daddu     $a0, $zero, $zero
 /* DF8060 80241660 27A50020 */  addiu     $a1, $sp, 0x20
 /* DF8064 80241664 24060040 */  addiu     $a2, $zero, 0x40
-/* DF8068 80241668 3C10800A */  lui       $s0, %hi(D_8009A66C)
-/* DF806C 8024166C 2610A66C */  addiu     $s0, $s0, %lo(D_8009A66C)
+/* DF8068 80241668 3C10800A */  lui       $s0, %hi(gMasterGfxPos)
+/* DF806C 8024166C 2610A66C */  addiu     $s0, $s0, %lo(gMasterGfxPos)
 /* DF8070 80241670 0220382D */  daddu     $a3, $s1, $zero
 /* DF8074 80241674 8E020000 */  lw        $v0, ($s0)
 /* DF8078 80241678 96480000 */  lhu       $t0, ($s2)
@@ -128,11 +128,11 @@ glabel func_802414CC_DF7ECC
 /* DF80B8 802416B8 93A90040 */  lbu       $t1, 0x40($sp)
 /* DF80BC 802416BC 93AA0041 */  lbu       $t2, 0x41($sp)
 /* DF80C0 802416C0 44820000 */  mtc1      $v0, $f0
-/* DF80C4 802416C4 00000000 */  nop       
+/* DF80C4 802416C4 00000000 */  nop
 /* DF80C8 802416C8 46800021 */  cvt.d.w   $f0, $f0
 /* DF80CC 802416CC 8FA20038 */  lw        $v0, 0x38($sp)
 /* DF80D0 802416D0 46380002 */  mul.d     $f0, $f0, $f24
-/* DF80D4 802416D4 00000000 */  nop       
+/* DF80D4 802416D4 00000000 */  nop
 /* DF80D8 802416D8 A6480000 */  sh        $t0, ($s2)
 /* DF80DC 802416DC A7A0002E */  sh        $zero, 0x2e($sp)
 /* DF80E0 802416E0 A3B50030 */  sb        $s5, 0x30($sp)

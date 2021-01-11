@@ -104,8 +104,8 @@ glabel func_802184C0_47F570
 /* 47F6F0 80218640 1440FFB9 */  bnez      $v0, .L80218528
 /* 47F6F4 80218644 02140018 */   mult     $s0, $s4
 .L80218648:
-/* 47F6F8 80218648 3C03800A */  lui       $v1, %hi(D_8009A66C)
-/* 47F6FC 8021864C 2463A66C */  addiu     $v1, $v1, %lo(D_8009A66C)
+/* 47F6F8 80218648 3C03800A */  lui       $v1, %hi(gMasterGfxPos)
+/* 47F6FC 8021864C 2463A66C */  addiu     $v1, $v1, %lo(gMasterGfxPos)
 /* 47F700 80218650 8C620000 */  lw        $v0, ($v1)
 /* 47F704 80218654 0260202D */  daddu     $a0, $s3, $zero
 /* 47F708 80218658 0040802D */  daddu     $s0, $v0, $zero

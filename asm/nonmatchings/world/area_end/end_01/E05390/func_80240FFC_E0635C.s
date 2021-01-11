@@ -35,10 +35,10 @@ glabel func_80240FFC_E0635C
 /* E063D4 80241074 0C019E40 */  jal       guTranslateF
 /* E063D8 80241078 36B51630 */   ori      $s5, $s5, 0x1630
 /* E063DC 8024107C 0280202D */  daddu     $a0, $s4, $zero
-/* E063E0 80241080 3C118007 */  lui       $s1, %hi(D_800741F0)
-/* E063E4 80241084 263141F0 */  addiu     $s1, $s1, %lo(D_800741F0)
-/* E063E8 80241088 3C12800A */  lui       $s2, %hi(D_8009A674)
-/* E063EC 8024108C 2652A674 */  addiu     $s2, $s2, %lo(D_8009A674)
+/* E063E0 80241080 3C118007 */  lui       $s1, %hi(gMatrixListPos)
+/* E063E4 80241084 263141F0 */  addiu     $s1, $s1, %lo(gMatrixListPos)
+/* E063E8 80241088 3C12800A */  lui       $s2, %hi(gDisplayContext)
+/* E063EC 8024108C 2652A674 */  addiu     $s2, $s2, %lo(gDisplayContext)
 /* E063F0 80241090 96250000 */  lhu       $a1, ($s1)
 /* E063F4 80241094 8E420000 */  lw        $v0, ($s2)
 /* E063F8 80241098 00052980 */  sll       $a1, $a1, 6
@@ -47,8 +47,8 @@ glabel func_80240FFC_E0635C
 /* E06404 802410A4 00452821 */   addu     $a1, $v0, $a1
 /* E06408 802410A8 3C02DA38 */  lui       $v0, 0xda38
 /* E0640C 802410AC 34420002 */  ori       $v0, $v0, 2
-/* E06410 802410B0 3C13800A */  lui       $s3, %hi(D_8009A66C)
-/* E06414 802410B4 2673A66C */  addiu     $s3, $s3, %lo(D_8009A66C)
+/* E06410 802410B0 3C13800A */  lui       $s3, %hi(gMasterGfxPos)
+/* E06414 802410B4 2673A66C */  addiu     $s3, $s3, %lo(gMasterGfxPos)
 /* E06418 802410B8 8E680000 */  lw        $t0, ($s3)
 /* E0641C 802410BC 96290000 */  lhu       $t1, ($s1)
 /* E06420 802410C0 0100202D */  daddu     $a0, $t0, $zero
@@ -86,10 +86,10 @@ glabel func_80240FFC_E0635C
 /* E064A0 80241140 93A90040 */  lbu       $t1, 0x40($sp)
 /* E064A4 80241144 93AA0041 */  lbu       $t2, 0x41($sp)
 /* E064A8 80241148 44821000 */  mtc1      $v0, $f2
-/* E064AC 8024114C 00000000 */  nop       
+/* E064AC 8024114C 00000000 */  nop
 /* E064B0 80241150 468010A1 */  cvt.d.w   $f2, $f2
 /* E064B4 80241154 46201082 */  mul.d     $f2, $f2, $f0
-/* E064B8 80241158 00000000 */  nop       
+/* E064B8 80241158 00000000 */  nop
 /* E064BC 8024115C A7A0002E */  sh        $zero, 0x2e($sp)
 /* E064C0 80241160 240200FF */  addiu     $v0, $zero, 0xff
 /* E064C4 80241164 A3A20030 */  sb        $v0, 0x30($sp)

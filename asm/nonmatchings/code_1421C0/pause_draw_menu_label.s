@@ -28,8 +28,8 @@ glabel pause_draw_menu_label
 /* 142220 8024EEE0 50E20001 */  beql      $a3, $v0, .L8024EEE8
 /* 142224 8024EEE4 240600A0 */   addiu    $a2, $zero, 0xa0
 .L8024EEE8:
-/* 142228 8024EEE8 3C05800A */  lui       $a1, %hi(D_8009A66C)
-/* 14222C 8024EEEC 24A5A66C */  addiu     $a1, $a1, %lo(D_8009A66C)
+/* 142228 8024EEE8 3C05800A */  lui       $a1, %hi(gMasterGfxPos)
+/* 14222C 8024EEEC 24A5A66C */  addiu     $a1, $a1, %lo(gMasterGfxPos)
 /* 142230 8024EEF0 3C02DE00 */  lui       $v0, 0xde00
 /* 142234 8024EEF4 01063021 */  addu      $a2, $t0, $a2
 /* 142238 8024EEF8 8CA30000 */  lw        $v1, ($a1)
@@ -57,4 +57,4 @@ glabel pause_draw_menu_label
 /* 142290 8024EF50 8FBF0028 */  lw        $ra, 0x28($sp)
 /* 142294 8024EF54 03E00008 */  jr        $ra
 /* 142298 8024EF58 27BD0030 */   addiu    $sp, $sp, 0x30
-/* 14229C 8024EF5C 00000000 */  nop       
+/* 14229C 8024EF5C 00000000 */  nop

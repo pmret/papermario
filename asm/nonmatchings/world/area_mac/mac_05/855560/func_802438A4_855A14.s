@@ -18,8 +18,8 @@ glabel func_802438A4_855A14
 /* 855A48 802438D8 8FA60018 */  lw        $a2, 0x18($sp)
 /* 855A4C 802438DC 0C090D62 */  jal       func_80243588_8556F8
 /* 855A50 802438E0 0220382D */   daddu    $a3, $s1, $zero
-/* 855A54 802438E4 3C03800A */  lui       $v1, %hi(D_8009A66C)
-/* 855A58 802438E8 2463A66C */  addiu     $v1, $v1, %lo(D_8009A66C)
+/* 855A54 802438E4 3C03800A */  lui       $v1, %hi(gMasterGfxPos)
+/* 855A58 802438E8 2463A66C */  addiu     $v1, $v1, %lo(gMasterGfxPos)
 /* 855A5C 802438EC 8C620000 */  lw        $v0, ($v1)
 /* 855A60 802438F0 24040002 */  addiu     $a0, $zero, 2
 /* 855A64 802438F4 0040802D */  daddu     $s0, $v0, $zero

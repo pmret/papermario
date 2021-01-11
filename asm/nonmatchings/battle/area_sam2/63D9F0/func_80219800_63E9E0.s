@@ -104,8 +104,8 @@ glabel func_80219800_63E9E0
 /* 63EB60 80219980 1440FFB8 */  bnez      $v0, .L80219864
 /* 63EB64 80219984 02130018 */   mult     $s0, $s3
 .L80219988:
-/* 63EB68 80219988 3C03800A */  lui       $v1, %hi(D_8009A66C)
-/* 63EB6C 8021998C 2463A66C */  addiu     $v1, $v1, %lo(D_8009A66C)
+/* 63EB68 80219988 3C03800A */  lui       $v1, %hi(gMasterGfxPos)
+/* 63EB6C 8021998C 2463A66C */  addiu     $v1, $v1, %lo(gMasterGfxPos)
 /* 63EB70 80219990 8C620000 */  lw        $v0, ($v1)
 /* 63EB74 80219994 02C0202D */  daddu     $a0, $s6, $zero
 /* 63EB78 80219998 0040802D */  daddu     $s0, $v0, $zero

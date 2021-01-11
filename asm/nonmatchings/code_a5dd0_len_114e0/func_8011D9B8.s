@@ -147,7 +147,7 @@ glabel func_8011D9B8
 /* B42B8 8011DBB8 8E020004 */  lw        $v0, 4($s0)
 /* B42BC 8011DBBC 0162102A */  slt       $v0, $t3, $v0
 /* B42C0 8011DBC0 1440001E */  bnez      $v0, .L8011DC3C
-/* B42C4 8011DBC4 00000000 */   nop      
+/* B42C4 8011DBC4 00000000 */   nop
 /* B42C8 8011DBC8 26650001 */  addiu     $a1, $s3, 1
 /* B42CC 8011DBCC 00B5102A */  slt       $v0, $a1, $s5
 /* B42D0 8011DBD0 10400016 */  beqz      $v0, .L8011DC2C
@@ -206,10 +206,10 @@ glabel func_8011D9B8
 /* B4390 8011DC90 0C019DF0 */  jal       guScaleF
 /* B4394 8011DC94 00A0382D */   daddu    $a3, $a1, $zero
 /* B4398 8011DC98 0200202D */  daddu     $a0, $s0, $zero
-/* B439C 8011DC9C 3C108007 */  lui       $s0, %hi(D_800741F0)
-/* B43A0 8011DCA0 261041F0 */  addiu     $s0, $s0, %lo(D_800741F0)
-/* B43A4 8011DCA4 3C11800A */  lui       $s1, %hi(D_8009A674)
-/* B43A8 8011DCA8 2631A674 */  addiu     $s1, $s1, %lo(D_8009A674)
+/* B439C 8011DC9C 3C108007 */  lui       $s0, %hi(gMatrixListPos)
+/* B43A0 8011DCA0 261041F0 */  addiu     $s0, $s0, %lo(gMatrixListPos)
+/* B43A4 8011DCA4 3C11800A */  lui       $s1, %hi(gDisplayContext)
+/* B43A8 8011DCA8 2631A674 */  addiu     $s1, $s1, %lo(gDisplayContext)
 /* B43AC 8011DCAC 96050000 */  lhu       $a1, ($s0)
 /* B43B0 8011DCB0 8E220000 */  lw        $v0, ($s1)
 /* B43B4 8011DCB4 00052980 */  sll       $a1, $a1, 6
@@ -226,8 +226,8 @@ glabel func_8011D9B8
 /* B43E0 8011DCE0 00521021 */  addu      $v0, $v0, $s2
 /* B43E4 8011DCE4 1AA00050 */  blez      $s5, .L8011DE28
 /* B43E8 8011DCE8 0062B821 */   addu     $s7, $v1, $v0
-/* B43EC 8011DCEC 3C11800A */  lui       $s1, %hi(D_8009A66C)
-/* B43F0 8011DCF0 2631A66C */  addiu     $s1, $s1, %lo(D_8009A66C)
+/* B43EC 8011DCEC 3C11800A */  lui       $s1, %hi(gMasterGfxPos)
+/* B43F0 8011DCF0 2631A66C */  addiu     $s1, $s1, %lo(gMasterGfxPos)
 /* B43F4 8011DCF4 3C12DE00 */  lui       $s2, 0xde00
 /* B43F8 8011DCF8 00131080 */  sll       $v0, $s3, 2
 .L8011DCFC:
@@ -239,7 +239,7 @@ glabel func_8011D9B8
 /* B4410 8011DD10 8E03000C */  lw        $v1, 0xc($s0)
 /* B4414 8011DD14 30420002 */  andi      $v0, $v0, 2
 /* B4418 8011DD18 10400004 */  beqz      $v0, .L8011DD2C
-/* B441C 8011DD1C 00000000 */   nop      
+/* B441C 8011DD1C 00000000 */   nop
 /* B4420 8011DD20 8E360000 */  lw        $s6, ($s1)
 /* B4424 8011DD24 26C20008 */  addiu     $v0, $s6, 8
 /* B4428 8011DD28 AE220000 */  sw        $v0, ($s1)
@@ -280,8 +280,8 @@ glabel func_8011D9B8
 /* B44B0 8011DDB0 24620020 */  addiu     $v0, $v1, 0x20
 /* B44B4 8011DDB4 AC720010 */  sw        $s2, 0x10($v1)
 /* B44B8 8011DDB8 AE220000 */  sw        $v0, ($s1)
-/* B44BC 8011DDBC 3C02800A */  lui       $v0, %hi(D_8009A674)
-/* B44C0 8011DDC0 8C42A674 */  lw        $v0, %lo(D_8009A674)($v0)
+/* B44BC 8011DDBC 3C02800A */  lui       $v0, %hi(gDisplayContext)
+/* B44C0 8011DDC0 8C42A674 */  lw        $v0, %lo(gDisplayContext)($v0)
 /* B44C4 8011DDC4 34C60007 */  ori       $a2, $a2, 7
 /* B44C8 8011DDC8 AC660018 */  sw        $a2, 0x18($v1)
 /* B44CC 8011DDCC 00042180 */  sll       $a0, $a0, 6
@@ -293,7 +293,7 @@ glabel func_8011D9B8
 /* B44E0 8011DDE0 1440FFC6 */  bnez      $v0, .L8011DCFC
 /* B44E4 8011DDE4 00131080 */   sll      $v0, $s3, 2
 /* B44E8 8011DDE8 0804778A */  j         .L8011DE28
-/* B44EC 8011DDEC 00000000 */   nop      
+/* B44EC 8011DDEC 00000000 */   nop
 .L8011DDF0:
 /* B44F0 8011DDF0 1AA0000D */  blez      $s5, .L8011DE28
 /* B44F4 8011DDF4 0000982D */   daddu    $s3, $zero, $zero
@@ -309,7 +309,7 @@ glabel func_8011D9B8
 /* B4518 8011DE18 26730001 */   addiu    $s3, $s3, 1
 /* B451C 8011DE1C 0275102A */  slt       $v0, $s3, $s5
 /* B4520 8011DE20 1440FFF6 */  bnez      $v0, .L8011DDFC
-/* B4524 8011DE24 00000000 */   nop      
+/* B4524 8011DE24 00000000 */   nop
 .L8011DE28:
 /* B4528 8011DE28 3C038015 */  lui       $v1, %hi(D_801533AC)
 /* B452C 8011DE2C 246333AC */  addiu     $v1, $v1, %lo(D_801533AC)
@@ -334,4 +334,4 @@ glabel func_8011D9B8
 /* B4570 8011DE70 8FB00450 */  lw        $s0, 0x450($sp)
 /* B4574 8011DE74 03E00008 */  jr        $ra
 /* B4578 8011DE78 27BD0478 */   addiu    $sp, $sp, 0x478
-/* B457C 8011DE7C 00000000 */  nop       
+/* B457C 8011DE7C 00000000 */  nop

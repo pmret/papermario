@@ -6,13 +6,13 @@ glabel render_messages
 /* BA908 80124208 AFB10024 */  sw        $s1, 0x24($sp)
 /* BA90C 8012420C 0000882D */  daddu     $s1, $zero, $zero
 /* BA910 80124210 AFB00020 */  sw        $s0, 0x20($sp)
-/* BA914 80124214 3C10800A */  lui       $s0, %hi(D_8009A66C)
-/* BA918 80124218 2610A66C */  addiu     $s0, $s0, %lo(D_8009A66C)
+/* BA914 80124214 3C10800A */  lui       $s0, %hi(gMasterGfxPos)
+/* BA918 80124218 2610A66C */  addiu     $s0, $s0, %lo(gMasterGfxPos)
 /* BA91C 8012421C 3C058015 */  lui       $a1, %hi(D_80154C30)
 /* BA920 80124220 24A54C30 */  addiu     $a1, $a1, %lo(D_80154C30)
 /* BA924 80124224 44803000 */  mtc1      $zero, $f6
-/* BA928 80124228 3C028007 */  lui       $v0, %hi(D_800741F4)
-/* BA92C 8012422C 8C4241F4 */  lw        $v0, %lo(D_800741F4)($v0)
+/* BA928 80124228 3C028007 */  lui       $v0, %hi(gCurrentDisplayContextIndex)
+/* BA92C 8012422C 8C4241F4 */  lw        $v0, %lo(gCurrentDisplayContextIndex)($v0)
 /* BA930 80124230 3C038015 */  lui       $v1, %hi(D_80155CA0)
 /* BA934 80124234 24635CA0 */  addiu     $v1, $v1, %lo(D_80155CA0)
 /* BA938 80124238 AFBF002C */  sw        $ra, 0x2c($sp)
@@ -143,7 +143,7 @@ glabel render_messages
 /* BAB0C 8012440C 26310001 */  addiu     $s1, $s1, 1
 /* BAB10 80124410 2A220003 */  slti      $v0, $s1, 3
 /* BAB14 80124414 1440FFD4 */  bnez      $v0, .L80124368
-/* BAB18 80124418 00000000 */   nop      
+/* BAB18 80124418 00000000 */   nop
 /* BAB1C 8012441C 8FBF002C */  lw        $ra, 0x2c($sp)
 /* BAB20 80124420 8FB20028 */  lw        $s2, 0x28($sp)
 /* BAB24 80124424 8FB10024 */  lw        $s1, 0x24($sp)

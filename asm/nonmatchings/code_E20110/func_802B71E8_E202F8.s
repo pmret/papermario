@@ -63,10 +63,10 @@ glabel func_802B71E8_E202F8
 /* E203E0 802B72D0 0C019D80 */  jal       guMtxCatF
 /* E203E4 802B72D4 0220302D */   daddu    $a2, $s1, $zero
 /* E203E8 802B72D8 0220202D */  daddu     $a0, $s1, $zero
-/* E203EC 802B72DC 3C108007 */  lui       $s0, %hi(D_800741F0)
-/* E203F0 802B72E0 261041F0 */  addiu     $s0, $s0, %lo(D_800741F0)
-/* E203F4 802B72E4 3C13800A */  lui       $s3, %hi(D_8009A674)
-/* E203F8 802B72E8 2673A674 */  addiu     $s3, $s3, %lo(D_8009A674)
+/* E203EC 802B72DC 3C108007 */  lui       $s0, %hi(gMatrixListPos)
+/* E203F0 802B72E0 261041F0 */  addiu     $s0, $s0, %lo(gMatrixListPos)
+/* E203F4 802B72E4 3C13800A */  lui       $s3, %hi(gDisplayContext)
+/* E203F8 802B72E8 2673A674 */  addiu     $s3, $s3, %lo(gDisplayContext)
 /* E203FC 802B72EC 96050000 */  lhu       $a1, ($s0)
 /* E20400 802B72F0 8E620000 */  lw        $v0, ($s3)
 /* E20404 802B72F4 00052980 */  sll       $a1, $a1, 6
@@ -78,8 +78,8 @@ glabel func_802B71E8_E202F8
 /* E2041C 802B730C 0000202D */  daddu     $a0, $zero, $zero
 /* E20420 802B7310 0080282D */  daddu     $a1, $a0, $zero
 /* E20424 802B7314 0080302D */  daddu     $a2, $a0, $zero
-/* E20428 802B7318 3C12800A */  lui       $s2, %hi(D_8009A66C)
-/* E2042C 802B731C 2652A66C */  addiu     $s2, $s2, %lo(D_8009A66C)
+/* E20428 802B7318 3C12800A */  lui       $s2, %hi(gMasterGfxPos)
+/* E2042C 802B731C 2652A66C */  addiu     $s2, $s2, %lo(gMasterGfxPos)
 /* E20430 802B7320 0080382D */  daddu     $a3, $a0, $zero
 /* E20434 802B7324 8E480000 */  lw        $t0, ($s2)
 /* E20438 802B7328 96020000 */  lhu       $v0, ($s0)

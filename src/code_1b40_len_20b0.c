@@ -2,7 +2,6 @@
 
 extern Gfx D_00074210[];
 extern Gfx D_00074230[];
-extern Gfx* D_8009A66C[1];
 
 extern int D_000759B0[];
 extern int D_000759B0_end[]; // A55D0
@@ -117,13 +116,13 @@ s32 func_80027190(void) {
 
 INCLUDE_ASM(s32, "code_1b40_len_20b0", func_800271A0);
 /*void func_800271A0(void) {
-    Gfx *temp = D_8009A66C[0] + 1;
+    Gfx *temp = gMasterGfxPos[0] + 1;
 
-    gSPSegment(D_8009A66C[0], 0x00, 0x00000000);
-    D_8009A66C[0] = temp;
+    gSPSegment(gMasterGfxPos[0], 0x00, 0x00000000);
+    gMasterGfxPos[0] = temp;
     gSPDisplayList(temp, &D_00074230);
-    D_8009A66C[0]++;
-    gSPDisplayList(D_8009A66C[0]++, &D_00074210);
+    gMasterGfxPos[0]++;
+    gSPDisplayList(gMasterGfxPos[0]++, &D_00074210);
 }*/
 
 INCLUDE_ASM(s32, "code_1b40_len_20b0", func_800271FC);

@@ -8,8 +8,8 @@ glabel func_8024F768
 /* 17E054 8024F774 2407000A */   addiu    $a3, $zero, 0xa
 .L8024F778:
 /* 17E058 8024F778 3C056666 */  lui       $a1, 0x6666
-/* 17E05C 8024F77C 3C04800A */  lui       $a0, %hi(D_8009A66C)
-/* 17E060 8024F780 2484A66C */  addiu     $a0, $a0, %lo(D_8009A66C)
+/* 17E05C 8024F77C 3C04800A */  lui       $a0, %hi(gMasterGfxPos)
+/* 17E060 8024F780 2484A66C */  addiu     $a0, $a0, %lo(gMasterGfxPos)
 /* 17E064 8024F784 34A56667 */  ori       $a1, $a1, 0x6667
 /* 17E068 8024F788 00071A00 */  sll       $v1, $a3, 8
 /* 17E06C 8024F78C 00671823 */  subu      $v1, $v1, $a3

@@ -10,8 +10,8 @@ glabel func_E00DA230
 /* 3D7484 E00DA244 AFB600A8 */  sw        $s6, 0xa8($sp)
 /* 3D7488 E00DA248 3C160001 */  lui       $s6, 1
 /* 3D748C E00DA24C AFB3009C */  sw        $s3, 0x9c($sp)
-/* 3D7490 E00DA250 3C13800A */  lui       $s3, %hi(D_8009A66C)
-/* 3D7494 E00DA254 2673A66C */  addiu     $s3, $s3, %lo(D_8009A66C)
+/* 3D7490 E00DA250 3C13800A */  lui       $s3, %hi(gMasterGfxPos)
+/* 3D7494 E00DA254 2673A66C */  addiu     $s3, $s3, %lo(gMasterGfxPos)
 /* 3D7498 E00DA258 36D61630 */  ori       $s6, $s6, 0x1630
 /* 3D749C E00DA25C AFBF00AC */  sw        $ra, 0xac($sp)
 /* 3D74A0 E00DA260 AFB500A4 */  sw        $s5, 0xa4($sp)
@@ -38,7 +38,7 @@ glabel func_E00DA230
 /* 3D74F4 E00DA2B4 8C62001C */  lw        $v0, 0x1c($v1)
 /* 3D74F8 E00DA2B8 3C038000 */  lui       $v1, 0x8000
 /* 3D74FC E00DA2BC 4600A502 */  mul.s     $f20, $f20, $f0
-/* 3D7500 E00DA2C0 00000000 */  nop       
+/* 3D7500 E00DA2C0 00000000 */  nop
 /* 3D7504 E00DA2C4 00431021 */  addu      $v0, $v0, $v1
 /* 3D7508 E00DA2C8 3C03800B */  lui       $v1, %hi(gCameras)
 /* 3D750C E00DA2CC 24631D80 */  addiu     $v1, $v1, %lo(gCameras)
@@ -68,10 +68,10 @@ glabel func_E00DA230
 /* 3D756C E00DA32C 0C080114 */  jal       func_E0200450
 /* 3D7570 E00DA330 00A0302D */   daddu    $a2, $a1, $zero
 /* 3D7574 E00DA334 27A40010 */  addiu     $a0, $sp, 0x10
-/* 3D7578 E00DA338 3C108007 */  lui       $s0, %hi(D_800741F0)
-/* 3D757C E00DA33C 261041F0 */  addiu     $s0, $s0, %lo(D_800741F0)
-/* 3D7580 E00DA340 3C14800A */  lui       $s4, %hi(D_8009A674)
-/* 3D7584 E00DA344 2694A674 */  addiu     $s4, $s4, %lo(D_8009A674)
+/* 3D7578 E00DA338 3C108007 */  lui       $s0, %hi(gMatrixListPos)
+/* 3D757C E00DA33C 261041F0 */  addiu     $s0, $s0, %lo(gMatrixListPos)
+/* 3D7580 E00DA340 3C14800A */  lui       $s4, %hi(gDisplayContext)
+/* 3D7584 E00DA344 2694A674 */  addiu     $s4, $s4, %lo(gDisplayContext)
 /* 3D7588 E00DA348 96050000 */  lhu       $a1, ($s0)
 /* 3D758C E00DA34C 8E820000 */  lw        $v0, ($s4)
 /* 3D7590 E00DA350 00052980 */  sll       $a1, $a1, 6
@@ -180,5 +180,5 @@ glabel func_E00DA230
 /* 3D772C E00DA4EC D7B400B0 */  ldc1      $f20, 0xb0($sp)
 /* 3D7730 E00DA4F0 03E00008 */  jr        $ra
 /* 3D7734 E00DA4F4 27BD00B8 */   addiu    $sp, $sp, 0xb8
-/* 3D7738 E00DA4F8 00000000 */  nop       
-/* 3D773C E00DA4FC 00000000 */  nop       
+/* 3D7738 E00DA4F8 00000000 */  nop
+/* 3D773C E00DA4FC 00000000 */  nop

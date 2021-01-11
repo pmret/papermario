@@ -18,8 +18,8 @@ glabel func_80240354_8A9D64
 /* 8A9D98 80240388 8FA60018 */  lw        $a2, 0x18($sp)
 /* 8A9D9C 8024038C 0C090058 */  jal       func_80240160_8A9B70
 /* 8A9DA0 80240390 96070000 */   lhu      $a3, ($s0)
-/* 8A9DA4 80240394 3C03800A */  lui       $v1, %hi(D_8009A66C)
-/* 8A9DA8 80240398 2463A66C */  addiu     $v1, $v1, %lo(D_8009A66C)
+/* 8A9DA4 80240394 3C03800A */  lui       $v1, %hi(gMasterGfxPos)
+/* 8A9DA8 80240398 2463A66C */  addiu     $v1, $v1, %lo(gMasterGfxPos)
 /* 8A9DAC 8024039C 8C620000 */  lw        $v0, ($v1)
 /* 8A9DB0 802403A0 24040001 */  addiu     $a0, $zero, 1
 /* 8A9DB4 802403A4 0040882D */  daddu     $s1, $v0, $zero

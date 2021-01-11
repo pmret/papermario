@@ -8,8 +8,8 @@ glabel func_E0050308
 /* 35C2E4 E0050314 34C60024 */  ori       $a2, $a2, 0x24
 /* 35C2E8 E0050318 27A40018 */  addiu     $a0, $sp, 0x18
 /* 35C2EC E005031C AFB400A8 */  sw        $s4, 0xa8($sp)
-/* 35C2F0 E0050320 3C14800A */  lui       $s4, %hi(D_8009A66C)
-/* 35C2F4 E0050324 2694A66C */  addiu     $s4, $s4, %lo(D_8009A66C)
+/* 35C2F0 E0050320 3C14800A */  lui       $s4, %hi(gMasterGfxPos)
+/* 35C2F4 E0050324 2694A66C */  addiu     $s4, $s4, %lo(gMasterGfxPos)
 /* 35C2F8 E0050328 AFB200A0 */  sw        $s2, 0xa0($sp)
 /* 35C2FC E005032C 3C120001 */  lui       $s2, 1
 /* 35C300 E0050330 3C02E700 */  lui       $v0, 0xe700
@@ -77,10 +77,10 @@ glabel func_E0050308
 /* 35C3F8 E0050428 0C080114 */  jal       func_E0200450
 /* 35C3FC E005042C 00A0302D */   daddu    $a2, $a1, $zero
 /* 35C400 E0050430 27A40018 */  addiu     $a0, $sp, 0x18
-/* 35C404 E0050434 3C108007 */  lui       $s0, %hi(D_800741F0)
-/* 35C408 E0050438 261041F0 */  addiu     $s0, $s0, %lo(D_800741F0)
-/* 35C40C E005043C 3C11800A */  lui       $s1, %hi(D_8009A674)
-/* 35C410 E0050440 2631A674 */  addiu     $s1, $s1, %lo(D_8009A674)
+/* 35C404 E0050434 3C108007 */  lui       $s0, %hi(gMatrixListPos)
+/* 35C408 E0050438 261041F0 */  addiu     $s0, $s0, %lo(gMatrixListPos)
+/* 35C40C E005043C 3C11800A */  lui       $s1, %hi(gDisplayContext)
+/* 35C410 E0050440 2631A674 */  addiu     $s1, $s1, %lo(gDisplayContext)
 /* 35C414 E0050444 96050000 */  lhu       $a1, ($s0)
 /* 35C418 E0050448 8E220000 */  lw        $v0, ($s1)
 /* 35C41C E005044C 00052980 */  sll       $a1, $a1, 6
@@ -104,7 +104,7 @@ glabel func_E0050308
 /* 35C464 E0050494 C6600010 */  lwc1      $f0, 0x10($s3)
 /* 35C468 E0050498 24840001 */  addiu     $a0, $a0, 1
 /* 35C46C E005049C 4600A03C */  c.lt.s    $f20, $f0
-/* 35C470 E00504A0 00000000 */  nop       
+/* 35C470 E00504A0 00000000 */  nop
 /* 35C474 E00504A4 4500000D */  bc1f      .LE00504DC
 /* 35C478 E00504A8 A6040000 */   sh       $a0, ($s0)
 /* 35C47C E00504AC 3C040900 */  lui       $a0, 0x900
@@ -134,8 +134,8 @@ glabel func_E0050308
 /* 35C4D4 E0050504 ACC40004 */  sw        $a0, 4($a2)
 .LE0050508:
 /* 35C4D8 E0050508 3C05D838 */  lui       $a1, 0xd838
-/* 35C4DC E005050C 3C03800A */  lui       $v1, %hi(D_8009A66C)
-/* 35C4E0 E0050510 2463A66C */  addiu     $v1, $v1, %lo(D_8009A66C)
+/* 35C4DC E005050C 3C03800A */  lui       $v1, %hi(gMasterGfxPos)
+/* 35C4E0 E0050510 2463A66C */  addiu     $v1, $v1, %lo(gMasterGfxPos)
 /* 35C4E4 E0050514 8C620000 */  lw        $v0, ($v1)
 /* 35C4E8 E0050518 34A50002 */  ori       $a1, $a1, 2
 /* 35C4EC E005051C 0040202D */  daddu     $a0, $v0, $zero
@@ -154,4 +154,4 @@ glabel func_E0050308
 /* 35C520 E0050550 D7B400B0 */  ldc1      $f20, 0xb0($sp)
 /* 35C524 E0050554 03E00008 */  jr        $ra
 /* 35C528 E0050558 27BD00C0 */   addiu    $sp, $sp, 0xc0
-/* 35C52C E005055C 00000000 */  nop       
+/* 35C52C E005055C 00000000 */  nop

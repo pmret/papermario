@@ -12,8 +12,8 @@ glabel func_E005A3F4
 /* 3606D0 E005A410 3C100001 */  lui       $s0, 1
 /* 3606D4 E005A414 36101630 */  ori       $s0, $s0, 0x1630
 /* 3606D8 E005A418 AFB200A0 */  sw        $s2, 0xa0($sp)
-/* 3606DC E005A41C 3C12800A */  lui       $s2, %hi(D_8009A66C)
-/* 3606E0 E005A420 2652A66C */  addiu     $s2, $s2, %lo(D_8009A66C)
+/* 3606DC E005A41C 3C12800A */  lui       $s2, %hi(gMasterGfxPos)
+/* 3606E0 E005A420 2652A66C */  addiu     $s2, $s2, %lo(gMasterGfxPos)
 /* 3606E4 E005A424 3C02E700 */  lui       $v0, 0xe700
 /* 3606E8 E005A428 AFBF00BC */  sw        $ra, 0xbc($sp)
 /* 3606EC E005A42C AFB700B4 */  sw        $s7, 0xb4($sp)
@@ -80,10 +80,10 @@ glabel func_E005A3F4
 /* 3607E0 E005A520 0C080114 */  jal       func_E0200450
 /* 3607E4 E005A524 00A0302D */   daddu    $a2, $a1, $zero
 /* 3607E8 E005A528 27A40018 */  addiu     $a0, $sp, 0x18
-/* 3607EC E005A52C 3C158007 */  lui       $s5, %hi(D_800741F0)
-/* 3607F0 E005A530 26B541F0 */  addiu     $s5, $s5, %lo(D_800741F0)
-/* 3607F4 E005A534 3C16800A */  lui       $s6, %hi(D_8009A674)
-/* 3607F8 E005A538 26D6A674 */  addiu     $s6, $s6, %lo(D_8009A674)
+/* 3607EC E005A52C 3C158007 */  lui       $s5, %hi(gMatrixListPos)
+/* 3607F0 E005A530 26B541F0 */  addiu     $s5, $s5, %lo(gMatrixListPos)
+/* 3607F4 E005A534 3C16800A */  lui       $s6, %hi(gDisplayContext)
+/* 3607F8 E005A538 26D6A674 */  addiu     $s6, $s6, %lo(gDisplayContext)
 /* 3607FC E005A53C 96A50000 */  lhu       $a1, ($s5)
 /* 360800 E005A540 8EC20000 */  lw        $v0, ($s6)
 /* 360804 E005A544 00052980 */  sll       $a1, $a1, 6
@@ -191,8 +191,8 @@ glabel func_E005A3F4
 /* 360998 E005A6D8 AE440000 */   sw       $a0, ($s2)
 .LE005A6DC:
 /* 36099C E005A6DC 3C05D838 */  lui       $a1, 0xd838
-/* 3609A0 E005A6E0 3C03800A */  lui       $v1, %hi(D_8009A66C)
-/* 3609A4 E005A6E4 2463A66C */  addiu     $v1, $v1, %lo(D_8009A66C)
+/* 3609A0 E005A6E0 3C03800A */  lui       $v1, %hi(gMasterGfxPos)
+/* 3609A4 E005A6E4 2463A66C */  addiu     $v1, $v1, %lo(gMasterGfxPos)
 /* 3609A8 E005A6E8 8C620000 */  lw        $v0, ($v1)
 /* 3609AC E005A6EC 34A50002 */  ori       $a1, $a1, 2
 /* 3609B0 E005A6F0 0040202D */  daddu     $a0, $v0, $zero
@@ -216,6 +216,6 @@ glabel func_E005A3F4
 /* 3609F8 E005A738 D7B400C0 */  ldc1      $f20, 0xc0($sp)
 /* 3609FC E005A73C 03E00008 */  jr        $ra
 /* 360A00 E005A740 27BD00D8 */   addiu    $sp, $sp, 0xd8
-/* 360A04 E005A744 00000000 */  nop       
-/* 360A08 E005A748 00000000 */  nop       
-/* 360A0C E005A74C 00000000 */  nop       
+/* 360A04 E005A744 00000000 */  nop
+/* 360A08 E005A748 00000000 */  nop
+/* 360A0C E005A74C 00000000 */  nop

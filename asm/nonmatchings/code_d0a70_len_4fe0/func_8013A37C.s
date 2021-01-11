@@ -75,8 +75,8 @@ glabel func_8013A37C
 /* D0B84 8013A484 2A220008 */  slti      $v0, $s1, 8
 /* D0B88 8013A488 1440FFFA */  bnez      $v0, .L8013A474
 /* D0B8C 8013A48C 24630008 */   addiu    $v1, $v1, 8
-/* D0B90 8013A490 3C028007 */  lui       $v0, %hi(D_800741F4)
-/* D0B94 8013A494 8C4241F4 */  lw        $v0, %lo(D_800741F4)($v0)
+/* D0B90 8013A490 3C028007 */  lui       $v0, %hi(gCurrentDisplayContextIndex)
+/* D0B94 8013A494 8C4241F4 */  lw        $v0, %lo(gCurrentDisplayContextIndex)($v0)
 /* D0B98 8013A498 8FBF001C */  lw        $ra, 0x1c($sp)
 /* D0B9C 8013A49C 8FB20018 */  lw        $s2, 0x18($sp)
 /* D0BA0 8013A4A0 8FB10014 */  lw        $s1, 0x14($sp)

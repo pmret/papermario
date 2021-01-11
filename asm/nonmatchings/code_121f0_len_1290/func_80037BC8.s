@@ -71,8 +71,8 @@ glabel func_80037BC8
 /* 130B8 80037CB8 3C0C0018 */  lui       $t4, 0x18
 /* 130BC 80037CBC 358C0224 */  ori       $t4, $t4, 0x224
 /* 130C0 80037CC0 3C0E0400 */  lui       $t6, 0x400
-/* 130C4 80037CC4 3C05800A */  lui       $a1, %hi(D_8009A66C)
-/* 130C8 80037CC8 24A5A66C */  addiu     $a1, $a1, %lo(D_8009A66C)
+/* 130C4 80037CC4 3C05800A */  lui       $a1, %hi(gMasterGfxPos)
+/* 130C8 80037CC8 24A5A66C */  addiu     $a1, $a1, %lo(gMasterGfxPos)
 /* 130CC 80037CCC 35CE0400 */  ori       $t6, $t6, 0x400
 /* 130D0 80037CD0 8CA20000 */  lw        $v0, ($a1)
 /* 130D4 80037CD4 3C03DE00 */  lui       $v1, 0xde00
