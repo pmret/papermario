@@ -14,9 +14,9 @@ glabel move_cam_over
 /* 17CDDC 8024E4FC 3C01802A */  lui       $at, %hi(D_8029F29E)
 /* 17CDE0 8024E500 A423F29E */  sh        $v1, %lo(D_8029F29E)($at)
 /* 17CDE4 8024E504 10800003 */  beqz      $a0, .L8024E514
-/* 17CDE8 8024E508 00000000 */   nop      
+/* 17CDE8 8024E508 00000000 */   nop
 /* 17CDEC 8024E50C 0C0B0F41 */  jal       restart_script
-/* 17CDF0 8024E510 00000000 */   nop      
+/* 17CDF0 8024E510 00000000 */   nop
 .L8024E514:
 /* 17CDF4 8024E514 8FBF0010 */  lw        $ra, 0x10($sp)
 /* 17CDF8 8024E518 03E00008 */  jr        $ra

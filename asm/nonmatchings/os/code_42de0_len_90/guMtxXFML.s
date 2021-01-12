@@ -37,4 +37,4 @@ glabel guMtxXFML
 /* 42E60 80067A60 D7B40070 */  ldc1      $f20, 0x70($sp)
 /* 42E64 80067A64 03E00008 */  jr        $ra
 /* 42E68 80067A68 27BD0088 */   addiu    $sp, $sp, 0x88
-/* 42E6C 80067A6C 00000000 */  nop       
+/* 42E6C 80067A6C 00000000 */  nop

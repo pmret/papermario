@@ -22,4 +22,4 @@ glabel osSpTaskYielded
 /* 410B0 80065CB0 8FB00010 */  lw        $s0, 0x10($sp)
 /* 410B4 80065CB4 03E00008 */  jr        $ra
 /* 410B8 80065CB8 27BD0018 */   addiu    $sp, $sp, 0x18
-/* 410BC 80065CBC 00000000 */  nop       
+/* 410BC 80065CBC 00000000 */  nop

@@ -24,4 +24,4 @@ glabel func_802BBE14_E30764
 /* E307B0 802BBE60 8FB00010 */  lw        $s0, 0x10($sp)
 /* E307B4 802BBE64 03E00008 */  jr        $ra
 /* E307B8 802BBE68 27BD0020 */   addiu    $sp, $sp, 0x20
-/* E307BC 802BBE6C 00000000 */  nop       
+/* E307BC 802BBE6C 00000000 */  nop

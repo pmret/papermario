@@ -24,18 +24,18 @@ glabel BindNpcAI
 /* 1FEC4 80044AC4 0040A02D */  daddu     $s4, $v0, $zero
 /* 1FEC8 80044AC8 2402FFFF */  addiu     $v0, $zero, -1
 /* 1FECC 80044ACC 12420011 */  beq       $s2, $v0, .L80044B14
-/* 1FED0 80044AD0 00000000 */   nop      
+/* 1FED0 80044AD0 00000000 */   nop
 /* 1FED4 80044AD4 12620004 */  beq       $s3, $v0, .L80044AE8
-/* 1FED8 80044AD8 00000000 */   nop      
+/* 1FED8 80044AD8 00000000 */   nop
 /* 1FEDC 80044ADC 86420008 */  lh        $v0, 8($s2)
 /* 1FEE0 80044AE0 1453000C */  bne       $v0, $s3, .L80044B14
-/* 1FEE4 80044AE4 00000000 */   nop      
+/* 1FEE4 80044AE4 00000000 */   nop
 .L80044AE8:
 /* 1FEE8 80044AE8 86530008 */  lh        $s3, 8($s2)
 .L80044AEC:
 /* 1FEEC 80044AEC 8E020064 */  lw        $v0, 0x64($s0)
 /* 1FEF0 80044AF0 10400003 */  beqz      $v0, .L80044B00
-/* 1FEF4 80044AF4 00000000 */   nop      
+/* 1FEF4 80044AF4 00000000 */   nop
 /* 1FEF8 80044AF8 080112BB */  j         .L80044AEC
 /* 1FEFC 80044AFC 0040802D */   daddu    $s0, $v0, $zero
 .L80044B00:
@@ -43,7 +43,7 @@ glabel BindNpcAI
 /* 1FF04 80044B04 52020006 */  beql      $s0, $v0, .L80044B20
 /* 1FF08 80044B08 241500FF */   addiu    $s5, $zero, 0xff
 /* 1FF0C 80044B0C 080112C8 */  j         .L80044B20
-/* 1FF10 80044B10 00000000 */   nop      
+/* 1FF10 80044B10 00000000 */   nop
 .L80044B14:
 /* 1FF14 80044B14 0C00FB3A */  jal       get_enemy
 /* 1FF18 80044B18 0260202D */   daddu    $a0, $s3, $zero
@@ -60,7 +60,7 @@ glabel BindNpcAI
 /* 1FF3C 80044B3C 0280202D */   daddu    $a0, $s4, $zero
 /* 1FF40 80044B40 8E440054 */  lw        $a0, 0x54($s2)
 /* 1FF44 80044B44 0C0B102B */  jal       kill_script_by_ID
-/* 1FF48 80044B48 00000000 */   nop      
+/* 1FF48 80044B48 00000000 */   nop
 /* 1FF4C 80044B4C 0280202D */  daddu     $a0, $s4, $zero
 .L80044B50:
 /* 1FF50 80044B50 2405000A */  addiu     $a1, $zero, 0xa

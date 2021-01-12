@@ -12,7 +12,7 @@ glabel func_80238590_6FB2A0
 /* 6FB2BC 802385AC 3C10800E */  lui       $s0, %hi(gBattleStatus+0xDC)
 /* 6FB2C0 802385B0 8E10C14C */  lw        $s0, %lo(gBattleStatus+0xDC)($s0)
 /* 6FB2C4 802385B4 0C0B1EAF */  jal       get_variable
-/* 6FB2C8 802385B8 00000000 */   nop      
+/* 6FB2C8 802385B8 00000000 */   nop
 /* 6FB2CC 802385BC 8E030008 */  lw        $v1, 8($s0)
 /* 6FB2D0 802385C0 0040282D */  daddu     $a1, $v0, $zero
 /* 6FB2D4 802385C4 90630006 */  lbu       $v1, 6($v1)
@@ -47,5 +47,5 @@ glabel func_80238590_6FB2A0
 /* 6FB33C 8023862C 24020002 */  addiu     $v0, $zero, 2
 /* 6FB340 80238630 03E00008 */  jr        $ra
 /* 6FB344 80238634 27BD0020 */   addiu    $sp, $sp, 0x20
-/* 6FB348 80238638 00000000 */  nop       
-/* 6FB34C 8023863C 00000000 */  nop       
+/* 6FB348 80238638 00000000 */  nop
+/* 6FB34C 8023863C 00000000 */  nop

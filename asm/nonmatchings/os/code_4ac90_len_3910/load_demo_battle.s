@@ -17,51 +17,51 @@ glabel load_demo_battle
 /* 4E244 80072E44 0C00AB00 */  jal       general_heap_create
 /* 4E248 80072E48 A0400070 */   sb       $zero, 0x70($v0)
 /* 4E24C 80072E4C 0C048C2E */  jal       clear_dynamic_entity_list
-/* 4E250 80072E50 00000000 */   nop      
+/* 4E250 80072E50 00000000 */   nop
 /* 4E254 80072E54 0C0B0C77 */  jal       clear_script_list
-/* 4E258 80072E58 00000000 */   nop      
+/* 4E258 80072E58 00000000 */   nop
 /* 4E25C 80072E5C 0C00B7BD */  jal       create_cameras_a
-/* 4E260 80072E60 00000000 */   nop      
+/* 4E260 80072E60 00000000 */   nop
 /* 4E264 80072E64 0C0B763E */  jal       func_802DD8F8
 /* 4E268 80072E68 0000202D */   daddu    $a0, $zero, $zero
 /* 4E26C 80072E6C 0C047889 */  jal       func_8011E224
-/* 4E270 80072E70 00000000 */   nop      
+/* 4E270 80072E70 00000000 */   nop
 /* 4E274 80072E74 0C0482EC */  jal       clear_virtual_models
-/* 4E278 80072E78 00000000 */   nop      
+/* 4E278 80072E78 00000000 */   nop
 /* 4E27C 80072E7C 0C00E12F */  jal       clear_npcs
-/* 4E280 80072E80 00000000 */   nop      
+/* 4E280 80072E80 00000000 */   nop
 /* 4E284 80072E84 0C050440 */  jal       func_80141100
-/* 4E288 80072E88 00000000 */   nop      
+/* 4E288 80072E88 00000000 */   nop
 /* 4E28C 80072E8C 0C0515A0 */  jal       clear_trigger_data
-/* 4E290 80072E90 00000000 */   nop      
+/* 4E290 80072E90 00000000 */   nop
 /* 4E294 80072E94 0C045751 */  jal       clear_model_data
-/* 4E298 80072E98 00000000 */   nop      
+/* 4E298 80072E98 00000000 */   nop
 /* 4E29C 80072E9C 0C052010 */  jal       func_80148040
-/* 4E2A0 80072EA0 00000000 */   nop      
+/* 4E2A0 80072EA0 00000000 */   nop
 /* 4E2A4 80072EA4 0C05177E */  jal       func_80145DF8
-/* 4E2A8 80072EA8 00000000 */   nop      
+/* 4E2A8 80072EA8 00000000 */   nop
 /* 4E2AC 80072EAC 0C04E062 */  jal       func_80138188
-/* 4E2B0 80072EB0 00000000 */   nop      
+/* 4E2B0 80072EB0 00000000 */   nop
 /* 4E2B4 80072EB4 0C01CACC */  jal       func_80072B30
-/* 4E2B8 80072EB8 00000000 */   nop      
+/* 4E2B8 80072EB8 00000000 */   nop
 /* 4E2BC 80072EBC 0C00F900 */  jal       clear_encounter_status
-/* 4E2C0 80072EC0 00000000 */   nop      
+/* 4E2C0 80072EC0 00000000 */   nop
 /* 4E2C4 80072EC4 0C04432E */  jal       clear_entity_data
 /* 4E2C8 80072EC8 24040001 */   addiu    $a0, $zero, 1
 /* 4E2CC 80072ECC 0C016727 */  jal       func_80059C9C
-/* 4E2D0 80072ED0 00000000 */   nop      
+/* 4E2D0 80072ED0 00000000 */   nop
 /* 4E2D4 80072ED4 0C037F14 */  jal       clear_player_status
-/* 4E2D8 80072ED8 00000000 */   nop      
+/* 4E2D8 80072ED8 00000000 */   nop
 /* 4E2DC 80072EDC 0C048D9D */  jal       clear_printers
-/* 4E2E0 80072EE0 00000000 */   nop      
+/* 4E2E0 80072EE0 00000000 */   nop
 /* 4E2E4 80072EE4 0C04C3FC */  jal       clear_item_entity_data
-/* 4E2E8 80072EE8 00000000 */   nop      
+/* 4E2E8 80072EE8 00000000 */   nop
 /* 4E2EC 80072EEC 0C039CE8 */  jal       clear_player_data
-/* 4E2F0 80072EF0 00000000 */   nop      
+/* 4E2F0 80072EF0 00000000 */   nop
 /* 4E2F4 80072EF4 0C039E4D */  jal       initialize_status_menu
-/* 4E2F8 80072EF8 00000000 */   nop      
+/* 4E2F8 80072EF8 00000000 */   nop
 /* 4E2FC 80072EFC 0C04C3FC */  jal       clear_item_entity_data
-/* 4E300 80072F00 00000000 */   nop      
+/* 4E300 80072F00 00000000 */   nop
 /* 4E304 80072F04 3C05437F */  lui       $a1, 0x437f
 /* 4E308 80072F08 0C04DF62 */  jal       func_80137D88
 /* 4E30C 80072F0C 24040009 */   addiu    $a0, $zero, 9
@@ -74,7 +74,7 @@ glabel load_demo_battle
 /* 4E328 80072F28 00220821 */  addu      $at, $at, $v0
 /* 4E32C 80072F2C 8C22A578 */  lw        $v0, %lo(D_8009A578)($at)
 /* 4E330 80072F30 00400008 */  jr        $v0
-/* 4E334 80072F34 00000000 */   nop      
+/* 4E334 80072F34 00000000 */   nop
 /* 4E338 80072F38 0C01CB4B */  jal       setup_demo_player
 /* 4E33C 80072F3C 24112700 */   addiu    $s1, $zero, 0x2700
 /* 4E340 80072F40 0000202D */  daddu     $a0, $zero, $zero
@@ -133,7 +133,7 @@ glabel load_demo_battle
 /* 4E40C 8007300C 00220821 */  addu      $at, $at, $v0
 /* 4E410 80073010 8C22A590 */  lw        $v0, %lo(D_8009A590)($at)
 /* 4E414 80073014 00400008 */  jr        $v0
-/* 4E418 80073018 00000000 */   nop      
+/* 4E418 80073018 00000000 */   nop
 /* 4E41C 8007301C 3C03800B */  lui       $v1, %hi(gCurrentEncounter)
 /* 4E420 80073020 24630F10 */  addiu     $v1, $v1, %lo(gCurrentEncounter)
 /* 4E424 80073024 3C048007 */  lui       $a0, %hi(gGameStatusPtr)
@@ -233,4 +233,4 @@ glabel load_demo_battle
 /* 4E590 80073190 8FB00010 */  lw        $s0, 0x10($sp)
 /* 4E594 80073194 03E00008 */  jr        $ra
 /* 4E598 80073198 27BD0020 */   addiu    $sp, $sp, 0x20
-/* 4E59C 8007319C 00000000 */  nop       
+/* 4E59C 8007319C 00000000 */  nop

@@ -10,7 +10,7 @@ glabel func_8024EFA4
 /* 17D898 8024EFB8 50800005 */  beql      $a0, $zero, .L8024EFD0
 /* 17D89C 8024EFBC A6000010 */   sh       $zero, 0x10($s0)
 /* 17D8A0 8024EFC0 0C00AB4B */  jal       heap_free
-/* 17D8A4 8024EFC4 00000000 */   nop      
+/* 17D8A4 8024EFC4 00000000 */   nop
 /* 17D8A8 8024EFC8 AE000018 */  sw        $zero, 0x18($s0)
 /* 17D8AC 8024EFCC A6000010 */  sh        $zero, 0x10($s0)
 .L8024EFD0:

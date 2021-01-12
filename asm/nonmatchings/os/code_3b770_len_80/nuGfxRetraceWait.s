@@ -33,6 +33,6 @@ glabel nuGfxRetraceWait
 /* 3B7D8 800603D8 8FB00040 */  lw        $s0, 0x40($sp)
 /* 3B7DC 800603DC 03E00008 */  jr        $ra
 /* 3B7E0 800603E0 27BD0050 */   addiu    $sp, $sp, 0x50
-/* 3B7E4 800603E4 00000000 */  nop       
-/* 3B7E8 800603E8 00000000 */  nop       
-/* 3B7EC 800603EC 00000000 */  nop       
+/* 3B7E4 800603E4 00000000 */  nop
+/* 3B7E8 800603E8 00000000 */  nop
+/* 3B7EC 800603EC 00000000 */  nop

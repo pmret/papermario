@@ -103,13 +103,13 @@ glabel ShowSleepBubble
 /* FCB54 802D81A4 00021400 */  sll       $v0, $v0, 0x10
 /* FCB58 802D81A8 00021403 */  sra       $v0, $v0, 0x10
 /* FCB5C 802D81AC 44822000 */  mtc1      $v0, $f4
-/* FCB60 802D81B0 00000000 */  nop       
+/* FCB60 802D81B0 00000000 */  nop
 /* FCB64 802D81B4 46802120 */  cvt.s.w   $f4, $f4
 /* FCB68 802D81B8 00031FC3 */  sra       $v1, $v1, 0x1f
 /* FCB6C 802D81BC 00004010 */  mfhi      $t0
 /* FCB70 802D81C0 01031823 */  subu      $v1, $t0, $v1
 /* FCB74 802D81C4 44830000 */  mtc1      $v1, $f0
-/* FCB78 802D81C8 00000000 */  nop       
+/* FCB78 802D81C8 00000000 */  nop
 /* FCB7C 802D81CC 46800020 */  cvt.s.w   $f0, $f0
 /* FCB80 802D81D0 080B6078 */  j         .L802D81E0
 /* FCB84 802D81D4 46001000 */   add.s    $f0, $f2, $f0

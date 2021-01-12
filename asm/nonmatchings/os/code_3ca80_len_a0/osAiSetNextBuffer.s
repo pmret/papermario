@@ -29,7 +29,7 @@ glabel osAiSetNextBuffer
 /* 3CAD8 800616D8 A0203DA0 */  sb        $zero, %lo(D_80093DA0)($at)
 .L800616DC:
 /* 3CADC 800616DC 0C0187A4 */  jal       osVirtualToPhysical
-/* 3CAE0 800616E0 00000000 */   nop      
+/* 3CAE0 800616E0 00000000 */   nop
 /* 3CAE4 800616E4 3C05A450 */  lui       $a1, 0xa450
 /* 3CAE8 800616E8 34A50004 */  ori       $a1, $a1, 4
 /* 3CAEC 800616EC 00402021 */  addu      $a0, $v0, $zero
@@ -43,6 +43,6 @@ glabel osAiSetNextBuffer
 /* 3CB08 80061708 8FB00010 */  lw        $s0, 0x10($sp)
 /* 3CB0C 8006170C 03E00008 */  jr        $ra
 /* 3CB10 80061710 27BD0020 */   addiu    $sp, $sp, 0x20
-/* 3CB14 80061714 00000000 */  nop       
-/* 3CB18 80061718 00000000 */  nop       
-/* 3CB1C 8006171C 00000000 */  nop       
+/* 3CB14 80061714 00000000 */  nop
+/* 3CB18 80061718 00000000 */  nop
+/* 3CB1C 8006171C 00000000 */  nop

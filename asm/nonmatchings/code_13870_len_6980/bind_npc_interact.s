@@ -28,10 +28,10 @@ glabel bind_npc_interact
 .L8003EC74:
 /* 1A074 8003EC74 8C640004 */  lw        $a0, 4($v1)
 /* 1A078 8003EC78 10800008 */  beqz      $a0, .L8003EC9C
-/* 1A07C 8003EC7C 00000000 */   nop      
+/* 1A07C 8003EC7C 00000000 */   nop
 /* 1A080 8003EC80 84820008 */  lh        $v0, 8($a0)
 /* 1A084 8003EC84 14530005 */  bne       $v0, $s3, .L8003EC9C
-/* 1A088 8003EC88 00000000 */   nop      
+/* 1A088 8003EC88 00000000 */   nop
 /* 1A08C 8003EC8C 0C00FA87 */  jal       bind_enemy_interact
 /* 1A090 8003EC90 0280282D */   daddu    $a1, $s4, $zero
 /* 1A094 8003EC94 0800FB2D */  j         .L8003ECB4
@@ -49,7 +49,7 @@ glabel bind_npc_interact
 /* 1A0B8 8003ECB8 26100001 */  addiu     $s0, $s0, 1
 /* 1A0BC 8003ECBC 0202102A */  slt       $v0, $s0, $v0
 /* 1A0C0 8003ECC0 1440FFE5 */  bnez      $v0, .L8003EC58
-/* 1A0C4 8003ECC4 00000000 */   nop      
+/* 1A0C4 8003ECC4 00000000 */   nop
 .L8003ECC8:
 /* 1A0C8 8003ECC8 8FBF0024 */  lw        $ra, 0x24($sp)
 /* 1A0CC 8003ECCC 8FB40020 */  lw        $s4, 0x20($sp)

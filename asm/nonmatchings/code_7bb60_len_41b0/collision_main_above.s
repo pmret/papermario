@@ -14,10 +14,10 @@ glabel collision_main_above
 /* 7BCB4 800E2804 3C013F00 */  lui       $at, 0x3f00
 /* 7BCB8 800E2808 44811000 */  mtc1      $at, $f2
 /* 7BCBC 800E280C 44820000 */  mtc1      $v0, $f0
-/* 7BCC0 800E2810 00000000 */  nop       
+/* 7BCC0 800E2810 00000000 */  nop
 /* 7BCC4 800E2814 46800020 */  cvt.s.w   $f0, $f0
 /* 7BCC8 800E2818 46020002 */  mul.s     $f0, $f0, $f2
-/* 7BCCC 800E281C 00000000 */  nop       
+/* 7BCCC 800E281C 00000000 */  nop
 /* 7BCD0 800E2820 27A40018 */  addiu     $a0, $sp, 0x18
 /* 7BCD4 800E2824 C6220028 */  lwc1      $f2, 0x28($s1)
 /* 7BCD8 800E2828 27A5001C */  addiu     $a1, $sp, 0x1c
@@ -35,7 +35,7 @@ glabel collision_main_above
 /* 7BD08 800E2858 3C128016 */  lui       $s2, %hi(gCollisionStatus)
 /* 7BD0C 800E285C 2652A550 */  addiu     $s2, $s2, %lo(gCollisionStatus)
 /* 7BD10 800E2860 46001032 */  c.eq.s    $f2, $f0
-/* 7BD14 800E2864 00000000 */  nop       
+/* 7BD14 800E2864 00000000 */  nop
 /* 7BD18 800E2868 45010004 */  bc1t      .L800E287C
 /* 7BD1C 800E286C 0220202D */   daddu    $a0, $s1, $zero
 /* 7BD20 800E2870 C6220080 */  lwc1      $f2, 0x80($s1)
@@ -84,11 +84,11 @@ glabel collision_main_above
 /* 7BDC4 800E2914 C7A2002C */  lwc1      $f2, 0x2c($sp)
 /* 7BDC8 800E2918 46000005 */  abs.s     $f0, $f0
 /* 7BDCC 800E291C 4600103E */  c.le.s    $f2, $f0
-/* 7BDD0 800E2920 00000000 */  nop       
+/* 7BDD0 800E2920 00000000 */  nop
 /* 7BDD4 800E2924 45000020 */  bc1f      .L800E29A8
 /* 7BDD8 800E2928 32024000 */   andi     $v0, $s0, 0x4000
 /* 7BDDC 800E292C 10400006 */  beqz      $v0, .L800E2948
-/* 7BDE0 800E2930 00000000 */   nop      
+/* 7BDE0 800E2930 00000000 */   nop
 /* 7BDE4 800E2934 0C0441A9 */  jal       get_entity_type
 /* 7BDE8 800E2938 0200202D */   daddu    $a0, $s0, $zero
 /* 7BDEC 800E293C 2403000D */  addiu     $v1, $zero, 0xd
@@ -101,11 +101,11 @@ glabel collision_main_above
 /* 7BE04 800E2954 3C014040 */  lui       $at, 0x4040
 /* 7BE08 800E2958 44812000 */  mtc1      $at, $f4
 /* 7BE0C 800E295C 44821000 */  mtc1      $v0, $f2
-/* 7BE10 800E2960 00000000 */  nop       
+/* 7BE10 800E2960 00000000 */  nop
 /* 7BE14 800E2964 468010A0 */  cvt.s.w   $f2, $f2
 /* 7BE18 800E2968 46001083 */  div.s     $f2, $f2, $f0
 /* 7BE1C 800E296C 46041082 */  mul.s     $f2, $f2, $f4
-/* 7BE20 800E2970 00000000 */  nop       
+/* 7BE20 800E2970 00000000 */  nop
 /* 7BE24 800E2974 C7A00024 */  lwc1      $f0, 0x24($sp)
 /* 7BE28 800E2978 46020001 */  sub.s     $f0, $f0, $f2
 /* 7BE2C 800E297C 822300B4 */  lb        $v1, 0xb4($s1)

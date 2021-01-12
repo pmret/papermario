@@ -12,4 +12,4 @@ glabel func_800EF600
 /* 88ACC 800EF61C A0600014 */   sb       $zero, 0x14($v1)
 .L800EF620:
 /* 88AD0 800EF620 03E00008 */  jr        $ra
-/* 88AD4 800EF624 00000000 */   nop      
+/* 88AD4 800EF624 00000000 */   nop

@@ -11,4 +11,4 @@ glabel set_popup_duration
 /* 17E3BC 8024FADC A4640014 */   sh       $a0, 0x14($v1)
 .L8024FAE0:
 /* 17E3C0 8024FAE0 03E00008 */  jr        $ra
-/* 17E3C4 8024FAE4 00000000 */   nop      
+/* 17E3C4 8024FAE4 00000000 */   nop

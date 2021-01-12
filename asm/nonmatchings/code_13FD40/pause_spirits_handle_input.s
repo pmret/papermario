@@ -12,7 +12,7 @@ glabel pause_spirits_handle_input
 /* 1407A8 8024D468 92070003 */  lbu       $a3, 3($s0)
 /* 1407AC 8024D46C 00431024 */  and       $v0, $v0, $v1
 /* 1407B0 8024D470 1040001C */  beqz      $v0, .L8024D4E4
-/* 1407B4 8024D474 00000000 */   nop      
+/* 1407B4 8024D474 00000000 */   nop
 .L8024D478:
 /* 1407B8 8024D478 92020001 */  lbu       $v0, 1($s0)
 /* 1407BC 8024D47C 2442FFFF */  addiu     $v0, $v0, -1
@@ -26,11 +26,11 @@ glabel pause_spirits_handle_input
 /* 1407DC 8024D49C 00430018 */  mult      $v0, $v1
 /* 1407E0 8024D4A0 00003012 */  mflo      $a2
 /* 1407E4 8024D4A4 82020006 */  lb        $v0, 6($s0)
-/* 1407E8 8024D4A8 00000000 */  nop       
+/* 1407E8 8024D4A8 00000000 */  nop
 /* 1407EC 8024D4AC 00C20018 */  mult      $a2, $v0
 /* 1407F0 8024D4B0 00002012 */  mflo      $a0
 /* 1407F4 8024D4B4 82020002 */  lb        $v0, 2($s0)
-/* 1407F8 8024D4B8 00000000 */  nop       
+/* 1407F8 8024D4B8 00000000 */  nop
 /* 1407FC 8024D4BC 00620018 */  mult      $v1, $v0
 /* 140800 8024D4C0 00001812 */  mflo      $v1
 /* 140804 8024D4C4 00831021 */  addu      $v0, $a0, $v1
@@ -40,14 +40,14 @@ glabel pause_spirits_handle_input
 /* 140814 8024D4D4 00621821 */  addu      $v1, $v1, $v0
 /* 140818 8024D4D8 90620000 */  lbu       $v0, ($v1)
 /* 14081C 8024D4DC 1082FFE6 */  beq       $a0, $v0, .L8024D478
-/* 140820 8024D4E0 00000000 */   nop      
+/* 140820 8024D4E0 00000000 */   nop
 .L8024D4E4:
 /* 140824 8024D4E4 3C028027 */  lui       $v0, %hi(gPauseMenuHeldButtons)
 /* 140828 8024D4E8 8C4200C0 */  lw        $v0, %lo(gPauseMenuHeldButtons)($v0)
 /* 14082C 8024D4EC 3C030008 */  lui       $v1, 8
 /* 140830 8024D4F0 00431024 */  and       $v0, $v0, $v1
 /* 140834 8024D4F4 1040001E */  beqz      $v0, .L8024D570
-/* 140838 8024D4F8 00000000 */   nop      
+/* 140838 8024D4F8 00000000 */   nop
 /* 14083C 8024D4FC 92060005 */  lbu       $a2, 5($s0)
 /* 140840 8024D500 82050005 */  lb        $a1, 5($s0)
 .L8024D504:
@@ -63,11 +63,11 @@ glabel pause_spirits_handle_input
 /* 140868 8024D528 00450018 */  mult      $v0, $a1
 /* 14086C 8024D52C 00001812 */  mflo      $v1
 /* 140870 8024D530 82020006 */  lb        $v0, 6($s0)
-/* 140874 8024D534 00000000 */  nop       
+/* 140874 8024D534 00000000 */  nop
 /* 140878 8024D538 00620018 */  mult      $v1, $v0
 /* 14087C 8024D53C 00001812 */  mflo      $v1
 /* 140880 8024D540 82020002 */  lb        $v0, 2($s0)
-/* 140884 8024D544 00000000 */  nop       
+/* 140884 8024D544 00000000 */  nop
 /* 140888 8024D548 00A20018 */  mult      $a1, $v0
 /* 14088C 8024D54C 00004812 */  mflo      $t1
 /* 140890 8024D550 00691021 */  addu      $v0, $v1, $t1
@@ -77,7 +77,7 @@ glabel pause_spirits_handle_input
 /* 1408A0 8024D560 00621821 */  addu      $v1, $v1, $v0
 /* 1408A4 8024D564 90620000 */  lbu       $v0, ($v1)
 /* 1408A8 8024D568 1082FFE6 */  beq       $a0, $v0, .L8024D504
-/* 1408AC 8024D56C 00000000 */   nop      
+/* 1408AC 8024D56C 00000000 */   nop
 .L8024D570:
 /* 1408B0 8024D570 3C028027 */  lui       $v0, %hi(gPauseMenuHeldButtons)
 /* 1408B4 8024D574 8C4200C0 */  lw        $v0, %lo(gPauseMenuHeldButtons)($v0)
@@ -113,11 +113,11 @@ glabel pause_spirits_handle_input
 /* 14091C 8024D5DC 00430018 */  mult      $v0, $v1
 /* 140920 8024D5E0 00002812 */  mflo      $a1
 /* 140924 8024D5E4 82020006 */  lb        $v0, 6($s0)
-/* 140928 8024D5E8 00000000 */  nop       
+/* 140928 8024D5E8 00000000 */  nop
 /* 14092C 8024D5EC 00A20018 */  mult      $a1, $v0
 /* 140930 8024D5F0 00001012 */  mflo      $v0
-/* 140934 8024D5F4 00000000 */  nop       
-/* 140938 8024D5F8 00000000 */  nop       
+/* 140934 8024D5F4 00000000 */  nop
+/* 140938 8024D5F8 00000000 */  nop
 /* 14093C 8024D5FC 00640018 */  mult      $v1, $a0
 /* 140940 8024D600 82040001 */  lb        $a0, 1($s0)
 /* 140944 8024D604 00001812 */  mflo      $v1
@@ -128,7 +128,7 @@ glabel pause_spirits_handle_input
 /* 140958 8024D618 00621821 */  addu      $v1, $v1, $v0
 /* 14095C 8024D61C 90620000 */  lbu       $v0, ($v1)
 /* 140960 8024D620 1082FFE5 */  beq       $a0, $v0, .L8024D5B8
-/* 140964 8024D624 00000000 */   nop      
+/* 140964 8024D624 00000000 */   nop
 .L8024D628:
 /* 140968 8024D628 3C028027 */  lui       $v0, %hi(gPauseMenuHeldButtons)
 /* 14096C 8024D62C 8C4200C0 */  lw        $v0, %lo(gPauseMenuHeldButtons)($v0)
@@ -169,12 +169,12 @@ glabel pause_spirits_handle_input
 /* 1409E8 8024D6A8 82030005 */  lb        $v1, 5($s0)
 /* 1409EC 8024D6AC 00430018 */  mult      $v0, $v1
 /* 1409F0 8024D6B0 00004812 */  mflo      $t1
-/* 1409F4 8024D6B4 00000000 */  nop       
-/* 1409F8 8024D6B8 00000000 */  nop       
+/* 1409F4 8024D6B4 00000000 */  nop
+/* 1409F8 8024D6B8 00000000 */  nop
 /* 1409FC 8024D6BC 01250018 */  mult      $t1, $a1
 /* 140A00 8024D6C0 00001012 */  mflo      $v0
-/* 140A04 8024D6C4 00000000 */  nop       
-/* 140A08 8024D6C8 00000000 */  nop       
+/* 140A04 8024D6C4 00000000 */  nop
+/* 140A08 8024D6C8 00000000 */  nop
 /* 140A0C 8024D6CC 00640018 */  mult      $v1, $a0
 /* 140A10 8024D6D0 82040001 */  lb        $a0, 1($s0)
 /* 140A14 8024D6D4 00001812 */  mflo      $v1
@@ -185,18 +185,18 @@ glabel pause_spirits_handle_input
 /* 140A28 8024D6E8 00621821 */  addu      $v1, $v1, $v0
 /* 140A2C 8024D6EC 90620000 */  lbu       $v0, ($v1)
 /* 140A30 8024D6F0 1082FFE4 */  beq       $a0, $v0, .L8024D684
-/* 140A34 8024D6F4 00000000 */   nop      
+/* 140A34 8024D6F4 00000000 */   nop
 .L8024D6F8:
 /* 140A38 8024D6F8 82020004 */  lb        $v0, 4($s0)
 /* 140A3C 8024D6FC 82030005 */  lb        $v1, 5($s0)
 /* 140A40 8024D700 00430018 */  mult      $v0, $v1
 /* 140A44 8024D704 00002812 */  mflo      $a1
 /* 140A48 8024D708 82020006 */  lb        $v0, 6($s0)
-/* 140A4C 8024D70C 00000000 */  nop       
+/* 140A4C 8024D70C 00000000 */  nop
 /* 140A50 8024D710 00A20018 */  mult      $a1, $v0
 /* 140A54 8024D714 00002012 */  mflo      $a0
 /* 140A58 8024D718 82020002 */  lb        $v0, 2($s0)
-/* 140A5C 8024D71C 00000000 */  nop       
+/* 140A5C 8024D71C 00000000 */  nop
 /* 140A60 8024D720 00620018 */  mult      $v1, $v0
 /* 140A64 8024D724 00001812 */  mflo      $v1
 /* 140A68 8024D728 00831821 */  addu      $v1, $a0, $v1
@@ -215,7 +215,7 @@ glabel pause_spirits_handle_input
 .L8024D75C:
 /* 140A9C 8024D75C 92020003 */  lbu       $v0, 3($s0)
 /* 140AA0 8024D760 10470003 */  beq       $v0, $a3, .L8024D770
-/* 140AA4 8024D764 00000000 */   nop      
+/* 140AA4 8024D764 00000000 */   nop
 /* 140AA8 8024D768 0C05272D */  jal       play_sound
 /* 140AAC 8024D76C 240400C7 */   addiu    $a0, $zero, 0xc7
 .L8024D770:
@@ -223,18 +223,18 @@ glabel pause_spirits_handle_input
 /* 140AB4 8024D774 8C4200C4 */  lw        $v0, %lo(gPauseMenuPressedButtons)($v0)
 /* 140AB8 8024D778 30424000 */  andi      $v0, $v0, 0x4000
 /* 140ABC 8024D77C 10400007 */  beqz      $v0, .L8024D79C
-/* 140AC0 8024D780 00000000 */   nop      
+/* 140AC0 8024D780 00000000 */   nop
 /* 140AC4 8024D784 3C018027 */  lui       $at, %hi(gPauseMenuCurrentTab)
 /* 140AC8 8024D788 A02000D4 */  sb        $zero, %lo(gPauseMenuCurrentTab)($at)
 /* 140ACC 8024D78C 0C05272D */  jal       play_sound
 /* 140AD0 8024D790 240400CA */   addiu    $a0, $zero, 0xca
 /* 140AD4 8024D794 080935FC */  j         .L8024D7F0
-/* 140AD8 8024D798 00000000 */   nop      
+/* 140AD8 8024D798 00000000 */   nop
 .L8024D79C:
 /* 140ADC 8024D79C 3C018027 */  lui       $at, %hi(gPauseMenuCurrentDescIconScript)
 /* 140AE0 8024D7A0 AC2000CC */  sw        $zero, %lo(gPauseMenuCurrentDescIconScript)($at)
 /* 140AE4 8024D7A4 0C039D59 */  jal       get_player_data
-/* 140AE8 8024D7A8 00000000 */   nop      
+/* 140AE8 8024D7A8 00000000 */   nop
 /* 140AEC 8024D7AC 92030003 */  lbu       $v1, 3($s0)
 /* 140AF0 8024D7B0 8042028E */  lb        $v0, 0x28e($v0)
 /* 140AF4 8024D7B4 00031880 */  sll       $v1, $v1, 2
@@ -247,7 +247,7 @@ glabel pause_spirits_handle_input
 /* 140B10 8024D7D0 0C093BA0 */  jal       pause_get_menu_string
 /* 140B14 8024D7D4 24040056 */   addiu    $a0, $zero, 0x56
 /* 140B18 8024D7D8 080935FA */  j         .L8024D7E8
-/* 140B1C 8024D7DC 00000000 */   nop      
+/* 140B1C 8024D7DC 00000000 */   nop
 .L8024D7E0:
 /* 140B20 8024D7E0 34420031 */  ori       $v0, $v0, 0x31
 /* 140B24 8024D7E4 00621021 */  addu      $v0, $v1, $v0

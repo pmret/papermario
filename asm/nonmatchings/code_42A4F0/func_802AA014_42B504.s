@@ -36,7 +36,7 @@ glabel func_802AA014_42B504
 /* 42B580 802AA090 00A32821 */  addu      $a1, $a1, $v1
 /* 42B584 802AA094 8CA5B180 */  lw        $a1, %lo(D_802AB180)($a1)
 /* 42B588 802AA098 10450003 */  beq       $v0, $a1, .L802AA0A8
-/* 42B58C 802AA09C 00000000 */   nop      
+/* 42B58C 802AA09C 00000000 */   nop
 /* 42B590 802AA0A0 0C0511FF */  jal       set_menu_icon_script
 /* 42B594 802AA0A4 0220202D */   daddu    $a0, $s1, $zero
 .L802AA0A8:
@@ -44,7 +44,7 @@ glabel func_802AA014_42B504
 /* 42B59C 802AA0AC 0220202D */   daddu    $a0, $s1, $zero
 /* 42B5A0 802AA0B0 8E040030 */  lw        $a0, 0x30($s0)
 /* 42B5A4 802AA0B4 0C0511EA */  jal       draw_icon_0
-/* 42B5A8 802AA0B8 00000000 */   nop      
+/* 42B5A8 802AA0B8 00000000 */   nop
 /* 42B5AC 802AA0BC 0C0511EA */  jal       draw_icon_0
 /* 42B5B0 802AA0C0 8E040034 */   lw       $a0, 0x34($s0)
 /* 42B5B4 802AA0C4 8FBF0018 */  lw        $ra, 0x18($sp)

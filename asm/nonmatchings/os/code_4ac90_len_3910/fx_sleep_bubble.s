@@ -25,4 +25,4 @@ glabel fx_sleep_bubble
 /* 4BC40 80070840 3C018008 */  lui       $at, %hi(D_8007F5E8)
 /* 4BC44 80070844 8C21F5E8 */  lw        $at, %lo(D_8007F5E8)($at)
 /* 4BC48 80070848 00200008 */  jr        $at
-/* 4BC4C 8007084C 00000000 */   nop      
+/* 4BC4C 8007084C 00000000 */   nop

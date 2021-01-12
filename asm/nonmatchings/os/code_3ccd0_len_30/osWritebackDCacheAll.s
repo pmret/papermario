@@ -12,6 +12,6 @@ glabel osWritebackDCacheAll
 /* 3CCE8 800618E8 1420FFFD */  bnez      $at, .L800618E0
 /* 3CCEC 800618EC 25080010 */   addiu    $t0, $t0, 0x10
 /* 3CCF0 800618F0 03E00008 */  jr        $ra
-/* 3CCF4 800618F4 00000000 */   nop      
-/* 3CCF8 800618F8 00000000 */  nop       
-/* 3CCFC 800618FC 00000000 */  nop       
+/* 3CCF4 800618F4 00000000 */   nop
+/* 3CCF8 800618F8 00000000 */  nop
+/* 3CCFC 800618FC 00000000 */  nop

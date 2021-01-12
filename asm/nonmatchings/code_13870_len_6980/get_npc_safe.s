@@ -27,4 +27,4 @@ glabel get_npc_safe
 /* 15F94 8003AB94 00A0102D */  daddu     $v0, $a1, $zero
 .L8003AB98:
 /* 15F98 8003AB98 03E00008 */  jr        $ra
-/* 15F9C 8003AB9C 00000000 */   nop      
+/* 15F9C 8003AB9C 00000000 */   nop

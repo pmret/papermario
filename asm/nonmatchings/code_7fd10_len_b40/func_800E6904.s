@@ -19,7 +19,7 @@ glabel func_800E6904
 /* 7FDEC 800E693C 0000102D */   daddu    $v0, $zero, $zero
 /* 7FDF0 800E6940 82220000 */  lb        $v0, ($s1)
 /* 7FDF4 800E6944 1440000A */  bnez      $v0, .L800E6970
-/* 7FDF8 800E6948 00000000 */   nop      
+/* 7FDF8 800E6948 00000000 */   nop
 /* 7FDFC 800E694C 8C820000 */  lw        $v0, ($a0)
 /* 7FE00 800E6950 30421000 */  andi      $v0, $v0, 0x1000
 /* 7FE04 800E6954 1440001C */  bnez      $v0, .L800E69C8
@@ -32,7 +32,7 @@ glabel func_800E6904
 /* 7FE1C 800E696C 24020001 */   addiu    $v0, $zero, 1
 .L800E6970:
 /* 7FE20 800E6970 0C03ACF8 */  jal       partner_player_can_pause
-/* 7FE24 800E6974 00000000 */   nop      
+/* 7FE24 800E6974 00000000 */   nop
 /* 7FE28 800E6978 10400012 */  beqz      $v0, .L800E69C4
 /* 7FE2C 800E697C 24020006 */   addiu    $v0, $zero, 6
 /* 7FE30 800E6980 82230003 */  lb        $v1, 3($s1)

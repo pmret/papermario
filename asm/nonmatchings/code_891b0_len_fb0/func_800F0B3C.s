@@ -21,7 +21,7 @@ glabel func_800F0B3C
 /* 8A02C 800F0B7C 00021E03 */  sra       $v1, $v0, 0x18
 /* 8A030 800F0B80 2402000A */  addiu     $v0, $zero, 0xa
 /* 8A034 800F0B84 10620003 */  beq       $v1, $v0, .L800F0B94
-/* 8A038 800F0B88 00000000 */   nop      
+/* 8A038 800F0B88 00000000 */   nop
 /* 8A03C 800F0B8C 14600004 */  bnez      $v1, .L800F0BA0
 /* 8A040 800F0B90 24020004 */   addiu    $v0, $zero, 4
 .L800F0B94:
@@ -49,9 +49,9 @@ glabel func_800F0B3C
 /* 8A090 800F0BE0 3C0140C9 */  lui       $at, 0x40c9
 /* 8A094 800F0BE4 34210FD0 */  ori       $at, $at, 0xfd0
 /* 8A098 800F0BE8 44811000 */  mtc1      $at, $f2
-/* 8A09C 800F0BEC 00000000 */  nop       
+/* 8A09C 800F0BEC 00000000 */  nop
 /* 8A0A0 800F0BF0 46020002 */  mul.s     $f0, $f0, $f2
-/* 8A0A4 800F0BF4 00000000 */  nop       
+/* 8A0A4 800F0BF4 00000000 */  nop
 /* 8A0A8 800F0BF8 27A50018 */  addiu     $a1, $sp, 0x18
 /* 8A0AC 800F0BFC 3C0143B4 */  lui       $at, 0x43b4
 /* 8A0B0 800F0C00 44816000 */  mtc1      $at, $f12
@@ -61,21 +61,21 @@ glabel func_800F0B3C
 /* 8A0C0 800F0C10 860200B2 */  lh        $v0, 0xb2($s0)
 /* 8A0C4 800F0C14 C7A40018 */  lwc1      $f4, 0x18($sp)
 /* 8A0C8 800F0C18 44821000 */  mtc1      $v0, $f2
-/* 8A0CC 800F0C1C 00000000 */  nop       
+/* 8A0CC 800F0C1C 00000000 */  nop
 /* 8A0D0 800F0C20 468010A0 */  cvt.s.w   $f2, $f2
 /* 8A0D4 800F0C24 46041102 */  mul.s     $f4, $f2, $f4
-/* 8A0D8 800F0C28 00000000 */  nop       
+/* 8A0D8 800F0C28 00000000 */  nop
 /* 8A0DC 800F0C2C C7A0001C */  lwc1      $f0, 0x1c($sp)
 /* 8A0E0 800F0C30 46001082 */  mul.s     $f2, $f2, $f0
-/* 8A0E4 800F0C34 00000000 */  nop       
+/* 8A0E4 800F0C34 00000000 */  nop
 /* 8A0E8 800F0C38 3C013E4C */  lui       $at, 0x3e4c
 /* 8A0EC 800F0C3C 3421CCCD */  ori       $at, $at, 0xcccd
 /* 8A0F0 800F0C40 44810000 */  mtc1      $at, $f0
-/* 8A0F4 800F0C44 00000000 */  nop       
+/* 8A0F4 800F0C44 00000000 */  nop
 /* 8A0F8 800F0C48 46002102 */  mul.s     $f4, $f4, $f0
-/* 8A0FC 800F0C4C 00000000 */  nop       
+/* 8A0FC 800F0C4C 00000000 */  nop
 /* 8A100 800F0C50 46001082 */  mul.s     $f2, $f2, $f0
-/* 8A104 800F0C54 00000000 */  nop       
+/* 8A104 800F0C54 00000000 */  nop
 /* 8A108 800F0C58 44803000 */  mtc1      $zero, $f6
 /* 8A10C 800F0C5C C600002C */  lwc1      $f0, 0x2c($s0)
 /* 8A110 800F0C60 46060000 */  add.s     $f0, $f0, $f6

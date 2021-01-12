@@ -22,10 +22,10 @@ glabel osPiRawStartDma
 /* 468C0 8006B4C0 8C620000 */  lw        $v0, ($v1)
 /* 468C4 8006B4C4 30420003 */  andi      $v0, $v0, 3
 /* 468C8 8006B4C8 1440FFFD */  bnez      $v0, .L8006B4C0
-/* 468CC 8006B4CC 00000000 */   nop      
+/* 468CC 8006B4CC 00000000 */   nop
 .L8006B4D0:
 /* 468D0 8006B4D0 0C0187A4 */  jal       osVirtualToPhysical
-/* 468D4 8006B4D4 00000000 */   nop      
+/* 468D4 8006B4D4 00000000 */   nop
 /* 468D8 8006B4D8 3C06A460 */  lui       $a2, 0xa460
 /* 468DC 8006B4DC 34C60004 */  ori       $a2, $a2, 4
 /* 468E0 8006B4E0 3C051FFF */  lui       $a1, 0x1fff

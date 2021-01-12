@@ -13,7 +13,7 @@ glabel partner_suspend_ability_script
 /* 84CE8 800EB838 0C0B1059 */  jal       does_script_exist
 /* 84CEC 800EB83C 8E040000 */   lw       $a0, ($s0)
 /* 84CF0 800EB840 10400003 */  beqz      $v0, .L800EB850
-/* 84CF4 800EB844 00000000 */   nop      
+/* 84CF4 800EB844 00000000 */   nop
 /* 84CF8 800EB848 0C0B1108 */  jal       suspend_all_script
 /* 84CFC 800EB84C 8E040000 */   lw       $a0, ($s0)
 .L800EB850:

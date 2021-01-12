@@ -28,7 +28,7 @@ glabel func_8024064C_EDC62C
 /* EDC680 802406A0 00220821 */  addu      $at, $at, $v0
 /* EDC684 802406A4 AC2029E0 */  sw        $zero, %lo(D_802429E0)($at)
 /* EDC688 802406A8 080901B6 */  j         .L802406D8
-/* EDC68C 802406AC 00000000 */   nop      
+/* EDC68C 802406AC 00000000 */   nop
 .L802406B0:
 /* EDC690 802406B0 3C038024 */  lui       $v1, %hi(D_802429E0)
 /* EDC694 802406B4 246329E0 */  addiu     $v1, $v1, %lo(D_802429E0)
@@ -46,5 +46,5 @@ glabel func_8024064C_EDC62C
 /* EDC6BC 802406DC 24020002 */  addiu     $v0, $zero, 2
 /* EDC6C0 802406E0 03E00008 */  jr        $ra
 /* EDC6C4 802406E4 27BD0018 */   addiu    $sp, $sp, 0x18
-/* EDC6C8 802406E8 00000000 */  nop       
-/* EDC6CC 802406EC 00000000 */  nop       
+/* EDC6C8 802406E8 00000000 */  nop
+/* EDC6CC 802406EC 00000000 */  nop

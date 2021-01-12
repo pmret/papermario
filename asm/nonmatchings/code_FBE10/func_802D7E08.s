@@ -107,13 +107,13 @@ glabel func_802D7E08
 /* FC944 802D7F94 00021400 */  sll       $v0, $v0, 0x10
 /* FC948 802D7F98 00021403 */  sra       $v0, $v0, 0x10
 /* FC94C 802D7F9C 44822000 */  mtc1      $v0, $f4
-/* FC950 802D7FA0 00000000 */  nop       
+/* FC950 802D7FA0 00000000 */  nop
 /* FC954 802D7FA4 46802120 */  cvt.s.w   $f4, $f4
 /* FC958 802D7FA8 00031FC3 */  sra       $v1, $v1, 0x1f
 /* FC95C 802D7FAC 00004010 */  mfhi      $t0
 /* FC960 802D7FB0 01031823 */  subu      $v1, $t0, $v1
 /* FC964 802D7FB4 44830000 */  mtc1      $v1, $f0
-/* FC968 802D7FB8 00000000 */  nop       
+/* FC968 802D7FB8 00000000 */  nop
 /* FC96C 802D7FBC 46800020 */  cvt.s.w   $f0, $f0
 /* FC970 802D7FC0 080B5FF4 */  j         .L802D7FD0
 /* FC974 802D7FC4 46001000 */   add.s    $f0, $f2, $f0

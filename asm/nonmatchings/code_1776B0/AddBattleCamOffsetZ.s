@@ -11,7 +11,7 @@ glabel AddBattleCamOffsetZ
 /* 17D390 8024EAB0 24020002 */   addiu    $v0, $zero, 2
 /* 17D394 8024EAB4 8CA50000 */  lw        $a1, ($a1)
 /* 17D398 8024EAB8 0C0B1EAF */  jal       get_variable
-/* 17D39C 8024EABC 00000000 */   nop      
+/* 17D39C 8024EABC 00000000 */   nop
 /* 17D3A0 8024EAC0 3C04802A */  lui       $a0, %hi(D_8029F286)
 /* 17D3A4 8024EAC4 2484F286 */  addiu     $a0, $a0, %lo(D_8029F286)
 /* 17D3A8 8024EAC8 94830000 */  lhu       $v1, ($a0)

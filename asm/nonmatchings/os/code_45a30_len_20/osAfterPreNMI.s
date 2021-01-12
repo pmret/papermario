@@ -9,4 +9,4 @@ glabel osAfterPreNMI
 /* 45A40 8006A640 8FBF0010 */  lw        $ra, 0x10($sp)
 /* 45A44 8006A644 03E00008 */  jr        $ra
 /* 45A48 8006A648 27BD0018 */   addiu    $sp, $sp, 0x18
-/* 45A4C 8006A64C 00000000 */  nop       
+/* 45A4C 8006A64C 00000000 */  nop

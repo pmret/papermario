@@ -9,7 +9,7 @@ glabel enable_npc_shadow
 /* 15FB0 8003ABB0 8E020000 */  lw        $v0, ($s0)
 /* 15FB4 8003ABB4 30420010 */  andi      $v0, $v0, 0x10
 /* 15FB8 8003ABB8 1440000C */  bnez      $v0, .L8003ABEC
-/* 15FBC 8003ABBC 00000000 */   nop      
+/* 15FBC 8003ABBC 00000000 */   nop
 /* 15FC0 8003ABC0 0C044181 */  jal       get_shadow_by_index
 /* 15FC4 8003ABC4 8E040078 */   lw       $a0, 0x78($s0)
 /* 15FC8 8003ABC8 3C050001 */  lui       $a1, 1

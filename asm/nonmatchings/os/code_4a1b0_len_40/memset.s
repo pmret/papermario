@@ -16,7 +16,7 @@ glabel memset
 .L8006EDD8:
 /* 4A1D8 8006EDD8 27BD0008 */  addiu     $sp, $sp, 8
 /* 4A1DC 8006EDDC 03E00008 */  jr        $ra
-/* 4A1E0 8006EDE0 00000000 */   nop      
-/* 4A1E4 8006EDE4 00000000 */  nop       
-/* 4A1E8 8006EDE8 00000000 */  nop       
-/* 4A1EC 8006EDEC 00000000 */  nop       
+/* 4A1E0 8006EDE0 00000000 */   nop
+/* 4A1E4 8006EDE4 00000000 */  nop
+/* 4A1E8 8006EDE8 00000000 */  nop
+/* 4A1EC 8006EDEC 00000000 */  nop

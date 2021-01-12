@@ -21,4 +21,4 @@ glabel icon_set_opacity
 /* DB5F0 80144EF0 AC820000 */  sw        $v0, ($a0)
 .L80144EF4:
 /* DB5F4 80144EF4 03E00008 */  jr        $ra
-/* DB5F8 80144EF8 00000000 */   nop      
+/* DB5F8 80144EF8 00000000 */   nop

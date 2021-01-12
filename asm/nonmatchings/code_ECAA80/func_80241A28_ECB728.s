@@ -28,7 +28,7 @@ glabel func_80241A28_ECB728
 /* ECB77C 80241A7C 00220821 */  addu      $at, $at, $v0
 /* ECB780 80241A80 AC2062F0 */  sw        $zero, %lo(D_802462F0)($at)
 /* ECB784 80241A84 080906AD */  j         .L80241AB4
-/* ECB788 80241A88 00000000 */   nop      
+/* ECB788 80241A88 00000000 */   nop
 .L80241A8C:
 /* ECB78C 80241A8C 3C038024 */  lui       $v1, %hi(D_802462F0)
 /* ECB790 80241A90 246362F0 */  addiu     $v1, $v1, %lo(D_802462F0)

@@ -6,11 +6,11 @@ glabel clear_npcs
 /* 138C0 800384C0 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 138C4 800384C4 80420070 */  lb        $v0, 0x70($v0)
 /* 138C8 800384C8 14400005 */  bnez      $v0, .L800384E0
-/* 138CC 800384CC 00000000 */   nop      
+/* 138CC 800384CC 00000000 */   nop
 /* 138D0 800384D0 3C02800A */  lui       $v0, %hi(gWorldNpcList)
 /* 138D4 800384D4 24420990 */  addiu     $v0, $v0, %lo(gWorldNpcList)
 /* 138D8 800384D8 0800E13A */  j         .L800384E8
-/* 138DC 800384DC 00000000 */   nop      
+/* 138DC 800384DC 00000000 */   nop
 .L800384E0:
 /* 138E0 800384E0 3C02800A */  lui       $v0, %hi(gBattleNpcList)
 /* 138E4 800384E4 24420A90 */  addiu     $v0, $v0, %lo(gBattleNpcList)
@@ -32,4 +32,4 @@ glabel clear_npcs
 /* 1391C 8003851C 3C01800A */  lui       $at, %hi(D_800A0B94)
 /* 13920 80038520 A0220B94 */  sb        $v0, %lo(D_800A0B94)($at)
 /* 13924 80038524 03E00008 */  jr        $ra
-/* 13928 80038528 00000000 */   nop      
+/* 13928 80038528 00000000 */   nop

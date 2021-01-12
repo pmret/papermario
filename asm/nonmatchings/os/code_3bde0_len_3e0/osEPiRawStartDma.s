@@ -24,7 +24,7 @@ glabel osEPiRawStartDma
 /* 3BFB8 80060BB8 8C620000 */  lw        $v0, ($v1)
 /* 3BFBC 80060BBC 30420003 */  andi      $v0, $v0, 3
 /* 3BFC0 80060BC0 1440FFFD */  bnez      $v0, .L80060BB8
-/* 3BFC4 80060BC4 00000000 */   nop      
+/* 3BFC4 80060BC4 00000000 */   nop
 .L80060BC8:
 /* 3BFC8 80060BC8 92060009 */  lbu       $a2, 9($s0)
 /* 3BFCC 80060BCC 00061080 */  sll       $v0, $a2, 2
@@ -34,7 +34,7 @@ glabel osEPiRawStartDma
 /* 3BFDC 80060BDC 92020004 */  lbu       $v0, 4($s0)
 /* 3BFE0 80060BE0 90A30004 */  lbu       $v1, 4($a1)
 /* 3BFE4 80060BE4 1062003D */  beq       $v1, $v0, .L80060CDC
-/* 3BFE8 80060BE8 00000000 */   nop      
+/* 3BFE8 80060BE8 00000000 */   nop
 /* 3BFEC 80060BEC 14C00019 */  bnez      $a2, .L80060C54
 /* 3BFF0 80060BF0 00A01821 */   addu     $v1, $a1, $zero
 /* 3BFF4 80060BF4 90620005 */  lbu       $v0, 5($v1)
@@ -106,7 +106,7 @@ glabel osEPiRawStartDma
 /* 3C0D8 80060CD8 A0620008 */  sb        $v0, 8($v1)
 .L80060CDC:
 /* 3C0DC 80060CDC 0C0187A4 */  jal       osVirtualToPhysical
-/* 3C0E0 80060CE0 00000000 */   nop      
+/* 3C0E0 80060CE0 00000000 */   nop
 /* 3C0E4 80060CE4 3C04A460 */  lui       $a0, 0xa460
 /* 3C0E8 80060CE8 34840004 */  ori       $a0, $a0, 4
 /* 3C0EC 80060CEC 3C03A460 */  lui       $v1, 0xa460
@@ -141,4 +141,4 @@ glabel osEPiRawStartDma
 /* 3C150 80060D50 8FB00010 */  lw        $s0, 0x10($sp)
 /* 3C154 80060D54 03E00008 */  jr        $ra
 /* 3C158 80060D58 27BD0028 */   addiu    $sp, $sp, 0x28
-/* 3C15C 80060D5C 00000000 */  nop       
+/* 3C15C 80060D5C 00000000 */  nop

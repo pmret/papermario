@@ -8,7 +8,7 @@ glabel func_8004DAE0
 /* 28EEC 8004DAEC 12000009 */  beqz      $s0, .L8004DB14
 /* 28EF0 8004DAF0 AFBF0014 */   sw       $ra, 0x14($sp)
 /* 28EF4 8004DAF4 0C0135E5 */  jal       func_8004D794
-/* 28EF8 8004DAF8 00000000 */   nop      
+/* 28EF8 8004DAF8 00000000 */   nop
 /* 28EFC 8004DAFC 50400006 */  beql      $v0, $zero, .L8004DB18
 /* 28F00 8004DB00 24020002 */   addiu    $v0, $zero, 2
 /* 28F04 8004DB04 8C42001C */  lw        $v0, 0x1c($v0)

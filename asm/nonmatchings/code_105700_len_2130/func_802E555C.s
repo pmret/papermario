@@ -8,7 +8,7 @@ glabel func_802E555C
 /* 106DE8 802E5568 1040000C */  beqz      $v0, .L802E559C
 /* 106DEC 802E556C AFBF0010 */   sw       $ra, 0x10($sp)
 /* 106DF0 802E5570 0C043F5A */  jal       func_8010FD68
-/* 106DF4 802E5574 00000000 */   nop      
+/* 106DF4 802E5574 00000000 */   nop
 /* 106DF8 802E5578 0C009C22 */  jal       func_80027088
 /* 106DFC 802E557C 0000202D */   daddu    $a0, $zero, $zero
 /* 106E00 802E5580 3C02800A */  lui       $v0, %hi(D_8009A650)

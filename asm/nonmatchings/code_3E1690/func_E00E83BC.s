@@ -156,6 +156,6 @@ glabel func_E00E83BC
 /* 3E1CA8 E00E8618 8FB00090 */  lw        $s0, 0x90($sp)
 /* 3E1CAC E00E861C 03E00008 */  jr        $ra
 /* 3E1CB0 E00E8620 27BD00B0 */   addiu    $sp, $sp, 0xb0
-/* 3E1CB4 E00E8624 00000000 */  nop       
-/* 3E1CB8 E00E8628 00000000 */  nop       
-/* 3E1CBC E00E862C 00000000 */  nop       
+/* 3E1CB4 E00E8624 00000000 */  nop
+/* 3E1CB8 E00E8628 00000000 */  nop
+/* 3E1CBC E00E862C 00000000 */  nop

@@ -12,7 +12,7 @@ glabel fio_has_valid_backup
 /* 63F4 8002AFF4 0C00AE1A */  jal       fio_read_flash
 /* 63F8 8002AFF8 24060080 */   addiu    $a2, $zero, 0x80
 /* 63FC 8002AFFC 0C00ABDC */  jal       fio_validate_header_checksums
-/* 6400 8002B000 00000000 */   nop      
+/* 6400 8002B000 00000000 */   nop
 /* 6404 8002B004 1440000D */  bnez      $v0, .L8002B03C
 /* 6408 8002B008 24020001 */   addiu    $v0, $zero, 1
 /* 640C 8002B00C 24040007 */  addiu     $a0, $zero, 7
@@ -20,7 +20,7 @@ glabel fio_has_valid_backup
 /* 6414 8002B014 0C00AE1A */  jal       fio_read_flash
 /* 6418 8002B018 24060080 */   addiu    $a2, $zero, 0x80
 /* 641C 8002B01C 0C00ABDC */  jal       fio_validate_header_checksums
-/* 6420 8002B020 00000000 */   nop      
+/* 6420 8002B020 00000000 */   nop
 /* 6424 8002B024 14400005 */  bnez      $v0, .L8002B03C
 /* 6428 8002B028 24020001 */   addiu    $v0, $zero, 1
 /* 642C 8002B02C 0200202D */  daddu     $a0, $s0, $zero

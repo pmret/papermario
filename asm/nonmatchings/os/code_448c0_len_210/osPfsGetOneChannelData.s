@@ -37,6 +37,6 @@ glabel osPfsGetOneChannelData
 .L800696BC:
 /* 44ABC 800696BC 03E00008 */  jr        $ra
 /* 44AC0 800696C0 27BD0010 */   addiu    $sp, $sp, 0x10
-/* 44AC4 800696C4 00000000 */  nop       
-/* 44AC8 800696C8 00000000 */  nop       
-/* 44ACC 800696CC 00000000 */  nop       
+/* 44AC4 800696C4 00000000 */  nop
+/* 44AC8 800696C8 00000000 */  nop
+/* 44ACC 800696CC 00000000 */  nop

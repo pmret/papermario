@@ -44,7 +44,7 @@ glabel func_E0112000
 /* 3F9EEC E011209C AE22000C */   sw       $v0, 0xc($s1)
 .LE01120A0:
 /* 3F9EF0 E01120A0 08044828 */  j         .LE01120A0
-/* 3F9EF4 E01120A4 00000000 */   nop      
+/* 3F9EF4 E01120A4 00000000 */   nop
 .LE01120A8:
 /* 3F9EF8 E01120A8 AE120000 */  sw        $s2, ($s0)
 /* 3F9EFC E01120AC 1E600004 */  bgtz      $s3, .LE01120C0
@@ -84,7 +84,7 @@ glabel func_E0112000
 /* 3F9F78 E0112128 0C080150 */  jal       func_E0200540
 /* 3F9F7C E011212C 24040072 */   addiu    $a0, $zero, 0x72
 /* 3F9F80 E0112130 4616A102 */  mul.s     $f4, $f20, $f22
-/* 3F9F84 E0112134 00000000 */  nop       
+/* 3F9F84 E0112134 00000000 */  nop
 /* 3F9F88 E0112138 24040003 */  addiu     $a0, $zero, 3
 /* 3F9F8C E011213C 24020010 */  addiu     $v0, $zero, 0x10
 /* 3F9F90 E0112140 4405C000 */  mfc1      $a1, $f24
@@ -96,7 +96,7 @@ glabel func_E0112000
 /* 3F9FA8 E0112158 44811000 */  mtc1      $at, $f2
 /* 3F9FAC E011215C 4406E000 */  mfc1      $a2, $f28
 /* 3F9FB0 E0112160 4600A002 */  mul.s     $f0, $f20, $f0
-/* 3F9FB4 E0112164 00000000 */  nop       
+/* 3F9FB4 E0112164 00000000 */  nop
 /* 3F9FB8 E0112168 AFA2001C */  sw        $v0, 0x1c($sp)
 /* 3F9FBC E011216C AFA00020 */  sw        $zero, 0x20($sp)
 /* 3F9FC0 E0112170 E7A20018 */  swc1      $f2, 0x18($sp)
