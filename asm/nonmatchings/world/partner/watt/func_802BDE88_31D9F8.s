@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_802BDE88
+glabel func_802BDE88_31D9F8
 /* 31D9F8 802BDE88 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* 31D9FC 802BDE8C AFB10014 */  sw        $s1, 0x14($sp)
 /* 31DA00 802BDE90 0080882D */  daddu     $s1, $a0, $zero
@@ -27,19 +27,19 @@ glabel func_802BDE88
 /* 31DA4C 802BDEDC 10620037 */  beq       $v1, $v0, .L802BDFBC
 /* 31DA50 802BDEE0 0000102D */   daddu    $v0, $zero, $zero
 /* 31DA54 802BDEE4 080AF7FD */  j         .L802BDFF4
-/* 31DA58 802BDEE8 00000000 */   nop      
+/* 31DA58 802BDEE8 00000000 */   nop
 .L802BDEEC:
 /* 31DA5C 802BDEEC 8E2200B4 */  lw        $v0, 0xb4($s1)
 /* 31DA60 802BDEF0 14400007 */  bnez      $v0, .L802BDF10
-/* 31DA64 802BDEF4 00000000 */   nop      
+/* 31DA64 802BDEF4 00000000 */   nop
 /* 31DA68 802BDEF8 0C03ADF3 */  jal       partner_kill_ability_script
-/* 31DA6C 802BDEFC 00000000 */   nop      
-/* 31DA70 802BDF00 0C0AF460 */  jal       func_802BD180
-/* 31DA74 802BDF04 00000000 */   nop      
+/* 31DA6C 802BDEFC 00000000 */   nop
+/* 31DA70 802BDF00 0C0AF460 */  jal       func_802BD180_31CCF0
+/* 31DA74 802BDF04 00000000 */   nop
 /* 31DA78 802BDF08 080AF7C6 */  j         .L802BDF18
-/* 31DA7C 802BDF0C 00000000 */   nop      
+/* 31DA7C 802BDF0C 00000000 */   nop
 .L802BDF10:
-/* 31DA80 802BDF10 0C0AF440 */  jal       func_802BD100
+/* 31DA80 802BDF10 0C0AF440 */  jal       func_802BD100_31CC70
 /* 31DA84 802BDF14 0240202D */   daddu    $a0, $s2, $zero
 .L802BDF18:
 /* 31DA88 802BDF18 C6220088 */  lwc1      $f2, 0x88($s1)
@@ -59,9 +59,9 @@ glabel func_802BDE88
 /* 31DAC0 802BDF50 8E260098 */  lw        $a2, 0x98($s1)
 /* 31DAC4 802BDF54 44050000 */  mfc1      $a1, $f0
 /* 31DAC8 802BDF58 0C0389DE */  jal       move_player
-/* 31DACC 802BDF5C 00000000 */   nop      
-/* 31DAD0 802BDF60 0C0AF81C */  jal       func_802BE070
-/* 31DAD4 802BDF64 00000000 */   nop      
+/* 31DACC 802BDF5C 00000000 */   nop
+/* 31DAD0 802BDF60 0C0AF81C */  jal       func_802BE070_31DBE0
+/* 31DAD4 802BDF64 00000000 */   nop
 /* 31DAD8 802BDF68 8E420000 */  lw        $v0, ($s2)
 /* 31DADC 802BDF6C 2403FDFF */  addiu     $v1, $zero, -0x201
 /* 31DAE0 802BDF70 00431024 */  and       $v0, $v0, $v1
@@ -84,8 +84,8 @@ glabel func_802BDE88
 /* 31DB24 802BDFB4 080AF7FC */  j         .L802BDFF0
 /* 31DB28 802BDFB8 AE220070 */   sw       $v0, 0x70($s1)
 .L802BDFBC:
-/* 31DB2C 802BDFBC 0C0AF81C */  jal       func_802BE070
-/* 31DB30 802BDFC0 00000000 */   nop      
+/* 31DB2C 802BDFBC 0C0AF81C */  jal       func_802BE070_31DBE0
+/* 31DB30 802BDFC0 00000000 */   nop
 /* 31DB34 802BDFC4 8E220074 */  lw        $v0, 0x74($s1)
 /* 31DB38 802BDFC8 2442FFFF */  addiu     $v0, $v0, -1
 /* 31DB3C 802BDFCC 14400008 */  bnez      $v0, .L802BDFF0
@@ -94,7 +94,7 @@ glabel func_802BDE88
 /* 31DB48 802BDFD8 10400006 */  beqz      $v0, .L802BDFF4
 /* 31DB4C 802BDFDC 24020002 */   addiu    $v0, $zero, 2
 /* 31DB50 802BDFE0 0C03ACC5 */  jal       partner_use_ability
-/* 31DB54 802BDFE4 00000000 */   nop      
+/* 31DB54 802BDFE4 00000000 */   nop
 /* 31DB58 802BDFE8 080AF7FD */  j         .L802BDFF4
 /* 31DB5C 802BDFEC 24020002 */   addiu    $v0, $zero, 2
 .L802BDFF0:

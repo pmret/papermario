@@ -15,8 +15,8 @@ glabel entry_point
 /* 1024 80025C24 00000000 */   nop
 /* 1028 80025C28 3C1D800B */  lui       $sp, %hi(D_800B6590)
 /* 102C 80025C2C 27BD6590 */  addiu     $sp, $sp, %lo(D_800B6590)
-/* 1030 80025C30 3C0A8006 */  lui       $t2, %hi(jtbl_8005E8B0_39CB0)
-/* 1034 80025C34 254AE8B0 */  addiu     $t2, $t2, %lo(jtbl_8005E8B0_39CB0)
+/* 1030 80025C30 3C0A8006 */  lui       $t2, %hi(nuBoot)
+/* 1034 80025C34 254AE8B0 */  addiu     $t2, $t2, %lo(nuBoot)
 /* 1038 80025C38 01400008 */  jr        $t2
 /* 103C 80025C3C 00000000 */   nop
 /* 1040 80025C40 00000000 */  nop

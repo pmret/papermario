@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_802BDD9C
+glabel func_802BDD9C_31D90C
 /* 31D90C 802BDD9C 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 31D910 802BDDA0 3C02802C */  lui       $v0, %hi(D_802BE30C)
 /* 31D914 802BDDA4 8C42E30C */  lw        $v0, %lo(D_802BE30C)($v0)
@@ -28,8 +28,8 @@ glabel func_802BDD9C
 /* 31D964 802BDDF4 0C03BD17 */  jal       clear_partner_move_history
 /* 31D968 802BDDF8 A0C20001 */   sb       $v0, 1($a2)
 .L802BDDFC:
-/* 31D96C 802BDDFC 0C0AF460 */  jal       func_802BD180
-/* 31D970 802BDE00 00000000 */   nop      
+/* 31D96C 802BDDFC 0C0AF460 */  jal       func_802BD180_31CCF0
+/* 31D970 802BDE00 00000000 */   nop
 /* 31D974 802BDE04 8FBF0010 */  lw        $ra, 0x10($sp)
 /* 31D978 802BDE08 03E00008 */  jr        $ra
 /* 31D97C 802BDE0C 27BD0018 */   addiu    $sp, $sp, 0x18
