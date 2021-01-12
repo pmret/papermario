@@ -2,7 +2,7 @@
 
 extern Gfx D_00074210[];
 extern Gfx D_00074230[];
-extern Gfx* D_8009A66C[1];
+extern Gfx* D_8009A66C[2];
 
 extern int D_000759B0[];
 extern int D_000759B0_end[]; // A55D0
@@ -115,16 +115,18 @@ s32 func_80027190(void) {
     return D_8009A5D8;
 }
 
-INCLUDE_ASM(s32, "code_1b40_len_20b0", func_800271A0);
-/*void func_800271A0(void) {
-    Gfx *temp = D_8009A66C[0] + 1;
+//INCLUDE_ASM(s32, "code_1b40_len_20b0", func_800271A0);
+void func_800271A0(void) {
+    Gfx *temp = D_8009A66C[0];
 
-    gSPSegment(D_8009A66C[0], 0x00, 0x00000000);
-    D_8009A66C[0] = temp;
-    gSPDisplayList(temp, &D_00074230);
-    D_8009A66C[0]++;
-    gSPDisplayList(D_8009A66C[0]++, &D_00074210);
-}*/
+    do{
+        Gfx *_g = (Gfx *)((D_8009A66C[0]++));
+        _g->words.w0 = (((unsigned int) (((unsigned int)((0xdb)) & ((0x01 << (8)) - 1)) << (24))) | ((unsigned int) (((unsigned int)((0x06)) & ((0x01 << (8)) - 1)) << (16))) | ((unsigned int) (((unsigned int)(((0x00)*4)) & ((0x01 << (16)) - 1)) << (0)))); _g->words.w1 = (unsigned int)(0x00000000); 
+    }while(0);
+    do{ Gfx *_g = (Gfx *)(D_8009A66C[0]++); _g->words.w0 = (((unsigned int) (((unsigned int)((0xde)) & ((0x01 << (8)) - 1)) << (24))) | ((unsigned int) (((unsigned int)((0x00)) & ((0x01 << (8)) - 1)) << (16))) | ((unsigned int) (((unsigned int)((0)) & ((0x01 << (16)) - 1)) << (0)))); _g->words.w1 = (unsigned int)(&D_00074230);
+    Gfx *_g = (Gfx *)(D_8009A66C[0]++); _g->words.w0 = (((unsigned int) (((unsigned int)((0xde)) & ((0x01 << (8)) - 1)) << (24))) | ((unsigned int) (((unsigned int)((0x00)) & ((0x01 << (8)) - 1)) << (16))) | ((unsigned int) (((unsigned int)((0)) & ((0x01 << (16)) - 1)) << (0)))); _g->words.w1 = (unsigned int)(&D_00074210); }while(0);
+}
+
 
 INCLUDE_ASM(s32, "code_1b40_len_20b0", func_800271FC);
 

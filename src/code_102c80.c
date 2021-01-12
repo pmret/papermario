@@ -1,24 +1,10 @@
 #include "common.h"
 
-typedef struct struct802E1400 {
-    /* 0x000 */ Vec3f unk_00;
-    /* 0x00C */ char unk_0C[4];
-    /* 0x010 */ s8 unk_10;
-    /* 0x011 */ s8 unk_11;
-    /* 0x014 */ Vec3f unk_14;
-    /* 0x020 */ u16 unk_20;
-    /* 0x022 */ s16 unk_22;
-    /* 0x024 */ char unk_24[4];
-    /* 0x028 */ Entity* attachedEntity;
-    /* 0x02C */ char unk_2C[12];
-    /* 0x038 */ f32 unk_38;
-} struct802E1400;
-
 void func_802E246C(Entity* entity, void* arg1, void* arg2);
 
 void func_802E1400(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    struct802E1400* temp = (struct802E1400*)entity->dataBuf;
+    struct802E1400* temp = entity->dataBuf;
 
     if (entity->unk_06 & 1) {
         if ((playerStatus->actionState == ActionState_GROUND_POUND) || (playerStatus->actionState == ActionState_ULTRA_POUND)) {
@@ -29,11 +15,11 @@ void func_802E1400(Entity* entity) {
 }
 
 void func_802E1460(Entity* entity) {
-    struct802E1400* temp = (struct802E1400*)entity->dataBuf;
+    struct802E1400* temp = entity->dataBuf;
     u16 temp2 = temp->unk_22--;
 
     if (temp2) {
-        entity->position.y -= D_802EB000;
+        entity->position.y -= D_802EB000; // 1.8625;
         return;
     }
     func_80110678(entity);
@@ -42,11 +28,11 @@ void func_802E1460(Entity* entity) {
 }
 
 void func_802E14D8(Entity* entity) {
-    struct802E1400* temp = (struct802E1400*)entity->dataBuf;
+    struct802E1400* temp = entity->dataBuf;
     u16 temp2 = temp->unk_22--;
 
     if (temp2) {
-        entity->position.y += D_802EB008;
+        entity->position.y += D_802EB008; // 1.8625;
         return;
     }
     func_8010FD68(entity);
@@ -67,7 +53,7 @@ void func_802E1614(Entity* entity) {
 }
 
 void func_802E1660(Entity* entity) {
-    struct802E1400* temp = (struct802E1400*)entity->dataBuf;
+    struct802E1400* temp = entity->dataBuf;
     PlayerStatus* playerStatus = &gPlayerStatus;
     s8* temp2 = D_8010EBB0;
 
@@ -121,7 +107,7 @@ void func_802E1740(Entity* entity) {
 }
 
 void func_802E176C(Entity* entity) {
-    struct802E1400* temp = (struct802E1400*)entity->dataBuf;
+    struct802E1400* temp = entity->dataBuf;
 
     temp->unk_00.x = 1.0f;
     temp->unk_00.y = 0.1f;
@@ -133,7 +119,7 @@ void func_802E176C(Entity* entity) {
 INCLUDE_ASM(s32, "code_102c80", func_802E17A8);
 
 void func_802E1EA8(Entity* entity) {
-    struct802E1400* temp = (struct802E1400*)entity->dataBuf;
+    struct802E1400* temp = entity->dataBuf;
     set_area_flag(temp->unk_20);
     func_80110678(entity);
 }
@@ -142,7 +128,7 @@ INCLUDE_ASM(s32, "code_102c80", func_802E1EDC);
 
 void func_802E234C(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    struct802E1400* temp = (struct802E1400*)entity->dataBuf;
+    struct802E1400* temp = entity->dataBuf;
 
     playerStatus->animFlags |= 0x1000000;
     temp->unk_14.x = 1.0f;
@@ -152,7 +138,7 @@ void func_802E234C(Entity* entity) {
 
 void entity_init_BlueSwitch(Entity* entity) {
     Entity* temp_v0_2;
-    struct802E1400* temp = (struct802E1400*)entity->dataBuf;
+    struct802E1400* temp = entity->dataBuf;
 
     func_802E234C(entity);
     if (D_8015C7D0 == 2) {
@@ -175,7 +161,7 @@ void entity_init_HugeBlueSwitch(Entity* entity) {
     struct802E1400* temp;
 
     func_802E234C(entity);
-    temp = (struct802E1400*)entity->dataBuf;
+    temp = entity->dataBuf;
     entity->scale.x = 3.0f;
     entity->scale.y = 3.0f;
     entity->scale.z = 3.0f;

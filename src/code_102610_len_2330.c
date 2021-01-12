@@ -108,9 +108,9 @@ void func_802E1350(Entity* entity) {
 }
 
 void func_802E13B8(Entity* entity) {
-    Trigger* trigger = (Trigger*)entity->dataBuf; // TODO: Fix this
+    struct802E3650* temp = entity->dataBuf;
 
     entity_init_Hammer23Block_normal(entity);
     entity->unk_3C = func_802E0DE0;
-    trigger->params1.s = 8;
+    temp->unk_04 = 8;
 }

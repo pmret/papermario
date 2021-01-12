@@ -776,17 +776,41 @@ typedef struct StaticItem {
     /* 0x1D */ char unk_1D[3];
 } StaticItem; // size = 0x20
 
+typedef struct EffectInstance {
+    /* 0x00 */ s32 flags;
+    /* 0x04 */ s32 effectIndex;
+    /* 0x08 */ char unk_08[4];
+    /* 0x0C */ void* unk_0C;
+    /* 0x10 */ struct Effect* effect;
+} EffectInstance;
+
+typedef struct EffectBlueprint {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ s32 effectIndex;
+    /* 0x08 */ void (*init)(EffectInstance* effectInst);
+    /* 0x0C */ void (*update)(EffectInstance* effectInst);
+    /* 0x10 */ void (*renderWorld)(EffectInstance* effectInst);
+    /* 0x14 */ void (*unk_14)(EffectInstance* effectInst); 
+} EffectBlueprint; // size = 0x18
+
 typedef struct Effect {
-    /* 0x00 */ char unk_00[32];
+    /* 0x00 */ s32 flags;
+    /* 0x04 */ s32 effectIndex;
+    /* 0x08 */ s32 instanceCounter;
+    /* 0x0C */ s32 unk_0C;
+    /* 0x10 */ void (*update)(EffectInstance* effectInst);
+    /* 0x14 */ void (*renderWorld)(EffectInstance* effectInst);
+    /* 0x18 */ void (*unk_18)(EffectInstance* effectInst); 
+    /* 0x1C */ void* unk_1C;
 } Effect; // size = 0x20
 
 typedef struct EffectTableEntry {
-    /* 0x00 */ s32 dmaStart;
-    /* 0x04 */ s32 dmaEnd;
-    /* 0x08 */ s32 dmaDest;
-    /* 0x0C */ s32 unkStartRom;
-    /* 0x10 */ s32 unkEndRom;
-    /* 0x14 */ UNK_FUN_PTR(delegate);
+    /* 0x00 */ UNK_FUN_PTR(entryPoint);
+    /* 0x04 */ void* dmaStart;
+    /* 0x08 */ void* dmaEnd;
+    /* 0x0C */ void* dmaDest;
+    /* 0x10 */ void* unkStartRom;
+    /* 0x14 */ void* unkEndRom;
 } EffectTableEntry; // size = 0x18
 
 
@@ -1605,6 +1629,21 @@ typedef struct {
 } UIPanel; // size = 0x20
 
 // BEGIN ENTITY-SPECIFIC STRUCTS
+
+// from code_102c80, size unknown.
+typedef struct struct802E1400 {
+    /* 0x000 */ Vec3f unk_00;
+    /* 0x00C */ char unk_0C[4];
+    /* 0x010 */ s8 unk_10;
+    /* 0x011 */ s8 unk_11;
+    /* 0x014 */ Vec3f unk_14;
+    /* 0x020 */ u16 unk_20;
+    /* 0x022 */ s16 unk_22;
+    /* 0x024 */ char unk_24[4];
+    /* 0x028 */ Entity* attachedEntity;
+    /* 0x02C */ char unk_2C[12];
+    /* 0x038 */ f32 unk_38;
+} struct802E1400;
 
 // from code_104940_len_dc0, size unknown
 // appears to belong to the hammer blocks(?)

@@ -20,7 +20,7 @@ INCLUDE_ASM(s32, "world/world", func_80059AB8);
 
 INCLUDE_ASM(s32, "world/world", func_80059BD4);
 
-void func_80059C80(void) {
+void func_80059C80(EffectInstance* effectInst) {
 }
 
 INCLUDE_ASM(s32, "world/world", func_80059C88);
@@ -32,18 +32,207 @@ void func_80059D48(void) {
 
 INCLUDE_ASM(s32, "world/world", func_80059D50);
 
-INCLUDE_ASM(s32, "world/world", render_effects);
+#define EFFECT_LOADED 1
+
+extern EffectInstance* D_800B4398[96]; //effectInstanceList
+extern Effect D_800A4000[15];
+extern void* D_80059C80;
+
+s32 render_effects(void) {
+    EffectInstance** curEffectInst;
+    s32 i;
+
+    curEffectInst = &D_800B4398[0];
+    for(i = 0; i < ARRAY_COUNT(D_800B4398); i++) {
+        if ((curEffectInst[i] != NULL) && ((curEffectInst[i]->flags & 1) != 0) && ((curEffectInst[i]->flags & 8) != 0)) {
+            if(GAME_STATUS->isBattle) {
+                if((curEffectInst[i]->flags & 4) != 0) {
+                    curEffectInst[i]->effect->renderWorld(curEffectInst[i]);
+                }
+            } else if((curEffectInst[i]->flags & 4) == 0) {
+                curEffectInst[i]->effect->renderWorld(curEffectInst[i]);
+            }
+        }
+    }
+}
 
 INCLUDE_ASM(s32, "world/world", func_80059F94);
 
-INCLUDE_ASM(s32, "world/world", func_8005A2BC);
 
-INCLUDE_ASM(s32, "world/world", remove_effect);
+EffectInstance* func_8005A2BC(EffectBlueprint* effectBp) {
+    EffectInstance *newEffectInst;
+    Effect* curEffect;
+    s32 i;
+    EffectInstance** temp = &D_800B4398[0];
 
-INCLUDE_ASM(s32, "world/world", remove_all_effects);
+    // Search for an unused instance
+    for(i = 0; i < ARRAY_COUNT(D_800B4398); i++) {
+        if (temp[i] == NULL) {
+            break;
+        }
+    }
 
+    ASSERT(i < ARRAY_COUNT(D_800B4398));
+
+    // Allocate space for the new instance
+    D_800B4398[i] = newEffectInst = general_heap_malloc(sizeof(EffectInstance));
+    ASSERT(newEffectInst != NULL);
+
+    curEffect = &D_800A4000[0];
+    newEffectInst->effectIndex = effectBp->effectIndex;
+    newEffectInst->flags = 1;
+
+    // Look for a loaded effect of the proper index
+    for(i = 0; i < ARRAY_COUNT(D_800A4000); i++) {
+        if ((curEffect->flags & EFFECT_LOADED) && (curEffect->effectIndex == effectBp->effectIndex)) {
+            break;
+        }
+        curEffect++;
+    }
+
+    ASSERT(i < ARRAY_COUNT(D_800A4000));
+
+    // If this is the first new instance of the effect, initialize the function pointers
+    if (curEffect->instanceCounter == 0) {
+        curEffect->update = effectBp->update;
+        if (curEffect->update == NULL) {
+            curEffect->renderWorld = func_80059C80;
+        }
+
+        curEffect->renderWorld = effectBp->renderWorld;
+        if (curEffect->unk_18 == NULL) {
+            curEffect->unk_18 = func_80059C80;
+        }
+
+        curEffect->unk_18 = effectBp->unk_14;
+        if (curEffect->unk_18 == NULL) {
+            curEffect->unk_18 = func_80059C80;
+        }
+    }
+
+    curEffect->instanceCounter++;
+    newEffectInst->effect = curEffect;
+
+    if (effectBp->init != NULL) {
+        effectBp->init(newEffectInst);
+    }
+
+    if (GAME_STATUS->isBattle) {
+        newEffectInst->flags |= 4;
+    }
+    return newEffectInst;
+}
+
+void remove_effect(EffectInstance* arg0) {
+    s32 i;
+    EffectInstance** temp = &D_800B4398[0];
+
+    for(i = 0; i < ARRAY_COUNT(D_800B4398); i++) {
+        if (temp[i] == arg0) {
+            break;
+        }
+    }
+
+    ASSERT(i < ARRAY_COUNT(D_800B4398));
+
+    if (arg0->unk_0C == NULL) {
+        general_heap_free(arg0);
+        D_800B4398[i] = NULL;
+        return;
+    }
+
+    general_heap_free(arg0->unk_0C);
+    general_heap_free(arg0);
+    D_800B4398[i] = NULL;
+}
+
+void remove_all_effects(void) {
+    s32 i;
+    EffectInstance** temp = &D_800B4398[0];
+
+    for(i = 0; i < ARRAY_COUNT(D_800B4398); i++) {
+        EffectInstance* temp2 = temp[i];
+        if (temp2 != NULL && temp2->flags & 4) {
+            if(temp2->unk_0C != NULL) {
+                general_heap_free(temp2->unk_0C);
+            }
+            general_heap_free(temp2);
+            temp[i] = NULL;
+        }
+    }
+}
+
+typedef s32 TlbEntry[0x1000 / 4];
+typedef TlbEntry TlbMappablePage[15];
+
+extern TlbMappablePage D_80197000;
+extern EffectTableEntry D_8007F210[135];
+
+#ifdef NON_MATCHING
+// Matching, but needs a file split
+s32 play_effect(s32 effectIndex) {
+    
+    EffectTableEntry* effectTable = &D_8007F210[0];
+    EffectTableEntry* effectEntry;
+    Effect* curEffect;
+    TlbMappablePage* tlbMappablePages;
+    s32 i;
+
+    effectEntry = &effectTable[effectIndex];
+
+    // Look for a loaded effect matching the desired index
+    for(i = 0, curEffect = &D_800A4000[0]; i < ARRAY_COUNT(D_800A4000); i++) {
+        if ((curEffect->flags & EFFECT_LOADED) && (curEffect->effectIndex == effectIndex)) {
+            break;
+        }
+        curEffect++;
+    }
+
+    // If an effect was found within the table, initialize it and return
+    if (i < ARRAY_COUNT(D_800A4000)) {
+        curEffect->effectIndex = effectIndex;
+        curEffect->unk_08 = NULL;
+        curEffect->flags = EFFECT_LOADED;
+        return 1;
+    }
+
+    // If a loaded effect wasn't found, look for the first empty space
+    for(i = 0, curEffect = &D_800A4000[0]; i < ARRAY_COUNT(D_800A4000); i++) {
+        if (!(curEffect->flags & EFFECT_LOADED)) {
+            break;
+        }
+        curEffect++;
+    }
+
+    // If no empty space was found, panic
+    ASSERT(i < ARRAY_COUNT(D_800A4000));
+
+    // Map space for the effect
+    tlbMappablePages = &D_80197000;
+    osMapTLB(i, 0, effectEntry->dmaDest, (s32)((*tlbMappablePages)[i]) & 0xFFFFFF, -1, -1);
+
+    // Copy the effect into the newly mapped space
+    dma_copy(effectEntry->dmaStart, effectEntry->dmaEnd, effectEntry->dmaDest);
+
+    // If there's extra data the effect normally loads, allocate space and copy into the new space
+    if (effectEntry->unkStartRom != NULL) {
+        void* effectDataBuf = general_heap_malloc(effectEntry->unkEndRom - effectEntry->unkStartRom);
+        curEffect->unk_1C = effectDataBuf;
+        ASSERT(effectDataBuf != NULL);
+        dma_copy(effectEntry->unkStartRom, effectEntry->unkEndRom, curEffect->unk_1C);
+    }
+
+    // Initialize the newly loaded effect data
+    curEffect->effectIndex = effectIndex;
+    curEffect->unk_08 = NULL;
+    curEffect->flags = EFFECT_LOADED;
+    return 1;
+}
+#else
 INCLUDE_ASM(s32, "world/world", play_effect);
+#endif
 
+// FILE SPLIT
 void load_world_script_api(void) {
     dma_copy(&world_script_api_ROM_START, &world_script_api_ROM_END, &world_script_api_VRAM);
 }
@@ -100,7 +289,7 @@ static Map mac_maps[] = {
     { MAP_UNSPLIT(mac_01, 0x80246730), .bgName = "nok_bg" },
     { MAP_UNSPLIT(mac_02, 0x80243580), .bgName = "nok_bg" },
     { MAP_UNSPLIT(mac_03, 0x802428B0), .bgName = "nok_bg" },
-    { MAP_UNSPLIT(mac_04, 0x80242080), .bgName = "nok_bg", .init = (MapInit*)0x80240000 },
+    { MAP_UNSPLIT(mac_04, 0x80242080), .bgName = "nok_bg", .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(mac_05, 0x802441A0), .bgName = "nok_bg" },
     { MAP_UNSPLIT(mac_06, 0x802416A0), .bgName = "nok_bg" },
 };
@@ -127,7 +316,7 @@ static Map tik_maps[] = {
     { MAP_UNSPLIT(tik_21, 0x80240990), .songVariation = 1, .flags = 2 },
     { MAP_UNSPLIT(tik_22, 0x802409D0), .songVariation = 1, .flags = 2 },
     { MAP_UNSPLIT(tik_23, 0x80241160), .songVariation = 1, .flags = 2 },
-    { MAP_UNSPLIT(tik_24, 0x80240ED0), .songVariation = 1, .flags = 2, .init = (MapInit*)0x80240000 },
+    { MAP_UNSPLIT(tik_24, 0x80240ED0), .songVariation = 1, .flags = 2, .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(tik_25, 0x802407D0), .songVariation = 1, .flags = 2 },
 };
 
@@ -152,10 +341,10 @@ static Map kmr_maps[] = {
     { MAP_UNSPLIT(kmr_11, 0x80241180), .bgName = "kmr_bg" },
     { MAP(kmr_12), .bgName = "kmr_bg" },
     { MAP_UNSPLIT(kmr_20, 0x80242C00), .bgName = "kmr_bg" }, // Mario's House
-    { MAP_UNSPLIT(kmr_21, 0x802402F0), .init = (MapInit*)0x80240000 },
-    { MAP_UNSPLIT(kmr_22, 0x80240DA0), .init = (MapInit*)0x80240000 },
-    { MAP_UNSPLIT(kmr_23, 0x80241150), .init = (MapInit*)0x80240000 },
-    { MAP_UNSPLIT(kmr_24, 0x80240120), .init = (MapInit*)0x80240000 },
+    { MAP_UNSPLIT(kmr_21, 0x802402F0), .init = (MapInit)0x80240000 },
+    { MAP_UNSPLIT(kmr_22, 0x80240DA0), .init = (MapInit)0x80240000 },
+    { MAP_UNSPLIT(kmr_23, 0x80241150), .init = (MapInit)0x80240000 },
+    { MAP_UNSPLIT(kmr_24, 0x80240120), .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(kmr_30, 0x802404F0) },
 };
 
@@ -281,14 +470,14 @@ static Map nok_maps[] = {
 
 /// Star Region
 static Map hos_maps[] = {
-    { MAP_UNSPLIT(hos_00, 0x80240D50), .bgName = "nok_bg", .init = (MapInit*)0x80240000 },
+    { MAP_UNSPLIT(hos_00, 0x80240D50), .bgName = "nok_bg", .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(hos_01, 0x80240E40), .bgName = "hos_bg" },
     { MAP_UNSPLIT(hos_02, 0x80242B90), .bgName = "hos_bg" },
     { MAP_UNSPLIT(hos_03, 0x802435F0), .bgName = "hos_bg" },
     { MAP_UNSPLIT(hos_04, 0x80240EE0), .bgName = "hos_bg" },
     { MAP_UNSPLIT(hos_05, 0x80245910), .bgName = "hos_bg", .songVariation = 1, .flags = 2 },
     { MAP_UNSPLIT(hos_06, 0x80242570), .bgName = "hos_bg" },
-    { MAP_UNSPLIT(hos_10, 0x80240CE0), .bgName = "hos_bg", .init = (MapInit*)0x80240000 },
+    { MAP_UNSPLIT(hos_10, 0x80240CE0), .bgName = "hos_bg", .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(hos_20, 0x80240390), .bgName = "hos_bg" },
 };
 
@@ -312,29 +501,29 @@ static Map kpa_maps[] = {
     { MAP_UNSPLIT(kpa_40,  0x80240040), .songVariation = 1, .flags = 2 },
     { MAP_UNSPLIT(kpa_41,  0x80240040), .songVariation = 1, .flags = 2 },
     { MAP_UNSPLIT(kpa_50,  0x80241A40), .songVariation = 1, .flags = 2 },
-    { MAP_UNSPLIT(kpa_51,  0x80241C40), .songVariation = 1, .flags = 2, .init = (MapInit*)0x80240000 },
+    { MAP_UNSPLIT(kpa_51,  0x80241C40), .songVariation = 1, .flags = 2, .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(kpa_52,  0x80241360), .songVariation = 1, .flags = 2 },
-    { MAP_UNSPLIT(kpa_53,  0x80240190), .songVariation = 1, .flags = 2, .init = (MapInit*)0x80240000 },
+    { MAP_UNSPLIT(kpa_53,  0x80240190), .songVariation = 1, .flags = 2, .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(kpa_60,  0x80240450), .bgName = "kpa_bg" },
     { MAP_UNSPLIT(kpa_61,  0x80242360), .bgName = "kpa_bg" },
     { MAP_UNSPLIT(kpa_62,  0x80240430), .bgName = "kpa_bg" },
     { MAP_UNSPLIT(kpa_63,  0x802401B0), .songVariation = 1, .flags = 2 },
     { MAP_UNSPLIT(kpa_70,  0x80240B10), .songVariation = 1, .flags = 3 },
-    { MAP_UNSPLIT(kpa_81,  0x80240480), .songVariation = 1, .flags = 2, .init = (MapInit*)0x80240000 },
-    { MAP_UNSPLIT(kpa_82,  0x80240460), .songVariation = 1, .flags = 2, .init = (MapInit*)0x80240000 },
-    { MAP_UNSPLIT(kpa_83,  0x80240090), .songVariation = 1, .flags = 2, .init = (MapInit*)0x80240000 },
+    { MAP_UNSPLIT(kpa_81,  0x80240480), .songVariation = 1, .flags = 2, .init = (MapInit)0x80240000 },
+    { MAP_UNSPLIT(kpa_82,  0x80240460), .songVariation = 1, .flags = 2, .init = (MapInit)0x80240000 },
+    { MAP_UNSPLIT(kpa_83,  0x80240090), .songVariation = 1, .flags = 2, .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(kpa_90,  0x80240020), .songVariation = 1, .flags = 2 },
     { MAP_UNSPLIT(kpa_91,  0x80241920), .songVariation = 1, .flags = 2 },
     { MAP_UNSPLIT(kpa_94,  0x80240020), .songVariation = 1, .flags = 2 },
     { MAP_UNSPLIT(kpa_95,  0x80241920), .songVariation = 1, .flags = 2 },
     { MAP_UNSPLIT(kpa_96,  0x80240040), .songVariation = 1, .flags = 1 },
-    { MAP_UNSPLIT(kpa_100, 0x80240060), .songVariation = 1, .flags = 1, .init = (MapInit*)0x80240000 },
-    { MAP_UNSPLIT(kpa_101, 0x80240060), .songVariation = 1, .flags = 1, .init = (MapInit*)0x80240000 },
+    { MAP_UNSPLIT(kpa_100, 0x80240060), .songVariation = 1, .flags = 1, .init = (MapInit)0x80240000 },
+    { MAP_UNSPLIT(kpa_101, 0x80240060), .songVariation = 1, .flags = 1, .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(kpa_102, 0x802435B0), .songVariation = 1, .flags = 3 },
     { MAP_UNSPLIT(kpa_111, 0x802413E0), .songVariation = 1, .flags = 3 },
     { MAP_UNSPLIT(kpa_112, 0x80240020), .songVariation = 1, .flags = 2 },
     { MAP_UNSPLIT(kpa_113, 0x80240AD0), .songVariation = 1, .flags = 3 },
-    { MAP_UNSPLIT(kpa_114, 0x80240070), .songVariation = 1, .flags = 2, .init = (MapInit*)0x80240000 },
+    { MAP_UNSPLIT(kpa_114, 0x80240070), .songVariation = 1, .flags = 2, .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(kpa_115, 0x802413F0), .songVariation = 1, .flags = 3 },
     { MAP_UNSPLIT(kpa_116, 0x80240020), .songVariation = 1, .flags = 2 },
     { MAP_UNSPLIT(kpa_117, 0x80240010), .songVariation = 1, .flags = 1 },
@@ -349,24 +538,24 @@ static Map kpa_maps[] = {
 /// Peach's Castle Grounds
 static Map osr_maps[] = {
     { MAP_UNSPLIT(osr_00, 0x802407E0), .bgName = "nok_bg" },
-    { MAP_UNSPLIT(osr_01, 0x80240B00), .bgName = "nok_bg", .init = (MapInit*)0x80240000 },
-    { MAP_UNSPLIT(osr_02, 0x80240170), .bgName = "kpa_bg", .init = (MapInit*)0x80240000 },
-    { MAP_UNSPLIT(osr_03, 0x802403F0), .bgName = "kpa_bg", .init = (MapInit*)0x80240000 },
-    { MAP_UNSPLIT(osr_04, 0x802400D0), .bgName = "nok_bg", .init = (MapInit*)0x80240000 },
+    { MAP_UNSPLIT(osr_01, 0x80240B00), .bgName = "nok_bg", .init = (MapInit)0x80240000 },
+    { MAP_UNSPLIT(osr_02, 0x80240170), .bgName = "kpa_bg", .init = (MapInit)0x80240000 },
+    { MAP_UNSPLIT(osr_03, 0x802403F0), .bgName = "kpa_bg", .init = (MapInit)0x80240000 },
+    { MAP_UNSPLIT(osr_04, 0x802400D0), .bgName = "nok_bg", .init = (MapInit)0x80240000 },
 };
 
 /// Peach's Castle
 /// @bug There are two entries for kkj_26; the latter is unreachable.
 static Map kkj_maps[] = {
-    { MAP_UNSPLIT(kkj_00, 0x80241030), .bgName = "nok_bg", .songVariation = 1, .flags = 3, .init = (MapInit*)0x80240000 },
+    { MAP_UNSPLIT(kkj_00, 0x80241030), .bgName = "nok_bg", .songVariation = 1, .flags = 3, .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(kkj_01, 0x80240F10), .bgName = "nok_bg", .songVariation = 1, .flags = 3 },
     { MAP_UNSPLIT(kkj_02, 0x80240030), .bgName = "nok_bg", .flags = 2 },
-    { MAP_UNSPLIT(kkj_03, 0x80240360), .bgName = "nok_bg", .flags = 3, .init = (MapInit*)0x80240000 },
+    { MAP_UNSPLIT(kkj_03, 0x80240360), .bgName = "nok_bg", .flags = 3, .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(kkj_10, 0x80241120), .songVariation = 1, .flags = 3 },
     { MAP_UNSPLIT(kkj_11, 0x80241160), .songVariation = 1, .flags = 3 },
     { MAP_UNSPLIT(kkj_12, 0x802408D0), .songVariation = 1, .flags = 2 },
-    { MAP_UNSPLIT(kkj_13, 0x802407A0), .bgName = "kpa_bg", .songVariation = 1, .flags = 3, .init = (MapInit*)0x80240000 },
-    { MAP_UNSPLIT(kkj_14, 0x80240580), .bgName = "kpa_bg", .init = (MapInit*)0x80240000 },
+    { MAP_UNSPLIT(kkj_13, 0x802407A0), .bgName = "kpa_bg", .songVariation = 1, .flags = 3, .init = (MapInit)0x80240000 },
+    { MAP_UNSPLIT(kkj_14, 0x80240580), .bgName = "kpa_bg", .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(kkj_15, 0x80240640) },
     { MAP_UNSPLIT(kkj_16, 0x80241090), .flags = 0x1 },
     { MAP_UNSPLIT(kkj_17, 0x802405B0) },
@@ -375,9 +564,9 @@ static Map kkj_maps[] = {
     { MAP_UNSPLIT(kkj_20, 0x80240600) },
     { MAP_UNSPLIT(kkj_21, 0x80240010), .flags = 0x1 },
     { MAP_UNSPLIT(kkj_22, 0x80240020), .bgName = "kpa_bg", .songVariation = 1, .flags = 2 },
-    { MAP_UNSPLIT(kkj_23, 0x802409F0), .bgName = "kpa_bg", .init = (MapInit*)0x80240000 },
+    { MAP_UNSPLIT(kkj_23, 0x802409F0), .bgName = "kpa_bg", .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(kkj_24, 0x80240040), .bgName = "kpa_bg", .songVariation = 1, .flags = 2 },
-    { MAP_UNSPLIT(kkj_25, 0x80240F50), .bgName = "kpa_bg", .init = (MapInit*)0x80240000 },
+    { MAP_UNSPLIT(kkj_25, 0x80240F50), .bgName = "kpa_bg", .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(kkj_26, 0x80240070), .bgName = "kpa_bg" },
     { MAP_UNSPLIT(kkj_26, 0x80240070), .flags = 0x2 },
     { MAP_UNSPLIT(kkj_27, 0x802404C0), .flags = 0x1 },
@@ -457,7 +646,7 @@ static Map arn_maps[] = {
 
 /// Tubba Blubba's Castle
 static Map dgb_maps[] = {
-    { MAP_UNSPLIT(dgb_00, 0x802400D0), .bgName = "arn_bg", .init = (MapInit*)0x80240000 },
+    { MAP_UNSPLIT(dgb_00, 0x802400D0), .bgName = "arn_bg", .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(dgb_01, 0x80243460), .songVariation = 1, .flags = 2 },
     { MAP_UNSPLIT(dgb_02, 0x80241470), .songVariation = 1, .flags = 2 },
     { MAP_UNSPLIT(dgb_03, 0x80242830), .songVariation = 1, .flags = 2 },
@@ -541,38 +730,38 @@ static Map sam_maps[] = {
 
 /// Crystal Palace
 static Map pra_maps[] = {
-    { MAP_UNSPLIT(pra_01, 0x80241400), .bgName = "yki_bg", .flags = 1, .init = (MapInit*)0x80240000 },
-    { MAP_UNSPLIT(pra_02, 0x802416C0), .songVariation = 1, .flags = 2, .init = (MapInit*)0x80240000 },
-    { MAP_UNSPLIT(pra_03, 0x802401E0), .songVariation = 1, .flags = 2, .init = (MapInit*)0x80240000 },
-    { MAP_UNSPLIT(pra_04, 0x80240970), .songVariation = 1, .flags = 2, .init = (MapInit*)0x80240000 },
-    { MAP_UNSPLIT(pra_05, 0x802411F0), .songVariation = 1, .flags = 1, .init = (MapInit*)0x80240000 },
-    { MAP_UNSPLIT(pra_06, 0x80240F60), .songVariation = 1, .flags = 1, .init = (MapInit*)0x80240000 },
-    { MAP_UNSPLIT(pra_09, 0x80241670), .songVariation = 1, .flags = 2, .init = (MapInit*)0x80240000 },
-    { MAP_UNSPLIT(pra_10, 0x802416D0), .songVariation = 1, .flags = 2, .init = (MapInit*)0x80240000 },
-    { MAP_UNSPLIT(pra_11, 0x802411F0), .songVariation = 1, .flags = 1, .init = (MapInit*)0x80240000 },
-    { MAP_UNSPLIT(pra_12, 0x80241220), .songVariation = 1, .flags = 1, .init = (MapInit*)0x80240000 },
-    { MAP_UNSPLIT(pra_13, 0x80241620), .songVariation = 1, .flags = 2, .init = (MapInit*)0x80240000 },
-    { MAP_UNSPLIT(pra_14, 0x80241200), .songVariation = 1, .flags = 2, .init = (MapInit*)0x80240000 },
-    { MAP_UNSPLIT(pra_15, 0x80240050), .bgName = "yki_bg", .songVariation = 1, .flags = 1, .init = (MapInit*)0x80240000 },
-    { MAP_UNSPLIT(pra_16, 0x80240F60), .songVariation = 1, .flags = 2, .init = (MapInit*)0x80240000 },
-    { MAP_UNSPLIT(pra_18, 0x80240F50), .songVariation = 1, .flags = 2, .init = (MapInit*)0x80240000 },
-    { MAP_UNSPLIT(pra_19, 0x802419D0), .songVariation = 1, .flags = 2, .init = (MapInit*)0x80240000 },
-    { MAP_UNSPLIT(pra_20, 0x80240F70), .songVariation = 1, .flags = 1, .init = (MapInit*)0x80240000 },
-    { MAP_UNSPLIT(pra_21, 0x80240140), .songVariation = 1, .flags = 2, .init = (MapInit*)0x80240000 },
-    { MAP_UNSPLIT(pra_22, 0x802402F0), .songVariation = 1, .flags = 2, .init = (MapInit*)0x80240000 },
-    { MAP_UNSPLIT(pra_27, 0x80241220), .songVariation = 1, .flags = 1, .init = (MapInit*)0x80240000 },
-    { MAP_UNSPLIT(pra_28, 0x80241220), .songVariation = 1, .flags = 1, .init = (MapInit*)0x80240000 },
-    { MAP_UNSPLIT(pra_29, 0x802412C0), .songVariation = 1, .flags = 2, .init = (MapInit*)0x80240000 },
-    { MAP_UNSPLIT(pra_31, 0x802410E0), .songVariation = 1, .flags = 2, .init = (MapInit*)0x80240000 },
-    { MAP_UNSPLIT(pra_32, 0x80240850), .bgName = "sam_bg", .songVariation = 1, .flags = 1, .init = (MapInit*)0x80240000 },
-    { MAP_UNSPLIT(pra_33, 0x802410C0), .songVariation = 1, .flags = 2, .init = (MapInit*)0x80240000 },
-    { MAP_UNSPLIT(pra_34, 0x80241040), .songVariation = 1, .flags = 1, .init = (MapInit*)0x80240000 },
-    { MAP_UNSPLIT(pra_35, 0x80242C40), .songVariation = 1, .flags = 2, .init = (MapInit*)0x80240000 },
-    { MAP_UNSPLIT(pra_36, 0x80240F70), .songVariation = 1, .flags = 2, .init = (MapInit*)0x80240000 },
-    { MAP_UNSPLIT(pra_37, 0x80241840), .songVariation = 1, .flags = 2, .init = (MapInit*)0x80240000 },
-    { MAP_UNSPLIT(pra_38, 0x80241700), .songVariation = 1, .flags = 2, .init = (MapInit*)0x80240000 },
-    { MAP_UNSPLIT(pra_39, 0x80241700), .songVariation = 1, .flags = 2, .init = (MapInit*)0x80240000 },
-    { MAP_UNSPLIT(pra_40, 0x80240F40), .songVariation = 1, .flags = 1, .init = (MapInit*)0x80240000 },
+    { MAP_UNSPLIT(pra_01, 0x80241400), .bgName = "yki_bg", .flags = 1, .init = (MapInit)0x80240000 },
+    { MAP_UNSPLIT(pra_02, 0x802416C0), .songVariation = 1, .flags = 2, .init = (MapInit)0x80240000 },
+    { MAP_UNSPLIT(pra_03, 0x802401E0), .songVariation = 1, .flags = 2, .init = (MapInit)0x80240000 },
+    { MAP_UNSPLIT(pra_04, 0x80240970), .songVariation = 1, .flags = 2, .init = (MapInit)0x80240000 },
+    { MAP_UNSPLIT(pra_05, 0x802411F0), .songVariation = 1, .flags = 1, .init = (MapInit)0x80240000 },
+    { MAP_UNSPLIT(pra_06, 0x80240F60), .songVariation = 1, .flags = 1, .init = (MapInit)0x80240000 },
+    { MAP_UNSPLIT(pra_09, 0x80241670), .songVariation = 1, .flags = 2, .init = (MapInit)0x80240000 },
+    { MAP_UNSPLIT(pra_10, 0x802416D0), .songVariation = 1, .flags = 2, .init = (MapInit)0x80240000 },
+    { MAP_UNSPLIT(pra_11, 0x802411F0), .songVariation = 1, .flags = 1, .init = (MapInit)0x80240000 },
+    { MAP_UNSPLIT(pra_12, 0x80241220), .songVariation = 1, .flags = 1, .init = (MapInit)0x80240000 },
+    { MAP_UNSPLIT(pra_13, 0x80241620), .songVariation = 1, .flags = 2, .init = (MapInit)0x80240000 },
+    { MAP_UNSPLIT(pra_14, 0x80241200), .songVariation = 1, .flags = 2, .init = (MapInit)0x80240000 },
+    { MAP_UNSPLIT(pra_15, 0x80240050), .bgName = "yki_bg", .songVariation = 1, .flags = 1, .init = (MapInit)0x80240000 },
+    { MAP_UNSPLIT(pra_16, 0x80240F60), .songVariation = 1, .flags = 2, .init = (MapInit)0x80240000 },
+    { MAP_UNSPLIT(pra_18, 0x80240F50), .songVariation = 1, .flags = 2, .init = (MapInit)0x80240000 },
+    { MAP_UNSPLIT(pra_19, 0x802419D0), .songVariation = 1, .flags = 2, .init = (MapInit)0x80240000 },
+    { MAP_UNSPLIT(pra_20, 0x80240F70), .songVariation = 1, .flags = 1, .init = (MapInit)0x80240000 },
+    { MAP_UNSPLIT(pra_21, 0x80240140), .songVariation = 1, .flags = 2, .init = (MapInit)0x80240000 },
+    { MAP_UNSPLIT(pra_22, 0x802402F0), .songVariation = 1, .flags = 2, .init = (MapInit)0x80240000 },
+    { MAP_UNSPLIT(pra_27, 0x80241220), .songVariation = 1, .flags = 1, .init = (MapInit)0x80240000 },
+    { MAP_UNSPLIT(pra_28, 0x80241220), .songVariation = 1, .flags = 1, .init = (MapInit)0x80240000 },
+    { MAP_UNSPLIT(pra_29, 0x802412C0), .songVariation = 1, .flags = 2, .init = (MapInit)0x80240000 },
+    { MAP_UNSPLIT(pra_31, 0x802410E0), .songVariation = 1, .flags = 2, .init = (MapInit)0x80240000 },
+    { MAP_UNSPLIT(pra_32, 0x80240850), .bgName = "sam_bg", .songVariation = 1, .flags = 1, .init = (MapInit)0x80240000 },
+    { MAP_UNSPLIT(pra_33, 0x802410C0), .songVariation = 1, .flags = 2, .init = (MapInit)0x80240000 },
+    { MAP_UNSPLIT(pra_34, 0x80241040), .songVariation = 1, .flags = 1, .init = (MapInit)0x80240000 },
+    { MAP_UNSPLIT(pra_35, 0x80242C40), .songVariation = 1, .flags = 2, .init = (MapInit)0x80240000 },
+    { MAP_UNSPLIT(pra_36, 0x80240F70), .songVariation = 1, .flags = 2, .init = (MapInit)0x80240000 },
+    { MAP_UNSPLIT(pra_37, 0x80241840), .songVariation = 1, .flags = 2, .init = (MapInit)0x80240000 },
+    { MAP_UNSPLIT(pra_38, 0x80241700), .songVariation = 1, .flags = 2, .init = (MapInit)0x80240000 },
+    { MAP_UNSPLIT(pra_39, 0x80241700), .songVariation = 1, .flags = 2, .init = (MapInit)0x80240000 },
+    { MAP_UNSPLIT(pra_40, 0x80240F40), .songVariation = 1, .flags = 1, .init = (MapInit)0x80240000 },
 };
 
 /// Shy Guy's Toy Box
@@ -611,8 +800,8 @@ static Map tst_maps[] = {
 
 /// Credits
 static Map end_maps[] = {
-    { MAP_UNSPLIT(end_00, 0x80242B50), .init = (MapInit*)0x80240000 },
-    { MAP_UNSPLIT(end_01, 0x80243000), .init = (MapInit*)0x80240000 },
+    { MAP_UNSPLIT(end_00, 0x80242B50), .init = (MapInit)0x80240000 },
+    { MAP_UNSPLIT(end_01, 0x80243000), .init = (MapInit)0x80240000 },
 };
 
 /// Toad Town Playroom

@@ -10,6 +10,7 @@ extern f64 D_802EB1F8; // 0.3
 extern f64 D_802EB200; // 1.2
 extern f64 D_802EB208; // 0.3
 
+//display list func
 INCLUDE_ASM(s32, "code_104940_len_dc0", func_802E30C0);
 
 void func_802E31B0(Entity* entity) {
@@ -33,7 +34,7 @@ f32 func_802E31EC(Entity* entity) {
 
 void func_802E328C(Entity* entity) {
 
-    if ((get_entity_type(entity->listIndex) - 24) < 3U) {
+    if ((get_entity_type(entity->listIndex) - 24) < 3) {
         entity->scale.x -= D_802EB1D0;
         entity->scale.z -= D_802EB1D0;
         entity->scale.y += D_802EB1D8;
@@ -185,7 +186,7 @@ void func_802E3A48(Entity* entity) {
 void func_802E3B08(Entity* entity) {
     s32 temp_v0;
     u16 temp_v1;
-    struct802E3650* temp = (struct802E3650*)entity->dataBuf;
+    struct802E3650* temp = entity->dataBuf;
 
     if (temp->unk_0A != 0xFFFF) {
         if (get_global_flag(temp->unk_0A) != 0) {
@@ -195,7 +196,126 @@ void func_802E3B08(Entity* entity) {
     }
 }
 
-INCLUDE_ASM(s32, "code_104940_len_dc0", func_802E3BA4);
+extern s32 D_802E9E80;
+
+#ifdef NON_MATCHING
+s32 func_802E3BA4(Entity* entity) {
+  u8 bVar1;
+  s32 bVar2;
+  s32 iVar3;
+  s32 uVar4;
+  PlayerStatus* playerStatus = &gPlayerStatus;
+  
+    if ((entity->alpha == 0) && ((entity->unk_06 & 1) != 0)) {
+        return 0;
+    }
+
+    bVar1 = entity->unk_06;
+    if ((bVar1 & 4) != 0) {
+        s32 type = get_entity_type(entity->listIndex);
+        if((type == 0xC)) {
+            return 0;
+        }
+        
+        if((type >= 0xC)) {
+            if((type < 0x1b)) {
+                if((type > 0x14)) {
+                    return 0;
+                }
+            }
+        }
+
+        if ((playerStatus->flags & 2) == 0) {
+            return 1;
+        }
+        func_8010FD68(entity);
+        return 1;
+    }
+    if ((bVar1 & 0x80) != 0) {
+      func_8010FD68(entity);
+      return 1;
+    }
+
+    bVar2 = FALSE;
+    if ((bVar1 & 1)) {
+        if ((playerStatus->actionState == 0xd) || (playerStatus->actionState == 0x0f)) {
+            return 0;
+        }
+
+        if ((playerStatus->actionState == 0x0e) || (playerStatus->actionState == 0x10)) {
+            bVar2 = TRUE;
+        } else {
+            return 1;
+        }
+    } else {
+        if ((bVar1 & 0x40) == 0) {
+            return 1;
+        }
+        if ((playerStatus->flags & 0x1000000) == 0) {
+            return 1;
+        }
+    }
+
+    switch(get_entity_type(entity->listIndex)) {
+        default:
+          break;
+        case 0x15:
+        case 0x18:
+            if (bVar2) {
+                if (gPlayerData.bootsLevel < 1) {
+                    bVar2 = FALSE;
+                }
+            } else {
+                if (gPlayerData.hammerLevel > -1) {
+                    bVar2 = TRUE;
+                }
+            }
+            if (!bVar2) {
+                return 1;
+            }
+            func_8010FBC0(entity,&D_802E9E80);
+            play_sound_at_position(0x14f, 0, entity->position.x, entity->position.y ,entity->position.z);
+            break;
+        case 0x16:
+        case 0x19:
+            if (bVar2) {
+                if (gPlayerData.bootsLevel < 2) {
+                    bVar2 = FALSE;
+                }
+            } else if (gPlayerData.hammerLevel > 0) {
+                bVar2 = TRUE;
+            }
+            if (!bVar2) {
+                return 1;
+            }
+            func_8010FBC0(entity,&D_802E9E80);
+            play_sound_at_position(0x150, 0, entity->position.x, entity->position.y ,entity->position.z);
+            break;
+        case 0x17:
+        case 0x1a:
+            if (gPlayerData.hammerLevel < '\x02') {
+                return 1;
+            }
+            func_8010FBC0(entity,&D_802E9E80);
+            play_sound_at_position(0x151, 0, entity->position.x, entity->position.y ,entity->position.z);
+            break;
+        case 0x1b:
+        case 0x1c:
+        case 0x1d:
+        case 0x1e:
+        case 0x1f:
+          func_80110678(entity);
+          func_8010FD68(entity);
+          return 1;
+        case 0xb:
+          func_80110678(entity);
+          break;
+    }
+    return 1;
+}
+#else
+INCLUDE_ASM(s32, "code_104940_len_dc0", func_802E3BA4, Entity* entity);
+#endif
 
 void entity_init_Hammer1Block_normal(Entity* entity) {
     entity_init_Hammer23Block_normal(entity);
@@ -204,7 +324,7 @@ void entity_init_Hammer1Block_normal(Entity* entity) {
 
 s32 entity_init_HammerBlock_small(Entity* entity) {
     s32 temp_v0;
-    struct802E3650* temp = (struct802E3650*)entity->dataBuf;
+    struct802E3650* temp = entity->dataBuf;
 
     temp->unk_10 = -1;
     temp->unk_14 = entity->position.y;

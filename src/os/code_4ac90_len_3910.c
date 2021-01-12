@@ -1,5 +1,7 @@
 #include "common.h"
 
+extern EffectTableEntry D_8007F210[135];
+
 INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_8006F890);
 
 INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_8006F8F0);
@@ -273,6 +275,7 @@ INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_80072A70);
 
 INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_80072AD0);
 
+// FILE SPLIT
 INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_80072B30);
 
 INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_80072BB0);
