@@ -16,4 +16,4 @@ glabel func_80241BF8_ECB8F8
 /* ECB920 80241C20 AC2065CC */  sw        $zero, %lo(D_802465CC)($at)
 /* ECB924 80241C24 03E00008 */  jr        $ra
 /* ECB928 80241C28 24020002 */   addiu    $v0, $zero, 2
-/* ECB92C 80241C2C 00000000 */  nop       
+/* ECB92C 80241C2C 00000000 */  nop

@@ -44,7 +44,7 @@ glabel set_menu_icon_script
 /* DAF90 80144890 0C0505C1 */  jal       func_80141704
 /* DAF94 80144894 0200202D */   daddu    $a0, $s0, $zero
 /* DAF98 80144898 1440FFFD */  bnez      $v0, .L80144890
-/* DAF9C 8014489C 00000000 */   nop      
+/* DAF9C 8014489C 00000000 */   nop
 /* DAFA0 801448A0 8FBF0014 */  lw        $ra, 0x14($sp)
 /* DAFA4 801448A4 8FB00010 */  lw        $s0, 0x10($sp)
 /* DAFA8 801448A8 03E00008 */  jr        $ra

@@ -14,7 +14,7 @@ glabel func_80241770_ECB470
 /* ECB494 80241794 0C00F94D */  jal       func_8003E534
 /* ECB498 80241798 0040202D */   daddu    $a0, $v0, $zero
 /* ECB49C 8024179C 10400005 */  beqz      $v0, .L802417B4
-/* ECB4A0 802417A0 00000000 */   nop      
+/* ECB4A0 802417A0 00000000 */   nop
 /* ECB4A4 802417A4 8E050000 */  lw        $a1, ($s0)
 /* ECB4A8 802417A8 844600A8 */  lh        $a2, 0xa8($v0)
 /* ECB4AC 802417AC 0C0B551A */  jal       func_802D5468

@@ -50,4 +50,4 @@ glabel func_8013A9E8
 /* D118C 8013AA8C 1440FFF6 */  bnez      $v0, .L8013AA68
 /* D1190 8013AA90 0000182D */   daddu    $v1, $zero, $zero
 /* D1194 8013AA94 03E00008 */  jr        $ra
-/* D1198 8013AA98 00000000 */   nop      
+/* D1198 8013AA98 00000000 */   nop

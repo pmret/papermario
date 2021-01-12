@@ -47,7 +47,7 @@ glabel func_80240E50_EEDF50
 /* EEDFF8 80240EF8 0C013431 */  jal       func_8004D0C4
 /* EEDFFC 80240EFC 8E070038 */   lw       $a3, 0x38($s0)
 /* EEE000 80240F00 1040000E */  beqz      $v0, .L80240F3C
-/* EEE004 80240F04 00000000 */   nop      
+/* EEE004 80240F04 00000000 */   nop
 /* EEE008 80240F08 8E2200D0 */  lw        $v0, 0xd0($s1)
 /* EEE00C 80240F0C C60C0038 */  lwc1      $f12, 0x38($s0)
 /* EEE010 80240F10 C60E0040 */  lwc1      $f14, 0x40($s0)
@@ -58,7 +58,7 @@ glabel func_80240E50_EEDF50
 /* EEE024 80240F24 468031A0 */  cvt.s.w   $f6, $f6
 /* EEE028 80240F28 44073000 */  mfc1      $a3, $f6
 /* EEE02C 80240F2C 0C00ABDC */  jal       fio_validate_header_checksums
-/* EEE030 80240F30 00000000 */   nop      
+/* EEE030 80240F30 00000000 */   nop
 /* EEE034 80240F34 080903DB */  j         .L80240F6C
 /* EEE038 80240F38 E600000C */   swc1     $f0, 0xc($s0)
 .L80240F3C:
@@ -66,7 +66,7 @@ glabel func_80240E50_EEDF50
 /* EEE040 80240F40 2404003C */   addiu    $a0, $zero, 0x3c
 /* EEE044 80240F44 C60C000C */  lwc1      $f12, 0xc($s0)
 /* EEE048 80240F48 44820000 */  mtc1      $v0, $f0
-/* EEE04C 80240F4C 00000000 */  nop       
+/* EEE04C 80240F4C 00000000 */  nop
 /* EEE050 80240F50 46800020 */  cvt.s.w   $f0, $f0
 /* EEE054 80240F54 46006300 */  add.s     $f12, $f12, $f0
 /* EEE058 80240F58 3C0141F0 */  lui       $at, 0x41f0
@@ -82,7 +82,7 @@ glabel func_80240E50_EEDF50
 /* EEE07C 80240F7C 8E2200D0 */  lw        $v0, 0xd0($s1)
 /* EEE080 80240F80 8C420014 */  lw        $v0, 0x14($v0)
 /* EEE084 80240F84 04410004 */  bgez      $v0, .L80240F98
-/* EEE088 80240F88 00000000 */   nop      
+/* EEE088 80240F88 00000000 */   nop
 /* EEE08C 80240F8C C6400000 */  lwc1      $f0, ($s2)
 /* EEE090 80240F90 080903EE */  j         .L80240FB8
 /* EEE094 80240F94 E6000018 */   swc1     $f0, 0x18($s0)
@@ -90,7 +90,7 @@ glabel func_80240E50_EEDF50
 /* EEE098 80240F98 3C018024 */  lui       $at, %hi(D_80245450)
 /* EEE09C 80240F9C D4225450 */  ldc1      $f2, %lo(D_80245450)($at)
 /* EEE0A0 80240FA0 44820000 */  mtc1      $v0, $f0
-/* EEE0A4 80240FA4 00000000 */  nop       
+/* EEE0A4 80240FA4 00000000 */  nop
 /* EEE0A8 80240FA8 46800021 */  cvt.d.w   $f0, $f0
 /* EEE0AC 80240FAC 46220003 */  div.d     $f0, $f0, $f2
 /* EEE0B0 80240FB0 46200020 */  cvt.s.d   $f0, $f0
@@ -102,7 +102,7 @@ glabel func_80240E50_EEDF50
 /* EEE0C4 80240FC4 44801000 */  mtc1      $zero, $f2
 /* EEE0C8 80240FC8 46000021 */  cvt.d.s   $f0, $f0
 /* EEE0CC 80240FCC 46220002 */  mul.d     $f0, $f0, $f2
-/* EEE0D0 80240FD0 00000000 */  nop       
+/* EEE0D0 80240FD0 00000000 */  nop
 /* EEE0D4 80240FD4 24020001 */  addiu     $v0, $zero, 1
 /* EEE0D8 80240FD8 4620018D */  trunc.w.d $f6, $f0
 /* EEE0DC 80240FDC E626007C */  swc1      $f6, 0x7c($s1)

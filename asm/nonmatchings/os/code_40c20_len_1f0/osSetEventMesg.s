@@ -47,4 +47,4 @@ glabel osSetEventMesg
 /* 40DF0 800659F0 8FB00010 */  lw        $s0, 0x10($sp)
 /* 40DF4 800659F4 03E00008 */  jr        $ra
 /* 40DF8 800659F8 27BD0028 */   addiu    $sp, $sp, 0x28
-/* 40DFC 800659FC 00000000 */  nop       
+/* 40DFC 800659FC 00000000 */  nop

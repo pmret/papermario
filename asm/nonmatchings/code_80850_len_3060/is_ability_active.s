@@ -45,7 +45,7 @@ glabel is_ability_active
 /* 8328C 800E9DDC 24E70001 */   addiu    $a3, $a3, 1
 /* 83290 800E9DE0 8D420000 */  lw        $v0, ($t2)
 /* 83294 800E9DE4 00400008 */  jr        $v0
-/* 83298 800E9DE8 00000000 */   nop      
+/* 83298 800E9DE8 00000000 */   nop
 /* 8329C 800E9DEC 0803A81D */  j         .L800EA074
 /* 832A0 800E9DF0 2402004C */   addiu    $v0, $zero, 0x4c
 /* 832A4 800E9DF4 0803A81D */  j         .L800EA074

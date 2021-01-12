@@ -40,7 +40,7 @@ glabel func_E00AC000
 /* 3AEEAC E00AC08C AE02000C */   sw       $v0, 0xc($s0)
 .LE00AC090:
 /* 3AEEB0 E00AC090 0802B024 */  j         .LE00AC090
-/* 3AEEB4 E00AC094 00000000 */   nop      
+/* 3AEEB4 E00AC094 00000000 */   nop
 .LE00AC098:
 /* 3AEEB8 E00AC098 AC910000 */  sw        $s1, ($a0)
 /* 3AEEBC E00AC09C E4940004 */  swc1      $f20, 4($a0)

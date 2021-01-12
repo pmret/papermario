@@ -43,4 +43,4 @@ glabel osContGetReadData
 .L80061AB8:
 /* 3CEB8 80061AB8 27BD0010 */  addiu     $sp, $sp, 0x10
 /* 3CEBC 80061ABC 03E00008 */  jr        $ra
-/* 3CEC0 80061AC0 00000000 */   nop      
+/* 3CEC0 80061AC0 00000000 */   nop

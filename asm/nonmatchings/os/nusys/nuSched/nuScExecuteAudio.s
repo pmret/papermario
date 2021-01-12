@@ -24,12 +24,12 @@ glabel nuScExecuteAudio
 /* 3A028 8005EC28 9042A5B0 */  lbu       $v0, %lo(D_8009A5B0)($v0)
 /* 3A02C 8005EC2C 30420002 */  andi      $v0, $v0, 2
 /* 3A030 8005EC30 14400031 */  bnez      $v0, .L8005ECF8
-/* 3A034 8005EC34 00000000 */   nop      
+/* 3A034 8005EC34 00000000 */   nop
 /* 3A038 8005EC38 0C018634 */  jal       osWritebackDCacheAll
 /* 3A03C 8005EC3C 0000802D */   daddu    $s0, $zero, $zero
 /* 3A040 8005EC40 8E910668 */  lw        $s1, 0x668($s4)
 /* 3A044 8005EC44 1220000B */  beqz      $s1, .L8005EC74
-/* 3A048 8005EC48 00000000 */   nop      
+/* 3A048 8005EC48 00000000 */   nop
 /* 3A04C 8005EC4C 0C019714 */  jal       osSpTaskYield
 /* 3A050 8005EC50 24100002 */   addiu    $s0, $zero, 2
 /* 3A054 8005EC54 268400A8 */  addiu     $a0, $s4, 0xa8
@@ -69,7 +69,7 @@ glabel nuScExecuteAudio
 /* 3A0D4 8005ECD4 0C019707 */  jal       osSpTaskStartGo
 /* 3A0D8 8005ECD8 0200202D */   daddu    $a0, $s0, $zero
 /* 3A0DC 8005ECDC 08017B3E */  j         .L8005ECF8
-/* 3A0E0 8005ECE0 00000000 */   nop      
+/* 3A0E0 8005ECE0 00000000 */   nop
 .L8005ECE4:
 /* 3A0E4 8005ECE4 16020004 */  bne       $s0, $v0, .L8005ECF8
 /* 3A0E8 8005ECE8 02A0202D */   daddu    $a0, $s5, $zero

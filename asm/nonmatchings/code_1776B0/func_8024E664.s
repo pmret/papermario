@@ -11,13 +11,13 @@ glabel func_8024E664
 /* 17CF5C 8024E67C 24020002 */   addiu    $v0, $zero, 2
 /* 17CF60 8024E680 8CA50000 */  lw        $a1, ($a1)
 /* 17CF64 8024E684 0C0B1EAF */  jal       get_variable
-/* 17CF68 8024E688 00000000 */   nop      
+/* 17CF68 8024E688 00000000 */   nop
 /* 17CF6C 8024E68C 0040202D */  daddu     $a0, $v0, $zero
 /* 17CF70 8024E690 24020001 */  addiu     $v0, $zero, 1
 /* 17CF74 8024E694 3C01802A */  lui       $at, %hi(D_8029F2A4)
 /* 17CF78 8024E698 A022F2A4 */  sb        $v0, %lo(D_8029F2A4)($at)
 /* 17CF7C 8024E69C 0C0933CD */  jal       use_cam_preset
-/* 17CF80 8024E6A0 00000000 */   nop      
+/* 17CF80 8024E6A0 00000000 */   nop
 /* 17CF84 8024E6A4 24020002 */  addiu     $v0, $zero, 2
 .L8024E6A8:
 /* 17CF88 8024E6A8 8FBF0010 */  lw        $ra, 0x10($sp)

@@ -49,15 +49,15 @@ glabel func_80242038_EEF138
 /* EEF1E0 802420E0 44802000 */  mtc1      $zero, $f4
 /* EEF1E4 802420E4 460010A1 */  cvt.d.s   $f2, $f2
 /* EEF1E8 802420E8 46241082 */  mul.d     $f2, $f2, $f4
-/* EEF1EC 802420EC 00000000 */  nop       
+/* EEF1EC 802420EC 00000000 */  nop
 /* EEF1F0 802420F0 C7A0001C */  lwc1      $f0, 0x1c($sp)
 /* EEF1F4 802420F4 46000021 */  cvt.d.s   $f0, $f0
 /* EEF1F8 802420F8 46240002 */  mul.d     $f0, $f0, $f4
-/* EEF1FC 802420FC 00000000 */  nop       
+/* EEF1FC 802420FC 00000000 */  nop
 /* EEF200 80242100 3C013FE0 */  lui       $at, 0x3fe0
 /* EEF204 80242104 44812800 */  mtc1      $at, $f5
 /* EEF208 80242108 44802000 */  mtc1      $zero, $f4
-/* EEF20C 8024210C 00000000 */  nop       
+/* EEF20C 8024210C 00000000 */  nop
 /* EEF210 80242110 46241080 */  add.d     $f2, $f2, $f4
 /* EEF214 80242114 AE000074 */  sw        $zero, 0x74($s0)
 /* EEF218 80242118 46240000 */  add.d     $f0, $f0, $f4

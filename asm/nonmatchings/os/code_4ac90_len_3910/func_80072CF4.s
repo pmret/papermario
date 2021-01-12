@@ -12,7 +12,7 @@ glabel func_80072CF4
 /* 4E110 80072D10 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 4E114 80072D14 AFBF0010 */  sw        $ra, 0x10($sp)
 /* 4E118 80072D18 0C01CB3B */  jal       func_80072CEC
-/* 4E11C 80072D1C 00000000 */   nop      
+/* 4E11C 80072D1C 00000000 */   nop
 /* 4E120 80072D20 8FBF0010 */  lw        $ra, 0x10($sp)
 /* 4E124 80072D24 03E00008 */  jr        $ra
 /* 4E128 80072D28 27BD0018 */   addiu    $sp, $sp, 0x18

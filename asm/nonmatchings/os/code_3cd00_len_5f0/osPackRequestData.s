@@ -52,4 +52,4 @@ glabel osPackRequestData
 /* 3D280 80061E80 A0E20000 */  sb        $v0, ($a3)
 /* 3D284 80061E84 03E00008 */  jr        $ra
 /* 3D288 80061E88 27BD0010 */   addiu    $sp, $sp, 0x10
-/* 3D28C 80061E8C 00000000 */  nop       
+/* 3D28C 80061E8C 00000000 */  nop

@@ -13,7 +13,7 @@ glabel show_variable_battle_message
 /* 17E304 8024FA24 00C0902D */   daddu    $s2, $a2, $zero
 /* 17E308 8024FA28 0040182D */  daddu     $v1, $v0, $zero
 /* 17E30C 8024FA2C 1060001B */  beqz      $v1, .L8024FA9C
-/* 17E310 8024FA30 00000000 */   nop      
+/* 17E310 8024FA30 00000000 */   nop
 /* 17E314 8024FA34 3C028025 */  lui       $v0, %hi(func_8024FB3C)
 /* 17E318 8024FA38 2442FB3C */  addiu     $v0, $v0, %lo(func_8024FB3C)
 /* 17E31C 8024FA3C AC620004 */  sw        $v0, 4($v1)

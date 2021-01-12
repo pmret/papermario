@@ -16,16 +16,16 @@ glabel func_800E5098
 /* 7E570 800E50C0 14810004 */  bne       $a0, $at, .L800E50D4
 /* 7E574 800E50C4 3C018000 */   lui      $at, 0x8000
 /* 7E578 800E50C8 14410002 */  bne       $v0, $at, .L800E50D4
-/* 7E57C 800E50CC 00000000 */   nop      
+/* 7E57C 800E50CC 00000000 */   nop
 /* 7E580 800E50D0 0006000D */  break     6
 .L800E50D4:
 /* 7E584 800E50D4 00001810 */   mfhi     $v1
 /* 7E588 800E50D8 14600019 */  bnez      $v1, .L800E5140
-/* 7E58C 800E50DC 00000000 */   nop      
+/* 7E58C 800E50DC 00000000 */   nop
 /* 7E590 800E50E0 3C048016 */  lui       $a0, %hi(gCollisionStatus+0x2)
 /* 7E594 800E50E4 8484A552 */  lh        $a0, %lo(gCollisionStatus+0x2)($a0)
 /* 7E598 800E50E8 0C016F6A */  jal       get_collider_type_by_id
-/* 7E59C 800E50EC 00000000 */   nop      
+/* 7E59C 800E50EC 00000000 */   nop
 /* 7E5A0 800E50F0 304300FF */  andi      $v1, $v0, 0xff
 /* 7E5A4 800E50F4 24020006 */  addiu     $v0, $zero, 6
 /* 7E5A8 800E50F8 10620003 */  beq       $v1, $v0, .L800E5108

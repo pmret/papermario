@@ -88,7 +88,7 @@ glabel fio_serialize_state
 /* 6B70 8002B770 00220821 */  addu      $at, $at, $v0
 /* 6B74 8002B774 A02379CA */  sb        $v1, %lo(D_800779CA)($at)
 /* 6B78 8002B778 0C00AB90 */  jal       get_spirits_rescued
-/* 6B7C 8002B77C 00000000 */   nop      
+/* 6B7C 8002B77C 00000000 */   nop
 /* 6B80 8002B780 8E030000 */  lw        $v1, ($s0)
 /* 6B84 8002B784 90640166 */  lbu       $a0, 0x166($v1)
 /* 6B88 8002B788 00041840 */  sll       $v1, $a0, 1

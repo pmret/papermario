@@ -20,7 +20,7 @@ glabel osPfsChecker
 /* 4805C 8006CC5C 00408021 */  addu      $s0, $v0, $zero
 /* 48060 8006CC60 24020002 */  addiu     $v0, $zero, 2
 /* 48064 8006CC64 16020004 */  bne       $s0, $v0, .L8006CC78
-/* 48068 8006CC68 00000000 */   nop      
+/* 48068 8006CC68 00000000 */   nop
 /* 4806C 8006CC6C 0C01A702 */  jal       osGetId
 /* 48070 8006CC70 02202021 */   addu     $a0, $s1, $zero
 /* 48074 8006CC74 00408021 */  addu      $s0, $v0, $zero
@@ -35,7 +35,7 @@ glabel osPfsChecker
 /* 4808C 8006CC8C 27A50258 */   addiu    $a1, $sp, 0x258
 /* 48090 8006CC90 00408021 */  addu      $s0, $v0, $zero
 /* 48094 8006CC94 160000EE */  bnez      $s0, .L8006D050
-/* 48098 8006CC98 00000000 */   nop      
+/* 48098 8006CC98 00000000 */   nop
 /* 4809C 8006CC9C 8E220050 */  lw        $v0, 0x50($s1)
 /* 480A0 8006CCA0 0202102A */  slt       $v0, $s0, $v0
 /* 480A4 8006CCA4 1040006B */  beqz      $v0, .L8006CE54
@@ -54,12 +54,12 @@ glabel osPfsChecker
 /* 480D4 8006CCD4 02001021 */   addu     $v0, $s0, $zero
 /* 480D8 8006CCD8 97A2021C */  lhu       $v0, 0x21c($sp)
 /* 480DC 8006CCDC 14400006 */  bnez      $v0, .L8006CCF8
-/* 480E0 8006CCE0 00000000 */   nop      
+/* 480E0 8006CCE0 00000000 */   nop
 /* 480E4 8006CCE4 8FA20218 */  lw        $v0, 0x218($sp)
 /* 480E8 8006CCE8 10400055 */  beqz      $v0, .L8006CE40
 /* 480EC 8006CCEC 2405FFFF */   addiu    $a1, $zero, -1
 /* 480F0 8006CCF0 0801B374 */  j         .L8006CDD0
-/* 480F4 8006CCF4 00000000 */   nop      
+/* 480F4 8006CCF4 00000000 */   nop
 .L8006CCF8:
 /* 480F8 8006CCF8 8FA20218 */  lw        $v0, 0x218($sp)
 /* 480FC 8006CCFC 14400003 */  bnez      $v0, .L8006CD0C
@@ -126,7 +126,7 @@ glabel osPfsChecker
 /* 481D8 8006CDD8 3283FFFF */  andi      $v1, $s4, 0xffff
 /* 481DC 8006CDDC 24020001 */  addiu     $v0, $zero, 1
 /* 481E0 8006CDE0 10620017 */  beq       $v1, $v0, .L8006CE40
-/* 481E4 8006CDE4 00000000 */   nop      
+/* 481E4 8006CDE4 00000000 */   nop
 .L8006CDE8:
 /* 481E8 8006CDE8 27A40218 */  addiu     $a0, $sp, 0x218
 .L8006CDEC:
@@ -157,7 +157,7 @@ glabel osPfsChecker
 /* 48244 8006CE44 26520001 */  addiu     $s2, $s2, 1
 /* 48248 8006CE48 0242102A */  slt       $v0, $s2, $v0
 /* 4824C 8006CE4C 1440FF98 */  bnez      $v0, .L8006CCB0
-/* 48250 8006CE50 00000000 */   nop      
+/* 48250 8006CE50 00000000 */   nop
 .L8006CE54:
 /* 48254 8006CE54 8E220050 */  lw        $v0, 0x50($s1)
 /* 48258 8006CE58 1840001D */  blez      $v0, .L8006CED0
@@ -268,7 +268,7 @@ glabel osPfsChecker
 /* 483D0 8006CFD0 A4430220 */  sh        $v1, 0x220($v0)
 /* 483D4 8006CFD4 90820000 */  lbu       $v0, ($a0)
 /* 483D8 8006CFD8 1048FFF1 */  beq       $v0, $t0, .L8006CFA0
-/* 483DC 8006CFDC 00000000 */   nop      
+/* 483DC 8006CFDC 00000000 */   nop
 .L8006CFE0:
 /* 483E0 8006CFE0 24C60002 */  addiu     $a2, $a2, 2
 .L8006CFE4:

@@ -66,14 +66,14 @@ glabel guPerspectiveF
 /* 3F07C 80063C7C 1440FFF4 */  bnez      $v0, .L80063C50
 /* 3F080 80063C80 26100010 */   addiu    $s0, $s0, 0x10
 /* 3F084 80063C84 12200023 */  beqz      $s1, .L80063D14
-/* 3F088 80063C88 00000000 */   nop      
+/* 3F088 80063C88 00000000 */   nop
 /* 3F08C 80063C8C 461CD080 */  add.s     $f2, $f26, $f28
 /* 3F090 80063C90 3C01800A */  lui       $at, %hi(D_80099BB8)
 /* 3F094 80063C94 D4209BB8 */  ldc1      $f0, %lo(D_80099BB8)($at)
 /* 3F098 80063C98 460010A1 */  cvt.d.s   $f2, $f2
 /* 3F09C 80063C9C 4620103E */  c.le.d    $f2, $f0
-/* 3F0A0 80063CA0 00000000 */  nop       
-/* 3F0A4 80063CA4 00000000 */  nop       
+/* 3F0A0 80063CA0 00000000 */  nop
+/* 3F0A4 80063CA4 00000000 */  nop
 /* 3F0A8 80063CA8 45010019 */  bc1t      .L80063D10
 /* 3F0AC 80063CAC 3402FFFF */   ori      $v0, $zero, 0xffff
 /* 3F0B0 80063CB0 3C01800A */  lui       $at, %hi(D_80099BC0)
@@ -82,13 +82,13 @@ glabel guPerspectiveF
 /* 3F0BC 80063CBC 3C01800A */  lui       $at, %hi(D_80099BC8)
 /* 3F0C0 80063CC0 D4209BC8 */  ldc1      $f0, %lo(D_80099BC8)($at)
 /* 3F0C4 80063CC4 4622003E */  c.le.d    $f0, $f2
-/* 3F0C8 80063CC8 00000000 */  nop       
-/* 3F0CC 80063CCC 00000000 */  nop       
+/* 3F0C8 80063CC8 00000000 */  nop
+/* 3F0CC 80063CCC 00000000 */  nop
 /* 3F0D0 80063CD0 45030006 */  bc1tl     .L80063CEC
 /* 3F0D4 80063CD4 46201001 */   sub.d    $f0, $f2, $f0
 /* 3F0D8 80063CD8 4620100D */  trunc.w.d $f0, $f2
 /* 3F0DC 80063CDC 44030000 */  mfc1      $v1, $f0
-/* 3F0E0 80063CE0 00000000 */  nop       
+/* 3F0E0 80063CE0 00000000 */  nop
 /* 3F0E4 80063CE4 08018F40 */  j         .L80063D00
 /* 3F0E8 80063CE8 00601021 */   addu     $v0, $v1, $zero
 .L80063CEC:

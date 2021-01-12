@@ -14,4 +14,4 @@ glabel memcpy
 .L80064A94:
 /* 3FE94 80064A94 03E00008 */  jr        $ra
 /* 3FE98 80064A98 00801021 */   addu     $v0, $a0, $zero
-/* 3FE9C 80064A9C 00000000 */  nop       
+/* 3FE9C 80064A9C 00000000 */  nop

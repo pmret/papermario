@@ -11,7 +11,7 @@ glabel SetBattleCamOffsetZ
 /* 17D350 8024EA70 24020002 */   addiu    $v0, $zero, 2
 /* 17D354 8024EA74 8CA50000 */  lw        $a1, ($a1)
 /* 17D358 8024EA78 0C0B1EAF */  jal       get_variable
-/* 17D35C 8024EA7C 00000000 */   nop      
+/* 17D35C 8024EA7C 00000000 */   nop
 /* 17D360 8024EA80 3C01802A */  lui       $at, %hi(D_8029F286)
 /* 17D364 8024EA84 A422F286 */  sh        $v0, %lo(D_8029F286)($at)
 /* 17D368 8024EA88 24020002 */  addiu     $v0, $zero, 2

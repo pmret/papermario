@@ -9,7 +9,7 @@ glabel disable_npc_shadow
 /* 1600C 8003AC0C 8E020000 */  lw        $v0, ($s0)
 /* 16010 8003AC10 30420010 */  andi      $v0, $v0, 0x10
 /* 16014 8003AC14 1040000D */  beqz      $v0, .L8003AC4C
-/* 16018 8003AC18 00000000 */   nop      
+/* 16018 8003AC18 00000000 */   nop
 /* 1601C 8003AC1C 0C044181 */  jal       get_shadow_by_index
 /* 16020 8003AC20 8E040078 */   lw       $a0, 0x78($s0)
 /* 16024 8003AC24 3C04FFFE */  lui       $a0, 0xfffe

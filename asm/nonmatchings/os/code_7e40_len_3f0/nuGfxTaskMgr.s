@@ -30,23 +30,23 @@ glabel nuGfxTaskMgr
 /* 7EA0 8002CAA0 8C820054 */  lw        $v0, 0x54($a0)
 /* 7EA4 8002CAA4 84420000 */  lh        $v0, ($v0)
 /* 7EA8 8002CAA8 10530005 */  beq       $v0, $s3, .L8002CAC0
-/* 7EAC 8002CAAC 00000000 */   nop      
+/* 7EAC 8002CAAC 00000000 */   nop
 /* 7EB0 8002CAB0 10520012 */  beq       $v0, $s2, .L8002CAFC
-/* 7EB4 8002CAB4 00000000 */   nop      
+/* 7EB4 8002CAB4 00000000 */   nop
 /* 7EB8 8002CAB8 0800B2A2 */  j         .L8002CA88
-/* 7EBC 8002CABC 00000000 */   nop      
+/* 7EBC 8002CABC 00000000 */   nop
 .L8002CAC0:
 /* 7EC0 8002CAC0 3C028007 */  lui       $v0, %hi(D_800773F4)
 /* 7EC4 8002CAC4 8C4273F4 */  lw        $v0, %lo(D_800773F4)($v0)
 /* 7EC8 8002CAC8 10400003 */  beqz      $v0, .L8002CAD8
-/* 7ECC 8002CACC 00000000 */   nop      
+/* 7ECC 8002CACC 00000000 */   nop
 /* 7ED0 8002CAD0 0040F809 */  jalr      $v0
-/* 7ED4 8002CAD4 00000000 */   nop      
+/* 7ED4 8002CAD4 00000000 */   nop
 .L8002CAD8:
 /* 7ED8 8002CAD8 8E220000 */  lw        $v0, ($s1)
 /* 7EDC 8002CADC 30420080 */  andi      $v0, $v0, 0x80
 /* 7EE0 8002CAE0 1040000C */  beqz      $v0, .L8002CB14
-/* 7EE4 8002CAE4 00000000 */   nop      
+/* 7EE4 8002CAE4 00000000 */   nop
 /* 7EE8 8002CAE8 0C019CE0 */  jal       osViBlack
 /* 7EEC 8002CAEC 0000202D */   daddu    $a0, $zero, $zero
 /* 7EF0 8002CAF0 24020001 */  addiu     $v0, $zero, 1
@@ -56,9 +56,9 @@ glabel nuGfxTaskMgr
 /* 7EFC 8002CAFC 3C028007 */  lui       $v0, %hi(D_800773F8)
 /* 7F00 8002CB00 8C4273F8 */  lw        $v0, %lo(D_800773F8)($v0)
 /* 7F04 8002CB04 10400003 */  beqz      $v0, .L8002CB14
-/* 7F08 8002CB08 00000000 */   nop      
+/* 7F08 8002CB08 00000000 */   nop
 /* 7F0C 8002CB0C 0040F809 */  jalr      $v0
-/* 7F10 8002CB10 00000000 */   nop      
+/* 7F10 8002CB10 00000000 */   nop
 .L8002CB14:
 /* 7F14 8002CB14 0C018250 */  jal       osSetIntMask
 /* 7F18 8002CB18 24040001 */   addiu    $a0, $zero, 1
@@ -68,4 +68,4 @@ glabel nuGfxTaskMgr
 /* 7F28 8002CB28 0C018250 */  jal       osSetIntMask
 /* 7F2C 8002CB2C AE030000 */   sw       $v1, ($s0)
 /* 7F30 8002CB30 0800B2A2 */  j         .L8002CA88
-/* 7F34 8002CB34 00000000 */   nop      
+/* 7F34 8002CB34 00000000 */   nop

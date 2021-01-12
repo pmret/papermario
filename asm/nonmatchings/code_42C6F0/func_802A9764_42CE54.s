@@ -19,10 +19,10 @@ glabel func_802A9764_42CE54
 /* 42CE88 802A9798 26310001 */   addiu    $s1, $s1, 1
 /* 42CE8C 802A979C 2A22000F */  slti      $v0, $s1, 0xf
 /* 42CE90 802A97A0 1440FFFA */  bnez      $v0, .L802A978C
-/* 42CE94 802A97A4 00000000 */   nop      
+/* 42CE94 802A97A4 00000000 */   nop
 /* 42CE98 802A97A8 8FBF0018 */  lw        $ra, 0x18($sp)
 /* 42CE9C 802A97AC 8FB10014 */  lw        $s1, 0x14($sp)
 /* 42CEA0 802A97B0 8FB00010 */  lw        $s0, 0x10($sp)
 /* 42CEA4 802A97B4 03E00008 */  jr        $ra
 /* 42CEA8 802A97B8 27BD0020 */   addiu    $sp, $sp, 0x20
-/* 42CEAC 802A97BC 00000000 */  nop       
+/* 42CEAC 802A97BC 00000000 */  nop

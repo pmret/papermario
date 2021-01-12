@@ -53,14 +53,14 @@ glabel osCreateViManager
 /* 41F30 80066B30 00401821 */  addu      $v1, $v0, $zero
 /* 41F34 80066B34 0071102A */  slt       $v0, $v1, $s1
 /* 41F38 80066B38 10400005 */  beqz      $v0, .L80066B50
-/* 41F3C 80066B3C 00000000 */   nop      
+/* 41F3C 80066B3C 00000000 */   nop
 /* 41F40 80066B40 00609021 */  addu      $s2, $v1, $zero
 /* 41F44 80066B44 00002021 */  addu      $a0, $zero, $zero
 /* 41F48 80066B48 0C0197D4 */  jal       osSetThreadPri
 /* 41F4C 80066B4C 02202821 */   addu     $a1, $s1, $zero
 .L80066B50:
 /* 41F50 80066B50 0C01ACD8 */  jal       __osDisableInt
-/* 41F54 80066B54 00000000 */   nop      
+/* 41F54 80066B54 00000000 */   nop
 /* 41F58 80066B58 3C10800B */  lui       $s0, %hi(D_800AF918)
 /* 41F5C 80066B5C 2610F918 */  addiu     $s0, $s0, %lo(D_800AF918)
 /* 41F60 80066B60 02002021 */  addu      $a0, $s0, $zero
@@ -89,7 +89,7 @@ glabel osCreateViManager
 /* 41FBC 80066BBC 0C019798 */  jal       osCreateThread
 /* 41FC0 80066BC0 AFA30010 */   sw       $v1, 0x10($sp)
 /* 41FC4 80066BC4 0C01B2A4 */  jal       osViInit
-/* 41FC8 80066BC8 00000000 */   nop      
+/* 41FC8 80066BC8 00000000 */   nop
 /* 41FCC 80066BCC 0C019808 */  jal       osStartThread
 /* 41FD0 80066BD0 02002021 */   addu     $a0, $s0, $zero
 /* 41FD4 80066BD4 0C01ACF4 */  jal       __osRestoreInt

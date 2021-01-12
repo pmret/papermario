@@ -207,14 +207,14 @@ glabel func_E00E0600
 /* 3DBD80 E00E0920 AE220000 */  sw        $v0, ($s1)
 /* 3DBD84 E00E0924 4600010D */  trunc.w.s $f4, $f0
 /* 3DBD88 E00E0928 44032000 */  mfc1      $v1, $f4
-/* 3DBD8C E00E092C 00000000 */  nop       
+/* 3DBD8C E00E092C 00000000 */  nop
 /* 3DBD90 E00E0930 00031880 */  sll       $v1, $v1, 2
 /* 3DBD94 E00E0934 30630FFF */  andi      $v1, $v1, 0xfff
 /* 3DBD98 E00E0938 C6000000 */  lwc1      $f0, ($s0)
 /* 3DBD9C E00E093C 00031B00 */  sll       $v1, $v1, 0xc
 /* 3DBDA0 E00E0940 4600010D */  trunc.w.s $f4, $f0
 /* 3DBDA4 E00E0944 44022000 */  mfc1      $v0, $f4
-/* 3DBDA8 E00E0948 00000000 */  nop       
+/* 3DBDA8 E00E0948 00000000 */  nop
 /* 3DBDAC E00E094C 00021080 */  sll       $v0, $v0, 2
 /* 3DBDB0 E00E0950 30420FFF */  andi      $v0, $v0, 0xfff
 /* 3DBDB4 E00E0954 00561025 */  or        $v0, $v0, $s6
@@ -226,14 +226,14 @@ glabel func_E00E0600
 /* 3DBDCC E00E096C ACC20010 */  sw        $v0, 0x10($a2)
 /* 3DBDD0 E00E0970 4600010D */  trunc.w.s $f4, $f0
 /* 3DBDD4 E00E0974 44032000 */  mfc1      $v1, $f4
-/* 3DBDD8 E00E0978 00000000 */  nop       
+/* 3DBDD8 E00E0978 00000000 */  nop
 /* 3DBDDC E00E097C 2463000F */  addiu     $v1, $v1, 0xf
 /* 3DBDE0 E00E0980 00031880 */  sll       $v1, $v1, 2
 /* 3DBDE4 E00E0984 30630FFF */  andi      $v1, $v1, 0xfff
 /* 3DBDE8 E00E0988 00031B00 */  sll       $v1, $v1, 0xc
 /* 3DBDEC E00E098C 4600110D */  trunc.w.s $f4, $f2
 /* 3DBDF0 E00E0990 44022000 */  mfc1      $v0, $f4
-/* 3DBDF4 E00E0994 00000000 */  nop       
+/* 3DBDF4 E00E0994 00000000 */  nop
 /* 3DBDF8 E00E0998 2442000F */  addiu     $v0, $v0, 0xf
 /* 3DBDFC E00E099C 00021080 */  sll       $v0, $v0, 2
 /* 3DBE00 E00E09A0 30420FFF */  andi      $v0, $v0, 0xfff

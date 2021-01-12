@@ -42,7 +42,7 @@ glabel func_E004E000
 /* 35BA64 E004E094 0200202D */   daddu    $a0, $s0, $zero
 .LE004E098:
 /* 35BA68 E004E098 08013826 */  j         .LE004E098
-/* 35BA6C E004E09C 00000000 */   nop      
+/* 35BA6C E004E09C 00000000 */   nop
 .LE004E0A0:
 /* 35BA70 E004E0A0 00112880 */  sll       $a1, $s1, 2
 /* 35BA74 E004E0A4 00B12821 */  addu      $a1, $a1, $s1

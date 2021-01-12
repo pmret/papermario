@@ -11,7 +11,7 @@ glabel SetBattleCamYaw
 /* 17D3DC 8024EAFC 24020002 */   addiu    $v0, $zero, 2
 /* 17D3E0 8024EB00 8CA50000 */  lw        $a1, ($a1)
 /* 17D3E4 8024EB04 0C0B1EAF */  jal       get_variable
-/* 17D3E8 8024EB08 00000000 */   nop      
+/* 17D3E8 8024EB08 00000000 */   nop
 /* 17D3EC 8024EB0C 3C01802A */  lui       $at, %hi(D_8029F282)
 /* 17D3F0 8024EB10 A422F282 */  sh        $v0, %lo(D_8029F282)($at)
 /* 17D3F4 8024EB14 24020002 */  addiu     $v0, $zero, 2

@@ -21,7 +21,7 @@ glabel func_8013A650
 /* D0D8C 8013A68C 26100008 */   addiu    $s0, $s0, 8
 /* D0D90 8013A690 92020005 */  lbu       $v0, 5($s0)
 /* D0D94 8013A694 10400005 */  beqz      $v0, .L8013A6AC
-/* D0D98 8013A698 00000000 */   nop      
+/* D0D98 8013A698 00000000 */   nop
 /* D0D9C 8013A69C 0C00AB4B */  jal       heap_free
 /* D0DA0 8013A6A0 8E040000 */   lw       $a0, ($s0)
 /* D0DA4 8013A6A4 0804E9AF */  j         .L8013A6BC
@@ -29,7 +29,7 @@ glabel func_8013A650
 .L8013A6AC:
 /* D0DAC 8013A6AC 8E040000 */  lw        $a0, ($s0)
 /* D0DB0 8013A6B0 0C00AB1E */  jal       general_heap_free
-/* D0DB4 8013A6B4 00000000 */   nop      
+/* D0DB4 8013A6B4 00000000 */   nop
 /* D0DB8 8013A6B8 AE000000 */  sw        $zero, ($s0)
 .L8013A6BC:
 /* D0DBC 8013A6BC A2000004 */  sb        $zero, 4($s0)
@@ -38,7 +38,7 @@ glabel func_8013A650
 .L8013A6C8:
 /* D0DC8 8013A6C8 0211102A */  slt       $v0, $s0, $s1
 /* D0DCC 8013A6CC 1440FFE7 */  bnez      $v0, .L8013A66C
-/* D0DD0 8013A6D0 00000000 */   nop      
+/* D0DD0 8013A6D0 00000000 */   nop
 /* D0DD4 8013A6D4 8FBF0018 */  lw        $ra, 0x18($sp)
 /* D0DD8 8013A6D8 8FB10014 */  lw        $s1, 0x14($sp)
 /* D0DDC 8013A6DC 8FB00010 */  lw        $s0, 0x10($sp)

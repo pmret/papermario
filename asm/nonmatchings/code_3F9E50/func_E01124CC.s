@@ -91,4 +91,4 @@ glabel func_E01124CC
 /* 3FA470 E0112620 8FB00010 */  lw        $s0, 0x10($sp)
 /* 3FA474 E0112624 03E00008 */  jr        $ra
 /* 3FA478 E0112628 27BD0028 */   addiu    $sp, $sp, 0x28
-/* 3FA47C E011262C 00000000 */  nop       
+/* 3FA47C E011262C 00000000 */  nop

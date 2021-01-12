@@ -43,7 +43,7 @@ glabel func_E005C000
 /* 360FD8 E005C098 AE11000C */   sw       $s1, 0xc($s0)
 .LE005C09C:
 /* 360FDC E005C09C 08017027 */  j         .LE005C09C
-/* 360FE0 E005C0A0 00000000 */   nop      
+/* 360FE0 E005C0A0 00000000 */   nop
 .LE005C0A4:
 /* 360FE4 E005C0A4 0220202D */  daddu     $a0, $s1, $zero
 /* 360FE8 E005C0A8 00132840 */  sll       $a1, $s3, 1

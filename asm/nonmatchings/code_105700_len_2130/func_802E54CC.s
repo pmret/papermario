@@ -31,7 +31,7 @@ glabel func_802E54CC
 /* 106DB4 802E5534 0C051514 */  jal       set_global_flag
 /* 106DB8 802E5538 34845BE0 */   ori      $a0, $a0, 0x5be0
 /* 106DBC 802E553C 080B9553 */  j         .L802E554C
-/* 106DC0 802E5540 00000000 */   nop      
+/* 106DC0 802E5540 00000000 */   nop
 .L802E5544:
 /* 106DC4 802E5544 0C043F5A */  jal       func_8010FD68
 /* 106DC8 802E5548 0200202D */   daddu    $a0, $s0, $zero

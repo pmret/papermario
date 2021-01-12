@@ -30,6 +30,6 @@ glabel osPfsReleasePages
 .L800687CC:
 /* 43BCC 800687CC 03E00008 */  jr        $ra
 /* 43BD0 800687D0 00001021 */   addu     $v0, $zero, $zero
-/* 43BD4 800687D4 00000000 */  nop       
-/* 43BD8 800687D8 00000000 */  nop       
-/* 43BDC 800687DC 00000000 */  nop       
+/* 43BD4 800687D4 00000000 */  nop
+/* 43BD8 800687D8 00000000 */  nop
+/* 43BDC 800687DC 00000000 */  nop

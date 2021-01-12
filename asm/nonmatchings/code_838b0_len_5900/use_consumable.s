@@ -20,7 +20,7 @@ glabel use_consumable
 /* 838EC 800EA43C 02228821 */  addu      $s1, $s1, $v0
 /* 838F0 800EA440 8631F444 */  lh        $s1, %lo(gPlayerData+0x1B4)($s1)
 /* 838F4 800EA444 0C00A5CF */  jal       dma_copy
-/* 838F8 800EA448 00000000 */   nop      
+/* 838F8 800EA448 00000000 */   nop
 /* 838FC 800EA44C 24050001 */  addiu     $a1, $zero, 1
 /* 83900 800EA450 8E040008 */  lw        $a0, 8($s0)
 /* 83904 800EA454 0C0B0CF8 */  jal       start_script

@@ -41,11 +41,11 @@ glabel step_battle
 /* ED6C 8003396C 0C017CBC */  jal       nuGfxSetCfb
 /* ED70 80033970 A2020000 */   sb       $v0, ($s0)
 /* ED74 80033974 0C018030 */  jal       nuContRmbForceStopEnd
-/* ED78 80033978 00000000 */   nop      
+/* ED78 80033978 00000000 */   nop
 /* ED7C 8003397C 0C05260E */  jal       func_80149838
-/* ED80 80033980 00000000 */   nop      
+/* ED80 80033980 00000000 */   nop
 /* ED84 80033984 0C00EC6A */  jal       func_8003B1A8
-/* ED88 80033988 00000000 */   nop      
+/* ED88 80033988 00000000 */   nop
 /* ED8C 8003398C 3C108007 */  lui       $s0, %hi(gGameStatusPtr)
 /* ED90 80033990 2610419C */  addiu     $s0, $s0, %lo(gGameStatusPtr)
 /* ED94 80033994 8E030000 */  lw        $v1, ($s0)
@@ -53,9 +53,9 @@ glabel step_battle
 /* ED9C 8003399C 0C016BA8 */  jal       allocate_hit_tables
 /* EDA0 800339A0 A0620070 */   sb       $v0, 0x70($v1)
 /* EDA4 800339A4 0C00B458 */  jal       func_8002D160
-/* EDA8 800339A8 00000000 */   nop      
+/* EDA8 800339A8 00000000 */   nop
 /* EDAC 800339AC 0C0AC82D */  jal       func_802B20B4
-/* EDB0 800339B0 00000000 */   nop      
+/* EDB0 800339B0 00000000 */   nop
 /* EDB4 800339B4 0C05259C */  jal       func_80149670
 /* EDB8 800339B8 0000202D */   daddu    $a0, $zero, $zero
 /* EDBC 800339BC 8E100000 */  lw        $s0, ($s0)
@@ -78,36 +78,36 @@ glabel step_battle
 /* EDFC 800339FC 24040006 */  addiu     $a0, $zero, 6
 .L80033A00:
 /* EE00 80033A00 0C0B763E */  jal       func_802DD8F8
-/* EE04 80033A04 00000000 */   nop      
+/* EE04 80033A04 00000000 */   nop
 /* EE08 80033A08 0C045751 */  jal       clear_model_data
-/* EE0C 80033A0C 00000000 */   nop      
+/* EE0C 80033A0C 00000000 */   nop
 /* EE10 80033A10 0C052010 */  jal       func_80148040
-/* EE14 80033A14 00000000 */   nop      
+/* EE14 80033A14 00000000 */   nop
 /* EE18 80033A18 0C05177E */  jal       func_80145DF8
-/* EE1C 80033A1C 00000000 */   nop      
+/* EE1C 80033A1C 00000000 */   nop
 /* EE20 80033A20 0C0482EC */  jal       clear_virtual_models
-/* EE24 80033A24 00000000 */   nop      
+/* EE24 80033A24 00000000 */   nop
 /* EE28 80033A28 0C047889 */  jal       func_8011E224
-/* EE2C 80033A2C 00000000 */   nop      
+/* EE2C 80033A2C 00000000 */   nop
 /* EE30 80033A30 0C048C2E */  jal       clear_dynamic_entity_list
-/* EE34 80033A34 00000000 */   nop      
+/* EE34 80033A34 00000000 */   nop
 /* EE38 80033A38 0000202D */  daddu     $a0, $zero, $zero
 /* EE3C 80033A3C 0C0514BA */  jal       func_801452E8
 /* EE40 80033A40 0080282D */   daddu    $a1, $a0, $zero
 /* EE44 80033A44 0C050440 */  jal       func_80141100
-/* EE48 80033A48 00000000 */   nop      
+/* EE48 80033A48 00000000 */   nop
 /* EE4C 80033A4C 0C03A6EC */  jal       reset_status_menu
-/* EE50 80033A50 00000000 */   nop      
+/* EE50 80033A50 00000000 */   nop
 /* EE54 80033A54 0C04C3FC */  jal       clear_item_entity_data
-/* EE58 80033A58 00000000 */   nop      
+/* EE58 80033A58 00000000 */   nop
 /* EE5C 80033A5C 0C0B0C77 */  jal       clear_script_list
-/* EE60 80033A60 00000000 */   nop      
+/* EE60 80033A60 00000000 */   nop
 /* EE64 80033A64 0C00E12F */  jal       clear_npcs
-/* EE68 80033A68 00000000 */   nop      
+/* EE68 80033A68 00000000 */   nop
 /* EE6C 80033A6C 0C04432E */  jal       clear_entity_data
 /* EE70 80033A70 24040001 */   addiu    $a0, $zero, 1
 /* EE74 80033A74 0C0515A0 */  jal       clear_trigger_data
-/* EE78 80033A78 00000000 */   nop      
+/* EE78 80033A78 00000000 */   nop
 /* EE7C 80033A7C 3C040017 */  lui       $a0, 0x17
 /* EE80 80033A80 2484C8E0 */  addiu     $a0, $a0, -0x3720
 /* EE84 80033A84 3C05001D */  lui       $a1, 0x1d
@@ -115,13 +115,13 @@ glabel step_battle
 /* EE8C 80033A8C 3C068024 */  lui       $a2, %hi(get_dpad_input_radial)
 /* EE90 80033A90 24C6E000 */  addiu     $a2, $a2, %lo(get_dpad_input_radial)
 /* EE94 80033A94 0C00A5CF */  jal       dma_copy
-/* EE98 80033A98 00000000 */   nop      
+/* EE98 80033A98 00000000 */   nop
 /* EE9C 80033A9C 0C08F84C */  jal       initialize_battle
-/* EEA0 80033AA0 00000000 */   nop      
+/* EEA0 80033AA0 00000000 */   nop
 /* EEA4 80033AA4 0C09027D */  jal       func_802409F4
-/* EEA8 80033AA8 00000000 */   nop      
+/* EEA8 80033AA8 00000000 */   nop
 /* EEAC 80033AAC 0C01CAF7 */  jal       func_80072BDC
-/* EEB0 80033AB0 00000000 */   nop      
+/* EEB0 80033AB0 00000000 */   nop
 /* EEB4 80033AB4 3C04800F */  lui       $a0, %hi(gPlayerStatusPtr)
 /* EEB8 80033AB8 8C847B30 */  lw        $a0, %lo(gPlayerStatusPtr)($a0)
 /* EEBC 80033ABC 8C820004 */  lw        $v0, 4($a0)
@@ -146,19 +146,19 @@ glabel step_battle
 /* EF08 80033B08 ACA20000 */   sw       $v0, ($a1)
 .L80033B0C:
 /* EF0C 80033B0C 0C00F949 */  jal       func_8003E524
-/* EF10 80033B10 00000000 */   nop      
+/* EF10 80033B10 00000000 */   nop
 /* EF14 80033B14 0C08F90E */  jal       update_battle_state
-/* EF18 80033B18 00000000 */   nop      
+/* EF18 80033B18 00000000 */   nop
 /* EF1C 80033B1C 0C00E64C */  jal       update_npcs
-/* EF20 80033B20 00000000 */   nop      
+/* EF20 80033B20 00000000 */   nop
 /* EF24 80033B24 0C04C7BB */  jal       update_item_entities
-/* EF28 80033B28 00000000 */   nop      
+/* EF28 80033B28 00000000 */   nop
 /* EF2C 80033B2C 0C016754 */  jal       func_80059D50
-/* EF30 80033B30 00000000 */   nop      
+/* EF30 80033B30 00000000 */   nop
 /* EF34 80033B34 0C04599D */  jal       func_80116674
-/* EF38 80033B38 00000000 */   nop      
+/* EF38 80033B38 00000000 */   nop
 /* EF3C 80033B3C 0C00B500 */  jal       update_cameras
-/* EF40 80033B40 00000000 */   nop      
+/* EF40 80033B40 00000000 */   nop
 .L80033B44:
 /* EF44 80033B44 8FBF0014 */  lw        $ra, 0x14($sp)
 /* EF48 80033B48 8FB00010 */  lw        $s0, 0x10($sp)

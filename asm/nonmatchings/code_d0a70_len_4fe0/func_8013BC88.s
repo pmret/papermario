@@ -16,7 +16,7 @@ glabel func_8013BC88
 /* D23B0 8013BCB0 14610004 */  bne       $v1, $at, .L8013BCC4
 /* D23B4 8013BCB4 3C018000 */   lui      $at, 0x8000
 /* D23B8 8013BCB8 14410002 */  bne       $v0, $at, .L8013BCC4
-/* D23BC 8013BCBC 00000000 */   nop      
+/* D23BC 8013BCBC 00000000 */   nop
 /* D23C0 8013BCC0 0006000D */  break     6
 .L8013BCC4:
 /* D23C4 8013BCC4 00006812 */   mflo     $t5
@@ -132,7 +132,7 @@ glabel func_8013BC88
 /* D2570 8013BE70 14410004 */  bne       $v0, $at, .L8013BE84
 /* D2574 8013BE74 3C018000 */   lui      $at, 0x8000
 /* D2578 8013BE78 14C10002 */  bne       $a2, $at, .L8013BE84
-/* D257C 8013BE7C 00000000 */   nop      
+/* D257C 8013BE7C 00000000 */   nop
 /* D2580 8013BE80 0006000D */  break     6
 .L8013BE84:
 /* D2584 8013BE84 00003012 */   mflo     $a2

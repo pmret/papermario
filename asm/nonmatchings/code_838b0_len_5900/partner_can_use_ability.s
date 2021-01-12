@@ -12,7 +12,7 @@ glabel partner_can_use_ability
 /* 848F8 800EB448 3C048011 */  lui       $a0, %hi(D_8010C930)
 /* 848FC 800EB44C 8C84C930 */  lw        $a0, %lo(D_8010C930)($a0)
 /* 84900 800EB450 0040F809 */  jalr      $v0
-/* 84904 800EB454 00000000 */   nop      
+/* 84904 800EB454 00000000 */   nop
 /* 84908 800EB458 0040182D */  daddu     $v1, $v0, $zero
 /* 8490C 800EB45C 10600002 */  beqz      $v1, .L800EB468
 /* 84910 800EB460 24020001 */   addiu    $v0, $zero, 1

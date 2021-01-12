@@ -43,4 +43,4 @@ glabel _Ldunscale
 /* 474A8 8006C0A8 24020002 */  addiu     $v0, $zero, 2
 .L8006C0AC:
 /* 474AC 8006C0AC 03E00008 */  jr        $ra
-/* 474B0 8006C0B0 00000000 */   nop      
+/* 474B0 8006C0B0 00000000 */   nop

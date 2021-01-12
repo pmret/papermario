@@ -17,6 +17,6 @@ glabel osIdCheckSum
 /* 44BA0 800697A0 A4C20000 */  sh        $v0, ($a2)
 /* 44BA4 800697A4 0087102B */  sltu      $v0, $a0, $a3
 /* 44BA8 800697A8 1440FFF5 */  bnez      $v0, .L80069780
-/* 44BAC 800697AC 00000000 */   nop      
+/* 44BAC 800697AC 00000000 */   nop
 /* 44BB0 800697B0 03E00008 */  jr        $ra
 /* 44BB4 800697B4 00001021 */   addu     $v0, $zero, $zero

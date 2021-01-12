@@ -21,12 +21,12 @@ glabel func_E00AC2A4
 /* 3AF104 E00AC2E4 8E9E001C */  lw        $fp, 0x1c($s4)
 /* 3AF108 E00AC2E8 8E970020 */  lw        $s7, 0x20($s4)
 /* 3AF10C E00AC2EC 46020032 */  c.eq.s    $f0, $f2
-/* 3AF110 E00AC2F0 00000000 */  nop       
+/* 3AF110 E00AC2F0 00000000 */  nop
 /* 3AF114 E00AC2F4 4501011F */  bc1t      .LE00AC774
-/* 3AF118 E00AC2F8 00000000 */   nop      
+/* 3AF118 E00AC2F8 00000000 */   nop
 /* 3AF11C E00AC2FC C680002C */  lwc1      $f0, 0x2c($s4)
 /* 3AF120 E00AC300 46020032 */  c.eq.s    $f0, $f2
-/* 3AF124 E00AC304 00000000 */  nop       
+/* 3AF124 E00AC304 00000000 */  nop
 /* 3AF128 E00AC308 4501011A */  bc1t      .LE00AC774
 /* 3AF12C E00AC30C 3C08DB06 */   lui      $t0, 0xdb06
 /* 3AF130 E00AC310 35080024 */  ori       $t0, $t0, 0x24
@@ -329,5 +329,5 @@ glabel func_E00AC2A4
 /* 3AF5BC E00AC79C D7B400C8 */  ldc1      $f20, 0xc8($sp)
 /* 3AF5C0 E00AC7A0 03E00008 */  jr        $ra
 /* 3AF5C4 E00AC7A4 27BD00D0 */   addiu    $sp, $sp, 0xd0
-/* 3AF5C8 E00AC7A8 00000000 */  nop       
-/* 3AF5CC E00AC7AC 00000000 */  nop       
+/* 3AF5C8 E00AC7A8 00000000 */  nop
+/* 3AF5CC E00AC7AC 00000000 */  nop

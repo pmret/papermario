@@ -27,7 +27,7 @@ glabel pause_spirits_init
 /* 1406F4 8024D3B4 AC820000 */  sw        $v0, ($a0)
 /* 1406F8 8024D3B8 2A020007 */  slti      $v0, $s0, 7
 /* 1406FC 8024D3BC 1440FFF7 */  bnez      $v0, .L8024D39C
-/* 140700 8024D3C0 00000000 */   nop      
+/* 140700 8024D3C0 00000000 */   nop
 /* 140704 8024D3C4 0000802D */  daddu     $s0, $zero, $zero
 /* 140708 8024D3C8 3C128027 */  lui       $s2, %hi(D_802706C0)
 /* 14070C 8024D3CC 265206C0 */  addiu     $s2, $s2, %lo(D_802706C0)

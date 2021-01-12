@@ -35,7 +35,7 @@ glabel partner_reset_data
 /* 8499C 800EB4EC 3C108011 */  lui       $s0, %hi(gPlayerStatus)
 /* 849A0 800EB4F0 2610EFC8 */  addiu     $s0, $s0, %lo(gPlayerStatus)
 /* 849A4 800EB4F4 10400003 */  beqz      $v0, .L800EB504
-/* 849A8 800EB4F8 00000000 */   nop      
+/* 849A8 800EB4F8 00000000 */   nop
 /* 849AC 800EB4FC A2240000 */  sb        $a0, ($s1)
 /* 849B0 800EB500 A060007D */  sb        $zero, 0x7d($v1)
 .L800EB504:
@@ -56,12 +56,12 @@ glabel partner_reset_data
 /* 849EC 800EB53C ACC40000 */   sw       $a0, ($a2)
 .L800EB540:
 /* 849F0 800EB540 0C03A974 */  jal       func_800EA5D0
-/* 849F4 800EB544 00000000 */   nop      
+/* 849F4 800EB544 00000000 */   nop
 /* 849F8 800EB548 3C028011 */  lui       $v0, %hi(D_8010C930)
 /* 849FC 800EB54C 8C42C930 */  lw        $v0, %lo(D_8010C930)($v0)
 /* 84A00 800EB550 3C013F80 */  lui       $at, 0x3f80
 /* 84A04 800EB554 44810000 */  mtc1      $at, $f0
-/* 84A08 800EB558 00000000 */  nop       
+/* 84A08 800EB558 00000000 */  nop
 /* 84A0C 800EB55C E4400054 */  swc1      $f0, 0x54($v0)
 /* 84A10 800EB560 E4400058 */  swc1      $f0, 0x58($v0)
 /* 84A14 800EB564 0C03A9B3 */  jal       func_800EA6CC

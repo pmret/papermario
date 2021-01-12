@@ -14,7 +14,7 @@ glabel stop_sound
 /* E0390 80149C90 0C05269B */  jal       func_80149A6C
 /* E0394 80149C94 0000282D */   daddu    $a1, $zero, $zero
 /* E0398 80149C98 0805272A */  j         .L80149CA8
-/* E039C 80149C9C 00000000 */   nop      
+/* E039C 80149C9C 00000000 */   nop
 .L80149CA0:
 /* E03A0 80149CA0 0C0154F0 */  jal       func_800553C0
 /* E03A4 80149CA4 0040202D */   daddu    $a0, $v0, $zero

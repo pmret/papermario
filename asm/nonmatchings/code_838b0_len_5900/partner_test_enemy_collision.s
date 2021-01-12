@@ -16,9 +16,9 @@ glabel partner_test_enemy_collision
 /* 84AC0 800EB610 3C048011 */  lui       $a0, %hi(D_8010C930)
 /* 84AC4 800EB614 8C84C930 */  lw        $a0, %lo(D_8010C930)($a0)
 /* 84AC8 800EB618 0040F809 */  jalr      $v0
-/* 84ACC 800EB61C 00000000 */   nop      
+/* 84ACC 800EB61C 00000000 */   nop
 /* 84AD0 800EB620 0803AD8B */  j         .L800EB62C
-/* 84AD4 800EB624 00000000 */   nop      
+/* 84AD4 800EB624 00000000 */   nop
 .L800EB628:
 /* 84AD8 800EB628 0000102D */  daddu     $v0, $zero, $zero
 .L800EB62C:

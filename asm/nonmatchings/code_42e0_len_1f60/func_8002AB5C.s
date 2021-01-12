@@ -42,6 +42,6 @@ glabel func_8002AB5C
 /* 5FE8 8002ABE8 8FBF0020 */  lw        $ra, 0x20($sp)
 /* 5FEC 8002ABEC 03E00008 */  jr        $ra
 /* 5FF0 8002ABF0 27BD0028 */   addiu    $sp, $sp, 0x28
-/* 5FF4 8002ABF4 00000000 */  nop       
-/* 5FF8 8002ABF8 00000000 */  nop       
-/* 5FFC 8002ABFC 00000000 */  nop       
+/* 5FF4 8002ABF4 00000000 */  nop
+/* 5FF8 8002ABF8 00000000 */  nop
+/* 5FFC 8002ABFC 00000000 */  nop

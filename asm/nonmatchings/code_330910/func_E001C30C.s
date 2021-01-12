@@ -181,5 +181,5 @@ glabel func_E001C30C
 /* 330EDC E001C5CC D7B40180 */  ldc1      $f20, 0x180($sp)
 /* 330EE0 E001C5D0 03E00008 */  jr        $ra
 /* 330EE4 E001C5D4 27BD0190 */   addiu    $sp, $sp, 0x190
-/* 330EE8 E001C5D8 00000000 */  nop       
-/* 330EEC E001C5DC 00000000 */  nop       
+/* 330EE8 E001C5D8 00000000 */  nop
+/* 330EEC E001C5DC 00000000 */  nop
