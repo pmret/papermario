@@ -60,8 +60,8 @@ glabel func_E00D8334
 /* 3D6BD0 E00D8410 0280202D */  daddu     $a0, $s4, $zero
 /* 3D6BD4 E00D8414 24D30004 */  addiu     $s3, $a2, 4
 /* 3D6BD8 E00D8418 0260282D */  daddu     $a1, $s3, $zero
-/* 3D6BDC E00D841C 3C08800A */  lui       $t0, %hi(D_8009A66C)
-/* 3D6BE0 E00D8420 2508A66C */  addiu     $t0, $t0, %lo(D_8009A66C)
+/* 3D6BDC E00D841C 3C08800A */  lui       $t0, %hi(gMasterGfxPos)
+/* 3D6BE0 E00D8420 2508A66C */  addiu     $t0, $t0, %lo(gMasterGfxPos)
 /* 3D6BE4 E00D8424 3C02E700 */  lui       $v0, 0xe700
 /* 3D6BE8 E00D8428 44940000 */  mtc1      $s4, $f0
 /* 3D6BEC E00D842C 00000000 */  nop       

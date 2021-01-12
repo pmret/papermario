@@ -15,19 +15,19 @@ glabel func_E00CC9D0
 /* 3D2088 E00CC9F8 27A20058 */  addiu     $v0, $sp, 0x58
 /* 3D208C E00CC9FC AFB300AC */  sw        $s3, 0xac($sp)
 /* 3D2090 E00CCA00 0040982D */  daddu     $s3, $v0, $zero
-/* 3D2094 E00CCA04 3C02800A */  lui       $v0, %hi(D_8009A674)
-/* 3D2098 E00CCA08 2442A674 */  addiu     $v0, $v0, %lo(D_8009A674)
+/* 3D2094 E00CCA04 3C02800A */  lui       $v0, %hi(gDisplayContext)
+/* 3D2098 E00CCA08 2442A674 */  addiu     $v0, $v0, %lo(gDisplayContext)
 /* 3D209C E00CCA0C AFBE00C0 */  sw        $fp, 0xc0($sp)
 /* 3D20A0 E00CCA10 0040F02D */  daddu     $fp, $v0, $zero
-/* 3D20A4 E00CCA14 3C028007 */  lui       $v0, %hi(D_800741F0)
-/* 3D20A8 E00CCA18 244241F0 */  addiu     $v0, $v0, %lo(D_800741F0)
+/* 3D20A4 E00CCA14 3C028007 */  lui       $v0, %hi(gMatrixListPos)
+/* 3D20A8 E00CCA18 244241F0 */  addiu     $v0, $v0, %lo(gMatrixListPos)
 /* 3D20AC E00CCA1C AFB500B4 */  sw        $s5, 0xb4($sp)
 /* 3D20B0 E00CCA20 0040A82D */  daddu     $s5, $v0, $zero
 /* 3D20B4 E00CCA24 AFB700BC */  sw        $s7, 0xbc($sp)
 /* 3D20B8 E00CCA28 3C170001 */  lui       $s7, 1
 /* 3D20BC E00CCA2C 36F71630 */  ori       $s7, $s7, 0x1630
-/* 3D20C0 E00CCA30 3C02800A */  lui       $v0, %hi(D_8009A66C)
-/* 3D20C4 E00CCA34 2442A66C */  addiu     $v0, $v0, %lo(D_8009A66C)
+/* 3D20C0 E00CCA30 3C02800A */  lui       $v0, %hi(gMasterGfxPos)
+/* 3D20C4 E00CCA34 2442A66C */  addiu     $v0, $v0, %lo(gMasterGfxPos)
 /* 3D20C8 E00CCA38 AFB400B0 */  sw        $s4, 0xb0($sp)
 /* 3D20CC E00CCA3C 0040A02D */  daddu     $s4, $v0, $zero
 /* 3D20D0 E00CCA40 3C08800B */  lui       $t0, %hi(gCameras)
@@ -235,8 +235,8 @@ glabel func_E00CC9D0
 /* 3D23F0 E00CCD60 1440FF9D */  bnez      $v0, .LE00CCBD8
 /* 3D23F4 E00CCD64 26520004 */   addiu    $s2, $s2, 4
 /* 3D23F8 E00CCD68 3C05D838 */  lui       $a1, 0xd838
-/* 3D23FC E00CCD6C 3C03800A */  lui       $v1, %hi(D_8009A66C)
-/* 3D2400 E00CCD70 2463A66C */  addiu     $v1, $v1, %lo(D_8009A66C)
+/* 3D23FC E00CCD6C 3C03800A */  lui       $v1, %hi(gMasterGfxPos)
+/* 3D2400 E00CCD70 2463A66C */  addiu     $v1, $v1, %lo(gMasterGfxPos)
 /* 3D2404 E00CCD74 8C620000 */  lw        $v0, ($v1)
 /* 3D2408 E00CCD78 34A50002 */  ori       $a1, $a1, 2
 /* 3D240C E00CCD7C 0040202D */  daddu     $a0, $v0, $zero

@@ -8,8 +8,8 @@ glabel func_E0084928
 /* 389304 E0084934 8FAA00A8 */  lw        $t2, 0xa8($sp)
 /* 389308 E0084938 34C60024 */  ori       $a2, $a2, 0x24
 /* 38930C E008493C AFB3007C */  sw        $s3, 0x7c($sp)
-/* 389310 E0084940 3C13800A */  lui       $s3, %hi(D_8009A66C)
-/* 389314 E0084944 2673A66C */  addiu     $s3, $s3, %lo(D_8009A66C)
+/* 389310 E0084940 3C13800A */  lui       $s3, %hi(gMasterGfxPos)
+/* 389314 E0084944 2673A66C */  addiu     $s3, $s3, %lo(gMasterGfxPos)
 /* 389318 E0084948 AFBF0094 */  sw        $ra, 0x94($sp)
 /* 38931C E008494C AFBE0090 */  sw        $fp, 0x90($sp)
 /* 389320 E0084950 AFB7008C */  sw        $s7, 0x8c($sp)
@@ -62,10 +62,10 @@ glabel func_E0084928
 /* 3893DC E0084A0C 0C080108 */  jal       func_E0200420
 /* 3893E0 E0084A10 24120001 */   addiu    $s2, $zero, 1
 /* 3893E4 E0084A14 27A40020 */  addiu     $a0, $sp, 0x20
-/* 3893E8 E0084A18 3C148007 */  lui       $s4, %hi(D_800741F0)
-/* 3893EC E0084A1C 269441F0 */  addiu     $s4, $s4, %lo(D_800741F0)
-/* 3893F0 E0084A20 3C15800A */  lui       $s5, %hi(D_8009A674)
-/* 3893F4 E0084A24 26B5A674 */  addiu     $s5, $s5, %lo(D_8009A674)
+/* 3893E8 E0084A18 3C148007 */  lui       $s4, %hi(gMatrixListPos)
+/* 3893EC E0084A1C 269441F0 */  addiu     $s4, $s4, %lo(gMatrixListPos)
+/* 3893F0 E0084A20 3C15800A */  lui       $s5, %hi(gDisplayContext)
+/* 3893F4 E0084A24 26B5A674 */  addiu     $s5, $s5, %lo(gDisplayContext)
 /* 3893F8 E0084A28 96850000 */  lhu       $a1, ($s4)
 /* 3893FC E0084A2C 8EA20000 */  lw        $v0, ($s5)
 /* 389400 E0084A30 00052980 */  sll       $a1, $a1, 6
@@ -133,10 +133,10 @@ glabel func_E0084928
 /* 3894F4 E0084B24 0C080180 */  jal       func_E0200600
 /* 3894F8 E0084B28 E7A0001C */   swc1     $f0, 0x1c($sp)
 /* 3894FC E0084B2C 27A40020 */  addiu     $a0, $sp, 0x20
-/* 389500 E0084B30 3C058007 */  lui       $a1, %hi(D_800741F0)
-/* 389504 E0084B34 94A541F0 */  lhu       $a1, %lo(D_800741F0)($a1)
-/* 389508 E0084B38 3C02800A */  lui       $v0, %hi(D_8009A674)
-/* 38950C E0084B3C 8C42A674 */  lw        $v0, %lo(D_8009A674)($v0)
+/* 389500 E0084B30 3C058007 */  lui       $a1, %hi(gMatrixListPos)
+/* 389504 E0084B34 94A541F0 */  lhu       $a1, %lo(gMatrixListPos)($a1)
+/* 389508 E0084B38 3C02800A */  lui       $v0, %hi(gDisplayContext)
+/* 38950C E0084B3C 8C42A674 */  lw        $v0, %lo(gDisplayContext)($v0)
 /* 389510 E0084B40 00052980 */  sll       $a1, $a1, 6
 /* 389514 E0084B44 00B72821 */  addu      $a1, $a1, $s7
 /* 389518 E0084B48 0C080118 */  jal       func_E0200460
@@ -147,17 +147,17 @@ glabel func_E0084928
 /* 38952C E0084B5C 0080282D */  daddu     $a1, $a0, $zero
 /* 389530 E0084B60 24840008 */  addiu     $a0, $a0, 8
 /* 389534 E0084B64 AEA40000 */  sw        $a0, ($s5)
-/* 389538 E0084B68 3C028007 */  lui       $v0, %hi(D_800741F0)
-/* 38953C E0084B6C 944241F0 */  lhu       $v0, %lo(D_800741F0)($v0)
+/* 389538 E0084B68 3C028007 */  lui       $v0, %hi(gMatrixListPos)
+/* 38953C E0084B6C 944241F0 */  lhu       $v0, %lo(gMatrixListPos)($v0)
 /* 389540 E0084B70 3C03DA38 */  lui       $v1, 0xda38
 /* 389544 E0084B74 ACA30000 */  sw        $v1, ($a1)
 /* 389548 E0084B78 24430001 */  addiu     $v1, $v0, 1
 /* 38954C E0084B7C 3042FFFF */  andi      $v0, $v0, 0xffff
 /* 389550 E0084B80 00021180 */  sll       $v0, $v0, 6
-/* 389554 E0084B84 3C018007 */  lui       $at, %hi(D_800741F0)
-/* 389558 E0084B88 A42341F0 */  sh        $v1, %lo(D_800741F0)($at)
-/* 38955C E0084B8C 3C03800A */  lui       $v1, %hi(D_8009A674)
-/* 389560 E0084B90 8C63A674 */  lw        $v1, %lo(D_8009A674)($v1)
+/* 389554 E0084B84 3C018007 */  lui       $at, %hi(gMatrixListPos)
+/* 389558 E0084B88 A42341F0 */  sh        $v1, %lo(gMatrixListPos)($at)
+/* 38955C E0084B8C 3C03800A */  lui       $v1, %hi(gDisplayContext)
+/* 389560 E0084B90 8C63A674 */  lw        $v1, %lo(gDisplayContext)($v1)
 /* 389564 E0084B94 00571021 */  addu      $v0, $v0, $s7
 /* 389568 E0084B98 00621821 */  addu      $v1, $v1, $v0
 /* 38956C E0084B9C 3C02DE00 */  lui       $v0, 0xde00
@@ -178,8 +178,8 @@ glabel func_E0084928
 /* 3895A8 E0084BD8 1440FFBB */  bnez      $v0, .LE0084AC8
 /* 3895AC E0084BDC AEA40000 */   sw       $a0, ($s5)
 .LE0084BE0:
-/* 3895B0 E0084BE0 3C08800A */  lui       $t0, %hi(D_8009A66C)
-/* 3895B4 E0084BE4 2508A66C */  addiu     $t0, $t0, %lo(D_8009A66C)
+/* 3895B0 E0084BE0 3C08800A */  lui       $t0, %hi(gMasterGfxPos)
+/* 3895B4 E0084BE4 2508A66C */  addiu     $t0, $t0, %lo(gMasterGfxPos)
 /* 3895B8 E0084BE8 8D030000 */  lw        $v1, ($t0)
 /* 3895BC E0084BEC 3C02DE00 */  lui       $v0, 0xde00
 /* 3895C0 E0084BF0 0060202D */  daddu     $a0, $v1, $zero
@@ -199,10 +199,10 @@ glabel func_E0084928
 /* 3895F8 E0084C28 4480A000 */  mtc1      $zero, $f20
 /* 3895FC E0084C2C 3C17800B */  lui       $s7, %hi(gCameras)
 /* 389600 E0084C30 26F71D80 */  addiu     $s7, $s7, %lo(gCameras)
-/* 389604 E0084C34 3C16800A */  lui       $s6, %hi(D_8009A674)
-/* 389608 E0084C38 26D6A674 */  addiu     $s6, $s6, %lo(D_8009A674)
-/* 38960C E0084C3C 3C158007 */  lui       $s5, %hi(D_800741F0)
-/* 389610 E0084C40 26B541F0 */  addiu     $s5, $s5, %lo(D_800741F0)
+/* 389604 E0084C34 3C16800A */  lui       $s6, %hi(gDisplayContext)
+/* 389608 E0084C38 26D6A674 */  addiu     $s6, $s6, %lo(gDisplayContext)
+/* 38960C E0084C3C 3C158007 */  lui       $s5, %hi(gMatrixListPos)
+/* 389610 E0084C40 26B541F0 */  addiu     $s5, $s5, %lo(gMatrixListPos)
 /* 389614 E0084C44 3C140001 */  lui       $s4, 1
 /* 389618 E0084C48 36941630 */  ori       $s4, $s4, 0x1630
 /* 38961C E0084C4C 26300010 */  addiu     $s0, $s1, 0x10
@@ -295,8 +295,8 @@ glabel func_E0084928
 /* 389774 E0084DA4 AE640000 */   sw       $a0, ($s3)
 .LE0084DA8:
 /* 389778 E0084DA8 3C05D838 */  lui       $a1, 0xd838
-/* 38977C E0084DAC 3C03800A */  lui       $v1, %hi(D_8009A66C)
-/* 389780 E0084DB0 2463A66C */  addiu     $v1, $v1, %lo(D_8009A66C)
+/* 38977C E0084DAC 3C03800A */  lui       $v1, %hi(gMasterGfxPos)
+/* 389780 E0084DB0 2463A66C */  addiu     $v1, $v1, %lo(gMasterGfxPos)
 /* 389784 E0084DB4 8C620000 */  lw        $v0, ($v1)
 /* 389788 E0084DB8 34A50002 */  ori       $a1, $a1, 2
 /* 38978C E0084DBC 0040202D */  daddu     $a0, $v0, $zero

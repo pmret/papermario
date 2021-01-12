@@ -47,8 +47,8 @@ glabel func_802A123C_72C7EC
 /* 72C894 802A12E4 3C1451EB */  lui       $s4, 0x51eb
 /* 72C898 802A12E8 3694851F */  ori       $s4, $s4, 0x851f
 /* 72C89C 802A12EC 0220982D */  daddu     $s3, $s1, $zero
-/* 72C8A0 802A12F0 3C04800A */  lui       $a0, %hi(D_8009A66C)
-/* 72C8A4 802A12F4 2484A66C */  addiu     $a0, $a0, %lo(D_8009A66C)
+/* 72C8A0 802A12F0 3C04800A */  lui       $a0, %hi(gMasterGfxPos)
+/* 72C8A4 802A12F4 2484A66C */  addiu     $a0, $a0, %lo(gMasterGfxPos)
 /* 72C8A8 802A12F8 8C820000 */  lw        $v0, ($a0)
 /* 72C8AC 802A12FC 3C12802A */  lui       $s2, %hi(D_802A25C8)
 /* 72C8B0 802A1300 265225C8 */  addiu     $s2, $s2, %lo(D_802A25C8)

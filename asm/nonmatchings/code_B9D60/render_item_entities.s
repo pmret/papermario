@@ -10,8 +10,8 @@ glabel render_item_entities
 /* C9568 80132E68 AFB50134 */  sw        $s5, 0x134($sp)
 /* C956C 80132E6C 27B50098 */  addiu     $s5, $sp, 0x98
 /* C9570 80132E70 AFB10124 */  sw        $s1, 0x124($sp)
-/* C9574 80132E74 3C11800A */  lui       $s1, %hi(D_8009A66C)
-/* C9578 80132E78 2631A66C */  addiu     $s1, $s1, %lo(D_8009A66C)
+/* C9574 80132E74 3C11800A */  lui       $s1, %hi(gMasterGfxPos)
+/* C9578 80132E78 2631A66C */  addiu     $s1, $s1, %lo(gMasterGfxPos)
 /* C957C 80132E7C AFBE0140 */  sw        $fp, 0x140($sp)
 /* C9580 80132E80 3C1EE600 */  lui       $fp, 0xe600
 /* C9584 80132E84 AFB7013C */  sw        $s7, 0x13c($sp)
@@ -119,10 +119,10 @@ glabel render_item_entities
 /* C9708 80133008 3C020001 */  lui       $v0, 1
 /* C970C 8013300C 34421630 */  ori       $v0, $v0, 0x1630
 /* C9710 80133010 27A50018 */  addiu     $a1, $sp, 0x18
-/* C9714 80133014 3C038007 */  lui       $v1, %hi(D_800741F0)
-/* C9718 80133018 946341F0 */  lhu       $v1, %lo(D_800741F0)($v1)
-/* C971C 8013301C 3C04800A */  lui       $a0, %hi(D_8009A674)
-/* C9720 80133020 8C84A674 */  lw        $a0, %lo(D_8009A674)($a0)
+/* C9714 80133014 3C038007 */  lui       $v1, %hi(gMatrixListPos)
+/* C9718 80133018 946341F0 */  lhu       $v1, %lo(gMatrixListPos)($v1)
+/* C971C 8013301C 3C04800A */  lui       $a0, %hi(gDisplayContext)
+/* C9720 80133020 8C84A674 */  lw        $a0, %lo(gDisplayContext)($a0)
 /* C9724 80133024 00031980 */  sll       $v1, $v1, 6
 /* C9728 80133028 00832021 */  addu      $a0, $a0, $v1
 /* C972C 8013302C 00822021 */  addu      $a0, $a0, $v0
@@ -142,8 +142,8 @@ glabel render_item_entities
 /* C9760 80133060 34420002 */  ori       $v0, $v0, 2
 /* C9764 80133064 3C040001 */  lui       $a0, 1
 /* C9768 80133068 34841630 */  ori       $a0, $a0, 0x1630
-/* C976C 8013306C 3C078007 */  lui       $a3, %hi(D_800741F0)
-/* C9770 80133070 24E741F0 */  addiu     $a3, $a3, %lo(D_800741F0)
+/* C976C 8013306C 3C078007 */  lui       $a3, %hi(gMatrixListPos)
+/* C9770 80133070 24E741F0 */  addiu     $a3, $a3, %lo(gMatrixListPos)
 /* C9774 80133074 8E280000 */  lw        $t0, ($s1)
 /* C9778 80133078 94E50000 */  lhu       $a1, ($a3)
 /* C977C 8013307C 0100302D */  daddu     $a2, $t0, $zero
@@ -153,8 +153,8 @@ glabel render_item_entities
 /* C978C 8013308C 00641821 */  addu      $v1, $v1, $a0
 /* C9790 80133090 AE280000 */  sw        $t0, ($s1)
 /* C9794 80133094 ACC20000 */  sw        $v0, ($a2)
-/* C9798 80133098 3C02800A */  lui       $v0, %hi(D_8009A674)
-/* C979C 8013309C 8C42A674 */  lw        $v0, %lo(D_8009A674)($v0)
+/* C9798 80133098 3C02800A */  lui       $v0, %hi(gDisplayContext)
+/* C979C 8013309C 8C42A674 */  lw        $v0, %lo(gDisplayContext)($v0)
 /* C97A0 801330A0 3C048015 */  lui       $a0, %hi(D_80151328)
 /* C97A4 801330A4 8C841328 */  lw        $a0, %lo(D_80151328)($a0)
 /* C97A8 801330A8 00431021 */  addu      $v0, $v0, $v1

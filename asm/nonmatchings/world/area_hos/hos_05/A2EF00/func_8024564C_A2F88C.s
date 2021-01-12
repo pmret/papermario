@@ -5,8 +5,8 @@ glabel func_8024564C_A2F88C
 /* A2F88C 8024564C 3C06FC12 */  lui       $a2, 0xfc12
 /* A2F890 80245650 34C61624 */  ori       $a2, $a2, 0x1624
 /* A2F894 80245654 3C05FF2F */  lui       $a1, 0xff2f
-/* A2F898 80245658 3C04800A */  lui       $a0, %hi(D_8009A66C)
-/* A2F89C 8024565C 2484A66C */  addiu     $a0, $a0, %lo(D_8009A66C)
+/* A2F898 80245658 3C04800A */  lui       $a0, %hi(gMasterGfxPos)
+/* A2F89C 8024565C 2484A66C */  addiu     $a0, $a0, %lo(gMasterGfxPos)
 /* A2F8A0 80245660 8C820000 */  lw        $v0, ($a0)
 /* A2F8A4 80245664 34A5FFFF */  ori       $a1, $a1, 0xffff
 /* A2F8A8 80245668 0040182D */  daddu     $v1, $v0, $zero

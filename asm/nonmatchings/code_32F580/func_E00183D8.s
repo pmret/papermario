@@ -6,8 +6,8 @@ glabel func_E00183D8
 /* 32F95C E00183DC 0080602D */  daddu     $t4, $a0, $zero
 /* 32F960 E00183E0 3C05DB06 */  lui       $a1, 0xdb06
 /* 32F964 E00183E4 34A50024 */  ori       $a1, $a1, 0x24
-/* 32F968 E00183E8 3C06800A */  lui       $a2, %hi(D_8009A66C)
-/* 32F96C E00183EC 24C6A66C */  addiu     $a2, $a2, %lo(D_8009A66C)
+/* 32F968 E00183E8 3C06800A */  lui       $a2, %hi(gMasterGfxPos)
+/* 32F96C E00183EC 24C6A66C */  addiu     $a2, $a2, %lo(gMasterGfxPos)
 /* 32F970 E00183F0 3C02E700 */  lui       $v0, 0xe700
 /* 32F974 E00183F4 AFB7001C */  sw        $s7, 0x1c($sp)
 /* 32F978 E00183F8 AFB60018 */  sw        $s6, 0x18($sp)
@@ -35,10 +35,10 @@ glabel func_E00183D8
 /* 32F9D0 E0018450 24840008 */  addiu     $a0, $a0, 8
 /* 32F9D4 E0018454 1840004A */  blez      $v0, .LE0018580
 /* 32F9D8 E0018458 ACC40000 */   sw       $a0, ($a2)
-/* 32F9DC E001845C 3C0F800A */  lui       $t7, %hi(D_8009A674)
-/* 32F9E0 E0018460 25EFA674 */  addiu     $t7, $t7, %lo(D_8009A674)
-/* 32F9E4 E0018464 3C0D8007 */  lui       $t5, %hi(D_800741F0)
-/* 32F9E8 E0018468 25AD41F0 */  addiu     $t5, $t5, %lo(D_800741F0)
+/* 32F9DC E001845C 3C0F800A */  lui       $t7, %hi(gDisplayContext)
+/* 32F9E0 E0018460 25EFA674 */  addiu     $t7, $t7, %lo(gDisplayContext)
+/* 32F9E4 E0018464 3C0D8007 */  lui       $t5, %hi(gMatrixListPos)
+/* 32F9E8 E0018468 25AD41F0 */  addiu     $t5, $t5, %lo(gMatrixListPos)
 /* 32F9EC E001846C 3C0B0001 */  lui       $t3, 1
 /* 32F9F0 E0018470 356B1630 */  ori       $t3, $t3, 0x1630
 /* 32F9F4 E0018474 00C0502D */  daddu     $t2, $a2, $zero
@@ -112,8 +112,8 @@ glabel func_E00183D8
 /* 32FAF8 E0018578 1440FFC8 */  bnez      $v0, .LE001849C
 /* 32FAFC E001857C 25080098 */   addiu    $t0, $t0, 0x98
 .LE0018580:
-/* 32FB00 E0018580 3C03800A */  lui       $v1, %hi(D_8009A66C)
-/* 32FB04 E0018584 2463A66C */  addiu     $v1, $v1, %lo(D_8009A66C)
+/* 32FB00 E0018580 3C03800A */  lui       $v1, %hi(gMasterGfxPos)
+/* 32FB04 E0018584 2463A66C */  addiu     $v1, $v1, %lo(gMasterGfxPos)
 /* 32FB08 E0018588 8C620000 */  lw        $v0, ($v1)
 /* 32FB0C E001858C 0040202D */  daddu     $a0, $v0, $zero
 /* 32FB10 E0018590 24420008 */  addiu     $v0, $v0, 8

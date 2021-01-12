@@ -47,8 +47,8 @@ glabel func_802A123C_73153C
 /* 7315E4 802A12E4 3C1451EB */  lui       $s4, 0x51eb
 /* 7315E8 802A12E8 3694851F */  ori       $s4, $s4, 0x851f
 /* 7315EC 802A12EC 0220982D */  daddu     $s3, $s1, $zero
-/* 7315F0 802A12F0 3C04800A */  lui       $a0, %hi(D_8009A66C)
-/* 7315F4 802A12F4 2484A66C */  addiu     $a0, $a0, %lo(D_8009A66C)
+/* 7315F0 802A12F0 3C04800A */  lui       $a0, %hi(gMasterGfxPos)
+/* 7315F4 802A12F4 2484A66C */  addiu     $a0, $a0, %lo(gMasterGfxPos)
 /* 7315F8 802A12F8 8C820000 */  lw        $v0, ($a0)
 /* 7315FC 802A12FC 3C12802A */  lui       $s2, %hi(D_802A2DD8)
 /* 731600 802A1300 26522DD8 */  addiu     $s2, $s2, %lo(D_802A2DD8)

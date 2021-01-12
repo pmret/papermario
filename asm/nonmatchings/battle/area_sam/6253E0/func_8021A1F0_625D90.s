@@ -104,8 +104,8 @@ glabel func_8021A1F0_625D90
 /* 625F10 8021A370 1440FFB8 */  bnez      $v0, .L8021A254
 /* 625F14 8021A374 02130018 */   mult     $s0, $s3
 .L8021A378:
-/* 625F18 8021A378 3C03800A */  lui       $v1, %hi(D_8009A66C)
-/* 625F1C 8021A37C 2463A66C */  addiu     $v1, $v1, %lo(D_8009A66C)
+/* 625F18 8021A378 3C03800A */  lui       $v1, %hi(gMasterGfxPos)
+/* 625F1C 8021A37C 2463A66C */  addiu     $v1, $v1, %lo(gMasterGfxPos)
 /* 625F20 8021A380 8C620000 */  lw        $v0, ($v1)
 /* 625F24 8021A384 02C0202D */  daddu     $a0, $s6, $zero
 /* 625F28 8021A388 0040802D */  daddu     $s0, $v0, $zero

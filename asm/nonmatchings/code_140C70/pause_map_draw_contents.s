@@ -5,8 +5,8 @@ glabel pause_map_draw_contents
 /* 140E5C 8024DB1C 27BDFF60 */  addiu     $sp, $sp, -0xa0
 /* 140E60 8024DB20 AFB7008C */  sw        $s7, 0x8c($sp)
 /* 140E64 8024DB24 0000B82D */  daddu     $s7, $zero, $zero
-/* 140E68 8024DB28 3C02800A */  lui       $v0, %hi(D_8009A66C)
-/* 140E6C 8024DB2C 2442A66C */  addiu     $v0, $v0, %lo(D_8009A66C)
+/* 140E68 8024DB28 3C02800A */  lui       $v0, %hi(gMasterGfxPos)
+/* 140E6C 8024DB2C 2442A66C */  addiu     $v0, $v0, %lo(gMasterGfxPos)
 /* 140E70 8024DB30 AFB10074 */  sw        $s1, 0x74($sp)
 /* 140E74 8024DB34 0040882D */  daddu     $s1, $v0, $zero
 /* 140E78 8024DB38 AFB40080 */  sw        $s4, 0x80($sp)
@@ -184,8 +184,8 @@ glabel pause_map_draw_contents
 /* 14110C 8024DDCC 3C0E8025 */  lui       $t6, %hi(D_802502B8)
 /* 141110 8024DDD0 25CE02B8 */  addiu     $t6, $t6, %lo(D_802502B8)
 /* 141114 8024DDD4 0000B82D */  daddu     $s7, $zero, $zero
-/* 141118 8024DDD8 3C08800A */  lui       $t0, %hi(D_8009A66C)
-/* 14111C 8024DDDC 2508A66C */  addiu     $t0, $t0, %lo(D_8009A66C)
+/* 141118 8024DDD8 3C08800A */  lui       $t0, %hi(gMasterGfxPos)
+/* 14111C 8024DDDC 2508A66C */  addiu     $t0, $t0, %lo(gMasterGfxPos)
 /* 141120 8024DDE0 44841000 */  mtc1      $a0, $f2
 /* 141124 8024DDE4 00000000 */  nop       
 /* 141128 8024DDE8 468010A0 */  cvt.s.w   $f2, $f2
@@ -445,8 +445,8 @@ glabel pause_map_draw_contents
 /* 141508 8024E1C8 82620000 */  lb        $v0, ($s3)
 /* 14150C 8024E1CC 14500068 */  bne       $v0, $s0, .L8024E370
 /* 141510 8024E1D0 00000000 */   nop      
-/* 141514 8024E1D4 3C06800A */  lui       $a2, %hi(D_8009A66C)
-/* 141518 8024E1D8 24C6A66C */  addiu     $a2, $a2, %lo(D_8009A66C)
+/* 141514 8024E1D4 3C06800A */  lui       $a2, %hi(gMasterGfxPos)
+/* 141518 8024E1D8 24C6A66C */  addiu     $a2, $a2, %lo(gMasterGfxPos)
 /* 14151C 8024E1DC 3C05AAAA */  lui       $a1, 0xaaaa
 /* 141520 8024E1E0 34A5AAAB */  ori       $a1, $a1, 0xaaab
 /* 141524 8024E1E4 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
@@ -580,8 +580,8 @@ glabel pause_map_draw_contents
 /* 141704 8024E3C4 50400001 */  beql      $v0, $zero, .L8024E3CC
 /* 141708 8024E3C8 240B00EF */   addiu    $t3, $zero, 0xef
 .L8024E3CC:
-/* 14170C 8024E3CC 3C03800A */  lui       $v1, %hi(D_8009A66C)
-/* 141710 8024E3D0 2463A66C */  addiu     $v1, $v1, %lo(D_8009A66C)
+/* 14170C 8024E3CC 3C03800A */  lui       $v1, %hi(gMasterGfxPos)
+/* 141710 8024E3D0 2463A66C */  addiu     $v1, $v1, %lo(gMasterGfxPos)
 /* 141714 8024E3D4 44871000 */  mtc1      $a3, $f2
 /* 141718 8024E3D8 00000000 */  nop       
 /* 14171C 8024E3DC 468010A0 */  cvt.s.w   $f2, $f2

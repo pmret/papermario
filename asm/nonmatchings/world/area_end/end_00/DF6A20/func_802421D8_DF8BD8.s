@@ -8,8 +8,8 @@ glabel func_802421D8_DF8BD8
 /* DF8BE4 802421E4 AFB40030 */  sw        $s4, 0x30($sp)
 /* DF8BE8 802421E8 0000A02D */  daddu     $s4, $zero, $zero
 /* DF8BEC 802421EC AFB10024 */  sw        $s1, 0x24($sp)
-/* DF8BF0 802421F0 3C11800A */  lui       $s1, %hi(D_8009A66C)
-/* DF8BF4 802421F4 2631A66C */  addiu     $s1, $s1, %lo(D_8009A66C)
+/* DF8BF0 802421F0 3C11800A */  lui       $s1, %hi(gMasterGfxPos)
+/* DF8BF4 802421F4 2631A66C */  addiu     $s1, $s1, %lo(gMasterGfxPos)
 /* DF8BF8 802421F8 AFB3002C */  sw        $s3, 0x2c($sp)
 /* DF8BFC 802421FC 24130004 */  addiu     $s3, $zero, 4
 /* DF8C00 80242200 3C028025 */  lui       $v0, %hi(D_80250EF0)
@@ -19,8 +19,8 @@ glabel func_802421D8_DF8BD8
 /* DF8C10 80242210 AFB20028 */  sw        $s2, 0x28($sp)
 /* DF8C14 80242214 AFB00020 */  sw        $s0, 0x20($sp)
 /* DF8C18 80242218 8E230000 */  lw        $v1, ($s1)
-/* DF8C1C 8024221C 3C108007 */  lui       $s0, %hi(D_800741F4)
-/* DF8C20 80242220 8E1041F4 */  lw        $s0, %lo(D_800741F4)($s0)
+/* DF8C1C 8024221C 3C108007 */  lui       $s0, %hi(gCurrentDisplayContextIndex)
+/* DF8C20 80242220 8E1041F4 */  lw        $s0, %lo(gCurrentDisplayContextIndex)($s0)
 /* DF8C24 80242224 3C158025 */  lui       $s5, %hi(D_8024F7E4)
 /* DF8C28 80242228 8EB5F7E4 */  lw        $s5, %lo(D_8024F7E4)($s5)
 /* DF8C2C 8024222C 44800000 */  mtc1      $zero, $f0

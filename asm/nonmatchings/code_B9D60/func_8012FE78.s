@@ -231,8 +231,8 @@ glabel func_8012FE78
 /* C68C4 801301C4 32A3FFFF */  andi      $v1, $s5, 0xffff
 /* C68C8 801301C8 01437821 */  addu      $t7, $t2, $v1
 /* C68CC 801301CC 33D8FFFF */  andi      $t8, $fp, 0xffff
-/* C68D0 801301D0 3C07800A */  lui       $a3, %hi(D_8009A66C)
-/* C68D4 801301D4 24E7A66C */  addiu     $a3, $a3, %lo(D_8009A66C)
+/* C68D0 801301D0 3C07800A */  lui       $a3, %hi(gMasterGfxPos)
+/* C68D4 801301D4 24E7A66C */  addiu     $a3, $a3, %lo(gMasterGfxPos)
 /* C68D8 801301D8 3C1EF508 */  lui       $fp, 0xf508
 /* C68DC 801301DC 3042000F */  andi      $v0, $v0, 0xf
 /* C68E0 801301E0 00021380 */  sll       $v0, $v0, 0xe

@@ -104,8 +104,8 @@ glabel func_802186C0_660E10
 /* 660F90 80218840 1440FFB8 */  bnez      $v0, .L80218724
 /* 660F94 80218844 02130018 */   mult     $s0, $s3
 .L80218848:
-/* 660F98 80218848 3C03800A */  lui       $v1, %hi(D_8009A66C)
-/* 660F9C 8021884C 2463A66C */  addiu     $v1, $v1, %lo(D_8009A66C)
+/* 660F98 80218848 3C03800A */  lui       $v1, %hi(gMasterGfxPos)
+/* 660F9C 8021884C 2463A66C */  addiu     $v1, $v1, %lo(gMasterGfxPos)
 /* 660FA0 80218850 8C620000 */  lw        $v0, ($v1)
 /* 660FA4 80218854 02C0202D */  daddu     $a0, $s6, $zero
 /* 660FA8 80218858 0040802D */  daddu     $s0, $v0, $zero

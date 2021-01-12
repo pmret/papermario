@@ -245,7 +245,7 @@ typedef struct ScriptInstance {
     /* 0x00C */ Bytecode* ptrReadPos;
     /* 0x010 */ s8 labelIndices[16];
     /* 0x020 */ UNK_PTR labelPositions[16];
-    /* 0x060 */ UNK_PTR unk_60; /* unknown pointer; allocated on the heap, free'd in kill_script() */
+    /* 0x060 */ UNK_PTR userData; /* unknown pointer; allocated on the heap, free'd in kill_script() */
     /* 0x064 */ struct ScriptInstance* blockingParent; /* parent? */
     /* 0x068 */ struct ScriptInstance* childScript;
     /* 0x06C */ struct ScriptInstance* parentScript; /* brother? */
@@ -1585,5 +1585,13 @@ typedef struct {
     /* 0x1C */ s8 unk_1C;
     /* 0x1D */ char unk_1D[3];
 } UIPanel; // size = 0x20
+
+typedef struct {
+    /* 0x00000 */ LookAt lookAt[2];
+    /* 0x00030 */ Matrix4s camPerspMatrix[8]; // could only be length 4, unsure
+    /* 0x00230 */ s32 mainGfx[0x4100];
+    /* 0x10630 */ s32 smallGfx[0x400]; // used by func 800269EC
+    /* 0x11630 */ Matrix4s matrixStack[0x200];
+} DisplayContext; // size = 0x19630
 
 #endif

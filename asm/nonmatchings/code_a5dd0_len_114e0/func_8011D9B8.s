@@ -206,10 +206,10 @@ glabel func_8011D9B8
 /* B4390 8011DC90 0C019DF0 */  jal       guScaleF
 /* B4394 8011DC94 00A0382D */   daddu    $a3, $a1, $zero
 /* B4398 8011DC98 0200202D */  daddu     $a0, $s0, $zero
-/* B439C 8011DC9C 3C108007 */  lui       $s0, %hi(D_800741F0)
-/* B43A0 8011DCA0 261041F0 */  addiu     $s0, $s0, %lo(D_800741F0)
-/* B43A4 8011DCA4 3C11800A */  lui       $s1, %hi(D_8009A674)
-/* B43A8 8011DCA8 2631A674 */  addiu     $s1, $s1, %lo(D_8009A674)
+/* B439C 8011DC9C 3C108007 */  lui       $s0, %hi(gMatrixListPos)
+/* B43A0 8011DCA0 261041F0 */  addiu     $s0, $s0, %lo(gMatrixListPos)
+/* B43A4 8011DCA4 3C11800A */  lui       $s1, %hi(gDisplayContext)
+/* B43A8 8011DCA8 2631A674 */  addiu     $s1, $s1, %lo(gDisplayContext)
 /* B43AC 8011DCAC 96050000 */  lhu       $a1, ($s0)
 /* B43B0 8011DCB0 8E220000 */  lw        $v0, ($s1)
 /* B43B4 8011DCB4 00052980 */  sll       $a1, $a1, 6
@@ -226,8 +226,8 @@ glabel func_8011D9B8
 /* B43E0 8011DCE0 00521021 */  addu      $v0, $v0, $s2
 /* B43E4 8011DCE4 1AA00050 */  blez      $s5, .L8011DE28
 /* B43E8 8011DCE8 0062B821 */   addu     $s7, $v1, $v0
-/* B43EC 8011DCEC 3C11800A */  lui       $s1, %hi(D_8009A66C)
-/* B43F0 8011DCF0 2631A66C */  addiu     $s1, $s1, %lo(D_8009A66C)
+/* B43EC 8011DCEC 3C11800A */  lui       $s1, %hi(gMasterGfxPos)
+/* B43F0 8011DCF0 2631A66C */  addiu     $s1, $s1, %lo(gMasterGfxPos)
 /* B43F4 8011DCF4 3C12DE00 */  lui       $s2, 0xde00
 /* B43F8 8011DCF8 00131080 */  sll       $v0, $s3, 2
 .L8011DCFC:
@@ -280,8 +280,8 @@ glabel func_8011D9B8
 /* B44B0 8011DDB0 24620020 */  addiu     $v0, $v1, 0x20
 /* B44B4 8011DDB4 AC720010 */  sw        $s2, 0x10($v1)
 /* B44B8 8011DDB8 AE220000 */  sw        $v0, ($s1)
-/* B44BC 8011DDBC 3C02800A */  lui       $v0, %hi(D_8009A674)
-/* B44C0 8011DDC0 8C42A674 */  lw        $v0, %lo(D_8009A674)($v0)
+/* B44BC 8011DDBC 3C02800A */  lui       $v0, %hi(gDisplayContext)
+/* B44C0 8011DDC0 8C42A674 */  lw        $v0, %lo(gDisplayContext)($v0)
 /* B44C4 8011DDC4 34C60007 */  ori       $a2, $a2, 7
 /* B44C8 8011DDC8 AC660018 */  sw        $a2, 0x18($v1)
 /* B44CC 8011DDCC 00042180 */  sll       $a0, $a0, 6

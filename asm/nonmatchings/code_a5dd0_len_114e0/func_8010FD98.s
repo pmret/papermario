@@ -13,8 +13,8 @@ glabel func_8010FD98
 /* A64B8 8010FDB8 3C08FC12 */  lui       $t0, 0xfc12
 /* A64BC 8010FDBC 35081824 */  ori       $t0, $t0, 0x1824
 /* A64C0 8010FDC0 3C06FF33 */  lui       $a2, 0xff33
-/* A64C4 8010FDC4 3C04800A */  lui       $a0, %hi(D_8009A66C)
-/* A64C8 8010FDC8 2484A66C */  addiu     $a0, $a0, %lo(D_8009A66C)
+/* A64C4 8010FDC4 3C04800A */  lui       $a0, %hi(gMasterGfxPos)
+/* A64C8 8010FDC8 2484A66C */  addiu     $a0, $a0, %lo(gMasterGfxPos)
 /* A64CC 8010FDCC 8C820000 */  lw        $v0, ($a0)
 /* A64D0 8010FDD0 34C6FFFF */  ori       $a2, $a2, 0xffff
 /* A64D4 8010FDD4 0040182D */  daddu     $v1, $v0, $zero
@@ -30,8 +30,8 @@ glabel func_8010FD98
 .L8010FDFC:
 /* A64FC 8010FDFC 34C6B3FF */  ori       $a2, $a2, 0xb3ff
 /* A6500 8010FE00 3C05FF2C */  lui       $a1, 0xff2c
-/* A6504 8010FE04 3C04800A */  lui       $a0, %hi(D_8009A66C)
-/* A6508 8010FE08 2484A66C */  addiu     $a0, $a0, %lo(D_8009A66C)
+/* A6504 8010FE04 3C04800A */  lui       $a0, %hi(gMasterGfxPos)
+/* A6508 8010FE08 2484A66C */  addiu     $a0, $a0, %lo(gMasterGfxPos)
 /* A650C 8010FE0C 8C820000 */  lw        $v0, ($a0)
 /* A6510 8010FE10 34A5FE7F */  ori       $a1, $a1, 0xfe7f
 /* A6514 8010FE14 0040182D */  daddu     $v1, $v0, $zero

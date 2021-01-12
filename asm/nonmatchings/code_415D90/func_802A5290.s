@@ -60,8 +60,8 @@ glabel func_802A5290
 /* 41A0F8 802A5368 26F50021 */  addiu     $s5, $s7, 0x21
 /* 41A0FC 802A536C 0000B02D */  daddu     $s6, $zero, $zero
 /* 41A100 802A5370 02C0982D */  daddu     $s3, $s6, $zero
-/* 41A104 802A5374 3C06800A */  lui       $a2, %hi(D_8009A66C)
-/* 41A108 802A5378 24C6A66C */  addiu     $a2, $a2, %lo(D_8009A66C)
+/* 41A104 802A5374 3C06800A */  lui       $a2, %hi(gMasterGfxPos)
+/* 41A108 802A5378 24C6A66C */  addiu     $a2, $a2, %lo(gMasterGfxPos)
 /* 41A10C 802A537C 8FA90048 */  lw        $t1, 0x48($sp)
 /* 41A110 802A5380 8CC40000 */  lw        $a0, ($a2)
 /* 41A114 802A5384 3C03802B */  lui       $v1, %hi(D_802AD60A)

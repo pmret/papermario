@@ -1,0 +1,3 @@
+#include "common.h"
+
+INCLUDE_ASM(s32, "code_ECBB70", func_80241E70_ECBB70);

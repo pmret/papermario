@@ -22,8 +22,8 @@ glabel func_E007827C
 /* 37A6B0 E00782C0 2414007F */   addiu    $s4, $zero, 0x7f
 .LE00782C4:
 /* 37A6B4 E00782C4 3C05DB06 */  lui       $a1, 0xdb06
-/* 37A6B8 E00782C8 3C15800A */  lui       $s5, %hi(D_8009A66C)
-/* 37A6BC E00782CC 26B5A66C */  addiu     $s5, $s5, %lo(D_8009A66C)
+/* 37A6B8 E00782C8 3C15800A */  lui       $s5, %hi(gMasterGfxPos)
+/* 37A6BC E00782CC 26B5A66C */  addiu     $s5, $s5, %lo(gMasterGfxPos)
 /* 37A6C0 E00782D0 34A50024 */  ori       $a1, $a1, 0x24
 /* 37A6C4 E00782D4 8EA40000 */  lw        $a0, ($s5)
 /* 37A6C8 E00782D8 3C02E700 */  lui       $v0, 0xe700

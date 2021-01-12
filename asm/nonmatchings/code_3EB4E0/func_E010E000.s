@@ -16,8 +16,8 @@ glabel func_E010E000
 /* 3EB504 E010E024 8CC20000 */  lw        $v0, ($a2)
 /* 3EB508 E010E028 104000B5 */  beqz      $v0, .LE010E300
 /* 3EB50C E010E02C 00035080 */   sll      $t2, $v1, 2
-/* 3EB510 E010E030 3C08800A */  lui       $t0, %hi(D_8009A66C)
-/* 3EB514 E010E034 2508A66C */  addiu     $t0, $t0, %lo(D_8009A66C)
+/* 3EB510 E010E030 3C08800A */  lui       $t0, %hi(gMasterGfxPos)
+/* 3EB514 E010E034 2508A66C */  addiu     $t0, $t0, %lo(gMasterGfxPos)
 /* 3EB518 E010E038 3C014080 */  lui       $at, 0x4080
 /* 3EB51C E010E03C 44814000 */  mtc1      $at, $f8
 /* 3EB520 E010E040 24C70006 */  addiu     $a3, $a2, 6
@@ -209,8 +209,8 @@ glabel func_E010E000
 /* 3EB7D8 E010E2F8 1440FF52 */  bnez      $v0, .LE010E044
 /* 3EB7DC E010E2FC AD040000 */   sw       $a0, ($t0)
 .LE010E300:
-/* 3EB7E0 E010E300 3C03800A */  lui       $v1, %hi(D_8009A66C)
-/* 3EB7E4 E010E304 2463A66C */  addiu     $v1, $v1, %lo(D_8009A66C)
+/* 3EB7E0 E010E300 3C03800A */  lui       $v1, %hi(gMasterGfxPos)
+/* 3EB7E4 E010E304 2463A66C */  addiu     $v1, $v1, %lo(gMasterGfxPos)
 /* 3EB7E8 E010E308 8C620000 */  lw        $v0, ($v1)
 /* 3EB7EC E010E30C 0040202D */  daddu     $a0, $v0, $zero
 /* 3EB7F0 E010E310 24420008 */  addiu     $v0, $v0, 8

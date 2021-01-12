@@ -10,8 +10,8 @@ glabel func_8014271C
 /* D8E30 80142730 3C071021 */  lui       $a3, 0x1021
 /* D8E34 80142734 34E70080 */  ori       $a3, $a3, 0x80
 /* D8E38 80142738 27A60028 */  addiu     $a2, $sp, 0x28
-/* D8E3C 8014273C 3C03800A */  lui       $v1, %hi(D_8009A66C)
-/* D8E40 80142740 2463A66C */  addiu     $v1, $v1, %lo(D_8009A66C)
+/* D8E3C 8014273C 3C03800A */  lui       $v1, %hi(gMasterGfxPos)
+/* D8E40 80142740 2463A66C */  addiu     $v1, $v1, %lo(gMasterGfxPos)
 /* D8E44 80142744 AFBF054C */  sw        $ra, 0x54c($sp)
 /* D8E48 80142748 AFB60540 */  sw        $s6, 0x540($sp)
 /* D8E4C 8014274C AFB5053C */  sw        $s5, 0x53c($sp)

@@ -5,8 +5,8 @@ glabel func_E00A223C
 /* 3A2BCC E00A223C 27BDFF60 */  addiu     $sp, $sp, -0xa0
 /* 3A2BD0 E00A2240 3C07DB06 */  lui       $a3, 0xdb06
 /* 3A2BD4 E00A2244 34E70024 */  ori       $a3, $a3, 0x24
-/* 3A2BD8 E00A2248 3C02800A */  lui       $v0, %hi(D_8009A66C)
-/* 3A2BDC E00A224C 2442A66C */  addiu     $v0, $v0, %lo(D_8009A66C)
+/* 3A2BD8 E00A2248 3C02800A */  lui       $v0, %hi(gMasterGfxPos)
+/* 3A2BDC E00A224C 2442A66C */  addiu     $v0, $v0, %lo(gMasterGfxPos)
 /* 3A2BE0 E00A2250 AFB00078 */  sw        $s0, 0x78($sp)
 /* 3A2BE4 E00A2254 0040802D */  daddu     $s0, $v0, $zero
 /* 3A2BE8 E00A2258 AFB60090 */  sw        $s6, 0x90($sp)

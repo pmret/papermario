@@ -19,7 +19,7 @@ glabel func_80240C40_A0C930
 /* A0C968 80240C78 AFA20010 */   sw       $v0, 0x10($sp)
 /* A0C96C 80240C7C 4600010D */  trunc.w.s $f4, $f0
 /* A0C970 80240C80 44082000 */  mfc1      $t0, $f4
-/* A0C974 80240C84 00000000 */  nop       
+/* A0C974 80240C84 00000000 */  nop
 /* A0C978 80240C88 05020001 */  bltzl     $t0, .L80240C90
 /* A0C97C 80240C8C 0000402D */   daddu    $t0, $zero, $zero
 .L80240C90:
@@ -32,8 +32,8 @@ glabel func_80240C40_A0C930
 /* A0C994 80240CA4 3C07FCFF */  lui       $a3, 0xfcff
 /* A0C998 80240CA8 34E7C7FF */  ori       $a3, $a3, 0xc7ff
 /* A0C99C 80240CAC 3C06FF8E */  lui       $a2, 0xff8e
-/* A0C9A0 80240CB0 3C04800A */  lui       $a0, %hi(D_8009A66C)
-/* A0C9A4 80240CB4 2484A66C */  addiu     $a0, $a0, %lo(D_8009A66C)
+/* A0C9A0 80240CB0 3C04800A */  lui       $a0, %hi(gMasterGfxPos)
+/* A0C9A4 80240CB4 2484A66C */  addiu     $a0, $a0, %lo(gMasterGfxPos)
 /* A0C9A8 80240CB8 8C820000 */  lw        $v0, ($a0)
 /* A0C9AC 80240CBC 34C67F3F */  ori       $a2, $a2, 0x7f3f
 /* A0C9B0 80240CC0 0040182D */  daddu     $v1, $v0, $zero
@@ -54,5 +54,5 @@ glabel func_80240C40_A0C930
 /* A0C9EC 80240CFC 8FBF0018 */  lw        $ra, 0x18($sp)
 /* A0C9F0 80240D00 03E00008 */  jr        $ra
 /* A0C9F4 80240D04 27BD0020 */   addiu    $sp, $sp, 0x20
-/* A0C9F8 80240D08 00000000 */  nop       
-/* A0C9FC 80240D0C 00000000 */  nop       
+/* A0C9F8 80240D08 00000000 */  nop
+/* A0C9FC 80240D0C 00000000 */  nop

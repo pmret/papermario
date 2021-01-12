@@ -383,8 +383,8 @@ glabel update_status_menu
 /* 81AD0 800E8620 3C07004D */  lui       $a3, 0x4d
 /* 81AD4 800E8624 34E70370 */  ori       $a3, $a3, 0x370
 /* 81AD8 800E8628 0000202D */  daddu     $a0, $zero, $zero
-/* 81ADC 800E862C 3C06800A */  lui       $a2, %hi(D_8009A66C)
-/* 81AE0 800E8630 24C6A66C */  addiu     $a2, $a2, %lo(D_8009A66C)
+/* 81ADC 800E862C 3C06800A */  lui       $a2, %hi(gMasterGfxPos)
+/* 81AE0 800E8630 24C6A66C */  addiu     $a2, $a2, %lo(gMasterGfxPos)
 /* 81AE4 800E8634 24050005 */  addiu     $a1, $zero, 5
 /* 81AE8 800E8638 241200FF */  addiu     $s2, $zero, 0xff
 /* 81AEC 800E863C 24110140 */  addiu     $s1, $zero, 0x140

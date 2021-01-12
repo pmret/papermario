@@ -72,10 +72,10 @@ glabel func_E0112330
 /* 3FA284 E0112434 0C080114 */  jal       func_E0200450
 /* 3FA288 E0112438 00A0302D */   daddu    $a2, $a1, $zero
 /* 3FA28C E011243C 27A40020 */  addiu     $a0, $sp, 0x20
-/* 3FA290 E0112440 3C108007 */  lui       $s0, %hi(D_800741F0)
-/* 3FA294 E0112444 261041F0 */  addiu     $s0, $s0, %lo(D_800741F0)
-/* 3FA298 E0112448 3C11800A */  lui       $s1, %hi(D_8009A674)
-/* 3FA29C E011244C 2631A674 */  addiu     $s1, $s1, %lo(D_8009A674)
+/* 3FA290 E0112440 3C108007 */  lui       $s0, %hi(gMatrixListPos)
+/* 3FA294 E0112444 261041F0 */  addiu     $s0, $s0, %lo(gMatrixListPos)
+/* 3FA298 E0112448 3C11800A */  lui       $s1, %hi(gDisplayContext)
+/* 3FA29C E011244C 2631A674 */  addiu     $s1, $s1, %lo(gDisplayContext)
 /* 3FA2A0 E0112450 96050000 */  lhu       $a1, ($s0)
 /* 3FA2A4 E0112454 8E220000 */  lw        $v0, ($s1)
 /* 3FA2A8 E0112458 00052980 */  sll       $a1, $a1, 6
@@ -83,8 +83,8 @@ glabel func_E0112330
 /* 3FA2B0 E0112460 0C080118 */  jal       func_E0200460
 /* 3FA2B4 E0112464 00452821 */   addu     $a1, $v0, $a1
 /* 3FA2B8 E0112468 3C05DA38 */  lui       $a1, 0xda38
-/* 3FA2BC E011246C 3C04800A */  lui       $a0, %hi(D_8009A66C)
-/* 3FA2C0 E0112470 2484A66C */  addiu     $a0, $a0, %lo(D_8009A66C)
+/* 3FA2BC E011246C 3C04800A */  lui       $a0, %hi(gMasterGfxPos)
+/* 3FA2C0 E0112470 2484A66C */  addiu     $a0, $a0, %lo(gMasterGfxPos)
 /* 3FA2C4 E0112474 34A50002 */  ori       $a1, $a1, 2
 /* 3FA2C8 E0112478 8C830000 */  lw        $v1, ($a0)
 /* 3FA2CC E011247C 96020000 */  lhu       $v0, ($s0)

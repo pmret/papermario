@@ -155,8 +155,8 @@ glabel func_8011CFBC
 /* B390C 8011D20C 00000000 */  nop       
 /* B3910 8011D210 45000130 */  bc1f      .L8011D6D4
 /* B3914 8011D214 3C05FD10 */   lui      $a1, 0xfd10
-/* B3918 8011D218 3C11800A */  lui       $s1, %hi(D_8009A66C)
-/* B391C 8011D21C 2631A66C */  addiu     $s1, $s1, %lo(D_8009A66C)
+/* B3918 8011D218 3C11800A */  lui       $s1, %hi(gMasterGfxPos)
+/* B391C 8011D21C 2631A66C */  addiu     $s1, $s1, %lo(gMasterGfxPos)
 /* B3920 8011D220 34A5013F */  ori       $a1, $a1, 0x13f
 /* B3924 8011D224 4600158D */  trunc.w.s $f22, $f2
 /* B3928 8011D228 4402B000 */  mfc1      $v0, $f22

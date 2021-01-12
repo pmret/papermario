@@ -5,8 +5,8 @@ glabel func_80240488_90BB58
 /* 90BB58 80240488 3C06FC12 */  lui       $a2, 0xfc12
 /* 90BB5C 8024048C 34C61624 */  ori       $a2, $a2, 0x1624
 /* 90BB60 80240490 3C05FF2F */  lui       $a1, 0xff2f
-/* 90BB64 80240494 3C04800A */  lui       $a0, %hi(D_8009A66C)
-/* 90BB68 80240498 2484A66C */  addiu     $a0, $a0, %lo(D_8009A66C)
+/* 90BB64 80240494 3C04800A */  lui       $a0, %hi(gMasterGfxPos)
+/* 90BB68 80240498 2484A66C */  addiu     $a0, $a0, %lo(gMasterGfxPos)
 /* 90BB6C 8024049C 8C820000 */  lw        $v0, ($a0)
 /* 90BB70 802404A0 34A5FFFF */  ori       $a1, $a1, 0xffff
 /* 90BB74 802404A4 0040182D */  daddu     $v1, $v0, $zero
@@ -22,5 +22,5 @@ glabel func_80240488_90BB58
 /* 90BB9C 802404CC AC430000 */  sw        $v1, ($v0)
 /* 90BBA0 802404D0 03E00008 */  jr        $ra
 /* 90BBA4 802404D4 AC440004 */   sw       $a0, 4($v0)
-/* 90BBA8 802404D8 00000000 */  nop       
-/* 90BBAC 802404DC 00000000 */  nop       
+/* 90BBA8 802404D8 00000000 */  nop
+/* 90BBAC 802404DC 00000000 */  nop

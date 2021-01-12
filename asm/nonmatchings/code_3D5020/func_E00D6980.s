@@ -5,8 +5,8 @@ glabel func_E00D6980
 /* 3D59A0 E00D6980 27BDFF08 */  addiu     $sp, $sp, -0xf8
 /* 3D59A4 E00D6984 3C08DB06 */  lui       $t0, 0xdb06
 /* 3D59A8 E00D6988 AFB200B8 */  sw        $s2, 0xb8($sp)
-/* 3D59AC E00D698C 3C12800A */  lui       $s2, %hi(D_8009A66C)
-/* 3D59B0 E00D6990 2652A66C */  addiu     $s2, $s2, %lo(D_8009A66C)
+/* 3D59AC E00D698C 3C12800A */  lui       $s2, %hi(gMasterGfxPos)
+/* 3D59B0 E00D6990 2652A66C */  addiu     $s2, $s2, %lo(gMasterGfxPos)
 /* 3D59B4 E00D6994 AFBF00D4 */  sw        $ra, 0xd4($sp)
 /* 3D59B8 E00D6998 AFBE00D0 */  sw        $fp, 0xd0($sp)
 /* 3D59BC E00D699C AFB700CC */  sw        $s7, 0xcc($sp)
@@ -83,10 +83,10 @@ glabel func_E00D6980
 /* 3D5AD8 E00D6AB8 0C080180 */  jal       func_E0200600
 /* 3D5ADC E00D6ABC E7A0001C */   swc1     $f0, 0x1c($sp)
 /* 3D5AE0 E00D6AC0 27A40020 */  addiu     $a0, $sp, 0x20
-/* 3D5AE4 E00D6AC4 3C158007 */  lui       $s5, %hi(D_800741F0)
-/* 3D5AE8 E00D6AC8 26B541F0 */  addiu     $s5, $s5, %lo(D_800741F0)
-/* 3D5AEC E00D6ACC 3C17800A */  lui       $s7, %hi(D_8009A674)
-/* 3D5AF0 E00D6AD0 26F7A674 */  addiu     $s7, $s7, %lo(D_8009A674)
+/* 3D5AE4 E00D6AC4 3C158007 */  lui       $s5, %hi(gMatrixListPos)
+/* 3D5AE8 E00D6AC8 26B541F0 */  addiu     $s5, $s5, %lo(gMatrixListPos)
+/* 3D5AEC E00D6ACC 3C17800A */  lui       $s7, %hi(gDisplayContext)
+/* 3D5AF0 E00D6AD0 26F7A674 */  addiu     $s7, $s7, %lo(gDisplayContext)
 /* 3D5AF4 E00D6AD4 96A50000 */  lhu       $a1, ($s5)
 /* 3D5AF8 E00D6AD8 8EE20000 */  lw        $v0, ($s7)
 /* 3D5AFC E00D6ADC 00052980 */  sll       $a1, $a1, 6
@@ -283,8 +283,8 @@ glabel func_E00D6980
 /* 3D5DE8 E00D6DC8 AE640000 */   sw       $a0, ($s3)
 .LE00D6DCC:
 /* 3D5DEC E00D6DCC 3C05D838 */  lui       $a1, 0xd838
-/* 3D5DF0 E00D6DD0 3C03800A */  lui       $v1, %hi(D_8009A66C)
-/* 3D5DF4 E00D6DD4 2463A66C */  addiu     $v1, $v1, %lo(D_8009A66C)
+/* 3D5DF0 E00D6DD0 3C03800A */  lui       $v1, %hi(gMasterGfxPos)
+/* 3D5DF4 E00D6DD4 2463A66C */  addiu     $v1, $v1, %lo(gMasterGfxPos)
 /* 3D5DF8 E00D6DD8 8C620000 */  lw        $v0, ($v1)
 /* 3D5DFC E00D6DDC 34A50002 */  ori       $a1, $a1, 2
 /* 3D5E00 E00D6DE0 0040202D */  daddu     $a0, $v0, $zero

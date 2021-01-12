@@ -67,8 +67,8 @@ glabel func_8012EC94
 /* C5484 8012ED84 018B6021 */  addu      $t4, $t4, $t3
 /* C5488 8012ED88 8FB50088 */  lw        $s5, 0x88($sp)
 /* C548C 8012ED8C 8FB60088 */  lw        $s6, 0x88($sp)
-/* C5490 8012ED90 3C08800A */  lui       $t0, %hi(D_8009A66C)
-/* C5494 8012ED94 2508A66C */  addiu     $t0, $t0, %lo(D_8009A66C)
+/* C5490 8012ED90 3C08800A */  lui       $t0, %hi(gMasterGfxPos)
+/* C5494 8012ED94 2508A66C */  addiu     $t0, $t0, %lo(gMasterGfxPos)
 /* C5498 8012ED98 A3A00020 */  sb        $zero, 0x20($sp)
 /* C549C 8012ED9C AFA90024 */  sw        $t1, 0x24($sp)
 /* C54A0 8012EDA0 AFAC0034 */  sw        $t4, 0x34($sp)

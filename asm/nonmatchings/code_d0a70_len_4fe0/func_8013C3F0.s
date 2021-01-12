@@ -132,8 +132,8 @@ glabel func_8013C3F0
 /* D2CD4 8013C5D4 96620008 */  lhu       $v0, 8($s3)
 /* D2CD8 8013C5D8 104001EE */  beqz      $v0, .L8013CD94
 /* D2CDC 8013C5DC 46020103 */   div.s    $f4, $f0, $f2
-/* D2CE0 8013C5E0 3C098007 */  lui       $t1, %hi(D_800741F4)
-/* D2CE4 8013C5E4 252941F4 */  addiu     $t1, $t1, %lo(D_800741F4)
+/* D2CE0 8013C5E0 3C098007 */  lui       $t1, %hi(gCurrentDisplayContextIndex)
+/* D2CE4 8013C5E4 252941F4 */  addiu     $t1, $t1, %lo(gCurrentDisplayContextIndex)
 /* D2CE8 8013C5E8 3C0B8015 */  lui       $t3, %hi(D_8014EE10)
 /* D2CEC 8013C5EC 256BEE10 */  addiu     $t3, $t3, %lo(D_8014EE10)
 /* D2CF0 8013C5F0 3C0C8000 */  lui       $t4, 0x8000

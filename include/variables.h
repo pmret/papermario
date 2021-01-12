@@ -250,4 +250,10 @@ extern OSThread D_800A4270; // idle thread, id 1
 extern OSThread D_800A4420; // id 3
 extern s32 D_800B8590;
 
+// gfx
+extern DisplayContext* gDisplayContext;
+extern Gfx* gMasterGfxPos;
+extern u16 gMatrixListPos;
+extern u16 gCurrentDisplayContextIndex;
+
 #endif

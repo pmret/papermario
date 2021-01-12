@@ -5,8 +5,8 @@ glabel func_E00982EC
 /* 395E9C E00982EC 27BDFF80 */  addiu     $sp, $sp, -0x80
 /* 395EA0 E00982F0 3C05DB06 */  lui       $a1, 0xdb06
 /* 395EA4 E00982F4 AFB50074 */  sw        $s5, 0x74($sp)
-/* 395EA8 E00982F8 3C15800A */  lui       $s5, %hi(D_8009A66C)
-/* 395EAC E00982FC 26B5A66C */  addiu     $s5, $s5, %lo(D_8009A66C)
+/* 395EA8 E00982F8 3C15800A */  lui       $s5, %hi(gMasterGfxPos)
+/* 395EAC E00982FC 26B5A66C */  addiu     $s5, $s5, %lo(gMasterGfxPos)
 /* 395EB0 E0098300 34A50024 */  ori       $a1, $a1, 0x24
 /* 395EB4 E0098304 3C02E700 */  lui       $v0, 0xe700
 /* 395EB8 E0098308 AFBF0078 */  sw        $ra, 0x78($sp)
@@ -47,10 +47,10 @@ glabel func_E00982EC
 /* 395F44 E0098394 0C080180 */  jal       func_E0200600
 /* 395F48 E0098398 AEA80000 */   sw       $t0, ($s5)
 /* 395F4C E009839C 27A40020 */  addiu     $a0, $sp, 0x20
-/* 395F50 E00983A0 3C108007 */  lui       $s0, %hi(D_800741F0)
-/* 395F54 E00983A4 261041F0 */  addiu     $s0, $s0, %lo(D_800741F0)
-/* 395F58 E00983A8 3C11800A */  lui       $s1, %hi(D_8009A674)
-/* 395F5C E00983AC 2631A674 */  addiu     $s1, $s1, %lo(D_8009A674)
+/* 395F50 E00983A0 3C108007 */  lui       $s0, %hi(gMatrixListPos)
+/* 395F54 E00983A4 261041F0 */  addiu     $s0, $s0, %lo(gMatrixListPos)
+/* 395F58 E00983A8 3C11800A */  lui       $s1, %hi(gDisplayContext)
+/* 395F5C E00983AC 2631A674 */  addiu     $s1, $s1, %lo(gDisplayContext)
 /* 395F60 E00983B0 96050000 */  lhu       $a1, ($s0)
 /* 395F64 E00983B4 8E220000 */  lw        $v0, ($s1)
 /* 395F68 E00983B8 00052980 */  sll       $a1, $a1, 6
@@ -98,8 +98,8 @@ glabel func_E00982EC
 /* 396008 E0098458 ACC40008 */  sw        $a0, 8($a2)
 /* 39600C E009845C ACC3000C */  sw        $v1, 0xc($a2)
 /* 396010 E0098460 3C07D838 */  lui       $a3, 0xd838
-/* 396014 E0098464 3C05800A */  lui       $a1, %hi(D_8009A66C)
-/* 396018 E0098468 24A5A66C */  addiu     $a1, $a1, %lo(D_8009A66C)
+/* 396014 E0098464 3C05800A */  lui       $a1, %hi(gMasterGfxPos)
+/* 396018 E0098468 24A5A66C */  addiu     $a1, $a1, %lo(gMasterGfxPos)
 /* 39601C E009846C 34E70002 */  ori       $a3, $a3, 2
 /* 396020 E0098470 3C06DE00 */  lui       $a2, 0xde00
 /* 396024 E0098474 8CA40000 */  lw        $a0, ($a1)

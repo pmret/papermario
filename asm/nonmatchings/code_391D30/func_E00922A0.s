@@ -45,10 +45,10 @@ glabel func_E00922A0
 /* 392070 E0092340 0C080104 */  jal       func_E0200410
 /* 392074 E0092344 AFA60010 */   sw       $a2, 0x10($sp)
 /* 392078 E0092348 0200202D */  daddu     $a0, $s0, $zero
-/* 39207C E009234C 3C128007 */  lui       $s2, %hi(D_800741F0)
-/* 392080 E0092350 265241F0 */  addiu     $s2, $s2, %lo(D_800741F0)
-/* 392084 E0092354 3C16800A */  lui       $s6, %hi(D_8009A674)
-/* 392088 E0092358 26D6A674 */  addiu     $s6, $s6, %lo(D_8009A674)
+/* 39207C E009234C 3C128007 */  lui       $s2, %hi(gMatrixListPos)
+/* 392080 E0092350 265241F0 */  addiu     $s2, $s2, %lo(gMatrixListPos)
+/* 392084 E0092354 3C16800A */  lui       $s6, %hi(gDisplayContext)
+/* 392088 E0092358 26D6A674 */  addiu     $s6, $s6, %lo(gDisplayContext)
 /* 39208C E009235C 96450000 */  lhu       $a1, ($s2)
 /* 392090 E0092360 8EC20000 */  lw        $v0, ($s6)
 /* 392094 E0092364 00052980 */  sll       $a1, $a1, 6
@@ -57,8 +57,8 @@ glabel func_E00922A0
 /* 3920A0 E0092370 00452821 */   addu     $a1, $v0, $a1
 /* 3920A4 E0092374 3C06DB06 */  lui       $a2, 0xdb06
 /* 3920A8 E0092378 34C60024 */  ori       $a2, $a2, 0x24
-/* 3920AC E009237C 3C10800A */  lui       $s0, %hi(D_8009A66C)
-/* 3920B0 E0092380 2610A66C */  addiu     $s0, $s0, %lo(D_8009A66C)
+/* 3920AC E009237C 3C10800A */  lui       $s0, %hi(gMasterGfxPos)
+/* 3920B0 E0092380 2610A66C */  addiu     $s0, $s0, %lo(gMasterGfxPos)
 /* 3920B4 E0092384 27A40018 */  addiu     $a0, $sp, 0x18
 /* 3920B8 E0092388 8E050000 */  lw        $a1, ($s0)
 /* 3920BC E009238C 96480000 */  lhu       $t0, ($s2)
@@ -226,8 +226,8 @@ glabel func_E00922A0
 /* 392338 E0092608 26100024 */   addiu    $s0, $s0, 0x24
 .LE009260C:
 /* 39233C E009260C 3C03D838 */  lui       $v1, 0xd838
-/* 392340 E0092610 3C04800A */  lui       $a0, %hi(D_8009A66C)
-/* 392344 E0092614 2484A66C */  addiu     $a0, $a0, %lo(D_8009A66C)
+/* 392340 E0092610 3C04800A */  lui       $a0, %hi(gMasterGfxPos)
+/* 392344 E0092614 2484A66C */  addiu     $a0, $a0, %lo(gMasterGfxPos)
 /* 392348 E0092618 8C820000 */  lw        $v0, ($a0)
 /* 39234C E009261C 34630002 */  ori       $v1, $v1, 2
 /* 392350 E0092620 0040282D */  daddu     $a1, $v0, $zero

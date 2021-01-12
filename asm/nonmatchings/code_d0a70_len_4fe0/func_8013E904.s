@@ -22,10 +22,10 @@ glabel func_8013E904
 /* D5048 8013E948 9664000A */  lhu       $a0, 0xa($s3)
 /* D504C 8013E94C 0C04BF84 */  jal       func_8012FE10
 /* D5050 8013E950 0040B02D */   daddu    $s6, $v0, $zero
-/* D5054 8013E954 3C108007 */  lui       $s0, %hi(D_800741F0)
-/* D5058 8013E958 261041F0 */  addiu     $s0, $s0, %lo(D_800741F0)
-/* D505C 8013E95C 3C11800A */  lui       $s1, %hi(D_8009A674)
-/* D5060 8013E960 2631A674 */  addiu     $s1, $s1, %lo(D_8009A674)
+/* D5054 8013E954 3C108007 */  lui       $s0, %hi(gMatrixListPos)
+/* D5058 8013E958 261041F0 */  addiu     $s0, $s0, %lo(gMatrixListPos)
+/* D505C 8013E95C 3C11800A */  lui       $s1, %hi(gDisplayContext)
+/* D5060 8013E960 2631A674 */  addiu     $s1, $s1, %lo(gDisplayContext)
 /* D5064 8013E964 96040000 */  lhu       $a0, ($s0)
 /* D5068 8013E968 3C068015 */  lui       $a2, %hi(D_8014EE10)
 /* D506C 8013E96C 8CC6EE10 */  lw        $a2, %lo(D_8014EE10)($a2)
@@ -58,8 +58,8 @@ glabel func_8013E904
 /* D50D8 8013E9D8 3C06E200 */  lui       $a2, 0xe200
 /* D50DC 8013E9DC 34C6001C */  ori       $a2, $a2, 0x1c
 /* D50E0 8013E9E0 3C050050 */  lui       $a1, 0x50
-/* D50E4 8013E9E4 3C08800A */  lui       $t0, %hi(D_8009A66C)
-/* D50E8 8013E9E8 2508A66C */  addiu     $t0, $t0, %lo(D_8009A66C)
+/* D50E4 8013E9E4 3C08800A */  lui       $t0, %hi(gMasterGfxPos)
+/* D50E8 8013E9E8 2508A66C */  addiu     $t0, $t0, %lo(gMasterGfxPos)
 /* D50EC 8013E9EC 8D070000 */  lw        $a3, ($t0)
 /* D50F0 8013E9F0 34A54E50 */  ori       $a1, $a1, 0x4e50
 /* D50F4 8013E9F4 00E0202D */  daddu     $a0, $a3, $zero
@@ -116,8 +116,8 @@ glabel func_8013E904
 /* D51B8 8013EAB8 34A50100 */  ori       $a1, $a1, 0x100
 /* D51BC 8013EABC 3C060703 */  lui       $a2, 0x703
 /* D51C0 8013EAC0 34C6C000 */  ori       $a2, $a2, 0xc000
-/* D51C4 8013EAC4 3C07800A */  lui       $a3, %hi(D_8009A66C)
-/* D51C8 8013EAC8 24E7A66C */  addiu     $a3, $a3, %lo(D_8009A66C)
+/* D51C4 8013EAC4 3C07800A */  lui       $a3, %hi(gMasterGfxPos)
+/* D51C8 8013EAC8 24E7A66C */  addiu     $a3, $a3, %lo(gMasterGfxPos)
 /* D51CC 8013EACC 3C0BF240 */  lui       $t3, 0xf240
 /* D51D0 8013EAD0 3C080700 */  lui       $t0, 0x700
 /* D51D4 8013EAD4 3C0AE600 */  lui       $t2, 0xe600

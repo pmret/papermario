@@ -10,8 +10,8 @@ glabel func_E0082A84
 /* 3860D8 E0082A98 AFB40020 */  sw        $s4, 0x20($sp)
 /* 3860DC E0082A9C 24140001 */  addiu     $s4, $zero, 1
 /* 3860E0 E0082AA0 AFB00010 */  sw        $s0, 0x10($sp)
-/* 3860E4 E0082AA4 3C10800A */  lui       $s0, %hi(D_8009A66C)
-/* 3860E8 E0082AA8 2610A66C */  addiu     $s0, $s0, %lo(D_8009A66C)
+/* 3860E4 E0082AA4 3C10800A */  lui       $s0, %hi(gMasterGfxPos)
+/* 3860E8 E0082AA8 2610A66C */  addiu     $s0, $s0, %lo(gMasterGfxPos)
 /* 3860EC E0082AAC 3C02E700 */  lui       $v0, 0xe700
 /* 3860F0 E0082AB0 AFBF0034 */  sw        $ra, 0x34($sp)
 /* 3860F4 E0082AB4 AFBE0030 */  sw        $fp, 0x30($sp)
@@ -136,8 +136,8 @@ glabel func_E0082A84
 /* 3862C0 E0082C80 AE040000 */   sw       $a0, ($s0)
 .LE0082C84:
 /* 3862C4 E0082C84 3C03D838 */  lui       $v1, 0xd838
-/* 3862C8 E0082C88 3C04800A */  lui       $a0, %hi(D_8009A66C)
-/* 3862CC E0082C8C 2484A66C */  addiu     $a0, $a0, %lo(D_8009A66C)
+/* 3862C8 E0082C88 3C04800A */  lui       $a0, %hi(gMasterGfxPos)
+/* 3862CC E0082C8C 2484A66C */  addiu     $a0, $a0, %lo(gMasterGfxPos)
 /* 3862D0 E0082C90 8C820000 */  lw        $v0, ($a0)
 /* 3862D4 E0082C94 34630002 */  ori       $v1, $v1, 2
 /* 3862D8 E0082C98 0040282D */  daddu     $a1, $v0, $zero

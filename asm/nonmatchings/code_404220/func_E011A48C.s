@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel func_E011A48C
-/* 4046AC E011A48C 3C03800A */  lui       $v1, %hi(D_8009A66C)
-/* 4046B0 E011A490 2463A66C */  addiu     $v1, $v1, %lo(D_8009A66C)
+/* 4046AC E011A48C 3C03800A */  lui       $v1, %hi(gMasterGfxPos)
+/* 4046B0 E011A490 2463A66C */  addiu     $v1, $v1, %lo(gMasterGfxPos)
 /* 4046B4 E011A494 44872000 */  mtc1      $a3, $f4
 /* 4046B8 E011A498 8C670000 */  lw        $a3, ($v1)
 /* 4046BC E011A49C 24E20008 */  addiu     $v0, $a3, 8
@@ -46,8 +46,8 @@ glabel func_E011A48C
 /* 404740 E011A520 00621025 */  or        $v0, $v1, $v0
 /* 404744 E011A524 ACE20004 */  sw        $v0, 4($a3)
 .LE011A528:
-/* 404748 E011A528 3C03800A */  lui       $v1, %hi(D_8009A66C)
-/* 40474C E011A52C 2463A66C */  addiu     $v1, $v1, %lo(D_8009A66C)
+/* 404748 E011A528 3C03800A */  lui       $v1, %hi(gMasterGfxPos)
+/* 40474C E011A52C 2463A66C */  addiu     $v1, $v1, %lo(gMasterGfxPos)
 /* 404750 E011A530 8C620000 */  lw        $v0, ($v1)
 /* 404754 E011A534 0040202D */  daddu     $a0, $v0, $zero
 /* 404758 E011A538 24420008 */  addiu     $v0, $v0, 8
@@ -119,8 +119,8 @@ glabel func_E011A48C
 /* 404840 E011A620 00C21025 */  or        $v0, $a2, $v0
 .LE011A624:
 /* 404844 E011A624 AC820000 */  sw        $v0, ($a0)
-/* 404848 E011A628 3C03800A */  lui       $v1, %hi(D_8009A66C)
-/* 40484C E011A62C 2463A66C */  addiu     $v1, $v1, %lo(D_8009A66C)
+/* 404848 E011A628 3C03800A */  lui       $v1, %hi(gMasterGfxPos)
+/* 40484C E011A62C 2463A66C */  addiu     $v1, $v1, %lo(gMasterGfxPos)
 /* 404850 E011A630 8C620000 */  lw        $v0, ($v1)
 /* 404854 E011A634 3C014F00 */  lui       $at, 0x4f00
 /* 404858 E011A638 44810000 */  mtc1      $at, $f0
@@ -164,8 +164,8 @@ glabel func_E011A48C
 /* 4048E4 E011A6C4 00000000 */  nop       
 /* 4048E8 E011A6C8 00E23825 */  or        $a3, $a3, $v0
 .LE011A6CC:
-/* 4048EC E011A6CC 3C05800A */  lui       $a1, %hi(D_8009A66C)
-/* 4048F0 E011A6D0 24A5A66C */  addiu     $a1, $a1, %lo(D_8009A66C)
+/* 4048EC E011A6CC 3C05800A */  lui       $a1, %hi(gMasterGfxPos)
+/* 4048F0 E011A6D0 24A5A66C */  addiu     $a1, $a1, %lo(gMasterGfxPos)
 /* 4048F4 E011A6D4 30E2FFFF */  andi      $v0, $a3, 0xffff
 /* 4048F8 E011A6D8 8CA30000 */  lw        $v1, ($a1)
 /* 4048FC E011A6DC 00C21025 */  or        $v0, $a2, $v0

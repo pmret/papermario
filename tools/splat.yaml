@@ -8270,14 +8270,13 @@ segments:
     files:
     - [0xE1E460, c]
     - [0xE1EC20, bin]
-  - [0xE20110, bin] # replace with following commented out section once vram is discovered
-  # - type: code
-  #   overlay: True
-  #   start: 0xE20110
-  #   vram: 0 # unknown
-  #   files:
-  #   - [0xE20110, c]
-  #   - [0xE20B30, bin] # may or may not be part of this overlay, perhaps split further
+  - type: code
+    overlay: True
+    start: 0xE20110
+    vram: 0x802B7000
+    files:
+    - [0xE20110, c]
+    - [0xE20B30, bin]
   - type: code
     overlay: True
     start: 0xE20EB0
@@ -8299,164 +8298,487 @@ segments:
     files:
     - [0xE225B0, c]
     - [0xE22B30, bin]
-  - [0xE23260, "bin"]
-  - [0xF007C0, "bin", "Battle_Fanfare_02"] # BGM start
-  - [0xF02160, "bin", "Hey_You_03"]
-  - [0xF03740, "bin", "The_Goomba_King_s_Decree_07"]
-  - [0xF043F0, "bin", "Attack_of_the_Koopa_Bros_08"]
-  - [0xF073C0, "bin", "Trojan_Bowser_09"]
-  - [0xF08D40, "bin", "Chomp_Attack_0A"]
-  - [0xF09600, "bin", "Ghost_Gulping_0B"]
-  - [0xF0A550, "bin", "Keeping_Pace_0C"]
-  - [0xF0BAE0, "bin", "Go_Mario_Go_0D"]
-  - [0xF0DEC0, "bin", "Huffin_and_Puffin_0E"]
-  - [0xF0FD20, "bin", "Freeze_0F"]
-  - [0xF110D0, "bin", "Winning_a_Battle_8B"]
-  - [0xF116C0, "bin", "Winning_a_Battle_and_Level_Up_8E"]
-  - [0xF12320, "bin", "Jr_Troopa_Battle_04"]
-  - [0xF13C20, "bin", "Final_Bowser_Battle_interlude_05"]
-  - [0xF15F40, "bin", "Master_Battle_2C"]
-  - [0xF16F80, "bin", "Game_Over_87"]
-  - [0xF171D0, "bin", "Resting_at_the_Toad_House_88"]
-  - [0xF17370, "bin", "Running_around_the_Heart_Pillar_in_Ch1_84"]
-  - [0xF17570, "bin", "Tutankoopa_s_Warning_45"]
-  - [0xF18940, "bin", "Kammy_Koopa_s_Theme_46"]
-  - [0xF193D0, "bin", "Jr_Troopa_s_Theme_47"]
-  - [0xF19BC0, "bin", "Goomba_King_s_Theme_50"]
-  - [0xF1A6F0, "bin", "Koopa_Bros_Defeated_51"]
-  - [0xF1ABD0, "bin", "Koopa_Bros_Theme_52"]
-  - [0xF1C810, "bin", "Tutankoopa_s_Warning_2_53"]
-  - [0xF1DBF0, "bin", "Tutankoopa_s_Theme_54"]
-  - [0xF1F2E0, "bin", "Tubba_Blubba_s_Theme_55"]
-  - [0xF20FF0, "bin", "General_Guy_s_Theme_56"]
-  - [0xF21780, "bin", "Lava_Piranha_s_Theme_57"]
-  - [0xF22A00, "bin", "Huff_N_Puff_s_Theme_58"]
-  - [0xF23A00, "bin", "Crystal_King_s_Theme_59"]
-  - [0xF24810, "bin", "Blooper_s_Theme_5A"]
-  - [0xF25240, "bin", "Midboss_Theme_5B"]
-  - [0xF26260, "bin", "Monstar_s_Theme_5C"]
-  - [0xF27840, "bin", "Moustafa_s_Theme_86"]
-  - [0xF27E20, "bin", "Fuzzy_Searching_Minigame_85"]
-  - [0xF28E20, "bin", "Phonograph_in_Mansion_44"]
-  - [0xF29AC0, "bin", "Toad_Town_00"]
-  - [0xF2E130, "bin", "Bill_Blaster_Theme_48"]
-  - [0xF2EF90, "bin", "Monty_Mole_Theme_in_Flower_Fields_49"]
-  - [0xF30590, "bin", "Shy_Guys_in_Toad_Town_4A"]
-  - [0xF318B0, "bin", "Whale_s_Problem_4C"]
-  - [0xF32220, "bin", "Toad_Town_Sewers_4B"]
-  - [0xF33060, "bin", "Unused_Theme_4D"]
-  - [0xF33AA0, "bin", "Mario_s_House_Prologue_3E"]
-  - [0xF33F10, "bin", "Peach_s_Party_3F"]
-  - [0xF354E0, "bin", "Goomba_Village_01"]
-  - [0xF35ED0, "bin", "Pleasant_Path_11"]
-  - [0xF36690, "bin", "Fuzzy_s_Took_My_Shell_12"]
-  - [0xF379E0, "bin", "Koopa_Village_13"]
-  - [0xF38570, "bin", "Koopa_Bros_Fortress_14"]
-  - [0xF39160, "bin", "Dry_Dry_Ruins_18"]
-  - [0xF3A0D0, "bin", "Dry_Dry_Ruins_Mystery_19"]
-  - [0xF3A450, "bin", "Mt_Rugged_16"]
-  - [0xF3AF20, "bin", "Dry_Dry_Desert_Oasis_17"]
-  - [0xF3C130, "bin", "Dry_Dry_Outpost_15"]
-  - [0xF3CCC0, "bin", "Forever_Forest_1A"]
-  - [0xF3E130, "bin", "Boo_s_Mansion_1B"]
-  - [0xF3F3E0, "bin", "Bow_s_Theme_1C"]
-  - [0xF40F00, "bin", "Gusty_Gulch_Adventure_1D"]
-  - [0xF42F30, "bin", "Tubba_Blubba_s_Castle_1E"]
-  - [0xF45500, "bin", "The_Castle_Crumbles_1F"]
-  - [0xF465E0, "bin", "Shy_Guy_s_Toy_Box_20"]
-  - [0xF474A0, "bin", "Toy_Train_Travel_21"]
-  - [0xF47E10, "bin", "Big_Lantern_Ghost_s_Theme_22"]
-  - [0xF48410, "bin", "Jade_Jungle_24"]
-  - [0xF4A880, "bin", "Deep_Jungle_25"]
-  - [0xF4BC00, "bin", "Lavalava_Island_26"]
-  - [0xF4E690, "bin", "Search_for_the_Fearsome_5_27"]
-  - [0xF50A00, "bin", "Raphael_the_Raven_28"]
-  - [0xF52520, "bin", "Hot_Times_in_Mt_Lavalava_29"]
-  - [0xF55C80, "bin", "Escape_from_Mt_Lavalava_2A"]
-  - [0xF58ED0, "bin", "Cloudy_Climb_32"]
-  - [0xF592B0, "bin", "Puff_Puff_Machine_33"]
-  - [0xF5AFF0, "bin", "Flower_Fields_30"]
-  - [0xF5C8D0, "bin", "Flower_Fields_Sunny_31"]
-  - [0xF5DF40, "bin", "Sun_s_Tower_34"]
-  - [0xF5F500, "bin", "Sun_s_Celebration_35"]
-  - [0xF61700, "bin", "Shiver_City_38"]
-  - [0xF62E50, "bin", "Detective_Mario_39"]
-  - [0xF64220, "bin", "Snow_Road_3A"]
-  - [0xF64CB0, "bin", "Over_Shiver_Mountain_3B"]
-  - [0xF65B30, "bin", "Starborn_Valley_3C"]
-  - [0xF66690, "bin", "Sanctuary_3D"]
-  - [0xF66B70, "bin", "Crystal_Palace_37"]
-  - [0xF67F80, "bin", "Star_Haven_60"]
-  - [0xF69640, "bin", "Shooting_Star_Summit_61"]
-  - [0xF6A050, "bin", "Legendary_Star_Ship_62"]
-  - [0xF6C270, "bin", "Star_Sanctuary_63"]
-  - [0xF6CED0, "bin", "Bowser_s_Castle_-_Caves_65"]
-  - [0xF6EE40, "bin", "Bowser_s_Castle_64"]
-  - [0xF73390, "bin", "Star_Elevator_2B"]
-  - [0xF751F0, "bin", "Goomba_Bros_Defeated_7E"]
-  - [0xF759C0, "bin", "Farewell_Twink_70"]
-  - [0xF77200, "bin", "Peach_Cooking_71"]
-  - [0xF77680, "bin", "Gourmet_Guy_72"]
-  - [0xF78600, "bin", "Hope_on_the_Balcony_Peach_1_73"]
-  - [0xF79070, "bin", "Peach_s_Theme_2_74"]
-  - [0xF7A0C0, "bin", "Peach_Sneaking_75"]
-  - [0xF7AA40, "bin", "Peach_Captured_76"]
-  - [0xF7AD90, "bin", "Quiz_Show_Intro_77"]
-  - [0xF7BEA0, "bin", "Unconscious_Mario_78"]
-  - [0xF7C780, "bin", "Petunia_s_Theme_89"]
-  - [0xF7DC00, "bin", "Flower_Fields_Door_appears_8A"]
-  - [0xF7E190, "bin", "Beanstalk_7B"]
-  - [0xF7EE20, "bin", "Lakilester_s_Theme_7D"]
-  - [0xF80230, "bin", "The_Sun_s_Back_7F"]
-  - [0xF81260, "bin", "Shiver_City_in_Crisis_79"]
-  - [0xF82460, "bin", "Solved_Shiver_City_Mystery_7A"]
-  - [0xF82D00, "bin", "Merlon_s_Spell_7C"]
-  - [0xF83DC0, "bin", "Bowser_s_Theme_66"]
-  - [0xF85590, "bin", "Train_Travel_80"]
-  - [0xF860E0, "bin", "Whale_Trip_81"]
-  - [0xF87000, "bin", "Chanterelle_s_Song_8C"]
-  - [0xF87610, "bin", "Boo_s_Game_8D"]
-  - [0xF88B30, "bin", "Dry_Dry_Ruins_rises_up_83"]
-  - [0xF89570, "bin", "End_of_Chapter_40"]
-  - [0xF8AAF0, "bin", "Beginning_of_Chapter_41"]
-  - [0xF8B820, "bin", "Hammer_and_Jump_Upgrade_42"]
-  - [0xF8BD90, "bin", "Found_Baby_Yoshi_s_4E"]
-  - [0xF8C360, "bin", "New_Partner_JAP_96"]
-  - [0xF8D110, "bin", "Unused_YI_Fanfare_4F"]
-  - [0xF8D3E0, "bin", "Unused_YI_Fanfare_2_5D"]
-  - [0xF90880, "bin", "Peach_s_Castle_inside_Bubble_5E"]
-  - [0xF92A50, "bin", "Angry_Bowser_67"]
-  - [0xF95510, "bin", "Bowser_s_Castle_explodes_5F"]
-  - [0xF96280, "bin", "Peach_s_Wish_68"]
-  - [0xF98520, "bin", "File_Select_69"]
-  - [0xF98F90, "bin", "Title_Screen_6A"]
-  - [0xF9B830, "bin", "Peach_s_Castle_in_Crisis_6B"]
-  - [0xF9D3B0, "bin", "Mario_falls_from_Bowser_s_Castle_6C"]
-  - [0xF9D690, "bin", "Peach_s_Arrival_6D"]
-  - [0xF9EF30, "bin", "Star_Rod_Recovered_6F"]
-  - [0xF9FA30, "bin", "Mario_s_House_94"]
-  - [0xFA08A0, "bin", "Bowser_s_Attacks_95"]
-  - [0xFA3C60, "bin", "End_Parade_1_90"]
-  - [0xFA85F0, "bin", "End_Parade_2_91"]
-  - [0xFABE90, "bin", "The_End_6E"]
-  - [0xFACC80, "bin", "Koopa_Radio_Station_2D"]
-  - [0xFAD210, "bin", "The_End_Low_Frequency__2E"]
-  - [0xFAD8F0, "bin", "SMW_Remix_2F"]
-  - [0xFADE70, "bin", "New_Partner_82"] # BGM end
-  - [0xFAE860, "bin"]
-  - [0x19E09A8, "Yay0"]
-  - [0x19E1390, "Yay0"]
-  - [0x19E1888, "Yay0"]
-  - [0x19E2330, "Yay0"]
-  - [0x19E2DE0, "Yay0"]
-  - [0x19E3208, "Yay0"]
-  - [0x19E3BA8, "Yay0"]
-  - [0x19E3FD8, "Yay0"]
-  - [0x19E4828, "Yay0"]
-  - [0x19E4BE0, "Yay0"]
-  - [0x19E5758, "Yay0"]
-  - [0x19E5950, "Yay0"]
-  - [0x19E62A0, "Yay0"]
+  - type: code
+    start: 0xE23260
+    vram: 0x802B6000
+    overlay: True
+    files:
+    - [0xE23260, c]
+    - [0xE23690, bin]
+  - type: code
+    start: 0xE236E0
+    vram: 0x802B6000
+    overlay: True
+    files:
+    - [0xE236E0, c]
+    - [0xE23FE0, bin]
+  - type: code
+    start: 0xE24040
+    vram: 0x802B6000
+    overlay: True
+    files:
+    - [0xE24040, c]
+  - type: code
+    start: 0xE245D0
+    vram: 0x802B6000
+    overlay: True
+    files:
+    - [0xE245D0, c]
+    - [0xE248D0, bin]
+  - type: code
+    start: 0xE24920
+    vram: 0x802B6000
+    overlay: True
+    files:
+    - [0xE24920, c]
+  - type: code
+    start: 0xE24ED0
+    vram: 0x802B6000
+    overlay: True
+    files:
+    - [0xE24ED0, c]
+    - [0xE25C80, bin]
+  - type: code
+    start: 0xE25D60
+    vram: 0x802B6000
+    overlay: True
+    files:
+    - [0xE25D60, c]
+    - [0xE26700, bin]
+  - type: code
+    start: 0xE26710
+    vram: 0x802B6000
+    overlay: True
+    files:
+    - [0xE26710, c]
+    - [0xE26DA0, bin]
+  - type: code
+    start: 0xE26DE0
+    vram: 0x802B6000
+    overlay: True
+    files:
+    - [0xE26DE0, c]
+    - [0xE274C0, bin]
+  - type: code
+    start: 0xE27510
+    vram: 0x802B6000
+    overlay: True
+    files:
+    - [0xE27510, c]
+    - [0xE27C50, bin]
+  - type: code
+    start: 0xE27C90
+    vram: 0x802B6000
+    overlay: True
+    files:
+    - [0xE27C90, c]
+  - type: code
+    start: 0xE27F40
+    vram: 0x802B6000
+    overlay: True
+    files:
+    - [0xE27F40, c]
+    - [0xE28790, bin]
+  - type: code
+    start: 0xE287F0
+    vram: 0x802B6000
+    overlay: True
+    files:
+    - [0xE287F0, c]
+  - type: code
+    start: 0xE28A30
+    vram: 0x802B6000
+    overlay: True
+    files:
+    - [0xE28A30, c]
+    - [0xE29190, bin]
+  - type: code
+    start: 0xE291A0
+    vram: 0x802B6000
+    overlay: True
+    files:
+    - [0xE291A0, c]
+    - [0xE29450, bin]
+  - type: code
+    start: 0xE29470
+    vram: 0x802B6000
+    overlay: True
+    files:
+    - [0xE29470, c]
+    - [0xE2A300, bin]
+  - type: code
+    start: 0xE2A340
+    vram: 0x802B6000
+    overlay: True
+    files:
+    - [0xE2A340, c]
+    - [0xE2A690, bin]
+  - type: code
+    start: 0xE2A6B0
+    vram: 0x802B6000
+    overlay: True
+    files:
+    - [0xE2A6B0, c]
+    - [0xE2B420, bin]
+  - type: code
+    start: 0xE2B530
+    vram: 0x802BAE00
+    overlay: True
+    files:
+    - [0xE2B530, c]
+    - [0xE2BE40, c]
+    - [0xE2C930, c]
+    - [0xE2D410, bin]
+  - type: code
+    start: 0xE2D730
+    vram: 0x802BAE00
+    overlay: True
+    files:
+    - [0xE2D730, c]
+    - [0xE2E5F0, c]
+    - [0xE2EDE0, c]
+    - [0xE2EFD0, bin]
+  - type: code
+    start: 0xE2F750
+    vram: 0x802BAE00
+    overlay: True
+    files:
+    - [0xE2F750, c]
+    - [0xE31380, bin]
+  - [0xE31530, bin] # unk data
+  - type: code
+    start: 0xEA0900
+    vram: 0x80240000
+    overlay: True
+    files:
+    - [0xEA0900, c]
+    - [0xEA0C10, c]
+    - [0xEA36E0, c]
+    - [0xEA3A80, bin]
+  - type: code
+    start: 0xEA6FD0
+    vram: 0x80240000
+    overlay: True
+    files:
+    - [0xEA6FD0, c]
+    - [0xEA7010, c]
+    - [0xEA7320, c]
+    - [0xEA7390, bin]
+  - type: code
+    start: 0xEA8AE0
+    vram: 0x80240000
+    overlay: True
+    files:
+    - [0xEA8AE0, c]
+    - [0xEAA810, bin]
+  - type: code
+    start: 0xEB0E60
+    vram: 0x80240000
+    overlay: True
+    files:
+    - [0xEB0E60, c]
+    - [0xEB1170, c]
+    - [0xEB1920, bin]
+  - type: code
+    start: 0xEB5130
+    vram: 0x80240000
+    overlay: True
+    files:
+    - [0xEB5130, c]
+    - [0xEB5470, c]
+    - [0xEB54C0, bin]
+  - type: code
+    start: 0xEB7230
+    vram: 0x80240000
+    overlay: True
+    files:
+    - [0xEB7230, c]
+    - [0xEB7540, c]
+    - [0xEB7850, bin]
+  - type: code
+    start: 0xEB8E50
+    vram: 0x80240000
+    overlay: True
+    files:
+    - [0xEB8E50, c]
+    - [0xEB8E90, c]
+    - [0xEB9D90, c]
+    - [0xEBA260, bin]
+  - type: code
+    start: 0xEC2200
+    vram: 0x80240000
+    overlay: True
+    files:
+    - [0xEC2200, c]
+    - [0xEC2240, c]
+    - [0xEC2610, c]
+    - [0xEC2850, bin]
+  - type: code
+    start: 0xEC71B0
+    vram: 0x80240000
+    overlay: True
+    files:
+    - [0xEC71B0, c]
+    - [0xEC7590, c]
+    - [0xEC78F0, bin]
+  - type: code
+    start: 0xEC9D00
+    vram: 0x80240000
+    overlay: True
+    files:
+    - [0xEC9D00, c]
+    - [0xECAA40, c]
+    - [0xECAA80, c]
+    - [0xECB930, c]
+    - [0xECBB70, c]
+    - [0xECBC10, bin]
+  - type: code
+    start: 0xECFFF0
+    vram: 0x80240000
+    overlay: True
+    files:
+    - [0xECFFF0, c]
+    - [0xED0030, c]
+    - [0xED00D0, c]
+    - [0xED0310, c]
+    - [0xED1840, bin]
+  - type: code
+    start: 0xED4220
+    vram: 0x80240000
+    overlay: True
+    files:
+    - [0xED4220, c]
+    - [0xED4260, c]
+    - [0xED42A0, c]
+    - [0xED46D0, c]
+    - [0xED5540, c]
+    - [0xED5780, bin]
+  - type: code
+    start: 0xED8E20
+    vram: 0x80240000
+    overlay: True
+    files:
+    - [0xED8E20, c]
+    - [0xED9170, bin]
+  - type: code
+    start: 0xEDBFE0
+    vram: 0x80240000
+    overlay: True
+    files:
+    - [0xEDBFE0, c]
+    - [0xEDC020, c]
+    - [0xEDC6D0, bin]
+  - type: code
+    start: 0xEDE9C0
+    vram: 0x80240000
+    overlay: True
+    files:
+    - [0xEDE9C0, c]
+    - [0xEDEA00, c]
+    - [0xEE2040, c]
+    - [0xEE20E0, bin]
+  - type: code
+    start: 0xEE65B0
+    vram: 0x80240000
+    overlay: True
+    files:
+    - [0xEE65B0, c]
+    - [0xEE70C0, c]
+    - [0xEE8940, c]
+    - [0xEE8970, bin]
+  - type: code
+    start: 0xEED100
+    vram: 0x80240000
+    overlay: True
+    files:
+    - [0xEED100, c]
+    - [0xEED140, c]
+    - [0xEED1E0, c]
+    - [0xEEDF50, c]
+    - [0xEEFAA0, c]
+    - [0xEEFAD0, bin]
+  - type: code
+    start: 0xEF2610
+    vram: 0x80240000
+    overlay: True
+    files:
+    - [0xEF2610, c]
+    - [0xEF2650, c]
+    - [0xEF2680, c]
+    - [0xEF58E0, bin]
+  - type: code
+    start: 0xEF7A80
+    vram: 0x80240000
+    overlay: True
+    files:
+    - [0xEF7A80, c]
+    - [0xEF7FB0, c]
+    - [0xEF8010, c]
+    - [0xEF8250, bin]
+  - type: code
+    start: 0xEFEB00
+    vram: 0x80240000
+    overlay: True
+    files:
+    - [0xEFEB00, c]
+    - [0xEFF440, bin] # some of this is audio-related and not part of this overlay
+  - [0xF007C0, bin, Battle_Fanfare_02] # BGM start
+  - [0xF02160, bin, Hey_You_03]
+  - [0xF03740, bin, The_Goomba_King_s_Decree_07]
+  - [0xF043F0, bin, Attack_of_the_Koopa_Bros_08]
+  - [0xF073C0, bin, Trojan_Bowser_09]
+  - [0xF08D40, bin, Chomp_Attack_0A]
+  - [0xF09600, bin, Ghost_Gulping_0B]
+  - [0xF0A550, bin, Keeping_Pace_0C]
+  - [0xF0BAE0, bin, Go_Mario_Go_0D]
+  - [0xF0DEC0, bin, Huffin_and_Puffin_0E]
+  - [0xF0FD20, bin, Freeze_0F]
+  - [0xF110D0, bin, Winning_a_Battle_8B]
+  - [0xF116C0, bin, Winning_a_Battle_and_Level_Up_8E]
+  - [0xF12320, bin, Jr_Troopa_Battle_04]
+  - [0xF13C20, bin, Final_Bowser_Battle_interlude_05]
+  - [0xF15F40, bin, Master_Battle_2C]
+  - [0xF16F80, bin, Game_Over_87]
+  - [0xF171D0, bin, Resting_at_the_Toad_House_88]
+  - [0xF17370, bin, Running_around_the_Heart_Pillar_in_Ch1_84]
+  - [0xF17570, bin, Tutankoopa_s_Warning_45]
+  - [0xF18940, bin, Kammy_Koopa_s_Theme_46]
+  - [0xF193D0, bin, Jr_Troopa_s_Theme_47]
+  - [0xF19BC0, bin, Goomba_King_s_Theme_50]
+  - [0xF1A6F0, bin, Koopa_Bros_Defeated_51]
+  - [0xF1ABD0, bin, Koopa_Bros_Theme_52]
+  - [0xF1C810, bin, Tutankoopa_s_Warning_2_53]
+  - [0xF1DBF0, bin, Tutankoopa_s_Theme_54]
+  - [0xF1F2E0, bin, Tubba_Blubba_s_Theme_55]
+  - [0xF20FF0, bin, General_Guy_s_Theme_56]
+  - [0xF21780, bin, Lava_Piranha_s_Theme_57]
+  - [0xF22A00, bin, Huff_N_Puff_s_Theme_58]
+  - [0xF23A00, bin, Crystal_King_s_Theme_59]
+  - [0xF24810, bin, Blooper_s_Theme_5A]
+  - [0xF25240, bin, Midboss_Theme_5B]
+  - [0xF26260, bin, Monstar_s_Theme_5C]
+  - [0xF27840, bin, Moustafa_s_Theme_86]
+  - [0xF27E20, bin, Fuzzy_Searching_Minigame_85]
+  - [0xF28E20, bin, Phonograph_in_Mansion_44]
+  - [0xF29AC0, bin, Toad_Town_00]
+  - [0xF2E130, bin, Bill_Blaster_Theme_48]
+  - [0xF2EF90, bin, Monty_Mole_Theme_in_Flower_Fields_49]
+  - [0xF30590, bin, Shy_Guys_in_Toad_Town_4A]
+  - [0xF318B0, bin, Whale_s_Problem_4C]
+  - [0xF32220, bin, Toad_Town_Sewers_4B]
+  - [0xF33060, bin, Unused_Theme_4D]
+  - [0xF33AA0, bin, Mario_s_House_Prologue_3E]
+  - [0xF33F10, bin, Peach_s_Party_3F]
+  - [0xF354E0, bin, Goomba_Village_01]
+  - [0xF35ED0, bin, Pleasant_Path_11]
+  - [0xF36690, bin, Fuzzy_s_Took_My_Shell_12]
+  - [0xF379E0, bin, Koopa_Village_13]
+  - [0xF38570, bin, Koopa_Bros_Fortress_14]
+  - [0xF39160, bin, Dry_Dry_Ruins_18]
+  - [0xF3A0D0, bin, Dry_Dry_Ruins_Mystery_19]
+  - [0xF3A450, bin, Mt_Rugged_16]
+  - [0xF3AF20, bin, Dry_Dry_Desert_Oasis_17]
+  - [0xF3C130, bin, Dry_Dry_Outpost_15]
+  - [0xF3CCC0, bin, Forever_Forest_1A]
+  - [0xF3E130, bin, Boo_s_Mansion_1B]
+  - [0xF3F3E0, bin, Bow_s_Theme_1C]
+  - [0xF40F00, bin, Gusty_Gulch_Adventure_1D]
+  - [0xF42F30, bin, Tubba_Blubba_s_Castle_1E]
+  - [0xF45500, bin, The_Castle_Crumbles_1F]
+  - [0xF465E0, bin, Shy_Guy_s_Toy_Box_20]
+  - [0xF474A0, bin, Toy_Train_Travel_21]
+  - [0xF47E10, bin, Big_Lantern_Ghost_s_Theme_22]
+  - [0xF48410, bin, Jade_Jungle_24]
+  - [0xF4A880, bin, Deep_Jungle_25]
+  - [0xF4BC00, bin, Lavalava_Island_26]
+  - [0xF4E690, bin, Search_for_the_Fearsome_5_27]
+  - [0xF50A00, bin, Raphael_the_Raven_28]
+  - [0xF52520, bin, Hot_Times_in_Mt_Lavalava_29]
+  - [0xF55C80, bin, Escape_from_Mt_Lavalava_2A]
+  - [0xF58ED0, bin, Cloudy_Climb_32]
+  - [0xF592B0, bin, Puff_Puff_Machine_33]
+  - [0xF5AFF0, bin, Flower_Fields_30]
+  - [0xF5C8D0, bin, Flower_Fields_Sunny_31]
+  - [0xF5DF40, bin, Sun_s_Tower_34]
+  - [0xF5F500, bin, Sun_s_Celebration_35]
+  - [0xF61700, bin, Shiver_City_38]
+  - [0xF62E50, bin, Detective_Mario_39]
+  - [0xF64220, bin, Snow_Road_3A]
+  - [0xF64CB0, bin, Over_Shiver_Mountain_3B]
+  - [0xF65B30, bin, Starborn_Valley_3C]
+  - [0xF66690, bin, Sanctuary_3D]
+  - [0xF66B70, bin, Crystal_Palace_37]
+  - [0xF67F80, bin, Star_Haven_60]
+  - [0xF69640, bin, Shooting_Star_Summit_61]
+  - [0xF6A050, bin, Legendary_Star_Ship_62]
+  - [0xF6C270, bin, Star_Sanctuary_63]
+  - [0xF6CED0, bin, Bowser_s_Castle_-_Caves_65]
+  - [0xF6EE40, bin, Bowser_s_Castle_64]
+  - [0xF73390, bin, Star_Elevator_2B]
+  - [0xF751F0, bin, Goomba_Bros_Defeated_7E]
+  - [0xF759C0, bin, Farewell_Twink_70]
+  - [0xF77200, bin, Peach_Cooking_71]
+  - [0xF77680, bin, Gourmet_Guy_72]
+  - [0xF78600, bin, Hope_on_the_Balcony_Peach_1_73]
+  - [0xF79070, bin, Peach_s_Theme_2_74]
+  - [0xF7A0C0, bin, Peach_Sneaking_75]
+  - [0xF7AA40, bin, Peach_Captured_76]
+  - [0xF7AD90, bin, Quiz_Show_Intro_77]
+  - [0xF7BEA0, bin, Unconscious_Mario_78]
+  - [0xF7C780, bin, Petunia_s_Theme_89]
+  - [0xF7DC00, bin, Flower_Fields_Door_appears_8A]
+  - [0xF7E190, bin, Beanstalk_7B]
+  - [0xF7EE20, bin, Lakilester_s_Theme_7D]
+  - [0xF80230, bin, The_Sun_s_Back_7F]
+  - [0xF81260, bin, Shiver_City_in_Crisis_79]
+  - [0xF82460, bin, Solved_Shiver_City_Mystery_7A]
+  - [0xF82D00, bin, Merlon_s_Spell_7C]
+  - [0xF83DC0, bin, Bowser_s_Theme_66]
+  - [0xF85590, bin, Train_Travel_80]
+  - [0xF860E0, bin, Whale_Trip_81]
+  - [0xF87000, bin, Chanterelle_s_Song_8C]
+  - [0xF87610, bin, Boo_s_Game_8D]
+  - [0xF88B30, bin, Dry_Dry_Ruins_rises_up_83]
+  - [0xF89570, bin, End_of_Chapter_40]
+  - [0xF8AAF0, bin, Beginning_of_Chapter_41]
+  - [0xF8B820, bin, Hammer_and_Jump_Upgrade_42]
+  - [0xF8BD90, bin, Found_Baby_Yoshi_s_4E]
+  - [0xF8C360, bin, New_Partner_JAP_96]
+  - [0xF8D110, bin, Unused_YI_Fanfare_4F]
+  - [0xF8D3E0, bin, Unused_YI_Fanfare_2_5D]
+  - [0xF90880, bin, Peach_s_Castle_inside_Bubble_5E]
+  - [0xF92A50, bin, Angry_Bowser_67]
+  - [0xF95510, bin, Bowser_s_Castle_explodes_5F]
+  - [0xF96280, bin, Peach_s_Wish_68]
+  - [0xF98520, bin, File_Select_69]
+  - [0xF98F90, bin, Title_Screen_6A]
+  - [0xF9B830, bin, Peach_s_Castle_in_Crisis_6B]
+  - [0xF9D3B0, bin, Mario_falls_from_Bowser_s_Castle_6C]
+  - [0xF9D690, bin, Peach_s_Arrival_6D]
+  - [0xF9EF30, bin, Star_Rod_Recovered_6F]
+  - [0xF9FA30, bin, Mario_s_House_94]
+  - [0xFA08A0, bin, Bowser_s_Attacks_95]
+  - [0xFA3C60, bin, End_Parade_1_90]
+  - [0xFA85F0, bin, End_Parade_2_91]
+  - [0xFABE90, bin, The_End_6E]
+  - [0xFACC80, bin, Koopa_Radio_Station_2D]
+  - [0xFAD210, bin, The_End_Low_Frequency__2E]
+  - [0xFAD8F0, bin, SMW_Remix_2F]
+  - [0xFADE70, bin, New_Partner_82] # BGM end
+  - [0xFAE860, bin] # sfx
+  - [0x19E09A8, Yay0]
+  - [0x19E1390, Yay0]
+  - [0x19E1888, Yay0]
+  - [0x19E2330, Yay0]
+  - [0x19E2DE0, Yay0]
+  - [0x19E3208, Yay0]
+  - [0x19E3BA8, Yay0]
+  - [0x19E3FD8, Yay0]
+  - [0x19E4828, Yay0]
+  - [0x19E4BE0, Yay0]
+  - [0x19E5758, Yay0]
+  - [0x19E5950, Yay0]
+  - [0x19E62A0, Yay0]
   - start: 0x19E67B8
     type: PaperMarioNpcSprites
     files:

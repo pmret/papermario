@@ -272,8 +272,8 @@ glabel func_8012D3DC
 /* C3ED0 8012D7D0 50400001 */  beql      $v0, $zero, .L8012D7D8
 /* C3ED4 8012D7D4 24170019 */   addiu    $s7, $zero, 0x19
 .L8012D7D8:
-/* C3ED8 8012D7D8 3C028007 */  lui       $v0, %hi(D_800741F4)
-/* C3EDC 8012D7DC 8C4241F4 */  lw        $v0, %lo(D_800741F4)($v0)
+/* C3ED8 8012D7D8 3C028007 */  lui       $v0, %hi(gCurrentDisplayContextIndex)
+/* C3EDC 8012D7DC 8C4241F4 */  lw        $v0, %lo(gCurrentDisplayContextIndex)($v0)
 /* C3EE0 8012D7E0 3C1E8015 */  lui       $fp, %hi(D_8014C4C0)
 /* C3EE4 8012D7E4 27DEC4C0 */  addiu     $fp, $fp, %lo(D_8014C4C0)
 /* C3EE8 8012D7E8 10400003 */  beqz      $v0, .L8012D7F8
@@ -341,8 +341,8 @@ glabel func_8012D3DC
 /* C3FD8 8012D8D8 3718C03C */  ori       $t8, $t8, 0xc03c
 /* C3FDC 8012D8DC 27A40010 */  addiu     $a0, $sp, 0x10
 /* C3FE0 8012D8E0 3C140001 */  lui       $s4, 1
-/* C3FE4 8012D8E4 3C10800A */  lui       $s0, %hi(D_8009A66C)
-/* C3FE8 8012D8E8 2610A66C */  addiu     $s0, $s0, %lo(D_8009A66C)
+/* C3FE4 8012D8E4 3C10800A */  lui       $s0, %hi(gMasterGfxPos)
+/* C3FE8 8012D8E8 2610A66C */  addiu     $s0, $s0, %lo(gMasterGfxPos)
 /* C3FEC 8012D8EC 36941630 */  ori       $s4, $s4, 0x1630
 /* C3FF0 8012D8F0 AFB9005C */  sw        $t9, 0x5c($sp)
 /* C3FF4 8012D8F4 8E030000 */  lw        $v1, ($s0)
@@ -440,10 +440,10 @@ glabel func_8012D3DC
 /* C4164 8012DA64 0C019E40 */  jal       guTranslateF
 /* C4168 8012DA68 AC780054 */   sw       $t8, 0x54($v1)
 /* C416C 8012DA6C 27A40010 */  addiu     $a0, $sp, 0x10
-/* C4170 8012DA70 3C118007 */  lui       $s1, %hi(D_800741F0)
-/* C4174 8012DA74 263141F0 */  addiu     $s1, $s1, %lo(D_800741F0)
-/* C4178 8012DA78 3C12800A */  lui       $s2, %hi(D_8009A674)
-/* C417C 8012DA7C 2652A674 */  addiu     $s2, $s2, %lo(D_8009A674)
+/* C4170 8012DA70 3C118007 */  lui       $s1, %hi(gMatrixListPos)
+/* C4174 8012DA74 263141F0 */  addiu     $s1, $s1, %lo(gMatrixListPos)
+/* C4178 8012DA78 3C12800A */  lui       $s2, %hi(gDisplayContext)
+/* C417C 8012DA7C 2652A674 */  addiu     $s2, $s2, %lo(gDisplayContext)
 /* C4180 8012DA80 96250000 */  lhu       $a1, ($s1)
 /* C4184 8012DA84 8E420000 */  lw        $v0, ($s2)
 /* C4188 8012DA88 00052980 */  sll       $a1, $a1, 6

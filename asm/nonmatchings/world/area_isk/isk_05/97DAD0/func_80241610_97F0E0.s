@@ -5,8 +5,8 @@ glabel func_80241610_97F0E0
 /* 97F0E0 80241610 27BDFEF8 */  addiu     $sp, $sp, -0x108
 /* 97F0E4 80241614 3C02DC08 */  lui       $v0, 0xdc08
 /* 97F0E8 80241618 AFB700EC */  sw        $s7, 0xec($sp)
-/* 97F0EC 8024161C 3C17800A */  lui       $s7, %hi(D_8009A66C)
-/* 97F0F0 80241620 26F7A66C */  addiu     $s7, $s7, %lo(D_8009A66C)
+/* 97F0EC 8024161C 3C17800A */  lui       $s7, %hi(gMasterGfxPos)
+/* 97F0F0 80241620 26F7A66C */  addiu     $s7, $s7, %lo(gMasterGfxPos)
 /* 97F0F4 80241624 34420008 */  ori       $v0, $v0, 8
 /* 97F0F8 80241628 AFBF00F4 */  sw        $ra, 0xf4($sp)
 /* 97F0FC 8024162C AFBE00F0 */  sw        $fp, 0xf0($sp)
@@ -53,8 +53,8 @@ glabel func_80241610_97F0E0
 /* 97F1A0 802416D0 ACA30004 */  sw        $v1, 4($a1)
 .L802416D4:
 /* 97F1A4 802416D4 3C180001 */  lui       $t8, 1
-/* 97F1A8 802416D8 3C12800A */  lui       $s2, %hi(D_8009A674)
-/* 97F1AC 802416DC 2652A674 */  addiu     $s2, $s2, %lo(D_8009A674)
+/* 97F1A8 802416D8 3C12800A */  lui       $s2, %hi(gDisplayContext)
+/* 97F1AC 802416DC 2652A674 */  addiu     $s2, $s2, %lo(gDisplayContext)
 /* 97F1B0 802416E0 AFB800C8 */  sw        $t8, 0xc8($sp)
 /* 97F1B4 802416E4 8EC50000 */  lw        $a1, ($s6)
 /* 97F1B8 802416E8 8E420000 */  lw        $v0, ($s2)
@@ -227,8 +227,8 @@ glabel func_80241610_97F0E0
 /* 97F454 80241984 0220282D */  daddu     $a1, $s1, $zero
 /* 97F458 80241988 0C019D80 */  jal       guMtxCatF
 /* 97F45C 8024198C 0220302D */   daddu    $a2, $s1, $zero
-/* 97F460 80241990 3C108007 */  lui       $s0, %hi(D_800741F0)
-/* 97F464 80241994 261041F0 */  addiu     $s0, $s0, %lo(D_800741F0)
+/* 97F460 80241990 3C108007 */  lui       $s0, %hi(gMatrixListPos)
+/* 97F464 80241994 261041F0 */  addiu     $s0, $s0, %lo(gMatrixListPos)
 /* 97F468 80241998 0220202D */  daddu     $a0, $s1, $zero
 /* 97F46C 8024199C 96050000 */  lhu       $a1, ($s0)
 /* 97F470 802419A0 8E420000 */  lw        $v0, ($s2)
@@ -273,7 +273,7 @@ glabel func_80241610_97F0E0
 /* 97F50C 80241A3C AFA30020 */  sw        $v1, 0x20($sp)
 /* 97F510 80241A40 97A30046 */  lhu       $v1, 0x46($sp)
 /* 97F514 80241A44 44880000 */  mtc1      $t0, $f0
-/* 97F518 80241A48 00000000 */  nop       
+/* 97F518 80241A48 00000000 */  nop
 /* 97F51C 80241A4C 46800020 */  cvt.s.w   $f0, $f0
 /* 97F520 80241A50 AFA90024 */  sw        $t1, 0x24($sp)
 /* 97F524 80241A54 E7C0003C */  swc1      $f0, 0x3c($fp)
@@ -282,7 +282,7 @@ glabel func_80241610_97F0E0
 /* 97F530 80241A60 A7A3002A */  sh        $v1, 0x2a($sp)
 /* 97F534 80241A64 3063FFFF */  andi      $v1, $v1, 0xffff
 /* 97F538 80241A68 44830000 */  mtc1      $v1, $f0
-/* 97F53C 80241A6C 00000000 */  nop       
+/* 97F53C 80241A6C 00000000 */  nop
 /* 97F540 80241A70 46800020 */  cvt.s.w   $f0, $f0
 /* 97F544 80241A74 00021FC2 */  srl       $v1, $v0, 0x1f
 /* 97F548 80241A78 00431021 */  addu      $v0, $v0, $v1

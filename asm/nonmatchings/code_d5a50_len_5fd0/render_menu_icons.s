@@ -121,8 +121,8 @@ glabel render_menu_icons
 /* D9F68 80143868 35EF0A11 */  ori       $t7, $t7, 0xa11
 /* D9F6C 8014386C 3C0E0008 */  lui       $t6, 8
 /* D9F70 80143870 35CE2CF0 */  ori       $t6, $t6, 0x2cf0
-/* D9F74 80143874 3C05800A */  lui       $a1, %hi(D_8009A66C)
-/* D9F78 80143878 24A5A66C */  addiu     $a1, $a1, %lo(D_8009A66C)
+/* D9F74 80143874 3C05800A */  lui       $a1, %hi(gMasterGfxPos)
+/* D9F78 80143878 24A5A66C */  addiu     $a1, $a1, %lo(gMasterGfxPos)
 /* D9F7C 8014387C 8CA20000 */  lw        $v0, ($a1)
 /* D9F80 80143880 0000882D */  daddu     $s1, $zero, $zero
 /* D9F84 80143884 0040182D */  daddu     $v1, $v0, $zero
@@ -304,8 +304,8 @@ glabel render_menu_icons
 /* DA21C 80143B1C 35EF0A11 */  ori       $t7, $t7, 0xa11
 /* DA220 80143B20 3C0E0008 */  lui       $t6, 8
 /* DA224 80143B24 35CE2CF0 */  ori       $t6, $t6, 0x2cf0
-/* DA228 80143B28 3C05800A */  lui       $a1, %hi(D_8009A66C)
-/* DA22C 80143B2C 24A5A66C */  addiu     $a1, $a1, %lo(D_8009A66C)
+/* DA228 80143B28 3C05800A */  lui       $a1, %hi(gMasterGfxPos)
+/* DA22C 80143B2C 24A5A66C */  addiu     $a1, $a1, %lo(gMasterGfxPos)
 /* DA230 80143B30 8CA20000 */  lw        $v0, ($a1)
 /* DA234 80143B34 0000882D */  daddu     $s1, $zero, $zero
 /* DA238 80143B38 0040182D */  daddu     $v1, $v0, $zero

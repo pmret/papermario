@@ -60,8 +60,8 @@ glabel func_80143C48
 /* DA424 80143D24 36940A01 */  ori       $s4, $s4, 0xa01
 /* DA428 80143D28 3C15FF10 */  lui       $s5, 0xff10
 /* DA42C 80143D2C 36B5013F */  ori       $s5, $s5, 0x13f
-/* DA430 80143D30 3C12800A */  lui       $s2, %hi(D_8009A66C)
-/* DA434 80143D34 2652A66C */  addiu     $s2, $s2, %lo(D_8009A66C)
+/* DA430 80143D30 3C12800A */  lui       $s2, %hi(gMasterGfxPos)
+/* DA434 80143D34 2652A66C */  addiu     $s2, $s2, %lo(gMasterGfxPos)
 /* DA438 80143D38 8E500000 */  lw        $s0, ($s2)
 /* DA43C 80143D3C 3C13E700 */  lui       $s3, 0xe700
 /* DA440 80143D40 3C01800A */  lui       $at, %hi(D_8009A634)
@@ -206,8 +206,8 @@ glabel func_80143C48
 /* DA66C 80143F6C 0C018E44 */  jal       guOrthoF
 /* DA670 80143F70 E7A00014 */   swc1     $f0, 0x14($sp)
 /* DA674 80143F74 0200202D */  daddu     $a0, $s0, $zero
-/* DA678 80143F78 3C10800A */  lui       $s0, %hi(D_8009A674)
-/* DA67C 80143F7C 2610A674 */  addiu     $s0, $s0, %lo(D_8009A674)
+/* DA678 80143F78 3C10800A */  lui       $s0, %hi(gDisplayContext)
+/* DA67C 80143F7C 2610A674 */  addiu     $s0, $s0, %lo(gDisplayContext)
 /* DA680 80143F80 3C05800A */  lui       $a1, %hi(D_8009A634)
 /* DA684 80143F84 84A5A634 */  lh        $a1, %lo(D_8009A634)($a1)
 /* DA688 80143F88 8E020000 */  lw        $v0, ($s0)

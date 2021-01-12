@@ -10,8 +10,8 @@ glabel func_E00C221C
 /* 3C1400 E00C2230 AFB300A4 */  sw        $s3, 0xa4($sp)
 /* 3C1404 E00C2234 3C130001 */  lui       $s3, 1
 /* 3C1408 E00C2238 AFB400A8 */  sw        $s4, 0xa8($sp)
-/* 3C140C E00C223C 3C14800A */  lui       $s4, %hi(D_8009A66C)
-/* 3C1410 E00C2240 2694A66C */  addiu     $s4, $s4, %lo(D_8009A66C)
+/* 3C140C E00C223C 3C14800A */  lui       $s4, %hi(gMasterGfxPos)
+/* 3C1410 E00C2240 2694A66C */  addiu     $s4, $s4, %lo(gMasterGfxPos)
 /* 3C1414 E00C2244 AFBF00B8 */  sw        $ra, 0xb8($sp)
 /* 3C1418 E00C2248 AFB700B4 */  sw        $s7, 0xb4($sp)
 /* 3C141C E00C224C AFB600B0 */  sw        $s6, 0xb0($sp)
@@ -69,10 +69,10 @@ glabel func_E00C221C
 /* 3C14EC E00C231C 0C080114 */  jal       func_E0200450
 /* 3C14F0 E00C2320 00A0302D */   daddu    $a2, $a1, $zero
 /* 3C14F4 E00C2324 27A40010 */  addiu     $a0, $sp, 0x10
-/* 3C14F8 E00C2328 3C118007 */  lui       $s1, %hi(D_800741F0)
-/* 3C14FC E00C232C 263141F0 */  addiu     $s1, $s1, %lo(D_800741F0)
-/* 3C1500 E00C2330 3C12800A */  lui       $s2, %hi(D_8009A674)
-/* 3C1504 E00C2334 2652A674 */  addiu     $s2, $s2, %lo(D_8009A674)
+/* 3C14F8 E00C2328 3C118007 */  lui       $s1, %hi(gMatrixListPos)
+/* 3C14FC E00C232C 263141F0 */  addiu     $s1, $s1, %lo(gMatrixListPos)
+/* 3C1500 E00C2330 3C12800A */  lui       $s2, %hi(gDisplayContext)
+/* 3C1504 E00C2334 2652A674 */  addiu     $s2, $s2, %lo(gDisplayContext)
 /* 3C1508 E00C2338 96250000 */  lhu       $a1, ($s1)
 /* 3C150C E00C233C 8E420000 */  lw        $v0, ($s2)
 /* 3C1510 E00C2340 00052980 */  sll       $a1, $a1, 6
@@ -468,8 +468,8 @@ glabel func_E00C221C
 /* 3C1AF4 E00C2924 1440FEE0 */  bnez      $v0, .LE00C24A8
 /* 3C1AF8 E00C2928 AC600004 */   sw       $zero, 4($v1)
 /* 3C1AFC E00C292C 3C05D838 */  lui       $a1, 0xd838
-/* 3C1B00 E00C2930 3C03800A */  lui       $v1, %hi(D_8009A66C)
-/* 3C1B04 E00C2934 2463A66C */  addiu     $v1, $v1, %lo(D_8009A66C)
+/* 3C1B00 E00C2930 3C03800A */  lui       $v1, %hi(gMasterGfxPos)
+/* 3C1B04 E00C2934 2463A66C */  addiu     $v1, $v1, %lo(gMasterGfxPos)
 /* 3C1B08 E00C2938 8C620000 */  lw        $v0, ($v1)
 /* 3C1B0C E00C293C 34A50002 */  ori       $a1, $a1, 2
 /* 3C1B10 E00C2940 0040202D */  daddu     $a0, $v0, $zero

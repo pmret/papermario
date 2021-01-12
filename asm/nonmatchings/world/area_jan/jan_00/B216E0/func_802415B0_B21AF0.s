@@ -18,8 +18,8 @@ glabel func_802415B0_B21AF0
 /* B21B24 802415E4 8FA60018 */  lw        $a2, 0x18($sp)
 /* B21B28 802415E8 0C0904CE */  jal       func_80241338_B21878
 /* B21B2C 802415EC 0220382D */   daddu    $a3, $s1, $zero
-/* B21B30 802415F0 3C03800A */  lui       $v1, %hi(D_8009A66C)
-/* B21B34 802415F4 2463A66C */  addiu     $v1, $v1, %lo(D_8009A66C)
+/* B21B30 802415F0 3C03800A */  lui       $v1, %hi(gMasterGfxPos)
+/* B21B34 802415F4 2463A66C */  addiu     $v1, $v1, %lo(gMasterGfxPos)
 /* B21B38 802415F8 8C620000 */  lw        $v0, ($v1)
 /* B21B3C 802415FC 24040001 */  addiu     $a0, $zero, 1
 /* B21B40 80241600 0040802D */  daddu     $s0, $v0, $zero

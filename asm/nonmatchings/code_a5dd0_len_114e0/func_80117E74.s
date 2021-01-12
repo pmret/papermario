@@ -6,8 +6,8 @@ glabel func_80117E74
 /* AE578 80117E78 AFB20018 */  sw        $s2, 0x18($sp)
 /* AE57C 80117E7C 0080902D */  daddu     $s2, $a0, $zero
 /* AE580 80117E80 AFB3001C */  sw        $s3, 0x1c($sp)
-/* AE584 80117E84 3C13800A */  lui       $s3, %hi(D_8009A66C)
-/* AE588 80117E88 2673A66C */  addiu     $s3, $s3, %lo(D_8009A66C)
+/* AE584 80117E84 3C13800A */  lui       $s3, %hi(gMasterGfxPos)
+/* AE588 80117E88 2673A66C */  addiu     $s3, $s3, %lo(gMasterGfxPos)
 /* AE58C 80117E8C AFBF0020 */  sw        $ra, 0x20($sp)
 /* AE590 80117E90 AFB10014 */  sw        $s1, 0x14($sp)
 /* AE594 80117E94 12400056 */  beqz      $s2, .L80117FF0

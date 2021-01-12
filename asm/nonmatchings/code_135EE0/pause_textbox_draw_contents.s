@@ -51,8 +51,8 @@ glabel pause_textbox_draw_contents
 /* 136964 80243624 00000000 */   nop      
 .L80243628:
 /* 136968 80243628 0240202D */  daddu     $a0, $s2, $zero
-/* 13696C 8024362C 3C11800A */  lui       $s1, %hi(D_8009A66C)
-/* 136970 80243630 2631A66C */  addiu     $s1, $s1, %lo(D_8009A66C)
+/* 13696C 8024362C 3C11800A */  lui       $s1, %hi(gMasterGfxPos)
+/* 136970 80243630 2631A66C */  addiu     $s1, $s1, %lo(gMasterGfxPos)
 /* 136974 80243634 2665000A */  addiu     $a1, $s3, 0xa
 /* 136978 80243638 3C02E700 */  lui       $v0, 0xe700
 /* 13697C 8024363C 3C10ED00 */  lui       $s0, 0xed00

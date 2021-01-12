@@ -16,8 +16,8 @@ glabel func_802423F0_7ED100
 /* 7ED12C 8024241C 3C07FFFD */  lui       $a3, 0xfffd
 /* 7ED130 80242420 34E7FEFF */  ori       $a3, $a3, 0xfeff
 /* 7ED134 80242424 AFB00010 */  sw        $s0, 0x10($sp)
-/* 7ED138 80242428 3C10800A */  lui       $s0, %hi(D_8009A66C)
-/* 7ED13C 8024242C 2610A66C */  addiu     $s0, $s0, %lo(D_8009A66C)
+/* 7ED138 80242428 3C10800A */  lui       $s0, %hi(gMasterGfxPos)
+/* 7ED13C 8024242C 2610A66C */  addiu     $s0, $s0, %lo(gMasterGfxPos)
 /* 7ED140 80242430 240400D6 */  addiu     $a0, $zero, 0xd6
 /* 7ED144 80242434 24030004 */  addiu     $v1, $zero, 4
 /* 7ED148 80242438 AFBF0020 */  sw        $ra, 0x20($sp)
@@ -97,4 +97,4 @@ glabel func_802423F0_7ED100
 /* 7ED270 80242560 8FB00010 */  lw        $s0, 0x10($sp)
 /* 7ED274 80242564 03E00008 */  jr        $ra
 /* 7ED278 80242568 27BD0028 */   addiu    $sp, $sp, 0x28
-/* 7ED27C 8024256C 00000000 */  nop       
+/* 7ED27C 8024256C 00000000 */  nop
