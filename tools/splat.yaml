@@ -382,7 +382,7 @@ segments:
     - [0x1AC760, c]
     - [0x1AF120, c]
     - [0x1AF230, c]
-    - [0x1AF2D0, bin]
+    - [0x1AF2D0, data]
   - [0x1CC310, bin] # icon images and palettes, vram unknown
   - [0x1FE1B0, rgba16,  title/logo_n64, 128, 112]
   - [0x2051B0, rgba16,  title/logo_is, 256, 122]
