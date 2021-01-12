@@ -76,7 +76,7 @@ glabel func_80240E60_BAAFA0
 /* BAB0B8 80240F78 8E4300B0 */  lw        $v1, 0xb0($s2)
 /* BAB0BC 80240F7C 30620004 */  andi      $v0, $v1, 4
 /* BAB0C0 80240F80 10400007 */  beqz      $v0, .L80240FA0
-/* BAB0C4 80240F84 00000000 */   nop      
+/* BAB0C4 80240F84 00000000 */   nop
 /* BAB0C8 80240F88 824200B4 */  lb        $v0, 0xb4($s2)
 /* BAB0CC 80240F8C 14400034 */  bnez      $v0, .L80241060
 /* BAB0D0 80240F90 0000102D */   daddu    $v0, $zero, $zero
@@ -88,21 +88,24 @@ glabel func_80240E60_BAAFA0
 /* BAB0E4 80240FA4 2C62000F */  sltiu     $v0, $v1, 0xf
 /* BAB0E8 80240FA8 1040002C */  beqz      $v0, .L8024105C
 /* BAB0EC 80240FAC 00031080 */   sll      $v0, $v1, 2
-/* BAB0F0 80240FB0 3C018024 */  lui       $at, %hi(func_802437B8)
+/* BAB0F0 80240FB0 3C018024 */  lui       $at, %hi(jtbl_802437B8_BAD8F8)
 /* BAB0F4 80240FB4 00220821 */  addu      $at, $at, $v0
-/* BAB0F8 80240FB8 8C2237B8 */  lw        $v0, %lo(func_802437B8)($at)
+/* BAB0F8 80240FB8 8C2237B8 */  lw        $v0, %lo(jtbl_802437B8_BAD8F8)($at)
 /* BAB0FC 80240FBC 00400008 */  jr        $v0
-/* BAB100 80240FC0 00000000 */   nop      
+/* BAB100 80240FC0 00000000 */   nop
+glabel L80240FC4_BAB104
 /* BAB104 80240FC4 0260202D */  daddu     $a0, $s3, $zero
 /* BAB108 80240FC8 0280282D */  daddu     $a1, $s4, $zero
 /* BAB10C 80240FCC 0C09009C */  jal       func_80240270_BAA3B0
 /* BAB110 80240FD0 0200302D */   daddu    $a2, $s0, $zero
+glabel L80240FD4_BAB114
 /* BAB114 80240FD4 0260202D */  daddu     $a0, $s3, $zero
 /* BAB118 80240FD8 0280282D */  daddu     $a1, $s4, $zero
 /* BAB11C 80240FDC 0C090128 */  jal       func_802404A0_BAA5E0
 /* BAB120 80240FE0 0200302D */   daddu    $a2, $s0, $zero
 /* BAB124 80240FE4 08090418 */  j         .L80241060
 /* BAB128 80240FE8 0000102D */   daddu    $v0, $zero, $zero
+glabel L80240FEC_BAB12C
 /* BAB12C 80240FEC 0260202D */  daddu     $a0, $s3, $zero
 /* BAB130 80240FF0 0280282D */  daddu     $a1, $s4, $zero
 /* BAB134 80240FF4 0C0901F6 */  jal       mim_07_UnkNpcAIFunc1
@@ -111,27 +114,32 @@ glabel func_80240E60_BAAFA0
 /* BAB140 80241000 24020003 */  addiu     $v0, $zero, 3
 /* BAB144 80241004 14620016 */  bne       $v1, $v0, .L80241060
 /* BAB148 80241008 0000102D */   daddu    $v0, $zero, $zero
+glabel L8024100C_BAB14C
 /* BAB14C 8024100C 0260202D */  daddu     $a0, $s3, $zero
 /* BAB150 80241010 0280282D */  daddu     $a1, $s4, $zero
 /* BAB154 80241014 0C090226 */  jal       func_80240898_BAA9D8
 /* BAB158 80241018 0200302D */   daddu    $a2, $s0, $zero
 /* BAB15C 8024101C 08090418 */  j         .L80241060
 /* BAB160 80241020 0000102D */   daddu    $v0, $zero, $zero
+glabel L80241024_BAB164
 /* BAB164 80241024 0260202D */  daddu     $a0, $s3, $zero
 /* BAB168 80241028 0280282D */  daddu     $a1, $s4, $zero
 /* BAB16C 8024102C 0C09028F */  jal       func_80240A3C_BAAB7C
 /* BAB170 80241030 0200302D */   daddu    $a2, $s0, $zero
+glabel L80241034_BAB174
 /* BAB174 80241034 0260202D */  daddu     $a0, $s3, $zero
 /* BAB178 80241038 0280282D */  daddu     $a1, $s4, $zero
 /* BAB17C 8024103C 0C0902C7 */  jal       func_80240B1C_BAAC5C
 /* BAB180 80241040 0200302D */   daddu    $a2, $s0, $zero
 /* BAB184 80241044 08090418 */  j         .L80241060
 /* BAB188 80241048 0000102D */   daddu    $v0, $zero, $zero
+glabel L8024104C_BAB18C
 /* BAB18C 8024104C 0260202D */  daddu     $a0, $s3, $zero
 /* BAB190 80241050 0280282D */  daddu     $a1, $s4, $zero
 /* BAB194 80241054 0C090387 */  jal       mim_07_UnkDurationCheck
 /* BAB198 80241058 0200302D */   daddu    $a2, $s0, $zero
 .L8024105C:
+glabel L8024105C_BAB19C
 /* BAB19C 8024105C 0000102D */  daddu     $v0, $zero, $zero
 .L80241060:
 /* BAB1A0 80241060 8FBF0048 */  lw        $ra, 0x48($sp)
@@ -143,6 +151,6 @@ glabel func_80240E60_BAAFA0
 /* BAB1B8 80241078 8FB00030 */  lw        $s0, 0x30($sp)
 /* BAB1BC 8024107C 03E00008 */  jr        $ra
 /* BAB1C0 80241080 27BD0050 */   addiu    $sp, $sp, 0x50
-/* BAB1C4 80241084 00000000 */  nop       
-/* BAB1C8 80241088 00000000 */  nop       
-/* BAB1CC 8024108C 00000000 */  nop       
+/* BAB1C4 80241084 00000000 */  nop
+/* BAB1C8 80241088 00000000 */  nop
+/* BAB1CC 8024108C 00000000 */  nop

@@ -14,4 +14,4 @@ glabel func_8011FFB4
 /* B66D4 8011FFD4 24A50004 */   addiu    $a1, $a1, 4
 .L8011FFD8:
 /* B66D8 8011FFD8 03E00008 */  jr        $ra
-/* B66DC 8011FFDC 00000000 */   nop      
+/* B66DC 8011FFDC 00000000 */   nop

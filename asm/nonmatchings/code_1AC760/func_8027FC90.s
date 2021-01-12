@@ -19,7 +19,7 @@ glabel func_8027FC90
 /* 1AE5A8 8027FCC8 2673C070 */  addiu     $s3, $s3, %lo(gBattleStatus)
 /* 1AE5AC 8027FCCC 2402FF81 */  addiu     $v0, $zero, -0x7f
 /* 1AE5B0 8027FCD0 14820002 */  bne       $a0, $v0, .L8027FCDC
-/* 1AE5B4 8027FCD4 00000000 */   nop      
+/* 1AE5B4 8027FCD4 00000000 */   nop
 /* 1AE5B8 8027FCD8 8E840148 */  lw        $a0, 0x148($s4)
 .L8027FCDC:
 /* 1AE5BC 8027FCDC 0C09A75B */  jal       get_actor

@@ -37,7 +37,7 @@ glabel func_80219630_5CFCC0
 /* 5CFD38 802196A8 26100004 */   addiu    $s0, $s0, 4
 .L802196AC:
 /* 5CFD3C 802196AC 44800000 */  mtc1      $zero, $f0
-/* 5CFD40 802196B0 00000000 */  nop       
+/* 5CFD40 802196B0 00000000 */  nop
 /* 5CFD44 802196B4 44050000 */  mfc1      $a1, $f0
 /* 5CFD48 802196B8 0240202D */  daddu     $a0, $s2, $zero
 /* 5CFD4C 802196BC AFA00014 */  sw        $zero, 0x14($sp)

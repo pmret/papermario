@@ -6,11 +6,11 @@ glabel init_item_entity_list
 /* C77D0 801310D0 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* C77D4 801310D4 80420070 */  lb        $v0, 0x70($v0)
 /* C77D8 801310D8 14400005 */  bnez      $v0, .L801310F0
-/* C77DC 801310DC 00000000 */   nop      
+/* C77DC 801310DC 00000000 */   nop
 /* C77E0 801310E0 3C028015 */  lui       $v0, %hi(D_80155DA0)
 /* C77E4 801310E4 24425DA0 */  addiu     $v0, $v0, %lo(D_80155DA0)
 /* C77E8 801310E8 0804C43E */  j         .L801310F8
-/* C77EC 801310EC 00000000 */   nop      
+/* C77EC 801310EC 00000000 */   nop
 .L801310F0:
 /* C77F0 801310F0 3C028015 */  lui       $v0, %hi(D_801561A0)
 /* C77F4 801310F4 244261A0 */  addiu     $v0, $v0, %lo(D_801561A0)
@@ -26,4 +26,4 @@ glabel init_item_entity_list
 /* C7818 80131118 3C018015 */  lui       $at, %hi(D_80155D84)
 /* C781C 8013111C AC205D84 */  sw        $zero, %lo(D_80155D84)($at)
 /* C7820 80131120 03E00008 */  jr        $ra
-/* C7824 80131124 00000000 */   nop      
+/* C7824 80131124 00000000 */   nop

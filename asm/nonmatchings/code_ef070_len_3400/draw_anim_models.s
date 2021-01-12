@@ -91,7 +91,7 @@ glabel draw_anim_models
 .L802CCC6C:
 /* F161C 802CCC6C 2A620010 */  slti      $v0, $s3, 0x10
 /* F1620 802CCC70 1440FFC2 */  bnez      $v0, .L802CCB7C
-/* F1624 802CCC74 00000000 */   nop      
+/* F1624 802CCC74 00000000 */   nop
 /* F1628 802CCC78 8FBF0244 */  lw        $ra, 0x244($sp)
 /* F162C 802CCC7C 8FBE0240 */  lw        $fp, 0x240($sp)
 /* F1630 802CCC80 8FB7023C */  lw        $s7, 0x23c($sp)

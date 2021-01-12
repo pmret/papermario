@@ -35,7 +35,7 @@ glabel func_80244D68_8055E8
 /* 805658 80244DD8 0C0B1EAF */  jal       get_variable
 /* 80565C 80244DDC 34A55C86 */   ori      $a1, $a1, 0x5c86
 /* 805660 80244DE0 14400007 */  bnez      $v0, .L80244E00
-/* 805664 80244DE4 00000000 */   nop      
+/* 805664 80244DE4 00000000 */   nop
 /* 805668 80244DE8 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
 /* 80566C 80244DEC 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 805670 80244DF0 8C420140 */  lw        $v0, 0x140($v0)

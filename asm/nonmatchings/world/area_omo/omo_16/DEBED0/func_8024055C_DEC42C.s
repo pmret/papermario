@@ -14,7 +14,7 @@ glabel func_8024055C_DEC42C
 /* DEC450 80240580 44811000 */  mtc1      $at, $f2
 /* DEC454 80240584 46002005 */  abs.s     $f0, $f4
 /* DEC458 80240588 4602003C */  c.lt.s    $f0, $f2
-/* DEC45C 8024058C 00000000 */  nop       
+/* DEC45C 8024058C 00000000 */  nop
 /* DEC460 80240590 4500000D */  bc1f      .L802405C8
 /* DEC464 80240594 AE000084 */   sw       $zero, 0x84($s0)
 /* DEC468 80240598 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
@@ -28,10 +28,10 @@ glabel func_8024055C_DEC42C
 /* DEC488 802405B8 44811000 */  mtc1      $at, $f2
 /* DEC48C 802405BC 46002005 */  abs.s     $f0, $f4
 /* DEC490 802405C0 4602003C */  c.lt.s    $f0, $f2
-/* DEC494 802405C4 00000000 */  nop       
+/* DEC494 802405C4 00000000 */  nop
 .L802405C8:
 /* DEC498 802405C8 45000008 */  bc1f      .L802405EC
-/* DEC49C 802405CC 00000000 */   nop      
+/* DEC49C 802405CC 00000000 */   nop
 /* DEC4A0 802405D0 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
 /* DEC4A4 802405D4 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* DEC4A8 802405D8 8C420010 */  lw        $v0, 0x10($v0)

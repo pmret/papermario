@@ -15,16 +15,16 @@ glabel func_802B6CF0_E2B3A0
 /* E2B3C8 802B6D18 3C108011 */  lui       $s0, %hi(gPlayerStatus)
 /* E2B3CC 802B6D1C 2610EFC8 */  addiu     $s0, $s0, %lo(gPlayerStatus)
 /* E2B3D0 802B6D20 4602003C */  c.lt.s    $f0, $f2
-/* E2B3D4 802B6D24 00000000 */  nop       
+/* E2B3D4 802B6D24 00000000 */  nop
 /* E2B3D8 802B6D28 45010008 */  bc1t      .L802B6D4C
 /* E2B3DC 802B6D2C E4420020 */   swc1     $f2, 0x20($v0)
 /* E2B3E0 802B6D30 3C01C248 */  lui       $at, 0xc248
 /* E2B3E4 802B6D34 44810000 */  mtc1      $at, $f0
-/* E2B3E8 802B6D38 00000000 */  nop       
+/* E2B3E8 802B6D38 00000000 */  nop
 /* E2B3EC 802B6D3C 4600103C */  c.lt.s    $f2, $f0
-/* E2B3F0 802B6D40 00000000 */  nop       
+/* E2B3F0 802B6D40 00000000 */  nop
 /* E2B3F4 802B6D44 45000002 */  bc1f      .L802B6D50
-/* E2B3F8 802B6D48 00000000 */   nop      
+/* E2B3F8 802B6D48 00000000 */   nop
 .L802B6D4C:
 /* E2B3FC 802B6D4C E4400020 */  swc1      $f0, 0x20($v0)
 .L802B6D50:

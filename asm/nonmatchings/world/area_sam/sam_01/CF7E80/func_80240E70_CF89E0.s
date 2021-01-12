@@ -16,19 +16,19 @@ glabel func_80240E70_CF89E0
 /* CF8A0C 80240E9C 0220202D */  daddu     $a0, $s1, $zero
 /* CF8A10 80240EA0 3C05F4AC */  lui       $a1, 0xf4ac
 /* CF8A14 80240EA4 4482B000 */  mtc1      $v0, $f22
-/* CF8A18 80240EA8 00000000 */  nop       
+/* CF8A18 80240EA8 00000000 */  nop
 /* CF8A1C 80240EAC 4680B5A0 */  cvt.s.w   $f22, $f22
 /* CF8A20 80240EB0 0C0B1EAF */  jal       get_variable
 /* CF8A24 80240EB4 34A5D482 */   ori      $a1, $a1, 0xd482
 /* CF8A28 80240EB8 0220202D */  daddu     $a0, $s1, $zero
 /* CF8A2C 80240EBC 3C05F4AC */  lui       $a1, 0xf4ac
 /* CF8A30 80240EC0 4482A000 */  mtc1      $v0, $f20
-/* CF8A34 80240EC4 00000000 */  nop       
+/* CF8A34 80240EC4 00000000 */  nop
 /* CF8A38 80240EC8 4680A520 */  cvt.s.w   $f20, $f20
 /* CF8A3C 80240ECC 0C0B1EAF */  jal       get_variable
 /* CF8A40 80240ED0 34A5D483 */   ori      $a1, $a1, 0xd483
 /* CF8A44 80240ED4 44821000 */  mtc1      $v0, $f2
-/* CF8A48 80240ED8 00000000 */  nop       
+/* CF8A48 80240ED8 00000000 */  nop
 /* CF8A4C 80240EDC 468010A0 */  cvt.s.w   $f2, $f2
 /* CF8A50 80240EE0 4405B000 */  mfc1      $a1, $f22
 /* CF8A54 80240EE4 4406A000 */  mfc1      $a2, $f20
@@ -45,19 +45,19 @@ glabel func_80240E70_CF89E0
 /* CF8A80 80240F10 0220202D */  daddu     $a0, $s1, $zero
 /* CF8A84 80240F14 3C05F4AC */  lui       $a1, 0xf4ac
 /* CF8A88 80240F18 4482B000 */  mtc1      $v0, $f22
-/* CF8A8C 80240F1C 00000000 */  nop       
+/* CF8A8C 80240F1C 00000000 */  nop
 /* CF8A90 80240F20 4680B5A0 */  cvt.s.w   $f22, $f22
 /* CF8A94 80240F24 0C0B1EAF */  jal       get_variable
 /* CF8A98 80240F28 34A5D482 */   ori      $a1, $a1, 0xd482
 /* CF8A9C 80240F2C 0220202D */  daddu     $a0, $s1, $zero
 /* CF8AA0 80240F30 3C05F4AC */  lui       $a1, 0xf4ac
 /* CF8AA4 80240F34 4482A000 */  mtc1      $v0, $f20
-/* CF8AA8 80240F38 00000000 */  nop       
+/* CF8AA8 80240F38 00000000 */  nop
 /* CF8AAC 80240F3C 4680A520 */  cvt.s.w   $f20, $f20
 /* CF8AB0 80240F40 0C0B1EAF */  jal       get_variable
 /* CF8AB4 80240F44 34A5D483 */   ori      $a1, $a1, 0xd483
 /* CF8AB8 80240F48 44821000 */  mtc1      $v0, $f2
-/* CF8ABC 80240F4C 00000000 */  nop       
+/* CF8ABC 80240F4C 00000000 */  nop
 /* CF8AC0 80240F50 468010A0 */  cvt.s.w   $f2, $f2
 /* CF8AC4 80240F54 4405B000 */  mfc1      $a1, $f22
 /* CF8AC8 80240F58 4406A000 */  mfc1      $a2, $f20
@@ -73,19 +73,19 @@ glabel func_80240E70_CF89E0
 /* CF8AF0 80240F80 0220202D */  daddu     $a0, $s1, $zero
 /* CF8AF4 80240F84 3C05F4AC */  lui       $a1, 0xf4ac
 /* CF8AF8 80240F88 4482B000 */  mtc1      $v0, $f22
-/* CF8AFC 80240F8C 00000000 */  nop       
+/* CF8AFC 80240F8C 00000000 */  nop
 /* CF8B00 80240F90 4680B5A0 */  cvt.s.w   $f22, $f22
 /* CF8B04 80240F94 0C0B1EAF */  jal       get_variable
 /* CF8B08 80240F98 34A5D482 */   ori      $a1, $a1, 0xd482
 /* CF8B0C 80240F9C 0220202D */  daddu     $a0, $s1, $zero
 /* CF8B10 80240FA0 3C05F4AC */  lui       $a1, 0xf4ac
 /* CF8B14 80240FA4 4482A000 */  mtc1      $v0, $f20
-/* CF8B18 80240FA8 00000000 */  nop       
+/* CF8B18 80240FA8 00000000 */  nop
 /* CF8B1C 80240FAC 4680A520 */  cvt.s.w   $f20, $f20
 /* CF8B20 80240FB0 0C0B1EAF */  jal       get_variable
 /* CF8B24 80240FB4 34A5D483 */   ori      $a1, $a1, 0xd483
 /* CF8B28 80240FB8 44821000 */  mtc1      $v0, $f2
-/* CF8B2C 80240FBC 00000000 */  nop       
+/* CF8B2C 80240FBC 00000000 */  nop
 /* CF8B30 80240FC0 468010A0 */  cvt.s.w   $f2, $f2
 /* CF8B34 80240FC4 4405B000 */  mfc1      $a1, $f22
 /* CF8B38 80240FC8 4406A000 */  mfc1      $a2, $f20

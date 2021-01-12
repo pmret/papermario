@@ -41,7 +41,7 @@ glabel func_E008E000
 /* 38EEF0 E008E090 AE05000C */   sw       $a1, 0xc($s0)
 .LE008E094:
 /* 38EEF4 E008E094 08023825 */  j         .LE008E094
-/* 38EEF8 E008E098 00000000 */   nop      
+/* 38EEF8 E008E098 00000000 */   nop
 .LE008E09C:
 /* 38EEFC E008E09C ACB30004 */  sw        $s3, 4($a1)
 /* 38EF00 E008E0A0 1E400004 */  bgtz      $s2, .LE008E0B4
@@ -95,11 +95,11 @@ glabel func_E008E000
 /* 38EFA8 E008E148 15210004 */  bne       $t1, $at, .LE008E15C
 /* 38EFAC E008E14C 3C018000 */   lui      $at, 0x8000
 /* 38EFB0 E008E150 14E10002 */  bne       $a3, $at, .LE008E15C
-/* 38EFB4 E008E154 00000000 */   nop      
+/* 38EFB4 E008E154 00000000 */   nop
 /* 38EFB8 E008E158 0006000D */  break     6
 .LE008E15C:
 /* 38EFBC E008E15C 00001812 */   mflo     $v1
-/* 38EFC0 E008E160 00000000 */  nop       
+/* 38EFC0 E008E160 00000000 */  nop
 /* 38EFC4 E008E164 15200002 */  bnez      $t1, .LE008E170
 /* 38EFC8 E008E168 0109001A */   div      $zero, $t0, $t1
 /* 38EFCC E008E16C 0007000D */  break     7
@@ -108,7 +108,7 @@ glabel func_E008E000
 /* 38EFD4 E008E174 15210004 */  bne       $t1, $at, .LE008E188
 /* 38EFD8 E008E178 3C018000 */   lui      $at, 0x8000
 /* 38EFDC E008E17C 15010002 */  bne       $t0, $at, .LE008E188
-/* 38EFE0 E008E180 00000000 */   nop      
+/* 38EFE0 E008E180 00000000 */   nop
 /* 38EFE4 E008E184 0006000D */  break     6
 .LE008E188:
 /* 38EFE8 E008E188 00002012 */   mflo     $a0
@@ -118,11 +118,11 @@ glabel func_E008E000
 /* 38EFF8 E008E198 0151102A */  slt       $v0, $t2, $s1
 /* 38EFFC E008E19C E4C2FFF8 */  swc1      $f2, -8($a2)
 /* 38F000 E008E1A0 44830000 */  mtc1      $v1, $f0
-/* 38F004 E008E1A4 00000000 */  nop       
+/* 38F004 E008E1A4 00000000 */  nop
 /* 38F008 E008E1A8 46800020 */  cvt.s.w   $f0, $f0
 /* 38F00C E008E1AC E4C0FFF4 */  swc1      $f0, -0xc($a2)
 /* 38F010 E008E1B0 44840000 */  mtc1      $a0, $f0
-/* 38F014 E008E1B4 00000000 */  nop       
+/* 38F014 E008E1B4 00000000 */  nop
 /* 38F018 E008E1B8 46800020 */  cvt.s.w   $f0, $f0
 /* 38F01C E008E1BC E4C00000 */  swc1      $f0, ($a2)
 /* 38F020 E008E1C0 24C60048 */  addiu     $a2, $a2, 0x48

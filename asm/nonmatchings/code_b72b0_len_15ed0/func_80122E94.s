@@ -19,9 +19,9 @@ glabel func_80122E94
 /* B95C8 80122EC8 28820100 */  slti      $v0, $a0, 0x100
 .L80122ECC:
 /* B95CC 80122ECC 10400003 */  beqz      $v0, .L80122EDC
-/* B95D0 80122ED0 00000000 */   nop      
+/* B95D0 80122ED0 00000000 */   nop
 /* B95D4 80122ED4 0C048B7F */  jal       func_80122DFC
-/* B95D8 80122ED8 00000000 */   nop      
+/* B95D8 80122ED8 00000000 */   nop
 .L80122EDC:
 /* B95DC 80122EDC 8FBF0010 */  lw        $ra, 0x10($sp)
 /* B95E0 80122EE0 03E00008 */  jr        $ra

@@ -28,7 +28,7 @@ glabel func_8024197C_7EC68C
 /* 7EC6E0 802419D0 00220821 */  addu      $at, $at, $v0
 /* 7EC6E4 802419D4 AC205BA0 */  sw        $zero, %lo(D_80255BA0)($at)
 /* 7EC6E8 802419D8 08090682 */  j         .L80241A08
-/* 7EC6EC 802419DC 00000000 */   nop      
+/* 7EC6EC 802419DC 00000000 */   nop
 .L802419E0:
 /* 7EC6F0 802419E0 3C038025 */  lui       $v1, %hi(D_80255BA0)
 /* 7EC6F4 802419E4 24635BA0 */  addiu     $v1, $v1, %lo(D_80255BA0)

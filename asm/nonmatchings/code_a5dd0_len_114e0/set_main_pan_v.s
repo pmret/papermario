@@ -7,4 +7,4 @@ glabel set_main_pan_v
 /* B233C 8011BC3C 00240821 */  addu      $at, $at, $a0
 /* B2340 8011BC40 AC2532A8 */  sw        $a1, %lo(D_801532A8)($at)
 /* B2344 8011BC44 03E00008 */  jr        $ra
-/* B2348 8011BC48 00000000 */   nop      
+/* B2348 8011BC48 00000000 */   nop

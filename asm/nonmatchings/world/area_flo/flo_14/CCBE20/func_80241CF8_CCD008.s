@@ -49,15 +49,15 @@ glabel func_80241CF8_CCD008
 /* CCD0B0 80241DA0 44802000 */  mtc1      $zero, $f4
 /* CCD0B4 80241DA4 460010A1 */  cvt.d.s   $f2, $f2
 /* CCD0B8 80241DA8 46241082 */  mul.d     $f2, $f2, $f4
-/* CCD0BC 80241DAC 00000000 */  nop       
+/* CCD0BC 80241DAC 00000000 */  nop
 /* CCD0C0 80241DB0 C7A0001C */  lwc1      $f0, 0x1c($sp)
 /* CCD0C4 80241DB4 46000021 */  cvt.d.s   $f0, $f0
 /* CCD0C8 80241DB8 46240002 */  mul.d     $f0, $f0, $f4
-/* CCD0CC 80241DBC 00000000 */  nop       
+/* CCD0CC 80241DBC 00000000 */  nop
 /* CCD0D0 80241DC0 3C013FE0 */  lui       $at, 0x3fe0
 /* CCD0D4 80241DC4 44812800 */  mtc1      $at, $f5
 /* CCD0D8 80241DC8 44802000 */  mtc1      $zero, $f4
-/* CCD0DC 80241DCC 00000000 */  nop       
+/* CCD0DC 80241DCC 00000000 */  nop
 /* CCD0E0 80241DD0 46241080 */  add.d     $f2, $f2, $f4
 /* CCD0E4 80241DD4 AE000074 */  sw        $zero, 0x74($s0)
 /* CCD0E8 80241DD8 46240000 */  add.d     $f0, $f0, $f4

@@ -18,13 +18,13 @@ glabel func_80240040_A9CC70
 /* A9CCA4 80240074 24020014 */   addiu    $v0, $zero, 0x14
 /* A9CCA8 80240078 808300B4 */  lb        $v1, 0xb4($a0)
 /* A9CCAC 8024007C 10620006 */  beq       $v1, $v0, .L80240098
-/* A9CCB0 80240080 00000000 */   nop      
+/* A9CCB0 80240080 00000000 */   nop
 .L80240084:
 /* A9CCB4 80240084 8C820014 */  lw        $v0, 0x14($a0)
 /* A9CCB8 80240088 3C03FFFF */  lui       $v1, 0xffff
 /* A9CCBC 8024008C 00431024 */  and       $v0, $v0, $v1
 /* A9CCC0 80240090 10400005 */  beqz      $v0, .L802400A8
-/* A9CCC4 80240094 00000000 */   nop      
+/* A9CCC4 80240094 00000000 */   nop
 .L80240098:
 /* A9CCC8 80240098 0C039769 */  jal       set_action_state
 /* A9CCCC 8024009C 0000202D */   daddu    $a0, $zero, $zero

@@ -8,7 +8,7 @@ glabel func_802404B4_C7E634
 /* C7E640 802404C0 0C0B1EAF */  jal       get_variable
 /* C7E644 802404C4 8C450000 */   lw       $a1, ($v0)
 /* C7E648 802404C8 44820000 */  mtc1      $v0, $f0
-/* C7E64C 802404CC 00000000 */  nop       
+/* C7E64C 802404CC 00000000 */  nop
 /* C7E650 802404D0 46800020 */  cvt.s.w   $f0, $f0
 /* C7E654 802404D4 8FBF0010 */  lw        $ra, 0x10($sp)
 /* C7E658 802404D8 24020002 */  addiu     $v0, $zero, 2

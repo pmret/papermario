@@ -42,11 +42,11 @@ glabel func_80240BB8_CB5BB8
 .L80240C4C:
 /* CB5C4C 80240C4C 8E220070 */  lw        $v0, 0x70($s1)
 /* CB5C50 80240C50 18400034 */  blez      $v0, .L80240D24
-/* CB5C54 80240C54 00000000 */   nop      
+/* CB5C54 80240C54 00000000 */   nop
 /* CB5C58 80240C58 C62C0074 */  lwc1      $f12, 0x74($s1)
 /* CB5C5C 80240C5C 46806320 */  cvt.s.w   $f12, $f12
 /* CB5C60 80240C60 44820000 */  mtc1      $v0, $f0
-/* CB5C64 80240C64 00000000 */  nop       
+/* CB5C64 80240C64 00000000 */  nop
 /* CB5C68 80240C68 46800020 */  cvt.s.w   $f0, $f0
 /* CB5C6C 80240C6C 46000021 */  cvt.d.s   $f0, $f0
 /* CB5C70 80240C70 46220003 */  div.d     $f0, $f0, $f2
@@ -77,23 +77,23 @@ glabel func_80240BB8_CB5BB8
 /* CB5CD0 80240CD0 27A70030 */   addiu    $a3, $sp, 0x30
 .L80240CD4:
 /* CB5CD4 80240CD4 10400007 */  beqz      $v0, .L80240CF4
-/* CB5CD8 80240CD8 00000000 */   nop      
+/* CB5CD8 80240CD8 00000000 */   nop
 /* CB5CDC 80240CDC 4616A082 */  mul.s     $f2, $f20, $f22
-/* CB5CE0 80240CE0 00000000 */  nop       
+/* CB5CE0 80240CE0 00000000 */  nop
 /* CB5CE4 80240CE4 C7A0002C */  lwc1      $f0, 0x2c($sp)
 /* CB5CE8 80240CE8 46180000 */  add.s     $f0, $f0, $f24
 /* CB5CEC 80240CEC 08090340 */  j         .L80240D00
 /* CB5CF0 80240CF0 46020000 */   add.s    $f0, $f0, $f2
 .L80240CF4:
 /* CB5CF4 80240CF4 4616A002 */  mul.s     $f0, $f20, $f22
-/* CB5CF8 80240CF8 00000000 */  nop       
+/* CB5CF8 80240CF8 00000000 */  nop
 /* CB5CFC 80240CFC 4600D000 */  add.s     $f0, $f26, $f0
 .L80240D00:
 /* CB5D00 80240D00 E600003C */  swc1      $f0, 0x3c($s0)
 /* CB5D04 80240D04 8E220074 */  lw        $v0, 0x74($s1)
 /* CB5D08 80240D08 2442000A */  addiu     $v0, $v0, 0xa
 /* CB5D0C 80240D0C 44826000 */  mtc1      $v0, $f12
-/* CB5D10 80240D10 00000000 */  nop       
+/* CB5D10 80240D10 00000000 */  nop
 /* CB5D14 80240D14 0C00A6C9 */  jal       clamp_angle
 /* CB5D18 80240D18 46806320 */   cvt.s.w  $f12, $f12
 /* CB5D1C 80240D1C 4600020D */  trunc.w.s $f8, $f0
@@ -105,7 +105,7 @@ glabel func_80240BB8_CB5BB8
 /* CB5D30 80240D30 860200A8 */  lh        $v0, 0xa8($s0)
 /* CB5D34 80240D34 C600003C */  lwc1      $f0, 0x3c($s0)
 /* CB5D38 80240D38 44821000 */  mtc1      $v0, $f2
-/* CB5D3C 80240D3C 00000000 */  nop       
+/* CB5D3C 80240D3C 00000000 */  nop
 /* CB5D40 80240D40 468010A0 */  cvt.s.w   $f2, $f2
 /* CB5D44 80240D44 3C02800F */  lui       $v0, %hi(gPlayerStatusPtr)
 /* CB5D48 80240D48 8C427B30 */  lw        $v0, %lo(gPlayerStatusPtr)($v0)
@@ -118,7 +118,7 @@ glabel func_80240BB8_CB5BB8
 /* CB5D64 80240D64 46240000 */  add.d     $f0, $f0, $f4
 /* CB5D68 80240D68 460010A1 */  cvt.d.s   $f2, $f2
 /* CB5D6C 80240D6C 4620103C */  c.lt.d    $f2, $f0
-/* CB5D70 80240D70 00000000 */  nop       
+/* CB5D70 80240D70 00000000 */  nop
 /* CB5D74 80240D74 4500002E */  bc1f      .L80240E30
 /* CB5D78 80240D78 0280202D */   daddu    $a0, $s4, $zero
 /* CB5D7C 80240D7C 24020001 */  addiu     $v0, $zero, 1
@@ -140,7 +140,7 @@ glabel func_80240BB8_CB5BB8
 /* CB5DBC 80240DBC 3C01C1A0 */  lui       $at, 0xc1a0
 /* CB5DC0 80240DC0 44812000 */  mtc1      $at, $f4
 /* CB5DC4 80240DC4 44834000 */  mtc1      $v1, $f8
-/* CB5DC8 80240DC8 00000000 */  nop       
+/* CB5DC8 80240DC8 00000000 */  nop
 /* CB5DCC 80240DCC 46804220 */  cvt.s.w   $f8, $f8
 /* CB5DD0 80240DD0 44074000 */  mfc1      $a3, $f8
 /* CB5DD4 80240DD4 27A20038 */  addiu     $v0, $sp, 0x38
@@ -171,10 +171,10 @@ glabel func_80240BB8_CB5BB8
 .L80240E30:
 /* CB5E30 80240E30 8602008C */  lh        $v0, 0x8c($s0)
 /* CB5E34 80240E34 14400025 */  bnez      $v0, .L80240ECC
-/* CB5E38 80240E38 00000000 */   nop      
+/* CB5E38 80240E38 00000000 */   nop
 /* CB5E3C 80240E3C 8602008E */  lh        $v0, 0x8e($s0)
 /* CB5E40 80240E40 1C400022 */  bgtz      $v0, .L80240ECC
-/* CB5E44 80240E44 00000000 */   nop      
+/* CB5E44 80240E44 00000000 */   nop
 /* CB5E48 80240E48 8E620074 */  lw        $v0, 0x74($s3)
 /* CB5E4C 80240E4C 2442FFFF */  addiu     $v0, $v0, -1
 /* CB5E50 80240E50 1840001D */  blez      $v0, .L80240EC8
@@ -183,7 +183,7 @@ glabel func_80240BB8_CB5BB8
 /* CB5E5C 80240E5C 9442002A */  lhu       $v0, 0x2a($v0)
 /* CB5E60 80240E60 30420010 */  andi      $v0, $v0, 0x10
 /* CB5E64 80240E64 14400007 */  bnez      $v0, .L80240E84
-/* CB5E68 80240E68 00000000 */   nop      
+/* CB5E68 80240E68 00000000 */   nop
 /* CB5E6C 80240E6C C600000C */  lwc1      $f0, 0xc($s0)
 /* CB5E70 80240E70 3C014334 */  lui       $at, 0x4334
 /* CB5E74 80240E74 44816000 */  mtc1      $at, $f12

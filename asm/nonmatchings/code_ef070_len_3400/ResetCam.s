@@ -110,9 +110,9 @@ glabel ResetCam
 /* F1410 802CCA60 C6000484 */  lwc1      $f0, 0x484($s0)
 /* F1414 802CCA64 3C013F80 */  lui       $at, 0x3f80
 /* F1418 802CCA68 44811000 */  mtc1      $at, $f2
-/* F141C 802CCA6C 00000000 */  nop       
+/* F141C 802CCA6C 00000000 */  nop
 /* F1420 802CCA70 4600103E */  c.le.s    $f2, $f0
-/* F1424 802CCA74 00000000 */  nop       
+/* F1424 802CCA74 00000000 */  nop
 /* F1428 802CCA78 45000007 */  bc1f      .L802CCA98
 /* F142C 802CCA7C 0000102D */   daddu    $v0, $zero, $zero
 /* F1430 802CCA80 24020002 */  addiu     $v0, $zero, 2

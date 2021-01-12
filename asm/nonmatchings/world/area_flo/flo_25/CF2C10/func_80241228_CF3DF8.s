@@ -49,15 +49,15 @@ glabel func_80241228_CF3DF8
 /* CF3EA0 802412D0 44802000 */  mtc1      $zero, $f4
 /* CF3EA4 802412D4 460010A1 */  cvt.d.s   $f2, $f2
 /* CF3EA8 802412D8 46241082 */  mul.d     $f2, $f2, $f4
-/* CF3EAC 802412DC 00000000 */  nop       
+/* CF3EAC 802412DC 00000000 */  nop
 /* CF3EB0 802412E0 C7A0001C */  lwc1      $f0, 0x1c($sp)
 /* CF3EB4 802412E4 46000021 */  cvt.d.s   $f0, $f0
 /* CF3EB8 802412E8 46240002 */  mul.d     $f0, $f0, $f4
-/* CF3EBC 802412EC 00000000 */  nop       
+/* CF3EBC 802412EC 00000000 */  nop
 /* CF3EC0 802412F0 3C013FE0 */  lui       $at, 0x3fe0
 /* CF3EC4 802412F4 44812800 */  mtc1      $at, $f5
 /* CF3EC8 802412F8 44802000 */  mtc1      $zero, $f4
-/* CF3ECC 802412FC 00000000 */  nop       
+/* CF3ECC 802412FC 00000000 */  nop
 /* CF3ED0 80241300 46241080 */  add.d     $f2, $f2, $f4
 /* CF3ED4 80241304 AE000074 */  sw        $zero, 0x74($s0)
 /* CF3ED8 80241308 46240000 */  add.d     $f0, $f0, $f4

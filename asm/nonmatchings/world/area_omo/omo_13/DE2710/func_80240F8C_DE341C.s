@@ -28,7 +28,7 @@ glabel func_80240F8C_DE341C
 /* DE3470 80240FE0 00220821 */  addu      $at, $at, $v0
 /* DE3474 80240FE4 AC203220 */  sw        $zero, %lo(func_80243220_DC04D0)($at)
 /* DE3478 80240FE8 08090406 */  j         .L80241018
-/* DE347C 80240FEC 00000000 */   nop      
+/* DE347C 80240FEC 00000000 */   nop
 .L80240FF0:
 /* DE3480 80240FF0 3C038024 */  lui       $v1, %hi(func_80243220_DC04D0)
 /* DE3484 80240FF4 24633220 */  addiu     $v1, $v1, %lo(func_80243220_DC04D0)

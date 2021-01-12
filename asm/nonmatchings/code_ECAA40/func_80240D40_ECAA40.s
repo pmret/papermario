@@ -15,6 +15,6 @@ glabel func_80240D40_ECAA40
 /* ECAA68 80240D68 24020002 */  addiu     $v0, $zero, 2
 /* ECAA6C 80240D6C 03E00008 */  jr        $ra
 /* ECAA70 80240D70 27BD0020 */   addiu    $sp, $sp, 0x20
-/* ECAA74 80240D74 00000000 */  nop       
-/* ECAA78 80240D78 00000000 */  nop       
-/* ECAA7C 80240D7C 00000000 */  nop       
+/* ECAA74 80240D74 00000000 */  nop
+/* ECAA78 80240D78 00000000 */  nop
+/* ECAA7C 80240D7C 00000000 */  nop

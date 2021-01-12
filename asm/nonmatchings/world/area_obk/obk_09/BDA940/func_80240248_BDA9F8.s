@@ -17,7 +17,7 @@ glabel func_80240248_BDA9F8
 /* BDAA28 80240278 C6200038 */  lwc1      $f0, 0x38($s1)
 /* BDAA2C 8024027C 3C014000 */  lui       $at, 0x4000
 /* BDAA30 80240280 44811000 */  mtc1      $at, $f2
-/* BDAA34 80240284 00000000 */  nop       
+/* BDAA34 80240284 00000000 */  nop
 /* BDAA38 80240288 46020001 */  sub.s     $f0, $f0, $f2
 /* BDAA3C 8024028C 3C014140 */  lui       $at, 0x4140
 /* BDAA40 80240290 44811000 */  mtc1      $at, $f2
@@ -66,5 +66,5 @@ glabel func_80240248_BDA9F8
 /* BDAAEC 8024033C 0000102D */  daddu     $v0, $zero, $zero
 /* BDAAF0 80240340 03E00008 */  jr        $ra
 /* BDAAF4 80240344 27BD0020 */   addiu    $sp, $sp, 0x20
-/* BDAAF8 80240348 00000000 */  nop       
-/* BDAAFC 8024034C 00000000 */  nop       
+/* BDAAF8 80240348 00000000 */  nop
+/* BDAAFC 8024034C 00000000 */  nop

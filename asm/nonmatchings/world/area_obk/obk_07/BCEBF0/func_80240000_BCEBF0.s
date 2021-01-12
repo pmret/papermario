@@ -26,7 +26,7 @@ glabel func_80240000_BCEBF0
 /* BCEC40 80240050 1440FFFA */  bnez      $v0, .L8024003C
 /* BCEC44 80240054 24A50004 */   addiu    $a1, $a1, 4
 /* BCEC48 80240058 08090027 */  j         .L8024009C
-/* BCEC4C 8024005C 00000000 */   nop      
+/* BCEC4C 8024005C 00000000 */   nop
 .L80240060:
 /* BCEC50 80240060 0000182D */  daddu     $v1, $zero, $zero
 /* BCEC54 80240064 0040282D */  daddu     $a1, $v0, $zero

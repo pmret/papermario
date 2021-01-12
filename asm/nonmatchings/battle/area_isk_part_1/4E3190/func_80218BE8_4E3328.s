@@ -7,7 +7,7 @@ glabel func_80218BE8_4E3328
 /* 4E3330 80218BF0 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 4E3334 80218BF4 AFBF0010 */  sw        $ra, 0x10($sp)
 /* 4E3338 80218BF8 0C016914 */  jal       remove_effect
-/* 4E333C 80218BFC 00000000 */   nop      
+/* 4E333C 80218BFC 00000000 */   nop
 /* 4E3340 80218C00 8FBF0010 */  lw        $ra, 0x10($sp)
 /* 4E3344 80218C04 24020002 */  addiu     $v0, $zero, 2
 /* 4E3348 80218C08 03E00008 */  jr        $ra

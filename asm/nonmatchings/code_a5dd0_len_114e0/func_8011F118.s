@@ -83,7 +83,7 @@ glabel func_8011F118
 /* B594C 8011F24C 0000882D */   daddu    $s1, $zero, $zero
 /* B5950 8011F250 8E6400FC */  lw        $a0, 0xfc($s3)
 /* B5954 8011F254 0C046C04 */  jal       get_model_list_index_from_tree_index
-/* B5958 8011F258 00000000 */   nop      
+/* B5958 8011F258 00000000 */   nop
 /* B595C 8011F25C 0C046B4C */  jal       get_model_from_list_index
 /* B5960 8011F260 0040202D */   daddu    $a0, $v0, $zero
 /* B5964 8011F264 27A40010 */  addiu     $a0, $sp, 0x10

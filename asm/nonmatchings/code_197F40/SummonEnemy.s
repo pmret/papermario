@@ -20,7 +20,7 @@ glabel SummonEnemy
 /* 19C47C 8026DB9C 10620011 */  beq       $v1, $v0, .L8026DBE4
 /* 19C480 8026DBA0 0000102D */   daddu    $v0, $zero, $zero
 /* 19C484 8026DBA4 0809B77A */  j         .L8026DDE8
-/* 19C488 8026DBA8 00000000 */   nop      
+/* 19C488 8026DBA8 00000000 */   nop
 .L8026DBAC:
 /* 19C48C 8026DBAC 8E050000 */  lw        $a1, ($s0)
 /* 19C490 8026DBB0 26100004 */  addiu     $s0, $s0, 4
@@ -116,7 +116,7 @@ glabel SummonEnemy
 /* 19C5D0 8026DCF0 1440FFDE */  bnez      $v0, .L8026DC6C
 /* 19C5D4 8026DCF4 25AD0002 */   addiu    $t5, $t5, 2
 /* 19C5D8 8026DCF8 0809B775 */  j         .L8026DDD4
-/* 19C5DC 8026DCFC 00000000 */   nop      
+/* 19C5DC 8026DCFC 00000000 */   nop
 .L8026DD00:
 /* 19C5E0 8026DD00 822B0171 */  lb        $t3, 0x171($s1)
 /* 19C5E4 8026DD04 1960000D */  blez      $t3, .L8026DD3C

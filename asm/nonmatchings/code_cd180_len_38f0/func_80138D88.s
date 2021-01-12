@@ -26,7 +26,7 @@ glabel func_80138D88
 /* CF4CC 80138DCC 1040001E */  beqz      $v0, .L80138E48
 /* CF4D0 80138DD0 00A7102A */   slt      $v0, $a1, $a3
 /* CF4D4 80138DD4 1040001C */  beqz      $v0, .L80138E48
-/* CF4D8 80138DD8 00000000 */   nop      
+/* CF4D8 80138DD8 00000000 */   nop
 /* CF4DC 80138DDC 04820001 */  bltzl     $a0, .L80138DE4
 /* CF4E0 80138DE0 0000202D */   daddu    $a0, $zero, $zero
 .L80138DE4:
@@ -56,9 +56,9 @@ glabel func_80138D88
 /* CF528 80138E28 240700EF */   addiu    $a3, $zero, 0xef
 .L80138E2C:
 /* CF52C 80138E2C 10860006 */  beq       $a0, $a2, .L80138E48
-/* CF530 80138E30 00000000 */   nop      
+/* CF530 80138E30 00000000 */   nop
 /* CF534 80138E34 10A70004 */  beq       $a1, $a3, .L80138E48
-/* CF538 80138E38 00000000 */   nop      
+/* CF538 80138E38 00000000 */   nop
 /* CF53C 80138E3C C7A00030 */  lwc1      $f0, 0x30($sp)
 /* CF540 80138E40 0C04E1D0 */  jal       func_80138740
 /* CF544 80138E44 E7A00010 */   swc1     $f0, 0x10($sp)

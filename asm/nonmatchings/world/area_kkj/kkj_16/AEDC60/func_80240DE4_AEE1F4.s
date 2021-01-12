@@ -31,18 +31,18 @@ glabel func_80240DE4_AEE1F4
 /* AEE25C 80240E4C 0C0B1EAF */  jal       get_variable
 /* AEE260 80240E50 0040802D */   daddu    $s0, $v0, $zero
 /* AEE264 80240E54 44901000 */  mtc1      $s0, $f2
-/* AEE268 80240E58 00000000 */  nop       
+/* AEE268 80240E58 00000000 */  nop
 /* AEE26C 80240E5C 468010A0 */  cvt.s.w   $f2, $f2
 /* AEE270 80240E60 44936000 */  mtc1      $s3, $f12
-/* AEE274 80240E64 00000000 */  nop       
+/* AEE274 80240E64 00000000 */  nop
 /* AEE278 80240E68 46806320 */  cvt.s.w   $f12, $f12
 /* AEE27C 80240E6C 44061000 */  mfc1      $a2, $f2
 /* AEE280 80240E70 44821000 */  mtc1      $v0, $f2
-/* AEE284 80240E74 00000000 */  nop       
+/* AEE284 80240E74 00000000 */  nop
 /* AEE288 80240E78 468010A0 */  cvt.s.w   $f2, $f2
 /* AEE28C 80240E7C 44071000 */  mfc1      $a3, $f2
 /* AEE290 80240E80 44927000 */  mtc1      $s2, $f14
-/* AEE294 80240E84 00000000 */  nop       
+/* AEE294 80240E84 00000000 */  nop
 /* AEE298 80240E88 0C00A720 */  jal       atan2
 /* AEE29C 80240E8C 468073A0 */   cvt.s.w  $f14, $f14
 /* AEE2A0 80240E90 0220202D */  daddu     $a0, $s1, $zero

@@ -60,18 +60,18 @@ glabel func_80240CC0_8CED30
 /* 8CEE08 80240D98 C6200038 */  lwc1      $f0, 0x38($s1)
 /* 8CEE0C 80240D9C 4600018D */  trunc.w.s $f6, $f0
 /* 8CEE10 80240DA0 44023000 */  mfc1      $v0, $f6
-/* 8CEE14 80240DA4 00000000 */  nop       
+/* 8CEE14 80240DA4 00000000 */  nop
 /* 8CEE18 80240DA8 A6420010 */  sh        $v0, 0x10($s2)
 /* 8CEE1C 80240DAC C620003C */  lwc1      $f0, 0x3c($s1)
 /* 8CEE20 80240DB0 4600018D */  trunc.w.s $f6, $f0
 /* 8CEE24 80240DB4 44023000 */  mfc1      $v0, $f6
-/* 8CEE28 80240DB8 00000000 */  nop       
+/* 8CEE28 80240DB8 00000000 */  nop
 /* 8CEE2C 80240DBC A6420012 */  sh        $v0, 0x12($s2)
 /* 8CEE30 80240DC0 C6200040 */  lwc1      $f0, 0x40($s1)
 /* 8CEE34 80240DC4 A2430007 */  sb        $v1, 7($s2)
 /* 8CEE38 80240DC8 4600018D */  trunc.w.s $f6, $f0
 /* 8CEE3C 80240DCC 44023000 */  mfc1      $v0, $f6
-/* 8CEE40 80240DD0 00000000 */  nop       
+/* 8CEE40 80240DD0 00000000 */  nop
 /* 8CEE44 80240DD4 A6420014 */  sh        $v0, 0x14($s2)
 .L80240DD8:
 /* 8CEE48 80240DD8 8FBF0020 */  lw        $ra, 0x20($sp)

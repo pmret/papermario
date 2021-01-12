@@ -35,7 +35,7 @@ glabel func_80240350_B4ADC0
 /* B4AE34 802403C4 0C0B1EAF */  jal       get_variable
 /* B4AE38 802403C8 0220202D */   daddu    $a0, $s1, $zero
 /* B4AE3C 802403CC 1440002A */  bnez      $v0, .L80240478
-/* B4AE40 802403D0 00000000 */   nop      
+/* B4AE40 802403D0 00000000 */   nop
 /* B4AE44 802403D4 8E240078 */  lw        $a0, 0x78($s1)
 /* B4AE48 802403D8 0C044181 */  jal       get_shadow_by_index
 /* B4AE4C 802403DC 8E300074 */   lw       $s0, 0x74($s1)
@@ -80,7 +80,7 @@ glabel func_80240350_B4ADC0
 .L80240478:
 /* B4AEE8 80240478 8E240078 */  lw        $a0, 0x78($s1)
 /* B4AEEC 8024047C 0C0448CA */  jal       func_80112328
-/* B4AEF0 80240480 00000000 */   nop      
+/* B4AEF0 80240480 00000000 */   nop
 /* B4AEF4 80240484 24020002 */  addiu     $v0, $zero, 2
 .L80240488:
 /* B4AEF8 80240488 8FBF0038 */  lw        $ra, 0x38($sp)
@@ -88,4 +88,4 @@ glabel func_80240350_B4ADC0
 /* B4AF00 80240490 8FB00030 */  lw        $s0, 0x30($sp)
 /* B4AF04 80240494 03E00008 */  jr        $ra
 /* B4AF08 80240498 27BD0040 */   addiu    $sp, $sp, 0x40
-/* B4AF0C 8024049C 00000000 */  nop       
+/* B4AF0C 8024049C 00000000 */  nop

@@ -16,13 +16,13 @@ glabel func_802A11D4_72C784
 /* 72C7B0 802A1200 0C099CAB */  jal       heroes_is_ability_active
 /* 72C7B4 802A1204 2405001D */   addiu    $a1, $zero, 0x1d
 /* 72C7B8 802A1208 10400007 */  beqz      $v0, .L802A1228
-/* 72C7BC 802A120C 00000000 */   nop      
+/* 72C7BC 802A120C 00000000 */   nop
 /* 72C7C0 802A1210 1A000005 */  blez      $s0, .L802A1228
-/* 72C7C4 802A1214 00000000 */   nop      
+/* 72C7C4 802A1214 00000000 */   nop
 /* 72C7C8 802A1218 3C04802A */  lui       $a0, %hi(D_802A25C0)
 /* 72C7CC 802A121C 8C8425C0 */  lw        $a0, %lo(D_802A25C0)($a0)
 /* 72C7D0 802A1220 0C05123D */  jal       free_icon
-/* 72C7D4 802A1224 00000000 */   nop      
+/* 72C7D4 802A1224 00000000 */   nop
 .L802A1228:
 /* 72C7D8 802A1228 8FBF0014 */  lw        $ra, 0x14($sp)
 /* 72C7DC 802A122C 8FB00010 */  lw        $s0, 0x10($sp)

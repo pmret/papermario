@@ -21,13 +21,13 @@ glabel func_802D1270
 /* F5C60 802D12B0 8E050000 */  lw        $a1, ($s0)
 /* F5C64 802D12B4 26100004 */  addiu     $s0, $s0, 4
 /* F5C68 802D12B8 4482C000 */  mtc1      $v0, $f24
-/* F5C6C 802D12BC 00000000 */  nop       
+/* F5C6C 802D12BC 00000000 */  nop
 /* F5C70 802D12C0 4680C620 */  cvt.s.w   $f24, $f24
 /* F5C74 802D12C4 0C0B1EAF */  jal       get_variable
 /* F5C78 802D12C8 0220202D */   daddu    $a0, $s1, $zero
 /* F5C7C 802D12CC 8E050000 */  lw        $a1, ($s0)
 /* F5C80 802D12D0 4482B000 */  mtc1      $v0, $f22
-/* F5C84 802D12D4 00000000 */  nop       
+/* F5C84 802D12D4 00000000 */  nop
 /* F5C88 802D12D8 4680B5A0 */  cvt.s.w   $f22, $f22
 /* F5C8C 802D12DC 0C0B210B */  jal       get_float_variable
 /* F5C90 802D12E0 0220202D */   daddu    $a0, $s1, $zero
@@ -46,16 +46,16 @@ glabel func_802D1270
 /* F5CC4 802D1314 46140503 */  div.s     $f20, $f0, $f20
 /* F5CC8 802D1318 4600A10D */  trunc.w.s $f4, $f20
 /* F5CCC 802D131C 44042000 */  mfc1      $a0, $f4
-/* F5CD0 802D1320 00000000 */  nop       
+/* F5CD0 802D1320 00000000 */  nop
 /* F5CD4 802D1324 44841000 */  mtc1      $a0, $f2
-/* F5CD8 802D1328 00000000 */  nop       
+/* F5CD8 802D1328 00000000 */  nop
 /* F5CDC 802D132C 468010A0 */  cvt.s.w   $f2, $f2
 /* F5CE0 802D1330 46020003 */  div.s     $f0, $f0, $f2
 /* F5CE4 802D1334 AE240070 */  sw        $a0, 0x70($s1)
 /* F5CE8 802D1338 8E450080 */  lw        $a1, 0x80($s2)
 /* F5CEC 802D133C 44060000 */  mfc1      $a2, $f0
 /* F5CF0 802D1340 0C0389DE */  jal       move_player
-/* F5CF4 802D1344 00000000 */   nop      
+/* F5CF4 802D1344 00000000 */   nop
 .L802D1348:
 /* F5CF8 802D1348 8E230070 */  lw        $v1, 0x70($s1)
 /* F5CFC 802D134C 2463FFFF */  addiu     $v1, $v1, -1

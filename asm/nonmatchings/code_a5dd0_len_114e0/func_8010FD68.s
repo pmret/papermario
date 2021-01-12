@@ -10,7 +10,7 @@ glabel func_8010FD68
 /* A6478 8010FD78 0C043EF6 */  jal       func_8010FBD8
 /* A647C 8010FD7C 0200202D */   daddu    $a0, $s0, $zero
 /* A6480 8010FD80 1440FFFD */  bnez      $v0, .L8010FD78
-/* A6484 8010FD84 00000000 */   nop      
+/* A6484 8010FD84 00000000 */   nop
 /* A6488 8010FD88 8FBF0014 */  lw        $ra, 0x14($sp)
 /* A648C 8010FD8C 8FB00010 */  lw        $s0, 0x10($sp)
 /* A6490 8010FD90 03E00008 */  jr        $ra

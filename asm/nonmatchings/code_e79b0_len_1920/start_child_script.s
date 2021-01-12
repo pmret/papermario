@@ -29,7 +29,7 @@ glabel start_child_script
 /* E81D0 802C3820 24040168 */   addiu    $a0, $zero, 0x168
 .L802C3824:
 /* E81D4 802C3824 080B0E09 */  j         .L802C3824
-/* E81D8 802C3828 00000000 */   nop      
+/* E81D8 802C3828 00000000 */   nop
 .L802C382C:
 /* E81DC 802C382C 0C00AB39 */  jal       heap_malloc
 /* E81E0 802C3830 0060982D */   daddu    $s3, $v1, $zero
@@ -47,7 +47,7 @@ glabel start_child_script
 /* E8210 802C3860 ACA30000 */   sw       $v1, ($a1)
 .L802C3864:
 /* E8214 802C3864 080B0E19 */  j         .L802C3864
-/* E8218 802C3868 00000000 */   nop      
+/* E8218 802C3868 00000000 */   nop
 .L802C386C:
 /* E821C 802C386C 92220000 */  lbu       $v0, ($s1)
 /* E8220 802C3870 AE300068 */  sw        $s0, 0x68($s1)
@@ -118,7 +118,7 @@ glabel start_child_script
 /* E831C 802C396C 3C02802E */  lui       $v0, %hi(D_802D9CA4)
 /* E8320 802C3970 8C429CA4 */  lw        $v0, %lo(D_802D9CA4)($v0)
 /* E8324 802C3974 1040000E */  beqz      $v0, .L802C39B0
-/* E8328 802C3978 00000000 */   nop      
+/* E8328 802C3978 00000000 */   nop
 /* E832C 802C397C 3C05802E */  lui       $a1, %hi(gScriptListCount)
 /* E8330 802C3980 24A5AC98 */  addiu     $a1, $a1, %lo(gScriptListCount)
 /* E8334 802C3984 8CA20000 */  lw        $v0, ($a1)

@@ -41,7 +41,7 @@ glabel func_80240F60_ACBA80
 /* ACBB10 80240FF0 0C00A7B5 */  jal       dist2D
 /* ACBB14 80240FF4 24140001 */   addiu    $s4, $zero, 1
 /* ACBB18 80240FF8 4618003C */  c.lt.s    $f0, $f24
-/* ACBB1C 80240FFC 00000000 */  nop       
+/* ACBB1C 80240FFC 00000000 */  nop
 /* ACBB20 80241000 45030001 */  bc1tl     .L80241008
 /* ACBB24 80241004 0000A02D */   daddu    $s4, $zero, $zero
 .L80241008:
@@ -56,13 +56,13 @@ glabel func_80240F60_ACBA80
 /* ACBB48 80241028 0C00A8BB */  jal       sin_deg
 /* ACBB4C 8024102C 4600A306 */   mov.s    $f12, $f20
 /* ACBB50 80241030 46180002 */  mul.s     $f0, $f0, $f24
-/* ACBB54 80241034 00000000 */  nop       
+/* ACBB54 80241034 00000000 */  nop
 /* ACBB58 80241038 C6560028 */  lwc1      $f22, 0x28($s2)
 /* ACBB5C 8024103C 4600B580 */  add.s     $f22, $f22, $f0
 /* ACBB60 80241040 0C00A8D4 */  jal       cos_deg
 /* ACBB64 80241044 4600A306 */   mov.s    $f12, $f20
 /* ACBB68 80241048 46180002 */  mul.s     $f0, $f0, $f24
-/* ACBB6C 8024104C 00000000 */  nop       
+/* ACBB6C 8024104C 00000000 */  nop
 /* ACBB70 80241050 0260202D */  daddu     $a0, $s3, $zero
 /* ACBB74 80241054 02A0282D */  daddu     $a1, $s5, $zero
 /* ACBB78 80241058 C6540030 */  lwc1      $f20, 0x30($s2)
@@ -95,4 +95,4 @@ glabel func_80240F60_ACBA80
 /* ACBBE0 802410C0 D7B40038 */  ldc1      $f20, 0x38($sp)
 /* ACBBE4 802410C4 03E00008 */  jr        $ra
 /* ACBBE8 802410C8 27BD0050 */   addiu    $sp, $sp, 0x50
-/* ACBBEC 802410CC 00000000 */  nop       
+/* ACBBEC 802410CC 00000000 */  nop

@@ -22,7 +22,7 @@ glabel func_80242DB8_BE6568
 /* BE65AC 80242DFC 0C01242D */  jal       func_800490B4
 /* BE65B0 80242E00 0040802D */   daddu    $s0, $v0, $zero
 /* BE65B4 80242E04 1040000C */  beqz      $v0, .L80242E38
-/* BE65B8 80242E08 00000000 */   nop      
+/* BE65B8 80242E08 00000000 */   nop
 /* BE65BC 80242E0C C60C0038 */  lwc1      $f12, 0x38($s0)
 /* BE65C0 80242E10 3C02800F */  lui       $v0, %hi(gPlayerStatusPtr)
 /* BE65C4 80242E14 8C427B30 */  lw        $v0, %lo(gPlayerStatusPtr)($v0)
@@ -45,10 +45,10 @@ glabel func_80242DB8_BE6568
 /* BE6604 80242E54 46802120 */  cvt.s.w   $f4, $f4
 /* BE6608 80242E58 44072000 */  mfc1      $a3, $f4
 /* BE660C 80242E5C 0C00A7B5 */  jal       dist2D
-/* BE6610 80242E60 00000000 */   nop      
+/* BE6610 80242E60 00000000 */   nop
 /* BE6614 80242E64 C6020018 */  lwc1      $f2, 0x18($s0)
 /* BE6618 80242E68 4602003E */  c.le.s    $f0, $f2
-/* BE661C 80242E6C 00000000 */  nop       
+/* BE661C 80242E6C 00000000 */  nop
 /* BE6620 80242E70 45000005 */  bc1f      .L80242E88
 /* BE6624 80242E74 2402000A */   addiu    $v0, $zero, 0xa
 /* BE6628 80242E78 A602008E */  sh        $v0, 0x8e($s0)
@@ -58,7 +58,7 @@ glabel func_80242DB8_BE6568
 .L80242E88:
 /* BE6638 80242E88 8602008C */  lh        $v0, 0x8c($s0)
 /* BE663C 80242E8C 14400011 */  bnez      $v0, .L80242ED4
-/* BE6640 80242E90 00000000 */   nop      
+/* BE6640 80242E90 00000000 */   nop
 /* BE6644 80242E94 C60C0038 */  lwc1      $f12, 0x38($s0)
 /* BE6648 80242E98 8E4200D0 */  lw        $v0, 0xd0($s2)
 /* BE664C 80242E9C C60E0040 */  lwc1      $f14, 0x40($s0)
@@ -69,7 +69,7 @@ glabel func_80242DB8_BE6568
 /* BE6660 80242EB0 46802120 */  cvt.s.w   $f4, $f4
 /* BE6664 80242EB4 44072000 */  mfc1      $a3, $f4
 /* BE6668 80242EB8 0C00A720 */  jal       atan2
-/* BE666C 80242EBC 00000000 */   nop      
+/* BE666C 80242EBC 00000000 */   nop
 /* BE6670 80242EC0 8E050018 */  lw        $a1, 0x18($s0)
 /* BE6674 80242EC4 44060000 */  mfc1      $a2, $f0
 /* BE6678 80242EC8 0200202D */  daddu     $a0, $s0, $zero

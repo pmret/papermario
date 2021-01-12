@@ -173,4 +173,4 @@ glabel func_E00C0760
 /* 3BD760 E00C0A00 8FB00098 */  lw        $s0, 0x98($sp)
 /* 3BD764 E00C0A04 03E00008 */  jr        $ra
 /* 3BD768 E00C0A08 27BD00B8 */   addiu    $sp, $sp, 0xb8
-/* 3BD76C E00C0A0C 00000000 */  nop       
+/* 3BD76C E00C0A0C 00000000 */  nop

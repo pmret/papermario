@@ -14,7 +14,7 @@ glabel func_80241580_EAA060
 /* EAA084 802415A4 0C00F94D */  jal       func_8003E534
 /* EAA088 802415A8 0040202D */   daddu    $a0, $v0, $zero
 /* EAA08C 802415AC 10400005 */  beqz      $v0, .L802415C4
-/* EAA090 802415B0 00000000 */   nop      
+/* EAA090 802415B0 00000000 */   nop
 /* EAA094 802415B4 8E050000 */  lw        $a1, ($s0)
 /* EAA098 802415B8 844600A8 */  lh        $a2, 0xa8($v0)
 /* EAA09C 802415BC 0C0B551A */  jal       func_802D5468

@@ -16,7 +16,7 @@ glabel func_80240BB8_DCD888
 /* DCD8B4 80240BE4 A462008E */  sh        $v0, 0x8e($v1)
 /* DCD8B8 80240BE8 00021400 */  sll       $v0, $v0, 0x10
 /* DCD8BC 80240BEC 14400005 */  bnez      $v0, .L80240C04
-/* DCD8C0 80240BF0 00000000 */   nop      
+/* DCD8C0 80240BF0 00000000 */   nop
 /* DCD8C4 80240BF4 8E0200CC */  lw        $v0, 0xcc($s0)
 /* DCD8C8 80240BF8 8C420000 */  lw        $v0, ($v0)
 /* DCD8CC 80240BFC AC620028 */  sw        $v0, 0x28($v1)

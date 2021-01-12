@@ -35,12 +35,12 @@ glabel _draw_message_box
 /* C3380 8012CC80 44801000 */  mtc1      $zero, $f2
 /* C3384 8012CC84 4600B021 */  cvt.d.s   $f0, $f22
 /* C3388 8012CC88 46220032 */  c.eq.d    $f0, $f2
-/* C338C 8012CC8C 00000000 */  nop       
+/* C338C 8012CC8C 00000000 */  nop
 /* C3390 8012CC90 45000019 */  bc1f      .L8012CCF8
 /* C3394 8012CC94 27A40020 */   addiu    $a0, $sp, 0x20
 /* C3398 8012CC98 4600A021 */  cvt.d.s   $f0, $f20
 /* C339C 8012CC9C 46220032 */  c.eq.d    $f0, $f2
-/* C33A0 8012CCA0 00000000 */  nop       
+/* C33A0 8012CCA0 00000000 */  nop
 /* C33A4 8012CCA4 45000013 */  bc1f      .L8012CCF4
 /* C33A8 8012CCA8 24040020 */   addiu    $a0, $zero, 0x20
 /* C33AC 8012CCAC 24050080 */  addiu     $a1, $zero, 0x80
@@ -67,14 +67,14 @@ glabel _draw_message_box
 /* C33F8 8012CCF8 00111400 */  sll       $v0, $s1, 0x10
 /* C33FC 8012CCFC 00021403 */  sra       $v0, $v0, 0x10
 /* C3400 8012CD00 44822000 */  mtc1      $v0, $f4
-/* C3404 8012CD04 00000000 */  nop       
+/* C3404 8012CD04 00000000 */  nop
 /* C3408 8012CD08 46802120 */  cvt.s.w   $f4, $f4
 /* C340C 8012CD0C 00121400 */  sll       $v0, $s2, 0x10
 /* C3410 8012CD10 00021403 */  sra       $v0, $v0, 0x10
 /* C3414 8012CD14 00021023 */  negu      $v0, $v0
 /* C3418 8012CD18 44052000 */  mfc1      $a1, $f4
 /* C341C 8012CD1C 44822000 */  mtc1      $v0, $f4
-/* C3420 8012CD20 00000000 */  nop       
+/* C3420 8012CD20 00000000 */  nop
 /* C3424 8012CD24 46802120 */  cvt.s.w   $f4, $f4
 /* C3428 8012CD28 0000382D */  daddu     $a3, $zero, $zero
 /* C342C 8012CD2C 3C038015 */  lui       $v1, %hi(D_8014C3C0)
@@ -114,12 +114,12 @@ glabel _draw_message_box
 /* C34B4 8012CDB4 44801000 */  mtc1      $zero, $f2
 /* C34B8 8012CDB8 4600B021 */  cvt.d.s   $f0, $f22
 /* C34BC 8012CDBC 46220032 */  c.eq.d    $f0, $f2
-/* C34C0 8012CDC0 00000000 */  nop       
+/* C34C0 8012CDC0 00000000 */  nop
 /* C34C4 8012CDC4 45000007 */  bc1f      .L8012CDE4
 /* C34C8 8012CDC8 27B00060 */   addiu    $s0, $sp, 0x60
 /* C34CC 8012CDCC 4600A021 */  cvt.d.s   $f0, $f20
 /* C34D0 8012CDD0 46220032 */  c.eq.d    $f0, $f2
-/* C34D4 8012CDD4 00000000 */  nop       
+/* C34D4 8012CDD4 00000000 */  nop
 /* C34D8 8012CDD8 4501000C */  bc1t      .L8012CE0C
 /* C34DC 8012CDDC 3C120001 */   lui      $s2, 1
 /* C34E0 8012CDE0 27B00060 */  addiu     $s0, $sp, 0x60

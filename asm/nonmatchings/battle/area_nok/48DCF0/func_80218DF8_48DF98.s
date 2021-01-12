@@ -11,4 +11,4 @@ glabel func_80218DF8_48DF98
 /* 48DFB0 80218E10 24020002 */  addiu     $v0, $zero, 2
 /* 48DFB4 80218E14 03E00008 */  jr        $ra
 /* 48DFB8 80218E18 27BD0018 */   addiu    $sp, $sp, 0x18
-/* 48DFBC 80218E1C 00000000 */  nop       
+/* 48DFBC 80218E1C 00000000 */  nop

@@ -22,14 +22,14 @@ glabel crash_monitor_thread
 /* 7C5C 8002C85C 0C0195BC */  jal       osRecvMesg
 /* 7C60 8002C860 24060001 */   addiu    $a2, $zero, 1
 /* 7C64 8002C864 0C00B1EC */  jal       func_8002C7B0
-/* 7C68 8002C868 00000000 */   nop      
+/* 7C68 8002C868 00000000 */   nop
 /* 7C6C 8002C86C 0040802D */  daddu     $s0, $v0, $zero
 /* 7C70 8002C870 1200FFF7 */  beqz      $s0, .L8002C850
-/* 7C74 8002C874 00000000 */   nop      
+/* 7C74 8002C874 00000000 */   nop
 /* 7C78 8002C878 0C019850 */  jal       osStopThread
 /* 7C7C 8002C87C 0200202D */   daddu    $a0, $s0, $zero
 /* 7C80 8002C880 0C00B0EC */  jal       crash_show_handler
 /* 7C84 8002C884 0200202D */   daddu    $a0, $s0, $zero
 .L8002C888:
 /* 7C88 8002C888 0800B222 */  j         .L8002C888
-/* 7C8C 8002C88C 00000000 */   nop      
+/* 7C8C 8002C88C 00000000 */   nop

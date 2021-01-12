@@ -16,7 +16,7 @@ glabel EnableGroup
 /* EE574 802C9BC4 0040802D */  daddu     $s0, $v0, $zero
 /* EE578 802C9BC8 2402FFFF */  addiu     $v0, $zero, -1
 /* EE57C 802C9BCC 16020007 */  bne       $s0, $v0, .L802C9BEC
-/* EE580 802C9BD0 00000000 */   nop      
+/* EE580 802C9BD0 00000000 */   nop
 /* EE584 802C9BD4 3C04802D */  lui       $a0, %hi(EnableModel)
 /* EE588 802C9BD8 24849288 */  addiu     $a0, $a0, %lo(EnableModel)
 /* EE58C 802C9BDC 0C0B2568 */  jal       func_802C95A0

@@ -14,7 +14,7 @@ glabel func_8011EA54
 /* B5178 8011EA78 00A0882D */   daddu    $s1, $a1, $zero
 /* B517C 8011EA7C 30820800 */  andi      $v0, $a0, 0x800
 /* B5180 8011EA80 10400055 */  beqz      $v0, .L8011EBD8
-/* B5184 8011EA84 00000000 */   nop      
+/* B5184 8011EA84 00000000 */   nop
 .L8011EA88:
 /* B5188 8011EA88 2402F7FF */  addiu     $v0, $zero, -0x801
 /* B518C 8011EA8C 00822024 */  and       $a0, $a0, $v0
@@ -24,7 +24,7 @@ glabel func_8011EA54
 /* B519C 8011EA9C 00431021 */  addu      $v0, $v0, $v1
 /* B51A0 8011EAA0 8C500000 */  lw        $s0, ($v0)
 /* B51A4 8011EAA4 1200004C */  beqz      $s0, .L8011EBD8
-/* B51A8 8011EAA8 00000000 */   nop      
+/* B51A8 8011EAA8 00000000 */   nop
 /* B51AC 8011EAAC 8E040000 */  lw        $a0, ($s0)
 /* B51B0 8011EAB0 10800049 */  beqz      $a0, .L8011EBD8
 /* B51B4 8011EAB4 3C020004 */   lui      $v0, 4
@@ -39,7 +39,7 @@ glabel func_8011EA54
 /* B51D8 8011EAD8 00821024 */  and       $v0, $a0, $v0
 /* B51DC 8011EADC AE020000 */  sw        $v0, ($s0)
 /* B51E0 8011EAE0 4602003E */  c.le.s    $f0, $f2
-/* B51E4 8011EAE4 00000000 */  nop       
+/* B51E4 8011EAE4 00000000 */  nop
 /* B51E8 8011EAE8 45000014 */  bc1f      .L8011EB3C
 /* B51EC 8011EAEC E6000090 */   swc1     $f0, 0x90($s0)
 /* B51F0 8011EAF0 30428000 */  andi      $v0, $v0, 0x8000
@@ -52,7 +52,7 @@ glabel func_8011EA54
 /* B5208 8011EB08 1C60FFFC */  bgtz      $v1, .L8011EAFC
 /* B520C 8011EB0C 2402FFFF */   addiu    $v0, $zero, -1
 /* B5210 8011EB10 08047AD0 */  j         .L8011EB40
-/* B5214 8011EB14 00000000 */   nop      
+/* B5214 8011EB14 00000000 */   nop
 .L8011EB18:
 /* B5218 8011EB18 3C013F80 */  lui       $at, 0x3f80
 /* B521C 8011EB1C 44810000 */  mtc1      $at, $f0
@@ -63,7 +63,7 @@ glabel func_8011EA54
 /* B522C 8011EB2C 0200202D */   daddu    $a0, $s0, $zero
 /* B5230 8011EB30 0040182D */  daddu     $v1, $v0, $zero
 /* B5234 8011EB34 1C60FFFC */  bgtz      $v1, .L8011EB28
-/* B5238 8011EB38 00000000 */   nop      
+/* B5238 8011EB38 00000000 */   nop
 .L8011EB3C:
 /* B523C 8011EB3C 2402FFFF */  addiu     $v0, $zero, -1
 .L8011EB40:

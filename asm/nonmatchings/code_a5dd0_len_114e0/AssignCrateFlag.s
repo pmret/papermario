@@ -13,7 +13,7 @@ glabel AssignCrateFlag
 /* A8890 80112190 3C048015 */  lui       $a0, %hi(gLastCreatedEntityIndex)
 /* A8894 80112194 8C8412EC */  lw        $a0, %lo(gLastCreatedEntityIndex)($a0)
 /* A8898 80112198 0C04417A */  jal       get_entity_by_index
-/* A889C 8011219C 00000000 */   nop      
+/* A889C 8011219C 00000000 */   nop
 /* A88A0 801121A0 8E050000 */  lw        $a1, ($s0)
 /* A88A4 801121A4 8C500040 */  lw        $s0, 0x40($v0)
 /* A88A8 801121A8 0C0B1F6A */  jal       get_variable_index

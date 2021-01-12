@@ -12,14 +12,14 @@ glabel func_802404F8_BA4C78
 /* BA4C94 80240514 0C0B1EAF */  jal       get_variable
 /* BA4C98 80240518 26100004 */   addiu    $s0, $s0, 4
 /* BA4C9C 8024051C 44826000 */  mtc1      $v0, $f12
-/* BA4CA0 80240520 00000000 */  nop       
+/* BA4CA0 80240520 00000000 */  nop
 /* BA4CA4 80240524 0C00A8BB */  jal       sin_deg
 /* BA4CA8 80240528 46806320 */   cvt.s.w  $f12, $f12
 /* BA4CAC 8024052C 3C014120 */  lui       $at, 0x4120
 /* BA4CB0 80240530 44811000 */  mtc1      $at, $f2
-/* BA4CB4 80240534 00000000 */  nop       
+/* BA4CB4 80240534 00000000 */  nop
 /* BA4CB8 80240538 46020002 */  mul.s     $f0, $f0, $f2
-/* BA4CBC 8024053C 00000000 */  nop       
+/* BA4CBC 8024053C 00000000 */  nop
 /* BA4CC0 80240540 8E050000 */  lw        $a1, ($s0)
 /* BA4CC4 80240544 4600010D */  trunc.w.s $f4, $f0
 /* BA4CC8 80240548 44062000 */  mfc1      $a2, $f4
@@ -31,4 +31,4 @@ glabel func_802404F8_BA4C78
 /* BA4CE0 80240560 24020002 */  addiu     $v0, $zero, 2
 /* BA4CE4 80240564 03E00008 */  jr        $ra
 /* BA4CE8 80240568 27BD0020 */   addiu    $sp, $sp, 0x20
-/* BA4CEC 8024056C 00000000 */  nop       
+/* BA4CEC 8024056C 00000000 */  nop

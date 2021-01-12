@@ -26,7 +26,7 @@ glabel func_8024267C_EA2F7C
 /* EA2FCC 802426CC 1440FFFA */  bnez      $v0, .L802426B8
 /* EA2FD0 802426D0 24A50004 */   addiu    $a1, $a1, 4
 /* EA2FD4 802426D4 080909C6 */  j         .L80242718
-/* EA2FD8 802426D8 00000000 */   nop      
+/* EA2FD8 802426D8 00000000 */   nop
 .L802426DC:
 /* EA2FDC 802426DC 0000182D */  daddu     $v1, $zero, $zero
 /* EA2FE0 802426E0 0040282D */  daddu     $a1, $v0, $zero

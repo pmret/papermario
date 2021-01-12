@@ -58,4 +58,4 @@ glabel can_switch_to_player
 /* 41A654 802A58C4 38820001 */   xori     $v0, $a0, 1
 .L802A58C8:
 /* 41A658 802A58C8 03E00008 */  jr        $ra
-/* 41A65C 802A58CC 00000000 */   nop      
+/* 41A65C 802A58CC 00000000 */   nop

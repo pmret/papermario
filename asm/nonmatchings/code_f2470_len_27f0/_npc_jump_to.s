@@ -21,7 +21,7 @@ glabel _npc_jump_to
 .L802CE474:
 /* F2E24 802CE474 8E420070 */  lw        $v0, 0x70($s2)
 /* F2E28 802CE478 14400065 */  bnez      $v0, .L802CE610
-/* F2E2C 802CE47C 00000000 */   nop      
+/* F2E2C 802CE47C 00000000 */   nop
 /* F2E30 802CE480 8E250000 */  lw        $a1, ($s1)
 /* F2E34 802CE484 26310004 */  addiu     $s1, $s1, 4
 /* F2E38 802CE488 0C0B1EAF */  jal       get_variable
@@ -34,12 +34,12 @@ glabel _npc_jump_to
 /* F2E54 802CE4A4 8E250000 */  lw        $a1, ($s1)
 /* F2E58 802CE4A8 26310004 */  addiu     $s1, $s1, 4
 /* F2E5C 802CE4AC 4482C000 */  mtc1      $v0, $f24
-/* F2E60 802CE4B0 00000000 */  nop       
+/* F2E60 802CE4B0 00000000 */  nop
 /* F2E64 802CE4B4 4680C620 */  cvt.s.w   $f24, $f24
 /* F2E68 802CE4B8 0C0B1EAF */  jal       get_variable
 /* F2E6C 802CE4BC 0240202D */   daddu    $a0, $s2, $zero
 /* F2E70 802CE4C0 4482B000 */  mtc1      $v0, $f22
-/* F2E74 802CE4C4 00000000 */  nop       
+/* F2E74 802CE4C4 00000000 */  nop
 /* F2E78 802CE4C8 4680B5A0 */  cvt.s.w   $f22, $f22
 /* F2E7C 802CE4CC 8E250000 */  lw        $a1, ($s1)
 /* F2E80 802CE4D0 26310004 */  addiu     $s1, $s1, 4
@@ -47,7 +47,7 @@ glabel _npc_jump_to
 /* F2E88 802CE4D8 0240202D */   daddu    $a0, $s2, $zero
 /* F2E8C 802CE4DC 8E250000 */  lw        $a1, ($s1)
 /* F2E90 802CE4E0 4482A000 */  mtc1      $v0, $f20
-/* F2E94 802CE4E4 00000000 */  nop       
+/* F2E94 802CE4E4 00000000 */  nop
 /* F2E98 802CE4E8 4680A520 */  cvt.s.w   $f20, $f20
 /* F2E9C 802CE4EC 0C0B1EAF */  jal       get_variable
 /* F2EA0 802CE4F0 0240202D */   daddu    $a0, $s2, $zero
@@ -76,7 +76,7 @@ glabel _npc_jump_to
 /* F2EF8 802CE548 44801000 */  mtc1      $zero, $f2
 /* F2EFC 802CE54C 4600A021 */  cvt.d.s   $f0, $f20
 /* F2F00 802CE550 4620103C */  c.lt.d    $f2, $f0
-/* F2F04 802CE554 00000000 */  nop       
+/* F2F04 802CE554 00000000 */  nop
 /* F2F08 802CE558 45000009 */  bc1f      .L802CE580
 /* F2F0C 802CE55C AE400078 */   sw       $zero, 0x78($s2)
 /* F2F10 802CE560 C60C0038 */  lwc1      $f12, 0x38($s0)
@@ -101,7 +101,7 @@ glabel _npc_jump_to
 /* F2F58 802CE5A8 A602008E */   sh       $v0, 0x8e($s0)
 .L802CE5AC:
 /* F2F5C 802CE5AC 44820000 */  mtc1      $v0, $f0
-/* F2F60 802CE5B0 00000000 */  nop       
+/* F2F60 802CE5B0 00000000 */  nop
 /* F2F64 802CE5B4 46800020 */  cvt.s.w   $f0, $f0
 /* F2F68 802CE5B8 4600A003 */  div.s     $f0, $f20, $f0
 /* F2F6C 802CE5BC E6000018 */  swc1      $f0, 0x18($s0)
@@ -109,15 +109,15 @@ glabel _npc_jump_to
 /* F2F70 802CE5C0 8602008E */  lh        $v0, 0x8e($s0)
 /* F2F74 802CE5C4 C6000014 */  lwc1      $f0, 0x14($s0)
 /* F2F78 802CE5C8 44822000 */  mtc1      $v0, $f4
-/* F2F7C 802CE5CC 00000000 */  nop       
+/* F2F7C 802CE5CC 00000000 */  nop
 /* F2F80 802CE5D0 46802120 */  cvt.s.w   $f4, $f4
 /* F2F84 802CE5D4 46040002 */  mul.s     $f0, $f0, $f4
-/* F2F88 802CE5D8 00000000 */  nop       
+/* F2F88 802CE5D8 00000000 */  nop
 /* F2F8C 802CE5DC 3C013F00 */  lui       $at, 0x3f00
 /* F2F90 802CE5E0 44811000 */  mtc1      $at, $f2
-/* F2F94 802CE5E4 00000000 */  nop       
+/* F2F94 802CE5E4 00000000 */  nop
 /* F2F98 802CE5E8 46020002 */  mul.s     $f0, $f0, $f2
-/* F2F9C 802CE5EC 00000000 */  nop       
+/* F2F9C 802CE5EC 00000000 */  nop
 /* F2FA0 802CE5F0 8E020000 */  lw        $v0, ($s0)
 /* F2FA4 802CE5F4 4604B103 */  div.s     $f4, $f22, $f4
 /* F2FA8 802CE5F8 34420800 */  ori       $v0, $v0, 0x800

@@ -23,16 +23,16 @@ glabel func_8024177C_A6FB5C
 /* A6FBA4 802417C4 4480B000 */  mtc1      $zero, $f22
 /* A6FBA8 802417C8 2463000A */  addiu     $v1, $v1, 0xa
 /* A6FBAC 802417CC 44836000 */  mtc1      $v1, $f12
-/* A6FBB0 802417D0 00000000 */  nop       
+/* A6FBB0 802417D0 00000000 */  nop
 /* A6FBB4 802417D4 46806320 */  cvt.s.w   $f12, $f12
 /* A6FBB8 802417D8 4636A503 */  div.d     $f20, $f20, $f22
 /* A6FBBC 802417DC 0C00A6C9 */  jal       clamp_angle
 /* A6FBC0 802417E0 4620A520 */   cvt.s.d  $f20, $f20
 /* A6FBC4 802417E4 4600010D */  trunc.w.s $f4, $f0
 /* A6FBC8 802417E8 44022000 */  mfc1      $v0, $f4
-/* A6FBCC 802417EC 00000000 */  nop       
+/* A6FBCC 802417EC 00000000 */  nop
 /* A6FBD0 802417F0 44826000 */  mtc1      $v0, $f12
-/* A6FBD4 802417F4 00000000 */  nop       
+/* A6FBD4 802417F4 00000000 */  nop
 /* A6FBD8 802417F8 46806320 */  cvt.s.w   $f12, $f12
 /* A6FBDC 802417FC 0C00A8BB */  jal       sin_deg
 /* A6FBE0 80241800 AE22006C */   sw       $v0, 0x6c($s1)
@@ -41,7 +41,7 @@ glabel func_8024177C_A6FB5C
 /* A6FBEC 8024180C 44801000 */  mtc1      $zero, $f2
 /* A6FBF0 80241810 46000021 */  cvt.d.s   $f0, $f0
 /* A6FBF4 80241814 46220002 */  mul.d     $f0, $f0, $f2
-/* A6FBF8 80241818 00000000 */  nop       
+/* A6FBF8 80241818 00000000 */  nop
 /* A6FBFC 8024181C 4600A0A1 */  cvt.d.s   $f2, $f20
 /* A6FC00 80241820 46201080 */  add.d     $f2, $f2, $f0
 /* A6FC04 80241824 8602008C */  lh        $v0, 0x8c($s0)
@@ -50,7 +50,7 @@ glabel func_8024177C_A6FB5C
 /* A6FC10 80241830 E600003C */   swc1     $f0, 0x3c($s0)
 /* A6FC14 80241834 46000021 */  cvt.d.s   $f0, $f0
 /* A6FC18 80241838 46360002 */  mul.d     $f0, $f0, $f22
-/* A6FC1C 8024183C 00000000 */  nop       
+/* A6FC1C 8024183C 00000000 */  nop
 /* A6FC20 80241840 24020011 */  addiu     $v0, $zero, 0x11
 /* A6FC24 80241844 4620010D */  trunc.w.d $f4, $f0
 /* A6FC28 80241848 E6240080 */  swc1      $f4, 0x80($s1)

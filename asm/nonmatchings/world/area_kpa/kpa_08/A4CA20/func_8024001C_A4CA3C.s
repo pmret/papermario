@@ -19,11 +19,11 @@ glabel func_8024001C_A4CA3C
 /* A4CA74 80240054 3C028016 */  lui       $v0, %hi(gCollisionStatus+0x2)
 /* A4CA78 80240058 8442A552 */  lh        $v0, %lo(gCollisionStatus+0x2)($v0)
 /* A4CA7C 8024005C 16020009 */  bne       $s0, $v0, .L80240084
-/* A4CA80 80240060 00000000 */   nop      
+/* A4CA80 80240060 00000000 */   nop
 /* A4CA84 80240064 8E220084 */  lw        $v0, 0x84($s1)
 /* A4CA88 80240068 00431021 */  addu      $v0, $v0, $v1
 /* A4CA8C 8024006C 44820000 */  mtc1      $v0, $f0
-/* A4CA90 80240070 00000000 */  nop       
+/* A4CA90 80240070 00000000 */  nop
 /* A4CA94 80240074 46800020 */  cvt.s.w   $f0, $f0
 /* A4CA98 80240078 3C028011 */  lui       $v0, %hi(gPlayerStatus)
 /* A4CA9C 8024007C 2442EFC8 */  addiu     $v0, $v0, %lo(gPlayerStatus)
@@ -35,4 +35,4 @@ glabel func_8024001C_A4CA3C
 /* A4CAB0 80240090 24020002 */  addiu     $v0, $zero, 2
 /* A4CAB4 80240094 03E00008 */  jr        $ra
 /* A4CAB8 80240098 27BD0020 */   addiu    $sp, $sp, 0x20
-/* A4CABC 8024009C 00000000 */  nop       
+/* A4CABC 8024009C 00000000 */  nop

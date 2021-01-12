@@ -52,7 +52,7 @@ glabel func_802407FC_C6D11C
 .L802408B8:
 /* C6D1D8 802408B8 96240002 */  lhu       $a0, 2($s1)
 /* C6D1DC 802408BC 0C046C04 */  jal       get_model_list_index_from_tree_index
-/* C6D1E0 802408C0 00000000 */   nop      
+/* C6D1E0 802408C0 00000000 */   nop
 /* C6D1E4 802408C4 0C046B4C */  jal       get_model_from_list_index
 /* C6D1E8 802408C8 0040202D */   daddu    $a0, $v0, $zero
 /* C6D1EC 802408CC 0040802D */  daddu     $s0, $v0, $zero
@@ -61,7 +61,7 @@ glabel func_802407FC_C6D11C
 /* C6D1F8 802408D8 0C046F1F */  jal       func_8011BC7C
 /* C6D1FC 802408DC 24060003 */   addiu    $a2, $zero, 3
 /* C6D200 802408E0 12C00004 */  beqz      $s6, .L802408F4
-/* C6D204 802408E4 00000000 */   nop      
+/* C6D204 802408E4 00000000 */   nop
 /* C6D208 802408E8 96020000 */  lhu       $v0, ($s0)
 /* C6D20C 802408EC 3042FFFD */  andi      $v0, $v0, 0xfffd
 /* C6D210 802408F0 A6020000 */  sh        $v0, ($s0)
@@ -87,7 +87,7 @@ glabel func_802407FC_C6D11C
 /* C6D250 80240930 16810004 */  bne       $s4, $at, .L80240944
 /* C6D254 80240934 3C018000 */   lui      $at, 0x8000
 /* C6D258 80240938 14E10002 */  bne       $a3, $at, .L80240944
-/* C6D25C 8024093C 00000000 */   nop      
+/* C6D25C 8024093C 00000000 */   nop
 /* C6D260 80240940 0006000D */  break     6
 .L80240944:
 /* C6D264 80240944 00003812 */   mflo     $a3
@@ -106,7 +106,7 @@ glabel func_802407FC_C6D11C
 /* C6D290 80240970 16810004 */  bne       $s4, $at, .L80240984
 /* C6D294 80240974 3C018000 */   lui      $at, 0x8000
 /* C6D298 80240978 14E10002 */  bne       $a3, $at, .L80240984
-/* C6D29C 8024097C 00000000 */   nop      
+/* C6D29C 8024097C 00000000 */   nop
 /* C6D2A0 80240980 0006000D */  break     6
 .L80240984:
 /* C6D2A4 80240984 00003812 */   mflo     $a3
@@ -135,7 +135,7 @@ glabel func_802407FC_C6D11C
 /* C6D2F8 802409D8 0C046F1F */  jal       func_8011BC7C
 /* C6D2FC 802409DC 0000302D */   daddu    $a2, $zero, $zero
 /* C6D300 802409E0 16C00004 */  bnez      $s6, .L802409F4
-/* C6D304 802409E4 00000000 */   nop      
+/* C6D304 802409E4 00000000 */   nop
 /* C6D308 802409E8 96020000 */  lhu       $v0, ($s0)
 /* C6D30C 802409EC 34420002 */  ori       $v0, $v0, 2
 /* C6D310 802409F0 A6020000 */  sh        $v0, ($s0)

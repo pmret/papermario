@@ -19,4 +19,4 @@ glabel func_802BD100_319670
 /* 3196A8 802BD138 3C01802C */  lui       $at, %hi(D_802BEBC4)
 /* 3196AC 802BD13C AC20EBC4 */  sw        $zero, %lo(D_802BEBC4)($at)
 /* 3196B0 802BD140 03E00008 */  jr        $ra
-/* 3196B4 802BD144 00000000 */   nop      
+/* 3196B4 802BD144 00000000 */   nop

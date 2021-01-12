@@ -26,6 +26,6 @@ glabel func_80242898_DF9298
 /* DF92E8 802428E8 0000102D */  daddu     $v0, $zero, $zero
 /* DF92EC 802428EC 03E00008 */  jr        $ra
 /* DF92F0 802428F0 27BD0018 */   addiu    $sp, $sp, 0x18
-/* DF92F4 802428F4 00000000 */  nop       
-/* DF92F8 802428F8 00000000 */  nop       
-/* DF92FC 802428FC 00000000 */  nop       
+/* DF92F4 802428F4 00000000 */  nop
+/* DF92F8 802428F8 00000000 */  nop
+/* DF92FC 802428FC 00000000 */  nop

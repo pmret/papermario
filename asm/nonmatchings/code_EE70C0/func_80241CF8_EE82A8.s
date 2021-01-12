@@ -49,15 +49,15 @@ glabel func_80241CF8_EE82A8
 /* EE8350 80241DA0 44802000 */  mtc1      $zero, $f4
 /* EE8354 80241DA4 460010A1 */  cvt.d.s   $f2, $f2
 /* EE8358 80241DA8 46241082 */  mul.d     $f2, $f2, $f4
-/* EE835C 80241DAC 00000000 */  nop       
+/* EE835C 80241DAC 00000000 */  nop
 /* EE8360 80241DB0 C7A0001C */  lwc1      $f0, 0x1c($sp)
 /* EE8364 80241DB4 46000021 */  cvt.d.s   $f0, $f0
 /* EE8368 80241DB8 46240002 */  mul.d     $f0, $f0, $f4
-/* EE836C 80241DBC 00000000 */  nop       
+/* EE836C 80241DBC 00000000 */  nop
 /* EE8370 80241DC0 3C013FE0 */  lui       $at, 0x3fe0
 /* EE8374 80241DC4 44812800 */  mtc1      $at, $f5
 /* EE8378 80241DC8 44802000 */  mtc1      $zero, $f4
-/* EE837C 80241DCC 00000000 */  nop       
+/* EE837C 80241DCC 00000000 */  nop
 /* EE8380 80241DD0 46241080 */  add.d     $f2, $f2, $f4
 /* EE8384 80241DD4 AE000074 */  sw        $zero, 0x74($s0)
 /* EE8388 80241DD8 46240000 */  add.d     $f0, $f0, $f4

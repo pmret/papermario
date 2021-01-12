@@ -31,7 +31,7 @@ glabel func_802D354C
 /* F7F5C 802D35AC 10400016 */  beqz      $v0, .L802D3608
 /* F7F60 802D35B0 24020002 */   addiu    $v0, $zero, 2
 /* F7F64 802D35B4 0C048379 */  jal       func_80120DE4
-/* F7F68 802D35B8 00000000 */   nop      
+/* F7F68 802D35B8 00000000 */   nop
 /* F7F6C 802D35BC 3C013F80 */  lui       $at, 0x3f80
 /* F7F70 802D35C0 44810000 */  mtc1      $at, $f0
 /* F7F74 802D35C4 AE020000 */  sw        $v0, ($s0)

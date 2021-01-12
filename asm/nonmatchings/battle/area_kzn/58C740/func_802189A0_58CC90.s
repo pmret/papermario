@@ -69,12 +69,12 @@ glabel func_802189A0_58CC90
 /* 58CD90 80218AA0 82030210 */  lb        $v1, 0x210($s0)
 /* 58CD94 80218AA4 2402000A */  addiu     $v0, $zero, 0xa
 /* 58CD98 80218AA8 14620007 */  bne       $v1, $v0, .L80218AC8
-/* 58CD9C 80218AAC 00000000 */   nop      
+/* 58CD9C 80218AAC 00000000 */   nop
 /* 58CDA0 80218AB0 8C82000C */  lw        $v0, 0xc($a0)
 /* 58CDA4 80218AB4 3C013ECC */  lui       $at, 0x3ecc
 /* 58CDA8 80218AB8 3421CCCD */  ori       $at, $at, 0xcccd
 /* 58CDAC 80218ABC 44810000 */  mtc1      $at, $f0
-/* 58CDB0 80218AC0 00000000 */  nop       
+/* 58CDB0 80218AC0 00000000 */  nop
 /* 58CDB4 80218AC4 E4400028 */  swc1      $f0, 0x28($v0)
 .L80218AC8:
 /* 58CDB8 80218AC8 8FBF0028 */  lw        $ra, 0x28($sp)

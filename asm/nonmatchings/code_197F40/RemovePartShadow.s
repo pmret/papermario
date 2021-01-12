@@ -19,7 +19,7 @@ glabel RemovePartShadow
 /* 19DEB4 8026F5D4 0040282D */  daddu     $a1, $v0, $zero
 /* 19DEB8 8026F5D8 2402FF81 */  addiu     $v0, $zero, -0x7f
 /* 19DEBC 8026F5DC 16220002 */  bne       $s1, $v0, .L8026F5E8
-/* 19DEC0 8026F5E0 00000000 */   nop      
+/* 19DEC0 8026F5E0 00000000 */   nop
 /* 19DEC4 8026F5E4 8E510148 */  lw        $s1, 0x148($s2)
 .L8026F5E8:
 /* 19DEC8 8026F5E8 0C099CE8 */  jal       remove_part_shadow

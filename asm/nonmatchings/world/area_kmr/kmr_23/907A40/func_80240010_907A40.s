@@ -7,7 +7,7 @@ glabel func_80240010_907A40
 /* 907A48 80240018 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 907A4C 8024001C AFBF0010 */  sw        $ra, 0x10($sp)
 /* 907A50 80240020 0C00AFB7 */  jal       set_curtain_scale_goal
-/* 907A54 80240024 00000000 */   nop      
+/* 907A54 80240024 00000000 */   nop
 /* 907A58 80240028 0C00AFC1 */  jal       set_curtain_draw_callback
 /* 907A5C 8024002C 0000202D */   daddu    $a0, $zero, $zero
 /* 907A60 80240030 8FBF0010 */  lw        $ra, 0x10($sp)

@@ -13,4 +13,4 @@ glabel func_802407C0_A0C4B0
 /* A0C4D0 802407E0 24020002 */  addiu     $v0, $zero, 2
 /* A0C4D4 802407E4 03E00008 */  jr        $ra
 /* A0C4D8 802407E8 27BD0018 */   addiu    $sp, $sp, 0x18
-/* A0C4DC 802407EC 00000000 */  nop       
+/* A0C4DC 802407EC 00000000 */  nop

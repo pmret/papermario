@@ -39,5 +39,5 @@ glabel func_80240344_CAC534
 /* CAC5BC 802403CC 24020002 */  addiu     $v0, $zero, 2
 /* CAC5C0 802403D0 03E00008 */  jr        $ra
 /* CAC5C4 802403D4 27BD0030 */   addiu    $sp, $sp, 0x30
-/* CAC5C8 802403D8 00000000 */  nop       
-/* CAC5CC 802403DC 00000000 */  nop       
+/* CAC5C8 802403D8 00000000 */  nop
+/* CAC5CC 802403DC 00000000 */  nop

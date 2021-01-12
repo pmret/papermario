@@ -27,7 +27,7 @@ glabel func_802BC4B0_E2EDE0
 /* E2EE38 802BC508 C6000004 */  lwc1      $f0, 4($s0)
 /* E2EE3C 802BC50C 3C0142B4 */  lui       $at, 0x42b4
 /* E2EE40 802BC510 44816000 */  mtc1      $at, $f12
-/* E2EE44 802BC514 00000000 */  nop       
+/* E2EE44 802BC514 00000000 */  nop
 /* E2EE48 802BC518 460C0301 */  sub.s     $f12, $f0, $f12
 /* E2EE4C 802BC51C 0C00A6C9 */  jal       clamp_angle
 /* E2EE50 802BC520 36941630 */   ori      $s4, $s4, 0x1630

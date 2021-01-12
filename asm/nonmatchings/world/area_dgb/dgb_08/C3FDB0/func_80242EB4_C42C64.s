@@ -27,7 +27,7 @@ glabel func_80242EB4_C42C64
 .L80242F08:
 /* C42CB8 80242F08 2A020009 */  slti      $v0, $s0, 9
 /* C42CBC 80242F0C 1440FFF5 */  bnez      $v0, .L80242EE4
-/* C42CC0 80242F10 00000000 */   nop      
+/* C42CC0 80242F10 00000000 */   nop
 /* C42CC4 80242F14 8E42006C */  lw        $v0, 0x6c($s2)
 /* C42CC8 80242F18 3C03800F */  lui       $v1, %hi(gPlayerStatusPtr)
 /* C42CCC 80242F1C 8C637B30 */  lw        $v1, %lo(gPlayerStatusPtr)($v1)

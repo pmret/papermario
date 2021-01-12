@@ -19,7 +19,7 @@ glabel func_80045AC0
 /* 20EF4 80045AF4 0C048C56 */  jal       bind_dynamic_entity_3
 /* 20EF8 80045AF8 0000202D */   daddu    $a0, $zero, $zero
 /* 20EFC 80045AFC 0C0117ED */  jal       func_80045FB4
-/* 20F00 80045B00 00000000 */   nop      
+/* 20F00 80045B00 00000000 */   nop
 /* 20F04 80045B04 8FBF0010 */  lw        $ra, 0x10($sp)
 /* 20F08 80045B08 03E00008 */  jr        $ra
 /* 20F0C 80045B0C 27BD0018 */   addiu    $sp, $sp, 0x18

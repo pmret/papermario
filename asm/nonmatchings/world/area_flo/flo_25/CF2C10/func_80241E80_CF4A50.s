@@ -32,15 +32,15 @@ glabel func_80241E80_CF4A50
 /* CF4ABC 80241EEC 0040802D */   daddu    $s0, $v0, $zero
 /* CF4AC0 80241EF0 0040182D */  daddu     $v1, $v0, $zero
 /* CF4AC4 80241EF4 44920000 */  mtc1      $s2, $f0
-/* CF4AC8 80241EF8 00000000 */  nop       
+/* CF4AC8 80241EF8 00000000 */  nop
 /* CF4ACC 80241EFC 46800020 */  cvt.s.w   $f0, $f0
 /* CF4AD0 80241F00 E4600008 */  swc1      $f0, 8($v1)
 /* CF4AD4 80241F04 44910000 */  mtc1      $s1, $f0
-/* CF4AD8 80241F08 00000000 */  nop       
+/* CF4AD8 80241F08 00000000 */  nop
 /* CF4ADC 80241F0C 46800020 */  cvt.s.w   $f0, $f0
 /* CF4AE0 80241F10 E460000C */  swc1      $f0, 0xc($v1)
 /* CF4AE4 80241F14 44900000 */  mtc1      $s0, $f0
-/* CF4AE8 80241F18 00000000 */  nop       
+/* CF4AE8 80241F18 00000000 */  nop
 /* CF4AEC 80241F1C 46800020 */  cvt.s.w   $f0, $f0
 /* CF4AF0 80241F20 E4600010 */  swc1      $f0, 0x10($v1)
 /* CF4AF4 80241F24 8FBF0020 */  lw        $ra, 0x20($sp)

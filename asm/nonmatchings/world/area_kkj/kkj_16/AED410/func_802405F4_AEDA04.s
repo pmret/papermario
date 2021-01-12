@@ -31,18 +31,18 @@ glabel func_802405F4_AEDA04
 /* AEDA6C 8024065C 0C0B1EAF */  jal       get_variable
 /* AEDA70 80240660 0040802D */   daddu    $s0, $v0, $zero
 /* AEDA74 80240664 44901000 */  mtc1      $s0, $f2
-/* AEDA78 80240668 00000000 */  nop       
+/* AEDA78 80240668 00000000 */  nop
 /* AEDA7C 8024066C 468010A0 */  cvt.s.w   $f2, $f2
 /* AEDA80 80240670 44936000 */  mtc1      $s3, $f12
-/* AEDA84 80240674 00000000 */  nop       
+/* AEDA84 80240674 00000000 */  nop
 /* AEDA88 80240678 46806320 */  cvt.s.w   $f12, $f12
 /* AEDA8C 8024067C 44061000 */  mfc1      $a2, $f2
 /* AEDA90 80240680 44821000 */  mtc1      $v0, $f2
-/* AEDA94 80240684 00000000 */  nop       
+/* AEDA94 80240684 00000000 */  nop
 /* AEDA98 80240688 468010A0 */  cvt.s.w   $f2, $f2
 /* AEDA9C 8024068C 44071000 */  mfc1      $a3, $f2
 /* AEDAA0 80240690 44927000 */  mtc1      $s2, $f14
-/* AEDAA4 80240694 00000000 */  nop       
+/* AEDAA4 80240694 00000000 */  nop
 /* AEDAA8 80240698 0C00A720 */  jal       atan2
 /* AEDAAC 8024069C 468073A0 */   cvt.s.w  $f14, $f14
 /* AEDAB0 802406A0 0220202D */  daddu     $a0, $s1, $zero

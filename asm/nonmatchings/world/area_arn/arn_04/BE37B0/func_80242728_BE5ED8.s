@@ -16,7 +16,7 @@ glabel func_80242728_BE5ED8
 /* BE5F04 80242754 A602008E */  sh        $v0, 0x8e($s0)
 /* BE5F08 80242758 00021400 */  sll       $v0, $v0, 0x10
 /* BE5F0C 8024275C 1C40000F */  bgtz      $v0, .L8024279C
-/* BE5F10 80242760 00000000 */   nop      
+/* BE5F10 80242760 00000000 */   nop
 /* BE5F14 80242764 3C02800F */  lui       $v0, %hi(gPlayerStatusPtr)
 /* BE5F18 80242768 8C427B30 */  lw        $v0, %lo(gPlayerStatusPtr)($v0)
 /* BE5F1C 8024276C C60C0038 */  lwc1      $f12, 0x38($s0)

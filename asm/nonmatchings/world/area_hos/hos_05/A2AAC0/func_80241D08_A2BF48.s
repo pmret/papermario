@@ -22,7 +22,7 @@ glabel func_80241D08_A2BF48
 /* A2BF8C 80241D4C A4820000 */  sh        $v0, ($a0)
 .L80241D50:
 /* A2BF90 80241D50 44800000 */  mtc1      $zero, $f0
-/* A2BF94 80241D54 00000000 */  nop       
+/* A2BF94 80241D54 00000000 */  nop
 /* A2BF98 80241D58 44050000 */  mfc1      $a1, $f0
 /* A2BF9C 80241D5C 24840194 */  addiu     $a0, $a0, 0x194
 /* A2BFA0 80241D60 00A0302D */  daddu     $a2, $a1, $zero

@@ -221,5 +221,5 @@ glabel func_E002A3C4
 /* 33EFCC E002A70C 8FB000E0 */  lw        $s0, 0xe0($sp)
 /* 33EFD0 E002A710 03E00008 */  jr        $ra
 /* 33EFD4 E002A714 27BD0108 */   addiu    $sp, $sp, 0x108
-/* 33EFD8 E002A718 00000000 */  nop       
-/* 33EFDC E002A71C 00000000 */  nop       
+/* 33EFD8 E002A718 00000000 */  nop
+/* 33EFDC E002A71C 00000000 */  nop

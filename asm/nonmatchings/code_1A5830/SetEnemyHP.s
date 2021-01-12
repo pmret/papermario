@@ -15,7 +15,7 @@ glabel SetEnemyHP
 /* 1AAED0 8027C5F0 0040802D */  daddu     $s0, $v0, $zero
 /* 1AAED4 8027C5F4 2402FF81 */  addiu     $v0, $zero, -0x7f
 /* 1AAED8 8027C5F8 16020002 */  bne       $s0, $v0, .L8027C604
-/* 1AAEDC 8027C5FC 00000000 */   nop      
+/* 1AAEDC 8027C5FC 00000000 */   nop
 /* 1AAEE0 8027C600 8E500148 */  lw        $s0, 0x148($s2)
 .L8027C604:
 /* 1AAEE4 8027C604 8E250000 */  lw        $a1, ($s1)
@@ -48,7 +48,7 @@ glabel SetEnemyHP
 /* 1AAF48 8027C668 14810004 */  bne       $a0, $at, .L8027C67C
 /* 1AAF4C 8027C66C 3C018000 */   lui      $at, 0x8000
 /* 1AAF50 8027C670 14610002 */  bne       $v1, $at, .L8027C67C
-/* 1AAF54 8027C674 00000000 */   nop      
+/* 1AAF54 8027C674 00000000 */   nop
 /* 1AAF58 8027C678 0006000D */  break     6
 .L8027C67C:
 /* 1AAF5C 8027C67C 00001812 */   mflo     $v1

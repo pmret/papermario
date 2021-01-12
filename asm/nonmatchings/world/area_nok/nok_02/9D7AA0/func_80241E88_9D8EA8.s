@@ -32,7 +32,7 @@ glabel func_80241E88_9D8EA8
 /* 9D8F0C 80241EEC 0080302D */   daddu    $a2, $a0, $zero
 /* 9D8F10 80241EF0 8E020070 */  lw        $v0, 0x70($s0)
 /* 9D8F14 80241EF4 14400006 */  bnez      $v0, .L80241F10
-/* 9D8F18 80241EF8 00000000 */   nop      
+/* 9D8F18 80241EF8 00000000 */   nop
 /* 9D8F1C 80241EFC 8E020074 */  lw        $v0, 0x74($s0)
 /* 9D8F20 80241F00 14400003 */  bnez      $v0, .L80241F10
 /* 9D8F24 80241F04 24020001 */   addiu    $v0, $zero, 1
@@ -66,13 +66,13 @@ glabel func_80241E88_9D8EA8
 /* 9D8F8C 80241F6C 10730005 */  beq       $v1, $s3, .L80241F84
 /* 9D8F90 80241F70 26100001 */   addiu    $s0, $s0, 1
 /* 9D8F94 80241F74 10720003 */  beq       $v1, $s2, .L80241F84
-/* 9D8F98 80241F78 00000000 */   nop      
+/* 9D8F98 80241F78 00000000 */   nop
 /* 9D8F9C 80241F7C 00511024 */  and       $v0, $v0, $s1
 /* 9D8FA0 80241F80 AC820000 */  sw        $v0, ($a0)
 .L80241F84:
 /* 9D8FA4 80241F84 2A020040 */  slti      $v0, $s0, 0x40
 /* 9D8FA8 80241F88 1440FFEF */  bnez      $v0, .L80241F48
-/* 9D8FAC 80241F8C 00000000 */   nop      
+/* 9D8FAC 80241F8C 00000000 */   nop
 /* 9D8FB0 80241F90 0000802D */  daddu     $s0, $zero, $zero
 /* 9D8FB4 80241F94 3C11F7FF */  lui       $s1, 0xf7ff
 /* 9D8FB8 80241F98 3631FFFF */  ori       $s1, $s1, 0xffff
@@ -85,7 +85,7 @@ glabel func_80241E88_9D8EA8
 /* 9D8FD0 80241FB0 8C640000 */  lw        $a0, ($v1)
 /* 9D8FD4 80241FB4 30820010 */  andi      $v0, $a0, 0x10
 /* 9D8FD8 80241FB8 10400003 */  beqz      $v0, .L80241FC8
-/* 9D8FDC 80241FBC 00000000 */   nop      
+/* 9D8FDC 80241FBC 00000000 */   nop
 /* 9D8FE0 80241FC0 00911024 */  and       $v0, $a0, $s1
 /* 9D8FE4 80241FC4 AC620000 */  sw        $v0, ($v1)
 .L80241FC8:
@@ -93,7 +93,7 @@ glabel func_80241E88_9D8EA8
 /* 9D8FEC 80241FCC 1440FFF3 */  bnez      $v0, .L80241F9C
 /* 9D8FF0 80241FD0 24020002 */   addiu    $v0, $zero, 2
 /* 9D8FF4 80241FD4 080907F8 */  j         .L80241FE0
-/* 9D8FF8 80241FD8 00000000 */   nop      
+/* 9D8FF8 80241FD8 00000000 */   nop
 .L80241FDC:
 /* 9D8FFC 80241FDC 0000102D */  daddu     $v0, $zero, $zero
 .L80241FE0:

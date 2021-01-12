@@ -26,7 +26,7 @@ glabel func_80240180_9FA970
 /* 9FA9C4 802401D4 0040882D */  daddu     $s1, $v0, $zero
 /* 9FA9C8 802401D8 2402FFFF */  addiu     $v0, $zero, -1
 /* 9FA9CC 802401DC 16420002 */  bne       $s2, $v0, .L802401E8
-/* 9FA9D0 802401E0 00000000 */   nop      
+/* 9FA9D0 802401E0 00000000 */   nop
 /* 9FA9D4 802401E4 86720008 */  lh        $s2, 8($s3)
 .L802401E8:
 /* 9FA9D8 802401E8 0C00FB5A */  jal       get_enemy_safe

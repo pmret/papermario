@@ -26,9 +26,9 @@ glabel func_E00C4178
 /* 3CAFB4 E00C41C4 04A10005 */  bgez      $a1, .LE00C41DC
 /* 3CAFB8 E00C41C8 AC620014 */   sw       $v0, 0x14($v1)
 /* 3CAFBC E00C41CC 0C080128 */  jal       func_E02004A0
-/* 3CAFC0 E00C41D0 00000000 */   nop      
+/* 3CAFC0 E00C41D0 00000000 */   nop
 /* 3CAFC4 E00C41D4 080310AE */  j         .LE00C42B8
-/* 3CAFC8 E00C41D8 00000000 */   nop      
+/* 3CAFC8 E00C41D8 00000000 */   nop
 .LE00C41DC:
 /* 3CAFCC E00C41DC 00A0202D */  daddu     $a0, $a1, $zero
 /* 3CAFD0 E00C41E0 0040282D */  daddu     $a1, $v0, $zero
@@ -43,7 +43,7 @@ glabel func_E00C4178
 /* 3CAFF4 E00C4204 44801000 */  mtc1      $zero, $f2
 /* 3CAFF8 E00C4208 46200020 */  cvt.s.d   $f0, $f0
 /* 3CAFFC E00C420C 4602003C */  c.lt.s    $f0, $f2
-/* 3CB000 E00C4210 00000000 */  nop       
+/* 3CB000 E00C4210 00000000 */  nop
 /* 3CB004 E00C4214 45000003 */  bc1f      .LE00C4224
 /* 3CB008 E00C4218 E4600030 */   swc1     $f0, 0x30($v1)
 /* 3CB00C E00C421C E4620030 */  swc1      $f2, 0x30($v1)

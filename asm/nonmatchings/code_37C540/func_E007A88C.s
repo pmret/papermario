@@ -224,4 +224,4 @@ glabel func_E007A88C
 /* 37D130 E007ABF0 D7B400C0 */  ldc1      $f20, 0xc0($sp)
 /* 37D134 E007ABF4 03E00008 */  jr        $ra
 /* 37D138 E007ABF8 27BD00D0 */   addiu    $sp, $sp, 0xd0
-/* 37D13C E007ABFC 00000000 */  nop       
+/* 37D13C E007ABFC 00000000 */  nop

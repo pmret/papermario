@@ -26,7 +26,7 @@ glabel func_80240080_ED42A0
 /* ED42F0 802400D0 1440FFFA */  bnez      $v0, .L802400BC
 /* ED42F4 802400D4 24A50004 */   addiu    $a1, $a1, 4
 /* ED42F8 802400D8 08090047 */  j         .L8024011C
-/* ED42FC 802400DC 00000000 */   nop      
+/* ED42FC 802400DC 00000000 */   nop
 .L802400E0:
 /* ED4300 802400E0 0000182D */  daddu     $v1, $zero, $zero
 /* ED4304 802400E4 0040282D */  daddu     $a1, $v0, $zero

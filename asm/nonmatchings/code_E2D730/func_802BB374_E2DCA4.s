@@ -49,14 +49,14 @@ glabel func_802BB374_E2DCA4
 /* E2DD54 802BB424 C42C1DEC */  lwc1      $f12, %lo(D_800B1DEC)($at)
 /* E2DD58 802BB428 3C014334 */  lui       $at, 0x4334
 /* E2DD5C 802BB42C 44810000 */  mtc1      $at, $f0
-/* E2DD60 802BB430 00000000 */  nop       
+/* E2DD60 802BB430 00000000 */  nop
 /* E2DD64 802BB434 46006300 */  add.s     $f12, $f12, $f0
 /* E2DD68 802BB438 3C0140C9 */  lui       $at, 0x40c9
 /* E2DD6C 802BB43C 34210FD0 */  ori       $at, $at, 0xfd0
 /* E2DD70 802BB440 44810000 */  mtc1      $at, $f0
-/* E2DD74 802BB444 00000000 */  nop       
+/* E2DD74 802BB444 00000000 */  nop
 /* E2DD78 802BB448 46006302 */  mul.s     $f12, $f12, $f0
-/* E2DD7C 802BB44C 00000000 */  nop       
+/* E2DD7C 802BB44C 00000000 */  nop
 /* E2DD80 802BB450 27A50098 */  addiu     $a1, $sp, 0x98
 /* E2DD84 802BB454 3C0143B4 */  lui       $at, 0x43b4
 /* E2DD88 802BB458 44810000 */  mtc1      $at, $f0
@@ -98,12 +98,12 @@ glabel func_802BB374_E2DCA4
 /* E2DE18 802BB4E8 C7A00098 */  lwc1      $f0, 0x98($sp)
 /* E2DE1C 802BB4EC 3C014180 */  lui       $at, 0x4180
 /* E2DE20 802BB4F0 44812000 */  mtc1      $at, $f4
-/* E2DE24 802BB4F4 00000000 */  nop       
+/* E2DE24 802BB4F4 00000000 */  nop
 /* E2DE28 802BB4F8 46040002 */  mul.s     $f0, $f0, $f4
-/* E2DE2C 802BB4FC 00000000 */  nop       
+/* E2DE2C 802BB4FC 00000000 */  nop
 /* E2DE30 802BB500 C7A2009C */  lwc1      $f2, 0x9c($sp)
 /* E2DE34 802BB504 46041082 */  mul.s     $f2, $f2, $f4
-/* E2DE38 802BB508 00000000 */  nop       
+/* E2DE38 802BB508 00000000 */  nop
 /* E2DE3C 802BB50C C6440048 */  lwc1      $f4, 0x48($s2)
 /* E2DE40 802BB510 46002100 */  add.s     $f4, $f4, $f0
 /* E2DE44 802BB514 C6400050 */  lwc1      $f0, 0x50($s2)

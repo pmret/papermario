@@ -13,6 +13,6 @@ glabel func_802412C8_BE8EA8
 /* BE8EC8 802412E8 24020002 */  addiu     $v0, $zero, 2
 /* BE8ECC 802412EC 03E00008 */  jr        $ra
 /* BE8ED0 802412F0 27BD0018 */   addiu    $sp, $sp, 0x18
-/* BE8ED4 802412F4 00000000 */  nop       
-/* BE8ED8 802412F8 00000000 */  nop       
-/* BE8EDC 802412FC 00000000 */  nop       
+/* BE8ED4 802412F4 00000000 */  nop
+/* BE8ED8 802412F8 00000000 */  nop
+/* BE8EDC 802412FC 00000000 */  nop

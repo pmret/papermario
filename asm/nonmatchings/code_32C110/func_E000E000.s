@@ -44,7 +44,7 @@ glabel func_E000E000
 /* 32C1AC E000E09C AE11000C */   sw       $s1, 0xc($s0)
 .LE000E0A0:
 /* 32C1B0 E000E0A0 08003828 */  j         .LE000E0A0
-/* 32C1B4 E000E0A4 00000000 */   nop      
+/* 32C1B4 E000E0A4 00000000 */   nop
 .LE000E0A8:
 /* 32C1B8 E000E0A8 0220202D */  daddu     $a0, $s1, $zero
 /* 32C1BC E000E0AC 00122900 */  sll       $a1, $s2, 4

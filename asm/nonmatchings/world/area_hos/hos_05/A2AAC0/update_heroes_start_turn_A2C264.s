@@ -56,7 +56,7 @@ glabel update_heroes_start_turn_A2C264
 /* A2C330 802420F0 1482002C */  bne       $a0, $v0, .L802421A4
 /* A2C334 802420F4 E60004DC */   swc1     $f0, 0x4dc($s0)
 /* A2C338 802420F8 46140032 */  c.eq.s    $f0, $f20
-/* A2C33C 802420FC 00000000 */  nop       
+/* A2C33C 802420FC 00000000 */  nop
 /* A2C340 80242100 45010028 */  bc1t      .L802421A4
 /* A2C344 80242104 0260202D */   daddu    $a0, $s3, $zero
 /* A2C348 80242108 0C0B36B0 */  jal       resolve_npc
@@ -74,7 +74,7 @@ glabel update_heroes_start_turn_A2C264
 /* A2C378 80242138 44810000 */  mtc1      $at, $f0
 /* A2C37C 8024213C 2463FFFB */  addiu     $v1, $v1, -5
 /* A2C380 80242140 44831000 */  mtc1      $v1, $f2
-/* A2C384 80242144 00000000 */  nop       
+/* A2C384 80242144 00000000 */  nop
 /* A2C388 80242148 468010A0 */  cvt.s.w   $f2, $f2
 /* A2C38C 8024214C 46002101 */  sub.s     $f4, $f4, $f0
 /* A2C390 80242150 E7A20010 */  swc1      $f2, 0x10($sp)
@@ -94,7 +94,7 @@ glabel update_heroes_start_turn_A2C264
 /* A2C3C8 80242188 AFA20024 */  sw        $v0, 0x24($sp)
 /* A2C3CC 8024218C 2463FFE2 */  addiu     $v1, $v1, -0x1e
 /* A2C3D0 80242190 44830000 */  mtc1      $v1, $f0
-/* A2C3D4 80242194 00000000 */  nop       
+/* A2C3D4 80242194 00000000 */  nop
 /* A2C3D8 80242198 46800020 */  cvt.s.w   $f0, $f0
 /* A2C3DC 8024219C 0C01C34C */  jal       func_80070D30
 /* A2C3E0 802421A0 E7A00018 */   swc1     $f0, 0x18($sp)

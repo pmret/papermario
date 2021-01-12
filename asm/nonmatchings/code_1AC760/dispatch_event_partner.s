@@ -23,13 +23,13 @@ glabel dispatch_event_partner
 /* 1AC7A8 8027DEC8 AC430148 */  sw        $v1, 0x148($v0)
 /* 1AC7AC 8027DECC 8E0201D4 */  lw        $v0, 0x1d4($s0)
 /* 1AC7B0 8027DED0 10400004 */  beqz      $v0, .L8027DEE4
-/* 1AC7B4 8027DED4 00000000 */   nop      
+/* 1AC7B4 8027DED4 00000000 */   nop
 /* 1AC7B8 8027DED8 0C0B102B */  jal       kill_script_by_ID
 /* 1AC7BC 8027DEDC 8E0401E4 */   lw       $a0, 0x1e4($s0)
 /* 1AC7C0 8027DEE0 AE0001D4 */  sw        $zero, 0x1d4($s0)
 .L8027DEE4:
 /* 1AC7C4 8027DEE4 12200003 */  beqz      $s1, .L8027DEF4
-/* 1AC7C8 8027DEE8 00000000 */   nop      
+/* 1AC7C8 8027DEE8 00000000 */   nop
 /* 1AC7CC 8027DEEC 0C0B102B */  jal       kill_script_by_ID
 /* 1AC7D0 8027DEF0 0240202D */   daddu    $a0, $s2, $zero
 .L8027DEF4:

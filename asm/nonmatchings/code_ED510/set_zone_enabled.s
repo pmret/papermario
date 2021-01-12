@@ -16,11 +16,11 @@ glabel set_zone_enabled
 /* EEB94 802CA1E4 04800003 */  bltz      $a0, .L802CA1F4
 /* EEB98 802CA1E8 00A0882D */   daddu    $s1, $a1, $zero
 /* EEB9C 802CA1EC 0C0B286E */  jal       set_zone_enabled
-/* EEBA0 802CA1F0 00000000 */   nop      
+/* EEBA0 802CA1F0 00000000 */   nop
 .L802CA1F4:
 /* EEBA4 802CA1F4 86040006 */  lh        $a0, 6($s0)
 /* EEBA8 802CA1F8 04800003 */  bltz      $a0, .L802CA208
-/* EEBAC 802CA1FC 00000000 */   nop      
+/* EEBAC 802CA1FC 00000000 */   nop
 /* EEBB0 802CA200 0C0B286E */  jal       set_zone_enabled
 /* EEBB4 802CA204 0220282D */   daddu    $a1, $s1, $zero
 .L802CA208:
@@ -30,7 +30,7 @@ glabel set_zone_enabled
 /* EEBC4 802CA214 12220006 */  beq       $s1, $v0, .L802CA230
 /* EEBC8 802CA218 3C03FFFE */   lui      $v1, 0xfffe
 /* EEBCC 802CA21C 080B2890 */  j         .L802CA240
-/* EEBD0 802CA220 00000000 */   nop      
+/* EEBD0 802CA220 00000000 */   nop
 .L802CA224:
 /* EEBD4 802CA224 8E020000 */  lw        $v0, ($s0)
 /* EEBD8 802CA228 080B288F */  j         .L802CA23C

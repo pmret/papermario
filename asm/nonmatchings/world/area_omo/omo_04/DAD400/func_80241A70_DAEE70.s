@@ -16,7 +16,7 @@ glabel func_80241A70_DAEE70
 /* DAEE9C 80241A9C A462008E */  sh        $v0, 0x8e($v1)
 /* DAEEA0 80241AA0 00021400 */  sll       $v0, $v0, 0x10
 /* DAEEA4 80241AA4 14400005 */  bnez      $v0, .L80241ABC
-/* DAEEA8 80241AA8 00000000 */   nop      
+/* DAEEA8 80241AA8 00000000 */   nop
 /* DAEEAC 80241AAC 8E0200CC */  lw        $v0, 0xcc($s0)
 /* DAEEB0 80241AB0 8C420000 */  lw        $v0, ($v0)
 /* DAEEB4 80241AB4 AC620028 */  sw        $v0, 0x28($v1)

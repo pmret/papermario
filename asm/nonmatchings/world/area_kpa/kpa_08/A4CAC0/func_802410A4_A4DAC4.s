@@ -16,7 +16,7 @@ glabel func_802410A4_A4DAC4
 /* A4DAF0 802410D0 A482008E */  sh        $v0, 0x8e($a0)
 /* A4DAF4 802410D4 00021400 */  sll       $v0, $v0, 0x10
 /* A4DAF8 802410D8 1C400007 */  bgtz      $v0, .L802410F8
-/* A4DAFC 802410DC 00000000 */   nop      
+/* A4DAFC 802410DC 00000000 */   nop
 /* A4DB00 802410E0 8E0200CC */  lw        $v0, 0xcc($s0)
 /* A4DB04 802410E4 8C430000 */  lw        $v1, ($v0)
 /* A4DB08 802410E8 24020003 */  addiu     $v0, $zero, 3

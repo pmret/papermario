@@ -12,7 +12,7 @@ glabel crash_print_fpr
 /* 76D4 8002C2D4 14400003 */  bnez      $v0, .L8002C2E4
 /* 76D8 8002C2D8 00C0402D */   daddu    $t0, $a2, $zero
 /* 76DC 8002C2DC 1460000A */  bnez      $v1, .L8002C308
-/* 76E0 8002C2E0 00000000 */   nop      
+/* 76E0 8002C2E0 00000000 */   nop
 .L8002C2E4:
 /* 76E4 8002C2E4 3C06800A */  lui       $a2, %hi(D_80098034)
 /* 76E8 8002C2E8 24C68034 */  addiu     $a2, $a2, %lo(D_80098034)
@@ -22,7 +22,7 @@ glabel crash_print_fpr
 /* 76F8 8002C2F8 0C00B082 */  jal       crash_printf_string
 /* 76FC 8002C2FC 0100382D */   daddu    $a3, $t0, $zero
 /* 7700 8002C300 0800B0C6 */  j         .L8002C318
-/* 7704 8002C304 00000000 */   nop      
+/* 7704 8002C304 00000000 */   nop
 .L8002C308:
 /* 7708 8002C308 3C06800A */  lui       $a2, %hi(D_80098040)
 /* 770C 8002C30C 24C68040 */  addiu     $a2, $a2, %lo(D_80098040)

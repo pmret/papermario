@@ -38,11 +38,11 @@ glabel func_802D5B10
 /* FA540 802D5B90 8C820000 */  lw        $v0, ($a0)
 .L802D5B94:
 /* FA544 802D5B94 10450005 */  beq       $v0, $a1, .L802D5BAC
-/* FA548 802D5B98 00000000 */   nop      
+/* FA548 802D5B98 00000000 */   nop
 /* FA54C 802D5B9C 24840014 */  addiu     $a0, $a0, 0x14
 /* FA550 802D5BA0 8C820000 */  lw        $v0, ($a0)
 /* FA554 802D5BA4 1446FFFB */  bne       $v0, $a2, .L802D5B94
-/* FA558 802D5BA8 00000000 */   nop      
+/* FA558 802D5BA8 00000000 */   nop
 .L802D5BAC:
 /* FA55C 802D5BAC 50800017 */  beql      $a0, $zero, .L802D5C0C
 /* FA560 802D5BB0 26730001 */   addiu    $s3, $s3, 1
@@ -56,7 +56,7 @@ glabel func_802D5B10
 /* FA580 802D5BD0 02341021 */   addu     $v0, $s1, $s4
 /* FA584 802D5BD4 8C440000 */  lw        $a0, ($v0)
 /* FA588 802D5BD8 0C0B102B */  jal       kill_script_by_ID
-/* FA58C 802D5BDC 00000000 */   nop      
+/* FA58C 802D5BDC 00000000 */   nop
 .L802D5BE0:
 /* FA590 802D5BE0 5200000A */  beql      $s0, $zero, .L802D5C0C
 /* FA594 802D5BE4 26730001 */   addiu    $s3, $s3, 1
@@ -78,7 +78,7 @@ glabel func_802D5B10
 /* FA5D0 802D5C20 AFA20010 */   sw       $v0, 0x10($sp)
 .L802D5C24:
 /* FA5D4 802D5C24 0C01582A */  jal       func_800560A8
-/* FA5D8 802D5C28 00000000 */   nop      
+/* FA5D8 802D5C28 00000000 */   nop
 /* FA5DC 802D5C2C 3C04802E */  lui       $a0, %hi(D_802D9D30)
 /* FA5E0 802D5C30 24849D30 */  addiu     $a0, $a0, %lo(D_802D9D30)
 /* FA5E4 802D5C34 8C830000 */  lw        $v1, ($a0)

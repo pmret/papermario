@@ -17,7 +17,7 @@ glabel update_scripts
 /* E8754 802C3DA4 80420078 */  lb        $v0, 0x78($v0)
 /* E8758 802C3DA8 24030001 */  addiu     $v1, $zero, 1
 /* E875C 802C3DAC 10430042 */  beq       $v0, $v1, .L802C3EB8
-/* E8760 802C3DB0 00000000 */   nop      
+/* E8760 802C3DB0 00000000 */   nop
 /* E8764 802C3DB4 3C01802E */  lui       $at, %hi(D_802D9CA4)
 /* E8768 802C3DB8 AC239CA4 */  sw        $v1, %lo(D_802D9CA4)($at)
 /* E876C 802C3DBC 0C0B0C00 */  jal       sort_scripts
@@ -62,7 +62,7 @@ glabel update_scripts
 /* E8800 802C3E50 C6000154 */  lwc1      $f0, 0x154($s0)
 /* E8804 802C3E54 46000021 */  cvt.d.s   $f0, $f0
 /* E8808 802C3E58 4634003C */  c.lt.d    $f0, $f20
-/* E880C 802C3E5C 00000000 */  nop       
+/* E880C 802C3E5C 00000000 */  nop
 /* E8810 802C3E60 4501000B */  bc1t      .L802C3E90
 /* E8814 802C3E64 0200202D */   daddu    $a0, $s0, $zero
 /* E8818 802C3E68 46340001 */  sub.d     $f0, $f0, $f20
@@ -70,12 +70,12 @@ glabel update_scripts
 /* E8820 802C3E70 0C0B1D01 */  jal       si_execute_next_command
 /* E8824 802C3E74 E6000154 */   swc1     $f0, 0x154($s0)
 /* E8828 802C3E78 14560003 */  bne       $v0, $s6, .L802C3E88
-/* E882C 802C3E7C 00000000 */   nop      
+/* E882C 802C3E7C 00000000 */   nop
 /* E8830 802C3E80 080B0FA4 */  j         .L802C3E90
 /* E8834 802C3E84 24110001 */   addiu    $s1, $zero, 1
 .L802C3E88:
 /* E8838 802C3E88 1455FFF1 */  bne       $v0, $s5, .L802C3E50
-/* E883C 802C3E8C 00000000 */   nop      
+/* E883C 802C3E8C 00000000 */   nop
 .L802C3E90:
 /* E8840 802C3E90 16200007 */  bnez      $s1, .L802C3EB0
 /* E8844 802C3E94 26940004 */   addiu    $s4, $s4, 4

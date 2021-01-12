@@ -16,7 +16,7 @@ glabel func_80241C58_D2D988
 /* D2D9B4 80241C84 A462008E */  sh        $v0, 0x8e($v1)
 /* D2D9B8 80241C88 00021400 */  sll       $v0, $v0, 0x10
 /* D2D9BC 80241C8C 14400005 */  bnez      $v0, .L80241CA4
-/* D2D9C0 80241C90 00000000 */   nop      
+/* D2D9C0 80241C90 00000000 */   nop
 /* D2D9C4 80241C94 960200AA */  lhu       $v0, 0xaa($s0)
 /* D2D9C8 80241C98 A462008E */  sh        $v0, 0x8e($v1)
 /* D2D9CC 80241C9C 2402000E */  addiu     $v0, $zero, 0xe

@@ -25,7 +25,7 @@ glabel func_802D42AC
 /* F8CA4 802D42F4 10400015 */  beqz      $v0, .L802D434C
 /* F8CA8 802D42F8 0000102D */   daddu    $v0, $zero, $zero
 /* F8CAC 802D42FC 0C048379 */  jal       func_80120DE4
-/* F8CB0 802D4300 00000000 */   nop      
+/* F8CB0 802D4300 00000000 */   nop
 /* F8CB4 802D4304 3C013F80 */  lui       $at, 0x3f80
 /* F8CB8 802D4308 44810000 */  mtc1      $at, $f0
 /* F8CBC 802D430C AE020000 */  sw        $v0, ($s0)

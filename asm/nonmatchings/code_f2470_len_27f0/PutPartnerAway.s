@@ -43,7 +43,7 @@ glabel PutPartnerAway
 /* F43D0 802CFA20 00621821 */  addu      $v1, $v1, $v0
 /* F43D4 802CFA24 00031843 */  sra       $v1, $v1, 1
 /* F43D8 802CFA28 44830000 */  mtc1      $v1, $f0
-/* F43DC 802CFA2C 00000000 */  nop       
+/* F43DC 802CFA2C 00000000 */  nop
 /* F43E0 802CFA30 46800020 */  cvt.s.w   $f0, $f0
 /* F43E4 802CFA34 46001780 */  add.s     $f30, $f2, $f0
 /* F43E8 802CFA38 3C014080 */  lui       $at, 0x4080
@@ -72,7 +72,7 @@ glabel PutPartnerAway
 /* F4444 802CFA94 46041083 */  div.s     $f2, $f2, $f4
 /* F4448 802CFA98 4600118D */  trunc.w.s $f6, $f2
 /* F444C 802CFA9C 44023000 */  mfc1      $v0, $f6
-/* F4450 802CFAA0 00000000 */  nop       
+/* F4450 802CFAA0 00000000 */  nop
 /* F4454 802CFAA4 A622008E */  sh        $v0, 0x8e($s1)
 /* F4458 802CFAA8 00021400 */  sll       $v0, $v0, 0x10
 /* F445C 802CFAAC 00021403 */  sra       $v0, $v0, 0x10
@@ -89,17 +89,17 @@ glabel PutPartnerAway
 /* F4484 802CFAD4 8622008E */  lh        $v0, 0x8e($s1)
 /* F4488 802CFAD8 C6200014 */  lwc1      $f0, 0x14($s1)
 /* F448C 802CFADC 44822000 */  mtc1      $v0, $f4
-/* F4490 802CFAE0 00000000 */  nop       
+/* F4490 802CFAE0 00000000 */  nop
 /* F4494 802CFAE4 46802120 */  cvt.s.w   $f4, $f4
 /* F4498 802CFAE8 46040002 */  mul.s     $f0, $f0, $f4
-/* F449C 802CFAEC 00000000 */  nop       
+/* F449C 802CFAEC 00000000 */  nop
 /* F44A0 802CFAF0 46040002 */  mul.s     $f0, $f0, $f4
-/* F44A4 802CFAF4 00000000 */  nop       
+/* F44A4 802CFAF4 00000000 */  nop
 /* F44A8 802CFAF8 3C013F00 */  lui       $at, 0x3f00
 /* F44AC 802CFAFC 44811000 */  mtc1      $at, $f2
-/* F44B0 802CFB00 00000000 */  nop       
+/* F44B0 802CFB00 00000000 */  nop
 /* F44B4 802CFB04 46020002 */  mul.s     $f0, $f0, $f2
-/* F44B8 802CFB08 00000000 */  nop       
+/* F44B8 802CFB08 00000000 */  nop
 /* F44BC 802CFB0C 8E030000 */  lw        $v1, ($s0)
 /* F44C0 802CFB10 461CF701 */  sub.s     $f28, $f30, $f28
 /* F44C4 802CFB14 000310C0 */  sll       $v0, $v1, 3
@@ -121,7 +121,7 @@ glabel PutPartnerAway
 /* F4500 802CFB50 C622003C */  lwc1      $f2, 0x3c($s1)
 /* F4504 802CFB54 46001080 */  add.s     $f2, $f2, $f0
 /* F4508 802CFB58 4480A000 */  mtc1      $zero, $f20
-/* F450C 802CFB5C 00000000 */  nop       
+/* F450C 802CFB5C 00000000 */  nop
 /* F4510 802CFB60 4614003E */  c.le.s    $f0, $f20
 /* F4514 802CFB64 E620001C */  swc1      $f0, 0x1c($s1)
 /* F4518 802CFB68 4500000A */  bc1f      .L802CFB94
@@ -144,10 +144,10 @@ glabel PutPartnerAway
 /* F4558 802CFBA8 3C014120 */  lui       $at, 0x4120
 /* F455C 802CFBAC 44811000 */  mtc1      $at, $f2
 /* F4560 802CFBB0 44820000 */  mtc1      $v0, $f0
-/* F4564 802CFBB4 00000000 */  nop       
+/* F4564 802CFBB4 00000000 */  nop
 /* F4568 802CFBB8 46800020 */  cvt.s.w   $f0, $f0
 /* F456C 802CFBBC 4600103C */  c.lt.s    $f2, $f0
-/* F4570 802CFBC0 00000000 */  nop       
+/* F4570 802CFBC0 00000000 */  nop
 /* F4574 802CFBC4 45030001 */  bc1tl     .L802CFBCC
 /* F4578 802CFBC8 46001006 */   mov.s    $f0, $f2
 .L802CFBCC:

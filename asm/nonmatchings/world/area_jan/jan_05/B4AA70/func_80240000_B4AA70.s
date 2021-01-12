@@ -18,4 +18,4 @@ glabel func_80240000_B4AA70
 /* B4AAA0 80240030 8FBF0010 */  lw        $ra, 0x10($sp)
 /* B4AAA4 80240034 03E00008 */  jr        $ra
 /* B4AAA8 80240038 27BD0018 */   addiu    $sp, $sp, 0x18
-/* B4AAAC 8024003C 00000000 */  nop       
+/* B4AAAC 8024003C 00000000 */  nop

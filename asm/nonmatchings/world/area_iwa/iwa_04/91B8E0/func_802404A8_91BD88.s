@@ -16,7 +16,7 @@ glabel func_802404A8_91BD88
 /* 91BDB4 802404D4 0040802D */   daddu    $s0, $v0, $zero
 /* 91BDB8 802404D8 C60C000C */  lwc1      $f12, 0xc($s0)
 /* 91BDBC 802404DC 44820000 */  mtc1      $v0, $f0
-/* 91BDC0 802404E0 00000000 */  nop       
+/* 91BDC0 802404E0 00000000 */  nop
 /* 91BDC4 802404E4 46800020 */  cvt.s.w   $f0, $f0
 /* 91BDC8 802404E8 46006300 */  add.s     $f12, $f12, $f0
 /* 91BDCC 802404EC 3C0142B4 */  lui       $at, 0x42b4

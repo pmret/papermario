@@ -16,7 +16,7 @@ glabel NpcMoveTo
 .L802CE258:
 /* F2C08 802CE258 8E420070 */  lw        $v0, 0x70($s2)
 /* F2C0C 802CE25C 1440003D */  bnez      $v0, .L802CE354
-/* F2C10 802CE260 00000000 */   nop      
+/* F2C10 802CE260 00000000 */   nop
 /* F2C14 802CE264 8E250000 */  lw        $a1, ($s1)
 /* F2C18 802CE268 26310004 */  addiu     $s1, $s1, 4
 /* F2C1C 802CE26C 0C0B1EAF */  jal       get_variable
@@ -29,13 +29,13 @@ glabel NpcMoveTo
 /* F2C38 802CE288 8E250000 */  lw        $a1, ($s1)
 /* F2C3C 802CE28C 26310004 */  addiu     $s1, $s1, 4
 /* F2C40 802CE290 4482B000 */  mtc1      $v0, $f22
-/* F2C44 802CE294 00000000 */  nop       
+/* F2C44 802CE294 00000000 */  nop
 /* F2C48 802CE298 4680B5A0 */  cvt.s.w   $f22, $f22
 /* F2C4C 802CE29C 0C0B1EAF */  jal       get_variable
 /* F2C50 802CE2A0 0240202D */   daddu    $a0, $s2, $zero
 /* F2C54 802CE2A4 8E250000 */  lw        $a1, ($s1)
 /* F2C58 802CE2A8 4482A000 */  mtc1      $v0, $f20
-/* F2C5C 802CE2AC 00000000 */  nop       
+/* F2C5C 802CE2AC 00000000 */  nop
 /* F2C60 802CE2B0 4680A520 */  cvt.s.w   $f20, $f20
 /* F2C64 802CE2B4 0C0B1EAF */  jal       get_variable
 /* F2C68 802CE2B8 0240202D */   daddu    $a0, $s2, $zero
@@ -68,7 +68,7 @@ glabel NpcMoveTo
 /* F2CD0 802CE320 A602008E */   sh       $v0, 0x8e($s0)
 .L802CE324:
 /* F2CD4 802CE324 44820000 */  mtc1      $v0, $f0
-/* F2CD8 802CE328 00000000 */  nop       
+/* F2CD8 802CE328 00000000 */  nop
 /* F2CDC 802CE32C 46800020 */  cvt.s.w   $f0, $f0
 /* F2CE0 802CE330 46003003 */  div.s     $f0, $f6, $f0
 /* F2CE4 802CE334 E6000018 */  swc1      $f0, 0x18($s0)
@@ -99,7 +99,7 @@ glabel NpcMoveTo
 /* F2D3C 802CE38C 44801000 */  mtc1      $zero, $f2
 /* F2D40 802CE390 46000021 */  cvt.d.s   $f0, $f0
 /* F2D44 802CE394 4622003C */  c.lt.d    $f0, $f2
-/* F2D48 802CE398 00000000 */  nop       
+/* F2D48 802CE398 00000000 */  nop
 /* F2D4C 802CE39C 45000003 */  bc1f      .L802CE3AC
 /* F2D50 802CE3A0 0200202D */   daddu    $a0, $s0, $zero
 /* F2D54 802CE3A4 080B38EC */  j         .L802CE3B0
@@ -108,7 +108,7 @@ glabel NpcMoveTo
 /* F2D5C 802CE3AC 24050001 */  addiu     $a1, $zero, 1
 .L802CE3B0:
 /* F2D60 802CE3B0 0C00F598 */  jal       func_8003D660
-/* F2D64 802CE3B4 00000000 */   nop      
+/* F2D64 802CE3B4 00000000 */   nop
 /* F2D68 802CE3B8 C60C0038 */  lwc1      $f12, 0x38($s0)
 /* F2D6C 802CE3BC C60E0040 */  lwc1      $f14, 0x40($s0)
 /* F2D70 802CE3C0 8E060060 */  lw        $a2, 0x60($s0)
@@ -121,15 +121,15 @@ glabel NpcMoveTo
 /* F2D8C 802CE3DC 44801000 */  mtc1      $zero, $f2
 /* F2D90 802CE3E0 46002021 */  cvt.d.s   $f0, $f4
 /* F2D94 802CE3E4 4622003C */  c.lt.d    $f0, $f2
-/* F2D98 802CE3E8 00000000 */  nop       
+/* F2D98 802CE3E8 00000000 */  nop
 /* F2D9C 802CE3EC 45000004 */  bc1f      .L802CE400
-/* F2DA0 802CE3F0 00000000 */   nop      
+/* F2DA0 802CE3F0 00000000 */   nop
 /* F2DA4 802CE3F4 3C013F80 */  lui       $at, 0x3f80
 /* F2DA8 802CE3F8 44812000 */  mtc1      $at, $f4
-/* F2DAC 802CE3FC 00000000 */  nop       
+/* F2DAC 802CE3FC 00000000 */  nop
 .L802CE400:
 /* F2DB0 802CE400 4604303E */  c.le.s    $f6, $f4
-/* F2DB4 802CE404 00000000 */  nop       
+/* F2DB4 802CE404 00000000 */  nop
 /* F2DB8 802CE408 45010002 */  bc1t      .L802CE414
 /* F2DBC 802CE40C 24020001 */   addiu    $v0, $zero, 1
 /* F2DC0 802CE410 0000102D */  daddu     $v0, $zero, $zero

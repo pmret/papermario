@@ -17,7 +17,7 @@ glabel func_802425C8_911C78
 /* 911CA8 802425F8 A602008E */  sh        $v0, 0x8e($s0)
 /* 911CAC 802425FC 00021400 */  sll       $v0, $v0, 0x10
 /* 911CB0 80242600 1C400012 */  bgtz      $v0, .L8024264C
-/* 911CB4 80242604 00000000 */   nop      
+/* 911CB4 80242604 00000000 */   nop
 /* 911CB8 80242608 3C02800F */  lui       $v0, %hi(gPlayerStatusPtr)
 /* 911CBC 8024260C 8C427B30 */  lw        $v0, %lo(gPlayerStatusPtr)($v0)
 /* 911CC0 80242610 C60C0038 */  lwc1      $f12, 0x38($s0)

@@ -29,7 +29,7 @@ glabel load_simple_entity_data
 /* A79FC 801112FC 0C044457 */  jal       is_entity_data_loaded
 /* A7A00 80111300 27A70014 */   addiu    $a3, $sp, 0x14
 /* A7A04 80111304 10400020 */  beqz      $v0, .L80111388
-/* A7A08 80111308 00000000 */   nop      
+/* A7A08 80111308 00000000 */   nop
 /* A7A0C 8011130C 8E22001C */  lw        $v0, 0x1c($s1)
 /* A7A10 80111310 8E230018 */  lw        $v1, 0x18($s1)
 /* A7A14 80111314 00431023 */  subu      $v0, $v0, $v1
@@ -37,14 +37,14 @@ glabel load_simple_entity_data
 /* A7A1C 8011131C 02021021 */  addu      $v0, $s0, $v0
 /* A7A20 80111320 2C425FFD */  sltiu     $v0, $v0, 0x5ffd
 /* A7A24 80111324 14400007 */  bnez      $v0, .L80111344
-/* A7A28 80111328 00000000 */   nop      
+/* A7A28 80111328 00000000 */   nop
 /* A7A2C 8011132C 0C0441A9 */  jal       get_entity_type
 /* A7A30 80111330 92440004 */   lbu      $a0, 4($s2)
 /* A7A34 80111334 0C0441A9 */  jal       get_entity_type
 /* A7A38 80111338 92440004 */   lbu      $a0, 4($s2)
 .L8011133C:
 /* A7A3C 8011133C 080444CF */  j         .L8011133C
-/* A7A40 80111340 00000000 */   nop      
+/* A7A40 80111340 00000000 */   nop
 .L80111344:
 /* A7A44 80111344 8E22001C */  lw        $v0, 0x1c($s1)
 /* A7A48 80111348 3C068015 */  lui       $a2, %hi(D_801512C4)
@@ -79,16 +79,16 @@ glabel load_simple_entity_data
 /* A7AB8 801113B8 AE430044 */  sw        $v1, 0x44($s2)
 .L801113BC:
 /* A7ABC 801113BC 0C0441A9 */  jal       get_entity_type
-/* A7AC0 801113C0 00000000 */   nop      
+/* A7AC0 801113C0 00000000 */   nop
 /* A7AC4 801113C4 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
 /* A7AC8 801113C8 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* A7ACC 801113CC 80420070 */  lb        $v0, 0x70($v0)
 /* A7AD0 801113D0 14400005 */  bnez      $v0, .L801113E8
-/* A7AD4 801113D4 00000000 */   nop      
+/* A7AD4 801113D4 00000000 */   nop
 /* A7AD8 801113D8 3C018015 */  lui       $at, %hi(D_8015165C)
 /* A7ADC 801113DC AC30165C */  sw        $s0, %lo(D_8015165C)($at)
 /* A7AE0 801113E0 080444FC */  j         .L801113F0
-/* A7AE4 801113E4 00000000 */   nop      
+/* A7AE4 801113E4 00000000 */   nop
 .L801113E8:
 /* A7AE8 801113E8 3C018015 */  lui       $at, %hi(D_80151660)
 /* A7AEC 801113EC AC301660 */  sw        $s0, %lo(D_80151660)($at)

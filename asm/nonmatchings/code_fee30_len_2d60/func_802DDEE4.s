@@ -50,7 +50,7 @@ glabel func_802DDEE4
 /* 101080 802DDF90 0C04EAA7 */  jal       func_8013AA9C
 /* 101084 802DDF94 AFA80014 */   sw       $t0, 0x14($sp)
 /* 101088 802DDF98 12A00004 */  beqz      $s5, .L802DDFAC
-/* 10108C 802DDF9C 00000000 */   nop      
+/* 10108C 802DDF9C 00000000 */   nop
 /* 101090 802DDFA0 8E02004C */  lw        $v0, 0x4c($s0)
 /* 101094 802DDFA4 080B77ED */  j         .L802DDFB4
 /* 101098 802DDFA8 00571025 */   or       $v0, $v0, $s7

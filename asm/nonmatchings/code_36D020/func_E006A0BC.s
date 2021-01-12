@@ -59,7 +59,7 @@ glabel func_E006A0BC
 /* 36D1B4 E006A194 44801800 */  mtc1      $zero, $f3
 /* 36D1B8 E006A198 46000021 */  cvt.d.s   $f0, $f0
 /* 36D1BC E006A19C 46220002 */  mul.d     $f0, $f0, $f2
-/* 36D1C0 E006A1A0 00000000 */  nop       
+/* 36D1C0 E006A1A0 00000000 */  nop
 /* 36D1C4 E006A1A4 24630001 */  addiu     $v1, $v1, 1
 /* 36D1C8 E006A1A8 00031880 */  sll       $v1, $v1, 2
 /* 36D1CC E006A1AC 3C01E007 */  lui       $at, %hi(D_E006AF50)
@@ -72,7 +72,7 @@ glabel func_E006A0BC
 /* 36D1E8 E006A1C8 46800020 */  cvt.s.w   $f0, $f0
 /* 36D1EC E006A1CC 46000021 */  cvt.d.s   $f0, $f0
 /* 36D1F0 E006A1D0 46220002 */  mul.d     $f0, $f0, $f2
-/* 36D1F4 E006A1D4 00000000 */  nop       
+/* 36D1F4 E006A1D4 00000000 */  nop
 /* 36D1F8 E006A1D8 AC800090 */  sw        $zero, 0x90($a0)
 /* 36D1FC E006A1DC 46200020 */  cvt.s.d   $f0, $f0
 /* 36D200 E006A1E0 03E00008 */  jr        $ra

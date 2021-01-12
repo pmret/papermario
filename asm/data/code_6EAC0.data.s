@@ -27,7 +27,7 @@ glabel nuContCallBack
 .word 0x00000000, 0x80093CA8, 0x02000000, 0x00000000
 
 glabel nuContRmbSearchTime
-.word 0x0000012C, 0x8005FB10, contRmbCheckMesg, contRmbStartMesg, contRmbStopMesg, contRmbForceStopMesg, contRmbForceStopEndMesg, 0x00000000
+.word 0x0000012C, contRmbControl, contRmbCheckMesg, contRmbStartMesg, contRmbStopMesg, contRmbForceStopMesg, contRmbForceStopEndMesg, 0x00000000
 
 glabel nuContRmbCallBack
 .word 0x00000000, 0x80093CE4, 0x03000000, 0x00000000

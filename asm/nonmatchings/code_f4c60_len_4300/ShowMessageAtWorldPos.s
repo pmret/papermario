@@ -35,15 +35,15 @@ glabel ShowMessageAtWorldPos
 /* F5384 802D09D4 0C049640 */  jal       load_string
 /* F5388 802D09D8 ACA00000 */   sw       $zero, ($a1)
 /* F538C 802D09DC 44920000 */  mtc1      $s2, $f0
-/* F5390 802D09E0 00000000 */  nop       
+/* F5390 802D09E0 00000000 */  nop
 /* F5394 802D09E4 46800020 */  cvt.s.w   $f0, $f0
 /* F5398 802D09E8 44050000 */  mfc1      $a1, $f0
 /* F539C 802D09EC 44900000 */  mtc1      $s0, $f0
-/* F53A0 802D09F0 00000000 */  nop       
+/* F53A0 802D09F0 00000000 */  nop
 /* F53A4 802D09F4 46800020 */  cvt.s.w   $f0, $f0
 /* F53A8 802D09F8 44060000 */  mfc1      $a2, $f0
 /* F53AC 802D09FC 44910000 */  mtc1      $s1, $f0
-/* F53B0 802D0A00 00000000 */  nop       
+/* F53B0 802D0A00 00000000 */  nop
 /* F53B4 802D0A04 46800020 */  cvt.s.w   $f0, $f0
 /* F53B8 802D0A08 3C048007 */  lui       $a0, %hi(gCurrentCameraID)
 /* F53BC 802D0A0C 8C847410 */  lw        $a0, %lo(gCurrentCameraID)($a0)

@@ -39,11 +39,11 @@ glabel func_802A1740_71ED90
 /* 71EE10 802A17C0 0220202D */   daddu    $a0, $s1, $zero
 /* 71EE14 802A17C4 82230218 */  lb        $v1, 0x218($s1)
 /* 71EE18 802A17C8 1460000A */  bnez      $v1, .L802A17F4
-/* 71EE1C 802A17CC 00000000 */   nop      
+/* 71EE1C 802A17CC 00000000 */   nop
 /* 71EE20 802A17D0 8C42007C */  lw        $v0, 0x7c($v0)
 /* 71EE24 802A17D4 30420020 */  andi      $v0, $v0, 0x20
 /* 71EE28 802A17D8 14400006 */  bnez      $v0, .L802A17F4
-/* 71EE2C 802A17DC 00000000 */   nop      
+/* 71EE2C 802A17DC 00000000 */   nop
 /* 71EE30 802A17E0 C62C018C */  lwc1      $f12, 0x18c($s1)
 /* 71EE34 802A17E4 46146300 */  add.s     $f12, $f12, $f20
 /* 71EE38 802A17E8 0C00A6C9 */  jal       clamp_angle

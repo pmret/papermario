@@ -16,7 +16,7 @@ glabel func_80242014_D21EA4
 /* D21ED0 80242040 0C0B1EAF */  jal       get_variable
 /* D21ED4 80242044 0040802D */   daddu    $s0, $v0, $zero
 /* D21ED8 80242048 44820000 */  mtc1      $v0, $f0
-/* D21EDC 8024204C 00000000 */  nop       
+/* D21EDC 8024204C 00000000 */  nop
 /* D21EE0 80242050 46800020 */  cvt.s.w   $f0, $f0
 /* D21EE4 80242054 24020002 */  addiu     $v0, $zero, 2
 /* D21EE8 80242058 00501804 */  sllv      $v1, $s0, $v0

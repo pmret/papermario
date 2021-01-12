@@ -18,7 +18,7 @@ glabel IdleRunToGoal
 .L8027A298:
 /* 1A8B78 8027A298 8E420070 */  lw        $v0, 0x70($s2)
 /* 1A8B7C 8027A29C 14400055 */  bnez      $v0, .L8027A3F4
-/* 1A8B80 8027A2A0 00000000 */   nop      
+/* 1A8B80 8027A2A0 00000000 */   nop
 /* 1A8B84 8027A2A4 8E250000 */  lw        $a1, ($s1)
 /* 1A8B88 8027A2A8 26310004 */  addiu     $s1, $s1, 4
 /* 1A8B8C 8027A2AC 0C0B1EAF */  jal       get_variable
@@ -26,11 +26,11 @@ glabel IdleRunToGoal
 /* 1A8B94 8027A2B4 0040202D */  daddu     $a0, $v0, $zero
 /* 1A8B98 8027A2B8 2402FF81 */  addiu     $v0, $zero, -0x7f
 /* 1A8B9C 8027A2BC 14820002 */  bne       $a0, $v0, .L8027A2C8
-/* 1A8BA0 8027A2C0 00000000 */   nop      
+/* 1A8BA0 8027A2C0 00000000 */   nop
 /* 1A8BA4 8027A2C4 8E440148 */  lw        $a0, 0x148($s2)
 .L8027A2C8:
 /* 1A8BA8 8027A2C8 0C09A75B */  jal       get_actor
-/* 1A8BAC 8027A2CC 00000000 */   nop      
+/* 1A8BAC 8027A2CC 00000000 */   nop
 /* 1A8BB0 8027A2D0 0040802D */  daddu     $s0, $v0, $zero
 /* 1A8BB4 8027A2D4 AE500074 */  sw        $s0, 0x74($s2)
 /* 1A8BB8 8027A2D8 8E250000 */  lw        $a1, ($s1)
@@ -70,7 +70,7 @@ glabel IdleRunToGoal
 /* 1A8C40 8027A360 46001003 */  div.s     $f0, $f2, $f0
 /* 1A8C44 8027A364 4600020D */  trunc.w.s $f8, $f0
 /* 1A8C48 8027A368 44024000 */  mfc1      $v0, $f8
-/* 1A8C4C 8027A36C 00000000 */  nop       
+/* 1A8C4C 8027A36C 00000000 */  nop
 /* 1A8C50 8027A370 A6020120 */  sh        $v0, 0x120($s0)
 /* 1A8C54 8027A374 00021400 */  sll       $v0, $v0, 0x10
 /* 1A8C58 8027A378 14400002 */  bnez      $v0, .L8027A384
@@ -80,10 +80,10 @@ glabel IdleRunToGoal
 /* 1A8C64 8027A384 86020120 */  lh        $v0, 0x120($s0)
 /* 1A8C68 8027A388 C6020108 */  lwc1      $f2, 0x108($s0)
 /* 1A8C6C 8027A38C 44823000 */  mtc1      $v0, $f6
-/* 1A8C70 8027A390 00000000 */  nop       
+/* 1A8C70 8027A390 00000000 */  nop
 /* 1A8C74 8027A394 468031A0 */  cvt.s.w   $f6, $f6
 /* 1A8C78 8027A398 46023102 */  mul.s     $f4, $f6, $f2
-/* 1A8C7C 8027A39C 00000000 */  nop       
+/* 1A8C7C 8027A39C 00000000 */  nop
 /* 1A8C80 8027A3A0 C6000114 */  lwc1      $f0, 0x114($s0)
 /* 1A8C84 8027A3A4 46040001 */  sub.s     $f0, $f0, $f4
 /* 1A8C88 8027A3A8 46060003 */  div.s     $f0, $f0, $f6
@@ -92,7 +92,7 @@ glabel IdleRunToGoal
 /* 1A8C94 8027A3B4 E6020108 */   swc1     $f2, 0x108($s0)
 .L8027A3B8:
 /* 1A8C98 8027A3B8 44820000 */  mtc1      $v0, $f0
-/* 1A8C9C 8027A3BC 00000000 */  nop       
+/* 1A8C9C 8027A3BC 00000000 */  nop
 /* 1A8CA0 8027A3C0 46800020 */  cvt.s.w   $f0, $f0
 /* 1A8CA4 8027A3C4 46001003 */  div.s     $f0, $f2, $f0
 /* 1A8CA8 8027A3C8 E6000108 */  swc1      $f0, 0x108($s0)
@@ -103,7 +103,7 @@ glabel IdleRunToGoal
 /* 1A8CB8 8027A3D8 24420001 */  addiu     $v0, $v0, 1
 .L8027A3DC:
 /* 1A8CBC 8027A3DC 44820000 */  mtc1      $v0, $f0
-/* 1A8CC0 8027A3E0 00000000 */  nop       
+/* 1A8CC0 8027A3E0 00000000 */  nop
 /* 1A8CC4 8027A3E4 46800020 */  cvt.s.w   $f0, $f0
 /* 1A8CC8 8027A3E8 E620004C */  swc1      $f0, 0x4c($s1)
 /* 1A8CCC 8027A3EC 24020001 */  addiu     $v0, $zero, 1
@@ -118,9 +118,9 @@ glabel IdleRunToGoal
 /* 1A8CEC 8027A40C C6020108 */  lwc1      $f2, 0x108($s0)
 /* 1A8CF0 8027A410 3C014080 */  lui       $at, 0x4080
 /* 1A8CF4 8027A414 44810000 */  mtc1      $at, $f0
-/* 1A8CF8 8027A418 00000000 */  nop       
+/* 1A8CF8 8027A418 00000000 */  nop
 /* 1A8CFC 8027A41C 4600103C */  c.lt.s    $f2, $f0
-/* 1A8D00 8027A420 00000000 */  nop       
+/* 1A8D00 8027A420 00000000 */  nop
 /* 1A8D04 8027A424 45000007 */  bc1f      .L8027A444
 /* 1A8D08 8027A428 0000202D */   daddu    $a0, $zero, $zero
 /* 1A8D0C 8027A42C C6000110 */  lwc1      $f0, 0x110($s0)
@@ -138,7 +138,7 @@ glabel IdleRunToGoal
 /* 1A8D38 8027A458 24040001 */  addiu     $a0, $zero, 1
 .L8027A45C:
 /* 1A8D3C 8027A45C 0C0990BC */  jal       play_movement_dust_effects
-/* 1A8D40 8027A460 00000000 */   nop      
+/* 1A8D40 8027A460 00000000 */   nop
 /* 1A8D44 8027A464 C6200000 */  lwc1      $f0, ($s1)
 /* 1A8D48 8027A468 E6000144 */  swc1      $f0, 0x144($s0)
 /* 1A8D4C 8027A46C C6200008 */  lwc1      $f0, 8($s1)
@@ -159,7 +159,7 @@ glabel IdleRunToGoal
 /* 1A8D88 8027A4A8 14400004 */  bnez      $v0, .L8027A4BC
 /* 1A8D8C 8027A4AC 24020001 */   addiu    $v0, $zero, 1
 /* 1A8D90 8027A4B0 0C0154F0 */  jal       func_800553C0
-/* 1A8D94 8027A4B4 00000000 */   nop      
+/* 1A8D94 8027A4B4 00000000 */   nop
 .L8027A4B8:
 /* 1A8D98 8027A4B8 24020001 */  addiu     $v0, $zero, 1
 .L8027A4BC:

@@ -279,15 +279,17 @@ glabel func_802417E0_A65870
 /* A65C5C 80241BCC 2C620015 */  sltiu     $v0, $v1, 0x15
 /* A65C60 80241BD0 10400009 */  beqz      $v0, .L80241BF8
 /* A65C64 80241BD4 00031080 */   sll      $v0, $v1, 2
-/* A65C68 80241BD8 3C018024 */  lui       $at, %hi(func_80243010_A1E110)
+/* A65C68 80241BD8 3C018024 */  lui       $at, %hi(jtbl_80243010_A670A0)
 /* A65C6C 80241BDC 00220821 */  addu      $at, $at, $v0
-/* A65C70 80241BE0 8C223010 */  lw        $v0, %lo(func_80243010_A1E110)($at)
+/* A65C70 80241BE0 8C223010 */  lw        $v0, %lo(jtbl_80243010_A670A0)($at)
 /* A65C74 80241BE4 00400008 */  jr        $v0
 /* A65C78 80241BE8 00000000 */   nop
+glabel L80241BEC_A65C7C
 /* A65C7C 80241BEC 8E420028 */  lw        $v0, 0x28($s2)
 /* A65C80 80241BF0 24420001 */  addiu     $v0, $v0, 1
 /* A65C84 80241BF4 AE420028 */  sw        $v0, 0x28($s2)
 .L80241BF8:
+glabel L80241BF8_A65C88
 /* A65C88 80241BF8 0000102D */  daddu     $v0, $zero, $zero
 .L80241BFC:
 /* A65C8C 80241BFC 8FBF0068 */  lw        $ra, 0x68($sp)

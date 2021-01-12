@@ -17,7 +17,7 @@ glabel func_802BB228_E2DB58
 /* E2DB88 802BB258 44811000 */  mtc1      $at, $f2
 /* E2DB8C 802BB25C 46200020 */  cvt.s.d   $f0, $f0
 /* E2DB90 802BB260 4600103C */  c.lt.s    $f2, $f0
-/* E2DB94 802BB264 00000000 */  nop       
+/* E2DB94 802BB264 00000000 */  nop
 /* E2DB98 802BB268 45000002 */  bc1f      .L802BB274
 /* E2DB9C 802BB26C E6000014 */   swc1     $f0, 0x14($s0)
 /* E2DBA0 802BB270 E6020014 */  swc1      $f2, 0x14($s0)

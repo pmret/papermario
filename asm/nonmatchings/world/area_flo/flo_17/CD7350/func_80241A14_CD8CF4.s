@@ -57,7 +57,7 @@ glabel func_80241A14_CD8CF4
 /* CD8DC0 80241AE0 0C00A8BB */  jal       sin_deg
 /* CD8DC4 80241AE4 46806320 */   cvt.s.w  $f12, $f12
 /* CD8DC8 80241AE8 46140002 */  mul.s     $f0, $f0, $f20
-/* CD8DCC 80241AEC 00000000 */  nop       
+/* CD8DCC 80241AEC 00000000 */  nop
 /* CD8DD0 80241AF0 C7A2002C */  lwc1      $f2, 0x2c($sp)
 /* CD8DD4 80241AF4 46161080 */  add.s     $f2, $f2, $f22
 /* CD8DD8 80241AF8 46001080 */  add.s     $f2, $f2, $f0
@@ -65,7 +65,7 @@ glabel func_80241A14_CD8CF4
 /* CD8DE0 80241B00 8E220074 */  lw        $v0, 0x74($s1)
 /* CD8DE4 80241B04 2442000C */  addiu     $v0, $v0, 0xc
 /* CD8DE8 80241B08 44826000 */  mtc1      $v0, $f12
-/* CD8DEC 80241B0C 00000000 */  nop       
+/* CD8DEC 80241B0C 00000000 */  nop
 /* CD8DF0 80241B10 0C00A6C9 */  jal       clamp_angle
 /* CD8DF4 80241B14 46806320 */   cvt.s.w  $f12, $f12
 /* CD8DF8 80241B18 4600028D */  trunc.w.s $f10, $f0
@@ -91,7 +91,7 @@ glabel func_80241A14_CD8CF4
 /* CD8E48 80241B68 2402000F */  addiu     $v0, $zero, 0xf
 /* CD8E4C 80241B6C AFA2001C */  sw        $v0, 0x1c($sp)
 /* CD8E50 80241B70 44835000 */  mtc1      $v1, $f10
-/* CD8E54 80241B74 00000000 */  nop       
+/* CD8E54 80241B74 00000000 */  nop
 /* CD8E58 80241B78 468052A0 */  cvt.s.w   $f10, $f10
 /* CD8E5C 80241B7C 44075000 */  mfc1      $a3, $f10
 /* CD8E60 80241B80 27A20038 */  addiu     $v0, $sp, 0x38
@@ -110,10 +110,10 @@ glabel func_80241A14_CD8CF4
 .L80241BB4:
 /* CD8E94 80241BB4 8602008C */  lh        $v0, 0x8c($s0)
 /* CD8E98 80241BB8 14400020 */  bnez      $v0, .L80241C3C
-/* CD8E9C 80241BBC 00000000 */   nop      
+/* CD8E9C 80241BBC 00000000 */   nop
 /* CD8EA0 80241BC0 8602008E */  lh        $v0, 0x8e($s0)
 /* CD8EA4 80241BC4 1C40001D */  bgtz      $v0, .L80241C3C
-/* CD8EA8 80241BC8 00000000 */   nop      
+/* CD8EA8 80241BC8 00000000 */   nop
 /* CD8EAC 80241BCC 8E420074 */  lw        $v0, 0x74($s2)
 /* CD8EB0 80241BD0 2442FFFF */  addiu     $v0, $v0, -1
 /* CD8EB4 80241BD4 18400018 */  blez      $v0, .L80241C38

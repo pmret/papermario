@@ -35,7 +35,7 @@ glabel pause_tabs_draw_badges_805540
 /* 8055B0 80244D30 0C0B1EAF */  jal       get_variable
 /* 8055B4 80244D34 34A55C86 */   ori      $a1, $a1, 0x5c86
 /* 8055B8 80244D38 14400007 */  bnez      $v0, .L80244D58
-/* 8055BC 80244D3C 00000000 */   nop      
+/* 8055BC 80244D3C 00000000 */   nop
 /* 8055C0 80244D40 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
 /* 8055C4 80244D44 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 8055C8 80244D48 8C420140 */  lw        $v0, 0x140($v0)

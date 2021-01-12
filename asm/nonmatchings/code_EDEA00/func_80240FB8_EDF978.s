@@ -17,7 +17,7 @@ glabel func_80240FB8_EDF978
 /* EDF9A8 80240FE8 A482008E */  sh        $v0, 0x8e($a0)
 /* EDF9AC 80240FEC 00021400 */  sll       $v0, $v0, 0x10
 /* EDF9B0 80240FF0 1C400006 */  bgtz      $v0, .L8024100C
-/* EDF9B4 80240FF4 00000000 */   nop      
+/* EDF9B4 80240FF4 00000000 */   nop
 .L80240FF8:
 /* EDF9B8 80240FF8 8482008C */  lh        $v0, 0x8c($a0)
 /* EDF9BC 80240FFC 14400003 */  bnez      $v0, .L8024100C

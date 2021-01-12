@@ -32,7 +32,7 @@ glabel func_80242E54_C63B64
 /* C63BD0 80242EC0 44060000 */  mfc1      $a2, $f0
 /* C63BD4 80242EC4 44071000 */  mfc1      $a3, $f2
 /* C63BD8 80242EC8 44820000 */  mtc1      $v0, $f0
-/* C63BDC 80242ECC 00000000 */  nop       
+/* C63BDC 80242ECC 00000000 */  nop
 /* C63BE0 80242ED0 46800020 */  cvt.s.w   $f0, $f0
 /* C63BE4 80242ED4 AE220078 */  sw        $v0, 0x78($s1)
 /* C63BE8 80242ED8 0C05267B */  jal       func_801499EC

@@ -28,7 +28,7 @@ glabel func_80241DE4_CF49B4
 /* CF4A08 80241E38 00220821 */  addu      $at, $at, $v0
 /* CF4A0C 80241E3C AC204FA0 */  sw        $zero, %lo(D_80244FA0)($at)
 /* CF4A10 80241E40 0809079C */  j         .L80241E70
-/* CF4A14 80241E44 00000000 */   nop      
+/* CF4A14 80241E44 00000000 */   nop
 .L80241E48:
 /* CF4A18 80241E48 3C038024 */  lui       $v1, %hi(D_80244FA0)
 /* CF4A1C 80241E4C 24634FA0 */  addiu     $v1, $v1, %lo(D_80244FA0)

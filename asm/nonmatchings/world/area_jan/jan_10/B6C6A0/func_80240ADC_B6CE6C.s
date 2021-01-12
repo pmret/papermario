@@ -24,7 +24,7 @@ glabel func_80240ADC_B6CE6C
 /* B6CEB8 80240B28 0C00A67F */  jal       rand_int
 /* B6CEBC 80240B2C AE020000 */   sw       $v0, ($s0)
 /* B6CEC0 80240B30 44820000 */  mtc1      $v0, $f0
-/* B6CEC4 80240B34 00000000 */  nop       
+/* B6CEC4 80240B34 00000000 */  nop
 /* B6CEC8 80240B38 46800021 */  cvt.d.w   $f0, $f0
 /* B6CECC 80240B3C 3C014024 */  lui       $at, 0x4024
 /* B6CED0 80240B40 44811800 */  mtc1      $at, $f3

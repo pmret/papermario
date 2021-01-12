@@ -32,7 +32,7 @@ glabel update_shadows
 /* A6200 8010FB00 26310001 */   addiu    $s1, $s1, 1
 /* A6204 8010FB04 30622000 */  andi      $v0, $v1, 0x2000
 /* A6208 8010FB08 1040000E */  beqz      $v0, .L8010FB44
-/* A620C 8010FB0C 00000000 */   nop      
+/* A620C 8010FB0C 00000000 */   nop
 /* A6210 8010FB10 3C038007 */  lui       $v1, %hi(gCurrentCameraID)
 /* A6214 8010FB14 8C637410 */  lw        $v1, %lo(gCurrentCameraID)($v1)
 /* A6218 8010FB18 00031080 */  sll       $v0, $v1, 2
@@ -52,11 +52,11 @@ glabel update_shadows
 /* A624C 8010FB4C 8E020000 */  lw        $v0, ($s0)
 /* A6250 8010FB50 30420008 */  andi      $v0, $v0, 8
 /* A6254 8010FB54 10400005 */  beqz      $v0, .L8010FB6C
-/* A6258 8010FB58 00000000 */   nop      
+/* A6258 8010FB58 00000000 */   nop
 /* A625C 8010FB5C 0C047A2F */  jal       func_8011E8BC
 /* A6260 8010FB60 86040008 */   lh       $a0, 8($s0)
 /* A6264 8010FB64 08043EDD */  j         .L8010FB74
-/* A6268 8010FB68 00000000 */   nop      
+/* A6268 8010FB68 00000000 */   nop
 .L8010FB6C:
 /* A626C 8010FB6C 0C0483C1 */  jal       func_80120F04
 /* A6270 8010FB70 86040008 */   lh       $a0, 8($s0)
@@ -68,11 +68,11 @@ glabel update_shadows
 /* A6284 8010FB84 26310001 */   addiu    $s1, $s1, 1
 /* A6288 8010FB88 92040004 */  lbu       $a0, 4($s0)
 /* A628C 8010FB8C 0C044217 */  jal       func_8011085C
-/* A6290 8010FB90 00000000 */   nop      
+/* A6290 8010FB90 00000000 */   nop
 .L8010FB94:
 /* A6294 8010FB94 2A22003C */  slti      $v0, $s1, 0x3c
 /* A6298 8010FB98 1440FFCE */  bnez      $v0, .L8010FAD4
-/* A629C 8010FB9C 00000000 */   nop      
+/* A629C 8010FB9C 00000000 */   nop
 /* A62A0 8010FBA0 8FBF0024 */  lw        $ra, 0x24($sp)
 /* A62A4 8010FBA4 8FB40020 */  lw        $s4, 0x20($sp)
 /* A62A8 8010FBA8 8FB3001C */  lw        $s3, 0x1c($sp)

@@ -39,6 +39,6 @@ glabel func_80240350_BDAB00
 /* BDAB88 802403D8 24020002 */  addiu     $v0, $zero, 2
 /* BDAB8C 802403DC 03E00008 */  jr        $ra
 /* BDAB90 802403E0 27BD0028 */   addiu    $sp, $sp, 0x28
-/* BDAB94 802403E4 00000000 */  nop       
-/* BDAB98 802403E8 00000000 */  nop       
-/* BDAB9C 802403EC 00000000 */  nop       
+/* BDAB94 802403E4 00000000 */  nop
+/* BDAB98 802403E8 00000000 */  nop
+/* BDAB9C 802403EC 00000000 */  nop

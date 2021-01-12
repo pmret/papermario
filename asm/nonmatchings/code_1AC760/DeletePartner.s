@@ -7,7 +7,7 @@ glabel DeletePartner
 /* 1AF090 802807B0 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 1AF094 802807B4 AFBF0010 */  sw        $ra, 0x10($sp)
 /* 1AF098 802807B8 0C0902EF */  jal       delete_actor
-/* 1AF09C 802807BC 00000000 */   nop      
+/* 1AF09C 802807BC 00000000 */   nop
 /* 1AF0A0 802807C0 8FBF0010 */  lw        $ra, 0x10($sp)
 /* 1AF0A4 802807C4 24020002 */  addiu     $v0, $zero, 2
 /* 1AF0A8 802807C8 03E00008 */  jr        $ra

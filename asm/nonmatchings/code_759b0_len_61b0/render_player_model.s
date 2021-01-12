@@ -70,7 +70,7 @@ glabel render_player_model
 /* 7A714 800E1264 AFA0001C */  sw        $zero, 0x1c($sp)
 .L800E1268:
 /* 7A718 800E1268 0C0B77B9 */  jal       func_802DDEE4
-/* 7A71C 800E126C 00000000 */   nop      
+/* 7A71C 800E126C 00000000 */   nop
 .L800E1270:
 /* 7A720 800E1270 9202000E */  lbu       $v0, 0xe($s0)
 /* 7A724 800E1274 080384A1 */  j         .L800E1284
@@ -103,7 +103,7 @@ glabel render_player_model
 /* 7A784 800E12D4 0220202D */   daddu    $a0, $s1, $zero
 .L800E12D8:
 /* 7A788 800E12D8 0C03C327 */  jal       func_800F0C9C
-/* 7A78C 800E12DC 00000000 */   nop      
+/* 7A78C 800E12DC 00000000 */   nop
 .L800E12E0:
 /* 7A790 800E12E0 8FBF0048 */  lw        $ra, 0x48($sp)
 /* 7A794 800E12E4 8FB10044 */  lw        $s1, 0x44($sp)

@@ -29,7 +29,7 @@ glabel func_80241F4C_A7032C
 /* A7038C 80241FAC 44801000 */  mtc1      $zero, $f2
 /* A70390 80241FB0 46000021 */  cvt.d.s   $f0, $f0
 /* A70394 80241FB4 46220002 */  mul.d     $f0, $f0, $f2
-/* A70398 80241FB8 00000000 */  nop       
+/* A70398 80241FB8 00000000 */  nop
 /* A7039C 80241FBC 4600A0A1 */  cvt.d.s   $f2, $f20
 /* A703A0 80241FC0 46201080 */  add.d     $f2, $f2, $f0
 /* A703A4 80241FC4 462010A0 */  cvt.s.d   $f2, $f2
@@ -37,7 +37,7 @@ glabel func_80241F4C_A7032C
 /* A703AC 80241FCC 8E02006C */  lw        $v0, 0x6c($s0)
 /* A703B0 80241FD0 2442000A */  addiu     $v0, $v0, 0xa
 /* A703B4 80241FD4 44826000 */  mtc1      $v0, $f12
-/* A703B8 80241FD8 00000000 */  nop       
+/* A703B8 80241FD8 00000000 */  nop
 /* A703BC 80241FDC 0C00A6C9 */  jal       clamp_angle
 /* A703C0 80241FE0 46806320 */   cvt.s.w  $f12, $f12
 /* A703C4 80241FE4 4600010D */  trunc.w.s $f4, $f0

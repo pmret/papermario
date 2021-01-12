@@ -73,13 +73,13 @@ glabel func_800DC500
 /* 75AC0 800DC610 8E860000 */  lw        $a2, ($s4)
 /* 75AC4 800DC614 44070000 */  mfc1      $a3, $f0
 /* 75AC8 800DC618 0C017512 */  jal       test_ray_entities
-/* 75ACC 800DC61C 00000000 */   nop      
+/* 75ACC 800DC61C 00000000 */   nop
 /* 75AD0 800DC620 04400014 */  bltz      $v0, .L800DC674
-/* 75AD4 800DC624 00000000 */   nop      
+/* 75AD4 800DC624 00000000 */   nop
 /* 75AD8 800DC628 C7AC0060 */  lwc1      $f12, 0x60($sp)
 /* 75ADC 800DC62C C7A00044 */  lwc1      $f0, 0x44($sp)
 /* 75AE0 800DC630 4600603C */  c.lt.s    $f12, $f0
-/* 75AE4 800DC634 00000000 */  nop       
+/* 75AE4 800DC634 00000000 */  nop
 /* 75AE8 800DC638 4500000E */  bc1f      .L800DC674
 /* 75AEC 800DC63C 34514000 */   ori      $s1, $v0, 0x4000
 /* 75AF0 800DC640 C7A00054 */  lwc1      $f0, 0x54($sp)
@@ -111,15 +111,15 @@ glabel func_800DC500
 /* 75B50 800DC6A0 C7A40050 */  lwc1      $f4, 0x50($sp)
 /* 75B54 800DC6A4 3C0142C8 */  lui       $at, 0x42c8
 /* 75B58 800DC6A8 4481A000 */  mtc1      $at, $f20
-/* 75B5C 800DC6AC 00000000 */  nop       
+/* 75B5C 800DC6AC 00000000 */  nop
 /* 75B60 800DC6B0 46142402 */  mul.s     $f16, $f4, $f20
-/* 75B64 800DC6B4 00000000 */  nop       
+/* 75B64 800DC6B4 00000000 */  nop
 /* 75B68 800DC6B8 3C108007 */  lui       $s0, %hi(gGameStatusPtr)
 /* 75B6C 800DC6BC 2610419C */  addiu     $s0, $s0, %lo(gGameStatusPtr)
 /* 75B70 800DC6C0 C7A2004C */  lwc1      $f2, 0x4c($sp)
 /* 75B74 800DC6C4 44068000 */  mfc1      $a2, $f16
 /* 75B78 800DC6C8 46141402 */  mul.s     $f16, $f2, $f20
-/* 75B7C 800DC6CC 00000000 */  nop       
+/* 75B7C 800DC6CC 00000000 */  nop
 /* 75B80 800DC6D0 4480B000 */  mtc1      $zero, $f22
 /* 75B84 800DC6D4 8E020000 */  lw        $v0, ($s0)
 /* 75B88 800DC6D8 C7A00048 */  lwc1      $f0, 0x48($sp)
@@ -132,11 +132,11 @@ glabel func_800DC500
 /* 75BA4 800DC6F4 E4440130 */   swc1     $f4, 0x130($v0)
 /* 75BA8 800DC6F8 C7A20048 */  lwc1      $f2, 0x48($sp)
 /* 75BAC 800DC6FC 46141082 */  mul.s     $f2, $f2, $f20
-/* 75BB0 800DC700 00000000 */  nop       
+/* 75BB0 800DC700 00000000 */  nop
 /* 75BB4 800DC704 44061000 */  mfc1      $a2, $f2
 /* 75BB8 800DC708 C7A2004C */  lwc1      $f2, 0x4c($sp)
 /* 75BBC 800DC70C 46141082 */  mul.s     $f2, $f2, $f20
-/* 75BC0 800DC710 00000000 */  nop       
+/* 75BC0 800DC710 00000000 */  nop
 /* 75BC4 800DC714 4600B306 */  mov.s     $f12, $f22
 /* 75BC8 800DC718 46006386 */  mov.s     $f14, $f12
 /* 75BCC 800DC71C 8E020000 */  lw        $v0, ($s0)

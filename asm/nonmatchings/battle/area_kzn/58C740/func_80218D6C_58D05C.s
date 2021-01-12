@@ -21,7 +21,7 @@ glabel func_80218D6C_58D05C
 /* 58D09C 80218DAC 0040902D */  daddu     $s2, $v0, $zero
 /* 58D0A0 80218DB0 2402FF81 */  addiu     $v0, $zero, -0x7f
 /* 58D0A4 80218DB4 16220002 */  bne       $s1, $v0, .L80218DC0
-/* 58D0A8 80218DB8 00000000 */   nop      
+/* 58D0A8 80218DB8 00000000 */   nop
 /* 58D0AC 80218DBC 8E710148 */  lw        $s1, 0x148($s3)
 .L80218DC0:
 /* 58D0B0 80218DC0 0C09A75B */  jal       get_actor

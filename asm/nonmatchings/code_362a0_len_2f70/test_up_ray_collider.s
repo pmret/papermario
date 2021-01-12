@@ -24,7 +24,7 @@ glabel test_up_ray_collider
 /* 38728 8005D328 F7B60038 */  sdc1      $f22, 0x38($sp)
 /* 3872C 8005D32C C7B6006C */  lwc1      $f22, 0x6c($sp)
 /* 38730 8005D330 46006302 */  mul.s     $f12, $f12, $f0
-/* 38734 8005D334 00000000 */  nop       
+/* 38734 8005D334 00000000 */  nop
 /* 38738 8005D338 3C0143B4 */  lui       $at, 0x43b4
 /* 3873C 8005D33C 44810000 */  mtc1      $at, $f0
 /* 38740 8005D340 27A60014 */  addiu     $a2, $sp, 0x14
@@ -63,7 +63,7 @@ glabel test_up_ray_collider
 /* 387C4 8005D3C4 4600E006 */   mov.s    $f0, $f28
 /* 387C8 8005D3C8 8642000A */  lh        $v0, 0xa($s2)
 /* 387CC 8005D3CC 10400012 */  beqz      $v0, .L8005D418
-/* 387D0 8005D3D0 00000000 */   nop      
+/* 387D0 8005D3D0 00000000 */   nop
 /* 387D4 8005D3D4 8E51000C */  lw        $s1, 0xc($s2)
 /* 387D8 8005D3D8 1840000F */  blez      $v0, .L8005D418
 /* 387DC 8005D3DC 0000802D */   daddu    $s0, $zero, $zero
@@ -73,7 +73,7 @@ glabel test_up_ray_collider
 /* 387E8 8005D3E8 0C0171E9 */  jal       test_up_ray_triangle
 /* 387EC 8005D3EC 26310040 */   addiu    $s1, $s1, 0x40
 /* 387F0 8005D3F0 10400003 */  beqz      $v0, .L8005D400
-/* 387F4 8005D3F4 00000000 */   nop      
+/* 387F4 8005D3F4 00000000 */   nop
 /* 387F8 8005D3F8 3C01800A */  lui       $at, %hi(D_800A4254)
 /* 387FC 8005D3FC C43C4254 */  lwc1      $f28, %lo(D_800A4254)($at)
 .L8005D400:

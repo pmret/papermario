@@ -12,6 +12,6 @@ glabel func_80241D1C_8EDB3C
 /* 8EDB58 80241D38 24020002 */  addiu     $v0, $zero, 2
 /* 8EDB5C 80241D3C 03E00008 */  jr        $ra
 /* 8EDB60 80241D40 27BD0018 */   addiu    $sp, $sp, 0x18
-/* 8EDB64 80241D44 00000000 */  nop       
-/* 8EDB68 80241D48 00000000 */  nop       
-/* 8EDB6C 80241D4C 00000000 */  nop       
+/* 8EDB64 80241D44 00000000 */  nop
+/* 8EDB68 80241D48 00000000 */  nop
+/* 8EDB6C 80241D4C 00000000 */  nop

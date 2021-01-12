@@ -5,7 +5,7 @@ glabel func_80240064_BBB3E4
 /* BBB3E4 80240064 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* BBB3E8 80240068 AFBF0010 */  sw        $ra, 0x10($sp)
 /* BBB3EC 8024006C 0C046ED4 */  jal       enable_world_fog
-/* BBB3F0 80240070 00000000 */   nop      
+/* BBB3F0 80240070 00000000 */   nop
 /* BBB3F4 80240074 240403D4 */  addiu     $a0, $zero, 0x3d4
 /* BBB3F8 80240078 0C046EDD */  jal       set_world_fog_dist
 /* BBB3FC 8024007C 240503E8 */   addiu    $a1, $zero, 0x3e8

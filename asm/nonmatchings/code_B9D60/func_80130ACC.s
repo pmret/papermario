@@ -14,7 +14,7 @@ glabel func_80130ACC
 /* C71EC 80130AEC 0C04C281 */  jal       func_80130A04
 /* C71F0 80130AF0 0200202D */   daddu    $a0, $s0, $zero
 /* C71F4 80130AF4 1440FFFD */  bnez      $v0, .L80130AEC
-/* C71F8 80130AF8 00000000 */   nop      
+/* C71F8 80130AF8 00000000 */   nop
 .L80130AFC:
 /* C71FC 80130AFC 8FBF0014 */  lw        $ra, 0x14($sp)
 /* C7200 80130B00 8FB00010 */  lw        $s0, 0x10($sp)

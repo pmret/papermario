@@ -115,7 +115,7 @@ glabel func_80241CD8_B368A8
 /* B36A50 80241E80 14E20005 */  bne       $a3, $v0, .L80241E98
 /* B36A54 80241E84 32E2FFFF */   andi     $v0, $s7, 0xffff
 /* B36A58 80241E88 14400003 */  bnez      $v0, .L80241E98
-/* B36A5C 80241E8C 00000000 */   nop      
+/* B36A5C 80241E8C 00000000 */   nop
 /* B36A60 80241E90 14800008 */  bnez      $a0, .L80241EB4
 /* B36A64 80241E94 24020001 */   addiu    $v0, $zero, 1
 .L80241E98:
@@ -123,7 +123,7 @@ glabel func_80241CD8_B368A8
 /* B36A6C 80241E9C 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* B36A70 80241EA0 80420075 */  lb        $v0, 0x75($v0)
 /* B36A74 80241EA4 10400005 */  beqz      $v0, .L80241EBC
-/* B36A78 80241EA8 00000000 */   nop      
+/* B36A78 80241EA8 00000000 */   nop
 /* B36A7C 80241EAC 10800003 */  beqz      $a0, .L80241EBC
 /* B36A80 80241EB0 24020001 */   addiu    $v0, $zero, 1
 .L80241EB4:

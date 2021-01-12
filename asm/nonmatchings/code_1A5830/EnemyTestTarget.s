@@ -19,11 +19,11 @@ glabel EnemyTestTarget
 /* 1AB8D0 8027CFF0 2631C070 */  addiu     $s1, $s1, %lo(gBattleStatus)
 /* 1AB8D4 8027CFF4 2402FF81 */  addiu     $v0, $zero, -0x7f
 /* 1AB8D8 8027CFF8 14820002 */  bne       $a0, $v0, .L8027D004
-/* 1AB8DC 8027CFFC 00000000 */   nop      
+/* 1AB8DC 8027CFFC 00000000 */   nop
 /* 1AB8E0 8027D000 8E640148 */  lw        $a0, 0x148($s3)
 .L8027D004:
 /* 1AB8E4 8027D004 0C09A75B */  jal       get_actor
-/* 1AB8E8 8027D008 00000000 */   nop      
+/* 1AB8E8 8027D008 00000000 */   nop
 /* 1AB8EC 8027D00C 8E140000 */  lw        $s4, ($s0)
 /* 1AB8F0 8027D010 26100004 */  addiu     $s0, $s0, 4
 /* 1AB8F4 8027D014 8E030000 */  lw        $v1, ($s0)

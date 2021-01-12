@@ -26,7 +26,7 @@ glabel func_80240000_AF1C60
 /* AF1CB0 80240050 1440FFFA */  bnez      $v0, .L8024003C
 /* AF1CB4 80240054 24A50004 */   addiu    $a1, $a1, 4
 /* AF1CB8 80240058 08090027 */  j         .L8024009C
-/* AF1CBC 8024005C 00000000 */   nop      
+/* AF1CBC 8024005C 00000000 */   nop
 .L80240060:
 /* AF1CC0 80240060 0000182D */  daddu     $v1, $zero, $zero
 /* AF1CC4 80240064 0040282D */  daddu     $a1, $v0, $zero

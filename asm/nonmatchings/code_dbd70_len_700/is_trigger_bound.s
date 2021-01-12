@@ -17,7 +17,7 @@ glabel is_trigger_bound
 /* DC398 80145C98 25080001 */   addiu    $t0, $t0, 1
 /* DC39C 80145C9C 30C20002 */  andi      $v0, $a2, 2
 /* DC3A0 80145CA0 10400006 */  beqz      $v0, .L80145CBC
-/* DC3A4 80145CA4 00000000 */   nop      
+/* DC3A4 80145CA4 00000000 */   nop
 /* DC3A8 80145CA8 8C620010 */  lw        $v0, 0x10($v1)
 /* DC3AC 80145CAC 14450004 */  bne       $v0, $a1, .L80145CC0
 /* DC3B0 80145CB0 29020040 */   slti     $v0, $t0, 0x40

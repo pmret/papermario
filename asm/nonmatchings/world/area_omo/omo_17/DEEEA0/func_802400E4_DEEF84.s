@@ -18,7 +18,7 @@ glabel func_802400E4_DEEF84
 /* DEEFB8 80240118 0C0B210B */  jal       get_float_variable
 /* DEEFBC 8024011C 46000506 */   mov.s    $f20, $f0
 /* DEEFC0 80240120 4614003C */  c.lt.s    $f0, $f20
-/* DEEFC4 80240124 00000000 */  nop       
+/* DEEFC4 80240124 00000000 */  nop
 /* DEEFC8 80240128 45000004 */  bc1f      .L8024013C
 /* DEEFCC 8024012C 0220202D */   daddu    $a0, $s1, $zero
 /* DEEFD0 80240130 8E050000 */  lw        $a1, ($s0)
@@ -29,7 +29,7 @@ glabel func_802400E4_DEEF84
 /* DEEFE0 80240140 0000302D */  daddu     $a2, $zero, $zero
 .L80240144:
 /* DEEFE4 80240144 0C0B2026 */  jal       set_variable
-/* DEEFE8 80240148 00000000 */   nop      
+/* DEEFE8 80240148 00000000 */   nop
 /* DEEFEC 8024014C 8FBF0018 */  lw        $ra, 0x18($sp)
 /* DEEFF0 80240150 8FB10014 */  lw        $s1, 0x14($sp)
 /* DEEFF4 80240154 8FB00010 */  lw        $s0, 0x10($sp)

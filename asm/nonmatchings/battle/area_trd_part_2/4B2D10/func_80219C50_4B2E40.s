@@ -10,7 +10,7 @@ glabel func_80219C50_4B2E40
 /* 4B2E54 80219C64 24040200 */   addiu    $a0, $zero, 0x200
 /* 4B2E58 80219C68 0040202D */  daddu     $a0, $v0, $zero
 /* 4B2E5C 80219C6C 10800004 */  beqz      $a0, .L80219C80
-/* 4B2E60 80219C70 00000000 */   nop      
+/* 4B2E60 80219C70 00000000 */   nop
 /* 4B2E64 80219C74 8C82008C */  lw        $v0, 0x8c($a0)
 /* 4B2E68 80219C78 10500019 */  beq       $v0, $s0, .L80219CE0
 /* 4B2E6C 80219C7C 0080102D */   daddu    $v0, $a0, $zero
@@ -19,7 +19,7 @@ glabel func_80219C50_4B2E40
 /* 4B2E74 80219C84 24040201 */   addiu    $a0, $zero, 0x201
 /* 4B2E78 80219C88 0040202D */  daddu     $a0, $v0, $zero
 /* 4B2E7C 80219C8C 10800004 */  beqz      $a0, .L80219CA0
-/* 4B2E80 80219C90 00000000 */   nop      
+/* 4B2E80 80219C90 00000000 */   nop
 /* 4B2E84 80219C94 8C82008C */  lw        $v0, 0x8c($a0)
 /* 4B2E88 80219C98 10500011 */  beq       $v0, $s0, .L80219CE0
 /* 4B2E8C 80219C9C 0080102D */   daddu    $v0, $a0, $zero
@@ -28,7 +28,7 @@ glabel func_80219C50_4B2E40
 /* 4B2E94 80219CA4 24040202 */   addiu    $a0, $zero, 0x202
 /* 4B2E98 80219CA8 0040202D */  daddu     $a0, $v0, $zero
 /* 4B2E9C 80219CAC 10800004 */  beqz      $a0, .L80219CC0
-/* 4B2EA0 80219CB0 00000000 */   nop      
+/* 4B2EA0 80219CB0 00000000 */   nop
 /* 4B2EA4 80219CB4 8C82008C */  lw        $v0, 0x8c($a0)
 /* 4B2EA8 80219CB8 10500009 */  beq       $v0, $s0, .L80219CE0
 /* 4B2EAC 80219CBC 0080102D */   daddu    $v0, $a0, $zero

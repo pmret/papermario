@@ -8,7 +8,7 @@ glabel func_8004D2B0
 /* 286BC 8004D2BC 908200BC */  lbu       $v0, 0xbc($a0)
 /* 286C0 8004D2C0 90C30045 */  lbu       $v1, 0x45($a2)
 /* 286C4 8004D2C4 14620004 */  bne       $v1, $v0, .L8004D2D8
-/* 286C8 8004D2C8 00000000 */   nop      
+/* 286C8 8004D2C8 00000000 */   nop
 /* 286CC 8004D2CC 908500BF */  lbu       $a1, 0xbf($a0)
 /* 286D0 8004D2D0 0C014E31 */  jal       func_800538C4
 /* 286D4 8004D2D4 00C0202D */   daddu    $a0, $a2, $zero

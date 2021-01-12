@@ -12,18 +12,18 @@ glabel step_pause_menu
 /* FD98 80034998 12200005 */  beqz      $s1, .L800349B0
 /* FD9C 8003499C 24020002 */   addiu    $v0, $zero, 2
 /* FDA0 800349A0 12220022 */  beq       $s1, $v0, .L80034A2C
-/* FDA4 800349A4 00000000 */   nop      
+/* FDA4 800349A4 00000000 */   nop
 /* FDA8 800349A8 0800D2F8 */  j         .L80034BE0
-/* FDAC 800349AC 00000000 */   nop      
+/* FDAC 800349AC 00000000 */   nop
 .L800349B0:
 /* FDB0 800349B0 0C00F949 */  jal       func_8003E524
-/* FDB4 800349B4 00000000 */   nop      
+/* FDB4 800349B4 00000000 */   nop
 /* FDB8 800349B8 0C00E64C */  jal       update_npcs
-/* FDBC 800349BC 00000000 */   nop      
+/* FDBC 800349BC 00000000 */   nop
 /* FDC0 800349C0 0C037DD0 */  jal       update_player
-/* FDC4 800349C4 00000000 */   nop      
+/* FDC4 800349C4 00000000 */   nop
 /* FDC8 800349C8 0C016754 */  jal       func_80059D50
-/* FDCC 800349CC 00000000 */   nop      
+/* FDCC 800349CC 00000000 */   nop
 /* FDD0 800349D0 3C02800A */  lui       $v0, %hi(D_8009A658)
 /* FDD4 800349D4 8C42A658 */  lw        $v0, %lo(D_8009A658)($v0)
 /* FDD8 800349D8 8C430004 */  lw        $v1, 4($v0)
@@ -58,7 +58,7 @@ glabel step_pause_menu
 /* FE48 80034A48 A0C20000 */  sb        $v0, ($a2)
 /* FE4C 80034A4C 00021600 */  sll       $v0, $v0, 0x18
 /* FE50 80034A50 1440004C */  bnez      $v0, .L80034B84
-/* FE54 80034A54 00000000 */   nop      
+/* FE54 80034A54 00000000 */   nop
 .L80034A58:
 /* FE58 80034A58 3C048007 */  lui       $a0, %hi(D_80077950)
 /* FE5C 80034A5C 24847950 */  addiu     $a0, $a0, %lo(D_80077950)
@@ -73,62 +73,62 @@ glabel step_pause_menu
 /* FE80 80034A80 0C05260E */  jal       func_80149838
 /* FE84 80034A84 A462015E */   sh       $v0, 0x15e($v1)
 /* FE88 80034A88 0C00EC6A */  jal       func_8003B1A8
-/* FE8C 80034A8C 00000000 */   nop      
+/* FE8C 80034A8C 00000000 */   nop
 /* FE90 80034A90 8E020000 */  lw        $v0, ($s0)
 /* FE94 80034A94 0C016BA8 */  jal       allocate_hit_tables
 /* FE98 80034A98 A0510070 */   sb       $s1, 0x70($v0)
 /* FE9C 80034A9C 0C00AB28 */  jal       battle_heap_create
-/* FEA0 80034AA0 00000000 */   nop      
+/* FEA0 80034AA0 00000000 */   nop
 /* FEA4 80034AA4 0C018028 */  jal       nuContRmbForceStop
-/* FEA8 80034AA8 00000000 */   nop      
+/* FEA8 80034AA8 00000000 */   nop
 /* FEAC 80034AAC 0C05259C */  jal       func_80149670
 /* FEB0 80034AB0 0000202D */   daddu    $a0, $zero, $zero
 /* FEB4 80034AB4 0C0B763E */  jal       func_802DD8F8
 /* FEB8 80034AB8 0000202D */   daddu    $a0, $zero, $zero
 /* FEBC 80034ABC 0C045751 */  jal       clear_model_data
-/* FEC0 80034AC0 00000000 */   nop      
+/* FEC0 80034AC0 00000000 */   nop
 /* FEC4 80034AC4 0C052010 */  jal       func_80148040
-/* FEC8 80034AC8 00000000 */   nop      
+/* FEC8 80034AC8 00000000 */   nop
 /* FECC 80034ACC 0C05177E */  jal       func_80145DF8
-/* FED0 80034AD0 00000000 */   nop      
+/* FED0 80034AD0 00000000 */   nop
 /* FED4 80034AD4 0C0482EC */  jal       clear_virtual_models
-/* FED8 80034AD8 00000000 */   nop      
+/* FED8 80034AD8 00000000 */   nop
 /* FEDC 80034ADC 0C047889 */  jal       func_8011E224
-/* FEE0 80034AE0 00000000 */   nop      
+/* FEE0 80034AE0 00000000 */   nop
 /* FEE4 80034AE4 0C048C2E */  jal       clear_dynamic_entity_list
-/* FEE8 80034AE8 00000000 */   nop      
+/* FEE8 80034AE8 00000000 */   nop
 /* FEEC 80034AEC 3C048020 */  lui       $a0, %hi(gBackgroundImage)
 /* FEF0 80034AF0 24840000 */  addiu     $a0, $a0, %lo(gBackgroundImage)
 /* FEF4 80034AF4 3C050003 */  lui       $a1, 3
 /* FEF8 80034AF8 0C0514BA */  jal       func_801452E8
 /* FEFC 80034AFC 34A58000 */   ori      $a1, $a1, 0x8000
 /* FF00 80034B00 0C050440 */  jal       func_80141100
-/* FF04 80034B04 00000000 */   nop      
+/* FF04 80034B04 00000000 */   nop
 /* FF08 80034B08 0C03A6EC */  jal       reset_status_menu
-/* FF0C 80034B0C 00000000 */   nop      
+/* FF0C 80034B0C 00000000 */   nop
 /* FF10 80034B10 0C04C3FC */  jal       clear_item_entity_data
-/* FF14 80034B14 00000000 */   nop      
+/* FF14 80034B14 00000000 */   nop
 /* FF18 80034B18 0C0B0C77 */  jal       clear_script_list
-/* FF1C 80034B1C 00000000 */   nop      
+/* FF1C 80034B1C 00000000 */   nop
 /* FF20 80034B20 0C00E12F */  jal       clear_npcs
-/* FF24 80034B24 00000000 */   nop      
+/* FF24 80034B24 00000000 */   nop
 /* FF28 80034B28 0C04432E */  jal       clear_entity_data
 /* FF2C 80034B2C 0000202D */   daddu    $a0, $zero, $zero
 /* FF30 80034B30 0C0515A0 */  jal       clear_trigger_data
-/* FF34 80034B34 00000000 */   nop      
+/* FF34 80034B34 00000000 */   nop
 /* FF38 80034B38 0C05260A */  jal       func_80149828
-/* FF3C 80034B3C 00000000 */   nop      
+/* FF3C 80034B3C 00000000 */   nop
 /* FF40 80034B40 3C01800A */  lui       $at, %hi(D_800A0924)
 /* FF44 80034B44 AC220924 */  sw        $v0, %lo(D_800A0924)($at)
 /* FF48 80034B48 0C0525FF */  jal       func_801497FC
 /* FF4C 80034B4C 0000202D */   daddu    $a0, $zero, $zero
 /* FF50 80034B50 0C052B17 */  jal       func_8014AC5C
-/* FF54 80034B54 00000000 */   nop      
+/* FF54 80034B54 00000000 */   nop
 /* FF58 80034B58 3C048007 */  lui       $a0, %hi(D_8007795C)
 /* FF5C 80034B5C 0C018038 */  jal       nuPiReadRomOverlay
 /* FF60 80034B60 2484795C */   addiu    $a0, $a0, %lo(D_8007795C)
 /* FF64 80034B64 0C091018 */  jal       pause_init
-/* FF68 80034B68 00000000 */   nop      
+/* FF68 80034B68 00000000 */   nop
 /* FF6C 80034B6C 3C04800A */  lui       $a0, %hi(D_8009A650)
 /* FF70 80034B70 2484A650 */  addiu     $a0, $a0, %lo(D_8009A650)
 /* FF74 80034B74 8C820000 */  lw        $v0, ($a0)
@@ -139,7 +139,7 @@ glabel step_pause_menu
 /* FF84 80034B84 3C02800A */  lui       $v0, %hi(D_800A0920)
 /* FF88 80034B88 80420920 */  lb        $v0, %lo(D_800A0920)($v0)
 /* FF8C 80034B8C 04410014 */  bgez      $v0, .L80034BE0
-/* FF90 80034B90 00000000 */   nop      
+/* FF90 80034B90 00000000 */   nop
 .L80034B94:
 /* FF94 80034B94 3C10800A */  lui       $s0, %hi(D_800A0920)
 /* FF98 80034B98 26100920 */  addiu     $s0, $s0, %lo(D_800A0920)

@@ -23,7 +23,7 @@ glabel func_8024061C_BD3E8C
 /* BD3ED4 80240664 4600008D */  trunc.w.s $f2, $f0
 /* BD3ED8 80240668 44111000 */  mfc1      $s1, $f2
 /* BD3EDC 8024066C 0C0B210B */  jal       get_float_variable
-/* BD3EE0 80240670 00000000 */   nop      
+/* BD3EE0 80240670 00000000 */   nop
 /* BD3EE4 80240674 0000202D */  daddu     $a0, $zero, $zero
 /* BD3EE8 80240678 3C05FD05 */  lui       $a1, 0xfd05
 /* BD3EEC 8024067C 4600008D */  trunc.w.s $f2, $f0
@@ -32,15 +32,15 @@ glabel func_8024061C_BD3E8C
 /* BD3EF8 80240688 34A50F8A */   ori      $a1, $a1, 0xf8a
 /* BD3EFC 8024068C 0040182D */  daddu     $v1, $v0, $zero
 /* BD3F00 80240690 44920000 */  mtc1      $s2, $f0
-/* BD3F04 80240694 00000000 */  nop       
+/* BD3F04 80240694 00000000 */  nop
 /* BD3F08 80240698 46800020 */  cvt.s.w   $f0, $f0
 /* BD3F0C 8024069C E460001C */  swc1      $f0, 0x1c($v1)
 /* BD3F10 802406A0 44910000 */  mtc1      $s1, $f0
-/* BD3F14 802406A4 00000000 */  nop       
+/* BD3F14 802406A4 00000000 */  nop
 /* BD3F18 802406A8 46800020 */  cvt.s.w   $f0, $f0
 /* BD3F1C 802406AC E4600020 */  swc1      $f0, 0x20($v1)
 /* BD3F20 802406B0 44900000 */  mtc1      $s0, $f0
-/* BD3F24 802406B4 00000000 */  nop       
+/* BD3F24 802406B4 00000000 */  nop
 /* BD3F28 802406B8 46800020 */  cvt.s.w   $f0, $f0
 /* BD3F2C 802406BC E4600024 */  swc1      $f0, 0x24($v1)
 /* BD3F30 802406C0 8FBF001C */  lw        $ra, 0x1c($sp)

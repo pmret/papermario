@@ -21,7 +21,7 @@ glabel load_font
 /* B9E74 80123774 24050500 */   addiu    $a1, $zero, 0x500
 .L80123778:
 /* B9E78 80123778 14820014 */  bne       $a0, $v0, .L801237CC
-/* B9E7C 8012377C 00000000 */   nop      
+/* B9E7C 8012377C 00000000 */   nop
 /* B9E80 80123780 3C040000 */  lui       $a0, 0
 /* B9E84 80123784 24845800 */  addiu     $a0, $a0, 0x5800
 /* B9E88 80123788 3C06802F */  lui       $a2, %hi(D_802ED970)
@@ -41,7 +41,7 @@ glabel load_font
 /* B9EBC 801237BC 3C06802F */  lui       $a2, %hi(D_802F4560)
 /* B9EC0 801237C0 24C64560 */  addiu     $a2, $a2, %lo(D_802F4560)
 /* B9EC4 801237C4 0C048DC2 */  jal       load_font_data
-/* B9EC8 801237C8 00000000 */   nop      
+/* B9EC8 801237C8 00000000 */   nop
 .L801237CC:
 /* B9ECC 801237CC 8FBF0010 */  lw        $ra, 0x10($sp)
 /* B9ED0 801237D0 03E00008 */  jr        $ra

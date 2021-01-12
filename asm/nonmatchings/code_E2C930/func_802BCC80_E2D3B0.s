@@ -9,9 +9,9 @@ glabel func_802BCC80_E2D3B0
 /* E2D3C0 802BCC90 92020006 */  lbu       $v0, 6($s0)
 /* E2D3C4 802BCC94 30420080 */  andi      $v0, $v0, 0x80
 /* E2D3C8 802BCC98 1040000C */  beqz      $v0, .L802BCCCC
-/* E2D3CC 802BCC9C 00000000 */   nop      
+/* E2D3CC 802BCC9C 00000000 */   nop
 /* E2D3D0 802BCCA0 0C04419E */  jal       func_80110678
-/* E2D3D4 802BCCA4 00000000 */   nop      
+/* E2D3D4 802BCCA4 00000000 */   nop
 /* E2D3D8 802BCCA8 0C043F5A */  jal       func_8010FD68
 /* E2D3DC 802BCCAC 0200202D */   daddu    $a0, $s0, $zero
 /* E2D3E0 802BCCB0 C600004C */  lwc1      $f0, 0x4c($s0)
@@ -26,4 +26,4 @@ glabel func_802BCC80_E2D3B0
 /* E2D400 802BCCD0 8FB00010 */  lw        $s0, 0x10($sp)
 /* E2D404 802BCCD4 03E00008 */  jr        $ra
 /* E2D408 802BCCD8 27BD0018 */   addiu    $sp, $sp, 0x18
-/* E2D40C 802BCCDC 00000000 */  nop       
+/* E2D40C 802BCCDC 00000000 */  nop

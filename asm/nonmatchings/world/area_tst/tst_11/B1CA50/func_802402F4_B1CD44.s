@@ -14,7 +14,7 @@ glabel func_802402F4_B1CD44
 /* B1CD68 80240318 27B10020 */   addiu    $s1, $sp, 0x20
 /* B1CD6C 8024031C 8E0400CC */  lw        $a0, 0xcc($s0)
 /* B1CD70 80240320 0C044181 */  jal       get_shadow_by_index
-/* B1CD74 80240324 00000000 */   nop      
+/* B1CD74 80240324 00000000 */   nop
 /* B1CD78 80240328 0C048B77 */  jal       func_80122DDC
 /* B1CD7C 8024032C 84440008 */   lh       $a0, 8($v0)
 /* B1CD80 80240330 8C430000 */  lw        $v1, ($v0)
@@ -34,7 +34,7 @@ glabel func_802402F4_B1CD44
 /* B1CDB8 80240368 46000007 */  neg.s     $f0, $f0
 /* B1CDBC 8024036C 44060000 */  mfc1      $a2, $f0
 /* B1CDC0 80240370 0C00B94E */  jal       get_screen_coords
-/* B1CDC4 80240374 00000000 */   nop      
+/* B1CDC4 80240374 00000000 */   nop
 /* B1CDC8 80240378 0220202D */  daddu     $a0, $s1, $zero
 /* B1CDCC 8024037C AFB00028 */  sw        $s0, 0x28($sp)
 /* B1CDD0 80240380 820500BE */  lb        $a1, 0xbe($s0)

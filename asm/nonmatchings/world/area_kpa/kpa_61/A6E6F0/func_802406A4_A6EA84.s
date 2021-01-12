@@ -279,15 +279,17 @@ glabel func_802406A4_A6EA84
 /* A6EE70 80240A90 2C620015 */  sltiu     $v0, $v1, 0x15
 /* A6EE74 80240A94 10400009 */  beqz      $v0, .L80240ABC
 /* A6EE78 80240A98 00031080 */   sll      $v0, $v1, 2
-/* A6EE7C 80240A9C 3C018024 */  lui       $at, %hi(D_80243CD8)
+/* A6EE7C 80240A9C 3C018024 */  lui       $at, %hi(jtbl_80243CD8_A720B8)
 /* A6EE80 80240AA0 00220821 */  addu      $at, $at, $v0
-/* A6EE84 80240AA4 8C223CD8 */  lw        $v0, %lo(D_80243CD8)($at)
+/* A6EE84 80240AA4 8C223CD8 */  lw        $v0, %lo(jtbl_80243CD8_A720B8)($at)
 /* A6EE88 80240AA8 00400008 */  jr        $v0
 /* A6EE8C 80240AAC 00000000 */   nop
+glabel L80240AB0_A6EE90
 /* A6EE90 80240AB0 8E420028 */  lw        $v0, 0x28($s2)
 /* A6EE94 80240AB4 24420001 */  addiu     $v0, $v0, 1
 /* A6EE98 80240AB8 AE420028 */  sw        $v0, 0x28($s2)
 .L80240ABC:
+glabel L80240ABC_A6EE9C
 /* A6EE9C 80240ABC 0000102D */  daddu     $v0, $zero, $zero
 .L80240AC0:
 /* A6EEA0 80240AC0 8FBF0068 */  lw        $ra, 0x68($sp)

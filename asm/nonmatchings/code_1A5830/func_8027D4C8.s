@@ -16,7 +16,7 @@ glabel func_8027D4C8
 /* 1ABDD4 8027D4F4 0040802D */  daddu     $s0, $v0, $zero
 /* 1ABDD8 8027D4F8 2402FF81 */  addiu     $v0, $zero, -0x7f
 /* 1ABDDC 8027D4FC 16020002 */  bne       $s0, $v0, .L8027D508
-/* 1ABDE0 8027D500 00000000 */   nop      
+/* 1ABDE0 8027D500 00000000 */   nop
 /* 1ABDE4 8027D504 8E700148 */  lw        $s0, 0x148($s3)
 .L8027D508:
 /* 1ABDE8 8027D508 8E450000 */  lw        $a1, ($s2)

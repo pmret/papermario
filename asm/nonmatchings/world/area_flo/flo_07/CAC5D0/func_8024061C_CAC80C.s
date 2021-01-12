@@ -26,7 +26,7 @@ glabel func_8024061C_CAC80C
 /* CAC85C 8024066C 1440FFFA */  bnez      $v0, .L80240658
 /* CAC860 80240670 24A50004 */   addiu    $a1, $a1, 4
 /* CAC864 80240674 080901AE */  j         .L802406B8
-/* CAC868 80240678 00000000 */   nop      
+/* CAC868 80240678 00000000 */   nop
 .L8024067C:
 /* CAC86C 8024067C 0000182D */  daddu     $v1, $zero, $zero
 /* CAC870 80240680 0040282D */  daddu     $a1, $v0, $zero

@@ -30,7 +30,7 @@ glabel calc_partner_test_enemy
 /* 1AC8C0 8027DFE0 2402000C */   addiu    $v0, $zero, 0xc
 .L8027DFE4:
 /* 1AC8C4 8027DFE4 0809F7F9 */  j         .L8027DFE4
-/* 1AC8C8 8027DFE8 00000000 */   nop      
+/* 1AC8C8 8027DFE8 00000000 */   nop
 .L8027DFEC:
 /* 1AC8CC 8027DFEC 82630214 */  lb        $v1, 0x214($s3)
 /* 1AC8D0 8027DFF0 106200C5 */  beq       $v1, $v0, .L8027E308
@@ -100,15 +100,15 @@ glabel calc_partner_test_enemy
 /* 1AC9C4 8027E0E4 34630040 */  ori       $v1, $v1, 0x40
 /* 1AC9C8 8027E0E8 00431024 */  and       $v0, $v0, $v1
 /* 1AC9CC 8027E0EC 14400009 */  bnez      $v0, .L8027E114
-/* 1AC9D0 8027E0F0 00000000 */   nop      
+/* 1AC9D0 8027E0F0 00000000 */   nop
 /* 1AC9D4 8027E0F4 8E42007C */  lw        $v0, 0x7c($s2)
 /* 1AC9D8 8027E0F8 30420002 */  andi      $v0, $v0, 2
 /* 1AC9DC 8027E0FC 10400005 */  beqz      $v0, .L8027E114
-/* 1AC9E0 8027E100 00000000 */   nop      
+/* 1AC9E0 8027E100 00000000 */   nop
 /* 1AC9E4 8027E104 8E22018C */  lw        $v0, 0x18c($s1)
 /* 1AC9E8 8027E108 30420010 */  andi      $v0, $v0, 0x10
 /* 1AC9EC 8027E10C 1040006B */  beqz      $v0, .L8027E2BC
-/* 1AC9F0 8027E110 00000000 */   nop      
+/* 1AC9F0 8027E110 00000000 */   nop
 .L8027E114:
 /* 1AC9F4 8027E114 8E230188 */  lw        $v1, 0x188($s1)
 /* 1AC9F8 8027E118 30628000 */  andi      $v0, $v1, 0x8000
@@ -116,15 +116,15 @@ glabel calc_partner_test_enemy
 /* 1ACA00 8027E120 3C021000 */   lui      $v0, 0x1000
 /* 1ACA04 8027E124 00621024 */  and       $v0, $v1, $v0
 /* 1ACA08 8027E128 14400036 */  bnez      $v0, .L8027E204
-/* 1ACA0C 8027E12C 00000000 */   nop      
+/* 1ACA0C 8027E12C 00000000 */   nop
 /* 1ACA10 8027E130 8E42007C */  lw        $v0, 0x7c($s2)
 /* 1ACA14 8027E134 30420010 */  andi      $v0, $v0, 0x10
 /* 1ACA18 8027E138 10400015 */  beqz      $v0, .L8027E190
-/* 1ACA1C 8027E13C 00000000 */   nop      
+/* 1ACA1C 8027E13C 00000000 */   nop
 /* 1ACA20 8027E140 8E620000 */  lw        $v0, ($s3)
 /* 1ACA24 8027E144 30420800 */  andi      $v0, $v0, 0x800
 /* 1ACA28 8027E148 14400011 */  bnez      $v0, .L8027E190
-/* 1ACA2C 8027E14C 00000000 */   nop      
+/* 1ACA2C 8027E14C 00000000 */   nop
 /* 1ACA30 8027E150 8E22018C */  lw        $v0, 0x18c($s1)
 /* 1ACA34 8027E154 30420001 */  andi      $v0, $v0, 1
 /* 1ACA38 8027E158 1440000D */  bnez      $v0, .L8027E190
@@ -150,11 +150,11 @@ glabel calc_partner_test_enemy
 /* 1ACA84 8027E1A4 8E42007C */  lw        $v0, 0x7c($s2)
 /* 1ACA88 8027E1A8 00431024 */  and       $v0, $v0, $v1
 /* 1ACA8C 8027E1AC 10400015 */  beqz      $v0, .L8027E204
-/* 1ACA90 8027E1B0 00000000 */   nop      
+/* 1ACA90 8027E1B0 00000000 */   nop
 /* 1ACA94 8027E1B4 8E620000 */  lw        $v0, ($s3)
 /* 1ACA98 8027E1B8 30420800 */  andi      $v0, $v0, 0x800
 /* 1ACA9C 8027E1BC 14400011 */  bnez      $v0, .L8027E204
-/* 1ACAA0 8027E1C0 00000000 */   nop      
+/* 1ACAA0 8027E1C0 00000000 */   nop
 /* 1ACAA4 8027E1C4 8E22018C */  lw        $v0, 0x18c($s1)
 /* 1ACAA8 8027E1C8 30420080 */  andi      $v0, $v0, 0x80
 /* 1ACAAC 8027E1CC 1440000D */  bnez      $v0, .L8027E204
@@ -178,7 +178,7 @@ glabel calc_partner_test_enemy
 /* 1ACAF0 8027E210 3C031000 */   lui      $v1, 0x1000
 /* 1ACAF4 8027E214 82620212 */  lb        $v0, 0x212($s3)
 /* 1ACAF8 8027E218 10430005 */  beq       $v0, $v1, .L8027E230
-/* 1ACAFC 8027E21C 00000000 */   nop      
+/* 1ACAFC 8027E21C 00000000 */   nop
 /* 1ACB00 8027E220 8E42007C */  lw        $v0, 0x7c($s2)
 /* 1ACB04 8027E224 30420080 */  andi      $v0, $v0, 0x80
 /* 1ACB08 8027E228 10400017 */  beqz      $v0, .L8027E288
@@ -188,7 +188,7 @@ glabel calc_partner_test_enemy
 /* 1ACB14 8027E234 3C031000 */  lui       $v1, 0x1000
 /* 1ACB18 8027E238 00431024 */  and       $v0, $v0, $v1
 /* 1ACB1C 8027E23C 14400012 */  bnez      $v0, .L8027E288
-/* 1ACB20 8027E240 00000000 */   nop      
+/* 1ACB20 8027E240 00000000 */   nop
 /* 1ACB24 8027E244 8E22018C */  lw        $v0, 0x18c($s1)
 /* 1ACB28 8027E248 30420008 */  andi      $v0, $v0, 8
 /* 1ACB2C 8027E24C 1440000E */  bnez      $v0, .L8027E288
@@ -215,11 +215,11 @@ glabel calc_partner_test_enemy
 /* 1ACB7C 8027E29C 8E42007C */  lw        $v0, 0x7c($s2)
 /* 1ACB80 8027E2A0 30420002 */  andi      $v0, $v0, 2
 /* 1ACB84 8027E2A4 10400015 */  beqz      $v0, .L8027E2FC
-/* 1ACB88 8027E2A8 00000000 */   nop      
+/* 1ACB88 8027E2A8 00000000 */   nop
 /* 1ACB8C 8027E2AC 8E22018C */  lw        $v0, 0x18c($s1)
 /* 1ACB90 8027E2B0 30420010 */  andi      $v0, $v0, 0x10
 /* 1ACB94 8027E2B4 14400011 */  bnez      $v0, .L8027E2FC
-/* 1ACB98 8027E2B8 00000000 */   nop      
+/* 1ACB98 8027E2B8 00000000 */   nop
 .L8027E2BC:
 /* 1ACB9C 8027E2BC C6000014 */  lwc1      $f0, 0x14($s0)
 /* 1ACBA0 8027E2C0 240400EA */  addiu     $a0, $zero, 0xea
@@ -235,7 +235,7 @@ glabel calc_partner_test_enemy
 /* 1ACBC8 8027E2E8 2405001C */  addiu     $a1, $zero, 0x1c
 .L8027E2EC:
 /* 1ACBCC 8027E2EC 0C09DC58 */  jal       dispatch_event_actor
-/* 1ACBD0 8027E2F0 00000000 */   nop      
+/* 1ACBD0 8027E2F0 00000000 */   nop
 /* 1ACBD4 8027E2F4 0809F8C2 */  j         .L8027E308
 /* 1ACBD8 8027E2F8 2402FFFF */   addiu    $v0, $zero, -1
 .L8027E2FC:

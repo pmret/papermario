@@ -13,5 +13,5 @@ glabel func_802405BC_AFE0FC
 /* AFE11C 802405DC 24020002 */  addiu     $v0, $zero, 2
 /* AFE120 802405E0 03E00008 */  jr        $ra
 /* AFE124 802405E4 27BD0018 */   addiu    $sp, $sp, 0x18
-/* AFE128 802405E8 00000000 */  nop       
-/* AFE12C 802405EC 00000000 */  nop       
+/* AFE128 802405E8 00000000 */  nop
+/* AFE12C 802405EC 00000000 */  nop

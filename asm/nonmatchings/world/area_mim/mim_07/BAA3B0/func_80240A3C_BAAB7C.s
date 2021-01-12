@@ -24,7 +24,7 @@ glabel func_80240A3C_BAAB7C
 /* BAABC8 80240A88 0C00A67F */  jal       rand_int
 /* BAABCC 80240A8C AE020000 */   sw       $v0, ($s0)
 /* BAABD0 80240A90 44820000 */  mtc1      $v0, $f0
-/* BAABD4 80240A94 00000000 */  nop       
+/* BAABD4 80240A94 00000000 */  nop
 /* BAABD8 80240A98 46800021 */  cvt.d.w   $f0, $f0
 /* BAABDC 80240A9C 3C014024 */  lui       $at, 0x4024
 /* BAABE0 80240AA0 44811800 */  mtc1      $at, $f3

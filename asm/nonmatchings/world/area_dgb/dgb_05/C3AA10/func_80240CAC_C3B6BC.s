@@ -22,7 +22,7 @@ glabel func_80240CAC_C3B6BC
 /* C3B700 80240CF0 0C01242D */  jal       func_800490B4
 /* C3B704 80240CF4 0040802D */   daddu    $s0, $v0, $zero
 /* C3B708 80240CF8 1040000C */  beqz      $v0, .L80240D2C
-/* C3B70C 80240CFC 00000000 */   nop      
+/* C3B70C 80240CFC 00000000 */   nop
 /* C3B710 80240D00 C60C0038 */  lwc1      $f12, 0x38($s0)
 /* C3B714 80240D04 3C02800F */  lui       $v0, %hi(gPlayerStatusPtr)
 /* C3B718 80240D08 8C427B30 */  lw        $v0, %lo(gPlayerStatusPtr)($v0)
@@ -45,12 +45,12 @@ glabel func_80240CAC_C3B6BC
 /* C3B758 80240D48 46802120 */  cvt.s.w   $f4, $f4
 /* C3B75C 80240D4C 44072000 */  mfc1      $a3, $f4
 /* C3B760 80240D50 0C00A7B5 */  jal       dist2D
-/* C3B764 80240D54 00000000 */   nop      
+/* C3B764 80240D54 00000000 */   nop
 /* C3B768 80240D58 C6020018 */  lwc1      $f2, 0x18($s0)
 /* C3B76C 80240D5C 4602003E */  c.le.s    $f0, $f2
-/* C3B770 80240D60 00000000 */  nop       
+/* C3B770 80240D60 00000000 */  nop
 /* C3B774 80240D64 4500000B */  bc1f      .L80240D94
-/* C3B778 80240D68 00000000 */   nop      
+/* C3B778 80240D68 00000000 */   nop
 /* C3B77C 80240D6C 8E4200CC */  lw        $v0, 0xcc($s2)
 /* C3B780 80240D70 8C430000 */  lw        $v1, ($v0)
 /* C3B784 80240D74 2402000F */  addiu     $v0, $zero, 0xf
@@ -85,7 +85,7 @@ glabel func_80240CAC_C3B6BC
 /* C3B7F4 80240DE4 46802120 */  cvt.s.w   $f4, $f4
 /* C3B7F8 80240DE8 44072000 */  mfc1      $a3, $f4
 /* C3B7FC 80240DEC 0C00A720 */  jal       atan2
-/* C3B800 80240DF0 00000000 */   nop      
+/* C3B800 80240DF0 00000000 */   nop
 /* C3B804 80240DF4 8E050018 */  lw        $a1, 0x18($s0)
 /* C3B808 80240DF8 44060000 */  mfc1      $a2, $f0
 /* C3B80C 80240DFC 0200202D */  daddu     $a0, $s0, $zero

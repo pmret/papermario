@@ -40,7 +40,7 @@ glabel func_E00C2000
 /* 3C125C E00C208C AE02000C */   sw       $v0, 0xc($s0)
 .LE00C2090:
 /* 3C1260 E00C2090 08030824 */  j         .LE00C2090
-/* 3C1264 E00C2094 00000000 */   nop      
+/* 3C1264 E00C2094 00000000 */   nop
 .LE00C2098:
 /* 3C1268 E00C2098 AC920000 */  sw        $s2, ($a0)
 /* 3C126C E00C209C 1E200004 */  bgtz      $s1, .LE00C20B0
@@ -60,7 +60,7 @@ glabel func_E00C2000
 /* 3C129C E00C20CC D42229A0 */  ldc1      $f2, %lo(D_E00C29A0)($at)
 /* 3C12A0 E00C20D0 46000021 */  cvt.d.s   $f0, $f0
 /* 3C12A4 E00C20D4 46220002 */  mul.d     $f0, $f0, $f2
-/* 3C12A8 E00C20D8 00000000 */  nop       
+/* 3C12A8 E00C20D8 00000000 */  nop
 /* 3C12AC E00C20DC 24030046 */  addiu     $v1, $zero, 0x46
 /* 3C12B0 E00C20E0 AC830018 */  sw        $v1, 0x18($a0)
 /* 3C12B4 E00C20E4 240300B4 */  addiu     $v1, $zero, 0xb4

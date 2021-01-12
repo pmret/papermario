@@ -115,7 +115,7 @@ glabel func_8024090C_D3AEDC
 /* D3B084 80240AB4 14E20005 */  bne       $a3, $v0, .L80240ACC
 /* D3B088 80240AB8 32E2FFFF */   andi     $v0, $s7, 0xffff
 /* D3B08C 80240ABC 14400003 */  bnez      $v0, .L80240ACC
-/* D3B090 80240AC0 00000000 */   nop      
+/* D3B090 80240AC0 00000000 */   nop
 /* D3B094 80240AC4 14800008 */  bnez      $a0, .L80240AE8
 /* D3B098 80240AC8 24020001 */   addiu    $v0, $zero, 1
 .L80240ACC:
@@ -123,7 +123,7 @@ glabel func_8024090C_D3AEDC
 /* D3B0A0 80240AD0 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* D3B0A4 80240AD4 80420075 */  lb        $v0, 0x75($v0)
 /* D3B0A8 80240AD8 10400005 */  beqz      $v0, .L80240AF0
-/* D3B0AC 80240ADC 00000000 */   nop      
+/* D3B0AC 80240ADC 00000000 */   nop
 /* D3B0B0 80240AE0 10800003 */  beqz      $a0, .L80240AF0
 /* D3B0B4 80240AE4 24020001 */   addiu    $v0, $zero, 1
 .L80240AE8:

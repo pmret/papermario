@@ -9,5 +9,5 @@ glabel func_8024049C_ADB33C
 /* ADB34C 802404AC A062007E */  sb        $v0, 0x7e($v1)
 /* ADB350 802404B0 03E00008 */  jr        $ra
 /* ADB354 802404B4 24020002 */   addiu    $v0, $zero, 2
-/* ADB358 802404B8 00000000 */  nop       
-/* ADB35C 802404BC 00000000 */  nop       
+/* ADB358 802404B8 00000000 */  nop
+/* ADB35C 802404BC 00000000 */  nop

@@ -31,7 +31,7 @@ glabel func_802D3474
 /* F7E84 802D34D4 10400016 */  beqz      $v0, .L802D3530
 /* F7E88 802D34D8 24020002 */   addiu    $v0, $zero, 2
 /* F7E8C 802D34DC 0C048338 */  jal       load_virtual_model
-/* F7E90 802D34E0 00000000 */   nop      
+/* F7E90 802D34E0 00000000 */   nop
 /* F7E94 802D34E4 3C013F80 */  lui       $at, 0x3f80
 /* F7E98 802D34E8 44810000 */  mtc1      $at, $f0
 /* F7E9C 802D34EC AE020000 */  sw        $v0, ($s0)

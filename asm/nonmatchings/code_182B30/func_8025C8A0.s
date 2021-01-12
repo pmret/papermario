@@ -8,7 +8,7 @@ glabel func_8025C8A0
 /* 18B18C 8025C8AC 8CE300C0 */  lw        $v1, 0xc0($a3)
 /* 18B190 8025C8B0 80620751 */  lb        $v0, 0x751($v1)
 /* 18B194 8025C8B4 10400015 */  beqz      $v0, .L8025C90C
-/* 18B198 8025C8B8 00000000 */   nop      
+/* 18B198 8025C8B8 00000000 */   nop
 /* 18B19C 8025C8BC 1480000B */  bnez      $a0, .L8025C8EC
 /* 18B1A0 8025C8C0 A0600751 */   sb       $zero, 0x751($v1)
 /* 18B1A4 8025C8C4 0000202D */  daddu     $a0, $zero, $zero
@@ -20,7 +20,7 @@ glabel func_8025C8A0
 /* 18B1BC 8025C8DC 0C0B77FE */  jal       func_802DDFF8
 /* 18B1C0 8025C8E0 AFA00018 */   sw       $zero, 0x18($sp)
 /* 18B1C4 8025C8E4 08097243 */  j         .L8025C90C
-/* 18B1C8 8025C8E8 00000000 */   nop      
+/* 18B1C8 8025C8E8 00000000 */   nop
 .L8025C8EC:
 /* 18B1CC 8025C8EC 0000282D */  daddu     $a1, $zero, $zero
 /* 18B1D0 8025C8F0 00A0302D */  daddu     $a2, $a1, $zero

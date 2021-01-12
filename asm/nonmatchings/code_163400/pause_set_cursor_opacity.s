@@ -10,9 +10,9 @@ glabel pause_set_cursor_opacity
 /* 163414 80242BB4 14400075 */  bnez      $v0, .L80242D8C
 /* 163418 80242BB8 28A2F581 */   slti     $v0, $a1, -0xa7f
 /* 16341C 80242BBC 14400073 */  bnez      $v0, .L80242D8C
-/* 163420 80242BC0 00000000 */   nop      
+/* 163420 80242BC0 00000000 */   nop
 /* 163424 80242BC4 18C00071 */  blez      $a2, .L80242D8C
-/* 163428 80242BC8 00000000 */   nop      
+/* 163428 80242BC8 00000000 */   nop
 /* 16342C 80242BCC 18E0006F */  blez      $a3, .L80242D8C
 /* 163430 80242BD0 28820500 */   slti     $v0, $a0, 0x500
 /* 163434 80242BD4 1040006D */  beqz      $v0, .L80242D8C
@@ -22,7 +22,7 @@ glabel pause_set_cursor_opacity
 /* 163444 80242BE4 10400069 */  beqz      $v0, .L80242D8C
 /* 163448 80242BE8 28E20A80 */   slti     $v0, $a3, 0xa80
 /* 16344C 80242BEC 10400067 */  beqz      $v0, .L80242D8C
-/* 163450 80242BF0 00000000 */   nop      
+/* 163450 80242BF0 00000000 */   nop
 /* 163454 80242BF4 3C02800A */  lui       $v0, %hi(gMasterGfxPos)
 /* 163458 80242BF8 2442A66C */  addiu     $v0, $v0, %lo(gMasterGfxPos)
 /* 16345C 80242BFC 8C480000 */  lw        $t0, ($v0)
@@ -141,4 +141,4 @@ glabel pause_set_cursor_opacity
 /* 1635E8 80242D88 AC820004 */  sw        $v0, 4($a0)
 .L80242D8C:
 /* 1635EC 80242D8C 03E00008 */  jr        $ra
-/* 1635F0 80242D90 00000000 */   nop      
+/* 1635F0 80242D90 00000000 */   nop

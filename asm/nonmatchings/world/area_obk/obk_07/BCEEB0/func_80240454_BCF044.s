@@ -48,4 +48,4 @@ glabel func_80240454_BCF044
 /* BCF0E0 802404F0 24020002 */  addiu     $v0, $zero, 2
 /* BCF0E4 802404F4 03E00008 */  jr        $ra
 /* BCF0E8 802404F8 27BD0020 */   addiu    $sp, $sp, 0x20
-/* BCF0EC 802404FC 00000000 */  nop       
+/* BCF0EC 802404FC 00000000 */  nop

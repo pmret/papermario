@@ -26,7 +26,7 @@ glabel func_80241C90_CF9800
 /* CF9850 80241CE0 1440FFFA */  bnez      $v0, .L80241CCC
 /* CF9854 80241CE4 24A50004 */   addiu    $a1, $a1, 4
 /* CF9858 80241CE8 0809074B */  j         .L80241D2C
-/* CF985C 80241CEC 00000000 */   nop      
+/* CF985C 80241CEC 00000000 */   nop
 .L80241CF0:
 /* CF9860 80241CF0 0000182D */  daddu     $v1, $zero, $zero
 /* CF9864 80241CF4 0040282D */  daddu     $a1, $v0, $zero

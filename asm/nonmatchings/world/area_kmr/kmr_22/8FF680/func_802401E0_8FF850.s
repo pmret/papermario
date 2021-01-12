@@ -7,7 +7,7 @@ glabel func_802401E0_8FF850
 /* 8FF858 802401E8 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 8FF85C 802401EC AFBF0010 */  sw        $ra, 0x10($sp)
 /* 8FF860 802401F0 0C00AFB7 */  jal       set_curtain_scale_goal
-/* 8FF864 802401F4 00000000 */   nop      
+/* 8FF864 802401F4 00000000 */   nop
 /* 8FF868 802401F8 8FBF0010 */  lw        $ra, 0x10($sp)
 /* 8FF86C 802401FC 24020002 */  addiu     $v0, $zero, 2
 /* 8FF870 80240200 03E00008 */  jr        $ra

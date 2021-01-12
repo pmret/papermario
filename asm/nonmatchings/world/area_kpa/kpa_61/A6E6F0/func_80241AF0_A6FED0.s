@@ -36,7 +36,7 @@ glabel func_80241AF0_A6FED0
 /* A6FF4C 80241B6C 3C01C1A0 */  lui       $at, 0xc1a0
 /* A6FF50 80241B70 44812000 */  mtc1      $at, $f4
 /* A6FF54 80241B74 44824000 */  mtc1      $v0, $f8
-/* A6FF58 80241B78 00000000 */  nop       
+/* A6FF58 80241B78 00000000 */  nop
 /* A6FF5C 80241B7C 46804220 */  cvt.s.w   $f8, $f8
 /* A6FF60 80241B80 44074000 */  mfc1      $a3, $f8
 /* A6FF64 80241B84 2402000C */  addiu     $v0, $zero, 0xc
@@ -62,7 +62,7 @@ glabel func_80241AF0_A6FED0
 /* A6FFB0 80241BD0 0260382D */   daddu    $a3, $s3, $zero
 /* A6FFB4 80241BD4 24030001 */  addiu     $v1, $zero, 1
 /* A6FFB8 80241BD8 1443002F */  bne       $v0, $v1, .L80241C98
-/* A6FFBC 80241BDC 00000000 */   nop      
+/* A6FFBC 80241BDC 00000000 */   nop
 /* A6FFC0 80241BE0 8602008C */  lh        $v0, 0x8c($s0)
 /* A6FFC4 80241BE4 1440002C */  bnez      $v0, .L80241C98
 /* A6FFC8 80241BE8 0200202D */   daddu    $a0, $s0, $zero

@@ -22,10 +22,10 @@ glabel func_8021B570_6A2770
 /* 6A27B4 8021B5B4 0240202D */   daddu    $a0, $s2, $zero
 /* 6A27B8 8021B5B8 822200AF */  lb        $v0, 0xaf($s1)
 /* 6A27BC 8021B5BC 10430004 */  beq       $v0, $v1, .L8021B5D0
-/* 6A27C0 8021B5C0 00000000 */   nop      
+/* 6A27C0 8021B5C0 00000000 */   nop
 /* 6A27C4 8021B5C4 822200B0 */  lb        $v0, 0xb0($s1)
 /* 6A27C8 8021B5C8 14430005 */  bne       $v0, $v1, .L8021B5E0
-/* 6A27CC 8021B5CC 00000000 */   nop      
+/* 6A27CC 8021B5CC 00000000 */   nop
 .L8021B5D0:
 /* 6A27D0 8021B5D0 8E050000 */  lw        $a1, ($s0)
 /* 6A27D4 8021B5D4 08086D7A */  j         .L8021B5E8
@@ -37,7 +37,7 @@ glabel func_8021B570_6A2770
 /* 6A27E4 8021B5E4 2406FFFF */  addiu     $a2, $zero, -1
 .L8021B5E8:
 /* 6A27E8 8021B5E8 0C0B2026 */  jal       set_variable
-/* 6A27EC 8021B5EC 00000000 */   nop      
+/* 6A27EC 8021B5EC 00000000 */   nop
 /* 6A27F0 8021B5F0 24020002 */  addiu     $v0, $zero, 2
 /* 6A27F4 8021B5F4 8FBF001C */  lw        $ra, 0x1c($sp)
 /* 6A27F8 8021B5F8 8FB20018 */  lw        $s2, 0x18($sp)

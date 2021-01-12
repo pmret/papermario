@@ -25,7 +25,7 @@ glabel func_8024255C_BE5D0C
 /* BE5D5C 802425AC D4224338 */  ldc1      $f2, %lo(D_80244338)($at)
 /* BE5D60 802425B0 46000021 */  cvt.d.s   $f0, $f0
 /* BE5D64 802425B4 46220002 */  mul.d     $f0, $f0, $f2
-/* BE5D68 802425B8 00000000 */  nop       
+/* BE5D68 802425B8 00000000 */  nop
 /* BE5D6C 802425BC 0280202D */  daddu     $a0, $s4, $zero
 /* BE5D70 802425C0 AFA00010 */  sw        $zero, 0x10($sp)
 /* BE5D74 802425C4 8E470010 */  lw        $a3, 0x10($s2)
@@ -47,7 +47,7 @@ glabel func_8024255C_BE5D0C
 /* BE5DB4 80242604 3C01C1A0 */  lui       $at, 0xc1a0
 /* BE5DB8 80242608 44812000 */  mtc1      $at, $f4
 /* BE5DBC 8024260C 44823000 */  mtc1      $v0, $f6
-/* BE5DC0 80242610 00000000 */  nop       
+/* BE5DC0 80242610 00000000 */  nop
 /* BE5DC4 80242614 468031A0 */  cvt.s.w   $f6, $f6
 /* BE5DC8 80242618 44073000 */  mfc1      $a3, $f6
 /* BE5DCC 8024261C 2402000F */  addiu     $v0, $zero, 0xf

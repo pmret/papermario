@@ -76,7 +76,7 @@ glabel pause_partners_draw_title
 /* 13F000 8024BCC0 2666000A */   addiu    $a2, $s3, 0xa
 /* 13F004 8024BCC4 8E040008 */  lw        $a0, 8($s0)
 /* 13F008 8024BCC8 08092F44 */  j         .L8024BD10
-/* 13F00C 8024BCCC 00000000 */   nop      
+/* 13F00C 8024BCCC 00000000 */   nop
 .L8024BCD0:
 /* 13F010 8024BCD0 16020011 */  bne       $s0, $v0, .L8024BD18
 /* 13F014 8024BCD4 2645005B */   addiu    $a1, $s2, 0x5b
@@ -88,7 +88,7 @@ glabel pause_partners_draw_title
 /* 13F02C 8024BCEC 0220302D */   daddu    $a2, $s1, $zero
 /* 13F030 8024BCF0 8E040008 */  lw        $a0, 8($s0)
 /* 13F034 8024BCF4 0C0511F8 */  jal       draw_icon_2
-/* 13F038 8024BCF8 00000000 */   nop      
+/* 13F038 8024BCF8 00000000 */   nop
 /* 13F03C 8024BCFC 26450065 */  addiu     $a1, $s2, 0x65
 /* 13F040 8024BD00 8E04000C */  lw        $a0, 0xc($s0)
 /* 13F044 8024BD04 0C051261 */  jal       set_icon_render_pos
@@ -96,7 +96,7 @@ glabel pause_partners_draw_title
 /* 13F04C 8024BD0C 8E04000C */  lw        $a0, 0xc($s0)
 .L8024BD10:
 /* 13F050 8024BD10 0C0511F8 */  jal       draw_icon_2
-/* 13F054 8024BD14 00000000 */   nop      
+/* 13F054 8024BD14 00000000 */   nop
 .L8024BD18:
 /* 13F058 8024BD18 8FBF002C */  lw        $ra, 0x2c($sp)
 /* 13F05C 8024BD1C 8FB40028 */  lw        $s4, 0x28($sp)

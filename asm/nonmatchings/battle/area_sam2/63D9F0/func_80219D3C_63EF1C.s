@@ -25,17 +25,17 @@ glabel func_80219D3C_63EF1C
 /* 63EF6C 80219D8C 00071883 */  sra       $v1, $a3, 2
 /* 63EF70 80219D90 00621823 */  subu      $v1, $v1, $v0
 /* 63EF74 80219D94 44836000 */  mtc1      $v1, $f12
-/* 63EF78 80219D98 00000000 */  nop       
+/* 63EF78 80219D98 00000000 */  nop
 /* 63EF7C 80219D9C 46806320 */  cvt.s.w   $f12, $f12
 /* 63EF80 80219DA0 46006302 */  mul.s     $f12, $f12, $f0
-/* 63EF84 80219DA4 00000000 */  nop       
+/* 63EF84 80219DA4 00000000 */  nop
 /* 63EF88 80219DA8 3C0143B4 */  lui       $at, 0x43b4
 /* 63EF8C 80219DAC 44810000 */  mtc1      $at, $f0
 /* 63EF90 80219DB0 3C014100 */  lui       $at, 0x4100
 /* 63EF94 80219DB4 44811000 */  mtc1      $at, $f2
 /* 63EF98 80219DB8 46006303 */  div.s     $f12, $f12, $f0
 /* 63EF9C 80219DBC 46026302 */  mul.s     $f12, $f12, $f2
-/* 63EFA0 80219DC0 00000000 */  nop       
+/* 63EFA0 80219DC0 00000000 */  nop
 /* 63EFA4 80219DC4 8E120000 */  lw        $s2, ($s0)
 /* 63EFA8 80219DC8 26100004 */  addiu     $s0, $s0, 4
 /* 63EFAC 80219DCC 8E130000 */  lw        $s3, ($s0)
@@ -46,7 +46,7 @@ glabel func_80219D3C_63EF1C
 /* 63EFC0 80219DE0 44811000 */  mtc1      $at, $f2
 /* 63EFC4 80219DE4 0240282D */  daddu     $a1, $s2, $zero
 /* 63EFC8 80219DE8 46020502 */  mul.s     $f20, $f0, $f2
-/* 63EFCC 80219DEC 00000000 */  nop       
+/* 63EFCC 80219DEC 00000000 */  nop
 /* 63EFD0 80219DF0 0C0B2026 */  jal       set_variable
 /* 63EFD4 80219DF4 0000302D */   daddu    $a2, $zero, $zero
 /* 63EFD8 80219DF8 0220202D */  daddu     $a0, $s1, $zero

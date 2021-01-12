@@ -16,10 +16,10 @@ glabel pause_items_cleanup
 /* 13E0F8 8024ADB8 26310001 */   addiu    $s1, $s1, 1
 /* 13E0FC 8024ADBC 2A220014 */  slti      $v0, $s1, 0x14
 /* 13E100 8024ADC0 1440FFFA */  bnez      $v0, .L8024ADAC
-/* 13E104 8024ADC4 00000000 */   nop      
+/* 13E104 8024ADC4 00000000 */   nop
 /* 13E108 8024ADC8 8FBF0018 */  lw        $ra, 0x18($sp)
 /* 13E10C 8024ADCC 8FB10014 */  lw        $s1, 0x14($sp)
 /* 13E110 8024ADD0 8FB00010 */  lw        $s0, 0x10($sp)
 /* 13E114 8024ADD4 03E00008 */  jr        $ra
 /* 13E118 8024ADD8 27BD0020 */   addiu    $sp, $sp, 0x20
-/* 13E11C 8024ADDC 00000000 */  nop       
+/* 13E11C 8024ADDC 00000000 */  nop

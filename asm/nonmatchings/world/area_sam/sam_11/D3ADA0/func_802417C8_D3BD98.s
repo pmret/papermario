@@ -13,7 +13,7 @@ glabel func_802417C8_D3BD98
 /* D3BDB8 802417E8 14620006 */  bne       $v1, $v0, .L80241804
 /* D3BDBC 802417EC 24020002 */   addiu    $v0, $zero, 2
 /* D3BDC0 802417F0 44800000 */  mtc1      $zero, $f0
-/* D3BDC4 802417F4 00000000 */  nop       
+/* D3BDC4 802417F4 00000000 */  nop
 /* D3BDC8 802417F8 44050000 */  mfc1      $a1, $f0
 /* D3BDCC 802417FC 08090607 */  j         .L8024181C
 /* D3BDD0 80241800 0000202D */   daddu    $a0, $zero, $zero
@@ -21,9 +21,9 @@ glabel func_802417C8_D3BD98
 /* D3BDD4 80241804 14620008 */  bne       $v1, $v0, .L80241828
 /* D3BDD8 80241808 24040001 */   addiu    $a0, $zero, 1
 /* D3BDDC 8024180C 44800000 */  mtc1      $zero, $f0
-/* D3BDE0 80241810 00000000 */  nop       
+/* D3BDE0 80241810 00000000 */  nop
 /* D3BDE4 80241814 44050000 */  mfc1      $a1, $f0
-/* D3BDE8 80241818 00000000 */  nop       
+/* D3BDE8 80241818 00000000 */  nop
 .L8024181C:
 /* D3BDEC 8024181C 00A0302D */  daddu     $a2, $a1, $zero
 /* D3BDF0 80241820 0C01C5A4 */  jal       func_80071690

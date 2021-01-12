@@ -33,7 +33,7 @@ glabel func_80240100_B1CB50
 /* B1CBC0 80240170 E7B40010 */   swc1     $f20, 0x10($sp)
 /* B1CBC4 80240174 C62C008C */  lwc1      $f12, 0x8c($s1)
 /* B1CBC8 80240178 0C00A6C9 */  jal       clamp_angle
-/* B1CBCC 8024017C 00000000 */   nop      
+/* B1CBCC 8024017C 00000000 */   nop
 /* B1CBD0 80240180 44050000 */  mfc1      $a1, $f0
 /* B1CBD4 80240184 4406A000 */  mfc1      $a2, $f20
 /* B1CBD8 80240188 4407A000 */  mfc1      $a3, $f20

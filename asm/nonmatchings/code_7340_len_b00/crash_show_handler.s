@@ -22,7 +22,7 @@ glabel crash_show_handler
 /* 77F0 8002C3F0 24100011 */   addiu    $s0, $zero, 0x11
 .L8002C3F4:
 /* 77F4 8002C3F4 0C018634 */  jal       osWritebackDCacheAll
-/* 77F8 8002C3F8 00000000 */   nop      
+/* 77F8 8002C3F8 00000000 */   nop
 /* 77FC 8002C3FC 24040019 */  addiu     $a0, $zero, 0x19
 /* 7800 8002C400 24050014 */  addiu     $a1, $zero, 0x14
 /* 7804 8002C404 2406010E */  addiu     $a2, $zero, 0x10e
@@ -58,7 +58,7 @@ glabel crash_show_handler
 /* 787C 8002C47C 3C04800A */  lui       $a0, %hi(D_8009C4FC)
 /* 7880 8002C480 8C84C4FC */  lw        $a0, %lo(D_8009C4FC)($a0)
 /* 7884 8002C484 0C019C08 */  jal       osViSwapBuffer
-/* 7888 8002C488 00000000 */   nop      
+/* 7888 8002C488 00000000 */   nop
 /* 788C 8002C48C 24040019 */  addiu     $a0, $zero, 0x19
 /* 7890 8002C490 2405002D */  addiu     $a1, $zero, 0x2d
 /* 7894 8002C494 2406010E */  addiu     $a2, $zero, 0x10e
@@ -164,7 +164,7 @@ glabel crash_show_handler
 /* 7A24 8002C624 2405008C */   addiu    $a1, $zero, 0x8c
 /* 7A28 8002C628 8E24012C */  lw        $a0, 0x12c($s1)
 /* 7A2C 8002C62C 0C00B0C9 */  jal       func_8002C324
-/* 7A30 8002C630 00000000 */   nop      
+/* 7A30 8002C630 00000000 */   nop
 /* 7A34 8002C634 2404001E */  addiu     $a0, $zero, 0x1e
 /* 7A38 8002C638 240500AA */  addiu     $a1, $zero, 0xaa
 /* 7A3C 8002C63C 0000302D */  daddu     $a2, $zero, $zero

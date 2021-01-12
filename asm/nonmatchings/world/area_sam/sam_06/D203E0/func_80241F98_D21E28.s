@@ -22,7 +22,7 @@ glabel func_80241F98_D21E28
 /* D21E6C 80241FDC 0C04DF93 */  jal       func_80137E4C
 /* D21E70 80241FE0 24070091 */   addiu    $a3, $zero, 0x91
 /* D21E74 80241FE4 44900000 */  mtc1      $s0, $f0
-/* D21E78 80241FE8 00000000 */  nop       
+/* D21E78 80241FE8 00000000 */  nop
 /* D21E7C 80241FEC 46800020 */  cvt.s.w   $f0, $f0
 /* D21E80 80241FF0 44050000 */  mfc1      $a1, $f0
 /* D21E84 80241FF4 0C04DF62 */  jal       func_80137D88

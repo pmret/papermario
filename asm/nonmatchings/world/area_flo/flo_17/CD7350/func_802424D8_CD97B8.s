@@ -279,15 +279,17 @@ glabel func_802424D8_CD97B8
 /* CD9BA4 802428C4 2C620015 */  sltiu     $v0, $v1, 0x15
 /* CD9BA8 802428C8 10400009 */  beqz      $v0, .L802428F0
 /* CD9BAC 802428CC 00031080 */   sll      $v0, $v1, 2
-/* CD9BB0 802428D0 3C018024 */  lui       $at, %hi(D_80245360)
+/* CD9BB0 802428D0 3C018024 */  lui       $at, %hi(jtbl_80245360_CDC640)
 /* CD9BB4 802428D4 00220821 */  addu      $at, $at, $v0
-/* CD9BB8 802428D8 8C225360 */  lw        $v0, %lo(D_80245360)($at)
+/* CD9BB8 802428D8 8C225360 */  lw        $v0, %lo(jtbl_80245360_CDC640)($at)
 /* CD9BBC 802428DC 00400008 */  jr        $v0
 /* CD9BC0 802428E0 00000000 */   nop
+glabel L802428E4_CD9BC4
 /* CD9BC4 802428E4 8E420028 */  lw        $v0, 0x28($s2)
 /* CD9BC8 802428E8 24420001 */  addiu     $v0, $v0, 1
 /* CD9BCC 802428EC AE420028 */  sw        $v0, 0x28($s2)
 .L802428F0:
+glabel L802428F0_CD9BD0
 /* CD9BD0 802428F0 0000102D */  daddu     $v0, $zero, $zero
 .L802428F4:
 /* CD9BD4 802428F4 8FBF0068 */  lw        $ra, 0x68($sp)

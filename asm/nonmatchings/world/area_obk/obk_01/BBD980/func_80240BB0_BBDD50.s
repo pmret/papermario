@@ -28,7 +28,7 @@ glabel func_80240BB0_BBDD50
 /* BBDDA4 80240C04 00220821 */  addu      $at, $at, $v0
 /* BBDDA8 80240C08 AC2058F0 */  sw        $zero, %lo(D_802458F0)($at)
 /* BBDDAC 80240C0C 0809030F */  j         .L80240C3C
-/* BBDDB0 80240C10 00000000 */   nop      
+/* BBDDB0 80240C10 00000000 */   nop
 .L80240C14:
 /* BBDDB4 80240C14 3C038024 */  lui       $v1, %hi(D_802458F0)
 /* BBDDB8 80240C18 246358F0 */  addiu     $v1, $v1, %lo(D_802458F0)

@@ -27,9 +27,9 @@ glabel func_80218D10_6BC8A0
 /* 6BC8F4 80218D64 C622004C */  lwc1      $f2, 0x4c($s1)
 /* 6BC8F8 80218D68 3C014080 */  lui       $at, 0x4080
 /* 6BC8FC 80218D6C 44810000 */  mtc1      $at, $f0
-/* 6BC900 80218D70 00000000 */  nop       
+/* 6BC900 80218D70 00000000 */  nop
 /* 6BC904 80218D74 4600103C */  c.lt.s    $f2, $f0
-/* 6BC908 80218D78 00000000 */  nop       
+/* 6BC908 80218D78 00000000 */  nop
 /* 6BC90C 80218D7C 45000007 */  bc1f      .L80218D9C
 /* 6BC910 80218D80 0000202D */   daddu    $a0, $zero, $zero
 /* 6BC914 80218D84 C6200054 */  lwc1      $f0, 0x54($s1)
@@ -47,7 +47,7 @@ glabel func_80218D10_6BC8A0
 /* 6BC940 80218DB0 24040001 */  addiu     $a0, $zero, 1
 .L80218DB4:
 /* 6BC944 80218DB4 0C0990BC */  jal       play_movement_dust_effects
-/* 6BC948 80218DB8 00000000 */   nop      
+/* 6BC948 80218DB8 00000000 */   nop
 /* 6BC94C 80218DBC C6400040 */  lwc1      $f0, 0x40($s2)
 /* 6BC950 80218DC0 3C013FF8 */  lui       $at, 0x3ff8
 /* 6BC954 80218DC4 44811800 */  mtc1      $at, $f3
@@ -68,7 +68,7 @@ glabel func_80218D10_6BC8A0
 /* 6BC990 80218E00 44801000 */  mtc1      $zero, $f2
 /* 6BC994 80218E04 46000021 */  cvt.d.s   $f0, $f0
 /* 6BC998 80218E08 4622003C */  c.lt.d    $f0, $f2
-/* 6BC99C 80218E0C 00000000 */  nop       
+/* 6BC99C 80218E0C 00000000 */  nop
 /* 6BC9A0 80218E10 45010002 */  bc1t      .L80218E1C
 /* 6BC9A4 80218E14 24020002 */   addiu    $v0, $zero, 2
 /* 6BC9A8 80218E18 0000102D */  daddu     $v0, $zero, $zero

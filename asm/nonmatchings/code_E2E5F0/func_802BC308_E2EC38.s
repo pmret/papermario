@@ -7,7 +7,7 @@ glabel func_802BC308_E2EC38
 /* E2EC40 802BC310 24A5CCD4 */  addiu     $a1, $a1, %lo(D_802BCCD4)
 /* E2EC44 802BC314 AFBF0010 */  sw        $ra, 0x10($sp)
 /* E2EC48 802BC318 0C0AF074 */  jal       func_802BC1D0_E2EB00
-/* E2EC4C 802BC31C 00000000 */   nop      
+/* E2EC4C 802BC31C 00000000 */   nop
 /* E2EC50 802BC320 8FBF0010 */  lw        $ra, 0x10($sp)
 /* E2EC54 802BC324 03E00008 */  jr        $ra
 /* E2EC58 802BC328 27BD0018 */   addiu    $sp, $sp, 0x18

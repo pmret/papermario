@@ -26,7 +26,7 @@ glabel func_80240870_DB8180
 /* DB81D0 802408C0 1440FFFA */  bnez      $v0, .L802408AC
 /* DB81D4 802408C4 24A50004 */   addiu    $a1, $a1, 4
 /* DB81D8 802408C8 08090243 */  j         .L8024090C
-/* DB81DC 802408CC 00000000 */   nop      
+/* DB81DC 802408CC 00000000 */   nop
 .L802408D0:
 /* DB81E0 802408D0 0000182D */  daddu     $v1, $zero, $zero
 /* DB81E4 802408D4 0040282D */  daddu     $a1, $v0, $zero

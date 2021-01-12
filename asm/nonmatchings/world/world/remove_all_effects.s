@@ -20,9 +20,9 @@ glabel remove_all_effects
 /* 35918 8005A518 26520001 */   addiu    $s2, $s2, 1
 /* 3591C 8005A51C 8E04000C */  lw        $a0, 0xc($s0)
 /* 35920 8005A520 10800003 */  beqz      $a0, .L8005A530
-/* 35924 8005A524 00000000 */   nop      
+/* 35924 8005A524 00000000 */   nop
 /* 35928 8005A528 0C00AB1E */  jal       general_heap_free
-/* 3592C 8005A52C 00000000 */   nop      
+/* 3592C 8005A52C 00000000 */   nop
 .L8005A530:
 /* 35930 8005A530 0C00AB1E */  jal       general_heap_free
 /* 35934 8005A534 0200202D */   daddu    $a0, $s0, $zero

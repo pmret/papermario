@@ -49,15 +49,15 @@ glabel func_80241288_BAEBC8
 /* BAEC70 80241330 44802000 */  mtc1      $zero, $f4
 /* BAEC74 80241334 460010A1 */  cvt.d.s   $f2, $f2
 /* BAEC78 80241338 46241082 */  mul.d     $f2, $f2, $f4
-/* BAEC7C 8024133C 00000000 */  nop       
+/* BAEC7C 8024133C 00000000 */  nop
 /* BAEC80 80241340 C7A0001C */  lwc1      $f0, 0x1c($sp)
 /* BAEC84 80241344 46000021 */  cvt.d.s   $f0, $f0
 /* BAEC88 80241348 46240002 */  mul.d     $f0, $f0, $f4
-/* BAEC8C 8024134C 00000000 */  nop       
+/* BAEC8C 8024134C 00000000 */  nop
 /* BAEC90 80241350 3C013FE0 */  lui       $at, 0x3fe0
 /* BAEC94 80241354 44812800 */  mtc1      $at, $f5
 /* BAEC98 80241358 44802000 */  mtc1      $zero, $f4
-/* BAEC9C 8024135C 00000000 */  nop       
+/* BAEC9C 8024135C 00000000 */  nop
 /* BAECA0 80241360 46241080 */  add.d     $f2, $f2, $f4
 /* BAECA4 80241364 AE000074 */  sw        $zero, 0x74($s0)
 /* BAECA8 80241368 46240000 */  add.d     $f0, $f0, $f4

@@ -279,15 +279,17 @@ glabel func_80240728_CEE988
 /* CEED74 80240B14 2C620015 */  sltiu     $v0, $v1, 0x15
 /* CEED78 80240B18 10400009 */  beqz      $v0, .L80240B40
 /* CEED7C 80240B1C 00031080 */   sll      $v0, $v1, 2
-/* CEED80 80240B20 3C018024 */  lui       $at, %hi(func_80242688_C79368)
+/* CEED80 80240B20 3C018024 */  lui       $at, %hi(jtbl_80242688_CF08E8)
 /* CEED84 80240B24 00220821 */  addu      $at, $at, $v0
-/* CEED88 80240B28 8C222688 */  lw        $v0, %lo(func_80242688_C79368)($at)
+/* CEED88 80240B28 8C222688 */  lw        $v0, %lo(jtbl_80242688_CF08E8)($at)
 /* CEED8C 80240B2C 00400008 */  jr        $v0
 /* CEED90 80240B30 00000000 */   nop
+glabel L80240B34_CEED94
 /* CEED94 80240B34 8E420028 */  lw        $v0, 0x28($s2)
 /* CEED98 80240B38 24420001 */  addiu     $v0, $v0, 1
 /* CEED9C 80240B3C AE420028 */  sw        $v0, 0x28($s2)
 .L80240B40:
+glabel L80240B40_CEEDA0
 /* CEEDA0 80240B40 0000102D */  daddu     $v0, $zero, $zero
 .L80240B44:
 /* CEEDA4 80240B44 8FBF0068 */  lw        $ra, 0x68($sp)

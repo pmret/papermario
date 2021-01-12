@@ -36,7 +36,7 @@ glabel func_80240D44_A4D764
 /* A4D7E0 80240DC0 3C01C1A0 */  lui       $at, 0xc1a0
 /* A4D7E4 80240DC4 44812000 */  mtc1      $at, $f4
 /* A4D7E8 80240DC8 44824000 */  mtc1      $v0, $f8
-/* A4D7EC 80240DCC 00000000 */  nop       
+/* A4D7EC 80240DCC 00000000 */  nop
 /* A4D7F0 80240DD0 46804220 */  cvt.s.w   $f8, $f8
 /* A4D7F4 80240DD4 44074000 */  mfc1      $a3, $f8
 /* A4D7F8 80240DD8 2402000C */  addiu     $v0, $zero, 0xc

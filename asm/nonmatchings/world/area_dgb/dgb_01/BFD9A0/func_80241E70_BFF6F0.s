@@ -26,9 +26,9 @@ glabel func_80241E70_BFF6F0
 /* BFF744 80241EC4 A480008E */   sh       $zero, 0x8e($a0)
 .L80241EC8:
 /* BFF748 80241EC8 0C038069 */  jal       enable_player_input
-/* BFF74C 80241ECC 00000000 */   nop      
+/* BFF74C 80241ECC 00000000 */   nop
 /* BFF750 80241ED0 0C03BD80 */  jal       func_800EF600
-/* BFF754 80241ED4 00000000 */   nop      
+/* BFF754 80241ED4 00000000 */   nop
 /* BFF758 80241ED8 24020010 */  addiu     $v0, $zero, 0x10
 .L80241EDC:
 /* BFF75C 80241EDC AE020070 */  sw        $v0, 0x70($s0)

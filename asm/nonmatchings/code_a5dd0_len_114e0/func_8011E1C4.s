@@ -15,7 +15,7 @@ glabel func_8011E1C4
 /* B48E8 8011E1E8 10800003 */  beqz      $a0, .L8011E1F8
 /* B48EC 8011E1EC 26310001 */   addiu    $s1, $s1, 1
 /* B48F0 8011E1F0 0C047871 */  jal       func_8011E1C4
-/* B48F4 8011E1F4 00000000 */   nop      
+/* B48F4 8011E1F4 00000000 */   nop
 .L8011E1F8:
 /* B48F8 8011E1F8 2A220020 */  slti      $v0, $s1, 0x20
 /* B48FC 8011E1FC 1440FFF9 */  bnez      $v0, .L8011E1E4

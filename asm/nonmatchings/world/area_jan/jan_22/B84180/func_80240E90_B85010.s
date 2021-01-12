@@ -26,7 +26,7 @@ glabel func_80240E90_B85010
 /* B85060 80240EE0 1440FFFA */  bnez      $v0, .L80240ECC
 /* B85064 80240EE4 24A50004 */   addiu    $a1, $a1, 4
 /* B85068 80240EE8 080903CB */  j         .L80240F2C
-/* B8506C 80240EEC 00000000 */   nop      
+/* B8506C 80240EEC 00000000 */   nop
 .L80240EF0:
 /* B85070 80240EF0 0000182D */  daddu     $v1, $zero, $zero
 /* B85074 80240EF4 0040282D */  daddu     $a1, $v0, $zero

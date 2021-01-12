@@ -28,7 +28,7 @@ glabel appendGfx_model_group
 /* AE3E4 80117CE4 3C018015 */  lui       $at, %hi(D_80153224)
 /* AE3E8 80117CE8 AC223224 */  sw        $v0, %lo(D_80153224)($at)
 /* AE3EC 80117CEC 0C045F40 */  jal       func_80117D00
-/* AE3F0 80117CF0 00000000 */   nop      
+/* AE3F0 80117CF0 00000000 */   nop
 /* AE3F4 80117CF4 8FBF0010 */  lw        $ra, 0x10($sp)
 /* AE3F8 80117CF8 03E00008 */  jr        $ra
 /* AE3FC 80117CFC 27BD0018 */   addiu    $sp, $sp, 0x18

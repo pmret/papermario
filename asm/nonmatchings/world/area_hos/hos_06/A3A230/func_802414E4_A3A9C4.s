@@ -48,7 +48,7 @@ glabel func_802414E4_A3A9C4
 /* A3AA64 80241584 1440FFEF */  bnez      $v0, .L80241544
 /* A3AA68 80241588 2631000C */   addiu    $s1, $s1, 0xc
 /* A3AA6C 8024158C 12800029 */  beqz      $s4, .L80241634
-/* A3AA70 80241590 00000000 */   nop      
+/* A3AA70 80241590 00000000 */   nop
 /* A3AA74 80241594 0C00A67F */  jal       rand_int
 /* A3AA78 80241598 2684FFFF */   addiu    $a0, $s4, -1
 /* A3AA7C 8024159C 0040B82D */  daddu     $s7, $v0, $zero
@@ -84,7 +84,7 @@ glabel func_802414E4_A3A9C4
 /* A3AAF0 80241610 0C0B2026 */  jal       set_variable
 /* A3AAF4 80241614 AFC20088 */   sw       $v0, 0x88($fp)
 /* A3AAF8 80241618 0809058D */  j         .L80241634
-/* A3AAFC 8024161C 00000000 */   nop      
+/* A3AAFC 8024161C 00000000 */   nop
 .L80241620:
 /* A3AB00 80241620 26100001 */  addiu     $s0, $s0, 1
 .L80241624:

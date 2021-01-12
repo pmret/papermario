@@ -15,4 +15,4 @@ glabel func_80241F98_A3B478
 /* A3B4A0 80241FC0 24020002 */  addiu     $v0, $zero, 2
 /* A3B4A4 80241FC4 03E00008 */  jr        $ra
 /* A3B4A8 80241FC8 27BD0018 */   addiu    $sp, $sp, 0x18
-/* A3B4AC 80241FCC 00000000 */  nop       
+/* A3B4AC 80241FCC 00000000 */  nop

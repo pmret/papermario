@@ -16,7 +16,7 @@ glabel func_80218D90_59F470
 /* 59F49C 80218DBC 0C0B1EAF */  jal       get_variable
 /* 59F4A0 80218DC0 0220202D */   daddu    $a0, $s1, $zero
 /* 59F4A4 80218DC4 44820000 */  mtc1      $v0, $f0
-/* 59F4A8 80218DC8 00000000 */  nop       
+/* 59F4A8 80218DC8 00000000 */  nop
 /* 59F4AC 80218DCC 46800020 */  cvt.s.w   $f0, $f0
 /* 59F4B0 80218DD0 E6000004 */  swc1      $f0, 4($s0)
 /* 59F4B4 80218DD4 8FBF0018 */  lw        $ra, 0x18($sp)
@@ -25,4 +25,4 @@ glabel func_80218D90_59F470
 /* 59F4C0 80218DE0 24020002 */  addiu     $v0, $zero, 2
 /* 59F4C4 80218DE4 03E00008 */  jr        $ra
 /* 59F4C8 80218DE8 27BD0020 */   addiu    $sp, $sp, 0x20
-/* 59F4CC 80218DEC 00000000 */  nop       
+/* 59F4CC 80218DEC 00000000 */  nop

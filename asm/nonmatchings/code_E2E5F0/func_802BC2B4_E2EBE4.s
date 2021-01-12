@@ -7,7 +7,7 @@ glabel func_802BC2B4_E2EBE4
 /* E2EBEC 802BC2BC 24A5CCB0 */  addiu     $a1, $a1, %lo(D_802BCCB0)
 /* E2EBF0 802BC2C0 AFBF0010 */  sw        $ra, 0x10($sp)
 /* E2EBF4 802BC2C4 0C0AF074 */  jal       func_802BC1D0_E2EB00
-/* E2EBF8 802BC2C8 00000000 */   nop      
+/* E2EBF8 802BC2C8 00000000 */   nop
 /* E2EBFC 802BC2CC 3C027FFF */  lui       $v0, 0x7fff
 /* E2EC00 802BC2D0 3442FFFF */  ori       $v0, $v0, 0xffff
 /* E2EC04 802BC2D4 3C040008 */  lui       $a0, 8

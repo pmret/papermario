@@ -16,7 +16,7 @@ glabel SetTargetOffset
 /* 1ABC8C 8027D3AC 0040802D */  daddu     $s0, $v0, $zero
 /* 1ABC90 8027D3B0 2402FF81 */  addiu     $v0, $zero, -0x7f
 /* 1ABC94 8027D3B4 16020002 */  bne       $s0, $v0, .L8027D3C0
-/* 1ABC98 8027D3B8 00000000 */   nop      
+/* 1ABC98 8027D3B8 00000000 */   nop
 /* 1ABC9C 8027D3BC 8E700148 */  lw        $s0, 0x148($s3)
 .L8027D3C0:
 /* 1ABCA0 8027D3C0 8E450000 */  lw        $a1, ($s2)

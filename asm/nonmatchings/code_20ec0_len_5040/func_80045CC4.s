@@ -10,7 +10,7 @@ glabel func_80045CC4
 /* 210D8 80045CD8 50800005 */  beql      $a0, $zero, .L80045CF0
 /* 210DC 80045CDC A6000010 */   sh       $zero, 0x10($s0)
 /* 210E0 80045CE0 0C00AB4B */  jal       heap_free
-/* 210E4 80045CE4 00000000 */   nop      
+/* 210E4 80045CE4 00000000 */   nop
 /* 210E8 80045CE8 AE000018 */  sw        $zero, 0x18($s0)
 /* 210EC 80045CEC A6000010 */  sh        $zero, 0x10($s0)
 .L80045CF0:

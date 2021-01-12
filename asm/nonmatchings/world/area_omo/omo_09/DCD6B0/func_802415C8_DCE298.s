@@ -28,7 +28,7 @@ glabel func_802415C8_DCE298
 /* DCE2F0 80241620 8E0200D0 */  lw        $v0, 0xd0($s0)
 /* DCE2F4 80241624 8C42007C */  lw        $v0, 0x7c($v0)
 /* DCE2F8 80241628 04410004 */  bgez      $v0, .L8024163C
-/* DCE2FC 8024162C 00000000 */   nop      
+/* DCE2FC 8024162C 00000000 */   nop
 /* DCE300 80241630 C6400000 */  lwc1      $f0, ($s2)
 /* DCE304 80241634 08090597 */  j         .L8024165C
 /* DCE308 80241638 E4A00018 */   swc1     $f0, 0x18($a1)
@@ -36,7 +36,7 @@ glabel func_802415C8_DCE298
 /* DCE30C 8024163C 3C018025 */  lui       $at, %hi(pause_items_handle_input)
 /* DCE310 80241640 D422A7D8 */  ldc1      $f2, %lo(pause_items_handle_input)($at)
 /* DCE314 80241644 44820000 */  mtc1      $v0, $f0
-/* DCE318 80241648 00000000 */  nop       
+/* DCE318 80241648 00000000 */  nop
 /* DCE31C 8024164C 46800021 */  cvt.d.w   $f0, $f0
 /* DCE320 80241650 46220003 */  div.d     $f0, $f0, $f2
 /* DCE324 80241654 46200020 */  cvt.s.d   $f0, $f0

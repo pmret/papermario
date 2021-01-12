@@ -24,7 +24,7 @@ glabel pause_items_update
 /* 13DFDC 8024AC9C 14610004 */  bne       $v1, $at, .L8024ACB0
 /* 13DFE0 8024ACA0 3C018000 */   lui      $at, 0x8000
 /* 13DFE4 8024ACA4 14410002 */  bne       $v0, $at, .L8024ACB0
-/* 13DFE8 8024ACA8 00000000 */   nop      
+/* 13DFE8 8024ACA8 00000000 */   nop
 /* 13DFEC 8024ACAC 0006000D */  break     6
 .L8024ACB0:
 /* 13DFF0 8024ACB0 00001012 */   mflo     $v0
@@ -32,16 +32,16 @@ glabel pause_items_update
 /* 13DFF8 8024ACB8 00432023 */  subu      $a0, $v0, $v1
 /* 13DFFC 8024ACBC 28820002 */  slti      $v0, $a0, 2
 /* 13E000 8024ACC0 14400005 */  bnez      $v0, .L8024ACD8
-/* 13E004 8024ACC4 00000000 */   nop      
+/* 13E004 8024ACC4 00000000 */   nop
 /* 13E008 8024ACC8 90C20003 */  lbu       $v0, 3($a2)
 /* 13E00C 8024ACCC 2C420009 */  sltiu     $v0, $v0, 9
 /* 13E010 8024ACD0 10400005 */  beqz      $v0, .L8024ACE8
-/* 13E014 8024ACD4 00000000 */   nop      
+/* 13E014 8024ACD4 00000000 */   nop
 .L8024ACD8:
 /* 13E018 8024ACD8 3C018027 */  lui       $at, %hi(D_802705DC)
 /* 13E01C 8024ACDC AC2005DC */  sw        $zero, %lo(D_802705DC)($at)
 /* 13E020 8024ACE0 08092B4D */  j         .L8024AD34
-/* 13E024 8024ACE4 00000000 */   nop      
+/* 13E024 8024ACE4 00000000 */   nop
 .L8024ACE8:
 /* 13E028 8024ACE8 90C30003 */  lbu       $v1, 3($a2)
 /* 13E02C 8024ACEC 2462FFFE */  addiu     $v0, $v1, -2
@@ -51,7 +51,7 @@ glabel pause_items_update
 /* 13E03C 8024ACFC 3C018027 */  lui       $at, %hi(D_802705DC)
 /* 13E040 8024AD00 AC2205DC */  sw        $v0, %lo(D_802705DC)($at)
 /* 13E044 8024AD04 08092B4D */  j         .L8024AD34
-/* 13E048 8024AD08 00000000 */   nop      
+/* 13E048 8024AD08 00000000 */   nop
 .L8024AD0C:
 /* 13E04C 8024AD0C 3C058027 */  lui       $a1, %hi(D_802705DC)
 /* 13E050 8024AD10 24A505DC */  addiu     $a1, $a1, %lo(D_802705DC)
@@ -73,7 +73,7 @@ glabel pause_items_update
 /* 13E088 8024AD48 8C8404C8 */  lw        $a0, %lo(gItemMenuCurrentPage)($a0)
 /* 13E08C 8024AD4C 00002812 */  mflo      $a1
 /* 13E090 8024AD50 0C09260A */  jal       pause_items_get_pos_y
-/* 13E094 8024AD54 00000000 */   nop      
+/* 13E094 8024AD54 00000000 */   nop
 /* 13E098 8024AD58 3C108027 */  lui       $s0, %hi(gItemMenuCurrentScrollPos)
 /* 13E09C 8024AD5C 261005D4 */  addiu     $s0, $s0, %lo(gItemMenuCurrentScrollPos)
 /* 13E0A0 8024AD60 8E040000 */  lw        $a0, ($s0)

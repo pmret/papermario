@@ -14,7 +14,7 @@ glabel func_80241A58_A3AF38
 .L80241A7C:
 /* A3AF5C 80241A7C 8E020074 */  lw        $v0, 0x74($s0)
 /* A3AF60 80241A80 1440001A */  bnez      $v0, .L80241AEC
-/* A3AF64 80241A84 00000000 */   nop      
+/* A3AF64 80241A84 00000000 */   nop
 /* A3AF68 80241A88 8E020070 */  lw        $v0, 0x70($s0)
 /* A3AF6C 80241A8C 24420004 */  addiu     $v0, $v0, 4
 /* A3AF70 80241A90 AE020070 */  sw        $v0, 0x70($s0)
@@ -36,7 +36,7 @@ glabel func_80241A58_A3AF38
 /* A3AFA8 80241AC8 8E030070 */  lw        $v1, 0x70($s0)
 /* A3AFAC 80241ACC 2402007F */  addiu     $v0, $zero, 0x7f
 /* A3AFB0 80241AD0 14620014 */  bne       $v1, $v0, .L80241B24
-/* A3AFB4 80241AD4 00000000 */   nop      
+/* A3AFB4 80241AD4 00000000 */   nop
 /* A3AFB8 80241AD8 8E020078 */  lw        $v0, 0x78($s0)
 /* A3AFBC 80241ADC 14430011 */  bne       $v0, $v1, .L80241B24
 /* A3AFC0 80241AE0 24020001 */   addiu    $v0, $zero, 1

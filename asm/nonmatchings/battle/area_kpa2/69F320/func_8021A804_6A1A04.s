@@ -31,21 +31,21 @@ glabel func_8021A804_6A1A04
 /* 6A1A6C 8021A86C 8E050000 */  lw        $a1, ($s0)
 /* 6A1A70 8021A870 26100004 */  addiu     $s0, $s0, 4
 /* 6A1A74 8021A874 4482E000 */  mtc1      $v0, $f28
-/* 6A1A78 8021A878 00000000 */  nop       
+/* 6A1A78 8021A878 00000000 */  nop
 /* 6A1A7C 8021A87C 4680E720 */  cvt.s.w   $f28, $f28
 /* 6A1A80 8021A880 0C0B1EAF */  jal       get_variable
 /* 6A1A84 8021A884 0220202D */   daddu    $a0, $s1, $zero
 /* 6A1A88 8021A888 8E050000 */  lw        $a1, ($s0)
 /* 6A1A8C 8021A88C 26100004 */  addiu     $s0, $s0, 4
 /* 6A1A90 8021A890 4482D000 */  mtc1      $v0, $f26
-/* 6A1A94 8021A894 00000000 */  nop       
+/* 6A1A94 8021A894 00000000 */  nop
 /* 6A1A98 8021A898 4680D6A0 */  cvt.s.w   $f26, $f26
 /* 6A1A9C 8021A89C 0C0B1EAF */  jal       get_variable
 /* 6A1AA0 8021A8A0 0220202D */   daddu    $a0, $s1, $zero
 /* 6A1AA4 8021A8A4 8E050000 */  lw        $a1, ($s0)
 /* 6A1AA8 8021A8A8 26100004 */  addiu     $s0, $s0, 4
 /* 6A1AAC 8021A8AC 4482C000 */  mtc1      $v0, $f24
-/* 6A1AB0 8021A8B0 00000000 */  nop       
+/* 6A1AB0 8021A8B0 00000000 */  nop
 /* 6A1AB4 8021A8B4 4680C620 */  cvt.s.w   $f24, $f24
 /* 6A1AB8 8021A8B8 0C0B210B */  jal       get_float_variable
 /* 6A1ABC 8021A8BC 0220202D */   daddu    $a0, $s1, $zero
@@ -130,7 +130,7 @@ glabel func_8021A804_6A1A04
 .L8021A9EC:
 /* 6A1BEC 8021A9EC 8E020010 */  lw        $v0, 0x10($s0)
 /* 6A1BF0 8021A9F0 10400003 */  beqz      $v0, .L8021AA00
-/* 6A1BF4 8021A9F4 00000000 */   nop      
+/* 6A1BF4 8021A9F4 00000000 */   nop
 /* 6A1BF8 8021A9F8 08086ADE */  j         .L8021AB78
 /* 6A1BFC 8021A9FC 26940001 */   addiu    $s4, $s4, 1
 .L8021AA00:
@@ -141,7 +141,7 @@ glabel func_8021A804_6A1A04
 /* 6A1C10 8021AA10 468010A0 */  cvt.s.w   $f2, $f2
 /* 6A1C14 8021AA14 46000005 */  abs.s     $f0, $f0
 /* 6A1C18 8021AA18 46020002 */  mul.s     $f0, $f0, $f2
-/* 6A1C1C 8021AA1C 00000000 */  nop       
+/* 6A1C1C 8021AA1C 00000000 */  nop
 /* 6A1C20 8021AA20 C606000C */  lwc1      $f6, 0xc($s0)
 /* 6A1C24 8021AA24 3C014110 */  lui       $at, 0x4110
 /* 6A1C28 8021AA28 44811000 */  mtc1      $at, $f2
@@ -159,25 +159,25 @@ glabel func_8021A804_6A1A04
 /* 6A1C58 8021AA58 00621021 */  addu      $v0, $v1, $v0
 /* 6A1C5C 8021AA5C 00021043 */  sra       $v0, $v0, 1
 /* 6A1C60 8021AA60 44821000 */  mtc1      $v0, $f2
-/* 6A1C64 8021AA64 00000000 */  nop       
+/* 6A1C64 8021AA64 00000000 */  nop
 /* 6A1C68 8021AA68 468010A0 */  cvt.s.w   $f2, $f2
 /* 6A1C6C 8021AA6C 0060102D */  daddu     $v0, $v1, $zero
 /* 6A1C70 8021AA70 46181082 */  mul.s     $f2, $f2, $f24
-/* 6A1C74 8021AA74 00000000 */  nop       
+/* 6A1C74 8021AA74 00000000 */  nop
 /* 6A1C78 8021AA78 00021FC2 */  srl       $v1, $v0, 0x1f
 /* 6A1C7C 8021AA7C 00431021 */  addu      $v0, $v0, $v1
 /* 6A1C80 8021AA80 00021043 */  sra       $v0, $v0, 1
 /* 6A1C84 8021AA84 44820000 */  mtc1      $v0, $f0
-/* 6A1C88 8021AA88 00000000 */  nop       
+/* 6A1C88 8021AA88 00000000 */  nop
 /* 6A1C8C 8021AA8C 46800020 */  cvt.s.w   $f0, $f0
 /* 6A1C90 8021AA90 46180002 */  mul.s     $f0, $f0, $f24
-/* 6A1C94 8021AA94 00000000 */  nop       
+/* 6A1C94 8021AA94 00000000 */  nop
 /* 6A1C98 8021AA98 46161080 */  add.s     $f2, $f2, $f22
 /* 6A1C9C 8021AA9C 46141082 */  mul.s     $f2, $f2, $f20
-/* 6A1CA0 8021AAA0 00000000 */  nop       
+/* 6A1CA0 8021AAA0 00000000 */  nop
 /* 6A1CA4 8021AAA4 46160000 */  add.s     $f0, $f0, $f22
 /* 6A1CA8 8021AAA8 46140002 */  mul.s     $f0, $f0, $f20
-/* 6A1CAC 8021AAAC 00000000 */  nop       
+/* 6A1CAC 8021AAAC 00000000 */  nop
 /* 6A1CB0 8021AAB0 4600128D */  trunc.w.s $f10, $f2
 /* 6A1CB4 8021AAB4 E60AFFFC */  swc1      $f10, -4($s0)
 /* 6A1CB8 8021AAB8 4600028D */  trunc.w.s $f10, $f0
@@ -189,7 +189,7 @@ glabel func_8021A804_6A1A04
 /* 6A1CCC 8021AACC AE02FFF8 */   sw       $v0, -8($s0)
 /* 6A1CD0 8021AAD0 8E240000 */  lw        $a0, ($s1)
 /* 6A1CD4 8021AAD4 0C016914 */  jal       remove_effect
-/* 6A1CD8 8021AAD8 00000000 */   nop      
+/* 6A1CD8 8021AAD8 00000000 */   nop
 /* 6A1CDC 8021AADC 24020001 */  addiu     $v0, $zero, 1
 /* 6A1CE0 8021AAE0 08086ADE */  j         .L8021AB78
 /* 6A1CE4 8021AAE4 AE020010 */   sw       $v0, 0x10($s0)

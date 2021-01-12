@@ -48,4 +48,4 @@ glabel func_80241094_BBE234
 /* BBE2D0 80241130 24020002 */  addiu     $v0, $zero, 2
 /* BBE2D4 80241134 03E00008 */  jr        $ra
 /* BBE2D8 80241138 27BD0020 */   addiu    $sp, $sp, 0x20
-/* BBE2DC 8024113C 00000000 */  nop       
+/* BBE2DC 8024113C 00000000 */  nop

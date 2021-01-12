@@ -5,7 +5,7 @@ glabel func_802199E0_448E20
 /* 448E20 802199E0 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 448E24 802199E4 AFBF0010 */  sw        $ra, 0x10($sp)
 /* 448E28 802199E8 0C046ED4 */  jal       enable_world_fog
-/* 448E2C 802199EC 00000000 */   nop      
+/* 448E2C 802199EC 00000000 */   nop
 /* 448E30 802199F0 240403B6 */  addiu     $a0, $zero, 0x3b6
 /* 448E34 802199F4 0C046EDD */  jal       set_world_fog_dist
 /* 448E38 802199F8 240503E8 */   addiu    $a1, $zero, 0x3e8
@@ -25,4 +25,4 @@ glabel func_802199E0_448E20
 /* 448E70 80219A30 24020002 */  addiu     $v0, $zero, 2
 /* 448E74 80219A34 03E00008 */  jr        $ra
 /* 448E78 80219A38 27BD0018 */   addiu    $sp, $sp, 0x18
-/* 448E7C 80219A3C 00000000 */  nop       
+/* 448E7C 80219A3C 00000000 */  nop

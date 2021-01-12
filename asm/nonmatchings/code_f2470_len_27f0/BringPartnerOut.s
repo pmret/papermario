@@ -22,7 +22,7 @@ glabel BringPartnerOut
 /* F3FAC 802CF5FC 27B10010 */   addiu    $s1, $sp, 0x10
 /* F3FB0 802CF600 8C450000 */  lw        $a1, ($v0)
 /* F3FB4 802CF604 0C0B1EAF */  jal       get_variable
-/* F3FB8 802CF608 00000000 */   nop      
+/* F3FB8 802CF608 00000000 */   nop
 /* F3FBC 802CF60C 3C038011 */  lui       $v1, %hi(gPlayerData)
 /* F3FC0 802CF610 2463F290 */  addiu     $v1, $v1, %lo(gPlayerData)
 /* F3FC4 802CF614 80630012 */  lb        $v1, 0x12($v1)
@@ -87,7 +87,7 @@ glabel BringPartnerOut
 /* F40AC 802CF6FC 00621821 */  addu      $v1, $v1, $v0
 /* F40B0 802CF700 00031843 */  sra       $v1, $v1, 1
 /* F40B4 802CF704 44830000 */  mtc1      $v1, $f0
-/* F40B8 802CF708 00000000 */  nop       
+/* F40B8 802CF708 00000000 */  nop
 /* F40BC 802CF70C 46800020 */  cvt.s.w   $f0, $f0
 /* F40C0 802CF710 46001700 */  add.s     $f28, $f2, $f0
 /* F40C4 802CF714 3C014080 */  lui       $at, 0x4080
@@ -117,13 +117,13 @@ glabel BringPartnerOut
 /* F4124 802CF774 46041083 */  div.s     $f2, $f2, $f4
 /* F4128 802CF778 4600118D */  trunc.w.s $f6, $f2
 /* F412C 802CF77C 44023000 */  mfc1      $v0, $f6
-/* F4130 802CF780 00000000 */  nop       
+/* F4130 802CF780 00000000 */  nop
 /* F4134 802CF784 A622008E */  sh        $v0, 0x8e($s1)
 /* F4138 802CF788 00021400 */  sll       $v0, $v0, 0x10
 /* F413C 802CF78C 00021403 */  sra       $v0, $v0, 0x10
 /* F4140 802CF790 2842000A */  slti      $v0, $v0, 0xa
 /* F4144 802CF794 10400007 */  beqz      $v0, .L802CF7B4
-/* F4148 802CF798 00000000 */   nop      
+/* F4148 802CF798 00000000 */   nop
 /* F414C 802CF79C 3C014120 */  lui       $at, 0x4120
 /* F4150 802CF7A0 44811000 */  mtc1      $at, $f2
 /* F4154 802CF7A4 C6200010 */  lwc1      $f0, 0x10($s1)
@@ -134,17 +134,17 @@ glabel BringPartnerOut
 /* F4164 802CF7B4 8622008E */  lh        $v0, 0x8e($s1)
 /* F4168 802CF7B8 C6200014 */  lwc1      $f0, 0x14($s1)
 /* F416C 802CF7BC 44822000 */  mtc1      $v0, $f4
-/* F4170 802CF7C0 00000000 */  nop       
+/* F4170 802CF7C0 00000000 */  nop
 /* F4174 802CF7C4 46802120 */  cvt.s.w   $f4, $f4
 /* F4178 802CF7C8 46040002 */  mul.s     $f0, $f0, $f4
-/* F417C 802CF7CC 00000000 */  nop       
+/* F417C 802CF7CC 00000000 */  nop
 /* F4180 802CF7D0 46040002 */  mul.s     $f0, $f0, $f4
-/* F4184 802CF7D4 00000000 */  nop       
+/* F4184 802CF7D4 00000000 */  nop
 /* F4188 802CF7D8 3C013F00 */  lui       $at, 0x3f00
 /* F418C 802CF7DC 44811000 */  mtc1      $at, $f2
-/* F4190 802CF7E0 00000000 */  nop       
+/* F4190 802CF7E0 00000000 */  nop
 /* F4194 802CF7E4 46020002 */  mul.s     $f0, $f0, $f2
-/* F4198 802CF7E8 00000000 */  nop       
+/* F4198 802CF7E8 00000000 */  nop
 /* F419C 802CF7EC 8E830000 */  lw        $v1, ($s4)
 /* F41A0 802CF7F0 461CF081 */  sub.s     $f2, $f30, $f28
 /* F41A4 802CF7F4 000310C0 */  sll       $v0, $v1, 3
@@ -162,7 +162,7 @@ glabel BringPartnerOut
 /* F41D0 802CF820 3C04802E */  lui       $a0, %hi(D_802DAE44)
 /* F41D4 802CF824 8C84AE44 */  lw        $a0, %lo(D_802DAE44)($a0)
 /* F41D8 802CF828 0C00E2B7 */  jal       get_npc_by_index
-/* F41DC 802CF82C 00000000 */   nop      
+/* F41DC 802CF82C 00000000 */   nop
 /* F41E0 802CF830 0040882D */  daddu     $s1, $v0, $zero
 /* F41E4 802CF834 C620001C */  lwc1      $f0, 0x1c($s1)
 /* F41E8 802CF838 C6220014 */  lwc1      $f2, 0x14($s1)
@@ -170,7 +170,7 @@ glabel BringPartnerOut
 /* F41F0 802CF840 C622003C */  lwc1      $f2, 0x3c($s1)
 /* F41F4 802CF844 46001080 */  add.s     $f2, $f2, $f0
 /* F41F8 802CF848 4480A000 */  mtc1      $zero, $f20
-/* F41FC 802CF84C 00000000 */  nop       
+/* F41FC 802CF84C 00000000 */  nop
 /* F4200 802CF850 4614003E */  c.le.s    $f0, $f20
 /* F4204 802CF854 E620001C */  swc1      $f0, 0x1c($s1)
 /* F4208 802CF858 4500000A */  bc1f      .L802CF884
@@ -193,10 +193,10 @@ glabel BringPartnerOut
 /* F4248 802CF898 3C014120 */  lui       $at, 0x4120
 /* F424C 802CF89C 44811000 */  mtc1      $at, $f2
 /* F4250 802CF8A0 44820000 */  mtc1      $v0, $f0
-/* F4254 802CF8A4 00000000 */  nop       
+/* F4254 802CF8A4 00000000 */  nop
 /* F4258 802CF8A8 46800020 */  cvt.s.w   $f0, $f0
 /* F425C 802CF8AC 4600103C */  c.lt.s    $f2, $f0
-/* F4260 802CF8B0 00000000 */  nop       
+/* F4260 802CF8B0 00000000 */  nop
 /* F4264 802CF8B4 45030001 */  bc1tl     .L802CF8BC
 /* F4268 802CF8B8 46001006 */   mov.s    $f0, $f2
 .L802CF8BC:

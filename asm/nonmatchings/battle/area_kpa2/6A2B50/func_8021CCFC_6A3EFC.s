@@ -56,12 +56,12 @@ glabel func_8021CCFC_6A3EFC
 /* 6A3FBC 8021CDBC 50600007 */  beql      $v1, $zero, .L8021CDDC
 /* 6A3FC0 8021CDC0 A25000AE */   sb       $s0, 0xae($s2)
 /* 6A3FC4 8021CDC4 080873A4 */  j         .L8021CE90
-/* 6A3FC8 8021CDC8 00000000 */   nop      
+/* 6A3FC8 8021CDC8 00000000 */   nop
 .L8021CDCC:
 /* 6A3FCC 8021CDCC 50620026 */  beql      $v1, $v0, .L8021CE68
 /* 6A3FD0 8021CDD0 A25000B0 */   sb       $s0, 0xb0($s2)
 /* 6A3FD4 8021CDD4 080873A4 */  j         .L8021CE90
-/* 6A3FD8 8021CDD8 00000000 */   nop      
+/* 6A3FD8 8021CDD8 00000000 */   nop
 .L8021CDDC:
 /* 6A3FDC 8021CDDC 8E250000 */  lw        $a1, ($s1)
 /* 6A3FE0 8021CDE0 82820001 */  lb        $v0, 1($s4)
@@ -110,7 +110,7 @@ glabel func_8021CCFC_6A3EFC
 /* 6A4084 8021CE84 2406004F */  addiu     $a2, $zero, 0x4f
 .L8021CE88:
 /* 6A4088 8021CE88 0C0B2026 */  jal       set_variable
-/* 6A408C 8021CE8C 00000000 */   nop      
+/* 6A408C 8021CE8C 00000000 */   nop
 .L8021CE90:
 /* 6A4090 8021CE90 8FBF0038 */  lw        $ra, 0x38($sp)
 /* 6A4094 8021CE94 8FB50034 */  lw        $s5, 0x34($sp)

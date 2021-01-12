@@ -26,7 +26,7 @@ glabel func_802432AC_C79F8C
 /* C79FDC 802432FC 1440FFFA */  bnez      $v0, .L802432E8
 /* C79FE0 80243300 24A50004 */   addiu    $a1, $a1, 4
 /* C79FE4 80243304 08090CD2 */  j         .L80243348
-/* C79FE8 80243308 00000000 */   nop      
+/* C79FE8 80243308 00000000 */   nop
 .L8024330C:
 /* C79FEC 8024330C 0000182D */  daddu     $v1, $zero, $zero
 /* C79FF0 80243310 0040282D */  daddu     $a1, $v0, $zero

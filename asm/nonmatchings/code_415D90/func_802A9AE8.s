@@ -14,9 +14,9 @@ glabel func_802A9AE8
 /* 41E89C 802A9B0C 00220821 */  addu      $at, $at, $v0
 /* 41E8A0 802A9B10 8C22C880 */  lw        $v0, %lo(D_802AC880)($at)
 /* 41E8A4 802A9B14 00400008 */  jr        $v0
-/* 41E8A8 802A9B18 00000000 */   nop      
+/* 41E8A8 802A9B18 00000000 */   nop
 /* 41E8AC 802A9B1C 0C0A8715 */  jal       draw_battle_wheel
-/* 41E8B0 802A9B20 00000000 */   nop      
+/* 41E8B0 802A9B20 00000000 */   nop
 .L802A9B24:
 /* 41E8B4 802A9B24 8FBF0010 */  lw        $ra, 0x10($sp)
 /* 41E8B8 802A9B28 03E00008 */  jr        $ra

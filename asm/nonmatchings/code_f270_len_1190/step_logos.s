@@ -9,18 +9,18 @@ glabel step_logos
 /* F4B4 800340B4 AFB00010 */  sw        $s0, 0x10($sp)
 /* F4B8 800340B8 806200AE */  lb        $v0, 0xae($v1)
 /* F4BC 800340BC 1040000E */  beqz      $v0, .L800340F8
-/* F4C0 800340C0 00000000 */   nop      
+/* F4C0 800340C0 00000000 */   nop
 /* F4C4 800340C4 0C00CE0C */  jal       intro_logos_fade_out
 /* F4C8 800340C8 2404000A */   addiu    $a0, $zero, 0xa
 /* F4CC 800340CC 104000A4 */  beqz      $v0, .L80034360
-/* F4D0 800340D0 00000000 */   nop      
+/* F4D0 800340D0 00000000 */   nop
 /* F4D4 800340D4 3C013F80 */  lui       $at, 0x3f80
 /* F4D8 800340D8 44816000 */  mtc1      $at, $f12
 /* F4DC 800340DC 0C00AFBB */  jal       set_curtain_scale
-/* F4E0 800340E0 00000000 */   nop      
+/* F4E0 800340E0 00000000 */   nop
 /* F4E4 800340E4 44806000 */  mtc1      $zero, $f12
 /* F4E8 800340E8 0C00AFC9 */  jal       set_curtain_fade
-/* F4EC 800340EC 00000000 */   nop      
+/* F4EC 800340EC 00000000 */   nop
 /* F4F0 800340F0 0800D0D6 */  j         .L80034358
 /* F4F4 800340F4 24040002 */   addiu    $a0, $zero, 2
 .L800340F8:
@@ -28,17 +28,18 @@ glabel step_logos
 /* F4FC 800340FC 2C62000C */  sltiu     $v0, $v1, 0xc
 /* F500 80034100 10400097 */  beqz      $v0, .L80034360
 /* F504 80034104 00031080 */   sll      $v0, $v1, 2
-/* F508 80034108 3C01800A */  lui       $at, %hi(D_80098290)
+/* F508 80034108 3C01800A */  lui       $at, %hi(jtbl_80098290_73690)
 /* F50C 8003410C 00220821 */  addu      $at, $at, $v0
-/* F510 80034110 8C228290 */  lw        $v0, %lo(D_80098290)($at)
+/* F510 80034110 8C228290 */  lw        $v0, %lo(jtbl_80098290_73690)($at)
 /* F514 80034114 00400008 */  jr        $v0
-/* F518 80034118 00000000 */   nop      
+/* F518 80034118 00000000 */   nop
+glabel L8003411C_F51C
 /* F51C 8003411C 3C108007 */  lui       $s0, %hi(gGameStatusPtr)
 /* F520 80034120 2610419C */  addiu     $s0, $s0, %lo(gGameStatusPtr)
 /* F524 80034124 8E020000 */  lw        $v0, ($s0)
 /* F528 80034128 804200AD */  lb        $v0, 0xad($v0)
 /* F52C 8003412C 1440004D */  bnez      $v0, .L80034264
-/* F530 80034130 00000000 */   nop      
+/* F530 80034130 00000000 */   nop
 /* F534 80034134 0C00CDF8 */  jal       intro_logos_set_fade_color
 /* F538 80034138 240400D0 */   addiu    $a0, $zero, 0xd0
 /* F53C 8003413C 8E030000 */  lw        $v1, ($s0)
@@ -46,18 +47,20 @@ glabel step_logos
 /* F544 80034144 24420001 */  addiu     $v0, $v0, 1
 /* F548 80034148 0800D099 */  j         .L80034264
 /* F54C 8003414C A06200AC */   sb       $v0, 0xac($v1)
+glabel L80034150_F550
 /* F550 80034150 0C00CE0C */  jal       intro_logos_fade_out
 /* F554 80034154 2404000A */   addiu    $a0, $zero, 0xa
 /* F558 80034158 10400081 */  beqz      $v0, .L80034360
-/* F55C 8003415C 00000000 */   nop      
+/* F55C 8003415C 00000000 */   nop
 /* F560 80034160 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
 /* F564 80034164 8C63419C */  lw        $v1, %lo(gGameStatusPtr)($v1)
 /* F568 80034168 0800D0C5 */  j         .L80034314
-/* F56C 8003416C 00000000 */   nop      
+/* F56C 8003416C 00000000 */   nop
+glabel L80034170_F570
 /* F570 80034170 0C00CDFE */  jal       intro_logos_fade_in
 /* F574 80034174 2404000A */   addiu    $a0, $zero, 0xa
 /* F578 80034178 10400079 */  beqz      $v0, .L80034360
-/* F57C 8003417C 00000000 */   nop      
+/* F57C 8003417C 00000000 */   nop
 /* F580 80034180 3C048007 */  lui       $a0, %hi(gGameStatusPtr)
 /* F584 80034184 2484419C */  addiu     $a0, $a0, %lo(gGameStatusPtr)
 /* F588 80034188 8C830000 */  lw        $v1, ($a0)
@@ -68,6 +71,7 @@ glabel step_logos
 /* F59C 8003419C 24020028 */  addiu     $v0, $zero, 0x28
 /* F5A0 800341A0 0800D0D8 */  j         .L80034360
 /* F5A4 800341A4 A06200AD */   sb       $v0, 0xad($v1)
+glabel L800341A8_F5A8
 /* F5A8 800341A8 3C108007 */  lui       $s0, %hi(gGameStatusPtr)
 /* F5AC 800341AC 2610419C */  addiu     $s0, $s0, %lo(gGameStatusPtr)
 /* F5B0 800341B0 8E030000 */  lw        $v1, ($s0)
@@ -79,19 +83,21 @@ glabel step_logos
 /* F5C8 800341C8 0C00CDF8 */  jal       intro_logos_set_fade_color
 /* F5CC 800341CC A06200AC */   sb       $v0, 0xac($v1)
 /* F5D0 800341D0 0800D099 */  j         .L80034264
-/* F5D4 800341D4 00000000 */   nop      
+/* F5D4 800341D4 00000000 */   nop
+glabel L800341D8_F5D8
 /* F5D8 800341D8 0C00CE0C */  jal       intro_logos_fade_out
 /* F5DC 800341DC 2404000A */   addiu    $a0, $zero, 0xa
 /* F5E0 800341E0 1040005F */  beqz      $v0, .L80034360
-/* F5E4 800341E4 00000000 */   nop      
+/* F5E4 800341E4 00000000 */   nop
 /* F5E8 800341E8 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
 /* F5EC 800341EC 8C63419C */  lw        $v1, %lo(gGameStatusPtr)($v1)
 /* F5F0 800341F0 0800D0C5 */  j         .L80034314
-/* F5F4 800341F4 00000000 */   nop      
+/* F5F4 800341F4 00000000 */   nop
+glabel L800341F8_F5F8
 /* F5F8 800341F8 0C00CDFE */  jal       intro_logos_fade_in
 /* F5FC 800341FC 2404000A */   addiu    $a0, $zero, 0xa
 /* F600 80034200 10400057 */  beqz      $v0, .L80034360
-/* F604 80034204 00000000 */   nop      
+/* F604 80034204 00000000 */   nop
 /* F608 80034208 3C048007 */  lui       $a0, %hi(gGameStatusPtr)
 /* F60C 8003420C 2484419C */  addiu     $a0, $a0, %lo(gGameStatusPtr)
 /* F610 80034210 8C830000 */  lw        $v1, ($a0)
@@ -102,6 +108,7 @@ glabel step_logos
 /* F624 80034224 2402001E */  addiu     $v0, $zero, 0x1e
 /* F628 80034228 0800D0D8 */  j         .L80034360
 /* F62C 8003422C A06200AD */   sb       $v0, 0xad($v1)
+glabel L80034230_F630
 /* F630 80034230 3C108007 */  lui       $s0, %hi(gGameStatusPtr)
 /* F634 80034234 2610419C */  addiu     $s0, $s0, %lo(gGameStatusPtr)
 /* F638 80034238 8E030000 */  lw        $v1, ($s0)
@@ -122,6 +129,7 @@ glabel step_logos
 /* F66C 8003426C 2442FFFF */  addiu     $v0, $v0, -1
 /* F670 80034270 0800D0D8 */  j         .L80034360
 /* F674 80034274 A06200AD */   sb       $v0, 0xad($v1)
+glabel L80034278_F678
 /* F678 80034278 3C048007 */  lui       $a0, %hi(gGameStatusPtr)
 /* F67C 8003427C 8C84419C */  lw        $a0, %lo(gGameStatusPtr)($a0)
 /* F680 80034280 808200AD */  lb        $v0, 0xad($a0)
@@ -140,12 +148,13 @@ glabel step_logos
 /* F6B4 800342B4 3421999A */  ori       $at, $at, 0x999a
 /* F6B8 800342B8 44816000 */  mtc1      $at, $f12
 /* F6BC 800342BC 0C00AFC5 */  jal       set_curtain_fade_goal
-/* F6C0 800342C0 00000000 */   nop      
+/* F6C0 800342C0 00000000 */   nop
 /* F6C4 800342C4 0800D0D8 */  j         .L80034360
-/* F6C8 800342C8 00000000 */   nop      
+/* F6C8 800342C8 00000000 */   nop
 .L800342CC:
 /* F6CC 800342CC 0800D0D8 */  j         .L80034360
 /* F6D0 800342D0 A08200AD */   sb       $v0, 0xad($a0)
+glabel L800342D4_F6D4
 /* F6D4 800342D4 0C00CE0C */  jal       intro_logos_fade_out
 /* F6D8 800342D8 2404000A */   addiu    $a0, $zero, 0xa
 /* F6DC 800342DC 10400020 */  beqz      $v0, .L80034360
@@ -156,6 +165,7 @@ glabel step_logos
 /* F6F0 800342F0 A06200AD */  sb        $v0, 0xad($v1)
 /* F6F4 800342F4 0800D0C5 */  j         .L80034314
 /* F6F8 800342F8 8C830000 */   lw       $v1, ($a0)
+glabel L800342FC_F6FC
 /* F6FC 800342FC 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
 /* F700 80034300 8C63419C */  lw        $v1, %lo(gGameStatusPtr)($v1)
 /* F704 80034304 806200AD */  lb        $v0, 0xad($v1)
@@ -170,6 +180,7 @@ glabel step_logos
 .L80034324:
 /* F724 80034324 0800D0D8 */  j         .L80034360
 /* F728 80034328 A06200AD */   sb       $v0, 0xad($v1)
+glabel L8003432C_F72C
 /* F72C 8003432C 3C10800A */  lui       $s0, %hi(D_800A0910)
 /* F730 80034330 26100910 */  addiu     $s0, $s0, %lo(D_800A0910)
 /* F734 80034334 0C00AB4B */  jal       heap_free
@@ -183,14 +194,14 @@ glabel step_logos
 /* F754 80034354 A04000A8 */  sb        $zero, 0xa8($v0)
 .L80034358:
 /* F758 80034358 0C00CD3C */  jal       set_game_mode
-/* F75C 8003435C 00000000 */   nop      
+/* F75C 8003435C 00000000 */   nop
 .L80034360:
 /* F760 80034360 0C00E64C */  jal       update_npcs
-/* F764 80034364 00000000 */   nop      
+/* F764 80034364 00000000 */   nop
 /* F768 80034368 0C00B500 */  jal       update_cameras
-/* F76C 8003436C 00000000 */   nop      
+/* F76C 8003436C 00000000 */   nop
 /* F770 80034370 0C00CE1D */  jal       intro_logos_update_fade
-/* F774 80034374 00000000 */   nop      
+/* F774 80034374 00000000 */   nop
 /* F778 80034378 8FBF0014 */  lw        $ra, 0x14($sp)
 /* F77C 8003437C 8FB00010 */  lw        $s0, 0x10($sp)
 /* F780 80034380 03E00008 */  jr        $ra

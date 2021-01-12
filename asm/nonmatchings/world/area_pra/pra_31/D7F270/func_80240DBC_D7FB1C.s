@@ -9,7 +9,7 @@ glabel func_80240DBC_D7FB1C
 /* D7FB2C 80240DCC 3C108011 */  lui       $s0, %hi(gPlayerStatus)
 /* D7FB30 80240DD0 2610EFC8 */  addiu     $s0, $s0, %lo(gPlayerStatus)
 /* D7FB34 80240DD4 14400005 */  bnez      $v0, .L80240DEC
-/* D7FB38 80240DD8 00000000 */   nop      
+/* D7FB38 80240DD8 00000000 */   nop
 /* D7FB3C 80240DDC C4800084 */  lwc1      $f0, 0x84($a0)
 /* D7FB40 80240DE0 46800020 */  cvt.s.w   $f0, $f0
 /* D7FB44 80240DE4 0809037E */  j         .L80240DF8

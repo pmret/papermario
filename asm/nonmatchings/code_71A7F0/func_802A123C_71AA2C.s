@@ -18,4 +18,4 @@ glabel func_802A123C_71AA2C
 /* 71AA60 802A1270 24020002 */  addiu     $v0, $zero, 2
 /* 71AA64 802A1274 03E00008 */  jr        $ra
 /* 71AA68 802A1278 27BD0018 */   addiu    $sp, $sp, 0x18
-/* 71AA6C 802A127C 00000000 */  nop       
+/* 71AA6C 802A127C 00000000 */  nop

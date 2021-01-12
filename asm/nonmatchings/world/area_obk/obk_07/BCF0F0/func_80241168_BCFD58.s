@@ -71,7 +71,7 @@ glabel func_80241168_BCFD58
 /* BCFE5C 8024126C 3C048011 */  lui       $a0, %hi(D_80108AFC)
 /* BCFE60 80241270 24848AFC */  addiu     $a0, $a0, %lo(D_80108AFC)
 /* BCFE64 80241274 0C050529 */  jal       create_icon
-/* BCFE68 80241278 00000000 */   nop      
+/* BCFE68 80241278 00000000 */   nop
 /* BCFE6C 8024127C 0040802D */  daddu     $s0, $v0, $zero
 /* BCFE70 80241280 8E250034 */  lw        $a1, 0x34($s1)
 /* BCFE74 80241284 8E260038 */  lw        $a2, 0x38($s1)
@@ -88,7 +88,7 @@ glabel func_80241168_BCFD58
 /* BCFEA0 802412B0 3C048011 */  lui       $a0, %hi(D_80109244)
 /* BCFEA4 802412B4 24849244 */  addiu     $a0, $a0, %lo(D_80109244)
 /* BCFEA8 802412B8 0C050529 */  jal       create_icon
-/* BCFEAC 802412BC 00000000 */   nop      
+/* BCFEAC 802412BC 00000000 */   nop
 /* BCFEB0 802412C0 0040802D */  daddu     $s0, $v0, $zero
 /* BCFEB4 802412C4 8E250034 */  lw        $a1, 0x34($s1)
 /* BCFEB8 802412C8 8E260038 */  lw        $a2, 0x38($s1)

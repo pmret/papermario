@@ -103,7 +103,7 @@ glabel func_E006A94C
 /* 36DAEC E006AACC 46161000 */   add.s    $f0, $f2, $f22
 /* 36DAF0 E006AAD0 3C014234 */  lui       $at, 0x4234
 /* 36DAF4 E006AAD4 44810000 */  mtc1      $at, $f0
-/* 36DAF8 E006AAD8 00000000 */  nop       
+/* 36DAF8 E006AAD8 00000000 */  nop
 /* 36DAFC E006AADC 46001000 */  add.s     $f0, $f2, $f0
 .LE006AAE0:
 /* 36DB00 E006AAE0 44050000 */  mfc1      $a1, $f0
@@ -137,14 +137,14 @@ glabel func_E006A94C
 /* 36DB70 E006AB50 00A0302D */   daddu    $a2, $a1, $zero
 /* 36DB74 E006AB54 3C014040 */  lui       $at, 0x4040
 /* 36DB78 E006AB58 44810000 */  mtc1      $at, $f0
-/* 36DB7C E006AB5C 00000000 */  nop       
+/* 36DB7C E006AB5C 00000000 */  nop
 /* 36DB80 E006AB60 4600A000 */  add.s     $f0, $f20, $f0
 /* 36DB84 E006AB64 3C013FD0 */  lui       $at, 0x3fd0
 /* 36DB88 E006AB68 44811800 */  mtc1      $at, $f3
 /* 36DB8C E006AB6C 44801000 */  mtc1      $zero, $f2
 /* 36DB90 E006AB70 46000021 */  cvt.d.s   $f0, $f0
 /* 36DB94 E006AB74 46220002 */  mul.d     $f0, $f0, $f2
-/* 36DB98 E006AB78 00000000 */  nop       
+/* 36DB98 E006AB78 00000000 */  nop
 /* 36DB9C E006AB7C 32830003 */  andi      $v1, $s4, 3
 /* 36DBA0 E006AB80 24020001 */  addiu     $v0, $zero, 1
 /* 36DBA4 E006AB84 46200120 */  cvt.s.d   $f4, $f0
@@ -154,7 +154,7 @@ glabel func_E006A94C
 /* 36DBB4 E006AB94 10400005 */  beqz      $v0, .LE006ABAC
 /* 36DBB8 E006AB98 24020002 */   addiu    $v0, $zero, 2
 /* 36DBBC E006AB9C 10600007 */  beqz      $v1, .LE006ABBC
-/* 36DBC0 E006ABA0 00000000 */   nop      
+/* 36DBC0 E006ABA0 00000000 */   nop
 /* 36DBC4 E006ABA4 0801AAFD */  j         .LE006ABF4
 /* 36DBC8 E006ABA8 4600A006 */   mov.s    $f0, $f20
 .LE006ABAC:
@@ -178,7 +178,7 @@ glabel func_E006A94C
 /* 36DC04 E006ABE4 D422AF60 */  ldc1      $f2, %lo(D_E006AF60)($at)
 .LE006ABE8:
 /* 36DC08 E006ABE8 46220002 */  mul.d     $f0, $f0, $f2
-/* 36DC0C E006ABEC 00000000 */  nop       
+/* 36DC0C E006ABEC 00000000 */  nop
 /* 36DC10 E006ABF0 46200020 */  cvt.s.d   $f0, $f0
 .LE006ABF4:
 /* 36DC14 E006ABF4 44053000 */  mfc1      $a1, $f6
@@ -309,5 +309,5 @@ glabel func_E006A94C
 /* 36DDFC E006ADDC D7B40108 */  ldc1      $f20, 0x108($sp)
 /* 36DE00 E006ADE0 03E00008 */  jr        $ra
 /* 36DE04 E006ADE4 27BD0120 */   addiu    $sp, $sp, 0x120
-/* 36DE08 E006ADE8 00000000 */  nop       
-/* 36DE0C E006ADEC 00000000 */  nop       
+/* 36DE08 E006ADE8 00000000 */  nop
+/* 36DE0C E006ADEC 00000000 */  nop

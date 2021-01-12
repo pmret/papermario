@@ -11,11 +11,11 @@ glabel func_802BB298_E2DBC8
 /* E2DBE0 802BB2B0 00C31025 */  or        $v0, $a2, $v1
 /* E2DBE4 802BB2B4 00451025 */  or        $v0, $v0, $a1
 /* E2DBE8 802BB2B8 1440000E */  bnez      $v0, .L802BB2F4
-/* E2DBEC 802BB2BC 00000000 */   nop      
+/* E2DBEC 802BB2BC 00000000 */   nop
 /* E2DBF0 802BB2C0 C482004C */  lwc1      $f2, 0x4c($a0)
 /* E2DBF4 802BB2C4 3C0142C8 */  lui       $at, 0x42c8
 /* E2DBF8 802BB2C8 44810000 */  mtc1      $at, $f0
-/* E2DBFC 802BB2CC 00000000 */  nop       
+/* E2DBFC 802BB2CC 00000000 */  nop
 /* E2DC00 802BB2D0 46001080 */  add.s     $f2, $f2, $f0
 /* E2DC04 802BB2D4 C4800048 */  lwc1      $f0, 0x48($a0)
 /* E2DC08 802BB2D8 C4840050 */  lwc1      $f4, 0x50($a0)

@@ -31,9 +31,9 @@ glabel func_80280410
 /* 7E12F8 80280478 10400022 */  beqz      $v0, .L80280504
 /* 7E12FC 8028047C 24020002 */   addiu    $v0, $zero, 2
 /* 7E1300 80280480 0C03805E */  jal       disable_player_input
-/* 7E1304 80280484 00000000 */   nop      
+/* 7E1304 80280484 00000000 */   nop
 /* 7E1308 80280488 0C038045 */  jal       disable_player_static_collisions
-/* 7E130C 8028048C 00000000 */   nop      
+/* 7E130C 8028048C 00000000 */   nop
 /* 7E1310 80280490 3C048028 */  lui       $a0, %hi(D_80284034)
 /* 7E1314 80280494 24844034 */  addiu     $a0, $a0, %lo(D_80284034)
 /* 7E1318 80280498 24050001 */  addiu     $a1, $zero, 1
@@ -62,7 +62,7 @@ glabel func_80280410
 /* 7E1370 802804F0 0C038050 */  jal       enable_player_static_collisions
 /* 7E1374 802804F4 A6020000 */   sh       $v0, ($s0)
 /* 7E1378 802804F8 0C038069 */  jal       enable_player_input
-/* 7E137C 802804FC 00000000 */   nop      
+/* 7E137C 802804FC 00000000 */   nop
 /* 7E1380 80280500 24020002 */  addiu     $v0, $zero, 2
 .L80280504:
 /* 7E1384 80280504 8FBF001C */  lw        $ra, 0x1c($sp)

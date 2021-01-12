@@ -10,7 +10,7 @@ glabel func_802404CC_D97D5C
 /* D97D70 802404E0 0440000E */  bltz      $v0, .L8024051C
 /* D97D74 802404E4 28420002 */   slti     $v0, $v0, 2
 /* D97D78 802404E8 1040000C */  beqz      $v0, .L8024051C
-/* D97D7C 802404EC 00000000 */   nop      
+/* D97D7C 802404EC 00000000 */   nop
 /* D97D80 802404F0 3C058024 */  lui       $a1, %hi(func_80240530_D97DC0)
 /* D97D84 802404F4 24A50530 */  addiu     $a1, $a1, %lo(func_80240530_D97DC0)
 /* D97D88 802404F8 0C048C56 */  jal       bind_dynamic_entity_3

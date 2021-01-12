@@ -15,7 +15,7 @@ glabel func_80241898_DAEC98
 /* DAECC0 802418C0 D4224D08 */  ldc1      $f2, %lo(D_80244D08)($at)
 /* DAECC4 802418C4 46000021 */  cvt.d.s   $f0, $f0
 /* DAECC8 802418C8 46220002 */  mul.d     $f0, $f0, $f2
-/* DAECCC 802418CC 00000000 */  nop       
+/* DAECCC 802418CC 00000000 */  nop
 /* DAECD0 802418D0 46200020 */  cvt.s.d   $f0, $f0
 /* DAECD4 802418D4 E4400018 */  swc1      $f0, 0x18($v0)
 /* DAECD8 802418D8 8E0300CC */  lw        $v1, 0xcc($s0)

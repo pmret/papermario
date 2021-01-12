@@ -42,7 +42,7 @@ glabel func_80242C00_BB0540
 /* BB05D4 80242C94 2402000F */  addiu     $v0, $zero, 0xf
 /* BB05D8 80242C98 AFA2001C */  sw        $v0, 0x1c($sp)
 /* BB05DC 80242C9C 44833000 */  mtc1      $v1, $f6
-/* BB05E0 80242CA0 00000000 */  nop       
+/* BB05E0 80242CA0 00000000 */  nop
 /* BB05E4 80242CA4 468031A0 */  cvt.s.w   $f6, $f6
 /* BB05E8 80242CA8 44073000 */  mfc1      $a3, $f6
 /* BB05EC 80242CAC 27A20028 */  addiu     $v0, $sp, 0x28

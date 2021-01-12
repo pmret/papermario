@@ -17,9 +17,9 @@ glabel func_80110E58
 /* A7588 80110E88 3C018015 */  lui       $at, %hi(D_801512C4)
 /* A758C 80110E8C AC2312C4 */  sw        $v1, %lo(D_801512C4)($at)
 /* A7590 80110E90 0C0443C4 */  jal       func_80110F10
-/* A7594 80110E94 00000000 */   nop      
+/* A7594 80110E94 00000000 */   nop
 /* A7598 80110E98 080443B5 */  j         .L80110ED4
-/* A759C 80110E9C 00000000 */   nop      
+/* A759C 80110E9C 00000000 */   nop
 .L80110EA0:
 /* A75A0 80110EA0 3C028015 */  lui       $v0, %hi(D_801516F4)
 /* A75A4 80110EA4 244216F4 */  addiu     $v0, $v0, %lo(D_801516F4)
@@ -37,11 +37,11 @@ glabel func_80110E58
 /* A75D0 80110ED0 AC2212C4 */  sw        $v0, %lo(D_801512C4)($at)
 .L80110ED4:
 /* A75D4 80110ED4 0C044188 */  jal       get_entity_list
-/* A75D8 80110ED8 00000000 */   nop      
+/* A75D8 80110ED8 00000000 */   nop
 /* A75DC 80110EDC 3C018015 */  lui       $at, %hi(gCurrentEntityListPtr)
 /* A75E0 80110EE0 AC221470 */  sw        $v0, %lo(gCurrentEntityListPtr)($at)
 /* A75E4 80110EE4 0C044193 */  jal       get_shadow_list
-/* A75E8 80110EE8 00000000 */   nop      
+/* A75E8 80110EE8 00000000 */   nop
 /* A75EC 80110EEC 8FBF0010 */  lw        $ra, 0x10($sp)
 /* A75F0 80110EF0 3C018015 */  lui       $at, %hi(gCurrentShadowListPtr)
 /* A75F4 80110EF4 AC221658 */  sw        $v0, %lo(gCurrentShadowListPtr)($at)

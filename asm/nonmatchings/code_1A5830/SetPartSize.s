@@ -31,7 +31,7 @@ glabel SetPartSize
 /* 1AC2B8 8027D9D8 0040982D */  daddu     $s3, $v0, $zero
 /* 1AC2BC 8027D9DC 2402FF81 */  addiu     $v0, $zero, -0x7f
 /* 1AC2C0 8027D9E0 16220002 */  bne       $s1, $v0, .L8027D9EC
-/* 1AC2C4 8027D9E4 00000000 */   nop      
+/* 1AC2C4 8027D9E4 00000000 */   nop
 /* 1AC2C8 8027D9E8 8E510148 */  lw        $s1, 0x148($s2)
 .L8027D9EC:
 /* 1AC2CC 8027D9EC 0C09A75B */  jal       get_actor
@@ -53,7 +53,7 @@ glabel SetPartSize
 /* 1AC304 8027DA24 44811800 */  mtc1      $at, $f3
 /* 1AC308 8027DA28 44801000 */  mtc1      $zero, $f2
 /* 1AC30C 8027DA2C 44830000 */  mtc1      $v1, $f0
-/* 1AC310 8027DA30 00000000 */  nop       
+/* 1AC310 8027DA30 00000000 */  nop
 /* 1AC314 8027DA34 46800021 */  cvt.d.w   $f0, $f0
 /* 1AC318 8027DA38 46220003 */  div.d     $f0, $f0, $f2
 /* 1AC31C 8027DA3C 46200020 */  cvt.s.d   $f0, $f0

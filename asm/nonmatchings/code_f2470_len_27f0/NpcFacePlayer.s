@@ -47,28 +47,28 @@ glabel NpcFacePlayer
 /* F3720 802CED70 C6220078 */  lwc1      $f2, 0x78($s1)
 /* F3724 802CED74 3C01C334 */  lui       $at, 0xc334
 /* F3728 802CED78 44810000 */  mtc1      $at, $f0
-/* F372C 802CED7C 00000000 */  nop       
+/* F372C 802CED7C 00000000 */  nop
 /* F3730 802CED80 4600103C */  c.lt.s    $f2, $f0
-/* F3734 802CED84 00000000 */  nop       
+/* F3734 802CED84 00000000 */  nop
 /* F3738 802CED88 45000007 */  bc1f      .L802CEDA8
-/* F373C 802CED8C 00000000 */   nop      
+/* F373C 802CED8C 00000000 */   nop
 /* F3740 802CED90 3C0143B4 */  lui       $at, 0x43b4
 /* F3744 802CED94 44810000 */  mtc1      $at, $f0
-/* F3748 802CED98 00000000 */  nop       
+/* F3748 802CED98 00000000 */  nop
 /* F374C 802CED9C 46001000 */  add.s     $f0, $f2, $f0
 /* F3750 802CEDA0 E6200078 */  swc1      $f0, 0x78($s1)
 /* F3754 802CEDA4 C6220078 */  lwc1      $f2, 0x78($s1)
 .L802CEDA8:
 /* F3758 802CEDA8 3C014334 */  lui       $at, 0x4334
 /* F375C 802CEDAC 44810000 */  mtc1      $at, $f0
-/* F3760 802CEDB0 00000000 */  nop       
+/* F3760 802CEDB0 00000000 */  nop
 /* F3764 802CEDB4 4602003C */  c.lt.s    $f0, $f2
-/* F3768 802CEDB8 00000000 */  nop       
+/* F3768 802CEDB8 00000000 */  nop
 /* F376C 802CEDBC 45000006 */  bc1f      .L802CEDD8
-/* F3770 802CEDC0 00000000 */   nop      
+/* F3770 802CEDC0 00000000 */   nop
 /* F3774 802CEDC4 3C0143B4 */  lui       $at, 0x43b4
 /* F3778 802CEDC8 44810000 */  mtc1      $at, $f0
-/* F377C 802CEDCC 00000000 */  nop       
+/* F377C 802CEDCC 00000000 */  nop
 /* F3780 802CEDD0 46001001 */  sub.s     $f0, $f2, $f0
 /* F3784 802CEDD4 E6200078 */  swc1      $f0, 0x78($s1)
 .L802CEDD8:
@@ -89,10 +89,10 @@ glabel NpcFacePlayer
 /* F37BC 802CEE0C 00021403 */  sra       $v0, $v0, 0x10
 /* F37C0 802CEE10 C6A00000 */  lwc1      $f0, ($s5)
 /* F37C4 802CEE14 44821000 */  mtc1      $v0, $f2
-/* F37C8 802CEE18 00000000 */  nop       
+/* F37C8 802CEE18 00000000 */  nop
 /* F37CC 802CEE1C 468010A0 */  cvt.s.w   $f2, $f2
 /* F37D0 802CEE20 46020002 */  mul.s     $f0, $f0, $f2
-/* F37D4 802CEE24 00000000 */  nop       
+/* F37D4 802CEE24 00000000 */  nop
 /* F37D8 802CEE28 C6CC0000 */  lwc1      $f12, ($s6)
 /* F37DC 802CEE2C C6620000 */  lwc1      $f2, ($s3)
 /* F37E0 802CEE30 468010A0 */  cvt.s.w   $f2, $f2

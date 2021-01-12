@@ -279,15 +279,17 @@ glabel func_80241CF4_88A8C4
 /* 88ACB0 802420E0 2C620015 */  sltiu     $v0, $v1, 0x15
 /* 88ACB4 802420E4 10400009 */  beqz      $v0, .L8024210C
 /* 88ACB8 802420E8 00031080 */   sll      $v0, $v1, 2
-/* 88ACBC 802420EC 3C018024 */  lui       $at, %hi(D_802449D8)
+/* 88ACBC 802420EC 3C018024 */  lui       $at, %hi(jtbl_802449D8_88D5A8)
 /* 88ACC0 802420F0 00220821 */  addu      $at, $at, $v0
-/* 88ACC4 802420F4 8C2249D8 */  lw        $v0, %lo(D_802449D8)($at)
+/* 88ACC4 802420F4 8C2249D8 */  lw        $v0, %lo(jtbl_802449D8_88D5A8)($at)
 /* 88ACC8 802420F8 00400008 */  jr        $v0
 /* 88ACCC 802420FC 00000000 */   nop
+glabel L80242100_88ACD0
 /* 88ACD0 80242100 8E420028 */  lw        $v0, 0x28($s2)
 /* 88ACD4 80242104 24420001 */  addiu     $v0, $v0, 1
 /* 88ACD8 80242108 AE420028 */  sw        $v0, 0x28($s2)
 .L8024210C:
+glabel L8024210C_88ACDC
 /* 88ACDC 8024210C 0000102D */  daddu     $v0, $zero, $zero
 .L80242110:
 /* 88ACE0 80242110 8FBF0068 */  lw        $ra, 0x68($sp)

@@ -87,7 +87,7 @@ glabel render_sprite
 /* 100E64 802DDD74 46000007 */  neg.s     $f0, $f0
 /* 100E68 802DDD78 4600008D */  trunc.w.s $f2, $f0
 /* 100E6C 802DDD7C 44021000 */  mfc1      $v0, $f2
-/* 100E70 802DDD80 00000000 */  nop       
+/* 100E70 802DDD80 00000000 */  nop
 /* 100E74 802DDD84 00A22821 */  addu      $a1, $a1, $v0
 /* 100E78 802DDD88 28A20169 */  slti      $v0, $a1, 0x169
 /* 100E7C 802DDD8C 50400001 */  beql      $v0, $zero, .L802DDD94
@@ -116,9 +116,9 @@ glabel render_sprite
 .L802DDDD4:
 /* 100EC4 802DDDD4 00821024 */  and       $v0, $a0, $v0
 /* 100EC8 802DDDD8 10400004 */  beqz      $v0, .L802DDDEC
-/* 100ECC 802DDDDC 00000000 */   nop      
+/* 100ECC 802DDDDC 00000000 */   nop
 /* 100ED0 802DDDE0 44800000 */  mtc1      $zero, $f0
-/* 100ED4 802DDDE4 00000000 */  nop       
+/* 100ED4 802DDDE4 00000000 */  nop
 /* 100ED8 802DDDE8 46140501 */  sub.s     $f20, $f0, $f20
 .L802DDDEC:
 /* 100EDC 802DDDEC 3C02802E */  lui       $v0, %hi(D_802DFEA0)
@@ -167,7 +167,7 @@ glabel render_sprite
 .L802DDE84:
 /* 100F74 802DDE84 8E020000 */  lw        $v0, ($s0)
 /* 100F78 802DDE88 1451FFF2 */  bne       $v0, $s1, .L802DDE54
-/* 100F7C 802DDE8C 00000000 */   nop      
+/* 100F7C 802DDE8C 00000000 */   nop
 .L802DDE90:
 /* 100F80 802DDE90 24020001 */  addiu     $v0, $zero, 1
 .L802DDE94:

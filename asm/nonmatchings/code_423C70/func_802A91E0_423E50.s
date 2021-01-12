@@ -23,7 +23,7 @@ glabel func_802A91E0_423E50
 /* 423E98 802A9228 24020002 */   addiu    $v0, $zero, 2
 .L802A922C:
 /* 423E9C 802A922C 0C09A216 */  jal       func_80268858
-/* 423EA0 802A9230 00000000 */   nop      
+/* 423EA0 802A9230 00000000 */   nop
 /* 423EA4 802A9234 8E050000 */  lw        $a1, ($s0)
 /* 423EA8 802A9238 26100004 */  addiu     $s0, $s0, 4
 /* 423EAC 802A923C 0C0B1EAF */  jal       get_variable

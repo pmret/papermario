@@ -17,7 +17,7 @@ glabel func_802807D0
 /* 1AF0DC 802807FC 0060302D */   daddu    $a2, $v1, $zero
 .L80280800:
 /* 1AF0E0 80280800 0C0B2026 */  jal       set_variable
-/* 1AF0E4 80280804 00000000 */   nop      
+/* 1AF0E4 80280804 00000000 */   nop
 /* 1AF0E8 80280808 8FBF0010 */  lw        $ra, 0x10($sp)
 /* 1AF0EC 8028080C 24020002 */  addiu     $v0, $zero, 2
 /* 1AF0F0 80280810 03E00008 */  jr        $ra

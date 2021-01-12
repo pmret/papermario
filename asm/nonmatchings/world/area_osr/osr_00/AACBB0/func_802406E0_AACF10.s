@@ -44,5 +44,5 @@ glabel func_802406E0_AACF10
 /* AACFAC 8024077C 24020002 */  addiu     $v0, $zero, 2
 /* AACFB0 80240780 03E00008 */  jr        $ra
 /* AACFB4 80240784 27BD0020 */   addiu    $sp, $sp, 0x20
-/* AACFB8 80240788 00000000 */  nop       
-/* AACFBC 8024078C 00000000 */  nop       
+/* AACFB8 80240788 00000000 */  nop
+/* AACFBC 8024078C 00000000 */  nop

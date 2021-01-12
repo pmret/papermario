@@ -10,7 +10,7 @@ glabel func_80218BC4_6BC754
 /* 6BC768 80218BD8 8C43000C */  lw        $v1, 0xc($v0)
 /* 6BC76C 80218BDC 3C01C47A */  lui       $at, 0xc47a
 /* 6BC770 80218BE0 44810000 */  mtc1      $at, $f0
-/* 6BC774 80218BE4 00000000 */  nop       
+/* 6BC774 80218BE4 00000000 */  nop
 /* 6BC778 80218BE8 E4600008 */  swc1      $f0, 8($v1)
 /* 6BC77C 80218BEC 8FBF0010 */  lw        $ra, 0x10($sp)
 /* 6BC780 80218BF0 24020002 */  addiu     $v0, $zero, 2

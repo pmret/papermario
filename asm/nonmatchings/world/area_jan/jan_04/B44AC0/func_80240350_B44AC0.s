@@ -26,7 +26,7 @@ glabel func_80240350_B44AC0
 /* B44B10 802403A0 1440FFFA */  bnez      $v0, .L8024038C
 /* B44B14 802403A4 24A50004 */   addiu    $a1, $a1, 4
 /* B44B18 802403A8 080900FB */  j         .L802403EC
-/* B44B1C 802403AC 00000000 */   nop      
+/* B44B1C 802403AC 00000000 */   nop
 .L802403B0:
 /* B44B20 802403B0 0000182D */  daddu     $v1, $zero, $zero
 /* B44B24 802403B4 0040282D */  daddu     $a1, $v0, $zero

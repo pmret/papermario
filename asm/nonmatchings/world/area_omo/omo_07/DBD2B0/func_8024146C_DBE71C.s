@@ -22,7 +22,7 @@ glabel func_8024146C_DBE71C
 /* DBE760 802414B0 0C0129E1 */  jal       func_8004A784
 /* DBE764 802414B4 0000382D */   daddu    $a3, $zero, $zero
 /* DBE768 802414B8 14400005 */  bnez      $v0, .L802414D0
-/* DBE76C 802414BC 00000000 */   nop      
+/* DBE76C 802414BC 00000000 */   nop
 /* DBE770 802414C0 8E050018 */  lw        $a1, 0x18($s0)
 /* DBE774 802414C4 8E06000C */  lw        $a2, 0xc($s0)
 /* DBE778 802414C8 0C00EA95 */  jal       npc_move_heading
@@ -33,13 +33,13 @@ glabel func_8024146C_DBE71C
 /* DBE788 802414D8 A602008E */  sh        $v0, 0x8e($s0)
 /* DBE78C 802414DC 00021400 */  sll       $v0, $v0, 0x10
 /* DBE790 802414E0 14400010 */  bnez      $v0, .L80241524
-/* DBE794 802414E4 00000000 */   nop      
+/* DBE794 802414E4 00000000 */   nop
 /* DBE798 802414E8 C6000018 */  lwc1      $f0, 0x18($s0)
 /* DBE79C 802414EC 3C018024 */  lui       $at, %hi(D_80246F18)
 /* DBE7A0 802414F0 D4226F18 */  ldc1      $f2, %lo(D_80246F18)($at)
 /* DBE7A4 802414F4 46000021 */  cvt.d.s   $f0, $f0
 /* DBE7A8 802414F8 46220002 */  mul.d     $f0, $f0, $f2
-/* DBE7AC 802414FC 00000000 */  nop       
+/* DBE7AC 802414FC 00000000 */  nop
 /* DBE7B0 80241500 46200020 */  cvt.s.d   $f0, $f0
 /* DBE7B4 80241504 E6000018 */  swc1      $f0, 0x18($s0)
 /* DBE7B8 80241508 8E2200CC */  lw        $v0, 0xcc($s1)

@@ -38,7 +38,7 @@ glabel func_E00DA000
 /* 3D72C4 E00DA084 AE02000C */   sw       $v0, 0xc($s0)
 .LE00DA088:
 /* 3D72C8 E00DA088 08036822 */  j         .LE00DA088
-/* 3D72CC E00DA08C 00000000 */   nop      
+/* 3D72CC E00DA08C 00000000 */   nop
 .LE00DA090:
 /* 3D72D0 E00DA090 0200102D */  daddu     $v0, $s0, $zero
 /* 3D72D4 E00DA094 2403000A */  addiu     $v1, $zero, 0xa

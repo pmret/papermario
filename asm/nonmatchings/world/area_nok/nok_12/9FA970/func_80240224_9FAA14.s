@@ -32,15 +32,15 @@ glabel func_80240224_9FAA14
 /* 9FAA80 80240290 0040802D */   daddu    $s0, $v0, $zero
 /* 9FAA84 80240294 0040182D */  daddu     $v1, $v0, $zero
 /* 9FAA88 80240298 44920000 */  mtc1      $s2, $f0
-/* 9FAA8C 8024029C 00000000 */  nop       
+/* 9FAA8C 8024029C 00000000 */  nop
 /* 9FAA90 802402A0 46800020 */  cvt.s.w   $f0, $f0
 /* 9FAA94 802402A4 E4600048 */  swc1      $f0, 0x48($v1)
 /* 9FAA98 802402A8 44910000 */  mtc1      $s1, $f0
-/* 9FAA9C 802402AC 00000000 */  nop       
+/* 9FAA9C 802402AC 00000000 */  nop
 /* 9FAAA0 802402B0 46800020 */  cvt.s.w   $f0, $f0
 /* 9FAAA4 802402B4 E460004C */  swc1      $f0, 0x4c($v1)
 /* 9FAAA8 802402B8 44900000 */  mtc1      $s0, $f0
-/* 9FAAAC 802402BC 00000000 */  nop       
+/* 9FAAAC 802402BC 00000000 */  nop
 /* 9FAAB0 802402C0 46800020 */  cvt.s.w   $f0, $f0
 /* 9FAAB4 802402C4 E4600050 */  swc1      $f0, 0x50($v1)
 /* 9FAAB8 802402C8 8FBF0020 */  lw        $ra, 0x20($sp)
@@ -51,5 +51,5 @@ glabel func_80240224_9FAA14
 /* 9FAACC 802402DC 24020002 */  addiu     $v0, $zero, 2
 /* 9FAAD0 802402E0 03E00008 */  jr        $ra
 /* 9FAAD4 802402E4 27BD0028 */   addiu    $sp, $sp, 0x28
-/* 9FAAD8 802402E8 00000000 */  nop       
-/* 9FAADC 802402EC 00000000 */  nop       
+/* 9FAAD8 802402E8 00000000 */  nop
+/* 9FAADC 802402EC 00000000 */  nop

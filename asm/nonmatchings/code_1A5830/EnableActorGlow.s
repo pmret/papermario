@@ -15,7 +15,7 @@ glabel EnableActorGlow
 /* 1AC4AC 8027DBCC 0040802D */  daddu     $s0, $v0, $zero
 /* 1AC4B0 8027DBD0 2402FF81 */  addiu     $v0, $zero, -0x7f
 /* 1AC4B4 8027DBD4 16020002 */  bne       $s0, $v0, .L8027DBE0
-/* 1AC4B8 8027DBD8 00000000 */   nop      
+/* 1AC4B8 8027DBD8 00000000 */   nop
 /* 1AC4BC 8027DBDC 8E500148 */  lw        $s0, 0x148($s2)
 .L8027DBE0:
 /* 1AC4C0 8027DBE0 8E250000 */  lw        $a1, ($s1)
