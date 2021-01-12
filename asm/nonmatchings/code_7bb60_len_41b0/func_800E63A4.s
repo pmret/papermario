@@ -11,7 +11,7 @@ glabel func_800E63A4
 /* 7F86C 800E63BC 0C039769 */  jal       set_action_state
 /* 7F870 800E63C0 24040019 */   addiu    $a0, $zero, 0x19
 /* 7F874 800E63C4 08039906 */  j         .L800E6418
-/* 7F878 800E63C8 00000000 */   nop      
+/* 7F878 800E63C8 00000000 */   nop
 .L800E63CC:
 /* 7F87C 800E63CC 2403DFFF */  addiu     $v1, $zero, -0x2001
 /* 7F880 800E63D0 8E020004 */  lw        $v0, 4($s0)

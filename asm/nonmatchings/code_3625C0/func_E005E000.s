@@ -14,17 +14,17 @@ glabel func_E005E000
 /* 3625E4 E005E024 27A40010 */  addiu     $a0, $sp, 0x10
 /* 3625E8 E005E028 AFB1002C */  sw        $s1, 0x2c($sp)
 /* 3625EC E005E02C 8FB1006C */  lw        $s1, 0x6c($sp)
-/* 3625F0 E005E030 3C02E006 */  lui       $v0, %hi(D_E005E1B0)
-/* 3625F4 E005E034 2442E1B0 */  addiu     $v0, $v0, %lo(D_E005E1B0)
+/* 3625F0 E005E030 3C02E006 */  lui       $v0, %hi(func_E005E1B0)
+/* 3625F4 E005E034 2442E1B0 */  addiu     $v0, $v0, %lo(func_E005E1B0)
 /* 3625F8 E005E038 AFA20018 */  sw        $v0, 0x18($sp)
-/* 3625FC E005E03C 3C02E006 */  lui       $v0, %hi(D_E005E1B8)
-/* 362600 E005E040 2442E1B8 */  addiu     $v0, $v0, %lo(D_E005E1B8)
+/* 3625FC E005E03C 3C02E006 */  lui       $v0, %hi(func_E005E1B8)
+/* 362600 E005E040 2442E1B8 */  addiu     $v0, $v0, %lo(func_E005E1B8)
 /* 362604 E005E044 AFA2001C */  sw        $v0, 0x1c($sp)
-/* 362608 E005E048 3C02E006 */  lui       $v0, %hi(D_E005E310)
-/* 36260C E005E04C 2442E310 */  addiu     $v0, $v0, %lo(D_E005E310)
+/* 362608 E005E048 3C02E006 */  lui       $v0, %hi(func_E005E310)
+/* 36260C E005E04C 2442E310 */  addiu     $v0, $v0, %lo(func_E005E310)
 /* 362610 E005E050 AFA20020 */  sw        $v0, 0x20($sp)
-/* 362614 E005E054 3C02E006 */  lui       $v0, %hi(D_E005E318)
-/* 362618 E005E058 2442E318 */  addiu     $v0, $v0, %lo(D_E005E318)
+/* 362614 E005E054 3C02E006 */  lui       $v0, %hi(func_E005E318)
+/* 362618 E005E058 2442E318 */  addiu     $v0, $v0, %lo(func_E005E318)
 /* 36261C E005E05C AFA20024 */  sw        $v0, 0x24($sp)
 /* 362620 E005E060 2402002F */  addiu     $v0, $zero, 0x2f
 /* 362624 E005E064 AFBF0038 */  sw        $ra, 0x38($sp)
@@ -47,7 +47,7 @@ glabel func_E005E000
 /* 362668 E005E0A8 AE50000C */   sw       $s0, 0xc($s2)
 .LE005E0AC:
 /* 36266C E005E0AC 0801782B */  j         .LE005E0AC
-/* 362670 E005E0B0 00000000 */   nop      
+/* 362670 E005E0B0 00000000 */   nop
 .LE005E0B4:
 /* 362674 E005E0B4 0200202D */  daddu     $a0, $s0, $zero
 /* 362678 E005E0B8 00112840 */  sll       $a1, $s1, 1
@@ -84,7 +84,7 @@ glabel func_E005E000
 /* 3626EC E005E12C 14E10004 */  bne       $a3, $at, .LE005E140
 /* 3626F0 E005E130 3C018000 */   lui      $at, 0x8000
 /* 3626F4 E005E134 14A10002 */  bne       $a1, $at, .LE005E140
-/* 3626F8 E005E138 00000000 */   nop      
+/* 3626F8 E005E138 00000000 */   nop
 /* 3626FC E005E13C 0006000D */  break     6
 .LE005E140:
 /* 362700 E005E140 00001812 */   mflo     $v1
@@ -97,7 +97,7 @@ glabel func_E005E000
 /* 36271C E005E15C E482FFF8 */  swc1      $f2, -8($a0)
 /* 362720 E005E160 AC80FFFC */  sw        $zero, -4($a0)
 /* 362724 E005E164 44830000 */  mtc1      $v1, $f0
-/* 362728 E005E168 00000000 */  nop       
+/* 362728 E005E168 00000000 */  nop
 /* 36272C E005E16C 46800020 */  cvt.s.w   $f0, $f0
 /* 362730 E005E170 E480FFF4 */  swc1      $f0, -0xc($a0)
 /* 362734 E005E174 AC830000 */  sw        $v1, ($a0)

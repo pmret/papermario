@@ -41,5 +41,5 @@ glabel get_enemy_safe
 .L8003EDE0:
 /* 1A1E0 8003EDE0 03E00008 */  jr        $ra
 /* 1A1E4 8003EDE4 0000102D */   daddu    $v0, $zero, $zero
-/* 1A1E8 8003EDE8 00000000 */  nop       
-/* 1A1EC 8003EDEC 00000000 */  nop       
+/* 1A1E8 8003EDE8 00000000 */  nop
+/* 1A1EC 8003EDEC 00000000 */  nop

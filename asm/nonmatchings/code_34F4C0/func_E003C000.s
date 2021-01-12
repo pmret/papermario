@@ -27,17 +27,17 @@ glabel func_E003C000
 /* 34F518 E003C058 24120014 */  addiu     $s2, $zero, 0x14
 .LE003C05C:
 /* 34F51C E003C05C 26520001 */  addiu     $s2, $s2, 1
-/* 34F520 E003C060 3C02E004 */  lui       $v0, %hi(D_E003C23C)
-/* 34F524 E003C064 2442C23C */  addiu     $v0, $v0, %lo(D_E003C23C)
+/* 34F520 E003C060 3C02E004 */  lui       $v0, %hi(func_E003C23C)
+/* 34F524 E003C064 2442C23C */  addiu     $v0, $v0, %lo(func_E003C23C)
 /* 34F528 E003C068 AFA20018 */  sw        $v0, 0x18($sp)
-/* 34F52C E003C06C 3C02E004 */  lui       $v0, %hi(D_E003C244)
-/* 34F530 E003C070 2442C244 */  addiu     $v0, $v0, %lo(D_E003C244)
+/* 34F52C E003C06C 3C02E004 */  lui       $v0, %hi(func_E003C244)
+/* 34F530 E003C070 2442C244 */  addiu     $v0, $v0, %lo(func_E003C244)
 /* 34F534 E003C074 AFA2001C */  sw        $v0, 0x1c($sp)
-/* 34F538 E003C078 3C02E004 */  lui       $v0, %hi(D_E003C474)
-/* 34F53C E003C07C 2442C474 */  addiu     $v0, $v0, %lo(D_E003C474)
+/* 34F538 E003C078 3C02E004 */  lui       $v0, %hi(func_E003C474)
+/* 34F53C E003C07C 2442C474 */  addiu     $v0, $v0, %lo(func_E003C474)
 /* 34F540 E003C080 AFA20020 */  sw        $v0, 0x20($sp)
-/* 34F544 E003C084 3C02E004 */  lui       $v0, %hi(D_E003C47C)
-/* 34F548 E003C088 2442C47C */  addiu     $v0, $v0, %lo(D_E003C47C)
+/* 34F544 E003C084 3C02E004 */  lui       $v0, %hi(func_E003C47C)
+/* 34F548 E003C088 2442C47C */  addiu     $v0, $v0, %lo(func_E003C47C)
 /* 34F54C E003C08C AFA20024 */  sw        $v0, 0x24($sp)
 /* 34F550 E003C090 2402001E */  addiu     $v0, $zero, 0x1e
 /* 34F554 E003C094 AFA00010 */  sw        $zero, 0x10($sp)
@@ -52,7 +52,7 @@ glabel func_E003C000
 /* 34F578 E003C0B8 AE63000C */   sw       $v1, 0xc($s3)
 .LE003C0BC:
 /* 34F57C E003C0BC 0800F02F */  j         .LE003C0BC
-/* 34F580 E003C0C0 00000000 */   nop      
+/* 34F580 E003C0C0 00000000 */   nop
 .LE003C0C4:
 /* 34F584 E003C0C4 24020064 */  addiu     $v0, $zero, 0x64
 /* 34F588 E003C0C8 AC710000 */  sw        $s1, ($v1)
@@ -69,7 +69,7 @@ glabel func_E003C000
 /* 34F5B4 E003C0F4 24630040 */   addiu    $v1, $v1, 0x40
 /* 34F5B8 E003C0F8 2470002C */  addiu     $s0, $v1, 0x2c
 /* 34F5BC E003C0FC 44920000 */  mtc1      $s2, $f0
-/* 34F5C0 E003C100 00000000 */  nop       
+/* 34F5C0 E003C100 00000000 */  nop
 /* 34F5C4 E003C104 46800020 */  cvt.s.w   $f0, $f0
 /* 34F5C8 E003C108 3C0141F0 */  lui       $at, 0x41f0
 /* 34F5CC E003C10C 44811000 */  mtc1      $at, $f2
@@ -97,10 +97,10 @@ glabel func_E003C000
 /* 34F620 E003C160 00431021 */  addu      $v0, $v0, $v1
 /* 34F624 E003C164 00021043 */  sra       $v0, $v0, 1
 /* 34F628 E003C168 4482A000 */  mtc1      $v0, $f20
-/* 34F62C E003C16C 00000000 */  nop       
+/* 34F62C E003C16C 00000000 */  nop
 /* 34F630 E003C170 4680A520 */  cvt.s.w   $f20, $f20
 /* 34F634 E003C174 461AA502 */  mul.s     $f20, $f20, $f26
-/* 34F638 E003C178 00000000 */  nop       
+/* 34F638 E003C178 00000000 */  nop
 /* 34F63C E003C17C C600FFE0 */  lwc1      $f0, -0x20($s0)
 /* 34F640 E003C180 E602FFE8 */  swc1      $f2, -0x18($s0)
 /* 34F644 E003C184 3C013E4C */  lui       $at, 0x3e4c
@@ -113,19 +113,19 @@ glabel func_E003C000
 /* 34F660 E003C1A0 4600A306 */   mov.s    $f12, $f20
 /* 34F664 E003C1A4 46000007 */  neg.s     $f0, $f0
 /* 34F668 E003C1A8 46180002 */  mul.s     $f0, $f0, $f24
-/* 34F66C E003C1AC 00000000 */  nop       
+/* 34F66C E003C1AC 00000000 */  nop
 /* 34F670 E003C1B0 46000021 */  cvt.d.s   $f0, $f0
 /* 34F674 E003C1B4 46360002 */  mul.d     $f0, $f0, $f22
-/* 34F678 E003C1B8 00000000 */  nop       
+/* 34F678 E003C1B8 00000000 */  nop
 /* 34F67C E003C1BC 4600A306 */  mov.s     $f12, $f20
 /* 34F680 E003C1C0 46200020 */  cvt.s.d   $f0, $f0
 /* 34F684 E003C1C4 0C080144 */  jal       func_E0200510
 /* 34F688 E003C1C8 E600FFF0 */   swc1     $f0, -0x10($s0)
 /* 34F68C E003C1CC 46180002 */  mul.s     $f0, $f0, $f24
-/* 34F690 E003C1D0 00000000 */  nop       
+/* 34F690 E003C1D0 00000000 */  nop
 /* 34F694 E003C1D4 46000021 */  cvt.d.s   $f0, $f0
 /* 34F698 E003C1D8 46360002 */  mul.d     $f0, $f0, $f22
-/* 34F69C E003C1DC 00000000 */  nop       
+/* 34F69C E003C1DC 00000000 */  nop
 /* 34F6A0 E003C1E0 26310001 */  addiu     $s1, $s1, 1
 /* 34F6A4 E003C1E4 240200FF */  addiu     $v0, $zero, 0xff
 /* 34F6A8 E003C1E8 AE020000 */  sw        $v0, ($s0)

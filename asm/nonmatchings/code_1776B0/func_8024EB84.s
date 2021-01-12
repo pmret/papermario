@@ -20,7 +20,7 @@ glabel func_8024EB84
 /* 17D4A0 8024EBC0 0040802D */  daddu     $s0, $v0, $zero
 /* 17D4A4 8024EBC4 2402FF81 */  addiu     $v0, $zero, -0x7f
 /* 17D4A8 8024EBC8 16020002 */  bne       $s0, $v0, .L8024EBD4
-/* 17D4AC 8024EBCC 00000000 */   nop      
+/* 17D4AC 8024EBCC 00000000 */   nop
 /* 17D4B0 8024EBD0 8E500148 */  lw        $s0, 0x148($s2)
 .L8024EBD4:
 /* 17D4B4 8024EBD4 8E250000 */  lw        $a1, ($s1)

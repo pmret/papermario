@@ -16,7 +16,7 @@ glabel partner_handle_after_battle
 /* 84BA0 800EB6F0 0C0B1059 */  jal       does_script_exist
 /* 84BA4 800EB6F4 8E040000 */   lw       $a0, ($s0)
 /* 84BA8 800EB6F8 10400003 */  beqz      $v0, .L800EB708
-/* 84BAC 800EB6FC 00000000 */   nop      
+/* 84BAC 800EB6FC 00000000 */   nop
 /* 84BB0 800EB700 0C0B102B */  jal       kill_script_by_ID
 /* 84BB4 800EB704 8E040000 */   lw       $a0, ($s0)
 .L800EB708:
@@ -43,7 +43,7 @@ glabel partner_handle_after_battle
 /* 84C08 800EB758 80420012 */  lb        $v0, 0x12($v0)
 /* 84C0C 800EB75C 24030006 */  addiu     $v1, $zero, 6
 /* 84C10 800EB760 1043000C */  beq       $v0, $v1, .L800EB794
-/* 84C14 800EB764 00000000 */   nop      
+/* 84C14 800EB764 00000000 */   nop
 /* 84C18 800EB768 82220003 */  lb        $v0, 3($s1)
 /* 84C1C 800EB76C 14430009 */  bne       $v0, $v1, .L800EB794
 /* 84C20 800EB770 2403FFFE */   addiu    $v1, $zero, -2
@@ -60,11 +60,11 @@ glabel partner_handle_after_battle
 /* 84C48 800EB798 8C42CFEC */  lw        $v0, %lo(D_8010CFEC)($v0)
 /* 84C4C 800EB79C 8C420038 */  lw        $v0, 0x38($v0)
 /* 84C50 800EB7A0 10400005 */  beqz      $v0, .L800EB7B8
-/* 84C54 800EB7A4 00000000 */   nop      
+/* 84C54 800EB7A4 00000000 */   nop
 /* 84C58 800EB7A8 3C048011 */  lui       $a0, %hi(D_8010C930)
 /* 84C5C 800EB7AC 8C84C930 */  lw        $a0, %lo(D_8010C930)($a0)
 /* 84C60 800EB7B0 0040F809 */  jalr      $v0
-/* 84C64 800EB7B4 00000000 */   nop      
+/* 84C64 800EB7B4 00000000 */   nop
 .L800EB7B8:
 /* 84C68 800EB7B8 8FBF0018 */  lw        $ra, 0x18($sp)
 /* 84C6C 800EB7BC 8FB10014 */  lw        $s1, 0x14($sp)

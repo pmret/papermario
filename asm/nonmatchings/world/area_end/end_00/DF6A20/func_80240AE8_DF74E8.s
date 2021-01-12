@@ -28,7 +28,7 @@ glabel func_80240AE8_DF74E8
 /* DF7544 80240B44 00431021 */  addu      $v0, $v0, $v1
 /* DF7548 80240B48 2442FFF0 */  addiu     $v0, $v0, -0x10
 /* DF754C 80240B4C 44822000 */  mtc1      $v0, $f4
-/* DF7550 80240B50 00000000 */  nop       
+/* DF7550 80240B50 00000000 */  nop
 /* DF7554 80240B54 46802120 */  cvt.s.w   $f4, $f4
 /* DF7558 80240B58 8E03006C */  lw        $v1, 0x6c($s0)
 /* DF755C 80240B5C 44052000 */  mfc1      $a1, $f4
@@ -36,7 +36,7 @@ glabel func_80240AE8_DF74E8
 /* DF7564 80240B64 8E270018 */  lw        $a3, 0x18($s1)
 /* DF7568 80240B68 2463003C */  addiu     $v1, $v1, 0x3c
 /* DF756C 80240B6C 4483A000 */  mtc1      $v1, $f20
-/* DF7570 80240B70 00000000 */  nop       
+/* DF7570 80240B70 00000000 */  nop
 /* DF7574 80240B74 4680A520 */  cvt.s.w   $f20, $f20
 /* DF7578 80240B78 0C00A8ED */  jal       update_lerp
 /* DF757C 80240B7C 2404000A */   addiu    $a0, $zero, 0xa
@@ -57,14 +57,14 @@ glabel func_80240AE8_DF74E8
 /* DF75B8 80240BB8 46000706 */   mov.s    $f28, $f0
 /* DF75BC 80240BBC 4480B000 */  mtc1      $zero, $f22
 /* DF75C0 80240BC0 080902F9 */  j         .L80240BE4
-/* DF75C4 80240BC4 00000000 */   nop      
+/* DF75C4 80240BC4 00000000 */   nop
 .L80240BC8:
 /* DF75C8 80240BC8 00621823 */  subu      $v1, $v1, $v0
 /* DF75CC 80240BCC 00031080 */  sll       $v0, $v1, 2
 /* DF75D0 80240BD0 00431021 */  addu      $v0, $v0, $v1
 /* DF75D4 80240BD4 00021040 */  sll       $v0, $v0, 1
 /* DF75D8 80240BD8 4482B000 */  mtc1      $v0, $f22
-/* DF75DC 80240BDC 00000000 */  nop       
+/* DF75DC 80240BDC 00000000 */  nop
 /* DF75E0 80240BE0 4680B5A0 */  cvt.s.w   $f22, $f22
 .L80240BE4:
 /* DF75E4 80240BE4 8E02001C */  lw        $v0, 0x1c($s0)
@@ -98,9 +98,9 @@ glabel func_80240AE8_DF74E8
 /* DF7650 80240C50 0000202D */   daddu    $a0, $zero, $zero
 /* DF7654 80240C54 3C01437F */  lui       $at, 0x437f
 /* DF7658 80240C58 44811000 */  mtc1      $at, $f2
-/* DF765C 80240C5C 00000000 */  nop       
+/* DF765C 80240C5C 00000000 */  nop
 /* DF7660 80240C60 4600103C */  c.lt.s    $f2, $f0
-/* DF7664 80240C64 00000000 */  nop       
+/* DF7664 80240C64 00000000 */  nop
 /* DF7668 80240C68 45030001 */  bc1tl     .L80240C70
 /* DF766C 80240C6C 46001006 */   mov.s    $f0, $f2
 .L80240C70:
@@ -127,10 +127,10 @@ glabel func_80240AE8_DF74E8
 /* DF76BC 80240CBC 4481C800 */  mtc1      $at, $f25
 /* DF76C0 80240CC0 4480C000 */  mtc1      $zero, $f24
 /* DF76C4 80240CC4 44820000 */  mtc1      $v0, $f0
-/* DF76C8 80240CC8 00000000 */  nop       
+/* DF76C8 80240CC8 00000000 */  nop
 /* DF76CC 80240CCC 46800021 */  cvt.d.w   $f0, $f0
 /* DF76D0 80240CD0 46380002 */  mul.d     $f0, $f0, $f24
-/* DF76D4 80240CD4 00000000 */  nop       
+/* DF76D4 80240CD4 00000000 */  nop
 /* DF76D8 80240CD8 36941630 */  ori       $s4, $s4, 0x1630
 /* DF76DC 80240CDC 4600A0A1 */  cvt.d.s   $f2, $f20
 /* DF76E0 80240CE0 27B10048 */  addiu     $s1, $sp, 0x48
@@ -169,10 +169,10 @@ glabel func_80240AE8_DF74E8
 /* DF7764 80240D64 0C019D80 */  jal       guMtxCatF
 /* DF7768 80240D68 0220302D */   daddu    $a2, $s1, $zero
 /* DF776C 80240D6C 0220202D */  daddu     $a0, $s1, $zero
-/* DF7770 80240D70 3C108007 */  lui       $s0, %hi(D_800741F0)
-/* DF7774 80240D74 261041F0 */  addiu     $s0, $s0, %lo(D_800741F0)
-/* DF7778 80240D78 3C13800A */  lui       $s3, %hi(D_8009A674)
-/* DF777C 80240D7C 2673A674 */  addiu     $s3, $s3, %lo(D_8009A674)
+/* DF7770 80240D70 3C108007 */  lui       $s0, %hi(gMatrixListPos)
+/* DF7774 80240D74 261041F0 */  addiu     $s0, $s0, %lo(gMatrixListPos)
+/* DF7778 80240D78 3C13800A */  lui       $s3, %hi(gDisplayContext)
+/* DF777C 80240D7C 2673A674 */  addiu     $s3, $s3, %lo(gDisplayContext)
 /* DF7780 80240D80 96050000 */  lhu       $a1, ($s0)
 /* DF7784 80240D84 8E620000 */  lw        $v0, ($s3)
 /* DF7788 80240D88 00052980 */  sll       $a1, $a1, 6
@@ -181,8 +181,8 @@ glabel func_80240AE8_DF74E8
 /* DF7794 80240D94 00452821 */   addu     $a1, $v0, $a1
 /* DF7798 80240D98 3C02DA38 */  lui       $v0, 0xda38
 /* DF779C 80240D9C 34420002 */  ori       $v0, $v0, 2
-/* DF77A0 80240DA0 3C12800A */  lui       $s2, %hi(D_8009A66C)
-/* DF77A4 80240DA4 2652A66C */  addiu     $s2, $s2, %lo(D_8009A66C)
+/* DF77A0 80240DA0 3C12800A */  lui       $s2, %hi(gMasterGfxPos)
+/* DF77A4 80240DA4 2652A66C */  addiu     $s2, $s2, %lo(gMasterGfxPos)
 /* DF77A8 80240DA8 8E440000 */  lw        $a0, ($s2)
 /* DF77AC 80240DAC 96050000 */  lhu       $a1, ($s0)
 /* DF77B0 80240DB0 0080302D */  daddu     $a2, $a0, $zero
@@ -209,10 +209,10 @@ glabel func_80240AE8_DF74E8
 /* DF7804 80240E04 A7A2002A */  sh        $v0, 0x2a($sp)
 /* DF7808 80240E08 92A2000A */  lbu       $v0, 0xa($s5)
 /* DF780C 80240E0C 44820000 */  mtc1      $v0, $f0
-/* DF7810 80240E10 00000000 */  nop       
+/* DF7810 80240E10 00000000 */  nop
 /* DF7814 80240E14 46800021 */  cvt.d.w   $f0, $f0
 /* DF7818 80240E18 46380002 */  mul.d     $f0, $f0, $f24
-/* DF781C 80240E1C 00000000 */  nop       
+/* DF781C 80240E1C 00000000 */  nop
 /* DF7820 80240E20 0220382D */  daddu     $a3, $s1, $zero
 /* DF7824 80240E24 0000202D */  daddu     $a0, $zero, $zero
 /* DF7828 80240E28 02C0302D */  daddu     $a2, $s6, $zero

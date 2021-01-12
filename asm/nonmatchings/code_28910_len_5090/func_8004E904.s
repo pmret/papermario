@@ -43,12 +43,12 @@ glabel func_8004E904
 /* 29D90 8004E990 3C020007 */   lui      $v0, 7
 /* 29D94 8004E994 3C020005 */  lui       $v0, 5
 /* 29D98 8004E998 10620016 */  beq       $v1, $v0, .L8004E9F4
-/* 29D9C 8004E99C 00000000 */   nop      
+/* 29D9C 8004E99C 00000000 */   nop
 /* 29DA0 8004E9A0 08013A82 */  j         .L8004EA08
 /* 29DA4 8004E9A4 0000882D */   daddu    $s1, $zero, $zero
 .L8004E9A8:
 /* 29DA8 8004E9A8 1062000E */  beq       $v1, $v0, .L8004E9E4
-/* 29DAC 8004E9AC 00000000 */   nop      
+/* 29DAC 8004E9AC 00000000 */   nop
 /* 29DB0 8004E9B0 08013A82 */  j         .L8004EA08
 /* 29DB4 8004E9B4 0000882D */   daddu    $s1, $zero, $zero
 .L8004E9B8:
@@ -63,7 +63,7 @@ glabel func_8004E904
 /* 29DD4 8004E9D4 1440000D */  bnez      $v0, .L8004EA0C
 /* 29DD8 8004E9D8 3222FFFF */   andi     $v0, $s1, 0xffff
 /* 29DDC 8004E9DC 08013A7D */  j         .L8004E9F4
-/* 29DE0 8004E9E0 00000000 */   nop      
+/* 29DE0 8004E9E0 00000000 */   nop
 .L8004E9E4:
 /* 29DE4 8004E9E4 92020223 */  lbu       $v0, 0x223($s0)
 /* 29DE8 8004E9E8 30420001 */  andi      $v0, $v0, 1
@@ -80,7 +80,7 @@ glabel func_8004E904
 /* 29E08 8004EA08 3222FFFF */  andi      $v0, $s1, 0xffff
 .L8004EA0C:
 /* 29E0C 8004EA0C 1440FFCB */  bnez      $v0, .L8004E93C
-/* 29E10 8004EA10 00000000 */   nop      
+/* 29E10 8004EA10 00000000 */   nop
 /* 29E14 8004EA14 8FBF0024 */  lw        $ra, 0x24($sp)
 /* 29E18 8004EA18 8FB40020 */  lw        $s4, 0x20($sp)
 /* 29E1C 8004EA1C 8FB3001C */  lw        $s3, 0x1c($sp)

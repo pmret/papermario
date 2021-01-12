@@ -71,8 +71,8 @@ glabel pause_tabs_draw_stats_805418
 /* 8054FC 80244C7C 1440FFDB */  bnez      $v0, .L80244BEC
 /* 805500 80244C80 24A50010 */   addiu    $a1, $a1, 0x10
 .L80244C84:
-/* 805504 80244C84 3C03800A */  lui       $v1, %hi(D_8009A66C)
-/* 805508 80244C88 2463A66C */  addiu     $v1, $v1, %lo(D_8009A66C)
+/* 805504 80244C84 3C03800A */  lui       $v1, %hi(gMasterGfxPos)
+/* 805508 80244C88 2463A66C */  addiu     $v1, $v1, %lo(gMasterGfxPos)
 /* 80550C 80244C8C 8C620000 */  lw        $v0, ($v1)
 /* 805510 80244C90 0000202D */  daddu     $a0, $zero, $zero
 /* 805514 80244C94 0040802D */  daddu     $s0, $v0, $zero

@@ -84,10 +84,10 @@ glabel draw_coin_sparkles
 /* C7348 80130C48 0C019D80 */  jal       guMtxCatF
 /* C734C 80130C4C 0220302D */   daddu    $a2, $s1, $zero
 /* C7350 80130C50 0220202D */  daddu     $a0, $s1, $zero
-/* C7354 80130C54 3C138007 */  lui       $s3, %hi(D_800741F0)
-/* C7358 80130C58 267341F0 */  addiu     $s3, $s3, %lo(D_800741F0)
-/* C735C 80130C5C 3C14800A */  lui       $s4, %hi(D_8009A674)
-/* C7360 80130C60 2694A674 */  addiu     $s4, $s4, %lo(D_8009A674)
+/* C7354 80130C54 3C138007 */  lui       $s3, %hi(gMatrixListPos)
+/* C7358 80130C58 267341F0 */  addiu     $s3, $s3, %lo(gMatrixListPos)
+/* C735C 80130C5C 3C14800A */  lui       $s4, %hi(gDisplayContext)
+/* C7360 80130C60 2694A674 */  addiu     $s4, $s4, %lo(gDisplayContext)
 /* C7364 80130C64 96650000 */  lhu       $a1, ($s3)
 /* C7368 80130C68 8E820000 */  lw        $v0, ($s4)
 /* C736C 80130C6C 00052980 */  sll       $a1, $a1, 6
@@ -131,8 +131,8 @@ glabel draw_coin_sparkles
 /* C7404 80130D04 3C0AE200 */  lui       $t2, 0xe200
 /* C7408 80130D08 354A1E01 */  ori       $t2, $t2, 0x1e01
 /* C740C 80130D0C 0000202D */  daddu     $a0, $zero, $zero
-/* C7410 80130D10 3C10800A */  lui       $s0, %hi(D_8009A66C)
-/* C7414 80130D14 2610A66C */  addiu     $s0, $s0, %lo(D_8009A66C)
+/* C7410 80130D10 3C10800A */  lui       $s0, %hi(gMasterGfxPos)
+/* C7414 80130D14 2610A66C */  addiu     $s0, $s0, %lo(gMasterGfxPos)
 /* C7418 80130D18 AFAA013C */  sw        $t2, 0x13c($sp)
 /* C741C 80130D1C 8E030000 */  lw        $v1, ($s0)
 /* C7420 80130D20 96620000 */  lhu       $v0, ($s3)

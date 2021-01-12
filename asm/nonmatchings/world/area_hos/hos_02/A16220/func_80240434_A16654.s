@@ -100,8 +100,8 @@ glabel func_80240434_A16654
 /* A167C4 802405A4 1440FFB9 */  bnez      $v0, .L8024048C
 /* A167C8 802405A8 02130018 */   mult     $s0, $s3
 .L802405AC:
-/* A167CC 802405AC 3C03800A */  lui       $v1, %hi(D_8009A66C)
-/* A167D0 802405B0 2463A66C */  addiu     $v1, $v1, %lo(D_8009A66C)
+/* A167CC 802405AC 3C03800A */  lui       $v1, %hi(gMasterGfxPos)
+/* A167D0 802405B0 2463A66C */  addiu     $v1, $v1, %lo(gMasterGfxPos)
 /* A167D4 802405B4 8C620000 */  lw        $v0, ($v1)
 /* A167D8 802405B8 0000202D */  daddu     $a0, $zero, $zero
 /* A167DC 802405BC 0040802D */  daddu     $s0, $v0, $zero

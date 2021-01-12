@@ -3,4 +3,4 @@
 
 glabel func_E00D018C
 /* 3D3FAC E00D018C 03E00008 */  jr        $ra
-/* 3D3FB0 E00D0190 00000000 */   nop      
+/* 3D3FB0 E00D0190 00000000 */   nop

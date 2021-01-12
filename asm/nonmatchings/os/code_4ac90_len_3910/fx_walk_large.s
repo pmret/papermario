@@ -25,4 +25,4 @@ glabel fx_walk_large
 /* 4AF20 8006FB20 3C018008 */  lui       $at, %hi(D_8007F2A0)
 /* 4AF24 8006FB24 8C21F2A0 */  lw        $at, %lo(D_8007F2A0)($at)
 /* 4AF28 8006FB28 00200008 */  jr        $at
-/* 4AF2C 8006FB2C 00000000 */   nop      
+/* 4AF2C 8006FB2C 00000000 */   nop

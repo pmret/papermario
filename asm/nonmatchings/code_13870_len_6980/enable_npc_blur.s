@@ -18,7 +18,7 @@ glabel enable_npc_blur
 /* 16158 8003AD58 AE020020 */   sw       $v0, 0x20($s0)
 .L8003AD5C:
 /* 1615C 8003AD5C 0800EB57 */  j         .L8003AD5C
-/* 16160 8003AD60 00000000 */   nop      
+/* 16160 8003AD60 00000000 */   nop
 .L8003AD64:
 /* 16164 8003AD64 0000202D */  daddu     $a0, $zero, $zero
 /* 16168 8003AD68 0040182D */  daddu     $v1, $v0, $zero

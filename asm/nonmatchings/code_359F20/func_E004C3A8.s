@@ -12,8 +12,8 @@ glabel func_E004C3A8
 /* 35A2E4 E004C3C4 AFB500AC */  sw        $s5, 0xac($sp)
 /* 35A2E8 E004C3C8 3C150001 */  lui       $s5, 1
 /* 35A2EC E004C3CC AFB200A0 */  sw        $s2, 0xa0($sp)
-/* 35A2F0 E004C3D0 3C12800A */  lui       $s2, %hi(D_8009A66C)
-/* 35A2F4 E004C3D4 2652A66C */  addiu     $s2, $s2, %lo(D_8009A66C)
+/* 35A2F0 E004C3D0 3C12800A */  lui       $s2, %hi(gMasterGfxPos)
+/* 35A2F4 E004C3D4 2652A66C */  addiu     $s2, $s2, %lo(gMasterGfxPos)
 /* 35A2F8 E004C3D8 AFB600B0 */  sw        $s6, 0xb0($sp)
 /* 35A2FC E004C3DC 3C16E700 */  lui       $s6, 0xe700
 /* 35A300 E004C3E0 AFBF00B4 */  sw        $ra, 0xb4($sp)
@@ -118,10 +118,10 @@ glabel func_E004C3A8
 /* 35A48C E004C56C 0C080114 */  jal       func_E0200450
 /* 35A490 E004C570 00A0302D */   daddu    $a2, $a1, $zero
 /* 35A494 E004C574 27A40018 */  addiu     $a0, $sp, 0x18
-/* 35A498 E004C578 3C108007 */  lui       $s0, %hi(D_800741F0)
-/* 35A49C E004C57C 261041F0 */  addiu     $s0, $s0, %lo(D_800741F0)
-/* 35A4A0 E004C580 3C11800A */  lui       $s1, %hi(D_8009A674)
-/* 35A4A4 E004C584 2631A674 */  addiu     $s1, $s1, %lo(D_8009A674)
+/* 35A498 E004C578 3C108007 */  lui       $s0, %hi(gMatrixListPos)
+/* 35A49C E004C57C 261041F0 */  addiu     $s0, $s0, %lo(gMatrixListPos)
+/* 35A4A0 E004C580 3C11800A */  lui       $s1, %hi(gDisplayContext)
+/* 35A4A4 E004C584 2631A674 */  addiu     $s1, $s1, %lo(gDisplayContext)
 /* 35A4A8 E004C588 96050000 */  lhu       $a1, ($s0)
 /* 35A4AC E004C58C 8E220000 */  lw        $v0, ($s1)
 /* 35A4B0 E004C590 00052980 */  sll       $a1, $a1, 6
@@ -173,6 +173,6 @@ glabel func_E004C3A8
 /* 35A568 E004C648 D7B400B8 */  ldc1      $f20, 0xb8($sp)
 /* 35A56C E004C64C 03E00008 */  jr        $ra
 /* 35A570 E004C650 27BD00C0 */   addiu    $sp, $sp, 0xc0
-/* 35A574 E004C654 00000000 */  nop       
-/* 35A578 E004C658 00000000 */  nop       
-/* 35A57C E004C65C 00000000 */  nop       
+/* 35A574 E004C654 00000000 */  nop
+/* 35A578 E004C658 00000000 */  nop
+/* 35A57C E004C65C 00000000 */  nop

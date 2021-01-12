@@ -237,8 +237,8 @@ glabel func_80126F78
 /* BD9FC 801272FC 0240202D */  daddu     $a0, $s2, $zero
 /* BDA00 80127300 24050010 */  addiu     $a1, $zero, 0x10
 /* BDA04 80127304 00A0302D */  daddu     $a2, $a1, $zero
-/* BDA08 80127308 3C08800A */  lui       $t0, %hi(D_8009A66C)
-/* BDA0C 8012730C 2508A66C */  addiu     $t0, $t0, %lo(D_8009A66C)
+/* BDA08 80127308 3C08800A */  lui       $t0, %hi(gMasterGfxPos)
+/* BDA0C 8012730C 2508A66C */  addiu     $t0, $t0, %lo(gMasterGfxPos)
 /* BDA10 80127310 24070002 */  addiu     $a3, $zero, 2
 /* BDA14 80127314 3C09E700 */  lui       $t1, 0xe700
 /* BDA18 80127318 8D030000 */  lw        $v1, ($t0)

@@ -9,12 +9,8 @@ root_dir = script_dir + "/../"
 src_dir = root_dir + "src/"
 asm_dir = root_dir + "asm/"
 
-with open(os.path.join(script_dir, "manual_renames.txt")) as f:
+with open(os.path.join(script_dir, "duplicate_renames.txt")) as f:
     renames_text = f.readlines()
-
-to_line = renames_text[0].strip()
-func_name = to_line[to_line.rfind("/") + 1:to_line.find(".")]
-
 
 for root, dirs, files in os.walk(asm_dir):
     for f_name in files:
@@ -25,8 +21,7 @@ for root, dirs, files in os.walk(asm_dir):
 
             f_text = f_text_orig
             for rename_text in renames_text:
-                r_from = rename_text[rename_text.find("+") + 1 : rename_text.rfind("+")]
-                r_to = rename_text[rename_text.find("-") + 1 : rename_text.rfind("-")]
+                r_from, r_to = rename_text.rstrip().split(",")
                 f_text = f_text.replace(r_from, r_to)
             if f_text != f_text_orig:
                 with open(f_path, "w", newline="\n") as f:

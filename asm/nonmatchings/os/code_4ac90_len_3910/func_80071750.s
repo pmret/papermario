@@ -25,4 +25,4 @@ glabel func_80071750
 /* 4CBA0 800717A0 3C018008 */  lui       $at, %hi(D_8007F9C0)
 /* 4CBA4 800717A4 8C21F9C0 */  lw        $at, %lo(D_8007F9C0)($at)
 /* 4CBA8 800717A8 00200008 */  jr        $at
-/* 4CBAC 800717AC 00000000 */   nop      
+/* 4CBAC 800717AC 00000000 */   nop

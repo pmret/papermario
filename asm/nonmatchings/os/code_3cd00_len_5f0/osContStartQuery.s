@@ -10,7 +10,7 @@ glabel osContStartQuery
 /* 3CD14 80061914 3C02800A */  lui       $v0, %hi(D_8009A61C)
 /* 3CD18 80061918 9042A61C */  lbu       $v0, %lo(D_8009A61C)($v0)
 /* 3CD1C 8006191C 1040000B */  beqz      $v0, .L8006194C
-/* 3CD20 80061920 00000000 */   nop      
+/* 3CD20 80061920 00000000 */   nop
 /* 3CD24 80061924 0C018774 */  jal       osPackRequestData
 /* 3CD28 80061928 00002021 */   addu     $a0, $zero, $zero
 /* 3CD2C 8006192C 3C05800B */  lui       $a1, %hi(D_800B0ED0)

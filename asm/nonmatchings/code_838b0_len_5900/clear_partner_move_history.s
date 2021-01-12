@@ -35,4 +35,4 @@ glabel clear_partner_move_history
 /* 88980 800EF4D0 1440FFF5 */  bnez      $v0, .L800EF4A8
 /* 88984 800EF4D4 24A50010 */   addiu    $a1, $a1, 0x10
 /* 88988 800EF4D8 03E00008 */  jr        $ra
-/* 8898C 800EF4DC 00000000 */   nop      
+/* 8898C 800EF4DC 00000000 */   nop

@@ -100,9 +100,9 @@ glabel func_80241170_C3ED60
 /* C3EEC4 802412D4 2C620064 */  sltiu     $v0, $v1, 0x64
 /* C3EEC8 802412D8 10400048 */  beqz      $v0, .L802413FC
 /* C3EECC 802412DC 00031080 */   sll      $v0, $v1, 2
-/* C3EED0 802412E0 3C018024 */  lui       $at, %hi(D_80242030)
+/* C3EED0 802412E0 3C018024 */  lui       $at, %hi(func_80242030_8EDE50)
 /* C3EED4 802412E4 00220821 */  addu      $at, $at, $v0
-/* C3EED8 802412E8 8C222030 */  lw        $v0, %lo(D_80242030)($at)
+/* C3EED8 802412E8 8C222030 */  lw        $v0, %lo(func_80242030_8EDE50)($at)
 /* C3EEDC 802412EC 00400008 */  jr        $v0
 /* C3EEE0 802412F0 00000000 */   nop
 /* C3EEE4 802412F4 0240202D */  daddu     $a0, $s2, $zero

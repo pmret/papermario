@@ -241,8 +241,8 @@ glabel func_8012F500
 /* C5F84 8012F884 0040B02D */   daddu    $s6, $v0, $zero
 /* C5F88 8012F888 0016B023 */  negu      $s6, $s6
 .L8012F88C:
-/* C5F8C 8012F88C 3C08800A */  lui       $t0, %hi(D_8009A66C)
-/* C5F90 8012F890 2508A66C */  addiu     $t0, $t0, %lo(D_8009A66C)
+/* C5F8C 8012F88C 3C08800A */  lui       $t0, %hi(gMasterGfxPos)
+/* C5F90 8012F890 2508A66C */  addiu     $t0, $t0, %lo(gMasterGfxPos)
 /* C5F94 8012F894 46004021 */  cvt.d.s   $f0, $f8
 /* C5F98 8012F898 266CFFFF */  addiu     $t4, $s3, -1
 /* C5F9C 8012F89C 3C11F510 */  lui       $s1, 0xf510

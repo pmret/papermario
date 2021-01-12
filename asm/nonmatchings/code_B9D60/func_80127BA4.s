@@ -98,8 +98,8 @@ glabel func_80127BA4
 /* BE408 80127D08 00000000 */  nop       
 /* BE40C 80127D0C 46800020 */  cvt.s.w   $f0, $f0
 /* BE410 80127D10 AFA2001C */  sw        $v0, 0x1c($sp)
-/* BE414 80127D14 3C028012 */  lui       $v0, %hi(D_80127B70)
-/* BE418 80127D18 24427B70 */  addiu     $v0, $v0, %lo(D_80127B70)
+/* BE414 80127D14 3C028012 */  lui       $v0, %hi(func_80127B70)
+/* BE418 80127D18 24427B70 */  addiu     $v0, $v0, %lo(func_80127B70)
 /* BE41C 80127D1C AFA20038 */  sw        $v0, 0x38($sp)
 /* BE420 80127D20 24020140 */  addiu     $v0, $zero, 0x140
 /* BE424 80127D24 AFA20044 */  sw        $v0, 0x44($sp)

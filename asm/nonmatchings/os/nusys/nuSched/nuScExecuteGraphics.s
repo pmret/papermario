@@ -18,7 +18,7 @@ glabel nuScExecuteGraphics
 /* 3A144 8005ED44 9042A5B0 */  lbu       $v0, %lo(D_8009A5B0)($v0)
 /* 3A148 8005ED48 30420002 */  andi      $v0, $v0, 2
 /* 3A14C 8005ED4C 14400032 */  bnez      $v0, .L8005EE18
-/* 3A150 8005ED50 00000000 */   nop      
+/* 3A150 8005ED50 00000000 */   nop
 /* 3A154 8005ED54 0C017C48 */  jal       nuScWaitTaskReady
 /* 3A158 8005ED58 8FA40010 */   lw       $a0, 0x10($sp)
 /* 3A15C 8005ED5C 0C018250 */  jal       osSetIntMask
@@ -39,7 +39,7 @@ glabel nuScExecuteGraphics
 /* 3A198 8005ED98 AE000638 */  sw        $zero, 0x638($s0)
 .L8005ED9C:
 /* 3A19C 8005ED9C 0C018250 */  jal       osSetIntMask
-/* 3A1A0 8005EDA0 00000000 */   nop      
+/* 3A1A0 8005EDA0 00000000 */   nop
 /* 3A1A4 8005EDA4 0C018250 */  jal       osSetIntMask
 /* 3A1A8 8005EDA8 24040001 */   addiu    $a0, $zero, 1
 /* 3A1AC 8005EDAC 8FA30010 */  lw        $v1, 0x10($sp)

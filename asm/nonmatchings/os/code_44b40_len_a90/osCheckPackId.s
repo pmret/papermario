@@ -17,7 +17,7 @@ glabel osCheckPackId
 /* 44ED4 80069AD4 0C01A5B4 */  jal       osPfsSelectBank
 /* 44ED8 80069AD8 00002821 */   addu     $a1, $zero, $zero
 /* 44EDC 80069ADC 14400041 */  bnez      $v0, .L80069BE4
-/* 44EE0 80069AE0 00000000 */   nop      
+/* 44EE0 80069AE0 00000000 */   nop
 .L80069AE4:
 /* 44EE4 80069AE4 24130001 */  addiu     $s3, $zero, 1
 /* 44EE8 80069AE8 27B0001A */  addiu     $s0, $sp, 0x1a

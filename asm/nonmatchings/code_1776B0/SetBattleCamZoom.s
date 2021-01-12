@@ -11,7 +11,7 @@ glabel SetBattleCamZoom
 /* 17D564 8024EC84 24020002 */   addiu    $v0, $zero, 2
 /* 17D568 8024EC88 8CA50000 */  lw        $a1, ($a1)
 /* 17D56C 8024EC8C 0C0B1EAF */  jal       get_variable
-/* 17D570 8024EC90 00000000 */   nop      
+/* 17D570 8024EC90 00000000 */   nop
 /* 17D574 8024EC94 3C01802A */  lui       $at, %hi(D_8029F280)
 /* 17D578 8024EC98 A422F280 */  sh        $v0, %lo(D_8029F280)($at)
 /* 17D57C 8024EC9C 24020002 */  addiu     $v0, $zero, 2

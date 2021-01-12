@@ -32,8 +32,8 @@ glabel func_E00D8288
 /* 3D6A98 E00D82D8 50400001 */  beql      $v0, $zero, .LE00D82E0
 /* 3D6A9C E00D82DC 240700EF */   addiu    $a3, $zero, 0xef
 .LE00D82E0:
-/* 3D6AA0 E00D82E0 3C03800A */  lui       $v1, %hi(D_8009A66C)
-/* 3D6AA4 E00D82E4 2463A66C */  addiu     $v1, $v1, %lo(D_8009A66C)
+/* 3D6AA0 E00D82E0 3C03800A */  lui       $v1, %hi(gMasterGfxPos)
+/* 3D6AA4 E00D82E4 2463A66C */  addiu     $v1, $v1, %lo(gMasterGfxPos)
 /* 3D6AA8 E00D82E8 30C403FF */  andi      $a0, $a2, 0x3ff
 /* 3D6AAC E00D82EC 8C620000 */  lw        $v0, ($v1)
 /* 3D6AB0 E00D82F0 00042380 */  sll       $a0, $a0, 0xe

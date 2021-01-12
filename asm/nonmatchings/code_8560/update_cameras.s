@@ -70,8 +70,8 @@ glabel update_cameras
 /* 88FC 8002D4FC 0200202D */   daddu    $a0, $s0, $zero
 .L8002D500:
 /* 8900 8002D500 C6000044 */  lwc1      $f0, 0x44($s0)
-/* 8904 8002D504 3C05800A */  lui       $a1, %hi(D_8009A674)
-/* 8908 8002D508 8CA5A674 */  lw        $a1, %lo(D_8009A674)($a1)
+/* 8904 8002D504 3C05800A */  lui       $a1, %hi(gDisplayContext)
+/* 8908 8002D508 8CA5A674 */  lw        $a1, %lo(gDisplayContext)($a1)
 /* 890C 8002D50C E7A00010 */  swc1      $f0, 0x10($sp)
 /* 8910 8002D510 C6000048 */  lwc1      $f0, 0x48($s0)
 /* 8914 8002D514 E7A00014 */  swc1      $f0, 0x14($sp)

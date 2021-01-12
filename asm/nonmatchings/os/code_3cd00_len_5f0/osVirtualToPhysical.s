@@ -16,15 +16,15 @@ glabel osVirtualToPhysical
 /* 3D2BC 80061EBC 10400006 */  beqz      $v0, .L80061ED8
 /* 3D2C0 80061EC0 00831024 */   and      $v0, $a0, $v1
 /* 3D2C4 80061EC4 0C019A18 */  jal       osProbeTLB
-/* 3D2C8 80061EC8 00000000 */   nop      
+/* 3D2C8 80061EC8 00000000 */   nop
 /* 3D2CC 80061ECC 080187B6 */  j         .L80061ED8
-/* 3D2D0 80061ED0 00000000 */   nop      
+/* 3D2D0 80061ED0 00000000 */   nop
 .L80061ED4:
 /* 3D2D4 80061ED4 00831024 */  and       $v0, $a0, $v1
 .L80061ED8:
 /* 3D2D8 80061ED8 8FBF0010 */  lw        $ra, 0x10($sp)
 /* 3D2DC 80061EDC 03E00008 */  jr        $ra
 /* 3D2E0 80061EE0 27BD0018 */   addiu    $sp, $sp, 0x18
-/* 3D2E4 80061EE4 00000000 */  nop       
-/* 3D2E8 80061EE8 00000000 */  nop       
-/* 3D2EC 80061EEC 00000000 */  nop       
+/* 3D2E4 80061EE4 00000000 */  nop
+/* 3D2E8 80061EE8 00000000 */  nop
+/* 3D2EC 80061EEC 00000000 */  nop

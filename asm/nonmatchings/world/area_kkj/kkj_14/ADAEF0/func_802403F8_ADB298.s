@@ -9,8 +9,8 @@ glabel func_802403F8_ADB298
 /* ADB2A8 80240408 3C060C18 */  lui       $a2, 0xc18
 /* ADB2AC 8024040C 34C649D8 */  ori       $a2, $a2, 0x49d8
 /* ADB2B0 80240410 3C08FC11 */  lui       $t0, 0xfc11
-/* ADB2B4 80240414 3C04800A */  lui       $a0, %hi(D_8009A66C)
-/* ADB2B8 80240418 2484A66C */  addiu     $a0, $a0, %lo(D_8009A66C)
+/* ADB2B4 80240414 3C04800A */  lui       $a0, %hi(gMasterGfxPos)
+/* ADB2B8 80240418 2484A66C */  addiu     $a0, $a0, %lo(gMasterGfxPos)
 /* ADB2BC 8024041C 8C830000 */  lw        $v1, ($a0)
 /* ADB2C0 80240420 350815FF */  ori       $t0, $t0, 0x15ff
 /* ADB2C4 80240424 0060282D */  daddu     $a1, $v1, $zero

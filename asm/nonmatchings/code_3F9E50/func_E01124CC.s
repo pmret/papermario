@@ -5,8 +5,8 @@ glabel func_E01124CC
 /* 3FA31C E01124CC 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* 3FA320 E01124D0 3C06DB06 */  lui       $a2, 0xdb06
 /* 3FA324 E01124D4 AFB00010 */  sw        $s0, 0x10($sp)
-/* 3FA328 E01124D8 3C10800A */  lui       $s0, %hi(D_8009A66C)
-/* 3FA32C E01124DC 2610A66C */  addiu     $s0, $s0, %lo(D_8009A66C)
+/* 3FA328 E01124D8 3C10800A */  lui       $s0, %hi(gMasterGfxPos)
+/* 3FA32C E01124DC 2610A66C */  addiu     $s0, $s0, %lo(gMasterGfxPos)
 /* 3FA330 E01124E0 34C60024 */  ori       $a2, $a2, 0x24
 /* 3FA334 E01124E4 AFB3001C */  sw        $s3, 0x1c($sp)
 /* 3FA338 E01124E8 3C13E700 */  lui       $s3, 0xe700
@@ -91,4 +91,4 @@ glabel func_E01124CC
 /* 3FA470 E0112620 8FB00010 */  lw        $s0, 0x10($sp)
 /* 3FA474 E0112624 03E00008 */  jr        $ra
 /* 3FA478 E0112628 27BD0028 */   addiu    $sp, $sp, 0x28
-/* 3FA47C E011262C 00000000 */  nop       
+/* 3FA47C E011262C 00000000 */  nop

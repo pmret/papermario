@@ -23,7 +23,7 @@ glabel play_sound_at_position
 /* E04A4 80149DA4 0C05265D */  jal       func_80149974
 /* E04A8 80149DA8 E7A00010 */   swc1     $f0, 0x10($sp)
 /* E04AC 80149DAC 0805277B */  j         .L80149DEC
-/* E04B0 80149DB0 00000000 */   nop      
+/* E04B0 80149DB0 00000000 */   nop
 .L80149DB4:
 /* E04B4 80149DB4 27B10018 */  addiu     $s1, $sp, 0x18
 /* E04B8 80149DB8 0220382D */  daddu     $a3, $s1, $zero

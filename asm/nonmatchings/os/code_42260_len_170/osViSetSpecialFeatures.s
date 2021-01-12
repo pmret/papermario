@@ -99,6 +99,6 @@ glabel osViSetSpecialFeatures
 /* 423B8 80066FB8 8FB00010 */  lw        $s0, 0x10($sp)
 /* 423BC 80066FBC 03E00008 */  jr        $ra
 /* 423C0 80066FC0 27BD0018 */   addiu    $sp, $sp, 0x18
-/* 423C4 80066FC4 00000000 */  nop       
-/* 423C8 80066FC8 00000000 */  nop       
-/* 423CC 80066FCC 00000000 */  nop       
+/* 423C4 80066FC4 00000000 */  nop
+/* 423C8 80066FC8 00000000 */  nop
+/* 423CC 80066FCC 00000000 */  nop

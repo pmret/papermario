@@ -58,10 +58,10 @@ glabel func_802B7000_E225B0
 /* E22684 802B70D4 0C019D80 */  jal       guMtxCatF
 /* E22688 802B70D8 0200302D */   daddu    $a2, $s0, $zero
 /* E2268C 802B70DC 0200202D */  daddu     $a0, $s0, $zero
-/* E22690 802B70E0 3C108007 */  lui       $s0, %hi(D_800741F0)
-/* E22694 802B70E4 261041F0 */  addiu     $s0, $s0, %lo(D_800741F0)
-/* E22698 802B70E8 3C11800A */  lui       $s1, %hi(D_8009A674)
-/* E2269C 802B70EC 2631A674 */  addiu     $s1, $s1, %lo(D_8009A674)
+/* E22690 802B70E0 3C108007 */  lui       $s0, %hi(gMatrixListPos)
+/* E22694 802B70E4 261041F0 */  addiu     $s0, $s0, %lo(gMatrixListPos)
+/* E22698 802B70E8 3C11800A */  lui       $s1, %hi(gDisplayContext)
+/* E2269C 802B70EC 2631A674 */  addiu     $s1, $s1, %lo(gDisplayContext)
 /* E226A0 802B70F0 96050000 */  lhu       $a1, ($s0)
 /* E226A4 802B70F4 8E220000 */  lw        $v0, ($s1)
 /* E226A8 802B70F8 00052980 */  sll       $a1, $a1, 6
@@ -69,8 +69,8 @@ glabel func_802B7000_E225B0
 /* E226B0 802B7100 0C019D40 */  jal       guMtxF2L
 /* E226B4 802B7104 00452821 */   addu     $a1, $v0, $a1
 /* E226B8 802B7108 3C03DA38 */  lui       $v1, 0xda38
-/* E226BC 802B710C 3C05800A */  lui       $a1, %hi(D_8009A66C)
-/* E226C0 802B7110 24A5A66C */  addiu     $a1, $a1, %lo(D_8009A66C)
+/* E226BC 802B710C 3C05800A */  lui       $a1, %hi(gMasterGfxPos)
+/* E226C0 802B7110 24A5A66C */  addiu     $a1, $a1, %lo(gMasterGfxPos)
 /* E226C4 802B7114 34630002 */  ori       $v1, $v1, 2
 /* E226C8 802B7118 8CA40000 */  lw        $a0, ($a1)
 /* E226CC 802B711C 96020000 */  lhu       $v0, ($s0)
@@ -163,8 +163,8 @@ glabel func_802B7000_E225B0
 /* E22820 802B7270 0C04EBDC */  jal       func_8013AF70
 /* E22824 802B7274 A3B000B0 */   sb       $s0, 0xb0($sp)
 /* E22828 802B7278 3C05D838 */  lui       $a1, 0xd838
-/* E2282C 802B727C 3C03800A */  lui       $v1, %hi(D_8009A66C)
-/* E22830 802B7280 2463A66C */  addiu     $v1, $v1, %lo(D_8009A66C)
+/* E2282C 802B727C 3C03800A */  lui       $v1, %hi(gMasterGfxPos)
+/* E22830 802B7280 2463A66C */  addiu     $v1, $v1, %lo(gMasterGfxPos)
 /* E22834 802B7284 8C620000 */  lw        $v0, ($v1)
 /* E22838 802B7288 34A50002 */  ori       $a1, $a1, 2
 /* E2283C 802B728C 0040202D */  daddu     $a0, $v0, $zero

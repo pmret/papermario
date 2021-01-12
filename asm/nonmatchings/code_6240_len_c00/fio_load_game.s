@@ -36,7 +36,7 @@ glabel fio_load_game
 /* 674C 8002B34C AC640168 */   sw       $a0, 0x168($v1)
 .L8002B350:
 /* 6750 8002B350 0C00AD24 */  jal       fio_deserialize_state
-/* 6754 8002B354 00000000 */   nop      
+/* 6754 8002B354 00000000 */   nop
 /* 6758 8002B358 24020001 */  addiu     $v0, $zero, 1
 .L8002B35C:
 /* 675C 8002B35C 8FBF001C */  lw        $ra, 0x1c($sp)

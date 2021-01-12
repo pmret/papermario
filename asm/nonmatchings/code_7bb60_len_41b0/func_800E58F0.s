@@ -20,4 +20,4 @@ glabel func_800E58F0
 /* 7EDD8 800E5928 1440FFFA */  bnez      $v0, .L800E5914
 /* 7EDDC 800E592C 24630002 */   addiu    $v1, $v1, 2
 /* 7EDE0 800E5930 03E00008 */  jr        $ra
-/* 7EDE4 800E5934 00000000 */   nop      
+/* 7EDE4 800E5934 00000000 */   nop

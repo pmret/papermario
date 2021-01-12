@@ -54,8 +54,8 @@ glabel func_802A3C98
 /* 418AEC 802A3D5C 0220402D */  daddu     $t0, $s1, $zero
 .L802A3D60:
 /* 418AF0 802A3D60 0000982D */  daddu     $s3, $zero, $zero
-/* 418AF4 802A3D64 3C06800A */  lui       $a2, %hi(D_8009A66C)
-/* 418AF8 802A3D68 24C6A66C */  addiu     $a2, $a2, %lo(D_8009A66C)
+/* 418AF4 802A3D64 3C06800A */  lui       $a2, %hi(gMasterGfxPos)
+/* 418AF8 802A3D68 24C6A66C */  addiu     $a2, $a2, %lo(gMasterGfxPos)
 /* 418AFC 802A3D6C 3C05802B */  lui       $a1, %hi(D_802AD110)
 /* 418B00 802A3D70 24A5D110 */  addiu     $a1, $a1, %lo(D_802AD110)
 /* 418B04 802A3D74 8FA9004C */  lw        $t1, 0x4c($sp)

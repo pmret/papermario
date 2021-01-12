@@ -31,7 +31,7 @@ glabel can_pause
 /* 7FEF4 800E6A44 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 7FEF8 800E6A48 8C420144 */  lw        $v0, 0x144($v0)
 /* 7FEFC 800E6A4C 10400005 */  beqz      $v0, .L800E6A64
-/* 7FF00 800E6A50 00000000 */   nop      
+/* 7FF00 800E6A50 00000000 */   nop
 /* 7FF04 800E6A54 94420000 */  lhu       $v0, ($v0)
 /* 7FF08 800E6A58 30420001 */  andi      $v0, $v0, 1
 /* 7FF0C 800E6A5C 1440003C */  bnez      $v0, .L800E6B50
@@ -44,16 +44,16 @@ glabel can_pause
 /* 7FF24 800E6A74 14400036 */  bnez      $v0, .L800E6B50
 /* 7FF28 800E6A78 0000102D */   daddu    $v0, $zero, $zero
 /* 7FF2C 800E6A7C 0C04D07A */  jal       func_801341E8
-/* 7FF30 800E6A80 00000000 */   nop      
+/* 7FF30 800E6A80 00000000 */   nop
 /* 7FF34 800E6A84 14400032 */  bnez      $v0, .L800E6B50
 /* 7FF38 800E6A88 0000102D */   daddu    $v0, $zero, $zero
 /* 7FF3C 800E6A8C 8E220004 */  lw        $v0, 4($s1)
 /* 7FF40 800E6A90 30424000 */  andi      $v0, $v0, 0x4000
 /* 7FF44 800E6A94 1440002B */  bnez      $v0, .L800E6B44
-/* 7FF48 800E6A98 00000000 */   nop      
+/* 7FF48 800E6A98 00000000 */   nop
 /* 7FF4C 800E6A9C 82420000 */  lb        $v0, ($s2)
 /* 7FF50 800E6AA0 1440000A */  bnez      $v0, .L800E6ACC
-/* 7FF54 800E6AA4 00000000 */   nop      
+/* 7FF54 800E6AA4 00000000 */   nop
 /* 7FF58 800E6AA8 8E220000 */  lw        $v0, ($s1)
 /* 7FF5C 800E6AAC 30421000 */  andi      $v0, $v0, 0x1000
 /* 7FF60 800E6AB0 14400027 */  bnez      $v0, .L800E6B50
@@ -62,10 +62,10 @@ glabel can_pause
 /* 7FF6C 800E6ABC 10400023 */  beqz      $v0, .L800E6B4C
 /* 7FF70 800E6AC0 24020001 */   addiu    $v0, $zero, 1
 /* 7FF74 800E6AC4 08039AD4 */  j         .L800E6B50
-/* 7FF78 800E6AC8 00000000 */   nop      
+/* 7FF78 800E6AC8 00000000 */   nop
 .L800E6ACC:
 /* 7FF7C 800E6ACC 0C03ACF8 */  jal       partner_player_can_pause
-/* 7FF80 800E6AD0 00000000 */   nop      
+/* 7FF80 800E6AD0 00000000 */   nop
 /* 7FF84 800E6AD4 1040001D */  beqz      $v0, .L800E6B4C
 /* 7FF88 800E6AD8 24020006 */   addiu    $v0, $zero, 6
 /* 7FF8C 800E6ADC 82430003 */  lb        $v1, 3($s2)
@@ -89,11 +89,11 @@ glabel can_pause
 /* 7FFCC 800E6B1C 1602000C */  bne       $s0, $v0, .L800E6B50
 /* 7FFD0 800E6B20 0000102D */   daddu    $v0, $zero, $zero
 /* 7FFD4 800E6B24 0C0AF5F7 */  jal       func_802BD7DC
-/* 7FFD8 800E6B28 00000000 */   nop      
+/* 7FFD8 800E6B28 00000000 */   nop
 /* 7FFDC 800E6B2C 14400008 */  bnez      $v0, .L800E6B50
 /* 7FFE0 800E6B30 24020001 */   addiu    $v0, $zero, 1
 /* 7FFE4 800E6B34 08039AD1 */  j         .L800E6B44
-/* 7FFE8 800E6B38 00000000 */   nop      
+/* 7FFE8 800E6B38 00000000 */   nop
 .L800E6B3C:
 /* 7FFEC 800E6B3C 14620004 */  bne       $v1, $v0, .L800E6B50
 /* 7FFF0 800E6B40 0000102D */   daddu    $v0, $zero, $zero

@@ -181,7 +181,7 @@ ScriptInstance* start_script(Bytecode* initialLine, s32 priority, s32 initialSta
     newScript->ptrNextLine = initialLine;
     newScript->ptrFirstLine = initialLine;
     newScript->ptrCurrentLine = initialLine;
-    newScript->unk_60 = NULL;
+    newScript->userData = NULL;
     newScript->blockingParent = NULL;
     newScript->childScript = NULL;
     newScript->parentScript = NULL;
@@ -258,7 +258,7 @@ ScriptInstance* start_script_in_group(Bytecode* initialLine, u8 priority, u8 ini
         newScript->ptrNextLine = initialLine;
         newScript->ptrFirstLine = initialLine;
         newScript->ptrCurrentLine = initialLine;
-        newScript->unk_60 = 0;
+        newScript->userData = 0;
         newScript->blockingParent = 0;
         newScript->childScript = 0;
         newScript->parentScript = 0;
@@ -325,7 +325,7 @@ ScriptInstance* func_802C39F8(ScriptInstance* parentScript, Bytecode* nextLine, 
     child->ptrFirstLine = nextLine;
     child->ptrCurrentLine = nextLine;
     child->currentOpcode = 0;
-    child->unk_60 = NULL;
+    child->userData = NULL;
     child->blockingParent = NULL;
     child->parentScript = parentScript;
     child->childScript = NULL;
@@ -384,9 +384,9 @@ ScriptInstance* func_802C3C10(ScriptInstance* script, Bytecode* line, s32 arg2) 
     script->state |= arg2;
     script->timeScale = 1.0f;
 
-    if (script->unk_60 != NULL) {
-        heap_free(script->unk_60);
-        script->unk_60 = NULL;
+    if (script->userData != NULL) {
+        heap_free(script->userData);
+        script->userData = NULL;
     }
 
     if (script->childScript != 0) {
@@ -485,9 +485,9 @@ void kill_script(ScriptInstance* instanceToKill) {
         }
     }
 
-    if (instanceToKill->unk_60 != NULL) {
-        heap_free(instanceToKill->unk_60);
-        instanceToKill->unk_60 = NULL;
+    if (instanceToKill->userData != NULL) {
+        heap_free(instanceToKill->userData);
+        instanceToKill->userData = NULL;
     }
 
     SCRIPT_FREE(i);

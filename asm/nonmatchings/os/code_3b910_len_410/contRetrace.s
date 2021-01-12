@@ -17,7 +17,7 @@ glabel contRetrace
 /* 3BA8C 8006068C 3C04800E */  lui       $a0, %hi(nuSiMesgQ)
 /* 3BA90 80060690 2484AC78 */  addiu     $a0, $a0, %lo(nuSiMesgQ)
 /* 3BA94 80060694 0C018668 */  jal       osContStartReadData
-/* 3BA98 80060698 00000000 */   nop      
+/* 3BA98 80060698 00000000 */   nop
 /* 3BA9C 8006069C 14400016 */  bnez      $v0, .L800606F8
 /* 3BAA0 800606A0 0000282D */   daddu    $a1, $zero, $zero
 /* 3BAA4 800606A4 3C04800E */  lui       $a0, %hi(nuSiMesgQ)
@@ -45,7 +45,7 @@ glabel contRetrace
 /* 3BAF8 800606F8 3C028009 */  lui       $v0, %hi(D_80093D20)
 /* 3BAFC 800606FC 8C423D20 */  lw        $v0, %lo(D_80093D20)($v0)
 /* 3BB00 80060700 10400003 */  beqz      $v0, .L80060710
-/* 3BB04 80060704 00000000 */   nop      
+/* 3BB04 80060704 00000000 */   nop
 /* 3BB08 80060708 0040F809 */  jalr      $v0
 /* 3BB0C 8006070C 86040000 */   lh       $a0, ($s0)
 .L80060710:

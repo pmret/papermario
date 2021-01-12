@@ -53,8 +53,8 @@ glabel func_802406EC_B070EC
 /* B071AC 802407AC 0C04E9C1 */  jal       func_8013A704
 /* B071B0 802407B0 E6020018 */   swc1     $f2, 0x18($s0)
 /* B071B4 802407B4 0000202D */  daddu     $a0, $zero, $zero
-/* B071B8 802407B8 3C058024 */  lui       $a1, %hi(D_80240310)
-/* B071BC 802407BC 24A50310 */  addiu     $a1, $a1, %lo(D_80240310)
+/* B071B8 802407B8 3C058024 */  lui       $a1, %hi(func_80240310_B06D10)
+/* B071BC 802407BC 24A50310 */  addiu     $a1, $a1, %lo(func_80240310_B06D10)
 /* B071C0 802407C0 0C048C56 */  jal       bind_dynamic_entity_3
 /* B071C4 802407C4 AE020000 */   sw       $v0, ($s0)
 /* B071C8 802407C8 0260202D */  daddu     $a0, $s3, $zero

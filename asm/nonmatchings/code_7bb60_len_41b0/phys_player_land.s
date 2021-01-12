@@ -32,7 +32,7 @@ glabel phys_player_land
 /* 7C794 800E32E4 14400003 */  bnez      $v0, .L800E32F4
 /* 7C798 800E32E8 0060882D */   daddu    $s1, $v1, $zero
 /* 7C79C 800E32EC 0C03954C */  jal       func_800E5530
-/* 7C7A0 800E32F0 00000000 */   nop      
+/* 7C7A0 800E32F0 00000000 */   nop
 .L800E32F4:
 /* 7C7A4 800E32F4 96240002 */  lhu       $a0, 2($s1)
 /* 7C7A8 800E32F8 2402FFFF */  addiu     $v0, $zero, -1
@@ -47,7 +47,7 @@ glabel phys_player_land
 /* 7C7CC 800E331C 1040001C */  beqz      $v0, .L800E3390
 /* 7C7D0 800E3320 28620007 */   slti     $v0, $v1, 7
 /* 7C7D4 800E3324 1440001A */  bnez      $v0, .L800E3390
-/* 7C7D8 800E3328 00000000 */   nop      
+/* 7C7D8 800E3328 00000000 */   nop
 /* 7C7DC 800E332C 0C04417A */  jal       get_entity_by_index
 /* 7C7E0 800E3330 86240002 */   lh       $a0, 2($s1)
 /* 7C7E4 800E3334 90430006 */  lbu       $v1, 6($v0)
@@ -63,14 +63,14 @@ glabel phys_player_land
 /* 7C80C 800E335C 10620007 */  beq       $v1, $v0, .L800E337C
 /* 7C810 800E3360 2402000E */   addiu    $v0, $zero, 0xe
 /* 7C814 800E3364 10620005 */  beq       $v1, $v0, .L800E337C
-/* 7C818 800E3368 00000000 */   nop      
+/* 7C818 800E3368 00000000 */   nop
 /* 7C81C 800E336C 0C039769 */  jal       set_action_state
 /* 7C820 800E3370 24040007 */   addiu    $a0, $zero, 7
 /* 7C824 800E3374 08038D0D */  j         .L800E3434
-/* 7C828 800E3378 00000000 */   nop      
+/* 7C828 800E3378 00000000 */   nop
 .L800E337C:
 /* 7C82C 800E337C 0C03805E */  jal       disable_player_input
-/* 7C830 800E3380 00000000 */   nop      
+/* 7C830 800E3380 00000000 */   nop
 /* 7C834 800E3384 2402000B */  addiu     $v0, $zero, 0xb
 /* 7C838 800E3388 08038D0D */  j         .L800E3434
 /* 7C83C 800E338C A20200B6 */   sb       $v0, 0xb6($s0)
@@ -82,7 +82,7 @@ glabel phys_player_land
 /* 7C850 800E33A0 0C039769 */  jal       set_action_state
 /* 7C854 800E33A4 24040002 */   addiu    $a0, $zero, 2
 /* 7C858 800E33A8 08038D0D */  j         .L800E3434
-/* 7C85C 800E33AC 00000000 */   nop      
+/* 7C85C 800E33AC 00000000 */   nop
 .L800E33B0:
 /* 7C860 800E33B0 820300B4 */  lb        $v1, 0xb4($s0)
 /* 7C864 800E33B4 14620005 */  bne       $v1, $v0, .L800E33CC
@@ -90,37 +90,37 @@ glabel phys_player_land
 /* 7C86C 800E33BC 0C039769 */  jal       set_action_state
 /* 7C870 800E33C0 24040020 */   addiu    $a0, $zero, 0x20
 /* 7C874 800E33C4 08038D0D */  j         .L800E3434
-/* 7C878 800E33C8 00000000 */   nop      
+/* 7C878 800E33C8 00000000 */   nop
 .L800E33CC:
 /* 7C87C 800E33CC 0C0388C1 */  jal       input_to_move_vector
 /* 7C880 800E33D0 27A50014 */   addiu    $a1, $sp, 0x14
 /* 7C884 800E33D4 C7A00014 */  lwc1      $f0, 0x14($sp)
 /* 7C888 800E33D8 44801000 */  mtc1      $zero, $f2
-/* 7C88C 800E33DC 00000000 */  nop       
+/* 7C88C 800E33DC 00000000 */  nop
 /* 7C890 800E33E0 46020032 */  c.eq.s    $f0, $f2
-/* 7C894 800E33E4 00000000 */  nop       
+/* 7C894 800E33E4 00000000 */  nop
 /* 7C898 800E33E8 4500000C */  bc1f      .L800E341C
 /* 7C89C 800E33EC 24020009 */   addiu    $v0, $zero, 9
 /* 7C8A0 800E33F0 820300B4 */  lb        $v1, 0xb4($s0)
 /* 7C8A4 800E33F4 10620005 */  beq       $v1, $v0, .L800E340C
-/* 7C8A8 800E33F8 00000000 */   nop      
+/* 7C8A8 800E33F8 00000000 */   nop
 /* 7C8AC 800E33FC 0C039769 */  jal       set_action_state
 /* 7C8B0 800E3400 2404000A */   addiu    $a0, $zero, 0xa
 /* 7C8B4 800E3404 08038D0D */  j         .L800E3434
-/* 7C8B8 800E3408 00000000 */   nop      
+/* 7C8B8 800E3408 00000000 */   nop
 .L800E340C:
 /* 7C8BC 800E340C 0C039769 */  jal       set_action_state
 /* 7C8C0 800E3410 2404000B */   addiu    $a0, $zero, 0xb
 /* 7C8C4 800E3414 08038D0D */  j         .L800E3434
-/* 7C8C8 800E3418 00000000 */   nop      
+/* 7C8C8 800E3418 00000000 */   nop
 .L800E341C:
 /* 7C8CC 800E341C 45010003 */  bc1t      .L800E342C
-/* 7C8D0 800E3420 00000000 */   nop      
+/* 7C8D0 800E3420 00000000 */   nop
 /* 7C8D4 800E3424 C7A00010 */  lwc1      $f0, 0x10($sp)
 /* 7C8D8 800E3428 E6000080 */  swc1      $f0, 0x80($s0)
 .L800E342C:
 /* 7C8DC 800E342C 0C0397DA */  jal       update_locomotion_state
-/* 7C8E0 800E3430 00000000 */   nop      
+/* 7C8E0 800E3430 00000000 */   nop
 .L800E3434:
 /* 7C8E4 800E3434 8FBF0020 */  lw        $ra, 0x20($sp)
 /* 7C8E8 800E3438 8FB1001C */  lw        $s1, 0x1c($sp)

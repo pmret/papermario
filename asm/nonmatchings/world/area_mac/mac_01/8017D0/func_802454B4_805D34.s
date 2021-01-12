@@ -5,8 +5,8 @@ glabel func_802454B4_805D34
 /* 805D34 802454B4 3C06FCFF */  lui       $a2, 0xfcff
 /* 805D38 802454B8 34C6C7FF */  ori       $a2, $a2, 0xc7ff
 /* 805D3C 802454BC 3C05FF8F */  lui       $a1, 0xff8f
-/* 805D40 802454C0 3C04800A */  lui       $a0, %hi(D_8009A66C)
-/* 805D44 802454C4 2484A66C */  addiu     $a0, $a0, %lo(D_8009A66C)
+/* 805D40 802454C0 3C04800A */  lui       $a0, %hi(gMasterGfxPos)
+/* 805D44 802454C4 2484A66C */  addiu     $a0, $a0, %lo(gMasterGfxPos)
 /* 805D48 802454C8 8C820000 */  lw        $v0, ($a0)
 /* 805D4C 802454CC 34A57FBF */  ori       $a1, $a1, 0x7fbf
 /* 805D50 802454D0 0040182D */  daddu     $v1, $v0, $zero

@@ -7,8 +7,8 @@ glabel func_E02000AC
 /* 325B84 E02000B4 34C680FF */  ori       $a2, $a2, 0x80ff
 /* 325B88 E02000B8 AFB50034 */  sw        $s5, 0x34($sp)
 /* 325B8C E02000BC 0000A82D */  daddu     $s5, $zero, $zero
-/* 325B90 E02000C0 3C02800A */  lui       $v0, %hi(D_8009A66C)
-/* 325B94 E02000C4 2442A66C */  addiu     $v0, $v0, %lo(D_8009A66C)
+/* 325B90 E02000C0 3C02800A */  lui       $v0, %hi(gMasterGfxPos)
+/* 325B94 E02000C4 2442A66C */  addiu     $v0, $v0, %lo(gMasterGfxPos)
 /* 325B98 E02000C8 0040502D */  daddu     $t2, $v0, $zero
 /* 325B9C E02000CC 3C0EF510 */  lui       $t6, 0xf510
 /* 325BA0 E02000D0 35CE2800 */  ori       $t6, $t6, 0x2800

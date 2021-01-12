@@ -14,14 +14,14 @@ glabel func_E007C000
 /* 37D4B4 E007C024 27A40010 */  addiu     $a0, $sp, 0x10
 /* 37D4B8 E007C028 AFB20030 */  sw        $s2, 0x30($sp)
 /* 37D4BC E007C02C 8FB2006C */  lw        $s2, 0x6c($sp)
-/* 37D4C0 E007C030 3C02E008 */  lui       $v0, %hi(D_E007C128)
-/* 37D4C4 E007C034 2442C128 */  addiu     $v0, $v0, %lo(D_E007C128)
+/* 37D4C0 E007C030 3C02E008 */  lui       $v0, %hi(func_E007C128)
+/* 37D4C4 E007C034 2442C128 */  addiu     $v0, $v0, %lo(func_E007C128)
 /* 37D4C8 E007C038 AFA20018 */  sw        $v0, 0x18($sp)
-/* 37D4CC E007C03C 3C02E008 */  lui       $v0, %hi(D_E007C130)
-/* 37D4D0 E007C040 2442C130 */  addiu     $v0, $v0, %lo(D_E007C130)
+/* 37D4CC E007C03C 3C02E008 */  lui       $v0, %hi(func_E007C130)
+/* 37D4D0 E007C040 2442C130 */  addiu     $v0, $v0, %lo(func_E007C130)
 /* 37D4D4 E007C044 AFA2001C */  sw        $v0, 0x1c($sp)
-/* 37D4D8 E007C048 3C02E008 */  lui       $v0, %hi(D_E007C1B0)
-/* 37D4DC E007C04C 2442C1B0 */  addiu     $v0, $v0, %lo(D_E007C1B0)
+/* 37D4D8 E007C048 3C02E008 */  lui       $v0, %hi(func_E007C1B0)
+/* 37D4DC E007C04C 2442C1B0 */  addiu     $v0, $v0, %lo(func_E007C1B0)
 /* 37D4E0 E007C050 AFA20020 */  sw        $v0, 0x20($sp)
 /* 37D4E4 E007C054 2402003E */  addiu     $v0, $zero, 0x3e
 /* 37D4E8 E007C058 AFBF0038 */  sw        $ra, 0x38($sp)
@@ -42,7 +42,7 @@ glabel func_E007C000
 /* 37D524 E007C094 0200202D */   daddu    $a0, $s0, $zero
 .LE007C098:
 /* 37D528 E007C098 0801F026 */  j         .LE007C098
-/* 37D52C E007C09C 00000000 */   nop      
+/* 37D52C E007C09C 00000000 */   nop
 .LE007C0A0:
 /* 37D530 E007C0A0 00112840 */  sll       $a1, $s1, 1
 /* 37D534 E007C0A4 00B12821 */  addu      $a1, $a1, $s1
@@ -67,7 +67,7 @@ glabel func_E007C000
 .LE007C0F0:
 /* 37D580 E007C0F0 3C014220 */  lui       $at, 0x4220
 /* 37D584 E007C0F4 44810000 */  mtc1      $at, $f0
-/* 37D588 E007C0F8 00000000 */  nop       
+/* 37D588 E007C0F8 00000000 */  nop
 /* 37D58C E007C0FC E6000028 */  swc1      $f0, 0x28($s0)
 .LE007C100:
 /* 37D590 E007C100 8FBF0038 */  lw        $ra, 0x38($sp)

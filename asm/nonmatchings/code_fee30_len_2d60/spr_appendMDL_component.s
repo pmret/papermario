@@ -109,10 +109,10 @@ glabel spr_appendMDL_component
 .L802DCA84:
 /* FFB74 802DCA84 36521630 */  ori       $s2, $s2, 0x1630
 /* FFB78 802DCA88 27A40020 */  addiu     $a0, $sp, 0x20
-/* FFB7C 802DCA8C 3C108007 */  lui       $s0, %hi(D_800741F0)
-/* FFB80 802DCA90 261041F0 */  addiu     $s0, $s0, %lo(D_800741F0)
-/* FFB84 802DCA94 3C11800A */  lui       $s1, %hi(D_8009A674)
-/* FFB88 802DCA98 2631A674 */  addiu     $s1, $s1, %lo(D_8009A674)
+/* FFB7C 802DCA8C 3C108007 */  lui       $s0, %hi(gMatrixListPos)
+/* FFB80 802DCA90 261041F0 */  addiu     $s0, $s0, %lo(gMatrixListPos)
+/* FFB84 802DCA94 3C11800A */  lui       $s1, %hi(gDisplayContext)
+/* FFB88 802DCA98 2631A674 */  addiu     $s1, $s1, %lo(gDisplayContext)
 /* FFB8C 802DCA9C 96050000 */  lhu       $a1, ($s0)
 /* FFB90 802DCAA0 8E220000 */  lw        $v0, ($s1)
 /* FFB94 802DCAA4 00052980 */  sll       $a1, $a1, 6
@@ -120,8 +120,8 @@ glabel spr_appendMDL_component
 /* FFB9C 802DCAAC 0C019D40 */  jal       guMtxF2L
 /* FFBA0 802DCAB0 00452821 */   addu     $a1, $v0, $a1
 /* FFBA4 802DCAB4 3C02DA38 */  lui       $v0, 0xda38
-/* FFBA8 802DCAB8 3C08800A */  lui       $t0, %hi(D_8009A66C)
-/* FFBAC 802DCABC 2508A66C */  addiu     $t0, $t0, %lo(D_8009A66C)
+/* FFBA8 802DCAB8 3C08800A */  lui       $t0, %hi(gMasterGfxPos)
+/* FFBAC 802DCABC 2508A66C */  addiu     $t0, $t0, %lo(gMasterGfxPos)
 /* FFBB0 802DCAC0 34420002 */  ori       $v0, $v0, 2
 /* FFBB4 802DCAC4 8D070000 */  lw        $a3, ($t0)
 /* FFBB8 802DCAC8 96040000 */  lhu       $a0, ($s0)
@@ -247,8 +247,8 @@ glabel spr_appendMDL_component
 /* FFD80 802DCC90 00431024 */  and       $v0, $v0, $v1
 /* FFD84 802DCC94 AE620000 */  sw        $v0, ($s3)
 .L802DCC98:
-/* FFD88 802DCC98 3C03800A */  lui       $v1, %hi(D_8009A66C)
-/* FFD8C 802DCC9C 2463A66C */  addiu     $v1, $v1, %lo(D_8009A66C)
+/* FFD88 802DCC98 3C03800A */  lui       $v1, %hi(gMasterGfxPos)
+/* FFD8C 802DCC9C 2463A66C */  addiu     $v1, $v1, %lo(gMasterGfxPos)
 /* FFD90 802DCCA0 8C620000 */  lw        $v0, ($v1)
 /* FFD94 802DCCA4 34A50002 */  ori       $a1, $a1, 2
 /* FFD98 802DCCA8 0040202D */  daddu     $a0, $v0, $zero

@@ -61,8 +61,8 @@ glabel func_802407E8_A1B8E8
 /* A1B9C0 802408C0 1480FFDB */  bnez      $a0, .L80240830
 /* A1B9C4 802408C4 A6430002 */   sh       $v1, 2($s2)
 .L802408C8:
-/* A1B9C8 802408C8 3C03800A */  lui       $v1, %hi(D_8009A66C)
-/* A1B9CC 802408CC 2463A66C */  addiu     $v1, $v1, %lo(D_8009A66C)
+/* A1B9C8 802408C8 3C03800A */  lui       $v1, %hi(gMasterGfxPos)
+/* A1B9CC 802408CC 2463A66C */  addiu     $v1, $v1, %lo(gMasterGfxPos)
 /* A1B9D0 802408D0 8C620000 */  lw        $v0, ($v1)
 /* A1B9D4 802408D4 0000202D */  daddu     $a0, $zero, $zero
 /* A1B9D8 802408D8 0040802D */  daddu     $s0, $v0, $zero

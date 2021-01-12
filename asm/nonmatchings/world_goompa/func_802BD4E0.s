@@ -8,7 +8,7 @@ glabel func_802BD4E0
 /* 324DFC 802BD4EC AFBF0010 */  sw        $ra, 0x10($sp)
 /* 324E00 802BD4F0 8CA20000 */  lw        $v0, ($a1)
 /* 324E04 802BD4F4 10400008 */  beqz      $v0, .L802BD518
-/* 324E08 802BD4F8 00000000 */   nop      
+/* 324E08 802BD4F8 00000000 */   nop
 /* 324E0C 802BD4FC 3C03802C */  lui       $v1, %hi(D_802BD58C)
 /* 324E10 802BD500 8C63D58C */  lw        $v1, %lo(D_802BD58C)($v1)
 /* 324E14 802BD504 8C620008 */  lw        $v0, 8($v1)

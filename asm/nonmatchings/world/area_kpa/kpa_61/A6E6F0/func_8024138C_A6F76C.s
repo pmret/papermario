@@ -106,9 +106,9 @@ glabel func_8024138C_A6F76C
 /* A6F8FC 8024151C E600000C */   swc1     $f0, 0xc($s0)
 /* A6F900 80241520 0C00A67F */  jal       rand_int
 /* A6F904 80241524 2404000A */   addiu    $a0, $zero, 0xa
-/* A6F908 80241528 3C018024 */  lui       $at, %hi(D_80243D78)
+/* A6F908 80241528 3C018024 */  lui       $at, %hi(func_80243D78_855EE8)
 /* A6F90C 8024152C 08090551 */  j         .L80241544
-/* A6F910 80241530 D4203D78 */   ldc1     $f0, %lo(D_80243D78)($at)
+/* A6F910 80241530 D4203D78 */   ldc1     $f0, %lo(func_80243D78_855EE8)($at)
 .L80241534:
 /* A6F914 80241534 0C00A67F */  jal       rand_int
 /* A6F918 80241538 2404000A */   addiu    $a0, $zero, 0xa

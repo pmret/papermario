@@ -5,8 +5,8 @@ glabel osViGetCurrentContext
 /* 47FA0 8006CBA0 3C028009 */  lui       $v0, %hi(D_800959D0)
 /* 47FA4 8006CBA4 03E00008 */  jr        $ra
 /* 47FA8 8006CBA8 8C4259D0 */   lw       $v0, %lo(D_800959D0)($v0)
-/* 47FAC 8006CBAC 00000000 */  nop       
-/* 47FB0 8006CBB0 00000000 */  nop       
-/* 47FB4 8006CBB4 00000000 */  nop       
-/* 47FB8 8006CBB8 00000000 */  nop       
-/* 47FBC 8006CBBC 00000000 */  nop       
+/* 47FAC 8006CBAC 00000000 */  nop
+/* 47FB0 8006CBB0 00000000 */  nop
+/* 47FB4 8006CBB4 00000000 */  nop
+/* 47FB8 8006CBB8 00000000 */  nop
+/* 47FBC 8006CBBC 00000000 */  nop

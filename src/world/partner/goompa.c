@@ -36,7 +36,7 @@ Script world_goompa_take_out = SCRIPT({
     GoompaTakeOut();
 });
 
-s32 unk = 0x802BD600;
+s32 D_802BD58C = 0x802BD600;
 
 Script world_goompa_update = SCRIPT({
     func_802BD14C();

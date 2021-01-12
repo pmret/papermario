@@ -33,4 +33,4 @@ glabel func_80072B30
 /* 4DFA0 80072BA0 3C01800E */  lui       $at, %hi(gBattleStatus+0x484)
 /* 4DFA4 80072BA4 AC20C4F4 */  sw        $zero, %lo(gBattleStatus+0x484)($at)
 /* 4DFA8 80072BA8 03E00008 */  jr        $ra
-/* 4DFAC 80072BAC 00000000 */   nop      
+/* 4DFAC 80072BAC 00000000 */   nop

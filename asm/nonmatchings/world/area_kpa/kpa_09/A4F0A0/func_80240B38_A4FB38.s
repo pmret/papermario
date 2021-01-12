@@ -80,8 +80,8 @@ glabel func_80240B38_A4FB38
 /* A4FC50 80240C50 C64C006C */  lwc1      $f12, 0x6c($s2)
 /* A4FC54 80240C54 0C00A6C9 */  jal       clamp_angle
 /* A4FC58 80240C58 00000000 */   nop      
-/* A4FC5C 80240C5C 3C018024 */  lui       $at, %hi(D_802427D0)
-/* A4FC60 80240C60 D43827D0 */  ldc1      $f24, %lo(D_802427D0)($at)
+/* A4FC5C 80240C5C 3C018024 */  lui       $at, %hi(func_802427D0_833FD0)
+/* A4FC60 80240C60 D43827D0 */  ldc1      $f24, %lo(func_802427D0_833FD0)($at)
 /* A4FC64 80240C64 46000521 */  cvt.d.s   $f20, $f0
 /* A4FC68 80240C68 4638A300 */  add.d     $f12, $f20, $f24
 /* A4FC6C 80240C6C 3C018024 */  lui       $at, %hi(D_802427D8)

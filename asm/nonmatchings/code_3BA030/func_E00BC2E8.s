@@ -5,8 +5,8 @@ glabel func_E00BC2E8
 /* 3BA318 E00BC2E8 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* 3BA31C E00BC2EC AFBF0020 */  sw        $ra, 0x20($sp)
 /* 3BA320 E00BC2F0 8C85000C */  lw        $a1, 0xc($a0)
-/* 3BA324 E00BC2F4 3C02E00C */  lui       $v0, %hi(D_E00BC374)
-/* 3BA328 E00BC2F8 2442C374 */  addiu     $v0, $v0, %lo(D_E00BC374)
+/* 3BA324 E00BC2F4 3C02E00C */  lui       $v0, %hi(func_E00BC374)
+/* 3BA328 E00BC2F8 2442C374 */  addiu     $v0, $v0, %lo(func_E00BC374)
 /* 3BA32C E00BC2FC AFA2001C */  sw        $v0, 0x1c($sp)
 /* 3BA330 E00BC300 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
 /* 3BA334 E00BC304 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
@@ -18,7 +18,7 @@ glabel func_E00BC2E8
 /* 3BA34C E00BC31C C4A0000C */  lwc1      $f0, 0xc($a1)
 /* 3BA350 E00BC320 3C01447A */  lui       $at, 0x447a
 /* 3BA354 E00BC324 44811000 */  mtc1      $at, $f2
-/* 3BA358 E00BC328 00000000 */  nop       
+/* 3BA358 E00BC328 00000000 */  nop
 /* 3BA35C E00BC32C 46020000 */  add.s     $f0, $f0, $f2
 /* 3BA360 E00BC330 4600010D */  trunc.w.s $f4, $f0
 /* 3BA364 E00BC334 E7A40014 */  swc1      $f4, 0x14($sp)

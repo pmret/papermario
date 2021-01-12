@@ -26,14 +26,14 @@ glabel osPfsFileState
 /* 44074 80068C74 0C01A775 */  jal       osCheckId
 /* 44078 80068C78 02202021 */   addu     $a0, $s1, $zero
 /* 4407C 80068C7C 14400044 */  bnez      $v0, .L80068D90
-/* 44080 80068C80 00000000 */   nop      
+/* 44080 80068C80 00000000 */   nop
 /* 44084 80068C84 92220065 */  lbu       $v0, 0x65($s1)
 /* 44088 80068C88 10400005 */  beqz      $v0, .L80068CA0
 /* 4408C 80068C8C 02202021 */   addu     $a0, $s1, $zero
 /* 44090 80068C90 0C01A5B4 */  jal       osPfsSelectBank
 /* 44094 80068C94 00002821 */   addu     $a1, $zero, $zero
 /* 44098 80068C98 1440003D */  bnez      $v0, .L80068D90
-/* 4409C 80068C9C 00000000 */   nop      
+/* 4409C 80068C9C 00000000 */   nop
 .L80068CA0:
 /* 440A0 80068CA0 8E240004 */  lw        $a0, 4($s1)
 /* 440A4 80068CA4 8E26005C */  lw        $a2, 0x5c($s1)
@@ -43,7 +43,7 @@ glabel osPfsFileState
 /* 440B4 80068CB4 0C01A874 */  jal       osContRamRead
 /* 440B8 80068CB8 30C6FFFF */   andi     $a2, $a2, 0xffff
 /* 440BC 80068CBC 14400034 */  bnez      $v0, .L80068D90
-/* 440C0 80068CC0 00000000 */   nop      
+/* 440C0 80068CC0 00000000 */   nop
 /* 440C4 80068CC4 97A20114 */  lhu       $v0, 0x114($sp)
 /* 440C8 80068CC8 10400031 */  beqz      $v0, .L80068D90
 /* 440CC 80068CCC 24020005 */   addiu    $v0, $zero, 5
@@ -71,7 +71,7 @@ glabel osPfsFileState
 /* 44118 80068D18 0C01A7A3 */  jal       osPfsRWInode
 /* 4411C 80068D1C 00003021 */   addu     $a2, $zero, $zero
 /* 44120 80068D20 1440001B */  bnez      $v0, .L80068D90
-/* 44124 80068D24 00000000 */   nop      
+/* 44124 80068D24 00000000 */   nop
 .L80068D28:
 /* 44128 80068D28 320200FF */  andi      $v0, $s0, 0xff
 /* 4412C 80068D2C 00021040 */  sll       $v0, $v0, 1
@@ -110,6 +110,6 @@ glabel osPfsFileState
 /* 441A8 80068DA8 8FB00130 */  lw        $s0, 0x130($sp)
 /* 441AC 80068DAC 03E00008 */  jr        $ra
 /* 441B0 80068DB0 27BD0150 */   addiu    $sp, $sp, 0x150
-/* 441B4 80068DB4 00000000 */  nop       
-/* 441B8 80068DB8 00000000 */  nop       
-/* 441BC 80068DBC 00000000 */  nop       
+/* 441B4 80068DB4 00000000 */  nop
+/* 441B8 80068DB8 00000000 */  nop
+/* 441BC 80068DBC 00000000 */  nop

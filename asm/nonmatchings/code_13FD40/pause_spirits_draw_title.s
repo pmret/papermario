@@ -18,7 +18,7 @@ glabel pause_spirits_draw_title
 /* 140608 8024D2C8 806300D4 */  lb        $v1, %lo(gPauseMenuCurrentTab)($v1)
 /* 14060C 8024D2CC 24020005 */  addiu     $v0, $zero, 5
 /* 140610 8024D2D0 1462001C */  bne       $v1, $v0, .L8024D344
-/* 140614 8024D2D4 00000000 */   nop      
+/* 140614 8024D2D4 00000000 */   nop
 /* 140618 8024D2D8 92020003 */  lbu       $v0, 3($s0)
 /* 14061C 8024D2DC 8083028E */  lb        $v1, 0x28e($a0)
 /* 140620 8024D2E0 00021080 */  sll       $v0, $v0, 2

@@ -13,23 +13,23 @@ glabel func_8003B47C
 /* 1689C 8003B49C 00220821 */  addu      $at, $at, $v0
 /* 168A0 8003B4A0 8C2284C8 */  lw        $v0, %lo(D_800984C8)($at)
 /* 168A4 8003B4A4 00400008 */  jr        $v0
-/* 168A8 8003B4A8 00000000 */   nop      
+/* 168A8 8003B4A8 00000000 */   nop
 /* 168AC 8003B4AC 0C00ED40 */  jal       func_8003B500
 /* 168B0 8003B4B0 00E0302D */   daddu    $a2, $a3, $zero
 /* 168B4 8003B4B4 0800ED3D */  j         .L8003B4F4
-/* 168B8 8003B4B8 00000000 */   nop      
+/* 168B8 8003B4B8 00000000 */   nop
 /* 168BC 8003B4BC 0C00ED6D */  jal       func_8003B5B4
 /* 168C0 8003B4C0 00E0302D */   daddu    $a2, $a3, $zero
 /* 168C4 8003B4C4 0800ED3D */  j         .L8003B4F4
-/* 168C8 8003B4C8 00000000 */   nop      
+/* 168C8 8003B4C8 00000000 */   nop
 /* 168CC 8003B4CC 0C00EE98 */  jal       func_8003BA60
 /* 168D0 8003B4D0 0000302D */   daddu    $a2, $zero, $zero
 /* 168D4 8003B4D4 0800ED3D */  j         .L8003B4F4
-/* 168D8 8003B4D8 00000000 */   nop      
+/* 168D8 8003B4D8 00000000 */   nop
 /* 168DC 8003B4DC 0C00EE98 */  jal       func_8003BA60
 /* 168E0 8003B4E0 24060001 */   addiu    $a2, $zero, 1
 /* 168E4 8003B4E4 0800ED3D */  j         .L8003B4F4
-/* 168E8 8003B4E8 00000000 */   nop      
+/* 168E8 8003B4E8 00000000 */   nop
 /* 168EC 8003B4EC 0C00EFB6 */  jal       func_8003BED8
 /* 168F0 8003B4F0 00E0302D */   daddu    $a2, $a3, $zero
 .L8003B4F4:

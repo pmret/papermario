@@ -9,8 +9,8 @@ glabel func_E0116884
 /* 402ED4 E0116894 34A50024 */  ori       $a1, $a1, 0x24
 /* 402ED8 E0116898 AFB3001C */  sw        $s3, 0x1c($sp)
 /* 402EDC E011689C 24130001 */  addiu     $s3, $zero, 1
-/* 402EE0 E01168A0 3C06800A */  lui       $a2, %hi(D_8009A66C)
-/* 402EE4 E01168A4 24C6A66C */  addiu     $a2, $a2, %lo(D_8009A66C)
+/* 402EE0 E01168A0 3C06800A */  lui       $a2, %hi(gMasterGfxPos)
+/* 402EE4 E01168A4 24C6A66C */  addiu     $a2, $a2, %lo(gMasterGfxPos)
 /* 402EE8 E01168A8 3C03E700 */  lui       $v1, 0xe700
 /* 402EEC E01168AC AFBF0034 */  sw        $ra, 0x34($sp)
 /* 402EF0 E01168B0 AFBE0030 */  sw        $fp, 0x30($sp)

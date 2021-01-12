@@ -40,4 +40,4 @@ glabel osSpRawStartDma
 /* 47BB0 8006C7B0 8FB00010 */  lw        $s0, 0x10($sp)
 /* 47BB4 8006C7B4 03E00008 */  jr        $ra
 /* 47BB8 8006C7B8 27BD0028 */   addiu    $sp, $sp, 0x28
-/* 47BBC 8006C7BC 00000000 */  nop       
+/* 47BBC 8006C7BC 00000000 */  nop

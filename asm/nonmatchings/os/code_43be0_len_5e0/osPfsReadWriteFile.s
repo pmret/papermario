@@ -46,7 +46,7 @@ glabel osPfsReadWriteFile
 /* 43C84 80068884 00002821 */   addu     $a1, $zero, $zero
 /* 43C88 80068888 00401821 */  addu      $v1, $v0, $zero
 /* 43C8C 8006888C 146000DA */  bnez      $v1, .L80068BF8
-/* 43C90 80068890 00000000 */   nop      
+/* 43C90 80068890 00000000 */   nop
 .L80068894:
 /* 43C94 80068894 8E040004 */  lw        $a0, 4($s0)
 /* 43C98 80068898 8E06005C */  lw        $a2, 0x5c($s0)
@@ -57,7 +57,7 @@ glabel osPfsReadWriteFile
 /* 43CAC 800688AC 30C6FFFF */   andi     $a2, $a2, 0xffff
 /* 43CB0 800688B0 00401821 */  addu      $v1, $v0, $zero
 /* 43CB4 800688B4 146000D0 */  bnez      $v1, .L80068BF8
-/* 43CB8 800688B8 00000000 */   nop      
+/* 43CB8 800688B8 00000000 */   nop
 /* 43CBC 800688BC 97A2001C */  lhu       $v0, 0x1c($sp)
 /* 43CC0 800688C0 104000CD */  beqz      $v0, .L80068BF8
 /* 43CC4 800688C4 24020005 */   addiu    $v0, $zero, 5
@@ -68,12 +68,12 @@ glabel osPfsReadWriteFile
 /* 43CD8 800688D8 8E030060 */  lw        $v1, 0x60($s0)
 /* 43CDC 800688DC 0043102A */  slt       $v0, $v0, $v1
 /* 43CE0 800688E0 1440000D */  bnez      $v0, .L80068918
-/* 43CE4 800688E4 00000000 */   nop      
+/* 43CE4 800688E4 00000000 */   nop
 /* 43CE8 800688E8 93A2001E */  lbu       $v0, 0x1e($sp)
 /* 43CEC 800688EC 92030064 */  lbu       $v1, 0x64($s0)
 /* 43CF0 800688F0 0043102B */  sltu      $v0, $v0, $v1
 /* 43CF4 800688F4 10400008 */  beqz      $v0, .L80068918
-/* 43CF8 800688F8 00000000 */   nop      
+/* 43CF8 800688F8 00000000 */   nop
 /* 43CFC 800688FC 93A2001F */  lbu       $v0, 0x1f($sp)
 /* 43D00 80068900 2C430001 */  sltiu     $v1, $v0, 1
 /* 43D04 80068904 2C420080 */  sltiu     $v0, $v0, 0x80
@@ -133,12 +133,12 @@ glabel osPfsReadWriteFile
 /* 43DC0 800689C0 8E020060 */  lw        $v0, 0x60($s0)
 /* 43DC4 800689C4 0062182A */  slt       $v1, $v1, $v0
 /* 43DC8 800689C8 1460000D */  bnez      $v1, .L80068A00
-/* 43DCC 800689CC 00000000 */   nop      
+/* 43DCC 800689CC 00000000 */   nop
 /* 43DD0 800689D0 93A2013A */  lbu       $v0, 0x13a($sp)
 /* 43DD4 800689D4 92030064 */  lbu       $v1, 0x64($s0)
 /* 43DD8 800689D8 0043102B */  sltu      $v0, $v0, $v1
 /* 43DDC 800689DC 10400008 */  beqz      $v0, .L80068A00
-/* 43DE0 800689E0 00000000 */   nop      
+/* 43DE0 800689E0 00000000 */   nop
 /* 43DE4 800689E4 93A2013B */  lbu       $v0, 0x13b($sp)
 /* 43DE8 800689E8 2C430001 */  sltiu     $v1, $v0, 1
 /* 43DEC 800689EC 2C420080 */  sltiu     $v0, $v0, 0x80
@@ -169,7 +169,7 @@ glabel osPfsReadWriteFile
 .L80068A40:
 /* 43E40 80068A40 24020008 */  addiu     $v0, $zero, 8
 /* 43E44 80068A44 16220028 */  bne       $s1, $v0, .L80068AE8
-/* 43E48 80068A48 00000000 */   nop      
+/* 43E48 80068A48 00000000 */   nop
 /* 43E4C 80068A4C 93A3013A */  lbu       $v1, 0x13a($sp)
 /* 43E50 80068A50 93A20138 */  lbu       $v0, 0x138($sp)
 /* 43E54 80068A54 306700FF */  andi      $a3, $v1, 0xff
@@ -191,12 +191,12 @@ glabel osPfsReadWriteFile
 /* 43E90 80068A90 8E020060 */  lw        $v0, 0x60($s0)
 /* 43E94 80068A94 0062182A */  slt       $v1, $v1, $v0
 /* 43E98 80068A98 1460000D */  bnez      $v1, .L80068AD0
-/* 43E9C 80068A9C 00000000 */   nop      
+/* 43E9C 80068A9C 00000000 */   nop
 /* 43EA0 80068AA0 93A2013A */  lbu       $v0, 0x13a($sp)
 /* 43EA4 80068AA4 92030064 */  lbu       $v1, 0x64($s0)
 /* 43EA8 80068AA8 0043102B */  sltu      $v0, $v0, $v1
 /* 43EAC 80068AAC 10400008 */  beqz      $v0, .L80068AD0
-/* 43EB0 80068AB0 00000000 */   nop      
+/* 43EB0 80068AB0 00000000 */   nop
 /* 43EB4 80068AB4 93A2013B */  lbu       $v0, 0x13b($sp)
 /* 43EB8 80068AB8 2C430001 */  sltiu     $v1, $v0, 1
 /* 43EBC 80068ABC 2C420080 */  sltiu     $v0, $v0, 0x80
@@ -216,7 +216,7 @@ glabel osPfsReadWriteFile
 /* 43EE8 80068AE8 92020065 */  lbu       $v0, 0x65($s0)
 /* 43EEC 80068AEC 93A5013A */  lbu       $a1, 0x13a($sp)
 /* 43EF0 80068AF0 10450006 */  beq       $v0, $a1, .L80068B0C
-/* 43EF4 80068AF4 00000000 */   nop      
+/* 43EF4 80068AF4 00000000 */   nop
 /* 43EF8 80068AF8 0C01A5B4 */  jal       osPfsSelectBank
 /* 43EFC 80068AFC 02002021 */   addu     $a0, $s0, $zero
 /* 43F00 80068B00 00401821 */  addu      $v1, $v0, $zero
@@ -253,7 +253,7 @@ glabel osPfsReadWriteFile
 .L80068B70:
 /* 43F70 80068B70 24020001 */  addiu     $v0, $zero, 1
 /* 43F74 80068B74 1462001D */  bne       $v1, $v0, .L80068BEC
-/* 43F78 80068B78 00000000 */   nop      
+/* 43F78 80068B78 00000000 */   nop
 /* 43F7C 80068B7C 93A30020 */  lbu       $v1, 0x20($sp)
 /* 43F80 80068B80 30620002 */  andi      $v0, $v1, 2
 /* 43F84 80068B84 14400019 */  bnez      $v0, .L80068BEC
@@ -266,7 +266,7 @@ glabel osPfsReadWriteFile
 /* 43FA0 80068BA0 00002821 */   addu     $a1, $zero, $zero
 /* 43FA4 80068BA4 00401821 */  addu      $v1, $v0, $zero
 /* 43FA8 80068BA8 14600013 */  bnez      $v1, .L80068BF8
-/* 43FAC 80068BAC 00000000 */   nop      
+/* 43FAC 80068BAC 00000000 */   nop
 .L80068BB0:
 /* 43FB0 80068BB0 8E06005C */  lw        $a2, 0x5c($s0)
 /* 43FB4 80068BB4 AFA00010 */  sw        $zero, 0x10($sp)
@@ -278,9 +278,9 @@ glabel osPfsReadWriteFile
 /* 43FCC 80068BCC 30C6FFFF */   andi     $a2, $a2, 0xffff
 /* 43FD0 80068BD0 00401821 */  addu      $v1, $v0, $zero
 /* 43FD4 80068BD4 10600005 */  beqz      $v1, .L80068BEC
-/* 43FD8 80068BD8 00000000 */   nop      
+/* 43FD8 80068BD8 00000000 */   nop
 /* 43FDC 80068BDC 0801A2FE */  j         .L80068BF8
-/* 43FE0 80068BE0 00000000 */   nop      
+/* 43FE0 80068BE0 00000000 */   nop
 .L80068BE4:
 /* 43FE4 80068BE4 0801A2FE */  j         .L80068BF8
 /* 43FE8 80068BE8 00601021 */   addu     $v0, $v1, $zero

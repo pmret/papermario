@@ -3,118 +3,118 @@
 .section .rodata
 
 glabel D_802EB000
-.word 0x3FFDCCCC, 0xCCCCCCCD
+.double 1.8625
 
 glabel D_802EB008
-.word 0x3FFDCCCC, 0xCCCCCCCD
+.double 1.8625
 
 glabel D_802EB010
 .word 0x802E17EC, 0x802E1894, 0x802E1938, 0x802E19E0, 0x802E1A84, 0x802E1B18
 
 glabel D_802EB028
-.word 0x3FD33333, 0x33333333
+.double 0.3
 
 glabel D_802EB030
-.word 0x3F847AE1, 0x47AE147B
+.double 0.01
 
 glabel D_802EB038
-.word 0xBFC99999, 0x9999999A
+.double -0.2
 
 glabel D_802EB040
-.word 0xBF847AE1, 0x47AE147B
+.double -0.01
 
 glabel D_802EB048
-.word 0x3FC33333, 0x33333333
+.double 0.15
 
 glabel D_802EB050
-.word 0x3F847AE1, 0x47AE147B
+.double 0.01
 
 glabel D_802EB058
-.word 0xBFB99999, 0x9999999A
+.double -0.1
 
 glabel D_802EB060
-.word 0xBF847AE1, 0x47AE147B
+.double -0.01
 
 glabel D_802EB068
-.word 0x3F847AE1, 0x47AE147B
+.double 0.01
 
 glabel D_802EB070
 .word 0x802E1B48, 0x802E1BF0, 0x802E1C94, 0x802E1D38, 0x802E1DDC, 0x802E1E6C
 
 glabel D_802EB088
-.word 0xBF847AE1, 0x47AE147B
+.double -0.01
 
 glabel D_802EB090
-.word 0x3FB99999, 0x9999999A
+.double 0.1
 
 glabel D_802EB098
-.word 0x3F847AE1, 0x47AE147B
+.double 0.01
 
 glabel D_802EB0A0
-.ascii "甚333333"
+.double -0.3
 
 glabel D_802EB0A8
-.word 0xBF847AE1, 0x47AE147B
+.double -0.01
 
 glabel D_802EB0B0
-.word 0x3F847AE1, 0x47AE147B
+.double 0.01
 
 glabel D_802EB0B8
-.word 0xBF847AE1, 0x47AE147B
+.double -0.01
 
 glabel D_802EB0C0
 .word 0x802E1F20, 0x802E1FBC, 0x802E1FD0, 0x802E206C, 0x802E211C, 0x00000000
 
 glabel D_802EB0D8
-.word 0x3FD33333, 0x33333333
+.double 0.3
 
 glabel D_802EB0E0
-.word 0x3F847AE1, 0x47AE147B
+.double 0.01
 
 glabel D_802EB0E8
-.word 0xBFC99999, 0x9999999A
+.double -0.2
 
 glabel D_802EB0F0
-.word 0x3FC33333, 0x33333333
+.double 0.15
 
 glabel D_802EB0F8
-.word 0x3F847AE1, 0x47AE147B
+.double 0.01
 
 glabel D_802EB100
-.word 0xBFB99999, 0x9999999A
+.double -0.1
 
 glabel D_802EB108
-.word 0xBF847AE1, 0x47AE147B
+.double -0.01
 
 glabel D_802EB110
-.word 0x3FB99999, 0x9999999A
+.double 0.1
 
 glabel D_802EB118
-.word 0x3F847AE1, 0x47AE147B
+.double 0.01
 
 glabel D_802EB120
-.ascii "甚333333"
+.double -0.3
 
 glabel D_802EB128
-.word 0xBF847AE1, 0x47AE147B
+.double -0.01
 
 glabel D_802EB130
-.word 0x40059999, 0x9999999A
+.double 2.7
 
 glabel D_802EB138
-.word 0x40768000, 0x00000000
+.double 360.0
 
 glabel D_802EB140
-.word 0x3FD33333, 0x33333333
+.double 0.3
 
 glabel D_802EB148
-.word 0x3FF33333, 0x33333333
+.double 1.2
 
 glabel D_802EB150
-.word 0xC0286666, 0x66666666
+.double -12.2
 
 glabel D_802EB158
-.word 0x401921FA, 0x00000000
+.double 6.283180236816406
 
 glabel D_802EB160
 .word 0x802E2F78, 0x802E2FA4, 0x802E2FA4, 0x802E2FA4, 0x802E2FA4, 0x802E2FA4, 0x802E2FA4, 0x802E2FA4, 0x802E2F30, 0x802E2F48, 0x802E2F60, 0x802E2F30, 0x802E2F48, 0x802E2F60

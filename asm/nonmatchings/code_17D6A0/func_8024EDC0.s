@@ -13,4 +13,4 @@ glabel func_8024EDC0
 /* 17D6BC 8024EDDC 1440FFFB */  bnez      $v0, .L8024EDCC
 /* 17D6C0 8024EDE0 2463001C */   addiu    $v1, $v1, 0x1c
 /* 17D6C4 8024EDE4 03E00008 */  jr        $ra
-/* 17D6C8 8024EDE8 00000000 */   nop      
+/* 17D6C8 8024EDE8 00000000 */   nop

@@ -15,63 +15,63 @@ glabel osSpTaskLoad
 /* 40E38 80065A38 3C04800B */  lui       $a0, %hi(D_800AF8D0)
 /* 40E3C 80065A3C 8C84F8D0 */  lw        $a0, %lo(D_800AF8D0)($a0)
 /* 40E40 80065A40 10800005 */  beqz      $a0, .L80065A58
-/* 40E44 80065A44 00000000 */   nop      
+/* 40E44 80065A44 00000000 */   nop
 /* 40E48 80065A48 0C0187A4 */  jal       osVirtualToPhysical
-/* 40E4C 80065A4C 00000000 */   nop      
+/* 40E4C 80065A4C 00000000 */   nop
 /* 40E50 80065A50 3C01800B */  lui       $at, %hi(D_800AF8D0)
 /* 40E54 80065A54 AC22F8D0 */  sw        $v0, %lo(D_800AF8D0)($at)
 .L80065A58:
 /* 40E58 80065A58 3C04800B */  lui       $a0, %hi(D_800AF8D8)
 /* 40E5C 80065A5C 8C84F8D8 */  lw        $a0, %lo(D_800AF8D8)($a0)
 /* 40E60 80065A60 10800005 */  beqz      $a0, .L80065A78
-/* 40E64 80065A64 00000000 */   nop      
+/* 40E64 80065A64 00000000 */   nop
 /* 40E68 80065A68 0C0187A4 */  jal       osVirtualToPhysical
-/* 40E6C 80065A6C 00000000 */   nop      
+/* 40E6C 80065A6C 00000000 */   nop
 /* 40E70 80065A70 3C01800B */  lui       $at, %hi(D_800AF8D8)
 /* 40E74 80065A74 AC22F8D8 */  sw        $v0, %lo(D_800AF8D8)($at)
 .L80065A78:
 /* 40E78 80065A78 3C04800B */  lui       $a0, %hi(D_800AF8E0)
 /* 40E7C 80065A7C 8C84F8E0 */  lw        $a0, %lo(D_800AF8E0)($a0)
 /* 40E80 80065A80 10800005 */  beqz      $a0, .L80065A98
-/* 40E84 80065A84 00000000 */   nop      
+/* 40E84 80065A84 00000000 */   nop
 /* 40E88 80065A88 0C0187A4 */  jal       osVirtualToPhysical
-/* 40E8C 80065A8C 00000000 */   nop      
+/* 40E8C 80065A8C 00000000 */   nop
 /* 40E90 80065A90 3C01800B */  lui       $at, %hi(D_800AF8E0)
 /* 40E94 80065A94 AC22F8E0 */  sw        $v0, %lo(D_800AF8E0)($at)
 .L80065A98:
 /* 40E98 80065A98 3C04800B */  lui       $a0, %hi(D_800AF8E8)
 /* 40E9C 80065A9C 8C84F8E8 */  lw        $a0, %lo(D_800AF8E8)($a0)
 /* 40EA0 80065AA0 10800005 */  beqz      $a0, .L80065AB8
-/* 40EA4 80065AA4 00000000 */   nop      
+/* 40EA4 80065AA4 00000000 */   nop
 /* 40EA8 80065AA8 0C0187A4 */  jal       osVirtualToPhysical
-/* 40EAC 80065AAC 00000000 */   nop      
+/* 40EAC 80065AAC 00000000 */   nop
 /* 40EB0 80065AB0 3C01800B */  lui       $at, %hi(D_800AF8E8)
 /* 40EB4 80065AB4 AC22F8E8 */  sw        $v0, %lo(D_800AF8E8)($at)
 .L80065AB8:
 /* 40EB8 80065AB8 3C04800B */  lui       $a0, %hi(D_800AF8EC)
 /* 40EBC 80065ABC 8C84F8EC */  lw        $a0, %lo(D_800AF8EC)($a0)
 /* 40EC0 80065AC0 10800005 */  beqz      $a0, .L80065AD8
-/* 40EC4 80065AC4 00000000 */   nop      
+/* 40EC4 80065AC4 00000000 */   nop
 /* 40EC8 80065AC8 0C0187A4 */  jal       osVirtualToPhysical
-/* 40ECC 80065ACC 00000000 */   nop      
+/* 40ECC 80065ACC 00000000 */   nop
 /* 40ED0 80065AD0 3C01800B */  lui       $at, %hi(D_800AF8EC)
 /* 40ED4 80065AD4 AC22F8EC */  sw        $v0, %lo(D_800AF8EC)($at)
 .L80065AD8:
 /* 40ED8 80065AD8 3C04800B */  lui       $a0, %hi(D_800AF8F0)
 /* 40EDC 80065ADC 8C84F8F0 */  lw        $a0, %lo(D_800AF8F0)($a0)
 /* 40EE0 80065AE0 10800005 */  beqz      $a0, .L80065AF8
-/* 40EE4 80065AE4 00000000 */   nop      
+/* 40EE4 80065AE4 00000000 */   nop
 /* 40EE8 80065AE8 0C0187A4 */  jal       osVirtualToPhysical
-/* 40EEC 80065AEC 00000000 */   nop      
+/* 40EEC 80065AEC 00000000 */   nop
 /* 40EF0 80065AF0 3C01800B */  lui       $at, %hi(D_800AF8F0)
 /* 40EF4 80065AF4 AC22F8F0 */  sw        $v0, %lo(D_800AF8F0)($at)
 .L80065AF8:
 /* 40EF8 80065AF8 3C04800B */  lui       $a0, %hi(D_800AF8F8)
 /* 40EFC 80065AFC 8C84F8F8 */  lw        $a0, %lo(D_800AF8F8)($a0)
 /* 40F00 80065B00 10800005 */  beqz      $a0, .L80065B18
-/* 40F04 80065B04 00000000 */   nop      
+/* 40F04 80065B04 00000000 */   nop
 /* 40F08 80065B08 0C0187A4 */  jal       osVirtualToPhysical
-/* 40F0C 80065B0C 00000000 */   nop      
+/* 40F0C 80065B0C 00000000 */   nop
 /* 40F10 80065B10 3C01800B */  lui       $at, %hi(D_800AF8F8)
 /* 40F14 80065B14 AC22F8F8 */  sw        $v0, %lo(D_800AF8F8)($at)
 .L80065B18:
@@ -128,7 +128,7 @@ glabel osSpTaskLoad
 /* 40FD4 80065BD4 24040001 */   addiu    $a0, $zero, 1
 .L80065BD8:
 /* 40FD8 80065BD8 0C01B1B0 */  jal       osSpDeviceBusy
-/* 40FDC 80065BDC 00000000 */   nop      
+/* 40FDC 80065BDC 00000000 */   nop
 /* 40FE0 80065BE0 1440FFFD */  bnez      $v0, .L80065BD8
 /* 40FE4 80065BE4 24040001 */   addiu    $a0, $zero, 1
 /* 40FE8 80065BE8 2410FFFF */  addiu     $s0, $zero, -1

@@ -14,14 +14,14 @@ glabel func_E00CA000
 /* 3D0524 E00CA024 27A40010 */  addiu     $a0, $sp, 0x10
 /* 3D0528 E00CA028 AFB30034 */  sw        $s3, 0x34($sp)
 /* 3D052C E00CA02C 8FB3006C */  lw        $s3, 0x6c($sp)
-/* 3D0530 E00CA030 3C02E00D */  lui       $v0, %hi(D_E00CA240)
-/* 3D0534 E00CA034 2442A240 */  addiu     $v0, $v0, %lo(D_E00CA240)
+/* 3D0530 E00CA030 3C02E00D */  lui       $v0, %hi(func_E00CA240)
+/* 3D0534 E00CA034 2442A240 */  addiu     $v0, $v0, %lo(func_E00CA240)
 /* 3D0538 E00CA038 AFA20018 */  sw        $v0, 0x18($sp)
-/* 3D053C E00CA03C 3C02E00D */  lui       $v0, %hi(D_E00CA248)
-/* 3D0540 E00CA040 2442A248 */  addiu     $v0, $v0, %lo(D_E00CA248)
+/* 3D053C E00CA03C 3C02E00D */  lui       $v0, %hi(func_E00CA248)
+/* 3D0540 E00CA040 2442A248 */  addiu     $v0, $v0, %lo(func_E00CA248)
 /* 3D0544 E00CA044 AFA2001C */  sw        $v0, 0x1c($sp)
-/* 3D0548 E00CA048 3C02E00D */  lui       $v0, %hi(D_E00CA484)
-/* 3D054C E00CA04C 2442A484 */  addiu     $v0, $v0, %lo(D_E00CA484)
+/* 3D0548 E00CA048 3C02E00D */  lui       $v0, %hi(func_E00CA484)
+/* 3D054C E00CA04C 2442A484 */  addiu     $v0, $v0, %lo(func_E00CA484)
 /* 3D0550 E00CA050 AFA20020 */  sw        $v0, 0x20($sp)
 /* 3D0554 E00CA054 24020065 */  addiu     $v0, $zero, 0x65
 /* 3D0558 E00CA058 AFBF0038 */  sw        $ra, 0x38($sp)
@@ -41,7 +41,7 @@ glabel func_E00CA000
 /* 3D0590 E00CA090 AE42000C */   sw       $v0, 0xc($s2)
 .LE00CA094:
 /* 3D0594 E00CA094 08032825 */  j         .LE00CA094
-/* 3D0598 E00CA098 00000000 */   nop      
+/* 3D0598 E00CA098 00000000 */   nop
 .LE00CA09C:
 /* 3D059C E00CA09C AE110000 */  sw        $s1, ($s0)
 /* 3D05A0 E00CA0A0 1E600004 */  bgtz      $s3, .LE00CA0B4
@@ -145,7 +145,7 @@ glabel func_E00CA000
 /* 3D06F8 E00CA1F8 2443000A */  addiu     $v1, $v0, 0xa
 /* 3D06FC E00CA1FC 0240102D */  daddu     $v0, $s2, $zero
 /* 3D0700 E00CA200 44830000 */  mtc1      $v1, $f0
-/* 3D0704 E00CA204 00000000 */  nop       
+/* 3D0704 E00CA204 00000000 */  nop
 /* 3D0708 E00CA208 46800020 */  cvt.s.w   $f0, $f0
 /* 3D070C E00CA20C E6000044 */  swc1      $f0, 0x44($s0)
 /* 3D0710 E00CA210 AE000048 */  sw        $zero, 0x48($s0)

@@ -50,8 +50,8 @@ glabel clear_item_entity_data
 /* C7794 80131094 24A52C80 */  addiu     $a1, $a1, %lo(draw_item_entities)
 /* C7798 80131098 0C048C56 */  jal       bind_dynamic_entity_3
 /* C779C 8013109C 0000202D */   daddu    $a0, $zero, $zero
-/* C77A0 801310A0 3C058013 */  lui       $a1, %hi(D_80132D94)
-/* C77A4 801310A4 24A52D94 */  addiu     $a1, $a1, %lo(D_80132D94)
+/* C77A0 801310A0 3C058013 */  lui       $a1, %hi(func_80132D94)
+/* C77A4 801310A4 24A52D94 */  addiu     $a1, $a1, %lo(func_80132D94)
 /* C77A8 801310A8 0C048C8F */  jal       bind_dynamic_entity_7
 /* C77AC 801310AC 0000202D */   daddu    $a0, $zero, $zero
 /* C77B0 801310B0 8FBF0010 */  lw        $ra, 0x10($sp)

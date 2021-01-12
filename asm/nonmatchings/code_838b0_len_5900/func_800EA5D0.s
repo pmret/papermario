@@ -32,7 +32,7 @@ glabel func_800EA5D0
 /* 83AEC 800EA63C 3C018011 */  lui       $at, %hi(D_8010CFD0)
 /* 83AF0 800EA640 AC24CFD0 */  sw        $a0, %lo(D_8010CFD0)($at)
 /* 83AF4 800EA644 0C00E2B7 */  jal       get_npc_by_index
-/* 83AF8 800EA648 00000000 */   nop      
+/* 83AF8 800EA648 00000000 */   nop
 /* 83AFC 800EA64C 3C048011 */  lui       $a0, %hi(D_8010C930)
 /* 83B00 800EA650 2484C930 */  addiu     $a0, $a0, %lo(D_8010C930)
 /* 83B04 800EA654 2403FFFC */  addiu     $v1, $zero, -4

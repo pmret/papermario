@@ -15,9 +15,9 @@ glabel func_80241474_C6F7A4
 /* C6F7CC 8024149C 00031C00 */  sll       $v1, $v1, 0x10
 /* C6F7D0 802414A0 00031B83 */  sra       $v1, $v1, 0xe
 /* C6F7D4 802414A4 A444008E */  sh        $a0, 0x8e($v0)
-/* C6F7D8 802414A8 3C018024 */  lui       $at, %hi(D_80242B90)
+/* C6F7D8 802414A8 3C018024 */  lui       $at, %hi(func_80242B90_A1DC90)
 /* C6F7DC 802414AC 00230821 */  addu      $at, $at, $v1
-/* C6F7E0 802414B0 C4222B90 */  lwc1      $f2, %lo(D_80242B90)($at)
+/* C6F7E0 802414B0 C4222B90 */  lwc1      $f2, %lo(func_80242B90_A1DC90)($at)
 /* C6F7E4 802414B4 8443008E */  lh        $v1, 0x8e($v0)
 /* C6F7E8 802414B8 46020000 */  add.s     $f0, $f0, $f2
 /* C6F7EC 802414BC 28630005 */  slti      $v1, $v1, 5

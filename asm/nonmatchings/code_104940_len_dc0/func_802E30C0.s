@@ -4,8 +4,8 @@
 glabel func_802E30C0
 /* 104940 802E30C0 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 104944 802E30C4 AFB00010 */  sw        $s0, 0x10($sp)
-/* 104948 802E30C8 3C10800A */  lui       $s0, %hi(D_8009A66C)
-/* 10494C 802E30CC 8E10A66C */  lw        $s0, %lo(D_8009A66C)($s0)
+/* 104948 802E30C8 3C10800A */  lui       $s0, %hi(gMasterGfxPos)
+/* 10494C 802E30CC 8E10A66C */  lw        $s0, %lo(gMasterGfxPos)($s0)
 /* 104950 802E30D0 AFBF0014 */  sw        $ra, 0x14($sp)
 /* 104954 802E30D4 0C04417A */  jal       get_entity_by_index
 /* 104958 802E30D8 00000000 */   nop      
@@ -59,8 +59,8 @@ glabel func_802E30C0
 .L802E3194:
 /* 104A14 802E3194 AC620004 */  sw        $v0, 4($v1)
 /* 104A18 802E3198 8FBF0014 */  lw        $ra, 0x14($sp)
-/* 104A1C 802E319C 3C01800A */  lui       $at, %hi(D_8009A66C)
-/* 104A20 802E31A0 AC30A66C */  sw        $s0, %lo(D_8009A66C)($at)
+/* 104A1C 802E319C 3C01800A */  lui       $at, %hi(gMasterGfxPos)
+/* 104A20 802E31A0 AC30A66C */  sw        $s0, %lo(gMasterGfxPos)($at)
 /* 104A24 802E31A4 8FB00010 */  lw        $s0, 0x10($sp)
 /* 104A28 802E31A8 03E00008 */  jr        $ra
 /* 104A2C 802E31AC 27BD0018 */   addiu    $sp, $sp, 0x18

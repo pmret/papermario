@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel func_802400D8_BAA218
-/* BAA218 802400D8 3C058024 */  lui       $a1, %hi(D_80241680)
-/* BAA21C 802400DC 24A51680 */  addiu     $a1, $a1, %lo(D_80241680)
+/* BAA218 802400D8 3C058024 */  lui       $a1, %hi(func_80241680_8537F0)
+/* BAA21C 802400DC 24A51680 */  addiu     $a1, $a1, %lo(func_80241680_8537F0)
 /* BAA220 802400E0 8CA30000 */  lw        $v1, ($a1)
 /* BAA224 802400E4 24040002 */  addiu     $a0, $zero, 2
 /* BAA228 802400E8 10640012 */  beq       $v1, $a0, .L80240134
@@ -74,8 +74,8 @@ glabel func_802400D8_BAA218
 /* BAA30C 802401CC 3C08E200 */  lui       $t0, 0xe200
 /* BAA310 802401D0 3508001C */  ori       $t0, $t0, 0x1c
 /* BAA314 802401D4 3C07C810 */  lui       $a3, 0xc810
-/* BAA318 802401D8 3C05800A */  lui       $a1, %hi(D_8009A66C)
-/* BAA31C 802401DC 24A5A66C */  addiu     $a1, $a1, %lo(D_8009A66C)
+/* BAA318 802401D8 3C05800A */  lui       $a1, %hi(gMasterGfxPos)
+/* BAA31C 802401DC 24A5A66C */  addiu     $a1, $a1, %lo(gMasterGfxPos)
 /* BAA320 802401E0 8CA30000 */  lw        $v1, ($a1)
 /* BAA324 802401E4 34E74DD8 */  ori       $a3, $a3, 0x4dd8
 /* BAA328 802401E8 0060202D */  daddu     $a0, $v1, $zero

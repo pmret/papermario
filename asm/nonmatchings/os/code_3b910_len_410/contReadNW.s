@@ -14,7 +14,7 @@ glabel contReadNW
 /* 3BBD8 800607D8 3C04800E */  lui       $a0, %hi(nuSiMesgQ)
 /* 3BBDC 800607DC 2484AC78 */  addiu     $a0, $a0, %lo(nuSiMesgQ)
 /* 3BBE0 800607E0 0C018668 */  jal       osContStartReadData
-/* 3BBE4 800607E4 00000000 */   nop      
+/* 3BBE4 800607E4 00000000 */   nop
 /* 3BBE8 800607E8 14400013 */  bnez      $v0, .L80060838
 /* 3BBEC 800607EC 0000282D */   daddu    $a1, $zero, $zero
 /* 3BBF0 800607F0 3C04800E */  lui       $a0, %hi(nuSiMesgQ)
@@ -37,14 +37,14 @@ glabel contReadNW
 /* 3BC34 80060834 0000102D */  daddu     $v0, $zero, $zero
 .L80060838:
 /* 3BC38 80060838 14400009 */  bnez      $v0, .L80060860
-/* 3BC3C 8006083C 00000000 */   nop      
+/* 3BC3C 8006083C 00000000 */   nop
 /* 3BC40 80060840 3C028009 */  lui       $v0, %hi(D_80093D20)
 /* 3BC44 80060844 8C423D20 */  lw        $v0, %lo(D_80093D20)($v0)
 /* 3BC48 80060848 50400005 */  beql      $v0, $zero, .L80060860
 /* 3BC4C 8006084C 0000102D */   daddu    $v0, $zero, $zero
 /* 3BC50 80060850 86040000 */  lh        $a0, ($s0)
 /* 3BC54 80060854 0040F809 */  jalr      $v0
-/* 3BC58 80060858 00000000 */   nop      
+/* 3BC58 80060858 00000000 */   nop
 /* 3BC5C 8006085C 0000102D */  daddu     $v0, $zero, $zero
 .L80060860:
 /* 3BC60 80060860 8FBF0014 */  lw        $ra, 0x14($sp)

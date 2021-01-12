@@ -113,8 +113,8 @@ glabel func_80240C08_A9F948
 /* A9FAE4 80240DA4 E616000C */  swc1      $f22, 0xc($s0)
 .L80240DA8:
 /* A9FAE8 80240DA8 C6000018 */  lwc1      $f0, 0x18($s0)
-/* A9FAEC 80240DAC 3C018024 */  lui       $at, %hi(D_80243000)
-/* A9FAF0 80240DB0 D4223000 */  ldc1      $f2, %lo(D_80243000)($at)
+/* A9FAEC 80240DAC 3C018024 */  lui       $at, %hi(func_80243000_9AB3F0)
+/* A9FAF0 80240DB0 D4223000 */  ldc1      $f2, %lo(func_80243000_9AB3F0)($at)
 /* A9FAF4 80240DB4 46000021 */  cvt.d.s   $f0, $f0
 /* A9FAF8 80240DB8 46220002 */  mul.d     $f0, $f0, $f2
 /* A9FAFC 80240DBC 00000000 */  nop       

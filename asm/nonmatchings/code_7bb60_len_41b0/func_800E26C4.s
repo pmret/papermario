@@ -19,17 +19,17 @@ glabel func_800E26C4
 /* 7BBA8 800E26F8 24020001 */   addiu    $v0, $zero, 1
 .L800E26FC:
 /* 7BBAC 800E26FC 1462001C */  bne       $v1, $v0, .L800E2770
-/* 7BBB0 800E2700 00000000 */   nop      
+/* 7BBB0 800E2700 00000000 */   nop
 /* 7BBB4 800E2704 3C028011 */  lui       $v0, %hi(gPlayerData)
 /* 7BBB8 800E2708 2442F290 */  addiu     $v0, $v0, %lo(gPlayerData)
 /* 7BBBC 800E270C 90420012 */  lbu       $v0, 0x12($v0)
 /* 7BBC0 800E2710 2442FFF8 */  addiu     $v0, $v0, -8
 /* 7BBC4 800E2714 2C420002 */  sltiu     $v0, $v0, 2
 /* 7BBC8 800E2718 10400009 */  beqz      $v0, .L800E2740
-/* 7BBCC 800E271C 00000000 */   nop      
+/* 7BBCC 800E271C 00000000 */   nop
 /* 7BBD0 800E2720 80A20000 */  lb        $v0, ($a1)
 /* 7BBD4 800E2724 1440FFF3 */  bnez      $v0, .L800E26F4
-/* 7BBD8 800E2728 00000000 */   nop      
+/* 7BBD8 800E2728 00000000 */   nop
 .L800E272C:
 /* 7BBDC 800E272C 8C830004 */  lw        $v1, 4($a0)
 /* 7BBE0 800E2730 0000102D */  daddu     $v0, $zero, $zero
@@ -49,7 +49,7 @@ glabel func_800E26C4
 /* 7BC10 800E2760 00021603 */  sra       $v0, $v0, 0x18
 /* 7BC14 800E2764 24030004 */  addiu     $v1, $zero, 4
 /* 7BC18 800E2768 1043FFF0 */  beq       $v0, $v1, .L800E272C
-/* 7BC1C 800E276C 00000000 */   nop      
+/* 7BC1C 800E276C 00000000 */   nop
 .L800E2770:
 /* 7BC20 800E2770 03E00008 */  jr        $ra
 /* 7BC24 800E2774 0000102D */   daddu    $v0, $zero, $zero

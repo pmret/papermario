@@ -32,8 +32,8 @@ glabel func_80240B64_A4D584
 /* A4D5E8 80240BC8 240300FF */   addiu    $v1, $zero, 0xff
 .L80240BCC:
 /* A4D5EC 80240BCC 8602008E */  lh        $v0, 0x8e($s0)
-/* A4D5F0 80240BD0 3C018024 */  lui       $at, %hi(D_80242560)
-/* A4D5F4 80240BD4 D4222560 */  ldc1      $f2, %lo(D_80242560)($at)
+/* A4D5F0 80240BD0 3C018024 */  lui       $at, %hi(func_80242560_95D760)
+/* A4D5F4 80240BD4 D4222560 */  ldc1      $f2, %lo(func_80242560_95D760)($at)
 /* A4D5F8 80240BD8 44820000 */  mtc1      $v0, $f0
 /* A4D5FC 80240BDC 00000000 */  nop       
 /* A4D600 80240BE0 46800020 */  cvt.s.w   $f0, $f0

@@ -18,8 +18,8 @@ glabel func_80240974_8654B4
 /* 8654E8 802409A8 8FA60018 */  lw        $a2, 0x18($sp)
 /* 8654EC 802409AC 0C090196 */  jal       func_80240658_865198
 /* 8654F0 802409B0 0220382D */   daddu    $a3, $s1, $zero
-/* 8654F4 802409B4 3C03800A */  lui       $v1, %hi(D_8009A66C)
-/* 8654F8 802409B8 2463A66C */  addiu     $v1, $v1, %lo(D_8009A66C)
+/* 8654F4 802409B4 3C03800A */  lui       $v1, %hi(gMasterGfxPos)
+/* 8654F8 802409B8 2463A66C */  addiu     $v1, $v1, %lo(gMasterGfxPos)
 /* 8654FC 802409BC 8C620000 */  lw        $v0, ($v1)
 /* 865500 802409C0 24040002 */  addiu     $a0, $zero, 2
 /* 865504 802409C4 0040802D */  daddu     $s0, $v0, $zero

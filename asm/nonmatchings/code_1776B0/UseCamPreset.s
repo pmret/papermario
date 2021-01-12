@@ -11,7 +11,7 @@ glabel UseCamPreset
 /* 17CF14 8024E634 24020002 */   addiu    $v0, $zero, 2
 /* 17CF18 8024E638 8CA50000 */  lw        $a1, ($a1)
 /* 17CF1C 8024E63C 0C0B1EAF */  jal       get_variable
-/* 17CF20 8024E640 00000000 */   nop      
+/* 17CF20 8024E640 00000000 */   nop
 /* 17CF24 8024E644 3C01802A */  lui       $at, %hi(D_8029F2A4)
 /* 17CF28 8024E648 A020F2A4 */  sb        $zero, %lo(D_8029F2A4)($at)
 /* 17CF2C 8024E64C 0C0933CD */  jal       use_cam_preset

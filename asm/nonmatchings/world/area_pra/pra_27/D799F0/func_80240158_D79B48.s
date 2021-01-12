@@ -110,8 +110,8 @@ glabel func_80240158_D79B48
 /* D79CD4 802402E4 AC910000 */  sw        $s1, ($a0)
 /* D79CD8 802402E8 AC900008 */  sw        $s0, 8($a0)
 /* D79CDC 802402EC 8FA20038 */  lw        $v0, 0x38($sp)
-/* D79CE0 802402F0 3C038024 */  lui       $v1, %hi(D_80240320)
-/* D79CE4 802402F4 24630320 */  addiu     $v1, $v1, %lo(D_80240320)
+/* D79CE0 802402F0 3C038024 */  lui       $v1, %hi(func_80240320_D79D10)
+/* D79CE4 802402F4 24630320 */  addiu     $v1, $v1, %lo(func_80240320_D79D10)
 /* D79CE8 802402F8 AC83000C */  sw        $v1, 0xc($a0)
 /* D79CEC 802402FC 00021023 */  negu      $v0, $v0
 /* D79CF0 80240300 0C047644 */  jal       queue_render_task

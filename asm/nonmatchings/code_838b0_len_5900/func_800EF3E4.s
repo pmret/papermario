@@ -13,4 +13,4 @@ glabel func_800EF3E4
 /* 888B4 800EF404 3C018011 */  lui       $at, %hi(D_8010CFCE)
 /* 888B8 800EF408 A420CFCE */  sh        $zero, %lo(D_8010CFCE)($at)
 /* 888BC 800EF40C 03E00008 */  jr        $ra
-/* 888C0 800EF410 00000000 */   nop      
+/* 888C0 800EF410 00000000 */   nop

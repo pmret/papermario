@@ -17,7 +17,7 @@ glabel strcmp
 /* 4A198 8006ED98 00001021 */   addu     $v0, $zero, $zero
 .L8006ED9C:
 /* 4A19C 8006ED9C 03E00008 */  jr        $ra
-/* 4A1A0 8006EDA0 00000000 */   nop      
-/* 4A1A4 8006EDA4 00000000 */  nop       
-/* 4A1A8 8006EDA8 00000000 */  nop       
-/* 4A1AC 8006EDAC 00000000 */  nop       
+/* 4A1A0 8006EDA0 00000000 */   nop
+/* 4A1A4 8006EDA4 00000000 */  nop
+/* 4A1A8 8006EDA8 00000000 */  nop
+/* 4A1AC 8006EDAC 00000000 */  nop

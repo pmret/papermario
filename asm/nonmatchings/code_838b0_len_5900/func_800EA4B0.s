@@ -8,9 +8,9 @@ glabel func_800EA4B0
 /* 8396C 800EA4BC 24030001 */   addiu    $v1, $zero, 1
 /* 83970 800EA4C0 30824000 */  andi      $v0, $a0, 0x4000
 /* 83974 800EA4C4 1040000F */  beqz      $v0, .L800EA504
-/* 83978 800EA4C8 00000000 */   nop      
+/* 83978 800EA4C8 00000000 */   nop
 /* 8397C 800EA4CC 0C0441A9 */  jal       get_entity_type
-/* 83980 800EA4D0 00000000 */   nop      
+/* 83980 800EA4D0 00000000 */   nop
 /* 83984 800EA4D4 2443FFF9 */  addiu     $v1, $v0, -7
 /* 83988 800EA4D8 2C620036 */  sltiu     $v0, $v1, 0x36
 /* 8398C 800EA4DC 10400008 */  beqz      $v0, .L800EA500
@@ -19,7 +19,7 @@ glabel func_800EA4B0
 /* 83998 800EA4E8 00220821 */  addu      $at, $at, $v0
 /* 8399C 800EA4EC 8C22C040 */  lw        $v0, %lo(D_8010C040)($at)
 /* 839A0 800EA4F0 00400008 */  jr        $v0
-/* 839A4 800EA4F4 00000000 */   nop      
+/* 839A4 800EA4F4 00000000 */   nop
 /* 839A8 800EA4F8 0803A941 */  j         .L800EA504
 /* 839AC 800EA4FC 0000182D */   daddu    $v1, $zero, $zero
 .L800EA500:

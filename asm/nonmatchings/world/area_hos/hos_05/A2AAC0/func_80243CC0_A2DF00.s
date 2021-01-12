@@ -24,8 +24,8 @@ glabel func_80243CC0_A2DF00
 /* A2DF4C 80243D0C 0C090DC3 */  jal       func_8024370C_A2D94C
 /* A2DF50 80243D10 84520010 */   lh       $s2, 0x10($v0)
 /* A2DF54 80243D14 3C05FF10 */  lui       $a1, 0xff10
-/* A2DF58 80243D18 3C10800A */  lui       $s0, %hi(D_8009A66C)
-/* A2DF5C 80243D1C 2610A66C */  addiu     $s0, $s0, %lo(D_8009A66C)
+/* A2DF58 80243D18 3C10800A */  lui       $s0, %hi(gMasterGfxPos)
+/* A2DF5C 80243D1C 2610A66C */  addiu     $s0, $s0, %lo(gMasterGfxPos)
 /* A2DF60 80243D20 34A5013F */  ori       $a1, $a1, 0x13f
 /* A2DF64 80243D24 8E060000 */  lw        $a2, ($s0)
 /* A2DF68 80243D28 3C02DE00 */  lui       $v0, 0xde00
@@ -69,9 +69,9 @@ glabel func_80243CC0_A2DF00
 /* A2DFFC 80243DBC 27A60014 */   addiu    $a2, $sp, 0x14
 /* A2E000 80243DC0 C7A20014 */  lwc1      $f2, 0x14($sp)
 /* A2E004 80243DC4 44800000 */  mtc1      $zero, $f0
-/* A2E008 80243DC8 00000000 */  nop       
+/* A2E008 80243DC8 00000000 */  nop
 /* A2E00C 80243DCC 46001032 */  c.eq.s    $f2, $f0
-/* A2E010 80243DD0 00000000 */  nop       
+/* A2E010 80243DD0 00000000 */  nop
 /* A2E014 80243DD4 45010016 */  bc1t      .L80243E30
 /* A2E018 80243DD8 3C05FC35 */   lui      $a1, 0xfc35
 /* A2E01C 80243DDC 34A57E6A */  ori       $a1, $a1, 0x7e6a
@@ -91,7 +91,7 @@ glabel func_80243CC0_A2DF00
 /* A2E054 80243E14 AC620000 */  sw        $v0, ($v1)
 /* A2E058 80243E18 4600110D */  trunc.w.s $f4, $f2
 /* A2E05C 80243E1C 44022000 */  mfc1      $v0, $f4
-/* A2E060 80243E20 00000000 */  nop       
+/* A2E060 80243E20 00000000 */  nop
 /* A2E064 80243E24 304200FF */  andi      $v0, $v0, 0xff
 /* A2E068 80243E28 00461025 */  or        $v0, $v0, $a2
 /* A2E06C 80243E2C AC620004 */  sw        $v0, 4($v1)
@@ -99,7 +99,7 @@ glabel func_80243CC0_A2DF00
 /* A2E070 80243E30 8E630000 */  lw        $v1, ($s3)
 /* A2E074 80243E34 84620058 */  lh        $v0, 0x58($v1)
 /* A2E078 80243E38 1440000F */  bnez      $v0, .L80243E78
-/* A2E07C 80243E3C 00000000 */   nop      
+/* A2E07C 80243E3C 00000000 */   nop
 /* A2E080 80243E40 8C66000C */  lw        $a2, 0xc($v1)
 /* A2E084 80243E44 8C670010 */  lw        $a3, 0x10($v1)
 /* A2E088 80243E48 84640040 */  lh        $a0, 0x40($v1)

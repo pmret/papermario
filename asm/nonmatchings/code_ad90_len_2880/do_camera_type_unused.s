@@ -16,10 +16,10 @@ glabel do_camera_type_unused
 /* B10C 8002FD0C 3C038011 */  lui       $v1, %hi(gPlayerStatus)
 /* B110 8002FD10 2463EFC8 */  addiu     $v1, $v1, %lo(gPlayerStatus)
 /* B114 8002FD14 14400004 */  bnez      $v0, .L8002FD28
-/* B118 8002FD18 00000000 */   nop      
+/* B118 8002FD18 00000000 */   nop
 /* B11C 8002FD1C 86020008 */  lh        $v0, 8($s0)
 /* B120 8002FD20 1040000F */  beqz      $v0, .L8002FD60
-/* B124 8002FD24 00000000 */   nop      
+/* B124 8002FD24 00000000 */   nop
 .L8002FD28:
 /* B128 8002FD28 C6000054 */  lwc1      $f0, 0x54($s0)
 /* B12C 8002FD2C C6020058 */  lwc1      $f2, 0x58($s0)
@@ -39,11 +39,11 @@ glabel do_camera_type_unused
 /* B160 8002FD60 8C620000 */  lw        $v0, ($v1)
 /* B164 8002FD64 30420006 */  andi      $v0, $v0, 6
 /* B168 8002FD68 14400007 */  bnez      $v0, .L8002FD88
-/* B16C 8002FD6C 00000000 */   nop      
+/* B16C 8002FD6C 00000000 */   nop
 /* B170 8002FD70 C460002C */  lwc1      $f0, 0x2c($v1)
 /* B174 8002FD74 3C014270 */  lui       $at, 0x4270
 /* B178 8002FD78 44811000 */  mtc1      $at, $f2
-/* B17C 8002FD7C 00000000 */  nop       
+/* B17C 8002FD7C 00000000 */  nop
 /* B180 8002FD80 46020000 */  add.s     $f0, $f0, $f2
 /* B184 8002FD84 E6000058 */  swc1      $f0, 0x58($s0)
 .L8002FD88:
@@ -66,7 +66,7 @@ glabel do_camera_type_unused
 /* B1C4 8002FDC4 14610004 */  bne       $v1, $at, .L8002FDD8
 /* B1C8 8002FDC8 3C018000 */   lui      $at, 0x8000
 /* B1CC 8002FDCC 14410002 */  bne       $v0, $at, .L8002FDD8
-/* B1D0 8002FDD0 00000000 */   nop      
+/* B1D0 8002FDD0 00000000 */   nop
 /* B1D4 8002FDD4 0006000D */  break     6
 .L8002FDD8:
 /* B1D8 8002FDD8 00002012 */   mflo     $a0
@@ -77,18 +77,18 @@ glabel do_camera_type_unused
 /* B1EC 8002FDEC 8603001E */  lh        $v1, 0x1e($s0)
 /* B1F0 8002FDF0 E6000048 */  swc1      $f0, 0x48($s0)
 /* B1F4 8002FDF4 44820000 */  mtc1      $v0, $f0
-/* B1F8 8002FDF8 00000000 */  nop       
+/* B1F8 8002FDF8 00000000 */  nop
 /* B1FC 8002FDFC 46800020 */  cvt.s.w   $f0, $f0
 /* B200 8002FE00 86020022 */  lh        $v0, 0x22($s0)
 /* B204 8002FE04 E602004C */  swc1      $f2, 0x4c($s0)
 /* B208 8002FE08 E6040050 */  swc1      $f4, 0x50($s0)
 /* B20C 8002FE0C E6000084 */  swc1      $f0, 0x84($s0)
 /* B210 8002FE10 44820000 */  mtc1      $v0, $f0
-/* B214 8002FE14 00000000 */  nop       
+/* B214 8002FE14 00000000 */  nop
 /* B218 8002FE18 46800020 */  cvt.s.w   $f0, $f0
 /* B21C 8002FE1C E6000074 */  swc1      $f0, 0x74($s0)
 /* B220 8002FE20 44830000 */  mtc1      $v1, $f0
-/* B224 8002FE24 00000000 */  nop       
+/* B224 8002FE24 00000000 */  nop
 /* B228 8002FE28 46800020 */  cvt.s.w   $f0, $f0
 /* B22C 8002FE2C 04810002 */  bgez      $a0, .L8002FE38
 /* B230 8002FE30 E6000078 */   swc1     $f0, 0x78($s0)
@@ -100,12 +100,12 @@ glabel do_camera_type_unused
 /* B244 8002FE44 4481A000 */  mtc1      $at, $f20
 /* B248 8002FE48 00041083 */  sra       $v0, $a0, 2
 /* B24C 8002FE4C 46141082 */  mul.s     $f2, $f2, $f20
-/* B250 8002FE50 00000000 */  nop       
+/* B250 8002FE50 00000000 */  nop
 /* B254 8002FE54 4480F000 */  mtc1      $zero, $f30
 /* B258 8002FE58 3C0143B4 */  lui       $at, 0x43b4
 /* B25C 8002FE5C 4481B000 */  mtc1      $at, $f22
 /* B260 8002FE60 44820000 */  mtc1      $v0, $f0
-/* B264 8002FE64 00000000 */  nop       
+/* B264 8002FE64 00000000 */  nop
 /* B268 8002FE68 46800020 */  cvt.s.w   $f0, $f0
 /* B26C 8002FE6C E6000018 */  swc1      $f0, 0x18($s0)
 /* B270 8002FE70 46161683 */  div.s     $f26, $f2, $f22
@@ -115,18 +115,18 @@ glabel do_camera_type_unused
 /* B280 8002FE80 0C00A874 */  jal       cos_rad
 /* B284 8002FE84 4600D306 */   mov.s    $f12, $f26
 /* B288 8002FE88 461E0202 */  mul.s     $f8, $f0, $f30
-/* B28C 8002FE8C 00000000 */  nop       
+/* B28C 8002FE8C 00000000 */  nop
 /* B290 8002FE90 4600F087 */  neg.s     $f2, $f30
 /* B294 8002FE94 4602E082 */  mul.s     $f2, $f28, $f2
-/* B298 8002FE98 00000000 */  nop       
+/* B298 8002FE98 00000000 */  nop
 /* B29C 8002FE9C C6180078 */  lwc1      $f24, 0x78($s0)
 /* B2A0 8002FEA0 461CC102 */  mul.s     $f4, $f24, $f28
-/* B2A4 8002FEA4 00000000 */  nop       
+/* B2A4 8002FEA4 00000000 */  nop
 /* B2A8 8002FEA8 4600C182 */  mul.s     $f6, $f24, $f0
-/* B2AC 8002FEAC 00000000 */  nop       
+/* B2AC 8002FEAC 00000000 */  nop
 /* B2B0 8002FEB0 C6000084 */  lwc1      $f0, 0x84($s0)
 /* B2B4 8002FEB4 46140002 */  mul.s     $f0, $f0, $f20
-/* B2B8 8002FEB8 00000000 */  nop       
+/* B2B8 8002FEB8 00000000 */  nop
 /* B2BC 8002FEBC 4600F286 */  mov.s     $f10, $f30
 /* B2C0 8002FEC0 46005506 */  mov.s     $f20, $f10
 /* B2C4 8002FEC4 46044780 */  add.s     $f30, $f8, $f4
@@ -138,13 +138,13 @@ glabel do_camera_type_unused
 /* B2DC 8002FEDC 0C00A874 */  jal       cos_rad
 /* B2E0 8002FEE0 4600D306 */   mov.s    $f12, $f26
 /* B2E4 8002FEE4 46140182 */  mul.s     $f6, $f0, $f20
-/* B2E8 8002FEE8 00000000 */  nop       
+/* B2E8 8002FEE8 00000000 */  nop
 /* B2EC 8002FEEC 4614E102 */  mul.s     $f4, $f28, $f20
-/* B2F0 8002FEF0 00000000 */  nop       
+/* B2F0 8002FEF0 00000000 */  nop
 /* B2F4 8002FEF4 461CC082 */  mul.s     $f2, $f24, $f28
-/* B2F8 8002FEF8 00000000 */  nop       
+/* B2F8 8002FEF8 00000000 */  nop
 /* B2FC 8002FEFC 4600C002 */  mul.s     $f0, $f24, $f0
-/* B300 8002FF00 00000000 */  nop       
+/* B300 8002FF00 00000000 */  nop
 /* B304 8002FF04 46023281 */  sub.s     $f10, $f6, $f2
 /* B308 8002FF08 46002100 */  add.s     $f4, $f4, $f0
 /* B30C 8002FF0C C600004C */  lwc1      $f0, 0x4c($s0)
@@ -179,19 +179,19 @@ glabel do_camera_type_unused
 /* B37C 8002FF7C 0C00A720 */  jal       atan2
 /* B380 8002FF80 4600B386 */   mov.s    $f14, $f22
 /* B384 8002FF84 4614A102 */  mul.s     $f4, $f20, $f20
-/* B388 8002FF88 00000000 */  nop       
+/* B388 8002FF88 00000000 */  nop
 /* B38C 8002FF8C 4618C082 */  mul.s     $f2, $f24, $f24
-/* B390 8002FF90 00000000 */  nop       
+/* B390 8002FF90 00000000 */  nop
 /* B394 8002FF94 46022300 */  add.s     $f12, $f4, $f2
 /* B398 8002FF98 46000007 */  neg.s     $f0, $f0
 /* B39C 8002FF9C E6000090 */  swc1      $f0, 0x90($s0)
 /* B3A0 8002FFA0 46006004 */  sqrt.s    $f0, $f12
 /* B3A4 8002FFA4 46000032 */  c.eq.s    $f0, $f0
-/* B3A8 8002FFA8 00000000 */  nop       
+/* B3A8 8002FFA8 00000000 */  nop
 /* B3AC 8002FFAC 45030004 */  bc1tl     .L8002FFC0
 /* B3B0 8002FFB0 4600B306 */   mov.s    $f12, $f22
 /* B3B4 8002FFB4 0C0187BC */  jal       sqrtf
-/* B3B8 8002FFB8 00000000 */   nop      
+/* B3B8 8002FFB8 00000000 */   nop
 /* B3BC 8002FFBC 4600B306 */  mov.s     $f12, $f22
 .L8002FFC0:
 /* B3C0 8002FFC0 46000007 */  neg.s     $f0, $f0

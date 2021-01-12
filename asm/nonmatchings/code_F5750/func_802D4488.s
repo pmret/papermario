@@ -46,13 +46,13 @@ glabel func_802D4488
 /* F8EC8 802D4518 2A220040 */  slti      $v0, $s1, 0x40
 /* F8ECC 802D451C 1440FFEF */  bnez      $v0, .L802D44DC
 /* F8ED0 802D4520 26100004 */   addiu    $s0, $s0, 4
-/* F8ED4 802D4524 3C04802D */  lui       $a0, %hi(D_802D2FCC)
-/* F8ED8 802D4528 24842FCC */  addiu     $a0, $a0, %lo(D_802D2FCC)
-/* F8EDC 802D452C 3C05802D */  lui       $a1, %hi(D_802D3028)
+/* F8ED4 802D4524 3C04802D */  lui       $a0, %hi(func_802D2FCC)
+/* F8ED8 802D4528 24842FCC */  addiu     $a0, $a0, %lo(func_802D2FCC)
+/* F8EDC 802D452C 3C05802D */  lui       $a1, %hi(func_802D3028)
 /* F8EE0 802D4530 0C048C56 */  jal       bind_dynamic_entity_3
-/* F8EE4 802D4534 24A53028 */   addiu    $a1, $a1, %lo(D_802D3028)
-/* F8EE8 802D4538 3C05802D */  lui       $a1, %hi(D_802D31E0)
-/* F8EEC 802D453C 24A531E0 */  addiu     $a1, $a1, %lo(D_802D31E0)
+/* F8EE4 802D4534 24A53028 */   addiu    $a1, $a1, %lo(func_802D3028)
+/* F8EE8 802D4538 3C05802D */  lui       $a1, %hi(func_802D31E0)
+/* F8EEC 802D453C 24A531E0 */  addiu     $a1, $a1, %lo(func_802D31E0)
 /* F8EF0 802D4540 0C048CC8 */  jal       bind_dynamic_entity_B
 /* F8EF4 802D4544 0000202D */   daddu    $a0, $zero, $zero
 /* F8EF8 802D4548 8FBF001C */  lw        $ra, 0x1c($sp)

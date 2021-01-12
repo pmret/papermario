@@ -5,7 +5,7 @@ glabel nuContMgrInit
 /* 3B910 80060510 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 3B914 80060514 AFBF0010 */  sw        $ra, 0x10($sp)
 /* 3B918 80060518 0C01823C */  jal       nuContDataUnLock
-/* 3B91C 8006051C 00000000 */   nop      
+/* 3B91C 8006051C 00000000 */   nop
 /* 3B920 80060520 3C04800B */  lui       $a0, %hi(D_800B0EB8)
 /* 3B924 80060524 24840EB8 */  addiu     $a0, $a0, %lo(D_800B0EB8)
 /* 3B928 80060528 3C05800B */  lui       $a1, %hi(D_800AE6D0)
@@ -22,7 +22,7 @@ glabel nuContMgrInit
 /* 3B954 80060554 0C0180FC */  jal       nuSiCallBackAdd
 /* 3B958 80060558 24843D38 */   addiu    $a0, $a0, %lo(D_80093D38)
 /* 3B95C 8006055C 0C018248 */  jal       nuContQueryRead
-/* 3B960 80060560 00000000 */   nop      
+/* 3B960 80060560 00000000 */   nop
 /* 3B964 80060564 24050001 */  addiu     $a1, $zero, 1
 /* 3B968 80060568 0000302D */  daddu     $a2, $zero, $zero
 /* 3B96C 8006056C 0000202D */  daddu     $a0, $zero, $zero

@@ -36,7 +36,7 @@ glabel func_8024013C_B1D89C
 /* B1D918 802401B8 4480C000 */  mtc1      $zero, $f24
 /* B1D91C 802401BC 460005A1 */  cvt.d.s   $f22, $f0
 /* B1D920 802401C0 4638B582 */  mul.d     $f22, $f22, $f24
-/* B1D924 802401C4 00000000 */  nop       
+/* B1D924 802401C4 00000000 */  nop
 /* B1D928 802401C8 4638B580 */  add.d     $f22, $f22, $f24
 /* B1D92C 802401CC C60C0000 */  lwc1      $f12, ($s0)
 /* B1D930 802401D0 46806320 */  cvt.s.w   $f12, $f12
@@ -49,9 +49,9 @@ glabel func_8024013C_B1D89C
 /* B1D94C 802401EC 0C00A874 */  jal       cos_rad
 /* B1D950 802401F0 46000506 */   mov.s    $f20, $f0
 /* B1D954 802401F4 4600A502 */  mul.s     $f20, $f20, $f0
-/* B1D958 802401F8 00000000 */  nop       
-/* B1D95C 802401FC 3C018024 */  lui       $at, %hi(D_80242D00)
-/* B1D960 80240200 D4202D00 */  ldc1      $f0, %lo(D_80242D00)($at)
+/* B1D958 802401F8 00000000 */  nop
+/* B1D95C 802401FC 3C018024 */  lui       $at, %hi(func_80242D00_A96440)
+/* B1D960 80240200 D4202D00 */  ldc1      $f0, %lo(func_80242D00_A96440)($at)
 /* B1D964 80240204 4600A521 */  cvt.d.s   $f20, $f20
 /* B1D968 80240208 4620A500 */  add.d     $f20, $f20, $f0
 /* B1D96C 8024020C C60C0000 */  lwc1      $f12, ($s0)
@@ -61,7 +61,7 @@ glabel func_8024013C_B1D89C
 /* B1D97C 8024021C 4620A520 */   cvt.s.d  $f20, $f20
 /* B1D980 80240220 46000021 */  cvt.d.s   $f0, $f0
 /* B1D984 80240224 46380002 */  mul.d     $f0, $f0, $f24
-/* B1D988 80240228 00000000 */  nop       
+/* B1D988 80240228 00000000 */  nop
 /* B1D98C 8024022C 3C140001 */  lui       $s4, 1
 /* B1D990 80240230 36941630 */  ori       $s4, $s4, 0x1630
 /* B1D994 80240234 27B00050 */  addiu     $s0, $sp, 0x50
@@ -77,10 +77,10 @@ glabel func_8024013C_B1D89C
 /* B1D9BC 8024025C 0C019D80 */  jal       guMtxCatF
 /* B1D9C0 80240260 00A0302D */   daddu    $a2, $a1, $zero
 /* B1D9C4 80240264 27A40010 */  addiu     $a0, $sp, 0x10
-/* B1D9C8 80240268 3C118007 */  lui       $s1, %hi(D_800741F0)
-/* B1D9CC 8024026C 263141F0 */  addiu     $s1, $s1, %lo(D_800741F0)
-/* B1D9D0 80240270 3C12800A */  lui       $s2, %hi(D_8009A674)
-/* B1D9D4 80240274 2652A674 */  addiu     $s2, $s2, %lo(D_8009A674)
+/* B1D9C8 80240268 3C118007 */  lui       $s1, %hi(gMatrixListPos)
+/* B1D9CC 8024026C 263141F0 */  addiu     $s1, $s1, %lo(gMatrixListPos)
+/* B1D9D0 80240270 3C12800A */  lui       $s2, %hi(gDisplayContext)
+/* B1D9D4 80240274 2652A674 */  addiu     $s2, $s2, %lo(gDisplayContext)
 /* B1D9D8 80240278 96250000 */  lhu       $a1, ($s1)
 /* B1D9DC 8024027C 8E420000 */  lw        $v0, ($s2)
 /* B1D9E0 80240280 00052980 */  sll       $a1, $a1, 6
@@ -88,8 +88,8 @@ glabel func_8024013C_B1D89C
 /* B1D9E8 80240288 0C019D40 */  jal       guMtxF2L
 /* B1D9EC 8024028C 00452821 */   addu     $a1, $v0, $a1
 /* B1D9F0 80240290 24040001 */  addiu     $a0, $zero, 1
-/* B1D9F4 80240294 3C138024 */  lui       $s3, %hi(D_80242860)
-/* B1D9F8 80240298 26732860 */  addiu     $s3, $s3, %lo(D_80242860)
+/* B1D9F4 80240294 3C138024 */  lui       $s3, %hi(func_80242860_8B28D0)
+/* B1D9F8 80240298 26732860 */  addiu     $s3, $s3, %lo(func_80242860_8B28D0)
 /* B1D9FC 8024029C 0260282D */  daddu     $a1, $s3, $zero
 /* B1DA00 802402A0 27A60010 */  addiu     $a2, $sp, 0x10
 /* B1DA04 802402A4 0C0470CB */  jal       func_8011C32C
@@ -100,8 +100,8 @@ glabel func_8024013C_B1D89C
 /* B1DA18 802402B8 3529001C */  ori       $t1, $t1, 0x1c
 /* B1DA1C 802402BC 3C080055 */  lui       $t0, 0x55
 /* B1DA20 802402C0 35082078 */  ori       $t0, $t0, 0x2078
-/* B1DA24 802402C4 3C10800A */  lui       $s0, %hi(D_8009A66C)
-/* B1DA28 802402C8 2610A66C */  addiu     $s0, $s0, %lo(D_8009A66C)
+/* B1DA24 802402C4 3C10800A */  lui       $s0, %hi(gMasterGfxPos)
+/* B1DA28 802402C8 2610A66C */  addiu     $s0, $s0, %lo(gMasterGfxPos)
 /* B1DA2C 802402CC 0200202D */  daddu     $a0, $s0, $zero
 /* B1DA30 802402D0 24050001 */  addiu     $a1, $zero, 1
 /* B1DA34 802402D4 8E020000 */  lw        $v0, ($s0)
@@ -160,6 +160,6 @@ glabel func_8024013C_B1D89C
 /* B1DB08 802403A8 D7B400A8 */  ldc1      $f20, 0xa8($sp)
 /* B1DB0C 802403AC 03E00008 */  jr        $ra
 /* B1DB10 802403B0 27BD00C8 */   addiu    $sp, $sp, 0xc8
-/* B1DB14 802403B4 00000000 */  nop       
-/* B1DB18 802403B8 00000000 */  nop       
-/* B1DB1C 802403BC 00000000 */  nop       
+/* B1DB14 802403B4 00000000 */  nop
+/* B1DB18 802403B8 00000000 */  nop
+/* B1DB1C 802403BC 00000000 */  nop

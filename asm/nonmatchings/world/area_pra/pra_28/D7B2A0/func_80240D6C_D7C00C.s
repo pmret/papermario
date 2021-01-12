@@ -25,13 +25,13 @@ glabel func_80240D6C_D7C00C
 /* D7C058 80240DB8 08090384 */  j         .L80240E10
 /* D7C05C 80240DBC 00000000 */   nop      
 .L80240DC0:
-/* D7C060 80240DC0 3C048024 */  lui       $a0, %hi(D_80240EB4)
-/* D7C064 80240DC4 24840EB4 */  addiu     $a0, $a0, %lo(D_80240EB4)
+/* D7C060 80240DC0 3C048024 */  lui       $a0, %hi(pra_28_SetPartnerFlagsA0000)
+/* D7C064 80240DC4 24840EB4 */  addiu     $a0, $a0, %lo(pra_28_SetPartnerFlagsA0000)
 /* D7C068 80240DC8 08090380 */  j         .L80240E00
 /* D7C06C 80240DCC 00000000 */   nop      
 .L80240DD0:
-/* D7C070 80240DD0 3C048024 */  lui       $a0, %hi(D_80240F1C)
-/* D7C074 80240DD4 24840F1C */  addiu     $a0, $a0, %lo(D_80240F1C)
+/* D7C070 80240DD0 3C048024 */  lui       $a0, %hi(pra_28_SetPartnerFlags20000)
+/* D7C074 80240DD4 24840F1C */  addiu     $a0, $a0, %lo(pra_28_SetPartnerFlags20000)
 /* D7C078 80240DD8 08090380 */  j         .L80240E00
 /* D7C07C 80240DDC 00000000 */   nop      
 .L80240DE0:
@@ -42,8 +42,8 @@ glabel func_80240D6C_D7C00C
 /* D7C090 80240DF0 10400007 */  beqz      $v0, .L80240E10
 /* D7C094 80240DF4 00000000 */   nop      
 .L80240DF8:
-/* D7C098 80240DF8 3C048024 */  lui       $a0, %hi(D_80240EE8)
-/* D7C09C 80240DFC 24840EE8 */  addiu     $a0, $a0, %lo(D_80240EE8)
+/* D7C098 80240DF8 3C048024 */  lui       $a0, %hi(pra_28_SetPartnerFlags80000)
+/* D7C09C 80240DFC 24840EE8 */  addiu     $a0, $a0, %lo(pra_28_SetPartnerFlags80000)
 .L80240E00:
 /* D7C0A0 80240E00 0C048C56 */  jal       bind_dynamic_entity_3
 /* D7C0A4 80240E04 0000282D */   daddu    $a1, $zero, $zero

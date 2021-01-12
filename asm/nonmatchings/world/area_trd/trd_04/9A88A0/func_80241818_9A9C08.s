@@ -46,7 +46,7 @@ glabel func_80241818_9A9C08
 /* 9A9CAC 802418BC 8E2200B0 */  lw        $v0, 0xb0($s1)
 /* 9A9CB0 802418C0 30420004 */  andi      $v0, $v0, 4
 /* 9A9CB4 802418C4 10400044 */  beqz      $v0, .L802419D8
-/* 9A9CB8 802418C8 00000000 */   nop      
+/* 9A9CB8 802418C8 00000000 */   nop
 .L802418CC:
 /* 9A9CBC 802418CC 2404F7FF */  addiu     $a0, $zero, -0x801
 /* 9A9CC0 802418D0 AE800070 */  sw        $zero, 0x70($s4)
@@ -101,7 +101,7 @@ glabel func_80241818_9A9C08
 /* 9A9D74 80241984 3C0142C8 */  lui       $at, 0x42c8
 /* 9A9D78 80241988 44812000 */  mtc1      $at, $f4
 /* 9A9D7C 8024198C 44823000 */  mtc1      $v0, $f6
-/* 9A9D80 80241990 00000000 */  nop       
+/* 9A9D80 80241990 00000000 */  nop
 /* 9A9D84 80241994 468031A0 */  cvt.s.w   $f6, $f6
 /* 9A9D88 80241998 27A20044 */  addiu     $v0, $sp, 0x44
 /* 9A9D8C 8024199C E7A00038 */  swc1      $f0, 0x38($sp)
@@ -116,7 +116,7 @@ glabel func_80241818_9A9C08
 /* 9A9DB0 802419C0 0C0372DF */  jal       func_800DCB7C
 /* 9A9DB4 802419C4 27A70040 */   addiu    $a3, $sp, 0x40
 /* 9A9DB8 802419C8 10400003 */  beqz      $v0, .L802419D8
-/* 9A9DBC 802419CC 00000000 */   nop      
+/* 9A9DBC 802419CC 00000000 */   nop
 /* 9A9DC0 802419D0 C7A0003C */  lwc1      $f0, 0x3c($sp)
 /* 9A9DC4 802419D4 E640003C */  swc1      $f0, 0x3c($s2)
 .L802419D8:
@@ -128,7 +128,7 @@ glabel func_80241818_9A9C08
 /* 9A9DDC 802419EC 00220821 */  addu      $at, $at, $v0
 /* 9A9DE0 802419F0 8C225F50 */  lw        $v0, %lo(D_80245F50)($at)
 /* 9A9DE4 802419F4 00400008 */  jr        $v0
-/* 9A9DE8 802419F8 00000000 */   nop      
+/* 9A9DE8 802419F8 00000000 */   nop
 /* 9A9DEC 802419FC 0280202D */  daddu     $a0, $s4, $zero
 /* 9A9DF0 80241A00 0260282D */  daddu     $a1, $s3, $zero
 /* 9A9DF4 80241A04 0C090321 */  jal       func_80240C84_9A9074
@@ -138,7 +138,7 @@ glabel func_80241818_9A9C08
 /* 9A9E04 80241A14 0C090377 */  jal       func_80240DDC_9A91CC
 /* 9A9E08 80241A18 02A0302D */   daddu    $a2, $s5, $zero
 /* 9A9E0C 80241A1C 080906BB */  j         .L80241AEC
-/* 9A9E10 80241A20 00000000 */   nop      
+/* 9A9E10 80241A20 00000000 */   nop
 /* 9A9E14 80241A24 0280202D */  daddu     $a0, $s4, $zero
 /* 9A9E18 80241A28 0260282D */  daddu     $a1, $s3, $zero
 /* 9A9E1C 80241A2C 0C090421 */  jal       trd_04_UnkNpcAIFunc1
@@ -148,13 +148,13 @@ glabel func_80241818_9A9C08
 /* 9A9E2C 80241A3C 0C090451 */  jal       func_80241144_9A9534
 /* 9A9E30 80241A40 02A0302D */   daddu    $a2, $s5, $zero
 /* 9A9E34 80241A44 080906BB */  j         .L80241AEC
-/* 9A9E38 80241A48 00000000 */   nop      
+/* 9A9E38 80241A48 00000000 */   nop
 /* 9A9E3C 80241A4C 0280202D */  daddu     $a0, $s4, $zero
 /* 9A9E40 80241A50 0260282D */  daddu     $a1, $s3, $zero
 /* 9A9E44 80241A54 0C0904C0 */  jal       func_80241300_9A96F0
 /* 9A9E48 80241A58 02A0302D */   daddu    $a2, $s5, $zero
 /* 9A9E4C 80241A5C 080906BB */  j         .L80241AEC
-/* 9A9E50 80241A60 00000000 */   nop      
+/* 9A9E50 80241A60 00000000 */   nop
 /* 9A9E54 80241A64 0280202D */  daddu     $a0, $s4, $zero
 /* 9A9E58 80241A68 0260282D */  daddu     $a1, $s3, $zero
 /* 9A9E5C 80241A6C 0C0904ED */  jal       trd_04_NpcJumpFunc2
@@ -164,7 +164,7 @@ glabel func_80241818_9A9C08
 /* 9A9E6C 80241A7C 0C09050A */  jal       trd_04_NpcJumpFunc
 /* 9A9E70 80241A80 02A0302D */   daddu    $a2, $s5, $zero
 /* 9A9E74 80241A84 080906BB */  j         .L80241AEC
-/* 9A9E78 80241A88 00000000 */   nop      
+/* 9A9E78 80241A88 00000000 */   nop
 /* 9A9E7C 80241A8C 0280202D */  daddu     $a0, $s4, $zero
 /* 9A9E80 80241A90 0260282D */  daddu     $a1, $s3, $zero
 /* 9A9E84 80241A94 0C090528 */  jal       func_802414A0_9A9890
@@ -174,19 +174,19 @@ glabel func_80241818_9A9C08
 /* 9A9E94 80241AA4 0C090574 */  jal       func_802415D0_9A99C0
 /* 9A9E98 80241AA8 02A0302D */   daddu    $a2, $s5, $zero
 /* 9A9E9C 80241AAC 080906BB */  j         .L80241AEC
-/* 9A9EA0 80241AB0 00000000 */   nop      
+/* 9A9EA0 80241AB0 00000000 */   nop
 /* 9A9EA4 80241AB4 0280202D */  daddu     $a0, $s4, $zero
 /* 9A9EA8 80241AB8 0260282D */  daddu     $a1, $s3, $zero
 /* 9A9EAC 80241ABC 0C0905BC */  jal       trd_04_UnkNpcDurationFlagFunc
 /* 9A9EB0 80241AC0 02A0302D */   daddu    $a2, $s5, $zero
 /* 9A9EB4 80241AC4 080906BB */  j         .L80241AEC
-/* 9A9EB8 80241AC8 00000000 */   nop      
+/* 9A9EB8 80241AC8 00000000 */   nop
 /* 9A9EBC 80241ACC 0280202D */  daddu     $a0, $s4, $zero
 /* 9A9EC0 80241AD0 0260282D */  daddu     $a1, $s3, $zero
 /* 9A9EC4 80241AD4 0C0905D6 */  jal       func_80241758_9A9B48
 /* 9A9EC8 80241AD8 02A0302D */   daddu    $a2, $s5, $zero
 /* 9A9ECC 80241ADC 080906BB */  j         .L80241AEC
-/* 9A9ED0 80241AE0 00000000 */   nop      
+/* 9A9ED0 80241AE0 00000000 */   nop
 /* 9A9ED4 80241AE4 0C0129CF */  jal       func_8004A73C
 /* 9A9ED8 80241AE8 0280202D */   daddu    $a0, $s4, $zero
 .L80241AEC:

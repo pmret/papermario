@@ -26,8 +26,8 @@ glabel func_802E7DE0
 /* 1096B4 802E7E34 4481A000 */  mtc1      $at, $f20
 /* 1096B8 802E7E38 00451021 */  addu      $v0, $v0, $a1
 /* 1096BC 802E7E3C AE020008 */  sw        $v0, 8($s0)
-/* 1096C0 802E7E40 3C02802F */  lui       $v0, %hi(D_802E854C)
-/* 1096C4 802E7E44 2442854C */  addiu     $v0, $v0, %lo(D_802E854C)
+/* 1096C0 802E7E40 3C02802F */  lui       $v0, %hi(func_802E854C)
+/* 1096C4 802E7E44 2442854C */  addiu     $v0, $v0, %lo(func_802E854C)
 /* 1096C8 802E7E48 AE62003C */  sw        $v0, 0x3c($s3)
 /* 1096CC 802E7E4C 240200FF */  addiu     $v0, $zero, 0xff
 /* 1096D0 802E7E50 A262000B */  sb        $v0, 0xb($s3)

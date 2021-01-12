@@ -9,7 +9,7 @@ glabel contReadData
 /* 3BB48 80060748 3C04800E */  lui       $a0, %hi(nuSiMesgQ)
 /* 3BB4C 8006074C 2484AC78 */  addiu     $a0, $a0, %lo(nuSiMesgQ)
 /* 3BB50 80060750 0C018668 */  jal       osContStartReadData
-/* 3BB54 80060754 00000000 */   nop      
+/* 3BB54 80060754 00000000 */   nop
 /* 3BB58 80060758 14400012 */  bnez      $v0, .L800607A4
 /* 3BB5C 8006075C 0000282D */   daddu    $a1, $zero, $zero
 /* 3BB60 80060760 3C04800E */  lui       $a0, %hi(nuSiMesgQ)

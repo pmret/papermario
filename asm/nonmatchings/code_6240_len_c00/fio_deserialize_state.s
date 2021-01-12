@@ -98,4 +98,4 @@ glabel fio_deserialize_state
 /* 69F8 8002B5F8 00220821 */  addu      $at, $at, $v0
 /* 69FC 8002B5FC AC2A79D8 */  sw        $t2, %lo(D_800779D8)($at)
 /* 6A00 8002B600 03E00008 */  jr        $ra
-/* 6A04 8002B604 00000000 */   nop      
+/* 6A04 8002B604 00000000 */   nop

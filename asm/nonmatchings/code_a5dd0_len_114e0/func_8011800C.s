@@ -7,8 +7,8 @@ glabel func_8011800C
 /* AE714 80118014 AFB10014 */  sw        $s1, 0x14($sp)
 /* AE718 80118018 00A0882D */  daddu     $s1, $a1, $zero
 /* AE71C 8011801C AFB00010 */  sw        $s0, 0x10($sp)
-/* AE720 80118020 3C10800A */  lui       $s0, %hi(D_8009A66C)
-/* AE724 80118024 2610A66C */  addiu     $s0, $s0, %lo(D_8009A66C)
+/* AE720 80118020 3C10800A */  lui       $s0, %hi(gMasterGfxPos)
+/* AE724 80118024 2610A66C */  addiu     $s0, $s0, %lo(gMasterGfxPos)
 /* AE728 80118028 AFBF001C */  sw        $ra, 0x1c($sp)
 /* AE72C 8011802C AFB20018 */  sw        $s2, 0x18($sp)
 /* AE730 80118030 94A20000 */  lhu       $v0, ($a1)

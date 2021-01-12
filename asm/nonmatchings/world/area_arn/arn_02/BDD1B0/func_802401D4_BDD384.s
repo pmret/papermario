@@ -21,8 +21,8 @@ glabel func_802401D4_BDD384
 /* BDD3C4 80240214 8E420014 */  lw        $v0, 0x14($s2)
 /* BDD3C8 80240218 AE620074 */  sw        $v0, 0x74($s3)
 /* BDD3CC 8024021C C640000C */  lwc1      $f0, 0xc($s2)
-/* BDD3D0 80240220 3C018024 */  lui       $at, %hi(D_80241AF0)
-/* BDD3D4 80240224 D4221AF0 */  ldc1      $f2, %lo(D_80241AF0)($at)
+/* BDD3D0 80240220 3C018024 */  lui       $at, %hi(func_80241AF0_A6FED0)
+/* BDD3D4 80240224 D4221AF0 */  ldc1      $f2, %lo(func_80241AF0_A6FED0)($at)
 /* BDD3D8 80240228 46000021 */  cvt.d.s   $f0, $f0
 /* BDD3DC 8024022C 46220002 */  mul.d     $f0, $f0, $f2
 /* BDD3E0 80240230 00000000 */  nop       

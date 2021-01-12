@@ -79,7 +79,7 @@ glabel nuGfxTaskStart
 /* 81DC 8002CDDC 0C018250 */  jal       osSetIntMask
 /* 81E0 8002CDE0 ACA30000 */   sw       $v1, ($a1)
 /* 81E4 8002CDE4 0C018634 */  jal       osWritebackDCacheAll
-/* 81E8 8002CDE8 00000000 */   nop      
+/* 81E8 8002CDE8 00000000 */   nop
 /* 81EC 8002CDEC 3C04800E */  lui       $a0, %hi(D_800DA47C)
 /* 81F0 8002CDF0 2484A47C */  addiu     $a0, $a0, %lo(D_800DA47C)
 /* 81F4 8002CDF4 3C10800A */  lui       $s0, %hi(D_8009C510)
@@ -94,6 +94,6 @@ glabel nuGfxTaskStart
 /* 8218 8002CE18 8FB00010 */  lw        $s0, 0x10($sp)
 /* 821C 8002CE1C 03E00008 */  jr        $ra
 /* 8220 8002CE20 27BD0018 */   addiu    $sp, $sp, 0x18
-/* 8224 8002CE24 00000000 */  nop       
-/* 8228 8002CE28 00000000 */  nop       
-/* 822C 8002CE2C 00000000 */  nop       
+/* 8224 8002CE24 00000000 */  nop
+/* 8228 8002CE28 00000000 */  nop
+/* 822C 8002CE2C 00000000 */  nop
