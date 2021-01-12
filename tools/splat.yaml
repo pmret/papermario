@@ -213,7 +213,8 @@ segments:
     - [0x6B450, .data, world/world]
     - [0x6EAC0, data] # has scripts
     - [0x70E30, .data, battle/battle]
-    - [0x71430, data] # data / rodata split is somewhere in here probably
+    - [0x71430, data]
+    - [0x73130, rodata]
     - [0x73DA0, .rodata, world/world]
     - [0x74EA0, rodata]
     - [0x75240, .rodata, battle/battle] # ram 80099E40
@@ -267,6 +268,7 @@ segments:
     - [0xE56C0, .data, code_d5a50_len_5fd0]
     - [0xE5820, .data, code_dc470_len_14c0]
     - [0xE5830, data]
+    - [0xE5E40, rodata]
   - type: code
     start: 0xE79B0
     vram: 0x802C3000
@@ -359,6 +361,7 @@ segments:
     - [0x168590, c]
     - [0x169BE0, c]
     - [0x16A3E0, data]
+    - [0x16C7D0, rodata]
   - type: code
     start: 0x16C8E0
     vram: 0x8023E000
@@ -381,6 +384,7 @@ segments:
     - [0x1AF120, c]
     - [0x1AF230, c]
     - [0x1AF2D0, data]
+    - [0x1CB240, rodata]
   - [0x1CC310, bin] # icon images and palettes, vram unknown
   - [0x1FE1B0, rgba16,  title/logo_n64, 128, 112]
   - [0x2051B0, rgba16,  title/logo_is, 256, 122]
@@ -445,6 +449,7 @@ segments:
     files:
     - [0x319670, c, world/partner/parakarry]
     - [0x31b000, data]
+    - [0x31B080, rodata]
   - type: code
     ld_name: world_partner_kooper
     start: 0x31b120
@@ -453,6 +458,7 @@ segments:
     files:
     - [0x31b120, c, world/partner/kooper]
     - [0x31cb60, data]
+    - [0x31CBE0, rodata]
   - type: code
     ld_name: world_partner_watt
     start: 0x31cc70
@@ -469,6 +475,7 @@ segments:
     files:
     - [0x31de70, c, world/partner/sushie]
     - [0x320b20, data]
+    - [0x320BC0, rodata]
   - type: code
     ld_name: world_partner_lakilester
     start: 0x320c50
@@ -485,6 +492,7 @@ segments:
     files:
     - [0x323A50, c, world/partner/bow]
     - [0x324930, data]
+    - [0x3249B0, rodata]
   - type: code
     ld_name: world_partner_goompa
     start: 0x324a10
@@ -1351,7 +1359,7 @@ segments:
     overlay: True
     files:
     - [0x4219F0, c]
-    - [0x421FC0, data]
+    - [0x421FC0, rodata]
   - type: code
     start: 0x422000
     vram: 0x802A9000

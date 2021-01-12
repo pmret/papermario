@@ -1,8 +1,5 @@
 .include "macro.inc"
 
-.section .data
-
-
 .section .rodata
 
 glabel jtbl_802A95D0_421FC0
