@@ -11,6 +11,10 @@ struct ScriptInstance;
 
 typedef ApiStatus(*ApiFunc)(struct ScriptInstance*, s32);
 
+typedef struct {
+    u8 r, g, b, a;
+} Color_RGBA8;
+
 typedef struct Vec2b {
     /* 0x00 */ s8 x;
     /* 0x01 */ s8 y;

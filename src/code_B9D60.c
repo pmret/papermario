@@ -1,5 +1,6 @@
 #include "common.h"
 
+extern Gfx D_8014C500[];
 extern s32 D_801512F4; // message images?
 extern s16 D_80155C98;
 extern s32 D_80155D88;
@@ -94,7 +95,11 @@ INCLUDE_ASM(s32, "code_B9D60", func_80127BA4);
 
 INCLUDE_ASM(s32, "code_B9D60", func_80127D90);
 
-INCLUDE_ASM(s32, "code_B9D60", func_8012C2E0);
+
+void func_8012C2E0(void) {
+    gDPPipeSync(gMasterGfxPos++);
+    gSPDisplayList(gMasterGfxPos++, D_8014C500);
+}
 
 INCLUDE_ASM(s32, "code_B9D60", func_8012C324);
 

@@ -14,7 +14,10 @@ INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8010FD98);
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8010FE44);
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8010FE68);
+void func_8010FE68(s32 alpha) {
+    gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, 0, PRIMITIVE, 0, TEXEL0, 0, 0, 0, 0, 0, TEXEL0, 0, PRIMITIVE, 0);
+    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0x00, 0x00, 0x00, alpha);
+}
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", render_entities);
 
