@@ -18,13 +18,13 @@ glabel func_80240FF0_D7FD50
 /* D7FD84 80241024 24020014 */   addiu    $v0, $zero, 0x14
 /* D7FD88 80241028 808300B4 */  lb        $v1, 0xb4($a0)
 /* D7FD8C 8024102C 10620006 */  beq       $v1, $v0, .L80241048
-/* D7FD90 80241030 00000000 */   nop      
+/* D7FD90 80241030 00000000 */   nop
 .L80241034:
 /* D7FD94 80241034 8C820014 */  lw        $v0, 0x14($a0)
 /* D7FD98 80241038 3C03FFFF */  lui       $v1, 0xffff
 /* D7FD9C 8024103C 00431024 */  and       $v0, $v0, $v1
 /* D7FDA0 80241040 10400005 */  beqz      $v0, .L80241058
-/* D7FDA4 80241044 00000000 */   nop      
+/* D7FDA4 80241044 00000000 */   nop
 .L80241048:
 /* D7FDA8 80241048 0C039769 */  jal       set_action_state
 /* D7FDAC 8024104C 0000202D */   daddu    $a0, $zero, $zero
@@ -55,4 +55,4 @@ glabel func_80240FF0_D7FD50
 /* D7FE00 802410A0 8FB00010 */  lw        $s0, 0x10($sp)
 /* D7FE04 802410A4 03E00008 */  jr        $ra
 /* D7FE08 802410A8 27BD0018 */   addiu    $sp, $sp, 0x18
-/* D7FE0C 802410AC 00000000 */  nop       
+/* D7FE0C 802410AC 00000000 */  nop

@@ -38,7 +38,7 @@ glabel func_80240EAC_BA562C
 /* BA56B0 80240F30 3C01C1A0 */  lui       $at, 0xc1a0
 /* BA56B4 80240F34 44812000 */  mtc1      $at, $f4
 /* BA56B8 80240F38 44833000 */  mtc1      $v1, $f6
-/* BA56BC 80240F3C 00000000 */  nop       
+/* BA56BC 80240F3C 00000000 */  nop
 /* BA56C0 80240F40 468031A0 */  cvt.s.w   $f6, $f6
 /* BA56C4 80240F44 44073000 */  mfc1      $a3, $f6
 /* BA56C8 80240F48 27A20028 */  addiu     $v0, $sp, 0x28

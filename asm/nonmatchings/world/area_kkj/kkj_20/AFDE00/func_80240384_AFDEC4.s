@@ -16,7 +16,7 @@ glabel func_80240384_AFDEC4
 /* AFDEF0 802403B0 0C0B1EAF */  jal       get_variable
 /* AFDEF4 802403B4 0040802D */   daddu    $s0, $v0, $zero
 /* AFDEF8 802403B8 44820000 */  mtc1      $v0, $f0
-/* AFDEFC 802403BC 00000000 */  nop       
+/* AFDEFC 802403BC 00000000 */  nop
 /* AFDF00 802403C0 46800020 */  cvt.s.w   $f0, $f0
 /* AFDF04 802403C4 24020002 */  addiu     $v0, $zero, 2
 /* AFDF08 802403C8 00501804 */  sllv      $v1, $s0, $v0

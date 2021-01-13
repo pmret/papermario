@@ -19,7 +19,7 @@ glabel func_80241A24_B5FCD4
 /* B5FD0C 80241A5C 8E2200B0 */  lw        $v0, 0xb0($s1)
 /* B5FD10 80241A60 30420004 */  andi      $v0, $v0, 4
 /* B5FD14 80241A64 10400015 */  beqz      $v0, .L80241ABC
-/* B5FD18 80241A68 00000000 */   nop      
+/* B5FD18 80241A68 00000000 */   nop
 .L80241A6C:
 /* B5FD1C 80241A6C AE800070 */  sw        $zero, 0x70($s4)
 /* B5FD20 80241A70 8E420000 */  lw        $v0, ($s2)
@@ -46,9 +46,9 @@ glabel func_80241A24_B5FCD4
 /* B5FD70 80241AC0 12600005 */  beqz      $s3, .L80241AD8
 /* B5FD74 80241AC4 24020001 */   addiu    $v0, $zero, 1
 /* B5FD78 80241AC8 12620048 */  beq       $s3, $v0, .L80241BEC
-/* B5FD7C 80241ACC 00000000 */   nop      
+/* B5FD7C 80241ACC 00000000 */   nop
 /* B5FD80 80241AD0 08090718 */  j         .L80241C60
-/* B5FD84 80241AD4 00000000 */   nop      
+/* B5FD84 80241AD4 00000000 */   nop
 .L80241AD8:
 /* B5FD88 80241AD8 86240008 */  lh        $a0, 8($s1)
 /* B5FD8C 80241ADC 0C00FB3A */  jal       get_enemy
@@ -62,7 +62,7 @@ glabel func_80241A24_B5FCD4
 /* B5FDAC 80241AFC 8E03006C */  lw        $v1, 0x6c($s0)
 /* B5FDB0 80241B00 24020003 */  addiu     $v0, $zero, 3
 /* B5FDB4 80241B04 14620056 */  bne       $v1, $v0, .L80241C60
-/* B5FDB8 80241B08 00000000 */   nop      
+/* B5FDB8 80241B08 00000000 */   nop
 /* B5FDBC 80241B0C 8E2500A8 */  lw        $a1, 0xa8($s1)
 /* B5FDC0 80241B10 10A00003 */  beqz      $a1, .L80241B20
 /* B5FDC4 80241B14 0260202D */   daddu    $a0, $s3, $zero
@@ -99,7 +99,7 @@ glabel func_80241A24_B5FCD4
 /* B5FE3C 80241B8C C7A20014 */  lwc1      $f2, 0x14($sp)
 /* B5FE40 80241B90 4600020D */  trunc.w.s $f8, $f0
 /* B5FE44 80241B94 44024000 */  mfc1      $v0, $f8
-/* B5FE48 80241B98 00000000 */  nop       
+/* B5FE48 80241B98 00000000 */  nop
 /* B5FE4C 80241B9C A6220012 */  sh        $v0, 0x12($s1)
 /* B5FE50 80241BA0 4600120D */  trunc.w.s $f8, $f2
 /* B5FE54 80241BA4 44024000 */  mfc1      $v0, $f8

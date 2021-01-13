@@ -9,4 +9,4 @@ glabel func_802DDEC4
 /* 100FC4 802DDED4 00220821 */  addu      $at, $at, $v0
 /* 100FC8 802DDED8 8C22F590 */  lw        $v0, %lo(D_802DF590)($at)
 /* 100FCC 802DDEDC 03E00008 */  jr        $ra
-/* 100FD0 802DDEE0 00000000 */   nop      
+/* 100FD0 802DDEE0 00000000 */   nop

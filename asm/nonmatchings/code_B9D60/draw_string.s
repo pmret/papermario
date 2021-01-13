@@ -40,7 +40,7 @@ glabel draw_string
 /* BCC70 80126570 0C0495A9 */  jal       initialize_printer
 /* BCC74 80126574 0000302D */   daddu    $a2, $zero, $zero
 /* BCC78 80126578 06010003 */  bgez      $s0, .L80126588
-/* BCC7C 8012657C 00000000 */   nop      
+/* BCC7C 8012657C 00000000 */   nop
 /* BCC80 80126580 08049975 */  j         .L801265D4
 /* BCC84 80126584 AFB00020 */   sw       $s0, 0x20($sp)
 .L80126588:
@@ -164,7 +164,7 @@ glabel draw_string
 /* BCE48 80126748 0C049F64 */  jal       func_80127D90
 /* BCE4C 8012674C 00063403 */   sra      $a2, $a2, 0x10
 /* BCE50 80126750 12800003 */  beqz      $s4, .L80126760
-/* BCE54 80126754 00000000 */   nop      
+/* BCE54 80126754 00000000 */   nop
 /* BCE58 80126758 0C00AB1E */  jal       general_heap_free
 /* BCE5C 8012675C 0280202D */   daddu    $a0, $s4, $zero
 .L80126760:

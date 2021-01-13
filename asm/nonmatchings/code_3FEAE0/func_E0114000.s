@@ -30,7 +30,7 @@ glabel func_E0114000
 /* 3FEB44 E0114064 AE02000C */   sw       $v0, 0xc($s0)
 .LE0114068:
 /* 3FEB48 E0114068 0804501A */  j         .LE0114068
-/* 3FEB4C E011406C 00000000 */   nop      
+/* 3FEB4C E011406C 00000000 */   nop
 .LE0114070:
 /* 3FEB50 E0114070 0000202D */  daddu     $a0, $zero, $zero
 /* 3FEB54 E0114074 24060001 */  addiu     $a2, $zero, 1

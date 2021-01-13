@@ -39,6 +39,6 @@ glabel func_80240420_DDF730
 /* DDF7B8 802404A8 24020002 */  addiu     $v0, $zero, 2
 /* DDF7BC 802404AC 03E00008 */  jr        $ra
 /* DDF7C0 802404B0 27BD0028 */   addiu    $sp, $sp, 0x28
-/* DDF7C4 802404B4 00000000 */  nop       
-/* DDF7C8 802404B8 00000000 */  nop       
-/* DDF7CC 802404BC 00000000 */  nop       
+/* DDF7C4 802404B4 00000000 */  nop
+/* DDF7C8 802404B8 00000000 */  nop
+/* DDF7CC 802404BC 00000000 */  nop

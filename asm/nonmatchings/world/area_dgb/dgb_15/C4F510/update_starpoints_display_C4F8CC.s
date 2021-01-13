@@ -19,7 +19,7 @@ glabel update_starpoints_display_C4F8CC
 /* C4F904 802403F4 8E2200B0 */  lw        $v0, 0xb0($s1)
 /* C4F908 802403F8 30420004 */  andi      $v0, $v0, 4
 /* C4F90C 802403FC 10400015 */  beqz      $v0, .L80240454
-/* C4F910 80240400 00000000 */   nop      
+/* C4F910 80240400 00000000 */   nop
 .L80240404:
 /* C4F914 80240404 AE800070 */  sw        $zero, 0x70($s4)
 /* C4F918 80240408 8E420000 */  lw        $v0, ($s2)
@@ -46,9 +46,9 @@ glabel update_starpoints_display_C4F8CC
 /* C4F968 80240458 12600005 */  beqz      $s3, .L80240470
 /* C4F96C 8024045C 24020001 */   addiu    $v0, $zero, 1
 /* C4F970 80240460 12620048 */  beq       $s3, $v0, .L80240584
-/* C4F974 80240464 00000000 */   nop      
+/* C4F974 80240464 00000000 */   nop
 /* C4F978 80240468 0809017E */  j         .L802405F8
-/* C4F97C 8024046C 00000000 */   nop      
+/* C4F97C 8024046C 00000000 */   nop
 .L80240470:
 /* C4F980 80240470 86240008 */  lh        $a0, 8($s1)
 /* C4F984 80240474 0C00FB3A */  jal       get_enemy
@@ -62,7 +62,7 @@ glabel update_starpoints_display_C4F8CC
 /* C4F9A4 80240494 8E03006C */  lw        $v1, 0x6c($s0)
 /* C4F9A8 80240498 24020003 */  addiu     $v0, $zero, 3
 /* C4F9AC 8024049C 14620056 */  bne       $v1, $v0, .L802405F8
-/* C4F9B0 802404A0 00000000 */   nop      
+/* C4F9B0 802404A0 00000000 */   nop
 /* C4F9B4 802404A4 8E2500A8 */  lw        $a1, 0xa8($s1)
 /* C4F9B8 802404A8 10A00003 */  beqz      $a1, .L802404B8
 /* C4F9BC 802404AC 0260202D */   daddu    $a0, $s3, $zero
@@ -99,7 +99,7 @@ glabel update_starpoints_display_C4F8CC
 /* C4FA34 80240524 C7A20014 */  lwc1      $f2, 0x14($sp)
 /* C4FA38 80240528 4600020D */  trunc.w.s $f8, $f0
 /* C4FA3C 8024052C 44024000 */  mfc1      $v0, $f8
-/* C4FA40 80240530 00000000 */  nop       
+/* C4FA40 80240530 00000000 */  nop
 /* C4FA44 80240534 A6220012 */  sh        $v0, 0x12($s1)
 /* C4FA48 80240538 4600120D */  trunc.w.s $f8, $f2
 /* C4FA4C 8024053C 44024000 */  mfc1      $v0, $f8

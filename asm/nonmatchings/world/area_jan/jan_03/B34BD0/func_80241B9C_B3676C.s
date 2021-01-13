@@ -26,7 +26,7 @@ glabel func_80241B9C_B3676C
 /* B367BC 80241BEC 1440FFFA */  bnez      $v0, .L80241BD8
 /* B367C0 80241BF0 24A50004 */   addiu    $a1, $a1, 4
 /* B367C4 80241BF4 0809070E */  j         .L80241C38
-/* B367C8 80241BF8 00000000 */   nop      
+/* B367C8 80241BF8 00000000 */   nop
 .L80241BFC:
 /* B367CC 80241BFC 0000182D */  daddu     $v1, $zero, $zero
 /* B367D0 80241C00 0040282D */  daddu     $a1, $v0, $zero

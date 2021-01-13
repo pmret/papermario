@@ -93,7 +93,7 @@ glabel func_802DD8F8
 /* 100B2C 802DDA3C 1440FFF8 */  bnez      $v0, .L802DDA20
 /* 100B30 802DDA40 24630014 */   addiu    $v1, $v1, 0x14
 /* 100B34 802DDA44 0C0B6F50 */  jal       func_802DBD40
-/* 100B38 802DDA48 00000000 */   nop      
+/* 100B38 802DDA48 00000000 */   nop
 /* 100B3C 802DDA4C 8FBF0018 */  lw        $ra, 0x18($sp)
 /* 100B40 802DDA50 8FB10014 */  lw        $s1, 0x14($sp)
 /* 100B44 802DDA54 8FB00010 */  lw        $s0, 0x10($sp)

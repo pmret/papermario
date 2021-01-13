@@ -45,7 +45,7 @@ glabel func_80240D44_9FB534
 /* 9FB5D0 80240DE0 0C00A7B5 */  jal       dist2D
 /* 9FB5D4 80240DE4 4600B386 */   mov.s    $f14, $f22
 /* 9FB5D8 80240DE8 4614003C */  c.lt.s    $f0, $f20
-/* 9FB5DC 80240DEC 00000000 */  nop       
+/* 9FB5DC 80240DEC 00000000 */  nop
 /* 9FB5E0 80240DF0 45000003 */  bc1f      .L80240E00
 /* 9FB5E4 80240DF4 2631000C */   addiu    $s1, $s1, 0xc
 /* 9FB5E8 80240DF8 46000506 */  mov.s     $f20, $f0
@@ -64,7 +64,7 @@ glabel func_80240D44_9FB534
 /* 9FB614 80240E24 8E6200D0 */  lw        $v0, 0xd0($s3)
 /* 9FB618 80240E28 8C42007C */  lw        $v0, 0x7c($v0)
 /* 9FB61C 80240E2C 04410004 */  bgez      $v0, .L80240E40
-/* 9FB620 80240E30 00000000 */   nop      
+/* 9FB620 80240E30 00000000 */   nop
 /* 9FB624 80240E34 C6C00000 */  lwc1      $f0, ($s6)
 /* 9FB628 80240E38 08090398 */  j         .L80240E60
 /* 9FB62C 80240E3C E6800018 */   swc1     $f0, 0x18($s4)
@@ -72,7 +72,7 @@ glabel func_80240D44_9FB534
 /* 9FB630 80240E40 3C018024 */  lui       $at, %hi(update_player_action)
 /* 9FB634 80240E44 D4225AD0 */  ldc1      $f2, %lo(update_player_action)($at)
 /* 9FB638 80240E48 44820000 */  mtc1      $v0, $f0
-/* 9FB63C 80240E4C 00000000 */  nop       
+/* 9FB63C 80240E4C 00000000 */  nop
 /* 9FB640 80240E50 46800021 */  cvt.d.w   $f0, $f0
 /* 9FB644 80240E54 46220003 */  div.d     $f0, $f0, $f2
 /* 9FB648 80240E58 46200020 */  cvt.s.d   $f0, $f0

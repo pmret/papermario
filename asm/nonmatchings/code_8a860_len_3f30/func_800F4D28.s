@@ -33,7 +33,7 @@ glabel func_800F4D28
 /* 8E244 800F4D94 2666000A */  addiu     $a2, $s3, 0xa
 .L800F4D98:
 /* 8E248 800F4D98 0C051261 */  jal       set_icon_render_pos
-/* 8E24C 800F4D9C 00000000 */   nop      
+/* 8E24C 800F4D9C 00000000 */   nop
 /* 8E250 800F4DA0 0C0511EA */  jal       draw_icon_0
 /* 8E254 800F4DA4 0200202D */   daddu    $a0, $s0, $zero
 /* 8E258 800F4DA8 2685001A */  addiu     $a1, $s4, 0x1a

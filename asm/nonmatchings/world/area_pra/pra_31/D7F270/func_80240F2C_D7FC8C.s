@@ -31,7 +31,7 @@ glabel func_80240F2C_D7FC8C
 /* D7FCF4 80240F94 34A53C81 */   ori      $a1, $a1, 0x3c81
 /* D7FCF8 80240F98 C60C0014 */  lwc1      $f12, 0x14($s0)
 /* D7FCFC 80240F9C 0C00A6C9 */  jal       clamp_angle
-/* D7FD00 80240FA0 00000000 */   nop      
+/* D7FD00 80240FA0 00000000 */   nop
 /* D7FD04 80240FA4 0220202D */  daddu     $a0, $s1, $zero
 /* D7FD08 80240FA8 3C05FE36 */  lui       $a1, 0xfe36
 /* D7FD0C 80240FAC 44060000 */  mfc1      $a2, $f0

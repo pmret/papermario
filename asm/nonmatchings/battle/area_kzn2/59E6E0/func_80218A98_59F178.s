@@ -31,7 +31,7 @@ glabel func_80218A98_59F178
 /* 59F1DC 80218AFC 0000102D */   daddu    $v0, $zero, $zero
 .L80218B00:
 /* 59F1E0 80218B00 0C052B02 */  jal       func_8014AC08
-/* 59F1E4 80218B04 00000000 */   nop      
+/* 59F1E4 80218B04 00000000 */   nop
 /* 59F1E8 80218B08 080862CB */  j         .L80218B2C
 /* 59F1EC 80218B0C 0000102D */   daddu    $v0, $zero, $zero
 .L80218B10:

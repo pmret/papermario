@@ -37,7 +37,7 @@ glabel func_8024084C_E12FAC
 /* E13028 802408C8 0000302D */  daddu     $a2, $zero, $zero
 .L802408CC:
 /* E1302C 802408CC 0C0B2026 */  jal       set_variable
-/* E13030 802408D0 00000000 */   nop      
+/* E13030 802408D0 00000000 */   nop
 /* E13034 802408D4 8FBF0018 */  lw        $ra, 0x18($sp)
 /* E13038 802408D8 8FB10014 */  lw        $s1, 0x14($sp)
 /* E1303C 802408DC 8FB00010 */  lw        $s0, 0x10($sp)

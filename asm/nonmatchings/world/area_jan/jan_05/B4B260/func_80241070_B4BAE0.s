@@ -24,7 +24,7 @@ glabel func_80241070_B4BAE0
 /* B4BB2C 802410BC 0C00A67F */  jal       rand_int
 /* B4BB30 802410C0 AE020000 */   sw       $v0, ($s0)
 /* B4BB34 802410C4 44820000 */  mtc1      $v0, $f0
-/* B4BB38 802410C8 00000000 */  nop       
+/* B4BB38 802410C8 00000000 */  nop
 /* B4BB3C 802410CC 46800021 */  cvt.d.w   $f0, $f0
 /* B4BB40 802410D0 3C014024 */  lui       $at, 0x4024
 /* B4BB44 802410D4 44811800 */  mtc1      $at, $f3

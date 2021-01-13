@@ -26,7 +26,7 @@ glabel func_80242F20_DC01D0
 /* DC0220 80242F70 1440FFFA */  bnez      $v0, .L80242F5C
 /* DC0224 80242F74 24A50004 */   addiu    $a1, $a1, 4
 /* DC0228 80242F78 08090BEF */  j         .L80242FBC
-/* DC022C 80242F7C 00000000 */   nop      
+/* DC022C 80242F7C 00000000 */   nop
 .L80242F80:
 /* DC0230 80242F80 0000182D */  daddu     $v1, $zero, $zero
 /* DC0234 80242F84 0040282D */  daddu     $a1, $v0, $zero

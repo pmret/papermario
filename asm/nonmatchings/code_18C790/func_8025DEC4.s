@@ -77,7 +77,7 @@ glabel func_8025DEC4
 /* 18C8BC 8025DFDC 5C400004 */  bgtzl     $v0, .L8025DFF0
 /* 18C8C0 8025DFE0 00021080 */   sll      $v0, $v0, 2
 /* 18C8C4 8025DFE4 10A00007 */  beqz      $a1, .L8025E004
-/* 18C8C8 8025DFE8 00000000 */   nop      
+/* 18C8C8 8025DFE8 00000000 */   nop
 /* 18C8CC 8025DFEC 00021080 */  sll       $v0, $v0, 2
 .L8025DFF0:
 /* 18C8D0 8025DFF0 3C018028 */  lui       $at, %hi(D_80284188)

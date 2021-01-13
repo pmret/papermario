@@ -49,15 +49,15 @@ glabel func_80241C3C_DB3EFC
 /* DB3FA4 80241CE4 44802000 */  mtc1      $zero, $f4
 /* DB3FA8 80241CE8 460010A1 */  cvt.d.s   $f2, $f2
 /* DB3FAC 80241CEC 46241082 */  mul.d     $f2, $f2, $f4
-/* DB3FB0 80241CF0 00000000 */  nop       
+/* DB3FB0 80241CF0 00000000 */  nop
 /* DB3FB4 80241CF4 C7A0001C */  lwc1      $f0, 0x1c($sp)
 /* DB3FB8 80241CF8 46000021 */  cvt.d.s   $f0, $f0
 /* DB3FBC 80241CFC 46240002 */  mul.d     $f0, $f0, $f4
-/* DB3FC0 80241D00 00000000 */  nop       
+/* DB3FC0 80241D00 00000000 */  nop
 /* DB3FC4 80241D04 3C013FE0 */  lui       $at, 0x3fe0
 /* DB3FC8 80241D08 44812800 */  mtc1      $at, $f5
 /* DB3FCC 80241D0C 44802000 */  mtc1      $zero, $f4
-/* DB3FD0 80241D10 00000000 */  nop       
+/* DB3FD0 80241D10 00000000 */  nop
 /* DB3FD4 80241D14 46241080 */  add.d     $f2, $f2, $f4
 /* DB3FD8 80241D18 AE000074 */  sw        $zero, 0x74($s0)
 /* DB3FDC 80241D1C 46240000 */  add.d     $f0, $f0, $f4

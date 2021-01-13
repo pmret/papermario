@@ -45,7 +45,7 @@ glabel func_8024252C_BFFDAC
 /* BFFE48 802425C8 0C00A7B5 */  jal       dist2D
 /* BFFE4C 802425CC 4600B386 */   mov.s    $f14, $f22
 /* BFFE50 802425D0 4614003C */  c.lt.s    $f0, $f20
-/* BFFE54 802425D4 00000000 */  nop       
+/* BFFE54 802425D4 00000000 */  nop
 /* BFFE58 802425D8 45000003 */  bc1f      .L802425E8
 /* BFFE5C 802425DC 2631000C */   addiu    $s1, $s1, 0xc
 /* BFFE60 802425E0 46000506 */  mov.s     $f20, $f0
@@ -64,7 +64,7 @@ glabel func_8024252C_BFFDAC
 /* BFFE8C 8024260C 8E6200D0 */  lw        $v0, 0xd0($s3)
 /* BFFE90 80242610 8C42007C */  lw        $v0, 0x7c($v0)
 /* BFFE94 80242614 04410004 */  bgez      $v0, .L80242628
-/* BFFE98 80242618 00000000 */   nop      
+/* BFFE98 80242618 00000000 */   nop
 /* BFFE9C 8024261C C6C00000 */  lwc1      $f0, ($s6)
 /* BFFEA0 80242620 08090992 */  j         .L80242648
 /* BFFEA4 80242624 E6800018 */   swc1     $f0, 0x18($s4)
@@ -72,7 +72,7 @@ glabel func_8024252C_BFFDAC
 /* BFFEA8 80242628 3C018026 */  lui       $at, %hi(D_80263510)
 /* BFFEAC 8024262C D4223510 */  ldc1      $f2, %lo(D_80263510)($at)
 /* BFFEB0 80242630 44820000 */  mtc1      $v0, $f0
-/* BFFEB4 80242634 00000000 */  nop       
+/* BFFEB4 80242634 00000000 */  nop
 /* BFFEB8 80242638 46800021 */  cvt.d.w   $f0, $f0
 /* BFFEBC 8024263C 46220003 */  div.d     $f0, $f0, $f2
 /* BFFEC0 80242640 46200020 */  cvt.s.d   $f0, $f0

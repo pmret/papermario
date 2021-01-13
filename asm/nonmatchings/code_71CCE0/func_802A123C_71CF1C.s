@@ -28,15 +28,15 @@ glabel func_802A123C_71CF1C
 /* 71CF78 802A1298 0C0B1EAF */  jal       get_variable
 /* 71CF7C 802A129C 0040802D */   daddu    $s0, $v0, $zero
 /* 71CF80 802A12A0 44930000 */  mtc1      $s3, $f0
-/* 71CF84 802A12A4 00000000 */  nop       
+/* 71CF84 802A12A4 00000000 */  nop
 /* 71CF88 802A12A8 46800020 */  cvt.s.w   $f0, $f0
 /* 71CF8C 802A12AC 44050000 */  mfc1      $a1, $f0
 /* 71CF90 802A12B0 44920000 */  mtc1      $s2, $f0
-/* 71CF94 802A12B4 00000000 */  nop       
+/* 71CF94 802A12B4 00000000 */  nop
 /* 71CF98 802A12B8 46800020 */  cvt.s.w   $f0, $f0
 /* 71CF9C 802A12BC 44060000 */  mfc1      $a2, $f0
 /* 71CFA0 802A12C0 44900000 */  mtc1      $s0, $f0
-/* 71CFA4 802A12C4 00000000 */  nop       
+/* 71CFA4 802A12C4 00000000 */  nop
 /* 71CFA8 802A12C8 46800020 */  cvt.s.w   $f0, $f0
 /* 71CFAC 802A12CC 44070000 */  mfc1      $a3, $f0
 /* 71CFB0 802A12D0 0000202D */  daddu     $a0, $zero, $zero

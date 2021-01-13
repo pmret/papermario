@@ -31,18 +31,18 @@ glabel func_80240E34_ACB954
 /* ACB9BC 80240E9C 0C0B1EAF */  jal       get_variable
 /* ACB9C0 80240EA0 0040802D */   daddu    $s0, $v0, $zero
 /* ACB9C4 80240EA4 44901000 */  mtc1      $s0, $f2
-/* ACB9C8 80240EA8 00000000 */  nop       
+/* ACB9C8 80240EA8 00000000 */  nop
 /* ACB9CC 80240EAC 468010A0 */  cvt.s.w   $f2, $f2
 /* ACB9D0 80240EB0 44936000 */  mtc1      $s3, $f12
-/* ACB9D4 80240EB4 00000000 */  nop       
+/* ACB9D4 80240EB4 00000000 */  nop
 /* ACB9D8 80240EB8 46806320 */  cvt.s.w   $f12, $f12
 /* ACB9DC 80240EBC 44061000 */  mfc1      $a2, $f2
 /* ACB9E0 80240EC0 44821000 */  mtc1      $v0, $f2
-/* ACB9E4 80240EC4 00000000 */  nop       
+/* ACB9E4 80240EC4 00000000 */  nop
 /* ACB9E8 80240EC8 468010A0 */  cvt.s.w   $f2, $f2
 /* ACB9EC 80240ECC 44071000 */  mfc1      $a3, $f2
 /* ACB9F0 80240ED0 44927000 */  mtc1      $s2, $f14
-/* ACB9F4 80240ED4 00000000 */  nop       
+/* ACB9F4 80240ED4 00000000 */  nop
 /* ACB9F8 80240ED8 0C00A720 */  jal       atan2
 /* ACB9FC 80240EDC 468073A0 */   cvt.s.w  $f14, $f14
 /* ACBA00 80240EE0 0220202D */  daddu     $a0, $s1, $zero

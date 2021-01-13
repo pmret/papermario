@@ -18,7 +18,7 @@ glabel func_802BC1D0_E2EB00
 /* E2EB34 802BC204 4600120D */  trunc.w.s $f8, $f2
 /* E2EB38 802BC208 44074000 */  mfc1      $a3, $f8
 /* E2EB3C 802BC20C 0C044631 */  jal       create_entity
-/* E2EB40 802BC210 00000000 */   nop      
+/* E2EB40 802BC210 00000000 */   nop
 /* E2EB44 802BC214 8FBF0018 */  lw        $ra, 0x18($sp)
 /* E2EB48 802BC218 03E00008 */  jr        $ra
 /* E2EB4C 802BC21C 27BD0020 */   addiu    $sp, $sp, 0x20

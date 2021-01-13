@@ -13,7 +13,7 @@ glabel func_80240F20_D4DF60
 /* D4DF80 80240F40 0C046EE2 */  jal       set_world_fog_color
 /* D4DF84 80240F44 240700FF */   addiu    $a3, $zero, 0xff
 /* D4DF88 80240F48 0C046ED4 */  jal       enable_world_fog
-/* D4DF8C 80240F4C 00000000 */   nop      
+/* D4DF8C 80240F4C 00000000 */   nop
 /* D4DF90 80240F50 8FBF0010 */  lw        $ra, 0x10($sp)
 /* D4DF94 80240F54 24020002 */  addiu     $v0, $zero, 2
 /* D4DF98 80240F58 03E00008 */  jr        $ra

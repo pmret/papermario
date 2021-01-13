@@ -18,7 +18,7 @@ glabel func_8025DBD0
 /* 18C4E4 8025DC04 1062001B */  beq       $v1, $v0, .L8025DC74
 /* 18C4E8 8025DC08 00131080 */   sll      $v0, $s3, 2
 /* 18C4EC 8025DC0C 08097749 */  j         .L8025DD24
-/* 18C4F0 8025DC10 00000000 */   nop      
+/* 18C4F0 8025DC10 00000000 */   nop
 .L8025DC14:
 /* 18C4F4 8025DC14 00131080 */  sll       $v0, $s3, 2
 /* 18C4F8 8025DC18 244208B0 */  addiu     $v0, $v0, 0x8b0
@@ -57,7 +57,7 @@ glabel func_8025DBD0
 /* 18C578 8025DC98 848208CC */  lh        $v0, 0x8cc($a0)
 /* 18C57C 8025DC9C C6200060 */  lwc1      $f0, 0x60($s1)
 /* 18C580 8025DCA0 44821000 */  mtc1      $v0, $f2
-/* 18C584 8025DCA4 00000000 */  nop       
+/* 18C584 8025DCA4 00000000 */  nop
 /* 18C588 8025DCA8 468010A0 */  cvt.s.w   $f2, $f2
 /* 18C58C 8025DCAC 46020000 */  add.s     $f0, $f0, $f2
 /* 18C590 8025DCB0 E460000C */  swc1      $f0, 0xc($v1)
@@ -65,7 +65,7 @@ glabel func_8025DBD0
 /* 18C598 8025DCB8 3C0142C8 */  lui       $at, 0x42c8
 /* 18C59C 8025DCBC 44810000 */  mtc1      $at, $f0
 /* 18C5A0 8025DCC0 44822000 */  mtc1      $v0, $f4
-/* 18C5A4 8025DCC4 00000000 */  nop       
+/* 18C5A4 8025DCC4 00000000 */  nop
 /* 18C5A8 8025DCC8 46802120 */  cvt.s.w   $f4, $f4
 /* 18C5AC 8025DCCC 8CA2000C */  lw        $v0, 0xc($a1)
 /* 18C5B0 8025DCD0 46002103 */  div.s     $f4, $f4, $f0
@@ -74,12 +74,12 @@ glabel func_8025DBD0
 /* 18C5BC 8025DCDC 3C01802A */  lui       $at, %hi(D_8029D4E8)
 /* 18C5C0 8025DCE0 D422D4E8 */  ldc1      $f2, %lo(D_8029D4E8)($at)
 /* 18C5C4 8025DCE4 44822000 */  mtc1      $v0, $f4
-/* 18C5C8 8025DCE8 00000000 */  nop       
+/* 18C5C8 8025DCE8 00000000 */  nop
 /* 18C5CC 8025DCEC 46802120 */  cvt.s.w   $f4, $f4
 /* 18C5D0 8025DCF0 46002103 */  div.s     $f4, $f4, $f0
 /* 18C5D4 8025DCF4 46002021 */  cvt.d.s   $f0, $f4
 /* 18C5D8 8025DCF8 46220002 */  mul.d     $f0, $f0, $f2
-/* 18C5DC 8025DCFC 00000000 */  nop       
+/* 18C5DC 8025DCFC 00000000 */  nop
 /* 18C5E0 8025DD00 8CA2000C */  lw        $v0, 0xc($a1)
 /* 18C5E4 8025DD04 46200020 */  cvt.s.d   $f0, $f0
 /* 18C5E8 8025DD08 E4400020 */  swc1      $f0, 0x20($v0)

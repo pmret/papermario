@@ -14,11 +14,11 @@ glabel func_80218AB8_63DC98
 /* 63DCBC 80218ADC 0040202D */  daddu     $a0, $v0, $zero
 /* 63DCC0 80218AE0 2402FF81 */  addiu     $v0, $zero, -0x7f
 /* 63DCC4 80218AE4 14820002 */  bne       $a0, $v0, .L80218AF0
-/* 63DCC8 80218AE8 00000000 */   nop      
+/* 63DCC8 80218AE8 00000000 */   nop
 /* 63DCCC 80218AEC 8E240148 */  lw        $a0, 0x148($s1)
 .L80218AF0:
 /* 63DCD0 80218AF0 0C09A75B */  jal       get_actor
-/* 63DCD4 80218AF4 00000000 */   nop      
+/* 63DCD4 80218AF4 00000000 */   nop
 /* 63DCD8 80218AF8 0040202D */  daddu     $a0, $v0, $zero
 /* 63DCDC 80218AFC 90830136 */  lbu       $v1, 0x136($a0)
 /* 63DCE0 80218B00 24020047 */  addiu     $v0, $zero, 0x47
@@ -49,11 +49,11 @@ glabel func_80218AB8_63DC98
 /* 63DD38 80218B58 0000302D */  daddu     $a2, $zero, $zero
 .L80218B5C:
 /* 63DD3C 80218B5C 0C0B2026 */  jal       set_variable
-/* 63DD40 80218B60 00000000 */   nop      
+/* 63DD40 80218B60 00000000 */   nop
 /* 63DD44 80218B64 8FBF0018 */  lw        $ra, 0x18($sp)
 /* 63DD48 80218B68 8FB10014 */  lw        $s1, 0x14($sp)
 /* 63DD4C 80218B6C 8FB00010 */  lw        $s0, 0x10($sp)
 /* 63DD50 80218B70 24020002 */  addiu     $v0, $zero, 2
 /* 63DD54 80218B74 03E00008 */  jr        $ra
 /* 63DD58 80218B78 27BD0020 */   addiu    $sp, $sp, 0x20
-/* 63DD5C 80218B7C 00000000 */  nop       
+/* 63DD5C 80218B7C 00000000 */  nop

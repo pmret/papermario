@@ -54,7 +54,7 @@ glabel func_8024134C_CF3F1C
 /* CF3FDC 8024140C 8E4300B0 */  lw        $v1, 0xb0($s2)
 /* CF3FE0 80241410 30620004 */  andi      $v0, $v1, 4
 /* CF3FE4 80241414 10400007 */  beqz      $v0, .L80241434
-/* CF3FE8 80241418 00000000 */   nop      
+/* CF3FE8 80241418 00000000 */   nop
 /* CF3FEC 8024141C 824200B4 */  lb        $v0, 0xb4($s2)
 /* CF3FF0 80241420 1440003C */  bnez      $v0, .L80241514
 /* CF3FF4 80241424 0000102D */   daddu    $v0, $zero, $zero
@@ -66,58 +66,68 @@ glabel func_8024134C_CF3F1C
 /* CF4008 80241438 2C62000F */  sltiu     $v0, $v1, 0xf
 /* CF400C 8024143C 10400034 */  beqz      $v0, .L80241510
 /* CF4010 80241440 00031080 */   sll      $v0, $v1, 2
-/* CF4014 80241444 3C018024 */  lui       $at, %hi(func_80244EF8)
+/* CF4014 80241444 3C018024 */  lui       $at, %hi(jtbl_80244EF8_CF7AC8)
 /* CF4018 80241448 00220821 */  addu      $at, $at, $v0
-/* CF401C 8024144C 8C224EF8 */  lw        $v0, %lo(func_80244EF8)($at)
+/* CF401C 8024144C 8C224EF8 */  lw        $v0, %lo(jtbl_80244EF8_CF7AC8)($at)
 /* CF4020 80241450 00400008 */  jr        $v0
-/* CF4024 80241454 00000000 */   nop      
+/* CF4024 80241454 00000000 */   nop
+glabel L80241458_CF4028
 /* CF4028 80241458 0280202D */  daddu     $a0, $s4, $zero
 /* CF402C 8024145C 0200282D */  daddu     $a1, $s0, $zero
 /* CF4030 80241460 0C090010 */  jal       func_80240040_CF2C10
 /* CF4034 80241464 0260302D */   daddu    $a2, $s3, $zero
+glabel L80241468_CF4038
 /* CF4038 80241468 0280202D */  daddu     $a0, $s4, $zero
 /* CF403C 8024146C 0200282D */  daddu     $a1, $s0, $zero
 /* CF4040 80241470 0C09007C */  jal       func_802401F0_CF2DC0
 /* CF4044 80241474 0260302D */   daddu    $a2, $s3, $zero
 /* CF4048 80241478 08090545 */  j         .L80241514
 /* CF404C 8024147C 0000102D */   daddu    $v0, $zero, $zero
+glabel L80241480_CF4050
 /* CF4050 80241480 0280202D */  daddu     $a0, $s4, $zero
 /* CF4054 80241484 0200282D */  daddu     $a1, $s0, $zero
 /* CF4058 80241488 0C090206 */  jal       flo_25_UnkNpcAIFunc1
 /* CF405C 8024148C 0260302D */   daddu    $a2, $s3, $zero
+glabel L80241490_CF4060
 /* CF4060 80241490 0280202D */  daddu     $a0, $s4, $zero
 /* CF4064 80241494 0200282D */  daddu     $a1, $s0, $zero
 /* CF4068 80241498 0C090236 */  jal       func_802408D8_CF34A8
 /* CF406C 8024149C 0260302D */   daddu    $a2, $s3, $zero
 /* CF4070 802414A0 08090545 */  j         .L80241514
 /* CF4074 802414A4 0000102D */   daddu    $v0, $zero, $zero
+glabel L802414A8_CF4078
 /* CF4078 802414A8 0280202D */  daddu     $a0, $s4, $zero
 /* CF407C 802414AC 0200282D */  daddu     $a1, $s0, $zero
 /* CF4080 802414B0 0C090307 */  jal       flo_25_UnkNpcAIFunc2
 /* CF4084 802414B4 0260302D */   daddu    $a2, $s3, $zero
+glabel L802414B8_CF4088
 /* CF4088 802414B8 0280202D */  daddu     $a0, $s4, $zero
 /* CF408C 802414BC 0200282D */  daddu     $a1, $s0, $zero
 /* CF4090 802414C0 0C090325 */  jal       func_80240C94_CF3864
 /* CF4094 802414C4 0260302D */   daddu    $a2, $s3, $zero
 /* CF4098 802414C8 08090545 */  j         .L80241514
 /* CF409C 802414CC 0000102D */   daddu    $v0, $zero, $zero
+glabel L802414D0_CF40A0
 /* CF40A0 802414D0 0280202D */  daddu     $a0, $s4, $zero
 /* CF40A4 802414D4 0200282D */  daddu     $a1, $s0, $zero
 /* CF40A8 802414D8 0C090340 */  jal       func_80240D00_CF38D0
 /* CF40AC 802414DC 0260302D */   daddu    $a2, $s3, $zero
 /* CF40B0 802414E0 08090545 */  j         .L80241514
 /* CF40B4 802414E4 0000102D */   daddu    $v0, $zero, $zero
+glabel L802414E8_CF40B8
 /* CF40B8 802414E8 0280202D */  daddu     $a0, $s4, $zero
 /* CF40BC 802414EC 0200282D */  daddu     $a1, $s0, $zero
 /* CF40C0 802414F0 0C09038D */  jal       flo_25_UnkNpcAIFunc3
 /* CF40C4 802414F4 0260302D */   daddu    $a2, $s3, $zero
 /* CF40C8 802414F8 08090545 */  j         .L80241514
 /* CF40CC 802414FC 0000102D */   daddu    $v0, $zero, $zero
+glabel L80241500_CF40D0
 /* CF40D0 80241500 0280202D */  daddu     $a0, $s4, $zero
 /* CF40D4 80241504 0200282D */  daddu     $a1, $s0, $zero
 /* CF40D8 80241508 0C0903A6 */  jal       func_80240E98_CF3A68
 /* CF40DC 8024150C 0260302D */   daddu    $a2, $s3, $zero
 .L80241510:
+glabel L80241510_CF40E0
 /* CF40E0 80241510 0000102D */  daddu     $v0, $zero, $zero
 .L80241514:
 /* CF40E4 80241514 8FBF0048 */  lw        $ra, 0x48($sp)

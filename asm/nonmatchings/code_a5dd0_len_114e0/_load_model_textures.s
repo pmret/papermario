@@ -17,10 +17,10 @@ glabel _load_model_textures
 /* AC274 80115B74 00C0A02D */   daddu    $s4, $a2, $zero
 /* AC278 80115B78 8E420010 */  lw        $v0, 0x10($s2)
 /* AC27C 80115B7C 1040001C */  beqz      $v0, .L80115BF0
-/* AC280 80115B80 00000000 */   nop      
+/* AC280 80115B80 00000000 */   nop
 /* AC284 80115B84 8C51000C */  lw        $s1, 0xc($v0)
 /* AC288 80115B88 12200019 */  beqz      $s1, .L80115BF0
-/* AC28C 80115B8C 00000000 */   nop      
+/* AC28C 80115B8C 00000000 */   nop
 /* AC290 80115B90 1A200017 */  blez      $s1, .L80115BF0
 /* AC294 80115B94 0000802D */   daddu    $s0, $zero, $zero
 /* AC298 80115B98 0260282D */  daddu     $a1, $s3, $zero
@@ -37,7 +37,7 @@ glabel _load_model_textures
 /* AC2C0 80115BC0 1440FFF6 */  bnez      $v0, .L80115B9C
 /* AC2C4 80115BC4 0260282D */   daddu    $a1, $s3, $zero
 /* AC2C8 80115BC8 080456FC */  j         .L80115BF0
-/* AC2CC 80115BCC 00000000 */   nop      
+/* AC2CC 80115BCC 00000000 */   nop
 .L80115BD0:
 /* AC2D0 80115BD0 0240202D */  daddu     $a0, $s2, $zero
 /* AC2D4 80115BD4 0C0456C3 */  jal       get_model_property

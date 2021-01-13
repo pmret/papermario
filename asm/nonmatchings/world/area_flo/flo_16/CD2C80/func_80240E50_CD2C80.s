@@ -47,7 +47,7 @@ glabel func_80240E50_CD2C80
 /* CD2D28 80240EF8 0C0123F5 */  jal       is_point_within_region
 /* CD2D2C 80240EFC 8E070038 */   lw       $a3, 0x38($s0)
 /* CD2D30 80240F00 1040000E */  beqz      $v0, .L80240F3C
-/* CD2D34 80240F04 00000000 */   nop      
+/* CD2D34 80240F04 00000000 */   nop
 /* CD2D38 80240F08 8E2200D0 */  lw        $v0, 0xd0($s1)
 /* CD2D3C 80240F0C C60C0038 */  lwc1      $f12, 0x38($s0)
 /* CD2D40 80240F10 C60E0040 */  lwc1      $f14, 0x40($s0)
@@ -58,7 +58,7 @@ glabel func_80240E50_CD2C80
 /* CD2D54 80240F24 468031A0 */  cvt.s.w   $f6, $f6
 /* CD2D58 80240F28 44073000 */  mfc1      $a3, $f6
 /* CD2D5C 80240F2C 0C00A720 */  jal       atan2
-/* CD2D60 80240F30 00000000 */   nop      
+/* CD2D60 80240F30 00000000 */   nop
 /* CD2D64 80240F34 080903DB */  j         .L80240F6C
 /* CD2D68 80240F38 E600000C */   swc1     $f0, 0xc($s0)
 .L80240F3C:
@@ -66,7 +66,7 @@ glabel func_80240E50_CD2C80
 /* CD2D70 80240F40 2404003C */   addiu    $a0, $zero, 0x3c
 /* CD2D74 80240F44 C60C000C */  lwc1      $f12, 0xc($s0)
 /* CD2D78 80240F48 44820000 */  mtc1      $v0, $f0
-/* CD2D7C 80240F4C 00000000 */  nop       
+/* CD2D7C 80240F4C 00000000 */  nop
 /* CD2D80 80240F50 46800020 */  cvt.s.w   $f0, $f0
 /* CD2D84 80240F54 46006300 */  add.s     $f12, $f12, $f0
 /* CD2D88 80240F58 3C0141F0 */  lui       $at, 0x41f0
@@ -82,7 +82,7 @@ glabel func_80240E50_CD2C80
 /* CD2DAC 80240F7C 8E2200D0 */  lw        $v0, 0xd0($s1)
 /* CD2DB0 80240F80 8C420014 */  lw        $v0, 0x14($v0)
 /* CD2DB4 80240F84 04410004 */  bgez      $v0, .L80240F98
-/* CD2DB8 80240F88 00000000 */   nop      
+/* CD2DB8 80240F88 00000000 */   nop
 /* CD2DBC 80240F8C C6400000 */  lwc1      $f0, ($s2)
 /* CD2DC0 80240F90 080903EE */  j         .L80240FB8
 /* CD2DC4 80240F94 E6000018 */   swc1     $f0, 0x18($s0)
@@ -90,7 +90,7 @@ glabel func_80240E50_CD2C80
 /* CD2DC8 80240F98 3C018024 */  lui       $at, %hi(D_802453F0)
 /* CD2DCC 80240F9C D42253F0 */  ldc1      $f2, %lo(D_802453F0)($at)
 /* CD2DD0 80240FA0 44820000 */  mtc1      $v0, $f0
-/* CD2DD4 80240FA4 00000000 */  nop       
+/* CD2DD4 80240FA4 00000000 */  nop
 /* CD2DD8 80240FA8 46800021 */  cvt.d.w   $f0, $f0
 /* CD2DDC 80240FAC 46220003 */  div.d     $f0, $f0, $f2
 /* CD2DE0 80240FB0 46200020 */  cvt.s.d   $f0, $f0
@@ -102,7 +102,7 @@ glabel func_80240E50_CD2C80
 /* CD2DF4 80240FC4 44801000 */  mtc1      $zero, $f2
 /* CD2DF8 80240FC8 46000021 */  cvt.d.s   $f0, $f0
 /* CD2DFC 80240FCC 46220002 */  mul.d     $f0, $f0, $f2
-/* CD2E00 80240FD0 00000000 */  nop       
+/* CD2E00 80240FD0 00000000 */  nop
 /* CD2E04 80240FD4 24020001 */  addiu     $v0, $zero, 1
 /* CD2E08 80240FD8 4620018D */  trunc.w.d $f6, $f0
 /* CD2E0C 80240FDC E626007C */  swc1      $f6, 0x7c($s1)

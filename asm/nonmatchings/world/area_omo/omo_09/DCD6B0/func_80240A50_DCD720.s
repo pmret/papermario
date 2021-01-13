@@ -22,7 +22,7 @@ glabel func_80240A50_DCD720
 /* DCD764 80240A94 0C0129E1 */  jal       func_8004A784
 /* DCD768 80240A98 0000382D */   daddu    $a3, $zero, $zero
 /* DCD76C 80240A9C 14400005 */  bnez      $v0, .L80240AB4
-/* DCD770 80240AA0 00000000 */   nop      
+/* DCD770 80240AA0 00000000 */   nop
 /* DCD774 80240AA4 8E050018 */  lw        $a1, 0x18($s0)
 /* DCD778 80240AA8 8E06000C */  lw        $a2, 0xc($s0)
 /* DCD77C 80240AAC 0C00EA95 */  jal       npc_move_heading
@@ -33,13 +33,13 @@ glabel func_80240A50_DCD720
 /* DCD78C 80240ABC A602008E */  sh        $v0, 0x8e($s0)
 /* DCD790 80240AC0 00021400 */  sll       $v0, $v0, 0x10
 /* DCD794 80240AC4 14400010 */  bnez      $v0, .L80240B08
-/* DCD798 80240AC8 00000000 */   nop      
+/* DCD798 80240AC8 00000000 */   nop
 /* DCD79C 80240ACC C6000018 */  lwc1      $f0, 0x18($s0)
 /* DCD7A0 80240AD0 3C018025 */  lui       $at, %hi(D_8024A638)
 /* DCD7A4 80240AD4 D422A638 */  ldc1      $f2, %lo(D_8024A638)($at)
 /* DCD7A8 80240AD8 46000021 */  cvt.d.s   $f0, $f0
 /* DCD7AC 80240ADC 46220002 */  mul.d     $f0, $f0, $f2
-/* DCD7B0 80240AE0 00000000 */  nop       
+/* DCD7B0 80240AE0 00000000 */  nop
 /* DCD7B4 80240AE4 46200020 */  cvt.s.d   $f0, $f0
 /* DCD7B8 80240AE8 E6000018 */  swc1      $f0, 0x18($s0)
 /* DCD7BC 80240AEC 8E2200CC */  lw        $v0, 0xcc($s1)

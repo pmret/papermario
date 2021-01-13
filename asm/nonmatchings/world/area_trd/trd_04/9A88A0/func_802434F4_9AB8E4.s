@@ -55,7 +55,7 @@ glabel func_802434F4_9AB8E4
 .L802435BC:
 /* 9AB9AC 802435BC C600003C */  lwc1      $f0, 0x3c($s0)
 /* 9AB9B0 802435C0 4602003C */  c.lt.s    $f0, $f2
-/* 9AB9B4 802435C4 00000000 */  nop       
+/* 9AB9B4 802435C4 00000000 */  nop
 /* 9AB9B8 802435C8 45010009 */  bc1t      .L802435F0
 /* 9AB9BC 802435CC 2402000A */   addiu    $v0, $zero, 0xa
 /* 9AB9C0 802435D0 A602008E */  sh        $v0, 0x8e($s0)

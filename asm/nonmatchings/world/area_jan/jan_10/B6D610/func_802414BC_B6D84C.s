@@ -20,4 +20,4 @@ glabel func_802414BC_B6D84C
 /* B6D880 802414F0 24020002 */  addiu     $v0, $zero, 2
 /* B6D884 802414F4 03E00008 */  jr        $ra
 /* B6D888 802414F8 27BD0018 */   addiu    $sp, $sp, 0x18
-/* B6D88C 802414FC 00000000 */  nop       
+/* B6D88C 802414FC 00000000 */  nop

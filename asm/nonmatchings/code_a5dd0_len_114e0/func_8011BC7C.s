@@ -4,7 +4,7 @@
 glabel func_8011BC7C
 /* B237C 8011BC7C 2403FFFF */  addiu     $v1, $zero, -1
 /* B2380 8011BC80 14A30003 */  bne       $a1, $v1, .L8011BC90
-/* B2384 8011BC84 00000000 */   nop      
+/* B2384 8011BC84 00000000 */   nop
 /* B2388 8011BC88 908200A5 */  lbu       $v0, 0xa5($a0)
 /* B238C 8011BC8C 3045000F */  andi      $a1, $v0, 0xf
 .L8011BC90:

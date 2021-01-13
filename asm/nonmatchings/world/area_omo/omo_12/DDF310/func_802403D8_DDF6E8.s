@@ -5,7 +5,7 @@ glabel func_802403D8_DDF6E8
 /* DDF6E8 802403D8 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* DDF6EC 802403DC F7B40018 */  sdc1      $f20, 0x18($sp)
 /* DDF6F0 802403E0 4480A000 */  mtc1      $zero, $f20
-/* DDF6F4 802403E4 00000000 */  nop       
+/* DDF6F4 802403E4 00000000 */  nop
 /* DDF6F8 802403E8 4405A000 */  mfc1      $a1, $f20
 /* DDF6FC 802403EC AFBF0010 */  sw        $ra, 0x10($sp)
 /* DDF700 802403F0 0C04E035 */  jal       func_801380D4
@@ -18,5 +18,5 @@ glabel func_802403D8_DDF6E8
 /* DDF71C 8024040C 24020002 */  addiu     $v0, $zero, 2
 /* DDF720 80240410 03E00008 */  jr        $ra
 /* DDF724 80240414 27BD0020 */   addiu    $sp, $sp, 0x20
-/* DDF728 80240418 00000000 */  nop       
-/* DDF72C 8024041C 00000000 */  nop       
+/* DDF728 80240418 00000000 */  nop
+/* DDF72C 8024041C 00000000 */  nop

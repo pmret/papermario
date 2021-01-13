@@ -13,12 +13,12 @@ glabel func_802BBD78_E2E6A8
 /* E2E6C8 802BBD98 3C0140C9 */  lui       $at, 0x40c9
 /* E2E6CC 802BBD9C 34210FD0 */  ori       $at, $at, 0xfd0
 /* E2E6D0 802BBDA0 44811000 */  mtc1      $at, $f2
-/* E2E6D4 802BBDA4 00000000 */  nop       
+/* E2E6D4 802BBDA4 00000000 */  nop
 /* E2E6D8 802BBDA8 46020582 */  mul.s     $f22, $f0, $f2
-/* E2E6DC 802BBDAC 00000000 */  nop       
+/* E2E6DC 802BBDAC 00000000 */  nop
 /* E2E6E0 802BBDB0 3C0143B4 */  lui       $at, 0x43b4
 /* E2E6E4 802BBDB4 44810000 */  mtc1      $at, $f0
-/* E2E6E8 802BBDB8 00000000 */  nop       
+/* E2E6E8 802BBDB8 00000000 */  nop
 /* E2E6EC 802BBDBC 4600B583 */  div.s     $f22, $f22, $f0
 /* E2E6F0 802BBDC0 0C00A874 */  jal       cos_rad
 /* E2E6F4 802BBDC4 4600B306 */   mov.s    $f12, $f22
@@ -27,7 +27,7 @@ glabel func_802BBD78_E2E6A8
 /* E2E700 802BBDD0 44801000 */  mtc1      $zero, $f2
 /* E2E704 802BBDD4 46000521 */  cvt.d.s   $f20, $f0
 /* E2E708 802BBDD8 4622A502 */  mul.d     $f20, $f20, $f2
-/* E2E70C 802BBDDC 00000000 */  nop       
+/* E2E70C 802BBDDC 00000000 */  nop
 /* E2E710 802BBDE0 4600B306 */  mov.s     $f12, $f22
 /* E2E714 802BBDE4 0C00A85B */  jal       sin_rad
 /* E2E718 802BBDE8 4620A520 */   cvt.s.d  $f20, $f20
@@ -36,7 +36,7 @@ glabel func_802BBD78_E2E6A8
 /* E2E724 802BBDF4 44801000 */  mtc1      $zero, $f2
 /* E2E728 802BBDF8 460005A1 */  cvt.d.s   $f22, $f0
 /* E2E72C 802BBDFC 4622B582 */  mul.d     $f22, $f22, $f2
-/* E2E730 802BBE00 00000000 */  nop       
+/* E2E730 802BBE00 00000000 */  nop
 /* E2E734 802BBE04 C60C0064 */  lwc1      $f12, 0x64($s0)
 /* E2E738 802BBE08 3C01802C */  lui       $at, %hi(D_802BCE10)
 /* E2E73C 802BBE0C D420CE10 */  ldc1      $f0, %lo(D_802BCE10)($at)
@@ -52,7 +52,7 @@ glabel func_802BBD78_E2E6A8
 /* E2E764 802BBE34 46141080 */  add.s     $f2, $f2, $f20
 /* E2E768 802BBE38 3C014278 */  lui       $at, 0x4278
 /* E2E76C 802BBE3C 44810000 */  mtc1      $at, $f0
-/* E2E770 802BBE40 00000000 */  nop       
+/* E2E770 802BBE40 00000000 */  nop
 /* E2E774 802BBE44 46002100 */  add.s     $f4, $f4, $f0
 /* E2E778 802BBE48 24020002 */  addiu     $v0, $zero, 2
 /* E2E77C 802BBE4C 46163180 */  add.s     $f6, $f6, $f22

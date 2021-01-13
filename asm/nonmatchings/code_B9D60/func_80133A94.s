@@ -29,7 +29,7 @@ glabel func_80133A94
 /* CA1F4 80133AF4 AC820000 */  sw        $v0, ($a0)
 .L80133AF8:
 /* CA1F8 80133AF8 0C04C44A */  jal       func_80131128
-/* CA1FC 80133AFC 00000000 */   nop      
+/* CA1FC 80133AFC 00000000 */   nop
 /* CA200 80133B00 8FBF0010 */  lw        $ra, 0x10($sp)
 /* CA204 80133B04 03E00008 */  jr        $ra
 /* CA208 80133B08 27BD0018 */   addiu    $sp, $sp, 0x18

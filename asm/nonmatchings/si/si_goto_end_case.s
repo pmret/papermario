@@ -19,7 +19,7 @@ glabel si_goto_end_case
 /* ED3C0 802C8A10 00C23021 */   addu     $a2, $a2, $v0
 /* ED3C4 802C8A14 28620015 */  slti      $v0, $v1, 0x15
 /* ED3C8 802C8A18 10400005 */  beqz      $v0, .L802C8A30
-/* ED3CC 802C8A1C 00000000 */   nop      
+/* ED3CC 802C8A1C 00000000 */   nop
 /* ED3D0 802C8A20 10680007 */  beq       $v1, $t0, .L802C8A40
 /* ED3D4 802C8A24 00C0202D */   daddu    $a0, $a2, $zero
 /* ED3D8 802C8A28 080B2280 */  j         .L802C8A00
@@ -31,7 +31,7 @@ glabel si_goto_end_case
 /* ED3EC 802C8A3C 00C0202D */   daddu    $a0, $a2, $zero
 .L802C8A40:
 /* ED3F0 802C8A40 080B2290 */  j         .L802C8A40
-/* ED3F4 802C8A44 00000000 */   nop      
+/* ED3F4 802C8A44 00000000 */   nop
 .L802C8A48:
 /* ED3F8 802C8A48 080B227E */  j         .L802C89F8
 /* ED3FC 802C8A4C 24A50001 */   addiu    $a1, $a1, 1

@@ -21,7 +21,7 @@ glabel func_802409B0_DC4D80
 /* DC4DC0 802409F0 0C0129E1 */  jal       func_8004A784
 /* DC4DC4 802409F4 0000382D */   daddu    $a3, $zero, $zero
 /* DC4DC8 802409F8 14400005 */  bnez      $v0, .L80240A10
-/* DC4DCC 802409FC 00000000 */   nop      
+/* DC4DCC 802409FC 00000000 */   nop
 /* DC4DD0 80240A00 8E050018 */  lw        $a1, 0x18($s0)
 /* DC4DD4 80240A04 8E06000C */  lw        $a2, 0xc($s0)
 /* DC4DD8 80240A08 0C00EA95 */  jal       npc_move_heading

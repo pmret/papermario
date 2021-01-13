@@ -28,9 +28,9 @@ glabel func_E00BE3A4
 /* 3BC358 E00BE3F8 04A10005 */  bgez      $a1, .LE00BE410
 /* 3BC35C E00BE3FC AC620020 */   sw       $v0, 0x20($v1)
 /* 3BC360 E00BE400 0C080128 */  jal       func_E02004A0
-/* 3BC364 E00BE404 00000000 */   nop      
+/* 3BC364 E00BE404 00000000 */   nop
 /* 3BC368 E00BE408 0802F95A */  j         .LE00BE568
-/* 3BC36C E00BE40C 00000000 */   nop      
+/* 3BC36C E00BE40C 00000000 */   nop
 .LE00BE410:
 /* 3BC370 E00BE410 28A20004 */  slti      $v0, $a1, 4
 /* 3BC374 E00BE414 10400002 */  beqz      $v0, .LE00BE420
@@ -59,7 +59,7 @@ glabel func_E00BE3A4
 /* 3BC3C8 E00BE468 C464FFFC */  lwc1      $f4, -4($v1)
 /* 3BC3CC E00BE46C 46802121 */  cvt.d.w   $f4, $f4
 /* 3BC3D0 E00BE470 462A2102 */  mul.d     $f4, $f4, $f10
-/* 3BC3D4 E00BE474 00000000 */  nop       
+/* 3BC3D4 E00BE474 00000000 */  nop
 /* 3BC3D8 E00BE478 C468FFD0 */  lwc1      $f8, -0x30($v1)
 /* 3BC3DC E00BE47C C460FFDC */  lwc1      $f0, -0x24($v1)
 /* 3BC3E0 E00BE480 C466FFD4 */  lwc1      $f6, -0x2c($v1)
@@ -84,11 +84,11 @@ glabel func_E00BE3A4
 /* 3BC428 E00BE4C8 C464FFDC */  lwc1      $f4, -0x24($v1)
 /* 3BC42C E00BE4CC 46002121 */  cvt.d.s   $f4, $f4
 /* 3BC430 E00BE4D0 462A2102 */  mul.d     $f4, $f4, $f10
-/* 3BC434 E00BE4D4 00000000 */  nop       
+/* 3BC434 E00BE4D4 00000000 */  nop
 /* 3BC438 E00BE4D8 C462FFE4 */  lwc1      $f2, -0x1c($v1)
 /* 3BC43C E00BE4DC 460010A1 */  cvt.d.s   $f2, $f2
 /* 3BC440 E00BE4E0 462A1082 */  mul.d     $f2, $f2, $f10
-/* 3BC444 E00BE4E4 00000000 */  nop       
+/* 3BC444 E00BE4E4 00000000 */  nop
 /* 3BC448 E00BE4E8 C460FFE0 */  lwc1      $f0, -0x20($v1)
 /* 3BC44C E00BE4EC 46000021 */  cvt.d.s   $f0, $f0
 /* 3BC450 E00BE4F0 46300000 */  add.d     $f0, $f0, $f16
@@ -96,7 +96,7 @@ glabel func_E00BE3A4
 /* 3BC458 E00BE4F8 E460FFE0 */  swc1      $f0, -0x20($v1)
 /* 3BC45C E00BE4FC 46000021 */  cvt.d.s   $f0, $f0
 /* 3BC460 E00BE500 462A0002 */  mul.d     $f0, $f0, $f10
-/* 3BC464 E00BE504 00000000 */  nop       
+/* 3BC464 E00BE504 00000000 */  nop
 /* 3BC468 E00BE508 46202120 */  cvt.s.d   $f4, $f4
 /* 3BC46C E00BE50C 462010A0 */  cvt.s.d   $f2, $f2
 /* 3BC470 E00BE510 E464FFDC */  swc1      $f4, -0x24($v1)
@@ -107,14 +107,14 @@ glabel func_E00BE3A4
 /* 3BC484 E00BE524 C4600000 */  lwc1      $f0, ($v1)
 /* 3BC488 E00BE528 46000021 */  cvt.d.s   $f0, $f0
 /* 3BC48C E00BE52C 462E0002 */  mul.d     $f0, $f0, $f14
-/* 3BC490 E00BE530 00000000 */  nop       
+/* 3BC490 E00BE530 00000000 */  nop
 /* 3BC494 E00BE534 0802F954 */  j         .LE00BE550
 /* 3BC498 E00BE538 46200020 */   cvt.s.d  $f0, $f0
 .LE00BE53C:
 /* 3BC49C E00BE53C C4600000 */  lwc1      $f0, ($v1)
 /* 3BC4A0 E00BE540 46000021 */  cvt.d.s   $f0, $f0
 /* 3BC4A4 E00BE544 462C0002 */  mul.d     $f0, $f0, $f12
-/* 3BC4A8 E00BE548 00000000 */  nop       
+/* 3BC4A8 E00BE548 00000000 */  nop
 /* 3BC4AC E00BE54C 46200020 */  cvt.s.d   $f0, $f0
 .LE00BE550:
 /* 3BC4B0 E00BE550 E4600000 */  swc1      $f0, ($v1)

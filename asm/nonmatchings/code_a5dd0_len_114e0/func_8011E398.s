@@ -16,7 +16,7 @@ glabel func_8011E398
 /* B4AC0 8011E3C0 10800004 */  beqz      $a0, .L8011E3D4
 /* B4AC4 8011E3C4 26310001 */   addiu    $s1, $s1, 1
 /* B4AC8 8011E3C8 0C0478E6 */  jal       func_8011E398
-/* B4ACC 8011E3CC 00000000 */   nop      
+/* B4ACC 8011E3CC 00000000 */   nop
 /* B4AD0 8011E3D0 AE000004 */  sw        $zero, 4($s0)
 .L8011E3D4:
 /* B4AD4 8011E3D4 2A220020 */  slti      $v0, $s1, 0x20

@@ -13,14 +13,14 @@ glabel func_802BBD1C_E2E64C
 /* E2E66C 802BBD3C 92020006 */  lbu       $v0, 6($s0)
 /* E2E670 802BBD40 30420048 */  andi      $v0, $v0, 0x48
 /* E2E674 802BBD44 10400008 */  beqz      $v0, .L802BBD68
-/* E2E678 802BBD48 00000000 */   nop      
+/* E2E678 802BBD48 00000000 */   nop
 /* E2E67C 802BBD4C 0C043F5A */  jal       func_8010FD68
-/* E2E680 802BBD50 00000000 */   nop      
+/* E2E680 802BBD50 00000000 */   nop
 /* E2E684 802BBD54 86040014 */  lh        $a0, 0x14($s0)
 /* E2E688 802BBD58 3C050000 */  lui       $a1, 0
 /* E2E68C 802BBD5C 24A50064 */  addiu     $a1, $a1, 0x64
 /* E2E690 802BBD60 0C048052 */  jal       play_model_animation
-/* E2E694 802BBD64 00000000 */   nop      
+/* E2E694 802BBD64 00000000 */   nop
 .L802BBD68:
 /* E2E698 802BBD68 8FBF0014 */  lw        $ra, 0x14($sp)
 /* E2E69C 802BBD6C 8FB00010 */  lw        $s0, 0x10($sp)

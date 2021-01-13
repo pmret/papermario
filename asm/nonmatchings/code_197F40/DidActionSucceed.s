@@ -17,7 +17,7 @@ glabel DidActionSucceed
 /* 1A57C0 80276EE0 0060302D */   daddu    $a2, $v1, $zero
 .L80276EE4:
 /* 1A57C4 80276EE4 0C0B2026 */  jal       set_variable
-/* 1A57C8 80276EE8 00000000 */   nop      
+/* 1A57C8 80276EE8 00000000 */   nop
 /* 1A57CC 80276EEC 8FBF0010 */  lw        $ra, 0x10($sp)
 /* 1A57D0 80276EF0 24020002 */  addiu     $v0, $zero, 2
 /* 1A57D4 80276EF4 03E00008 */  jr        $ra

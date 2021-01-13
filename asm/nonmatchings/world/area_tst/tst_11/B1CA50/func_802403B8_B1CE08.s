@@ -40,7 +40,7 @@ glabel func_802403B8_B1CE08
 /* B1CE94 80240444 E7B40010 */   swc1     $f20, 0x10($sp)
 /* B1CE98 80240448 C64C008C */  lwc1      $f12, 0x8c($s2)
 /* B1CE9C 8024044C 0C00A6C9 */  jal       clamp_angle
-/* B1CEA0 80240450 00000000 */   nop      
+/* B1CEA0 80240450 00000000 */   nop
 /* B1CEA4 80240454 44050000 */  mfc1      $a1, $f0
 /* B1CEA8 80240458 4406A000 */  mfc1      $a2, $f20
 /* B1CEAC 8024045C 4407A000 */  mfc1      $a3, $f20
@@ -114,7 +114,7 @@ glabel func_802403B8_B1CE08
 /* B1CFBC 8024056C E7B40010 */   swc1     $f20, 0x10($sp)
 /* B1CFC0 80240570 C64C008C */  lwc1      $f12, 0x8c($s2)
 /* B1CFC4 80240574 0C00A6C9 */  jal       clamp_angle
-/* B1CFC8 80240578 00000000 */   nop      
+/* B1CFC8 80240578 00000000 */   nop
 /* B1CFCC 8024057C 44050000 */  mfc1      $a1, $f0
 /* B1CFD0 80240580 4406A000 */  mfc1      $a2, $f20
 /* B1CFD4 80240584 4407A000 */  mfc1      $a3, $f20

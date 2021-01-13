@@ -5,7 +5,7 @@ glabel func_802DEFB4
 /* 1020A4 802DEFB4 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 1020A8 802DEFB8 AFBF0010 */  sw        $ra, 0x10($sp)
 /* 1020AC 802DEFBC 0C04E934 */  jal       func_8013A4D0
-/* 1020B0 802DEFC0 00000000 */   nop      
+/* 1020B0 802DEFC0 00000000 */   nop
 /* 1020B4 802DEFC4 3C02802E */  lui       $v0, %hi(D_802E0C58)
 /* 1020B8 802DEFC8 8C420C58 */  lw        $v0, %lo(D_802E0C58)($v0)
 /* 1020BC 802DEFCC 1840000C */  blez      $v0, .L802DF000

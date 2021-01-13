@@ -47,7 +47,7 @@ glabel func_80240950_BED740
 /* BED7E8 802409F8 0C0123F5 */  jal       is_point_within_region
 /* BED7EC 802409FC 8E070038 */   lw       $a3, 0x38($s0)
 /* BED7F0 80240A00 1040000E */  beqz      $v0, .L80240A3C
-/* BED7F4 80240A04 00000000 */   nop      
+/* BED7F4 80240A04 00000000 */   nop
 /* BED7F8 80240A08 8E2200D0 */  lw        $v0, 0xd0($s1)
 /* BED7FC 80240A0C C60C0038 */  lwc1      $f12, 0x38($s0)
 /* BED800 80240A10 C60E0040 */  lwc1      $f14, 0x40($s0)
@@ -58,7 +58,7 @@ glabel func_80240950_BED740
 /* BED814 80240A24 468031A0 */  cvt.s.w   $f6, $f6
 /* BED818 80240A28 44073000 */  mfc1      $a3, $f6
 /* BED81C 80240A2C 0C00A720 */  jal       atan2
-/* BED820 80240A30 00000000 */   nop      
+/* BED820 80240A30 00000000 */   nop
 /* BED824 80240A34 0809029B */  j         .L80240A6C
 /* BED828 80240A38 E600000C */   swc1     $f0, 0xc($s0)
 .L80240A3C:
@@ -66,7 +66,7 @@ glabel func_80240950_BED740
 /* BED830 80240A40 2404003C */   addiu    $a0, $zero, 0x3c
 /* BED834 80240A44 C60C000C */  lwc1      $f12, 0xc($s0)
 /* BED838 80240A48 44820000 */  mtc1      $v0, $f0
-/* BED83C 80240A4C 00000000 */  nop       
+/* BED83C 80240A4C 00000000 */  nop
 /* BED840 80240A50 46800020 */  cvt.s.w   $f0, $f0
 /* BED844 80240A54 46006300 */  add.s     $f12, $f12, $f0
 /* BED848 80240A58 3C0141F0 */  lui       $at, 0x41f0
@@ -82,7 +82,7 @@ glabel func_80240950_BED740
 /* BED86C 80240A7C 8E2200D0 */  lw        $v0, 0xd0($s1)
 /* BED870 80240A80 8C420014 */  lw        $v0, 0x14($v0)
 /* BED874 80240A84 04410004 */  bgez      $v0, .L80240A98
-/* BED878 80240A88 00000000 */   nop      
+/* BED878 80240A88 00000000 */   nop
 /* BED87C 80240A8C C6400000 */  lwc1      $f0, ($s2)
 /* BED880 80240A90 080902AE */  j         .L80240AB8
 /* BED884 80240A94 E6000018 */   swc1     $f0, 0x18($s0)
@@ -90,7 +90,7 @@ glabel func_80240950_BED740
 /* BED888 80240A98 3C018024 */  lui       $at, %hi(D_80247950)
 /* BED88C 80240A9C D4227950 */  ldc1      $f2, %lo(D_80247950)($at)
 /* BED890 80240AA0 44820000 */  mtc1      $v0, $f0
-/* BED894 80240AA4 00000000 */  nop       
+/* BED894 80240AA4 00000000 */  nop
 /* BED898 80240AA8 46800021 */  cvt.d.w   $f0, $f0
 /* BED89C 80240AAC 46220003 */  div.d     $f0, $f0, $f2
 /* BED8A0 80240AB0 46200020 */  cvt.s.d   $f0, $f0
@@ -102,7 +102,7 @@ glabel func_80240950_BED740
 /* BED8B4 80240AC4 44801000 */  mtc1      $zero, $f2
 /* BED8B8 80240AC8 46000021 */  cvt.d.s   $f0, $f0
 /* BED8BC 80240ACC 46220002 */  mul.d     $f0, $f0, $f2
-/* BED8C0 80240AD0 00000000 */  nop       
+/* BED8C0 80240AD0 00000000 */  nop
 /* BED8C4 80240AD4 24020001 */  addiu     $v0, $zero, 1
 /* BED8C8 80240AD8 4620018D */  trunc.w.d $f6, $f0
 /* BED8CC 80240ADC E626007C */  swc1      $f6, 0x7c($s1)

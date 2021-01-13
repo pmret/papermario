@@ -46,7 +46,7 @@ glabel func_80240B94_BE4344
 /* BE43E8 80240C38 8E2200B0 */  lw        $v0, 0xb0($s1)
 /* BE43EC 80240C3C 30420004 */  andi      $v0, $v0, 4
 /* BE43F0 80240C40 10400044 */  beqz      $v0, .L80240D54
-/* BE43F4 80240C44 00000000 */   nop      
+/* BE43F4 80240C44 00000000 */   nop
 .L80240C48:
 /* BE43F8 80240C48 2404F7FF */  addiu     $a0, $zero, -0x801
 /* BE43FC 80240C4C AE800070 */  sw        $zero, 0x70($s4)
@@ -101,7 +101,7 @@ glabel func_80240B94_BE4344
 /* BE44B0 80240D00 3C0142C8 */  lui       $at, 0x42c8
 /* BE44B4 80240D04 44812000 */  mtc1      $at, $f4
 /* BE44B8 80240D08 44823000 */  mtc1      $v0, $f6
-/* BE44BC 80240D0C 00000000 */  nop       
+/* BE44BC 80240D0C 00000000 */  nop
 /* BE44C0 80240D10 468031A0 */  cvt.s.w   $f6, $f6
 /* BE44C4 80240D14 27A20044 */  addiu     $v0, $sp, 0x44
 /* BE44C8 80240D18 E7A00038 */  swc1      $f0, 0x38($sp)
@@ -116,7 +116,7 @@ glabel func_80240B94_BE4344
 /* BE44EC 80240D3C 0C0372DF */  jal       func_800DCB7C
 /* BE44F0 80240D40 27A70040 */   addiu    $a3, $sp, 0x40
 /* BE44F4 80240D44 10400003 */  beqz      $v0, .L80240D54
-/* BE44F8 80240D48 00000000 */   nop      
+/* BE44F8 80240D48 00000000 */   nop
 /* BE44FC 80240D4C C7A0003C */  lwc1      $f0, 0x3c($sp)
 /* BE4500 80240D50 E640003C */  swc1      $f0, 0x3c($s2)
 .L80240D54:
@@ -124,72 +124,85 @@ glabel func_80240B94_BE4344
 /* BE4508 80240D58 2C620064 */  sltiu     $v0, $v1, 0x64
 /* BE450C 80240D5C 10400042 */  beqz      $v0, .L80240E68
 /* BE4510 80240D60 00031080 */   sll      $v0, $v1, 2
-/* BE4514 80240D64 3C018024 */  lui       $at, %hi(D_80244140)
+/* BE4514 80240D64 3C018024 */  lui       $at, %hi(jtbl_80244140_BE78F0)
 /* BE4518 80240D68 00220821 */  addu      $at, $at, $v0
-/* BE451C 80240D6C 8C224140 */  lw        $v0, %lo(D_80244140)($at)
+/* BE451C 80240D6C 8C224140 */  lw        $v0, %lo(jtbl_80244140_BE78F0)($at)
 /* BE4520 80240D70 00400008 */  jr        $v0
-/* BE4524 80240D74 00000000 */   nop      
+/* BE4524 80240D74 00000000 */   nop
+glabel L80240D78_BE4528
 /* BE4528 80240D78 0280202D */  daddu     $a0, $s4, $zero
 /* BE452C 80240D7C 0260282D */  daddu     $a1, $s3, $zero
 /* BE4530 80240D80 0C090000 */  jal       func_80240000_BE37B0
 /* BE4534 80240D84 02A0302D */   daddu    $a2, $s5, $zero
+glabel L80240D88_BE4538
 /* BE4538 80240D88 0280202D */  daddu     $a0, $s4, $zero
 /* BE453C 80240D8C 0260282D */  daddu     $a1, $s3, $zero
 /* BE4540 80240D90 0C090056 */  jal       func_80240158_BE3908
 /* BE4544 80240D94 02A0302D */   daddu    $a2, $s5, $zero
 /* BE4548 80240D98 0809039A */  j         .L80240E68
-/* BE454C 80240D9C 00000000 */   nop      
+/* BE454C 80240D9C 00000000 */   nop
+glabel L80240DA0_BE4550
 /* BE4550 80240DA0 0280202D */  daddu     $a0, $s4, $zero
 /* BE4554 80240DA4 0260282D */  daddu     $a1, $s3, $zero
 /* BE4558 80240DA8 0C090100 */  jal       arn_04_UnkNpcAIFunc1
 /* BE455C 80240DAC 02A0302D */   daddu    $a2, $s5, $zero
+glabel L80240DB0_BE4560
 /* BE4560 80240DB0 0280202D */  daddu     $a0, $s4, $zero
 /* BE4564 80240DB4 0260282D */  daddu     $a1, $s3, $zero
 /* BE4568 80240DB8 0C090130 */  jal       func_802404C0_BE3C70
 /* BE456C 80240DBC 02A0302D */   daddu    $a2, $s5, $zero
 /* BE4570 80240DC0 0809039A */  j         .L80240E68
-/* BE4574 80240DC4 00000000 */   nop      
+/* BE4574 80240DC4 00000000 */   nop
+glabel L80240DC8_BE4578
 /* BE4578 80240DC8 0280202D */  daddu     $a0, $s4, $zero
 /* BE457C 80240DCC 0260282D */  daddu     $a1, $s3, $zero
 /* BE4580 80240DD0 0C09019F */  jal       func_8024067C_BE3E2C
 /* BE4584 80240DD4 02A0302D */   daddu    $a2, $s5, $zero
 /* BE4588 80240DD8 0809039A */  j         .L80240E68
-/* BE458C 80240DDC 00000000 */   nop      
+/* BE458C 80240DDC 00000000 */   nop
+glabel L80240DE0_BE4590
 /* BE4590 80240DE0 0280202D */  daddu     $a0, $s4, $zero
 /* BE4594 80240DE4 0260282D */  daddu     $a1, $s3, $zero
 /* BE4598 80240DE8 0C0901CC */  jal       arn_04_NpcJumpFunc2
 /* BE459C 80240DEC 02A0302D */   daddu    $a2, $s5, $zero
+glabel L80240DF0_BE45A0
 /* BE45A0 80240DF0 0280202D */  daddu     $a0, $s4, $zero
 /* BE45A4 80240DF4 0260282D */  daddu     $a1, $s3, $zero
 /* BE45A8 80240DF8 0C0901E9 */  jal       arn_04_NpcJumpFunc
 /* BE45AC 80240DFC 02A0302D */   daddu    $a2, $s5, $zero
 /* BE45B0 80240E00 0809039A */  j         .L80240E68
-/* BE45B4 80240E04 00000000 */   nop      
+/* BE45B4 80240E04 00000000 */   nop
+glabel L80240E08_BE45B8
 /* BE45B8 80240E08 0280202D */  daddu     $a0, $s4, $zero
 /* BE45BC 80240E0C 0260282D */  daddu     $a1, $s3, $zero
 /* BE45C0 80240E10 0C090207 */  jal       func_8024081C_BE3FCC
 /* BE45C4 80240E14 02A0302D */   daddu    $a2, $s5, $zero
+glabel L80240E18_BE45C8
 /* BE45C8 80240E18 0280202D */  daddu     $a0, $s4, $zero
 /* BE45CC 80240E1C 0260282D */  daddu     $a1, $s3, $zero
 /* BE45D0 80240E20 0C090253 */  jal       func_8024094C_BE40FC
 /* BE45D4 80240E24 02A0302D */   daddu    $a2, $s5, $zero
 /* BE45D8 80240E28 0809039A */  j         .L80240E68
-/* BE45DC 80240E2C 00000000 */   nop      
+/* BE45DC 80240E2C 00000000 */   nop
+glabel L80240E30_BE45E0
 /* BE45E0 80240E30 0280202D */  daddu     $a0, $s4, $zero
 /* BE45E4 80240E34 0260282D */  daddu     $a1, $s3, $zero
 /* BE45E8 80240E38 0C09029B */  jal       arn_04_UnkNpcDurationFlagFunc
 /* BE45EC 80240E3C 02A0302D */   daddu    $a2, $s5, $zero
 /* BE45F0 80240E40 0809039A */  j         .L80240E68
-/* BE45F4 80240E44 00000000 */   nop      
+/* BE45F4 80240E44 00000000 */   nop
+glabel L80240E48_BE45F8
 /* BE45F8 80240E48 0280202D */  daddu     $a0, $s4, $zero
 /* BE45FC 80240E4C 0260282D */  daddu     $a1, $s3, $zero
 /* BE4600 80240E50 0C0902B5 */  jal       func_80240AD4_BE4284
 /* BE4604 80240E54 02A0302D */   daddu    $a2, $s5, $zero
 /* BE4608 80240E58 0809039A */  j         .L80240E68
-/* BE460C 80240E5C 00000000 */   nop      
+/* BE460C 80240E5C 00000000 */   nop
+glabel L80240E60_BE4610
 /* BE4610 80240E60 0C0129CF */  jal       func_8004A73C
 /* BE4614 80240E64 0280202D */   daddu    $a0, $s4, $zero
 .L80240E68:
+glabel L80240E68_BE4618
 /* BE4618 80240E68 8FBF0060 */  lw        $ra, 0x60($sp)
 /* BE461C 80240E6C 8FB5005C */  lw        $s5, 0x5c($sp)
 /* BE4620 80240E70 8FB40058 */  lw        $s4, 0x58($sp)

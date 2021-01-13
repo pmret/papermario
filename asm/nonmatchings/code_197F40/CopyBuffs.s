@@ -14,7 +14,7 @@ glabel CopyBuffs
 /* 19FA64 80271184 26100004 */   addiu    $s0, $s0, 4
 /* 19FA68 80271188 2412FF81 */  addiu     $s2, $zero, -0x7f
 /* 19FA6C 8027118C 14520002 */  bne       $v0, $s2, .L80271198
-/* 19FA70 80271190 00000000 */   nop      
+/* 19FA70 80271190 00000000 */   nop
 /* 19FA74 80271194 8E220148 */  lw        $v0, 0x148($s1)
 .L80271198:
 /* 19FA78 80271198 0C09A75B */  jal       get_actor
@@ -24,7 +24,7 @@ glabel CopyBuffs
 /* 19FA88 802711A8 0C0B1EAF */  jal       get_variable
 /* 19FA8C 802711AC 0040802D */   daddu    $s0, $v0, $zero
 /* 19FA90 802711B0 14520002 */  bne       $v0, $s2, .L802711BC
-/* 19FA94 802711B4 00000000 */   nop      
+/* 19FA94 802711B4 00000000 */   nop
 /* 19FA98 802711B8 8E220148 */  lw        $v0, 0x148($s1)
 .L802711BC:
 /* 19FA9C 802711BC 0C09A75B */  jal       get_actor
@@ -47,4 +47,4 @@ glabel CopyBuffs
 /* 19FAE0 80271200 24020002 */  addiu     $v0, $zero, 2
 /* 19FAE4 80271204 03E00008 */  jr        $ra
 /* 19FAE8 80271208 27BD0020 */   addiu    $sp, $sp, 0x20
-/* 19FAEC 8027120C 00000000 */  nop       
+/* 19FAEC 8027120C 00000000 */  nop

@@ -42,11 +42,11 @@ glabel func_80240A5C_EDF41C
 .L80240AF0:
 /* EDF4B0 80240AF0 8E220070 */  lw        $v0, 0x70($s1)
 /* EDF4B4 80240AF4 18400034 */  blez      $v0, .L80240BC8
-/* EDF4B8 80240AF8 00000000 */   nop      
+/* EDF4B8 80240AF8 00000000 */   nop
 /* EDF4BC 80240AFC C62C0074 */  lwc1      $f12, 0x74($s1)
 /* EDF4C0 80240B00 46806320 */  cvt.s.w   $f12, $f12
 /* EDF4C4 80240B04 44820000 */  mtc1      $v0, $f0
-/* EDF4C8 80240B08 00000000 */  nop       
+/* EDF4C8 80240B08 00000000 */  nop
 /* EDF4CC 80240B0C 46800020 */  cvt.s.w   $f0, $f0
 /* EDF4D0 80240B10 46000021 */  cvt.d.s   $f0, $f0
 /* EDF4D4 80240B14 46220003 */  div.d     $f0, $f0, $f2
@@ -77,23 +77,23 @@ glabel func_80240A5C_EDF41C
 /* EDF534 80240B74 27A70030 */   addiu    $a3, $sp, 0x30
 .L80240B78:
 /* EDF538 80240B78 10400007 */  beqz      $v0, .L80240B98
-/* EDF53C 80240B7C 00000000 */   nop      
+/* EDF53C 80240B7C 00000000 */   nop
 /* EDF540 80240B80 4616A082 */  mul.s     $f2, $f20, $f22
-/* EDF544 80240B84 00000000 */  nop       
+/* EDF544 80240B84 00000000 */  nop
 /* EDF548 80240B88 C7A0002C */  lwc1      $f0, 0x2c($sp)
 /* EDF54C 80240B8C 46180000 */  add.s     $f0, $f0, $f24
 /* EDF550 80240B90 080902E9 */  j         .L80240BA4
 /* EDF554 80240B94 46020000 */   add.s    $f0, $f0, $f2
 .L80240B98:
 /* EDF558 80240B98 4616A002 */  mul.s     $f0, $f20, $f22
-/* EDF55C 80240B9C 00000000 */  nop       
+/* EDF55C 80240B9C 00000000 */  nop
 /* EDF560 80240BA0 4600D000 */  add.s     $f0, $f26, $f0
 .L80240BA4:
 /* EDF564 80240BA4 E600003C */  swc1      $f0, 0x3c($s0)
 /* EDF568 80240BA8 8E220074 */  lw        $v0, 0x74($s1)
 /* EDF56C 80240BAC 2442000A */  addiu     $v0, $v0, 0xa
 /* EDF570 80240BB0 44826000 */  mtc1      $v0, $f12
-/* EDF574 80240BB4 00000000 */  nop       
+/* EDF574 80240BB4 00000000 */  nop
 /* EDF578 80240BB8 0C00AB85 */  jal       func_8002AE14
 /* EDF57C 80240BBC 46806320 */   cvt.s.w  $f12, $f12
 /* EDF580 80240BC0 4600020D */  trunc.w.s $f8, $f0
@@ -105,7 +105,7 @@ glabel func_80240A5C_EDF41C
 /* EDF594 80240BD4 860200A8 */  lh        $v0, 0xa8($s0)
 /* EDF598 80240BD8 C600003C */  lwc1      $f0, 0x3c($s0)
 /* EDF59C 80240BDC 44821000 */  mtc1      $v0, $f2
-/* EDF5A0 80240BE0 00000000 */  nop       
+/* EDF5A0 80240BE0 00000000 */  nop
 /* EDF5A4 80240BE4 468010A0 */  cvt.s.w   $f2, $f2
 /* EDF5A8 80240BE8 3C028010 */  lui       $v0, %hi(D_800FFC90)
 /* EDF5AC 80240BEC 8C42FC90 */  lw        $v0, %lo(D_800FFC90)($v0)
@@ -118,7 +118,7 @@ glabel func_80240A5C_EDF41C
 /* EDF5C8 80240C08 46240000 */  add.d     $f0, $f0, $f4
 /* EDF5CC 80240C0C 460010A1 */  cvt.d.s   $f2, $f2
 /* EDF5D0 80240C10 4620103C */  c.lt.d    $f2, $f0
-/* EDF5D4 80240C14 00000000 */  nop       
+/* EDF5D4 80240C14 00000000 */  nop
 /* EDF5D8 80240C18 4500002E */  bc1f      .L80240CD4
 /* EDF5DC 80240C1C 0280202D */   daddu    $a0, $s4, $zero
 /* EDF5E0 80240C20 24020001 */  addiu     $v0, $zero, 1
@@ -140,7 +140,7 @@ glabel func_80240A5C_EDF41C
 /* EDF620 80240C60 3C01C1A0 */  lui       $at, 0xc1a0
 /* EDF624 80240C64 44812000 */  mtc1      $at, $f4
 /* EDF628 80240C68 44834000 */  mtc1      $v1, $f8
-/* EDF62C 80240C6C 00000000 */  nop       
+/* EDF62C 80240C6C 00000000 */  nop
 /* EDF630 80240C70 46804220 */  cvt.s.w   $f8, $f8
 /* EDF634 80240C74 44074000 */  mfc1      $a3, $f8
 /* EDF638 80240C78 27A20038 */  addiu     $v0, $sp, 0x38
@@ -171,10 +171,10 @@ glabel func_80240A5C_EDF41C
 .L80240CD4:
 /* EDF694 80240CD4 8602008C */  lh        $v0, 0x8c($s0)
 /* EDF698 80240CD8 14400025 */  bnez      $v0, .L80240D70
-/* EDF69C 80240CDC 00000000 */   nop      
+/* EDF69C 80240CDC 00000000 */   nop
 /* EDF6A0 80240CE0 8602008E */  lh        $v0, 0x8e($s0)
 /* EDF6A4 80240CE4 1C400022 */  bgtz      $v0, .L80240D70
-/* EDF6A8 80240CE8 00000000 */   nop      
+/* EDF6A8 80240CE8 00000000 */   nop
 /* EDF6AC 80240CEC 8E620074 */  lw        $v0, 0x74($s3)
 /* EDF6B0 80240CF0 2442FFFF */  addiu     $v0, $v0, -1
 /* EDF6B4 80240CF4 1840001D */  blez      $v0, .L80240D6C
@@ -183,7 +183,7 @@ glabel func_80240A5C_EDF41C
 /* EDF6C0 80240D00 9442002A */  lhu       $v0, 0x2a($v0)
 /* EDF6C4 80240D04 30420010 */  andi      $v0, $v0, 0x10
 /* EDF6C8 80240D08 14400007 */  bnez      $v0, .L80240D28
-/* EDF6CC 80240D0C 00000000 */   nop      
+/* EDF6CC 80240D0C 00000000 */   nop
 /* EDF6D0 80240D10 C600000C */  lwc1      $f0, 0xc($s0)
 /* EDF6D4 80240D14 3C014334 */  lui       $at, 0x4334
 /* EDF6D8 80240D18 44816000 */  mtc1      $at, $f12

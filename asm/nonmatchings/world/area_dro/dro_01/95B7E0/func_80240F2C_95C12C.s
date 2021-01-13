@@ -37,7 +37,7 @@ glabel func_80240F2C_95C12C
 /* 95C1AC 80240FAC 2402000F */  addiu     $v0, $zero, 0xf
 /* 95C1B0 80240FB0 AFA2001C */  sw        $v0, 0x1c($sp)
 /* 95C1B4 80240FB4 44833000 */  mtc1      $v1, $f6
-/* 95C1B8 80240FB8 00000000 */  nop       
+/* 95C1B8 80240FB8 00000000 */  nop
 /* 95C1BC 80240FBC 468031A0 */  cvt.s.w   $f6, $f6
 /* 95C1C0 80240FC0 44073000 */  mfc1      $a3, $f6
 /* 95C1C4 80240FC4 27A20028 */  addiu     $v0, $sp, 0x28

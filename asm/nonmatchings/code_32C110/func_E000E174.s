@@ -18,9 +18,9 @@ glabel func_E000E174
 /* 32C2B8 E000E1A8 04410005 */  bgez      $v0, .LE000E1C0
 /* 32C2BC E000E1AC ACC20074 */   sw       $v0, 0x74($a2)
 /* 32C2C0 E000E1B0 0C080128 */  jal       func_E02004A0
-/* 32C2C4 E000E1B4 00000000 */   nop      
+/* 32C2C4 E000E1B4 00000000 */   nop
 /* 32C2C8 E000E1B8 0800388E */  j         .LE000E238
-/* 32C2CC E000E1BC 00000000 */   nop      
+/* 32C2CC E000E1BC 00000000 */   nop
 .LE000E1C0:
 /* 32C2D0 E000E1C0 8C820008 */  lw        $v0, 8($a0)
 /* 32C2D4 E000E1C4 1840001C */  blez      $v0, .LE000E238
@@ -30,11 +30,11 @@ glabel func_E000E174
 /* 32C2E0 E000E1D0 C462004C */  lwc1      $f2, 0x4c($v1)
 /* 32C2E4 E000E1D4 C4600058 */  lwc1      $f0, 0x58($v1)
 /* 32C2E8 E000E1D8 46001082 */  mul.s     $f2, $f2, $f0
-/* 32C2EC E000E1DC 00000000 */  nop       
+/* 32C2EC E000E1DC 00000000 */  nop
 /* 32C2F0 E000E1E0 C468004C */  lwc1      $f8, 0x4c($v1)
 /* 32C2F4 E000E1E4 C460005C */  lwc1      $f0, 0x5c($v1)
 /* 32C2F8 E000E1E8 46004202 */  mul.s     $f8, $f8, $f0
-/* 32C2FC E000E1EC 00000000 */  nop       
+/* 32C2FC E000E1EC 00000000 */  nop
 /* 32C300 E000E1F0 C466FFFC */  lwc1      $f6, -4($v1)
 /* 32C304 E000E1F4 C4600054 */  lwc1      $f0, 0x54($v1)
 /* 32C308 E000E1F8 46023180 */  add.s     $f6, $f6, $f2

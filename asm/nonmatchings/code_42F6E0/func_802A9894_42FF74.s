@@ -19,5 +19,5 @@ glabel func_802A9894_42FF74
 /* 42FFAC 802A98CC 8FB00010 */  lw        $s0, 0x10($sp)
 /* 42FFB0 802A98D0 03E00008 */  jr        $ra
 /* 42FFB4 802A98D4 27BD0018 */   addiu    $sp, $sp, 0x18
-/* 42FFB8 802A98D8 00000000 */  nop       
-/* 42FFBC 802A98DC 00000000 */  nop       
+/* 42FFB8 802A98D8 00000000 */  nop
+/* 42FFBC 802A98DC 00000000 */  nop

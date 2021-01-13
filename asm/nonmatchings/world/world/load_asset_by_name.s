@@ -18,7 +18,7 @@ glabel load_asset_by_name
 /* 3611C 8005AD1C AFB10034 */   sw       $s1, 0x34($sp)
 /* 36120 8005AD20 8FA40020 */  lw        $a0, 0x20($sp)
 /* 36124 8005AD24 0C00AB39 */  jal       heap_malloc
-/* 36128 8005AD28 00000000 */   nop      
+/* 36128 8005AD28 00000000 */   nop
 /* 3612C 8005AD2C 0040902D */  daddu     $s2, $v0, $zero
 /* 36130 8005AD30 0240882D */  daddu     $s1, $s2, $zero
 /* 36134 8005AD34 3C0201E4 */  lui       $v0, 0x1e4
@@ -34,7 +34,7 @@ glabel load_asset_by_name
 /* 36158 8005AD58 0C01BB5C */  jal       strcmp
 /* 3615C 8005AD5C 0200282D */   daddu    $a1, $s0, $zero
 /* 36160 8005AD60 10400003 */  beqz      $v0, .L8005AD70
-/* 36164 8005AD64 00000000 */   nop      
+/* 36164 8005AD64 00000000 */   nop
 /* 36168 8005AD68 08016B55 */  j         .L8005AD54
 /* 3616C 8005AD6C 2631001C */   addiu    $s1, $s1, 0x1c
 .L8005AD70:

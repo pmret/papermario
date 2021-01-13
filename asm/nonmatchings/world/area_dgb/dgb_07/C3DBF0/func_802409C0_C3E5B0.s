@@ -16,7 +16,7 @@ glabel func_802409C0_C3E5B0
 /* C3E5DC 802409EC 0040802D */   daddu    $s0, $v0, $zero
 /* C3E5E0 802409F0 C60C000C */  lwc1      $f12, 0xc($s0)
 /* C3E5E4 802409F4 44820000 */  mtc1      $v0, $f0
-/* C3E5E8 802409F8 00000000 */  nop       
+/* C3E5E8 802409F8 00000000 */  nop
 /* C3E5EC 802409FC 46800020 */  cvt.s.w   $f0, $f0
 /* C3E5F0 80240A00 46006300 */  add.s     $f12, $f12, $f0
 /* C3E5F4 80240A04 3C0142B4 */  lui       $at, 0x42b4

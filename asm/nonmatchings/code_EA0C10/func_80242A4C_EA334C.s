@@ -28,7 +28,7 @@ glabel func_80242A4C_EA334C
 /* EA33A0 80242AA0 00220821 */  addu      $at, $at, $v0
 /* EA33A4 80242AA4 AC2066D0 */  sw        $zero, %lo(D_802466D0)($at)
 /* EA33A8 80242AA8 08090AB6 */  j         .L80242AD8
-/* EA33AC 80242AAC 00000000 */   nop      
+/* EA33AC 80242AAC 00000000 */   nop
 .L80242AB0:
 /* EA33B0 80242AB0 3C038024 */  lui       $v1, %hi(D_802466D0)
 /* EA33B4 80242AB4 246366D0 */  addiu     $v1, $v1, %lo(D_802466D0)

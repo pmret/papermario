@@ -11,11 +11,11 @@ glabel func_802BB648_E2DF78
 /* E2DF90 802BB660 8E050040 */  lw        $a1, 0x40($s0)
 /* E2DF94 802BB664 30420010 */  andi      $v0, $v0, 0x10
 /* E2DF98 802BB668 10400019 */  beqz      $v0, .L802BB6D0
-/* E2DF9C 802BB66C 00000000 */   nop      
+/* E2DF9C 802BB66C 00000000 */   nop
 /* E2DFA0 802BB670 92020006 */  lbu       $v0, 6($s0)
 /* E2DFA4 802BB674 30420048 */  andi      $v0, $v0, 0x48
 /* E2DFA8 802BB678 10400015 */  beqz      $v0, .L802BB6D0
-/* E2DFAC 802BB67C 00000000 */   nop      
+/* E2DFAC 802BB67C 00000000 */   nop
 /* E2DFB0 802BB680 8E030000 */  lw        $v1, ($s0)
 /* E2DFB4 802BB684 30621000 */  andi      $v0, $v1, 0x1000
 /* E2DFB8 802BB688 10400011 */  beqz      $v0, .L802BB6D0
@@ -35,7 +35,7 @@ glabel func_802BB648_E2DF78
 /* E2DFF0 802BB6C0 3C050000 */  lui       $a1, 0
 /* E2DFF4 802BB6C4 24A500F4 */  addiu     $a1, $a1, 0xf4
 /* E2DFF8 802BB6C8 0C048052 */  jal       play_model_animation
-/* E2DFFC 802BB6CC 00000000 */   nop      
+/* E2DFFC 802BB6CC 00000000 */   nop
 .L802BB6D0:
 /* E2E000 802BB6D0 8FBF0014 */  lw        $ra, 0x14($sp)
 /* E2E004 802BB6D4 8FB00010 */  lw        $s0, 0x10($sp)

@@ -22,7 +22,7 @@ glabel func_80240AC8_C3B4D8
 /* C3B51C 80240B0C 0C01242D */  jal       func_800490B4
 /* C3B520 80240B10 0220282D */   daddu    $a1, $s1, $zero
 /* C3B524 80240B14 1040000C */  beqz      $v0, .L80240B48
-/* C3B528 80240B18 00000000 */   nop      
+/* C3B528 80240B18 00000000 */   nop
 /* C3B52C 80240B1C 3C02800F */  lui       $v0, %hi(gPlayerStatusPtr)
 /* C3B530 80240B20 8C427B30 */  lw        $v0, %lo(gPlayerStatusPtr)($v0)
 /* C3B534 80240B24 C60C0038 */  lwc1      $f12, 0x38($s0)
@@ -40,7 +40,7 @@ glabel func_80240AC8_C3B4D8
 /* C3B560 80240B50 A602008E */  sh        $v0, 0x8e($s0)
 /* C3B564 80240B54 00021400 */  sll       $v0, $v0, 0x10
 /* C3B568 80240B58 1C400022 */  bgtz      $v0, .L80240BE4
-/* C3B56C 80240B5C 00000000 */   nop      
+/* C3B56C 80240B5C 00000000 */   nop
 /* C3B570 80240B60 8E420074 */  lw        $v0, 0x74($s2)
 /* C3B574 80240B64 2442FFFF */  addiu     $v0, $v0, -1
 /* C3B578 80240B68 18400014 */  blez      $v0, .L80240BBC

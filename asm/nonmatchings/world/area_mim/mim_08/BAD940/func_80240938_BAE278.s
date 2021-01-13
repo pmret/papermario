@@ -42,11 +42,11 @@ glabel func_80240938_BAE278
 .L802409CC:
 /* BAE30C 802409CC 8E220070 */  lw        $v0, 0x70($s1)
 /* BAE310 802409D0 18400034 */  blez      $v0, .L80240AA4
-/* BAE314 802409D4 00000000 */   nop      
+/* BAE314 802409D4 00000000 */   nop
 /* BAE318 802409D8 C62C0074 */  lwc1      $f12, 0x74($s1)
 /* BAE31C 802409DC 46806320 */  cvt.s.w   $f12, $f12
 /* BAE320 802409E0 44820000 */  mtc1      $v0, $f0
-/* BAE324 802409E4 00000000 */  nop       
+/* BAE324 802409E4 00000000 */  nop
 /* BAE328 802409E8 46800020 */  cvt.s.w   $f0, $f0
 /* BAE32C 802409EC 46000021 */  cvt.d.s   $f0, $f0
 /* BAE330 802409F0 46220003 */  div.d     $f0, $f0, $f2
@@ -77,23 +77,23 @@ glabel func_80240938_BAE278
 /* BAE390 80240A50 27A70030 */   addiu    $a3, $sp, 0x30
 .L80240A54:
 /* BAE394 80240A54 10400007 */  beqz      $v0, .L80240A74
-/* BAE398 80240A58 00000000 */   nop      
+/* BAE398 80240A58 00000000 */   nop
 /* BAE39C 80240A5C 4616A082 */  mul.s     $f2, $f20, $f22
-/* BAE3A0 80240A60 00000000 */  nop       
+/* BAE3A0 80240A60 00000000 */  nop
 /* BAE3A4 80240A64 C7A0002C */  lwc1      $f0, 0x2c($sp)
 /* BAE3A8 80240A68 46180000 */  add.s     $f0, $f0, $f24
 /* BAE3AC 80240A6C 080902A0 */  j         .L80240A80
 /* BAE3B0 80240A70 46020000 */   add.s    $f0, $f0, $f2
 .L80240A74:
 /* BAE3B4 80240A74 4616A002 */  mul.s     $f0, $f20, $f22
-/* BAE3B8 80240A78 00000000 */  nop       
+/* BAE3B8 80240A78 00000000 */  nop
 /* BAE3BC 80240A7C 4600D000 */  add.s     $f0, $f26, $f0
 .L80240A80:
 /* BAE3C0 80240A80 E600003C */  swc1      $f0, 0x3c($s0)
 /* BAE3C4 80240A84 8E220074 */  lw        $v0, 0x74($s1)
 /* BAE3C8 80240A88 2442000A */  addiu     $v0, $v0, 0xa
 /* BAE3CC 80240A8C 44826000 */  mtc1      $v0, $f12
-/* BAE3D0 80240A90 00000000 */  nop       
+/* BAE3D0 80240A90 00000000 */  nop
 /* BAE3D4 80240A94 0C00A6C9 */  jal       clamp_angle
 /* BAE3D8 80240A98 46806320 */   cvt.s.w  $f12, $f12
 /* BAE3DC 80240A9C 4600020D */  trunc.w.s $f8, $f0
@@ -105,7 +105,7 @@ glabel func_80240938_BAE278
 /* BAE3F0 80240AB0 860200A8 */  lh        $v0, 0xa8($s0)
 /* BAE3F4 80240AB4 C600003C */  lwc1      $f0, 0x3c($s0)
 /* BAE3F8 80240AB8 44821000 */  mtc1      $v0, $f2
-/* BAE3FC 80240ABC 00000000 */  nop       
+/* BAE3FC 80240ABC 00000000 */  nop
 /* BAE400 80240AC0 468010A0 */  cvt.s.w   $f2, $f2
 /* BAE404 80240AC4 3C02800F */  lui       $v0, %hi(gPlayerStatusPtr)
 /* BAE408 80240AC8 8C427B30 */  lw        $v0, %lo(gPlayerStatusPtr)($v0)
@@ -118,7 +118,7 @@ glabel func_80240938_BAE278
 /* BAE424 80240AE4 46240000 */  add.d     $f0, $f0, $f4
 /* BAE428 80240AE8 460010A1 */  cvt.d.s   $f2, $f2
 /* BAE42C 80240AEC 4620103C */  c.lt.d    $f2, $f0
-/* BAE430 80240AF0 00000000 */  nop       
+/* BAE430 80240AF0 00000000 */  nop
 /* BAE434 80240AF4 4500002E */  bc1f      .L80240BB0
 /* BAE438 80240AF8 0280202D */   daddu    $a0, $s4, $zero
 /* BAE43C 80240AFC 24020001 */  addiu     $v0, $zero, 1
@@ -140,7 +140,7 @@ glabel func_80240938_BAE278
 /* BAE47C 80240B3C 3C01C1A0 */  lui       $at, 0xc1a0
 /* BAE480 80240B40 44812000 */  mtc1      $at, $f4
 /* BAE484 80240B44 44834000 */  mtc1      $v1, $f8
-/* BAE488 80240B48 00000000 */  nop       
+/* BAE488 80240B48 00000000 */  nop
 /* BAE48C 80240B4C 46804220 */  cvt.s.w   $f8, $f8
 /* BAE490 80240B50 44074000 */  mfc1      $a3, $f8
 /* BAE494 80240B54 27A20038 */  addiu     $v0, $sp, 0x38
@@ -171,10 +171,10 @@ glabel func_80240938_BAE278
 .L80240BB0:
 /* BAE4F0 80240BB0 8602008C */  lh        $v0, 0x8c($s0)
 /* BAE4F4 80240BB4 14400025 */  bnez      $v0, .L80240C4C
-/* BAE4F8 80240BB8 00000000 */   nop      
+/* BAE4F8 80240BB8 00000000 */   nop
 /* BAE4FC 80240BBC 8602008E */  lh        $v0, 0x8e($s0)
 /* BAE500 80240BC0 1C400022 */  bgtz      $v0, .L80240C4C
-/* BAE504 80240BC4 00000000 */   nop      
+/* BAE504 80240BC4 00000000 */   nop
 /* BAE508 80240BC8 8E620074 */  lw        $v0, 0x74($s3)
 /* BAE50C 80240BCC 2442FFFF */  addiu     $v0, $v0, -1
 /* BAE510 80240BD0 1840001D */  blez      $v0, .L80240C48
@@ -183,7 +183,7 @@ glabel func_80240938_BAE278
 /* BAE51C 80240BDC 9442002A */  lhu       $v0, 0x2a($v0)
 /* BAE520 80240BE0 30420010 */  andi      $v0, $v0, 0x10
 /* BAE524 80240BE4 14400007 */  bnez      $v0, .L80240C04
-/* BAE528 80240BE8 00000000 */   nop      
+/* BAE528 80240BE8 00000000 */   nop
 /* BAE52C 80240BEC C600000C */  lwc1      $f0, 0xc($s0)
 /* BAE530 80240BF0 3C014334 */  lui       $at, 0x4334
 /* BAE534 80240BF4 44816000 */  mtc1      $at, $f12

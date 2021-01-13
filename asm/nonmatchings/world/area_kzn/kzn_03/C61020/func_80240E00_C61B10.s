@@ -42,7 +42,7 @@ glabel func_80240E00_C61B10
 /* C61BA4 80240E94 C6620074 */  lwc1      $f2, 0x74($s3)
 /* C61BA8 80240E98 468010A0 */  cvt.s.w   $f2, $f2
 /* C61BAC 80240E9C 4600103C */  c.lt.s    $f2, $f0
-/* C61BB0 80240EA0 00000000 */  nop       
+/* C61BB0 80240EA0 00000000 */  nop
 /* C61BB4 80240EA4 45030001 */  bc1tl     .L80240EAC
 /* C61BB8 80240EA8 0000882D */   daddu    $s1, $zero, $zero
 .L80240EAC:
@@ -51,16 +51,16 @@ glabel func_80240E00_C61B10
 /* C61BC4 80240EB4 3C014387 */  lui       $at, 0x4387
 /* C61BC8 80240EB8 4481A000 */  mtc1      $at, $f20
 /* C61BCC 80240EBC 0C00A70A */  jal       get_clamped_angle_diff
-/* C61BD0 80240EC0 00000000 */   nop      
+/* C61BD0 80240EC0 00000000 */   nop
 /* C61BD4 80240EC4 0C00A6C9 */  jal       clamp_angle
 /* C61BD8 80240EC8 46000306 */   mov.s    $f12, $f0
 /* C61BDC 80240ECC 3C018024 */  lui       $at, %hi(D_80247240)
 /* C61BE0 80240ED0 D4227240 */  ldc1      $f2, %lo(D_80247240)($at)
 /* C61BE4 80240ED4 46000021 */  cvt.d.s   $f0, $f0
 /* C61BE8 80240ED8 4622003C */  c.lt.d    $f0, $f2
-/* C61BEC 80240EDC 00000000 */  nop       
+/* C61BEC 80240EDC 00000000 */  nop
 /* C61BF0 80240EE0 45000003 */  bc1f      .L80240EF0
-/* C61BF4 80240EE4 00000000 */   nop      
+/* C61BF4 80240EE4 00000000 */   nop
 /* C61BF8 80240EE8 3C0142B4 */  lui       $at, 0x42b4
 /* C61BFC 80240EEC 4481A000 */  mtc1      $at, $f20
 .L80240EF0:
@@ -77,7 +77,7 @@ glabel func_80240E00_C61B10
 /* C61C28 80240F18 468010A0 */  cvt.s.w   $f2, $f2
 /* C61C2C 80240F1C 46000005 */  abs.s     $f0, $f0
 /* C61C30 80240F20 4600103C */  c.lt.s    $f2, $f0
-/* C61C34 80240F24 00000000 */  nop       
+/* C61C34 80240F24 00000000 */  nop
 /* C61C38 80240F28 45030001 */  bc1tl     .L80240F30
 /* C61C3C 80240F2C 0000882D */   daddu    $s1, $zero, $zero
 .L80240F30:
@@ -87,13 +87,13 @@ glabel func_80240E00_C61B10
 /* C61C4C 80240F3C 860200A8 */  lh        $v0, 0xa8($s0)
 /* C61C50 80240F40 46020001 */  sub.s     $f0, $f0, $f2
 /* C61C54 80240F44 44821000 */  mtc1      $v0, $f2
-/* C61C58 80240F48 00000000 */  nop       
+/* C61C58 80240F48 00000000 */  nop
 /* C61C5C 80240F4C 468010A1 */  cvt.d.w   $f2, $f2
 /* C61C60 80240F50 46221080 */  add.d     $f2, $f2, $f2
 /* C61C64 80240F54 46000005 */  abs.s     $f0, $f0
 /* C61C68 80240F58 46000021 */  cvt.d.s   $f0, $f0
 /* C61C6C 80240F5C 4620103E */  c.le.d    $f2, $f0
-/* C61C70 80240F60 00000000 */  nop       
+/* C61C70 80240F60 00000000 */  nop
 /* C61C74 80240F64 45030001 */  bc1tl     .L80240F6C
 /* C61C78 80240F68 0000882D */   daddu    $s1, $zero, $zero
 .L80240F6C:

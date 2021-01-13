@@ -76,7 +76,7 @@ glabel func_80240BF0_9EC3E0
 /* 9EC4F8 80240D08 8E4300B0 */  lw        $v1, 0xb0($s2)
 /* 9EC4FC 80240D0C 30620004 */  andi      $v0, $v1, 4
 /* 9EC500 80240D10 10400007 */  beqz      $v0, .L80240D30
-/* 9EC504 80240D14 00000000 */   nop      
+/* 9EC504 80240D14 00000000 */   nop
 /* 9EC508 80240D18 824200B4 */  lb        $v0, 0xb4($s2)
 /* 9EC50C 80240D1C 14400034 */  bnez      $v0, .L80240DF0
 /* 9EC510 80240D20 0000102D */   daddu    $v0, $zero, $zero
@@ -88,21 +88,24 @@ glabel func_80240BF0_9EC3E0
 /* 9EC524 80240D34 2C62000F */  sltiu     $v0, $v1, 0xf
 /* 9EC528 80240D38 1040002C */  beqz      $v0, .L80240DEC
 /* 9EC52C 80240D3C 00031080 */   sll      $v0, $v1, 2
-/* 9EC530 80240D40 3C018024 */  lui       $at, %hi(D_802423B8)
+/* 9EC530 80240D40 3C018024 */  lui       $at, %hi(jtbl_802423B8_9EDBA8)
 /* 9EC534 80240D44 00220821 */  addu      $at, $at, $v0
-/* 9EC538 80240D48 8C2223B8 */  lw        $v0, %lo(D_802423B8)($at)
+/* 9EC538 80240D48 8C2223B8 */  lw        $v0, %lo(jtbl_802423B8_9EDBA8)($at)
 /* 9EC53C 80240D4C 00400008 */  jr        $v0
-/* 9EC540 80240D50 00000000 */   nop      
+/* 9EC540 80240D50 00000000 */   nop
+glabel L80240D54_9EC544
 /* 9EC544 80240D54 0260202D */  daddu     $a0, $s3, $zero
 /* 9EC548 80240D58 0280282D */  daddu     $a1, $s4, $zero
 /* 9EC54C 80240D5C 0C090000 */  jal       func_80240000_9EB7F0
 /* 9EC550 80240D60 0200302D */   daddu    $a2, $s0, $zero
+glabel L80240D64_9EC554
 /* 9EC554 80240D64 0260202D */  daddu     $a0, $s3, $zero
 /* 9EC558 80240D68 0280282D */  daddu     $a1, $s4, $zero
 /* 9EC55C 80240D6C 0C09008C */  jal       func_80240230_9EBA20
 /* 9EC560 80240D70 0200302D */   daddu    $a2, $s0, $zero
 /* 9EC564 80240D74 0809037C */  j         .L80240DF0
 /* 9EC568 80240D78 0000102D */   daddu    $v0, $zero, $zero
+glabel L80240D7C_9EC56C
 /* 9EC56C 80240D7C 0260202D */  daddu     $a0, $s3, $zero
 /* 9EC570 80240D80 0280282D */  daddu     $a1, $s4, $zero
 /* 9EC574 80240D84 0C09015A */  jal       nok_03_UnkNpcAIFunc1
@@ -111,27 +114,32 @@ glabel func_80240BF0_9EC3E0
 /* 9EC580 80240D90 24020003 */  addiu     $v0, $zero, 3
 /* 9EC584 80240D94 14620016 */  bne       $v1, $v0, .L80240DF0
 /* 9EC588 80240D98 0000102D */   daddu    $v0, $zero, $zero
+glabel L80240D9C_9EC58C
 /* 9EC58C 80240D9C 0260202D */  daddu     $a0, $s3, $zero
 /* 9EC590 80240DA0 0280282D */  daddu     $a1, $s4, $zero
 /* 9EC594 80240DA4 0C09018A */  jal       func_80240628_9EBE18
 /* 9EC598 80240DA8 0200302D */   daddu    $a2, $s0, $zero
 /* 9EC59C 80240DAC 0809037C */  j         .L80240DF0
 /* 9EC5A0 80240DB0 0000102D */   daddu    $v0, $zero, $zero
+glabel L80240DB4_9EC5A4
 /* 9EC5A4 80240DB4 0260202D */  daddu     $a0, $s3, $zero
 /* 9EC5A8 80240DB8 0280282D */  daddu     $a1, $s4, $zero
 /* 9EC5AC 80240DBC 0C0901F3 */  jal       func_802407CC_9EBFBC
 /* 9EC5B0 80240DC0 0200302D */   daddu    $a2, $s0, $zero
+glabel L80240DC4_9EC5B4
 /* 9EC5B4 80240DC4 0260202D */  daddu     $a0, $s3, $zero
 /* 9EC5B8 80240DC8 0280282D */  daddu     $a1, $s4, $zero
 /* 9EC5BC 80240DCC 0C09022B */  jal       func_802408AC_9EC09C
 /* 9EC5C0 80240DD0 0200302D */   daddu    $a2, $s0, $zero
 /* 9EC5C4 80240DD4 0809037C */  j         .L80240DF0
 /* 9EC5C8 80240DD8 0000102D */   daddu    $v0, $zero, $zero
+glabel L80240DDC_9EC5CC
 /* 9EC5CC 80240DDC 0260202D */  daddu     $a0, $s3, $zero
 /* 9EC5D0 80240DE0 0280282D */  daddu     $a1, $s4, $zero
 /* 9EC5D4 80240DE4 0C0902EB */  jal       nok_03_UnkDurationCheck
 /* 9EC5D8 80240DE8 0200302D */   daddu    $a2, $s0, $zero
 .L80240DEC:
+glabel L80240DEC_9EC5DC
 /* 9EC5DC 80240DEC 0000102D */  daddu     $v0, $zero, $zero
 .L80240DF0:
 /* 9EC5E0 80240DF0 8FBF0048 */  lw        $ra, 0x48($sp)
@@ -143,6 +151,6 @@ glabel func_80240BF0_9EC3E0
 /* 9EC5F8 80240E08 8FB00030 */  lw        $s0, 0x30($sp)
 /* 9EC5FC 80240E0C 03E00008 */  jr        $ra
 /* 9EC600 80240E10 27BD0050 */   addiu    $sp, $sp, 0x50
-/* 9EC604 80240E14 00000000 */  nop       
-/* 9EC608 80240E18 00000000 */  nop       
-/* 9EC60C 80240E1C 00000000 */  nop       
+/* 9EC604 80240E14 00000000 */  nop
+/* 9EC608 80240E18 00000000 */  nop
+/* 9EC60C 80240E1C 00000000 */  nop

@@ -5,7 +5,7 @@ glabel func_802B79C8_E20AD8
 /* E20AD8 802B79C8 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* E20ADC 802B79CC AFBF0010 */  sw        $ra, 0x10($sp)
 /* E20AE0 802B79D0 0C0ADD7A */  jal       func_802B75E8_E206F8
-/* E20AE4 802B79D4 00000000 */   nop      
+/* E20AE4 802B79D4 00000000 */   nop
 /* E20AE8 802B79D8 3C04800F */  lui       $a0, %hi(gPlayerStatusPtr)
 /* E20AEC 802B79DC 8C847B30 */  lw        $a0, %lo(gPlayerStatusPtr)($a0)
 /* E20AF0 802B79E0 2402FFFF */  addiu     $v0, $zero, -1
@@ -20,7 +20,7 @@ glabel func_802B79C8_E20AD8
 /* E20B14 802B7A04 0C03BCF5 */  jal       func_800EF3D4
 /* E20B18 802B7A08 0000202D */   daddu    $a0, $zero, $zero
 /* E20B1C 802B7A0C 0C03BCE9 */  jal       func_800EF3A4
-/* E20B20 802B7A10 00000000 */   nop      
+/* E20B20 802B7A10 00000000 */   nop
 /* E20B24 802B7A14 8FBF0010 */  lw        $ra, 0x10($sp)
 /* E20B28 802B7A18 03E00008 */  jr        $ra
 /* E20B2C 802B7A1C 27BD0018 */   addiu    $sp, $sp, 0x18

@@ -33,11 +33,11 @@ glabel func_E008A53C
 .LE008A5AC:
 /* 38CB9C E008A5AC 8E220020 */  lw        $v0, 0x20($s1)
 /* 38CBA0 E008A5B0 04410005 */  bgez      $v0, .LE008A5C8
-/* 38CBA4 E008A5B4 00000000 */   nop      
+/* 38CBA4 E008A5B4 00000000 */   nop
 /* 38CBA8 E008A5B8 0C080128 */  jal       func_E02004A0
 /* 38CBAC E008A5BC 00A0202D */   daddu    $a0, $a1, $zero
 /* 38CBB0 E008A5C0 080229AF */  j         .LE008A6BC
-/* 38CBB4 E008A5C4 00000000 */   nop      
+/* 38CBB4 E008A5C4 00000000 */   nop
 .LE008A5C8:
 /* 38CBB8 E008A5C8 8E220024 */  lw        $v0, 0x24($s1)
 /* 38CBBC E008A5CC 8E330020 */  lw        $s3, 0x20($s1)
@@ -57,16 +57,16 @@ glabel func_E008A53C
 /* 38CBF0 E008A600 D422AA78 */  ldc1      $f2, %lo(D_E008AA78)($at)
 /* 38CBF4 E008A604 4600020D */  trunc.w.s $f8, $f0
 /* 38CBF8 E008A608 44144000 */  mfc1      $s4, $f8
-/* 38CBFC E008A60C 00000000 */  nop       
+/* 38CBFC E008A60C 00000000 */  nop
 /* 38CC00 E008A610 44940000 */  mtc1      $s4, $f0
-/* 38CC04 E008A614 00000000 */  nop       
+/* 38CC04 E008A614 00000000 */  nop
 /* 38CC08 E008A618 46800021 */  cvt.d.w   $f0, $f0
 /* 38CC0C E008A61C 46220002 */  mul.d     $f0, $f0, $f2
-/* 38CC10 E008A620 00000000 */  nop       
+/* 38CC10 E008A620 00000000 */  nop
 /* 38CC14 E008A624 3C013FF0 */  lui       $at, 0x3ff0
 /* 38CC18 E008A628 44811800 */  mtc1      $at, $f3
 /* 38CC1C E008A62C 44801000 */  mtc1      $zero, $f2
-/* 38CC20 E008A630 00000000 */  nop       
+/* 38CC20 E008A630 00000000 */  nop
 /* 38CC24 E008A634 46220000 */  add.d     $f0, $f0, $f2
 /* 38CC28 E008A638 26310034 */  addiu     $s1, $s1, 0x34
 /* 38CC2C E008A63C 4620020D */  trunc.w.d $f8, $f0

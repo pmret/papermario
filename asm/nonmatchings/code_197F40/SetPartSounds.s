@@ -17,7 +17,7 @@ glabel SetPartSounds
 /* 19E310 8026FA30 0040982D */  daddu     $s3, $v0, $zero
 /* 19E314 8026FA34 2402FF81 */  addiu     $v0, $zero, -0x7f
 /* 19E318 8026FA38 16620002 */  bne       $s3, $v0, .L8026FA44
-/* 19E31C 8026FA3C 00000000 */   nop      
+/* 19E31C 8026FA3C 00000000 */   nop
 /* 19E320 8026FA40 8E530148 */  lw        $s3, 0x148($s2)
 .L8026FA44:
 /* 19E324 8026FA44 8E250000 */  lw        $a1, ($s1)
@@ -48,23 +48,29 @@ glabel SetPartSounds
 /* 19E388 8026FAA8 2E820006 */  sltiu     $v0, $s4, 6
 /* 19E38C 8026FAAC 10400013 */  beqz      $v0, .L8026FAFC
 /* 19E390 8026FAB0 00141080 */   sll      $v0, $s4, 2
-/* 19E394 8026FAB4 3C01802A */  lui       $at, %hi(D_8029D7F0)
+/* 19E394 8026FAB4 3C01802A */  lui       $at, %hi(jtbl_8029D7F0_1CC0D0)
 /* 19E398 8026FAB8 00220821 */  addu      $at, $at, $v0
-/* 19E39C 8026FABC 8C22D7F0 */  lw        $v0, %lo(D_8029D7F0)($at)
+/* 19E39C 8026FABC 8C22D7F0 */  lw        $v0, %lo(jtbl_8029D7F0_1CC0D0)($at)
 /* 19E3A0 8026FAC0 00400008 */  jr        $v0
-/* 19E3A4 8026FAC4 00000000 */   nop      
+/* 19E3A4 8026FAC4 00000000 */   nop
+glabel L8026FAC8_19E3A8
 /* 19E3A8 8026FAC8 AC7100A4 */  sw        $s1, 0xa4($v1)
 /* 19E3AC 8026FACC 0809BEBF */  j         .L8026FAFC
 /* 19E3B0 8026FAD0 AC7200A8 */   sw       $s2, 0xa8($v1)
+glabel L8026FAD4_19E3B4
 /* 19E3B4 8026FAD4 AC7100AC */  sw        $s1, 0xac($v1)
 /* 19E3B8 8026FAD8 0809BEBF */  j         .L8026FAFC
 /* 19E3BC 8026FADC AC7200B0 */   sw       $s2, 0xb0($v1)
+glabel L8026FAE0_19E3C0
 /* 19E3C0 8026FAE0 0809BEBF */  j         .L8026FAFC
 /* 19E3C4 8026FAE4 AC7100B4 */   sw       $s1, 0xb4($v1)
+glabel L8026FAE8_19E3C8
 /* 19E3C8 8026FAE8 0809BEBF */  j         .L8026FAFC
 /* 19E3CC 8026FAEC AC7100B8 */   sw       $s1, 0xb8($v1)
+glabel L8026FAF0_19E3D0
 /* 19E3D0 8026FAF0 0809BEBF */  j         .L8026FAFC
 /* 19E3D4 8026FAF4 A47100BC */   sh       $s1, 0xbc($v1)
+glabel L8026FAF8_19E3D8
 /* 19E3D8 8026FAF8 A47100BE */  sh        $s1, 0xbe($v1)
 .L8026FAFC:
 /* 19E3DC 8026FAFC 8FBF0024 */  lw        $ra, 0x24($sp)

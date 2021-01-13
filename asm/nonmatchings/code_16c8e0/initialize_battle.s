@@ -79,7 +79,7 @@ glabel initialize_battle
 /* 16CB28 8023E248 0C03A6D5 */  jal       increment_status_menu_disabled
 /* 16CB2C 8023E24C AC620004 */   sw       $v0, 4($v1)
 /* 16CB30 8023E250 0808F89B */  j         .L8023E26C
-/* 16CB34 8023E254 00000000 */   nop      
+/* 16CB34 8023E254 00000000 */   nop
 .L8023E258:
 /* 16CB38 8023E258 3C02800E */  lui       $v0, %hi(gBattleStatus)
 /* 16CB3C 8023E25C 2442C070 */  addiu     $v0, $v0, %lo(gBattleStatus)
@@ -94,13 +94,13 @@ glabel initialize_battle
 /* 16CB5C 8023E27C 0C093B70 */  jal       func_8024EDC0
 /* 16CB60 8023E280 0000882D */   daddu    $s1, $zero, $zero
 /* 16CB64 8023E284 0C09A3A2 */  jal       func_80268E88
-/* 16CB68 8023E288 00000000 */   nop      
+/* 16CB68 8023E288 00000000 */   nop
 /* 16CB6C 8023E28C 0C051FB1 */  jal       func_80147EC4
 /* 16CB70 8023E290 24040001 */   addiu    $a0, $zero, 1
 /* 16CB74 8023E294 3C048029 */  lui       $a0, %hi(D_80291F80)
 /* 16CB78 8023E298 24841F80 */  addiu     $a0, $a0, %lo(D_80291F80)
 /* 16CB7C 8023E29C 0C050529 */  jal       create_icon
-/* 16CB80 8023E2A0 00000000 */   nop      
+/* 16CB80 8023E2A0 00000000 */   nop
 /* 16CB84 8023E2A4 3C01802A */  lui       $at, %hi(D_8029EFBC)
 /* 16CB88 8023E2A8 AC22EFBC */  sw        $v0, %lo(D_8029EFBC)($at)
 /* 16CB8C 8023E2AC 0040202D */  daddu     $a0, $v0, $zero

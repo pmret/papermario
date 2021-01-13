@@ -11,4 +11,4 @@ glabel func_802401DC_B9DB3C
 .L802401F4:
 /* B9DB54 802401F4 03E00008 */  jr        $ra
 /* B9DB58 802401F8 24020002 */   addiu    $v0, $zero, 2
-/* B9DB5C 802401FC 00000000 */  nop       
+/* B9DB5C 802401FC 00000000 */  nop

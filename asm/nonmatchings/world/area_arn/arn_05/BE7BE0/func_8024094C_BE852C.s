@@ -37,7 +37,7 @@ glabel func_8024094C_BE852C
 /* BE85AC 802409CC 2402000F */  addiu     $v0, $zero, 0xf
 /* BE85B0 802409D0 AFA2001C */  sw        $v0, 0x1c($sp)
 /* BE85B4 802409D4 44833000 */  mtc1      $v1, $f6
-/* BE85B8 802409D8 00000000 */  nop       
+/* BE85B8 802409D8 00000000 */  nop
 /* BE85BC 802409DC 468031A0 */  cvt.s.w   $f6, $f6
 /* BE85C0 802409E0 44073000 */  mfc1      $a3, $f6
 /* BE85C4 802409E4 27A20028 */  addiu     $v0, $sp, 0x28

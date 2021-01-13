@@ -27,7 +27,7 @@ glabel func_80240894_D7F5F4
 /* D7F64C 802408EC 2402005A */  addiu     $v0, $zero, 0x5a
 /* D7F650 802408F0 4600008D */  trunc.w.s $f2, $f0
 /* D7F654 802408F4 44041000 */  mfc1      $a0, $f2
-/* D7F658 802408F8 00000000 */  nop       
+/* D7F658 802408F8 00000000 */  nop
 /* D7F65C 802408FC 10820011 */  beq       $a0, $v0, .L80240944
 /* D7F660 80240900 2882005B */   slti     $v0, $a0, 0x5b
 /* D7F664 80240904 50400005 */  beql      $v0, $zero, .L8024091C
@@ -105,13 +105,13 @@ glabel func_80240894_D7F5F4
 /* D7F74C 802409EC 8E430084 */  lw        $v1, 0x84($s2)
 /* D7F750 802409F0 24020001 */  addiu     $v0, $zero, 1
 /* D7F754 802409F4 14620009 */  bne       $v1, $v0, .L80240A1C
-/* D7F758 802409F8 00000000 */   nop      
+/* D7F758 802409F8 00000000 */   nop
 /* D7F75C 802409FC 3C02800F */  lui       $v0, %hi(gPlayerStatusPtr)
 /* D7F760 80240A00 8C427B30 */  lw        $v0, %lo(gPlayerStatusPtr)($v0)
 /* D7F764 80240A04 804300B4 */  lb        $v1, 0xb4($v0)
 /* D7F768 80240A08 24020014 */  addiu     $v0, $zero, 0x14
 /* D7F76C 80240A0C 14620003 */  bne       $v1, $v0, .L80240A1C
-/* D7F770 80240A10 00000000 */   nop      
+/* D7F770 80240A10 00000000 */   nop
 /* D7F774 80240A14 0C039769 */  jal       set_action_state
 /* D7F778 80240A18 0000202D */   daddu    $a0, $zero, $zero
 .L80240A1C:

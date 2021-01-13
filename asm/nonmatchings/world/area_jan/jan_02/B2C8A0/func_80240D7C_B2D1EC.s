@@ -37,7 +37,7 @@ glabel func_80240D7C_B2D1EC
 /* B2D26C 80240DFC 2402000F */  addiu     $v0, $zero, 0xf
 /* B2D270 80240E00 AFA2001C */  sw        $v0, 0x1c($sp)
 /* B2D274 80240E04 44833000 */  mtc1      $v1, $f6
-/* B2D278 80240E08 00000000 */  nop       
+/* B2D278 80240E08 00000000 */  nop
 /* B2D27C 80240E0C 468031A0 */  cvt.s.w   $f6, $f6
 /* B2D280 80240E10 44073000 */  mfc1      $a3, $f6
 /* B2D284 80240E14 27A20028 */  addiu     $v0, $sp, 0x28

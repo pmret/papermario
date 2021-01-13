@@ -16,7 +16,7 @@ glabel func_80242898_A18AB8
 /* A18AE4 802428C4 A462008E */  sh        $v0, 0x8e($v1)
 /* A18AE8 802428C8 00021400 */  sll       $v0, $v0, 0x10
 /* A18AEC 802428CC 1C400004 */  bgtz      $v0, .L802428E0
-/* A18AF0 802428D0 00000000 */   nop      
+/* A18AF0 802428D0 00000000 */   nop
 /* A18AF4 802428D4 AE000074 */  sw        $zero, 0x74($s0)
 /* A18AF8 802428D8 A460008E */  sh        $zero, 0x8e($v1)
 /* A18AFC 802428DC AE200070 */  sw        $zero, 0x70($s1)

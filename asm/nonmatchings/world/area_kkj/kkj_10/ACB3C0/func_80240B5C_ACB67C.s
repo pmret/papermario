@@ -84,7 +84,7 @@ glabel func_80240B5C_ACB67C
 /* ACB7B8 80240C98 0C00A7B5 */  jal       dist2D
 /* ACB7BC 80240C9C 0000802D */   daddu    $s0, $zero, $zero
 /* ACB7C0 80240CA0 4616003E */  c.le.s    $f0, $f22
-/* ACB7C4 80240CA4 00000000 */  nop       
+/* ACB7C4 80240CA4 00000000 */  nop
 /* ACB7C8 80240CA8 45000002 */  bc1f      .L80240CB4
 /* ACB7CC 80240CAC 0240982D */   daddu    $s3, $s2, $zero
 /* ACB7D0 80240CB0 24100001 */  addiu     $s0, $zero, 1
@@ -122,7 +122,7 @@ glabel func_80240B5C_ACB67C
 /* ACB84C 80240D2C 0C00A7B5 */  jal       dist2D
 /* ACB850 80240D30 8E470030 */   lw       $a3, 0x30($s2)
 /* ACB854 80240D34 461A003E */  c.le.s    $f0, $f26
-/* ACB858 80240D38 00000000 */  nop       
+/* ACB858 80240D38 00000000 */  nop
 /* ACB85C 80240D3C 45030001 */  bc1tl     .L80240D44
 /* ACB860 80240D40 36100010 */   ori      $s0, $s0, 0x10
 .L80240D44:
@@ -153,13 +153,13 @@ glabel func_80240B5C_ACB67C
 /* ACB8C4 80240DA4 862200A6 */  lh        $v0, 0xa6($s1)
 /* ACB8C8 80240DA8 27A60028 */  addiu     $a2, $sp, 0x28
 /* ACB8CC 80240DAC 44820000 */  mtc1      $v0, $f0
-/* ACB8D0 80240DB0 00000000 */  nop       
+/* ACB8D0 80240DB0 00000000 */  nop
 /* ACB8D4 80240DB4 46800020 */  cvt.s.w   $f0, $f0
 /* ACB8D8 80240DB8 E7A00018 */  swc1      $f0, 0x18($sp)
 /* ACB8DC 80240DBC 862200A8 */  lh        $v0, 0xa8($s1)
 /* ACB8E0 80240DC0 0280382D */  daddu     $a3, $s4, $zero
 /* ACB8E4 80240DC4 44820000 */  mtc1      $v0, $f0
-/* ACB8E8 80240DC8 00000000 */  nop       
+/* ACB8E8 80240DC8 00000000 */  nop
 /* ACB8EC 80240DCC 46800020 */  cvt.s.w   $f0, $f0
 /* ACB8F0 80240DD0 0C0376B9 */  jal       func_800DDAE4
 /* ACB8F4 80240DD4 E7A0001C */   swc1     $f0, 0x1c($sp)

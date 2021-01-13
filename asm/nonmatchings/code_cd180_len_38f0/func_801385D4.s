@@ -17,11 +17,12 @@ glabel func_801385D4
 /* CED04 80138604 10400030 */  beqz      $v0, .L801386C8
 /* CED08 80138608 AFBF0020 */   sw       $ra, 0x20($sp)
 /* CED0C 8013860C 00031080 */  sll       $v0, $v1, 2
-/* CED10 80138610 3C018015 */  lui       $at, %hi(D_80150F38)
+/* CED10 80138610 3C018015 */  lui       $at, %hi(jtbl_80150F38_E7638)
 /* CED14 80138614 00220821 */  addu      $at, $at, $v0
-/* CED18 80138618 8C220F38 */  lw        $v0, %lo(D_80150F38)($at)
+/* CED18 80138618 8C220F38 */  lw        $v0, %lo(jtbl_80150F38_E7638)($at)
 /* CED1C 8013861C 00400008 */  jr        $v0
-/* CED20 80138620 00000000 */   nop      
+/* CED20 80138620 00000000 */   nop
+glabel L80138624_CED24
 /* CED24 80138624 0000202D */  daddu     $a0, $zero, $zero
 /* CED28 80138628 240500D0 */  addiu     $a1, $zero, 0xd0
 /* CED2C 8013862C 00A0302D */  daddu     $a2, $a1, $zero
@@ -29,22 +30,29 @@ glabel func_801385D4
 /* CED34 80138634 00A0382D */   daddu    $a3, $a1, $zero
 /* CED38 80138638 0804E1B2 */  j         .L801386C8
 /* CED3C 8013863C 24100032 */   addiu    $s0, $zero, 0x32
+glabel L80138640_CED40
 /* CED40 80138640 24110001 */  addiu     $s1, $zero, 1
 /* CED44 80138644 0804E1B2 */  j         .L801386C8
 /* CED48 80138648 24100032 */   addiu    $s0, $zero, 0x32
+glabel L8013864C_CED4C
 /* CED4C 8013864C 24110001 */  addiu     $s1, $zero, 1
 /* CED50 80138650 0804E1B2 */  j         .L801386C8
 /* CED54 80138654 24100007 */   addiu    $s0, $zero, 7
+glabel L80138658_CED58
 /* CED58 80138658 0804E1B2 */  j         .L801386C8
 /* CED5C 8013865C 24110001 */   addiu    $s1, $zero, 1
+glabel L80138660_CED60
 /* CED60 80138660 0804E1B2 */  j         .L801386C8
 /* CED64 80138664 24110004 */   addiu    $s1, $zero, 4
+glabel L80138668_CED68
 /* CED68 80138668 24110005 */  addiu     $s1, $zero, 5
 /* CED6C 8013866C 0804E1B2 */  j         .L801386C8
 /* CED70 80138670 24100007 */   addiu    $s0, $zero, 7
+glabel L80138674_CED74
 /* CED74 80138674 24110004 */  addiu     $s1, $zero, 4
 /* CED78 80138678 0804E1B2 */  j         .L801386C8
 /* CED7C 8013867C 24100007 */   addiu    $s0, $zero, 7
+glabel L80138680_CED80
 /* CED80 80138680 0000202D */  daddu     $a0, $zero, $zero
 /* CED84 80138684 0080282D */  daddu     $a1, $a0, $zero
 /* CED88 80138688 2406000F */  addiu     $a2, $zero, 0xf
@@ -58,7 +66,7 @@ glabel func_801385D4
 /* CEDA8 801386A8 86420000 */  lh        $v0, ($s2)
 /* CEDAC 801386AC 2404000C */  addiu     $a0, $zero, 0xc
 /* CEDB0 801386B0 44820000 */  mtc1      $v0, $f0
-/* CEDB4 801386B4 00000000 */  nop       
+/* CEDB4 801386B4 00000000 */  nop
 /* CEDB8 801386B8 46800020 */  cvt.s.w   $f0, $f0
 /* CEDBC 801386BC 44050000 */  mfc1      $a1, $f0
 /* CEDC0 801386C0 0C04DF62 */  jal       func_80137D88
@@ -68,10 +76,10 @@ glabel func_801385D4
 /* CEDCC 801386CC 8C63C6F0 */  lw        $v1, %lo(D_8014C6F0)($v1)
 /* CEDD0 801386D0 24020010 */  addiu     $v0, $zero, 0x10
 /* CEDD4 801386D4 10620008 */  beq       $v1, $v0, .L801386F8
-/* CEDD8 801386D8 00000000 */   nop      
+/* CEDD8 801386D8 00000000 */   nop
 /* CEDDC 801386DC 86420000 */  lh        $v0, ($s2)
 /* CEDE0 801386E0 44820000 */  mtc1      $v0, $f0
-/* CEDE4 801386E4 00000000 */  nop       
+/* CEDE4 801386E4 00000000 */  nop
 /* CEDE8 801386E8 46800020 */  cvt.s.w   $f0, $f0
 /* CEDEC 801386EC 44050000 */  mfc1      $a1, $f0
 /* CEDF0 801386F0 0C04DF62 */  jal       func_80137D88
@@ -96,4 +104,4 @@ glabel func_801385D4
 /* CEE30 80138730 8FB00010 */  lw        $s0, 0x10($sp)
 /* CEE34 80138734 03E00008 */  jr        $ra
 /* CEE38 80138738 27BD0028 */   addiu    $sp, $sp, 0x28
-/* CEE3C 8013873C 00000000 */  nop       
+/* CEE3C 8013873C 00000000 */  nop

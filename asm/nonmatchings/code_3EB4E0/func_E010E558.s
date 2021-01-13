@@ -32,11 +32,12 @@ glabel func_E010E558
 /* 3EBAA4 E010E5C4 2D020013 */  sltiu     $v0, $t0, 0x13
 /* 3EBAA8 E010E5C8 1040001A */  beqz      $v0, .LE010E634
 /* 3EBAAC E010E5CC 00081080 */   sll      $v0, $t0, 2
-/* 3EBAB0 E010E5D0 3C01E011 */  lui       $at, %hi(D_E010E930)
+/* 3EBAB0 E010E5D0 3C01E011 */  lui       $at, %hi(jtbl_E010E930_3EBE10)
 /* 3EBAB4 E010E5D4 00220821 */  addu      $at, $at, $v0
-/* 3EBAB8 E010E5D8 8C22E930 */  lw        $v0, %lo(D_E010E930)($at)
+/* 3EBAB8 E010E5D8 8C22E930 */  lw        $v0, %lo(jtbl_E010E930_3EBE10)($at)
 /* 3EBABC E010E5DC 00400008 */  jr        $v0
-/* 3EBAC0 E010E5E0 00000000 */   nop      
+/* 3EBAC0 E010E5E0 00000000 */   nop
+glabel LE010E5E4_3EBAC4
 /* 3EBAC4 E010E5E4 3C06E011 */  lui       $a2, %hi(D_E010E7FC)
 /* 3EBAC8 E010E5E8 24C6E7FC */  addiu     $a2, $a2, %lo(D_E010E7FC)
 /* 3EBACC E010E5EC 3C04E011 */  lui       $a0, %hi(D_E010E868)
@@ -47,10 +48,12 @@ glabel func_E010E558
 /* 3EBAE0 E010E600 000210C0 */  sll       $v0, $v0, 3
 /* 3EBAE4 E010E604 0804398F */  j         .LE010E63C
 /* 3EBAE8 E010E608 00448821 */   addu     $s1, $v0, $a0
+glabel LE010E60C_3EBAEC
 /* 3EBAEC E010E60C 3C06E011 */  lui       $a2, %hi(D_E010E7D8)
 /* 3EBAF0 E010E610 24C6E7D8 */  addiu     $a2, $a2, %lo(D_E010E7D8)
 /* 3EBAF4 E010E614 0804398F */  j         .LE010E63C
 /* 3EBAF8 E010E618 0000882D */   daddu    $s1, $zero, $zero
+glabel LE010E61C_3EBAFC
 /* 3EBAFC E010E61C 3C06E011 */  lui       $a2, %hi(D_E010E79C)
 /* 3EBB00 E010E620 24C6E79C */  addiu     $a2, $a2, %lo(D_E010E79C)
 /* 3EBB04 E010E624 3C11E011 */  lui       $s1, %hi(D_E010E838)
@@ -129,6 +132,6 @@ glabel func_E010E558
 /* 3EBC18 E010E738 8FB00018 */  lw        $s0, 0x18($sp)
 /* 3EBC1C E010E73C 03E00008 */  jr        $ra
 /* 3EBC20 E010E740 27BD0028 */   addiu    $sp, $sp, 0x28
-/* 3EBC24 E010E744 00000000 */  nop       
-/* 3EBC28 E010E748 00000000 */  nop       
-/* 3EBC2C E010E74C 00000000 */  nop       
+/* 3EBC24 E010E744 00000000 */  nop
+/* 3EBC28 E010E748 00000000 */  nop
+/* 3EBC2C E010E74C 00000000 */  nop

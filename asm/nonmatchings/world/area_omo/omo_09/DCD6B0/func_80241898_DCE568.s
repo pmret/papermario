@@ -37,7 +37,7 @@ glabel func_80241898_DCE568
 /* DCE5E8 80241918 2402000F */  addiu     $v0, $zero, 0xf
 /* DCE5EC 8024191C AFA2001C */  sw        $v0, 0x1c($sp)
 /* DCE5F0 80241920 44833000 */  mtc1      $v1, $f6
-/* DCE5F4 80241924 00000000 */  nop       
+/* DCE5F4 80241924 00000000 */  nop
 /* DCE5F8 80241928 468031A0 */  cvt.s.w   $f6, $f6
 /* DCE5FC 8024192C 44073000 */  mfc1      $a3, $f6
 /* DCE600 80241930 27A20028 */  addiu     $v0, $sp, 0x28

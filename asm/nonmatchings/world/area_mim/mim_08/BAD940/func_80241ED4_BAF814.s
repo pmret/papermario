@@ -38,7 +38,7 @@ glabel func_80241ED4_BAF814
 /* BAF898 80241F58 3C01C1A0 */  lui       $at, 0xc1a0
 /* BAF89C 80241F5C 44812000 */  mtc1      $at, $f4
 /* BAF8A0 80241F60 44833000 */  mtc1      $v1, $f6
-/* BAF8A4 80241F64 00000000 */  nop       
+/* BAF8A4 80241F64 00000000 */  nop
 /* BAF8A8 80241F68 468031A0 */  cvt.s.w   $f6, $f6
 /* BAF8AC 80241F6C 44073000 */  mfc1      $a3, $f6
 /* BAF8B0 80241F70 27A20028 */  addiu     $v0, $sp, 0x28

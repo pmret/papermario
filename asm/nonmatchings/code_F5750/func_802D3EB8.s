@@ -12,7 +12,7 @@ glabel func_802D3EB8
 .L802D3ED4:
 /* F8884 802D3ED4 8E020070 */  lw        $v0, 0x70($s0)
 /* F8888 802D3ED8 14400007 */  bnez      $v0, .L802D3EF8
-/* F888C 802D3EDC 00000000 */   nop      
+/* F888C 802D3EDC 00000000 */   nop
 /* F8890 802D3EE0 8C650000 */  lw        $a1, ($v1)
 /* F8894 802D3EE4 0C0B1EAF */  jal       get_variable
 /* F8898 802D3EE8 0200202D */   daddu    $a0, $s0, $zero
@@ -39,9 +39,9 @@ glabel func_802D3EB8
 /* F88E8 802D3F38 E6000044 */   swc1     $f0, 0x44($s0)
 /* F88EC 802D3F3C C6000008 */  lwc1      $f0, 8($s0)
 /* F88F0 802D3F40 44801000 */  mtc1      $zero, $f2
-/* F88F4 802D3F44 00000000 */  nop       
+/* F88F4 802D3F44 00000000 */  nop
 /* F88F8 802D3F48 4602003C */  c.lt.s    $f0, $f2
-/* F88FC 802D3F4C 00000000 */  nop       
+/* F88FC 802D3F4C 00000000 */  nop
 /* F8900 802D3F50 45030003 */  bc1tl     .L802D3F60
 /* F8904 802D3F54 E6020008 */   swc1     $f2, 8($s0)
 /* F8908 802D3F58 080B4FD9 */  j         .L802D3F64

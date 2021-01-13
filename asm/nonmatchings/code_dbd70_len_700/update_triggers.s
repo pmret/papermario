@@ -29,11 +29,11 @@ glabel update_triggers
 /* DBFBC 801458BC 34620002 */   ori      $v0, $v1, 2
 /* DBFC0 801458C0 30620040 */  andi      $v0, $v1, 0x40
 /* DBFC4 801458C4 1040000D */  beqz      $v0, .L801458FC
-/* DBFC8 801458C8 00000000 */   nop      
+/* DBFC8 801458C8 00000000 */   nop
 /* DBFCC 801458CC 86430012 */  lh        $v1, 0x12($s2)
 /* DBFD0 801458D0 8E220008 */  lw        $v0, 8($s1)
 /* DBFD4 801458D4 14430003 */  bne       $v0, $v1, .L801458E4
-/* DBFD8 801458D8 00000000 */   nop      
+/* DBFD8 801458D8 00000000 */   nop
 /* DBFDC 801458DC 0C0381B0 */  jal       func_800E06C0
 /* DBFE0 801458E0 24040001 */   addiu    $a0, $zero, 1
 .L801458E4:
@@ -64,7 +64,7 @@ glabel update_triggers
 /* DC03C 8014593C 30820100 */  andi      $v0, $a0, 0x100
 .L80145940:
 /* DC040 80145940 1040000E */  beqz      $v0, .L8014597C
-/* DC044 80145944 00000000 */   nop      
+/* DC044 80145944 00000000 */   nop
 /* DC048 80145948 86430012 */  lh        $v1, 0x12($s2)
 /* DC04C 8014594C 8E220008 */  lw        $v0, 8($s1)
 /* DC050 80145950 14430002 */  bne       $v0, $v1, .L8014595C
@@ -76,7 +76,7 @@ glabel update_triggers
 /* DC064 80145964 5443007F */  bnel      $v0, $v1, .L80145B64
 /* DC068 80145968 26730001 */   addiu    $s3, $s3, 1
 /* DC06C 8014596C 0C0394BE */  jal       func_800E52F8
-/* DC070 80145970 00000000 */   nop      
+/* DC070 80145970 00000000 */   nop
 /* DC074 80145974 5040007B */  beql      $v0, $zero, .L80145B64
 /* DC078 80145978 26730001 */   addiu    $s3, $s3, 1
 .L8014597C:
@@ -160,7 +160,7 @@ glabel update_triggers
 .L80145A94:
 /* DC194 80145A94 00821024 */  and       $v0, $a0, $v0
 /* DC198 80145A98 1040001C */  beqz      $v0, .L80145B0C
-/* DC19C 80145A9C 00000000 */   nop      
+/* DC19C 80145A9C 00000000 */   nop
 /* DC1A0 80145AA0 86420018 */  lh        $v0, 0x18($s2)
 /* DC1A4 80145AA4 0442002F */  bltzl     $v0, .L80145B64
 /* DC1A8 80145AA8 26730001 */   addiu    $s3, $s3, 1
@@ -177,15 +177,15 @@ glabel update_triggers
 /* DC1D4 80145AD4 C604000C */  lwc1      $f4, 0xc($s0)
 /* DC1D8 80145AD8 3C013F00 */  lui       $at, 0x3f00
 /* DC1DC 80145ADC 44811000 */  mtc1      $at, $f2
-/* DC1E0 80145AE0 00000000 */  nop       
+/* DC1E0 80145AE0 00000000 */  nop
 /* DC1E4 80145AE4 46022102 */  mul.s     $f4, $f4, $f2
-/* DC1E8 80145AE8 00000000 */  nop       
+/* DC1E8 80145AE8 00000000 */  nop
 /* DC1EC 80145AEC 3C014248 */  lui       $at, 0x4248
 /* DC1F0 80145AF0 44811000 */  mtc1      $at, $f2
-/* DC1F4 80145AF4 00000000 */  nop       
+/* DC1F4 80145AF4 00000000 */  nop
 /* DC1F8 80145AF8 46022100 */  add.s     $f4, $f4, $f2
 /* DC1FC 80145AFC 4600203C */  c.lt.s    $f4, $f0
-/* DC200 80145B00 00000000 */  nop       
+/* DC200 80145B00 00000000 */  nop
 /* DC204 80145B04 45030017 */  bc1tl     .L80145B64
 /* DC208 80145B08 26730001 */   addiu    $s3, $s3, 1
 .L80145B0C:
@@ -193,7 +193,7 @@ glabel update_triggers
 /* DC210 80145B10 3C030001 */  lui       $v1, 1
 /* DC214 80145B14 00431024 */  and       $v0, $v0, $v1
 /* DC218 80145B18 10400005 */  beqz      $v0, .L80145B30
-/* DC21C 80145B1C 00000000 */   nop      
+/* DC21C 80145B1C 00000000 */   nop
 /* DC220 80145B20 0C05152F */  jal       get_global_flag
 /* DC224 80145B24 8E240004 */   lw       $a0, 4($s1)
 /* DC228 80145B28 5040000E */  beql      $v0, $zero, .L80145B64
@@ -203,7 +203,7 @@ glabel update_triggers
 /* DC234 80145B34 3C030002 */  lui       $v1, 2
 /* DC238 80145B38 00431024 */  and       $v0, $v0, $v1
 /* DC23C 80145B3C 10400005 */  beqz      $v0, .L80145B54
-/* DC240 80145B40 00000000 */   nop      
+/* DC240 80145B40 00000000 */   nop
 /* DC244 80145B44 0C05157C */  jal       get_area_flag
 /* DC248 80145B48 8E240004 */   lw       $a0, 4($s1)
 /* DC24C 80145B4C 50400005 */  beql      $v0, $zero, .L80145B64
@@ -245,7 +245,7 @@ glabel update_triggers
 .L80145BCC:
 /* DC2CC 80145BCC 2A620040 */  slti      $v0, $s3, 0x40
 /* DC2D0 80145BD0 1440FFE8 */  bnez      $v0, .L80145B74
-/* DC2D4 80145BD4 00000000 */   nop      
+/* DC2D4 80145BD4 00000000 */   nop
 /* DC2D8 80145BD8 8FBF0028 */  lw        $ra, 0x28($sp)
 /* DC2DC 80145BDC 8FB30024 */  lw        $s3, 0x24($sp)
 /* DC2E0 80145BE0 8FB20020 */  lw        $s2, 0x20($sp)

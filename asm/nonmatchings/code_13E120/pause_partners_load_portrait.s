@@ -44,7 +44,7 @@ glabel pause_partners_load_portrait
 /* 13E1B4 8024AE74 14610004 */  bne       $v1, $at, .L8024AE88
 /* 13E1B8 8024AE78 3C018000 */   lui      $at, 0x8000
 /* 13E1BC 8024AE7C 14410002 */  bne       $v0, $at, .L8024AE88
-/* 13E1C0 8024AE80 00000000 */   nop      
+/* 13E1C0 8024AE80 00000000 */   nop
 /* 13E1C4 8024AE84 0006000D */  break     6
 .L8024AE88:
 /* 13E1C8 8024AE88 00001810 */   mfhi     $v1

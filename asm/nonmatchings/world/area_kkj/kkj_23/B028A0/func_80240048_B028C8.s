@@ -10,7 +10,7 @@ glabel func_80240048_B028C8
 /* B028DC 8024005C 8FBF0010 */  lw        $ra, 0x10($sp)
 /* B028E0 80240060 4600008D */  trunc.w.s $f2, $f0
 /* B028E4 80240064 44021000 */  mfc1      $v0, $f2
-/* B028E8 80240068 00000000 */  nop       
+/* B028E8 80240068 00000000 */  nop
 /* B028EC 8024006C 3C018011 */  lui       $at, %hi(gPlayerStatus+0xD)
 /* B028F0 80240070 A022EFD5 */  sb        $v0, %lo(gPlayerStatus+0xD)($at)
 /* B028F4 80240074 24020002 */  addiu     $v0, $zero, 2

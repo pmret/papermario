@@ -97,7 +97,7 @@ glabel func_802A2AB8
 /* 4179A0 802A2C10 3C058010 */  lui       $a1, %hi(D_80104A28)
 /* 4179A4 802A2C14 24A54A28 */  addiu     $a1, $a1, %lo(D_80104A28)
 /* 4179A8 802A2C18 0C0511FF */  jal       set_menu_icon_script
-/* 4179AC 802A2C1C 00000000 */   nop      
+/* 4179AC 802A2C1C 00000000 */   nop
 /* 4179B0 802A2C20 8FBF0018 */  lw        $ra, 0x18($sp)
 /* 4179B4 802A2C24 8FB10014 */  lw        $s1, 0x14($sp)
 /* 4179B8 802A2C28 8FB00010 */  lw        $s0, 0x10($sp)

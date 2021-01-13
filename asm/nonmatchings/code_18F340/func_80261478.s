@@ -22,17 +22,17 @@ glabel func_80261478
 /* 18FD9C 802614BC 0C0B1EAF */  jal       get_variable
 /* 18FDA0 802614C0 0040802D */   daddu    $s0, $v0, $zero
 /* 18FDA4 802614C4 44921000 */  mtc1      $s2, $f2
-/* 18FDA8 802614C8 00000000 */  nop       
+/* 18FDA8 802614C8 00000000 */  nop
 /* 18FDAC 802614CC 468010A0 */  cvt.s.w   $f2, $f2
 /* 18FDB0 802614D0 2403000F */  addiu     $v1, $zero, 0xf
 /* 18FDB4 802614D4 02038021 */  addu      $s0, $s0, $v1
 /* 18FDB8 802614D8 44051000 */  mfc1      $a1, $f2
 /* 18FDBC 802614DC 44901000 */  mtc1      $s0, $f2
-/* 18FDC0 802614E0 00000000 */  nop       
+/* 18FDC0 802614E0 00000000 */  nop
 /* 18FDC4 802614E4 468010A0 */  cvt.s.w   $f2, $f2
 /* 18FDC8 802614E8 44061000 */  mfc1      $a2, $f2
 /* 18FDCC 802614EC 44821000 */  mtc1      $v0, $f2
-/* 18FDD0 802614F0 00000000 */  nop       
+/* 18FDD0 802614F0 00000000 */  nop
 /* 18FDD4 802614F4 468010A0 */  cvt.s.w   $f2, $f2
 /* 18FDD8 802614F8 3C0140A0 */  lui       $at, 0x40a0
 /* 18FDDC 802614FC 44810000 */  mtc1      $at, $f0

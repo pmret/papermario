@@ -18,7 +18,7 @@ glabel func_80280AC4
 /* 7E1978 80280AF8 0000102D */   daddu    $v0, $zero, $zero
 .L80280AFC:
 /* 7E197C 80280AFC 0C03C4EC */  jal       func_800F13B0
-/* 7E1980 80280B00 00000000 */   nop      
+/* 7E1980 80280B00 00000000 */   nop
 /* 7E1984 80280B04 240200FF */  addiu     $v0, $zero, 0xff
 /* 7E1988 80280B08 16020003 */  bne       $s0, $v0, .L80280B18
 /* 7E198C 80280B0C 2602FFFF */   addiu    $v0, $s0, -1

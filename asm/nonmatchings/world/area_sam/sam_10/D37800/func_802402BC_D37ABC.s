@@ -9,7 +9,7 @@ glabel func_802402BC_D37ABC
 /* D37ACC 802402CC 3C013F4C */  lui       $at, 0x3f4c
 /* D37AD0 802402D0 3421CCCD */  ori       $at, $at, 0xcccd
 /* D37AD4 802402D4 44810000 */  mtc1      $at, $f0
-/* D37AD8 802402D8 00000000 */  nop       
+/* D37AD8 802402D8 00000000 */  nop
 /* D37ADC 802402DC E4400030 */  swc1      $f0, 0x30($v0)
 /* D37AE0 802402E0 8FBF0010 */  lw        $ra, 0x10($sp)
 /* D37AE4 802402E4 24020002 */  addiu     $v0, $zero, 2

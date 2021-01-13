@@ -71,20 +71,20 @@ glabel func_802404A4_AACCD4
 /* AACDDC 802405AC 12620008 */  beq       $s3, $v0, .L802405D0
 /* AACDE0 802405B0 32C400FF */   andi     $a0, $s6, 0xff
 /* AACDE4 802405B4 08090191 */  j         .L80240644
-/* AACDE8 802405B8 00000000 */   nop      
+/* AACDE8 802405B8 00000000 */   nop
 .L802405BC:
 /* AACDEC 802405BC 24020003 */  addiu     $v0, $zero, 3
 /* AACDF0 802405C0 12620018 */  beq       $s3, $v0, .L80240624
 /* AACDF4 802405C4 32C400FF */   andi     $a0, $s6, 0xff
 /* AACDF8 802405C8 08090191 */  j         .L80240644
-/* AACDFC 802405CC 00000000 */   nop      
+/* AACDFC 802405CC 00000000 */   nop
 .L802405D0:
 /* AACE00 802405D0 32A500FF */  andi      $a1, $s5, 0xff
 /* AACE04 802405D4 328600FF */  andi      $a2, $s4, 0xff
 /* AACE08 802405D8 0C046F97 */  jal       set_background_color_blend
 /* AACE0C 802405DC 324700FF */   andi     $a3, $s2, 0xff
 /* AACE10 802405E0 08090191 */  j         .L80240644
-/* AACE14 802405E4 00000000 */   nop      
+/* AACE14 802405E4 00000000 */   nop
 .L802405E8:
 /* AACE18 802405E8 32C400FF */  andi      $a0, $s6, 0xff
 /* AACE1C 802405EC 32A500FF */  andi      $a1, $s5, 0xff
@@ -100,7 +100,7 @@ glabel func_802404A4_AACCD4
 /* AACE44 80240614 0C046FAD */  jal       func_8011BEB4
 /* AACE48 80240618 AFA20018 */   sw       $v0, 0x18($sp)
 /* AACE4C 8024061C 08090191 */  j         .L80240644
-/* AACE50 80240620 00000000 */   nop      
+/* AACE50 80240620 00000000 */   nop
 .L80240624:
 /* AACE54 80240624 32A500FF */  andi      $a1, $s5, 0xff
 /* AACE58 80240628 328600FF */  andi      $a2, $s4, 0xff

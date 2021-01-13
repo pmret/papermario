@@ -105,7 +105,7 @@ glabel func_80244078_9DB098
 /* 9DB208 802441E8 AC820084 */  sw        $v0, 0x84($a0)
 .L802441EC:
 /* 9DB20C 802441EC 0C0B2026 */  jal       set_variable
-/* 9DB210 802441F0 00000000 */   nop      
+/* 9DB210 802441F0 00000000 */   nop
 /* 9DB214 802441F4 24020002 */  addiu     $v0, $zero, 2
 /* 9DB218 802441F8 8FBF0030 */  lw        $ra, 0x30($sp)
 /* 9DB21C 802441FC 8FB7002C */  lw        $s7, 0x2c($sp)

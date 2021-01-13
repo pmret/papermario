@@ -47,7 +47,7 @@ glabel func_80240B10_CCBE20
 /* CCBEC8 80240BB8 0C0123F5 */  jal       is_point_within_region
 /* CCBECC 80240BBC 8E070038 */   lw       $a3, 0x38($s0)
 /* CCBED0 80240BC0 1040000E */  beqz      $v0, .L80240BFC
-/* CCBED4 80240BC4 00000000 */   nop      
+/* CCBED4 80240BC4 00000000 */   nop
 /* CCBED8 80240BC8 8E2200D0 */  lw        $v0, 0xd0($s1)
 /* CCBEDC 80240BCC C60C0038 */  lwc1      $f12, 0x38($s0)
 /* CCBEE0 80240BD0 C60E0040 */  lwc1      $f14, 0x40($s0)
@@ -58,7 +58,7 @@ glabel func_80240B10_CCBE20
 /* CCBEF4 80240BE4 468031A0 */  cvt.s.w   $f6, $f6
 /* CCBEF8 80240BE8 44073000 */  mfc1      $a3, $f6
 /* CCBEFC 80240BEC 0C00A720 */  jal       atan2
-/* CCBF00 80240BF0 00000000 */   nop      
+/* CCBF00 80240BF0 00000000 */   nop
 /* CCBF04 80240BF4 0809030B */  j         .L80240C2C
 /* CCBF08 80240BF8 E600000C */   swc1     $f0, 0xc($s0)
 .L80240BFC:
@@ -66,7 +66,7 @@ glabel func_80240B10_CCBE20
 /* CCBF10 80240C00 2404003C */   addiu    $a0, $zero, 0x3c
 /* CCBF14 80240C04 C60C000C */  lwc1      $f12, 0xc($s0)
 /* CCBF18 80240C08 44820000 */  mtc1      $v0, $f0
-/* CCBF1C 80240C0C 00000000 */  nop       
+/* CCBF1C 80240C0C 00000000 */  nop
 /* CCBF20 80240C10 46800020 */  cvt.s.w   $f0, $f0
 /* CCBF24 80240C14 46006300 */  add.s     $f12, $f12, $f0
 /* CCBF28 80240C18 3C0141F0 */  lui       $at, 0x41f0
@@ -82,7 +82,7 @@ glabel func_80240B10_CCBE20
 /* CCBF4C 80240C3C 8E2200D0 */  lw        $v0, 0xd0($s1)
 /* CCBF50 80240C40 8C420014 */  lw        $v0, 0x14($v0)
 /* CCBF54 80240C44 04410004 */  bgez      $v0, .L80240C58
-/* CCBF58 80240C48 00000000 */   nop      
+/* CCBF58 80240C48 00000000 */   nop
 /* CCBF5C 80240C4C C6400000 */  lwc1      $f0, ($s2)
 /* CCBF60 80240C50 0809031E */  j         .L80240C78
 /* CCBF64 80240C54 E6000018 */   swc1     $f0, 0x18($s0)
@@ -90,7 +90,7 @@ glabel func_80240B10_CCBE20
 /* CCBF68 80240C58 3C018024 */  lui       $at, %hi(D_80245350)
 /* CCBF6C 80240C5C D4225350 */  ldc1      $f2, %lo(D_80245350)($at)
 /* CCBF70 80240C60 44820000 */  mtc1      $v0, $f0
-/* CCBF74 80240C64 00000000 */  nop       
+/* CCBF74 80240C64 00000000 */  nop
 /* CCBF78 80240C68 46800021 */  cvt.d.w   $f0, $f0
 /* CCBF7C 80240C6C 46220003 */  div.d     $f0, $f0, $f2
 /* CCBF80 80240C70 46200020 */  cvt.s.d   $f0, $f0
@@ -102,7 +102,7 @@ glabel func_80240B10_CCBE20
 /* CCBF94 80240C84 44801000 */  mtc1      $zero, $f2
 /* CCBF98 80240C88 46000021 */  cvt.d.s   $f0, $f0
 /* CCBF9C 80240C8C 46220002 */  mul.d     $f0, $f0, $f2
-/* CCBFA0 80240C90 00000000 */  nop       
+/* CCBFA0 80240C90 00000000 */  nop
 /* CCBFA4 80240C94 24020001 */  addiu     $v0, $zero, 1
 /* CCBFA8 80240C98 4620018D */  trunc.w.d $f6, $f0
 /* CCBFAC 80240C9C E626007C */  swc1      $f6, 0x7c($s1)

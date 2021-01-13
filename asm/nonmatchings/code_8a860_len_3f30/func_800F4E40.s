@@ -10,9 +10,9 @@ glabel func_800F4E40
 /* 8E304 800F4E54 3C018011 */  lui       $at, %hi(D_8010D69A)
 /* 8E308 800F4E58 A022D69A */  sb        $v0, %lo(D_8010D69A)($at)
 /* 8E30C 800F4E5C 0C03A625 */  jal       func_800E9894
-/* 8E310 800F4E60 00000000 */   nop      
+/* 8E310 800F4E60 00000000 */   nop
 /* 8E314 800F4E64 0C03A5E3 */  jal       open_status_menu_short
-/* 8E318 800F4E68 00000000 */   nop      
+/* 8E318 800F4E68 00000000 */   nop
 /* 8E31C 800F4E6C 3C048011 */  lui       $a0, %hi(D_8010D699)
 /* 8E320 800F4E70 2484D699 */  addiu     $a0, $a0, %lo(D_8010D699)
 /* 8E324 800F4E74 3C068011 */  lui       $a2, %hi(D_8010D698)

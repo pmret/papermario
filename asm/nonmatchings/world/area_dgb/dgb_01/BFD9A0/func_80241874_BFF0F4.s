@@ -27,7 +27,7 @@ glabel func_80241874_BFF0F4
 .L802418C8:
 /* BFF148 802418C8 2A020004 */  slti      $v0, $s0, 4
 /* BFF14C 802418CC 1440FFF5 */  bnez      $v0, .L802418A4
-/* BFF150 802418D0 00000000 */   nop      
+/* BFF150 802418D0 00000000 */   nop
 /* BFF154 802418D4 8E42006C */  lw        $v0, 0x6c($s2)
 /* BFF158 802418D8 3C03800F */  lui       $v1, %hi(gPlayerStatusPtr)
 /* BFF15C 802418DC 8C637B30 */  lw        $v1, %lo(gPlayerStatusPtr)($v1)

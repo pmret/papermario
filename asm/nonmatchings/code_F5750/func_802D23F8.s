@@ -18,7 +18,7 @@ glabel func_802D23F8
 /* F6DDC 802D242C 10620003 */  beq       $v1, $v0, .L802D243C
 /* F6DE0 802D2430 2402001A */   addiu    $v0, $zero, 0x1a
 /* F6DE4 802D2434 14620003 */  bne       $v1, $v0, .L802D2444
-/* F6DE8 802D2438 00000000 */   nop      
+/* F6DE8 802D2438 00000000 */   nop
 .L802D243C:
 /* F6DEC 802D243C 03E00008 */  jr        $ra
 /* F6DF0 802D2440 24020001 */   addiu    $v0, $zero, 1

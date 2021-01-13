@@ -28,10 +28,10 @@ glabel create_shadow_from_data
 /* A8330 80111C30 2A22003C */  slti      $v0, $s1, 0x3c
 .L80111C34:
 /* A8334 80111C34 14400003 */  bnez      $v0, .L80111C44
-/* A8338 80111C38 00000000 */   nop      
+/* A8338 80111C38 00000000 */   nop
 .L80111C3C:
 /* A833C 80111C3C 0804470F */  j         .L80111C3C
-/* A8340 80111C40 00000000 */   nop      
+/* A8340 80111C40 00000000 */   nop
 .L80111C44:
 /* A8344 80111C44 0C00AB39 */  jal       heap_malloc
 /* A8348 80111C48 24040078 */   addiu    $a0, $zero, 0x78
@@ -73,7 +73,7 @@ glabel create_shadow_from_data
 /* A83D8 80111CD8 0C0480EB */  jal       func_801203AC
 /* A83DC 80111CDC 00022403 */   sra      $a0, $v0, 0x10
 /* A83E0 80111CE0 0804473D */  j         .L80111CF4
-/* A83E4 80111CE4 00000000 */   nop      
+/* A83E4 80111CE4 00000000 */   nop
 .L80111CE8:
 /* A83E8 80111CE8 0C048338 */  jal       load_virtual_model
 /* A83EC 80111CEC 8E440004 */   lw       $a0, 4($s2)
@@ -81,7 +81,7 @@ glabel create_shadow_from_data
 .L80111CF4:
 /* A83F4 80111CF4 8E42000C */  lw        $v0, 0xc($s2)
 /* A83F8 80111CF8 10400003 */  beqz      $v0, .L80111D08
-/* A83FC 80111CFC 00000000 */   nop      
+/* A83FC 80111CFC 00000000 */   nop
 /* A8400 80111D00 0040F809 */  jalr      $v0
 /* A8404 80111D04 0200202D */   daddu    $a0, $s0, $zero
 .L80111D08:

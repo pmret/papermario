@@ -18,7 +18,7 @@ glabel modify_collider_family_flags
 /* EE6CC 802C9D1C 04800003 */  bltz      $a0, .L802C9D2C
 /* EE6D0 802C9D20 00C0882D */   daddu    $s1, $a2, $zero
 /* EE6D4 802C9D24 0C0B273A */  jal       modify_collider_family_flags
-/* EE6D8 802C9D28 00000000 */   nop      
+/* EE6D8 802C9D28 00000000 */   nop
 .L802C9D2C:
 /* EE6DC 802C9D2C 86040006 */  lh        $a0, 6($s0)
 /* EE6E0 802C9D30 04800003 */  bltz      $a0, .L802C9D40
@@ -33,16 +33,16 @@ glabel modify_collider_family_flags
 /* EE700 802C9D50 50400005 */  beql      $v0, $zero, .L802C9D68
 /* EE704 802C9D54 24020002 */   addiu    $v0, $zero, 2
 /* EE708 802C9D58 12200009 */  beqz      $s1, .L802C9D80
-/* EE70C 802C9D5C 00000000 */   nop      
+/* EE70C 802C9D5C 00000000 */   nop
 /* EE710 802C9D60 080B276D */  j         .L802C9DB4
-/* EE714 802C9D64 00000000 */   nop      
+/* EE714 802C9D64 00000000 */   nop
 .L802C9D68:
 /* EE718 802C9D68 1222000B */  beq       $s1, $v0, .L802C9D98
 /* EE71C 802C9D6C 24020003 */   addiu    $v0, $zero, 3
 /* EE720 802C9D70 1222000B */  beq       $s1, $v0, .L802C9DA0
 /* EE724 802C9D74 2403FF00 */   addiu    $v1, $zero, -0x100
 /* EE728 802C9D78 080B276D */  j         .L802C9DB4
-/* EE72C 802C9D7C 00000000 */   nop      
+/* EE72C 802C9D7C 00000000 */   nop
 .L802C9D80:
 /* EE730 802C9D80 8E020000 */  lw        $v0, ($s0)
 /* EE734 802C9D84 080B276C */  j         .L802C9DB0

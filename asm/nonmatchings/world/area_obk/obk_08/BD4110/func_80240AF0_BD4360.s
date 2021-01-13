@@ -16,11 +16,12 @@ glabel func_80240AF0_BD4360
 /* BD438C 80240B1C 2C62000E */  sltiu     $v0, $v1, 0xe
 /* BD4390 80240B20 10400058 */  beqz      $v0, .L80240C84
 /* BD4394 80240B24 00031080 */   sll      $v0, $v1, 2
-/* BD4398 80240B28 3C018024 */  lui       $at, %hi(D_80246EC8)
+/* BD4398 80240B28 3C018024 */  lui       $at, %hi(jtbl_80246EC8_BDA738)
 /* BD439C 80240B2C 00220821 */  addu      $at, $at, $v0
-/* BD43A0 80240B30 8C226EC8 */  lw        $v0, %lo(D_80246EC8)($at)
+/* BD43A0 80240B30 8C226EC8 */  lw        $v0, %lo(jtbl_80246EC8_BDA738)($at)
 /* BD43A4 80240B34 00400008 */  jr        $v0
-/* BD43A8 80240B38 00000000 */   nop      
+/* BD43A8 80240B38 00000000 */   nop
+glabel L80240B3C_BD43AC
 /* BD43AC 80240B3C 0220202D */  daddu     $a0, $s1, $zero
 /* BD43B0 80240B40 3C05F971 */  lui       $a1, 0xf971
 /* BD43B4 80240B44 0C0B1EAF */  jal       get_variable
@@ -31,6 +32,7 @@ glabel func_80240AF0_BD4360
 /* BD43C8 80240B58 2402000A */   addiu    $v0, $zero, 0xa
 /* BD43CC 80240B5C 08090320 */  j         .L80240C80
 /* BD43D0 80240B60 AE430000 */   sw       $v1, ($s2)
+glabel L80240B64_BD43D4
 /* BD43D4 80240B64 C600000C */  lwc1      $f0, 0xc($s0)
 /* BD43D8 80240B68 3C014000 */  lui       $at, 0x4000
 /* BD43DC 80240B6C 44816000 */  mtc1      $at, $f12
@@ -45,16 +47,17 @@ glabel func_80240AF0_BD4360
 /* BD4400 80240B90 2402000B */   addiu    $v0, $zero, 0xb
 /* BD4404 80240B94 08090321 */  j         .L80240C84
 /* BD4408 80240B98 AE220074 */   sw       $v0, 0x74($s1)
+glabel L80240B9C_BD440C
 /* BD440C 80240B9C C602003C */  lwc1      $f2, 0x3c($s0)
 /* BD4410 80240BA0 3C01C466 */  lui       $at, 0xc466
 /* BD4414 80240BA4 44810000 */  mtc1      $at, $f0
-/* BD4418 80240BA8 00000000 */  nop       
+/* BD4418 80240BA8 00000000 */  nop
 /* BD441C 80240BAC 4600103E */  c.le.s    $f2, $f0
-/* BD4420 80240BB0 00000000 */  nop       
+/* BD4420 80240BB0 00000000 */  nop
 /* BD4424 80240BB4 45000003 */  bc1f      .L80240BC4
-/* BD4428 80240BB8 00000000 */   nop      
+/* BD4428 80240BB8 00000000 */   nop
 /* BD442C 80240BBC 0C09027A */  jal       func_802409E8_BD4258
-/* BD4430 80240BC0 00000000 */   nop      
+/* BD4430 80240BC0 00000000 */   nop
 .L80240BC4:
 /* BD4434 80240BC4 C600000C */  lwc1      $f0, 0xc($s0)
 /* BD4438 80240BC8 3C014000 */  lui       $at, 0x4000
@@ -64,13 +67,13 @@ glabel func_80240AF0_BD4360
 /* BD4448 80240BD8 C604003C */  lwc1      $f4, 0x3c($s0)
 /* BD444C 80240BDC 3C013F00 */  lui       $at, 0x3f00
 /* BD4450 80240BE0 44811000 */  mtc1      $at, $f2
-/* BD4454 80240BE4 00000000 */  nop       
+/* BD4454 80240BE4 00000000 */  nop
 /* BD4458 80240BE8 46022101 */  sub.s     $f4, $f4, $f2
 /* BD445C 80240BEC 3C01C477 */  lui       $at, 0xc477
 /* BD4460 80240BF0 44811000 */  mtc1      $at, $f2
 /* BD4464 80240BF4 E600000C */  swc1      $f0, 0xc($s0)
 /* BD4468 80240BF8 4602203E */  c.le.s    $f4, $f2
-/* BD446C 80240BFC 00000000 */  nop       
+/* BD446C 80240BFC 00000000 */  nop
 /* BD4470 80240C00 45000020 */  bc1f      .L80240C84
 /* BD4474 80240C04 E604003C */   swc1     $f4, 0x3c($s0)
 /* BD4478 80240C08 0220202D */  daddu     $a0, $s1, $zero
@@ -79,9 +82,10 @@ glabel func_80240AF0_BD4360
 /* BD4484 80240C14 0C0B2026 */  jal       set_variable
 /* BD4488 80240C18 24060001 */   addiu    $a2, $zero, 1
 /* BD448C 80240C1C 0C09029F */  jal       func_80240A7C_BD42EC
-/* BD4490 80240C20 00000000 */   nop      
+/* BD4490 80240C20 00000000 */   nop
 /* BD4494 80240C24 08090320 */  j         .L80240C80
 /* BD4498 80240C28 2402000C */   addiu    $v0, $zero, 0xc
+glabel L80240C2C_BD449C
 /* BD449C 80240C2C 0220202D */  daddu     $a0, $s1, $zero
 /* BD44A0 80240C30 3C05FD05 */  lui       $a1, 0xfd05
 /* BD44A4 80240C34 0C0B1EAF */  jal       get_variable
@@ -98,6 +102,7 @@ glabel func_80240AF0_BD4360
 /* BD44CC 80240C5C 460C0300 */   add.s    $f12, $f0, $f12
 /* BD44D0 80240C60 08090321 */  j         .L80240C84
 /* BD44D4 80240C64 E600000C */   swc1     $f0, 0xc($s0)
+glabel L80240C68_BD44D8
 /* BD44D8 80240C68 0220202D */  daddu     $a0, $s1, $zero
 /* BD44DC 80240C6C 3C05FD05 */  lui       $a1, 0xfd05
 /* BD44E0 80240C70 0C0B1EAF */  jal       get_variable
@@ -107,6 +112,7 @@ glabel func_80240AF0_BD4360
 .L80240C80:
 /* BD44F0 80240C80 AE220074 */  sw        $v0, 0x74($s1)
 .L80240C84:
+glabel L80240C84_BD44F4
 /* BD44F4 80240C84 8FBF001C */  lw        $ra, 0x1c($sp)
 /* BD44F8 80240C88 8FB20018 */  lw        $s2, 0x18($sp)
 /* BD44FC 80240C8C 8FB10014 */  lw        $s1, 0x14($sp)

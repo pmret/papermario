@@ -49,15 +49,15 @@ glabel func_80241A08_C6FD38
 /* C6FDE0 80241AB0 44802000 */  mtc1      $zero, $f4
 /* C6FDE4 80241AB4 460010A1 */  cvt.d.s   $f2, $f2
 /* C6FDE8 80241AB8 46241082 */  mul.d     $f2, $f2, $f4
-/* C6FDEC 80241ABC 00000000 */  nop       
+/* C6FDEC 80241ABC 00000000 */  nop
 /* C6FDF0 80241AC0 C7A0001C */  lwc1      $f0, 0x1c($sp)
 /* C6FDF4 80241AC4 46000021 */  cvt.d.s   $f0, $f0
 /* C6FDF8 80241AC8 46240002 */  mul.d     $f0, $f0, $f4
-/* C6FDFC 80241ACC 00000000 */  nop       
+/* C6FDFC 80241ACC 00000000 */  nop
 /* C6FE00 80241AD0 3C013FE0 */  lui       $at, 0x3fe0
 /* C6FE04 80241AD4 44812800 */  mtc1      $at, $f5
 /* C6FE08 80241AD8 44802000 */  mtc1      $zero, $f4
-/* C6FE0C 80241ADC 00000000 */  nop       
+/* C6FE0C 80241ADC 00000000 */  nop
 /* C6FE10 80241AE0 46241080 */  add.d     $f2, $f2, $f4
 /* C6FE14 80241AE4 AE000074 */  sw        $zero, 0x74($s0)
 /* C6FE18 80241AE8 46240000 */  add.d     $f0, $f0, $f4

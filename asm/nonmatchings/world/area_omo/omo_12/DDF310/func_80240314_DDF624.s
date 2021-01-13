@@ -35,7 +35,7 @@ glabel func_80240314_DDF624
 /* DDF69C 8024038C 0C04DFB0 */  jal       func_80137EC0
 /* DDF6A0 80240390 0240382D */   daddu    $a3, $s2, $zero
 /* DDF6A4 80240394 44900000 */  mtc1      $s0, $f0
-/* DDF6A8 80240398 00000000 */  nop       
+/* DDF6A8 80240398 00000000 */  nop
 /* DDF6AC 8024039C 46800020 */  cvt.s.w   $f0, $f0
 /* DDF6B0 802403A0 44050000 */  mfc1      $a1, $f0
 /* DDF6B4 802403A4 0C04E035 */  jal       func_801380D4

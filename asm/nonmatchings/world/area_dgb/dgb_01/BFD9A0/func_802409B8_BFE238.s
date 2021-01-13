@@ -42,11 +42,11 @@ glabel func_802409B8_BFE238
 .L80240A4C:
 /* BFE2CC 80240A4C 8E220070 */  lw        $v0, 0x70($s1)
 /* BFE2D0 80240A50 18400034 */  blez      $v0, .L80240B24
-/* BFE2D4 80240A54 00000000 */   nop      
+/* BFE2D4 80240A54 00000000 */   nop
 /* BFE2D8 80240A58 C62C0074 */  lwc1      $f12, 0x74($s1)
 /* BFE2DC 80240A5C 46806320 */  cvt.s.w   $f12, $f12
 /* BFE2E0 80240A60 44820000 */  mtc1      $v0, $f0
-/* BFE2E4 80240A64 00000000 */  nop       
+/* BFE2E4 80240A64 00000000 */  nop
 /* BFE2E8 80240A68 46800020 */  cvt.s.w   $f0, $f0
 /* BFE2EC 80240A6C 46000021 */  cvt.d.s   $f0, $f0
 /* BFE2F0 80240A70 46220003 */  div.d     $f0, $f0, $f2
@@ -77,23 +77,23 @@ glabel func_802409B8_BFE238
 /* BFE350 80240AD0 27A70030 */   addiu    $a3, $sp, 0x30
 .L80240AD4:
 /* BFE354 80240AD4 10400007 */  beqz      $v0, .L80240AF4
-/* BFE358 80240AD8 00000000 */   nop      
+/* BFE358 80240AD8 00000000 */   nop
 /* BFE35C 80240ADC 4616A082 */  mul.s     $f2, $f20, $f22
-/* BFE360 80240AE0 00000000 */  nop       
+/* BFE360 80240AE0 00000000 */  nop
 /* BFE364 80240AE4 C7A0002C */  lwc1      $f0, 0x2c($sp)
 /* BFE368 80240AE8 46180000 */  add.s     $f0, $f0, $f24
 /* BFE36C 80240AEC 080902C0 */  j         .L80240B00
 /* BFE370 80240AF0 46020000 */   add.s    $f0, $f0, $f2
 .L80240AF4:
 /* BFE374 80240AF4 4616A002 */  mul.s     $f0, $f20, $f22
-/* BFE378 80240AF8 00000000 */  nop       
+/* BFE378 80240AF8 00000000 */  nop
 /* BFE37C 80240AFC 4600D000 */  add.s     $f0, $f26, $f0
 .L80240B00:
 /* BFE380 80240B00 E600003C */  swc1      $f0, 0x3c($s0)
 /* BFE384 80240B04 8E220074 */  lw        $v0, 0x74($s1)
 /* BFE388 80240B08 2442000A */  addiu     $v0, $v0, 0xa
 /* BFE38C 80240B0C 44826000 */  mtc1      $v0, $f12
-/* BFE390 80240B10 00000000 */  nop       
+/* BFE390 80240B10 00000000 */  nop
 /* BFE394 80240B14 0C00A6C9 */  jal       clamp_angle
 /* BFE398 80240B18 46806320 */   cvt.s.w  $f12, $f12
 /* BFE39C 80240B1C 4600020D */  trunc.w.s $f8, $f0
@@ -105,7 +105,7 @@ glabel func_802409B8_BFE238
 /* BFE3B0 80240B30 860200A8 */  lh        $v0, 0xa8($s0)
 /* BFE3B4 80240B34 C600003C */  lwc1      $f0, 0x3c($s0)
 /* BFE3B8 80240B38 44821000 */  mtc1      $v0, $f2
-/* BFE3BC 80240B3C 00000000 */  nop       
+/* BFE3BC 80240B3C 00000000 */  nop
 /* BFE3C0 80240B40 468010A0 */  cvt.s.w   $f2, $f2
 /* BFE3C4 80240B44 3C02800F */  lui       $v0, %hi(gPlayerStatusPtr)
 /* BFE3C8 80240B48 8C427B30 */  lw        $v0, %lo(gPlayerStatusPtr)($v0)
@@ -118,7 +118,7 @@ glabel func_802409B8_BFE238
 /* BFE3E4 80240B64 46240000 */  add.d     $f0, $f0, $f4
 /* BFE3E8 80240B68 460010A1 */  cvt.d.s   $f2, $f2
 /* BFE3EC 80240B6C 4620103C */  c.lt.d    $f2, $f0
-/* BFE3F0 80240B70 00000000 */  nop       
+/* BFE3F0 80240B70 00000000 */  nop
 /* BFE3F4 80240B74 4500002E */  bc1f      .L80240C30
 /* BFE3F8 80240B78 0280202D */   daddu    $a0, $s4, $zero
 /* BFE3FC 80240B7C 24020001 */  addiu     $v0, $zero, 1
@@ -140,7 +140,7 @@ glabel func_802409B8_BFE238
 /* BFE43C 80240BBC 3C01C1A0 */  lui       $at, 0xc1a0
 /* BFE440 80240BC0 44812000 */  mtc1      $at, $f4
 /* BFE444 80240BC4 44834000 */  mtc1      $v1, $f8
-/* BFE448 80240BC8 00000000 */  nop       
+/* BFE448 80240BC8 00000000 */  nop
 /* BFE44C 80240BCC 46804220 */  cvt.s.w   $f8, $f8
 /* BFE450 80240BD0 44074000 */  mfc1      $a3, $f8
 /* BFE454 80240BD4 27A20038 */  addiu     $v0, $sp, 0x38
@@ -171,10 +171,10 @@ glabel func_802409B8_BFE238
 .L80240C30:
 /* BFE4B0 80240C30 8602008C */  lh        $v0, 0x8c($s0)
 /* BFE4B4 80240C34 14400025 */  bnez      $v0, .L80240CCC
-/* BFE4B8 80240C38 00000000 */   nop      
+/* BFE4B8 80240C38 00000000 */   nop
 /* BFE4BC 80240C3C 8602008E */  lh        $v0, 0x8e($s0)
 /* BFE4C0 80240C40 1C400022 */  bgtz      $v0, .L80240CCC
-/* BFE4C4 80240C44 00000000 */   nop      
+/* BFE4C4 80240C44 00000000 */   nop
 /* BFE4C8 80240C48 8E620074 */  lw        $v0, 0x74($s3)
 /* BFE4CC 80240C4C 2442FFFF */  addiu     $v0, $v0, -1
 /* BFE4D0 80240C50 1840001D */  blez      $v0, .L80240CC8
@@ -183,7 +183,7 @@ glabel func_802409B8_BFE238
 /* BFE4DC 80240C5C 9442002A */  lhu       $v0, 0x2a($v0)
 /* BFE4E0 80240C60 30420010 */  andi      $v0, $v0, 0x10
 /* BFE4E4 80240C64 14400007 */  bnez      $v0, .L80240C84
-/* BFE4E8 80240C68 00000000 */   nop      
+/* BFE4E8 80240C68 00000000 */   nop
 /* BFE4EC 80240C6C C600000C */  lwc1      $f0, 0xc($s0)
 /* BFE4F0 80240C70 3C014334 */  lui       $at, 0x4334
 /* BFE4F4 80240C74 44816000 */  mtc1      $at, $f12

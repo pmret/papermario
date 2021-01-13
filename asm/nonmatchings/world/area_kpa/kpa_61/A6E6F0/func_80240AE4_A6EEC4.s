@@ -41,16 +41,16 @@ glabel func_80240AE4_A6EEC4
 /* A6EF54 80240B74 3C014387 */  lui       $at, 0x4387
 /* A6EF58 80240B78 4481A000 */  mtc1      $at, $f20
 /* A6EF5C 80240B7C 0C00A70A */  jal       get_clamped_angle_diff
-/* A6EF60 80240B80 00000000 */   nop      
+/* A6EF60 80240B80 00000000 */   nop
 /* A6EF64 80240B84 0C00A6C9 */  jal       clamp_angle
 /* A6EF68 80240B88 46000306 */   mov.s    $f12, $f0
 /* A6EF6C 80240B8C 3C018024 */  lui       $at, %hi(D_80243D30)
 /* A6EF70 80240B90 D4223D30 */  ldc1      $f2, %lo(D_80243D30)($at)
 /* A6EF74 80240B94 46000021 */  cvt.d.s   $f0, $f0
 /* A6EF78 80240B98 4622003C */  c.lt.d    $f0, $f2
-/* A6EF7C 80240B9C 00000000 */  nop       
+/* A6EF7C 80240B9C 00000000 */  nop
 /* A6EF80 80240BA0 45000003 */  bc1f      .L80240BB0
-/* A6EF84 80240BA4 00000000 */   nop      
+/* A6EF84 80240BA4 00000000 */   nop
 /* A6EF88 80240BA8 3C0142B4 */  lui       $at, 0x42b4
 /* A6EF8C 80240BAC 4481A000 */  mtc1      $at, $f20
 .L80240BB0:
@@ -70,7 +70,7 @@ glabel func_80240AE4_A6EEC4
 /* A6EFC4 80240BE4 D4223D38 */  ldc1      $f2, %lo(D_80243D38)($at)
 /* A6EFC8 80240BE8 46000021 */  cvt.d.s   $f0, $f0
 /* A6EFCC 80240BEC 4620103C */  c.lt.d    $f2, $f0
-/* A6EFD0 80240BF0 00000000 */  nop       
+/* A6EFD0 80240BF0 00000000 */  nop
 /* A6EFD4 80240BF4 45010027 */  bc1t      .L80240C94
 /* A6EFD8 80240BF8 2402FFFF */   addiu    $v0, $zero, -1
 /* A6EFDC 80240BFC 8E020000 */  lw        $v0, ($s0)
@@ -83,7 +83,7 @@ glabel func_80240AE4_A6EEC4
 /* A6EFF8 80240C18 46000005 */  abs.s     $f0, $f0
 /* A6EFFC 80240C1C 44060000 */  mfc1      $a2, $f0
 /* A6F000 80240C20 0C00A720 */  jal       atan2
-/* A6F004 80240C24 00000000 */   nop      
+/* A6F004 80240C24 00000000 */   nop
 /* A6F008 80240C28 3C018024 */  lui       $at, %hi(D_80243D40)
 /* A6F00C 80240C2C D4223D40 */  ldc1      $f2, %lo(D_80243D40)($at)
 /* A6F010 80240C30 46000021 */  cvt.d.s   $f0, $f0
@@ -94,7 +94,7 @@ glabel func_80240AE4_A6EEC4
 /* A6F024 80240C44 46000005 */  abs.s     $f0, $f0
 /* A6F028 80240C48 46000021 */  cvt.d.s   $f0, $f0
 /* A6F02C 80240C4C 4620103C */  c.lt.d    $f2, $f0
-/* A6F030 80240C50 00000000 */  nop       
+/* A6F030 80240C50 00000000 */  nop
 /* A6F034 80240C54 4501000F */  bc1t      .L80240C94
 /* A6F038 80240C58 2402FFFF */   addiu    $v0, $zero, -1
 /* A6F03C 80240C5C 3C038011 */  lui       $v1, %hi(D_8010EBB3)

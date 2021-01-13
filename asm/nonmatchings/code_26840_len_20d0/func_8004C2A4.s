@@ -26,4 +26,4 @@ glabel func_8004C2A4
 /* 276F0 8004C2F0 1440FFF3 */  bnez      $v0, .L8004C2C0
 /* 276F4 8004C2F4 24C600AC */   addiu    $a2, $a2, 0xac
 /* 276F8 8004C2F8 03E00008 */  jr        $ra
-/* 276FC 8004C2FC 00000000 */   nop      
+/* 276FC 8004C2FC 00000000 */   nop

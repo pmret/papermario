@@ -41,7 +41,7 @@ glabel func_80240000_9BD660
 /* 9BD6E8 80240088 2406FFFF */  addiu     $a2, $zero, -1
 .L8024008C:
 /* 9BD6EC 8024008C 0C0B2026 */  jal       set_variable
-/* 9BD6F0 80240090 00000000 */   nop      
+/* 9BD6F0 80240090 00000000 */   nop
 /* 9BD6F4 80240094 8FBF0024 */  lw        $ra, 0x24($sp)
 /* 9BD6F8 80240098 8FB40020 */  lw        $s4, 0x20($sp)
 /* 9BD6FC 8024009C 8FB3001C */  lw        $s3, 0x1c($sp)
@@ -51,5 +51,5 @@ glabel func_80240000_9BD660
 /* 9BD70C 802400AC 24020002 */  addiu     $v0, $zero, 2
 /* 9BD710 802400B0 03E00008 */  jr        $ra
 /* 9BD714 802400B4 27BD0028 */   addiu    $sp, $sp, 0x28
-/* 9BD718 802400B8 00000000 */  nop       
-/* 9BD71C 802400BC 00000000 */  nop       
+/* 9BD718 802400B8 00000000 */  nop
+/* 9BD71C 802400BC 00000000 */  nop

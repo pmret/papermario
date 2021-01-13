@@ -19,7 +19,7 @@ glabel func_80238A6C_70C77C
 /* 70C7B4 80238AA4 4600C600 */  add.s     $f24, $f24, $f0
 /* 70C7B8 80238AA8 C4760148 */  lwc1      $f22, 0x148($v1)
 /* 70C7BC 80238AAC 44820000 */  mtc1      $v0, $f0
-/* 70C7C0 80238AB0 00000000 */  nop       
+/* 70C7C0 80238AB0 00000000 */  nop
 /* 70C7C4 80238AB4 46800020 */  cvt.s.w   $f0, $f0
 /* 70C7C8 80238AB8 4600B580 */  add.s     $f22, $f22, $f0
 /* 70C7CC 80238ABC 3C0141A0 */  lui       $at, 0x41a0
@@ -29,14 +29,14 @@ glabel func_80238A6C_70C77C
 /* 70C7DC 80238ACC 461AB580 */   add.s    $f22, $f22, $f26
 /* 70C7E0 80238AD0 2442000A */  addiu     $v0, $v0, 0xa
 /* 70C7E4 80238AD4 4482A000 */  mtc1      $v0, $f20
-/* 70C7E8 80238AD8 00000000 */  nop       
+/* 70C7E8 80238AD8 00000000 */  nop
 /* 70C7EC 80238ADC 4680A520 */  cvt.s.w   $f20, $f20
 /* 70C7F0 80238AE0 0C00A67F */  jal       rand_int
 /* 70C7F4 80238AE4 24040050 */   addiu    $a0, $zero, 0x50
 /* 70C7F8 80238AE8 0000202D */  daddu     $a0, $zero, $zero
 /* 70C7FC 80238AEC 2442000A */  addiu     $v0, $v0, 0xa
 /* 70C800 80238AF0 44820000 */  mtc1      $v0, $f0
-/* 70C804 80238AF4 00000000 */  nop       
+/* 70C804 80238AF4 00000000 */  nop
 /* 70C808 80238AF8 46800020 */  cvt.s.w   $f0, $f0
 /* 70C80C 80238AFC E7A00014 */  swc1      $f0, 0x14($sp)
 /* 70C810 80238B00 3C013FC0 */  lui       $at, 0x3fc0

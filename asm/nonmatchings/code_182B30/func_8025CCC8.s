@@ -15,15 +15,15 @@ glabel func_8025CCC8
 /* 18B5D0 8025CCF0 10620007 */  beq       $v1, $v0, .L8025CD10
 /* 18B5D4 8025CCF4 0000102D */   daddu    $v0, $zero, $zero
 /* 18B5D8 8025CCF8 08097347 */  j         .L8025CD1C
-/* 18B5DC 8025CCFC 00000000 */   nop      
+/* 18B5DC 8025CCFC 00000000 */   nop
 .L8025CD00:
 /* 18B5E0 8025CD00 0C09734A */  jal       func_8025CD28
-/* 18B5E4 8025CD04 00000000 */   nop      
+/* 18B5E4 8025CD04 00000000 */   nop
 /* 18B5E8 8025CD08 08097347 */  j         .L8025CD1C
 /* 18B5EC 8025CD0C 0000102D */   daddu    $v0, $zero, $zero
 .L8025CD10:
 /* 18B5F0 8025CD10 0C097350 */  jal       func_8025CD40
-/* 18B5F4 8025CD14 00000000 */   nop      
+/* 18B5F4 8025CD14 00000000 */   nop
 /* 18B5F8 8025CD18 0000102D */  daddu     $v0, $zero, $zero
 .L8025CD1C:
 /* 18B5FC 8025CD1C 8FBF0010 */  lw        $ra, 0x10($sp)

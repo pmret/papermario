@@ -19,7 +19,7 @@ glabel UseIdleAnimation
 /* 19DA04 8026F124 0040802D */  daddu     $s0, $v0, $zero
 /* 19DA08 8026F128 2402FF81 */  addiu     $v0, $zero, -0x7f
 /* 19DA0C 8026F12C 16220002 */  bne       $s1, $v0, .L8026F138
-/* 19DA10 8026F130 00000000 */   nop      
+/* 19DA10 8026F130 00000000 */   nop
 /* 19DA14 8026F134 8E510148 */  lw        $s1, 0x148($s2)
 .L8026F138:
 /* 19DA18 8026F138 0C09A75B */  jal       get_actor
@@ -36,7 +36,7 @@ glabel UseIdleAnimation
 /* 19DA44 8026F164 0C099B90 */  jal       func_80266E40
 /* 19DA48 8026F168 AC820000 */   sw       $v0, ($a0)
 /* 19DA4C 8026F16C 0809BC61 */  j         .L8026F184
-/* 19DA50 8026F170 00000000 */   nop      
+/* 19DA50 8026F170 00000000 */   nop
 .L8026F174:
 /* 19DA54 8026F174 8C820000 */  lw        $v0, ($a0)
 /* 19DA58 8026F178 3C030400 */  lui       $v1, 0x400

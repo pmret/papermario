@@ -16,22 +16,28 @@ glabel create_shadow_type
 /* A898C 8011228C 10400014 */  beqz      $v0, .L801122E0
 /* A8990 80112290 AFB10014 */   sw       $s1, 0x14($sp)
 /* A8994 80112294 00031080 */  sll       $v0, $v1, 2
-/* A8998 80112298 3C018015 */  lui       $at, %hi(D_8014F928)
+/* A8998 80112298 3C018015 */  lui       $at, %hi(jtbl_8014F928_E6028)
 /* A899C 8011229C 00220821 */  addu      $at, $at, $v0
-/* A89A0 801122A0 8C22F928 */  lw        $v0, %lo(D_8014F928)($at)
+/* A89A0 801122A0 8C22F928 */  lw        $v0, %lo(jtbl_8014F928_E6028)($at)
 /* A89A4 801122A4 00400008 */  jr        $v0
-/* A89A8 801122A8 00000000 */   nop      
+/* A89A8 801122A8 00000000 */   nop
+glabel L801122AC_A89AC
 /* A89AC 801122AC 24100001 */  addiu     $s0, $zero, 1
+glabel L801122B0_A89B0
 /* A89B0 801122B0 3C04802F */  lui       $a0, %hi(D_802E98BC)
 /* A89B4 801122B4 248498BC */  addiu     $a0, $a0, %lo(D_802E98BC)
 /* A89B8 801122B8 080448B8 */  j         .L801122E0
-/* A89BC 801122BC 00000000 */   nop      
+/* A89BC 801122BC 00000000 */   nop
+glabel L801122C0_A89C0
 /* A89C0 801122C0 24100001 */  addiu     $s0, $zero, 1
+glabel L801122C4_A89C4
 /* A89C4 801122C4 3C04802F */  lui       $a0, %hi(D_802E9904)
 /* A89C8 801122C8 24849904 */  addiu     $a0, $a0, %lo(D_802E9904)
 /* A89CC 801122CC 080448B8 */  j         .L801122E0
-/* A89D0 801122D0 00000000 */   nop      
+/* A89D0 801122D0 00000000 */   nop
+glabel L801122D4_A89D4
 /* A89D4 801122D4 24100001 */  addiu     $s0, $zero, 1
+glabel L801122D8_A89D8
 /* A89D8 801122D8 3C04802F */  lui       $a0, %hi(D_802E98E0)
 /* A89DC 801122DC 248498E0 */  addiu     $a0, $a0, %lo(D_802E98E0)
 .L801122E0:
@@ -39,7 +45,7 @@ glabel create_shadow_type
 /* A89E4 801122E4 44061000 */  mfc1      $a2, $f2
 /* A89E8 801122E8 44072000 */  mfc1      $a3, $f4
 /* A89EC 801122EC 0C0446F6 */  jal       create_shadow_from_data
-/* A89F0 801122F0 00000000 */   nop      
+/* A89F0 801122F0 00000000 */   nop
 /* A89F4 801122F4 12000006 */  beqz      $s0, .L80112310
 /* A89F8 801122F8 0040882D */   daddu    $s1, $v0, $zero
 /* A89FC 801122FC 0C044181 */  jal       get_shadow_by_index

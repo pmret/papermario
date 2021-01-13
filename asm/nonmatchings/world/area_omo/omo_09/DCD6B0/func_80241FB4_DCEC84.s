@@ -16,7 +16,7 @@ glabel func_80241FB4_DCEC84
 /* DCECB0 80241FE0 A462008E */  sh        $v0, 0x8e($v1)
 /* DCECB4 80241FE4 00021400 */  sll       $v0, $v0, 0x10
 /* DCECB8 80241FE8 14400005 */  bnez      $v0, .L80242000
-/* DCECBC 80241FEC 00000000 */   nop      
+/* DCECBC 80241FEC 00000000 */   nop
 /* DCECC0 80241FF0 8E0200CC */  lw        $v0, 0xcc($s0)
 /* DCECC4 80241FF4 8C420000 */  lw        $v0, ($v0)
 /* DCECC8 80241FF8 AC620028 */  sw        $v0, 0x28($v1)

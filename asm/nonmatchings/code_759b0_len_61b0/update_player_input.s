@@ -55,4 +55,4 @@ glabel update_player_input
 /* 7B500 800E2050 ACE300E0 */  sw        $v1, 0xe0($a3)
 .L800E2054:
 /* 7B504 800E2054 03E00008 */  jr        $ra
-/* 7B508 800E2058 00000000 */   nop      
+/* 7B508 800E2058 00000000 */   nop

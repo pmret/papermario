@@ -47,7 +47,7 @@ glabel func_E00C8000
 /* 3CF448 E00C80A8 AE42000C */   sw       $v0, 0xc($s2)
 .LE00C80AC:
 /* 3CF44C E00C80AC 0803202B */  j         .LE00C80AC
-/* 3CF450 E00C80B0 00000000 */   nop      
+/* 3CF450 E00C80B0 00000000 */   nop
 .LE00C80B4:
 /* 3CF454 E00C80B4 AE130000 */  sw        $s3, ($s0)
 /* 3CF458 E00C80B8 1E200003 */  bgtz      $s1, .LE00C80C8
@@ -60,11 +60,11 @@ glabel func_E00C8000
 /* 3CF46C E00C80CC AE020028 */  sw        $v0, 0x28($s0)
 /* 3CF470 E00C80D0 240200FF */  addiu     $v0, $zero, 0xff
 /* 3CF474 E00C80D4 44913000 */  mtc1      $s1, $f6
-/* 3CF478 E00C80D8 00000000 */  nop       
+/* 3CF478 E00C80D8 00000000 */  nop
 /* 3CF47C E00C80DC 468031A1 */  cvt.d.w   $f6, $f6
 /* 3CF480 E00C80E0 4616E201 */  sub.s     $f8, $f28, $f22
 /* 3CF484 E00C80E4 44912000 */  mtc1      $s1, $f4
-/* 3CF488 E00C80E8 00000000 */  nop       
+/* 3CF488 E00C80E8 00000000 */  nop
 /* 3CF48C E00C80EC 46802120 */  cvt.s.w   $f4, $f4
 /* 3CF490 E00C80F0 3C01E00D */  lui       $at, %hi(D_E00C8730)
 /* 3CF494 E00C80F4 D4208730 */  ldc1      $f0, %lo(D_E00C8730)($at)
@@ -72,7 +72,7 @@ glabel func_E00C8000
 /* 3CF49C E00C80FC AE110068 */  sw        $s1, 0x68($s0)
 /* 3CF4A0 E00C8100 AE02003C */  sw        $v0, 0x3c($s0)
 /* 3CF4A4 E00C8104 46203182 */  mul.d     $f6, $f6, $f0
-/* 3CF4A8 E00C8108 00000000 */  nop       
+/* 3CF4A8 E00C8108 00000000 */  nop
 /* 3CF4AC E00C810C E6140010 */  swc1      $f20, 0x10($s0)
 /* 3CF4B0 E00C8110 E6160014 */  swc1      $f22, 0x14($s0)
 /* 3CF4B4 E00C8114 E6180018 */  swc1      $f24, 0x18($s0)
@@ -113,14 +113,14 @@ glabel func_E00C8000
 /* 3CF538 E00C8198 E6000040 */   swc1     $f0, 0x40($s0)
 /* 3CF53C E00C819C 2404000A */  addiu     $a0, $zero, 0xa
 /* 3CF540 E00C81A0 44820000 */  mtc1      $v0, $f0
-/* 3CF544 E00C81A4 00000000 */  nop       
+/* 3CF544 E00C81A4 00000000 */  nop
 /* 3CF548 E00C81A8 46800020 */  cvt.s.w   $f0, $f0
 /* 3CF54C E00C81AC 0C080138 */  jal       func_E02004E0
 /* 3CF550 E00C81B0 E6000050 */   swc1     $f0, 0x50($s0)
 /* 3CF554 E00C81B4 24430005 */  addiu     $v1, $v0, 5
 /* 3CF558 E00C81B8 0240102D */  daddu     $v0, $s2, $zero
 /* 3CF55C E00C81BC 44830000 */  mtc1      $v1, $f0
-/* 3CF560 E00C81C0 00000000 */  nop       
+/* 3CF560 E00C81C0 00000000 */  nop
 /* 3CF564 E00C81C4 46800020 */  cvt.s.w   $f0, $f0
 /* 3CF568 E00C81C8 E6000054 */  swc1      $f0, 0x54($s0)
 /* 3CF56C E00C81CC 3C013F80 */  lui       $at, 0x3f80

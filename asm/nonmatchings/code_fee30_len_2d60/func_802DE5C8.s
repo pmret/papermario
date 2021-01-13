@@ -9,4 +9,4 @@ glabel func_802DE5C8
 /* 1016C8 802DE5D8 00220821 */  addu      $at, $at, $v0
 /* 1016CC 802DE5DC 8C22FA58 */  lw        $v0, %lo(D_802DFA58)($at)
 /* 1016D0 802DE5E0 03E00008 */  jr        $ra
-/* 1016D4 802DE5E4 00000000 */   nop      
+/* 1016D4 802DE5E4 00000000 */   nop

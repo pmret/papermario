@@ -22,7 +22,7 @@ glabel func_80240AB4_9C5E94
 /* 9C5ED8 80240AF8 0C04DF93 */  jal       func_80137E4C
 /* 9C5EDC 80240AFC 24070091 */   addiu    $a3, $zero, 0x91
 /* 9C5EE0 80240B00 44900000 */  mtc1      $s0, $f0
-/* 9C5EE4 80240B04 00000000 */  nop       
+/* 9C5EE4 80240B04 00000000 */  nop
 /* 9C5EE8 80240B08 46800020 */  cvt.s.w   $f0, $f0
 /* 9C5EEC 80240B0C 44050000 */  mfc1      $a1, $f0
 /* 9C5EF0 80240B10 0C04DF62 */  jal       func_80137D88

@@ -26,7 +26,7 @@ glabel func_80240080_CB9280
 /* CB92D0 802400D0 1440FFFA */  bnez      $v0, .L802400BC
 /* CB92D4 802400D4 24A50004 */   addiu    $a1, $a1, 4
 /* CB92D8 802400D8 08090047 */  j         .L8024011C
-/* CB92DC 802400DC 00000000 */   nop      
+/* CB92DC 802400DC 00000000 */   nop
 .L802400E0:
 /* CB92E0 802400E0 0000182D */  daddu     $v1, $zero, $zero
 /* CB92E4 802400E4 0040282D */  daddu     $a1, $v0, $zero

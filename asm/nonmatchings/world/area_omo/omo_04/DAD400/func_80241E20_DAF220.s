@@ -9,4 +9,4 @@ glabel func_80241E20_DAF220
 /* DAF230 80241E30 A4620000 */  sh        $v0, ($v1)
 /* DAF234 80241E34 03E00008 */  jr        $ra
 /* DAF238 80241E38 24020002 */   addiu    $v0, $zero, 2
-/* DAF23C 80241E3C 00000000 */  nop       
+/* DAF23C 80241E3C 00000000 */  nop

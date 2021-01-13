@@ -28,7 +28,7 @@ glabel func_80243C78_9DAC98
 /* 9DACEC 80243CCC 00220821 */  addu      $at, $at, $v0
 /* 9DACF0 80243CD0 AC204BA0 */  sw        $zero, %lo(D_80254BA0)($at)
 /* 9DACF4 80243CD4 08090F41 */  j         .L80243D04
-/* 9DACF8 80243CD8 00000000 */   nop      
+/* 9DACF8 80243CD8 00000000 */   nop
 .L80243CDC:
 /* 9DACFC 80243CDC 3C038025 */  lui       $v1, %hi(D_80254BA0)
 /* 9DAD00 80243CE0 24634BA0 */  addiu     $v1, $v1, %lo(D_80254BA0)

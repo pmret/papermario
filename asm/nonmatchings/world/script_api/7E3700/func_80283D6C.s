@@ -5,7 +5,7 @@ glabel func_80283D6C
 /* 7E4BEC 80283D6C 0080282D */  daddu     $a1, $a0, $zero
 /* 7E4BF0 80283D70 8CA20090 */  lw        $v0, 0x90($a1)
 /* 7E4BF4 80283D74 0440000C */  bltz      $v0, .L80283DA8
-/* 7E4BF8 80283D78 00000000 */   nop      
+/* 7E4BF8 80283D78 00000000 */   nop
 /* 7E4BFC 80283D7C 8CA2008C */  lw        $v0, 0x8c($a1)
 /* 7E4C00 80283D80 3C03802E */  lui       $v1, %hi(D_802DBD28)
 /* 7E4C04 80283D84 2463BD28 */  addiu     $v1, $v1, %lo(D_802DBD28)

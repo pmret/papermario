@@ -69,12 +69,12 @@ glabel func_80219BA0_66B920
 /* 66BA20 80219CA0 82030210 */  lb        $v1, 0x210($s0)
 /* 66BA24 80219CA4 2402000A */  addiu     $v0, $zero, 0xa
 /* 66BA28 80219CA8 14620007 */  bne       $v1, $v0, .L80219CC8
-/* 66BA2C 80219CAC 00000000 */   nop      
+/* 66BA2C 80219CAC 00000000 */   nop
 /* 66BA30 80219CB0 8C82000C */  lw        $v0, 0xc($a0)
 /* 66BA34 80219CB4 3C013ECC */  lui       $at, 0x3ecc
 /* 66BA38 80219CB8 3421CCCD */  ori       $at, $at, 0xcccd
 /* 66BA3C 80219CBC 44810000 */  mtc1      $at, $f0
-/* 66BA40 80219CC0 00000000 */  nop       
+/* 66BA40 80219CC0 00000000 */  nop
 /* 66BA44 80219CC4 E4400028 */  swc1      $f0, 0x28($v0)
 .L80219CC8:
 /* 66BA48 80219CC8 8FBF0028 */  lw        $ra, 0x28($sp)

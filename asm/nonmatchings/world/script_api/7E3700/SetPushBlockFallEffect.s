@@ -26,4 +26,4 @@ glabel SetPushBlockFallEffect
 /* 7E4680 80283800 24020002 */  addiu     $v0, $zero, 2
 /* 7E4684 80283804 03E00008 */  jr        $ra
 /* 7E4688 80283808 27BD0020 */   addiu    $sp, $sp, 0x20
-/* 7E468C 8028380C 00000000 */  nop       
+/* 7E468C 8028380C 00000000 */  nop

@@ -46,9 +46,9 @@ glabel begin_state_logos
 /* F314 80033F14 3C01800A */  lui       $at, %hi(D_800A091C)
 /* F318 80033F18 AC22091C */  sw        $v0, %lo(D_800A091C)($at)
 /* F31C 80033F1C 0C018028 */  jal       nuContRmbForceStop
-/* F320 80033F20 00000000 */   nop      
+/* F320 80033F20 00000000 */   nop
 /* F324 80033F24 0C00B7BD */  jal       create_cameras_a
-/* F328 80033F28 00000000 */   nop      
+/* F328 80033F28 00000000 */   nop
 /* F32C 80033F2C 0000202D */  daddu     $a0, $zero, $zero
 /* F330 80033F30 2405000C */  addiu     $a1, $zero, 0xc
 /* F334 80033F34 2406001C */  addiu     $a2, $zero, 0x1c
@@ -109,25 +109,25 @@ glabel begin_state_logos
 /* F410 80034010 0C0B0C77 */  jal       clear_script_list
 /* F414 80034014 E606005C */   swc1     $f6, 0x5c($s0)
 /* F418 80034018 0C048C2E */  jal       clear_dynamic_entity_list
-/* F41C 8003401C 00000000 */   nop      
+/* F41C 8003401C 00000000 */   nop
 /* F420 80034020 0C047624 */  jal       func_8011D890
-/* F424 80034024 00000000 */   nop      
+/* F424 80034024 00000000 */   nop
 /* F428 80034028 0C0B763E */  jal       func_802DD8F8
 /* F42C 8003402C 0000202D */   daddu    $a0, $zero, $zero
 /* F430 80034030 0C047889 */  jal       func_8011E224
-/* F434 80034034 00000000 */   nop      
+/* F434 80034034 00000000 */   nop
 /* F438 80034038 0C0482EC */  jal       clear_virtual_models
-/* F43C 8003403C 00000000 */   nop      
+/* F43C 8003403C 00000000 */   nop
 /* F440 80034040 0C00E12F */  jal       clear_npcs
-/* F444 80034044 00000000 */   nop      
+/* F444 80034044 00000000 */   nop
 /* F448 80034048 0C050440 */  jal       func_80141100
-/* F44C 8003404C 00000000 */   nop      
+/* F44C 8003404C 00000000 */   nop
 /* F450 80034050 0C05177E */  jal       func_80145DF8
-/* F454 80034054 00000000 */   nop      
+/* F454 80034054 00000000 */   nop
 /* F458 80034058 0C04432E */  jal       clear_entity_data
 /* F45C 8003405C 24040001 */   addiu    $a0, $zero, 1
 /* F460 80034060 0C016727 */  jal       func_80059C9C
-/* F464 80034064 00000000 */   nop      
+/* F464 80034064 00000000 */   nop
 /* F468 80034068 3C03800A */  lui       $v1, %hi(D_8009A650)
 /* F46C 8003406C 2463A650 */  addiu     $v1, $v1, %lo(D_8009A650)
 /* F470 80034070 8C620000 */  lw        $v0, ($v1)

@@ -30,7 +30,7 @@ glabel func_80053CF8
 /* 2F15C 80053D5C 0C01511F */  jal       al_CopyFileTableEntry
 /* 2F160 80053D60 03A53021 */   addu     $a2, $sp, $a1
 /* 2F164 80053D64 14400030 */  bnez      $v0, .L80053E28
-/* 2F168 80053D68 00000000 */   nop      
+/* 2F168 80053D68 00000000 */   nop
 /* 2F16C 80053D6C 0C0136CA */  jal       func_8004DB28
 /* 2F170 80053D70 0260202D */   daddu    $a0, $s3, $zero
 /* 2F174 80053D74 1440002C */  bnez      $v0, .L80053E28

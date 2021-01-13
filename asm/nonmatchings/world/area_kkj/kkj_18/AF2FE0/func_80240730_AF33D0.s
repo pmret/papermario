@@ -11,7 +11,7 @@ glabel func_80240730_AF33D0
 /* AF33E8 80240748 8C63419C */  lw        $v1, %lo(gGameStatusPtr)($v1)
 /* AF33EC 8024074C 4600008D */  trunc.w.s $f2, $f0
 /* AF33F0 80240750 44021000 */  mfc1      $v0, $f2
-/* AF33F4 80240754 00000000 */  nop       
+/* AF33F4 80240754 00000000 */  nop
 /* AF33F8 80240758 3C018011 */  lui       $at, %hi(gPlayerStatus+0xC4)
 /* AF33FC 8024075C A022F08C */  sb        $v0, %lo(gPlayerStatus+0xC4)($at)
 /* AF3400 80240760 A0620080 */  sb        $v0, 0x80($v1)

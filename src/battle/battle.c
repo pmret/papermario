@@ -368,11 +368,11 @@ BattleArea gBattleAreas[0x30] = {
 };
 
 // possibly a jump table
-const s32 D_8009A578[] = {
+const s32 jtbl_8009A578_75978[] = {
     0x80072F38, 0x80072F4C, 0x80072F64, 0x80072F90, 0x80072FA8, 0x00000000,
 };
 
 // possibly a jump table
-const s32 D_8009A590[] = {
+const s32 jtbl_8009A590_75990[] = {
     0x8007301C, 0x80073070, 0x80073094, 0x800730CC, 0x800730F8,
 };

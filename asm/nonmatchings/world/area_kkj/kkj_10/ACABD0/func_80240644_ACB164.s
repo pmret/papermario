@@ -31,18 +31,18 @@ glabel func_80240644_ACB164
 /* ACB1CC 802406AC 0C0B1EAF */  jal       get_variable
 /* ACB1D0 802406B0 0040802D */   daddu    $s0, $v0, $zero
 /* ACB1D4 802406B4 44901000 */  mtc1      $s0, $f2
-/* ACB1D8 802406B8 00000000 */  nop       
+/* ACB1D8 802406B8 00000000 */  nop
 /* ACB1DC 802406BC 468010A0 */  cvt.s.w   $f2, $f2
 /* ACB1E0 802406C0 44936000 */  mtc1      $s3, $f12
-/* ACB1E4 802406C4 00000000 */  nop       
+/* ACB1E4 802406C4 00000000 */  nop
 /* ACB1E8 802406C8 46806320 */  cvt.s.w   $f12, $f12
 /* ACB1EC 802406CC 44061000 */  mfc1      $a2, $f2
 /* ACB1F0 802406D0 44821000 */  mtc1      $v0, $f2
-/* ACB1F4 802406D4 00000000 */  nop       
+/* ACB1F4 802406D4 00000000 */  nop
 /* ACB1F8 802406D8 468010A0 */  cvt.s.w   $f2, $f2
 /* ACB1FC 802406DC 44071000 */  mfc1      $a3, $f2
 /* ACB200 802406E0 44927000 */  mtc1      $s2, $f14
-/* ACB204 802406E4 00000000 */  nop       
+/* ACB204 802406E4 00000000 */  nop
 /* ACB208 802406E8 0C00A720 */  jal       atan2
 /* ACB20C 802406EC 468073A0 */   cvt.s.w  $f14, $f14
 /* ACB210 802406F0 0220202D */  daddu     $a0, $s1, $zero

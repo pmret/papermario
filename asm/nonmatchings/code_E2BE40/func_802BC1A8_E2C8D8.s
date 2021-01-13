@@ -22,6 +22,6 @@ glabel func_802BC1A8_E2C8D8
 /* E2C918 802BC1E8 8FBF0010 */  lw        $ra, 0x10($sp)
 /* E2C91C 802BC1EC 03E00008 */  jr        $ra
 /* E2C920 802BC1F0 27BD0018 */   addiu    $sp, $sp, 0x18
-/* E2C924 802BC1F4 00000000 */  nop       
-/* E2C928 802BC1F8 00000000 */  nop       
-/* E2C92C 802BC1FC 00000000 */  nop       
+/* E2C924 802BC1F4 00000000 */  nop
+/* E2C928 802BC1F8 00000000 */  nop
+/* E2C92C 802BC1FC 00000000 */  nop

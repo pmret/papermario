@@ -69,7 +69,7 @@ glabel func_802BB710_E2BE40
 /* E2BF3C 802BB80C 02A31023 */  subu      $v0, $s5, $v1
 .L802BB810:
 /* E2BF40 802BB810 44820000 */  mtc1      $v0, $f0
-/* E2BF44 802BB814 00000000 */  nop       
+/* E2BF44 802BB814 00000000 */  nop
 /* E2BF48 802BB818 46800020 */  cvt.s.w   $f0, $f0
 /* E2BF4C 802BB81C E600004C */  swc1      $f0, 0x4c($s0)
 /* E2BF50 802BB820 E614011C */  swc1      $f20, 0x11c($s0)

@@ -35,7 +35,7 @@ glabel NpcFaceNpc
 /* F38A8 802CEEF8 0200282D */   daddu    $a1, $s0, $zero
 /* F38AC 802CEEFC 0040802D */  daddu     $s0, $v0, $zero
 /* F38B0 802CEF00 16000003 */  bnez      $s0, .L802CEF10
-/* F38B4 802CEF04 00000000 */   nop      
+/* F38B4 802CEF04 00000000 */   nop
 .L802CEF08:
 /* F38B8 802CEF08 080B3C0E */  j         .L802CF038
 /* F38BC 802CEF0C 24020002 */   addiu    $v0, $zero, 2
@@ -59,28 +59,28 @@ glabel NpcFaceNpc
 /* F3900 802CEF50 C6220078 */  lwc1      $f2, 0x78($s1)
 /* F3904 802CEF54 3C01C334 */  lui       $at, 0xc334
 /* F3908 802CEF58 44810000 */  mtc1      $at, $f0
-/* F390C 802CEF5C 00000000 */  nop       
+/* F390C 802CEF5C 00000000 */  nop
 /* F3910 802CEF60 4600103C */  c.lt.s    $f2, $f0
-/* F3914 802CEF64 00000000 */  nop       
+/* F3914 802CEF64 00000000 */  nop
 /* F3918 802CEF68 45000007 */  bc1f      .L802CEF88
-/* F391C 802CEF6C 00000000 */   nop      
+/* F391C 802CEF6C 00000000 */   nop
 /* F3920 802CEF70 3C0143B4 */  lui       $at, 0x43b4
 /* F3924 802CEF74 44810000 */  mtc1      $at, $f0
-/* F3928 802CEF78 00000000 */  nop       
+/* F3928 802CEF78 00000000 */  nop
 /* F392C 802CEF7C 46001000 */  add.s     $f0, $f2, $f0
 /* F3930 802CEF80 E6200078 */  swc1      $f0, 0x78($s1)
 /* F3934 802CEF84 C6220078 */  lwc1      $f2, 0x78($s1)
 .L802CEF88:
 /* F3938 802CEF88 3C014334 */  lui       $at, 0x4334
 /* F393C 802CEF8C 44810000 */  mtc1      $at, $f0
-/* F3940 802CEF90 00000000 */  nop       
+/* F3940 802CEF90 00000000 */  nop
 /* F3944 802CEF94 4602003C */  c.lt.s    $f0, $f2
-/* F3948 802CEF98 00000000 */  nop       
+/* F3948 802CEF98 00000000 */  nop
 /* F394C 802CEF9C 45000006 */  bc1f      .L802CEFB8
-/* F3950 802CEFA0 00000000 */   nop      
+/* F3950 802CEFA0 00000000 */   nop
 /* F3954 802CEFA4 3C0143B4 */  lui       $at, 0x43b4
 /* F3958 802CEFA8 44810000 */  mtc1      $at, $f0
-/* F395C 802CEFAC 00000000 */  nop       
+/* F395C 802CEFAC 00000000 */  nop
 /* F3960 802CEFB0 46001001 */  sub.s     $f0, $f2, $f0
 /* F3964 802CEFB4 E6200078 */  swc1      $f0, 0x78($s1)
 .L802CEFB8:
@@ -101,10 +101,10 @@ glabel NpcFaceNpc
 /* F399C 802CEFEC 00021403 */  sra       $v0, $v0, 0x10
 /* F39A0 802CEFF0 C6A00000 */  lwc1      $f0, ($s5)
 /* F39A4 802CEFF4 44821000 */  mtc1      $v0, $f2
-/* F39A8 802CEFF8 00000000 */  nop       
+/* F39A8 802CEFF8 00000000 */  nop
 /* F39AC 802CEFFC 468010A0 */  cvt.s.w   $f2, $f2
 /* F39B0 802CF000 46020002 */  mul.s     $f0, $f0, $f2
-/* F39B4 802CF004 00000000 */  nop       
+/* F39B4 802CF004 00000000 */  nop
 /* F39B8 802CF008 C6CC0000 */  lwc1      $f12, ($s6)
 /* F39BC 802CF00C C6820000 */  lwc1      $f2, ($s4)
 /* F39C0 802CF010 468010A0 */  cvt.s.w   $f2, $f2

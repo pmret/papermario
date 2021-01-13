@@ -39,13 +39,13 @@ glabel func_80241A40_B2DEB0
 /* B2DF34 80241AC4 10740005 */  beq       $v1, $s4, .L80241ADC
 /* B2DF38 80241AC8 26100001 */   addiu    $s0, $s0, 1
 /* B2DF3C 80241ACC 10730003 */  beq       $v1, $s3, .L80241ADC
-/* B2DF40 80241AD0 00000000 */   nop      
+/* B2DF40 80241AD0 00000000 */   nop
 /* B2DF44 80241AD4 00521025 */  or        $v0, $v0, $s2
 /* B2DF48 80241AD8 AC820000 */  sw        $v0, ($a0)
 .L80241ADC:
 /* B2DF4C 80241ADC 2A020040 */  slti      $v0, $s0, 0x40
 /* B2DF50 80241AE0 1440FFEF */  bnez      $v0, .L80241AA0
-/* B2DF54 80241AE4 00000000 */   nop      
+/* B2DF54 80241AE4 00000000 */   nop
 /* B2DF58 80241AE8 0000802D */  daddu     $s0, $zero, $zero
 /* B2DF5C 80241AEC 3C120800 */  lui       $s2, 0x800
 .L80241AF0:
@@ -57,13 +57,13 @@ glabel func_80241A40_B2DEB0
 /* B2DF74 80241B04 8C640000 */  lw        $a0, ($v1)
 /* B2DF78 80241B08 30820010 */  andi      $v0, $a0, 0x10
 /* B2DF7C 80241B0C 10400003 */  beqz      $v0, .L80241B1C
-/* B2DF80 80241B10 00000000 */   nop      
+/* B2DF80 80241B10 00000000 */   nop
 /* B2DF84 80241B14 00921025 */  or        $v0, $a0, $s2
 /* B2DF88 80241B18 AC620000 */  sw        $v0, ($v1)
 .L80241B1C:
 /* B2DF8C 80241B1C 2A020100 */  slti      $v0, $s0, 0x100
 /* B2DF90 80241B20 1440FFF3 */  bnez      $v0, .L80241AF0
-/* B2DF94 80241B24 00000000 */   nop      
+/* B2DF94 80241B24 00000000 */   nop
 /* B2DF98 80241B28 AE200070 */  sw        $zero, 0x70($s1)
 .L80241B2C:
 /* B2DF9C 80241B2C 8E220070 */  lw        $v0, 0x70($s1)

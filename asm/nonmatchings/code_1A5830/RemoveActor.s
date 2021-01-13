@@ -19,7 +19,7 @@ glabel RemoveActor
 /* 1AB0C8 8027C7E8 26730F10 */  addiu     $s3, $s3, %lo(gCurrentEncounter)
 /* 1AB0CC 8027C7EC 2402FF81 */  addiu     $v0, $zero, -0x7f
 /* 1AB0D0 8027C7F0 16220002 */  bne       $s1, $v0, .L8027C7FC
-/* 1AB0D4 8027C7F4 00000000 */   nop      
+/* 1AB0D4 8027C7F4 00000000 */   nop
 /* 1AB0D8 8027C7F8 8E110148 */  lw        $s1, 0x148($s0)
 .L8027C7FC:
 /* 1AB0DC 8027C7FC 0C09A75B */  jal       get_actor

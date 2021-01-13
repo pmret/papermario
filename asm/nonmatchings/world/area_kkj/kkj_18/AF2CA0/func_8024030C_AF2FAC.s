@@ -12,6 +12,6 @@ glabel func_8024030C_AF2FAC
 /* AF2FC8 80240328 A022F2A2 */  sb        $v0, %lo(gPlayerData+0x12)($at)
 /* AF2FCC 8024032C 03E00008 */  jr        $ra
 /* AF2FD0 80240330 24020002 */   addiu    $v0, $zero, 2
-/* AF2FD4 80240334 00000000 */  nop       
-/* AF2FD8 80240338 00000000 */  nop       
-/* AF2FDC 8024033C 00000000 */  nop       
+/* AF2FD4 80240334 00000000 */  nop
+/* AF2FD8 80240338 00000000 */  nop
+/* AF2FDC 8024033C 00000000 */  nop

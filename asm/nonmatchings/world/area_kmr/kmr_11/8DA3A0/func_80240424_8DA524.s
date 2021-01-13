@@ -38,7 +38,7 @@ glabel func_80240424_8DA524
 /* 8DA5A8 802404A8 2402000F */  addiu     $v0, $zero, 0xf
 /* 8DA5AC 802404AC AFA2001C */  sw        $v0, 0x1c($sp)
 /* 8DA5B0 802404B0 44833000 */  mtc1      $v1, $f6
-/* 8DA5B4 802404B4 00000000 */  nop       
+/* 8DA5B4 802404B4 00000000 */  nop
 /* 8DA5B8 802404B8 468031A0 */  cvt.s.w   $f6, $f6
 /* 8DA5BC 802404BC 44073000 */  mfc1      $a3, $f6
 /* 8DA5C0 802404C0 27A20028 */  addiu     $v0, $sp, 0x28

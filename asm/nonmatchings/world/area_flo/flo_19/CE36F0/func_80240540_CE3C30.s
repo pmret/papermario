@@ -22,7 +22,7 @@ glabel func_80240540_CE3C30
 /* CE3C74 80240584 468010A0 */  cvt.s.w   $f2, $f2
 /* CE3C78 80240588 44071000 */  mfc1      $a3, $f2
 /* CE3C7C 8024058C 4482A000 */  mtc1      $v0, $f20
-/* CE3C80 80240590 00000000 */  nop       
+/* CE3C80 80240590 00000000 */  nop
 /* CE3C84 80240594 4680A520 */  cvt.s.w   $f20, $f20
 /* CE3C88 80240598 0C00A7B5 */  jal       dist2D
 /* CE3C8C 8024059C 4600B386 */   mov.s    $f14, $f22
@@ -42,7 +42,7 @@ glabel func_80240540_CE3C30
 /* CE3CC4 802405D4 0C00A8BB */  jal       sin_deg
 /* CE3CC8 802405D8 4600A306 */   mov.s    $f12, $f20
 /* CE3CCC 802405DC 4600C002 */  mul.s     $f0, $f24, $f0
-/* CE3CD0 802405E0 00000000 */  nop       
+/* CE3CD0 802405E0 00000000 */  nop
 /* CE3CD4 802405E4 46160000 */  add.s     $f0, $f0, $f22
 /* CE3CD8 802405E8 3C118011 */  lui       $s1, %hi(gPlayerStatus)
 /* CE3CDC 802405EC 2631EFC8 */  addiu     $s1, $s1, %lo(gPlayerStatus)
@@ -57,12 +57,12 @@ glabel func_80240540_CE3C30
 /* CE3D00 80240610 4600A306 */  mov.s     $f12, $f20
 /* CE3D04 80240614 02028021 */  addu      $s0, $s0, $v0
 /* CE3D08 80240618 44900000 */  mtc1      $s0, $f0
-/* CE3D0C 8024061C 00000000 */  nop       
+/* CE3D0C 8024061C 00000000 */  nop
 /* CE3D10 80240620 46800020 */  cvt.s.w   $f0, $f0
 /* CE3D14 80240624 0C00A8D4 */  jal       cos_deg
 /* CE3D18 80240628 E620002C */   swc1     $f0, 0x2c($s1)
 /* CE3D1C 8024062C 4600C602 */  mul.s     $f24, $f24, $f0
-/* CE3D20 80240630 00000000 */  nop       
+/* CE3D20 80240630 00000000 */  nop
 /* CE3D24 80240634 4618B581 */  sub.s     $f22, $f22, $f24
 /* CE3D28 80240638 E6360030 */  swc1      $f22, 0x30($s1)
 /* CE3D2C 8024063C 8FBF0018 */  lw        $ra, 0x18($sp)

@@ -31,18 +31,18 @@ glabel func_80240E34_ACEF74
 /* ACEFDC 80240E9C 0C0B1EAF */  jal       get_variable
 /* ACEFE0 80240EA0 0040802D */   daddu    $s0, $v0, $zero
 /* ACEFE4 80240EA4 44901000 */  mtc1      $s0, $f2
-/* ACEFE8 80240EA8 00000000 */  nop       
+/* ACEFE8 80240EA8 00000000 */  nop
 /* ACEFEC 80240EAC 468010A0 */  cvt.s.w   $f2, $f2
 /* ACEFF0 80240EB0 44936000 */  mtc1      $s3, $f12
-/* ACEFF4 80240EB4 00000000 */  nop       
+/* ACEFF4 80240EB4 00000000 */  nop
 /* ACEFF8 80240EB8 46806320 */  cvt.s.w   $f12, $f12
 /* ACEFFC 80240EBC 44061000 */  mfc1      $a2, $f2
 /* ACF000 80240EC0 44821000 */  mtc1      $v0, $f2
-/* ACF004 80240EC4 00000000 */  nop       
+/* ACF004 80240EC4 00000000 */  nop
 /* ACF008 80240EC8 468010A0 */  cvt.s.w   $f2, $f2
 /* ACF00C 80240ECC 44071000 */  mfc1      $a3, $f2
 /* ACF010 80240ED0 44927000 */  mtc1      $s2, $f14
-/* ACF014 80240ED4 00000000 */  nop       
+/* ACF014 80240ED4 00000000 */  nop
 /* ACF018 80240ED8 0C00A720 */  jal       atan2
 /* ACF01C 80240EDC 468073A0 */   cvt.s.w  $f14, $f14
 /* ACF020 80240EE0 0220202D */  daddu     $a0, $s1, $zero

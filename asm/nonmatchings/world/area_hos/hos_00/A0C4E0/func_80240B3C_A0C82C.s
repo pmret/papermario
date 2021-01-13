@@ -21,9 +21,9 @@ glabel func_80240B3C_A0C82C
 /* A0C86C 80240B7C 0C00A8BB */  jal       sin_deg
 /* A0C870 80240B80 4600A306 */   mov.s    $f12, $f20
 /* A0C874 80240B84 46180002 */  mul.s     $f0, $f0, $f24
-/* A0C878 80240B88 00000000 */  nop       
+/* A0C878 80240B88 00000000 */  nop
 /* A0C87C 80240B8C 4491B000 */  mtc1      $s1, $f22
-/* A0C880 80240B90 00000000 */  nop       
+/* A0C880 80240B90 00000000 */  nop
 /* A0C884 80240B94 4680B5A0 */  cvt.s.w   $f22, $f22
 /* A0C888 80240B98 4600B000 */  add.s     $f0, $f22, $f0
 /* A0C88C 80240B9C 4600008D */  trunc.w.s $f2, $f0
@@ -31,9 +31,9 @@ glabel func_80240B3C_A0C82C
 /* A0C894 80240BA4 0C00A8D4 */  jal       cos_deg
 /* A0C898 80240BA8 4600A306 */   mov.s    $f12, $f20
 /* A0C89C 80240BAC 46180002 */  mul.s     $f0, $f0, $f24
-/* A0C8A0 80240BB0 00000000 */  nop       
+/* A0C8A0 80240BB0 00000000 */  nop
 /* A0C8A4 80240BB4 4492A000 */  mtc1      $s2, $f20
-/* A0C8A8 80240BB8 00000000 */  nop       
+/* A0C8A8 80240BB8 00000000 */  nop
 /* A0C8AC 80240BBC 4680A520 */  cvt.s.w   $f20, $f20
 /* A0C8B0 80240BC0 3C014302 */  lui       $at, 0x4302
 /* A0C8B4 80240BC4 4481D000 */  mtc1      $at, $f26
@@ -43,14 +43,14 @@ glabel func_80240B3C_A0C82C
 /* A0C8C4 80240BD4 0C00A8BB */  jal       sin_deg
 /* A0C8C8 80240BD8 4600D306 */   mov.s    $f12, $f26
 /* A0C8CC 80240BDC 46180002 */  mul.s     $f0, $f0, $f24
-/* A0C8D0 80240BE0 00000000 */  nop       
+/* A0C8D0 80240BE0 00000000 */  nop
 /* A0C8D4 80240BE4 4600B580 */  add.s     $f22, $f22, $f0
 /* A0C8D8 80240BE8 4600B08D */  trunc.w.s $f2, $f22
 /* A0C8DC 80240BEC E602008C */  swc1      $f2, 0x8c($s0)
 /* A0C8E0 80240BF0 0C00A8D4 */  jal       cos_deg
 /* A0C8E4 80240BF4 4600D306 */   mov.s    $f12, $f26
 /* A0C8E8 80240BF8 46180002 */  mul.s     $f0, $f0, $f24
-/* A0C8EC 80240BFC 00000000 */  nop       
+/* A0C8EC 80240BFC 00000000 */  nop
 /* A0C8F0 80240C00 4600A501 */  sub.s     $f20, $f20, $f0
 /* A0C8F4 80240C04 4600A08D */  trunc.w.s $f2, $f20
 /* A0C8F8 80240C08 E6020090 */  swc1      $f2, 0x90($s0)
@@ -65,5 +65,5 @@ glabel func_80240B3C_A0C82C
 /* A0C91C 80240C2C 24020002 */  addiu     $v0, $zero, 2
 /* A0C920 80240C30 03E00008 */  jr        $ra
 /* A0C924 80240C34 27BD0040 */   addiu    $sp, $sp, 0x40
-/* A0C928 80240C38 00000000 */  nop       
-/* A0C92C 80240C3C 00000000 */  nop       
+/* A0C928 80240C38 00000000 */  nop
+/* A0C92C 80240C3C 00000000 */  nop

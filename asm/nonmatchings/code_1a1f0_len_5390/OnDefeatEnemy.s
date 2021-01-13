@@ -34,7 +34,7 @@ glabel OnDefeatEnemy
 /* 1A9E8 8003F5E8 8E430074 */  lw        $v1, 0x74($s2)
 /* 1A9EC 8003F5EC 2402000F */  addiu     $v0, $zero, 0xf
 /* 1A9F0 8003F5F0 1462001A */  bne       $v1, $v0, .L8003F65C
-/* 1A9F4 8003F5F4 00000000 */   nop      
+/* 1A9F4 8003F5F4 00000000 */   nop
 /* 1A9F8 8003F5F8 0C05272D */  jal       play_sound
 /* 1A9FC 8003F5FC 240403E5 */   addiu    $a0, $zero, 0x3e5
 /* 1AA00 8003F600 962300A8 */  lhu       $v1, 0xa8($s1)
@@ -51,7 +51,7 @@ glabel OnDefeatEnemy
 /* 1AA2C 8003F62C 00431021 */  addu      $v0, $v0, $v1
 /* 1AA30 8003F630 00021043 */  sra       $v0, $v0, 1
 /* 1AA34 8003F634 44820000 */  mtc1      $v0, $f0
-/* 1AA38 8003F638 00000000 */  nop       
+/* 1AA38 8003F638 00000000 */  nop
 /* 1AA3C 8003F63C 46800020 */  cvt.s.w   $f0, $f0
 /* 1AA40 8003F640 46002100 */  add.s     $f4, $f4, $f0
 /* 1AA44 8003F644 E7A20014 */  swc1      $f2, 0x14($sp)
@@ -64,7 +64,7 @@ glabel OnDefeatEnemy
 /* 1AA5C 8003F65C 8E500074 */  lw        $s0, 0x74($s2)
 /* 1AA60 8003F660 2402000A */  addiu     $v0, $zero, 0xa
 /* 1AA64 8003F664 1602000F */  bne       $s0, $v0, .L8003F6A4
-/* 1AA68 8003F668 00000000 */   nop      
+/* 1AA68 8003F668 00000000 */   nop
 /* 1AA6C 8003F66C 3C014120 */  lui       $at, 0x4120
 /* 1AA70 8003F670 44811000 */  mtc1      $at, $f2
 /* 1AA74 8003F674 C6200040 */  lwc1      $f0, 0x40($s1)

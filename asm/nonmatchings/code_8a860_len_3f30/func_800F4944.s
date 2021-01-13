@@ -21,7 +21,7 @@ glabel func_800F4944
 /* 8DE34 800F4984 00220821 */  addu      $at, $at, $v0
 /* 8DE38 800F4988 8C22C8E0 */  lw        $v0, %lo(D_8010C8E0)($at)
 /* 8DE3C 800F498C 00400008 */  jr        $v0
-/* 8DE40 800F4990 00000000 */   nop      
+/* 8DE40 800F4990 00000000 */   nop
 /* 8DE44 800F4994 3C04001D */  lui       $a0, 0x1d
 /* 8DE48 800F4998 34840061 */  ori       $a0, $a0, 0x61
 /* 8DE4C 800F499C 0C04991D */  jal       get_string_width

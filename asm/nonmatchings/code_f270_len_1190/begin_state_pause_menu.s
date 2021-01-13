@@ -9,7 +9,7 @@ glabel begin_state_pause_menu
 /* FD50 80034950 3C01800A */  lui       $at, %hi(D_800A0922)
 /* FD54 80034954 A4200922 */  sh        $zero, %lo(D_800A0922)($at)
 /* FD58 80034958 0C03805E */  jal       disable_player_input
-/* FD5C 8003495C 00000000 */   nop      
+/* FD5C 8003495C 00000000 */   nop
 /* FD60 80034960 0C009C22 */  jal       func_80027088
 /* FD64 80034964 24040003 */   addiu    $a0, $zero, 3
 /* FD68 80034968 0C051FB1 */  jal       func_80147EC4

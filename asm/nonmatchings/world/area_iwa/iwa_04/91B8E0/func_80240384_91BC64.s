@@ -17,7 +17,7 @@ glabel func_80240384_91BC64
 /* 91BC94 802403B4 A602008E */  sh        $v0, 0x8e($s0)
 /* 91BC98 802403B8 00021400 */  sll       $v0, $v0, 0x10
 /* 91BC9C 802403BC 1C400012 */  bgtz      $v0, .L80240408
-/* 91BCA0 802403C0 00000000 */   nop      
+/* 91BCA0 802403C0 00000000 */   nop
 /* 91BCA4 802403C4 3C02800F */  lui       $v0, %hi(gPlayerStatusPtr)
 /* 91BCA8 802403C8 8C427B30 */  lw        $v0, %lo(gPlayerStatusPtr)($v0)
 /* 91BCAC 802403CC C60C0038 */  lwc1      $f12, 0x38($s0)

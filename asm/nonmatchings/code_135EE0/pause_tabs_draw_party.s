@@ -23,10 +23,10 @@ glabel pause_tabs_draw_party
 /* 138298 80244F58 44811800 */  mtc1      $at, $f3
 /* 13829C 80244F5C 44801000 */  mtc1      $zero, $f2
 /* 1382A0 80244F60 44910000 */  mtc1      $s1, $f0
-/* 1382A4 80244F64 00000000 */  nop       
+/* 1382A4 80244F64 00000000 */  nop
 /* 1382A8 80244F68 46800021 */  cvt.d.w   $f0, $f0
 /* 1382AC 80244F6C 46220002 */  mul.d     $f0, $f0, $f2
-/* 1382B0 80244F70 00000000 */  nop       
+/* 1382B0 80244F70 00000000 */  nop
 /* 1382B4 80244F74 3C018027 */  lui       $at, %hi(D_8026FF98)
 /* 1382B8 80244F78 D422FF98 */  ldc1      $f2, %lo(D_8026FF98)($at)
 /* 1382BC 80244F7C 46201081 */  sub.d     $f2, $f2, $f0
@@ -34,7 +34,7 @@ glabel pause_tabs_draw_party
 /* 1382C4 80244F84 4620110D */  trunc.w.d $f4, $f2
 /* 1382C8 80244F88 44052000 */  mfc1      $a1, $f4
 /* 1382CC 80244F8C 080913EC */  j         .L80244FB0
-/* 1382D0 80244F90 00000000 */   nop      
+/* 1382D0 80244F90 00000000 */   nop
 .L80244F94:
 /* 1382D4 80244F94 3C108027 */  lui       $s0, %hi(gPauseMenuTabIconIDs)
 /* 1382D8 80244F98 26100130 */  addiu     $s0, $s0, %lo(gPauseMenuTabIconIDs)
@@ -45,7 +45,7 @@ glabel pause_tabs_draw_party
 /* 1382EC 80244FAC 240500FF */  addiu     $a1, $zero, 0xff
 .L80244FB0:
 /* 1382F0 80244FB0 0C0513AC */  jal       icon_set_opacity
-/* 1382F4 80244FB4 00000000 */   nop      
+/* 1382F4 80244FB4 00000000 */   nop
 /* 1382F8 80244FB8 26450016 */  addiu     $a1, $s2, 0x16
 /* 1382FC 80244FBC 3C108027 */  lui       $s0, %hi(gPauseMenuTabIconIDs)
 /* 138300 80244FC0 26100130 */  addiu     $s0, $s0, %lo(gPauseMenuTabIconIDs)
@@ -54,11 +54,11 @@ glabel pause_tabs_draw_party
 /* 13830C 80244FCC 26660007 */   addiu    $a2, $s3, 7
 /* 138310 80244FD0 8E04000C */  lw        $a0, 0xc($s0)
 /* 138314 80244FD4 0C0511F8 */  jal       draw_icon_2
-/* 138318 80244FD8 00000000 */   nop      
+/* 138318 80244FD8 00000000 */   nop
 /* 13831C 80244FDC 3C028027 */  lui       $v0, %hi(gPauseMenuCurrentTab)
 /* 138320 80244FE0 804200D4 */  lb        $v0, %lo(gPauseMenuCurrentTab)($v0)
 /* 138324 80244FE4 1440000C */  bnez      $v0, .L80245018
-/* 138328 80244FE8 00000000 */   nop      
+/* 138328 80244FE8 00000000 */   nop
 /* 13832C 80244FEC 82830001 */  lb        $v1, 1($s4)
 /* 138330 80244FF0 3C028025 */  lui       $v0, %hi(D_8024F1D8)
 /* 138334 80244FF4 2442F1D8 */  addiu     $v0, $v0, %lo(D_8024F1D8)

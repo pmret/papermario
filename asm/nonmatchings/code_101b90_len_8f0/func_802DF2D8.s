@@ -22,7 +22,7 @@ glabel func_802DF2D8
 /* 10240C 802DF31C 2484B800 */  addiu     $a0, $a0, %lo(D_802FB800)
 .L802DF320:
 /* 102410 802DF320 0C00A41B */  jal       _heap_malloc
-/* 102414 802DF324 00000000 */   nop      
+/* 102414 802DF324 00000000 */   nop
 /* 102418 802DF328 0040302D */  daddu     $a2, $v0, $zero
 /* 10241C 802DF32C 00C0282D */  daddu     $a1, $a2, $zero
 /* 102420 802DF330 0220102D */  daddu     $v0, $s1, $zero
@@ -51,4 +51,4 @@ glabel func_802DF2D8
 /* 102470 802DF380 00C0102D */  daddu     $v0, $a2, $zero
 /* 102474 802DF384 03E00008 */  jr        $ra
 /* 102478 802DF388 27BD0020 */   addiu    $sp, $sp, 0x20
-/* 10247C 802DF38C 00000000 */  nop       
+/* 10247C 802DF38C 00000000 */  nop

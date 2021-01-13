@@ -175,5 +175,5 @@ glabel func_E002852C
 /* 33D5BC E00287CC D7B40100 */  ldc1      $f20, 0x100($sp)
 /* 33D5C0 E00287D0 03E00008 */  jr        $ra
 /* 33D5C4 E00287D4 27BD0110 */   addiu    $sp, $sp, 0x110
-/* 33D5C8 E00287D8 00000000 */  nop       
-/* 33D5CC E00287DC 00000000 */  nop       
+/* 33D5C8 E00287D8 00000000 */  nop
+/* 33D5CC E00287DC 00000000 */  nop

@@ -16,4 +16,4 @@ glabel func_802423C8_DB4688
 /* DB46B0 802423F0 AC20592C */  sw        $zero, %lo(D_8024592C)($at)
 /* DB46B4 802423F4 03E00008 */  jr        $ra
 /* DB46B8 802423F8 24020002 */   addiu    $v0, $zero, 2
-/* DB46BC 802423FC 00000000 */  nop       
+/* DB46BC 802423FC 00000000 */  nop

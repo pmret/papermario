@@ -41,14 +41,14 @@ glabel func_80240040_EDEA00
 /* EDEA8C 802400CC 10600009 */  beqz      $v1, .L802400F4
 /* EDEA90 802400D0 0000102D */   daddu    $v0, $zero, $zero
 /* EDEA94 802400D4 08090069 */  j         .L802401A4
-/* EDEA98 802400D8 00000000 */   nop      
+/* EDEA98 802400D8 00000000 */   nop
 .L802400DC:
 /* EDEA9C 802400DC 10620013 */  beq       $v1, $v0, .L8024012C
 /* EDEAA0 802400E0 24020003 */   addiu    $v0, $zero, 3
 /* EDEAA4 802400E4 1062001E */  beq       $v1, $v0, .L80240160
 /* EDEAA8 802400E8 0000102D */   daddu    $v0, $zero, $zero
 /* EDEAAC 802400EC 08090069 */  j         .L802401A4
-/* EDEAB0 802400F0 00000000 */   nop      
+/* EDEAB0 802400F0 00000000 */   nop
 .L802400F4:
 /* EDEAB4 802400F4 0C03CB57 */  jal       func_800F2D5C
 /* EDEAB8 802400F8 0000202D */   daddu    $a0, $zero, $zero
@@ -75,7 +75,7 @@ glabel func_80240040_EDEA00
 /* EDEB04 80240144 A0510014 */   sb       $s1, 0x14($v0)
 /* EDEB08 80240148 82640012 */  lb        $a0, 0x12($s3)
 /* EDEB0C 8024014C 0C03CBA6 */  jal       func_800F2E98
-/* EDEB10 80240150 00000000 */   nop      
+/* EDEB10 80240150 00000000 */   nop
 /* EDEB14 80240154 24020003 */  addiu     $v0, $zero, 3
 /* EDEB18 80240158 08090068 */  j         .L802401A0
 /* EDEB1C 8024015C AE420070 */   sw       $v0, 0x70($s2)

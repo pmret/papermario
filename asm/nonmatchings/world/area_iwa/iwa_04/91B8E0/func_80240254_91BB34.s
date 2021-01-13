@@ -25,7 +25,7 @@ glabel func_80240254_91BB34
 /* 91BB84 802402A4 D4222BA0 */  ldc1      $f2, %lo(pause_set_cursor_opacity)($at)
 /* 91BB88 802402A8 46000021 */  cvt.d.s   $f0, $f0
 /* 91BB8C 802402AC 46220002 */  mul.d     $f0, $f0, $f2
-/* 91BB90 802402B0 00000000 */  nop       
+/* 91BB90 802402B0 00000000 */  nop
 /* 91BB94 802402B4 0280202D */  daddu     $a0, $s4, $zero
 /* 91BB98 802402B8 AFA00010 */  sw        $zero, 0x10($sp)
 /* 91BB9C 802402BC 8E470010 */  lw        $a3, 0x10($s2)
@@ -47,7 +47,7 @@ glabel func_80240254_91BB34
 /* 91BBDC 802402FC 3C01C1A0 */  lui       $at, 0xc1a0
 /* 91BBE0 80240300 44812000 */  mtc1      $at, $f4
 /* 91BBE4 80240304 44823000 */  mtc1      $v0, $f6
-/* 91BBE8 80240308 00000000 */  nop       
+/* 91BBE8 80240308 00000000 */  nop
 /* 91BBEC 8024030C 468031A0 */  cvt.s.w   $f6, $f6
 /* 91BBF0 80240310 44073000 */  mfc1      $a3, $f6
 /* 91BBF4 80240314 2402000F */  addiu     $v0, $zero, 0xf

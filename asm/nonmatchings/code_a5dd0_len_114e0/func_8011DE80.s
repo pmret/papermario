@@ -29,10 +29,10 @@ glabel func_8011DE80
 /* B45DC 8011DEDC 28A20060 */  slti      $v0, $a1, 0x60
 .L8011DEE0:
 /* B45E0 8011DEE0 14400003 */  bnez      $v0, .L8011DEF0
-/* B45E4 8011DEE4 00000000 */   nop      
+/* B45E4 8011DEE4 00000000 */   nop
 .L8011DEE8:
 /* B45E8 8011DEE8 080477BA */  j         .L8011DEE8
-/* B45EC 8011DEEC 00000000 */   nop      
+/* B45EC 8011DEEC 00000000 */   nop
 .L8011DEF0:
 /* B45F0 8011DEF0 8FA40038 */  lw        $a0, 0x38($sp)
 /* B45F4 8011DEF4 02442021 */  addu      $a0, $s2, $a0
@@ -43,7 +43,7 @@ glabel func_8011DE80
 /* B4608 8011DF08 AE270004 */   sw       $a3, 4($s1)
 .L8011DF0C:
 /* B460C 8011DF0C 080477C3 */  j         .L8011DF0C
-/* B4610 8011DF10 00000000 */   nop      
+/* B4610 8011DF10 00000000 */   nop
 .L8011DF14:
 /* B4614 8011DF14 24020003 */  addiu     $v0, $zero, 3
 /* B4618 8011DF18 AE220000 */  sw        $v0, ($s1)

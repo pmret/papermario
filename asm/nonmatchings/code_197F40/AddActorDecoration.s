@@ -31,7 +31,7 @@ glabel AddActorDecoration
 /* 19D7D0 8026EEF0 0040802D */  daddu     $s0, $v0, $zero
 /* 19D7D4 8026EEF4 2402FF81 */  addiu     $v0, $zero, -0x7f
 /* 19D7D8 8026EEF8 16220002 */  bne       $s1, $v0, .L8026EF04
-/* 19D7DC 8026EEFC 00000000 */   nop      
+/* 19D7DC 8026EEFC 00000000 */   nop
 /* 19D7E0 8026EF00 8E510148 */  lw        $s1, 0x148($s2)
 .L8026EF04:
 /* 19D7E4 8026EF04 0C09A75B */  jal       get_actor

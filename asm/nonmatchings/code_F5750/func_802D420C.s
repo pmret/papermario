@@ -23,7 +23,7 @@ glabel func_802D420C
 /* F8BFC 802D424C 50400012 */  beql      $v0, $zero, .L802D4298
 /* F8C00 802D4250 0000102D */   daddu    $v0, $zero, $zero
 /* F8C04 802D4254 0C048338 */  jal       load_virtual_model
-/* F8C08 802D4258 00000000 */   nop      
+/* F8C08 802D4258 00000000 */   nop
 /* F8C0C 802D425C 3C013F80 */  lui       $at, 0x3f80
 /* F8C10 802D4260 44810000 */  mtc1      $at, $f0
 /* F8C14 802D4264 AE020000 */  sw        $v0, ($s0)

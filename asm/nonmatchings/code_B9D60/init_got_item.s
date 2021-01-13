@@ -32,7 +32,7 @@ glabel init_got_item
 /* C8264 80131B64 2404005C */   addiu    $a0, $zero, 0x5c
 .L80131B68:
 /* C8268 80131B68 0804C6DA */  j         .L80131B68
-/* C826C 80131B6C 00000000 */   nop      
+/* C826C 80131B6C 00000000 */   nop
 .L80131B70:
 /* C8270 80131B70 0C00AB39 */  jal       heap_malloc
 /* C8274 80131B74 0060A82D */   daddu    $s5, $v1, $zero
@@ -50,7 +50,7 @@ glabel init_got_item
 /* C82A4 80131BA4 ACA30000 */   sw       $v1, ($a1)
 .L80131BA8:
 /* C82A8 80131BA8 0804C6EA */  j         .L80131BA8
-/* C82AC 80131BAC 00000000 */   nop      
+/* C82AC 80131BAC 00000000 */   nop
 .L80131BB0:
 /* C82B0 80131BB0 3210FFFF */  andi      $s0, $s0, 0xffff
 /* C82B4 80131BB4 3C030200 */  lui       $v1, 0x200
@@ -162,7 +162,7 @@ glabel init_got_item
 /* C8450 80131D50 44810000 */  mtc1      $at, $f0
 /* C8454 80131D54 C444011C */  lwc1      $f4, 0x11c($v0)
 /* C8458 80131D58 46001082 */  mul.s     $f2, $f2, $f0
-/* C845C 80131D5C 00000000 */  nop       
+/* C845C 80131D5C 00000000 */  nop
 /* C8460 80131D60 AE00002C */  sw        $zero, 0x2c($s0)
 /* C8464 80131D64 E6040028 */  swc1      $f4, 0x28($s0)
 /* C8468 80131D68 C4400124 */  lwc1      $f0, 0x124($v0)

@@ -21,7 +21,7 @@ glabel render_frame
 /* 8B7C 8002D77C 3C01800A */  lui       $at, %hi(D_8009A634)
 /* 8B80 8002D780 A420A634 */  sh        $zero, %lo(D_8009A634)($at)
 /* 8B84 8002D784 0C0459A6 */  jal       func_80116698
-/* 8B88 8002D788 00000000 */   nop      
+/* 8B88 8002D788 00000000 */   nop
 .L8002D78C:
 /* 8B8C 8002D78C 8FAB0070 */  lw        $t3, 0x70($sp)
 /* 8B90 8002D790 11600003 */  beqz      $t3, .L8002D7A0
@@ -60,7 +60,7 @@ glabel render_frame
 /* 8C0C 8002D80C 104001A0 */  beqz      $v0, .L8002DE90
 /* 8C10 8002D810 30420082 */   andi     $v0, $v0, 0x82
 /* 8C14 8002D814 1440019E */  bnez      $v0, .L8002DE90
-/* 8C18 8002D818 00000000 */   nop      
+/* 8C18 8002D818 00000000 */   nop
 /* 8C1C 8002D81C 8EC201FC */  lw        $v0, 0x1fc($s6)
 /* 8C20 8002D820 97AB0022 */  lhu       $t3, 0x22($sp)
 /* 8C24 8002D824 3C01800A */  lui       $at, %hi(D_8009A634)
@@ -207,20 +207,20 @@ glabel render_frame
 /* 8E34 8002DA34 AEE20000 */  sw        $v0, ($s7)
 /* 8E38 8002DA38 26A20068 */  addiu     $v0, $s5, 0x68
 /* 8E3C 8002DA3C 44981000 */  mtc1      $t8, $f2
-/* 8E40 8002DA40 00000000 */  nop       
+/* 8E40 8002DA40 00000000 */  nop
 /* 8E44 8002DA44 468010A0 */  cvt.s.w   $f2, $f2
 /* 8E48 8002DA48 46161082 */  mul.s     $f2, $f2, $f22
-/* 8E4C 8002DA4C 00000000 */  nop       
+/* 8E4C 8002DA4C 00000000 */  nop
 /* 8E50 8002DA50 AEAA0058 */  sw        $t2, 0x58($s5)
 /* 8E54 8002DA54 AEA9005C */  sw        $t1, 0x5c($s5)
 /* 8E58 8002DA58 AEE20000 */  sw        $v0, ($s7)
 /* 8E5C 8002DA5C 26A20070 */  addiu     $v0, $s5, 0x70
 /* 8E60 8002DA60 44990000 */  mtc1      $t9, $f0
-/* 8E64 8002DA64 00000000 */  nop       
+/* 8E64 8002DA64 00000000 */  nop
 /* 8E68 8002DA68 46800020 */  cvt.s.w   $f0, $f0
 /* 8E6C 8002DA6C 8FAB0028 */  lw        $t3, 0x28($sp)
 /* 8E70 8002DA70 46160002 */  mul.s     $f0, $f0, $f22
-/* 8E74 8002DA74 00000000 */  nop       
+/* 8E74 8002DA74 00000000 */  nop
 /* 8E78 8002DA78 AEAB0060 */  sw        $t3, 0x60($s5)
 /* 8E7C 8002DA7C AEA00064 */  sw        $zero, 0x64($s5)
 /* 8E80 8002DA80 AEE20000 */  sw        $v0, ($s7)
@@ -233,33 +233,33 @@ glabel render_frame
 /* 8E9C 8002DA9C AEAE0074 */  sw        $t6, 0x74($s5)
 /* 8EA0 8002DAA0 4600110D */  trunc.w.s $f4, $f2
 /* 8EA4 8002DAA4 44042000 */  mfc1      $a0, $f4
-/* 8EA8 8002DAA8 00000000 */  nop       
+/* 8EA8 8002DAA8 00000000 */  nop
 /* 8EAC 8002DAAC 30840FFF */  andi      $a0, $a0, 0xfff
 /* 8EB0 8002DAB0 00042300 */  sll       $a0, $a0, 0xc
 /* 8EB4 8002DAB4 4600010D */  trunc.w.s $f4, $f0
 /* 8EB8 8002DAB8 44032000 */  mfc1      $v1, $f4
 /* 8EBC 8002DABC 449E1000 */  mtc1      $fp, $f2
-/* 8EC0 8002DAC0 00000000 */  nop       
+/* 8EC0 8002DAC0 00000000 */  nop
 /* 8EC4 8002DAC4 468010A0 */  cvt.s.w   $f2, $f2
 /* 8EC8 8002DAC8 46161082 */  mul.s     $f2, $f2, $f22
-/* 8ECC 8002DACC 00000000 */  nop       
+/* 8ECC 8002DACC 00000000 */  nop
 /* 8ED0 8002DAD0 30630FFF */  andi      $v1, $v1, 0xfff
 /* 8ED4 8002DAD4 00621825 */  or        $v1, $v1, $v0
 /* 8ED8 8002DAD8 00832025 */  or        $a0, $a0, $v1
 /* 8EDC 8002DADC 44940000 */  mtc1      $s4, $f0
-/* 8EE0 8002DAE0 00000000 */  nop       
+/* 8EE0 8002DAE0 00000000 */  nop
 /* 8EE4 8002DAE4 46800020 */  cvt.s.w   $f0, $f0
 /* 8EE8 8002DAE8 46160002 */  mul.s     $f0, $f0, $f22
-/* 8EEC 8002DAEC 00000000 */  nop       
+/* 8EEC 8002DAEC 00000000 */  nop
 /* 8EF0 8002DAF0 AEA40020 */  sw        $a0, 0x20($s5)
 /* 8EF4 8002DAF4 4600110D */  trunc.w.s $f4, $f2
 /* 8EF8 8002DAF8 44032000 */  mfc1      $v1, $f4
-/* 8EFC 8002DAFC 00000000 */  nop       
+/* 8EFC 8002DAFC 00000000 */  nop
 /* 8F00 8002DB00 30630FFF */  andi      $v1, $v1, 0xfff
 /* 8F04 8002DB04 00031B00 */  sll       $v1, $v1, 0xc
 /* 8F08 8002DB08 4600010D */  trunc.w.s $f4, $f0
 /* 8F0C 8002DB0C 44022000 */  mfc1      $v0, $f4
-/* 8F10 8002DB10 00000000 */  nop       
+/* 8F10 8002DB10 00000000 */  nop
 /* 8F14 8002DB14 30420FFF */  andi      $v0, $v0, 0xfff
 /* 8F18 8002DB18 00621825 */  or        $v1, $v1, $v0
 /* 8F1C 8002DB1C 26A20080 */  addiu     $v0, $s5, 0x80
@@ -387,31 +387,31 @@ glabel render_frame
 /* 90FC 8002DCFC 10620019 */  beq       $v1, $v0, .L8002DD64
 /* 9100 8002DD00 30820200 */   andi     $v0, $a0, 0x200
 /* 9104 8002DD04 14400003 */  bnez      $v0, .L8002DD14
-/* 9108 8002DD08 00000000 */   nop      
+/* 9108 8002DD08 00000000 */   nop
 /* 910C 8002DD0C 0C043FAD */  jal       render_entities
-/* 9110 8002DD10 00000000 */   nop      
+/* 9110 8002DD10 00000000 */   nop
 .L8002DD14:
 /* 9114 8002DD14 96C20000 */  lhu       $v0, ($s6)
 /* 9118 8002DD18 30420400 */  andi      $v0, $v0, 0x400
 /* 911C 8002DD1C 14400003 */  bnez      $v0, .L8002DD2C
-/* 9120 8002DD20 00000000 */   nop      
+/* 9120 8002DD20 00000000 */   nop
 /* 9124 8002DD24 0C045AE4 */  jal       render_models
-/* 9128 8002DD28 00000000 */   nop      
+/* 9128 8002DD28 00000000 */   nop
 .L8002DD2C:
 /* 912C 8002DD2C 0C03844E */  jal       render_player
-/* 9130 8002DD30 00000000 */   nop      
+/* 9130 8002DD30 00000000 */   nop
 /* 9134 8002DD34 0C00E9FC */  jal       render_npcs
-/* 9138 8002DD38 00000000 */   nop      
+/* 9138 8002DD38 00000000 */   nop
 /* 913C 8002DD3C 0C048D1C */  jal       render_dynamic_entities
-/* 9140 8002DD40 00000000 */   nop      
+/* 9140 8002DD40 00000000 */   nop
 /* 9144 8002DD44 0C0167BD */  jal       render_effects
-/* 9148 8002DD48 00000000 */   nop      
+/* 9148 8002DD48 00000000 */   nop
 /* 914C 8002DD4C 0C04766E */  jal       func_8011D9B8
-/* 9150 8002DD50 00000000 */   nop      
+/* 9150 8002DD50 00000000 */   nop
 /* 9154 8002DD54 0C050DAD */  jal       render_menu_icons
-/* 9158 8002DD58 00000000 */   nop      
+/* 9158 8002DD58 00000000 */   nop
 /* 915C 8002DD5C 0800B788 */  j         .L8002DE20
-/* 9160 8002DD60 00000000 */   nop      
+/* 9160 8002DD60 00000000 */   nop
 .L8002DD64:
 /* 9164 8002DD64 26D000D4 */  addiu     $s0, $s6, 0xd4
 /* 9168 8002DD68 4405A000 */  mfc1      $a1, $f20
@@ -453,14 +453,14 @@ glabel render_frame
 /* 91F8 8002DDF8 0C050DAD */  jal       render_menu_icons
 /* 91FC 8002DDFC AC820004 */   sw       $v0, 4($a0)
 /* 9200 8002DE00 0C04CB95 */  jal       render_item_entities
-/* 9204 8002DE04 00000000 */   nop      
+/* 9204 8002DE04 00000000 */   nop
 /* 9208 8002DE08 0800B788 */  j         .L8002DE20
-/* 920C 8002DE0C 00000000 */   nop      
+/* 920C 8002DE0C 00000000 */   nop
 .L8002DE10:
 /* 9210 8002DE10 0C048D1C */  jal       render_dynamic_entities
-/* 9214 8002DE14 00000000 */   nop      
+/* 9214 8002DE14 00000000 */   nop
 /* 9218 8002DE18 0C04766E */  jal       func_8011D9B8
-/* 921C 8002DE1C 00000000 */   nop      
+/* 921C 8002DE1C 00000000 */   nop
 .L8002DE20:
 /* 9220 8002DE20 8EC20200 */  lw        $v0, 0x200($s6)
 /* 9224 8002DE24 10400004 */  beqz      $v0, .L8002DE38

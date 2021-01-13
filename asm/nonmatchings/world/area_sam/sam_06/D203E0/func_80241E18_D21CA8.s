@@ -28,7 +28,7 @@ glabel func_80241E18_D21CA8
 /* D21CFC 80241E6C 00220821 */  addu      $at, $at, $v0
 /* D21D00 80241E70 AC20BEA0 */  sw        $zero, %lo(D_8024BEA0)($at)
 /* D21D04 80241E74 080907A9 */  j         .L80241EA4
-/* D21D08 80241E78 00000000 */   nop      
+/* D21D08 80241E78 00000000 */   nop
 .L80241E7C:
 /* D21D0C 80241E7C 3C038025 */  lui       $v1, %hi(D_8024BEA0)
 /* D21D10 80241E80 2463BEA0 */  addiu     $v1, $v1, %lo(D_8024BEA0)

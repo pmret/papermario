@@ -18,7 +18,7 @@ glabel GetDistanceToGoal
 /* 19D310 8026EA30 8E240148 */  lw        $a0, 0x148($s1)
 .L8026EA34:
 /* 19D314 8026EA34 0C09A75B */  jal       get_actor
-/* 19D318 8026EA38 00000000 */   nop      
+/* 19D318 8026EA38 00000000 */   nop
 /* 19D31C 8026EA3C 8C460018 */  lw        $a2, 0x18($v0)
 /* 19D320 8026EA40 C44C0144 */  lwc1      $f12, 0x144($v0)
 /* 19D324 8026EA44 C44E014C */  lwc1      $f14, 0x14c($v0)

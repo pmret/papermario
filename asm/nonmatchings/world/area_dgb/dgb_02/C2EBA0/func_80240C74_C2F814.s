@@ -16,7 +16,7 @@ glabel func_80240C74_C2F814
 /* C2F840 80240CA0 0040802D */   daddu    $s0, $v0, $zero
 /* C2F844 80240CA4 C60C000C */  lwc1      $f12, 0xc($s0)
 /* C2F848 80240CA8 44820000 */  mtc1      $v0, $f0
-/* C2F84C 80240CAC 00000000 */  nop       
+/* C2F84C 80240CAC 00000000 */  nop
 /* C2F850 80240CB0 46800020 */  cvt.s.w   $f0, $f0
 /* C2F854 80240CB4 46006300 */  add.s     $f12, $f12, $f0
 /* C2F858 80240CB8 3C0142B4 */  lui       $at, 0x42b4

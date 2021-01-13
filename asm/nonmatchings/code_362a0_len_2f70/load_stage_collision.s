@@ -12,10 +12,10 @@ glabel load_stage_collision
 /* 365BC 8005B1BC 3C01800B */  lui       $at, %hi(D_800B42EC)
 /* 365C0 8005B1C0 A42042EC */  sh        $zero, %lo(D_800B42EC)($at)
 /* 365C4 8005B1C4 08016C89 */  j         .L8005B224
-/* 365C8 8005B1C8 00000000 */   nop      
+/* 365C8 8005B1C8 00000000 */   nop
 .L8005B1CC:
 /* 365CC 8005B1CC 0C016AFA */  jal       get_current_map_header
-/* 365D0 8005B1D0 00000000 */   nop      
+/* 365D0 8005B1D0 00000000 */   nop
 /* 365D4 8005B1D4 0200202D */  daddu     $a0, $s0, $zero
 /* 365D8 8005B1D8 27A50010 */  addiu     $a1, $sp, 0x10
 /* 365DC 8005B1DC 0C016B3A */  jal       load_asset_by_name

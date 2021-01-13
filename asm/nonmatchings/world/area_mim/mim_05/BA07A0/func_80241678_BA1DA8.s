@@ -16,7 +16,7 @@ glabel func_80241678_BA1DA8
 /* BA1DD4 802416A4 A462008E */  sh        $v0, 0x8e($v1)
 /* BA1DD8 802416A8 00021400 */  sll       $v0, $v0, 0x10
 /* BA1DDC 802416AC 14400005 */  bnez      $v0, .L802416C4
-/* BA1DE0 802416B0 00000000 */   nop      
+/* BA1DE0 802416B0 00000000 */   nop
 /* BA1DE4 802416B4 960200AA */  lhu       $v0, 0xaa($s0)
 /* BA1DE8 802416B8 A462008E */  sh        $v0, 0x8e($v1)
 /* BA1DEC 802416BC 2402000E */  addiu     $v0, $zero, 0xe

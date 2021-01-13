@@ -25,7 +25,7 @@ glabel func_80241E40_DAF240
 /* DAF290 80241E90 0C00A8BB */  jal       sin_deg
 /* DAF294 80241E94 46146300 */   add.s    $f12, $f12, $f20
 /* DAF298 80241E98 46160002 */  mul.s     $f0, $f0, $f22
-/* DAF29C 80241E9C 00000000 */  nop       
+/* DAF29C 80241E9C 00000000 */  nop
 /* DAF2A0 80241EA0 C6020038 */  lwc1      $f2, 0x38($s0)
 /* DAF2A4 80241EA4 46001080 */  add.s     $f2, $f2, $f0
 /* DAF2A8 80241EA8 4600110D */  trunc.w.s $f4, $f2
@@ -33,7 +33,7 @@ glabel func_80241E40_DAF240
 /* DAF2B0 80241EB0 C600003C */  lwc1      $f0, 0x3c($s0)
 /* DAF2B4 80241EB4 3C014100 */  lui       $at, 0x4100
 /* DAF2B8 80241EB8 44811000 */  mtc1      $at, $f2
-/* DAF2BC 80241EBC 00000000 */  nop       
+/* DAF2BC 80241EBC 00000000 */  nop
 /* DAF2C0 80241EC0 46020000 */  add.s     $f0, $f0, $f2
 /* DAF2C4 80241EC4 4600010D */  trunc.w.s $f4, $f0
 /* DAF2C8 80241EC8 E6240088 */  swc1      $f4, 0x88($s1)
@@ -43,7 +43,7 @@ glabel func_80241E40_DAF240
 /* DAF2D8 80241ED8 0C00A8D4 */  jal       cos_deg
 /* DAF2DC 80241EDC 46146300 */   add.s    $f12, $f12, $f20
 /* DAF2E0 80241EE0 46160002 */  mul.s     $f0, $f0, $f22
-/* DAF2E4 80241EE4 00000000 */  nop       
+/* DAF2E4 80241EE4 00000000 */  nop
 /* DAF2E8 80241EE8 C6020040 */  lwc1      $f2, 0x40($s0)
 /* DAF2EC 80241EEC 46001081 */  sub.s     $f2, $f2, $f0
 /* DAF2F0 80241EF0 4600110D */  trunc.w.s $f4, $f2
@@ -57,4 +57,4 @@ glabel func_80241E40_DAF240
 /* DAF310 80241F10 24020002 */  addiu     $v0, $zero, 2
 /* DAF314 80241F14 03E00008 */  jr        $ra
 /* DAF318 80241F18 27BD0030 */   addiu    $sp, $sp, 0x30
-/* DAF31C 80241F1C 00000000 */  nop       
+/* DAF31C 80241F1C 00000000 */  nop

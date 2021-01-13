@@ -25,7 +25,7 @@ glabel func_802A9258_422258
 /* 4222A8 802A92A8 A0600084 */   sb       $zero, 0x84($v1)
 .L802A92AC:
 /* 4222AC 802A92AC 0C09A216 */  jal       func_80268858
-/* 4222B0 802A92B0 00000000 */   nop      
+/* 4222B0 802A92B0 00000000 */   nop
 /* 4222B4 802A92B4 8E050000 */  lw        $a1, ($s0)
 /* 4222B8 802A92B8 26100004 */  addiu     $s0, $s0, 4
 /* 4222BC 802A92BC 0C0B1EAF */  jal       get_variable

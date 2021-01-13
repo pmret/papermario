@@ -9,7 +9,7 @@ glabel func_80111E9C
 /* A85AC 80111EAC 8C8412EC */  lw        $a0, %lo(gLastCreatedEntityIndex)($a0)
 /* A85B0 80111EB0 AFBF0014 */  sw        $ra, 0x14($sp)
 /* A85B4 80111EB4 0C04417A */  jal       get_entity_by_index
-/* A85B8 80111EB8 00000000 */   nop      
+/* A85B8 80111EB8 00000000 */   nop
 /* A85BC 80111EBC 8E03000C */  lw        $v1, 0xc($s0)
 /* A85C0 80111EC0 0200202D */  daddu     $a0, $s0, $zero
 /* A85C4 80111EC4 8C650000 */  lw        $a1, ($v1)

@@ -17,7 +17,7 @@ glabel func_802A1280_72A9D0
 /* 72AA00 802A12B0 0000282D */   daddu    $a1, $zero, $zero
 /* 72AA04 802A12B4 86040428 */  lh        $a0, 0x428($s0)
 /* 72AA08 802A12B8 0C09A75B */  jal       get_actor
-/* 72AA0C 802A12BC 00000000 */   nop      
+/* 72AA0C 802A12BC 00000000 */   nop
 /* 72AA10 802A12C0 0040202D */  daddu     $a0, $v0, $zero
 /* 72AA14 802A12C4 0C09DC58 */  jal       dispatch_event_actor
 /* 72AA18 802A12C8 24050039 */   addiu    $a1, $zero, 0x39

@@ -14,7 +14,7 @@ glabel LandJumpPart
 .L8027AB80:
 /* 1A9460 8027AB80 8E420070 */  lw        $v0, 0x70($s2)
 /* 1A9464 8027AB84 14400020 */  bnez      $v0, .L8027AC08
-/* 1A9468 8027AB88 00000000 */   nop      
+/* 1A9468 8027AB88 00000000 */   nop
 /* 1A946C 8027AB8C 8E250000 */  lw        $a1, ($s1)
 /* 1A9470 8027AB90 26310004 */  addiu     $s1, $s1, 4
 /* 1A9474 8027AB94 0C0B1EAF */  jal       get_variable
@@ -26,7 +26,7 @@ glabel LandJumpPart
 /* 1A948C 8027ABAC 0040882D */  daddu     $s1, $v0, $zero
 /* 1A9490 8027ABB0 2402FF81 */  addiu     $v0, $zero, -0x7f
 /* 1A9494 8027ABB4 16020002 */  bne       $s0, $v0, .L8027ABC0
-/* 1A9498 8027ABB8 00000000 */   nop      
+/* 1A9498 8027ABB8 00000000 */   nop
 /* 1A949C 8027ABBC 8E500148 */  lw        $s0, 0x148($s2)
 .L8027ABC0:
 /* 1A94A0 8027ABC0 0C09A75B */  jal       get_actor
@@ -69,7 +69,7 @@ glabel LandJumpPart
 /* 1A9530 8027AC50 C6220030 */  lwc1      $f2, 0x30($s1)
 /* 1A9534 8027AC54 C6000008 */  lwc1      $f0, 8($s0)
 /* 1A9538 8027AC58 4604103C */  c.lt.s    $f2, $f4
-/* 1A953C 8027AC5C 00000000 */  nop       
+/* 1A953C 8027AC5C 00000000 */  nop
 /* 1A9540 8027AC60 45010003 */  bc1t      .L8027AC70
 /* 1A9544 8027AC64 E6200034 */   swc1     $f0, 0x34($s1)
 /* 1A9548 8027AC68 0809EB25 */  j         .L8027AC94

@@ -18,10 +18,10 @@ glabel func_80117D00
 /* AE434 80117D34 0080802D */   daddu    $s0, $a0, $zero
 /* AE438 80117D38 8E620010 */  lw        $v0, 0x10($s3)
 /* AE43C 80117D3C 10400043 */  beqz      $v0, .L80117E4C
-/* AE440 80117D40 00000000 */   nop      
+/* AE440 80117D40 00000000 */   nop
 /* AE444 80117D44 8C52000C */  lw        $s2, 0xc($v0)
 /* AE448 80117D48 12400040 */  beqz      $s2, .L80117E4C
-/* AE44C 80117D4C 00000000 */   nop      
+/* AE44C 80117D4C 00000000 */   nop
 /* AE450 80117D50 1A40003E */  blez      $s2, .L80117E4C
 /* AE454 80117D54 0000882D */   daddu    $s1, $zero, $zero
 /* AE458 80117D58 249500B0 */  addiu     $s5, $a0, 0xb0
@@ -86,7 +86,7 @@ glabel func_80117D00
 /* AE534 80117E34 1440FFCD */  bnez      $v0, .L80117D6C
 /* AE538 80117E38 27A30010 */   addiu    $v1, $sp, 0x10
 /* AE53C 80117E3C 08045F93 */  j         .L80117E4C
-/* AE540 80117E40 00000000 */   nop      
+/* AE540 80117E40 00000000 */   nop
 .L80117E44:
 /* AE544 80117E44 0C044C24 */  jal       appendGfx_model
 /* AE548 80117E48 0200202D */   daddu    $a0, $s0, $zero

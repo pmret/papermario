@@ -21,4 +21,4 @@ glabel func_80240518_DEF3B8
 .L80240554:
 /* DEF3F4 80240554 03E00008 */  jr        $ra
 /* DEF3F8 80240558 24020002 */   addiu    $v0, $zero, 2
-/* DEF3FC 8024055C 00000000 */  nop       
+/* DEF3FC 8024055C 00000000 */  nop

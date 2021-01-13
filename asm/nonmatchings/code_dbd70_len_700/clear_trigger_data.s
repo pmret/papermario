@@ -8,11 +8,11 @@ glabel clear_trigger_data
 /* DBD8C 8014568C 3C048016 */  lui       $a0, %hi(gCollisionStatus)
 /* DBD90 80145690 2484A550 */  addiu     $a0, $a0, %lo(gCollisionStatus)
 /* DBD94 80145694 14400005 */  bnez      $v0, .L801456AC
-/* DBD98 80145698 00000000 */   nop      
+/* DBD98 80145698 00000000 */   nop
 /* DBD9C 8014569C 3C028016 */  lui       $v0, %hi(gTriggerList1)
 /* DBDA0 801456A0 24429190 */  addiu     $v0, $v0, %lo(gTriggerList1)
 /* DBDA4 801456A4 080515AD */  j         .L801456B4
-/* DBDA8 801456A8 00000000 */   nop      
+/* DBDA8 801456A8 00000000 */   nop
 .L801456AC:
 /* DBDAC 801456AC 3C028016 */  lui       $v0, %hi(gTriggerList2)
 /* DBDB0 801456B0 24429290 */  addiu     $v0, $v0, %lo(gTriggerList2)

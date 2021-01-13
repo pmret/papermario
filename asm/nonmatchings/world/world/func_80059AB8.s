@@ -62,7 +62,7 @@ glabel func_80059AB8
 /* 34F98 80059B98 AE420000 */  sw        $v0, ($s2)
 .L80059B9C:
 /* 34F9C 80059B9C 0C0187A4 */  jal       osVirtualToPhysical
-/* 34FA0 80059BA0 00000000 */   nop      
+/* 34FA0 80059BA0 00000000 */   nop
 /* 34FA4 80059BA4 AE420004 */  sw        $v0, 4($s2)
 /* 34FA8 80059BA8 0280102D */  daddu     $v0, $s4, $zero
 /* 34FAC 80059BAC 8FBF002C */  lw        $ra, 0x2c($sp)

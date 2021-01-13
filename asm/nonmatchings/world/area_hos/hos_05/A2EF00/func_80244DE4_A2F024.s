@@ -71,20 +71,20 @@ glabel func_80244DE4_A2F024
 /* A2F12C 80244EEC 12620008 */  beq       $s3, $v0, .L80244F10
 /* A2F130 80244EF0 32C400FF */   andi     $a0, $s6, 0xff
 /* A2F134 80244EF4 080913E1 */  j         .L80244F84
-/* A2F138 80244EF8 00000000 */   nop      
+/* A2F138 80244EF8 00000000 */   nop
 .L80244EFC:
 /* A2F13C 80244EFC 24020003 */  addiu     $v0, $zero, 3
 /* A2F140 80244F00 12620018 */  beq       $s3, $v0, .L80244F64
 /* A2F144 80244F04 32C400FF */   andi     $a0, $s6, 0xff
 /* A2F148 80244F08 080913E1 */  j         .L80244F84
-/* A2F14C 80244F0C 00000000 */   nop      
+/* A2F14C 80244F0C 00000000 */   nop
 .L80244F10:
 /* A2F150 80244F10 32A500FF */  andi      $a1, $s5, 0xff
 /* A2F154 80244F14 328600FF */  andi      $a2, $s4, 0xff
 /* A2F158 80244F18 0C046F97 */  jal       set_background_color_blend
 /* A2F15C 80244F1C 324700FF */   andi     $a3, $s2, 0xff
 /* A2F160 80244F20 080913E1 */  j         .L80244F84
-/* A2F164 80244F24 00000000 */   nop      
+/* A2F164 80244F24 00000000 */   nop
 .L80244F28:
 /* A2F168 80244F28 32C400FF */  andi      $a0, $s6, 0xff
 /* A2F16C 80244F2C 32A500FF */  andi      $a1, $s5, 0xff
@@ -100,7 +100,7 @@ glabel func_80244DE4_A2F024
 /* A2F194 80244F54 0C046FAD */  jal       func_8011BEB4
 /* A2F198 80244F58 AFA20018 */   sw       $v0, 0x18($sp)
 /* A2F19C 80244F5C 080913E1 */  j         .L80244F84
-/* A2F1A0 80244F60 00000000 */   nop      
+/* A2F1A0 80244F60 00000000 */   nop
 .L80244F64:
 /* A2F1A4 80244F64 32A500FF */  andi      $a1, $s5, 0xff
 /* A2F1A8 80244F68 328600FF */  andi      $a2, $s4, 0xff

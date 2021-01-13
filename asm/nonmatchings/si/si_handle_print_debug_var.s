@@ -37,7 +37,7 @@ glabel si_handle_print_debug_var
 /* EB848 802C6E98 0C01953C */  jal       sprintf
 /* EB84C 802C6E9C 24A59DA8 */   addiu    $a1, $a1, %lo(D_802D9DA8)
 /* EB850 802C6EA0 080B1CE0 */  j         .L802C7380
-/* EB854 802C6EA4 00000000 */   nop      
+/* EB854 802C6EA4 00000000 */   nop
 .L802C6EA8:
 /* EB858 802C6EA8 34423E00 */  ori       $v0, $v0, 0x3e00
 /* EB85C 802C6EAC 0050102A */  slt       $v0, $v0, $s0
@@ -88,7 +88,7 @@ glabel si_handle_print_debug_var
 /* EB908 802C6F58 00E0302D */   daddu    $a2, $a3, $zero
 .L802C6F5C:
 /* EB90C 802C6F5C 1440000A */  bnez      $v0, .L802C6F88
-/* EB910 802C6F60 00000000 */   nop      
+/* EB910 802C6F60 00000000 */   nop
 /* EB914 802C6F64 0C0B1248 */  jal       fixed_var_to_float
 /* EB918 802C6F68 00E0202D */   daddu    $a0, $a3, $zero
 /* EB91C 802C6F6C 46000021 */  cvt.d.s   $f0, $f0
@@ -126,7 +126,7 @@ glabel si_handle_print_debug_var
 /* EB994 802C6FE4 00E0302D */   daddu    $a2, $a3, $zero
 .L802C6FE8:
 /* EB998 802C6FE8 1440000A */  bnez      $v0, .L802C7014
-/* EB99C 802C6FEC 00000000 */   nop      
+/* EB99C 802C6FEC 00000000 */   nop
 /* EB9A0 802C6FF0 0C0B1248 */  jal       fixed_var_to_float
 /* EB9A4 802C6FF4 00E0202D */   daddu    $a0, $a3, $zero
 /* EB9A8 802C6FF8 46000021 */  cvt.d.s   $f0, $f0
@@ -164,7 +164,7 @@ glabel si_handle_print_debug_var
 /* EBA20 802C7070 00E0302D */   daddu    $a2, $a3, $zero
 .L802C7074:
 /* EBA24 802C7074 1440000A */  bnez      $v0, .L802C70A0
-/* EBA28 802C7078 00000000 */   nop      
+/* EBA28 802C7078 00000000 */   nop
 /* EBA2C 802C707C 0C0B1248 */  jal       fixed_var_to_float
 /* EBA30 802C7080 00E0202D */   daddu    $a0, $a3, $zero
 /* EBA34 802C7084 46000021 */  cvt.d.s   $f0, $f0
@@ -215,7 +215,7 @@ glabel si_handle_print_debug_var
 /* EBAD8 802C7128 0C01953C */  jal       sprintf
 /* EBADC 802C712C 0040382D */   daddu    $a3, $v0, $zero
 /* EBAE0 802C7130 080B1CE0 */  j         .L802C7380
-/* EBAE4 802C7134 00000000 */   nop      
+/* EBAE4 802C7134 00000000 */   nop
 .L802C7138:
 /* EBAE8 802C7138 34424C00 */  ori       $v0, $v0, 0x4c00
 /* EBAEC 802C713C 0050102A */  slt       $v0, $v0, $s0
@@ -274,7 +274,7 @@ glabel si_handle_print_debug_var
 /* EBBB0 802C7200 0C01953C */  jal       sprintf
 /* EBBB4 802C7204 00473824 */   and      $a3, $v0, $a3
 /* EBBB8 802C7208 080B1CE0 */  j         .L802C7380
-/* EBBBC 802C720C 00000000 */   nop      
+/* EBBBC 802C720C 00000000 */   nop
 .L802C7210:
 /* EBBC0 802C7210 3442A600 */  ori       $v0, $v0, 0xa600
 /* EBBC4 802C7214 0050102A */  slt       $v0, $v0, $s0
@@ -303,7 +303,7 @@ glabel si_handle_print_debug_var
 /* EBC1C 802C726C 34421100 */  ori       $v0, $v0, 0x1100
 /* EBC20 802C7270 0047102A */  slt       $v0, $v0, $a3
 /* EBC24 802C7274 1440000A */  bnez      $v0, .L802C72A0
-/* EBC28 802C7278 00000000 */   nop      
+/* EBC28 802C7278 00000000 */   nop
 /* EBC2C 802C727C 0C0B1248 */  jal       fixed_var_to_float
 /* EBC30 802C7280 00E0202D */   daddu    $a0, $a3, $zero
 /* EBC34 802C7284 46000021 */  cvt.d.s   $f0, $f0
@@ -345,7 +345,7 @@ glabel si_handle_print_debug_var
 /* EBCB8 802C7308 34421100 */  ori       $v0, $v0, 0x1100
 /* EBCBC 802C730C 0047102A */  slt       $v0, $v0, $a3
 /* EBCC0 802C7310 1440000D */  bnez      $v0, .L802C7348
-/* EBCC4 802C7314 00000000 */   nop      
+/* EBCC4 802C7314 00000000 */   nop
 /* EBCC8 802C7318 0C0B1248 */  jal       fixed_var_to_float
 /* EBCCC 802C731C 00E0202D */   daddu    $a0, $a3, $zero
 /* EBCD0 802C7320 46000021 */  cvt.d.s   $f0, $f0
@@ -358,7 +358,7 @@ glabel si_handle_print_debug_var
 /* EBCE8 802C7338 0C01953C */  jal       sprintf
 /* EBCEC 802C733C 0200302D */   daddu    $a2, $s0, $zero
 /* EBCF0 802C7340 080B1CE0 */  j         .L802C7380
-/* EBCF4 802C7344 00000000 */   nop      
+/* EBCF4 802C7344 00000000 */   nop
 .L802C7348:
 /* EBCF8 802C7348 3C04802E */  lui       $a0, %hi(D_802DACA0)
 /* EBCFC 802C734C 2484ACA0 */  addiu     $a0, $a0, %lo(D_802DACA0)
@@ -368,7 +368,7 @@ glabel si_handle_print_debug_var
 /* EBD08 802C7358 0C01953C */  jal       sprintf
 /* EBD0C 802C735C 0200302D */   daddu    $a2, $s0, $zero
 /* EBD10 802C7360 080B1CE0 */  j         .L802C7380
-/* EBD14 802C7364 00000000 */   nop      
+/* EBD14 802C7364 00000000 */   nop
 .L802C7368:
 /* EBD18 802C7368 3C04802E */  lui       $a0, %hi(D_802DACA0)
 /* EBD1C 802C736C 2484ACA0 */  addiu     $a0, $a0, %lo(D_802DACA0)
@@ -376,7 +376,7 @@ glabel si_handle_print_debug_var
 /* EBD24 802C7374 24A59F10 */  addiu     $a1, $a1, %lo(D_802D9F10)
 .L802C7378:
 /* EBD28 802C7378 0C01953C */  jal       sprintf
-/* EBD2C 802C737C 00000000 */   nop      
+/* EBD2C 802C737C 00000000 */   nop
 .L802C7380:
 /* EBD30 802C7380 8FBF0024 */  lw        $ra, 0x24($sp)
 /* EBD34 802C7384 8FB20020 */  lw        $s2, 0x20($sp)

@@ -13,10 +13,10 @@ glabel func_80219998_448DD8
 /* 448DF8 802199B8 0C046EE2 */  jal       set_world_fog_color
 /* 448DFC 802199BC 240700FF */   addiu    $a3, $zero, 0xff
 /* 448E00 802199C0 0C046ED4 */  jal       enable_world_fog
-/* 448E04 802199C4 00000000 */   nop      
+/* 448E04 802199C4 00000000 */   nop
 /* 448E08 802199C8 8FBF0010 */  lw        $ra, 0x10($sp)
 /* 448E0C 802199CC 24020002 */  addiu     $v0, $zero, 2
 /* 448E10 802199D0 03E00008 */  jr        $ra
 /* 448E14 802199D4 27BD0018 */   addiu    $sp, $sp, 0x18
-/* 448E18 802199D8 00000000 */  nop       
-/* 448E1C 802199DC 00000000 */  nop       
+/* 448E18 802199D8 00000000 */  nop
+/* 448E1C 802199DC 00000000 */  nop

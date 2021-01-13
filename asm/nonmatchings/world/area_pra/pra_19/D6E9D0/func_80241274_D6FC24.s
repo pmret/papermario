@@ -28,7 +28,7 @@ glabel func_80241274_D6FC24
 /* D6FC78 802412C8 00220821 */  addu      $at, $at, $v0
 /* D6FC7C 802412CC AC207BB8 */  sw        $zero, %lo(D_80247BB8)($at)
 /* D6FC80 802412D0 080904C0 */  j         .L80241300
-/* D6FC84 802412D4 00000000 */   nop      
+/* D6FC84 802412D4 00000000 */   nop
 .L802412D8:
 /* D6FC88 802412D8 3C038024 */  lui       $v1, %hi(D_80247BB8)
 /* D6FC8C 802412DC 24637BB8 */  addiu     $v1, $v1, %lo(D_80247BB8)

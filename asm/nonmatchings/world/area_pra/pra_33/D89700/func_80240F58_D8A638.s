@@ -28,9 +28,9 @@ glabel func_80240F58_D8A638
 /* D8A694 80240FB4 4600B386 */   mov.s    $f14, $f22
 /* D8A698 80240FB8 4600008D */  trunc.w.s $f2, $f0
 /* D8A69C 80240FBC 44021000 */  mfc1      $v0, $f2
-/* D8A6A0 80240FC0 00000000 */  nop       
+/* D8A6A0 80240FC0 00000000 */  nop
 /* D8A6A4 80240FC4 44826000 */  mtc1      $v0, $f12
-/* D8A6A8 80240FC8 00000000 */  nop       
+/* D8A6A8 80240FC8 00000000 */  nop
 /* D8A6AC 80240FCC 46806320 */  cvt.s.w   $f12, $f12
 /* D8A6B0 80240FD0 0C00A6C9 */  jal       clamp_angle
 /* D8A6B4 80240FD4 AE2200A0 */   sw       $v0, 0xa0($s1)

@@ -20,7 +20,7 @@ glabel _update_message
 /* B9FD0 801238D0 44811800 */  mtc1      $at, $f3
 /* B9FD4 801238D4 44801000 */  mtc1      $zero, $f2
 /* B9FD8 801238D8 44820000 */  mtc1      $v0, $f0
-/* B9FDC 801238DC 00000000 */  nop       
+/* B9FDC 801238DC 00000000 */  nop
 /* B9FE0 801238E0 46800020 */  cvt.s.w   $f0, $f0
 /* B9FE4 801238E4 46000021 */  cvt.d.s   $f0, $f0
 /* B9FE8 801238E8 46220001 */  sub.d     $f0, $f0, $f2
@@ -37,28 +37,28 @@ glabel _update_message
 /* BA014 80123914 44800000 */  mtc1      $zero, $f0
 /* BA018 80123918 460020A1 */  cvt.d.s   $f2, $f4
 /* BA01C 8012391C 4620103C */  c.lt.d    $f2, $f0
-/* BA020 80123920 00000000 */  nop       
+/* BA020 80123920 00000000 */  nop
 /* BA024 80123924 45000005 */  bc1f      .L8012393C
-/* BA028 80123928 00000000 */   nop      
+/* BA028 80123928 00000000 */   nop
 /* BA02C 8012392C 3C0140A0 */  lui       $at, 0x40a0
 /* BA030 80123930 44812000 */  mtc1      $at, $f4
 /* BA034 80123934 08048E57 */  j         .L8012395C
-/* BA038 80123938 00000000 */   nop      
+/* BA038 80123938 00000000 */   nop
 .L8012393C:
 /* BA03C 8012393C 3C018015 */  lui       $at, %hi(D_80150378)
 /* BA040 80123940 D4200378 */  ldc1      $f0, %lo(D_80150378)($at)
 /* BA044 80123944 4622003C */  c.lt.d    $f0, $f2
-/* BA048 80123948 00000000 */  nop       
+/* BA048 80123948 00000000 */  nop
 /* BA04C 8012394C 45000003 */  bc1f      .L8012395C
-/* BA050 80123950 00000000 */   nop      
+/* BA050 80123950 00000000 */   nop
 /* BA054 80123954 3C0142F4 */  lui       $at, 0x42f4
 /* BA058 80123958 44812000 */  mtc1      $at, $f4
 .L8012395C:
 /* BA05C 8012395C 3C014F00 */  lui       $at, 0x4f00
 /* BA060 80123960 44810000 */  mtc1      $at, $f0
-/* BA064 80123964 00000000 */  nop       
+/* BA064 80123964 00000000 */  nop
 /* BA068 80123968 4604003E */  c.le.s    $f0, $f4
-/* BA06C 8012396C 00000000 */  nop       
+/* BA06C 8012396C 00000000 */  nop
 /* BA070 80123970 45010005 */  bc1t      .L80123988
 /* BA074 80123974 2604051A */   addiu    $a0, $s0, 0x51a
 /* BA078 80123978 4600218D */  trunc.w.s $f6, $f4
@@ -70,7 +70,7 @@ glabel _update_message
 /* BA08C 8012398C 3C028000 */  lui       $v0, 0x8000
 /* BA090 80123990 4600018D */  trunc.w.s $f6, $f0
 /* BA094 80123994 44033000 */  mfc1      $v1, $f6
-/* BA098 80123998 00000000 */  nop       
+/* BA098 80123998 00000000 */  nop
 /* BA09C 8012399C 00621825 */  or        $v1, $v1, $v0
 /* BA0A0 801239A0 A0830000 */  sb        $v1, ($a0)
 .L801239A4:
@@ -91,15 +91,15 @@ glabel _update_message
 /* BA0DC 801239DC 1062000A */  beq       $v1, $v0, .L80123A08
 /* BA0E0 801239E0 3C020008 */   lui      $v0, 8
 /* BA0E4 801239E4 08048F72 */  j         .L80123DC8
-/* BA0E8 801239E8 00000000 */   nop      
+/* BA0E8 801239E8 00000000 */   nop
 .L801239EC:
 /* BA0EC 801239EC 24020008 */  addiu     $v0, $zero, 8
 /* BA0F0 801239F0 106200D9 */  beq       $v1, $v0, .L80123D58
 /* BA0F4 801239F4 2402000C */   addiu    $v0, $zero, 0xc
 /* BA0F8 801239F8 1062004F */  beq       $v1, $v0, .L80123B38
-/* BA0FC 801239FC 00000000 */   nop      
+/* BA0FC 801239FC 00000000 */   nop
 /* BA100 80123A00 08048F72 */  j         .L80123DC8
-/* BA104 80123A04 00000000 */   nop      
+/* BA104 80123A04 00000000 */   nop
 .L80123A08:
 /* BA108 80123A08 00C21024 */  and       $v0, $a2, $v0
 /* BA10C 80123A0C 54400001 */  bnel      $v0, $zero, .L80123A14
@@ -111,7 +111,7 @@ glabel _update_message
 /* BA120 80123A20 8C850010 */  lw        $a1, 0x10($a0)
 /* BA124 80123A24 00E51024 */  and       $v0, $a3, $a1
 /* BA128 80123A28 14400005 */  bnez      $v0, .L80123A40
-/* BA12C 80123A2C 00000000 */   nop      
+/* BA12C 80123A2C 00000000 */   nop
 /* BA130 80123A30 8C820000 */  lw        $v0, ($a0)
 /* BA134 80123A34 30424000 */  andi      $v0, $v0, 0x4000
 /* BA138 80123A38 1040002F */  beqz      $v0, .L80123AF8
@@ -127,7 +127,7 @@ glabel _update_message
 /* BA15C 80123A5C 8C620010 */  lw        $v0, 0x10($v1)
 /* BA160 80123A60 30428004 */  andi      $v0, $v0, 0x8004
 /* BA164 80123A64 10400003 */  beqz      $v0, .L80123A74
-/* BA168 80123A68 00000000 */   nop      
+/* BA168 80123A68 00000000 */   nop
 /* BA16C 80123A6C 08048EB7 */  j         .L80123ADC
 /* BA170 80123A70 24110001 */   addiu    $s1, $zero, 1
 .L80123A74:
@@ -158,7 +158,7 @@ glabel _update_message
 /* BA1CC 80123ACC 2442FFFF */  addiu     $v0, $v0, -1
 /* BA1D0 80123AD0 2C420004 */  sltiu     $v0, $v0, 4
 /* BA1D4 80123AD4 104000BC */  beqz      $v0, .L80123DC8
-/* BA1D8 80123AD8 00000000 */   nop      
+/* BA1D8 80123AD8 00000000 */   nop
 .L80123ADC:
 /* BA1DC 80123ADC 240400C9 */  addiu     $a0, $zero, 0xc9
 .L80123AE0:
@@ -167,13 +167,13 @@ glabel _update_message
 /* BA1E8 80123AE8 0C0526AE */  jal       _play_sound
 /* BA1EC 80123AEC 00A0382D */   daddu    $a3, $a1, $zero
 /* BA1F0 80123AF0 08048F72 */  j         .L80123DC8
-/* BA1F4 80123AF4 00000000 */   nop      
+/* BA1F4 80123AF4 00000000 */   nop
 .L80123AF8:
 /* BA1F8 80123AF8 104000B3 */  beqz      $v0, .L80123DC8
 /* BA1FC 80123AFC 3C020004 */   lui      $v0, 4
 /* BA200 80123B00 00C21024 */  and       $v0, $a2, $v0
 /* BA204 80123B04 144000B0 */  bnez      $v0, .L80123DC8
-/* BA208 80123B08 00000000 */   nop      
+/* BA208 80123B08 00000000 */   nop
 /* BA20C 80123B0C 92020486 */  lbu       $v0, 0x486($s0)
 /* BA210 80123B10 104000AD */  beqz      $v0, .L80123DC8
 /* BA214 80123B14 240400CD */   addiu    $a0, $zero, 0xcd
@@ -239,7 +239,7 @@ glabel _update_message
 /* BA2F0 80123BF0 0C0526AE */  jal       _play_sound
 /* BA2F4 80123BF4 A60204C8 */   sh       $v0, 0x4c8($s0)
 /* BA2F8 80123BF8 08048F72 */  j         .L80123DC8
-/* BA2FC 80123BFC 00000000 */   nop      
+/* BA2FC 80123BFC 00000000 */   nop
 .L80123C00:
 /* BA300 80123C00 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
 /* BA304 80123C04 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
@@ -267,7 +267,7 @@ glabel _update_message
 /* BA358 80123C58 10620019 */  beq       $v1, $v0, .L80123CC0
 /* BA35C 80123C5C 30824000 */   andi     $v0, $a0, 0x4000
 /* BA360 80123C60 10400017 */  beqz      $v0, .L80123CC0
-/* BA364 80123C64 00000000 */   nop      
+/* BA364 80123C64 00000000 */   nop
 /* BA368 80123C68 920204CE */  lbu       $v0, 0x4ce($s0)
 /* BA36C 80123C6C 0062102B */  sltu      $v0, $v1, $v0
 /* BA370 80123C70 54400003 */  bnel      $v0, $zero, .L80123C80
@@ -312,7 +312,7 @@ glabel _update_message
 .L80123D04:
 /* BA404 80123D04 00621024 */  and       $v0, $v1, $v0
 /* BA408 80123D08 1040000F */  beqz      $v0, .L80123D48
-/* BA40C 80123D0C 00000000 */   nop      
+/* BA40C 80123D0C 00000000 */   nop
 /* BA410 80123D10 920204E8 */  lbu       $v0, 0x4e8($s0)
 /* BA414 80123D14 1040000C */  beqz      $v0, .L80123D48
 /* BA418 80123D18 240400C7 */   addiu    $a0, $zero, 0xc7
@@ -328,12 +328,12 @@ glabel _update_message
 /* BA43C 80123D3C A20204ED */  sb        $v0, 0x4ed($s0)
 .L80123D40:
 /* BA440 80123D40 0C0526AE */  jal       _play_sound
-/* BA444 80123D44 00000000 */   nop      
+/* BA444 80123D44 00000000 */   nop
 .L80123D48:
 /* BA448 80123D48 920304F8 */  lbu       $v1, 0x4f8($s0)
 /* BA44C 80123D4C 24020008 */  addiu     $v0, $zero, 8
 /* BA450 80123D50 1462001D */  bne       $v1, $v0, .L80123DC8
-/* BA454 80123D54 00000000 */   nop      
+/* BA454 80123D54 00000000 */   nop
 .L80123D58:
 /* BA458 80123D58 920204ED */  lbu       $v0, 0x4ed($s0)
 /* BA45C 80123D5C 24420001 */  addiu     $v0, $v0, 1
@@ -352,7 +352,7 @@ glabel _update_message
 /* BA48C 80123D8C 24020005 */   addiu    $v0, $zero, 5
 /* BA490 80123D90 920304F8 */  lbu       $v1, 0x4f8($s0)
 /* BA494 80123D94 1462000C */  bne       $v1, $v0, .L80123DC8
-/* BA498 80123D98 00000000 */   nop      
+/* BA498 80123D98 00000000 */   nop
 /* BA49C 80123D9C 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
 /* BA4A0 80123DA0 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* BA4A4 80123DA4 8C420010 */  lw        $v0, 0x10($v0)
@@ -397,11 +397,12 @@ glabel _update_message
 /* BA530 80123E30 2C62000E */  sltiu     $v0, $v1, 0xe
 /* BA534 80123E34 104000CF */  beqz      $v0, .L80124174
 /* BA538 80123E38 00031080 */   sll      $v0, $v1, 2
-/* BA53C 80123E3C 3C018015 */  lui       $at, %hi(D_80150380)
+/* BA53C 80123E3C 3C018015 */  lui       $at, %hi(jtbl_80150380_E6A80)
 /* BA540 80123E40 00220821 */  addu      $at, $at, $v0
-/* BA544 80123E44 8C220380 */  lw        $v0, %lo(D_80150380)($at)
+/* BA544 80123E44 8C220380 */  lw        $v0, %lo(jtbl_80150380_E6A80)($at)
 /* BA548 80123E48 00400008 */  jr        $v0
-/* BA54C 80123E4C 00000000 */   nop      
+/* BA54C 80123E4C 00000000 */   nop
+glabel L80123E50_BA550
 /* BA550 80123E50 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
 /* BA554 80123E54 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* BA558 80123E58 8C430010 */  lw        $v1, 0x10($v0)
@@ -420,6 +421,7 @@ glabel _update_message
 /* BA58C 80123E8C 24020001 */   addiu    $v0, $zero, 1
 /* BA590 80123E90 34620100 */  ori       $v0, $v1, 0x100
 /* BA594 80123E94 AE0204FC */  sw        $v0, 0x4fc($s0)
+glabel L80123E98_BA598
 /* BA598 80123E98 24020001 */  addiu     $v0, $zero, 1
 .L80123E9C:
 /* BA59C 80123E9C 920304F8 */  lbu       $v1, 0x4f8($s0)
@@ -439,13 +441,13 @@ glabel _update_message
 /* BA5CC 80123ECC 1440000B */  bnez      $v0, .L80123EFC
 /* BA5D0 80123ED0 30620030 */   andi     $v0, $v1, 0x30
 /* BA5D4 80123ED4 14400009 */  bnez      $v0, .L80123EFC
-/* BA5D8 80123ED8 00000000 */   nop      
+/* BA5D8 80123ED8 00000000 */   nop
 /* BA5DC 80123EDC 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
 /* BA5E0 80123EE0 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* BA5E4 80123EE4 8C420000 */  lw        $v0, ($v0)
 /* BA5E8 80123EE8 30428000 */  andi      $v0, $v0, 0x8000
 /* BA5EC 80123EEC 10400003 */  beqz      $v0, .L80123EFC
-/* BA5F0 80123EF0 00000000 */   nop      
+/* BA5F0 80123EF0 00000000 */   nop
 /* BA5F4 80123EF4 24050006 */  addiu     $a1, $zero, 6
 .L80123EF8:
 /* BA5F8 80123EF8 A600000E */  sh        $zero, 0xe($s0)
@@ -456,19 +458,20 @@ glabel _update_message
 /* BA608 80123F08 A602000E */  sh        $v0, 0xe($s0)
 /* BA60C 80123F0C 3042FFFF */  andi      $v0, $v0, 0xffff
 /* BA610 80123F10 14400098 */  bnez      $v0, .L80124174
-/* BA614 80123F14 00000000 */   nop      
+/* BA614 80123F14 00000000 */   nop
 .L80123F18:
 /* BA618 80123F18 0200202D */  daddu     $a0, $s0, $zero
 /* BA61C 80123F1C 0C04915C */  jal       func_80124570
 /* BA620 80123F20 0000302D */   daddu    $a2, $zero, $zero
 /* BA624 80123F24 0804905D */  j         .L80124174
-/* BA628 80123F28 00000000 */   nop      
+/* BA628 80123F28 00000000 */   nop
+glabel L80123F2C_BA62C
 /* BA62C 80123F2C 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
 /* BA630 80123F30 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* BA634 80123F34 8C420010 */  lw        $v0, 0x10($v0)
 /* BA638 80123F38 3042C000 */  andi      $v0, $v0, 0xc000
 /* BA63C 80123F3C 10400006 */  beqz      $v0, .L80123F58
-/* BA640 80123F40 00000000 */   nop      
+/* BA640 80123F40 00000000 */   nop
 /* BA644 80123F44 8E0304FC */  lw        $v1, 0x4fc($s0)
 /* BA648 80123F48 30620030 */  andi      $v0, $v1, 0x30
 /* BA64C 80123F4C 14400002 */  bnez      $v0, .L80123F58
@@ -484,13 +487,13 @@ glabel _update_message
 /* BA670 80123F70 AE030460 */   sw       $v1, 0x460($s0)
 /* BA674 80123F74 30820014 */  andi      $v0, $a0, 0x14
 /* BA678 80123F78 14400009 */  bnez      $v0, .L80123FA0
-/* BA67C 80123F7C 00000000 */   nop      
+/* BA67C 80123F7C 00000000 */   nop
 /* BA680 80123F80 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
 /* BA684 80123F84 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* BA688 80123F88 8C420000 */  lw        $v0, ($v0)
 /* BA68C 80123F8C 30428000 */  andi      $v0, $v0, 0x8000
 /* BA690 80123F90 10400003 */  beqz      $v0, .L80123FA0
-/* BA694 80123F94 00000000 */   nop      
+/* BA694 80123F94 00000000 */   nop
 .L80123F98:
 /* BA698 80123F98 24620006 */  addiu     $v0, $v1, 6
 /* BA69C 80123F9C AE020460 */  sw        $v0, 0x460($s0)
@@ -528,6 +531,7 @@ glabel _update_message
 /* BA70C 8012400C 02021021 */  addu      $v0, $s0, $v0
 /* BA710 80124010 0804905D */  j         .L80124174
 /* BA714 80124014 A4430488 */   sh       $v1, 0x488($v0)
+glabel L80124018_BA718
 /* BA718 80124018 960204CC */  lhu       $v0, 0x4cc($s0)
 /* BA71C 8012401C 92030487 */  lbu       $v1, 0x487($s0)
 /* BA720 80124020 24420001 */  addiu     $v0, $v0, 1
@@ -550,7 +554,7 @@ glabel _update_message
 /* BA760 80124060 10400018 */  beqz      $v0, .L801240C4
 /* BA764 80124064 28620009 */   slti     $v0, $v1, 9
 /* BA768 80124068 08049033 */  j         .L801240CC
-/* BA76C 8012406C 00000000 */   nop      
+/* BA76C 8012406C 00000000 */   nop
 .L80124070:
 /* BA770 80124070 00031400 */  sll       $v0, $v1, 0x10
 /* BA774 80124074 00021C03 */  sra       $v1, $v0, 0x10
@@ -601,7 +605,7 @@ glabel _update_message
 /* BA80C 8012410C 94420488 */  lhu       $v0, 0x488($v0)
 /* BA810 80124110 0043182A */  slt       $v1, $v0, $v1
 /* BA814 80124114 14600017 */  bnez      $v1, .L80124174
-/* BA818 80124118 00000000 */   nop      
+/* BA818 80124118 00000000 */   nop
 /* BA81C 8012411C AE020460 */  sw        $v0, 0x460($s0)
 /* BA820 80124120 2402000C */  addiu     $v0, $zero, 0xc
 /* BA824 80124124 0804905D */  j         .L80124174
@@ -614,7 +618,7 @@ glabel _update_message
 /* BA83C 8012413C 94420488 */  lhu       $v0, 0x488($v0)
 /* BA840 80124140 0062182A */  slt       $v1, $v1, $v0
 /* BA844 80124144 1460000B */  bnez      $v1, .L80124174
-/* BA848 80124148 00000000 */   nop      
+/* BA848 80124148 00000000 */   nop
 /* BA84C 8012414C 92040487 */  lbu       $a0, 0x487($s0)
 /* BA850 80124150 92030486 */  lbu       $v1, 0x486($s0)
 /* BA854 80124154 AE020460 */  sw        $v0, 0x460($s0)
@@ -626,34 +630,35 @@ glabel _update_message
 /* BA86C 8012416C A200047C */  sb        $zero, 0x47c($s0)
 /* BA870 80124170 A600047E */  sh        $zero, 0x47e($s0)
 .L80124174:
+glabel L80124174_BA874
 /* BA874 80124174 8E0204FC */  lw        $v0, 0x4fc($s0)
 /* BA878 80124178 30420001 */  andi      $v0, $v0, 1
 /* BA87C 8012417C 1040001B */  beqz      $v0, .L801241EC
-/* BA880 80124180 00000000 */   nop      
+/* BA880 80124180 00000000 */   nop
 /* BA884 80124184 8E040544 */  lw        $a0, 0x544($s0)
 /* BA888 80124188 A20004F8 */  sb        $zero, 0x4f8($s0)
 /* BA88C 8012418C 10800003 */  beqz      $a0, .L8012419C
 /* BA890 80124190 AE0004FC */   sw       $zero, 0x4fc($s0)
 /* BA894 80124194 0C00AB1E */  jal       general_heap_free
-/* BA898 80124198 00000000 */   nop      
+/* BA898 80124198 00000000 */   nop
 .L8012419C:
 /* BA89C 8012419C 8E040548 */  lw        $a0, 0x548($s0)
 /* BA8A0 801241A0 10800003 */  beqz      $a0, .L801241B0
-/* BA8A4 801241A4 00000000 */   nop      
+/* BA8A4 801241A4 00000000 */   nop
 /* BA8A8 801241A8 0C00AB1E */  jal       general_heap_free
-/* BA8AC 801241AC 00000000 */   nop      
+/* BA8AC 801241AC 00000000 */   nop
 .L801241B0:
 /* BA8B0 801241B0 8E04054C */  lw        $a0, 0x54c($s0)
 /* BA8B4 801241B4 10800003 */  beqz      $a0, .L801241C4
-/* BA8B8 801241B8 00000000 */   nop      
+/* BA8B8 801241B8 00000000 */   nop
 /* BA8BC 801241BC 0C00AB1E */  jal       general_heap_free
-/* BA8C0 801241C0 00000000 */   nop      
+/* BA8C0 801241C0 00000000 */   nop
 .L801241C4:
 /* BA8C4 801241C4 8E040550 */  lw        $a0, 0x550($s0)
 /* BA8C8 801241C8 10800003 */  beqz      $a0, .L801241D8
-/* BA8CC 801241CC 00000000 */   nop      
+/* BA8CC 801241CC 00000000 */   nop
 /* BA8D0 801241D0 0C00AB1E */  jal       general_heap_free
-/* BA8D4 801241D4 00000000 */   nop      
+/* BA8D4 801241D4 00000000 */   nop
 .L801241D8:
 /* BA8D8 801241D8 8E030504 */  lw        $v1, 0x504($s0)
 /* BA8DC 801241DC 10600003 */  beqz      $v1, .L801241EC

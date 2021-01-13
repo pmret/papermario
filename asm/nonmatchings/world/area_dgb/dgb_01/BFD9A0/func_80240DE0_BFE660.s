@@ -60,18 +60,18 @@ glabel func_80240DE0_BFE660
 /* BFE738 80240EB8 C6200038 */  lwc1      $f0, 0x38($s1)
 /* BFE73C 80240EBC 4600018D */  trunc.w.s $f6, $f0
 /* BFE740 80240EC0 44023000 */  mfc1      $v0, $f6
-/* BFE744 80240EC4 00000000 */  nop       
+/* BFE744 80240EC4 00000000 */  nop
 /* BFE748 80240EC8 A6420010 */  sh        $v0, 0x10($s2)
 /* BFE74C 80240ECC C620003C */  lwc1      $f0, 0x3c($s1)
 /* BFE750 80240ED0 4600018D */  trunc.w.s $f6, $f0
 /* BFE754 80240ED4 44023000 */  mfc1      $v0, $f6
-/* BFE758 80240ED8 00000000 */  nop       
+/* BFE758 80240ED8 00000000 */  nop
 /* BFE75C 80240EDC A6420012 */  sh        $v0, 0x12($s2)
 /* BFE760 80240EE0 C6200040 */  lwc1      $f0, 0x40($s1)
 /* BFE764 80240EE4 A2430007 */  sb        $v1, 7($s2)
 /* BFE768 80240EE8 4600018D */  trunc.w.s $f6, $f0
 /* BFE76C 80240EEC 44023000 */  mfc1      $v0, $f6
-/* BFE770 80240EF0 00000000 */  nop       
+/* BFE770 80240EF0 00000000 */  nop
 /* BFE774 80240EF4 A6420014 */  sh        $v0, 0x14($s2)
 .L80240EF8:
 /* BFE778 80240EF8 8FBF0020 */  lw        $ra, 0x20($sp)

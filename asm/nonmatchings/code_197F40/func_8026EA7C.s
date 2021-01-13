@@ -25,7 +25,7 @@ glabel func_8026EA7C
 /* 19D3AC 8026EACC 0040982D */  daddu     $s3, $v0, $zero
 /* 19D3B0 8026EAD0 2402FF81 */  addiu     $v0, $zero, -0x7f
 /* 19D3B4 8026EAD4 16220002 */  bne       $s1, $v0, .L8026EAE0
-/* 19D3B8 8026EAD8 00000000 */   nop      
+/* 19D3B8 8026EAD8 00000000 */   nop
 /* 19D3BC 8026EADC 8E510148 */  lw        $s1, 0x148($s2)
 .L8026EAE0:
 /* 19D3C0 8026EAE0 0C09A75B */  jal       get_actor

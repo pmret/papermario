@@ -18,7 +18,7 @@ glabel func_802405B0_D2C2E0
 /* D2C314 802405E4 3C038016 */  lui       $v1, %hi(gCollisionStatus+0x2)
 /* D2C318 802405E8 8463A552 */  lh        $v1, %lo(gCollisionStatus+0x2)($v1)
 /* D2C31C 802405EC 10700003 */  beq       $v1, $s0, .L802405FC
-/* D2C320 802405F0 00000000 */   nop      
+/* D2C320 802405F0 00000000 */   nop
 /* D2C324 802405F4 1462000A */  bne       $v1, $v0, .L80240620
 /* D2C328 802405F8 24020002 */   addiu    $v0, $zero, 2
 .L802405FC:

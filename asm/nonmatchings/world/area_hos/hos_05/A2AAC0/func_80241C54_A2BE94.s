@@ -37,7 +37,7 @@ glabel func_80241C54_A2BE94
 /* A2BF14 80241CD4 C6200000 */  lwc1      $f0, ($s1)
 /* A2BF18 80241CD8 0040182D */  daddu     $v1, $v0, $zero
 /* A2BF1C 80241CDC 46140032 */  c.eq.s    $f0, $f20
-/* A2BF20 80241CE0 00000000 */  nop       
+/* A2BF20 80241CE0 00000000 */  nop
 /* A2BF24 80241CE4 45010002 */  bc1t      .L80241CF0
 /* A2BF28 80241CE8 A6030506 */   sh       $v1, 0x506($s0)
 /* A2BF2C 80241CEC 0000102D */  daddu     $v0, $zero, $zero

@@ -28,7 +28,7 @@ glabel func_80241A64_B36634
 /* B36688 80241AB8 00220821 */  addu      $at, $at, $v0
 /* B3668C 80241ABC AC20FBA0 */  sw        $zero, %lo(D_8024FBA0)($at)
 /* B36690 80241AC0 080906BC */  j         .L80241AF0
-/* B36694 80241AC4 00000000 */   nop      
+/* B36694 80241AC4 00000000 */   nop
 .L80241AC8:
 /* B36698 80241AC8 3C038025 */  lui       $v1, %hi(D_8024FBA0)
 /* B3669C 80241ACC 2463FBA0 */  addiu     $v1, $v1, %lo(D_8024FBA0)

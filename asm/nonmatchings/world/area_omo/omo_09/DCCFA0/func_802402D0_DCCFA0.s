@@ -143,7 +143,7 @@ glabel func_802402D0_DCCFA0
 /* DCD1A4 802404D4 8FA30014 */  lw        $v1, 0x14($sp)
 /* DCD1A8 802404D8 8FA20010 */  lw        $v0, 0x10($sp)
 /* DCD1AC 802404DC 14620007 */  bne       $v1, $v0, .L802404FC
-/* DCD1B0 802404E0 00000000 */   nop      
+/* DCD1B0 802404E0 00000000 */   nop
 /* DCD1B4 802404E4 8FA20018 */  lw        $v0, 0x18($sp)
 /* DCD1B8 802404E8 14620008 */  bne       $v1, $v0, .L8024050C
 /* DCD1BC 802404EC 24020002 */   addiu    $v0, $zero, 2

@@ -41,7 +41,7 @@ glabel func_80240F10_AEE320
 /* AEE3B0 80240FA0 0C00A7B5 */  jal       dist2D
 /* AEE3B4 80240FA4 24140001 */   addiu    $s4, $zero, 1
 /* AEE3B8 80240FA8 4618003C */  c.lt.s    $f0, $f24
-/* AEE3BC 80240FAC 00000000 */  nop       
+/* AEE3BC 80240FAC 00000000 */  nop
 /* AEE3C0 80240FB0 45030001 */  bc1tl     .L80240FB8
 /* AEE3C4 80240FB4 0000A02D */   daddu    $s4, $zero, $zero
 .L80240FB8:
@@ -56,13 +56,13 @@ glabel func_80240F10_AEE320
 /* AEE3E8 80240FD8 0C00A8BB */  jal       sin_deg
 /* AEE3EC 80240FDC 4600A306 */   mov.s    $f12, $f20
 /* AEE3F0 80240FE0 46180002 */  mul.s     $f0, $f0, $f24
-/* AEE3F4 80240FE4 00000000 */  nop       
+/* AEE3F4 80240FE4 00000000 */  nop
 /* AEE3F8 80240FE8 C6560028 */  lwc1      $f22, 0x28($s2)
 /* AEE3FC 80240FEC 4600B580 */  add.s     $f22, $f22, $f0
 /* AEE400 80240FF0 0C00A8D4 */  jal       cos_deg
 /* AEE404 80240FF4 4600A306 */   mov.s    $f12, $f20
 /* AEE408 80240FF8 46180002 */  mul.s     $f0, $f0, $f24
-/* AEE40C 80240FFC 00000000 */  nop       
+/* AEE40C 80240FFC 00000000 */  nop
 /* AEE410 80241000 0260202D */  daddu     $a0, $s3, $zero
 /* AEE414 80241004 02A0282D */  daddu     $a1, $s5, $zero
 /* AEE418 80241008 C6540030 */  lwc1      $f20, 0x30($s2)
@@ -95,4 +95,4 @@ glabel func_80240F10_AEE320
 /* AEE480 80241070 D7B40038 */  ldc1      $f20, 0x38($sp)
 /* AEE484 80241074 03E00008 */  jr        $ra
 /* AEE488 80241078 27BD0050 */   addiu    $sp, $sp, 0x50
-/* AEE48C 8024107C 00000000 */  nop       
+/* AEE48C 8024107C 00000000 */  nop

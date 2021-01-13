@@ -43,7 +43,7 @@ glabel func_E002C000
 /* 33FF18 E002C098 AE11000C */   sw       $s1, 0xc($s0)
 .LE002C09C:
 /* 33FF1C E002C09C 0800B027 */  j         .LE002C09C
-/* 33FF20 E002C0A0 00000000 */   nop      
+/* 33FF20 E002C0A0 00000000 */   nop
 .LE002C0A4:
 /* 33FF24 E002C0A4 3C01C000 */  lui       $at, 0xc000
 /* 33FF28 E002C0A8 44811000 */  mtc1      $at, $f2
@@ -61,7 +61,7 @@ glabel func_E002C000
 /* 33FF58 E002C0D8 2404003C */  addiu     $a0, $zero, 0x3c
 /* 33FF5C E002C0DC 2442FFE2 */  addiu     $v0, $v0, -0x1e
 /* 33FF60 E002C0E0 44820000 */  mtc1      $v0, $f0
-/* 33FF64 E002C0E4 00000000 */  nop       
+/* 33FF64 E002C0E4 00000000 */  nop
 /* 33FF68 E002C0E8 46800020 */  cvt.s.w   $f0, $f0
 /* 33FF6C E002C0EC 240200FF */  addiu     $v0, $zero, 0xff
 /* 33FF70 E002C0F0 E6200034 */  swc1      $f0, 0x34($s1)
@@ -69,14 +69,14 @@ glabel func_E002C000
 /* 33FF78 E002C0F8 AE220028 */   sw       $v0, 0x28($s1)
 /* 33FF7C E002C0FC 2442FFE2 */  addiu     $v0, $v0, -0x1e
 /* 33FF80 E002C100 44822000 */  mtc1      $v0, $f4
-/* 33FF84 E002C104 00000000 */  nop       
+/* 33FF84 E002C104 00000000 */  nop
 /* 33FF88 E002C108 46802120 */  cvt.s.w   $f4, $f4
 /* 33FF8C E002C10C 3C013FD0 */  lui       $at, 0x3fd0
 /* 33FF90 E002C110 44811800 */  mtc1      $at, $f3
 /* 33FF94 E002C114 44801000 */  mtc1      $zero, $f2
 /* 33FF98 E002C118 46002021 */  cvt.d.s   $f0, $f4
 /* 33FF9C E002C11C 46220002 */  mul.d     $f0, $f0, $f2
-/* 33FFA0 E002C120 00000000 */  nop       
+/* 33FFA0 E002C120 00000000 */  nop
 /* 33FFA4 E002C124 24120001 */  addiu     $s2, $zero, 1
 /* 33FFA8 E002C128 24020014 */  addiu     $v0, $zero, 0x14
 /* 33FFAC E002C12C AE220020 */  sw        $v0, 0x20($s1)
@@ -114,11 +114,11 @@ glabel func_E002C000
 /* 340028 E002C1A8 0C080138 */  jal       func_E02004E0
 /* 34002C E002C1AC E600FFDC */   swc1     $f0, -0x24($s0)
 /* 340030 E002C1B0 44820000 */  mtc1      $v0, $f0
-/* 340034 E002C1B4 00000000 */  nop       
+/* 340034 E002C1B4 00000000 */  nop
 /* 340038 E002C1B8 46800020 */  cvt.s.w   $f0, $f0
 /* 34003C E002C1BC 46000021 */  cvt.d.s   $f0, $f0
 /* 340040 E002C1C0 46360002 */  mul.d     $f0, $f0, $f22
-/* 340044 E002C1C4 00000000 */  nop       
+/* 340044 E002C1C4 00000000 */  nop
 /* 340048 E002C1C8 26940004 */  addiu     $s4, $s4, 4
 /* 34004C E002C1CC 26730008 */  addiu     $s3, $s3, 8
 /* 340050 E002C1D0 26520001 */  addiu     $s2, $s2, 1

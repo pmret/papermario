@@ -21,7 +21,7 @@ glabel func_80240AB0_D9DF80
 /* D9DFC0 80240AF0 0C0129E1 */  jal       func_8004A784
 /* D9DFC4 80240AF4 0000382D */   daddu    $a3, $zero, $zero
 /* D9DFC8 80240AF8 14400005 */  bnez      $v0, .L80240B10
-/* D9DFCC 80240AFC 00000000 */   nop      
+/* D9DFCC 80240AFC 00000000 */   nop
 /* D9DFD0 80240B00 8E050018 */  lw        $a1, 0x18($s0)
 /* D9DFD4 80240B04 8E06000C */  lw        $a2, 0xc($s0)
 /* D9DFD8 80240B08 0C00EA95 */  jal       npc_move_heading

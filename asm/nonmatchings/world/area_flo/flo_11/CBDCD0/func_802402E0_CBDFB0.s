@@ -15,6 +15,6 @@ glabel func_802402E0_CBDFB0
 /* CBDFD8 80240308 24020002 */  addiu     $v0, $zero, 2
 /* CBDFDC 8024030C 03E00008 */  jr        $ra
 /* CBDFE0 80240310 27BD0020 */   addiu    $sp, $sp, 0x20
-/* CBDFE4 80240314 00000000 */  nop       
-/* CBDFE8 80240318 00000000 */  nop       
-/* CBDFEC 8024031C 00000000 */  nop       
+/* CBDFE4 80240314 00000000 */  nop
+/* CBDFE8 80240318 00000000 */  nop
+/* CBDFEC 8024031C 00000000 */  nop

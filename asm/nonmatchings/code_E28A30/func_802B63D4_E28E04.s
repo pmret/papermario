@@ -37,7 +37,7 @@ glabel func_802B63D4_E28E04
 /* E28E7C 802B644C 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* E28E80 802B6450 80420070 */  lb        $v0, 0x70($v0)
 /* E28E84 802B6454 14400003 */  bnez      $v0, .L802B6464
-/* E28E88 802B6458 00000000 */   nop      
+/* E28E88 802B6458 00000000 */   nop
 /* E28E8C 802B645C 0C039769 */  jal       set_action_state
 /* E28E90 802B6460 0000202D */   daddu    $a0, $zero, $zero
 .L802B6464:

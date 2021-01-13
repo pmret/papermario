@@ -28,7 +28,7 @@ glabel func_80241E80_7ECB90
 /* 7ECBE8 80241ED8 0C0B1EAF */  jal       get_variable
 /* 7ECBEC 80241EDC 0280202D */   daddu    $a0, $s4, $zero
 /* 7ECBF0 80241EE0 14400003 */  bnez      $v0, .L80241EF0
-/* 7ECBF4 80241EE4 00000000 */   nop      
+/* 7ECBF4 80241EE4 00000000 */   nop
 /* 7ECBF8 80241EE8 080907C6 */  j         .L80241F18
 /* 7ECBFC 80241EEC 24150001 */   addiu    $s5, $zero, 1
 .L80241EF0:

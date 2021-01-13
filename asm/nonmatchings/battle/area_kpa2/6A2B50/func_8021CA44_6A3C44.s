@@ -62,12 +62,12 @@ glabel func_8021CA44_6A3C44
 /* 6A3D28 8021CB28 C626001C */  lwc1      $f6, 0x1c($s1)
 /* 6A3D2C 8021CB2C 468031A0 */  cvt.s.w   $f6, $f6
 /* 6A3D30 8021CB30 46062102 */  mul.s     $f4, $f4, $f6
-/* 6A3D34 8021CB34 00000000 */  nop       
+/* 6A3D34 8021CB34 00000000 */  nop
 /* 6A3D38 8021CB38 3C013F00 */  lui       $at, 0x3f00
 /* 6A3D3C 8021CB3C 44811000 */  mtc1      $at, $f2
-/* 6A3D40 8021CB40 00000000 */  nop       
+/* 6A3D40 8021CB40 00000000 */  nop
 /* 6A3D44 8021CB44 46022102 */  mul.s     $f4, $f4, $f2
-/* 6A3D48 8021CB48 00000000 */  nop       
+/* 6A3D48 8021CB48 00000000 */  nop
 /* 6A3D4C 8021CB4C E620000C */  swc1      $f0, 0xc($s1)
 /* 6A3D50 8021CB50 C6200004 */  lwc1      $f0, 4($s1)
 /* 6A3D54 8021CB54 C602000C */  lwc1      $f2, 0xc($s0)
@@ -84,7 +84,7 @@ glabel func_8021CA44_6A3C44
 /* 6A3D7C 8021CB7C 8E240020 */   lw       $a0, 0x20($s1)
 /* 6A3D80 8021CB80 0040802D */  daddu     $s0, $v0, $zero
 /* 6A3D84 8021CB84 16000005 */  bnez      $s0, .L8021CB9C
-/* 6A3D88 8021CB88 00000000 */   nop      
+/* 6A3D88 8021CB88 00000000 */   nop
 /* 6A3D8C 8021CB8C 0C00AB4B */  jal       heap_free
 /* 6A3D90 8021CB90 8E440070 */   lw       $a0, 0x70($s2)
 /* 6A3D94 8021CB94 08087310 */  j         .L8021CC40
@@ -92,10 +92,10 @@ glabel func_8021CA44_6A3C44
 .L8021CB9C:
 /* 6A3D9C 8021CB9C C62C000C */  lwc1      $f12, 0xc($s1)
 /* 6A3DA0 8021CBA0 0C00A8BB */  jal       sin_deg
-/* 6A3DA4 8021CBA4 00000000 */   nop      
+/* 6A3DA4 8021CBA4 00000000 */   nop
 /* 6A3DA8 8021CBA8 C6220014 */  lwc1      $f2, 0x14($s1)
 /* 6A3DAC 8021CBAC 46001082 */  mul.s     $f2, $f2, $f0
-/* 6A3DB0 8021CBB0 00000000 */  nop       
+/* 6A3DB0 8021CBB0 00000000 */  nop
 /* 6A3DB4 8021CBB4 C6000008 */  lwc1      $f0, 8($s0)
 /* 6A3DB8 8021CBB8 46020000 */  add.s     $f0, $f0, $f2
 /* 6A3DBC 8021CBBC E6000008 */  swc1      $f0, 8($s0)
@@ -103,7 +103,7 @@ glabel func_8021CA44_6A3C44
 /* 6A3DC4 8021CBC4 C62C000C */   lwc1     $f12, 0xc($s1)
 /* 6A3DC8 8021CBC8 C6220014 */  lwc1      $f2, 0x14($s1)
 /* 6A3DCC 8021CBCC 46001082 */  mul.s     $f2, $f2, $f0
-/* 6A3DD0 8021CBD0 00000000 */  nop       
+/* 6A3DD0 8021CBD0 00000000 */  nop
 /* 6A3DD4 8021CBD4 C6000010 */  lwc1      $f0, 0x10($s0)
 /* 6A3DD8 8021CBD8 46020001 */  sub.s     $f0, $f0, $f2
 /* 6A3DDC 8021CBDC E6000010 */  swc1      $f0, 0x10($s0)

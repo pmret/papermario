@@ -25,7 +25,7 @@ glabel func_8026ED20
 /* 19D650 8026ED70 0040982D */  daddu     $s3, $v0, $zero
 /* 19D654 8026ED74 2402FF81 */  addiu     $v0, $zero, -0x7f
 /* 19D658 8026ED78 16220002 */  bne       $s1, $v0, .L8026ED84
-/* 19D65C 8026ED7C 00000000 */   nop      
+/* 19D65C 8026ED7C 00000000 */   nop
 /* 19D660 8026ED80 8E510148 */  lw        $s1, 0x148($s2)
 .L8026ED84:
 /* 19D664 8026ED84 0C09A75B */  jal       get_actor

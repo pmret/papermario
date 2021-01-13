@@ -15,7 +15,7 @@ glabel func_80280B78
 /* 7E1A1C 80280B9C 24A50001 */   addiu    $a1, $a1, 1
 /* 7E1A20 80280BA0 8C620004 */  lw        $v0, 4($v1)
 /* 7E1A24 80280BA4 03E00008 */  jr        $ra
-/* 7E1A28 80280BA8 00000000 */   nop      
+/* 7E1A28 80280BA8 00000000 */   nop
 .L80280BAC:
 /* 7E1A2C 80280BAC 00A6102A */  slt       $v0, $a1, $a2
 /* 7E1A30 80280BB0 1440FFF8 */  bnez      $v0, .L80280B94
@@ -26,4 +26,4 @@ glabel func_80280B78
 /* 7E1A40 80280BC0 00220821 */  addu      $at, $at, $v0
 /* 7E1A44 80280BC4 842278EC */  lh        $v0, %lo(gItemTable+0xC)($at)
 /* 7E1A48 80280BC8 03E00008 */  jr        $ra
-/* 7E1A4C 80280BCC 00000000 */   nop      
+/* 7E1A4C 80280BCC 00000000 */   nop

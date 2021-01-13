@@ -51,10 +51,10 @@ glabel func_80241B40_A2BD80
 /* A2BE34 80241BF4 3421CCCD */  ori       $at, $at, 0xcccd
 /* A2BE38 80241BF8 44810000 */  mtc1      $at, $f0
 /* A2BE3C 80241BFC 44821000 */  mtc1      $v0, $f2
-/* A2BE40 80241C00 00000000 */  nop       
+/* A2BE40 80241C00 00000000 */  nop
 /* A2BE44 80241C04 468010A0 */  cvt.s.w   $f2, $f2
 /* A2BE48 80241C08 46001082 */  mul.s     $f2, $f2, $f0
-/* A2BE4C 80241C0C 00000000 */  nop       
+/* A2BE4C 80241C0C 00000000 */  nop
 /* A2BE50 80241C10 C600003C */  lwc1      $f0, 0x3c($s0)
 /* A2BE54 80241C14 46020000 */  add.s     $f0, $f0, $f2
 /* A2BE58 80241C18 E600003C */  swc1      $f0, 0x3c($s0)

@@ -12,7 +12,7 @@ glabel func_80240480_AFDFC0
 /* AFDFDC 8024049C 80A30006 */  lb        $v1, 6($a1)
 /* AFDFE0 802404A0 80A20005 */  lb        $v0, 5($a1)
 /* AFDFE4 802404A4 14620007 */  bne       $v1, $v0, .L802404C4
-/* AFDFE8 802404A8 00000000 */   nop      
+/* AFDFE8 802404A8 00000000 */   nop
 /* AFDFEC 802404AC 80C2028E */  lb        $v0, 0x28e($a2)
 /* AFDFF0 802404B0 84C30290 */  lh        $v1, 0x290($a2)
 /* AFDFF4 802404B4 00021200 */  sll       $v0, $v0, 8

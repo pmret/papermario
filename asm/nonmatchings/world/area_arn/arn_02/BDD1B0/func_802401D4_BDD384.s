@@ -25,7 +25,7 @@ glabel func_802401D4_BDD384
 /* BDD3D4 80240224 D4221AF0 */  ldc1      $f2, %lo(func_80241AF0_A6FED0)($at)
 /* BDD3D8 80240228 46000021 */  cvt.d.s   $f0, $f0
 /* BDD3DC 8024022C 46220002 */  mul.d     $f0, $f0, $f2
-/* BDD3E0 80240230 00000000 */  nop       
+/* BDD3E0 80240230 00000000 */  nop
 /* BDD3E4 80240234 0280202D */  daddu     $a0, $s4, $zero
 /* BDD3E8 80240238 AFA00010 */  sw        $zero, 0x10($sp)
 /* BDD3EC 8024023C 8E470010 */  lw        $a3, 0x10($s2)
@@ -47,7 +47,7 @@ glabel func_802401D4_BDD384
 /* BDD42C 8024027C 3C01C1A0 */  lui       $at, 0xc1a0
 /* BDD430 80240280 44812000 */  mtc1      $at, $f4
 /* BDD434 80240284 44823000 */  mtc1      $v0, $f6
-/* BDD438 80240288 00000000 */  nop       
+/* BDD438 80240288 00000000 */  nop
 /* BDD43C 8024028C 468031A0 */  cvt.s.w   $f6, $f6
 /* BDD440 80240290 44073000 */  mfc1      $a3, $f6
 /* BDD444 80240294 2402000F */  addiu     $v0, $zero, 0xf

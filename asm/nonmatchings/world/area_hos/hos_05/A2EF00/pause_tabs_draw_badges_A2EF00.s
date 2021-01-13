@@ -37,12 +37,12 @@ glabel pause_tabs_draw_badges_A2EF00
 /* A2EF7C 80244D3C 12400007 */  beqz      $s2, .L80244D5C
 /* A2EF80 80244D40 3412FFFF */   ori      $s2, $zero, 0xffff
 /* A2EF84 80244D44 08091373 */  j         .L80244DCC
-/* A2EF88 80244D48 00000000 */   nop      
+/* A2EF88 80244D48 00000000 */   nop
 .L80244D4C:
 /* A2EF8C 80244D4C 1242001B */  beq       $s2, $v0, .L80244DBC
 /* A2EF90 80244D50 24020002 */   addiu    $v0, $zero, 2
 /* A2EF94 80244D54 08091373 */  j         .L80244DCC
-/* A2EF98 80244D58 00000000 */   nop      
+/* A2EF98 80244D58 00000000 */   nop
 .L80244D5C:
 /* A2EF9C 80244D5C 8E040000 */  lw        $a0, ($s0)
 /* A2EFA0 80244D60 1092001A */  beq       $a0, $s2, .L80244DCC
@@ -56,7 +56,7 @@ glabel pause_tabs_draw_badges_A2EF00
 /* A2EFC0 80244D80 0C046F1F */  jal       func_8011BC7C
 /* A2EFC4 80244D84 0220302D */   daddu    $a2, $s1, $zero
 /* A2EFC8 80244D88 08091357 */  j         .L80244D5C
-/* A2EFCC 80244D8C 00000000 */   nop      
+/* A2EFCC 80244D8C 00000000 */   nop
 .L80244D90:
 /* A2EFD0 80244D90 3412FFFF */  ori       $s2, $zero, 0xffff
 .L80244D94:
@@ -69,7 +69,7 @@ glabel pause_tabs_draw_badges_A2EF00
 /* A2EFEC 80244DAC 0C046E54 */  jal       func_8011B950
 /* A2EFF0 80244DB0 0000382D */   daddu    $a3, $zero, $zero
 /* A2EFF4 80244DB4 08091365 */  j         .L80244D94
-/* A2EFF8 80244DB8 00000000 */   nop      
+/* A2EFF8 80244DB8 00000000 */   nop
 .L80244DBC:
 /* A2EFFC 80244DBC 3C028015 */  lui       $v0, %hi(D_801512F0)
 /* A2F000 80244DC0 8C4212F0 */  lw        $v0, %lo(D_801512F0)($v0)

@@ -42,7 +42,7 @@ glabel func_8024095C_8DAA5C
 /* 8DAAF0 802409F0 2402000F */  addiu     $v0, $zero, 0xf
 /* 8DAAF4 802409F4 AFA2001C */  sw        $v0, 0x1c($sp)
 /* 8DAAF8 802409F8 44833000 */  mtc1      $v1, $f6
-/* 8DAAFC 802409FC 00000000 */  nop       
+/* 8DAAFC 802409FC 00000000 */  nop
 /* 8DAB00 80240A00 468031A0 */  cvt.s.w   $f6, $f6
 /* 8DAB04 80240A04 44073000 */  mfc1      $a3, $f6
 /* 8DAB08 80240A08 27A20028 */  addiu     $v0, $sp, 0x28
@@ -90,12 +90,12 @@ glabel func_8024095C_8DAA5C
 /* 8DABA0 80240AA0 468031A0 */  cvt.s.w   $f6, $f6
 /* 8DABA4 80240AA4 44073000 */  mfc1      $a3, $f6
 /* 8DABA8 80240AA8 0C00A7B5 */  jal       dist2D
-/* 8DABAC 80240AAC 00000000 */   nop      
+/* 8DABAC 80240AAC 00000000 */   nop
 /* 8DABB0 80240AB0 C6020018 */  lwc1      $f2, 0x18($s0)
 /* 8DABB4 80240AB4 4602003C */  c.lt.s    $f0, $f2
-/* 8DABB8 80240AB8 00000000 */  nop       
+/* 8DABB8 80240AB8 00000000 */  nop
 /* 8DABBC 80240ABC 4500000E */  bc1f      .L80240AF8
-/* 8DABC0 80240AC0 00000000 */   nop      
+/* 8DABC0 80240AC0 00000000 */   nop
 /* 8DABC4 80240AC4 8E2200D0 */  lw        $v0, 0xd0($s1)
 /* 8DABC8 80240AC8 C4400000 */  lwc1      $f0, ($v0)
 /* 8DABCC 80240ACC 46800020 */  cvt.s.w   $f0, $f0
@@ -112,7 +112,7 @@ glabel func_8024095C_8DAA5C
 .L80240AF8:
 /* 8DABF8 80240AF8 8602008C */  lh        $v0, 0x8c($s0)
 /* 8DABFC 80240AFC 14400011 */  bnez      $v0, .L80240B44
-/* 8DAC00 80240B00 00000000 */   nop      
+/* 8DAC00 80240B00 00000000 */   nop
 /* 8DAC04 80240B04 C60C0038 */  lwc1      $f12, 0x38($s0)
 /* 8DAC08 80240B08 8E2200D0 */  lw        $v0, 0xd0($s1)
 /* 8DAC0C 80240B0C C60E0040 */  lwc1      $f14, 0x40($s0)
@@ -123,7 +123,7 @@ glabel func_8024095C_8DAA5C
 /* 8DAC20 80240B20 468031A0 */  cvt.s.w   $f6, $f6
 /* 8DAC24 80240B24 44073000 */  mfc1      $a3, $f6
 /* 8DAC28 80240B28 0C00A720 */  jal       atan2
-/* 8DAC2C 80240B2C 00000000 */   nop      
+/* 8DAC2C 80240B2C 00000000 */   nop
 /* 8DAC30 80240B30 8E050018 */  lw        $a1, 0x18($s0)
 /* 8DAC34 80240B34 44060000 */  mfc1      $a2, $f0
 /* 8DAC38 80240B38 0200202D */  daddu     $a0, $s0, $zero

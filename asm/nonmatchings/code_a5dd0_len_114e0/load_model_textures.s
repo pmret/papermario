@@ -15,9 +15,9 @@ glabel load_model_textures
 /* AC34C 80115C4C 3C018015 */  lui       $at, %hi(D_80153368)
 /* AC350 80115C50 AC233368 */  sw        $v1, %lo(D_80153368)($at)
 /* AC354 80115C54 10800011 */  beqz      $a0, .L80115C9C
-/* AC358 80115C58 00000000 */   nop      
+/* AC358 80115C58 00000000 */   nop
 /* AC35C 80115C5C 10A0000F */  beqz      $a1, .L80115C9C
-/* AC360 80115C60 00000000 */   nop      
+/* AC360 80115C60 00000000 */   nop
 /* AC364 80115C64 10C0000D */  beqz      $a2, .L80115C9C
 /* AC368 80115C68 2403007F */   addiu    $v1, $zero, 0x7f
 /* AC36C 80115C6C 3C028016 */  lui       $v0, %hi(D_8015C74C)
@@ -30,9 +30,9 @@ glabel load_model_textures
 /* AC384 80115C84 3C018015 */  lui       $at, %hi(D_80153224)
 /* AC388 80115C88 AC203224 */  sw        $zero, %lo(D_80153224)($at)
 /* AC38C 80115C8C 10800003 */  beqz      $a0, .L80115C9C
-/* AC390 80115C90 00000000 */   nop      
+/* AC390 80115C90 00000000 */   nop
 /* AC394 80115C94 0C0456D1 */  jal       _load_model_textures
-/* AC398 80115C98 00000000 */   nop      
+/* AC398 80115C98 00000000 */   nop
 .L80115C9C:
 /* AC39C 80115C9C 8FBF0010 */  lw        $ra, 0x10($sp)
 /* AC3A0 80115CA0 03E00008 */  jr        $ra

@@ -26,7 +26,7 @@ glabel func_80240F20_D56AD0
 /* D56B20 80240F70 1440FFFA */  bnez      $v0, .L80240F5C
 /* D56B24 80240F74 24A50004 */   addiu    $a1, $a1, 4
 /* D56B28 80240F78 080903EF */  j         .L80240FBC
-/* D56B2C 80240F7C 00000000 */   nop      
+/* D56B2C 80240F7C 00000000 */   nop
 .L80240F80:
 /* D56B30 80240F80 0000182D */  daddu     $v1, $zero, $zero
 /* D56B34 80240F84 0040282D */  daddu     $a1, $v0, $zero

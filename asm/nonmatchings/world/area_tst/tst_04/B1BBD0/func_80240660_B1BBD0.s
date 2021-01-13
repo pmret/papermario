@@ -13,4 +13,4 @@ glabel func_80240660_B1BBD0
 /* B1BBF0 80240680 24020002 */  addiu     $v0, $zero, 2
 /* B1BBF4 80240684 03E00008 */  jr        $ra
 /* B1BBF8 80240688 27BD0018 */   addiu    $sp, $sp, 0x18
-/* B1BBFC 8024068C 00000000 */  nop       
+/* B1BBFC 8024068C 00000000 */  nop

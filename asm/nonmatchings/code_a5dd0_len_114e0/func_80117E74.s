@@ -19,10 +19,10 @@ glabel func_80117E74
 /* AE5AC 80117EAC 0C0456C3 */  jal       get_model_property
 /* AE5B0 80117EB0 24050060 */   addiu    $a1, $zero, 0x60
 /* AE5B4 80117EB4 10400011 */  beqz      $v0, .L80117EFC
-/* AE5B8 80117EB8 00000000 */   nop      
+/* AE5B8 80117EB8 00000000 */   nop
 /* AE5BC 80117EBC 8C420008 */  lw        $v0, 8($v0)
 /* AE5C0 80117EC0 1040000E */  beqz      $v0, .L80117EFC
-/* AE5C4 80117EC4 00000000 */   nop      
+/* AE5C4 80117EC4 00000000 */   nop
 /* AE5C8 80117EC8 3C108015 */  lui       $s0, %hi(D_8015336C)
 /* AE5CC 80117ECC 2610336C */  addiu     $s0, $s0, %lo(D_8015336C)
 /* AE5D0 80117ED0 0C046B4C */  jal       get_model_from_list_index
@@ -31,20 +31,20 @@ glabel func_80117E74
 /* AE5DC 80117EDC 94820000 */  lhu       $v0, ($a0)
 /* AE5E0 80117EE0 30420002 */  andi      $v0, $v0, 2
 /* AE5E4 80117EE4 1440003F */  bnez      $v0, .L80117FE4
-/* AE5E8 80117EE8 00000000 */   nop      
+/* AE5E8 80117EE8 00000000 */   nop
 /* AE5EC 80117EEC 0C045F25 */  jal       appendGfx_model_group
-/* AE5F0 80117EF0 00000000 */   nop      
+/* AE5F0 80117EF0 00000000 */   nop
 /* AE5F4 80117EF4 08045FF9 */  j         .L80117FE4
-/* AE5F8 80117EF8 00000000 */   nop      
+/* AE5F8 80117EF8 00000000 */   nop
 .L80117EFC:
 /* AE5FC 80117EFC 8E430000 */  lw        $v1, ($s2)
 /* AE600 80117F00 24020002 */  addiu     $v0, $zero, 2
 .L80117F04:
 /* AE604 80117F04 1062002C */  beq       $v1, $v0, .L80117FB8
-/* AE608 80117F08 00000000 */   nop      
+/* AE608 80117F08 00000000 */   nop
 /* AE60C 80117F0C 8E420010 */  lw        $v0, 0x10($s2)
 /* AE610 80117F10 10400037 */  beqz      $v0, .L80117FF0
-/* AE614 80117F14 00000000 */   nop      
+/* AE614 80117F14 00000000 */   nop
 /* AE618 80117F18 8C420000 */  lw        $v0, ($v0)
 /* AE61C 80117F1C 10400009 */  beqz      $v0, .L80117F44
 /* AE620 80117F20 3C02DA38 */   lui      $v0, 0xda38
@@ -60,7 +60,7 @@ glabel func_80117E74
 /* AE644 80117F44 8E420010 */  lw        $v0, 0x10($s2)
 /* AE648 80117F48 8C51000C */  lw        $s1, 0xc($v0)
 /* AE64C 80117F4C 1220000E */  beqz      $s1, .L80117F88
-/* AE650 80117F50 00000000 */   nop      
+/* AE650 80117F50 00000000 */   nop
 /* AE654 80117F54 1A20000C */  blez      $s1, .L80117F88
 /* AE658 80117F58 0000802D */   daddu    $s0, $zero, $zero
 .L80117F5C:
@@ -73,7 +73,7 @@ glabel func_80117E74
 /* AE674 80117F74 26100001 */   addiu    $s0, $s0, 1
 /* AE678 80117F78 0211102A */  slt       $v0, $s0, $s1
 /* AE67C 80117F7C 1440FFF7 */  bnez      $v0, .L80117F5C
-/* AE680 80117F80 00000000 */   nop      
+/* AE680 80117F80 00000000 */   nop
 /* AE684 80117F84 8E420010 */  lw        $v0, 0x10($s2)
 .L80117F88:
 /* AE688 80117F88 8C420000 */  lw        $v0, ($v0)
@@ -97,9 +97,9 @@ glabel func_80117E74
 /* AE6CC 80117FCC 94820000 */  lhu       $v0, ($a0)
 /* AE6D0 80117FD0 30420002 */  andi      $v0, $v0, 2
 /* AE6D4 80117FD4 14400003 */  bnez      $v0, .L80117FE4
-/* AE6D8 80117FD8 00000000 */   nop      
+/* AE6D8 80117FD8 00000000 */   nop
 /* AE6DC 80117FDC 0C044C24 */  jal       appendGfx_model
-/* AE6E0 80117FE0 00000000 */   nop      
+/* AE6E0 80117FE0 00000000 */   nop
 .L80117FE4:
 /* AE6E4 80117FE4 96020000 */  lhu       $v0, ($s0)
 /* AE6E8 80117FE8 24420001 */  addiu     $v0, $v0, 1

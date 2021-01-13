@@ -24,7 +24,7 @@ glabel func_802410C0_BCFCB0
 /* BCFCFC 8024110C 24070002 */   addiu    $a3, $zero, 2
 /* BCFD00 80241110 8E240044 */  lw        $a0, 0x44($s1)
 /* BCFD04 80241114 0C0511EA */  jal       draw_icon_0
-/* BCFD08 80241118 00000000 */   nop      
+/* BCFD08 80241118 00000000 */   nop
 /* BCFD0C 8024111C 8FBF0020 */  lw        $ra, 0x20($sp)
 /* BCFD10 80241120 8FB1001C */  lw        $s1, 0x1c($sp)
 /* BCFD14 80241124 8FB00018 */  lw        $s0, 0x18($sp)

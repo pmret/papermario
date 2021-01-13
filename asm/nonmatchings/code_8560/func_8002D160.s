@@ -179,4 +179,4 @@ glabel func_8002D160
 /* 87F0 8002D3F0 8FB00018 */  lw        $s0, 0x18($sp)
 /* 87F4 8002D3F4 03E00008 */  jr        $ra
 /* 87F8 8002D3F8 27BD0040 */   addiu    $sp, $sp, 0x40
-/* 87FC 8002D3FC 00000000 */  nop       
+/* 87FC 8002D3FC 00000000 */  nop
