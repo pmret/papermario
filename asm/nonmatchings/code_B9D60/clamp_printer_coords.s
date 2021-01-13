@@ -25,4 +25,4 @@ glabel clamp_printer_coords
 /* BC1FC 80125AFC A482050C */  sh        $v0, 0x50c($a0)
 .L80125B00:
 /* BC200 80125B00 03E00008 */  jr        $ra
-/* BC204 80125B04 00000000 */   nop      
+/* BC204 80125B04 00000000 */   nop

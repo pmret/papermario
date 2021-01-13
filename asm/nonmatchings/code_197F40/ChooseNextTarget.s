@@ -26,7 +26,7 @@ glabel ChooseNextTarget
 /* 19CD48 8026E468 A2200425 */   sb       $zero, 0x425($s1)
 .L8026E46C:
 /* 19CD4C 8026E46C 14820013 */  bne       $a0, $v0, .L8026E4BC
-/* 19CD50 8026E470 00000000 */   nop      
+/* 19CD50 8026E470 00000000 */   nop
 /* 19CD54 8026E474 9222040C */  lbu       $v0, 0x40c($s1)
 /* 19CD58 8026E478 2442FFFF */  addiu     $v0, $v0, -1
 /* 19CD5C 8026E47C A2220425 */  sb        $v0, 0x425($s1)

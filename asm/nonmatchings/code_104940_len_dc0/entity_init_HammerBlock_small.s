@@ -19,6 +19,6 @@ glabel entity_init_HammerBlock_small
 /* 1056E8 802E3E68 E480005C */  swc1      $f0, 0x5c($a0)
 /* 1056EC 802E3E6C 03E00008 */  jr        $ra
 /* 1056F0 802E3E70 AC820000 */   sw       $v0, ($a0)
-/* 1056F4 802E3E74 00000000 */  nop       
-/* 1056F8 802E3E78 00000000 */  nop       
-/* 1056FC 802E3E7C 00000000 */  nop       
+/* 1056F4 802E3E74 00000000 */  nop
+/* 1056F8 802E3E78 00000000 */  nop
+/* 1056FC 802E3E7C 00000000 */  nop

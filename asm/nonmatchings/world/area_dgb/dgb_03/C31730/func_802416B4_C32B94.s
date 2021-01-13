@@ -46,7 +46,7 @@ glabel func_802416B4_C32B94
 /* C32C38 80241758 8E2200B0 */  lw        $v0, 0xb0($s1)
 /* C32C3C 8024175C 30420004 */  andi      $v0, $v0, 4
 /* C32C40 80241760 10400044 */  beqz      $v0, .L80241874
-/* C32C44 80241764 00000000 */   nop      
+/* C32C44 80241764 00000000 */   nop
 .L80241768:
 /* C32C48 80241768 2404F7FF */  addiu     $a0, $zero, -0x801
 /* C32C4C 8024176C AE800070 */  sw        $zero, 0x70($s4)
@@ -101,7 +101,7 @@ glabel func_802416B4_C32B94
 /* C32D00 80241820 3C0142C8 */  lui       $at, 0x42c8
 /* C32D04 80241824 44812000 */  mtc1      $at, $f4
 /* C32D08 80241828 44823000 */  mtc1      $v0, $f6
-/* C32D0C 8024182C 00000000 */  nop       
+/* C32D0C 8024182C 00000000 */  nop
 /* C32D10 80241830 468031A0 */  cvt.s.w   $f6, $f6
 /* C32D14 80241834 27A20044 */  addiu     $v0, $sp, 0x44
 /* C32D18 80241838 E7A00038 */  swc1      $f0, 0x38($sp)
@@ -116,7 +116,7 @@ glabel func_802416B4_C32B94
 /* C32D3C 8024185C 0C0372DF */  jal       func_800DCB7C
 /* C32D40 80241860 27A70040 */   addiu    $a3, $sp, 0x40
 /* C32D44 80241864 10400003 */  beqz      $v0, .L80241874
-/* C32D48 80241868 00000000 */   nop      
+/* C32D48 80241868 00000000 */   nop
 /* C32D4C 8024186C C7A0003C */  lwc1      $f0, 0x3c($sp)
 /* C32D50 80241870 E640003C */  swc1      $f0, 0x3c($s2)
 .L80241874:
@@ -124,72 +124,85 @@ glabel func_802416B4_C32B94
 /* C32D58 80241878 2C620064 */  sltiu     $v0, $v1, 0x64
 /* C32D5C 8024187C 10400042 */  beqz      $v0, .L80241988
 /* C32D60 80241880 00031080 */   sll      $v0, $v1, 2
-/* C32D64 80241884 3C018024 */  lui       $at, %hi(pause_tabs_draw_stats_805418)
+/* C32D64 80241884 3C018024 */  lui       $at, %hi(jtbl_80244B98_C36078)
 /* C32D68 80241888 00220821 */  addu      $at, $at, $v0
-/* C32D6C 8024188C 8C224B98 */  lw        $v0, %lo(pause_tabs_draw_stats_805418)($at)
+/* C32D6C 8024188C 8C224B98 */  lw        $v0, %lo(jtbl_80244B98_C36078)($at)
 /* C32D70 80241890 00400008 */  jr        $v0
-/* C32D74 80241894 00000000 */   nop      
+/* C32D74 80241894 00000000 */   nop
+glabel L80241898_C32D78
 /* C32D78 80241898 0280202D */  daddu     $a0, $s4, $zero
 /* C32D7C 8024189C 0260282D */  daddu     $a1, $s3, $zero
 /* C32D80 802418A0 0C0902C8 */  jal       func_80240B20_C32000
 /* C32D84 802418A4 02A0302D */   daddu    $a2, $s5, $zero
+glabel L802418A8_C32D88
 /* C32D88 802418A8 0280202D */  daddu     $a0, $s4, $zero
 /* C32D8C 802418AC 0260282D */  daddu     $a1, $s3, $zero
 /* C32D90 802418B0 0C09031E */  jal       func_80240C78_C32158
 /* C32D94 802418B4 02A0302D */   daddu    $a2, $s5, $zero
 /* C32D98 802418B8 08090662 */  j         .L80241988
-/* C32D9C 802418BC 00000000 */   nop      
+/* C32D9C 802418BC 00000000 */   nop
+glabel L802418C0_C32DA0
 /* C32DA0 802418C0 0280202D */  daddu     $a0, $s4, $zero
 /* C32DA4 802418C4 0260282D */  daddu     $a1, $s3, $zero
 /* C32DA8 802418C8 0C0903C8 */  jal       dgb_03_UnkNpcAIFunc1
 /* C32DAC 802418CC 02A0302D */   daddu    $a2, $s5, $zero
+glabel L802418D0_C32DB0
 /* C32DB0 802418D0 0280202D */  daddu     $a0, $s4, $zero
 /* C32DB4 802418D4 0260282D */  daddu     $a1, $s3, $zero
 /* C32DB8 802418D8 0C0903F8 */  jal       func_80240FE0_C324C0
 /* C32DBC 802418DC 02A0302D */   daddu    $a2, $s5, $zero
 /* C32DC0 802418E0 08090662 */  j         .L80241988
-/* C32DC4 802418E4 00000000 */   nop      
+/* C32DC4 802418E4 00000000 */   nop
+glabel L802418E8_C32DC8
 /* C32DC8 802418E8 0280202D */  daddu     $a0, $s4, $zero
 /* C32DCC 802418EC 0260282D */  daddu     $a1, $s3, $zero
 /* C32DD0 802418F0 0C090467 */  jal       func_8024119C_C3267C
 /* C32DD4 802418F4 02A0302D */   daddu    $a2, $s5, $zero
 /* C32DD8 802418F8 08090662 */  j         .L80241988
-/* C32DDC 802418FC 00000000 */   nop      
+/* C32DDC 802418FC 00000000 */   nop
+glabel L80241900_C32DE0
 /* C32DE0 80241900 0280202D */  daddu     $a0, $s4, $zero
 /* C32DE4 80241904 0260282D */  daddu     $a1, $s3, $zero
 /* C32DE8 80241908 0C090494 */  jal       dgb_03_NpcJumpFunc2
 /* C32DEC 8024190C 02A0302D */   daddu    $a2, $s5, $zero
+glabel L80241910_C32DF0
 /* C32DF0 80241910 0280202D */  daddu     $a0, $s4, $zero
 /* C32DF4 80241914 0260282D */  daddu     $a1, $s3, $zero
 /* C32DF8 80241918 0C0904B1 */  jal       dgb_03_NpcJumpFunc
 /* C32DFC 8024191C 02A0302D */   daddu    $a2, $s5, $zero
 /* C32E00 80241920 08090662 */  j         .L80241988
-/* C32E04 80241924 00000000 */   nop      
+/* C32E04 80241924 00000000 */   nop
+glabel L80241928_C32E08
 /* C32E08 80241928 0280202D */  daddu     $a0, $s4, $zero
 /* C32E0C 8024192C 0260282D */  daddu     $a1, $s3, $zero
 /* C32E10 80241930 0C0904CF */  jal       func_8024133C_C3281C
 /* C32E14 80241934 02A0302D */   daddu    $a2, $s5, $zero
+glabel L80241938_C32E18
 /* C32E18 80241938 0280202D */  daddu     $a0, $s4, $zero
 /* C32E1C 8024193C 0260282D */  daddu     $a1, $s3, $zero
 /* C32E20 80241940 0C09051B */  jal       func_8024146C_C3294C
 /* C32E24 80241944 02A0302D */   daddu    $a2, $s5, $zero
 /* C32E28 80241948 08090662 */  j         .L80241988
-/* C32E2C 8024194C 00000000 */   nop      
+/* C32E2C 8024194C 00000000 */   nop
+glabel L80241950_C32E30
 /* C32E30 80241950 0280202D */  daddu     $a0, $s4, $zero
 /* C32E34 80241954 0260282D */  daddu     $a1, $s3, $zero
 /* C32E38 80241958 0C090563 */  jal       dgb_03_UnkNpcDurationFlagFunc
 /* C32E3C 8024195C 02A0302D */   daddu    $a2, $s5, $zero
 /* C32E40 80241960 08090662 */  j         .L80241988
-/* C32E44 80241964 00000000 */   nop      
+/* C32E44 80241964 00000000 */   nop
+glabel L80241968_C32E48
 /* C32E48 80241968 0280202D */  daddu     $a0, $s4, $zero
 /* C32E4C 8024196C 0260282D */  daddu     $a1, $s3, $zero
 /* C32E50 80241970 0C09057D */  jal       func_802415F4_C32AD4
 /* C32E54 80241974 02A0302D */   daddu    $a2, $s5, $zero
 /* C32E58 80241978 08090662 */  j         .L80241988
-/* C32E5C 8024197C 00000000 */   nop      
+/* C32E5C 8024197C 00000000 */   nop
+glabel L80241980_C32E60
 /* C32E60 80241980 0C0129CF */  jal       func_8004A73C
 /* C32E64 80241984 0280202D */   daddu    $a0, $s4, $zero
 .L80241988:
+glabel L80241988_C32E68
 /* C32E68 80241988 8FBF0060 */  lw        $ra, 0x60($sp)
 /* C32E6C 8024198C 8FB5005C */  lw        $s5, 0x5c($sp)
 /* C32E70 80241990 8FB40058 */  lw        $s4, 0x58($sp)

@@ -21,7 +21,7 @@ glabel func_8021948C_64A29C
 /* 64A2DC 802194CC 0040902D */  daddu     $s2, $v0, $zero
 /* 64A2E0 802194D0 2402FF81 */  addiu     $v0, $zero, -0x7f
 /* 64A2E4 802194D4 16220002 */  bne       $s1, $v0, .L802194E0
-/* 64A2E8 802194D8 00000000 */   nop      
+/* 64A2E8 802194D8 00000000 */   nop
 /* 64A2EC 802194DC 8E710148 */  lw        $s1, 0x148($s3)
 .L802194E0:
 /* 64A2F0 802194E0 0C09A75B */  jal       get_actor

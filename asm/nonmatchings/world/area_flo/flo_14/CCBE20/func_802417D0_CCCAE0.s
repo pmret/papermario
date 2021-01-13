@@ -60,18 +60,18 @@ glabel func_802417D0_CCCAE0
 /* CCCBB8 802418A8 C6200038 */  lwc1      $f0, 0x38($s1)
 /* CCCBBC 802418AC 4600018D */  trunc.w.s $f6, $f0
 /* CCCBC0 802418B0 44023000 */  mfc1      $v0, $f6
-/* CCCBC4 802418B4 00000000 */  nop       
+/* CCCBC4 802418B4 00000000 */  nop
 /* CCCBC8 802418B8 A6420010 */  sh        $v0, 0x10($s2)
 /* CCCBCC 802418BC C620003C */  lwc1      $f0, 0x3c($s1)
 /* CCCBD0 802418C0 4600018D */  trunc.w.s $f6, $f0
 /* CCCBD4 802418C4 44023000 */  mfc1      $v0, $f6
-/* CCCBD8 802418C8 00000000 */  nop       
+/* CCCBD8 802418C8 00000000 */  nop
 /* CCCBDC 802418CC A6420012 */  sh        $v0, 0x12($s2)
 /* CCCBE0 802418D0 C6200040 */  lwc1      $f0, 0x40($s1)
 /* CCCBE4 802418D4 A2430007 */  sb        $v1, 7($s2)
 /* CCCBE8 802418D8 4600018D */  trunc.w.s $f6, $f0
 /* CCCBEC 802418DC 44023000 */  mfc1      $v0, $f6
-/* CCCBF0 802418E0 00000000 */  nop       
+/* CCCBF0 802418E0 00000000 */  nop
 /* CCCBF4 802418E4 A6420014 */  sh        $v0, 0x14($s2)
 .L802418E8:
 /* CCCBF8 802418E8 8FBF0020 */  lw        $ra, 0x20($sp)

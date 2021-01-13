@@ -11,7 +11,7 @@ glabel func_802BC050_E2E980
 /* E2E998 802BC068 2463EFC8 */  addiu     $v1, $v1, %lo(gPlayerStatus)
 /* E2E99C 802BC06C 30420001 */  andi      $v0, $v0, 1
 /* E2E9A0 802BC070 1040000D */  beqz      $v0, .L802BC0A8
-/* E2E9A4 802BC074 00000000 */   nop      
+/* E2E9A4 802BC074 00000000 */   nop
 /* E2E9A8 802BC078 8C620004 */  lw        $v0, 4($v1)
 /* E2E9AC 802BC07C 34420004 */  ori       $v0, $v0, 4
 /* E2E9B0 802BC080 0C03BCC0 */  jal       func_800EF300

@@ -26,7 +26,7 @@ glabel delete_player_actor_9C6148
 /* 9C6198 80240DB8 1440FFFA */  bnez      $v0, .L80240DA4
 /* 9C619C 80240DBC 24A50004 */   addiu    $a1, $a1, 4
 /* 9C61A0 80240DC0 08090381 */  j         .L80240E04
-/* 9C61A4 80240DC4 00000000 */   nop      
+/* 9C61A4 80240DC4 00000000 */   nop
 .L80240DC8:
 /* 9C61A8 80240DC8 0000182D */  daddu     $v1, $zero, $zero
 /* 9C61AC 80240DCC 0040282D */  daddu     $a1, $v0, $zero

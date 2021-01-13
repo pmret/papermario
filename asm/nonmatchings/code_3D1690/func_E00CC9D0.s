@@ -259,4 +259,4 @@ glabel func_E00CC9D0
 /* 3D2450 E00CCDC0 D7B400C8 */  ldc1      $f20, 0xc8($sp)
 /* 3D2454 E00CCDC4 03E00008 */  jr        $ra
 /* 3D2458 E00CCDC8 27BD00D8 */   addiu    $sp, $sp, 0xd8
-/* 3D245C E00CCDCC 00000000 */  nop       
+/* 3D245C E00CCDCC 00000000 */  nop

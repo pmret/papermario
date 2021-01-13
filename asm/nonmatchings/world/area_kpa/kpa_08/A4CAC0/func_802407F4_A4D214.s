@@ -44,7 +44,7 @@ glabel func_802407F4_A4D214
 /* A4D2B0 80240890 A20200AC */  sb        $v0, 0xac($s0)
 /* A4D2B4 80240894 24020004 */  addiu     $v0, $zero, 4
 /* A4D2B8 80240898 14620007 */  bne       $v1, $v0, .L802408B8
-/* A4D2BC 8024089C 00000000 */   nop      
+/* A4D2BC 8024089C 00000000 */   nop
 /* A4D2C0 802408A0 0C00EAFF */  jal       disable_npc_shadow
 /* A4D2C4 802408A4 0200202D */   daddu    $a0, $s0, $zero
 /* A4D2C8 802408A8 8E420000 */  lw        $v0, ($s2)

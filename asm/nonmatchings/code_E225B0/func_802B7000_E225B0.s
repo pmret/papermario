@@ -117,19 +117,22 @@ glabel func_802B7000_E225B0
 /* E2276C 802B71BC 2C82000C */  sltiu     $v0, $a0, 0xc
 /* E22770 802B71C0 10400011 */  beqz      $v0, .L802B7208
 /* E22774 802B71C4 00041080 */   sll      $v0, $a0, 2
-/* E22778 802B71C8 3C01802B */  lui       $at, %hi(D_802B7C80)
+/* E22778 802B71C8 3C01802B */  lui       $at, %hi(jtbl_802B7C80_E23230)
 /* E2277C 802B71CC 00220821 */  addu      $at, $at, $v0
-/* E22780 802B71D0 8C227C80 */  lw        $v0, %lo(D_802B7C80)($at)
+/* E22780 802B71D0 8C227C80 */  lw        $v0, %lo(jtbl_802B7C80_E23230)($at)
 /* E22784 802B71D4 00400008 */  jr        $v0
-/* E22788 802B71D8 00000000 */   nop      
+/* E22788 802B71D8 00000000 */   nop
+glabel L802B71DC_E2278C
 /* E2278C 802B71DC 3C02802B */  lui       $v0, %hi(D_802B7BA0)
 /* E22790 802B71E0 24427BA0 */  addiu     $v0, $v0, %lo(D_802B7BA0)
 /* E22794 802B71E4 080ADC82 */  j         .L802B7208
 /* E22798 802B71E8 AFA200A4 */   sw       $v0, 0xa4($sp)
+glabel L802B71EC_E2279C
 /* E2279C 802B71EC 3C02802B */  lui       $v0, %hi(D_802B7BC0)
 /* E227A0 802B71F0 24427BC0 */  addiu     $v0, $v0, %lo(D_802B7BC0)
 /* E227A4 802B71F4 080ADC82 */  j         .L802B7208
 /* E227A8 802B71F8 AFA200A4 */   sw       $v0, 0xa4($sp)
+glabel L802B71FC_E227AC
 /* E227AC 802B71FC 3C02802B */  lui       $v0, %hi(D_802B7BE0)
 /* E227B0 802B7200 24427BE0 */  addiu     $v0, $v0, %lo(D_802B7BE0)
 /* E227B4 802B7204 AFA200A4 */  sw        $v0, 0xa4($sp)

@@ -16,7 +16,7 @@ glabel func_8024226C_A1D36C
 /* A1D398 80242298 0C0B1EAF */  jal       get_variable
 /* A1D39C 8024229C 0040802D */   daddu    $s0, $v0, $zero
 /* A1D3A0 802422A0 44820000 */  mtc1      $v0, $f0
-/* A1D3A4 802422A4 00000000 */  nop       
+/* A1D3A4 802422A4 00000000 */  nop
 /* A1D3A8 802422A8 46800020 */  cvt.s.w   $f0, $f0
 /* A1D3AC 802422AC 24020002 */  addiu     $v0, $zero, 2
 /* A1D3B0 802422B0 00501804 */  sllv      $v1, $s0, $v0

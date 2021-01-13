@@ -23,10 +23,10 @@ glabel bind_dynamic_entity_3
 /* B989C 8012319C 2A020010 */  slti      $v0, $s0, 0x10
 .L801231A0:
 /* B98A0 801231A0 14400003 */  bnez      $v0, .L801231B0
-/* B98A4 801231A4 00000000 */   nop      
+/* B98A4 801231A4 00000000 */   nop
 .L801231A8:
 /* B98A8 801231A8 08048C6A */  j         .L801231A8
-/* B98AC 801231AC 00000000 */   nop      
+/* B98AC 801231AC 00000000 */   nop
 .L801231B0:
 /* B98B0 801231B0 0C00AB39 */  jal       heap_malloc
 /* B98B4 801231B4 2404000C */   addiu    $a0, $zero, 0xc
@@ -39,7 +39,7 @@ glabel bind_dynamic_entity_3
 /* B98D0 801231D0 AC640000 */   sw       $a0, ($v1)
 .L801231D4:
 /* B98D4 801231D4 08048C75 */  j         .L801231D4
-/* B98D8 801231D8 00000000 */   nop      
+/* B98D8 801231D8 00000000 */   nop
 .L801231DC:
 /* B98DC 801231DC 24020003 */  addiu     $v0, $zero, 3
 /* B98E0 801231E0 AC820000 */  sw        $v0, ($a0)

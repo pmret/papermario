@@ -11,4 +11,4 @@ glabel func_80112B98
 /* A92AC 80112BAC 0441FFFD */  bgez      $v0, .L80112BA4
 /* A92B0 80112BB0 24630018 */   addiu    $v1, $v1, 0x18
 /* A92B4 80112BB4 03E00008 */  jr        $ra
-/* A92B8 80112BB8 00000000 */   nop      
+/* A92B8 80112BB8 00000000 */   nop

@@ -22,7 +22,7 @@ glabel func_80240308_AFDE48
 /* AFDE8C 8024034C 0C04DF93 */  jal       func_80137E4C
 /* AFDE90 80240350 24070091 */   addiu    $a3, $zero, 0x91
 /* AFDE94 80240354 44900000 */  mtc1      $s0, $f0
-/* AFDE98 80240358 00000000 */  nop       
+/* AFDE98 80240358 00000000 */  nop
 /* AFDE9C 8024035C 46800020 */  cvt.s.w   $f0, $f0
 /* AFDEA0 80240360 44050000 */  mfc1      $a1, $f0
 /* AFDEA4 80240364 0C04DF62 */  jal       func_80137D88

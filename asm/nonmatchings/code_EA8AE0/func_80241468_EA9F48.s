@@ -26,7 +26,7 @@ glabel func_80241468_EA9F48
 /* EA9F98 802414B8 1440FFFA */  bnez      $v0, .L802414A4
 /* EA9F9C 802414BC 24A50004 */   addiu    $a1, $a1, 4
 /* EA9FA0 802414C0 08090541 */  j         .L80241504
-/* EA9FA4 802414C4 00000000 */   nop      
+/* EA9FA4 802414C4 00000000 */   nop
 .L802414C8:
 /* EA9FA8 802414C8 0000182D */  daddu     $v1, $zero, $zero
 /* EA9FAC 802414CC 0040282D */  daddu     $a1, $v0, $zero

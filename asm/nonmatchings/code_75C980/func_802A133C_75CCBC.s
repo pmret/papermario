@@ -11,4 +11,4 @@ glabel func_802A133C_75CCBC
 /* 75CCD0 802A1350 AC820084 */  sw        $v0, 0x84($a0)
 /* 75CCD4 802A1354 03E00008 */  jr        $ra
 /* 75CCD8 802A1358 24020002 */   addiu    $v0, $zero, 2
-/* 75CCDC 802A135C 00000000 */  nop       
+/* 75CCDC 802A135C 00000000 */  nop

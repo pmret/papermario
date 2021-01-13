@@ -24,9 +24,9 @@ glabel func_8025DA68
 /* 18C394 8025DAB4 10600005 */  beqz      $v1, .L8025DACC
 /* 18C398 8025DAB8 24020001 */   addiu    $v0, $zero, 1
 /* 18C39C 8025DABC 10620008 */  beq       $v1, $v0, .L8025DAE0
-/* 18C3A0 8025DAC0 00000000 */   nop      
+/* 18C3A0 8025DAC0 00000000 */   nop
 /* 18C3A4 8025DAC4 080976EA */  j         .L8025DBA8
-/* 18C3A8 8025DAC8 00000000 */   nop      
+/* 18C3A8 8025DAC8 00000000 */   nop
 .L8025DACC:
 /* 18C3AC 8025DACC 00111040 */  sll       $v0, $s1, 1
 /* 18C3B0 8025DAD0 02021021 */  addu      $v0, $s0, $v0
@@ -39,7 +39,7 @@ glabel func_8025DA68
 /* 18C3C8 8025DAE8 C4940058 */  lwc1      $f20, 0x58($a0)
 /* 18C3CC 8025DAEC 00021042 */  srl       $v0, $v0, 1
 /* 18C3D0 8025DAF0 44820000 */  mtc1      $v0, $f0
-/* 18C3D4 8025DAF4 00000000 */  nop       
+/* 18C3D4 8025DAF4 00000000 */  nop
 /* 18C3D8 8025DAF8 46800020 */  cvt.s.w   $f0, $f0
 /* 18C3DC 8025DAFC 46001600 */  add.s     $f24, $f2, $f0
 /* 18C3E0 8025DB00 3C028007 */  lui       $v0, %hi(gGameStatusPtr)

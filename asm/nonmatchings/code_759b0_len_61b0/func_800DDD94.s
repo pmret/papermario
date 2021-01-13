@@ -38,7 +38,7 @@ glabel func_800DDD94
 /* 772C8 800DDE18 44811000 */  mtc1      $at, $f2
 /* 772CC 800DDE1C 0260302D */  daddu     $a2, $s3, $zero
 /* 772D0 800DDE20 4602A502 */  mul.s     $f20, $f20, $f2
-/* 772D4 800DDE24 00000000 */  nop       
+/* 772D4 800DDE24 00000000 */  nop
 /* 772D8 800DDE28 27B00028 */  addiu     $s0, $sp, 0x28
 /* 772DC 800DDE2C 0200382D */  daddu     $a3, $s0, $zero
 /* 772E0 800DDE30 E7A00024 */  swc1      $f0, 0x24($sp)
@@ -50,7 +50,7 @@ glabel func_800DDD94
 /* 772F8 800DDE48 0C037586 */  jal       func_800DD618
 /* 772FC 800DDE4C E7B40018 */   swc1     $f20, 0x18($sp)
 /* 77300 800DDE50 04400006 */  bltz      $v0, .L800DDE6C
-/* 77304 800DDE54 00000000 */   nop      
+/* 77304 800DDE54 00000000 */   nop
 /* 77308 800DDE58 C7A00020 */  lwc1      $f0, 0x20($sp)
 /* 7730C 800DDE5C E6200000 */  swc1      $f0, ($s1)
 /* 77310 800DDE60 C7A00028 */  lwc1      $f0, 0x28($sp)
@@ -75,7 +75,7 @@ glabel func_800DDD94
 /* 77358 800DDEA8 0C037586 */  jal       func_800DD618
 /* 7735C 800DDEAC E7B40018 */   swc1     $f20, 0x18($sp)
 /* 77360 800DDEB0 04400006 */  bltz      $v0, .L800DDECC
-/* 77364 800DDEB4 00000000 */   nop      
+/* 77364 800DDEB4 00000000 */   nop
 /* 77368 800DDEB8 C7A00020 */  lwc1      $f0, 0x20($sp)
 /* 7736C 800DDEBC E6200000 */  swc1      $f0, ($s1)
 /* 77370 800DDEC0 C7A00028 */  lwc1      $f0, 0x28($sp)
@@ -101,7 +101,7 @@ glabel func_800DDD94
 /* 773BC 800DDF0C 0C037586 */  jal       func_800DD618
 /* 773C0 800DDF10 E7B40018 */   swc1     $f20, 0x18($sp)
 /* 773C4 800DDF14 04400006 */  bltz      $v0, .L800DDF30
-/* 773C8 800DDF18 00000000 */   nop      
+/* 773C8 800DDF18 00000000 */   nop
 /* 773CC 800DDF1C C7A00020 */  lwc1      $f0, 0x20($sp)
 /* 773D0 800DDF20 E6200000 */  swc1      $f0, ($s1)
 /* 773D4 800DDF24 C7A00028 */  lwc1      $f0, 0x28($sp)
@@ -148,4 +148,4 @@ glabel func_800DDD94
 /* 77470 800DDFC0 D7B40058 */  ldc1      $f20, 0x58($sp)
 /* 77474 800DDFC4 03E00008 */  jr        $ra
 /* 77478 800DDFC8 27BD0070 */   addiu    $sp, $sp, 0x70
-/* 7747C 800DDFCC 00000000 */  nop       
+/* 7747C 800DDFCC 00000000 */  nop

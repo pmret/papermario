@@ -38,7 +38,7 @@ glabel func_E00DA230
 /* 3D74F4 E00DA2B4 8C62001C */  lw        $v0, 0x1c($v1)
 /* 3D74F8 E00DA2B8 3C038000 */  lui       $v1, 0x8000
 /* 3D74FC E00DA2BC 4600A502 */  mul.s     $f20, $f20, $f0
-/* 3D7500 E00DA2C0 00000000 */  nop       
+/* 3D7500 E00DA2C0 00000000 */  nop
 /* 3D7504 E00DA2C4 00431021 */  addu      $v0, $v0, $v1
 /* 3D7508 E00DA2C8 3C03800B */  lui       $v1, %hi(gCameras)
 /* 3D750C E00DA2CC 24631D80 */  addiu     $v1, $v1, %lo(gCameras)
@@ -180,5 +180,5 @@ glabel func_E00DA230
 /* 3D772C E00DA4EC D7B400B0 */  ldc1      $f20, 0xb0($sp)
 /* 3D7730 E00DA4F0 03E00008 */  jr        $ra
 /* 3D7734 E00DA4F4 27BD00B8 */   addiu    $sp, $sp, 0xb8
-/* 3D7738 E00DA4F8 00000000 */  nop       
-/* 3D773C E00DA4FC 00000000 */  nop       
+/* 3D7738 E00DA4F8 00000000 */  nop
+/* 3D773C E00DA4FC 00000000 */  nop

@@ -9,7 +9,7 @@ glabel func_80240000_BFA0A0
 /* BFA0B0 80240010 24A537A0 */  addiu     $a1, $a1, %lo(D_802437A0)
 /* BFA0B4 80240014 AFBF0010 */  sw        $ra, 0x10($sp)
 /* BFA0B8 80240018 0C01953C */  jal       sprintf
-/* BFA0BC 8024001C 00000000 */   nop      
+/* BFA0BC 8024001C 00000000 */   nop
 /* BFA0C0 80240020 3C04800E */  lui       $a0, %hi(D_800D91E0)
 /* BFA0C4 80240024 248491E0 */  addiu     $a0, $a0, %lo(D_800D91E0)
 /* BFA0C8 80240028 3C058024 */  lui       $a1, %hi(D_802437B0)
@@ -24,5 +24,5 @@ glabel func_80240000_BFA0A0
 /* BFA0EC 8024004C 0000102D */  daddu     $v0, $zero, $zero
 /* BFA0F0 80240050 03E00008 */  jr        $ra
 /* BFA0F4 80240054 27BD0018 */   addiu    $sp, $sp, 0x18
-/* BFA0F8 80240058 00000000 */  nop       
-/* BFA0FC 8024005C 00000000 */  nop       
+/* BFA0F8 80240058 00000000 */  nop
+/* BFA0FC 8024005C 00000000 */  nop

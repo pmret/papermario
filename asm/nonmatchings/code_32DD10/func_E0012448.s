@@ -43,7 +43,7 @@ glabel func_E0012448
 /* 32E1E0 E00124D0 26100098 */   addiu    $s0, $s0, 0x98
 .LE00124D4:
 /* 32E1E4 E00124D4 16600003 */  bnez      $s3, .LE00124E4
-/* 32E1E8 E00124D8 00000000 */   nop      
+/* 32E1E8 E00124D8 00000000 */   nop
 /* 32E1EC E00124DC 0C080128 */  jal       func_E02004A0
 /* 32E1F0 E00124E0 0280202D */   daddu    $a0, $s4, $zero
 .LE00124E4:

@@ -15,7 +15,7 @@ glabel GetActorHP
 /* 1AAFA8 8027C6C8 0040802D */  daddu     $s0, $v0, $zero
 /* 1AAFAC 8027C6CC 2402FF81 */  addiu     $v0, $zero, -0x7f
 /* 1AAFB0 8027C6D0 16020002 */  bne       $s0, $v0, .L8027C6DC
-/* 1AAFB4 8027C6D4 00000000 */   nop      
+/* 1AAFB4 8027C6D4 00000000 */   nop
 /* 1AAFB8 8027C6D8 8E500148 */  lw        $s0, 0x148($s2)
 .L8027C6DC:
 /* 1AAFBC 8027C6DC 8E310000 */  lw        $s1, ($s1)
@@ -28,7 +28,7 @@ glabel GetActorHP
 /* 1AAFD8 8027C6F8 50820009 */  beql      $a0, $v0, .L8027C720
 /* 1AAFDC 8027C6FC 24060063 */   addiu    $a2, $zero, 0x63
 /* 1AAFE0 8027C700 0809F1C7 */  j         .L8027C71C
-/* 1AAFE4 8027C704 00000000 */   nop      
+/* 1AAFE4 8027C704 00000000 */   nop
 .L8027C708:
 /* 1AAFE8 8027C708 3C028011 */  lui       $v0, %hi(gPlayerData)
 /* 1AAFEC 8027C70C 2442F290 */  addiu     $v0, $v0, %lo(gPlayerData)

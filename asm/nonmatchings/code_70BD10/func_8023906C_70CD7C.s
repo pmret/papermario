@@ -34,7 +34,7 @@ glabel func_8023906C_70CD7C
 /* 70CDF0 802390E0 24020002 */   addiu    $v0, $zero, 2
 /* 70CDF4 802390E4 86240000 */  lh        $a0, ($s1)
 /* 70CDF8 802390E8 0C09A75B */  jal       get_actor
-/* 70CDFC 802390EC 00000000 */   nop      
+/* 70CDFC 802390EC 00000000 */   nop
 /* 70CE00 802390F0 0C00A67F */  jal       rand_int
 /* 70CE04 802390F4 24040063 */   addiu    $a0, $zero, 0x63
 /* 70CE08 802390F8 82830081 */  lb        $v1, 0x81($s4)

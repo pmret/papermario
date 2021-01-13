@@ -16,19 +16,19 @@ glabel func_80240F40_D3B510
 /* D3B53C 80240F6C 0220202D */  daddu     $a0, $s1, $zero
 /* D3B540 80240F70 3C05F4AC */  lui       $a1, 0xf4ac
 /* D3B544 80240F74 4482B000 */  mtc1      $v0, $f22
-/* D3B548 80240F78 00000000 */  nop       
+/* D3B548 80240F78 00000000 */  nop
 /* D3B54C 80240F7C 4680B5A0 */  cvt.s.w   $f22, $f22
 /* D3B550 80240F80 0C0B1EAF */  jal       get_variable
 /* D3B554 80240F84 34A5D482 */   ori      $a1, $a1, 0xd482
 /* D3B558 80240F88 0220202D */  daddu     $a0, $s1, $zero
 /* D3B55C 80240F8C 3C05F4AC */  lui       $a1, 0xf4ac
 /* D3B560 80240F90 4482A000 */  mtc1      $v0, $f20
-/* D3B564 80240F94 00000000 */  nop       
+/* D3B564 80240F94 00000000 */  nop
 /* D3B568 80240F98 4680A520 */  cvt.s.w   $f20, $f20
 /* D3B56C 80240F9C 0C0B1EAF */  jal       get_variable
 /* D3B570 80240FA0 34A5D483 */   ori      $a1, $a1, 0xd483
 /* D3B574 80240FA4 44821000 */  mtc1      $v0, $f2
-/* D3B578 80240FA8 00000000 */  nop       
+/* D3B578 80240FA8 00000000 */  nop
 /* D3B57C 80240FAC 468010A0 */  cvt.s.w   $f2, $f2
 /* D3B580 80240FB0 4405B000 */  mfc1      $a1, $f22
 /* D3B584 80240FB4 4406A000 */  mfc1      $a2, $f20
@@ -45,19 +45,19 @@ glabel func_80240F40_D3B510
 /* D3B5B0 80240FE0 0220202D */  daddu     $a0, $s1, $zero
 /* D3B5B4 80240FE4 3C05F4AC */  lui       $a1, 0xf4ac
 /* D3B5B8 80240FE8 4482B000 */  mtc1      $v0, $f22
-/* D3B5BC 80240FEC 00000000 */  nop       
+/* D3B5BC 80240FEC 00000000 */  nop
 /* D3B5C0 80240FF0 4680B5A0 */  cvt.s.w   $f22, $f22
 /* D3B5C4 80240FF4 0C0B1EAF */  jal       get_variable
 /* D3B5C8 80240FF8 34A5D482 */   ori      $a1, $a1, 0xd482
 /* D3B5CC 80240FFC 0220202D */  daddu     $a0, $s1, $zero
 /* D3B5D0 80241000 3C05F4AC */  lui       $a1, 0xf4ac
 /* D3B5D4 80241004 4482A000 */  mtc1      $v0, $f20
-/* D3B5D8 80241008 00000000 */  nop       
+/* D3B5D8 80241008 00000000 */  nop
 /* D3B5DC 8024100C 4680A520 */  cvt.s.w   $f20, $f20
 /* D3B5E0 80241010 0C0B1EAF */  jal       get_variable
 /* D3B5E4 80241014 34A5D483 */   ori      $a1, $a1, 0xd483
 /* D3B5E8 80241018 44821000 */  mtc1      $v0, $f2
-/* D3B5EC 8024101C 00000000 */  nop       
+/* D3B5EC 8024101C 00000000 */  nop
 /* D3B5F0 80241020 468010A0 */  cvt.s.w   $f2, $f2
 /* D3B5F4 80241024 4405B000 */  mfc1      $a1, $f22
 /* D3B5F8 80241028 4406A000 */  mfc1      $a2, $f20
@@ -73,19 +73,19 @@ glabel func_80240F40_D3B510
 /* D3B620 80241050 0220202D */  daddu     $a0, $s1, $zero
 /* D3B624 80241054 3C05F4AC */  lui       $a1, 0xf4ac
 /* D3B628 80241058 4482B000 */  mtc1      $v0, $f22
-/* D3B62C 8024105C 00000000 */  nop       
+/* D3B62C 8024105C 00000000 */  nop
 /* D3B630 80241060 4680B5A0 */  cvt.s.w   $f22, $f22
 /* D3B634 80241064 0C0B1EAF */  jal       get_variable
 /* D3B638 80241068 34A5D482 */   ori      $a1, $a1, 0xd482
 /* D3B63C 8024106C 0220202D */  daddu     $a0, $s1, $zero
 /* D3B640 80241070 3C05F4AC */  lui       $a1, 0xf4ac
 /* D3B644 80241074 4482A000 */  mtc1      $v0, $f20
-/* D3B648 80241078 00000000 */  nop       
+/* D3B648 80241078 00000000 */  nop
 /* D3B64C 8024107C 4680A520 */  cvt.s.w   $f20, $f20
 /* D3B650 80241080 0C0B1EAF */  jal       get_variable
 /* D3B654 80241084 34A5D483 */   ori      $a1, $a1, 0xd483
 /* D3B658 80241088 44821000 */  mtc1      $v0, $f2
-/* D3B65C 8024108C 00000000 */  nop       
+/* D3B65C 8024108C 00000000 */  nop
 /* D3B660 80241090 468010A0 */  cvt.s.w   $f2, $f2
 /* D3B664 80241094 4405B000 */  mfc1      $a1, $f22
 /* D3B668 80241098 4406A000 */  mfc1      $a2, $f20

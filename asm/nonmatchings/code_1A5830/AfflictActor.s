@@ -25,7 +25,7 @@ glabel AfflictActor
 /* 1ABFAC 8027D6CC 0040982D */  daddu     $s3, $v0, $zero
 /* 1ABFB0 8027D6D0 2402FF81 */  addiu     $v0, $zero, -0x7f
 /* 1ABFB4 8027D6D4 16220002 */  bne       $s1, $v0, .L8027D6E0
-/* 1ABFB8 8027D6D8 00000000 */   nop      
+/* 1ABFB8 8027D6D8 00000000 */   nop
 /* 1ABFBC 8027D6DC 8E510148 */  lw        $s1, 0x148($s2)
 .L8027D6E0:
 /* 1ABFC0 8027D6E0 0C09A75B */  jal       get_actor

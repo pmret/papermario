@@ -33,5 +33,5 @@ glabel func_80240754_D3AD24
 /* D3AD8C 802407BC 0000102D */  daddu     $v0, $zero, $zero
 /* D3AD90 802407C0 03E00008 */  jr        $ra
 /* D3AD94 802407C4 27BD0020 */   addiu    $sp, $sp, 0x20
-/* D3AD98 802407C8 00000000 */  nop       
-/* D3AD9C 802407CC 00000000 */  nop       
+/* D3AD98 802407C8 00000000 */  nop
+/* D3AD9C 802407CC 00000000 */  nop

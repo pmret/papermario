@@ -18,4 +18,4 @@ glabel func_8011D890
 /* B3FC0 8011D8C0 3C018015 */  lui       $at, %hi(D_801533B0)
 /* B3FC4 8011D8C4 AC2033B0 */  sw        $zero, %lo(D_801533B0)($at)
 /* B3FC8 8011D8C8 03E00008 */  jr        $ra
-/* B3FCC 8011D8CC 00000000 */   nop      
+/* B3FCC 8011D8CC 00000000 */   nop

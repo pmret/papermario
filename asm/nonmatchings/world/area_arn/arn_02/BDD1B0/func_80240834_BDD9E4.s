@@ -55,13 +55,13 @@ glabel func_80240834_BDD9E4
 /* BDDAAC 802408FC 860200A8 */  lh        $v0, 0xa8($s0)
 /* BDDAB0 80240900 27A50020 */  addiu     $a1, $sp, 0x20
 /* BDDAB4 80240904 44820000 */  mtc1      $v0, $f0
-/* BDDAB8 80240908 00000000 */  nop       
+/* BDDAB8 80240908 00000000 */  nop
 /* BDDABC 8024090C 46800020 */  cvt.s.w   $f0, $f0
 /* BDDAC0 80240910 E7A00018 */  swc1      $f0, 0x18($sp)
 /* BDDAC4 80240914 860200A6 */  lh        $v0, 0xa6($s0)
 /* BDDAC8 80240918 27A60024 */  addiu     $a2, $sp, 0x24
 /* BDDACC 8024091C 44820000 */  mtc1      $v0, $f0
-/* BDDAD0 80240920 00000000 */  nop       
+/* BDDAD0 80240920 00000000 */  nop
 /* BDDAD4 80240924 46800020 */  cvt.s.w   $f0, $f0
 /* BDDAD8 80240928 E7A0001C */  swc1      $f0, 0x1c($sp)
 /* BDDADC 8024092C 8E040080 */  lw        $a0, 0x80($s0)

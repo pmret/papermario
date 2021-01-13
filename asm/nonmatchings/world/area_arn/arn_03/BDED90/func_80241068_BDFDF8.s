@@ -19,7 +19,7 @@ glabel func_80241068_BDFDF8
 /* BDFE30 802410A0 A602008E */  sh        $v0, 0x8e($s0)
 /* BDFE34 802410A4 00021400 */  sll       $v0, $v0, 0x10
 /* BDFE38 802410A8 0441001D */  bgez      $v0, .L80241120
-/* BDFE3C 802410AC 00000000 */   nop      
+/* BDFE3C 802410AC 00000000 */   nop
 /* BDFE40 802410B0 8E220074 */  lw        $v0, 0x74($s1)
 /* BDFE44 802410B4 2442FFFF */  addiu     $v0, $v0, -1
 /* BDFE48 802410B8 04400014 */  bltz      $v0, .L8024110C

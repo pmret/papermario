@@ -23,10 +23,10 @@ glabel si_goto_next_case
 /* ED450 802C8AA0 00481021 */  addu      $v0, $v0, $t0
 /* ED454 802C8AA4 8C420000 */  lw        $v0, ($v0)
 /* ED458 802C8AA8 00400008 */  jr        $v0
-/* ED45C 802C8AAC 00000000 */   nop      
+/* ED45C 802C8AAC 00000000 */   nop
 .L802C8AB0:
 /* ED460 802C8AB0 080B22AC */  j         .L802C8AB0
-/* ED464 802C8AB4 00000000 */   nop      
+/* ED464 802C8AB4 00000000 */   nop
 /* ED468 802C8AB8 080B229D */  j         .L802C8A74
 /* ED46C 802C8ABC 24A50001 */   addiu    $a1, $a1, 1
 /* ED470 802C8AC0 24A5FFFF */  addiu     $a1, $a1, -1

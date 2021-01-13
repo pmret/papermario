@@ -17,5 +17,5 @@ glabel func_80240EFC_EB9D4C
 /* EB9D7C 80240F2C 24020002 */  addiu     $v0, $zero, 2
 /* EB9D80 80240F30 03E00008 */  jr        $ra
 /* EB9D84 80240F34 27BD0018 */   addiu    $sp, $sp, 0x18
-/* EB9D88 80240F38 00000000 */  nop       
-/* EB9D8C 80240F3C 00000000 */  nop       
+/* EB9D88 80240F38 00000000 */  nop
+/* EB9D8C 80240F3C 00000000 */  nop

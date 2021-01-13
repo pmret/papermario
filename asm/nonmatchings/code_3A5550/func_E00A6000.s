@@ -38,7 +38,7 @@ glabel func_E00A6000
 /* 3A55D4 E00A6084 AE02000C */   sw       $v0, 0xc($s0)
 .LE00A6088:
 /* 3A55D8 E00A6088 08029822 */  j         .LE00A6088
-/* 3A55DC E00A608C 00000000 */   nop      
+/* 3A55DC E00A608C 00000000 */   nop
 .LE00A6090:
 /* 3A55E0 E00A6090 0200102D */  daddu     $v0, $s0, $zero
 /* 3A55E4 E00A6094 44800000 */  mtc1      $zero, $f0

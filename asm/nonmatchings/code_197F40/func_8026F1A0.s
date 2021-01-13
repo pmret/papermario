@@ -19,7 +19,7 @@ glabel func_8026F1A0
 /* 19DAB8 8026F1D8 0040802D */  daddu     $s0, $v0, $zero
 /* 19DABC 8026F1DC 2402FF81 */  addiu     $v0, $zero, -0x7f
 /* 19DAC0 8026F1E0 16220002 */  bne       $s1, $v0, .L8026F1EC
-/* 19DAC4 8026F1E4 00000000 */   nop      
+/* 19DAC4 8026F1E4 00000000 */   nop
 /* 19DAC8 8026F1E8 8E510148 */  lw        $s1, 0x148($s2)
 .L8026F1EC:
 /* 19DACC 8026F1EC 0C09A75B */  jal       get_actor

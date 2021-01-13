@@ -16,7 +16,7 @@ glabel func_802427B0_BE5F60
 /* BE5F8C 802427DC 0040802D */   daddu    $s0, $v0, $zero
 /* BE5F90 802427E0 C60C000C */  lwc1      $f12, 0xc($s0)
 /* BE5F94 802427E4 44820000 */  mtc1      $v0, $f0
-/* BE5F98 802427E8 00000000 */  nop       
+/* BE5F98 802427E8 00000000 */  nop
 /* BE5F9C 802427EC 46800020 */  cvt.s.w   $f0, $f0
 /* BE5FA0 802427F0 46006300 */  add.s     $f12, $f12, $f0
 /* BE5FA4 802427F4 3C0142B4 */  lui       $at, 0x42b4

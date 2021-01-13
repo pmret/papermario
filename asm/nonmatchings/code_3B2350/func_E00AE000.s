@@ -41,7 +41,7 @@ glabel func_E00AE000
 /* 3B23E0 E00AE090 AE04000C */   sw       $a0, 0xc($s0)
 .LE00AE094:
 /* 3B23E4 E00AE094 0802B825 */  j         .LE00AE094
-/* 3B23E8 E00AE098 00000000 */   nop      
+/* 3B23E8 E00AE098 00000000 */   nop
 .LE00AE09C:
 /* 3B23EC E00AE09C AC930000 */  sw        $s3, ($a0)
 /* 3B23F0 E00AE0A0 1E400004 */  bgtz      $s2, .LE00AE0B4
@@ -85,7 +85,7 @@ glabel func_E00AE000
 /* 3B2478 E00AE128 14E10004 */  bne       $a3, $at, .LE00AE13C
 /* 3B247C E00AE12C 3C018000 */   lui      $at, 0x8000
 /* 3B2480 E00AE130 14A10002 */  bne       $a1, $at, .LE00AE13C
-/* 3B2484 E00AE134 00000000 */   nop      
+/* 3B2484 E00AE134 00000000 */   nop
 /* 3B2488 E00AE138 0006000D */  break     6
 .LE00AE13C:
 /* 3B248C E00AE13C 00001812 */   mflo     $v1
@@ -100,7 +100,7 @@ glabel func_E00AE000
 /* 3B24B0 E00AE160 AC80FFC8 */  sw        $zero, -0x38($a0)
 /* 3B24B4 E00AE164 E482FFF4 */  swc1      $f2, -0xc($a0)
 /* 3B24B8 E00AE168 44830000 */  mtc1      $v1, $f0
-/* 3B24BC E00AE16C 00000000 */  nop       
+/* 3B24BC E00AE16C 00000000 */  nop
 /* 3B24C0 E00AE170 46800020 */  cvt.s.w   $f0, $f0
 /* 3B24C4 E00AE174 E480FFFC */  swc1      $f0, -4($a0)
 /* 3B24C8 E00AE178 1440FFE7 */  bnez      $v0, .LE00AE118

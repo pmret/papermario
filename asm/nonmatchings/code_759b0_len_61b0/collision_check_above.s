@@ -28,23 +28,23 @@ glabel collision_check_above
 /* 77CF0 800DE840 F7B60050 */  sdc1      $f22, 0x50($sp)
 /* 77CF4 800DE844 848200B2 */  lh        $v0, 0xb2($a0)
 /* 77CF8 800DE848 4600A502 */  mul.s     $f20, $f20, $f0
-/* 77CFC 800DE84C 00000000 */  nop       
+/* 77CFC 800DE84C 00000000 */  nop
 /* 77D00 800DE850 3C013E99 */  lui       $at, 0x3e99
 /* 77D04 800DE854 3421999A */  ori       $at, $at, 0x999a
 /* 77D08 800DE858 44811000 */  mtc1      $at, $f2
 /* 77D0C 800DE85C 8FB50080 */  lw        $s5, 0x80($sp)
 /* 77D10 800DE860 4482B000 */  mtc1      $v0, $f22
-/* 77D14 800DE864 00000000 */  nop       
+/* 77D14 800DE864 00000000 */  nop
 /* 77D18 800DE868 4680B5A0 */  cvt.s.w   $f22, $f22
 /* 77D1C 800DE86C 3C0143B4 */  lui       $at, 0x43b4
 /* 77D20 800DE870 44810000 */  mtc1      $at, $f0
 /* 77D24 800DE874 4602B582 */  mul.s     $f22, $f22, $f2
-/* 77D28 800DE878 00000000 */  nop       
+/* 77D28 800DE878 00000000 */  nop
 /* 77D2C 800DE87C 4600A503 */  div.s     $f20, $f20, $f0
 /* 77D30 800DE880 0C00A85B */  jal       sin_rad
 /* 77D34 800DE884 4600A306 */   mov.s    $f12, $f20
 /* 77D38 800DE888 4600B702 */  mul.s     $f28, $f22, $f0
-/* 77D3C 800DE88C 00000000 */  nop       
+/* 77D3C 800DE88C 00000000 */  nop
 /* 77D40 800DE890 0C00A874 */  jal       cos_rad
 /* 77D44 800DE894 4600A306 */   mov.s    $f12, $f20
 /* 77D48 800DE898 27B30010 */  addiu     $s3, $sp, 0x10
@@ -56,7 +56,7 @@ glabel collision_check_above
 /* 77D60 800DE8B0 27B0001C */  addiu     $s0, $sp, 0x1c
 /* 77D64 800DE8B4 4600B587 */  neg.s     $f22, $f22
 /* 77D68 800DE8B8 4600B682 */  mul.s     $f26, $f22, $f0
-/* 77D6C 800DE8BC 00000000 */  nop       
+/* 77D6C 800DE8BC 00000000 */  nop
 /* 77D70 800DE8C0 C6D60000 */  lwc1      $f22, ($s6)
 /* 77D74 800DE8C4 C6F80000 */  lwc1      $f24, ($s7)
 /* 77D78 800DE8C8 C7D40000 */  lwc1      $f20, ($fp)
@@ -103,7 +103,7 @@ glabel collision_check_above
 /* 77E1C 800DE96C 0C037A82 */  jal       trace_above_player
 /* 77E20 800DE970 E7A00018 */   swc1     $f0, 0x18($sp)
 /* 77E24 800DE974 0440000A */  bltz      $v0, .L800DE9A0
-/* 77E28 800DE978 00000000 */   nop      
+/* 77E28 800DE978 00000000 */   nop
 .L800DE97C:
 /* 77E2C 800DE97C C7A00010 */  lwc1      $f0, 0x10($sp)
 /* 77E30 800DE980 E6C00000 */  swc1      $f0, ($s6)

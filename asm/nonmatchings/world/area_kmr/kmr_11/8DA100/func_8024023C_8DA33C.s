@@ -13,7 +13,7 @@ glabel func_8024023C_8DA33C
 /* 8DA35C 8024025C 0C046EE2 */  jal       set_world_fog_color
 /* 8DA360 80240260 240700FF */   addiu    $a3, $zero, 0xff
 /* 8DA364 80240264 0C046ED4 */  jal       enable_world_fog
-/* 8DA368 80240268 00000000 */   nop      
+/* 8DA368 80240268 00000000 */   nop
 /* 8DA36C 8024026C 8FBF0010 */  lw        $ra, 0x10($sp)
 /* 8DA370 80240270 24020002 */  addiu     $v0, $zero, 2
 /* 8DA374 80240274 03E00008 */  jr        $ra

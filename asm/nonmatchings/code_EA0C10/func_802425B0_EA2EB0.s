@@ -15,9 +15,9 @@ glabel func_802425B0_EA2EB0
 /* EA2ED8 802425D8 8C670030 */   lw       $a3, 0x30($v1)
 /* EA2EDC 802425DC 3C014248 */  lui       $at, 0x4248
 /* EA2EE0 802425E0 44811000 */  mtc1      $at, $f2
-/* EA2EE4 802425E4 00000000 */  nop       
+/* EA2EE4 802425E4 00000000 */  nop
 /* EA2EE8 802425E8 4602003C */  c.lt.s    $f0, $f2
-/* EA2EEC 802425EC 00000000 */  nop       
+/* EA2EEC 802425EC 00000000 */  nop
 /* EA2EF0 802425F0 45010002 */  bc1t      .L802425FC
 /* EA2EF4 802425F4 24020002 */   addiu    $v0, $zero, 2
 /* EA2EF8 802425F8 0000102D */  daddu     $v0, $zero, $zero

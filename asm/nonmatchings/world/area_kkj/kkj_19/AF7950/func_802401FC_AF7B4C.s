@@ -47,4 +47,4 @@ glabel func_802401FC_AF7B4C
 /* AF7BF0 802402A0 8FB00018 */  lw        $s0, 0x18($sp)
 /* AF7BF4 802402A4 03E00008 */  jr        $ra
 /* AF7BF8 802402A8 27BD0028 */   addiu    $sp, $sp, 0x28
-/* AF7BFC 802402AC 00000000 */  nop       
+/* AF7BFC 802402AC 00000000 */  nop

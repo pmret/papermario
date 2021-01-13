@@ -57,4 +57,4 @@ glabel pause_draw_menu_label
 /* 142290 8024EF50 8FBF0028 */  lw        $ra, 0x28($sp)
 /* 142294 8024EF54 03E00008 */  jr        $ra
 /* 142298 8024EF58 27BD0030 */   addiu    $sp, $sp, 0x30
-/* 14229C 8024EF5C 00000000 */  nop       
+/* 14229C 8024EF5C 00000000 */  nop

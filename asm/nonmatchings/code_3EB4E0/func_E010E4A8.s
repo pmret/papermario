@@ -26,7 +26,7 @@ glabel func_E010E4A8
 /* 3EB9D4 E010E4F4 04610003 */  bgez      $v1, .LE010E504
 /* 3EB9D8 E010E4F8 ACA2001C */   sw       $v0, 0x1c($a1)
 /* 3EB9DC E010E4FC 0C080128 */  jal       func_E02004A0
-/* 3EB9E0 E010E500 00000000 */   nop      
+/* 3EB9E0 E010E500 00000000 */   nop
 .LE010E504:
 /* 3EB9E4 E010E504 8FBF0010 */  lw        $ra, 0x10($sp)
 /* 3EB9E8 E010E508 03E00008 */  jr        $ra

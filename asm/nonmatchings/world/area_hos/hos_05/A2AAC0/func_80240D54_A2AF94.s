@@ -7,7 +7,7 @@ glabel func_80240D54_A2AF94
 /* A2AF9C 80240D5C D422F1E0 */  ldc1      $f2, %lo(D_8024F1E0)($at)
 /* A2AFA0 80240D60 46002021 */  cvt.d.s   $f0, $f4
 /* A2AFA4 80240D64 46220002 */  mul.d     $f0, $f0, $f2
-/* A2AFA8 80240D68 00000000 */  nop       
+/* A2AFA8 80240D68 00000000 */  nop
 /* A2AFAC 80240D6C 00041080 */  sll       $v0, $a0, 2
 /* A2AFB0 80240D70 00441021 */  addu      $v0, $v0, $a0
 /* A2AFB4 80240D74 00021080 */  sll       $v0, $v0, 2
@@ -20,4 +20,4 @@ glabel func_80240D54_A2AF94
 /* A2AFD0 80240D90 00220821 */  addu      $at, $at, $v0
 /* A2AFD4 80240D94 E4201D98 */  swc1      $f0, %lo(D_800B1D98)($at)
 /* A2AFD8 80240D98 03E00008 */  jr        $ra
-/* A2AFDC 80240D9C 00000000 */   nop      
+/* A2AFDC 80240D9C 00000000 */   nop

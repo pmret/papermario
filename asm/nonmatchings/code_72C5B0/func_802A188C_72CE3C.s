@@ -23,15 +23,15 @@ glabel func_802A188C_72CE3C
 /* 72CE84 802A18D4 0040802D */   daddu    $s0, $v0, $zero
 /* 72CE88 802A18D8 24040002 */  addiu     $a0, $zero, 2
 /* 72CE8C 802A18DC 44921000 */  mtc1      $s2, $f2
-/* 72CE90 802A18E0 00000000 */  nop       
+/* 72CE90 802A18E0 00000000 */  nop
 /* 72CE94 802A18E4 468010A0 */  cvt.s.w   $f2, $f2
 /* 72CE98 802A18E8 44051000 */  mfc1      $a1, $f2
 /* 72CE9C 802A18EC 44901000 */  mtc1      $s0, $f2
-/* 72CEA0 802A18F0 00000000 */  nop       
+/* 72CEA0 802A18F0 00000000 */  nop
 /* 72CEA4 802A18F4 468010A0 */  cvt.s.w   $f2, $f2
 /* 72CEA8 802A18F8 44061000 */  mfc1      $a2, $f2
 /* 72CEAC 802A18FC 44821000 */  mtc1      $v0, $f2
-/* 72CEB0 802A1900 00000000 */  nop       
+/* 72CEB0 802A1900 00000000 */  nop
 /* 72CEB4 802A1904 468010A0 */  cvt.s.w   $f2, $f2
 /* 72CEB8 802A1908 3C01BF80 */  lui       $at, 0xbf80
 /* 72CEBC 802A190C 44810000 */  mtc1      $at, $f0
@@ -49,5 +49,5 @@ glabel func_802A188C_72CE3C
 /* 72CEEC 802A193C 24020002 */  addiu     $v0, $zero, 2
 /* 72CEF0 802A1940 03E00008 */  jr        $ra
 /* 72CEF4 802A1944 27BD0030 */   addiu    $sp, $sp, 0x30
-/* 72CEF8 802A1948 00000000 */  nop       
-/* 72CEFC 802A194C 00000000 */  nop       
+/* 72CEF8 802A1948 00000000 */  nop
+/* 72CEFC 802A194C 00000000 */  nop

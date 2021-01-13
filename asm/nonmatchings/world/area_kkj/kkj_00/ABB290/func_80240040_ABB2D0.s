@@ -10,9 +10,9 @@ glabel func_80240040_ABB2D0
 /* ABB2E4 80240054 3C108011 */  lui       $s0, %hi(gPlayerStatus)
 /* ABB2E8 80240058 2610EFC8 */  addiu     $s0, $s0, %lo(gPlayerStatus)
 /* ABB2EC 8024005C 0C0B1EAF */  jal       get_variable
-/* ABB2F0 80240060 00000000 */   nop      
+/* ABB2F0 80240060 00000000 */   nop
 /* ABB2F4 80240064 14400005 */  bnez      $v0, .L8024007C
-/* ABB2F8 80240068 00000000 */   nop      
+/* ABB2F8 80240068 00000000 */   nop
 /* ABB2FC 8024006C 3C028024 */  lui       $v0, %hi(D_8024160C)
 /* ABB300 80240070 2442160C */  addiu     $v0, $v0, %lo(D_8024160C)
 /* ABB304 80240074 08090022 */  j         .L80240088
@@ -30,5 +30,5 @@ glabel func_80240040_ABB2D0
 /* ABB32C 8024009C 24020002 */  addiu     $v0, $zero, 2
 /* ABB330 802400A0 03E00008 */  jr        $ra
 /* ABB334 802400A4 27BD0018 */   addiu    $sp, $sp, 0x18
-/* ABB338 802400A8 00000000 */  nop       
-/* ABB33C 802400AC 00000000 */  nop       
+/* ABB338 802400A8 00000000 */  nop
+/* ABB33C 802400AC 00000000 */  nop

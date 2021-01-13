@@ -5,7 +5,7 @@ glabel func_80218360_4F7F40
 /* 4F7F40 80218360 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 4F7F44 80218364 AFBF0010 */  sw        $ra, 0x10($sp)
 /* 4F7F48 80218368 0C046ED4 */  jal       enable_world_fog
-/* 4F7F4C 8021836C 00000000 */   nop      
+/* 4F7F4C 8021836C 00000000 */   nop
 /* 4F7F50 80218370 240403B6 */  addiu     $a0, $zero, 0x3b6
 /* 4F7F54 80218374 0C046EDD */  jal       set_world_fog_dist
 /* 4F7F58 80218378 240503E8 */   addiu    $a1, $zero, 0x3e8
@@ -25,4 +25,4 @@ glabel func_80218360_4F7F40
 /* 4F7F90 802183B0 24020002 */  addiu     $v0, $zero, 2
 /* 4F7F94 802183B4 03E00008 */  jr        $ra
 /* 4F7F98 802183B8 27BD0018 */   addiu    $sp, $sp, 0x18
-/* 4F7F9C 802183BC 00000000 */  nop       
+/* 4F7F9C 802183BC 00000000 */  nop

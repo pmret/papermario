@@ -79,7 +79,7 @@ glabel func_80240E90_BDFC20
 /* BDFD48 80240FB8 E7A2001C */  swc1      $f2, 0x1c($sp)
 /* BDFD4C 80240FBC 46000121 */  cvt.d.s   $f4, $f0
 /* BDFD50 80240FC0 4624303C */  c.lt.d    $f6, $f4
-/* BDFD54 80240FC4 00000000 */  nop       
+/* BDFD54 80240FC4 00000000 */  nop
 /* BDFD58 80240FC8 45000005 */  bc1f      .L80240FE0
 /* BDFD5C 80240FCC E7A00024 */   swc1     $f0, 0x24($sp)
 /* BDFD60 80240FD0 C620003C */  lwc1      $f0, 0x3c($s1)
@@ -90,9 +90,9 @@ glabel func_80240E90_BDFC20
 /* BDFD70 80240FE0 3C01C000 */  lui       $at, 0xc000
 /* BDFD74 80240FE4 44810800 */  mtc1      $at, $f1
 /* BDFD78 80240FE8 44800000 */  mtc1      $zero, $f0
-/* BDFD7C 80240FEC 00000000 */  nop       
+/* BDFD7C 80240FEC 00000000 */  nop
 /* BDFD80 80240FF0 4620203C */  c.lt.d    $f4, $f0
-/* BDFD84 80240FF4 00000000 */  nop       
+/* BDFD84 80240FF4 00000000 */  nop
 /* BDFD88 80240FF8 45020006 */  bc1fl     .L80241014
 /* BDFD8C 80240FFC E622003C */   swc1     $f2, 0x3c($s1)
 /* BDFD90 80241000 C620003C */  lwc1      $f0, 0x3c($s1)
@@ -107,10 +107,10 @@ glabel func_80240E90_BDFC20
 /* BDFDAC 8024101C 4406B000 */  mfc1      $a2, $f22
 /* BDFDB0 80241020 4407A000 */  mfc1      $a3, $f20
 /* BDFDB4 80241024 0C00A7B5 */  jal       dist2D
-/* BDFDB8 80241028 00000000 */   nop      
+/* BDFDB8 80241028 00000000 */   nop
 /* BDFDBC 8024102C C6220018 */  lwc1      $f2, 0x18($s1)
 /* BDFDC0 80241030 4600103C */  c.lt.s    $f2, $f0
-/* BDFDC4 80241034 00000000 */  nop       
+/* BDFDC4 80241034 00000000 */  nop
 /* BDFDC8 80241038 45010003 */  bc1t      .L80241048
 /* BDFDCC 8024103C E7A00024 */   swc1     $f0, 0x24($sp)
 /* BDFDD0 80241040 24020002 */  addiu     $v0, $zero, 2

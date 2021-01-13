@@ -18,7 +18,7 @@ glabel get_asset_offset
 /* 36204 8005AE04 AFB00030 */   sw       $s0, 0x30($sp)
 /* 36208 8005AE08 8FA40020 */  lw        $a0, 0x20($sp)
 /* 3620C 8005AE0C 0C00AB39 */  jal       heap_malloc
-/* 36210 8005AE10 00000000 */   nop      
+/* 36210 8005AE10 00000000 */   nop
 /* 36214 8005AE14 0040882D */  daddu     $s1, $v0, $zero
 /* 36218 8005AE18 0220802D */  daddu     $s0, $s1, $zero
 /* 3621C 8005AE1C 3C0201E4 */  lui       $v0, 0x1e4
@@ -53,6 +53,6 @@ glabel get_asset_offset
 /* 36288 8005AE88 8FB00030 */  lw        $s0, 0x30($sp)
 /* 3628C 8005AE8C 03E00008 */  jr        $ra
 /* 36290 8005AE90 27BD0048 */   addiu    $sp, $sp, 0x48
-/* 36294 8005AE94 00000000 */  nop       
-/* 36298 8005AE98 00000000 */  nop       
-/* 3629C 8005AE9C 00000000 */  nop       
+/* 36294 8005AE94 00000000 */  nop
+/* 36298 8005AE98 00000000 */  nop
+/* 3629C 8005AE9C 00000000 */  nop

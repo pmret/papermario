@@ -42,7 +42,7 @@ glabel func_80241CB8_D2D9E8
 /* D2DA7C 80241D4C 2402000F */  addiu     $v0, $zero, 0xf
 /* D2DA80 80241D50 AFA2001C */  sw        $v0, 0x1c($sp)
 /* D2DA84 80241D54 44833000 */  mtc1      $v1, $f6
-/* D2DA88 80241D58 00000000 */  nop       
+/* D2DA88 80241D58 00000000 */  nop
 /* D2DA8C 80241D5C 468031A0 */  cvt.s.w   $f6, $f6
 /* D2DA90 80241D60 44073000 */  mfc1      $a3, $f6
 /* D2DA94 80241D64 27A20028 */  addiu     $v0, $sp, 0x28

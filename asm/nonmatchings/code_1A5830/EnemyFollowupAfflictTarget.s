@@ -22,7 +22,7 @@ glabel EnemyFollowupAfflictTarget
 /* 1AB7F8 8027CF18 8E440148 */  lw        $a0, 0x148($s2)
 .L8027CF1C:
 /* 1AB7FC 8027CF1C 0C09A75B */  jal       get_actor
-/* 1AB800 8027CF20 00000000 */   nop      
+/* 1AB800 8027CF20 00000000 */   nop
 /* 1AB804 8027CF24 0040202D */  daddu     $a0, $v0, $zero
 /* 1AB808 8027CF28 94820428 */  lhu       $v0, 0x428($a0)
 /* 1AB80C 8027CF2C 8E100000 */  lw        $s0, ($s0)

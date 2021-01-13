@@ -6,11 +6,11 @@ glabel clear_virtual_models
 /* B72B4 80120BB4 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* B72B8 80120BB8 80420070 */  lb        $v0, 0x70($v0)
 /* B72BC 80120BBC 14400005 */  bnez      $v0, .L80120BD4
-/* B72C0 80120BC0 00000000 */   nop      
+/* B72C0 80120BC0 00000000 */   nop
 /* B72C4 80120BC4 3C028015 */  lui       $v0, %hi(D_80153B70)
 /* B72C8 80120BC8 24423B70 */  addiu     $v0, $v0, %lo(D_80153B70)
 /* B72CC 80120BCC 080482F7 */  j         .L80120BDC
-/* B72D0 80120BD0 00000000 */   nop      
+/* B72D0 80120BD0 00000000 */   nop
 .L80120BD4:
 /* B72D4 80120BD4 3C028015 */  lui       $v0, %hi(D_80153F70)
 /* B72D8 80120BD8 24423F70 */  addiu     $v0, $v0, %lo(D_80153F70)
@@ -46,4 +46,4 @@ glabel clear_virtual_models
 /* B7348 80120C48 3C018015 */  lui       $at, %hi(D_80154390)
 /* B734C 80120C4C AC224390 */  sw        $v0, %lo(D_80154390)($at)
 /* B7350 80120C50 03E00008 */  jr        $ra
-/* B7354 80120C54 00000000 */   nop      
+/* B7354 80120C54 00000000 */   nop

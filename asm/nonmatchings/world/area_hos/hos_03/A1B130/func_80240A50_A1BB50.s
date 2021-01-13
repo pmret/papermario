@@ -8,5 +8,5 @@ glabel func_80240A50_A1BB50
 /* A1BB5C 80240A5C AC820084 */  sw        $v0, 0x84($a0)
 /* A1BB60 80240A60 03E00008 */  jr        $ra
 /* A1BB64 80240A64 24020002 */   addiu    $v0, $zero, 2
-/* A1BB68 80240A68 00000000 */  nop       
-/* A1BB6C 80240A6C 00000000 */  nop       
+/* A1BB68 80240A68 00000000 */  nop
+/* A1BB6C 80240A6C 00000000 */  nop

@@ -21,10 +21,10 @@ glabel create_trigger
 /* DBEA8 801457A8 2A020040 */  slti      $v0, $s0, 0x40
 .L801457AC:
 /* DBEAC 801457AC 14400003 */  bnez      $v0, .L801457BC
-/* DBEB0 801457B0 00000000 */   nop      
+/* DBEB0 801457B0 00000000 */   nop
 .L801457B4:
 /* DBEB4 801457B4 080515ED */  j         .L801457B4
-/* DBEB8 801457B8 00000000 */   nop      
+/* DBEB8 801457B8 00000000 */   nop
 .L801457BC:
 /* DBEBC 801457BC 0C00AB39 */  jal       heap_malloc
 /* DBEC0 801457C0 24040038 */   addiu    $a0, $zero, 0x38
@@ -42,7 +42,7 @@ glabel create_trigger
 /* DBEF0 801457F0 A4A30000 */   sh       $v1, ($a1)
 .L801457F4:
 /* DBEF4 801457F4 080515FD */  j         .L801457F4
-/* DBEF8 801457F8 00000000 */   nop      
+/* DBEF8 801457F8 00000000 */   nop
 .L801457FC:
 /* DBEFC 801457FC 8E220000 */  lw        $v0, ($s1)
 /* DBF00 80145800 34420001 */  ori       $v0, $v0, 1

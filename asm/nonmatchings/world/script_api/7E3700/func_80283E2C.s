@@ -21,5 +21,5 @@ glabel func_80283E2C
 /* 7E4CEC 80283E6C 24020002 */  addiu     $v0, $zero, 2
 /* 7E4CF0 80283E70 03E00008 */  jr        $ra
 /* 7E4CF4 80283E74 AC85008C */   sw       $a1, 0x8c($a0)
-/* 7E4CF8 80283E78 00000000 */  nop       
-/* 7E4CFC 80283E7C 00000000 */  nop       
+/* 7E4CF8 80283E78 00000000 */  nop
+/* 7E4CFC 80283E7C 00000000 */  nop

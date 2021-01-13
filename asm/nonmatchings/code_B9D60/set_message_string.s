@@ -31,7 +31,7 @@ glabel set_message_string
 /* BC29C 80125B9C A0830000 */  sb        $v1, ($a0)
 /* BC2A0 80125BA0 90420000 */  lbu       $v0, ($v0)
 /* BC2A4 80125BA4 10460006 */  beq       $v0, $a2, .L80125BC0
-/* BC2A8 80125BA8 00000000 */   nop      
+/* BC2A8 80125BA8 00000000 */   nop
 /* BC2AC 80125BAC 24A50001 */  addiu     $a1, $a1, 1
 /* BC2B0 80125BB0 28A20020 */  slti      $v0, $a1, 0x20
 /* BC2B4 80125BB4 1440FFF7 */  bnez      $v0, .L80125B94
@@ -39,7 +39,7 @@ glabel set_message_string
 /* BC2BC 80125BBC A086FFFF */  sb        $a2, -1($a0)
 .L80125BC0:
 /* BC2C0 80125BC0 12200003 */  beqz      $s1, .L80125BD0
-/* BC2C4 80125BC4 00000000 */   nop      
+/* BC2C4 80125BC4 00000000 */   nop
 /* BC2C8 80125BC8 0C00AB1E */  jal       general_heap_free
 /* BC2CC 80125BCC 0220202D */   daddu    $a0, $s1, $zero
 .L80125BD0:

@@ -30,7 +30,7 @@ glabel func_80240848_EF2E58
 /* EF2EBC 802408AC A603008E */   sh       $v1, 0x8e($s0)
 /* EF2EC0 802408B0 C60C000C */  lwc1      $f12, 0xc($s0)
 /* EF2EC4 802408B4 44820000 */  mtc1      $v0, $f0
-/* EF2EC8 802408B8 00000000 */  nop       
+/* EF2EC8 802408B8 00000000 */  nop
 /* EF2ECC 802408BC 46800020 */  cvt.s.w   $f0, $f0
 /* EF2ED0 802408C0 46006300 */  add.s     $f12, $f12, $f0
 /* EF2ED4 802408C4 3C0142B4 */  lui       $at, 0x42b4

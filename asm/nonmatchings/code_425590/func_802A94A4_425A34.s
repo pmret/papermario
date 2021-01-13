@@ -13,7 +13,7 @@ glabel func_802A94A4_425A34
 /* 425A54 802A94C4 0060882D */   daddu    $s1, $v1, $zero
 /* 425A58 802A94C8 8C640004 */  lw        $a0, 4($v1)
 /* 425A5C 802A94CC 0C0511EA */  jal       draw_icon_0
-/* 425A60 802A94D0 00000000 */   nop      
+/* 425A60 802A94D0 00000000 */   nop
 .L802A94D4:
 /* 425A64 802A94D4 8E300008 */  lw        $s0, 8($s1)
 /* 425A68 802A94D8 0C0511EA */  jal       draw_icon_0

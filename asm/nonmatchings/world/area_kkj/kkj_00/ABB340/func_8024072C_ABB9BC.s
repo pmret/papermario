@@ -28,7 +28,7 @@ glabel func_8024072C_ABB9BC
 /* ABBA14 80240784 8E0200D0 */  lw        $v0, 0xd0($s0)
 /* ABBA18 80240788 8C42007C */  lw        $v0, 0x7c($v0)
 /* ABBA1C 8024078C 04410004 */  bgez      $v0, .L802407A0
-/* ABBA20 80240790 00000000 */   nop      
+/* ABBA20 80240790 00000000 */   nop
 /* ABBA24 80240794 C6400000 */  lwc1      $f0, ($s2)
 /* ABBA28 80240798 080901F0 */  j         .L802407C0
 /* ABBA2C 8024079C E4A00018 */   swc1     $f0, 0x18($a1)
@@ -36,7 +36,7 @@ glabel func_8024072C_ABB9BC
 /* ABBA30 802407A0 3C018025 */  lui       $at, %hi(D_80249D38)
 /* ABBA34 802407A4 D4229D38 */  ldc1      $f2, %lo(D_80249D38)($at)
 /* ABBA38 802407A8 44820000 */  mtc1      $v0, $f0
-/* ABBA3C 802407AC 00000000 */  nop       
+/* ABBA3C 802407AC 00000000 */  nop
 /* ABBA40 802407B0 46800021 */  cvt.d.w   $f0, $f0
 /* ABBA44 802407B4 46220003 */  div.d     $f0, $f0, $f2
 /* ABBA48 802407B8 46200020 */  cvt.s.d   $f0, $f0

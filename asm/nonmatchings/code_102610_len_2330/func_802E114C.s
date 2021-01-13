@@ -7,7 +7,7 @@ glabel func_802E114C
 /* 1029D4 802E1154 0C009C22 */  jal       func_80027088
 /* 1029D8 802E1158 24040001 */   addiu    $a0, $zero, 1
 /* 1029DC 802E115C 0C03805E */  jal       disable_player_input
-/* 1029E0 802E1160 00000000 */   nop      
+/* 1029E0 802E1160 00000000 */   nop
 /* 1029E4 802E1164 3C02800F */  lui       $v0, %hi(gPlayerStatusPtr)
 /* 1029E8 802E1168 8C427B30 */  lw        $v0, %lo(gPlayerStatusPtr)($v0)
 /* 1029EC 802E116C AC400054 */  sw        $zero, 0x54($v0)

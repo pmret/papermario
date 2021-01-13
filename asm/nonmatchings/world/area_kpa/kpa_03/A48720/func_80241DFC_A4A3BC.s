@@ -12,7 +12,7 @@ glabel func_80241DFC_A4A3BC
 /* A4A3D8 80241E18 8E03006C */  lw        $v1, 0x6c($s0)
 /* A4A3DC 80241E1C 24020002 */  addiu     $v0, $zero, 2
 /* A4A3E0 80241E20 14620003 */  bne       $v1, $v0, .L80241E30
-/* A4A3E4 80241E24 00000000 */   nop      
+/* A4A3E4 80241E24 00000000 */   nop
 /* A4A3E8 80241E28 AC80001C */  sw        $zero, 0x1c($a0)
 /* A4A3EC 80241E2C AC800018 */  sw        $zero, 0x18($a0)
 .L80241E30:
@@ -21,6 +21,6 @@ glabel func_80241DFC_A4A3BC
 /* A4A3F8 80241E38 24020002 */  addiu     $v0, $zero, 2
 /* A4A3FC 80241E3C 03E00008 */  jr        $ra
 /* A4A400 80241E40 27BD0018 */   addiu    $sp, $sp, 0x18
-/* A4A404 80241E44 00000000 */  nop       
-/* A4A408 80241E48 00000000 */  nop       
-/* A4A40C 80241E4C 00000000 */  nop       
+/* A4A404 80241E44 00000000 */  nop
+/* A4A408 80241E48 00000000 */  nop
+/* A4A40C 80241E4C 00000000 */  nop

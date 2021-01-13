@@ -36,7 +36,7 @@ glabel spr_appendMDL_component
 /* FFA60 802DC970 0200282D */   daddu    $a1, $s0, $zero
 /* FFA64 802DC974 C7A20124 */  lwc1      $f2, 0x124($sp)
 /* FFA68 802DC978 46141032 */  c.eq.s    $f2, $f20
-/* FFA6C 802DC97C 00000000 */  nop       
+/* FFA6C 802DC97C 00000000 */  nop
 /* FFA70 802DC980 4501000A */  bc1t      .L802DC9AC
 /* FFA74 802DC984 0220202D */   daddu    $a0, $s1, $zero
 /* FFA78 802DC988 44051000 */  mfc1      $a1, $f2
@@ -50,7 +50,7 @@ glabel spr_appendMDL_component
 /* FFA98 802DC9A8 00A0302D */   daddu    $a2, $a1, $zero
 .L802DC9AC:
 /* FFA9C 802DC9AC 4614B032 */  c.eq.s    $f22, $f20
-/* FFAA0 802DC9B0 00000000 */  nop       
+/* FFAA0 802DC9B0 00000000 */  nop
 /* FFAA4 802DC9B4 4501000C */  bc1t      .L802DC9E8
 /* FFAA8 802DC9B8 0220202D */   daddu    $a0, $s1, $zero
 /* FFAAC 802DC9BC 4405B000 */  mfc1      $a1, $f22
@@ -66,7 +66,7 @@ glabel spr_appendMDL_component
 /* FFAD4 802DC9E4 00A0302D */   daddu    $a2, $a1, $zero
 .L802DC9E8:
 /* FFAD8 802DC9E8 4614C032 */  c.eq.s    $f24, $f20
-/* FFADC 802DC9EC 00000000 */  nop       
+/* FFADC 802DC9EC 00000000 */  nop
 /* FFAE0 802DC9F0 4501000A */  bc1t      .L802DCA1C
 /* FFAE4 802DC9F4 0220202D */   daddu    $a0, $s1, $zero
 /* FFAE8 802DC9F8 4405C000 */  mfc1      $a1, $f24
@@ -81,17 +81,17 @@ glabel spr_appendMDL_component
 .L802DCA1C:
 /* FFB0C 802DCA1C 3C013F80 */  lui       $at, 0x3f80
 /* FFB10 802DCA20 44810000 */  mtc1      $at, $f0
-/* FFB14 802DCA24 00000000 */  nop       
+/* FFB14 802DCA24 00000000 */  nop
 /* FFB18 802DCA28 4600D032 */  c.eq.s    $f26, $f0
-/* FFB1C 802DCA2C 00000000 */  nop       
+/* FFB1C 802DCA2C 00000000 */  nop
 /* FFB20 802DCA30 4500000A */  bc1f      .L802DCA5C
 /* FFB24 802DCA34 27B00060 */   addiu    $s0, $sp, 0x60
 /* FFB28 802DCA38 4600E032 */  c.eq.s    $f28, $f0
-/* FFB2C 802DCA3C 00000000 */  nop       
+/* FFB2C 802DCA3C 00000000 */  nop
 /* FFB30 802DCA40 45000006 */  bc1f      .L802DCA5C
-/* FFB34 802DCA44 00000000 */   nop      
+/* FFB34 802DCA44 00000000 */   nop
 /* FFB38 802DCA48 4600F032 */  c.eq.s    $f30, $f0
-/* FFB3C 802DCA4C 00000000 */  nop       
+/* FFB3C 802DCA4C 00000000 */  nop
 /* FFB40 802DCA50 4501000C */  bc1t      .L802DCA84
 /* FFB44 802DCA54 3C120001 */   lui      $s2, 1
 /* FFB48 802DCA58 27B00060 */  addiu     $s0, $sp, 0x60

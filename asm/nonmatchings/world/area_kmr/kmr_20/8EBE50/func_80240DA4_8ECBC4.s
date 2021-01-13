@@ -12,4 +12,4 @@ glabel func_80240DA4_8ECBC4
 /* 8ECBE0 80240DC0 24020002 */  addiu     $v0, $zero, 2
 /* 8ECBE4 80240DC4 03E00008 */  jr        $ra
 /* 8ECBE8 80240DC8 27BD0018 */   addiu    $sp, $sp, 0x18
-/* 8ECBEC 80240DCC 00000000 */  nop       
+/* 8ECBEC 80240DCC 00000000 */  nop

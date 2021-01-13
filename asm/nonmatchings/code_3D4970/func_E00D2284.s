@@ -38,7 +38,7 @@ glabel func_E00D2284
 /* 3D4C78 E00D2308 8C62001C */  lw        $v0, 0x1c($v1)
 /* 3D4C7C E00D230C 3C038000 */  lui       $v1, 0x8000
 /* 3D4C80 E00D2310 4600A502 */  mul.s     $f20, $f20, $f0
-/* 3D4C84 E00D2314 00000000 */  nop       
+/* 3D4C84 E00D2314 00000000 */  nop
 /* 3D4C88 E00D2318 00431021 */  addu      $v0, $v0, $v1
 /* 3D4C8C E00D231C 3C03800B */  lui       $v1, %hi(gCameras)
 /* 3D4C90 E00D2320 24631D80 */  addiu     $v1, $v1, %lo(gCameras)
@@ -160,4 +160,4 @@ glabel func_E00D2284
 /* 3D4E60 E00D24F0 D7B400B0 */  ldc1      $f20, 0xb0($sp)
 /* 3D4E64 E00D24F4 03E00008 */  jr        $ra
 /* 3D4E68 E00D24F8 27BD00B8 */   addiu    $sp, $sp, 0xb8
-/* 3D4E6C E00D24FC 00000000 */  nop       
+/* 3D4E6C E00D24FC 00000000 */  nop

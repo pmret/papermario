@@ -30,7 +30,7 @@ glabel func_8024099C_EDF35C
 /* EDF3C0 80240A00 A603008E */   sh       $v1, 0x8e($s0)
 /* EDF3C4 80240A04 C60C000C */  lwc1      $f12, 0xc($s0)
 /* EDF3C8 80240A08 44820000 */  mtc1      $v0, $f0
-/* EDF3CC 80240A0C 00000000 */  nop       
+/* EDF3CC 80240A0C 00000000 */  nop
 /* EDF3D0 80240A10 46800020 */  cvt.s.w   $f0, $f0
 /* EDF3D4 80240A14 46006300 */  add.s     $f12, $f12, $f0
 /* EDF3D8 80240A18 3C0142B4 */  lui       $at, 0x42b4

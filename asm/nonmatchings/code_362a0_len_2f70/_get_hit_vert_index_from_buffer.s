@@ -8,7 +8,7 @@ glabel _get_hit_vert_index_from_buffer
 .L8005BA00:
 /* 36E00 8005BA00 8C820000 */  lw        $v0, ($a0)
 /* 36E04 8005BA04 10450005 */  beq       $v0, $a1, .L8005BA1C
-/* 36E08 8005BA08 00000000 */   nop      
+/* 36E08 8005BA08 00000000 */   nop
 /* 36E0C 8005BA0C 24630001 */  addiu     $v1, $v1, 1
 /* 36E10 8005BA10 0066102A */  slt       $v0, $v1, $a2
 /* 36E14 8005BA14 1440FFFA */  bnez      $v0, .L8005BA00

@@ -17,7 +17,7 @@ glabel func_80240304_BDD4B4
 /* BDD4E4 80240334 A602008E */  sh        $v0, 0x8e($s0)
 /* BDD4E8 80240338 00021400 */  sll       $v0, $v0, 0x10
 /* BDD4EC 8024033C 1C400012 */  bgtz      $v0, .L80240388
-/* BDD4F0 80240340 00000000 */   nop      
+/* BDD4F0 80240340 00000000 */   nop
 /* BDD4F4 80240344 3C02800F */  lui       $v0, %hi(gPlayerStatusPtr)
 /* BDD4F8 80240348 8C427B30 */  lw        $v0, %lo(gPlayerStatusPtr)($v0)
 /* BDD4FC 8024034C C60C0038 */  lwc1      $f12, 0x38($s0)

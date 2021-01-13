@@ -5,7 +5,7 @@ glabel func_80240080_BB5A60
 /* BB5A60 80240080 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* BB5A64 80240084 AFBF0010 */  sw        $ra, 0x10($sp)
 /* BB5A68 80240088 0C046ED4 */  jal       enable_world_fog
-/* BB5A6C 8024008C 00000000 */   nop      
+/* BB5A6C 8024008C 00000000 */   nop
 /* BB5A70 80240090 240403DE */  addiu     $a0, $zero, 0x3de
 /* BB5A74 80240094 0C046EDD */  jal       set_world_fog_dist
 /* BB5A78 80240098 240503E8 */   addiu    $a1, $zero, 0x3e8

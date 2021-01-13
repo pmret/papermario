@@ -10,7 +10,7 @@ glabel func_802E1204
 /* 102A98 802E1218 0C05152F */  jal       get_global_flag
 /* 102A9C 802E121C 34845BDF */   ori      $a0, $a0, 0x5bdf
 /* 102AA0 802E1220 1440000B */  bnez      $v0, .L802E1250
-/* 102AA4 802E1224 00000000 */   nop      
+/* 102AA4 802E1224 00000000 */   nop
 /* 102AA8 802E1228 3C05802F */  lui       $a1, %hi(D_802EB390)
 /* 102AAC 802E122C 24A5B390 */  addiu     $a1, $a1, %lo(D_802EB390)
 /* 102AB0 802E1230 ACA00000 */  sw        $zero, ($a1)
@@ -20,7 +20,7 @@ glabel func_802E1204
 /* 102AC0 802E1240 0C051514 */  jal       set_global_flag
 /* 102AC4 802E1244 34845BDF */   ori      $a0, $a0, 0x5bdf
 /* 102AC8 802E1248 080B8498 */  j         .L802E1260
-/* 102ACC 802E124C 00000000 */   nop      
+/* 102ACC 802E124C 00000000 */   nop
 .L802E1250:
 /* 102AD0 802E1250 0C043F5A */  jal       func_8010FD68
 /* 102AD4 802E1254 0200202D */   daddu    $a0, $s0, $zero

@@ -26,7 +26,7 @@ glabel func_80240720_DCD3F0
 /* DCD440 80240770 1440FFFA */  bnez      $v0, .L8024075C
 /* DCD444 80240774 24A50004 */   addiu    $a1, $a1, 4
 /* DCD448 80240778 080901EF */  j         .L802407BC
-/* DCD44C 8024077C 00000000 */   nop      
+/* DCD44C 8024077C 00000000 */   nop
 .L80240780:
 /* DCD450 80240780 0000182D */  daddu     $v1, $zero, $zero
 /* DCD454 80240784 0040282D */  daddu     $a1, $v0, $zero

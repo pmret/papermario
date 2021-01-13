@@ -24,7 +24,7 @@ glabel test_below_player
 /* 774CC 800DE01C AFBE0048 */  sw        $fp, 0x48($sp)
 /* 774D0 800DE020 8FBE00A4 */  lw        $fp, 0xa4($sp)
 /* 774D4 800DE024 46006082 */  mul.s     $f2, $f12, $f0
-/* 774D8 800DE028 00000000 */  nop       
+/* 774D8 800DE028 00000000 */  nop
 /* 774DC 800DE02C 3C0143B4 */  lui       $at, 0x43b4
 /* 774E0 800DE030 44816000 */  mtc1      $at, $f12
 /* 774E4 800DE034 3C013E8F */  lui       $at, 0x3e8f
@@ -45,19 +45,19 @@ glabel test_below_player
 /* 77520 800DE070 AFC00000 */  sw        $zero, ($fp)
 /* 77524 800DE074 C63E0000 */  lwc1      $f30, ($s1)
 /* 77528 800DE078 46007502 */  mul.s     $f20, $f14, $f0
-/* 7752C 800DE07C 00000000 */  nop       
+/* 7752C 800DE07C 00000000 */  nop
 /* 77530 800DE080 0C00A82D */  jal       sin_cos_rad
 /* 77534 800DE084 460C1303 */   div.s    $f12, $f2, $f12
 /* 77538 800DE088 C7A00010 */  lwc1      $f0, 0x10($sp)
 /* 7753C 800DE08C 4600A582 */  mul.s     $f22, $f20, $f0
-/* 77540 800DE090 00000000 */  nop       
+/* 77540 800DE090 00000000 */  nop
 /* 77544 800DE094 2410FFFF */  addiu     $s0, $zero, -1
 /* 77548 800DE098 27A40018 */  addiu     $a0, $sp, 0x18
 /* 7754C 800DE09C 27A5001C */  addiu     $a1, $sp, 0x1c
 /* 77550 800DE0A0 C7A00014 */  lwc1      $f0, 0x14($sp)
 /* 77554 800DE0A4 4600A507 */  neg.s     $f20, $f20
 /* 77558 800DE0A8 4600A502 */  mul.s     $f20, $f20, $f0
-/* 7755C 800DE0AC 00000000 */  nop       
+/* 7755C 800DE0AC 00000000 */  nop
 /* 77560 800DE0B0 27A60020 */  addiu     $a2, $sp, 0x20
 /* 77564 800DE0B4 C65C0000 */  lwc1      $f28, ($s2)
 /* 77568 800DE0B8 C6780000 */  lwc1      $f24, ($s3)
@@ -77,7 +77,7 @@ glabel test_below_player
 /* 775A0 800DE0F0 C7A20024 */  lwc1      $f2, 0x24($sp)
 /* 775A4 800DE0F4 46000005 */  abs.s     $f0, $f0
 /* 775A8 800DE0F8 4600103E */  c.le.s    $f2, $f0
-/* 775AC 800DE0FC 00000000 */  nop       
+/* 775AC 800DE0FC 00000000 */  nop
 /* 775B0 800DE100 45020017 */  bc1fl     .L800DE160
 /* 775B4 800DE104 27A40018 */   addiu    $a0, $sp, 0x18
 /* 775B8 800DE108 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
@@ -120,7 +120,7 @@ glabel test_below_player
 /* 77648 800DE198 C7A20024 */  lwc1      $f2, 0x24($sp)
 /* 7764C 800DE19C 46000005 */  abs.s     $f0, $f0
 /* 77650 800DE1A0 4600103E */  c.le.s    $f2, $f0
-/* 77654 800DE1A4 00000000 */  nop       
+/* 77654 800DE1A4 00000000 */  nop
 /* 77658 800DE1A8 45020019 */  bc1fl     .L800DE210
 /* 7765C 800DE1AC 27A40018 */   addiu    $a0, $sp, 0x18
 /* 77660 800DE1B0 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
@@ -165,7 +165,7 @@ glabel test_below_player
 /* 776F8 800DE248 C7A20024 */  lwc1      $f2, 0x24($sp)
 /* 776FC 800DE24C 46000005 */  abs.s     $f0, $f0
 /* 77700 800DE250 4600103E */  c.le.s    $f2, $f0
-/* 77704 800DE254 00000000 */  nop       
+/* 77704 800DE254 00000000 */  nop
 /* 77708 800DE258 45020017 */  bc1fl     .L800DE2B8
 /* 7770C 800DE25C 27A40018 */   addiu    $a0, $sp, 0x18
 /* 77710 800DE260 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
@@ -208,7 +208,7 @@ glabel test_below_player
 /* 777A0 800DE2F0 C7A20024 */  lwc1      $f2, 0x24($sp)
 /* 777A4 800DE2F4 46000005 */  abs.s     $f0, $f0
 /* 777A8 800DE2F8 4600103E */  c.le.s    $f2, $f0
-/* 777AC 800DE2FC 00000000 */  nop       
+/* 777AC 800DE2FC 00000000 */  nop
 /* 777B0 800DE300 45020019 */  bc1fl     .L800DE368
 /* 777B4 800DE304 27A40018 */   addiu    $a0, $sp, 0x18
 /* 777B8 800DE308 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
@@ -246,14 +246,14 @@ glabel test_below_player
 /* 77834 800DE384 E7BE0024 */   swc1     $f30, 0x24($sp)
 /* 77838 800DE388 0040202D */  daddu     $a0, $v0, $zero
 /* 7783C 800DE38C 0480001D */  bltz      $a0, .L800DE404
-/* 77840 800DE390 00000000 */   nop      
+/* 77840 800DE390 00000000 */   nop
 /* 77844 800DE394 C6200000 */  lwc1      $f0, ($s1)
 /* 77848 800DE398 C7A20024 */  lwc1      $f2, 0x24($sp)
 /* 7784C 800DE39C 46000005 */  abs.s     $f0, $f0
 /* 77850 800DE3A0 4600103E */  c.le.s    $f2, $f0
-/* 77854 800DE3A4 00000000 */  nop       
+/* 77854 800DE3A4 00000000 */  nop
 /* 77858 800DE3A8 45000016 */  bc1f      .L800DE404
-/* 7785C 800DE3AC 00000000 */   nop      
+/* 7785C 800DE3AC 00000000 */   nop
 /* 77860 800DE3B0 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
 /* 77864 800DE3B4 2463419C */  addiu     $v1, $v1, %lo(gGameStatusPtr)
 /* 77868 800DE3B8 8C620000 */  lw        $v0, ($v1)

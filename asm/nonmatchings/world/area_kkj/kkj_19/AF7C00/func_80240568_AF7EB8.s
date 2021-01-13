@@ -28,7 +28,7 @@ glabel func_80240568_AF7EB8
 /* AF7F0C 802405BC 00220821 */  addu      $at, $at, $v0
 /* AF7F10 802405C0 AC2061F0 */  sw        $zero, %lo(D_802461F0)($at)
 /* AF7F14 802405C4 0809017D */  j         .L802405F4
-/* AF7F18 802405C8 00000000 */   nop      
+/* AF7F18 802405C8 00000000 */   nop
 .L802405CC:
 /* AF7F1C 802405CC 3C038024 */  lui       $v1, %hi(D_802461F0)
 /* AF7F20 802405D0 246361F0 */  addiu     $v1, $v1, %lo(D_802461F0)

@@ -31,11 +31,12 @@ glabel func_802D2520
 /* F6F38 802D2588 2E22000E */  sltiu     $v0, $s1, 0xe
 /* F6F3C 802D258C 104000AB */  beqz      $v0, .L802D283C
 /* F6F40 802D2590 00111080 */   sll      $v0, $s1, 2
-/* F6F44 802D2594 3C01802E */  lui       $at, %hi(D_802DA208)
+/* F6F44 802D2594 3C01802E */  lui       $at, %hi(jtbl_802DA208_FEBB8)
 /* F6F48 802D2598 00220821 */  addu      $at, $at, $v0
-/* F6F4C 802D259C 8C22A208 */  lw        $v0, %lo(D_802DA208)($at)
+/* F6F4C 802D259C 8C22A208 */  lw        $v0, %lo(jtbl_802DA208_FEBB8)($at)
 /* F6F50 802D25A0 00400008 */  jr        $v0
-/* F6F54 802D25A4 00000000 */   nop      
+/* F6F54 802D25A4 00000000 */   nop
+glabel L802D25A8_F6F58
 /* F6F58 802D25A8 02A0202D */  daddu     $a0, $s5, $zero
 /* F6F5C 802D25AC 0000282D */  daddu     $a1, $zero, $zero
 /* F6F60 802D25B0 00A0302D */  daddu     $a2, $a1, $zero
@@ -47,8 +48,10 @@ glabel func_802D2520
 /* F6F78 802D25C8 AFA00010 */  sw        $zero, 0x10($sp)
 /* F6F7C 802D25CC 080B4A0C */  j         .L802D2830
 /* F6F80 802D25D0 AFA00014 */   sw       $zero, 0x14($sp)
+glabel L802D25D4_F6F84
 /* F6F84 802D25D4 2402000D */  addiu     $v0, $zero, 0xd
 /* F6F88 802D25D8 A24200BE */  sb        $v0, 0xbe($s2)
+glabel L802D25DC_F6F8C
 /* F6F8C 802D25DC 02A0202D */  daddu     $a0, $s5, $zero
 /* F6F90 802D25E0 0220282D */  daddu     $a1, $s1, $zero
 /* F6F94 802D25E4 0000302D */  daddu     $a2, $zero, $zero
@@ -59,6 +62,7 @@ glabel func_802D2520
 /* F6FA8 802D25F8 AFA00014 */  sw        $zero, 0x14($sp)
 /* F6FAC 802D25FC 080B4A0D */  j         .L802D2834
 /* F6FB0 802D2600 AFA20018 */   sw       $v0, 0x18($sp)
+glabel L802D2604_F6FB4
 /* F6FB4 802D2604 2402000D */  addiu     $v0, $zero, 0xd
 /* F6FB8 802D2608 A24200BE */  sb        $v0, 0xbe($s2)
 /* F6FBC 802D260C 8E050000 */  lw        $a1, ($s0)
@@ -83,6 +87,7 @@ glabel func_802D2520
 /* F7008 802D2658 AFA20010 */  sw        $v0, 0x10($sp)
 /* F700C 802D265C 080B4A0C */  j         .L802D2830
 /* F7010 802D2660 AFA00014 */   sw       $zero, 0x14($sp)
+glabel L802D2664_F7014
 /* F7014 802D2664 2402000D */  addiu     $v0, $zero, 0xd
 /* F7018 802D2668 A24200BE */  sb        $v0, 0xbe($s2)
 /* F701C 802D266C 8E050000 */  lw        $a1, ($s0)
@@ -107,6 +112,7 @@ glabel func_802D2520
 /* F7068 802D26B8 AFA20010 */  sw        $v0, 0x10($sp)
 /* F706C 802D26BC 080B4A0B */  j         .L802D282C
 /* F7070 802D26C0 240200FF */   addiu    $v0, $zero, 0xff
+glabel L802D26C4_F7074
 /* F7074 802D26C4 24020016 */  addiu     $v0, $zero, 0x16
 /* F7078 802D26C8 A24200BE */  sb        $v0, 0xbe($s2)
 /* F707C 802D26CC 8E050000 */  lw        $a1, ($s0)
@@ -123,6 +129,7 @@ glabel func_802D2520
 /* F70A8 802D26F8 AFA20014 */  sw        $v0, 0x14($sp)
 /* F70AC 802D26FC 080B4A0D */  j         .L802D2834
 /* F70B0 802D2700 AFA80018 */   sw       $t0, 0x18($sp)
+glabel L802D2704_F70B4
 /* F70B4 802D2704 24020016 */  addiu     $v0, $zero, 0x16
 /* F70B8 802D2708 A24200BE */  sb        $v0, 0xbe($s2)
 /* F70BC 802D270C 8E050000 */  lw        $a1, ($s0)
@@ -146,6 +153,7 @@ glabel func_802D2520
 /* F7104 802D2754 02A0202D */  daddu     $a0, $s5, $zero
 /* F7108 802D2758 080B4A06 */  j         .L802D2818
 /* F710C 802D275C 24050008 */   addiu    $a1, $zero, 8
+glabel L802D2760_F7110
 /* F7110 802D2760 2402000D */  addiu     $v0, $zero, 0xd
 /* F7114 802D2764 A24200BE */  sb        $v0, 0xbe($s2)
 /* F7118 802D2768 8E050000 */  lw        $a1, ($s0)
@@ -170,6 +178,7 @@ glabel func_802D2520
 /* F7164 802D27B4 AFA20010 */  sw        $v0, 0x10($sp)
 /* F7168 802D27B8 080B4A0C */  j         .L802D2830
 /* F716C 802D27BC AFA00014 */   sw       $zero, 0x14($sp)
+glabel L802D27C0_F7170
 /* F7170 802D27C0 24020016 */  addiu     $v0, $zero, 0x16
 /* F7174 802D27C4 A24200BE */  sb        $v0, 0xbe($s2)
 /* F7178 802D27C8 8E050000 */  lw        $a1, ($s0)
@@ -204,8 +213,9 @@ glabel func_802D2520
 /* F71E0 802D2830 AFA30018 */  sw        $v1, 0x18($sp)
 .L802D2834:
 /* F71E4 802D2834 0C0B77FE */  jal       func_802DDFF8
-/* F71E8 802D2838 00000000 */   nop      
+/* F71E8 802D2838 00000000 */   nop
 .L802D283C:
+glabel L802D283C_F71EC
 /* F71EC 802D283C 8FBF0038 */  lw        $ra, 0x38($sp)
 /* F71F0 802D2840 8FB50034 */  lw        $s5, 0x34($sp)
 /* F71F4 802D2844 8FB40030 */  lw        $s4, 0x30($sp)

@@ -14,7 +14,7 @@ glabel GetActorAttackBoost
 /* 19E508 8026FC28 0040202D */  daddu     $a0, $v0, $zero
 /* 19E50C 8026FC2C 2402FF81 */  addiu     $v0, $zero, -0x7f
 /* 19E510 8026FC30 14820002 */  bne       $a0, $v0, .L8026FC3C
-/* 19E514 8026FC34 00000000 */   nop      
+/* 19E514 8026FC34 00000000 */   nop
 /* 19E518 8026FC38 8E240148 */  lw        $a0, 0x148($s1)
 .L8026FC3C:
 /* 19E51C 8026FC3C 0C09A75B */  jal       get_actor

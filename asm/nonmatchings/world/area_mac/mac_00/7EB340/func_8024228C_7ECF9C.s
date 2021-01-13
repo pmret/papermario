@@ -13,5 +13,5 @@ glabel func_8024228C_7ECF9C
 /* 7ECFBC 802422AC 24020002 */  addiu     $v0, $zero, 2
 /* 7ECFC0 802422B0 03E00008 */  jr        $ra
 /* 7ECFC4 802422B4 27BD0018 */   addiu    $sp, $sp, 0x18
-/* 7ECFC8 802422B8 00000000 */  nop       
-/* 7ECFCC 802422BC 00000000 */  nop       
+/* 7ECFC8 802422B8 00000000 */  nop
+/* 7ECFCC 802422BC 00000000 */  nop

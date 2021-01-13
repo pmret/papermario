@@ -27,7 +27,7 @@ glabel create_entity_shadow
 /* A891C 8011221C 44061000 */  mfc1      $a2, $f2
 /* A8920 80112220 44072000 */  mfc1      $a3, $f4
 /* A8924 80112224 0C044898 */  jal       create_shadow_type
-/* A8928 80112228 00000000 */   nop      
+/* A8928 80112228 00000000 */   nop
 /* A892C 8011222C 00022400 */  sll       $a0, $v0, 0x10
 /* A8930 80112230 00042403 */  sra       $a0, $a0, 0x10
 /* A8934 80112234 0C044181 */  jal       get_shadow_by_index

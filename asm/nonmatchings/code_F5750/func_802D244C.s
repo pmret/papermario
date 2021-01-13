@@ -8,7 +8,7 @@ glabel func_802D244C
 /* F6E08 802D2458 04400006 */  bltz      $v0, .L802D2474
 /* F6E0C 802D245C AFBF0010 */   sw       $ra, 0x10($sp)
 /* F6E10 802D2460 0C0B48FE */  jal       func_802D23F8
-/* F6E14 802D2464 00000000 */   nop      
+/* F6E14 802D2464 00000000 */   nop
 /* F6E18 802D2468 0040182D */  daddu     $v1, $v0, $zero
 /* F6E1C 802D246C 14600002 */  bnez      $v1, .L802D2478
 /* F6E20 802D2470 24020002 */   addiu    $v0, $zero, 2

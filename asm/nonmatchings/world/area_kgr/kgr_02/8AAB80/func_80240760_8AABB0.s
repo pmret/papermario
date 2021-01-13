@@ -10,4 +10,4 @@ glabel func_80240760_8AABB0
 .L80240774:
 /* 8AABC4 80240774 03E00008 */  jr        $ra
 /* 8AABC8 80240778 24020002 */   addiu    $v0, $zero, 2
-/* 8AABCC 8024077C 00000000 */  nop       
+/* 8AABCC 8024077C 00000000 */  nop

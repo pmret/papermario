@@ -24,7 +24,7 @@ glabel set_variable
 /* ECA94 802C80E4 4600008D */  trunc.w.s $f2, $f0
 /* ECA98 802C80E8 44021000 */  mfc1      $v0, $f2
 /* ECA9C 802C80EC 080B2105 */  j         .L802C8414
-/* ECAA0 802C80F0 00000000 */   nop      
+/* ECAA0 802C80F0 00000000 */   nop
 .L802C80F4:
 /* ECAA4 802C80F4 34423E00 */  ori       $v0, $v0, 0x3e00
 /* ECAA8 802C80F8 0050102A */  slt       $v0, $v0, $s0

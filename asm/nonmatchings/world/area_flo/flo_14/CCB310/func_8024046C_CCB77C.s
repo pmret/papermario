@@ -29,7 +29,7 @@ glabel func_8024046C_CCB77C
 /* CCB7DC 802404CC 44060000 */  mfc1      $a2, $f0
 /* CCB7E0 802404D0 44071000 */  mfc1      $a3, $f2
 /* CCB7E4 802404D4 44820000 */  mtc1      $v0, $f0
-/* CCB7E8 802404D8 00000000 */  nop       
+/* CCB7E8 802404D8 00000000 */  nop
 /* CCB7EC 802404DC 46800020 */  cvt.s.w   $f0, $f0
 /* CCB7F0 802404E0 AE220078 */  sw        $v0, 0x78($s1)
 /* CCB7F4 802404E4 0C05267B */  jal       func_801499EC

@@ -18,11 +18,12 @@ glabel update_swap_partner
 /* 17400C 8024572C 104000DF */  beqz      $v0, .L80245AAC
 /* 174010 80245730 2613000C */   addiu    $s3, $s0, 0xc
 /* 174014 80245734 00031080 */  sll       $v0, $v1, 2
-/* 174018 80245738 3C01802A */  lui       $at, %hi(D_8029CAD0)
+/* 174018 80245738 3C01802A */  lui       $at, %hi(jtbl_8029CAD0_1CB3B0)
 /* 17401C 8024573C 00220821 */  addu      $at, $at, $v0
-/* 174020 80245740 8C22CAD0 */  lw        $v0, %lo(D_8029CAD0)($at)
+/* 174020 80245740 8C22CAD0 */  lw        $v0, %lo(jtbl_8029CAD0_1CB3B0)($at)
 /* 174024 80245744 00400008 */  jr        $v0
 /* 174028 80245748 00000000 */   nop
+glabel L8024574C_17402C
 /* 17402C 8024574C 3C03F7FF */  lui       $v1, 0xf7ff
 /* 174030 80245750 8E020000 */  lw        $v0, ($s0)
 /* 174034 80245754 3463FFFF */  ori       $v1, $v1, 0xffff
@@ -80,6 +81,7 @@ glabel update_swap_partner
 /* 1740FC 8024581C 24020002 */  addiu     $v0, $zero, 2
 /* 174100 80245820 3C01800E */  lui       $at, %hi(gBattleStatus+0x46C)
 /* 174104 80245824 AC22C4DC */  sw        $v0, %lo(gBattleStatus+0x46C)($at)
+glabel L80245828_174108
 /* 174108 80245828 3C03802A */  lui       $v1, %hi(D_8029F248)
 /* 17410C 8024582C 2463F248 */  addiu     $v1, $v1, %lo(D_8029F248)
 /* 174110 80245830 8C620000 */  lw        $v0, ($v1)
@@ -110,6 +112,7 @@ glabel update_swap_partner
 /* 174170 80245890 AC22C4DC */  sw        $v0, %lo(gBattleStatus+0x46C)($at)
 /* 174174 80245894 080916AB */  j         .L80245AAC
 /* 174178 80245898 E6600020 */   swc1     $f0, 0x20($s3)
+glabel L8024589C_17417C
 /* 17417C 8024589C 8E4400C0 */  lw        $a0, 0xc0($s2)
 /* 174180 802458A0 0C0B1059 */  jal       does_script_exist
 /* 174184 802458A4 00000000 */   nop
@@ -149,6 +152,7 @@ glabel update_swap_partner
 /* 17420C 8024592C AC22C4DC */  sw        $v0, %lo(gBattleStatus+0x46C)($at)
 /* 174210 80245930 080916AB */  j         .L80245AAC
 /* 174214 80245934 E620014C */   swc1     $f0, 0x14c($s1)
+glabel L80245938_174218
 /* 174218 80245938 8E5100DC */  lw        $s1, 0xdc($s2)
 /* 17421C 8024593C 12200006 */  beqz      $s1, .L80245958
 /* 174220 80245940 00000000 */   nop
@@ -173,6 +177,7 @@ glabel update_swap_partner
 /* 174268 80245988 24020100 */  addiu     $v0, $zero, 0x100
 /* 17426C 8024598C 080916AB */  j         .L80245AAC
 /* 174270 80245990 AC820148 */   sw       $v0, 0x148($a0)
+glabel L80245994_174274
 /* 174274 80245994 8E4400C0 */  lw        $a0, 0xc0($s2)
 /* 174278 80245998 0C0B1059 */  jal       does_script_exist
 /* 17427C 8024599C 00000000 */   nop
@@ -202,6 +207,7 @@ glabel update_swap_partner
 /* 1742D4 802459F4 AC22C4DC */  sw        $v0, %lo(gBattleStatus+0x46C)($at)
 /* 1742D8 802459F8 080916AB */  j         .L80245AAC
 /* 1742DC 802459FC 00000000 */   nop
+glabel L80245A00_1742E0
 /* 1742E0 80245A00 8E5100DC */  lw        $s1, 0xdc($s2)
 /* 1742E4 80245A04 12200008 */  beqz      $s1, .L80245A28
 /* 1742E8 80245A08 00000000 */   nop
@@ -220,6 +226,7 @@ glabel update_swap_partner
 /* 174318 80245A38 AC22C4DC */  sw        $v0, %lo(gBattleStatus+0x46C)($at)
 /* 17431C 80245A3C 080916AB */  j         .L80245AAC
 /* 174320 80245A40 00000000 */   nop
+glabel L80245A44_174324
 /* 174324 80245A44 8242008C */  lb        $v0, 0x8c($s2)
 /* 174328 80245A48 14400018 */  bnez      $v0, .L80245AAC
 /* 17432C 80245A4C 2403FFEF */   addiu    $v1, $zero, -0x11
@@ -249,6 +256,7 @@ glabel update_swap_partner
 /* 174384 80245AA4 0C090464 */  jal       func_80241190
 /* 174388 80245AA8 00000000 */   nop
 .L80245AAC:
+glabel L80245AAC_17438C
 /* 17438C 80245AAC 8FBF0020 */  lw        $ra, 0x20($sp)
 /* 174390 80245AB0 8FB3001C */  lw        $s3, 0x1c($sp)
 /* 174394 80245AB4 8FB20018 */  lw        $s2, 0x18($sp)

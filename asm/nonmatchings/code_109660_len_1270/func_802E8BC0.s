@@ -25,7 +25,7 @@ glabel func_802E8BC0
 /* 10A490 802E8C10 46020003 */  div.s     $f0, $f0, $f2
 /* 10A494 802E8C14 4600010D */  trunc.w.s $f4, $f0
 /* 10A498 802E8C18 44022000 */  mfc1      $v0, $f4
-/* 10A49C 802E8C1C 00000000 */  nop       
+/* 10A49C 802E8C1C 00000000 */  nop
 /* 10A4A0 802E8C20 14400003 */  bnez      $v0, .L802E8C30
 /* 10A4A4 802E8C24 AE020004 */   sw       $v0, 4($s0)
 /* 10A4A8 802E8C28 24020001 */  addiu     $v0, $zero, 1
@@ -43,12 +43,12 @@ glabel func_802E8BC0
 /* 10A4D4 802E8C54 0C03805E */  jal       disable_player_input
 /* 10A4D8 802E8C58 46000506 */   mov.s    $f20, $f0
 /* 10A4DC 802E8C5C 0C038045 */  jal       disable_player_static_collisions
-/* 10A4E0 802E8C60 00000000 */   nop      
+/* 10A4E0 802E8C60 00000000 */   nop
 /* 10A4E4 802E8C64 8E26005C */  lw        $a2, 0x5c($s1)
 /* 10A4E8 802E8C68 8E040004 */  lw        $a0, 4($s0)
 /* 10A4EC 802E8C6C 4405A000 */  mfc1      $a1, $f20
 /* 10A4F0 802E8C70 0C0389DE */  jal       move_player
-/* 10A4F4 802E8C74 00000000 */   nop      
+/* 10A4F4 802E8C74 00000000 */   nop
 /* 10A4F8 802E8C78 8FBF001C */  lw        $ra, 0x1c($sp)
 /* 10A4FC 802E8C7C 8FB20018 */  lw        $s2, 0x18($sp)
 /* 10A500 802E8C80 8FB10014 */  lw        $s1, 0x14($sp)

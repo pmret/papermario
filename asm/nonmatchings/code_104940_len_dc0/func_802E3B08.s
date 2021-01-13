@@ -10,7 +10,7 @@ glabel func_802E3B08
 /* 10539C 802E3B1C 9483000A */  lhu       $v1, 0xa($a0)
 /* 1053A0 802E3B20 3402FFFF */  ori       $v0, $zero, 0xffff
 /* 1053A4 802E3B24 1062001B */  beq       $v1, $v0, .L802E3B94
-/* 1053A8 802E3B28 00000000 */   nop      
+/* 1053A8 802E3B28 00000000 */   nop
 /* 1053AC 802E3B2C 0C05152F */  jal       get_global_flag
 /* 1053B0 802E3B30 0060202D */   daddu    $a0, $v1, $zero
 /* 1053B4 802E3B34 10400017 */  beqz      $v0, .L802E3B94
@@ -31,7 +31,7 @@ glabel func_802E3B08
 /* 1053F0 802E3B70 4600320D */  trunc.w.s $f8, $f6
 /* 1053F4 802E3B74 44074000 */  mfc1      $a3, $f8
 /* 1053F8 802E3B78 0C044631 */  jal       create_entity
-/* 1053FC 802E3B7C 00000000 */   nop      
+/* 1053FC 802E3B7C 00000000 */   nop
 /* 105400 802E3B80 3C032000 */  lui       $v1, 0x2000
 /* 105404 802E3B84 8E020000 */  lw        $v0, ($s0)
 /* 105408 802E3B88 34630020 */  ori       $v1, $v1, 0x20

@@ -15,7 +15,7 @@ glabel CloseActionCommandInfo
 /* 197D18 80269438 24020002 */   addiu    $v0, $zero, 2
 .L8026943C:
 /* 197D1C 8026943C 0C09A327 */  jal       func_80268C9C
-/* 197D20 80269440 00000000 */   nop      
+/* 197D20 80269440 00000000 */   nop
 /* 197D24 80269444 0809A519 */  j         .L80269464
 /* 197D28 80269448 0000102D */   daddu    $v0, $zero, $zero
 .L8026944C:
@@ -23,7 +23,7 @@ glabel CloseActionCommandInfo
 /* 197D30 80269450 0C05271B */  jal       stop_sound
 /* 197D34 80269454 34840041 */   ori      $a0, $a0, 0x41
 /* 197D38 80269458 0C093EC3 */  jal       close_action_command_instruction_popup
-/* 197D3C 8026945C 00000000 */   nop      
+/* 197D3C 8026945C 00000000 */   nop
 /* 197D40 80269460 24020002 */  addiu     $v0, $zero, 2
 .L80269464:
 /* 197D44 80269464 8FBF0010 */  lw        $ra, 0x10($sp)

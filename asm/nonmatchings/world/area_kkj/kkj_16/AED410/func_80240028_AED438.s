@@ -10,7 +10,7 @@ glabel func_80240028_AED438
 /* AED44C 8024003C 8FBF0010 */  lw        $ra, 0x10($sp)
 /* AED450 80240040 4600008D */  trunc.w.s $f2, $f0
 /* AED454 80240044 44021000 */  mfc1      $v0, $f2
-/* AED458 80240048 00000000 */  nop       
+/* AED458 80240048 00000000 */  nop
 /* AED45C 8024004C 3C018011 */  lui       $at, %hi(gPlayerStatus+0xD)
 /* AED460 80240050 A022EFD5 */  sb        $v0, %lo(gPlayerStatus+0xD)($at)
 /* AED464 80240054 24020002 */  addiu     $v0, $zero, 2

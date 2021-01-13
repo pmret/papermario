@@ -10,7 +10,7 @@ glabel func_8011E438
 /* B4B4C 8011E44C 10800016 */  beqz      $a0, .L8011E4A8
 /* B4B50 8011E450 A2000014 */   sb       $zero, 0x14($s0)
 /* B4B54 8011E454 0C0478E6 */  jal       func_8011E398
-/* B4B58 8011E458 00000000 */   nop      
+/* B4B58 8011E458 00000000 */   nop
 /* B4B5C 8011E45C 3C038015 */  lui       $v1, %hi(gCurrentAnimMeshListPtr)
 /* B4B60 8011E460 8C633A40 */  lw        $v1, %lo(gCurrentAnimMeshListPtr)($v1)
 /* B4B64 8011E464 0000202D */  daddu     $a0, $zero, $zero

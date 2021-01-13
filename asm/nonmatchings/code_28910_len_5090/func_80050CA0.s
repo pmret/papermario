@@ -27,7 +27,7 @@ glabel func_80050CA0
 /* 2C0F8 80050CF8 5440000E */  bnel      $v0, $zero, .L80050D34
 /* 2C0FC 80050CFC 24110001 */   addiu    $s1, $zero, 1
 /* 2C100 80050D00 0C014429 */  jal       func_800510A4
-/* 2C104 80050D04 00000000 */   nop      
+/* 2C104 80050D04 00000000 */   nop
 /* 2C108 80050D08 1240000A */  beqz      $s2, .L80050D34
 /* 2C10C 80050D0C 0200202D */   daddu    $a0, $s0, $zero
 /* 2C110 80050D10 2402007F */  addiu     $v0, $zero, 0x7f

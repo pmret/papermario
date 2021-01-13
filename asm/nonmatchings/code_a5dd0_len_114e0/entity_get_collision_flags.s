@@ -72,7 +72,7 @@ glabel entity_get_collision_flags
 /* A70AC 801109AC 10400009 */  beqz      $v0, .L801109D4
 /* A70B0 801109B0 306200FF */   andi     $v0, $v1, 0xff
 /* A70B4 801109B4 14C20007 */  bne       $a2, $v0, .L801109D4
-/* A70B8 801109B8 00000000 */   nop      
+/* A70B8 801109B8 00000000 */   nop
 /* A70BC 801109BC 3C02800F */  lui       $v0, %hi(gPlayerStatusPtr)
 /* A70C0 801109C0 8C427B30 */  lw        $v0, %lo(gPlayerStatusPtr)($v0)
 /* A70C4 801109C4 8C4200E0 */  lw        $v0, 0xe0($v0)

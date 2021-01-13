@@ -20,7 +20,7 @@ glabel func_800F16CC
 /* 8ABB8 800F1708 00220821 */  addu      $at, $at, $v0
 /* 8ABBC 800F170C 8C22C3A0 */  lw        $v0, %lo(D_8010C3A0)($at)
 /* 8ABC0 800F1710 00400008 */  jr        $v0
-/* 8ABC4 800F1714 00000000 */   nop      
+/* 8ABC4 800F1714 00000000 */   nop
 /* 8ABC8 800F1718 2404000E */  addiu     $a0, $zero, 0xe
 /* 8ABCC 800F171C 3C108014 */  lui       $s0, %hi(D_80147474)
 /* 8ABD0 800F1720 26107474 */  addiu     $s0, $s0, %lo(D_80147474)
@@ -36,7 +36,7 @@ glabel func_800F16CC
 /* 8ABF8 800F1748 24040002 */  addiu     $a0, $zero, 2
 .L800F174C:
 /* 8ABFC 800F174C 0C05272D */  jal       play_sound
-/* 8AC00 800F1750 00000000 */   nop      
+/* 8AC00 800F1750 00000000 */   nop
 /* 8AC04 800F1754 24040013 */  addiu     $a0, $zero, 0x13
 /* 8AC08 800F1758 0C051F9F */  jal       func_80147E7C
 /* 8AC0C 800F175C 0200282D */   daddu    $a1, $s0, $zero
@@ -54,7 +54,7 @@ glabel func_800F16CC
 /* 8AC34 800F1784 3C058014 */  lui       $a1, %hi(D_80147474)
 /* 8AC38 800F1788 24A57474 */  addiu     $a1, $a1, %lo(D_80147474)
 /* 8AC3C 800F178C 0803C5FC */  j         .L800F17F0
-/* 8AC40 800F1790 00000000 */   nop      
+/* 8AC40 800F1790 00000000 */   nop
 .L800F1794:
 /* 8AC44 800F1794 3C028011 */  lui       $v0, %hi(D_8010D69C)
 /* 8AC48 800F1798 8C42D69C */  lw        $v0, %lo(D_8010D69C)($v0)
@@ -66,7 +66,7 @@ glabel func_800F16CC
 /* 8AC60 800F17B0 00220821 */  addu      $at, $at, $v0
 /* 8AC64 800F17B4 8C22C3D8 */  lw        $v0, %lo(D_8010C3D8)($at)
 /* 8AC68 800F17B8 00400008 */  jr        $v0
-/* 8AC6C 800F17BC 00000000 */   nop      
+/* 8AC6C 800F17BC 00000000 */   nop
 /* 8AC70 800F17C0 2404000E */  addiu     $a0, $zero, 0xe
 /* 8AC74 800F17C4 0C051F9F */  jal       func_80147E7C
 /* 8AC78 800F17C8 24050001 */   addiu    $a1, $zero, 1
@@ -82,7 +82,7 @@ glabel func_800F16CC
 /* 8AC9C 800F17EC 24050001 */  addiu     $a1, $zero, 1
 .L800F17F0:
 /* 8ACA0 800F17F0 0C051F9F */  jal       func_80147E7C
-/* 8ACA4 800F17F4 00000000 */   nop      
+/* 8ACA4 800F17F4 00000000 */   nop
 .L800F17F8:
 /* 8ACA8 800F17F8 3C118011 */  lui       $s1, %hi(D_8010D69C)
 /* 8ACAC 800F17FC 2631D69C */  addiu     $s1, $s1, %lo(D_8010D69C)
@@ -103,7 +103,7 @@ glabel func_800F16CC
 /* 8ACE4 800F1834 8C420318 */  lw        $v0, 0x318($v0)
 /* 8ACE8 800F1838 24100004 */  addiu     $s0, $zero, 4
 /* 8ACEC 800F183C 14500005 */  bne       $v0, $s0, .L800F1854
-/* 8ACF0 800F1840 00000000 */   nop      
+/* 8ACF0 800F1840 00000000 */   nop
 /* 8ACF4 800F1844 3C058014 */  lui       $a1, %hi(D_80147474)
 /* 8ACF8 800F1848 24A57474 */  addiu     $a1, $a1, %lo(D_80147474)
 /* 8ACFC 800F184C 0C051F9F */  jal       func_80147E7C
@@ -185,9 +185,9 @@ glabel func_800F16CC
 /* 8AE1C 800F196C 8C430318 */  lw        $v1, 0x318($v0)
 /* 8AE20 800F1970 24020001 */  addiu     $v0, $zero, 1
 /* 8AE24 800F1974 10620003 */  beq       $v1, $v0, .L800F1984
-/* 8AE28 800F1978 00000000 */   nop      
+/* 8AE28 800F1978 00000000 */   nop
 /* 8AE2C 800F197C 14700007 */  bne       $v1, $s0, .L800F199C
-/* 8AE30 800F1980 00000000 */   nop      
+/* 8AE30 800F1980 00000000 */   nop
 .L800F1984:
 /* 8AE34 800F1984 3C048011 */  lui       $a0, %hi(D_8010D668)
 /* 8AE38 800F1988 8C84D668 */  lw        $a0, %lo(D_8010D668)($a0)
@@ -213,7 +213,7 @@ glabel func_800F16CC
 /* 8AE80 800F19D0 3C058010 */  lui       $a1, %hi(D_80104A28)
 /* 8AE84 800F19D4 24A54A28 */  addiu     $a1, $a1, %lo(D_80104A28)
 /* 8AE88 800F19D8 0C0511FF */  jal       set_menu_icon_script
-/* 8AE8C 800F19DC 00000000 */   nop      
+/* 8AE8C 800F19DC 00000000 */   nop
 /* 8AE90 800F19E0 8FBF001C */  lw        $ra, 0x1c($sp)
 /* 8AE94 800F19E4 8FB20018 */  lw        $s2, 0x18($sp)
 /* 8AE98 800F19E8 8FB10014 */  lw        $s1, 0x14($sp)

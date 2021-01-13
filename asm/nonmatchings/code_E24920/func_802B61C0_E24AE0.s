@@ -15,9 +15,9 @@ glabel func_802B61C0_E24AE0
 /* E24B08 802B61E8 10400005 */  beqz      $v0, .L802B6200
 /* E24B0C 802B61EC 0060882D */   daddu    $s1, $v1, $zero
 /* E24B10 802B61F0 0C0AD913 */  jal       func_802B644C_E24D6C
-/* E24B14 802B61F4 00000000 */   nop      
+/* E24B14 802B61F4 00000000 */   nop
 /* E24B18 802B61F8 080AD8AE */  j         .L802B62B8
-/* E24B1C 802B61FC 00000000 */   nop      
+/* E24B1C 802B61FC 00000000 */   nop
 .L802B6200:
 /* E24B20 802B6200 8E040000 */  lw        $a0, ($s0)
 /* E24B24 802B6204 04810012 */  bgez      $a0, .L802B6250
@@ -36,7 +36,7 @@ glabel func_802B61C0_E24AE0
 /* E24B58 802B6238 14600003 */  bnez      $v1, .L802B6248
 /* E24B5C 802B623C E6020048 */   swc1     $f2, 0x48($s0)
 /* E24B60 802B6240 0C03954C */  jal       func_800E5530
-/* E24B64 802B6244 00000000 */   nop      
+/* E24B64 802B6244 00000000 */   nop
 .L802B6248:
 /* E24B68 802B6248 2402FFFF */  addiu     $v0, $zero, -1
 /* E24B6C 802B624C A6220004 */  sh        $v0, 4($s1)
@@ -47,7 +47,7 @@ glabel func_802B61C0_E24AE0
 /* E24B7C 802B625C 44810000 */  mtc1      $at, $f0
 /* E24B80 802B6260 27A40010 */  addiu     $a0, $sp, 0x10
 /* E24B84 802B6264 46001082 */  mul.s     $f2, $f2, $f0
-/* E24B88 802B6268 00000000 */  nop       
+/* E24B88 802B6268 00000000 */  nop
 /* E24B8C 802B626C 920200B6 */  lbu       $v0, 0xb6($s0)
 /* E24B90 802B6270 27A50014 */  addiu     $a1, $sp, 0x14
 /* E24B94 802B6274 24420001 */  addiu     $v0, $v0, 1
@@ -55,19 +55,19 @@ glabel func_802B61C0_E24AE0
 /* E24B9C 802B627C 0C0388C1 */  jal       input_to_move_vector
 /* E24BA0 802B6280 E6020054 */   swc1     $f2, 0x54($s0)
 /* E24BA4 802B6284 0C039858 */  jal       check_input_jump
-/* E24BA8 802B6288 00000000 */   nop      
+/* E24BA8 802B6288 00000000 */   nop
 /* E24BAC 802B628C C7A20014 */  lwc1      $f2, 0x14($sp)
 /* E24BB0 802B6290 44800000 */  mtc1      $zero, $f0
-/* E24BB4 802B6294 00000000 */  nop       
+/* E24BB4 802B6294 00000000 */  nop
 /* E24BB8 802B6298 46001032 */  c.eq.s    $f2, $f0
-/* E24BBC 802B629C 00000000 */  nop       
+/* E24BBC 802B629C 00000000 */  nop
 /* E24BC0 802B62A0 45010003 */  bc1t      .L802B62B0
-/* E24BC4 802B62A4 00000000 */   nop      
+/* E24BC4 802B62A4 00000000 */   nop
 /* E24BC8 802B62A8 C7A00010 */  lwc1      $f0, 0x10($sp)
 /* E24BCC 802B62AC E6000080 */  swc1      $f0, 0x80($s0)
 .L802B62B0:
 /* E24BD0 802B62B0 0C0397DA */  jal       update_locomotion_state
-/* E24BD4 802B62B4 00000000 */   nop      
+/* E24BD4 802B62B4 00000000 */   nop
 .L802B62B8:
 /* E24BD8 802B62B8 8FBF0020 */  lw        $ra, 0x20($sp)
 /* E24BDC 802B62BC 8FB1001C */  lw        $s1, 0x1c($sp)

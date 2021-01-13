@@ -13,6 +13,6 @@ glabel func_80242DA8_EA36A8
 /* EA36C8 80242DC8 24020002 */  addiu     $v0, $zero, 2
 /* EA36CC 80242DCC 03E00008 */  jr        $ra
 /* EA36D0 80242DD0 27BD0018 */   addiu    $sp, $sp, 0x18
-/* EA36D4 80242DD4 00000000 */  nop       
-/* EA36D8 80242DD8 00000000 */  nop       
-/* EA36DC 80242DDC 00000000 */  nop       
+/* EA36D4 80242DD4 00000000 */  nop
+/* EA36D8 80242DD8 00000000 */  nop
+/* EA36DC 80242DDC 00000000 */  nop

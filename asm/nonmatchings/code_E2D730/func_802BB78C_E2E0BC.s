@@ -12,13 +12,13 @@ glabel func_802BB78C_E2E0BC
 /* E2E0D8 802BB7A8 10600005 */  beqz      $v1, .L802BB7C0
 /* E2E0DC 802BB7AC 24020001 */   addiu    $v0, $zero, 1
 /* E2E0E0 802BB7B0 10620014 */  beq       $v1, $v0, .L802BB804
-/* E2E0E4 802BB7B4 00000000 */   nop      
+/* E2E0E4 802BB7B4 00000000 */   nop
 /* E2E0E8 802BB7B8 080AEE29 */  j         .L802BB8A4
-/* E2E0EC 802BB7BC 00000000 */   nop      
+/* E2E0EC 802BB7BC 00000000 */   nop
 .L802BB7C0:
 /* E2E0F0 802BB7C0 96220000 */  lhu       $v0, ($s1)
 /* E2E0F4 802BB7C4 10400037 */  beqz      $v0, .L802BB8A4
-/* E2E0F8 802BB7C8 00000000 */   nop      
+/* E2E0F8 802BB7C8 00000000 */   nop
 /* E2E0FC 802BB7CC 96220002 */  lhu       $v0, 2($s1)
 /* E2E100 802BB7D0 3C01C1C8 */  lui       $at, 0xc1c8
 /* E2E104 802BB7D4 44810000 */  mtc1      $at, $f0
@@ -37,13 +37,13 @@ glabel func_802BB78C_E2E0BC
 /* E2E134 802BB804 C6000068 */  lwc1      $f0, 0x68($s0)
 /* E2E138 802BB808 3C013F80 */  lui       $at, 0x3f80
 /* E2E13C 802BB80C 44811000 */  mtc1      $at, $f2
-/* E2E140 802BB810 00000000 */  nop       
+/* E2E140 802BB810 00000000 */  nop
 /* E2E144 802BB814 46020000 */  add.s     $f0, $f0, $f2
 /* E2E148 802BB818 3C014100 */  lui       $at, 0x4100
 /* E2E14C 802BB81C 44811000 */  mtc1      $at, $f2
-/* E2E150 802BB820 00000000 */  nop       
+/* E2E150 802BB820 00000000 */  nop
 /* E2E154 802BB824 4600103E */  c.le.s    $f2, $f0
-/* E2E158 802BB828 00000000 */  nop       
+/* E2E158 802BB828 00000000 */  nop
 /* E2E15C 802BB82C 45000002 */  bc1f      .L802BB838
 /* E2E160 802BB830 E6000068 */   swc1     $f0, 0x68($s0)
 /* E2E164 802BB834 E6020068 */  swc1      $f2, 0x68($s0)
@@ -67,7 +67,7 @@ glabel func_802BB78C_E2E0BC
 /* E2E1A4 802BB874 46200020 */  cvt.s.d   $f0, $f0
 /* E2E1A8 802BB878 460000A1 */  cvt.d.s   $f2, $f0
 /* E2E1AC 802BB87C 4624103E */  c.le.d    $f2, $f4
-/* E2E1B0 802BB880 00000000 */  nop       
+/* E2E1B0 802BB880 00000000 */  nop
 /* E2E1B4 802BB884 45000003 */  bc1f      .L802BB894
 /* E2E1B8 802BB888 E6000054 */   swc1     $f0, 0x54($s0)
 /* E2E1BC 802BB88C A6200002 */  sh        $zero, 2($s1)

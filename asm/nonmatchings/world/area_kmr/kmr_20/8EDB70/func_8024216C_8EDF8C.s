@@ -12,6 +12,6 @@ glabel func_8024216C_8EDF8C
 /* 8EDFA8 80242188 24020002 */  addiu     $v0, $zero, 2
 /* 8EDFAC 8024218C 03E00008 */  jr        $ra
 /* 8EDFB0 80242190 27BD0018 */   addiu    $sp, $sp, 0x18
-/* 8EDFB4 80242194 00000000 */  nop       
-/* 8EDFB8 80242198 00000000 */  nop       
-/* 8EDFBC 8024219C 00000000 */  nop       
+/* 8EDFB4 80242194 00000000 */  nop
+/* 8EDFB8 80242198 00000000 */  nop
+/* 8EDFBC 8024219C 00000000 */  nop

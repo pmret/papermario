@@ -119,4 +119,4 @@ glabel func_80241CA0_ECB9A0
 /* ECBB60 80241E60 24020002 */  addiu     $v0, $zero, 2
 /* ECBB64 80241E64 03E00008 */  jr        $ra
 /* ECBB68 80241E68 27BD0088 */   addiu    $sp, $sp, 0x88
-/* ECBB6C 80241E6C 00000000 */  nop       
+/* ECBB6C 80241E6C 00000000 */  nop

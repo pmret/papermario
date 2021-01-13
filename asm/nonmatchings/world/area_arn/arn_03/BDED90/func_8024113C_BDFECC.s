@@ -54,31 +54,36 @@ glabel func_8024113C_BDFECC
 /* BDFF8C 802411FC 2C620005 */  sltiu     $v0, $v1, 5
 /* BDFF90 80241200 1040001E */  beqz      $v0, .L8024127C
 /* BDFF94 80241204 00031080 */   sll      $v0, $v1, 2
-/* BDFF98 80241208 3C018024 */  lui       $at, %hi(D_80244A00)
+/* BDFF98 80241208 3C018024 */  lui       $at, %hi(jtbl_80244A00_BE3790)
 /* BDFF9C 8024120C 00220821 */  addu      $at, $at, $v0
-/* BDFFA0 80241210 8C224A00 */  lw        $v0, %lo(D_80244A00)($at)
+/* BDFFA0 80241210 8C224A00 */  lw        $v0, %lo(jtbl_80244A00_BE3790)($at)
 /* BDFFA4 80241214 00400008 */  jr        $v0
-/* BDFFA8 80241218 00000000 */   nop      
+/* BDFFA8 80241218 00000000 */   nop
+glabel L8024121C_BDFFAC
 /* BDFFAC 8024121C 0280202D */  daddu     $a0, $s4, $zero
 /* BDFFB0 80241220 0200282D */  daddu     $a1, $s0, $zero
 /* BDFFB4 80241224 0C090000 */  jal       func_80240000_BDED90
 /* BDFFB8 80241228 0240302D */   daddu    $a2, $s2, $zero
+glabel L8024122C_BDFFBC
 /* BDFFBC 8024122C 0280202D */  daddu     $a0, $s4, $zero
 /* BDFFC0 80241230 0200282D */  daddu     $a1, $s0, $zero
 /* BDFFC4 80241234 0C0903A4 */  jal       func_80240E90_BDFC20
 /* BDFFC8 80241238 0240302D */   daddu    $a2, $s2, $zero
 /* BDFFCC 8024123C 0809049F */  j         .L8024127C
-/* BDFFD0 80241240 00000000 */   nop      
+/* BDFFD0 80241240 00000000 */   nop
+glabel L80241244_BDFFD4
 /* BDFFD4 80241244 0280202D */  daddu     $a0, $s4, $zero
 /* BDFFD8 80241248 0200282D */  daddu     $a1, $s0, $zero
 /* BDFFDC 8024124C 0C090100 */  jal       arn_03_UnkNpcAIFunc1
 /* BDFFE0 80241250 0240302D */   daddu    $a2, $s2, $zero
+glabel L80241254_BDFFE4
 /* BDFFE4 80241254 0280202D */  daddu     $a0, $s4, $zero
 /* BDFFE8 80241258 0200282D */  daddu     $a1, $s0, $zero
 /* BDFFEC 8024125C 0C09041A */  jal       func_80241068_BDFDF8
 /* BDFFF0 80241260 0240302D */   daddu    $a2, $s2, $zero
 /* BDFFF4 80241264 0809049F */  j         .L8024127C
-/* BDFFF8 80241268 00000000 */   nop      
+/* BDFFF8 80241268 00000000 */   nop
+glabel L8024126C_BDFFFC
 /* BDFFFC 8024126C 0280202D */  daddu     $a0, $s4, $zero
 /* BE0000 80241270 0200282D */  daddu     $a1, $s0, $zero
 /* BE0004 80241274 0C09019F */  jal       func_8024067C_BDF40C

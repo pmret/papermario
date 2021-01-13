@@ -26,7 +26,7 @@ glabel func_802D3FC8
 /* F89CC 802D401C 0C048BBA */  jal       func_80122EE8
 /* F89D0 802D4020 0200282D */   daddu    $a1, $s0, $zero
 /* F89D4 802D4024 080B500E */  j         .L802D4038
-/* F89D8 802D4028 00000000 */   nop      
+/* F89D8 802D4028 00000000 */   nop
 .L802D402C:
 /* F89DC 802D402C 8C840000 */  lw        $a0, ($a0)
 /* F89E0 802D4030 0C048BC9 */  jal       func_80122F24

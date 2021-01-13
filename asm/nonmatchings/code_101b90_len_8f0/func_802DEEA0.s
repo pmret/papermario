@@ -19,7 +19,7 @@ glabel func_802DEEA0
 .L802DEED8:
 /* 101FC8 802DEED8 8C620000 */  lw        $v0, ($v1)
 /* 101FCC 802DEEDC 1040000A */  beqz      $v0, .L802DEF08
-/* 101FD0 802DEEE0 00000000 */   nop      
+/* 101FD0 802DEEE0 00000000 */   nop
 /* 101FD4 802DEEE4 8C620004 */  lw        $v0, 4($v1)
 /* 101FD8 802DEEE8 1447000A */  bne       $v0, $a3, .L802DEF14
 /* 101FDC 802DEEEC 24840001 */   addiu    $a0, $a0, 1
@@ -71,7 +71,7 @@ glabel func_802DEEA0
 /* 102080 802DEF90 30C6FFF0 */   andi     $a2, $a2, 0xfff0
 /* 102084 802DEF94 8E02000C */  lw        $v0, 0xc($s0)
 /* 102088 802DEF98 080B7BE9 */  j         .L802DEFA4
-/* 10208C 802DEF9C 00000000 */   nop      
+/* 10208C 802DEF9C 00000000 */   nop
 .L802DEFA0:
 /* 102090 802DEFA0 0000102D */  daddu     $v0, $zero, $zero
 .L802DEFA4:

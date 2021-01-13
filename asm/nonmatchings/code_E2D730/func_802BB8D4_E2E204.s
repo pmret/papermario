@@ -26,7 +26,7 @@ glabel func_802BB8D4_E2E204
 /* E2E258 802BB928 44801000 */  mtc1      $zero, $f2
 /* E2E25C 802BB92C 46000021 */  cvt.d.s   $f0, $f0
 /* E2E260 802BB930 46220002 */  mul.d     $f0, $f0, $f2
-/* E2E264 802BB934 00000000 */  nop       
+/* E2E264 802BB934 00000000 */  nop
 /* E2E268 802BB938 46200005 */  abs.d     $f0, $f0
 /* E2E26C 802BB93C 46200020 */  cvt.s.d   $f0, $f0
 /* E2E270 802BB940 E6400008 */  swc1      $f0, 8($s2)
@@ -39,7 +39,7 @@ glabel func_802BB8D4_E2E204
 /* E2E28C 802BB95C C62E0030 */  lwc1      $f14, 0x30($s1)
 /* E2E290 802BB960 44070000 */  mfc1      $a3, $f0
 /* E2E294 802BB964 0C00A720 */  jal       atan2
-/* E2E298 802BB968 00000000 */   nop      
+/* E2E298 802BB968 00000000 */   nop
 /* E2E29C 802BB96C E6400004 */  swc1      $f0, 4($s2)
 /* E2E2A0 802BB970 8FBF001C */  lw        $ra, 0x1c($sp)
 /* E2E2A4 802BB974 8FB20018 */  lw        $s2, 0x18($sp)

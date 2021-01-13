@@ -8,9 +8,9 @@ glabel update_item_entity_static
 /* CBD64 80135664 AFBF0014 */  sw        $ra, 0x14($sp)
 /* CBD68 80135668 8202001A */  lb        $v0, 0x1a($s0)
 /* CBD6C 8013566C 14400011 */  bnez      $v0, .L801356B4
-/* CBD70 80135670 00000000 */   nop      
+/* CBD70 80135670 00000000 */   nop
 /* CBD74 80135674 0C04CEC3 */  jal       test_item_player_collision
-/* CBD78 80135678 00000000 */   nop      
+/* CBD78 80135678 00000000 */   nop
 /* CBD7C 8013567C 1040000D */  beqz      $v0, .L801356B4
 /* CBD80 80135680 24020001 */   addiu    $v0, $zero, 1
 /* CBD84 80135684 3C018015 */  lui       $at, %hi(D_801565A4)

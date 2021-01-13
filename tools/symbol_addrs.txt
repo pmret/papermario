@@ -222,6 +222,7 @@ SetTattleString = 0x80045A58;
 spawn_drops = 0x80048280;
 get_coin_drop_amount = 0x80048D50;
 is_point_within_region = 0x80048FD4;
+base_UnkNpcAIFunc1 = 0x80049B44;
 DoBasicAI = 0x8004A47C;
 nuAuPreNMIFuncSet = 0x8004ADD0;
 nuAuDmaCallBack = 0x8004B074; // !

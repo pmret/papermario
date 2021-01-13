@@ -33,7 +33,7 @@ glabel SetZoneEnabled
 /* EEC70 802CA2C0 12020006 */  beq       $s0, $v0, .L802CA2DC
 /* EEC74 802CA2C4 3C03FFFE */   lui      $v1, 0xfffe
 /* EEC78 802CA2C8 080B28BB */  j         .L802CA2EC
-/* EEC7C 802CA2CC 00000000 */   nop      
+/* EEC7C 802CA2CC 00000000 */   nop
 .L802CA2D0:
 /* EEC80 802CA2D0 8E220000 */  lw        $v0, ($s1)
 /* EEC84 802CA2D4 080B28BA */  j         .L802CA2E8

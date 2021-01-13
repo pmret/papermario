@@ -6,7 +6,7 @@ glabel clear_model_data
 /* AC448 80115D48 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* AC44C 80115D4C 80420070 */  lb        $v0, 0x70($v0)
 /* AC450 80115D50 1440002C */  bnez      $v0, .L80115E04
-/* AC454 80115D54 00000000 */   nop      
+/* AC454 80115D54 00000000 */   nop
 /* AC458 80115D58 3C028015 */  lui       $v0, %hi(gWorldModelList)
 /* AC45C 80115D5C 24421770 */  addiu     $v0, $v0, %lo(gWorldModelList)
 /* AC460 80115D60 3C018015 */  lui       $at, %hi(gCurrentModelListPtr)
@@ -177,4 +177,4 @@ glabel clear_model_data
 /* AC6D8 80115FD8 1440FFF6 */  bnez      $v0, .L80115FB4
 /* AC6DC 80115FDC 24A50004 */   addiu    $a1, $a1, 4
 /* AC6E0 80115FE0 03E00008 */  jr        $ra
-/* AC6E4 80115FE4 00000000 */   nop      
+/* AC6E4 80115FE4 00000000 */   nop

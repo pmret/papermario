@@ -24,5 +24,5 @@ glabel func_80240530_CDCBD0
 /* CDCC1C 8024057C 24020002 */  addiu     $v0, $zero, 2
 /* CDCC20 80240580 03E00008 */  jr        $ra
 /* CDCC24 80240584 27BD0018 */   addiu    $sp, $sp, 0x18
-/* CDCC28 80240588 00000000 */  nop       
-/* CDCC2C 8024058C 00000000 */  nop       
+/* CDCC28 80240588 00000000 */  nop
+/* CDCC2C 8024058C 00000000 */  nop

@@ -42,9 +42,9 @@ glabel func_802B6000_E2A6B0
 /* E2A740 802B6090 46220001 */  sub.d     $f0, $f0, $f2
 /* E2A744 802B6094 44801000 */  mtc1      $zero, $f2
 /* E2A748 802B6098 44801800 */  mtc1      $zero, $f3
-/* E2A74C 802B609C 00000000 */  nop       
+/* E2A74C 802B609C 00000000 */  nop
 /* E2A750 802B60A0 4620103C */  c.lt.d    $f2, $f0
-/* E2A754 802B60A4 00000000 */  nop       
+/* E2A754 802B60A4 00000000 */  nop
 /* E2A758 802B60A8 45030015 */  bc1tl     .L802B6100
 /* E2A75C 802B60AC 0000802D */   daddu    $s0, $zero, $zero
 /* E2A760 802B60B0 C64C0028 */  lwc1      $f12, 0x28($s2)
@@ -63,7 +63,7 @@ glabel func_802B6000_E2A6B0
 /* E2A794 802B60E4 4600A521 */  cvt.d.s   $f20, $f20
 /* E2A798 802B60E8 4620A505 */  abs.d     $f20, $f20
 /* E2A79C 802B60EC 4634003C */  c.lt.d    $f0, $f20
-/* E2A7A0 802B60F0 00000000 */  nop       
+/* E2A7A0 802B60F0 00000000 */  nop
 /* E2A7A4 802B60F4 45000003 */  bc1f      .L802B6104
 /* E2A7A8 802B60F8 0200102D */   daddu    $v0, $s0, $zero
 /* E2A7AC 802B60FC 0000802D */  daddu     $s0, $zero, $zero

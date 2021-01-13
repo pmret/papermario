@@ -29,7 +29,7 @@ glabel pause_items_load_items
 /* 13D874 8024A534 1440FFF7 */  bnez      $v0, .L8024A514
 /* 13D878 8024A538 24C60002 */   addiu    $a2, $a2, 2
 /* 13D87C 8024A53C 0809295F */  j         .L8024A57C
-/* 13D880 8024A540 00000000 */   nop      
+/* 13D880 8024A540 00000000 */   nop
 .L8024A544:
 /* 13D884 8024A544 0000202D */  daddu     $a0, $zero, $zero
 /* 13D888 8024A548 0060302D */  daddu     $a2, $v1, $zero

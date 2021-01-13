@@ -6,7 +6,7 @@ glabel init_model_data
 /* AC6EC 80115FEC 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* AC6F0 80115FF0 80420070 */  lb        $v0, 0x70($v0)
 /* AC6F4 80115FF4 14400027 */  bnez      $v0, .L80116094
-/* AC6F8 80115FF8 00000000 */   nop      
+/* AC6F8 80115FF8 00000000 */   nop
 /* AC6FC 80115FFC 3C028015 */  lui       $v0, %hi(gWorldModelList)
 /* AC700 80116000 24421770 */  addiu     $v0, $v0, %lo(gWorldModelList)
 /* AC704 80116004 3C018015 */  lui       $at, %hi(gCurrentModelListPtr)
@@ -44,7 +44,7 @@ glabel init_model_data
 /* AC784 80116084 3C018015 */  lui       $at, %hi(D_80153264)
 /* AC788 80116088 AC223264 */  sw        $v0, %lo(D_80153264)($at)
 /* AC78C 8011608C 03E00008 */  jr        $ra
-/* AC790 80116090 00000000 */   nop      
+/* AC790 80116090 00000000 */   nop
 .L80116094:
 /* AC794 80116094 3C028015 */  lui       $v0, %hi(gBattleModelList)
 /* AC798 80116098 24421B70 */  addiu     $v0, $v0, %lo(gBattleModelList)
@@ -83,4 +83,4 @@ glabel init_model_data
 /* AC81C 8011611C 3C018015 */  lui       $at, %hi(D_80153264)
 /* AC820 80116120 AC223264 */  sw        $v0, %lo(D_80153264)($at)
 /* AC824 80116124 03E00008 */  jr        $ra
-/* AC828 80116128 00000000 */   nop      
+/* AC828 80116128 00000000 */   nop

@@ -40,7 +40,7 @@ glabel func_802416F8_E0FE98
 /* E0FF20 80241780 0000102D */   daddu    $v0, $zero, $zero
 /* E0FF24 80241784 8E040014 */  lw        $a0, 0x14($s0)
 /* E0FF28 80241788 0C048D70 */  jal       func_801235C0
-/* E0FF2C 8024178C 00000000 */   nop      
+/* E0FF2C 8024178C 00000000 */   nop
 /* E0FF30 80241790 0C00AB4B */  jal       heap_free
 /* E0FF34 80241794 0200202D */   daddu    $a0, $s0, $zero
 /* E0FF38 80241798 24020001 */  addiu     $v0, $zero, 1
@@ -51,6 +51,6 @@ glabel func_802416F8_E0FE98
 /* E0FF48 802417A8 8FB00010 */  lw        $s0, 0x10($sp)
 /* E0FF4C 802417AC 03E00008 */  jr        $ra
 /* E0FF50 802417B0 27BD0020 */   addiu    $sp, $sp, 0x20
-/* E0FF54 802417B4 00000000 */  nop       
-/* E0FF58 802417B8 00000000 */  nop       
-/* E0FF5C 802417BC 00000000 */  nop       
+/* E0FF54 802417B4 00000000 */  nop
+/* E0FF58 802417B8 00000000 */  nop
+/* E0FF5C 802417BC 00000000 */  nop

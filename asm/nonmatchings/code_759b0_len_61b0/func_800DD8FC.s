@@ -21,7 +21,7 @@ glabel func_800DD8FC
 /* 76DEC 800DD93C F7B40078 */  sdc1      $f20, 0x78($sp)
 /* 76DF0 800DD940 C7B400B0 */  lwc1      $f20, 0xb0($sp)
 /* 76DF4 800DD944 46006302 */  mul.s     $f12, $f12, $f0
-/* 76DF8 800DD948 00000000 */  nop       
+/* 76DF8 800DD948 00000000 */  nop
 /* 76DFC 800DD94C 3C0143B4 */  lui       $at, 0x43b4
 /* 76E00 800DD950 44810000 */  mtc1      $at, $f0
 /* 76E04 800DD954 27A6003C */  addiu     $a2, $sp, 0x3c
@@ -33,26 +33,26 @@ glabel func_800DD8FC
 /* 76E1C 800DD96C 46006303 */   div.s    $f12, $f12, $f0
 /* 76E20 800DD970 3C013F00 */  lui       $at, 0x3f00
 /* 76E24 800DD974 44813000 */  mtc1      $at, $f6
-/* 76E28 800DD978 00000000 */  nop       
+/* 76E28 800DD978 00000000 */  nop
 /* 76E2C 800DD97C 4606A082 */  mul.s     $f2, $f20, $f6
-/* 76E30 800DD980 00000000 */  nop       
+/* 76E30 800DD980 00000000 */  nop
 /* 76E34 800DD984 4614B000 */  add.s     $f0, $f22, $f20
 /* 76E38 800DD988 46020600 */  add.s     $f24, $f0, $f2
 /* 76E3C 800DD98C C7A00038 */  lwc1      $f0, 0x38($sp)
 /* 76E40 800DD990 4600B682 */  mul.s     $f26, $f22, $f0
-/* 76E44 800DD994 00000000 */  nop       
+/* 76E44 800DD994 00000000 */  nop
 /* 76E48 800DD998 2412FFFF */  addiu     $s2, $zero, -1
 /* 76E4C 800DD99C 27A20040 */  addiu     $v0, $sp, 0x40
 /* 76E50 800DD9A0 C7A2003C */  lwc1      $f2, 0x3c($sp)
 /* 76E54 800DD9A4 46001087 */  neg.s     $f2, $f2
 /* 76E58 800DD9A8 4600A102 */  mul.s     $f4, $f20, $f0
-/* 76E5C 800DD9AC 00000000 */  nop       
+/* 76E5C 800DD9AC 00000000 */  nop
 /* 76E60 800DD9B0 E7A2003C */  swc1      $f2, 0x3c($sp)
 /* 76E64 800DD9B4 E7B8004C */  swc1      $f24, 0x4c($sp)
 /* 76E68 800DD9B8 C6680000 */  lwc1      $f8, ($s3)
 /* 76E6C 800DD9BC C68A0000 */  lwc1      $f10, ($s4)
 /* 76E70 800DD9C0 4602A502 */  mul.s     $f20, $f20, $f2
-/* 76E74 800DD9C4 00000000 */  nop       
+/* 76E74 800DD9C4 00000000 */  nop
 /* 76E78 800DD9C8 AFA2001C */  sw        $v0, 0x1c($sp)
 /* 76E7C 800DD9CC 27A20044 */  addiu     $v0, $sp, 0x44
 /* 76E80 800DD9D0 AFA20020 */  sw        $v0, 0x20($sp)
@@ -60,13 +60,13 @@ glabel func_800DD8FC
 /* 76E88 800DD9D8 AFA20024 */  sw        $v0, 0x24($sp)
 /* 76E8C 800DD9DC 27A2004C */  addiu     $v0, $sp, 0x4c
 /* 76E90 800DD9E0 46062102 */  mul.s     $f4, $f4, $f6
-/* 76E94 800DD9E4 00000000 */  nop       
+/* 76E94 800DD9E4 00000000 */  nop
 /* 76E98 800DD9E8 AFA20028 */  sw        $v0, 0x28($sp)
 /* 76E9C 800DD9EC 27A20050 */  addiu     $v0, $sp, 0x50
 /* 76EA0 800DD9F0 AFA2002C */  sw        $v0, 0x2c($sp)
 /* 76EA4 800DD9F4 27A20054 */  addiu     $v0, $sp, 0x54
 /* 76EA8 800DD9F8 4606A502 */  mul.s     $f20, $f20, $f6
-/* 76EAC 800DD9FC 00000000 */  nop       
+/* 76EAC 800DD9FC 00000000 */  nop
 /* 76EB0 800DDA00 AFA20030 */  sw        $v0, 0x30($sp)
 /* 76EB4 800DDA04 27A20058 */  addiu     $v0, $sp, 0x58
 /* 76EB8 800DDA08 E7A00010 */  swc1      $f0, 0x10($sp)
@@ -79,25 +79,25 @@ glabel func_800DD8FC
 /* 76ED4 800DDA24 44054000 */  mfc1      $a1, $f8
 /* 76ED8 800DDA28 44075000 */  mfc1      $a3, $f10
 /* 76EDC 800DDA2C 4602B582 */  mul.s     $f22, $f22, $f2
-/* 76EE0 800DDA30 00000000 */  nop       
+/* 76EE0 800DDA30 00000000 */  nop
 /* 76EE4 800DDA34 0C037513 */  jal       func_800DD44C
 /* 76EE8 800DDA38 0220202D */   daddu    $a0, $s1, $zero
 /* 76EEC 800DDA3C 04400016 */  bltz      $v0, .L800DDA98
-/* 76EF0 800DDA40 00000000 */   nop      
+/* 76EF0 800DDA40 00000000 */   nop
 /* 76EF4 800DDA44 C7A4004C */  lwc1      $f4, 0x4c($sp)
 /* 76EF8 800DDA48 4618203E */  c.le.s    $f4, $f24
-/* 76EFC 800DDA4C 00000000 */  nop       
+/* 76EFC 800DDA4C 00000000 */  nop
 /* 76F00 800DDA50 45000011 */  bc1f      .L800DDA98
-/* 76F04 800DDA54 00000000 */   nop      
+/* 76F04 800DDA54 00000000 */   nop
 /* 76F08 800DDA58 46182101 */  sub.s     $f4, $f4, $f24
 /* 76F0C 800DDA5C C7A00038 */  lwc1      $f0, 0x38($sp)
 /* 76F10 800DDA60 46002002 */  mul.s     $f0, $f4, $f0
-/* 76F14 800DDA64 00000000 */  nop       
+/* 76F14 800DDA64 00000000 */  nop
 /* 76F18 800DDA68 C6620000 */  lwc1      $f2, ($s3)
 /* 76F1C 800DDA6C 46001080 */  add.s     $f2, $f2, $f0
 /* 76F20 800DDA70 C7A0003C */  lwc1      $f0, 0x3c($sp)
 /* 76F24 800DDA74 46002102 */  mul.s     $f4, $f4, $f0
-/* 76F28 800DDA78 00000000 */  nop       
+/* 76F28 800DDA78 00000000 */  nop
 /* 76F2C 800DDA7C E6620000 */  swc1      $f2, ($s3)
 /* 76F30 800DDA80 C6800000 */  lwc1      $f0, ($s4)
 /* 76F34 800DDA84 46040000 */  add.s     $f0, $f0, $f4

@@ -20,7 +20,7 @@ glabel func_802B65E8_E23CC8
 /* E23D04 802B6624 E6000054 */  swc1      $f0, 0x54($s0)
 .L802B6628:
 /* E23D08 802B6628 0C0AD954 */  jal       func_802B6550_E23C30
-/* E23D0C 802B662C 00000000 */   nop      
+/* E23D0C 802B662C 00000000 */   nop
 .L802B6630:
 /* E23D10 802B6630 8E020000 */  lw        $v0, ($s0)
 /* E23D14 802B6634 30424000 */  andi      $v0, $v0, 0x4000
@@ -34,18 +34,18 @@ glabel func_802B65E8_E23CC8
 /* E23D30 802B6650 0C0388C1 */  jal       input_to_move_vector
 /* E23D34 802B6654 27A50014 */   addiu    $a1, $sp, 0x14
 /* E23D38 802B6658 0C039454 */  jal       func_800E5150
-/* E23D3C 802B665C 00000000 */   nop      
+/* E23D3C 802B665C 00000000 */   nop
 /* E23D40 802B6660 C7A20014 */  lwc1      $f2, 0x14($sp)
 /* E23D44 802B6664 44800000 */  mtc1      $zero, $f0
-/* E23D48 802B6668 00000000 */  nop       
+/* E23D48 802B6668 00000000 */  nop
 /* E23D4C 802B666C 46001032 */  c.eq.s    $f2, $f0
-/* E23D50 802B6670 00000000 */  nop       
+/* E23D50 802B6670 00000000 */  nop
 /* E23D54 802B6674 45000005 */  bc1f      .L802B668C
-/* E23D58 802B6678 00000000 */   nop      
+/* E23D58 802B6678 00000000 */   nop
 /* E23D5C 802B667C 0C039769 */  jal       set_action_state
 /* E23D60 802B6680 0000202D */   daddu    $a0, $zero, $zero
 /* E23D64 802B6684 080AD9CA */  j         .L802B6728
-/* E23D68 802B6688 00000000 */   nop      
+/* E23D68 802B6688 00000000 */   nop
 .L802B668C:
 /* E23D6C 802B668C C7A00010 */  lwc1      $f0, 0x10($sp)
 /* E23D70 802B6690 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
@@ -58,36 +58,36 @@ glabel func_802B65E8_E23CC8
 /* E23D8C 802B66AC 00420018 */  mult      $v0, $v0
 /* E23D90 802B66B0 00001812 */  mflo      $v1
 /* E23D94 802B66B4 8E0200EC */  lw        $v0, 0xec($s0)
-/* E23D98 802B66B8 00000000 */  nop       
+/* E23D98 802B66B8 00000000 */  nop
 /* E23D9C 802B66BC 00420018 */  mult      $v0, $v0
 /* E23DA0 802B66C0 00001012 */  mflo      $v0
 /* E23DA4 802B66C4 00621021 */  addu      $v0, $v1, $v0
 /* E23DA8 802B66C8 44826000 */  mtc1      $v0, $f12
-/* E23DAC 802B66CC 00000000 */  nop       
+/* E23DAC 802B66CC 00000000 */  nop
 /* E23DB0 802B66D0 46806320 */  cvt.s.w   $f12, $f12
 /* E23DB4 802B66D4 46006084 */  sqrt.s    $f2, $f12
 /* E23DB8 802B66D8 46021032 */  c.eq.s    $f2, $f2
-/* E23DBC 802B66DC 00000000 */  nop       
+/* E23DBC 802B66DC 00000000 */  nop
 /* E23DC0 802B66E0 45010004 */  bc1t      .L802B66F4
-/* E23DC4 802B66E4 00000000 */   nop      
+/* E23DC4 802B66E4 00000000 */   nop
 /* E23DC8 802B66E8 0C0187BC */  jal       sqrtf
-/* E23DCC 802B66EC 00000000 */   nop      
+/* E23DCC 802B66EC 00000000 */   nop
 /* E23DD0 802B66F0 46000086 */  mov.s     $f2, $f0
 .L802B66F4:
 /* E23DD4 802B66F4 3C01425C */  lui       $at, 0x425c
 /* E23DD8 802B66F8 44810000 */  mtc1      $at, $f0
-/* E23DDC 802B66FC 00000000 */  nop       
+/* E23DDC 802B66FC 00000000 */  nop
 /* E23DE0 802B6700 4602003C */  c.lt.s    $f0, $f2
-/* E23DE4 802B6704 00000000 */  nop       
+/* E23DE4 802B6704 00000000 */  nop
 /* E23DE8 802B6708 45000005 */  bc1f      .L802B6720
 /* E23DEC 802B670C 24040008 */   addiu    $a0, $zero, 8
 /* E23DF0 802B6710 0C039769 */  jal       set_action_state
 /* E23DF4 802B6714 24040002 */   addiu    $a0, $zero, 2
 /* E23DF8 802B6718 080AD9CA */  j         .L802B6728
-/* E23DFC 802B671C 00000000 */   nop      
+/* E23DFC 802B671C 00000000 */   nop
 .L802B6720:
 /* E23E00 802B6720 0C039426 */  jal       func_800E5098
-/* E23E04 802B6724 00000000 */   nop      
+/* E23E04 802B6724 00000000 */   nop
 .L802B6728:
 /* E23E08 802B6728 8FBF001C */  lw        $ra, 0x1c($sp)
 /* E23E0C 802B672C 8FB00018 */  lw        $s0, 0x18($sp)

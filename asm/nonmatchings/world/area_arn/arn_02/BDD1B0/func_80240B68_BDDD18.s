@@ -19,7 +19,7 @@ glabel func_80240B68_BDDD18
 .L80240BA0:
 /* BDDD50 80240BA0 8482008C */  lh        $v0, 0x8c($a0)
 /* BDDD54 80240BA4 1440000A */  bnez      $v0, .L80240BD0
-/* BDDD58 80240BA8 00000000 */   nop      
+/* BDDD58 80240BA8 00000000 */   nop
 /* BDDD5C 80240BAC 8482008E */  lh        $v0, 0x8e($a0)
 /* BDDD60 80240BB0 1C400007 */  bgtz      $v0, .L80240BD0
 /* BDDD64 80240BB4 24020008 */   addiu    $v0, $zero, 8

@@ -26,7 +26,7 @@ glabel func_80240A44_92ACF4
 /* 92AD44 80240A94 1440FFFA */  bnez      $v0, .L80240A80
 /* 92AD48 80240A98 24A50004 */   addiu    $a1, $a1, 4
 /* 92AD4C 80240A9C 080902B8 */  j         .L80240AE0
-/* 92AD50 80240AA0 00000000 */   nop      
+/* 92AD50 80240AA0 00000000 */   nop
 .L80240AA4:
 /* 92AD54 80240AA4 0000182D */  daddu     $v1, $zero, $zero
 /* 92AD58 80240AA8 0040282D */  daddu     $a1, $v0, $zero

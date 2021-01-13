@@ -19,7 +19,7 @@ glabel CreatePartShadow
 /* 19DE44 8026F564 0040282D */  daddu     $a1, $v0, $zero
 /* 19DE48 8026F568 2402FF81 */  addiu     $v0, $zero, -0x7f
 /* 19DE4C 8026F56C 16220002 */  bne       $s1, $v0, .L8026F578
-/* 19DE50 8026F570 00000000 */   nop      
+/* 19DE50 8026F570 00000000 */   nop
 /* 19DE54 8026F574 8E510148 */  lw        $s1, 0x148($s2)
 .L8026F578:
 /* 19DE58 8026F578 0C099CC7 */  jal       create_part_shadow

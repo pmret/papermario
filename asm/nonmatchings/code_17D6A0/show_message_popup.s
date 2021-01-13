@@ -15,11 +15,12 @@ glabel show_message_popup
 /* 17F7AC 80250ECC 104000F1 */  beqz      $v0, .L80251294
 /* 17F7B0 80250ED0 24140050 */   addiu    $s4, $zero, 0x50
 /* 17F7B4 80250ED4 00031080 */  sll       $v0, $v1, 2
-/* 17F7B8 80250ED8 3C01802A */  lui       $at, %hi(D_8029D1F0)
+/* 17F7B8 80250ED8 3C01802A */  lui       $at, %hi(jtbl_8029D1F0_1CBAD0)
 /* 17F7BC 80250EDC 00220821 */  addu      $at, $at, $v0
-/* 17F7C0 80250EE0 8C22D1F0 */  lw        $v0, %lo(D_8029D1F0)($at)
+/* 17F7C0 80250EE0 8C22D1F0 */  lw        $v0, %lo(jtbl_8029D1F0_1CBAD0)($at)
 /* 17F7C4 80250EE4 00400008 */  jr        $v0
 /* 17F7C8 80250EE8 00000000 */   nop
+glabel L80250EEC_17F7CC
 /* 17F7CC 80250EEC 82620017 */  lb        $v0, 0x17($s3)
 /* 17F7D0 80250EF0 104000E8 */  beqz      $v0, .L80251294
 /* 17F7D4 80250EF4 0000282D */   daddu    $a1, $zero, $zero
@@ -61,6 +62,7 @@ glabel show_message_popup
 /* 17F864 80250F84 24040009 */  addiu     $a0, $zero, 9
 /* 17F868 80250F88 080944A3 */  j         .L8025128C
 /* 17F86C 80250F8C 24050001 */   addiu    $a1, $zero, 1
+glabel L80250F90_17F870
 /* 17F870 80250F90 82620017 */  lb        $v0, 0x17($s3)
 /* 17F874 80250F94 104000BF */  beqz      $v0, .L80251294
 /* 17F878 80250F98 00000000 */   nop
@@ -93,6 +95,7 @@ glabel show_message_popup
 /* 17F8E4 80251004 24040009 */  addiu     $a0, $zero, 9
 /* 17F8E8 80251008 080944A3 */  j         .L8025128C
 /* 17F8EC 8025100C 24050001 */   addiu    $a1, $zero, 1
+glabel L80251010_17F8F0
 /* 17F8F0 80251010 82620017 */  lb        $v0, 0x17($s3)
 /* 17F8F4 80251014 1040009F */  beqz      $v0, .L80251294
 /* 17F8F8 80251018 00000000 */   nop
@@ -139,6 +142,7 @@ glabel show_message_popup
 /* 17F99C 802510BC 24040009 */  addiu     $a0, $zero, 9
 /* 17F9A0 802510C0 080944A3 */  j         .L8025128C
 /* 17F9A4 802510C4 24050001 */   addiu    $a1, $zero, 1
+glabel L802510C8_17F9A8
 /* 17F9A8 802510C8 82620017 */  lb        $v0, 0x17($s3)
 /* 17F9AC 802510CC 10400071 */  beqz      $v0, .L80251294
 /* 17F9B0 802510D0 00000000 */   nop
@@ -189,6 +193,7 @@ glabel show_message_popup
 /* 17FA64 80251184 24040009 */  addiu     $a0, $zero, 9
 /* 17FA68 80251188 080944A3 */  j         .L8025128C
 /* 17FA6C 8025118C 24050001 */   addiu    $a1, $zero, 1
+glabel L80251190_17FA70
 /* 17FA70 80251190 82620017 */  lb        $v0, 0x17($s3)
 /* 17FA74 80251194 1040003F */  beqz      $v0, .L80251294
 /* 17FA78 80251198 0000282D */   daddu    $a1, $zero, $zero

@@ -44,36 +44,36 @@ glabel appendGfx_player_spin
 /* 7AC4C 800E179C C62200A8 */  lwc1      $f2, 0xa8($s1)
 /* 7AC50 800E17A0 3C0142B4 */  lui       $at, 0x42b4
 /* 7AC54 800E17A4 44810000 */  mtc1      $at, $f0
-/* 7AC58 800E17A8 00000000 */  nop       
+/* 7AC58 800E17A8 00000000 */  nop
 /* 7AC5C 800E17AC 4602003C */  c.lt.s    $f0, $f2
-/* 7AC60 800E17B0 00000000 */  nop       
+/* 7AC60 800E17B0 00000000 */  nop
 /* 7AC64 800E17B4 4500000A */  bc1f      .L800E17E0
-/* 7AC68 800E17B8 00000000 */   nop      
+/* 7AC68 800E17B8 00000000 */   nop
 /* 7AC6C 800E17BC 3C014334 */  lui       $at, 0x4334
 /* 7AC70 800E17C0 44812000 */  mtc1      $at, $f4
-/* 7AC74 800E17C4 00000000 */  nop       
+/* 7AC74 800E17C4 00000000 */  nop
 /* 7AC78 800E17C8 4604103E */  c.le.s    $f2, $f4
-/* 7AC7C 800E17CC 00000000 */  nop       
+/* 7AC7C 800E17CC 00000000 */  nop
 /* 7AC80 800E17D0 45000003 */  bc1f      .L800E17E0
-/* 7AC84 800E17D4 00000000 */   nop      
+/* 7AC84 800E17D4 00000000 */   nop
 /* 7AC88 800E17D8 0803861C */  j         .L800E1870
 /* 7AC8C 800E17DC 46022501 */   sub.s    $f20, $f4, $f2
 .L800E17E0:
 /* 7AC90 800E17E0 C62000A8 */  lwc1      $f0, 0xa8($s1)
 /* 7AC94 800E17E4 3C014334 */  lui       $at, 0x4334
 /* 7AC98 800E17E8 44812000 */  mtc1      $at, $f4
-/* 7AC9C 800E17EC 00000000 */  nop       
+/* 7AC9C 800E17EC 00000000 */  nop
 /* 7ACA0 800E17F0 4600203C */  c.lt.s    $f4, $f0
-/* 7ACA4 800E17F4 00000000 */  nop       
+/* 7ACA4 800E17F4 00000000 */  nop
 /* 7ACA8 800E17F8 4500000C */  bc1f      .L800E182C
-/* 7ACAC 800E17FC 00000000 */   nop      
+/* 7ACAC 800E17FC 00000000 */   nop
 /* 7ACB0 800E1800 3C014387 */  lui       $at, 0x4387
 /* 7ACB4 800E1804 44812000 */  mtc1      $at, $f4
-/* 7ACB8 800E1808 00000000 */  nop       
+/* 7ACB8 800E1808 00000000 */  nop
 /* 7ACBC 800E180C 4604003E */  c.le.s    $f0, $f4
-/* 7ACC0 800E1810 00000000 */  nop       
+/* 7ACC0 800E1810 00000000 */  nop
 /* 7ACC4 800E1814 45000008 */  bc1f      .L800E1838
-/* 7ACC8 800E1818 00000000 */   nop      
+/* 7ACC8 800E1818 00000000 */   nop
 /* 7ACCC 800E181C 3C014334 */  lui       $at, 0x4334
 /* 7ACD0 800E1820 44812000 */  mtc1      $at, $f4
 /* 7ACD4 800E1824 0803861C */  j         .L800E1870
@@ -81,19 +81,19 @@ glabel appendGfx_player_spin
 .L800E182C:
 /* 7ACDC 800E182C 3C014387 */  lui       $at, 0x4387
 /* 7ACE0 800E1830 44812000 */  mtc1      $at, $f4
-/* 7ACE4 800E1834 00000000 */  nop       
+/* 7ACE4 800E1834 00000000 */  nop
 .L800E1838:
 /* 7ACE8 800E1838 4600203C */  c.lt.s    $f4, $f0
-/* 7ACEC 800E183C 00000000 */  nop       
+/* 7ACEC 800E183C 00000000 */  nop
 /* 7ACF0 800E1840 4500000A */  bc1f      .L800E186C
-/* 7ACF4 800E1844 00000000 */   nop      
+/* 7ACF4 800E1844 00000000 */   nop
 /* 7ACF8 800E1848 3C0143B4 */  lui       $at, 0x43b4
 /* 7ACFC 800E184C 44811000 */  mtc1      $at, $f2
-/* 7AD00 800E1850 00000000 */  nop       
+/* 7AD00 800E1850 00000000 */  nop
 /* 7AD04 800E1854 4602003E */  c.le.s    $f0, $f2
-/* 7AD08 800E1858 00000000 */  nop       
+/* 7AD08 800E1858 00000000 */  nop
 /* 7AD0C 800E185C 45000003 */  bc1f      .L800E186C
-/* 7AD10 800E1860 00000000 */   nop      
+/* 7AD10 800E1860 00000000 */   nop
 /* 7AD14 800E1864 0803861C */  j         .L800E1870
 /* 7AD18 800E1868 46001501 */   sub.s    $f20, $f2, $f0
 .L800E186C:
@@ -101,11 +101,11 @@ glabel appendGfx_player_spin
 .L800E1870:
 /* 7AD20 800E1870 3C0141C8 */  lui       $at, 0x41c8
 /* 7AD24 800E1874 44810000 */  mtc1      $at, $f0
-/* 7AD28 800E1878 00000000 */  nop       
+/* 7AD28 800E1878 00000000 */  nop
 /* 7AD2C 800E187C 4600A003 */  div.s     $f0, $f20, $f0
 /* 7AD30 800E1880 4600010D */  trunc.w.s $f4, $f0
 /* 7AD34 800E1884 44062000 */  mfc1      $a2, $f4
-/* 7AD38 800E1888 00000000 */  nop       
+/* 7AD38 800E1888 00000000 */  nop
 /* 7AD3C 800E188C 00061100 */  sll       $v0, $a2, 4
 /* 7AD40 800E1890 00461023 */  subu      $v0, $v0, $a2
 /* 7AD44 800E1894 00021080 */  sll       $v0, $v0, 2
@@ -129,7 +129,7 @@ glabel appendGfx_player_spin
 /* 7AD88 800E18D8 E7B60010 */   swc1     $f22, 0x10($sp)
 /* 7AD8C 800E18DC C62C008C */  lwc1      $f12, 0x8c($s1)
 /* 7AD90 800E18E0 0C00A6C9 */  jal       clamp_angle
-/* 7AD94 800E18E4 00000000 */   nop      
+/* 7AD94 800E18E4 00000000 */   nop
 /* 7AD98 800E18E8 44050000 */  mfc1      $a1, $f0
 /* 7AD9C 800E18EC 4406B000 */  mfc1      $a2, $f22
 /* 7ADA0 800E18F0 4407B000 */  mfc1      $a3, $f22
@@ -161,7 +161,7 @@ glabel appendGfx_player_spin
 /* 7AE04 800E1954 0000202D */   daddu    $a0, $zero, $zero
 .L800E1958:
 /* 7AE08 800E1958 4486C000 */  mtc1      $a2, $f24
-/* 7AE0C 800E195C 00000000 */  nop       
+/* 7AE0C 800E195C 00000000 */  nop
 /* 7AE10 800E1960 4680C620 */  cvt.s.w   $f24, $f24
 /* 7AE14 800E1964 0000202D */  daddu     $a0, $zero, $zero
 .L800E1968:
@@ -204,10 +204,10 @@ glabel appendGfx_player_spin
 /* 7AEA4 800E19F4 44812000 */  mtc1      $at, $f4
 /* 7AEA8 800E19F8 00021023 */  negu      $v0, $v0
 /* 7AEAC 800E19FC 44820000 */  mtc1      $v0, $f0
-/* 7AEB0 800E1A00 00000000 */  nop       
+/* 7AEB0 800E1A00 00000000 */  nop
 /* 7AEB4 800E1A04 46800020 */  cvt.s.w   $f0, $f0
 /* 7AEB8 800E1A08 46040102 */  mul.s     $f4, $f0, $f4
-/* 7AEBC 800E1A0C 00000000 */  nop       
+/* 7AEBC 800E1A0C 00000000 */  nop
 /* 7AEC0 800E1A10 4405B000 */  mfc1      $a1, $f22
 /* 7AEC4 800E1A14 4407B000 */  mfc1      $a3, $f22
 /* 7AEC8 800E1A18 44062000 */  mfc1      $a2, $f4
@@ -241,10 +241,10 @@ glabel appendGfx_player_spin
 /* 7AF38 800E1A88 3C013F00 */  lui       $at, 0x3f00
 /* 7AF3C 800E1A8C 44812000 */  mtc1      $at, $f4
 /* 7AF40 800E1A90 44820000 */  mtc1      $v0, $f0
-/* 7AF44 800E1A94 00000000 */  nop       
+/* 7AF44 800E1A94 00000000 */  nop
 /* 7AF48 800E1A98 46800020 */  cvt.s.w   $f0, $f0
 /* 7AF4C 800E1A9C 46040102 */  mul.s     $f4, $f0, $f4
-/* 7AF50 800E1AA0 00000000 */  nop       
+/* 7AF50 800E1AA0 00000000 */  nop
 /* 7AF54 800E1AA4 4405B000 */  mfc1      $a1, $f22
 /* 7AF58 800E1AA8 4407B000 */  mfc1      $a3, $f22
 /* 7AF5C 800E1AAC 44062000 */  mfc1      $a2, $f4
@@ -257,7 +257,7 @@ glabel appendGfx_player_spin
 /* 7AF78 800E1AC8 3C013F36 */  lui       $at, 0x3f36
 /* 7AF7C 800E1ACC 3421DB6E */  ori       $at, $at, 0xdb6e
 /* 7AF80 800E1AD0 44810000 */  mtc1      $at, $f0
-/* 7AF84 800E1AD4 00000000 */  nop       
+/* 7AF84 800E1AD4 00000000 */  nop
 /* 7AF88 800E1AD8 44050000 */  mfc1      $a1, $f0
 /* 7AF8C 800E1ADC 0280202D */  daddu     $a0, $s4, $zero
 /* 7AF90 800E1AE0 00A0302D */  daddu     $a2, $a1, $zero
@@ -279,16 +279,16 @@ glabel appendGfx_player_spin
 /* 7AFD0 800E1B20 C62200A8 */  lwc1      $f2, 0xa8($s1)
 /* 7AFD4 800E1B24 3C0142B4 */  lui       $at, 0x42b4
 /* 7AFD8 800E1B28 44810000 */  mtc1      $at, $f0
-/* 7AFDC 800E1B2C 00000000 */  nop       
+/* 7AFDC 800E1B2C 00000000 */  nop
 /* 7AFE0 800E1B30 4602003E */  c.le.s    $f0, $f2
-/* 7AFE4 800E1B34 00000000 */  nop       
+/* 7AFE4 800E1B34 00000000 */  nop
 /* 7AFE8 800E1B38 45000008 */  bc1f      .L800E1B5C
 /* 7AFEC 800E1B3C 0000202D */   daddu    $a0, $zero, $zero
 /* 7AFF0 800E1B40 3C014387 */  lui       $at, 0x4387
 /* 7AFF4 800E1B44 44812000 */  mtc1      $at, $f4
-/* 7AFF8 800E1B48 00000000 */  nop       
+/* 7AFF8 800E1B48 00000000 */  nop
 /* 7AFFC 800E1B4C 4604103C */  c.lt.s    $f2, $f4
-/* 7B000 800E1B50 00000000 */  nop       
+/* 7B000 800E1B50 00000000 */  nop
 /* 7B004 800E1B54 45030001 */  bc1tl     .L800E1B5C
 /* 7B008 800E1B58 3C041000 */   lui      $a0, 0x1000
 .L800E1B5C:
@@ -301,7 +301,7 @@ glabel appendGfx_player_spin
 /* 7B024 800E1B74 26730001 */  addiu     $s3, $s3, 1
 /* 7B028 800E1B78 2A620002 */  slti      $v0, $s3, 2
 /* 7B02C 800E1B7C 1440FEFA */  bnez      $v0, .L800E1768
-/* 7B030 800E1B80 00000000 */   nop      
+/* 7B030 800E1B80 00000000 */   nop
 /* 7B034 800E1B84 8FBF014C */  lw        $ra, 0x14c($sp)
 /* 7B038 800E1B88 8FB60148 */  lw        $s6, 0x148($sp)
 /* 7B03C 800E1B8C 8FB50144 */  lw        $s5, 0x144($sp)

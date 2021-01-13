@@ -80,7 +80,7 @@ glabel reset_all_actor_sounds
 /* 1964A4 80267BC4 A4A200BE */  sh        $v0, 0xbe($a1)
 /* 1964A8 80267BC8 8CA5000C */  lw        $a1, 0xc($a1)
 /* 1964AC 80267BCC 14A0FFEE */  bnez      $a1, .L80267B88
-/* 1964B0 80267BD0 00000000 */   nop      
+/* 1964B0 80267BD0 00000000 */   nop
 .L80267BD4:
 /* 1964B4 80267BD4 03E00008 */  jr        $ra
-/* 1964B8 80267BD8 00000000 */   nop      
+/* 1964B8 80267BD8 00000000 */   nop

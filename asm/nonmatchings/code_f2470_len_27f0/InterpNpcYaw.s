@@ -32,7 +32,7 @@ glabel InterpNpcYaw
 /* F3520 802CEB70 0240202D */   daddu    $a0, $s2, $zero
 /* F3524 802CEB74 C6420074 */  lwc1      $f2, 0x74($s2)
 /* F3528 802CEB78 44820000 */  mtc1      $v0, $f0
-/* F352C 802CEB7C 00000000 */  nop       
+/* F352C 802CEB7C 00000000 */  nop
 /* F3530 802CEB80 46800020 */  cvt.s.w   $f0, $f0
 /* F3534 802CEB84 46020001 */  sub.s     $f0, $f0, $f2
 /* F3538 802CEB88 26310004 */  addiu     $s1, $s1, 4
@@ -52,28 +52,28 @@ glabel InterpNpcYaw
 /* F356C 802CEBBC C6420078 */  lwc1      $f2, 0x78($s2)
 /* F3570 802CEBC0 3C01C334 */  lui       $at, 0xc334
 /* F3574 802CEBC4 44810000 */  mtc1      $at, $f0
-/* F3578 802CEBC8 00000000 */  nop       
+/* F3578 802CEBC8 00000000 */  nop
 /* F357C 802CEBCC 4600103C */  c.lt.s    $f2, $f0
-/* F3580 802CEBD0 00000000 */  nop       
+/* F3580 802CEBD0 00000000 */  nop
 /* F3584 802CEBD4 45000007 */  bc1f      .L802CEBF4
-/* F3588 802CEBD8 00000000 */   nop      
+/* F3588 802CEBD8 00000000 */   nop
 /* F358C 802CEBDC 3C0143B4 */  lui       $at, 0x43b4
 /* F3590 802CEBE0 44810000 */  mtc1      $at, $f0
-/* F3594 802CEBE4 00000000 */  nop       
+/* F3594 802CEBE4 00000000 */  nop
 /* F3598 802CEBE8 46001000 */  add.s     $f0, $f2, $f0
 /* F359C 802CEBEC E6400078 */  swc1      $f0, 0x78($s2)
 /* F35A0 802CEBF0 C6420078 */  lwc1      $f2, 0x78($s2)
 .L802CEBF4:
 /* F35A4 802CEBF4 3C014334 */  lui       $at, 0x4334
 /* F35A8 802CEBF8 44810000 */  mtc1      $at, $f0
-/* F35AC 802CEBFC 00000000 */  nop       
+/* F35AC 802CEBFC 00000000 */  nop
 /* F35B0 802CEC00 4602003C */  c.lt.s    $f0, $f2
-/* F35B4 802CEC04 00000000 */  nop       
+/* F35B4 802CEC04 00000000 */  nop
 /* F35B8 802CEC08 45000006 */  bc1f      .L802CEC24
-/* F35BC 802CEC0C 00000000 */   nop      
+/* F35BC 802CEC0C 00000000 */   nop
 /* F35C0 802CEC10 3C0143B4 */  lui       $at, 0x43b4
 /* F35C4 802CEC14 44810000 */  mtc1      $at, $f0
-/* F35C8 802CEC18 00000000 */  nop       
+/* F35C8 802CEC18 00000000 */  nop
 /* F35CC 802CEC1C 46001001 */  sub.s     $f0, $f2, $f0
 /* F35D0 802CEC20 E6400078 */  swc1      $f0, 0x78($s2)
 .L802CEC24:
@@ -95,10 +95,10 @@ glabel InterpNpcYaw
 /* F3608 802CEC58 00021403 */  sra       $v0, $v0, 0x10
 /* F360C 802CEC5C C6800000 */  lwc1      $f0, ($s4)
 /* F3610 802CEC60 44821000 */  mtc1      $v0, $f2
-/* F3614 802CEC64 00000000 */  nop       
+/* F3614 802CEC64 00000000 */  nop
 /* F3618 802CEC68 468010A0 */  cvt.s.w   $f2, $f2
 /* F361C 802CEC6C 46020002 */  mul.s     $f0, $f0, $f2
-/* F3620 802CEC70 00000000 */  nop       
+/* F3620 802CEC70 00000000 */  nop
 /* F3624 802CEC74 C6AC0000 */  lwc1      $f12, ($s5)
 /* F3628 802CEC78 C6620000 */  lwc1      $f2, ($s3)
 /* F362C 802CEC7C 468010A0 */  cvt.s.w   $f2, $f2

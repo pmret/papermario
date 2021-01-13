@@ -26,7 +26,7 @@ glabel func_80240360_AB0350
 /* AB03A0 802403B0 1440FFFA */  bnez      $v0, .L8024039C
 /* AB03A4 802403B4 24A50004 */   addiu    $a1, $a1, 4
 /* AB03A8 802403B8 080900FF */  j         .L802403FC
-/* AB03AC 802403BC 00000000 */   nop      
+/* AB03AC 802403BC 00000000 */   nop
 .L802403C0:
 /* AB03B0 802403C0 0000182D */  daddu     $v1, $zero, $zero
 /* AB03B4 802403C4 0040282D */  daddu     $a1, $v0, $zero

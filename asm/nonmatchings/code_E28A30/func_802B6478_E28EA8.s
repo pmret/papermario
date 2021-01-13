@@ -27,7 +27,7 @@ glabel func_802B6478_E28EA8
 /* E28EFC 802B64CC 8E020004 */  lw        $v0, 4($s0)
 /* E28F00 802B64D0 30420200 */  andi      $v0, $v0, 0x200
 /* E28F04 802B64D4 14400008 */  bnez      $v0, .L802B64F8
-/* E28F08 802B64D8 00000000 */   nop      
+/* E28F08 802B64D8 00000000 */   nop
 /* E28F0C 802B64DC 0C039769 */  jal       set_action_state
 /* E28F10 802B64E0 0000202D */   daddu    $a0, $zero, $zero
 /* E28F14 802B64E4 3C03FFF7 */  lui       $v1, 0xfff7

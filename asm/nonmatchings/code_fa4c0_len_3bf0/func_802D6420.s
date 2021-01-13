@@ -23,16 +23,16 @@ glabel func_802D6420
 /* FAE14 802D6464 1062004B */  beq       $v1, $v0, .L802D6594
 /* FAE18 802D6468 0000102D */   daddu    $v0, $zero, $zero
 /* FAE1C 802D646C 080B5988 */  j         .L802D6620
-/* FAE20 802D6470 00000000 */   nop      
+/* FAE20 802D6470 00000000 */   nop
 .L802D6474:
 /* FAE24 802D6474 0C03805E */  jal       disable_player_input
-/* FAE28 802D6478 00000000 */   nop      
+/* FAE28 802D6478 00000000 */   nop
 /* FAE2C 802D647C 0C038045 */  jal       disable_player_static_collisions
-/* FAE30 802D6480 00000000 */   nop      
+/* FAE30 802D6480 00000000 */   nop
 /* FAE34 802D6484 0C03BD8A */  jal       func_800EF628
-/* FAE38 802D6488 00000000 */   nop      
+/* FAE38 802D6488 00000000 */   nop
 /* FAE3C 802D648C 0C03A5EE */  jal       func_800E97B8
-/* FAE40 802D6490 00000000 */   nop      
+/* FAE40 802D6490 00000000 */   nop
 /* FAE44 802D6494 0000482D */  daddu     $t1, $zero, $zero
 /* FAE48 802D6498 0120402D */  daddu     $t0, $t1, $zero
 /* FAE4C 802D649C 3C0C8008 */  lui       $t4, %hi(gItemTable)
@@ -63,7 +63,7 @@ glabel func_802D6420
 .L802D64F8:
 /* FAEA8 802D64F8 8C620000 */  lw        $v0, ($v1)
 /* FAEAC 802D64FC 1C40FFFA */  bgtz      $v0, .L802D64E8
-/* FAEB0 802D6500 00000000 */   nop      
+/* FAEB0 802D6500 00000000 */   nop
 .L802D6504:
 /* FAEB4 802D6504 50A00012 */  beql      $a1, $zero, .L802D6550
 /* FAEB8 802D6508 25080001 */   addiu    $t0, $t0, 1
@@ -111,7 +111,7 @@ glabel func_802D6420
 /* FAF54 802D65A4 1040001D */  beqz      $v0, .L802D661C
 /* FAF58 802D65A8 AE020078 */   sw       $v0, 0x78($s0)
 /* FAF5C 802D65AC 0C03C4EC */  jal       func_800F13B0
-/* FAF60 802D65B0 00000000 */   nop      
+/* FAF60 802D65B0 00000000 */   nop
 /* FAF64 802D65B4 8E020074 */  lw        $v0, 0x74($s0)
 /* FAF68 802D65B8 24420001 */  addiu     $v0, $v0, 1
 .L802D65BC:
@@ -120,7 +120,7 @@ glabel func_802D6420
 /* FAF74 802D65C4 14400016 */  bnez      $v0, .L802D6620
 /* FAF78 802D65C8 0000102D */   daddu    $v0, $zero, $zero
 /* FAF7C 802D65CC 0C03C54E */  jal       func_800F1538
-/* FAF80 802D65D0 00000000 */   nop      
+/* FAF80 802D65D0 00000000 */   nop
 /* FAF84 802D65D4 8E030078 */  lw        $v1, 0x78($s0)
 /* FAF88 802D65D8 240200FF */  addiu     $v0, $zero, 0xff
 /* FAF8C 802D65DC 54620005 */  bnel      $v1, $v0, .L802D65F4

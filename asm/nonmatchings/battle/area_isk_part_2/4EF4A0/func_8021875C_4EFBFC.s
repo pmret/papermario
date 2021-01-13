@@ -23,14 +23,14 @@ glabel func_8021875C_4EFBFC
 /* 4EFC44 802187A4 0040802D */   daddu    $s0, $v0, $zero
 /* 4EFC48 802187A8 24040002 */  addiu     $a0, $zero, 2
 /* 4EFC4C 802187AC 44923000 */  mtc1      $s2, $f6
-/* 4EFC50 802187B0 00000000 */  nop       
+/* 4EFC50 802187B0 00000000 */  nop
 /* 4EFC54 802187B4 468031A0 */  cvt.s.w   $f6, $f6
 /* 4EFC58 802187B8 44900000 */  mtc1      $s0, $f0
-/* 4EFC5C 802187BC 00000000 */  nop       
+/* 4EFC5C 802187BC 00000000 */  nop
 /* 4EFC60 802187C0 46800020 */  cvt.s.w   $f0, $f0
 /* 4EFC64 802187C4 44053000 */  mfc1      $a1, $f6
 /* 4EFC68 802187C8 44823000 */  mtc1      $v0, $f6
-/* 4EFC6C 802187CC 00000000 */  nop       
+/* 4EFC6C 802187CC 00000000 */  nop
 /* 4EFC70 802187D0 468031A0 */  cvt.s.w   $f6, $f6
 /* 4EFC74 802187D4 E7A00010 */  swc1      $f0, 0x10($sp)
 /* 4EFC78 802187D8 3C01BF00 */  lui       $at, 0xbf00
@@ -61,5 +61,5 @@ glabel func_8021875C_4EFBFC
 /* 4EFCDC 8021883C 24020002 */  addiu     $v0, $zero, 2
 /* 4EFCE0 80218840 03E00008 */  jr        $ra
 /* 4EFCE4 80218844 27BD0038 */   addiu    $sp, $sp, 0x38
-/* 4EFCE8 80218848 00000000 */  nop       
-/* 4EFCEC 8021884C 00000000 */  nop       
+/* 4EFCE8 80218848 00000000 */  nop
+/* 4EFCEC 8021884C 00000000 */  nop

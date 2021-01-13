@@ -19,11 +19,12 @@ glabel end_battle
 /* 173368 80244A88 104000BA */  beqz      $v0, .L80244D74
 /* 17336C 80244A8C AFB00018 */   sw       $s0, 0x18($sp)
 /* 173370 80244A90 00031080 */  sll       $v0, $v1, 2
-/* 173374 80244A94 3C01802A */  lui       $at, %hi(D_8029CAB8)
+/* 173374 80244A94 3C01802A */  lui       $at, %hi(jtbl_8029CAB8_1CB398)
 /* 173378 80244A98 00220821 */  addu      $at, $at, $v0
-/* 17337C 80244A9C 8C22CAB8 */  lw        $v0, %lo(D_8029CAB8)($at)
+/* 17337C 80244A9C 8C22CAB8 */  lw        $v0, %lo(jtbl_8029CAB8_1CB398)($at)
 /* 173380 80244AA0 00400008 */  jr        $v0
 /* 173384 80244AA4 00000000 */   nop
+glabel L80244AA8_173388
 /* 173388 80244AA8 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
 /* 17338C 80244AAC 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 173390 80244AB0 3C048028 */  lui       $a0, %hi(D_80280A30)
@@ -64,6 +65,7 @@ glabel end_battle
 /* 173414 80244B34 AC22C4DC */  sw        $v0, %lo(gBattleStatus+0x46C)($at)
 /* 173418 80244B38 0809135D */  j         .L80244D74
 /* 17341C 80244B3C 00000000 */   nop
+glabel L80244B40_173420
 /* 173420 80244B40 3C048028 */  lui       $a0, %hi(D_80280A30)
 /* 173424 80244B44 24840A30 */  addiu     $a0, $a0, %lo(D_80280A30)
 /* 173428 80244B48 8C830000 */  lw        $v1, ($a0)
@@ -83,6 +85,7 @@ glabel end_battle
 /* 17345C 80244B7C AC850000 */   sw       $a1, ($a0)
 /* 173460 80244B80 0809135D */  j         .L80244D74
 /* 173464 80244B84 00000000 */   nop
+glabel L80244B88_173468
 /* 173468 80244B88 240200FF */  addiu     $v0, $zero, 0xff
 /* 17346C 80244B8C 3C04800E */  lui       $a0, %hi(gBattleStatus)
 /* 173470 80244B90 2484C070 */  addiu     $a0, $a0, %lo(gBattleStatus)
@@ -119,6 +122,7 @@ glabel end_battle
 /* 1734E0 80244C00 AC22C4DC */  sw        $v0, %lo(gBattleStatus+0x46C)($at)
 /* 1734E4 80244C04 0809135D */  j         .L80244D74
 /* 1734E8 80244C08 AE4300C0 */   sw       $v1, 0xc0($s2)
+glabel L80244C0C_1734EC
 /* 1734EC 80244C0C 8E4400C0 */  lw        $a0, 0xc0($s2)
 /* 1734F0 80244C10 0C0B1059 */  jal       does_script_exist
 /* 1734F4 80244C14 00000000 */   nop
@@ -126,6 +130,7 @@ glabel end_battle
 /* 1734FC 80244C1C 24020004 */   addiu    $v0, $zero, 4
 /* 173500 80244C20 3C01800E */  lui       $at, %hi(gBattleStatus+0x46C)
 /* 173504 80244C24 AC22C4DC */  sw        $v0, %lo(gBattleStatus+0x46C)($at)
+glabel L80244C28_173508
 /* 173508 80244C28 0C0B1045 */  jal       kill_all_scripts
 /* 17350C 80244C2C 0000882D */   daddu    $s1, $zero, $zero
 /* 173510 80244C30 0240802D */  daddu     $s0, $s2, $zero

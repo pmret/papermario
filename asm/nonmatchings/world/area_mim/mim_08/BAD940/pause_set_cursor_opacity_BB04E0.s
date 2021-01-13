@@ -16,7 +16,7 @@ glabel pause_set_cursor_opacity_BB04E0
 /* BB050C 80242BCC A462008E */  sh        $v0, 0x8e($v1)
 /* BB0510 80242BD0 00021400 */  sll       $v0, $v0, 0x10
 /* BB0514 80242BD4 14400005 */  bnez      $v0, .L80242BEC
-/* BB0518 80242BD8 00000000 */   nop      
+/* BB0518 80242BD8 00000000 */   nop
 /* BB051C 80242BDC 960200AA */  lhu       $v0, 0xaa($s0)
 /* BB0520 80242BE0 A462008E */  sh        $v0, 0x8e($v1)
 /* BB0524 80242BE4 2402000E */  addiu     $v0, $zero, 0xe

@@ -15,7 +15,7 @@ glabel func_80241DDC_DCEAAC
 /* DCEAD4 80241E04 D422A970 */  ldc1      $f2, %lo(D_8024A970)($at)
 /* DCEAD8 80241E08 46000021 */  cvt.d.s   $f0, $f0
 /* DCEADC 80241E0C 46220002 */  mul.d     $f0, $f0, $f2
-/* DCEAE0 80241E10 00000000 */  nop       
+/* DCEAE0 80241E10 00000000 */  nop
 /* DCEAE4 80241E14 46200020 */  cvt.s.d   $f0, $f0
 /* DCEAE8 80241E18 E4400018 */  swc1      $f0, 0x18($v0)
 /* DCEAEC 80241E1C 8E0300CC */  lw        $v1, 0xcc($s0)

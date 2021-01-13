@@ -13,7 +13,7 @@ glabel func_8024349C_A1E59C
 /* A1E5BC 802434BC 14620006 */  bne       $v1, $v0, .L802434D8
 /* A1E5C0 802434C0 24020002 */   addiu    $v0, $zero, 2
 /* A1E5C4 802434C4 44800000 */  mtc1      $zero, $f0
-/* A1E5C8 802434C8 00000000 */  nop       
+/* A1E5C8 802434C8 00000000 */  nop
 /* A1E5CC 802434CC 44050000 */  mfc1      $a1, $f0
 /* A1E5D0 802434D0 08090D3C */  j         .L802434F0
 /* A1E5D4 802434D4 0000202D */   daddu    $a0, $zero, $zero
@@ -21,9 +21,9 @@ glabel func_8024349C_A1E59C
 /* A1E5D8 802434D8 14620008 */  bne       $v1, $v0, .L802434FC
 /* A1E5DC 802434DC 24040001 */   addiu    $a0, $zero, 1
 /* A1E5E0 802434E0 44800000 */  mtc1      $zero, $f0
-/* A1E5E4 802434E4 00000000 */  nop       
+/* A1E5E4 802434E4 00000000 */  nop
 /* A1E5E8 802434E8 44050000 */  mfc1      $a1, $f0
-/* A1E5EC 802434EC 00000000 */  nop       
+/* A1E5EC 802434EC 00000000 */  nop
 .L802434F0:
 /* A1E5F0 802434F0 00A0302D */  daddu     $a2, $a1, $zero
 /* A1E5F4 802434F4 0C01C5A4 */  jal       func_80071690

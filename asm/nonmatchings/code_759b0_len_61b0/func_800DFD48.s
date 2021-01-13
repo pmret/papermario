@@ -29,7 +29,7 @@ glabel func_800DFD48
 /* 79254 800DFDA4 3C020001 */   lui      $v0, 1
 /* 79258 800DFDA8 34420002 */  ori       $v0, $v0, 2
 /* 7925C 800DFDAC 16020003 */  bne       $s0, $v0, .L800DFDBC
-/* 79260 800DFDB0 00000000 */   nop      
+/* 79260 800DFDB0 00000000 */   nop
 /* 79264 800DFDB4 3C100008 */  lui       $s0, 8
 /* 79268 800DFDB8 3610000E */  ori       $s0, $s0, 0xe
 .L800DFDBC:
@@ -67,14 +67,14 @@ glabel func_800DFD48
 /* 792D8 800DFE28 3C020001 */   lui      $v0, 1
 /* 792DC 800DFE2C 34420002 */  ori       $v0, $v0, 2
 /* 792E0 800DFE30 1602001A */  bne       $s0, $v0, .L800DFE9C
-/* 792E4 800DFE34 00000000 */   nop      
+/* 792E4 800DFE34 00000000 */   nop
 .L800DFE38:
 /* 792E8 800DFE38 8CA30004 */  lw        $v1, 4($a1)
 /* 792EC 800DFE3C 30621000 */  andi      $v0, $v1, 0x1000
 /* 792F0 800DFE40 14400007 */  bnez      $v0, .L800DFE60
 /* 792F4 800DFE44 30622000 */   andi     $v0, $v1, 0x2000
 /* 792F8 800DFE48 0C037F3D */  jal       func_800DFCF4
-/* 792FC 800DFE4C 00000000 */   nop      
+/* 792FC 800DFE4C 00000000 */   nop
 /* 79300 800DFE50 1440001E */  bnez      $v0, .L800DFECC
 /* 79304 800DFE54 3C020008 */   lui      $v0, 8
 /* 79308 800DFE58 08037FBB */  j         .L800DFEEC
@@ -93,7 +93,7 @@ glabel func_800DFD48
 /* 79334 800DFE84 00822021 */  addu      $a0, $a0, $v0
 /* 79338 800DFE88 8C847C30 */  lw        $a0, %lo(D_800F7C30)($a0)
 /* 7933C 800DFE8C 0C0398DB */  jal       func_800E636C
-/* 79340 800DFE90 00000000 */   nop      
+/* 79340 800DFE90 00000000 */   nop
 /* 79344 800DFE94 08037FBB */  j         .L800DFEEC
 /* 79348 800DFE98 2402FFFF */   addiu    $v0, $zero, -1
 .L800DFE9C:

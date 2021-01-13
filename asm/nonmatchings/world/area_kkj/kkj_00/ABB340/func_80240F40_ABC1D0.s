@@ -37,4 +37,4 @@ glabel func_80240F40_ABC1D0
 /* ABC240 80240FB0 8FB00010 */  lw        $s0, 0x10($sp)
 /* ABC244 80240FB4 03E00008 */  jr        $ra
 /* ABC248 80240FB8 27BD0018 */   addiu    $sp, $sp, 0x18
-/* ABC24C 80240FBC 00000000 */  nop       
+/* ABC24C 80240FBC 00000000 */  nop

@@ -20,5 +20,5 @@ glabel func_80240830_A2AA70
 /* A2AAAC 8024086C 24020002 */  addiu     $v0, $zero, 2
 /* A2AAB0 80240870 03E00008 */  jr        $ra
 /* A2AAB4 80240874 27BD0018 */   addiu    $sp, $sp, 0x18
-/* A2AAB8 80240878 00000000 */  nop       
-/* A2AABC 8024087C 00000000 */  nop       
+/* A2AAB8 80240878 00000000 */  nop
+/* A2AABC 8024087C 00000000 */  nop

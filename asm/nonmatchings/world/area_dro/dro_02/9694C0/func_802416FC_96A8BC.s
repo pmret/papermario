@@ -82,7 +82,7 @@ glabel func_802416FC_96A8BC
 /* 96A9F0 80241830 3C058024 */  lui       $a1, %hi(func_80242EAC_96C06C)
 /* 96A9F4 80241834 24A52EAC */  addiu     $a1, $a1, %lo(func_80242EAC_96C06C)
 /* 96A9F8 80241838 0C048C56 */  jal       bind_dynamic_entity_3
-/* 96A9FC 8024183C 00000000 */   nop      
+/* 96A9FC 8024183C 00000000 */   nop
 /* 96AA00 80241840 0240202D */  daddu     $a0, $s2, $zero
 /* 96AA04 80241844 3C05F4AC */  lui       $a1, 0xf4ac
 /* 96AA08 80241848 34A5D487 */  ori       $a1, $a1, 0xd487

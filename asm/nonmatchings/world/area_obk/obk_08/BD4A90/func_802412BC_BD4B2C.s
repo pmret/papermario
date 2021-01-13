@@ -9,7 +9,7 @@ glabel func_802412BC_BD4B2C
 /* BD4B3C 802412CC 8E020084 */  lw        $v0, 0x84($s0)
 /* BD4B40 802412D0 2442FFFE */  addiu     $v0, $v0, -2
 /* BD4B44 802412D4 44826000 */  mtc1      $v0, $f12
-/* BD4B48 802412D8 00000000 */  nop       
+/* BD4B48 802412D8 00000000 */  nop
 /* BD4B4C 802412DC 0C00A6C9 */  jal       clamp_angle
 /* BD4B50 802412E0 46806320 */   cvt.s.w  $f12, $f12
 /* BD4B54 802412E4 4600008D */  trunc.w.s $f2, $f0

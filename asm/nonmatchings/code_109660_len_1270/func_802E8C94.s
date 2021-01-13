@@ -10,9 +10,9 @@ glabel func_802E8C94
 /* 10A528 802E8CA8 AC430004 */  sw        $v1, 4($v0)
 /* 10A52C 802E8CAC 2402FFFF */  addiu     $v0, $zero, -1
 /* 10A530 802E8CB0 14620003 */  bne       $v1, $v0, .L802E8CC0
-/* 10A534 802E8CB4 00000000 */   nop      
+/* 10A534 802E8CB4 00000000 */   nop
 /* 10A538 802E8CB8 0C043F5A */  jal       func_8010FD68
-/* 10A53C 802E8CBC 00000000 */   nop      
+/* 10A53C 802E8CBC 00000000 */   nop
 .L802E8CC0:
 /* 10A540 802E8CC0 8FBF0010 */  lw        $ra, 0x10($sp)
 /* 10A544 802E8CC4 03E00008 */  jr        $ra

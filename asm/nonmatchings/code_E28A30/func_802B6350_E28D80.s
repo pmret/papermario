@@ -30,7 +30,7 @@ glabel func_802B6350_E28D80
 /* E28DE0 802B63B0 A4C20008 */  sh        $v0, 8($a2)
 /* E28DE4 802B63B4 00021400 */  sll       $v0, $v0, 0x10
 /* E28DE8 802B63B8 14400003 */  bnez      $v0, .L802B63C8
-/* E28DEC 802B63BC 00000000 */   nop      
+/* E28DEC 802B63BC 00000000 */   nop
 /* E28DF0 802B63C0 0C039769 */  jal       set_action_state
 /* E28DF4 802B63C4 0000202D */   daddu    $a0, $zero, $zero
 .L802B63C8:

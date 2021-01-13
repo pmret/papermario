@@ -13,5 +13,5 @@ glabel func_80240A8C_AB0A7C
 /* AB0A9C 80240AAC 24020002 */  addiu     $v0, $zero, 2
 /* AB0AA0 80240AB0 03E00008 */  jr        $ra
 /* AB0AA4 80240AB4 27BD0018 */   addiu    $sp, $sp, 0x18
-/* AB0AA8 80240AB8 00000000 */  nop       
-/* AB0AAC 80240ABC 00000000 */  nop       
+/* AB0AA8 80240AB8 00000000 */  nop
+/* AB0AAC 80240ABC 00000000 */  nop

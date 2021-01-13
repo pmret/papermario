@@ -14,7 +14,7 @@ glabel func_80054C84
 /* 300A8 80054CA8 0060282D */   daddu    $a1, $v1, $zero
 /* 300AC 80054CAC 0040182D */  daddu     $v1, $v0, $zero
 /* 300B0 80054CB0 10600007 */  beqz      $v1, .L80054CD0
-/* 300B4 80054CB4 00000000 */   nop      
+/* 300B4 80054CB4 00000000 */   nop
 /* 300B8 80054CB8 0000202D */  daddu     $a0, $zero, $zero
 .L80054CBC:
 /* 300BC 80054CBC AC700000 */  sw        $s0, ($v1)

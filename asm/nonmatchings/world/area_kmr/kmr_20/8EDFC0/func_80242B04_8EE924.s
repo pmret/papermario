@@ -25,7 +25,7 @@ glabel func_80242B04_8EE924
 /* 8EE974 80242B54 0200302D */  daddu     $a2, $s0, $zero
 /* 8EE978 80242B58 0C0B2026 */  jal       set_variable
 /* 8EE97C 80242B5C AE020020 */   sw       $v0, 0x20($s0)
-/* 8EE980 80242B60 0C090A8F */  jal       func_80242A3C_8EE85C
+/* 8EE980 80242B60 0C090A8F */  jal       D_80242A3C
 /* 8EE984 80242B64 0200202D */   daddu    $a0, $s0, $zero
 .L80242B68:
 /* 8EE988 80242B68 8E300070 */  lw        $s0, 0x70($s1)
@@ -35,7 +35,7 @@ glabel func_80242B04_8EE924
 /* 8EE998 80242B78 0000102D */   daddu    $v0, $zero, $zero
 /* 8EE99C 80242B7C 8E040020 */  lw        $a0, 0x20($s0)
 /* 8EE9A0 80242B80 0C048D70 */  jal       func_801235C0
-/* 8EE9A4 80242B84 00000000 */   nop      
+/* 8EE9A4 80242B84 00000000 */   nop
 /* 8EE9A8 80242B88 0C00AB4B */  jal       heap_free
 /* 8EE9AC 80242B8C 0200202D */   daddu    $a0, $s0, $zero
 /* 8EE9B0 80242B90 24020001 */  addiu     $v0, $zero, 1
@@ -45,5 +45,5 @@ glabel func_80242B04_8EE924
 /* 8EE9BC 80242B9C 8FB00010 */  lw        $s0, 0x10($sp)
 /* 8EE9C0 80242BA0 03E00008 */  jr        $ra
 /* 8EE9C4 80242BA4 27BD0020 */   addiu    $sp, $sp, 0x20
-/* 8EE9C8 80242BA8 00000000 */  nop       
-/* 8EE9CC 80242BAC 00000000 */  nop       
+/* 8EE9C8 80242BA8 00000000 */  nop
+/* 8EE9CC 80242BAC 00000000 */  nop

@@ -13,5 +13,5 @@ glabel func_8024089C_BC4B1C
 /* BC4B3C 802408BC 24020002 */  addiu     $v0, $zero, 2
 /* BC4B40 802408C0 03E00008 */  jr        $ra
 /* BC4B44 802408C4 27BD0018 */   addiu    $sp, $sp, 0x18
-/* BC4B48 802408C8 00000000 */  nop       
-/* BC4B4C 802408CC 00000000 */  nop       
+/* BC4B48 802408C8 00000000 */  nop
+/* BC4B4C 802408CC 00000000 */  nop

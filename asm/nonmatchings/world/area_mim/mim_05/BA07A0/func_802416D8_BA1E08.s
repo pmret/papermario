@@ -42,7 +42,7 @@ glabel func_802416D8_BA1E08
 /* BA1E9C 8024176C 2402000F */  addiu     $v0, $zero, 0xf
 /* BA1EA0 80241770 AFA2001C */  sw        $v0, 0x1c($sp)
 /* BA1EA4 80241774 44833000 */  mtc1      $v1, $f6
-/* BA1EA8 80241778 00000000 */  nop       
+/* BA1EA8 80241778 00000000 */  nop
 /* BA1EAC 8024177C 468031A0 */  cvt.s.w   $f6, $f6
 /* BA1EB0 80241780 44073000 */  mfc1      $a3, $f6
 /* BA1EB4 80241784 27A20028 */  addiu     $v0, $sp, 0x28

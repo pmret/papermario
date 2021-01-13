@@ -25,7 +25,7 @@ glabel SetActorSize
 /* 1AC140 8027D860 0040982D */  daddu     $s3, $v0, $zero
 /* 1AC144 8027D864 2402FF81 */  addiu     $v0, $zero, -0x7f
 /* 1AC148 8027D868 16220002 */  bne       $s1, $v0, .L8027D874
-/* 1AC14C 8027D86C 00000000 */   nop      
+/* 1AC14C 8027D86C 00000000 */   nop
 /* 1AC150 8027D870 8E510148 */  lw        $s1, 0x148($s2)
 .L8027D874:
 /* 1AC154 8027D874 0C09A75B */  jal       get_actor
@@ -44,7 +44,7 @@ glabel SetActorSize
 /* 1AC180 8027D8A0 44811800 */  mtc1      $at, $f3
 /* 1AC184 8027D8A4 44801000 */  mtc1      $zero, $f2
 /* 1AC188 8027D8A8 44830000 */  mtc1      $v1, $f0
-/* 1AC18C 8027D8AC 00000000 */  nop       
+/* 1AC18C 8027D8AC 00000000 */  nop
 /* 1AC190 8027D8B0 46800021 */  cvt.d.w   $f0, $f0
 /* 1AC194 8027D8B4 46220003 */  div.d     $f0, $f0, $f2
 /* 1AC198 8027D8B8 46200020 */  cvt.s.d   $f0, $f0

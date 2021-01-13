@@ -26,7 +26,7 @@ glabel func_80240F50_D63C60
 /* D63CB0 80240FA0 1440FFFA */  bnez      $v0, .L80240F8C
 /* D63CB4 80240FA4 24A50004 */   addiu    $a1, $a1, 4
 /* D63CB8 80240FA8 080903FB */  j         .L80240FEC
-/* D63CBC 80240FAC 00000000 */   nop      
+/* D63CBC 80240FAC 00000000 */   nop
 .L80240FB0:
 /* D63CC0 80240FB0 0000182D */  daddu     $v1, $zero, $zero
 /* D63CC4 80240FB4 0040282D */  daddu     $a1, $v0, $zero

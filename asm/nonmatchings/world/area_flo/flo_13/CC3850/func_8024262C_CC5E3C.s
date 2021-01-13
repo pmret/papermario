@@ -244,7 +244,7 @@ glabel func_8024262C_CC5E3C
 .L802429A4:
 /* CC61B4 802429A4 0260202D */  daddu     $a0, $s3, $zero
 /* CC61B8 802429A8 0280282D */  daddu     $a1, $s4, $zero
-/* CC61BC 802429AC 0C090912 */  jal       func_80242448_CC5C58
+/* CC61BC 802429AC 0C090912 */  jal       flo_13_UnkNpcAIFunc12
 /* CC61C0 802429B0 02A0302D */   daddu    $a2, $s5, $zero
 /* CC61C4 802429B4 08090A76 */  j         .L802429D8
 /* CC61C8 802429B8 00000000 */   nop
@@ -279,15 +279,17 @@ glabel func_8024262C_CC5E3C
 /* CC6228 80242A18 2C620015 */  sltiu     $v0, $v1, 0x15
 /* CC622C 80242A1C 10400009 */  beqz      $v0, .L80242A44
 /* CC6230 80242A20 00031080 */   sll      $v0, $v1, 2
-/* CC6234 80242A24 3C018024 */  lui       $at, %hi(D_80247A90)
+/* CC6234 80242A24 3C018024 */  lui       $at, %hi(jtbl_80247A90_CCB2A0)
 /* CC6238 80242A28 00220821 */  addu      $at, $at, $v0
-/* CC623C 80242A2C 8C227A90 */  lw        $v0, %lo(D_80247A90)($at)
+/* CC623C 80242A2C 8C227A90 */  lw        $v0, %lo(jtbl_80247A90_CCB2A0)($at)
 /* CC6240 80242A30 00400008 */  jr        $v0
 /* CC6244 80242A34 00000000 */   nop
+glabel L80242A38_CC6248
 /* CC6248 80242A38 8E420028 */  lw        $v0, 0x28($s2)
 /* CC624C 80242A3C 24420001 */  addiu     $v0, $v0, 1
 /* CC6250 80242A40 AE420028 */  sw        $v0, 0x28($s2)
 .L80242A44:
+glabel L80242A44_CC6254
 /* CC6254 80242A44 0000102D */  daddu     $v0, $zero, $zero
 .L80242A48:
 /* CC6258 80242A48 8FBF0068 */  lw        $ra, 0x68($sp)

@@ -45,7 +45,7 @@ glabel func_80240F4C_DCDC1C
 /* DCDCB8 80240FE8 0C00A7B5 */  jal       dist2D
 /* DCDCBC 80240FEC 4600B386 */   mov.s    $f14, $f22
 /* DCDCC0 80240FF0 4614003C */  c.lt.s    $f0, $f20
-/* DCDCC4 80240FF4 00000000 */  nop       
+/* DCDCC4 80240FF4 00000000 */  nop
 /* DCDCC8 80240FF8 45000003 */  bc1f      .L80241008
 /* DCDCCC 80240FFC 2631000C */   addiu    $s1, $s1, 0xc
 /* DCDCD0 80241000 46000506 */  mov.s     $f20, $f0
@@ -64,7 +64,7 @@ glabel func_80240F4C_DCDC1C
 /* DCDCFC 8024102C 8E6200D0 */  lw        $v0, 0xd0($s3)
 /* DCDD00 80241030 8C42007C */  lw        $v0, 0x7c($v0)
 /* DCDD04 80241034 04410004 */  bgez      $v0, .L80241048
-/* DCDD08 80241038 00000000 */   nop      
+/* DCDD08 80241038 00000000 */   nop
 /* DCDD0C 8024103C C6C00000 */  lwc1      $f0, ($s6)
 /* DCDD10 80241040 0809041A */  j         .L80241068
 /* DCDD14 80241044 E6800018 */   swc1     $f0, 0x18($s4)
@@ -72,7 +72,7 @@ glabel func_80240F4C_DCDC1C
 /* DCDD18 80241048 3C018025 */  lui       $at, %hi(D_8024A7D0)
 /* DCDD1C 8024104C D422A7D0 */  ldc1      $f2, %lo(D_8024A7D0)($at)
 /* DCDD20 80241050 44820000 */  mtc1      $v0, $f0
-/* DCDD24 80241054 00000000 */  nop       
+/* DCDD24 80241054 00000000 */  nop
 /* DCDD28 80241058 46800021 */  cvt.d.w   $f0, $f0
 /* DCDD2C 8024105C 46220003 */  div.d     $f0, $f0, $f2
 /* DCDD30 80241060 46200020 */  cvt.s.d   $f0, $f0

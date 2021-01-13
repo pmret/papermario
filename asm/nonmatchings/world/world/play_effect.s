@@ -52,7 +52,7 @@ glabel play_effect
 /* 35A0C 8005A60C 3C0700FF */   lui      $a3, 0xff
 .L8005A610:
 /* 35A10 8005A610 08016984 */  j         .L8005A610
-/* 35A14 8005A614 00000000 */   nop      
+/* 35A14 8005A614 00000000 */   nop
 .L8005A618:
 /* 35A18 8005A618 34E7FFFF */  ori       $a3, $a3, 0xffff
 /* 35A1C 8005A61C 0000282D */  daddu     $a1, $zero, $zero
@@ -80,7 +80,7 @@ glabel play_effect
 /* 35A74 8005A674 AE02001C */   sw       $v0, 0x1c($s0)
 .L8005A678:
 /* 35A78 8005A678 0801699E */  j         .L8005A678
-/* 35A7C 8005A67C 00000000 */   nop      
+/* 35A7C 8005A67C 00000000 */   nop
 .L8005A680:
 /* 35A80 8005A680 8E240010 */  lw        $a0, 0x10($s1)
 /* 35A84 8005A684 8E250014 */  lw        $a1, 0x14($s1)
@@ -98,4 +98,4 @@ glabel play_effect
 /* 35AB0 8005A6B0 8FB00018 */  lw        $s0, 0x18($sp)
 /* 35AB4 8005A6B4 03E00008 */  jr        $ra
 /* 35AB8 8005A6B8 27BD0028 */   addiu    $sp, $sp, 0x28
-/* 35ABC 8005A6BC 00000000 */  nop       
+/* 35ABC 8005A6BC 00000000 */  nop

@@ -37,7 +37,7 @@ glabel func_8024094C_AC5ABC
 /* AC5B3C 802409CC 2402000F */  addiu     $v0, $zero, 0xf
 /* AC5B40 802409D0 AFA2001C */  sw        $v0, 0x1c($sp)
 /* AC5B44 802409D4 44833000 */  mtc1      $v1, $f6
-/* AC5B48 802409D8 00000000 */  nop       
+/* AC5B48 802409D8 00000000 */  nop
 /* AC5B4C 802409DC 468031A0 */  cvt.s.w   $f6, $f6
 /* AC5B50 802409E0 44073000 */  mfc1      $a3, $f6
 /* AC5B54 802409E4 27A20028 */  addiu     $v0, $sp, 0x28

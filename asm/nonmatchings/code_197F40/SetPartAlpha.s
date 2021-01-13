@@ -26,7 +26,7 @@ glabel SetPartAlpha
 /* 19DDA4 8026F4C4 0040982D */  daddu     $s3, $v0, $zero
 /* 19DDA8 8026F4C8 2402FF81 */  addiu     $v0, $zero, -0x7f
 /* 19DDAC 8026F4CC 16220002 */  bne       $s1, $v0, .L8026F4D8
-/* 19DDB0 8026F4D0 00000000 */   nop      
+/* 19DDB0 8026F4D0 00000000 */   nop
 /* 19DDB4 8026F4D4 8E510148 */  lw        $s1, 0x148($s2)
 .L8026F4D8:
 /* 19DDB8 8026F4D8 0C09A75B */  jal       get_actor

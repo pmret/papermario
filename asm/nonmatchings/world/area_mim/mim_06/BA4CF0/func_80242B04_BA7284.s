@@ -76,7 +76,7 @@ glabel func_80242B04_BA7284
 /* BA739C 80242C1C 8E4300B0 */  lw        $v1, 0xb0($s2)
 /* BA73A0 80242C20 30620004 */  andi      $v0, $v1, 4
 /* BA73A4 80242C24 10400007 */  beqz      $v0, .L80242C44
-/* BA73A8 80242C28 00000000 */   nop      
+/* BA73A8 80242C28 00000000 */   nop
 /* BA73AC 80242C2C 824200B4 */  lb        $v0, 0xb4($s2)
 /* BA73B0 80242C30 14400034 */  bnez      $v0, .L80242D04
 /* BA73B4 80242C34 0000102D */   daddu    $v0, $zero, $zero
@@ -88,21 +88,24 @@ glabel func_80242B04_BA7284
 /* BA73C8 80242C48 2C62000F */  sltiu     $v0, $v1, 0xf
 /* BA73CC 80242C4C 1040002C */  beqz      $v0, .L80242D00
 /* BA73D0 80242C50 00031080 */   sll      $v0, $v1, 2
-/* BA73D4 80242C54 3C018024 */  lui       $at, %hi(pause_stats_draw_contents)
+/* BA73D4 80242C54 3C018024 */  lui       $at, %hi(jtbl_80245980_BAA100)
 /* BA73D8 80242C58 00220821 */  addu      $at, $at, $v0
-/* BA73DC 80242C5C 8C225980 */  lw        $v0, %lo(pause_stats_draw_contents)($at)
+/* BA73DC 80242C5C 8C225980 */  lw        $v0, %lo(jtbl_80245980_BAA100)($at)
 /* BA73E0 80242C60 00400008 */  jr        $v0
-/* BA73E4 80242C64 00000000 */   nop      
+/* BA73E4 80242C64 00000000 */   nop
+glabel L80242C68_BA73E8
 /* BA73E8 80242C68 0260202D */  daddu     $a0, $s3, $zero
 /* BA73EC 80242C6C 0280282D */  daddu     $a1, $s4, $zero
 /* BA73F0 80242C70 0C0907C5 */  jal       func_80241F14_BA6694
 /* BA73F4 80242C74 0200302D */   daddu    $a2, $s0, $zero
+glabel L80242C78_BA73F8
 /* BA73F8 80242C78 0260202D */  daddu     $a0, $s3, $zero
 /* BA73FC 80242C7C 0280282D */  daddu     $a1, $s4, $zero
 /* BA7400 80242C80 0C090851 */  jal       func_80242144_BA68C4
 /* BA7404 80242C84 0200302D */   daddu    $a2, $s0, $zero
 /* BA7408 80242C88 08090B41 */  j         .L80242D04
 /* BA740C 80242C8C 0000102D */   daddu    $v0, $zero, $zero
+glabel L80242C90_BA7410
 /* BA7410 80242C90 0260202D */  daddu     $a0, $s3, $zero
 /* BA7414 80242C94 0280282D */  daddu     $a1, $s4, $zero
 /* BA7418 80242C98 0C09091F */  jal       mim_06_UnkNpcAIFunc1
@@ -111,27 +114,32 @@ glabel func_80242B04_BA7284
 /* BA7424 80242CA4 24020003 */  addiu     $v0, $zero, 3
 /* BA7428 80242CA8 14620016 */  bne       $v1, $v0, .L80242D04
 /* BA742C 80242CAC 0000102D */   daddu    $v0, $zero, $zero
+glabel L80242CB0_BA7430
 /* BA7430 80242CB0 0260202D */  daddu     $a0, $s3, $zero
 /* BA7434 80242CB4 0280282D */  daddu     $a1, $s4, $zero
 /* BA7438 80242CB8 0C09094F */  jal       func_8024253C_BA6CBC
 /* BA743C 80242CBC 0200302D */   daddu    $a2, $s0, $zero
 /* BA7440 80242CC0 08090B41 */  j         .L80242D04
 /* BA7444 80242CC4 0000102D */   daddu    $v0, $zero, $zero
+glabel L80242CC8_BA7448
 /* BA7448 80242CC8 0260202D */  daddu     $a0, $s3, $zero
 /* BA744C 80242CCC 0280282D */  daddu     $a1, $s4, $zero
 /* BA7450 80242CD0 0C0909B8 */  jal       func_802426E0_BA6E60
 /* BA7454 80242CD4 0200302D */   daddu    $a2, $s0, $zero
+glabel L80242CD8_BA7458
 /* BA7458 80242CD8 0260202D */  daddu     $a0, $s3, $zero
 /* BA745C 80242CDC 0280282D */  daddu     $a1, $s4, $zero
 /* BA7460 80242CE0 0C0909F0 */  jal       func_802427C0_BA6F40
 /* BA7464 80242CE4 0200302D */   daddu    $a2, $s0, $zero
 /* BA7468 80242CE8 08090B41 */  j         .L80242D04
 /* BA746C 80242CEC 0000102D */   daddu    $v0, $zero, $zero
+glabel L80242CF0_BA7470
 /* BA7470 80242CF0 0260202D */  daddu     $a0, $s3, $zero
 /* BA7474 80242CF4 0280282D */  daddu     $a1, $s4, $zero
 /* BA7478 80242CF8 0C090AB0 */  jal       mim_06_UnkDurationCheck
 /* BA747C 80242CFC 0200302D */   daddu    $a2, $s0, $zero
 .L80242D00:
+glabel L80242D00_BA7480
 /* BA7480 80242D00 0000102D */  daddu     $v0, $zero, $zero
 .L80242D04:
 /* BA7484 80242D04 8FBF0048 */  lw        $ra, 0x48($sp)
@@ -143,5 +151,5 @@ glabel func_80242B04_BA7284
 /* BA749C 80242D1C 8FB00030 */  lw        $s0, 0x30($sp)
 /* BA74A0 80242D20 03E00008 */  jr        $ra
 /* BA74A4 80242D24 27BD0050 */   addiu    $sp, $sp, 0x50
-/* BA74A8 80242D28 00000000 */  nop       
-/* BA74AC 80242D2C 00000000 */  nop       
+/* BA74A8 80242D28 00000000 */  nop
+/* BA74AC 80242D2C 00000000 */  nop

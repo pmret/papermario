@@ -21,7 +21,7 @@ glabel func_802BC0F0_E2EA20
 /* E2EA60 802BC130 44801000 */  mtc1      $zero, $f2
 /* E2EA64 802BC134 46000021 */  cvt.d.s   $f0, $f0
 /* E2EA68 802BC138 46220002 */  mul.d     $f0, $f0, $f2
-/* E2EA6C 802BC13C 00000000 */  nop       
+/* E2EA6C 802BC13C 00000000 */  nop
 /* E2EA70 802BC140 46200005 */  abs.d     $f0, $f0
 /* E2EA74 802BC144 46200020 */  cvt.s.d   $f0, $f0
 /* E2EA78 802BC148 E6400018 */  swc1      $f0, 0x18($s2)

@@ -22,4 +22,4 @@ glabel func_802DBFC0
 /* FF0E8 802DBFF8 1440FFF5 */  bnez      $v0, .L802DBFD0
 /* FF0EC 802DBFFC 24630004 */   addiu    $v1, $v1, 4
 /* FF0F0 802DC000 03E00008 */  jr        $ra
-/* FF0F4 802DC004 00000000 */   nop      
+/* FF0F4 802DC004 00000000 */   nop

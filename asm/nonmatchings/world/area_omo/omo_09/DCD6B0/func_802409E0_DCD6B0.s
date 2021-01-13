@@ -15,7 +15,7 @@ glabel func_802409E0_DCD6B0
 /* DCD6D8 80240A08 D422A630 */  ldc1      $f2, %lo(D_8024A630)($at)
 /* DCD6DC 80240A0C 46000021 */  cvt.d.s   $f0, $f0
 /* DCD6E0 80240A10 46220002 */  mul.d     $f0, $f0, $f2
-/* DCD6E4 80240A14 00000000 */  nop       
+/* DCD6E4 80240A14 00000000 */  nop
 /* DCD6E8 80240A18 46200020 */  cvt.s.d   $f0, $f0
 /* DCD6EC 80240A1C E4400018 */  swc1      $f0, 0x18($v0)
 /* DCD6F0 80240A20 8E0300CC */  lw        $v1, 0xcc($s0)

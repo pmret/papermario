@@ -32,4 +32,4 @@ glabel func_802DEAA0
 /* 101BF0 802DEB00 24C60004 */   addiu    $a2, $a2, 4
 .L802DEB04:
 /* 101BF4 802DEB04 03E00008 */  jr        $ra
-/* 101BF8 802DEB08 00000000 */   nop      
+/* 101BF8 802DEB08 00000000 */   nop

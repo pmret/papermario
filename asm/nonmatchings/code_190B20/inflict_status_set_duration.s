@@ -15,9 +15,9 @@ glabel inflict_status_set_duration
 /* 1955F8 80266D18 10800005 */  beqz      $a0, .L80266D30
 /* 1955FC 80266D1C 0000802D */   daddu    $s0, $zero, $zero
 /* 195600 80266D20 0C0997A6 */  jal       lookup_status_chance
-/* 195604 80266D24 00000000 */   nop      
+/* 195604 80266D24 00000000 */   nop
 /* 195608 80266D28 18400002 */  blez      $v0, .L80266D34
-/* 19560C 80266D2C 00000000 */   nop      
+/* 19560C 80266D2C 00000000 */   nop
 .L80266D30:
 /* 195610 80266D30 0220802D */  daddu     $s0, $s1, $zero
 .L80266D34:

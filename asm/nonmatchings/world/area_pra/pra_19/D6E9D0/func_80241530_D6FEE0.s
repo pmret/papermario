@@ -29,7 +29,7 @@ glabel func_80241530_D6FEE0
 /* D6FF40 80241590 46000007 */  neg.s     $f0, $f0
 /* D6FF44 80241594 44070000 */  mfc1      $a3, $f0
 /* D6FF48 80241598 0C00B94E */  jal       get_screen_coords
-/* D6FF4C 8024159C 00000000 */   nop      
+/* D6FF4C 8024159C 00000000 */   nop
 /* D6FF50 802415A0 0220202D */  daddu     $a0, $s1, $zero
 /* D6FF54 802415A4 820500AA */  lb        $a1, 0xaa($s0)
 /* D6FF58 802415A8 8FA30038 */  lw        $v1, 0x38($sp)

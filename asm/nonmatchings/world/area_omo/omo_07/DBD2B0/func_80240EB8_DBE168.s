@@ -37,7 +37,7 @@ glabel func_80240EB8_DBE168
 /* DBE1E8 80240F38 2402000F */  addiu     $v0, $zero, 0xf
 /* DBE1EC 80240F3C AFA2001C */  sw        $v0, 0x1c($sp)
 /* DBE1F0 80240F40 44833000 */  mtc1      $v1, $f6
-/* DBE1F4 80240F44 00000000 */  nop       
+/* DBE1F4 80240F44 00000000 */  nop
 /* DBE1F8 80240F48 468031A0 */  cvt.s.w   $f6, $f6
 /* DBE1FC 80240F4C 44073000 */  mfc1      $a3, $f6
 /* DBE200 80240F50 27A20028 */  addiu     $v0, $sp, 0x28

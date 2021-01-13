@@ -50,7 +50,7 @@ glabel func_E003A000
 /* 34ED34 E003A0B4 AE11000C */   sw       $s1, 0xc($s0)
 .LE003A0B8:
 /* 34ED38 E003A0B8 0800E82E */  j         .LE003A0B8
-/* 34ED3C E003A0BC 00000000 */   nop      
+/* 34ED3C E003A0BC 00000000 */   nop
 .LE003A0C0:
 /* 34ED40 E003A0C0 0220202D */  daddu     $a0, $s1, $zero
 /* 34ED44 E003A0C4 00132840 */  sll       $a1, $s3, 1
@@ -88,7 +88,7 @@ glabel func_E003A000
 /* 34EDBC E003A13C 16810004 */  bne       $s4, $at, .LE003A150
 /* 34EDC0 E003A140 3C018000 */   lui      $at, 0x8000
 /* 34EDC4 E003A144 16210002 */  bne       $s1, $at, .LE003A150
-/* 34EDC8 E003A148 00000000 */   nop      
+/* 34EDC8 E003A148 00000000 */   nop
 /* 34EDCC E003A14C 0006000D */  break     6
 .LE003A150:
 /* 34EDD0 E003A150 00001812 */   mflo     $v1
@@ -96,7 +96,7 @@ glabel func_E003A000
 /* 34EDD8 E003A158 26520001 */  addiu     $s2, $s2, 1
 /* 34EDDC E003A15C AE00FFEC */  sw        $zero, -0x14($s0)
 /* 34EDE0 E003A160 4483A000 */  mtc1      $v1, $f20
-/* 34EDE4 E003A164 00000000 */  nop       
+/* 34EDE4 E003A164 00000000 */  nop
 /* 34EDE8 E003A168 4680A520 */  cvt.s.w   $f20, $f20
 /* 34EDEC E003A16C 4614D500 */  add.s     $f20, $f26, $f20
 /* 34EDF0 E003A170 AE00FFF0 */  sw        $zero, -0x10($s0)

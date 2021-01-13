@@ -40,7 +40,7 @@ glabel load_model_transforms
 /* B154C 8011AE4C 8E230000 */  lw        $v1, ($s1)
 /* B1550 8011AE50 24020005 */  addiu     $v0, $zero, 5
 /* B1554 8011AE54 14620003 */  bne       $v1, $v0, .L8011AE64
-/* B1558 8011AE58 00000000 */   nop      
+/* B1558 8011AE58 00000000 */   nop
 /* B155C 8011AE5C 1480002A */  bnez      $a0, .L8011AF08
 /* B1560 8011AE60 0260202D */   daddu    $a0, $s3, $zero
 .L8011AE64:
@@ -128,7 +128,7 @@ glabel load_model_transforms
 /* B1690 8011AF90 00441021 */  addu      $v0, $v0, $a0
 /* B1694 8011AF94 0202102A */  slt       $v0, $s0, $v0
 /* B1698 8011AF98 1440FFF4 */  bnez      $v0, .L8011AF6C
-/* B169C 8011AF9C 00000000 */   nop      
+/* B169C 8011AF9C 00000000 */   nop
 .L8011AFA0:
 /* B16A0 8011AFA0 3C038015 */  lui       $v1, %hi(D_80153224)
 /* B16A4 8011AFA4 24633224 */  addiu     $v1, $v1, %lo(D_80153224)

@@ -18,7 +18,7 @@ glabel func_802A9170_427BE0
 /* 427C14 802A91A4 10400030 */  beqz      $v0, .L802A9268
 /* 427C18 802A91A8 0240182D */   daddu    $v1, $s2, $zero
 /* 427C1C 802A91AC 0C09A216 */  jal       func_80268858
-/* 427C20 802A91B0 00000000 */   nop      
+/* 427C20 802A91B0 00000000 */   nop
 /* 427C24 802A91B4 8E050000 */  lw        $a1, ($s0)
 /* 427C28 802A91B8 26100004 */  addiu     $s0, $s0, 4
 /* 427C2C 802A91BC 0C0B1EAF */  jal       get_variable

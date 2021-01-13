@@ -36,7 +36,7 @@ glabel func_800DDAE4
 /* 77010 800DDB60 44811000 */  mtc1      $at, $f2
 /* 77014 800DDB64 0220302D */  daddu     $a2, $s1, $zero
 /* 77018 800DDB68 4602A502 */  mul.s     $f20, $f20, $f2
-/* 7701C 800DDB6C 00000000 */  nop       
+/* 7701C 800DDB6C 00000000 */  nop
 /* 77020 800DDB70 27B00028 */  addiu     $s0, $sp, 0x28
 /* 77024 800DDB74 0200382D */  daddu     $a3, $s0, $zero
 /* 77028 800DDB78 E7A00024 */  swc1      $f0, 0x24($sp)

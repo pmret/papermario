@@ -16,7 +16,7 @@ glabel func_80241B78_BA62F8
 /* BA6324 80241BA4 A462008E */  sh        $v0, 0x8e($v1)
 /* BA6328 80241BA8 00021400 */  sll       $v0, $v0, 0x10
 /* BA632C 80241BAC 14400005 */  bnez      $v0, .L80241BC4
-/* BA6330 80241BB0 00000000 */   nop      
+/* BA6330 80241BB0 00000000 */   nop
 /* BA6334 80241BB4 960200AA */  lhu       $v0, 0xaa($s0)
 /* BA6338 80241BB8 A462008E */  sh        $v0, 0x8e($v1)
 /* BA633C 80241BBC 2402000E */  addiu     $v0, $zero, 0xe

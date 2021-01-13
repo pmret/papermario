@@ -21,7 +21,7 @@ glabel clear_entity_data
 /* A73F8 80110CF8 AC201304 */  sw        $zero, %lo(D_80151304)($at)
 /* A73FC 80110CFC 80420070 */  lb        $v0, 0x70($v0)
 /* A7400 80110D00 14400003 */  bnez      $v0, .L80110D10
-/* A7404 80110D04 00000000 */   nop      
+/* A7404 80110D04 00000000 */   nop
 /* A7408 80110D08 3C018015 */  lui       $at, %hi(D_80151310)
 /* A740C 80110D0C AC201310 */  sw        $zero, %lo(D_80151310)($at)
 .L80110D10:
@@ -53,7 +53,7 @@ glabel clear_entity_data
 /* A746C 80110D6C 0481FFFD */  bgez      $a0, .L80110D64
 /* A7470 80110D70 2442FFFC */   addiu    $v0, $v0, -4
 /* A7474 80110D74 08044367 */  j         .L80110D9C
-/* A7478 80110D78 00000000 */   nop      
+/* A7478 80110D78 00000000 */   nop
 .L80110D7C:
 /* A747C 80110D7C 3C018015 */  lui       $at, %hi(D_80151660)
 /* A7480 80110D80 AC201660 */  sw        $zero, %lo(D_80151660)($at)
@@ -77,7 +77,7 @@ glabel clear_entity_data
 /* A74C0 80110DC0 3C018015 */  lui       $at, %hi(D_801512C4)
 /* A74C4 80110DC4 AC2312C4 */  sw        $v1, %lo(D_801512C4)($at)
 /* A74C8 80110DC8 0804437B */  j         .L80110DEC
-/* A74CC 80110DCC 00000000 */   nop      
+/* A74CC 80110DCC 00000000 */   nop
 .L80110DD0:
 /* A74D0 80110DD0 3C02801A */  lui       $v0, %hi(D_801A7000)
 /* A74D4 80110DD4 24427000 */  addiu     $v0, $v0, %lo(D_801A7000)
@@ -88,7 +88,7 @@ glabel clear_entity_data
 /* A74E8 80110DE8 AC2212C4 */  sw        $v0, %lo(D_801512C4)($at)
 .L80110DEC:
 /* A74EC 80110DEC 0C044188 */  jal       get_entity_list
-/* A74F0 80110DF0 00000000 */   nop      
+/* A74F0 80110DF0 00000000 */   nop
 /* A74F4 80110DF4 3C108015 */  lui       $s0, %hi(gCurrentEntityListPtr)
 /* A74F8 80110DF8 26101470 */  addiu     $s0, $s0, %lo(gCurrentEntityListPtr)
 /* A74FC 80110DFC 0C044193 */  jal       get_shadow_list

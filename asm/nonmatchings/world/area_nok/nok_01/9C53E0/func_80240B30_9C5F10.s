@@ -16,7 +16,7 @@ glabel func_80240B30_9C5F10
 /* 9C5F3C 80240B5C 0C0B1EAF */  jal       get_variable
 /* 9C5F40 80240B60 0040802D */   daddu    $s0, $v0, $zero
 /* 9C5F44 80240B64 44820000 */  mtc1      $v0, $f0
-/* 9C5F48 80240B68 00000000 */  nop       
+/* 9C5F48 80240B68 00000000 */  nop
 /* 9C5F4C 80240B6C 46800020 */  cvt.s.w   $f0, $f0
 /* 9C5F50 80240B70 24020002 */  addiu     $v0, $zero, 2
 /* 9C5F54 80240B74 00501804 */  sllv      $v1, $s0, $v0

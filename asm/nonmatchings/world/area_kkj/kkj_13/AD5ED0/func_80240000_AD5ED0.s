@@ -8,5 +8,5 @@ glabel func_80240000_AD5ED0
 /* AD5EDC 8024000C A0620084 */  sb        $v0, 0x84($v1)
 /* AD5EE0 80240010 03E00008 */  jr        $ra
 /* AD5EE4 80240014 0000102D */   daddu    $v0, $zero, $zero
-/* AD5EE8 80240018 00000000 */  nop       
-/* AD5EEC 8024001C 00000000 */  nop       
+/* AD5EE8 80240018 00000000 */  nop
+/* AD5EEC 8024001C 00000000 */  nop

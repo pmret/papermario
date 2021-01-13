@@ -15,7 +15,7 @@ glabel SetActorType
 /* 19E428 8026FB48 0040802D */  daddu     $s0, $v0, $zero
 /* 19E42C 8026FB4C 2402FF81 */  addiu     $v0, $zero, -0x7f
 /* 19E430 8026FB50 16020002 */  bne       $s0, $v0, .L8026FB5C
-/* 19E434 8026FB54 00000000 */   nop      
+/* 19E434 8026FB54 00000000 */   nop
 /* 19E438 8026FB58 8E500148 */  lw        $s0, 0x148($s2)
 .L8026FB5C:
 /* 19E43C 8026FB5C 8E250000 */  lw        $a1, ($s1)

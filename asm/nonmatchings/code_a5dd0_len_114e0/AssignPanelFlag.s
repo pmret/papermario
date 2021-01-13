@@ -13,7 +13,7 @@ glabel AssignPanelFlag
 /* A8834 80112134 3C048015 */  lui       $a0, %hi(gLastCreatedEntityIndex)
 /* A8838 80112138 8C8412EC */  lw        $a0, %lo(gLastCreatedEntityIndex)($a0)
 /* A883C 8011213C 0C04417A */  jal       get_entity_by_index
-/* A8840 80112140 00000000 */   nop      
+/* A8840 80112140 00000000 */   nop
 /* A8844 80112144 8E050000 */  lw        $a1, ($s0)
 /* A8848 80112148 8C500040 */  lw        $s0, 0x40($v0)
 /* A884C 8011214C 0C0B1F6A */  jal       get_variable_index

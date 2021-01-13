@@ -15,7 +15,7 @@ glabel CopyStatusEffects
 /* 1AC5C4 8027DCE4 26100004 */   addiu    $s0, $s0, 4
 /* 1AC5C8 8027DCE8 2413FF81 */  addiu     $s3, $zero, -0x7f
 /* 1AC5CC 8027DCEC 14530002 */  bne       $v0, $s3, .L8027DCF8
-/* 1AC5D0 8027DCF0 00000000 */   nop      
+/* 1AC5D0 8027DCF0 00000000 */   nop
 /* 1AC5D4 8027DCF4 8E420148 */  lw        $v0, 0x148($s2)
 .L8027DCF8:
 /* 1AC5D8 8027DCF8 0C09A75B */  jal       get_actor
@@ -25,7 +25,7 @@ glabel CopyStatusEffects
 /* 1AC5E8 8027DD08 0C0B1EAF */  jal       get_variable
 /* 1AC5EC 8027DD0C 0040882D */   daddu    $s1, $v0, $zero
 /* 1AC5F0 8027DD10 14530002 */  bne       $v0, $s3, .L8027DD1C
-/* 1AC5F4 8027DD14 00000000 */   nop      
+/* 1AC5F4 8027DD14 00000000 */   nop
 /* 1AC5F8 8027DD18 8E420148 */  lw        $v0, 0x148($s2)
 .L8027DD1C:
 /* 1AC5FC 8027DD1C 0C09A75B */  jal       get_actor

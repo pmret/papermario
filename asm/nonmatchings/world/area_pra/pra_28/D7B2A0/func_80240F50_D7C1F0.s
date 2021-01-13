@@ -26,7 +26,7 @@ glabel func_80240F50_D7C1F0
 /* D7C240 80240FA0 1440FFFA */  bnez      $v0, .L80240F8C
 /* D7C244 80240FA4 24A50004 */   addiu    $a1, $a1, 4
 /* D7C248 80240FA8 080903FB */  j         .L80240FEC
-/* D7C24C 80240FAC 00000000 */   nop      
+/* D7C24C 80240FAC 00000000 */   nop
 .L80240FB0:
 /* D7C250 80240FB0 0000182D */  daddu     $v1, $zero, $zero
 /* D7C254 80240FB4 0040282D */  daddu     $a1, $v0, $zero

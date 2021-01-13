@@ -26,7 +26,7 @@ glabel func_8024027C_CC10AC
 /* CC10FC 802402CC 1440FFFA */  bnez      $v0, .L802402B8
 /* CC1100 802402D0 24A50004 */   addiu    $a1, $a1, 4
 /* CC1104 802402D4 080900C6 */  j         .L80240318
-/* CC1108 802402D8 00000000 */   nop      
+/* CC1108 802402D8 00000000 */   nop
 .L802402DC:
 /* CC110C 802402DC 0000182D */  daddu     $v1, $zero, $zero
 /* CC1110 802402E0 0040282D */  daddu     $a1, $v0, $zero

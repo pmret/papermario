@@ -12,9 +12,9 @@ glabel nuAuDmaCallBack
 /* 26490 8004B090 14E00005 */  bnez      $a3, .L8004B0A8
 /* 26494 8004B094 AFB00010 */   sw       $s0, 0x10($sp)
 /* 26498 8004B098 0C0187A4 */  jal       osVirtualToPhysical
-/* 2649C 8004B09C 00000000 */   nop      
+/* 2649C 8004B09C 00000000 */   nop
 /* 264A0 8004B0A0 08012C82 */  j         .L8004B208
-/* 264A4 8004B0A4 00000000 */   nop      
+/* 264A4 8004B0A4 00000000 */   nop
 .L8004B0A8:
 /* 264A8 8004B0A8 0000802D */  daddu     $s0, $zero, $zero
 /* 264AC 8004B0AC 3C11800A */  lui       $s1, %hi(D_800A3BD4)
@@ -31,7 +31,7 @@ glabel nuAuDmaCallBack
 /* 264D4 8004B0D4 0220802D */   daddu    $s0, $s1, $zero
 /* 264D8 8004B0D8 8E310000 */  lw        $s1, ($s1)
 /* 264DC 8004B0DC 1620FFF7 */  bnez      $s1, .L8004B0BC
-/* 264E0 8004B0E0 00000000 */   nop      
+/* 264E0 8004B0E0 00000000 */   nop
 .L8004B0E4:
 /* 264E4 8004B0E4 3C12800A */  lui       $s2, %hi(nuAuDmaState)
 /* 264E8 8004B0E8 26523BD0 */  addiu     $s2, $s2, %lo(nuAuDmaState)
@@ -40,9 +40,9 @@ glabel nuAuDmaCallBack
 /* 264F4 8004B0F4 0220202D */   daddu    $a0, $s1, $zero
 /* 264F8 8004B0F8 8E440004 */  lw        $a0, 4($s2)
 /* 264FC 8004B0FC 0C0187A4 */  jal       osVirtualToPhysical
-/* 26500 8004B100 00000000 */   nop      
+/* 26500 8004B100 00000000 */   nop
 /* 26504 8004B104 08012C82 */  j         .L8004B208
-/* 26508 8004B108 00000000 */   nop      
+/* 26508 8004B108 00000000 */   nop
 .L8004B10C:
 /* 2650C 8004B10C 8E220000 */  lw        $v0, ($s1)
 /* 26510 8004B110 0C012D03 */  jal       alUnlink
@@ -52,7 +52,7 @@ glabel nuAuDmaCallBack
 /* 26520 8004B120 0C012CFB */  jal       alLink
 /* 26524 8004B124 0200282D */   daddu    $a1, $s0, $zero
 /* 26528 8004B128 08012C61 */  j         .L8004B184
-/* 2652C 8004B12C 00000000 */   nop      
+/* 2652C 8004B12C 00000000 */   nop
 .L8004B130:
 /* 26530 8004B130 8E450004 */  lw        $a1, 4($s2)
 /* 26534 8004B134 10A00010 */  beqz      $a1, .L8004B178
@@ -72,7 +72,7 @@ glabel nuAuDmaCallBack
 /* 26568 8004B168 0C0187A4 */  jal       osVirtualToPhysical
 /* 2656C 8004B16C AE23000C */   sw       $v1, 0xc($s1)
 /* 26570 8004B170 08012C82 */  j         .L8004B208
-/* 26574 8004B174 00000000 */   nop      
+/* 26574 8004B174 00000000 */   nop
 .L8004B178:
 /* 26578 8004B178 AE510004 */  sw        $s1, 4($s2)
 /* 2657C 8004B17C AE200000 */  sw        $zero, ($s1)

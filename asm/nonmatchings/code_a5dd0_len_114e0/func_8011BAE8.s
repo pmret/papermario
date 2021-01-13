@@ -31,4 +31,4 @@ glabel func_8011BAE8
 /* B2240 8011BB40 1440FFF8 */  bnez      $v0, .L8011BB24
 /* B2244 8011BB44 24A50004 */   addiu    $a1, $a1, 4
 /* B2248 8011BB48 03E00008 */  jr        $ra
-/* B224C 8011BB4C 00000000 */   nop      
+/* B224C 8011BB4C 00000000 */   nop

@@ -59,7 +59,7 @@ glabel func_802B66A8_E25578
 /* E25648 802B6778 34840010 */  ori       $a0, $a0, 0x10
 .L802B677C:
 /* E2564C 802B677C 0C037FBF */  jal       func_800DFEFC
-/* E25650 802B6780 00000000 */   nop      
+/* E25650 802B6780 00000000 */   nop
 /* E25654 802B6784 0200202D */  daddu     $a0, $s0, $zero
 /* E25658 802B6788 0C052736 */  jal       play_sound_at_player
 /* E2565C 802B678C 0000282D */   daddu    $a1, $zero, $zero
@@ -96,7 +96,7 @@ glabel func_802B66A8_E25578
 /* E256D0 802B6800 AC820018 */   sw       $v0, 0x18($a0)
 .L802B6804:
 /* E256D4 802B6804 0C0ADA08 */  jal       func_802B6820_E256F0
-/* E256D8 802B6808 00000000 */   nop      
+/* E256D8 802B6808 00000000 */   nop
 .L802B680C:
 /* E256DC 802B680C 8FBF0018 */  lw        $ra, 0x18($sp)
 /* E256E0 802B6810 8FB10014 */  lw        $s1, 0x14($sp)

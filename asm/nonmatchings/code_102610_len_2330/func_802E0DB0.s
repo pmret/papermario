@@ -14,4 +14,4 @@ glabel func_802E0DB0
 /* 102654 802E0DD4 0000102D */  daddu     $v0, $zero, $zero
 .L802E0DD8:
 /* 102658 802E0DD8 03E00008 */  jr        $ra
-/* 10265C 802E0DDC 00000000 */   nop      
+/* 10265C 802E0DDC 00000000 */   nop

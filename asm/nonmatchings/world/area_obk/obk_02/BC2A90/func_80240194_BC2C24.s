@@ -48,4 +48,4 @@ glabel func_80240194_BC2C24
 /* BC2CC0 80240230 24020002 */  addiu     $v0, $zero, 2
 /* BC2CC4 80240234 03E00008 */  jr        $ra
 /* BC2CC8 80240238 27BD0020 */   addiu    $sp, $sp, 0x20
-/* BC2CCC 8024023C 00000000 */  nop       
+/* BC2CCC 8024023C 00000000 */  nop

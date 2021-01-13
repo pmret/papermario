@@ -44,7 +44,7 @@ glabel func_80240D18_8B0D88
 /* 8B0E1C 80240DAC 3C048025 */  lui       $a0, %hi(D_80257F2C)
 /* 8B0E20 80240DB0 8C847F2C */  lw        $a0, %lo(D_80257F2C)($a0)
 /* 8B0E24 80240DB4 0C048D70 */  jal       func_801235C0
-/* 8B0E28 80240DB8 00000000 */   nop      
+/* 8B0E28 80240DB8 00000000 */   nop
 /* 8B0E2C 80240DBC 24020002 */  addiu     $v0, $zero, 2
 .L80240DC0:
 /* 8B0E30 80240DC0 8FBF0010 */  lw        $ra, 0x10($sp)

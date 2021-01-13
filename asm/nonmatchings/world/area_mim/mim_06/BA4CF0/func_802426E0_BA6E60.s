@@ -24,7 +24,7 @@ glabel func_802426E0_BA6E60
 /* BA6EAC 8024272C 0C00A67F */  jal       rand_int
 /* BA6EB0 80242730 AE020000 */   sw       $v0, ($s0)
 /* BA6EB4 80242734 44820000 */  mtc1      $v0, $f0
-/* BA6EB8 80242738 00000000 */  nop       
+/* BA6EB8 80242738 00000000 */  nop
 /* BA6EBC 8024273C 46800021 */  cvt.d.w   $f0, $f0
 /* BA6EC0 80242740 3C014024 */  lui       $at, 0x4024
 /* BA6EC4 80242744 44811800 */  mtc1      $at, $f3

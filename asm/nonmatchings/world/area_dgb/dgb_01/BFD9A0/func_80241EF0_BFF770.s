@@ -33,7 +33,7 @@ glabel func_80241EF0_BFF770
 /* BFF7E0 80241F60 44801000 */  mtc1      $zero, $f2
 /* BFF7E4 80241F64 46000021 */  cvt.d.s   $f0, $f0
 /* BFF7E8 80241F68 46220002 */  mul.d     $f0, $f0, $f2
-/* BFF7EC 80241F6C 00000000 */  nop       
+/* BFF7EC 80241F6C 00000000 */  nop
 /* BFF7F0 80241F70 2402001E */  addiu     $v0, $zero, 0x1e
 /* BFF7F4 80241F74 4620010D */  trunc.w.d $f4, $f0
 /* BFF7F8 80241F78 E604007C */  swc1      $f4, 0x7c($s0)

@@ -16,7 +16,7 @@ glabel func_80241D08_C81EA8
 /* C81ED4 80241D34 A462008E */  sh        $v0, 0x8e($v1)
 /* C81ED8 80241D38 00021400 */  sll       $v0, $v0, 0x10
 /* C81EDC 80241D3C 1C400004 */  bgtz      $v0, .L80241D50
-/* C81EE0 80241D40 00000000 */   nop      
+/* C81EE0 80241D40 00000000 */   nop
 /* C81EE4 80241D44 AE000074 */  sw        $zero, 0x74($s0)
 /* C81EE8 80241D48 A460008E */  sh        $zero, 0x8e($v1)
 /* C81EEC 80241D4C AE200070 */  sw        $zero, 0x70($s1)

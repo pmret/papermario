@@ -51,9 +51,9 @@ glabel set_float_variable
 /* ED0A0 802C86F0 00C0202D */  daddu     $a0, $a2, $zero
 /* ED0A4 802C86F4 00041140 */  sll       $v0, $a0, 5
 /* ED0A8 802C86F8 44800000 */  mtc1      $zero, $f0
-/* ED0AC 802C86FC 00000000 */  nop       
+/* ED0AC 802C86FC 00000000 */  nop
 /* ED0B0 802C8700 46006032 */  c.eq.s    $f12, $f0
-/* ED0B4 802C8704 00000000 */  nop       
+/* ED0B4 802C8704 00000000 */  nop
 /* ED0B8 802C8708 4501000A */  bc1t      .L802C8734
 /* ED0BC 802C870C 00A23023 */   subu     $a2, $a1, $v0
 /* ED0C0 802C8710 3C02802E */  lui       $v0, %hi(gMapFlags)
@@ -96,9 +96,9 @@ glabel set_float_variable
 /* ED140 802C8790 00C0182D */  daddu     $v1, $a2, $zero
 /* ED144 802C8794 00031140 */  sll       $v0, $v1, 5
 /* ED148 802C8798 44800000 */  mtc1      $zero, $f0
-/* ED14C 802C879C 00000000 */  nop       
+/* ED14C 802C879C 00000000 */  nop
 /* ED150 802C87A0 46006032 */  c.eq.s    $f12, $f0
-/* ED154 802C87A4 00000000 */  nop       
+/* ED154 802C87A4 00000000 */  nop
 /* ED158 802C87A8 45010008 */  bc1t      .L802C87CC
 /* ED15C 802C87AC 00A23023 */   subu     $a2, $a1, $v0
 /* ED160 802C87B0 00031080 */  sll       $v0, $v1, 2
@@ -155,7 +155,7 @@ glabel set_float_variable
 /* ED21C 802C886C 0240202D */  daddu     $a0, $s2, $zero
 .L802C8870:
 /* ED220 802C8870 0C0B1248 */  jal       fixed_var_to_float
-/* ED224 802C8874 00000000 */   nop      
+/* ED224 802C8874 00000000 */   nop
 .L802C8878:
 /* ED228 802C8878 8FBF001C */  lw        $ra, 0x1c($sp)
 /* ED22C 802C887C 8FB20018 */  lw        $s2, 0x18($sp)

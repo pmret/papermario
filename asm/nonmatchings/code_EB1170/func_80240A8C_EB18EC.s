@@ -13,5 +13,5 @@ glabel func_80240A8C_EB18EC
 /* EB190C 80240AAC 24020002 */  addiu     $v0, $zero, 2
 /* EB1910 80240AB0 03E00008 */  jr        $ra
 /* EB1914 80240AB4 27BD0018 */   addiu    $sp, $sp, 0x18
-/* EB1918 80240AB8 00000000 */  nop       
-/* EB191C 80240ABC 00000000 */  nop       
+/* EB1918 80240AB8 00000000 */  nop
+/* EB191C 80240ABC 00000000 */  nop

@@ -37,7 +37,7 @@ glabel func_80240F6C_B35B3C
 /* B35BBC 80240FEC 2402000F */  addiu     $v0, $zero, 0xf
 /* B35BC0 80240FF0 AFA2001C */  sw        $v0, 0x1c($sp)
 /* B35BC4 80240FF4 44833000 */  mtc1      $v1, $f6
-/* B35BC8 80240FF8 00000000 */  nop       
+/* B35BC8 80240FF8 00000000 */  nop
 /* B35BCC 80240FFC 468031A0 */  cvt.s.w   $f6, $f6
 /* B35BD0 80241000 44073000 */  mfc1      $a3, $f6
 /* B35BD4 80241004 27A20028 */  addiu     $v0, $sp, 0x28

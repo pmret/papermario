@@ -16,7 +16,7 @@ glabel func_80240128_D7CC78
 /* D7CCA4 80240154 27B20020 */   addiu    $s2, $sp, 0x20
 /* D7CCA8 80240158 8E0400CC */  lw        $a0, 0xcc($s0)
 /* D7CCAC 8024015C 0C044181 */  jal       get_shadow_by_index
-/* D7CCB0 80240160 00000000 */   nop      
+/* D7CCB0 80240160 00000000 */   nop
 /* D7CCB4 80240164 0C048B77 */  jal       func_80122DDC
 /* D7CCB8 80240168 84440008 */   lh       $a0, 8($v0)
 /* D7CCBC 8024016C 8C430000 */  lw        $v1, ($v0)
@@ -38,22 +38,22 @@ glabel func_80240128_D7CC78
 /* D7CCFC 802401AC AFA20018 */   sw       $v0, 0x18($sp)
 /* D7CD00 802401B0 8E0400A4 */  lw        $a0, 0xa4($s0)
 /* D7CD04 802401B4 0C090008 */  jal       pra_29_UnkFunc2
-/* D7CD08 802401B8 00000000 */   nop      
+/* D7CD08 802401B8 00000000 */   nop
 /* D7CD0C 802401BC C6020080 */  lwc1      $f2, 0x80($s0)
 /* D7CD10 802401C0 3C014307 */  lui       $at, 0x4307
 /* D7CD14 802401C4 44810000 */  mtc1      $at, $f0
-/* D7CD18 802401C8 00000000 */  nop       
+/* D7CD18 802401C8 00000000 */  nop
 /* D7CD1C 802401CC 4602003C */  c.lt.s    $f0, $f2
-/* D7CD20 802401D0 00000000 */  nop       
+/* D7CD20 802401D0 00000000 */  nop
 /* D7CD24 802401D4 4500000B */  bc1f      .L80240204
 /* D7CD28 802401D8 24040002 */   addiu    $a0, $zero, 2
 /* D7CD2C 802401DC 3C014361 */  lui       $at, 0x4361
 /* D7CD30 802401E0 44810000 */  mtc1      $at, $f0
-/* D7CD34 802401E4 00000000 */  nop       
+/* D7CD34 802401E4 00000000 */  nop
 /* D7CD38 802401E8 4600103C */  c.lt.s    $f2, $f0
-/* D7CD3C 802401EC 00000000 */  nop       
+/* D7CD3C 802401EC 00000000 */  nop
 /* D7CD40 802401F0 45000004 */  bc1f      .L80240204
-/* D7CD44 802401F4 00000000 */   nop      
+/* D7CD44 802401F4 00000000 */   nop
 /* D7CD48 802401F8 0C090015 */  jal       func_80240054_D7CBA4
 /* D7CD4C 802401FC 0040202D */   daddu    $a0, $v0, $zero
 /* D7CD50 80240200 24040002 */  addiu     $a0, $zero, 2
@@ -95,7 +95,7 @@ glabel func_80240128_D7CC78
 /* D7CDD8 80240288 AFA0001C */  sw        $zero, 0x1c($sp)
 .L8024028C:
 /* D7CDDC 8024028C 0C0B77B9 */  jal       func_802DDEE4
-/* D7CDE0 80240290 00000000 */   nop      
+/* D7CDE0 80240290 00000000 */   nop
 .L80240294:
 /* D7CDE4 80240294 9202000E */  lbu       $v0, 0xe($s0)
 /* D7CDE8 80240298 3C01802E */  lui       $at, %hi(D_802D9D70)

@@ -15,6 +15,6 @@ glabel func_80240D40_CAFA80
 /* CAFAA8 80240D68 24020002 */  addiu     $v0, $zero, 2
 /* CAFAAC 80240D6C 03E00008 */  jr        $ra
 /* CAFAB0 80240D70 27BD0020 */   addiu    $sp, $sp, 0x20
-/* CAFAB4 80240D74 00000000 */  nop       
-/* CAFAB8 80240D78 00000000 */  nop       
-/* CAFABC 80240D7C 00000000 */  nop       
+/* CAFAB4 80240D74 00000000 */  nop
+/* CAFAB8 80240D78 00000000 */  nop
+/* CAFABC 80240D7C 00000000 */  nop

@@ -27,7 +27,7 @@ glabel func_80241BF0_BFF470
 /* BFF4C8 80241C48 8E02006C */  lw        $v0, 0x6c($s0)
 /* BFF4CC 80241C4C 30421000 */  andi      $v0, $v0, 0x1000
 /* BFF4D0 80241C50 10400008 */  beqz      $v0, .L80241C74
-/* BFF4D4 80241C54 00000000 */   nop      
+/* BFF4D4 80241C54 00000000 */   nop
 /* BFF4D8 80241C58 3C048000 */  lui       $a0, 0x8000
 /* BFF4DC 80241C5C 0C05271B */  jal       stop_sound
 /* BFF4E0 80241C60 34840011 */   ori      $a0, $a0, 0x11

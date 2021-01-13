@@ -12,7 +12,7 @@ glabel do_camera_type_0
 /* AC6C 8002F86C F7B40018 */  sdc1      $f20, 0x18($sp)
 /* AC70 8002F870 86020006 */  lh        $v0, 6($s0)
 /* AC74 8002F874 10400011 */  beqz      $v0, .L8002F8BC
-/* AC78 8002F878 00000000 */   nop      
+/* AC78 8002F878 00000000 */   nop
 /* AC7C 8002F87C 3C01800A */  lui       $at, %hi(D_8009A5EC)
 /* AC80 8002F880 C420A5EC */  lwc1      $f0, %lo(D_8009A5EC)($at)
 /* AC84 8002F884 3C01447A */  lui       $at, 0x447a
@@ -36,7 +36,7 @@ glabel do_camera_type_0
 /* ACC8 8002F8C8 8E070050 */  lw        $a3, 0x50($s0)
 /* ACCC 8002F8CC 4480C000 */  mtc1      $zero, $f24
 /* ACD0 8002F8D0 0C00A720 */  jal       atan2
-/* ACD4 8002F8D4 00000000 */   nop      
+/* ACD4 8002F8D4 00000000 */   nop
 /* ACD8 8002F8D8 4600C306 */  mov.s     $f12, $f24
 /* ACDC 8002F8DC 4600C386 */  mov.s     $f14, $f24
 /* ACE0 8002F8E0 C6040048 */  lwc1      $f4, 0x48($s0)
@@ -53,19 +53,19 @@ glabel do_camera_type_0
 /* AD0C 8002F90C 0C00A720 */  jal       atan2
 /* AD10 8002F910 E600006C */   swc1     $f0, 0x6c($s0)
 /* AD14 8002F914 4616B082 */  mul.s     $f2, $f22, $f22
-/* AD18 8002F918 00000000 */  nop       
+/* AD18 8002F918 00000000 */  nop
 /* AD1C 8002F91C 4614A502 */  mul.s     $f20, $f20, $f20
-/* AD20 8002F920 00000000 */  nop       
+/* AD20 8002F920 00000000 */  nop
 /* AD24 8002F924 46141300 */  add.s     $f12, $f2, $f20
 /* AD28 8002F928 46000007 */  neg.s     $f0, $f0
 /* AD2C 8002F92C E6000090 */  swc1      $f0, 0x90($s0)
 /* AD30 8002F930 46006004 */  sqrt.s    $f0, $f12
 /* AD34 8002F934 46000032 */  c.eq.s    $f0, $f0
-/* AD38 8002F938 00000000 */  nop       
+/* AD38 8002F938 00000000 */  nop
 /* AD3C 8002F93C 45030004 */  bc1tl     .L8002F950
 /* AD40 8002F940 4600C306 */   mov.s    $f12, $f24
 /* AD44 8002F944 0C0187BC */  jal       sqrtf
-/* AD48 8002F948 00000000 */   nop      
+/* AD48 8002F948 00000000 */   nop
 /* AD4C 8002F94C 4600C306 */  mov.s     $f12, $f24
 .L8002F950:
 /* AD50 8002F950 46000007 */  neg.s     $f0, $f0
@@ -82,5 +82,5 @@ glabel do_camera_type_0
 /* AD7C 8002F97C D7B40018 */  ldc1      $f20, 0x18($sp)
 /* AD80 8002F980 03E00008 */  jr        $ra
 /* AD84 8002F984 27BD0038 */   addiu    $sp, $sp, 0x38
-/* AD88 8002F988 00000000 */  nop       
-/* AD8C 8002F98C 00000000 */  nop       
+/* AD88 8002F988 00000000 */  nop
+/* AD8C 8002F98C 00000000 */  nop

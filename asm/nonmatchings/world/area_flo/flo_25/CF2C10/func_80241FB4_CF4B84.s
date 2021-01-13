@@ -16,5 +16,5 @@ glabel func_80241FB4_CF4B84
 /* CF4BAC 80241FDC AC20527C */  sw        $zero, %lo(D_8024527C)($at)
 /* CF4BB0 80241FE0 03E00008 */  jr        $ra
 /* CF4BB4 80241FE4 24020002 */   addiu    $v0, $zero, 2
-/* CF4BB8 80241FE8 00000000 */  nop       
-/* CF4BBC 80241FEC 00000000 */  nop       
+/* CF4BB8 80241FE8 00000000 */  nop
+/* CF4BBC 80241FEC 00000000 */  nop

@@ -79,7 +79,7 @@ glabel func_80240AAC_E1320C
 /* E13330 80240BD0 0000302D */  daddu     $a2, $zero, $zero
 .L80240BD4:
 /* E13334 80240BD4 0C0B2026 */  jal       set_variable
-/* E13338 80240BD8 00000000 */   nop      
+/* E13338 80240BD8 00000000 */   nop
 /* E1333C 80240BDC 8FBF0020 */  lw        $ra, 0x20($sp)
 /* E13340 80240BE0 8FB1001C */  lw        $s1, 0x1c($sp)
 /* E13344 80240BE4 8FB00018 */  lw        $s0, 0x18($sp)

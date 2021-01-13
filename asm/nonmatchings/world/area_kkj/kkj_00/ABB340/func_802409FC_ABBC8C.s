@@ -37,7 +37,7 @@ glabel func_802409FC_ABBC8C
 /* ABBD0C 80240A7C 2402000F */  addiu     $v0, $zero, 0xf
 /* ABBD10 80240A80 AFA2001C */  sw        $v0, 0x1c($sp)
 /* ABBD14 80240A84 44833000 */  mtc1      $v1, $f6
-/* ABBD18 80240A88 00000000 */  nop       
+/* ABBD18 80240A88 00000000 */  nop
 /* ABBD1C 80240A8C 468031A0 */  cvt.s.w   $f6, $f6
 /* ABBD20 80240A90 44073000 */  mfc1      $a3, $f6
 /* ABBD24 80240A94 27A20028 */  addiu     $v0, $sp, 0x28

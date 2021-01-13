@@ -10,14 +10,14 @@ glabel func_802E8A58
 /* 10A2EC 802E8A6C 8443008E */  lh        $v1, 0x8e($v0)
 /* 10A2F0 802E8A70 8CA2000C */  lw        $v0, 0xc($a1)
 /* 10A2F4 802E8A74 14430014 */  bne       $v0, $v1, .L802E8AC8
-/* 10A2F8 802E8A78 00000000 */   nop      
+/* 10A2F8 802E8A78 00000000 */   nop
 /* 10A2FC 802E8A7C 8CA30004 */  lw        $v1, 4($a1)
 /* 10A300 802E8A80 10600005 */  beqz      $v1, .L802E8A98
 /* 10A304 802E8A84 24020001 */   addiu    $v0, $zero, 1
 /* 10A308 802E8A88 10620009 */  beq       $v1, $v0, .L802E8AB0
-/* 10A30C 802E8A8C 00000000 */   nop      
+/* 10A30C 802E8A8C 00000000 */   nop
 /* 10A310 802E8A90 080BA2B2 */  j         .L802E8AC8
-/* 10A314 802E8A94 00000000 */   nop      
+/* 10A314 802E8A94 00000000 */   nop
 .L802E8A98:
 /* 10A318 802E8A98 3C028016 */  lui       $v0, %hi(gCollisionStatus+0x2)
 /* 10A31C 802E8A9C 8442A552 */  lh        $v0, %lo(gCollisionStatus+0x2)($v0)
@@ -34,7 +34,7 @@ glabel func_802E8A58
 /* 10A344 802E8AC4 ACA20004 */   sw       $v0, 4($a1)
 .L802E8AC8:
 /* 10A348 802E8AC8 0C043F5A */  jal       func_8010FD68
-/* 10A34C 802E8ACC 00000000 */   nop      
+/* 10A34C 802E8ACC 00000000 */   nop
 .L802E8AD0:
 /* 10A350 802E8AD0 8FBF0010 */  lw        $ra, 0x10($sp)
 /* 10A354 802E8AD4 03E00008 */  jr        $ra

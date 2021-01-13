@@ -28,16 +28,16 @@ glabel PlayerFaceNpc
 /* F6510 802D1B60 3C02EFE8 */   lui      $v0, 0xefe8
 /* F6514 802D1B64 8E44014C */  lw        $a0, 0x14c($s2)
 /* F6518 802D1B68 0C00EAD2 */  jal       get_npc_safe
-/* F651C 802D1B6C 00000000 */   nop      
+/* F651C 802D1B6C 00000000 */   nop
 /* F6520 802D1B70 080B46E7 */  j         .L802D1B9C
 /* F6524 802D1B74 0040202D */   daddu    $a0, $v0, $zero
 .L802D1B78:
 /* F6528 802D1B78 34422080 */  ori       $v0, $v0, 0x2080
 /* F652C 802D1B7C 0082102A */  slt       $v0, $a0, $v0
 /* F6530 802D1B80 14400006 */  bnez      $v0, .L802D1B9C
-/* F6534 802D1B84 00000000 */   nop      
+/* F6534 802D1B84 00000000 */   nop
 /* F6538 802D1B88 0C00EAD2 */  jal       get_npc_safe
-/* F653C 802D1B8C 00000000 */   nop      
+/* F653C 802D1B8C 00000000 */   nop
 /* F6540 802D1B90 0040202D */  daddu     $a0, $v0, $zero
 /* F6544 802D1B94 1080005A */  beqz      $a0, .L802D1D00
 /* F6548 802D1B98 24020002 */   addiu    $v0, $zero, 2
@@ -66,32 +66,32 @@ glabel PlayerFaceNpc
 /* F65A0 802D1BF0 A440008E */  sh        $zero, 0x8e($v0)
 /* F65A4 802D1BF4 C6220000 */  lwc1      $f2, ($s1)
 /* F65A8 802D1BF8 4600103C */  c.lt.s    $f2, $f0
-/* F65AC 802D1BFC 00000000 */  nop       
+/* F65AC 802D1BFC 00000000 */  nop
 /* F65B0 802D1C00 45000007 */  bc1f      .L802D1C20
-/* F65B4 802D1C04 00000000 */   nop      
+/* F65B4 802D1C04 00000000 */   nop
 /* F65B8 802D1C08 3C0143B4 */  lui       $at, 0x43b4
 /* F65BC 802D1C0C 44810000 */  mtc1      $at, $f0
-/* F65C0 802D1C10 00000000 */  nop       
+/* F65C0 802D1C10 00000000 */  nop
 /* F65C4 802D1C14 46001000 */  add.s     $f0, $f2, $f0
 /* F65C8 802D1C18 E6200000 */  swc1      $f0, ($s1)
 /* F65CC 802D1C1C C6220000 */  lwc1      $f2, ($s1)
 .L802D1C20:
 /* F65D0 802D1C20 3C014334 */  lui       $at, 0x4334
 /* F65D4 802D1C24 44810000 */  mtc1      $at, $f0
-/* F65D8 802D1C28 00000000 */  nop       
+/* F65D8 802D1C28 00000000 */  nop
 /* F65DC 802D1C2C 4602003C */  c.lt.s    $f0, $f2
-/* F65E0 802D1C30 00000000 */  nop       
+/* F65E0 802D1C30 00000000 */  nop
 /* F65E4 802D1C34 45000006 */  bc1f      .L802D1C50
-/* F65E8 802D1C38 00000000 */   nop      
+/* F65E8 802D1C38 00000000 */   nop
 /* F65EC 802D1C3C 3C0143B4 */  lui       $at, 0x43b4
 /* F65F0 802D1C40 44810000 */  mtc1      $at, $f0
-/* F65F4 802D1C44 00000000 */  nop       
+/* F65F4 802D1C44 00000000 */  nop
 /* F65F8 802D1C48 46001001 */  sub.s     $f0, $f2, $f0
 /* F65FC 802D1C4C E6200000 */  swc1      $f0, ($s1)
 .L802D1C50:
 /* F6600 802D1C50 8E820000 */  lw        $v0, ($s4)
 /* F6604 802D1C54 1C40000E */  bgtz      $v0, .L802D1C90
-/* F6608 802D1C58 00000000 */   nop      
+/* F6608 802D1C58 00000000 */   nop
 /* F660C 802D1C5C 3C10802E */  lui       $s0, %hi(gPlayerNpcPtr)
 /* F6610 802D1C60 26109D20 */  addiu     $s0, $s0, %lo(gPlayerNpcPtr)
 /* F6614 802D1C64 8E020000 */  lw        $v0, ($s0)
@@ -116,10 +116,10 @@ glabel PlayerFaceNpc
 /* F665C 802D1CAC 00021403 */  sra       $v0, $v0, 0x10
 /* F6660 802D1CB0 C6200000 */  lwc1      $f0, ($s1)
 /* F6664 802D1CB4 44821000 */  mtc1      $v0, $f2
-/* F6668 802D1CB8 00000000 */  nop       
+/* F6668 802D1CB8 00000000 */  nop
 /* F666C 802D1CBC 468010A0 */  cvt.s.w   $f2, $f2
 /* F6670 802D1CC0 46020002 */  mul.s     $f0, $f0, $f2
-/* F6674 802D1CC4 00000000 */  nop       
+/* F6674 802D1CC4 00000000 */  nop
 /* F6678 802D1CC8 C6AC0000 */  lwc1      $f12, ($s5)
 /* F667C 802D1CCC C6820000 */  lwc1      $f2, ($s4)
 /* F6680 802D1CD0 468010A0 */  cvt.s.w   $f2, $f2

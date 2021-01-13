@@ -18,4 +18,4 @@ glabel func_80240000_C8C0A0
 /* C8C0D0 80240030 8FBF0010 */  lw        $ra, 0x10($sp)
 /* C8C0D4 80240034 03E00008 */  jr        $ra
 /* C8C0D8 80240038 27BD0018 */   addiu    $sp, $sp, 0x18
-/* C8C0DC 8024003C 00000000 */  nop       
+/* C8C0DC 8024003C 00000000 */  nop

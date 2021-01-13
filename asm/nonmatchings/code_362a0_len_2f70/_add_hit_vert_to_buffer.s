@@ -9,7 +9,7 @@ glabel _add_hit_vert_to_buffer
 .L8005B9B0:
 /* 36DB0 8005B9B0 8CE20000 */  lw        $v0, ($a3)
 /* 36DB4 8005B9B4 10450005 */  beq       $v0, $a1, .L8005B9CC
-/* 36DB8 8005B9B8 00000000 */   nop      
+/* 36DB8 8005B9B8 00000000 */   nop
 /* 36DBC 8005B9BC 24630001 */  addiu     $v1, $v1, 1
 /* 36DC0 8005B9C0 0068102A */  slt       $v0, $v1, $t0
 /* 36DC4 8005B9C4 1440FFFA */  bnez      $v0, .L8005B9B0
@@ -25,4 +25,4 @@ glabel _add_hit_vert_to_buffer
 /* 36DE8 8005B9E8 ACC20000 */  sw        $v0, ($a2)
 .L8005B9EC:
 /* 36DEC 8005B9EC 03E00008 */  jr        $ra
-/* 36DF0 8005B9F0 00000000 */   nop      
+/* 36DF0 8005B9F0 00000000 */   nop

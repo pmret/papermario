@@ -32,15 +32,15 @@ glabel func_80240B68_CEEDC8
 /* CEEE34 80240BD4 0040802D */   daddu    $s0, $v0, $zero
 /* CEEE38 80240BD8 0040182D */  daddu     $v1, $v0, $zero
 /* CEEE3C 80240BDC 44920000 */  mtc1      $s2, $f0
-/* CEEE40 80240BE0 00000000 */  nop       
+/* CEEE40 80240BE0 00000000 */  nop
 /* CEEE44 80240BE4 46800020 */  cvt.s.w   $f0, $f0
 /* CEEE48 80240BE8 E4600008 */  swc1      $f0, 8($v1)
 /* CEEE4C 80240BEC 44910000 */  mtc1      $s1, $f0
-/* CEEE50 80240BF0 00000000 */  nop       
+/* CEEE50 80240BF0 00000000 */  nop
 /* CEEE54 80240BF4 46800020 */  cvt.s.w   $f0, $f0
 /* CEEE58 80240BF8 E460000C */  swc1      $f0, 0xc($v1)
 /* CEEE5C 80240BFC 44900000 */  mtc1      $s0, $f0
-/* CEEE60 80240C00 00000000 */  nop       
+/* CEEE60 80240C00 00000000 */  nop
 /* CEEE64 80240C04 46800020 */  cvt.s.w   $f0, $f0
 /* CEEE68 80240C08 E4600010 */  swc1      $f0, 0x10($v1)
 /* CEEE6C 80240C0C 8FBF0020 */  lw        $ra, 0x20($sp)

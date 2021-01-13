@@ -25,17 +25,17 @@ glabel func_E000E288
 /* 32C3E8 E000E2D8 3C1E0900 */  lui       $fp, 0x900
 /* 32C3EC E000E2DC 27DE2B20 */  addiu     $fp, $fp, 0x2b20
 /* 32C3F0 E000E2E0 1160000A */  beqz      $t3, .LE000E30C
-/* 32C3F4 E000E2E4 00000000 */   nop      
+/* 32C3F4 E000E2E4 00000000 */   nop
 .LE000E2E8:
 /* 32C3F8 E000E2E8 3C0A0900 */  lui       $t2, 0x900
 /* 32C3FC E000E2EC 254A2950 */  addiu     $t2, $t2, 0x2950
 /* 32C400 E000E2F0 24020001 */  addiu     $v0, $zero, 1
 /* 32C404 E000E2F4 15620007 */  bne       $t3, $v0, .LE000E314
-/* 32C408 E000E2F8 00000000 */   nop      
+/* 32C408 E000E2F8 00000000 */   nop
 /* 32C40C E000E2FC 3C0A0900 */  lui       $t2, 0x900
 /* 32C410 E000E300 254A2868 */  addiu     $t2, $t2, 0x2868
 /* 32C414 E000E304 080038C5 */  j         .LE000E314
-/* 32C418 E000E308 00000000 */   nop      
+/* 32C418 E000E308 00000000 */   nop
 .LE000E30C:
 /* 32C41C E000E30C 3C0A0900 */  lui       $t2, 0x900
 /* 32C420 E000E310 254A2780 */  addiu     $t2, $t2, 0x2780
@@ -259,4 +259,4 @@ glabel func_E000E288
 /* 32C760 E000E650 D7B400C0 */  ldc1      $f20, 0xc0($sp)
 /* 32C764 E000E654 03E00008 */  jr        $ra
 /* 32C768 E000E658 27BD00C8 */   addiu    $sp, $sp, 0xc8
-/* 32C76C E000E65C 00000000 */  nop       
+/* 32C76C E000E65C 00000000 */  nop

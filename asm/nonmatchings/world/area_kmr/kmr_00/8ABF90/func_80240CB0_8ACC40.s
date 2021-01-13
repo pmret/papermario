@@ -28,14 +28,14 @@ glabel func_80240CB0_8ACC40
 /* 8ACC98 80240D08 8E300078 */   lw       $s0, 0x78($s1)
 /* 8ACC9C 80240D0C 3C013FC0 */  lui       $at, 0x3fc0
 /* 8ACCA0 80240D10 44811000 */  mtc1      $at, $f2
-/* 8ACCA4 80240D14 00000000 */  nop       
+/* 8ACCA4 80240D14 00000000 */  nop
 /* 8ACCA8 80240D18 46020002 */  mul.s     $f0, $f0, $f2
-/* 8ACCAC 80240D1C 00000000 */  nop       
+/* 8ACCAC 80240D1C 00000000 */  nop
 /* 8ACCB0 80240D20 3C014190 */  lui       $at, 0x4190
 /* 8ACCB4 80240D24 44816000 */  mtc1      $at, $f12
 /* 8ACCB8 80240D28 4600010D */  trunc.w.s $f4, $f0
 /* 8ACCBC 80240D2C 44022000 */  mfc1      $v0, $f4
-/* 8ACCC0 80240D30 00000000 */  nop       
+/* 8ACCC0 80240D30 00000000 */  nop
 /* 8ACCC4 80240D34 A20200AB */  sb        $v0, 0xab($s0)
 /* 8ACCC8 80240D38 C6200074 */  lwc1      $f0, 0x74($s1)
 /* 8ACCCC 80240D3C 0C00A6C9 */  jal       clamp_angle
@@ -52,4 +52,4 @@ glabel func_80240CB0_8ACC40
 /* 8ACCF0 80240D60 8FB00010 */  lw        $s0, 0x10($sp)
 /* 8ACCF4 80240D64 03E00008 */  jr        $ra
 /* 8ACCF8 80240D68 27BD0020 */   addiu    $sp, $sp, 0x20
-/* 8ACCFC 80240D6C 00000000 */  nop       
+/* 8ACCFC 80240D6C 00000000 */  nop

@@ -58,7 +58,7 @@ glabel trace_above_player
 /* 77F8C 800DEADC C6400000 */  lwc1      $f0, ($s2)
 /* 77F90 800DEAE0 C7A20044 */  lwc1      $f2, 0x44($sp)
 /* 77F94 800DEAE4 4600103C */  c.lt.s    $f2, $f0
-/* 77F98 800DEAE8 00000000 */  nop       
+/* 77F98 800DEAE8 00000000 */  nop
 /* 77F9C 800DEAEC 45020007 */  bc1fl     .L800DEB0C
 /* 77FA0 800DEAF0 4600D606 */   mov.s    $f24, $f26
 /* 77FA4 800DEAF4 0200882D */  daddu     $s1, $s0, $zero
@@ -104,9 +104,9 @@ glabel trace_above_player
 /* 7803C 800DEB8C C6420000 */  lwc1      $f2, ($s2)
 /* 78040 800DEB90 C7A00044 */  lwc1      $f0, 0x44($sp)
 /* 78044 800DEB94 4602003C */  c.lt.s    $f0, $f2
-/* 78048 800DEB98 00000000 */  nop       
+/* 78048 800DEB98 00000000 */  nop
 /* 7804C 800DEB9C 4500000A */  bc1f      .L800DEBC8
-/* 78050 800DEBA0 00000000 */   nop      
+/* 78050 800DEBA0 00000000 */   nop
 /* 78054 800DEBA4 0C04417A */  jal       get_entity_by_index
 /* 78058 800DEBA8 0200202D */   daddu    $a0, $s0, $zero
 /* 7805C 800DEBAC C7A00044 */  lwc1      $f0, 0x44($sp)

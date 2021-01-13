@@ -14,11 +14,11 @@ glabel func_80218C48_58CF38
 /* 58CF5C 80218C6C 0040202D */  daddu     $a0, $v0, $zero
 /* 58CF60 80218C70 2402FF81 */  addiu     $v0, $zero, -0x7f
 /* 58CF64 80218C74 14820002 */  bne       $a0, $v0, .L80218C80
-/* 58CF68 80218C78 00000000 */   nop      
+/* 58CF68 80218C78 00000000 */   nop
 /* 58CF6C 80218C7C 8E240148 */  lw        $a0, 0x148($s1)
 .L80218C80:
 /* 58CF70 80218C80 0C09A75B */  jal       get_actor
-/* 58CF74 80218C84 00000000 */   nop      
+/* 58CF74 80218C84 00000000 */   nop
 /* 58CF78 80218C88 0040202D */  daddu     $a0, $v0, $zero
 /* 58CF7C 80218C8C 90830136 */  lbu       $v1, 0x136($a0)
 /* 58CF80 80218C90 24020047 */  addiu     $v0, $zero, 0x47
@@ -49,7 +49,7 @@ glabel func_80218C48_58CF38
 /* 58CFD8 80218CE8 0000302D */  daddu     $a2, $zero, $zero
 .L80218CEC:
 /* 58CFDC 80218CEC 0C0B2026 */  jal       set_variable
-/* 58CFE0 80218CF0 00000000 */   nop      
+/* 58CFE0 80218CF0 00000000 */   nop
 /* 58CFE4 80218CF4 8FBF0018 */  lw        $ra, 0x18($sp)
 /* 58CFE8 80218CF8 8FB10014 */  lw        $s1, 0x14($sp)
 /* 58CFEC 80218CFC 8FB00010 */  lw        $s0, 0x10($sp)

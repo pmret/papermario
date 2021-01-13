@@ -14,9 +14,9 @@ glabel func_802AA640
 /* 41F3F4 802AA664 00220821 */  addu      $at, $at, $v0
 /* 41F3F8 802AA668 8C22CC38 */  lw        $v0, %lo(D_802ACC38)($at)
 /* 41F3FC 802AA66C 00400008 */  jr        $v0
-/* 41F400 802AA670 00000000 */   nop      
+/* 41F400 802AA670 00000000 */   nop
 /* 41F404 802AA674 0C0A8715 */  jal       draw_battle_wheel
-/* 41F408 802AA678 00000000 */   nop      
+/* 41F408 802AA678 00000000 */   nop
 .L802AA67C:
 /* 41F40C 802AA67C 8FBF0010 */  lw        $ra, 0x10($sp)
 /* 41F410 802AA680 03E00008 */  jr        $ra

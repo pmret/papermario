@@ -76,7 +76,7 @@ glabel func_80240F00_B6D290
 /* B6D3A8 80241018 8E4300B0 */  lw        $v1, 0xb0($s2)
 /* B6D3AC 8024101C 30620004 */  andi      $v0, $v1, 4
 /* B6D3B0 80241020 10400007 */  beqz      $v0, .L80241040
-/* B6D3B4 80241024 00000000 */   nop      
+/* B6D3B4 80241024 00000000 */   nop
 /* B6D3B8 80241028 824200B4 */  lb        $v0, 0xb4($s2)
 /* B6D3BC 8024102C 14400034 */  bnez      $v0, .L80241100
 /* B6D3C0 80241030 0000102D */   daddu    $v0, $zero, $zero
@@ -88,21 +88,24 @@ glabel func_80240F00_B6D290
 /* B6D3D4 80241044 2C62000F */  sltiu     $v0, $v1, 0xf
 /* B6D3D8 80241048 1040002C */  beqz      $v0, .L802410FC
 /* B6D3DC 8024104C 00031080 */   sll      $v0, $v1, 2
-/* B6D3E0 80241050 3C018024 */  lui       $at, %hi(D_80244488)
+/* B6D3E0 80241050 3C018024 */  lui       $at, %hi(jtbl_80244488_B70818)
 /* B6D3E4 80241054 00220821 */  addu      $at, $at, $v0
-/* B6D3E8 80241058 8C224488 */  lw        $v0, %lo(D_80244488)($at)
+/* B6D3E8 80241058 8C224488 */  lw        $v0, %lo(jtbl_80244488_B70818)($at)
 /* B6D3EC 8024105C 00400008 */  jr        $v0
-/* B6D3F0 80241060 00000000 */   nop      
+/* B6D3F0 80241060 00000000 */   nop
+glabel L80241064_B6D3F4
 /* B6D3F4 80241064 0260202D */  daddu     $a0, $s3, $zero
 /* B6D3F8 80241068 0280282D */  daddu     $a1, $s4, $zero
 /* B6D3FC 8024106C 0C0900C4 */  jal       func_80240310_B6C6A0
 /* B6D400 80241070 0200302D */   daddu    $a2, $s0, $zero
+glabel L80241074_B6D404
 /* B6D404 80241074 0260202D */  daddu     $a0, $s3, $zero
 /* B6D408 80241078 0280282D */  daddu     $a1, $s4, $zero
 /* B6D40C 8024107C 0C090150 */  jal       func_80240540_B6C8D0
 /* B6D410 80241080 0200302D */   daddu    $a2, $s0, $zero
 /* B6D414 80241084 08090440 */  j         .L80241100
 /* B6D418 80241088 0000102D */   daddu    $v0, $zero, $zero
+glabel L8024108C_B6D41C
 /* B6D41C 8024108C 0260202D */  daddu     $a0, $s3, $zero
 /* B6D420 80241090 0280282D */  daddu     $a1, $s4, $zero
 /* B6D424 80241094 0C09021E */  jal       jan_10_UnkNpcAIFunc1
@@ -111,27 +114,32 @@ glabel func_80240F00_B6D290
 /* B6D430 802410A0 24020003 */  addiu     $v0, $zero, 3
 /* B6D434 802410A4 14620016 */  bne       $v1, $v0, .L80241100
 /* B6D438 802410A8 0000102D */   daddu    $v0, $zero, $zero
+glabel L802410AC_B6D43C
 /* B6D43C 802410AC 0260202D */  daddu     $a0, $s3, $zero
 /* B6D440 802410B0 0280282D */  daddu     $a1, $s4, $zero
 /* B6D444 802410B4 0C09024E */  jal       func_80240938_B6CCC8
 /* B6D448 802410B8 0200302D */   daddu    $a2, $s0, $zero
 /* B6D44C 802410BC 08090440 */  j         .L80241100
 /* B6D450 802410C0 0000102D */   daddu    $v0, $zero, $zero
+glabel L802410C4_B6D454
 /* B6D454 802410C4 0260202D */  daddu     $a0, $s3, $zero
 /* B6D458 802410C8 0280282D */  daddu     $a1, $s4, $zero
 /* B6D45C 802410CC 0C0902B7 */  jal       func_80240ADC_B6CE6C
 /* B6D460 802410D0 0200302D */   daddu    $a2, $s0, $zero
+glabel L802410D4_B6D464
 /* B6D464 802410D4 0260202D */  daddu     $a0, $s3, $zero
 /* B6D468 802410D8 0280282D */  daddu     $a1, $s4, $zero
 /* B6D46C 802410DC 0C0902EF */  jal       delete_actor
 /* B6D470 802410E0 0200302D */   daddu    $a2, $s0, $zero
 /* B6D474 802410E4 08090440 */  j         .L80241100
 /* B6D478 802410E8 0000102D */   daddu    $v0, $zero, $zero
+glabel L802410EC_B6D47C
 /* B6D47C 802410EC 0260202D */  daddu     $a0, $s3, $zero
 /* B6D480 802410F0 0280282D */  daddu     $a1, $s4, $zero
 /* B6D484 802410F4 0C0903AF */  jal       jan_10_UnkDurationCheck
 /* B6D488 802410F8 0200302D */   daddu    $a2, $s0, $zero
 .L802410FC:
+glabel L802410FC_B6D48C
 /* B6D48C 802410FC 0000102D */  daddu     $v0, $zero, $zero
 .L80241100:
 /* B6D490 80241100 8FBF0048 */  lw        $ra, 0x48($sp)
@@ -143,6 +151,6 @@ glabel func_80240F00_B6D290
 /* B6D4A8 80241118 8FB00030 */  lw        $s0, 0x30($sp)
 /* B6D4AC 8024111C 03E00008 */  jr        $ra
 /* B6D4B0 80241120 27BD0050 */   addiu    $sp, $sp, 0x50
-/* B6D4B4 80241124 00000000 */  nop       
-/* B6D4B8 80241128 00000000 */  nop       
-/* B6D4BC 8024112C 00000000 */  nop       
+/* B6D4B4 80241124 00000000 */  nop
+/* B6D4B8 80241128 00000000 */  nop
+/* B6D4BC 8024112C 00000000 */  nop

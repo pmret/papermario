@@ -34,7 +34,7 @@ glabel func_8011B660
 /* B1DCC 8011B6CC 26100001 */  addiu     $s0, $s0, 1
 /* B1DD0 8011B6D0 0050102A */  slt       $v0, $v0, $s0
 /* B1DD4 8011B6D4 1040FFF2 */  beqz      $v0, .L8011B6A0
-/* B1DD8 8011B6D8 00000000 */   nop      
+/* B1DD8 8011B6D8 00000000 */   nop
 .L8011B6DC:
 /* B1DDC 8011B6DC 8FBF0018 */  lw        $ra, 0x18($sp)
 /* B1DE0 8011B6E0 8FB10014 */  lw        $s1, 0x14($sp)

@@ -5,7 +5,7 @@ glabel func_8002C7B0
 /* 7BB0 8002C7B0 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 7BB4 8002C7B4 AFBF0010 */  sw        $ra, 0x10($sp)
 /* 7BB8 8002C7B8 0C0198A4 */  jal       osGetActiveQueue
-/* 7BBC 8002C7BC 00000000 */   nop      
+/* 7BBC 8002C7BC 00000000 */   nop
 /* 7BC0 8002C7C0 0040202D */  daddu     $a0, $v0, $zero
 /* 7BC4 8002C7C4 8C830004 */  lw        $v1, 4($a0)
 /* 7BC8 8002C7C8 2402FFFF */  addiu     $v0, $zero, -1
@@ -17,7 +17,7 @@ glabel func_8002C7B0
 .L8002C7E0:
 /* 7BE0 8002C7E0 2C42007E */  sltiu     $v0, $v0, 0x7e
 /* 7BE4 8002C7E4 10400005 */  beqz      $v0, .L8002C7FC
-/* 7BE8 8002C7E8 00000000 */   nop      
+/* 7BE8 8002C7E8 00000000 */   nop
 /* 7BEC 8002C7EC 94820012 */  lhu       $v0, 0x12($a0)
 /* 7BF0 8002C7F0 30420003 */  andi      $v0, $v0, 3
 /* 7BF4 8002C7F4 14400006 */  bnez      $v0, .L8002C810

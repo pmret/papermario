@@ -25,7 +25,7 @@ glabel RemoveActorDecoration
 /* 19D87C 8026EF9C 0040982D */  daddu     $s3, $v0, $zero
 /* 19D880 8026EFA0 2402FF81 */  addiu     $v0, $zero, -0x7f
 /* 19D884 8026EFA4 16220002 */  bne       $s1, $v0, .L8026EFB0
-/* 19D888 8026EFA8 00000000 */   nop      
+/* 19D888 8026EFA8 00000000 */   nop
 /* 19D88C 8026EFAC 8E510148 */  lw        $s1, 0x148($s2)
 .L8026EFB0:
 /* 19D890 8026EFB0 0C09A75B */  jal       get_actor

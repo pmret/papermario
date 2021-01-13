@@ -13,5 +13,5 @@ glabel func_80240A8C_C969BC
 /* C969DC 80240AAC 24020002 */  addiu     $v0, $zero, 2
 /* C969E0 80240AB0 03E00008 */  jr        $ra
 /* C969E4 80240AB4 27BD0018 */   addiu    $sp, $sp, 0x18
-/* C969E8 80240AB8 00000000 */  nop       
-/* C969EC 80240ABC 00000000 */  nop       
+/* C969E8 80240AB8 00000000 */  nop
+/* C969EC 80240ABC 00000000 */  nop

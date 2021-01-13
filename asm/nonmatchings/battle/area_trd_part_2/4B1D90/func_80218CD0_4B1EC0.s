@@ -10,7 +10,7 @@ glabel func_80218CD0_4B1EC0
 /* 4B1ED4 80218CE4 24040200 */   addiu    $a0, $zero, 0x200
 /* 4B1ED8 80218CE8 0040202D */  daddu     $a0, $v0, $zero
 /* 4B1EDC 80218CEC 10800004 */  beqz      $a0, .L80218D00
-/* 4B1EE0 80218CF0 00000000 */   nop      
+/* 4B1EE0 80218CF0 00000000 */   nop
 /* 4B1EE4 80218CF4 8C82008C */  lw        $v0, 0x8c($a0)
 /* 4B1EE8 80218CF8 10500019 */  beq       $v0, $s0, .L80218D60
 /* 4B1EEC 80218CFC 0080102D */   daddu    $v0, $a0, $zero
@@ -19,7 +19,7 @@ glabel func_80218CD0_4B1EC0
 /* 4B1EF4 80218D04 24040201 */   addiu    $a0, $zero, 0x201
 /* 4B1EF8 80218D08 0040202D */  daddu     $a0, $v0, $zero
 /* 4B1EFC 80218D0C 10800004 */  beqz      $a0, .L80218D20
-/* 4B1F00 80218D10 00000000 */   nop      
+/* 4B1F00 80218D10 00000000 */   nop
 /* 4B1F04 80218D14 8C82008C */  lw        $v0, 0x8c($a0)
 /* 4B1F08 80218D18 10500011 */  beq       $v0, $s0, .L80218D60
 /* 4B1F0C 80218D1C 0080102D */   daddu    $v0, $a0, $zero
@@ -28,7 +28,7 @@ glabel func_80218CD0_4B1EC0
 /* 4B1F14 80218D24 24040202 */   addiu    $a0, $zero, 0x202
 /* 4B1F18 80218D28 0040202D */  daddu     $a0, $v0, $zero
 /* 4B1F1C 80218D2C 10800004 */  beqz      $a0, .L80218D40
-/* 4B1F20 80218D30 00000000 */   nop      
+/* 4B1F20 80218D30 00000000 */   nop
 /* 4B1F24 80218D34 8C82008C */  lw        $v0, 0x8c($a0)
 /* 4B1F28 80218D38 10500009 */  beq       $v0, $s0, .L80218D60
 /* 4B1F2C 80218D3C 0080102D */   daddu    $v0, $a0, $zero

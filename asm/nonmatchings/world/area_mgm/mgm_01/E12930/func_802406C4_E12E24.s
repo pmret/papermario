@@ -69,7 +69,7 @@ glabel func_802406C4_E12E24
 /* E12F20 802407C0 0000302D */  daddu     $a2, $zero, $zero
 .L802407C4:
 /* E12F24 802407C4 0C0B2026 */  jal       set_variable
-/* E12F28 802407C8 00000000 */   nop      
+/* E12F28 802407C8 00000000 */   nop
 /* E12F2C 802407CC 8FBF0020 */  lw        $ra, 0x20($sp)
 /* E12F30 802407D0 8FB1001C */  lw        $s1, 0x1c($sp)
 /* E12F34 802407D4 8FB00018 */  lw        $s0, 0x18($sp)

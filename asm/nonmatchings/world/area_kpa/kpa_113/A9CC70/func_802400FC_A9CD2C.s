@@ -9,7 +9,7 @@ glabel func_802400FC_A9CD2C
 /* A9CD3C 8024010C 3C108011 */  lui       $s0, %hi(gPlayerStatus)
 /* A9CD40 80240110 2610EFC8 */  addiu     $s0, $s0, %lo(gPlayerStatus)
 /* A9CD44 80240114 14400005 */  bnez      $v0, .L8024012C
-/* A9CD48 80240118 00000000 */   nop      
+/* A9CD48 80240118 00000000 */   nop
 /* A9CD4C 8024011C C4800084 */  lwc1      $f0, 0x84($a0)
 /* A9CD50 80240120 46800020 */  cvt.s.w   $f0, $f0
 /* A9CD54 80240124 0809004E */  j         .L80240138

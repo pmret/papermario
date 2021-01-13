@@ -23,16 +23,16 @@ glabel func_802D663C
 /* FB030 802D6680 1062004B */  beq       $v1, $v0, .L802D67B0
 /* FB034 802D6684 0000102D */   daddu    $v0, $zero, $zero
 /* FB038 802D6688 080B5A0F */  j         .L802D683C
-/* FB03C 802D668C 00000000 */   nop      
+/* FB03C 802D668C 00000000 */   nop
 .L802D6690:
 /* FB040 802D6690 0C03805E */  jal       disable_player_input
-/* FB044 802D6694 00000000 */   nop      
+/* FB044 802D6694 00000000 */   nop
 /* FB048 802D6698 0C038045 */  jal       disable_player_static_collisions
-/* FB04C 802D669C 00000000 */   nop      
+/* FB04C 802D669C 00000000 */   nop
 /* FB050 802D66A0 0C03BD8A */  jal       func_800EF628
-/* FB054 802D66A4 00000000 */   nop      
+/* FB054 802D66A4 00000000 */   nop
 /* FB058 802D66A8 0C03A5EE */  jal       func_800E97B8
-/* FB05C 802D66AC 00000000 */   nop      
+/* FB05C 802D66AC 00000000 */   nop
 /* FB060 802D66B0 0000482D */  daddu     $t1, $zero, $zero
 /* FB064 802D66B4 0120402D */  daddu     $t0, $t1, $zero
 /* FB068 802D66B8 3C0C8008 */  lui       $t4, %hi(gItemTable)
@@ -63,7 +63,7 @@ glabel func_802D663C
 .L802D6714:
 /* FB0C4 802D6714 8C620000 */  lw        $v0, ($v1)
 /* FB0C8 802D6718 1C40FFFA */  bgtz      $v0, .L802D6704
-/* FB0CC 802D671C 00000000 */   nop      
+/* FB0CC 802D671C 00000000 */   nop
 .L802D6720:
 /* FB0D0 802D6720 50A00012 */  beql      $a1, $zero, .L802D676C
 /* FB0D4 802D6724 25080001 */   addiu    $t0, $t0, 1
@@ -111,7 +111,7 @@ glabel func_802D663C
 /* FB170 802D67C0 1040001D */  beqz      $v0, .L802D6838
 /* FB174 802D67C4 AE020078 */   sw       $v0, 0x78($s0)
 /* FB178 802D67C8 0C03C4EC */  jal       func_800F13B0
-/* FB17C 802D67CC 00000000 */   nop      
+/* FB17C 802D67CC 00000000 */   nop
 /* FB180 802D67D0 8E020074 */  lw        $v0, 0x74($s0)
 /* FB184 802D67D4 24420001 */  addiu     $v0, $v0, 1
 .L802D67D8:
@@ -120,7 +120,7 @@ glabel func_802D663C
 /* FB190 802D67E0 14400016 */  bnez      $v0, .L802D683C
 /* FB194 802D67E4 0000102D */   daddu    $v0, $zero, $zero
 /* FB198 802D67E8 0C03C54E */  jal       func_800F1538
-/* FB19C 802D67EC 00000000 */   nop      
+/* FB19C 802D67EC 00000000 */   nop
 /* FB1A0 802D67F0 8E030078 */  lw        $v1, 0x78($s0)
 /* FB1A4 802D67F4 240200FF */  addiu     $v0, $zero, 0xff
 /* FB1A8 802D67F8 54620005 */  bnel      $v1, $v0, .L802D6810

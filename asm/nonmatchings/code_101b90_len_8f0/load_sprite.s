@@ -50,7 +50,7 @@ glabel load_sprite
 /* 101CA8 802DEBB8 3C048035 */  lui       $a0, %hi(D_8034F800)
 /* 101CAC 802DEBBC 2484F800 */  addiu     $a0, $a0, %lo(D_8034F800)
 /* 101CB0 802DEBC0 0C00A459 */  jal       _heap_malloc_tail
-/* 101CB4 802DEBC4 00000000 */   nop      
+/* 101CB4 802DEBC4 00000000 */   nop
 /* 101CB8 802DEBC8 080B7AFA */  j         .L802DEBE8
 /* 101CBC 802DEBCC 0040882D */   daddu    $s1, $v0, $zero
 .L802DEBD0:
@@ -58,7 +58,7 @@ glabel load_sprite
 /* 101CC4 802DEBD4 3C048035 */  lui       $a0, %hi(D_8034F800)
 /* 101CC8 802DEBD8 2484F800 */  addiu     $a0, $a0, %lo(D_8034F800)
 /* 101CCC 802DEBDC 0C00A41B */  jal       _heap_malloc
-/* 101CD0 802DEBE0 00000000 */   nop      
+/* 101CD0 802DEBE0 00000000 */   nop
 /* 101CD4 802DEBE4 0040882D */  daddu     $s1, $v0, $zero
 .L802DEBE8:
 /* 101CD8 802DEBE8 0240202D */  daddu     $a0, $s2, $zero

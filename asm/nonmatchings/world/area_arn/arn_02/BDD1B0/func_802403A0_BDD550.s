@@ -16,7 +16,7 @@ glabel func_802403A0_BDD550
 /* BDD57C 802403CC A602008E */  sh        $v0, 0x8e($s0)
 /* BDD580 802403D0 00021400 */  sll       $v0, $v0, 0x10
 /* BDD584 802403D4 1C40000F */  bgtz      $v0, .L80240414
-/* BDD588 802403D8 00000000 */   nop      
+/* BDD588 802403D8 00000000 */   nop
 /* BDD58C 802403DC 3C02800F */  lui       $v0, %hi(gPlayerStatusPtr)
 /* BDD590 802403E0 8C427B30 */  lw        $v0, %lo(gPlayerStatusPtr)($v0)
 /* BDD594 802403E4 C60C0038 */  lwc1      $f12, 0x38($s0)

@@ -32,4 +32,4 @@ glabel func_8024025C_D78ADC
 /* D78B40 802402C0 0000102D */  daddu     $v0, $zero, $zero
 /* D78B44 802402C4 03E00008 */  jr        $ra
 /* D78B48 802402C8 27BD0020 */   addiu    $sp, $sp, 0x20
-/* D78B4C 802402CC 00000000 */  nop       
+/* D78B4C 802402CC 00000000 */  nop

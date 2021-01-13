@@ -3,7 +3,7 @@
 
 glabel func_80240E4C_9EEA3C
 /* 9EEA3C 80240E4C 10A00003 */  beqz      $a1, .L80240E5C
-/* 9EEA40 80240E50 00000000 */   nop      
+/* 9EEA40 80240E50 00000000 */   nop
 /* 9EEA44 80240E54 3C018024 */  lui       $at, %hi(func_80243254_8553C4)
 /* 9EEA48 80240E58 AC203254 */  sw        $zero, %lo(func_80243254_8553C4)($at)
 .L80240E5C:

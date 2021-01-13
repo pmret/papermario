@@ -47,7 +47,7 @@ glabel ScaleGroup
 /* EE470 802C9AC0 96020000 */  lhu       $v0, ($s0)
 /* EE474 802C9AC4 30420400 */  andi      $v0, $v0, 0x400
 /* EE478 802C9AC8 1440000A */  bnez      $v0, .L802C9AF4
-/* EE47C 802C9ACC 00000000 */   nop      
+/* EE47C 802C9ACC 00000000 */   nop
 /* EE480 802C9AD0 4405C000 */  mfc1      $a1, $f24
 /* EE484 802C9AD4 4406B000 */  mfc1      $a2, $f22
 /* EE488 802C9AD8 4407A000 */  mfc1      $a3, $f20

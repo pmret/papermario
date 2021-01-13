@@ -28,7 +28,7 @@ glabel func_802402F8_CEE558
 /* CEE5AC 8024034C 00220821 */  addu      $at, $at, $v0
 /* CEE5B0 80240350 AC2026E0 */  sw        $zero, %lo(func_802426E0_BA6E60)($at)
 /* CEE5B4 80240354 080900E1 */  j         .L80240384
-/* CEE5B8 80240358 00000000 */   nop      
+/* CEE5B8 80240358 00000000 */   nop
 .L8024035C:
 /* CEE5BC 8024035C 3C038024 */  lui       $v1, %hi(func_802426E0_BA6E60)
 /* CEE5C0 80240360 246326E0 */  addiu     $v1, $v1, %lo(func_802426E0_BA6E60)

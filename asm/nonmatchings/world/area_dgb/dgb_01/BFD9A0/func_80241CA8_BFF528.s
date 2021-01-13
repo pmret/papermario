@@ -49,9 +49,9 @@ glabel func_80241CA8_BFF528
 /* BFF5D8 80241D58 46140000 */  add.s     $f0, $f0, $f20
 /* BFF5DC 80241D5C C622003C */  lwc1      $f2, 0x3c($s1)
 /* BFF5E0 80241D60 4600103C */  c.lt.s    $f2, $f0
-/* BFF5E4 80241D64 00000000 */  nop       
+/* BFF5E4 80241D64 00000000 */  nop
 /* BFF5E8 80241D68 45010028 */  bc1t      .L80241E0C
-/* BFF5EC 80241D6C 00000000 */   nop      
+/* BFF5EC 80241D6C 00000000 */   nop
 /* BFF5F0 80241D70 8E0200D0 */  lw        $v0, 0xd0($s0)
 /* BFF5F4 80241D74 C62C0038 */  lwc1      $f12, 0x38($s1)
 /* BFF5F8 80241D78 C62E0040 */  lwc1      $f14, 0x40($s1)
@@ -76,7 +76,7 @@ glabel func_80241CA8_BFF528
 /* BFF644 80241DC4 3C01C1A0 */  lui       $at, 0xc1a0
 /* BFF648 80241DC8 44813000 */  mtc1      $at, $f6
 /* BFF64C 80241DCC 44825000 */  mtc1      $v0, $f10
-/* BFF650 80241DD0 00000000 */  nop       
+/* BFF650 80241DD0 00000000 */  nop
 /* BFF654 80241DD4 468052A0 */  cvt.s.w   $f10, $f10
 /* BFF658 80241DD8 46141080 */  add.s     $f2, $f2, $f20
 /* BFF65C 80241DDC 44075000 */  mfc1      $a3, $f10

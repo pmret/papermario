@@ -73,7 +73,7 @@ glabel func_80241954_BFF1D4
 /* BFF2DC 80241A5C 344260B7 */  ori       $v0, $v0, 0x60b7
 /* BFF2E0 80241A60 4600020D */  trunc.w.s $f8, $f0
 /* BFF2E4 80241A64 44044000 */  mfc1      $a0, $f8
-/* BFF2E8 80241A68 00000000 */  nop       
+/* BFF2E8 80241A68 00000000 */  nop
 /* BFF2EC 80241A6C 00820018 */  mult      $a0, $v0
 /* BFF2F0 80241A70 00041FC3 */  sra       $v1, $a0, 0x1f
 /* BFF2F4 80241A74 00004010 */  mfhi      $t0
@@ -91,9 +91,9 @@ glabel func_80241954_BFF1D4
 /* BFF324 80241AA4 00042403 */   sra      $a0, $a0, 0x10
 /* BFF328 80241AA8 3C014260 */  lui       $at, 0x4260
 /* BFF32C 80241AAC 44811000 */  mtc1      $at, $f2
-/* BFF330 80241AB0 00000000 */  nop       
+/* BFF330 80241AB0 00000000 */  nop
 /* BFF334 80241AB4 46020002 */  mul.s     $f0, $f0, $f2
-/* BFF338 80241AB8 00000000 */  nop       
+/* BFF338 80241AB8 00000000 */  nop
 /* BFF33C 80241ABC 24050006 */  addiu     $a1, $zero, 6
 /* BFF340 80241AC0 3C01437F */  lui       $at, 0x437f
 /* BFF344 80241AC4 44811000 */  mtc1      $at, $f2
@@ -103,7 +103,7 @@ glabel func_80241954_BFF1D4
 /* BFF354 80241AD4 AFA00018 */  sw        $zero, 0x18($sp)
 /* BFF358 80241AD8 4600120D */  trunc.w.s $f8, $f2
 /* BFF35C 80241ADC 44064000 */  mfc1      $a2, $f8
-/* BFF360 80241AE0 00000000 */  nop       
+/* BFF360 80241AE0 00000000 */  nop
 /* BFF364 80241AE4 AFA60010 */  sw        $a2, 0x10($sp)
 /* BFF368 80241AE8 8E440024 */  lw        $a0, 0x24($s2)
 /* BFF36C 80241AEC 0C0B7A25 */  jal       func_802DE894
@@ -134,7 +134,7 @@ glabel func_80241954_BFF1D4
 /* BFF3D0 80241B50 46000005 */  abs.s     $f0, $f0
 /* BFF3D4 80241B54 46000021 */  cvt.d.s   $f0, $f0
 /* BFF3D8 80241B58 4620103C */  c.lt.d    $f2, $f0
-/* BFF3DC 80241B5C 00000000 */  nop       
+/* BFF3DC 80241B5C 00000000 */  nop
 /* BFF3E0 80241B60 45000008 */  bc1f      .L80241B84
 /* BFF3E4 80241B64 3C03FFDF */   lui      $v1, 0xffdf
 /* BFF3E8 80241B68 3C018026 */  lui       $at, %hi(D_80263480)
@@ -156,9 +156,9 @@ glabel func_80241954_BFF1D4
 /* BFF424 80241BA4 10620009 */  beq       $v1, $v0, .L80241BCC
 /* BFF428 80241BA8 24020010 */   addiu    $v0, $zero, 0x10
 /* BFF42C 80241BAC 0C03805E */  jal       disable_player_input
-/* BFF430 80241BB0 00000000 */   nop      
+/* BFF430 80241BB0 00000000 */   nop
 /* BFF434 80241BB4 0C03BD8A */  jal       func_800EF628
-/* BFF438 80241BB8 00000000 */   nop      
+/* BFF438 80241BB8 00000000 */   nop
 /* BFF43C 80241BBC 24020014 */  addiu     $v0, $zero, 0x14
 /* BFF440 80241BC0 080906F3 */  j         .L80241BCC
 /* BFF444 80241BC4 A640008E */   sh       $zero, 0x8e($s2)

@@ -22,7 +22,7 @@ glabel func_800DDCEC
 /* 771E0 800DDD30 44811000 */  mtc1      $at, $f2
 /* 771E4 800DDD34 27A50020 */  addiu     $a1, $sp, 0x20
 /* 771E8 800DDD38 46023182 */  mul.s     $f6, $f6, $f2
-/* 771EC 800DDD3C 00000000 */  nop       
+/* 771EC 800DDD3C 00000000 */  nop
 /* 771F0 800DDD40 27A70028 */  addiu     $a3, $sp, 0x28
 /* 771F4 800DDD44 27A60024 */  addiu     $a2, $sp, 0x24
 /* 771F8 800DDD48 E7A00024 */  swc1      $f0, 0x24($sp)

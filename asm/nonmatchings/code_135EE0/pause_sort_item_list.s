@@ -22,7 +22,7 @@ glabel pause_sort_item_list
 /* 137DD0 80244A90 02E0F809 */  jalr      $s7
 /* 137DD4 80244A94 02C22821 */   addu     $a1, $s6, $v0
 /* 137DD8 80244A98 18400031 */  blez      $v0, .L80244B60
-/* 137DDC 80244A9C 00000000 */   nop      
+/* 137DDC 80244A9C 00000000 */   nop
 /* 137DE0 80244AA0 96C20002 */  lhu       $v0, 2($s6)
 /* 137DE4 80244AA4 96C30000 */  lhu       $v1, ($s6)
 /* 137DE8 80244AA8 A6C20000 */  sh        $v0, ($s6)
@@ -93,4 +93,4 @@ glabel pause_sort_item_list
 /* 137EC0 80244B80 8FB00010 */  lw        $s0, 0x10($sp)
 /* 137EC4 80244B84 03E00008 */  jr        $ra
 /* 137EC8 80244B88 27BD0038 */   addiu    $sp, $sp, 0x38
-/* 137ECC 80244B8C 00000000 */  nop       
+/* 137ECC 80244B8C 00000000 */  nop

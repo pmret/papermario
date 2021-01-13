@@ -41,16 +41,16 @@ glabel ModifyColliderFlags
 /* EE808 802C9E58 50400005 */  beql      $v0, $zero, .L802C9E70
 /* EE80C 802C9E5C 24020002 */   addiu    $v0, $zero, 2
 /* EE810 802C9E60 12400009 */  beqz      $s2, .L802C9E88
-/* EE814 802C9E64 00000000 */   nop      
+/* EE814 802C9E64 00000000 */   nop
 /* EE818 802C9E68 080B27AF */  j         .L802C9EBC
-/* EE81C 802C9E6C 00000000 */   nop      
+/* EE81C 802C9E6C 00000000 */   nop
 .L802C9E70:
 /* EE820 802C9E70 1242000B */  beq       $s2, $v0, .L802C9EA0
 /* EE824 802C9E74 24020003 */   addiu    $v0, $zero, 3
 /* EE828 802C9E78 1242000B */  beq       $s2, $v0, .L802C9EA8
 /* EE82C 802C9E7C 2403FF00 */   addiu    $v1, $zero, -0x100
 /* EE830 802C9E80 080B27AF */  j         .L802C9EBC
-/* EE834 802C9E84 00000000 */   nop      
+/* EE834 802C9E84 00000000 */   nop
 .L802C9E88:
 /* EE838 802C9E88 8E020000 */  lw        $v0, ($s0)
 /* EE83C 802C9E8C 080B27AE */  j         .L802C9EB8

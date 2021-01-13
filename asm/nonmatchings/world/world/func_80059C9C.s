@@ -22,7 +22,7 @@ glabel func_80059C9C
 /* 350D8 80059CD8 0441FFFD */  bgez      $v0, .L80059CD0
 /* 350DC 80059CDC 2463FFFC */   addiu    $v1, $v1, -4
 /* 350E0 80059CE0 0C019A58 */  jal       osUnmapTLBAll
-/* 350E4 80059CE4 00000000 */   nop      
+/* 350E4 80059CE4 00000000 */   nop
 /* 350E8 80059CE8 3C0300FF */  lui       $v1, 0xff
 /* 350EC 80059CEC 3463FFFF */  ori       $v1, $v1, 0xffff
 /* 350F0 80059CF0 24040010 */  addiu     $a0, $zero, 0x10

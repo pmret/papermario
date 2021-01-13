@@ -25,15 +25,18 @@ glabel func_E01140DC
 /* 3FEC08 E0114128 10400050 */  beqz      $v0, .LE011426C
 /* 3FEC0C E011412C 0000982D */   daddu    $s3, $zero, $zero
 /* 3FEC10 E0114130 00031080 */  sll       $v0, $v1, 2
-/* 3FEC14 E0114134 3C01E011 */  lui       $at, %hi(D_E0114750)
+/* 3FEC14 E0114134 3C01E011 */  lui       $at, %hi(jtbl_E0114750_3FF230)
 /* 3FEC18 E0114138 00220821 */  addu      $at, $at, $v0
-/* 3FEC1C E011413C 8C224750 */  lw        $v0, %lo(D_E0114750)($at)
+/* 3FEC1C E011413C 8C224750 */  lw        $v0, %lo(jtbl_E0114750_3FF230)($at)
 /* 3FEC20 E0114140 00400008 */  jr        $v0
-/* 3FEC24 E0114144 00000000 */   nop      
+/* 3FEC24 E0114144 00000000 */   nop
+glabel LE0114148_3FEC28
 /* 3FEC28 E0114148 24020001 */  addiu     $v0, $zero, 1
 /* 3FEC2C E011414C A2220105 */  sb        $v0, 0x105($s1)
+glabel LE0114150_3FEC30
 /* 3FEC30 E0114150 080450B5 */  j         .LE01142D4
 /* 3FEC34 E0114154 24130001 */   addiu    $s3, $zero, 1
+glabel LE0114158_3FEC38
 /* 3FEC38 E0114158 06010002 */  bgez      $s0, .LE0114164
 /* 3FEC3C E011415C 0200102D */   daddu    $v0, $s0, $zero
 /* 3FEC40 E0114160 26020003 */  addiu     $v0, $s0, 3
@@ -47,7 +50,7 @@ glabel func_E01140DC
 /* 3FEC5C E011417C 00031840 */  sll       $v1, $v1, 1
 /* 3FEC60 E0114180 90420000 */  lbu       $v0, ($v0)
 /* 3FEC64 E0114184 44836000 */  mtc1      $v1, $f12
-/* 3FEC68 E0114188 00000000 */  nop       
+/* 3FEC68 E0114188 00000000 */  nop
 /* 3FEC6C E011418C 46806320 */  cvt.s.w   $f12, $f12
 /* 3FEC70 E0114190 0C080140 */  jal       func_E0200500
 /* 3FEC74 E0114194 A2220105 */   sb       $v0, 0x105($s1)
@@ -58,6 +61,7 @@ glabel func_E01140DC
 /* 3FEC88 E01141A8 E64200B8 */   swc1     $f2, 0xb8($s2)
 /* 3FEC8C E01141AC 080450B4 */  j         .LE01142D0
 /* 3FEC90 E01141B0 24130001 */   addiu    $s3, $zero, 1
+glabel LE01141B4_3FEC94
 /* 3FEC94 E01141B4 06010002 */  bgez      $s0, .LE01141C0
 /* 3FEC98 E01141B8 0200102D */   daddu    $v0, $s0, $zero
 /* 3FEC9C E01141BC 26020003 */  addiu     $v0, $s0, 3
@@ -71,7 +75,7 @@ glabel func_E01140DC
 /* 3FECB8 E01141D8 00031880 */  sll       $v1, $v1, 2
 /* 3FECBC E01141DC 90420000 */  lbu       $v0, ($v0)
 /* 3FECC0 E01141E0 44836000 */  mtc1      $v1, $f12
-/* 3FECC4 E01141E4 00000000 */  nop       
+/* 3FECC4 E01141E4 00000000 */  nop
 /* 3FECC8 E01141E8 46806320 */  cvt.s.w   $f12, $f12
 /* 3FECCC E01141EC 0C080140 */  jal       func_E0200500
 /* 3FECD0 E01141F0 A2220105 */   sb       $v0, 0x105($s1)
@@ -82,6 +86,7 @@ glabel func_E01140DC
 /* 3FECE4 E0114204 E6400110 */   swc1     $f0, 0x110($s2)
 /* 3FECE8 E0114208 080450B4 */  j         .LE01142D0
 /* 3FECEC E011420C AE400110 */   sw       $zero, 0x110($s2)
+glabel LE0114210_3FECF0
 /* 3FECF0 E0114210 06010002 */  bgez      $s0, .LE011421C
 /* 3FECF4 E0114214 0200102D */   daddu    $v0, $s0, $zero
 /* 3FECF8 E0114218 26020003 */  addiu     $v0, $s0, 3
@@ -95,18 +100,19 @@ glabel func_E01140DC
 /* 3FED14 E0114234 00031880 */  sll       $v1, $v1, 2
 /* 3FED18 E0114238 90420000 */  lbu       $v0, ($v0)
 /* 3FED1C E011423C 44836000 */  mtc1      $v1, $f12
-/* 3FED20 E0114240 00000000 */  nop       
+/* 3FED20 E0114240 00000000 */  nop
 /* 3FED24 E0114244 46806320 */  cvt.s.w   $f12, $f12
 /* 3FED28 E0114248 0C080140 */  jal       func_E0200500
 /* 3FED2C E011424C A2220105 */   sb       $v0, 0x105($s1)
 /* 3FED30 E0114250 3C014080 */  lui       $at, 0x4080
 /* 3FED34 E0114254 44811000 */  mtc1      $at, $f2
-/* 3FED38 E0114258 00000000 */  nop       
+/* 3FED38 E0114258 00000000 */  nop
 /* 3FED3C E011425C 46020002 */  mul.s     $f0, $f0, $f2
-/* 3FED40 E0114260 00000000 */  nop       
+/* 3FED40 E0114260 00000000 */  nop
 /* 3FED44 E0114264 080450B0 */  j         .LE01142C0
 /* 3FED48 E0114268 2A020009 */   slti     $v0, $s0, 9
 .LE011426C:
+glabel LE011426C_3FED4C
 /* 3FED4C E011426C 06010002 */  bgez      $s0, .LE0114278
 /* 3FED50 E0114270 0200102D */   daddu    $v0, $s0, $zero
 /* 3FED54 E0114274 26020003 */  addiu     $v0, $s0, 3
@@ -119,15 +125,15 @@ glabel func_E01140DC
 /* 3FED6C E011428C 00701821 */  addu      $v1, $v1, $s0
 /* 3FED70 E0114290 90420000 */  lbu       $v0, ($v0)
 /* 3FED74 E0114294 44836000 */  mtc1      $v1, $f12
-/* 3FED78 E0114298 00000000 */  nop       
+/* 3FED78 E0114298 00000000 */  nop
 /* 3FED7C E011429C 46806320 */  cvt.s.w   $f12, $f12
 /* 3FED80 E01142A0 0C080140 */  jal       func_E0200500
 /* 3FED84 E01142A4 A2220105 */   sb       $v0, 0x105($s1)
 /* 3FED88 E01142A8 3C014140 */  lui       $at, 0x4140
 /* 3FED8C E01142AC 44811000 */  mtc1      $at, $f2
-/* 3FED90 E01142B0 00000000 */  nop       
+/* 3FED90 E01142B0 00000000 */  nop
 /* 3FED94 E01142B4 46020002 */  mul.s     $f0, $f0, $f2
-/* 3FED98 E01142B8 00000000 */  nop       
+/* 3FED98 E01142B8 00000000 */  nop
 /* 3FED9C E01142BC 2A020024 */  slti      $v0, $s0, 0x24
 .LE01142C0:
 /* 3FEDA0 E01142C0 14400004 */  bnez      $v0, .LE01142D4

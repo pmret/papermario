@@ -40,7 +40,7 @@ glabel func_80240EB0_DF78B0
 /* DF793C 80240F3C AFA20018 */  sw        $v0, 0x18($sp)
 /* DF7940 80240F40 4600B08D */  trunc.w.s $f2, $f22
 /* DF7944 80240F44 44021000 */  mfc1      $v0, $f2
-/* DF7948 80240F48 00000000 */  nop       
+/* DF7948 80240F48 00000000 */  nop
 /* DF794C 80240F4C 00021400 */  sll       $v0, $v0, 0x10
 /* DF7950 80240F50 3C014F00 */  lui       $at, 0x4f00
 /* DF7954 80240F54 44810000 */  mtc1      $at, $f0
@@ -55,7 +55,7 @@ glabel func_80240EB0_DF78B0
 /* DF7978 80240F78 240200C8 */  addiu     $v0, $zero, 0xc8
 /* DF797C 80240F7C AFA2002C */  sw        $v0, 0x2c($sp)
 /* DF7980 80240F80 4618003E */  c.le.s    $f0, $f24
-/* DF7984 80240F84 00000000 */  nop       
+/* DF7984 80240F84 00000000 */  nop
 /* DF7988 80240F88 45010005 */  bc1t      .L80240FA0
 /* DF798C 80240F8C AFA30014 */   sw       $v1, 0x14($sp)
 /* DF7990 80240F90 4600C08D */  trunc.w.s $f2, $f24
@@ -67,7 +67,7 @@ glabel func_80240EB0_DF78B0
 /* DF79A4 80240FA4 3C028000 */  lui       $v0, 0x8000
 /* DF79A8 80240FA8 4600008D */  trunc.w.s $f2, $f0
 /* DF79AC 80240FAC 44031000 */  mfc1      $v1, $f2
-/* DF79B0 80240FB0 00000000 */  nop       
+/* DF79B0 80240FB0 00000000 */  nop
 /* DF79B4 80240FB4 00621825 */  or        $v1, $v1, $v0
 /* DF79B8 80240FB8 306200FF */  andi      $v0, $v1, 0xff
 .L80240FBC:

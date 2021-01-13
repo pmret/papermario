@@ -5,7 +5,7 @@ glabel func_80240000_BB2E00
 /* BB2E00 80240000 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* BB2E04 80240004 AFBF0010 */  sw        $ra, 0x10($sp)
 /* BB2E08 80240008 0C046ED4 */  jal       enable_world_fog
-/* BB2E0C 8024000C 00000000 */   nop      
+/* BB2E0C 8024000C 00000000 */   nop
 /* BB2E10 80240010 240403DE */  addiu     $a0, $zero, 0x3de
 /* BB2E14 80240014 0C046EDD */  jal       set_world_fog_dist
 /* BB2E18 80240018 240503E8 */   addiu    $a1, $zero, 0x3e8
@@ -15,7 +15,7 @@ glabel func_80240000_BB2E00
 /* BB2E28 80240028 0C046EE2 */  jal       set_world_fog_color
 /* BB2E2C 8024002C 240700FF */   addiu    $a3, $zero, 0xff
 /* BB2E30 80240030 0C048BFB */  jal       enable_entity_fog
-/* BB2E34 80240034 00000000 */   nop      
+/* BB2E34 80240034 00000000 */   nop
 /* BB2E38 80240038 240403DE */  addiu     $a0, $zero, 0x3de
 /* BB2E3C 8024003C 0C048C04 */  jal       set_entity_fog_dist
 /* BB2E40 80240040 240503E8 */   addiu    $a1, $zero, 0x3e8

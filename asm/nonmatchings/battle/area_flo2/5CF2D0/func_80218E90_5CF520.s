@@ -37,7 +37,7 @@ glabel func_80218E90_5CF520
 /* 5CF598 80218F08 26100004 */   addiu    $s0, $s0, 4
 .L80218F0C:
 /* 5CF59C 80218F0C 44800000 */  mtc1      $zero, $f0
-/* 5CF5A0 80218F10 00000000 */  nop       
+/* 5CF5A0 80218F10 00000000 */  nop
 /* 5CF5A4 80218F14 44050000 */  mfc1      $a1, $f0
 /* 5CF5A8 80218F18 0240202D */  daddu     $a0, $s2, $zero
 /* 5CF5AC 80218F1C AFA00014 */  sw        $zero, 0x14($sp)

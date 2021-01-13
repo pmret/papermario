@@ -41,7 +41,7 @@ glabel func_8014AC94
 /* E1418 8014AD18 3C048016 */  lui       $a0, %hi(gMusicCurrentVolume)
 /* E141C 8014AD1C 84849AE6 */  lh        $a0, %lo(gMusicCurrentVolume)($a0)
 /* E1420 8014AD20 0C015869 */  jal       func_800561A4
-/* E1424 8014AD24 00000000 */   nop      
+/* E1424 8014AD24 00000000 */   nop
 /* E1428 8014AD28 24020003 */  addiu     $v0, $zero, 3
 /* E142C 8014AD2C 3C018015 */  lui       $at, %hi(D_8014F738)
 /* E1430 8014AD30 A422F738 */  sh        $v0, %lo(D_8014F738)($at)
