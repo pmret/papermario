@@ -8,7 +8,7 @@ glabel func_802E30C0
 /* 10494C 802E30CC 8E10A66C */  lw        $s0, %lo(gMasterGfxPos)($s0)
 /* 104950 802E30D0 AFBF0014 */  sw        $ra, 0x14($sp)
 /* 104954 802E30D4 0C04417A */  jal       get_entity_by_index
-/* 104958 802E30D8 00000000 */   nop      
+/* 104958 802E30D8 00000000 */   nop
 /* 10495C 802E30DC 3C04E300 */  lui       $a0, 0xe300
 /* 104960 802E30E0 34841001 */  ori       $a0, $a0, 0x1001
 /* 104964 802E30E4 3C05D700 */  lui       $a1, 0xd700

@@ -143,6 +143,83 @@ INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_80112328);
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_80112344);
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_801125E8);
+/*s32 func_801125E8(void *arg0, void *arg1, void *arg2, void *arg3, void *arg4, void *arg5) {
+    ? sp50;
+    ? sp4C;
+    ? sp48;
+    f32 sp44;
+    ? sp40;
+    ? sp3C;
+    ? sp38;
+    ? *sp34;
+    ? *sp30;
+    ? *sp2C;
+    ? *sp28;
+    ? *sp24;
+    ? *sp20;
+    ? *sp1C;
+    ? *sp18;
+    f32 sp14;
+    s32 temp_v0;
+    s32 temp_v0_2;
+    s32 phi_s1;
+    s32 phi_s2;
+
+    sp44 = 32767.0f;
+    *arg5 = 32767.0f;
+    sp18 = &sp38;
+    sp1C = &sp3C;
+    sp20 = &sp40;
+    sp24 = &sp44;
+    sp28 = &sp48;
+    sp2C = &sp4C;
+    sp14 = 0.0f;
+    sp30 = &sp50;
+    temp_v0 = test_ray_entities(*arg0, *arg1, *arg2, 0.0f, -1.0f);
+    phi_s1 = -1;
+    if (temp_v0 >= 0) {
+        if (get_entity_type(temp_v0) == 0xC) {
+            phi_s1 = -1;
+            if (sp48 == 0.0f) {
+                phi_s1 = -1;
+                if (sp50 == 0.0f) {
+                    phi_s1 = -1;
+                    if ((f64) sp4C == 1.0) {
+block_5:
+                        phi_s1 = temp_v0 | 0x4000;
+                    }
+                }
+            }
+        } else {
+            goto block_5;
+        }
+    }
+    sp1C = &sp38;
+    sp20 = &sp3C;
+    sp24 = &sp40;
+    sp28 = &sp44;
+    sp2C = &sp48;
+    sp30 = &sp4C;
+    sp18 = 0;
+    sp34 = &sp50;
+    sp14 = -1.0f;
+    temp_v0_2 = test_ray_colliders(0x10000, (bitwise s32) *arg0, (bitwise s32) *arg1, *arg2, 0);
+    if (temp_v0_2 >= 0) {
+        phi_s1 = temp_v0_2;
+    }
+    if (phi_s1 < 0) {
+        *arg3 = 0.0f;
+        *arg4 = 0.0f;
+        phi_s2 = 0;
+    } else {
+        *arg5 = sp44;
+        *arg1 = sp3C;
+        *arg3 = (f32) -atan2(0, 0, sp50 * 100.0f, sp4C * 100.0f);
+        *arg4 = (f32) -atan2(0, 0, sp48 * 100.0f, sp4C * 100.0f);
+        phi_s2 = 1;
+    }
+    return phi_s2;
+}*/
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", set_standard_shadow_scale);
 

@@ -58,7 +58,6 @@ s32 render_effects(void) {
 
 INCLUDE_ASM(s32, "world/world", func_80059F94);
 
-
 EffectInstance* func_8005A2BC(EffectBlueprint* effectBp) {
     EffectInstance *newEffectInst;
     Effect* curEffect;

@@ -39,7 +39,32 @@ void func_802E14D8(Entity* entity) {
     temp->unk_22 = 8;
 }
 
+void func_801125E8(f32*, f32*, f32*, f32*, f32*, f32*);
+
+#ifdef NON_MATCHING
+// regalloc issues
+void func_802E153C(Entity* entity) {
+    struct802E1400* temp_s1 = entity->dataBuf;
+    f32 hitDepth = 10.0f;
+    f32 x = entity->position.x;
+    f32 y = entity->position.y;
+    f32 z = entity->position.z;
+    f32 hitYaw;
+    f32 hitPitch;
+
+    func_801125E8(&x, &y, &z, &hitYaw, &hitPitch, &hitDepth);
+
+    if ((entity->position.y != y) && (entity->position.y > y)) {
+        temp_s1->unk_00.x += 0.5;
+        entity->position.y -= temp_s1->unk_00.x;
+        if (entity->position.y < y) {
+            entity->position.y = y;
+        }
+    }
+}
+#else
 INCLUDE_ASM(s32, "code_102c80", func_802E153C);
+#endif
 
 void func_802E1614(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -116,7 +141,182 @@ void func_802E176C(Entity* entity) {
     temp->unk_11 = 0;
 }
 
+#ifdef NON_MATCHING
+// needs rodata support
+s32 func_802E17A8(Entity* entity) {
+    f32 temp_f0;
+    f32 temp_f2;
+    f32 temp_f4;
+    f32 temp_f6;
+    struct802E1400* temp_s0 = entity->dataBuf;
+    f32 phi_f4;
+    s32 phi_s2 = 0;
+
+    switch(temp_s0->unk_10) {
+        case 0: // switch 1
+            temp_f6 = temp_s0->unk_14.z * 0.3;
+            temp_f4 = ((temp_s0->unk_14.x + temp_f6) - entity->scale.x) / 4.0;
+            phi_f4 = temp_f4;
+            if (temp_f4 < 0.01) {
+                phi_f4 = 0.01f;
+            }
+            temp_s0->unk_00.y += phi_f4;
+            entity->scale.x += temp_s0->unk_00.y;
+            if ((temp_s0->unk_14.x + temp_f6) <= entity->scale.x) {
+                temp_s0->unk_00.y = 0.0f;
+                temp_s0->unk_10++;
+            }
+            break;
+        case 1: // switch 1
+            temp_f6 = temp_s0->unk_14.z * -0.2;
+            temp_f4 = ((temp_s0->unk_14.x + temp_f6) - entity->scale.x) / 6.0;
+            phi_f4 = temp_f4;
+            if (temp_f4 > -0.01) {
+                phi_f4 = -0.01f;
+            }
+            temp_s0->unk_00.y += phi_f4;
+            entity->scale.x += temp_s0->unk_00.y;
+            if (entity->scale.x <= (temp_s0->unk_14.x + temp_f6)) {
+                temp_s0->unk_00.y = 0.0f;
+                temp_s0->unk_10++;
+            }
+            break;
+        case 2: // switch 1
+            temp_f6 = temp_s0->unk_14.z * 0.15;
+            temp_f4 = ((temp_s0->unk_14.x + temp_f6) - entity->scale.x) / 4.0;
+            phi_f4 = temp_f4;
+            if (temp_f4 < 0.01) {
+                phi_f4 = 0.01f;
+            }
+            temp_s0->unk_00.y += phi_f4;
+            entity->scale.x += temp_s0->unk_00.y;
+            if ((temp_s0->unk_14.x + temp_f6) <= entity->scale.x) {
+                temp_s0->unk_00.y = 0.0f;
+                temp_s0->unk_10++;
+            }
+            break;
+        case 3: // switch 1
+            temp_f6 = temp_s0->unk_14.z * -0.1;
+            temp_f4 = ((temp_s0->unk_14.x + temp_f6) - entity->scale.x) / 6.0;
+            phi_f4 = temp_f4;
+            if (temp_f4 > -0.01) {
+                phi_f4 = -0.01f;
+            }
+            temp_s0->unk_00.y += phi_f4;
+            entity->scale.x += temp_s0->unk_00.y;
+            if (entity->scale.x <= (temp_s0->unk_14.x + temp_f6)) {
+                temp_s0->unk_00.y = 0.0f;
+                temp_s0->unk_10++;
+            }
+            break;
+        case 4: // switch 1
+            temp_f4 = (temp_s0->unk_14.x - entity->scale.x) / 4.0;
+            phi_f4 = temp_f4;
+            if (temp_f4 < 0.01) {
+                phi_f4 = 0.01f;
+            }
+            temp_s0->unk_00.y += phi_f4;
+            entity->scale.x += temp_s0->unk_00.y;
+            if (temp_s0->unk_14.x <= entity->scale.x) {
+                entity->scale.x = temp_s0->unk_14.x;
+                temp_s0->unk_00.y = 0.0f;
+                temp_s0->unk_10++;
+            }
+            break;
+        case 5: // switch 1
+            phi_s2++;
+            break;
+    }
+
+    entity->scale.z = entity->scale.x;
+
+    switch(temp_s0->unk_11) {
+
+        case 0: // switch 2
+            temp_f6 = temp_s0->unk_14.z * -0.5;
+            temp_f4 = ((temp_s0->unk_14.y + temp_f6) - entity->scale.y) / 5.0;
+            phi_f4 = temp_f4;
+            if (temp_f4 > -0.01) {
+                phi_f4 = -0.01f;
+            }
+            temp_s0->unk_00.z += phi_f4;
+            entity->scale.y += temp_s0->unk_00.z;
+            if (entity->scale.y <= (temp_s0->unk_14.y + temp_f6)) {
+                temp_s0->unk_00.z = 0.0f;
+                temp_s0->unk_11++;
+            }
+            break;
+        case 1: // switch 2
+            temp_f6 = temp_s0->unk_14.z * 0.1;
+            temp_f4 = ((temp_s0->unk_14.y + temp_f6) - entity->scale.y) / 10.0;
+            phi_f4 = temp_f4;
+            if (temp_f4 < 0.01) {
+                phi_f4 = 0.01f;
+            }
+            temp_s0->unk_00.z += phi_f4;
+            entity->scale.y += temp_s0->unk_00.z;
+            if ((temp_s0->unk_14.y + temp_f6) <= entity->scale.y) {
+                temp_s0->unk_00.z = 0.0f;
+                temp_s0->unk_11++;
+            }
+            break;
+        case 2: // switch 2
+            temp_f6 = temp_s0->unk_14.z * -0.3;
+            temp_f4 = ((temp_s0->unk_14.y + temp_f6) - entity->scale.y) / 5.0;
+            phi_f4 = temp_f4;
+            if (temp_f4 > -0.01) {
+                phi_f4 = -0.01f;
+            }
+            temp_s0->unk_00.z += phi_f4;
+            entity->scale.y += temp_s0->unk_00.z;
+            if (entity->scale.y <= (temp_s0->unk_14.y + temp_f6)) {
+                temp_s0->unk_00.z = 0.0f;
+                temp_s0->unk_11++;
+            }
+            break;
+        case 3: // switch 2
+            temp_f6 = temp_s0->unk_14.z * 0.0;
+            temp_f4 = ((temp_s0->unk_14.y + temp_f6) - entity->scale.y) / 10.0;
+            phi_f4 = temp_f4;
+            if (temp_f4 < 0.01) {
+                phi_f4 = 0.01f;
+            }
+            temp_s0->unk_00.z += phi_f4;
+            entity->scale.y += temp_s0->unk_00.z;
+            if ((temp_s0->unk_14.y + temp_f6) <= entity->scale.y) {
+                temp_s0->unk_00.z = 0.0f;
+                temp_s0->unk_11++;
+            }
+            break;
+        case 4: // switch 2
+            temp_f4 = (temp_s0->unk_14.y - entity->scale.y) / 5.0;
+            phi_f4 = temp_f4;
+            if (temp_f4 > -0.01) {
+                phi_f4 = -0.01f;
+            }
+            temp_s0->unk_00.z += phi_f4;
+            entity->scale.y += temp_s0->unk_00.z;
+            if (entity->scale.y <= temp_s0->unk_14.y) {
+                entity->scale.y = temp_s0->unk_14.y;
+                temp_s0->unk_00.z = 0.0f;
+                temp_s0->unk_11++;
+            }
+            break;
+        case 5: // switch 2
+            phi_s2++;
+            break;
+    }
+
+    func_802E153C(entity);
+    if (phi_s2 == 2) {
+        temp_s0->unk_10 = 0;
+        temp_s0->unk_11 = 0;
+        func_8010FD68(entity);
+    }
+}
+#else
 INCLUDE_ASM(s32, "code_102c80", func_802E17A8);
+#endif
 
 void func_802E1EA8(Entity* entity) {
     struct802E1400* temp = entity->dataBuf;
@@ -124,7 +324,150 @@ void func_802E1EA8(Entity* entity) {
     func_80110678(entity);
 }
 
+#ifdef NON_MATCHING
+// needs rodata support
+void func_802E1EDC(Entity* entity) {
+    f32 temp_f0;
+    f32 temp_f4;
+    f32 temp_f6;
+    struct802E1400* temp_s0 = entity->dataBuf;
+    f32 phi_f4;
+    s32 phi_s2 = 0;
+
+    switch(temp_s0->unk_10) {
+        case 0:
+            temp_f6 = temp_s0->unk_14.z * 0.3;
+            temp_f4 = ((temp_s0->unk_14.x + temp_f6) - entity->scale.x) / 4.0;
+            phi_f4 = temp_f4;
+            if (temp_f4 < 0.01) {
+                phi_f4 = 0.01f;
+            }
+            temp_s0->unk_00.y += phi_f4;
+            entity->scale.x += temp_s0->unk_00.y;
+            if ((temp_s0->unk_14.x + temp_f6) <= entity->scale.x) {
+                temp_s0->unk_00.y = 0.0f;
+                temp_s0->unk_10++;
+            }
+            break;
+
+        case 1:
+            temp_f6 = (temp_s0->unk_14.z * -0.2);
+            temp_f4 = ((temp_s0->unk_14.x + temp_f6) - entity->scale.x) / 6.0;
+            phi_f4 = temp_f4;
+            if (temp_f4 > -0.01) {
+                phi_f4 = -0.01f;
+            }
+            temp_s0->unk_00.y += phi_f4;
+            entity->scale.x += temp_s0->unk_00.y;
+            if (entity->scale.x <= (temp_s0->unk_14.x + temp_f6)) {
+                temp_s0->unk_00.y = 0.0f;
+                temp_s0->unk_10++;
+            }
+            break;
+
+        case 2:
+            temp_f6 = temp_s0->unk_14.z * 0.15;
+            temp_f4 = ((temp_s0->unk_14.x + temp_f6) - entity->scale.x) / 4.0;
+            phi_f4 = temp_f4;
+            if (temp_f4 < 0.01) {
+                phi_f4 = 0.01f;
+            }
+            temp_s0->unk_00.y += phi_f4;
+            entity->scale.x += temp_s0->unk_00.y;
+            if ((temp_s0->unk_14.x + temp_f6) <= entity->scale.x) {
+                temp_s0->unk_00.y = 0.0f;
+                temp_s0->unk_10++;
+            }
+            break;
+
+        case 3:
+            temp_f6 = temp_s0->unk_14.z * -0.1;
+            temp_f4 = ((temp_s0->unk_14.x + temp_f6) - entity->scale.x) / 6.0;
+            phi_f4 = temp_f4;
+            if (temp_f4 > -0.01) {
+                phi_f4 = -0.01f;
+            }
+            temp_s0->unk_00.y += phi_f4;
+            entity->scale.x += temp_s0->unk_00.y;
+            if (entity->scale.x <= (temp_s0->unk_14.x + temp_f6)) {
+                temp_s0->unk_00.y = 0.0f;
+                temp_s0->unk_10++;
+            }
+            break;
+
+        case 4:
+            phi_s2++;
+            break;
+    }
+
+    entity->scale.z = entity->scale.x;
+
+    switch (temp_s0->unk_11) {
+        case 0:
+            temp_f6 = temp_s0->unk_14.z * -0.5;
+            temp_f4 = ((temp_s0->unk_14.y + temp_f6) - entity->scale.y) / 5.0;
+            phi_f4 = temp_f4;
+            if (temp_f4 > -0.01) {
+                phi_f4 = -0.01f;
+            }
+            temp_s0->unk_00.z += phi_f4;
+            entity->scale.y += temp_s0->unk_00.z;
+            if (entity->scale.y <= (temp_s0->unk_14.y + temp_f6)) {
+                temp_s0->unk_00.z = 0.0f;
+                temp_s0->unk_11++;
+            }
+            break;
+
+        case 1:
+            temp_f6 = temp_s0->unk_14.z * 0.1;
+            temp_f4 = ((temp_s0->unk_14.y + temp_f6) - entity->scale.y) / 10.0;
+            phi_f4 = temp_f4;
+            if (temp_f4 < 0.01) {
+                phi_f4 = 0.01f;
+            }
+            temp_s0->unk_00.z += phi_f4;
+            entity->scale.y += temp_s0->unk_00.z;
+            if ((temp_s0->unk_14.y + temp_f6) <= entity->scale.y) {
+                temp_s0->unk_00.z = 0.0f;
+                temp_s0->unk_11++;
+            }
+            break;
+
+        case 2:
+            temp_f6 = temp_s0->unk_14.z * -0.3;
+            temp_f4 = ((temp_s0->unk_14.y + temp_f6) - entity->scale.y) / 5.0;
+            phi_f4 = temp_f4;
+            if (temp_f4 > -0.01) {
+                phi_f4 = -0.01f;
+            }
+            temp_s0->unk_00.z += phi_f4;
+            entity->scale.y += temp_s0->unk_00.z;
+            if (entity->scale.y <= (temp_s0->unk_14.y + temp_f6)) {
+                temp_s0->unk_00.z = 0.0f;
+                temp_s0->unk_11++;
+            }
+            break;
+
+        case 3:
+            phi_s2++;
+            break;
+    }
+
+    func_802E153C(entity);
+    if (phi_s2 == 2) {
+        temp_s0->unk_10 = 0;
+        temp_s0->unk_11 = 0;
+        func_8010FD68(entity);
+    }
+
+    temp_s0->unk_24++;
+    if ((temp_s0->unk_24 == 10) && (temp_s0->attachedEntity == NULL)) {
+        func_80072230(0, entity->position.x, entity->position.y, entity->position.z, 1.0f, 0x3C);
+    }
+}
+#else
 INCLUDE_ASM(s32, "code_102c80", func_802E1EDC);
+#endif
 
 void func_802E234C(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
