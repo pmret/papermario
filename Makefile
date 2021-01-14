@@ -128,7 +128,6 @@ clean-code:
 	rm -rf $(BUILD_DIR)/src
 
 tools:
-	make -C tools
 
 setup: clean-all submodules tools
 	@make split

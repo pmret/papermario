@@ -122,6 +122,9 @@ async def main():
     cpp = args.cpp or "cpp"
     task_sem = asyncio.Semaphore(8)
 
+    # compile n64splat dependencies
+    await shell("make -C tools/n64splat")
+
     # split assets
     split.main(
         "baserom.z64",
@@ -297,6 +300,10 @@ async def main():
     num_tasks_done = 0
     await asyncio.gather(*tasks)
     print("")
+    n.newline()
+
+    n.rule("cc_modern_exe", command="cc $in -O3 -o $out")
+    n.build("tools/Yay0compress", "cc_modern_exe", "tools/Yay0compress.c")
 
 if __name__ == "__main__":
     asyncio.run(main())
