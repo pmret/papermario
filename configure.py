@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import re
 import os, sys
 from glob import glob
@@ -6,8 +8,8 @@ from argparse import ArgumentParser
 import asyncio
 from subprocess import PIPE
 
-tools_dir = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
-sys.path.append(tools_dir + "/n64splat")
+sys.path.append(os.path.dirname(__file__) + "/tools/n64splat")
+import split
 
 INCLUDE_ASM_RE = re.compile(r"_INCLUDE_ASM\([^,]+, ([^,]+), ([^,)]+)") # note _ prefix
 CPPFLAGS = "-Iinclude -Isrc -D _LANGUAGE_C -D _FINALROM -ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32"
@@ -20,9 +22,6 @@ def obj(path: str):
 def read_splat(splat_config: str):
     import argparse
     import yaml
-    from pathlib import PurePath
-
-    from split import initialize_segments
 
     # Load config
     with open(splat_config) as f:
@@ -32,7 +31,7 @@ def read_splat(splat_config: str):
     assert options.get("ld_o_replace_extension", True) == False
 
     # Initialize segments
-    all_segments = initialize_segments(options, splat_config, config["segments"])
+    all_segments = split.initialize_segments(options, splat_config, config["segments"])
 
     objects = set()
     segments = {}
@@ -121,6 +120,17 @@ async def main():
     cpp = args.cpp or "cpp"
     task_sem = asyncio.Semaphore(8)
 
+    # split assets
+    split.main(
+        "baserom.z64",
+        "tools/splat.yaml",
+        ".",
+        [ "ld", "bin", "Yay0", "PaperMarioMapFS", "PaperMarioMessages", "img", "PaperMarioNpcSprites" ],
+        False,
+        False,
+    )
+
+    # generate build.ninja
     n = ninja_syntax.Writer(open("build.ninja", "w"), width=120)
 
     n.variable("builddir", "build")
