@@ -101,7 +101,7 @@ def build_image(f: str, segment):
         if segment.flip_vertical:
             flags += "--flip-y"
 
-    n.build(out, "img", path + ".png", variables={
+    n.build(out, "img", path + ".png", implicit="tools/convert_image.py", variables={
         "img_type": img_type,
         "img_flags": flags,
     })
@@ -185,10 +185,16 @@ async def main():
         description="image $in")
     n.newline()
 
-    # $sprite_id
+    # $sprite_id, $sprite_dir, $sprite_name
     n.rule("sprite_animations_h",
         command="$python tools/gen_sprite_animations_h.py $out $sprite_dir $sprite_id",
-        description="sprite_animations_h $sprite_dir")
+        description="sprite_animations_h $sprite_name ($sprite_id)")
+    n.rule("npc_sprite",
+        command="$python tools/compile_npc_sprite.py $out $sprite_dir",
+        description="npc_sprite $sprite_name ($sprite_id)")
+    n.rule("npc_sprites",
+        command="$python tools/compile_npc_sprites.py $out $in",
+        description="package npc sprites")
     n.newline()
 
     n.rule("ld_addrs_h",
@@ -223,17 +229,38 @@ async def main():
 
     n.build(add_generated_header("include/ld_addrs.h"), "ld_addrs_h", "$builddir/$target.ld")
 
+    npc_sprite_yay0s = []
     for sprite_id, sprite_name in enumerate(NPC_SPRITES, 1):
+        sources = glob(f"sprite/npc/{sprite_name}/**/*.*", recursive=True)
+        variables = {
+            "sprite_name": sprite_name,
+            "sprite_dir": f"sprite/npc/{sprite_name}",
+            "sprite_id": sprite_id,
+        }
+
+        # generated header
         n.build(
             add_generated_header(f"include/sprite/npc/{sprite_name}.h"),
             "sprite_animations_h",
-            glob(f"sprite/npc/{sprite_name}/**/*.*", recursive=True),
-            variables={
-                "sprite_dir": f"sprite/npc/{sprite_name}",
-                "sprite_id": sprite_id,
-            },
+            implicit=sources + ["tools/gen_sprite_animations_h.py"],
+            variables=variables,
         )
 
+        # sprite bin/yay0
+        n.build(
+            f"$builddir/sprite/npc/{sprite_name}",
+            "npc_sprite",
+            implicit=sources + ["tools/compile_npc_sprite.py"],
+            variables=variables,
+        )
+        yay0 = f"$builddir/sprite/npc/{sprite_name}.Yay0"
+        npc_sprite_yay0s.append(yay0)
+        n.build(
+            yay0,
+            "yay0compress",
+            f"$builddir/sprite/npc/{sprite_name}",
+            implicit=["tools/Yay0compress"],
+        )
 
     n.newline()
 
@@ -256,6 +283,9 @@ async def main():
             n.build(obj(f), "as", f)
         elif f.endswith(".png"):
             build_image(f, segment)
+        elif f == "sprite/npc":
+            n.build(f"$builddir/{f}.bin", "npc_sprites", npc_sprite_yay0s)
+            n.build(obj(f), "bin", f"$builddir/{f}.bin")
         else:
             print("warning: dont know what to do with object " + f)
     n.newline()

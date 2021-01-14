@@ -251,17 +251,17 @@ $(MSG_BIN:.bin=.o): $(MSG_BIN)
 	$(LD) -r -b binary -o $@ $<
 
 # Sprites
-$(foreach npc, $(NPC_SPRITES), $(eval $(BUILD_DIR)/sprite/npc/$(npc):: $(shell find sprite/npc/$(npc) -type f 2> /dev/null))) # dependencies
-NPC_YAY0 := $(foreach npc, $(NPC_SPRITES), $(BUILD_DIR)/sprite/npc/$(npc).Yay0)
-$(BUILD_DIR)/sprite/npc/%:: sprite/npc/% tools/compile_npc_sprite.py
-	@mkdir -p $(shell dirname $@)
-	$(PYTHON) tools/compile_npc_sprite.py $@ $<
-$(NPC_BIN): $(NPC_YAY0) tools/compile_npc_sprites.py
-	@mkdir -p $(shell dirname $@)
-	@echo "building $@"
-	@$(PYTHON) tools/compile_npc_sprites.py $@ $(NPC_YAY0)
-$(NPC_BIN:.bin=.o): $(NPC_BIN)
-	$(LD) -r -b binary -o $@ $<
+# $(foreach npc, $(NPC_SPRITES), $(eval $(BUILD_DIR)/sprite/npc/$(npc):: $(shell find sprite/npc/$(npc) -type f 2> /dev/null))) # dependencies
+# NPC_YAY0 := $(foreach npc, $(NPC_SPRITES), $(BUILD_DIR)/sprite/npc/$(npc).Yay0)
+# $(BUILD_DIR)/sprite/npc/%:: sprite/npc/% tools/compile_npc_sprite.py
+# 	@mkdir -p $(shell dirname $@)
+# 	$(PYTHON) tools/compile_npc_sprite.py $@ $<
+# $(NPC_BIN): $(NPC_YAY0) tools/compile_npc_sprites.py
+# 	@mkdir -p $(shell dirname $@)
+# 	@echo "building $@"
+# 	@$(PYTHON) tools/compile_npc_sprites.py $@ $(NPC_YAY0)
+# $(NPC_BIN:.bin=.o): $(NPC_BIN)
+# 	$(LD) -r -b binary -o $@ $<
 # include/sprite/npc/%.h: sprite/npc/%/SpriteSheet.xml tools/gen_sprite_animations_h.py
 # 	@mkdir -p $(shell dirname $@)
 # 	@echo "building $@"
