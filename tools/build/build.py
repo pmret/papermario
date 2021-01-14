@@ -1,18 +1,49 @@
 import re
-import sys
+import os, sys
 from glob import glob
 import ninja_syntax
 from argparse import ArgumentParser
 import asyncio
 from subprocess import PIPE
 
-c_files = glob("src/**/*.c", recursive=True)
+tools_dir = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+sys.path.append(tools_dir + "/n64splat")
 
 INCLUDE_ASM_RE = re.compile(r"_INCLUDE_ASM\([^,]+, ([^,]+), ([^,)]+)") # note _ prefix
 CPPFLAGS = "-Iinclude -Isrc -D _LANGUAGE_C -D _FINALROM -ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32"
 
 def obj(path: str):
-    return "$builddir/" + path + ".o"
+    if not path.startswith("$builddir/"):
+        path = "$builddir/" + path
+    return path + ".o"
+
+def list_objects(splat_config: str):
+    import argparse
+    import yaml
+    from pathlib import PurePath
+
+    from split import initialize_segments
+
+    # Load config
+    with open(splat_config) as f:
+        config = yaml.safe_load(f.read())
+
+    options = config.get("options")
+    assert options.get("ld_o_replace_extension", True) == False
+
+    # Initialize segments
+    all_segments = initialize_segments(options, splat_config, config["segments"])
+
+    objects = set()
+
+    for segment in all_segments:
+        for subdir, path, obj_type, start in segment.get_ld_files():
+            path = PurePath(subdir) / PurePath(path)
+            #path = path.with_suffix(".o" if replace_ext else path.suffix + ".o")
+
+            objects.add(str(path))
+
+    return objects
 
 async def shell(cmd: str):
     async with task_sem:
@@ -23,7 +54,15 @@ async def shell(cmd: str):
 
     return stdout.decode("utf-8"), stderr.decode("utf-8")
 
-async def build_c_file(c_file: str, rule: str, dsl_rule: str):
+async def task(coro):
+    global num_tasks, num_tasks_done
+
+    await coro
+
+    num_tasks_done += 1
+    print(f"\r{(num_tasks_done / num_tasks) * 100:.0f}%", end="")
+
+async def build_c_file(c_file: str):
     # preprocess c_file, but simply put an _ in front of INCLUDE_ASM and SCRIPT
     stdout, stderr = await shell(f"{cpp} {CPPFLAGS} '-DINCLUDE_ASM(...)=_INCLUDE_ASM(__VA_ARGS__)' '-DSCRIPT(...)=_SCRIPT(__VA_ARGS__)' {c_file} -o -")
 
@@ -38,15 +77,15 @@ async def build_c_file(c_file: str, rule: str, dsl_rule: str):
                 s_deps.append("asm/nonmatchings/" + eval(match[1]) + "/" + match[2] + ".s")
 
     # add build task to ninja
-    n.build(obj(c_file), dsl_rule if uses_dsl else rule, c_file, implicit=s_deps)
+    n.build(obj(c_file), "cc_dsl" if uses_dsl else "cc", c_file, implicit=s_deps)
 
-async def task(coro):
-    global num_tasks, num_tasks_done
+def build_yay0_file(bin_file: str):
+    yay0_file = f"$builddir/{os.path.splitext(bin_file)[0]}.Yay0"
+    n.build(yay0_file, "yay0compress", bin_file, implicit=["tools/Yay0compress"])
+    build_bin_object(yay0_file)
 
-    await coro
-
-    num_tasks_done += 1
-    print(f"\r{(num_tasks_done / num_tasks) * 100:.0f}%", end="")
+def build_bin_object(bin_file: str):
+    n.build(obj(bin_file), "bin", bin_file)
 
 async def main():
     global n, cpp, task_sem, num_tasks, num_tasks_done
@@ -86,14 +125,43 @@ async def main():
         deps="gcc")
     n.newline()
 
-    # build all the things! concurrently!
+    n.rule("yay0compress",
+        command=f"tools/Yay0compress $in $out",
+        description="compress $in")
+    n.newline()
+
+    n.rule("bin",
+        command="${cross}ld -r -b binary $in -o $out",
+        description="bin $in")
+    n.newline()
+
+    objects = list_objects("tools/splat.yaml") # no .o extension!
+
+    c_files = (f for f in objects if f.endswith(".c")) # glob("src/**/*.c", recursive=True)
+    yay0_files = (os.path.splitext(f)[0] + ".bin" for f in objects if f.endswith(".Yay0"))
+    bin_files = (f for f in objects if f.endswith(".bin"))
+
+    # TODO: build elf
+
+    n.comment("bin")
+    for f in bin_files:
+        build_bin_object(f)
+    n.newline()
+
+    n.comment("yay0")
+    for f in yay0_files:
+        build_yay0_file(f)
+    n.newline()
+
+    # build slow tasks concurrently
+    n.comment("c")
     tasks = [
-        *(task(build_c_file(c_file, "cc", "cc_dsl")) for c_file in c_files),
+        *(task(build_c_file(f)) for f in c_files),
     ]
     num_tasks = len(tasks)
     num_tasks_done = 0
     await asyncio.gather(*tasks)
-    print(" done")
+    print("")
 
 if __name__ == "__main__":
     asyncio.run(main())

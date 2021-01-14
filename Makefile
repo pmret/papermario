@@ -156,19 +156,19 @@ test: $(ROM)
 %.Yay0: %
 	@mkdir -p $(shell dirname $@)
 	$(YAY0COMPRESS) $< $@
-$(BUILD_DIR)/%.bin.Yay0: %.bin
-	@mkdir -p $(shell dirname $@)
-	$(YAY0COMPRESS) $< $@
+# $(BUILD_DIR)/%.bin.Yay0: %.bin
+# 	@mkdir -p $(shell dirname $@)
+# 	$(YAY0COMPRESS) $< $@
 
 # Data objects
-$(BUILD_DIR)/%.bin.o: %.bin
-	@mkdir -p $(shell dirname $@)
-	$(LD) -r -b binary -o $@ $<
+# $(BUILD_DIR)/%.bin.o: %.bin
+# 	@mkdir -p $(shell dirname $@)
+# 	$(LD) -r -b binary -o $@ $<
 
 # Compressed data objects
-$(BUILD_DIR)/%.Yay0.o: $(BUILD_DIR)/%.bin.Yay0
-	@mkdir -p $(shell dirname $@)
-	$(LD) -r -b binary -o $@ $<
+# $(BUILD_DIR)/%.Yay0.o: $(BUILD_DIR)/%.bin.Yay0
+# 	@mkdir -p $(shell dirname $@)
+# 	$(LD) -r -b binary -o $@ $<
 
 # Compile C files
 # $(BUILD_DIR)/%.c.o: %.c $(MDEPS) | $(GENERATED_HEADERS)
