@@ -242,12 +242,12 @@ $(ASSETS_BIN:.bin=.o): $(ASSETS_BIN)
 	$(LD) -r -b binary -o $@ $<
 
 # Messages
-$(MSG_BIN): $(MESSAGES)
-	@mkdir -p $(shell dirname $@)
-	@echo "building $@"
-	@$(PYTHON) tools/compile_messages.py $@ /dev/null $(MESSAGES)
-$(MSG_BIN:.bin=.o): $(MSG_BIN)
-	$(LD) -r -b binary -o $@ $<
+# $(MSG_BIN): $(MESSAGES)
+# 	@mkdir -p $(shell dirname $@)
+# 	@echo "building $@"
+# 	@$(PYTHON) tools/compile_messages.py $@ /dev/null $(MESSAGES)
+# $(MSG_BIN:.bin=.o): $(MSG_BIN)
+# 	$(LD) -r -b binary -o $@ $<
 
 # Sprites
 # $(foreach npc, $(NPC_SPRITES), $(eval $(BUILD_DIR)/sprite/npc/$(npc):: $(shell find sprite/npc/$(npc) -type f 2> /dev/null))) # dependencies

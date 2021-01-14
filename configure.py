@@ -205,7 +205,16 @@ async def main():
         description="ld_addrs_h $in")
     n.newline()
 
-    objects, segments = read_splat("tools/splat.yaml") # no .o extension!
+    # $msg_combine_headers
+    n.rule("msg_combine",
+        command="$python tools/msg/combine.py $out $in --headers $msg_combine_headers",
+        description="combine messages")
+    n.rule("msg",
+        command="$python tools/msg/parse_compile.py $in $out",
+        description="msg $in")
+    n.newline()
+
+    objects, segments = read_splat("tools/splat.yaml") # no .o extensions!
     c_files = (f for f in objects if f.endswith(".c")) # glob("src/**/*.c", recursive=True)
 
     n.comment("target")
@@ -218,6 +227,8 @@ async def main():
     generated_headers = []
 
     def add_generated_header(h: str):
+        generated_headers.append(h)
+
         if not os.path.exists(h):
             # mkdir -p
             os.makedirs(os.path.dirname(h), exist_ok=True)
@@ -232,6 +243,26 @@ async def main():
 
     n.build(add_generated_header("include/ld_addrs.h"), "ld_addrs_h", "$builddir/$target.ld")
 
+    # messages
+    msg_files = glob("src/**/*.msg", recursive=True) + glob("msg/**/*.msg", recursive=True)
+    for msg_file in msg_files:
+        n.build(
+            f"$builddir/{msg_file}.bin",
+            "msg",
+            msg_file,
+            implicit="tools/msg/parse_compile.py",
+        )
+    n.build(
+        "$builddir/msg.bin",
+        "msg_combine",
+        [f"$builddir/{msg_file}.bin" for msg_file in msg_files],
+        implicit="tools/msg/combine.py",
+        implicit_outputs=[add_generated_header(f"{msg_file}.h") for msg_file in msg_files],
+        variables={ "msg_combine_headers": [f"{msg_file}.h" for msg_file in msg_files] }
+    )
+    n.build("$builddir/msg.o", "bin", "$builddir/msg.bin")
+
+    # sprites
     npc_sprite_yay0s = []
     for sprite_id, sprite_name in enumerate(NPC_SPRITES, 1):
         sources = glob(f"sprite/npc/{sprite_name}/**/*.*", recursive=True)
@@ -287,8 +318,11 @@ async def main():
         elif f.endswith(".png"):
             build_image(f, segment)
         elif f == "sprite/npc":
-            n.build(f"$builddir/{f}.bin", "npc_sprites", npc_sprite_yay0s)
+            # combine sprites
+            n.build(f"$builddir/{f}.bin", "npc_sprites", npc_sprite_yay0s, implicit="tools/compile_npc_sprites.py")
             n.build(obj(f), "bin", f"$builddir/{f}.bin")
+        elif f == "/msg":
+            continue # done already above
         else:
             print("warning: dont know what to do with object " + f)
     n.newline()
