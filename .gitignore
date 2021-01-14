@@ -13,6 +13,7 @@ settings.mk
 .vscode/launch.json
 
 # Build artifacts
+build.ninja
 *.ld
 *.z64
 *.Yay0
