@@ -136,6 +136,7 @@ async def main():
     n = ninja_syntax.Writer(open("build.ninja", "w"), width=120)
 
     n.variable("builddir", "build")
+    n.variable("target", "papermario")
     n.variable("cross", "mips-linux-gnu-")
     n.variable("python", sys.executable)
     n.variable("os", "mac" if sys.platform == "darwin" else "linux")
@@ -151,6 +152,13 @@ async def main():
         deps="gcc")
     n.rule("cc_dsl",
         command=f"{cpp} $cppflags $in -o - | $python tools/compile_dsl_macros.py | $iconv | tools/$os/cc1 $cflags -o - | tools/$os/mips-nintendo-nu64-as -EB -G 0 - -o $out",
+        description="cc (with dsl) $in",
+        depfile="$out.d",
+        deps="gcc")
+    n.newline()
+
+    n.rule("cpp",
+        command=f"{cpp} -P -DBUILD_DIR=$builddir $in -o $out",
         description="cc (with dsl) $in",
         depfile="$out.d",
         deps="gcc")
@@ -180,13 +188,21 @@ async def main():
     # $sprite_id
     n.rule("sprite_animations_h",
         command="$python tools/gen_sprite_animations_h.py $out $sprite_dir $sprite_id",
-        description="sprite_animations_h $in")
+        description="sprite_animations_h $sprite_dir")
+    n.newline()
+
+    n.rule("ld_addrs_h",
+        command="grep -E \"[^\. ]+ =\" $in -o | sed 's/^/extern void* /; s/ =/;/' > $out",
+        description="ld_addrs_h $in")
     n.newline()
 
     objects, segments = read_splat("tools/splat.yaml") # no .o extension!
     c_files = (f for f in objects if f.endswith(".c")) # glob("src/**/*.c", recursive=True)
 
-    # TODO: build elf
+    n.comment("target")
+    n.build("$builddir/$target.ld", "cpp", "$target.ld")
+    # TODO ...
+    n.newline()
 
     # generated headers
     n.comment("generated headers")
@@ -203,13 +219,21 @@ async def main():
             # mark it as really old so ninja builds it
             os.utime(h, (0, 0))
 
+        return h
+
+    n.build(add_generated_header("include/ld_addrs.h"), "ld_addrs_h", "$builddir/$target.ld")
+
     for sprite_id, sprite_name in enumerate(NPC_SPRITES, 1):
-        h = f"include/sprite/npc/{sprite_name}.h"
-        n.build(h, "sprite_animations_h", glob(f"sprite/npc/{sprite_name}/**/*.*", recursive=True), variables={
-            "sprite_dir": f"sprite/npc/{sprite_name}",
-            "sprite_id": sprite_id,
-        })
-        add_generated_header(h)
+        n.build(
+            add_generated_header(f"include/sprite/npc/{sprite_name}.h"),
+            "sprite_animations_h",
+            glob(f"sprite/npc/{sprite_name}/**/*.*", recursive=True),
+            variables={
+                "sprite_dir": f"sprite/npc/{sprite_name}",
+                "sprite_id": sprite_id,
+            },
+        )
+
 
     n.newline()
 
