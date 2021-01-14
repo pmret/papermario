@@ -141,6 +141,11 @@ async def main():
         description="assemble $in")
     n.newline()
 
+    n.rule("img",
+        command="$python tools/convert_image.py $img_type $in $out $img_flags",
+        description="image $in")
+    n.newline()
+
     objects = list_objects("tools/splat.yaml") # no .o extension!
     c_files = (f for f in objects if f.endswith(".c")) # glob("src/**/*.c", recursive=True)
 
@@ -159,6 +164,13 @@ async def main():
             n.build(obj(f), "as", "asm/" + f[2:] + ".s")
         elif f.endswith(".s"):
             n.build(obj(f), "as", f)
+        elif f.endswith(".png"):
+            path, img_type, png = f.rsplit(".", 2)
+
+            n.build(obj(f), "img", path + ".png", variables={
+                "img_type": img_type,
+                "img_flags": "", # TODO ask splat? have some other config file for image flags?
+            })
         else:
             print("warning: dont know what to do with object " + f)
     n.newline()
