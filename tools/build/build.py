@@ -8,7 +8,7 @@ from subprocess import PIPE
 
 c_files = glob("src/**/*.c", recursive=True)
 
-INCLUDE_ASM_RE = re.compile(r"INCLUDE_ASM\([^,]+, ([^,]+), ([^,)]+)")
+INCLUDE_ASM_RE = re.compile(r"_INCLUDE_ASM\([^,]+, ([^,]+), ([^,)]+)") # note _ prefix
 CPPFLAGS = "-Iinclude -Isrc -D _LANGUAGE_C -D _FINALROM -ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32"
 
 def obj(path: str):
@@ -21,18 +21,18 @@ async def shell(cmd: str):
 
     assert proc.returncode == 0, f"{cmd} failed: {stderr}"
 
-    return str(stdout), str(stderr)
+    return stdout.decode("utf-8"), stderr.decode("utf-8")
 
 async def build_c_file(c_file: str, rule: str, dsl_rule: str):
-    # preprocess c_file, but dont expand INCLUDE_ASM or SCRIPT
-    stdout, stderr = await shell(f"{cpp} {CPPFLAGS} '-DINCLUDE_ASM(...)=INCLUDE_ASM(__VA_ARGS__)' '-DSCRIPT(...)=SCRIPT(__VA_ARGS__)' {c_file} -o -")
+    # preprocess c_file, but simply put an _ in front of INCLUDE_ASM and SCRIPT
+    stdout, stderr = await shell(f"{cpp} {CPPFLAGS} '-DINCLUDE_ASM(...)=_INCLUDE_ASM(__VA_ARGS__)' '-DSCRIPT(...)=_SCRIPT(__VA_ARGS__)' {c_file} -o -")
 
-    # search for macro usage
-    uses_dsl = "SCRIPT(" in stdout
+    # search for macro usage (note _ prefix)
+    uses_dsl = "_SCRIPT(" in stdout
 
     s_deps = []
     for line in stdout.splitlines():
-        if line.startswith("INCLUDE_ASM"):
+        if line.startswith("_INCLUDE_ASM"):
             match = INCLUDE_ASM_RE.match(line)
             if match:
                 s_deps.append("asm/nonmatchings/" + eval(match[1]) + "/" + match[2] + ".s")
@@ -93,6 +93,7 @@ async def main():
     num_tasks = len(tasks)
     num_tasks_done = 0
     await asyncio.gather(*tasks)
+    print(" done")
 
 if __name__ == "__main__":
     asyncio.run(main())
