@@ -229,17 +229,17 @@ test: $(ROM)
 # 	$(PYTHON) tools/convert_image.py i8 $< $@ $(IMG_FLAGS)
 
 # Assets
-ASSET_FILES := $(foreach asset, $(ASSETS), $(BUILD_DIR)/bin/assets/$(asset))
-YAY0_ASSET_FILES := $(foreach asset, $(filter-out %_tex, $(ASSET_FILES)), $(asset).Yay0)
-$(BUILD_DIR)/bin/assets/%: bin/assets/%.bin
-	@mkdir -p $(shell dirname $@)
-	@cp $< $@
-$(ASSETS_BIN): $(ASSET_FILES) $(YAY0_ASSET_FILES) sources.mk
-	@mkdir -p $(shell dirname $@)
-	@echo "building $@"
-	@$(PYTHON) tools/build_assets_bin.py $@ $(ASSET_FILES)
-$(ASSETS_BIN:.bin=.o): $(ASSETS_BIN)
-	$(LD) -r -b binary -o $@ $<
+# ASSET_FILES := $(foreach asset, $(ASSETS), $(BUILD_DIR)/bin/assets/$(asset))
+# YAY0_ASSET_FILES := $(foreach asset, $(filter-out %_tex, $(ASSET_FILES)), $(asset).Yay0)
+# $(BUILD_DIR)/bin/assets/%: bin/assets/%.bin
+# 	@mkdir -p $(shell dirname $@)
+# 	@cp $< $@
+# $(ASSETS_BIN): $(ASSET_FILES) $(YAY0_ASSET_FILES) sources.mk
+# 	@mkdir -p $(shell dirname $@)
+# 	@echo "building $@"
+# 	@$(PYTHON) tools/build_assets_bin.py $@ $(ASSET_FILES)
+# $(ASSETS_BIN:.bin=.o): $(ASSETS_BIN)
+# 	$(LD) -r -b binary -o $@ $<
 
 # Messages
 # $(MSG_BIN): $(MESSAGES)
@@ -269,24 +269,24 @@ $(ASSETS_BIN:.bin=.o): $(ASSETS_BIN)
 
 ### Linker ###
 
-$(LD_SCRIPT): $(SPLAT_YAML)
-	$(SPLAT) --modes ld bin Yay0 PaperMarioMapFS PaperMarioMessages img PaperMarioNpcSprites --new
+# $(LD_SCRIPT): $(SPLAT_YAML)
+# 	$(SPLAT) --modes ld bin Yay0 PaperMarioMapFS PaperMarioMessages img PaperMarioNpcSprites --new
 
-$(BUILD_DIR)/$(LD_SCRIPT): $(LD_SCRIPT)
-	@mkdir -p $(shell dirname $@)
-	$(CPP) -P -DBUILD_DIR=$(BUILD_DIR) -o $@ $<
+# $(BUILD_DIR)/$(LD_SCRIPT): $(LD_SCRIPT)
+# 	@mkdir -p $(shell dirname $@)
+# 	$(CPP) -P -DBUILD_DIR=$(BUILD_DIR) -o $@ $<
 
-$(ROM): $(BUILD_DIR)/$(TARGET).bin
-	@cp $< $@
-ifeq ($(COMPARE),1)
-	@sha1sum -c checksum.sha1 || (echo 'The build succeeded, but did not match the base ROM. This is expected if you are making changes to the game. To skip this check, use "make COMPARE=0".' && false)
-endif
+# $(ROM): $(BUILD_DIR)/$(TARGET).bin
+# 	@cp $< $@
+# ifeq ($(COMPARE),1)
+# 	@sha1sum -c checksum.sha1 || (echo 'The build succeeded, but did not match the base ROM. This is expected if you are making changes to the game. To skip this check, use "make COMPARE=0".' && false)
+# endif
 
-$(BUILD_DIR)/$(TARGET).elf: $(BUILD_DIR)/$(LD_SCRIPT) $(OBJECTS)
-	$(LD) $(LDFLAGS) -o $@
+# $(BUILD_DIR)/$(TARGET).elf: $(BUILD_DIR)/$(LD_SCRIPT) $(OBJECTS)
+# 	$(LD) $(LDFLAGS) -o $@
 
-$(BUILD_DIR)/$(TARGET).bin: $(BUILD_DIR)/$(TARGET).elf
-	$(OBJCOPY) $< $@ -O binary
+# $(BUILD_DIR)/$(TARGET).bin: $(BUILD_DIR)/$(TARGET).elf
+# 	$(OBJCOPY) $< $@ -O binary
 
 # include/ld_addrs.h: $(BUILD_DIR)/$(LD_SCRIPT)
 # 	grep -E "[^\. ]+ =" $< -o | sed 's/^/extern void* /; s/ =/;/' > $@
