@@ -17,7 +17,7 @@ def obj(path: str):
         path = "$builddir/" + path
     return path + ".o"
 
-def list_objects(splat_config: str):
+def read_splat(splat_config: str):
     import argparse
     import yaml
     from pathlib import PurePath
@@ -35,15 +35,17 @@ def list_objects(splat_config: str):
     all_segments = initialize_segments(options, splat_config, config["segments"])
 
     objects = set()
+    segments = {}
 
     for segment in all_segments:
         for subdir, path, obj_type, start in segment.get_ld_files():
-            path = PurePath(subdir) / PurePath(path)
-            #path = path.with_suffix(".o" if replace_ext else path.suffix + ".o")
+            path = subdir + "/" + path
 
-            objects.add(str(path))
+            objects.add(path)
+            segments[path] = segment
 
-    return objects
+    # note: `objects` lacks .o extensions
+    return objects, segments
 
 async def shell(cmd: str):
     async with task_sem:
@@ -87,6 +89,22 @@ def build_yay0_file(bin_file: str):
 def build_bin_object(bin_file: str):
     n.build(obj(bin_file), "bin", bin_file)
 
+def build_image(f: str, segment):
+    path, img_type, png = f.rsplit(".", 2)
+    out = "$builddir/" + path + "." + img_type + ".png"
+
+    flags = ""
+    if img_type != "palette":
+        if segment.flip_horizontal:
+            flags += "--flip-x"
+        if segment.flip_vertical:
+            flags += "--flip-y"
+
+    n.build(out, "img", path + ".png", variables={
+        "img_type": img_type,
+        "img_flags": flags,
+    })
+    build_bin_object(out)
 
 async def main():
     global n, cpp, task_sem, num_tasks, num_tasks_done
@@ -146,12 +164,14 @@ async def main():
         description="image $in")
     n.newline()
 
-    objects = list_objects("tools/splat.yaml") # no .o extension!
+    objects, segments = read_splat("tools/splat.yaml") # no .o extension!
     c_files = (f for f in objects if f.endswith(".c")) # glob("src/**/*.c", recursive=True)
 
     # TODO: build elf
 
     for f in objects:
+        segment = segments[f]
+
         if f.endswith(".c"):
             continue # these are handled later
         elif f.endswith(".Yay0"):
@@ -165,12 +185,7 @@ async def main():
         elif f.endswith(".s"):
             n.build(obj(f), "as", f)
         elif f.endswith(".png"):
-            path, img_type, png = f.rsplit(".", 2)
-
-            n.build(obj(f), "img", path + ".png", variables={
-                "img_type": img_type,
-                "img_flags": "", # TODO ask splat? have some other config file for image flags?
-            })
+            build_image(f, segment)
         else:
             print("warning: dont know what to do with object " + f)
     n.newline()
