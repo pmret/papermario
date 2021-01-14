@@ -262,10 +262,10 @@ $(NPC_BIN): $(NPC_YAY0) tools/compile_npc_sprites.py
 	@$(PYTHON) tools/compile_npc_sprites.py $@ $(NPC_YAY0)
 $(NPC_BIN:.bin=.o): $(NPC_BIN)
 	$(LD) -r -b binary -o $@ $<
-include/sprite/npc/%.h: sprite/npc/%/SpriteSheet.xml tools/gen_sprite_animations_h.py
-	@mkdir -p $(shell dirname $@)
-	@echo "building $@"
-	@$(PYTHON) tools/gen_sprite_animations_h.py $@ sprite/npc/$* $(NPC_DIRS)
+# include/sprite/npc/%.h: sprite/npc/%/SpriteSheet.xml tools/gen_sprite_animations_h.py
+# 	@mkdir -p $(shell dirname $@)
+# 	@echo "building $@"
+# 	@$(PYTHON) tools/gen_sprite_animations_h.py $@ sprite/npc/$* $(NPC_DIRS)
 
 
 ### Linker ###

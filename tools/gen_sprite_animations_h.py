@@ -8,14 +8,14 @@ from splat_ext.PaperMarioNpcSprites import Sprite
 
 if __name__ == "__main__":
     if len(argv) < 4:
-        print("usage: gen_sprite_animations_h.py [OUT] [DIR] [ALLDIRS]")
+        print("usage: gen_sprite_animations_h.py [OUT] [DIR] [ID]")
         exit(1)
 
-    _, outfile, sprite_dir, *alldirs = argv
+    _, outfile, sprite_dir, s = argv
 
     with open(outfile, "w") as f:
         # get sprite index
-        s = alldirs.index(sprite_dir) + 1
+        s = int(s)
         assert s >= 1
 
         sprite_dir = Path(sprite_dir)

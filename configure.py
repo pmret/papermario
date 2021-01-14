@@ -14,6 +14,8 @@ import split
 INCLUDE_ASM_RE = re.compile(r"_INCLUDE_ASM\([^,]+, ([^,]+), ([^,)]+)") # note _ prefix
 CPPFLAGS = "-Iinclude -Isrc -D _LANGUAGE_C -D _FINALROM -ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32"
 
+NPC_SPRITES = "world_goombario world_kooper world_bombette world_parakarry world_bow world_watt world_sushie world_lakilester battle_goombario battle_kooper battle_bombette battle_parakarry battle_bow battle_watt battle_sushie battle_lakilester kooper_without_shell world_eldstar world_mamar world_skolar world_muskular world_misstar world_klevar world_kalmar battle_eldstar battle_mamar battle_skolar battle_muskular battle_misstar battle_klevar battle_kalmar twink jr_troopa spiked_jr_troopa spiked_para_jr_troopa mage_jr_troopa para_jr_troopa goomba spiked_goomba paragoomba koopa_troopa para_troopa fuzzy bob_omb bullet_bill bill_blaster monty_mole cleft pokey battle_bandit buzzy_beetle swooper stone_chomp putrid_piranha piranha_plant sentinel world_clubba battle_clubba shy_guy groove_guy sky_guy pyro_guy spy_guy medi_guy fuzzipede jungle_guy heart_plant hurt_plant m_bush bubble kent_c_koopa dayzee lakitu spiny bzzap ruff_puff spike_top duplighost albino_dino blooper baby_blooper gulpit dry_bones thrown_bone bony_beetle magikoopa flying_magikoopa world_koopatrol koopatrol hammer_bros bush_basic bush_blocky bush_dry bush_leafy bush_matted world_kammy battle_kammy goomba_bros goomba_king spiky_goomnut dark_toad koopa_bros buzzar tutankoopa chain_chomp world_tubba battle_tubba tubbas_heart big_lantern_ghost shy_squad_guy marshal_guy stilt_guy stilt_guy_unfold shy_stack_guy shy_stack_unfold shy_stack_damage shy_stack_rock general_guy general_guy_bomb tank_guy lava_piranha_head petit_piranha lava_bud huff_n_puff tuff_puff monstar crystal_king world_bowser battle_bowser luigi toad three_sisters vanna_t toad_kid toad_guard harry_t toad_minister postmaster conductor_toad train_station_toad fishmael artist_toad koopa koopa_without_shell world_bob_omb whacka dryite mouser boo yoshi yoshi_kid raven bubulb penguin shiver_toad world_bandit goompa goombaria gooma goompapa goomama the_master chan lee merlon chet_rippo rowf minh_t russ_t tayce_t fice_t bartender chanterelle rip_cheato chuck_quizmo merluvlee merlar merlow star_kid kolorado_wife koopa_koot kolorado battle_kolorado archeologist nomadimouse world_merlee battle_merlee disguised_moustafa moustafa oaklie bootler yakkey gourmet_guy village_leader leaders_friend rafael_raven tolielup gate_flower petunia posie lily rosie sun lakilulu ninji mayor_penguin mayor_penguin_wife penguin_patrol herringway merle star_rod fire coin parade_peach parade_koopas parade_burnt_bowser parade_luigi parade_partners parade_yoshis parade_kolorados parade_chicks parade_ice_show parade_toads parade_batons parade_drums parade_flags parade_horns parade_tubba_balloon parade_wizards parade_mario parade_shy_guys parade_twink leaf".split(" ")
+
 def obj(path: str):
     if not path.startswith("$builddir/"):
         path = "$builddir/" + path
@@ -63,7 +65,7 @@ async def task(coro):
     num_tasks_done += 1
     print(f"\r{(num_tasks_done / num_tasks) * 100:.0f}%", end="")
 
-async def build_c_file(c_file: str):
+async def build_c_file(c_file: str, generated_headers):
     # preprocess c_file, but simply put an _ in front of INCLUDE_ASM and SCRIPT
     stdout, stderr = await shell(f"{cpp} {CPPFLAGS} '-DINCLUDE_ASM(...)=_INCLUDE_ASM(__VA_ARGS__)' '-DSCRIPT(...)=_SCRIPT(__VA_ARGS__)' {c_file} -o -")
 
@@ -78,7 +80,7 @@ async def build_c_file(c_file: str):
                 s_deps.append("asm/nonmatchings/" + eval(match[1]) + "/" + match[2] + ".s")
 
     # add build task to ninja
-    n.build(obj(c_file), "cc_dsl" if uses_dsl else "cc", c_file, implicit=s_deps)
+    n.build(obj(c_file), "cc_dsl" if uses_dsl else "cc", c_file, implicit=s_deps, order_only=generated_headers)
 
 def build_yay0_file(bin_file: str):
     yay0_file = f"$builddir/{os.path.splitext(bin_file)[0]}.Yay0"
@@ -169,9 +171,16 @@ async def main():
         description="assemble $in")
     n.newline()
 
+    # $img_type, $img_flags
     n.rule("img",
         command="$python tools/convert_image.py $img_type $in $out $img_flags",
         description="image $in")
+    n.newline()
+
+    # $sprite_id
+    n.rule("sprite_animations_h",
+        command="$python tools/gen_sprite_animations_h.py $out $sprite_dir $sprite_id",
+        description="sprite_animations_h $in")
     n.newline()
 
     objects, segments = read_splat("tools/splat.yaml") # no .o extension!
@@ -179,6 +188,33 @@ async def main():
 
     # TODO: build elf
 
+    # generated headers
+    n.comment("generated headers")
+    generated_headers = []
+
+    def add_generated_header(h: str):
+        if not os.path.exists(h):
+            # mkdir -p
+            os.makedirs(os.path.dirname(h), exist_ok=True)
+
+            # touch it so cpp doesn't complain if its #included
+            open(h, "w").close()
+
+            # mark it as really old so ninja builds it
+            os.utime(h, (0, 0))
+
+    for sprite_id, sprite_name in enumerate(NPC_SPRITES, 1):
+        h = f"include/sprite/npc/{sprite_name}.h"
+        n.build(h, "sprite_animations_h", glob(f"sprite/npc/{sprite_name}/**/*.*", recursive=True), variables={
+            "sprite_dir": f"sprite/npc/{sprite_name}",
+            "sprite_id": sprite_id,
+        })
+        add_generated_header(h)
+
+    n.newline()
+
+    # fast tasks
+    n.comment("data")
     for f in objects:
         segment = segments[f]
 
@@ -200,11 +236,9 @@ async def main():
             print("warning: dont know what to do with object " + f)
     n.newline()
 
-    # build slow tasks concurrently
+    # slow tasks generated concurrently
     n.comment("c")
-    tasks = [
-        *(task(build_c_file(f)) for f in c_files),
-    ]
+    tasks = [task(build_c_file(f, generated_headers)) for f in c_files]
     num_tasks = len(tasks)
     num_tasks_done = 0
     await asyncio.gather(*tasks)
