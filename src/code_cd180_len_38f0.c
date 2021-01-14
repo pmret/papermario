@@ -32,11 +32,3 @@ INCLUDE_ASM(s32, "code_cd180_len_38f0", set_map_transition_effect);
 INCLUDE_ASM(s32, "code_cd180_len_38f0", func_801382AC);
 
 INCLUDE_ASM(s32, "code_cd180_len_38f0", func_801385D4);
-
-INCLUDE_ASM(s32, "code_cd180_len_38f0", func_80138740);
-
-INCLUDE_ASM(s32, "code_cd180_len_38f0", func_80138D88);
-
-INCLUDE_ASM(s32, "code_cd180_len_38f0", func_80138E54);
-
-INCLUDE_ASM(s32, "code_cd180_len_38f0", func_80139F10);

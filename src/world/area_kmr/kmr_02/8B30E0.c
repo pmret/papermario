@@ -19,11 +19,3 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B30E0", func_80243284_8B32F4);
 #include "world/common/GetPartnerCall800EB168.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B30E0", func_80243364_8B33D4);
-
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B30E0", func_80243370_8B33E0);
-
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B30E0", func_802433AC_8B341C);
-
-#include "world/common/GetEntityPosition.inc.c"
-
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B30E0", func_80243514_8B3584);
