@@ -196,38 +196,38 @@ test: $(ROM)
 # 	$(AS) $(ASFLAGS) -o $@ $<
 
 # Images
-$(BUILD_DIR)/%.png.o: $(BUILD_DIR)/%.png
-	$(LD) -r -b binary -o $@ $<
-$(BUILD_DIR)/%.rgba16.png: %.png
-	@mkdir -p $(shell dirname $@)
-	$(PYTHON) tools/convert_image.py rgba16 $< $@ $(IMG_FLAGS)
-$(BUILD_DIR)/%.rgba32.png: %.png
-	@mkdir -p $(shell dirname $@)
-	$(PYTHON) tools/convert_image.py rgba32 $< $@ $(IMG_FLAGS)
-$(BUILD_DIR)/%.ci8.png: %.png
-	@mkdir -p $(shell dirname $@)
-	$(PYTHON) tools/convert_image.py ci8 $< $@ $(IMG_FLAGS)
-$(BUILD_DIR)/%.ci4.png: %.png
-	@mkdir -p $(shell dirname $@)
-	$(PYTHON) tools/convert_image.py ci4 $< $@ $(IMG_FLAGS)
-$(BUILD_DIR)/%.palette.png: %.png
-	@mkdir -p $(shell dirname $@)
-	$(PYTHON) tools/convert_image.py palette $< $@ $(IMG_FLAGS)
-$(BUILD_DIR)/%.ia4.png: %.png
-	@mkdir -p $(shell dirname $@)
-	$(PYTHON) tools/convert_image.py ia4 $< $@ $(IMG_FLAGS)
-$(BUILD_DIR)/%.ia8.png: %.png
-	@mkdir -p $(shell dirname $@)
-	$(PYTHON) tools/convert_image.py ia8 $< $@ $(IMG_FLAGS)
-$(BUILD_DIR)/%.ia16.png: %.png
-	@mkdir -p $(shell dirname $@)
-	$(PYTHON) tools/convert_image.py ia16 $< $@ $(IMG_FLAGS)
-$(BUILD_DIR)/%.i4.png: %.png
-	@mkdir -p $(shell dirname $@)
-	$(PYTHON) tools/convert_image.py i4 $< $@ $(IMG_FLAGS)
-$(BUILD_DIR)/%.i8.png: %.png
-	@mkdir -p $(shell dirname $@)
-	$(PYTHON) tools/convert_image.py i8 $< $@ $(IMG_FLAGS)
+# $(BUILD_DIR)/%.png.o: $(BUILD_DIR)/%.png
+# 	$(LD) -r -b binary -o $@ $<
+# $(BUILD_DIR)/%.rgba16.png: %.png
+# 	@mkdir -p $(shell dirname $@)
+# 	$(PYTHON) tools/convert_image.py rgba16 $< $@ $(IMG_FLAGS)
+# $(BUILD_DIR)/%.rgba32.png: %.png
+# 	@mkdir -p $(shell dirname $@)
+# 	$(PYTHON) tools/convert_image.py rgba32 $< $@ $(IMG_FLAGS)
+# $(BUILD_DIR)/%.ci8.png: %.png
+# 	@mkdir -p $(shell dirname $@)
+# 	$(PYTHON) tools/convert_image.py ci8 $< $@ $(IMG_FLAGS)
+# $(BUILD_DIR)/%.ci4.png: %.png
+# 	@mkdir -p $(shell dirname $@)
+# 	$(PYTHON) tools/convert_image.py ci4 $< $@ $(IMG_FLAGS)
+# $(BUILD_DIR)/%.palette.png: %.png
+# 	@mkdir -p $(shell dirname $@)
+# 	$(PYTHON) tools/convert_image.py palette $< $@ $(IMG_FLAGS)
+# $(BUILD_DIR)/%.ia4.png: %.png
+# 	@mkdir -p $(shell dirname $@)
+# 	$(PYTHON) tools/convert_image.py ia4 $< $@ $(IMG_FLAGS)
+# $(BUILD_DIR)/%.ia8.png: %.png
+# 	@mkdir -p $(shell dirname $@)
+# 	$(PYTHON) tools/convert_image.py ia8 $< $@ $(IMG_FLAGS)
+# $(BUILD_DIR)/%.ia16.png: %.png
+# 	@mkdir -p $(shell dirname $@)
+# 	$(PYTHON) tools/convert_image.py ia16 $< $@ $(IMG_FLAGS)
+# $(BUILD_DIR)/%.i4.png: %.png
+# 	@mkdir -p $(shell dirname $@)
+# 	$(PYTHON) tools/convert_image.py i4 $< $@ $(IMG_FLAGS)
+# $(BUILD_DIR)/%.i8.png: %.png
+# 	@mkdir -p $(shell dirname $@)
+# 	$(PYTHON) tools/convert_image.py i8 $< $@ $(IMG_FLAGS)
 
 # Assets
 ASSET_FILES := $(foreach asset, $(ASSETS), $(BUILD_DIR)/bin/assets/$(asset))
