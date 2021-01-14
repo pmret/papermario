@@ -4,3 +4,4 @@ lark-parser
 python-ranges
 pypng
 colorama
+ninja_syntax
