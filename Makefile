@@ -181,19 +181,19 @@ test: $(ROM)
 # 	$(CPP) $(CPPFLAGS) -o - $< $(CPPMFLAGS) | $(PYTHON) tools/compile_dsl_macros.py | $(ICONV) | $(CC) $(CFLAGS) -o - | $(OLD_AS) $(OLDASFLAGS) -o $@ -
 
 # Assemble handwritten ASM
-$(BUILD_DIR)/%.s.o: %.s
-	@mkdir -p $(shell dirname $@)
-	$(AS) $(ASFLAGS) -o $@ $<
+# $(BUILD_DIR)/%.s.o: %.s
+# 	@mkdir -p $(shell dirname $@)
+# 	$(AS) $(ASFLAGS) -o $@ $<
 
-# Data
-$(BUILD_DIR)/data/%.data.o: asm/data/%.data.s
-	@mkdir -p $(shell dirname $@)
-	$(AS) $(ASFLAGS) -o $@ $<
+# # Data
+# $(BUILD_DIR)/data/%.data.o: asm/data/%.data.s
+# 	@mkdir -p $(shell dirname $@)
+# 	$(AS) $(ASFLAGS) -o $@ $<
 
-# Rodata
-$(BUILD_DIR)/rodata/%.rodata.o: asm/data/%.rodata.s
-	@mkdir -p $(shell dirname $@)
-	$(AS) $(ASFLAGS) -o $@ $<
+# # Rodata
+# $(BUILD_DIR)/rodata/%.rodata.o: asm/data/%.rodata.s
+# 	@mkdir -p $(shell dirname $@)
+# 	$(AS) $(ASFLAGS) -o $@ $<
 
 # Images
 $(BUILD_DIR)/%.png.o: $(BUILD_DIR)/%.png

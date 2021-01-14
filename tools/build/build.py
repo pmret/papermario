@@ -87,6 +87,7 @@ def build_yay0_file(bin_file: str):
 def build_bin_object(bin_file: str):
     n.build(obj(bin_file), "bin", bin_file)
 
+
 async def main():
     global n, cpp, task_sem, num_tasks, num_tasks_done
 
@@ -100,7 +101,7 @@ async def main():
         exit(1)
 
     cpp = args.cpp or "cpp"
-    task_sem = asyncio.Semaphore(8) # TODO: args.j
+    task_sem = asyncio.Semaphore(8)
 
     n = ninja_syntax.Writer(open("build.ninja", "w"), width=120)
 
@@ -135,22 +136,31 @@ async def main():
         description="bin $in")
     n.newline()
 
-    objects = list_objects("tools/splat.yaml") # no .o extension!
+    n.rule("as",
+        command="${cross}as -EB -march=vr4300 -mtune=vr4300 -Iinclude $in -o $out",
+        description="assemble $in")
+    n.newline()
 
+    objects = list_objects("tools/splat.yaml") # no .o extension!
     c_files = (f for f in objects if f.endswith(".c")) # glob("src/**/*.c", recursive=True)
-    yay0_files = (os.path.splitext(f)[0] + ".bin" for f in objects if f.endswith(".Yay0"))
-    bin_files = (f for f in objects if f.endswith(".bin"))
 
     # TODO: build elf
 
-    n.comment("bin")
-    for f in bin_files:
-        build_bin_object(f)
-    n.newline()
-
-    n.comment("yay0")
-    for f in yay0_files:
-        build_yay0_file(f)
+    for f in objects:
+        if f.endswith(".c"):
+            continue # these are handled later
+        elif f.endswith(".Yay0"):
+            build_yay0_file(os.path.splitext(f)[0] + ".bin")
+        elif f.endswith(".bin"):
+            build_bin_object(f)
+        elif f.endswith(".data"):
+            n.build(obj(f), "as", "asm/" + f + ".s")
+        elif f.endswith(".rodata"):
+            n.build(obj(f), "as", "asm/" + f[2:] + ".s")
+        elif f.endswith(".s"):
+            n.build(obj(f), "as", f)
+        else:
+            print("warning: dont know what to do with object " + f)
     n.newline()
 
     # build slow tasks concurrently
