@@ -77,4 +77,6 @@
 #define _NS(x, y) x ## _ ## y
 #define NS(x, y) _NS(x, y)
 
+#define ASCII_TO_U32(a, b, c, d) ((u32)((a << 24) | (b << 16) | (c << 8) | (d << 0)))
+
 #endif

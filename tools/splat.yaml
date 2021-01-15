@@ -2285,7 +2285,7 @@ segments:
     overlay: True
     files:
     - [0x7345A0, c]
-    - [0x734640, bin]
+    - [0x734650, bin]
   - type: code
     start: 0x737890
     vram: 0x802A1000
