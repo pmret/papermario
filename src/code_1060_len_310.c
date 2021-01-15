@@ -4,9 +4,10 @@ u32 func_80025D74(void* arg0, const unsigned char* str, s32 count);
 
 void func_80025C60(void) {
     OSPiHandle** handle = &carthandle;
+
     osEPiWriteIo(*handle, 0xB3FF0014, 0);
     osEPiWriteIo(*handle, 0xB3FF0004, 0);
-    osEPiWriteIo(*handle, 0xB3FF0000, 0x49533634);
+    osEPiWriteIo(*handle, 0xB3FF0000, ASCII_TO_U32('I', 'S', '6', '4'));
 }
 
 void func_80025CC0(const char* fmt, ...) {
