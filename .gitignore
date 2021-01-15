@@ -9,7 +9,6 @@ venv/
 .DS_Store
 ctx.c
 expected/
-settings.mk
 .vscode/launch.json
 
 # Build artifacts
@@ -17,6 +16,7 @@ build.ninja
 *.ld
 *.z64
 *.Yay0
+*.msg.h
 /build/
 /docs/doxygen/
 /include/ld_addrs.h
