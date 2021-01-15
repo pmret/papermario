@@ -37,7 +37,7 @@ ninja
 
 If you get `papermario.z64: OK` at the end, the build succeeded!
 
-The output ROM is `papermario.z64` - you can run this in an emulator such as Project64.
+The output ROM is `papermario.z64` - you can run this in any N64 emulator.
 
 
 ## WSL 2
@@ -47,7 +47,7 @@ The output ROM is `papermario.z64` - you can run this in an emulator such as Pro
 3. Run the following command: `sudo apt update && sudo apt upgrade && cd ~`
 4. Continue with [the instructions for Linux](#unix)
 
-If you have Visual Studio Code, you can type code . to open the repo within it.
+If you have Visual Studio Code, you can type `code .` to open the repo within it.
 `Ctrl + J` opens up a Linux terminal within VS Code.
 
 
