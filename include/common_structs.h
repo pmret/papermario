@@ -477,7 +477,9 @@ typedef struct Camera {
     /* 0x084 */ f32 trueRotation[3];
     /* 0x090 */ f32 currentBlendedYawNegated;
     /* 0x094 */ f32 currentPitch;
-    /* 0x098 */ char unk_98[60];
+    /* 0x098 */ char unk_98[8];
+    /* 0x0A0 */ Vp viewport;
+    /* 0x0B0 */ char unk_B0[0x24];
     /* 0x0D4 */ struct Matrix4f perspectiveMatrix;
     /* 0x114 */ struct Matrix4f viewMtxPlayer; /* centers on player */
     /* 0x154 */ struct Matrix4f viewMtxLeading; /* leads player slightly */
@@ -779,7 +781,7 @@ typedef struct StaticItem {
 typedef struct EffectInstance {
     /* 0x00 */ s32 flags;
     /* 0x04 */ s32 effectIndex;
-    /* 0x08 */ char unk_08[4];
+    /* 0x08 */ s32 totalMatricies;
     /* 0x0C */ void* unk_0C;
     /* 0x10 */ struct Effect* effect;
 } EffectInstance;
@@ -805,14 +807,13 @@ typedef struct Effect {
 } Effect; // size = 0x20
 
 typedef struct EffectTableEntry {
-    /* 0x00 */ UNK_FUN_PTR(entryPoint);
+    /* 0x00 */ void (*entryPoint)(s32 arg0, s32 arg1, s32 arg2, s32 arg3, f32 x, f32 y, f32 z);
     /* 0x04 */ void* dmaStart;
     /* 0x08 */ void* dmaEnd;
     /* 0x0C */ void* dmaDest;
     /* 0x10 */ void* unkStartRom;
     /* 0x14 */ void* unkEndRom;
 } EffectTableEntry; // size = 0x18
-
 
 typedef struct ItemEntity {
     /* 0x00 */ s32 flags;
@@ -953,7 +954,8 @@ typedef struct GameStatus {
     /* 0x08A */ s16 changedArea; /* (1 = yes) */
     /* 0x08C */ s16 mapID;
     /* 0x08E */ s16 entryID;
-    /* 0x090 */ char unk_90[4];
+    /* 0x090 */ u16 unk_90;
+    /* 0x092 */ u16 unk_92;
     /* 0x094 */ f32 exitAngle;
     /* 0x098 */ Vec3f playerPos;
     /* 0x0A4 */ f32 playerYaw;
@@ -1630,6 +1632,11 @@ typedef struct {
 
 // BEGIN ENTITY-SPECIFIC STRUCTS
 
+typedef struct struct802E2BA4 {
+    /* 0x00 */ char unk_00[2];
+    /* 0x02 */ u16 unk_02[24][2];
+} struct802E2BA4;
+
 // from code_102c80, size unknown.
 typedef struct struct802E1400 {
     /* 0x000 */ Vec3f unk_00;
@@ -1639,10 +1646,25 @@ typedef struct struct802E1400 {
     /* 0x014 */ Vec3f unk_14;
     /* 0x020 */ u16 unk_20;
     /* 0x022 */ s16 unk_22;
-    /* 0x024 */ char unk_24[4];
+    /* 0x024 */ s16 unk_24;
     /* 0x028 */ Entity* attachedEntity;
-    /* 0x02C */ char unk_2C[12];
+    /* 0x02C */ char unk_2C[8];
+    /* 0x034 */ struct802E2BA4* unk_34;
     /* 0x038 */ f32 unk_38;
+    /* 0x03C */ union {
+    /*       */     s16 s;
+    /*       */     s8 b[2];
+    /*       */ } unk_3C;
+    /* 0x03E */ char unk_3E[0x4D];
+    /* 0x08B */ u8 unk_8B[24];
+    /* 0x0A3 */ char unk_A3; // padding?
+    /* 0x0A4 */ u8 unk_A4[24];
+    /* 0x0BC */ char unk_BC[4];
+    /* 0x0C0 */ f32 unk_C0[24];
+    /* 0x120 */ char unk_120[4];
+    /* 0x124 */ f32 unk_124[24];
+    /* 0x184 */ char unk_184[4];
+    /* 0x188 */ f32 unk_188[24];
 } struct802E1400;
 
 // from code_104940_len_dc0, size unknown

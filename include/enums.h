@@ -782,7 +782,7 @@ typedef UNK_TYPE Phase;
 #define Phase_MERLEE_EXP_BONUS     0x00000016
 #define Phase_PLAYER_HAPPY         0x0000001E
 
-typedef UNK_TYPE ActorID;
+typedef s32 ActorID;
 #define ActorID_SELF    0xFFFFFF81
 #define ActorID_PLAYER  0x00000000
 #define ActorID_PARTNER 0x00000100

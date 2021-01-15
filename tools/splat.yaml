@@ -63,7 +63,8 @@ segments:
     - [0x2e230, c, code_2e230_len_2190]
     - [0x303c0, c, code_303c0_len_3e10]
     - [0x31650, c, code_31650]
-    - [0x341d0, c, world/world]
+    - [0x341d0, c, code_341d0]
+    - [0x35ac0, c, world/world]
     - [0x362a0, c, code_362a0_len_2f70]
     - [0x39210, c, code_39210_len_aa0]
     - [0x39cb0, c, os/code_39cb0_len_100]
@@ -214,7 +215,8 @@ segments:
     - [0x6EAC0, data] # has scripts
     - [0x70E30, .data, battle/battle]
     - [0x71430, data]
-    - [0x73130, rodata]
+    - [0x73130, .rodata, code_1060_len_310]
+    - [0x73148, rodata]
     - [0x73DA0, .rodata, world/world]
     - [0x74EA0, rodata]
     - [0x75240, .rodata, battle/battle] # ram 80099E40

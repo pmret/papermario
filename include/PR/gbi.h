@@ -1361,7 +1361,7 @@ typedef struct {
 
 typedef union {
     Light_t	l;
-    long long int	force_structure_alignment[2];
+    //long long int	force_structure_alignment[2];
 } Light;
 
 typedef union {
