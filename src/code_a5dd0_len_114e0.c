@@ -328,29 +328,27 @@ INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8011C80C);
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8011CFBC);
 
-//INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8011D72C);
 void func_8011D72C(Gfx** arg0, s32 treeIndex) {
     Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(treeIndex & 0xFFFF));
     Model copied = *model;
-    Gfx** oldGfxPos;
+    Gfx** gfxPos = &gMasterGfxPos;
+    Gfx* oldGfxPos;
     s32 flag;
-    Gfx* new_var2;
-    Gfx* new_var;
 
-    *oldGfxPos = &gMasterGfxPos;
-
-    if (*arg0 == *oldGfxPos) {
+    if (*arg0 == *gfxPos) {
         flag = 1;
     }
-    new_var = *arg0;
+
+    oldGfxPos = *gfxPos;
+    *gfxPos = *arg0;
 
     copied.flags = 0x81;
     appendGfx_model(&copied);
-    new_var2 = *oldGfxPos;
 
-    *arg0 = new_var;
+    *arg0 = *gfxPos;
+
     if (flag == 0) {
-        *arg0 = new_var2;
+        *gfxPos = oldGfxPos;
     }
 }
 
