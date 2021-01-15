@@ -34,4 +34,5 @@ build.ninja
 /sprite/SpriteTable.xml
 /mod.cfg
 
-tools/Yay0compress
+/tools/Yay0compress
+/tools/n64crc

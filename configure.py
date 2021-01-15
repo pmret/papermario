@@ -284,7 +284,7 @@ async def main():
     n.comment("target")
     n.build("$builddir/$target.ld", "cpp", "$target.ld")
     n.build("$builddir/$target.elf", "link", "$builddir/$target.ld", implicit=[obj(o) for o in objects], implicit_outputs="$builddir/$target.map")
-    n.build("$target.z64", "rom", "$builddir/$target.elf")
+    n.build("$target.z64", "rom", "$builddir/$target.elf", implicit="tools/n64crc")
     n.build("compare", "sha1sum", "checksum.sha1", implicit="$target.z64")
     n.newline()
 
@@ -426,7 +426,9 @@ async def main():
     print("")
     n.newline()
 
+    # c tools that need to be compiled
     n.build("tools/Yay0compress", "cc_modern_exe", "tools/Yay0compress.c")
+    n.build("tools/n64crc", "cc_modern_exe", "tools/n64crc.c")
     n.newline()
 
     print("")
