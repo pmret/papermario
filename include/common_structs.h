@@ -792,7 +792,7 @@ typedef struct EffectBlueprint {
     /* 0x08 */ void (*init)(EffectInstance* effectInst);
     /* 0x0C */ void (*update)(EffectInstance* effectInst);
     /* 0x10 */ void (*renderWorld)(EffectInstance* effectInst);
-    /* 0x14 */ void (*unk_14)(EffectInstance* effectInst); 
+    /* 0x14 */ void (*unk_14)(EffectInstance* effectInst);
 } EffectBlueprint; // size = 0x18
 
 typedef struct Effect {
@@ -802,7 +802,7 @@ typedef struct Effect {
     /* 0x0C */ s32 unk_0C;
     /* 0x10 */ void (*update)(EffectInstance* effectInst);
     /* 0x14 */ void (*renderWorld)(EffectInstance* effectInst);
-    /* 0x18 */ void (*unk_18)(EffectInstance* effectInst); 
+    /* 0x18 */ void (*unk_18)(EffectInstance* effectInst);
     /* 0x1C */ void* unk_1C;
 } Effect; // size = 0x20
 
@@ -1652,9 +1652,10 @@ typedef struct struct802E1400 {
     /* 0x034 */ struct802E2BA4* unk_34;
     /* 0x038 */ f32 unk_38;
     /* 0x03C */ union {
-    /*       */     s16 s;
-    /*       */     s8 b[2];
-    /*       */ } unk_3C;
+        /*       */     s16 s;
+        /*       */     s8 b[2];
+        /*       */
+    } unk_3C;
     /* 0x03E */ char unk_3E[0x4D];
     /* 0x08B */ u8 unk_8B[24];
     /* 0x0A3 */ char unk_A3; // padding?

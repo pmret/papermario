@@ -111,7 +111,7 @@ ApiStatus si_handle_sleep_seconds(ScriptInstance* script) {
     if (script->functionTemp[0].s == 0) {
         return ApiStatus_DONE2;
     }
-    
+
     script->functionTemp[0].s -= 1;
     return !script->functionTemp[0].s;
 }

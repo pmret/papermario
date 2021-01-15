@@ -65,7 +65,7 @@
 #ifdef _ANSI_STDARG_H_
 #define _VA_LIST_
 #endif
-#define _ANSI_STDARG_H_ 
+#define _ANSI_STDARG_H_
 
 #undef va_alist
 #undef va_dcl
@@ -97,15 +97,15 @@
 #ifndef __GNUC_VA_LIST
 #define __GNUC_VA_LIST
 #if defined(__svr4__) || defined(_AIX) || defined(_M_UNIX)
-typedef char *__gnuc_va_list;
+typedef char* __gnuc_va_list;
 #else
-typedef void *__gnuc_va_list;
+typedef void* __gnuc_va_list;
 #endif
 #endif
 
 #define va_start(AP)  AP=(char *) &__builtin_va_alist
 
-#define va_end(AP)	((void)0)
+#define va_end(AP)  ((void)0)
 
 #if defined(sysV68)
 #define __va_rounded_size(TYPE)  \
@@ -117,16 +117,16 @@ typedef void *__gnuc_va_list;
 
 #if (defined (__arm__) && ! defined (__ARMEB__)) || defined (__i386__) || defined (__i860__) || defined (__ns32000__) || defined (__vax__)
 /* This is for little-endian machines; small args are padded upward.  */
-#define va_arg(AP, TYPE)						\
- (AP = (__gnuc_va_list) ((char *) (AP) + __va_rounded_size (TYPE)),	\
+#define va_arg(AP, TYPE)                        \
+ (AP = (__gnuc_va_list) ((char *) (AP) + __va_rounded_size (TYPE)), \
   *((TYPE *) (void *) ((char *) (AP) - __va_rounded_size (TYPE))))
 #else /* big-endian */
 /* This is for big-endian machines; small args are padded downward.  */
-#define va_arg(AP, TYPE)						\
- (AP = (__gnuc_va_list) ((char *) (AP) + __va_rounded_size (TYPE)),	\
-  *((TYPE *) (void *) ((char *) (AP)					\
-		       - ((sizeof (TYPE) < __va_rounded_size (char)	\
-			   ? sizeof (TYPE) : __va_rounded_size (TYPE))))))
+#define va_arg(AP, TYPE)                        \
+ (AP = (__gnuc_va_list) ((char *) (AP) + __va_rounded_size (TYPE)), \
+  *((TYPE *) (void *) ((char *) (AP)                    \
+               - ((sizeof (TYPE) < __va_rounded_size (char) \
+               ? sizeof (TYPE) : __va_rounded_size (TYPE))))))
 #endif /* big-endian */
 
 /* Copy __gnuc_va_list into another variable of this type.  */

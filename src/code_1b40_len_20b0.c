@@ -39,7 +39,7 @@ INCLUDE_ASM(s32, "code_1b40_len_20b0", gfx_draw_frame);
 
 #ifdef NON_MATCHING
 void load_engine_data(void) {
-    GameStatus *phi_s0;
+    GameStatus* phi_s0;
     s32 i;
 
     dma_copy(D_000FEE30, D_000FEE30_end, D_802DBD40);
@@ -98,8 +98,7 @@ void load_engine_data(void) {
     poll_rumble();
 
     phi_s0 = GAME_STATUS;
-    for(i = 0; i < 4; i++)
-    {
+    for (i = 0; i < 4; i++) {
         phi_s0->unk_50[i] = 3;
         phi_s0->unk_48[i] = 0xC;
     }

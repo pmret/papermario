@@ -41,13 +41,13 @@ s32 render_effects(void) {
     s32 i;
 
     curEffectInst = &D_800B4398[0];
-    for(i = 0; i < ARRAY_COUNT(D_800B4398); i++) {
+    for (i = 0; i < ARRAY_COUNT(D_800B4398); i++) {
         if ((curEffectInst[i] != NULL) && ((curEffectInst[i]->flags & 1) != 0) && ((curEffectInst[i]->flags & 8) != 0)) {
-            if(GAME_STATUS->isBattle) {
-                if((curEffectInst[i]->flags & 4) != 0) {
+            if (GAME_STATUS->isBattle) {
+                if ((curEffectInst[i]->flags & 4) != 0) {
                     curEffectInst[i]->effect->renderWorld(curEffectInst[i]);
                 }
-            } else if((curEffectInst[i]->flags & 4) == 0) {
+            } else if ((curEffectInst[i]->flags & 4) == 0) {
                 curEffectInst[i]->effect->renderWorld(curEffectInst[i]);
             }
         }
@@ -57,13 +57,13 @@ s32 render_effects(void) {
 INCLUDE_ASM(s32, "code_341d0", func_80059F94);
 
 EffectInstance* func_8005A2BC(EffectBlueprint* effectBp) {
-    EffectInstance *newEffectInst;
+    EffectInstance* newEffectInst;
     Effect* curEffect;
     s32 i;
     EffectInstance** temp = &D_800B4398[0];
 
     // Search for an unused instance
-    for(i = 0; i < ARRAY_COUNT(D_800B4398); i++) {
+    for (i = 0; i < ARRAY_COUNT(D_800B4398); i++) {
         if (temp[i] == NULL) {
             break;
         }
@@ -80,7 +80,7 @@ EffectInstance* func_8005A2BC(EffectBlueprint* effectBp) {
     newEffectInst->flags = 1;
 
     // Look for a loaded effect of the proper index
-    for(i = 0; i < ARRAY_COUNT(D_800A4000); i++) {
+    for (i = 0; i < ARRAY_COUNT(D_800A4000); i++) {
         if ((curEffect->flags & EFFECT_LOADED) && (curEffect->effectIndex == effectBp->effectIndex)) {
             break;
         }
@@ -124,7 +124,7 @@ void remove_effect(EffectInstance* arg0) {
     s32 i;
     EffectInstance** temp = &D_800B4398[0];
 
-    for(i = 0; i < ARRAY_COUNT(D_800B4398); i++) {
+    for (i = 0; i < ARRAY_COUNT(D_800B4398); i++) {
         if (temp[i] == arg0) {
             break;
         }
@@ -147,10 +147,10 @@ void remove_all_effects(void) {
     s32 i;
     EffectInstance** temp = &D_800B4398[0];
 
-    for(i = 0; i < ARRAY_COUNT(D_800B4398); i++) {
+    for (i = 0; i < ARRAY_COUNT(D_800B4398); i++) {
         EffectInstance* temp2 = temp[i];
         if (temp2 != NULL && temp2->flags & 4) {
-            if(temp2->unk_0C != NULL) {
+            if (temp2->unk_0C != NULL) {
                 general_heap_free(temp2->unk_0C);
             }
             general_heap_free(temp2);
@@ -166,7 +166,7 @@ extern TlbMappablePage D_80197000;
 extern EffectTableEntry D_8007F210[135];
 
 s32 play_effect(s32 effectIndex) {
-    
+
     EffectTableEntry* effectTable = &D_8007F210[0];
     EffectTableEntry* effectEntry;
     Effect* curEffect;
@@ -176,7 +176,7 @@ s32 play_effect(s32 effectIndex) {
     effectEntry = &effectTable[effectIndex];
 
     // Look for a loaded effect matching the desired index
-    for(i = 0, curEffect = &D_800A4000[0]; i < ARRAY_COUNT(D_800A4000); i++) {
+    for (i = 0, curEffect = &D_800A4000[0]; i < ARRAY_COUNT(D_800A4000); i++) {
         if ((curEffect->flags & EFFECT_LOADED) && (curEffect->effectIndex == effectIndex)) {
             break;
         }
@@ -192,7 +192,7 @@ s32 play_effect(s32 effectIndex) {
     }
 
     // If a loaded effect wasn't found, look for the first empty space
-    for(i = 0, curEffect = &D_800A4000[0]; i < ARRAY_COUNT(D_800A4000); i++) {
+    for (i = 0, curEffect = &D_800A4000[0]; i < ARRAY_COUNT(D_800A4000); i++) {
         if (!(curEffect->flags & EFFECT_LOADED)) {
             break;
         }

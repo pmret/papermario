@@ -200,12 +200,12 @@ extern s32 D_802E9E80;
 
 #ifdef NON_MATCHING
 s32 func_802E3BA4(Entity* entity) {
-  u8 bVar1;
-  s32 bVar2;
-  s32 iVar3;
-  s32 uVar4;
-  PlayerStatus* playerStatus = &gPlayerStatus;
-  
+    u8 bVar1;
+    s32 bVar2;
+    s32 iVar3;
+    s32 uVar4;
+    PlayerStatus* playerStatus = &gPlayerStatus;
+
     if ((entity->alpha == 0) && ((entity->unk_06 & 1) != 0)) {
         return 0;
     }
@@ -213,13 +213,13 @@ s32 func_802E3BA4(Entity* entity) {
     bVar1 = entity->unk_06;
     if ((bVar1 & 4) != 0) {
         s32 type = get_entity_type(entity->listIndex);
-        if((type == 0xC)) {
+        if ((type == 0xC)) {
             return 0;
         }
-        
-        if((type >= 0xC)) {
-            if((type < 0x1b)) {
-                if((type > 0x14)) {
+
+        if ((type >= 0xC)) {
+            if ((type < 0x1b)) {
+                if ((type > 0x14)) {
                     return 0;
                 }
             }
@@ -232,8 +232,8 @@ s32 func_802E3BA4(Entity* entity) {
         return 1;
     }
     if ((bVar1 & 0x80) != 0) {
-      func_8010FD68(entity);
-      return 1;
+        func_8010FD68(entity);
+        return 1;
     }
 
     bVar2 = FALSE;
@@ -256,9 +256,9 @@ s32 func_802E3BA4(Entity* entity) {
         }
     }
 
-    switch(get_entity_type(entity->listIndex)) {
+    switch (get_entity_type(entity->listIndex)) {
         default:
-          break;
+            break;
         case 0x15:
         case 0x18:
             if (bVar2) {
@@ -273,8 +273,8 @@ s32 func_802E3BA4(Entity* entity) {
             if (!bVar2) {
                 return 1;
             }
-            func_8010FBC0(entity,&D_802E9E80);
-            play_sound_at_position(0x14f, 0, entity->position.x, entity->position.y ,entity->position.z);
+            func_8010FBC0(entity, &D_802E9E80);
+            play_sound_at_position(0x14f, 0, entity->position.x, entity->position.y, entity->position.z);
             break;
         case 0x16:
         case 0x19:
@@ -288,28 +288,28 @@ s32 func_802E3BA4(Entity* entity) {
             if (!bVar2) {
                 return 1;
             }
-            func_8010FBC0(entity,&D_802E9E80);
-            play_sound_at_position(0x150, 0, entity->position.x, entity->position.y ,entity->position.z);
+            func_8010FBC0(entity, &D_802E9E80);
+            play_sound_at_position(0x150, 0, entity->position.x, entity->position.y, entity->position.z);
             break;
         case 0x17:
         case 0x1a:
             if (gPlayerData.hammerLevel < '\x02') {
                 return 1;
             }
-            func_8010FBC0(entity,&D_802E9E80);
-            play_sound_at_position(0x151, 0, entity->position.x, entity->position.y ,entity->position.z);
+            func_8010FBC0(entity, &D_802E9E80);
+            play_sound_at_position(0x151, 0, entity->position.x, entity->position.y, entity->position.z);
             break;
         case 0x1b:
         case 0x1c:
         case 0x1d:
         case 0x1e:
         case 0x1f:
-          func_80110678(entity);
-          func_8010FD68(entity);
-          return 1;
+            func_80110678(entity);
+            func_8010FD68(entity);
+            return 1;
         case 0xb:
-          func_80110678(entity);
-          break;
+            func_80110678(entity);
+            break;
     }
     return 1;
 }

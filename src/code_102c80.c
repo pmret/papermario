@@ -152,7 +152,7 @@ s32 func_802E17A8(Entity* entity) {
     f32 phi_f4;
     s32 phi_s2 = 0;
 
-    switch(temp_s0->unk_10) {
+    switch (temp_s0->unk_10) {
         case 0: // switch 1
             temp_f6 = temp_s0->unk_14.z * 0.3;
             temp_f4 = ((temp_s0->unk_14.x + temp_f6) - entity->scale.x) / 4.0;
@@ -230,7 +230,7 @@ s32 func_802E17A8(Entity* entity) {
 
     entity->scale.z = entity->scale.x;
 
-    switch(temp_s0->unk_11) {
+    switch (temp_s0->unk_11) {
 
         case 0: // switch 2
             temp_f6 = temp_s0->unk_14.z * -0.5;
@@ -334,7 +334,7 @@ void func_802E1EDC(Entity* entity) {
     f32 phi_f4;
     s32 phi_s2 = 0;
 
-    switch(temp_s0->unk_10) {
+    switch (temp_s0->unk_10) {
         case 0:
             temp_f6 = temp_s0->unk_14.z * 0.3;
             temp_f4 = ((temp_s0->unk_14.x + temp_f6) - entity->scale.x) / 4.0;
@@ -551,7 +551,7 @@ void func_802E2BA4(s32 entityIndex) {
     y_inv = -entity->position.y;
     z_inv = -entity->position.z;
     phi_fp = temp_s4->unk_34;
-    for(i = 0; i < 24; i++) {
+    for (i = 0; i < 24; i++) {
         if (temp_s4->unk_3C.s == 0xFF) {
             gDPSetRenderMode(temp_s2++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
             gDPSetCombineMode(temp_s2++, G_CC_MODULATEIA, G_CC_MODULATEIA);
