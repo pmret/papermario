@@ -3,7 +3,7 @@
 This repository supports:
 
 - [Linux](#unix)
-- (macOS)(#unix)
+- [macOS](#unix)
 - [Windows Subsystem for Linux 2](#wsl-2)
 - [Docker](#docker) (any host OS)
 
