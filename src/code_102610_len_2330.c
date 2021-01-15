@@ -8,11 +8,10 @@ void create_shadow_callback(Shadow* shadow) {
 
 //TODO: make sure this is the right struct for this.
 s32 func_802E0DB0(Shadow* shadow) {
-
     if (((shadow->unk_06 & 4) != 0) && (gPlayerStatus.flags & 2) != 0) {
-        return 1;
+        return TRUE;
     }
-    return 0;
+    return FALSE;
 }
 
 INCLUDE_ASM(s32, "code_102610_len_2330", func_802E0DE0);
@@ -31,14 +30,13 @@ void func_802E10F4(Entity* entity) {
 }
 
 void func_802E114C(void) {
-
-    func_80027088(1);
+    func_80027088(TRUE);
     disable_player_input();
     gPlayerStatusPtr->currentSpeed = 0.0f;
 }
 
 void func_802E117C(void) {
-    func_80027088(0);
+    func_80027088(FALSE);
     enable_player_input();
 }
 
@@ -53,7 +51,7 @@ void save_game_at_player_position(void) {
 
 void func_802E1204(Entity* entity) {
 
-    if (get_global_flag(0xF8405BDF) == 0) {
+    if (!get_global_flag(0xF8405BDF)) {
         s32* temp = &D_802EB390;
         *temp = 0;
         load_string(0x1D0000, temp);

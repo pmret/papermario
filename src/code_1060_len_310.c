@@ -39,7 +39,7 @@ u32 func_80025D74(void* arg0, const unsigned char* str, s32 count) {
     OSPiHandle** handle = &carthandle;
 
     osEPiReadIo(*handle, 0xB3FF0000, &data);
-    if (data != 0x49533634) {
+    if (data != ASCII_TO_U32('I', 'S', '6', '4')) {
         return 1;
     }
     osEPiReadIo(*handle, 0xB3FF0004, &data);

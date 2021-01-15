@@ -50,13 +50,11 @@ ApiStatus func_80240000_8C7F90(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/CheckPartnerFlags1000.inc.c"
 
-// 8C85E0
 Vec4f N(entryList)[] = {
     { -340.0f, 0.0f, 348.0f, 48.0f },
     { 480.0f, 0.0f, 0.0f, 270.0f },
     { -310.0f, 20.0f, -80.0f, 135.0f },
 };
-
 
 MapConfig N(config) = {
     .main = N(Main),

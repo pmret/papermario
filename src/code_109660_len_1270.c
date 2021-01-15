@@ -58,16 +58,16 @@ INCLUDE_ASM(s32, "code_109660_len_1270", func_802E854C);
 
 s32 func_802E8858(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    s32 phi_a0 = 0;
+    s32 phi_a0 = FALSE;
 
     if (entity->unk_06 & 1) {
         if ((playerStatus->actionState == ActionState_GROUND_POUND) || (playerStatus->actionState == ActionState_ULTRA_POUND)) {
             set_action_state(ActionState_FALLING);
-            phi_a0 = 1;
+            phi_a0 = TRUE;
         }
     }
 
-    if (phi_a0 != 0) {
+    if (phi_a0) {
         func_802E7F6C(entity);
         func_80110BCC(entity, &D_802EAE7C);
         func_80110678(entity);
@@ -82,16 +82,16 @@ void func_802E88EC(Entity* entity, f32 arg1) {
     struct802E7F40* temp = entity->dataBuf;
 
     if (temp->unk_00 != -1) {
-        s32 flag = 0;
+        s32 flag = FALSE;
 
         // can't do || here, or gcc realizes it can reuse the temp->unk_04 load
-        if ((temp->unk_04 == 0xFFFF)) {
-            flag = 1;
-        } else if ((get_global_flag(temp->unk_04) == 0)) {
-            flag = 1;
+        if (temp->unk_04 == 0xFFFF) {
+            flag = TRUE;
+        } else if (!get_global_flag(temp->unk_04)) {
+            flag = TRUE;
         }
 
-        if (flag != 0) {
+        if (flag) {
             make_item_entity(temp->unk_00, entity->position.x, entity->position.y + D_802EB370, entity->position.z, 0xA, 0,
                              func_800E546C(), temp->unk_04);
         }
@@ -103,15 +103,16 @@ typedef struct struct802E89B0 {
     /* 0x04 */ s32 unk_04;
     /* 0x08 */ s32 unk_08;
     /* 0x0C */ s32 unk_0C;
-    /* 0x10 */ char unk_10[4];
+    /* 0x10 */ s32 unk_10;
     /* 0x14 */ s32 unk_14;
+    /* 0x18 */ f32 unk_18;
 } struct802E89B0;
 
 void func_802E89B0(Entity* entity) {
     struct802E89B0* temp_s0;
 
     temp_s0 = entity->dataBuf;
-    if (get_global_flag(temp_s0->unk_14) != 0) {
+    if (get_global_flag(temp_s0->unk_14)) {
         temp_s0->unk_04 = 0x10;
         func_8010FD68(entity);
     }

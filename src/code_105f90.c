@@ -9,11 +9,9 @@ void func_802E4AEC(s32 entityIndex) {
 }
 
 void func_802E4B10(Entity* entity) {
-    f32 temp_f0;
-    Entity* entityTemp;
     struct802E4B10* temp = entity->dataBuf;
+    Entity* entityTemp = get_entity_by_index(temp->unk_00);
 
-    entityTemp = get_entity_by_index(temp->unk_00);
     entity->position.x = entityTemp->position.x;
     entity->position.y = entityTemp->position.y + 14.0f;
     entity->position.z = entityTemp->position.z;
@@ -65,7 +63,6 @@ INCLUDE_ASM(s32, "code_105f90", func_802E4E04);
 void func_802E5308(Entity* entity) {
     func_802E3650(entity);
 }
-
 
 INCLUDE_ASM(s32, "code_105f90", func_802E5324);
 

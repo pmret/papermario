@@ -97,7 +97,7 @@ extern f64 D_802EB000;
 extern f64 D_802EB008;
 
 extern Entity* D_802EB3A0;
-extern s32 D_8015C7D0;
+extern s32 D_8015C7D0[3];
 
 extern UNK_TYPE D_0A0031E0;
 extern UNK_TYPE D_0A001508;

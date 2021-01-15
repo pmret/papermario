@@ -166,7 +166,6 @@ extern TlbMappablePage D_80197000;
 extern EffectTableEntry D_8007F210[135];
 
 s32 play_effect(s32 effectIndex) {
-
     EffectTableEntry* effectTable = &D_8007F210[0];
     EffectTableEntry* effectEntry;
     Effect* curEffect;
