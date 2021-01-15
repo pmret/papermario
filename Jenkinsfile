@@ -4,14 +4,12 @@ pipeline {
     stages {
         stage('Setup') {
             steps {
-                sh 'cp /usr/local/etc/roms/baserom_pm.z64 baserom.z64'
-                sh 'make setup'
+                sh './configure.py --baserom /usr/local/etc/roms/baserom_pm.z64'
             }
         }
         stage('Build') {
             steps {
-                echo 'Building...'
-                sh 'make -j'
+                sh 'ninja'
             }
         }
         stage('Report Progress') {
