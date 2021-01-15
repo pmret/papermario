@@ -2,9 +2,9 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "make",
+            "label": "ninja",
             "type": "shell",
-            "command": "PM_HEADER_REBUILD=1 make all",
+            "command": "ninja",
             "problemMatcher": [
                 {
                     "fileLocation": ["relative", "${workspaceFolder}"],
@@ -35,7 +35,7 @@
         {
             "label": "diff",
             "type": "shell",
-            "command": "PM_HEADER_REBUILD=1 ./diff.py -mwo ${input:funcName}",
+            "command": "./diff.py -mwo ${input:funcName}",
             "isBackground": true,
             "problemMatcher": [
                 {
