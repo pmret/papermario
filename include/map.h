@@ -31,7 +31,7 @@ typedef struct MapConfig {
     } tattle;
 } MapConfig; // size = 0x40
 
-typedef s32 (*MapInit)(void);
+typedef s32(*MapInit)(void);
 
 #define MAP_ID_MAX_LEN 7 ///< "xxx_yyy" excluding null terminator.
 typedef struct Map {
