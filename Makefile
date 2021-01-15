@@ -129,13 +129,8 @@ clean-code:
 
 tools:
 
-setup: clean-all submodules tools
+setup: clean-all tools
 	@make split
-
-# tools/star-rod submodule intentionally omitted
-submodules:
-	git submodule init tools/n64splat
-	git submodule update --recursive
 
 split:
 	make $(LD_SCRIPT) -W $(SPLAT_YAML)
@@ -296,10 +291,6 @@ test: $(ROM)
 
 STAR_ROD := cd tools/star-rod && $(JAVA) -jar StarRod.jar
 
-# lazily initialise the submodule
-tools/star-rod:
-	git submodule init tools/star-rod
-
 sprite/SpriteTable.xml: tools/star-rod sources.mk
 	$(PYTHON) tools/star-rod/spritetable.xml.py $(NPC_SPRITES) > $@
 
@@ -309,7 +300,7 @@ editor: tools/star-rod sprite/SpriteTable.xml
 
 ### Make Settings ###
 
-.PHONY: clean tools test setup submodules split editor $(ROM)
+.PHONY: clean tools test setup split editor $(ROM)
 .DELETE_ON_ERROR:
 .SECONDARY:
 .PRECIOUS: $(ROM) %.Yay0
