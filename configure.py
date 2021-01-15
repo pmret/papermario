@@ -117,13 +117,15 @@ def build_image(f: str, segment):
 async def main():
     global n, cpp, task_sem, num_tasks, num_tasks_done
 
+    task_sem = asyncio.Semaphore(8)
+
     parser = ArgumentParser(description="Paper Mario build.ninja generator")
     parser.add_argument("--cpp", help="GNU C preprocessor command")
     parser.add_argument("--baserom", default="baserom.z64", help="Path to unmodified Paper Mario (U) z64 ROM")
     args = parser.parse_args()
 
     # on macOS, /usr/bin/cpp defaults to clang rather than gcc (but we need gcc's)
-    if args.cpp is None and sys.platform == "darwin" and "Free Software Foundation" not in await shell("cpp --version")[0]:
+    if args.cpp is None and sys.platform == "darwin" and "Free Software Foundation" not in (await shell("cpp --version"))[0]:
         print("error: system C preprocessor is not GNU!")
         print("This is a known issue on macOS - only clang's cpp is installed by default.")
         print("Use 'brew' to obtain GNU cpp, then run this script again with the --cpp option, e.g.")
@@ -150,7 +152,6 @@ async def main():
             exit(1)
 
     cpp = args.cpp or "cpp"
-    task_sem = asyncio.Semaphore(8)
 
     """
     # update submodules
