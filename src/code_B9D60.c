@@ -142,8 +142,6 @@ INCLUDE_ASM(s32, "code_B9D60", init_item_entity_list);
 
 INCLUDE_ASM(s32, "code_B9D60", func_80131128);
 
-s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pickupDelay, s32 facingAngleSign,
-                     s32 pickupVar);
 INCLUDE_ASM(s32, "code_B9D60", make_item_entity, s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pickupDelay,
             s32 facingAngleSign, s32 pickupVar);
 

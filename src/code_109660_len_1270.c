@@ -36,12 +36,11 @@ typedef struct struct802E7F40 {
 } struct802E7F40;
 
 void func_802E7F40(Entity* entity) {
-    struct802E7F40* temp_v1;
+    struct802E7F40* temp = entity->dataBuf;
 
-    temp_v1 = entity->dataBuf;
     entity->scale.y = 0.85714287f;
-    temp_v1->unk_04 = 0xFFFF;
-    temp_v1->unk_00 = D_8015C7D0;
+    temp->unk_04 = 0xFFFF;
+    temp->unk_00 = D_8015C7D0;
 }
 
 void func_802E7F6C(Entity* entity) {
@@ -52,6 +51,8 @@ void func_802E7F6C(Entity* entity) {
 }
 
 INCLUDE_ASM(s32, "code_109660_len_1270", func_802E7FA0);
+
+extern f64 D_802EB370;
 
 INCLUDE_ASM(s32, "code_109660_len_1270", func_802E854C);
 
@@ -75,38 +76,139 @@ s32 func_802E8858(Entity* entity) {
     }
 }
 
-INCLUDE_ASM(s32, "code_109660_len_1270", func_802E88EC);
+f32 func_800E546C(void);
 
-INCLUDE_ASM(s32, "code_109660_len_1270", func_802E89B0);
+void func_802E88EC(Entity* entity, f32 arg1) {
+    struct802E7F40* temp = entity->dataBuf;
 
-INCLUDE_ASM(s32, "code_109660_len_1270", func_802E89F8);
+    if (temp->unk_00 != -1) {
+        s32 flag = 0;
 
-INCLUDE_ASM(s32, "code_109660_len_1270", func_802E8A58);
+        // can't do || here, or gcc realizes it can reuse the temp->unk_04 load
+        if ((temp->unk_04 == 0xFFFF)) {
+            flag = 1;
+        } else if((get_global_flag(temp->unk_04) == 0)) {
+            flag = 1;
+        }
 
+        if (flag != 0) {
+            make_item_entity(temp->unk_00, entity->position.x, entity->position.y + D_802EB370, entity->position.z, 0xA, 0, func_800E546C(), temp->unk_04);
+        }
+    }
+}
+
+typedef struct struct802E89B0 {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ s32 unk_04;
+    /* 0x08 */ s32 unk_08;
+    /* 0x0C */ s32 unk_0C;
+    /* 0x10 */ char unk_10[4];
+    /* 0x14 */ s32 unk_14;
+} struct802E89B0;
+
+void func_802E89B0(Entity *entity) {
+    struct802E89B0* temp_s0;
+
+    temp_s0 = entity->dataBuf;
+    if (get_global_flag(temp_s0->unk_14) != 0) {
+        temp_s0->unk_04 = 0x10;
+        func_8010FD68(entity);
+    }
+}
+
+extern f64 D_802EB380;
+
+void func_802E89F8(Entity *entity) {
+    s32 temp_v0;
+    struct802E89B0* temp;
+
+    temp = entity->dataBuf;
+    temp->unk_04--;
+    if ((temp->unk_04 != -1) && (temp->unk_08 == 0)) {
+        entity->position.y += D_802EB380;
+        return;
+    }
+    temp->unk_04 = 0;
+    func_8010FD68(entity);
+}
+
+void func_802E8A58(Entity *entity) {
+    struct802E89B0* temp = entity->dataBuf;
+
+    if (temp->unk_0C == GAME_STATUS->entryID) {
+        switch(temp->unk_04) {
+            case 0:
+                if (gCollisionStatus.currentFloor > 0) {
+                    temp->unk_04 = 1;
+                }
+                return;
+            case 1:
+                if (gCollisionStatus.currentFloor < 0) {
+                    temp->unk_04 = 2;
+                }
+                return;
+            default:
+                func_8010FD68(entity);
+                return;
+        }
+    } else {
+        func_8010FD68(entity);
+        return;
+    }
+}
+
+#ifdef NON_MATCHING
+// small regalloc issue
+void func_802E8ADC(Entity *entity) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+
+    if ((entity->unk_06 & 1) != 0) {
+        *D_8009A650 |= 0x40;
+        if ((playerStatus->flags & 0x3000) == 0) {
+            s32 phi_v0 = playerStatus->stickAxis[0];
+            s32 temp_a0 = playerStatus->stickAxis[1];
+
+            if (phi_v0 < 0) {
+                phi_v0 = -phi_v0;
+            }
+
+            if ((phi_v0 != 0) || (temp_a0 != 0)) {
+                if (atan2(0.0f, 0.0f, phi_v0, temp_a0) < 60.0f) {
+                    func_8010FD68(entity);
+                    return;
+                }
+            }
+        }
+    } else {
+        *D_8009A650 &= ~0x40;
+    }
+}
+#else
 INCLUDE_ASM(s32, "code_109660_len_1270", func_802E8ADC);
+#endif
 
 void func_802E8BC0(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PlayerStatus* playerStatus2 = &gPlayerStatus;
-    struct802E7DE0* temp = (struct802E7DE0*)entity->dataBuf;
+    struct802E89B0* temp = entity->dataBuf;
     MapConfig* mapConfig = get_current_map_header();
     f32 temp_f20;
     f32 entryX;
     f32 entryZ;
 
-    entryX = GET_MAP_ENTRY(mapConfig, temp->unk_00C)->x;
-    entryZ = GET_MAP_ENTRY(mapConfig, temp->unk_00C)->z;
-    temp->unk_004 = func_800E0088(entryX, entryZ) / playerStatus->runSpeed;
-    if (temp->unk_004 == 0) {
-        temp->unk_004 = 1;
+    entryX = GET_MAP_ENTRY(mapConfig, temp->unk_0C)->x;
+    entryZ = GET_MAP_ENTRY(mapConfig, temp->unk_0C)->z;
+    temp->unk_04 = func_800E0088(entryX, entryZ) / playerStatus->runSpeed;
+    if (temp->unk_04 == 0) {
+        temp->unk_04 = 1;
     }
 
-    entryX = GET_MAP_ENTRY(mapConfig, temp->unk_00C)->x;
-    entryZ = GET_MAP_ENTRY(mapConfig, temp->unk_00C)->z;
+    entryX = GET_MAP_ENTRY(mapConfig, temp->unk_0C)->x;
+    entryZ = GET_MAP_ENTRY(mapConfig, temp->unk_0C)->z;
     temp_f20 = atan2(playerStatus2->position.x, playerStatus2->position.z, entryX, entryZ);
     disable_player_input();
     disable_player_static_collisions();
-    move_player(temp->unk_004, temp_f20, playerStatus2->runSpeed);
+    move_player(temp->unk_04, temp_f20, playerStatus2->runSpeed);
 }
 
 void func_802E8C94(Entity* entity) {
