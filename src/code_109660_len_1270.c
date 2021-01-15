@@ -44,26 +44,18 @@ void func_802E7F40(Entity* entity) {
     temp_v1->unk_00 = D_8015C7D0;
 }
 
-extern UNK_TYPE D_0A004350;
-extern UNK_TYPE D_0A0026F0;
-
-INCLUDE_ASM(s32, "code_109660_len_1270", func_802E7F6C);
-/*void func_802E7F6C(Entity* entity) {
+void func_802E7F6C(Entity* entity) {
     struct802E7F40* temp = entity->dataBuf;
 
     temp->unk_0C = entity->position.y;
     func_802E7DE0(entity, &D_0A004350, &D_0A0026F0);
-}*/
+}
 
 INCLUDE_ASM(s32, "code_109660_len_1270", func_802E7FA0);
 
 INCLUDE_ASM(s32, "code_109660_len_1270", func_802E854C);
 
-extern UNK_TYPE D_802EAE7C;
-extern f64 D_802EB370;
-
-INCLUDE_ASM(s32, "code_109660_len_1270", func_802E8858);
-/*s32 func_802E8858(Entity* entity) {
+s32 func_802E8858(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 phi_a0 = 0;
 
@@ -81,7 +73,7 @@ INCLUDE_ASM(s32, "code_109660_len_1270", func_802E8858);
         func_8010FD68(entity);
         play_sound(0x20AE);
     }
-}*/
+}
 
 INCLUDE_ASM(s32, "code_109660_len_1270", func_802E88EC);
 

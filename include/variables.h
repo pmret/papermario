@@ -294,4 +294,9 @@ extern Gfx* gMasterGfxPos;
 extern u16 gMatrixListPos;
 extern u16 gCurrentDisplayContextIndex;
 
+extern UNK_TYPE D_0A004350;
+extern UNK_TYPE D_0A0026F0;
+extern UNK_TYPE D_802EAE7C;
+extern f64 D_802EB370;
+
 #endif
