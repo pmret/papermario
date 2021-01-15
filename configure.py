@@ -153,12 +153,6 @@ async def main():
 
     cpp = args.cpp or "cpp"
 
-    """
-    # update submodules
-    await shell("git submodule init tools/n64splat")
-    await shell("git submodule update --recursive")
-    """
-
     # compile n64splat dependencies
     await shell("make -C tools/n64splat")
 
