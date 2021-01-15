@@ -16,7 +16,7 @@ smallest_len = 1000
 
 for root, dirs, files in os.walk(asm_dir):
     for f_name in files:
-        if f_name.endswith(".s") and f_name not in ["func_8024F768.s", "func_800271A0.s", "func_80240448_B141B8.s"]:
+        if f_name.endswith(".s") and len(f_name) < 20 and f_name not in ["func_8024F768.s", "func_800271A0.s", "func_80240448_B141B8.s"]:
             f_path = os.path.join(root, f_name)
             with open(f_path) as f:
                 f_text = f.read()

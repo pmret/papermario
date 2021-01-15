@@ -10,7 +10,15 @@ INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8010FBD8);
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8010FD68);
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8010FD98);
+void func_8010FD98(s32 arg0, s32 alpha) {
+    if (alpha >= 255) {
+        gDPSetRenderMode(gMasterGfxPos++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
+        gDPSetCombineMode(gMasterGfxPos++, G_CC_MODULATEIA, G_CC_MODULATEIA);
+    } else {
+        gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0);
+        gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0x00, 0x00, 0x00, alpha);
+    }
+}
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8010FE44);
 
@@ -320,7 +328,31 @@ INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8011C80C);
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8011CFBC);
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8011D72C);
+//INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8011D72C);
+void func_8011D72C(Gfx** arg0, s32 treeIndex) {
+    Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(treeIndex & 0xFFFF));
+    Model copied = *model;
+    Gfx** oldGfxPos;
+    s32 flag;
+    Gfx* new_var2;
+    Gfx* new_var;
+
+    *oldGfxPos = &gMasterGfxPos;
+
+    if (*arg0 == *oldGfxPos) {
+        flag = 1;
+    }
+    new_var = *arg0;
+
+    copied.flags = 0x81;
+    appendGfx_model(&copied);
+    new_var2 = *oldGfxPos;
+
+    *arg0 = new_var;
+    if (flag == 0) {
+        *arg0 = new_var2;
+    }
+}
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8011D7E4);
 
