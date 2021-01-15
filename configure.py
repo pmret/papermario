@@ -190,12 +190,12 @@ async def main():
     n.newline()
 
     n.rule("cc",
-        command=f"{cpp} $cppflags $in -o - | $iconv | tools/$os/cc1 $cflags -o - | tools/$os/mips-nintendo-nu64-as -EB -G 0 - -o $out",
+        command=f"bash -o pipefail -c '{cpp} $cppflags $in -o - | $iconv | tools/$os/cc1 $cflags -o - | tools/$os/mips-nintendo-nu64-as -EB -G 0 - -o $out'",
         description="cc $in",
         depfile="$out.d",
         deps="gcc")
     n.rule("cc_dsl",
-        command=f"{cpp} $cppflags $in -o - | $python tools/compile_dsl_macros.py | $iconv | tools/$os/cc1 $cflags -o - | tools/$os/mips-nintendo-nu64-as -EB -G 0 - -o $out",
+        command=f"bash -o pipefail -c '{cpp} $cppflags $in -o - | $python tools/compile_dsl_macros.py | $iconv | tools/$os/cc1 $cflags -o - | tools/$os/mips-nintendo-nu64-as -EB -G 0 - -o $out'",
         description="cc (with dsl) $in",
         depfile="$out.d",
         deps="gcc")
@@ -271,7 +271,7 @@ async def main():
     n.newline()
 
     n.rule("sha1sum",
-        command="sha1sum -c $in",
+        command="sha1sum -c $in && touch $out",
         description="compare")
     n.newline()
 
@@ -285,10 +285,10 @@ async def main():
     n.build("$builddir/$target.ld", "cpp", "$target.ld")
     n.build("$builddir/$target.elf", "link", "$builddir/$target.ld", implicit=[obj(o) for o in objects], implicit_outputs="$builddir/$target.map")
     n.build("$target.z64", "rom", "$builddir/$target.elf", implicit="tools/n64crc")
-    n.build("compare", "sha1sum", "checksum.sha1", implicit="$target.z64")
+    n.build("$builddir/is_ok", "sha1sum", "checksum.sha1", implicit="$target.z64")
     n.newline()
 
-    n.default("compare")
+    n.default("$builddir/is_ok")
     n.newline()
 
     # generated headers
