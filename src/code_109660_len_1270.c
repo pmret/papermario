@@ -87,12 +87,13 @@ void func_802E88EC(Entity* entity, f32 arg1) {
         // can't do || here, or gcc realizes it can reuse the temp->unk_04 load
         if ((temp->unk_04 == 0xFFFF)) {
             flag = 1;
-        } else if((get_global_flag(temp->unk_04) == 0)) {
+        } else if ((get_global_flag(temp->unk_04) == 0)) {
             flag = 1;
         }
 
         if (flag != 0) {
-            make_item_entity(temp->unk_00, entity->position.x, entity->position.y + D_802EB370, entity->position.z, 0xA, 0, func_800E546C(), temp->unk_04);
+            make_item_entity(temp->unk_00, entity->position.x, entity->position.y + D_802EB370, entity->position.z, 0xA, 0,
+                             func_800E546C(), temp->unk_04);
         }
     }
 }
@@ -106,7 +107,7 @@ typedef struct struct802E89B0 {
     /* 0x14 */ s32 unk_14;
 } struct802E89B0;
 
-void func_802E89B0(Entity *entity) {
+void func_802E89B0(Entity* entity) {
     struct802E89B0* temp_s0;
 
     temp_s0 = entity->dataBuf;
@@ -118,7 +119,7 @@ void func_802E89B0(Entity *entity) {
 
 extern f64 D_802EB380;
 
-void func_802E89F8(Entity *entity) {
+void func_802E89F8(Entity* entity) {
     s32 temp_v0;
     struct802E89B0* temp;
 
@@ -132,11 +133,11 @@ void func_802E89F8(Entity *entity) {
     func_8010FD68(entity);
 }
 
-void func_802E8A58(Entity *entity) {
+void func_802E8A58(Entity* entity) {
     struct802E89B0* temp = entity->dataBuf;
 
     if (temp->unk_0C == GAME_STATUS->entryID) {
-        switch(temp->unk_04) {
+        switch (temp->unk_04) {
             case 0:
                 if (gCollisionStatus.currentFloor > 0) {
                     temp->unk_04 = 1;
@@ -159,7 +160,7 @@ void func_802E8A58(Entity *entity) {
 
 #ifdef NON_MATCHING
 // small regalloc issue
-void func_802E8ADC(Entity *entity) {
+void func_802E8ADC(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if ((entity->unk_06 & 1) != 0) {
