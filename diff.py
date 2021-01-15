@@ -283,7 +283,7 @@ arch: str = config.get("arch", "mips")
 baseimg: Optional[str] = config.get("baseimg")
 myimg: Optional[str] = config.get("myimg")
 mapfile: Optional[str] = config.get("mapfile")
-makeflags: List[str] = config.get("makeflags", [])
+build_command: List[str] = config.get("make_command", ["make", *config.get("makeflags", [])])
 source_directories: Optional[List[str]] = config.get("source_directories")
 objdump_executable: Optional[str] = config.get("objdump_executable")
 map_format: str = config.get("map_format", "gnu")
@@ -372,12 +372,12 @@ def eval_line_num(expr: str) -> int:
 
 
 def run_make(target: str) -> None:
-    subprocess.check_call(["make"] + makeflags + [target])
+    subprocess.check_call(build_command + [target])
 
 
 def run_make_capture_output(target: str) -> "subprocess.CompletedProcess[bytes]":
     return subprocess.run(
-        ["make"] + makeflags + [target],
+        build_command + [target],
         stderr=subprocess.PIPE,
         stdout=subprocess.PIPE,
     )
@@ -676,28 +676,28 @@ elif arch == "ppc":
     forbidden = set(string.ascii_letters + "_")
     branch_likely_instructions = set()
     branch_instructions = {
-        "b", 
-        "beq", 
-        "beq+", 
-        "beq-", 
-        "bne", 
-        "bne+", 
-        "bne-", 
-        "blt", 
-        "blt+", 
-        "blt-", 
+        "b",
+        "beq",
+        "beq+",
+        "beq-",
+        "bne",
+        "bne+",
+        "bne-",
+        "blt",
+        "blt+",
+        "blt-",
         "ble",
         "ble+",
-        "ble-", 
-        "bdnz", 
-        "bdnz+", 
+        "ble-",
+        "bdnz",
+        "bdnz+",
         "bdnz-",
-        "bge", 
-        "bge+", 
-        "bge-", 
-        "bgt", 
-        "bgt+", 
-        "bgt-", 
+        "bge",
+        "bge+",
+        "bge-",
+        "bgt",
+        "bgt+",
+        "bgt-",
     }
     instructions_with_address_immediates = branch_instructions.union({"bl"})
 else:
