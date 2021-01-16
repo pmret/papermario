@@ -49,7 +49,6 @@ void func_802E12F8(void);
 void func_802E1328(Entity* entity);
 void func_802E1350(Entity* entity);
 void func_802E13B8(Entity* entity);
-
 void func_802E1400(Entity* entity);
 void func_802E1460(Entity* entity);
 void func_802E14D8(Entity* entity);
