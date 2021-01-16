@@ -16,15 +16,15 @@ void func_802E3E9C(Entity* entity) {
     s32 alpha;
 
     alpha = entity->alpha;
-    if ((gPlayerStatus.animFlags & 1)) {
-        alpha += 0x20;
-        if (alpha > 0xC0) {
-            alpha = 0xC0;
+    if (gPlayerStatus.animFlags & 1) {
+        alpha += 32;
+        if (alpha > 192) {
+            alpha = 192;
         }
         entity->alpha = alpha;
         return;
     } else {
-        alpha -= 0x20;
+        alpha -= 32;
         if (alpha <= 0) {
             alpha = 0;
         }
@@ -74,7 +74,7 @@ void func_802E4154(Entity* entity) {
     UNK_PTR phi_a0;
     struct802E3F0C* temp = entity->dataBuf;
 
-    if ((temp->unk_A != 0xFFFF) && (get_global_flag(temp->unk_A) != 0)) {
+    if ((temp->unk_A != 0xFFFF) && get_global_flag(temp->unk_A)) {
         if (get_entity_type(entity->listIndex) != 0x14) {
             phi_a0 = &D_802EA07C;
         } else {
@@ -82,9 +82,9 @@ void func_802E4154(Entity* entity) {
         }
         create_entity(phi_a0, entity->position.x, entity->position.y, entity->position.z, entity->rotation.y, 0x80000000);
         func_8010FBC0(entity, &D_802EA310);
-        return;
+    } else {
+        func_8010FD68(entity);
     }
-    func_8010FD68(entity);
 }
 
 void func_802E421C(Entity* entity) {
@@ -164,9 +164,9 @@ void func_802E4484(Entity* entity) {
 s32 func_802E44CC(Entity* entity) {
     if (entity->boundScript != NULL) {
         entity->flags |= 0x1000000;
-        return 1;
+        return TRUE;
     }
-    return 0;
+    return FALSE;
 }
 
 // TODO: new file here?

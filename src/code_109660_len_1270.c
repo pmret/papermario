@@ -155,7 +155,6 @@ void func_802E8A58(Entity* entity) {
         }
     } else {
         func_8010FD68(entity);
-        return;
     }
 }
 
@@ -216,7 +215,7 @@ void func_802E8BC0(Entity* entity) {
 void func_802E8C94(Entity* entity) {
     Trigger* trigger = (Trigger*)entity->dataBuf; // TODO: is Trigger correct?
 
-    if (--trigger->params1.w == -1) {
+    if (--trigger->params1 == -1) {
         func_8010FD68(entity);
     }
 }
@@ -226,7 +225,7 @@ void player_enter_blue_pipe(Entity* bluePipe) {
     Trigger* pipeTrigger = (Trigger*)bluePipe->dataBuf; // TODO: is Trigger correct?
 
     playerStatus->targetYaw = CURRENT_CAM->currentYaw + 180.0f;
-    pipeTrigger->params1.w = 0x19;
+    pipeTrigger->params1 = 0x19;
     playerStatus->renderMode = 0xD;
 
     func_802DDFF8(0x10002, 5, 2, 1, 1, 0, 0);
@@ -239,9 +238,9 @@ void func_802E8D74(Entity* entity) {
     Trigger* entityTrigger = (Trigger*)entity->dataBuf; // TODO: is Trigger correct?
 
     playerStatus->position.y--;
-    entityTrigger->params1.w--;
+    entityTrigger->params1--;
 
-    if (entityTrigger->params1.w == -1) {
+    if (entityTrigger->params1 == -1) {
         playerStatus->renderMode = 0xD;
         playerStatus->position.y -= 50.0f;
         func_802DDFF8(0x10002, 0, 0, 0, 0, 0, 0);
@@ -278,5 +277,5 @@ f32 func_802E8F94(Entity* entity) {
     temp_s0->unk_14 = temp4;
     temp_s0->unk_18 = entity->position.y;
     temp_s0->unk_08 = get_global_flag(temp_s0->unk_14);
-    *temp5 = entity->position.y - ((temp_s0->unk_08 != 0) ? 15.0 : 52.0);
+    *temp5 = entity->position.y - (temp_s0->unk_08 ? 15.0 : 52.0);
 }

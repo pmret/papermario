@@ -199,6 +199,7 @@ void func_802E3B08(Entity* entity) {
 extern s32 D_802E9E80;
 
 #ifdef NON_MATCHING
+// tail merge + rodata
 s32 func_802E3BA4(Entity* entity) {
     u8 bVar1;
     s32 bVar2;
@@ -211,33 +212,33 @@ s32 func_802E3BA4(Entity* entity) {
     }
 
     bVar1 = entity->unk_06;
-    if ((bVar1 & 4) != 0) {
+    if (bVar1 & 4) {
         s32 type = get_entity_type(entity->listIndex);
-        if ((type == 0xC)) {
+        if (type == 0xC) {
             return 0;
         }
 
-        if ((type >= 0xC)) {
-            if ((type < 0x1b)) {
-                if ((type > 0x14)) {
+        if (type >= 0xC) {
+            if (type < 0x1b) {
+                if (type > 0x14) {
                     return 0;
                 }
             }
         }
 
-        if ((playerStatus->flags & 2) == 0) {
+        if (!(playerStatus->flags & 2)) {
             return 1;
         }
         func_8010FD68(entity);
         return 1;
     }
-    if ((bVar1 & 0x80) != 0) {
+    if (bVar1 & 0x80) {
         func_8010FD68(entity);
         return 1;
     }
 
     bVar2 = FALSE;
-    if ((bVar1 & 1)) {
+    if (bVar1 & 1) {
         if ((playerStatus->actionState == 0xd) || (playerStatus->actionState == 0x0f)) {
             return 0;
         }
@@ -248,7 +249,7 @@ s32 func_802E3BA4(Entity* entity) {
             return 1;
         }
     } else {
-        if ((bVar1 & 0x40) == 0) {
+        if (!(bVar1 & 0x40)) {
             return 1;
         }
         if ((playerStatus->flags & 0x1000000) == 0) {

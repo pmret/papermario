@@ -209,14 +209,9 @@ typedef union {
     s32 flags;
 } TriggerFlags;
 
-typedef union {
-    s16 s;
-    s32 w;
-} TriggerParams;
-
 typedef struct Trigger {
     /* 0x00 */ TriggerFlags flags;
-    /* 0x04 */ TriggerParams params1;
+    /* 0x04 */ s32 params1;
     /* 0x08 */ s32 params2;
     /* 0x0C */ UNK_FUN_PTR(functionHandler);
     /* 0x10 */ Bytecode* scriptStart;
@@ -1708,7 +1703,8 @@ typedef struct struct802E4B10 {
 // END ENTITY-SPECIFIC STRUCTS
 
 typedef struct {
-    /* 0x00000 */ LookAt lookAt[2];
+    /* 0x00000 */ Light l1[2];
+    /* 0x00018 */ Light l2[2];
     /* 0x00030 */ Matrix4s camPerspMatrix[8]; // could only be length 4, unsure
     /* 0x00230 */ s32 mainGfx[0x4100];
     /* 0x10630 */ s32 smallGfx[0x400]; // used by func 800269EC

@@ -8,7 +8,7 @@ void create_shadow_callback(Shadow* shadow) {
 
 //TODO: make sure this is the right struct for this.
 s32 func_802E0DB0(Shadow* shadow) {
-    if (((shadow->unk_06 & 4) != 0) && (gPlayerStatus.flags & 2) != 0) {
+    if ((shadow->unk_06 & 4) && (gPlayerStatus.flags & 2)) {
         return TRUE;
     }
     return FALSE;
@@ -51,11 +51,11 @@ void save_game_at_player_position(void) {
 
 void func_802E1204(Entity* entity) {
 
-    if (!get_global_flag(0xF8405BDF)) {
+    if (!get_global_flag(SI_SAVE_FLAG(95))) {
         s32* temp = &D_802EB390;
         *temp = 0;
         load_string(0x1D0000, temp);
-        set_global_flag(0xF8405BDF);
+        set_global_flag(SI_SAVE_FLAG(95));
         return;
     }
 

@@ -104,10 +104,8 @@ void func_802E1660(Entity* entity) {
         return;
     }
 
-    if (temp2[3] == 4) {
-        if (temp2[0] != 0) {
-            return;
-        }
+    if ((temp2[3] == 4) && (temp2[0] != 0)) {
+        return;
     }
 
     if (!(entity->unk_06 & 1)) {
