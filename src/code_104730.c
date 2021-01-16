@@ -202,7 +202,6 @@ s32 D_802E9B94[7] = {
     (s32) &D_0A000740, 0x00000002, 0x00000000,
 };
 
-// TODO: resolve FILL_LATER
 StaticEntityData D_802E9BB0 = { 0xA000, 0x002C, &D_802E9B78, {0, 0, 0, 0}, func_802E234C,              &D_802E9A40, NULL, &D_00E62AC0, &D_00E639C0,  8, {0x16, 0x17, 0x16} };
 StaticEntityData D_802E9BD4 = { 0xAA04, 0x002C, &D_802E9B40, {0, 0, 0, 0}, entity_init_BlueSwitch,     &D_802E9AC4, NULL, &D_00E639C0, &D_00E648D0,  7, {0x16, 0x17, 0x16} };
 StaticEntityData D_802E9BF8 = { 0xAA04, 0x002C, &D_802E9B5C, {0, 0, 0, 0}, entity_init_HugeBlueSwitch, &D_802E9A88, NULL, &D_00E639C0, &D_00E648D0,  9, {0x42, 0x4B, 0x42} };
@@ -219,7 +218,6 @@ s32 D_802E9C70[7] = {
     (s32) &D_802E9828, 0x00000002, 0x00000000
 };
 
-//ROM addrs; todo
 extern UNK_TYPE D_00E32420;
 extern UNK_TYPE D_00E35670;
 extern UNK_TYPE D_00E38890;
