@@ -179,7 +179,19 @@ async def main():
     n.variable("target", TARGET)
     n.variable("cross", "mips-linux-gnu-")
     n.variable("python", sys.executable)
-    n.variable("os", "mac" if sys.platform == "darwin" else "linux")
+
+    if sys.platform  == "darwin":
+        os_dir = "mac"
+    elif sys.platform == "linux":
+        if os.uname()[4] == "aarch64":
+            os_dir = "arm"
+        else:
+            os_dir = "linux"
+    else:
+        print(f"Unsupported platform {sys.platform}")
+        sys.exit(1)
+
+    n.variable("os", os_dir)
     n.variable("iconv", "tools/iconv.py UTF-8 SHIFT-JIS" if sys.platform == "darwin" else "iconv --from UTF-8 --to SHIFT-JIS")
     n.variable("cppflags", f"{cppflags} -Wcomment")
     n.variable("cflags", "-O2 -quiet -G 0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wuninitialized -Wshadow " + args.cflags)
