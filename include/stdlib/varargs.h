@@ -1,33 +1,31 @@
-/* stdarg.h for GNU.
-   Note that the type used in va_arg is supposed to match the
-   actual type **after default promotions**.
-   Thus, va_arg (..., short) is not valid.  */
+/* Record that this is varargs.h; this turns off stdarg.h.  */
 
-#ifndef _STDARG_H
-#ifndef _ANSI_STDARG_H_
-#ifndef __need___va_list
-#define _STDARG_H
-#define _ANSI_STDARG_H_
-#endif /* not __need___va_list */
-#undef __need___va_list
+#ifndef _VARARGS_H
+#define _VARARGS_H
 
+#ifdef __sparc__
+#include "va-sparc.h"
+#else
+#ifdef __spur__
+#include "va-spur.h"
+#else
+#ifdef __mips__
+#include "va-mips.h"
+#else
+#ifdef __i860__
+#include "va-i860.h"
+#else
+#ifdef __pyr__
+#include "va-pyr.h"
+#else
 #ifdef __clipper__
 #include "va-clipper.h"
 #else
 #ifdef __m88k__
 #include "va-m88k.h"
 #else
-#ifdef __i860__
-#include "va-i860.h"
-#else
-#ifdef __hppa__
+#if defined(__hppa__) || defined(hp800)
 #include "va-pa.h"
-#else
-#ifdef __mips__
-#include "va-mips.h"
-#else
-#ifdef __sparc__
-#include "va-sparc.h"
 #else
 #ifdef __i960__
 #include "va-i960.h"
@@ -60,23 +58,54 @@
 #include "va-v850.h"
 #else
 
-/* Define __gnuc_va_list.  */
+#ifdef __NeXT__
+
+/* On Next, erase any vestiges of stdarg.h.  */
+
+#ifdef _ANSI_STDARG_H_
+#define _VA_LIST_
+#endif
+#define _ANSI_STDARG_H_ 
+
+#undef va_alist
+#undef va_dcl
+#undef va_list
+#undef va_start
+#undef va_end
+#undef __va_rounded_size
+#undef va_arg
+#endif  /* __NeXT__ */
+
+/* In GCC version 2, we want an ellipsis at the end of the declaration
+   of the argument list.  GCC version 1 can't parse it.  */
+
+#if __GNUC__ > 1
+#define __va_ellipsis ...
+#else
+#define __va_ellipsis
+#endif
+
+/* These macros implement traditional (non-ANSI) varargs
+   for GNU C.  */
+
+#define va_alist  __builtin_va_alist
+/* The ... causes current_function_varargs to be set in cc1.  */
+#define va_dcl    int __builtin_va_alist; __va_ellipsis
+
+/* Define __gnuc_va_list, just as in gstdarg.h.  */
 
 #ifndef __GNUC_VA_LIST
 #define __GNUC_VA_LIST
-#if defined(__svr4__) || defined(_AIX) || defined(_M_UNIX) || defined(__NetBSD__)
-typedef char* __gnuc_va_list;
+#if defined(__svr4__) || defined(_AIX) || defined(_M_UNIX)
+typedef char *__gnuc_va_list;
 #else
-typedef void* __gnuc_va_list;
+typedef void *__gnuc_va_list;
 #endif
 #endif
 
-/* Define the standard macros for the user,
-   if this invocation was from the user program.  */
-#ifdef _STDARG_H
+#define va_start(AP)  AP=(char *) &__builtin_va_alist
 
-/* Amount of space required in an argument list for an arg of type TYPE.
-   TYPE may alternatively be an expression whose type is used.  */
+#define va_end(AP)	((void)0)
 
 #if defined(sysV68)
 #define __va_rounded_size(TYPE)  \
@@ -86,34 +115,22 @@ typedef void* __gnuc_va_list;
   (((sizeof (TYPE) + sizeof (int) - 1) / sizeof (int)) * sizeof (int))
 #endif
 
-#define va_start(AP, LASTARG)                       \
- (AP = ((__gnuc_va_list) __builtin_next_arg (LASTARG)))
-
-#undef va_end
-void va_end(__gnuc_va_list);        /* Defined in libgcc.a */
-#define va_end(AP)  ((void)0)
-
-/* We cast to void * and then to TYPE * because this avoids
-   a warning about increasing the alignment requirement.  */
-
 #if (defined (__arm__) && ! defined (__ARMEB__)) || defined (__i386__) || defined (__i860__) || defined (__ns32000__) || defined (__vax__)
 /* This is for little-endian machines; small args are padded upward.  */
-#define va_arg(AP, TYPE)                        \
- (AP = (__gnuc_va_list) ((char *) (AP) + __va_rounded_size (TYPE)), \
+#define va_arg(AP, TYPE)						\
+ (AP = (__gnuc_va_list) ((char *) (AP) + __va_rounded_size (TYPE)),	\
   *((TYPE *) (void *) ((char *) (AP) - __va_rounded_size (TYPE))))
 #else /* big-endian */
 /* This is for big-endian machines; small args are padded downward.  */
-#define va_arg(AP, TYPE)                        \
- (AP = (__gnuc_va_list) ((char *) (AP) + __va_rounded_size (TYPE)), \
-  *((TYPE *) (void *) ((char *) (AP)                    \
-               - ((sizeof (TYPE) < __va_rounded_size (char) \
-               ? sizeof (TYPE) : __va_rounded_size (TYPE))))))
+#define va_arg(AP, TYPE)						\
+ (AP = (__gnuc_va_list) ((char *) (AP) + __va_rounded_size (TYPE)),	\
+  *((TYPE *) (void *) ((char *) (AP)					\
+		       - ((sizeof (TYPE) < __va_rounded_size (char)	\
+			   ? sizeof (TYPE) : __va_rounded_size (TYPE))))))
 #endif /* big-endian */
 
 /* Copy __gnuc_va_list into another variable of this type.  */
 #define __va_copy(dest, src) (dest) = (src)
-
-#endif /* _STDARG_H */
 
 #endif /* not v850 */
 #endif /* not mn10200 */
@@ -125,27 +142,20 @@ void va_end(__gnuc_va_list);        /* Defined in libgcc.a */
 #endif /* not h8300 */
 #endif /* not alpha */
 #endif /* not i960 */
-#endif /* not sparc */
-#endif /* not mips */
 #endif /* not hppa */
-#endif /* not i860 */
 #endif /* not m88k */
 #endif /* not clipper */
+#endif /* not pyr */
+#endif /* not i860 */
+#endif /* not mips */
+#endif /* not spur */
+#endif /* not sparc */
+#endif /* not _VARARGS_H */
 
-#ifdef _STDARG_H
-/* Define va_list, if desired, from __gnuc_va_list. */
-/* We deliberately do not define va_list when called from
-   stdio.h, because ANSI C says that stdio.h is not supposed to define
-   va_list.  stdio.h needs to have access to that data type,
-   but must not use that name.  It should use the name __gnuc_va_list,
-   which is safe because it is reserved for the implementation.  */
+/* Define va_list from __gnuc_va_list.  */
 
 #ifdef _HIDDEN_VA_LIST  /* On OSF1, this means varargs.h is "half-loaded".  */
 #undef _VA_LIST
-#endif
-
-#ifdef _BSD_VA_LIST
-#undef _BSD_VA_LIST
 #endif
 
 #if defined(__svr4__) || (defined(_SCO_DS) && !defined(__VA_LIST))
@@ -165,12 +175,16 @@ typedef __gnuc_va_list va_list;
 #define __VA_LIST
 #endif
 #endif /* _VA_LIST_ */
-#else /* not __svr4__ || _SCO_DS */
+
+#else /* not __svr4__  || _SCO_DS */
 
 /* The macro _VA_LIST_ is the same thing used by this file in Ultrix.
    But on BSD NET2 we must not test or define or undef it.
    (Note that the comments in NET 2's ansi.h
    are incorrect for _VA_LIST_--see stdio.h!)  */
+/* Michael Eriksson <mer@sics.se> at Thu Sep 30 11:00:57 1993:
+   Sequent defines _VA_LIST_ in <machine/machtypes.h> to be the type to
+   use for va_list (``typedef _VA_LIST_ va_list'') */
 #if !defined (_VA_LIST_) || defined (__BSD_NET2__) || defined (____386BSD____) || defined (__bsdi__) || defined (__sequent__) || defined (__FreeBSD__) || defined(WINNT)
 /* The macro _VA_LIST_DEFINED is used in Windows NT 3.5  */
 #ifndef _VA_LIST_DEFINED
@@ -199,7 +213,8 @@ typedef __gnuc_va_list va_list;
 
 #endif /* not __svr4__ */
 
-#endif /* _STDARG_H */
-
-#endif /* not _ANSI_STDARG_H_ */
-#endif /* not _STDARG_H */
+/* The next BSD release (if there is one) wants this symbol to be
+   undefined instead of _VA_LIST_.  */
+#ifdef _BSD_VA_LIST
+#undef _BSD_VA_LIST
+#endif

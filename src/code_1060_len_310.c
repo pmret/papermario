@@ -1,4 +1,5 @@
 #include "common.h"
+#include "stdlib/stdarg.h"
 
 u32 func_80025D74(void* arg0, const unsigned char* str, s32 count);
 

@@ -326,13 +326,15 @@ typedef UNK_TYPE* DynamicEntityList[MAX_DYNAMIC_ENTITIES];
 typedef struct StaticEntityData {
     /* 0x00 */ s16 flags;
     /* 0x02 */ s16 argSize;
-    /* 0x04 */ char unk_04[8];
+    /* 0x04 */ UNK_PTR unk_04;
+    /* 0x08 */ char unk_08[4];
     /* 0x0C */ UNK_FUN_PTR(unk_data_func);
     /* 0x10 */ UNK_PTR unk_data_ptr1;
     /* 0x14 */ UNK_PTR unk_data_ptr2;
     /* 0x18 */ s32 dmaStart;
     /* 0x1C */ s32 dmaEnd;
-    /* 0x20 */ char unk_20[4];
+    /* 0x20 */ s8 entityType;
+    /* 0x21 */ char unk_21[3];
 } StaticEntityData; // size = 0x24
 
 typedef struct MusicPlayer {

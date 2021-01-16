@@ -11,6 +11,5 @@
 #include "si.h"
 #include "messages.h"
 #include "ld_addrs.h"
-#include "stdarg.h"
 
 #endif

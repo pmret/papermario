@@ -308,7 +308,7 @@ segments:
     files:
     - [0x102610, c, code_102610_len_2330]
     - [0x102C80, c]
-    - [0x104730, c]
+    - [0x104730, c, code_104730]
     - [0x104940, c, code_104940_len_dc0]
     - [0x105700, c, code_105700_len_2130]
     - [0x105F90, c]
@@ -324,7 +324,10 @@ segments:
     #- [0x10AB70, i4,      shadow/10AB70, 32, 32]
     #- [0x10AD70, i4,      shadow/10AD70, 32, 32]
     - [0x10AF70, bin] # TODO
+    - [0x10B4C0, .data, code_104730]
+    - [0x10B608, bin]
     - [0x10C880, rodata, code_102c80]
+    - [0x10C9E0, .rodata, code_104730]
     - [0x10CA50, rodata, code_104940_len_dc0]
   - [0x10CAF0, bin]
   - [0x1164B8, ci8,     peach_letter, 150, 105]
