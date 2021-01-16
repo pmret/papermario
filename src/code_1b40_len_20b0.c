@@ -126,6 +126,12 @@ void func_800271A0(void) {
 INCLUDE_ASM(s32, "code_1b40_len_20b0", func_800271A0);
 #endif
 
+// void func_800271A0(void) {
+//     gSPSegment(gMasterGfxPos++, 0x00, 0x00000000);
+//     gSPDisplayList(gMasterGfxPos++, D_00074230);
+//     gSPDisplayList(gMasterGfxPos++, D_00074210);
+// }
+
 INCLUDE_ASM(s32, "code_1b40_len_20b0", func_800271FC);
 
 INCLUDE_ASM(s32, "code_1b40_len_20b0", func_8002725C);

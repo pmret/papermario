@@ -17,5 +17,3 @@ INCLUDE_ASM(s32, "battle/area_kpa/684C30", func_802184E8_684F18);
 #define NAMESPACE b_area_kpa
 
 INCLUDE_ASM(s32, "battle/area_kpa/684C30", func_80218638_685068);
-
-INCLUDE_ASM(s32, "battle/area_kpa/684C30", func_80218700_685130);

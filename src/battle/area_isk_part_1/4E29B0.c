@@ -13,7 +13,3 @@ INCLUDE_ASM(s32, "battle/area_isk_part_1/4E29B0", func_802184CC_4E2C0C);
 INCLUDE_ASM(s32, "battle/area_isk_part_1/4E29B0", func_802188B0_4E2FF0);
 
 INCLUDE_ASM(s32, "battle/area_isk_part_1/4E29B0", func_80218944_4E3084);
-
-INCLUDE_ASM(s32, "battle/area_isk_part_1/4E29B0", func_80218980_4E30C0);
-
-INCLUDE_ASM(s32, "battle/area_isk_part_1/4E29B0", func_80218A10_4E3150);
