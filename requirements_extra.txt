@@ -3,3 +3,4 @@ cxxfilt
 python-Levenshtein
 stringcase
 watchdog
+gitpython

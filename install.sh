@@ -4,7 +4,7 @@
 if cat /etc/os-release | grep ID=ubuntu &> /dev/null; then
     echo "Installing packages for Ubuntu (apt)"
 
-    sudo apt install -y git python3 python3-pip python3-setuptools build-essential binutils-mips-linux-gnu zlib1g-dev libyaml-dev || exit 1
+    sudo apt install -y git python3 python3-pip python3-setuptools build-essential binutils-mips-linux-gnu zlib1g-dev libyaml-dev ninja-build || exit 1
     python3 -m pip install -U -r requirements.txt
 
     if [[ $1 == "--extra" ]]; then
@@ -25,7 +25,7 @@ if cat /etc/os-release | grep ID=arch &> /dev/null; then
     sudo pacman -Syu || exit 1
 
     # Install dependencies
-    sudo pacman -S --noconfirm --needed git python python-pip python-setuptools base-devel zlib libyaml || exit 1
+    sudo pacman -S --noconfirm --needed git python python-pip python-setuptools base-devel zlib libyaml ninja || exit 1
     python3 -m pip install -U -r requirements.txt
 
     # Install binutils if required
@@ -62,7 +62,7 @@ fi
 if cat /etc/os-release | grep ID=opensuse &> /dev/null; then
     echo "Installing packages for openSUSE (zypper)"
 
-    sudo zypper -n install git python3 python3-devel python3-pip python3-setuptools gcc gcc-c++ glibc-devel make cross-mips-binutils zlib-devel libyaml-devel
+    sudo zypper -n install git python3 python3-devel python3-pip python3-setuptools gcc gcc-c++ glibc-devel make cross-mips-binutils zlib-devel libyaml-devel ninja
 
     # Link the openSUSE locations for binutils tools to their usual GNU locations
     sudo ln -s /usr/bin/mips-suse-linux-addr2line /usr/bin/mips-linux-gnu-addr2line
@@ -103,7 +103,7 @@ if cat /etc/os-release | grep ID=alpine &> /dev/null; then
     fi
 
     # Install dependencies
-    sudo apk add --no-cache bash wget git python3 python3-dev py3-pip build-base zlib-dev yaml-dev
+    sudo apk add --no-cache bash wget git python3 python3-dev py3-pip build-base zlib-dev yaml-dev ninja
     python3 -m pip install -U -r requirements.txt
 
     # Install binutils if required

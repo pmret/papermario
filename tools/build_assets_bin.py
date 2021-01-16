@@ -3,6 +3,7 @@
 import os
 from sys import argv
 from pathlib import Path
+from itertools import tee
 
 def next_multiple(pos, multiple):
     return pos + pos % multiple
@@ -10,7 +11,7 @@ def next_multiple(pos, multiple):
 def build_mapfs(out_bin, assets):
     # every TOC entry's name field has data after the null terminator made up from all the previous name fields.
     # we probably don't have to do this for the game to read the data properly (it doesn't read past the null terminator
-    # of `string`), but the original devs' equivalent to build_assets_fs.py had this bug so we need to replicate it to match.
+    # of `string`), but the original devs' equivalent of this script had this bug so we need to replicate it to match.
     written_names = []
 
     with open(out_bin, "wb") as f:
@@ -19,16 +20,8 @@ def build_mapfs(out_bin, assets):
         next_data_pos = (len(assets) + 1) * 0x1C
 
         asset_idx = 0
-        for decompressed in assets:
+        for decompressed, compressed in assets:
             toc_entry_pos = 0x20 + asset_idx * 0x1C
-
-            decompressed = Path(decompressed)
-            compressed = decompressed.with_suffix(".Yay0")
-
-            # non-texture assets should be compressed
-            if not decompressed.stem.endswith("_tex") and not compressed.exists():
-                print(f"uncompressed asset: {decompressed} (expected {compressed} to exist)")
-                exit(1)
 
             # data for TOC entry
             name = decompressed.stem + "\0"
@@ -72,4 +65,10 @@ if __name__ == "__main__":
     argv.pop(0) # python3
     out = argv.pop(0)
 
-    build_mapfs(out, argv)
+    assets = []
+
+    # pairs
+    for i in range(0, len(argv), 2):
+        assets.append((Path(argv[i]), Path(argv[i+1])))
+
+    build_mapfs(out, assets)

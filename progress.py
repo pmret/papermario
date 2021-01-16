@@ -79,6 +79,16 @@ def main(args):
         csv_list = [str(version), timestamp, git_hash, str(len(all_funcs)), str(len(nonmatching_funcs)),
                     str(len(matching_funcs)), str(total_size), str(nonmatching_size), str(matching_size)]
         print(",".join(csv_list))
+    elif args.shield_json:
+        import json
+
+        # https://shields.io/endpoint
+        print(json.dumps({
+            "schemaVersion": 1,
+            "label": "progress",
+            "message": f"{matching_ratio:.2f}%",
+            "color": "yellow",
+        }))
     else:
         if matching_size + nonmatching_size != total_size:
             print("Warning: category/total size mismatch!\n")
@@ -89,6 +99,7 @@ def main(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Reports progress for the project")
     parser.add_argument("--csv", action="store_true")
+    parser.add_argument("--shield-json", action="store_true")
     args = parser.parse_args()
 
     main(args)

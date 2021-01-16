@@ -4,14 +4,12 @@ pipeline {
     stages {
         stage('Setup') {
             steps {
-                sh 'cp /usr/local/etc/roms/baserom_pm.z64 baserom.z64'
-                sh 'make setup'
+                sh './configure.py --baserom /usr/local/etc/roms/baserom_pm.z64'
             }
         }
         stage('Build') {
             steps {
-                echo 'Building...'
-                sh 'make -j'
+                sh 'ninja'
             }
         }
         stage('Report Progress') {
@@ -20,6 +18,7 @@ pipeline {
             }
             steps {
                 sh 'python3 progress.py --csv >> /var/www/papermar.io/html/reports/progress.csv'
+                sh 'python3 progress.py --shield-json > /var/www/papermar.io/html/reports/progress_shield.json'
             }
         }
     }

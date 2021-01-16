@@ -4,8 +4,10 @@
 #include "common.h"
 
 #ifndef SPLAT
+#ifndef INCLUDE_ASM
 #define INCLUDE_ASM(TYPE, FOLDER, NAME, ARGS...) \
   TYPE __attribute__((naked)) NAME(ARGS) { __asm__( ".include \"include/macro.inc\"\n.include \"asm/nonmatchings/"FOLDER"/"#NAME".s\"\n.set reorder\n.set at"); }
+#endif
 #else
 #define INCLUDE_ASM(TYPE, FOLDER, NAME, ARGS...)
 #endif
