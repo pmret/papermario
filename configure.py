@@ -7,6 +7,7 @@ import ninja_syntax
 from argparse import ArgumentParser
 import asyncio
 from subprocess import PIPE
+import subprocess
 import hashlib
 
 sys.path.append(os.path.dirname(__file__) + "/tools/n64splat")
@@ -71,9 +72,9 @@ async def task(coro):
     num_tasks_done += 1
     print(f"\rConfiguring build... {(num_tasks_done / num_tasks) * 100:.0f}%", end="")
 
-async def build_c_file(c_file: str, generated_headers, cppflags):
+async def build_c_file(c_file: str, generated_headers, ccache, cppflags):
     # preprocess c_file, but simply put an _ in front of INCLUDE_ASM and SCRIPT
-    stdout, stderr = await shell(f"{cpp} {cppflags} '-DINCLUDE_ASM(...)=_INCLUDE_ASM(__VA_ARGS__)' '-DSCRIPT(...)=_SCRIPT(__VA_ARGS__)' {c_file} -o -")
+    stdout, stderr = await shell(f"{ccache} {cpp} {cppflags} '-DINCLUDE_ASM(...)=_INCLUDE_ASM(__VA_ARGS__)' '-DSCRIPT(...)=_SCRIPT(__VA_ARGS__)' {c_file} -o -")
 
     # search for macro usage (note _ prefix)
     uses_dsl = "_SCRIPT(" in stdout
@@ -112,6 +113,10 @@ def build_image(f: str, segment):
         "img_flags": flags,
     })
     build_bin_object(out)
+
+def cmd_exists(cmd):
+    return subprocess.call("type " + cmd, shell=True,
+        stdout=subprocess.PIPE, stderr=subprocess.PIPE) == 0
 
 async def main():
     global n, cpp, task_sem, num_tasks, num_tasks_done
@@ -152,6 +157,7 @@ async def main():
             exit(1)
 
     cpp = args.cpp or "cpp"
+    ccache = "ccache" if cmd_exists("ccache") else ""
 
     # compile n64splat dependencies
     await shell("make -C tools/n64splat")
@@ -186,12 +192,12 @@ async def main():
     n.newline()
 
     n.rule("cc",
-        command=f"bash -o pipefail -c '{cpp} $cppflags $in -o - | $iconv | tools/$os/cc1 $cflags -o - | tools/$os/mips-nintendo-nu64-as -EB -G 0 - -o $out'",
+        command=f"bash -o pipefail -c '{ccache} {cpp} $cppflags $in -o - | $iconv | {ccache} tools/$os/cc1 $cflags -o - | tools/$os/mips-nintendo-nu64-as -EB -G 0 - -o $out'",
         description="cc $in",
         depfile="$out.d",
         deps="gcc")
     n.rule("cc_dsl",
-        command=f"bash -o pipefail -c '{cpp} $cppflags $in -o - | $python tools/compile_dsl_macros.py | $iconv | tools/$os/cc1 $cflags -o - | tools/$os/mips-nintendo-nu64-as -EB -G 0 - -o $out'",
+        command=f"bash -o pipefail -c '{ccache} {cpp} $cppflags $in -o - | $python tools/compile_dsl_macros.py | $iconv | {ccache} tools/$os/cc1 $cflags -o - | tools/$os/mips-nintendo-nu64-as -EB -G 0 - -o $out'",
         description="cc (with dsl) $in",
         depfile="$out.d",
         deps="gcc")
@@ -415,7 +421,7 @@ async def main():
 
     # slow tasks generated concurrently
     n.comment("c")
-    tasks = [task(build_c_file(f, "generated_headers", cppflags)) for f in c_files]
+    tasks = [task(build_c_file(f, "generated_headers", ccache, cppflags)) for f in c_files]
     num_tasks = len(tasks)
     num_tasks_done = 0
     await asyncio.gather(*tasks)
