@@ -18,7 +18,7 @@ pipeline {
             }
             steps {
                 sh 'python3 progress.py --csv >> /var/www/papermar.io/html/reports/progress.csv'
-                sh 'python3 progress.py --shield-json >> /var/www/papermar.io/html/reports/progress_shield.json'
+                sh 'python3 progress.py --shield-json > /var/www/papermar.io/html/reports/progress_shield.json'
             }
         }
     }

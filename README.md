@@ -15,7 +15,7 @@ This is a work-in-progress decompilation of Paper Mario (USA).
 
 It builds the following ROM:
 
-* [**papermario.z64**](https://datomatic.no-intro.org/index.php?page=show_record&s=24&n=0537) `sha1: 3837f44cda784b466c9a2d99df70d77c322b97a0`
+* papermario.z64 `sha1: 3837f44cda784b466c9a2d99df70d77c322b97a0`
 
 To set up the repository, see [INSTALL.md](INSTALL.md).
 

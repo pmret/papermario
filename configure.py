@@ -13,7 +13,6 @@ sys.path.append(os.path.dirname(__file__) + "/tools/n64splat")
 import split
 
 INCLUDE_ASM_RE = re.compile(r"_INCLUDE_ASM\([^,]+, ([^,]+), ([^,)]+)") # note _ prefix
-CPPFLAGS = "-Iinclude -Isrc -D _LANGUAGE_C -D _FINALROM -ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32"
 
 TARGET = "papermario"
 
@@ -72,9 +71,9 @@ async def task(coro):
     num_tasks_done += 1
     print(f"\rConfiguring build... {(num_tasks_done / num_tasks) * 100:.0f}%", end="")
 
-async def build_c_file(c_file: str, generated_headers):
+async def build_c_file(c_file: str, generated_headers, cppflags):
     # preprocess c_file, but simply put an _ in front of INCLUDE_ASM and SCRIPT
-    stdout, stderr = await shell(f"{cpp} {CPPFLAGS} '-DINCLUDE_ASM(...)=_INCLUDE_ASM(__VA_ARGS__)' '-DSCRIPT(...)=_SCRIPT(__VA_ARGS__)' {c_file} -o -")
+    stdout, stderr = await shell(f"{cpp} {cppflags} '-DINCLUDE_ASM(...)=_INCLUDE_ASM(__VA_ARGS__)' '-DSCRIPT(...)=_SCRIPT(__VA_ARGS__)' {c_file} -o -")
 
     # search for macro usage (note _ prefix)
     uses_dsl = "_SCRIPT(" in stdout
@@ -122,6 +121,7 @@ async def main():
     parser = ArgumentParser(description="Paper Mario build.ninja generator")
     parser.add_argument("--cpp", help="GNU C preprocessor command")
     parser.add_argument("--baserom", default="baserom.z64", help="Path to unmodified Paper Mario (U) z64 ROM")
+    parser.add_argument("--cflags", default="", help="Extra cc/cpp flags")
     args = parser.parse_args()
 
     # on macOS, /usr/bin/cpp defaults to clang rather than gcc (but we need gcc's)
@@ -173,14 +173,16 @@ async def main():
     # generate build.ninja
     n = ninja_syntax.Writer(open("build.ninja", "w"), width=120)
 
+    cppflags = "-Iinclude -Isrc -D _LANGUAGE_C -D _FINALROM -ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 " + args.cflags
+
     n.variable("builddir", "build")
     n.variable("target", TARGET)
     n.variable("cross", "mips-linux-gnu-")
     n.variable("python", sys.executable)
     n.variable("os", "mac" if sys.platform == "darwin" else "linux")
     n.variable("iconv", "tools/iconv.py UTF-8 SHIFT-JIS" if sys.platform == "darwin" else "iconv --from UTF-8 --to SHIFT-JIS")
-    n.variable("cppflags", f"{CPPFLAGS} -Wcomment")
-    n.variable("cflags", "-O2 -quiet -G 0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wuninitialized -Wshadow")
+    n.variable("cppflags", f"{cppflags} -Wcomment")
+    n.variable("cflags", "-O2 -quiet -G 0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wuninitialized -Wshadow " + args.cflags)
     n.newline()
 
     n.rule("cc",
@@ -413,7 +415,7 @@ async def main():
 
     # slow tasks generated concurrently
     n.comment("c")
-    tasks = [task(build_c_file(f, "generated_headers")) for f in c_files]
+    tasks = [task(build_c_file(f, "generated_headers", cppflags)) for f in c_files]
     num_tasks = len(tasks)
     num_tasks_done = 0
     await asyncio.gather(*tasks)
