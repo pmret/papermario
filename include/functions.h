@@ -35,6 +35,7 @@ u32 get_entity_type(s32 arg0);
 Entity* get_entity_by_index(s32 index);
 s32 create_entity(StaticEntityData*, s32, s32, s32, s32, s32);
 void func_80070550(s32, f32, f32, f32, f32, f32, s32, s32);
+void func_802E263C(Entity* entity);
 
 UNK_TYPE func_80072230(s32, f32, f32, f32, f32, s32);
 

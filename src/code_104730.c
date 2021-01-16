@@ -60,24 +60,6 @@ void func_802E2EB0(Entity* entity) {
     func_802E246C(entity, a1, a2);
 }
 
-typedef struct struct802E9C40 {
-    /* 0x00 */ char unk_00[0x10];
-    /* 0x10 */ UNK_PTR unk_10;
-    /* 0x14 */ char unk_14[0x1C];
-} struct802E9C40; // size = 0x20
-
-typedef struct struct802E9C70 {
-    /* 0x00 */ char unk_00[0x10];
-    /* 0x10 */ UNK_PTR unk_10;
-    /* 0x14 */ char unk_14[8];
-} struct802E9C70;
-
-extern UNK_TYPE D_802E9828;
-void func_802E263C(Entity* entity);
-
-struct802E9C40 D_802E9C40 = {{0, 0, 0, 7, 0, 0, 0, 0x20, 0, 0, 0, 3, 0, 0, 0, 0}, func_802E263C, {0, 0, 0, 7, 0, 0, 0, 1, 0, 0, 0, 7, 0x20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-struct802E9C70 D_802E9C70 = {{0, 0, 0, 4, 0, 0, 0, 0x11, 0, 0, 0, 1, 0, 0, 0, 0x3C}, &D_802E9828, {0, 0, 0, 2, 0, 0, 0, 0}};
-
 //ROM addrs; todo
 extern UNK_TYPE D_00E32420;
 extern UNK_TYPE D_00E35670;
@@ -86,13 +68,13 @@ extern UNK_TYPE D_00E3B870;
 extern UNK_TYPE D_00E3E260;
 extern UNK_TYPE D_00E42240;
 
-StaticEntityData D_802E9C8C = {0, 0x250, &D_802E9C70, {0, 0, 0, 0}, func_802E2EB0, &D_802E9C40, NULL, &D_00E32420, &D_00E35670, 21, {0x10, 0x10, 0x10}};
-StaticEntityData D_802E9CB0 = {0, 0x250, &D_802E9C70, {0, 0, 0, 0}, func_802E2EB0, &D_802E9C40, NULL, &D_00E35670, &D_00E38890, 22, {0x10, 0x10, 0x10}};
-StaticEntityData D_802E9CD4 = {0, 0x250, &D_802E9C70, {0, 0, 0, 0}, func_802E2EB0, &D_802E9C40, NULL, &D_00E38890, &D_00E3B870, 23, {0x10, 0x10, 0x10}};
-StaticEntityData D_802E9CF8 = {0, 0x250, &D_802E9C70, {0, 0, 0, 0}, func_802E2EB0, &D_802E9C40, NULL, &D_00E32420, &D_00E35670, 24, {0x08, 0x08, 0x08}};
-StaticEntityData D_802E9D1C = {0, 0x250, &D_802E9C70, {0, 0, 0, 0}, func_802E2EB0, &D_802E9C40, NULL, &D_00E35670, &D_00E38890, 25, {0x08, 0x08, 0x08}};
-StaticEntityData D_802E9D40 = {0, 0x250, &D_802E9C70, {0, 0, 0, 0}, func_802E2EB0, &D_802E9C40, NULL, &D_00E38890, &D_00E3B870, 26, {0x08, 0x08, 0x08}};
-StaticEntityData D_802E9D64 = {0, 0x250, &D_802E9C70, {0, 0, 0, 0}, func_802E2EB0, &D_802E9C40, NULL, &D_00E3E260, &D_00E42240, 13, {0x08, 0x08, 0x08}};
+extern StaticEntityData D_802E9C8C;
+extern StaticEntityData D_802E9CB0;
+extern StaticEntityData D_802E9CD4;
+extern StaticEntityData D_802E9CF8;
+extern StaticEntityData D_802E9D1C;
+extern StaticEntityData D_802E9D40;
+extern StaticEntityData D_802E9D64;
 
 void func_802E2FD0(Entity* entity) {
     u32 type;
