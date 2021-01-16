@@ -313,7 +313,7 @@ s32 func_802E17A8(Entity* entity) {
     }
 }
 #else
-INCLUDE_ASM(s32, "code_102C80", func_802E17A8);
+INCLUDE_ASM(s32, "code_102C80", func_802E17A8, Entity* entity);
 #endif
 
 void func_802E1EA8(Entity* entity) {
@@ -464,7 +464,7 @@ void func_802E1EDC(Entity* entity) {
     }
 }
 #else
-INCLUDE_ASM(s32, "code_102C80", func_802E1EDC);
+INCLUDE_ASM(void, "code_102C80", func_802E1EDC, Entity* entity);
 #endif
 
 void func_802E234C(Entity* entity) {
@@ -518,7 +518,7 @@ void func_802E2450(Entity* entity) {
 
 INCLUDE_ASM(void, "code_102C80", func_802E246C, Entity* entity, void* arg1, void* arg2);
 
-INCLUDE_ASM(s32, "code_102C80", func_802E263C);
+INCLUDE_ASM(void, "code_102C80", func_802E263C, Entity* entity);
 
 #ifdef NON_MATCHING
 // display list issues

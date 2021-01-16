@@ -323,8 +323,7 @@ segments:
     - [0x10AAF0, bin]
     #- [0x10AB70, i4,      shadow/10AB70, 32, 32]
     #- [0x10AD70, i4,      shadow/10AD70, 32, 32]
-    - [0x10AF70, bin] # TODO
-    - [0x10B4C0, .data, code_104730]
+    - [0x10AF70, .data, code_104730]
     - [0x10B608, bin]
     - [0x10C880, rodata, code_102c80]
     - [0x10C9E0, .rodata, code_104730]
