@@ -28,72 +28,26 @@ INCLUDE_ASM(s32, "code_105700_len_2130", func_802E44F8);
 
 INCLUDE_ASM(s32, "code_105700_len_2130", func_802E4540);
 
-INCLUDE_ASM(s32, "code_105700_len_2130", func_802E455C);
+void func_802E455C(s32 entityIndex) {
+    Gfx* gfx = gMasterGfxPos;
+    Entity* entity = get_entity_by_index(entityIndex);
+
+    gDPSetTextureLUT(gfx++, G_TT_NONE);
+    gSPTexture(gfx++, -1, -1, 0, G_TX_RENDERTILE, G_ON);
+
+    if (entity->alpha >= 255) {
+        gDPSetRenderMode(gfx++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
+        gDPSetCombineMode(gfx++, G_CC_MODULATEIA, G_CC_MODULATEIA);
+    } else {
+        gDPSetCombineLERP(gfx++, 0, 0, 0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0);
+        gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, entity->alpha);
+    }
+
+    gMasterGfxPos = gfx;
+}
 
 INCLUDE_ASM(s32, "code_105700_len_2130", func_802E464C);
 
 INCLUDE_ASM(s32, "code_105700_len_2130", func_802E4694);
 
 INCLUDE_ASM(s32, "code_105700_len_2130", func_802E46BC);
-
-INCLUDE_ASM(s32, "code_105700_len_2130", func_802E4710);
-
-INCLUDE_ASM(s32, "code_105700_len_2130", func_802E4730);
-
-INCLUDE_ASM(s32, "code_105700_len_2130", func_802E4AEC);
-
-INCLUDE_ASM(s32, "code_105700_len_2130", func_802E4B10);
-
-INCLUDE_ASM(s32, "code_105700_len_2130", func_802E4B60);
-
-INCLUDE_ASM(s32, "code_105700_len_2130", func_802E4C10);
-
-INCLUDE_ASM(s32, "code_105700_len_2130", func_802E4DE0);
-
-INCLUDE_ASM(s32, "code_105700_len_2130", func_802E4E04);
-
-INCLUDE_ASM(s32, "code_105700_len_2130", func_802E5308);
-
-INCLUDE_ASM(s32, "code_105700_len_2130", func_802E5324);
-
-INCLUDE_ASM(s32, "code_105700_len_2130", func_802E540C);
-
-INCLUDE_ASM(s32, "code_105700_len_2130", func_802E5428);
-
-INCLUDE_ASM(s32, "code_105700_len_2130", func_802E545C);
-
-INCLUDE_ASM(s32, "code_105700_len_2130", func_802E548C);
-
-INCLUDE_ASM(s32, "code_105700_len_2130", func_802E54A8);
-
-INCLUDE_ASM(s32, "code_105700_len_2130", func_802E54CC);
-
-INCLUDE_ASM(s32, "code_105700_len_2130", func_802E555C);
-
-INCLUDE_ASM(s32, "code_105700_len_2130", func_802E55A8);
-
-INCLUDE_ASM(s32, "code_105700_len_2130", func_802E5648);
-
-INCLUDE_ASM(s32, "code_105700_len_2130", func_802E5670);
-
-INCLUDE_ASM(s32, "code_105700_len_2130", func_802E5690);
-
-INCLUDE_ASM(s32, "code_105700_len_2130", func_802E56D0);
-
-INCLUDE_ASM(s32, "code_105700_len_2130", func_802E56EC);
-
-INCLUDE_ASM(s32, "code_105700_len_2130", func_802E578C);
-
-INCLUDE_ASM(s32, "code_105700_len_2130", func_802E57E4);
-
-INCLUDE_ASM(s32, "code_105700_len_2130", func_802E5800);
-
-INCLUDE_ASM(s32, "code_105700_len_2130", func_802E581C);
-
-INCLUDE_ASM(s32, "code_105700_len_2130", func_802E586C);
-
-INCLUDE_ASM(s32, "code_105700_len_2130", func_802E5E50);
-
-INCLUDE_ASM(s32, "code_105700_len_2130", func_802E5F50);
-
-INCLUDE_ASM(s32, "code_105700_len_2130", func_802E5F7C);

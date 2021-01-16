@@ -223,6 +223,8 @@ segments:
     vram: 0x800DC500
     files:
     - [0x759b0, c, code_759b0_len_61b0]
+    - [0x77480, c]
+    - [0x7B440, c]
     - [0x7bb60, c, code_7bb60_len_41b0]
     - [0x7fd10, c, code_7fd10_len_b40]
     - [0x80850, c, code_80850_len_3060]
@@ -251,9 +253,12 @@ segments:
     vram: 0x8010F6D0
     files:
     - [0xa5dd0, c, code_a5dd0_len_114e0]
+    - [0xB4580, c]
     - [0xb72b0, c, code_b72b0_len_15ed0]
     - [0xB9D60, c, code_B9D60]
+    - [0xC50A0, c]
     - [0xcd180, c, code_cd180_len_38f0]
+    - [0xCEE40, c]
     - [0xd0a70, c, code_d0a70_len_4fe0]
     - [0xd5a50, c, code_d5a50_len_5fd0]
     - [0xdba20, c, code_dba20_len_350]
@@ -262,6 +267,7 @@ segments:
     - [0xdd930, c, code_dd930_len_1c0]
     - [0xddaf0, c, code_ddaf0_len_c50]
     - [0xde740, c, code_de740_len_23f0]
+    - [0xDF950, c]
     - [0xe0b30, c, code_e0b30_len_b80]
     - [0xE16B0, data, code_a5dd0_len_114e0]
     - [0xE5510, .data, code_d0a70_len_4fe0]
@@ -300,8 +306,12 @@ segments:
     vram: 0x802E0D90
     files:
     - [0x102610, c, code_102610_len_2330]
+    - [0x102C80, c]
+    - [0x104730, c]
     - [0x104940, c, code_104940_len_dc0]
     - [0x105700, c, code_105700_len_2130]
+    - [0x105F90, c]
+    - [0x106EF0, c]
     - [0x107830, c, code_107830_len_e70]
     - [0x1086a0, c, code_1086a0_len_fc0]
     - [0x109660, c, code_109660_len_1270]
@@ -322,6 +332,7 @@ segments:
     vram: 0x80242BA0
     files:
     - [0x135EE0, c]
+    - [0x137ED0, c]
     - [0x138CC0, c]
     - [0x13CAF0, c]
     - [0x13E120, c]
@@ -375,10 +386,12 @@ segments:
     - [0x182B30, c]
     - [0x18C790, c]
     - [0x18F340, c]
+    - [0x190A10, c]
     - [0x190B20, c]
     - [0x1967B0, c]
     - [0x196AA0, c]
     - [0x197F40, c]
+    - [0x19FAF0, c]
     - [0x1A5830, c]
     - [0x1AC760, c]
     - [0x1AF120, c]
@@ -1553,10 +1566,12 @@ segments:
     - [0x4479A0, c]
     - [0x447C80, c]
     - [0x447D50, c]
+    - [0x448420, c]
     - [0x448690, c]
     - [0x448900, c]
     - [0x448B70, c]
     - [0x448E20, c]
+    - [0x448E80, c]
     - [0x4495F0, bin]
   - name: battle/area_mac/
     type: code
@@ -1576,6 +1591,7 @@ segments:
     files:
     - [0x47F0B0, c]
     - [0x47F0D0, c]
+    - [0x47F570, c]
     - [0x4800C0, bin]
   - name: battle/area_nok/
     type: code
@@ -1652,6 +1668,7 @@ segments:
     - [0x4E2810, c]
     - [0x4E28E0, c]
     - [0x4E29B0, c]
+    - [0x4E30C0, c]
     - [0x4E3190, c]
     - [0x4E3350, bin]
   - name: battle/area_isk_part_2/
@@ -1662,6 +1679,7 @@ segments:
     files:
     - [0x4EF4A0, c]
     - [0x4EFCF0, c]
+    - [0x4EFDC0, c]
     - [0x4EFE90, c]
     - [0x4EFFE0, bin]
   - name: battle/area_mim/
@@ -1705,6 +1723,8 @@ segments:
     - [0x512910, c]
     - [0x5129E0, c]
     - [0x512AB0, c]
+    - [0x512C90, c]
+    - [0x512E50, c]
     - [0x513380, c]
     - [0x5134B0, c]
     - [0x513580, c]
@@ -1796,6 +1816,7 @@ segments:
     - [0x5739F0, c]
     - [0x573AC0, c]
     - [0x573C30, c]
+    - [0x573E10, c]
     - [0x573EE0, bin]
   - name: battle/area_jan2/
     type: code
@@ -1815,6 +1836,8 @@ segments:
     - [0x58C2F0, c]
     - [0x58C670, c]
     - [0x58C740, c]
+    - [0x58C920, c]
+    - [0x58CC90, c]
     - [0x58D100, bin]
   - name: battle/area_kzn2/
     type: code
@@ -1824,6 +1847,7 @@ segments:
     files:
     - [0x59E6E0, c]
     - [0x59F420, c]
+    - [0x59F4D0, c]
     - [0x59F530, bin]
   - name: battle/area_flo/
     type: code
@@ -1833,6 +1857,10 @@ segments:
     files:
     - [0x5B14B0, c]
     - [0x5B16A0, c]
+    - [0x5B1A10, c]
+    - [0x5B1D80, c]
+    - [0x5B20F0, c]
+    - [0x5B28D0, c]
     - [0x5B3370, bin]
   - name: battle/area_flo2/
     type: code
@@ -1892,6 +1920,7 @@ segments:
     files:
     - [0x623BA0, c]
     - [0x6253E0, c]
+    - [0x625750, c]
     - [0x626A30, bin]
   - name: battle/area_sam2/
     type: code
@@ -1902,6 +1931,7 @@ segments:
     - [0x63D1E0, c]
     - [0x63D710, c]
     - [0x63D9F0, c]
+    - [0x63DD60, c]
     - [0x63F040, bin]
   - name: battle/area_pra/
     type: code
@@ -1911,6 +1941,10 @@ segments:
     files:
     - [0x648E10, c]
     - [0x649050, c]
+    - [0x649480, c]
+    - [0x6497F0, c]
+    - [0x649B60, c]
+    - [0x649ED0, c]
     - [0x64A340, bin]
   - name: battle/area_pra2/
     type: code
@@ -1919,6 +1953,8 @@ segments:
     overlay: True
     files:
     - [0x660750, c]
+    - [0x660D20, c]
+    - [0x660E10, c]
     - [0x661150, bin]
   - name: battle/area_pra3/
     type: code
@@ -1928,6 +1964,7 @@ segments:
     files:
     - [0x669D80, c]
     - [0x66B5B0, c]
+    - [0x66B920, c]
     - [0x66BC90, bin]
   - name: battle/area_kpa/
     type: code
@@ -1938,6 +1975,7 @@ segments:
     - [0x684A30, c]
     - [0x684B00, c]
     - [0x684C30, c]
+    - [0x685130, c]
     - [0x685260, bin]
   - name: battle/area_kpa2/
     type: code
@@ -2603,6 +2641,7 @@ segments:
     - [0x7e0e80, c]
     - [0x7E2AA0, c]
     - [0x7E3700, c]
+    - [0x7E4690, c]
     - [0x7e4d00, bin]
   - name: world/area_mac/machi/
     type: code
@@ -3114,6 +3153,7 @@ segments:
     files:
     - [0x8B0070, c]
     - [0x8B30E0, c]
+    - [0x8B33E0, c]
     - [0x8B36B0, c]
     - [0x8B37D0, c]
     - [0x8B3A10, c]
@@ -4630,6 +4670,7 @@ segments:
     vram: 0x80240000
     files:
     - [0xA16220, c]
+    - [0xA171F0, c]
     - [0xA17210, c]
     - [0xA18D00, bin]
     - [0xA18E50, bin]
@@ -8450,6 +8491,7 @@ segments:
     overlay: True
     files:
     - [0xE2F750, c]
+    - [0xE307C0, c]
     - [0xE31380, bin]
   - [0xE31530, bin] # unk data
   - type: code

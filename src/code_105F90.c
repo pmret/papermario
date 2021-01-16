@@ -1,0 +1,39 @@
+#include "common.h"
+
+INCLUDE_ASM(s32, "code_105F90", func_802E4710);
+
+INCLUDE_ASM(s32, "code_105F90", func_802E4730);
+
+INCLUDE_ASM(s32, "code_105F90", func_802E4AEC);
+
+INCLUDE_ASM(s32, "code_105F90", func_802E4B10);
+
+INCLUDE_ASM(s32, "code_105F90", func_802E4B60);
+
+INCLUDE_ASM(s32, "code_105F90", func_802E4C10);
+
+INCLUDE_ASM(s32, "code_105F90", func_802E4DE0);
+
+INCLUDE_ASM(s32, "code_105F90", func_802E4E04);
+
+INCLUDE_ASM(s32, "code_105F90", func_802E5308);
+
+INCLUDE_ASM(s32, "code_105F90", func_802E5324);
+
+INCLUDE_ASM(s32, "code_105F90", func_802E540C);
+
+INCLUDE_ASM(s32, "code_105F90", func_802E5428);
+
+INCLUDE_ASM(s32, "code_105F90", func_802E545C);
+
+INCLUDE_ASM(s32, "code_105F90", func_802E548C);
+
+INCLUDE_ASM(s32, "code_105F90", func_802E54A8);
+
+INCLUDE_ASM(s32, "code_105F90", func_802E54CC);
+
+INCLUDE_ASM(s32, "code_105F90", func_802E555C);
+
+INCLUDE_ASM(s32, "code_105F90", func_802E55A8);
+
+INCLUDE_ASM(s32, "code_105F90", func_802E5648);

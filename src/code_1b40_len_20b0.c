@@ -1,7 +1,7 @@
 #include "common.h"
 
-extern Gfx D_00074210[];
-extern Gfx D_00074230[];
+// extern Gfx D_00074210[];
+// extern Gfx D_00074230[];
 
 extern int D_000759B0[];
 extern int D_000759B0_end[]; // A55D0
@@ -124,6 +124,15 @@ INCLUDE_ASM(s32, "code_1b40_len_20b0", func_800271A0);
     gMasterGfxPos[0]++;
     gSPDisplayList(gMasterGfxPos[0]++, &D_00074210);
 }*/
+
+// extern Gfx D_00074210[];
+// extern Gfx D_00074230[];
+
+// void func_800271A0(void) {
+//     gSPSegment(gMasterGfxPos++, 0x00, 0x00000000);
+//     gSPDisplayList(gMasterGfxPos++, D_00074230);
+//     gSPDisplayList(gMasterGfxPos++, D_00074210);
+// }
 
 INCLUDE_ASM(s32, "code_1b40_len_20b0", func_800271FC);
 

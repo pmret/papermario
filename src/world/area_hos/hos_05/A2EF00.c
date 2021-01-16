@@ -1,5 +1,9 @@
 #include "hos_05.h"
 
+extern u8 D_8024DCCF;
+extern u8 D_8024DCD3;
+extern u8 D_802D9D73;
+
 INCLUDE_ASM(s32, "world/area_hos/hos_05/A2EF00", pause_tabs_draw_badges_A2EF00);
 
 INCLUDE_ASM(s32, "world/area_hos/hos_05/A2EF00", func_80244DE4_A2F024);
@@ -12,15 +16,24 @@ INCLUDE_ASM(s32, "world/area_hos/hos_05/A2EF00", func_80244DE4_A2F024);
 
 INCLUDE_ASM(s32, "world/area_hos/hos_05/A2EF00", func_802452C4_A2F504);
 
-INCLUDE_ASM(s32, "world/area_hos/hos_05/A2EF00", func_8024564C_A2F88C);
+void func_8024564C_A2F88C(void) {
+    gDPSetCombineLERP(gMasterGfxPos++, TEXEL0, 0, SHADE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, SHADE, 0, TEXEL0, 0, PRIMITIVE, 0);
+    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, D_802D9D73);
+}
 
 INCLUDE_ASM(s32, "world/area_hos/hos_05/A2EF00", func_8024569C_A2F8DC);
 
-INCLUDE_ASM(s32, "world/area_hos/hos_05/A2EF00", func_802456C8_A2F908);
+void func_802456C8_A2F908(void) {
+    gDPSetCombineLERP(gMasterGfxPos++, TEXEL0, 0, SHADE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, SHADE, 0, TEXEL0, 0, PRIMITIVE, 0);
+    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, D_8024DCCF);
+}
 
 INCLUDE_ASM(s32, "world/area_hos/hos_05/A2EF00", func_80245718_A2F958);
 
-INCLUDE_ASM(s32, "world/area_hos/hos_05/A2EF00", func_80245744_A2F984);
+void func_80245744_A2F984(void) {
+    gDPSetCombineLERP(gMasterGfxPos++, TEXEL0, 0, SHADE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, SHADE, 0, TEXEL0, 0, PRIMITIVE, 0);
+    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, D_8024DCD3);
+}
 
 INCLUDE_ASM(s32, "world/area_hos/hos_05/A2EF00", func_80245794_A2F9D4);
 
