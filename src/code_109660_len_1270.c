@@ -39,8 +39,8 @@ void func_802E7F40(Entity* entity) {
     struct802E7F40* temp = entity->dataBuf;
 
     entity->scale.y = 0.85714287f;
+    temp->unk_00 = D_8015C7D0[0];
     temp->unk_04 = 0xFFFF;
-    temp->unk_00 = D_8015C7D0;
 }
 
 void func_802E7F6C(Entity* entity) {
@@ -259,4 +259,24 @@ void func_802E8E10(Entity* entity) {
 
 INCLUDE_ASM(s32, "code_109660_len_1270", push_entity_matrix);
 
-INCLUDE_ASM(s32, "code_109660_len_1270", func_802E8F94);
+f32 func_802E8F94(Entity* entity) {
+    struct802E89B0* temp_s0;
+    s32* temp = &D_8015C7D0;
+    s32 temp2;
+    s32 temp3;
+    s32 temp4;
+    f32* temp5;
+
+    temp2 = temp[0];
+    temp3 = temp[1];
+    temp4 = temp[2];
+    entity->unk_3C = &push_entity_matrix;
+    temp_s0 = entity->dataBuf;
+    temp5 = &entity->position.y; // required... wtf
+    temp_s0->unk_0C = temp2;
+    temp_s0->unk_10 = temp3;
+    temp_s0->unk_14 = temp4;
+    temp_s0->unk_18 = entity->position.y;
+    temp_s0->unk_08 = get_global_flag(temp_s0->unk_14);
+    *temp5 = entity->position.y - ((temp_s0->unk_08 != 0) ? 15.0 : 52.0);
+}

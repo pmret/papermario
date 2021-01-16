@@ -484,12 +484,12 @@ void entity_init_BlueSwitch(Entity* entity) {
     struct802E1400* temp = entity->dataBuf;
 
     func_802E234C(entity);
-    if (D_8015C7D0 == 2) {
+    if (D_8015C7D0[0] == 2) {
         D_802EB3A0 = entity;
         return;
     }
 
-    if (D_8015C7D0 == 1) {
+    if (D_8015C7D0[0] == 1) {
         if (D_802EB3A0 != NULL) {
             temp->attachedEntity = D_802EB3A0;
             entity->flags |= 1;

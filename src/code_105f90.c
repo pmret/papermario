@@ -123,7 +123,7 @@ s8 func_802E55A8(Entity* entity, StaticEntityData* data) {
     struct802E4B10* temp_v1;
     s8 phi_v0;
 
-    temp_s2 = D_8015C7D0;
+    temp_s2 = D_8015C7D0[0];
     entity_init_Hammer23Block_normal(entity);
     someEntity = get_entity_by_index(create_entity(data, entity->position.x, entity->position.y, entity->position.z, 0.0f,
                                      0x80000000));
