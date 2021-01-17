@@ -8,7 +8,7 @@ INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8010FBC0);
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8010FBD8);
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8010FD68);
+INCLUDE_ASM(void, "code_a5dd0_len_114e0", func_8010FD68, Entity* entity);
 
 void func_8010FD98(s32 arg0, s32 alpha) {
     if (alpha >= 255) {
@@ -69,7 +69,7 @@ ShadowList* get_shadow_list(void) {
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_80110678);
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", get_entity_type);
+INCLUDE_ASM(u32, "code_a5dd0_len_114e0", get_entity_type, s32 arg0);
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", delete_entity);
 
@@ -111,7 +111,8 @@ INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_80111790);
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_801117DC);
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", create_entity);
+INCLUDE_ASM(s32, "code_a5dd0_len_114e0", create_entity, StaticEntityData* data, s32 x, s32 y, s32 z, s32 arg4,
+            s32 flags);
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", create_shadow_from_data);
 
@@ -132,7 +133,7 @@ ApiStatus AssignFlag(ScriptInstance* script, s32 isInitialCall) {
     Trigger* trigger;
 
     if (isInitialCall == TRUE) {
-        trigger = get_entity_by_index(gLastCreatedEntityIndex)->trigger;
+        trigger = (Trigger*)get_entity_by_index(gLastCreatedEntityIndex)->dataBuf;
         trigger->flags.bytes.genericFlagIndex = get_variable_index(script, *args);
         return ApiStatus_DONE2;
     }

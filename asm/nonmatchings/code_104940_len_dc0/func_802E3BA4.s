@@ -41,6 +41,7 @@ glabel func_802E3BA4
 /* 1054AC 802E3C2C 1040006E */  beqz      $v0, .L802E3DE8
 /* 1054B0 802E3C30 24020001 */   addiu    $v0, $zero, 1
 .L802E3C34:
+glabel L802E3C34_1054B4
 /* 1054B4 802E3C34 0C043F5A */  jal       func_8010FD68
 /* 1054B8 802E3C38 0220202D */   daddu    $a0, $s1, $zero
 /* 1054BC 802E3C3C 080B8F7A */  j         .L802E3DE8
@@ -83,11 +84,12 @@ glabel func_802E3BA4
 /* 105538 802E3CB8 2C620015 */  sltiu     $v0, $v1, 0x15
 /* 10553C 802E3CBC 10400049 */  beqz      $v0, .L802E3DE4
 /* 105540 802E3CC0 00031080 */   sll      $v0, $v1, 2
-/* 105544 802E3CC4 3C01802F */  lui       $at, %hi(D_802EB210)
+/* 105544 802E3CC4 3C01802F */  lui       $at, %hi(jtbl_802EB210_10CA90)
 /* 105548 802E3CC8 00220821 */  addu      $at, $at, $v0
-/* 10554C 802E3CCC 8C22B210 */  lw        $v0, %lo(D_802EB210)($at)
+/* 10554C 802E3CCC 8C22B210 */  lw        $v0, %lo(jtbl_802EB210_10CA90)($at)
 /* 105550 802E3CD0 00400008 */  jr        $v0
 /* 105554 802E3CD4 00000000 */   nop
+glabel L802E3CD8_105558
 /* 105558 802E3CD8 12000007 */  beqz      $s0, .L802E3CF8
 /* 10555C 802E3CDC 00000000 */   nop
 /* 105560 802E3CE0 3C028011 */  lui       $v0, %hi(gPlayerData)
@@ -111,6 +113,7 @@ glabel func_802E3BA4
 /* 1055A0 802E3D20 C6200050 */  lwc1      $f0, 0x50($s1)
 /* 1055A4 802E3D24 080B8F6C */  j         .L802E3DB0
 /* 1055A8 802E3D28 2404014F */   addiu    $a0, $zero, 0x14f
+glabel L802E3D2C_1055AC
 /* 1055AC 802E3D2C 12000008 */  beqz      $s0, .L802E3D50
 /* 1055B0 802E3D30 00000000 */   nop
 /* 1055B4 802E3D34 3C028011 */  lui       $v0, %hi(gPlayerData)
@@ -135,6 +138,7 @@ glabel func_802E3BA4
 /* 1055F8 802E3D78 C6200050 */  lwc1      $f0, 0x50($s1)
 /* 1055FC 802E3D7C 080B8F6C */  j         .L802E3DB0
 /* 105600 802E3D80 24040150 */   addiu    $a0, $zero, 0x150
+glabel L802E3D84_105604
 /* 105604 802E3D84 3C028011 */  lui       $v0, %hi(gPlayerData+0x1)
 /* 105608 802E3D88 8042F291 */  lb        $v0, %lo(gPlayerData+0x1)($v0)
 /* 10560C 802E3D8C 28420002 */  slti      $v0, $v0, 2
@@ -154,13 +158,16 @@ glabel func_802E3BA4
 /* 105640 802E3DC0 0000282D */   daddu    $a1, $zero, $zero
 /* 105644 802E3DC4 080B8F7A */  j         .L802E3DE8
 /* 105648 802E3DC8 24020001 */   addiu    $v0, $zero, 1
+glabel L802E3DCC_10564C
 /* 10564C 802E3DCC 0C04419E */  jal       func_80110678
 /* 105650 802E3DD0 0220202D */   daddu    $a0, $s1, $zero
 /* 105654 802E3DD4 080B8F0D */  j         .L802E3C34
 /* 105658 802E3DD8 00000000 */   nop
+glabel L802E3DDC_10565C
 /* 10565C 802E3DDC 0C04419E */  jal       func_80110678
 /* 105660 802E3DE0 0220202D */   daddu    $a0, $s1, $zero
 .L802E3DE4:
+glabel L802E3DE4_105664
 /* 105664 802E3DE4 24020001 */  addiu     $v0, $zero, 1
 .L802E3DE8:
 /* 105668 802E3DE8 8FBF0024 */  lw        $ra, 0x24($sp)

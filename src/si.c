@@ -92,14 +92,12 @@ ApiStatus si_handle_sleep_frames(ScriptInstance* script) {
         script->blocked = 1;
     }
 
-    if (script->functionTemp[0].s) {
-        s32 todo = 1; // val can be anything
-        if (todo) {
-            script->functionTemp[0].s -= 1;
-        }
-        return !script->functionTemp[0].s;
+    if (script->functionTemp[0].s == 0) {
+        return ApiStatus_DONE2;
     }
-    return ApiStatus_DONE2;
+
+    script->functionTemp[0].s -= 1;
+    return !script->functionTemp[0].s;
 }
 
 ApiStatus si_handle_sleep_seconds(ScriptInstance* script) {
@@ -110,14 +108,12 @@ ApiStatus si_handle_sleep_seconds(ScriptInstance* script) {
         script->blocked = 1;
     }
 
-    if (script->functionTemp[0].s != 0) {
-        s32 todo = 1; // val can be anything
-        if (todo) {
-            script->functionTemp[0].s -= 1;
-        }
-        return !script->functionTemp[0].s;
+    if (script->functionTemp[0].s == 0) {
+        return ApiStatus_DONE2;
     }
-    return ApiStatus_DONE2;
+
+    script->functionTemp[0].s--;
+    return !script->functionTemp[0].s;
 }
 
 ApiStatus si_handle_if_equal(ScriptInstance* script) {
@@ -248,6 +244,7 @@ ApiStatus si_handle_case_equal(ScriptInstance* script) {
 
     if (script->switchBlockState[switchDepth] <= 0) {
         script->ptrNextLine = si_goto_end_case(script);
+        return ApiStatus_DONE2;
     } else if (var != switchBlockValue) {
         script->ptrNextLine = si_goto_next_case(script);
     } else {
@@ -255,7 +252,6 @@ ApiStatus si_handle_case_equal(ScriptInstance* script) {
     }
 
     return ApiStatus_DONE2;
-    do {} while (0); // Necessary to match
 }
 
 ApiStatus si_handle_case_not_equal(ScriptInstance* script) {
@@ -271,6 +267,7 @@ ApiStatus si_handle_case_not_equal(ScriptInstance* script) {
 
     if (script->switchBlockState[switchDepth] <= 0) {
         script->ptrNextLine = si_goto_end_case(script);
+        return ApiStatus_DONE2;
     } else if (var == switchBlockValue) {
         script->ptrNextLine = si_goto_next_case(script);
     } else {
@@ -278,7 +275,6 @@ ApiStatus si_handle_case_not_equal(ScriptInstance* script) {
     }
 
     return ApiStatus_DONE2;
-    do {} while (0); // Necessary to match
 }
 
 ApiStatus si_handle_case_less(ScriptInstance* script) {
@@ -294,6 +290,7 @@ ApiStatus si_handle_case_less(ScriptInstance* script) {
 
     if (script->switchBlockState[switchDepth] <= 0) {
         script->ptrNextLine = si_goto_end_case(script);
+        return ApiStatus_DONE2;
     } else if (var <= switchBlockValue) {
         script->ptrNextLine = si_goto_next_case(script);
     } else {
@@ -301,7 +298,6 @@ ApiStatus si_handle_case_less(ScriptInstance* script) {
     }
 
     return ApiStatus_DONE2;
-    do {} while (0); // Necessary to match
 }
 
 ApiStatus si_handle_case_less_equal(ScriptInstance* script) {
@@ -317,6 +313,7 @@ ApiStatus si_handle_case_less_equal(ScriptInstance* script) {
 
     if (script->switchBlockState[switchDepth] <= 0) {
         script->ptrNextLine = si_goto_end_case(script);
+        return ApiStatus_DONE2;
     } else if (var < switchBlockValue) {
         script->ptrNextLine = si_goto_next_case(script);
     } else {
@@ -324,7 +321,6 @@ ApiStatus si_handle_case_less_equal(ScriptInstance* script) {
     }
 
     return ApiStatus_DONE2;
-    do {} while (0); // Necessary to match
 }
 
 ApiStatus si_handle_case_greater(ScriptInstance* script) {
@@ -340,6 +336,7 @@ ApiStatus si_handle_case_greater(ScriptInstance* script) {
 
     if (script->switchBlockState[switchDepth] <= 0) {
         script->ptrNextLine = si_goto_end_case(script);
+        return ApiStatus_DONE2;
     } else if (var >= switchBlockValue) {
         script->ptrNextLine = si_goto_next_case(script);
     } else {
@@ -347,7 +344,6 @@ ApiStatus si_handle_case_greater(ScriptInstance* script) {
     }
 
     return ApiStatus_DONE2;
-    do {} while (0); // Necessary to match
 }
 
 ApiStatus si_handle_case_greater_equal(ScriptInstance* script) {
@@ -363,6 +359,7 @@ ApiStatus si_handle_case_greater_equal(ScriptInstance* script) {
 
     if (script->switchBlockState[switchDepth] <= 0) {
         script->ptrNextLine = si_goto_end_case(script);
+        return ApiStatus_DONE2;
     } else if (var > switchBlockValue) {
         script->ptrNextLine = si_goto_next_case(script);
     } else {
@@ -370,7 +367,6 @@ ApiStatus si_handle_case_greater_equal(ScriptInstance* script) {
     }
 
     return ApiStatus_DONE2;
-    do {} while (0); // Necessary to match
 }
 
 ApiStatus si_handle_case_range(ScriptInstance* script) {
@@ -389,6 +385,7 @@ ApiStatus si_handle_case_range(ScriptInstance* script) {
 
     if (script->switchBlockState[switchDepth] <= 0) {
         script->ptrNextLine = si_goto_end_case(script);
+        return ApiStatus_DONE2;
     } else if ((var <= switchBlockValue) && (switchBlockValue <= var2)) {
         script->switchBlockState[switchDepth] = 0;
     } else {
@@ -396,7 +393,6 @@ ApiStatus si_handle_case_range(ScriptInstance* script) {
     }
 
     return ApiStatus_DONE2;
-    do {} while (0); // Necessary to match
 }
 
 ApiStatus si_handle_case_else(ScriptInstance* script) {
@@ -404,13 +400,14 @@ ApiStatus si_handle_case_else(ScriptInstance* script) {
 
     ASSERT(switchDepth >= 0);
 
-    if (script->switchBlockState[switchDepth] > 0) {
-        script->switchBlockState[switchDepth] = 0;
-    } else {
+    if (script->switchBlockState[switchDepth] <= 0) {
         script->ptrNextLine = si_goto_end_case(script);
+        return ApiStatus_DONE2;
+    } else {
+        script->switchBlockState[switchDepth] = 0;
     }
+
     return ApiStatus_DONE2;
-    do {} while (0); // Necessary to match
 }
 
 ApiStatus si_handle_case_flag(ScriptInstance* script) {
@@ -428,6 +425,7 @@ ApiStatus si_handle_case_flag(ScriptInstance* script) {
 
     if (switchBlockState <= 0) {
         script->ptrNextLine = si_goto_end_case(script);
+        return ApiStatus_DONE2;
     } else if ((var & switchBlockValue) == 0) {
         script->ptrNextLine = si_goto_next_case(script);
     } else {
@@ -435,7 +433,6 @@ ApiStatus si_handle_case_flag(ScriptInstance* script) {
     }
 
     return ApiStatus_DONE2;
-    do {} while (0); // Necessary to match
 }
 
 ApiStatus si_handle_case_multi_or_equal(ScriptInstance* script) {
@@ -453,6 +450,7 @@ ApiStatus si_handle_case_multi_or_equal(ScriptInstance* script) {
 
     if (switchBlockState == 0) {
         script->ptrNextLine = si_goto_end_case(script);
+        return ApiStatus_DONE2;
     } else if (var == switchBlockValue) {
         script->switchBlockState[switchDepth] = -1;
     } else if (switchBlockState != -1) {
@@ -460,7 +458,6 @@ ApiStatus si_handle_case_multi_or_equal(ScriptInstance* script) {
     }
 
     return ApiStatus_DONE2;
-    do {} while (0); // Necessary to match
 }
 
 ApiStatus si_handle_case_multi_and_equal(ScriptInstance* script) {
@@ -478,6 +475,7 @@ ApiStatus si_handle_case_multi_and_equal(ScriptInstance* script) {
 
     if (switchBlockState == 0) {
         script->ptrNextLine = si_goto_end_case(script);
+        return ApiStatus_DONE2;
     } else if (switchBlockState == -2) {
         script->ptrNextLine = si_goto_next_case(script);
     } else if (var == switchBlockValue) {
@@ -488,7 +486,6 @@ ApiStatus si_handle_case_multi_and_equal(ScriptInstance* script) {
     }
 
     return ApiStatus_DONE2;
-    do {} while (0); // Necessary to match
 }
 
 ApiStatus si_handle_end_case_multi(ScriptInstance* script) {
@@ -496,6 +493,7 @@ ApiStatus si_handle_end_case_multi(ScriptInstance* script) {
 
     if (script->switchBlockState[script->switchDepth] == 0) {
         script->ptrNextLine = si_goto_end_case(script);
+        return ApiStatus_DONE2;
     } else if (script->switchBlockState[script->switchDepth] != -1) {
         script->switchBlockState[script->switchDepth] = 1;
         script->ptrNextLine = si_goto_next_case(script);
@@ -505,8 +503,6 @@ ApiStatus si_handle_end_case_multi(ScriptInstance* script) {
     }
 
     return ApiStatus_DONE2;
-
-    do {} while (0); // Necessary to match
 }
 
 ApiStatus si_handle_break_match(ScriptInstance* script) {

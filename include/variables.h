@@ -87,6 +87,27 @@ extern PrintContext* gCurrentPrintContext;
 extern s32 D_802DB264;
 extern PrintContext* D_802DB268;
 
+extern s32 D_802EB390;
+extern s32 D_802EB394;
+extern PrintContext* D_802EB398;
+extern PrintContext* D_802EB39C;
+extern s32 D_802E99DC;
+
+extern f64 D_802EB000;
+extern f64 D_802EB008;
+
+extern Entity* D_802EB3A0;
+extern s32 D_8015C7D0[3];
+
+extern UNK_TYPE D_0A0031E0;
+extern UNK_TYPE D_0A001508;
+extern UNK_TYPE D_0A0031B0;
+extern UNK_TYPE D_0A0014D8;
+extern UNK_TYPE D_0A002F78;
+extern UNK_TYPE D_0A001218;
+extern UNK_TYPE D_0A003F70;
+extern UNK_TYPE D_0A002318;
+
 // Animation related
 extern AnimatedMeshList* gCurrentAnimMeshListPtr;
 
@@ -232,6 +253,23 @@ extern u8 D_800779B0;
 extern u32 D_80078174;
 extern u8 D_800A0963;
 
+extern UNK_TYPE D_802EB3B0;
+extern UNK_TYPE D_00000094;
+extern UNK_TYPE D_00000094_2; // two symbols resolve to the same addr. Required for matching
+extern UNK_TYPE D_802EA0A0;
+extern StaticEntityData D_802EA07C;
+extern UNK_TYPE D_802EA310;
+extern UNK_TYPE D_802EA618;
+extern UNK_TYPE D_802EA63C;
+extern UNK_TYPE D_802EA660;
+extern s16 D_8015C7D2;
+
+extern UNK_TYPE D_0A000328;
+extern UNK_TYPE D_0A000380;
+extern UNK_TYPE D_0A000750;
+extern UNK_TYPE D_0A000800;
+extern UNK_TYPE D_0A000808;
+
 // Scripts
 extern Bytecode* SCRIPT_NpcDefeat;
 extern Bytecode* ShakeCam1;
@@ -255,5 +293,10 @@ extern DisplayContext* gDisplayContext;
 extern Gfx* gMasterGfxPos;
 extern u16 gMatrixListPos;
 extern u16 gCurrentDisplayContextIndex;
+
+extern UNK_TYPE D_0A004350;
+extern UNK_TYPE D_0A0026F0;
+extern UNK_TYPE D_802EAE7C;
+extern f64 D_802EB370;
 
 #endif

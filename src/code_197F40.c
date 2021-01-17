@@ -79,7 +79,7 @@ void set_actor_home_position(ActorID actorID, f32 x, f32 y, f32 z) {
     actor->homePos.z = z;
 }
 
-Actor* get_actor(s32 actorID) {
+Actor* get_actor(ActorID actorID) {
     Actor* ret = NULL;
     BattleStatus* battleStatus = BATTLE_STATUS;
     s32 idFlag = actorID & 0x700;

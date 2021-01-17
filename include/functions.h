@@ -31,6 +31,43 @@ void render_player_model();
 f32 integrate_gravity(void);
 f32 get_clamped_angle_diff(f32, f32);
 
+u32 get_entity_type(s32 arg0);
+Entity* get_entity_by_index(s32 index);
+s32 create_entity(StaticEntityData*, s32, s32, s32, s32, s32);
+void func_80070550(s32, f32, f32, f32, f32, f32, s32, s32);
+void func_802E263C(Entity* entity);
+
+void create_shadow_callback(Shadow* entity);
+void func_802E10F4(Entity* entity);
+void func_802E114C(void);
+void func_802E117C(void);
+void save_game_at_player_position(void);
+void func_802E1204(Entity* entity);
+void func_802E1270(Entity* entity);
+void func_802E1298(void);
+void func_802E12F8(void);
+void func_802E1328(Entity* entity);
+void func_802E1350(Entity* entity);
+void func_802E13B8(Entity* entity);
+void func_802E1400(Entity* entity);
+void func_802E1460(Entity* entity);
+void func_802E14D8(Entity* entity);
+void func_802E1614(Entity* entity);
+void func_802E1660(Entity* entity);
+void func_802E1740(Entity* entity);
+void func_802E176C(Entity* entity);
+s32 func_802E17A8(Entity* entity);
+void func_802E1EA8(Entity* entity);
+void func_802E1EDC(Entity* entity);
+void func_802E234C(Entity* entity);
+f32 func_802E31EC(Entity* entity);
+void func_802E328C(Entity* entity);
+s32 func_802E3BA4(Entity* entity);
+void entity_init_BlueSwitch(Entity* entity);
+void entity_init_HugeBlueSwitch(Entity* entity);
+
+UNK_TYPE func_80072230(s32, f32, f32, f32, f32, s32);
+
 // Text
 PrintContext* load_string(s32 stringID, s32* a1);
 void get_screen_coords(Cam camID, f32 x, f32 y, f32 z, f32* outX, f32* outY, f32* outZ);
@@ -135,6 +172,8 @@ void sort_items(void);
 s32 is_ability_active(s32 arg0);
 f32 update_lerp(Easing easing, f32 start, f32 end, s32 elapsed, s32 duration);
 
+s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pickupDelay, s32 facingAngleSign,
+                     s32 pickupVar);
 s32 make_item_entity_delayed(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pickupDelay, s32 pickupVar);
 void set_item_entity_position(s32 itemEntityIndex, f32 x, f32 y, f32 z);
 ItemEntity* get_item_entity(s32 itemEntityIndex);
@@ -185,6 +224,7 @@ ScriptInstance* get_script_by_index(s32 index);
 
 void suspend_all_group(s32 groupFlags);
 void kill_script(ScriptInstance* instanceToKill);
+void func_8010FD68(Entity* entity);
 
 void func_802D7460(f32 x, f32 y, f32 z, s32 arg3);
 void func_802D74C0(f32 x, f32 y, f32 z, s32 arg3);

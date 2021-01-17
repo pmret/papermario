@@ -289,29 +289,34 @@ typedef ScriptInstance* ScriptList[MAX_SCRIPTS];
 
 typedef struct Entity {
     /* 0x00 */ s32 flags;
-    /* 0x04 */ char unk_04[2];
-    /* 0x06 */ s8 unk_06;
-    /* 0x07 */ char unk_08[4];
+    /* 0x04 */ u8 listIndex;
+    /* 0x05 */ char unk_05;
+    /* 0x06 */ u8 unk_06;
+    /* 0x07 */ char unk_07[3];
+    /* 0x0A */ u8 unk_0A;
     /* 0x0B */ u8 alpha; /* reported by rain */
     /* 0x0C */ s16 aabb[3];
     /* 0x12 */ char unk_12[2];
-    /* 0x14 */ s16 unk_14;
+    /* 0x14 */ s16 virtualModelIndex;
     /* 0x16 */ s16 shadowIndex;
-    /* 0x18 */ char unk_18[16];
+    /* 0x18 */ char unk_18[8];
+    /* 0x20 */ UNK_PTR buildMatrixOverride;
+    /* 0x24 */ char unk_24[4];
     /* 0x28 */ Bytecode* boundScript;
     /* 0x2C */ char unk_2C[12];
     /* 0x38 */ struct StaticEntityData* static_data;
-    /* 0x3C */ char unk_3C[4];
-    /* 0x40 */ struct Trigger* trigger;
-    /* 0x44 */ s32* vertexData;
+    /* 0x3C */ UNK_PTR unk_3C; // pointer to draw func(?)
+    /* 0x40 */ void* dataBuf;
+    /* 0x44 */ Mtx* vertexData;
     /* 0x48 */ Vec3f position;
     /* 0x54 */ Vec3f scale;
     /* 0x60 */ Vec3f rotation;
     /* 0x6C */ char unk_6C[4];
     /* 0x70 */ struct Matrix4f* inverseTransformMatrix; /* world-to-local */
     /* 0x74 */ char unk_74[60];
-    /* 0xB0 */ u8 radius; /* Created by retype action */
-    /* 0xB1 */ char unk_B1[71];
+    /* 0xB0 */ float effectiveSize;
+    /* 0xB4 */ char unk_B4[4];
+    /* 0xB8 */ Matrix4s transformMatrix;
 } Entity; // size = 0xF8
 
 typedef Entity* EntityList[MAX_ENTITIES];
@@ -321,13 +326,15 @@ typedef UNK_TYPE* DynamicEntityList[MAX_DYNAMIC_ENTITIES];
 typedef struct StaticEntityData {
     /* 0x00 */ s16 flags;
     /* 0x02 */ s16 argSize;
-    /* 0x04 */ char unk_04[8];
+    /* 0x04 */ UNK_PTR unk_04;
+    /* 0x08 */ char unk_08[4];
     /* 0x0C */ UNK_FUN_PTR(unk_data_func);
     /* 0x10 */ UNK_PTR unk_data_ptr1;
     /* 0x14 */ UNK_PTR unk_data_ptr2;
     /* 0x18 */ s32 dmaStart;
     /* 0x1C */ s32 dmaEnd;
-    /* 0x20 */ char unk_20[4];
+    /* 0x20 */ s8 entityType;
+    /* 0x21 */ char unk_21[3];
 } StaticEntityData; // size = 0x24
 
 typedef struct MusicPlayer {
@@ -471,7 +478,9 @@ typedef struct Camera {
     /* 0x084 */ f32 trueRotation[3];
     /* 0x090 */ f32 currentBlendedYawNegated;
     /* 0x094 */ f32 currentPitch;
-    /* 0x098 */ char unk_98[60];
+    /* 0x098 */ char unk_98[8];
+    /* 0x0A0 */ Vp viewport;
+    /* 0x0B0 */ char unk_B0[0x24];
     /* 0x0D4 */ struct Matrix4f perspectiveMatrix;
     /* 0x114 */ struct Matrix4f viewMtxPlayer; /* centers on player */
     /* 0x154 */ struct Matrix4f viewMtxLeading; /* leads player slightly */
@@ -770,17 +779,41 @@ typedef struct StaticItem {
     /* 0x1D */ char unk_1D[3];
 } StaticItem; // size = 0x20
 
+typedef struct EffectInstance {
+    /* 0x00 */ s32 flags;
+    /* 0x04 */ s32 effectIndex;
+    /* 0x08 */ s32 totalMatricies;
+    /* 0x0C */ void* unk_0C;
+    /* 0x10 */ struct Effect* effect;
+} EffectInstance;
+
+typedef struct EffectBlueprint {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ s32 effectIndex;
+    /* 0x08 */ void (*init)(EffectInstance* effectInst);
+    /* 0x0C */ void (*update)(EffectInstance* effectInst);
+    /* 0x10 */ void (*renderWorld)(EffectInstance* effectInst);
+    /* 0x14 */ void (*unk_14)(EffectInstance* effectInst);
+} EffectBlueprint; // size = 0x18
+
 typedef struct Effect {
-    /* 0x00 */ char unk_00[32];
+    /* 0x00 */ s32 flags;
+    /* 0x04 */ s32 effectIndex;
+    /* 0x08 */ s32 instanceCounter;
+    /* 0x0C */ s32 unk_0C;
+    /* 0x10 */ void (*update)(EffectInstance* effectInst);
+    /* 0x14 */ void (*renderWorld)(EffectInstance* effectInst);
+    /* 0x18 */ void (*unk_18)(EffectInstance* effectInst);
+    /* 0x1C */ void* unk_1C;
 } Effect; // size = 0x20
 
 typedef struct EffectTableEntry {
-    /* 0x00 */ s32 dmaStart;
-    /* 0x04 */ s32 dmaEnd;
-    /* 0x08 */ s32 dmaDest;
-    /* 0x0C */ s32 unkStartRom;
-    /* 0x10 */ s32 unkEndRom;
-    /* 0x14 */ UNK_FUN_PTR(delegate);
+    /* 0x00 */ void (*entryPoint)(s32 arg0, s32 arg1, s32 arg2, s32 arg3, f32 x, f32 y, f32 z);
+    /* 0x04 */ void* dmaStart;
+    /* 0x08 */ void* dmaEnd;
+    /* 0x0C */ void* dmaDest;
+    /* 0x10 */ void* unkStartRom;
+    /* 0x14 */ void* unkEndRom;
 } EffectTableEntry; // size = 0x18
 
 typedef struct ItemEntity {
@@ -906,11 +939,15 @@ typedef struct GameStatus {
     /* 0x078 */ s8 disableScripts;
     /* 0x079 */ char unk_79;
     /* 0x07A */ s8 musicEnabled;
-    /* 0x07B */ char unk_7B[2];
+    /* 0x07B */ char unk_7B;
+    /* 0x07C */ s8 unk_7C;
     /* 0x07D */ s8 unk_7D;
     /* 0x07E */ u8 peachFlags; /* (1 = isPeach, 2 = isTransformed, 4 = hasUmbrella) */
     /* 0x07F */ u8 peachDisguise; /* (1 = koopatrol, 2 = hammer bros, 3 = clubba) */
-    /* 0x080 */ char unk_80[4];
+    /* 0x080 */ char unk_80;
+    /* 0x081 */ s8 unk_81;
+    /* 0x082 */ s8 unk_82;
+    /* 0x083 */ s8 unk_83;
     /* 0x084 */ s8 unk_84;
     /* 0x085 */ char unk_85;
     /* 0x086 */ s16 areaID; /* Created by retype action */
@@ -918,7 +955,8 @@ typedef struct GameStatus {
     /* 0x08A */ s16 changedArea; /* (1 = yes) */
     /* 0x08C */ s16 mapID;
     /* 0x08E */ s16 entryID;
-    /* 0x090 */ char unk_90[4];
+    /* 0x090 */ u16 unk_90;
+    /* 0x092 */ u16 unk_92;
     /* 0x094 */ f32 exitAngle;
     /* 0x098 */ Vec3f playerPos;
     /* 0x0A4 */ f32 playerYaw;
@@ -938,7 +976,8 @@ typedef struct GameStatus {
     /* 0x134 */ u16 frameCounter;
     /* 0x136 */ char unk_136[2];
     /* 0x138 */ s32 nextRNG;
-    /* 0x13C */ char unk_13C[4];
+    /* 0x13C */ s16 unk_13C;
+    /* 0x13E */ char unk_13E[2];
     /* 0x140 */ s32* shopItemData;
     /* 0x144 */ struct Shop* mapShop;
     /* 0x148 */ s16 enableBackground; /* (bit 2 is also used for something) */
@@ -975,9 +1014,11 @@ typedef struct PartnerAnimations {
 
 typedef struct Shadow {
     /* 0x00 */ s32 flags;
-    /* 0x04 */ char unk_04[12];
-    /* 0x10 */ Vec3f position;
-    /* 0x1C */ Vec3f scale;
+    /* 0x04 */ char unk_04[2];
+    /* 0x06 */ u8 unk_06;
+    /* 0x07 */ char unk_07[9];
+    /* 0x10 */ struct Vec3f position;
+    /* 0x1C */ struct Vec3f scale;
     /* 0x28 */ char unk_28[80];
 } Shadow; // size = 0x78
 
@@ -1590,8 +1631,86 @@ typedef struct {
     /* 0x1D */ char unk_1D[3];
 } UIPanel; // size = 0x20
 
+// BEGIN ENTITY-SPECIFIC STRUCTS
+
+typedef struct struct802E2BA4 {
+    /* 0x00 */ char unk_00[2];
+    /* 0x02 */ u16 unk_02[24][2];
+} struct802E2BA4;
+
+// from code_102c80, size unknown.
+typedef struct struct802E1400 {
+    /* 0x000 */ Vec3f unk_00;
+    /* 0x00C */ char unk_0C[4];
+    /* 0x010 */ s8 unk_10;
+    /* 0x011 */ s8 unk_11;
+    /* 0x014 */ Vec3f unk_14;
+    /* 0x020 */ u16 unk_20;
+    /* 0x022 */ s16 unk_22;
+    /* 0x024 */ s16 unk_24;
+    /* 0x028 */ Entity* attachedEntity;
+    /* 0x02C */ char unk_2C[8];
+    /* 0x034 */ struct802E2BA4* unk_34;
+    /* 0x038 */ f32 unk_38;
+    /* 0x03C */ union {
+        /*       */     s16 s;
+        /*       */     s8 b[2];
+        /*       */
+    } unk_3C;
+    /* 0x03E */ char unk_3E[0x4D];
+    /* 0x08B */ u8 unk_8B[24];
+    /* 0x0A3 */ char unk_A3; // padding?
+    /* 0x0A4 */ u8 unk_A4[24];
+    /* 0x0BC */ char unk_BC[4];
+    /* 0x0C0 */ f32 unk_C0[24];
+    /* 0x120 */ char unk_120[4];
+    /* 0x124 */ f32 unk_124[24];
+    /* 0x184 */ char unk_184[4];
+    /* 0x188 */ f32 unk_188[24];
+} struct802E1400;
+
+// from code_104940_len_dc0, size unknown
+// appears to belong to the hammer blocks(?)
+typedef struct struct802E3650 {
+    /* 0x000 */ u8 unk_00;
+    /* 0x001 */ char unk_01[2];
+    /* 0x003 */ s8 unk_03;
+    /* 0x004 */ s16 unk_04;
+    /* 0x006 */ s16 unk_06;
+    /* 0x008 */ char unk_08[2];
+    /* 0x00A */ u16 unk_0A;
+    /* 0x00C */ char unk_0C[2];
+    /* 0x00E */ s16 unk_0E;
+    /* 0x010 */ s16 unk_10;
+    /* 0x012 */ s16 unk_12;
+    /* 0x014 */ f32 unk_14;
+    /* 0x018 */ f32 unk_18;
+    /* 0x01C */ char unk_1C[0x10C];
+    /* 0x128 */ UNK_PTR unk_128;
+    /* 0x12C */ UNK_PTR unk_12C;
+} struct802E3650;
+
+// size unknown
+typedef struct struct802E4B10 {
+    /* 0x00 */ u8 unk_00;
+    /* 0x01 */ u8 unk_01;
+    /* 0x02 */ s8 unk_02;
+    /* 0x03 */ char unk_03[6];
+    /* 0x09 */ u8 unk_09;
+    /* 0x0A */ u8 unk_0A;
+    /* 0x0B */ char unk_0B; // padding?
+    /* 0x0C */ s32 unk_0C;
+    /* 0x10 */ s32 unk_10;
+    /* 0x14 */ char unk_14[0xBC];
+    /* 0xD0 */ u16 unk_D0;
+    /* 0xD4 */ f32 unk_D4[0];
+} struct802E4B10;
+
+// END ENTITY-SPECIFIC STRUCTS
+
 typedef struct {
-    /* 0x00000 */ LookAt lookAt[2];
+    /* 0x00000 */ Light l1[2];
+    /* 0x00018 */ Light l2[2];
     /* 0x00030 */ Matrix4s camPerspMatrix[8]; // could only be length 4, unsure
     /* 0x00230 */ s32 mainGfx[0x4100];
     /* 0x10630 */ s32 smallGfx[0x400]; // used by func 800269EC

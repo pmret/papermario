@@ -1,5 +1,7 @@
 #include "common.h"
 
+extern EffectTableEntry D_8007F210[135];
+
 INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_8006F890);
 
 INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_8006F8F0);
@@ -69,7 +71,8 @@ INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_80070490);
 
 INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_800704F0);
 
-INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_80070550);
+INCLUDE_ASM(void, "os/code_4ac90_len_3910", func_80070550, s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5,
+            s32 arg6, s32 arg7);
 
 INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_800705B0);
 
@@ -223,7 +226,8 @@ INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_80072170);
 
 INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_800721D0);
 
-INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_80072230);
+INCLUDE_ASM(UNK_TYPE, "os/code_4ac90_len_3910", func_80072230, s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4,
+            s32 arg5);
 
 INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_80072290);
 
@@ -271,6 +275,7 @@ INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_80072A70);
 
 INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_80072AD0);
 
+// FILE SPLIT
 INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_80072B30);
 
 INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_80072BB0);
