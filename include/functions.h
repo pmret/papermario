@@ -81,7 +81,10 @@ void get_model_center_and_size(s32 modelID, f32* centerX, f32* centerY, f32* cen
 
 void func_80027088(s32);
 
+void func_8006F8F0(f32, f32, f32);
 void func_8006FEF0(s32, f32, f32, f32, f32);
+void func_80070190(s32, f32, f32, f32, s32, f32, s32, s32);
+
 void func_80071090(s32, f32, f32, f32, s32);
 void func_80071750(s32, f32, f32, f32, f32, s32);
 void func_800720B0(s32, f32, f32, f32, f32, s32);
