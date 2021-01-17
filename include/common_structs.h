@@ -1093,7 +1093,9 @@ typedef struct ActorPart {
     /* 0x70 */ s16 unk_70;
     /* 0x72 */ u8 size[2];
     /* 0x74 */ u8 verticalStretch;
-    /* 0x75 */ char unk_75[3];
+    /* 0x75 */ s8 unk_75;
+    /* 0x76 */ s8 unk_76;
+    /* 0x77 */ char unk_77[1];
     /* 0x78 */ u32* defenseTable;
     /* 0x7C */ s32 eventFlags;
     /* 0x80 */ s32 partFlags3;

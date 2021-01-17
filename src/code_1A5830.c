@@ -232,7 +232,38 @@ ApiStatus SetTargetActor(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "code_1A5830", SetEnemyHP);
 
+#ifdef NON_MATCHING
+ApiStatus GetActorHP(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    PlayerData* playerData = PLAYER_DATA;
+    ActorID actorID = get_variable(script, *args++);
+    Actor* actor;
+    s32 outVar;
+    s32 outVal;
+
+    if (actorID == ActorID_SELF) {
+        actorID = script->owner1.actorID;
+    }
+    outVar = *args++;
+
+    actor = get_actor(actorID);
+
+    if (actorID & 0x700) {
+        if (actorID == ActorID_PARTNER) {
+            outVal = 99;
+        } else {
+            outVal = actor->currentHP;
+        }
+    } else {
+        outVal = playerData->curHP;
+    }
+
+    set_variable(script, outVar, outVal);
+    return ApiStatus_DONE2;
+}
+#else
 INCLUDE_ASM(s32, "code_1A5830", GetActorHP);
+#endif
 
 ApiStatus GetEnemyMaxHP(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -379,7 +410,29 @@ ApiStatus func_8027D32C(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_1A5830", SetTargetOffset);
+ApiStatus SetTargetOffset(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    ActorID actorID = get_variable(script, *args++);
+    s32 partIndex;
+    ActorPart* part;
+    s32 x;
+    s32 y;
+
+    if (actorID == ActorID_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    partIndex = get_variable(script, *args++);
+    part = get_actor_part(get_actor(actorID), partIndex);
+
+    x = get_variable(script, *args++);
+    y = get_variable(script, *args++);
+
+    part->targetOffset.x = x;
+    part->targetOffset.y = y;
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus func_8027D434(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -397,7 +450,29 @@ ApiStatus func_8027D434(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_1A5830", func_8027D4C8);
+ApiStatus func_8027D4C8(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    ActorID actorID = get_variable(script, *args++);
+    s32 partIndex;
+    ActorPart* part;
+    s32 temp;
+    s32 temp2;
+
+    if (actorID == ActorID_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    partIndex = get_variable(script, *args++);
+    part = get_actor_part(get_actor(actorID), partIndex);
+
+    temp = get_variable(script, *args++);
+    temp2 = get_variable(script, *args++);
+
+    part->unk_75 = temp;
+    part->unk_76 = temp2;
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus EnableActorBlur(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -520,19 +595,22 @@ ApiStatus GetLastDamage(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "code_1A5830", EnableActorGlow);
 
-// Cannot get gBattleStatus to load via lui+addiu no matter what I do
-#ifdef NON_MATCHING
 ApiStatus WasStatusInflicted(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
+    BattleStatus* battleStatus = BATTLE_STATUS;
+    s32 outVal;
 
     get_variable(script, *args++);
-    set_variable(script, *args++, gBattleStatus.wasStatusInflicted);
+
+    if (script) { // can be args or script but not 1 or do while 0, nor does else work after
+        outVal = battleStatus->wasStatusInflicted;
+    }
+    outVal = battleStatus->wasStatusInflicted;
+
+    set_variable(script, *args++, outVal);
 
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(s32, "code_1A5830", WasStatusInflicted);
-#endif
 
 INCLUDE_ASM(s32, "code_1A5830", CopyStatusEffects);
 
