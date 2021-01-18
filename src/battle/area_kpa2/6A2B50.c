@@ -8,7 +8,7 @@ INCLUDE_ASM(s32, "battle/area_kpa2/6A2B50", func_8021B9A8_6A2BA8);
 
 INCLUDE_ASM(s32, "battle/area_kpa2/6A2B50", func_8021BC60_6A2E60);
 
-INCLUDE_ASM(s32, "battle/area_kpa2/6A2B50", func_8021C004_6A3204);
+#include "common/FadeBackgroundToBlack.inc.c"
 
 INCLUDE_ASM(s32, "battle/area_kpa2/6A2B50", func_8021C09C_6A329C);
 
