@@ -4,7 +4,9 @@
 
 INCLUDE_ASM(s32, "battle/area_pra/649ED0", func_802190C0_649ED0);
 
-INCLUDE_ASM(s32, "battle/area_pra/649ED0", func_80219218_64A028);
+#define NAMESPACE dup_b_area_pra
+#include "common/GetSelectedMoveID.inc.c"
+#define NAMESPACE b_area_pra
 
 #define NAMESPACE dup5_b_area_pra
 #include "common/UnkBattleFunc1.inc.c"

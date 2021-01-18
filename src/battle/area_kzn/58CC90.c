@@ -4,7 +4,9 @@
 
 INCLUDE_ASM(s32, "battle/area_kzn/58CC90", func_802189A0_58CC90);
 
-INCLUDE_ASM(s32, "battle/area_kzn/58CC90", func_80218AF8_58CDE8);
+#define NAMESPACE dup_b_area_kzn
+#include "common/GetSelectedMoveID.inc.c"
+#define NAMESPACE b_area_kzn
 
 #define NAMESPACE dup4_b_area_kzn
 #include "common/UnkBattleFunc1.inc.c"

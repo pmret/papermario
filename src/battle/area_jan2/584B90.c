@@ -4,7 +4,7 @@
 
 INCLUDE_ASM(s32, "battle/area_jan2/584B90", func_80218250_584B90);
 
-INCLUDE_ASM(s32, "battle/area_jan2/584B90", func_802183A8_584CE8);
+#include "common/GetSelectedMoveID.inc.c"
 
 #include "common/UnkBattleFunc1.inc.c"
 
