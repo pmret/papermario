@@ -216,6 +216,8 @@ segments:
     - [0x70E30, .data, battle/battle]
     - [0x71430, data]
     - [0x73130, rodata]
+    - [0x73160, .rodata, code_42e0_len_1f60]
+    - [0x73200, rodata]
     - [0x73DA0, .rodata, world/world]
     - [0x74EA0, rodata]
     - [0x75240, .rodata, battle/battle] # ram 80099E40

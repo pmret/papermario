@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_80097D80
+.word 0x3F000020, 0x04DBF38E
+
+.section .text
+
 glabel sin_deg
 /* 56EC 8002A2EC 3C014336 */  lui       $at, 0x4336
 /* 56F0 8002A2F0 34210B61 */  ori       $at, $at, 0xb61

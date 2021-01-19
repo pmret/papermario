@@ -157,7 +157,16 @@ s32 _advance_rng(void) {
     return *rngVal;
 }
 
-INCLUDE_ASM(s32, "code_42e0_len_1f60", func_80029934);
+f32 func_80029934(void) {
+    s32 temp_v0 = _advance_rng() & 0x7FFF;
+    f64 temp_f2 = temp_v0;
+
+    if (temp_v0 < 0) {
+        temp_f2 += 4294967296.0;
+    }
+
+    return temp_f2 * 3.0517578125e-05;
+}
 
 s32 func_80029994(s32 arg0) {
     u32 div = -1;
@@ -193,7 +202,13 @@ f32 signF(f32 val) {
     return sign;
 }
 
-INCLUDE_ASM(s16, "code_42e0_len_1f60", round, f32 arg0);
+s32 round(f32 arg0) {
+    if (!(arg0 >= 0.0f)) {
+        return -(s32) (0.5 - arg0);
+    } else {
+        return (s32) (0.5 + arg0);
+    }
+}
 
 INCLUDE_ASM(f32, "code_42e0_len_1f60", clamp_angle, f32 theta);
 
@@ -253,6 +268,11 @@ INCLUDE_ASM(void, "code_42e0_len_1f60", sin_cos_rad, f32 rad, f32* outSinTheta, 
 INCLUDE_ASM(f32, "code_42e0_len_1f60", sin_rad, f32 angle);
 
 INCLUDE_ASM(f32, "code_42e0_len_1f60", cos_rad, f32 angle);
+/*
+f32 cos_rad(f32 angle) {
+    return (coss((u16)_wrap_trig_lookup_value(angle * 10430.378f)) * 3.051851e-05);
+}
+*/
 
 INCLUDE_ASM(s32, "code_42e0_len_1f60", sin_cos_deg);
 
