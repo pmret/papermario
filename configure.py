@@ -74,7 +74,7 @@ async def task(coro):
 
 async def build_c_file(c_file: str, generated_headers, ccache, cppflags):
     # preprocess c_file, but simply put an _ in front of INCLUDE_ASM and SCRIPT
-    stdout, stderr = await shell(f"{ccache} {cpp} {cppflags} '-DINCLUDE_ASM(...)=_INCLUDE_ASM(__VA_ARGS__)' '-DSCRIPT(...)=_SCRIPT(__VA_ARGS__)' {c_file} -o -")
+    stdout, stderr = await shell(f"{cpp} {cppflags} '-DINCLUDE_ASM(...)=_INCLUDE_ASM(__VA_ARGS__)' '-DSCRIPT(...)=_SCRIPT(__VA_ARGS__)' {c_file} -o -")
 
     # search for macro usage (note _ prefix)
     uses_dsl = "_SCRIPT(" in stdout
@@ -204,12 +204,12 @@ async def main():
     n.newline()
 
     n.rule("cc",
-        command=f"bash -o pipefail -c '{ccache} {cpp} $cppflags $in -o - | $iconv | {ccache} tools/$os/cc1 $cflags -o - | tools/$os/mips-nintendo-nu64-as -EB -G 0 - -o $out'",
+        command=f"bash -o pipefail -c '{cpp} $cppflags $in -o - | $iconv | tools/$os/cc1 $cflags -o - | tools/$os/mips-nintendo-nu64-as -EB -G 0 - -o $out'",
         description="cc $in",
         depfile="$out.d",
         deps="gcc")
     n.rule("cc_dsl",
-        command=f"bash -o pipefail -c '{ccache} {cpp} $cppflags $in -o - | $python tools/compile_dsl_macros.py | $iconv | {ccache} tools/$os/cc1 $cflags -o - | tools/$os/mips-nintendo-nu64-as -EB -G 0 - -o $out'",
+        command=f"bash -o pipefail -c '{cpp} $cppflags $in -o - | $python tools/compile_dsl_macros.py | $iconv | tools/$os/cc1 $cflags -o - | tools/$os/mips-nintendo-nu64-as -EB -G 0 - -o $out'",
         description="cc (with dsl) $in",
         depfile="$out.d",
         deps="gcc")
