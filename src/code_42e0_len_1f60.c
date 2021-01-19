@@ -1,4 +1,10 @@
 #include "common.h"
+#include "nu/nusys.h"
+
+// TODO: replace nustuff with defines
+
+extern u16 D_80074260;
+extern s32 D_80074264;
 
 void sin_cos_rad(f32 rad, f32* outSinTheta, f32* outCosTheta);
 void func_80029860(s32 romStart, s32 vramDest, s32 length);
@@ -6,22 +12,72 @@ void func_80029860(s32 romStart, s32 vramDest, s32 length);
 #define ROM_CHUNK_SIZE 0x2000
 
 void poll_rumble(void) {
-    // TODO: replace with defines
     nuContRmbCheck(0);
     nuContRmbModeSet(0, 2);
 }
 
-INCLUDE_ASM(s32, "code_42e0_len_1f60", start_rumble);
+void start_rumble(s32 freq, s32 frame) {
+    if (GAME_STATUS->demoState == 0) {
+        u16* sym = &D_80074260;
 
-INCLUDE_ASM(s32, "code_42e0_len_1f60", func_80028F8C);
+        if (*sym != 0) {
+            s32 symx2 = *sym * 2;
 
-INCLUDE_ASM(s32, "code_42e0_len_1f60", func_80028FE0);
+            if (frame > symx2) {
+                frame = symx2;
+            }
+
+            if (nuContRmbCheck(0) == 0) {
+                nuContRmbModeSet(0, 2);
+                nuContRmbStart(0, freq, frame);
+            }
+        }
+    }
+}
+
+//INCLUDE_ASM(s32, "code_42e0_len_1f60", func_80028F8C);
+void func_80028F8C(void) {
+    s32* sym = &D_80074264;
+    u16* sym2;
+
+    if (*sym != GAME_STATUS->currentButtons) {
+        *sym = GAME_STATUS->currentButtons;
+        func_80028FE0();
+    }
+
+    sym2 = &D_80074260;
+    if (*sym2 != 0) {
+        (*sym2)--;
+    }
+}
+
+// needs data
+#ifdef NON_MATCHING
+void func_80028FE0(void) {
+    D_80074260 = 300;
+}
+#else
+INCLUDE_ASM(void, "code_42e0_len_1f60", func_80028FE0);
+#endif
 
 f32 length2D(f32 x, f32 y) {
     return sqrtf(SQ(x) + SQ(y));
 }
 
-INCLUDE_ASM(HeapNode*, "code_42e0_len_1f60", _heap_create, void* addr, s32 size);
+HeapNode* _heap_create(s32* addr, u32 size) {
+    if (size < 32) {
+        return (HeapNode*) - 1;
+    } else {
+        HeapNode* heapNode = ALIGN16((s32)addr);
+
+        size -= ((char*)heapNode - (char*)addr);
+        heapNode->next = NULL;
+        heapNode->length = size - sizeof(HeapNode);
+        heapNode->allocated = 0;
+        heapNode->capacity = size;
+        return heapNode;
+    }
+}
 
 INCLUDE_ASM(s32, "code_42e0_len_1f60", _heap_malloc);
 
