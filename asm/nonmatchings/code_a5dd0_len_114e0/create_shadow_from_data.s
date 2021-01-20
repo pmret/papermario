@@ -75,7 +75,7 @@ glabel create_shadow_from_data
 /* A83E0 80111CE0 0804473D */  j         .L80111CF4
 /* A83E4 80111CE4 00000000 */   nop
 .L80111CE8:
-/* A83E8 80111CE8 0C048338 */  jal       load_virtual_model
+/* A83E8 80111CE8 0C048338 */  jal       load_entity_model
 /* A83EC 80111CEC 8E440004 */   lw       $a0, 4($s2)
 /* A83F0 80111CF0 A6020008 */  sh        $v0, 8($s0)
 .L80111CF4:

@@ -58,7 +58,7 @@ glabel func_802E70B0
 /* 108A00 802E7180 30420008 */  andi      $v0, $v0, 8
 /* 108A04 802E7184 10400016 */  beqz      $v0, .L802E71E0
 /* 108A08 802E7188 00000000 */   nop
-/* 108A0C 802E718C 0C043F5A */  jal       func_8010FD68
+/* 108A0C 802E718C 0C043F5A */  jal       exec_entity_updatecmd
 /* 108A10 802E7190 0220202D */   daddu    $a0, $s1, $zero
 /* 108A14 802E7194 8E240040 */  lw        $a0, 0x40($s1)
 /* 108A18 802E7198 A0800004 */  sb        $zero, 4($a0)

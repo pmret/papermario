@@ -344,7 +344,7 @@ glabel func_802E263C
 /* 1043C8 802E2B48 1C400004 */  bgtz      $v0, .L802E2B5C
 /* 1043CC 802E2B4C 00000000 */   nop
 /* 1043D0 802E2B50 A640003C */  sh        $zero, 0x3c($s2)
-/* 1043D4 802E2B54 0C043F5A */  jal       func_8010FD68
+/* 1043D4 802E2B54 0C043F5A */  jal       exec_entity_updatecmd
 /* 1043D8 802E2B58 8FA40098 */   lw       $a0, 0x98($sp)
 .L802E2B5C:
 /* 1043DC 802E2B5C 8FBF0064 */  lw        $ra, 0x64($sp)

@@ -1,13 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80122DFC
+glabel free_entity_model_by_index
 /* B94FC 80122DFC 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* B9500 80122E00 2402F7FF */  addiu     $v0, $zero, -0x801
 /* B9504 80122E04 00822024 */  and       $a0, $a0, $v0
 /* B9508 80122E08 AFB10014 */  sw        $s1, 0x14($sp)
-/* B950C 80122E0C 3C118015 */  lui       $s1, %hi(D_80154370)
-/* B9510 80122E10 26314370 */  addiu     $s1, $s1, %lo(D_80154370)
+/* B950C 80122E0C 3C118015 */  lui       $s1, %hi(gCurrentEntityModelList)
+/* B9510 80122E10 26314370 */  addiu     $s1, $s1, %lo(gCurrentEntityModelList)
 /* B9514 80122E14 AFBF0018 */  sw        $ra, 0x18($sp)
 /* B9518 80122E18 AFB00010 */  sw        $s0, 0x10($sp)
 /* B951C 80122E1C 8E220000 */  lw        $v0, ($s1)
@@ -28,8 +28,8 @@ glabel func_80122DFC
 /* B9554 80122E54 02021021 */  addu      $v0, $s0, $v0
 /* B9558 80122E58 0C00AB4B */  jal       heap_free
 /* B955C 80122E5C 8C440000 */   lw       $a0, ($v0)
-/* B9560 80122E60 3C048015 */  lui       $a0, %hi(D_80151318)
-/* B9564 80122E64 24841318 */  addiu     $a0, $a0, %lo(D_80151318)
+/* B9560 80122E60 3C048015 */  lui       $a0, %hi(gEntityModelCount)
+/* B9564 80122E64 24841318 */  addiu     $a0, $a0, %lo(gEntityModelCount)
 /* B9568 80122E68 8E220000 */  lw        $v0, ($s1)
 /* B956C 80122E6C 8C830000 */  lw        $v1, ($a0)
 /* B9570 80122E70 02021021 */  addu      $v0, $s0, $v0

@@ -10,7 +10,7 @@ glabel func_802D43F4
 /* F8DB8 802D4408 AFB00010 */  sw        $s0, 0x10($sp)
 /* F8DBC 802D440C 00822021 */  addu      $a0, $a0, $v0
 /* F8DC0 802D4410 8C900000 */  lw        $s0, ($a0)
-/* F8DC4 802D4414 0C048B7F */  jal       func_80122DFC
+/* F8DC4 802D4414 0C048B7F */  jal       free_entity_model_by_index
 /* F8DC8 802D4418 8E040000 */   lw       $a0, ($s0)
 /* F8DCC 802D441C 2402FFFF */  addiu     $v0, $zero, -1
 /* F8DD0 802D4420 AE020000 */  sw        $v0, ($s0)

@@ -29,7 +29,7 @@ glabel func_802BB648_E2DF78
 /* E2DFD8 802BB6A8 14400009 */  bnez      $v0, .L802BB6D0
 /* E2DFDC 802BB6AC 0200202D */   daddu    $a0, $s0, $zero
 /* E2DFE0 802BB6B0 24020001 */  addiu     $v0, $zero, 1
-/* E2DFE4 802BB6B4 0C043F5A */  jal       func_8010FD68
+/* E2DFE4 802BB6B4 0C043F5A */  jal       exec_entity_updatecmd
 /* E2DFE8 802BB6B8 A4A20000 */   sh       $v0, ($a1)
 /* E2DFEC 802BB6BC 86040014 */  lh        $a0, 0x14($s0)
 /* E2DFF0 802BB6C0 3C050000 */  lui       $a1, 0

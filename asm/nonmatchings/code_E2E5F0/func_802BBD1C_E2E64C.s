@@ -14,7 +14,7 @@ glabel func_802BBD1C_E2E64C
 /* E2E670 802BBD40 30420048 */  andi      $v0, $v0, 0x48
 /* E2E674 802BBD44 10400008 */  beqz      $v0, .L802BBD68
 /* E2E678 802BBD48 00000000 */   nop
-/* E2E67C 802BBD4C 0C043F5A */  jal       func_8010FD68
+/* E2E67C 802BBD4C 0C043F5A */  jal       exec_entity_updatecmd
 /* E2E680 802BBD50 00000000 */   nop
 /* E2E684 802BBD54 86040014 */  lh        $a0, 0x14($s0)
 /* E2E688 802BBD58 3C050000 */  lui       $a1, 0

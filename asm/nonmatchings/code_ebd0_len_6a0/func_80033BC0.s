@@ -68,7 +68,7 @@ glabel func_80033BC0
 /* F0BC 80033CBC 00000000 */   nop
 /* F0C0 80033CC0 0C05203C */  jal       func_801480F0
 /* F0C4 80033CC4 00000000 */   nop
-/* F0C8 80033CC8 0C048316 */  jal       init_virtual_models
+/* F0C8 80033CC8 0C048316 */  jal       init_entity_models
 /* F0CC 80033CCC 00000000 */   nop
 /* F0D0 80033CD0 0C0478C4 */  jal       func_8011E310
 /* F0D4 80033CD4 00000000 */   nop

@@ -322,7 +322,7 @@ glabel func_802E4E04
 /* 106B54 802E52D4 8CA20000 */  lw        $v0, ($a1)
 /* 106B58 802E52D8 2403FFBF */  addiu     $v1, $zero, -0x41
 /* 106B5C 802E52DC 00431024 */  and       $v0, $v0, $v1
-/* 106B60 802E52E0 0C043F5A */  jal       func_8010FD68
+/* 106B60 802E52E0 0C043F5A */  jal       exec_entity_updatecmd
 /* 106B64 802E52E4 ACA20000 */   sw       $v0, ($a1)
 .L802E52E8:
 /* 106B68 802E52E8 8FBF0024 */  lw        $ra, 0x24($sp)

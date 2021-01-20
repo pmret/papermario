@@ -319,7 +319,7 @@ glabel func_802E75E4
 /* 109320 802E7AA0 00021400 */  sll       $v0, $v0, 0x10
 /* 109324 802E7AA4 14400004 */  bnez      $v0, .L802E7AB8
 /* 109328 802E7AA8 00000000 */   nop
-/* 10932C 802E7AAC 0C043F5A */  jal       func_8010FD68
+/* 10932C 802E7AAC 0C043F5A */  jal       exec_entity_updatecmd
 /* 109330 802E7AB0 0200202D */   daddu    $a0, $s0, $zero
 /* 109334 802E7AB4 A2200004 */  sb        $zero, 4($s1)
 .L802E7AB8:

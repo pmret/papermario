@@ -8,7 +8,7 @@ void func_802E1400(Entity* entity) {
 
     if (entity->unk_06 & 1) {
         if ((playerStatus->actionState == ActionState_GROUND_POUND) || (playerStatus->actionState == ActionState_ULTRA_POUND)) {
-            func_8010FD68(entity);
+            exec_entity_updatecmd(entity);
             temp->unk_22 = 8;
         }
     }
@@ -23,7 +23,7 @@ void func_802E1460(Entity* entity) {
         return;
     }
     func_80110678(entity);
-    func_8010FD68(entity);
+    exec_entity_updatecmd(entity);
     temp->unk_22 = 8;
 }
 
@@ -35,7 +35,7 @@ void func_802E14D8(Entity* entity) {
         entity->position.y += D_802EB008; // 1.8625;
         return;
     }
-    func_8010FD68(entity);
+    exec_entity_updatecmd(entity);
     temp->unk_22 = 8;
 }
 
@@ -72,7 +72,7 @@ void func_802E1614(Entity* entity) {
     if (entity->unk_06 & 1) {
         if ((playerStatus->actionState == ActionState_GROUND_POUND)
             || (playerStatus->actionState == ActionState_ULTRA_POUND)) {
-            func_8010FD68(entity);
+            exec_entity_updatecmd(entity);
         }
     }
 }
@@ -89,13 +89,13 @@ void func_802E1660(Entity* entity) {
             if (gPlayerData.hammerLevel < 0) {
                 return;
             }
-            func_8010FD68(entity);
+            exec_entity_updatecmd(entity);
 
             if (temp->attachedEntity == NULL) {
                 return;
             }
 
-            func_8010FD68(temp->attachedEntity);
+            exec_entity_updatecmd(temp->attachedEntity);
             return;
         }
     }
@@ -114,18 +114,18 @@ void func_802E1660(Entity* entity) {
         }
     }
 
-    func_8010FD68(entity);
+    exec_entity_updatecmd(entity);
 
     if (temp->attachedEntity == NULL) {
         return;
     }
 
-    func_8010FD68(temp->attachedEntity);
+    exec_entity_updatecmd(temp->attachedEntity);
 }
 
 void func_802E1740(Entity* entity) {
     if (!(entity->unk_06 & 1)) {
-        func_8010FD68(entity);
+        exec_entity_updatecmd(entity);
     }
 }
 
@@ -309,7 +309,7 @@ s32 func_802E17A8(Entity* entity) {
     if (phi_s2 == 2) {
         temp_s0->unk_10 = 0;
         temp_s0->unk_11 = 0;
-        func_8010FD68(entity);
+        exec_entity_updatecmd(entity);
     }
 }
 #else
@@ -455,7 +455,7 @@ void func_802E1EDC(Entity* entity) {
     if (phi_s2 == 2) {
         temp_s0->unk_10 = 0;
         temp_s0->unk_11 = 0;
-        func_8010FD68(entity);
+        exec_entity_updatecmd(entity);
     }
 
     temp_s0->unk_24++;

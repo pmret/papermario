@@ -4,8 +4,8 @@
 glabel func_80122D7C
 /* B947C 80122D7C 2402F7FF */  addiu     $v0, $zero, -0x801
 /* B9480 80122D80 00822024 */  and       $a0, $a0, $v0
-/* B9484 80122D84 3C028015 */  lui       $v0, %hi(D_80154370)
-/* B9488 80122D88 8C424370 */  lw        $v0, %lo(D_80154370)($v0)
+/* B9484 80122D84 3C028015 */  lui       $v0, %hi(gCurrentEntityModelList)
+/* B9488 80122D88 8C424370 */  lw        $v0, %lo(gCurrentEntityModelList)($v0)
 /* B948C 80122D8C 00042080 */  sll       $a0, $a0, 2
 /* B9490 80122D90 00822021 */  addu      $a0, $a0, $v0
 /* B9494 80122D94 8C840000 */  lw        $a0, ($a0)

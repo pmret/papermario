@@ -85,7 +85,7 @@ glabel step_battle
 /* EE14 80033A14 00000000 */   nop
 /* EE18 80033A18 0C05177E */  jal       func_80145DF8
 /* EE1C 80033A1C 00000000 */   nop
-/* EE20 80033A20 0C0482EC */  jal       clear_virtual_models
+/* EE20 80033A20 0C0482EC */  jal       clear_entity_models
 /* EE24 80033A24 00000000 */   nop
 /* EE28 80033A28 0C047889 */  jal       func_8011E224
 /* EE2C 80033A2C 00000000 */   nop

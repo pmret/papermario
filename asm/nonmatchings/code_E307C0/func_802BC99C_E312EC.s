@@ -9,7 +9,7 @@ glabel func_802BC99C_E312EC
 /* E312FC 802BC9AC 00431024 */  and       $v0, $v0, $v1
 /* E31300 802BC9B0 14400003 */  bnez      $v0, .L802BC9C0
 /* E31304 802BC9B4 00000000 */   nop
-/* E31308 802BC9B8 0C043F5A */  jal       func_8010FD68
+/* E31308 802BC9B8 0C043F5A */  jal       exec_entity_updatecmd
 /* E3130C 802BC9BC 00000000 */   nop
 .L802BC9C0:
 /* E31310 802BC9C0 8FBF0010 */  lw        $ra, 0x10($sp)

@@ -364,7 +364,7 @@ glabel func_802E7FA0
 /* 109D70 802E84F0 2A620023 */  slti      $v0, $s3, 0x23
 /* 109D74 802E84F4 14400003 */  bnez      $v0, .L802E8504
 /* 109D78 802E84F8 00000000 */   nop
-/* 109D7C 802E84FC 0C043F5A */  jal       func_8010FD68
+/* 109D7C 802E84FC 0C043F5A */  jal       exec_entity_updatecmd
 /* 109D80 802E8500 03C0202D */   daddu    $a0, $fp, $zero
 .L802E8504:
 /* 109D84 802E8504 8FBF0054 */  lw        $ra, 0x54($sp)

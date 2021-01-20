@@ -104,7 +104,7 @@ glabel L800381C8_135C8
 /* 1366C 8003826C 00000000 */   nop
 /* 13670 80038270 0C0B763E */  jal       func_802DD8F8
 /* 13674 80038274 0000202D */   daddu    $a0, $zero, $zero
-/* 13678 80038278 0C0482EC */  jal       clear_virtual_models
+/* 13678 80038278 0C0482EC */  jal       clear_entity_models
 /* 1367C 8003827C 00000000 */   nop
 /* 13680 80038280 0C047889 */  jal       func_8011E224
 /* 13684 80038284 00000000 */   nop

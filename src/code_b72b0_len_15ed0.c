@@ -1,6 +1,6 @@
 #include "common.h"
 
-extern s32** D_80154370; // probably entities of some sort
+extern s32** gCurrentEntityModelList;
 extern s32 D_80154378; // entity fog enabled
 extern s32 D_8015437C; // entity fog red
 extern s32 D_80154380; // entity fog green
@@ -9,19 +9,19 @@ extern s32 D_80154388; // entity fog alpha
 extern s32 D_8015438C; // entity fog dist min
 extern s32 D_80154390; // entity fog dist max
 
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", clear_virtual_models);
+INCLUDE_ASM(s32, "code_b72b0_len_15ed0", clear_entity_models);
 
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", init_virtual_models);
+INCLUDE_ASM(s32, "code_b72b0_len_15ed0", init_entity_models);
 
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", load_virtual_model);
+INCLUDE_ASM(s32, "code_b72b0_len_15ed0", load_entity_model);
 
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80120DE4);
+INCLUDE_ASM(s32, "code_b72b0_len_15ed0", ALT_load_entity_model);
 
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80120F04);
+INCLUDE_ASM(s32, "code_b72b0_len_15ed0", update_entity_rendercmd);
 
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80120FB8);
+INCLUDE_ASM(s32, "code_b72b0_len_15ed0", step_entity_rendercmd);
 
-void func_80121140(Matrix4f* arg0) {
+void make_mtx_flipZ(Matrix4f* arg0) {
     guMtxIdentF(arg0->mtx);
     arg0->mtx[0][0] = 1.0f;
     arg0->mtx[1][1] = 1.0f;
@@ -29,7 +29,7 @@ void func_80121140(Matrix4f* arg0) {
     arg0->mtx[3][3] = 1.0f;
 }
 
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80121184);
+INCLUDE_ASM(s32, "code_b72b0_len_15ed0", appendGfx_entity_model);
 
 INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80121CE8);
 
@@ -44,16 +44,16 @@ INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80122288);
 INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80122D7C);
 
 s32 func_80122DDC(s32 arg0) {
-    return D_80154370[arg0 & ~0x800];
+    return gCurrentEntityModelList[arg0 & ~0x800];
 }
 
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80122DFC);
+INCLUDE_ASM(s32, "code_b72b0_len_15ed0", free_entity_model_by_index);
 
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80122E94);
+INCLUDE_ASM(s32, "code_b72b0_len_15ed0", free_entity_model_by_ref);
 
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80122EE8);
+INCLUDE_ASM(s32, "code_b72b0_len_15ed0", set_entity_model_flags);
 
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80122F24);
+INCLUDE_ASM(s32, "code_b72b0_len_15ed0", clear_entity_model_flags);
 
 INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80122F64);
 

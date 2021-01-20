@@ -1,9 +1,9 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel load_virtual_model
-/* B73E0 80120CE0 3C038015 */  lui       $v1, %hi(D_80154370)
-/* B73E4 80120CE4 8C634370 */  lw        $v1, %lo(D_80154370)($v1)
+glabel load_entity_model
+/* B73E0 80120CE0 3C038015 */  lui       $v1, %hi(gCurrentEntityModelList)
+/* B73E4 80120CE4 8C634370 */  lw        $v1, %lo(gCurrentEntityModelList)($v1)
 /* B73E8 80120CE8 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* B73EC 80120CEC AFB10014 */  sw        $s1, 0x14($sp)
 /* B73F0 80120CF0 0080882D */  daddu     $s1, $a0, $zero
@@ -29,10 +29,10 @@ glabel load_virtual_model
 /* B7430 80120D30 0C00AB39 */  jal       heap_malloc
 /* B7434 80120D34 24040068 */   addiu    $a0, $zero, 0x68
 /* B7438 80120D38 00102080 */  sll       $a0, $s0, 2
-/* B743C 80120D3C 3C038015 */  lui       $v1, %hi(D_80154370)
-/* B7440 80120D40 8C634370 */  lw        $v1, %lo(D_80154370)($v1)
-/* B7444 80120D44 3C058015 */  lui       $a1, %hi(D_80151318)
-/* B7448 80120D48 24A51318 */  addiu     $a1, $a1, %lo(D_80151318)
+/* B743C 80120D3C 3C038015 */  lui       $v1, %hi(gCurrentEntityModelList)
+/* B7440 80120D40 8C634370 */  lw        $v1, %lo(gCurrentEntityModelList)($v1)
+/* B7444 80120D44 3C058015 */  lui       $a1, %hi(gEntityModelCount)
+/* B7448 80120D48 24A51318 */  addiu     $a1, $a1, %lo(gEntityModelCount)
 /* B744C 80120D4C 00832021 */  addu      $a0, $a0, $v1
 /* B7450 80120D50 8CA30000 */  lw        $v1, ($a1)
 /* B7454 80120D54 0040302D */  daddu     $a2, $v0, $zero

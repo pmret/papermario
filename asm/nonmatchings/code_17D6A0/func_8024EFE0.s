@@ -109,11 +109,11 @@ glabel func_8024EFE0
 /* 17DA44 8024F164 24020001 */  addiu     $v0, $zero, 1
 /* 17DA48 8024F168 AE620000 */  sw        $v0, ($s3)
 /* 17DA4C 8024F16C 8FA80010 */  lw        $t0, 0x10($sp)
-/* 17DA50 8024F170 0C048338 */  jal       load_virtual_model
+/* 17DA50 8024F170 0C048338 */  jal       load_entity_model
 /* 17DA54 8024F174 8D040000 */   lw       $a0, ($t0)
 /* 17DA58 8024F178 0040202D */  daddu     $a0, $v0, $zero
 /* 17DA5C 8024F17C 24050020 */  addiu     $a1, $zero, 0x20
-/* 17DA60 8024F180 0C048BBA */  jal       func_80122EE8
+/* 17DA60 8024F180 0C048BBA */  jal       set_entity_model_flags
 /* 17DA64 8024F184 AE04FFBC */   sw       $a0, -0x44($s0)
 /* 17DA68 8024F188 8E04FFBC */  lw        $a0, -0x44($s0)
 /* 17DA6C 8024F18C 3C068025 */  lui       $a2, %hi(func_8024F768)

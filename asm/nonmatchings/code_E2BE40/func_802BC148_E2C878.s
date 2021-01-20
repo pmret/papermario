@@ -21,7 +21,7 @@ glabel func_802BC148_E2C878
 .L802BC188:
 /* E2C8B8 802BC188 0C04419E */  jal       func_80110678
 /* E2C8BC 802BC18C 0200202D */   daddu    $a0, $s0, $zero
-/* E2C8C0 802BC190 0C043F5A */  jal       func_8010FD68
+/* E2C8C0 802BC190 0C043F5A */  jal       exec_entity_updatecmd
 /* E2C8C4 802BC194 0200202D */   daddu    $a0, $s0, $zero
 .L802BC198:
 /* E2C8C8 802BC198 8FBF0014 */  lw        $ra, 0x14($sp)

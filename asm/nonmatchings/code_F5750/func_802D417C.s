@@ -13,7 +13,7 @@ glabel func_802D417C
 /* F8B4C 802D419C 8E420000 */  lw        $v0, ($s2)
 /* F8B50 802D41A0 02221021 */  addu      $v0, $s1, $v0
 /* F8B54 802D41A4 8C500000 */  lw        $s0, ($v0)
-/* F8B58 802D41A8 0C048338 */  jal       load_virtual_model
+/* F8B58 802D41A8 0C048338 */  jal       load_entity_model
 /* F8B5C 802D41AC 00A0202D */   daddu    $a0, $a1, $zero
 /* F8B60 802D41B0 3C013F80 */  lui       $at, 0x3f80
 /* F8B64 802D41B4 44810000 */  mtc1      $at, $f0
@@ -27,7 +27,7 @@ glabel func_802D417C
 /* F8B84 802D41D4 AE000018 */  sw        $zero, 0x18($s0)
 /* F8B88 802D41D8 E600001C */  swc1      $f0, 0x1c($s0)
 /* F8B8C 802D41DC E6000020 */  swc1      $f0, 0x20($s0)
-/* F8B90 802D41E0 0C0483C1 */  jal       func_80120F04
+/* F8B90 802D41E0 0C0483C1 */  jal       update_entity_rendercmd
 /* F8B94 802D41E4 E6000024 */   swc1     $f0, 0x24($s0)
 /* F8B98 802D41E8 8E420000 */  lw        $v0, ($s2)
 /* F8B9C 802D41EC 8FBF001C */  lw        $ra, 0x1c($sp)

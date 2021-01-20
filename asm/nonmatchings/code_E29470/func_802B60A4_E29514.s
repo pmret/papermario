@@ -327,7 +327,7 @@ glabel func_802B60A4_E29514
 /* E299EC 802B657C A422A552 */  sh        $v0, %lo(gCollisionStatus+0x2)($at)
 /* E299F0 802B6580 0C04417A */  jal       get_entity_by_index
 /* E299F4 802B6584 00000000 */   nop
-/* E299F8 802B6588 0C043F5A */  jal       func_8010FD68
+/* E299F8 802B6588 0C043F5A */  jal       exec_entity_updatecmd
 /* E299FC 802B658C 0040202D */   daddu    $a0, $v0, $zero
 /* E29A00 802B6590 080AD9D6 */  j         .L802B6758
 /* E29A04 802B6594 00000000 */   nop

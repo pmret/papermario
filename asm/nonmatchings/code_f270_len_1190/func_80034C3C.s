@@ -92,7 +92,7 @@ glabel func_80034C3C
 /* 1018C 80034D8C 00000000 */   nop
 /* 10190 80034D90 0C05203C */  jal       func_801480F0
 /* 10194 80034D94 00000000 */   nop
-/* 10198 80034D98 0C048316 */  jal       init_virtual_models
+/* 10198 80034D98 0C048316 */  jal       init_entity_models
 /* 1019C 80034D9C 00000000 */   nop
 /* 101A0 80034DA0 0C0478C4 */  jal       func_8011E310
 /* 101A4 80034DA4 00000000 */   nop

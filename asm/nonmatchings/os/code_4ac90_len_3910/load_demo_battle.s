@@ -26,7 +26,7 @@ glabel load_demo_battle
 /* 4E268 80072E68 0000202D */   daddu    $a0, $zero, $zero
 /* 4E26C 80072E6C 0C047889 */  jal       func_8011E224
 /* 4E270 80072E70 00000000 */   nop
-/* 4E274 80072E74 0C0482EC */  jal       clear_virtual_models
+/* 4E274 80072E74 0C0482EC */  jal       clear_entity_models
 /* 4E278 80072E78 00000000 */   nop
 /* 4E27C 80072E7C 0C00E12F */  jal       clear_npcs
 /* 4E280 80072E80 00000000 */   nop

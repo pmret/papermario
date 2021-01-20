@@ -278,7 +278,7 @@ glabel L802E211C_10399C
 /* 103B50 802E22D0 16420004 */  bne       $s2, $v0, .L802E22E4
 /* 103B54 802E22D4 0220202D */   daddu    $a0, $s1, $zero
 /* 103B58 802E22D8 A2000010 */  sb        $zero, 0x10($s0)
-/* 103B5C 802E22DC 0C043F5A */  jal       func_8010FD68
+/* 103B5C 802E22DC 0C043F5A */  jal       exec_entity_updatecmd
 /* 103B60 802E22E0 A2000011 */   sb       $zero, 0x11($s0)
 .L802E22E4:
 /* 103B64 802E22E4 96020024 */  lhu       $v0, 0x24($s0)

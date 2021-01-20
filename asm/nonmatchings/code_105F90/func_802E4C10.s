@@ -103,7 +103,7 @@ glabel func_802E4C10
 /* 1065FC 802E4D7C 0040202D */   daddu    $a0, $v0, $zero
 /* 106600 802E4D80 10400012 */  beqz      $v0, .L802E4DCC
 /* 106604 802E4D84 00000000 */   nop
-/* 106608 802E4D88 0C043F5A */  jal       func_8010FD68
+/* 106608 802E4D88 0C043F5A */  jal       exec_entity_updatecmd
 /* 10660C 802E4D8C 0220202D */   daddu    $a0, $s1, $zero
 /* 106610 802E4D90 0C03805E */  jal       disable_player_input
 /* 106614 802E4D94 00000000 */   nop

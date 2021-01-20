@@ -31,7 +31,7 @@ glabel func_80240688_E1EAE8
 /* E1EB50 802406F0 00000000 */   nop
 /* E1EB54 802406F4 0C0B763E */  jal       func_802DD8F8
 /* E1EB58 802406F8 0000202D */   daddu    $a0, $zero, $zero
-/* E1EB5C 802406FC 0C0482EC */  jal       clear_virtual_models
+/* E1EB5C 802406FC 0C0482EC */  jal       clear_entity_models
 /* E1EB60 80240700 00000000 */   nop
 /* E1EB64 80240704 0C047889 */  jal       func_8011E224
 /* E1EB68 80240708 00000000 */   nop

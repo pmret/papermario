@@ -13,7 +13,7 @@ glabel func_802D3624
 /* F7FF4 802D3644 00021080 */  sll       $v0, $v0, 2
 /* F7FF8 802D3648 00431021 */  addu      $v0, $v0, $v1
 /* F7FFC 802D364C 8C500000 */  lw        $s0, ($v0)
-/* F8000 802D3650 0C048B7F */  jal       func_80122DFC
+/* F8000 802D3650 0C048B7F */  jal       free_entity_model_by_index
 /* F8004 802D3654 8E040000 */   lw       $a0, ($s0)
 /* F8008 802D3658 2403FFFF */  addiu     $v1, $zero, -1
 /* F800C 802D365C AE030000 */  sw        $v1, ($s0)

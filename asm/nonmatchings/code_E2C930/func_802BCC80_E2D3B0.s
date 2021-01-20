@@ -12,7 +12,7 @@ glabel func_802BCC80_E2D3B0
 /* E2D3CC 802BCC9C 00000000 */   nop
 /* E2D3D0 802BCCA0 0C04419E */  jal       func_80110678
 /* E2D3D4 802BCCA4 00000000 */   nop
-/* E2D3D8 802BCCA8 0C043F5A */  jal       func_8010FD68
+/* E2D3D8 802BCCA8 0C043F5A */  jal       exec_entity_updatecmd
 /* E2D3DC 802BCCAC 0200202D */   daddu    $a0, $s0, $zero
 /* E2D3E0 802BCCB0 C600004C */  lwc1      $f0, 0x4c($s0)
 /* E2D3E4 802BCCB4 3C0141C8 */  lui       $at, 0x41c8

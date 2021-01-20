@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80120FB8
+glabel step_entity_rendercmd
 /* B76B8 80120FB8 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* B76BC 80120FBC 0080302D */  daddu     $a2, $a0, $zero
 /* B76C0 80120FC0 AFBF0010 */  sw        $ra, 0x10($sp)
@@ -17,7 +17,7 @@ glabel func_80120FB8
 /* B76E8 80120FE8 00400008 */  jr        $v0
 /* B76EC 80120FEC 00000000 */   nop
 glabel L80120FF0_B76F0
-/* B76F0 80120FF0 0C048BA5 */  jal       func_80122E94
+/* B76F0 80120FF0 0C048BA5 */  jal       free_entity_model_by_ref
 /* B76F4 80120FF4 00C0202D */   daddu    $a0, $a2, $zero
 /* B76F8 80120FF8 0804844D */  j         .L80121134
 /* B76FC 80120FFC 24020001 */   addiu    $v0, $zero, 1

@@ -4,11 +4,11 @@ INCLUDE_ASM(s32, "code_a5dd0_len_114e0", update_entities);
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", update_shadows);
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8010FBC0);
+INCLUDE_ASM(s32, "code_a5dd0_len_114e0", set_entity_updatecmd);
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8010FBD8);
+INCLUDE_ASM(s32, "code_a5dd0_len_114e0", step_entity_updatecmd);
 
-INCLUDE_ASM(void, "code_a5dd0_len_114e0", func_8010FD68, Entity* entity);
+INCLUDE_ASM(void, "code_a5dd0_len_114e0", exec_entity_updatecmd, Entity* entity);
 
 void func_8010FD98(s32 arg0, s32 alpha) {
     if (alpha >= 255) {
@@ -22,7 +22,7 @@ void func_8010FD98(s32 arg0, s32 alpha) {
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8010FE44);
 
-void func_8010FE68(s32 alpha) {
+void entity_model_set_shadow_color(s32 alpha) {
     gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, 0, PRIMITIVE, 0, TEXEL0, 0, 0, 0, 0, 0, TEXEL0, 0, PRIMITIVE, 0);
     gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0x00, 0x00, 0x00, alpha);
 }

@@ -73,7 +73,7 @@ glabel update_entities
 /* A5ED4 8010F7D4 08043DF9 */  j         .L8010F7E4
 /* A5ED8 8010F7D8 00000000 */   nop
 .L8010F7DC:
-/* A5EDC 8010F7DC 0C0483C1 */  jal       func_80120F04
+/* A5EDC 8010F7DC 0C0483C1 */  jal       update_entity_rendercmd
 /* A5EE0 8010F7E0 86040014 */   lh       $a0, 0x14($s0)
 .L8010F7E4:
 /* A5EE4 8010F7E4 8E020000 */  lw        $v0, ($s0)
@@ -199,7 +199,7 @@ glabel update_entities
 /* A60A0 8010F9A0 14400005 */  bnez      $v0, .L8010F9B8
 /* A60A4 8010F9A4 00000000 */   nop
 .L8010F9A8:
-/* A60A8 8010F9A8 0C043EF6 */  jal       func_8010FBD8
+/* A60A8 8010F9A8 0C043EF6 */  jal       step_entity_updatecmd
 /* A60AC 8010F9AC 0200202D */   daddu    $a0, $s0, $zero
 /* A60B0 8010F9B0 1440FFFD */  bnez      $v0, .L8010F9A8
 /* A60B4 8010F9B4 00000000 */   nop
@@ -227,7 +227,7 @@ glabel update_entities
 /* A6100 8010FA00 08043E84 */  j         .L8010FA10
 /* A6104 8010FA04 00000000 */   nop
 .L8010FA08:
-/* A6108 8010FA08 0C0483C1 */  jal       func_80120F04
+/* A6108 8010FA08 0C0483C1 */  jal       update_entity_rendercmd
 /* A610C 8010FA0C 86040014 */   lh       $a0, 0x14($s0)
 .L8010FA10:
 /* A6110 8010FA10 86020016 */  lh        $v0, 0x16($s0)

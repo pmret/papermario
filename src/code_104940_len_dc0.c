@@ -94,7 +94,7 @@ void func_802E3728(Entity* entity) {
     temp->unk_18 += 60.0f;
     if (temp->unk_18 > 450.0f) {
         temp->unk_18 = clamp_angle(temp->unk_18);
-        func_8010FD68(entity);
+        exec_entity_updatecmd(entity);
     }
 }
 
@@ -109,7 +109,7 @@ void func_802E37E4(Entity* entity) {
     if (temp->unk_18 >= 360.0f) {
         temp->unk_18 = 0.0f;
         entity->position.y = temp->unk_14;
-        func_8010FD68(entity);
+        exec_entity_updatecmd(entity);
     }
 }
 
@@ -145,7 +145,7 @@ void func_802E38D8(Entity* entity) {
 
     if ((temp->unk_04 == 0) || (temp->unk_06 == 0)) {
         temp->unk_03 = 1;
-        func_8010FBC0(get_entity_by_index(create_entity(&D_802EA07C, entity->position.x, entity->position.y, entity->position.z,
+        set_entity_updatecmd(get_entity_by_index(create_entity(&D_802EA07C, entity->position.x, entity->position.y, entity->position.z,
                                           entity->rotation.y, 0x80000000)), &D_802E9E54);
         entity->flags |= 0x20000020;
     }
@@ -172,7 +172,7 @@ void func_802E3A48(Entity* entity) {
     struct802E3650* temp = (struct802E3650*)entity->dataBuf;
 
     if ((entity->unk_06 & 0x80) != 0) {
-        func_8010FD68(entity);
+        exec_entity_updatecmd(entity);
         return;
     }
     func_802E3A00(entity);
@@ -229,11 +229,11 @@ s32 func_802E3BA4(Entity* entity) {
         if (!(playerStatus->flags & 2)) {
             return 1;
         }
-        func_8010FD68(entity);
+        exec_entity_updatecmd(entity);
         return 1;
     }
     if (bVar1 & 0x80) {
-        func_8010FD68(entity);
+        exec_entity_updatecmd(entity);
         return 1;
     }
 
@@ -274,7 +274,7 @@ s32 func_802E3BA4(Entity* entity) {
             if (!bVar2) {
                 return 1;
             }
-            func_8010FBC0(entity, &D_802E9E80);
+            set_entity_updatecmd(entity, &D_802E9E80);
             play_sound_at_position(0x14f, 0, entity->position.x, entity->position.y, entity->position.z);
             break;
         case 0x16:
@@ -289,7 +289,7 @@ s32 func_802E3BA4(Entity* entity) {
             if (!bVar2) {
                 return 1;
             }
-            func_8010FBC0(entity, &D_802E9E80);
+            set_entity_updatecmd(entity, &D_802E9E80);
             play_sound_at_position(0x150, 0, entity->position.x, entity->position.y, entity->position.z);
             break;
         case 0x17:
@@ -297,7 +297,7 @@ s32 func_802E3BA4(Entity* entity) {
             if (gPlayerData.hammerLevel < '\x02') {
                 return 1;
             }
-            func_8010FBC0(entity, &D_802E9E80);
+            set_entity_updatecmd(entity, &D_802E9E80);
             play_sound_at_position(0x151, 0, entity->position.x, entity->position.y, entity->position.z);
             break;
         case 0x1b:
@@ -306,7 +306,7 @@ s32 func_802E3BA4(Entity* entity) {
         case 0x1e:
         case 0x1f:
             func_80110678(entity);
-            func_8010FD68(entity);
+            exec_entity_updatecmd(entity);
             return 1;
         case 0xb:
             func_80110678(entity);

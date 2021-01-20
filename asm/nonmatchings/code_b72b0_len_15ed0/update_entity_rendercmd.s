@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80120F04
+glabel update_entity_rendercmd
 /* B7604 80120F04 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
 /* B7608 80120F08 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* B760C 80120F0C 27BDFFE8 */  addiu     $sp, $sp, -0x18
@@ -15,8 +15,8 @@ glabel func_80120F04
 .L80120F2C:
 /* B762C 80120F2C 2402F7FF */  addiu     $v0, $zero, -0x801
 /* B7630 80120F30 00822024 */  and       $a0, $a0, $v0
-/* B7634 80120F34 3C038015 */  lui       $v1, %hi(D_80154370)
-/* B7638 80120F38 8C634370 */  lw        $v1, %lo(D_80154370)($v1)
+/* B7634 80120F34 3C038015 */  lui       $v1, %hi(gCurrentEntityModelList)
+/* B7638 80120F38 8C634370 */  lw        $v1, %lo(gCurrentEntityModelList)($v1)
 /* B763C 80120F3C 00041080 */  sll       $v0, $a0, 2
 /* B7640 80120F40 00431021 */  addu      $v0, $v0, $v1
 /* B7644 80120F44 8C500000 */  lw        $s0, ($v0)
@@ -41,7 +41,7 @@ glabel func_80120F04
 /* B7690 80120F90 45000005 */  bc1f      .L80120FA8
 /* B7694 80120F94 E6000008 */   swc1     $f0, 8($s0)
 .L80120F98:
-/* B7698 80120F98 0C0483EE */  jal       func_80120FB8
+/* B7698 80120F98 0C0483EE */  jal       step_entity_rendercmd
 /* B769C 80120F9C 0200202D */   daddu    $a0, $s0, $zero
 /* B76A0 80120FA0 1440FFFD */  bnez      $v0, .L80120F98
 /* B76A4 80120FA4 00000000 */   nop

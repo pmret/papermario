@@ -183,7 +183,7 @@ glabel load_map_by_IDs
 /* 35D98 8005A998 80440084 */   lb       $a0, 0x84($v0)
 /* 35D9C 8005A99C 0C047889 */  jal       func_8011E224
 /* 35DA0 8005A9A0 00000000 */   nop
-/* 35DA4 8005A9A4 0C0482EC */  jal       clear_virtual_models
+/* 35DA4 8005A9A4 0C0482EC */  jal       clear_entity_models
 /* 35DA8 8005A9A8 00000000 */   nop
 /* 35DAC 8005A9AC 0C00E12F */  jal       clear_npcs
 /* 35DB0 8005A9B0 00000000 */   nop

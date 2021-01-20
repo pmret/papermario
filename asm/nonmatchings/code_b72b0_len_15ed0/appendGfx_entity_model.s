@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80121184
+glabel appendGfx_entity_model
 /* B7884 80121184 27BDFF08 */  addiu     $sp, $sp, -0xf8
 /* B7888 80121188 AFB200F0 */  sw        $s2, 0xf0($sp)
 /* B788C 8012118C 0080902D */  daddu     $s2, $a0, $zero
@@ -597,7 +597,7 @@ glabel L801218AC_B7FAC
 /* B8124 80121A24 0C019D60 */  jal       guMtxL2F
 /* B8128 80121A28 0220282D */   daddu    $a1, $s1, $zero
 /* B812C 80121A2C 27B00050 */  addiu     $s0, $sp, 0x50
-/* B8130 80121A30 0C048450 */  jal       func_80121140
+/* B8130 80121A30 0C048450 */  jal       make_mtx_flipZ
 /* B8134 80121A34 0200202D */   daddu    $a0, $s0, $zero
 /* B8138 80121A38 27A40010 */  addiu     $a0, $sp, 0x10
 /* B813C 80121A3C 0200282D */  daddu     $a1, $s0, $zero

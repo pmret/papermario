@@ -1,24 +1,24 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel clear_virtual_models
+glabel clear_entity_models
 /* B72B0 80120BB0 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
 /* B72B4 80120BB4 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* B72B8 80120BB8 80420070 */  lb        $v0, 0x70($v0)
 /* B72BC 80120BBC 14400005 */  bnez      $v0, .L80120BD4
 /* B72C0 80120BC0 00000000 */   nop
-/* B72C4 80120BC4 3C028015 */  lui       $v0, %hi(D_80153B70)
-/* B72C8 80120BC8 24423B70 */  addiu     $v0, $v0, %lo(D_80153B70)
+/* B72C4 80120BC4 3C028015 */  lui       $v0, %hi(gWorldEntityModelList)
+/* B72C8 80120BC8 24423B70 */  addiu     $v0, $v0, %lo(gWorldEntityModelList)
 /* B72CC 80120BCC 080482F7 */  j         .L80120BDC
 /* B72D0 80120BD0 00000000 */   nop
 .L80120BD4:
-/* B72D4 80120BD4 3C028015 */  lui       $v0, %hi(D_80153F70)
-/* B72D8 80120BD8 24423F70 */  addiu     $v0, $v0, %lo(D_80153F70)
+/* B72D4 80120BD4 3C028015 */  lui       $v0, %hi(gBattleEntityModelList)
+/* B72D8 80120BD8 24423F70 */  addiu     $v0, $v0, %lo(gBattleEntityModelList)
 .L80120BDC:
-/* B72DC 80120BDC 3C018015 */  lui       $at, %hi(D_80154370)
-/* B72E0 80120BE0 AC224370 */  sw        $v0, %lo(D_80154370)($at)
-/* B72E4 80120BE4 3C028015 */  lui       $v0, %hi(D_80154370)
-/* B72E8 80120BE8 8C424370 */  lw        $v0, %lo(D_80154370)($v0)
+/* B72DC 80120BDC 3C018015 */  lui       $at, %hi(gCurrentEntityModelList)
+/* B72E0 80120BE0 AC224370 */  sw        $v0, %lo(gCurrentEntityModelList)($at)
+/* B72E4 80120BE4 3C028015 */  lui       $v0, %hi(gCurrentEntityModelList)
+/* B72E8 80120BE8 8C424370 */  lw        $v0, %lo(gCurrentEntityModelList)($v0)
 /* B72EC 80120BEC 240300FF */  addiu     $v1, $zero, 0xff
 /* B72F0 80120BF0 244203FC */  addiu     $v0, $v0, 0x3fc
 .L80120BF4:
@@ -39,8 +39,8 @@ glabel clear_virtual_models
 /* B732C 80120C2C 3C018015 */  lui       $at, %hi(D_8015438C)
 /* B7330 80120C30 AC22438C */  sw        $v0, %lo(D_8015438C)($at)
 /* B7334 80120C34 240203E8 */  addiu     $v0, $zero, 0x3e8
-/* B7338 80120C38 3C018015 */  lui       $at, %hi(D_80151318)
-/* B733C 80120C3C AC201318 */  sw        $zero, %lo(D_80151318)($at)
+/* B7338 80120C38 3C018015 */  lui       $at, %hi(gEntityModelCount)
+/* B733C 80120C3C AC201318 */  sw        $zero, %lo(gEntityModelCount)($at)
 /* B7340 80120C40 3C018015 */  lui       $at, %hi(D_80154378)
 /* B7344 80120C44 AC204378 */  sw        $zero, %lo(D_80154378)($at)
 /* B7348 80120C48 3C018015 */  lui       $at, %hi(D_80154390)

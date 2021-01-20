@@ -263,7 +263,7 @@ glabel L802BB5A0_E2BCD0
 /* E2BCF0 802BB5C0 A2020012 */  sb        $v0, 0x12($s0)
 /* E2BCF4 802BB5C4 8E220000 */  lw        $v0, ($s1)
 /* E2BCF8 802BB5C8 34420021 */  ori       $v0, $v0, 0x21
-/* E2BCFC 802BB5CC 0C043F5A */  jal       func_8010FD68
+/* E2BCFC 802BB5CC 0C043F5A */  jal       exec_entity_updatecmd
 /* E2BD00 802BB5D0 AE220000 */   sw       $v0, ($s1)
 .L802BB5D4:
 /* E2BD04 802BB5D4 92020012 */  lbu       $v0, 0x12($s0)

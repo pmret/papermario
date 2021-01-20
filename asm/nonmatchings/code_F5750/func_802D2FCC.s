@@ -17,7 +17,7 @@ glabel func_802D2FCC
 /* F79A8 802D2FF8 8C440000 */  lw        $a0, ($v0)
 /* F79AC 802D2FFC 04800003 */  bltz      $a0, .L802D300C
 /* F79B0 802D3000 00000000 */   nop
-/* F79B4 802D3004 0C0483C1 */  jal       func_80120F04
+/* F79B4 802D3004 0C0483C1 */  jal       update_entity_rendercmd
 /* F79B8 802D3008 00000000 */   nop
 .L802D300C:
 /* F79BC 802D300C 2A020040 */  slti      $v0, $s0, 0x40

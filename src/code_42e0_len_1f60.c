@@ -3,8 +3,51 @@
 
 // TODO: replace nustuff with defines
 
-extern u16 D_80074260;
-extern s32 D_80074264;
+u16 D_80074260 = 0;
+s32 D_80074264 = 0;
+
+// probably padding
+s32 D_80074268[2] = {0, 0};
+
+s32 D_80074270 = 0;
+
+f32 D_80074274[] = {
+    0.0f, 0.017452f, 0.034899f, 0.052336f, 0.069756f, 0.087156f, 0.104528f, 0.121869f, 0.139173f,
+    0.156434f, 0.173648f, 0.190809f, 0.207912f, 0.224951f, 0.241922f, 0.258819f, 0.275637f, 0.292372f, 0.309017f,
+    0.325568f, 0.34202f, 0.358368f, 0.374607f, 0.390731f, 0.406737f, 0.422618f, 0.438371f, 0.45399f, 0.469472f,
+    0.48481f, 0.5f, 0.515038f, 0.529919f, 0.544639f, 0.559193f, 0.573576f, 0.587785f, 0.601815f, 0.615661f, 0.62932f,
+    0.642788f, 0.656059f, 0.669131f, 0.681998f, 0.694658f, 0.707107f, 0.71934f, 0.731354f, 0.743145f, 0.75471f,
+    0.766044f, 0.777146f, 0.788011f, 0.798636f, 0.809017f, 0.819152f, 0.829038f, 0.838671f, 0.848048f, 0.857167f,
+    0.866025f, 0.87462f, 0.882948f, 0.891007f, 0.898794f, 0.906308f, 0.913545f, 0.920505f, 0.927184f, 0.93358f,
+    0.939693f, 0.945519f, 0.951057f, 0.956305f, 0.961262f, 0.965926f, 0.970296f, 0.97437f, 0.978148f, 0.981627f,
+    0.984808f, 0.987688f, 0.990268f, 0.992546f, 0.994522f, 0.996195f, 0.997564f, 0.99863f, 0.999391f, 0.999848f, 1.0f
+};
+
+s8 D_800743E0[] = {
+    0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39, 0x61, 0x62, 0x63, 0x64, 0x65, 0x66, 0x67, 0x68, 0x69,
+    0x6A, 0x6B, 0x6C, 0x6D, 0x6E, 0x6F, 0x70, 0x71, 0x72, 0x73, 0x74, 0x75, 0x76, 0x77, 0x78, 0x79, 0x7A, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+};
+
+s32 gRandSeed = 1;
+
+f32 D_80074414[] = {
+    1.0f, 1.273187f, 1.27303f, 1.272768f, 1.272402f, 1.271932f, 1.271358f, 1.270681f, 1.269902f, 1.269021f, 1.268038f,
+    1.266956f, 1.265774f, 1.264494f, 1.263116f, 1.261643f, 1.260075f, 1.258413f, 1.256659f, 1.254815f, 1.252881f,
+    1.250859f, 1.248752f, 1.24656f, 1.244285f, 1.241929f, 1.239494f, 1.236981f, 1.234393f, 1.231731f, 1.228997f,
+    1.226192f, 1.22332f, 1.220382f, 1.217379f, 1.214315f, 1.211189f, 1.208006f, 1.204766f, 1.201471f, 1.198124f,
+    1.194727f, 1.191281f, 1.187787f, 1.18425f, 1.180669f, 1.177047f, 1.173386f, 1.169687f, 1.165952f, 1.162184f,
+    1.158384f, 1.154553f, 1.150693f, 1.146806f, 1.142893f, 1.138957f, 1.134998f, 1.131018f, 1.127019f, 1.123002f,
+    1.118969f, 1.11492f, 1.110858f, 1.106783f, 1.102697f, 1.098601f, 1.094496f, 1.090384f, 1.086266f, 1.082142f,
+    1.078014f, 1.073883f, 1.06975f, 1.065616f, 1.061482f, 1.057348f, 1.053216f, 1.049087f, 1.04496f, 1.040838f,
+    1.036721f, 1.03261f, 1.028504f, 1.024406f, 1.020316f, 1.016234f, 1.01216f, 1.008097f, 1.004043f, 1.0f
+};
+
+s32 D_80074580[] = {
+    0xE7000000, 0x00000000, 0xD7000000, 0xFFFFFFFF, 0xE3000A01, 0x00000000, 0xE3000C00, 0x00000000, 0xE3000D01,
+    0x00000000, 0xE3000F00, 0x00000000, 0xE3001201, 0x00000000, 0xE3001001, 0x00000000, 0xE3001402, 0x00000C00,
+    0xDF000000, 0x00000000
+};
 
 void sin_cos_rad(f32 rad, f32* outSinTheta, f32* outCosTheta);
 void func_80029860(s32 romStart, s32 vramDest, s32 length);
@@ -35,7 +78,6 @@ void start_rumble(s32 freq, s32 frame) {
     }
 }
 
-//INCLUDE_ASM(s32, "code_42e0_len_1f60", func_80028F8C);
 void func_80028F8C(void) {
     s32* sym = &D_80074264;
     u16* sym2;
@@ -51,14 +93,9 @@ void func_80028F8C(void) {
     }
 }
 
-// needs data
-#ifdef NON_MATCHING
 void func_80028FE0(void) {
     D_80074260 = 300;
 }
-#else
-INCLUDE_ASM(void, "code_42e0_len_1f60", func_80028FE0);
-#endif
 
 f32 length2D(f32 x, f32 y) {
     return sqrtf(SQ(x) + SQ(y));
@@ -204,9 +241,9 @@ f32 signF(f32 val) {
 
 s32 round(f32 arg0) {
     if (!(arg0 >= 0.0f)) {
-        return -(s32) (0.5 - arg0);
+        return -(s32)(0.5 - arg0);
     } else {
-        return (s32) (0.5 + arg0);
+        return (s32)(0.5 + arg0);
     }
 }
 
@@ -261,24 +298,46 @@ void add_vec2D_polar(f32* x, f32* y, f32 r, f32 theta) {
     *y -= r * cosTheta;
 }
 
-INCLUDE_ASM(s32, "code_42e0_len_1f60", _wrap_trig_lookup_value);
+u16 _wrap_trig_lookup_value(f32 theta) {
+    f32 ret = theta;
 
-INCLUDE_ASM(void, "code_42e0_len_1f60", sin_cos_rad, f32 rad, f32* outSinTheta, f32* outCosTheta);
+    if (theta >= 1048576.0f || theta <= -1048576.0f) {
+        ret = theta * 0.0000009536743f;
+        ret = theta - ((s32) ret) * 1048576.0f;
+    }
 
-INCLUDE_ASM(f32, "code_42e0_len_1f60", sin_rad, f32 angle);
-
-INCLUDE_ASM(f32, "code_42e0_len_1f60", cos_rad, f32 angle);
-/*
-f32 cos_rad(f32 angle) {
-    return (coss((u16)_wrap_trig_lookup_value(angle * 10430.378f)) * 3.051851e-05);
+    return (s32) ret;
 }
-*/
 
-INCLUDE_ASM(s32, "code_42e0_len_1f60", sin_cos_deg);
+void sin_cos_rad(f32 rad, f32* outSinTheta, f32* outCosTheta) {
+    u16 theta = _wrap_trig_lookup_value(rad * 10430.378f);
 
-INCLUDE_ASM(f32, "code_42e0_len_1f60", sin_deg, f32 x);
+    *outSinTheta = sins(theta) * 3.051851e-05;
+    *outCosTheta = coss(theta) * 3.051851e-05;
+}
 
-INCLUDE_ASM(f32, "code_42e0_len_1f60", cos_deg, f32 x);
+f32 sin_rad(f32 angle) {
+    return sins(_wrap_trig_lookup_value(angle * 10430.378f)) * 3.051851e-05;
+}
+
+f32 cos_rad(f32 angle) {
+    return coss(_wrap_trig_lookup_value(angle * 10430.378f)) * 3.051851e-05;
+}
+
+void sin_cos_deg(f32 rad, f32* outSinTheta, f32* outCosTheta) {
+    u16 theta = _wrap_trig_lookup_value(rad * 182.04445f);
+
+    *outSinTheta = sins(theta) * 3.051851e-05;
+    *outCosTheta = coss(theta) * 3.051851e-05;
+}
+
+f32 sin_deg(f32 angle) {
+    return sins(_wrap_trig_lookup_value(angle * 182.04445f)) * 3.051851e-05;
+}
+
+f32 cos_deg(f32 angle) {
+    return coss(_wrap_trig_lookup_value(angle * 182.04445f)) * 3.051851e-05;
+}
 
 INCLUDE_ASM(f32, "code_42e0_len_1f60", update_lerp, Easing easing, f32 start, f32 end, s32 elapsed, s32 duration);
 

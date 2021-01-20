@@ -23,13 +23,13 @@ glabel func_802D3FC8
 /* F89C0 802D4010 10400006 */  beqz      $v0, .L802D402C
 /* F89C4 802D4014 8E240000 */   lw       $a0, ($s1)
 /* F89C8 802D4018 8C840000 */  lw        $a0, ($a0)
-/* F89CC 802D401C 0C048BBA */  jal       func_80122EE8
+/* F89CC 802D401C 0C048BBA */  jal       set_entity_model_flags
 /* F89D0 802D4020 0200282D */   daddu    $a1, $s0, $zero
 /* F89D4 802D4024 080B500E */  j         .L802D4038
 /* F89D8 802D4028 00000000 */   nop
 .L802D402C:
 /* F89DC 802D402C 8C840000 */  lw        $a0, ($a0)
-/* F89E0 802D4030 0C048BC9 */  jal       func_80122F24
+/* F89E0 802D4030 0C048BC9 */  jal       clear_entity_model_flags
 /* F89E4 802D4034 0200282D */   daddu    $a1, $s0, $zero
 .L802D4038:
 /* F89E8 802D4038 8FBF0018 */  lw        $ra, 0x18($sp)

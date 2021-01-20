@@ -111,8 +111,8 @@ void set_script_timescale(ScriptInstance* script, f32 timescale);
 f32 sin_deg(f32 x);
 f32 cos_deg(f32 x);
 f32 sin_rad(f32 x);
-//f32 cos_rad(f32 x);
-//s16 round(f32);
+f32 cos_rad(f32 x);
+s32 round(f32);
 f32 atan2(f32 startX, f32 startZ, f32 endX, f32 endZ);
 f32 clamp_angle(f32 theta);
 s32 sign(s32 value);
@@ -227,7 +227,7 @@ ScriptInstance* get_script_by_index(s32 index);
 
 void suspend_all_group(s32 groupFlags);
 void kill_script(ScriptInstance* instanceToKill);
-void func_8010FD68(Entity* entity);
+void exec_entity_updatecmd(Entity* entity);
 
 void func_802D7460(f32 x, f32 y, f32 z, s32 arg3);
 void func_802D74C0(f32 x, f32 y, f32 z, s32 arg3);

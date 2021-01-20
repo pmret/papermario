@@ -31,6 +31,7 @@
     "files.associations": {
         "*.tcc": "c",
         "ratio": "c",
-        "vector": "c"
+        "vector": "c",
+        "cmath": "c"
     },
 }

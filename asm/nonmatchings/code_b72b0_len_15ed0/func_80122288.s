@@ -5,8 +5,8 @@ glabel func_80122288
 /* B8988 80122288 27BDFF08 */  addiu     $sp, $sp, -0xf8
 /* B898C 8012228C 2402F7FF */  addiu     $v0, $zero, -0x801
 /* B8990 80122290 00822024 */  and       $a0, $a0, $v0
-/* B8994 80122294 3C028015 */  lui       $v0, %hi(D_80154370)
-/* B8998 80122298 8C424370 */  lw        $v0, %lo(D_80154370)($v0)
+/* B8994 80122294 3C028015 */  lui       $v0, %hi(gCurrentEntityModelList)
+/* B8998 80122298 8C424370 */  lw        $v0, %lo(gCurrentEntityModelList)($v0)
 /* B899C 8012229C 00042080 */  sll       $a0, $a0, 2
 /* B89A0 801222A0 AFBF00F4 */  sw        $ra, 0xf4($sp)
 /* B89A4 801222A4 AFB200F0 */  sw        $s2, 0xf0($sp)
@@ -569,7 +569,7 @@ glabel L80122980_B9080
 /* B91B8 80122AB8 0C019D60 */  jal       guMtxL2F
 /* B91BC 80122ABC 0220282D */   daddu    $a1, $s1, $zero
 /* B91C0 80122AC0 27B00050 */  addiu     $s0, $sp, 0x50
-/* B91C4 80122AC4 0C048450 */  jal       func_80121140
+/* B91C4 80122AC4 0C048450 */  jal       make_mtx_flipZ
 /* B91C8 80122AC8 0200202D */   daddu    $a0, $s0, $zero
 /* B91CC 80122ACC 27A40010 */  addiu     $a0, $sp, 0x10
 /* B91D0 80122AD0 0200282D */  daddu     $a1, $s0, $zero
