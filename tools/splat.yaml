@@ -2653,7 +2653,8 @@ segments:
     - [0x7E2AA0, c]
     - [0x7E3700, c]
     - [0x7E4690, c]
-    - [0x7e4d00, bin]
+    - [0x7E4D00, data]
+    - [0x7E7380, .rodata, world/script_api/7E2AA0]
   - name: world/area_mac/machi/
     type: code
     overlay: True

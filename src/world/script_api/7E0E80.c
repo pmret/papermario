@@ -38,7 +38,12 @@ INCLUDE_ASM(s32, "world/script_api/7E0E80", func_80280954);
 
 INCLUDE_ASM(s32, "world/script_api/7E0E80", func_80280AC4);
 
-INCLUDE_ASM(s32, "world/script_api/7E0E80", func_80280B44);
+void func_80280B44(void) {
+    func_800F1538();
+    func_800E9900();
+    func_800E98C4();
+    func_800E97B8();
+}
 
 INCLUDE_ASM(s32, "world/script_api/7E0E80", func_80280B78);
 
