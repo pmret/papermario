@@ -1,5 +1,14 @@
+def agentLabel
+if (BRANCH_NAME == "master") {
+    agentLabel = "master"
+} else {
+    agentLabel = "papermario"
+}
+
 pipeline {
-    agent any
+    agent {
+        label agentLabel
+    }
 
     stages {
         stage('Setup') {
