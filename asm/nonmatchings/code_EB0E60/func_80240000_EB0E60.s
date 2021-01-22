@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80240000_EB0E60
+glabel nonmatchings_DeadUnkTexturePanFunc
 /* EB0E60 80240000 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* EB0E64 80240004 AFB00010 */  sw        $s0, 0x10($sp)
 /* EB0E68 80240008 0080802D */  daddu     $s0, $a0, $zero

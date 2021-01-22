@@ -1,6 +1,8 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "code_EB5130", func_80240000_EB5130);
+#define NAMESPACE code_EB5130
+
+#include "world/common/DeadUnkTexturePanFunc.inc.c"
 
 INCLUDE_ASM(s32, "code_EB5130", func_80240124_EB5254);
 

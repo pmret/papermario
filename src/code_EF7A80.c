@@ -1,6 +1,8 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "code_EF7A80", func_80240000_EF7A80);
+#define NAMESPACE code_EF7A80
+
+#include "world/common/DeadUnkTexturePanFunc.inc.c"
 
 INCLUDE_ASM(s32, "code_EF7A80", func_80240124_EF7BA4);
 

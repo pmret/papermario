@@ -1,5 +1,7 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "code_EA0900", func_80240000_EA0900);
+#define NAMESPACE code_EA0900
+
+#include "world/common/DeadUnkTexturePanFunc.inc.c"
 
 INCLUDE_ASM(s32, "code_EA0900", func_80240124_EA0A24);
