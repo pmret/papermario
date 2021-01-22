@@ -1982,6 +1982,7 @@ nuScGraphicsStack = 0x800AA5D0;
 nuContRmbCtl = 0x800B1D40;
 nuContData = 0x800B1D68;
 gCameras = 0x800B1D80;
+gCollisionData = 0x800B42E0 // size:0x10
 nuContPfs = 0x800DAAD8;
 nuSiMesgQ = 0x800DAC78;
 gCurrentSaveFile = 0x800DACC0;
