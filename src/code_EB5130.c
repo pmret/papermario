@@ -4,6 +4,6 @@
 
 #include "world/common/DeadUnkTexturePanFunc.inc.c"
 
-INCLUDE_ASM(s32, "code_EB5130", func_80240124_EB5254);
+#include "world/common/DeadUnkTexturePanFunc2.inc.c"
 
 INCLUDE_ASM(s32, "code_EB5130", func_8024030C_EB543C);

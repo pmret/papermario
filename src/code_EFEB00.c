@@ -4,7 +4,7 @@
 
 #include "world/common/DeadUnkTexturePanFunc.inc.c"
 
-INCLUDE_ASM(s32, "code_EFEB00", func_80240124_EFEC24);
+#include "world/common/DeadUnkTexturePanFunc2.inc.c"
 
 INCLUDE_ASM(s32, "code_EFEB00", func_8024030C_EFEE0C);
 
