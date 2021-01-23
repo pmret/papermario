@@ -10,7 +10,9 @@ INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_80218178_69F378);
 
 INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_802181E4_69F3E4);
 
-INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_80218588_69F788);
+#define NAMESPACE dup2_b_area_kpa2
+#include "common/FadeBackgroundToBlack.inc.c"
+#define NAMESPACE b_area_kpa2
 
 INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_80218620_69F820);
 
@@ -26,7 +28,9 @@ INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_80218AA4_69FCA4);
 
 INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_80218F58_6A0158);
 
-INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_802192FC_6A04FC);
+#define NAMESPACE dup3_b_area_kpa2
+#include "common/FadeBackgroundToBlack.inc.c"
+#define NAMESPACE b_area_kpa2
 
 INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_80219394_6A0594);
 
@@ -56,7 +60,9 @@ INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_8021A254_6A1454);
 
 INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_8021A318_6A1518);
 
-INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_8021A6BC_6A18BC);
+#define NAMESPACE dup4_b_area_kpa2
+#include "common/FadeBackgroundToBlack.inc.c"
+#define NAMESPACE b_area_kpa2
 
 INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_8021A754_6A1954);
 

@@ -117,7 +117,7 @@ glabel func_802BC2BC_E30C0C
 /* E30DB8 802BC468 00000000 */  nop
 /* E30DBC 802BC46C 46020001 */  sub.s     $f0, $f0, $f2
 /* E30DC0 802BC470 0240202D */  daddu     $a0, $s2, $zero
-/* E30DC4 802BC474 0C043F5A */  jal       func_8010FD68
+/* E30DC4 802BC474 0C043F5A */  jal       exec_entity_updatecmd
 /* E30DC8 802BC478 E480004C */   swc1     $f0, 0x4c($a0)
 /* E30DCC 802BC47C 24020004 */  addiu     $v0, $zero, 4
 /* E30DD0 802BC480 0C038045 */  jal       disable_player_static_collisions

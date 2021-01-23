@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_80286500_7E7380
+.word L80281E18_7E2C98, L80281F04_7E2D84, L80282000_7E2E80, L80282104_7E2F84, L80282174_7E2FF4, L80281E80_7E2D00, L80281F74_7E2DF4, L80282074_7E2EF4
+
+.section .text
+
 glabel MakeDoorAdvanced
 /* 7E2B2C 80281CAC 27BDFFA8 */  addiu     $sp, $sp, -0x58
 /* 7E2B30 80281CB0 AFB10034 */  sw        $s1, 0x34($sp)

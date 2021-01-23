@@ -269,7 +269,7 @@ glabel L80037450_12850
 /* 12880 80037480 00000000 */   nop
 /* 12884 80037484 0C00B7BD */  jal       create_cameras_a
 /* 12888 80037488 00000000 */   nop
-/* 1288C 8003748C 0C0482EC */  jal       clear_virtual_models
+/* 1288C 8003748C 0C0482EC */  jal       clear_entity_models
 /* 12890 80037490 00000000 */   nop
 /* 12894 80037494 0C047889 */  jal       func_8011E224
 /* 12898 80037498 00000000 */   nop

@@ -190,7 +190,7 @@ glabel L80036AA0_11EA0
 /* 11F08 80036B08 00000000 */   nop
 /* 11F0C 80036B0C 0C0B763E */  jal       func_802DD8F8
 /* 11F10 80036B10 0000202D */   daddu    $a0, $zero, $zero
-/* 11F14 80036B14 0C0482EC */  jal       clear_virtual_models
+/* 11F14 80036B14 0C0482EC */  jal       clear_entity_models
 /* 11F18 80036B18 00000000 */   nop
 /* 11F1C 80036B1C 0C047889 */  jal       func_8011E224
 /* 11F20 80036B20 00000000 */   nop

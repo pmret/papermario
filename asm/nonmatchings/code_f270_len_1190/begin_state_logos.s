@@ -116,7 +116,7 @@ glabel begin_state_logos
 /* F42C 8003402C 0000202D */   daddu    $a0, $zero, $zero
 /* F430 80034030 0C047889 */  jal       func_8011E224
 /* F434 80034034 00000000 */   nop
-/* F438 80034038 0C0482EC */  jal       clear_virtual_models
+/* F438 80034038 0C0482EC */  jal       clear_entity_models
 /* F43C 8003403C 00000000 */   nop
 /* F440 80034040 0C00E12F */  jal       clear_npcs
 /* F444 80034044 00000000 */   nop

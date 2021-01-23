@@ -136,7 +136,7 @@ glabel L80035814_10C14
 /* 10CF0 800358F0 00000000 */   nop
 /* 10CF4 800358F4 0C05203C */  jal       func_801480F0
 /* 10CF8 800358F8 00000000 */   nop
-/* 10CFC 800358FC 0C048316 */  jal       init_virtual_models
+/* 10CFC 800358FC 0C048316 */  jal       init_entity_models
 /* 10D00 80035900 00000000 */   nop
 /* 10D04 80035904 0C0478C4 */  jal       func_8011E310
 /* 10D08 80035908 00000000 */   nop

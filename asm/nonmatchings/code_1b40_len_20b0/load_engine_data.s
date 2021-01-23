@@ -104,7 +104,7 @@ glabel load_engine_data
 /* 2368 80026F68 00000000 */   nop
 /* 236C 80026F6C 0C0B763E */  jal       func_802DD8F8
 /* 2370 80026F70 0000202D */   daddu    $a0, $zero, $zero
-/* 2374 80026F74 0C0482EC */  jal       clear_virtual_models
+/* 2374 80026F74 0C0482EC */  jal       clear_entity_models
 /* 2378 80026F78 00000000 */   nop
 /* 237C 80026F7C 0C047889 */  jal       func_8011E224
 /* 2380 80026F80 00000000 */   nop

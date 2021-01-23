@@ -24,7 +24,7 @@ glabel func_802D42AC
 .L802D42F4:
 /* F8CA4 802D42F4 10400015 */  beqz      $v0, .L802D434C
 /* F8CA8 802D42F8 0000102D */   daddu    $v0, $zero, $zero
-/* F8CAC 802D42FC 0C048379 */  jal       func_80120DE4
+/* F8CAC 802D42FC 0C048379 */  jal       ALT_load_entity_model
 /* F8CB0 802D4300 00000000 */   nop
 /* F8CB4 802D4304 3C013F80 */  lui       $at, 0x3f80
 /* F8CB8 802D4308 44810000 */  mtc1      $at, $f0
@@ -38,7 +38,7 @@ glabel func_802D42AC
 /* F8CD8 802D4328 AE000018 */  sw        $zero, 0x18($s0)
 /* F8CDC 802D432C E600001C */  swc1      $f0, 0x1c($s0)
 /* F8CE0 802D4330 E6000020 */  swc1      $f0, 0x20($s0)
-/* F8CE4 802D4334 0C0483C1 */  jal       func_80120F04
+/* F8CE4 802D4334 0C0483C1 */  jal       update_entity_rendercmd
 /* F8CE8 802D4338 E6000024 */   swc1     $f0, 0x24($s0)
 /* F8CEC 802D433C 8E430000 */  lw        $v1, ($s2)
 /* F8CF0 802D4340 00111080 */  sll       $v0, $s1, 2

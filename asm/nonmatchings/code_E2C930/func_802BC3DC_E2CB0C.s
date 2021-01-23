@@ -359,7 +359,7 @@ glabel func_802BC3DC_E2CB0C
 /* E2D048 802BC918 2A620005 */  slti      $v0, $s3, 5
 /* E2D04C 802BC91C 14400003 */  bnez      $v0, .L802BC92C
 /* E2D050 802BC920 00000000 */   nop
-/* E2D054 802BC924 0C043F5A */  jal       func_8010FD68
+/* E2D054 802BC924 0C043F5A */  jal       exec_entity_updatecmd
 /* E2D058 802BC928 03C0202D */   daddu    $a0, $fp, $zero
 .L802BC92C:
 /* E2D05C 802BC92C 8FBF0054 */  lw        $ra, 0x54($sp)

@@ -115,7 +115,7 @@ glabel func_802E63A8
 /* 107DC8 802E6548 44810000 */  mtc1      $at, $f0
 /* 107DCC 802E654C A2400000 */  sb        $zero, ($s2)
 .L802E6550:
-/* 107DD0 802E6550 0C043F5A */  jal       func_8010FD68
+/* 107DD0 802E6550 0C043F5A */  jal       exec_entity_updatecmd
 /* 107DD4 802E6554 E6400028 */   swc1     $f0, 0x28($s2)
 .L802E6558:
 /* 107DD8 802E6558 8FBF0020 */  lw        $ra, 0x20($sp)

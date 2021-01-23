@@ -12,7 +12,7 @@ glabel func_802E7CB8
 /* 109554 802E7CD4 82020030 */  lb        $v0, 0x30($s0)
 /* 109558 802E7CD8 1040000F */  beqz      $v0, .L802E7D18
 /* 10955C 802E7CDC 00000000 */   nop
-/* 109560 802E7CE0 0C043F5A */  jal       func_8010FD68
+/* 109560 802E7CE0 0C043F5A */  jal       exec_entity_updatecmd
 /* 109564 802E7CE4 00000000 */   nop
 /* 109568 802E7CE8 0C04CE7F */  jal       remove_item_entity_by_index
 /* 10956C 802E7CEC 8E040014 */   lw       $a0, 0x14($s0)
@@ -25,7 +25,7 @@ glabel func_802E7CB8
 /* 109588 802E7D08 080B9F46 */  j         .L802E7D18
 /* 10958C 802E7D0C AE020010 */   sw       $v0, 0x10($s0)
 .L802E7D10:
-/* 109590 802E7D10 0C043F5A */  jal       func_8010FD68
+/* 109590 802E7D10 0C043F5A */  jal       exec_entity_updatecmd
 /* 109594 802E7D14 00000000 */   nop
 .L802E7D18:
 /* 109598 802E7D18 8FBF0014 */  lw        $ra, 0x14($sp)

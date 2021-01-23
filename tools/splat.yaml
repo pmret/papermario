@@ -206,6 +206,8 @@ segments:
     - [0x4a360, c, os/code_4a360_len_930]
     - [0x4ac90, c, os/code_4ac90_len_3910]
     - [0x4E5A0, data, code_1000_len_60]
+    - [0x4F660, .data, code_42e0_len_1f60]
+    - [0x4F9D0, data, code_6240_len_c00]
     - [0x53570, .data, code_25f00_len_940]
     - [0x53590, data, code_26840_len_20d0]
     - [0x541B0, .data, code_303c0_len_3e10]
@@ -216,6 +218,8 @@ segments:
     - [0x70E30, .data, battle/battle]
     - [0x71430, data]
     - [0x73130, rodata]
+    - [0x73160, .rodata, code_42e0_len_1f60]
+    - [0x73200, rodata]
     - [0x73DA0, .rodata, world/world]
     - [0x74EA0, rodata]
     - [0x75240, .rodata, battle/battle] # ram 80099E40
@@ -2649,7 +2653,8 @@ segments:
     - [0x7E2AA0, c]
     - [0x7E3700, c]
     - [0x7E4690, c]
-    - [0x7e4d00, bin]
+    - [0x7E4D00, data]
+    - [0x7E7380, .rodata, world/script_api/7E2AA0]
   - name: world/area_mac/machi/
     type: code
     overlay: True

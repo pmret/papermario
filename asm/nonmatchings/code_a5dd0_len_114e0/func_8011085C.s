@@ -9,7 +9,7 @@ glabel func_8011085C
 /* A6F6C 8011086C 0C044181 */  jal       get_shadow_by_index
 /* A6F70 80110870 AFB10014 */   sw       $s1, 0x14($sp)
 /* A6F74 80110874 84440008 */  lh        $a0, 8($v0)
-/* A6F78 80110878 0C048B7F */  jal       func_80122DFC
+/* A6F78 80110878 0C048B7F */  jal       free_entity_model_by_index
 /* A6F7C 8011087C 00108080 */   sll      $s0, $s0, 2
 /* A6F80 80110880 3C118015 */  lui       $s1, %hi(gCurrentShadowListPtr)
 /* A6F84 80110884 26311658 */  addiu     $s1, $s1, %lo(gCurrentShadowListPtr)

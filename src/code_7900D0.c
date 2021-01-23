@@ -8,7 +8,8 @@ INCLUDE_ASM(s32, "code_7900D0", func_802A116C_79023C);
 
 INCLUDE_ASM(s32, "code_7900D0", func_802A1218_7902E8);
 
-INCLUDE_ASM(s32, "code_7900D0", func_802A12E4_7903B4);
+#define NAMESPACE code_7900D0
+#include "common/FadeBackgroundToBlack.inc.c"
 
 INCLUDE_ASM(s32, "code_7900D0", func_802A137C_79044C);
 

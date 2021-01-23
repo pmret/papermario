@@ -81,9 +81,9 @@ void func_802E4154(Entity* entity) {
             phi_a0 = &D_802EA0A0;
         }
         create_entity(phi_a0, entity->position.x, entity->position.y, entity->position.z, entity->rotation.y, 0x80000000);
-        func_8010FBC0(entity, &D_802EA310);
+        set_entity_updatecmd(entity, &D_802EA310);
     } else {
-        func_8010FD68(entity);
+        exec_entity_updatecmd(entity);
     }
 }
 

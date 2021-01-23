@@ -71,7 +71,7 @@ s32 func_802E8858(Entity* entity) {
         func_802E7F6C(entity);
         func_80110BCC(entity, &D_802EAE7C);
         func_80110678(entity);
-        func_8010FD68(entity);
+        exec_entity_updatecmd(entity);
         play_sound(0x20AE);
     }
 }
@@ -114,7 +114,7 @@ void func_802E89B0(Entity* entity) {
     temp_s0 = entity->dataBuf;
     if (get_global_flag(temp_s0->unk_14)) {
         temp_s0->unk_04 = 0x10;
-        func_8010FD68(entity);
+        exec_entity_updatecmd(entity);
     }
 }
 
@@ -131,7 +131,7 @@ void func_802E89F8(Entity* entity) {
         return;
     }
     temp->unk_04 = 0;
-    func_8010FD68(entity);
+    exec_entity_updatecmd(entity);
 }
 
 void func_802E8A58(Entity* entity) {
@@ -150,11 +150,11 @@ void func_802E8A58(Entity* entity) {
                 }
                 return;
             default:
-                func_8010FD68(entity);
+                exec_entity_updatecmd(entity);
                 return;
         }
     } else {
-        func_8010FD68(entity);
+        exec_entity_updatecmd(entity);
     }
 }
 
@@ -175,7 +175,7 @@ void func_802E8ADC(Entity* entity) {
 
             if ((phi_v0 != 0) || (temp_a0 != 0)) {
                 if (atan2(0.0f, 0.0f, phi_v0, temp_a0) < 60.0f) {
-                    func_8010FD68(entity);
+                    exec_entity_updatecmd(entity);
                     return;
                 }
             }
@@ -216,7 +216,7 @@ void func_802E8C94(Entity* entity) {
     Trigger* trigger = (Trigger*)entity->dataBuf; // TODO: is Trigger correct?
 
     if (--trigger->params1 == -1) {
-        func_8010FD68(entity);
+        exec_entity_updatecmd(entity);
     }
 }
 
@@ -244,7 +244,7 @@ void func_802E8D74(Entity* entity) {
         playerStatus->renderMode = 0xD;
         playerStatus->position.y -= 50.0f;
         func_802DDFF8(0x10002, 0, 0, 0, 0, 0, 0);
-        func_8010FD68(entity);
+        exec_entity_updatecmd(entity);
     }
 }
 

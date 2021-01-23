@@ -16,7 +16,7 @@ void func_80070A90(s32, f32, f32, f32);
 void func_80070AF0(s32, f32, f32, f32);
 
 s32 heap_malloc(s32 size);
-HeapNode* _heap_create(void* addr, s32 size);
+HeapNode* _heap_create(s32* addr, u32 size);
 s32 dma_copy(s32 romStart, s32 romEnd, void* vramDest);
 
 s32 get_global_byte(s32 index);
@@ -81,7 +81,10 @@ void get_model_center_and_size(s32 modelID, f32* centerX, f32* centerY, f32* cen
 
 void func_80027088(s32);
 
+void func_8006F8F0(f32, f32, f32);
 void func_8006FEF0(s32, f32, f32, f32, f32);
+void func_80070190(s32, f32, f32, f32, s32, f32, s32, s32);
+
 void func_80071090(s32, f32, f32, f32, s32);
 void func_80071750(s32, f32, f32, f32, f32, s32);
 void func_800720B0(s32, f32, f32, f32, f32, s32);
@@ -109,7 +112,7 @@ f32 sin_deg(f32 x);
 f32 cos_deg(f32 x);
 f32 sin_rad(f32 x);
 f32 cos_rad(f32 x);
-s16 round(f32);
+s32 round(f32);
 f32 atan2(f32 startX, f32 startZ, f32 endX, f32 endZ);
 f32 clamp_angle(f32 theta);
 s32 sign(s32 value);
@@ -224,7 +227,7 @@ ScriptInstance* get_script_by_index(s32 index);
 
 void suspend_all_group(s32 groupFlags);
 void kill_script(ScriptInstance* instanceToKill);
-void func_8010FD68(Entity* entity);
+void exec_entity_updatecmd(Entity* entity);
 
 void func_802D7460(f32 x, f32 y, f32 z, s32 arg3);
 void func_802D74C0(f32 x, f32 y, f32 z, s32 arg3);

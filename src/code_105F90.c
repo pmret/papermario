@@ -105,12 +105,12 @@ void func_802E54CC(Entity* entity) {
         set_global_flag(0xF8405BE0);
         return;
     }
-    func_8010FD68(entity);
+    exec_entity_updatecmd(entity);
 }
 
 void func_802E555C(Entity* entity) {
     if (D_802EB3C0) {
-        func_8010FD68(entity);
+        exec_entity_updatecmd(entity);
         func_80027088(0);
         D_8009A650[0] &= ~0x40;
         enable_player_input();

@@ -1,4 +1,8 @@
 #include "common.h"
+#include "map.h"
+
+extern s32 D_8009A5D0;
+extern s32 D_8009A678;
 
 s32 get_defeated(s32 mapID, s32 encounterID) {
     EncounterStatus* currentEncounter = &gCurrentEncounter;
@@ -144,7 +148,44 @@ ApiStatus func_8003F4CC(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_1a1f0_len_5390", OnDefeatEnemy, ScriptInstance* script, s32 isInitialCall);
+ApiStatus OnDefeatEnemy(ScriptInstance* script, s32 isInitialCall) {
+    Enemy* enemy = script->owner1.enemy;
+    Npc* npc = get_npc_unsafe(enemy->npcID);
+    s32 temp1;
+
+    if (isInitialCall) {
+        script->functionTemp[0].s = 0;
+        script->functionTemp[1].s = 20;
+    }
+
+    if (script->functionTemp[1].s & 1) {
+        npc->flags &= ~2;
+    } else {
+        npc->flags |= 2;
+    }
+
+    if (script->functionTemp[1].s == 15) {
+        play_sound(SoundId_DEATH);
+        func_80070190(1, npc->pos.x, npc->pos.y + (npc->collisionHeight / 2), npc->pos.z, 0, -1.0f, 0, 10);
+    }
+
+    temp1 = script->functionTemp[1].s;
+    if (script->functionTemp[1].s == 10) {
+        func_8006F8F0(npc->pos.x, npc->pos.y + 10.0f, npc->pos.z + 10.0f);
+        if (script->functionTemp[1].s == temp1) { // what? (never can be false, seemingly)
+            spawn_drops(enemy);
+        }
+    }
+
+    script->functionTemp[1].s -= 1;
+
+    if (script->functionTemp[1].s == 0) {
+        npc->flags |= 2;
+        return ApiStatus_DONE1;
+    }
+
+    return ApiStatus_BLOCK;
+}
 
 ApiStatus OnFleeBattleDrops(ScriptInstance* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -196,7 +237,61 @@ s32 func_8004304C(void) {
     return ret;
 }
 
-INCLUDE_ASM(s32, "code_1a1f0_len_5390", func_8004309C);
+void func_8004309C(void) {
+    EncounterStatus* encounter = &gCurrentEncounter;
+    PlayerStatus* playerStatus = PLAYER_STATUS;
+    Enemy* currentEnemy;
+    s32 flag;
+
+    switch (D_8009A5D0) {
+        case 0:
+            currentEnemy = encounter->currentEnemy;
+            flag = FALSE;
+
+            if (currentEnemy->interactScript != NULL) {
+                if (does_script_exist(currentEnemy->interactScriptID)) {
+                    flag = TRUE;
+                } else {
+                    currentEnemy->interactScript = NULL;
+                }
+            }
+
+            if (currentEnemy->hitScript != NULL) {
+                if (does_script_exist(currentEnemy->hitScriptID)) {
+                    flag = TRUE;
+                } else {
+                    currentEnemy->hitScript = NULL;
+                }
+            }
+
+            if (!flag) {
+                D_8009A5D0 = 1;
+            }
+            break;
+        case 1:
+            resume_all_group(1);
+
+            currentEnemy = encounter->currentEnemy;
+            if (currentEnemy != NULL && currentEnemy->aiScript != NULL) {
+                resume_all_script(currentEnemy->aiScriptID);
+            }
+
+            enable_player_input();
+            func_800EF600();
+
+            if (playerStatus->actionState == ActionState_CONVERSATION) {
+                set_action_state(ActionState_IDLE);
+            }
+
+            func_800EF3D4(0);
+            encounter->hitType = 0;
+            resume_all_group(16);
+            gGameState = 2;
+            D_8009A678 = 1;
+            D_8009A5D0 = 0;
+            break;
+    }
+}
 
 void func_800431D4() {
 }

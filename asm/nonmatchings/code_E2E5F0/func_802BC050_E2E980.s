@@ -20,9 +20,9 @@ glabel func_802BC050_E2E980
 /* E2E9BC 802BC08C 0C04417A */  jal       get_entity_by_index
 /* E2E9C0 802BC090 8C440000 */   lw       $a0, ($v0)
 /* E2E9C4 802BC094 0200202D */  daddu     $a0, $s0, $zero
-/* E2E9C8 802BC098 0C043F5A */  jal       func_8010FD68
+/* E2E9C8 802BC098 0C043F5A */  jal       exec_entity_updatecmd
 /* E2E9CC 802BC09C 0040802D */   daddu    $s0, $v0, $zero
-/* E2E9D0 802BC0A0 0C043F5A */  jal       func_8010FD68
+/* E2E9D0 802BC0A0 0C043F5A */  jal       exec_entity_updatecmd
 /* E2E9D4 802BC0A4 0200202D */   daddu    $a0, $s0, $zero
 .L802BC0A8:
 /* E2E9D8 802BC0A8 8FBF0014 */  lw        $ra, 0x14($sp)

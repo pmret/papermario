@@ -4,7 +4,7 @@ extern EffectTableEntry D_8007F210[135];
 
 INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_8006F890);
 
-INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_8006F8F0);
+INCLUDE_ASM(void, "os/code_4ac90_len_3910", func_8006F8F0, f32 arg0, f32 arg1, f32 arg2);
 
 INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_8006F950);
 
@@ -51,7 +51,8 @@ INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_800700D0);
 
 INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_80070130);
 
-INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_80070190);
+INCLUDE_ASM(void, "os/code_4ac90_len_3910", func_80070190, s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4, f32 arg5,
+            s32 arg6, s32 arg7);
 
 INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_800701F0);
 

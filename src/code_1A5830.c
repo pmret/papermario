@@ -137,7 +137,36 @@ ApiStatus BindIdle(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_1A5830", EnableIdleScript);
+ApiStatus EnableIdleScript(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    ActorID actorID = get_variable(script, *args++);
+    s32 var1;
+    Actor* actor;
+
+    if (actorID == ActorID_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    var1 = get_variable(script, *args++);
+    actor = get_actor(actorID);
+
+    if (actor->idleScript != NULL) {
+        switch (var1) {
+            case -1:
+                restart_script(actor->idleScript);
+                resume_all_script(actor->idleScriptID);
+                break;
+            case 1:
+                resume_all_script(actor->idleScriptID);
+                break;
+            case 0:
+                suspend_all_script(actor->idleScriptID);
+                break;
+        }
+    }
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus BindHandleEvent(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -230,9 +259,61 @@ ApiStatus SetTargetActor(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_1A5830", SetEnemyHP);
+ApiStatus SetEnemyHP(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    ActorID actorID = get_variable(script, *args++);
+    s8 newHP;
+    Actor* actor;
 
+    if (actorID == ActorID_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    newHP = get_variable(script, *args++);
+    actor = get_actor(actorID);
+
+    actor->currentHP = newHP;
+    if (newHP > actor->maxHP) {
+        actor->currentHP = actor->maxHP;
+    }
+
+    actor->hpFraction = (actor->currentHP * 25) / actor->maxHP;
+
+    return ApiStatus_DONE2;
+}
+
+#ifdef NON_MATCHING
+ApiStatus GetActorHP(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    PlayerData* playerData = PLAYER_DATA;
+    ActorID actorID = get_variable(script, *args++);
+    Actor* actor;
+    s32 outVar;
+    s32 outVal;
+
+    if (actorID == ActorID_SELF) {
+        actorID = script->owner1.actorID;
+    }
+    outVar = *args++;
+
+    actor = get_actor(actorID);
+
+    if (actorID & 0x700) {
+        if (actorID == ActorID_PARTNER) {
+            outVal = 99;
+        } else {
+            outVal = actor->currentHP;
+        }
+    } else {
+        outVal = playerData->curHP;
+    }
+
+    set_variable(script, outVar, outVal);
+    return ApiStatus_DONE2;
+}
+#else
 INCLUDE_ASM(s32, "code_1A5830", GetActorHP);
+#endif
 
 ApiStatus GetEnemyMaxHP(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -379,7 +460,29 @@ ApiStatus func_8027D32C(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_1A5830", SetTargetOffset);
+ApiStatus SetTargetOffset(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    ActorID actorID = get_variable(script, *args++);
+    s32 partIndex;
+    ActorPart* part;
+    s32 x;
+    s32 y;
+
+    if (actorID == ActorID_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    partIndex = get_variable(script, *args++);
+    part = get_actor_part(get_actor(actorID), partIndex);
+
+    x = get_variable(script, *args++);
+    y = get_variable(script, *args++);
+
+    part->targetOffset.x = x;
+    part->targetOffset.y = y;
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus func_8027D434(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -397,7 +500,29 @@ ApiStatus func_8027D434(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_1A5830", func_8027D4C8);
+ApiStatus func_8027D4C8(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    ActorID actorID = get_variable(script, *args++);
+    s32 partIndex;
+    ActorPart* part;
+    s32 temp;
+    s32 temp2;
+
+    if (actorID == ActorID_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    partIndex = get_variable(script, *args++);
+    part = get_actor_part(get_actor(actorID), partIndex);
+
+    temp = get_variable(script, *args++);
+    temp2 = get_variable(script, *args++);
+
+    part->unk_75 = temp;
+    part->unk_76 = temp2;
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus EnableActorBlur(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -432,7 +557,44 @@ ApiStatus func_8027D628(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_1A5830", AfflictActor);
+ApiStatus AfflictActor(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    ActorID actorID = get_variable(script, *args++);
+    Actor* actor;
+    s32 statusTypeKey;
+    s32 duration;
+    s32 statusDurationKey;
+
+    statusTypeKey = get_variable(script, *args++);
+    duration = get_variable(script, *args++);
+
+    if (actorID == ActorID_SELF) {
+        actorID = script->owner1.actorID;
+    }
+    actor = get_actor(actorID);
+
+    switch (statusTypeKey) {
+        case 7:
+            statusDurationKey = 38;
+            break;
+        case 6:
+            statusDurationKey = 32;
+            break;
+        case 5:
+            statusDurationKey = 38;
+            break;
+        case 4:
+            statusDurationKey = 36;
+            break;
+        default:
+            statusDurationKey = 38;
+            break;
+    }
+
+    inflict_status_set_duration(actor, statusTypeKey, statusDurationKey, duration);
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus func_8027D75C(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -457,7 +619,29 @@ ApiStatus YieldTurn(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_1A5830", SetActorSize);
+ApiStatus SetActorSize(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    ActorID actorID = get_variable(script, *args++);
+    s32 y = get_variable(script, *args++);
+    s32 x = get_variable(script, *args++);
+    Actor* actor;
+
+    if (actorID == ActorID_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    actor = get_actor(actorID);
+
+    if (y != -250000000) {
+        actor->size.y = y;
+    }
+    if (x != -250000000) {
+        actor->size.x = x;
+    }
+    actor->shadowScale = actor->size.x / 24.0;
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus GetActorSize(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -518,22 +702,124 @@ ApiStatus GetLastDamage(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_1A5830", EnableActorGlow);
-
-// Cannot get gBattleStatus to load via lui+addiu no matter what I do
-#ifdef NON_MATCHING
-ApiStatus WasStatusInflicted(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus EnableActorGlow(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
+    ActorID actorID = get_variable(script, *args++);
+    s32 flag;
+    Actor* actor;
 
-    get_variable(script, *args++);
-    set_variable(script, *args++, gBattleStatus.wasStatusInflicted);
+    if (actorID == ActorID_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    flag = get_variable(script, *args++);
+    actor = get_actor(actorID);
+    actor->isGlowing = flag;
+
+    if (!flag) {
+        ActorPart* it = actor->partsTable;
+
+        while (it != NULL) {
+            if (it->idleAnimations != NULL) {
+                func_802DE894(it->unk_84, 0, 0, 0, 0, 0, 0);
+            }
+            it = it->nextPart;
+        }
+        func_80266EE8(actor, 0);
+    }
 
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(s32, "code_1A5830", WasStatusInflicted);
-#endif
 
-INCLUDE_ASM(s32, "code_1A5830", CopyStatusEffects);
+ApiStatus WasStatusInflicted(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    BattleStatus* battleStatus = BATTLE_STATUS;
+    s32 outVal;
 
-INCLUDE_ASM(s32, "code_1A5830", ClearStatusEffects);
+    get_variable(script, *args++);
+
+    if (script) { // can be args or script but not 1 or do while 0, nor does else work after
+        outVal = battleStatus->wasStatusInflicted;
+    }
+    outVal = battleStatus->wasStatusInflicted;
+
+    set_variable(script, *args++, outVal);
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus CopyStatusEffects(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    ActorID actorIDTo;
+    ActorID actorIDFrom;
+    Actor* actorTo;
+    Actor* actorFrom;
+
+    actorIDFrom = get_variable(script, *args++);
+    if (actorIDFrom == ActorID_SELF) {
+        actorIDFrom = script->owner1.actorID;
+    }
+    actorFrom = get_actor(actorIDFrom);
+
+    actorIDTo = get_variable(script, *args++);
+    if (actorIDTo == ActorID_SELF) {
+        actorIDTo = script->owner1.actorID;
+    }
+    actorTo = get_actor(actorIDTo);
+
+    inflict_status(actorTo, actorFrom->debuff, actorFrom->debuffDuration);
+    inflict_status(actorTo, actorFrom->staticStatus, actorFrom->staticDuration);
+    inflict_status(actorTo, actorFrom->stoneStatus, actorFrom->stoneDuration);
+    inflict_status(actorTo, actorFrom->koStatus, actorFrom->koDuration);
+    inflict_status(actorTo, actorFrom->transStatus, actorFrom->transDuration);
+
+    actorFrom->status = 0;
+    actorTo->status = 0;
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus ClearStatusEffects(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    ActorID actorID = get_variable(script, *args++);
+    s32 flag;
+    Actor* actor;
+
+    if (actorID == ActorID_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    actor = get_actor(actorID);
+
+    if (actor->debuff != Debuff_END) {
+        actor->debuffDuration = 0;
+        actor->debuff = Debuff_END;
+        func_80047898(actor->unk_436);
+    }
+
+    if (actor->staticStatus != 0) {
+        actor->staticDuration = 0;
+        actor->staticStatus = 0;
+        func_800479A0(actor->unk_436);
+    }
+
+    if (actor->transStatus != 0) {
+        actor->transDuration = 0;
+        actor->transStatus = 0;
+        func_80047AA8(actor->unk_436);
+    }
+
+    if (actor->stoneStatus != 0) {
+        actor->stoneDuration = 0;
+        actor->stoneStatus = 0;
+    }
+
+    actor->koStatus = 0;
+    actor->koDuration = 0;
+    actor->ptrDefuffIcon->ptrPropertyList[15] = 0;
+    actor->attackBoost = 0;
+    actor->defenseBoost = 0;
+    actor->isGlowing = 0;
+
+    return ApiStatus_DONE2;
+}

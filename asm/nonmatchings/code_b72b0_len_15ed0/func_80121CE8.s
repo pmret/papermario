@@ -32,8 +32,8 @@ glabel func_80121CE8
 .L80121D54:
 /* B8454 80121D54 2402F7FF */  addiu     $v0, $zero, -0x801
 /* B8458 80121D58 00C23024 */  and       $a2, $a2, $v0
-/* B845C 80121D5C 3C038015 */  lui       $v1, %hi(D_80154370)
-/* B8460 80121D60 8C634370 */  lw        $v1, %lo(D_80154370)($v1)
+/* B845C 80121D5C 3C038015 */  lui       $v1, %hi(gCurrentEntityModelList)
+/* B8460 80121D60 8C634370 */  lw        $v1, %lo(gCurrentEntityModelList)($v1)
 /* B8464 80121D64 00061080 */  sll       $v0, $a2, 2
 /* B8468 80121D68 00431021 */  addu      $v0, $v0, $v1
 /* B846C 80121D6C 8C500000 */  lw        $s0, ($v0)
@@ -89,8 +89,8 @@ glabel func_80121CE8
 /* B8530 80121E30 0C00A588 */  jal       transform_point
 /* B8534 80121E34 E7A00010 */   swc1     $f0, 0x10($sp)
 /* B8538 80121E38 82030004 */  lb        $v1, 4($s0)
-/* B853C 80121E3C 3C028012 */  lui       $v0, %hi(func_80121184)
-/* B8540 80121E40 24421184 */  addiu     $v0, $v0, %lo(func_80121184)
+/* B853C 80121E3C 3C028012 */  lui       $v0, %hi(appendGfx_entity_model)
+/* B8540 80121E40 24421184 */  addiu     $v0, $v0, %lo(appendGfx_entity_model)
 /* B8544 80121E44 AE300008 */  sw        $s0, 8($s1)
 /* B8548 80121E48 AE22000C */  sw        $v0, 0xc($s1)
 /* B854C 80121E4C AE230000 */  sw        $v1, ($s1)

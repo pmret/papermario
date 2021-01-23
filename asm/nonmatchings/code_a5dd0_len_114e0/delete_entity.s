@@ -19,7 +19,7 @@ glabel delete_entity
 /* A6E04 80110704 30420008 */  andi      $v0, $v0, 8
 /* A6E08 80110708 14400005 */  bnez      $v0, .L80110720
 /* A6E0C 8011070C 00000000 */   nop
-/* A6E10 80110710 0C048B7F */  jal       func_80122DFC
+/* A6E10 80110710 0C048B7F */  jal       free_entity_model_by_index
 /* A6E14 80110714 86240014 */   lh       $a0, 0x14($s1)
 /* A6E18 80110718 080441CC */  j         .L80110730
 /* A6E1C 8011071C 00000000 */   nop

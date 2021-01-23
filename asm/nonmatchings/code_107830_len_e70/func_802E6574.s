@@ -330,7 +330,7 @@ glabel func_802E6574
 /* 1082D4 802E6A54 00021600 */  sll       $v0, $v0, 0x18
 /* 1082D8 802E6A58 0441001E */  bgez      $v0, .L802E6AD4
 /* 1082DC 802E6A5C 0220202D */   daddu    $a0, $s1, $zero
-/* 1082E0 802E6A60 0C043F5A */  jal       func_8010FD68
+/* 1082E0 802E6A60 0C043F5A */  jal       exec_entity_updatecmd
 /* 1082E4 802E6A64 A2000000 */   sb       $zero, ($s0)
 /* 1082E8 802E6A68 82020002 */  lb        $v0, 2($s0)
 /* 1082EC 802E6A6C 10400009 */  beqz      $v0, .L802E6A94

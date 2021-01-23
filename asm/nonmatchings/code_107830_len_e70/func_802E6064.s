@@ -31,7 +31,7 @@ glabel func_802E6064
 /* 107948 802E60C8 00000000 */   nop
 /* 10794C 802E60CC 0C04419E */  jal       func_80110678
 /* 107950 802E60D0 0200202D */   daddu    $a0, $s0, $zero
-/* 107954 802E60D4 0C043F5A */  jal       func_8010FD68
+/* 107954 802E60D4 0C043F5A */  jal       exec_entity_updatecmd
 /* 107958 802E60D8 0200202D */   daddu    $a0, $s0, $zero
 /* 10795C 802E60DC C6000050 */  lwc1      $f0, 0x50($s0)
 /* 107960 802E60E0 24042086 */  addiu     $a0, $zero, 0x2086

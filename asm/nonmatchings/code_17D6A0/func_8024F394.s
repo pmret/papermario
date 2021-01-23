@@ -33,15 +33,15 @@ glabel func_8024F394
 /* 17DCE0 8024F400 14400004 */  bnez      $v0, .L8024F414
 /* 17DCE4 8024F404 AE02FFE0 */   sw       $v0, -0x20($s0)
 /* 17DCE8 8024F408 0220202D */  daddu     $a0, $s1, $zero
-/* 17DCEC 8024F40C 0C048BC9 */  jal       func_80122F24
+/* 17DCEC 8024F40C 0C048BC9 */  jal       clear_entity_model_flags
 /* 17DCF0 8024F410 24050020 */   addiu    $a1, $zero, 0x20
 .L8024F414:
-/* 17DCF4 8024F414 0C0483C1 */  jal       func_80120F04
+/* 17DCF4 8024F414 0C0483C1 */  jal       update_entity_rendercmd
 /* 17DCF8 8024F418 0220202D */   daddu    $a0, $s1, $zero
 /* 17DCFC 8024F41C 08093D5A */  j         .L8024F568
 /* 17DD00 8024F420 00000000 */   nop
 .L8024F424:
-/* 17DD04 8024F424 0C0483C1 */  jal       func_80120F04
+/* 17DD04 8024F424 0C0483C1 */  jal       update_entity_rendercmd
 /* 17DD08 8024F428 0220202D */   daddu    $a0, $s1, $zero
 /* 17DD0C 8024F42C 8E02FFDC */  lw        $v0, -0x24($s0)
 /* 17DD10 8024F430 0440000D */  bltz      $v0, .L8024F468
@@ -115,7 +115,7 @@ glabel func_8024F394
 /* 17DE18 8024F538 2442FFFF */  addiu     $v0, $v0, -1
 /* 17DE1C 8024F53C 04410004 */  bgez      $v0, .L8024F550
 /* 17DE20 8024F540 AE020000 */   sw       $v0, ($s0)
-/* 17DE24 8024F544 0C048B7F */  jal       func_80122DFC
+/* 17DE24 8024F544 0C048B7F */  jal       free_entity_model_by_index
 /* 17DE28 8024F548 0220202D */   daddu    $a0, $s1, $zero
 /* 17DE2C 8024F54C AE400000 */  sw        $zero, ($s2)
 .L8024F550:

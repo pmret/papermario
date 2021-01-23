@@ -72,7 +72,7 @@ void load_engine_data(void) {
     create_cameras_a();
     clear_player_status();
     func_802DD8F8(0);
-    func_80120BB0();
+    clear_entity_models();
     func_8011E224();
     clear_model_data();
     func_80148040();

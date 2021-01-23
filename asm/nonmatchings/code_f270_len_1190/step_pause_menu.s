@@ -91,7 +91,7 @@ glabel step_pause_menu
 /* FEC8 80034AC8 00000000 */   nop
 /* FECC 80034ACC 0C05177E */  jal       func_80145DF8
 /* FED0 80034AD0 00000000 */   nop
-/* FED4 80034AD4 0C0482EC */  jal       clear_virtual_models
+/* FED4 80034AD4 0C0482EC */  jal       clear_entity_models
 /* FED8 80034AD8 00000000 */   nop
 /* FEDC 80034ADC 0C047889 */  jal       func_8011E224
 /* FEE0 80034AE0 00000000 */   nop

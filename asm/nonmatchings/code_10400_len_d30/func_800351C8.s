@@ -146,7 +146,7 @@ glabel func_800351C8
 /* 107DC 800353DC 00000000 */   nop
 /* 107E0 800353E0 0C05177E */  jal       func_80145DF8
 /* 107E4 800353E4 00000000 */   nop
-/* 107E8 800353E8 0C0482EC */  jal       clear_virtual_models
+/* 107E8 800353E8 0C0482EC */  jal       clear_entity_models
 /* 107EC 800353EC 00000000 */   nop
 /* 107F0 800353F0 0C047889 */  jal       func_8011E224
 /* 107F4 800353F4 00000000 */   nop

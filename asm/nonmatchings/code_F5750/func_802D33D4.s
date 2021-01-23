@@ -20,7 +20,7 @@ glabel func_802D33D4
 /* F7DC0 802D3410 8C42B7C0 */  lw        $v0, %lo(D_802DB7C0)($v0)
 /* F7DC4 802D3414 00108080 */  sll       $s0, $s0, 2
 /* F7DC8 802D3418 02028021 */  addu      $s0, $s0, $v0
-/* F7DCC 802D341C 0C048338 */  jal       load_virtual_model
+/* F7DCC 802D341C 0C048338 */  jal       load_entity_model
 /* F7DD0 802D3420 8E100000 */   lw       $s0, ($s0)
 /* F7DD4 802D3424 3C013F80 */  lui       $at, 0x3f80
 /* F7DD8 802D3428 44810000 */  mtc1      $at, $f0
@@ -34,7 +34,7 @@ glabel func_802D33D4
 /* F7DF8 802D3448 AE000018 */  sw        $zero, 0x18($s0)
 /* F7DFC 802D344C E600001C */  swc1      $f0, 0x1c($s0)
 /* F7E00 802D3450 E6000020 */  swc1      $f0, 0x20($s0)
-/* F7E04 802D3454 0C0483C1 */  jal       func_80120F04
+/* F7E04 802D3454 0C0483C1 */  jal       update_entity_rendercmd
 /* F7E08 802D3458 E6000024 */   swc1     $f0, 0x24($s0)
 /* F7E0C 802D345C 8FBF0018 */  lw        $ra, 0x18($sp)
 /* F7E10 802D3460 8FB10014 */  lw        $s1, 0x14($sp)

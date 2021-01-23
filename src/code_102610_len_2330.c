@@ -59,15 +59,15 @@ void func_802E1204(Entity* entity) {
         return;
     }
 
-    func_8010FD68(entity);
-    func_8010FD68(entity);
+    exec_entity_updatecmd(entity);
+    exec_entity_updatecmd(entity);
 }
 
 void func_802E1270(Entity* entity) {
     s32* temp = &D_802EB390;
 
     if (*temp != 0) {
-        func_8010FD68(entity);
+        exec_entity_updatecmd(entity);
     }
 }
 
@@ -89,7 +89,7 @@ void func_802E1328(Entity* entity) {
     s32* temp = &D_802EB394;
 
     if (*temp != 0) {
-        func_8010FD68(entity);
+        exec_entity_updatecmd(entity);
     }
 }
 
@@ -97,9 +97,9 @@ void func_802E1350(Entity* entity) {
     s32* temp = &D_802EB390;
     if (*temp != 0) {
         if (D_802EB398->unk_4E8 == 1) {
-            func_8010FBC0(entity, &D_802E99DC);
+            set_entity_updatecmd(entity, &D_802E99DC);
         } else {
-            func_8010FD68(entity);
+            exec_entity_updatecmd(entity);
         }
         close_message(D_802EB39C);
     }
