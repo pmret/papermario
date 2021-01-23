@@ -1,5 +1,6 @@
 EnemyNpcHit = 0x80077F70;
 EnemyNpcDefeat = 0x8007809C;
+gCollisionData = 0x800B42E0;
 StartRumbleWithParams = 0x80267D9C;
 ExecutePlayerAction = 0x8028505C;
 ExecutePeachAction = 0x80285174;

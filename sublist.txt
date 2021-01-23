@@ -1,0 +1,9 @@
+#include "world/common/DeadUnkTexturePanFunc2.inc.c"
+1.00 - func_80240124_EA8C04
+1.00 - func_80240124_EB0F84
+1.00 - func_80240124_EB5254
+1.00 - func_80240124_EB7354
+1.00 - func_80240124_EC72D4
+1.00 - func_80240124_EE66D4
+1.00 - func_80240124_EF7BA4
+1.00 - func_80240124_EFEC24

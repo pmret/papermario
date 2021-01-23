@@ -1,7 +1,7 @@
 #include "common.h"
 #include "map.h"
 
-ApiStatus N(UnkTexturePanFunc2)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(DeadUnkTexturePanFunc2)(ScriptInstance* script, s32 isInitialCall) {
     if (isInitialCall) {
         script->functionTemp[0].s = 0;
         script->functionTemp[1].s = 0;
@@ -45,10 +45,10 @@ ApiStatus N(UnkTexturePanFunc2)(ScriptInstance* script, s32 isInitialCall) {
         }
     }
 
-    set_main_pan_u(script->varTable[0], script->varTable[9]);
-    set_main_pan_v(script->varTable[0], script->varTable[10]);
-    set_aux_pan_u(script->varTable[0], script->varTable[11]);
-    set_aux_pan_v(script->varTable[0], script->varTable[12]);
+    func_80126064(script->varTable[0], script->varTable[9]);
+    func_8012607C(script->varTable[0], script->varTable[10]);
+    func_80126094(script->varTable[0], script->varTable[11]);
+    func_801260AC(script->varTable[0], script->varTable[12]);
 
     script->functionTemp[0].s++;
     script->functionTemp[1].s++;
