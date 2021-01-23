@@ -43,10 +43,17 @@ f32 D_80074414[] = {
     1.036721f, 1.03261f, 1.028504f, 1.024406f, 1.020316f, 1.016234f, 1.01216f, 1.008097f, 1.004043f, 1.0f
 };
 
-s32 D_80074580[] = {
-    0xE7000000, 0x00000000, 0xD7000000, 0xFFFFFFFF, 0xE3000A01, 0x00000000, 0xE3000C00, 0x00000000, 0xE3000D01,
-    0x00000000, 0xE3000F00, 0x00000000, 0xE3001201, 0x00000000, 0xE3001001, 0x00000000, 0xE3001402, 0x00000C00,
-    0xDF000000, 0x00000000
+Gfx D_80074580[] = {
+    gsDPPipeSync(),
+    gsSPTexture(-1, -1, 0, G_TX_RENDERTILE, G_OFF),
+    gsDPSetCycleType(G_CYC_1CYCLE),
+    gsDPSetTexturePersp(G_TP_NONE),
+    gsDPSetTextureDetail(G_TD_CLAMP),
+    gsDPSetTextureLOD(G_TL_TILE),
+    gsDPSetTextureFilter(G_TF_POINT),
+    gsDPSetTextureLUT(G_TT_NONE),
+    gsDPSetTextureConvert(G_TC_FILT),
+    gsSPEndDisplayList(),
 };
 
 void sin_cos_rad(f32 rad, f32* outSinTheta, f32* outCosTheta);
@@ -107,7 +114,7 @@ HeapNode* _heap_create(s32* addr, u32 size) {
     } else {
         HeapNode* heapNode = ALIGN16((s32)addr);
 
-        size -= ((char*)heapNode - (char*)addr);
+        size -= ((s8*)heapNode - (s8*)addr);
         heapNode->next = NULL;
         heapNode->length = size - sizeof(HeapNode);
         heapNode->allocated = 0;
