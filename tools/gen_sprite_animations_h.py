@@ -3,7 +3,7 @@
 from sys import argv, path
 from pathlib import Path
 import os
-path.append(os.path.join(os.path.dirname(__file__), "n64splat"))
+path.append(os.path.join(os.path.dirname(__file__), "splat"))
 from splat_ext.PaperMarioNpcSprites import Sprite
 
 if __name__ == "__main__":
