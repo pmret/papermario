@@ -280,7 +280,7 @@ def main(rom_path, config_path, repo_path, modes, verbose, ignore_cache=False):
         cache = {}
 
     # Initialize segments
-    all_segments = initialize_segments(options, config_path, config["segments"], platform)
+    all_segments = initialize_segments(options, config_path, config["segments"])
 
     for segment in all_segments:
         if platform == "n64" and type(segment) == N64SegCode: # remove special-case sometime
