@@ -194,6 +194,8 @@ def get_extension_class(options, config_path, seg_type, platform):
 
     return getattr(ext_mod, f"{platform.upper()}Seg{seg_type[0].upper()}{seg_type[1:]}")
 
+def get_platform(options):
+    return options.get("platform", "n64")
 
 def fmt_size(size):
     if size > 1000000:
@@ -204,7 +206,7 @@ def fmt_size(size):
         return str(size) + " B"
 
 
-def initialize_segments(options, config_path, config_segments, platform):
+def initialize_segments(options, config_path, config_segments):
     seen_segment_names = set()
     ret = []
 
@@ -214,6 +216,8 @@ def initialize_segments(options, config_path, config_segments, platform):
             continue
 
         seg_type = parse_segment_type(segment)
+
+        platform = get_platform(options)
 
         segment_class = get_base_segment_class(seg_type, platform)
         if segment_class == None:
@@ -254,7 +258,7 @@ def main(rom_path, config_path, repo_path, modes, verbose, ignore_cache=False):
     symbol_addrs_path = get_symbol_addrs_path(repo_path, options)
     undefined_syms_path = get_undefined_syms_path(repo_path, options)
     provided_symbols, c_func_labels_to_add, special_labels, ranges = gather_symbols(symbol_addrs_path, undefined_syms_path)
-    platform = options.get("platform", "n64")
+    platform = get_platform(options)
 
     processed_segments = []
     ld_sections = []
