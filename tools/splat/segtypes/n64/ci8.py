@@ -1,8 +1,7 @@
-from segtypes.segment import N64Segment
-from segtypes.rgba16 import N64SegRgba16
+from segtypes.n64.rgba16 import N64SegRgba16
 import png
 import os
-from util import Yay0decompress
+from util.n64 import Yay0decompress
 
 
 class N64SegCi8(N64SegRgba16):

@@ -5,16 +5,12 @@ import importlib
 import importlib.util
 import os
 from ranges import Range, RangeDict
-import re
 from pathlib import Path
-import segtypes
-import sys
 import yaml
 import pickle
 from colorama import Style, Fore
-from collections import OrderedDict
-from segtypes.segment import N64Segment, parse_segment_type
-from segtypes.code import N64SegCode
+from segtypes.segment import parse_segment_type
+from segtypes.n64.code import N64SegCode
 from util import log
 
 parser = argparse.ArgumentParser(
@@ -81,11 +77,23 @@ def parse_file_start(split_file):
 
 
 def get_symbol_addrs_path(repo_path, options):
-    return os.path.join(repo_path, options.get("symbol_addrs", "symbol_addrs.txt"))
+    return os.path.join(repo_path, options.get("symbol_addrs_path", "symbol_addrs.txt"))
 
 
 def get_undefined_syms_path(repo_path, options):
-    return os.path.join(repo_path, options.get("undefined_syms", "undefined_syms.txt"))
+    return os.path.join(repo_path, options.get("undefined_syms_path", "undefined_syms.txt"))
+
+
+def get_undefined_syms_auto_path(repo_path, options):
+    return os.path.join(repo_path, options.get("undefined_syms_auto_path", "undefined_syms_auto.txt"))
+
+
+def get_undefined_funcs_auto_path(repo_path, options):
+    return os.path.join(repo_path, options.get("undefined_funcs_auto_path", "undefined_funcs_auto.txt"))
+
+
+def get_cache_path(repo_path, options):
+    return os.path.join(repo_path, options.get("cache_path", ".splat_cache"))
 
 
 def gather_symbols(symbol_addrs_path, undefined_syms_path):
@@ -156,13 +164,13 @@ def gather_c_variables(undefined_syms_path):
     return vars
 
 
-def get_base_segment_class(seg_type):
+def get_base_segment_class(seg_type, platform):
     try:
-        segmodule = importlib.import_module("segtypes." + seg_type)
+        segmodule = importlib.import_module(f"segtypes.{platform}.{seg_type}")
     except ModuleNotFoundError:
         return None
 
-    return getattr(segmodule, "N64Seg" + seg_type[0].upper() + seg_type[1:])
+    return getattr(segmodule, f"{platform.upper()}Seg{seg_type[0].upper()}{seg_type[1:]}")
 
 
 def get_extension_dir(options, config_path):
@@ -171,20 +179,20 @@ def get_extension_dir(options, config_path):
     return os.path.join(Path(config_path).parent, options["extensions"])
 
 
-def get_extension_class(options, config_path, seg_type):
+def get_extension_class(options, config_path, seg_type, platform):
     ext_dir = get_extension_dir(options, config_path)
     if ext_dir == None:
         return None
 
     try:
-        ext_spec = importlib.util.spec_from_file_location(f"segtypes.{seg_type}", os.path.join(ext_dir, f"{seg_type}.py"))
+        ext_spec = importlib.util.spec_from_file_location(f"{platform}.segtypes.{seg_type}", os.path.join(ext_dir, f"{seg_type}.py"))
         ext_mod = importlib.util.module_from_spec(ext_spec)
         ext_spec.loader.exec_module(ext_mod)
     except Exception as err:
         log.write(err, status="error")
         return None
 
-    return getattr(ext_mod, "N64Seg" + seg_type[0].upper() + seg_type[1:])
+    return getattr(ext_mod, f"{platform.upper()}Seg{seg_type[0].upper()}{seg_type[1:]}")
 
 
 def fmt_size(size):
@@ -196,7 +204,7 @@ def fmt_size(size):
         return str(size) + " B"
 
 
-def initialize_segments(options, config_path, config_segments):
+def initialize_segments(options, config_path, config_segments, platform):
     seen_segment_names = set()
     ret = []
 
@@ -207,24 +215,16 @@ def initialize_segments(options, config_path, config_segments):
 
         seg_type = parse_segment_type(segment)
 
-        segment_class = get_base_segment_class(seg_type)
+        segment_class = get_base_segment_class(seg_type, platform)
         if segment_class == None:
             # Look in extensions
-            segment_class = get_extension_class(options, config_path, seg_type)
+            segment_class = get_extension_class(options, config_path, seg_type, platform)
 
         if segment_class == None:
             log.write(f"fatal error: could not load segment type '{seg_type}'\n(hint: confirm your extension directory is configured correctly)", status="error")
             return 2
 
-        try:
-            segment = segment_class(segment, config_segments[i + 1], options)
-        except (IndexError, KeyError) as e:
-            try:
-                segment = N64Segment(segment, config_segments[i + 1], options)
-                segment.error(e)
-            except Exception as e:
-                log.write(f"fatal error (segment type = {seg_type}): " + str(e), status="error")
-                return 2
+        segment = segment_class(segment, config_segments[i + 1], options)
 
         if segment_class.require_unique_name:
             if segment.name in seen_segment_names:
@@ -254,6 +254,7 @@ def main(rom_path, config_path, repo_path, modes, verbose, ignore_cache=False):
     symbol_addrs_path = get_symbol_addrs_path(repo_path, options)
     undefined_syms_path = get_undefined_syms_path(repo_path, options)
     provided_symbols, c_func_labels_to_add, special_labels, ranges = gather_symbols(symbol_addrs_path, undefined_syms_path)
+    platform = options.get("platform", "n64")
 
     processed_segments = []
     ld_sections = []
@@ -267,7 +268,7 @@ def main(rom_path, config_path, repo_path, modes, verbose, ignore_cache=False):
     seg_cached = {}
 
     # Load cache
-    cache_path = Path(repo_path) / ".splat_cache"
+    cache_path = get_cache_path(repo_path, options)
     try:
         with open(cache_path, "rb") as f:
             cache = pickle.load(f)
@@ -275,10 +276,10 @@ def main(rom_path, config_path, repo_path, modes, verbose, ignore_cache=False):
         cache = {}
 
     # Initialize segments
-    all_segments = initialize_segments(options, config_path, config["segments"])
+    all_segments = initialize_segments(options, config_path, config["segments"], platform)
 
     for segment in all_segments:
-        if type(segment) == N64SegCode:
+        if platform == "n64" and type(segment) == N64SegCode: # remove special-case sometime
             segment.all_functions = defined_funcs
             segment.provided_symbols = provided_symbols
             segment.special_labels = special_labels
@@ -314,7 +315,7 @@ def main(rom_path, config_path, repo_path, modes, verbose, ignore_cache=False):
                     if len(segment.errors) == 0:
                         processed_segments.append(segment)
 
-                        if type(segment) == N64SegCode:
+                        if platform == "n64" and type(segment) == N64SegCode: # edge case
                             undefined_funcs |= segment.glabels_to_add
                             defined_funcs = {**defined_funcs, **segment.glabels_added}
                             undefined_syms |= segment.undefined_syms_to_add
@@ -335,21 +336,23 @@ def main(rom_path, config_path, repo_path, modes, verbose, ignore_cache=False):
         write_ldscript(config['basename'], repo_path, ld_sections, options)
 
     # Write undefined_funcs_auto.txt
+    undefined_funcs_auto_path = get_undefined_funcs_auto_path(repo_path, options)
     if verbose:
-        log.write(f"saving undefined_funcs_auto.txt")
+        log.write(f"saving {undefined_funcs_auto_path}")
     c_predefined_funcs = set(provided_symbols.keys())
     to_write = sorted(undefined_funcs - set(defined_funcs.values()) - c_predefined_funcs)
     if len(to_write) > 0:
-        with open(os.path.join(repo_path, "undefined_funcs_auto.txt"), "w", newline="\n") as f:
+        with open(undefined_funcs_auto_path, "w", newline="\n") as f:
             for line in to_write:
                 f.write(line + " = 0x" + line.split("_")[1][:8].upper() + ";\n")
 
     # write undefined_syms_auto.txt
+    undefined_syms_auto_path = get_undefined_syms_auto_path(repo_path, options)
     if verbose:
-        log.write(f"saving undefined_syms_auto.txt")
+        log.write(f"saving {undefined_syms_auto_path}")
     to_write = sorted(undefined_syms, key=lambda x:x[0])
     if len(to_write) > 0:
-        with open(os.path.join(repo_path, "undefined_syms_auto.txt"), "w", newline="\n") as f:
+        with open(undefined_syms_auto_path, "w", newline="\n") as f:
             for sym in to_write:
                 f.write(f"{sym[0]} = 0x{sym[1]:X};\n")
 

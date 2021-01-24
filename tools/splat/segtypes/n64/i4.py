@@ -1,4 +1,4 @@
-from segtypes.rgba16 import N64SegRgba16
+from segtypes.n64.rgba16 import N64SegRgba16
 import png
 from math import ceil
 

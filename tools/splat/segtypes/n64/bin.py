@@ -1,5 +1,5 @@
 import os
-from segtypes.segment import N64Segment
+from segtypes.n64.segment import N64Segment
 from pathlib import Path
 
 
