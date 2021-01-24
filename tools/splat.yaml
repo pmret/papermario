@@ -7,7 +7,8 @@ options:
   ld_o_replace_extension: False
   ld_addrs_header: include/ld_addrs.h
   extensions: splat_ext
-  symbol_addrs: tools/symbol_addrs.txt
+  symbol_addrs_path: tools/symbol_addrs.txt
+  platform: n64
 segments:
   - name: header
     type: header
