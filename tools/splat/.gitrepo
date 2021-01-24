@@ -4,7 +4,7 @@
 ; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
 ;
 [subrepo]
-	remote = https://github.com/ethteck/n64splat.git
+	remote = https://github.com/ethteck/splat.git
 	branch = master
 	commit = 7574db712ef19ca420904c82d3559e9ac4b8c5f5
 	parent = 86760369a5ab977c037c21aebf6f10484570642f
