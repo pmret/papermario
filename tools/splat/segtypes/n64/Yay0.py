@@ -1,7 +1,6 @@
 import os
-from segtypes.segment import N64Segment
-from pathlib import Path
-from util import Yay0decompress
+from segtypes.n64.segment import N64Segment
+from util.n64 import Yay0decompress
 
 class N64SegYay0(N64Segment):
     def split(self, rom_bytes, base_path):

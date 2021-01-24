@@ -6,7 +6,7 @@ import zlib
 
 parser = argparse.ArgumentParser(description='Gives information on n64 roms')
 parser.add_argument('rom', help='path to a .z64 rom')
-parser.add_argument('--encoding', help='Text encoding the game header is using, defaults to ASCII, see docs.python.org/2.4/lib/standard-encodings.html for valid encodings', default='ASCII')
+parser.add_argument('--encoding', help='Text encoding the game header is using; see docs.python.org/3/library/codecs.html#standard-encodings for valid encodings', default='ASCII')
 
 country_codes = {
     0x37: "Beta",
@@ -71,7 +71,7 @@ def get_info_bytes(rom_bytes, encoding):
     try:
         name = rom_bytes[0x20:0x34].decode(encoding).strip()
     except:
-        print("n64splat could not decode the game name, try using a different encoding by passing the --encoding argument (see docs.python.org/2.4/lib/standard-encodings.html for valid encodings)")
+        print("splat could not decode the game name; try using a different encoding by passing the --encoding argument (see docs.python.org/3/library/codecs.html#standard-encodings for valid encodings)")
         exit(1)
 
     country_code = rom_bytes[0x3E]

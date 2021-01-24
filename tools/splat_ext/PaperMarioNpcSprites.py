@@ -1,6 +1,6 @@
-from segtypes.segment import N64Segment
+from segtypes.n64.segment import N64Segment
 from pathlib import Path
-from util import Yay0decompress
+from util.n64 import Yay0decompress
 from util.iter import iter_in_groups
 from util.color import unpack_color
 import png

@@ -10,7 +10,7 @@ from subprocess import PIPE
 import subprocess
 import hashlib
 
-sys.path.append(os.path.dirname(__file__) + "/tools/n64splat")
+sys.path.append(os.path.dirname(__file__) + "/tools/splat")
 import split
 
 INCLUDE_ASM_RE = re.compile(r"_INCLUDE_ASM\([^,]+, ([^,]+), ([^,)]+)") # note _ prefix
@@ -159,8 +159,8 @@ async def main():
     cpp = args.cpp or "cpp"
     ccache = "ccache" if cmd_exists("ccache") else ""
 
-    # compile n64splat dependencies
-    await shell("make -C tools/n64splat")
+    # compile splat dependencies
+    await shell("make -C tools/splat")
 
     # split assets
     print("Splitting segments from baserom", end="")

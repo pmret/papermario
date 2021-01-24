@@ -1,8 +1,8 @@
 import os
-from segtypes.segment import N64Segment
+from segtypes.n64.segment import N64Segment
 from util.color import unpack_color
+from util.n64 import Yay0decompress
 from util.iter import iter_in_groups
-
 
 class N64SegPalette(N64Segment):
     require_unique_name = False

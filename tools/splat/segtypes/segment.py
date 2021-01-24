@@ -1,7 +1,4 @@
-import os
 from pathlib import Path, PurePath
-import re
-import json
 from util import log
 
 default_subalign = 16
@@ -43,7 +40,7 @@ def parse_segment_subalign(segment):
     return default_subalign
 
 
-class N64Segment:
+class Segment:
     require_unique_name = True
 
     def __init__(self, segment, next_segment, options):
@@ -52,8 +49,7 @@ class N64Segment:
         self.type = parse_segment_type(segment)
         self.name = parse_segment_name(segment, self.__class__)
         self.vram_addr = parse_segment_vram(segment)
-        self.ld_name_override = segment.get(
-            "ld_name", None) if type(segment) is dict else None
+        self.ld_name_override = segment.get("ld_name", None) if type(segment) is dict else None
         self.options = options
         self.config = segment
         self.subalign = parse_segment_subalign(segment)
