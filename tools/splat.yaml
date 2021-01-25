@@ -112,7 +112,7 @@ segments:
     - [0x3d330, c, os/code_3d330_len_990]
     - [0x3dcc0, c, os/code_3dcc0_len_a60]
     - [0x3e720, c, os/code_3e720_len_5f0]
-    - [0x3ed10, c, guOrtho]
+    - [0x3ed10, c, os/guOrtho]
     - [0x3ef90, c, os/code_3ef90_len_600]
     - [0x3f310, c, os/code_3f310_len_3c0]
     - [0x3f6d0, c, os/code_3f6d0_len_320]
