@@ -3,7 +3,7 @@ from capstone import *
 from capstone.mips import *
 
 from collections import OrderedDict
-from segtypes.segment import N64Segment, parse_segment_name
+from segtypes.n64.segment import N64Segment
 import os
 from pathlib import Path, PurePath
 from ranges import Range, RangeDict
@@ -508,7 +508,7 @@ class N64SegCode(N64Segment):
             if sym_type in ["float", "double"]:
                 if sym_type == "float":
                     float_str = floats.format_f32_imm(bits)
-                elif sym_type == "double":
+                else:
                     float_str = floats.format_f64_imm(bits)
 
                 # Fall back to .word if we see weird float values

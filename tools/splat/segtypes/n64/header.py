@@ -1,7 +1,6 @@
 import os
-from segtypes.segment import N64Segment
+from segtypes.n64.segment import N64Segment
 from pathlib import Path
-from util import rominfo
 
 class N64SegHeader(N64Segment):
     def should_run(self):

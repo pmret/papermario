@@ -1,7 +1,7 @@
 import os
-from segtypes.segment import N64Segment
+from segtypes.n64.segment import N64Segment
 from pathlib import Path
-from util import Yay0decompress
+from util.n64 import Yay0decompress
 
 
 def decode_null_terminated_ascii(data):

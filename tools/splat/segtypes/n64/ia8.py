@@ -1,5 +1,4 @@
-from segtypes.ia4 import N64SegIa4
-import png
+from segtypes.n64.ia4 import N64SegIa4
 from math import ceil
 
 class N64SegIa8(N64SegIa4):

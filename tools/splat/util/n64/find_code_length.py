@@ -4,9 +4,6 @@ from capstone import *
 from capstone.mips import *
 
 import argparse
-import hashlib
-import rominfo
-import zlib
 
 md = Cs(CS_ARCH_MIPS, CS_MODE_MIPS64 + CS_MODE_BIG_ENDIAN)
 
@@ -33,7 +30,7 @@ def run(rom_bytes, start_offset, vram, end_offset=None):
 def main():
     args = parser.parse_args()
 
-    rom_bytes = rominfo.read_rom(args.rom)
+    rom_bytes = open(args.rom, "rb").read()
     start = int(args.start, 0)
     end = None
     vram = int(args.vram, 0)
