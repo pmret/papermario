@@ -2,7 +2,7 @@
 
 INCLUDE_ASM(s32, "code_412730", func_E0124000);
 
-INCLUDE_ASM(s32, "code_412730", func_E01242FC);
+void func_E01242FC(void) {}
 
 INCLUDE_ASM(s32, "code_412730", func_E0124304);
 

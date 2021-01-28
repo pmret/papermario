@@ -2,7 +2,7 @@
 
 INCLUDE_ASM(s32, "code_3D3E20", func_E00D0000);
 
-INCLUDE_ASM(s32, "code_3D3E20", func_E00D018C);
+void func_E00D018C(void) {}
 
 INCLUDE_ASM(s32, "code_3D3E20", func_E00D0194);
 

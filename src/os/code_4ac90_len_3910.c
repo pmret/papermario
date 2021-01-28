@@ -291,7 +291,7 @@ INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_80072CCC);
 
 INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_80072CDC);
 
-INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_80072CEC);
+void func_80072CEC() {}
 
 INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_80072CF4);
 
