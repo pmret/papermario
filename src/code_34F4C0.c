@@ -2,11 +2,13 @@
 
 INCLUDE_ASM(s32, "code_34F4C0", func_E003C000);
 
-void func_E003C23C(void) {}
+void func_E003C23C(void){
+}
 
 INCLUDE_ASM(s32, "code_34F4C0", func_E003C244);
 
-void func_E003C474(void) {}
+void func_E003C474(void){
+}
 
 INCLUDE_ASM(s32, "code_34F4C0", func_E003C47C);
 

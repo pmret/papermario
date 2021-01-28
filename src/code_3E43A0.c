@@ -2,7 +2,8 @@
 
 INCLUDE_ASM(s32, "code_3E43A0", func_E010A000);
 
-void func_E010A184(void) {}
+void func_E010A184(void){
+}
 
 INCLUDE_ASM(s32, "code_3E43A0", func_E010A18C);
 
