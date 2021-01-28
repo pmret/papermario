@@ -2,15 +2,18 @@
 
 INCLUDE_ASM(s32, "code_3D67C0", func_E00D8000);
 
-INCLUDE_ASM(s32, "code_3D67C0", func_E00D8120);
+void func_E00D8120(void){
+}
 
 INCLUDE_ASM(s32, "code_3D67C0", func_E00D8128);
 
-INCLUDE_ASM(s32, "code_3D67C0", func_E00D825C);
+void func_E00D825C(void){
+}
 
 INCLUDE_ASM(s32, "code_3D67C0", func_E00D8264);
 
-INCLUDE_ASM(s32, "code_3D67C0", func_E00D8280);
+void func_E00D8280(void){
+}
 
 void func_E00D8288(s32 l, s32 r, s32 t, s32 b) {
     if (l < 0) {

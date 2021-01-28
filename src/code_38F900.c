@@ -2,11 +2,13 @@
 
 INCLUDE_ASM(s32, "code_38F900", func_E0090000);
 
-INCLUDE_ASM(s32, "code_38F900", func_E00901C0);
+void func_E00901C0(void){
+}
 
 INCLUDE_ASM(s32, "code_38F900", func_E00901C8);
 
-INCLUDE_ASM(s32, "code_38F900", func_E0090420);
+void func_E0090420(void){
+}
 
 INCLUDE_ASM(s32, "code_38F900", func_E0090428);
 

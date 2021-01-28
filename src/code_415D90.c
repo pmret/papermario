@@ -90,6 +90,8 @@ INCLUDE_ASM(s32, "code_415D90", update_targeting_enemies);
 
 INCLUDE_ASM(s32, "code_415D90", func_802AACD8);
 
-INCLUDE_ASM(s32, "code_415D90", func_802AB330);
+void func_802AB330(void){
+}
 
-INCLUDE_ASM(s32, "code_415D90", func_802AB338);
+void func_802AB338(void){
+}
