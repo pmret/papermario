@@ -13,7 +13,7 @@ import hashlib
 sys.path.append(os.path.dirname(__file__) + "/tools/splat")
 import split
 
-INCLUDE_ASM_RE = re.compile(r"_INCLUDE_ASM\([^,]+, ([^,]+), ([^,)]+)") # note _ prefix
+INCLUDE_ASM_RE = re.compile(r"___INCLUDE_ASM\([^,]+, ([^,]+), ([^,)]+)") # note _ prefix
 
 TARGET = "papermario"
 
@@ -74,10 +74,10 @@ async def task(coro):
 
 async def build_c_file(c_file: str, generated_headers, ccache, cppflags):
     # preprocess c_file, but simply put an _ in front of INCLUDE_ASM and SCRIPT
-    stdout, stderr = await shell(f"{cpp} {cppflags} '-DINCLUDE_ASM(...)=_INCLUDE_ASM(__VA_ARGS__)' '-DSCRIPT(...)=_SCRIPT(__VA_ARGS__)' {c_file} -o -")
+    stdout, stderr = await shell(f"{cpp} {cppflags} '-DINCLUDE_ASM(...)=___INCLUDE_ASM(__VA_ARGS__)' '-DSCRIPT(...)=___SCRIPT(__VA_ARGS__)' {c_file} -o - | grep -E '___SCRIPT|___INCLUDE_ASM' || true")
 
     # search for macro usage (note _ prefix)
-    uses_dsl = "_SCRIPT(" in stdout
+    uses_dsl = "___SCRIPT(" in stdout
 
     s_deps = []
     for line in stdout.splitlines():
@@ -127,6 +127,7 @@ async def main():
     parser.add_argument("--cpp", help="GNU C preprocessor command")
     parser.add_argument("--baserom", default="baserom.z64", help="Path to unmodified Paper Mario (U) z64 ROM")
     parser.add_argument("--cflags", default="", help="Extra cc/cpp flags")
+    parser.add_argument("--no-splat", action="store_true", help="Don't split the baserom")
     args = parser.parse_args()
 
     # on macOS, /usr/bin/cpp defaults to clang rather than gcc (but we need gcc's)
@@ -159,21 +160,23 @@ async def main():
     cpp = args.cpp or "cpp"
     ccache = "ccache" if cmd_exists("ccache") else ""
 
-    # compile splat dependencies
-    await shell("make -C tools/splat")
+    if not args.no_splat:
+        # compile splat dependencies
+        await shell("make -C tools/splat")
 
-    # split assets
-    print("Splitting segments from baserom", end="")
-    split.main(
-        args.baserom,
-        "tools/splat.yaml",
-        ".",
-        [ "ld", "bin", "Yay0", "PaperMarioMapFS", "PaperMarioMessages", "img", "PaperMarioNpcSprites" ],
-        False,
-        False,
-    )
+        # split assets
+        print("Splitting segments from baserom", end="")
+        split.main(
+            args.baserom,
+            "tools/splat.yaml",
+            ".",
+            [ "ld", "bin", "Yay0", "PaperMarioMapFS", "PaperMarioMessages", "img", "PaperMarioNpcSprites" ],
+            False,
+            False,
+        )
 
-    print("")
+        print("")
+
     print("Configuring build...", end="")
 
     # generate build.ninja
