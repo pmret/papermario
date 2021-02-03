@@ -1,9 +1,20 @@
 #include "common.h"
 #include "script_api/battle.h"
 
-INCLUDE_ASM(s32, "battle/item/coconut", func_802A1000_72F720);
+MenuIcon* D_802A1E80;
 
-INCLUDE_ASM(s32, "battle/item/coconut", func_802A11D4_72F8F4);
+INCLUDE_ASM(s32, "battle/item/coconut", func_802A1000_72F720); // alloc and show icon
+
+ApiStatus func_802A11D4_72F8F4(ScriptInstance* script, s32 isInitialCall) {
+    BattleStatus* battleStatus = BATTLE_STATUS;
+    s32 sellValue = gItemTable[battleStatus->selectedItemID].sellValue;
+
+    if (heroes_is_ability_active(battleStatus->playerActor, Ability_REFUND) && sellValue > 0) {
+        free_icon(D_802A1E80);
+    }
+
+    return ApiStatus_DONE2;
+}
 
 Script D_802A1240_72F960 = SCRIPT({
     if (SI_VAR(1) == 0) {
@@ -161,3 +172,7 @@ Script D_802A1B6C_7304B0 = SCRIPT({
     0x802D3624(SI_VAR(10));
     await D_802A1670_72FFD0;
 });
+
+s32 foo = 0;
+s32 bar = 0;
+MenuIcon* D_802A1E80 = NULL;
