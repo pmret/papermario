@@ -94,7 +94,6 @@ func_802AA0D8 = 0x802AA0D8;
 func_802B71E8 = 0x802B71E8;
 func_802BE070 = 0x802BE070;
 gStaticScriptCounter = 0x802D9CA0;
-D_802D9CA4 = 0x802D9CA4;
 gGlobalTimeSpace = 0x802D9CA8;
 gBattleMeshAnimationList = 0x802DADB0;
 gWorldMeshAnimationList = 0x802DADF0;

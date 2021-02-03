@@ -115,8 +115,8 @@ glabel start_child_script
 /* E8310 802C3960 24A50004 */   addiu    $a1, $a1, 4
 /* E8314 802C3964 0C0B0C52 */  jal       find_script_labels
 /* E8318 802C3968 0200202D */   daddu    $a0, $s0, $zero
-/* E831C 802C396C 3C02802E */  lui       $v0, %hi(D_802D9CA4)
-/* E8320 802C3970 8C429CA4 */  lw        $v0, %lo(D_802D9CA4)($v0)
+/* E831C 802C396C 3C02802E */  lui       $v0, %hi(gIsUpdatingScripts)
+/* E8320 802C3970 8C429CA4 */  lw        $v0, %lo(gIsUpdatingScripts)($v0)
 /* E8324 802C3974 1040000E */  beqz      $v0, .L802C39B0
 /* E8328 802C3978 00000000 */   nop
 /* E832C 802C397C 3C05802E */  lui       $a1, %hi(gScriptListCount)

@@ -29,7 +29,7 @@ glabel start_script
 /* E7DE8 802C3438 24040168 */   addiu    $a0, $zero, 0x168
 .L802C343C:
 /* E7DEC 802C343C 080B0D0F */  j         .L802C343C
-/* E7DF0 802C3440 00000000 */   nop      
+/* E7DF0 802C3440 00000000 */   nop
 .L802C3444:
 /* E7DF4 802C3444 0C00AB39 */  jal       heap_malloc
 /* E7DF8 802C3448 00A0902D */   daddu    $s2, $a1, $zero
@@ -47,7 +47,7 @@ glabel start_script
 /* E7E28 802C3478 ACA30000 */   sw       $v1, ($a1)
 .L802C347C:
 /* E7E2C 802C347C 080B0D1F */  j         .L802C347C
-/* E7E30 802C3480 00000000 */   nop      
+/* E7E30 802C3480 00000000 */   nop
 .L802C3484:
 /* E7E34 802C3484 36620001 */  ori       $v0, $s3, 1
 /* E7E38 802C3488 3C03802E */  lui       $v1, %hi(gStaticScriptCounter)
@@ -95,14 +95,14 @@ glabel start_script
 /* E7ED8 802C3528 2442FFFC */   addiu    $v0, $v0, -4
 /* E7EDC 802C352C 0C0B0C52 */  jal       find_script_labels
 /* E7EE0 802C3530 0200202D */   daddu    $a0, $s0, $zero
-/* E7EE4 802C3534 3C02802E */  lui       $v0, %hi(D_802D9CA4)
-/* E7EE8 802C3538 8C429CA4 */  lw        $v0, %lo(D_802D9CA4)($v0)
+/* E7EE4 802C3534 3C02802E */  lui       $v0, %hi(gIsUpdatingScripts)
+/* E7EE8 802C3538 8C429CA4 */  lw        $v0, %lo(gIsUpdatingScripts)($v0)
 /* E7EEC 802C353C 10400012 */  beqz      $v0, .L802C3588
-/* E7EF0 802C3540 00000000 */   nop      
+/* E7EF0 802C3540 00000000 */   nop
 /* E7EF4 802C3544 92020000 */  lbu       $v0, ($s0)
 /* E7EF8 802C3548 30420020 */  andi      $v0, $v0, 0x20
 /* E7EFC 802C354C 1040000E */  beqz      $v0, .L802C3588
-/* E7F00 802C3550 00000000 */   nop      
+/* E7F00 802C3550 00000000 */   nop
 /* E7F04 802C3554 3C05802E */  lui       $a1, %hi(gScriptListCount)
 /* E7F08 802C3558 24A5AC98 */  addiu     $a1, $a1, %lo(gScriptListCount)
 /* E7F0C 802C355C 8CA20000 */  lw        $v0, ($a1)

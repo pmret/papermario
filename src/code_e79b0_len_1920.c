@@ -1,7 +1,7 @@
 #include "common.h"
 
 s32 gStaticScriptCounter = 1;
-s32 D_802D9CA4 = 0;
+s32 gIsUpdatingScripts = 0;
 f32 gGlobalTimeSpace = 1.0f;
 
 #ifdef NON_MATCHING
@@ -105,7 +105,7 @@ void clear_script_list(void) {
 
     gNumScripts = 0;
     gScriptListCount = 0;
-    D_802D9CA4 = 0;
+    gIsUpdatingScripts = 0;
 
     for (i = 0; i < MAX_MAPVARS; i++) {
         gMapVars[i] = 0;
@@ -132,7 +132,7 @@ void init_script_list(void) {
     }
 
     gNumScripts = 0;
-    D_802D9CA4 = 0;
+    gIsUpdatingScripts = 0;
 
     func_802D4560();
     func_802CD57C();
@@ -208,7 +208,7 @@ ScriptInstance* start_script(Bytecode* initialLine, s32 priority, s32 initialSta
 
     find_script_labels(newScript);
 
-    if ((D_802D9CA4 != 0) && ((newScript->state & 0x20) != 0)) {
+    if (gIsUpdatingScripts && (newScript->state & 0x20)) {
         scriptListCount = gScriptListCount++;
         gScriptIndexList[scriptListCount] = curScriptIndex;
         gScriptIdList[scriptListCount] = newScript->id;
@@ -282,7 +282,7 @@ ScriptInstance* start_script_in_group(Bytecode* initialLine, u8 priority, u8 ini
 
         find_script_labels(newScript);
 
-        if ((D_802D9CA4 != 0) && (newScript->state & 0x20)) {
+        if (gIsUpdatingScripts && (newScript->state & 0x20)) {
             scriptListCount = gScriptListCount++;
             gScriptIndexList[scriptListCount] = curScriptIndex;
             gScriptIdList[scriptListCount] = newScript->id;
@@ -354,7 +354,7 @@ ScriptInstance* func_802C39F8(ScriptInstance* parentScript, Bytecode* nextLine, 
     }
 
     find_script_labels(child);
-    if (D_802D9CA4 != 0) {
+    if (gIsUpdatingScripts) {
         scriptListCount = gScriptListCount++;
         gScriptIndexList[scriptListCount] = curScriptIndex;
         gScriptIdList[scriptListCount] = child->id;

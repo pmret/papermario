@@ -235,7 +235,6 @@ extern OSPiHandle* carthandle;
 
 extern SaveData gCurrentSaveFile;
 
-extern s32 D_802D9CA4;
 extern u32* gMapFlags;
 extern u32* gMapVars;
 
