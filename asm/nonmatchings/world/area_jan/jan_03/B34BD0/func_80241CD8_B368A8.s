@@ -90,8 +90,8 @@ glabel func_80241CD8_B368A8
 /* B369F4 80241E24 0040802D */   daddu    $s0, $v0, $zero
 /* B369F8 80241E28 0040282D */  daddu     $a1, $v0, $zero
 /* B369FC 80241E2C 0000182D */  daddu     $v1, $zero, $zero
-/* B36A00 80241E30 3C068024 */  lui       $a2, %hi(D_80247808)
-/* B36A04 80241E34 24C67808 */  addiu     $a2, $a2, %lo(D_80247808)
+/* B36A00 80241E30 3C068024 */  lui       $a2, %hi(D_80247808_B3C3D8)
+/* B36A04 80241E34 24C67808 */  addiu     $a2, $a2, %lo(D_80247808_B3C3D8)
 /* B36A08 80241E38 00C0202D */  daddu     $a0, $a2, $zero
 .L80241E3C:
 /* B36A0C 80241E3C 8C820000 */  lw        $v0, ($a0)

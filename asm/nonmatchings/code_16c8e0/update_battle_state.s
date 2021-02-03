@@ -103,9 +103,9 @@ glabel update_battle_state
 /* 16CE8C 8023E5AC 2C620025 */  sltiu     $v0, $v1, 0x25
 /* 16CE90 8023E5B0 1040008C */  beqz      $v0, .L8023E7E4
 /* 16CE94 8023E5B4 00031080 */   sll      $v0, $v1, 2
-/* 16CE98 8023E5B8 3C01802A */  lui       $at, %hi(jtbl_8029C960_1CB240)
+/* 16CE98 8023E5B8 3C01802A */  lui       $at, %hi(jtbl_8029C960)
 /* 16CE9C 8023E5BC 00220821 */  addu      $at, $at, $v0
-/* 16CEA0 8023E5C0 8C22C960 */  lw        $v0, %lo(jtbl_8029C960_1CB240)($at)
+/* 16CEA0 8023E5C0 8C22C960 */  lw        $v0, %lo(jtbl_8029C960)($at)
 /* 16CEA4 8023E5C4 00400008 */  jr        $v0
 /* 16CEA8 8023E5C8 00000000 */   nop
 glabel L8023E5CC_16CEAC

@@ -3,8 +3,8 @@
 
 glabel func_802BBDB8_E30708
 /* E30708 802BBDB8 C4800054 */  lwc1      $f0, 0x54($a0)
-/* E3070C 802BBDBC 3C01802C */  lui       $at, %hi(D_802BCB90)
-/* E30710 802BBDC0 D422CB90 */  ldc1      $f2, %lo(D_802BCB90)($at)
+/* E3070C 802BBDBC 3C01802C */  lui       $at, %hi(D_802BCB90_E314E0)
+/* E30710 802BBDC0 D422CB90 */  ldc1      $f2, %lo(D_802BCB90_E314E0)($at)
 /* E30714 802BBDC4 46000021 */  cvt.d.s   $f0, $f0
 /* E30718 802BBDC8 46220000 */  add.d     $f0, $f0, $f2
 /* E3071C 802BBDCC 3C013FF0 */  lui       $at, 0x3ff0

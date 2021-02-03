@@ -32,9 +32,9 @@ glabel func_E010E558
 /* 3EBAA4 E010E5C4 2D020013 */  sltiu     $v0, $t0, 0x13
 /* 3EBAA8 E010E5C8 1040001A */  beqz      $v0, .LE010E634
 /* 3EBAAC E010E5CC 00081080 */   sll      $v0, $t0, 2
-/* 3EBAB0 E010E5D0 3C01E011 */  lui       $at, %hi(jtbl_E010E930_3EBE10)
+/* 3EBAB0 E010E5D0 3C01E011 */  lui       $at, %hi(jtbl_E010E930)
 /* 3EBAB4 E010E5D4 00220821 */  addu      $at, $at, $v0
-/* 3EBAB8 E010E5D8 8C22E930 */  lw        $v0, %lo(jtbl_E010E930_3EBE10)($at)
+/* 3EBAB8 E010E5D8 8C22E930 */  lw        $v0, %lo(jtbl_E010E930)($at)
 /* 3EBABC E010E5DC 00400008 */  jr        $v0
 /* 3EBAC0 E010E5E0 00000000 */   nop
 glabel LE010E5E4_3EBAC4

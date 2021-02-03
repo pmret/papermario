@@ -3,8 +3,8 @@
 
 glabel func_80241BF8_ECB8F8
 /* ECB8F8 80241BF8 2404005A */  addiu     $a0, $zero, 0x5a
-/* ECB8FC 80241BFC 3C038024 */  lui       $v1, %hi(D_802465C8)
-/* ECB900 80241C00 246365C8 */  addiu     $v1, $v1, %lo(D_802465C8)
+/* ECB8FC 80241BFC 3C038024 */  lui       $v1, %hi(D_802465C8_915C78)
+/* ECB900 80241C00 246365C8 */  addiu     $v1, $v1, %lo(D_802465C8_915C78)
 /* ECB904 80241C04 240200DA */  addiu     $v0, $zero, 0xda
 .L80241C08:
 /* ECB908 80241C08 AC620000 */  sw        $v0, ($v1)

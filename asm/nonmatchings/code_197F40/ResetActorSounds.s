@@ -37,9 +37,9 @@ glabel ResetActorSounds
 /* 19E194 8026F8B4 2E620006 */  sltiu     $v0, $s3, 6
 /* 19E198 8026F8B8 10400049 */  beqz      $v0, .L8026F9E0
 /* 19E19C 8026F8BC 00131080 */   sll      $v0, $s3, 2
-/* 19E1A0 8026F8C0 3C01802A */  lui       $at, %hi(jtbl_8029D7D8_1CC0B8)
+/* 19E1A0 8026F8C0 3C01802A */  lui       $at, %hi(jtbl_8029D7D8)
 /* 19E1A4 8026F8C4 00220821 */  addu      $at, $at, $v0
-/* 19E1A8 8026F8C8 8C22D7D8 */  lw        $v0, %lo(jtbl_8029D7D8_1CC0B8)($at)
+/* 19E1A8 8026F8C8 8C22D7D8 */  lw        $v0, %lo(jtbl_8029D7D8)($at)
 /* 19E1AC 8026F8CC 00400008 */  jr        $v0
 /* 19E1B0 8026F8D0 00000000 */   nop
 glabel L8026F8D4_19E1B4

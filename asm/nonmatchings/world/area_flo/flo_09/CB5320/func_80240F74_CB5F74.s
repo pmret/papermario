@@ -15,9 +15,9 @@ glabel func_80240F74_CB5F74
 /* CB5F9C 80240F9C 00031C00 */  sll       $v1, $v1, 0x10
 /* CB5FA0 80240FA0 00031B83 */  sra       $v1, $v1, 0xe
 /* CB5FA4 80240FA4 A444008E */  sh        $a0, 0x8e($v0)
-/* CB5FA8 80240FA8 3C018024 */  lui       $at, %hi(D_8024362C)
+/* CB5FA8 80240FA8 3C018024 */  lui       $at, %hi(D_8024362C_CB862C)
 /* CB5FAC 80240FAC 00230821 */  addu      $at, $at, $v1
-/* CB5FB0 80240FB0 C422362C */  lwc1      $f2, %lo(D_8024362C)($at)
+/* CB5FB0 80240FB0 C422362C */  lwc1      $f2, %lo(D_8024362C_CB862C)($at)
 /* CB5FB4 80240FB4 8443008E */  lh        $v1, 0x8e($v0)
 /* CB5FB8 80240FB8 46020000 */  add.s     $f0, $f0, $f2
 /* CB5FBC 80240FBC 28630005 */  slti      $v1, $v1, 5

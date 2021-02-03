@@ -25,9 +25,9 @@ glabel func_E01140DC
 /* 3FEC08 E0114128 10400050 */  beqz      $v0, .LE011426C
 /* 3FEC0C E011412C 0000982D */   daddu    $s3, $zero, $zero
 /* 3FEC10 E0114130 00031080 */  sll       $v0, $v1, 2
-/* 3FEC14 E0114134 3C01E011 */  lui       $at, %hi(jtbl_E0114750_3FF230)
+/* 3FEC14 E0114134 3C01E011 */  lui       $at, %hi(jtbl_E0114750)
 /* 3FEC18 E0114138 00220821 */  addu      $at, $at, $v0
-/* 3FEC1C E011413C 8C224750 */  lw        $v0, %lo(jtbl_E0114750_3FF230)($at)
+/* 3FEC1C E011413C 8C224750 */  lw        $v0, %lo(jtbl_E0114750)($at)
 /* 3FEC20 E0114140 00400008 */  jr        $v0
 /* 3FEC24 E0114144 00000000 */   nop
 glabel LE0114148_3FEC28

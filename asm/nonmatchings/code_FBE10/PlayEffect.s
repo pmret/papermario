@@ -174,9 +174,9 @@ glabel PlayEffect
 /* FCEF0 802D8540 2C620087 */  sltiu     $v0, $v1, 0x87
 /* FCEF4 802D8544 10400450 */  beqz      $v0, .L802D9688
 /* FCEF8 802D8548 00031080 */   sll      $v0, $v1, 2
-/* FCEFC 802D854C 3C01802E */  lui       $at, %hi(jtbl_802DA258_FEC08)
+/* FCEFC 802D854C 3C01802E */  lui       $at, %hi(jtbl_802DA258)
 /* FCF00 802D8550 00220821 */  addu      $at, $at, $v0
-/* FCF04 802D8554 8C22A258 */  lw        $v0, %lo(jtbl_802DA258_FEC08)($at)
+/* FCF04 802D8554 8C22A258 */  lw        $v0, %lo(jtbl_802DA258)($at)
 /* FCF08 802D8558 00400008 */  jr        $v0
 /* FCF0C 802D855C 00000000 */   nop
 glabel L802D8560_FCF10

@@ -9,8 +9,8 @@ glabel func_802BD514_319A84
 /* 319A94 802BD524 8CA20000 */  lw        $v0, ($a1)
 /* 319A98 802BD528 10400008 */  beqz      $v0, .L802BD54C
 /* 319A9C 802BD52C 00000000 */   nop
-/* 319AA0 802BD530 3C03802C */  lui       $v1, %hi(D_802BEAAC)
-/* 319AA4 802BD534 8C63EAAC */  lw        $v1, %lo(D_802BEAAC)($v1)
+/* 319AA0 802BD530 3C03802C */  lui       $v1, %hi(D_802BEAAC_31B01C)
+/* 319AA4 802BD534 8C63EAAC */  lw        $v1, %lo(D_802BEAAC_31B01C)($v1)
 /* 319AA8 802BD538 8C620008 */  lw        $v0, 8($v1)
 /* 319AAC 802BD53C ACA00000 */  sw        $zero, ($a1)
 /* 319AB0 802BD540 AC820000 */  sw        $v0, ($a0)

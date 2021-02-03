@@ -150,8 +150,8 @@ glabel L80240394_A4CDB4
 /* A4CEC4 802404A4 44061000 */  mfc1      $a2, $f2
 /* A4CEC8 802404A8 0C00A720 */  jal       atan2
 /* A4CECC 802404AC 00000000 */   nop
-/* A4CED0 802404B0 3C018024 */  lui       $at, %hi(func_80242558_A1D658)
-/* A4CED4 802404B4 D4222558 */  ldc1      $f2, %lo(func_80242558_A1D658)($at)
+/* A4CED0 802404B0 3C018024 */  lui       $at, %hi(D_80242558_A4EF78)
+/* A4CED4 802404B4 D4222558 */  ldc1      $f2, %lo(D_80242558_A4EF78)($at)
 /* A4CED8 802404B8 46000021 */  cvt.d.s   $f0, $f0
 /* A4CEDC 802404BC 46220001 */  sub.d     $f0, $f0, $f2
 /* A4CEE0 802404C0 46200020 */  cvt.s.d   $f0, $f0

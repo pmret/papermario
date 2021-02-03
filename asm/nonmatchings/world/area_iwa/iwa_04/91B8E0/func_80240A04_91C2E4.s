@@ -30,8 +30,8 @@ glabel func_80240A04_91C2E4
 /* 91C348 80240A68 080902A4 */  j         .L80240A90
 /* 91C34C 80240A6C E4600018 */   swc1     $f0, 0x18($v1)
 .L80240A70:
-/* 91C350 80240A70 3C018024 */  lui       $at, %hi(update_end_player_turn)
-/* 91C354 80240A74 D4222BB0 */  ldc1      $f2, %lo(update_end_player_turn)($at)
+/* 91C350 80240A70 3C018024 */  lui       $at, %hi(D_80242BB0_91E490)
+/* 91C354 80240A74 D4222BB0 */  ldc1      $f2, %lo(D_80242BB0_91E490)($at)
 /* 91C358 80240A78 44820000 */  mtc1      $v0, $f0
 /* 91C35C 80240A7C 00000000 */  nop
 /* 91C360 80240A80 46800021 */  cvt.d.w   $f0, $f0

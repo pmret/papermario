@@ -19,9 +19,9 @@ glabel func_80242288_B36E58
 /* B36E8C 802422BC 34A502E0 */  ori       $a1, $a1, 0x2e0
 /* B36E90 802422C0 0C0B1EAF */  jal       get_variable
 /* B36E94 802422C4 0000202D */   daddu    $a0, $zero, $zero
-/* B36E98 802422C8 3C038024 */  lui       $v1, %hi(D_802477C8)
+/* B36E98 802422C8 3C038024 */  lui       $v1, %hi(D_802477C8_B3C398)
 /* B36E9C 802422CC 00621821 */  addu      $v1, $v1, $v0
-/* B36EA0 802422D0 906377C8 */  lbu       $v1, %lo(D_802477C8)($v1)
+/* B36EA0 802422D0 906377C8 */  lbu       $v1, %lo(D_802477C8_B3C398)($v1)
 /* B36EA4 802422D4 8E220084 */  lw        $v0, 0x84($s1)
 /* B36EA8 802422D8 54430006 */  bnel      $v0, $v1, .L802422F4
 /* B36EAC 802422DC AE200084 */   sw       $zero, 0x84($s1)

@@ -17,9 +17,9 @@ glabel update_lerp_battle
 /* 1A99EC 8027B10C 1040013B */  beqz      $v0, .L8027B5FC
 /* 1A99F0 8027B110 00E0882D */   daddu    $s1, $a3, $zero
 /* 1A99F4 8027B114 00041080 */  sll       $v0, $a0, 2
-/* 1A99F8 8027B118 3C01802A */  lui       $at, %hi(jtbl_8029D9A8_1CC288)
+/* 1A99F8 8027B118 3C01802A */  lui       $at, %hi(jtbl_8029D9A8)
 /* 1A99FC 8027B11C 00220821 */  addu      $at, $at, $v0
-/* 1A9A00 8027B120 8C22D9A8 */  lw        $v0, %lo(jtbl_8029D9A8_1CC288)($at)
+/* 1A9A00 8027B120 8C22D9A8 */  lw        $v0, %lo(jtbl_8029D9A8)($at)
 /* 1A9A04 8027B124 00400008 */  jr        $v0
 /* 1A9A08 8027B128 00000000 */   nop
 glabel L8027B12C_1A9A0C

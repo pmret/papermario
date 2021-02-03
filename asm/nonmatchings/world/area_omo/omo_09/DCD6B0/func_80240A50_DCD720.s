@@ -35,8 +35,8 @@ glabel func_80240A50_DCD720
 /* DCD794 80240AC4 14400010 */  bnez      $v0, .L80240B08
 /* DCD798 80240AC8 00000000 */   nop
 /* DCD79C 80240ACC C6000018 */  lwc1      $f0, 0x18($s0)
-/* DCD7A0 80240AD0 3C018025 */  lui       $at, %hi(D_8024A638)
-/* DCD7A4 80240AD4 D422A638 */  ldc1      $f2, %lo(D_8024A638)($at)
+/* DCD7A0 80240AD0 3C018025 */  lui       $at, %hi(D_8024A638_DD7308)
+/* DCD7A4 80240AD4 D422A638 */  ldc1      $f2, %lo(D_8024A638_DD7308)($at)
 /* DCD7A8 80240AD8 46000021 */  cvt.d.s   $f0, $f0
 /* DCD7AC 80240ADC 46220002 */  mul.d     $f0, $f0, $f2
 /* DCD7B0 80240AE0 00000000 */  nop

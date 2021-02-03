@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel func_802400E4_AF7A34
-/* AF7A34 802400E4 3C038024 */  lui       $v1, %hi(func_80240E90_A878E0)
-/* AF7A38 802400E8 8C630E90 */  lw        $v1, %lo(func_80240E90_A878E0)($v1)
+/* AF7A34 802400E4 3C038024 */  lui       $v1, %hi(D_80240E90_AF87E0)
+/* AF7A38 802400E8 8C630E90 */  lw        $v1, %lo(D_80240E90_AF87E0)($v1)
 /* AF7A3C 802400EC 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* AF7A40 802400F0 AFB1001C */  sw        $s1, 0x1c($sp)
 /* AF7A44 802400F4 00A0882D */  daddu     $s1, $a1, $zero
@@ -14,9 +14,9 @@ glabel func_802400E4_AF7A34
 /* AF7A58 80240108 00031040 */  sll       $v0, $v1, 1
 /* AF7A5C 8024010C 00431021 */  addu      $v0, $v0, $v1
 /* AF7A60 80240110 00021080 */  sll       $v0, $v0, 2
-/* AF7A64 80240114 3C108024 */  lui       $s0, %hi(D_80240E10)
+/* AF7A64 80240114 3C108024 */  lui       $s0, %hi(D_80240E10_AF8760)
 /* AF7A68 80240118 02028021 */  addu      $s0, $s0, $v0
-/* AF7A6C 8024011C 8E100E10 */  lw        $s0, %lo(D_80240E10)($s0)
+/* AF7A6C 8024011C 8E100E10 */  lw        $s0, %lo(D_80240E10_AF8760)($s0)
 /* AF7A70 80240120 3C028008 */  lui       $v0, %hi(gItemTable)
 /* AF7A74 80240124 244278E0 */  addiu     $v0, $v0, %lo(gItemTable)
 /* AF7A78 80240128 00108140 */  sll       $s0, $s0, 5

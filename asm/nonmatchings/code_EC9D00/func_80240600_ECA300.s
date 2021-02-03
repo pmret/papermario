@@ -79,8 +79,8 @@ glabel func_80240600_ECA300
 /* ECA424 80240724 26100004 */   addiu    $s0, $s0, 4
 /* ECA428 80240728 0000882D */  daddu     $s1, $zero, $zero
 /* ECA42C 8024072C 0240802D */  daddu     $s0, $s2, $zero
-/* ECA430 80240730 3C148024 */  lui       $s4, %hi(func_80242038_CD3E68)
-/* ECA434 80240734 26942038 */  addiu     $s4, $s4, %lo(func_80242038_CD3E68)
+/* ECA430 80240730 3C148024 */  lui       $s4, %hi(D_80242038_ECBD38)
+/* ECA434 80240734 26942038 */  addiu     $s4, $s4, %lo(D_80242038_ECBD38)
 /* ECA438 80240738 3C014248 */  lui       $at, 0x4248
 /* ECA43C 8024073C 4481A000 */  mtc1      $at, $f20
 /* ECA440 80240740 24130044 */  addiu     $s3, $zero, 0x44
@@ -150,8 +150,8 @@ glabel func_80240600_ECA300
 /* ECA534 80240834 00000000 */   nop
 .L80240838:
 /* ECA538 80240838 0000882D */  daddu     $s1, $zero, $zero
-/* ECA53C 8024083C 3C148024 */  lui       $s4, %hi(func_80242038_CD3E68)
-/* ECA540 80240840 26942038 */  addiu     $s4, $s4, %lo(func_80242038_CD3E68)
+/* ECA53C 8024083C 3C148024 */  lui       $s4, %hi(D_80242038_ECBD38)
+/* ECA540 80240840 26942038 */  addiu     $s4, $s4, %lo(D_80242038_ECBD38)
 /* ECA544 80240844 24130020 */  addiu     $s3, $zero, 0x20
 /* ECA548 80240848 3C064248 */  lui       $a2, 0x4248
 /* ECA54C 8024084C 44800000 */  mtc1      $zero, $f0
@@ -197,8 +197,8 @@ glabel func_80240600_ECA300
 /* ECA5E8 802408E8 AE400060 */   sw       $zero, 0x60($s2)
 .L802408EC:
 /* ECA5EC 802408EC 0000882D */  daddu     $s1, $zero, $zero
-/* ECA5F0 802408F0 3C148024 */  lui       $s4, %hi(func_80242038_CD3E68)
-/* ECA5F4 802408F4 26942038 */  addiu     $s4, $s4, %lo(func_80242038_CD3E68)
+/* ECA5F0 802408F0 3C148024 */  lui       $s4, %hi(D_80242038_ECBD38)
+/* ECA5F4 802408F4 26942038 */  addiu     $s4, $s4, %lo(D_80242038_ECBD38)
 /* ECA5F8 802408F8 24130020 */  addiu     $s3, $zero, 0x20
 /* ECA5FC 802408FC 0240802D */  daddu     $s0, $s2, $zero
 /* ECA600 80240900 3C014248 */  lui       $at, 0x4248

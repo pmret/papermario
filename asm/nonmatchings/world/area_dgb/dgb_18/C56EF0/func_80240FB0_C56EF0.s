@@ -4,8 +4,8 @@
 glabel func_80240FB0_C56EF0
 /* C56EF0 80240FB0 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* C56EF4 80240FB4 AFB00010 */  sw        $s0, 0x10($sp)
-/* C56EF8 80240FB8 3C108024 */  lui       $s0, %hi(D_802436E0)
-/* C56EFC 80240FBC 261036E0 */  addiu     $s0, $s0, %lo(D_802436E0)
+/* C56EF8 80240FB8 3C108024 */  lui       $s0, %hi(D_802436E0_C59620)
+/* C56EFC 80240FBC 261036E0 */  addiu     $s0, $s0, %lo(D_802436E0_C59620)
 /* C56F00 80240FC0 AFBF0018 */  sw        $ra, 0x18($sp)
 /* C56F04 80240FC4 AFB10014 */  sw        $s1, 0x14($sp)
 /* C56F08 80240FC8 8E020000 */  lw        $v0, ($s0)
@@ -39,8 +39,8 @@ glabel func_80240FB0_C56EF0
 /* C56F6C 8024102C 28620010 */  slti      $v0, $v1, 0x10
 /* C56F70 80241030 1440FFFA */  bnez      $v0, .L8024101C
 /* C56F74 80241034 24840004 */   addiu    $a0, $a0, 4
-/* C56F78 80241038 3C108024 */  lui       $s0, %hi(D_802436E0)
-/* C56F7C 8024103C 261036E0 */  addiu     $s0, $s0, %lo(D_802436E0)
+/* C56F78 80241038 3C108024 */  lui       $s0, %hi(D_802436E0_C59620)
+/* C56F7C 8024103C 261036E0 */  addiu     $s0, $s0, %lo(D_802436E0_C59620)
 /* C56F80 80241040 0C00AB4B */  jal       heap_free
 /* C56F84 80241044 8E040000 */   lw       $a0, ($s0)
 /* C56F88 80241048 AE000000 */  sw        $zero, ($s0)

@@ -4,8 +4,8 @@
 glabel func_80240080_CB9280
 /* CB9280 80240080 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* CB9284 80240084 AFB00010 */  sw        $s0, 0x10($sp)
-/* CB9288 80240088 3C108024 */  lui       $s0, %hi(func_80241CB0_A17ED0)
-/* CB928C 8024008C 26101CB0 */  addiu     $s0, $s0, %lo(func_80241CB0_A17ED0)
+/* CB9288 80240088 3C108024 */  lui       $s0, %hi(D_80241CB0_CBAEB0)
+/* CB928C 8024008C 26101CB0 */  addiu     $s0, $s0, %lo(D_80241CB0_CBAEB0)
 /* CB9290 80240090 AFBF0018 */  sw        $ra, 0x18($sp)
 /* CB9294 80240094 AFB10014 */  sw        $s1, 0x14($sp)
 /* CB9298 80240098 8E020000 */  lw        $v0, ($s0)
@@ -39,8 +39,8 @@ glabel func_80240080_CB9280
 /* CB92FC 802400FC 28620010 */  slti      $v0, $v1, 0x10
 /* CB9300 80240100 1440FFFA */  bnez      $v0, .L802400EC
 /* CB9304 80240104 24840004 */   addiu    $a0, $a0, 4
-/* CB9308 80240108 3C108024 */  lui       $s0, %hi(func_80241CB0_A17ED0)
-/* CB930C 8024010C 26101CB0 */  addiu     $s0, $s0, %lo(func_80241CB0_A17ED0)
+/* CB9308 80240108 3C108024 */  lui       $s0, %hi(D_80241CB0_CBAEB0)
+/* CB930C 8024010C 26101CB0 */  addiu     $s0, $s0, %lo(D_80241CB0_CBAEB0)
 /* CB9310 80240110 0C00AB4B */  jal       heap_free
 /* CB9314 80240114 8E040000 */   lw       $a0, ($s0)
 /* CB9318 80240118 AE000000 */  sw        $zero, ($s0)

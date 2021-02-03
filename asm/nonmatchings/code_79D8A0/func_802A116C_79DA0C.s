@@ -10,16 +10,16 @@ glabel func_802A116C_79DA0C
 /* 79DA20 802A1180 AFB00018 */  sw        $s0, 0x18($sp)
 /* 79DA24 802A1184 8E30000C */  lw        $s0, 0xc($s1)
 /* 79DA28 802A1188 8E050000 */  lw        $a1, ($s0)
-/* 79DA2C 802A118C 0C0B1EAF */  jal       get_variable
+/* 79DA2C 802A118C 0C0B1EAF */  jal       func_802C7ABC_7C435C
 /* 79DA30 802A1190 26100004 */   addiu    $s0, $s0, 4
 /* 79DA34 802A1194 8E050000 */  lw        $a1, ($s0)
 /* 79DA38 802A1198 26100004 */  addiu     $s0, $s0, 4
 /* 79DA3C 802A119C 0220202D */  daddu     $a0, $s1, $zero
-/* 79DA40 802A11A0 0C0B1EAF */  jal       get_variable
+/* 79DA40 802A11A0 0C0B1EAF */  jal       func_802C7ABC_7C435C
 /* 79DA44 802A11A4 0040902D */   daddu    $s2, $v0, $zero
 /* 79DA48 802A11A8 0220202D */  daddu     $a0, $s1, $zero
 /* 79DA4C 802A11AC 8E050000 */  lw        $a1, ($s0)
-/* 79DA50 802A11B0 0C0B1EAF */  jal       get_variable
+/* 79DA50 802A11B0 0C0B1EAF */  jal       func_802C7ABC_7C435C
 /* 79DA54 802A11B4 0040802D */   daddu    $s0, $v0, $zero
 /* 79DA58 802A11B8 44921000 */  mtc1      $s2, $f2
 /* 79DA5C 802A11BC 00000000 */  nop

@@ -9,9 +9,9 @@ glabel func_802418A4_A3AD84
 /* A3AD94 802418B4 8C450000 */   lw       $a1, ($v0)
 /* A3AD98 802418B8 3C058011 */  lui       $a1, %hi(gPlayerData)
 /* A3AD9C 802418BC 24A5F290 */  addiu     $a1, $a1, %lo(gPlayerData)
-/* A3ADA0 802418C0 3C048024 */  lui       $a0, %hi(D_802447D0)
+/* A3ADA0 802418C0 3C048024 */  lui       $a0, %hi(D_802447D0_A3DCB0)
 /* A3ADA4 802418C4 00822021 */  addu      $a0, $a0, $v0
-/* A3ADA8 802418C8 908447D0 */  lbu       $a0, %lo(D_802447D0)($a0)
+/* A3ADA8 802418C8 908447D0 */  lbu       $a0, %lo(D_802447D0_A3DCB0)($a0)
 /* A3ADAC 802418CC 94A3000C */  lhu       $v1, 0xc($a1)
 /* A3ADB0 802418D0 00641821 */  addu      $v1, $v1, $a0
 /* A3ADB4 802418D4 A4A3000C */  sh        $v1, 0xc($a1)

@@ -627,3 +627,4 @@ func_80245CF4_806574,mac_01_NpcJumpFunc
 func_80245FBC_80683C,mac_01_UnkNpcDurationFlagFunc
 func_802413B4_9A97A4,trd_04_NpcJumpFunc2
 func_80241428_9A9818,trd_04_NpcJumpFunc
+func_802429B8_B37588,jan_03_UnkRotatePlayer

@@ -356,9 +356,9 @@ glabel func_80136A80
 /* CD6C8 80136FC8 2C62000E */  sltiu     $v0, $v1, 0xe
 /* CD6CC 80136FCC 1040034C */  beqz      $v0, .L80137D00
 /* CD6D0 80136FD0 00031080 */   sll      $v0, $v1, 2
-/* CD6D4 80136FD4 3C018015 */  lui       $at, %hi(jtbl_80150EA0_E75A0)
+/* CD6D4 80136FD4 3C018015 */  lui       $at, %hi(jtbl_80150EA0)
 /* CD6D8 80136FD8 00220821 */  addu      $at, $at, $v0
-/* CD6DC 80136FDC 8C220EA0 */  lw        $v0, %lo(jtbl_80150EA0_E75A0)($at)
+/* CD6DC 80136FDC 8C220EA0 */  lw        $v0, %lo(jtbl_80150EA0)($at)
 /* CD6E0 80136FE0 00400008 */  jr        $v0
 /* CD6E4 80136FE4 00000000 */   nop
 glabel L80136FE8_CD6E8

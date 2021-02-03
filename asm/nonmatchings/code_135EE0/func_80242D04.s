@@ -72,9 +72,9 @@ glabel func_80242D04
 /* 136134 80242DF4 AC32EF9C */  sw        $s2, %lo(gPauseMenuCursorPosX)($at)
 /* 136138 80242DF8 3C018025 */  lui       $at, %hi(gPauseMenuTargetPosY)
 /* 13613C 80242DFC AC33EFAC */  sw        $s3, %lo(gPauseMenuTargetPosY)($at)
-/* 136140 80242E00 3C018025 */  lui       $at, %hi(gPauseMenuCursorPosY)
+/* 136140 80242E00 3C018025 */  lui       $at, %hi(D_8024EFA0)
 /* 136144 80242E04 08090B93 */  j         .L80242E4C
-/* 136148 80242E08 AC33EFA0 */   sw       $s3, %lo(gPauseMenuCursorPosY)($at)
+/* 136148 80242E08 AC33EFA0 */   sw       $s3, %lo(D_8024EFA0)($at)
 .L80242E0C:
 /* 13614C 80242E0C 92020000 */  lbu       $v0, ($s0)
 /* 136150 80242E10 30420008 */  andi      $v0, $v0, 8

@@ -48,9 +48,9 @@ glabel SetPartSounds
 /* 19E388 8026FAA8 2E820006 */  sltiu     $v0, $s4, 6
 /* 19E38C 8026FAAC 10400013 */  beqz      $v0, .L8026FAFC
 /* 19E390 8026FAB0 00141080 */   sll      $v0, $s4, 2
-/* 19E394 8026FAB4 3C01802A */  lui       $at, %hi(jtbl_8029D7F0_1CC0D0)
+/* 19E394 8026FAB4 3C01802A */  lui       $at, %hi(jtbl_8029D7F0)
 /* 19E398 8026FAB8 00220821 */  addu      $at, $at, $v0
-/* 19E39C 8026FABC 8C22D7F0 */  lw        $v0, %lo(jtbl_8029D7F0_1CC0D0)($at)
+/* 19E39C 8026FABC 8C22D7F0 */  lw        $v0, %lo(jtbl_8029D7F0)($at)
 /* 19E3A0 8026FAC0 00400008 */  jr        $v0
 /* 19E3A4 8026FAC4 00000000 */   nop
 glabel L8026FAC8_19E3A8

@@ -40,7 +40,7 @@ INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_80240C80_9C6060);
 
 INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_80240D60_9C6140);
 
-INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", delete_player_actor_9C6148);
+INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_80240D68_9C6148);
 
 #include "world/common/GetItemName.inc.c"
 

@@ -3,7 +3,7 @@
 
 .section .rodata
 
-glabel jtbl_80286500_7E7380
+glabel jtbl_80286500
 .word L80281E18_7E2C98, L80281F04_7E2D84, L80282000_7E2E80, L80282104_7E2F84, L80282174_7E2FF4, L80281E80_7E2D00, L80281F74_7E2DF4, L80282074_7E2EF4
 
 .section .text
@@ -96,9 +96,9 @@ glabel MakeDoorAdvanced
 /* 7E2C78 80281DF8 2C620008 */  sltiu     $v0, $v1, 8
 /* 7E2C7C 80281DFC 104000F0 */  beqz      $v0, .L802821C0
 /* 7E2C80 80281E00 00031080 */   sll      $v0, $v1, 2
-/* 7E2C84 80281E04 3C018028 */  lui       $at, %hi(jtbl_80286500_7E7380)
+/* 7E2C84 80281E04 3C018028 */  lui       $at, %hi(jtbl_80286500)
 /* 7E2C88 80281E08 00220821 */  addu      $at, $at, $v0
-/* 7E2C8C 80281E0C 8C226500 */  lw        $v0, %lo(jtbl_80286500_7E7380)($at)
+/* 7E2C8C 80281E0C 8C226500 */  lw        $v0, %lo(jtbl_80286500)($at)
 /* 7E2C90 80281E10 00400008 */  jr        $v0
 /* 7E2C94 80281E14 00000000 */   nop
 glabel L80281E18_7E2C98

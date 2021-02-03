@@ -25,9 +25,9 @@ glabel func_E009A140
 /* 39673C E009A18C 2C820006 */  sltiu     $v0, $a0, 6
 /* 396740 E009A190 1040007B */  beqz      $v0, .LE009A380
 /* 396744 E009A194 00041080 */   sll      $v0, $a0, 2
-/* 396748 E009A198 3C01E00A */  lui       $at, %hi(jtbl_E009AA60_397010)
+/* 396748 E009A198 3C01E00A */  lui       $at, %hi(jtbl_E009AA60)
 /* 39674C E009A19C 00220821 */  addu      $at, $at, $v0
-/* 396750 E009A1A0 8C22AA60 */  lw        $v0, %lo(jtbl_E009AA60_397010)($at)
+/* 396750 E009A1A0 8C22AA60 */  lw        $v0, %lo(jtbl_E009AA60)($at)
 /* 396754 E009A1A4 00400008 */  jr        $v0
 /* 396758 E009A1A8 00000000 */   nop
 glabel LE009A1AC_39675C

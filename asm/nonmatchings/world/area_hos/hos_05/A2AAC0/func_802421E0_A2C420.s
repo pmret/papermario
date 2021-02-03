@@ -4,13 +4,13 @@
 glabel func_802421E0_A2C420
 /* A2C420 802421E0 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* A2C424 802421E4 AFB20020 */  sw        $s2, 0x20($sp)
-/* A2C428 802421E8 3C128025 */  lui       $s2, %hi(D_80249A74)
-/* A2C42C 802421EC 26529A74 */  addiu     $s2, $s2, %lo(D_80249A74)
+/* A2C428 802421E8 3C128025 */  lui       $s2, %hi(D_80249A74_A33CB4)
+/* A2C42C 802421EC 26529A74 */  addiu     $s2, $s2, %lo(D_80249A74_A33CB4)
 /* A2C430 802421F0 3C03800B */  lui       $v1, %hi(gCameras)
 /* A2C434 802421F4 24631D80 */  addiu     $v1, $v1, %lo(gCameras)
 /* A2C438 802421F8 AFB1001C */  sw        $s1, 0x1c($sp)
-/* A2C43C 802421FC 3C118025 */  lui       $s1, %hi(D_80249A78)
-/* A2C440 80242200 26319A78 */  addiu     $s1, $s1, %lo(D_80249A78)
+/* A2C43C 802421FC 3C118025 */  lui       $s1, %hi(D_80249A78_A33CB8)
+/* A2C440 80242200 26319A78 */  addiu     $s1, $s1, %lo(D_80249A78_A33CB8)
 /* A2C444 80242204 3C0141A0 */  lui       $at, 0x41a0
 /* A2C448 80242208 44810000 */  mtc1      $at, $f0
 /* A2C44C 8024220C 3C028007 */  lui       $v0, %hi(gCurrentCameraID)

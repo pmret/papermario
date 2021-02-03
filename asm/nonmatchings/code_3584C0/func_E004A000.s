@@ -118,9 +118,9 @@ glabel func_E004A000
 /* 35864C E004A18C 10400033 */  beqz      $v0, .LE004A25C
 /* 358650 E004A190 E638000C */   swc1     $f24, 0xc($s1)
 /* 358654 E004A194 00121080 */  sll       $v0, $s2, 2
-/* 358658 E004A198 3C01E005 */  lui       $at, %hi(jtbl_E004AE80_359340)
+/* 358658 E004A198 3C01E005 */  lui       $at, %hi(jtbl_E004AE80)
 /* 35865C E004A19C 00220821 */  addu      $at, $at, $v0
-/* 358660 E004A1A0 8C22AE80 */  lw        $v0, %lo(jtbl_E004AE80_359340)($at)
+/* 358660 E004A1A0 8C22AE80 */  lw        $v0, %lo(jtbl_E004AE80)($at)
 /* 358664 E004A1A4 00400008 */  jr        $v0
 /* 358668 E004A1A8 00000000 */   nop
 glabel LE004A1AC_35866C

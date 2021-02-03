@@ -19,9 +19,9 @@ glabel func_80242B90_A1DC90
 /* A1DCC4 80242BC4 34A502E0 */  ori       $a1, $a1, 0x2e0
 /* A1DCC8 80242BC8 0C0B1EAF */  jal       get_variable
 /* A1DCCC 80242BCC 0000202D */   daddu    $a0, $zero, $zero
-/* A1DCD0 80242BD0 3C038025 */  lui       $v1, %hi(D_80248080)
+/* A1DCD0 80242BD0 3C038025 */  lui       $v1, %hi(D_80248080_A23180)
 /* A1DCD4 80242BD4 00621821 */  addu      $v1, $v1, $v0
-/* A1DCD8 80242BD8 90638080 */  lbu       $v1, %lo(D_80248080)($v1)
+/* A1DCD8 80242BD8 90638080 */  lbu       $v1, %lo(D_80248080_A23180)($v1)
 /* A1DCDC 80242BDC 8E220084 */  lw        $v0, 0x84($s1)
 /* A1DCE0 80242BE0 54430006 */  bnel      $v0, $v1, .L80242BFC
 /* A1DCE4 80242BE4 AE200084 */   sw       $zero, 0x84($s1)

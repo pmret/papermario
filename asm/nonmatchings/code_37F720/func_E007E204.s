@@ -25,9 +25,9 @@ glabel func_E007E204
 /* 37F970 E007E250 2CA20007 */  sltiu     $v0, $a1, 7
 /* 37F974 E007E254 10400075 */  beqz      $v0, .LE007E42C
 /* 37F978 E007E258 00051080 */   sll      $v0, $a1, 2
-/* 37F97C E007E25C 3C01E008 */  lui       $at, %hi(jtbl_E007EC48_380368)
+/* 37F97C E007E25C 3C01E008 */  lui       $at, %hi(jtbl_E007EC48)
 /* 37F980 E007E260 00220821 */  addu      $at, $at, $v0
-/* 37F984 E007E264 8C22EC48 */  lw        $v0, %lo(jtbl_E007EC48_380368)($at)
+/* 37F984 E007E264 8C22EC48 */  lw        $v0, %lo(jtbl_E007EC48)($at)
 /* 37F988 E007E268 00400008 */  jr        $v0
 /* 37F98C E007E26C 00000000 */   nop
 glabel LE007E270_37F990

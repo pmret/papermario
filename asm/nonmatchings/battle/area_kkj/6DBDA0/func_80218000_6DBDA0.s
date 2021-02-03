@@ -8,8 +8,8 @@ glabel func_80218000_6DBDA0
 /* 6DBDAC 8021800C AFB00010 */  sw        $s0, 0x10($sp)
 /* 6DBDB0 80218010 0C09A75B */  jal       get_actor
 /* 6DBDB4 80218014 8C840148 */   lw       $a0, 0x148($a0)
-/* 6DBDB8 80218018 3C108022 */  lui       $s0, %hi(D_802187E4)
-/* 6DBDBC 8021801C 261087E4 */  addiu     $s0, $s0, %lo(D_802187E4)
+/* 6DBDB8 80218018 3C108022 */  lui       $s0, %hi(D_802187E4_6DC584)
+/* 6DBDBC 8021801C 261087E4 */  addiu     $s0, $s0, %lo(D_802187E4_6DC584)
 /* 6DBDC0 80218020 8E030000 */  lw        $v1, ($s0)
 /* 6DBDC4 80218024 0040882D */  daddu     $s1, $v0, $zero
 /* 6DBDC8 80218028 24630009 */  addiu     $v1, $v1, 9

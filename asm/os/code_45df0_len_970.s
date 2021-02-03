@@ -158,12 +158,12 @@ glabel func_8006AA34
 /* 4601C 8006AC1C 00095202 */  srl       $t2, $t1, 8
 /* 46020 8006AC20 214A0010 */  addi      $t2, $t2, 0x10
 .L8006AC24:
-/* 46024 8006AC24 3C01800A */  lui       $at, %hi(jtbl_80099D80_75180)
+/* 46024 8006AC24 3C01800A */  lui       $at, %hi(jtbl_80099D80)
 /* 46028 8006AC28 002A0821 */  addu      $at, $at, $t2
-/* 4602C 8006AC2C 902A9D80 */  lbu       $t2, %lo(jtbl_80099D80_75180)($at)
-/* 46030 8006AC30 3C01800A */  lui       $at, %hi(jtbl_80099DA0_751A0)
+/* 4602C 8006AC2C 902A9D80 */  lbu       $t2, %lo(jtbl_80099D80)($at)
+/* 46030 8006AC30 3C01800A */  lui       $at, %hi(jtbl_80099DA0)
 /* 46034 8006AC34 002A0821 */  addu      $at, $at, $t2
-/* 46038 8006AC38 8C2A9DA0 */  lw        $t2, %lo(jtbl_80099DA0_751A0)($at)
+/* 46038 8006AC38 8C2A9DA0 */  lw        $t2, %lo(jtbl_80099DA0)($at)
 /* 4603C 8006AC3C 01400008 */  jr        $t2
 /* 46040 8006AC40 00000000 */   nop
 glabel L8006AC44_46044

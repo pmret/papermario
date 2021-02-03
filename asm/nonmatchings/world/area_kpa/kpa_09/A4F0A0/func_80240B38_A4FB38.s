@@ -80,12 +80,12 @@ glabel func_80240B38_A4FB38
 /* A4FC50 80240C50 C64C006C */  lwc1      $f12, 0x6c($s2)
 /* A4FC54 80240C54 0C00A6C9 */  jal       clamp_angle
 /* A4FC58 80240C58 00000000 */   nop
-/* A4FC5C 80240C5C 3C018024 */  lui       $at, %hi(func_802427D0_833FD0)
-/* A4FC60 80240C60 D43827D0 */  ldc1      $f24, %lo(func_802427D0_833FD0)($at)
+/* A4FC5C 80240C5C 3C018024 */  lui       $at, %hi(D_802427D0_A517D0)
+/* A4FC60 80240C60 D43827D0 */  ldc1      $f24, %lo(D_802427D0_A517D0)($at)
 /* A4FC64 80240C64 46000521 */  cvt.d.s   $f20, $f0
 /* A4FC68 80240C68 4638A300 */  add.d     $f12, $f20, $f24
-/* A4FC6C 80240C6C 3C018024 */  lui       $at, %hi(D_802427D8)
-/* A4FC70 80240C70 D43627D8 */  ldc1      $f22, %lo(D_802427D8)($at)
+/* A4FC6C 80240C6C 3C018024 */  lui       $at, %hi(D_802427D8_A517D8)
+/* A4FC70 80240C70 D43627D8 */  ldc1      $f22, %lo(D_802427D8_A517D8)($at)
 /* A4FC74 80240C74 0C00A6C9 */  jal       clamp_angle
 /* A4FC78 80240C78 46206320 */   cvt.s.d  $f12, $f12
 /* A4FC7C 80240C7C 4636A500 */  add.d     $f20, $f20, $f22
@@ -113,8 +113,8 @@ glabel func_80240B38_A4FB38
 /* A4FCD4 80240CD4 E616000C */  swc1      $f22, 0xc($s0)
 .L80240CD8:
 /* A4FCD8 80240CD8 C6000018 */  lwc1      $f0, 0x18($s0)
-/* A4FCDC 80240CDC 3C018024 */  lui       $at, %hi(D_802427E0)
-/* A4FCE0 80240CE0 D42227E0 */  ldc1      $f2, %lo(D_802427E0)($at)
+/* A4FCDC 80240CDC 3C018024 */  lui       $at, %hi(D_802427E0_A517E0)
+/* A4FCE0 80240CE0 D42227E0 */  ldc1      $f2, %lo(D_802427E0_A517E0)($at)
 /* A4FCE4 80240CE4 46000021 */  cvt.d.s   $f0, $f0
 /* A4FCE8 80240CE8 46220002 */  mul.d     $f0, $f0, $f2
 /* A4FCEC 80240CEC 00000000 */  nop

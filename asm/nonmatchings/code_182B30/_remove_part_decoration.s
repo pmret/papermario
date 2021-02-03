@@ -13,9 +13,9 @@ glabel _remove_part_decoration
 /* 18B93C 8025D05C 2C62000C */  sltiu     $v0, $v1, 0xc
 /* 18B940 8025D060 10400034 */  beqz      $v0, .L8025D134
 /* 18B944 8025D064 00031080 */   sll      $v0, $v1, 2
-/* 18B948 8025D068 3C01802A */  lui       $at, %hi(jtbl_8029D4B8_1CBD98)
+/* 18B948 8025D068 3C01802A */  lui       $at, %hi(jtbl_8029D4B8)
 /* 18B94C 8025D06C 00220821 */  addu      $at, $at, $v0
-/* 18B950 8025D070 8C22D4B8 */  lw        $v0, %lo(jtbl_8029D4B8_1CBD98)($at)
+/* 18B950 8025D070 8C22D4B8 */  lw        $v0, %lo(jtbl_8029D4B8)($at)
 /* 18B954 8025D074 00400008 */  jr        $v0
 /* 18B958 8025D078 00000000 */   nop
 glabel L8025D07C_18B95C

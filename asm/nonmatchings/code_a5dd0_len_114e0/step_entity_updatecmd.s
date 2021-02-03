@@ -13,9 +13,9 @@ glabel step_entity_updatecmd
 /* A62F8 8010FBF8 10400052 */  beqz      $v0, .L8010FD44
 /* A62FC 8010FBFC 26100004 */   addiu    $s0, $s0, 4
 /* A6300 8010FC00 00031080 */  sll       $v0, $v1, 2
-/* A6304 8010FC04 3C018015 */  lui       $at, %hi(jtbl_8014F740_E5E40)
+/* A6304 8010FC04 3C018015 */  lui       $at, %hi(jtbl_8014F740)
 /* A6308 8010FC08 00220821 */  addu      $at, $at, $v0
-/* A630C 8010FC0C 8C22F740 */  lw        $v0, %lo(jtbl_8014F740_E5E40)($at)
+/* A630C 8010FC0C 8C22F740 */  lw        $v0, %lo(jtbl_8014F740)($at)
 /* A6310 8010FC10 00400008 */  jr        $v0
 /* A6314 8010FC14 00000000 */   nop
 glabel L8010FC18_A6318

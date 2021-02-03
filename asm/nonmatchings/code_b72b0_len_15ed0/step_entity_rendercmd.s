@@ -11,9 +11,9 @@ glabel step_entity_rendercmd
 /* B76D0 80120FD0 10400057 */  beqz      $v0, .L80121130
 /* B76D4 80120FD4 24A50004 */   addiu    $a1, $a1, 4
 /* B76D8 80120FD8 00031080 */  sll       $v0, $v1, 2
-/* B76DC 80120FDC 3C018015 */  lui       $at, %hi(jtbl_801500B0_E67B0)
+/* B76DC 80120FDC 3C018015 */  lui       $at, %hi(jtbl_801500B0)
 /* B76E0 80120FE0 00220821 */  addu      $at, $at, $v0
-/* B76E4 80120FE4 8C2200B0 */  lw        $v0, %lo(jtbl_801500B0_E67B0)($at)
+/* B76E4 80120FE4 8C2200B0 */  lw        $v0, %lo(jtbl_801500B0)($at)
 /* B76E8 80120FE8 00400008 */  jr        $v0
 /* B76EC 80120FEC 00000000 */   nop
 glabel L80120FF0_B76F0

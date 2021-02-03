@@ -187,7 +187,7 @@ glabel L80241E98_802718
 glabel L80241EB0_802730
 /* 802730 80241EB0 0280202D */  daddu     $a0, $s4, $zero
 /* 802734 80241EB4 0260282D */  daddu     $a1, $s3, $zero
-/* 802738 80241EB8 0C0906BB */  jal       func_80241AEC_80236C
+/* 802738 80241EB8 0C0906BB */  jal       dup_mac_01_UnkNpcDurationFlagFunc
 /* 80273C 80241EBC 02A0302D */   daddu    $a2, $s5, $zero
 /* 802740 80241EC0 080907BA */  j         .L80241EE8
 /* 802744 80241EC4 00000000 */   nop

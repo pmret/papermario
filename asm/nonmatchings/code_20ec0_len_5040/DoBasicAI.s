@@ -99,9 +99,9 @@ glabel DoBasicAI
 /* 259DC 8004A5DC 2C620064 */  sltiu     $v0, $v1, 0x64
 /* 259E0 8004A5E0 10400038 */  beqz      $v0, .L8004A6C4
 /* 259E4 8004A5E4 00031080 */   sll      $v0, $v1, 2
-/* 259E8 8004A5E8 3C01800A */  lui       $at, %hi(jtbl_80098728_73B28)
+/* 259E8 8004A5E8 3C01800A */  lui       $at, %hi(jtbl_80098728)
 /* 259EC 8004A5EC 00220821 */  addu      $at, $at, $v0
-/* 259F0 8004A5F0 8C228728 */  lw        $v0, %lo(jtbl_80098728_73B28)($at)
+/* 259F0 8004A5F0 8C228728 */  lw        $v0, %lo(jtbl_80098728)($at)
 /* 259F4 8004A5F4 00400008 */  jr        $v0
 /* 259F8 8004A5F8 00000000 */   nop
 glabel L8004A5FC_259FC

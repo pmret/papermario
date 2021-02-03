@@ -181,9 +181,9 @@ glabel update_player_menu
 /* 41A9C0 802A5C30 2C62012E */  sltiu     $v0, $v1, 0x12e
 /* 41A9C4 802A5C34 10400943 */  beqz      $v0, .L802A8144
 /* 41A9C8 802A5C38 00031080 */   sll      $v0, $v1, 2
-/* 41A9CC 802A5C3C 3C01802B */  lui       $at, %hi(jtbl_802ABBD8_420968)
+/* 41A9CC 802A5C3C 3C01802B */  lui       $at, %hi(jtbl_802ABBD8)
 /* 41A9D0 802A5C40 00220821 */  addu      $at, $at, $v0
-/* 41A9D4 802A5C44 8C22BBD8 */  lw        $v0, %lo(jtbl_802ABBD8_420968)($at)
+/* 41A9D4 802A5C44 8C22BBD8 */  lw        $v0, %lo(jtbl_802ABBD8)($at)
 /* 41A9D8 802A5C48 00400008 */  jr        $v0
 /* 41A9DC 802A5C4C 00000000 */   nop
 glabel L802A5C50_41A9E0

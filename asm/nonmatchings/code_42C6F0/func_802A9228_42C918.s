@@ -100,9 +100,9 @@ glabel L802A9354_42CA44
 /* 42CA74 802A9384 02221021 */  addu      $v0, $s1, $v0
 /* 42CA78 802A9388 8C500004 */  lw        $s0, 4($v0)
 /* 42CA7C 802A938C 00031080 */  sll       $v0, $v1, 2
-/* 42CA80 802A9390 3C05802B */  lui       $a1, %hi(D_802A97C0)
+/* 42CA80 802A9390 3C05802B */  lui       $a1, %hi(D_802A97C0_42CEB0)
 /* 42CA84 802A9394 00A22821 */  addu      $a1, $a1, $v0
-/* 42CA88 802A9398 8CA597C0 */  lw        $a1, %lo(D_802A97C0)($a1)
+/* 42CA88 802A9398 8CA597C0 */  lw        $a1, %lo(D_802A97C0_42CEB0)($a1)
 /* 42CA8C 802A939C 0C0511FF */  jal       set_menu_icon_script
 /* 42CA90 802A93A0 0200202D */   daddu    $a0, $s0, $zero
 /* 42CA94 802A93A4 0200202D */  daddu     $a0, $s0, $zero
@@ -168,8 +168,8 @@ glabel L802A93F4_42CAE4
 /* 42CB6C 802A947C 1AA0009A */  blez      $s5, .L802A96E8
 /* 42CB70 802A9480 0000A02D */   daddu    $s4, $zero, $zero
 /* 42CB74 802A9484 24160001 */  addiu     $s6, $zero, 1
-/* 42CB78 802A9488 3C1E802B */  lui       $fp, %hi(func_802A97CC_42823C)
-/* 42CB7C 802A948C 27DE97CC */  addiu     $fp, $fp, %lo(func_802A97CC_42823C)
+/* 42CB78 802A9488 3C1E802B */  lui       $fp, %hi(D_802A97CC_42CEBC)
+/* 42CB7C 802A948C 27DE97CC */  addiu     $fp, $fp, %lo(D_802A97CC_42CEBC)
 /* 42CB80 802A9490 00131080 */  sll       $v0, $s3, 2
 /* 42CB84 802A9494 00579021 */  addu      $s2, $v0, $s7
 .L802A9498:

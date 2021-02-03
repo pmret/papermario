@@ -40,8 +40,8 @@ glabel func_80241610_993D40
 /* 993DCC 8024169C 24C200A0 */  addiu     $v0, $a2, 0xa0
 /* 993DD0 802416A0 AC820004 */  sw        $v0, 4($a0)
 /* 993DD4 802416A4 94C20000 */  lhu       $v0, ($a2)
-/* 993DD8 802416A8 3C1E8024 */  lui       $fp, %hi(func_80242AC0)
-/* 993DDC 802416AC 27DE2AC0 */  addiu     $fp, $fp, %lo(func_80242AC0)
+/* 993DD8 802416A8 3C1E8024 */  lui       $fp, %hi(mim_06_UnkDurationCheck)
+/* 993DDC 802416AC 27DE2AC0 */  addiu     $fp, $fp, %lo(mim_06_UnkDurationCheck)
 /* 993DE0 802416B0 30420010 */  andi      $v0, $v0, 0x10
 /* 993DE4 802416B4 14400007 */  bnez      $v0, .L802416D4
 /* 993DE8 802416B8 24C400D4 */   addiu    $a0, $a2, 0xd4

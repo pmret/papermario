@@ -15,9 +15,9 @@ glabel func_80240CF4_BAE634
 /* BAE65C 80240D1C 00031C00 */  sll       $v1, $v1, 0x10
 /* BAE660 80240D20 00031B83 */  sra       $v1, $v1, 0xe
 /* BAE664 80240D24 A444008E */  sh        $a0, 0x8e($v0)
-/* BAE668 80240D28 3C018024 */  lui       $at, %hi(D_802443C0)
+/* BAE668 80240D28 3C018024 */  lui       $at, %hi(D_802443C0_BB1D00)
 /* BAE66C 80240D2C 00230821 */  addu      $at, $at, $v1
-/* BAE670 80240D30 C42243C0 */  lwc1      $f2, %lo(D_802443C0)($at)
+/* BAE670 80240D30 C42243C0 */  lwc1      $f2, %lo(D_802443C0_BB1D00)($at)
 /* BAE674 80240D34 8443008E */  lh        $v1, 0x8e($v0)
 /* BAE678 80240D38 46020000 */  add.s     $f0, $f0, $f2
 /* BAE67C 80240D3C 28630005 */  slti      $v1, $v1, 5

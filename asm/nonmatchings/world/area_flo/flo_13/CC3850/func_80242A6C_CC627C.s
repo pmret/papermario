@@ -268,7 +268,7 @@ glabel func_80242A6C_CC627C
 /* CC6650 80242E40 00000000 */   nop
 .L80242E44:
 /* CC6654 80242E44 0260282D */  daddu     $a1, $s3, $zero
-/* CC6658 80242E48 0C0908A6 */  jal       func_80242298_CC5AA8
+/* CC6658 80242E48 0C0908A6 */  jal       flo_13_set_script_owner_npc_anim
 /* CC665C 80242E4C 0280302D */   daddu    $a2, $s4, $zero
 .L80242E50:
 /* CC6660 80242E50 02A0202D */  daddu     $a0, $s5, $zero
@@ -301,8 +301,8 @@ glabel func_80242A6C_CC627C
 /* CC66C0 80242EB0 0C00EABB */  jal       get_npc_unsafe
 /* CC66C4 80242EB4 84440008 */   lh       $a0, 8($v0)
 /* CC66C8 80242EB8 C440000C */  lwc1      $f0, 0xc($v0)
-/* CC66CC 80242EBC 3C018024 */  lui       $at, %hi(D_80247AE8)
-/* CC66D0 80242EC0 D4227AE8 */  ldc1      $f2, %lo(D_80247AE8)($at)
+/* CC66CC 80242EBC 3C018024 */  lui       $at, %hi(D_80247AE8_CCB2F8)
+/* CC66D0 80242EC0 D4227AE8 */  ldc1      $f2, %lo(D_80247AE8_CCB2F8)($at)
 /* CC66D4 80242EC4 46000021 */  cvt.d.s   $f0, $f0
 /* CC66D8 80242EC8 4622003C */  c.lt.d    $f0, $f2
 /* CC66DC 80242ECC 00000000 */  nop

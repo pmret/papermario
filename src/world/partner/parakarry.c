@@ -19,7 +19,7 @@ INCLUDE_ASM(s32, "world/partner/parakarry", func_802BD558_319AC8);
 
 INCLUDE_ASM(s32, "world/partner/parakarry", func_802BD660_319BD0);
 
-ApiStatus func_802BE8D4(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802BE8D4_31AE44(ScriptInstance* script, s32 isInitialCall) {
     s32 unk = script->owner2.npc; // todo what is this
 
     if (isInitialCall) {

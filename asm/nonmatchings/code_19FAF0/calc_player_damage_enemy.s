@@ -339,9 +339,9 @@ glabel calc_player_damage_enemy
 /* 1A070C 80271E2C 2C620006 */  sltiu     $v0, $v1, 6
 /* 1A0710 80271E30 1040001C */  beqz      $v0, .L80271EA4
 /* 1A0714 80271E34 00031080 */   sll      $v0, $v1, 2
-/* 1A0718 80271E38 3C01802A */  lui       $at, %hi(jtbl_8029D880_1CC160)
+/* 1A0718 80271E38 3C01802A */  lui       $at, %hi(jtbl_8029D880)
 /* 1A071C 80271E3C 00220821 */  addu      $at, $at, $v0
-/* 1A0720 80271E40 8C22D880 */  lw        $v0, %lo(jtbl_8029D880_1CC160)($at)
+/* 1A0720 80271E40 8C22D880 */  lw        $v0, %lo(jtbl_8029D880)($at)
 /* 1A0724 80271E44 00400008 */  jr        $v0
 /* 1A0728 80271E48 00000000 */   nop
 glabel L80271E4C_1A072C

@@ -78,8 +78,8 @@ glabel func_80239F84_70DC94
 /* 70DDAC 8023A09C 460C0302 */  mul.s     $f12, $f0, $f12
 /* 70DDB0 8023A0A0 0C00A85B */  jal       sin_rad
 /* 70DDB4 8023A0A4 00000000 */   nop
-/* 70DDB8 8023A0A8 3C018024 */  lui       $at, %hi(D_8023D1D0)
-/* 70DDBC 8023A0AC D422D1D0 */  ldc1      $f2, %lo(D_8023D1D0)($at)
+/* 70DDB8 8023A0A8 3C018024 */  lui       $at, %hi(D_8023D1D0_710EE0)
+/* 70DDBC 8023A0AC D422D1D0 */  ldc1      $f2, %lo(D_8023D1D0_710EE0)($at)
 /* 70DDC0 8023A0B0 46000021 */  cvt.d.s   $f0, $f0
 /* 70DDC4 8023A0B4 46220002 */  mul.d     $f0, $f0, $f2
 /* 70DDC8 8023A0B8 00000000 */  nop

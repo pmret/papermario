@@ -67,7 +67,7 @@ glabel func_80243CCC
 /* 164624 80243DC4 AFA00014 */  sw        $zero, 0x14($sp)
 /* 164628 80243DC8 AFA00018 */  sw        $zero, 0x18($sp)
 /* 16462C 80243DCC AFA0001C */  sw        $zero, 0x1c($sp)
-/* 164630 80243DD0 0C090AE8 */  jal       pause_set_cursor_opacity
+/* 164630 80243DD0 0C090AE8 */  jal       func_80242BA0
 /* 164634 80243DD4 AFA00020 */   sw       $zero, 0x20($sp)
 /* 164638 80243DD8 0000202D */  daddu     $a0, $zero, $zero
 /* 16463C 80243DDC 241100F0 */  addiu     $s1, $zero, 0xf0
@@ -80,7 +80,7 @@ glabel func_80243CCC
 /* 164658 80243DF8 AFA00014 */  sw        $zero, 0x14($sp)
 /* 16465C 80243DFC AFA00018 */  sw        $zero, 0x18($sp)
 /* 164660 80243E00 AFA0001C */  sw        $zero, 0x1c($sp)
-/* 164664 80243E04 0C090AE8 */  jal       pause_set_cursor_opacity
+/* 164664 80243E04 0C090AE8 */  jal       func_80242BA0
 /* 164668 80243E08 AFA00020 */   sw       $zero, 0x20($sp)
 /* 16466C 80243E0C 0000202D */  daddu     $a0, $zero, $zero
 /* 164670 80243E10 0240282D */  daddu     $a1, $s2, $zero
@@ -90,7 +90,7 @@ glabel func_80243CCC
 /* 164680 80243E20 AFA00014 */  sw        $zero, 0x14($sp)
 /* 164684 80243E24 AFA00018 */  sw        $zero, 0x18($sp)
 /* 164688 80243E28 AFA0001C */  sw        $zero, 0x1c($sp)
-/* 16468C 80243E2C 0C090AE8 */  jal       pause_set_cursor_opacity
+/* 16468C 80243E2C 0C090AE8 */  jal       func_80242BA0
 /* 164690 80243E30 AFA00020 */   sw       $zero, 0x20($sp)
 /* 164694 80243E34 00131100 */  sll       $v0, $s3, 4
 /* 164698 80243E38 24040140 */  addiu     $a0, $zero, 0x140
@@ -109,7 +109,7 @@ glabel func_80243CCC
 /* 1646C4 80243E64 AFA00014 */  sw        $zero, 0x14($sp)
 /* 1646C8 80243E68 AFA00018 */  sw        $zero, 0x18($sp)
 /* 1646CC 80243E6C AFA0001C */  sw        $zero, 0x1c($sp)
-/* 1646D0 80243E70 0C090AE8 */  jal       pause_set_cursor_opacity
+/* 1646D0 80243E70 0C090AE8 */  jal       func_80242BA0
 /* 1646D4 80243E74 AFA00020 */   sw       $zero, 0x20($sp)
 /* 1646D8 80243E78 2663FFF6 */  addiu     $v1, $s3, -0xa
 /* 1646DC 80243E7C 2C62000A */  sltiu     $v0, $v1, 0xa

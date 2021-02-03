@@ -159,9 +159,9 @@ glabel osDevMgrMain
 /* 3C6D4 800612D4 2C620007 */  sltiu     $v0, $v1, 7
 /* 3C6D8 800612D8 10400042 */  beqz      $v0, .L800613E4
 /* 3C6DC 800612DC 00031080 */   sll      $v0, $v1, 2
-/* 3C6E0 800612E0 3C01800A */  lui       $at, %hi(jtbl_80099B20_74F20)
+/* 3C6E0 800612E0 3C01800A */  lui       $at, %hi(jtbl_80099B20)
 /* 3C6E4 800612E4 00220821 */  addu      $at, $at, $v0
-/* 3C6E8 800612E8 8C229B20 */  lw        $v0, %lo(jtbl_80099B20_74F20)($at)
+/* 3C6E8 800612E8 8C229B20 */  lw        $v0, %lo(jtbl_80099B20)($at)
 /* 3C6EC 800612EC 00400008 */  jr        $v0
 /* 3C6F0 800612F0 00000000 */   nop
 glabel L800612F4_3C6F4

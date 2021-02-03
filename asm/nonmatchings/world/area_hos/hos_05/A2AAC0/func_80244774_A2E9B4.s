@@ -30,8 +30,8 @@ glabel func_80244774_A2E9B4
 /* A2EA14 802447D4 3C0143FA */  lui       $at, 0x43fa
 /* A2EA18 802447D8 44810000 */  mtc1      $at, $f0
 /* A2EA1C 802447DC 44853000 */  mtc1      $a1, $f6
-/* A2EA20 802447E0 3C108025 */  lui       $s0, %hi(D_8024AEC4)
-/* A2EA24 802447E4 2610AEC4 */  addiu     $s0, $s0, %lo(D_8024AEC4)
+/* A2EA20 802447E0 3C108025 */  lui       $s0, %hi(D_8024AEC4_A35104)
+/* A2EA24 802447E4 2610AEC4 */  addiu     $s0, $s0, %lo(D_8024AEC4_A35104)
 /* A2EA28 802447E8 46003180 */  add.s     $f6, $f6, $f0
 /* A2EA2C 802447EC 3C014220 */  lui       $at, 0x4220
 /* A2EA30 802447F0 4481A000 */  mtc1      $at, $f20

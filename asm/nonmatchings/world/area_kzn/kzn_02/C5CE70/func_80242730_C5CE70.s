@@ -3,8 +3,8 @@
 
 glabel func_80242730_C5CE70
 /* C5CE70 80242730 27BDFFD8 */  addiu     $sp, $sp, -0x28
-/* C5CE74 80242734 3C048024 */  lui       $a0, %hi(D_802464A4)
-/* C5CE78 80242738 248464A4 */  addiu     $a0, $a0, %lo(D_802464A4)
+/* C5CE74 80242734 3C048024 */  lui       $a0, %hi(D_802464A4_C60BE4)
+/* C5CE78 80242738 248464A4 */  addiu     $a0, $a0, %lo(D_802464A4_C60BE4)
 /* C5CE7C 8024273C AFBF0018 */  sw        $ra, 0x18($sp)
 /* C5CE80 80242740 AFB10014 */  sw        $s1, 0x14($sp)
 /* C5CE84 80242744 AFB00010 */  sw        $s0, 0x10($sp)

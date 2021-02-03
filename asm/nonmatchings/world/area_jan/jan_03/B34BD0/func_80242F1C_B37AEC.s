@@ -11,8 +11,8 @@ glabel func_80242F1C_B37AEC
 /* B37B04 80242F34 2508F290 */  addiu     $t0, $t0, %lo(gPlayerData)
 /* B37B08 80242F38 8C450000 */  lw        $a1, ($v0)
 .L80242F3C:
-/* B37B0C 80242F3C 3C038025 */  lui       $v1, %hi(D_8024A5AC)
-/* B37B10 80242F40 2463A5AC */  addiu     $v1, $v1, %lo(D_8024A5AC)
+/* B37B0C 80242F3C 3C038025 */  lui       $v1, %hi(D_8024A5AC_B3F17C)
+/* B37B10 80242F40 2463A5AC */  addiu     $v1, $v1, %lo(D_8024A5AC_B3F17C)
 /* B37B14 80242F44 8C620000 */  lw        $v0, ($v1)
 /* B37B18 80242F48 5040000A */  beql      $v0, $zero, .L80242F74
 /* B37B1C 80242F4C 25290001 */   addiu    $t1, $t1, 1

@@ -3,8 +3,8 @@
 
 glabel func_802438D0_9DA8F0
 /* 9DA8F0 802438D0 27BDFFD8 */  addiu     $sp, $sp, -0x28
-/* 9DA8F4 802438D4 3C048025 */  lui       $a0, %hi(D_802523B4)
-/* 9DA8F8 802438D8 248423B4 */  addiu     $a0, $a0, %lo(D_802523B4)
+/* 9DA8F4 802438D4 3C048025 */  lui       $a0, %hi(D_802523B4_9E93D4)
+/* 9DA8F8 802438D8 248423B4 */  addiu     $a0, $a0, %lo(D_802523B4_9E93D4)
 /* 9DA8FC 802438DC AFBF0018 */  sw        $ra, 0x18($sp)
 /* 9DA900 802438E0 AFB10014 */  sw        $s1, 0x14($sp)
 /* 9DA904 802438E4 AFB00010 */  sw        $s0, 0x10($sp)

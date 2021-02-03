@@ -11,9 +11,9 @@ glabel func_80045D7C
 /* 21194 80045D94 10400020 */  beqz      $v0, .L80045E18
 /* 21198 80045D98 0000202D */   daddu    $a0, $zero, $zero
 /* 2119C 80045D9C 00031080 */  sll       $v0, $v1, 2
-/* 211A0 80045DA0 3C01800A */  lui       $at, %hi(jtbl_800986B0_73AB0)
+/* 211A0 80045DA0 3C01800A */  lui       $at, %hi(jtbl_800986B0)
 /* 211A4 80045DA4 00220821 */  addu      $at, $at, $v0
-/* 211A8 80045DA8 8C2286B0 */  lw        $v0, %lo(jtbl_800986B0_73AB0)($at)
+/* 211A8 80045DA8 8C2286B0 */  lw        $v0, %lo(jtbl_800986B0)($at)
 /* 211AC 80045DAC 00400008 */  jr        $v0
 /* 211B0 80045DB0 00000000 */   nop
 glabel L80045DB4_211B4

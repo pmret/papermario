@@ -6,11 +6,11 @@ glabel func_8024026C_CEE4CC
 /* CEE4D0 80240270 AFBF0010 */  sw        $ra, 0x10($sp)
 /* CEE4D4 80240274 10A00003 */  beqz      $a1, .L80240284
 /* CEE4D8 80240278 8C86000C */   lw       $a2, 0xc($a0)
-/* CEE4DC 8024027C 3C018024 */  lui       $at, %hi(func_8024130C_C3783C)
-/* CEE4E0 80240280 AC20130C */  sw        $zero, %lo(func_8024130C_C3783C)($at)
+/* CEE4DC 8024027C 3C018024 */  lui       $at, %hi(D_8024130C_CEF56C)
+/* CEE4E0 80240280 AC20130C */  sw        $zero, %lo(D_8024130C_CEF56C)($at)
 .L80240284:
-/* CEE4E4 80240284 3C038024 */  lui       $v1, %hi(func_8024130C_C3783C)
-/* CEE4E8 80240288 2463130C */  addiu     $v1, $v1, %lo(func_8024130C_C3783C)
+/* CEE4E4 80240284 3C038024 */  lui       $v1, %hi(D_8024130C_CEF56C)
+/* CEE4E8 80240288 2463130C */  addiu     $v1, $v1, %lo(D_8024130C_CEF56C)
 /* CEE4EC 8024028C 8C620000 */  lw        $v0, ($v1)
 /* CEE4F0 80240290 54400003 */  bnel      $v0, $zero, .L802402A0
 /* CEE4F4 80240294 AC600000 */   sw       $zero, ($v1)
@@ -18,9 +18,9 @@ glabel func_8024026C_CEE4CC
 /* CEE4FC 8024029C 0000102D */   daddu    $v0, $zero, $zero
 .L802402A0:
 /* CEE500 802402A0 8CC50000 */  lw        $a1, ($a2)
-/* CEE504 802402A4 3C068024 */  lui       $a2, %hi(D_80241310)
+/* CEE504 802402A4 3C068024 */  lui       $a2, %hi(D_80241310_CEF570)
 /* CEE508 802402A8 0C0B2026 */  jal       set_variable
-/* CEE50C 802402AC 8CC61310 */   lw       $a2, %lo(D_80241310)($a2)
+/* CEE50C 802402AC 8CC61310 */   lw       $a2, %lo(D_80241310_CEF570)($a2)
 /* CEE510 802402B0 24020002 */  addiu     $v0, $zero, 2
 .L802402B4:
 /* CEE514 802402B4 8FBF0010 */  lw        $ra, 0x10($sp)

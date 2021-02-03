@@ -148,8 +148,8 @@ glabel func_8021B678_6A2878
 /* 6A2AA4 8021B8A4 14400008 */  bnez      $v0, .L8021B8C8
 /* 6A2AA8 8021B8A8 E600FFF8 */   swc1     $f0, -8($s0)
 /* 6A2AAC 8021B8AC 46001006 */  mov.s     $f0, $f2
-/* 6A2AB0 8021B8B0 3C018023 */  lui       $at, %hi(D_80234800)
-/* 6A2AB4 8021B8B4 D4224800 */  ldc1      $f2, %lo(D_80234800)($at)
+/* 6A2AB0 8021B8B0 3C018023 */  lui       $at, %hi(D_80234800_6BBA00)
+/* 6A2AB4 8021B8B4 D4224800 */  ldc1      $f2, %lo(D_80234800_6BBA00)($at)
 /* 6A2AB8 8021B8B8 46000021 */  cvt.d.s   $f0, $f0
 /* 6A2ABC 8021B8BC 46220001 */  sub.d     $f0, $f0, $f2
 /* 6A2AC0 8021B8C0 46200020 */  cvt.s.d   $f0, $f0

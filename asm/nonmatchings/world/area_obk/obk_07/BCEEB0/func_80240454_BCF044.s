@@ -13,9 +13,9 @@ glabel func_80240454_BCF044
 /* BCF064 80240474 0C00A67F */  jal       rand_int
 /* BCF068 80240478 24040003 */   addiu    $a0, $zero, 3
 /* BCF06C 8024047C 00021040 */  sll       $v0, $v0, 1
-/* BCF070 80240480 3C018024 */  lui       $at, %hi(D_8024292C)
+/* BCF070 80240480 3C018024 */  lui       $at, %hi(D_8024292C_BD151C)
 /* BCF074 80240484 00220821 */  addu      $at, $at, $v0
-/* BCF078 80240488 8422292C */  lh        $v0, %lo(D_8024292C)($at)
+/* BCF078 80240488 8422292C */  lh        $v0, %lo(D_8024292C_BD151C)($at)
 /* BCF07C 8024048C 24040032 */  addiu     $a0, $zero, 0x32
 /* BCF080 80240490 0C00A67F */  jal       rand_int
 /* BCF084 80240494 AE220078 */   sw       $v0, 0x78($s1)
