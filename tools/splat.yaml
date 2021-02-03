@@ -2242,7 +2242,8 @@ segments:
     files:
     - [0x723780, c]
     - [0x723AB0, data]
-  - type: code # todo what is this
+  - name: battle/item/unknown_item
+    type: code
     start: 0x724240
     vram: 0x802A1000
     overlay: True
@@ -2585,7 +2586,7 @@ segments:
     files:
     - [0x777690, c]
     - [0x777730, data]
-  - name: battle/move/unknown
+  - name: battle/move/unknown_move
     type: code
     start: 0x779C90
     vram: 0x802A1000
@@ -2633,90 +2634,102 @@ segments:
     files:
     - [0x785B20, c]
     - [0x785C10, data]
-  - type: code
+  - name: battle/star/focus
+    type: code
     start: 0x789E60
     vram: 0x802A1000
     overlay: True
     files:
-    - [0x789E60, c] # add c func
-    - [0x78A480, bin]
-  - type: code
+    - [0x789E60, c]
+    - [0x78A480, data]
+  - name: battle/star/refresh
+    type: code
     start: 0x78B600
     vram: 0x802A1000
     overlay: True
     files:
-    - [0x78B600, c] # add c func
-    - [0x78C070, bin]
-  - type: code
+    - [0x78B600, c]
+    - [0x78C070, data]
+  - name: battle/star/lullaby
+    type: code
     start: 0x78D150
     vram: 0x802A1000
     overlay: True
     files:
-    - [0x78D150, c] # add c func
-    - [0x78D770, bin]
-  - type: code
+    - [0x78D150, c]
+    - [0x78D770, data]
+  - name: battle/star/star_storm
+    type: code
     start: 0x78E7D0
     vram: 0x802A1000
     overlay: True
     files:
-    - [0x78E7D0, c] # add c func
-    - [0x78EEB0, bin]
-  - type: code
+    - [0x78E7D0, c]
+    - [0x78EEB0, data]
+  - name: battle/star/chill_out
+    type: code
     start: 0x7900D0
     vram: 0x802A1000
     overlay: True
     files:
-    - [0x7900D0, c] # add c func
-    - [0x7909C0, bin]
-  - type: code
+    - [0x7900D0, c]
+    - [0x7909C0, data]
+  - name: battle/star/smooch
+    type: code
     start: 0x791D90
     vram: 0x802A1000
     overlay: True
     files:
-    - [0x791D90, c] # add c func
-    - [0x7923C0, bin]
-  - type: code
+    - [0x791D90, c]
+    - [0x7923C0, data]
+  - name: battle/star/time_out
+    type: code
     start: 0x793D20
     vram: 0x802A1000
     overlay: True
     files:
-    - [0x793D20, c] # add c func
-    - [0x794240, bin]
-  - type: code
+    - [0x793D20, c]
+    - [0x794240, data]
+  - name: battle/star/up_and_away
+    type: code
     start: 0x7952E0
     vram: 0x802A1000
     overlay: True
     files:
-    - [0x7952E0, c] # add c func
-    - [0x7959B0, bin]
-  - type: code
+    - [0x7952E0, c]
+    - [0x7959B0, data]
+  - name: battle/star/star_beam
+    type: code
     start: 0x796FC0
     vram: 0x802A1000
     overlay: True
     files:
-    - [0x796FC0, c] # add c func
-    - [0x7984B0, bin]
-  - type: code
+    - [0x796FC0, c]
+    - [0x7984B0, data]
+  - name: battle/star/peach_beam
+    type: code
     start: 0x7997B0
     vram: 0x802A1000
     overlay: True
     files:
-    - [0x7997B0, c] # add c func
-    - [0x79ACA0, bin]
-  - type: code
+    - [0x7997B0, c]
+    - [0x79ACA0, data]
+  - name: battle/star/peach_focus
+    type: code
     start: 0x79BFA0
     vram: 0x802A1000
     overlay: True
     files:
-    - [0x79BFA0, c] # add c func
-    - [0x79C4D0, bin]
-  - type: code
+    - [0x79BFA0, c]
+    - [0x79C4D0, data]
+  - name: battle/star/peach_dash
+    type: code
     start: 0x79D8A0
     vram: 0x802A1000
     overlay: True
     files:
-    - [0x79D8A0, c] # add c func
-    - [0x79DE50, bin]
+    - [0x79D8A0, c]
+    - [0x79DE50, data]
   - name: world/script_api/
     ld_name: world_script_api
     type: code
