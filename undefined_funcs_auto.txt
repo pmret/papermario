@@ -1,12 +1,8 @@
 pause_set_cursor_opacity = 0x80242BA0;
 pause_cleanup = 0x80244708;
-end_battle = 0x80244A50;
-pause_partners_load_portrait = 0x8024ADE0;
-pause_partners_draw_movelist_flower = 0x8024C0A0;
 ForceCloseMessageBox = 0x802513F0;
 func_802AB330 = 0x802AB330;
 func_802AB338 = 0x802AB338;
-sort_scripts = 0x802C3000;
 create_shadow_callback = 0x802E0D90;
 func_802B2000 = 0x802B2000;
 func_802B203C = 0x802B203C;
