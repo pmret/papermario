@@ -854,8 +854,8 @@ glabel L802BEB18_31F888
 /* 31FDE0 802BF070 C7A20030 */  lwc1      $f2, 0x30($sp)
 /* 31FDE4 802BF074 46023182 */  mul.s     $f6, $f6, $f2
 /* 31FDE8 802BF078 00000000 */  nop
-/* 31FDEC 802BF07C 3C01802C */  lui       $at, %hi(D_802BFED0)
-/* 31FDF0 802BF080 D420FED0 */  ldc1      $f0, %lo(D_802BFED0)($at)
+/* 31FDEC 802BF07C 3C01802C */  lui       $at, %hi(D_802BFED0_320C40)
+/* 31FDF0 802BF080 D420FED0 */  ldc1      $f0, %lo(D_802BFED0_320C40)($at)
 /* 31FDF4 802BF084 460031A1 */  cvt.d.s   $f6, $f6
 /* 31FDF8 802BF088 46203182 */  mul.d     $f6, $f6, $f0
 /* 31FDFC 802BF08C 00000000 */  nop

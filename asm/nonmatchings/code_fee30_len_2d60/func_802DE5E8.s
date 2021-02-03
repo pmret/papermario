@@ -60,15 +60,15 @@ glabel func_802DE5E8
 /* 1017A4 802DE6B4 3C01802E */  lui       $at, %hi(D_802DF5B0)
 /* 1017A8 802DE6B8 00220821 */  addu      $at, $at, $v0
 /* 1017AC 802DE6BC AC20F5B0 */  sw        $zero, %lo(D_802DF5B0)($at)
-/* 1017B0 802DE6C0 3C048035 */  lui       $a0, %hi(D_8034F800)
-/* 1017B4 802DE6C4 2484F800 */  addiu     $a0, $a0, %lo(D_8034F800)
+/* 1017B0 802DE6C0 3C048035 */  lui       $a0, %hi(gSpriteHeapPtr)
+/* 1017B4 802DE6C4 2484F800 */  addiu     $a0, $a0, %lo(gSpriteHeapPtr)
 /* 1017B8 802DE6C8 0C00A487 */  jal       _heap_free
 /* 1017BC 802DE6CC 0280282D */   daddu    $a1, $s4, $zero
 .L802DE6D0:
 /* 1017C0 802DE6D0 3C02802E */  lui       $v0, %hi(D_802DF524)
 /* 1017C4 802DE6D4 8C42F524 */  lw        $v0, %lo(D_802DF524)($v0)
-/* 1017C8 802DE6D8 3C048035 */  lui       $a0, %hi(D_8034F800)
-/* 1017CC 802DE6DC 2484F800 */  addiu     $a0, $a0, %lo(D_8034F800)
+/* 1017C8 802DE6D8 3C048035 */  lui       $a0, %hi(gSpriteHeapPtr)
+/* 1017CC 802DE6DC 2484F800 */  addiu     $a0, $a0, %lo(gSpriteHeapPtr)
 /* 1017D0 802DE6E0 10400003 */  beqz      $v0, .L802DE6F0
 /* 1017D4 802DE6E4 00000000 */   nop
 /* 1017D8 802DE6E8 3C048030 */  lui       $a0, %hi(D_802FB800)

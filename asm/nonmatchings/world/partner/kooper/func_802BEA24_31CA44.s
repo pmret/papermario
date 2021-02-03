@@ -36,8 +36,8 @@ glabel func_802BEA24_31CA44
 .L802BEA9C:
 /* 31CABC 802BEA9C 8E420000 */  lw        $v0, ($s2)
 /* 31CAC0 802BEAA0 2403FFFD */  addiu     $v1, $zero, -3
-/* 31CAC4 802BEAA4 3C01802C */  lui       $at, %hi(D_802BEB40)
-/* 31CAC8 802BEAA8 AC20EB40 */  sw        $zero, %lo(D_802BEB40)($at)
+/* 31CAC4 802BEAA4 3C01802C */  lui       $at, %hi(D_802BEB40_31CB60)
+/* 31CAC8 802BEAA8 AC20EB40 */  sw        $zero, %lo(D_802BEB40_31CB60)($at)
 /* 31CACC 802BEAAC 00431024 */  and       $v0, $v0, $v1
 /* 31CAD0 802BEAB0 AE420000 */  sw        $v0, ($s2)
 /* 31CAD4 802BEAB4 8E220000 */  lw        $v0, ($s1)

@@ -55,8 +55,8 @@ glabel func_80241DE4_EA26E4
 /* EA27A0 80241EA0 8C470030 */   lw       $a3, 0x30($v0)
 /* EA27A4 80241EA4 C6020018 */  lwc1      $f2, 0x18($s0)
 /* EA27A8 80241EA8 46020003 */  div.s     $f0, $f0, $f2
-/* EA27AC 80241EAC 3C018024 */  lui       $at, %hi(D_80246648)
-/* EA27B0 80241EB0 D4226648 */  ldc1      $f2, %lo(D_80246648)($at)
+/* EA27AC 80241EAC 3C018024 */  lui       $at, %hi(D_80246648_EA6F48)
+/* EA27B0 80241EB0 D4226648 */  ldc1      $f2, %lo(D_80246648_EA6F48)($at)
 /* EA27B4 80241EB4 46000021 */  cvt.d.s   $f0, $f0
 /* EA27B8 80241EB8 46220000 */  add.d     $f0, $f0, $f2
 /* EA27BC 80241EBC 4620010D */  trunc.w.d $f4, $f0

@@ -6,8 +6,8 @@ glabel func_80241C54_A2BE94
 /* A2BE98 80241C58 8C427410 */  lw        $v0, %lo(gCurrentCameraID)($v0)
 /* A2BE9C 80241C5C 27BDFFD0 */  addiu     $sp, $sp, -0x30
 /* A2BEA0 80241C60 AFB1001C */  sw        $s1, 0x1c($sp)
-/* A2BEA4 80241C64 3C118025 */  lui       $s1, %hi(D_80249980)
-/* A2BEA8 80241C68 26319980 */  addiu     $s1, $s1, %lo(D_80249980)
+/* A2BEA4 80241C64 3C118025 */  lui       $s1, %hi(D_80249980_A33BC0)
+/* A2BEA8 80241C68 26319980 */  addiu     $s1, $s1, %lo(D_80249980_A33BC0)
 /* A2BEAC 80241C6C F7B40028 */  sdc1      $f20, 0x28($sp)
 /* A2BEB0 80241C70 3C014170 */  lui       $at, 0x4170
 /* A2BEB4 80241C74 4481A000 */  mtc1      $at, $f20

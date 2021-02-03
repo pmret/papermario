@@ -219,9 +219,9 @@ glabel _show_message
 /* F4FF8 802D0648 2C620006 */  sltiu     $v0, $v1, 6
 /* F4FFC 802D064C 10400013 */  beqz      $v0, .L802D069C
 /* F5000 802D0650 00031080 */   sll      $v0, $v1, 2
-/* F5004 802D0654 3C01802E */  lui       $at, %hi(jtbl_802DA1F0_FEBA0)
+/* F5004 802D0654 3C01802E */  lui       $at, %hi(jtbl_802DA1F0)
 /* F5008 802D0658 00220821 */  addu      $at, $at, $v0
-/* F500C 802D065C 8C22A1F0 */  lw        $v0, %lo(jtbl_802DA1F0_FEBA0)($at)
+/* F500C 802D065C 8C22A1F0 */  lw        $v0, %lo(jtbl_802DA1F0)($at)
 /* F5010 802D0660 00400008 */  jr        $v0
 /* F5014 802D0664 00000000 */   nop
 glabel L802D0668_F5018

@@ -397,9 +397,9 @@ glabel _update_message
 /* BA530 80123E30 2C62000E */  sltiu     $v0, $v1, 0xe
 /* BA534 80123E34 104000CF */  beqz      $v0, .L80124174
 /* BA538 80123E38 00031080 */   sll      $v0, $v1, 2
-/* BA53C 80123E3C 3C018015 */  lui       $at, %hi(jtbl_80150380_E6A80)
+/* BA53C 80123E3C 3C018015 */  lui       $at, %hi(jtbl_80150380)
 /* BA540 80123E40 00220821 */  addu      $at, $at, $v0
-/* BA544 80123E44 8C220380 */  lw        $v0, %lo(jtbl_80150380_E6A80)($at)
+/* BA544 80123E44 8C220380 */  lw        $v0, %lo(jtbl_80150380)($at)
 /* BA548 80123E48 00400008 */  jr        $v0
 /* BA54C 80123E4C 00000000 */   nop
 glabel L80123E50_BA550

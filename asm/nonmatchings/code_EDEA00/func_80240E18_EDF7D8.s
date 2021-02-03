@@ -15,9 +15,9 @@ glabel func_80240E18_EDF7D8
 /* EDF800 80240E40 00031C00 */  sll       $v1, $v1, 0x10
 /* EDF804 80240E44 00031B83 */  sra       $v1, $v1, 0xe
 /* EDF808 80240E48 A444008E */  sh        $a0, 0x8e($v0)
-/* EDF80C 80240E4C 3C018024 */  lui       $at, %hi(D_802441DC)
+/* EDF80C 80240E4C 3C018024 */  lui       $at, %hi(D_802441DC_EE2B9C)
 /* EDF810 80240E50 00230821 */  addu      $at, $at, $v1
-/* EDF814 80240E54 C42241DC */  lwc1      $f2, %lo(D_802441DC)($at)
+/* EDF814 80240E54 C42241DC */  lwc1      $f2, %lo(D_802441DC_EE2B9C)($at)
 /* EDF818 80240E58 8443008E */  lh        $v1, 0x8e($v0)
 /* EDF81C 80240E5C 46020000 */  add.s     $f0, $f0, $f2
 /* EDF820 80240E60 28630005 */  slti      $v1, $v1, 5

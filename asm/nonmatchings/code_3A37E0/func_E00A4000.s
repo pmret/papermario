@@ -62,9 +62,9 @@ glabel func_E00A4000
 /* 3A38B4 E00A40D4 1040001B */  beqz      $v0, .LE00A4144
 /* 3A38B8 E00A40D8 AC600018 */   sw       $zero, 0x18($v1)
 /* 3A38BC E00A40DC 00111080 */  sll       $v0, $s1, 2
-/* 3A38C0 E00A40E0 3C01E00A */  lui       $at, %hi(jtbl_E00A4AD0_3A42B0)
+/* 3A38C0 E00A40E0 3C01E00A */  lui       $at, %hi(jtbl_E00A4AD0)
 /* 3A38C4 E00A40E4 00220821 */  addu      $at, $at, $v0
-/* 3A38C8 E00A40E8 8C224AD0 */  lw        $v0, %lo(jtbl_E00A4AD0_3A42B0)($at)
+/* 3A38C8 E00A40E8 8C224AD0 */  lw        $v0, %lo(jtbl_E00A4AD0)($at)
 /* 3A38CC E00A40EC 00400008 */  jr        $v0
 /* 3A38D0 E00A40F0 00000000 */   nop
 glabel LE00A40F4_3A38D4

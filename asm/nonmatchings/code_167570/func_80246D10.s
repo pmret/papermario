@@ -18,9 +18,9 @@ glabel func_80246D10
 /* 1675A4 80246D44 1040000B */  beqz      $v0, .L80246D74
 /* 1675A8 80246D48 00C0A82D */   daddu    $s5, $a2, $zero
 /* 1675AC 80246D4C 00031080 */  sll       $v0, $v1, 2
-/* 1675B0 80246D50 3C018025 */  lui       $at, %hi(jtbl_8024BFE8_16C848)
+/* 1675B0 80246D50 3C018025 */  lui       $at, %hi(jtbl_8024BFE8)
 /* 1675B4 80246D54 00220821 */  addu      $at, $at, $v0
-/* 1675B8 80246D58 8C22BFE8 */  lw        $v0, %lo(jtbl_8024BFE8_16C848)($at)
+/* 1675B8 80246D58 8C22BFE8 */  lw        $v0, %lo(jtbl_8024BFE8)($at)
 /* 1675BC 80246D5C 00400008 */  jr        $v0
 /* 1675C0 80246D60 00000000 */   nop
 glabel L80246D64_1675C4

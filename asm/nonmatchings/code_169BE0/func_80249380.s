@@ -317,7 +317,7 @@ glabel func_80249380
 /* 16A090 80249830 AFA00014 */  sw        $zero, 0x14($sp)
 /* 16A094 80249834 AFA00018 */  sw        $zero, 0x18($sp)
 /* 16A098 80249838 AFA2001C */  sw        $v0, 0x1c($sp)
-/* 16A09C 8024983C 0C090AE8 */  jal       pause_set_cursor_opacity
+/* 16A09C 8024983C 0C090AE8 */  jal       func_80242BA0
 /* 16A0A0 80249840 AFA20020 */   sw       $v0, 0x20($sp)
 /* 16A0A4 80249844 3C06FCFF */  lui       $a2, 0xfcff
 /* 16A0A8 80249848 34C6FFFF */  ori       $a2, $a2, 0xffff
@@ -352,7 +352,7 @@ glabel func_80249380
 /* 16A118 802498B8 AFA00014 */  sw        $zero, 0x14($sp)
 /* 16A11C 802498BC AFA00018 */  sw        $zero, 0x18($sp)
 /* 16A120 802498C0 AFA2001C */  sw        $v0, 0x1c($sp)
-/* 16A124 802498C4 0C090AE8 */  jal       pause_set_cursor_opacity
+/* 16A124 802498C4 0C090AE8 */  jal       func_80242BA0
 /* 16A128 802498C8 AFA20020 */   sw       $v0, 0x20($sp)
 /* 16A12C 802498CC 3C03800A */  lui       $v1, %hi(gMasterGfxPos)
 /* 16A130 802498D0 8C63A66C */  lw        $v1, %lo(gMasterGfxPos)($v1)

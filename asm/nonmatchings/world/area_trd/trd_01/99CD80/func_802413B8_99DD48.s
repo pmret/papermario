@@ -122,7 +122,7 @@ glabel L80241558_99DEE8
 glabel L80241570_99DF00
 /* 99DF00 80241570 0280202D */  daddu     $a0, $s4, $zero
 /* 99DF04 80241574 0260282D */  daddu     $a1, $s3, $zero
-/* 99DF08 80241578 0C090366 */  jal       func_80240D98_99D728
+/* 99DF08 80241578 0C090366 */  jal       trd_01_NpcJumpFunc3
 /* 99DF0C 8024157C 02A0302D */   daddu    $a2, $s5, $zero
 glabel L80241580_99DF10
 /* 99DF10 80241580 0280202D */  daddu     $a0, $s4, $zero

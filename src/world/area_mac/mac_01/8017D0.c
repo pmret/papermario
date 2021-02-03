@@ -1,6 +1,6 @@
 #include "mac_01.h"
 
-extern u8 D_80258407;
+extern u8 D_80258407_818C87;
 
 #include "world/common/UnkMusicFunc.inc.c"
 
@@ -197,7 +197,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80245488_805D08);
 
 void func_802454B4_805D34(void) {
     gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, 1, SHADE, 0, PRIMITIVE, 0, 0, 0, 0, 1, SHADE, 0, PRIMITIVE, 0);
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, D_80258407);
+    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, D_80258407_818C87);
 }
 
 ApiStatus func_80245504_805D84(ScriptInstance* script, s32 isInitialCall) {

@@ -29,8 +29,8 @@ glabel func_802B6000_E2A340
 /* E2A3A0 802B6060 00431025 */  or        $v0, $v0, $v1
 /* E2A3A4 802B6064 0C037FBF */  jal       func_800DFEFC
 /* E2A3A8 802B6068 AE220000 */   sw       $v0, ($s1)
-/* E2A3AC 802B606C 3C10802B */  lui       $s0, %hi(func_802B6350_E28D80)
-/* E2A3B0 802B6070 26106350 */  addiu     $s0, $s0, %lo(func_802B6350_E28D80)
+/* E2A3AC 802B606C 3C10802B */  lui       $s0, %hi(D_802B6350_E2A690)
+/* E2A3B0 802B6070 26106350 */  addiu     $s0, $s0, %lo(D_802B6350_E2A690)
 /* E2A3B4 802B6074 8E040000 */  lw        $a0, ($s0)
 /* E2A3B8 802B6078 2405001C */  addiu     $a1, $zero, 0x1c
 /* E2A3BC 802B607C 0C00A580 */  jal       mem_clear
@@ -70,8 +70,8 @@ glabel func_802B6000_E2A340
 /* E2A440 802B6100 080AD8CB */  j         .L802B632C
 /* E2A444 802B6104 00000000 */   nop
 .L802B6108:
-/* E2A448 802B6108 3C10802B */  lui       $s0, %hi(func_802B6350_E28D80)
-/* E2A44C 802B610C 26106350 */  addiu     $s0, $s0, %lo(func_802B6350_E28D80)
+/* E2A448 802B6108 3C10802B */  lui       $s0, %hi(D_802B6350_E2A690)
+/* E2A44C 802B610C 26106350 */  addiu     $s0, $s0, %lo(D_802B6350_E2A690)
 /* E2A450 802B6110 8E020000 */  lw        $v0, ($s0)
 /* E2A454 802B6114 3C0140C9 */  lui       $at, 0x40c9
 /* E2A458 802B6118 34210FD0 */  ori       $at, $at, 0xfd0
@@ -131,8 +131,8 @@ glabel func_802B6000_E2A340
 .L802B61EC:
 /* E2A52C 802B61EC E600000C */  swc1      $f0, 0xc($s0)
 .L802B61F0:
-/* E2A530 802B61F0 3C10802B */  lui       $s0, %hi(func_802B6350_E28D80)
-/* E2A534 802B61F4 26106350 */  addiu     $s0, $s0, %lo(func_802B6350_E28D80)
+/* E2A530 802B61F0 3C10802B */  lui       $s0, %hi(D_802B6350_E2A690)
+/* E2A534 802B61F4 26106350 */  addiu     $s0, $s0, %lo(D_802B6350_E2A690)
 /* E2A538 802B61F8 8E020000 */  lw        $v0, ($s0)
 /* E2A53C 802B61FC 3C0140C9 */  lui       $at, 0x40c9
 /* E2A540 802B6200 34210FD0 */  ori       $at, $at, 0xfd0
@@ -169,8 +169,8 @@ glabel func_802B6000_E2A340
 /* E2A5B8 802B6278 8E020000 */  lw        $v0, ($s0)
 /* E2A5BC 802B627C E62000A8 */  swc1      $f0, 0xa8($s1)
 /* E2A5C0 802B6280 C4400014 */  lwc1      $f0, 0x14($v0)
-/* E2A5C4 802B6284 3C01802B */  lui       $at, %hi(D_802B6360)
-/* E2A5C8 802B6288 D4226360 */  ldc1      $f2, %lo(D_802B6360)($at)
+/* E2A5C4 802B6284 3C01802B */  lui       $at, %hi(D_802B6360_E2A6A0)
+/* E2A5C8 802B6288 D4226360 */  ldc1      $f2, %lo(D_802B6360_E2A6A0)($at)
 /* E2A5CC 802B628C 46000021 */  cvt.d.s   $f0, $f0
 /* E2A5D0 802B6290 46220000 */  add.d     $f0, $f0, $f2
 /* E2A5D4 802B6294 3C014220 */  lui       $at, 0x4220

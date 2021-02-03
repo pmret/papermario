@@ -11,8 +11,8 @@ glabel func_80242754_E07AB4
 /* E07ACC 8024276C 8E050000 */  lw        $a1, ($s0)
 /* E07AD0 80242770 0C0B1EAF */  jal       get_variable
 /* E07AD4 80242774 26100004 */   addiu    $s0, $s0, 4
-/* E07AD8 80242778 3C048035 */  lui       $a0, %hi(D_8034F800)
-/* E07ADC 8024277C 2484F800 */  addiu     $a0, $a0, %lo(D_8034F800)
+/* E07AD8 80242778 3C048035 */  lui       $a0, %hi(gSpriteHeapPtr)
+/* E07ADC 8024277C 2484F800 */  addiu     $a0, $a0, %lo(gSpriteHeapPtr)
 /* E07AE0 80242780 8E100000 */  lw        $s0, ($s0)
 /* E07AE4 80242784 0C00A41B */  jal       _heap_malloc
 /* E07AE8 80242788 0040282D */   daddu    $a1, $v0, $zero

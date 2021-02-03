@@ -201,9 +201,9 @@ glabel BoostAttack
 /* 19E89C 8026FFBC 10400063 */  beqz      $v0, .L8027014C
 /* 19E8A0 8026FFC0 46020580 */   add.s    $f22, $f0, $f2
 /* 19E8A4 8026FFC4 00031080 */  sll       $v0, $v1, 2
-/* 19E8A8 8026FFC8 3C01802A */  lui       $at, %hi(jtbl_8029D808_1CC0E8)
+/* 19E8A8 8026FFC8 3C01802A */  lui       $at, %hi(jtbl_8029D808)
 /* 19E8AC 8026FFCC 00220821 */  addu      $at, $at, $v0
-/* 19E8B0 8026FFD0 8C22D808 */  lw        $v0, %lo(jtbl_8029D808_1CC0E8)($at)
+/* 19E8B0 8026FFD0 8C22D808 */  lw        $v0, %lo(jtbl_8029D808)($at)
 /* 19E8B4 8026FFD4 00400008 */  jr        $v0
 /* 19E8B8 8026FFD8 00000000 */   nop
 glabel L8026FFDC_19E8BC

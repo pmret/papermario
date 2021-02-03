@@ -9,8 +9,8 @@ glabel func_80241390_87AF70
 /* 87AF80 802413A0 84A5A552 */  lh        $a1, %lo(gCollisionStatus+0x2)($a1)
 /* 87AF84 802413A4 2407000E */  addiu     $a3, $zero, 0xe
 /* 87AF88 802413A8 24060010 */  addiu     $a2, $zero, 0x10
-/* 87AF8C 802413AC 3C038024 */  lui       $v1, %hi(D_802449B0)
-/* 87AF90 802413B0 246349B0 */  addiu     $v1, $v1, %lo(D_802449B0)
+/* 87AF8C 802413AC 3C038024 */  lui       $v1, %hi(D_802449B0_87E590)
+/* 87AF90 802413B0 246349B0 */  addiu     $v1, $v1, %lo(D_802449B0_87E590)
 .L802413B4:
 /* 87AF94 802413B4 8C620000 */  lw        $v0, ($v1)
 /* 87AF98 802413B8 54A20008 */  bnel      $a1, $v0, .L802413DC

@@ -39,9 +39,9 @@ glabel begin_battle
 /* 16FB74 80241294 104001FC */  beqz      $v0, .L80241A88
 /* 16FB78 80241298 AE950438 */   sw       $s5, 0x438($s4)
 /* 16FB7C 8024129C 00031080 */  sll       $v0, $v1, 2
-/* 16FB80 802412A0 3C01802A */  lui       $at, %hi(jtbl_8029CA88_1CB368)
+/* 16FB80 802412A0 3C01802A */  lui       $at, %hi(jtbl_8029CA88)
 /* 16FB84 802412A4 00220821 */  addu      $at, $at, $v0
-/* 16FB88 802412A8 8C22CA88 */  lw        $v0, %lo(jtbl_8029CA88_1CB368)($at)
+/* 16FB88 802412A8 8C22CA88 */  lw        $v0, %lo(jtbl_8029CA88)($at)
 /* 16FB8C 802412AC 00400008 */  jr        $v0
 /* 16FB90 802412B0 00000000 */   nop
 glabel L802412B4_16FB94

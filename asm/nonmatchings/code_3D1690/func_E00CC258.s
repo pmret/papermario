@@ -97,9 +97,9 @@ glabel func_E00CC258
 /* 3D1A48 E00CC3B8 10400159 */  beqz      $v0, .LE00CC920
 /* 3D1A4C E00CC3BC E62203B0 */   swc1     $f2, 0x3b0($s1)
 /* 3D1A50 E00CC3C0 00031080 */  sll       $v0, $v1, 2
-/* 3D1A54 E00CC3C4 3C01E00D */  lui       $at, %hi(jtbl_E00CCE78_3D2508)
+/* 3D1A54 E00CC3C4 3C01E00D */  lui       $at, %hi(jtbl_E00CCE78)
 /* 3D1A58 E00CC3C8 00220821 */  addu      $at, $at, $v0
-/* 3D1A5C E00CC3CC 8C22CE78 */  lw        $v0, %lo(jtbl_E00CCE78_3D2508)($at)
+/* 3D1A5C E00CC3CC 8C22CE78 */  lw        $v0, %lo(jtbl_E00CCE78)($at)
 /* 3D1A60 E00CC3D0 00400008 */  jr        $v0
 /* 3D1A64 E00CC3D4 00000000 */   nop
 glabel LE00CC3D8_3D1A68

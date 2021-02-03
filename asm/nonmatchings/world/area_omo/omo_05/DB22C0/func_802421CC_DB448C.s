@@ -7,12 +7,12 @@ glabel func_802421CC_DB448C
 /* DB4494 802421D4 8C82000C */  lw        $v0, 0xc($a0)
 /* DB4498 802421D8 0C0B1EAF */  jal       get_variable
 /* DB449C 802421DC 8C450000 */   lw       $a1, ($v0)
-/* DB44A0 802421E0 3C018024 */  lui       $at, %hi(func_8024309C_95E29C)
-/* DB44A4 802421E4 AC22309C */  sw        $v0, %lo(func_8024309C_95E29C)($at)
+/* DB44A0 802421E0 3C018024 */  lui       $at, %hi(D_8024309C_DB535C)
+/* DB44A4 802421E4 AC22309C */  sw        $v0, %lo(D_8024309C_DB535C)($at)
 /* DB44A8 802421E8 24020002 */  addiu     $v0, $zero, 2
 /* DB44AC 802421EC 8FBF0010 */  lw        $ra, 0x10($sp)
 /* DB44B0 802421F0 24030001 */  addiu     $v1, $zero, 1
-/* DB44B4 802421F4 3C018024 */  lui       $at, %hi(D_80243098)
-/* DB44B8 802421F8 AC233098 */  sw        $v1, %lo(D_80243098)($at)
+/* DB44B4 802421F4 3C018024 */  lui       $at, %hi(D_80243098_DB5358)
+/* DB44B8 802421F8 AC233098 */  sw        $v1, %lo(D_80243098_DB5358)($at)
 /* DB44BC 802421FC 03E00008 */  jr        $ra
 /* DB44C0 80242200 27BD0018 */   addiu    $sp, $sp, 0x18

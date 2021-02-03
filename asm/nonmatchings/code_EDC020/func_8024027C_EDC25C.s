@@ -4,8 +4,8 @@
 glabel func_8024027C_EDC25C
 /* EDC25C 8024027C 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* EDC260 80240280 AFB00010 */  sw        $s0, 0x10($sp)
-/* EDC264 80240284 3C108024 */  lui       $s0, %hi(func_802417EC_C5BF2C)
-/* EDC268 80240288 261017EC */  addiu     $s0, $s0, %lo(func_802417EC_C5BF2C)
+/* EDC264 80240284 3C108024 */  lui       $s0, %hi(D_802417EC_EDD7CC)
+/* EDC268 80240288 261017EC */  addiu     $s0, $s0, %lo(D_802417EC_EDD7CC)
 /* EDC26C 8024028C AFBF0018 */  sw        $ra, 0x18($sp)
 /* EDC270 80240290 AFB10014 */  sw        $s1, 0x14($sp)
 /* EDC274 80240294 8E020000 */  lw        $v0, ($s0)
@@ -39,8 +39,8 @@ glabel func_8024027C_EDC25C
 /* EDC2D8 802402F8 28620010 */  slti      $v0, $v1, 0x10
 /* EDC2DC 802402FC 1440FFFA */  bnez      $v0, .L802402E8
 /* EDC2E0 80240300 24840004 */   addiu    $a0, $a0, 4
-/* EDC2E4 80240304 3C108024 */  lui       $s0, %hi(func_802417EC_C5BF2C)
-/* EDC2E8 80240308 261017EC */  addiu     $s0, $s0, %lo(func_802417EC_C5BF2C)
+/* EDC2E4 80240304 3C108024 */  lui       $s0, %hi(D_802417EC_EDD7CC)
+/* EDC2E8 80240308 261017EC */  addiu     $s0, $s0, %lo(D_802417EC_EDD7CC)
 /* EDC2EC 8024030C 0C00B007 */  jal       func_8002C01C
 /* EDC2F0 80240310 8E040000 */   lw       $a0, ($s0)
 /* EDC2F4 80240314 AE000000 */  sw        $zero, ($s0)

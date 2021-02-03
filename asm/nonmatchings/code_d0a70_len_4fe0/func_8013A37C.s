@@ -11,8 +11,8 @@ glabel func_8013A37C
 /* D0A94 8013A394 AFBF001C */  sw        $ra, 0x1c($sp)
 /* D0A98 8013A398 AFB20018 */  sw        $s2, 0x18($sp)
 .L8013A39C:
-/* D0A9C 8013A39C 3C048035 */  lui       $a0, %hi(D_8034F800)
-/* D0AA0 8013A3A0 2484F800 */  addiu     $a0, $a0, %lo(D_8034F800)
+/* D0A9C 8013A39C 3C048035 */  lui       $a0, %hi(gSpriteHeapPtr)
+/* D0AA0 8013A3A0 2484F800 */  addiu     $a0, $a0, %lo(gSpriteHeapPtr)
 /* D0AA4 8013A3A4 3C058015 */  lui       $a1, %hi(D_8014EE60)
 /* D0AA8 8013A3A8 94A5EE60 */  lhu       $a1, %lo(D_8014EE60)($a1)
 /* D0AAC 8013A3AC 26310001 */  addiu     $s1, $s1, 1
@@ -22,8 +22,8 @@ glabel func_8013A37C
 /* D0ABC 8013A3BC 2A220002 */  slti      $v0, $s1, 2
 /* D0AC0 8013A3C0 1440FFF6 */  bnez      $v0, .L8013A39C
 /* D0AC4 8013A3C4 26100004 */   addiu    $s0, $s0, 4
-/* D0AC8 8013A3C8 3C048035 */  lui       $a0, %hi(D_8034F800)
-/* D0ACC 8013A3CC 2484F800 */  addiu     $a0, $a0, %lo(D_8034F800)
+/* D0AC8 8013A3C8 3C048035 */  lui       $a0, %hi(gSpriteHeapPtr)
+/* D0ACC 8013A3CC 2484F800 */  addiu     $a0, $a0, %lo(gSpriteHeapPtr)
 /* D0AD0 8013A3D0 0C00A41B */  jal       _heap_malloc
 /* D0AD4 8013A3D4 24052B98 */   addiu    $a1, $zero, 0x2b98
 /* D0AD8 8013A3D8 3C038015 */  lui       $v1, %hi(D_80156954)

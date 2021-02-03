@@ -21,9 +21,9 @@ glabel func_802A2C84
 /* 417A54 802A2CC4 104003E9 */  beqz      $v0, .L802A3C6C
 /* 417A58 802A2CC8 AFB00028 */   sw       $s0, 0x28($sp)
 /* 417A5C 802A2CCC 00031080 */  sll       $v0, $v1, 2
-/* 417A60 802A2CD0 3C01802B */  lui       $at, %hi(jtbl_802AB808_420598)
+/* 417A60 802A2CD0 3C01802B */  lui       $at, %hi(jtbl_802AB808)
 /* 417A64 802A2CD4 00220821 */  addu      $at, $at, $v0
-/* 417A68 802A2CD8 8C22B808 */  lw        $v0, %lo(jtbl_802AB808_420598)($at)
+/* 417A68 802A2CD8 8C22B808 */  lw        $v0, %lo(jtbl_802AB808)($at)
 /* 417A6C 802A2CDC 00400008 */  jr        $v0
 /* 417A70 802A2CE0 00000000 */   nop
 glabel L802A2CE4_417A74

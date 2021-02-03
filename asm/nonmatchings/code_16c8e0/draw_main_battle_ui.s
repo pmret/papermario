@@ -41,9 +41,9 @@ glabel draw_main_battle_ui
 /* 16D3E0 8023EB00 2C620023 */  sltiu     $v0, $v1, 0x23
 /* 16D3E4 8023EB04 1040008C */  beqz      $v0, .L8023ED38
 /* 16D3E8 8023EB08 00031080 */   sll      $v0, $v1, 2
-/* 16D3EC 8023EB0C 3C01802A */  lui       $at, %hi(jtbl_8029C9F8_1CB2D8)
+/* 16D3EC 8023EB0C 3C01802A */  lui       $at, %hi(jtbl_8029C9F8)
 /* 16D3F0 8023EB10 00220821 */  addu      $at, $at, $v0
-/* 16D3F4 8023EB14 8C22C9F8 */  lw        $v0, %lo(jtbl_8029C9F8_1CB2D8)($at)
+/* 16D3F4 8023EB14 8C22C9F8 */  lw        $v0, %lo(jtbl_8029C9F8)($at)
 /* 16D3F8 8023EB18 00400008 */  jr        $v0
 /* 16D3FC 8023EB1C 00000000 */   nop
 glabel L8023EB20_16D400
@@ -157,7 +157,7 @@ glabel L8023EC70_16D550
 /* 16D558 8023EC78 0808FB4E */  j         .L8023ED38
 /* 16D55C 8023EC7C 00000000 */   nop
 glabel L8023EC80_16D560
-/* 16D560 8023EC80 0C0911C2 */  jal       pause_cleanup
+/* 16D560 8023EC80 0C0911C2 */  jal       func_80244708
 /* 16D564 8023EC84 00000000 */   nop
 /* 16D568 8023EC88 0808FB4E */  j         .L8023ED38
 /* 16D56C 8023EC8C 00000000 */   nop

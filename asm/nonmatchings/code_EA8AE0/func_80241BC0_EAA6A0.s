@@ -33,8 +33,8 @@ glabel func_80241BC0_EAA6A0
 /* EAA70C 80241C2C 08090743 */  j         .L80241D0C
 /* EAA710 80241C30 00000000 */   nop
 .L80241C34:
-/* EAA714 80241C34 3C028024 */  lui       $v0, %hi(D_80243BB8)
-/* EAA718 80241C38 24423BB8 */  addiu     $v0, $v0, %lo(D_80243BB8)
+/* EAA714 80241C34 3C028024 */  lui       $v0, %hi(D_80243BB8_EAC698)
+/* EAA718 80241C38 24423BB8 */  addiu     $v0, $v0, %lo(D_80243BB8_EAC698)
 /* EAA71C 80241C3C 00641821 */  addu      $v1, $v1, $a0
 /* EAA720 80241C40 00032080 */  sll       $a0, $v1, 2
 /* EAA724 80241C44 00822021 */  addu      $a0, $a0, $v0
@@ -47,8 +47,8 @@ glabel func_80241BC0_EAA6A0
 /* EAA740 80241C60 3C068020 */   lui      $a2, 0x8020
 .L80241C64:
 /* EAA744 80241C64 3C068020 */  lui       $a2, 0x8020
-/* EAA748 80241C68 3C028024 */  lui       $v0, %hi(D_80243BB8)
-/* EAA74C 80241C6C 24423BB8 */  addiu     $v0, $v0, %lo(D_80243BB8)
+/* EAA748 80241C68 3C028024 */  lui       $v0, %hi(D_80243BB8_EAC698)
+/* EAA74C 80241C6C 24423BB8 */  addiu     $v0, $v0, %lo(D_80243BB8_EAC698)
 /* EAA750 80241C70 00041840 */  sll       $v1, $a0, 1
 /* EAA754 80241C74 00641821 */  addu      $v1, $v1, $a0
 /* EAA758 80241C78 00032080 */  sll       $a0, $v1, 2
@@ -62,8 +62,8 @@ glabel func_80241BC0_EAA6A0
 /* EAA778 80241C98 34C64000 */   ori      $a2, $a2, 0x4000
 .L80241C9C:
 /* EAA77C 80241C9C 3C068020 */  lui       $a2, 0x8020
-/* EAA780 80241CA0 3C028024 */  lui       $v0, %hi(D_80243BB8)
-/* EAA784 80241CA4 24423BB8 */  addiu     $v0, $v0, %lo(D_80243BB8)
+/* EAA780 80241CA0 3C028024 */  lui       $v0, %hi(D_80243BB8_EAC698)
+/* EAA784 80241CA4 24423BB8 */  addiu     $v0, $v0, %lo(D_80243BB8_EAC698)
 /* EAA788 80241CA8 00041840 */  sll       $v1, $a0, 1
 /* EAA78C 80241CAC 00641821 */  addu      $v1, $v1, $a0
 /* EAA790 80241CB0 00032080 */  sll       $a0, $v1, 2
@@ -76,8 +76,8 @@ glabel func_80241BC0_EAA6A0
 /* EAA7AC 80241CCC 08090741 */  j         .L80241D04
 /* EAA7B0 80241CD0 34C67000 */   ori      $a2, $a2, 0x7000
 .L80241CD4:
-/* EAA7B4 80241CD4 3C028024 */  lui       $v0, %hi(D_80243BB8)
-/* EAA7B8 80241CD8 24423BB8 */  addiu     $v0, $v0, %lo(D_80243BB8)
+/* EAA7B4 80241CD4 3C028024 */  lui       $v0, %hi(D_80243BB8_EAC698)
+/* EAA7B8 80241CD8 24423BB8 */  addiu     $v0, $v0, %lo(D_80243BB8_EAC698)
 /* EAA7BC 80241CDC 00041840 */  sll       $v1, $a0, 1
 /* EAA7C0 80241CE0 00641821 */  addu      $v1, $v1, $a0
 /* EAA7C4 80241CE4 00032080 */  sll       $a0, $v1, 2

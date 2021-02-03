@@ -4,7 +4,6 @@ import argparse
 import importlib
 import importlib.util
 import os
-from ranges import Range, RangeDict
 from pathlib import Path
 import yaml
 import pickle
@@ -12,6 +11,7 @@ from colorama import Style, Fore
 from segtypes.segment import parse_segment_type
 from segtypes.n64.code import N64SegCode
 from util import log
+from util.symbol import Symbol
 
 parser = argparse.ArgumentParser(
     description="Split a rom given a rom, a config, and output directory")
@@ -24,6 +24,7 @@ parser.add_argument("--verbose", action="store_true",
 parser.add_argument("--new", action="store_true",
                     help="Only split changed segments in config")
 
+sym_isolated_map = {}
 
 def write_ldscript(rom_name, repo_path, sections, options):
     with open(os.path.join(repo_path, rom_name + ".ld"), "w", newline="\n") as f:
@@ -97,10 +98,7 @@ def get_cache_path(repo_path, options):
 
 
 def gather_symbols(symbol_addrs_path, undefined_syms_path):
-    symbols = {}
-    special_labels = {}
-    labels_to_add = set()
-    ranges = RangeDict()
+    symbols = []
 
     # Manual list of func name / addrs
     if os.path.exists(symbol_addrs_path):
@@ -120,17 +118,23 @@ def gather_symbols(symbol_addrs_path, undefined_syms_path):
                 line_split = line.split("=")
                 name = line_split[0].strip()
                 addr = int(line_split[1].strip()[:-1], 0)
-                symbols[addr] = name
+
+                sym = Symbol(addr, given_name=name)
 
                 if line_ext:
                     for info in line_ext.split(" "):
-                        if info == "!":
-                            labels_to_add.add(name)
-                            special_labels[addr] = name
+                        if info.startswith("type:"):
+                            type = info.split(":")[1]
+                            sym.type = type
                         if info.startswith("size:"):
                             size = int(info.split(":")[1], 0)
-                            ranges.add(Range(addr, addr + size), name)
-    
+                            sym.size = size
+                        if info.startswith("rom:"):
+                            rom_addr = int(info.split(":")[1], 0)
+                            sym.rom = rom_addr
+                symbols.append(sym)
+
+    # Maybe let's not use this
     if os.path.exists(undefined_syms_path):
         with open(undefined_syms_path) as f:
             us_lines = f.readlines()
@@ -141,27 +145,9 @@ def gather_symbols(symbol_addrs_path, undefined_syms_path):
                 line_split = line.split("=")
                 name = line_split[0].strip()
                 addr = int(line_split[1].strip()[:-1], 0)
-                symbols[addr] = name
+                symbols.append(Symbol(addr, given_name=name))
 
-    return symbols, labels_to_add, special_labels, ranges
-
-
-def gather_c_variables(undefined_syms_path):
-    vars = {}
-
-    if os.path.exists(undefined_syms_path):
-        with open(undefined_syms_path) as f:
-            us_lines = f.readlines()
-
-        for line in us_lines:
-            line = line.strip()
-            if not line == "" and not line.startswith("//"):
-                line_split = line.split("=")
-                name = line_split[0].strip()
-                addr = int(line_split[1].strip()[:-1], 0)
-                vars[addr] = name
-
-    return vars
+    return symbols
 
 
 def get_base_segment_class(seg_type, platform):
@@ -239,6 +225,46 @@ def initialize_segments(options, config_path, config_segments):
 
     return ret
 
+def is_symbol_isolated(symbol, all_segments):
+    if symbol in sym_isolated_map:
+        return sym_isolated_map[symbol]
+
+    relevant_segs = 0
+
+    for segment in all_segments:
+        if segment.contains_vram(symbol.vram_start):
+            relevant_segs += 1
+            if relevant_segs > 1:
+                break
+
+    sym_isolated_map[symbol] = relevant_segs < 2
+    return sym_isolated_map[symbol]
+
+def get_segment_symbols(segment, all_symbols, all_segments):
+    seg_syms = {}
+    other_syms = {}
+
+    for symbol in all_symbols:
+        if is_symbol_isolated(symbol, all_segments) and not symbol.rom:
+            if segment.contains_vram(symbol.vram_start):
+                if symbol.vram_start not in seg_syms:
+                    seg_syms[symbol.vram_start] = []
+                seg_syms[symbol.vram_start].append(symbol)
+            else:
+                if symbol.vram_start not in other_syms:
+                    other_syms[symbol.vram_start] = []
+                other_syms[symbol.vram_start].append(symbol)
+        else:
+            if symbol.rom and segment.contains_rom(symbol.rom):
+                if symbol.vram_start not in seg_syms:
+                    seg_syms[symbol.vram_start] = []
+                seg_syms[symbol.vram_start].append(symbol)
+            else:
+                if symbol.vram_start not in other_syms:
+                    other_syms[symbol.vram_start] = []
+                other_syms[symbol.vram_start].append(symbol)
+
+    return seg_syms, other_syms
 
 def main(rom_path, config_path, repo_path, modes, verbose, ignore_cache=False):
     with open(rom_path, "rb") as f:
@@ -257,15 +283,13 @@ def main(rom_path, config_path, repo_path, modes, verbose, ignore_cache=False):
 
     symbol_addrs_path = get_symbol_addrs_path(repo_path, options)
     undefined_syms_path = get_undefined_syms_path(repo_path, options)
-    provided_symbols, c_func_labels_to_add, special_labels, ranges = gather_symbols(symbol_addrs_path, undefined_syms_path)
+    all_symbols = gather_symbols(symbol_addrs_path, undefined_syms_path)
+    isolated_symbols = {}
+    symbol_ranges = [s for s in all_symbols if s.size > 4]
     platform = get_platform(options)
 
     processed_segments = []
     ld_sections = []
-
-    defined_funcs = {}
-    undefined_funcs = set()
-    undefined_syms = set()
 
     seg_sizes = {}
     seg_split = {}
@@ -284,11 +308,11 @@ def main(rom_path, config_path, repo_path, modes, verbose, ignore_cache=False):
 
     for segment in all_segments:
         if platform == "n64" and type(segment) == N64SegCode: # remove special-case sometime
-            segment.all_functions = defined_funcs
-            segment.provided_symbols = provided_symbols
-            segment.special_labels = special_labels
-            segment.c_labels_to_add = c_func_labels_to_add
-            segment.symbol_ranges = ranges
+            segment_symbols, other_symbols = get_segment_symbols(segment, all_symbols, all_segments)
+            segment.seg_symbols = segment_symbols
+            segment.ext_symbols = other_symbols
+            segment.all_symbols = all_symbols
+            segment.symbol_ranges = symbol_ranges
 
         segment.check()
 
@@ -319,11 +343,6 @@ def main(rom_path, config_path, repo_path, modes, verbose, ignore_cache=False):
                     if len(segment.errors) == 0:
                         processed_segments.append(segment)
 
-                        if platform == "n64" and type(segment) == N64SegCode: # edge case
-                            undefined_funcs |= segment.glabels_to_add
-                            defined_funcs = {**defined_funcs, **segment.glabels_added}
-                            undefined_syms |= segment.undefined_syms_to_add
-
                     seg_split[tp] += 1
 
         log.dot(status=segment.status())
@@ -339,44 +358,39 @@ def main(rom_path, config_path, repo_path, modes, verbose, ignore_cache=False):
             log.write(f"saving {config['basename']}.ld")
         write_ldscript(config['basename'], repo_path, ld_sections, options)
 
+    undefined_syms_to_write = [s for s in all_symbols if s.referenced and not s.defined and not s.type == "func"]
+    undefined_funcs_to_write = [s for s in all_symbols if s.referenced and not s.defined and s.type == "func"]
+
     # Write undefined_funcs_auto.txt
     undefined_funcs_auto_path = get_undefined_funcs_auto_path(repo_path, options)
     if verbose:
         log.write(f"saving {undefined_funcs_auto_path}")
-    c_predefined_funcs = set(provided_symbols.keys())
-    to_write = sorted(undefined_funcs - set(defined_funcs.values()) - c_predefined_funcs)
+
+    to_write = undefined_funcs_to_write
     if len(to_write) > 0:
         with open(undefined_funcs_auto_path, "w", newline="\n") as f:
-            for line in to_write:
-                f.write(line + " = 0x" + line.split("_")[1][:8].upper() + ";\n")
+            for symbol in to_write:
+                f.write(f"{symbol.name} = 0x{symbol.vram_start:X};\n")
 
     # write undefined_syms_auto.txt
     undefined_syms_auto_path = get_undefined_syms_auto_path(repo_path, options)
     if verbose:
         log.write(f"saving {undefined_syms_auto_path}")
-    to_write = sorted(undefined_syms, key=lambda x:x[0])
+    to_write = undefined_syms_to_write
     if len(to_write) > 0:
         with open(undefined_syms_auto_path, "w", newline="\n") as f:
-            for sym in to_write:
-                f.write(f"{sym[0]} = 0x{sym[1]:X};\n")
+            for symbol in to_write:
+                f.write(f"{symbol.name} = 0x{symbol.vram_start:X};\n")
 
-    # print warnings and errors during split/postsplit
-    had_error = False
+    # print warnings during split/postsplit
     for segment in all_segments:
-        if len(segment.warnings) > 0 or len(segment.errors) > 0:
+        if len(segment.warnings) > 0:
             log.write(f"{Style.DIM}0x{segment.rom_start:06X}{Style.RESET_ALL} {segment.type} {Style.BRIGHT}{segment.name}{Style.RESET_ALL}:")
 
             for warn in segment.warnings:
                 log.write("warning: " + warn, status="warn")
 
-            for error in segment.errors:
-                log.write("error: " + error, status="error")
-                had_error = True
-
             log.write("") # empty line
-
-    if had_error:
-        return 1
 
     # Statistics
     unk_size = seg_sizes.get("unk", 0)

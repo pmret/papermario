@@ -19,9 +19,9 @@ glabel func_80241B5C_95CD5C
 /* 95CD90 80241B90 34A502E0 */  ori       $a1, $a1, 0x2e0
 /* 95CD94 80241B94 0C0B1EAF */  jal       get_variable
 /* 95CD98 80241B98 0000202D */   daddu    $a0, $zero, $zero
-/* 95CD9C 80241B9C 3C038024 */  lui       $v1, %hi(D_8024521C)
+/* 95CD9C 80241B9C 3C038024 */  lui       $v1, %hi(D_8024521C_96041C)
 /* 95CDA0 80241BA0 00621821 */  addu      $v1, $v1, $v0
-/* 95CDA4 80241BA4 9063521C */  lbu       $v1, %lo(D_8024521C)($v1)
+/* 95CDA4 80241BA4 9063521C */  lbu       $v1, %lo(D_8024521C_96041C)($v1)
 /* 95CDA8 80241BA8 8E220084 */  lw        $v0, 0x84($s1)
 /* 95CDAC 80241BAC 54430006 */  bnel      $v0, $v1, .L80241BC8
 /* 95CDB0 80241BB0 AE200084 */   sw       $zero, 0x84($s1)

@@ -16,9 +16,9 @@ glabel func_8011EBF0
 /* B531C 8011EC1C 10400105 */  beqz      $v0, .L8011F034
 /* B5320 8011EC20 26100002 */   addiu    $s0, $s0, 2
 /* B5324 8011EC24 00031080 */  sll       $v0, $v1, 2
-/* B5328 8011EC28 3C018015 */  lui       $at, %hi(jtbl_8014FE60_E6560)
+/* B5328 8011EC28 3C018015 */  lui       $at, %hi(jtbl_8014FE60)
 /* B532C 8011EC2C 00220821 */  addu      $at, $at, $v0
-/* B5330 8011EC30 8C22FE60 */  lw        $v0, %lo(jtbl_8014FE60_E6560)($at)
+/* B5330 8011EC30 8C22FE60 */  lw        $v0, %lo(jtbl_8014FE60)($at)
 /* B5334 8011EC34 00400008 */  jr        $v0
 /* B5338 8011EC38 00000000 */   nop
 glabel L8011EC3C_B533C

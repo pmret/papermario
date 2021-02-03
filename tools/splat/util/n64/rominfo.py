@@ -9,6 +9,7 @@ parser.add_argument('rom', help='path to a .z64 rom')
 parser.add_argument('--encoding', help='Text encoding the game header is using; see docs.python.org/3/library/codecs.html#standard-encodings for valid encodings', default='ASCII')
 
 country_codes = {
+    0x00: "Unknown",
     0x37: "Beta",
     0x41: "Asian (NTSC)",
     0x42: "Brazillian",
@@ -102,7 +103,7 @@ class N64Rom:
     def get_country_name(self):
         return country_codes[self.country_code]
 
-
+# TODO: support .n64 extension
 def main():
     args = parser.parse_args()
     rom = get_info(args.rom, args.encoding)

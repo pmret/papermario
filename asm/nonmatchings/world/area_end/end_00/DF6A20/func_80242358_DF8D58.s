@@ -35,8 +35,8 @@ glabel func_80242358_DF8D58
 /* DF8DC8 802423C8 00C28821 */   addu     $s1, $a2, $v0
 /* DF8DCC 802423CC 04820014 */  bltzl     $a0, .L80242420
 /* DF8DD0 802423D0 AE240000 */   sw       $a0, ($s1)
-/* DF8DD4 802423D4 3C138024 */  lui       $s3, %hi(D_80242D70)
-/* DF8DD8 802423D8 26732D70 */  addiu     $s3, $s3, %lo(D_80242D70)
+/* DF8DD4 802423D4 3C138024 */  lui       $s3, %hi(D_80242D70_DF9770)
+/* DF8DD8 802423D8 26732D70 */  addiu     $s3, $s3, %lo(D_80242D70_DF9770)
 /* DF8DDC 802423DC 8E650000 */  lw        $a1, ($s3)
 /* DF8DE0 802423E0 3C108025 */  lui       $s0, %hi(D_8024F7F0)
 /* DF8DE4 802423E4 2610F7F0 */  addiu     $s0, $s0, %lo(D_8024F7F0)

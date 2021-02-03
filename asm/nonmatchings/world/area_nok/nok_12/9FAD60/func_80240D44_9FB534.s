@@ -69,8 +69,8 @@ glabel func_80240D44_9FB534
 /* 9FB628 80240E38 08090398 */  j         .L80240E60
 /* 9FB62C 80240E3C E6800018 */   swc1     $f0, 0x18($s4)
 .L80240E40:
-/* 9FB630 80240E40 3C018024 */  lui       $at, %hi(update_player_action)
-/* 9FB634 80240E44 D4225AD0 */  ldc1      $f2, %lo(update_player_action)($at)
+/* 9FB630 80240E40 3C018024 */  lui       $at, %hi(D_80245AD0_A002C0)
+/* 9FB634 80240E44 D4225AD0 */  ldc1      $f2, %lo(D_80245AD0_A002C0)($at)
 /* 9FB638 80240E48 44820000 */  mtc1      $v0, $f0
 /* 9FB63C 80240E4C 00000000 */  nop
 /* 9FB640 80240E50 46800021 */  cvt.d.w   $f0, $f0

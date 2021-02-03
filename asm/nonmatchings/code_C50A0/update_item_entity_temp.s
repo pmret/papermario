@@ -50,9 +50,9 @@ glabel update_item_entity_temp
 /* CBE88 80135788 2C62000F */  sltiu     $v0, $v1, 0xf
 /* CBE8C 8013578C 104002FB */  beqz      $v0, .L8013637C
 /* CBE90 80135790 00031080 */   sll      $v0, $v1, 2
-/* CBE94 80135794 3C018015 */  lui       $at, %hi(jtbl_80150E20_E7520)
+/* CBE94 80135794 3C018015 */  lui       $at, %hi(jtbl_80150E20)
 /* CBE98 80135798 00220821 */  addu      $at, $at, $v0
-/* CBE9C 8013579C 8C220E20 */  lw        $v0, %lo(jtbl_80150E20_E7520)($at)
+/* CBE9C 8013579C 8C220E20 */  lw        $v0, %lo(jtbl_80150E20)($at)
 /* CBEA0 801357A0 00400008 */  jr        $v0
 /* CBEA4 801357A4 00000000 */   nop
 glabel L801357A8_CBEA8

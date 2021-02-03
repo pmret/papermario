@@ -154,9 +154,9 @@ glabel L802A9450_42FB30
 /* 42FBA4 802A94C4 00621823 */  subu      $v1, $v1, $v0
 /* 42FBA8 802A94C8 00031880 */  sll       $v1, $v1, 2
 /* 42FBAC 802A94CC 96220044 */  lhu       $v0, 0x44($s1)
-/* 42FBB0 802A94D0 3C01802B */  lui       $at, %hi(D_802A98E2)
+/* 42FBB0 802A94D0 3C01802B */  lui       $at, %hi(D_802A98E2_42FFC2)
 /* 42FBB4 802A94D4 00230821 */  addu      $at, $at, $v1
-/* 42FBB8 802A94D8 942398E2 */  lhu       $v1, %lo(D_802A98E2)($at)
+/* 42FBB8 802A94D8 942398E2 */  lhu       $v1, %lo(D_802A98E2_42FFC2)($at)
 /* 42FBBC 802A94DC 080AA53B */  j         .L802A94EC
 /* 42FBC0 802A94E0 00431023 */   subu     $v0, $v0, $v1
 .L802A94E4:

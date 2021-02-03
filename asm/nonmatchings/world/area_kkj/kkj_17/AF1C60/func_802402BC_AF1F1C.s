@@ -45,8 +45,8 @@ glabel func_802402BC_AF1F1C
 /* AF1FB4 80240354 3C1E8009 */  lui       $fp, %hi(D_8008A680)
 /* AF1FB8 80240358 27DEA680 */  addiu     $fp, $fp, %lo(D_8008A680)
 /* AF1FBC 8024035C 24170001 */  addiu     $s7, $zero, 1
-/* AF1FC0 80240360 3C148024 */  lui       $s4, %hi(D_8024092C)
-/* AF1FC4 80240364 2694092C */  addiu     $s4, $s4, %lo(D_8024092C)
+/* AF1FC0 80240360 3C148024 */  lui       $s4, %hi(D_8024092C_AF258C)
+/* AF1FC4 80240364 2694092C */  addiu     $s4, $s4, %lo(D_8024092C_AF258C)
 /* AF1FC8 80240368 02A0882D */  daddu     $s1, $s5, $zero
 .L8024036C:
 /* AF1FCC 8024036C 8E650088 */  lw        $a1, 0x88($s3)
@@ -131,9 +131,9 @@ glabel func_802402BC_AF1F1C
 /* AF20EC 8024048C 8C460108 */  lw        $a2, 0x108($v0)
 /* AF20F0 80240490 8E6300AC */  lw        $v1, 0xac($s3)
 /* AF20F4 80240494 00061080 */  sll       $v0, $a2, 2
-/* AF20F8 80240498 3C018024 */  lui       $at, %hi(D_8024092C)
+/* AF20F8 80240498 3C018024 */  lui       $at, %hi(D_8024092C_AF258C)
 /* AF20FC 8024049C 00220821 */  addu      $at, $at, $v0
-/* AF2100 802404A0 8C22092C */  lw        $v0, %lo(D_8024092C)($at)
+/* AF2100 802404A0 8C22092C */  lw        $v0, %lo(D_8024092C_AF258C)($at)
 /* AF2104 802404A4 14600006 */  bnez      $v1, .L802404C0
 /* AF2108 802404A8 AE620084 */   sw       $v0, 0x84($s3)
 /* AF210C 802404AC 8E65008C */  lw        $a1, 0x8c($s3)

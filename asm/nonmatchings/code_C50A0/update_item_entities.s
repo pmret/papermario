@@ -59,9 +59,9 @@ glabel update_item_entities
 /* C86B8 80131FB8 2C62001D */  sltiu     $v0, $v1, 0x1d
 /* C86BC 80131FBC 10400014 */  beqz      $v0, .L80132010
 /* C86C0 80131FC0 00031080 */   sll      $v0, $v1, 2
-/* C86C4 80131FC4 3C018015 */  lui       $at, %hi(jtbl_80150BD8_E72D8)
+/* C86C4 80131FC4 3C018015 */  lui       $at, %hi(jtbl_80150BD8)
 /* C86C8 80131FC8 00220821 */  addu      $at, $at, $v0
-/* C86CC 80131FCC 8C220BD8 */  lw        $v0, %lo(jtbl_80150BD8_E72D8)($at)
+/* C86CC 80131FCC 8C220BD8 */  lw        $v0, %lo(jtbl_80150BD8)($at)
 /* C86D0 80131FD0 00400008 */  jr        $v0
 /* C86D4 80131FD4 00000000 */   nop
 glabel L80131FD8_C86D8
@@ -94,9 +94,9 @@ glabel L80132010_C8710
 /* C872C 8013202C 2C62001D */  sltiu     $v0, $v1, 0x1d
 /* C8730 80132030 10400043 */  beqz      $v0, .L80132140
 /* C8734 80132034 00031080 */   sll      $v0, $v1, 2
-/* C8738 80132038 3C018015 */  lui       $at, %hi(jtbl_80150C50_E7350)
+/* C8738 80132038 3C018015 */  lui       $at, %hi(jtbl_80150C50)
 /* C873C 8013203C 00220821 */  addu      $at, $at, $v0
-/* C8740 80132040 8C220C50 */  lw        $v0, %lo(jtbl_80150C50_E7350)($at)
+/* C8740 80132040 8C220C50 */  lw        $v0, %lo(jtbl_80150C50)($at)
 /* C8744 80132044 00400008 */  jr        $v0
 /* C8748 80132048 00000000 */   nop
 glabel L8013204C_C874C

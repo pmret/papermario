@@ -104,8 +104,8 @@ glabel func_80240550_DAD950
 /* DADAD4 802406D4 1040000A */  beqz      $v0, .L80240700
 /* DADAD8 802406D8 4600C106 */   mov.s    $f4, $f24
 /* DADADC 802406DC 4614C081 */  sub.s     $f2, $f24, $f20
-/* DADAE0 802406E0 3C018024 */  lui       $at, %hi(D_80244CB8)
-/* DADAE4 802406E4 D4204CB8 */  ldc1      $f0, %lo(D_80244CB8)($at)
+/* DADAE0 802406E0 3C018024 */  lui       $at, %hi(D_80244CB8_DB20B8)
+/* DADAE4 802406E4 D4204CB8 */  ldc1      $f0, %lo(D_80244CB8_DB20B8)($at)
 /* DADAE8 802406E8 460010A1 */  cvt.d.s   $f2, $f2
 /* DADAEC 802406EC 46201082 */  mul.d     $f2, $f2, $f0
 /* DADAF0 802406F0 00000000 */  nop
@@ -131,8 +131,8 @@ glabel func_80240550_DAD950
 /* DADB3C 8024073C C7A4002C */  lwc1      $f4, 0x2c($sp)
 /* DADB40 80240740 461A2100 */  add.s     $f4, $f4, $f26
 /* DADB44 80240744 46142081 */  sub.s     $f2, $f4, $f20
-/* DADB48 80240748 3C018024 */  lui       $at, %hi(pause_tabs_draw_badges_A2EF00)
-/* DADB4C 8024074C D4204CC0 */  ldc1      $f0, %lo(pause_tabs_draw_badges_A2EF00)($at)
+/* DADB48 80240748 3C018024 */  lui       $at, %hi(D_80244CC0_DB20C0)
+/* DADB4C 8024074C D4204CC0 */  ldc1      $f0, %lo(D_80244CC0_DB20C0)($at)
 /* DADB50 80240750 460010A1 */  cvt.d.s   $f2, $f2
 /* DADB54 80240754 46201082 */  mul.d     $f2, $f2, $f0
 /* DADB58 80240758 00000000 */  nop

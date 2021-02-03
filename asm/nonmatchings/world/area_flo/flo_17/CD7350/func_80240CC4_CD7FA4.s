@@ -15,9 +15,9 @@ glabel func_80240CC4_CD7FA4
 /* CD7FCC 80240CEC 00031C00 */  sll       $v1, $v1, 0x10
 /* CD7FD0 80240CF0 00031B83 */  sra       $v1, $v1, 0xe
 /* CD7FD4 80240CF4 A444008E */  sh        $a0, 0x8e($v0)
-/* CD7FD8 80240CF8 3C018024 */  lui       $at, %hi(D_8024440C)
+/* CD7FD8 80240CF8 3C018024 */  lui       $at, %hi(D_8024440C_CDB6EC)
 /* CD7FDC 80240CFC 00230821 */  addu      $at, $at, $v1
-/* CD7FE0 80240D00 C422440C */  lwc1      $f2, %lo(D_8024440C)($at)
+/* CD7FE0 80240D00 C422440C */  lwc1      $f2, %lo(D_8024440C_CDB6EC)($at)
 /* CD7FE4 80240D04 8443008E */  lh        $v1, 0x8e($v0)
 /* CD7FE8 80240D08 46020000 */  add.s     $f0, $f0, $f2
 /* CD7FEC 80240D0C 28630005 */  slti      $v1, $v1, 5

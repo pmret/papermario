@@ -3,8 +3,8 @@
 
 glabel func_802DBD40
 /* FEE30 802DBD40 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* FEE34 802DBD44 3C048035 */  lui       $a0, %hi(D_8034F800)
-/* FEE38 802DBD48 2484F800 */  addiu     $a0, $a0, %lo(D_8034F800)
+/* FEE34 802DBD44 3C048035 */  lui       $a0, %hi(gSpriteHeapPtr)
+/* FEE38 802DBD48 2484F800 */  addiu     $a0, $a0, %lo(gSpriteHeapPtr)
 /* FEE3C 802DBD4C AFBF0010 */  sw        $ra, 0x10($sp)
 /* FEE40 802DBD50 0C00A41B */  jal       _heap_malloc
 /* FEE44 802DBD54 24050580 */   addiu    $a1, $zero, 0x580

@@ -35,8 +35,8 @@ glabel func_8024146C_DBE71C
 /* DBE790 802414E0 14400010 */  bnez      $v0, .L80241524
 /* DBE794 802414E4 00000000 */   nop
 /* DBE798 802414E8 C6000018 */  lwc1      $f0, 0x18($s0)
-/* DBE79C 802414EC 3C018024 */  lui       $at, %hi(D_80246F18)
-/* DBE7A0 802414F0 D4226F18 */  ldc1      $f2, %lo(D_80246F18)($at)
+/* DBE79C 802414EC 3C018024 */  lui       $at, %hi(D_80246F18_DC41C8)
+/* DBE7A0 802414F0 D4226F18 */  ldc1      $f2, %lo(D_80246F18_DC41C8)($at)
 /* DBE7A4 802414F4 46000021 */  cvt.d.s   $f0, $f0
 /* DBE7A8 802414F8 46220002 */  mul.d     $f0, $f0, $f2
 /* DBE7AC 802414FC 00000000 */  nop

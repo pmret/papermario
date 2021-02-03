@@ -21,8 +21,8 @@ glabel func_802403C0_9EDFB0
 /* 9EDFF0 80240400 8E050000 */  lw        $a1, ($s0)
 /* 9EDFF4 80240404 0C0B1EAF */  jal       get_variable
 /* 9EDFF8 80240408 0040802D */   daddu    $s0, $v0, $zero
-/* 9EDFFC 8024040C 3C038024 */  lui       $v1, %hi(D_802413F8)
-/* 9EE000 80240410 246313F8 */  addiu     $v1, $v1, %lo(D_802413F8)
+/* 9EDFFC 8024040C 3C038024 */  lui       $v1, %hi(D_802413F8_9EEFE8)
+/* 9EE000 80240410 246313F8 */  addiu     $v1, $v1, %lo(D_802413F8_9EEFE8)
 /* 9EE004 80240414 06010002 */  bgez      $s0, .L80240420
 /* 9EE008 80240418 0040202D */   daddu    $a0, $v0, $zero
 /* 9EE00C 8024041C 2610000F */  addiu     $s0, $s0, 0xf

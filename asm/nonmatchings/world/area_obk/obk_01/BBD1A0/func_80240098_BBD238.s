@@ -24,8 +24,8 @@ glabel func_80240098_BBD238
 /* BBD284 802400E4 0000982D */  daddu     $s3, $zero, $zero
 /* BBD288 802400E8 AE910074 */  sw        $s1, 0x74($s4)
 /* BBD28C 802400EC 8E050000 */  lw        $a1, ($s0)
-/* BBD290 802400F0 3C108024 */  lui       $s0, %hi(D_80241C58)
-/* BBD294 802400F4 26101C58 */  addiu     $s0, $s0, %lo(D_80241C58)
+/* BBD290 802400F0 3C108024 */  lui       $s0, %hi(D_80241C58_BBEDF8)
+/* BBD294 802400F4 26101C58 */  addiu     $s0, $s0, %lo(D_80241C58_BBEDF8)
 /* BBD298 802400F8 0C0B1EAF */  jal       get_variable
 /* BBD29C 802400FC 0220902D */   daddu    $s2, $s1, $zero
 /* BBD2A0 80240100 AE220008 */  sw        $v0, 8($s1)

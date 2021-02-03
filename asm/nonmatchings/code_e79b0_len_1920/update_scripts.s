@@ -18,8 +18,8 @@ glabel update_scripts
 /* E8758 802C3DA8 24030001 */  addiu     $v1, $zero, 1
 /* E875C 802C3DAC 10430042 */  beq       $v0, $v1, .L802C3EB8
 /* E8760 802C3DB0 00000000 */   nop
-/* E8764 802C3DB4 3C01802E */  lui       $at, %hi(D_802D9CA4)
-/* E8768 802C3DB8 AC239CA4 */  sw        $v1, %lo(D_802D9CA4)($at)
+/* E8764 802C3DB4 3C01802E */  lui       $at, %hi(gIsUpdatingScripts)
+/* E8768 802C3DB8 AC239CA4 */  sw        $v1, %lo(gIsUpdatingScripts)($at)
 /* E876C 802C3DBC 0C0B0C00 */  jal       sort_scripts
 /* E8770 802C3DC0 0000902D */   daddu    $s2, $zero, $zero
 /* E8774 802C3DC4 3C02802E */  lui       $v0, %hi(gScriptListCount)
@@ -87,8 +87,8 @@ glabel update_scripts
 /* E8858 802C3EA8 1440FFD2 */  bnez      $v0, .L802C3DF4
 /* E885C 802C3EAC 26730004 */   addiu    $s3, $s3, 4
 .L802C3EB0:
-/* E8860 802C3EB0 3C01802E */  lui       $at, %hi(D_802D9CA4)
-/* E8864 802C3EB4 AC209CA4 */  sw        $zero, %lo(D_802D9CA4)($at)
+/* E8860 802C3EB0 3C01802E */  lui       $at, %hi(gIsUpdatingScripts)
+/* E8864 802C3EB4 AC209CA4 */  sw        $zero, %lo(gIsUpdatingScripts)($at)
 .L802C3EB8:
 /* E8868 802C3EB8 8FBF002C */  lw        $ra, 0x2c($sp)
 /* E886C 802C3EBC 8FB60028 */  lw        $s6, 0x28($sp)

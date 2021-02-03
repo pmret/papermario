@@ -19,8 +19,8 @@ glabel func_80240170_A0BE60
 /* A0BE98 802401A8 AFB00030 */  sw        $s0, 0x30($sp)
 /* A0BE9C 802401AC F7B60040 */  sdc1      $f22, 0x40($sp)
 /* A0BEA0 802401B0 F7B40038 */  sdc1      $f20, 0x38($sp)
-/* A0BEA4 802401B4 3C018024 */  lui       $at, %hi(D_80244B40)
-/* A0BEA8 802401B8 D4204B40 */  ldc1      $f0, %lo(D_80244B40)($at)
+/* A0BEA4 802401B4 3C018024 */  lui       $at, %hi(D_80244B40_A10830)
+/* A0BEA8 802401B8 D4204B40 */  ldc1      $f0, %lo(D_80244B40_A10830)($at)
 /* A0BEAC 802401BC 4600D521 */  cvt.d.s   $f20, $f26
 /* A0BEB0 802401C0 4620A580 */  add.d     $f22, $f20, $f0
 /* A0BEB4 802401C4 F7BE0060 */  sdc1      $f30, 0x60($sp)

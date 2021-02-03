@@ -98,8 +98,8 @@ glabel func_802408D0_BC4B50
 /* BC4CA8 80240A28 4500000D */  bc1f      .L80240A60
 /* BC4CAC 80240A2C 00000000 */   nop
 /* BC4CB0 80240A30 C6600028 */  lwc1      $f0, 0x28($s3)
-/* BC4CB4 80240A34 3C018024 */  lui       $at, %hi(D_80243BD0)
-/* BC4CB8 80240A38 D4223BD0 */  ldc1      $f2, %lo(D_80243BD0)($at)
+/* BC4CB4 80240A34 3C018024 */  lui       $at, %hi(D_80243BD0_BC7E50)
+/* BC4CB8 80240A38 D4223BD0 */  ldc1      $f2, %lo(D_80243BD0_BC7E50)($at)
 /* BC4CBC 80240A3C 46000021 */  cvt.d.s   $f0, $f0
 /* BC4CC0 80240A40 46201081 */  sub.d     $f2, $f2, $f0
 /* BC4CC4 80240A44 3C014348 */  lui       $at, 0x4348
@@ -117,8 +117,8 @@ glabel func_802408D0_BC4B50
 /* BC4CF0 80240A70 E6200004 */  swc1      $f0, 4($s1)
 .L80240A74:
 /* BC4CF4 80240A74 C6600028 */  lwc1      $f0, 0x28($s3)
-/* BC4CF8 80240A78 3C018024 */  lui       $at, %hi(D_80243BD8)
-/* BC4CFC 80240A7C D4243BD8 */  ldc1      $f4, %lo(D_80243BD8)($at)
+/* BC4CF8 80240A78 3C018024 */  lui       $at, %hi(D_80243BD8_BC7E58)
+/* BC4CFC 80240A7C D4243BD8 */  ldc1      $f4, %lo(D_80243BD8_BC7E58)($at)
 /* BC4D00 80240A80 46000021 */  cvt.d.s   $f0, $f0
 /* BC4D04 80240A84 4624003E */  c.le.d    $f0, $f4
 /* BC4D08 80240A88 00000000 */  nop

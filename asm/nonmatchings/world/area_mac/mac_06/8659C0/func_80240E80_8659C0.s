@@ -79,8 +79,8 @@ glabel func_80240E80_8659C0
 .L80240F94:
 /* 865AD4 80240F94 3C028011 */  lui       $v0, %hi(gPlayerStatus)
 /* 865AD8 80240F98 2442EFC8 */  addiu     $v0, $v0, %lo(gPlayerStatus)
-/* 865ADC 80240F9C 3C018024 */  lui       $at, %hi(D_80243434)
-/* 865AE0 80240FA0 C4203434 */  lwc1      $f0, %lo(D_80243434)($at)
+/* 865ADC 80240F9C 3C018024 */  lui       $at, %hi(D_80243434_867F74)
+/* 865AE0 80240FA0 C4203434 */  lwc1      $f0, %lo(D_80243434_867F74)($at)
 /* 865AE4 80240FA4 3C030001 */  lui       $v1, 1
 /* 865AE8 80240FA8 4600A000 */  add.s     $f0, $f20, $f0
 /* 865AEC 80240FAC E4580028 */  swc1      $f24, 0x28($v0)

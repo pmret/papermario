@@ -150,8 +150,8 @@ glabel L80240DD8_A6F1B8
 /* A6F2C8 80240EE8 44061000 */  mfc1      $a2, $f2
 /* A6F2CC 80240EEC 0C00A720 */  jal       atan2
 /* A6F2D0 80240EF0 00000000 */   nop
-/* A6F2D4 80240EF4 3C018024 */  lui       $at, %hi(D_80243D68)
-/* A6F2D8 80240EF8 D4223D68 */  ldc1      $f2, %lo(D_80243D68)($at)
+/* A6F2D4 80240EF4 3C018024 */  lui       $at, %hi(D_80243D68_A72148)
+/* A6F2D8 80240EF8 D4223D68 */  ldc1      $f2, %lo(D_80243D68_A72148)($at)
 /* A6F2DC 80240EFC 46000021 */  cvt.d.s   $f0, $f0
 /* A6F2E0 80240F00 46220001 */  sub.d     $f0, $f0, $f2
 /* A6F2E4 80240F04 46200020 */  cvt.s.d   $f0, $f0

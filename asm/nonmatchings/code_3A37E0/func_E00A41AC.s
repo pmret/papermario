@@ -55,9 +55,9 @@ glabel func_E00A41AC
 .LE00A4260:
 /* 3A3A40 E00A4260 104000C4 */  beqz      $v0, .LE00A4574
 /* 3A3A44 E00A4264 00041080 */   sll      $v0, $a0, 2
-/* 3A3A48 E00A4268 3C01E00A */  lui       $at, %hi(jtbl_E00A4AF8_3A42D8)
+/* 3A3A48 E00A4268 3C01E00A */  lui       $at, %hi(jtbl_E00A4AF8)
 /* 3A3A4C E00A426C 00220821 */  addu      $at, $at, $v0
-/* 3A3A50 E00A4270 8C224AF8 */  lw        $v0, %lo(jtbl_E00A4AF8_3A42D8)($at)
+/* 3A3A50 E00A4270 8C224AF8 */  lw        $v0, %lo(jtbl_E00A4AF8)($at)
 /* 3A3A54 E00A4274 00400008 */  jr        $v0
 /* 3A3A58 E00A4278 00000000 */   nop
 glabel LE00A427C_3A3A5C

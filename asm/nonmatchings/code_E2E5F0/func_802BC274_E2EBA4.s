@@ -8,8 +8,8 @@ glabel func_802BC274_E2EBA4
 /* E2EBB0 802BC280 AFBF0014 */  sw        $ra, 0x14($sp)
 /* E2EBB4 802BC284 0C03A8CD */  jal       subtract_hp
 /* E2EBB8 802BC288 24040001 */   addiu    $a0, $zero, 1
-/* E2EBBC 802BC28C 3C05802C */  lui       $a1, %hi(D_802BCC8C)
-/* E2EBC0 802BC290 24A5CC8C */  addiu     $a1, $a1, %lo(D_802BCC8C)
+/* E2EBBC 802BC28C 3C05802C */  lui       $a1, %hi(D_802BCC8C_E2F5BC)
+/* E2EBC0 802BC290 24A5CC8C */  addiu     $a1, $a1, %lo(D_802BCC8C_E2F5BC)
 /* E2EBC4 802BC294 0C0AF074 */  jal       func_802BC1D0_E2EB00
 /* E2EBC8 802BC298 0200202D */   daddu    $a0, $s0, $zero
 /* E2EBCC 802BC29C 0C039769 */  jal       set_action_state

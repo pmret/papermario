@@ -22,12 +22,12 @@ glabel func_802401CC_CAEF0C
 /* CAEF50 80240210 0040982D */  daddu     $s3, $v0, $zero
 /* CAEF54 80240214 0000B02D */  daddu     $s6, $zero, $zero
 /* CAEF58 80240218 02C0902D */  daddu     $s2, $s6, $zero
-/* CAEF5C 8024021C 3C148024 */  lui       $s4, %hi(D_80241FB8)
-/* CAEF60 80240220 26941FB8 */  addiu     $s4, $s4, %lo(D_80241FB8)
+/* CAEF5C 8024021C 3C148024 */  lui       $s4, %hi(D_80241FB8_CB0CF8)
+/* CAEF60 80240220 26941FB8 */  addiu     $s4, $s4, %lo(D_80241FB8_CB0CF8)
 /* CAEF64 80240224 0260882D */  daddu     $s1, $s3, $zero
 /* CAEF68 80240228 8EA200B4 */  lw        $v0, 0xb4($s5)
-/* CAEF6C 8024022C 3C038024 */  lui       $v1, %hi(D_80241FB0)
-/* CAEF70 80240230 24631FB0 */  addiu     $v1, $v1, %lo(D_80241FB0)
+/* CAEF6C 8024022C 3C038024 */  lui       $v1, %hi(D_80241FB0_CB0CF0)
+/* CAEF70 80240230 24631FB0 */  addiu     $v1, $v1, %lo(D_80241FB0_CB0CF0)
 /* CAEF74 80240234 AEB30078 */  sw        $s3, 0x78($s5)
 /* CAEF78 80240238 00021027 */  nor       $v0, $zero, $v0
 /* CAEF7C 8024023C 0002BFC2 */  srl       $s7, $v0, 0x1f
@@ -61,8 +61,8 @@ glabel func_802401CC_CAEF0C
 /* CAEFE8 802402A8 24020001 */  addiu     $v0, $zero, 1
 /* CAEFEC 802402AC AE22018C */  sw        $v0, 0x18c($s1)
 /* CAEFF0 802402B0 00041080 */  sll       $v0, $a0, 2
-/* CAEFF4 802402B4 3C068024 */  lui       $a2, %hi(func_80241FC8_C87A78)
-/* CAEFF8 802402B8 24C61FC8 */  addiu     $a2, $a2, %lo(func_80241FC8_C87A78)
+/* CAEFF4 802402B4 3C068024 */  lui       $a2, %hi(D_80241FC8_CB0D08)
+/* CAEFF8 802402B8 24C61FC8 */  addiu     $a2, $a2, %lo(D_80241FC8_CB0D08)
 /* CAEFFC 802402BC AE230000 */  sw        $v1, ($s1)
 /* CAF000 802402C0 001218C0 */  sll       $v1, $s2, 3
 /* CAF004 802402C4 00431021 */  addu      $v0, $v0, $v1

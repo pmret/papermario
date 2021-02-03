@@ -22,9 +22,9 @@ glabel func_801382AC
 /* CE9F0 801382F0 1040005E */  beqz      $v0, .L8013846C
 /* CE9F4 801382F4 AFB00010 */   sw       $s0, 0x10($sp)
 /* CE9F8 801382F8 00031080 */  sll       $v0, $v1, 2
-/* CE9FC 801382FC 3C018015 */  lui       $at, %hi(jtbl_80150EF0_E75F0)
+/* CE9FC 801382FC 3C018015 */  lui       $at, %hi(jtbl_80150EF0)
 /* CEA00 80138300 00220821 */  addu      $at, $at, $v0
-/* CEA04 80138304 8C220EF0 */  lw        $v0, %lo(jtbl_80150EF0_E75F0)($at)
+/* CEA04 80138304 8C220EF0 */  lw        $v0, %lo(jtbl_80150EF0)($at)
 /* CEA08 80138308 00400008 */  jr        $v0
 /* CEA0C 8013830C 00000000 */   nop
 glabel L80138310_CEA10

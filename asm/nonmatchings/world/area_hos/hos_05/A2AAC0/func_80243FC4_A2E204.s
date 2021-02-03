@@ -10,8 +10,8 @@ glabel func_80243FC4_A2E204
 /* A2E218 80243FD8 0C048C8F */  jal       bind_dynamic_entity_7
 /* A2E21C 80243FDC AFB00010 */   sw       $s0, 0x10($sp)
 /* A2E220 80243FE0 3C040001 */  lui       $a0, 1
-/* A2E224 80243FE4 3C108025 */  lui       $s0, %hi(D_8024AA20)
-/* A2E228 80243FE8 2610AA20 */  addiu     $s0, $s0, %lo(D_8024AA20)
+/* A2E224 80243FE4 3C108025 */  lui       $s0, %hi(D_8024AA20_A34C60)
+/* A2E228 80243FE8 2610AA20 */  addiu     $s0, $s0, %lo(D_8024AA20_A34C60)
 /* A2E22C 80243FEC 8E030000 */  lw        $v1, ($s0)
 /* A2E230 80243FF0 3484D420 */  ori       $a0, $a0, 0xd420
 /* A2E234 80243FF4 0C0475F9 */  jal       func_8011D7E4

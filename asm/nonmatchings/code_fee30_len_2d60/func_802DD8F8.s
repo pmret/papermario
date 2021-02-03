@@ -5,8 +5,8 @@ glabel func_802DD8F8
 /* 1009E8 802DD8F8 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 1009EC 802DD8FC AFB10014 */  sw        $s1, 0x14($sp)
 /* 1009F0 802DD900 0080882D */  daddu     $s1, $a0, $zero
-/* 1009F4 802DD904 3C048035 */  lui       $a0, %hi(D_8034F800)
-/* 1009F8 802DD908 2484F800 */  addiu     $a0, $a0, %lo(D_8034F800)
+/* 1009F4 802DD904 3C048035 */  lui       $a0, %hi(gSpriteHeapPtr)
+/* 1009F8 802DD908 2484F800 */  addiu     $a0, $a0, %lo(gSpriteHeapPtr)
 /* 1009FC 802DD90C AFBF0018 */  sw        $ra, 0x18($sp)
 /* 100A00 802DD910 AFB00010 */  sw        $s0, 0x10($sp)
 /* 100A04 802DD914 3C01802E */  lui       $at, %hi(D_802DF524)

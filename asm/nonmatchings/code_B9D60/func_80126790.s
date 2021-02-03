@@ -54,9 +54,9 @@ glabel func_80126790
 /* BCF54 80126854 10400071 */  beqz      $v0, .L80126A1C
 /* BCF58 80126858 4600B106 */   mov.s    $f4, $f22
 /* BCF5C 8012685C 00031080 */  sll       $v0, $v1, 2
-/* BCF60 80126860 3C018015 */  lui       $at, %hi(jtbl_801506F8_E6DF8)
+/* BCF60 80126860 3C018015 */  lui       $at, %hi(jtbl_801506F8)
 /* BCF64 80126864 00220821 */  addu      $at, $at, $v0
-/* BCF68 80126868 8C2206F8 */  lw        $v0, %lo(jtbl_801506F8_E6DF8)($at)
+/* BCF68 80126868 8C2206F8 */  lw        $v0, %lo(jtbl_801506F8)($at)
 /* BCF6C 8012686C 00400008 */  jr        $v0
 /* BCF70 80126870 00000000 */   nop
 glabel L80126874_BCF74

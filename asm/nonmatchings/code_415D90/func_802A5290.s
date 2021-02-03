@@ -23,9 +23,9 @@ glabel func_802A5290
 /* 41A068 802A52D8 104000FB */  beqz      $v0, .L802A56C8
 /* 41A06C 802A52DC AFA60048 */   sw       $a2, 0x48($sp)
 /* 41A070 802A52E0 00031080 */  sll       $v0, $v1, 2
-/* 41A074 802A52E4 3C01802B */  lui       $at, %hi(jtbl_802ABAA8_420838)
+/* 41A074 802A52E4 3C01802B */  lui       $at, %hi(jtbl_802ABAA8)
 /* 41A078 802A52E8 00220821 */  addu      $at, $at, $v0
-/* 41A07C 802A52EC 8C22BAA8 */  lw        $v0, %lo(jtbl_802ABAA8_420838)($at)
+/* 41A07C 802A52EC 8C22BAA8 */  lw        $v0, %lo(jtbl_802ABAA8)($at)
 /* 41A080 802A52F0 00400008 */  jr        $v0
 /* 41A084 802A52F4 00000000 */   nop
 glabel L802A52F8_41A088

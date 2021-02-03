@@ -3,8 +3,8 @@
 
 glabel func_802409E0_86F4E0
 /* 86F4E0 802409E0 27BDFFE0 */  addiu     $sp, $sp, -0x20
-/* 86F4E4 802409E4 3C048024 */  lui       $a0, %hi(func_80242EBC_7EDBCC)
-/* 86F4E8 802409E8 24842EBC */  addiu     $a0, $a0, %lo(func_80242EBC_7EDBCC)
+/* 86F4E4 802409E4 3C048024 */  lui       $a0, %hi(D_80242EBC_8719BC)
+/* 86F4E8 802409E8 24842EBC */  addiu     $a0, $a0, %lo(D_80242EBC_8719BC)
 /* 86F4EC 802409EC AFBF0018 */  sw        $ra, 0x18($sp)
 /* 86F4F0 802409F0 AFB10014 */  sw        $s1, 0x14($sp)
 /* 86F4F4 802409F4 AFB00010 */  sw        $s0, 0x10($sp)

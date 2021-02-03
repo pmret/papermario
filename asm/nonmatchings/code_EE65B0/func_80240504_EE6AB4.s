@@ -9,20 +9,20 @@ glabel func_80240504_EE6AB4
 /* EE6AC4 80240514 F7B40068 */  sdc1      $f20, 0x68($sp)
 /* EE6AC8 80240518 0C01B198 */  jal       osGetCause
 /* EE6ACC 8024051C 27A40010 */   addiu    $a0, $sp, 0x10
-/* EE6AD0 80240520 3C108024 */  lui       $s0, %hi(func_80243B44_C74FC4)
-/* EE6AD4 80240524 26103B44 */  addiu     $s0, $s0, %lo(func_80243B44_C74FC4)
+/* EE6AD0 80240520 3C108024 */  lui       $s0, %hi(D_80243B44_EEA0F4)
+/* EE6AD4 80240524 26103B44 */  addiu     $s0, $s0, %lo(D_80243B44_EEA0F4)
 /* EE6AD8 80240528 C6000000 */  lwc1      $f0, ($s0)
 /* EE6ADC 8024052C 3C014130 */  lui       $at, 0x4130
 /* EE6AE0 80240530 44816000 */  mtc1      $at, $f12
 /* EE6AE4 80240534 0C00AD17 */  jal       func_8002B45C
 /* EE6AE8 80240538 460C0303 */   div.s    $f12, $f0, $f12
-/* EE6AEC 8024053C 3C018024 */  lui       $at, %hi(D_80245350)
-/* EE6AF0 80240540 D4345350 */  ldc1      $f20, %lo(D_80245350)($at)
+/* EE6AEC 8024053C 3C018024 */  lui       $at, %hi(D_80245350_EEB900)
+/* EE6AF0 80240540 D4345350 */  ldc1      $f20, %lo(D_80245350_EEB900)($at)
 /* EE6AF4 80240544 46000021 */  cvt.d.s   $f0, $f0
 /* EE6AF8 80240548 46340002 */  mul.d     $f0, $f0, $f20
 /* EE6AFC 8024054C 00000000 */  nop
-/* EE6B00 80240550 3C018024 */  lui       $at, %hi(D_80245358)
-/* EE6B04 80240554 D4365358 */  ldc1      $f22, %lo(D_80245358)($at)
+/* EE6B00 80240550 3C018024 */  lui       $at, %hi(D_80245358_EEB908)
+/* EE6B04 80240554 D4365358 */  ldc1      $f22, %lo(D_80245358_EEB908)($at)
 /* EE6B08 80240558 C6020000 */  lwc1      $f2, ($s0)
 /* EE6B0C 8024055C 3C014140 */  lui       $at, 0x4140
 /* EE6B10 80240560 44816000 */  mtc1      $at, $f12
@@ -167,8 +167,8 @@ glabel func_80240504_EE6AB4
 /* EE6D3C 8024078C 3C02DE00 */  lui       $v0, 0xde00
 /* EE6D40 80240790 0C0499CD */  jal       func_80126734
 /* EE6D44 80240794 AE020000 */   sw       $v0, ($s0)
-/* EE6D48 80240798 3C038024 */  lui       $v1, %hi(func_80243B44_C74FC4)
-/* EE6D4C 8024079C 24633B44 */  addiu     $v1, $v1, %lo(func_80243B44_C74FC4)
+/* EE6D48 80240798 3C038024 */  lui       $v1, %hi(D_80243B44_EEA0F4)
+/* EE6D4C 8024079C 24633B44 */  addiu     $v1, $v1, %lo(D_80243B44_EEA0F4)
 /* EE6D50 802407A0 C4600000 */  lwc1      $f0, ($v1)
 /* EE6D54 802407A4 3C013F80 */  lui       $at, 0x3f80
 /* EE6D58 802407A8 44811000 */  mtc1      $at, $f2

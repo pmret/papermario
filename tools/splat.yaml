@@ -88,7 +88,7 @@ segments:
     - [0x3b390, c, os/code_3b390_len_110]
     - [0x3b4a0, c, os/code_3b4a0_len_270]
     - [0x3b710, c, os/code_3b710_len_40]
-    - [0x3b750, c, code_3b750_len_20]
+    - [0x3b750, c, os/code_3b750_len_20]
     - [0x3b770, c, os/code_3b770_len_80]
     - [0x3b7f0, c, os/code_3b7f0_len_120]
     - [0x3b910, c, os/code_3b910_len_410]
@@ -113,7 +113,7 @@ segments:
     - [0x3d330, c, os/code_3d330_len_990]
     - [0x3dcc0, c, os/code_3dcc0_len_a60]
     - [0x3e720, c, os/code_3e720_len_5f0]
-    - [0x3ed10, c, guOrtho]
+    - [0x3ed10, c, os/guOrtho]
     - [0x3ef90, c, os/code_3ef90_len_600]
     - [0x3f310, c, os/code_3f310_len_3c0]
     - [0x3f6d0, c, os/code_3f6d0_len_320]
@@ -2043,607 +2043,694 @@ segments:
     - [0x6DE4A0, c]
     - [0x6DE650, c]
     - [0x6DE670, bin]
-  - type: code
+  - name: battle/partner/goompa
+    type: code
     start: 0x6F0B30
     vram: 0x80238000
     overlay: True
     files:
-    - [0x6F0B30, bin]
-  - type: code
+    - [0x6F0B30, data]
+  - name: battle/partner/goombario
+    type: code
     start: 0x6F10E0
     vram: 0x80238000
     overlay: True
     files:
     - [0x6F10E0, c]
-    - [0x6F2290, bin]
-  - type: code
+    - [0x6F2290, data]
+  - name: battle/partner/kooper
+    type: code
     start: 0x6F5E80
     vram: 0x80238000
     overlay: True
     files:
     - [0x6F5E80, c]
-    - [0x6F62B0, bin]
-  - type: code
+    - [0x6F62B0, data]
+  - name: battle/partner/bombette
+    type: code
     start: 0x6FAD10
     vram: 0x80238000
     overlay: True
     files:
     - [0x6FAD10, c]
-    - [0x6FB350, bin]
-  - type: code
+    - [0x6FB350, data]
+  - name: battle/partner/parakarry
+    type: code
     start: 0x6FFD80
     vram: 0x80238000
     overlay: True
     files:
     - [0x6FFD80, c]
-    - [0x701590, bin]
-  - type: code
+    - [0x701590, data]
+  - name: battle/partner/watt
+    type: code
     start: 0x703AF0
     vram: 0x80238000
     overlay: True
     files:
     - [0x703AF0, c]
-    - [0x704A70, bin]
-  - type: code
+    - [0x704A70, data]
+  - name: battle/partner/sushie
+    type: code
     start: 0x707CA0
     vram: 0x80238000
     overlay: True
     files:
     - [0x707CA0, c]
-    - [0x708B70, bin]
-  - type: code
+    - [0x708B70, data]
+  - name: battle/partner/lakilester
+    type: code
     start: 0x70BD10
     vram: 0x80238000
     overlay: True
     files:
     - [0x70BD10, c]
-    - [0x70DED0, bin]
-  - type: code
+    - [0x70DED0, data]
+  - name: battle/partner/bow
+    type: code
     start: 0x710EF0
     vram: 0x80238000
     overlay: True
     files:
     - [0x710EF0, c]
-    - [0x7111F0, bin]
-  - type: code
+    - [0x7111F0, data]
+  - name: battle/partner/twink
+    type: code
     start: 0x714CF0
     vram: 0x80238000
     overlay: True
     files:
     - [0x714CF0, c]
-    - [0x714DC0, bin]
-  - type: code
+    - [0x714DC0, data]
+  - name: battle/item/mushroom
+    type: code
     start: 0x715850
     vram: 0x802A1000
     overlay: True
     files:
     - [0x715850, c]
-    - [0x715E50, bin]
-  - type: code
+    - [0x715E50, data]
+  - name: battle/item/fire_flower
+    type: code
     start: 0x716C60
     vram: 0x802A1000
     overlay: True
     files:
     - [0x716C60, c]
-    - [0x717060, bin]
-  - type: code
+    - [0x717060, data]
+  - name: battle/item/dusty_hammer
+    type: code
     start: 0x7179D0
     vram: 0x802A1000
     overlay: True
     files:
     - [0x7179D0, c]
-    - [0x717C10, bin]
-  - type: code
+    - [0x717C10, data]
+  - name: battle/item/pow_block
+    type: code
     start: 0x718850
     vram: 0x802A1000
     overlay: True
     files:
     - [0x718850, c]
-    - [0x718BF0, bin]
-  - type: code
+    - [0x718BF0, data]
+  - name: battle/item/pebble
+    type: code
     start: 0x719970
     vram: 0x802A1000
     overlay: True
     files:
     - [0x719970, c]
-    - [0x719BB0, bin]
-  - type: code
+    - [0x719BB0, data]
+  - name: battle/item/volt_shroom
+    type: code
     start: 0x71A7F0
     vram: 0x802A1000
     overlay: True
     files:
     - [0x71A7F0, c]
-    - [0x71AA70, bin]
-  - type: code
+    - [0x71AA70, data]
+  - name: battle/item/thunder_rage
+    type: code
     start: 0x71B1A0
     vram: 0x802A1000
     overlay: True
     files:
     - [0x71B1A0, c]
-    - [0x71B640, bin]
-  - type: code
+    - [0x71B640, data]
+  - name: battle/item/snowman_doll
+    type: code
     start: 0x71BE30
     vram: 0x802A1000
     overlay: True
     files:
     - [0x71BE30, c]
-    - [0x71C270, bin]
-  - type: code
+    - [0x71C270, data]
+  - name: battle/item/dried_shroom
+    type: code
     start: 0x71CCE0
     vram: 0x802A1000
     overlay: True
     files:
     - [0x71CCE0, c]
-    - [0x71D010, bin]
-  - type: code
+    - [0x71D010, data]
+  - name: battle/item/shooting_star
+    type: code
     start: 0x71D770
     vram: 0x802A1000
     overlay: True
     files:
     - [0x71D770, c]
-    - [0x71DCC0, bin]
-  - type: code
+    - [0x71DCC0, data]
+  - name: battle/item/sleepy_sheep
+    type: code
     start: 0x71E650
     vram: 0x802A1000
     overlay: True
     files:
     - [0x71E650, c]
-    - [0x71EFC0, bin]
-  - type: code
+    - [0x71EFC0, data]
+  - name: battle/item/stone_cap
+    type: code
     start: 0x7215A0
     vram: 0x802A1000
     overlay: True
     files:
     - [0x7215A0, c]
-    - [0x721970, bin]
-  - type: code
+    - [0x721970, data]
+  - name: battle/item/tasty_tonic
+    type: code
     start: 0x722000
     vram: 0x802A1000
     overlay: True
     files:
     - [0x722000, c]
-    - [0x7222D0, bin]
-  - type: code
+    - [0x7222D0, data]
+  - name: battle/item/thunder_bolt
+    type: code
     start: 0x722B40
     vram: 0x802A1000
     overlay: True
     files:
     - [0x722B40, c]
-    - [0x722FE0, bin]
-  - type: code
+    - [0x722FE0, data]
+  - name: battle/item/ultra_shroom
+    type: code
     start: 0x723780
     vram: 0x802A1000
     overlay: True
     files:
     - [0x723780, c]
-    - [0x723AB0, bin]
-  - type: code
+    - [0x723AB0, data]
+  - name: battle/item/unknown_item
+    type: code
     start: 0x724240
     vram: 0x802A1000
     overlay: True
     files:
     - [0x724240, c]
-    - [0x724570, bin]
-  - type: code
+    - [0x724570, data]
+  - name: battle/item/super_soda
+    type: code
     start: 0x724CE0
     vram: 0x802A1000
     overlay: True
     files:
     - [0x724CE0, c]
-    - [0x725210, bin]
-  - type: code
+    - [0x725210, data]
+  - name: battle/item/hustle_drink
+    type: code
     start: 0x725F60
     vram: 0x802A1000
     overlay: True
     files:
     - [0x725F60, c]
-    - [0x726240, bin]
-  - type: code
+    - [0x726240, data]
+  - name: battle/item/stop_watch
+    type: code
     start: 0x726DD0
     vram: 0x802A1000
     overlay: True
     files:
     - [0x726DD0, c]
-    - [0x727120, bin]
-  - type: code
+    - [0x727120, data]
+  - name: battle/item/dizzy_dial
+    type: code
     start: 0x727910
     vram: 0x802A1000
     overlay: True
     files:
     - [0x727910, c]
-    - [0x727CE0, bin]
-  - type: code
+    - [0x727CE0, data]
+  - name: battle/item/please_come_back
+    type: code
     start: 0x7285E0
     vram: 0x802A1000
     overlay: True
     files:
     - [0x7285E0, c]
-    - [0x728820, bin]
-  - type: code
+    - [0x728820, data]
+  - name: battle/item/egg_missile
+    type: code
     start: 0x728EC0
     vram: 0x802A1000
     overlay: True
     files:
     - [0x728EC0, c]
-    - [0x7291D0, bin]
-  - type: code
+    - [0x7291D0, data]
+  - name: battle/item/insecticide_herb
+    type: code
     start: 0x72A750
     vram: 0x802A1000
     overlay: True
     files:
     - [0x72A750, c]
-    - [0x72AB70, bin]
-  - type: code
+    - [0x72AB70, data]
+  - name: battle/item/fright_jar
+    type: code
     start: 0x72B910
     vram: 0x802A1000
     overlay: True
     files:
     - [0x72B910, c]
-    - [0x72BC60, bin]
-  - type: code
+    - [0x72BC60, data]
+  - name: battle/item/mystery
+    type: code
     start: 0x72C5B0
     vram: 0x802A1000
     overlay: True
     files:
     - [0x72C5B0, c]
-    - [0x72CF00, bin]
-  - type: code
+    - [0x72CF00, data]
+  - name: battle/item/repel_gel
+    type: code
     start: 0x72DB70
     vram: 0x802A1000
     overlay: True
     files:
     - [0x72DB70, c]
-    - [0x72DE00, bin]
-  - type: code
+    - [0x72DE00, data]
+  - name: battle/item/life_shroom
+    type: code
     start: 0x72E530
     vram: 0x802A1000
     overlay: True
     files:
     - [0x72E530, c]
-    - [0x72EA20, bin]
-  - type: code
+    - [0x72EA20, data]
+  - name: battle/item/coconut
+    type: code
     start: 0x72F720
     vram: 0x802A1000
     overlay: True
     files:
     - [0x72F720, c]
-    - [0x72F960, bin]
-  - type: code
+    - [0x72F960, data]
+  - name: battle/item/electro_pop
+    type: code
     start: 0x7305A0
     vram: 0x802A1000
     overlay: True
     files:
     - [0x7305A0, c]
-    - [0x730AE0, bin]
-  - type: code
+    - [0x730AE0, data]
+  - name: battle/item/strange_cake
+    type: code
     start: 0x731300
     vram: 0x802A1000
     overlay: True
     files:
     - [0x731300, c]
-    - [0x731EA0, bin]
-  - type: code
+    - [0x731EA0, data]
+  - name: battle/item/food
+    type: code
     start: 0x7330D0
     vram: 0x802A1000
     overlay: True
     files:
     - [0x7330D0, c]
-    - [0x733700, bin]
-  - type: code
+    - [0x733700, data]
+  - name: battle/move/hammer
+    type: code
     start: 0x7345A0
     vram: 0x802A1000
     overlay: True
     files:
     - [0x7345A0, c]
-    - [0x734650, bin]
-  - type: code
+    - [0x734650, data]
+  - name: battle/move/spin_smash
+    type: code
     start: 0x737890
     vram: 0x802A1000
     overlay: True
     files:
     - [0x737890, c]
-    - [0x737A20, bin]
-  - type: code
+    - [0x737A20, data]
+  - name: battle/move/quake_hammer
+    type: code
     start: 0x73AED0
     vram: 0x802A1000
     overlay: True
     files:
     - [0x73AED0, c]
-    - [0x73AF70, bin]
-  - type: code
+    - [0x73AF70, data]
+  - name: battle/move/jump
+    type: code
     start: 0x73D860
     vram: 0x802A1000
     overlay: True
     files:
     - [0x73D860, c]
-    - [0x73D9A0, bin]
-  - type: code
+    - [0x73D9A0, data]
+  - name: battle/move/multibounce
+    type: code
     start: 0x740CC0
     vram: 0x802A1000
     overlay: True
     files:
     - [0x740CC0, c]
-    - [0x740DA0, bin]
-  - type: code
+    - [0x740DA0, data]
+  - name: battle/move/power_bounce
+    type: code
     start: 0x743DF0
     vram: 0x802A1000
     overlay: True
     files:
     - [0x743DF0, c]
-    - [0x743FE0, bin]
-  - type: code
+    - [0x743FE0, data]
+  - name: battle/move/sleep_stomp
+    type: code
     start: 0x746E10
     vram: 0x802A1000
     overlay: True
     files:
     - [0x746E10, c]
-    - [0x746EF0, bin]
-  - type: code
+    - [0x746EF0, data]
+  - name: battle/move/dizzy_stomp
+    type: code
     start: 0x748DD0
     vram: 0x802A1000
     overlay: True
     files:
     - [0x748DD0, c]
-    - [0x748EB0, bin]
-  - type: code
+    - [0x748EB0, data]
+  - name: battle/move/d_down_pound
+    type: code
     start: 0x74AD90
     vram: 0x802A1000
     overlay: True
     files:
     - [0x74AD90, c]
-    - [0x74AF40, bin]
-  - type: code
+    - [0x74AF40, data]
+  - name: battle/move/jump_charge_0
+    type: code
     start: 0x74D570
     vram: 0x802A1000
     overlay: True
     files:
     - [0x74D570, c]
-    - [0x74D850, bin]
-  - type: code
+    - [0x74D850, data]
+  - name: battle/move/hammer_charge_0
+    type: code
     start: 0x74F130
     vram: 0x802A1000
     overlay: True
     files:
     - [0x74F130, c]
-    - [0x74F3D0, bin]
-  - type: code
+    - [0x74F3D0, data]
+  - name: battle/move/hammer_throw
+    type: code
     start: 0x752450
     vram: 0x802A1000
     overlay: True
     files:
     - [0x752450, c]
-    - [0x7524F0, bin]
-  - type: code
+    - [0x7524F0, data]
+  - name: battle/move/mega_quake
+    type: code
     start: 0x756780
     vram: 0x802A1000
     overlay: True
     files:
     - [0x756780, c]
-    - [0x756900, bin]
-  - type: code
+    - [0x756900, data]
+  - name: battle/move/hammer_charge_1
+    type: code
     start: 0x7595B0
     vram: 0x802A1000
     overlay: True
     files:
     - [0x7595B0, c]
-    - [0x7598D0, bin]
-  - type: code
+    - [0x7598D0, data]
+  - name: battle/move/jump_charge_1
+    type: code
     start: 0x75C980
     vram: 0x802A1000
     overlay: True
     files:
     - [0x75C980, c]
-    - [0x75CCE0, bin]
-  - type: code
+    - [0x75CCE0, data]
+  - name: battle/move/hammer_charge_2
+    type: code
     start: 0x75E5D0
     vram: 0x802A1000
     overlay: True
     files:
     - [0x75E5D0, c]
-    - [0x75E8F0, bin]
-  - type: code
+    - [0x75E8F0, data]
+  - name: battle/move/jump_charge_2
+    type: code
     start: 0x761920
     vram: 0x802A1000
     overlay: True
     files:
     - [0x761920, c]
-    - [0x761C80, bin]
-  - type: code
+    - [0x761C80, data]
+  - name: battle/move/auto_smash
+    type: code
     start: 0x763540
     vram: 0x802A1000
     overlay: True
     files:
     - [0x763540, c]
-    - [0x7635E0, bin]
-  - type: code
+    - [0x7635E0, data]
+  - name: battle/move/auto_jump
+    type: code
     start: 0x765C20
     vram: 0x802A1000
     overlay: True
     files:
     - [0x765C20, c]
-    - [0x765D00, bin]
-  - type: code
+    - [0x765D00, data]
+  - name: battle/move/power_quake
+    type: code
     start: 0x767C90
     vram: 0x802A1000
     overlay: True
     files:
     - [0x767C90, c]
-    - [0x767D30, bin]
-  - type: code
+    - [0x767D30, data]
+  - name: battle/move/auto_multibounce
+    type: code
     start: 0x76A830
     vram: 0x802A1000
     overlay: True
     files:
     - [0x76A830, c]
-    - [0x76A910, bin]
-  - type: code
+    - [0x76A910, data]
+  - name: battle/move/power_jump
+    type: code
     start: 0x76D760
     vram: 0x802A1000
     overlay: True
     files:
     - [0x76D760, c]
-    - [0x76D840, bin]
-  - type: code
+    - [0x76D840, data]
+  - name: battle/move/super_jump
+    type: code
     start: 0x76F330
     vram: 0x802A1000
     overlay: True
     files:
     - [0x76F330, c]
-    - [0x76F410, bin]
-  - type: code
+    - [0x76F410, data]
+  - name: battle/move/mega_jump
+    type: code
     start: 0x770F30
     vram: 0x802A1000
     overlay: True
     files:
     - [0x770F30, c]
-    - [0x771010, bin]
-  - type: code
+    - [0x771010, data]
+  - name: battle/move/power_smash
+    type: code
     start: 0x772BA0
     vram: 0x802A1000
     overlay: True
     files:
     - [0x772BA0, c]
-    - [0x772C40, bin]
-  - type: code
+    - [0x772C40, data]
+  - name: battle/move/super_smash
+    type: code
     start: 0x775100
     vram: 0x802A1000
     overlay: True
     files:
     - [0x775100, c]
-    - [0x7751A0, bin]
-  - type: code
+    - [0x7751A0, data]
+  - name: battle/move/mega_smash
+    type: code
     start: 0x777690
     vram: 0x802A1000
     overlay: True
     files:
     - [0x777690, c]
-    - [0x777730, bin]
-  - type: code
+    - [0x777730, data]
+  - name: battle/move/unknown_move
+    type: code
     start: 0x779C90
     vram: 0x802A1000
     overlay: True
     files:
     - [0x779C90, c]
-    - [0x779E20, bin]
-  - type: code
+    - [0x779E20, data]
+  - name: battle/move/shrink_smash
+    type: code
     start: 0x77CB80
     vram: 0x802A1000
     overlay: True
     files:
     - [0x77CB80, c]
-    - [0x77CC20, bin]
-  - type: code
+    - [0x77CC20, data]
+  - name: battle/move/shell_crack
+    type: code
     start: 0x77F240
     vram: 0x802A1000
     overlay: True
     files:
     - [0x77F240, c]
-    - [0x77F3D0, bin]
-  - type: code
+    - [0x77F3D0, data]
+  - name: battle/move/d_down_jump
+    type: code
     start: 0x781920
     vram: 0x802A1000
     overlay: True
     files:
     - [0x781920, c]
-    - [0x781AF0, bin]
-  - type: code
+    - [0x781AF0, data]
+  - name: battle/move/shrink_stomp
+    type: code
     start: 0x783BA0
     vram: 0x802A1000
     overlay: True
     files:
     - [0x783BA0, c]
-    - [0x783C80, bin]
-  - type: code
+    - [0x783C80, data]
+  - name: battle/move/earthquake_jump
+    type: code
     start: 0x785B20
     vram: 0x802A1000
     overlay: True
     files:
     - [0x785B20, c]
-    - [0x785C10, bin]
-  - type: code
+    - [0x785C10, data]
+  - name: battle/star/focus
+    type: code
     start: 0x789E60
     vram: 0x802A1000
     overlay: True
     files:
     - [0x789E60, c]
-    - [0x78A480, bin]
-  - type: code
+    - [0x78A480, data]
+  - name: battle/star/refresh
+    type: code
     start: 0x78B600
     vram: 0x802A1000
     overlay: True
     files:
     - [0x78B600, c]
-    - [0x78C070, bin]
-  - type: code
+    - [0x78C070, data]
+  - name: battle/star/lullaby
+    type: code
     start: 0x78D150
     vram: 0x802A1000
     overlay: True
     files:
     - [0x78D150, c]
-    - [0x78D770, bin]
-  - type: code
+    - [0x78D770, data]
+  - name: battle/star/star_storm
+    type: code
     start: 0x78E7D0
     vram: 0x802A1000
     overlay: True
     files:
     - [0x78E7D0, c]
-    - [0x78EEB0, bin]
-  - type: code
+    - [0x78EEB0, data]
+  - name: battle/star/chill_out
+    type: code
     start: 0x7900D0
     vram: 0x802A1000
     overlay: True
     files:
     - [0x7900D0, c]
-    - [0x7909C0, bin]
-  - type: code
+    - [0x7909C0, data]
+  - name: battle/star/smooch
+    type: code
     start: 0x791D90
     vram: 0x802A1000
     overlay: True
     files:
     - [0x791D90, c]
-    - [0x7923C0, bin]
-  - type: code
+    - [0x7923C0, data]
+  - name: battle/star/time_out
+    type: code
     start: 0x793D20
     vram: 0x802A1000
     overlay: True
     files:
     - [0x793D20, c]
-    - [0x794240, bin]
-  - type: code
+    - [0x794240, data]
+  - name: battle/star/up_and_away
+    type: code
     start: 0x7952E0
     vram: 0x802A1000
     overlay: True
     files:
     - [0x7952E0, c]
-    - [0x7959B0, bin]
-  - type: code
+    - [0x7959B0, data]
+  - name: battle/star/star_beam
+    type: code
     start: 0x796FC0
     vram: 0x802A1000
     overlay: True
     files:
     - [0x796FC0, c]
-    - [0x7984B0, bin]
-  - type: code
+    - [0x7984B0, data]
+  - name: battle/star/peach_beam
+    type: code
     start: 0x7997B0
     vram: 0x802A1000
     overlay: True
     files:
     - [0x7997B0, c]
-    - [0x79ACA0, bin]
-  - type: code
+    - [0x79ACA0, data]
+  - name: battle/star/peach_focus
+    type: code
     start: 0x79BFA0
     vram: 0x802A1000
     overlay: True
     files:
     - [0x79BFA0, c]
-    - [0x79C4D0, bin]
-  - type: code
+    - [0x79C4D0, data]
+  - name: battle/star/peach_dash
+    type: code
     start: 0x79D8A0
     vram: 0x802A1000
     overlay: True
     files:
     - [0x79D8A0, c]
-    - [0x79DE50, bin]
+    - [0x79DE50, data]
+  - [0x79EF40, bin] # todo identify
   - name: world/script_api/
     ld_name: world_script_api
     type: code

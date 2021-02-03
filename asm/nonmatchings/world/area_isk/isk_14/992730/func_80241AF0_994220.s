@@ -11,8 +11,8 @@ glabel func_80241AF0_994220
 /* 994238 80241B08 84440008 */   lh       $a0, 8($v0)
 /* 99423C 80241B0C 27A40010 */  addiu     $a0, $sp, 0x10
 /* 994240 80241B10 24050035 */  addiu     $a1, $zero, 0x35
-/* 994244 80241B14 3C108024 */  lui       $s0, %hi(func_80242AC0)
-/* 994248 80241B18 26102AC0 */  addiu     $s0, $s0, %lo(func_80242AC0)
+/* 994244 80241B14 3C108024 */  lui       $s0, %hi(mim_06_UnkDurationCheck)
+/* 994248 80241B18 26102AC0 */  addiu     $s0, $s0, %lo(mim_06_UnkDurationCheck)
 /* 99424C 80241B1C 00A0182D */  daddu     $v1, $a1, $zero
 /* 994250 80241B20 0040882D */  daddu     $s1, $v0, $zero
 /* 994254 80241B24 0000302D */  daddu     $a2, $zero, $zero

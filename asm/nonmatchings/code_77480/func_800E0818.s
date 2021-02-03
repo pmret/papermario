@@ -174,8 +174,8 @@ glabel func_800E0818
 /* 79F3C 800E0A8C 24A50EB0 */  addiu     $a1, $a1, 0xeb0
 /* 79F40 800E0A90 0C00A5CF */  jal       dma_copy
 /* 79F44 800E0A94 34C67000 */   ori      $a2, $a2, 0x7000
-/* 79F48 800E0A98 3C02802B */  lui       $v0, %hi(D_802B70B4)
-/* 79F4C 800E0A9C 244270B4 */  addiu     $v0, $v0, %lo(D_802B70B4)
+/* 79F48 800E0A98 3C02802B */  lui       $v0, %hi(func_802B70B4_E201C4)
+/* 79F4C 800E0A9C 244270B4 */  addiu     $v0, $v0, %lo(func_802B70B4_E201C4)
 /* 79F50 800E0AA0 10400004 */  beqz      $v0, .L800E0AB4
 /* 79F54 800E0AA4 AE020000 */   sw       $v0, ($s0)
 /* 79F58 800E0AA8 8E020000 */  lw        $v0, ($s0)

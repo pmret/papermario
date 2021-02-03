@@ -7,8 +7,8 @@ glabel func_802427A4_DF91A4
 /* DF91AC 802427AC 8C82000C */  lw        $v0, 0xc($a0)
 /* DF91B0 802427B0 0C0B1EAF */  jal       get_variable
 /* DF91B4 802427B4 8C450000 */   lw       $a1, ($v0)
-/* DF91B8 802427B8 3C048035 */  lui       $a0, %hi(D_8034F800)
-/* DF91BC 802427BC 2484F800 */  addiu     $a0, $a0, %lo(D_8034F800)
+/* DF91B8 802427B8 3C048035 */  lui       $a0, %hi(gSpriteHeapPtr)
+/* DF91BC 802427BC 2484F800 */  addiu     $a0, $a0, %lo(gSpriteHeapPtr)
 /* DF91C0 802427C0 0C00A487 */  jal       _heap_free
 /* DF91C4 802427C4 0040282D */   daddu    $a1, $v0, $zero
 /* DF91C8 802427C8 8FBF0010 */  lw        $ra, 0x10($sp)

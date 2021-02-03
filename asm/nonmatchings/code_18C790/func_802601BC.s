@@ -16,9 +16,9 @@ glabel func_802601BC
 /* 18EAC8 802601E8 10400193 */  beqz      $v0, .L80260838
 /* 18EACC 802601EC AFB00010 */   sw       $s0, 0x10($sp)
 /* 18EAD0 802601F0 00031080 */  sll       $v0, $v1, 2
-/* 18EAD4 802601F4 3C01802A */  lui       $at, %hi(jtbl_8029D550_1CBE30)
+/* 18EAD4 802601F4 3C01802A */  lui       $at, %hi(jtbl_8029D550)
 /* 18EAD8 802601F8 00220821 */  addu      $at, $at, $v0
-/* 18EADC 802601FC 8C22D550 */  lw        $v0, %lo(jtbl_8029D550_1CBE30)($at)
+/* 18EADC 802601FC 8C22D550 */  lw        $v0, %lo(jtbl_8029D550)($at)
 /* 18EAE0 80260200 00400008 */  jr        $v0
 /* 18EAE4 80260204 00000000 */   nop
 glabel L80260208_18EAE8

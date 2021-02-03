@@ -9,8 +9,8 @@ glabel func_8024160C_B8578C
 /* B8579C 8024161C AFBF0014 */  sw        $ra, 0x14($sp)
 /* B857A0 80241620 0C019D28 */  jal       guMtxIdentF
 /* B857A4 80241624 0080802D */   daddu    $s0, $a0, $zero
-/* B857A8 80241628 3C018025 */  lui       $at, %hi(D_8024BB40)
-/* B857AC 8024162C D420BB40 */  ldc1      $f0, %lo(D_8024BB40)($at)
+/* B857A8 80241628 3C018025 */  lui       $at, %hi(D_8024BB40_B8FCC0)
+/* B857AC 8024162C D420BB40 */  ldc1      $f0, %lo(D_8024BB40_B8FCC0)($at)
 /* B857B0 80241630 4600A521 */  cvt.d.s   $f20, $f20
 /* B857B4 80241634 4620A502 */  mul.d     $f20, $f20, $f0
 /* B857B8 80241638 00000000 */  nop

@@ -74,9 +74,9 @@ glabel func_802591EC
 /* 187BC0 802592E0 2C620011 */  sltiu     $v0, $v1, 0x11
 /* 187BC4 802592E4 10400067 */  beqz      $v0, .L80259484
 /* 187BC8 802592E8 00031080 */   sll      $v0, $v1, 2
-/* 187BCC 802592EC 3C01802A */  lui       $at, %hi(jtbl_8029D3A0_1CBC80)
+/* 187BCC 802592EC 3C01802A */  lui       $at, %hi(jtbl_8029D3A0)
 /* 187BD0 802592F0 00220821 */  addu      $at, $at, $v0
-/* 187BD4 802592F4 8C22D3A0 */  lw        $v0, %lo(jtbl_8029D3A0_1CBC80)($at)
+/* 187BD4 802592F4 8C22D3A0 */  lw        $v0, %lo(jtbl_8029D3A0)($at)
 /* 187BD8 802592F8 00400008 */  jr        $v0
 /* 187BDC 802592FC 00000000 */   nop
 glabel L80259300_187BE0

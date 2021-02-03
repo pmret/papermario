@@ -23,9 +23,9 @@ glabel func_8013673C
 /* CCE84 80136784 1040008B */  beqz      $v0, .L801369B4
 /* CCE88 80136788 00C0982D */   daddu    $s3, $a2, $zero
 /* CCE8C 8013678C 00031080 */  sll       $v0, $v1, 2
-/* CCE90 80136790 3C018015 */  lui       $at, %hi(jtbl_80150E60_E7560)
+/* CCE90 80136790 3C018015 */  lui       $at, %hi(jtbl_80150E60)
 /* CCE94 80136794 00220821 */  addu      $at, $at, $v0
-/* CCE98 80136798 8C220E60 */  lw        $v0, %lo(jtbl_80150E60_E7560)($at)
+/* CCE98 80136798 8C220E60 */  lw        $v0, %lo(jtbl_80150E60)($at)
 /* CCE9C 8013679C 00400008 */  jr        $v0
 /* CCEA0 801367A0 00000000 */   nop
 glabel L801367A4_CCEA4

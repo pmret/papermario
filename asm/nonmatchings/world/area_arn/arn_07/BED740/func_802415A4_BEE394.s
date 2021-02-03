@@ -15,9 +15,9 @@ glabel func_802415A4_BEE394
 /* BEE3BC 802415CC 00031C00 */  sll       $v1, $v1, 0x10
 /* BEE3C0 802415D0 00031B83 */  sra       $v1, $v1, 0xe
 /* BEE3C4 802415D4 A444008E */  sh        $a0, 0x8e($v0)
-/* BEE3C8 802415D8 3C018024 */  lui       $at, %hi(D_80243BC0)
+/* BEE3C8 802415D8 3C018024 */  lui       $at, %hi(D_80243BC0_BF09B0)
 /* BEE3CC 802415DC 00230821 */  addu      $at, $at, $v1
-/* BEE3D0 802415E0 C4223BC0 */  lwc1      $f2, %lo(D_80243BC0)($at)
+/* BEE3D0 802415E0 C4223BC0 */  lwc1      $f2, %lo(D_80243BC0_BF09B0)($at)
 /* BEE3D4 802415E4 8443008E */  lh        $v1, 0x8e($v0)
 /* BEE3D8 802415E8 46020000 */  add.s     $f0, $f0, $f2
 /* BEE3DC 802415EC 28630005 */  slti      $v1, $v1, 5

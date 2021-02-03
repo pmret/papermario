@@ -301,8 +301,8 @@ glabel func_80242918_CD9BF8
 /* CDA03C 80242D5C 0C00EABB */  jal       get_npc_unsafe
 /* CDA040 80242D60 84440008 */   lh       $a0, 8($v0)
 /* CDA044 80242D64 C440000C */  lwc1      $f0, 0xc($v0)
-/* CDA048 80242D68 3C018024 */  lui       $at, %hi(D_802453B8)
-/* CDA04C 80242D6C D42253B8 */  ldc1      $f2, %lo(D_802453B8)($at)
+/* CDA048 80242D68 3C018024 */  lui       $at, %hi(D_802453B8_CDC698)
+/* CDA04C 80242D6C D42253B8 */  ldc1      $f2, %lo(D_802453B8_CDC698)($at)
 /* CDA050 80242D70 46000021 */  cvt.d.s   $f0, $f0
 /* CDA054 80242D74 4622003C */  c.lt.d    $f0, $f2
 /* CDA058 80242D78 00000000 */  nop

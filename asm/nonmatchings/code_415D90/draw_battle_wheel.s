@@ -25,9 +25,9 @@ glabel draw_battle_wheel
 /* 416A34 802A1CA4 2C620020 */  sltiu     $v0, $v1, 0x20
 /* 416A38 802A1CA8 10400266 */  beqz      $v0, .L802A2644
 /* 416A3C 802A1CAC 00031080 */   sll      $v0, $v1, 2
-/* 416A40 802A1CB0 3C01802B */  lui       $at, %hi(jtbl_802AB770_420500)
+/* 416A40 802A1CB0 3C01802B */  lui       $at, %hi(jtbl_802AB770)
 /* 416A44 802A1CB4 00220821 */  addu      $at, $at, $v0
-/* 416A48 802A1CB8 8C22B770 */  lw        $v0, %lo(jtbl_802AB770_420500)($at)
+/* 416A48 802A1CB8 8C22B770 */  lw        $v0, %lo(jtbl_802AB770)($at)
 /* 416A4C 802A1CBC 00400008 */  jr        $v0
 /* 416A50 802A1CC0 00000000 */   nop
 glabel L802A1CC4_416A54

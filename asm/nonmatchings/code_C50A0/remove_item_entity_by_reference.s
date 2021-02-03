@@ -32,9 +32,9 @@ glabel remove_item_entity_by_reference
 /* CA090 80133990 2C62001D */  sltiu     $v0, $v1, 0x1d
 /* CA094 80133994 10400008 */  beqz      $v0, .L801339B8
 /* CA098 80133998 00031080 */   sll      $v0, $v1, 2
-/* CA09C 8013399C 3C018015 */  lui       $at, %hi(jtbl_80150D28_E7428)
+/* CA09C 8013399C 3C018015 */  lui       $at, %hi(jtbl_80150D28)
 /* CA0A0 801339A0 00220821 */  addu      $at, $at, $v0
-/* CA0A4 801339A4 8C220D28 */  lw        $v0, %lo(jtbl_80150D28_E7428)($at)
+/* CA0A4 801339A4 8C220D28 */  lw        $v0, %lo(jtbl_80150D28)($at)
 /* CA0A8 801339A8 00400008 */  jr        $v0
 /* CA0AC 801339AC 00000000 */   nop
 glabel L801339B0_CA0B0

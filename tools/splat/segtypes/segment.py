@@ -48,7 +48,7 @@ class Segment:
         self.rom_end = parse_segment_start(next_segment)
         self.type = parse_segment_type(segment)
         self.name = parse_segment_name(segment, self.__class__)
-        self.vram_addr = parse_segment_vram(segment)
+        self.vram_start = parse_segment_vram(segment)
         self.ld_name_override = segment.get("ld_name", None) if type(segment) is dict else None
         self.options = options
         self.config = segment
@@ -73,19 +73,25 @@ class Segment:
 
     @property
     def vram_end(self):
-        return self.vram_addr + self.size
+        return self.vram_start + self.size
+
+    def contains_vram(self, vram):
+        return vram >= self.vram_start and vram < self.vram_end
+
+    def contains_rom(self, rom):
+        return rom >= self.rom_start and rom < self.rom_end
 
     def rom_to_ram(self, rom_addr):
         if rom_addr < self.rom_start or rom_addr > self.rom_end:
             return None
 
-        return self.vram_addr + rom_addr - self.rom_start
+        return self.vram_start + rom_addr - self.rom_start
 
     def ram_to_rom(self, ram_addr):
-        if ram_addr < self.vram_addr or ram_addr > self.vram_end:
+        if ram_addr < self.vram_start or ram_addr > self.vram_end:
             return None
 
-        return self.rom_start + ram_addr - self.vram_addr
+        return self.rom_start + ram_addr - self.vram_start
 
     def create_split_dir(self, base_path, subdir):
         out_dir = Path(base_path, subdir)
@@ -112,7 +118,7 @@ class Segment:
     def get_ld_section(self):
         replace_ext = self.options.get("ld_o_replace_extension", True)
         sect_name = self.ld_name_override if self.ld_name_override else self.get_ld_section_name()
-        vram_or_rom = self.rom_start if self.vram_addr == 0 else self.vram_addr
+        vram_or_rom = self.rom_start if self.vram_start == 0 else self.vram_start
         subalign_str = "" if self.subalign == default_subalign else f"SUBALIGN({self.subalign})"
 
         s = (
@@ -125,7 +131,7 @@ class Segment:
             if start % 0x10 != 0 and i != 0:
                 tmp_sect_name = path.replace(".", "_")
                 tmp_sect_name = tmp_sect_name.replace("/", "_")
-                tmp_vram = start - self.rom_start + self.vram_addr
+                tmp_vram = start - self.rom_start + self.vram_start
                 s += (
                     "}\n"
                     f"SPLAT_BEGIN_SEG({tmp_sect_name}, 0x{start:X}, 0x{tmp_vram:X}, {subalign_str})\n"

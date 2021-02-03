@@ -24,9 +24,9 @@ glabel L8013F38C_D5A8C
 /* D5A94 8013F394 1040FFFD */  beqz      $v0, .L8013F38C
 /* D5A98 8013F398 26100004 */   addiu    $s0, $s0, 4
 /* D5A9C 8013F39C 00031080 */  sll       $v0, $v1, 2
-/* D5AA0 8013F3A0 3C018015 */  lui       $at, %hi(jtbl_80151140_E7840)
+/* D5AA0 8013F3A0 3C018015 */  lui       $at, %hi(jtbl_80151140)
 /* D5AA4 8013F3A4 00220821 */  addu      $at, $at, $v0
-/* D5AA8 8013F3A8 8C221140 */  lw        $v0, %lo(jtbl_80151140_E7840)($at)
+/* D5AA8 8013F3A8 8C221140 */  lw        $v0, %lo(jtbl_80151140)($at)
 /* D5AAC 8013F3AC 00400008 */  jr        $v0
 /* D5AB0 8013F3B0 00000000 */   nop
 glabel L8013F3B4_D5AB4

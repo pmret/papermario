@@ -34,9 +34,9 @@ glabel func_80124570
 /* BACE0 801245E0 2C620010 */  sltiu     $v0, $v1, 0x10
 /* BACE4 801245E4 104003EF */  beqz      $v0, .L801255A4
 /* BACE8 801245E8 00031080 */   sll      $v0, $v1, 2
-/* BACEC 801245EC 3C018015 */  lui       $at, %hi(jtbl_801503B8_E6AB8)
+/* BACEC 801245EC 3C018015 */  lui       $at, %hi(jtbl_801503B8)
 /* BACF0 801245F0 00220821 */  addu      $at, $at, $v0
-/* BACF4 801245F4 8C2203B8 */  lw        $v0, %lo(jtbl_801503B8_E6AB8)($at)
+/* BACF4 801245F4 8C2203B8 */  lw        $v0, %lo(jtbl_801503B8)($at)
 /* BACF8 801245F8 00400008 */  jr        $v0
 /* BACFC 801245FC 00000000 */   nop
 glabel L80124600_BAD00
@@ -180,9 +180,9 @@ glabel L801247CC_BAECC
 /* BAEF8 801247F8 104000BD */  beqz      $v0, .L80124AF0
 /* BAEFC 801247FC A2800509 */   sb       $zero, 0x509($s4)
 /* BAF00 80124800 00031080 */  sll       $v0, $v1, 2
-/* BAF04 80124804 3C018015 */  lui       $at, %hi(jtbl_801503F8_E6AF8)
+/* BAF04 80124804 3C018015 */  lui       $at, %hi(jtbl_801503F8)
 /* BAF08 80124808 00220821 */  addu      $at, $at, $v0
-/* BAF0C 8012480C 8C2203F8 */  lw        $v0, %lo(jtbl_801503F8_E6AF8)($at)
+/* BAF0C 8012480C 8C2203F8 */  lw        $v0, %lo(jtbl_801503F8)($at)
 /* BAF10 80124810 00400008 */  jr        $v0
 /* BAF14 80124814 00000000 */   nop
 glabel L80124818_BAF18
@@ -425,9 +425,9 @@ glabel L80124B7C_BB27C
 /* BB284 80124B84 1040029E */  beqz      $v0, .L80125600
 /* BB288 80124B88 26730001 */   addiu    $s3, $s3, 1
 /* BB28C 80124B8C 00031080 */  sll       $v0, $v1, 2
-/* BB290 80124B90 3C018015 */  lui       $at, %hi(jtbl_80150438_E6B38)
+/* BB290 80124B90 3C018015 */  lui       $at, %hi(jtbl_80150438)
 /* BB294 80124B94 00220821 */  addu      $at, $at, $v0
-/* BB298 80124B98 8C220438 */  lw        $v0, %lo(jtbl_80150438_E6B38)($at)
+/* BB298 80124B98 8C220438 */  lw        $v0, %lo(jtbl_80150438)($at)
 /* BB29C 80124B9C 00400008 */  jr        $v0
 /* BB2A0 80124BA0 00000000 */   nop
 glabel L80124BA4_BB2A4
@@ -877,9 +877,9 @@ glabel L801251C4_BB8C4
 /* BB8E4 801251E4 10400106 */  beqz      $v0, .L80125600
 /* BB8E8 801251E8 26730001 */   addiu    $s3, $s3, 1
 /* BB8EC 801251EC 00031080 */  sll       $v0, $v1, 2
-/* BB8F0 801251F0 3C018015 */  lui       $at, %hi(jtbl_801504F8_E6BF8)
+/* BB8F0 801251F0 3C018015 */  lui       $at, %hi(jtbl_801504F8)
 /* BB8F4 801251F4 00220821 */  addu      $at, $at, $v0
-/* BB8F8 801251F8 8C2204F8 */  lw        $v0, %lo(jtbl_801504F8_E6BF8)($at)
+/* BB8F8 801251F8 8C2204F8 */  lw        $v0, %lo(jtbl_801504F8)($at)
 /* BB8FC 801251FC 00400008 */  jr        $v0
 /* BB900 80125200 00000000 */   nop
 glabel L80125204_BB904

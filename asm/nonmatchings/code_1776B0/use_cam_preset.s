@@ -28,9 +28,9 @@ glabel use_cam_preset
 /* 17B870 8024CF90 A020F2A7 */  sb        $zero, %lo(D_8029F2A7)($at)
 /* 17B874 8024CF94 104004F7 */  beqz      $v0, .L8024E374
 /* 17B878 8024CF98 00111080 */   sll      $v0, $s1, 2
-/* 17B87C 8024CF9C 3C01802A */  lui       $at, %hi(jtbl_8029CC48_1CB528)
+/* 17B87C 8024CF9C 3C01802A */  lui       $at, %hi(jtbl_8029CC48)
 /* 17B880 8024CFA0 00220821 */  addu      $at, $at, $v0
-/* 17B884 8024CFA4 8C22CC48 */  lw        $v0, %lo(jtbl_8029CC48_1CB528)($at)
+/* 17B884 8024CFA4 8C22CC48 */  lw        $v0, %lo(jtbl_8029CC48)($at)
 /* 17B888 8024CFA8 00400008 */  jr        $v0
 /* 17B88C 8024CFAC 00000000 */   nop
 glabel L8024CFB0_17B890
