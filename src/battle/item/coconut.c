@@ -2,8 +2,68 @@
 #include "script_api/battle.h"
 
 MenuIcon* D_802A1E80;
+void* D_80108A64; // an image
 
-INCLUDE_ASM(s32, "battle/item/coconut", func_802A1000_72F720); // alloc and show icon
+// TODO
+ApiStatus func_802A1000_72F720(ScriptInstance* script, s32 isInitialCall) {
+    MenuIcon *temp_a0;
+    f32 playerTop;
+    s32 sellValue;
+    s32 temp_s0;
+    s32 numCoins;
+    s32 temp_v0;
+    Actor* player;
+    s32 pickupDelay;
+    f32 facingAngleSign;
+    s32 phi_s0;
+    s32 i = 0;
+    s32 phi_s0_2;
+
+    s32 iconX;
+    s32 iconY;
+    s32 iconZ;
+
+    BattleStatus* battleStatus = BATTLE_STATUS;
+
+    player = &battleStatus->playerActor;
+    sellValue = gItemTable[battleStatus->selectedItemID].sellValue;
+    playerTop = player->currentPos.y + (f32) player->size.y;
+
+    // If Refund is equipped, the player gets 75% of the item's sell price, rounded up
+    if (heroes_is_ability_active(player, Ability_REFUND)) {
+        if (sellValue > 0) {
+            temp_v0 = (sellValue * 0x4B) + 0x63;
+            numCoins = (MULT_HI(temp_v0, 0x51EB851F) >> 5) - (temp_v0 >> 0x1F);
+
+            if (numCoins > 0) {
+                pickupDelay = 1;
+                facingAngleSign = 0.0f;
+                i = 0;
+loop_4:
+                i++;
+                make_item_entity(ItemId_COIN, player->currentPos.x, playerTop, player->currentPos.z, 0x17, pickupDelay, facingAngleSign, 0);
+                add_coins(1);
+
+                pickupDelay += 3;
+                facingAngleSign += 30.0f;
+
+                if (i < numCoins) {
+                    goto loop_4;
+                }
+            }
+
+            get_screen_coords(gCurrentCameraID, player->currentPos.x, player->currentPos.y, player->currentPos.z, &iconX, &iconY, &iconZ);
+            D_802A1E80 = create_icon(&D_80108A64);
+            set_icon_render_pos(D_802A1E80, iconX + 0x24, iconY - 0x3F);
+            i = (i * 2) + i + 0x1E;
+        }
+    }
+
+    script->varTable[0] = i;
+
+    return ApiStatus_DONE2;
+}
+//INCLUDE_ASM(ApiStatus, "battle/item/coconut", func_802A1000_72F720, ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus func_802A11D4_72F8F4(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = BATTLE_STATUS;
