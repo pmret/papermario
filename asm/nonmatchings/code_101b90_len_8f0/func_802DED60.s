@@ -18,8 +18,8 @@ glabel func_802DED60
 /* 101E84 802DED94 2406000C */   addiu    $a2, $zero, 0xc
 /* 101E88 802DED98 3C060194 */  lui       $a2, 0x194
 /* 101E8C 802DED9C 34C63010 */  ori       $a2, $a2, 0x3010
-/* 101E90 802DEDA0 3C048035 */  lui       $a0, %hi(D_8034F800)
-/* 101E94 802DEDA4 2484F800 */  addiu     $a0, $a0, %lo(D_8034F800)
+/* 101E90 802DEDA0 3C048035 */  lui       $a0, %hi(gSpriteHeapPtr)
+/* 101E94 802DEDA4 2484F800 */  addiu     $a0, $a0, %lo(gSpriteHeapPtr)
 /* 101E98 802DEDA8 8E020000 */  lw        $v0, ($s0)
 /* 101E9C 802DEDAC 02510018 */  mult      $s2, $s1
 /* 101EA0 802DEDB0 3C01802E */  lui       $at, %hi(D_802E0C58)
