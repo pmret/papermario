@@ -29,26 +29,22 @@ ApiStatus func_802A1000_72F720(ScriptInstance* script, s32 isInitialCall) {
     sellValue = gItemTable[battleStatus->selectedItemID].sellValue;
     playerTop = player->currentPos.y + (f32) player->size.y;
 
-    // If Refund is equipped, the player gets 75% of the item's sell price, rounded up
+    // If Refund is equipped, the player gets
     if (heroes_is_ability_active(player, Ability_REFUND)) {
         if (sellValue > 0) {
-            temp_v0 = (sellValue * 0x4B) + 0x63;
-            numCoins = (MULT_HI(temp_v0, 0x51EB851F) >> 5) - (temp_v0 >> 0x1F);
+            // 75% of the item's sell value, rounded up
+            numCoins = (sellValue * 75 + 99) / 100;
 
             if (numCoins > 0) {
                 pickupDelay = 1;
                 facingAngleSign = 0.0f;
-                i = 0;
-loop_4:
-                i++;
-                make_item_entity(ItemId_COIN, player->currentPos.x, playerTop, player->currentPos.z, 0x17, pickupDelay, facingAngleSign, 0);
-                add_coins(1);
 
-                pickupDelay += 3;
-                facingAngleSign += 30.0f;
+                for (i = 0; i < numCoins; i++) {
+                    make_item_entity(ItemId_COIN, player->currentPos.x, playerTop, player->currentPos.z, 0x17, pickupDelay, facingAngleSign, 0);
+                    add_coins(1);
 
-                if (i < numCoins) {
-                    goto loop_4;
+                    pickupDelay += 3;
+                    facingAngleSign += 30.0f;
                 }
             }
 
