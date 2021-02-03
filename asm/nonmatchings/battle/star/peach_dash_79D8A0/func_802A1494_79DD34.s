@@ -5,7 +5,7 @@ glabel func_802A1494_79DD34
 /* 79DD34 802A1494 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 79DD38 802A1498 AFBF0010 */  sw        $ra, 0x10($sp)
 /* 79DD3C 802A149C 8C82000C */  lw        $v0, 0xc($a0)
-/* 79DD40 802A14A0 0C0B1EAF */  jal       func_802C7ABC_7C435C
+/* 79DD40 802A14A0 0C0B1EAF */  jal       get_variable
 /* 79DD44 802A14A4 8C450000 */   lw       $a1, ($v0)
 /* 79DD48 802A14A8 3C058011 */  lui       $a1, %hi(gPlayerData+0x12)
 /* 79DD4C 802A14AC 80A5F2A2 */  lb        $a1, %lo(gPlayerData+0x12)($a1)

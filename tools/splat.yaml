@@ -2730,6 +2730,7 @@ segments:
     files:
     - [0x79D8A0, c]
     - [0x79DE50, data]
+  - [0x79EF40, bin] # todo identify
   - name: world/script_api/
     ld_name: world_script_api
     type: code

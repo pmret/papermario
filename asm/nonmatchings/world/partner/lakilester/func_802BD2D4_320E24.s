@@ -195,8 +195,8 @@ glabel func_802BD2D4_320E24
 /* 3210F8 802BD5A8 8E020000 */  lw        $v0, ($s0)
 /* 3210FC 802BD5AC E6200034 */  swc1      $f0, 0x34($s1)
 /* 321100 802BD5B0 C4400014 */  lwc1      $f0, 0x14($v0)
-/* 321104 802BD5B4 3C01802C */  lui       $at, %hi(D_802BFEF0_323A40)
-/* 321108 802BD5B8 D422FEF0 */  ldc1      $f2, %lo(D_802BFEF0_323A40)($at)
+/* 321104 802BD5B4 3C01802C */  lui       $at, %hi(D_802BFEF0)
+/* 321108 802BD5B8 D422FEF0 */  ldc1      $f2, %lo(D_802BFEF0)($at)
 /* 32110C 802BD5BC 46000021 */  cvt.d.s   $f0, $f0
 /* 321110 802BD5C0 46220000 */  add.d     $f0, $f0, $f2
 /* 321114 802BD5C4 3C014220 */  lui       $at, 0x4220
