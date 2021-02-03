@@ -22,7 +22,7 @@ void guOrthoF(float mf[4][4], float l, float r, float b, float t,
     }
 }
 #else
-INCLUDE_ASM(void, "guOrtho", guOrthoF, float mf[4][4], float l, float r, float b, float t, float n, float f,
+INCLUDE_ASM(void, "os/guOrtho", guOrthoF, float mf[4][4], float l, float r, float b, float t, float n, float f,
             float scale);
 #endif
 
@@ -36,6 +36,6 @@ void guOrtho(Mtx* m, float l, float r, float b, float t,
     guMtxF2L(mf, m);
 }
 #else
-INCLUDE_ASM(void, "guOrtho", guOrtho, Mtx* m, float l, float r, float b, float t,
+INCLUDE_ASM(void, "os/guOrtho", guOrtho, Mtx* m, float l, float r, float b, float t,
             float n, float f, float scale);
 #endif
