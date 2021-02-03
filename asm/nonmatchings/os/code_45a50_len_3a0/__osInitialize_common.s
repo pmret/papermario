@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel osInitialize
+glabel __osInitialize_common
 /* 45B08 8006A708 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 45B0C 8006A70C 24020001 */  addiu     $v0, $zero, 1
 /* 45B10 8006A710 AFBF0018 */  sw        $ra, 0x18($sp)
