@@ -287,25 +287,27 @@ async def main():
         description="rom $in")
     n.newline()
 
-    n.rule("sha1sum",
-        command="sha1sum -c $in && touch $out",
-        description="compare")
+    objects, segments = read_splat("tools/splat.yaml") # no .o extensions!
+    c_files = (f for f in objects if f.endswith(".c")) # glob("src/**/*.c", recursive=True)
+
+    n.rule("checksums",
+        command=f"(sha1sum -c checksum.sha1 && bash $out.bash > $out) || sha1sum -c $out --quiet",
+        description="compare",
+        rspfile="$out.bash",
+        rspfile_content=f"sha1sum {' '.join([obj(o) for o in objects])}")
     n.newline()
 
     n.rule("cc_modern_exe", command="cc $in -O3 -o $out")
     n.newline()
 
-    objects, segments = read_splat("tools/splat.yaml") # no .o extensions!
-    c_files = (f for f in objects if f.endswith(".c")) # glob("src/**/*.c", recursive=True)
-
     n.comment("target")
     n.build("$builddir/$target.ld", "cpp", "$target.ld")
     n.build("$builddir/$target.elf", "link", "$builddir/$target.ld", implicit=[obj(o) for o in objects], implicit_outputs="$builddir/$target.map")
     n.build("$target.z64", "rom", "$builddir/$target.elf", implicit="tools/n64crc")
-    n.build("$builddir/is_ok", "sha1sum", "checksum.sha1", implicit="$target.z64")
+    n.build("$builddir/expected.sha1", "checksums", implicit="$target.z64")
     n.newline()
 
-    n.default("$builddir/is_ok")
+    n.default("$builddir/expected.sha1")
     n.newline()
 
     # generated headers
