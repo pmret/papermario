@@ -2122,223 +2122,253 @@ segments:
     files:
     - [0x714CF0, c]
     - [0x714DC0, data]
-  - type: code
+  - name: battle/item/mushroom
+    type: code
     start: 0x715850
     vram: 0x802A1000
     overlay: True
     files:
     - [0x715850, c]
-    - [0x715E50, bin]
-  - type: code
+    - [0x715E50, data]
+  - name: battle/item/fire_flower
+    type: code
     start: 0x716C60
     vram: 0x802A1000
     overlay: True
     files:
     - [0x716C60, c]
-    - [0x717060, bin]
-  - type: code
+    - [0x717060, data]
+  - name: battle/item/dusty_hammer
+    type: code
     start: 0x7179D0
     vram: 0x802A1000
     overlay: True
     files:
     - [0x7179D0, c]
-    - [0x717C10, bin]
-  - type: code
+    - [0x717C10, data]
+  - name: battle/item/pow_block
+    type: code
     start: 0x718850
     vram: 0x802A1000
     overlay: True
     files:
     - [0x718850, c]
-    - [0x718BF0, bin]
-  - type: code
+    - [0x718BF0, data]
+  - name: battle/item/pebble
+    type: code
     start: 0x719970
     vram: 0x802A1000
     overlay: True
     files:
     - [0x719970, c]
-    - [0x719BB0, bin]
-  - type: code
+    - [0x719BB0, data]
+  - name: battle/item/volt_shroom
+    type: code
     start: 0x71A7F0
     vram: 0x802A1000
     overlay: True
     files:
     - [0x71A7F0, c]
-    - [0x71AA70, bin]
-  - type: code
+    - [0x71AA70, data]
+  - name: battle/item/thunder_rage
+    type: code
     start: 0x71B1A0
     vram: 0x802A1000
     overlay: True
     files:
     - [0x71B1A0, c]
-    - [0x71B640, bin]
-  - type: code
+    - [0x71B640, data]
+  - name: battle/item/snowman_doll
+    type: code
     start: 0x71BE30
     vram: 0x802A1000
     overlay: True
     files:
     - [0x71BE30, c]
-    - [0x71C270, bin]
-  - type: code
+    - [0x71C270, data]
+  - name: battle/item/dried_shroom
+    type: code
     start: 0x71CCE0
     vram: 0x802A1000
     overlay: True
     files:
     - [0x71CCE0, c]
-    - [0x71D010, bin]
-  - type: code
+    - [0x71D010, data]
+  - name: battle/item/shooting_star
+    type: code
     start: 0x71D770
     vram: 0x802A1000
     overlay: True
     files:
     - [0x71D770, c]
-    - [0x71DCC0, bin]
-  - type: code
+    - [0x71DCC0, data]
+  - name: battle/item/sleepy_sheep
+    type: code
     start: 0x71E650
     vram: 0x802A1000
     overlay: True
     files:
     - [0x71E650, c]
-    - [0x71EFC0, bin]
-  - type: code
+    - [0x71EFC0, data]
+  - name: battle/item/stone_cap
+    type: code
     start: 0x7215A0
     vram: 0x802A1000
     overlay: True
     files:
     - [0x7215A0, c]
-    - [0x721970, bin]
-  - type: code
+    - [0x721970, data]
+  - name: battle/item/tasty_tonic
+    type: code
     start: 0x722000
     vram: 0x802A1000
     overlay: True
     files:
     - [0x722000, c]
-    - [0x7222D0, bin]
-  - type: code
+    - [0x7222D0, data]
+  - name: battle/item/thunder_bolt
+    type: code
     start: 0x722B40
     vram: 0x802A1000
     overlay: True
     files:
     - [0x722B40, c]
-    - [0x722FE0, bin]
-  - type: code
+    - [0x722FE0, data]
+  - name: battle/item/ultra_shroom
+    type: code
     start: 0x723780
     vram: 0x802A1000
     overlay: True
     files:
     - [0x723780, c]
-    - [0x723AB0, bin]
-  - type: code
+    - [0x723AB0, data]
+  - type: code # todo what is this
     start: 0x724240
     vram: 0x802A1000
     overlay: True
     files:
     - [0x724240, c]
-    - [0x724570, bin]
-  - type: code
+    - [0x724570, data]
+  - name: battle/item/super_soda
+    type: code
     start: 0x724CE0
     vram: 0x802A1000
     overlay: True
     files:
     - [0x724CE0, c]
-    - [0x725210, bin]
-  - type: code
+    - [0x725210, data]
+  - name: battle/item/hustle_drink
+    type: code
     start: 0x725F60
     vram: 0x802A1000
     overlay: True
     files:
     - [0x725F60, c]
-    - [0x726240, bin]
-  - type: code
+    - [0x726240, data]
+  - name: battle/item/stop_watch
+    type: code
     start: 0x726DD0
     vram: 0x802A1000
     overlay: True
     files:
     - [0x726DD0, c]
-    - [0x727120, bin]
-  - type: code
+    - [0x727120, data]
+  - name: battle/item/dizzy_dial
+    type: code
     start: 0x727910
     vram: 0x802A1000
     overlay: True
     files:
     - [0x727910, c]
-    - [0x727CE0, bin]
-  - type: code
+    - [0x727CE0, data]
+  - name: battle/item/please_come_back
+    type: code
     start: 0x7285E0
     vram: 0x802A1000
     overlay: True
     files:
     - [0x7285E0, c]
-    - [0x728820, bin]
-  - type: code
+    - [0x728820, data]
+  - name: battle/item/egg_missile
+    type: code
     start: 0x728EC0
     vram: 0x802A1000
     overlay: True
     files:
     - [0x728EC0, c]
-    - [0x7291D0, bin]
-  - type: code
+    - [0x7291D0, data]
+  - name: battle/item/insecticide_herb
+    type: code
     start: 0x72A750
     vram: 0x802A1000
     overlay: True
     files:
     - [0x72A750, c]
-    - [0x72AB70, bin]
-  - type: code
+    - [0x72AB70, data]
+  - name: battle/item/fright_jar
+    type: code
     start: 0x72B910
     vram: 0x802A1000
     overlay: True
     files:
     - [0x72B910, c]
-    - [0x72BC60, bin]
-  - type: code
+    - [0x72BC60, data]
+  - name: battle/item/mystery
+    type: code
     start: 0x72C5B0
     vram: 0x802A1000
     overlay: True
     files:
     - [0x72C5B0, c]
-    - [0x72CF00, bin]
-  - type: code
+    - [0x72CF00, data]
+  - name: battle/item/repel_gel
+    type: code
     start: 0x72DB70
     vram: 0x802A1000
     overlay: True
     files:
     - [0x72DB70, c]
-    - [0x72DE00, bin]
-  - type: code
+    - [0x72DE00, data]
+  - name: battle/item/life_shroom
+    type: code
     start: 0x72E530
     vram: 0x802A1000
     overlay: True
     files:
     - [0x72E530, c]
-    - [0x72EA20, bin]
-  - type: code
+    - [0x72EA20, data]
+  - name: battle/item/coconut
+    type: code
     start: 0x72F720
     vram: 0x802A1000
     overlay: True
     files:
     - [0x72F720, c]
-    - [0x72F960, bin]
-  - type: code
+    - [0x72F960, data]
+  - name: battle/item/electro_pop
+    type: code
     start: 0x7305A0
     vram: 0x802A1000
     overlay: True
     files:
     - [0x7305A0, c]
-    - [0x730AE0, bin]
-  - type: code
+    - [0x730AE0, data]
+  - name: battle/item/strange_cake
+    type: code
     start: 0x731300
     vram: 0x802A1000
     overlay: True
     files:
     - [0x731300, c]
-    - [0x731EA0, bin]
-  - type: code
+    - [0x731EA0, data]
+  - name: battle/item/food
+    type: code
     start: 0x7330D0
     vram: 0x802A1000
     overlay: True
     files:
     - [0x7330D0, c]
-    - [0x733700, bin]
+    - [0x733700, data]
   - type: code
     start: 0x7345A0
     vram: 0x802A1000
@@ -2575,84 +2605,84 @@ segments:
     vram: 0x802A1000
     overlay: True
     files:
-    - [0x789E60, c]
+    - [0x789E60, c] # add c func
     - [0x78A480, bin]
   - type: code
     start: 0x78B600
     vram: 0x802A1000
     overlay: True
     files:
-    - [0x78B600, c]
+    - [0x78B600, c] # add c func
     - [0x78C070, bin]
   - type: code
     start: 0x78D150
     vram: 0x802A1000
     overlay: True
     files:
-    - [0x78D150, c]
+    - [0x78D150, c] # add c func
     - [0x78D770, bin]
   - type: code
     start: 0x78E7D0
     vram: 0x802A1000
     overlay: True
     files:
-    - [0x78E7D0, c]
+    - [0x78E7D0, c] # add c func
     - [0x78EEB0, bin]
   - type: code
     start: 0x7900D0
     vram: 0x802A1000
     overlay: True
     files:
-    - [0x7900D0, c]
+    - [0x7900D0, c] # add c func
     - [0x7909C0, bin]
   - type: code
     start: 0x791D90
     vram: 0x802A1000
     overlay: True
     files:
-    - [0x791D90, c]
+    - [0x791D90, c] # add c func
     - [0x7923C0, bin]
   - type: code
     start: 0x793D20
     vram: 0x802A1000
     overlay: True
     files:
-    - [0x793D20, c]
+    - [0x793D20, c] # add c func
     - [0x794240, bin]
   - type: code
     start: 0x7952E0
     vram: 0x802A1000
     overlay: True
     files:
-    - [0x7952E0, c]
+    - [0x7952E0, c] # add c func
     - [0x7959B0, bin]
   - type: code
     start: 0x796FC0
     vram: 0x802A1000
     overlay: True
     files:
-    - [0x796FC0, c]
+    - [0x796FC0, c] # add c func
     - [0x7984B0, bin]
   - type: code
     start: 0x7997B0
     vram: 0x802A1000
     overlay: True
     files:
-    - [0x7997B0, c]
+    - [0x7997B0, c] # add c func
     - [0x79ACA0, bin]
   - type: code
     start: 0x79BFA0
     vram: 0x802A1000
     overlay: True
     files:
-    - [0x79BFA0, c]
+    - [0x79BFA0, c] # add c func
     - [0x79C4D0, bin]
   - type: code
     start: 0x79D8A0
     vram: 0x802A1000
     overlay: True
     files:
-    - [0x79D8A0, c]
+    - [0x79D8A0, c] # add c func
     - [0x79DE50, bin]
   - name: world/script_api/
     ld_name: world_script_api
