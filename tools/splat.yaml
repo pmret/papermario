@@ -2344,8 +2344,8 @@ segments:
     vram: 0x802A1000
     overlay: True
     files:
-    - [0x72F720, c]
-    - [0x72F960, data]
+    - [0x72F720, c, battle/item/coconut]
+    - [0x72F960, .data, battle/item/coconut]
   - name: battle/item/electro_pop
     type: code
     start: 0x7305A0

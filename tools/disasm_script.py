@@ -42,7 +42,7 @@ def script_lib():
 
                 s = [s.strip() for s in line.split("=", 1)]
                 name = s[0]
-                addr = s[1]
+                addr = s[1].split(";")[0].split(" ")[0]
                 _script_lib[int(addr, 16)] = name
 
     return _script_lib
@@ -67,7 +67,7 @@ class ScriptDisassembler:
             argc = self.read_word()
 
             if opcode > 0xFF or argc > 0xFF:
-                raise Exception(f"script '{script_name}' is malformed")
+                raise Exception(f"script '{self.script_name}' is malformed")
 
             argv = []
             for i in range(0, argc):
