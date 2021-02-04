@@ -30,7 +30,7 @@ ApiStatus func_802A1000_72F720(ScriptInstance* script, s32 isInitialCall) {
     sellValue = gItemTable[battleStatus->selectedItemID].sellValue;
     posY = battleStatus->playerActor->currentPos.y + battleStatus->playerActor->size.y;
 
-    player = PLAYER;
+    player = PLAYER_ACTOR;
 
     // If Refund is equipped, the player gets
     if (heroes_is_ability_active(battleStatus->playerActor, Ability_REFUND)) {
