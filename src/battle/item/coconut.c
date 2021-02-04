@@ -153,7 +153,7 @@ Script D_802A1670_72FFD0 = SCRIPT({
     UseIdleAnimation(0, 0);
     SetGoalToHome(0);
     SetActorSpeed(0, 8.0);
-    SetAnimation(0, 0, 0x10005);
+    SetAnimation(0, 0, PlayerAnim_RUNNING);
     PlayerRunToGoal(0);
     SetAnimation(0, 0, 0x10002);
     UseIdleAnimation(0, 1);
@@ -244,12 +244,12 @@ Script D_802A1B6C_7304B0 = SCRIPT({
     SI_VAR(2) += SI_VAR(5);
     func_802D36E0(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2));
     InitTargetIterator();
-    SetGoalToTarget(0xFFFFFF81);
-    GetGoalPos(0xFFFFFF81, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    SetGoalToTarget(ActorID_SELF);
+    GetGoalPos(ActorID_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     spawn {
         SI_VAR(0) = 0;
         loop 18 {
-            SI_VAR(0) += 0xFFFFFFC4;
+            SI_VAR(0) += -60;
             func_802D3840(SI_VAR(10), 0, 0, SI_VAR(0));
             sleep 1;
         }
