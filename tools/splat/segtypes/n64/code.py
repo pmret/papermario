@@ -46,7 +46,7 @@ def get_funcs_defined_in_c(c_file):
 
 class N64SegCode(N64Segment):
     def parse_segment_files(self, segment, seg_start, seg_end, seg_name, seg_vram):
-        prefix = "" if seg_name.endswith("/") else f"{seg_name}_"
+        prefix = seg_name if seg_name.endswith("/") else f"{seg_name}_"
 
         ret = []
         prev_start = -1
@@ -70,6 +70,8 @@ class N64SegCode(N64Segment):
 
                 if not name:
                     name = self.get_default_name(start) if seg_name == self.get_default_name(seg_start) else f"{prefix}{start:X}"
+                elif seg_name.endswith("/"):
+                    name = seg_name + name
 
                 vram = seg_vram + (start - seg_start)
 
@@ -735,7 +737,6 @@ class N64SegCode(N64Segment):
                     c_path = os.path.join(
                         base_path,
                         "src",
-                        self.name if self.name.endswith("/") else "",
                         split_file["name"] + "." + self.get_ext(split_file["subtype"])
                     )
 

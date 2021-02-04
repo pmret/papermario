@@ -47,8 +47,7 @@ def read_splat(splat_config: str):
 
     for segment in all_segments:
         for subdir, path, obj_type, start in segment.get_ld_files():
-            print(path)
-            path = (segment.name if segment.name.endswith("/") else "") + subdir + "/" + path
+            path = subdir + "/" + path
 
             objects.add(path)
             segments[path] = segment
