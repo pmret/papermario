@@ -1,5 +1,6 @@
 from pathlib import Path, PurePath
 from util import log
+import os
 
 default_subalign = 16
 
@@ -129,7 +130,7 @@ class Segment:
         for subdir, path, obj_type, start in self.get_ld_files():
             # Hack for non-0x10 alignment
             if start % 0x10 != 0 and i != 0:
-                tmp_sect_name = path.replace(".", "_")
+                tmp_sect_name = os.path.join(subdir, path).replace(".", "_")
                 tmp_sect_name = tmp_sect_name.replace("/", "_")
                 tmp_vram = start - self.rom_start + self.vram_start
                 s += (

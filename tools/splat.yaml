@@ -1550,10 +1550,10 @@ segments:
     - [0x4313F0, c]
     - [0x431660, c]
     - [0x4318D0, c]
-    - [0x431B80, .data, battle/area_kmr_part_1/battles]
-    - [0x431FB0, .data, battle/actor/goomba]
+    - [0x431B80, .data, battles]
+    - [0x431FB0, .data, goomba]
     - [0x433970, bin]
-    - [0x4398A0, .rodata, battle/area_kmr_part_1/battles]
+    - [0x4398A0, .rodata, battles]
     - [0x439984, bin]
   - name: battle/area_kmr_part_2/
     type: code
@@ -2338,14 +2338,18 @@ segments:
     files:
     - [0x72E530, c]
     - [0x72EA20, data]
-  - name: battle/item/coconut
+  - name: battle/item/coconut/
     type: code
     start: 0x72F720
     vram: 0x802A1000
     overlay: True
     files:
-    - [0x72F720, c, battle/item/coconut]
-    - [0x72F960, .data, battle/item/coconut]
+    - [0x72F720, c,       aux]
+    - [0x72F960, .data,   aux]
+    # - [0x72F960, .data,   aux]
+    # - [0x72F960, ci8,     coconut, w, h]
+    # - [0x72F960, palette, coconut]
+    # - [0x72F960, .data,   coconut]
   - name: battle/item/electro_pop
     type: code
     start: 0x7305A0
@@ -2742,7 +2746,7 @@ segments:
     - [0x7E3700, c]
     - [0x7E4690, c]
     - [0x7E4D00, data]
-    - [0x7E7380, .rodata, world/script_api/7E2AA0]
+    - [0x7E7380, .rodata, 7E2AA0]
   - name: world/area_mac/machi/
     type: code
     overlay: True
@@ -3279,13 +3283,13 @@ segments:
     - [0x8C82B0, c]
     - [0x8C83A0, c]
     - [0x8C85E0, c]
-    - [0x8C85E0, .data, world/area_kmr/kmr_03/8C7F90]
-    - [0x8C8680, .data, world/area_kmr/kmr_03/8C8140]
-    - [0x8C88E0, .data, world/area_kmr/kmr_03/8C82B0]
+    - [0x8C85E0, .data, 8C7F90]
+    - [0x8C8680, .data, 8C8140]
+    - [0x8C88E0, .data, 8C82B0]
       # - [0x8C9400, bin]
-    - [0x8C9780, .data, world/area_kmr/kmr_03/8C83A0]
-    - [0x8CA2D0, .data, world/area_kmr/kmr_03/8C85E0]
-    - [0x8CA8F0, .rodata, world/area_kmr/kmr_03/8C8140]
+    - [0x8C9780, .data, 8C83A0]
+    - [0x8CA2D0, .data, 8C85E0]
+    - [0x8CA8F0, .rodata, 8C8140]
   - name: world/area_kmr/kmr_04/
     type: code
     overlay: True
@@ -3391,10 +3395,10 @@ segments:
     start: 0x8EB360
     vram: 0x80240000
     files:
-    - [0x8EB360, c, world/area_kmr/kmr_12/header]
-    - [0x8EB390, .data, world/area_kmr/kmr_12/header]
-    - [0x8EB420, .data, world/area_kmr/kmr_12/events]
-    - [0x8EBE10, .rodata, world/area_kmr/kmr_12/events]
+    - [0x8EB360, c, header]
+    - [0x8EB390, .data, header]
+    - [0x8EB420, .data, events]
+    - [0x8EBE10, .rodata, events]
   - name: world/area_kmr/kmr_20/
     type: code
     overlay: True
@@ -3589,9 +3593,9 @@ segments:
     files:
     - [0x929270, c]
     - [0x9292B0, c]
-    - [0x9292D0, .data, world/area_sbk/sbk_00/929270]
-    - [0x929A00, .data, world/area_sbk/sbk_00/9292B0]
-    - [0x929A80, .rodata, world/area_sbk/sbk_00/929270]
+    - [0x9292D0, .data, "929270"]
+    - [0x929A00, .data, 9292B0]
+    - [0x929A80, .rodata, "929270"]
   - name: world/area_sbk/sbk_01/
     type: code
     overlay: True
@@ -3600,9 +3604,9 @@ segments:
     files:
     - [0x929A90, c]
     - [0x929AD0, c]
-    - [0x929AF0, .data, world/area_sbk/sbk_01/929A90]
-    - [0x929E00, .data, world/area_sbk/sbk_01/929AD0]
-    - [0x92A290, .rodata, world/area_sbk/sbk_01/929A90]
+    - [0x929AF0, .data, 929A90]
+    - [0x929E00, .data, 929AD0]
+    - [0x92A290, .rodata, 929A90]
   - name: world/area_sbk/sbk_02/
     type: code
     overlay: True
