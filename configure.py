@@ -418,6 +418,18 @@ async def main():
                 if asset_name.endswith("_tex"): # uncompressed
                     asset_files.append(f"bin/assets/{asset_name}.bin")
                     asset_files.append(f"bin/assets/{asset_name}.bin")
+                elif asset_name.startswith("party_"):
+                    source_file = f"$builddir/bin/assets/{asset_name}.bin"
+                    asset_file = f"$builddir/bin/assets/{asset_name}.Yay0"
+
+                    n.build(source_file, "img", f"img/party/{asset_name}.png", implicit="tools/convert_image.py", variables={
+                        "img_type": "party",
+                        "img_flags": "",
+                    })
+
+                    asset_files.append(source_file)
+                    asset_files.append(asset_file)
+                    n.build(asset_file, "yay0compress", source_file, implicit="tools/Yay0compress")
                 else: # uncompressed
                     source_file = f"bin/assets/{asset_name}.bin"
                     asset_file = f"$builddir/assets/{asset_name}.Yay0"

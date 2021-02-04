@@ -180,6 +180,27 @@ class Converter():
 
                         i = rgb_to_intensity(*rgba[:3])
                         f.write(i.to_bytes(1, byteorder="big"))
+        elif self.mode == "party":
+            data = img.read()[2]
+            img.preamble(True)
+            palette = img.palette(alpha="force")
+
+            with open(self.outfile, "wb") as f:
+                # palette
+                for rgba in palette:
+                    if rgba[3] not in (0, 0xFF):
+                        self.warn("alpha mask mode but translucent pixels used")
+
+                    color = pack_color(*rgba)
+                    f.write(color.to_bytes(2, byteorder="big"))
+
+                assert f.tell() == 0x200, "palette has wrong size"
+
+                # ci 8
+                for row in reversed_if(data, self.flip_y):
+                    f.write(row)
+
+                f.write(b"\0\0\0\0\0\0\0\0\0\0") # padding
         else:
             print("unsupported mode", file=stderr)
             exit(1)
