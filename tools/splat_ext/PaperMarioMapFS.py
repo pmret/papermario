@@ -2,6 +2,9 @@ import os
 from segtypes.n64.segment import N64Segment
 from pathlib import Path
 from util.n64 import Yay0decompress
+from util.color import unpack_color
+from util.iter import iter_in_groups
+import png
 
 
 def decode_null_terminated_ascii(data):
@@ -14,12 +17,22 @@ def decode_null_terminated_ascii(data):
     return data[:length].decode('ascii')
 
 
+def parse_palette(data):
+        palette = []
+
+        for a, b in iter_in_groups(data, 2):
+            palette.append(unpack_color([a, b]))
+
+        return palette
+
+
 class N64SegPaperMarioMapFS(N64Segment):
     def __init__(self, segment, next_segment, options):
         super().__init__(segment, next_segment, options)
 
     def split(self, rom_bytes, base_path):
         bin_dir = self.create_split_dir(base_path, "bin/assets")
+        img_party_dir = self.create_split_dir(base_path, "img/party")
 
         data = rom_bytes[self.rom_start: self.rom_end]
 
@@ -37,6 +50,9 @@ class N64SegPaperMarioMapFS(N64Segment):
 
             if offset == 0:
                 path = None
+            elif name.startswith("party_"):
+                path = "{}.png".format(name)
+                self.create_parent_dir(img_party_dir, path)
             else:
                 path = "{}.bin".format(name)
                 self.create_parent_dir(bin_dir, path)
@@ -44,16 +60,24 @@ class N64SegPaperMarioMapFS(N64Segment):
             if name == "end_data":
                 break
 
-            with open(os.path.join(bin_dir, path), "wb") as f:
-                bytes = rom_bytes[self.rom_start + 0x20 +
-                                  offset: self.rom_start + 0x20 + offset + size]
+            bytes = rom_bytes[self.rom_start + 0x20 +
+                                offset: self.rom_start + 0x20 + offset + size]
 
-                if is_compressed:
-                    self.log(f"Decompressing {name}...")
-                    bytes = Yay0decompress.decompress_yay0(bytes)
+            if is_compressed:
+                self.log(f"Decompressing {name}...")
+                bytes = Yay0decompress.decompress_yay0(bytes)
 
-                f.write(bytes)
-                self.log(f"Wrote {name} to {Path(bin_dir, path)}")
+
+                if name.startswith("party_"):
+                    with open(os.path.join(img_party_dir, path), "wb") as f:
+                        # CI-8
+                        w = png.Writer(150, 105, palette=parse_palette(bytes[:0x200]))
+                        w.write_array(f, bytes[0x200:])
+                else:
+                    with open(os.path.join(bin_dir, path), "wb") as f:
+                        f.write(bytes)
+
+            self.log(f"Wrote {name} to {Path(bin_dir, path)}")
 
             asset_idx += 1
 
