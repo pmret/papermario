@@ -8870,3 +8870,4 @@ battle_item_snowman_doll_FadeBackgroundToBlack = 0x802A1320; // type:func rom:0x
 battle_item_thunder_bolt_FadeBackgroundToBlack = 0x802A1388; // type:func rom:0x722EC8
 battle_item_stop_watch_FadeBackgroundToBlack = 0x802A123C; // type:func rom:0x72700C
 battle_item_fright_jar_FadeBackgroundToBlack = 0x802A123C; // type:func rom:0x72BB4C
+func_802D3474 = 0x802D3474; // type:func rom:0xF7E24

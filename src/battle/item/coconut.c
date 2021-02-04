@@ -207,7 +207,7 @@ Script D_802A1B6C_7304B0 = SCRIPT({
     SetAnimation(0, 0, 0x10016);
     PlaySound(1018);
     sleep 3;
-    0x802D3474(SI_VAR(10), D_802A1B50_7304B0);
+    func_802D3474(SI_VAR(10), D_802A1B50_7304B0);
     SI_VAR(0) = 1.0;
     MultiplyByActorScale(SI_VAR(0));
     0x802D38EC(SI_VAR(10), SI_VAR(0), SI_VAR(0), SI_VAR(0));
