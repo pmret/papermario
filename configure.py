@@ -183,10 +183,13 @@ async def main():
     n = ninja_syntax.Writer(open("build.ninja", "w"), width=120)
 
     cppflags = "-Iinclude -Isrc -D _LANGUAGE_C -D _FINALROM -ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 " + args.cflags
+    cflags = "-O2 -quiet -G 0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wuninitialized -Wshadow " + args.cflags
+    iconv = "tools/iconv.py UTF-8 SHIFT-JIS" if sys.platform == "darwin" else "iconv --from UTF-8 --to SHIFT-JIS"
+    cross = "mips-linux-gnu-"
 
     n.variable("builddir", "build")
     n.variable("target", TARGET)
-    n.variable("cross", "mips-linux-gnu-")
+    n.variable("cross", cross)
     n.variable("python", sys.executable)
 
     if sys.platform  == "darwin":
@@ -201,9 +204,9 @@ async def main():
         sys.exit(1)
 
     n.variable("os", os_dir)
-    n.variable("iconv", "tools/iconv.py UTF-8 SHIFT-JIS" if sys.platform == "darwin" else "iconv --from UTF-8 --to SHIFT-JIS")
+    n.variable("iconv", iconv)
     n.variable("cppflags", f"{cppflags} -Wcomment")
-    n.variable("cflags", "-O2 -quiet -G 0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wuninitialized -Wshadow " + args.cflags)
+    n.variable("cflags", cflags)
     n.newline()
 
     n.rule("cc",
@@ -217,6 +220,10 @@ async def main():
         depfile="$out.d",
         deps="gcc")
     n.newline()
+
+    with open("tools/permuter_settings.toml", "w") as f:
+        f.write(f"compiler_command = \"{cpp} {cppflags} -D SCRIPT(...)={{}} | {iconv} | tools/{os_dir}/cc1 {cflags} -o - | tools/{os_dir}/mips-nintendo-nu64-as -EB -G 0 -\"\n")
+        f.write(f"assembler_command = \"{cross}as -march=vr4300 -mabi=32\"\n")
 
     n.rule("cpp",
         command=f"{cpp} -P -DBUILD_DIR=$builddir $in -o $out",
