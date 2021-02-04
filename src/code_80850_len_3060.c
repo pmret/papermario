@@ -1088,7 +1088,7 @@ s32 is_partner_ability_active(void) {
     return 0;
 }
 
-s16 add_coins(s32 amt) {
+s32 add_coins(s32 amt) {
     PlayerData* playerData = &gPlayerData;
     s16 newCoins = playerData->coins + amt;
 

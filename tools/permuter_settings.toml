@@ -1,1 +1,3 @@
 build_system = "ninja"
+[preserve_macros]
+SCRIPT = "void"

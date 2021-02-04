@@ -4,54 +4,67 @@
 MenuIcon* D_802A1E80;
 void* D_80108A64; // an image
 
-// TODO
+#ifdef NON_MATCHING
 ApiStatus func_802A1000_72F720(ScriptInstance* script, s32 isInitialCall) {
-    MenuIcon *temp_a0;
-    f32 playerTop;
-    s32 sellValue;
-    s32 temp_s0;
-    s32 numCoins;
-    s32 temp_v0;
+    BattleStatus* battleStatus;
     Actor* player;
+    Actor* player2;
+    s32 sellValue;
+    s32 numCoins;
     s32 pickupDelay;
     f32 facingAngleSign;
-    s32 phi_s0;
-    s32 i = 0;
-    s32 phi_s0_2;
+    s32 i;
+
+    f32 posX;
+    f32 posY;
+    f32 posZ;
 
     s32 iconX;
     s32 iconY;
     s32 iconZ;
 
-    BattleStatus* battleStatus = BATTLE_STATUS;
+    i = 0;
+    facingAngleSign = 0.0f;
 
-    player = &battleStatus->playerActor;
+    battleStatus = BATTLE_STATUS;
     sellValue = gItemTable[battleStatus->selectedItemID].sellValue;
-    playerTop = player->currentPos.y + (f32) player->size.y;
+    posY = battleStatus->playerActor->currentPos.y + battleStatus->playerActor->size.y;
+
+    player = PLAYER;
 
     // If Refund is equipped, the player gets
-    if (heroes_is_ability_active(player, Ability_REFUND)) {
+    if (heroes_is_ability_active(battleStatus->playerActor, Ability_REFUND)) {
+        //player2 = player;
+
         if (sellValue > 0) {
             // 75% of the item's sell value, rounded up
-            numCoins = (sellValue * 75 + 99) / 100;
+            sellValue = (sellValue * 75 + 99) / 100;
 
-            if (numCoins > 0) {
-                pickupDelay = 1;
-                facingAngleSign = 0.0f;
+            pickupDelay = 1;
+                player2 = player;
 
-                for (i = 0; i < numCoins; i++) {
-                    make_item_entity(ItemId_COIN, player->currentPos.x, playerTop, player->currentPos.z, 0x17, pickupDelay, facingAngleSign, 0);
-                    add_coins(1);
+            while (i < sellValue) {
+                posX = player2->currentPos.x;
+                posZ = player2->currentPos.z;
 
-                    pickupDelay += 3;
-                    facingAngleSign += 30.0f;
-                }
+                make_item_entity(ItemId_COIN, posX, posY, posZ, 0x17, pickupDelay, facingAngleSign, 0);
+                add_coins(1);
+
+                pickupDelay += 3;
+                facingAngleSign += 30.0f;
+                i++;
             }
 
-            get_screen_coords(gCurrentCameraID, player->currentPos.x, player->currentPos.y, player->currentPos.z, &iconX, &iconY, &iconZ);
+            i = (i * 3) + 30;
+
+                //player2 = player;
+            posX = player2->currentPos.x;
+            posY = player2->currentPos.y;
+            posZ = player2->currentPos.z;
+
+            get_screen_coords(gCurrentCameraID, posX, posY, posZ, &iconX, &iconY, &iconZ);
             D_802A1E80 = create_icon(&D_80108A64);
-            set_icon_render_pos(D_802A1E80, iconX + 0x24, iconY - 0x3F);
-            i = (i * 2) + i + 0x1E;
+            set_icon_render_pos(D_802A1E80, iconX + 36, iconY - 63);
         }
     }
 
@@ -59,7 +72,9 @@ ApiStatus func_802A1000_72F720(ScriptInstance* script, s32 isInitialCall) {
 
     return ApiStatus_DONE2;
 }
-//INCLUDE_ASM(ApiStatus, "battle/item/coconut", func_802A1000_72F720, ScriptInstance* script, s32 isInitialCall);
+#else
+INCLUDE_ASM(ApiStatus, "battle/item/coconut", func_802A1000_72F720, ScriptInstance* script, s32 isInitialCall);
+#endif
 
 ApiStatus func_802A11D4_72F8F4(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = BATTLE_STATUS;
