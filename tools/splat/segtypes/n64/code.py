@@ -880,8 +880,10 @@ class N64SegCode(N64Segment):
             return "s"
         elif subtype == "bin":
             return "bin"
-        elif subtype in ["i4", "i8", "ia4", "ia8", "ia16", "rgba16", "rgba32", "ci4", "ci8", "palette"]:
+        elif subtype in ["i4", "i8", "ia4", "ia8", "ia16", "rgba16", "rgba32", "ci4", "ci8"]:
             return "png"
+        elif subtype == "palette":
+            return "pal.png"
         return subtype
 
     @staticmethod

@@ -15,7 +15,7 @@ Gfx D_802A1A60_7303C0[] = {
     gsDPSetTextureFilter(G_TF_AVERAGE),
     gsDPSetTextureConvert(G_TC_FILT),
     gsDPSetTextureLUT(G_TT_RGBA16),
-    gsDPLoadTLUT_pal16(0, &battle_item_coconut_coconut_png),
+    gsDPLoadTLUT_pal16(0, &battle_item_coconut_coconut_pal_png),
     gsDPLoadTextureTile_4b(&battle_item_coconut_coconut_png, G_IM_FMT_CI, 32, 0, 0, 0, 31, 31, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPClearGeometryMode(G_SHADING_SMOOTH),

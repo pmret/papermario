@@ -55,11 +55,13 @@ def read_splat(splat_config: str):
 
         if isinstance(segment, N64SegCode):
             for split_file in segment.files:
-                if split_file["subtype"] in ["ci4", "palette"]:
+                if split_file["subtype"] in ["i4", "i8", "ia4", "ia8", "ia16", "rgba16", "rgba32", "ci4", "ci8", "palette"]:
                     path = os.path.join(
                         "src",
                         split_file["name"] + "." + segment.get_ext(split_file["subtype"])
                     )
+
+                    print(path)
 
                     if path in segments:
                         segments[path] = split_file
@@ -426,7 +428,7 @@ async def main():
             if isinstance(segment, dict):
                 # image within a code section
                 out = "$builddir/" + f + ".bin"
-                n.build(out, "img", f, implicit="tools/convert_image.py", variables={
+                n.build(out, "img", re.sub(r"\.pal\.png", ".png", f), implicit="tools/convert_image.py", variables={
                     "img_type": segment["subtype"],
                     "img_flags": "",
                 })

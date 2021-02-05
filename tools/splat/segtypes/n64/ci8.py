@@ -18,7 +18,7 @@ class N64SegCi8(N64SegRgba16):
         if self.compressed:
             data = Yay0decompress.decompress_yay0(data)
 
-        self.image = type(self).parse_image(data, self.width, self.height)
+        self.image = self.parse_image(data, self.width, self.height)
 
     def postsplit(self, segments):
         palettes = [seg for seg in segments if seg.type ==
