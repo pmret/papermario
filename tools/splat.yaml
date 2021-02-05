@@ -2346,10 +2346,9 @@ segments:
     files:
     - [0x72F720, c,       aux]
     - [0x72F960, .data,   aux]
-    # - [0x72F960, .data,   aux]
-    # - [0x72F960, ci8,     coconut, w, h]
-    # - [0x72F960, palette, coconut]
-    # - [0x72F960, .data,   coconut]
+    - [0x72FF20, ci4,     coconut, 32, 32]
+    - [0x730120, palette, coconut]
+    - [0x730140, .data,   coconut]
   - name: battle/item/electro_pop
     type: code
     start: 0x7305A0

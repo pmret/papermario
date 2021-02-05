@@ -102,11 +102,13 @@ def build_image(f: str, segment):
     out = "$builddir/" + path + "." + img_type + ".png"
 
     flags = ""
+    """
     if img_type != "palette":
         if segment.flip_horizontal:
             flags += "--flip-x"
         if segment.flip_vertical:
             flags += "--flip-y"
+    """
 
     n.build(out, "img", path + ".png", implicit="tools/convert_image.py", variables={
         "img_type": img_type,

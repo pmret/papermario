@@ -41,9 +41,10 @@ class N64SegPalette(N64Segment):
         if self.compressed:
             data = Yay0decompress.decompress_yay0(data)
 
-        self.palette = self.parse_palette(data)
+        self.palette = N64SegPalette.parse_palette(data)
 
-    def parse_palette(self, data):
+    @staticmethod
+    def parse_palette(data):
         palette = []
 
         for a, b in iter_in_groups(data, 2):

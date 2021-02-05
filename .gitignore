@@ -30,6 +30,7 @@ build.ninja
 /img
 /msg
 /sprite
+/src/**/*.png
 
 # Star Rod
 /sprite/SpriteTable.xml
