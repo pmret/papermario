@@ -31,6 +31,7 @@ def obj(path: str):
 def read_splat(splat_config: str):
     import argparse
     import yaml
+    from segtypes.n64.code import N64SegCode
 
     # Load config
     with open(splat_config) as f:
@@ -51,6 +52,17 @@ def read_splat(splat_config: str):
 
             objects.add(path)
             segments[path] = segment
+
+        if isinstance(segment, N64SegCode):
+            for split_file in segment.files:
+                if split_file["subtype"] in ["ci4", "palette"]:
+                    path = os.path.join(
+                        "src",
+                        split_file["name"] + "." + segment.get_ext(split_file["subtype"])
+                    )
+
+                    if path in segments:
+                        segments[path] = split_file
 
     # note: `objects` lacks .o extensions
     return objects, segments
@@ -102,13 +114,11 @@ def build_image(f: str, segment):
     out = "$builddir/" + path + "." + img_type + ".png"
 
     flags = ""
-    """
     if img_type != "palette":
         if segment.flip_horizontal:
             flags += "--flip-x"
         if segment.flip_vertical:
             flags += "--flip-y"
-    """
 
     n.build(out, "img", path + ".png", implicit="tools/convert_image.py", variables={
         "img_type": img_type,
@@ -413,7 +423,17 @@ async def main():
         elif f.endswith(".s"):
             n.build(obj(f), "as", f)
         elif f.endswith(".png"):
-            build_image(f, segment)
+            if isinstance(segment, dict):
+                # image within a code section
+                out = "$builddir/" + f + ".bin"
+                n.build(out, "img", f, implicit="tools/convert_image.py", variables={
+                    "img_type": segment["subtype"],
+                    "img_flags": "",
+                })
+
+                n.build("$builddir/" + f + ".o", "bin", out)
+            else:
+                build_image(f, segment)
         elif f == "sprite/npc":
             # combine sprites
             n.build(f"$builddir/{f}.bin", "npc_sprites", npc_sprite_yay0s, implicit="tools/compile_npc_sprites.py")

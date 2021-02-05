@@ -849,7 +849,7 @@ class N64SegCode(N64Segment):
                 split_file["name"] + "." + self.get_ext(split_file["subtype"])
             )
 
-            if file_type == "ci4":
+            if file_type == "ci4" and (file_type in self.options["modes"] or "all" in self.options["modes"] or "img" in self.options["modes"]):
                 from segtypes.n64.ci4 import N64SegCi4
 
                 width, height = split_file["args"]
@@ -861,6 +861,8 @@ class N64SegCode(N64Segment):
                     w.write_array(f, image)
 
             # TODO other image types
+
+        # TODO write orphaned palettes
 
     @staticmethod
     def get_subdir(subtype):
@@ -879,7 +881,7 @@ class N64SegCode(N64Segment):
         elif subtype == "bin":
             return "bin"
         elif subtype in ["i4", "i8", "ia4", "ia8", "ia16", "rgba16", "rgba32", "ci4", "ci8", "palette"]:
-            return subtype + ".png"
+            return "png"
         return subtype
 
     @staticmethod

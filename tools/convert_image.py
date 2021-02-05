@@ -83,6 +83,7 @@ class Converter():
                 for row in reversed_if(img.read()[2], self.flip_y):
                     for a, b in iter_in_groups(row, 2):
                         byte = (a << 4) | b
+                        byte = byte & 0xFF
                         f.write(byte.to_bytes(1, byteorder="big"))
         elif self.mode == "palette":
             img.preamble(True)

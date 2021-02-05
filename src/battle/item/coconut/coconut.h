@@ -7,6 +7,9 @@
 #undef NAMESPACE
 #define NAMESPACE battle_item_coconut
 
+Script D_802A1240_72F960;
+Script D_802A1670_72FFD0;
+
 ApiStatus func_802A1000_72F720(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_802A11D4_72F8F4(ScriptInstance* script, s32 isInitialCall);
 

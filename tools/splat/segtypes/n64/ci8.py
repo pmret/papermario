@@ -18,7 +18,7 @@ class N64SegCi8(N64SegRgba16):
         if self.compressed:
             data = Yay0decompress.decompress_yay0(data)
 
-        self.image = N64SegCi8.parse_image(data)
+        self.image = type(self).parse_image(data, self.width, self.height)
 
     def postsplit(self, segments):
         palettes = [seg for seg in segments if seg.type ==
@@ -53,7 +53,7 @@ class N64SegCi8(N64SegRgba16):
                     f"No unnamed palette for {self.name}; wrote image data to {self.path}")
 
     @staticmethod
-    def parse_image(data):
+    def parse_image(data, width, height):
         return data
 
     def max_length(self):
