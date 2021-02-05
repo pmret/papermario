@@ -159,15 +159,16 @@ void set_action_state(s32 actionState) {
     }
 
     if (actionState == ActionState_HIT_HAZARD || actionState == ActionState_HIT_LAVA) {
-        u8 partner;
+        PartnerID partner;
 
         if (playerStatus->unk_BF == 3) {
             actionState = ActionState_HIT_HAZARD;
         }
 
-        // Whilst Lakilester, Bow, or Parakarry's ability is active, hazards have no effect.
+        // Whilst Sushie, Lakilester, Parakarry's ability is active, hazards have no effect.
         partner = playerData->currentPartner;
-        if (((u8)(partner - 7) < 2) || (playerData->currentPartner == PartnerID_PARAKARRY)) {
+
+        if (partner == PartnerID_SUSHIE || partner == PartnerID_LAKILESTER || partner == PartnerID_PARAKARRY) {
             if (D_8010EBB0[0]) {
                 playerStatus->animFlags |= 0x4;
                 playerStatus->flags |= 0x800;
