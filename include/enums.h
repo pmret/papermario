@@ -1094,19 +1094,17 @@ typedef UNK_TYPE DamageType;
 #define DamageType_THROW          0x00040000
 
 typedef s8 PartnerID;
-enum PartnerID {
-    PartnerID_NONE,
-    PartnerID_GOOMBARIO,
-    PartnerID_KOOPER,
-    PartnerID_BOMBETTE,
-    PartnerID_PARAKARRY,
-    PartnerID_GOOMPA,
-    PartnerID_WATT,
-    PartnerID_SUSHIE,
-    PartnerID_LAKILESTER,
-    PartnerID_BOW,
-    PartnerID_GOOMBARIA,
-    PartnerID_TWINK,
-};
+#define PartnerID_NONE       0
+#define PartnerID_GOOMBARIO  1
+#define PartnerID_KOOPER     2
+#define PartnerID_BOMBETTE   3
+#define PartnerID_PARAKARRY  4
+#define PartnerID_GOOMPA     5
+#define PartnerID_WATT       6
+#define PartnerID_SUSHIE     7
+#define PartnerID_LAKILESTER 8
+#define PartnerID_BOW        9
+#define PartnerID_GOOMBARIA  10
+#define PartnerID_TWINK      11
 
 #endif
