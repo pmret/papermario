@@ -32,45 +32,59 @@ s32 D_802A1B50_7304B0[] = {
 
 Script N(main) = SCRIPT({
     SI_VAR(10) =c ItemId_COCONUT;
+
     await D_802A1240_72F960;
+
     UseCamPreset(3);
     MoveBattleCamOver(15);
-    SetAnimation(0, 0, 0x10016);
-    PlaySound(1018);
+
+    SetAnimation(ActorID_PLAYER, 0, PlayerAnim_THROW);
+    PlaySound(SoundId_THROW);
     sleep 3;
+
     func_802D3474(SI_VAR(10), D_802A1B50_7304B0);
-    SI_VAR(0) = 1.0;
-    MultiplyByActorScale(SI_VAR(0));
-    func_802D38EC(SI_VAR(10), SI_VAR(0), SI_VAR(0), SI_VAR(0));
-    GetActorPos(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+
+    $x = 1.0;
+    MultiplyByActorScale($x);
+    func_802D38EC(SI_VAR(10), $x, $x, $x);
+
+    GetActorPos(ActorID_PLAYER, $x, $y, $z);
     SI_VAR(3) = 20;
     SI_VAR(4) = 42;
     SI_VAR(5) = 5;
     MultiplyVec3ByActorScale(SI_VAR(3), SI_VAR(4), SI_VAR(5));
-    SI_VAR(0) += SI_VAR(3);
-    SI_VAR(1) += SI_VAR(4);
-    SI_VAR(2) += SI_VAR(5);
-    func_802D36E0(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    $x += SI_VAR(3);
+    $y += SI_VAR(4);
+    $z += SI_VAR(5);
+    func_802D36E0(SI_VAR(10), $x, $y, $z);
+
     InitTargetIterator();
     SetGoalToTarget(ActorID_SELF);
-    GetGoalPos(ActorID_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    GetGoalPos(ActorID_SELF, $x, $y, $z);
+
     spawn {
-        SI_VAR(0) = 0;
+        $x = 0;
         loop 18 {
-            SI_VAR(0) += -60;
-            func_802D3840(SI_VAR(10), 0, 0, SI_VAR(0));
+            $x += -60;
+            func_802D3840(SI_VAR(10), 0, 0, $x);
             sleep 1;
         }
     }
+
     func_802D39FC(SI_VAR(10), 0.8);
-    SI_VAR(2) += 5;
-    func_802D3C58(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 18);
-    GetItemPower(ItemId_COCONUT, SI_VAR(3), SI_VAR(4));
-    ApplyShrinkFromOwner(SI_VAR(3));
-    ItemDamageEnemy(SI_VAR(9), 0x18000000, 0, SI_VAR(3), 32);
-    SI_VAR(0) += 60;
-    SI_VAR(1) += 0;
-    func_802D3C58(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 16);
+    $z += 5;
+    func_802D3C58(SI_VAR(10), $x, $y, $z, 18);
+
+    GetItemPower(ItemId_COCONUT, $damage, SI_VAR(4));
+    ApplyShrinkFromOwner($damage);
+    ItemDamageEnemy(SI_VAR(9), 0x18000000, 0, $damage, 32);
+
+    // Bounce off
+    $x += 60;
+    $y += 0;
+    func_802D3C58(SI_VAR(10), $x, $y, $z, 16);
+
     func_802D3624(SI_VAR(10));
-    await D_802A1670_72FFD0;
+
+    await D_802A1670_72FFD0; // back to home pos
 });

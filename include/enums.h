@@ -286,6 +286,7 @@ typedef UNK_TYPE SoundId;
 #define SoundId_MOLE_THROW            0x000003E8
 #define SoundId_CLOSE_SHELL           0x000002FF
 #define SoundId_OPEN_SHELL            0x000003D4
+#define SoundId_THROW                 0x3FA
 #define SoundId_BOW_VANISH            0x0000200E
 #define SoundId_BOW_APPEAR            0x0000200F
 #define SoundId_CANNON1               0x00002016
