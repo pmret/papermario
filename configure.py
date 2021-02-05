@@ -61,8 +61,6 @@ def read_splat(splat_config: str):
                         split_file["name"] + "." + segment.get_ext(split_file["subtype"])
                     )
 
-                    print(path)
-
                     if path in segments:
                         segments[path] = split_file
 

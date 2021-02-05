@@ -75,8 +75,8 @@ glabel LoadItemScript
 /* 1968A8 80267FC8 30420080 */  andi      $v0, $v0, 0x80
 /* 1968AC 80267FCC 2C500001 */  sltiu     $s0, $v0, 1
 .L80267FD0:
-/* 1968B0 80267FD0 3C028029 */  lui       $v0, %hi(D_80293C04)
-/* 1968B4 80267FD4 24423C04 */  addiu     $v0, $v0, %lo(D_80293C04)
+/* 1968B0 80267FD0 3C028029 */  lui       $v0, %hi(gBattleItemTable)
+/* 1968B4 80267FD4 24423C04 */  addiu     $v0, $v0, %lo(gBattleItemTable)
 /* 1968B8 80267FD8 00108100 */  sll       $s0, $s0, 4
 /* 1968BC 80267FDC 02028021 */  addu      $s0, $s0, $v0
 /* 1968C0 80267FE0 8E040000 */  lw        $a0, ($s0)

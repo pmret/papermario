@@ -2339,6 +2339,7 @@ segments:
     - [0x72E530, c]
     - [0x72EA20, data]
   - name: battle/item/coconut/
+    ld_name: battle_item_coconut
     type: code
     start: 0x72F720
     vram: 0x802A1000
