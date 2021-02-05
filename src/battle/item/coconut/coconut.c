@@ -1,10 +1,14 @@
 #include "coconut.h"
 
-s32 D_802A1A20_730380[] = {
-    0xFFF0FFF0, 0x00000000, 0x00000000, 0x000000FF, 0x000FFFF0, 0x00000000, 0x04000000, 0x000000FF, 0x000F000F, 0x00000000, 0x04000400, 0x000000FF, 0xFFF0000F, 0x00000000, 0x00000400, 0x000000FF,
+/// 32x32 square.
+Vtx N(coconutModel)[] = {
+    { .v = { .ob = { -16, -16, 0 }, .tc = { 0,    0    }, .cn = { 0, 0, 0, 255 } } },
+    { .v = { .ob = { 15,  -16, 0 }, .tc = { 1024, 0    }, .cn = { 0, 0, 0, 255 } } },
+    { .v = { .ob = { 15,  15,  0 }, .tc = { 1024, 1024 }, .cn = { 0, 0, 0, 255 } } },
+    { .v = { .ob = { -16, 15,  0 }, .tc = { 0,    1024 }, .cn = { 0, 0, 0, 255 } } },
 };
 
-Gfx D_802A1A60_7303C0[] = {
+Gfx N(coconutDL)[] = {
     gsDPPipeSync(),
     gsSPTexture(-1, -1, 0, G_TX_RENDERTILE, G_ON),
     gsDPSetCombineMode(G_CC_DECALRGBA, G_CC_DECALRGBA),
@@ -19,7 +23,7 @@ Gfx D_802A1A60_7303C0[] = {
     gsDPLoadTextureTile_4b(&battle_item_coconut_coconut_png, G_IM_FMT_CI, 32, 0, 0, 0, 31, 31, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPClearGeometryMode(G_SHADING_SMOOTH),
-    gsSPVertex(&D_802A1A20_730380, 4, 0),
+    gsSPVertex(&N(coconutModel), 4, 0),
     gsSP1Triangle(0, 1, 2, 0),
     gsSP1Triangle(0, 2, 3, 0),
     gsDPPipeSync(),
@@ -27,7 +31,7 @@ Gfx D_802A1A60_7303C0[] = {
 };
 
 s32 D_802A1B50_7304B0[] = {
-    0x00000004, 0x0000000D, 0x00000001, sizeof(D_802A1A60_7303C0) / sizeof(s32), &D_802A1A60_7303C0, 0x00000002, 0x00000000,
+    0x00000004, 0x0000000D, 0x00000001, sizeof(N(coconutDL)) / sizeof(s32), &N(coconutDL), 0x00000002, 0x00000000,
 };
 
 Script N(main) = SCRIPT({
