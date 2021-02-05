@@ -120,7 +120,7 @@ def build_image(f: str, segment):
         if segment.flip_vertical:
             flags += "--flip-y"
 
-    n.build(out, "img", path + ".png", implicit="tools/convert_image.py", variables={
+    n.build(out, "img", path + ".png", implicit="tools/img/build.py", variables={
         "img_type": img_type,
         "img_flags": flags,
     })
@@ -261,8 +261,11 @@ async def main():
 
     # $img_type, $img_flags
     n.rule("img",
-        command="$python tools/convert_image.py $img_type $in $out $img_flags",
+        command="$python tools/img/build.py $img_type $in $out $img_flags",
         description="image $in")
+    n.rule("img_header",
+        command="$python tools/img/header.py $in $out",
+        description="image_header $in")
     n.newline()
 
     # $sprite_id, $sprite_dir, $sprite_name
@@ -426,10 +429,13 @@ async def main():
             if isinstance(segment, dict):
                 # image within a code section
                 out = "$builddir/" + f + ".bin"
-                n.build(out, "img", re.sub(r"\.pal\.png", ".png", f), implicit="tools/convert_image.py", variables={
+                n.build(out, "img", re.sub(r"\.pal\.png", ".png", f), implicit="tools/img/build.py", variables={
                     "img_type": segment["subtype"],
                     "img_flags": "",
                 })
+
+                if ".pal.png" not in f:
+                    n.build(add_generated_header(f + ".h"), "img_header", f, implicit="tools/img/header.py")
 
                 n.build("$builddir/" + f + ".o", "bin", out)
             else:
