@@ -1,3 +1,4 @@
+from typing import get_args
 from capstone import *
 from capstone.mips import *
 
@@ -43,54 +44,111 @@ def get_funcs_defined_in_c(c_file):
 
     return set(m.group(2) for m in C_FUNC_RE.finditer(text))
 
+class Subsegment():
+
+    def __init__(self, start, end, name, type, vram, args):
+        self.rom_start = start
+        self.rom_end = end
+        self.size = self.rom_end - self.rom_start
+        self.name = name
+        self.vram_start = vram
+        self.vram_end = vram + self.size
+        self.type = type
+        self.args = args
+
+        # TODO maybe move to a better place
+        if self.type in [".bss", "bss"]:
+            self.rom_start = 0
+            self.rom_end = 0
+            self.size = self.args[0]
+            self.vram_end = self.vram_start + self.size
+
+    def contains_vram(self, addr):
+        return self.vram_start <= addr < self.vram_end
+
+    def get_out_subdir(self, options):
+        if self.type in ["c", ".data", ".rodata", ".bss"]:
+            return "src"
+        elif self.type in ["asm", "hasm", "header"]:
+            return "asm"
+        elif self.type == "bin":
+            return options.get("assets_dir", "bin")
+        elif self.type in ["i4", "i8", "ia4", "ia8", "ia16", "rgba16", "rgba32", "ci4", "ci8", "palette"]:
+            return options.get("assets_dir", "img")
+        return self.type
+
+    def get_ld_obj_type(self, section_name):
+        if self.type in "c":
+            return ".text"
+        elif self.type in ["bin", ".data", "data", "i4", "i8", "ia4", "ia8", "ia16", "rgba16", "rgba32", "ci4", "ci8", "palette"]:
+            return ".data"
+        elif self.type in [".rodata", "rodata"]:
+            return ".rodata"
+        elif self.type in [".bss", "bss"]:
+            return ".bss"
+        return section_name
+
+    def get_ext(self):
+        if self.type in ["c", ".data", ".rodata", ".bss"]:
+            return "c"
+        elif self.type in ["asm", "hasm", "header"]:
+            return "s"
+        elif self.type == "bin":
+            return "bin"
+        elif self.type in ["i4", "i8", "ia4", "ia8", "ia16", "rgba16", "rgba32", "ci4", "ci8"]:
+            return "png"
+        elif self.type == "palette":
+            return "pal.png"
+        return self.type
+
+    def should_run(self, options):
+        return self.type in options["modes"] or "all" in options["modes"]
+
 
 class N64SegCode(N64Segment):
-    def parse_segment_files(self, segment, seg_start, seg_end, seg_name, seg_vram):
-        prefix = seg_name if seg_name.endswith("/") else f"{seg_name}_"
+    def parse_subsegments(self, segment_yaml):
+        prefix = self.name if self.name.endswith("/") else f"{self.name}_"
 
         ret = []
         prev_start = -1
 
-        if "files" in segment:
-            for i, split_file in enumerate(segment["files"]):
-                if type(split_file) is dict:
-                    start = split_file["start"]
-                    end = split_file["end"]
-                    name = None if "name" not in split_file else split_file["name"]
-                    subtype = split_file["type"]
-                    args = []
-                else:
-                    start = split_file[0]
-                    end = seg_end if i == len(segment["files"]) - 1 else segment["files"][i + 1][0]
-                    name = None if len(split_file) < 3 else split_file[2]
-                    subtype = split_file[1]
-                    args = split_file[3:]
+        if "subsections" not in segment_yaml:
+            print(f"Error: Code segment {self.name} is missing a 'subsections' field")
+            sys.exit(2)
 
-                if start < prev_start:
-                    print(f"Error: Code segment {seg_name} has files out of ascending rom order (0x{prev_start:X} followed by 0x{start:X})")
-                    sys.exit(1)
+        for i, subsection_yaml in enumerate(segment_yaml["subsections"]):
+            if type(subsection_yaml) is dict:
+                start = subsection_yaml["start"]
+                end = subsection_yaml["end"]
+                name = subsection_yaml.get("name", None)
+                typ = subsection_yaml["type"]
+                args = subsection_yaml.get("args", [])
+            else:
+                start = subsection_yaml[0]
+                end = self.rom_end if i == len(segment_yaml["subsections"]) - 1 else segment_yaml["subsections"][i + 1][0]
+                name = None if len(subsection_yaml) < 3 else subsection_yaml[2]
+                typ = subsection_yaml[1]
+                args = subsection_yaml[3:]
 
-                if not name:
-                    name = self.get_default_name(start) if seg_name == self.get_default_name(seg_start) else f"{prefix}{start:X}"
-                elif seg_name.endswith("/"):
-                    name = seg_name + name
+            if start < prev_start:
+                print(f"Error: Code segment {self.name} contains subsections which are out of ascending rom order (0x{prev_start:X} followed by 0x{start:X})")
+                sys.exit(1)
 
-                vram = seg_vram + (start - seg_start)
+            if not name:
+                name = self.get_default_name(start) if self.name == self.get_default_name(self.rom_start) else f"{prefix}{start:X}"
+            elif self.name.endswith("/"):
+                name = self.name + name
 
-                fl = {"start": start, "end": end, "name": name, "vram": vram, "subtype": subtype, "args": args}
+            vram = self.rom_to_ram(start)
 
-                ret.append(fl)
-                prev_start = start
-        else:
-            fl = {"start": seg_start, "end": seg_end,
-                "name": seg_name, "vram": seg_vram, "subtype": "asm"}
-            ret.append(fl)
+            ret.append(Subsegment(start, end, name, typ, vram, args))
+            prev_start = start
 
         return ret
 
     def __init__(self, segment, next_segment, options):
         super().__init__(segment, next_segment, options)
-        self.files = self.parse_segment_files(segment, self.rom_start, self.rom_end, self.name, self.vram_start)
+        self.subsegments = self.parse_subsegments(segment)
         self.is_overlay = segment.get("overlay", False)
         self.all_symbols = ()
         self.seg_symbols = {} # Symbols known to be in this segment
@@ -307,9 +365,9 @@ class N64SegCode(N64Segment):
         return ret
 
     def get_file_for_addr(self, addr):
-        for fl in self.files:
-            if addr >= fl["vram"] and addr < fl["vram"] + fl["end"] - fl["start"]:
-                return fl
+        for sub in self.subsegments:
+            if sub.contains_vram(addr):
+                return sub
         return None
 
     def update_access_mnemonic(self, sym, mnemonic):
@@ -490,7 +548,6 @@ class N64SegCode(N64Segment):
         return ret
 
     def should_run(self):
-        # we have lots of subtypes
         return True
 
     @staticmethod
@@ -509,16 +566,22 @@ class N64SegCode(N64Segment):
 
         return True
 
-    def get_symbols_for_file(self, split_file):
+    def get_symbols_for_file(self, sub):
         ret = []
-
-        vram_start = split_file["vram"]
-        vram_end = split_file["vram"] + split_file["end"] - split_file["start"]
 
         for symbol_addr in self.seg_symbols:
             for symbol in self.seg_symbols[symbol_addr]:
-                if symbol.vram_start >= vram_start and symbol.vram_end < vram_end:
+                if sub.contains_vram(symbol.vram_start):
                     ret.append(symbol)
+
+        ret.sort(key=lambda s:s.vram_start)
+
+        # Ensure we start at the beginning
+        if len(ret) == 0 or ret[0].vram_start != sub.vram_start:
+            ret.insert(0, self.get_symbol(sub.vram_start, create=True, define=True, local_only=True))
+
+        # Make a dummy symbol here that marks the end of the previous symbol's disasm range
+        ret.append(Symbol(sub.vram_end))
 
         return ret
 
@@ -530,12 +593,22 @@ class N64SegCode(N64Segment):
 
         if sym_type == "double":
             slen = 8
-        elif sym_type in ["float", "word", "jtbl"]:
-            slen = 4
         elif sym_type == "short":
             slen = 2
-        else:
+        elif sym_type == "byte":
             slen = 1
+        else:
+            slen = 4
+
+        if sym_type == "ascii":
+            try:
+                ascii_str = sym_bytes.decode("EUC-JP")
+                ascii_str = ascii_str.replace("\\", "\\\\")
+                ascii_str = ascii_str.replace("\x00", "\\0")
+                sym_str += f'"{ascii_str}"'
+                return sym_str
+            except:
+                return self.disassemble_symbol(sym_bytes, "word")
 
         i = 0
         while i < len(sym_bytes):
@@ -583,79 +656,51 @@ class N64SegCode(N64Segment):
 
         return sym_str
 
-    def disassemble_data(self, split_file, rom_bytes):
-        rodata_encountered = split_file["subtype"] == "rodata"
+    def disassemble_data(self, sub, rom_bytes):
+        rodata_encountered = sub.type == "rodata"
         ret = ".include \"macro.inc\"\n\n"
-        ret += f'.section .{split_file["subtype"]}'
+        ret += f'.section .{sub.type}'
 
-        # Todo remove when we have class for file
-        file_size = split_file['end'] - split_file['start']
-
-        if file_size == 0:
+        if sub.size == 0:
             return None
 
-        syms = self.get_symbols_for_file(split_file)
-        syms.sort(key=lambda s:s.vram_start)
-
-        if len(syms) == 0:
-            self.warn("No symbol accesses detected for " + split_file["name"] + "; the output will most likely be an ugly blob")
-
-        # Ensure we start at the beginning
-        if len(syms) == 0 or syms[0].vram_start != split_file["vram"]:
-            syms.insert(0, self.get_symbol(split_file["vram"], create=True, define=True, local_only=True))
-
-        vram_end = split_file["vram"] + file_size
-        if syms[-1].vram_start != vram_end:
-            # Make a dummy symbol here that marks the end of the previous symbol's disasm range
-            syms.append(Symbol(vram_end))
+        syms = self.get_symbols_for_file(sub)
 
         for i in range(len(syms) - 1):
             mnemonic = syms[i].access_mnemonic
-            start = syms[i].vram_start
-            end = syms[i + 1].vram_start
-            sym_rom_start = start - split_file["vram"] + split_file["start"]
-            sym_rom_end = end - split_file["vram"] + split_file["start"]
-            sym = self.get_symbol(start, create=True, define=True, local_only=True)
+            sym = self.get_symbol(syms[i].vram_start, create=True, define=True, local_only=True)
             sym_str = f"\n\nglabel {sym.name}\n"
-            sym_bytes = rom_bytes[sym_rom_start : sym_rom_end]
+            dis_start = self.ram_to_rom(syms[i].vram_start)
+            dis_end = self.ram_to_rom(syms[i + 1].vram_start)
 
-            # TODO: Hack for null mnemonic - move elsewhere later, probably
-            if not mnemonic:
-                mnemonic = "addiu"
-
-            # .ascii
-            if self.is_valid_ascii(sym_bytes) and mnemonic == "addiu":
-            # mnemonic thing may be too picky, we'll see
-                try:
-                    ascii_str = sym_bytes.decode("EUC-JP")
-                    ascii_str = ascii_str.replace("\\", "\\\\")
-                    ascii_str = ascii_str.replace("\x00", "\\0")
-                    sym_str += f'.ascii "{ascii_str}"'
-                    ret += sym_str
-                    continue
-                except:
-                    pass
-
-            # Fallback to raw data
-            if syms[i].type == "jtbl":
-                stype = "jtbl"
-            elif len(sym_bytes) % 8 == 0 and mnemonic in double_mnemonics:
-                stype = "double"
-            elif len(sym_bytes) % 4 == 0 and mnemonic in word_mnemonics:
-                stype = "word"
-            elif len(sym_bytes) % 4 == 0 and mnemonic in float_mnemonics:
-                stype = "float"
-            elif len(sym_bytes) % 2 == 0 and mnemonic in short_mnemonics:
-                stype = "short"
+            if sub.type == "bss":
+                sym_len = dis_end - dis_start
+                ret += f".space 0x{sym_len:X}"
             else:
-                stype = "byte"
+                sym_bytes = rom_bytes[dis_start : dis_end]
 
-            if not rodata_encountered and mnemonic == "jtbl":
-                rodata_encountered = True
-                ret += "\n\n\n.section .rodata"
+                # Checking if the mnemonic is addiu may be too picky - we'll see
+                if self.is_valid_ascii(sym_bytes) and mnemonic == "addiu":
+                    stype = "ascii"
+                elif syms[i].type == "jtbl":
+                    stype = "jtbl"
+                elif len(sym_bytes) % 8 == 0 and mnemonic in double_mnemonics:
+                    stype = "double"
+                elif len(sym_bytes) % 4 == 0 and mnemonic in float_mnemonics:
+                    stype = "float"
+                elif len(sym_bytes) % 4 == 0 and mnemonic in word_mnemonics or not mnemonic:
+                    stype = "word"
+                elif len(sym_bytes) % 2 == 0 and mnemonic in short_mnemonics:
+                    stype = "short"
+                else:
+                    stype = "byte"
 
-            sym_str += self.disassemble_symbol(sym_bytes, stype)
-            ret += sym_str
+                if not rodata_encountered and mnemonic == "jtbl":
+                    rodata_encountered = True
+                    ret += "\n\n\n.section .rodata"
+
+                sym_str += self.disassemble_symbol(sym_bytes, stype)
+                ret += sym_str
 
         ret += "\n"
 
@@ -702,6 +747,39 @@ class N64SegCode(N64Segment):
                 if found:
                     break
 
+    def create_c_asm_file(self, funcs_text, func, out_dir, sub, func_name):
+        if self.options.get("compiler", "IDO") == "GCC":
+            out_lines = self.get_gcc_inc_header()
+        else:
+            out_lines = []
+        out_lines.extend(funcs_text[func][0])
+        out_lines.append("")
+
+        outpath = Path(os.path.join(out_dir, sub.name, func_name + ".s"))
+        outpath.parent.mkdir(parents=True, exist_ok=True)
+
+        with open(outpath, "w", newline="\n") as f:
+            f.write("\n".join(out_lines))
+        self.log(f"Disassembled {func_name} to {outpath}")
+
+    def create_c_file(self, funcs_text, sub, asm_out_dir, base_path, c_path):
+        c_lines = self.get_c_preamble()
+
+        for func in funcs_text:
+            func_name = self.get_symbol(func, type="func", local_only=True).name
+            if self.options.get("compiler", "IDO") == "GCC":
+                c_lines.append("INCLUDE_ASM(s32, \"{}\", {});".format(sub.name, func_name))
+            else:
+                asm_outpath = Path(os.path.join(asm_out_dir, sub.name, func_name + ".s"))
+                rel_asm_outpath = os.path.relpath(asm_outpath, base_path)
+                c_lines.append(f"#pragma GLOBAL_ASM(\"{rel_asm_outpath}\")")
+            c_lines.append("")
+
+        Path(c_path).parent.mkdir(parents=True, exist_ok=True)
+        with open(c_path, "w") as f:
+            f.write("\n".join(c_lines))
+        print(f"Wrote {sub.name} to {c_path}")
+
     def split(self, rom_bytes, base_path):
         md = Cs(CS_ARCH_MIPS, CS_MODE_MIPS64 + CS_MODE_BIG_ENDIAN)
         md.detail = True
@@ -709,21 +787,19 @@ class N64SegCode(N64Segment):
 
         palettes = {}
 
-        for split_file in self.files:
-            file_type = split_file["subtype"]
-
-            if file_type in ["asm", "hasm", "c"]:
-                if self.type not in self.options["modes"] and "all" not in self.options["modes"]:
+        for sub in self.subsegments:
+            if sub.type in ["asm", "hasm", "c"]:
+                if not sub.should_run(self.options):
                     continue
 
-                if split_file["start"] == split_file["end"]:
+                if sub.rom_start == sub.rom_end:
                     continue
 
-                out_dir = self.create_split_dir(base_path, "asm")
+                asm_out_dir = self.create_split_dir(base_path, "asm")
 
-                rom_addr = split_file["start"]
+                rom_addr = sub.rom_start
 
-                insns = [insn for insn in md.disasm(rom_bytes[split_file["start"]: split_file["end"]], split_file["vram"])]
+                insns = [insn for insn in md.disasm(rom_bytes[sub.rom_start: sub.rom_end], sub.vram_start)]
 
                 funcs = self.process_insns(insns, rom_addr)
 
@@ -735,11 +811,11 @@ class N64SegCode(N64Segment):
                 self.gather_jumptable_labels(rom_bytes)
                 funcs_text = self.add_labels(funcs)
 
-                if file_type == "c":
+                if sub.type == "c":
                     c_path = os.path.join(
                         base_path,
-                        self.get_subdir(split_file["subtype"]),
-                        split_file["name"] + "." + self.get_ext(split_file["subtype"])
+                        sub.get_out_subdir(self.options),
+                        sub.name + "." + sub.get_ext()
                     )
 
                     if os.path.exists(c_path):
@@ -748,114 +824,82 @@ class N64SegCode(N64Segment):
                     else:
                         defined_funcs = set()
 
-                    out_dir = self.create_split_dir(
-                        base_path, os.path.join("asm", "nonmatchings"))
+                    asm_out_dir = self.create_split_dir(base_path, os.path.join("asm", "nonmatchings"))
 
                     for func in funcs_text:
                         func_name = self.get_symbol(func, type="func", local_only=True).name
 
                         if func_name not in defined_funcs:
-                            if self.options.get("compiler", "IDO") == "GCC":
-                                out_lines = self.get_gcc_inc_header()
-                            else:
-                                out_lines = []
-                            out_lines.extend(funcs_text[func][0])
-                            out_lines.append("")
+                            self.create_c_asm_file(funcs_text, func, asm_out_dir, sub, func_name)
 
-                            outpath = Path(os.path.join(
-                                out_dir, split_file["name"], func_name + ".s"))
-                            outpath.parent.mkdir(parents=True, exist_ok=True)
-
-                            with open(outpath, "w", newline="\n") as f:
-                                f.write("\n".join(out_lines))
-                            self.log(f"Disassembled {func_name} to {outpath}")
-
-                    # Creation of c files
-                    if not os.path.exists(c_path):  # and some option is enabled
-                        c_lines = self.get_c_preamble()
-
-                        for func in funcs_text:
-                            func_name = self.get_symbol(func, type="func", local_only=True).name
-                            if self.options.get("compiler", "IDO") == "GCC":
-                                c_lines.append("INCLUDE_ASM(s32, \"{}\", {});".format(split_file["name"], func_name))
-                            else:
-                                outpath = Path(os.path.join(out_dir, split_file["name"], func_name + ".s"))
-                                rel_outpath = os.path.relpath(outpath, base_path)
-                                c_lines.append(f"#pragma GLOBAL_ASM(\"{rel_outpath}\")")
-                            c_lines.append("")
-
-                        Path(c_path).parent.mkdir(parents=True, exist_ok=True)
-                        with open(c_path, "w") as f:
-                            f.write("\n".join(c_lines))
-                        print(f"Wrote {split_file['name']} to {c_path}")
-
+                    if not os.path.exists(c_path) and self.options.get("create_new_c_files", True):
+                        self.create_c_file(funcs_text, sub, asm_out_dir, base_path, c_path)
                 else:
                     out_lines = self.get_asm_header()
                     for func in funcs_text:
                         out_lines.extend(funcs_text[func][0])
                         out_lines.append("")
 
-                    outpath = Path(os.path.join(out_dir, split_file["name"] + ".s"))
+                    outpath = Path(os.path.join(asm_out_dir, sub.name + ".s"))
                     outpath.parent.mkdir(parents=True, exist_ok=True)
 
                     with open(outpath, "w", newline="\n") as f:
                         f.write("\n".join(out_lines))
 
-            elif file_type in ["data", "rodata"] and (file_type in self.options["modes"] or "all" in self.options["modes"]):
-                out_dir = self.create_split_dir(base_path, os.path.join("asm", "data"))
+            elif sub.type in ["data", "rodata", "bss"] and sub.should_run(self.options):
+                asm_out_dir = self.create_split_dir(base_path, os.path.join("asm", "data"))
 
-                outpath = Path(os.path.join(out_dir, split_file["name"] + f".{file_type}.s"))
+                outpath = Path(os.path.join(asm_out_dir, sub.name + f".{sub.type}.s"))
                 outpath.parent.mkdir(parents=True, exist_ok=True)
 
-                file_text = self.disassemble_data(split_file, rom_bytes)
+                file_text = self.disassemble_data(sub, rom_bytes)
                 if file_text:
                     with open(outpath, "w", newline="\n") as f:
                         f.write(file_text)
 
-            elif file_type == "bin" and ("bin" in self.options["modes"] or "all" in self.options["modes"]):
+            elif sub.type == "bin" and sub.should_run(self.options):
                 bin_path = os.path.join(
                     base_path,
-                    self.get_subdir(split_file["subtype"]),
-                    split_file["name"] + "." + self.get_ext(split_file["subtype"])
+                    sub.get_out_subdir(self.options),
+                    sub.name + "." + sub.get_ext()
                 )
 
                 Path(bin_path).parent.mkdir(parents=True, exist_ok=True)
                 with open(bin_path, "wb") as f:
-                    f.write(rom_bytes[split_file["start"]: split_file["end"]])
+                    f.write(rom_bytes[sub.rom_start : sub.rom_end])
 
-            elif file_type in ["i4", "i8", "ia4", "ia8", "ia16", "rgba16", "rgba32", "ci4", "ci8"]:
+            elif sub.type in ["i4", "i8", "ia4", "ia8", "ia16", "rgba16", "rgba32", "ci4", "ci8"]:
                 pass
 
-            elif file_type == "palette":
+            elif sub.type == "palette":
                 from segtypes.n64.palette import N64SegPalette
 
                 out_path = os.path.join(
                     base_path,
-                    self.get_subdir(split_file["subtype"]),
-                    split_file["name"] + "." + self.get_ext(split_file["subtype"])
+                    sub.get_out_subdir(self.options),
+                    sub.name + "." + sub.get_ext()
                 )
-                img_bytes = rom_bytes[split_file["start"]:split_file["end"]]
+                img_bytes = rom_bytes[sub.rom_start : sub.rom_end]
 
                 palette = N64SegPalette.parse_palette(img_bytes)
-                palettes[split_file["name"]] = palette
+                palettes[sub.name] = palette
 
         import png
 
-        for split_file in self.files:
-            file_type = split_file["subtype"]
-            img_bytes = rom_bytes[split_file["start"]:split_file["end"]]
+        for sub in self.subsegments:
+            img_bytes = rom_bytes[sub.rom_start : sub.rom_end]
 
             out_path = os.path.join(
                 base_path,
-                self.get_subdir(split_file["subtype"]),
-                split_file["name"] + "." + self.get_ext(split_file["subtype"])
+                sub.get_out_subdir(self.options),
+                sub.name + "." + sub.get_ext()
             )
 
-            if file_type == "ci4" and (file_type in self.options["modes"] or "all" in self.options["modes"] or "img" in self.options["modes"]):
+            if sub.type == "ci4" and (sub.should_run(self.options) or "img" in self.options["modes"]):
                 from segtypes.n64.ci4 import N64SegCi4
 
-                width, height = split_file["args"]
-                palette = palettes[split_file["name"]]
+                width, height = sub.args
+                palette = palettes[sub.name]
                 image = N64SegCi4.parse_image(img_bytes, width, height)
 
                 w = png.Writer(width, height, palette=palette)
@@ -868,53 +912,15 @@ class N64SegCode(N64Segment):
 
         # TODO write orphaned palettes
 
-    def get_subdir(self, subtype):
-        if subtype in ["c", ".data", ".rodata", ".bss"]:
-            return "src"
-        elif subtype in ["asm", "hasm", "header"]:
-            return "asm"
-        elif subtype == "bin":
-            return self.options.get("assets_dir", "bin")
-        elif subtype in ["i4", "i8", "ia4", "ia8", "ia16", "rgba16", "rgba32", "ci4", "ci8", "palette"]:
-            return self.options.get("assets_dir", "img")
-        return subtype
-
-    @staticmethod
-    def get_ext(subtype):
-        if subtype in ["c", ".data", ".rodata", ".bss"]:
-            return "c"
-        elif subtype in ["asm", "hasm", "header"]:
-            return "s"
-        elif subtype == "bin":
-            return "bin"
-        elif subtype in ["i4", "i8", "ia4", "ia8", "ia16", "rgba16", "rgba32", "ci4", "ci8"]:
-            return "png"
-        elif subtype == "palette":
-            return "pal.png"
-        return subtype
-
-    @staticmethod
-    def get_ld_obj_type(subtype, section_name):
-        if subtype in "c":
-            return ".text"
-        elif subtype in ["bin", ".data", "data", "i4", "i8", "ia4", "ia8", "ia16", "rgba16", "rgba32", "ci4", "ci8", "palette"]:
-            return ".data"
-        elif subtype in [".rodata", "rodata"]:
-            return ".rodata"
-        elif subtype == ".bss":
-            return ".bss"
-        return section_name
-
     def get_ld_files(self):
-        def transform(split_file):
-            subdir = self.get_subdir(split_file["subtype"])
-            obj_type = self.get_ld_obj_type(split_file["subtype"], ".text")
-            ext = self.get_ext(split_file['subtype'])
-            start = split_file["start"]
+        def transform(sub):
+            subdir = sub.get_out_subdir(self.options)
+            obj_type = sub.get_ld_obj_type(".text")
+            ext = sub.get_ext()
 
-            return subdir, f"{split_file['name']}.{ext}", obj_type, start
+            return subdir, f"{sub.name}.{ext}", obj_type, sub.rom_start
 
-        return [transform(file) for file in self.files]
+        return [transform(file) for file in self.subsegments]
 
     def get_ld_section_name(self):
         path = PurePath(self.name)
