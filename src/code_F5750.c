@@ -515,7 +515,7 @@ ApiStatus func_802D354C(ScriptInstance* script, s32 isInitialCall) {
         }
     }
 
-    if (i >= 0x40) {
+    if (i >= ARRAY_COUNT(*D_802DB7C0)) {
         return ApiStatus_DONE2;
     }
 
