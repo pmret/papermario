@@ -129,7 +129,7 @@ def build_image(f: str, segment):
     out = "$builddir/" + path + "." + img_type + ".png"
 
     flags = ""
-    if img_type != "palette":
+    if img_type != "palette" and not isinstance(segment, dict):
         if segment.flip_horizontal:
             flags += "--flip-x"
         if segment.flip_vertical:
@@ -150,7 +150,10 @@ def find_asset_dir(path):
         if os.path.exists(d + "/" + path):
             return d
 
-    print("unable to find asset: " + path)
+    print("Unable to find asset: " + path)
+    print("The asset dump may be incomplete. Run")
+    print("    rm .splat_cache")
+    print("And then run ./configure.py again.")
     exit(1)
 
 def find_asset(path):
@@ -484,9 +487,40 @@ async def main():
 
             for asset_name in ASSETS:
                 if asset_name.endswith("_tex"): # uncompressed
-                    asset_files.append(find_asset(f"{asset_name}.bin"))
-                    asset_files.append(find_asset(f"{asset_name}.bin"))
-                else: # uncompressed
+                    asset_files.append(find_asset(f"map/{asset_name}.bin"))
+                    asset_files.append(find_asset(f"map/{asset_name}.bin"))
+                elif asset_name.startswith("party_"):
+                    source_file = f"$builddir/{asset_name}.bin"
+                    asset_file = f"$builddir/{asset_name}.Yay0"
+
+                    n.build(source_file, "img", find_asset(f"party/{asset_name}.png"), implicit="tools/img/build.py", variables={
+                        "img_type": "party",
+                        "img_flags": "",
+                    })
+
+                    asset_files.append(source_file)
+                    asset_files.append(asset_file)
+                    n.build(asset_file, "yay0compress", source_file, implicit="tools/Yay0compress")
+                elif asset_name.endswith("_bg"):
+                    source_file = f"$builddir/{asset_name}.bin"
+                    asset_file = f"$builddir/{asset_name}.Yay0"
+
+                    n.build(source_file, "img", find_asset(f"map/{asset_name}.png"), implicit="tools/img/build.py", variables={
+                        "img_type": "bg",
+                        "img_flags": "",
+                    })
+
+                    asset_files.append(source_file)
+                    asset_files.append(asset_file)
+                    n.build(asset_file, "yay0compress", source_file, implicit="tools/Yay0compress")
+                elif asset_name.endswith("_shape") or asset_name.endswith("_hit"):
+                    source_file = find_asset(f"map/{asset_name}.bin")
+                    asset_file = f"$builddir/assets/{asset_name}.Yay0"
+
+                    asset_files.append(source_file)
+                    asset_files.append(asset_file)
+                    n.build(asset_file, "yay0compress", source_file, implicit="tools/Yay0compress")
+                else:
                     source_file = find_asset(f"{asset_name}.bin")
                     asset_file = f"$builddir/assets/{asset_name}.Yay0"
 

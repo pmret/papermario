@@ -1418,8 +1418,8 @@ typedef struct TileDescriptor {
 } TileDescriptor; // size = 0x30
 
 typedef struct BackgroundHeader {
-    /* 0x00 */ UNK_PTR raster;
-    /* 0x04 */ UNK_PTR palette;
+    /* 0x00 */ void* raster;
+    /* 0x04 */ void* palette;
     /* 0x08 */ u16 startX;
     /* 0x0A */ u16 startY;
     /* 0x0C */ u16 width;
