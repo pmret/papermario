@@ -13,8 +13,10 @@ typedef struct UnkF5750 {
     /* 0x24 */ f32 unk_24;
 } UnkF5750;
 
+typedef UnkF5750* UnkF5750List[0x40];
+
 extern s16 D_802DB5B0;
-extern UnkF5750** D_802DB7C0;
+extern UnkF5750List* D_802DB7C0;
 
 ApiStatus HidePlayerShadow(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -471,14 +473,14 @@ ApiStatus func_802D3474(ScriptInstance* script, s32 isInitialCall) {
     UnkF5750* temp;
     s32 i;
 
-    for (i = 0; i < 0x40; i++) {
-        temp = D_802DB7C0[i];
+    for (i = 0; i < ARRAY_COUNT(*D_802DB7C0); i++) {
+        temp = (*D_802DB7C0)[i];
         if (temp->unk_00 < 0) {
             break;
         }
     }
 
-    if (i >= 0x40) {
+    if (i >= ARRAY_COUNT(*D_802DB7C0)) {
         return ApiStatus_DONE2;
     }
 
@@ -506,8 +508,8 @@ ApiStatus func_802D354C(ScriptInstance* script, s32 isInitialCall) {
     UnkF5750* temp;
     s32 i;
 
-    for (i = 0; i < 0x40; i++) {
-        temp = D_802DB7C0[i];
+    for (i = 0; i < ARRAY_COUNT(*D_802DB7C0); i++) {
+        temp = (*D_802DB7C0)[i];
         if (temp->unk_00 < 0) {
             break;
         }
@@ -563,7 +565,7 @@ INCLUDE_ASM(s32, "code_F5750", func_802D3FC8);
 INCLUDE_ASM(s32, "code_F5750", func_802D4050);
 
 UnkF5750* func_802D4164(s32 index) {
-    return D_802DB7C0[index];
+    return (*D_802DB7C0)[index];
 }
 
 INCLUDE_ASM(s32, "code_F5750", func_802D417C);
@@ -575,7 +577,7 @@ INCLUDE_ASM(s32, "code_F5750", func_802D42AC);
 INCLUDE_ASM(s32, "code_F5750", func_802D4364);
 
 void func_802D43AC(s32 index, f32 arg1, f32 arg2, f32 arg3) {
-    UnkF5750* temp = D_802DB7C0[index];
+    UnkF5750* temp = (*D_802DB7C0)[index];
 
     temp->unk_1C = arg1;
     temp->unk_20 = arg2;
@@ -583,7 +585,7 @@ void func_802D43AC(s32 index, f32 arg1, f32 arg2, f32 arg3) {
 }
 
 void func_802D43D0(s32 index, s32 arg1, s32 arg2, s32 arg3) {
-    UnkF5750* temp = D_802DB7C0[index];
+    UnkF5750* temp = (*D_802DB7C0)[index];
 
     temp->unk_10 = arg1;
     temp->unk_14 = arg2;

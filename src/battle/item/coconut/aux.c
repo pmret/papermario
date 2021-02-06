@@ -3,7 +3,8 @@
 MenuIcon* D_802A1E80;
 void* D_80108A64; // an image
 
-ApiStatus func_802A1000_72F720(ScriptInstance* script, s32 isInitialCall) {
+// Returns time to sleep for on SI_VAR(0).
+ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = BATTLE_STATUS;
     Actor* player = PLAYER_ACTOR;
     s32 sellValue = gItemTable[battleStatus->selectedItemID].sellValue;
@@ -11,9 +12,8 @@ ApiStatus func_802A1000_72F720(ScriptInstance* script, s32 isInitialCall) {
     f32 posY = player->currentPos.y + player->size.y;
     f32 posZ;
     f32 facingAngleSign = 0.0f;
-    s32 outVal = 0;
+    s32 sleepTime = 0;
 
-    // If Refund is equipped, the player gets
     if (heroes_is_ability_active(player, Ability_REFUND) && sellValue > 0) {
         s32 iconX;
         s32 iconY;
@@ -33,7 +33,7 @@ ApiStatus func_802A1000_72F720(ScriptInstance* script, s32 isInitialCall) {
             facingAngleSign += 30.0f;
         }
 
-        outVal = (i * 3) + 30;
+        sleepTime = (i * 3) + 30;
 
         posX = player->currentPos.x;
         posY = player->currentPos.y;
@@ -44,12 +44,12 @@ ApiStatus func_802A1000_72F720(ScriptInstance* script, s32 isInitialCall) {
         set_icon_render_pos(D_802A1E80, iconX + 36, iconY - 63);
     }
 
-    script->varTable[0] = outVal;
+    script->varTable[0] = sleepTime;
 
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802A11D4_72F8F4(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(GiveRefundCleanup)(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = BATTLE_STATUS;
     s32 sellValue = gItemTable[battleStatus->selectedItemID].sellValue;
 
@@ -78,10 +78,10 @@ Script D_802A1240_72F960 = SCRIPT({
         PlayEffect(51, 1, SI_VAR(0), SI_VAR(3), SI_VAR(2), 1.0, 30, 0, 0, 0, 0, 0, 0, 0);
         MakeItemEntity(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 1, 0);
         SI_VAR(10) = SI_VAR(0);
-        func_802A1000_72F720();
+        N(GiveRefund)();
         sleep SI_VAR(0);
         sleep 15;
-        func_802A11D4_72F8F4();
+        N(GiveRefundCleanup)();
         RemoveItemEntity(SI_VAR(10));
     } else {
         GetActorPos(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -112,10 +112,10 @@ Script D_802A1544_72FC64 = SCRIPT({
     SI_VAR(1) += 45;
     MakeItemEntity(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 1, 0);
     SI_VAR(14) = SI_VAR(0);
-    func_802A1000_72F720();
+    N(GiveRefund)();
     sleep SI_VAR(0);
     sleep 15;
-    func_802A11D4_72F8F4();
+    N(GiveRefundCleanup)();
     RemoveItemEntity(SI_VAR(14));
 });
 
