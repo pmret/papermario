@@ -144,7 +144,10 @@ def find_asset_dir(path):
         if os.path.exists(d + "/" + path):
             return d
 
-    print("unable to find asset: " + path)
+    print("Unable to find asset: " + path)
+    print("The asset dump may be incomplete. Run")
+    print("    rm .splat_cache")
+    print("And then run ./configure.py again.")
     exit(1)
 
 def find_asset(path):
