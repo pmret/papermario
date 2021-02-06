@@ -58,8 +58,11 @@ class N64SegPaperMarioMapFS(N64Segment):
 
                 path = os.path.join(map_dir, "{}.bin".format(name))
             elif name.endswith("_tex"):
-                map_dir = self.create_split_dir(base_path, self.options.get("assets_dir", "bin") + f"/map/texture")
+                map_dir = self.create_split_dir(base_path, self.options.get("assets_dir", "bin") + f"/map")
                 path = os.path.join(map_dir, "{}.bin".format(name))
+            elif name.endswith("_bg"):
+                map_dir = self.create_split_dir(base_path, self.options.get("assets_dir", "bin") + f"/map")
+                path = os.path.join(map_dir, "{}.png".format(name))
             else:
                 path = os.path.join(bin_dir, "{}.bin".format(name))
 
@@ -80,6 +83,26 @@ class N64SegPaperMarioMapFS(N64Segment):
                     # CI-8
                     w = png.Writer(150, 105, palette=parse_palette(bytes[:0x200]))
                     w.write_array(f, bytes[0x200:])
+            elif name.endswith("_bg"):
+                def write_bg_png(bytes, path, header_offset=0):
+                    header = bytes[header_offset:header_offset+0x10]
+
+                    raster_offset = int.from_bytes(header[0:4], byteorder="big") - 0x80200000
+                    palette_offset = int.from_bytes(header[4:8], byteorder="big") - 0x80200000
+                    assert int.from_bytes(header[8:12], byteorder="big") == 0x000C0014 # draw pos
+                    width = int.from_bytes(header[12:14], byteorder="big")
+                    height = int.from_bytes(header[14:16], byteorder="big")
+
+                    with open(path, "wb") as f:
+                        # CI-8
+                        w = png.Writer(width, height, palette=parse_palette(bytes[palette_offset:palette_offset+512]))
+                        w.write_array(f, bytes[raster_offset:])
+
+                write_bg_png(bytes, path)
+
+                # sbk_bg has an alternative palette
+                if name == "sbk_bg":
+                    write_bg_png(bytes, path.split(".")[0] + ".alt.png", header_offset=0x10)
             else:
                 with open(path, "wb") as f:
                     f.write(bytes)
