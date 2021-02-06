@@ -29,10 +29,6 @@
         "editor.wordSeparators": "`~!@#%^&*()-=+[{]}\\|;:'\",.<>/?", // no $, for scripts
     },
     "files.associations": {
-        "*.tcc": "c",
-        "ratio": "c",
-        "vector": "c",
-        "cmath": "c",
-        "common.h": "c"
+        "*.h": "c",
     },
 }

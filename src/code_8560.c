@@ -21,8 +21,7 @@ void get_cam_viewport(s32 camID, u16* x, u16* y, u16* width, u16* height) {
     *y = CAM(camID)->viewportStartY;
 }
 
-INCLUDE_ASM(void, "code_8560", get_screen_coords, Cam camID, f32 x, f32 y, f32 z, f32* outX, f32* outY,
-            f32* outZ);
+INCLUDE_ASM(void, "code_8560", get_screen_coords, Cam camID, f32 x, f32 y, f32 z, f32* outX, f32* outY, f32* outZ);
 
 s32 func_8002E754(s32 camID, s32 x, s32 y) {
     s32 startX = CAM(camID)->viewportStartX;

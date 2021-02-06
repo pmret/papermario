@@ -367,7 +367,7 @@ class N64SegPaperMarioMessages(N64Segment):
 
             self.log(f"Reading {len(msg_offsets)} messages in section {name} (0x{i:02X})")
 
-            path = Path(base_path, self.name, name + ".msg")
+            path = Path(base_path, self.options["assets_dir"], self.name, name + ".msg")
             path.parent.mkdir(parents=True, exist_ok=True)
             with open(path, "w") as self.f:
                 for j, msg_offset in enumerate(msg_offsets):
@@ -378,7 +378,7 @@ class N64SegPaperMarioMessages(N64Segment):
                     self.f.write("\n[/message]\n")
 
     def get_ld_files(self):
-        return [("", self.name, ".data", self.rom_start)]
+        return [(self.options["assets_dir"], self.name, ".data", self.rom_start)]
 
     @staticmethod
     def get_default_name(addr):

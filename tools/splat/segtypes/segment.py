@@ -1,5 +1,7 @@
 from pathlib import Path, PurePath
 from util import log
+import os
+import re
 
 default_subalign = 16
 
@@ -137,7 +139,14 @@ class Segment:
                     f"SPLAT_BEGIN_SEG({tmp_sect_name}, 0x{start:X}, 0x{tmp_vram:X}, {subalign_str})\n"
                 )
 
-            path = PurePath(subdir) / PurePath(path)
+            path_cname = re.sub(r"[^0-9a-zA-Z_]", "_", path)
+            s += f"    {path_cname} = .;\n"
+
+            if subdir == self.options.get("assets_dir"):
+                path = PurePath(path)
+            else:
+                path = PurePath(subdir) / PurePath(path)
+
             path = path.with_suffix(".o" if replace_ext else path.suffix + ".o")
 
             s += f"    BUILD_DIR/{path}({obj_type});\n"

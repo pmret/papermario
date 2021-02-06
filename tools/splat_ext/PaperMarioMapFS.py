@@ -19,7 +19,7 @@ class N64SegPaperMarioMapFS(N64Segment):
         super().__init__(segment, next_segment, options)
 
     def split(self, rom_bytes, base_path):
-        bin_dir = self.create_split_dir(base_path, "bin/assets")
+        bin_dir = self.create_split_dir(base_path, self.options.get("assets_dir", "bin"))
 
         data = rom_bytes[self.rom_start: self.rom_end]
 
@@ -59,7 +59,7 @@ class N64SegPaperMarioMapFS(N64Segment):
 
 
     def get_ld_files(self):
-        return [("bin/assets", self.name, ".data", self.rom_start)]
+        return [(self.options.get("assets_dir", "bin"), self.name, ".data", self.rom_start)]
 
 
     @staticmethod

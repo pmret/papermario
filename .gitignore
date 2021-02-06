@@ -23,16 +23,15 @@ build.ninja
 /include/message_ids.h
 /include/sprite/
 /include/map
+/tools/permuter_settings.toml
 
 # Assets
-/bin
-/img
-/msg
-/sprite
+/assets
 
 # Star Rod
 /sprite/SpriteTable.xml
 /mod.cfg
+/tools/star-rod
 
 /tools/Yay0compress
 /tools/n64crc
