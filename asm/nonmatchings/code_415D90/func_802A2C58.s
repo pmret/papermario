@@ -9,7 +9,7 @@ glabel func_802A2C58
 /* 4179F8 802A2C68 24050001 */   addiu    $a1, $zero, 1
 /* 4179FC 802A2C6C 8FBF0010 */  lw        $ra, 0x10($sp)
 /* 417A00 802A2C70 2402001E */  addiu     $v0, $zero, 0x1e
-/* 417A04 802A2C74 3C01802B */  lui       $at, %hi(D_802AD108)
-/* 417A08 802A2C78 A022D108 */  sb        $v0, %lo(D_802AD108)($at)
+/* 417A04 802A2C74 3C01802B */  lui       $at, %hi(battle_menu_moveState)
+/* 417A08 802A2C78 A022D108 */  sb        $v0, %lo(battle_menu_moveState)($at)
 /* 417A0C 802A2C7C 03E00008 */  jr        $ra
 /* 417A10 802A2C80 27BD0018 */   addiu    $sp, $sp, 0x18
