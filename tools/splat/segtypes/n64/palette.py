@@ -33,7 +33,7 @@ class N64SegPalette(N64Segment):
         )
 
     def split(self, rom_bytes, base_path):
-        out_dir = self.create_parent_dir(base_path + "/img", self.name)
+        out_dir = self.create_parent_dir(base_path + "/" + self.options.get("assets_dir", "img"), self.name)
         self.path = os.path.join(
             out_dir, os.path.basename(self.name) + ".png")
 
@@ -62,4 +62,4 @@ class N64SegPalette(N64Segment):
         if self.compressed:
             ext += ".Yay0"
 
-        return [("img", f"{self.name}{ext}", ".data", self.rom_start)]
+        return [(self.options.get("assets_dir", "img"), f"{self.name}{ext}", ".data", self.rom_start)]

@@ -16,6 +16,8 @@ import split
 INCLUDE_ASM_RE = re.compile(r"___INCLUDE_ASM\([^,]+, ([^,]+), ([^,)]+)") # note _ prefix
 
 TARGET = "papermario"
+BUILD_DIR = "build"
+ASSET_DIRS = ["assets"]
 
 NPC_SPRITES = "world_goombario world_kooper world_bombette world_parakarry world_bow world_watt world_sushie world_lakilester battle_goombario battle_kooper battle_bombette battle_parakarry battle_bow battle_watt battle_sushie battle_lakilester kooper_without_shell world_eldstar world_mamar world_skolar world_muskular world_misstar world_klevar world_kalmar battle_eldstar battle_mamar battle_skolar battle_muskular battle_misstar battle_klevar battle_kalmar twink jr_troopa spiked_jr_troopa spiked_para_jr_troopa mage_jr_troopa para_jr_troopa goomba spiked_goomba paragoomba koopa_troopa para_troopa fuzzy bob_omb bullet_bill bill_blaster monty_mole cleft pokey battle_bandit buzzy_beetle swooper stone_chomp putrid_piranha piranha_plant sentinel world_clubba battle_clubba shy_guy groove_guy sky_guy pyro_guy spy_guy medi_guy fuzzipede jungle_guy heart_plant hurt_plant m_bush bubble kent_c_koopa dayzee lakitu spiny bzzap ruff_puff spike_top duplighost albino_dino blooper baby_blooper gulpit dry_bones thrown_bone bony_beetle magikoopa flying_magikoopa world_koopatrol koopatrol hammer_bros bush_basic bush_blocky bush_dry bush_leafy bush_matted world_kammy battle_kammy goomba_bros goomba_king spiky_goomnut dark_toad koopa_bros buzzar tutankoopa chain_chomp world_tubba battle_tubba tubbas_heart big_lantern_ghost shy_squad_guy marshal_guy stilt_guy stilt_guy_unfold shy_stack_guy shy_stack_unfold shy_stack_damage shy_stack_rock general_guy general_guy_bomb tank_guy lava_piranha_head petit_piranha lava_bud huff_n_puff tuff_puff monstar crystal_king world_bowser battle_bowser luigi toad three_sisters vanna_t toad_kid toad_guard harry_t toad_minister postmaster conductor_toad train_station_toad fishmael artist_toad koopa koopa_without_shell world_bob_omb whacka dryite mouser boo yoshi yoshi_kid raven bubulb penguin shiver_toad world_bandit goompa goombaria gooma goompapa goomama the_master chan lee merlon chet_rippo rowf minh_t russ_t tayce_t fice_t bartender chanterelle rip_cheato chuck_quizmo merluvlee merlar merlow star_kid kolorado_wife koopa_koot kolorado battle_kolorado archeologist nomadimouse world_merlee battle_merlee disguised_moustafa moustafa oaklie bootler yakkey gourmet_guy village_leader leaders_friend rafael_raven tolielup gate_flower petunia posie lily rosie sun lakilulu ninji mayor_penguin mayor_penguin_wife penguin_patrol herringway merle star_rod fire coin parade_peach parade_koopas parade_burnt_bowser parade_luigi parade_partners parade_yoshis parade_kolorados parade_chicks parade_ice_show parade_toads parade_batons parade_drums parade_flags parade_horns parade_tubba_balloon parade_wizards parade_mario parade_shy_guys parade_twink leaf".split(" ")
 
@@ -26,6 +28,7 @@ ASSETS = sum([[f"{map_name}_shape", f"{map_name}_hit"] for map_name in MAPS], []
 def obj(path: str):
     if not path.startswith("$builddir/"):
         path = "$builddir/" + path
+    path = re.sub(r"/assets/", "/", path)
     return path + ".o"
 
 def read_splat(splat_config: str):
@@ -48,7 +51,10 @@ def read_splat(splat_config: str):
 
     for segment in all_segments:
         for subdir, path, obj_type, start in segment.get_ld_files():
-            path = subdir + "/" + path
+            if path.endswith(".c") or path.endswith(".s") or path.endswith(".data") or path.endswith(".rodata"):
+                path = subdir + "/" + path
+            else:
+                assert subdir == "assets", subdir + " " + path
 
             objects.add(path)
             segments[path] = segment
@@ -57,7 +63,7 @@ def read_splat(splat_config: str):
             for split_file in segment.files:
                 if split_file["subtype"] in ["i4", "i8", "ia4", "ia8", "ia16", "rgba16", "rgba32", "ci4", "ci8", "palette"]:
                     path = os.path.join(
-                        "src",
+                        #segment.get_subdir(split_file["subtype"]),
                         split_file["name"] + "." + segment.get_ext(split_file["subtype"])
                     )
 
@@ -103,7 +109,7 @@ async def build_c_file(c_file: str, generated_headers, ccache, cppflags):
 
 def build_yay0_file(bin_file: str):
     yay0_file = f"$builddir/{os.path.splitext(bin_file)[0]}.Yay0"
-    n.build(yay0_file, "yay0compress", bin_file, implicit="tools/Yay0compress")
+    n.build(yay0_file, "yay0compress", find_asset(bin_file), implicit="tools/Yay0compress")
     build_bin_object(yay0_file)
 
 def build_bin_object(bin_file: str):
@@ -120,7 +126,7 @@ def build_image(f: str, segment):
         if segment.flip_vertical:
             flags += "--flip-y"
 
-    n.build(out, "img", path + ".png", implicit="tools/img/build.py", variables={
+    n.build(out, "img", find_asset(path + ".png"), implicit="tools/img/build.py", variables={
         "img_type": img_type,
         "img_flags": flags,
     })
@@ -129,6 +135,17 @@ def build_image(f: str, segment):
 def cmd_exists(cmd):
     return subprocess.call("type " + cmd, shell=True,
         stdout=subprocess.PIPE, stderr=subprocess.PIPE) == 0
+
+def find_asset_dir(path):
+    for d in ASSET_DIRS:
+        if os.path.exists(d + "/" + path):
+            return d
+
+    print("unable to find asset: " + path)
+    exit(1)
+
+def find_asset(path):
+    return find_asset_dir(path) + "/" + path
 
 async def main():
     global n, cpp, task_sem, num_tasks, num_tasks_done
@@ -194,12 +211,12 @@ async def main():
     # generate build.ninja
     n = ninja_syntax.Writer(open("build.ninja", "w"), width=120)
 
-    cppflags = "-Iinclude -Isrc -D _LANGUAGE_C -D _FINALROM -ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 " + args.cflags
+    cppflags = f"-I{BUILD_DIR}/include -Iinclude -Isrc -D _LANGUAGE_C -D _FINALROM -ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 " + args.cflags
     cflags = "-O2 -quiet -G 0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wuninitialized -Wshadow " + args.cflags
     iconv = "tools/iconv.py UTF-8 SHIFT-JIS" if sys.platform == "darwin" else "iconv --from UTF-8 --to SHIFT-JIS"
     cross = "mips-linux-gnu-"
 
-    n.variable("builddir", "build")
+    n.variable("builddir", BUILD_DIR)
     n.variable("target", TARGET)
     n.variable("cross", cross)
     n.variable("python", sys.executable)
@@ -339,22 +356,26 @@ async def main():
     def add_generated_header(h: str):
         generated_headers.append(h)
 
-        if not os.path.exists(h):
+        he = re.sub(r"\$builddir", BUILD_DIR, h)
+
+        if not os.path.exists(he):
             # mkdir -p
-            os.makedirs(os.path.dirname(h), exist_ok=True)
+            os.makedirs(os.path.dirname(he), exist_ok=True)
 
             # touch it so cpp doesn't complain if its #included
-            open(h, "w").close()
+            open(he, "w").close()
 
             # mark it as really old so ninja builds it
-            os.utime(h, (0, 0))
+            os.utime(he, (0, 0))
 
         return h
 
-    n.build(add_generated_header("include/ld_addrs.h"), "ld_addrs_h", "$builddir/$target.ld")
+    n.build(add_generated_header("$builddir/include/ld_addrs.h"), "ld_addrs_h", "$builddir/$target.ld")
 
     # messages
-    msg_files = glob("src/**/*.msg", recursive=True) + glob("msg/**/*.msg", recursive=True)
+    msg_files = []
+    for d in ASSET_DIRS:
+        msg_files.extend(glob(d + "/**/*.msg", recursive=True))
     for msg_file in msg_files:
         n.build(
             f"$builddir/{msg_file}.bin",
@@ -367,7 +388,7 @@ async def main():
         "msg_combine",
         [f"$builddir/{msg_file}.bin" for msg_file in msg_files],
         implicit="tools/msg/combine.py",
-        implicit_outputs=[add_generated_header(f"{msg_file}.h") for msg_file in msg_files],
+        implicit_outputs=[add_generated_header(f"$builddir/include/{msg_file.split('/', 1)[1]}.h") for msg_file in msg_files],
         variables={ "msg_combine_headers": [f"{msg_file}.h" for msg_file in msg_files] }
     )
     n.build("$builddir/msg.o", "bin", "$builddir/msg.bin")
@@ -375,16 +396,17 @@ async def main():
     # sprites
     npc_sprite_yay0s = []
     for sprite_id, sprite_name in enumerate(NPC_SPRITES, 1):
-        sources = glob(f"sprite/npc/{sprite_name}/**/*.*", recursive=True)
+        asset_dir = find_asset_dir(f"sprite/npc/{sprite_name}")
+        sources = glob(f"{asset_dir}/npc/{sprite_name}/**/*.*", recursive=True)
         variables = {
             "sprite_name": sprite_name,
-            "sprite_dir": f"sprite/npc/{sprite_name}",
+            "sprite_dir": f"{asset_dir}/sprite/npc/{sprite_name}",
             "sprite_id": sprite_id,
         }
 
         # generated header
         n.build(
-            add_generated_header(f"include/sprite/npc/{sprite_name}.h"),
+            add_generated_header(f"$builddir/include/sprite/npc/{sprite_name}.h"),
             "sprite_animations_h",
             implicit=sources + ["tools/gen_sprite_animations_h.py"],
             variables=variables,
@@ -418,7 +440,7 @@ async def main():
         elif f.endswith(".Yay0"):
             build_yay0_file(os.path.splitext(f)[0] + ".bin")
         elif f.endswith(".bin"):
-            build_bin_object(f)
+            build_bin_object(find_asset(f))
         elif f.endswith(".data"):
             n.build(obj(f), "as", "asm/" + f + ".s")
         elif f.endswith(".rodata"):
@@ -429,13 +451,15 @@ async def main():
             if isinstance(segment, dict):
                 # image within a code section
                 out = "$builddir/" + f + ".bin"
-                n.build(out, "img", re.sub(r"\.pal\.png", ".png", f), implicit="tools/img/build.py", variables={
+                infile = find_asset(re.sub(r"\.pal\.png", ".png", f))
+
+                n.build(out, "img", infile, implicit="tools/img/build.py", variables={
                     "img_type": segment["subtype"],
                     "img_flags": "",
                 })
 
                 if ".pal.png" not in f:
-                    n.build(add_generated_header(f + ".h"), "img_header", f, implicit="tools/img/header.py")
+                    n.build(add_generated_header("$builddir/include/" + f + ".h"), "img_header", infile, implicit="tools/img/header.py")
 
                 n.build("$builddir/" + f + ".o", "bin", out)
             else:
@@ -444,17 +468,17 @@ async def main():
             # combine sprites
             n.build(f"$builddir/{f}.bin", "npc_sprites", npc_sprite_yay0s, implicit="tools/compile_npc_sprites.py")
             n.build(obj(f), "bin", f"$builddir/{f}.bin")
-        elif f == "/msg": # XXX: why does this have a leading '/'??
+        elif segment.type == "PaperMarioMessages":
             continue # done already above
-        elif f == "bin/assets/assets":
+        elif segment.type == "PaperMarioMapFS":
             asset_files = [] # even indexes: uncompressed; odd indexes: compressed
 
             for asset_name in ASSETS:
                 if asset_name.endswith("_tex"): # uncompressed
-                    asset_files.append(f"bin/assets/{asset_name}.bin")
-                    asset_files.append(f"bin/assets/{asset_name}.bin")
+                    asset_files.append(find_asset(f"{asset_name}.bin"))
+                    asset_files.append(find_asset(f"{asset_name}.bin"))
                 else: # uncompressed
-                    source_file = f"bin/assets/{asset_name}.bin"
+                    source_file = find_asset(f"{asset_name}.bin")
                     asset_file = f"$builddir/assets/{asset_name}.Yay0"
 
                     asset_files.append(source_file)
@@ -463,7 +487,6 @@ async def main():
 
             n.build("$builddir/assets.bin", "assets", asset_files)
             n.build(obj(f), "bin", "$builddir/assets.bin")
-
         else:
             print("warning: dont know what to do with object " + f)
     n.newline()

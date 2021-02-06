@@ -9,6 +9,7 @@ options:
   extensions: splat_ext
   symbol_addrs_path: tools/symbol_addrs.txt
   platform: n64
+  assets_dir: assets
 segments:
   - name: header
     type: header

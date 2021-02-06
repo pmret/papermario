@@ -738,7 +738,7 @@ class N64SegCode(N64Segment):
                 if file_type == "c":
                     c_path = os.path.join(
                         base_path,
-                        "src",
+                        self.get_subdir(split_file["subtype"]),
                         split_file["name"] + "." + self.get_ext(split_file["subtype"])
                     )
 
@@ -813,10 +813,12 @@ class N64SegCode(N64Segment):
                         f.write(file_text)
 
             elif file_type == "bin" and ("bin" in self.options["modes"] or "all" in self.options["modes"]):
-                out_dir = self.create_split_dir(base_path, "bin")
-
                 bin_path = os.path.join(
-                    out_dir, split_file["name"] + "." + self.get_ext(split_file["subtype"]))
+                    base_path,
+                    self.get_subdir(split_file["subtype"]),
+                    split_file["name"] + "." + self.get_ext(split_file["subtype"])
+                )
+
                 Path(bin_path).parent.mkdir(parents=True, exist_ok=True)
                 with open(bin_path, "wb") as f:
                     f.write(rom_bytes[split_file["start"]: split_file["end"]])
@@ -829,7 +831,7 @@ class N64SegCode(N64Segment):
 
                 out_path = os.path.join(
                     base_path,
-                    "src",
+                    self.get_subdir(split_file["subtype"]),
                     split_file["name"] + "." + self.get_ext(split_file["subtype"])
                 )
                 img_bytes = rom_bytes[split_file["start"]:split_file["end"]]
@@ -845,7 +847,7 @@ class N64SegCode(N64Segment):
 
             out_path = os.path.join(
                 base_path,
-                "src",
+                self.get_subdir(split_file["subtype"]),
                 split_file["name"] + "." + self.get_ext(split_file["subtype"])
             )
 
@@ -857,6 +859,8 @@ class N64SegCode(N64Segment):
                 image = N64SegCi4.parse_image(img_bytes, width, height)
 
                 w = png.Writer(width, height, palette=palette)
+
+                Path(out_path).parent.mkdir(parents=True, exist_ok=True)
                 with open(out_path, "wb") as f:
                     w.write_array(f, image)
 
@@ -864,12 +868,15 @@ class N64SegCode(N64Segment):
 
         # TODO write orphaned palettes
 
-    @staticmethod
-    def get_subdir(subtype):
-        if subtype in ["c", ".data", ".rodata", ".bss", "i4", "i8", "ia4", "ia8", "ia16", "rgba16", "rgba32", "ci4", "ci8", "palette"]:
+    def get_subdir(self, subtype):
+        if subtype in ["c", ".data", ".rodata", ".bss"]:
             return "src"
         elif subtype in ["asm", "hasm", "header"]:
             return "asm"
+        elif subtype == "bin":
+            return self.options.get("assets_dir", "bin")
+        elif subtype in ["i4", "i8", "ia4", "ia8", "ia16", "rgba16", "rgba32", "ci4", "ci8", "palette"]:
+            return self.options.get("assets_dir", "img")
         return subtype
 
     @staticmethod
