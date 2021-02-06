@@ -2346,8 +2346,8 @@ segments:
     vram: 0x802A1000
     overlay: True
     files:
-    - [0x72F720, c,       aux]
-    - [0x72F960, .data,   aux]
+    - [0x72F720, c,       lib]
+    - [0x72F960, .data,   lib]
     - [0x72FF20, ci4,     coconut, 32, 32]
     - [0x730120, palette, coconut]
     - [0x730140, .data,   coconut]
