@@ -3,7 +3,7 @@
 MenuIcon* D_802A1E80;
 void* D_80108A64; // an image
 
-// Returns time to sleep for on SI_VAR(0).
+// Returns time to sleep for on $x.
 ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = BATTLE_STATUS;
     Actor* player = PLAYER_ACTOR;
@@ -60,93 +60,108 @@ ApiStatus N(GiveRefundCleanup)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-Script D_802A1240_72F960 = SCRIPT({
+/// Provide arg `TRUE` on `SI_VAR(1)` to disable refunding.
+Script N(UseItemWithEffect) = SCRIPT({
     if (SI_VAR(1) == 0) {
-        UseCamPreset(69);
+        UseCamPreset(69); // Nice
         sleep 10;
-        PlaySoundAtActor(0, 8333);
-        SetAnimation(0, 0, 0x1001F);
-        GetActorPos(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-        SI_VAR(0) += 18;
-        SetActorSpeed(0, 4.0);
-        SetGoalPos(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+
+        PlaySoundAtActor(ActorID_PLAYER, 8333);
+        SetAnimation(ActorID_PLAYER, 0, PlayerAnim_GOT_ITEM);
+        GetActorPos(ActorID_PLAYER, $x, $y, $z);
+        $x += 18;
+        SetActorSpeed(ActorID_PLAYER, 4.0);
+        SetGoalPos(ActorID_PLAYER, $x, $y, $z);
         PlayerRunToGoal(0);
-        SI_VAR(1) += 45;
-        SI_VAR(3) = SI_VAR(1);
-        SI_VAR(3) += 10;
-        SI_VAR(3) += 2;
-        PlayEffect(51, 1, SI_VAR(0), SI_VAR(3), SI_VAR(2), 1.0, 30, 0, 0, 0, 0, 0, 0, 0);
-        MakeItemEntity(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 1, 0);
-        SI_VAR(10) = SI_VAR(0);
+
+        $y += 45;
+        $effectY = $y;
+        $effectY += 10;
+        $effectY += 2;
+        PlayEffect(51, 1, $x, $effectY, $z, 1.0, 30, 0, 0, 0, 0, 0, 0, 0);
+        MakeItemEntity(SI_VAR(10), $x, $y, $z, 1, 0);
+        SI_VAR(10) = $x;
+
         N(GiveRefund)();
-        sleep SI_VAR(0);
+        sleep $x;
+
         sleep 15;
+
         N(GiveRefundCleanup)();
         RemoveItemEntity(SI_VAR(10));
     } else {
-        GetActorPos(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-        PlaySoundAtActor(0, 8333);
-        SetAnimation(0, 0, 0x1001F);
+        // No refund.
+
+        GetActorPos(ActorID_PLAYER, $x, $y, $z);
+        PlaySoundAtActor(ActorID_PLAYER, 8333);
+        SetAnimation(ActorID_PLAYER, 0, PlayerAnim_GOT_ITEM);
         sleep 4;
-        SI_VAR(1) += 45;
-        SI_VAR(3) = SI_VAR(1);
-        SI_VAR(3) += 10;
-        SI_VAR(3) += 2;
-        PlayEffect(51, 1, SI_VAR(0), SI_VAR(3), SI_VAR(2), 1.0, 30, 0, 0, 0, 0, 0, 0, 0);
-        MakeItemEntity(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 1, 0);
-        SI_VAR(10) = SI_VAR(0);
+
+        $y += 45;
+        $effectY = $y;
+        $effectY += 10;
+        $effectY += 2;
+        PlayEffect(51, 1, $x, $effectY, $z, 1.0, 30, 0, 0, 0, 0, 0, 0, 0);
+        MakeItemEntity(SI_VAR(10), $x, $y, $z, 1, 0);
+        SI_VAR(10) = $x;
+
         sleep 15;
         RemoveItemEntity(SI_VAR(10));
     }
 });
 
-Script D_802A1544_72FC64 = SCRIPT({
+Script N(UseItem) = SCRIPT({
     UseCamPreset(19);
-    SetBattleCamTarget(0xFFFFFFAB, 1, 0);
+    SetBattleCamTarget(-85, 1, 0);
     SetBattleCamOffsetZ(41);
     SetBattleCamZoom(248);
     MoveBattleCamOver(30);
     sleep 10;
-    SetAnimation(0, 0, 0x1001F);
-    GetActorPos(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    SI_VAR(1) += 45;
-    MakeItemEntity(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 1, 0);
-    SI_VAR(14) = SI_VAR(0);
+
+    SetAnimation(ActorID_PLAYER, 0, PlayerAnim_GOT_ITEM);
+    GetActorPos(ActorID_PLAYER, $x, $y, $z);
+    $y += 45;
+    MakeItemEntity(SI_VAR(10), $x, $y, $z, 1, 0);
+    SI_VAR(14) = $x;
+
     N(GiveRefund)();
-    sleep SI_VAR(0);
+    sleep $x;
+
     sleep 15;
+
     N(GiveRefundCleanup)();
     RemoveItemEntity(SI_VAR(14));
 });
 
-Script D_802A1670_72FFD0 = SCRIPT({
-    UseIdleAnimation(0, 0);
-    SetGoalToHome(0);
-    SetActorSpeed(0, 8.0);
-    SetAnimation(0, 0, PlayerAnim_RUNNING);
+Script N(PlayerGoHome) = SCRIPT({
+    UseIdleAnimation(ActorID_PLAYER, 0);
+    SetGoalToHome(ActorID_PLAYER);
+    SetActorSpeed(ActorID_PLAYER, 8.0);
+    SetAnimation(ActorID_PLAYER, 0, PlayerAnim_RUNNING);
     PlayerRunToGoal(0);
-    SetAnimation(0, 0, 0x10002);
-    UseIdleAnimation(0, 1);
+
+    SetAnimation(ActorID_PLAYER, 0, PlayerAnim_2);
+    UseIdleAnimation(ActorID_PLAYER, 1);
 });
 
-Script Script_802A170C = SCRIPT({
+Script N(EatItem) = SCRIPT({
     spawn {
         loop 4 {
             PlaySoundAtActor(0, 0x2095);
             sleep 10;
         }
     }
-    SetAnimation(0, 0, 0x1001C);
+    SetAnimation(ActorID_PLAYER, 0, PlayerAnim_EAT);
     sleep 45;
 });
 
-Script D_802A1784_7300E4 = SCRIPT({
+Script N(DrinkItem) = SCRIPT({
     spawn {
         loop 4 {
             PlaySoundAtActor(0, 0x2095);
             sleep 10;
         }
     }
-    SetAnimation(0, 0, 0x10025);
+    SetAnimation(ActorID_PLAYER, 0, PlayerAnim_DRINK);
     sleep 45;
 });
