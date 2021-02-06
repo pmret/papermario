@@ -83,6 +83,7 @@ class Converter():
                 for row in reversed_if(img.read()[2], self.flip_y):
                     for a, b in iter_in_groups(row, 2):
                         byte = (a << 4) | b
+                        byte = byte & 0xFF
                         f.write(byte.to_bytes(1, byteorder="big"))
         elif self.mode == "palette":
             img.preamble(True)
@@ -208,7 +209,7 @@ class Converter():
 
 if __name__ == "__main__":
     if len(argv) < 4:
-        print("usage: convert_image.py MODE INFILE OUTFILE [--flip-y]")
+        print("usage: build.py MODE INFILE OUTFILE [--flip-y]")
         exit(1)
 
     Converter(*argv[1:]).convert()

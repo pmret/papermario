@@ -31,8 +31,8 @@ class N64SegPaperMarioMapFS(N64Segment):
         super().__init__(segment, next_segment, options)
 
     def split(self, rom_bytes, base_path):
-        bin_dir = self.create_split_dir(base_path, "bin/assets")
-        img_party_dir = self.create_split_dir(base_path, "img/party")
+        bin_dir = self.create_split_dir(base_path, self.options.get("assets_dir", "bin"))
+        img_party_dir = self.create_split_dir(base_path, self.options.get("assets_dir", "img") + "/party")
 
         data = rom_bytes[self.rom_start: self.rom_end]
 
@@ -51,11 +51,17 @@ class N64SegPaperMarioMapFS(N64Segment):
             if offset == 0:
                 path = None
             elif name.startswith("party_"):
-                path = "{}.png".format(name)
-                self.create_parent_dir(img_party_dir, path)
+                path = os.path.join(img_party_dir, "{}.png".format(name))
+            elif name.endswith("_hit") or name.endswith("_shape"):
+                area = "area_" + name.split("_")[0][0:3]
+                map_dir = self.create_split_dir(base_path, self.options.get("assets_dir", "bin") + f"/map/{area}")
+
+                path = os.path.join(map_dir, "{}.bin".format(name))
+            elif name.endswith("_tex"):
+                map_dir = self.create_split_dir(base_path, self.options.get("assets_dir", "bin") + f"/map/texture")
+                path = os.path.join(map_dir, "{}.bin".format(name))
             else:
-                path = "{}.bin".format(name)
-                self.create_parent_dir(bin_dir, path)
+                path = os.path.join(bin_dir, "{}.bin".format(name))
 
             if name == "end_data":
                 break
@@ -63,19 +69,20 @@ class N64SegPaperMarioMapFS(N64Segment):
             bytes = rom_bytes[self.rom_start + 0x20 +
                                 offset: self.rom_start + 0x20 + offset + size]
 
+            Path(path).parent.mkdir(parents=True, exist_ok=True)
+
             if is_compressed:
                 self.log(f"Decompressing {name}...")
                 bytes = Yay0decompress.decompress_yay0(bytes)
 
-
-                if name.startswith("party_"):
-                    with open(os.path.join(img_party_dir, path), "wb") as f:
-                        # CI-8
-                        w = png.Writer(150, 105, palette=parse_palette(bytes[:0x200]))
-                        w.write_array(f, bytes[0x200:])
-                else:
-                    with open(os.path.join(bin_dir, path), "wb") as f:
-                        f.write(bytes)
+            if name.startswith("party_"):
+                with open(path, "wb") as f:
+                    # CI-8
+                    w = png.Writer(150, 105, palette=parse_palette(bytes[:0x200]))
+                    w.write_array(f, bytes[0x200:])
+            else:
+                with open(path, "wb") as f:
+                    f.write(bytes)
 
             self.log(f"Wrote {name} to {Path(bin_dir, path)}")
 
@@ -83,7 +90,7 @@ class N64SegPaperMarioMapFS(N64Segment):
 
 
     def get_ld_files(self):
-        return [("bin/assets", self.name, ".data", self.rom_start)]
+        return [(self.options.get("assets_dir", "bin"), self.name, ".data", self.rom_start)]
 
 
     @staticmethod

@@ -259,7 +259,7 @@ class N64SegPaperMarioNpcSprites(N64Segment):
             self.files = DEFAULT_SPRITE_NAMES
 
     def split(self, rom_bytes, base_path):
-        out_dir = self.create_split_dir(base_path, "sprite/" + self.name)
+        out_dir = self.create_split_dir(base_path, self.options["assets_dir"] + "/sprite/" + self.name)
 
         data = rom_bytes[self.rom_start:self.rom_end]
         pos = 0
@@ -294,7 +294,7 @@ class N64SegPaperMarioNpcSprites(N64Segment):
             sprite.write_to_dir(sprite_dir)
 
     def get_ld_files(self):
-        return [("sprite", self.name, ".data", self.rom_start)]
+        return [(self.options["assets_dir"], "sprite/" + self.name, ".data", self.rom_start)]
 
     @staticmethod
     def get_default_name(addr):

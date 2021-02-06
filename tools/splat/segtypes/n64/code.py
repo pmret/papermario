@@ -58,11 +58,13 @@ class N64SegCode(N64Segment):
                     end = split_file["end"]
                     name = None if "name" not in split_file else split_file["name"]
                     subtype = split_file["type"]
+                    args = []
                 else:
                     start = split_file[0]
                     end = seg_end if i == len(segment["files"]) - 1 else segment["files"][i + 1][0]
                     name = None if len(split_file) < 3 else split_file[2]
                     subtype = split_file[1]
+                    args = split_file[3:]
 
                 if start < prev_start:
                     print(f"Error: Code segment {seg_name} has files out of ascending rom order (0x{prev_start:X} followed by 0x{start:X})")
@@ -70,10 +72,12 @@ class N64SegCode(N64Segment):
 
                 if not name:
                     name = self.get_default_name(start) if seg_name == self.get_default_name(seg_start) else f"{prefix}{start:X}"
+                elif seg_name.endswith("/"):
+                    name = seg_name + name
 
                 vram = seg_vram + (start - seg_start)
 
-                fl = {"start": start, "end": end, "name": name, "vram": vram, "subtype": subtype}
+                fl = {"start": start, "end": end, "name": name, "vram": vram, "subtype": subtype, "args": args}
 
                 ret.append(fl)
                 prev_start = start
@@ -486,10 +490,8 @@ class N64SegCode(N64Segment):
         return ret
 
     def should_run(self):
-        possible_subtypes = ["c", "asm", "hasm", "bin", "data", "rodata"]
-        subtypes = set(f["subtype"] for f in self.files)
-
-        return super().should_run() or (st in self.options["modes"] and st in subtypes for st in possible_subtypes)
+        # we have lots of subtypes
+        return True
 
     @staticmethod
     def is_valid_ascii(bytes):
@@ -705,6 +707,8 @@ class N64SegCode(N64Segment):
         md.detail = True
         md.skipdata = True
 
+        palettes = {}
+
         for split_file in self.files:
             file_type = split_file["subtype"]
 
@@ -733,7 +737,10 @@ class N64SegCode(N64Segment):
 
                 if file_type == "c":
                     c_path = os.path.join(
-                        base_path, "src", split_file["name"] + "." + self.get_ext(split_file["subtype"]))
+                        base_path,
+                        self.get_subdir(split_file["subtype"]),
+                        split_file["name"] + "." + self.get_ext(split_file["subtype"])
+                    )
 
                     if os.path.exists(c_path):
                         defined_funcs = get_funcs_defined_in_c(c_path)
@@ -806,20 +813,70 @@ class N64SegCode(N64Segment):
                         f.write(file_text)
 
             elif file_type == "bin" and ("bin" in self.options["modes"] or "all" in self.options["modes"]):
-                out_dir = self.create_split_dir(base_path, "bin")
-
                 bin_path = os.path.join(
-                    out_dir, split_file["name"] + "." + self.get_ext(split_file["subtype"]))
+                    base_path,
+                    self.get_subdir(split_file["subtype"]),
+                    split_file["name"] + "." + self.get_ext(split_file["subtype"])
+                )
+
                 Path(bin_path).parent.mkdir(parents=True, exist_ok=True)
                 with open(bin_path, "wb") as f:
                     f.write(rom_bytes[split_file["start"]: split_file["end"]])
 
-    @staticmethod
-    def get_subdir(subtype):
+            elif file_type in ["i4", "i8", "ia4", "ia8", "ia16", "rgba16", "rgba32", "ci4", "ci8"]:
+                pass
+
+            elif file_type == "palette":
+                from segtypes.n64.palette import N64SegPalette
+
+                out_path = os.path.join(
+                    base_path,
+                    self.get_subdir(split_file["subtype"]),
+                    split_file["name"] + "." + self.get_ext(split_file["subtype"])
+                )
+                img_bytes = rom_bytes[split_file["start"]:split_file["end"]]
+
+                palette = N64SegPalette.parse_palette(img_bytes)
+                palettes[split_file["name"]] = palette
+
+        import png
+
+        for split_file in self.files:
+            file_type = split_file["subtype"]
+            img_bytes = rom_bytes[split_file["start"]:split_file["end"]]
+
+            out_path = os.path.join(
+                base_path,
+                self.get_subdir(split_file["subtype"]),
+                split_file["name"] + "." + self.get_ext(split_file["subtype"])
+            )
+
+            if file_type == "ci4" and (file_type in self.options["modes"] or "all" in self.options["modes"] or "img" in self.options["modes"]):
+                from segtypes.n64.ci4 import N64SegCi4
+
+                width, height = split_file["args"]
+                palette = palettes[split_file["name"]]
+                image = N64SegCi4.parse_image(img_bytes, width, height)
+
+                w = png.Writer(width, height, palette=palette)
+
+                Path(out_path).parent.mkdir(parents=True, exist_ok=True)
+                with open(out_path, "wb") as f:
+                    w.write_array(f, image)
+
+            # TODO other image types
+
+        # TODO write orphaned palettes
+
+    def get_subdir(self, subtype):
         if subtype in ["c", ".data", ".rodata", ".bss"]:
             return "src"
         elif subtype in ["asm", "hasm", "header"]:
             return "asm"
+        elif subtype == "bin":
+            return self.options.get("assets_dir", "bin")
+        elif subtype in ["i4", "i8", "ia4", "ia8", "ia16", "rgba16", "rgba32", "ci4", "ci8", "palette"]:
+            return self.options.get("assets_dir", "img")
         return subtype
 
     @staticmethod
@@ -830,13 +887,17 @@ class N64SegCode(N64Segment):
             return "s"
         elif subtype == "bin":
             return "bin"
+        elif subtype in ["i4", "i8", "ia4", "ia8", "ia16", "rgba16", "rgba32", "ci4", "ci8"]:
+            return "png"
+        elif subtype == "palette":
+            return "pal.png"
         return subtype
 
     @staticmethod
     def get_ld_obj_type(subtype, section_name):
         if subtype in "c":
             return ".text"
-        elif subtype in ["bin", ".data", "data"]:
+        elif subtype in ["bin", ".data", "data", "i4", "i8", "ia4", "ia8", "ia16", "rgba16", "rgba32", "ci4", "ci8", "palette"]:
             return ".data"
         elif subtype in [".rodata", "rodata"]:
             return ".rodata"

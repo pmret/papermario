@@ -1,5 +1,23 @@
 #include "common.h"
 
+typedef struct UnkF5750 {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ s32 unk_04;
+    /* 0x08 */ s32 unk_08;
+    /* 0x0C */ s32 unk_0C;
+    /* 0x10 */ s32 unk_10;
+    /* 0x14 */ s32 unk_14;
+    /* 0x18 */ s32 unk_18;
+    /* 0x1C */ f32 unk_1C;
+    /* 0x20 */ f32 unk_20;
+    /* 0x24 */ f32 unk_24;
+} UnkF5750;
+
+typedef UnkF5750* UnkF5750List[0x40];
+
+extern s16 D_802DB5B0;
+extern UnkF5750List* D_802DB7C0;
+
 ApiStatus HidePlayerShadow(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 hideShadow = get_variable(script, *args++);
@@ -293,19 +311,31 @@ ApiStatus DisablePartner(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "code_F5750", UseEntryHeading);
 
-INCLUDE_ASM(s32, "code_F5750", func_802D2148);
+ApiStatus func_802D2148(ScriptInstance* script, s32 isInitialCall) {
+    gPlayerStatus.flags &= ~0x4000000;
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_F5750", UseExitHeading);
 
 INCLUDE_ASM(s32, "code_F5750", func_802D23F8);
 
-INCLUDE_ASM(s32, "code_F5750", func_802D244C);
+ApiStatus func_802D244C(ScriptInstance* script, s32 isInitialCall) {
+    if ((gCollisionStatus.currentFloor >= 0) && (func_802D23F8() != 0)) {
+        return ApiStatus_DONE2;
+    }
 
-INCLUDE_ASM(s32, "code_F5750", func_802D2484);
+    return ApiStatus_BLOCK;
+}
+
+ApiStatus func_802D2484(ScriptInstance* script, s32 isInitialCall) {
+    return (gCollisionStatus.currentFloor >= 0) * ApiStatus_DONE2;
+}
 
 ApiStatus func_802D249C(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 val = 0;
+
     if (gCollisionStatus.currentFloor >= 0) {
         val = func_802D23F8() != 0;
     }
@@ -318,11 +348,18 @@ ApiStatus func_802D24F4(ScriptInstance* script, s32 isInitialCall) {
     return (gPlayerStatus.moveFrames == 0) * ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_F5750", func_802D2508);
+ApiStatus func_802D2508(ScriptInstance* script, s32 isInitialCall) {
+    return !(gPlayerStatus.flags & 0x2000) * ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_F5750", func_802D2520);
 
-INCLUDE_ASM(s32, "code_F5750", func_802D286C);
+ApiStatus func_802D286C(ScriptInstance* script, s32 isInitialCall) {
+    s32 temp = *script->ptrReadPos;
+
+    D_802DB5B0 = temp;
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_F5750", func_802D2884);
 
@@ -353,9 +390,19 @@ ApiStatus GetCurrentPartner(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_F5750", func_802D2B50);
+ApiStatus func_802D2B50(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
 
-INCLUDE_ASM(s32, "code_F5750", func_802D2B6C);
+    playerStatus->animFlags |= 8;
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_802D2B6C(ScriptInstance* script, s32 isInitialCall) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+
+    playerStatus->animFlags |= 4;
+    return ApiStatus_DONE2;
+}
 
 ApiStatus Disable8bitMario(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -375,9 +422,24 @@ ApiStatus Disable8bitMario(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_F5750", func_802D2C14);
+ApiStatus func_802D2C14(ScriptInstance* script, s32 isInitialCall) {
+    func_800EF3D4(get_variable(script, *script->ptrReadPos));
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "code_F5750", func_802D2C40);
+ApiStatus func_802D2C40(ScriptInstance *script) {
+    Bytecode* args = script->ptrReadPos;
+    f32 x = get_variable(script, *args++);
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    f32 y;
+    f32 z;
+
+    playerStatus->extraVelocity.x = x;
+    playerStatus->extraVelocity.y = get_variable(script, *args++);
+    playerStatus->extraVelocity.z = get_variable(script, *args++);
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus PlaySoundAtPlayer(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -404,9 +466,75 @@ INCLUDE_ASM(s32, "code_F5750", func_802D3398);
 
 INCLUDE_ASM(s32, "code_F5750", func_802D33D4);
 
-INCLUDE_ASM(s32, "code_F5750", func_802D3474);
+ApiStatus func_802D3474(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 outVar = *args++;
+    s32* unkStructPtr = get_variable(script, *args++);
+    UnkF5750* temp;
+    s32 i;
 
-INCLUDE_ASM(s32, "code_F5750", func_802D354C);
+    for (i = 0; i < ARRAY_COUNT(*D_802DB7C0); i++) {
+        temp = (*D_802DB7C0)[i];
+        if (temp->unk_00 < 0) {
+            break;
+        }
+    }
+
+    if (i >= ARRAY_COUNT(*D_802DB7C0)) {
+        return ApiStatus_DONE2;
+    }
+
+    temp->unk_00 = load_entity_model(unkStructPtr);
+    temp->unk_04 = 0;
+    temp->unk_08 = 0;
+    temp->unk_0C = 0;
+    temp->unk_10 = 0;
+    temp->unk_14 = 0;
+    temp->unk_18 = 0;
+    temp->unk_1C = 1.0f;
+    temp->unk_20 = 1.0f;
+    temp->unk_24 = 1.0f;
+
+    update_entity_rendercmd(temp->unk_00);
+    set_variable(script, outVar, i);
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_802D354C(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 outVar = *args++;
+    s32* unkStructPtr = get_variable(script, *args++);
+    UnkF5750* temp;
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(*D_802DB7C0); i++) {
+        temp = (*D_802DB7C0)[i];
+        if (temp->unk_00 < 0) {
+            break;
+        }
+    }
+
+    if (i >= ARRAY_COUNT(*D_802DB7C0)) {
+        return ApiStatus_DONE2;
+    }
+
+    temp->unk_00 = ALT_load_entity_model(unkStructPtr);
+    temp->unk_04 = 0;
+    temp->unk_08 = 0;
+    temp->unk_0C = 0;
+    temp->unk_10 = 0;
+    temp->unk_14 = 0;
+    temp->unk_18 = 0;
+    temp->unk_1C = 1.0f;
+    temp->unk_20 = 1.0f;
+    temp->unk_24 = 1.0f;
+
+    update_entity_rendercmd(temp->unk_00);
+    set_variable(script, outVar, i);
+
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_F5750", func_802D3624);
 
@@ -436,7 +564,9 @@ INCLUDE_ASM(s32, "code_F5750", func_802D3FC8);
 
 INCLUDE_ASM(s32, "code_F5750", func_802D4050);
 
-INCLUDE_ASM(s32, "code_F5750", func_802D4164);
+UnkF5750* func_802D4164(s32 index) {
+    return (*D_802DB7C0)[index];
+}
 
 INCLUDE_ASM(s32, "code_F5750", func_802D417C);
 
@@ -446,9 +576,21 @@ INCLUDE_ASM(s32, "code_F5750", func_802D42AC);
 
 INCLUDE_ASM(s32, "code_F5750", func_802D4364);
 
-INCLUDE_ASM(s32, "code_F5750", func_802D43AC);
+void func_802D43AC(s32 index, f32 arg1, f32 arg2, f32 arg3) {
+    UnkF5750* temp = (*D_802DB7C0)[index];
 
-INCLUDE_ASM(s32, "code_F5750", func_802D43D0);
+    temp->unk_1C = arg1;
+    temp->unk_20 = arg2;
+    temp->unk_24 = arg3;
+}
+
+void func_802D43D0(s32 index, s32 arg1, s32 arg2, s32 arg3) {
+    UnkF5750* temp = (*D_802DB7C0)[index];
+
+    temp->unk_10 = arg1;
+    temp->unk_14 = arg2;
+    temp->unk_18 = arg3;
+}
 
 INCLUDE_ASM(s32, "code_F5750", func_802D43F4);
 

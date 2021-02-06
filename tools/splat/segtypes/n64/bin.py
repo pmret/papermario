@@ -5,7 +5,7 @@ from pathlib import Path
 
 class N64SegBin(N64Segment):
     def split(self, rom_bytes, base_path):
-        out_dir = self.create_split_dir(base_path, "bin")
+        out_dir = self.create_split_dir(base_path, self.options.get("assets_dir", "bin"))
 
         bin_path = os.path.join(out_dir,  self.name + ".bin")
         Path(bin_path).parent.mkdir(parents=True, exist_ok=True)
@@ -14,7 +14,7 @@ class N64SegBin(N64Segment):
         self.log(f"Wrote {self.name} to {bin_path}")
 
     def get_ld_files(self):
-        return [("bin", f"{self.name}.bin", ".data", self.rom_start)]
+        return [(self.options.get("assets_dir", "bin"), f"{self.name}.bin", ".data", self.rom_start)]
 
     @staticmethod
     def get_default_name(addr):

@@ -100,6 +100,7 @@ Trigger* get_trigger_by_id(s32 triggerID);
 
 Actor* get_actor(ActorID actorID);
 ActorPart* get_actor_part(Actor* actor, s32 partIndex);
+s32 add_coins(s32 amt);
 
 s32 func_800494C0(Npc* npc, s32 arg1, s32 arg2);
 
@@ -120,6 +121,9 @@ s32 func_80055448(s32);
 s32 func_80055464(s32, s32);
 void func_800561A4(s32);
 s32 osGetId();
+
+s32* create_icon(s32 iconIndex);
+void set_icon_render_pos(s32 iconIndex, s32 posX, s32 posY);
 
 void set_curtain_scale_goal(f32 scale);
 void set_curtain_fade(f32 scale);
