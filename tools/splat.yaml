@@ -8954,10 +8954,10 @@ segments:
           - read_paper
         palettes:
           - normal
-          - poisoned
+          - green
           - inactive
-          - electrified
-          - burnt
+          - yellow
+          - gray
         animations:
           - still
           - idle
@@ -8970,8 +8970,143 @@ segments:
           - talk
           - celebrate
           - read_paper
-      - world_kooper
-      - world_bombette
+      - name: world_kooper
+        frames:
+          - walk1
+          - walk2
+          - walk3
+          - idle1
+          - idle2
+          - idle3
+          - idle4
+          - shell1
+          - shell2
+          - shell3
+          - shell4
+          - shell5
+          - shell6
+          - shell7
+          - shell8
+          - pain1
+          - pain2
+          - shell_start1
+          - shell_start2
+          - shell_start3
+          - talk
+          - talk_wave1
+          - talk_wave2
+          - happy1
+          - happy2
+          - happy3
+          - happy4
+          - jump
+          - fall
+          - read_paper
+          - talk_sad1
+          - talk_sad2
+        palettes:
+          - normal
+          - green
+          - inactive
+          - yellow
+          - gray
+        animations:
+          - still
+          - happy_still
+          - sad_still
+          - idle
+          - walk
+          - walk_fast
+          - jump
+          - fall
+          - shell_still1
+          - shell_spin
+          - shell_start
+          - shell_end
+          - pain
+          - talk
+          - talk_wave
+          - anim_0f
+          - celebrate
+          - celebrate_loop
+          - shell_still2
+          - read_paper
+      - name: world_bombette
+        frames:
+          - still
+          - walk1
+          - walk2
+          - walk3
+          - walk4
+          - idle1
+          - idle2
+          - idle3
+          - idle4
+          - jump
+          - fall
+          - key_fall
+          - still_lit
+          - walk_lit1
+          - walk_lit2
+          - walk_lit3
+          - charge_lit
+          - pain1
+          - pain2
+          - frame_13
+          - happy1
+          - happy2
+          - happy3
+          - happy4
+          - happy5
+          - happy_jump
+          - happy_fall
+          - lit_fuse1
+          - lit_fuse2
+          - lit_fuse3
+          - lit_fuse4
+          - lit_fuse5
+          - lit_fuse6
+          - key1
+          - key2
+          - key3
+          - key4
+          - key5
+          - key6
+          - key7
+          - key8
+        palettes:
+          - normal
+          - fuse
+          - red
+          - green
+          - fuse2
+          - black
+          - inactive
+          - purple
+          - black2
+          - yellow
+          - fuse3
+          - black3
+          - gray
+        animations:
+          - still
+          - happy
+          - still_lit
+          - idle
+          - happy_idle
+          - walk
+          - walk_lit
+          - walk_fast
+          - walk_fast_lit
+          - jump
+          - fall
+          - happy_jump
+          - happy_fall
+          - pain
+          - idle_fast
+          - celebrate
+          - lit_charge
+          - anim_11
       - world_parakarry
       - world_bow
       - world_watt
