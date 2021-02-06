@@ -39,6 +39,7 @@ script_parser = Lark(r"""
           | stmt_no_semi
 
     ?stmt: call
+         | var_decl
          | "goto" label         -> label_goto
          | "return"             -> return_stmt
          | "break"              -> break_stmt
@@ -102,6 +103,8 @@ script_parser = Lark(r"""
 
     loop_stmt: "loop" [expr] block
     loop_until_stmt: "loop" block "until" "(" expr cond_op expr ")"
+
+    var_decl: ("int"|"float") variable
 
     ?expr: c_const_expr
          | ESCAPED_STRING
@@ -596,6 +599,9 @@ class Compile(Transformer):
     def variable(self, tree):
         name = tree.children[0]
         return self.alloc.variables.index(name) - 30000000
+
+    def var_decl(self, tree):
+        return []
 
     def label_decl(self, tree):
         if len(tree.children) == 1:
