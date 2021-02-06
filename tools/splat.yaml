@@ -8982,7 +8982,7 @@ segments:
           - shell1
           - shell2
           - shell3
-          - shlell4
+          - shell4
           - shell5
           - shell6
           - shell7
@@ -8991,6 +8991,7 @@ segments:
           - pain2
           - shell_start1
           - shell_start2
+          - shell_start3
           - talk
           - talk_wave1
           - talk_wave2
