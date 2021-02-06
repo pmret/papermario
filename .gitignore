@@ -26,7 +26,7 @@ build.ninja
 /tools/permuter_settings.toml
 
 # Assets
-/assets
+/*assets
 
 # Star Rod
 /sprite/SpriteTable.xml
