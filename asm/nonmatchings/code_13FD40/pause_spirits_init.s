@@ -53,7 +53,7 @@ glabel pause_spirits_init
 /* 140754 8024D414 2442FFDC */   addiu    $v0, $v0, -0x24
 /* 140758 8024D418 3C048025 */  lui       $a0, %hi(D_8024F9C8)
 /* 14075C 8024D41C 2484F9C8 */  addiu     $a0, $a0, %lo(D_8024F9C8)
-/* 140760 8024D420 0C051FCC */  jal       func_80147F30
+/* 140760 8024D420 0C051FCC */  jal       setup_pause_menu_tab
 /* 140764 8024D424 24050002 */   addiu    $a1, $zero, 2
 /* 140768 8024D428 24020001 */  addiu     $v0, $zero, 1
 /* 14076C 8024D42C A2620000 */  sb        $v0, ($s3)

@@ -7,26 +7,26 @@ glabel func_802A2AB8
 /* 417850 802A2AC0 24050005 */  addiu     $a1, $zero, 5
 /* 417854 802A2AC4 AFBF0018 */  sw        $ra, 0x18($sp)
 /* 417858 802A2AC8 AFB10014 */  sw        $s1, 0x14($sp)
-/* 41785C 802A2ACC 0C051F9F */  jal       func_80147E7C
+/* 41785C 802A2ACC 0C051F9F */  jal       set_window_update
 /* 417860 802A2AD0 AFB00010 */   sw       $s0, 0x10($sp)
 /* 417864 802A2AD4 3C02802B */  lui       $v0, %hi(battle_menu_hasSpiritsMenu)
 /* 417868 802A2AD8 8C42D4A0 */  lw        $v0, %lo(battle_menu_hasSpiritsMenu)($v0)
 /* 41786C 802A2ADC 54400006 */  bnel      $v0, $zero, .L802A2AF8
 /* 417870 802A2AE0 24040004 */   addiu    $a0, $zero, 4
 /* 417874 802A2AE4 24040002 */  addiu     $a0, $zero, 2
-/* 417878 802A2AE8 0C051F9F */  jal       func_80147E7C
+/* 417878 802A2AE8 0C051F9F */  jal       set_window_update
 /* 41787C 802A2AEC 24050005 */   addiu    $a1, $zero, 5
 /* 417880 802A2AF0 080A8AC1 */  j         .L802A2B04
 /* 417884 802A2AF4 24040003 */   addiu    $a0, $zero, 3
 .L802A2AF8:
-/* 417888 802A2AF8 0C051F9F */  jal       func_80147E7C
+/* 417888 802A2AF8 0C051F9F */  jal       set_window_update
 /* 41788C 802A2AFC 24050005 */   addiu    $a1, $zero, 5
 /* 417890 802A2B00 24040005 */  addiu     $a0, $zero, 5
 .L802A2B04:
-/* 417894 802A2B04 0C051F9F */  jal       func_80147E7C
+/* 417894 802A2B04 0C051F9F */  jal       set_window_update
 /* 417898 802A2B08 24050005 */   addiu    $a1, $zero, 5
 /* 41789C 802A2B0C 24040008 */  addiu     $a0, $zero, 8
-/* 4178A0 802A2B10 0C051F9F */  jal       func_80147E7C
+/* 4178A0 802A2B10 0C051F9F */  jal       set_window_update
 /* 4178A4 802A2B14 24050001 */   addiu    $a1, $zero, 1
 /* 4178A8 802A2B18 3C02802B */  lui       $v0, %hi(battle_menu_moveOptionCount)
 /* 4178AC 802A2B1C 8C42D4A4 */  lw        $v0, %lo(battle_menu_moveOptionCount)($v0)

@@ -99,7 +99,7 @@ async def build_c_file(c_file: str, generated_headers, ccache, cppflags):
 
     s_deps = []
     for line in stdout.splitlines():
-        if line.startswith("_INCLUDE_ASM"):
+        if line.startswith("___INCLUDE_ASM"):
             match = INCLUDE_ASM_RE.match(line)
             if match:
                 s_deps.append("asm/nonmatchings/" + eval(match[1]) + "/" + match[2] + ".s")

@@ -15,6 +15,6 @@ void func_80030450(void) {
 
 INCLUDE_ASM(s32, "code_ad90_len_2880", test_ray_zone_aabb);
 
-INCLUDE_ASM(s32, "code_ad90_len_2880", func_800304FC);
+INCLUDE_ASM(s32, "code_ad90_len_2880", update_camera_from_zone);
 
 INCLUDE_ASM(s32, "code_ad90_len_2880", do_camera_type_3);

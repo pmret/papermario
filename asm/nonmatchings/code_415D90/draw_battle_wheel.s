@@ -597,7 +597,7 @@ glabel L802A1DB4_416B44
 /* 4172E0 802A2550 3C04802B */  lui       $a0, %hi(battle_menu_messageIDs)
 /* 4172E4 802A2554 00832021 */  addu      $a0, $a0, $v1
 /* 4172E8 802A2558 8C84D090 */  lw        $a0, %lo(battle_menu_messageIDs)($a0)
-/* 4172EC 802A255C 0C04993B */  jal       draw_string
+/* 4172EC 802A255C 0C04993B */  jal       draw_msg
 /* 4172F0 802A2560 02A0382D */   daddu    $a3, $s5, $zero
 .L802A2564:
 /* 4172F4 802A2564 3C04800E */  lui       $a0, %hi(gBattleStatus)

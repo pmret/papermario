@@ -264,7 +264,7 @@ ApiStatus DemoJoystickXY(ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus func_802CFE2C(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_802CFD30(ScriptInstance* script, s32 isInitialCall);
-ApiStatus func_800441F0(ScriptInstance* script, s32 isInitialCall);
+ApiStatus IsStartingConversation(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_802D5830(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_802D3474(ScriptInstance* script, s32 isInitialCall);
 

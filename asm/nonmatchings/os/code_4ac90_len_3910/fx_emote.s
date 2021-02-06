@@ -11,7 +11,7 @@ glabel fx_emote
 /* 4B2A8 8006FEA8 E7AE0024 */  swc1      $f14, 0x24($sp)
 /* 4B2AC 8006FEAC E7B00028 */  swc1      $f16, 0x28($sp)
 /* 4B2B0 8006FEB0 AFBF002C */  sw        $ra, 0x2c($sp)
-/* 4B2B4 8006FEB4 0C016959 */  jal       play_effect
+/* 4B2B4 8006FEB4 0C016959 */  jal       load_effect
 /* 4B2B8 8006FEB8 24040010 */   addiu    $a0, $zero, 0x10
 /* 4B2BC 8006FEBC 8FA40010 */  lw        $a0, 0x10($sp)
 /* 4B2C0 8006FEC0 8FA50014 */  lw        $a1, 0x14($sp)

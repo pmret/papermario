@@ -38,7 +38,7 @@ glabel L802A44D0_419260
 /* 4192A4 802A4514 3C04802B */  lui       $a0, %hi(battle_menu_moveOptionDescriptions)
 /* 4192A8 802A4518 00822021 */  addu      $a0, $a0, $v0
 /* 4192AC 802A451C 8C84D570 */  lw        $a0, %lo(battle_menu_moveOptionDescriptions)($a0)
-/* 4192B0 802A4520 0C04993B */  jal       draw_string
+/* 4192B0 802A4520 0C04993B */  jal       draw_msg
 /* 4192B4 802A4524 24A50008 */   addiu    $a1, $a1, 8
 .L802A4528:
 glabel L802A4528_4192B8

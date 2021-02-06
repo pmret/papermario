@@ -16,7 +16,7 @@ glabel func_80247198
 /* 167A20 802471C0 2442FFDC */   addiu    $v0, $v0, -0x24
 /* 167A24 802471C4 3C048025 */  lui       $a0, %hi(D_8024A0CC)
 /* 167A28 802471C8 2484A0CC */  addiu     $a0, $a0, %lo(D_8024A0CC)
-/* 167A2C 802471CC 0C051FCC */  jal       func_80147F30
+/* 167A2C 802471CC 0C051FCC */  jal       setup_pause_menu_tab
 /* 167A30 802471D0 24050002 */   addiu    $a1, $zero, 2
 /* 167A34 802471D4 24020001 */  addiu     $v0, $zero, 1
 /* 167A38 802471D8 A2020000 */  sb        $v0, ($s0)

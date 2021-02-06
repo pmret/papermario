@@ -129,7 +129,7 @@ glabel func_802BD5D8_3174F8
 /* 3176B8 802BD798 E640000C */  swc1      $f0, 0xc($s2)
 /* 3176BC 802BD79C 3C018011 */  lui       $at, %hi(D_8010EBB0)
 /* 3176C0 802BD7A0 A033EBB0 */  sb        $s3, %lo(D_8010EBB0)($at)
-/* 3176C4 802BD7A4 0C03A5EE */  jal       func_800E97B8
+/* 3176C4 802BD7A4 0C03A5EE */  jal       close_status_menu
 /* 3176C8 802BD7A8 00000000 */   nop
 /* 3176CC 802BD7AC 3C02802C */  lui       $v0, %hi(D_802BDF30)
 /* 3176D0 802BD7B0 8C42DF30 */  lw        $v0, %lo(D_802BDF30)($v0)

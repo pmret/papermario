@@ -7,13 +7,13 @@ glabel func_802A472C
 /* 4194C4 802A4734 24050002 */  addiu     $a1, $zero, 2
 /* 4194C8 802A4738 AFBF0018 */  sw        $ra, 0x18($sp)
 /* 4194CC 802A473C AFB10014 */  sw        $s1, 0x14($sp)
-/* 4194D0 802A4740 0C051F9F */  jal       func_80147E7C
+/* 4194D0 802A4740 0C051F9F */  jal       set_window_update
 /* 4194D4 802A4744 AFB00010 */   sw       $s0, 0x10($sp)
 /* 4194D8 802A4748 24040007 */  addiu     $a0, $zero, 7
-/* 4194DC 802A474C 0C051F9F */  jal       func_80147E7C
+/* 4194DC 802A474C 0C051F9F */  jal       set_window_update
 /* 4194E0 802A4750 24050002 */   addiu    $a1, $zero, 2
 /* 4194E4 802A4754 24040008 */  addiu     $a0, $zero, 8
-/* 4194E8 802A4758 0C051F9F */  jal       func_80147E7C
+/* 4194E8 802A4758 0C051F9F */  jal       set_window_update
 /* 4194EC 802A475C 24050002 */   addiu    $a1, $zero, 2
 /* 4194F0 802A4760 3C02802B */  lui       $v0, %hi(D_802AD66C)
 /* 4194F4 802A4764 8C42D66C */  lw        $v0, %lo(D_802AD66C)($v0)

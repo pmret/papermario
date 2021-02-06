@@ -1484,10 +1484,10 @@ glabel L8025F5F4_18DED4
 /* 18E0DC 8025F7FC 2402FFFF */  addiu     $v0, $zero, -1
 /* 18E0E0 8025F800 AFA30014 */  sw        $v1, 0x14($sp)
 /* 18E0E4 8025F804 AFA0001C */  sw        $zero, 0x1c($sp)
-/* 18E0E8 8025F808 0C051F32 */  jal       set_ui_panel_properties
+/* 18E0E8 8025F808 0C051F32 */  jal       set_window_properties
 /* 18E0EC 8025F80C AFA20020 */   sw       $v0, 0x20($sp)
 /* 18E0F0 8025F810 24040008 */  addiu     $a0, $zero, 8
-/* 18E0F4 8025F814 0C051F9F */  jal       func_80147E7C
+/* 18E0F4 8025F814 0C051F9F */  jal       set_window_update
 /* 18E0F8 8025F818 24050001 */   addiu    $a1, $zero, 1
 /* 18E0FC 8025F81C 08097FD0 */  j         .L8025FF40
 /* 18E100 8025F820 24020008 */   addiu    $v0, $zero, 8
@@ -1569,7 +1569,7 @@ glabel L8025F924_18E204
 /* 18E20C 8025F92C 0C05123D */  jal       free_icon
 /* 18E210 8025F930 00000000 */   nop
 /* 18E214 8025F934 24040008 */  addiu     $a0, $zero, 8
-/* 18E218 8025F938 0C051F9F */  jal       func_80147E7C
+/* 18E218 8025F938 0C051F9F */  jal       set_window_update
 /* 18E21C 8025F93C 24050002 */   addiu    $a1, $zero, 2
 /* 18E220 8025F940 83C30048 */  lb        $v1, 0x48($fp)
 /* 18E224 8025F944 24020001 */  addiu     $v0, $zero, 1
@@ -1841,10 +1841,10 @@ glabel L8025FCA4_18E584
 /* 18E5D8 8025FCF8 AFA20018 */  sw        $v0, 0x18($sp)
 /* 18E5DC 8025FCFC 2402FFFF */  addiu     $v0, $zero, -1
 /* 18E5E0 8025FD00 AFA0001C */  sw        $zero, 0x1c($sp)
-/* 18E5E4 8025FD04 0C051F32 */  jal       set_ui_panel_properties
+/* 18E5E4 8025FD04 0C051F32 */  jal       set_window_properties
 /* 18E5E8 8025FD08 AFA20020 */   sw       $v0, 0x20($sp)
 /* 18E5EC 8025FD0C 24040009 */  addiu     $a0, $zero, 9
-/* 18E5F0 8025FD10 0C051F9F */  jal       func_80147E7C
+/* 18E5F0 8025FD10 0C051F9F */  jal       set_window_update
 /* 18E5F4 8025FD14 24050001 */   addiu    $a1, $zero, 1
 /* 18E5F8 8025FD18 2402003C */  addiu     $v0, $zero, 0x3c
 /* 18E5FC 8025FD1C 3C01802A */  lui       $at, %hi(D_8029FB4C)
@@ -1871,7 +1871,7 @@ glabel L8025FD2C_18E60C
 /* 18E644 8025FD64 AC620000 */   sw       $v0, ($v1)
 .L8025FD68:
 /* 18E648 8025FD68 24040009 */  addiu     $a0, $zero, 9
-/* 18E64C 8025FD6C 0C051F9F */  jal       func_80147E7C
+/* 18E64C 8025FD6C 0C051F9F */  jal       set_window_update
 /* 18E650 8025FD70 24050002 */   addiu    $a1, $zero, 2
 /* 18E654 8025FD74 08097FD0 */  j         .L8025FF40
 /* 18E658 8025FD78 24020008 */   addiu    $v0, $zero, 8

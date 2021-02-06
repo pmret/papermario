@@ -443,7 +443,7 @@ glabel L80260810_18F0F0
 /* 18F108 80260828 468010A0 */  cvt.s.w   $f2, $f2
 .L8026082C:
 /* 18F10C 8026082C 44051000 */  mfc1      $a1, $f2
-/* 18F110 80260830 0C04DF62 */  jal       func_80137D88
+/* 18F110 80260830 0C04DF62 */  jal       set_transition_stencil_zoom_0
 /* 18F114 80260834 0000202D */   daddu    $a0, $zero, $zero
 .L80260838:
 glabel L80260838_18F118

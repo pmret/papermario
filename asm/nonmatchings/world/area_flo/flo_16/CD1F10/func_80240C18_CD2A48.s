@@ -24,7 +24,7 @@ glabel func_80240C18_CD2A48
 /* CD2A94 80240C64 00A0382D */  daddu     $a3, $a1, $zero
 /* CD2A98 80240C68 AE220088 */  sw        $v0, 0x88($s1)
 /* CD2A9C 80240C6C AE200070 */  sw        $zero, 0x70($s1)
-/* CD2AA0 80240C70 0C04DF84 */  jal       func_80137E10
+/* CD2AA0 80240C70 0C04DF84 */  jal       set_transition_stencil_color
 /* CD2AA4 80240C74 AE200074 */   sw       $zero, 0x74($s1)
 .L80240C78:
 /* CD2AA8 80240C78 8E230070 */  lw        $v1, 0x70($s1)
@@ -81,7 +81,7 @@ glabel func_80240C18_CD2A48
 /* CD2B58 80240D28 C6200074 */  lwc1      $f0, 0x74($s1)
 /* CD2B5C 80240D2C 46800020 */  cvt.s.w   $f0, $f0
 /* CD2B60 80240D30 44050000 */  mfc1      $a1, $f0
-/* CD2B64 80240D34 0C04DF62 */  jal       func_80137D88
+/* CD2B64 80240D34 0C04DF62 */  jal       set_transition_stencil_zoom_0
 /* CD2B68 80240D38 24040001 */   addiu    $a0, $zero, 1
 /* CD2B6C 80240D3C 0240102D */  daddu     $v0, $s2, $zero
 /* CD2B70 80240D40 8FBF001C */  lw        $ra, 0x1c($sp)

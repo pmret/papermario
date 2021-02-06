@@ -192,7 +192,7 @@ glabel MakeShop
 /* 7E29B0 80281B30 AFA00014 */  sw        $zero, 0x14($sp)
 /* 7E29B4 80281B34 AFA20018 */  sw        $v0, 0x18($sp)
 /* 7E29B8 80281B38 AFA0001C */  sw        $zero, 0x1c($sp)
-/* 7E29BC 80281B3C 0C051F32 */  jal       set_ui_panel_properties
+/* 7E29BC 80281B3C 0C051F32 */  jal       set_window_properties
 /* 7E29C0 80281B40 AFB00020 */   sw       $s0, 0x20($sp)
 /* 7E29C4 80281B44 2404000B */  addiu     $a0, $zero, 0xb
 /* 7E29C8 80281B48 24050020 */  addiu     $a1, $zero, 0x20
@@ -206,7 +206,7 @@ glabel MakeShop
 /* 7E29E8 80281B68 244214D0 */  addiu     $v0, $v0, %lo(func_802814D0)
 /* 7E29EC 80281B6C AFA20018 */  sw        $v0, 0x18($sp)
 /* 7E29F0 80281B70 AFA0001C */  sw        $zero, 0x1c($sp)
-/* 7E29F4 80281B74 0C051F32 */  jal       set_ui_panel_properties
+/* 7E29F4 80281B74 0C051F32 */  jal       set_window_properties
 /* 7E29F8 80281B78 AFB00020 */   sw       $s0, 0x20($sp)
 /* 7E29FC 80281B7C 3C048015 */  lui       $a0, %hi(D_8014F150)
 /* 7E2A00 80281B80 2484F150 */  addiu     $a0, $a0, %lo(D_8014F150)

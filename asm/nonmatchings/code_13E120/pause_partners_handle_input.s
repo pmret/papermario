@@ -219,7 +219,7 @@ glabel pause_partners_handle_input
 /* 13F984 8024C644 0C05272D */  jal       play_sound
 /* 13F988 8024C648 240400C9 */   addiu    $a0, $zero, 0xc9
 /* 13F98C 8024C64C 24040024 */  addiu     $a0, $zero, 0x24
-/* 13F990 8024C650 0C051F9F */  jal       func_80147E7C
+/* 13F990 8024C650 0C051F9F */  jal       set_window_update
 /* 13F994 8024C654 24050001 */   addiu    $a1, $zero, 1
 /* 13F998 8024C658 080931E4 */  j         .L8024C790
 /* 13F99C 8024C65C 00000000 */   nop
@@ -244,7 +244,7 @@ glabel pause_partners_handle_input
 /* 13F9E0 8024C6A0 0C05272D */  jal       play_sound
 /* 13F9E4 8024C6A4 240400CA */   addiu    $a0, $zero, 0xca
 /* 13F9E8 8024C6A8 24040024 */  addiu     $a0, $zero, 0x24
-/* 13F9EC 8024C6AC 0C051F9F */  jal       func_80147E7C
+/* 13F9EC 8024C6AC 0C051F9F */  jal       set_window_update
 /* 13F9F0 8024C6B0 24050002 */   addiu    $a1, $zero, 2
 /* 13F9F4 8024C6B4 080931E4 */  j         .L8024C790
 /* 13F9F8 8024C6B8 00000000 */   nop

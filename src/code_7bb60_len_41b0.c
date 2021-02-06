@@ -107,7 +107,7 @@ void func_800E5150(void) {
 
 INCLUDE_ASM(s32, "code_7bb60_len_41b0", func_800E5174);
 
-INCLUDE_ASM(s32, "code_7bb60_len_41b0", func_800E52F8);
+INCLUDE_ASM(s32, "code_7bb60_len_41b0", can_player_interact);
 
 INCLUDE_ASM(s32, "code_7bb60_len_41b0", func_800E5348);
 

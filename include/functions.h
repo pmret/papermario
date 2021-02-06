@@ -133,7 +133,7 @@ void fx_emote(s32, Npc*, f32, f32, f32, f32, f32, s32, s32*);
 
 f32 func_800E0088(f32, f32);
 void func_800E06C0(s32);
-void func_800E97B8(void);
+void close_status_menu(void);
 s32 func_800EB168(s32);
 
 Shadow* create_shadow_type(s32 type, f32 x, f32 y, f32 z);
@@ -160,7 +160,7 @@ s32 is_current_partner_flying(void);
 void func_800ED5D0(Npc* partner);
 void clear_partner_move_history(Npc* partner);
 
-s32 func_800EF394(f32);
+s32 set_parter_tether_distance(f32);
 s32 does_script_exist(s32 id);
 s32 does_script_exist_by_ref(ScriptInstance* script);
 ScriptInstance* start_script(Bytecode* initialLine, s32 priority, s32 initialState);
@@ -169,11 +169,11 @@ ScriptInstance* start_script_in_group(Bytecode* initialLine, u8 priority, u8 ini
 void set_animation_rate(ActorID actorID, s32 partIndex, f32 rate);
 void func_8011B7C0(u16, s32, s32);
 AnimatedMesh* get_anim_mesh(s32 arg0);
-void func_80137D88(s32, f32);
-void func_80137DA4(s32, f32);
+void set_transition_stencil_zoom_0(s32, f32);
+void set_transition_stencil_zoom_1(s32, f32);
 void func_80137DC0(s32, f32*, f32*);
-s32 func_80137E10(s32, u8, u8, u8);
-void func_80137E4C(s32, s32, s32, s32);
+s32 set_transition_stencil_color(s32, u8, u8, u8);
+void set_transition_stencil_center(s32, s32, s32, s32);
 s32 rand_int(s32);
 void sort_items(void);
 s32 is_ability_active(s32 arg0);

@@ -17,7 +17,7 @@ glabel func_802BBA60_E303B0
 /* E303E0 802BBA90 8E300040 */   lw       $s0, 0x40($s1)
 /* E303E4 802BBA94 14400017 */  bnez      $v0, .L802BBAF4
 /* E303E8 802BBA98 00000000 */   nop
-/* E303EC 802BBA9C 0C04D07A */  jal       func_801341E8
+/* E303EC 802BBA9C 0C04D07A */  jal       is_picking_up_item
 /* E303F0 802BBAA0 00000000 */   nop
 /* E303F4 802BBAA4 14400013 */  bnez      $v0, .L802BBAF4
 /* E303F8 802BBAA8 00000000 */   nop
@@ -186,7 +186,7 @@ glabel func_802BBA60_E303B0
 /* E3065C 802BBD0C 3C018011 */  lui       $at, %hi(D_8010C954)
 /* E30660 802BBD10 AC31C954 */  sw        $s1, %lo(D_8010C954)($at)
 .L802BBD14:
-/* E30664 802BBD14 0C04D07A */  jal       func_801341E8
+/* E30664 802BBD14 0C04D07A */  jal       is_picking_up_item
 /* E30668 802BBD18 00000000 */   nop
 /* E3066C 802BBD1C 1440001F */  bnez      $v0, .L802BBD9C
 /* E30670 802BBD20 00000000 */   nop

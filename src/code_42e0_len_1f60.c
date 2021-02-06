@@ -85,13 +85,13 @@ void start_rumble(s32 freq, s32 frame) {
     }
 }
 
-void func_80028F8C(void) {
+void update_max_rumble_duration(void) {
     s32* sym = &D_80074264;
     u16* sym2;
 
     if (*sym != GAME_STATUS->currentButtons) {
         *sym = GAME_STATUS->currentButtons;
-        func_80028FE0();
+        reset_max_rumble_duration();
     }
 
     sym2 = &D_80074260;
@@ -100,7 +100,7 @@ void func_80028F8C(void) {
     }
 }
 
-void func_80028FE0(void) {
+void reset_max_rumble_duration(void) {
     D_80074260 = 300;
 }
 

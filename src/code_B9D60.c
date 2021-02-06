@@ -69,9 +69,9 @@ INCLUDE_ASM(s32, "code_B9D60", get_string_properties);
 
 INCLUDE_ASM(s32, "code_B9D60", get_string_width);
 
-INCLUDE_ASM(s32, "code_B9D60", func_801264B0);
+INCLUDE_ASM(s32, "code_B9D60", get_msg_lines);
 
-INCLUDE_ASM(s32, "code_B9D60", draw_string);
+INCLUDE_ASM(s32, "code_B9D60", draw_msg);
 
 INCLUDE_ASM(s32, "code_B9D60", func_80126790);
 

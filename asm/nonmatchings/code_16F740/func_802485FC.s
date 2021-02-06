@@ -25,7 +25,7 @@ glabel func_802485FC
 /* 176F24 80248644 44050000 */  mfc1      $a1, $f0
 /* 176F28 80248648 0000202D */  daddu     $a0, $zero, $zero
 .L8024864C:
-/* 176F2C 8024864C 0C04DF62 */  jal       func_80137D88
+/* 176F2C 8024864C 0C04DF62 */  jal       set_transition_stencil_zoom_0
 /* 176F30 80248650 00000000 */   nop
 .L80248654:
 /* 176F34 80248654 8FBF0010 */  lw        $ra, 0x10($sp)

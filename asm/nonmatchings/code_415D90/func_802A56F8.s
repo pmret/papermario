@@ -13,7 +13,7 @@ glabel func_802A56F8
 /* 41A4A8 802A5718 8CE7D624 */  lw        $a3, %lo(D_802AD624)($a3)
 /* 41A4AC 802A571C 24C60002 */  addiu     $a2, $a2, 2
 /* 41A4B0 802A5720 AFBF0018 */  sw        $ra, 0x18($sp)
-/* 41A4B4 802A5724 0C04993B */  jal       draw_string
+/* 41A4B4 802A5724 0C04993B */  jal       draw_msg
 /* 41A4B8 802A5728 AFA20014 */   sw       $v0, 0x14($sp)
 /* 41A4BC 802A572C 8FBF0018 */  lw        $ra, 0x18($sp)
 /* 41A4C0 802A5730 03E00008 */  jr        $ra

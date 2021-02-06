@@ -26,13 +26,13 @@ ApiStatus func_80281C20(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* thisPos = script->ptrReadPos;
 
     func_800EF414(get_variable(script, *thisPos++), get_variable(script, *thisPos++));
-    func_800EF394(0.0f);
+    set_parter_tether_distance(0.0f);
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_80281C84(ScriptInstance* script, s32 isInitialCall) {
     func_800EF3E4();
-    func_800EF3A4();
+    reset_parter_tether_distance();
     return ApiStatus_DONE2;
 }
 

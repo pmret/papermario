@@ -44,7 +44,7 @@ glabel pause_partners_init
 /* 13F4B4 8024C174 1440000A */  bnez      $v0, .L8024C1A0
 /* 13F4B8 8024C178 0000802D */   daddu    $s0, $zero, $zero
 /* 13F4BC 8024C17C 24040022 */  addiu     $a0, $zero, 0x22
-/* 13F4C0 8024C180 0C051F9F */  jal       func_80147E7C
+/* 13F4C0 8024C180 0C051F9F */  jal       set_window_update
 /* 13F4C4 8024C184 24050002 */   addiu    $a1, $zero, 2
 /* 13F4C8 8024C188 080930C6 */  j         .L8024C318
 /* 13F4CC 8024C18C A2800000 */   sb       $zero, ($s4)
@@ -95,7 +95,7 @@ glabel pause_partners_init
 /* 13F56C 8024C22C 2442FFDC */   addiu    $v0, $v0, -0x24
 /* 13F570 8024C230 3C048025 */  lui       $a0, %hi(D_8024F7C8)
 /* 13F574 8024C234 2484F7C8 */  addiu     $a0, $a0, %lo(D_8024F7C8)
-/* 13F578 8024C238 0C051FCC */  jal       func_80147F30
+/* 13F578 8024C238 0C051FCC */  jal       setup_pause_menu_tab
 /* 13F57C 8024C23C 24050005 */   addiu    $a1, $zero, 5
 /* 13F580 8024C240 3C028027 */  lui       $v0, %hi(D_802706B0)
 /* 13F584 8024C244 8C4206B0 */  lw        $v0, %lo(D_802706B0)($v0)

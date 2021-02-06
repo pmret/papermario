@@ -73,12 +73,12 @@ glabel L802B74C8_E205D8
 /* E20658 802B7548 32022000 */   andi     $v0, $s0, 0x2000
 /* E2065C 802B754C 14400010 */  bnez      $v0, .L802B7590
 /* E20660 802B7550 00000000 */   nop
-/* E20664 802B7554 0C05173A */  jal       func_80145CE8
+/* E20664 802B7554 0C05173A */  jal       should_collider_allow_interact
 /* E20668 802B7558 0200202D */   daddu    $a0, $s0, $zero
 /* E2066C 802B755C 080ADD5B */  j         .L802B756C
 /* E20670 802B7560 00000000 */   nop
 .L802B7564:
-/* E20674 802B7564 0C0394BE */  jal       func_800E52F8
+/* E20674 802B7564 0C0394BE */  jal       can_player_interact
 /* E20678 802B7568 00000000 */   nop
 .L802B756C:
 /* E2067C 802B756C 14400008 */  bnez      $v0, .L802B7590

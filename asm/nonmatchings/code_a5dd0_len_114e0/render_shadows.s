@@ -76,14 +76,14 @@ glabel render_shadows
 /* A68D4 801101D4 14E00006 */  bnez      $a3, .L801101F0
 /* A68D8 801101D8 00000000 */   nop
 /* A68DC 801101DC 86040008 */  lh        $a0, 8($s0)
-/* A68E0 801101E0 0C04873A */  jal       func_80121CE8
+/* A68E0 801101E0 0C04873A */  jal       draw_entity_model_shadow
 /* A68E4 801101E4 26050038 */   addiu    $a1, $s0, 0x38
 /* A68E8 801101E8 08044081 */  j         .L80110204
 /* A68EC 801101EC 26310001 */   addiu    $s1, $s1, 1
 .L801101F0:
 /* A68F0 801101F0 86040008 */  lh        $a0, 8($s0)
 /* A68F4 801101F4 8606000A */  lh        $a2, 0xa($s0)
-/* A68F8 801101F8 0C0487AE */  jal       func_80121EB8
+/* A68F8 801101F8 0C0487AE */  jal       draw_entity_model_main
 /* A68FC 801101FC 26050038 */   addiu    $a1, $s0, 0x38
 .L80110200:
 /* A6900 80110200 26310001 */  addiu     $s1, $s1, 1

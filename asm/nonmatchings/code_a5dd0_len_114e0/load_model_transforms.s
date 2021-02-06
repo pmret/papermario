@@ -102,7 +102,7 @@ glabel load_model_transforms
 /* B162C 8011AF2C 24020005 */  addiu     $v0, $zero, 5
 /* B1630 8011AF30 14620021 */  bne       $v1, $v0, .L8011AFB8
 /* B1634 8011AF34 0240202D */   daddu    $a0, $s2, $zero
-/* B1638 8011AF38 0C04572A */  jal       func_80115CA8
+/* B1638 8011AF38 0C04572A */  jal       mdl_get_child_count
 /* B163C 8011AF3C 0220202D */   daddu    $a0, $s1, $zero
 /* B1640 8011AF40 3C078015 */  lui       $a3, %hi(D_80153224)
 /* B1644 8011AF44 24E73224 */  addiu     $a3, $a3, %lo(D_80153224)
@@ -137,7 +137,7 @@ glabel load_model_transforms
 /* B16B0 8011AFB0 AC620000 */  sw        $v0, ($v1)
 /* B16B4 8011AFB4 0240202D */  daddu     $a0, $s2, $zero
 .L8011AFB8:
-/* B16B8 8011AFB8 0C045883 */  jal       func_8011620C
+/* B16B8 8011AFB8 0C045883 */  jal       mdl_create_model
 /* B16BC 8011AFBC 24050004 */   addiu    $a1, $zero, 4
 /* B16C0 8011AFC0 3C038015 */  lui       $v1, %hi(D_80153224)
 /* B16C4 8011AFC4 24633224 */  addiu     $v1, $v1, %lo(D_80153224)

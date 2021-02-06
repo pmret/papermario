@@ -43,6 +43,6 @@ INCLUDE_ASM(void, "code_1370_len_7d0", boot_main, void);
 
 INCLUDE_ASM(void, "code_1370_len_7d0", gfxRetrace_Callback, void);
 
-INCLUDE_ASM(s32, "code_1370_len_7d0", func_80026164);
+INCLUDE_ASM(s32, "code_1370_len_7d0", gfx_task_main);
 
 INCLUDE_ASM(void, "code_1370_len_7d0", gfxPreNMI_Callback, void);

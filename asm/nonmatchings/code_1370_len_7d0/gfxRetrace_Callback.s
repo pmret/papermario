@@ -41,7 +41,7 @@ glabel gfxRetrace_Callback
 /* 14E8 800260E8 24020002 */  addiu     $v0, $zero, 2
 /* 14EC 800260EC 14620018 */  bne       $v1, $v0, .L80026150
 /* 14F0 800260F0 00000000 */   nop
-/* 14F4 800260F4 0C009859 */  jal       func_80026164
+/* 14F4 800260F4 0C009859 */  jal       gfx_task_main
 /* 14F8 800260F8 00000000 */   nop
 /* 14FC 800260FC 08009854 */  j         .L80026150
 /* 1500 80026100 00000000 */   nop
@@ -61,7 +61,7 @@ glabel gfxRetrace_Callback
 /* 1534 80026134 2A020003 */  slti      $v0, $s0, 3
 /* 1538 80026138 10400005 */  beqz      $v0, .L80026150
 /* 153C 8002613C 00000000 */   nop
-/* 1540 80026140 0C009A7B */  jal       func_800269EC
+/* 1540 80026140 0C009A7B */  jal       gfx_task_background
 /* 1544 80026144 A4600000 */   sh       $zero, ($v1)
 /* 1548 80026148 0C009AC2 */  jal       gfx_draw_frame
 /* 154C 8002614C 00000000 */   nop

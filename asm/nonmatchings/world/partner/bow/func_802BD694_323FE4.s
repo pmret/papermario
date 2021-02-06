@@ -84,7 +84,7 @@ glabel func_802BD694_323FE4
 /* 324104 802BD7B4 24040009 */   addiu    $a0, $zero, 9
 /* 324108 802BD7B8 10400005 */  beqz      $v0, .L802BD7D0
 /* 32410C 802BD7BC 00000000 */   nop
-/* 324110 802BD7C0 0C011052 */  jal       func_80044148
+/* 324110 802BD7C0 0C011052 */  jal       is_starting_conversation
 /* 324114 802BD7C4 00000000 */   nop
 /* 324118 802BD7C8 10400010 */  beqz      $v0, .L802BD80C
 /* 32411C 802BD7CC 00000000 */   nop

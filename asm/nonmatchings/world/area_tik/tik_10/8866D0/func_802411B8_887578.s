@@ -24,7 +24,7 @@ glabel func_802411B8_887578
 /* 8875C4 80241204 00A0382D */  daddu     $a3, $a1, $zero
 /* 8875C8 80241208 AE220088 */  sw        $v0, 0x88($s1)
 /* 8875CC 8024120C AE200070 */  sw        $zero, 0x70($s1)
-/* 8875D0 80241210 0C04DF84 */  jal       func_80137E10
+/* 8875D0 80241210 0C04DF84 */  jal       set_transition_stencil_color
 /* 8875D4 80241214 AE200074 */   sw       $zero, 0x74($s1)
 .L80241218:
 /* 8875D8 80241218 8E230070 */  lw        $v1, 0x70($s1)
@@ -81,7 +81,7 @@ glabel func_802411B8_887578
 /* 887688 802412C8 C6200074 */  lwc1      $f0, 0x74($s1)
 /* 88768C 802412CC 46800020 */  cvt.s.w   $f0, $f0
 /* 887690 802412D0 44050000 */  mfc1      $a1, $f0
-/* 887694 802412D4 0C04DF62 */  jal       func_80137D88
+/* 887694 802412D4 0C04DF62 */  jal       set_transition_stencil_zoom_0
 /* 887698 802412D8 24040001 */   addiu    $a0, $zero, 1
 /* 88769C 802412DC 0240102D */  daddu     $v0, $s2, $zero
 /* 8876A0 802412E0 8FBF001C */  lw        $ra, 0x1c($sp)

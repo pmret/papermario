@@ -313,7 +313,7 @@ void initialize_status_menu(void) {
     uiStatus->unk_6C[1] = 0;
     uiStatus->iconIndex12 = -1;
 
-    func_800E97B8();
+    close_status_menu();
 
     iconIndex = create_icon(&D_80108248);
     uiStatus->hpIconIndexes[0] = iconIndex;
@@ -433,7 +433,7 @@ void update_coin_counter(void) {
         if ((uiStatus->displayCoins == playerData->coins) || (uiStatus->unk_6C[0] <= 30)) {
             uiStatus->unk_6C[0] -= 1;
             if (uiStatus->unk_6C[0] == 0) {
-                func_80147E7C(20, &D_80147574);
+                set_window_update(20, &D_80147574);
                 uiStatus->unk_6C[1] = 15;
                 D_8010CD10 = 0;
                 D_8010CD12 = 1;
@@ -455,7 +455,7 @@ void show_coin_counter(void) {
     s32 index;
 
     if ((*coinCounterUnk != 0) || (D_8010CD12 != 0)) {
-        func_80147E7C(0x14, 2);
+        set_window_update(0x14, 2);
         if (uiStatus->iconIndex12 > -1) {
             free_icon(uiStatus->iconIndex10);
             free_icon(uiStatus->iconIndex11);
@@ -468,8 +468,8 @@ void show_coin_counter(void) {
     }
 
     if (uiStatus->unk_6C[0] == 0) {
-        set_ui_panel_properties(0x14, 0x20, 0xa4, 0x40, 0x14, 0x15, coin_counter_draw_content, 0, -1);
-        func_80147E7C(0x14, &D_80147474);
+        set_window_properties(0x14, 0x20, 0xa4, 0x40, 0x14, 0x15, coin_counter_draw_content, 0, -1);
+        set_window_update(0x14, &D_80147474);
         index = create_icon(&D_80109270);
         uiStatus->iconIndex10 = index;
         set_icon_flags(index, 0x80);
@@ -540,7 +540,7 @@ void open_status_menu_short(void) {
     }
 }
 
-void func_800E97B8(void) {
+void close_status_menu(void) {
     UiStatus* uiStatus = &gUIStatus;
 
     if (uiStatus->hidden != 1) {

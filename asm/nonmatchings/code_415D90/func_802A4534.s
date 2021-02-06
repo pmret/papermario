@@ -24,7 +24,7 @@ glabel func_802A4534
 /* 41930C 802A457C 3C10001D */  lui       $s0, 0x1d
 /* 419310 802A4580 3610009F */  ori       $s0, $s0, 0x9f
 .L802A4584:
-/* 419314 802A4584 0C04992C */  jal       func_801264B0
+/* 419314 802A4584 0C04992C */  jal       get_msg_lines
 /* 419318 802A4588 0200202D */   daddu    $a0, $s0, $zero
 /* 41931C 802A458C 0200202D */  daddu     $a0, $s0, $zero
 /* 419320 802A4590 2442FFFF */  addiu     $v0, $v0, -1
@@ -37,7 +37,7 @@ glabel func_802A4534
 /* 41933C 802A45AC 240700FF */  addiu     $a3, $zero, 0xff
 /* 419340 802A45B0 AFA20010 */  sw        $v0, 0x10($sp)
 /* 419344 802A45B4 AFA00014 */  sw        $zero, 0x14($sp)
-/* 419348 802A45B8 0C04993B */  jal       draw_string
+/* 419348 802A45B8 0C04993B */  jal       draw_msg
 /* 41934C 802A45BC 02263021 */   addu     $a2, $s1, $a2
 /* 419350 802A45C0 8FBF0024 */  lw        $ra, 0x24($sp)
 /* 419354 802A45C4 8FB20020 */  lw        $s2, 0x20($sp)

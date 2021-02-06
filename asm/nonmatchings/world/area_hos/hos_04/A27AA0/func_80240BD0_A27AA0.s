@@ -152,7 +152,7 @@ glabel L80240D60_A27C30
 /* A27CB4 80240DE4 8C440000 */  lw        $a0, ($v0)
 /* A27CB8 80240DE8 1080000F */  beqz      $a0, .L80240E28
 /* A27CBC 80240DEC 00000000 */   nop
-/* A27CC0 80240DF0 0C04992C */  jal       func_801264B0
+/* A27CC0 80240DF0 0C04992C */  jal       get_msg_lines
 /* A27CC4 80240DF4 0000802D */   daddu    $s0, $zero, $zero
 /* A27CC8 80240DF8 28420002 */  slti      $v0, $v0, 2
 /* A27CCC 80240DFC 50400001 */  beql      $v0, $zero, .L80240E04
@@ -165,7 +165,7 @@ glabel L80240D60_A27C30
 /* A27CE4 80240E14 AFA20010 */  sw        $v0, 0x10($sp)
 /* A27CE8 80240E18 AFA00014 */  sw        $zero, 0x14($sp)
 /* A27CEC 80240E1C 8C640000 */  lw        $a0, ($v1)
-/* A27CF0 80240E20 0C04993B */  jal       draw_string
+/* A27CF0 80240E20 0C04993B */  jal       draw_msg
 /* A27CF4 80240E24 0220382D */   daddu    $a3, $s1, $zero
 .L80240E28:
 /* A27CF8 80240E28 8FBF0034 */  lw        $ra, 0x34($sp)

@@ -20,7 +20,7 @@ glabel func_80240B60_A27A30
 /* A27A64 80240B94 C6000074 */  lwc1      $f0, 0x74($s0)
 /* A27A68 80240B98 46800020 */  cvt.s.w   $f0, $f0
 /* A27A6C 80240B9C 44050000 */  mfc1      $a1, $f0
-/* A27A70 80240BA0 0C04DF62 */  jal       func_80137D88
+/* A27A70 80240BA0 0C04DF62 */  jal       set_transition_stencil_zoom_0
 /* A27A74 80240BA4 0000202D */   daddu    $a0, $zero, $zero
 /* A27A78 80240BA8 8E020074 */  lw        $v0, 0x74($s0)
 /* A27A7C 80240BAC 8FBF0014 */  lw        $ra, 0x14($sp)

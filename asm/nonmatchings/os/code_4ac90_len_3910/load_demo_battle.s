@@ -38,7 +38,7 @@ glabel load_demo_battle
 /* 4E298 80072E98 00000000 */   nop
 /* 4E29C 80072E9C 0C052010 */  jal       func_80148040
 /* 4E2A0 80072EA0 00000000 */   nop
-/* 4E2A4 80072EA4 0C05177E */  jal       func_80145DF8
+/* 4E2A4 80072EA4 0C05177E */  jal       use_default_background_settings
 /* 4E2A8 80072EA8 00000000 */   nop
 /* 4E2AC 80072EAC 0C04E062 */  jal       func_80138188
 /* 4E2B0 80072EB0 00000000 */   nop
@@ -48,7 +48,7 @@ glabel load_demo_battle
 /* 4E2C0 80072EC0 00000000 */   nop
 /* 4E2C4 80072EC4 0C04432E */  jal       clear_entity_data
 /* 4E2C8 80072EC8 24040001 */   addiu    $a0, $zero, 1
-/* 4E2CC 80072ECC 0C016727 */  jal       func_80059C9C
+/* 4E2CC 80072ECC 0C016727 */  jal       clear_effect_data
 /* 4E2D0 80072ED0 00000000 */   nop
 /* 4E2D4 80072ED4 0C037F14 */  jal       clear_player_status
 /* 4E2D8 80072ED8 00000000 */   nop
@@ -63,7 +63,7 @@ glabel load_demo_battle
 /* 4E2FC 80072EFC 0C04C3FC */  jal       clear_item_entity_data
 /* 4E300 80072F00 00000000 */   nop
 /* 4E304 80072F04 3C05437F */  lui       $a1, 0x437f
-/* 4E308 80072F08 0C04DF62 */  jal       func_80137D88
+/* 4E308 80072F08 0C04DF62 */  jal       set_transition_stencil_zoom_0
 /* 4E30C 80072F0C 24040009 */   addiu    $a0, $zero, 9
 /* 4E310 80072F10 3C108011 */  lui       $s0, %hi(gPlayerData)
 /* 4E314 80072F14 2610F290 */  addiu     $s0, $s0, %lo(gPlayerData)
@@ -223,7 +223,7 @@ glabel L800730F8_4E4F8
 /* 4E540 80073140 3C02800B */  lui       $v0, %hi(gCurrentEncounter)
 /* 4E544 80073144 24420F10 */  addiu     $v0, $v0, %lo(gCurrentEncounter)
 /* 4E548 80073148 A0400007 */  sb        $zero, 7($v0)
-/* 4E54C 8007314C 0C01CB33 */  jal       func_80072CCC
+/* 4E54C 8007314C 0C01CB33 */  jal       set_battle_stage
 /* 4E550 80073150 A0400010 */   sb       $zero, 0x10($v0)
 /* 4E554 80073154 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
 /* 4E558 80073158 8C63419C */  lw        $v1, %lo(gGameStatusPtr)($v1)

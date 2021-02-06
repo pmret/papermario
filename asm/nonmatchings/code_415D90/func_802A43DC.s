@@ -26,7 +26,7 @@ glabel func_802A43DC
 .L802A442C:
 /* 4191BC 802A442C AFA20010 */  sw        $v0, 0x10($sp)
 /* 4191C0 802A4430 24020001 */  addiu     $v0, $zero, 1
-/* 4191C4 802A4434 0C04993B */  jal       draw_string
+/* 4191C4 802A4434 0C04993B */  jal       draw_msg
 /* 4191C8 802A4438 AFA20014 */   sw       $v0, 0x14($sp)
 /* 4191CC 802A443C 8FBF0018 */  lw        $ra, 0x18($sp)
 /* 4191D0 802A4440 03E00008 */  jr        $ra

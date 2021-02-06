@@ -192,7 +192,7 @@ NpcGroupList N(npcGroupList) = {
 };
 
 Script N(ReadEastSign) = SCRIPT({
-    func_800441F0($a);
+    IsStartingConversation($a);
     if ($a == 1) {
         return;
     }

@@ -95,7 +95,7 @@ glabel initialize_battle
 /* 16CB60 8023E280 0000882D */   daddu    $s1, $zero, $zero
 /* 16CB64 8023E284 0C09A3A2 */  jal       func_80268E88
 /* 16CB68 8023E288 00000000 */   nop
-/* 16CB6C 8023E28C 0C051FB1 */  jal       func_80147EC4
+/* 16CB6C 8023E28C 0C051FB1 */  jal       set_windows_visible
 /* 16CB70 8023E290 24040001 */   addiu    $a0, $zero, 1
 /* 16CB74 8023E294 3C048029 */  lui       $a0, %hi(D_80291F80)
 /* 16CB78 8023E298 24841F80 */  addiu     $a0, $a0, %lo(D_80291F80)

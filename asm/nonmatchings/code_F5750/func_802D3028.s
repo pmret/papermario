@@ -94,7 +94,7 @@ glabel func_802D3028
 /* F7B38 802D3188 0C019D40 */  jal       guMtxF2L
 /* F7B3C 802D318C 0260282D */   daddu    $a1, $s3, $zero
 /* F7B40 802D3190 8E040000 */  lw        $a0, ($s0)
-/* F7B44 802D3194 0C04873A */  jal       func_80121CE8
+/* F7B44 802D3194 0C04873A */  jal       draw_entity_model_shadow
 /* F7B48 802D3198 0260282D */   daddu    $a1, $s3, $zero
 .L802D319C:
 /* F7B4C 802D319C 2A420040 */  slti      $v0, $s2, 0x40

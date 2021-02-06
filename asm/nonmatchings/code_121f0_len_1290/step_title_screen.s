@@ -281,7 +281,7 @@ glabel L80037450_12850
 /* 128B0 800374B0 0000202D */   daddu    $a0, $zero, $zero
 /* 128B4 800374B4 0C04432E */  jal       clear_entity_data
 /* 128B8 800374B8 24040001 */   addiu    $a0, $zero, 1
-/* 128BC 800374BC 0C051CFC */  jal       func_801473F0
+/* 128BC 800374BC 0C051CFC */  jal       clear_windows
 /* 128C0 800374C0 00000000 */   nop
 /* 128C4 800374C4 3C04800A */  lui       $a0, %hi(D_8009A650)
 /* 128C8 800374C8 2484A650 */  addiu     $a0, $a0, %lo(D_8009A650)

@@ -12,7 +12,7 @@ glabel begin_state_pause_menu
 /* FD5C 8003495C 00000000 */   nop
 /* FD60 80034960 0C009C22 */  jal       func_80027088
 /* FD64 80034964 24040003 */   addiu    $a0, $zero, 3
-/* FD68 80034968 0C051FB1 */  jal       func_80147EC4
+/* FD68 80034968 0C051FB1 */  jal       set_windows_visible
 /* FD6C 8003496C 24040002 */   addiu    $a0, $zero, 2
 /* FD70 80034970 8FBF0010 */  lw        $ra, 0x10($sp)
 /* FD74 80034974 03E00008 */  jr        $ra

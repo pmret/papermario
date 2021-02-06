@@ -4,7 +4,7 @@
 glabel partner_use_ability
 /* 847C4 800EB314 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 847C8 800EB318 AFBF0010 */  sw        $ra, 0x10($sp)
-/* 847CC 800EB31C 0C011052 */  jal       func_80044148
+/* 847CC 800EB31C 0C011052 */  jal       is_starting_conversation
 /* 847D0 800EB320 00000000 */   nop
 /* 847D4 800EB324 1440002B */  bnez      $v0, .L800EB3D4
 /* 847D8 800EB328 0000102D */   daddu    $v0, $zero, $zero
@@ -47,7 +47,7 @@ glabel partner_use_ability
 /* 84864 800EB3B4 24020008 */  addiu     $v0, $zero, 8
 /* 84868 800EB3B8 3C018011 */  lui       $at, %hi(D_8010CFE8)
 /* 8486C 800EB3BC AC22CFE8 */  sw        $v0, %lo(D_8010CFE8)($at)
-/* 84870 800EB3C0 0C03A9B3 */  jal       func_800EA6CC
+/* 84870 800EB3C0 0C03A9B3 */  jal       _use_partner_ability
 /* 84874 800EB3C4 00000000 */   nop
 /* 84878 800EB3C8 0803ACF5 */  j         .L800EB3D4
 /* 8487C 800EB3CC 24020001 */   addiu    $v0, $zero, 1

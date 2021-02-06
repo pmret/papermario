@@ -443,7 +443,7 @@ glabel L80250178_17EA58
 /* 17EA94 802501B4 24040009 */  addiu     $a0, $zero, 9
 /* 17EA98 802501B8 2402BFFF */  addiu     $v0, $zero, -0x4001
 /* 17EA9C 802501BC 00621024 */  and       $v0, $v1, $v0
-/* 17EAA0 802501C0 0C051F9F */  jal       func_80147E7C
+/* 17EAA0 802501C0 0C051F9F */  jal       set_window_update
 /* 17EAA4 802501C4 ACC20000 */   sw       $v0, ($a2)
 /* 17EAA8 802501C8 24020002 */  addiu     $v0, $zero, 2
 /* 17EAAC 802501CC A6200014 */  sh        $zero, 0x14($s1)
@@ -455,7 +455,7 @@ glabel L80250178_17EA58
 /* 17EAC0 802501E0 24020002 */   addiu    $v0, $zero, 2
 /* 17EAC4 802501E4 1082017D */  beq       $a0, $v0, .L802507DC
 /* 17EAC8 802501E8 24040009 */   addiu    $a0, $zero, 9
-/* 17EACC 802501EC 0C051F9F */  jal       func_80147E7C
+/* 17EACC 802501EC 0C051F9F */  jal       set_window_update
 /* 17EAD0 802501F0 24050007 */   addiu    $a1, $zero, 7
 /* 17EAD4 802501F4 96220012 */  lhu       $v0, 0x12($s1)
 /* 17EAD8 802501F8 2442FFD2 */  addiu     $v0, $v0, -0x2e
@@ -894,7 +894,7 @@ glabel L802507A8_17F088
 /* 17F0BC 802507DC 12400008 */  beqz      $s2, .L80250800
 /* 17F0C0 802507E0 00000000 */   nop
 /* 17F0C4 802507E4 24040009 */  addiu     $a0, $zero, 9
-/* 17F0C8 802507E8 0C051F9F */  jal       func_80147E7C
+/* 17F0C8 802507E8 0C051F9F */  jal       set_window_update
 /* 17F0CC 802507EC 24050002 */   addiu    $a1, $zero, 2
 /* 17F0D0 802507F0 3C018028 */  lui       $at, %hi(D_802838F8)
 /* 17F0D4 802507F4 AC2038F8 */  sw        $zero, %lo(D_802838F8)($at)

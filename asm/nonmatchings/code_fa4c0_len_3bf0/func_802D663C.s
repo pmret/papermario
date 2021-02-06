@@ -31,7 +31,7 @@ glabel func_802D663C
 /* FB04C 802D669C 00000000 */   nop
 /* FB050 802D66A0 0C03BD8A */  jal       func_800EF628
 /* FB054 802D66A4 00000000 */   nop
-/* FB058 802D66A8 0C03A5EE */  jal       func_800E97B8
+/* FB058 802D66A8 0C03A5EE */  jal       close_status_menu
 /* FB05C 802D66AC 00000000 */   nop
 /* FB060 802D66B0 0000482D */  daddu     $t1, $zero, $zero
 /* FB064 802D66B4 0120402D */  daddu     $t0, $t1, $zero
