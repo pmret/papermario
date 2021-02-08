@@ -152,7 +152,7 @@ glabel L80244B80_A2EDC0
 /* A2EE44 80244C04 8C440000 */  lw        $a0, ($v0)
 /* A2EE48 80244C08 1080000F */  beqz      $a0, .L80244C48
 /* A2EE4C 80244C0C 00000000 */   nop
-/* A2EE50 80244C10 0C04992C */  jal       func_801264B0
+/* A2EE50 80244C10 0C04992C */  jal       get_msg_lines
 /* A2EE54 80244C14 0000802D */   daddu    $s0, $zero, $zero
 /* A2EE58 80244C18 28420002 */  slti      $v0, $v0, 2
 /* A2EE5C 80244C1C 50400001 */  beql      $v0, $zero, .L80244C24

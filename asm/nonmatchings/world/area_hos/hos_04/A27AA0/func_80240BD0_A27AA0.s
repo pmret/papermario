@@ -152,7 +152,7 @@ glabel L80240D60_A27C30
 /* A27CB4 80240DE4 8C440000 */  lw        $a0, ($v0)
 /* A27CB8 80240DE8 1080000F */  beqz      $a0, .L80240E28
 /* A27CBC 80240DEC 00000000 */   nop
-/* A27CC0 80240DF0 0C04992C */  jal       func_801264B0
+/* A27CC0 80240DF0 0C04992C */  jal       get_msg_lines
 /* A27CC4 80240DF4 0000802D */   daddu    $s0, $zero, $zero
 /* A27CC8 80240DF8 28420002 */  slti      $v0, $v0, 2
 /* A27CCC 80240DFC 50400001 */  beql      $v0, $zero, .L80240E04

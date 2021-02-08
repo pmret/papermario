@@ -35,6 +35,7 @@ build.ninja
 /sprite/SpriteTable.xml
 /mod.cfg
 /tools/star-rod
+/editor
 
 /tools/Yay0compress
 /tools/n64crc

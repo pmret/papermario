@@ -439,7 +439,10 @@ segments:
     - [0x1AC760, c]
     - [0x1AF120, c]
     - [0x1AF230, c]
-    - [0x1AF2D0, data]
+    - [0x1AF2D0, .data, code_16c8e0]
+    - [0x1AF8A0, .data, code_190B20]
+    #- [0x1B21E0, bin] # begins with image
+    - [0x1B21E0, data, code_1AF2D0]
     - [0x1CB240, rodata]
   - [0x1CC310, bin] # icon images and palettes, vram unknown
   - [0x1FE1B0, rgba16,  title/logo_n64, 128, 112]

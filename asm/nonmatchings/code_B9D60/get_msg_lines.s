@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_801264B0
+glabel get_msg_lines
 /* BCBB0 801264B0 27BDFFD0 */  addiu     $sp, $sp, -0x30
 /* BCBB4 801264B4 27A20020 */  addiu     $v0, $sp, 0x20
 /* BCBB8 801264B8 0000282D */  daddu     $a1, $zero, $zero

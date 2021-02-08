@@ -97,7 +97,7 @@ glabel L801367A4_CCEA4
 /* CCF80 80136880 0C0496CF */  jal       set_message_string
 /* CCF84 80136884 0000282D */   daddu    $a1, $zero, $zero
 .L80136888:
-/* CCF88 80136888 0C04992C */  jal       func_801264B0
+/* CCF88 80136888 0C04992C */  jal       get_msg_lines
 /* CCF8C 8013688C 0200202D */   daddu    $a0, $s0, $zero
 /* CCF90 80136890 2442FFFF */  addiu     $v0, $v0, -1
 /* CCF94 80136894 86250018 */  lh        $a1, 0x18($s1)

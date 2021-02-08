@@ -13,8 +13,8 @@ glabel func_80260A60
 /* 18F360 80260A80 8C6301F4 */  lw        $v1, 0x1f4($v1)
 /* 18F364 80260A84 1040000A */  beqz      $v0, .L80260AB0
 /* 18F368 80260A88 3C06000A */   lui      $a2, 0xa
-/* 18F36C 80260A8C 3C028028 */  lui       $v0, %hi(D_8028340C)
-/* 18F370 80260A90 2442340C */  addiu     $v0, $v0, %lo(D_8028340C)
+/* 18F36C 80260A8C 3C028028 */  lui       $v0, %hi(bPeachIdleAnims)
+/* 18F370 80260A90 2442340C */  addiu     $v0, $v0, %lo(bPeachIdleAnims)
 /* 18F374 80260A94 AC620094 */  sw        $v0, 0x94($v1)
 /* 18F378 80260A98 34C60002 */  ori       $a2, $a2, 2
 /* 18F37C 80260A9C 0000202D */  daddu     $a0, $zero, $zero
@@ -26,8 +26,8 @@ glabel func_80260A60
 /* 18F390 80260AB0 8082009A */  lb        $v0, 0x9a($a0)
 /* 18F394 80260AB4 14400004 */  bnez      $v0, .L80260AC8
 /* 18F398 80260AB8 00000000 */   nop
-/* 18F39C 80260ABC 3C028028 */  lui       $v0, %hi(D_80283238)
-/* 18F3A0 80260AC0 24423238 */  addiu     $v0, $v0, %lo(D_80283238)
+/* 18F39C 80260ABC 3C028028 */  lui       $v0, %hi(bMarioIdleAnims)
+/* 18F3A0 80260AC0 24423238 */  addiu     $v0, $v0, %lo(bMarioIdleAnims)
 /* 18F3A4 80260AC4 AC620094 */  sw        $v0, 0x94($v1)
 .L80260AC8:
 /* 18F3A8 80260AC8 8FBF0010 */  lw        $ra, 0x10($sp)
