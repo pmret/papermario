@@ -37,3 +37,10 @@ There's also a new option, `create_new_c_files`, which disables the creation of 
 I am also working on adding bss support as well. It should almost be all set, aside from the changes needed in the linker script.
 
 **Breaking change**: The `files` field in `code` segments should now be renamed to `subsections`.
+
+### 0.6.3: More refactoring
+**Breaking Change**: The command line args to split.py have changed. Currently, only the config path is now a required argument to splat. The old `rom` and `outdir` parameters are now optional (`--rom`, `--outdir`). Now, you can add rom and out directory paths in the yaml.
+
+The `out_dir` option specifies a directory relative to the config file. If your config file is in a subdirectory of the main repo, you can set `out_dir: ../`, for example.
+
+The `target_path` option spcifies a path to the binary file to split, relative to the `out_dir`. If your `baserom.z64` is in the top-level of the repo, you can set `target_path: baserom.z64`, for example.
