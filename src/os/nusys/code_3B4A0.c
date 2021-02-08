@@ -1,7 +1,12 @@
 #include "common.h"
+#include "nu/nusys.h"
 
-INCLUDE_ASM(s32, "os/nusys/code_3B4A0", nuContRmbForceStop);
+void nuContRmbForceStop(void) {
+    nuSiSendMesg(NU_CONT_RMB_FORCESTOP_MSG, NULL);
+}
 
-INCLUDE_ASM(s32, "os/nusys/code_3B4A0", nuContRmbForceStopEnd);
+void nuContRmbForceStopEnd(void) {
+    nuSiSendMesg(NU_CONT_RMB_FORCESTOPEND_MSG, NULL);
+}
 
-INCLUDE_ASM(s32, "os/nusys/code_3B4A0", nuPiReadRomOverlay);
+INCLUDE_ASM(void, "os/nusys/code_3B4A0", nuPiReadRomOverlay, NUPiOverlaySegment* segment);

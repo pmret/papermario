@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel nuGfxThread
+glabel nuGfxThread2
 /* 3B648 80060248 27BDFFC8 */  addiu     $sp, $sp, -0x38
 /* 3B64C 8006024C AFB00028 */  sw        $s0, 0x28($sp)
 /* 3B650 80060250 3C10800B */  lui       $s0, %hi(D_800B42F0)

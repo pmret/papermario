@@ -1,5 +1,14 @@
 #include "common.h"
+#include "nu/nusys.h"
 
-INCLUDE_ASM(s32, "os/nusys/nuGfxThread", nuGfxThreadStart);
+void nuGfxThread2(void);
 
-INCLUDE_ASM(s32, "os/nusys/nuGfxThread", nuGfxThread);
+extern s32 D_800AE6D0;
+extern OSThread D_800B1B90;
+
+void nuGfxThreadStart(void) {
+    osCreateThread(&D_800B1B90, 4, nuGfxThread2, NULL, &D_800AE6D0, NU_GFX_THREAD_PRI);
+    osStartThread(&D_800B1B90);
+}
+
+INCLUDE_ASM(void, "os/nusys/nuGfxThread", nuGfxThread2);
