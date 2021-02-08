@@ -31,7 +31,7 @@ segments:
     vram: 0x80025C00
     subalign: 8
     subsections:
-    - [0x1000, c, code_1000_len_60]
+    - [0x1000, hasm, entry_point]
     - [0x1060, c, code_1060_len_310]
     - [0x1370, c, code_1370_len_7d0]
     - [0x1b40, c, code_1b40_len_20b0]
@@ -92,7 +92,7 @@ segments:
     - [0x3aa10, c, os/nusys/nuContInit]
     - [0x3aa50, c, os/nusys/nuContDataGet]
     - [0x3aab0, c, os/nusys/nuContPakMgr]
-    - [0x3af10, c, os/nusys/nuContRmbMgr]
+    - [0x3AD20, c, os/nusys/nuContRmbMgr]
     - [0x3b290, c, os/nusys/nuContRmbStart]
     - [0x3b2f0, c, os/nusys/nuContRmbCheck]
     - [0x3b390, c, os/nusys/nuContRmbModeSet]
@@ -250,6 +250,8 @@ segments:
     - [0x73DA0, .rodata, world/world]
     - [0x74EA0, rodata]
     - [0x75240, .rodata, battle/battle] # ram 80099E40
+    # bss starts at 0x8009A5B0
+    - [0x75240, .bss, os/code_39cb0_len_100, 0x800] # we need at least this much bss space until this file
   - type: code
     start: 0x759B0
     vram: 0x800DC500
@@ -2061,7 +2063,7 @@ segments:
     - [0x6DDDC0, c]
     - [0x6DDE90, c]
     - [0x6DE000, c]
-    - [0x6DE060, c]
+    - [0x6DE0D0, c]
     - [0x6DE1A0, c]
     - [0x6DE1F0, c]
     - [0x6DE3A0, c]
