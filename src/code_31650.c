@@ -233,9 +233,3 @@ void func_80057FD8(u8* src, u8* dst, s32 size) {
 }
 
 INCLUDE_ASM(s32, "code_31650", func_80058004);
-
-INCLUDE_ASM(s32, "code_31650", func_80058050);
-
-INCLUDE_ASM(s32, "code_31650", func_80058B20);
-
-INCLUDE_ASM(s32, "code_31650", func_80058C6C);
