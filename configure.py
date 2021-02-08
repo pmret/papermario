@@ -409,7 +409,7 @@ async def main():
     npc_sprite_yay0s = []
     for sprite_id, sprite_name in enumerate(NPC_SPRITES, 1):
         asset_dir = find_asset_dir(f"sprite/npc/{sprite_name}")
-        sources = glob(f"{asset_dir}/npc/{sprite_name}/**/*.*", recursive=True)
+        sources = glob(f"{asset_dir}/sprite/npc/{sprite_name}/**/*.*", recursive=True)
         variables = {
             "sprite_name": sprite_name,
             "sprite_dir": f"{asset_dir}/sprite/npc/{sprite_name}",
