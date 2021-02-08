@@ -8877,3 +8877,4 @@ func_802D38EC = 0x802D38EC; // type:func rom:0xF829C
 func_802D3840 = 0x802D3840; // type:func rom:0xF81F0
 func_802D39FC = 0x802D39FC; // type:func rom:0xF83AC
 func_802D3C58 = 0x802D3C58; // type:func rom:0xF8608
+gBattleItemTable = 0x80293C04; // type:data
