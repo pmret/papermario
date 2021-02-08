@@ -37,6 +37,8 @@ s32 create_entity(StaticEntityData*, s32, s32, s32, s32, s32);
 void func_80070550(s32, f32, f32, f32, f32, f32, s32, s32);
 void func_802E263C(Entity* entity);
 
+void step_game_loop(void);
+
 void create_shadow_callback(Shadow* entity);
 void func_802E10F4(Entity* entity);
 void func_802E114C(void);

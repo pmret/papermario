@@ -31,7 +31,7 @@ extern int D_802EB3D0[];
 extern u8 D_80074021;
 extern s32 D_8009A5D8;
 
-INCLUDE_ASM(s32, "code_1b40_len_20b0", step_game_loop);
+INCLUDE_ASM(void, "code_1b40_len_20b0", step_game_loop);
 
 INCLUDE_ASM(s32, "code_1b40_len_20b0", func_800269EC);
 
