@@ -9,6 +9,8 @@ options:
   extensions: splat_ext
   symbol_addrs_path: tools/symbol_addrs.txt
   platform: n64
+  out_dir: ../
+  target_path: baserom.z64
   assets_dir: assets
 segments:
   - name: header

@@ -12,9 +12,9 @@ glabel LoadBattleDmaData
 /* 181F20 80253640 9084C4EA */  lbu       $a0, %lo(gBattleStatus+0x47A)($a0)
 /* 181F24 80253644 00621821 */  addu      $v1, $v1, $v0
 /* 181F28 80253648 00042140 */  sll       $a0, $a0, 5
-/* 181F2C 8025364C 3C028009 */  lui       $v0, %hi(D_80095A4C)
+/* 181F2C 8025364C 3C028009 */  lui       $v0, %hi(gBattleAreas+0x1C)
 /* 181F30 80253650 00441021 */  addu      $v0, $v0, $a0
-/* 181F34 80253654 8C425A4C */  lw        $v0, %lo(D_80095A4C)($v0)
+/* 181F34 80253654 8C425A4C */  lw        $v0, %lo(gBattleAreas+0x1C)($v0)
 /* 181F38 80253658 00031880 */  sll       $v1, $v1, 2
 /* 181F3C 8025365C 00431021 */  addu      $v0, $v0, $v1
 /* 181F40 80253660 5040000E */  beql      $v0, $zero, .L8025369C
