@@ -110,7 +110,42 @@ void load_engine_data(void) {
 INCLUDE_ASM(s32, "code_1b40_len_20b0", load_engine_data);
 #endif
 
+//weird ordering issue
+#ifdef NON_MATCHING
+void func_80027088(s32 arg0) {
+    switch (arg0) {
+        case 0:
+            D_8009A5D8 = arg0;
+            *D_8009A650 &= ~0xF00;
+            resume_all_group(3);
+            break;
+        case 1:
+            D_8009A5D8 = arg0;
+            *D_8009A650 &= ~0xE00;
+            *D_8009A650 |= 0x100;
+            suspend_all_group(1);
+            break;
+        case 2:
+            D_8009A5D8 = arg0;
+            *D_8009A650 &= ~0xC00;
+            *D_8009A650 |= 0x300;
+            suspend_all_group(2);
+            break;
+        case 3:
+            D_8009A5D8 = arg0;
+            *D_8009A650 &= ~0x800;
+            *D_8009A650 |= 0x700;
+            suspend_all_group(2);
+            break;
+        case 4:
+            D_8009A5D8 = arg0;
+            *D_8009A650 |=  0xF00;
+            break;
+    }
+}
+#else
 INCLUDE_ASM(void, "code_1b40_len_20b0", func_80027088, s32 arg0);
+#endif
 
 s32 func_80027190(void) {
     return D_8009A5D8;

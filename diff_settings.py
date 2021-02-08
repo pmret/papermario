@@ -4,5 +4,5 @@ def apply(config, args):
     config['baseimg'] = 'baserom.z64'
     config['myimg'] = 'papermario.z64'
     config['mapfile'] = 'build/papermario.map'
-    config['source_directories'] = ['.']
+    config['source_directories'] = ['src', 'asm', 'include', 'assets']
     config['make_command'] = ['ninja']
