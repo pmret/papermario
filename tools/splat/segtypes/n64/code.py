@@ -227,6 +227,9 @@ class BinSubsegment(Subsegment):
             f.write(rom_bytes[self.rom_start : self.rom_end])
 
 class PaletteSubsegment(Subsegment):
+    def should_run(self, options):
+        return super().should_run(options) or "img" in options["modes"]
+
     def split_inner(self, segment, rom_bytes, base_path, generic_out_path):
         img_bytes = rom_bytes[self.rom_start : self.rom_end]
 
