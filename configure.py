@@ -390,18 +390,20 @@ async def main():
         msg_files.extend(glob(d + "/**/*.msg", recursive=True))
     for msg_file in msg_files:
         n.build(
-            f"$builddir/{msg_file}.bin",
+            f"$builddir/{msg_file.split('/', 1)[1]}.bin",
             "msg",
             msg_file,
             implicit="tools/msg/parse_compile.py",
         )
+    msg_headers = [add_generated_header(f"$builddir/include/{msg_file.split('/', 1)[1]}.h") for msg_file in msg_files]
+    msg_bins = list(set([f"$builddir/{msg_file.split('/', 1)[1]}.bin" for msg_file in msg_files]))
     n.build(
         "$builddir/msg.bin",
         "msg_combine",
-        [f"$builddir/{msg_file}.bin" for msg_file in msg_files],
+        msg_bins,
         implicit="tools/msg/combine.py",
-        implicit_outputs=[add_generated_header(f"$builddir/include/{msg_file.split('/', 1)[1]}.h") for msg_file in msg_files],
-        variables={ "msg_combine_headers": [f"{msg_file}.h" for msg_file in msg_files] }
+        implicit_outputs=msg_headers,
+        variables={ "msg_combine_headers": msg_headers }
     )
     n.build("$builddir/msg.o", "bin", "$builddir/msg.bin")
 
