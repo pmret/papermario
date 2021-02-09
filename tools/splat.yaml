@@ -459,6 +459,10 @@ segments:
     vram: 0x80200000
     subsections:
     - [0x3169f0, c, code_3169f0]
+  - type: code
+    start: 0x316a70
+    vram: 0x80200080
+    subsections:
     - [0x316a70, c, code_316a70]
   - type: code
     start: 0x316C00
