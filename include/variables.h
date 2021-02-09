@@ -12,7 +12,7 @@ extern PlayerData gPlayerData;
 extern ActionState gPlayerActionState;
 extern PlayerAnim gPlayerAnimation;
 extern PlayerStatus gPlayerStatus;
-PlayerStatus* gPlayerStatusPtr;
+extern PlayerStatus* gPlayerStatusPtr;
 extern CollisionStatus gCollisionStatus;
 extern GameStatus* gGameStatusPtr[1];
 extern s32 gRandSeed;
