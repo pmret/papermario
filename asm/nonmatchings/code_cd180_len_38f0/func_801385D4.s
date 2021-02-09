@@ -26,7 +26,7 @@ glabel L80138624_CED24
 /* CED24 80138624 0000202D */  daddu     $a0, $zero, $zero
 /* CED28 80138628 240500D0 */  addiu     $a1, $zero, 0xd0
 /* CED2C 8013862C 00A0302D */  daddu     $a2, $a1, $zero
-/* CED30 80138630 0C04DF84 */  jal       func_80137E10
+/* CED30 80138630 0C04DF84 */  jal       set_transition_stencil_color
 /* CED34 80138634 00A0382D */   daddu    $a3, $a1, $zero
 /* CED38 80138638 0804E1B2 */  j         .L801386C8
 /* CED3C 8013863C 24100032 */   addiu    $s0, $zero, 0x32
@@ -56,12 +56,12 @@ glabel L80138680_CED80
 /* CED80 80138680 0000202D */  daddu     $a0, $zero, $zero
 /* CED84 80138684 0080282D */  daddu     $a1, $a0, $zero
 /* CED88 80138688 2406000F */  addiu     $a2, $zero, 0xf
-/* CED8C 8013868C 0C04DF93 */  jal       func_80137E4C
+/* CED8C 8013868C 0C04DF93 */  jal       set_transition_stencil_center
 /* CED90 80138690 2407001C */   addiu    $a3, $zero, 0x1c
 /* CED94 80138694 0000202D */  daddu     $a0, $zero, $zero
 /* CED98 80138698 24050001 */  addiu     $a1, $zero, 1
 /* CED9C 8013869C 24060131 */  addiu     $a2, $zero, 0x131
-/* CEDA0 801386A0 0C04DF93 */  jal       func_80137E4C
+/* CEDA0 801386A0 0C04DF93 */  jal       set_transition_stencil_center
 /* CEDA4 801386A4 2407009C */   addiu    $a3, $zero, 0x9c
 /* CEDA8 801386A8 86420000 */  lh        $v0, ($s2)
 /* CEDAC 801386AC 2404000C */  addiu     $a0, $zero, 0xc
@@ -69,7 +69,7 @@ glabel L80138680_CED80
 /* CEDB4 801386B4 00000000 */  nop
 /* CEDB8 801386B8 46800020 */  cvt.s.w   $f0, $f0
 /* CEDBC 801386BC 44050000 */  mfc1      $a1, $f0
-/* CEDC0 801386C0 0C04DF62 */  jal       func_80137D88
+/* CEDC0 801386C0 0C04DF62 */  jal       set_transition_stencil_zoom_0
 /* CEDC4 801386C4 24100002 */   addiu    $s0, $zero, 2
 .L801386C8:
 /* CEDC8 801386C8 3C038015 */  lui       $v1, %hi(D_8014C6F0)
@@ -82,7 +82,7 @@ glabel L80138680_CED80
 /* CEDE4 801386E4 00000000 */  nop
 /* CEDE8 801386E8 46800020 */  cvt.s.w   $f0, $f0
 /* CEDEC 801386EC 44050000 */  mfc1      $a1, $f0
-/* CEDF0 801386F0 0C04DF62 */  jal       func_80137D88
+/* CEDF0 801386F0 0C04DF62 */  jal       set_transition_stencil_zoom_0
 /* CEDF4 801386F4 0220202D */   daddu    $a0, $s1, $zero
 .L801386F8:
 /* CEDF8 801386F8 86420000 */  lh        $v0, ($s2)

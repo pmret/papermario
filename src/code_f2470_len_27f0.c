@@ -23,6 +23,7 @@ void set_npc_animation(Npc* npc, u32 arg1) {
     }
 }
 
+/// Used in battle scripts.
 INCLUDE_ASM(ApiStatus, "code_f2470_len_27f0", CreateNpc, ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus DeleteNpc(ScriptInstance* script, s32 isInitialCall) {
@@ -305,7 +306,7 @@ ApiStatus func_802CF1B4(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802CF208(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetNpcSprite(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     NpcId npcId = get_variable(script, *args++);
     Bytecode arg1 = *args;
@@ -315,7 +316,7 @@ ApiStatus func_802CF208(ScriptInstance* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    func_8003AC5C(npc, arg1, 0);
+    set_npc_sprite(npc, arg1, 0);
     return ApiStatus_DONE2;
 }
 

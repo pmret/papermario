@@ -11,7 +11,7 @@ glabel fx_sweat
 /* 4BBA8 800707A8 E7AE0024 */  swc1      $f14, 0x24($sp)
 /* 4BBAC 800707AC E7B00028 */  swc1      $f16, 0x28($sp)
 /* 4BBB0 800707B0 AFBF002C */  sw        $ra, 0x2c($sp)
-/* 4BBB4 800707B4 0C016959 */  jal       play_effect
+/* 4BBB4 800707B4 0C016959 */  jal       load_effect
 /* 4BBB8 800707B8 24040028 */   addiu    $a0, $zero, 0x28
 /* 4BBBC 800707BC 8FA40010 */  lw        $a0, 0x10($sp)
 /* 4BBC0 800707C0 8FA50014 */  lw        $a1, 0x14($sp)

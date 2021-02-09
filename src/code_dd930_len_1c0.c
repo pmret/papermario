@@ -12,11 +12,11 @@ typedef struct {
 extern struct_80147230 D_8014F140;
 extern struct_80147230 D_8015C7C0;
 
-void func_80147230(void) {
+void reset_ambient_sounds(void) {
     D_8015C7C0 = D_8014F140;
 }
 
-void func_80147264(void) {
+void update_ambient_sounds(void) {
     struct_80147230* temp = &D_8015C7C0;
 
     switch (temp->fadeState) {

@@ -25,7 +25,7 @@ void load_map_bg(char* optAssetName) {
     general_heap_free(compressedData);
 }
 
-void func_80145DF8(void) {
+void use_default_background_settings(void) {
     GameStatus* gameStatus = GAME_STATUS;
     D_801595A0 = 0;
     D_8014F12F = 0;
@@ -56,10 +56,10 @@ void set_background_size(s16 startX, s16 startY, s16 sizeX, s16 sizeY) {
     gameStatus->backgroundMinH = sizeY;
 }
 
-u16 func_80145E98(s32 arg0, s32 arg1, s32 arg2) {
+u16 blend_background_channel(s32 arg0, s32 arg1, s32 alpha) {
     s32 temp_lo;
 
-    temp_lo = (arg1 - (u16)arg0) * arg2;
+    temp_lo = (arg1 - (u16)arg0) * alpha;
     if (temp_lo < 0) {
         temp_lo = temp_lo + 0xFF;
     }
@@ -67,12 +67,12 @@ u16 func_80145E98(s32 arg0, s32 arg1, s32 arg2) {
     return temp_lo;
 }
 
-INCLUDE_ASM(s32, "code_dc470_len_14c0", func_80145EC0);
+INCLUDE_ASM(s32, "code_dc470_len_14c0", enable_background_wave);
 
 void func_8014720C(void) {
     D_8014F12F = 1;
 }
 
-void func_8014721C(void) {
+void disable_background_wave(void) {
     D_8014F12F = 0;
 }

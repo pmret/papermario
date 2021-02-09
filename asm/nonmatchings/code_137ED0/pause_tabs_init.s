@@ -36,7 +36,7 @@ glabel pause_tabs_init
 /* 13863C 802452FC 2442FFDC */   addiu    $v0, $v0, -0x24
 /* 138640 80245300 3C048025 */  lui       $a0, %hi(D_8024F1E8)
 /* 138644 80245304 2484F1E8 */  addiu     $a0, $a0, %lo(D_8024F1E8)
-/* 138648 80245308 0C051FCC */  jal       func_80147F30
+/* 138648 80245308 0C051FCC */  jal       setup_pause_menu_tab
 /* 13864C 8024530C 24050007 */   addiu    $a1, $zero, 7
 /* 138650 80245310 24020019 */  addiu     $v0, $zero, 0x19
 /* 138654 80245314 3C018016 */  lui       $at, %hi(D_8015A2BE)

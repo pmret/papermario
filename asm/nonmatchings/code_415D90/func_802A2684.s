@@ -4,8 +4,8 @@
 glabel func_802A2684
 /* 417414 802A2684 3C03802B */  lui       $v1, %hi(D_802AD4A8)
 /* 417418 802A2688 2463D4A8 */  addiu     $v1, $v1, %lo(D_802AD4A8)
-/* 41741C 802A268C 3C05802B */  lui       $a1, %hi(D_802AD4A4)
-/* 417420 802A2690 24A5D4A4 */  addiu     $a1, $a1, %lo(D_802AD4A4)
+/* 41741C 802A268C 3C05802B */  lui       $a1, %hi(battle_menu_moveOptionCount)
+/* 417420 802A2690 24A5D4A4 */  addiu     $a1, $a1, %lo(battle_menu_moveOptionCount)
 /* 417424 802A2694 8C620000 */  lw        $v0, ($v1)
 /* 417428 802A2698 8CA70000 */  lw        $a3, ($a1)
 /* 41742C 802A269C 0047102A */  slt       $v0, $v0, $a3
@@ -13,14 +13,14 @@ glabel func_802A2684
 /* 417434 802A26A4 24E2FFFF */   addiu    $v0, $a3, -1
 /* 417438 802A26A8 AC620000 */  sw        $v0, ($v1)
 .L802A26AC:
-/* 41743C 802A26AC 3C01802B */  lui       $at, %hi(D_802AD108)
-/* 417440 802A26B0 A020D108 */  sb        $zero, %lo(D_802AD108)($at)
+/* 41743C 802A26AC 3C01802B */  lui       $at, %hi(battle_menu_moveState)
+/* 417440 802A26B0 A020D108 */  sb        $zero, %lo(battle_menu_moveState)($at)
 /* 417444 802A26B4 90640003 */  lbu       $a0, 3($v1)
-/* 417448 802A26B8 3C03802B */  lui       $v1, %hi(D_802AD10C)
-/* 41744C 802A26BC 2463D10C */  addiu     $v1, $v1, %lo(D_802AD10C)
+/* 417448 802A26B8 3C03802B */  lui       $v1, %hi(battle_menu_moveScrollLine)
+/* 41744C 802A26BC 2463D10C */  addiu     $v1, $v1, %lo(battle_menu_moveScrollLine)
 /* 417450 802A26C0 A0600000 */  sb        $zero, ($v1)
-/* 417454 802A26C4 3C01802B */  lui       $at, %hi(D_802AD109)
-/* 417458 802A26C8 A024D109 */  sb        $a0, %lo(D_802AD109)($at)
+/* 417454 802A26C4 3C01802B */  lui       $at, %hi(battle_menu_moveCursorPos)
+/* 417458 802A26C8 A024D109 */  sb        $a0, %lo(battle_menu_moveCursorPos)($at)
 /* 41745C 802A26CC 3C01802B */  lui       $at, %hi(D_802AD10A)
 /* 417460 802A26D0 A024D10A */  sb        $a0, %lo(D_802AD10A)($at)
 /* 417464 802A26D4 90A60003 */  lbu       $a2, 3($a1)
@@ -43,8 +43,8 @@ glabel func_802A2684
 /* 4174A4 802A2714 A1060000 */   sb       $a2, ($t0)
 .L802A2718:
 /* 4174A8 802A2718 240200FF */  addiu     $v0, $zero, 0xff
-/* 4174AC 802A271C 3C01802B */  lui       $at, %hi(D_802AD116)
-/* 4174B0 802A2720 A422D116 */  sh        $v0, %lo(D_802AD116)($at)
+/* 4174AC 802A271C 3C01802B */  lui       $at, %hi(battle_menu_moveTextOpacity)
+/* 4174B0 802A2720 A422D116 */  sh        $v0, %lo(battle_menu_moveTextOpacity)($at)
 /* 4174B4 802A2724 24020001 */  addiu     $v0, $zero, 1
 /* 4174B8 802A2728 3C01802B */  lui       $at, %hi(D_802AD10F)
 /* 4174BC 802A272C A022D10F */  sb        $v0, %lo(D_802AD10F)($at)
@@ -79,15 +79,15 @@ glabel func_802A2684
 /* 417524 802A2794 00021080 */  sll       $v0, $v0, 2
 /* 417528 802A2798 00441021 */  addu      $v0, $v0, $a0
 /* 41752C 802A279C 00A31823 */  subu      $v1, $a1, $v1
-/* 417530 802A27A0 3C01802B */  lui       $at, %hi(D_802AD110)
-/* 417534 802A27A4 A422D110 */  sh        $v0, %lo(D_802AD110)($at)
+/* 417530 802A27A0 3C01802B */  lui       $at, %hi(battle_menu_moveScrollOffset)
+/* 417534 802A27A4 A422D110 */  sh        $v0, %lo(battle_menu_moveScrollOffset)($at)
 /* 417538 802A27A8 00031040 */  sll       $v0, $v1, 1
 /* 41753C 802A27AC 00431021 */  addu      $v0, $v0, $v1
 /* 417540 802A27B0 00021080 */  sll       $v0, $v0, 2
 /* 417544 802A27B4 00431021 */  addu      $v0, $v0, $v1
 /* 417548 802A27B8 3C01802B */  lui       $at, %hi(D_802AD112)
 /* 41754C 802A27BC A422D112 */  sh        $v0, %lo(D_802AD112)($at)
-/* 417550 802A27C0 3C01802B */  lui       $at, %hi(D_802AD600)
-/* 417554 802A27C4 AC20D600 */  sw        $zero, %lo(D_802AD600)($at)
+/* 417550 802A27C0 3C01802B */  lui       $at, %hi(battle_menu_moveOptionActive)
+/* 417554 802A27C4 AC20D600 */  sw        $zero, %lo(battle_menu_moveOptionActive)($at)
 /* 417558 802A27C8 03E00008 */  jr        $ra
 /* 41755C 802A27CC 00000000 */   nop

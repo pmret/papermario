@@ -16,7 +16,7 @@ glabel func_802420EC_8EDF0C
 /* 8EDF34 80242114 00000000 */  nop
 /* 8EDF38 80242118 46800020 */  cvt.s.w   $f0, $f0
 /* 8EDF3C 8024211C 44050000 */  mfc1      $a1, $f0
-/* 8EDF40 80242120 0C04DF62 */  jal       func_80137D88
+/* 8EDF40 80242120 0C04DF62 */  jal       set_transition_stencil_zoom_0
 /* 8EDF44 80242124 0000202D */   daddu    $a0, $zero, $zero
 /* 8EDF48 80242128 0809084E */  j         .L80242138
 /* 8EDF4C 8024212C 0000102D */   daddu    $v0, $zero, $zero

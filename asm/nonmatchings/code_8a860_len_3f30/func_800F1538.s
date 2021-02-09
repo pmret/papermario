@@ -100,7 +100,7 @@ glabel func_800F1538
 /* 8AB4C 800F169C 0C03A631 */  jal       func_800E98C4
 /* 8AB50 800F16A0 00000000 */   nop
 .L800F16A4:
-/* 8AB54 800F16A4 0C03A5EE */  jal       func_800E97B8
+/* 8AB54 800F16A4 0C03A5EE */  jal       close_status_menu
 /* 8AB58 800F16A8 00000000 */   nop
 .L800F16AC:
 /* 8AB5C 800F16AC 8FBF0018 */  lw        $ra, 0x18($sp)

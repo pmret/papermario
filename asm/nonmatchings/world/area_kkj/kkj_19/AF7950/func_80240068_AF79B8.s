@@ -17,10 +17,10 @@ glabel func_80240068_AF79B8
 /* AF79E4 80240094 3C108014 */  lui       $s0, %hi(D_80147574)
 /* AF79E8 80240098 26107574 */  addiu     $s0, $s0, %lo(D_80147574)
 .L8024009C:
-/* AF79EC 8024009C 0C051F9F */  jal       func_80147E7C
+/* AF79EC 8024009C 0C051F9F */  jal       set_window_update
 /* AF79F0 802400A0 0200282D */   daddu    $a1, $s0, $zero
 /* AF79F4 802400A4 2404000B */  addiu     $a0, $zero, 0xb
-/* AF79F8 802400A8 0C051F9F */  jal       func_80147E7C
+/* AF79F8 802400A8 0C051F9F */  jal       set_window_update
 /* AF79FC 802400AC 0200282D */   daddu    $a1, $s0, $zero
 /* AF7A00 802400B0 3C038024 */  lui       $v1, %hi(D_80240E8C_AF87DC)
 /* AF7A04 802400B4 24630E8C */  addiu     $v1, $v1, %lo(D_80240E8C_AF87DC)

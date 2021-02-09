@@ -1418,8 +1418,8 @@ typedef struct TileDescriptor {
 } TileDescriptor; // size = 0x30
 
 typedef struct BackgroundHeader {
-    /* 0x00 */ UNK_PTR raster;
-    /* 0x04 */ UNK_PTR palette;
+    /* 0x00 */ void* raster;
+    /* 0x04 */ void* palette;
     /* 0x08 */ u16 startX;
     /* 0x0A */ u16 startY;
     /* 0x0C */ u16 width;
@@ -1721,7 +1721,7 @@ typedef struct {
     /* 0x00018 */ Light l2[2];
     /* 0x00030 */ Matrix4s camPerspMatrix[8]; // could only be length 4, unsure
     /* 0x00230 */ s32 mainGfx[0x4100];
-    /* 0x10630 */ s32 smallGfx[0x400]; // used by func 800269EC
+    /* 0x10630 */ s32 smallGfx[0x400]; // used by gfx_task_background
     /* 0x11630 */ Matrix4s matrixStack[0x200];
 } DisplayContext; // size = 0x19630
 

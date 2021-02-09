@@ -81,7 +81,7 @@ glabel func_8024522C_805AAC
 /* 805BC8 80245348 AEC00328 */   sw       $zero, 0x328($s6)
 /* 805BCC 8024534C 0C03A631 */  jal       func_800E98C4
 /* 805BD0 80245350 00000000 */   nop
-/* 805BD4 80245354 0C03A5EE */  jal       func_800E97B8
+/* 805BD4 80245354 0C03A5EE */  jal       close_status_menu
 /* 805BD8 80245358 00000000 */   nop
 /* 805BDC 8024535C AEA00070 */  sw        $zero, 0x70($s5)
 .L80245360:

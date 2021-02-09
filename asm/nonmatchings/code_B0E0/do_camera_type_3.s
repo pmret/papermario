@@ -402,7 +402,7 @@ glabel do_camera_type_3
 /* CE64 80031A64 2625044C */  addiu     $a1, $s1, 0x44c
 /* CE68 80031A68 AFA20030 */  sw        $v0, 0x30($sp)
 /* CE6C 80031A6C AFB00034 */  sw        $s0, 0x34($sp)
-/* CE70 80031A70 0C00C13F */  jal       func_800304FC
+/* CE70 80031A70 0C00C13F */  jal       update_camera_from_zone
 /* CE74 80031A74 AFA3002C */   sw       $v1, 0x2c($sp)
 /* CE78 80031A78 86220008 */  lh        $v0, 8($s1)
 /* CE7C 80031A7C 10400013 */  beqz      $v0, .L80031ACC

@@ -165,7 +165,7 @@ glabel L80244B80_A2EDC0
 /* A2EE74 80244C34 AFA20010 */  sw        $v0, 0x10($sp)
 /* A2EE78 80244C38 AFA00014 */  sw        $zero, 0x14($sp)
 /* A2EE7C 80244C3C 8C640000 */  lw        $a0, ($v1)
-/* A2EE80 80244C40 0C04993B */  jal       draw_string
+/* A2EE80 80244C40 0C04993B */  jal       draw_msg
 /* A2EE84 80244C44 0220382D */   daddu    $a3, $s1, $zero
 .L80244C48:
 /* A2EE88 80244C48 8FBF0034 */  lw        $ra, 0x34($sp)

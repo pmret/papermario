@@ -33,7 +33,7 @@ glabel func_80281434
 /* 7E2324 802814A4 AFA00010 */  sw        $zero, 0x10($sp)
 /* 7E2328 802814A8 AFA00014 */  sw        $zero, 0x14($sp)
 /* 7E232C 802814AC 8E040000 */  lw        $a0, ($s0)
-/* 7E2330 802814B0 0C04993B */  jal       draw_string
+/* 7E2330 802814B0 0C04993B */  jal       draw_msg
 /* 7E2334 802814B4 240700FF */   addiu    $a3, $zero, 0xff
 /* 7E2338 802814B8 8FBF0024 */  lw        $ra, 0x24($sp)
 /* 7E233C 802814BC 8FB20020 */  lw        $s2, 0x20($sp)

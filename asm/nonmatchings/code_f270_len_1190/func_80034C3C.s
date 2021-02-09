@@ -165,7 +165,7 @@ glabel func_80034C3C
 /* 102A4 80034EA4 A462015C */   sh       $v0, 0x15c($v1)
 /* 102A8 80034EA8 0C00EC6C */  jal       func_8003B1B0
 /* 102AC 80034EAC 00000000 */   nop
-/* 102B0 80034EB0 0C051FB1 */  jal       func_80147EC4
+/* 102B0 80034EB0 0C051FB1 */  jal       set_windows_visible
 /* 102B4 80034EB4 0000202D */   daddu    $a0, $zero, $zero
 /* 102B8 80034EB8 0C03A631 */  jal       func_800E98C4
 /* 102BC 80034EBC 00000000 */   nop
@@ -184,13 +184,13 @@ glabel func_80034C3C
 /* 102F0 80034EF0 A082000F */  sb        $v0, 0xf($a0)
 /* 102F4 80034EF4 3C01802E */  lui       $at, %hi(D_802D9D71)
 /* 102F8 80034EF8 A0239D71 */  sb        $v1, %lo(D_802D9D71)($at)
-/* 102FC 80034EFC 0C00F949 */  jal       func_8003E524
+/* 102FC 80034EFC 0C00F949 */  jal       update_counters
 /* 10300 80034F00 00000000 */   nop
 /* 10304 80034F04 0C00E64C */  jal       update_npcs
 /* 10308 80034F08 00000000 */   nop
 /* 1030C 80034F0C 0C037DD0 */  jal       update_player
 /* 10310 80034F10 00000000 */   nop
-/* 10314 80034F14 0C016754 */  jal       func_80059D50
+/* 10314 80034F14 0C016754 */  jal       update_effects
 /* 10318 80034F18 00000000 */   nop
 /* 1031C 80034F1C 3C03800A */  lui       $v1, %hi(D_800A0922)
 /* 10320 80034F20 24630922 */  addiu     $v1, $v1, %lo(D_800A0922)
@@ -203,13 +203,13 @@ glabel func_80034C3C
 /* 1033C 80034F3C 0800D3F6 */  j         .L80034FD8
 /* 10340 80034F40 00000000 */   nop
 .L80034F44:
-/* 10344 80034F44 0C00F949 */  jal       func_8003E524
+/* 10344 80034F44 0C00F949 */  jal       update_counters
 /* 10348 80034F48 00000000 */   nop
 /* 1034C 80034F4C 0C00E64C */  jal       update_npcs
 /* 10350 80034F50 00000000 */   nop
 /* 10354 80034F54 0C037DD0 */  jal       update_player
 /* 10358 80034F58 00000000 */   nop
-/* 1035C 80034F5C 0C016754 */  jal       func_80059D50
+/* 1035C 80034F5C 0C016754 */  jal       update_effects
 /* 10360 80034F60 00000000 */   nop
 /* 10364 80034F64 3C04800A */  lui       $a0, %hi(D_800A0922)
 /* 10368 80034F68 24840922 */  addiu     $a0, $a0, %lo(D_800A0922)
@@ -230,13 +230,13 @@ glabel func_80034C3C
 .L80034FA0:
 /* 103A0 80034FA0 0C009C22 */  jal       func_80027088
 /* 103A4 80034FA4 0000202D */   daddu    $a0, $zero, $zero
-/* 103A8 80034FA8 0C00F949 */  jal       func_8003E524
+/* 103A8 80034FA8 0C00F949 */  jal       update_counters
 /* 103AC 80034FAC 00000000 */   nop
 /* 103B0 80034FB0 0C00E64C */  jal       update_npcs
 /* 103B4 80034FB4 00000000 */   nop
 /* 103B8 80034FB8 0C037DD0 */  jal       update_player
 /* 103BC 80034FBC 00000000 */   nop
-/* 103C0 80034FC0 0C016754 */  jal       func_80059D50
+/* 103C0 80034FC0 0C016754 */  jal       update_effects
 /* 103C4 80034FC4 00000000 */   nop
 /* 103C8 80034FC8 0C038069 */  jal       enable_player_input
 /* 103CC 80034FCC 00000000 */   nop

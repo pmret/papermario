@@ -44,7 +44,7 @@ glabel update_fall_state
 /* 7C264 800E2DB4 E600002C */   swc1     $f0, 0x2c($s0)
 /* 7C268 800E2DB8 0C0389AC */  jal       func_800E26B0
 /* 7C26C 800E2DBC 00000000 */   nop
-/* 7C270 800E2DC0 0C011052 */  jal       func_80044148
+/* 7C270 800E2DC0 0C011052 */  jal       is_starting_conversation
 /* 7C274 800E2DC4 00000000 */   nop
 /* 7C278 800E2DC8 1040001F */  beqz      $v0, .L800E2E48
 /* 7C27C 800E2DCC 00000000 */   nop

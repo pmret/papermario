@@ -17,8 +17,8 @@ glabel func_802A4534
 /* 4192F4 802A4564 361000C3 */   ori      $s0, $s0, 0xc3
 .L802A4568:
 /* 4192F8 802A4568 3C10001D */  lui       $s0, 0x1d
-/* 4192FC 802A456C 3C02802B */  lui       $v0, %hi(D_802AD4A0)
-/* 419300 802A4570 8C42D4A0 */  lw        $v0, %lo(D_802AD4A0)($v0)
+/* 4192FC 802A456C 3C02802B */  lui       $v0, %hi(battle_menu_hasSpiritsMenu)
+/* 419300 802A4570 8C42D4A0 */  lw        $v0, %lo(battle_menu_hasSpiritsMenu)($v0)
 /* 419304 802A4574 14400003 */  bnez      $v0, .L802A4584
 /* 419308 802A4578 361000A0 */   ori      $s0, $s0, 0xa0
 /* 41930C 802A457C 3C10001D */  lui       $s0, 0x1d
@@ -37,7 +37,7 @@ glabel func_802A4534
 /* 41933C 802A45AC 240700FF */  addiu     $a3, $zero, 0xff
 /* 419340 802A45B0 AFA20010 */  sw        $v0, 0x10($sp)
 /* 419344 802A45B4 AFA00014 */  sw        $zero, 0x14($sp)
-/* 419348 802A45B8 0C04993B */  jal       draw_string
+/* 419348 802A45B8 0C04993B */  jal       draw_msg
 /* 41934C 802A45BC 02263021 */   addu     $a2, $s1, $a2
 /* 419350 802A45C0 8FBF0024 */  lw        $ra, 0x24($sp)
 /* 419354 802A45C4 8FB20020 */  lw        $s2, 0x20($sp)

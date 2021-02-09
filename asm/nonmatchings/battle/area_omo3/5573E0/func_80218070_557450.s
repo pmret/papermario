@@ -25,7 +25,7 @@ glabel func_80218070_557450
 /* 5574A0 802180C0 0040902D */  daddu     $s2, $v0, $zero
 /* 5574A4 802180C4 16400005 */  bnez      $s2, .L802180DC
 /* 5574A8 802180C8 24040001 */   addiu    $a0, $zero, 1
-/* 5574AC 802180CC 0C04E035 */  jal       func_801380D4
+/* 5574AC 802180CC 0C04E035 */  jal       set_transition_stencil_alpha
 /* 5574B0 802180D0 0000282D */   daddu    $a1, $zero, $zero
 /* 5574B4 802180D4 08086116 */  j         .L80218458
 /* 5574B8 802180D8 0000102D */   daddu    $v0, $zero, $zero
@@ -207,7 +207,7 @@ glabel L8021831C_5576FC
 /* 557730 80218350 00000000 */  nop
 /* 557734 80218354 468031A0 */  cvt.s.w   $f6, $f6
 /* 557738 80218358 44053000 */  mfc1      $a1, $f6
-/* 55773C 8021835C 0C04E035 */  jal       func_801380D4
+/* 55773C 8021835C 0C04E035 */  jal       set_transition_stencil_alpha
 /* 557740 80218360 24040001 */   addiu    $a0, $zero, 1
 /* 557744 80218364 C7A40018 */  lwc1      $f4, 0x18($sp)
 /* 557748 80218368 46802120 */  cvt.s.w   $f4, $f4
@@ -227,7 +227,7 @@ glabel L8021831C_5576FC
 /* 557780 802183A0 44063000 */  mfc1      $a2, $f6
 /* 557784 802183A4 4600018D */  trunc.w.s $f6, $f0
 /* 557788 802183A8 44073000 */  mfc1      $a3, $f6
-/* 55778C 802183AC 0C04DFB0 */  jal       func_80137EC0
+/* 55778C 802183AC 0C04DFB0 */  jal       set_transition_stencil_center_worldpos
 /* 557790 802183B0 0000282D */   daddu    $a1, $zero, $zero
 /* 557794 802183B4 C7A40018 */  lwc1      $f4, 0x18($sp)
 /* 557798 802183B8 46802120 */  cvt.s.w   $f4, $f4

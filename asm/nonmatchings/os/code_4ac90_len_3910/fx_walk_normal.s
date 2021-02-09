@@ -11,7 +11,7 @@ glabel fx_walk_normal
 /* 4AF48 8006FB48 E7AE0024 */  swc1      $f14, 0x24($sp)
 /* 4AF4C 8006FB4C E7B00028 */  swc1      $f16, 0x28($sp)
 /* 4AF50 8006FB50 AFBF002C */  sw        $ra, 0x2c($sp)
-/* 4AF54 8006FB54 0C016959 */  jal       play_effect
+/* 4AF54 8006FB54 0C016959 */  jal       load_effect
 /* 4AF58 8006FB58 24040007 */   addiu    $a0, $zero, 7
 /* 4AF5C 8006FB5C 8FA40010 */  lw        $a0, 0x10($sp)
 /* 4AF60 8006FB60 8FA50014 */  lw        $a1, 0x14($sp)

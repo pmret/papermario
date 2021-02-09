@@ -90,7 +90,7 @@ glabel MakeDoorAdvanced
 /* 7E2C60 80281DE0 0280202D */  daddu     $a0, $s4, $zero
 /* 7E2C64 80281DE4 27A50024 */  addiu     $a1, $sp, 0x24
 /* 7E2C68 80281DE8 0200302D */  daddu     $a2, $s0, $zero
-/* 7E2C6C 80281DEC 0C016F76 */  jal       func_8005BDD8
+/* 7E2C6C 80281DEC 0C016F76 */  jal       get_flat_collider_normal
 /* 7E2C70 80281DF0 27A70028 */   addiu    $a3, $sp, 0x28
 /* 7E2C74 80281DF4 326300FF */  andi      $v1, $s3, 0xff
 /* 7E2C78 80281DF8 2C620008 */  sltiu     $v0, $v1, 8

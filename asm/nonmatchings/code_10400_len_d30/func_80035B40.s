@@ -63,7 +63,7 @@ glabel L80035BDC_10FDC
 glabel L80035C10_11010
 /* 11010 80035C10 0C0912C0 */  jal       func_80244B00
 /* 11014 80035C14 00000000 */   nop
-/* 11018 80035C18 0C051FB1 */  jal       func_80147EC4
+/* 11018 80035C18 0C051FB1 */  jal       set_windows_visible
 /* 1101C 80035C1C 0000202D */   daddu    $a0, $zero, $zero
 /* 11020 80035C20 24020003 */  addiu     $v0, $zero, 3
 /* 11024 80035C24 3C01800A */  lui       $at, %hi(D_800A0931)

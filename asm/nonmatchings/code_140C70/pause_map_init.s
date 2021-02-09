@@ -35,7 +35,7 @@ glabel pause_map_init
 /* 1419B4 8024E674 2442FFDC */   addiu    $v0, $v0, -0x24
 /* 1419B8 8024E678 3C048025 */  lui       $a0, %hi(D_80250590)
 /* 1419BC 8024E67C 24840590 */  addiu     $a0, $a0, %lo(D_80250590)
-/* 1419C0 8024E680 0C051FCC */  jal       func_80147F30
+/* 1419C0 8024E680 0C051FCC */  jal       setup_pause_menu_tab
 /* 1419C4 8024E684 24050007 */   addiu    $a1, $zero, 7
 /* 1419C8 8024E688 0000202D */  daddu     $a0, $zero, $zero
 /* 1419CC 8024E68C 3C05F5DE */  lui       $a1, 0xf5de

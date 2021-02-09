@@ -31,15 +31,15 @@ void make_mtx_flipZ(Matrix4f* arg0) {
 
 INCLUDE_ASM(s32, "code_b72b0_len_15ed0", appendGfx_entity_model);
 
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80121CE8);
+INCLUDE_ASM(s32, "code_b72b0_len_15ed0", draw_entity_model_shadow);
 
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80121EB8);
+INCLUDE_ASM(s32, "code_b72b0_len_15ed0", draw_entity_model_main);
 
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80122088);
+INCLUDE_ASM(s32, "code_b72b0_len_15ed0", draw_entity_model_extra1);
 
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80122188);
+INCLUDE_ASM(s32, "code_b72b0_len_15ed0", draw_entity_model_extra2);
 
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80122288);
+INCLUDE_ASM(s32, "code_b72b0_len_15ed0", draw_entity_model_extra3);
 
 INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80122D7C);
 

@@ -51,13 +51,13 @@ glabel func_802A47E0
 /* 419620 802A4890 0C0511FF */  jal       set_menu_icon_script
 /* 419624 802A4894 00000000 */   nop
 /* 419628 802A4898 24040006 */  addiu     $a0, $zero, 6
-/* 41962C 802A489C 0C051F9F */  jal       func_80147E7C
+/* 41962C 802A489C 0C051F9F */  jal       set_window_update
 /* 419630 802A48A0 24050005 */   addiu    $a1, $zero, 5
 /* 419634 802A48A4 24040007 */  addiu     $a0, $zero, 7
-/* 419638 802A48A8 0C051F9F */  jal       func_80147E7C
+/* 419638 802A48A8 0C051F9F */  jal       set_window_update
 /* 41963C 802A48AC 24050005 */   addiu    $a1, $zero, 5
 /* 419640 802A48B0 24040008 */  addiu     $a0, $zero, 8
-/* 419644 802A48B4 0C051F9F */  jal       func_80147E7C
+/* 419644 802A48B4 0C051F9F */  jal       set_window_update
 /* 419648 802A48B8 24050001 */   addiu    $a1, $zero, 1
 /* 41964C 802A48BC 2402000A */  addiu     $v0, $zero, 0xa
 /* 419650 802A48C0 8FBF0018 */  lw        $ra, 0x18($sp)

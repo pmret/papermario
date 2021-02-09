@@ -32,16 +32,16 @@ glabel func_80240314_DDF624
 /* DDF690 80240380 AFB00010 */  sw        $s0, 0x10($sp)
 /* DDF694 80240384 0040802D */  daddu     $s0, $v0, $zero
 /* DDF698 80240388 0260302D */  daddu     $a2, $s3, $zero
-/* DDF69C 8024038C 0C04DFB0 */  jal       func_80137EC0
+/* DDF69C 8024038C 0C04DFB0 */  jal       set_transition_stencil_center_worldpos
 /* DDF6A0 80240390 0240382D */   daddu    $a3, $s2, $zero
 /* DDF6A4 80240394 44900000 */  mtc1      $s0, $f0
 /* DDF6A8 80240398 00000000 */  nop
 /* DDF6AC 8024039C 46800020 */  cvt.s.w   $f0, $f0
 /* DDF6B0 802403A0 44050000 */  mfc1      $a1, $f0
-/* DDF6B4 802403A4 0C04E035 */  jal       func_801380D4
+/* DDF6B4 802403A4 0C04E035 */  jal       set_transition_stencil_alpha
 /* DDF6B8 802403A8 24040001 */   addiu    $a0, $zero, 1
 /* DDF6BC 802403AC 3C05437F */  lui       $a1, 0x437f
-/* DDF6C0 802403B0 0C04DF69 */  jal       func_80137DA4
+/* DDF6C0 802403B0 0C04DF69 */  jal       set_transition_stencil_zoom_1
 /* DDF6C4 802403B4 2404000B */   addiu    $a0, $zero, 0xb
 /* DDF6C8 802403B8 8FBF0028 */  lw        $ra, 0x28($sp)
 /* DDF6CC 802403BC 8FB30024 */  lw        $s3, 0x24($sp)

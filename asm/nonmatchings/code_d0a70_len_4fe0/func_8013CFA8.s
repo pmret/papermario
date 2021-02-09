@@ -370,7 +370,7 @@ glabel func_8013CFA8
 /* D3C28 8013D528 01A0382D */  daddu     $a3, $t5, $zero
 /* D3C2C 8013D52C AFB80020 */  sw        $t8, 0x20($sp)
 /* D3C30 8013D530 AFB90024 */  sw        $t9, 0x24($sp)
-/* D3C34 8013D534 0C052071 */  jal       func_801481C4
+/* D3C34 8013D534 0C052071 */  jal       render_shaded_sprite
 /* D3C38 8013D538 AFA20018 */   sw       $v0, 0x18($sp)
 /* D3C3C 8013D53C 8FB80020 */  lw        $t8, 0x20($sp)
 /* D3C40 8013D540 0804F64E */  j         .L8013D938

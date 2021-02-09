@@ -11,7 +11,7 @@ glabel func_80240310_A5A340
 /* A5A358 80240328 00000000 */  nop
 /* A5A35C 8024032C 46800020 */  cvt.s.w   $f0, $f0
 /* A5A360 80240330 44050000 */  mfc1      $a1, $f0
-/* A5A364 80240334 0C04DF62 */  jal       func_80137D88
+/* A5A364 80240334 0C04DF62 */  jal       set_transition_stencil_zoom_0
 /* A5A368 80240338 0000202D */   daddu    $a0, $zero, $zero
 /* A5A36C 8024033C 8FBF0010 */  lw        $ra, 0x10($sp)
 /* A5A370 80240340 24020002 */  addiu     $v0, $zero, 2

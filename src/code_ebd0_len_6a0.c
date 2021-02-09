@@ -43,8 +43,8 @@ s16 intro_logos_fade_out(s16 addAlpha) {
 }
 
 void intro_logos_update_fade(void) {
-    func_80137D88(0, GAME_STATUS->bootAlpha);
-    func_80137E10(0, GAME_STATUS->bootBlue, GAME_STATUS->bootGreen, GAME_STATUS->bootRed);
+    set_transition_stencil_zoom_0(0, GAME_STATUS->bootAlpha);
+    set_transition_stencil_color(0, GAME_STATUS->bootBlue, GAME_STATUS->bootGreen, GAME_STATUS->bootRed);
 }
 
 void begin_state_battle(void) {
@@ -54,7 +54,7 @@ void begin_state_battle(void) {
 INCLUDE_ASM(s32, "code_ebd0_len_6a0", step_battle);
 
 void func_80033B54(void) {
-    func_8003E5B0();
+    draw_encounter_ui();
     if (D_800A0900 < 0) {
         draw_main_battle_ui();
     }

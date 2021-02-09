@@ -83,7 +83,7 @@ glabel step_battle
 /* EE0C 80033A0C 00000000 */   nop
 /* EE10 80033A10 0C052010 */  jal       func_80148040
 /* EE14 80033A14 00000000 */   nop
-/* EE18 80033A18 0C05177E */  jal       func_80145DF8
+/* EE18 80033A18 0C05177E */  jal       use_default_background_settings
 /* EE1C 80033A1C 00000000 */   nop
 /* EE20 80033A20 0C0482EC */  jal       clear_entity_models
 /* EE24 80033A24 00000000 */   nop
@@ -120,7 +120,7 @@ glabel step_battle
 /* EEA0 80033AA0 00000000 */   nop
 /* EEA4 80033AA4 0C09027D */  jal       func_802409F4
 /* EEA8 80033AA8 00000000 */   nop
-/* EEAC 80033AAC 0C01CAF7 */  jal       func_80072BDC
+/* EEAC 80033AAC 0C01CAF7 */  jal       load_battle_section
 /* EEB0 80033AB0 00000000 */   nop
 /* EEB4 80033AB4 3C04800F */  lui       $a0, %hi(gPlayerStatusPtr)
 /* EEB8 80033AB8 8C847B30 */  lw        $a0, %lo(gPlayerStatusPtr)($a0)
@@ -145,7 +145,7 @@ glabel step_battle
 /* EF04 80033B04 0481000F */  bgez      $a0, .L80033B44
 /* EF08 80033B08 ACA20000 */   sw       $v0, ($a1)
 .L80033B0C:
-/* EF0C 80033B0C 0C00F949 */  jal       func_8003E524
+/* EF0C 80033B0C 0C00F949 */  jal       update_counters
 /* EF10 80033B10 00000000 */   nop
 /* EF14 80033B14 0C08F90E */  jal       update_battle_state
 /* EF18 80033B18 00000000 */   nop
@@ -153,7 +153,7 @@ glabel step_battle
 /* EF20 80033B20 00000000 */   nop
 /* EF24 80033B24 0C04C7BB */  jal       update_item_entities
 /* EF28 80033B28 00000000 */   nop
-/* EF2C 80033B2C 0C016754 */  jal       func_80059D50
+/* EF2C 80033B2C 0C016754 */  jal       update_effects
 /* EF30 80033B30 00000000 */   nop
 /* EF34 80033B34 0C04599D */  jal       func_80116674
 /* EF38 80033B38 00000000 */   nop

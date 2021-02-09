@@ -43,7 +43,7 @@ glabel can_pause
 /* 7FF20 800E6A70 00431024 */  and       $v0, $v0, $v1
 /* 7FF24 800E6A74 14400036 */  bnez      $v0, .L800E6B50
 /* 7FF28 800E6A78 0000102D */   daddu    $v0, $zero, $zero
-/* 7FF2C 800E6A7C 0C04D07A */  jal       func_801341E8
+/* 7FF2C 800E6A7C 0C04D07A */  jal       is_picking_up_item
 /* 7FF30 800E6A80 00000000 */   nop
 /* 7FF34 800E6A84 14400032 */  bnez      $v0, .L800E6B50
 /* 7FF38 800E6A88 0000102D */   daddu    $v0, $zero, $zero

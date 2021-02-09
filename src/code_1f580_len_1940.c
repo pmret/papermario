@@ -16,10 +16,10 @@ ApiStatus SetEncounterStatusFlags(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_800441F0(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus IsStartingConversation(ScriptInstance* script, s32 isInitialCall) {
     Bytecode arg1 = *script->ptrReadPos;
 
-    set_variable(script, arg1, func_80044148());
+    set_variable(script, arg1, is_starting_conversation());
     return ApiStatus_DONE2;
 }
 
@@ -411,7 +411,7 @@ ApiStatus SetSelfEnemyFlagBits(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80045580(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SyncOverrideEnemyPos(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Enemy* owner = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(script->owner2.npcID);
@@ -493,7 +493,7 @@ ApiStatus func_800457F8(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8004580C(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus GetEncounterTriggerHitTier(ScriptInstance* script, s32 isInitialCall) {
     set_variable(script, *script->ptrReadPos, gCurrentEncounter.hitTier);
     return ApiStatus_DONE2;
 }

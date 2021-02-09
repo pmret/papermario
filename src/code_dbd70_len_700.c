@@ -1,6 +1,6 @@
 #include "common.h"
 
-void default_trigger_function_handler(s32* arg0) {
+void default_trigger_delegate(s32* arg0) {
     arg0[0] |= 2;
 }
 
@@ -42,10 +42,11 @@ Trigger* get_trigger_by_id(s32 triggerID) {
     return (*gCurrentTriggerListPtr)[triggerID];
 }
 
-s32 func_80145CE8(s32 arg0) {
+/// @returns TRUE if colliderID is bound to an interaction trigger (press A) and the player can use it.
+s32 should_collider_allow_interact(s32 colliderID) {
     s32 i;
 
-    if (func_800E52F8() == 0) {
+    if (can_player_interact() == 0) {
         return 0;
     }
 
@@ -54,7 +55,7 @@ s32 func_80145CE8(s32 arg0) {
 
         if ((trigger != NULL) &&
             (trigger->unk_30 != 0) &&
-            (trigger->params2 == arg0) &&
+            (trigger->params2 == colliderID) &&
             (trigger->flags.flags & 0x100)) {
             return 1;
         }

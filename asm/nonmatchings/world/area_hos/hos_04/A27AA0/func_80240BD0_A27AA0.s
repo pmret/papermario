@@ -165,7 +165,7 @@ glabel L80240D60_A27C30
 /* A27CE4 80240E14 AFA20010 */  sw        $v0, 0x10($sp)
 /* A27CE8 80240E18 AFA00014 */  sw        $zero, 0x14($sp)
 /* A27CEC 80240E1C 8C640000 */  lw        $a0, ($v1)
-/* A27CF0 80240E20 0C04993B */  jal       draw_string
+/* A27CF0 80240E20 0C04993B */  jal       draw_msg
 /* A27CF4 80240E24 0220382D */   daddu    $a3, $s1, $zero
 .L80240E28:
 /* A27CF8 80240E28 8FBF0034 */  lw        $ra, 0x34($sp)

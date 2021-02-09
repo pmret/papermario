@@ -18,7 +18,7 @@ glabel func_80242274_E17FF4
 /* E18028 802422A8 24030384 */  addiu     $v1, $zero, 0x384
 /* E1802C 802422AC 0C03A625 */  jal       func_800E9894
 /* E18030 802422B0 AC430008 */   sw       $v1, 8($v0)
-/* E18034 802422B4 0C03A5EE */  jal       func_800E97B8
+/* E18034 802422B4 0C03A5EE */  jal       close_status_menu
 /* E18038 802422B8 00000000 */   nop
 /* E1803C 802422BC 8FBF0014 */  lw        $ra, 0x14($sp)
 /* E18040 802422C0 8FB00010 */  lw        $s0, 0x10($sp)

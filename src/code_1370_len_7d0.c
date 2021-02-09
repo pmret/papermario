@@ -3,7 +3,7 @@
 
 void gfxRetrace_Callback(s32);
 void gfxPreNMI_Callback(void);
-void func_80026164(void);
+void gfx_task_main(void);
 
 extern s32* D_80073E00;
 extern s32 D_80073E04;
@@ -69,7 +69,7 @@ void gfxRetrace_Callback(s32 arg0) {
             }
         }
         if (D_80073E00 == 2) {
-            func_80026164();
+            gfx_task_main();
         }
     } else {
         s16* temp_80073E0A = &D_80073E0A;
@@ -84,14 +84,14 @@ void gfxRetrace_Callback(s32 arg0) {
 
             if (arg0 < 3) {
                 *temp_80073E08 = 0;
-                func_800269EC();
+                gfx_task_background();
                 gfx_draw_frame();
             }
         }
     }
 }
 
-INCLUDE_ASM(void, "code_1370_len_7d0", func_80026164);
+INCLUDE_ASM(void, "code_1370_len_7d0", gfx_task_main);
 
 void gfxPreNMI_Callback(void) {
     D_80073E00 = 1;

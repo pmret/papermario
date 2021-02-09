@@ -132,7 +132,7 @@ glabel L801367A4_CCEA4
 /* CD000 80136900 240700FF */  addiu     $a3, $zero, 0xff
 /* CD004 80136904 2402002F */  addiu     $v0, $zero, 0x2f
 /* CD008 80136908 AFA20010 */  sw        $v0, 0x10($sp)
-/* CD00C 8013690C 0C04993B */  jal       draw_string
+/* CD00C 8013690C 0C04993B */  jal       draw_msg
 /* CD010 80136910 AFA00014 */   sw       $zero, 0x14($sp)
 /* CD014 80136914 0804DA6D */  j         .L801369B4
 /* CD018 80136918 00000000 */   nop
@@ -141,7 +141,7 @@ glabel L801367A4_CCEA4
 /* CD020 80136920 240700FF */  addiu     $a3, $zero, 0xff
 /* CD024 80136924 2402002F */  addiu     $v0, $zero, 0x2f
 /* CD028 80136928 AFA20010 */  sw        $v0, 0x10($sp)
-/* CD02C 8013692C 0C04993B */  jal       draw_string
+/* CD02C 8013692C 0C04993B */  jal       draw_msg
 /* CD030 80136930 AFA00014 */   sw       $zero, 0x14($sp)
 /* CD034 80136934 96220006 */  lhu       $v0, 6($s1)
 /* CD038 80136938 30420030 */  andi      $v0, $v0, 0x30
@@ -165,7 +165,7 @@ glabel L8013694C_CD04C
 /* CD07C 8013697C 240700FF */  addiu     $a3, $zero, 0xff
 /* CD080 80136980 2402002F */  addiu     $v0, $zero, 0x2f
 /* CD084 80136984 AFA20010 */  sw        $v0, 0x10($sp)
-/* CD088 80136988 0C04993B */  jal       draw_string
+/* CD088 80136988 0C04993B */  jal       draw_msg
 /* CD08C 8013698C AFA00014 */   sw       $zero, 0x14($sp)
 /* CD090 80136990 26450014 */  addiu     $a1, $s2, 0x14
 .L80136994:

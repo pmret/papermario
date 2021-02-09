@@ -13,7 +13,7 @@ glabel func_802BB000_E2D930
 /* E2D950 802BB020 30420001 */  andi      $v0, $v0, 1
 /* E2D954 802BB024 10400019 */  beqz      $v0, .L802BB08C
 /* E2D958 802BB028 00000000 */   nop
-/* E2D95C 802BB02C 0C04D07A */  jal       func_801341E8
+/* E2D95C 802BB02C 0C04D07A */  jal       is_picking_up_item
 /* E2D960 802BB030 00000000 */   nop
 /* E2D964 802BB034 14400015 */  bnez      $v0, .L802BB08C
 /* E2D968 802BB038 24020021 */   addiu    $v0, $zero, 0x21

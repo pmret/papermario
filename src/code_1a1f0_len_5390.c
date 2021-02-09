@@ -31,18 +31,18 @@ void set_defeated(s32 mapID, s32 encounterID) {
     currentEncounter->defeatFlags[mapID][encounterIdx] |= (1 << encounterShift);*/
 }
 
-ApiStatus func_8003EE98(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus ShowMerleeCoinMessage(ScriptInstance* script, s32 isInitialCall) {
     if (isInitialCall) {
         func_80045D00(0, 60);
     }
-    return (func_80045FA4() == 0) * ApiStatus_DONE2;
+    return (is_merlee_message_done() == 0) * ApiStatus_DONE2;
 }
 
-ApiStatus func_8003EECC(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus ShowMerleeRanOutMessage(ScriptInstance* script, s32 isInitialCall) {
     if (isInitialCall) {
         func_80045D00(1, 60);
     }
-    return (func_80045FA4() == 0) * ApiStatus_DONE2;
+    return (is_merlee_message_done() == 0) * ApiStatus_DONE2;
 }
 
 ApiStatus FadeBackgroundToBlack(ScriptInstance* script, s32 isInitialCall) {
@@ -75,7 +75,7 @@ ApiStatus UnfadeBackgroundFromBlack(ScriptInstance* script, s32 isInitialCall) {
     }
 }
 
-ApiStatus func_8003F018(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus FadeInMerlee(ScriptInstance* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(-0xA);
 
     if (isInitialCall) {
@@ -92,7 +92,7 @@ ApiStatus func_8003F018(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus func_8003F084(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus FadeOutMerlee(ScriptInstance* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(-0xA);
 
     npc->unk_AC -= 17;
@@ -104,9 +104,9 @@ ApiStatus func_8003F084(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-INCLUDE_ASM(s32, "code_1a1f0_len_5390", func_8003F0C4);
+INCLUDE_ASM(s32, "code_1a1f0_len_5390", MerleeUpdateFX);
 
-ApiStatus func_8003F384(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus MerleeStopFX(ScriptInstance* script, s32 isInitialCall) {
     D_800A0BB8 = 1;
     return ApiStatus_DONE2;
 }
@@ -128,7 +128,7 @@ ApiStatus HasMerleeCasts(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8003F414(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus PlayMerleeGatherFX(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var0 = get_variable(script, *args++);
     s32 var1 = get_variable(script, *args++);
@@ -138,7 +138,7 @@ ApiStatus func_8003F414(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8003F4CC(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus PlayMerleeOrbFX(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var0 = get_variable(script, *args++);
     s32 var1 = get_variable(script, *args++);
@@ -212,32 +212,33 @@ ApiStatus OnFleeBattleDrops(ScriptInstance* script, s32 isInitialCall) {
     return --script->functionTemp[1].s == 0;
 }
 
-INCLUDE_ASM(s32, "code_1a1f0_len_5390", func_8003F7CC);
+/// Default/neutral state during world gameplay; checks for player-enemy collisions and initiates battles when they occur.
+INCLUDE_ASM(s32, "code_1a1f0_len_5390", update_encounters_neutral);
 
-void func_8004135C() {
+void draw_encounters_neutral() {
 }
 
-INCLUDE_ASM(s32, "code_1a1f0_len_5390", func_80041364);
+INCLUDE_ASM(s32, "code_1a1f0_len_5390", update_encounters_pre_battle);
 
-INCLUDE_ASM(s32, "code_1a1f0_len_5390", func_80041964);
+INCLUDE_ASM(s32, "code_1a1f0_len_5390", draw_encounters_pre_battle);
 
 INCLUDE_ASM(s32, "code_1a1f0_len_5390", show_first_strike_message);
 
-INCLUDE_ASM(s32, "code_1a1f0_len_5390", func_80041F10);
+INCLUDE_ASM(s32, "code_1a1f0_len_5390", update_encounters_post_battle);
 
-s32 func_8004304C(void) {
+s32 draw_encounters_post_battle(void) {
     EncounterStatus* currentEncounter = &gCurrentEncounter;
     s32 ret = currentEncounter->unk_98;
 
     if (ret != 0) {
-        func_80137D88(0, currentEncounter->unk_90);
-        ret = func_80137E10(0, 0, 0, 0);
+        set_transition_stencil_zoom_0(0, currentEncounter->unk_90);
+        ret = set_transition_stencil_color(0, 0, 0, 0);
     }
 
     return ret;
 }
 
-void func_8004309C(void) {
+void update_encounters_conversation(void) {
     EncounterStatus* encounter = &gCurrentEncounter;
     PlayerStatus* playerStatus = PLAYER_STATUS;
     Enemy* currentEnemy;
@@ -293,17 +294,17 @@ void func_8004309C(void) {
     }
 }
 
-void func_800431D4() {
+void draw_encounters_conversation() {
 }
 
-INCLUDE_ASM(s32, "code_1a1f0_len_5390", func_800431DC);
+INCLUDE_ASM(s32, "code_1a1f0_len_5390", check_conversation_trigger);
 
-INCLUDE_ASM(s32, "code_1a1f0_len_5390", create_npcs);
+INCLUDE_ASM(s32, "code_1a1f0_len_5390", create_encounters);
 
-void func_80044140() {
+void init_encounters_ui() {
 }
 
-s32 func_80044148(void) {
+s32 is_starting_conversation(void) {
     s32 ret = gGameState == 3;
 
     if (gCurrentEncounter.hitType == 5) {

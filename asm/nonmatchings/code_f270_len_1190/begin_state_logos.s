@@ -122,11 +122,11 @@ glabel begin_state_logos
 /* F444 80034044 00000000 */   nop
 /* F448 80034048 0C050440 */  jal       func_80141100
 /* F44C 8003404C 00000000 */   nop
-/* F450 80034050 0C05177E */  jal       func_80145DF8
+/* F450 80034050 0C05177E */  jal       use_default_background_settings
 /* F454 80034054 00000000 */   nop
 /* F458 80034058 0C04432E */  jal       clear_entity_data
 /* F45C 8003405C 24040001 */   addiu    $a0, $zero, 1
-/* F460 80034060 0C016727 */  jal       func_80059C9C
+/* F460 80034060 0C016727 */  jal       clear_effect_data
 /* F464 80034064 00000000 */   nop
 /* F468 80034068 3C03800A */  lui       $v1, %hi(D_8009A650)
 /* F46C 8003406C 2463A650 */  addiu     $v1, $v1, %lo(D_8009A650)

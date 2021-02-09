@@ -10,6 +10,7 @@ venv/
 ctx.c
 expected/
 .vscode/launch.json
+/tools/star-rod
 
 # Build artifacts
 build.ninja
@@ -27,7 +28,7 @@ build.ninja
 /tools/permuter_settings.toml
 
 # Assets
-/assets
+/*assets
 *.bin
 *.o
 
@@ -36,6 +37,8 @@ build.ninja
 /mod.cfg
 /tools/star-rod
 /editor
+/logs
+/out
 
 /tools/Yay0compress
 /tools/n64crc

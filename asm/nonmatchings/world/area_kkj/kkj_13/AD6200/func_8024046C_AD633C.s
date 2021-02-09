@@ -19,12 +19,12 @@ glabel func_8024046C_AD633C
 /* AD636C 8024049C 0000202D */  daddu     $a0, $zero, $zero
 /* AD6370 802404A0 240500A0 */  addiu     $a1, $zero, 0xa0
 /* AD6374 802404A4 00A0302D */  daddu     $a2, $a1, $zero
-/* AD6378 802404A8 0C04DF84 */  jal       func_80137E10
+/* AD6378 802404A8 0C04DF84 */  jal       set_transition_stencil_color
 /* AD637C 802404AC 00A0382D */   daddu    $a3, $a1, $zero
 /* AD6380 802404B0 C6000074 */  lwc1      $f0, 0x74($s0)
 /* AD6384 802404B4 46800020 */  cvt.s.w   $f0, $f0
 /* AD6388 802404B8 44050000 */  mfc1      $a1, $f0
-/* AD638C 802404BC 0C04DF62 */  jal       func_80137D88
+/* AD638C 802404BC 0C04DF62 */  jal       set_transition_stencil_zoom_0
 /* AD6390 802404C0 24040001 */   addiu    $a0, $zero, 1
 /* AD6394 802404C4 8E020074 */  lw        $v0, 0x74($s0)
 /* AD6398 802404C8 8FBF0014 */  lw        $ra, 0x14($sp)

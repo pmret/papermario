@@ -39,24 +39,24 @@ void step_init_state(void) {
     func_8011E224();
     clear_model_data();
     func_80148040();
-    func_80145DF8();
+    use_default_background_settings();
     func_801452E8(0, 0);
     func_80141100();
     clear_trigger_data();
     clear_printers();
     clear_entity_data(0);
-    func_80138108();
+    clear_transition_stencil();
     clear_player_status();
     clear_npcs();
     clear_player_data();
     func_80072B30();
     func_8003E338();
-    func_80059C9C();
+    clear_effect_data();
     clear_item_entity_data();
     clear_saved_variables();
     initialize_collision();
     func_8014AC08();
-    func_801473F0();
+    clear_windows();
     partner_initialize_data();
     func_80149618();
     func_8014A52C();
@@ -81,6 +81,6 @@ void step_init_state(void) {
     set_game_mode(1);
 }
 
-void func_80033788(void) {
+void state_drawUI_startup(void) {
     func_8002AB5C(0, 0, 0x13F, 0xEF, 0, 0, 0, 0xFF);
 }
