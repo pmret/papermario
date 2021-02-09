@@ -15,6 +15,7 @@ expected/
 # Build artifacts
 build.ninja
 *.ld
+*.elf
 *.z64
 *.Yay0
 *.msg.h
@@ -28,6 +29,8 @@ build.ninja
 
 # Assets
 /*assets
+*.bin
+*.o
 
 # Star Rod
 /sprite/SpriteTable.xml

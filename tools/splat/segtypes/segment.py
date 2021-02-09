@@ -94,12 +94,14 @@ class Segment:
 
         return self.rom_start + ram_addr - self.vram_start
 
-    def create_split_dir(self, base_path, subdir):
+    @staticmethod
+    def create_split_dir(base_path, subdir):
         out_dir = Path(base_path, subdir)
         out_dir.mkdir(parents=True, exist_ok=True)
         return out_dir
 
-    def create_parent_dir(self, base_path, filename):
+    @staticmethod
+    def create_parent_dir(base_path, filename):
         out_dir = Path(base_path, filename).parent
         out_dir.mkdir(parents=True, exist_ok=True)
         return out_dir

@@ -77,7 +77,7 @@ void world_goombario_pre_battle(s32 arg0) {
 INCLUDE_ASM(void, "world/partner/goombario", world_goombario_pre_battle, s32 arg0);
 #endif
 
-s32 D_802BDC40[] = {
+s32 D_802BDC40_317B60[] = {
     0x00000015, 0x001B0000, 0x00000018, 0x001B0000, 0x00000016, 0x001B0001, 0x00000019, 0x001B0001,
     0x00000017, 0x001B0003, 0x0000001A, 0x001B0003, 0x0000000D, 0x001B0005, 0x0000000E, 0x001B0005,
     0x0000000F, 0x001B0006, 0x00000010, 0x001B0006, 0x0000000B, 0x001B0007, 0x0000000C, 0x001B0008,
@@ -94,7 +94,7 @@ Script world_goombario_take_out = SCRIPT({
     func_802BD188_3170A8();
 });
 
-s32 D_802BDD88 = 0x802BDF40;
+s32 D_802BDD88_317CA8 = 0x802BDF40;
 
 Script world_goombario_update = SCRIPT({
     func_802BD1D0_3170F0();

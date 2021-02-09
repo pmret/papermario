@@ -209,9 +209,9 @@ async def main():
         # split assets
         print("Splitting segments from baserom", end="")
         split.main(
-            args.baserom,
             "tools/splat.yaml",
             ".",
+            args.baserom,
             [ "ld", "bin", "Yay0", "PaperMarioMapFS", "PaperMarioMessages", "img", "PaperMarioNpcSprites" ],
             False,
             False,

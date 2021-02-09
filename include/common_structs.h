@@ -1721,7 +1721,7 @@ typedef struct {
     /* 0x00018 */ Light l2[2];
     /* 0x00030 */ Matrix4s camPerspMatrix[8]; // could only be length 4, unsure
     /* 0x00230 */ s32 mainGfx[0x4100];
-    /* 0x10630 */ s32 smallGfx[0x400]; // used by func 800269EC
+    /* 0x10630 */ s32 smallGfx[0x400]; // used by gfx_task_background
     /* 0x11630 */ Matrix4s matrixStack[0x200];
 } DisplayContext; // size = 0x19630
 
