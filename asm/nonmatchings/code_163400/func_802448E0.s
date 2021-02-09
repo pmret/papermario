@@ -47,7 +47,7 @@ glabel func_802448E0
 .L80244984:
 /* 1651E4 80244984 3C048025 */  lui       $a0, %hi(D_80249DAC)
 /* 1651E8 80244988 24849DAC */  addiu     $a0, $a0, %lo(D_80249DAC)
-/* 1651EC 8024498C 0C051FCC */  jal       func_80147F30
+/* 1651EC 8024498C 0C051FCC */  jal       setup_pause_menu_tab
 /* 1651F0 80244990 24050003 */   addiu    $a1, $zero, 3
 /* 1651F4 80244994 3C138025 */  lui       $s3, %hi(D_80249B84)
 /* 1651F8 80244998 8E739B84 */  lw        $s3, %lo(D_80249B84)($s3)
@@ -138,7 +138,7 @@ glabel func_802448E0
 /* 165328 80244AC8 1440FFF8 */  bnez      $v0, .L80244AAC
 /* 16532C 80244ACC 26310004 */   addiu    $s1, $s1, 4
 /* 165330 80244AD0 24040017 */  addiu     $a0, $zero, 0x17
-/* 165334 80244AD4 0C051F5C */  jal       func_80147D70
+/* 165334 80244AD4 0C051F5C */  jal       update_window_hierarchy
 /* 165338 80244AD8 24050040 */   addiu    $a1, $zero, 0x40
 /* 16533C 80244ADC 8FBF0028 */  lw        $ra, 0x28($sp)
 /* 165340 80244AE0 8FB50024 */  lw        $s5, 0x24($sp)

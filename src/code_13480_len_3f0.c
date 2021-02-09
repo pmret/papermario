@@ -17,7 +17,7 @@ void init_demo_data(void) {
 
     func_80056228();
     set_map_transition_effect(2);
-    func_80137D88(0, 255.0f);
+    set_transition_stencil_zoom_0(0, 255.0f);
     clear_saved_variables();
     clear_script_list();
 }

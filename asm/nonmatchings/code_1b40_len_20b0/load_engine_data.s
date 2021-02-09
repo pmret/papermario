@@ -112,7 +112,7 @@ glabel load_engine_data
 /* 2388 80026F88 00000000 */   nop
 /* 238C 80026F8C 0C052010 */  jal       func_80148040
 /* 2390 80026F90 00000000 */   nop
-/* 2394 80026F94 0C05177E */  jal       func_80145DF8
+/* 2394 80026F94 0C05177E */  jal       use_default_background_settings
 /* 2398 80026F98 00000000 */   nop
 /* 239C 80026F9C 0C048D98 */  jal       clear_character_set
 /* 23A0 80026FA0 00000000 */   nop
@@ -132,9 +132,9 @@ glabel load_engine_data
 /* 23D8 80026FD8 00000000 */   nop
 /* 23DC 80026FDC 0C00F8CE */  jal       func_8003E338
 /* 23E0 80026FE0 00000000 */   nop
-/* 23E4 80026FE4 0C04E042 */  jal       func_80138108
+/* 23E4 80026FE4 0C04E042 */  jal       clear_transition_stencil
 /* 23E8 80026FE8 00000000 */   nop
-/* 23EC 80026FEC 0C016727 */  jal       func_80059C9C
+/* 23EC 80026FEC 0C016727 */  jal       clear_effect_data
 /* 23F0 80026FF0 00000000 */   nop
 /* 23F4 80026FF4 0C0514C8 */  jal       clear_saved_variables
 /* 23F8 80026FF8 00000000 */   nop
@@ -142,11 +142,11 @@ glabel load_engine_data
 /* 2400 80027000 00000000 */   nop
 /* 2404 80027004 0C052926 */  jal       func_8014A498
 /* 2408 80027008 00000000 */   nop
-/* 240C 8002700C 0C051C8C */  jal       func_80147230
+/* 240C 8002700C 0C051C8C */  jal       reset_ambient_sounds
 /* 2410 80027010 00000000 */   nop
 /* 2414 80027014 0C052586 */  jal       func_80149618
 /* 2418 80027018 00000000 */   nop
-/* 241C 8002701C 0C051CFC */  jal       func_801473F0
+/* 241C 8002701C 0C051CFC */  jal       clear_windows
 /* 2420 80027020 00000000 */   nop
 /* 2424 80027024 0C00AE90 */  jal       initialize_curtains
 /* 2428 80027028 00000000 */   nop

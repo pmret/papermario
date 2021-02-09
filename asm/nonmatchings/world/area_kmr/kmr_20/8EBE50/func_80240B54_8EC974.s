@@ -88,7 +88,7 @@ glabel func_80240B54_8EC974
 /* 8ECAA4 80240C84 AC820328 */   sw       $v0, 0x328($a0)
 /* 8ECAA8 80240C88 0C03A631 */  jal       func_800E98C4
 /* 8ECAAC 80240C8C 00000000 */   nop
-/* 8ECAB0 80240C90 0C03A5EE */  jal       func_800E97B8
+/* 8ECAB0 80240C90 0C03A5EE */  jal       close_status_menu
 /* 8ECAB4 80240C94 00000000 */   nop
 /* 8ECAB8 80240C98 24020001 */  addiu     $v0, $zero, 1
 /* 8ECABC 80240C9C AE800074 */  sw        $zero, 0x74($s4)

@@ -3,6 +3,7 @@
 from sys import argv, stderr
 from math import floor, ceil
 from itertools import zip_longest
+from glob import glob
 import png
 
 def unpack_color(s):
@@ -181,6 +182,67 @@ class Converter():
 
                         i = rgb_to_intensity(*rgba[:3])
                         f.write(i.to_bytes(1, byteorder="big"))
+        elif self.mode == "party":
+            data = img.read()[2]
+            img.preamble(True)
+            palette = img.palette(alpha="force")
+
+            with open(self.outfile, "wb") as f:
+                # palette
+                for rgba in palette:
+                    if rgba[3] not in (0, 0xFF):
+                        self.warn("alpha mask mode but translucent pixels used")
+
+                    color = pack_color(*rgba)
+                    f.write(color.to_bytes(2, byteorder="big"))
+
+                assert f.tell() == 0x200, "palette has wrong size"
+
+                # ci 8
+                for row in reversed_if(data, self.flip_y):
+                    f.write(row)
+
+                f.write(b"\0\0\0\0\0\0\0\0\0\0") # padding
+        elif self.mode == "bg":
+            width, height, data, info = img.read()
+            img.preamble(True)
+            palettes = [img.palette(alpha="force")]
+
+            for palettepath in glob(self.infile.split(".")[0] + ".*.png"):
+                pal = png.Reader(palettepath)
+                pal.preamble(True)
+                palettes.append(pal.palette(alpha="force"))
+
+            with open(self.outfile, "wb") as f:
+                baseaddr = 0x80200000 # gBackgroundImage
+                headers_len = 0x10 * len(palettes)
+                palettes_len = 0x200 * len(palettes)
+
+                # header (struct BackgroundHeader)
+                for i, palette in enumerate(palettes):
+                    f.write((baseaddr + palettes_len + headers_len).to_bytes(4, byteorder="big")) # raster offset
+                    f.write((baseaddr + headers_len + 0x200 * i).to_bytes(4, byteorder="big")) # palette offset
+                    f.write((12).to_bytes(2, byteorder="big")) # startX
+                    f.write((20).to_bytes(2, byteorder="big")) # startY
+                    f.write((width).to_bytes(2, byteorder="big")) # width
+                    f.write((height).to_bytes(2, byteorder="big")) # height
+
+                assert f.tell() == headers_len
+
+                for palette in palettes:
+                    # palette
+                    for rgba in palette:
+                        if rgba[3] not in (0, 0xFF):
+                            self.warn("alpha mask mode but translucent pixels used")
+
+                        color = pack_color(*rgba)
+                        f.write(color.to_bytes(2, byteorder="big"))
+
+                assert f.tell() == palettes_len + headers_len
+
+                # ci 8
+                for row in reversed_if(data, self.flip_y):
+                    f.write(row)
         else:
             print("unsupported mode", file=stderr)
             exit(1)

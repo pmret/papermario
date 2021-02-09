@@ -145,7 +145,7 @@ glabel func_802406C8_8EC4E8
 /* 8EC6E0 802408C0 AC820328 */   sw       $v0, 0x328($a0)
 /* 8EC6E4 802408C4 0C03A631 */  jal       func_800E98C4
 /* 8EC6E8 802408C8 00000000 */   nop
-/* 8EC6EC 802408CC 0C03A5EE */  jal       func_800E97B8
+/* 8EC6EC 802408CC 0C03A5EE */  jal       close_status_menu
 /* 8EC6F0 802408D0 00000000 */   nop
 /* 8EC6F4 802408D4 24020001 */  addiu     $v0, $zero, 1
 /* 8EC6F8 802408D8 AE800074 */  sw        $zero, 0x74($s4)

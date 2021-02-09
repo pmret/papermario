@@ -420,7 +420,7 @@ glabel func_802AACD8
 .L802AB2E8:
 /* 420078 802AB2E8 01052821 */  addu      $a1, $t0, $a1
 .L802AB2EC:
-/* 42007C 802AB2EC 0C04993B */  jal       draw_string
+/* 42007C 802AB2EC 0C04993B */  jal       draw_msg
 /* 420080 802AB2F0 00000000 */   nop
 .L802AB2F4:
 /* 420084 802AB2F4 8FBF008C */  lw        $ra, 0x8c($sp)

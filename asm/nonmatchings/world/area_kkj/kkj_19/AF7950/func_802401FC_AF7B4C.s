@@ -21,7 +21,7 @@ glabel func_802401FC_AF7B4C
 /* AF7B8C 8024023C 0040202D */   daddu    $a0, $v0, $zero
 /* AF7B90 80240240 3C048024 */  lui       $a0, %hi(D_80240EF0_AF8840)
 /* AF7B94 80240244 24840EF0 */  addiu     $a0, $a0, %lo(D_80240EF0_AF8840)
-/* AF7B98 80240248 0C051FCC */  jal       func_80147F30
+/* AF7B98 80240248 0C051FCC */  jal       setup_pause_menu_tab
 /* AF7B9C 8024024C 24050002 */   addiu    $a1, $zero, 2
 /* AF7BA0 80240250 0000802D */  daddu     $s0, $zero, $zero
 /* AF7BA4 80240254 24120003 */  addiu     $s2, $zero, 3

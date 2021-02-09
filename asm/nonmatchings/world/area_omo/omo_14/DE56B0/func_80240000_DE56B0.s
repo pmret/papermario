@@ -32,7 +32,7 @@ glabel func_80240000_DE56B0
 /* DE5718 80240068 44063000 */  mfc1      $a2, $f6
 /* DE571C 8024006C 4600018D */  trunc.w.s $f6, $f0
 /* DE5720 80240070 44073000 */  mfc1      $a3, $f6
-/* DE5724 80240074 0C04DFB0 */  jal       func_80137EC0
+/* DE5724 80240074 0C04DFB0 */  jal       set_transition_stencil_center_worldpos
 /* DE5728 80240078 0080282D */   daddu    $a1, $a0, $zero
 /* DE572C 8024007C 3C028011 */  lui       $v0, %hi(D_8010EBB0)
 /* DE5730 80240080 8042EBB0 */  lb        $v0, %lo(D_8010EBB0)($v0)
@@ -82,10 +82,10 @@ glabel func_80240000_DE56B0
 /* DE57CC 8024011C C6060070 */  lwc1      $f6, 0x70($s0)
 /* DE57D0 80240120 468031A0 */  cvt.s.w   $f6, $f6
 /* DE57D4 80240124 44053000 */  mfc1      $a1, $f6
-/* DE57D8 80240128 0C04E035 */  jal       func_801380D4
+/* DE57D8 80240128 0C04E035 */  jal       set_transition_stencil_alpha
 /* DE57DC 8024012C 24040001 */   addiu    $a0, $zero, 1
 /* DE57E0 80240130 3C05437F */  lui       $a1, 0x437f
-/* DE57E4 80240134 0C04DF69 */  jal       func_80137DA4
+/* DE57E4 80240134 0C04DF69 */  jal       set_transition_stencil_zoom_1
 /* DE57E8 80240138 2404000B */   addiu    $a0, $zero, 0xb
 /* DE57EC 8024013C 8FBF0024 */  lw        $ra, 0x24($sp)
 /* DE57F0 80240140 8FB20020 */  lw        $s2, 0x20($sp)

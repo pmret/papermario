@@ -97,7 +97,8 @@ void func_801341B0(s32 index) {
     itemEntity->flags |= 0x100;
 }
 
-s32 func_801341E8(void) {
+/// @returns TRUE when "you got X" popup is on-screen
+s32 is_picking_up_item(void) {
     s32 ret = D_801565A8 != 0;
 
     if (D_801565A4 != 0) {

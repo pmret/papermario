@@ -10,7 +10,7 @@ Script N(BindExits) = SCRIPT({
 });
 
 Script N(Main) = SCRIPT({
-    SI_SAVE_VAR(425) = 31;
+    WORLD_LOCATION = 31;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
     SetCamBGColor(0, 0, 0, 0);
@@ -192,7 +192,7 @@ NpcGroupList N(npcGroupList) = {
 };
 
 Script N(ReadEastSign) = SCRIPT({
-    func_800441F0($a);
+    IsStartingConversation($a);
     if ($a == 1) {
         return;
     }

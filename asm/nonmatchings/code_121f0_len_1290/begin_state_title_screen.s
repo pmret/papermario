@@ -137,19 +137,19 @@ glabel begin_state_title_screen
 /* 12400 80037000 00000000 */   nop
 /* 12404 80037004 0C050440 */  jal       func_80141100
 /* 12408 80037008 00000000 */   nop
-/* 1240C 8003700C 0C05177E */  jal       func_80145DF8
+/* 1240C 8003700C 0C05177E */  jal       use_default_background_settings
 /* 12410 80037010 00000000 */   nop
 /* 12414 80037014 0C04432E */  jal       clear_entity_data
 /* 12418 80037018 24040001 */   addiu    $a0, $zero, 1
-/* 1241C 8003701C 0C016727 */  jal       func_80059C9C
+/* 1241C 8003701C 0C016727 */  jal       clear_effect_data
 /* 12420 80037020 00000000 */   nop
 /* 12424 80037024 8E420000 */  lw        $v0, ($s2)
 /* 12428 80037028 34420002 */  ori       $v0, $v0, 2
 /* 1242C 8003702C 0C039CE8 */  jal       clear_player_data
 /* 12430 80037030 AE420000 */   sw       $v0, ($s2)
 /* 12434 80037034 0000202D */  daddu     $a0, $zero, $zero
-/* 12438 80037038 3C058003 */  lui       $a1, %hi(func_80037638)
-/* 1243C 8003703C 24A57638 */  addiu     $a1, $a1, %lo(func_80037638)
+/* 12438 80037038 3C058003 */  lui       $a1, %hi(title_append_gfx)
+/* 1243C 8003703C 24A57638 */  addiu     $a1, $a1, %lo(title_append_gfx)
 /* 12440 80037040 8E420000 */  lw        $v0, ($s2)
 /* 12444 80037044 2403FFF7 */  addiu     $v1, $zero, -9
 /* 12448 80037048 00431024 */  and       $v0, $v0, $v1

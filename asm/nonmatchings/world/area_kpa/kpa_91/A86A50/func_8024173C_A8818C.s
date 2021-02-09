@@ -24,7 +24,7 @@ glabel func_8024173C_A8818C
 /* A881D8 80241788 0000202D */  daddu     $a0, $zero, $zero
 /* A881DC 8024178C 324500FF */  andi      $a1, $s2, 0xff
 /* A881E0 80241790 320600FF */  andi      $a2, $s0, 0xff
-/* A881E4 80241794 0C04DF84 */  jal       func_80137E10
+/* A881E4 80241794 0C04DF84 */  jal       set_transition_stencil_color
 /* A881E8 80241798 304700FF */   andi     $a3, $v0, 0xff
 /* A881EC 8024179C 8FBF001C */  lw        $ra, 0x1c($sp)
 /* A881F0 802417A0 8FB20018 */  lw        $s2, 0x18($sp)

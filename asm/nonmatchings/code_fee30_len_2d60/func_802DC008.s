@@ -255,7 +255,7 @@ glabel func_802DC008
 /* FF4C4 802DC3D4 8FA40050 */  lw        $a0, 0x50($sp)
 /* FF4C8 802DC3D8 0000282D */  daddu     $a1, $zero, $zero
 /* FF4CC 802DC3DC 00A0302D */  daddu     $a2, $a1, $zero
-/* FF4D0 802DC3E0 0C052071 */  jal       func_801481C4
+/* FF4D0 802DC3E0 0C052071 */  jal       render_shaded_sprite
 /* FF4D4 802DC3E4 01A0382D */   daddu    $a3, $t5, $zero
 /* FF4D8 802DC3E8 080B71E2 */  j         .L802DC788
 /* FF4DC 802DC3EC 00000000 */   nop

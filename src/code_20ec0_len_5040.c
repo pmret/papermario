@@ -5,11 +5,11 @@ INCLUDE_ASM(s32, "code_20ec0_len_5040", func_80045AC0);
 
 INCLUDE_ASM(s32, "code_20ec0_len_5040", func_80045B10);
 
-INCLUDE_ASM(s32, "code_20ec0_len_5040", func_80045B68);
+INCLUDE_ASM(s32, "code_20ec0_len_5040", update_merlee_messages);
 
 INCLUDE_ASM(s32, "code_20ec0_len_5040", func_80045BC8);
 
-INCLUDE_ASM(s32, "code_20ec0_len_5040", func_80045C28);
+INCLUDE_ASM(s32, "code_20ec0_len_5040", draw_merlee_messages);
 
 INCLUDE_ASM(s32, "code_20ec0_len_5040", func_80045C88);
 
@@ -19,11 +19,11 @@ INCLUDE_ASM(s32, "code_20ec0_len_5040", func_80045D00);
 
 INCLUDE_ASM(s32, "code_20ec0_len_5040", func_80045D7C);
 
-INCLUDE_ASM(s32, "code_20ec0_len_5040", func_80045E4C);
+INCLUDE_ASM(s32, "code_20ec0_len_5040", draw_merlee_message_string);
 
-INCLUDE_ASM(s32, "code_20ec0_len_5040", func_80045ED0);
+INCLUDE_ASM(s32, "code_20ec0_len_5040", draw_merlee_message);
 
-INCLUDE_ASM(s32, "code_20ec0_len_5040", func_80045FA4);
+INCLUDE_ASM(s32, "code_20ec0_len_5040", is_merlee_message_done);
 
 INCLUDE_ASM(s32, "code_20ec0_len_5040", func_80045FB4);
 

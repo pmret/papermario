@@ -50,7 +50,7 @@ ApiStatus DisablePlayerInput(ScriptInstance* script, s32 isInitialCall) {
     if (enable) {
         disable_player_input();
         func_800EF628();
-        func_800E97B8();
+        close_status_menu();
         func_800E984C();
         if (playerStatus->actionState == ActionState_SPIN) {
             playerStatus->animFlags |= 0x40000;
@@ -320,7 +320,7 @@ INCLUDE_ASM(s32, "code_F5750", UseExitHeading);
 
 INCLUDE_ASM(s32, "code_F5750", func_802D23F8);
 
-ApiStatus func_802D244C(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus WaitForPlayerTouchingFloor(ScriptInstance* script, s32 isInitialCall) {
     if ((gCollisionStatus.currentFloor >= 0) && (func_802D23F8() != 0)) {
         return ApiStatus_DONE2;
     }
@@ -332,7 +332,7 @@ ApiStatus func_802D2484(ScriptInstance* script, s32 isInitialCall) {
     return (gCollisionStatus.currentFloor >= 0) * ApiStatus_DONE2;
 }
 
-ApiStatus func_802D249C(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus IsPlayerOnValidFloor(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 val = 0;
 
@@ -344,11 +344,11 @@ ApiStatus func_802D249C(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D24F4(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus WaitForPlayerMoveToComplete(ScriptInstance* script, s32 isInitialCall) {
     return (gPlayerStatus.moveFrames == 0) * ApiStatus_DONE2;
 }
 
-ApiStatus func_802D2508(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus WaitForPlayerInputEnabled(ScriptInstance* script, s32 isInitialCall) {
     return !(gPlayerStatus.flags & 0x2000) * ApiStatus_DONE2;
 }
 

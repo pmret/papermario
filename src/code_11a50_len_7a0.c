@@ -78,8 +78,8 @@ void begin_state_intro(void) {
             }
     }
 
-    func_80137DA4(D_800A0963, (f32)D_800A0954);
-    func_80137E10(1, D_800A095B, D_800A095D, D_800A095F);
+    set_transition_stencil_zoom_1(D_800A0963, (f32)D_800A0954);
+    set_transition_stencil_color(1, D_800A095B, D_800A095D, D_800A095F);
 
     intro_logos_update_fade();
 }

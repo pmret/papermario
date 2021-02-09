@@ -201,11 +201,11 @@ void func_802454B4_805D34(void) {
 }
 
 ApiStatus func_80245504_805D84(ScriptInstance* script, s32 isInitialCall) {
-    func_800EF394(20.0f);
+    set_parter_tether_distance(20.0f);
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_8024552C_805DAC(ScriptInstance* script, s32 isInitialCall) {
-    func_800EF3A4();
+    reset_parter_tether_distance();
     return ApiStatus_DONE2;
 }

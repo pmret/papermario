@@ -15,8 +15,8 @@ glabel func_80045D00
 /* 21128 80045D28 3C028004 */  lui       $v0, %hi(func_80045D7C)
 /* 2112C 80045D2C 24425D7C */  addiu     $v0, $v0, %lo(func_80045D7C)
 /* 21130 80045D30 AC620004 */  sw        $v0, 4($v1)
-/* 21134 80045D34 3C028004 */  lui       $v0, %hi(func_80045ED0)
-/* 21138 80045D38 24425ED0 */  addiu     $v0, $v0, %lo(func_80045ED0)
+/* 21134 80045D34 3C028004 */  lui       $v0, %hi(draw_merlee_message)
+/* 21138 80045D38 24425ED0 */  addiu     $v0, $v0, %lo(draw_merlee_message)
 /* 2113C 80045D3C AC62000C */  sw        $v0, 0xc($v1)
 /* 21140 80045D40 24020001 */  addiu     $v0, $zero, 1
 /* 21144 80045D44 A0620017 */  sb        $v0, 0x17($v1)

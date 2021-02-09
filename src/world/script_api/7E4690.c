@@ -72,12 +72,12 @@ INCLUDE_ASM(s32, "world/script_api/7E4690", func_80283908);
 INCLUDE_ASM(s32, "world/script_api/7E4690", func_80283A50);
 
 ApiStatus func_80283B88(ScriptInstance* script, s32 isInitialCall) {
-    func_800EF394(20.0f);
+    set_parter_tether_distance(20.0f);
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_80283BB0(ScriptInstance* script, s32 isInitialCall) {
-    func_800EF3A4();
+    reset_parter_tether_distance();
     return ApiStatus_DONE2;
 }
 

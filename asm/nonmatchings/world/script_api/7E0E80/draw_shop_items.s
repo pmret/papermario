@@ -30,10 +30,10 @@ glabel draw_shop_items
 /* 7E2404 80281584 3C108014 */  lui       $s0, %hi(D_80147574)
 /* 7E2408 80281588 26107574 */  addiu     $s0, $s0, %lo(D_80147574)
 .L8028158C:
-/* 7E240C 8028158C 0C051F9F */  jal       func_80147E7C
+/* 7E240C 8028158C 0C051F9F */  jal       set_window_update
 /* 7E2410 80281590 0200282D */   daddu    $a1, $s0, $zero
 /* 7E2414 80281594 2404000B */  addiu     $a0, $zero, 0xb
-/* 7E2418 80281598 0C051F9F */  jal       func_80147E7C
+/* 7E2418 80281598 0C051F9F */  jal       set_window_update
 /* 7E241C 8028159C 0200282D */   daddu    $a1, $s0, $zero
 /* 7E2420 802815A0 96420000 */  lhu       $v0, ($s2)
 /* 7E2424 802815A4 30420001 */  andi      $v0, $v0, 1

@@ -42,7 +42,7 @@ glabel pause_items_init
 /* 13DAE0 8024A7A0 24420024 */   addiu    $v0, $v0, 0x24
 /* 13DAE4 8024A7A4 3C048025 */  lui       $a0, %hi(D_8024F5C0)
 /* 13DAE8 8024A7A8 2484F5C0 */  addiu     $a0, $a0, %lo(D_8024F5C0)
-/* 13DAEC 8024A7AC 0C051FCC */  jal       func_80147F30
+/* 13DAEC 8024A7AC 0C051FCC */  jal       setup_pause_menu_tab
 /* 13DAF0 8024A7B0 24050001 */   addiu    $a1, $zero, 1
 /* 13DAF4 8024A7B4 24020001 */  addiu     $v0, $zero, 1
 /* 13DAF8 8024A7B8 A2620000 */  sb        $v0, ($s3)

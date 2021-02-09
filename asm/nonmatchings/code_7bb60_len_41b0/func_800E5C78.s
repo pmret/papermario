@@ -21,7 +21,7 @@ glabel func_800E5C78
 /* 7F164 800E5CB4 30420020 */  andi      $v0, $v0, 0x20
 /* 7F168 800E5CB8 14400007 */  bnez      $v0, .L800E5CD8
 /* 7F16C 800E5CBC 00000000 */   nop
-/* 7F170 800E5CC0 0C010C77 */  jal       func_800431DC
+/* 7F170 800E5CC0 0C010C77 */  jal       check_conversation_trigger
 /* 7F174 800E5CC4 00000000 */   nop
 /* 7F178 800E5CC8 10400003 */  beqz      $v0, .L800E5CD8
 /* 7F17C 800E5CCC 00000000 */   nop

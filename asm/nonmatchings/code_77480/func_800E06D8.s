@@ -46,14 +46,14 @@ glabel func_800E06D8
 /* 79C20 800E0770 32024000 */  andi      $v0, $s0, 0x4000
 /* 79C24 800E0774 14400007 */  bnez      $v0, .L800E0794
 /* 79C28 800E0778 00000000 */   nop
-/* 79C2C 800E077C 0C05173A */  jal       func_80145CE8
+/* 79C2C 800E077C 0C05173A */  jal       should_collider_allow_interact
 /* 79C30 800E0780 0200202D */   daddu    $a0, $s0, $zero
 /* 79C34 800E0784 1440000E */  bnez      $v0, .L800E07C0
 /* 79C38 800E0788 0000102D */   daddu    $v0, $zero, $zero
 /* 79C3C 800E078C 08038200 */  j         .L800E0800
 /* 79C40 800E0790 00000000 */   nop
 .L800E0794:
-/* 79C44 800E0794 0C0394BE */  jal       func_800E52F8
+/* 79C44 800E0794 0C0394BE */  jal       can_player_interact
 /* 79C48 800E0798 00000000 */   nop
 /* 79C4C 800E079C 14400003 */  bnez      $v0, .L800E07AC
 /* 79C50 800E07A0 2402FFFF */   addiu    $v0, $zero, -1

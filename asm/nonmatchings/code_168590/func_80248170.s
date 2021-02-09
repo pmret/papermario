@@ -15,7 +15,7 @@ glabel func_80248170
 /* 1689F8 80248198 90A20000 */  lbu       $v0, ($a1)
 /* 1689FC 8024819C 304200F7 */  andi      $v0, $v0, 0xf7
 /* 168A00 802481A0 A0A20000 */  sb        $v0, ($a1)
-/* 168A04 802481A4 0C051F9F */  jal       func_80147E7C
+/* 168A04 802481A4 0C051F9F */  jal       set_window_update
 /* 168A08 802481A8 24050001 */   addiu    $a1, $zero, 1
 .L802481AC:
 /* 168A0C 802481AC 8FBF0010 */  lw        $ra, 0x10($sp)

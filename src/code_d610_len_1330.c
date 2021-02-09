@@ -12,7 +12,7 @@ INCLUDE_ASM(s32, "code_d610_len_1330", func_80032970);
 
 INCLUDE_ASM(s32, "code_d610_len_1330", func_80032C64);
 
-INCLUDE_ASM(s32, "code_d610_len_1330", func_80033394);
+INCLUDE_ASM(s32, "code_d610_len_1330", create_camera_lead_player_mtx);
 
 void func_800334E8(void) {
 }

@@ -78,17 +78,17 @@ ApiStatus func_802D7BA4(ScriptInstance* script, s32 isInitialCall) {
         script->functionTemp[0].s = var6;
         func_80137DC0(1, &t0, &t1);
         script->functionTemp[1].s = t1;
-        func_80137E4C(1, 0, var1, var2);
-        func_80137E4C(1, 1, var3, var4);
+        set_transition_stencil_center(1, 0, var1, var2);
+        set_transition_stencil_center(1, 1, var3, var4);
     }
 
     func_80137DC0(1, &t0, &t1);
     temp = (script->functionTemp[1].s - var5) * script->functionTemp[0].s;
-    func_80137DA4(12, (temp / var6) + var5);
+    set_transition_stencil_zoom_1(12, (temp / var6) + var5);
 
     script->functionTemp[0].s--;
     if (script->functionTemp[0].s < 0) {
-        func_80137DA4(12, var5);
+        set_transition_stencil_zoom_1(12, var5);
         return ApiStatus_DONE2;
     }
     return ApiStatus_BLOCK;

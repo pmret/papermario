@@ -101,7 +101,7 @@ glabel L8002D4F8_88F8
 /* 8958 8002D558 30620004 */  andi      $v0, $v1, 4
 /* 895C 8002D55C 10400004 */  beqz      $v0, .L8002D570
 /* 8960 8002D560 261100D4 */   addiu    $s1, $s0, 0xd4
-/* 8964 8002D564 0C00CCE5 */  jal       func_80033394
+/* 8964 8002D564 0C00CCE5 */  jal       create_camera_lead_player_mtx
 /* 8968 8002D568 0200202D */   daddu    $a0, $s0, $zero
 /* 896C 8002D56C 261100D4 */  addiu     $s1, $s0, 0xd4
 .L8002D570:

@@ -1,7 +1,7 @@
 #include "common.h"
 
 // this is definitely wrong but I had issues trying to use an array accessor
-void func_801473F0(void) {
+void clear_windows(void) {
     UIPanel* panelIt = gUIPanels;
     s32 i;
 
@@ -10,23 +10,23 @@ void func_801473F0(void) {
     }
 }
 
-INCLUDE_ASM(s32, "code_ddaf0_len_c50", func_80147414);
+INCLUDE_ASM(s32, "code_ddaf0_len_c50", update_windows);
 
-INCLUDE_ASM(s32, "code_ddaf0_len_c50", func_80147474);
+INCLUDE_ASM(s32, "code_ddaf0_len_c50", basic_window_update);
 
-INCLUDE_ASM(s32, "code_ddaf0_len_c50", func_80147574);
+INCLUDE_ASM(s32, "code_ddaf0_len_c50", basic_hidden_window_update);
 
-INCLUDE_ASM(s32, "code_ddaf0_len_c50", func_80147650);
+INCLUDE_ASM(s32, "code_ddaf0_len_c50", main_menu_window_update);
 
-INCLUDE_ASM(s32, "code_ddaf0_len_c50", func_80147698);
+INCLUDE_ASM(s32, "code_ddaf0_len_c50", render_windows);
 
-INCLUDE_ASM(s32, "code_ddaf0_len_c50", func_80147AC4);
+INCLUDE_ASM(s32, "code_ddaf0_len_c50", render_window_root);
 
-INCLUDE_ASM(s32, "code_ddaf0_len_c50", set_ui_panel_properties);
+INCLUDE_ASM(s32, "code_ddaf0_len_c50", set_window_properties);
 
-INCLUDE_ASM(s32, "code_ddaf0_len_c50", func_80147D70);
+INCLUDE_ASM(s32, "code_ddaf0_len_c50", update_window_hierarchy);
 
-void func_80147E48(s32 panelIndex, s8 arg1, s32 arg2) {
+void replace_window_update(s32 panelIndex, s8 arg1, s32 arg2) {
     UIPanel* panels = gUIPanels;
 
     if (panels[panelIndex].flags & 1) {
@@ -36,7 +36,7 @@ void func_80147E48(s32 panelIndex, s8 arg1, s32 arg2) {
     }
 }
 
-void func_80147E7C(s32 panelIndex, s32 arg1) {
+void set_window_update(s32 panelIndex, s32 arg1) {
     UIPanel* panels = gUIPanels;
 
     if (panels[panelIndex].flags & 1) {
@@ -49,6 +49,6 @@ void func_80147E7C(s32 panelIndex, s32 arg1) {
     }
 }
 
-INCLUDE_ASM(s32, "code_ddaf0_len_c50", func_80147EC4);
+INCLUDE_ASM(s32, "code_ddaf0_len_c50", set_windows_visible);
 
-INCLUDE_ASM(s32, "code_ddaf0_len_c50", func_80147F30);
+INCLUDE_ASM(s32, "code_ddaf0_len_c50", setup_pause_menu_tab);

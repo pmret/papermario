@@ -33,7 +33,7 @@ extern s32 D_8009A5D8;
 
 INCLUDE_ASM(void, "code_1b40_len_20b0", step_game_loop);
 
-INCLUDE_ASM(s32, "code_1b40_len_20b0", func_800269EC);
+INCLUDE_ASM(s32, "code_1b40_len_20b0", gfx_task_background);
 
 INCLUDE_ASM(s32, "code_1b40_len_20b0", gfx_draw_frame);
 
@@ -76,7 +76,7 @@ void load_engine_data(void) {
     func_8011E224();
     clear_model_data();
     func_80148040();
-    func_80145DF8();
+    use_default_background_settings();
     clear_character_set();
     clear_printers();
     func_80112B98();
@@ -86,15 +86,15 @@ void load_engine_data(void) {
     func_80110CB8(0);
     clear_player_data();
     func_8003E338();
-    func_80138108();
-    func_80059C9C();
+    clear_transition_stencil();
+    clear_effect_data();
     clear_saved_variables();
     clear_item_entity_data();
     func_8014A498();
-    func_80147230();
+    reset_ambient_sounds();
     func_80149618();
-    func_801473F0();
-    func_8002BA40();
+    clear_windows();
+    curtains_init();
     poll_rumble();
 
     phi_s0 = GAME_STATUS;
@@ -152,16 +152,16 @@ s32 func_80027190(void) {
 }
 
 #ifdef NON_MATCHING
-void func_800271A0(void) {
+void gfx_init_state(void) {
     gSPSegment(gMasterGfxPos++, 0x00, 0x0);
     gSPDisplayList(gMasterGfxPos++, OS_K0_TO_PHYSICAL(&D_80074230));
     gSPDisplayList(gMasterGfxPos++, OS_K0_TO_PHYSICAL(&D_80074210));
 }
 #else
-INCLUDE_ASM(s32, "code_1b40_len_20b0", func_800271A0);
+INCLUDE_ASM(s32, "code_1b40_len_20b0", gfx_init_state);
 #endif
 
-// void func_800271A0(void) {
+// void gfx_init_state(void) {
 //     gSPSegment(gMasterGfxPos++, 0x00, 0x00000000);
 //     gSPDisplayList(gMasterGfxPos++, D_00074230);
 //     gSPDisplayList(gMasterGfxPos++, D_00074210);
@@ -179,4 +179,4 @@ INCLUDE_ASM(s32, "code_1b40_len_20b0", func_800279B4);
 
 INCLUDE_ASM(s32, "code_1b40_len_20b0", func_80027BAC);
 
-INCLUDE_ASM(s32, "code_1b40_len_20b0", func_80027E10);
+INCLUDE_ASM(s32, "code_1b40_len_20b0", gfx_draw_background);

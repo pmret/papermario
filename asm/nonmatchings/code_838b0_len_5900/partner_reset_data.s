@@ -13,8 +13,8 @@ glabel partner_reset_data
 /* 84944 800EB494 AFBF0018 */  sw        $ra, 0x18($sp)
 /* 84948 800EB498 0C00A580 */  jal       mem_clear
 /* 8494C 800EB49C 24050360 */   addiu    $a1, $zero, 0x360
-/* 84950 800EB4A0 3C04800F */  lui       $a0, %hi(func_800EA6CC)
-/* 84954 800EB4A4 2484A6CC */  addiu     $a0, $a0, %lo(func_800EA6CC)
+/* 84950 800EB4A0 3C04800F */  lui       $a0, %hi(_use_partner_ability)
+/* 84954 800EB4A4 2484A6CC */  addiu     $a0, $a0, %lo(_use_partner_ability)
 /* 84958 800EB4A8 0C048C8F */  jal       bind_dynamic_entity_7
 /* 8495C 800EB4AC 0000282D */   daddu    $a1, $zero, $zero
 /* 84960 800EB4B0 0C048D8F */  jal       get_dynamic_entity
@@ -55,7 +55,7 @@ glabel partner_reset_data
 /* 849E8 800EB538 0803AD5B */  j         .L800EB56C
 /* 849EC 800EB53C ACC40000 */   sw       $a0, ($a2)
 .L800EB540:
-/* 849F0 800EB540 0C03A974 */  jal       func_800EA5D0
+/* 849F0 800EB540 0C03A974 */  jal       load_partner_npc
 /* 849F4 800EB544 00000000 */   nop
 /* 849F8 800EB548 3C028011 */  lui       $v0, %hi(D_8010C930)
 /* 849FC 800EB54C 8C42C930 */  lw        $v0, %lo(D_8010C930)($v0)
@@ -64,7 +64,7 @@ glabel partner_reset_data
 /* 84A08 800EB558 00000000 */  nop
 /* 84A0C 800EB55C E4400054 */  swc1      $f0, 0x54($v0)
 /* 84A10 800EB560 E4400058 */  swc1      $f0, 0x58($v0)
-/* 84A14 800EB564 0C03A9B3 */  jal       func_800EA6CC
+/* 84A14 800EB564 0C03A9B3 */  jal       _use_partner_ability
 /* 84A18 800EB568 E440005C */   swc1     $f0, 0x5c($v0)
 .L800EB56C:
 /* 84A1C 800EB56C 8FBF0018 */  lw        $ra, 0x18($sp)

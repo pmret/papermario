@@ -34,7 +34,7 @@ glabel L802A5774_41A504
 /* 41A538 802A57A8 3C04802B */  lui       $a0, %hi(D_802AD6C0)
 /* 41A53C 802A57AC 00822021 */  addu      $a0, $a0, $v0
 /* 41A540 802A57B0 8C84D6C0 */  lw        $a0, %lo(D_802AD6C0)($a0)
-/* 41A544 802A57B4 0C04993B */  jal       draw_string
+/* 41A544 802A57B4 0C04993B */  jal       draw_msg
 /* 41A548 802A57B8 24A50008 */   addiu    $a1, $a1, 8
 .L802A57BC:
 glabel L802A57BC_41A54C

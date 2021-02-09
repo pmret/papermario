@@ -41,7 +41,7 @@ glabel check_input_status_menu
 /* 807C4 800E7314 00000000 */   nop
 /* 807C8 800E7318 0C03A5D8 */  jal       open_status_menu_long
 /* 807CC 800E731C 00000000 */   nop
-/* 807D0 800E7320 0C04D07A */  jal       func_801341E8
+/* 807D0 800E7320 0C04D07A */  jal       is_picking_up_item
 /* 807D4 800E7324 00000000 */   nop
 /* 807D8 800E7328 14400015 */  bnez      $v0, .L800E7380
 /* 807DC 800E732C 24040003 */   addiu    $a0, $zero, 3
@@ -58,9 +58,9 @@ glabel check_input_status_menu
 /* 80804 800E7354 00000000 */   nop
 /* 80808 800E7358 10400009 */  beqz      $v0, .L800E7380
 /* 8080C 800E735C 00000000 */   nop
-/* 80810 800E7360 0C03A5EE */  jal       func_800E97B8
+/* 80810 800E7360 0C03A5EE */  jal       close_status_menu
 /* 80814 800E7364 00000000 */   nop
-/* 80818 800E7368 0C04D07A */  jal       func_801341E8
+/* 80818 800E7368 0C04D07A */  jal       is_picking_up_item
 /* 8081C 800E736C 00000000 */   nop
 /* 80820 800E7370 14400003 */  bnez      $v0, .L800E7380
 /* 80824 800E7374 24040004 */   addiu    $a0, $zero, 4

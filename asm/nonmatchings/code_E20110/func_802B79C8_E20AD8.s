@@ -19,7 +19,7 @@ glabel func_802B79C8_E20AD8
 /* E20B10 802B7A00 AC820004 */  sw        $v0, 4($a0)
 /* E20B14 802B7A04 0C03BCF5 */  jal       func_800EF3D4
 /* E20B18 802B7A08 0000202D */   daddu    $a0, $zero, $zero
-/* E20B1C 802B7A0C 0C03BCE9 */  jal       func_800EF3A4
+/* E20B1C 802B7A0C 0C03BCE9 */  jal       reset_parter_tether_distance
 /* E20B20 802B7A10 00000000 */   nop
 /* E20B24 802B7A14 8FBF0010 */  lw        $ra, 0x10($sp)
 /* E20B28 802B7A18 03E00008 */  jr        $ra

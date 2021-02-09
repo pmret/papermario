@@ -60,8 +60,8 @@ glabel create_trigger
 /* DBF30 80145830 8E22000C */  lw        $v0, 0xc($s1)
 /* DBF34 80145834 14400004 */  bnez      $v0, .L80145848
 /* DBF38 80145838 ACC2000C */   sw       $v0, 0xc($a2)
-/* DBF3C 8014583C 3C028014 */  lui       $v0, %hi(default_trigger_function_handler)
-/* DBF40 80145840 24425670 */  addiu     $v0, $v0, %lo(default_trigger_function_handler)
+/* DBF3C 8014583C 3C028014 */  lui       $v0, %hi(default_trigger_delegate)
+/* DBF40 80145840 24425670 */  addiu     $v0, $v0, %lo(default_trigger_delegate)
 /* DBF44 80145844 ACC2000C */  sw        $v0, 0xc($a2)
 .L80145848:
 /* DBF48 80145848 8FBF0018 */  lw        $ra, 0x18($sp)

@@ -93,7 +93,7 @@ glabel pause_tabs_handle_input
 /* 1387DC 8024549C 9084F1D8 */  lbu       $a0, %lo(D_8024F1D8)($a0)
 /* 1387E0 802454A0 3C068024 */  lui       $a2, %hi(func_80243090)
 /* 1387E4 802454A4 24C63090 */  addiu     $a2, $a2, %lo(func_80243090)
-/* 1387E8 802454A8 0C051F92 */  jal       func_80147E48
+/* 1387E8 802454A8 0C051F92 */  jal       replace_window_update
 /* 1387EC 802454AC 24050040 */   addiu    $a1, $zero, 0x40
 /* 1387F0 802454B0 8E220000 */  lw        $v0, ($s1)
 /* 1387F4 802454B4 3C048025 */  lui       $a0, %hi(D_8024F1D8)
@@ -101,7 +101,7 @@ glabel pause_tabs_handle_input
 /* 1387FC 802454BC 9084F1D8 */  lbu       $a0, %lo(D_8024F1D8)($a0)
 /* 138800 802454C0 3C068024 */  lui       $a2, %hi(func_80242FF4)
 /* 138804 802454C4 24C62FF4 */  addiu     $a2, $a2, %lo(func_80242FF4)
-/* 138808 802454C8 0C051F92 */  jal       func_80147E48
+/* 138808 802454C8 0C051F92 */  jal       replace_window_update
 /* 13880C 802454CC 24050040 */   addiu    $a1, $zero, 0x40
 /* 138810 802454D0 3C048016 */  lui       $a0, %hi(D_8015A070)
 /* 138814 802454D4 2484A070 */  addiu     $a0, $a0, %lo(D_8015A070)

@@ -112,7 +112,7 @@ glabel L800381C8_135C8
 /* 1368C 8003828C 00000000 */   nop
 /* 13690 80038290 0C052010 */  jal       func_80148040
 /* 13694 80038294 00000000 */   nop
-/* 13698 80038298 0C05177E */  jal       func_80145DF8
+/* 13698 80038298 0C05177E */  jal       use_default_background_settings
 /* 1369C 8003829C 00000000 */   nop
 /* 136A0 800382A0 0C050440 */  jal       func_80141100
 /* 136A4 800382A4 00000000 */   nop
@@ -122,7 +122,7 @@ glabel L800381C8_135C8
 /* 136B4 800382B4 00000000 */   nop
 /* 136B8 800382B8 0C04432E */  jal       clear_entity_data
 /* 136BC 800382BC 0000202D */   daddu    $a0, $zero, $zero
-/* 136C0 800382C0 0C04E042 */  jal       func_80138108
+/* 136C0 800382C0 0C04E042 */  jal       clear_transition_stencil
 /* 136C4 800382C4 00000000 */   nop
 /* 136C8 800382C8 0C037F14 */  jal       clear_player_status
 /* 136CC 800382CC 00000000 */   nop
@@ -134,7 +134,7 @@ glabel L800381C8_135C8
 /* 136E4 800382E4 00000000 */   nop
 /* 136E8 800382E8 0C00F8CE */  jal       func_8003E338
 /* 136EC 800382EC 00000000 */   nop
-/* 136F0 800382F0 0C016727 */  jal       func_80059C9C
+/* 136F0 800382F0 0C016727 */  jal       clear_effect_data
 /* 136F4 800382F4 00000000 */   nop
 /* 136F8 800382F8 0C04C3FC */  jal       clear_item_entity_data
 /* 136FC 800382FC 00000000 */   nop

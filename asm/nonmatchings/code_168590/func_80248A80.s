@@ -36,7 +36,7 @@ glabel func_80248A80
 /* 169354 80248AF4 2442FFDC */   addiu    $v0, $v0, -0x24
 /* 169358 80248AF8 3C048025 */  lui       $a0, %hi(D_8024A190)
 /* 16935C 80248AFC 2484A190 */  addiu     $a0, $a0, %lo(D_8024A190)
-/* 169360 80248B00 0C051FCC */  jal       func_80147F30
+/* 169360 80248B00 0C051FCC */  jal       setup_pause_menu_tab
 /* 169364 80248B04 24050002 */   addiu    $a1, $zero, 2
 /* 169368 80248B08 3C048016 */  lui       $a0, %hi(gUIPanels)
 /* 16936C 80248B0C 24849D50 */  addiu     $a0, $a0, %lo(gUIPanels)

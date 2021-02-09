@@ -8,7 +8,7 @@ glabel func_80242790_9C7B70
 /* 9C7B7C 8024279C 00000000 */   nop
 /* 9C7B80 802427A0 0C03A631 */  jal       func_800E98C4
 /* 9C7B84 802427A4 00000000 */   nop
-/* 9C7B88 802427A8 0C03A5EE */  jal       func_800E97B8
+/* 9C7B88 802427A8 0C03A5EE */  jal       close_status_menu
 /* 9C7B8C 802427AC 00000000 */   nop
 /* 9C7B90 802427B0 8FBF0010 */  lw        $ra, 0x10($sp)
 /* 9C7B94 802427B4 24020002 */  addiu     $v0, $zero, 2

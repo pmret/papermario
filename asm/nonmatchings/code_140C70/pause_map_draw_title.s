@@ -38,7 +38,7 @@ glabel pause_map_draw_title
 /* 141910 8024E5D0 AFA00014 */  sw        $zero, 0x14($sp)
 /* 141914 8024E5D4 00032040 */  sll       $a0, $v1, 1
 /* 141918 8024E5D8 00832021 */  addu      $a0, $a0, $v1
-/* 14191C 8024E5DC 0C04993B */  jal       draw_string
+/* 14191C 8024E5DC 0C04993B */  jal       draw_msg
 /* 141920 8024E5E0 00902021 */   addu     $a0, $a0, $s0
 .L8024E5E4:
 /* 141924 8024E5E4 8FBF002C */  lw        $ra, 0x2c($sp)

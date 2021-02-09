@@ -11,7 +11,7 @@ glabel fx_walk_large
 /* 4AEE8 8006FAE8 E7AE0024 */  swc1      $f14, 0x24($sp)
 /* 4AEEC 8006FAEC E7B00028 */  swc1      $f16, 0x28($sp)
 /* 4AEF0 8006FAF0 AFBF002C */  sw        $ra, 0x2c($sp)
-/* 4AEF4 8006FAF4 0C016959 */  jal       play_effect
+/* 4AEF4 8006FAF4 0C016959 */  jal       load_effect
 /* 4AEF8 8006FAF8 24040006 */   addiu    $a0, $zero, 6
 /* 4AEFC 8006FAFC 8FA40010 */  lw        $a0, 0x10($sp)
 /* 4AF00 8006FB00 8FA50014 */  lw        $a1, 0x14($sp)

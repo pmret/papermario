@@ -69,7 +69,7 @@ INCLUDE_ASM(s32, "code_13870_len_6980", enable_npc_shadow);
 
 INCLUDE_ASM(s32, "code_13870_len_6980", disable_npc_shadow);
 
-INCLUDE_ASM(s32, "code_13870_len_6980", func_8003AC5C);
+INCLUDE_ASM(s32, "code_13870_len_6980", set_npc_sprite);
 
 INCLUDE_ASM(s32, "code_13870_len_6980", enable_npc_blur);
 
@@ -223,11 +223,11 @@ void func_8003E50C(void) {
 
 INCLUDE_ASM(s32, "code_13870_len_6980", func_8003E514);
 
-INCLUDE_ASM(s32, "code_13870_len_6980", func_8003E524);
+INCLUDE_ASM(s32, "code_13870_len_6980", update_counters);
 
-INCLUDE_ASM(s32, "code_13870_len_6980", func_8003E5B0);
+INCLUDE_ASM(s32, "code_13870_len_6980", draw_encounter_ui);
 
-INCLUDE_ASM(s32, "code_13870_len_6980", func_8003E63C);
+INCLUDE_ASM(s32, "code_13870_len_6980", draw_first_strike_ui);
 
 void func_8003E670(void) {
 }

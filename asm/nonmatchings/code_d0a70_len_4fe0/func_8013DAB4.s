@@ -331,7 +331,7 @@ glabel func_8013DAB4
 /* D46B0 8013DFB0 24E7FF00 */  addiu     $a3, $a3, -0x100
 /* D46B4 8013DFB4 AFAE0020 */  sw        $t6, 0x20($sp)
 /* D46B8 8013DFB8 AFAF0024 */  sw        $t7, 0x24($sp)
-/* D46BC 8013DFBC 0C052071 */  jal       func_801481C4
+/* D46BC 8013DFBC 0C052071 */  jal       render_shaded_sprite
 /* D46C0 8013DFC0 AFA20018 */   sw       $v0, 0x18($sp)
 /* D46C4 8013DFC4 8FAE0020 */  lw        $t6, 0x20($sp)
 /* D46C8 8013DFC8 8FAF0024 */  lw        $t7, 0x24($sp)

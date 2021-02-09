@@ -11,7 +11,7 @@ glabel fx_sleep_bubble
 /* 4BC08 80070808 E7AE0024 */  swc1      $f14, 0x24($sp)
 /* 4BC0C 8007080C E7B00028 */  swc1      $f16, 0x28($sp)
 /* 4BC10 80070810 AFBF002C */  sw        $ra, 0x2c($sp)
-/* 4BC14 80070814 0C016959 */  jal       play_effect
+/* 4BC14 80070814 0C016959 */  jal       load_effect
 /* 4BC18 80070818 24040029 */   addiu    $a0, $zero, 0x29
 /* 4BC1C 8007081C 8FA40010 */  lw        $a0, 0x10($sp)
 /* 4BC20 80070820 8FA50014 */  lw        $a1, 0x14($sp)

@@ -52,7 +52,7 @@ glabel pause_badges_init
 /* 13C3B0 80249070 24420024 */   addiu    $v0, $v0, 0x24
 /* 13C3B4 80249074 3C048025 */  lui       $a0, %hi(D_8024F528)
 /* 13C3B8 80249078 2484F528 */  addiu     $a0, $a0, %lo(D_8024F528)
-/* 13C3BC 8024907C 0C051FCC */  jal       func_80147F30
+/* 13C3BC 8024907C 0C051FCC */  jal       setup_pause_menu_tab
 /* 13C3C0 80249080 24050001 */   addiu    $a1, $zero, 1
 /* 13C3C4 80249084 24020001 */  addiu     $v0, $zero, 1
 /* 13C3C8 80249088 A2620000 */  sb        $v0, ($s3)

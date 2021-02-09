@@ -104,7 +104,7 @@ glabel func_800E5A2C
 /* 7F044 800E5B94 30422000 */  andi      $v0, $v0, 0x2000
 /* 7F048 800E5B98 14400004 */  bnez      $v0, .L800E5BAC
 /* 7F04C 800E5B9C 0000182D */   daddu    $v1, $zero, $zero
-/* 7F050 800E5BA0 0C010C77 */  jal       func_800431DC
+/* 7F050 800E5BA0 0C010C77 */  jal       check_conversation_trigger
 /* 7F054 800E5BA4 00000000 */   nop
 /* 7F058 800E5BA8 0040182D */  daddu     $v1, $v0, $zero
 .L800E5BAC:

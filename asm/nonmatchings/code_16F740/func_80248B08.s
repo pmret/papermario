@@ -143,7 +143,7 @@ glabel L80248CAC_17758C
 /* 1775D0 80248CF0 8E4400D8 */   lw       $a0, 0xd8($s2)
 /* 1775D4 80248CF4 0C016938 */  jal       remove_all_effects
 /* 1775D8 80248CF8 00000000 */   nop
-/* 1775DC 80248CFC 0C051FB1 */  jal       func_80147EC4
+/* 1775DC 80248CFC 0C051FB1 */  jal       set_windows_visible
 /* 1775E0 80248D00 0000202D */   daddu    $a0, $zero, $zero
 /* 1775E4 80248D04 3C02800E */  lui       $v0, %hi(gBattleStatus+0x4)
 /* 1775E8 80248D08 8C42C074 */  lw        $v0, %lo(gBattleStatus+0x4)($v0)

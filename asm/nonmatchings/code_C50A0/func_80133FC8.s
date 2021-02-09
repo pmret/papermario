@@ -15,7 +15,7 @@ glabel func_80133FC8
 /* CA6F0 80133FF0 AFB3001C */  sw        $s3, 0x1c($sp)
 /* CA6F4 80133FF4 AFB20018 */  sw        $s2, 0x18($sp)
 /* CA6F8 80133FF8 AFB10014 */  sw        $s1, 0x14($sp)
-/* CA6FC 80133FFC 0C011052 */  jal       func_80044148
+/* CA6FC 80133FFC 0C011052 */  jal       is_starting_conversation
 /* CA700 80134000 AFB00010 */   sw       $s0, 0x10($sp)
 /* CA704 80134004 14400045 */  bnez      $v0, .L8013411C
 /* CA708 80134008 2402FFFF */   addiu    $v0, $zero, -1

@@ -25,15 +25,15 @@ glabel func_802A10A4_756824
 /* 756868 802A10E8 24040001 */  addiu     $a0, $zero, 1
 /* 75686C 802A10EC 0000282D */  daddu     $a1, $zero, $zero
 /* 756870 802A10F0 00A0302D */  daddu     $a2, $a1, $zero
-/* 756874 802A10F4 0C04DF93 */  jal       func_80137E4C
+/* 756874 802A10F4 0C04DF93 */  jal       set_transition_stencil_center
 /* 756878 802A10F8 00A0382D */   daddu    $a3, $a1, $zero
 /* 75687C 802A10FC 24040001 */  addiu     $a0, $zero, 1
 /* 756880 802A1100 0080282D */  daddu     $a1, $a0, $zero
 /* 756884 802A1104 24060140 */  addiu     $a2, $zero, 0x140
-/* 756888 802A1108 0C04DF93 */  jal       func_80137E4C
+/* 756888 802A1108 0C04DF93 */  jal       set_transition_stencil_center
 /* 75688C 802A110C 240700F0 */   addiu    $a3, $zero, 0xf0
 /* 756890 802A1110 3C054320 */  lui       $a1, 0x4320
-/* 756894 802A1114 0C04DF69 */  jal       func_80137DA4
+/* 756894 802A1114 0C04DF69 */  jal       set_transition_stencil_zoom_1
 /* 756898 802A1118 2404000C */   addiu    $a0, $zero, 0xc
 /* 75689C 802A111C 8E020074 */  lw        $v0, 0x74($s0)
 /* 7568A0 802A1120 14400010 */  bnez      $v0, .L802A1164
@@ -41,15 +41,15 @@ glabel func_802A10A4_756824
 /* 7568A8 802A1128 24040001 */  addiu     $a0, $zero, 1
 /* 7568AC 802A112C 0000282D */  daddu     $a1, $zero, $zero
 /* 7568B0 802A1130 00A0302D */  daddu     $a2, $a1, $zero
-/* 7568B4 802A1134 0C04DF93 */  jal       func_80137E4C
+/* 7568B4 802A1134 0C04DF93 */  jal       set_transition_stencil_center
 /* 7568B8 802A1138 00A0382D */   daddu    $a3, $a1, $zero
 /* 7568BC 802A113C 24040001 */  addiu     $a0, $zero, 1
 /* 7568C0 802A1140 0080282D */  daddu     $a1, $a0, $zero
 /* 7568C4 802A1144 24060140 */  addiu     $a2, $zero, 0x140
-/* 7568C8 802A1148 0C04DF93 */  jal       func_80137E4C
+/* 7568C8 802A1148 0C04DF93 */  jal       set_transition_stencil_center
 /* 7568CC 802A114C 240700F0 */   addiu    $a3, $zero, 0xf0
 /* 7568D0 802A1150 2404000C */  addiu     $a0, $zero, 0xc
-/* 7568D4 802A1154 0C04DF69 */  jal       func_80137DA4
+/* 7568D4 802A1154 0C04DF69 */  jal       set_transition_stencil_zoom_1
 /* 7568D8 802A1158 0000282D */   daddu    $a1, $zero, $zero
 /* 7568DC 802A115C 080A845B */  j         .L802A116C
 /* 7568E0 802A1160 24020002 */   addiu    $v0, $zero, 2

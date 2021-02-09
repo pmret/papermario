@@ -32,7 +32,7 @@ glabel func_80240178_AF7AC8
 /* AF7B30 802401E0 AFA00014 */  sw        $zero, 0x14($sp)
 /* AF7B34 802401E4 8C840014 */  lw        $a0, 0x14($a0)
 .L802401E8:
-/* AF7B38 802401E8 0C04993B */  jal       draw_string
+/* AF7B38 802401E8 0C04993B */  jal       draw_msg
 /* AF7B3C 802401EC 240700FF */   addiu    $a3, $zero, 0xff
 /* AF7B40 802401F0 8FBF0018 */  lw        $ra, 0x18($sp)
 /* AF7B44 802401F4 03E00008 */  jr        $ra

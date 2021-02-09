@@ -28,9 +28,9 @@ ApiStatus func_802405EC_E1EA4C(ScriptInstance* script, s32 isInitialCall) {
         script->functionTemp[0].s = 255;
     }
 
-    func_80137E10(1, 208, 208, 208);
-    func_80137DA4(0, script->functionTemp[0].s);
-    func_801380D4(1, 0);
+    set_transition_stencil_color(1, 208, 208, 208);
+    set_transition_stencil_zoom_1(0, script->functionTemp[0].s);
+    set_transition_stencil_alpha(1, 0);
     return script->functionTemp[0].s == 255;
 }
 

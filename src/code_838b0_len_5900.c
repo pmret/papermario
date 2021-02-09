@@ -23,11 +23,11 @@ INCLUDE_ASM(s32, "code_838b0_len_5900", is_current_partner_flying, void);
 
 INCLUDE_ASM(s32, "code_838b0_len_5900", func_800EA5B8);
 
-INCLUDE_ASM(s32, "code_838b0_len_5900", func_800EA5D0);
+INCLUDE_ASM(s32, "code_838b0_len_5900", load_partner_npc);
 
 INCLUDE_ASM(s32, "code_838b0_len_5900", func_800EA6A8);
 
-INCLUDE_ASM(s32, "code_838b0_len_5900", func_800EA6CC);
+INCLUDE_ASM(s32, "code_838b0_len_5900", _use_partner_ability);
 
 INCLUDE_ASM(s32, "code_838b0_len_5900", func_800EB168, s32 arg0);
 
@@ -89,9 +89,9 @@ INCLUDE_ASM(s32, "code_838b0_len_5900", func_800EF314);
 
 INCLUDE_ASM(void, "code_838b0_len_5900", enable_partner_ai, void);
 
-INCLUDE_ASM(s32, "code_838b0_len_5900", func_800EF394, f32 arg0);
+INCLUDE_ASM(s32, "code_838b0_len_5900", set_parter_tether_distance, f32 arg0);
 
-INCLUDE_ASM(s32, "code_838b0_len_5900", func_800EF3A4);
+INCLUDE_ASM(s32, "code_838b0_len_5900", reset_parter_tether_distance);
 
 INCLUDE_ASM(s32, "code_838b0_len_5900", func_800EF3C0);
 

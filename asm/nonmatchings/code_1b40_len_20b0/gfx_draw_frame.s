@@ -46,7 +46,7 @@ glabel gfx_draw_frame
 /* 1FA4 80026BA4 00000000 */   nop
 /* 1FA8 80026BA8 0C0B0FB9 */  jal       func_802C3EE4
 /* 1FAC 80026BAC 00000000 */   nop
-/* 1FB0 80026BB0 0C04E088 */  jal       func_80138220
+/* 1FB0 80026BB0 0C04E088 */  jal       render_transition_stencil_lower
 /* 1FB4 80026BB4 00000000 */   nop
 /* 1FB8 80026BB8 0C048D54 */  jal       func_80123550
 /* 1FBC 80026BBC 00000000 */   nop
@@ -61,7 +61,7 @@ glabel gfx_draw_frame
 /* 1FE0 80026BE0 00431024 */  and       $v0, $v0, $v1
 /* 1FE4 80026BE4 14400003 */  bnez      $v0, .L80026BF4
 /* 1FE8 80026BE8 00000000 */   nop
-/* 1FEC 80026BEC 0C051EB1 */  jal       func_80147AC4
+/* 1FEC 80026BEC 0C051EB1 */  jal       render_window_root
 /* 1FF0 80026BF0 00000000 */   nop
 .L80026BF4:
 /* 1FF4 80026BF4 8E020000 */  lw        $v0, ($s0)
@@ -91,7 +91,7 @@ glabel gfx_draw_frame
 /* 204C 80026C4C 00000000 */   nop
 /* 2050 80026C50 0C0509C7 */  jal       func_8014271C
 /* 2054 80026C54 00000000 */   nop
-/* 2058 80026C58 0C04E068 */  jal       func_801381A0
+/* 2058 80026C58 0C04E068 */  jal       render_transition_stencil_upper
 /* 205C 80026C5C 00000000 */   nop
 /* 2060 80026C60 8E220000 */  lw        $v0, ($s1)
 /* 2064 80026C64 24030010 */  addiu     $v1, $zero, 0x10
@@ -116,7 +116,7 @@ glabel gfx_draw_frame
 /* 20A8 80026CA8 00431024 */  and       $v0, $v0, $v1
 /* 20AC 80026CAC 10400003 */  beqz      $v0, .L80026CBC
 /* 20B0 80026CB0 00000000 */   nop
-/* 20B4 80026CB4 0C051EB1 */  jal       func_80147AC4
+/* 20B4 80026CB4 0C051EB1 */  jal       render_window_root
 /* 20B8 80026CB8 00000000 */   nop
 .L80026CBC:
 /* 20BC 80026CBC 0C044BF1 */  jal       func_80112FC4
@@ -138,7 +138,7 @@ glabel gfx_draw_frame
 /* 20FC 80026CFC 00000000 */  nop
 /* 2100 80026D00 46800020 */  cvt.s.w   $f0, $f0
 /* 2104 80026D04 44050000 */  mfc1      $a1, $f0
-/* 2108 80026D08 0C04DAA0 */  jal       func_80136A80
+/* 2108 80026D08 0C04DAA0 */  jal       _render_transition_stencil
 /* 210C 80026D0C 0000302D */   daddu    $a2, $zero, $zero
 .L80026D10:
 /* 2110 80026D10 3C02800A */  lui       $v0, %hi(gMasterGfxPos)
