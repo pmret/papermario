@@ -10413,3 +10413,4 @@ func_8004D428 = 0x8004D428; // type:func
 gBattleItemTable = 0x80293C04; // type:data
 func_8006A9F0 = 0x8006A9F0; // type:func rom:0x45B74
 rdpstateinit_dl = 0x80093BB8; // type:data
+wPartners = 0x800F803C; // type: data
