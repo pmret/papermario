@@ -12,6 +12,7 @@ import hashlib
 
 sys.path.append(os.path.dirname(__file__) + "/tools/splat")
 import split
+from segtypes.n64.code import Subsegment
 
 INCLUDE_ASM_RE = re.compile(r"___INCLUDE_ASM\([^,]+, ([^,]+), ([^,)]+)") # note _ prefix
 
@@ -69,11 +70,11 @@ def read_splat(splat_config: str):
             segments[path] = segment
 
         if isinstance(segment, N64SegCode):
-            for split_file in segment.files:
-                if split_file["subtype"] in ["i4", "i8", "ia4", "ia8", "ia16", "rgba16", "rgba32", "ci4", "ci8", "palette"]:
+            for split_file in segment.subsegments:
+                if split_file.type in ["i4", "i8", "ia4", "ia8", "ia16", "rgba16", "rgba32", "ci4", "ci8", "palette"]:
                     path = os.path.join(
                         #segment.get_subdir(split_file["subtype"]),
-                        split_file["name"] + "." + segment.get_ext(split_file["subtype"])
+                        split_file.name + "." + split_file.get_ext()
                     )
 
                     if path in segments:
@@ -462,13 +463,13 @@ async def main():
         elif f.endswith(".s"):
             n.build(obj(f), "as", f)
         elif f.endswith(".png"):
-            if isinstance(segment, dict):
+            if isinstance(segment, Subsegment):
                 # image within a code section
                 out = "$builddir/" + f + ".bin"
                 infile = find_asset(re.sub(r"\.pal\.png", ".png", f))
 
                 n.build(out, "img", infile, implicit="tools/img/build.py", variables={
-                    "img_type": segment["subtype"],
+                    "img_type": segment.type,
                     "img_flags": "",
                 })
 

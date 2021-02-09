@@ -31,7 +31,7 @@ Gfx N(coconutDL)[] = {
     gsSPEndDisplayList(),
 };
 
-s32 N(coconutEntity)[] = {
+s32 N(coconutItemModelCommandList)[] = {
     0x00000004, 0x0000000D, 0x00000001, sizeof(N(coconutDL)) / sizeof(s32), &N(coconutDL), 0x00000002, 0x00000000,
 };
 
@@ -47,7 +47,7 @@ Script N(main) = SCRIPT({
     PlaySound(SoundId_THROW);
     sleep 3;
 
-    func_802D3474(SI_VAR(10), N(coconutEntity));
+    func_802D3474(SI_VAR(10), N(coconutItemModelCommandList));
 
     $x = 1.0;
     MultiplyByActorScale($x);

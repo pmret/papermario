@@ -1,6 +1,5 @@
 from pathlib import Path, PurePath
 from util import log
-import os
 import re
 
 default_subalign = 16
