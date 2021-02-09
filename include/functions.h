@@ -177,7 +177,7 @@ void func_80137DA4(s32, f32);
 void func_80137DC0(s32, f32*, f32*);
 s32 func_80137E10(s32, u8, u8, u8);
 void func_80137E4C(s32, s32, s32, s32);
-//s32 rand_int(s32);
+s32 rand_int(s32);
 void sort_items(void);
 s32 is_ability_active(s32 arg0);
 f32 update_lerp(Easing easing, f32 start, f32 end, s32 elapsed, s32 duration);
