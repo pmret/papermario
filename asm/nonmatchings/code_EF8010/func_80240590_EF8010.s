@@ -11,7 +11,7 @@ glabel func_80240590_EF8010
 /* EF8028 802405A8 F7B80028 */  sdc1      $f24, 0x28($sp)
 /* EF802C 802405AC 4487C000 */  mtc1      $a3, $f24
 /* EF8030 802405B0 AFBF0014 */  sw        $ra, 0x14($sp)
-/* EF8034 802405B4 0C01B198 */  jal       osGetCause
+/* EF8034 802405B4 0C01B198 */  jal       __osGetCause
 /* EF8038 802405B8 0080802D */   daddu    $s0, $a0, $zero
 /* EF803C 802405BC 4616A582 */  mul.s     $f22, $f20, $f22
 /* EF8040 802405C0 00000000 */  nop

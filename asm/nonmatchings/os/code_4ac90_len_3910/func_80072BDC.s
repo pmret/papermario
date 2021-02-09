@@ -5,8 +5,8 @@ glabel func_80072BDC
 /* 4DFDC 80072BDC 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 4DFE0 80072BE0 3C02800E */  lui       $v0, %hi(gBattleStatus+0x47A)
 /* 4DFE4 80072BE4 9042C4EA */  lbu       $v0, %lo(gBattleStatus+0x47A)($v0)
-/* 4DFE8 80072BE8 3C038009 */  lui       $v1, %hi(D_80095A30)
-/* 4DFEC 80072BEC 24635A30 */  addiu     $v1, $v1, %lo(D_80095A30)
+/* 4DFE8 80072BE8 3C038009 */  lui       $v1, %hi(gBattleAreas)
+/* 4DFEC 80072BEC 24635A30 */  addiu     $v1, $v1, %lo(gBattleAreas)
 /* 4DFF0 80072BF0 AFBF0018 */  sw        $ra, 0x18($sp)
 /* 4DFF4 80072BF4 AFB10014 */  sw        $s1, 0x14($sp)
 /* 4DFF8 80072BF8 AFB00010 */  sw        $s0, 0x10($sp)

@@ -1,6 +1,7 @@
 import os
 from segtypes.n64.segment import N64Segment
 from pathlib import Path
+from segtypes.segment import Segment
 
 class N64SegHeader(N64Segment):
     def should_run(self):
@@ -18,7 +19,7 @@ class N64SegHeader(N64Segment):
         return f".{typ} {dstr} /* {comment} */"
 
     def split(self, rom_bytes, base_path):
-        out_dir = self.create_split_dir(base_path, "asm")
+        out_dir = Segment.create_split_dir(base_path, "asm")
 
         encoding = self.options.get("header_encoding", "ASCII")
 

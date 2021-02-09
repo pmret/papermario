@@ -64,9 +64,9 @@ glabel load_map_by_IDs
 /* 35BD4 8005A7D4 AC400144 */  sw        $zero, 0x144($v0)
 /* 35BD8 8005A7D8 00111400 */  sll       $v0, $s1, 0x10
 /* 35BDC 8005A7DC 00021303 */  sra       $v0, $v0, 0xc
-/* 35BE0 8005A7E0 3C018009 */  lui       $at, %hi(D_800934F4)
+/* 35BE0 8005A7E0 3C018009 */  lui       $at, %hi(gAreas+0x4)
 /* 35BE4 8005A7E4 00220821 */  addu      $at, $at, $v0
-/* 35BE8 8005A7E8 8C2234F4 */  lw        $v0, %lo(D_800934F4)($at)
+/* 35BE8 8005A7E8 8C2234F4 */  lw        $v0, %lo(gAreas+0x4)($at)
 /* 35BEC 8005A7EC 00031AC3 */  sra       $v1, $v1, 0xb
 /* 35BF0 8005A7F0 00439021 */  addu      $s2, $v0, $v1
 /* 35BF4 8005A7F4 8E460000 */  lw        $a2, ($s2)
