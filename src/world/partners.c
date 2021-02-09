@@ -64,7 +64,7 @@ f32 D_800F8030 = 0.0f;
 s8 D_800F8034[] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
 s16 D_800F803A = 0;
 
-WorldPartner wPartners[] = {
+WorldPartner wPartners[12] = {
     {}, // None
     {
         // Goombario
