@@ -23,11 +23,17 @@ Internally, there's a new Symbol class which stores information about a symbol a
 
 **data example**: `gSomeDataVar = 0x80024233; // type:data size:0x100`
 
-As always, feel free to reach out to me with any questions, suggestions, or feedback.
-
-## 0.6.1: `assets_dir` option
+### 0.6.1: `assets_dir` option
 
 This release adds a new `assets_dir` option in `splat.yaml`s that allows you to override the default `img`, `bin`, and other directories that segments output to.
 
 Want to interdisperse split assets with your sourcecode? `assets_dir: src`!
 Want to have all assets live in a single directory? `assets_dir: assets`!
+
+### 0.6.2: Subsections
+I've begun a refactor of the code "files" code, which makes everything cleaner and easier to extend.
+There's also a new option, `create_new_c_files`, which disables the creation of nonexistent c files. This behavior is on by default, but if you want to disable it for any reason, you now have the option to do so.
+
+I am also working on adding bss support as well. It should almost be all set, aside from the changes needed in the linker script.
+
+**Breaking change**: The `files` field in `code` segments should now be renamed to `subsections`.

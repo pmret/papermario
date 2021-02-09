@@ -1,7 +1,6 @@
 #! /usr/bin/python3
 
 import argparse
-import hashlib
 import zlib
 
 parser = argparse.ArgumentParser(description='Gives information on n64 roms')
@@ -80,7 +79,7 @@ def get_info_bytes(rom_bytes, encoding):
     cic = get_cic(rom_bytes)
     entry_point = get_entry_point(program_counter, cic)
 
-    # todo add support for
+    # TODO: add support for
     # compression_formats = []
     #  for format in ["Yay0", "vpk0"]:
     #     if rom_bytes.find(bytes(format, "ASCII")) != -1:

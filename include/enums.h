@@ -671,6 +671,7 @@ typedef s16 ItemId;
 typedef UNK_TYPE PlayerAnim;
 #define PlayerAnim_STAND_STILL      0x00010000
 #define PlayerAnim_CROUCH_STILL     0x00010001
+#define PlayerAnim_2                0x00010002 // TODO
 #define PlayerAnim_PANTING          0x00010003
 #define PlayerAnim_WALKING          0x00010004
 #define PlayerAnim_RUNNING          0x00010005

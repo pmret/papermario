@@ -31,14 +31,14 @@ Gfx N(coconutDL)[] = {
     gsSPEndDisplayList(),
 };
 
-s32 D_802A1B50_7304B0[] = {
+s32 N(coconutItemModelCommandList)[] = {
     0x00000004, 0x0000000D, 0x00000001, sizeof(N(coconutDL)) / sizeof(s32), &N(coconutDL), 0x00000002, 0x00000000,
 };
 
 Script N(main) = SCRIPT({
     SI_VAR(10) =c ItemId_COCONUT;
 
-    await D_802A1240_72F960;
+    await N(UseItemWithEffect);
 
     UseCamPreset(3);
     MoveBattleCamOver(15);
@@ -47,7 +47,7 @@ Script N(main) = SCRIPT({
     PlaySound(SoundId_THROW);
     sleep 3;
 
-    func_802D3474(SI_VAR(10), D_802A1B50_7304B0);
+    func_802D3474(SI_VAR(10), N(coconutItemModelCommandList));
 
     $x = 1.0;
     MultiplyByActorScale($x);
@@ -91,5 +91,5 @@ Script N(main) = SCRIPT({
 
     func_802D3624(SI_VAR(10));
 
-    await D_802A1670_72FFD0; // back to home pos
+    await N(PlayerGoHome);
 });

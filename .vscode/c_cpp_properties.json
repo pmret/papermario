@@ -12,6 +12,7 @@
             },
             "includePath": [
                 "${workspaceFolder}/include",
+                "${workspaceFolder}/build/include",
                 "${workspaceFolder}/src"
             ],
             "defines": [
