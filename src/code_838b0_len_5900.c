@@ -1,4 +1,8 @@
 #include "common.h"
+#include "map.h"
+#include "world/partners.h"
+
+NpcId create_basic_npc(NpcBlueprint* blueprint);
 
 INCLUDE_ASM(s32, "code_838b0_len_5900", use_consumable);
 
@@ -23,7 +27,46 @@ INCLUDE_ASM(s32, "code_838b0_len_5900", is_current_partner_flying, void);
 
 INCLUDE_ASM(s32, "code_838b0_len_5900", func_800EA5B8);
 
-INCLUDE_ASM(s32, "code_838b0_len_5900", load_partner_npc);
+void load_partner_npc(void) {
+    WorldPartner* partnerEntry = &D_800F803C[D_8010CFD8];
+    Npc** partnerNpcPtr = &D_8010C930;
+    WorldPartner** partner = &D_8010CFEC;
+    NpcId npcIndex;
+    NpcBlueprint blueprint;
+    NpcBlueprint* blueprintPtr;
+
+    *partner = partnerEntry;
+    blueprintPtr = &blueprint;
+    dma_copy(partnerEntry->dmaStart, partnerEntry->dmaEnd, partnerEntry->dmaDest);
+
+    blueprint.flags = 0x4000100;
+    blueprint.initialAnim = (*partner)->idle;
+    blueprint.onUpdate = NULL;
+    blueprint.onRender = NULL;
+    D_8010CFD0 = npcIndex = create_basic_npc(blueprintPtr);
+
+    *partnerNpcPtr = get_npc_by_index(npcIndex);
+
+    {
+        Npc* npc = *partnerNpcPtr;
+        npc->npcID = NpcId_PARTNER;
+        npc->collisionRadius = 10;
+        npc->collisionHeight = 10;
+    }
+
+    {
+        Npc* npc = *partnerNpcPtr;
+        npc->pos.x = 0.0f;
+        npc->pos.y = -1000.0f;
+        npc->pos.z = 0.0f;
+        npc->scale.x = 0.0f;
+        npc->scale.y = 0.0f;
+        npc->scale.z = 0.0f;
+    }
+
+    D_8010C954 = 0;
+}
+
 
 INCLUDE_ASM(s32, "code_838b0_len_5900", func_800EA6A8);
 
