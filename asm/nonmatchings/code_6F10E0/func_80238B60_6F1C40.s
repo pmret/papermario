@@ -13,11 +13,11 @@ glabel func_80238B60_6F1C40
 /* 6F1C60 80238B80 0040202D */  daddu     $a0, $v0, $zero
 /* 6F1C64 80238B84 90820136 */  lbu       $v0, 0x136($a0)
 /* 6F1C68 80238B88 00021080 */  sll       $v0, $v0, 2
-/* 6F1C6C 80238B8C 3C018028 */  lui       $at, %hi(D_80282B98)
+/* 6F1C6C 80238B8C 3C018028 */  lui       $at, %hi(gActorTattles)
 /* 6F1C70 80238B90 00220821 */  addu      $at, $at, $v0
-/* 6F1C74 80238B94 8C222B98 */  lw        $v0, %lo(D_80282B98)($at)
-/* 6F1C78 80238B98 3C038028 */  lui       $v1, %hi(D_80282B98)
-/* 6F1C7C 80238B9C 24632B98 */  addiu     $v1, $v1, %lo(D_80282B98)
+/* 6F1C74 80238B94 8C222B98 */  lw        $v0, %lo(gActorTattles)($at)
+/* 6F1C78 80238B98 3C038028 */  lui       $v1, %hi(gActorTattles)
+/* 6F1C7C 80238B9C 24632B98 */  addiu     $v1, $v1, %lo(gActorTattles)
 /* 6F1C80 80238BA0 14400003 */  bnez      $v0, .L80238BB0
 /* 6F1C84 80238BA4 AE020084 */   sw       $v0, 0x84($s0)
 /* 6F1C88 80238BA8 8C620000 */  lw        $v0, ($v1)

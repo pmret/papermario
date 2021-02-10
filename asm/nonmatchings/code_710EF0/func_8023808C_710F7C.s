@@ -15,8 +15,8 @@ glabel func_8023808C_710F7C
 /* 710FA4 802380B4 A082009A */  sb        $v0, 0x9a($a0)
 .L802380B8:
 /* 710FA8 802380B8 3C02FBFF */  lui       $v0, 0xfbff
-/* 710FAC 802380BC 3C038028 */  lui       $v1, %hi(D_80283370)
-/* 710FB0 802380C0 24633370 */  addiu     $v1, $v1, %lo(D_80283370)
+/* 710FAC 802380BC 3C038028 */  lui       $v1, %hi(bMarioHideAnims)
+/* 710FB0 802380C0 24633370 */  addiu     $v1, $v1, %lo(bMarioHideAnims)
 /* 710FB4 802380C4 ACA30094 */  sw        $v1, 0x94($a1)
 /* 710FB8 802380C8 8C830000 */  lw        $v1, ($a0)
 /* 710FBC 802380CC 3442FFFF */  ori       $v0, $v0, 0xffff

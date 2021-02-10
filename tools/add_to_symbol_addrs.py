@@ -9,6 +9,7 @@ root_dir = script_dir + "/../"
 asm_dir = root_dir + "asm/nonmatchings/"
 
 symbol_addrs_txt = os.path.join(script_dir, "symbol_addrs.txt")
+papermario_map = os.path.join(root_dir, "build/papermario.map")
 
 with open(symbol_addrs_txt, "r") as f:
     symbols = set()
@@ -35,12 +36,26 @@ with open(symbol_addrs_txt, "a") as symbol_addrs:
                     except:
                         addr = ""
 
-
                 if not line.startswith("glabel ") or not addr.startswith("80"):
-                    print(f"??? {f_path}")
+                    #print(f"??? {f_path}")
                     continue
 
                 func_name = line.split(" ")[1].rstrip()
 
                 if not func_name in symbols:
                     symbol_addrs.write(f"{func_name} = 0x{addr}; // type:func\n")
+                    symbols.add(func_name)
+                    print(func_name)
+
+    with open(papermario_map, "r") as f:
+        for match in re.compile(f"^\s+0x([a-f0-9]+)\s+([_a-zA-Z0-9]+)$", re.MULTILINE).finditer(f.read()):
+            addr = int(match.group(1), 16)
+            func = match.group(2)
+
+            if func.startswith("0") or func.startswith("_binary_"):
+                continue
+
+            if func not in symbols:
+                symbol_addrs.write(f"{func} = 0x{addr:X};\n")
+                symbols.add(func)
+                print(func)
