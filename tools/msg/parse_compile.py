@@ -21,21 +21,22 @@ def try_convert_int(s):
 
 def parse_command(source):
     if source[0] != "[":
-        return None, [], {}, source
+        return None, [], source
     source = source[1:] # "["
 
     inside_brackets = ""
     while source[0] != "]":
         if source[0] == "\n":
-            return None, [], {}, source
+            return None, [], source
 
         inside_brackets += source[0]
         source = source[1:]
     source = source[1:] # "]"
 
-    command, *args = inside_brackets.split(" ")
+    command, *raw_args = inside_brackets.split(":")
 
-    positional_args = []
+    """
+    args = []
     named_args = {}
 
     if "=" in command:
@@ -48,22 +49,18 @@ def parse_command(source):
             key, value = arg.split("=", 1)
             named_args[key.lower()] = try_convert_int(value.lower())
         else:
-            positional_args.append(try_convert_int(arg))
+            args.append(try_convert_int(arg))
+    """
 
-    return command.lower(), positional_args, named_args, source
+    args = []
+    for arg in raw_args:
+        args.append(try_convert_int(arg.lower()))
 
-def color_to_code(color, ctx="normal"):
+    return command.lower(), args, source
+
+def color_to_code(color, style):
+    """
     COLORS = {
-        "normal": {
-            "normal": 0x0A,
-            "red": 0x20,
-            "pink": 0x21,
-            "purple": 0x22,
-            "blue": 0x23,
-            "cyan": 0x24,
-            "green": 0x25,
-            "yellow": 0x26,
-        },
         "diary": {
             "normal": 0x00,
             "red": 0x07,
@@ -96,14 +93,50 @@ def color_to_code(color, ctx="normal"):
             "green": 0x1B,
         }
     }
+    """
+    COLORS = {}
 
     if type(color) is int:
         return color
 
-    return COLORS.get(ctx, {}).get(color)
+    return COLORS.get(ctx, {
+        # [style:left], [style:right]
+        "normal": 0x0A,
+        "red": 0x20,
+        "pink": 0x21,
+        "purple": 0x22,
+        "blue": 0x23,
+        "cyan": 0x24,
+        "green": 0x25,
+        "yellow": 0x26,
+    }).get(color)
+
+def resolve_effect(fx):
+    if type(fx) is int:
+        return fx
+
+    FX = {
+        "jitter": 0x00,
+        "wavy": 0x01,
+        "noise": 0x02,
+        "fadednoise": 0x03, # 1 arg
+        "unknown": 0x04,
+        "fadedjitter": 0x05, # 1 arg
+        "rainbow": 0x06,
+        "faded": 0x07, # 1 arg
+        "wavyb": 0x08,
+        "rainbowb": 0x09,
+        "shrinking": 0x0a,
+        "growing": 0x0b,
+        "sizejitter": 0x0c,
+        "sizewave": 0x0d,
+        "dropshadow": 0x0e,
+    }
+
+    return FX.get(fx)
 
 CHARSET = {
-    "𝅘𝅥𝅮": 0x00,
+    #"𝅘𝅥𝅮": 0x00,
     "!": 0x01,
     '"': 0x02,
     "#": 0x03,
@@ -247,29 +280,29 @@ CHARSET = {
     "¡": 0x8D,
     "¿": 0x8E,
     "ª": 0x8F,
-    "♥": 0x90,
-    "★": 0x91,
-    "↑": 0x92,
-    "↓": 0x93,
-    "←": 0x94,
-    "→": 0x95,
-    "●": 0x96,
-    "✖": 0x97,
+    # "♥": 0x90,
+    # "★": 0x91,
+    # "↑": 0x92,
+    # "↓": 0x93,
+    # "←": 0x94,
+    # "→": 0x95,
+    # "●": 0x96,
+    # "✖": 0x97,
     "“": 0xA2,
     "”": 0xA3,
     "‘": 0xA4,
     "’": 0xA5,
     " ": 0xF7,
-    "Ⓐ": [0xFF, 0x24, 0xFF, 0x05, 0x10, 0x98, 0xFF, 0x25],
-    "Ⓑ": [0xFF, 0x24, 0xFF, 0x05, 0x11, 0x99, 0xFF, 0x25],
-    "Ⓢ": [0xFF, 0x24, 0xFF, 0x05, 0x12, 0xA1, 0xFF, 0x25],
-    "▲": [0xFF, 0x24, 0xFF, 0x05, 0x13, 0x9D, 0xFF, 0x25],
-    "▼": [0xFF, 0x24, 0xFF, 0x05, 0x13, 0x9E, 0xFF, 0x25],
-    "◀": [0xFF, 0x24, 0xFF, 0x05, 0x13, 0x9F, 0xFF, 0x25],
-    "▶": [0xFF, 0x24, 0xFF, 0x05, 0x13, 0xA0, 0xFF, 0x25],
-    "Ⓛ": [0xFF, 0x24, 0xFF, 0x05, 0x14, 0x9A, 0xFF, 0x25],
-    "Ⓡ": [0xFF, 0x24, 0xFF, 0x05, 0x14, 0x9B, 0xFF, 0x25],
-    "Ⓩ": [0xFF, 0x24, 0xFF, 0x05, 0x14, 0x9C, 0xFF, 0x25],
+    # "Ⓐ": [0xFF, 0x24, 0xFF, 0x05, 0x10, 0x98, 0xFF, 0x25],
+    # "Ⓑ": [0xFF, 0x24, 0xFF, 0x05, 0x11, 0x99, 0xFF, 0x25],
+    # "Ⓢ": [0xFF, 0x24, 0xFF, 0x05, 0x12, 0xA1, 0xFF, 0x25],
+    # "▲": [0xFF, 0x24, 0xFF, 0x05, 0x13, 0x9D, 0xFF, 0x25],
+    # "▼": [0xFF, 0x24, 0xFF, 0x05, 0x13, 0x9E, 0xFF, 0x25],
+    # "◀": [0xFF, 0x24, 0xFF, 0x05, 0x13, 0x9F, 0xFF, 0x25],
+    # "▶": [0xFF, 0x24, 0xFF, 0x05, 0x13, 0xA0, 0xFF, 0x25],
+    # "Ⓛ": [0xFF, 0x24, 0xFF, 0x05, 0x14, 0x9A, 0xFF, 0x25],
+    # "Ⓡ": [0xFF, 0x24, 0xFF, 0x05, 0x14, 0x9B, 0xFF, 0x25],
+    # "Ⓩ": [0xFF, 0x24, 0xFF, 0x05, 0x14, 0x9C, 0xFF, 0x25],
 }
 
 CHARSET_CREDITS = {
@@ -317,6 +350,19 @@ CHARSET_CREDITS = {
     " ": 0xF7,
 }
 
+def strip_c_comments(text):
+    def replacer(match):
+        s = match.group(0)
+        if s.startswith('/'):
+            return " "
+        else:
+            return s
+    pattern = re.compile(
+        r'//.*?$|/\*.*?\*/|\'(?:\\.|[^\\\'])*\'|"(?:\\.|[^\\"])*"',
+        re.DOTALL | re.MULTILINE
+    )
+    return re.sub(pattern, replacer, text)
+
 if __name__ == "__main__":
     if len(argv) < 3:
         print("usage: parse_compile.py [in.msg] [out.msgpack]")
@@ -328,88 +374,144 @@ if __name__ == "__main__":
 
     message = None
     with open(filename, "r") as f:
-        source = f.read()
+        source = strip_c_comments(f.read())
         lineno = 1
+
+        directive = ""
+        indent_level = 0
 
         charset = CHARSET
         font_stack = [0]
         sound_stack = [0]
         color_stack = [0x0A]
+        style = None
+        explicit_end = False
 
         while len(source) > 0:
-            if source.startswith("\n"):
-                lineno += 1
+            if source[0] == "\r":
                 source = source[1:]
                 continue
 
-            if message is None:
-                if source.startswith("//"):
-                    while source[0] != "\n":
-                        source = source[1:]
-                else:
-                    command, positional_args, named_args, source = parse_command(source)
+            if source[0] == "\n":
+                lineno += 1
+                source = source[1:]
 
-                    if not command:
-                        print(f"{filename}:{lineno}: expected [message]")
+                for i in range(indent_level):
+                    if source[0] == " " or source[0] == "\t":
+                        source = source[1:]
+                    else:
+                        break
+
+                continue
+
+            if message is None:
+                directive = ""
+                while source[0] != " ":
+                    if source[0] == "\n":
+                        lineno += 1
+                    elif source[0] == "\r":
+                        pass
+                    else:
+                        directive += source[0]
+                    source = source[1:]
+
+                directive = directive.split(":")
+
+                if directive[0] != "#message" or len(directive) != 3:
+                    print(f"{filename}:{lineno}: expected #message:SECTION:INDEX directive")
+                    exit(1)
+
+                section = int(directive[1], 16)
+
+                if directive[2].startswith("(") and directive[2].endswith(")"):
+                    name = directive[2][1:-1]
+                    index = None
+                else:
+                    name = None
+                    index = int(directive[2], 16)
+
+                directive = ""
+
+                message = Message(name, section, index)
+                messages.append(message)
+
+                while source[0] != "{":
+                    source = source[1:]
+
+                    if source[0] == "\n":
+                        lineno += 1
+                    elif source[0] == "\r":
+                        pass
+                    elif source[0] == "{":
+                        break
+                    elif source[0] != " " and source[0] != "\t":
+                        print(f"{filename}:{lineno}: expected opening brace ('{{')")
                         exit(1)
 
-                    name = positional_args[0] if len(positional_args) > 0 else None
-                    message = Message(name, named_args.get("section"), named_args.get("index"))
-                    messages.append(message)
+                source = source[1:] # {
+
+                # count indent level
+                indent_level = 0
+                while source[0] == " " or source[0] == "\t" or source[0] == "\n" or source[0] == "\r":
+                    if source[0] == " " or source[0] == "\t":
+                        indent_level += 1
+                    source = source[1:]
+
+                    # TODO: lookahead at all lines until "}" to determine lowest indent value
+                    if indent_level == 4:
+                        break
             else:
-                command, positional_args, named_args, source = parse_command(source)
+                command, args, source = parse_command(source)
 
                 if command:
-                    if command == "/message":
+                    if command == "end":
                         message.bytes += [0xFD]
-
-                        # padding
-                        while len(message.bytes) % 4 != 0:
-                            message.bytes += [0x00]
-
-                        message = None
+                        explicit_end = True
                     elif command == "raw":
-                        message.bytes += [*positional_args]
-                    elif command == "func":
-                        message.bytes += [0xFF, *positional_args]
+                        message.bytes += [*args]
+                    #elif command == "func":
+                    #    message.bytes += [0xFF, *args]
                     elif command == "br":
                         message.bytes += [0xF0]
-                    elif command == "prompt":
+                    elif command == "wait":
                         message.bytes += [0xF1]
-                    elif command == "sleep":
-                        if len(positional_args) == 0:
-                            print(f"{filename}:{lineno}: {command} command requires a positional parameter")
+                    elif command == "pause":
+                        if len(args) != 1:
+                            print(f"{filename}:{lineno}: {command} command requires 1 parameter")
                             exit(1)
 
-                        message.bytes += [0xF2, positional_args[0]]
+                        message.bytes += [0xF2, args[0]]
                     elif command == "next":
                         message.bytes += [0xFB]
+                    elif command == "func_04":
+                        message.bytes += [0xFF, 0x04]
+                    elif command == "pushcolor":
+                        message.bytes += [0xFF, 0x24]
+                    elif command == "popcolor":
+                        message.bytes += [0xFF, 0x25]
                     elif command == "color":
-                        if "color" not in named_args:
-                            print(f"{filename}:{lineno}: color command requires a 'color' parameter")
+                        if len(args) != 1:
+                            print(f"{filename}:{lineno}: color command requires 1 parameter")
                             exit(1)
 
-                        color = color_to_code(**named_args)
+                        color = color_to_code(args[0], style)
 
                         if color is None:
-                            print(f"{filename}:{lineno}: unknown color combination {named_args}")
+                            print(f"{filename}:{lineno}: unknown color")
                             exit(1)
 
                         message.bytes += [0xFF, 0x05, color]
                         color_stack.append(color)
-                    elif command == "/color":
-                        color_stack.pop()
-                        message.bytes += [0xFF, 0x05, color_stack[0]]
+                    #elif command == "/color":
+                    #    color_stack.pop()
+                    #    message.bytes += [0xFF, 0x05, color_stack[0]]
                     elif command == "style":
-                        if "style" not in named_args:
-                            print(f"{filename}:{lineno}: style command requires a 'style' parameter")
-                            exit(1)
-
                         message.bytes += [0xFC]
 
-                        style = named_args["style"]
+                        style = args[0]
+                        args = args[1:]
                         if type(style) is int:
-                            message.bytes += [style, *positional_args]
+                            message.bytes += [style, *args]
                         else:
                             if style == "right":
                                 message.bytes += [0x01]
@@ -420,37 +522,45 @@ if __name__ == "__main__":
                             elif style == "tattle":
                                 message.bytes += [0x04]
                             elif style == "choice":
-                                if "w" not in named_args or "h" not in named_args or "x" not in named_args or "y" not in named_args:
-                                    print(f"{filename}:{lineno}: 'choice' style requires parameters: x, y, w, h")
+                                if len(args) != 4:
+                                    print(f"{filename}:{lineno}: 'choice' style requires 4 parameters")
                                     exit(1)
 
-                                message.bytes += [0x05, named_args["x"], named_args["y"], named_args["w"], named_args["h"]]
+                                message.bytes += [0x05, *args]
                             elif style == "inspect":
                                 message.bytes += [0x06]
                             elif style == "sign":
                                 message.bytes += [0x07]
                             elif style == "lamppost":
-                                message.bytes += [0x08]
+                                if len(args) != 1:
+                                    print(f"{filename}:{lineno}: 'lamppost' style requires 1 parameter")
+                                    exit(1)
+
+                                message.bytes += [0x08, args[0]]
                             elif style == "postcard":
-                                message.bytes += [0x09]
+                                if len(args) != 1:
+                                    print(f"{filename}:{lineno}: 'lamppost' style requires 1 parameter")
+                                    exit(1)
+
+                                message.bytes += [0x09, args[0]]
                             elif style == "popup":
                                 message.bytes += [0x0A]
                             elif style == "upgrade":
-                                if "w" not in named_args or "h" not in named_args or "x" not in named_args or "y" not in named_args:
-                                    print(f"{filename}:{lineno}: 'upgrade' style requires parameters: x, y, w, h")
+                                if len(args) != 4:
+                                    print(f"{filename}:{lineno}: 'upgrade' style requires 4 parameters")
                                     exit(1)
 
-                                message.bytes += [0x0C, named_args["w"], named_args["x"], named_args["h"], named_args["y"]]
+                                message.bytes += [0x0C, *args]
                             elif style == "narrate":
                                 message.bytes += [0x0D]
                             elif style == "epilogue":
                                 message.bytes += [0x0E]
                     elif command == "font":
-                        if "font" not in named_args:
-                            print(f"{filename}:{lineno}: font command requires a 'font' parameter")
+                        if len(args) != 1:
+                            print(f"{filename}:{lineno}: font command requires 1 parameter")
                             exit(1)
 
-                        font = named_args["font"]
+                        font = args[0]
 
                         if font == "normal":
                             font = 0
@@ -470,203 +580,213 @@ if __name__ == "__main__":
                             charset = CHARSET_CREDITS
                         else:
                             charset = CHARSET
-                    elif command == "/font":
-                        font_stack.pop()
-                        message.bytes += [0xFF, 0x00, font_stack[0]]
+                    # elif command == "/font":
+                    #     font_stack.pop()
+                    #     message.bytes += [0xFF, 0x00, font_stack[0]]
 
-                        if font == 3 or font == 4:
-                            charset = CHARSET_CREDITS
-                        else:
-                            charset = CHARSET
-                    elif command == "noskip":
+                    #     if font == 3 or font == 4:
+                    #         charset = CHARSET_CREDITS
+                    #     else:
+                    #         charset = CHARSET
+                    elif command == "inputoff":
                         message.bytes += [0xFF, 0x07]
-                    elif command == "/noskip":
+                    elif command == "inputon":
                         message.bytes += [0xFF, 0x08]
-                    elif command == "instant":
+                    elif command == "delayoff":
                         message.bytes += [0xFF, 0x09]
-                    elif command == "/instant":
+                    elif command == "delayon":
                         message.bytes += [0xFF, 0x0A]
                     elif command == "kerning":
-                        if "kerning" not in named_args:
-                            print(f"{filename}:{lineno}: kerning command requires a 'kerning' parameter")
+                        if len(args) != 1:
+                            print(f"{filename}:{lineno}: {command} command requires 1 parameter")
                             exit(1)
 
-                        message.bytes += [0xFF, 0x0B, named_args["kerning"]]
+                        message.bytes += [0xFF, 0x0B, args[0]]
                     elif command == "scroll":
-                        if len(positional_args) == 0:
-                            print(f"{filename}:{lineno}: scroll command requires a positional parameter")
+                        if len(args) != 1:
+                            print(f"{filename}:{lineno}: {command} command requires 1 parameter")
                             exit(1)
 
-                        message.bytes += [0xFF, 0x0C, positional_args[0]]
+                        message.bytes += [0xFF, 0x0C, args[0]]
                     elif command == "size":
-                        if "x" not in named_args or "y" not in named_args:
-                            print(f"{filename}:{lineno}: size command requires parameters: x, y")
+                        if len(args) != 2:
+                            print(f"{filename}:{lineno}: {command} command requires 2 parameters")
                             exit(1)
 
-                        message.bytes += [0xFF, 0x0D, named_args["x"], named_args["y"]]
-                    elif command == "/size":
+                        message.bytes += [0xFF, 0x0D, *args]
+                    elif command == "sizereset":
                         message.bytes += [0xFF, 0x0E]
                     elif command == "speed":
-                        if "delay" not in named_args or "chars" not in named_args:
-                            print(f"{filename}:{lineno}: speed command requires parameters: delay, chars")
+                        if len(args) != 2:
+                            print(f"{filename}:{lineno}: {command} command requires 2 parameters")
                             exit(1)
 
-                        message.bytes += [0xFF, 0x0F, named_args["delay"], named_args["chars"]]
-                    elif command == "pos":
-                        if "y" not in named_args:
-                            print(f"{filename}:{lineno}: pos command requires parameter: y (x is optional)")
+                        message.bytes += [0xFF, 0x0F, *args]
+                    # elif command == "pos":
+                    #     if "y" not in named_args:
+                    #         print(f"{filename}:{lineno}: pos command requires parameter: y (x is optional)")
+                    #         exit(1)
+
+                    #     if "x" in named_args:
+                    #         message.bytes += [0xFF, 0x10, named_args["x"], named_args["y"]]
+                    #     else:
+                    #         message.bytes += [0xFF, 0x11, named_args["y"]]
+                    elif command == "setprintpos":
+                        if len(args) != 2:
+                            print(f"{filename}:{lineno}: {command} command requires 2 parameters")
                             exit(1)
 
-                        if "x" in named_args:
-                            message.bytes += [0xFF, 0x10, named_args["x"], named_args["y"]]
-                        else:
-                            message.bytes += [0xFF, 0x11, named_args["y"]]
+                        message.bytes += [0xFF, 0x10, *args]
+                    elif command == "setprinty":
+                        if len(args) != 1:
+                            print(f"{filename}:{lineno}: {command} command requires 1 parameter")
+                            exit(1)
+
+                        message.bytes += [0xFF, 0x11, *args]
                     elif command == "indent":
-                        if len(positional_args) == 0:
-                            print(f"{filename}:{lineno}: indent command requires a positional parameter")
+                        if len(args) != 1:
+                            print(f"{filename}:{lineno}: indent command requires 1 parameter")
                             exit(1)
 
-                        message.bytes += [0xFF, 0x12, positional_args[0]]
-                    elif command == "down":
-                        if len(positional_args) == 0:
-                            print(f"{filename}:{lineno}: down command requires a positional parameter")
+                        message.bytes += [0xFF, 0x12, args[0]]
+                    # elif command == "image":
+                    #     if len(args) == 1:
+                    #         message.bytes += [0xFF, 0x15, args[0]]
+                    #     elif len(args) == 7:
+                    #         message.bytes += [0xFF, 0x18, *args]
+                    #     else:
+                    #         print(f"{filename}:{lineno}: image command requires 1 or 7 parameters")
+                    #         exit(1)
+                    elif command == "image1":
+                        if len(args) != 1:
+                            print(f"{filename}:{lineno}: {command} command requires 1 parameters")
                             exit(1)
 
-                        message.bytes += [0xFF, 0x13, positional_args[0]]
-                    elif command == "up":
-                        if len(positional_args) == 0:
-                            print(f"{filename}:{lineno}: up command requires a positional parameter")
+                        message.bytes += [0xFF, 0x15, *args]
+                    elif command == "image7":
+                        if len(args) != 7:
+                            print(f"{filename}:{lineno}: {command} command requires 7 parameters")
                             exit(1)
 
-                        message.bytes += [0xFF, 0x14, positional_args[0]]
-                    elif command == "image":
-                        if len(positional_args) == 1:
-                            message.bytes += [0xFF, 0x15, positional_args[0]]
-                        elif len(positional_args) == 7:
-                            message.bytes += [0xFF, 0x18, *positional_args]
-                        else:
-                            print(f"{filename}:{lineno}: image command requires 1 or 7 positional parameters")
-                            exit(1)
+                        message.bytes += [0xFF, 0x18, *args]
                     elif command == "sprite":
-                        if len(positional_args) != 3:
-                            print(f"{filename}:{lineno}: sprite command requires 3 positional parameters")
+                        if len(args) != 3:
+                            print(f"{filename}:{lineno}: sprite command requires 3 parameters")
                             exit(1)
 
-                        message.bytes += [0xFF, 0x16, *positional_args]
+                        message.bytes += [0xFF, 0x16, *args]
                     elif command == "item":
-                        if len(positional_args) != 2:
-                            print(f"{filename}:{lineno}: item command requires 2 positional parameters")
+                        if len(args) != 2:
+                            print(f"{filename}:{lineno}: item command requires 2 parameters")
                             exit(1)
 
-                        message.bytes += [0xFF, 0x17, *positional_args]
+                        message.bytes += [0xFF, 0x17, *args]
                     elif command == "cursor":
-                        if len(positional_args) != 1:
-                            print(f"{filename}:{lineno}: cursor command requires 1 positional parameter")
+                        if len(args) != 1:
+                            print(f"{filename}:{lineno}: cursor command requires 1 parameter")
                             exit(1)
 
-                        message.bytes += [0xFF, 0x1E, *positional_args]
+                        message.bytes += [0xFF, 0x1E, *args]
                     elif command == "option":
-                        if len(positional_args) != 1:
-                            print(f"{filename}:{lineno}: option command requires 1 positional parameter")
+                        if len(args) != 1:
+                            print(f"{filename}:{lineno}: option command requires 1 parameter")
                             exit(1)
 
-                        message.bytes += [0xFF, 0x21, *positional_args]
-                    elif command == "choice":
-                        if len(positional_args) != 1:
-                            print(f"{filename}:{lineno}: choice command requires 1 positional parameter")
+                        message.bytes += [0xFF, 0x21, *args]
+                    elif command == "endchoice":
+                        if len(args) != 1:
+                            print(f"{filename}:{lineno}: {command} command requires 1 parameter")
                             exit(1)
 
-                        message.bytes += [0xFF, 0x1E, positional_args[0], 0xFF, 0x21, positional_args[0]]
-                    elif command == "choicecount":
-                        if "choicecount" not in named_args:
-                            print(f"{filename}:{lineno}: choicecount command requires a 'choicecount' parameter")
+                        message.bytes += [0xFF, 0x1F, args[0]]
+                    elif command == "setcancel":
+                        if len(args) != 1:
+                            print(f"{filename}:{lineno}: {command} command requires 1 parameter")
                             exit(1)
 
-                        message.bytes += [0xFF, 0x1F, named_args["choicecount"]]
-                    elif command == "cancel":
-                        if "cancel" not in named_args:
-                            print(f"{filename}:{lineno}: cancel command requires a 'cancel' parameter")
-                            exit(1)
-
-                        message.bytes += [0xFF, 0x20, named_args["cancel"]]
-                    elif command == "shaky":
-                        message.bytes += [0xFF, 0x26, 0x00]
-                    elif command == "/shaky":
-                        message.bytes += [0xFF, 0x27, 0x00]
-                    elif command == "wavy":
-                        message.bytes += [0xFF, 0x26, 0x01]
-                    elif command == "/wavy":
-                        message.bytes += [0xFF, 0x27, 0x01]
-                    elif command == "shaky":
-                        if "opacity" in named_args:
-                            print(f"{filename}:{lineno}: shaky command doesn't accept parameter 'fade' (hint: did you mean 'faded-shaky'?)")
-                            exit(1)
-                        message.bytes += [0xFF, 0x26, 0x00]
-                    elif command == "/shaky":
-                        message.bytes += [0xFF, 0x27, 0x00]
-                    elif command == "noise":
-                        message.bytes += [0xFF, 0x26, 0x03, named_args.get("fade", 3)]
-                    elif command == "/noise":
-                        message.bytes += [0xFF, 0x27, 0x03]
-                    elif command == "faded-shaky":
-                        message.bytes += [0xFF, 0x26, 0x05, named_args.get("fade", 5)]
-                    elif command == "/faded-shaky":
-                        message.bytes += [0xFF, 0x27, 0x05]
-                    elif command == "fade":
-                        message.bytes += [0xFF, 0x26, 0x07, named_args.get("fade", 7)]
-                    elif command == "/fade":
-                        message.bytes += [0xFF, 0x27, 0x07]
-                    elif command == "shout" or command == "shrinking":
-                        message.bytes += [0xFF, 0x26, 0x0A]
-                    elif command == "/shout" or command == "/shrinking":
-                        message.bytes += [0xFF, 0x27, 0x0A]
-                    elif command == "whisper" or command == "growing":
-                        message.bytes += [0xFF, 0x26, 0x0B]
-                    elif command == "/whisper" or command == "/growing":
-                        message.bytes += [0xFF, 0x27, 0x0B]
-                    elif command == "scream" or command == "shaky-size":
-                        message.bytes += [0xFF, 0x26, 0x0C]
-                    elif command == "/scream" or command == "/shaky-size":
-                        message.bytes += [0xFF, 0x27, 0x0C]
-                    elif command == "chortle" or command == "wavy-size":
-                        message.bytes += [0xFF, 0x26, 0x0D]
-                    elif command == "/chortle" or command == "/wavy-size":
-                        message.bytes += [0xFF, 0x27, 0x0D]
-                    elif command == "shadow":
-                        message.bytes += [0xFF, 0x26, 0x0E]
-                    elif command == "/shadow":
-                        message.bytes += [0xFF, 0x27, 0x0E]
+                        message.bytes += [0xFF, 0x20, args[0]]
+                    elif command == "startfx":
+                        message.bytes += [0xFF, 0x26, resolve_effect(args[0]), *args[1:]]
+                    elif command == "endfx":
+                        message.bytes += [0xFF, 0x27, resolve_effect(args[0]), *args[1:]]
+                    # elif command == "shaky":
+                    #     message.bytes += [0xFF, 0x26, 0x00]
+                    # elif command == "/shaky":
+                    #     message.bytes += [0xFF, 0x27, 0x00]
+                    # elif command == "wavy":
+                    #     message.bytes += [0xFF, 0x26, 0x01]
+                    # elif command == "/wavy":
+                    #     message.bytes += [0xFF, 0x27, 0x01]
+                    # elif command == "shaky":
+                    #     if "opacity" in named_args:
+                    #         print(f"{filename}:{lineno}: shaky command doesn't accept parameter 'fade' (hint: did you mean 'faded-shaky'?)")
+                    #         exit(1)
+                    #     message.bytes += [0xFF, 0x26, 0x00]
+                    # elif command == "/shaky":
+                    #     message.bytes += [0xFF, 0x27, 0x00]
+                    # elif command == "noise":
+                    #     message.bytes += [0xFF, 0x26, 0x03, named_args.get("fade", 3)]
+                    # elif command == "/noise":
+                    #     message.bytes += [0xFF, 0x27, 0x03]
+                    # elif command == "faded-shaky":
+                    #     message.bytes += [0xFF, 0x26, 0x05, named_args.get("fade", 5)]
+                    # elif command == "/faded-shaky":
+                    #     message.bytes += [0xFF, 0x27, 0x05]
+                    # elif command == "fade":
+                    #     message.bytes += [0xFF, 0x26, 0x07, named_args.get("fade", 7)]
+                    # elif command == "/fade":
+                    #     message.bytes += [0xFF, 0x27, 0x07]
+                    # elif command == "shout" or command == "shrinking":
+                    #     message.bytes += [0xFF, 0x26, 0x0A]
+                    # elif command == "/shout" or command == "/shrinking":
+                    #     message.bytes += [0xFF, 0x27, 0x0A]
+                    # elif command == "whisper" or command == "growing":
+                    #     message.bytes += [0xFF, 0x26, 0x0B]
+                    # elif command == "/whisper" or command == "/growing":
+                    #     message.bytes += [0xFF, 0x27, 0x0B]
+                    # elif command == "scream" or command == "shaky-size":
+                    #     message.bytes += [0xFF, 0x26, 0x0C]
+                    # elif command == "/scream" or command == "/shaky-size":
+                    #     message.bytes += [0xFF, 0x27, 0x0C]
+                    # elif command == "chortle" or command == "wavy-size":
+                    #     message.bytes += [0xFF, 0x26, 0x0D]
+                    # elif command == "/chortle" or command == "/wavy-size":
+                    #     message.bytes += [0xFF, 0x27, 0x0D]
+                    # elif command == "shadow":
+                    #     message.bytes += [0xFF, 0x26, 0x0E]
+                    # elif command == "/shadow":
+                    #     message.bytes += [0xFF, 0x27, 0x0E]
                     elif command == "var":
-                        if len(positional_args) != 1:
-                            print(f"{filename}:{lineno}: var command requires 1 positional parameter")
+                        if len(args) != 1:
+                            print(f"{filename}:{lineno}: var command requires 1 parameter")
                             exit(1)
 
-                        message.bytes += [0xFF, 0x28, *positional_args]
-                    elif command == "center":
-                        if len(positional_args) != 1:
-                            print(f"{filename}:{lineno}: center command requires 1 positional parameter")
+                        message.bytes += [0xFF, 0x28, *args]
+                    elif command == "func_29":
+                        if len(args) != 1:
+                            print(f"{filename}:{lineno}: {command} command requires 1 parameter")
                             exit(1)
 
-                        message.bytes += [0xFF, 0x29, *positional_args]
+                        message.bytes += [0xFF, 0x29, *args]
                     elif command == "volume":
-                        if "volume" not in named_args:
-                            print(f"{filename}:{lineno}: volume command requires a 'volume' parameter")
+                        if len(args) != 1:
+                            print(f"{filename}:{lineno}: {command} command requires 1 parameter")
                             exit(1)
 
-                        message.bytes += [0xFF, 0x2E, named_args["volume"]]
-                    elif command == "sound":
-                        if "sound" not in named_args:
-                            print(f"{filename}:{lineno}: sound command requires a 'sound' parameter")
+                        message.bytes += [0xFF, 0x2E, *args]
+                    elif command == "speechsound":
+                        if len(args) != 1:
+                            print(f"{filename}:{lineno}: {command} command requires 1 parameter")
                             exit(1)
 
-                        sound = named_args["sound"]
+                        sound = args[0]
 
-                        if sound == "normal":
-                            sound = 0
-                        elif sound == "bowser":
-                            sound = 1
-                        elif sound == "spirit":
-                            sound = 2
+                        # if sound == "normal":
+                        #     sound = 0
+                        # elif sound == "bowser":
+                        #     sound = 1
+                        # elif sound == "star":
+                        #     sound = 2
 
                         if type(sound) is not int:
                             print(f"{filename}:{lineno}: unknown sound '{sound}'")
@@ -674,67 +794,131 @@ if __name__ == "__main__":
 
                         message.bytes += [0xFF, 0x2F, sound]
                         sound_stack.append(sound)
-                    elif command == "/sound":
-                        sound_stack.pop()
-                        message.bytes += [0xFF, 0x2F, sound_stack[0]]
+                    # elif command == "/sound":
+                    #     sound_stack.pop()
+                    #     message.bytes += [0xFF, 0x2F, sound_stack[0]]
+                    # elif command == "a":
+                    #     color_code = color_to_code(named_args.get("color", "blue"), named_args.get("ctx", "button"))
+                    #     message.bytes += [0xFF, 0x24, 0xFF, 0x05, color_code, 0x98, 0xFF, 0x25]
+                    # elif command == "b":
+                    #     color_code = color_to_code(named_args.get("color", "green"), named_args.get("ctx", "button"))
+                    #     message.bytes += [0xFF, 0x24, 0xFF, 0x05, color_code, 0x99, 0xFF, 0x25]
+                    # elif command == "l":
+                    #     color_code = color_to_code(named_args.get("color", "gray"), named_args.get("ctx", "button"))
+                    #     message.bytes += [0xFF, 0x24, 0xFF, 0x05, color_code, 0x9A, 0xFF, 0x25]
+                    # elif command == "r":
+                    #     color_code = color_to_code(named_args.get("color", "gray"), named_args.get("ctx", "button"))
+                    #     message.bytes += [0xFF, 0x24, 0xFF, 0x05, color_code, 0x9B, 0xFF, 0x25]
+                    # elif command == "z":
+                    #     color_code = color_to_code(named_args.get("color", "gray"), named_args.get("ctx", "button"))
+                    #     message.bytes += [0xFF, 0x24, 0xFF, 0x05, color_code, 0x9C, 0xFF, 0x25]
+                    # elif command == "c-up":
+                    #     color_code = color_to_code(named_args.get("color", "yellow"), named_args.get("ctx", "button"))
+                    #     message.bytes += [0xFF, 0x24, 0xFF, 0x05, color_code, 0x9D, 0xFF, 0x25]
+                    # elif command == "c-down":
+                    #     color_code = color_to_code(named_args.get("color", "yellow"), named_args.get("ctx", "button"))
+                    #     message.bytes += [0xFF, 0x24, 0xFF, 0x05, color_code, 0x9E, 0xFF, 0x25]
+                    # elif command == "c-left":
+                    #     color_code = color_to_code(named_args.get("color", "yellow"), named_args.get("ctx", "button"))
+                    #     message.bytes += [0xFF, 0x24, 0xFF, 0x05, color_code, 0x9F, 0xFF, 0x25]
+                    # elif command == "c-right":
+                    #     color_code = color_to_code(named_args.get("color", "yellow"), named_args.get("ctx", "button"))
+                    #     message.bytes += [0xFF, 0x24, 0xFF, 0x05, color_code, 0xA0, 0xFF, 0x25]
+                    # elif command == "start":
+                    #     color_code = color_to_code(named_args.get("color", "red"), named_args.get("ctx", "button"))
+                    #     message.bytes += [0xFF, 0x24, 0xFF, 0x05, color_code, 0xA1, 0xFF, 0x25]
                     elif command == "a":
-                        color_code = color_to_code(named_args.get("color", "blue"), named_args.get("ctx", "button"))
-                        message.bytes += [0xFF, 0x24, 0xFF, 0x05, color_code, 0x98, 0xFF, 0x25]
+                        message.bytes += [0x98]
                     elif command == "b":
-                        color_code = color_to_code(named_args.get("color", "green"), named_args.get("ctx", "button"))
-                        message.bytes += [0xFF, 0x24, 0xFF, 0x05, color_code, 0x99, 0xFF, 0x25]
+                        message.bytes += [0x99]
                     elif command == "l":
-                        color_code = color_to_code(named_args.get("color", "gray"), named_args.get("ctx", "button"))
-                        message.bytes += [0xFF, 0x24, 0xFF, 0x05, color_code, 0x9A, 0xFF, 0x25]
+                        message.bytes += [0x9a]
                     elif command == "r":
-                        color_code = color_to_code(named_args.get("color", "gray"), named_args.get("ctx", "button"))
-                        message.bytes += [0xFF, 0x24, 0xFF, 0x05, color_code, 0x9B, 0xFF, 0x25]
+                        message.bytes += [0x9b]
                     elif command == "z":
-                        color_code = color_to_code(named_args.get("color", "gray"), named_args.get("ctx", "button"))
-                        message.bytes += [0xFF, 0x24, 0xFF, 0x05, color_code, 0x9C, 0xFF, 0x25]
+                        message.bytes += [0x9c]
                     elif command == "c-up":
-                        color_code = color_to_code(named_args.get("color", "yellow"), named_args.get("ctx", "button"))
-                        message.bytes += [0xFF, 0x24, 0xFF, 0x05, color_code, 0x9D, 0xFF, 0x25]
+                        message.bytes += [0x9d]
                     elif command == "c-down":
-                        color_code = color_to_code(named_args.get("color", "yellow"), named_args.get("ctx", "button"))
-                        message.bytes += [0xFF, 0x24, 0xFF, 0x05, color_code, 0x9E, 0xFF, 0x25]
+                        message.bytes += [0x9e]
                     elif command == "c-left":
-                        color_code = color_to_code(named_args.get("color", "yellow"), named_args.get("ctx", "button"))
-                        message.bytes += [0xFF, 0x24, 0xFF, 0x05, color_code, 0x9F, 0xFF, 0x25]
+                        message.bytes += [0x9f]
                     elif command == "c-right":
-                        color_code = color_to_code(named_args.get("color", "yellow"), named_args.get("ctx", "button"))
-                        message.bytes += [0xFF, 0x24, 0xFF, 0x05, color_code, 0xA0, 0xFF, 0x25]
+                        message.bytes += [0xa0]
                     elif command == "start":
-                        color_code = color_to_code(named_args.get("color", "red"), named_args.get("ctx", "button"))
-                        message.bytes += [0xFF, 0x24, 0xFF, 0x05, color_code, 0xA1, 0xFF, 0x25]
+                        message.bytes += [0xa1]
                     elif command == "note":
                         message.bytes += [0x00]
                     elif command == "heart":
                         message.bytes += [0x90]
                     elif command == "star":
                         message.bytes += [0x91]
-                    elif command == "arrow-up":
-                        message.bytes += [0x92]
-                    elif command == "arrow-down":
-                        message.bytes += [0x93]
-                    elif command == "arrow-left":
+                    elif command == "up":
+                        if len(args) == 1:
+                            message.bytes += [0xFF, 0x14, args[0]]
+                        else:
+                            message.bytes += [0x92]
+                    elif command == "down":
+                        if len(args) == 1:
+                            message.bytes += [0xFF, 0x13, args[0]]
+                        else:
+                            message.bytes += [0x93]
+                    elif command == "left":
                         message.bytes += [0x94]
-                    elif command == "arrow-right":
+                    elif command == "right":
                         message.bytes += [0x95]
                     elif command == "circle":
                         message.bytes += [0x96]
                     elif command == "cross":
                         message.bytes += [0x97]
-                    elif command == "wait":
-                        print(f"{filename}:{lineno}: unknown command 'wait' (hint: did you mean 'prompt'?)")
-                        exit(1)
-                    elif command == "pause":
-                        print(f"{filename}:{lineno}: unknown command 'pause' (hint: did you mean 'sleep'?)")
-                        exit(1)
+                    # elif command == "wait":
+                    #     print(f"{filename}:{lineno}: unknown command 'wait' (hint: did you mean 'prompt'?)")
+                    #     exit(1)
+                    # elif command == "pause":
+                    #     print(f"{filename}:{lineno}: unknown command 'pause' (hint: did you mean 'sleep'?)")
+                    #     exit(1)
+                    elif command == "func_1a":
+                        if len(args) != 3:
+                            print(f"{filename}:{lineno}: {command} command requires 3 parameters")
+                            exit(1)
+
+                        message.bytes += [0xFF, 0x1A, *args]
+                    elif command == "func_1b":
+                        if len(args) != 2:
+                            print(f"{filename}:{lineno}: {command} command requires 2 parameters")
+                            exit(1)
+
+                        message.bytes += [0xFF, 0x1B, *args]
+                    elif command == "func_1c":
+                        if len(args) != 1:
+                            print(f"{filename}:{lineno}: {command} command requires 1 parameter")
+                            exit(1)
+
+                        message.bytes += [0xFF, 0x1C, *args]
+                    elif command == "startanim":
+                        message.bytes += [0xFF, 0x22]
+                    elif command == "endanim":
+                        message.bytes += [0xFF, 0x23]
+                    elif command == "func_2b":
+                        message.bytes += [0xFF, 0x2b]
                     else:
                         print(f"{filename}:{lineno}: unknown command '{command}'")
                         exit(1)
                 else:
+                    if source[0] == "}":
+                        if not explicit_end:
+                            message.bytes += [0xFD]
+                        explicit_end = False
+
+                        # padding
+                        while len(message.bytes) % 4 != 0:
+                            message.bytes += [0x00]
+
+                        message = None
+                        source = source[1:] # }
+                        indent_level = 0
+                        continue
+
                     if source[0] == "\\":
                         source = source[1:]
 
