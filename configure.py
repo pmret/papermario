@@ -389,6 +389,7 @@ async def main():
     msg_files = []
     for d in ASSET_DIRS:
         msg_files.extend(glob(d + "/**/*.msg", recursive=True))
+    msg_files = list(set(msg_files)) # dedup
     for msg_file in msg_files:
         n.build(
             f"$builddir/{msg_file.split('/', 1)[1]}.bin",
@@ -397,7 +398,7 @@ async def main():
             implicit="tools/msg/parse_compile.py",
         )
     msg_headers = [add_generated_header(f"$builddir/include/{msg_file.split('/', 1)[1]}.h") for msg_file in msg_files]
-    msg_bins = list(set([f"$builddir/{msg_file.split('/', 1)[1]}.bin" for msg_file in msg_files]))
+    msg_bins = [f"$builddir/{msg_file.split('/', 1)[1]}.bin" for msg_file in msg_files]
     n.build(
         "$builddir/msg.bin",
         "msg_combine",

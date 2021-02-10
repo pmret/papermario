@@ -53,7 +53,7 @@ if __name__ == "__main__":
                 sections.append([])
             section = sections[section_idx]
 
-            index = message.index if message.index is not None else len(section)
+            message.index = index = message.index if message.index is not None else len(section)
 
             if message.name:
                 if message.name in names:
@@ -104,7 +104,7 @@ if __name__ == "__main__":
         )
 
         for message in messages:
-            h += f"#define MessageID_{message.name} MESSAGE_ID({message.section}, {message.index})\n"
+            h += f"#define MSG_{message.name} MESSAGE_ID({message.section}, {message.index})\n"
 
         h += "\n#endif\n"
         h_lines = h.splitlines()
