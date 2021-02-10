@@ -1,6 +1,6 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "code_1776B0", func_80248DD0);
+INCLUDE_ASM(ApiStatus, "code_1776B0", func_80248DD0, ScriptInstance* script, s32 isInitialCall);
 
 INCLUDE_ASM(s32, "code_1776B0", func_80248DE4);
 

@@ -18,7 +18,6 @@ Script goomba_dispatch;
 
 s32 goomba_defense_table[] = {
     Element_NORMAL, 0,
-
     Element_END,
 };
 
@@ -34,7 +33,6 @@ s32 goomba_status_table[] = {
     Debuff_PARALYZE, 100,
     Debuff_SHRINK, 100,
     Debuff_STOP, 100,
-
     Debuff_DEFAULT_TURN_MOD, 0,
     Debuff_SLEEP_TURN_MOD, 0,
     Debuff_POISON_TURN_MOD, 0,
@@ -45,7 +43,6 @@ s32 goomba_status_table[] = {
     Debuff_PARALYZE_TURN_MOD, 0,
     Debuff_SHRINK_TURN_MOD, 0,
     Debuff_STOP_TURN_MOD, 0,
-
     Debuff_END,
 };
 

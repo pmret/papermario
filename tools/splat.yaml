@@ -436,7 +436,10 @@ segments:
     - [0x1AC760, c]
     - [0x1AF120, c]
     - [0x1AF230, c]
-    - [0x1AF2D0, data]
+    - [0x1AF2D0, .data, code_16c8e0]
+    - [0x1AF8A0, .data, code_190B20]
+    #- [0x1B21E0, bin] # begins with image
+    - [0x1B21E0, data, code_1AF2D0]
     - [0x1CB240, rodata]
   - [0x1CC310, bin] # icon images and palettes, vram unknown
   - [0x1FE1B0, rgba16,  title/logo_n64, 128, 112]
@@ -9433,55 +9436,60 @@ segments:
   - start: 0x1B83000
     type: PaperMarioMessages
     files:
-      - intro
-      - end/postgame
-      - toad_town/gate
-      - toad_town/castle
-      - toad_town/bridge
-      - toad_town/train
-      - toad_town/warehouse
-      - toad_town/docks
-      - toad_town/minigames
-      - castle_grounds
-      - shooting_star_summit
-      - prologue
-      - chapter1
-      - chapter2
-      - chapter3
-      - chapter4
-      - chapter5
-      - chapter6
-      - chapter7
-      - chapter8
-      - peach_interludes
-      - koopa_koot_quests
-      - advice/russ_t
-      - toad_town/bulletin_news
-      - toad_town/bulletin_gossip
-      - world/map_tattles
-      - world/npc_tattles
-      - world/entity_tattles
-      - battle/enemy_tattles
-      - ui/misc
-      - ui/choices
-      - ui/pause
-      - diary_letters
-      - advice/merlon
-      - advice/merluvlee
-      - item/descriptions_23 # TODO: difference between 23,24,25
-      - item/descriptions_24
-      - item/descriptions_25
-      - item/names
-      - shops
-      - partner_descriptions
-      - battle/enemy_names
-      - battle/mario_moves
-      - battle/partner_moves
-      - quiz/questions
-      - quiz/options
-      - end/credits
-  - [0x1C84D30, bin]
-  - [0x1E00000, bin] # sprites here; Star Rod considers this a copy of sprite/npc.bin, but that doesnt appear to be true
+      - 00_introduction
+      - 01_postgame_celebration
+      - 02_toad_town_gate_sector
+      - 03_toad_town_castle_sector
+      - 04_toad_town_bridge_sector
+      - 05_toad_town_train_sector
+      - 06_toad_town_warehouse_sector
+      - 07_toad_town_docks_sector
+      - 08_minigames
+      - 09_castle_grounds
+      - 0A_shooting_star_summit
+      - 0B_prologue
+      - 0C_chapter_1
+      - 0D_chapter_2
+      - 0E_chapter_3
+      - 0F_chapter_4
+      - 10_chapter_5
+      - 11_chapter_6
+      - 12_chapter_7
+      - 13_chapter_8
+      - 14_peach_segments
+      - 15_koopa_koot_favors
+      - 16_russ_t_advice
+      - 17_news_bulletin
+      - 18_gossip_bulletin
+      - 19_map_tattles
+      - 1A_npc_tattles
+      - 1B_entity_tattles
+      - 1C_enemy_tattles
+      - 1D_menus
+      - 1E_choices
+      - 1F_pause
+      - 20_party_letters_luigi_diary
+      - 21_advice_fortunes
+      - 22_treasure_fortunes
+      - 23_item_descriptions # TODO: difference between 23,24,25 (shops, menus, pickups?)
+      - 24_item_descriptions
+      - 25_item_descriptions
+      - 26_item_names
+      - 27_shop_messages
+      - 28_partner_descriptions
+      - 29_enemy_names
+      - 2A_mario_moves
+      - 2B_partner_moves
+      - 2C_quiz_questions
+      - 2D_quiz_options
+      - 2E_credits
+    ids:
+      - [0x19, 0x03B, kmr_03_tattle]
+      - [0x19, 0x040, kmr_12_tattle]
+      - [0x1D, 0x167, kmr_12_sign_trap]
+      - [0x1D, 0x168, kmr_12_sign_to_fortress]
+  - [0x1C84D30, bin] # junk(?)
+  - [0x1E00000, bin] # junk (player sprite data; can be zeroed out with no effect)
   - [0x1E40000, PaperMarioMapFS]
   - [0x27FEE22, bin]
   - [0x2800000]

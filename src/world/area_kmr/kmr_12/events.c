@@ -1,4 +1,5 @@
 #include "kmr_12.h"
+#include "message_ids.h"
 #include "sprite/npc/goomba.h"
 
 Script N(ExitWest) = EXIT_WALK_SCRIPT(60, 0, "kmr_07", 1);
@@ -59,7 +60,7 @@ Script N(ReadWestSign) = SCRIPT({
     // "Eat a Mushroom to regain your energy!"
     suspend group 1;
     DisablePlayerInput(TRUE);
-    ShowMessageAtScreenPos(MessageID_SIGN_MUSHROOM_GOOMBA_TRAP, 160, 40);
+    ShowMessageAtScreenPos(MSG_kmr_12_sign_trap, 160, 40);
     resume group 1;
 
     SI_FLAG(0) = FALSE;
@@ -201,7 +202,7 @@ Script N(ReadEastSign) = SCRIPT({
 
     func_802D5830(1);
     DisablePlayerInput(1);
-    ShowMessageAtScreenPos(MessageID_SIGN_GOOMBA_KINGS_FORTRESS_AHEAD, 160, 40);
+    ShowMessageAtScreenPos(MSG_kmr_12_sign_to_fortress, 160, 40);
     DisablePlayerInput(0);
     func_802D5830(0);
 });

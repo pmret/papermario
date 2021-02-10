@@ -51,7 +51,7 @@ class ScriptDisassembler:
     def __init__(self, bytes, script_name = "script", symbol_map = {}):
         self.bytes = bytes
         self.script_name = script_name
-        self.symbol_map = symbol_map
+        self.symbol_map = { **script_lib(), **symbol_map }
 
         self.out = ""
         self.prefix = ""
