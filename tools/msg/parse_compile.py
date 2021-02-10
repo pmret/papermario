@@ -907,7 +907,8 @@ if __name__ == "__main__":
                 else:
                     if source[0] == "}":
                         if not explicit_end:
-                            message.bytes += [0xFD]
+                            print(f"{filename}:{lineno}: warning: string lacks an [end] command")
+                            #message.bytes += [0xFD]
                         explicit_end = False
 
                         # padding

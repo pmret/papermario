@@ -467,6 +467,8 @@ class N64SegPaperMarioMessages(N64Segment):
                 else:
                     raise ValueError(value)
 
+        self.write_markup("[end]")
+
     def write_markup(self, markup):
         self.f.write(re.sub("\n", "\n    ", markup))
 

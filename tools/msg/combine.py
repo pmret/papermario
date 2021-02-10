@@ -65,12 +65,12 @@ if __name__ == "__main__":
             if message.index is None:
                 message.index = section_get_unused_id(section)
 
-            if message.name:
-                if message.name in names:
-                    print(f"error: multiple messages with name '{message.name}'")
-                    exit(1)
-                else:
-                    names.add(message.name)
+            # if message.name:
+            #     if message.name in names:
+            #         print(f"error: multiple messages with name '{message.name}'")
+            #         exit(1)
+            #     else:
+            #         names.add(message.name)
 
                 # if message.header_file_index in messages_by_file:
                 #     messages_by_file[message.header_file_index].add(message)
@@ -78,8 +78,7 @@ if __name__ == "__main__":
                 #     messages_by_file[message.header_file_index] = set([message])
 
             if message.index in section:
-                print(f"error: multiple messages allocated to id {section_idx:02X}:{message.index:03X}")
-                exit(1)
+                print(f"warning: multiple messages allocated to id {section_idx:02X}:{message.index:03X}")
 
             section[message.index] = message
 
