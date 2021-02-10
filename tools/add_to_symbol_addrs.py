@@ -17,6 +17,8 @@ map_symbols = {}
 symbol_addrs = []
 elf_symbols = []
 
+verbose = False
+
 def scan_map():
     ram_offset = None
     cur_file = "<no file>"
@@ -61,9 +63,25 @@ def read_symbol_addrs():
 
         for line in unique_lines:
             main, ext = line.rstrip().split(";")
-            args = ext.split("//")[-1].strip().split(" ")
+            opt = ext.split("//")[-1].strip().split(" ")
+
+            type = None
+            rom = -1
+
+            args = []
+            for thing in list(opt):
+                if thing.strip() == "":
+                    opt.remove(thing)
+                if "type:" in thing:
+                    type = thing.split(":")[1]
+                    opt.remove(thing)
+                elif "rom:" in thing:
+                    rom = int(thing.split(":")[1], 16)
+                    opt.remove(thing)
+
             name, addr = main.split(" = ")
-            symbol_addrs.append((name, int(addr, 0), args))
+
+            symbol_addrs.append([name, int(addr, 0), type, rom, opt])
 
 def read_elf():
     try:
@@ -90,61 +108,73 @@ def read_elf():
             else:
                 type = "data"
 
-            opts = [f"type:{type}"]
+            rom = None
 
             if name in map_symbols:
-                opts.append(f"rom:0x{map_symbols[name][0]:X}")
+                rom = map_symbols[name][0]
             elif re.match(".*_[0-9A-F]{8}_[0-9A-F]{6}", name):
-                rom = name.split("_")[-1]
-                opts.append(f"rom:0x{rom}")
+                rom = int(name.split('_')[-1], 16)
 
-            elf_symbols.append((name, addr, opts))
+            elf_symbols.append((name, addr, type, rom))
+
+def log(s):
+    if verbose:
+        print(s)
 
 def reconcile_symbols():
     print(f"Processing {str(len(elf_symbols))} elf symbols...")
 
-    for i, sym in enumerate(elf_symbols):
+    for i, elf_sym in enumerate(elf_symbols):
         if i % 1000 == 0:
             print(i)
         name_match = None
         rom_match = None
 
-        for sym2 in symbol_addrs:
-
+        for known_sym in symbol_addrs:
             # Name
             if not name_match:
-                if sym[0] == sym2[0]:
-                    name_match = sym2
+                if elf_sym[0] == known_sym[0]:
+                    name_match = known_sym
 
-                    if sym[1] != sym2[1]:
-                        print(f"Address mismatch! {sym[0]} is 0x{sym[1]:X} in the elf and 0x{sym2[1]} in symbol_addrs")
-
-                    if not rom_match:
-                        if sym[2] == sym2[2]:
-                            rom_match = sym2
+                    if elf_sym[1] != known_sym[1]:
+                        log(f"Ram mismatch! {elf_sym[0]} is 0x{elf_sym[1]:X} in the elf and 0x{known_sym[1]} in symbol_addrs")
 
             # Rom
             if not rom_match:
                 # Todo account for either or both syms not containing a rom addr
-                if sym[2] == sym2[2]:
-                    rom_match = sym2
-
-                    if not name_match:
-                        if sym[0] == sym2[1]:
-                            name_match = sym2
+                if elf_sym[3]:
+                    if elf_sym[3] == known_sym[3]:
+                        rom_match = known_sym
 
         if not name_match and not rom_match:
-            # Todo add new symbol to symbol_addrs
-            pass
+            log(f"Creating new symbol {elf_sym[0]}")
+            symbol_addrs.append([elf_sym[0], elf_sym[1], elf_sym[2], elf_sym[3] if elf_sym[3] else -1, []])
         elif not name_match:
-            #todo rename symbol in symbol_addrs
-            pass
-        elif not rom_match:
-            # todo add rom addr in symbol_addrs
-            pass
+            log(f"Renaming identical rom address symbol {rom_match[0]} to {elf_sym[0]}")
+            rom_match[0] = elf_sym[0]
+        elif not rom_match and elf_sym[3]:
+            if name_match[3] >= 0:
+                log(f"Correcting rom address {name_match[3]} to {elf_sym[3]} for symbol {name_match[0]}")
+            else:
+                log(f"Adding rom address {elf_sym[3]} to symbol {name_match[0]}")
+            name_match[3] = elf_sym[3]
+
+def write_new_symbol_addrs():
+    with open(symbol_addrs_path, "w", newline="\n") as f:
+        for symbol in sorted(symbol_addrs, key=lambda x: (x[3] == -1, x[3], x[1], x[0])):
+            line = f"{symbol[0]} = 0x{symbol[1]:X}; //"
+            if symbol[2]:
+                line += f" type:{symbol[2]}"
+            if symbol[3] >= 0:
+                line += f" rom:0x{symbol[3]:X}"
+            if len(symbol[4]) > 0:
+                for thing in symbol[4]:
+                    line += f" {thing}"
+            f.write(line + "\n")
 
 
 scan_map()
 read_symbol_addrs()
 read_elf()
 reconcile_symbols()
+write_new_symbol_addrs()
