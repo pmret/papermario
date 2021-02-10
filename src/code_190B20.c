@@ -653,7 +653,7 @@ MessageID bActorTattles[ACTOR_TYPE_COUNT] = {
     /* 0xD3 */ MSG_actor_slot_machine_start_tattle,
 };
 
-ActorOffsets bActorCamOffsets[ACTOR_TYPE_COUNT] = {
+ActorOffsets bActorOffsets[ACTOR_TYPE_COUNT] = {
     /* 0x00 */ { .tattleCam = { 0, 0, 0 }, .shadow = 0 },
     /* 0x01 */ { .tattleCam = { 0, 0, 0 }, .shadow = 0 },
     /* 0x02 */ { .tattleCam = { 0, 5, 0 }, .shadow = 0 },
