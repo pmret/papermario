@@ -387,7 +387,7 @@ async def main():
     # messages
     msg_files = set()
     for d in ASSET_DIRS:
-        for f in glob(d + "/**/*.msg", recursive=True):
+        for f in glob(d + "/msg/**/*.msg", recursive=True):
             msg_files.add(find_asset(f[len(d)+1:]))
     msg_files = list(msg_files)
     for msg_file in msg_files:
