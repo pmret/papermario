@@ -289,3 +289,4 @@ INCLUDE_ASM(s32, "code_7bb60_len_41b0", func_800E6500);
 INCLUDE_ASM(s32, "code_7bb60_len_41b0", make_disguise_npc);
 
 INCLUDE_ASM(s32, "code_7bb60_len_41b0", func_800E66C4);
+

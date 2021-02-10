@@ -61,9 +61,7 @@ typedef struct Vec4f {
     /* 0x0C */ f32 yaw;
 } Vec4f; // size = 0x10
 
-typedef struct Matrix4f {
-    /* 0x00 */ f32 mtx[4][4];
-} Matrix4f; // size = 0x40
+typedef f32 Matrix4f[4][4]; // size = 0x40
 
 typedef struct Matrix4s {
     /* 0x00 */ s16 whole[4][4];
@@ -318,7 +316,7 @@ typedef struct Entity {
     /* 0x54 */ Vec3f scale;
     /* 0x60 */ Vec3f rotation;
     /* 0x6C */ char unk_6C[4];
-    /* 0x70 */ struct Matrix4f* inverseTransformMatrix; /* world-to-local */
+    /* 0x70 */ Matrix4f* inverseTransformMatrix; /* world-to-local */
     /* 0x74 */ char unk_74[60];
     /* 0xB0 */ float effectiveSize;
     /* 0xB4 */ char unk_B4[4];
@@ -487,10 +485,10 @@ typedef struct Camera {
     /* 0x098 */ char unk_98[8];
     /* 0x0A0 */ Vp viewport;
     /* 0x0B0 */ char unk_B0[0x24];
-    /* 0x0D4 */ struct Matrix4f perspectiveMatrix;
-    /* 0x114 */ struct Matrix4f viewMtxPlayer; /* centers on player */
-    /* 0x154 */ struct Matrix4f viewMtxLeading; /* leads player slightly */
-    /* 0x194 */ struct Matrix4f viewMtxShaking; /* used while ShakeCam is active */
+    /* 0x0D4 */ Matrix4f perspectiveMatrix;
+    /* 0x114 */ Matrix4f viewMtxPlayer; /* centers on player */
+    /* 0x154 */ Matrix4f viewMtxLeading; /* leads player slightly */
+    /* 0x194 */ Matrix4f viewMtxShaking; /* used while ShakeCam is active */
     /* 0x1D4 */ char unk_1D4[48];
     /* 0x204 */ struct Matrix4s* unkMatrix;
     /* 0x208 */ char unk_208[572];
@@ -715,7 +713,7 @@ typedef struct Model {
     /* 0x10 */ s32* currentSpecialMatrix;
     /* 0x14 */ char unk_14[4];
     /* 0x18 */ struct Matrix4s specialMatrix;
-    /* 0x58 */ struct Matrix4f transformMatrix;
+    /* 0x58 */ Matrix4f transformMatrix;
     /* 0x98 */ f32 center[3]; /* Created by retype action */
     /* 0xA4 */ u8 texPannerID;
     /* 0xA5 */ u8 specialDisplayListID;
