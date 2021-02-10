@@ -313,4 +313,8 @@ extern s32 D_802920E8[];
 extern s32 D_80292110[];
 extern s32 D_8028358C[];
 
+extern UNK_PTR D_800F7BE8;
+extern UNK_PTR D_800F7BBC;
+extern UNK_PTR D_800F7B94;
+
 #endif
