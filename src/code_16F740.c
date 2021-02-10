@@ -109,7 +109,7 @@ void func_80246448(void) {
 
 INCLUDE_ASM(s32, "code_16F740", update_player_change_turn);
 
-void func_80246B2C_code(void) {
+void func_80246B2C(void) {
 }
 
 INCLUDE_ASM(s32, "code_16F740", update_partner_action);
