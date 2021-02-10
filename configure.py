@@ -315,9 +315,8 @@ async def main():
         description="ld_addrs_h $in")
     n.newline()
 
-    # $msg_combine_headers
     n.rule("msg_combine",
-        command="$python tools/msg/combine.py $out $in --headers $msg_combine_headers",
+        command="$python tools/msg/combine.py $out $in",
         description="combine messages")
     n.rule("msg",
         command="$python tools/msg/parse_compile.py $in $out",
@@ -386,10 +385,11 @@ async def main():
     n.build(add_generated_header("$builddir/include/ld_addrs.h"), "ld_addrs_h", "$builddir/$target.ld")
 
     # messages
-    msg_files = []
+    msg_files = set()
     for d in ASSET_DIRS:
-        msg_files.extend(glob(d + "/**/*.msg", recursive=True))
-    msg_files = list(set(msg_files)) # dedup
+        for f in glob(d + "/**/*.msg", recursive=True):
+            msg_files.add(find_asset(f[len(d)+1:]))
+    msg_files = list(msg_files)
     for msg_file in msg_files:
         n.build(
             f"$builddir/{msg_file.split('/', 1)[1]}.bin",
@@ -397,15 +397,13 @@ async def main():
             msg_file,
             implicit="tools/msg/parse_compile.py",
         )
-    msg_headers = [add_generated_header(f"$builddir/include/{msg_file.split('/', 1)[1]}.h") for msg_file in msg_files]
+    #msg_headers = [add_generated_header(f"$builddir/include/{msg_file.split('/', 1)[1]}.h") for msg_file in msg_files]
     msg_bins = [f"$builddir/{msg_file.split('/', 1)[1]}.bin" for msg_file in msg_files]
     n.build(
-        "$builddir/msg.bin",
+        ["$builddir/msg.bin", add_generated_header(f"$builddir/include/message_ids.h")],
         "msg_combine",
         msg_bins,
         implicit="tools/msg/combine.py",
-        implicit_outputs=msg_headers,
-        variables={ "msg_combine_headers": msg_headers }
     )
     n.build("$builddir/msg.o", "bin", "$builddir/msg.bin")
 

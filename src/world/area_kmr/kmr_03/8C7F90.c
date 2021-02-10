@@ -1,4 +1,5 @@
 #include "kmr_03.h"
+#include "message_ids.h"
 #include "../../partners.h"
 
 Script N(Main);
@@ -61,7 +62,7 @@ MapConfig N(config) = {
     .entryList = N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
     .background = &gBackgroundImage,
-    .tattle = MessageID_TATTLE_KMR_03,
+    .tattle = MSG_kmr_03_tattle,
 };
 
 Script N(Script_802406C0) = SCRIPT({

@@ -356,6 +356,7 @@ class N64SegPaperMarioMessages(N64Segment):
     def __init__(self, segment, next_segment, options):
         super().__init__(segment, next_segment, options)
         self.files = segment.get("files", []) if type(segment) is dict else []
+        self.ids = segment["ids"]
 
     def split(self, rom_bytes, base_path):
         data = rom_bytes[self.rom_start: self.rom_end]
@@ -401,7 +402,17 @@ class N64SegPaperMarioMessages(N64Segment):
                 for j, msg_offset in enumerate(msg_offsets):
                     if j != 0:
                         self.f.write("\n")
-                    self.f.write(f"#message:{i:02X}:{j:03X} {{\n    ")
+
+                    msg_name = None
+                    for section, index, goodname in self.ids:
+                        if i == section and j == index:
+                            msg_name = goodname
+                            break
+
+                    if msg_name is None:
+                        self.f.write(f"#message:{i:02X}:{j:03X} {{\n    ")
+                    else:
+                        self.f.write(f"#message:{i:02X}:({msg_name}) {{\n    ")
                     self.write_message_markup(data[msg_offset:])
                     self.f.write("\n}\n")
 

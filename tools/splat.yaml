@@ -9467,7 +9467,7 @@ segments:
       - 20_party_letters_luigi_diary
       - 21_advice_fortunes
       - 22_treasure_fortunes
-      - 23_item_descriptions # TODO: difference between 23,24,25
+      - 23_item_descriptions # TODO: difference between 23,24,25 (shops, menus, pickups?)
       - 24_item_descriptions
       - 25_item_descriptions
       - 26_item_names
@@ -9479,6 +9479,11 @@ segments:
       - 2C_quiz_questions
       - 2D_quiz_options
       - 2E_credits
+    ids:
+      - [0x19, 0x03B, kmr_03_tattle]
+      - [0x19, 0x040, kmr_12_tattle]
+      - [0x1D, 0x167, kmr_12_sign_trap]
+      - [0x1D, 0x168, kmr_12_sign_to_fortress]
   - [0x1C84D30, bin] # junk(?)
   - [0x1E00000, bin] # junk (player sprite data; can be zeroed out with no effect)
   - [0x1E40000, PaperMarioMapFS]
