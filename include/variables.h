@@ -317,4 +317,6 @@ extern UNK_PTR D_800F7BE8;
 extern UNK_PTR D_800F7BBC;
 extern UNK_PTR D_800F7B94;
 
+extern s32 D_802C05CC;
+
 #endif
