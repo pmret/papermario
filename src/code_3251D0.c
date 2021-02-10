@@ -10,7 +10,7 @@ ApiStatus func_802BD100_3251D0(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802BD1AC_3251D0(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802BD1AC_32527C(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 a = get_variable(script, *args++);
     s32 b = get_variable(script, *args++);
