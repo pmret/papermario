@@ -103,7 +103,7 @@ def read_elf():
                 continue
 
             addr = int(components[0], 16)
-            if " F " in line:
+            if " F " in line or name.startswith("func_"):
                 type = "func"
             else:
                 type = "data"
