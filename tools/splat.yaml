@@ -262,7 +262,7 @@ segments:
     - [0x759b0, c, code_759b0_len_61b0]
     - [0x77480, c]
     - [0x7B440, c]
-    - [0x7bb60, c, world/actions]
+    - [0x7bb60, c, code_7bb60_len_41b0]
     - [0x7fd10, c, code_7fd10_len_b40]
     - [0x80850, c, code_80850_len_3060]
     - [0x838b0, c, world/partners]
