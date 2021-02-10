@@ -83,6 +83,19 @@ def read_splat(splat_config: str):
     # note: `objects` lacks .o extensions
     return objects, segments
 
+def rm_recursive(path):
+    from pathlib import Path
+
+    path = Path(path)
+
+    if path.is_dir():
+        for f in path.iterdir():
+            rm_recursive(f)
+
+        path.rmdir()
+    else:
+        path.unlink()
+
 async def shell(cmd: str):
     async with task_sem:
         proc = await asyncio.create_subprocess_shell(cmd, stdout=PIPE, stderr=PIPE)
@@ -170,6 +183,7 @@ async def main():
     parser.add_argument("--baserom", default="baserom.z64", help="Path to unmodified Paper Mario (U) z64 ROM")
     parser.add_argument("--cflags", default="", help="Extra cc/cpp flags")
     parser.add_argument("--no-splat", action="store_true", help="Don't split the baserom")
+    parser.add_argument("--clean", action="store_true", help="Delete assets and previously-built files")
     args = parser.parse_args()
 
     # on macOS, /usr/bin/cpp defaults to clang rather than gcc (but we need gcc's)
@@ -201,6 +215,13 @@ async def main():
 
     cpp = args.cpp or "cpp"
     ccache = "ccache" if cmd_exists("ccache") else ""
+
+    if args.clean:
+        print("Cleaning...")
+        await shell("ninja -t clean")
+        rm_recursive("assets")
+        rm_recursive("build")
+        rm_recursive(".splat_cache")
 
     if not args.no_splat:
         # compile splat dependencies
