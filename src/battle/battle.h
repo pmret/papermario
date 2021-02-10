@@ -105,9 +105,9 @@
 #define ACTOR_TYPE_sushie 0x75
 #define ACTOR_TYPE_lakilester 0x76
 #define ACTOR_TYPE_twink 0x77
-#define ACTOR_TYPE_the_master1 0x7A
-#define ACTOR_TYPE_the_master2 0x7B
-#define ACTOR_TYPE_the_master3 0x7C
+#define ACTOR_TYPE_the_master_1 0x7A
+#define ACTOR_TYPE_the_master_2 0x7B
+#define ACTOR_TYPE_the_master_3 0x7C
 #define ACTOR_TYPE_chan 0x7D
 #define ACTOR_TYPE_lee 0x7E
 #define ACTOR_TYPE_lee_goombario 0x7F
@@ -176,11 +176,11 @@
 #define ACTOR_TYPE_crystal_clone 0xBE
 #define ACTOR_TYPE_crystal_bit 0xBF
 #define ACTOR_TYPE_intro_bowser 0xC0
-#define ACTOR_TYPE_bowser1 0xC1
+#define ACTOR_TYPE_bowser_phase_1 0xC1
 #define ACTOR_TYPE_bowser_dup1 0xC2
-#define ACTOR_TYPE_bowser2 0xC3
+#define ACTOR_TYPE_bowser_phase_2 0xC3
 #define ACTOR_TYPE_bowser_dup2 0xC4
-#define ACTOR_TYPE_bowser3 0xC5
+#define ACTOR_TYPE_bowser_phase_3 0xC5
 #define ACTOR_TYPE_bowser_dup3 0xC6
 #define ACTOR_TYPE_blooper 0xC7
 #define ACTOR_TYPE_electro_blooper1 0xC8
