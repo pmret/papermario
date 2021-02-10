@@ -1010,9 +1010,9 @@ typedef s8 ActionState;
 #define ActionState_USE_SPRING         0x00000026
 
 typedef s32 NpcId;
-#define NpcId_SELF    0xFFFFFFFF
-#define NpcId_PLAYER  0xFFFFFFFE
-#define NpcId_PARTNER 0xFFFFFFFC
+#define NpcId_SELF    -1
+#define NpcId_PLAYER  -2
+#define NpcId_PARTNER -4
 
 typedef UNK_TYPE TriggerFlag;
 #define TriggerFlag_FLOOR_TOUCH    0x00000080

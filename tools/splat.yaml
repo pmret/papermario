@@ -265,17 +265,14 @@ segments:
     - [0x7bb60, c, code_7bb60_len_41b0]
     - [0x7fd10, c, code_7fd10_len_b40]
     - [0x80850, c, code_80850_len_3060]
-    - [0x838b0, c, code_838b0_len_5900]
+    - [0x838b0, c, world/partners]
     - [0x891b0, c, code_891b0_len_fb0]
     - [0x8a160, c, code_8a160_len_700]
     - [0x8a860, c, code_8a860_len_3f30]
     - [0x8e790, c, code_8e790_len_2850]
-    - [0x90fe0, data]
-  - type: code
-    start: 0x91520 # section may start earlier
-    vram: 0 # TODO
-    subsections:
-    - [0x91520, .data, world/partners]
+    - [0x90FE0, .data, code_759b0_len_61b0]
+    - [0x913B0, .data, world/actions]
+    - [0x914E0, .data, world/partners]
   - [0x917EC, bin]
   - [0x93CD0, ci4,     ui/hammer, 32, 32]
   - [0x93ED0, palette, ui/hammer]
@@ -465,6 +462,10 @@ segments:
     vram: 0x80200000
     subsections:
     - [0x3169f0, c, code_3169f0]
+  - type: code
+    start: 0x316a70
+    vram: 0x80200080
+    subsections:
     - [0x316a70, c, code_316a70]
   - type: code
     start: 0x316C00

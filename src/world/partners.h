@@ -22,6 +22,12 @@ typedef struct WorldPartner {
     /* 0x40 */ Bytecode* whileRiding;
 } WorldPartner; // size = 0x40
 
-WorldPartner gWorldPartners[11];
+/// Set to 0 when partner NPC loaded
+extern s32 D_8010C954;
+extern s32 D_8010CFD8;
+extern WorldPartner wPartners[12]; // wPartners
+extern WorldPartner* D_8010CFEC; // wPartner
+extern NpcId D_8010CFD0; // wPartnerNpcIndex
+extern Npc* D_8010C930; // wPartnerNpc
 
 #endif

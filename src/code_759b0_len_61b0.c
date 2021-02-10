@@ -1,5 +1,7 @@
 #include "common.h"
 
+PlayerStatus* gPlayerStatusPtr = &gPlayerStatus; // maybe wPlayerStatus
+
 INCLUDE_ASM(s32, "code_759b0_len_61b0", func_800DC500);
 
 INCLUDE_ASM(s32, "code_759b0_len_61b0", func_800DC778);

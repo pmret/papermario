@@ -61,20 +61,20 @@ ApiStatus func_802BDB84(ScriptInstance* script, s32 isInitialCall) {
 
 // Something is up with D_8010EBB0 I think. It might be a struct or something
 #ifdef NON_MATCHING
-void world_goombario_pre_battle(s32 arg0) {
+void world_goombario_pre_battle(Npc* partner) {
     if (D_8010EBB0[0] != 0) {
         func_80027088(0);
         enable_player_input();
         CancelMessageAndBlock();
-        clear_partner_move_history(arg0);
+        clear_partner_move_history(partner);
         D_8010EBB0[0] = 0;
         D_8010EBB0[3] = 0;
-        disable_npc_blur(arg0);
+        disable_npc_blur(partner);
     }
     D_8010EBB0[3] = 1;
 }
 #else
-INCLUDE_ASM(void, "world/partner/goombario", world_goombario_pre_battle, s32 arg0);
+INCLUDE_ASM(void, "world/partner/goombario", world_goombario_pre_battle, Npc* partner);
 #endif
 
 s32 D_802BDC40_317B60[] = {
