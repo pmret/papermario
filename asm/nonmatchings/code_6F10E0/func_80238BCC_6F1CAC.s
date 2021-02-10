@@ -121,9 +121,9 @@ glabel func_80238BCC_6F1CAC
 /* 6F1E6C 80238D8C AE020090 */  sw        $v0, 0x90($s0)
 /* 6F1E70 80238D90 90820136 */  lbu       $v0, 0x136($a0)
 /* 6F1E74 80238D94 00021080 */  sll       $v0, $v0, 2
-/* 6F1E78 80238D98 3C038028 */  lui       $v1, %hi(gActorCamOffsets)
+/* 6F1E78 80238D98 3C038028 */  lui       $v1, %hi(bActorCamOffsets)
 /* 6F1E7C 80238D9C 00621821 */  addu      $v1, $v1, $v0
-/* 6F1E80 80238DA0 80632EE8 */  lb        $v1, %lo(gActorCamOffsets)($v1)
+/* 6F1E80 80238DA0 80632EE8 */  lb        $v1, %lo(bActorCamOffsets)($v1)
 /* 6F1E84 80238DA4 8E020084 */  lw        $v0, 0x84($s0)
 /* 6F1E88 80238DA8 00431021 */  addu      $v0, $v0, $v1
 /* 6F1E8C 80238DAC AE020084 */  sw        $v0, 0x84($s0)

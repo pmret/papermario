@@ -11948,3 +11948,6 @@ func_8004D428 = 0x8004D428; // type:func
 func_802CCCB0 = 0x802CCCB0; // type:func
 func_802CABE8 = 0x802CABE8; // type:func
 func_802CAE50 = 0x802CAE50; // type:func
+bActorCamOffsets = 0x80282ee8; // type:data size:0x350
+bActorTattles = 0x80282b98; // type:data size:0x350
+bActorSoundTable = 0x80281468; // type:data size:0x1730
