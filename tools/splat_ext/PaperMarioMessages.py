@@ -410,9 +410,9 @@ class N64SegPaperMarioMessages(N64Segment):
                             break
 
                     if msg_name is None:
-                        self.f.write(f"#message:{i:02X}:{j:03X} {{\n    ")
+                        self.f.write(f"#message:{i:02X}:{j:03X} {{\n\t")
                     else:
-                        self.f.write(f"#message:{i:02X}:({msg_name}) {{\n    ")
+                        self.f.write(f"#message:{i:02X}:({msg_name}) {{\n\t")
                     self.write_message_markup(data[msg_offset:])
                     self.f.write("\n}\n")
 
@@ -470,7 +470,7 @@ class N64SegPaperMarioMessages(N64Segment):
         self.write_markup("[end]")
 
     def write_markup(self, markup):
-        self.f.write(re.sub("\n", "\n    ", markup))
+        self.f.write(re.sub("\n", "\n\t", markup))
 
         if markup == "[font:title]\n" or markup == "[font:subtitle]\n":
             self.root_charset = CHARSET_CREDITS

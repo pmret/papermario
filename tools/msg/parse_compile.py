@@ -388,7 +388,7 @@ if __name__ == "__main__":
         explicit_end = False
 
         while len(source) > 0:
-            if source[0] == "\r":
+            if source[0] == "\r" or source[0] == "\t":
                 source = source[1:]
                 continue
 
@@ -397,7 +397,7 @@ if __name__ == "__main__":
                 source = source[1:]
 
                 for i in range(indent_level):
-                    if source[0] == " " or source[0] == "\t":
+                    if source[0] == "\t":
                         source = source[1:]
                     else:
                         break
@@ -452,14 +452,12 @@ if __name__ == "__main__":
 
                 # count indent level
                 indent_level = 0
+                """
                 while source[0] == " " or source[0] == "\t" or source[0] == "\n" or source[0] == "\r":
                     if source[0] == " " or source[0] == "\t":
                         indent_level += 1
                     source = source[1:]
-
-                    # TODO: lookahead at all lines until "}" to determine lowest indent value
-                    if indent_level == 4:
-                        break
+                """
             else:
                 command, args, source = parse_command(source)
 
