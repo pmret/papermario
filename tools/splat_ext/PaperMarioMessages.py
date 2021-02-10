@@ -404,7 +404,14 @@ class N64SegPaperMarioMessages(N64Segment):
                         self.f.write("\n")
 
                     msg_name = None
-                    for section, index, goodname in self.ids:
+                    for d in self.ids:
+                        section, index, goodname = d[:3]
+
+                        if len(d) > 3:
+                            # these will actually do something in the future
+                            context = d[3]
+                            assert context in ["battle_popup", "action_command"]
+
                         if i == section and j == index:
                             msg_name = goodname
                             break
