@@ -298,4 +298,19 @@ extern UNK_TYPE D_0A0026F0;
 extern UNK_TYPE D_802EAE7C;
 extern f64 D_802EB370;
 
+extern s32 D_80291FA8[];
+extern s32 D_80291FD0[];
+extern s32 D_80291FF8[];
+extern s32 D_80291FF8[];
+extern s32 D_80292020[];
+extern s32 D_80292048[];
+extern s32 D_80292070[];
+extern s32 D_80292098[];
+extern s32 D_80292098[];
+extern s32 D_802920C0[];
+extern s32 D_802920E8[];
+extern s32 D_802920E8[];
+extern s32 D_80292110[];
+extern s32 D_8028358C[];
+
 #endif

@@ -1,4 +1,5 @@
 #include "kmr_12.h"
+#include "message_ids.h"
 
 Vec4f N(entryList)[] = {
     { -126.0f, 0.0f, 12.0f, 90.0f }, // west, towards Red/Blue Goomba miniboss room
@@ -10,7 +11,7 @@ MapConfig N(config) = {
     .entryList = N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
     .background = &gBackgroundImage,
-    .tattle = MessageID_TATTLE_KMR_12,
+    .tattle = MSG_kmr_12_tattle,
 };
 
 Script N(PlayMusic) = SCRIPT({
