@@ -81,6 +81,7 @@ Model* get_model_from_list_index(s32 listIndex);
 s32 get_model_list_index_from_tree_index(s32 treeIndex);
 void get_model_center_and_size(s32 modelID, f32* centerX, f32* centerY, f32* centerZ, f32* sizeX, f32* sizeY,
                                f32* sizeZ);
+s32 collision_main_above(void);
 
 void func_80027088(s32);
 

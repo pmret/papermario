@@ -1501,8 +1501,8 @@ typedef struct PlayerStatus {
     /* 0x0BC */ s16 unk_BC;
     /* 0x0BE */ u8 renderMode;
     /* 0x0BF */ s8 unk_BF;
-    /* 0x0C0 */ u32* decorationList;
-    /* 0x0C4 */ char unk_C4[2];
+    /* 0x0C0 */ s16 decorationList;
+    /* 0x0C2 */ char unk_C2[4];
     /* 0x0C6 */ s16 unk_C6;
     /* 0x0C8 */ s32* unk_C8;
     /* 0x0CC */ s32 shadowID;
@@ -1515,8 +1515,8 @@ typedef struct PlayerStatus {
     /* 0x0F0 */ s32 currentButtonsBuffer[10];
     /* 0x118 */ s32 pressedButtonsBuffer[10];
     /* 0x140 */ s32 heldButtonsBuffer[10];
-    /* 0x168 */ f32 stickXBuffer[10];
-    /* 0x190 */ f32 stickYBuffer[10];
+    /* 0x168 */ s32 stickXBuffer[10];
+    /* 0x190 */ s32 stickYBuffer[10];
     /* 0x1B8 */ s32 inputBufPos;
     /* 0x1BC */ char unk_1BC[204];
 } PlayerStatus; // size = 0x288
