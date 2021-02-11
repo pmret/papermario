@@ -5,7 +5,7 @@ from segtypes.segment import Segment
 
 class N64SegBin(N64Segment):
     def split(self, rom_bytes, base_path):
-        out_dir = Segment.create_split_dir(base_path, self.options.get("assets_dir", ""))
+        out_dir = Segment.create_split_dir(base_path, os.path.join(self.options.get("assets_dir", ""), "bin"))
 
         bin_path = os.path.join(out_dir, self.name + ".bin")
         Path(bin_path).parent.mkdir(parents=True, exist_ok=True)
@@ -18,4 +18,4 @@ class N64SegBin(N64Segment):
 
     @staticmethod
     def get_default_name(addr):
-        return "bin/{:X}".format(addr)
+        return "bin_{:X}".format(addr)
