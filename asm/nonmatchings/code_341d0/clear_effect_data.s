@@ -27,8 +27,8 @@ glabel clear_effect_data
 /* 350EC 80059CEC 3463FFFF */  ori       $v1, $v1, 0xffff
 /* 350F0 80059CF0 24040010 */  addiu     $a0, $zero, 0x10
 /* 350F4 80059CF4 0000282D */  daddu     $a1, $zero, $zero
-/* 350F8 80059CF8 3C10E020 */  lui       $s0, %hi(D_E0200000)
-/* 350FC 80059CFC 26100000 */  addiu     $s0, $s0, %lo(D_E0200000)
+/* 350F8 80059CF8 3C10E020 */  lui       $s0, %hi(func_E0200000)
+/* 350FC 80059CFC 26100000 */  addiu     $s0, $s0, %lo(func_E0200000)
 /* 35100 80059D00 0200302D */  daddu     $a2, $s0, $zero
 /* 35104 80059D04 2402FFFF */  addiu     $v0, $zero, -1
 /* 35108 80059D08 3C07801A */  lui       $a3, %hi(D_801A6000)

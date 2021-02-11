@@ -158,8 +158,8 @@ glabel begin_state_title_screen
 /* 12454 80037054 3C04800A */  lui       $a0, %hi(D_8009839C)
 /* 12458 80037058 0C05175C */  jal       load_map_bg
 /* 1245C 8003705C 2484839C */   addiu    $a0, $a0, %lo(D_8009839C)
-/* 12460 80037060 3C048020 */  lui       $a0, %hi(gBackgroundImage)
-/* 12464 80037064 24840000 */  addiu     $a0, $a0, %lo(gBackgroundImage)
+/* 12460 80037060 3C048020 */  lui       $a0, %hi(func_80200000)
+/* 12464 80037064 24840000 */  addiu     $a0, $a0, %lo(func_80200000)
 /* 12468 80037068 0C05178A */  jal       read_background_size
 /* 1246C 8003706C 00000000 */   nop
 /* 12470 80037070 0000202D */  daddu     $a0, $zero, $zero

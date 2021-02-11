@@ -211,7 +211,6 @@ extern s16 gCurrentDoorSoundsSet;
 
 extern s32 D_800D9620;
 extern UNK_TYPE D_800E92D8;
-extern UNK_TYPE D_80147474;
 extern UNK_TYPE D_80147574;
 extern UNK_TYPE D_80109270;
 extern UNK_TYPE D_80108558;

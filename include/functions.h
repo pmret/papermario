@@ -211,6 +211,9 @@ s32 play_sound_at_position(s32 soundID, s32 value2, f32 posX, f32 posY, f32 posZ
 s32 set_music_track(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s16 volume);
 s32 func_8014AA54(s32 playerIndex, s32 arg1, s16 arg2);
 
+s32 basic_window_update(void);
+s32 basic_hidden_window_update(void);
+
 void player_create_target_list(Actor* actor);
 void enemy_create_target_list(Actor* actor);
 

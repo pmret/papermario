@@ -1555,7 +1555,7 @@ glabel pause_badges_draw_contents
 /* 13BF44 80248C04 8E020000 */  lw        $v0, ($s0)
 /* 13BF48 80248C08 10400054 */  beqz      $v0, .L80248D5C
 /* 13BF4C 80248C0C 00000000 */   nop
-/* 13BF50 80248C10 0C090AE8 */  jal       func_80242BA0
+/* 13BF50 80248C10 0C090AE8 */  jal       pause_set_cursor_opacity
 /* 13BF54 80248C14 0000202D */   daddu    $a0, $zero, $zero
 /* 13BF58 80248C18 8E020000 */  lw        $v0, ($s0)
 /* 13BF5C 80248C1C 24100001 */  addiu     $s0, $zero, 1

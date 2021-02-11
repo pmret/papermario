@@ -42,8 +42,8 @@ glabel func_802A9000_428A70
 /* 428B04 802A9094 2402FFD0 */  addiu     $v0, $zero, -0x30
 /* 428B08 802A9098 A6020056 */  sh        $v0, 0x56($s0)
 /* 428B0C 802A909C 24020050 */  addiu     $v0, $zero, 0x50
-/* 428B10 802A90A0 3C01802B */  lui       $at, %hi(func_802A98B0)
-/* 428B14 802A90A4 AC2098B0 */  sw        $zero, %lo(func_802A98B0)($at)
+/* 428B10 802A90A0 3C01802B */  lui       $at, %hi(func_802A98B0_42EC50)
+/* 428B14 802A90A4 AC2098B0 */  sw        $zero, %lo(func_802A98B0_42EC50)($at)
 /* 428B18 802A90A8 0C050529 */  jal       create_icon
 /* 428B1C 802A90AC A6020058 */   sh       $v0, 0x58($s0)
 /* 428B20 802A90B0 0040882D */  daddu     $s1, $v0, $zero

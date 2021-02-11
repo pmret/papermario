@@ -21,8 +21,6 @@ extern int D_00102610_end[]; // 10CC10
 extern int D_0010CC10[];
 extern int D_0010CC10_end[]; // 10F1B0
 
-extern int D_802DBD40[];
-extern int D_800DC500[];
 extern int D_802C3000[];
 extern int D_802E0D90[];
 extern int D_8010F6D0[];

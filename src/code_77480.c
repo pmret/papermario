@@ -254,7 +254,7 @@ INCLUDE_ASM(s32, "code_77480", check_for_interactables);
 
 void func_800E0AD0(void) {
     if ((gPlayerStatusPtr->animFlags & 0x10) && (D_8010C958 != 0)) {
-        func_802B71E8();
+        func_802B71E8_E202F8();
     }
 }
 

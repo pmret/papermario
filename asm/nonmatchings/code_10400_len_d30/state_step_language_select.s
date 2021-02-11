@@ -152,8 +152,8 @@ glabel state_step_language_select
 /* 107F4 800353F4 00000000 */   nop
 /* 107F8 800353F8 0C048C2E */  jal       clear_dynamic_entity_list
 /* 107FC 800353FC 00000000 */   nop
-/* 10800 80035400 3C048020 */  lui       $a0, %hi(gBackgroundImage)
-/* 10804 80035404 24840000 */  addiu     $a0, $a0, %lo(gBackgroundImage)
+/* 10800 80035400 3C048020 */  lui       $a0, %hi(func_80200000)
+/* 10804 80035404 24840000 */  addiu     $a0, $a0, %lo(func_80200000)
 /* 10808 80035408 0C0514BA */  jal       func_801452E8
 /* 1080C 8003540C 3C050002 */   lui      $a1, 2
 /* 10810 80035410 0C050440 */  jal       func_80141100
