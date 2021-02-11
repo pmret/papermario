@@ -249,6 +249,7 @@ extern s32 D_8009A5D8;
 
 extern u8 D_800779B0;
 extern u32 D_80078174;
+extern s32 D_8009A5D8;
 extern u8 D_800A0963;
 
 extern UNK_TYPE D_802EB3B0;

@@ -3,31 +3,29 @@
 extern Gfx D_80074210[];
 extern Gfx D_80074230[];
 
-extern int D_000759B0[];
-extern int D_000759B0_end[]; // A55D0
+s8 D_80074020 = 1;
+s8 D_80074021 = 5;
 
-extern int D_000A5DD0[];
-extern int D_000A5DD0_end[]; // E79B0
+GameStatus gGameStatus = {0};
 
-extern int D_000E79B0[];
-extern int D_000E79B0_end[]; // FEE30
+GameStatus* gGameStatusPtr[1] = { &gGameStatus };
 
-extern int D_000FEE30[];
-extern int D_000FEE30_end[]; // 102610
+s16 D_800741A0 = 0;
 
-extern int D_00102610[];
-extern int D_00102610_end[]; // 10CC10
+s16 D_800741A2 = 0;
 
-extern int D_0010CC10[];
-extern int D_0010CC10_end[]; // 10F1B0
+s32 D_800741A4 = 0;
 
-extern int D_802C3000[];
-extern int D_802E0D90[];
-extern int D_8010F6D0[];
-extern int D_802EB3D0[];
+s32 D_800741A8[] = { 0x00010000, 0x00000000, 0x00000001, 0x00000000, 0x00000000, 0x00010000, 0x00000000, 0x00000001, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, };
 
-extern u8 D_80074021;
-extern s32 D_8009A5D8;
+u16 gMatrixListPos = 0;
+
+u16 D_800741F2 = 0;
+
+u16 gCurrentDisplayContextIndex = 0;
+
+s32 D_800741F8[] = { 0x00000000, 0x00000000, 0x028001E0, 0x01FF0000, 0x028001E0, 0x01FF0000, 0xE200001C, 0x0F0A4000, 0xFCFFFFFF, 0xFFFE793C, 0xE3001801, 0x00000040, 0xDF000000, 0x00000000, 0xDC080008, 0x80074200, 0xD9000000, 0x00000000, 0xD9FFFFFF, 0x00200405, 0xD7000000, 0x00000000, 0xDF000000, 0x00000000, 0x00000000, 0x00000000, };
+
 
 INCLUDE_ASM(void, "code_1b40_len_20b0", step_game_loop);
 
@@ -40,12 +38,12 @@ void load_engine_data(void) {
     GameStatus* phi_s0;
     s32 i;
 
-    dma_copy(D_000FEE30, D_000FEE30_end, D_802DBD40);
-    dma_copy(D_000759B0, D_000759B0_end, D_800DC500);
-    dma_copy(D_000E79B0, D_000E79B0_end, D_802C3000);
-    dma_copy(D_00102610, D_00102610_end, D_802E0D90);
-    dma_copy(D_000A5DD0, D_000A5DD0_end, D_8010F6D0);
-    dma_copy(D_0010CC10, D_0010CC10_end, D_802EB3D0);
+    dma_copy(code_code_FEE30_ROM_START, code_code_FEE30_ROM_END, code_code_FEE30_VRAM);
+    dma_copy(code_code_759B0_ROM_START, code_code_759B0_ROM_END, code_code_759B0_VRAM);
+    dma_copy(code_code_E79B0_ROM_START, code_code_E79B0_ROM_END, code_code_E79B0_VRAM);
+    dma_copy(code_code_102610_ROM_START, code_code_102610_ROM_END, code_code_102610_VRAM);
+    dma_copy(code_code_A5DD0_ROM_START, code_code_A5DD0_ROM_END, code_code_A5DD0_VRAM);
+    dma_copy(D_0010CC10, D_0010CC10_end, D_802EB3D0); // new segment required to fix this
     D_8009A650[0] = 0;
     phi_s0 = *gGameStatusPtr;
     GAME_STATUS->unk_79 = 0;

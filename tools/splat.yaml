@@ -233,6 +233,7 @@ segments:
     - [0x4a360, c, os/code_4a360_len_930]
     - [0x4ac90, c, os/code_4ac90_len_3910]
     - [0x4E5A0, data, code_1000_len_60]
+    - [0x4F410, .data, code_1b40_len_20b0]
     - [0x4F660, .data, code_42e0_len_1f60]
     - [0x4F9D0, data, code_6240_len_c00]
     - [0x53570, .data, code_25f00_len_940]
