@@ -12,12 +12,24 @@ asm_dir = root_dir + "asm/nonmatchings/"
 symbol_addrs_path = os.path.join(script_dir, "symbol_addrs.txt")
 elf_path = os.path.join(root_dir, "build", "papermario.elf")
 map_path = os.path.join(root_dir, "build", "papermario.map")
+ignores_path = os.path.join(root_dir, "tools", "ignored_funcs.txt")
 
 map_symbols = {}
 symbol_addrs = []
 elf_symbols = []
 
+ignores = set()
+
 verbose = False
+
+def read_ignores():
+    with open(ignores_path) as f:
+        lines = f.readlines()
+
+    for line in lines:
+        name = line.split(" = ")[0].strip()
+        if name != "":
+            ignores.add(name)
 
 def scan_map():
     ram_offset = None
@@ -97,6 +109,7 @@ def read_elf():
             name = components[-1]
 
             if "/" in name or \
+               name in ignores or \
                name.startswith("_") or \
                name.startswith("jtbl_") or \
                re.match(r"L[0-9A-F]{8}", name):
@@ -172,7 +185,7 @@ def write_new_symbol_addrs():
                     line += f" {thing}"
             f.write(line + "\n")
 
-
+read_ignores()
 scan_map()
 read_symbol_addrs()
 read_elf()
