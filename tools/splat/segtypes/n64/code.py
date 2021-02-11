@@ -833,6 +833,12 @@ class N64SegCode(N64Segment):
                 else:
                     stype = "byte"
 
+                # If we're starting from a weird place, make sure our container size is correct
+                if dis_start % 4 != 0 and stype != "byte" and sym_len > 1:
+                    stype = "short"
+                if dis_start % 2 != 0:
+                    stype = "byte"
+
                 if not rodata_encountered and mnemonic == "jtbl":
                     rodata_encountered = True
                     ret += "\n\n\n.section .rodata"
