@@ -4,7 +4,7 @@ from util.n64 import Yay0decompress
 
 class N64SegYay0(N64Segment):
     def split(self, rom_bytes, base_path):
-        out_dir = self.create_parent_dir(base_path + "/" + self.options.get("assets_dir", "bin"), self.name)
+        out_dir = self.create_parent_dir(os.path.join(base_path, self.options.get("assets_dir", "bin")), self.name)
 
         path = os.path.join(out_dir, os.path.basename(self.name) + ".bin")
         with open(path, "wb") as f:
