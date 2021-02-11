@@ -64,7 +64,7 @@ def read_splat(splat_config: str):
             if path.endswith(".c") or path.endswith(".s") or path.endswith(".data") or path.endswith(".rodata"):
                 path = subdir + "/" + path
             else:
-                assert subdir == "assets/bin", subdir + " " + path
+                assert subdir == "assets", subdir + " " + path
 
             objects.add(path)
             segments[path] = segment
