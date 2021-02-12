@@ -1,7 +1,6 @@
 #include "common.h"
 #include "battle/battle.h"
 
-//INCLUDE_ASM(s32, "code_1AC760", dispatch_event_partner);
 void dispatch_event_partner(s8 lastEventType) {
     BattleStatus* battleStatus = &gBattleStatus;
     s32 temp_ret;
@@ -25,7 +24,6 @@ void dispatch_event_partner(s8 lastEventType) {
         kill_script_by_ID(onHitID);
     }
 }
-
 
 void dispatch_event_partner_continue_turn(s8 lastEventType) {
     BattleStatus* battleStatus = &gBattleStatus;
