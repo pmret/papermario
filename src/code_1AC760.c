@@ -62,7 +62,22 @@ INCLUDE_ASM(s32, "code_1AC760", PartnerPowerBounceEnemy);
 
 INCLUDE_ASM(s32, "code_1AC760", PartnerTestEnemy);
 
-INCLUDE_ASM(s32, "code_1AC760", func_8028070C);
+ApiStatus func_8028070C(ScriptInstance* script, s32 isInitialCall) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    Bytecode* args = script->ptrReadPos;
+    Actor* actorID = get_actor(script->owner1.actorID);
+    s32 damageAmount = get_variable(script, *args++);
+    s32 event = get_variable(script, *args++);
+    
+    battleStatus->currentTargetID = actorID->targetActorID;
+    battleStatus->currentTargetPart = actorID->targetPartIndex;
+
+    if (dispatch_damage_event_partner_0(damageAmount, event, battleStatus) >= 0) {
+        return does_script_exist_by_ref(script) ? ApiStatus_DONE2 : ApiStatus_BLOCK;
+    }
+
+    return ApiStatus_BLOCK;
+}
 
 ApiStatus DeletePartner(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
