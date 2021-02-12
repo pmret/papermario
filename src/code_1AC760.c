@@ -3,7 +3,23 @@
 
 INCLUDE_ASM(s32, "code_1AC760", dispatch_event_partner);
 
-INCLUDE_ASM(s32, "code_1AC760", dispatch_event_partner_continue_turn);
+void dispatch_event_partner_continue_turn(s8 lastEventType) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    Actor* partnerActor = battleStatus->partnerActor;
+    ScriptInstance* onHitScript = partnerActor->onHitScript;
+    ScriptID onHitID = partnerActor->onHitID;
+    ScriptInstance* script;
+
+    partnerActor->lastEventType = lastEventType;
+    script = start_script(partnerActor->onHitCode, 10, 0x20);
+    partnerActor->onHitScript = script;
+    partnerActor->onHitID = script->id;
+    script->owner1.actorID = ActorID_PARTNER;
+    
+    if (onHitScript != NULL) {
+        kill_script_by_ID(onHitID);
+    }
+}
 
 INCLUDE_ASM(s32, "code_1AC760", calc_partner_test_enemy);
 
