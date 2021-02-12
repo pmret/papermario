@@ -251,6 +251,13 @@ segments:
     - [0x73148, .rodata, code_1b40_len_20b0]
     - [0x73160, .rodata, code_42e0_len_1f60]
     - [0x73200, rodata]
+    - [0x73AB0, .rodata, code_20ec0_len_5040]
+    - [0x73B10, .rodata, code_23680]
+    - [0x73CC0, .rodata, code_28910_len_5090]
+    - [0x73CF0, .rodata, code_2e230_len_2190]
+    - [0x73D08, .rodata, code_30450]
+    - [0x73D30, .rodata, code_33450]
+    - [0x73D40, .rodata, code_341d0]
     - [0x73DA0, .rodata, world/world]
     - [0x74EA0, rodata]
     - [0x75240, .rodata, battle/battle] # ram 80099E40

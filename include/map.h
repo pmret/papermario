@@ -195,6 +195,12 @@ typedef struct StaticNPC {
     /* 0x1EC */ MessageID tattle;
 } StaticNpc; // size = 0x1F0
 
+typedef struct EnemyTerritory {
+    /* 0x00 */ Vec3i unk_00;
+    /* 0x0C */ char unk_0C[0x28];
+    /* 0x34 */ s32 unk_34;
+} EnemyTerritory; // size = ???
+
 typedef struct Enemy {
     /* 0x00 */ s32 flags;
     /* 0x04 */ s8 encounterIndex;
@@ -236,7 +242,7 @@ typedef struct Enemy {
     /* 0xC4 */ s32 unk_C4;
     /* 0xC8 */ s32 unk_C8;
     /* 0xCC */ s32* animList;
-    /* 0xD0 */ UNK_PTR territoryData;
+    /* 0xD0 */ EnemyTerritory* territory;
     /* 0xD4 */ s16* dropTables;
     /* 0xD8 */ u32 tattleString;
     /* 0xDC */ char unk_DC[20];

@@ -1,6 +1,8 @@
 #include "common.h"
 #include "map.h"
 
+extern s32 D_800A0F40;
+
 INCLUDE_ASM(s32, "code_20ec0_len_5040", func_80045AC0);
 
 INCLUDE_ASM(s32, "code_20ec0_len_5040", func_80045B10);
@@ -23,7 +25,9 @@ INCLUDE_ASM(s32, "code_20ec0_len_5040", draw_merlee_message_string);
 
 INCLUDE_ASM(s32, "code_20ec0_len_5040", draw_merlee_message);
 
-INCLUDE_ASM(s32, "code_20ec0_len_5040", is_merlee_message_done);
+s32 is_merlee_message_done(void) {
+    return D_800A0F40;
+}
 
 INCLUDE_ASM(s32, "code_20ec0_len_5040", func_80045FB4);
 

@@ -113,7 +113,7 @@ typedef struct Npc {
     /* 0x028 */ u32 currentAnim;
     /* 0x02C */ char unk_2C[4];
     /* 0x030 */ f32 animationSpeed;
-    /* 0x034 */ char unk_34[4];
+    /* 0x034 */ f32 unk_34; // r?
     /* 0x038 */ Vec3f pos;
     /* 0x044 */ Vec3f rotation;
     /* 0x050 */ f32 unk_50;
@@ -1546,7 +1546,7 @@ typedef struct EncounterStatus {
     /* 0x13 */ u8 dropWhackaBump;
     /* 0x14 */ s32 songID;
     /* 0x18 */ s32 unk_18;
-    /* 0x1C */ u8 numEncounters; /* number of encounters for current map (in list) */
+    /* 0x1C */ s8 numEncounters; /* number of encounters for current map (in list) */
     /* 0x1D */ s8 currentAreaIndex;
     /* 0x1E */ u8 currentMapIndex;
     /* 0x1F */ u8 currentEntryIndex;

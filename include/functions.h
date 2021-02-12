@@ -106,7 +106,7 @@ Actor* get_actor(ActorID actorID);
 ActorPart* get_actor_part(Actor* actor, s32 partIndex);
 s32 add_coins(s32 amt);
 
-s32 func_800494C0(Npc* npc, s32 arg1, s32 arg2);
+void func_800494C0(Npc* npc, s32 arg1, s32 arg2);
 
 s32 get_variable(ScriptInstance* script, Bytecode var);
 s32 set_variable(ScriptInstance* script, Bytecode var, s32 value);
