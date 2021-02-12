@@ -8,6 +8,7 @@ ApiStatus func_80238000_714CF0(ScriptInstance* script, s32 isInitialCall) {
     } else {
         script->varTable[0] = 0;
     }
+
     return ApiStatus_DONE2;
 }
 
