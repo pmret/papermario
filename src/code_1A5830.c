@@ -66,9 +66,13 @@ INCLUDE_ASM(s32, "code_1A5830", calc_enemy_damage_target);
 
 INCLUDE_ASM(s32, "code_1A5830", dispatch_damage_event_actor);
 
-INCLUDE_ASM(s32, "code_1A5830", dispatch_damage_event_actor_0);
+s32 dispatch_damage_event_actor_0(Actor* actor, s32 damageAmount, s32 event) {
+    return dispatch_damage_event_actor(actor, damageAmount, event, FALSE);
+}
 
-INCLUDE_ASM(s32, "code_1A5830", dispatch_damage_event_actor_1);
+s32 dispatch_damage_event_actor_1(Actor* actor, s32 damageAmount, s32 event) {
+    return dispatch_damage_event_actor(actor, damageAmount, event, TRUE);
+}
 
 ApiStatus BindTakeTurn(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
