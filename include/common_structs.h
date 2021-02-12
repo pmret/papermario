@@ -123,7 +123,7 @@ typedef struct Npc {
     /* 0x078 */ s32 shadowIndex;
     /* 0x07C */ f32 shadowScale;
     /* 0x080 */ s32 unk_80;
-    /* 0x084 */ s32 unk_84;
+    /* 0x084 */ char unk_84[4];
     /* 0x088 */ s16 isFacingAway;
     /* 0x08A */ s16 yawCamOffset;
     /* 0x08C */ s16 unk_8C;
