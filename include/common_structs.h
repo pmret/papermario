@@ -787,7 +787,7 @@ typedef struct EffectInstance {
     /* 0x00 */ s32 flags;
     /* 0x04 */ s32 effectIndex;
     /* 0x08 */ s32 totalMatricies;
-    /* 0x0C */ void* unk_0C;
+    /* 0x0C */ Vec4f* unk_0C;          // Correct Type?
     /* 0x10 */ struct Effect* effect;
 } EffectInstance;
 
@@ -1722,11 +1722,5 @@ typedef struct {
     /* 0x10630 */ s32 smallGfx[0x400]; // used by gfx_task_background
     /* 0x11630 */ Matrix4s matrixStack[0x200];
 } DisplayContext; // size = 0x19630
-
-// Size and purpose unknown
-typedef struct ScriptOwner {
-    /* 0x000 */ u16 unk_00; // ActorID??
-    /* 0x003 */ u8 unk_03; // ActorPartIndex??
-} ScriptOwner;
 
 #endif
