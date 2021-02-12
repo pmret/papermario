@@ -239,4 +239,6 @@ void exec_entity_updatecmd(Entity* entity);
 void func_802D7460(f32 x, f32 y, f32 z, s32 arg3);
 void func_802D74C0(f32 x, f32 y, f32 z, s32 arg3);
 
+void show_damage_popup(f32 x, f32 y, f32 z, s32 damageAmount);
+
 #endif

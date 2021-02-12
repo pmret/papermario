@@ -1,7 +1,31 @@
 #include "common.h"
 #include "battle/battle.h"
 
-INCLUDE_ASM(s32, "code_1AC760", dispatch_event_partner);
+//INCLUDE_ASM(s32, "code_1AC760", dispatch_event_partner);
+void dispatch_event_partner(s8 lastEventType) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    s32 temp_ret;
+    Actor* partnerActor = battleStatus->partnerActor;
+    ScriptInstance* onHitScript = partnerActor->onHitScript;
+    ScriptID onHitID = partnerActor->onHitID;
+    ScriptInstance* script;
+
+    partnerActor->lastEventType = lastEventType;
+    script = start_script(partnerActor->onHitCode, 10, 0x20);
+    partnerActor->onHitScript = script;
+    partnerActor->onHitID = script->id;
+    script->owner1.actorID = ActorID_PARTNER;
+
+    if (partnerActor->takeTurnScript != NULL) {
+        kill_script_by_ID(partnerActor->takeTurnID);
+        partnerActor->takeTurnScript = NULL;
+    }
+
+    if (onHitScript != NULL) {
+        kill_script_by_ID(onHitID);
+    }
+}
+
 
 void dispatch_event_partner_continue_turn(s8 lastEventType) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -35,9 +59,68 @@ s32 dispatch_damage_event_partner_1(s32 damageAmount, s32 event, s32 stopMotion)
     return dispatch_damage_event_partner(damageAmount, event, TRUE);
 }
 
-INCLUDE_ASM(s32, "code_1AC760", MakeOwnerTargetIndex);
+#ifdef NON_MATCHING
+ApiStatus MakeOwnerTargetIndex(ScriptInstance* script, s32 isInitialCall) {
+    s32 temp_v0;
+    s8 targetListLength;
+    Bytecode* args = script->ptrReadPos;
+    Bytecode* temp_s0_2;
+    Actor* actor;
+    SelectableTarget* selectableTarget;
+    s32 temp;
+    s32 outVal;
 
+    temp_s0_2 = *args++;
+    actor = get_actor(script->owner1.actorID);
+    targetListLength = actor->targetListLength;
+    get_variable(script, *args);
+    temp_v0 = get_variable(script, *temp_s0_2);
+    if (targetListLength == 0) {
+        outVal = -1;
+    } else {
+        temp = temp_v0;
+        if (temp_v0 != 0) {
+            temp = temp_v0 - 1;
+            if (temp_v0 >= (s32) targetListLength) {
+                temp = targetListLength - 1;
+            }
+        }
+        selectableTarget = &actor->targetData[actor->targetIndexList[temp]];
+        actor->targetActorID = (u16) selectableTarget->actorID;
+        actor->targetPartIndex = ((u8*)&selectableTarget->partID)[1]; // Should access only lower part of byte
+        outVal = temp;
+    }
+    set_variable(script, *temp_s0_2++, outVal);
+    return ApiStatus_DONE2;
+}
+#else
+INCLUDE_ASM(s32, "code_1AC760", MakeOwnerTargetIndex);
+#endif
+
+#ifdef NON_MATCHING
+ApiStatus func_8027FC90(ScriptInstance* script, s32 isInitialCall) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    s32 hitResult;
+    Actor* actor;
+    Bytecode* args = script->ptrReadPos;
+    s32 outVar = args[0];
+    s32 enemyID = get_variable(script, args[0]);
+
+    if (enemyID == -0x7F) {
+        enemyID = script->owner1.enemyID;
+    }
+
+    actor = get_actor(enemyID);
+    battleStatus->flags1 |= 0x20;
+    hitResult = calc_partner_damage_enemy();
+    show_damage_popup(actor->movePos.goal.x, actor->movePos.goal.y, actor->movePos.goal.z, battleStatus->lastAttackDamage);
+    set_variable(script, outVar, hitResult);
+    
+    return ApiStatus_DONE2;
+}
+#else
 INCLUDE_ASM(s32, "code_1AC760", func_8027FC90);
+#endif
 
 ApiStatus GetActorLevel(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -65,12 +148,12 @@ INCLUDE_ASM(s32, "code_1AC760", PartnerTestEnemy);
 ApiStatus func_8028070C(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
-    Actor* actorID = get_actor(script->owner1.actorID);
+    Actor* actor = get_actor(script->owner1.actorID);
     s32 damageAmount = get_variable(script, *args++);
     s32 event = get_variable(script, *args++);
     
-    battleStatus->currentTargetID = actorID->targetActorID;
-    battleStatus->currentTargetPart = actorID->targetPartIndex;
+    battleStatus->currentTargetID = actor->targetActorID;
+    battleStatus->currentTargetPart = actor->targetPartIndex;
 
     if (dispatch_damage_event_partner_0(damageAmount, event, battleStatus) >= 0) {
         return does_script_exist_by_ref(script) ? ApiStatus_DONE2 : ApiStatus_BLOCK;

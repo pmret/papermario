@@ -1723,4 +1723,10 @@ typedef struct {
     /* 0x11630 */ Matrix4s matrixStack[0x200];
 } DisplayContext; // size = 0x19630
 
+// Size and purpose unknown
+typedef struct ScriptOwner {
+    /* 0x000 */ u16 unk_00; // ActorID??
+    /* 0x003 */ u8 unk_03; // ActorPartIndex??
+} ScriptOwner;
+
 #endif
