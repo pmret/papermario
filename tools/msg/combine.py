@@ -41,14 +41,6 @@ if __name__ == "__main__":
         sections = []
         #messages_by_file = {}
 
-        # this logic could probably be a bit better (i.e. read ahead, so no overwriting happens)
-        def section_get_unused_id(section):
-            max_index = 0
-            for index in section:
-                if index > max_index:
-                    max_index = index
-            return max_index + 1
-
         for message in messages:
             if message.section is None:
                 # allocate a section
@@ -63,7 +55,7 @@ if __name__ == "__main__":
             section = sections[section_idx]
 
             if message.index is None:
-                message.index = section_get_unused_id(section)
+                message.index = len(section)
 
             # if message.name:
             #     if message.name in names:
@@ -79,6 +71,9 @@ if __name__ == "__main__":
 
             if message.index in section:
                 print(f"warning: multiple messages allocated to id {section_idx:02X}:{message.index:03X}")
+
+                if section[message.index].name and message.name:
+                    print(f"warning: message '{section[message.index].name}' and '{message.name}' conflict")
 
             section[message.index] = message
 
