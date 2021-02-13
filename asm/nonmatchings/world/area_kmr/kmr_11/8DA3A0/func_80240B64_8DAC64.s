@@ -134,7 +134,7 @@ glabel L80240D2C_8DAE2C
 glabel L80240D44_8DAE44
 /* 8DAE44 80240D44 0280202D */  daddu     $a0, $s4, $zero
 /* 8DAE48 80240D48 0260282D */  daddu     $a1, $s3, $zero
-/* 8DAE4C 80240D4C 0C090187 */  jal       func_8024061C_8DA71C
+/* 8DAE4C 80240D4C 0C090187 */  jal       kmr_11_UnkNpcAIFunc13_2
 /* 8DAE50 80240D50 02A0302D */   daddu    $a2, $s5, $zero
 glabel L80240D54_8DAE54
 /* 8DAE54 80240D54 0280202D */  daddu     $a0, $s4, $zero

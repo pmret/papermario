@@ -14,7 +14,7 @@ INCLUDE_ASM(s32, "world/area_arn/arn_05/BE7BE0", func_8024067C_BE825C);
 
 # include "world/common/NpcJumpFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_arn/arn_05/BE7BE0", func_8024081C_BE83FC);
+#include "world/common/UnkNpcAIFunc13.inc.c"
 
 INCLUDE_ASM(s32, "world/area_arn/arn_05/BE7BE0", func_8024094C_BE852C);
 

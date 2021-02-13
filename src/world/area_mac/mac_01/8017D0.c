@@ -24,7 +24,9 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802416FC_801F7C);
 #include "world/common/NpcJumpFunc.inc.c"
 #define NAMESPACE mac_01
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_8024189C_80211C);
+#define NAMESPACE dup_mac_01
+#include "world/common/UnkNpcAIFunc13.inc.c"
+#define NAMESPACE mac_01
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802419CC_80224C);
 

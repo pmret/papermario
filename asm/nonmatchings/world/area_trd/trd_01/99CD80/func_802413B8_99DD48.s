@@ -134,7 +134,7 @@ glabel L80241580_99DF10
 glabel L80241598_99DF28
 /* 99DF28 80241598 0280202D */  daddu     $a0, $s4, $zero
 /* 99DF2C 8024159C 0260282D */  daddu     $a1, $s3, $zero
-/* 99DF30 802415A0 0C09039C */  jal       func_80240E70_99D800
+/* 99DF30 802415A0 0C09039C */  jal       trd_01_UnkNpcAIFunc13_2
 /* 99DF34 802415A4 02A0302D */   daddu    $a2, $s5, $zero
 glabel L802415A8_99DF38
 /* 99DF38 802415A8 0280202D */  daddu     $a0, $s4, $zero

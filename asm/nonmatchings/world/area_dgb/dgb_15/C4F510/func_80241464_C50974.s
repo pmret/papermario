@@ -175,7 +175,7 @@ glabel L802416C0_C50BD0
 glabel L802416D8_C50BE8
 /* C50BE8 802416D8 0280202D */  daddu     $a0, $s4, $zero
 /* C50BEC 802416DC 0260282D */  daddu     $a1, $s3, $zero
-/* C50BF0 802416E0 0C09043B */  jal       func_802410EC_C505FC
+/* C50BF0 802416E0 0C09043B */  jal       dgb_15_UnkNpcAIFunc13
 /* C50BF4 802416E4 02A0302D */   daddu    $a2, $s5, $zero
 glabel L802416E8_C50BF8
 /* C50BF8 802416E8 0280202D */  daddu     $a0, $s4, $zero

@@ -66,7 +66,7 @@ typedef struct NpcAISettings {
     /* 0x04 */ s32 moveTime;
     /* 0x08 */ s32 waitTime;
     /* 0x0C */ f32 alertRadius;
-    /* 0x10 */ f32 unk_10;
+    /* 0x10 */ s32 unk_10;
     /* 0x14 */ s32 unk_14;
     /* 0x18 */ f32 chaseSpeed;
     /* 0x1C */ s32 unk_1C; // chase turn step?

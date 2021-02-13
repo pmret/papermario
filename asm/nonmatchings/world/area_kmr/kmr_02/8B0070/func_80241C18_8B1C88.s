@@ -134,7 +134,7 @@ glabel L80241DE0_8B1E50
 glabel L80241DF8_8B1E68
 /* 8B1E68 80241DF8 0280202D */  daddu     $a0, $s4, $zero
 /* 8B1E6C 80241DFC 0260282D */  daddu     $a1, $s3, $zero
-/* 8B1E70 80241E00 0C0905B4 */  jal       func_802416D0_8B1740
+/* 8B1E70 80241E00 0C0905B4 */  jal       kmr_02_UnkNpcAIFunc13_2
 /* 8B1E74 80241E04 02A0302D */   daddu    $a2, $s5, $zero
 glabel L80241E08_8B1E78
 /* 8B1E78 80241E08 0280202D */  daddu     $a0, $s4, $zero

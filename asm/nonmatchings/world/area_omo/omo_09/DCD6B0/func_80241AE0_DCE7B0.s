@@ -175,7 +175,7 @@ glabel L80241D3C_DCEA0C
 glabel L80241D54_DCEA24
 /* DCEA24 80241D54 0280202D */  daddu     $a0, $s4, $zero
 /* DCEA28 80241D58 0260282D */  daddu     $a1, $s3, $zero
-/* DCEA2C 80241D5C 0C0905DA */  jal       func_80241768_DCE438
+/* DCEA2C 80241D5C 0C0905DA */  jal       omo_09_UnkNpcAIFunc13
 /* DCEA30 80241D60 02A0302D */   daddu    $a2, $s5, $zero
 glabel L80241D64_DCEA34
 /* DCEA34 80241D64 0280202D */  daddu     $a0, $s4, $zero

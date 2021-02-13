@@ -12,7 +12,7 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_11/8DA3A0", func_80240424_8DA524);
 
 # include "world/common/NpcJumpFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_11/8DA3A0", func_8024061C_8DA71C);
+#include "world/common/UnkNpcAIFunc13_2.inc.c"
 
 # include "world/common/UnkNpcAIFunc11.inc.c"
 

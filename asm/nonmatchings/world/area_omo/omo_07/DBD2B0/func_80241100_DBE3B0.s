@@ -175,7 +175,7 @@ glabel L8024135C_DBE60C
 glabel L80241374_DBE624
 /* DBE624 80241374 0280202D */  daddu     $a0, $s4, $zero
 /* DBE628 80241378 0260282D */  daddu     $a1, $s3, $zero
-/* DBE62C 8024137C 0C090362 */  jal       func_80240D88_DBE038
+/* DBE62C 8024137C 0C090362 */  jal       omo_07_UnkNpcAIFunc13
 /* DBE630 80241380 02A0302D */   daddu    $a2, $s5, $zero
 glabel L80241384_DBE634
 /* DBE634 80241384 0280202D */  daddu     $a0, $s4, $zero

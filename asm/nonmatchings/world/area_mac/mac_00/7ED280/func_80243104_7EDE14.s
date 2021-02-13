@@ -175,7 +175,7 @@ glabel L80243360_7EE070
 glabel L80243378_7EE088
 /* 7EE088 80243378 0280202D */  daddu     $a0, $s4, $zero
 /* 7EE08C 8024337C 0260282D */  daddu     $a1, $s3, $zero
-/* 7EE090 80243380 0C090B63 */  jal       func_80242D8C_7EDA9C
+/* 7EE090 80243380 0C090B63 */  jal       mac_00_UnkNpcAIFunc13
 /* 7EE094 80243384 02A0302D */   daddu    $a2, $s5, $zero
 glabel L80243388_7EE098
 /* 7EE098 80243388 0280202D */  daddu     $a0, $s4, $zero

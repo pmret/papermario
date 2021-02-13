@@ -111,7 +111,7 @@ glabel L80242A64_A18C84
 glabel L80242A7C_A18C9C
 /* A18C9C 80242A7C 0280202D */  daddu     $a0, $s4, $zero
 /* A18CA0 80242A80 0200282D */  daddu     $a1, $s0, $zero
-/* A18CA4 80242A84 0C09093A */  jal       func_802424E8_A18708
+/* A18CA4 80242A84 0C09093A */  jal       hos_02_UnkNpcAIFunc13
 /* A18CA8 80242A88 0260302D */   daddu    $a2, $s3, $zero
 glabel L80242A8C_A18CAC
 /* A18CAC 80242A8C 0280202D */  daddu     $a0, $s4, $zero
