@@ -85,7 +85,7 @@ ApiStatus BindTakeTurn(ScriptInstance* script, s32 isInitialCall) {
 
     var1 = get_variable(script, *args++);
     get_actor(actorID)->takeTurnCode = var1;
-    return ApiStatus_FINISH;
+    return ApiStatus_DONE2;
 }
 
 ApiStatus PauseTakeTurn(ScriptInstance* script, s32 isInitialCall) {
@@ -286,10 +286,9 @@ ApiStatus SetEnemyHP(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#ifdef NON_MATCHING
 ApiStatus GetActorHP(ScriptInstance* script, s32 isInitialCall) {
+    PlayerData* playerData = &gPlayerData;
     Bytecode* args = script->ptrReadPos;
-    PlayerData* playerData = PLAYER_DATA;
     ActorID actorID = get_variable(script, *args++);
     Actor* actor;
     s32 outVar;
@@ -302,22 +301,21 @@ ApiStatus GetActorHP(ScriptInstance* script, s32 isInitialCall) {
 
     actor = get_actor(actorID);
 
-    if (actorID & 0x700) {
-        if (actorID == ActorID_PARTNER) {
+    switch (actorID & 0x700) {
+        case ActorID_PLAYER:
+            outVal = playerData->curHP;
+            break;
+        case ActorID_PARTNER:
             outVal = 99;
-        } else {
+            break;
+        default:
             outVal = actor->currentHP;
-        }
-    } else {
-        outVal = playerData->curHP;
+            break;
     }
 
     set_variable(script, outVar, outVal);
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(s32, "code_1A5830", GetActorHP);
-#endif
 
 ApiStatus GetEnemyMaxHP(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
