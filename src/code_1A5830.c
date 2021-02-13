@@ -21,13 +21,13 @@ s32 func_80276F50(Actor* actor) {
 
 void dispatch_event_general(Actor* actor, Event event) {
     switch (actor->actorID & 0x700) {
-        case 0:
+        case ActorID_PLAYER:
             dispatch_event_player(event);
             break;
-        case 0x100:
+        case ActorID_PARTNER:
             dispatch_event_partner(event);
             break;
-        case 0x200:
+        case ActorID_ENEMY0:
             dispatch_event_actor(actor, event);
             break;
     }
