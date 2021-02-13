@@ -2512,7 +2512,7 @@ segments:
     overlay: True
     subsections:
     - [0x752450, c]
-    - [0x7524F0, data]
+    - [0x752500, data]
   - name: battle/move/mega_quake
     type: code
     start: 0x756780

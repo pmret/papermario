@@ -282,7 +282,6 @@ ApiStatus SetEnemyHP(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#ifdef NON_MATCHING
 ApiStatus GetActorHP(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     PlayerData* playerData = PLAYER_DATA;
@@ -298,22 +297,21 @@ ApiStatus GetActorHP(ScriptInstance* script, s32 isInitialCall) {
 
     actor = get_actor(actorID);
 
-    if (actorID & 0x700) {
-        if (actorID == ActorID_PARTNER) {
+    switch (actorID & 0x700) {
+        case ActorID_PLAYER:
+            outVal = playerData->curHP;
+            break;
+        case ActorID_PARTNER:
             outVal = 99;
-        } else {
+            break;
+        default:
             outVal = actor->currentHP;
-        }
-    } else {
-        outVal = playerData->curHP;
+            break;
     }
 
     set_variable(script, outVar, outVal);
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(s32, "code_1A5830", GetActorHP);
-#endif
 
 ApiStatus GetEnemyMaxHP(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

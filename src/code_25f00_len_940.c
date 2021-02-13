@@ -12,6 +12,9 @@ u32 nuAuFrameCounter = 0;
 u8 D_80078180 = 1;
 u8 D_80078181 = 1;
 
+//bss
+//static u16 D_800A0F50;
+
 INCLUDE_ASM(s32, "code_25f00_len_940", func_8004AB00);
 
 void nuAuPreNMIFuncSet(NUAuPreNMIFunc func) {
@@ -77,6 +80,7 @@ void nuAuCleanDMABuffers(void) {
 }
 
 // Nop issue
+// try again when bss is figured out up until this file
 #ifdef NON_MATCHING
 void func_8004B328(s16 arg0, s32 arg1) {
     s16 temp_a0_2;
