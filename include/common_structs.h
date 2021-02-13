@@ -1725,7 +1725,7 @@ typedef struct {
 
 typedef struct EffectInstanceData {
     /* 0x00 */ s32 unk_00;
-    /* 0x0C */ Vec3f pos;
+    /* 0x04 */ Vec3f pos;
     /* 0x10 */ Vec3f rotation;
     /* 0x1C */ Vec3f scale;
     /* 0x28 */ char unk_28[0x4];

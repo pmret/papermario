@@ -3,7 +3,6 @@
 
 void dispatch_event_partner(s8 lastEventType) {
     BattleStatus* battleStatus = &gBattleStatus;
-    s32 temp_ret;
     Actor* partnerActor = battleStatus->partnerActor;
     ScriptInstance* onHitScript = partnerActor->onHitScript;
     ScriptID onHitID = partnerActor->onHitID;
@@ -37,7 +36,7 @@ void dispatch_event_partner_continue_turn(s8 lastEventType) {
     partnerActor->onHitScript = script;
     partnerActor->onHitID = script->id;
     script->owner1.actorID = ActorID_PARTNER;
-    
+
     if (onHitScript != NULL) {
         kill_script_by_ID(onHitID);
     }
@@ -113,7 +112,7 @@ ApiStatus func_8027FC90(ScriptInstance* script, s32 isInitialCall) {
     hitResult = calc_partner_damage_enemy();
     show_damage_popup(actor->movePos.goal.x, actor->movePos.goal.y, actor->movePos.goal.z, battleStatus->lastAttackDamage);
     set_variable(script, outVar, hitResult);
-    
+
     return ApiStatus_DONE2;
 }
 #else
@@ -149,7 +148,7 @@ ApiStatus func_8028070C(ScriptInstance* script, s32 isInitialCall) {
     Actor* actor = get_actor(script->owner1.actorID);
     s32 damageAmount = get_variable(script, *args++);
     s32 event = get_variable(script, *args++);
-    
+
     battleStatus->currentTargetID = actor->targetActorID;
     battleStatus->currentTargetPart = actor->targetPartIndex;
 
@@ -162,6 +161,7 @@ ApiStatus func_8028070C(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus DeletePartner(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
+
     delete_actor(battleStatus->partnerActor);
     return ApiStatus_DONE2;
 }
