@@ -3,7 +3,7 @@
 typedef struct StarPowerEntry {
     /* 0x04 */ void* dmaStart;
     /* 0x08 */ void* dmaEnd;
-    /* 0x0C */ void* dmaDest;S
+    /* 0x0C */ void* dmaDest;
     /* 0x10 */ Bytecode* init;
 } StarPowerEntry; // size = 0x14
 

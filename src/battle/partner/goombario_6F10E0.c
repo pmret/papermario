@@ -1,6 +1,35 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "battle/partner/goombario_6F10E0", func_80238000_6F10E0);
+extern UNK_TYPE D_802A43D0;
+
+//INCLUDE_ASM(s32, "battle/partner/goombario_6F10E0", func_80238000_6F10E0);
+ApiStatus func_80238000_6F10E0(ScriptInstance* script, s32 isInitialCall) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    BattleStatus* secondBattleStatus = &gBattleStatus;
+    Actor* partnerActor = battleStatus->partnerActor;
+    f32 posX = partnerActor->currentPos.x;
+    f32 posY = partnerActor->currentPos.y;
+    f32 posZ = partnerActor->currentPos.z;
+    f32 goalX = partnerActor->movePos.goal.x;
+    f32 goalY = partnerActor->movePos.goal.y;
+    f32 goalZ = partnerActor->movePos.goal.z;
+
+    script->varTable[0] = (dist3D(posX, posY, posZ, goalX, goalY, goalZ) * 15.0f) / 100.0f;
+
+    if (script->varTable[0] >= 21) {
+        script->varTable[0] = 20;
+    }
+
+    if (secondBattleStatus->unk_83 != 0) {
+        if (script->varTable[0] < 10) {
+            script->varTable[0] = 10;
+        }
+    } else if (script->varTable[0] < 15) {
+        script->varTable[0] = 15;
+    }
+
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "battle/partner/goombario_6F10E0", func_802380E4_6F11C4);
 
@@ -28,4 +57,12 @@ INCLUDE_ASM(s32, "battle/partner/goombario_6F10E0", func_802390B0_6F2190);
 
 INCLUDE_ASM(s32, "battle/partner/goombario_6F10E0", func_802390C8_6F21A8);
 
-INCLUDE_ASM(s32, "battle/partner/goombario_6F10E0", func_80239190_6F2270);
+ApiStatus func_80239190_6F2270(ScriptInstance* script, s32 isInitialCall) {
+    if (D_802A43D0 == 0) {
+        script->varTable[0] = 36;
+    } else {
+        script->varTable[0] = 37;
+    }
+
+    return ApiStatus_DONE2;
+}
