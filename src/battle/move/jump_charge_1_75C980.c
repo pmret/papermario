@@ -1,7 +1,6 @@
 #include "common.h"
 
 extern s32 D_802A2C50;
-extern UNK_TYPE D_802A43D0;
 
 ApiStatus func_802A1000_75C980(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -86,7 +85,7 @@ ApiStatus func_802A1228_75CBA8(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus func_802A133C_75CCBC(ScriptInstance* script, s32 isInitialCall) {
-    if (D_802A43D0 == 0) {
+    if (D_802A2C50 == 0) {
         script->varTable[0] = 6;
     } else {
         script->varTable[0] = 7;

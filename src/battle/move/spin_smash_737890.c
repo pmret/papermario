@@ -4,7 +4,6 @@ INCLUDE_ASM(s32, "battle/move/spin_smash_737890", func_802A1000_737890);
 
 INCLUDE_ASM(s32, "battle/move/spin_smash_737890", func_802A1074_737904);
 
-INCLUDE_ASM(s32, "battle/move/spin_smash_737890", func_802A10EC_73797C);
 ApiStatus func_802A10EC_73797C(ScriptInstance* script, s32 isInitialCall) {
     script->varTable[0] = *(&gBattleStatus.unk_83);
     script->varTable[1] = 15;

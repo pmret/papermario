@@ -1,7 +1,6 @@
 #include "common.h"
 
-extern s32 D_802A2C50;
-extern UNK_TYPE D_802A43D0;
+extern s32 D_802A43D0;
 
 ApiStatus func_802A1000_7595B0(ScriptInstance* script, s32 isInitialCall) {
     script->varTable[0] = *(&gBattleStatus.unk_83);
@@ -50,7 +49,7 @@ ApiStatus func_802A10C8_759678(ScriptInstance* script, s32 isInitialCall) {
     s32* var4;
 
     func_800718D0(1, var1, var2, var3, 1.0f, 60);
-    var4 = &D_802A2C50;
+    var4 = &D_802A43D0;
     *var4 = 0;
     if (battleStatus2->hammerCharge > 0) {
         *var4 = 1;

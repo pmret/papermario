@@ -27,3 +27,4 @@ ApiStatus func_802A1050_7567D0(ScriptInstance* script, s32 isInitialCall) {
 }
 
 INCLUDE_ASM(s32, "battle/move/mega_quake_756780", func_802A10A4_756824);
+

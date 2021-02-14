@@ -37,7 +37,7 @@ ApiStatus func_802A10E4_781A04(ScriptInstance* script, s32 isInitialCall) {
     if (script->varTable[10] == 0) {
         func_80070B50(TRUE, var0, var1, var2, 0.0f);
     } else {
-        func_80070B50(FALSE, var0, var1, var2, 0.,0f);
+        func_80070B50(FALSE, var0, var1, var2, 0.0f);
     }
 
     return ApiStatus_DONE2;

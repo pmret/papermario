@@ -1,6 +1,6 @@
 #include "common.h"
 
-extern UNK_TYPE D_802A43D0;
+extern s32 D_8023CDA4;
 
 //INCLUDE_ASM(s32, "battle/partner/goombario_6F10E0", func_80238000_6F10E0);
 ApiStatus func_80238000_6F10E0(ScriptInstance* script, s32 isInitialCall) {
@@ -58,7 +58,7 @@ INCLUDE_ASM(s32, "battle/partner/goombario_6F10E0", func_802390B0_6F2190);
 INCLUDE_ASM(s32, "battle/partner/goombario_6F10E0", func_802390C8_6F21A8);
 
 ApiStatus func_80239190_6F2270(ScriptInstance* script, s32 isInitialCall) {
-    if (D_802A43D0 == 0) {
+    if (D_8023CDA4 == 0) {
         script->varTable[0] = 36;
     } else {
         script->varTable[0] = 37;

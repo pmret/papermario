@@ -12,7 +12,7 @@ ApiStatus func_802A1000_77F240(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802A10A4_77F2E4(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802A1050_77F290(ScriptInstance* script, s32 isInitialCall) {
     script->varTable[0] = 0;
 
     if (is_ability_active(Ability_RIGHT_ON) != FALSE) {
