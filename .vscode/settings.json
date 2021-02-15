@@ -17,8 +17,9 @@
     ],
     "git.ignoreLimitWarning": true,
     "search.exclude": {
-        "build": true,
+        "**/build/src": true,
         "docs/doxygen": true,
+        "ctx.c": true,
     },
     "python.autoComplete.extraPaths": [
         "./tools"
@@ -33,4 +34,9 @@
         "*.h": "c",
     },
     "C_Cpp.autoAddFileAssociations": false,
+    "files.exclude": {
+        "**/.git": true,
+        "**/.splat_cache": true,
+        ".ninja*": true,
+    }
 }

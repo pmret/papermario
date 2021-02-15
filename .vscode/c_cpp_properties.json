@@ -12,13 +12,14 @@
             },
             "includePath": [
                 "${workspaceFolder}/include",
-                "${workspaceFolder}/build/include",
+                "${workspaceFolder}/ver/us/build/include",
                 "${workspaceFolder}/src"
             ],
             "defines": [
                 "F3DEX_GBI_2",
                 "_LANGUAGE_C",
-                "SCRIPT(...)={}"
+                "SCRIPT(...)={}",
+                "VERSION=us"
             ],
             "cStandard": "c89",
             "cppStandard": "c++17",
