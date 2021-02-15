@@ -183,7 +183,7 @@ glabel D_8014C290
 .word 0x53FD0000
 
 glabel D_8014C294
-.word 0x0000F0FD
+.short 0xF0FD
 
 glabel D_8014C296
 .short 0x0000
