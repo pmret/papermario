@@ -89,42 +89,6 @@ async def shell(cmd: str):
 
     return stdout.decode("utf-8"), stderr.decode("utf-8")
 
-async def task(coro):
-    global num_tasks, num_tasks_done
-
-    await coro
-
-    num_tasks_done += 1
-    print(f"\rConfiguring build... {(num_tasks_done / num_tasks) * 100:.0f}%", end="")
-
-async def build_c_file(c_file: str, generated_headers, version):
-    # TODO
-    """
-    # preprocess c_file, but simply put an _ in front of INCLUDE_ASM and SCRIPT
-    stdout, stderr = await shell(f"{cpp} {cppflags} '-DINCLUDE_ASM(...)=___INCLUDE_ASM(__VA_ARGS__)' '-DSCRIPT(...)=___SCRIPT(__VA_ARGS__)' {c_file} -o - | grep -E '___SCRIPT|___INCLUDE_ASM' || true")
-
-    # search for macro usage (note _ prefix)
-    uses_dsl = "___SCRIPT(" in stdout
-
-    s_deps = []
-    for line in stdout.splitlines():
-        if line.startswith("___INCLUDE_ASM"):
-            match = INCLUDE_ASM_RE.match(line)
-            if match:
-                s_deps.append("asm/nonmatchings/" + eval(match[1]) + "/" + match[2] + ".s")
-    """
-    uses_dsl = True
-    s_deps = []
-
-    n.build(
-        obj(c_file),
-        "cc_dsl" if uses_dsl else "cc",
-        c_file,
-        implicit=s_deps,
-        order_only=generated_headers,
-        variables={ "version": version }
-    )
-
 def build_yay0_file(bin_file: str):
     yay0_file = f"ver/{version}/build/{os.path.splitext(bin_file)[0]}.Yay0"
     n.build(yay0_file, "yay0compress", find_asset(bin_file), implicit="tools/Yay0compress")
@@ -256,11 +220,6 @@ async def main():
     n.rule("cc",
         command=f"bash -o pipefail -c '{cpp} -Iver/$version/build/include -Iinclude -Isrc -D _LANGUAGE_C -D _FINALROM -D VERSION=$version -ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 {args.cflags} -MD -MF $out.d $in -o - | {iconv} | tools/{os_dir}/cc1 -O2 -quiet -G 0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wuninitialized -Wshadow {args.cflags} -o - | tools/{os_dir}/mips-nintendo-nu64-as -EB -G 0 - -o $out'",
         description="cc $in ($version)",
-        depfile="$out.d",
-        deps="gcc")
-    n.rule("cc_dsl",
-        command=f"bash -o pipefail -c '{cpp} -Iver/$version/build/include -Iinclude -Isrc -D _LANGUAGE_C -D _FINALROM -D VERSION=$version -ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 {args.cflags} -MD -MF $out.d $in -o - | $python tools/compile_dsl_macros.py | {iconv} | tools/{os_dir}/cc1 -O2 -quiet -G 0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wuninitialized -Wshadow {args.cflags} -o - | tools/{os_dir}/mips-nintendo-nu64-as -EB -G 0 - -o $out'",
-        description="cc (with dsl) $in ($version)",
         depfile="$out.d",
         deps="gcc")
     n.newline()
@@ -554,14 +513,18 @@ async def main():
         n.build("generated_headers_" + version, "phony", generated_headers)
         n.newline()
 
-        # slow tasks generated concurrently
-        n.comment("c")
-        tasks = [task(build_c_file(f, "generated_headers_" + version, version)) for f in c_files]
-        num_tasks = len(tasks)
-        num_tasks_done = 0
-        await asyncio.gather(*tasks)
+        for c_file in c_files:
+            s_glob = "ver/" + version + "/" + re.sub("src/", "asm/nonmatchings/", c_file)[:-2] + "/*.s"
+            n.build(
+                obj(c_file),
+                "cc",
+                c_file,
+                implicit=glob(s_glob),
+                order_only="generated_headers_" + version,
+                variables={ "version": version }
+            )
+
         print("")
-        n.newline()
 
     # c tools that need to be compiled
     n.build("tools/Yay0compress", "cc_modern_exe", "tools/Yay0compress.c")
