@@ -38,6 +38,7 @@ assets/
 /editor
 /logs
 /out
+dump
 
 /tools/Yay0compress
 /tools/n64crc
