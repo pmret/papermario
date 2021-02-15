@@ -12,7 +12,6 @@ ApiStatus func_802A1000_777690(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#ifdef NOT_MATCHING
 ApiStatus func_802A1050_7776E0(ScriptInstance* script, s32 isInitialCall) {
     script->varTable[0] = 0;
 
@@ -26,7 +25,3 @@ ApiStatus func_802A1050_7776E0(ScriptInstance* script, s32 isInitialCall) {
 
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(s32, "battle/move/mega_smash_777690", func_802A1050_7776E0);
-#endif
-

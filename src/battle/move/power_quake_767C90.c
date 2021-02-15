@@ -12,7 +12,6 @@ ApiStatus func_802A1000_767C90(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#ifdef NOT_MATCHING
 ApiStatus func_802A1050_767CE0(ScriptInstance* script, s32 isInitialCall) {
     script->varTable[0] = 0;
 
@@ -26,7 +25,3 @@ ApiStatus func_802A1050_767CE0(ScriptInstance* script, s32 isInitialCall) {
 
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(s32, "battle/move/power_quake_767C90", func_802A1050_767CE0);
-#endif
-

@@ -29,6 +29,7 @@ ApiStatus func_802A1000_73D860(ScriptInstance* script, s32 isInitialCall) {
 }
 
 // NOT WORKING
+// TODO JUMP TABLE ETHAN
 #ifdef NON_MATCHING
 ApiStatus func_802A10E4_73D944(ScriptInstance* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;

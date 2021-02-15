@@ -12,7 +12,6 @@ ApiStatus func_802A1000_77CB80(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#ifdef NOT_MATCHING
 ApiStatus func_802A1050_77CBD0(ScriptInstance* script, s32 isInitialCall) {
     script->varTable[0] = 0;
 
@@ -26,7 +25,3 @@ ApiStatus func_802A1050_77CBD0(ScriptInstance* script, s32 isInitialCall) {
 
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(s32, "battle/move/shrink_smash_77CB80", func_802A1050_77CBD0);
-#endif
-

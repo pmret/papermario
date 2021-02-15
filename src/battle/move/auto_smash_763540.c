@@ -12,7 +12,6 @@ ApiStatus func_802A1000_763540(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#ifdef NOT_MATCHING
 ApiStatus func_802A1050_763590(ScriptInstance* script, s32 isInitialCall) {
     script->varTable[0] = 0;
 
@@ -21,11 +20,8 @@ ApiStatus func_802A1050_763590(ScriptInstance* script, s32 isInitialCall) {
     }
 
     if ((gBattleStatus.flags1 & 0x1000) != FALSE) {
-        script->varTable[0] = 1;
+    script->varTable[0] = 1;
     }
 
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(s32, "battle/move/auto_smash_763540", func_802A1050_763590);
-#endif

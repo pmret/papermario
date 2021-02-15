@@ -1,10 +1,9 @@
 #include "common.h"
 
-#ifdef NON_MATCHING
 ApiStatus func_802A1000_76F330(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     BattleStatus* secondBattleStatus = &gBattleStatus;
-    Actor* partnerActor = battleStatus->partnerActor;
+    Actor* partnerActor = battleStatus->playerActor;
     f32 posX = partnerActor->currentPos.x;
     f32 posY = partnerActor->currentPos.y;
     f32 posZ = partnerActor->currentPos.z;
@@ -19,16 +18,12 @@ ApiStatus func_802A1000_76F330(ScriptInstance* script, s32 isInitialCall) {
     }
 
     if (secondBattleStatus->unk_83 != 0) {
-        if (script->varTable[0] < 10) {
-            script->varTable[0] = 10;
+        if (script->varTable[0] < 6) {
+            script->varTable[0] = 6;
         }
-    } else if (script->varTable[0] < 15) {
-        script->varTable[0] = 15;
+    } else if (script->varTable[0] < 12) {
+        script->varTable[0] = 12;
     }
 
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(s32, "battle/move/super_jump_76F330", func_802A1000_76F330);
-#endif
-
