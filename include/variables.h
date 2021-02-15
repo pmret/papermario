@@ -69,6 +69,8 @@ extern s32 gCurrentCameraID;
 
 extern Npc* gPlayerNpcPtr;
 
+extern CollisionData gCollisionData;
+
 extern s8 D_800A0900;
 extern EncounterStatus gCurrentEncounter;
 extern s8* D_801512F0;

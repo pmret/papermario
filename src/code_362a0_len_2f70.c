@@ -1,5 +1,8 @@
 #include "common.h"
 
+extern s16 D_800B42EC;
+extern s16 D_800D91DC;
+
 INCLUDE_ASM(s32, "code_362a0_len_2f70", allocate_hit_tables);
 
 void func_8005AF84(void) {
@@ -8,7 +11,11 @@ void func_8005AF84(void) {
 void func_8005AF8C(void) {
 }
 
-INCLUDE_ASM(s32, "code_362a0_len_2f70", initialize_collision);
+void initialize_collision(void) {
+    D_800B42EC = 0;
+    D_800D91DC = 0;
+    collision_heap_create();
+}
 
 INCLUDE_ASM(s32, "code_362a0_len_2f70", load_hit_asset);
 
@@ -22,11 +29,33 @@ INCLUDE_ASM(void, "code_362a0_len_2f70", parent_collider_to_model, s32 colliderI
 
 INCLUDE_ASM(s32, "code_362a0_len_2f70", _add_hit_vert_to_buffer);
 
-INCLUDE_ASM(s32, "code_362a0_len_2f70", _get_hit_vert_index_from_buffer);
+s32 _get_hit_vert_index_from_buffer(f32** buffer, f32* vert, s32* bufferSize) {
+    s32 i;
+
+    for (i = 0; i < *bufferSize; i++) {
+        if (*buffer == vert) {
+            break;
+        }
+        buffer++;
+    }
+
+    return i;
+}
 
 INCLUDE_ASM(void, "code_362a0_len_2f70", update_collider_transform, s16 colliderID);
 
+// Simon says there's a struct size issue here which is causing the subu/addu issue
+#ifdef NON_MATCHING
+s32 get_collider_type_by_id(s32 colliderID) {
+    if (colliderID & 0x4000) {
+        return 0;
+    } else {
+        return gCollisionData.collider_list[colliderID].flags;
+    }
+}
+#else
 INCLUDE_ASM(s32, "code_362a0_len_2f70", get_collider_type_by_id);
+#endif
 
 INCLUDE_ASM(s32, "code_362a0_len_2f70", get_flat_collider_normal);
 

@@ -138,7 +138,7 @@ glabel func_802B7728_E20838
 /* E20A24 802B7914 3C018011 */  lui       $at, %hi(D_8010C958)
 /* E20A28 802B7918 AC22C958 */  sw        $v0, %lo(D_8010C958)($at)
 .L802B791C:
-/* E20A2C 802B791C 0C0ADC00 */  jal       func_802B7000_E20110
+/* E20A2C 802B791C 0C0ADC00 */  jal       code_E20110_UnkAngleFunc1
 /* E20A30 802B7920 00000000 */   nop
 /* E20A34 802B7924 0040802D */  daddu     $s0, $v0, $zero
 .L802B7928:

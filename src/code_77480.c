@@ -324,7 +324,7 @@ INCLUDE_ASM(s32, "code_77480", func_800E0294);
 
 void func_800E0330(void) {
     if ((gPlayerStatusPtr->animFlags & 0x100) && (D_8010C93C != 0)) {
-        func_802B7000();
+        func_802B7000_E225B0();
     }
 }
 
