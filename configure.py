@@ -16,7 +16,7 @@ from segtypes.n64.code import Subsegment
 INCLUDE_ASM_RE = re.compile(r"___INCLUDE_ASM\([^,]+, ([^,]+), ([^,)]+)") # note _ prefix
 
 TARGET = "papermario"
-versions = ["us"]
+versions = ["us", "jp"]
 
 def obj(path: str):
     if not path.startswith("ver/"):
@@ -160,10 +160,11 @@ def find_asset_dir(path):
         if os.path.exists(d + "/" + path):
             return d
 
+    raise Exception("lol")
+
     print("Unable to find asset: " + path)
-    print("The asset dump may be incomplete. Run")
-    print("    rm .splat_cache")
-    print("And then run ./configure.py again.")
+    print("The asset dump may be incomplete. Try:")
+    print("    ./configure.py --clean")
     exit(1)
 
 def find_asset(path):
@@ -226,6 +227,7 @@ async def main():
                     False,
                     False,
                 )
+                print("")
 
     print("Configuring build...", end="")
 
@@ -421,6 +423,9 @@ async def main():
         # sprites
         npc_sprite_yay0s = []
         for sprite_id, sprite_name in enumerate(NPC_SPRITES, 1):
+            if len(sprite_name) == 0 or sprite_name == "_":
+                continue
+
             asset_dir = find_asset_dir(f"sprite/npc/{sprite_name}")
             sources = glob(f"{asset_dir}/sprite/npc/{sprite_name}/**/*.*", recursive=True)
             variables = {
@@ -546,12 +551,12 @@ async def main():
                 print("warning: dont know what to do with object " + f)
         n.newline()
 
-        n.build("generated_headers", "phony", generated_headers)
+        n.build("generated_headers_" + version, "phony", generated_headers)
         n.newline()
 
         # slow tasks generated concurrently
         n.comment("c")
-        tasks = [task(build_c_file(f, "generated_headers", version)) for f in c_files]
+        tasks = [task(build_c_file(f, "generated_headers_" + version, version)) for f in c_files]
         num_tasks = len(tasks)
         num_tasks_done = 0
         await asyncio.gather(*tasks)
@@ -566,7 +571,6 @@ async def main():
     n.build("all", "phony", versions)
     n.default("all")
 
-    print("")
     print("Build configuration complete! Now run")
     print("    ninja")
     print(f"to compile '{TARGET}.z64'.")

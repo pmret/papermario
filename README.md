@@ -13,9 +13,10 @@
 
 This is a work-in-progress decompilation of Paper Mario.
 
-It builds the following ROM:
+It builds the following ROMs:
 
 * papermario.us.z64 `sha1: 3837f44cda784b466c9a2d99df70d77c322b97a0`
+* papermario.jp.z64 `sha1: b9cca3ff260b9ff427d981626b82f96de73586d3`
 
 To set up the repository, see [INSTALL.md](INSTALL.md).
 
