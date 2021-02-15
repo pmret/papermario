@@ -16,12 +16,13 @@ ApiStatus func_802A1108_74D678(ScriptInstance* script, s32 isInitialCall) {
     func_800718D0(0, var1, var2, var3, 1.0f, 60);
     battleStatus->jumpCharge += 1;
 
-    if (battleStatus->jumpCharge >= 100) {
+    if (battleStatus->jumpCharge > 99) {
         (*&battleStatus)->jumpCharge = 99; // TODO: macro?
     }
 
     battleStatus->hammerCharge = 0;
-    battleStatus->flags1 = ((battleStatus->flags1 | 0x20000000) & ~0x10000000);
+    battleStatus->flags1 |= 0x20000000;
+    battleStatus->flags1 &= ~0x10000000;
 
     return ApiStatus_DONE2;
 }
@@ -33,7 +34,7 @@ ApiStatus func_802A120C_74D77C(ScriptInstance* script, s32 isInitialCall) {
     s32 var2 = get_variable(script, *args++);
     f32 var3 = get_float_variable(script, *args++);
 
-    func_800720B0(6, (var0 + 10), (var1 + 18), var2, var3, 45);
+    func_800720B0(6, var0 + 10, var1 + 18, var2, var3, 45);
 
     return ApiStatus_DONE2;
 }

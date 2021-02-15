@@ -26,12 +26,13 @@ ApiStatus func_802A1108_761A28(ScriptInstance* script, s32 isInitialCall) {
 
     battleStatus2->jumpCharge += 3;
 
-    if (battleStatus2->jumpCharge >= 100) {
+    if (battleStatus2->jumpCharge > 99) {
         (*&battleStatus)->jumpCharge = 99; // TODO: macro?
     }
 
-    battleStatus2->hammerCharge = 0;
-    battleStatus->flags1 = (battleStatus->flags1 | 0x20000000) & ~0x10000000;
+    battleStatus->hammerCharge = 0;
+    battleStatus->flags1 |= 0x20000000;
+    battleStatus->flags1 &= ~0x10000000;
 
     return ApiStatus_DONE2;
 }

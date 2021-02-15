@@ -2672,7 +2672,7 @@ segments:
     overlay: True
     subsections:
     - [0x785B20, c]
-    - [0x785C10, data]
+    - [0x785C20, data]
   - name: battle/star/focus
     type: code
     start: 0x789E60
