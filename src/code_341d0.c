@@ -133,13 +133,13 @@ void remove_effect(EffectInstance* arg0) {
 
     ASSERT(i < ARRAY_COUNT(D_800B4398));
 
-    if (arg0->unk_0C == NULL) {
+    if (arg0->data == NULL) {
         general_heap_free(arg0);
         D_800B4398[i] = NULL;
         return;
     }
 
-    general_heap_free(arg0->unk_0C);
+    general_heap_free(arg0->data);
     general_heap_free(arg0);
     D_800B4398[i] = NULL;
 }
@@ -151,8 +151,8 @@ void remove_all_effects(void) {
     for (i = 0; i < ARRAY_COUNT(D_800B4398); i++) {
         EffectInstance* temp2 = temp[i];
         if (temp2 != NULL && temp2->flags & 4) {
-            if (temp2->unk_0C != NULL) {
-                general_heap_free(temp2->unk_0C);
+            if (temp2->data != NULL) {
+                general_heap_free(temp2->data);
             }
             general_heap_free(temp2);
             temp[i] = NULL;

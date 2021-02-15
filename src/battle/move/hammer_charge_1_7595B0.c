@@ -1,13 +1,53 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "battle/move/hammer_charge_1_7595B0", func_802A1000_7595B0);
+extern s32 D_802A43D0;
 
-INCLUDE_ASM(s32, "battle/move/hammer_charge_1_7595B0", func_802A1050_759600);
+#define NAMESPACE battle_move_hammer_charge_1
 
-INCLUDE_ASM(s32, "battle/move/hammer_charge_1_7595B0", func_802A10A4_759654);
+#include "world/common/IsBerserkerEquipped.inc.c"
 
-INCLUDE_ASM(s32, "battle/move/hammer_charge_1_7595B0", func_802A10C8_759678);
+#include "world/common/IsRightOnEquipped.inc.c"
 
-INCLUDE_ASM(s32, "battle/move/hammer_charge_1_7595B0", func_802A11E8_759798);
+#include "world/common/IsHammerMaxCharged.inc.c"
 
-INCLUDE_ASM(s32, "battle/move/hammer_charge_1_7595B0", func_802A12FC_7598AC);
+ApiStatus func_802A10C8_759678(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    BattleStatus* battleStatus = &gBattleStatus;
+    BattleStatus* battleStatus2 = battleStatus; // TODO: macro?
+    s32 var1 = get_variable(script, *args++);
+    s32 var2 = get_variable(script, *args++);
+    s32 var3 = get_variable(script, *args++);
+    s32* var4;
+
+    func_800718D0(1, var1, var2, var3, 1.0f, 60);
+    var4 = &D_802A43D0;
+    *var4 = 0;
+    if (battleStatus->hammerCharge > 0) {
+        *var4 = 1;
+    }
+
+    battleStatus2->hammerCharge += 2;
+
+    if (battleStatus2->hammerCharge > 99) {
+        (*&battleStatus)->hammerCharge = 99; // TODO: macro?
+    }
+
+    battleStatus->jumpCharge = 0;
+    battleStatus->flags1 |= 0x10000000;
+    battleStatus->flags1 &= ~0x20000000;
+
+    return ApiStatus_DONE2;
+}
+
+#include "world/common/UnkMoveFunc2.inc.c"
+
+ApiStatus func_802A12FC_7598AC(ScriptInstance* script, s32 isInitialCall) {
+    if (D_802A43D0 == 0) {
+        script->varTable[0] = 4;
+    } else {
+        script->varTable[0] = 5;
+    }
+
+    return ApiStatus_DONE2;
+}
+

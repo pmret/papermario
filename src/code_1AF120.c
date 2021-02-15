@@ -13,4 +13,14 @@ ApiStatus GetDamageIntensity(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_1AF120", ActorAddMovePos);
+// TODO: Rename to AddEffectOffset
+ApiStatus ActorAddMovePos(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    EffectInstance* effect = get_variable(script, *args++);
+
+    effect->data->pos.x += get_variable(script, *args++);
+    effect->data->pos.y += get_variable(script, *args++);
+    effect->data->pos.z += get_variable(script, *args++);
+
+    return ApiStatus_DONE2;
+}

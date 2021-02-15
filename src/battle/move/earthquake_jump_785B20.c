@@ -1,5 +1,10 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "battle/move/earthquake_jump_785B20", func_802A1000_785B20);
+#define NAMESPACE battle_move_earthquake_jump
 
-INCLUDE_ASM(s32, "battle/move/earthquake_jump_785B20", func_802A10E4_785C04);
+#include "world/common/UnkMoveFunc1.inc.c"
+
+ApiStatus func_802A10E4_785C04(ScriptInstance* script, s32 isInitialCall) {
+    script->varTable[0] = 3;
+    return ApiStatus_DONE2;
+}

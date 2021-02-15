@@ -1,3 +1,5 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "battle/move/shrink_stomp_783BA0", func_802A1000_783BA0);
+#define NAMESPACE battle_move_shrink_stomp
+
+#include "world/common/UnkMoveFunc1.inc.c"

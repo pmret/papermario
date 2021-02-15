@@ -120,9 +120,9 @@ ApiStatus GetCamLookAtObjVector(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus HasMerleeCasts(ScriptInstance* script, s32 isInitialCall) {
-    script->varTable[0] = 0;
+    script->varTable[0] = FALSE;
     if (gPlayerData.merleeCastsLeft > 0) {
-        script->varTable[0] = 1;
+        script->varTable[0] = TRUE;
     }
 
     return ApiStatus_DONE2;

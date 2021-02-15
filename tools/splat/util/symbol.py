@@ -34,6 +34,9 @@ class Symbol:
     def contains_vram(self, offset):
         return offset >= self.vram_start and offset < self.vram_end
 
+    def contains_rom(self, offset):
+        return offset >= self.rom and offset < self.rom_end
+
     def __init__(self, vram, given_name=None, rom=None, type="unknown", in_overlay=False, size=4):
         self.defined = False
         self.referenced = False
