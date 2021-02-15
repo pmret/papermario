@@ -188,8 +188,8 @@ class CodeSubsegment(Subsegment):
                     if func_name not in defined_funcs:
                         segment.create_c_asm_file(funcs_text, func, asm_out_dir, self, func_name)
 
-                if not os.path.exists(generic_out_path) and self.options.get("create_new_c_files", True):
-                    self.create_c_file(funcs_text, self, asm_out_dir, base_path, generic_out_path)
+                if not os.path.exists(generic_out_path) and segment.options.get("create_new_c_files", True):
+                    segment.create_c_file(funcs_text, self, asm_out_dir, base_path, generic_out_path)
             else:
                 out_lines = self.get_asm_header()
                 for func in funcs_text:
@@ -204,15 +204,16 @@ class CodeSubsegment(Subsegment):
 
 class DataSubsegment(Subsegment):
     def split_inner(self, segment, rom_bytes, base_path, generic_out_path):
-        asm_out_dir = Segment.create_split_dir(base_path, os.path.join("asm", "data"))
+        if not self.type.startswith("."):
+            asm_out_dir = Segment.create_split_dir(base_path, os.path.join("asm", "data"))
 
-        outpath = Path(os.path.join(asm_out_dir, self.name + f".{self.type}.s"))
-        outpath.parent.mkdir(parents=True, exist_ok=True)
+            outpath = Path(os.path.join(asm_out_dir, self.name + f".{self.type}.s"))
+            outpath.parent.mkdir(parents=True, exist_ok=True)
 
-        file_text = segment.disassemble_data(self, rom_bytes)
-        if file_text:
-            with open(outpath, "w", newline="\n") as f:
-                f.write(file_text)
+            file_text = segment.disassemble_data(self, rom_bytes)
+            if file_text:
+                with open(outpath, "w", newline="\n") as f:
+                    f.write(file_text)
 
 class BssSubsegment(DataSubsegment):
     def __init__(self, start, end, name, type, vram, args):
@@ -830,6 +831,12 @@ class N64SegCode(N64Segment):
                 elif len(sym_bytes) % 2 == 0 and mnemonic in short_mnemonics:
                     stype = "short"
                 else:
+                    stype = "byte"
+
+                # If we're starting from a weird place, make sure our container size is correct
+                if dis_start % 4 != 0 and stype != "byte" and sym_len > 1:
+                    stype = "short"
+                if dis_start % 2 != 0:
                     stype = "byte"
 
                 if not rodata_encountered and mnemonic == "jtbl":
