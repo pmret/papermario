@@ -1275,7 +1275,7 @@ s32 get_defense(Actor* actor, s32* defenseTable, s32 elementFlags) {
 
 INCLUDE_ASM(s32, "code_190B20", func_802664DC);
 
-INCLUDE_ASM(s32, "code_190B20", show_damage_popup);
+INCLUDE_ASM(void, "code_190B20", show_damage_popup, f32 x, f32 y, f32 z, s32 damageAmount);
 
 INCLUDE_ASM(s32, "code_190B20", func_80266684);
 

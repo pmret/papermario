@@ -1,5 +1,7 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "battle/move/mega_smash_777690", func_802A1000_777690);
+#define NAMESPACE battle_move_mega_smash
 
-INCLUDE_ASM(s32, "battle/move/mega_smash_777690", func_802A1050_7776E0);
+#include "world/common/IsBerserkerEquipped.inc.c"
+
+#include "world/common/IsRightOnEquipped.inc.c"

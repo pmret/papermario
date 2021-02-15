@@ -1,5 +1,7 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "battle/move/power_quake_767C90", func_802A1000_767C90);
+#define NAMESPACE battle_move_power_quake
 
-INCLUDE_ASM(s32, "battle/move/power_quake_767C90", func_802A1050_767CE0);
+#include "world/common/IsBerserkerEquipped.inc.c"
+
+#include "world/common/IsRightOnEquipped.inc.c"

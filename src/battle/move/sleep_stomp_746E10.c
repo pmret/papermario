@@ -1,3 +1,5 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "battle/move/sleep_stomp_746E10", func_802A1000_746E10);
+#define NAMESPACE battle_move_sleep_stomp
+
+#include "world/common/UnkMoveFunc1.inc.c"

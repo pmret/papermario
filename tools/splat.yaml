@@ -2440,7 +2440,7 @@ segments:
     overlay: True
     subsections:
     - [0x73AED0, c]
-    - [0x73AF70, data]
+    - [0x73AF80, data]
   - name: battle/move/jump
     type: code
     start: 0x73D860
@@ -2456,7 +2456,7 @@ segments:
     overlay: True
     subsections:
     - [0x740CC0, c]
-    - [0x740DA0, data]
+    - [0x740DB0, data]
   - name: battle/move/power_bounce
     type: code
     start: 0x743DF0
@@ -2472,7 +2472,7 @@ segments:
     overlay: True
     subsections:
     - [0x746E10, c]
-    - [0x746EF0, data]
+    - [0x746F00, data]
   - name: battle/move/dizzy_stomp
     type: code
     start: 0x748DD0
@@ -2480,7 +2480,7 @@ segments:
     overlay: True
     subsections:
     - [0x748DD0, c]
-    - [0x748EB0, data]
+    - [0x748EC0, data]
   - name: battle/move/d_down_pound
     type: code
     start: 0x74AD90
@@ -2560,7 +2560,7 @@ segments:
     overlay: True
     subsections:
     - [0x763540, c]
-    - [0x7635E0, data]
+    - [0x7635F0, data]
   - name: battle/move/auto_jump
     type: code
     start: 0x765C20
@@ -2568,7 +2568,7 @@ segments:
     overlay: True
     subsections:
     - [0x765C20, c]
-    - [0x765D00, data]
+    - [0x765D10, data]
   - name: battle/move/power_quake
     type: code
     start: 0x767C90
@@ -2576,7 +2576,7 @@ segments:
     overlay: True
     subsections:
     - [0x767C90, c]
-    - [0x767D30, data]
+    - [0x767D40, data]
   - name: battle/move/auto_multibounce
     type: code
     start: 0x76A830
@@ -2584,7 +2584,7 @@ segments:
     overlay: True
     subsections:
     - [0x76A830, c]
-    - [0x76A910, data]
+    - [0x76A920, data]
   - name: battle/move/power_jump
     type: code
     start: 0x76D760
@@ -2592,7 +2592,7 @@ segments:
     overlay: True
     subsections:
     - [0x76D760, c]
-    - [0x76D840, data]
+    - [0x76D850, data]
   - name: battle/move/super_jump
     type: code
     start: 0x76F330
@@ -2600,7 +2600,7 @@ segments:
     overlay: True
     subsections:
     - [0x76F330, c]
-    - [0x76F410, data]
+    - [0x76F420, data]
   - name: battle/move/mega_jump
     type: code
     start: 0x770F30
@@ -2608,7 +2608,7 @@ segments:
     overlay: True
     subsections:
     - [0x770F30, c]
-    - [0x771010, data]
+    - [0x771020, data]
   - name: battle/move/power_smash
     type: code
     start: 0x772BA0
@@ -2616,7 +2616,7 @@ segments:
     overlay: True
     subsections:
     - [0x772BA0, c]
-    - [0x772C40, data]
+    - [0x772C50, data]
   - name: battle/move/super_smash
     type: code
     start: 0x775100
@@ -2624,7 +2624,7 @@ segments:
     overlay: True
     subsections:
     - [0x775100, c]
-    - [0x7751A0, data]
+    - [0x7751B0, data]
   - name: battle/move/mega_smash
     type: code
     start: 0x777690
@@ -2632,7 +2632,7 @@ segments:
     overlay: True
     subsections:
     - [0x777690, c]
-    - [0x777730, data]
+    - [0x777740, data]
   - name: battle/move/unknown_move
     type: code
     start: 0x779C90
@@ -2648,7 +2648,7 @@ segments:
     overlay: True
     subsections:
     - [0x77CB80, c]
-    - [0x77CC20, data]
+    - [0x77CC30, data]
   - name: battle/move/shell_crack
     type: code
     start: 0x77F240
@@ -2672,7 +2672,7 @@ segments:
     overlay: True
     subsections:
     - [0x783BA0, c]
-    - [0x783C80, data]
+    - [0x783C90, data]
   - name: battle/move/earthquake_jump
     type: code
     start: 0x785B20
@@ -2680,7 +2680,7 @@ segments:
     overlay: True
     subsections:
     - [0x785B20, c]
-    - [0x785C10, data]
+    - [0x785C20, data]
   - name: battle/star/focus
     type: code
     start: 0x789E60

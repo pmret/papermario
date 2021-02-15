@@ -66,9 +66,13 @@ INCLUDE_ASM(s32, "code_1A5830", calc_enemy_damage_target);
 
 INCLUDE_ASM(s32, "code_1A5830", dispatch_damage_event_actor);
 
-INCLUDE_ASM(s32, "code_1A5830", dispatch_damage_event_actor_0);
+s32 dispatch_damage_event_actor_0(Actor* actor, s32 damageAmount, s32 event) {
+    return dispatch_damage_event_actor(actor, damageAmount, event, FALSE);
+}
 
-INCLUDE_ASM(s32, "code_1A5830", dispatch_damage_event_actor_1);
+s32 dispatch_damage_event_actor_1(Actor* actor, s32 damageAmount, s32 event) {
+    return dispatch_damage_event_actor(actor, damageAmount, event, TRUE);
+}
 
 ApiStatus BindTakeTurn(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -283,8 +287,8 @@ ApiStatus SetEnemyHP(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus GetActorHP(ScriptInstance* script, s32 isInitialCall) {
+    PlayerData* playerData = &gPlayerData;
     Bytecode* args = script->ptrReadPos;
-    PlayerData* playerData = PLAYER_DATA;
     ActorID actorID = get_variable(script, *args++);
     Actor* actor;
     s32 outVar;
@@ -398,7 +402,45 @@ ApiStatus func_8027CC10(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "code_1A5830", EnemyDamageTarget);
 
-INCLUDE_ASM(s32, "code_1A5830", EnemyFollowupAfflictTarget);
+//INCLUDE_ASM(s32, "code_1A5830", EnemyFollowupAfflictTarget);
+ApiStatus EnemyFollowupAfflictTarget(ScriptInstance* script, s32 isInitialCall) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    BattleStatus* anotherBattleStatus = &gBattleStatus;
+    Bytecode* args = script->ptrReadPos;
+    Actor* actor;
+    s32 actorID = get_variable(script, *args++);
+    s32 hitResults;
+    s32 outVar;
+
+    if (actorID == ActorID_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    actor = get_actor(actorID);
+    outVar = *args++;
+
+    battleStatus->currentTargetID = actor->targetActorID;
+    battleStatus->currentTargetPart = actor->targetPartIndex;
+    battleStatus->statusChance = battleStatus->currentAttackStatus;
+
+    if (battleStatus->statusChance == 0xFF) {
+        battleStatus->statusChance = 0;
+    }
+
+    anotherBattleStatus->statusDuration = (anotherBattleStatus->currentAttackStatus & 0xF00) >> 8;
+    hitResults = calc_enemy_damage_target(actor);
+
+    if (hitResults < 0) {
+        return ApiStatus_FINISH;
+    }
+
+    set_variable(script, outVar, hitResults);
+    if (does_script_exist_by_ref(script) == NULL) {
+        return ApiStatus_FINISH;
+    }
+    return ApiStatus_DONE2;
+}
+
 
 INCLUDE_ASM(s32, "code_1A5830", EnemyTestTarget);
 
