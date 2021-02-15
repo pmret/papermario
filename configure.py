@@ -221,7 +221,7 @@ async def main():
                 print(f"Splitting assets from {rom}", end="")
                 split.main(
                     f"ver/{version}/splat.yaml",
-                    ".",
+                    f"ver/{version}",
                     rom,
                     [ "ld", "bin", "Yay0", "PaperMarioMapFS", "PaperMarioMessages", "img", "PaperMarioNpcSprites" ],
                     False,

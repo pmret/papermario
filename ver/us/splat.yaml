@@ -11,7 +11,7 @@ options:
   platform: n64
   out_dir: .
   target_path: baserom.z64
-  assets_dir: ver/us/assets # XXX
+  assets_dir: ver/us/assets
 segments:
   - name: header
     type: header
