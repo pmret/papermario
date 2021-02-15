@@ -63,7 +63,7 @@ ActorPartDesc goomba_parts[] = {
 
 ActorDesc goomba = {
     .flags = 0,
-    .type = 7,
+    .type = ACTOR_TYPE_goomba,
     .level = 5,
     .maxHP = 2,
     .partCount = 1,
