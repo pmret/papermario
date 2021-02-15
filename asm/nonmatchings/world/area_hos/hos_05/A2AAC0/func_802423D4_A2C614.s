@@ -5,8 +5,8 @@ glabel func_802423D4_A2C614
 /* A2C614 802423D4 27BDFFB8 */  addiu     $sp, $sp, -0x48
 /* A2C618 802423D8 24040004 */  addiu     $a0, $zero, 4
 /* A2C61C 802423DC AFB20020 */  sw        $s2, 0x20($sp)
-/* A2C620 802423E0 3C128025 */  lui       $s2, %hi(D_80249A80)
-/* A2C624 802423E4 26529A80 */  addiu     $s2, $s2, %lo(D_80249A80)
+/* A2C620 802423E0 3C128025 */  lui       $s2, %hi(D_80249A80_A33CC0)
+/* A2C624 802423E4 26529A80 */  addiu     $s2, $s2, %lo(D_80249A80_A33CC0)
 /* A2C628 802423E8 AFBF0034 */  sw        $ra, 0x34($sp)
 /* A2C62C 802423EC AFB60030 */  sw        $s6, 0x30($sp)
 /* A2C630 802423F0 AFB5002C */  sw        $s5, 0x2c($sp)

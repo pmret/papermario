@@ -23,8 +23,8 @@ glabel func_80241668_A3AB48
 /* A3AB90 802416B0 0280802D */  daddu     $s0, $s4, $zero
 /* A3AB94 802416B4 3C12F971 */  lui       $s2, 0xf971
 /* A3AB98 802416B8 365288F4 */  ori       $s2, $s2, 0x88f4
-/* A3AB9C 802416BC 3C118024 */  lui       $s1, %hi(D_80244C4C)
-/* A3ABA0 802416C0 26314C4C */  addiu     $s1, $s1, %lo(D_80244C4C)
+/* A3AB9C 802416BC 3C118024 */  lui       $s1, %hi(D_80244C4C_A3E12C)
+/* A3ABA0 802416C0 26314C4C */  addiu     $s1, $s1, %lo(D_80244C4C_A3E12C)
 /* A3ABA4 802416C4 AFC00088 */  sw        $zero, 0x88($fp)
 .L802416C8:
 /* A3ABA8 802416C8 8E220004 */  lw        $v0, 4($s1)
@@ -52,8 +52,8 @@ glabel func_80241668_A3AB48
 /* A3ABF8 80241718 0C00A67F */  jal       rand_int
 /* A3ABFC 8024171C 2684FFFF */   addiu    $a0, $s4, -1
 /* A3AC00 80241720 0040B82D */  daddu     $s7, $v0, $zero
-/* A3AC04 80241724 3C138024 */  lui       $s3, %hi(D_80244C48)
-/* A3AC08 80241728 26734C48 */  addiu     $s3, $s3, %lo(D_80244C48)
+/* A3AC04 80241724 3C138024 */  lui       $s3, %hi(D_80244C48_A3E128)
+/* A3AC08 80241728 26734C48 */  addiu     $s3, $s3, %lo(D_80244C48_A3E128)
 /* A3AC0C 8024172C 0000A02D */  daddu     $s4, $zero, $zero
 /* A3AC10 80241730 0280802D */  daddu     $s0, $s4, $zero
 /* A3AC14 80241734 3C16F971 */  lui       $s6, 0xf971

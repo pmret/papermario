@@ -210,7 +210,7 @@ ApiStatus func_802D4BDC(ScriptInstance* script, s32 initialCall) {
             *t1 = 255;
         }
 
-        func_80137DA4(10, *t1);
+        set_transition_stencil_zoom_1(10, *t1);
     }
 
     return ApiStatus_BLOCK;
@@ -229,7 +229,7 @@ ApiStatus func_802D4C4C(ScriptInstance* script, s32 initialCall) {
     if (*t0 == 0) {
         t1v = *t1;
         if (t1v == 0) {
-            func_80137DA4(255, -1.0f);
+            set_transition_stencil_zoom_1(255, -1.0f);
             return ApiStatus_DONE2;
         }
         t1v -= 10;
@@ -237,7 +237,7 @@ ApiStatus func_802D4C4C(ScriptInstance* script, s32 initialCall) {
         if (t1v < 0) {
             *t1 = 0;
         }
-        func_80137DA4(10, *t1);
+        set_transition_stencil_zoom_1(10, *t1);
     }
 
     return ApiStatus_BLOCK;
@@ -246,9 +246,9 @@ ApiStatus func_802D4C4C(ScriptInstance* script, s32 initialCall) {
 ApiStatus func_802D4CC4(ScriptInstance* script, s32 initialCall) {
     s32 value = get_variable(script, *script->ptrReadPos);
     if (value < 0) {
-        func_80137DA4(255, -1.0f);
+        set_transition_stencil_zoom_1(255, -1.0f);
     } else {
-        func_80137DA4(10, value);
+        set_transition_stencil_zoom_1(10, value);
     }
 
     return ApiStatus_DONE2;
@@ -257,15 +257,15 @@ ApiStatus func_802D4CC4(ScriptInstance* script, s32 initialCall) {
 ApiStatus func_802D4D14(ScriptInstance* script, s32 initialCall) {
     s32 value = get_float_variable(script, *script->ptrReadPos);
 
-    func_80137E4C(0, 0, 0xC, 0x14);
-    func_80137E4C(0, 1, 0x134, 0xDC);
-    func_80137D88(0xC, value);
+    set_transition_stencil_center(0, 0, 0xC, 0x14);
+    set_transition_stencil_center(0, 1, 0x134, 0xDC);
+    set_transition_stencil_zoom_0(0xC, value);
 
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_802D4D88(ScriptInstance* script, s32 initialCall) {
-    func_80137D88(0xC, 0);
+    set_transition_stencil_zoom_0(0xC, 0);
     return ApiStatus_DONE2;
 }
 
@@ -444,7 +444,7 @@ ApiStatus EnableStatusMenu(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus ShowStatusMenu(ScriptInstance* script, s32 isInitialCall) {
     if (get_variable(script, *script->ptrReadPos) != 0) {
         func_800E9894();
-        func_800E97B8();
+        close_status_menu();
     } else {
         func_800E98C4();
     }

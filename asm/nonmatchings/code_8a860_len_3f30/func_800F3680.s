@@ -494,7 +494,7 @@ glabel func_800F3680
 /* 8D27C 800F3DCC AFB00010 */  sw        $s0, 0x10($sp)
 /* 8D280 800F3DD0 AFAA0014 */  sw        $t2, 0x14($sp)
 .L800F3DD4:
-/* 8D284 800F3DD4 0C04993B */  jal       draw_string
+/* 8D284 800F3DD4 0C04993B */  jal       draw_msg
 /* 8D288 800F3DD8 00000000 */   nop
 .L800F3DDC:
 /* 8D28C 800F3DDC 3C048011 */  lui       $a0, %hi(D_8010D69C)

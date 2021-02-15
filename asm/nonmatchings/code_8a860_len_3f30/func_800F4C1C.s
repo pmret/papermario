@@ -18,7 +18,7 @@ glabel func_800F4C1C
 /* 8E0FC 800F4C4C 2402000F */  addiu     $v0, $zero, 0xf
 /* 8E100 800F4C50 240700FF */  addiu     $a3, $zero, 0xff
 /* 8E104 800F4C54 AFA20010 */  sw        $v0, 0x10($sp)
-/* 8E108 800F4C58 0C04993B */  jal       draw_string
+/* 8E108 800F4C58 0C04993B */  jal       draw_msg
 /* 8E10C 800F4C5C AFA00014 */   sw       $zero, 0x14($sp)
 /* 8E110 800F4C60 8FBF0018 */  lw        $ra, 0x18($sp)
 /* 8E114 800F4C64 03E00008 */  jr        $ra

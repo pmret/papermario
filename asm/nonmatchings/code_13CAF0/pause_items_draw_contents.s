@@ -311,7 +311,7 @@ glabel pause_items_draw_contents
 /* 13D144 80249E04 8E240000 */  lw        $a0, ($s1)
 /* 13D148 80249E08 00553021 */  addu      $a2, $v0, $s5
 .L80249E0C:
-/* 13D14C 80249E0C 0C04993B */  jal       draw_string
+/* 13D14C 80249E0C 0C04993B */  jal       draw_msg
 /* 13D150 80249E10 00000000 */   nop
 .L80249E14:
 /* 13D154 80249E14 8FAA0050 */  lw        $t2, 0x50($sp)
@@ -617,7 +617,7 @@ glabel pause_items_draw_contents
 .L8024A27C:
 /* 13D5BC 8024A27C 0040202D */  daddu     $a0, $v0, $zero
 /* 13D5C0 8024A280 AFA00010 */  sw        $zero, 0x10($sp)
-/* 13D5C4 8024A284 0C04993B */  jal       draw_string
+/* 13D5C4 8024A284 0C04993B */  jal       draw_msg
 /* 13D5C8 8024A288 AFB00014 */   sw       $s0, 0x14($sp)
 /* 13D5CC 8024A28C 8E230000 */  lw        $v1, ($s1)
 /* 13D5D0 8024A290 8FA600AC */  lw        $a2, 0xac($sp)
@@ -676,7 +676,7 @@ glabel pause_items_draw_contents
 .L8024A354:
 /* 13D694 8024A354 0040202D */  daddu     $a0, $v0, $zero
 /* 13D698 8024A358 AFA00010 */  sw        $zero, 0x10($sp)
-/* 13D69C 8024A35C 0C04993B */  jal       draw_string
+/* 13D69C 8024A35C 0C04993B */  jal       draw_msg
 /* 13D6A0 8024A360 AFA80014 */   sw       $t0, 0x14($sp)
 /* 13D6A4 8024A364 3C038027 */  lui       $v1, %hi(gPauseMenuCurrentTab)
 /* 13D6A8 8024A368 806300D4 */  lb        $v1, %lo(gPauseMenuCurrentTab)($v1)

@@ -20,8 +20,8 @@ glabel func_8024301C_A2D25C
 /* A2D298 80243058 E422F2F8 */  swc1      $f2, %lo(D_8024F2F8)($at)
 .L8024305C:
 /* A2D29C 8024305C 24040003 */  addiu     $a0, $zero, 3
-/* A2D2A0 80243060 3C108025 */  lui       $s0, %hi(D_8024A9CC)
-/* A2D2A4 80243064 2610A9CC */  addiu     $s0, $s0, %lo(D_8024A9CC)
+/* A2D2A0 80243060 3C108025 */  lui       $s0, %hi(D_8024A9CC_A34C0C)
+/* A2D2A4 80243064 2610A9CC */  addiu     $s0, $s0, %lo(D_8024A9CC_A34C0C)
 /* A2D2A8 80243068 C6000000 */  lwc1      $f0, ($s0)
 /* A2D2AC 8024306C 46800020 */  cvt.s.w   $f0, $f0
 /* A2D2B0 80243070 3C058025 */  lui       $a1, %hi(D_8024F2F4)

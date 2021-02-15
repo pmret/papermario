@@ -2,7 +2,7 @@
 
 .section .rodata
 
-glabel D_802BE060
+glabel D_802BE060_3249B0
 .double 0.8
 
 glabel jtbl_802BE068_3249B8

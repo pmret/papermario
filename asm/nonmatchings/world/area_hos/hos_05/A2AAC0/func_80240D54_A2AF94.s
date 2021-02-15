@@ -3,8 +3,8 @@
 
 glabel func_80240D54_A2AF94
 /* A2AF94 80240D54 44852000 */  mtc1      $a1, $f4
-/* A2AF98 80240D58 3C018025 */  lui       $at, %hi(D_8024F1E0)
-/* A2AF9C 80240D5C D422F1E0 */  ldc1      $f2, %lo(D_8024F1E0)($at)
+/* A2AF98 80240D58 3C018025 */  lui       $at, %hi(D_8024F1E0_A39420)
+/* A2AF9C 80240D5C D422F1E0 */  ldc1      $f2, %lo(D_8024F1E0_A39420)($at)
 /* A2AFA0 80240D60 46002021 */  cvt.d.s   $f0, $f4
 /* A2AFA4 80240D64 46220002 */  mul.d     $f0, $f0, $f2
 /* A2AFA8 80240D68 00000000 */  nop

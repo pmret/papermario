@@ -107,7 +107,7 @@ void func_800E5150(void) {
 
 INCLUDE_ASM(s32, "code_7bb60_len_41b0", func_800E5174);
 
-INCLUDE_ASM(s32, "code_7bb60_len_41b0", func_800E52F8);
+INCLUDE_ASM(s32, "code_7bb60_len_41b0", can_player_interact);
 
 INCLUDE_ASM(s32, "code_7bb60_len_41b0", func_800E5348);
 
@@ -159,15 +159,16 @@ void set_action_state(s32 actionState) {
     }
 
     if (actionState == ActionState_HIT_HAZARD || actionState == ActionState_HIT_LAVA) {
-        u8 partner;
+        PartnerID partner;
 
         if (playerStatus->unk_BF == 3) {
             actionState = ActionState_HIT_HAZARD;
         }
 
-        // Whilst Lakilester, Bow, or Parakarry's ability is active, hazards have no effect.
+        // Whilst Sushie, Lakilester, Parakarry's ability is active, hazards have no effect.
         partner = playerData->currentPartner;
-        if (((u8)(partner - 7) < 2) || (playerData->currentPartner == PartnerID_PARAKARRY)) {
+
+        if (partner == PartnerID_SUSHIE || partner == PartnerID_LAKILESTER || partner == PartnerID_PARAKARRY) {
             if (D_8010EBB0[0]) {
                 playerStatus->animFlags |= 0x4;
                 playerStatus->flags |= 0x800;
@@ -288,3 +289,4 @@ INCLUDE_ASM(s32, "code_7bb60_len_41b0", func_800E6500);
 INCLUDE_ASM(s32, "code_7bb60_len_41b0", make_disguise_npc);
 
 INCLUDE_ASM(s32, "code_7bb60_len_41b0", func_800E66C4);
+

@@ -2,7 +2,7 @@
 #include "sprite/npc/world_goombario.h"
 #include "goombario.h"
 
-s32 func_802BD100(s32 arg0) {
+s32 func_802BD100_317020(s32 arg0) {
     s32 i;
 
     for (i = 0; i < 0x40; i++) {
@@ -20,12 +20,11 @@ void world_goombario_init(Npc* partner) {
     partner->collisionRadius = 20;
 }
 
-INCLUDE_ASM(ApiStatus, "world/partner/goombario", func_802BD188, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "world/partner/goombario", func_802BD188_3170A8, ScriptInstance* script, s32 isInitialCall);
 
-// uses rodata f64(?) at 802BDE80 = 0.8
-INCLUDE_ASM(ApiStatus, "world/partner/goombario", func_802BD1D0, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "world/partner/goombario", func_802BD1D0_3170F0, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "world/partner/goombario", func_802BD564);
+INCLUDE_ASM(s32, "world/partner/goombario", func_802BD564_317484);
 
 // Compiler is generating more efficient code than the original asm, using xori and sltiu instead of beq
 #ifdef NON_MATCHING
@@ -46,9 +45,9 @@ INCLUDE_ASM(s32, "world/partner/goombario", world_goombario_can_pause, Npc* part
 
 // get message for tattle routine
 // has big jumptable at rodata 802BDE88
-INCLUDE_ASM(ApiStatus, "world/partner/goombario", func_802BD5D8, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "world/partner/goombario", func_802BD5D8_3174F8, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(ApiStatus, "world/partner/goombario", func_802BDB30, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "world/partner/goombario", func_802BDB30_317A50, ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus func_802BDB84(ScriptInstance* script, s32 isInitialCall) {
     s32 unk = script->owner2.npc; // todo what is this?
@@ -62,23 +61,23 @@ ApiStatus func_802BDB84(ScriptInstance* script, s32 isInitialCall) {
 
 // Something is up with D_8010EBB0 I think. It might be a struct or something
 #ifdef NON_MATCHING
-void world_goombario_pre_battle(s32 arg0) {
+void world_goombario_pre_battle(Npc* partner) {
     if (D_8010EBB0[0] != 0) {
         func_80027088(0);
         enable_player_input();
         CancelMessageAndBlock();
-        clear_partner_move_history(arg0);
+        clear_partner_move_history(partner);
         D_8010EBB0[0] = 0;
         D_8010EBB0[3] = 0;
-        disable_npc_blur(arg0);
+        disable_npc_blur(partner);
     }
     D_8010EBB0[3] = 1;
 }
 #else
-INCLUDE_ASM(void, "world/partner/goombario", world_goombario_pre_battle, s32 arg0);
+INCLUDE_ASM(void, "world/partner/goombario", world_goombario_pre_battle, Npc* partner);
 #endif
 
-s32 D_802BDC40[] = {
+s32 D_802BDC40_317B60[] = {
     0x00000015, 0x001B0000, 0x00000018, 0x001B0000, 0x00000016, 0x001B0001, 0x00000019, 0x001B0001,
     0x00000017, 0x001B0003, 0x0000001A, 0x001B0003, 0x0000000D, 0x001B0005, 0x0000000E, 0x001B0005,
     0x0000000F, 0x001B0006, 0x00000010, 0x001B0006, 0x0000000B, 0x001B0007, 0x0000000C, 0x001B0008,
@@ -92,24 +91,24 @@ s32 D_802BDC40[] = {
 };
 
 Script world_goombario_take_out = SCRIPT({
-    func_802BD188();
+    func_802BD188_3170A8();
 });
 
-s32 D_802BDD88 = 0x802BDF40;
+s32 D_802BDD88_317CA8 = 0x802BDF40;
 
 Script world_goombario_update = SCRIPT({
-    func_802BD1D0();
+    func_802BD1D0_3170F0();
 });
 
 Script world_goombario_use_ability = SCRIPT({
-    func_802BD5D8(); // returns tattle message id on SI_VAR(0), and something else on SI_VAR(1)
+    func_802BD5D8_3174F8(); // returns tattle message id on SI_VAR(0), and something else on SI_VAR(1)
 
     if (SI_VAR(0) == -1) {
         return;
     }
 
     if (SI_VAR(0) == 0) {
-        func_802BDB30();
+        func_802BDB30_317A50();
         return;
     }
 
@@ -120,7 +119,7 @@ Script world_goombario_use_ability = SCRIPT({
 
     sleep 1;
 
-    func_802BDB30();
+    func_802BDB30_317A50();
 });
 
 Script world_goombario_put_away = SCRIPT({

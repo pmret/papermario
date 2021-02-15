@@ -322,7 +322,7 @@ glabel pause_tutorial_draw_contents
 /* 137014 80243CD4 240700FF */  addiu     $a3, $zero, 0xff
 /* 137018 80243CD8 AFA00010 */  sw        $zero, 0x10($sp)
 /* 13701C 80243CDC AFB40014 */  sw        $s4, 0x14($sp)
-/* 137020 80243CE0 0C04993B */  jal       draw_string
+/* 137020 80243CE0 0C04993B */  jal       draw_msg
 /* 137024 80243CE4 01F02821 */   addu     $a1, $t7, $s0
 /* 137028 80243CE8 3C158025 */  lui       $s5, %hi(D_8024F018)
 /* 13702C 80243CEC 26B5F018 */  addiu     $s5, $s5, %lo(D_8024F018)
@@ -444,7 +444,7 @@ glabel pause_tutorial_draw_contents
 /* 1371FC 80243EBC 8FAF0128 */  lw        $t7, 0x128($sp)
 /* 137200 80243EC0 01D02821 */  addu      $a1, $t6, $s0
 /* 137204 80243EC4 01E63021 */  addu      $a2, $t7, $a2
-/* 137208 80243EC8 0C04993B */  jal       draw_string
+/* 137208 80243EC8 0C04993B */  jal       draw_msg
 /* 13720C 80243ECC 00C23023 */   subu     $a2, $a2, $v0
 /* 137210 80243ED0 8EA30000 */  lw        $v1, ($s5)
 /* 137214 80243ED4 8FAE012C */  lw        $t6, 0x12c($sp)
@@ -529,7 +529,7 @@ glabel pause_tutorial_draw_contents
 /* 13734C 8024400C 240700FF */  addiu     $a3, $zero, 0xff
 /* 137350 80244010 AFB60010 */  sw        $s6, 0x10($sp)
 /* 137354 80244014 AFA00014 */  sw        $zero, 0x14($sp)
-/* 137358 80244018 0C04993B */  jal       draw_string
+/* 137358 80244018 0C04993B */  jal       draw_msg
 /* 13735C 8024401C 25C6002C */   addiu    $a2, $t6, 0x2c
 .L80244020:
 /* 137360 80244020 8FBF00FC */  lw        $ra, 0xfc($sp)

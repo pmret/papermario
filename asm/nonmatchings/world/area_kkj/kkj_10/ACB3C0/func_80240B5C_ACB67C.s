@@ -94,8 +94,8 @@ glabel func_80240B5C_ACB67C
 /* ACB7DC 80240CBC 3C014059 */  lui       $at, 0x4059
 /* ACB7E0 80240CC0 44811800 */  mtc1      $at, $f3
 /* ACB7E4 80240CC4 44801000 */  mtc1      $zero, $f2
-/* ACB7E8 80240CC8 3C018024 */  lui       $at, %hi(D_80243610)
-/* ACB7EC 80240CCC D4243610 */  ldc1      $f4, %lo(D_80243610)($at)
+/* ACB7E8 80240CC8 3C018024 */  lui       $at, %hi(D_80243610_ACE130)
+/* ACB7EC 80240CCC D4243610 */  ldc1      $f4, %lo(D_80243610_ACE130)($at)
 /* ACB7F0 80240CD0 46220003 */  div.d     $f0, $f0, $f2
 /* ACB7F4 80240CD4 46240000 */  add.d     $f0, $f0, $f4
 /* ACB7F8 80240CD8 C7A20020 */  lwc1      $f2, 0x20($sp)

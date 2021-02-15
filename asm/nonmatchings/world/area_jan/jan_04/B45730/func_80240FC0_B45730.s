@@ -7,8 +7,8 @@ glabel func_80240FC0_B45730
 /* B45738 80240FC8 3C118011 */  lui       $s1, %hi(gPlayerStatus)
 /* B4573C 80240FCC 2631EFC8 */  addiu     $s1, $s1, %lo(gPlayerStatus)
 /* B45740 80240FD0 AFB00010 */  sw        $s0, 0x10($sp)
-/* B45744 80240FD4 3C108024 */  lui       $s0, %hi(D_8024625C)
-/* B45748 80240FD8 2610625C */  addiu     $s0, $s0, %lo(D_8024625C)
+/* B45744 80240FD4 3C108024 */  lui       $s0, %hi(D_8024625C_B4A9CC)
+/* B45748 80240FD8 2610625C */  addiu     $s0, $s0, %lo(D_8024625C_B4A9CC)
 /* B4574C 80240FDC AFBF0018 */  sw        $ra, 0x18($sp)
 /* B45750 80240FE0 8E030000 */  lw        $v1, ($s0)
 /* B45754 80240FE4 28620003 */  slti      $v0, $v1, 3

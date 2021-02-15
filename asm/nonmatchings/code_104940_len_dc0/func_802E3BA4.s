@@ -84,9 +84,9 @@ glabel L802E3C34_1054B4
 /* 105538 802E3CB8 2C620015 */  sltiu     $v0, $v1, 0x15
 /* 10553C 802E3CBC 10400049 */  beqz      $v0, .L802E3DE4
 /* 105540 802E3CC0 00031080 */   sll      $v0, $v1, 2
-/* 105544 802E3CC4 3C01802F */  lui       $at, %hi(jtbl_802EB210_10CA90)
+/* 105544 802E3CC4 3C01802F */  lui       $at, %hi(jtbl_802EB210)
 /* 105548 802E3CC8 00220821 */  addu      $at, $at, $v0
-/* 10554C 802E3CCC 8C22B210 */  lw        $v0, %lo(jtbl_802EB210_10CA90)($at)
+/* 10554C 802E3CCC 8C22B210 */  lw        $v0, %lo(jtbl_802EB210)($at)
 /* 105550 802E3CD0 00400008 */  jr        $v0
 /* 105554 802E3CD4 00000000 */   nop
 glabel L802E3CD8_105558

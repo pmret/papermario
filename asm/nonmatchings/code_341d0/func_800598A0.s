@@ -9,9 +9,9 @@ glabel func_800598A0
 /* 34CB0 800598B0 1040007D */  beqz      $v0, .L80059AA8
 /* 34CB4 800598B4 AFBF0010 */   sw       $ra, 0x10($sp)
 /* 34CB8 800598B8 00061080 */  sll       $v0, $a2, 2
-/* 34CBC 800598BC 3C01800A */  lui       $at, %hi(jtbl_80098970_73D70)
+/* 34CBC 800598BC 3C01800A */  lui       $at, %hi(jtbl_80098970)
 /* 34CC0 800598C0 00220821 */  addu      $at, $at, $v0
-/* 34CC4 800598C4 8C228970 */  lw        $v0, %lo(jtbl_80098970_73D70)($at)
+/* 34CC4 800598C4 8C228970 */  lw        $v0, %lo(jtbl_80098970)($at)
 /* 34CC8 800598C8 00400008 */  jr        $v0
 /* 34CCC 800598CC 00000000 */   nop
 glabel L800598D0_34CD0

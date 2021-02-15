@@ -94,8 +94,8 @@ glabel func_8024036C_ACAE8C
 /* ACAFEC 802404CC 3C014059 */  lui       $at, 0x4059
 /* ACAFF0 802404D0 44811800 */  mtc1      $at, $f3
 /* ACAFF4 802404D4 44801000 */  mtc1      $zero, $f2
-/* ACAFF8 802404D8 3C018024 */  lui       $at, %hi(D_802435F0)
-/* ACAFFC 802404DC D42435F0 */  ldc1      $f4, %lo(D_802435F0)($at)
+/* ACAFF8 802404D8 3C018024 */  lui       $at, %hi(D_802435F0_ACE110)
+/* ACAFFC 802404DC D42435F0 */  ldc1      $f4, %lo(D_802435F0_ACE110)($at)
 /* ACB000 802404E0 46220003 */  div.d     $f0, $f0, $f2
 /* ACB004 802404E4 46240000 */  add.d     $f0, $f0, $f4
 /* ACB008 802404E8 C7A20020 */  lwc1      $f2, 0x20($sp)

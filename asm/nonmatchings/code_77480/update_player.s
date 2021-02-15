@@ -5,7 +5,7 @@ glabel update_player
 /* 78BF0 800DF740 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 78BF4 800DF744 AFBF0018 */  sw        $ra, 0x18($sp)
 /* 78BF8 800DF748 AFB10014 */  sw        $s1, 0x14($sp)
-/* 78BFC 800DF74C 0C0382CE */  jal       func_800E0B38
+/* 78BFC 800DF74C 0C0382CE */  jal       update_partner_timers
 /* 78C00 800DF750 AFB00010 */   sw       $s0, 0x10($sp)
 /* 78C04 800DF754 3C108011 */  lui       $s0, %hi(gPlayerStatus)
 /* 78C08 800DF758 2610EFC8 */  addiu     $s0, $s0, %lo(gPlayerStatus)
@@ -164,7 +164,7 @@ glabel update_player
 .L800DF998:
 /* 78E48 800DF998 0C0386F1 */  jal       update_player_shadow
 /* 78E4C 800DF99C 00000000 */   nop
-/* 78E50 800DF9A0 0C038206 */  jal       func_800E0818
+/* 78E50 800DF9A0 0C038206 */  jal       check_for_interactables
 /* 78E54 800DF9A4 00000000 */   nop
 /* 78E58 800DF9A8 0C038160 */  jal       func_800E0580
 /* 78E5C 800DF9AC 00000000 */   nop

@@ -6,8 +6,8 @@ glabel func_80241E80_7ECB90
 /* 7ECB94 80241E84 AFB40020 */  sw        $s4, 0x20($sp)
 /* 7ECB98 80241E88 0080A02D */  daddu     $s4, $a0, $zero
 /* 7ECB9C 80241E8C AFB3001C */  sw        $s3, 0x1c($sp)
-/* 7ECBA0 80241E90 3C138025 */  lui       $s3, %hi(D_80248F18)
-/* 7ECBA4 80241E94 26738F18 */  addiu     $s3, $s3, %lo(D_80248F18)
+/* 7ECBA0 80241E90 3C138025 */  lui       $s3, %hi(D_80248F18_7F3C28)
+/* 7ECBA4 80241E94 26738F18 */  addiu     $s3, $s3, %lo(D_80248F18_7F3C28)
 /* 7ECBA8 80241E98 AFB50024 */  sw        $s5, 0x24($sp)
 /* 7ECBAC 80241E9C 0000A82D */  daddu     $s5, $zero, $zero
 /* 7ECBB0 80241EA0 AFB20018 */  sw        $s2, 0x18($sp)
@@ -47,8 +47,8 @@ glabel func_80241E80_7ECB90
 .L80241F18:
 /* 7ECC28 80241F18 56A0001F */  bnel      $s5, $zero, .L80241F98
 /* 7ECC2C 80241F1C AE910084 */   sw       $s1, 0x84($s4)
-/* 7ECC30 80241F20 3C138025 */  lui       $s3, %hi(D_80248F18)
-/* 7ECC34 80241F24 26738F18 */  addiu     $s3, $s3, %lo(D_80248F18)
+/* 7ECC30 80241F20 3C138025 */  lui       $s3, %hi(D_80248F18_7F3C28)
+/* 7ECC34 80241F24 26738F18 */  addiu     $s3, $s3, %lo(D_80248F18_7F3C28)
 /* 7ECC38 80241F28 1240001A */  beqz      $s2, .L80241F94
 /* 7ECC3C 80241F2C 0000882D */   daddu    $s1, $zero, $zero
 /* 7ECC40 80241F30 0C00A67F */  jal       rand_int

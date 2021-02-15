@@ -3,8 +3,8 @@
 
 glabel func_80243680_EE2040
 /* EE2040 80243680 27BDFFD8 */  addiu     $sp, $sp, -0x28
-/* EE2044 80243684 3C048024 */  lui       $a0, %hi(D_80247BE0)
-/* EE2048 80243688 24847BE0 */  addiu     $a0, $a0, %lo(D_80247BE0)
+/* EE2044 80243684 3C048024 */  lui       $a0, %hi(D_80247BE0_EE65A0)
+/* EE2048 80243688 24847BE0 */  addiu     $a0, $a0, %lo(D_80247BE0_EE65A0)
 /* EE204C 8024368C 27A50010 */  addiu     $a1, $sp, 0x10
 /* EE2050 80243690 AFBF0020 */  sw        $ra, 0x20($sp)
 /* EE2054 80243694 AFB1001C */  sw        $s1, 0x1c($sp)

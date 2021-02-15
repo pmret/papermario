@@ -23,8 +23,8 @@ glabel func_8024486C_A2EAAC
 /* A2EAF0 802448B0 3C0143FA */  lui       $at, 0x43fa
 /* A2EAF4 802448B4 44810000 */  mtc1      $at, $f0
 /* A2EAF8 802448B8 44852000 */  mtc1      $a1, $f4
-/* A2EAFC 802448BC 3C108025 */  lui       $s0, %hi(D_8024AEC8)
-/* A2EB00 802448C0 2610AEC8 */  addiu     $s0, $s0, %lo(D_8024AEC8)
+/* A2EAFC 802448BC 3C108025 */  lui       $s0, %hi(D_8024AEC8_A35108)
+/* A2EB00 802448C0 2610AEC8 */  addiu     $s0, $s0, %lo(D_8024AEC8_A35108)
 /* A2EB04 802448C4 46002100 */  add.s     $f4, $f4, $f0
 /* A2EB08 802448C8 3C014220 */  lui       $at, 0x4220
 /* A2EB0C 802448CC 4481A000 */  mtc1      $at, $f20

@@ -38,8 +38,8 @@ glabel func_80240000_BDD1B0
 /* BDD234 80240084 0002802B */   sltu     $s0, $zero, $v0
 /* BDD238 80240088 0C00A6C9 */  jal       clamp_angle
 /* BDD23C 8024008C 46000306 */   mov.s    $f12, $f0
-/* BDD240 80240090 3C018024 */  lui       $at, %hi(func_80241AE0_9F6520)
-/* BDD244 80240094 D4221AE0 */  ldc1      $f2, %lo(func_80241AE0_9F6520)($at)
+/* BDD240 80240090 3C018024 */  lui       $at, %hi(D_80241AE0_BDEC90)
+/* BDD244 80240094 D4221AE0 */  ldc1      $f2, %lo(D_80241AE0_BDEC90)($at)
 /* BDD248 80240098 46000021 */  cvt.d.s   $f0, $f0
 /* BDD24C 8024009C 4622003C */  c.lt.d    $f0, $f2
 /* BDD250 802400A0 00000000 */  nop
@@ -60,8 +60,8 @@ glabel func_80240000_BDD1B0
 /* BDD288 802400D8 0C00A70A */  jal       get_clamped_angle_diff
 /* BDD28C 802400DC 46000386 */   mov.s    $f14, $f0
 /* BDD290 802400E0 46000005 */  abs.s     $f0, $f0
-/* BDD294 802400E4 3C018024 */  lui       $at, %hi(D_80241AE8)
-/* BDD298 802400E8 D4221AE8 */  ldc1      $f2, %lo(D_80241AE8)($at)
+/* BDD294 802400E4 3C018024 */  lui       $at, %hi(D_80241AE8_BDEC98)
+/* BDD298 802400E8 D4221AE8 */  ldc1      $f2, %lo(D_80241AE8_BDEC98)($at)
 /* BDD29C 802400EC 46000021 */  cvt.d.s   $f0, $f0
 /* BDD2A0 802400F0 4620103C */  c.lt.d    $f2, $f0
 /* BDD2A4 802400F4 00000000 */  nop

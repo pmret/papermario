@@ -75,7 +75,7 @@ glabel update_triggers
 /* DC060 80145960 8E220008 */  lw        $v0, 8($s1)
 /* DC064 80145964 5443007F */  bnel      $v0, $v1, .L80145B64
 /* DC068 80145968 26730001 */   addiu    $s3, $s3, 1
-/* DC06C 8014596C 0C0394BE */  jal       func_800E52F8
+/* DC06C 8014596C 0C0394BE */  jal       can_player_interact
 /* DC070 80145970 00000000 */   nop
 /* DC074 80145974 5040007B */  beql      $v0, $zero, .L80145B64
 /* DC078 80145978 26730001 */   addiu    $s3, $s3, 1

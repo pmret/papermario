@@ -14,8 +14,8 @@ glabel func_802DF2D8
 /* 1023EC 802DF2FC 3C03802E */  lui       $v1, %hi(D_802DF524)
 /* 1023F0 802DF300 8C63F524 */  lw        $v1, %lo(D_802DF524)($v1)
 /* 1023F4 802DF304 00512821 */  addu      $a1, $v0, $s1
-/* 1023F8 802DF308 3C048035 */  lui       $a0, %hi(D_8034F800)
-/* 1023FC 802DF30C 2484F800 */  addiu     $a0, $a0, %lo(D_8034F800)
+/* 1023F8 802DF308 3C048035 */  lui       $a0, %hi(gSpriteHeapPtr)
+/* 1023FC 802DF30C 2484F800 */  addiu     $a0, $a0, %lo(gSpriteHeapPtr)
 /* 102400 802DF310 10600003 */  beqz      $v1, .L802DF320
 /* 102404 802DF314 AFBF0018 */   sw       $ra, 0x18($sp)
 /* 102408 802DF318 3C048030 */  lui       $a0, %hi(D_802FB800)

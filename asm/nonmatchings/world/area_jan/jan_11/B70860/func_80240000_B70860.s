@@ -32,7 +32,7 @@ glabel func_80240000_B70860
 /* B708C8 80240068 44063000 */  mfc1      $a2, $f6
 /* B708CC 8024006C 4600018D */  trunc.w.s $f6, $f0
 /* B708D0 80240070 44073000 */  mfc1      $a3, $f6
-/* B708D4 80240074 0C04DFB0 */  jal       func_80137EC0
+/* B708D4 80240074 0C04DFB0 */  jal       set_transition_stencil_center_worldpos
 /* B708D8 80240078 0080282D */   daddu    $a1, $a0, $zero
 /* B708DC 8024007C 3C028011 */  lui       $v0, %hi(D_8010EBB0)
 /* B708E0 80240080 8042EBB0 */  lb        $v0, %lo(D_8010EBB0)($v0)
@@ -82,10 +82,10 @@ glabel func_80240000_B70860
 /* B7097C 8024011C C6060070 */  lwc1      $f6, 0x70($s0)
 /* B70980 80240120 468031A0 */  cvt.s.w   $f6, $f6
 /* B70984 80240124 44053000 */  mfc1      $a1, $f6
-/* B70988 80240128 0C04E035 */  jal       func_801380D4
+/* B70988 80240128 0C04E035 */  jal       set_transition_stencil_alpha
 /* B7098C 8024012C 24040001 */   addiu    $a0, $zero, 1
 /* B70990 80240130 3C05437F */  lui       $a1, 0x437f
-/* B70994 80240134 0C04DF69 */  jal       func_80137DA4
+/* B70994 80240134 0C04DF69 */  jal       set_transition_stencil_zoom_1
 /* B70998 80240138 2404000B */   addiu    $a0, $zero, 0xb
 /* B7099C 8024013C 8FBF0024 */  lw        $ra, 0x24($sp)
 /* B709A0 80240140 8FB20020 */  lw        $s2, 0x20($sp)

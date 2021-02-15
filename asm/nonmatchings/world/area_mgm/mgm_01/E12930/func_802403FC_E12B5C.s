@@ -11,7 +11,7 @@ glabel func_802403FC_E12B5C
 /* E12B74 80240414 00641825 */  or        $v1, $v1, $a0
 /* E12B78 80240418 0C03A625 */  jal       func_800E9894
 /* E12B7C 8024041C AC430000 */   sw       $v1, ($v0)
-/* E12B80 80240420 0C03A5EE */  jal       func_800E97B8
+/* E12B80 80240420 0C03A5EE */  jal       close_status_menu
 /* E12B84 80240424 00000000 */   nop
 /* E12B88 80240428 8FBF0010 */  lw        $ra, 0x10($sp)
 /* E12B8C 8024042C 24020002 */  addiu     $v0, $zero, 2

@@ -20,7 +20,7 @@ glabel func_80240C4C_AF859C
 /* AF85D0 80240C80 C6000074 */  lwc1      $f0, 0x74($s0)
 /* AF85D4 80240C84 46800020 */  cvt.s.w   $f0, $f0
 /* AF85D8 80240C88 44050000 */  mfc1      $a1, $f0
-/* AF85DC 80240C8C 0C04DF62 */  jal       func_80137D88
+/* AF85DC 80240C8C 0C04DF62 */  jal       set_transition_stencil_zoom_0
 /* AF85E0 80240C90 0000202D */   daddu    $a0, $zero, $zero
 /* AF85E4 80240C94 8E020074 */  lw        $v0, 0x74($s0)
 /* AF85E8 80240C98 8FBF0014 */  lw        $ra, 0x14($sp)

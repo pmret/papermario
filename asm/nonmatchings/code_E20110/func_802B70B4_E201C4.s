@@ -12,8 +12,8 @@ glabel func_802B70B4_E201C4
 /* E201E0 802B70D0 30420010 */  andi      $v0, $v0, 0x10
 /* E201E4 802B70D4 1040003F */  beqz      $v0, .L802B71D4
 /* E201E8 802B70D8 00000000 */   nop
-/* E201EC 802B70DC 3C10802B */  lui       $s0, %hi(D_802B7CB8)
-/* E201F0 802B70E0 26107CB8 */  addiu     $s0, $s0, %lo(D_802B7CB8)
+/* E201EC 802B70DC 3C10802B */  lui       $s0, %hi(D_802B7CB8_E20DC8)
+/* E201F0 802B70E0 26107CB8 */  addiu     $s0, $s0, %lo(D_802B7CB8_E20DC8)
 /* E201F4 802B70E4 8E040000 */  lw        $a0, ($s0)
 /* E201F8 802B70E8 0C00A580 */  jal       mem_clear
 /* E201FC 802B70EC 24050028 */   addiu    $a1, $zero, 0x28
@@ -40,8 +40,8 @@ glabel func_802B70B4_E201C4
 /* E20250 802B7140 00000000 */  nop
 .L802B7144:
 /* E20254 802B7144 46001000 */  add.s     $f0, $f2, $f0
-/* E20258 802B7148 3C04802B */  lui       $a0, %hi(D_802B7CB8)
-/* E2025C 802B714C 24847CB8 */  addiu     $a0, $a0, %lo(D_802B7CB8)
+/* E20258 802B7148 3C04802B */  lui       $a0, %hi(D_802B7CB8_E20DC8)
+/* E2025C 802B714C 24847CB8 */  addiu     $a0, $a0, %lo(D_802B7CB8_E20DC8)
 /* E20260 802B7150 E4600000 */  swc1      $f0, ($v1)
 /* E20264 802B7154 8C820000 */  lw        $v0, ($a0)
 /* E20268 802B7158 C6200030 */  lwc1      $f0, 0x30($s1)

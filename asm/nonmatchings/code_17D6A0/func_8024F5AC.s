@@ -92,7 +92,7 @@ glabel func_8024F5AC
 /* 17DFE4 8024F704 0C019D40 */  jal       guMtxF2L
 /* 17DFE8 8024F708 02A0282D */   daddu    $a1, $s5, $zero
 /* 17DFEC 8024F70C 0200202D */  daddu     $a0, $s0, $zero
-/* 17DFF0 8024F710 0C04873A */  jal       func_80121CE8
+/* 17DFF0 8024F710 0C04873A */  jal       draw_entity_model_shadow
 /* 17DFF4 8024F714 02A0282D */   daddu    $a1, $s5, $zero
 .L8024F718:
 /* 17DFF8 8024F718 8FA30258 */  lw        $v1, 0x258($sp)

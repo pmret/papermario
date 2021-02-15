@@ -10,9 +10,9 @@ glabel func_802BD1AC_31CD1C
 /* 31CD30 802BD1C0 24030001 */  addiu     $v1, $zero, 1
 /* 31CD34 802BD1C4 ACA40000 */  sw        $a0, ($a1)
 /* 31CD38 802BD1C8 00042080 */  sll       $a0, $a0, 2
-/* 31CD3C 802BD1CC 3C01802C */  lui       $at, %hi(D_802BE250)
+/* 31CD3C 802BD1CC 3C01802C */  lui       $at, %hi(D_802BE250_31DDC0)
 /* 31CD40 802BD1D0 00240821 */  addu      $at, $at, $a0
-/* 31CD44 802BD1D4 C422E250 */  lwc1      $f2, %lo(D_802BE250)($at)
+/* 31CD44 802BD1D4 C422E250 */  lwc1      $f2, %lo(D_802BE250_31DDC0)($at)
 /* 31CD48 802BD1D8 468010A0 */  cvt.s.w   $f2, $f2
 /* 31CD4C 802BD1DC 8C420008 */  lw        $v0, 8($v0)
 /* 31CD50 802BD1E0 46001082 */  mul.s     $f2, $f2, $f0

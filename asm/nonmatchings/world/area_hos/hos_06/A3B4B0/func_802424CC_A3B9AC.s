@@ -5,8 +5,8 @@ glabel func_802424CC_A3B9AC
 /* A3B9AC 802424CC 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* A3B9B0 802424D0 0000282D */  daddu     $a1, $zero, $zero
 /* A3B9B4 802424D4 00A0302D */  daddu     $a2, $a1, $zero
-/* A3B9B8 802424D8 3C038024 */  lui       $v1, %hi(D_80245EEC)
-/* A3B9BC 802424DC 24635EEC */  addiu     $v1, $v1, %lo(D_80245EEC)
+/* A3B9B8 802424D8 3C038024 */  lui       $v1, %hi(D_80245EEC_A3F3CC)
+/* A3B9BC 802424DC 24635EEC */  addiu     $v1, $v1, %lo(D_80245EEC_A3F3CC)
 /* A3B9C0 802424E0 AFBF0010 */  sw        $ra, 0x10($sp)
 /* A3B9C4 802424E4 8C840084 */  lw        $a0, 0x84($a0)
 .L802424E8:

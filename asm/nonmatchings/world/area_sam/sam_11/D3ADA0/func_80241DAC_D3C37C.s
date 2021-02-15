@@ -6,8 +6,8 @@ glabel func_80241DAC_D3C37C
 /* D3C380 80241DB0 F7BC0048 */  sdc1      $f28, 0x48($sp)
 /* D3C384 80241DB4 4480E000 */  mtc1      $zero, $f28
 /* D3C388 80241DB8 F7BA0040 */  sdc1      $f26, 0x40($sp)
-/* D3C38C 80241DBC 3C018025 */  lui       $at, %hi(D_80251430)
-/* D3C390 80241DC0 D43A1430 */  ldc1      $f26, %lo(D_80251430)($at)
+/* D3C38C 80241DBC 3C018025 */  lui       $at, %hi(D_80251430_D4BA00)
+/* D3C390 80241DC0 D43A1430 */  ldc1      $f26, %lo(D_80251430_D4BA00)($at)
 /* D3C394 80241DC4 AFB1001C */  sw        $s1, 0x1c($sp)
 /* D3C398 80241DC8 0000882D */  daddu     $s1, $zero, $zero
 /* D3C39C 80241DCC AFB20020 */  sw        $s2, 0x20($sp)
@@ -79,8 +79,8 @@ glabel func_80241DAC_D3C37C
 /* D3C4A0 80241ED0 2404000A */  addiu     $a0, $zero, 0xa
 /* D3C4A4 80241ED4 0C00A67F */  jal       rand_int
 /* D3C4A8 80241ED8 E45C0044 */   swc1     $f28, 0x44($v0)
-/* D3C4AC 80241EDC 3C018025 */  lui       $at, %hi(D_80251438)
-/* D3C4B0 80241EE0 D4221438 */  ldc1      $f2, %lo(D_80251438)($at)
+/* D3C4AC 80241EDC 3C018025 */  lui       $at, %hi(D_80251438_D4BA08)
+/* D3C4B0 80241EE0 D4221438 */  ldc1      $f2, %lo(D_80251438_D4BA08)($at)
 /* D3C4B4 80241EE4 44820000 */  mtc1      $v0, $f0
 /* D3C4B8 80241EE8 00000000 */  nop
 /* D3C4BC 80241EEC 46800021 */  cvt.d.w   $f0, $f0

@@ -1,9 +1,9 @@
 #include "common.h"
 #include "battle/battle.h"
 
-#include "battle/actor/goomba.h"
-#include "battle/actor/paragoomba.h"
-#include "battle/actor/spiked_goomba.h"
+#include "goomba.h"
+#include "paragoomba.h"
+#include "spiked_goomba.h"
 
 #define NAMESPACE b_area_kmr_part_1
 

@@ -117,7 +117,7 @@ glabel L802414BC_B53CEC
 glabel L802414DC_B53D0C
 /* B53D0C 802414DC 0260202D */  daddu     $a0, $s3, $zero
 /* B53D10 802414E0 0280282D */  daddu     $a1, $s4, $zero
-/* B53D14 802414E4 0C09035A */  jal       delete_player_actor
+/* B53D14 802414E4 0C09035A */  jal       delete_player_actor_B53598
 /* B53D18 802414E8 0200302D */   daddu    $a2, $s0, $zero
 /* B53D1C 802414EC 0809054C */  j         .L80241530
 /* B53D20 802414F0 0000102D */   daddu    $v0, $zero, $zero

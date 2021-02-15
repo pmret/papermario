@@ -55,8 +55,8 @@ glabel LoadFreeItemScript
 /* 1969B8 802680D8 30420080 */  andi      $v0, $v0, 0x80
 /* 1969BC 802680DC 2C500001 */  sltiu     $s0, $v0, 1
 .L802680E0:
-/* 1969C0 802680E0 3C028029 */  lui       $v0, %hi(D_80293C04)
-/* 1969C4 802680E4 24423C04 */  addiu     $v0, $v0, %lo(D_80293C04)
+/* 1969C0 802680E0 3C028029 */  lui       $v0, %hi(gBattleItemTable)
+/* 1969C4 802680E4 24423C04 */  addiu     $v0, $v0, %lo(gBattleItemTable)
 /* 1969C8 802680E8 00108100 */  sll       $s0, $s0, 4
 /* 1969CC 802680EC 02028021 */  addu      $s0, $s0, $v0
 /* 1969D0 802680F0 8E040000 */  lw        $a0, ($s0)

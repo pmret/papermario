@@ -30,8 +30,8 @@ glabel func_802403F8_ADB298
 /* ADB2FC 8024045C 24620018 */  addiu     $v0, $v1, 0x18
 /* ADB300 80240460 AC680008 */  sw        $t0, 8($v1)
 /* ADB304 80240464 AC820000 */  sw        $v0, ($a0)
-/* ADB308 80240468 3C048024 */  lui       $a0, %hi(D_80241D3B)
-/* ADB30C 8024046C 90841D3B */  lbu       $a0, %lo(D_80241D3B)($a0)
+/* ADB308 80240468 3C048024 */  lui       $a0, %hi(D_80241D3B_ADCBDB)
+/* ADB30C 8024046C 90841D3B */  lbu       $a0, %lo(D_80241D3B_ADCBDB)($a0)
 /* ADB310 80240470 3C02FA00 */  lui       $v0, 0xfa00
 /* ADB314 80240474 AC620010 */  sw        $v0, 0x10($v1)
 /* ADB318 80240478 03E00008 */  jr        $ra

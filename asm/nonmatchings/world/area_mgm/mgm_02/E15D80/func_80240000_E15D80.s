@@ -41,8 +41,8 @@ glabel func_80240000_E15D80
 /* E15E10 80240090 3C014028 */  lui       $at, 0x4028
 /* E15E14 80240094 44811800 */  mtc1      $at, $f3
 /* E15E18 80240098 44801000 */  mtc1      $zero, $f2
-/* E15E1C 8024009C 3C018025 */  lui       $at, %hi(D_802484E0)
-/* E15E20 802400A0 D42484E0 */  ldc1      $f4, %lo(D_802484E0)($at)
+/* E15E1C 8024009C 3C018025 */  lui       $at, %hi(D_802484E0_E1E260)
+/* E15E20 802400A0 D42484E0 */  ldc1      $f4, %lo(D_802484E0_E1E260)($at)
 /* E15E24 802400A4 46220003 */  div.d     $f0, $f0, $f2
 /* E15E28 802400A8 46240002 */  mul.d     $f0, $f0, $f4
 /* E15E2C 802400AC 00000000 */  nop
@@ -148,7 +148,7 @@ glabel func_80240000_E15D80
 /* E15F9C 8024021C 240700FF */  addiu     $a3, $zero, 0xff
 /* E15FA0 80240220 AFA00010 */  sw        $zero, 0x10($sp)
 /* E15FA4 80240224 AFA00014 */  sw        $zero, 0x14($sp)
-/* E15FA8 80240228 0C04993B */  jal       draw_string
+/* E15FA8 80240228 0C04993B */  jal       draw_msg
 /* E15FAC 8024022C 24A5002A */   addiu    $a1, $a1, 0x2a
 /* E15FB0 80240230 2406002B */  addiu     $a2, $zero, 0x2b
 /* E15FB4 80240234 24070001 */  addiu     $a3, $zero, 1
@@ -163,13 +163,13 @@ glabel func_80240000_E15D80
 /* E15FD8 80240258 02042023 */  subu      $a0, $s0, $a0
 /* E15FDC 8024025C 0C049DA7 */  jal       draw_number
 /* E15FE0 80240260 24A50041 */   addiu    $a1, $a1, 0x41
-/* E15FE4 80240264 3C048025 */  lui       $a0, %hi(D_802482A0)
-/* E15FE8 80240268 248482A0 */  addiu     $a0, $a0, %lo(D_802482A0)
+/* E15FE4 80240264 3C048025 */  lui       $a0, %hi(D_802482A0_E1E020)
+/* E15FE8 80240268 248482A0 */  addiu     $a0, $a0, %lo(D_802482A0_E1E020)
 /* E15FEC 8024026C 24050020 */  addiu     $a1, $zero, 0x20
 /* E15FF0 80240270 00A0302D */  daddu     $a2, $a1, $zero
 /* E15FF4 80240274 24070002 */  addiu     $a3, $zero, 2
-/* E15FF8 80240278 3C028025 */  lui       $v0, %hi(D_802484A0)
-/* E15FFC 8024027C 244284A0 */  addiu     $v0, $v0, %lo(D_802484A0)
+/* E15FF8 80240278 3C028025 */  lui       $v0, %hi(D_802484A0_E1E220)
+/* E15FFC 8024027C 244284A0 */  addiu     $v0, $v0, %lo(D_802484A0_E1E220)
 /* E16000 80240280 AFA00010 */  sw        $zero, 0x10($sp)
 /* E16004 80240284 AFA20014 */  sw        $v0, 0x14($sp)
 /* E16008 80240288 96430016 */  lhu       $v1, 0x16($s2)
@@ -267,7 +267,7 @@ glabel func_80240000_E15D80
 /* E16174 802403F4 240700FF */  addiu     $a3, $zero, 0xff
 /* E16178 802403F8 AFA00010 */  sw        $zero, 0x10($sp)
 /* E1617C 802403FC AFA00014 */  sw        $zero, 0x14($sp)
-/* E16180 80240400 0C04993B */  jal       draw_string
+/* E16180 80240400 0C04993B */  jal       draw_msg
 /* E16184 80240404 24A5001E */   addiu    $a1, $a1, 0x1e
 /* E16188 80240408 8FBF006C */  lw        $ra, 0x6c($sp)
 /* E1618C 8024040C 8FB60068 */  lw        $s6, 0x68($sp)

@@ -90,8 +90,8 @@ glabel func_8024083C_CF83AC
 /* CF84F8 80240988 0040802D */   daddu    $s0, $v0, $zero
 /* CF84FC 8024098C 0040282D */  daddu     $a1, $v0, $zero
 /* CF8500 80240990 0000182D */  daddu     $v1, $zero, $zero
-/* CF8504 80240994 3C068024 */  lui       $a2, %hi(D_8024373C)
-/* CF8508 80240998 24C6373C */  addiu     $a2, $a2, %lo(D_8024373C)
+/* CF8504 80240994 3C068024 */  lui       $a2, %hi(D_8024373C_CFB2AC)
+/* CF8508 80240998 24C6373C */  addiu     $a2, $a2, %lo(D_8024373C_CFB2AC)
 /* CF850C 8024099C 00C0202D */  daddu     $a0, $a2, $zero
 .L802409A0:
 /* CF8510 802409A0 8C820000 */  lw        $v0, ($a0)

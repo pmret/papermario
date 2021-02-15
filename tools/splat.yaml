@@ -9,26 +9,29 @@ options:
   extensions: splat_ext
   symbol_addrs_path: tools/symbol_addrs.txt
   platform: n64
+  out_dir: ../
+  target_path: baserom.z64
+  assets_dir: assets
 segments:
   - name: header
     type: header
     start: 0x00
     vram: 0
-    files:
+    subsections:
     - [0x0000, header, header]
   - name: boot
     type: code
     start: 0x0040
     vram: 0xA4000040
-    files:
+    subsections:
     - [0x0040, asm, boot]
     - [0x0B70, bin, bootcode_font]
   - type: code
     start: 0x1000
     vram: 0x80025C00
     subalign: 8
-    files:
-    - [0x1000, c, code_1000_len_60]
+    subsections:
+    - [0x1000, hasm, entry_point]
     - [0x1060, c, code_1060_len_310]
     - [0x1370, c, code_1370_len_7d0]
     - [0x1b40, c, code_1b40_len_20b0]
@@ -38,11 +41,13 @@ segments:
     - [0x6240, c, code_6240_len_c00]
     - [0x6e40, c, code_6e40_len_500]
     - [0x7340, c, code_7340_len_b00]
-    - [0x7e40, c, os/code_7e40_len_3f0]
+    - [0x7e40, c, os/nusys/code_7e40_len_3f0]
     - [0x8230, c, os/nusys/nuSiMgr]
     - [0x8560, c]
+    - [0x8800, c]
     - [0x9d10, c, code_9d10_len_1080]
     - [0xad90, c, code_ad90_len_2880]
+    - [0xB0E0, c]
     - [0xd610, c, code_d610_len_1330]
     - [0xe940, c, code_e940_len_290]
     - [0xebd0, c, code_ebd0_len_6a0]
@@ -57,13 +62,18 @@ segments:
     - [0x1a1f0, c, code_1a1f0_len_5390]
     - [0x1f580, c, code_1f580_len_1940]
     - [0x20ec0, c, code_20ec0_len_5040]
+    - [0x23680, c]
+    - [0x25AF0, c]
     - [0x25f00, c, code_25f00_len_940]
     - [0x26840, c, code_26840_len_20d0]
     - [0x28910, c, code_28910_len_5090]
+    - [0x2BF90, c]
     - [0x2d9a0, c, code_2d9a0_len_890]
     - [0x2e230, c, code_2e230_len_2190]
     - [0x303c0, c, code_303c0_len_3e10]
+    - [0x30450, c]
     - [0x31650, c, code_31650]
+    - [0x33450, c]
     - [0x341d0, c, code_341d0]
     - [0x35ac0, c, world/world]
     - [0x362a0, c, code_362a0_len_2f70]
@@ -82,13 +92,14 @@ segments:
     - [0x3aa10, c, os/nusys/nuContInit]
     - [0x3aa50, c, os/nusys/nuContDataGet]
     - [0x3aab0, c, os/nusys/nuContPakMgr]
-    - [0x3af10, c, os/nusys/nuContRmbMgr]
+    - [0x3AD20, c, os/nusys/nuContRmbMgr]
     - [0x3b290, c, os/nusys/nuContRmbStart]
     - [0x3b2f0, c, os/nusys/nuContRmbCheck]
-    - [0x3b390, c, os/code_3b390_len_110]
-    - [0x3b4a0, c, os/code_3b4a0_len_270]
+    - [0x3b390, c, os/nusys/nuContRmbModeSet]
+    - [0x3b4a0, c, os/nusys/code_3B4A0]
+    - [0x3B5F0, c, os/nusys/nuGfxThread] # End of nusys
     - [0x3b710, c, os/code_3b710_len_40]
-    - [0x3b750, c, code_3b750_len_20]
+    - [0x3b750, c, os/code_3b750_len_20]
     - [0x3b770, c, os/code_3b770_len_80]
     - [0x3b7f0, c, os/code_3b7f0_len_120]
     - [0x3b910, c, os/code_3b910_len_410]
@@ -108,9 +119,12 @@ segments:
     - [0x3cc50, c, os/code_3cc50_len_80]
     - [0x3ccd0, c, os/code_3ccd0_len_30]
     - [0x3cd00, c, os/code_3cd00_len_5f0]
+    - [0x3CF80, c]
+    - [0x3D290, c, os/osVirtualToPhysical]
     - [0x3d2f0, c, os/code_3d2f0_len_10]
     - [0x3d300, c, os/code_3d300_len_30]
-    - [0x3d330, c, os/code_3d330_len_990]
+    - [0x3d330, c, os/guFrustum]
+    - [0x3D5B0, c, os/guLookAt]
     - [0x3dcc0, c, os/code_3dcc0_len_a60]
     - [0x3e720, c, os/code_3e720_len_5f0]
     - [0x3ed10, c, os/guOrtho]
@@ -119,11 +133,16 @@ segments:
     - [0x3f6d0, c, os/code_3f6d0_len_320]
     - [0x3f9f0, c, os/code_3f9f0_len_60]
     - [0x3fa50, c, os/code_3fa50_len_f60]
+    - [0x3FEA0, c]
+    - [0x40980, c, os/osCreateMesgQueue]
     - [0x409b0, c, os/code_409b0_len_140]
     - [0x40af0, c, os/code_40af0_len_130]
     - [0x40c20, c, os/code_40c20_len_1f0]
-    - [0x40e10, c, os/code_40e10_len_240]
-    - [0x41050, c, os/code_41050_len_120]
+    - [0x40E00, hasm, os/osGetCount]
+    - [0x40E10, c]
+    - [0x41050, c, os/osSpTaskYield]
+    - [0x41070, c, os/osSpTaskYielded]
+    - [0x410C0, c, os/osSiRawStartDma]
     - [0x41170, c, os/code_41170_len_f0]
     - [0x41260, c, os/osCreateThread]
     - [0x41330, c, os/osGetThreadPri]
@@ -136,6 +155,7 @@ segments:
     - [0x416a0, c, os/code_416a0_len_90]
     - [0x41730, c, os/code_41730_len_20]
     - [0x41750, c, os/code_41750_len_450]
+    - [0x41880, c]
     - [0x41ba0, c, os/code_41ba0_len_c0]
     - [0x41c60, c, os/code_41c60_len_c0]
     - [0x41d20, c, os/code_41d20_len_40]
@@ -151,6 +171,8 @@ segments:
     - [0x42420, c, os/code_42420_len_50]
     - [0x42470, c, os/code_42470_len_310]
     - [0x42780, c, os/code_42780_len_120]
+    - [0x427E0, c, os/osViRepeatLine]
+    - [0x42840, c, os/guMtxIdent]
     - [0x428a0, c, os/guMtxIdentF]
     - [0x42900, c, os/code_42900_len_80]
     - [0x42980, c, os/code_42980_len_80]
@@ -162,11 +184,14 @@ segments:
     - [0x42d60, c, os/code_42d60_len_80]
     - [0x42de0, c, os/code_42de0_len_90]
     - [0x42e70, c, os/code_42e70_len_390]
+    - [0x42F20, c, os/guRotate]
     - [0x43200, c, os/code_43200_len_7c0]
+    - [0x43590, c]
     - [0x439c0, c, os/code_439c0_len_220]
     - [0x43be0, c, os/code_43be0_len_5e0]
     - [0x441c0, c, os/code_441c0_len_1c0]
     - [0x44380, c, os/code_44380_len_4e0]
+    - [0x44490, c]
     - [0x44860, c, os/code_44860_len_60]
     - [0x448c0, c, os/code_448c0_len_210]
     - [0x44ad0, c, os/code_44ad0_len_70]
@@ -183,6 +208,7 @@ segments:
     - [0x46ae0, c, os/code_46ae0_len_170]
     - [0x46c50, c, os/code_46c50_len_20]
     - [0x46c70, c, os/code_46c70_len_e00]
+    - [0x47A60, hasm, os/__osGetCause]
     - [0x47a70, c, os/code_47a70_len_10]
     - [0x47a80, c, os/code_47a80_len_10]
     - [0x47a90, c, os/code_47a90_len_50]
@@ -211,40 +237,42 @@ segments:
     - [0x4F9D0, data, code_6240_len_c00]
     - [0x53570, .data, code_25f00_len_940]
     - [0x53590, data, code_26840_len_20d0]
-    - [0x541B0, .data, code_303c0_len_3e10]
+    - [0x541B0, .data, code_30450]
     - [0x54250, .data, code_31650]
     - [0x542E0, data, code_31650]
     - [0x6B450, .data, world/world]
     - [0x6EAC0, data] # has scripts
+    - [0x6F0E0, .data, os/nusys/nuContRmbMgr]
+    - [0x6F110, data] # has scripts?
     - [0x70E30, .data, battle/battle]
     - [0x71430, data]
-    - [0x73130, rodata]
+    - [0x73130, rodata, code_1060_len_310]
+    - [0x73148, .rodata, code_1b40_len_20b0]
     - [0x73160, .rodata, code_42e0_len_1f60]
     - [0x73200, rodata]
     - [0x73DA0, .rodata, world/world]
     - [0x74EA0, rodata]
     - [0x75240, .rodata, battle/battle] # ram 80099E40
+    # bss starts at 0x8009A5B0
+    - [0x75240, .bss, os/code_39cb0_len_100, 0x800] # we need at least this much bss space until this file
   - type: code
     start: 0x759B0
     vram: 0x800DC500
-    files:
+    subsections:
     - [0x759b0, c, code_759b0_len_61b0]
     - [0x77480, c]
     - [0x7B440, c]
     - [0x7bb60, c, code_7bb60_len_41b0]
     - [0x7fd10, c, code_7fd10_len_b40]
     - [0x80850, c, code_80850_len_3060]
-    - [0x838b0, c, code_838b0_len_5900]
+    - [0x838b0, c, world/partners]
     - [0x891b0, c, code_891b0_len_fb0]
     - [0x8a160, c, code_8a160_len_700]
     - [0x8a860, c, code_8a860_len_3f30]
     - [0x8e790, c, code_8e790_len_2850]
-    - [0x90fe0, data]
-  - type: code
-    start: 0x91520 # section may start earlier
-    vram: 0 # TODO
-    files:
-    - [0x91520, .data, world/partners]
+    - [0x90FE0, .data, code_759b0_len_61b0]
+    - [0x913B0, .data, world/actions]
+    - [0x914E0, .data, world/partners]
   - [0x917EC, bin]
   - [0x93CD0, ci4,     ui/hammer, 32, 32]
   - [0x93ED0, palette, ui/hammer]
@@ -257,7 +285,7 @@ segments:
   - type: code
     start: 0xA5DD0
     vram: 0x8010F6D0
-    files:
+    subsections:
     - [0xa5dd0, c, code_a5dd0_len_114e0]
     - [0xB4580, c]
     - [0xb72b0, c, code_b72b0_len_15ed0]
@@ -284,7 +312,7 @@ segments:
   - type: code
     start: 0xE79B0
     vram: 0x802C3000
-    files:
+    subsections:
     - [0xe79b0, c, code_e79b0_len_1920]
     - [0xe92d0, c, si]
     - [0xED510, c, code_ED510]
@@ -303,14 +331,14 @@ segments:
   - type: code
     start: 0xFEE30
     vram: 0x802DBD40
-    files:
+    subsections:
     - [0xfee30, c, code_fee30_len_2d60]
     - [0x101b90, c, code_101b90_len_8f0]
     - [0x102480, data, code_fee30_len_2d60]
   - type: code
     start: 0x102610
     vram: 0x802E0D90
-    files:
+    subsections:
     - [0x102610, c, code_102610_len_2330]
     - [0x102C80, c]
     - [0x104730, c, code_104730]
@@ -342,7 +370,7 @@ segments:
   - type: code
     start: 0x135EE0
     vram: 0x80242BA0
-    files:
+    subsections:
     - [0x135EE0, c]
     - [0x137ED0, c]
     - [0x138CC0, c]
@@ -377,7 +405,7 @@ segments:
   - type: code
     start: 0x163400
     vram: 0x80242BA0
-    files:
+    subsections:
     - [0x163400, c]
     - [0x165490, c]
     - [0x167570, c]
@@ -388,7 +416,7 @@ segments:
   - type: code
     start: 0x16C8E0
     vram: 0x8023E000
-    files:
+    subsections:
     - [0x16C8E0, c, code_16c8e0]
     - [0x16F740, c]
     - [0x1776B0, c]
@@ -408,7 +436,10 @@ segments:
     - [0x1AC760, c]
     - [0x1AF120, c]
     - [0x1AF230, c]
-    - [0x1AF2D0, data]
+    - [0x1AF2D0, .data, code_16c8e0]
+    - [0x1AF8A0, .data, code_190B20]
+    #- [0x1B21E0, bin] # begins with image
+    - [0x1B21E0, data, code_1AF2D0]
     - [0x1CB240, rodata]
   - [0x1CC310, bin] # icon images and palettes, vram unknown
   - [0x1FE1B0, rgba16,  title/logo_n64, 128, 112]
@@ -429,32 +460,36 @@ segments:
   - type: code
     start: 0x3169F0
     vram: 0x80200000
-    files:
+    subsections:
     - [0x3169f0, c, code_3169f0]
+  - type: code
+    start: 0x316a70
+    vram: 0x80200080
+    subsections:
     - [0x316a70, c, code_316a70]
   - type: code
     start: 0x316C00
     vram: 0x802AE000
     overlay: True
-    files:
+    subsections:
     - [0x316C00, c]
   - type: code
     start: 0x316D90
     vram: 0x802AE000
     overlay: True
-    files:
+    subsections:
     - [0x316d90, c, code_316d90]
   - type: code
     start: 0x316f30
     vram: 0x802B2000
-    files:
+    subsections:
     - [0x316f30, c, code_316f30]
   - type: code
     ld_name: world_partner_goombario
     start: 0x317020
     vram: 0x802BD100
     overlay: True
-    files:
+    subsections:
     - [0x317020, c, world/partner/goombario]
     - [0x317b60, .data, world/partner/goombario]
     - [0x317DA0, rodata, world/partner/goombario] # rodata containing a double and a jumptable
@@ -463,7 +498,7 @@ segments:
     start: 0x317e50
     vram: 0x802BD100
     overlay: True
-    files:
+    subsections:
     - [0x317e50, c, world/partner/bombette]
     - [0x3195d0, data]
   - type: code
@@ -471,7 +506,7 @@ segments:
     start: 0x319670
     vram: 0x802BD100
     overlay: True
-    files:
+    subsections:
     - [0x319670, c, world/partner/parakarry]
     - [0x31b000, data]
     - [0x31B080, rodata]
@@ -480,7 +515,7 @@ segments:
     start: 0x31b120
     vram: 0x802BD100
     overlay: True
-    files:
+    subsections:
     - [0x31b120, c, world/partner/kooper]
     - [0x31cb60, data]
     - [0x31CBE0, rodata]
@@ -489,7 +524,7 @@ segments:
     start: 0x31cc70
     vram: 0x802BD100
     overlay: True
-    files:
+    subsections:
     - [0x31cc70, c, world/partner/watt]
     - [0x31ddc0, data]
   - type: code
@@ -497,7 +532,7 @@ segments:
     start: 0x31de70
     vram: 0x802BD100
     overlay: True
-    files:
+    subsections:
     - [0x31de70, c, world/partner/sushie]
     - [0x320b20, data]
     - [0x320BC0, rodata]
@@ -506,7 +541,7 @@ segments:
     start: 0x320c50
     vram: 0x802BD100
     overlay: True
-    files:
+    subsections:
     - [0x320c50, c, world/partner/lakilester]
     - [0x3239b0, data]
   - type: code
@@ -514,7 +549,7 @@ segments:
     start: 0x323A50
     vram: 0x802BD100
     overlay: True
-    files:
+    subsections:
     - [0x323A50, c, world/partner/bow]
     - [0x324930, data]
     - [0x3249B0, rodata]
@@ -523,7 +558,7 @@ segments:
     start: 0x324a10
     vram: 0x802BD100
     overlay: True
-    files:
+    subsections:
     - [0x324a10, c, world/partner/goompa]
     - [0x324e80, .data, world/partner/goompa]
     - [0x324F00, rodata, world/partner/goompa] # rodata with single f64 0.8
@@ -532,7 +567,7 @@ segments:
     start: 0x324f10
     vram: 0x802BD100
     overlay: True
-    files:
+    subsections:
     - [0x324f10, c, world/partner/goombaria]
     - [0x325000, .data, world/partner/goombaria]
   - type: code
@@ -540,20 +575,20 @@ segments:
     start: 0x325070
     vram: 0x802BD100
     overlay: True
-    files:
+    subsections:
     - [0x325070, c, world/partner/twink]
     - [0x325160, .data, world/partner/twink]
   - type: code
     start: 0x3251d0
     vram: 0x802BD100
     overlay: True
-    files:
+    subsections:
     - [0x3251d0, c]
     - [0x3255e0, bin]
   - type: code
     start: 0x325ad0
     vram: 0xE0200000
-    files:
+    subsections:
     - [0x325ad0, c]
     - [0x325ee0, c]
     - [0x326160, bin]
@@ -561,436 +596,436 @@ segments:
   - type: code
     start: 0x3278f0
     vram: 0xE0002000
-    files:
+    subsections:
     - [0x3278f0, c]
     - [0x328050, bin]
   - type: code
     start: 0x328110
     vram: 0xE000C000
-    files:
+    subsections:
     - [0x328110, c]
     - [0x328d20, bin]
   - [0x328EA0, bin]
   - type: code
     start: 0x32C110
     vram: 0xE000E000
-    files:
+    subsections:
     - [0x32C110, c]
     - [0x32c770, bin]
   - type: code
     start: 0x32C7A0
     vram: 0xE0010000
-    files:
+    subsections:
     - [0x32C7A0, c]
     - [0x32CEB0, bin]
   - type: code
     start: 0x32DD10
     vram: 0xE0012000
-    files:
+    subsections:
     - [0x32DD10, c]
   - type: code
     start: 0x32E490
     vram: 0xE0014000
-    files:
+    subsections:
     - [0x32E490, c]
     - [0x32EC10, bin]
   - type: code
     start: 0x32EE30
     vram: 0xE0016000
-    files:
+    subsections:
     - [0x32EE30, c]
     - [0x32F550, bin]
   - type: code
     start: 0x32F580
     vram: 0xE0018000
-    files:
+    subsections:
     - [0x32F580, c]
   - [0x32fb50, bin] # data/rodata section for above.
   - type: code
     start: 0x32FE30
     vram: 0xE001A000
-    files:
+    subsections:
     - [0x32FE30, c]
     - [0x330440, bin]
   - type: code
     start: 0x330910
     vram: 0xE001C000
-    files:
+    subsections:
     - [0x330910, c]
   - [0x330ef0, bin] # data/rodata section for above.
   - type: code
     start: 0x331940
     vram: 0xE001E000
-    files:
+    subsections:
     - [0x331940, c]
     - [0x332690, bin]
   - [0x3326A0, bin]
   - type: code
     start: 0x333ec0
     vram: 0xE0020000
-    files:
+    subsections:
     - [0x333ec0, c]
     - [0x334b50, bin]
   - [0x334C70, bin]
   - type: code
     start: 0x337240
     vram: 0xE0022000
-    files:
+    subsections:
     - [0x337240, c]
     - [0x337f10, bin]
   - [0x337FC0, bin]
   - type: code
     start: 0x339250
     vram: 0xE0024000
-    files:
+    subsections:
     - [0x339250, c]
     - [0x339f10, bin]
   - [0x339F60, bin]
   - type: code
     start: 0x33B180
     vram: 0xE0026000
-    files:
+    subsections:
     - [0x33B180, c]
     - [0x33bb70, bin]
   - [0x33BBD0, bin]
   - type: code
     start: 0x33CDF0
     vram: 0xE0028000
-    files:
+    subsections:
     - [0x33CDF0, c]
     - [0x33d5d0, bin]
   - [0x33D610, bin]
   - type: code
     start: 0x33E8C0
     vram: 0xE002A000
-    files:
+    subsections:
     - [0x33E8C0, c]
     - [0x33efe0, bin]
   - type: code
     start: 0x33FE80
     vram: 0xE002C000
-    files:
+    subsections:
     - [0x33FE80, c]
     - [0x3407c0, bin]
   - [0x340880, bin]
   - type: code
     start: 0x3419E0
     vram: 0xE002E000
-    files:
+    subsections:
     - [0x3419E0, c]
     - [0x342120, bin]
   - type: code
     start: 0x342140
     vram: 0xE0030000
-    files:
+    subsections:
     - [0x342140, c]
     - [0x342fd0, bin]
   - [0x343040, bin]
   - type: code
     start: 0x343680
     vram: 0xE0032000
-    files:
+    subsections:
     - [0x343680, c]
     - [0x343f30, bin]
   - [0x343F70, bin]
   - type: code
     start: 0x344a10
     vram: 0xE0034000
-    files:
+    subsections:
     - [0x344a10, c]
     - [0x345190, bin]
   - [0x3451E0, bin]
   - type: code
     start: 0x3454E0
     vram: 0xE0036000
-    files:
+    subsections:
     - [0x3454E0, c]
     - [0x345b10, bin]
   - [0x345B40, bin]
   - type: code
     start: 0x34DD20
     vram: 0xE0038000
-    files:
+    subsections:
     - [0x34DD20, c]
     - [0x34E710, bin]
   - type: code
     start: 0x34EC80
     vram: 0xE003A000
-    files:
+    subsections:
     - [0x34EC80, c]
     - [0x34f480, bin]
   - type: code
     start: 0x34F4C0
     vram: 0xE003C000
-    files:
+    subsections:
     - [0x34F4C0, c]
     - [0x350160, bin]
   - [0x350220, bin]
   - type: code
     start: 0x352440
     vram: 0xE003E000
-    files:
+    subsections:
     - [0x352440, c]
     - [0x352cb0, bin]
   - [0x352CE0, bin]
   - type: code
     start: 0x353300
     vram: 0xE0040000
-    files:
+    subsections:
     - [0x353300, c]
     - [0x353B40, bin]
   - type: code
     start: 0x3547A0
     vram: 0xE0042000
-    files:
+    subsections:
     - [0x3547A0, c]
     - [0x354F20, bin]
   - type: code
     start: 0x354F60
     vram: 0xE0044000
-    files:
+    subsections:
     - [0x354F60, c]
     - [0x355d10, bin]
   - type: code
     start: 0x355EE0
     vram: 0xE0046000
-    files:
+    subsections:
     - [0x355EE0, c]
     - [0x3564e0, bin]
   - [0x356530, bin]
   - type: code
     start: 0x356980
     vram: 0xE0048000
-    files:
+    subsections:
     - [0x356980, c]
     - [0x357380, bin]
   - [0x3573A0, bin]
   - type: code
     start: 0x3584C0
     vram: 0xE004A000
-    files:
+    subsections:
     - [0x3584C0, c]
     - [0x359320, bin]
   - [0x3593B0, bin]
   - type: code
     start: 0x359F20
     vram: 0xE004C000
-    files:
+    subsections:
     - [0x359F20, c]
     - [0x35A580, bin]
   - type: code
     start: 0x35B9D0
     vram: 0xE004E000
-    files:
+    subsections:
     - [0x35B9D0, c]
     - [0x35bfb0, bin]
   - type: code
     start: 0x35BFD0
     vram: 0xE0050000
-    files:
+    subsections:
     - [0x35BFD0, c]
     - [0x35c530, bin]
   - [0x35C550, bin]
   - type: code
     start: 0x35CA80
     vram: 0xE0052000
-    files:
+    subsections:
     - [0x35CA80, c]
     - [0x35D460, bin]
   - type: code
     start: 0x35DA00
     vram: 0xE0056000
-    files:
+    subsections:
     - [0x35DA00, c]
     - [0x35E8A0, bin]
   - type: code
     start: 0x35E920
     vram: 0xE0058000
-    files:
+    subsections:
     - [0x35E920, c]
     - [0x35F0A0, bin]
   - type: code
     start: 0x3602C0
     vram: 0xE005A000
-    files:
+    subsections:
     - [0x3602C0, c]
     - [0x360a10, bin]
   - [0x360A30, bin]
   - type: code
     start: 0x360F40
     vram: 0xE005C000
-    files:
+    subsections:
     - [0x360F40, c]
     - [0x361640, bin]
   - type: code
     start: 0x3625C0
     vram: 0xE005E000
-    files:
+    subsections:
     - [0x3625C0, c]
     - [0x362C30, bin]
   - type: code
     start: 0x363160
     vram: 0xE0060000
-    files:
+    subsections:
     - [0x363160, c]
     - [0x363890, bin]
   - type: code
     start: 0x364300
     vram: 0xE0062000
-    files:
+    subsections:
     - [0x364300, c]
     - [0x364BC0, bin]
   - type: code
     start: 0x364F10
     vram: 0xE0064000
-    files:
+    subsections:
     - [0x364F10, c]
     - [0x365970, bin]
   - type: code
     start: 0x366030
     vram: 0xE0066000
-    files:
+    subsections:
     - [0x366030, c]
     - [0x366c80, bin]
   - [0x366D60, bin]
   - type: code
     start: 0x36A8D0
     vram: 0xE0068000
-    files:
+    subsections:
     - [0x36A8D0, c]
     - [0x36ae80, bin]
   - [0x36AEE0, bin]
   - type: code
     start: 0x36D020
     vram: 0xE006A000
-    files:
+    subsections:
     - [0x36D020, c]
     - [0x36de10, bin]
   - [0x36DF90, bin]
   - type: code
     start: 0x36E1D0
     vram: 0xE006C000
-    files:
+    subsections:
     - [0x36E1D0, c]
     - [0x36ed30, bin]
   - [0x36ED60, bin]
   - type: code
     start: 0x372790
     vram: 0xE006E000
-    files:
+    subsections:
     - [0x372790, c]
     - [0x373390, bin]
   - [0x3733E0, bin]
   - type: code
     start: 0x3740B0
     vram: 0xE0070000
-    files:
+    subsections:
     - [0x3740B0, c]
     - [0x374d80, bin]
   - type: code
     start: 0x374E50
     vram: 0xE0072000
-    files:
+    subsections:
     - [0x374E50, c]
     - [0x375500, bin]
   - [0x375510, bin]
   - type: code
     start: 0x376460
     vram: 0xE0074000
-    files:
+    subsections:
     - [0x376460, c]
     - [0x376fc0, bin]
   - type: code
     start: 0x377070
     vram: 0xE0076000
-    files:
+    subsections:
     - [0x377070, c]
     - [0x377f00, bin]
   - [0x377F80, bin]
   - type: code
     start: 0x37A3F0
     vram: 0xE0078000
-    files:
+    subsections:
     - [0x37A3F0, c]
     - [0x37acf0, bin]
   - [0x37ADD0, bin]
   - type: code
     start: 0x37C540
     vram: 0xE007A000
-    files:
+    subsections:
     - [0x37C540, c]
     - [0x37D140, bin]
   - type: code
     start: 0x37D490
     vram: 0xE007C000
-    files:
+    subsections:
     - [0x37D490, c]
     - [0x37D9A0, bin]
   - [0x37D9D0, bin]
   - type: code
     start: 0x37F720
     vram: 0xE007E000
-    files:
+    subsections:
     - [0x37F720, c]
     - [0x380350, bin]
   - [0x3803A0, bin]
   - type: code
     start: 0x3812C0
     vram: 0xE0080000
-    files:
+    subsections:
     - [0x3812C0, c]
     - [0x381d80, bin]
   - [0x381E00, bin]
   - type: code
     start: 0x385640
     vram: 0xE0082000
-    files:
+    subsections:
     - [0x385640, c]
     - [0x386340, bin]
   - [0x3863B0, bin]
   - type: code
     start: 0x3889D0
     vram: 0xE0084000
-    files:
+    subsections:
     - [0x3889D0, c]
     - [0x3897e0, bin]
   - type: code
     start: 0x389850
     vram: 0xE0086000
-    files:
+    subsections:
     - [0x389850, c]
     - [0x38a2f0, bin]
   - [0x38A350, bin]
   - type: code
     start: 0x38ADF0
     vram: 0xE0088000
-    files:
+    subsections:
     - [0x38ADF0, c]
     - [0x38bab0, bin]
   - [0x38BBA0, bin]
   - type: code
     start: 0x38C5F0
     vram: 0xE008A000
-    files:
+    subsections:
     - [0x38C5F0, c]
     - [0x38D040, bin]
   - type: code
     start: 0x38DE00
     vram: 0xE008C000
-    files:
+    subsections:
     - [0x38DE00, c]
     - [0x38E8F0, bin]
   - type: code
     start: 0x38EE60
     vram: 0xE008E000
-    files:
+    subsections:
     - [0x38EE60, c]
     - [0x38f6f0, bin]
   - [0x38F710, bin]
   - type: code
     start: 0x38F900
     vram: 0xE0090000
-    files:
+    subsections:
     - [0x38F900, c]
     - [0x390340, bin]
   - [0x3903D0, bin]
@@ -1004,292 +1039,292 @@ segments:
   - type: code
     start: 0x391D30
     vram: 0xE0092000
-    files:
+    subsections:
     - [0x391D30, c]
     - [0x3923c0, bin]
   - [0x392440, bin]
   - type: code
     start: 0x3928D0
     vram: 0xE0094000
-    files:
+    subsections:
     - [0x3928D0, c]
     - [0x393080, bin]
   - [0x3930A0, bin]
   - type: code
     start: 0x394280
     vram: 0xE0096000
-    files:
+    subsections:
     - [0x394280, c]
   - [0x394660, bin] # data/rodata for the above, and some extra unknown data.
   - type: code
     start: 0x395BB0
     vram: 0xE0098000
-    files:
+    subsections:
     - [0x395BB0, c]
     - [0x3960C0, bin]
   - type: code
     start: 0x3965B0
     vram: 0xE009A000
-    files:
+    subsections:
     - [0x3965B0, c]
     - [0x397010, bin]
   - type: code
     start: 0x3981F0
     vram: 0xE009C000
-    files:
+    subsections:
     - [0x3981F0, c]
   - [0x398bc0, bin] # data/rodata for the above, and some extra unknown data.
   - type: code
     start: 0x39FF20
     vram: 0xE009E000
-    files:
+    subsections:
     - [0x39FF20, c]
     - [0x3A0D10, bin]
   - type: code
     start: 0x3A2290
     vram: 0xE00A0000
-    files:
+    subsections:
     - [0x3A2290, c]
   - [0x3a2440, bin] # data/rodata for the above, and some extra unknown data.
   - type: code
     start: 0x3A2990
     vram: 0xE00A2000
-    files:
+    subsections:
     - [0x3A2990, c]
     - [0x3A3360, bin]
   - type: code
     start: 0x3A37E0
     vram: 0xE00A4000
-    files:
+    subsections:
     - [0x3A37E0, c]
     - [0x3a42b0, bin]
   - [0x3A4320, bin]
   - type: code
     start: 0x3A5550
     vram: 0xE00A6000
-    files:
+    subsections:
     - [0x3A5550, c]
     - [0x3A5BE0, bin]
   - type: code
     start: 0x3A70F0
     vram: 0xE00A8000
-    files:
+    subsections:
     - [0x3A70F0, c]
     - [0x3A7710, bin]
   - [0x3A77A0, bin] # split further
   - type: code
     start: 0x3AA920
     vram: 0xE00AA000
-    files:
+    subsections:
     - [0x3AA920, c]
     - [0x3AAFE0, bin]
   - [0x3AB030, bin] # todo split this further
   - type: code
     start: 0x3AEE20
     vram: 0xE00AC000
-    files:
+    subsections:
     - [0x3AEE20, c]
     - [0x3AF5D0, bin]
   - [0x3AF700, bin] # todo split this further
   - type: code
     start: 0x3B2350
     vram: 0xE00AE000
-    files:
+    subsections:
     - [0x3B2350, c]
   - [0x3B2D90, bin] # todo split this further
   - type: code
     start: 0x3B3EB0
     vram: 0xE00B0000
-    files:
+    subsections:
     - [0x3B3EB0, c]
     - [0x3B4690, bin]
   - [0x3B46A0, bin] # todo split this further
   - type: code
     start: 0x3B4790
     vram: 0xE00B2000
-    files:
+    subsections:
     - [0x3B4790, c]
     - [0x3B5330, bin]
   - type: code
     start: 0x3B5CF0
     vram: 0xE00B4000
-    files:
+    subsections:
     - [0x3B5CF0, c]
     - [0x3B69E0, bin]
   - type: code
     start: 0x3B7160
     vram: 0xE00B6000
-    files:
+    subsections:
     - [0x3B7160, c]
     - [0x3B78B0, bin]
   - type: code
     start: 0x3B7B80
     vram: 0xE00B8000
-    files:
+    subsections:
     - [0x3B7B80, c]
     - [0x3B8470, bin]
   - [0x3B8860, bin] # todo split this further
   - type: code
     start: 0x3B8BD0
     vram: 0xE00BA000
-    files:
+    subsections:
     - [0x3B8BD0, c]
     - [0x3B9A50, bin]
   - type: code
     start: 0x3BA030
     vram: 0xE00BC000
-    files:
+    subsections:
     - [0x3BA030, c]
     - [0x3BAC60, bin]
   - [0x3BAEA0, bin] # todo split this further ADD STUFF AFTER HERE
   - type: code
     start: 0x3BBF60
     vram: 0xE00BE000
-    files:
+    subsections:
     - [0x3BBF60, c]
     - [0x3BCA50, bin]
   - type: code
     start: 0x3BCD60
     vram: 0xE00C0000
-    files:
+    subsections:
     - [0x3BCD60, c]
     - [0x3BD770, bin]
   - type: code
     start: 0x3C11D0
     vram: 0xE00C2000
-    files:
+    subsections:
     - [0x3C11D0, c]
     - [0x3C1B60, bin]
   - type: code
     start: 0x3CADF0
     vram: 0xE00C4000
-    files:
+    subsections:
     - [0x3CADF0, c]
     - [0x3CB7C0, bin]
   - type: code
     start: 0x3CC9E0
     vram: 0xE00C6000
-    files:
+    subsections:
     - [0x3CC9E0, c]
     - [0x3CD670, bin]
   - type: code
     start: 0x3CF3A0
     vram: 0xE00C8000
-    files:
+    subsections:
     - [0x3CF3A0, c]
     - [0x3CFAB0, bin]
   - type: code
     start: 0x3D0500
     vram: 0xE00CA000
-    files:
+    subsections:
     - [0x3D0500, c]
     - [0x3D11B0, bin]
   - type: code
     start: 0x3D1690
     vram: 0xE00CC000
-    files:
+    subsections:
     - [0x3D1690, c]
     - [0x3D2460, bin]
   - type: code
     start: 0x3D2AC0
     vram: 0xE00CE000
-    files:
+    subsections:
     - [0x3D2AC0, c]
     - [0x3D3910, bin]
   - type: code
     start: 0x3D3E20
     vram: 0xE00D0000
-    files:
+    subsections:
     - [0x3D3E20, c]
     - [0x3D4930, bin]
   - type: code
     start: 0x3D4970
     vram: 0xE00D2000
-    files:
+    subsections:
     - [0x3D4970, c]
     - [0x3D4E70, bin]
   - type: code
     start: 0x3D5020
     vram: 0xE00D6000
-    files:
+    subsections:
     - [0x3D5020, c]
     - [0x3D5E60, bin]
   - type: code
     start: 0x3D67C0
     vram: 0xE00D8000
-    files:
+    subsections:
     - [0x3D67C0, c]
     - [0x3D6FA0, bin]
   - type: code
     start: 0x3D7240
     vram: 0xE00DA000
-    files:
+    subsections:
     - [0x3D7240, c]
     - [0x3D7740, bin]
   - type: code
     start: 0x3D7A70
     vram: 0xE00DC000
-    files:
+    subsections:
     - [0x3D7A70, c]
     - [0x3D80B0, bin]
   - type: code
     start: 0x3D8720
     vram: 0xE00DE000
-    files:
+    subsections:
     - [0x3D8720, c]
     - [0x3D8F30, bin]
   - type: code
     start: 0x3DB460
     vram: 0xE00E0000
-    files:
+    subsections:
     - [0x3DB460, c]
     - [0x3DBEA0, bin]
   - type: code
     start: 0x3DC310
     vram: 0xE00E2000
-    files:
+    subsections:
     - [0x3DC310, c]
     - [0x3DCD00, bin]
   - type: code
     start: 0x3DE000
     vram: 0xE00E4000
-    files:
+    subsections:
     - [0x3DE000, c]
     - [0x3DED90, bin]
   - type: code
     start: 0x3E0930
     vram: 0xE00E6000
-    files:
+    subsections:
     - [0x3E0930, c]
     - [0x3E11B0, bin]
   - type: code
     start: 0x3E1690
     vram: 0xE00E8000
-    files:
+    subsections:
     - [0x3E1690, c]
     - [0x3E1CC0, bin]
   - type: code
     start: 0x3E1EE0
     vram: 0xE00EA000
-    files:
+    subsections:
     - [0x3E1EE0, c]
     - [0x3E2930, bin]
   - type: code
     start: 0x3E43A0
     vram: 0xE010A000
-    files:
+    subsections:
     - [0x3E43A0, c]
     - [0x3E5060, bin]
   - type: code
     start: 0x3E54C0
     vram: 0xE010C000
-    files:
+    subsections:
     - [0x3E54C0, c]
     - [0x3E5ED0, bin]
   - type: code
     start: 0x3EB4E0
     vram: 0xE010E000
-    files:
+    subsections:
     - [0x3EB4E0, c]
     - [0x3EBC30, bin]
   - [0x3ED4E0, ia8, world/text_chapter, 128, 38]
@@ -1297,246 +1332,246 @@ segments:
   - type: code
     start: 0x3F83F0
     vram: 0xE0110000
-    files:
+    subsections:
     - [0x3F83F0, c]
     - [0x3F8CA0, bin]
   - type: code
     start: 0x3F9E50
     vram: 0xE0112000
-    files:
+    subsections:
     - [0x3F9E50, c]
     - [0x3FA480, bin]
   - type: code
     start: 0x3FEAE0
     vram: 0xE0114000
-    files:
+    subsections:
     - [0x3FEAE0, c]
     - [0x3FF180, bin]
   - type: code
     start: 0x402640
     vram: 0xE0116000
-    files:
+    subsections:
     - [0x402640, c]
     - [0x4032A0, bin]
   - type: code
     start: 0x403400
     vram: 0xE0118000
-    files:
+    subsections:
     - [0x403400, c]
     - [0x403BB0, bin]
   - type: code
     start: 0x404220
     vram: 0xE011A000
-    files:
+    subsections:
     - [0x404220, c]
     - [0x404E40, bin]
   - type: code
     start: 0x406B40
     vram: 0xE011C000
-    files:
+    subsections:
     - [0x406B40, c]
     - [0x407040, bin]
   - type: code
     start: 0x409990
     vram: 0xE011E000
-    files:
+    subsections:
     - [0x409990, c]
     - [0x40A180, bin]
   - type: code
     start: 0x40B3F0
     vram: 0xE0120000
-    files:
+    subsections:
     - [0x40B3F0, c]
     - [0x40BB70, bin]
   - type: code
     start: 0x40C5A0
     vram: 0xE0122000
-    files:
+    subsections:
     - [0x40C5A0, c]
     - [0x40D130, bin]
   - type: code
     start: 0x412730
     vram: 0xE0124000
-    files:
+    subsections:
     - [0x412730, c]
     - [0x412FD0, bin]
   - type: code
     start: 0x413360
     vram: 0xE0126000
-    files:
+    subsections:
     - [0x413360, c]
     - [0x413F20, bin]
   - type: code
     start: 0x414BA0
     vram: 0xE0128000
-    files:
+    subsections:
     - [0x414BA0, c]
     - [0x415020, bin]
   - type: code
     start: 0x415D90
     vram: 0x802A1000
-    files:
+    subsections:
     - [0x415D90, c]
     - [0x4200D0, bin]
   - type: code
     start: 0x4219F0
     vram: 0x802A9000
     overlay: True
-    files:
+    subsections:
     - [0x4219F0, c]
     - [0x421FC0, rodata]
   - type: code
     start: 0x422000
     vram: 0x802A9000
     overlay: True
-    files:
+    subsections:
     - [0x422000, c]
     - [0x422A90, bin]
   - type: code
     start: 0x422AD0
     vram: 0x802A9000
     overlay: True
-    files:
+    subsections:
     - [0x422AD0, c]
     - [0x4233B0, bin]
   - type: code
     start: 0x4233F0
     vram: 0x802A9000
     overlay: True
-    files:
+    subsections:
     - [0x4233F0, c]
     - [0x423C30, bin]
   - type: code
     start: 0x423C70
     vram: 0x802A9000
     overlay: True
-    files:
+    subsections:
     - [0x423C70, c]
     - [0x424550, bin]
   - type: code
     start: 0x425590
     vram: 0x802A9000
     overlay: True
-    files:
+    subsections:
     - [0x425590, c]
     - [0x425B10, bin]
   - type: code
     start: 0x425B50
     vram: 0x802A9000
     overlay: True
-    files:
+    subsections:
     - [0x425B50, c]
     - [0x426130, bin]
   - type: code
     start: 0x426170
     vram: 0x802A9000
     overlay: True
-    files:
+    subsections:
     - [0x426170, c]
     - [0x426970, bin]
   - type: code
     start: 0x4269D0
     vram: 0x802A9000
     overlay: True
-    files:
+    subsections:
     - [0x4269D0, c]
     - [0x427320, bin]
   - type: code
     start: 0x4273B0
     vram: 0x802A9000
     overlay: True
-    files:
+    subsections:
     - [0x4273B0, c]
     - [0x427A30, bin]
   - type: code
     start: 0x427A70
     vram: 0x802A9000
     overlay: True
-    files:
+    subsections:
     - [0x427A70, c]
     - [0x428280, bin]
   - type: code
     start: 0x4282E0
     vram: 0x802A9000
     overlay: True
-    files:
+    subsections:
     - [0x4282E0, c]
     - [0x428A30, bin]
   - type: code
     start: 0x428A70
     vram: 0x802A9000
     overlay: True
-    files:
+    subsections:
     - [0x428A70, c]
     - [0x4292C0, bin]
   - type: code
     start: 0x429320
     vram: 0x802A9000
     overlay: True
-    files:
+    subsections:
     - [0x429320, c]
     - [0x429C90, bin]
   - type: code
     start: 0x429D20
     vram: 0x802A9000
     overlay: True
-    files:
+    subsections:
     - [0x429D20, c]
     - [0x42A480, bin]
   - type: code
     start: 0x42A4F0
     vram: 0x802A9000
     overlay: True
-    files:
+    subsections:
     - [0x42A4F0, c]
     - [0x42B650, bin]
   - type: code
     start: 0x42C6F0
     vram: 0x802A9000
     overlay: True
-    files:
+    subsections:
     - [0x42C6F0, c]
     - [0x42CEB0, bin]
   - type: code
     start: 0x42CF10
     vram: 0x802A9000
     overlay: True
-    files:
+    subsections:
     - [0x42CF10, c]
     - [0x42D9B0, bin]
   - type: code
     start: 0x42DA10
     vram: 0x802A9000
     overlay: True
-    files:
+    subsections:
     - [0x42DA10, c]
     - [0x42E330, bin]
   - type: code
     start: 0x42E3A0
     vram: 0x802A9000
     overlay: True
-    files:
+    subsections:
     - [0x42E3A0, c]
     - [0x42ED70, bin]
   - type: code
     start: 0x42EE20
     vram: 0x802A9000
     overlay: True
-    files:
+    subsections:
     - [0x42EE20, c]
     - [0x42F680, bin]
   - type: code
     start: 0x42F6E0
     vram: 0x802A9000
     overlay: True
-    files:
+    subsections:
     - [0x42F6E0, c]
     - [0x42FFC0, bin]
   - type: code
     start: 0x430020
     vram: 0x802A9000
     overlay: True
-    files:
+    subsections:
     - [0x430020, c]
     - [0x430940, bin]
   - name: battle/area_kmr_part_1/
@@ -1544,23 +1579,23 @@ segments:
     start: 0x4309A0
     vram: 0x80218000
     overlay: True
-    files:
+    subsections:
     - [0x4309A0, c]
     - [0x431180, c]
     - [0x4313F0, c]
     - [0x431660, c]
     - [0x4318D0, c]
-    - [0x431B80, .data, battle/area_kmr_part_1/battles]
-    - [0x431FB0, .data, battle/actor/goomba]
+    - [0x431B80, .data, battles]
+    - [0x431FB0, .data, goomba]
     - [0x433970, bin]
-    - [0x4398A0, .rodata, battle/area_kmr_part_1/battles]
+    - [0x4398A0, .rodata, battles]
     - [0x439984, bin]
   - name: battle/area_kmr_part_2/
     type: code
     start: 0x439A90
     vram: 0x80218000
     overlay: True
-    files:
+    subsections:
     - [0x439A90, c]
     - [0x43A5A0, c]
     - [0x43A7E0, c]
@@ -1573,7 +1608,7 @@ segments:
     start: 0x447440
     vram: 0x80218000
     overlay: True
-    files:
+    subsections:
     - [0x447440, c]
     - [0x4479A0, c]
     - [0x447C80, c]
@@ -1590,7 +1625,7 @@ segments:
     start: 0x464490
     vram: 0x80218000
     overlay: True
-    files:
+    subsections:
     - [0x464490, c]
     - [0x464560, c]
     - [0x465D90, c]
@@ -1600,7 +1635,7 @@ segments:
     start: 0x47F0B0
     vram: 0x80218000
     overlay: True
-    files:
+    subsections:
     - [0x47F0B0, c]
     - [0x47F0D0, c]
     - [0x47F570, c]
@@ -1610,7 +1645,7 @@ segments:
     start: 0x48D1A0
     vram: 0x80218000
     overlay: True
-    files:
+    subsections:
     - [0x48D1A0, c]
     - [0x48D700, c]
     - [0x48DA50, c]
@@ -1622,7 +1657,7 @@ segments:
     start: 0x4A10A0
     vram: 0x80218000
     overlay: True
-    files:
+    subsections:
     - [0x4A10A0, c]
     - [0x4A1190, c]
     - [0x4A12C0, c]
@@ -1632,7 +1667,7 @@ segments:
     start: 0x4B11F0
     vram: 0x80218000
     overlay: True
-    files:
+    subsections:
     - [0x4B11F0, c]
     - [0x4B15D0, c]
     - [0x4B1D90, c]
@@ -1645,7 +1680,7 @@ segments:
     start: 0x4CF1B0
     vram: 0x80218000
     overlay: True
-    files:
+    subsections:
     - [0x4CF1B0, c]
     - [0x4CF3D0, bin]
   - name: battle/area_iwa/
@@ -1653,7 +1688,7 @@ segments:
     start: 0x4D01F0
     vram: 0x80218000
     overlay: True
-    files:
+    subsections:
     - [0x4D01F0, c]
     - [0x4D02B0, c]
     - [0x4D0310, c]
@@ -1665,7 +1700,7 @@ segments:
     start: 0x4DA5E0
     vram: 0x80218000
     overlay: True
-    files:
+    subsections:
     - [0x4DA5E0, c]
     - [0x4DA6B0, c]
     - [0x4DA860, bin] # data
@@ -1675,7 +1710,7 @@ segments:
     start: 0x4E2740
     vram: 0x80218000
     overlay: True
-    files:
+    subsections:
     - [0x4E2740, c]
     - [0x4E2810, c]
     - [0x4E28E0, c]
@@ -1688,7 +1723,7 @@ segments:
     start: 0x4EF4A0
     vram: 0x80218000
     overlay: True
-    files:
+    subsections:
     - [0x4EF4A0, c]
     - [0x4EFCF0, c]
     - [0x4EFDC0, c]
@@ -1699,7 +1734,7 @@ segments:
     start: 0x4F7BE0
     vram: 0x80218000
     overlay: True
-    files:
+    subsections:
     - [0x4F7BE0, c]
     - [0x4F7D50, c]
     - [0x4F7F40, c]
@@ -1709,7 +1744,7 @@ segments:
     start: 0x4FEA50
     vram: 0x80218000
     overlay: True
-    files:
+    subsections:
     - [0x4FEA50, c]
     - [0x4FED30, c]
     - [0x4FF010, c]
@@ -1720,14 +1755,14 @@ segments:
     start: 0x50F020
     vram: 0x80218000
     overlay: True
-    files:
+    subsections:
     - [0x50F020, bin]
   - name: battle/area_omo/
     type: code
     start: 0x5125D0
     vram: 0x80218000
     overlay: True
-    files:
+    subsections:
     - [0x5125D0, c]
     - [0x5126A0, c]
     - [0x512770, c]
@@ -1747,7 +1782,7 @@ segments:
     start: 0x52B6A0
     vram: 0x80218000
     overlay: True
-    files:
+    subsections:
     - [0x52B6A0, c]
     - [0x52B7C0, c]
     - [0x52B9D0, bin]
@@ -1756,7 +1791,7 @@ segments:
     start: 0x543570
     vram: 0x80231000
     overlay: True
-    files:
+    subsections:
     - [0x543570, c]
     - [0x543620, bin]
   - name: battle/area_omo2_2/
@@ -1764,7 +1799,7 @@ segments:
     start: 0x5483E0
     vram: 0x80231000
     overlay: True
-    files:
+    subsections:
     - [0x5483E0, c]
     - [0x548500, bin]
   - name: battle/area_omo2_3/
@@ -1772,7 +1807,7 @@ segments:
     start: 0x54CC70
     vram: 0x80231000
     overlay: True
-    files:
+    subsections:
     - [0x54CC70, c]
     - [0x54CCA0, bin]
   - name: battle/area_omo2_4/
@@ -1780,28 +1815,28 @@ segments:
     start: 0x552440
     vram: 0x80231000
     overlay: True
-    files:
+    subsections:
     - [0x552440, bin]
   - name: battle/area_omo2_5/
     type: code
     start: 0x552BB0
     vram: 0x80231000
     overlay: True
-    files:
+    subsections:
     - [0x552BB0, bin]
   - name: battle/area_omo2_6/
     type: code
     start: 0x556C90
     vram: 0x80231000
     overlay: True
-    files:
+    subsections:
     - [0x556C90, bin]
   - name: battle/area_omo3/
     type: code
     start: 0x5573E0
     vram: 0x80218000
     overlay: True
-    files:
+    subsections:
     - [0x5573E0, c]
     - [0x557A80, c]
     - [0x557AD0, c]
@@ -1814,7 +1849,7 @@ segments:
     start: 0x56E2A0
     vram: 0x80218000
     overlay: True
-    files:
+    subsections:
     - [0x56E2A0, c]
     - [0x56E800, c]
     - [0x56EC50, bin]
@@ -1823,7 +1858,7 @@ segments:
     start: 0x573920
     vram: 0x80218000
     overlay: True
-    files:
+    subsections:
     - [0x573920, c]
     - [0x5739F0, c]
     - [0x573AC0, c]
@@ -1835,7 +1870,7 @@ segments:
     start: 0x584940
     vram: 0x80218000
     overlay: True
-    files:
+    subsections:
     - [0x584940, c]
     - [0x584B90, c]
     - [0x585000, bin]
@@ -1844,7 +1879,7 @@ segments:
     start: 0x58C2F0
     vram: 0x80218000
     overlay: True
-    files:
+    subsections:
     - [0x58C2F0, c]
     - [0x58C670, c]
     - [0x58C740, c]
@@ -1856,7 +1891,7 @@ segments:
     start: 0x59E6E0
     vram: 0x80218000
     overlay: True
-    files:
+    subsections:
     - [0x59E6E0, c]
     - [0x59F420, c]
     - [0x59F4D0, c]
@@ -1866,7 +1901,7 @@ segments:
     start: 0x5B14B0
     vram: 0x80218000
     overlay: True
-    files:
+    subsections:
     - [0x5B14B0, c]
     - [0x5B16A0, c]
     - [0x5B1A10, c]
@@ -1879,7 +1914,7 @@ segments:
     start: 0x5CE690
     vram: 0x80218000
     overlay: True
-    files:
+    subsections:
     - [0x5CE690, c]
     - [0x5CF2D0, c]
     - [0x5CFF00, bin]
@@ -1888,7 +1923,7 @@ segments:
     start: 0x5EC490
     vram: 0x80218000
     overlay: True
-    files:
+    subsections:
     - [0x5EC490, c]
     - [0x5EC560, c]
     - [0x5EC690, c]
@@ -1904,7 +1939,7 @@ segments:
     start: 0x608AB0
     vram: 0x80218000
     overlay: True
-    files:
+    subsections:
     - [0x608AB0, c]
     - [0x608CB0, c]
     - [0x609B30, c]
@@ -1916,7 +1951,7 @@ segments:
     start: 0x6186F0
     vram: 0x80218000
     overlay: True
-    files:
+    subsections:
     - [0x6186F0, c]
     - [0x6187C0, c]
     - [0x618A00, c]
@@ -1929,7 +1964,7 @@ segments:
     start: 0x623BA0
     vram: 0x80218000
     overlay: True
-    files:
+    subsections:
     - [0x623BA0, c]
     - [0x6253E0, c]
     - [0x625750, c]
@@ -1939,7 +1974,7 @@ segments:
     start: 0x63D1E0
     vram: 0x80218000
     overlay: True
-    files:
+    subsections:
     - [0x63D1E0, c]
     - [0x63D710, c]
     - [0x63D9F0, c]
@@ -1950,7 +1985,7 @@ segments:
     start: 0x648E10
     vram: 0x80218000
     overlay: True
-    files:
+    subsections:
     - [0x648E10, c]
     - [0x649050, c]
     - [0x649480, c]
@@ -1963,7 +1998,7 @@ segments:
     start: 0x660750
     vram: 0x80218000
     overlay: True
-    files:
+    subsections:
     - [0x660750, c]
     - [0x660D20, c]
     - [0x660E10, c]
@@ -1973,7 +2008,7 @@ segments:
     start: 0x669D80
     vram: 0x80218000
     overlay: True
-    files:
+    subsections:
     - [0x669D80, c]
     - [0x66B5B0, c]
     - [0x66B920, c]
@@ -1983,7 +2018,7 @@ segments:
     start: 0x684A30
     vram: 0x80218000
     overlay: True
-    files:
+    subsections:
     - [0x684A30, c]
     - [0x684B00, c]
     - [0x684C30, c]
@@ -1994,7 +2029,7 @@ segments:
     start: 0x69F200
     vram: 0x80218000
     overlay: True
-    files:
+    subsections:
     - [0x69F200, c]
     - [0x69F320, c]
     - [0x6A2B50, c]
@@ -2004,7 +2039,7 @@ segments:
     start: 0x6BBB90
     vram: 0x80218000
     overlay: True
-    files:
+    subsections:
     - [0x6BBB90, c]
     - [0x6BBC60, c]
     - [0x6BD250, bin]
@@ -2013,7 +2048,7 @@ segments:
     start: 0x6CC070
     vram: 0x80218000
     overlay: True
-    files:
+    subsections:
     - [0x6CC070, c]
     - [0x6CC1C0, c]
     - [0x6CC6C0, bin]
@@ -2022,7 +2057,7 @@ segments:
     start: 0x6DBDA0
     vram: 0x80218000
     overlay: True
-    files:
+    subsections:
     - [0x6DBDA0, c]
     - [0x6DC2F0, c]
     - [0x6DC340, bin]
@@ -2031,11 +2066,11 @@ segments:
     start: 0x6DDDC0
     vram: 0x80218000
     overlay: True
-    files:
+    subsections:
     - [0x6DDDC0, c]
     - [0x6DDE90, c]
     - [0x6DE000, c]
-    - [0x6DE060, c]
+    - [0x6DE0D0, c]
     - [0x6DE1A0, c]
     - [0x6DE1F0, c]
     - [0x6DE3A0, c]
@@ -2043,625 +2078,716 @@ segments:
     - [0x6DE4A0, c]
     - [0x6DE650, c]
     - [0x6DE670, bin]
-  - type: code
+  - name: battle/partner/goompa
+    type: code
     start: 0x6F0B30
     vram: 0x80238000
     overlay: True
-    files:
-    - [0x6F0B30, bin]
-  - type: code
+    subsections:
+    - [0x6F0B30, data]
+  - name: battle/partner/goombario
+    type: code
     start: 0x6F10E0
     vram: 0x80238000
     overlay: True
-    files:
+    subsections:
     - [0x6F10E0, c]
-    - [0x6F2290, bin]
-  - type: code
+    - [0x6F2290, data]
+  - name: battle/partner/kooper
+    type: code
     start: 0x6F5E80
     vram: 0x80238000
     overlay: True
-    files:
+    subsections:
     - [0x6F5E80, c]
-    - [0x6F62B0, bin]
-  - type: code
+    - [0x6F62B0, data]
+  - name: battle/partner/bombette
+    type: code
     start: 0x6FAD10
     vram: 0x80238000
     overlay: True
-    files:
+    subsections:
     - [0x6FAD10, c]
-    - [0x6FB350, bin]
-  - type: code
+    - [0x6FB350, data]
+  - name: battle/partner/parakarry
+    type: code
     start: 0x6FFD80
     vram: 0x80238000
     overlay: True
-    files:
+    subsections:
     - [0x6FFD80, c]
-    - [0x701590, bin]
-  - type: code
+    - [0x701590, data]
+  - name: battle/partner/watt
+    type: code
     start: 0x703AF0
     vram: 0x80238000
     overlay: True
-    files:
+    subsections:
     - [0x703AF0, c]
-    - [0x704A70, bin]
-  - type: code
+    - [0x704A70, data]
+  - name: battle/partner/sushie
+    type: code
     start: 0x707CA0
     vram: 0x80238000
     overlay: True
-    files:
+    subsections:
     - [0x707CA0, c]
-    - [0x708B70, bin]
-  - type: code
+    - [0x708B70, data]
+  - name: battle/partner/lakilester
+    type: code
     start: 0x70BD10
     vram: 0x80238000
     overlay: True
-    files:
+    subsections:
     - [0x70BD10, c]
-    - [0x70DED0, bin]
-  - type: code
+    - [0x70DED0, data]
+  - name: battle/partner/bow
+    type: code
     start: 0x710EF0
     vram: 0x80238000
     overlay: True
-    files:
+    subsections:
     - [0x710EF0, c]
-    - [0x7111F0, bin]
-  - type: code
+    - [0x7111F0, data]
+  - name: battle/partner/twink
+    type: code
     start: 0x714CF0
     vram: 0x80238000
     overlay: True
-    files:
+    subsections:
     - [0x714CF0, c]
-    - [0x714DC0, bin]
-  - type: code
+    - [0x714DC0, data]
+  - name: battle/item/mushroom
+    type: code
     start: 0x715850
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x715850, c]
-    - [0x715E50, bin]
-  - type: code
+    - [0x715E50, data]
+  - name: battle/item/fire_flower
+    type: code
     start: 0x716C60
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x716C60, c]
-    - [0x717060, bin]
-  - type: code
+    - [0x717060, data]
+  - name: battle/item/dusty_hammer
+    type: code
     start: 0x7179D0
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x7179D0, c]
-    - [0x717C10, bin]
-  - type: code
+    - [0x717C10, data]
+  - name: battle/item/pow_block
+    type: code
     start: 0x718850
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x718850, c]
-    - [0x718BF0, bin]
-  - type: code
+    - [0x718BF0, data]
+  - name: battle/item/pebble
+    type: code
     start: 0x719970
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x719970, c]
-    - [0x719BB0, bin]
-  - type: code
+    - [0x719BB0, data]
+  - name: battle/item/volt_shroom
+    type: code
     start: 0x71A7F0
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x71A7F0, c]
-    - [0x71AA70, bin]
-  - type: code
+    - [0x71AA70, data]
+  - name: battle/item/thunder_rage
+    type: code
     start: 0x71B1A0
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x71B1A0, c]
-    - [0x71B640, bin]
-  - type: code
+    - [0x71B640, data]
+  - name: battle/item/snowman_doll
+    type: code
     start: 0x71BE30
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x71BE30, c]
-    - [0x71C270, bin]
-  - type: code
+    - [0x71C270, data]
+  - name: battle/item/dried_shroom
+    type: code
     start: 0x71CCE0
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x71CCE0, c]
-    - [0x71D010, bin]
-  - type: code
+    - [0x71D010, data]
+  - name: battle/item/shooting_star
+    type: code
     start: 0x71D770
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x71D770, c]
-    - [0x71DCC0, bin]
-  - type: code
+    - [0x71DCC0, data]
+  - name: battle/item/sleepy_sheep
+    type: code
     start: 0x71E650
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x71E650, c]
-    - [0x71EFC0, bin]
-  - type: code
+    - [0x71EFC0, data]
+  - name: battle/item/stone_cap
+    type: code
     start: 0x7215A0
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x7215A0, c]
-    - [0x721970, bin]
-  - type: code
+    - [0x721970, data]
+  - name: battle/item/tasty_tonic
+    type: code
     start: 0x722000
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x722000, c]
-    - [0x7222D0, bin]
-  - type: code
+    - [0x7222D0, data]
+  - name: battle/item/thunder_bolt
+    type: code
     start: 0x722B40
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x722B40, c]
-    - [0x722FE0, bin]
-  - type: code
+    - [0x722FE0, data]
+  - name: battle/item/ultra_shroom
+    type: code
     start: 0x723780
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x723780, c]
-    - [0x723AB0, bin]
-  - type: code
+    - [0x723AB0, data]
+  - name: battle/item/unknown_item
+    type: code
     start: 0x724240
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x724240, c]
-    - [0x724570, bin]
-  - type: code
+    - [0x724570, data]
+  - name: battle/item/super_soda
+    type: code
     start: 0x724CE0
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x724CE0, c]
-    - [0x725210, bin]
-  - type: code
+    - [0x725210, data]
+  - name: battle/item/hustle_drink
+    type: code
     start: 0x725F60
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x725F60, c]
-    - [0x726240, bin]
-  - type: code
+    - [0x726240, data]
+  - name: battle/item/stop_watch
+    type: code
     start: 0x726DD0
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x726DD0, c]
-    - [0x727120, bin]
-  - type: code
+    - [0x727120, data]
+  - name: battle/item/dizzy_dial
+    type: code
     start: 0x727910
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x727910, c]
-    - [0x727CE0, bin]
-  - type: code
+    - [0x727CE0, data]
+  - name: battle/item/please_come_back
+    type: code
     start: 0x7285E0
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x7285E0, c]
-    - [0x728820, bin]
-  - type: code
+    - [0x728820, data]
+  - name: battle/item/egg_missile
+    type: code
     start: 0x728EC0
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x728EC0, c]
-    - [0x7291D0, bin]
-  - type: code
+    - [0x7291D0, data]
+  - name: battle/item/insecticide_herb
+    type: code
     start: 0x72A750
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x72A750, c]
-    - [0x72AB70, bin]
-  - type: code
+    - [0x72AB70, data]
+  - name: battle/item/fright_jar
+    type: code
     start: 0x72B910
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x72B910, c]
-    - [0x72BC60, bin]
-  - type: code
+    - [0x72BC60, data]
+  - name: battle/item/mystery
+    type: code
     start: 0x72C5B0
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x72C5B0, c]
-    - [0x72CF00, bin]
-  - type: code
+    - [0x72CF00, data]
+  - name: battle/item/repel_gel
+    type: code
     start: 0x72DB70
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x72DB70, c]
-    - [0x72DE00, bin]
-  - type: code
+    - [0x72DE00, data]
+  - name: battle/item/life_shroom
+    type: code
     start: 0x72E530
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x72E530, c]
-    - [0x72EA20, bin]
-  - type: code
+    - [0x72EA20, data]
+  - name: battle/item/coconut/
+    ld_name: battle_item_coconut
+    type: code
     start: 0x72F720
     vram: 0x802A1000
     overlay: True
-    files:
-    - [0x72F720, c]
-    - [0x72F960, bin]
-  - type: code
+    subsections:
+    - [0x72F720, c,       lib]
+    - [0x72F960, .data,   lib]
+    - [0x72FF20, ci4,     coconut, 32, 32]
+    - [0x730120, palette, coconut]
+    - [0x730140, .data,   coconut]
+  - name: battle/item/electro_pop
+    type: code
     start: 0x7305A0
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x7305A0, c]
-    - [0x730AE0, bin]
-  - type: code
+    - [0x730AE0, data]
+  - name: battle/item/strange_cake
+    type: code
     start: 0x731300
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x731300, c]
-    - [0x731EA0, bin]
-  - type: code
+    - [0x731EA0, data]
+  - name: battle/item/food
+    type: code
     start: 0x7330D0
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x7330D0, c]
-    - [0x733700, bin]
-  - type: code
+    - [0x733700, data]
+  - name: battle/move/hammer
+    type: code
     start: 0x7345A0
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x7345A0, c]
-    - [0x734650, bin]
-  - type: code
+    - [0x734650, data]
+  - name: battle/move/spin_smash
+    type: code
     start: 0x737890
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x737890, c]
-    - [0x737A20, bin]
-  - type: code
+    - [0x737A20, data]
+  - name: battle/move/quake_hammer
+    type: code
     start: 0x73AED0
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x73AED0, c]
-    - [0x73AF70, bin]
-  - type: code
+    - [0x73AF70, data]
+  - name: battle/move/jump
+    type: code
     start: 0x73D860
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x73D860, c]
-    - [0x73D9A0, bin]
-  - type: code
+    - [0x73D9A0, data]
+  - name: battle/move/multibounce
+    type: code
     start: 0x740CC0
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x740CC0, c]
-    - [0x740DA0, bin]
-  - type: code
+    - [0x740DA0, data]
+  - name: battle/move/power_bounce
+    type: code
     start: 0x743DF0
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x743DF0, c]
-    - [0x743FE0, bin]
-  - type: code
+    - [0x743FE0, data]
+  - name: battle/move/sleep_stomp
+    type: code
     start: 0x746E10
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x746E10, c]
-    - [0x746EF0, bin]
-  - type: code
+    - [0x746EF0, data]
+  - name: battle/move/dizzy_stomp
+    type: code
     start: 0x748DD0
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x748DD0, c]
-    - [0x748EB0, bin]
-  - type: code
+    - [0x748EB0, data]
+  - name: battle/move/d_down_pound
+    type: code
     start: 0x74AD90
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x74AD90, c]
-    - [0x74AF40, bin]
-  - type: code
+    - [0x74AF40, data]
+  - name: battle/move/jump_charge_0
+    type: code
     start: 0x74D570
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x74D570, c]
-    - [0x74D850, bin]
-  - type: code
+    - [0x74D850, data]
+  - name: battle/move/hammer_charge_0
+    type: code
     start: 0x74F130
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x74F130, c]
-    - [0x74F3D0, bin]
-  - type: code
+    - [0x74F3D0, data]
+  - name: battle/move/hammer_throw
+    type: code
     start: 0x752450
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x752450, c]
-    - [0x7524F0, bin]
-  - type: code
+    - [0x7524F0, data]
+  - name: battle/move/mega_quake
+    type: code
     start: 0x756780
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x756780, c]
-    - [0x756900, bin]
-  - type: code
+    - [0x756900, data]
+  - name: battle/move/hammer_charge_1
+    type: code
     start: 0x7595B0
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x7595B0, c]
-    - [0x7598D0, bin]
-  - type: code
+    - [0x7598D0, data]
+  - name: battle/move/jump_charge_1
+    type: code
     start: 0x75C980
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x75C980, c]
-    - [0x75CCE0, bin]
-  - type: code
+    - [0x75CCE0, data]
+  - name: battle/move/hammer_charge_2
+    type: code
     start: 0x75E5D0
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x75E5D0, c]
-    - [0x75E8F0, bin]
-  - type: code
+    - [0x75E8F0, data]
+  - name: battle/move/jump_charge_2
+    type: code
     start: 0x761920
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x761920, c]
-    - [0x761C80, bin]
-  - type: code
+    - [0x761C80, data]
+  - name: battle/move/auto_smash
+    type: code
     start: 0x763540
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x763540, c]
-    - [0x7635E0, bin]
-  - type: code
+    - [0x7635E0, data]
+  - name: battle/move/auto_jump
+    type: code
     start: 0x765C20
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x765C20, c]
-    - [0x765D00, bin]
-  - type: code
+    - [0x765D00, data]
+  - name: battle/move/power_quake
+    type: code
     start: 0x767C90
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x767C90, c]
-    - [0x767D30, bin]
-  - type: code
+    - [0x767D30, data]
+  - name: battle/move/auto_multibounce
+    type: code
     start: 0x76A830
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x76A830, c]
-    - [0x76A910, bin]
-  - type: code
+    - [0x76A910, data]
+  - name: battle/move/power_jump
+    type: code
     start: 0x76D760
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x76D760, c]
-    - [0x76D840, bin]
-  - type: code
+    - [0x76D840, data]
+  - name: battle/move/super_jump
+    type: code
     start: 0x76F330
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x76F330, c]
-    - [0x76F410, bin]
-  - type: code
+    - [0x76F410, data]
+  - name: battle/move/mega_jump
+    type: code
     start: 0x770F30
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x770F30, c]
-    - [0x771010, bin]
-  - type: code
+    - [0x771010, data]
+  - name: battle/move/power_smash
+    type: code
     start: 0x772BA0
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x772BA0, c]
-    - [0x772C40, bin]
-  - type: code
+    - [0x772C40, data]
+  - name: battle/move/super_smash
+    type: code
     start: 0x775100
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x775100, c]
-    - [0x7751A0, bin]
-  - type: code
+    - [0x7751A0, data]
+  - name: battle/move/mega_smash
+    type: code
     start: 0x777690
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x777690, c]
-    - [0x777730, bin]
-  - type: code
+    - [0x777730, data]
+  - name: battle/move/unknown_move
+    type: code
     start: 0x779C90
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x779C90, c]
-    - [0x779E20, bin]
-  - type: code
+    - [0x779E20, data]
+  - name: battle/move/shrink_smash
+    type: code
     start: 0x77CB80
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x77CB80, c]
-    - [0x77CC20, bin]
-  - type: code
+    - [0x77CC20, data]
+  - name: battle/move/shell_crack
+    type: code
     start: 0x77F240
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x77F240, c]
-    - [0x77F3D0, bin]
-  - type: code
+    - [0x77F3D0, data]
+  - name: battle/move/d_down_jump
+    type: code
     start: 0x781920
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x781920, c]
-    - [0x781AF0, bin]
-  - type: code
+    - [0x781AF0, data]
+  - name: battle/move/shrink_stomp
+    type: code
     start: 0x783BA0
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x783BA0, c]
-    - [0x783C80, bin]
-  - type: code
+    - [0x783C80, data]
+  - name: battle/move/earthquake_jump
+    type: code
     start: 0x785B20
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x785B20, c]
-    - [0x785C10, bin]
-  - type: code
+    - [0x785C10, data]
+  - name: battle/star/focus
+    type: code
     start: 0x789E60
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x789E60, c]
-    - [0x78A480, bin]
-  - type: code
+    - [0x78A480, data]
+  - name: battle/star/refresh
+    type: code
     start: 0x78B600
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x78B600, c]
-    - [0x78C070, bin]
-  - type: code
+    - [0x78C070, data]
+  - name: battle/star/lullaby
+    type: code
     start: 0x78D150
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x78D150, c]
-    - [0x78D770, bin]
-  - type: code
+    - [0x78D770, data]
+  - name: battle/star/star_storm
+    type: code
     start: 0x78E7D0
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x78E7D0, c]
-    - [0x78EEB0, bin]
-  - type: code
+    - [0x78EEB0, data]
+  - name: battle/star/chill_out
+    type: code
     start: 0x7900D0
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x7900D0, c]
-    - [0x7909C0, bin]
-  - type: code
+    - [0x7909C0, data]
+  - name: battle/star/smooch
+    type: code
     start: 0x791D90
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x791D90, c]
-    - [0x7923C0, bin]
-  - type: code
+    - [0x7923C0, data]
+  - name: battle/star/time_out
+    type: code
     start: 0x793D20
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x793D20, c]
-    - [0x794240, bin]
-  - type: code
+    - [0x794240, data]
+  - name: battle/star/up_and_away
+    type: code
     start: 0x7952E0
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x7952E0, c]
-    - [0x7959B0, bin]
-  - type: code
+    - [0x7959B0, data]
+  - name: battle/star/star_beam
+    type: code
     start: 0x796FC0
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x796FC0, c]
-    - [0x7984B0, bin]
-  - type: code
+    - [0x7984B0, data]
+  - name: battle/star/peach_beam
+    type: code
     start: 0x7997B0
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x7997B0, c]
-    - [0x79ACA0, bin]
-  - type: code
+    - [0x79ACA0, data]
+  - name: battle/star/peach_focus
+    type: code
     start: 0x79BFA0
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x79BFA0, c]
-    - [0x79C4D0, bin]
-  - type: code
+    - [0x79C4D0, data]
+  - name: battle/star/peach_dash
+    type: code
     start: 0x79D8A0
     vram: 0x802A1000
     overlay: True
-    files:
+    subsections:
     - [0x79D8A0, c]
-    - [0x79DE50, bin]
+    - [0x79DE50, data]
+  - [0x79EF40, bin] # todo identify
   - name: world/script_api/
     ld_name: world_script_api
     type: code
     start: 0x7E0E80
     vram: 0x80280000
-    files:
+    subsections:
     - [0x7e0e80, c]
     - [0x7E2AA0, c]
     - [0x7E3700, c]
     - [0x7E4690, c]
     - [0x7E4D00, data]
-    - [0x7E7380, .rodata, world/script_api/7E2AA0]
+    - [0x7E7380, .rodata, 7E2AA0]
   - name: world/area_mac/machi/
     type: code
     overlay: True
     start: 0x7E73A0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x7E73A0, c]
     - [0x7E7550, c]
     - [0x7E7850, c]
@@ -2676,7 +2802,7 @@ segments:
     overlay: True
     start: 0x7EAD10
     vram: 0x80240000
-    files:
+    subsections:
     - [0x7EAD10, c]
     - [0x7EB340, c]
     - [0x7ECFD0, c]
@@ -2700,7 +2826,7 @@ segments:
     overlay: True
     start: 0x800880
     vram: 0x80240000
-    files:
+    subsections:
     - [0x800880, c]
     - [0x800C40, c]
     - [0x801700, c]
@@ -2722,7 +2848,7 @@ segments:
     overlay: True
     start: 0x8232C0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x8232C0, c]
     - [0x8238B0, c]
     - [0x823970, c]
@@ -2740,7 +2866,7 @@ segments:
     overlay: True
     start: 0x831800
     vram: 0x80240000
-    files:
+    subsections:
     - [0x831800, c]
     - [0x831B20, c]
     - [0x833500, c]
@@ -2758,7 +2884,7 @@ segments:
     overlay: True
     start: 0x842BD0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x842BD0, c]
     - [0x842C20, c]
     - [0x842D90, c]
@@ -2783,7 +2909,7 @@ segments:
     overlay: True
     start: 0x852170
     vram: 0x80240000
-    files:
+    subsections:
     - [0x852170, c]
     - [0x855560, c]
     - [0x855F20, c]
@@ -2802,7 +2928,7 @@ segments:
     overlay: True
     start: 0x864B40
     vram: 0x80240000
-    files:
+    subsections:
     - [0x864B40, c]
     - [0x865000, c]
     - [0x8659C0, c]
@@ -2816,7 +2942,7 @@ segments:
     overlay: True
     start: 0x8694B0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x8694B0, c]
     - [0x869AA0, c]
     - [0x869EE0, c]
@@ -2831,7 +2957,7 @@ segments:
     overlay: True
     start: 0x86C740
     vram: 0x80240000
-    files:
+    subsections:
     - [0x86C740, c]
     - [0x86CA50, c]
     - [0x86CD10, c]
@@ -2846,7 +2972,7 @@ segments:
     overlay: True
     start: 0x86EB00
     vram: 0x80240000
-    files:
+    subsections:
     - [0x86EB00, c]
     - [0x86F0F0, c]
     - [0x86F5D0, bin]
@@ -2862,7 +2988,7 @@ segments:
     overlay: True
     start: 0x871A30
     vram: 0x80240000
-    files:
+    subsections:
     - [0x871A30, c]
     - [0x872020, c]
     - [0x8726A0, bin]
@@ -2876,7 +3002,7 @@ segments:
     overlay: True
     start: 0x874DC0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x874DC0, c]
     - [0x8750D0, c]
     - [0x875810, bin]
@@ -2891,7 +3017,7 @@ segments:
     overlay: True
     start: 0x876EE0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x876EE0, c]
     - [0x8774D0, c]
     - [0x877840, bin]
@@ -2905,7 +3031,7 @@ segments:
     overlay: True
     start: 0x879BE0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x879BE0, c]
     - [0x87AC00, c]
     - [0x87C4D0, bin]
@@ -2920,7 +3046,7 @@ segments:
     overlay: True
     start: 0x87EDF0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x87EDF0, c]
     - [0x87F3E0, c]
     - [0x87F820, c]
@@ -2934,7 +3060,7 @@ segments:
     overlay: True
     start: 0x8821C0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x8821C0, c]
     - [0x8827B0, c]
     - [0x882BF0, c]
@@ -2950,7 +3076,7 @@ segments:
     overlay: True
     start: 0x8863C0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x8863C0, c]
     - [0x8866D0, c]
     - [0x887780, bin]
@@ -2964,7 +3090,7 @@ segments:
     overlay: True
     start: 0x888BD0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x888BD0, c]
     - [0x8891C0, c]
     - [0x88A530, c]
@@ -2980,7 +3106,7 @@ segments:
     overlay: True
     start: 0x88D600
     vram: 0x80240000
-    files:
+    subsections:
     - [0x88D600, c]
     - [0x88DBF0, c]
     - [0x88DF60, bin]
@@ -2993,7 +3119,7 @@ segments:
     overlay: True
     start: 0x88FBA0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x88FBA0, c]
     - [0x890190, c]
     - [0x8906B0, bin]
@@ -3006,7 +3132,7 @@ segments:
     overlay: True
     start: 0x892A20
     vram: 0x80240000
-    files:
+    subsections:
     - [0x892A20, c]
     - [0x892A50, c]
     - [0x893790, c]
@@ -3020,7 +3146,7 @@ segments:
     overlay: True
     start: 0x8956E0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x8956E0, c]
     - [0x8959F0, c]
     - [0x895D90, bin]
@@ -3033,7 +3159,7 @@ segments:
     overlay: True
     start: 0x8975E0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x8975E0, c]
     - [0x897BD0, c]
     - [0x898910, bin]
@@ -3046,7 +3172,7 @@ segments:
     overlay: True
     start: 0x89A350
     vram: 0x80240000
-    files:
+    subsections:
     - [0x89A350, c]
     - [0x89ACB0, c]
     - [0x89B490, bin]
@@ -3060,7 +3186,7 @@ segments:
     overlay: True
     start: 0x89D7A0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x89D7A0, c]
     - [0x89E100, bin]
     - [0x89E1A0, bin]
@@ -3072,7 +3198,7 @@ segments:
     overlay: True
     start: 0x89FEC0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x89FEC0, c]
     - [0x89FEF0, c]
     - [0x8A0870, bin]
@@ -3083,7 +3209,7 @@ segments:
     overlay: True
     start: 0x8A23D0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x8A23D0, c]
     - [0x8A2D30, c]
     - [0x8A3510, bin]
@@ -3096,7 +3222,7 @@ segments:
     overlay: True
     start: 0x8A5A80
     vram: 0x80240000
-    files:
+    subsections:
     - [0x8A5A80, c]
     - [0x8A5AD0, c]
     - [0x8A5DE0, c]
@@ -3112,7 +3238,7 @@ segments:
     overlay: True
     start: 0x8A7F80
     vram: 0x80240000
-    files:
+    subsections:
     - [0x8A7F80, c]
     - [0x8A8600, c]
     - [0x8A8740, bin]
@@ -3125,7 +3251,7 @@ segments:
     overlay: True
     start: 0x8A9A10
     vram: 0x80240000
-    files:
+    subsections:
     - [0x8A9A10, c]
     - [0x8A9B70, c]
     - [0x8A9F30, bin]
@@ -3137,7 +3263,7 @@ segments:
     overlay: True
     start: 0x8AA450
     vram: 0x80240000
-    files:
+    subsections:
     - [0x8AA450, c]
     - [0x8AA5B0, c]
     - [0x8AAB80, c]
@@ -3150,7 +3276,7 @@ segments:
     overlay: True
     start: 0x8ABF90
     vram: 0x80240000
-    files:
+    subsections:
     - [0x8ABF90, c]
     - [0x8ACD00, bin]
     - [0x8ACDB0, bin]
@@ -3163,7 +3289,7 @@ segments:
     overlay: True
     start: 0x8B0070
     vram: 0x80240000
-    files:
+    subsections:
     - [0x8B0070, c]
     - [0x8B30E0, c]
     - [0x8B33E0, c]
@@ -3186,25 +3312,25 @@ segments:
     overlay: True
     start: 0x8C7F90
     vram: 0x80240000
-    files:
+    subsections:
     - [0x8C7F90, c]
     - [0x8C8140, c]
     - [0x8C82B0, c]
     - [0x8C83A0, c]
     - [0x8C85E0, c]
-    - [0x8C85E0, .data, world/area_kmr/kmr_03/8C7F90]
-    - [0x8C8680, .data, world/area_kmr/kmr_03/8C8140]
-    - [0x8C88E0, .data, world/area_kmr/kmr_03/8C82B0]
+    - [0x8C85E0, .data, 8C7F90]
+    - [0x8C8680, .data, 8C8140]
+    - [0x8C88E0, .data, 8C82B0]
       # - [0x8C9400, bin]
-    - [0x8C9780, .data, world/area_kmr/kmr_03/8C83A0]
-    - [0x8CA2D0, .data, world/area_kmr/kmr_03/8C85E0]
-    - [0x8CA8F0, .rodata, world/area_kmr/kmr_03/8C8140]
+    - [0x8C9780, .data, 8C83A0]
+    - [0x8CA2D0, .data, 8C85E0]
+    - [0x8CA8F0, .rodata, 8C8140]
   - name: world/area_kmr/kmr_04/
     type: code
     overlay: True
     start: 0x8CA900
     vram: 0x80240000
-    files:
+    subsections:
     - [0x8CA900, c]
     - [0x8CA960, c]
     - [0x8CAD70, bin]
@@ -3219,7 +3345,7 @@ segments:
     overlay: True
     start: 0x8CE070
     vram: 0x80240000
-    files:
+    subsections:
     - [0x8CE070, c]
     - [0x8CF570, c]
     - [0x8CF7F0, bin]
@@ -3233,7 +3359,7 @@ segments:
     overlay: True
     start: 0x8D1510
     vram: 0x80240000
-    files:
+    subsections:
     - [0x8D1510, c]
     - [0x8D2A10, c]
     - [0x8D32B0, bin]
@@ -3247,7 +3373,7 @@ segments:
     overlay: True
     start: 0x8D3DC0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x8D3DC0, c]
     - [0x8D4880, bin]
     - [0x8D49A0, bin]
@@ -3258,7 +3384,7 @@ segments:
     overlay: True
     start: 0x8D5E00
     vram: 0x80240000
-    files:
+    subsections:
     - [0x8D5E00, c]
     - [0x8D7330, bin]
     - [0x8D73C0, bin]
@@ -3270,7 +3396,7 @@ segments:
     overlay: True
     start: 0x8D84D0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x8D84D0, c]
     - [0x8D88A0, c]
     - [0x8D8AE0, bin]
@@ -3283,7 +3409,7 @@ segments:
     overlay: True
     start: 0x8DA100
     vram: 0x80240000
-    files:
+    subsections:
     - [0x8DA100, c]
     - [0x8DA3A0, c]
     - [0x8DAFC0, c]
@@ -3303,17 +3429,17 @@ segments:
     overlay: True
     start: 0x8EB360
     vram: 0x80240000
-    files:
-    - [0x8EB360, c, world/area_kmr/kmr_12/header]
-    - [0x8EB390, .data, world/area_kmr/kmr_12/header]
-    - [0x8EB420, .data, world/area_kmr/kmr_12/events]
-    - [0x8EBE10, .rodata, world/area_kmr/kmr_12/events]
+    subsections:
+    - [0x8EB360, c, header]
+    - [0x8EB390, .data, header]
+    - [0x8EB420, .data, events]
+    - [0x8EBE10, .rodata, events]
   - name: world/area_kmr/kmr_20/
     type: code
     overlay: True
     start: 0x8EBE20
     vram: 0x80240000
-    files:
+    subsections:
     - [0x8EBE20, c]
     - [0x8EBE50, c]
     - [0x8ECBF0, c]
@@ -3343,7 +3469,7 @@ segments:
     overlay: True
     start: 0x8FEE80
     vram: 0x80240000
-    files:
+    subsections:
     - [0x8FEE80, c]
     - [0x8FEE90, c]
     - [0x8FF160, bin]
@@ -3354,7 +3480,7 @@ segments:
     overlay: True
     start: 0x8FF670
     vram: 0x80240000
-    files:
+    subsections:
     - [0x8FF670, c]
     - [0x8FF680, c]
     - [0x8FF8B0, c]
@@ -3368,7 +3494,7 @@ segments:
     overlay: True
     start: 0x907A30
     vram: 0x80240000
-    files:
+    subsections:
     - [0x907A30, c]
     - [0x907A40, c]
     - [0x908B00, bin]
@@ -3379,7 +3505,7 @@ segments:
     overlay: True
     start: 0x90B240
     vram: 0x80240000
-    files:
+    subsections:
     - [0x90B240, c]
     - [0x90B250, c]
     - [0x90B350, bin]
@@ -3390,7 +3516,7 @@ segments:
     overlay: True
     start: 0x90B6D0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x90B6D0, c]
     - [0x90B9E0, c]
     - [0x90BBB0, bin]
@@ -3401,7 +3527,7 @@ segments:
     overlay: True
     start: 0x90CC40
     vram: 0x80240000
-    files:
+    subsections:
     - [0x90CC40, c]
     - [0x90CEF0, c]
     - [0x90CF20, bin]
@@ -3411,7 +3537,7 @@ segments:
     overlay: True
     start: 0x90F6B0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x90F6B0, c]
     - [0x90FBD0, c]
     - [0x912960, c]
@@ -3428,7 +3554,7 @@ segments:
     overlay: True
     start: 0x915D70
     vram: 0x80240000
-    files:
+    subsections:
     - [0x915D70, c]
     - [0x916E70, bin]
     - [0x917170, bin]
@@ -3440,7 +3566,7 @@ segments:
     overlay: True
     start: 0x918BB0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x918BB0, c]
     - [0x918EF0, c]
     - [0x919F00, bin]
@@ -3454,7 +3580,7 @@ segments:
     overlay: True
     start: 0x91B8E0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x91B8E0, c]
     - [0x91C9C0, bin]
     - [0x91CA50, bin]
@@ -3466,7 +3592,7 @@ segments:
     overlay: True
     start: 0x91E570
     vram: 0x80240000
-    files:
+    subsections:
     - [0x91E570, c]
     - [0x91E5B0, c]
     - [0x91E6D0, c]
@@ -3485,7 +3611,7 @@ segments:
     overlay: True
     start: 0x9269F0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x9269F0, c]
     - [0x926A10, c]
     - [0x926C70, c]
@@ -3499,29 +3625,29 @@ segments:
     overlay: True
     start: 0x929270
     vram: 0x80240000
-    files:
+    subsections:
     - [0x929270, c]
     - [0x9292B0, c]
-    - [0x9292D0, .data, world/area_sbk/sbk_00/929270]
-    - [0x929A00, .data, world/area_sbk/sbk_00/9292B0]
-    - [0x929A80, .rodata, world/area_sbk/sbk_00/929270]
+    - [0x9292D0, .data, "929270"]
+    - [0x929A00, .data, 9292B0]
+    - [0x929A80, .rodata, "929270"]
   - name: world/area_sbk/sbk_01/
     type: code
     overlay: True
     start: 0x929A90
     vram: 0x80240000
-    files:
+    subsections:
     - [0x929A90, c]
     - [0x929AD0, c]
-    - [0x929AF0, .data, world/area_sbk/sbk_01/929A90]
-    - [0x929E00, .data, world/area_sbk/sbk_01/929AD0]
-    - [0x92A290, .rodata, world/area_sbk/sbk_01/929A90]
+    - [0x929AF0, .data, 929A90]
+    - [0x929E00, .data, 929AD0]
+    - [0x92A290, .rodata, 929A90]
   - name: world/area_sbk/sbk_02/
     type: code
     overlay: True
     start: 0x92A2B0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x92A2B0, c]
     - [0x92A9A0, c]
     - [0x92AEB0, bin]
@@ -3536,7 +3662,7 @@ segments:
     overlay: True
     start: 0x92F8B0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x92F8B0, c]
     - [0x92F8F0, c]
     - [0x92F910, bin]
@@ -3548,7 +3674,7 @@ segments:
     overlay: True
     start: 0x9304D0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x9304D0, c]
     - [0x930510, c]
     - [0x930530, bin]
@@ -3560,7 +3686,7 @@ segments:
     overlay: True
     start: 0x930CF0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x930CF0, c]
     - [0x930D30, c]
     - [0x930D50, bin]
@@ -3573,7 +3699,7 @@ segments:
     overlay: True
     start: 0x9325C0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x9325C0, c]
     - [0x932600, c]
     - [0x932940, bin]
@@ -3585,7 +3711,7 @@ segments:
     overlay: True
     start: 0x933C80
     vram: 0x80240000
-    files:
+    subsections:
     - [0x933C80, c]
     - [0x933CC0, bin]
     - [0x933FD0, bin]
@@ -3596,7 +3722,7 @@ segments:
     overlay: True
     start: 0x934040
     vram: 0x80240000
-    files:
+    subsections:
     - [0x934040, c]
     - [0x934080, c]
     - [0x9341A0, bin]
@@ -3607,7 +3733,7 @@ segments:
     overlay: True
     start: 0x934D40
     vram: 0x80240000
-    files:
+    subsections:
     - [0x934D40, c]
     - [0x934D80, c]
     - [0x934DA0, bin]
@@ -3618,7 +3744,7 @@ segments:
     overlay: True
     start: 0x9357E0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x9357E0, c]
     - [0x935820, c]
     - [0x935940, bin]
@@ -3629,7 +3755,7 @@ segments:
     overlay: True
     start: 0x9366E0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x9366E0, c]
     - [0x936720, bin]
     - [0x936B20, bin]
@@ -3640,7 +3766,7 @@ segments:
     overlay: True
     start: 0x936CD0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x936CD0, c]
     - [0x936D10, c]
     - [0x936D30, bin]
@@ -3651,7 +3777,7 @@ segments:
     overlay: True
     start: 0x937570
     vram: 0x80240000
-    files:
+    subsections:
     - [0x937570, c]
     - [0x9375B0, c]
     - [0x9377F0, bin]
@@ -3663,7 +3789,7 @@ segments:
     overlay: True
     start: 0x938590
     vram: 0x80240000
-    files:
+    subsections:
     - [0x938590, c]
     - [0x9385D0, c]
     - [0x9386D0, bin]
@@ -3676,7 +3802,7 @@ segments:
     overlay: True
     start: 0x939560
     vram: 0x80240000
-    files:
+    subsections:
     - [0x939560, c]
     - [0x9395A0, bin]
     - [0x939910, bin] # rodata
@@ -3685,7 +3811,7 @@ segments:
     overlay: True
     start: 0x939930
     vram: 0x80240000
-    files:
+    subsections:
     - [0x939930, c]
     - [0x939970, c]
     - [0x939A90, bin]
@@ -3696,7 +3822,7 @@ segments:
     overlay: True
     start: 0x93A760
     vram: 0x80240000
-    files:
+    subsections:
     - [0x93A760, c]
     - [0x93A7A0, bin]
     - [0x93AB20, bin]
@@ -3707,7 +3833,7 @@ segments:
     overlay: True
     start: 0x93AC30
     vram: 0x80240000
-    files:
+    subsections:
     - [0x93AC30, c]
     - [0x93AC70, c]
     - [0x93AFB0, bin]
@@ -3719,7 +3845,7 @@ segments:
     overlay: True
     start: 0x93C280
     vram: 0x80240000
-    files:
+    subsections:
     - [0x93C280, c]
     - [0x93C2C0, c]
     - [0x93C600, bin]
@@ -3732,7 +3858,7 @@ segments:
     overlay: True
     start: 0x93DCD0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x93DCD0, c]
     - [0x93DD10, c]
     - [0x93DE30, c]
@@ -3746,7 +3872,7 @@ segments:
     overlay: True
     start: 0x93F5B0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x93F5B0, c]
     - [0x940DC0, bin]
     - [0x943E20, bin] # rodata
@@ -3757,7 +3883,7 @@ segments:
     overlay: True
     start: 0x944000
     vram: 0x80240000
-    files:
+    subsections:
     - [0x944000, c]
     - [0x944040, c]
     - [0x944140, bin]
@@ -3768,7 +3894,7 @@ segments:
     overlay: True
     start: 0x944A60
     vram: 0x80240000
-    files:
+    subsections:
     - [0x944A60, c]
     - [0x944AA0, c]
     - [0x944BC0, bin]
@@ -3778,7 +3904,7 @@ segments:
     overlay: True
     start: 0x9459D0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x9459D0, c]
     - [0x945A10, bin]
     - [0x945BA0, bin]
@@ -3789,7 +3915,7 @@ segments:
     overlay: True
     start: 0x945ED0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x945ED0, c]
     - [0x945F10, c]
     - [0x946670, c]
@@ -3801,7 +3927,7 @@ segments:
     overlay: True
     start: 0x9486B0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x9486B0, c]
     - [0x9486F0, c]
     - [0x948A30, bin]
@@ -3812,7 +3938,7 @@ segments:
     overlay: True
     start: 0x949E60
     vram: 0x80240000
-    files:
+    subsections:
     - [0x949E60, c]
     - [0x949EA0, c]
     - [0x94A0E0, bin]
@@ -3823,7 +3949,7 @@ segments:
     overlay: True
     start: 0x94B3A0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x94B3A0, c]
     - [0x94B3E0, c]
     - [0x94B4E0, bin]
@@ -3836,7 +3962,7 @@ segments:
     overlay: True
     start: 0x94C040
     vram: 0x80240000
-    files:
+    subsections:
     - [0x94C040, c]
     - [0x94C080, bin]
     - [0x94C400, bin]
@@ -3847,7 +3973,7 @@ segments:
     overlay: True
     start: 0x94C510
     vram: 0x80240000
-    files:
+    subsections:
     - [0x94C510, c]
     - [0x94C550, c]
     - [0x94C650, bin]
@@ -3858,7 +3984,7 @@ segments:
     overlay: True
     start: 0x94D170
     vram: 0x80240000
-    files:
+    subsections:
     - [0x94D170, c]
     - [0x94D1B0, bin]
     - [0x94D530, bin]
@@ -3868,7 +3994,7 @@ segments:
     overlay: True
     start: 0x94D5A0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x94D5A0, c]
     - [0x94D5E0, c]
     - [0x94D700, bin]
@@ -3879,7 +4005,7 @@ segments:
     overlay: True
     start: 0x94E4A0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x94E4A0, c]
     - [0x94E4E0, bin]
     - [0x94E8E0, bin]
@@ -3889,7 +4015,7 @@ segments:
     overlay: True
     start: 0x94E9A0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x94E9A0, c]
     - [0x94E9E0, c]
     - [0x94EB00, c]
@@ -3904,7 +4030,7 @@ segments:
     overlay: True
     start: 0x950610
     vram: 0x80240000
-    files:
+    subsections:
     - [0x950610, c]
     - [0x950650, bin]
     - [0x950950, bin] # rodata
@@ -3914,7 +4040,7 @@ segments:
     overlay: True
     start: 0x950970
     vram: 0x80240000
-    files:
+    subsections:
     - [0x950970, c]
     - [0x9509B0, c]
     - [0x950AD0, bin]
@@ -3925,7 +4051,7 @@ segments:
     overlay: True
     start: 0x951670
     vram: 0x80240000
-    files:
+    subsections:
     - [0x951670, c]
     - [0x9516B0, bin]
     - [0x951A30, bin]
@@ -3935,7 +4061,7 @@ segments:
     overlay: True
     start: 0x951AE0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x951AE0, c]
     - [0x951B20, c]
     - [0x951B40, bin]
@@ -3946,7 +4072,7 @@ segments:
     overlay: True
     start: 0x952580
     vram: 0x80240000
-    files:
+    subsections:
     - [0x952580, c]
     - [0x9525C0, bin]
     - [0x952940, bin]
@@ -3957,7 +4083,7 @@ segments:
     overlay: True
     start: 0x952A50
     vram: 0x80240000
-    files:
+    subsections:
     - [0x952A50, c]
     - [0x952A90, c]
     - [0x952AB0, c]
@@ -3970,7 +4096,7 @@ segments:
     overlay: True
     start: 0x953FC0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x953FC0, c]
     - [0x954D80, c]
     - [0x954FC0, bin]
@@ -3982,7 +4108,7 @@ segments:
     overlay: True
     start: 0x9569F0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x9569F0, c]
     - [0x956A30, c]
     - [0x956A50, bin]
@@ -3993,7 +4119,7 @@ segments:
     overlay: True
     start: 0x956F90
     vram: 0x80240000
-    files:
+    subsections:
     - [0x956F90, c]
     - [0x956FD0, bin]
     - [0x9572E0, bin]
@@ -4004,7 +4130,7 @@ segments:
     overlay: True
     start: 0x957350
     vram: 0x80240000
-    files:
+    subsections:
     - [0x957350, c]
     - [0x957390, c]
     - [0x9573B0, bin]
@@ -4016,7 +4142,7 @@ segments:
     overlay: True
     start: 0x957D70
     vram: 0x80240000
-    files:
+    subsections:
     - [0x957D70, c]
     - [0x957DB0, c]
     - [0x957DD0, bin]
@@ -4028,7 +4154,7 @@ segments:
     overlay: True
     start: 0x958590
     vram: 0x80240000
-    files:
+    subsections:
     - [0x958590, c]
     - [0x9585D0, bin]
     - [0x9588E0, bin]
@@ -4039,7 +4165,7 @@ segments:
     overlay: True
     start: 0x958950
     vram: 0x80240000
-    files:
+    subsections:
     - [0x958950, c]
     - [0x958990, bin]
     - [0x958C90, bin] # rodata
@@ -4049,7 +4175,7 @@ segments:
     overlay: True
     start: 0x958CB0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x958CB0, c]
     - [0x958CF0, c]
     - [0x959030, bin]
@@ -4062,7 +4188,7 @@ segments:
     overlay: True
     start: 0x95AEB0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x95AEB0, bin]
     - [0x95B190, bin]
     - [0x95B1F0, bin] # rodata
@@ -4071,7 +4197,7 @@ segments:
     overlay: True
     start: 0x95B200
     vram: 0x80240000
-    files:
+    subsections:
     - [0x95B200, c]
     - [0x95B7E0, c]
     - [0x95E660, c]
@@ -4090,7 +4216,7 @@ segments:
     overlay: True
     start: 0x9691C0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x9691C0, c]
     - [0x9694C0, c]
     - [0x96CC30, bin]
@@ -4104,7 +4230,7 @@ segments:
     overlay: True
     start: 0x978140
     vram: 0x80240000
-    files:
+    subsections:
     - [0x978140, bin]
     - [0x978360, bin]
     - [0x9785C0, bin]
@@ -4114,7 +4240,7 @@ segments:
     overlay: True
     start: 0x978710
     vram: 0x80240000
-    files:
+    subsections:
     - [0x978710, c]
     - [0x978750, c]
     - [0x978800, c]
@@ -4129,7 +4255,7 @@ segments:
     overlay: True
     start: 0x979E50
     vram: 0x80240000
-    files:
+    subsections:
     - [0x979E50, bin]
     - [0x97A210, bin]
     - [0x97B340, bin]
@@ -4139,7 +4265,7 @@ segments:
     overlay: True
     start: 0x97B630
     vram: 0x80240000
-    files:
+    subsections:
     - [0x97B630, c]
     - [0x97B670, c]
     - [0x97BF60, c]
@@ -4156,7 +4282,7 @@ segments:
     overlay: True
     start: 0x97DAD0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x97DAD0, c]
     - [0x97F990, bin]
     - [0x97FCE0, bin]
@@ -4171,7 +4297,7 @@ segments:
     overlay: True
     start: 0x980A20
     vram: 0x80240000
-    files:
+    subsections:
     - [0x980A20, bin]
     - [0x980D40, bin]
     - [0x982150, bin]
@@ -4182,7 +4308,7 @@ segments:
     overlay: True
     start: 0x982440
     vram: 0x80240000
-    files:
+    subsections:
     - [0x982440, c]
     - [0x9824F0, c]
     - [0x982530, c]
@@ -4198,7 +4324,7 @@ segments:
     overlay: True
     start: 0x984E30
     vram: 0x80240000
-    files:
+    subsections:
     - [0x984E30, c]
     - [0x985720, bin]
     - [0x985B00, bin]
@@ -4210,7 +4336,7 @@ segments:
     overlay: True
     start: 0x9864E0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x9864E0, c]
     - [0x9867D0, c]
     - [0x986810, bin]
@@ -4225,7 +4351,7 @@ segments:
     overlay: True
     start: 0x988B60
     vram: 0x80240000
-    files:
+    subsections:
     - [0x988B60, c]
     - [0x989910, bin]
     - [0x98A580, bin]
@@ -4236,7 +4362,7 @@ segments:
     overlay: True
     start: 0x98AA10
     vram: 0x80240000
-    files:
+    subsections:
     - [0x98AA10, c]
     - [0x98AAC0, c]
     - [0x98AB30, c]
@@ -4252,7 +4378,7 @@ segments:
     overlay: True
     start: 0x98D640
     vram: 0x80240000
-    files:
+    subsections:
     - [0x98D640, bin]
     - [0x98DA70, bin]
     - [0x98DCB0, bin]
@@ -4264,7 +4390,7 @@ segments:
     overlay: True
     start: 0x98F7E0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x98F7E0, c]
     - [0x991850, bin]
     - [0x991A90, bin]
@@ -4278,7 +4404,7 @@ segments:
     overlay: True
     start: 0x992730
     vram: 0x80240000
-    files:
+    subsections:
     - [0x992730, c]
     - [0x994490, bin]
     - [0x9946D0, bin]
@@ -4292,7 +4418,7 @@ segments:
     overlay: True
     start: 0x9951F0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x9951F0, c]
     - [0x9959F0, c]
     - [0x995CF0, bin]
@@ -4306,7 +4432,7 @@ segments:
     overlay: True
     start: 0x997F70
     vram: 0x80240000
-    files:
+    subsections:
     - [0x997F70, c]
     - [0x998860, bin]
     - [0x998B90, bin]
@@ -4318,7 +4444,7 @@ segments:
     overlay: True
     start: 0x999740
     vram: 0x80240000
-    files:
+    subsections:
     - [0x999740, bin]
     - [0x999960, bin]
     - [0x999BA0, bin]
@@ -4328,7 +4454,7 @@ segments:
     overlay: True
     start: 0x999C70
     vram: 0x80240000
-    files:
+    subsections:
     - [0x999C70, c]
     - [0x999F80, c]
     - [0x99A240, c]
@@ -4343,7 +4469,7 @@ segments:
     overlay: True
     start: 0x99C990
     vram: 0x80240000
-    files:
+    subsections:
     - [0x99C990, c]
     - [0x99CCA0, c]
     - [0x99CD80, c]
@@ -4360,7 +4486,7 @@ segments:
     overlay: True
     start: 0x9A0FE0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x9A0FE0, c]
     - [0x9A10C0, c]
     - [0x9A2A30, bin]
@@ -4374,7 +4500,7 @@ segments:
     overlay: True
     start: 0x9A4650
     vram: 0x80240000
-    files:
+    subsections:
     - [0x9A4650, c]
     - [0x9A46F0, c]
     - [0x9A4ED0, c]
@@ -4389,7 +4515,7 @@ segments:
     overlay: True
     start: 0x9A83F0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x9A83F0, c]
     - [0x9A8700, c]
     - [0x9A88A0, c]
@@ -4405,7 +4531,7 @@ segments:
     overlay: True
     start: 0x9AE700
     vram: 0x80240000
-    files:
+    subsections:
     - [0x9AE700, c]
     - [0x9AEE20, c]
     - [0x9AEE70, bin]
@@ -4419,7 +4545,7 @@ segments:
     overlay: True
     start: 0x9B1790
     vram: 0x80240000
-    files:
+    subsections:
     - [0x9B1790, c]
     - [0x9B1AA0, c]
     - [0x9B2280, c]
@@ -4434,7 +4560,7 @@ segments:
     overlay: True
     start: 0x9B6980
     vram: 0x80240000
-    files:
+    subsections:
     - [0x9B6980, c]
     - [0x9B6C90, c]
     - [0x9B9270, bin]
@@ -4450,7 +4576,7 @@ segments:
     overlay: True
     start: 0x9BB2A0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x9BB2A0, c]
     - [0x9BB5B0, c]
     - [0x9BBCC0, bin]
@@ -4463,7 +4589,7 @@ segments:
     overlay: True
     start: 0x9BD660
     vram: 0x80240000
-    files:
+    subsections:
     - [0x9BD660, c]
     - [0x9BD720, c]
     - [0x9BD830, bin]
@@ -4478,7 +4604,7 @@ segments:
     overlay: True
     start: 0x9C2910
     vram: 0x80240000
-    files:
+    subsections:
     - [0x9C2910, c]
     - [0x9C3130, c]
     - [0x9C3160, bin]
@@ -4491,7 +4617,7 @@ segments:
     overlay: True
     start: 0x9C53E0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x9C53E0, c]
     - [0x9C7D10, c]
     - [0x9C7F50, bin]
@@ -4510,7 +4636,7 @@ segments:
     overlay: True
     start: 0x9D7020
     vram: 0x80240000
-    files:
+    subsections:
     - [0x9D7020, c]
     - [0x9D7770, c]
     - [0x9D7990, c]
@@ -4534,7 +4660,7 @@ segments:
     overlay: True
     start: 0x9EB7F0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x9EB7F0, c]
     - [0x9EC610, bin]
     - [0x9EC700, bin]
@@ -4546,7 +4672,7 @@ segments:
     overlay: True
     start: 0x9EDBF0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x9EDBF0, c]
     - [0x9EEA80, c]
     - [0x9EEB20, bin]
@@ -4561,7 +4687,7 @@ segments:
     overlay: True
     start: 0x9F4A40
     vram: 0x80240000
-    files:
+    subsections:
     - [0x9F4A40, c]
     - [0x9F6990, bin]
     - [0x9F6A50, bin]
@@ -4574,7 +4700,7 @@ segments:
     overlay: True
     start: 0x9FA7F0
     vram: 0x80240000
-    files:
+    subsections:
     - [0x9FA7F0, c]
     - [0x9FA970, c]
     - [0x9FAAE0, c]
@@ -4594,7 +4720,7 @@ segments:
     overlay: True
     start: 0xA00600
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA00600, c]
     - [0xA01420, c]
     - [0xA01A90, bin]
@@ -4611,7 +4737,7 @@ segments:
     overlay: True
     start: 0xA02840
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA02840, c]
     - [0xA029C0, c]
     - [0xA02A00, c]
@@ -4629,7 +4755,7 @@ segments:
     overlay: True
     start: 0xA06F00
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA06F00, c]
     - [0xA09440, c]
     - [0xA09680, bin]
@@ -4646,7 +4772,7 @@ segments:
     overlay: True
     start: 0xA0BCF0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA0BCF0, c]
     - [0xA0BD40, c]
     - [0xA0C4B0, c]
@@ -4666,7 +4792,7 @@ segments:
     overlay: True
     start: 0xA10880
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA10880, c]
     - [0xA11020, c]
     - [0xA11650, c]
@@ -4681,7 +4807,7 @@ segments:
     overlay: True
     start: 0xA16220
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA16220, c]
     - [0xA171F0, c]
     - [0xA17210, c]
@@ -4698,7 +4824,7 @@ segments:
     overlay: True
     start: 0xA1B100
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA1B100, c]
     - [0xA1B130, c]
     - [0xA1BB70, c]
@@ -4718,7 +4844,7 @@ segments:
     overlay: True
     start: 0xA26ED0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA26ED0, c]
     - [0xA27490, c]
     - [0xA274B0, c]
@@ -4741,7 +4867,7 @@ segments:
     overlay: True
     start: 0xA2A240
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA2A240, c]
     - [0xA2AA70, c]
     - [0xA2AAC0, c]
@@ -4762,7 +4888,7 @@ segments:
     overlay: True
     start: 0xA394E0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA394E0, c]
     - [0xA397F0, c]
     - [0xA3A210, c]
@@ -4779,7 +4905,7 @@ segments:
     overlay: True
     start: 0xA3F740
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA3F740, c]
     - [0xA3F760, c]
     - [0xA3FBA0, c]
@@ -4795,7 +4921,7 @@ segments:
     overlay: True
     start: 0xA45930
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA45930, c]
     - [0xA45C40, c]
     - [0xA45C90, bin]
@@ -4806,7 +4932,7 @@ segments:
     overlay: True
     start: 0xA46F60
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA46F60, c]
     - [0xA470C0, c]
     - [0xA479B0, bin]
@@ -4820,7 +4946,7 @@ segments:
     overlay: True
     start: 0xA485C0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA485C0, c]
     - [0xA48720, c]
     - [0xA4A410, c]
@@ -4836,7 +4962,7 @@ segments:
     overlay: True
     start: 0xA4BF60
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA4BF60, c]
     - [0xA4C0D0, bin]
     - [0xA4C1A0, bin]
@@ -4846,7 +4972,7 @@ segments:
     overlay: True
     start: 0xA4CA20
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA4CA20, c]
     - [0xA4CAC0, c]
     - [0xA4DEC0, bin]
@@ -4861,7 +4987,7 @@ segments:
     overlay: True
     start: 0xA4F000
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA4F000, c]
     - [0xA4F0A0, c]
     - [0xA502F0, bin]
@@ -4875,7 +5001,7 @@ segments:
     overlay: True
     start: 0xA51980
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA51980, c]
     - [0xA51C90, bin]
     - [0xA51D90, bin]
@@ -4886,7 +5012,7 @@ segments:
     overlay: True
     start: 0xA528C0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA528C0, c]
     - [0xA52BD0, c]
     - [0xA533B0, bin]
@@ -4901,7 +5027,7 @@ segments:
     overlay: True
     start: 0xA54950
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA54950, c]
     - [0xA54990, c]
     - [0xA54CA0, c]
@@ -4914,7 +5040,7 @@ segments:
     overlay: True
     start: 0xA55F20
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA55F20, c]
     - [0xA55F60, c]
     - [0xA56270, c]
@@ -4928,7 +5054,7 @@ segments:
     overlay: True
     start: 0xA574B0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA574B0, c]
     - [0xA574F0, c]
     - [0xA57830, c]
@@ -4943,7 +5069,7 @@ segments:
     overlay: True
     start: 0xA59390
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA59390, c]
     - [0xA596A0, c]
     - [0xA59960, bin]
@@ -4955,7 +5081,7 @@ segments:
     overlay: True
     start: 0xA5A030
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA5A030, c]
     - [0xA5A340, c]
     - [0xA5A3D0, bin]
@@ -4967,7 +5093,7 @@ segments:
     overlay: True
     start: 0xA5CA20
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA5CA20, bin]
     - [0xA5CB00, bin]
     - [0xA5CBD0, bin]
@@ -4978,7 +5104,7 @@ segments:
     overlay: True
     start: 0xA5E0C0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA5E0C0, c]
     - [0xA5E3D0, bin]
     - [0xA5E4C0, bin]
@@ -4989,7 +5115,7 @@ segments:
     overlay: True
     start: 0xA5F080
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA5F080, c]
     - [0xA5F390, bin]
     - [0xA5F480, bin]
@@ -5000,7 +5126,7 @@ segments:
     overlay: True
     start: 0xA60040
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA60040, bin]
     - [0xA60130, bin]
     - [0xA60450, bin] # rodata
@@ -5010,7 +5136,7 @@ segments:
     overlay: True
     start: 0xA60470
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA60470, bin]
     - [0xA60560, bin]
     - [0xA609B0, bin] # rodata
@@ -5020,7 +5146,7 @@ segments:
     overlay: True
     start: 0xA609D0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA609D0, c]
     - [0xA623F0, bin]
     - [0xA624D0, bin]
@@ -5031,7 +5157,7 @@ segments:
     overlay: True
     start: 0xA64090
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA64090, c]
     - [0xA640E0, c]
     - [0xA65CB0, bin]
@@ -5047,7 +5173,7 @@ segments:
     overlay: True
     start: 0xA67100
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA67100, c]
     - [0xA671E0, c]
     - [0xA68430, bin]
@@ -5062,7 +5188,7 @@ segments:
     overlay: True
     start: 0xA6ACA0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA6ACA0, c]
     - [0xA6AE10, bin]
     - [0xA6AEE0, bin]
@@ -5076,7 +5202,7 @@ segments:
     overlay: True
     start: 0xA6CB00
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA6CB00, c]
     - [0xA6CBE0, c]
     - [0xA6CEF0, bin]
@@ -5087,7 +5213,7 @@ segments:
     overlay: True
     start: 0xA6E3E0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA6E3E0, c]
     - [0xA6E6F0, c]
     - [0xA70720, bin]
@@ -5103,7 +5229,7 @@ segments:
     overlay: True
     start: 0xA72220
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA72220, c]
     - [0xA72300, c]
     - [0xA72610, bin]
@@ -5114,7 +5240,7 @@ segments:
     overlay: True
     start: 0xA735B0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA735B0, c]
     - [0xA73740, bin]
     - [0xA738E0, bin]
@@ -5126,7 +5252,7 @@ segments:
     overlay: True
     start: 0xA74870
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA74870, c]
     - [0xA74B80, c]
     - [0xA75360, bin]
@@ -5139,7 +5265,7 @@ segments:
     overlay: True
     start: 0xA784C0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA784C0, c]
     - [0xA78510, c]
     - [0xA78900, bin]
@@ -5152,7 +5278,7 @@ segments:
     overlay: True
     start: 0xA7A500
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA7A500, c]
     - [0xA7A550, c]
     - [0xA7A940, bin]
@@ -5165,7 +5291,7 @@ segments:
     overlay: True
     start: 0xA83490
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA83490, c]
     - [0xA834E0, c]
     - [0xA83500, bin]
@@ -5178,7 +5304,7 @@ segments:
     overlay: True
     start: 0xA867B0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA867B0, bin]
     - [0xA86880, bin]
     - [0xA86A40, bin] # rodata
@@ -5187,7 +5313,7 @@ segments:
     overlay: True
     start: 0xA86A50
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA86A50, c]
     - [0xA88280, c]
     - [0xA88360, bin]
@@ -5202,7 +5328,7 @@ segments:
     overlay: True
     start: 0xA8C7C0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA8C7C0, bin]
     - [0xA8C890, bin]
     - [0xA8CA70, bin] # rodata
@@ -5211,7 +5337,7 @@ segments:
     overlay: True
     start: 0xA8CA80
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA8CA80, c]
     - [0xA8CB60, c]
     - [0xA8E390, bin]
@@ -5226,7 +5352,7 @@ segments:
     overlay: True
     start: 0xA927C0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA927C0, c]
     - [0xA927F0, bin]
     - [0xA928B0, bin]
@@ -5237,7 +5363,7 @@ segments:
     overlay: True
     start: 0xA93160
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA93160, c]
     - [0xA931B0, bin]
     - [0xA93270, bin]
@@ -5249,7 +5375,7 @@ segments:
     overlay: True
     start: 0xA93440
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA93440, c]
     - [0xA93490, bin]
     - [0xA93550, bin]
@@ -5261,7 +5387,7 @@ segments:
     overlay: True
     start: 0xA93740
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA93740, c]
     - [0xA93A50, c]
     - [0xA96CD0, bin]
@@ -5276,7 +5402,7 @@ segments:
     overlay: True
     start: 0xA99590
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA99590, c]
     - [0xA9A950, bin]
     - [0xA9AA20, bin]
@@ -5289,7 +5415,7 @@ segments:
     overlay: True
     start: 0xA9C990
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA9C990, bin]
     - [0xA9CA60, bin]
     - [0xA9CC20, bin] # rodata
@@ -5298,7 +5424,7 @@ segments:
     overlay: True
     start: 0xA9CC30
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA9CC30, c]
     - [0xA9CC70, c]
     - [0xA9D6D0, bin]
@@ -5313,7 +5439,7 @@ segments:
     overlay: True
     start: 0xA9E980
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA9E980, c]
     - [0xA9E9D0, bin]
     - [0xA9EAA0, bin]
@@ -5324,7 +5450,7 @@ segments:
     overlay: True
     start: 0xA9ED40
     vram: 0x80240000
-    files:
+    subsections:
     - [0xA9ED40, c]
     - [0xAA0100, bin]
     - [0xAA01E0, bin]
@@ -5338,7 +5464,7 @@ segments:
     overlay: True
     start: 0xAA1EE0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xAA1EE0, bin]
     - [0xAA1FB0, bin]
     - [0xAA2170, bin] # rodata
@@ -5347,7 +5473,7 @@ segments:
     overlay: True
     start: 0xAA2180
     vram: 0x80240000
-    files:
+    subsections:
     - [0xAA2180, bin]
     - [0xAA2240, bin]
     - [0xAA23B0, bin] # rodata
@@ -5357,7 +5483,7 @@ segments:
     overlay: True
     start: 0xAA23C0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xAA23C0, bin]
     - [0xAA2490, bin]
     - [0xAA2650, bin] # rodata
@@ -5366,7 +5492,7 @@ segments:
     overlay: True
     start: 0xAA2660
     vram: 0x80240000
-    files:
+    subsections:
     - [0xAA2660, bin]
     - [0xAA2720, bin]
     - [0xAA2760, bin]
@@ -5377,7 +5503,7 @@ segments:
     overlay: True
     start: 0xAA28F0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xAA28F0, bin]
     - [0xAA29C0, bin]
     - [0xAA2D10, bin] # rodata
@@ -5386,7 +5512,7 @@ segments:
     overlay: True
     start: 0xAA2D20
     vram: 0x80240000
-    files:
+    subsections:
     - [0xAA2D20, c]
     - [0xAA3460, bin]
     - [0xAA3530, bin]
@@ -5397,7 +5523,7 @@ segments:
     overlay: True
     start: 0xAA7480
     vram: 0x80240000
-    files:
+    subsections:
     - [0xAA7480, c]
     - [0xAA7790, c]
     - [0xAA78F0, bin]
@@ -5411,7 +5537,7 @@ segments:
     overlay: True
     start: 0xAA8FA0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xAA8FA0, c]
     - [0xAA92B0, c]
     - [0xAA94B0, c]
@@ -5426,7 +5552,7 @@ segments:
     overlay: True
     start: 0xAAC830
     vram: 0x80240000
-    files:
+    subsections:
     - [0xAAC830, c]
     - [0xAACBB0, c]
     - [0xAACFC0, bin]
@@ -5437,7 +5563,7 @@ segments:
     overlay: True
     start: 0xAAFFF0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xAAFFF0, c]
     - [0xAB0040, c]
     - [0xAB0350, c]
@@ -5450,7 +5576,7 @@ segments:
     overlay: True
     start: 0xAB2170
     vram: 0x80240000
-    files:
+    subsections:
     - [0xAB2170, c]
     - [0xAB2190, c]
     - [0xAB21D0, c]
@@ -5466,7 +5592,7 @@ segments:
     overlay: True
     start: 0xAB6290
     vram: 0x80240000
-    files:
+    subsections:
     - [0xAB6290, c]
     - [0xAB62B0, c]
     - [0xAB6610, bin]
@@ -5481,7 +5607,7 @@ segments:
     overlay: True
     start: 0xAB92B0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xAB92B0, c]
     - [0xAB9370, bin]
     - [0xAB95D0, bin]
@@ -5492,7 +5618,7 @@ segments:
     overlay: True
     start: 0xABB290
     vram: 0x80240000
-    files:
+    subsections:
     - [0xABB290, c]
     - [0xABB340, c]
     - [0xABC250, bin]
@@ -5507,7 +5633,7 @@ segments:
     overlay: True
     start: 0xAC5170
     vram: 0x80240000
-    files:
+    subsections:
     - [0xAC5170, c]
     - [0xAC6000, bin]
     - [0xAC6140, bin]
@@ -5519,7 +5645,7 @@ segments:
     overlay: True
     start: 0xAC8D20
     vram: 0x80240000
-    files:
+    subsections:
     - [0xAC8D20, bin]
     - [0xAC8E40, bin]
     - [0xAC9160, bin]
@@ -5529,7 +5655,7 @@ segments:
     overlay: True
     start: 0xAC9710
     vram: 0x80240000
-    files:
+    subsections:
     - [0xAC9710, c]
     - [0xAC9730, c]
     - [0xAC9A40, bin]
@@ -5543,7 +5669,7 @@ segments:
     overlay: True
     start: 0xACAB20
     vram: 0x80240000
-    files:
+    subsections:
     - [0xACAB20, c]
     - [0xACAB90, c]
     - [0xACABD0, c]
@@ -5557,7 +5683,7 @@ segments:
     overlay: True
     start: 0xACE140
     vram: 0x80240000
-    files:
+    subsections:
     - [0xACE140, c]
     - [0xACE1B0, c]
     - [0xACE1F0, c]
@@ -5573,7 +5699,7 @@ segments:
     overlay: True
     start: 0xAD4090
     vram: 0x80240000
-    files:
+    subsections:
     - [0xAD4090, c]
     - [0xAD4100, c]
     - [0xAD4940, bin]
@@ -5583,7 +5709,7 @@ segments:
     overlay: True
     start: 0xAD5ED0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xAD5ED0, c]
     - [0xAD5EF0, c]
     - [0xAD6200, c]
@@ -5599,7 +5725,7 @@ segments:
     overlay: True
     start: 0xADAEA0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xADAEA0, c]
     - [0xADAEF0, c]
     - [0xADB360, bin]
@@ -5622,7 +5748,7 @@ segments:
     overlay: True
     start: 0xAE5590
     vram: 0x80240000
-    files:
+    subsections:
     - [0xAE5590, c]
     - [0xAE58D0, c]
     - [0xAE5A90, c]
@@ -5644,7 +5770,7 @@ segments:
     overlay: True
     start: 0xAED410
     vram: 0x80240000
-    files:
+    subsections:
     - [0xAED410, c]
     - [0xAEDC60, c]
     - [0xAEE490, bin]
@@ -5657,7 +5783,7 @@ segments:
     overlay: True
     start: 0xAF1C60
     vram: 0x80240000
-    files:
+    subsections:
     - [0xAF1C60, c]
     - [0xAF2200, bin]
     - [0xAF2440, bin]
@@ -5669,7 +5795,7 @@ segments:
     overlay: True
     start: 0xAF2CA0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xAF2CA0, c]
     - [0xAF2FE0, c]
     - [0xAF34C0, bin]
@@ -5685,7 +5811,7 @@ segments:
     overlay: True
     start: 0xAF7950
     vram: 0x80240000
-    files:
+    subsections:
     - [0xAF7950, c]
     - [0xAF7C00, c]
     - [0xAF8660, bin]
@@ -5700,7 +5826,7 @@ segments:
     overlay: True
     start: 0xAFDB40
     vram: 0x80240000
-    files:
+    subsections:
     - [0xAFDB40, c]
     - [0xAFDE00, c]
     - [0xAFE130, bin]
@@ -5714,7 +5840,7 @@ segments:
     overlay: True
     start: 0xB022A0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xB022A0, bin]
     - [0xB024E0, bin] # rodata
     - [0xB024F0, bin] # rodata
@@ -5723,7 +5849,7 @@ segments:
     overlay: True
     start: 0xB024F0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xB024F0, bin]
     - [0xB025A0, bin]
     - [0xB02870, bin] # rodata
@@ -5732,7 +5858,7 @@ segments:
     overlay: True
     start: 0xB02880
     vram: 0x80240000
-    files:
+    subsections:
     - [0xB02880, c]
     - [0xB028A0, c]
     - [0xB03190, c]
@@ -5748,7 +5874,7 @@ segments:
     overlay: True
     start: 0xB06570
     vram: 0x80240000
-    files:
+    subsections:
     - [0xB06570, c]
     - [0xB06590, bin]
     - [0xB06640, bin]
@@ -5759,7 +5885,7 @@ segments:
     overlay: True
     start: 0xB06A00
     vram: 0x80240000
-    files:
+    subsections:
     - [0xB06A00, c]
     - [0xB06A20, c]
     - [0xB06A50, c]
@@ -5776,7 +5902,7 @@ segments:
     overlay: True
     start: 0xB13120
     vram: 0x80240000
-    files:
+    subsections:
     - [0xB13120, c]
     - [0xB13150, bin]
     - [0xB13500, bin]
@@ -5787,7 +5913,7 @@ segments:
     overlay: True
     start: 0xB13D70
     vram: 0x80240000
-    files:
+    subsections:
     - [0xB13D70, c]
     - [0xB14080, c]
     - [0xB14210, bin]
@@ -5799,7 +5925,7 @@ segments:
     overlay: True
     start: 0xB14EA0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xB14EA0, bin]
     - [0xB150A0, bin] # rodata
     - [0xB150B0, bin] # rodata
@@ -5808,7 +5934,7 @@ segments:
     overlay: True
     start: 0xB150B0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xB150B0, c]
     - [0xB150E0, c]
     - [0xB15120, bin]
@@ -5820,7 +5946,7 @@ segments:
     overlay: True
     start: 0xB1A900
     vram: 0x80240000
-    files:
+    subsections:
     - [0xB1A900, bin]
     - [0xB1AB20, bin]
     - [0xB1AC20, bin] # rodata
@@ -5829,7 +5955,7 @@ segments:
     overlay: True
     start: 0xB1AC30
     vram: 0x80240000
-    files:
+    subsections:
     - [0xB1AC30, bin]
     - [0xB1AE50, bin]
     - [0xB1AF70, bin] # rodata
@@ -5838,7 +5964,7 @@ segments:
     overlay: True
     start: 0xB1AF80
     vram: 0x80240000
-    files:
+    subsections:
     - [0xB1AF80, bin]
     - [0xB1B240, bin]
     - [0xB1B560, bin] # rodata
@@ -5847,7 +5973,7 @@ segments:
     overlay: True
     start: 0xB1B570
     vram: 0x80240000
-    files:
+    subsections:
     - [0xB1B570, c]
     - [0xB1BBD0, c]
     - [0xB1BC00, bin]
@@ -5862,7 +5988,7 @@ segments:
     overlay: True
     start: 0xB1C540
     vram: 0x80240000
-    files:
+    subsections:
     - [0xB1C540, bin]
     - [0xB1CA40, bin] # rodata
     - [0xB1CA50, bin] # rodata
@@ -5871,7 +5997,7 @@ segments:
     overlay: True
     start: 0xB1CA50
     vram: 0x80240000
-    files:
+    subsections:
     - [0xB1CA50, c]
     - [0xB1D1C0, bin]
     - [0xB1D2A0, bin]
@@ -5881,7 +6007,7 @@ segments:
     overlay: True
     start: 0xB1D2F0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xB1D2F0, bin]
     - [0xB1D760, bin]
   - name: world/area_tst/tst_13/
@@ -5889,7 +6015,7 @@ segments:
     overlay: True
     start: 0xB1D760
     vram: 0x80240000
-    files:
+    subsections:
     - [0xB1D760, c]
     - [0xB1DB20, bin]
     - [0xB20460, bin] # rodata
@@ -5899,14 +6025,14 @@ segments:
     overlay: True
     start: 0xB20470
     vram: 0x80240000
-    files:
+    subsections:
     - [0xB20470, bin]
   - name: world/area_jan/jan_00/
     type: code
     overlay: True
     start: 0xB20540
     vram: 0x80240000
-    files:
+    subsections:
     - [0xB20540, c]
     - [0xB216E0, c]
     - [0xB21EA0, c]
@@ -5922,7 +6048,7 @@ segments:
     overlay: True
     start: 0xB28030
     vram: 0x80240000
-    files:
+    subsections:
     - [0xB28030, c]
     - [0xB291C0, c]
     - [0xB29400, bin]
@@ -5937,7 +6063,7 @@ segments:
     overlay: True
     start: 0xB2C470
     vram: 0x80240000
-    files:
+    subsections:
     - [0xB2C470, c]
     - [0xB2C4A0, c]
     - [0xB2C8A0, c]
@@ -5953,7 +6079,7 @@ segments:
     overlay: True
     start: 0xB34BD0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xB34BD0, c]
     - [0xB37B70, c]
     - [0xB37C20, c]
@@ -5970,7 +6096,7 @@ segments:
     overlay: True
     start: 0xB44770
     vram: 0x80240000
-    files:
+    subsections:
     - [0xB44770, c]
     - [0xB447B0, c]
     - [0xB44AC0, c]
@@ -5996,7 +6122,7 @@ segments:
     overlay: True
     start: 0xB4AA70
     vram: 0x80240000
-    files:
+    subsections:
     - [0xB4AA70, c]
     - [0xB4AAB0, c]
     - [0xB4ADC0, c]
@@ -6018,7 +6144,7 @@ segments:
     overlay: True
     start: 0xB52830
     vram: 0x80240000
-    files:
+    subsections:
     - [0xB52830, c]
     - [0xB52B40, c]
     - [0xB52BE0, c]
@@ -6039,7 +6165,7 @@ segments:
     overlay: True
     start: 0xB59870
     vram: 0x80240000
-    files:
+    subsections:
     - [0xB59870, c]
     - [0xB5A610, c]
     - [0xB5A850, c]
@@ -6055,7 +6181,7 @@ segments:
     overlay: True
     start: 0xB5E2B0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xB5E2B0, c]
     - [0xB5E5C0, c]
     - [0xB5E910, c]
@@ -6074,7 +6200,7 @@ segments:
     overlay: True
     start: 0xB65AB0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xB65AB0, c]
     - [0xB660A0, c]
     - [0xB663F0, c]
@@ -6090,7 +6216,7 @@ segments:
     overlay: True
     start: 0xB6C390
     vram: 0x80240000
-    files:
+    subsections:
     - [0xB6C390, c]
     - [0xB6C6A0, c]
     - [0xB6D4C0, c]
@@ -6109,7 +6235,7 @@ segments:
     overlay: True
     start: 0xB70860
     vram: 0x80240000
-    files:
+    subsections:
     - [0xB70860, c]
     - [0xB71010, c]
     - [0xB71060, bin]
@@ -6122,7 +6248,7 @@ segments:
     overlay: True
     start: 0xB730B0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xB730B0, c]
     - [0xB73570, c]
     - [0xB74310, bin]
@@ -6135,7 +6261,7 @@ segments:
     overlay: True
     start: 0xB767B0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xB767B0, c]
     - [0xB76D80, bin]
     - [0xB77000, bin]
@@ -6147,7 +6273,7 @@ segments:
     overlay: True
     start: 0xB7A050
     vram: 0x80240000
-    files:
+    subsections:
     - [0xB7A050, c]
     - [0xB7A510, c]
     - [0xB7B330, bin]
@@ -6162,7 +6288,7 @@ segments:
     overlay: True
     start: 0xB7D920
     vram: 0x80240000
-    files:
+    subsections:
     - [0xB7D920, c]
     - [0xB7D9E0, c]
     - [0xB7DC20, bin]
@@ -6175,7 +6301,7 @@ segments:
     overlay: True
     start: 0xB80000
     vram: 0x80240000
-    files:
+    subsections:
     - [0xB80000, c]
     - [0xB80300, c]
     - [0xB80540, bin]
@@ -6188,7 +6314,7 @@ segments:
     overlay: True
     start: 0xB837C0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xB837C0, c]
     - [0xB837E0, bin]
     - [0xB838C0, bin]
@@ -6199,7 +6325,7 @@ segments:
     overlay: True
     start: 0xB83B90
     vram: 0x80240000
-    files:
+    subsections:
     - [0xB83B90, bin]
     - [0xB83E10, bin]
     - [0xB83E50, bin] # rodata
@@ -6208,7 +6334,7 @@ segments:
     overlay: True
     start: 0xB83E60
     vram: 0x80240000
-    files:
+    subsections:
     - [0xB83E60, c]
     - [0xB83E80, bin]
     - [0xB84110, bin]
@@ -6218,7 +6344,7 @@ segments:
     overlay: True
     start: 0xB84180
     vram: 0x80240000
-    files:
+    subsections:
     - [0xB84180, c]
     - [0xB851A0, c]
     - [0xB858A0, c]
@@ -6233,7 +6359,7 @@ segments:
     overlay: True
     start: 0xB8FCD0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xB8FCD0, bin]
     - [0xB903A0, bin]
     - [0xB93430, bin] # rodata
@@ -6242,7 +6368,7 @@ segments:
     overlay: True
     start: 0xB93440
     vram: 0x80240000
-    files:
+    subsections:
     - [0xB93440, c]
     - [0xB934B0, c]
     - [0xB93940, c]
@@ -6258,7 +6384,7 @@ segments:
     overlay: True
     start: 0xB97C00
     vram: 0x80240000
-    files:
+    subsections:
     - [0xB97C00, c]
     - [0xB97C70, c]
     - [0xB98DE0, bin]
@@ -6272,7 +6398,7 @@ segments:
     overlay: True
     start: 0xB9B480
     vram: 0x80240000
-    files:
+    subsections:
     - [0xB9B480, c]
     - [0xB9B9B0, bin]
     - [0xB9BA70, bin]
@@ -6285,7 +6411,7 @@ segments:
     overlay: True
     start: 0xB9D960
     vram: 0x80240000
-    files:
+    subsections:
     - [0xB9D960, c]
     - [0xB9D9D0, c]
     - [0xB9DB60, c]
@@ -6301,7 +6427,7 @@ segments:
     overlay: True
     start: 0xBA0730
     vram: 0x80240000
-    files:
+    subsections:
     - [0xBA0730, c]
     - [0xBA07A0, c]
     - [0xBA2150, bin]
@@ -6314,7 +6440,7 @@ segments:
     overlay: True
     start: 0xBA4780
     vram: 0x80240000
-    files:
+    subsections:
     - [0xBA4780, c]
     - [0xBA47F0, c]
     - [0xBA4CF0, c]
@@ -6330,7 +6456,7 @@ segments:
     overlay: True
     start: 0xBAA140
     vram: 0x80240000
-    files:
+    subsections:
     - [0xBAA140, c]
     - [0xBAA1B0, c]
     - [0xBAA3B0, c]
@@ -6347,7 +6473,7 @@ segments:
     overlay: True
     start: 0xBAD940
     vram: 0x80240000
-    files:
+    subsections:
     - [0xBAD940, c]
     - [0xBB0880, bin]
     - [0xBB0940, bin]
@@ -6361,7 +6487,7 @@ segments:
     overlay: True
     start: 0xBB2E00
     vram: 0x80240000
-    files:
+    subsections:
     - [0xBB2E00, c]
     - [0xBB3CC0, bin]
     - [0xBB3D80, bin]
@@ -6375,7 +6501,7 @@ segments:
     overlay: True
     start: 0xBB59E0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xBB59E0, c]
     - [0xBB5B70, bin]
     - [0xBB5EB0, bin]
@@ -6388,7 +6514,7 @@ segments:
     overlay: True
     start: 0xBB7070
     vram: 0x80240000
-    files:
+    subsections:
     - [0xBB7070, c]
     - [0xBB7940, c]
     - [0xBB79F0, c]
@@ -6402,7 +6528,7 @@ segments:
     overlay: True
     start: 0xBBB380
     vram: 0x80240000
-    files:
+    subsections:
     - [0xBBB380, c]
     - [0xBBB960, bin]
     - [0xBBBB90, bin]
@@ -6414,7 +6540,7 @@ segments:
     overlay: True
     start: 0xBBD1A0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xBBD1A0, c]
     - [0xBBD980, c]
     - [0xBBE2E0, bin]
@@ -6427,7 +6553,7 @@ segments:
     overlay: True
     start: 0xBC2A90
     vram: 0x80240000
-    files:
+    subsections:
     - [0xBC2A90, c]
     - [0xBC2CD0, c]
     - [0xBC2D40, bin]
@@ -6442,7 +6568,7 @@ segments:
     overlay: True
     start: 0xBC4280
     vram: 0x80240000
-    files:
+    subsections:
     - [0xBC4280, c]
     - [0xBC43F0, c]
     - [0xBC4B50, c]
@@ -6459,7 +6585,7 @@ segments:
     overlay: True
     start: 0xBC7E60
     vram: 0x80240000
-    files:
+    subsections:
     - [0xBC7E60, c]
     - [0xBC7EB0, c]
     - [0xBC8CE0, bin]
@@ -6474,7 +6600,7 @@ segments:
     overlay: True
     start: 0xBCD060
     vram: 0x80240000
-    files:
+    subsections:
     - [0xBCD060, c]
     - [0xBCD7D0, c]
     - [0xBCDA40, bin]
@@ -6487,7 +6613,7 @@ segments:
     overlay: True
     start: 0xBCE690
     vram: 0x80240000
-    files:
+    subsections:
     - [0xBCE690, bin]
     - [0xBCE760, bin]
     - [0xBCEAD0, bin]
@@ -6498,7 +6624,7 @@ segments:
     overlay: True
     start: 0xBCEBF0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xBCEBF0, c]
     - [0xBCEEB0, c]
     - [0xBCF0F0, c]
@@ -6515,7 +6641,7 @@ segments:
     overlay: True
     start: 0xBD3870
     vram: 0x80240000
-    files:
+    subsections:
     - [0xBD3870, c]
     - [0xBD40B0, c]
     - [0xBD4110, c]
@@ -6531,7 +6657,7 @@ segments:
     overlay: True
     start: 0xBDA7B0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xBDA7B0, c]
     - [0xBDA940, c]
     - [0xBDAB00, c]
@@ -6546,7 +6672,7 @@ segments:
     overlay: True
     start: 0xBDD1B0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xBDD1B0, c]
     - [0xBDE190, bin]
     - [0xBDE2A0, bin]
@@ -6558,7 +6684,7 @@ segments:
     overlay: True
     start: 0xBDED90
     vram: 0x80240000
-    files:
+    subsections:
     - [0xBDED90, c]
     - [0xBE04B0, bin]
     - [0xBE05C0, bin]
@@ -6571,7 +6697,7 @@ segments:
     overlay: True
     start: 0xBE37B0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xBE37B0, c]
     - [0xBE6B20, bin]
     - [0xBE6C30, bin]
@@ -6585,7 +6711,7 @@ segments:
     overlay: True
     start: 0xBE7BE0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xBE7BE0, c]
     - [0xBE8EE0, bin]
     - [0xBE9290, bin]
@@ -6597,7 +6723,7 @@ segments:
     overlay: True
     start: 0xBECDF0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xBECDF0, c]
     - [0xBED5F0, c]
     - [0xBED660, c]
@@ -6614,7 +6740,7 @@ segments:
     overlay: True
     start: 0xBF47A0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xBF47A0, c]
     - [0xBF4860, c]
     - [0xBF4A30, bin]
@@ -6631,7 +6757,7 @@ segments:
     overlay: True
     start: 0xBF6060
     vram: 0x80240000
-    files:
+    subsections:
     - [0xBF6060, c]
     - [0xBF60A0, bin]
     - [0xBF61A0, bin]
@@ -6644,7 +6770,7 @@ segments:
     overlay: True
     start: 0xBF6A00
     vram: 0x80240000
-    files:
+    subsections:
     - [0xBF6A00, bin]
     - [0xBF6B00, bin]
     - [0xBF6E30, bin]
@@ -6655,7 +6781,7 @@ segments:
     overlay: True
     start: 0xBF7680
     vram: 0x80240000
-    files:
+    subsections:
     - [0xBF7680, bin]
     - [0xBF7770, bin]
     - [0xBF7D00, bin]
@@ -6666,7 +6792,7 @@ segments:
     overlay: True
     start: 0xBF8790
     vram: 0x80240000
-    files:
+    subsections:
     - [0xBF8790, bin]
     - [0xBF8890, bin]
     - [0xBF8BB0, bin]
@@ -6676,7 +6802,7 @@ segments:
     overlay: True
     start: 0xBF9410
     vram: 0x80240000
-    files:
+    subsections:
     - [0xBF9410, bin]
     - [0xBF9510, bin]
     - [0xBF9840, bin]
@@ -6686,7 +6812,7 @@ segments:
     overlay: True
     start: 0xBFA0A0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xBFA0A0, c]
     - [0xBFA100, c]
     - [0xBFA150, bin]
@@ -6699,7 +6825,7 @@ segments:
     overlay: True
     start: 0xBFD880
     vram: 0x80240000
-    files:
+    subsections:
     - [0xBFD880, c]
     - [0xBFD8C0, c]
     - [0xBFD9A0, c]
@@ -6715,7 +6841,7 @@ segments:
     overlay: True
     start: 0xC2EBA0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xC2EBA0, c]
     - [0xC2FFD0, bin]
     - [0xC300F0, bin]
@@ -6726,7 +6852,7 @@ segments:
     overlay: True
     start: 0xC314E0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xC314E0, c]
     - [0xC31730, c]
     - [0xC33CB0, bin]
@@ -6740,7 +6866,7 @@ segments:
     overlay: True
     start: 0xC36530
     vram: 0x80240000
-    files:
+    subsections:
     - [0xC36530, c]
     - [0xC39640, bin]
     - [0xC39740, bin]
@@ -6752,7 +6878,7 @@ segments:
     overlay: True
     start: 0xC3AA10
     vram: 0x80240000
-    files:
+    subsections:
     - [0xC3AA10, c]
     - [0xC3BEA0, bin]
     - [0xC3BF90, bin]
@@ -6765,7 +6891,7 @@ segments:
     overlay: True
     start: 0xC3D080
     vram: 0x80240000
-    files:
+    subsections:
     - [0xC3D080, c]
     - [0xC3D340, bin]
     - [0xC3D440, bin]
@@ -6777,7 +6903,7 @@ segments:
     overlay: True
     start: 0xC3DBF0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xC3DBF0, c]
     - [0xC3F020, bin]
     - [0xC3F120, bin]
@@ -6789,7 +6915,7 @@ segments:
     overlay: True
     start: 0xC3FDB0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xC3FDB0, c]
     - [0xC43A40, bin]
     - [0xC43B40, bin]
@@ -6803,7 +6929,7 @@ segments:
     overlay: True
     start: 0xC46BE0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xC46BE0, c]
     - [0xC4A3E0, bin]
     - [0xC4A500, bin]
@@ -6816,7 +6942,7 @@ segments:
     overlay: True
     start: 0xC4C390
     vram: 0x80240000
-    files:
+    subsections:
     - [0xC4C390, c]
     - [0xC4C580, bin]
     - [0xC4C680, bin]
@@ -6828,7 +6954,7 @@ segments:
     overlay: True
     start: 0xC4D3E0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xC4D3E0, c]
     - [0xC4D430, bin]
     - [0xC4D550, bin]
@@ -6839,7 +6965,7 @@ segments:
     overlay: True
     start: 0xC4DEF0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xC4DEF0, c]
     - [0xC4E1B0, bin]
     - [0xC4E2A0, bin]
@@ -6851,7 +6977,7 @@ segments:
     overlay: True
     start: 0xC4E960
     vram: 0x80240000
-    files:
+    subsections:
     - [0xC4E960, bin]
     - [0xC4EA50, bin]
     - [0xC4ECE0, bin]
@@ -6862,7 +6988,7 @@ segments:
     overlay: True
     start: 0xC4F030
     vram: 0x80240000
-    files:
+    subsections:
     - [0xC4F030, bin]
     - [0xC4F130, bin]
     - [0xC4F4B0, bin]
@@ -6872,7 +6998,7 @@ segments:
     overlay: True
     start: 0xC4F510
     vram: 0x80240000
-    files:
+    subsections:
     - [0xC4F510, c]
     - [0xC50CA0, c]
     - [0xC50D80, bin]
@@ -6886,7 +7012,7 @@ segments:
     overlay: True
     start: 0xC52540
     vram: 0x80240000
-    files:
+    subsections:
     - [0xC52540, c]
     - [0xC53970, bin]
     - [0xC53A60, bin]
@@ -6899,7 +7025,7 @@ segments:
     overlay: True
     start: 0xC55A60
     vram: 0x80240000
-    files:
+    subsections:
     - [0xC55A60, bin]
     - [0xC55B60, bin]
     - [0xC55F30, bin] # rodata
@@ -6908,7 +7034,7 @@ segments:
     overlay: True
     start: 0xC55F40
     vram: 0x80240000
-    files:
+    subsections:
     - [0xC55F40, c]
     - [0xC56EF0, c]
     - [0xC571B0, bin]
@@ -6923,7 +7049,7 @@ segments:
     overlay: True
     start: 0xC599D0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xC599D0, c]
     - [0xC59CE0, bin]
     - [0xC5A730, bin] # rodata
@@ -6932,7 +7058,7 @@ segments:
     overlay: True
     start: 0xC5A740
     vram: 0x80240000
-    files:
+    subsections:
     - [0xC5A740, c]
     - [0xC5AA50, c]
     - [0xC5AC20, c]
@@ -6949,7 +7075,7 @@ segments:
     overlay: True
     start: 0xC60D10
     vram: 0x80240000
-    files:
+    subsections:
     - [0xC60D10, c]
     - [0xC61020, c]
     - [0xC63A10, c]
@@ -6966,7 +7092,7 @@ segments:
     overlay: True
     start: 0xC68130
     vram: 0x80240000
-    files:
+    subsections:
     - [0xC68130, c]
     - [0xC68440, c]
     - [0xC69180, c]
@@ -6980,7 +7106,7 @@ segments:
     overlay: True
     start: 0xC6C0D0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xC6C0D0, c]
     - [0xC6C3E0, bin]
     - [0xC6C910, bin] # rodata
@@ -6989,7 +7115,7 @@ segments:
     overlay: True
     start: 0xC6C920
     vram: 0x80240000
-    files:
+    subsections:
     - [0xC6C920, c]
     - [0xC6CC30, c]
     - [0xC6CD10, c]
@@ -7002,7 +7128,7 @@ segments:
     overlay: True
     start: 0xC6E330
     vram: 0x80240000
-    files:
+    subsections:
     - [0xC6E330, c]
     - [0xC6EA50, c]
     - [0xC70640, bin]
@@ -7017,7 +7143,7 @@ segments:
     overlay: True
     start: 0xC71480
     vram: 0x80240000
-    files:
+    subsections:
     - [0xC71480, c]
     - [0xC71C10, c]
     - [0xC71ED0, c]
@@ -7031,7 +7157,7 @@ segments:
     overlay: True
     start: 0xC76CE0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xC76CE0, c]
     - [0xC77A20, c]
     - [0xC77D00, c]
@@ -7045,7 +7171,7 @@ segments:
     overlay: True
     start: 0xC7E180
     vram: 0x80240000
-    files:
+    subsections:
     - [0xC7E180, c]
     - [0xC7E4B0, c]
     - [0xC7E850, bin]
@@ -7057,7 +7183,7 @@ segments:
     overlay: True
     start: 0xC801A0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xC801A0, c]
     - [0xC804B0, c]
     - [0xC80600, c]
@@ -7072,7 +7198,7 @@ segments:
     overlay: True
     start: 0xC85AB0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xC85AB0, c]
     - [0xC85DC0, c]
     - [0xC887B0, c]
@@ -7085,7 +7211,7 @@ segments:
     overlay: True
     start: 0xC8C0A0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xC8C0A0, c]
     - [0xC8C0E0, c]
     - [0xC8C3F0, c]
@@ -7096,7 +7222,7 @@ segments:
     overlay: True
     start: 0xC8DBB0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xC8DBB0, c]
     - [0xC8F8E0, bin]
     - [0xC8FA40, bin]
@@ -7112,7 +7238,7 @@ segments:
     overlay: True
     start: 0xC95F30
     vram: 0x80240000
-    files:
+    subsections:
     - [0xC95F30, c]
     - [0xC96240, c]
     - [0xC969F0, bin]
@@ -7123,7 +7249,7 @@ segments:
     overlay: True
     start: 0xC9A200
     vram: 0x80240000
-    files:
+    subsections:
     - [0xC9A200, c]
     - [0xC9A540, c]
     - [0xC9A590, bin]
@@ -7135,7 +7261,7 @@ segments:
     overlay: True
     start: 0xC9C300
     vram: 0x80240000
-    files:
+    subsections:
     - [0xC9C300, c]
     - [0xC9C610, c]
     - [0xC9C920, bin]
@@ -7147,7 +7273,7 @@ segments:
     overlay: True
     start: 0xC9DF20
     vram: 0x80240000
-    files:
+    subsections:
     - [0xC9DF20, c]
     - [0xC9DF60, c]
     - [0xC9EE30, c]
@@ -7164,7 +7290,7 @@ segments:
     overlay: True
     start: 0xCA72A0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xCA72A0, c]
     - [0xCA72E0, c]
     - [0xCA78D0, bin]
@@ -7176,7 +7302,7 @@ segments:
     overlay: True
     start: 0xCAC1F0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xCAC1F0, c]
     - [0xCAC5D0, c]
     - [0xCAC930, bin]
@@ -7189,7 +7315,7 @@ segments:
     overlay: True
     start: 0xCAED40
     vram: 0x80240000
-    files:
+    subsections:
     - [0xCAED40, c]
     - [0xCAFA80, c]
     - [0xCAFAC0, c]
@@ -7204,7 +7330,7 @@ segments:
     overlay: True
     start: 0xCB5000
     vram: 0x80240000
-    files:
+    subsections:
     - [0xCB5000, c]
     - [0xCB5040, c]
     - [0xCB50E0, c]
@@ -7219,7 +7345,7 @@ segments:
     overlay: True
     start: 0xCB9200
     vram: 0x80240000
-    files:
+    subsections:
     - [0xCB9200, c]
     - [0xCB9240, c]
     - [0xCB9280, c]
@@ -7239,7 +7365,7 @@ segments:
     overlay: True
     start: 0xCBDCD0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xCBDCD0, c]
     - [0xCBDFF0, bin]
     - [0xCBF790, bin]
@@ -7251,7 +7377,7 @@ segments:
     overlay: True
     start: 0xCC0E30
     vram: 0x80240000
-    files:
+    subsections:
     - [0xCC0E30, c]
     - [0xCC0E70, c]
     - [0xCC1520, bin]
@@ -7263,7 +7389,7 @@ segments:
     overlay: True
     start: 0xCC3810
     vram: 0x80240000
-    files:
+    subsections:
     - [0xCC3810, c]
     - [0xCC3850, c]
     - [0xCC6DE0, c]
@@ -7278,7 +7404,7 @@ segments:
     overlay: True
     start: 0xCCB310
     vram: 0x80240000
-    files:
+    subsections:
     - [0xCCB310, c]
     - [0xCCBE20, c]
     - [0xCCD670, c]
@@ -7294,7 +7420,7 @@ segments:
     overlay: True
     start: 0xCD06C0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xCD06C0, bin]
     - [0xCD07E0, bin]
     - [0xCD09C0, bin]
@@ -7306,7 +7432,7 @@ segments:
     overlay: True
     start: 0xCD1E30
     vram: 0x80240000
-    files:
+    subsections:
     - [0xCD1E30, c]
     - [0xCD1E70, c]
     - [0xCD1F10, c]
@@ -7324,7 +7450,7 @@ segments:
     overlay: True
     start: 0xCD72E0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xCD72E0, c]
     - [0xCD7320, c]
     - [0xCD7350, c]
@@ -7339,7 +7465,7 @@ segments:
     overlay: True
     start: 0xCDC6A0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xCDC6A0, c]
     - [0xCDCBD0, c]
     - [0xCDCC30, c]
@@ -7353,7 +7479,7 @@ segments:
     overlay: True
     start: 0xCE36F0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xCE36F0, c]
     - [0xCE4030, bin]
     - [0xCE41B0, bin]
@@ -7366,7 +7492,7 @@ segments:
     overlay: True
     start: 0xCE6700
     vram: 0x80240000
-    files:
+    subsections:
     - [0xCE6700, c]
     - [0xCE7240, c]
     - [0xCE73F0, bin]
@@ -7378,7 +7504,7 @@ segments:
     overlay: True
     start: 0xCEC240
     vram: 0x80240000
-    files:
+    subsections:
     - [0xCEC240, c]
     - [0xCEC280, c]
     - [0xCEC290, c]
@@ -7393,7 +7519,7 @@ segments:
     overlay: True
     start: 0xCEE260
     vram: 0x80240000
-    files:
+    subsections:
     - [0xCEE260, c]
     - [0xCEE2A0, c]
     - [0xCEEF30, bin]
@@ -7406,7 +7532,7 @@ segments:
     overlay: True
     start: 0xCF0940
     vram: 0x80240000
-    files:
+    subsections:
     - [0xCF0940, c]
     - [0xCF0980, c]
     - [0xCF0BC0, c]
@@ -7420,7 +7546,7 @@ segments:
     overlay: True
     start: 0xCF2BD0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xCF2BD0, c]
     - [0xCF2C10, c]
     - [0xCF4BC0, c]
@@ -7437,7 +7563,7 @@ segments:
     overlay: True
     start: 0xCF7B70
     vram: 0x80240000
-    files:
+    subsections:
     - [0xCF7B70, c]
     - [0xCF7E80, c]
     - [0xCF9AC0, bin]
@@ -7451,7 +7577,7 @@ segments:
     overlay: True
     start: 0xD05730
     vram: 0x80240000
-    files:
+    subsections:
     - [0xD05730, c]
     - [0xD05F60, c]
     - [0xD072F0, bin]
@@ -7467,7 +7593,7 @@ segments:
     overlay: True
     start: 0xD110C0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xD110C0, c]
     - [0xD119E0, bin]
     - [0xD11A70, bin]
@@ -7479,7 +7605,7 @@ segments:
     overlay: True
     start: 0xD135D0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xD135D0, c]
     - [0xD13810, c]
     - [0xD138E0, c]
@@ -7495,7 +7621,7 @@ segments:
     overlay: True
     start: 0xD187E0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xD187E0, c]
     - [0xD1A520, bin]
     - [0xD1A5B0, bin]
@@ -7509,7 +7635,7 @@ segments:
     overlay: True
     start: 0xD1FE90
     vram: 0x80240000
-    files:
+    subsections:
     - [0xD1FE90, c]
     - [0xD203E0, c]
     - [0xD224B0, bin]
@@ -7524,7 +7650,7 @@ segments:
     overlay: True
     start: 0xD2BD30
     vram: 0x80240000
-    files:
+    subsections:
     - [0xD2BD30, c]
     - [0xD2DD30, bin]
     - [0xD2DDC0, bin]
@@ -7538,7 +7664,7 @@ segments:
     overlay: True
     start: 0xD2FC80
     vram: 0x80240000
-    files:
+    subsections:
     - [0xD2FC80, c]
     - [0xD309C0, c]
     - [0xD31430, bin]
@@ -7552,7 +7678,7 @@ segments:
     overlay: True
     start: 0xD362F0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xD362F0, c]
     - [0xD366F0, bin]
     - [0xD36780, bin]
@@ -7563,7 +7689,7 @@ segments:
     overlay: True
     start: 0xD37800
     vram: 0x80240000
-    files:
+    subsections:
     - [0xD37800, c]
     - [0xD37BD0, c]
     - [0xD384A0, bin]
@@ -7577,7 +7703,7 @@ segments:
     overlay: True
     start: 0xD3A5D0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xD3A5D0, c]
     - [0xD3A610, c]
     - [0xD3A850, c]
@@ -7596,7 +7722,7 @@ segments:
     overlay: True
     start: 0xD4BA20
     vram: 0x80240000
-    files:
+    subsections:
     - [0xD4BA20, c]
     - [0xD4BAB0, c]
     - [0xD4BDC0, bin]
@@ -7611,7 +7737,7 @@ segments:
     overlay: True
     start: 0xD4D040
     vram: 0x80240000
-    files:
+    subsections:
     - [0xD4D040, c]
     - [0xD4D060, c]
     - [0xD4E3F0, bin]
@@ -7625,7 +7751,7 @@ segments:
     overlay: True
     start: 0xD4FFF0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xD4FFF0, c]
     - [0xD50010, c]
     - [0xD51650, bin]
@@ -7639,7 +7765,7 @@ segments:
     overlay: True
     start: 0xD53CB0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xD53CB0, c]
     - [0xD53CD0, c]
     - [0xD53E60, bin]
@@ -7652,7 +7778,7 @@ segments:
     overlay: True
     start: 0xD54690
     vram: 0x80240000
-    files:
+    subsections:
     - [0xD54690, c]
     - [0xD546B0, c]
     - [0xD54840, c]
@@ -7667,7 +7793,7 @@ segments:
     overlay: True
     start: 0xD55BB0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xD55BB0, c]
     - [0xD55BD0, c]
     - [0xD56D90, bin]
@@ -7679,7 +7805,7 @@ segments:
     overlay: True
     start: 0xD57430
     vram: 0x80240000
-    files:
+    subsections:
     - [0xD57430, c]
     - [0xD58380, bin]
     - [0xD58410, bin]
@@ -7690,7 +7816,7 @@ segments:
     overlay: True
     start: 0xD58890
     vram: 0x80240000
-    files:
+    subsections:
     - [0xD58890, c]
     - [0xD588B0, c]
     - [0xD59EE0, bin]
@@ -7701,7 +7827,7 @@ segments:
     overlay: True
     start: 0xD5F2B0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xD5F2B0, c]
     - [0xD5F2D0, c]
     - [0xD60960, bin]
@@ -7712,7 +7838,7 @@ segments:
     overlay: True
     start: 0xD61500
     vram: 0x80240000
-    files:
+    subsections:
     - [0xD61500, c]
     - [0xD61520, c]
     - [0xD626E0, bin]
@@ -7725,7 +7851,7 @@ segments:
     overlay: True
     start: 0xD62D10
     vram: 0x80240000
-    files:
+    subsections:
     - [0xD62D10, c]
     - [0xD63F20, bin]
     - [0xD63FB0, bin]
@@ -7736,7 +7862,7 @@ segments:
     overlay: True
     start: 0xD645E0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xD645E0, c]
     - [0xD64600, c]
     - [0xD65BC0, bin]
@@ -7748,7 +7874,7 @@ segments:
     overlay: True
     start: 0xD67D00
     vram: 0x80240000
-    files:
+    subsections:
     - [0xD67D00, c]
     - [0xD67D20, c]
     - [0xD68EE0, bin]
@@ -7761,7 +7887,7 @@ segments:
     overlay: True
     start: 0xD69810
     vram: 0x80240000
-    files:
+    subsections:
     - [0xD69810, c]
     - [0xD69830, c]
     - [0xD69850, bin]
@@ -7774,7 +7900,7 @@ segments:
     overlay: True
     start: 0xD69B20
     vram: 0x80240000
-    files:
+    subsections:
     - [0xD69B20, c]
     - [0xD69B40, c]
     - [0xD6AA40, bin]
@@ -7785,7 +7911,7 @@ segments:
     overlay: True
     start: 0xD6B620
     vram: 0x80240000
-    files:
+    subsections:
     - [0xD6B620, c]
     - [0xD6B640, c]
     - [0xD6C540, bin]
@@ -7797,7 +7923,7 @@ segments:
     overlay: True
     start: 0xD6E9B0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xD6E9B0, c]
     - [0xD6E9D0, c]
     - [0xD70360, bin]
@@ -7809,7 +7935,7 @@ segments:
     overlay: True
     start: 0xD763A0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xD763A0, c]
     - [0xD763C0, c]
     - [0xD772C0, bin]
@@ -7820,7 +7946,7 @@ segments:
     overlay: True
     start: 0xD77F20
     vram: 0x80240000
-    files:
+    subsections:
     - [0xD77F20, c]
     - [0xD77F40, c]
     - [0xD78040, bin]
@@ -7832,7 +7958,7 @@ segments:
     overlay: True
     start: 0xD78880
     vram: 0x80240000
-    files:
+    subsections:
     - [0xD78880, c]
     - [0xD788A0, c]
     - [0xD78B50, bin]
@@ -7844,7 +7970,7 @@ segments:
     overlay: True
     start: 0xD799F0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xD799F0, c]
     - [0xD7AC00, bin]
     - [0xD7AC90, bin]
@@ -7856,7 +7982,7 @@ segments:
     overlay: True
     start: 0xD7B2A0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xD7B2A0, c]
     - [0xD7C4B0, bin]
     - [0xD7C540, bin]
@@ -7868,7 +7994,7 @@ segments:
     overlay: True
     start: 0xD7CB50
     vram: 0x80240000
-    files:
+    subsections:
     - [0xD7CB50, c]
     - [0xD7CB70, c]
     - [0xD7DDD0, bin]
@@ -7880,7 +8006,7 @@ segments:
     overlay: True
     start: 0xD7ED60
     vram: 0x80240000
-    files:
+    subsections:
     - [0xD7ED60, c]
     - [0xD7ED80, c]
     - [0xD7F270, c]
@@ -7895,7 +8021,7 @@ segments:
     overlay: True
     start: 0xD86A00
     vram: 0x80240000
-    files:
+    subsections:
     - [0xD86A00, c]
     - [0xD86A20, c]
     - [0xD87240, bin]
@@ -7907,7 +8033,7 @@ segments:
     overlay: True
     start: 0xD896E0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xD896E0, c]
     - [0xD89700, c]
     - [0xD8A770, bin]
@@ -7919,7 +8045,7 @@ segments:
     overlay: True
     start: 0xD8B3B0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xD8B3B0, c]
     - [0xD8B3D0, c]
     - [0xD8C3B0, bin]
@@ -7931,7 +8057,7 @@ segments:
     overlay: True
     start: 0xD8D250
     vram: 0x80240000
-    files:
+    subsections:
     - [0xD8D250, c]
     - [0xD8D270, c]
     - [0xD8FBA0, c]
@@ -7946,7 +8072,7 @@ segments:
     overlay: True
     start: 0xD91700
     vram: 0x80240000
-    files:
+    subsections:
     - [0xD91700, c]
     - [0xD92650, bin]
     - [0xD926F0, bin]
@@ -7957,7 +8083,7 @@ segments:
     overlay: True
     start: 0xD92F40
     vram: 0x80240000
-    files:
+    subsections:
     - [0xD92F40, c]
     - [0xD94760, bin]
     - [0xD94800, bin]
@@ -7969,7 +8095,7 @@ segments:
     overlay: True
     start: 0xD955F0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xD955F0, c]
     - [0xD96CD0, bin]
     - [0xD96D70, bin]
@@ -7980,7 +8106,7 @@ segments:
     overlay: True
     start: 0xD97890
     vram: 0x80240000
-    files:
+    subsections:
     - [0xD97890, c]
     - [0xD98F70, bin]
     - [0xD99010, bin]
@@ -7991,7 +8117,7 @@ segments:
     overlay: True
     start: 0xD999B0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xD999B0, c]
     - [0xD999D0, c]
     - [0xD9A8D0, bin]
@@ -8003,7 +8129,7 @@ segments:
     overlay: True
     start: 0xD9AEF0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xD9AEF0, c]
     - [0xD9B150, c]
     - [0xD9BB20, bin]
@@ -8018,7 +8144,7 @@ segments:
     overlay: True
     start: 0xD9D4D0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xD9D4D0, c]
     - [0xD9D510, c]
     - [0xDA0080, bin]
@@ -8033,7 +8159,7 @@ segments:
     overlay: True
     start: 0xDA5240
     vram: 0x80240000
-    files:
+    subsections:
     - [0xDA5240, c]
     - [0xDA5260, c]
     - [0xDA5AD0, bin]
@@ -8045,7 +8171,7 @@ segments:
     overlay: True
     start: 0xDAD400
     vram: 0x80240000
-    files:
+    subsections:
     - [0xDAD400, c]
     - [0xDAF240, c]
     - [0xDAF320, bin]
@@ -8060,7 +8186,7 @@ segments:
     overlay: True
     start: 0xDB22C0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xDB22C0, c]
     - [0xDB46C0, bin]
     - [0xDB4770, bin]
@@ -8073,7 +8199,7 @@ segments:
     overlay: True
     start: 0xDB7910
     vram: 0x80240000
-    files:
+    subsections:
     - [0xDB7910, c]
     - [0xDB8180, c]
     - [0xDB8440, bin]
@@ -8087,7 +8213,7 @@ segments:
     overlay: True
     start: 0xDBD2B0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xDBD2B0, c]
     - [0xDC01D0, c]
     - [0xDC04D0, c]
@@ -8106,7 +8232,7 @@ segments:
     overlay: True
     start: 0xDC43D0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xDC43D0, c]
     - [0xDC4C40, c]
     - [0xDC51B0, bin]
@@ -8119,7 +8245,7 @@ segments:
     overlay: True
     start: 0xDCCCD0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xDCCCD0, c]
     - [0xDCCFA0, c]
     - [0xDCD3B0, c]
@@ -8142,7 +8268,7 @@ segments:
     overlay: True
     start: 0xDD79B0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xDD79B0, c]
     - [0xDD8220, bin]
     - [0xDD8640, bin]
@@ -8155,7 +8281,7 @@ segments:
     overlay: True
     start: 0xDDC830
     vram: 0x80240000
-    files:
+    subsections:
     - [0xDDC830, c]
     - [0xDDCFC0, c]
     - [0xDDDD00, bin]
@@ -8167,7 +8293,7 @@ segments:
     overlay: True
     start: 0xDDF310
     vram: 0x80240000
-    files:
+    subsections:
     - [0xDDF310, c]
     - [0xDDF730, c]
     - [0xDDF7D0, bin]
@@ -8179,7 +8305,7 @@ segments:
     overlay: True
     start: 0xDE2490
     vram: 0x80240000
-    files:
+    subsections:
     - [0xDE2490, c]
     - [0xDE2710, c]
     - [0xDE36C0, c]
@@ -8193,7 +8319,7 @@ segments:
     overlay: True
     start: 0xDE56B0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xDE56B0, c]
     - [0xDE5810, c]
     - [0xDE5C70, bin]
@@ -8205,7 +8331,7 @@ segments:
     overlay: True
     start: 0xDE8770
     vram: 0x80240000
-    files:
+    subsections:
     - [0xDE8770, c]
     - [0xDE8F70, bin]
     - [0xDE9670, bin]
@@ -8216,7 +8342,7 @@ segments:
     overlay: True
     start: 0xDEBED0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xDEBED0, c]
     - [0xDEC4D0, bin]
     - [0xDEC600, bin]
@@ -8227,7 +8353,7 @@ segments:
     overlay: True
     start: 0xDEEEA0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xDEEEA0, c]
     - [0xDEF400, c]
     - [0xDF25B0, bin]
@@ -8244,7 +8370,7 @@ segments:
     overlay: True
     start: 0xDF6A00
     vram: 0x80240000
-    files:
+    subsections:
     - [0xDF6A00, c]
     - [0xDF6A20, c]
     - [0xDF9300, c]
@@ -8261,7 +8387,7 @@ segments:
     overlay: True
     start: 0xE05360
     vram: 0x80240000
-    files:
+    subsections:
     - [0xE05360, c]
     - [0xE05370, c]
     - [0xE05390, c]
@@ -8279,7 +8405,7 @@ segments:
     overlay: True
     start: 0xE0E7A0
     vram: 0x80240000
-    files:
+    subsections:
     - [0xE0E7A0, c]
     - [0xE0F980, c]
     - [0xE0FF60, bin]
@@ -8293,7 +8419,7 @@ segments:
     overlay: True
     start: 0xE12760
     vram: 0x80240000
-    files:
+    subsections:
     - [0xE12760, c]
     - [0xE12930, c]
     - [0xE13F10, bin]
@@ -8306,7 +8432,7 @@ segments:
     overlay: True
     start: 0xE15D80
     vram: 0x80240000
-    files:
+    subsections:
     - [0xE15D80, c]
     - [0xE18150, c]
     - [0xE18180, bin]
@@ -8319,7 +8445,7 @@ segments:
     overlay: True
     start: 0xE1E380
     vram: 0x80240000
-    files:
+    subsections:
     - [0xE1E380, bin]
     - [0xE1E460, bin]
   - name: world/area_gv/gv_01/
@@ -8327,164 +8453,164 @@ segments:
     overlay: True
     start: 0xE1E460
     vram: 0x80240000
-    files:
+    subsections:
     - [0xE1E460, c]
     - [0xE1EC20, bin]
   - type: code
     overlay: True
     start: 0xE20110
     vram: 0x802B7000
-    files:
+    subsections:
     - [0xE20110, c]
     - [0xE20B30, bin]
   - type: code
     overlay: True
     start: 0xE20EB0
     vram: 0x802B7000
-    files:
+    subsections:
     - [0xe20eb0, c, code_e20eb0]
     - [0xE215C0, bin]
   - type: code
     overlay: True
     start: 0xE21870
     vram: 0x802B7000
-    files:
+    subsections:
     - [0xE21870, c]
     - [0xE21EB0, bin]
   - type: code
     overlay: True
     start: 0xE225B0
     vram: 0x802B7000
-    files:
+    subsections:
     - [0xE225B0, c]
     - [0xE22B30, bin]
   - type: code
     start: 0xE23260
     vram: 0x802B6000
     overlay: True
-    files:
+    subsections:
     - [0xE23260, c]
     - [0xE23690, bin]
   - type: code
     start: 0xE236E0
     vram: 0x802B6000
     overlay: True
-    files:
+    subsections:
     - [0xE236E0, c]
     - [0xE23FE0, bin]
   - type: code
     start: 0xE24040
     vram: 0x802B6000
     overlay: True
-    files:
+    subsections:
     - [0xE24040, c]
   - type: code
     start: 0xE245D0
     vram: 0x802B6000
     overlay: True
-    files:
+    subsections:
     - [0xE245D0, c]
     - [0xE248D0, bin]
   - type: code
     start: 0xE24920
     vram: 0x802B6000
     overlay: True
-    files:
+    subsections:
     - [0xE24920, c]
   - type: code
     start: 0xE24ED0
     vram: 0x802B6000
     overlay: True
-    files:
+    subsections:
     - [0xE24ED0, c]
     - [0xE25C80, bin]
   - type: code
     start: 0xE25D60
     vram: 0x802B6000
     overlay: True
-    files:
+    subsections:
     - [0xE25D60, c]
     - [0xE26700, bin]
   - type: code
     start: 0xE26710
     vram: 0x802B6000
     overlay: True
-    files:
+    subsections:
     - [0xE26710, c]
     - [0xE26DA0, bin]
   - type: code
     start: 0xE26DE0
     vram: 0x802B6000
     overlay: True
-    files:
+    subsections:
     - [0xE26DE0, c]
     - [0xE274C0, bin]
   - type: code
     start: 0xE27510
     vram: 0x802B6000
     overlay: True
-    files:
+    subsections:
     - [0xE27510, c]
     - [0xE27C50, bin]
   - type: code
     start: 0xE27C90
     vram: 0x802B6000
     overlay: True
-    files:
+    subsections:
     - [0xE27C90, c]
   - type: code
     start: 0xE27F40
     vram: 0x802B6000
     overlay: True
-    files:
+    subsections:
     - [0xE27F40, c]
     - [0xE28790, bin]
   - type: code
     start: 0xE287F0
     vram: 0x802B6000
     overlay: True
-    files:
+    subsections:
     - [0xE287F0, c]
   - type: code
     start: 0xE28A30
     vram: 0x802B6000
     overlay: True
-    files:
+    subsections:
     - [0xE28A30, c]
     - [0xE29190, bin]
   - type: code
     start: 0xE291A0
     vram: 0x802B6000
     overlay: True
-    files:
+    subsections:
     - [0xE291A0, c]
     - [0xE29450, bin]
   - type: code
     start: 0xE29470
     vram: 0x802B6000
     overlay: True
-    files:
+    subsections:
     - [0xE29470, c]
     - [0xE2A300, bin]
   - type: code
     start: 0xE2A340
     vram: 0x802B6000
     overlay: True
-    files:
+    subsections:
     - [0xE2A340, c]
     - [0xE2A690, bin]
   - type: code
     start: 0xE2A6B0
     vram: 0x802B6000
     overlay: True
-    files:
+    subsections:
     - [0xE2A6B0, c]
     - [0xE2B420, bin]
   - type: code
     start: 0xE2B530
     vram: 0x802BAE00
     overlay: True
-    files:
+    subsections:
     - [0xE2B530, c]
     - [0xE2BE40, c]
     - [0xE2C930, c]
@@ -8493,7 +8619,7 @@ segments:
     start: 0xE2D730
     vram: 0x802BAE00
     overlay: True
-    files:
+    subsections:
     - [0xE2D730, c]
     - [0xE2E5F0, c]
     - [0xE2EDE0, c]
@@ -8502,7 +8628,7 @@ segments:
     start: 0xE2F750
     vram: 0x802BAE00
     overlay: True
-    files:
+    subsections:
     - [0xE2F750, c]
     - [0xE307C0, c]
     - [0xE31380, bin]
@@ -8511,7 +8637,7 @@ segments:
     start: 0xEA0900
     vram: 0x80240000
     overlay: True
-    files:
+    subsections:
     - [0xEA0900, c]
     - [0xEA0C10, c]
     - [0xEA36E0, c]
@@ -8520,7 +8646,7 @@ segments:
     start: 0xEA6FD0
     vram: 0x80240000
     overlay: True
-    files:
+    subsections:
     - [0xEA6FD0, c]
     - [0xEA7010, c]
     - [0xEA7320, c]
@@ -8529,14 +8655,14 @@ segments:
     start: 0xEA8AE0
     vram: 0x80240000
     overlay: True
-    files:
+    subsections:
     - [0xEA8AE0, c]
     - [0xEAA810, bin]
   - type: code
     start: 0xEB0E60
     vram: 0x80240000
     overlay: True
-    files:
+    subsections:
     - [0xEB0E60, c]
     - [0xEB1170, c]
     - [0xEB1920, bin]
@@ -8544,7 +8670,7 @@ segments:
     start: 0xEB5130
     vram: 0x80240000
     overlay: True
-    files:
+    subsections:
     - [0xEB5130, c]
     - [0xEB5470, c]
     - [0xEB54C0, bin]
@@ -8552,7 +8678,7 @@ segments:
     start: 0xEB7230
     vram: 0x80240000
     overlay: True
-    files:
+    subsections:
     - [0xEB7230, c]
     - [0xEB7540, c]
     - [0xEB7850, bin]
@@ -8560,7 +8686,7 @@ segments:
     start: 0xEB8E50
     vram: 0x80240000
     overlay: True
-    files:
+    subsections:
     - [0xEB8E50, c]
     - [0xEB8E90, c]
     - [0xEB9D90, c]
@@ -8569,7 +8695,7 @@ segments:
     start: 0xEC2200
     vram: 0x80240000
     overlay: True
-    files:
+    subsections:
     - [0xEC2200, c]
     - [0xEC2240, c]
     - [0xEC2610, c]
@@ -8578,7 +8704,7 @@ segments:
     start: 0xEC71B0
     vram: 0x80240000
     overlay: True
-    files:
+    subsections:
     - [0xEC71B0, c]
     - [0xEC7590, c]
     - [0xEC78F0, bin]
@@ -8586,7 +8712,7 @@ segments:
     start: 0xEC9D00
     vram: 0x80240000
     overlay: True
-    files:
+    subsections:
     - [0xEC9D00, c]
     - [0xECAA40, c]
     - [0xECAA80, c]
@@ -8597,7 +8723,7 @@ segments:
     start: 0xECFFF0
     vram: 0x80240000
     overlay: True
-    files:
+    subsections:
     - [0xECFFF0, c]
     - [0xED0030, c]
     - [0xED00D0, c]
@@ -8607,7 +8733,7 @@ segments:
     start: 0xED4220
     vram: 0x80240000
     overlay: True
-    files:
+    subsections:
     - [0xED4220, c]
     - [0xED4260, c]
     - [0xED42A0, c]
@@ -8618,14 +8744,14 @@ segments:
     start: 0xED8E20
     vram: 0x80240000
     overlay: True
-    files:
+    subsections:
     - [0xED8E20, c]
     - [0xED9170, bin]
   - type: code
     start: 0xEDBFE0
     vram: 0x80240000
     overlay: True
-    files:
+    subsections:
     - [0xEDBFE0, c]
     - [0xEDC020, c]
     - [0xEDC6D0, bin]
@@ -8633,7 +8759,7 @@ segments:
     start: 0xEDE9C0
     vram: 0x80240000
     overlay: True
-    files:
+    subsections:
     - [0xEDE9C0, c]
     - [0xEDEA00, c]
     - [0xEE2040, c]
@@ -8642,7 +8768,7 @@ segments:
     start: 0xEE65B0
     vram: 0x80240000
     overlay: True
-    files:
+    subsections:
     - [0xEE65B0, c]
     - [0xEE70C0, c]
     - [0xEE8940, c]
@@ -8651,7 +8777,7 @@ segments:
     start: 0xEED100
     vram: 0x80240000
     overlay: True
-    files:
+    subsections:
     - [0xEED100, c]
     - [0xEED140, c]
     - [0xEED1E0, c]
@@ -8662,7 +8788,7 @@ segments:
     start: 0xEF2610
     vram: 0x80240000
     overlay: True
-    files:
+    subsections:
     - [0xEF2610, c]
     - [0xEF2650, c]
     - [0xEF2680, c]
@@ -8671,7 +8797,7 @@ segments:
     start: 0xEF7A80
     vram: 0x80240000
     overlay: True
-    files:
+    subsections:
     - [0xEF7A80, c]
     - [0xEF7FB0, c]
     - [0xEF8010, c]
@@ -8680,7 +8806,7 @@ segments:
     start: 0xEFEB00
     vram: 0x80240000
     overlay: True
-    files:
+    subsections:
     - [0xEFEB00, c]
     - [0xEFF440, bin] # some of this is audio-related and not part of this overlay
   - [0xF007C0, bin, Battle_Fanfare_02] # BGM start
@@ -8862,10 +8988,10 @@ segments:
           - read_paper
         palettes:
           - normal
-          - poisoned
+          - green
           - inactive
-          - electrified
-          - burnt
+          - yellow
+          - gray
         animations:
           - still
           - idle
@@ -8878,8 +9004,143 @@ segments:
           - talk
           - celebrate
           - read_paper
-      - world_kooper
-      - world_bombette
+      - name: world_kooper
+        frames:
+          - walk1
+          - walk2
+          - walk3
+          - idle1
+          - idle2
+          - idle3
+          - idle4
+          - shell1
+          - shell2
+          - shell3
+          - shell4
+          - shell5
+          - shell6
+          - shell7
+          - shell8
+          - pain1
+          - pain2
+          - shell_start1
+          - shell_start2
+          - shell_start3
+          - talk
+          - talk_wave1
+          - talk_wave2
+          - happy1
+          - happy2
+          - happy3
+          - happy4
+          - jump
+          - fall
+          - read_paper
+          - talk_sad1
+          - talk_sad2
+        palettes:
+          - normal
+          - green
+          - inactive
+          - yellow
+          - gray
+        animations:
+          - still
+          - happy_still
+          - sad_still
+          - idle
+          - walk
+          - walk_fast
+          - jump
+          - fall
+          - shell_still1
+          - shell_spin
+          - shell_start
+          - shell_end
+          - pain
+          - talk
+          - talk_wave
+          - anim_0f
+          - celebrate
+          - celebrate_loop
+          - shell_still2
+          - read_paper
+      - name: world_bombette
+        frames:
+          - still
+          - walk1
+          - walk2
+          - walk3
+          - walk4
+          - idle1
+          - idle2
+          - idle3
+          - idle4
+          - jump
+          - fall
+          - key_fall
+          - still_lit
+          - walk_lit1
+          - walk_lit2
+          - walk_lit3
+          - charge_lit
+          - pain1
+          - pain2
+          - frame_13
+          - happy1
+          - happy2
+          - happy3
+          - happy4
+          - happy5
+          - happy_jump
+          - happy_fall
+          - lit_fuse1
+          - lit_fuse2
+          - lit_fuse3
+          - lit_fuse4
+          - lit_fuse5
+          - lit_fuse6
+          - key1
+          - key2
+          - key3
+          - key4
+          - key5
+          - key6
+          - key7
+          - key8
+        palettes:
+          - normal
+          - fuse
+          - red
+          - green
+          - fuse2
+          - black
+          - inactive
+          - purple
+          - black2
+          - yellow
+          - fuse3
+          - black3
+          - gray
+        animations:
+          - still
+          - happy
+          - still_lit
+          - idle
+          - happy_idle
+          - walk
+          - walk_lit
+          - walk_fast
+          - walk_fast_lit
+          - jump
+          - fall
+          - happy_jump
+          - happy_fall
+          - pain
+          - idle_fast
+          - celebrate
+          - lit_charge
+          - anim_11
       - world_parakarry
       - world_bow
       - world_watt
@@ -9175,55 +9436,419 @@ segments:
   - start: 0x1B83000
     type: PaperMarioMessages
     files:
-      - intro
-      - end/postgame
-      - toad_town/gate
-      - toad_town/castle
-      - toad_town/bridge
-      - toad_town/train
-      - toad_town/warehouse
-      - toad_town/docks
-      - toad_town/minigames
-      - castle_grounds
-      - shooting_star_summit
-      - prologue
-      - chapter1
-      - chapter2
-      - chapter3
-      - chapter4
-      - chapter5
-      - chapter6
-      - chapter7
-      - chapter8
-      - peach_interludes
-      - koopa_koot_quests
-      - advice/russ_t
-      - toad_town/bulletin_news
-      - toad_town/bulletin_gossip
-      - world/map_tattles
-      - world/npc_tattles
-      - world/entity_tattles
-      - battle/enemy_tattles
-      - ui/misc
-      - ui/choices
-      - ui/pause
-      - diary_letters
-      - advice/merlon
-      - advice/merluvlee
-      - item/descriptions_23 # TODO: difference between 23,24,25
-      - item/descriptions_24
-      - item/descriptions_25
-      - item/names
-      - shops
-      - partner_descriptions
-      - battle/enemy_names
-      - battle/mario_moves
-      - battle/partner_moves
-      - quiz/questions
-      - quiz/options
-      - end/credits
-  - [0x1C84D30, bin]
-  - [0x1E00000, bin] # sprites here; Star Rod considers this a copy of sprite/npc.bin, but that doesnt appear to be true
+      - 00_introduction
+      - 01_postgame_celebration
+      - 02_toad_town_gate_sector
+      - 03_toad_town_castle_sector
+      - 04_toad_town_bridge_sector
+      - 05_toad_town_train_sector
+      - 06_toad_town_warehouse_sector
+      - 07_toad_town_docks_sector
+      - 08_minigames
+      - 09_castle_grounds
+      - 0A_shooting_star_summit
+      - 0B_prologue
+      - 0C_chapter_1
+      - 0D_chapter_2
+      - 0E_chapter_3
+      - 0F_chapter_4
+      - 10_chapter_5
+      - 11_chapter_6
+      - 12_chapter_7
+      - 13_chapter_8
+      - 14_peach_segments
+      - 15_koopa_koot_favors
+      - 16_russ_t_advice
+      - 17_news_bulletin
+      - 18_gossip_bulletin
+      - 19_map_tattles
+      - 1A_npc_tattles
+      - 1B_entity_tattles
+      - 1C_enemy_tattles
+      - 1D_menus
+      - 1E_choices
+      - 1F_pause
+      - 20_party_letters_luigi_diary
+      - 21_advice_fortunes
+      - 22_treasure_fortunes
+      - 23_item_descriptions # TODO: difference between 23,24,25 (shops, menus, pickups?)
+      - 24_item_descriptions
+      - 25_item_descriptions
+      - 26_item_names
+      - 27_shop_messages
+      - 28_partner_descriptions
+      - 29_enemy_names
+      - 2A_mario_moves
+      - 2B_partner_moves
+      - 2C_quiz_questions
+      - 2D_quiz_options
+      - 2E_credits
+    ids:
+      - [0x19, 0x03B, kmr_03_tattle]
+      - [0x19, 0x040, kmr_12_tattle]
+
+      - [0x1C, 0x000, actor_goomba_tattle]
+      - [0x1C, 0x001, actor_spiked_goomba_tattle]
+      - [0x1C, 0x002, actor_paragoomba_tattle]
+      - [0x1C, 0x003, actor_red_goomba_boss_tattle]
+      - [0x1C, 0x004, actor_blue_goomba_boss_tattle]
+      - [0x1C, 0x005, actor_goomba_king_tattle]
+      - [0x1C, 0x006, actor_goomnut_tree_tattle]
+      - [0x1C, 0x007, actor_koopa_troopa_tattle]
+      - [0x1C, 0x008, actor_paratroopa_tattle]
+      - [0x1C, 0x009, actor_fuzzy_tattle]
+      - [0x1C, 0x00A, actor_bob_omb_tattle]
+      - [0x1C, 0x00B, actor_bullet_bill_tattle]
+      - [0x1C, 0x00C, actor_bill_blaster_tattle]
+      - [0x1C, 0x00D, actor_fake_bowser_tattle]
+      - [0x1C, 0x00E, actor_red_ninjakoopa_tattle]
+      - [0x1C, 0x00F, actor_blue_ninjakoopa_tattle]
+      - [0x1C, 0x010, actor_yellow_ninjakoopa_tattle]
+      - [0x1C, 0x011, actor_green_ninjakoopa_tattle]
+      - [0x1C, 0x012, actor_koopa_bros_tattle]
+      - [0x1C, 0x013, actor_jr_troopa1_tattle]
+      - [0x1C, 0x014, actor_monty_mole_tattle]
+      - [0x1C, 0x015, actor_cleft_tattle]
+      - [0x1C, 0x016, actor_pokey_tattle]
+      - [0x1C, 0x017, actor_bandit_tattle]
+      - [0x1C, 0x018, actor_pokey_mummy_tattle]
+      - [0x1C, 0x019, actor_buzzy_beetle_tattle]
+      - [0x1C, 0x01A, actor_swooper_tattle]
+      - [0x1C, 0x01B, actor_buzzar_tattle]
+      - [0x1C, 0x01C, actor_tutankoopa_tattle]
+      - [0x1C, 0x01D, actor_chomp_tattle]
+      - [0x1C, 0x01E, actor_stone_chomp_tattle]
+      - [0x1C, 0x01F, actor_piranha_plant_tattle]
+      - [0x1C, 0x020, actor_forest_fuzzy_tattle]
+      - [0x1C, 0x021, actor_hyper_goomba_tattle]
+      - [0x1C, 0x022, actor_hyper_paragoomba_tattle]
+      - [0x1C, 0x023, actor_hyper_cleft_tattle]
+      - [0x1C, 0x024, actor_clubba_tattle]
+      - [0x1C, 0x025, actor_tubba_blubba_invincible_tattle]
+      - [0x1C, 0x026, actor_tubba_heart_tattle]
+      - [0x1C, 0x027, actor_tubba_blubba_tattle]
+      - [0x1C, 0x028, actor_jr_troopa2_tattle]
+      - [0x1C, 0x029, actor_shy_guy_tattle]
+      - [0x1C, 0x02A, actor_groove_guy_tattle]
+      - [0x1C, 0x02B, actor_spy_guy_tattle]
+      - [0x1C, 0x02C, actor_pyro_guy_tattle]
+      - [0x1C, 0x02D, actor_sky_guy_tattle]
+      - [0x1C, 0x02E, actor_medi_guy_tattle]
+      - [0x1C, 0x02F, actor_anti_guy_tattle]
+      - [0x1C, 0x030, actor_big_lantern_ghost_tattle]
+      - [0x1C, 0x031, actor_general_guy_tattle]
+      - [0x1C, 0x032, actor_shy_squad_tattle]
+      - [0x1C, 0x033, actor_shy_stack_tattle]
+      - [0x1C, 0x034, actor_stilt_guy_tattle]
+      - [0x1C, 0x035, actor_hurt_plant_tattle]
+      - [0x1C, 0x036, actor_m_bush_tattle]
+      - [0x1C, 0x037, actor_jungle_fuzzy_tattle]
+      - [0x1C, 0x038, actor_spear_guy_tattle]
+      - [0x1C, 0x039, actor_putrid_piranha_tattle]
+      - [0x1C, 0x03A, actor_lava_bubble_tattle]
+      - [0x1C, 0x03B, actor_spike_top_tattle]
+      - [0x1C, 0x03C, actor_lava_piranha_phase_1_tattle]
+      - [0x1C, 0x03D, actor_lava_piranha_phase_2_tattle]
+      - [0x1C, 0x03E, actor_lava_bud_phase_1_tattle]
+      - [0x1C, 0x03F, actor_lava_bud_phase_2_tattle]
+      - [0x1C, 0x040, actor_petit_piranha_tattle]
+      - [0x1C, 0x041, actor_jr_troopa3_tattle]
+      - [0x1C, 0x042, actor_lakitu_tattle]
+      - [0x1C, 0x043, actor_spiny_tattle]
+      - [0x1C, 0x044, actor_bzzap_tattle]
+      - [0x1C, 0x045, actor_crazee_dayzee_tattle]
+      - [0x1C, 0x046, actor_amazy_dayzee_tattle]
+      - [0x1C, 0x047, actor_monty_mole_boss_tattle]
+      - [0x1C, 0x048, actor_spike_tattle]
+      - [0x1C, 0x049, actor_ruff_puff_tattle]
+      - [0x1C, 0x04A, actor_huff_n_puff_tattle]
+      - [0x1C, 0x04B, actor_tuff_puff_tattle]
+      - [0x1C, 0x04C, actor_jr_troopa4_tattle]
+      - [0x1C, 0x04D, actor_gulpit_tattle]
+      - [0x1C, 0x04E, actor_gulpit_rocks_tattle]
+      - [0x1C, 0x04F, actor_monstar_tattle]
+      - [0x1C, 0x050, actor_frost_piranha_tattle]
+      - [0x1C, 0x051, actor_white_clubba_tattle]
+      - [0x1C, 0x052, actor_duplighost_tattle]
+      - [0x1C, 0x053, actor_ghost_watt_tattle]
+      - [0x1C, 0x054, actor_ghost_kooper_tattle]
+      - [0x1C, 0x055, actor_ghost_goombario_tattle]
+      - [0x1C, 0x056, actor_ghost_sushie_tattle]
+      - [0x1C, 0x057, actor_ghost_lakilester_tattle]
+      - [0x1C, 0x058, actor_ghost_parakarry_tattle]
+      - [0x1C, 0x059, actor_ghost_bombette_tattle]
+      - [0x1C, 0x05A, actor_ghost_bow_tattle]
+      - [0x1C, 0x05B, actor_albino_dino_tattle]
+      - [0x1C, 0x05C, actor_swoopula_tattle]
+      - [0x1C, 0x05D, actor_crystal_king_tattle]
+      - [0x1C, 0x05E, actor_crystal_clone_tattle]
+      - [0x1C, 0x05F, actor_crystal_bit_tattle]
+      - [0x1C, 0x060, actor_ember_tattle]
+      - [0x1C, 0x061, actor_dry_bones_tattle]
+      - [0x1C, 0x062, actor_bony_beetle_tattle]
+      - [0x1C, 0x063, actor_magikoopa_tattle]
+      - [0x1C, 0x064, actor_magiclone_tattle]
+      - [0x1C, 0x065, actor_magikoopa_dup_tattle]
+      - [0x1C, 0x066, actor_magiclone_dup_tattle]
+      - [0x1C, 0x067, actor_koopatrol_tattle]
+      - [0x1C, 0x068, actor_hammer_bros_tattle]
+      - [0x1C, 0x069, actor_bombshell_bill_tattle]
+      - [0x1C, 0x06A, actor_bombshell_blaster_tattle]
+      - [0x1C, 0x06B, actor_jr_troopa5_tattle]
+      - [0x1C, 0x06C, actor_bowser_phase_1_tattle]
+      - [0x1C, 0x06D, actor_bowser_phase_2_tattle]
+      - [0x1C, 0x06E, actor_bowser_phase_3_tattle]
+      - [0x1C, 0x06F, actor_kent_c_koopa_tattle]
+      - [0x1C, 0x070, actor_blooper_tattle]
+      - [0x1C, 0x071, actor_electro_blooper_tattle]
+      - [0x1C, 0x072, actor_super_blooper_tattle]
+      - [0x1C, 0x073, actor_blooper_baby_tattle]
+      - [0x1C, 0x074, actor_the_master_1_tattle]
+      - [0x1C, 0x075, actor_the_master_2_tattle]
+      - [0x1C, 0x076, actor_the_master_3_tattle]
+      - [0x1C, 0x077, actor_chan_tattle]
+      - [0x1C, 0x078, actor_lee_tattle]
+      - [0x1C, 0x079, actor_gloomba_tattle]
+      - [0x1C, 0x07A, actor_paragloomba_tattle]
+      - [0x1C, 0x07B, actor_spiked_gloomba_tattle]
+      - [0x1C, 0x07C, actor_dark_koopa_tattle]
+      - [0x1C, 0x07D, actor_dark_paratroopa_tattle]
+      - [0x1C, 0x07E, actor_red_magikoopa_tattle]
+      - [0x1C, 0x07F, actor_flying_red_magikoopa_tattle]
+      - [0x1C, 0x080, actor_green_magikoopa_tattle]
+      - [0x1C, 0x081, actor_flying_green_magikoopa_tattle]
+      - [0x1C, 0x082, actor_yellow_magikoopa_tattle]
+      - [0x1C, 0x083, actor_flying_yellow_magikoopa_tattle]
+      - [0x1C, 0x084, actor_gray_magikoopa_tattle]
+      - [0x1C, 0x085, actor_flying_gray_magikoopa_tattle]
+      - [0x1C, 0x086, actor_flying_white_magikoopa_tattle]
+      - [0x1C, 0x087, actor_white_magikoopa_tattle]
+      - [0x1C, 0x088, actor_magikoopa_boss_tattle]
+      - [0x1C, 0x089, actor_magikoopa_boss_dup_tattle]
+      - [0x1C, 0x08A, actor_lee_watt_tattle]
+      - [0x1C, 0x08B, actor_lee_kooper_tattle]
+      - [0x1C, 0x08C, actor_lee_goombario_tattle]
+      - [0x1C, 0x08D, actor_lee_sushie_tattle]
+      - [0x1C, 0x08E, actor_lee_lakilester_tattle]
+      - [0x1C, 0x08F, actor_lee_parakarry_tattle]
+      - [0x1C, 0x090, actor_lee_bombette_tattle]
+      - [0x1C, 0x091, actor_lee_bow_tattle]
+      - [0x1C, 0x092, actor_mario_tattle]
+      - [0x1C, 0x093, actor_slot_machine_start_tattle]
+      - [0x1C, 0x094, actor_slot_machine_stop_tattle]
+      - [0x1C, 0x095, actor_whacka_tattle]
+
+      - [0x1D, 0x007, party_goombario]
+      - [0x1D, 0x008, party_kooper]
+      - [0x1D, 0x009, party_bombette]
+      - [0x1D, 0x00A, party_parakarry]
+      - [0x1D, 0x00B, party_goompa]
+      - [0x1D, 0x00C, party_watt]
+      - [0x1D, 0x00D, party_sushie]
+      - [0x1D, 0x00E, party_lakilester]
+      - [0x1D, 0x00F, party_bow]
+      - [0x1D, 0x010, party_goombaria]
+      - [0x1D, 0x011, party_twink]
+      - [0x1D, 0x012, party_peach]
+      - [0x1D, 0x013, party_mario]
+
+      - [0x1D, 0x071, merlee_increase_atk, battle_popup]
+      - [0x1D, 0x072, merlee_increase_dmg, battle_popup]
+      - [0x1D, 0x073, merlee_increase_star_points, battle_popup]
+      - [0x1D, 0x074, merlee_increase_coins, battle_popup]
+      - [0x1D, 0x075, merlee_end, battle_popup]
+      - [0x1D, 0x076, charge_hammer, battle_popup]
+      - [0x1D, 0x077, charge_hammer_more, battle_popup]
+      - [0x1D, 0x078, charge_jump, battle_popup]
+      - [0x1D, 0x079, charge_jump_more, battle_popup]
+      - [0x1D, 0x07A, charge_max, battle_popup]
+      - [0x1D, 0x07B, enemy_missed, battle_popup]
+      - [0x1D, 0x07C, partner_dazed, battle_popup]
+      - [0x1D, 0x07D, charge_goombario, battle_popup]
+      - [0x1D, 0x07E, charge_goombario_more, battle_popup]
+      - [0x1D, 0x07F, star_energy_increased, battle_popup]
+      - [0x1D, 0x080, star_energy_filled, battle_popup]
+      - [0x1D, 0x081, star_energy_max, battle_popup]
+      - [0x1D, 0x082, atk_up_n, battle_popup]
+      - [0x1D, 0x083, def_up_n, battle_popup]
+
+      - [0x1D, 0x086, enemy_transparent, battle_popup]
+      - [0x1D, 0x087, enemy_electric_charge, battle_popup]
+
+      - [0x1D, 0x088, player_dazed, battle_popup]
+      - [0x1D, 0x089, player_poisoned, battle_popup]
+      - [0x1D, 0x08A, player_frozen, battle_popup]
+      - [0x1D, 0x08B, player_slept, battle_popup]
+      - [0x1D, 0x08C, player_shrunk, battle_popup]
+      - [0x1D, 0x08D, player_paralyzed, battle_popup]
+      - [0x1D, 0x08E, player_electrified, battle_popup]
+      - [0x1D, 0x08F, player_transparent, battle_popup]
+      - [0x1D, 0x090, enemy_dazed, battle_popup]
+      - [0x1D, 0x091, enemy_poisoned, battle_popup]
+      - [0x1D, 0x092, enemy_frozen, battle_popup]
+      - [0x1D, 0x093, enemy_slept, battle_popup]
+      - [0x1D, 0x094, enemy_shrunk, battle_popup]
+      - [0x1D, 0x095, enemy_paralyzed, battle_popup]
+      - [0x1D, 0x096, enemy_electrified, battle_popup]
+      - [0x1D, 0x097, enemy_cannot_move, battle_popup]
+      - [0x1D, 0x098, water_block_active, battle_popup]
+      - [0x1D, 0x099, water_block_end, battle_popup]
+      - [0x1D, 0x09A, cloud_nine_active, battle_popup]
+      - [0x1D, 0x09B, cloud_nine_end, battle_popup]
+      - [0x1D, 0x09B, cloud_nine_end, battle_popup]
+      - [0x1D, 0x09C, atk_up_active, battle_popup]
+      - [0x1D, 0x09D, atk_up_end, battle_popup]
+      - [0x1D, 0x09E, enemy_atk_down, battle_popup]
+
+      - [0x1D, 0x0AF, action_cmd_jump, action_command]
+      - [0x1D, 0x0B0, action_cmd_hammer, action_command]
+
+      - [0x1D, 0x0C0, no_target_jump, battle_popup]
+      - [0x1D, 0x0C1, no_target_hammer, battle_popup]
+      - [0x1D, 0x0C2, no_battle_items, battle_popup]
+
+      - [0x1D, 0x0C6, hammer_disabled, battle_popup]
+      - [0x1D, 0x0C7, jump_disabled, battle_popup]
+      - [0x1D, 0x0C8, items_disabled, battle_popup]
+      - [0x1D, 0x0C9, no_switch_used_turn, battle_popup]
+      - [0x1D, 0x0CA, no_switch_dazed, battle_popup]
+
+      - [0x1D, 0x167, kmr_12_sign_trap]
+      - [0x1D, 0x168, kmr_12_sign_to_fortress]
+
+      - [0x29, 0x000, actor_goomba]
+      - [0x29, 0x001, actor_spiked_goomba]
+      - [0x29, 0x002, actor_paragoomba]
+      - [0x29, 0x003, actor_red_goomba_boss]
+      - [0x29, 0x004, actor_blue_goomba_boss]
+      - [0x29, 0x005, actor_goomba_king]
+      - [0x29, 0x006, actor_goomnut_tree]
+      - [0x29, 0x007, actor_koopa_troopa]
+      - [0x29, 0x008, actor_paratroopa]
+      - [0x29, 0x009, actor_fuzzy]
+      - [0x29, 0x00A, actor_bob_omb]
+      - [0x29, 0x00B, actor_bullet_bill]
+      - [0x29, 0x00C, actor_bill_blaster]
+      - [0x29, 0x00D, actor_fake_bowser]
+      - [0x29, 0x00E, actor_red_ninjakoopa]
+      - [0x29, 0x00F, actor_blue_ninjakoopa]
+      - [0x29, 0x010, actor_yellow_ninjakoopa]
+      - [0x29, 0x011, actor_green_ninjakoopa]
+      - [0x29, 0x012, actor_koopa_bros]
+      - [0x29, 0x013, actor_jr_troopa]
+      - [0x29, 0x014, actor_monty_mole]
+      - [0x29, 0x015, actor_cleft]
+      - [0x29, 0x016, actor_pokey]
+      - [0x29, 0x017, actor_bandit]
+      - [0x29, 0x018, actor_pokey_mummy]
+      - [0x29, 0x019, actor_buzzy_beetle]
+      - [0x29, 0x01A, actor_swooper]
+      - [0x29, 0x01B, actor_buzzar]
+      - [0x29, 0x01C, actor_tutankoopa]
+      - [0x29, 0x01D, actor_chomp]
+      - [0x29, 0x01E, actor_stone_chomp]
+      - [0x29, 0x01F, actor_piranha_plant]
+      - [0x29, 0x020, actor_forest_fuzzy]
+      - [0x29, 0x021, actor_hyper_goomba]
+      - [0x29, 0x022, actor_hyper_paragoomba]
+      - [0x29, 0x023, actor_hyper_cleft]
+      - [0x29, 0x024, actor_clubba]
+      - [0x29, 0x025, actor_tubba_blubba]
+      - [0x29, 0x026, actor_tubba_heart]
+      - [0x29, 0x027, actor_shy_guy]
+      - [0x29, 0x028, actor_groove_guy]
+      - [0x29, 0x029, actor_spy_guy]
+      - [0x29, 0x02A, actor_pyro_guy]
+      - [0x29, 0x02B, actor_sky_guy]
+      - [0x29, 0x02C, actor_medi_guy]
+      - [0x29, 0x02D, actor_anti_guy]
+      - [0x29, 0x02E, actor_big_lantern_ghost]
+      - [0x29, 0x02F, actor_general_guy]
+      - [0x29, 0x030, actor_shy_squad]
+      - [0x29, 0x031, actor_shy_stack]
+      - [0x29, 0x032, actor_stilt_guy]
+      - [0x29, 0x033, actor_hurt_plant]
+      - [0x29, 0x034, actor_m_bush]
+      - [0x29, 0x035, actor_jungle_fuzzy]
+      - [0x29, 0x036, actor_spear_guy]
+      - [0x29, 0x037, actor_putrid_piranha]
+      - [0x29, 0x038, actor_lava_bubble]
+      - [0x29, 0x039, actor_spike_top]
+      - [0x29, 0x03A, actor_lava_piranha]
+      - [0x29, 0x03B, actor_lava_bud]
+      - [0x29, 0x03C, actor_petit_piranha]
+      - [0x29, 0x03D, actor_lakitu]
+      - [0x29, 0x03E, actor_spiny]
+      - [0x29, 0x03F, actor_bzzap]
+      - [0x29, 0x040, actor_crazee_dayzee]
+      - [0x29, 0x041, actor_amazy_dayzee]
+      - [0x29, 0x042, actor_monty_mole_boss]
+      - [0x29, 0x043, actor_spike]
+      - [0x29, 0x044, actor_ruff_puff]
+      - [0x29, 0x045, actor_huff_n_puff]
+      - [0x29, 0x046, actor_tuff_puff]
+      - [0x29, 0x047, actor_gulpit]
+      - [0x29, 0x048, actor_gulpit_rocks]
+      - [0x29, 0x049, actor_monstar]
+      - [0x29, 0x04A, actor_frost_piranha]
+      - [0x29, 0x04B, actor_white_clubba]
+      - [0x29, 0x04C, actor_duplighost]
+      - [0x29, 0x04D, actor_ghost_watt]
+      - [0x29, 0x04E, actor_ghost_kooper]
+      - [0x29, 0x04F, actor_ghost_goombario]
+      - [0x29, 0x050, actor_ghost_sushie]
+      - [0x29, 0x051, actor_ghost_lakilester]
+      - [0x29, 0x052, actor_ghost_parakarry]
+      - [0x29, 0x053, actor_ghost_bombette]
+      - [0x29, 0x054, actor_ghost_bow]
+      - [0x29, 0x055, actor_albino_dino]
+      - [0x29, 0x056, actor_swoopula]
+      - [0x29, 0x057, actor_crystal_king]
+      - [0x29, 0x058, actor_crystal_bit]
+      - [0x29, 0x059, actor_ember]
+      - [0x29, 0x05A, actor_dry_bones]
+      - [0x29, 0x05B, actor_bony_beetle]
+      - [0x29, 0x05C, actor_magikoopa]
+      - [0x29, 0x05D, actor_koopatrol]
+      - [0x29, 0x05E, actor_hammer_bros]
+      - [0x29, 0x05F, actor_bombshell_bill]
+      - [0x29, 0x060, actor_bombshell_blaster]
+      - [0x29, 0x061, actor_bowser]
+      - [0x29, 0x062, actor_kammy_koopa]
+      - [0x29, 0x063, actor_kent_c_koopa]
+      - [0x29, 0x064, actor_blooper]
+      - [0x29, 0x065, actor_electro_blooper]
+      - [0x29, 0x066, actor_super_blooper]
+      - [0x29, 0x067, actor_blooper_baby]
+      - [0x29, 0x068, actor_the_master]
+      - [0x29, 0x069, actor_chan]
+      - [0x29, 0x06A, actor_lee]
+      - [0x29, 0x06B, actor_gloomba]
+      - [0x29, 0x06C, actor_paragloomba]
+      - [0x29, 0x06D, actor_spiked_gloomba]
+      - [0x29, 0x06E, actor_dark_koopa]
+      - [0x29, 0x06F, actor_dark_paratroopa]
+      - [0x29, 0x070, actor_red_magikoopa]
+      - [0x29, 0x071, actor_green_magikoopa]
+      - [0x29, 0x072, actor_yellow_magikoopa]
+      - [0x29, 0x073, actor_gray_magikoopa]
+      - [0x29, 0x074, actor_white_magikoopa]
+      - [0x29, 0x075, actor_mario]
+      - [0x29, 0x076, actor_slot_machine_start]
+      - [0x29, 0x077, actor_slot_machine_stop]
+      - [0x29, 0x078, actor_whacka]
+      - [0x29, 0x079, actor_general_guy_dup]
+      - [0x29, 0x07A, actor_bulb]
+      - [0x29, 0x07B, actor_shy_squad_dup]
+      - [0x29, 0x07C, actor_fuzzipede]
+      - [0x29, 0x07D, actor_monty_hole]
+      - [0x29, 0x07E, actor_balloon]
+      - [0x29, 0x07F, actor_lantern]
+      - [0x29, 0x080, actor_aqua_fuzzy]
+      - [0x29, 0x081, actor_red_goomba]
+      - [0x29, 0x082, actor_red_paragoomba]
+  - [0x1C84D30, bin] # junk(?)
+  - [0x1E00000, bin] # junk (player sprite data; can be zeroed out with no effect)
   - [0x1E40000, PaperMarioMapFS]
   - [0x27FEE22, bin]
   - [0x2800000]

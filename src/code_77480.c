@@ -196,7 +196,7 @@ INCLUDE_ASM(s32, "code_77480", func_800E0294);
 
 void func_800E0330(void) {
     if ((gPlayerStatusPtr->animFlags & 0x100) && (D_8010C93C != 0)) {
-        func_802B7000();
+        func_802B7000_E225B0();
     }
 }
 
@@ -250,7 +250,7 @@ void func_800E06C0(s32 arg0) {
 
 INCLUDE_ASM(s32, "code_77480", func_800E06D8);
 
-INCLUDE_ASM(s32, "code_77480", func_800E0818);
+INCLUDE_ASM(s32, "code_77480", check_for_interactables);
 
 void func_800E0AD0(void) {
     if ((gPlayerStatusPtr->animFlags & 0x10) && (D_8010C958 != 0)) {
@@ -263,7 +263,7 @@ void func_800E0B14(void) {
     gPlayerStatusPtr->animFlags &= ~0x10;
 }
 
-void func_800E0B38(void) {
+void update_partner_timers(void) {
     PlayerData* playerData = PLAYER_DATA;
 
     if (!GAME_STATUS->isBattle) {
@@ -279,7 +279,7 @@ void func_800E0B38(void) {
 
 INCLUDE_ASM(s32, "code_77480", func_800E0B90);
 
-INCLUDE_ASM(s32, "code_77480", func_800E0FEC);
+INCLUDE_ASM(s32, "code_77480", get_player_back_anim);
 
 void render_player(void) {
     if (!GAME_STATUS->disableScripts) {
@@ -291,6 +291,8 @@ INCLUDE_ASM(void, "code_77480", render_player_model);
 
 INCLUDE_ASM(s32, "code_77480", appendGfx_player);
 
+/// Only used when speedy spinning.
 INCLUDE_ASM(s32, "code_77480", appendGfx_player_spin);
 
 INCLUDE_ASM(s32, "code_77480", update_player_shadow);
+

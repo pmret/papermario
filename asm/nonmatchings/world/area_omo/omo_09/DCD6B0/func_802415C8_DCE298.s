@@ -33,8 +33,8 @@ glabel func_802415C8_DCE298
 /* DCE304 80241634 08090597 */  j         .L8024165C
 /* DCE308 80241638 E4A00018 */   swc1     $f0, 0x18($a1)
 .L8024163C:
-/* DCE30C 8024163C 3C018025 */  lui       $at, %hi(pause_items_handle_input)
-/* DCE310 80241640 D422A7D8 */  ldc1      $f2, %lo(pause_items_handle_input)($at)
+/* DCE30C 8024163C 3C018025 */  lui       $at, %hi(D_8024A7D8_DD74A8)
+/* DCE310 80241640 D422A7D8 */  ldc1      $f2, %lo(D_8024A7D8_DD74A8)($at)
 /* DCE314 80241644 44820000 */  mtc1      $v0, $f0
 /* DCE318 80241648 00000000 */  nop
 /* DCE31C 8024164C 46800021 */  cvt.d.w   $f0, $f0

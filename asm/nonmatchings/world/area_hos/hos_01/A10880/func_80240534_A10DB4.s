@@ -21,8 +21,8 @@ glabel func_80240534_A10DB4
 /* A10DF4 80240574 AFB00030 */  sw        $s0, 0x30($sp)
 /* A10DF8 80240578 F7BC0060 */  sdc1      $f28, 0x60($sp)
 /* A10DFC 8024057C F7BA0058 */  sdc1      $f26, 0x58($sp)
-/* A10E00 80240580 3C018024 */  lui       $at, %hi(pause_stats_draw_contents)
-/* A10E04 80240584 D4225980 */  ldc1      $f2, %lo(pause_stats_draw_contents)($at)
+/* A10E00 80240580 3C018024 */  lui       $at, %hi(D_80245980_A16200)
+/* A10E04 80240584 D4225980 */  ldc1      $f2, %lo(D_80245980_A16200)($at)
 /* A10E08 80240588 4600F021 */  cvt.d.s   $f0, $f30
 /* A10E0C 8024058C 46220100 */  add.d     $f4, $f0, $f2
 /* A10E10 80240590 F7B80050 */  sdc1      $f24, 0x50($sp)

@@ -23,9 +23,9 @@ glabel func_8014A548
 /* E0C8C 8014A58C 50400085 */  beql      $v0, $zero, .L8014A7A4
 /* E0C90 8014A590 26520001 */   addiu    $s2, $s2, 1
 /* E0C94 8014A594 00031080 */  sll       $v0, $v1, 2
-/* E0C98 8014A598 3C018015 */  lui       $at, %hi(jtbl_80151290_E7990)
+/* E0C98 8014A598 3C018015 */  lui       $at, %hi(jtbl_80151290)
 /* E0C9C 8014A59C 00220821 */  addu      $at, $at, $v0
-/* E0CA0 8014A5A0 8C221290 */  lw        $v0, %lo(jtbl_80151290_E7990)($at)
+/* E0CA0 8014A5A0 8C221290 */  lw        $v0, %lo(jtbl_80151290)($at)
 /* E0CA4 8014A5A4 00400008 */  jr        $v0
 /* E0CA8 8014A5A8 00000000 */   nop
 glabel L8014A5AC_E0CAC

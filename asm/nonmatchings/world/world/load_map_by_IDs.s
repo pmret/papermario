@@ -64,9 +64,9 @@ glabel load_map_by_IDs
 /* 35BD4 8005A7D4 AC400144 */  sw        $zero, 0x144($v0)
 /* 35BD8 8005A7D8 00111400 */  sll       $v0, $s1, 0x10
 /* 35BDC 8005A7DC 00021303 */  sra       $v0, $v0, 0xc
-/* 35BE0 8005A7E0 3C018009 */  lui       $at, %hi(D_800934F4)
+/* 35BE0 8005A7E0 3C018009 */  lui       $at, %hi(gAreas+0x4)
 /* 35BE4 8005A7E4 00220821 */  addu      $at, $at, $v0
-/* 35BE8 8005A7E8 8C2234F4 */  lw        $v0, %lo(D_800934F4)($at)
+/* 35BE8 8005A7E8 8C2234F4 */  lw        $v0, %lo(gAreas+0x4)($at)
 /* 35BEC 8005A7EC 00031AC3 */  sra       $v1, $v1, 0xb
 /* 35BF0 8005A7F0 00439021 */  addu      $s2, $v0, $v1
 /* 35BF4 8005A7F4 8E460000 */  lw        $a2, ($s2)
@@ -195,7 +195,7 @@ glabel load_map_by_IDs
 /* 35DC8 8005A9C8 00000000 */   nop
 /* 35DCC 8005A9CC 0C052010 */  jal       func_80148040
 /* 35DD0 8005A9D0 00000000 */   nop
-/* 35DD4 8005A9D4 0C05177E */  jal       func_80145DF8
+/* 35DD4 8005A9D4 0C05177E */  jal       use_default_background_settings
 /* 35DD8 8005A9D8 00000000 */   nop
 /* 35DDC 8005A9DC 8E020000 */  lw        $v0, ($s0)
 /* 35DE0 8005A9E0 804300A8 */  lb        $v1, 0xa8($v0)
@@ -218,7 +218,7 @@ glabel load_map_by_IDs
 /* 35E1C 8005AA1C 00000000 */   nop
 /* 35E20 8005AA20 0C04432E */  jal       clear_entity_data
 /* 35E24 8005AA24 24040001 */   addiu    $a0, $zero, 1
-/* 35E28 8005AA28 0C016727 */  jal       func_80059C9C
+/* 35E28 8005AA28 0C016727 */  jal       clear_effect_data
 /* 35E2C 8005AA2C 00000000 */   nop
 /* 35E30 8005AA30 0C037F14 */  jal       clear_player_status
 /* 35E34 8005AA34 00000000 */   nop
@@ -241,7 +241,7 @@ glabel load_map_by_IDs
 /* 35E78 8005AA78 00822021 */  addu      $a0, $a0, $v0
 /* 35E7C 8005AA7C 0C0525FF */  jal       func_801497FC
 /* 35E80 8005AA80 8C84FF60 */   lw       $a0, %lo(D_8008FF60)($a0)
-/* 35E84 8005AA84 0C052580 */  jal       func_80149600
+/* 35E84 8005AA84 0C052580 */  jal       use_default_door_sounds
 /* 35E88 8005AA88 00000000 */   nop
 /* 35E8C 8005AA8C 1680000B */  bnez      $s4, .L8005AABC
 /* 35E90 8005AA90 00000000 */   nop

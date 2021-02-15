@@ -36,17 +36,17 @@ glabel func_80244B00
 /* 1653D0 80244B70 2410002C */  addiu     $s0, $zero, 0x2c
 /* 1653D4 80244B74 0200202D */  daddu     $a0, $s0, $zero
 .L80244B78:
-/* 1653D8 80244B78 0C051F9F */  jal       func_80147E7C
+/* 1653D8 80244B78 0C051F9F */  jal       set_window_update
 /* 1653DC 80244B7C 24050002 */   addiu    $a1, $zero, 2
 /* 1653E0 80244B80 26100001 */  addiu     $s0, $s0, 1
 /* 1653E4 80244B84 2A020040 */  slti      $v0, $s0, 0x40
 /* 1653E8 80244B88 1440FFFB */  bnez      $v0, .L80244B78
 /* 1653EC 80244B8C 0200202D */   daddu    $a0, $s0, $zero
 /* 1653F0 80244B90 24040018 */  addiu     $a0, $zero, 0x18
-/* 1653F4 80244B94 0C051F9F */  jal       func_80147E7C
+/* 1653F4 80244B94 0C051F9F */  jal       set_window_update
 /* 1653F8 80244B98 24050002 */   addiu    $a1, $zero, 2
 /* 1653FC 80244B9C 24040017 */  addiu     $a0, $zero, 0x17
-/* 165400 80244BA0 0C051F9F */  jal       func_80147E7C
+/* 165400 80244BA0 0C051F9F */  jal       set_window_update
 /* 165404 80244BA4 24050002 */   addiu    $a1, $zero, 2
 /* 165408 80244BA8 0C0912F1 */  jal       func_80244BC4
 /* 16540C 80244BAC 00000000 */   nop

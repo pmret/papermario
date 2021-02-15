@@ -156,7 +156,7 @@ glabel check_input_open_menus
 /* 803C8 800E6F18 00000000 */   nop
 /* 803CC 800E6F1C 1040000B */  beqz      $v0, .L800E6F4C
 /* 803D0 800E6F20 00000000 */   nop
-/* 803D4 800E6F24 0C04D07A */  jal       func_801341E8
+/* 803D4 800E6F24 0C04D07A */  jal       is_picking_up_item
 /* 803D8 800E6F28 00000000 */   nop
 /* 803DC 800E6F2C 14400007 */  bnez      $v0, .L800E6F4C
 /* 803E0 800E6F30 00000000 */   nop

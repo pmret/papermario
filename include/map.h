@@ -54,6 +54,13 @@ typedef struct Area {
     /* 0x0C */ char* name; ///< JP debug name.
 } Area; // size = 0x10
 
+typedef struct NpcBlueprint {
+    /* 0x00 */ s32 flags;
+    /* 0x04 */ NpcAnimID initialAnim;
+    /* 0x08 */ UNK_FUN_PTR(onUpdate);
+    /* 0x0C */ UNK_FUN_PTR(onRender);
+} NpcBlueprint; // size = 0x10
+
 typedef struct NpcAISettings {
     /* 0x00 */ f32 moveSpeed;
     /* 0x04 */ s32 moveTime;

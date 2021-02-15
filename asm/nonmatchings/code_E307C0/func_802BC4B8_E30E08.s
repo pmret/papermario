@@ -10,11 +10,11 @@ glabel func_802BC4B8_E30E08
 /* E30E1C 802BC4CC 1C40000F */  bgtz      $v0, .L802BC50C
 /* E30E20 802BC4D0 240200FF */   addiu    $v0, $zero, 0xff
 /* E30E24 802BC4D4 80830003 */  lb        $v1, 3($a0)
-/* E30E28 802BC4D8 3C06802C */  lui       $a2, %hi(D_802BCAA0)
-/* E30E2C 802BC4DC 24C6CAA0 */  addiu     $a2, $a2, %lo(D_802BCAA0)
-/* E30E30 802BC4E0 3C05802C */  lui       $a1, %hi(D_802BCAA0)
+/* E30E28 802BC4D8 3C06802C */  lui       $a2, %hi(D_802BCAA0_E313F0)
+/* E30E2C 802BC4DC 24C6CAA0 */  addiu     $a2, $a2, %lo(D_802BCAA0_E313F0)
+/* E30E30 802BC4E0 3C05802C */  lui       $a1, %hi(D_802BCAA0_E313F0)
 /* E30E34 802BC4E4 00A32821 */  addu      $a1, $a1, $v1
-/* E30E38 802BC4E8 90A5CAA0 */  lbu       $a1, %lo(D_802BCAA0)($a1)
+/* E30E38 802BC4E8 90A5CAA0 */  lbu       $a1, %lo(D_802BCAA0_E313F0)($a1)
 /* E30E3C 802BC4EC 10A20007 */  beq       $a1, $v0, .L802BC50C
 /* E30E40 802BC4F0 24630001 */   addiu    $v1, $v1, 1
 /* E30E44 802BC4F4 00661021 */  addu      $v0, $v1, $a2

@@ -39,9 +39,9 @@ glabel SetActorSounds
 /* 19E0A4 8026F7C4 2E620006 */  sltiu     $v0, $s3, 6
 /* 19E0A8 8026F7C8 10400013 */  beqz      $v0, .L8026F818
 /* 19E0AC 8026F7CC 00131080 */   sll      $v0, $s3, 2
-/* 19E0B0 8026F7D0 3C01802A */  lui       $at, %hi(jtbl_8029D7C0_1CC0A0)
+/* 19E0B0 8026F7D0 3C01802A */  lui       $at, %hi(jtbl_8029D7C0)
 /* 19E0B4 8026F7D4 00220821 */  addu      $at, $at, $v0
-/* 19E0B8 8026F7D8 8C22D7C0 */  lw        $v0, %lo(jtbl_8029D7C0_1CC0A0)($at)
+/* 19E0B8 8026F7D8 8C22D7C0 */  lw        $v0, %lo(jtbl_8029D7C0)($at)
 /* 19E0BC 8026F7DC 00400008 */  jr        $v0
 /* 19E0C0 8026F7E0 00000000 */   nop
 glabel L8026F7E4_19E0C4

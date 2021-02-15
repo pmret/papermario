@@ -1,6 +1,19 @@
 #include "common.h"
 #include "nu/nusys.h"
 
+s32 contRmbRetrace(NUSiCommonMesg* mesg);
+s32 contRmbCheckMesg(NUSiCommonMesg* mesg);
+s32 contRmbStartMesg(NUSiCommonMesg* mesg);
+s32 contRmbStopMesg(NUSiCommonMesg* mesg);
+s32 contRmbForceStopMesg(NUSiCommonMesg* mesg);
+s32 contRmbForceStopEndMesg(NUSiCommonMesg* mesg);
+
+u32 nuContRmbSearchTime = 300;
+
+s32 D_80093CE4[] = { contRmbRetrace, contRmbCheckMesg, contRmbStartMesg, contRmbStopMesg, contRmbForceStopMesg, contRmbForceStopEndMesg, NULL};
+
+NUCallBackList nuContRmbCallBack = {.next = NULL, .func = D_80093CE4, .majorNo = 0x300, .funcNum = 0};
+
 s32 contRmbControl(NUContRmbCtl* rmbCtl, u32 contNo) {
     s32 ret = 0;
     u32 cnt;
@@ -93,8 +106,6 @@ s32 contRmbRetrace(NUSiCommonMesg* mesg) {
     return 0;
 }
 
-#ifdef NON_MATCHING
-// Will match when data is decompiled.
 void nuContRmbMgrInit(void) {
     u32 i;
 
@@ -106,9 +117,6 @@ void nuContRmbMgrInit(void) {
 
     nuSiCallBackAdd(&nuContRmbCallBack);
 }
-#else
-INCLUDE_ASM(void, "os/nusys/nuContRmbMgr", nuContRmbMgrInit);
-#endif
 
 void nuContRmbMgrRemove(void) {
     nuSiCallBackRemove(&nuContRmbCallBack);

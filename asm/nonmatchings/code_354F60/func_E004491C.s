@@ -83,9 +83,9 @@ glabel func_E004491C
 /* 3559B4 E0044A54 2E42001F */  sltiu     $v0, $s2, 0x1f
 /* 3559B8 E0044A58 1040002E */  beqz      $v0, .LE0044B14
 /* 3559BC E0044A5C 00121080 */   sll      $v0, $s2, 2
-/* 3559C0 E0044A60 3C01E004 */  lui       $at, %hi(jtbl_E0044F00_355E60)
+/* 3559C0 E0044A60 3C01E004 */  lui       $at, %hi(jtbl_E0044F00)
 /* 3559C4 E0044A64 00220821 */  addu      $at, $at, $v0
-/* 3559C8 E0044A68 8C224F00 */  lw        $v0, %lo(jtbl_E0044F00_355E60)($at)
+/* 3559C8 E0044A68 8C224F00 */  lw        $v0, %lo(jtbl_E0044F00)($at)
 /* 3559CC E0044A6C 00400008 */  jr        $v0
 /* 3559D0 E0044A70 00000000 */   nop
 glabel LE0044A74_3559D4

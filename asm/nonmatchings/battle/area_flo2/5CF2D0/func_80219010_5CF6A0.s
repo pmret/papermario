@@ -11,8 +11,8 @@ glabel func_80219010_5CF6A0
 /* 5CF6B8 80219028 3C138009 */  lui       $s3, %hi(gAreas)
 /* 5CF6BC 8021902C 267334F0 */  addiu     $s3, $s3, %lo(gAreas)
 /* 5CF6C0 80219030 AFB00018 */  sw        $s0, 0x18($sp)
-/* 5CF6C4 80219034 3C108023 */  lui       $s0, %hi(D_80233B18)
-/* 5CF6C8 80219038 26103B18 */  addiu     $s0, $s0, %lo(D_80233B18)
+/* 5CF6C4 80219034 3C108023 */  lui       $s0, %hi(D_80233B18_5EA1A8)
+/* 5CF6C8 80219038 26103B18 */  addiu     $s0, $s0, %lo(D_80233B18_5EA1A8)
 /* 5CF6CC 8021903C AFBF0028 */  sw        $ra, 0x28($sp)
 .L80219040:
 /* 5CF6D0 80219040 3C028007 */  lui       $v0, %hi(gGameStatusPtr)

@@ -6,7 +6,7 @@
 // TODO: create src/os/nusys/nuSched.h?
 extern u64 nuScStack[NU_SC_STACK_SIZE / sizeof(u64)];
 
-//void (*nuIdleFunc)(void) = NULL;
+static void (*nuIdleFunc)(void);
 
 void nuBoot(void) {
     osInitialize(); // __osInitialize_common

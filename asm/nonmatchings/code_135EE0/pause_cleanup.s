@@ -53,14 +53,14 @@ glabel pause_cleanup
 /* 137AF4 802447B4 24100016 */  addiu     $s0, $zero, 0x16
 /* 137AF8 802447B8 0200202D */  daddu     $a0, $s0, $zero
 .L802447BC:
-/* 137AFC 802447BC 0C051F9F */  jal       func_80147E7C
+/* 137AFC 802447BC 0C051F9F */  jal       set_window_update
 /* 137B00 802447C0 24050002 */   addiu    $a1, $zero, 2
 /* 137B04 802447C4 26100001 */  addiu     $s0, $s0, 1
 /* 137B08 802447C8 2A02002C */  slti      $v0, $s0, 0x2c
 /* 137B0C 802447CC 1440FFFB */  bnez      $v0, .L802447BC
 /* 137B10 802447D0 0200202D */   daddu    $a0, $s0, $zero
 /* 137B14 802447D4 2404002C */  addiu     $a0, $zero, 0x2c
-/* 137B18 802447D8 0C051F9F */  jal       func_80147E7C
+/* 137B18 802447D8 0C051F9F */  jal       set_window_update
 /* 137B1C 802447DC 24050002 */   addiu    $a1, $zero, 2
 /* 137B20 802447E0 8FBF0018 */  lw        $ra, 0x18($sp)
 /* 137B24 802447E4 8FB10014 */  lw        $s1, 0x14($sp)

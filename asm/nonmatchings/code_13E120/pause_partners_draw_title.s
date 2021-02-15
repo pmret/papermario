@@ -63,7 +63,7 @@ glabel pause_partners_draw_title
 /* 13EFCC 8024BC8C 26660001 */  addiu     $a2, $s3, 1
 /* 13EFD0 8024BC90 240700FF */  addiu     $a3, $zero, 0xff
 /* 13EFD4 8024BC94 AFA00010 */  sw        $zero, 0x10($sp)
-/* 13EFD8 8024BC98 0C04993B */  jal       draw_string
+/* 13EFD8 8024BC98 0C04993B */  jal       draw_msg
 /* 13EFDC 8024BC9C AFA00014 */   sw       $zero, 0x14($sp)
 /* 13EFE0 8024BCA0 24020001 */  addiu     $v0, $zero, 1
 /* 13EFE4 8024BCA4 1602000A */  bne       $s0, $v0, .L8024BCD0

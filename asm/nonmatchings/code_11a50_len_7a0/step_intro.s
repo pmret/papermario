@@ -73,13 +73,13 @@ glabel step_intro
 /* 11D4C 8003694C 2C620016 */  sltiu     $v0, $v1, 0x16
 /* 11D50 80036950 10400109 */  beqz      $v0, .L80036D78
 /* 11D54 80036954 00031080 */   sll      $v0, $v1, 2
-/* 11D58 80036958 3C01800A */  lui       $at, %hi(jtbl_80098338_73738)
+/* 11D58 80036958 3C01800A */  lui       $at, %hi(jtbl_80098338)
 /* 11D5C 8003695C 00220821 */  addu      $at, $at, $v0
-/* 11D60 80036960 8C228338 */  lw        $v0, %lo(jtbl_80098338_73738)($at)
+/* 11D60 80036960 8C228338 */  lw        $v0, %lo(jtbl_80098338)($at)
 /* 11D64 80036964 00400008 */  jr        $v0
 /* 11D68 80036968 00000000 */   nop
 glabel L8003696C_11D6C
-/* 11D6C 8003696C 0C016754 */  jal       func_80059D50
+/* 11D6C 8003696C 0C016754 */  jal       update_effects
 /* 11D70 80036970 00000000 */   nop
 /* 11D74 80036974 0C00B500 */  jal       update_cameras
 /* 11D78 80036978 00000000 */   nop
@@ -198,7 +198,7 @@ glabel L80036AA0_11EA0
 /* 11F28 80036B28 00000000 */   nop
 /* 11F2C 80036B2C 0C052010 */  jal       func_80148040
 /* 11F30 80036B30 00000000 */   nop
-/* 11F34 80036B34 0C05177E */  jal       func_80145DF8
+/* 11F34 80036B34 0C05177E */  jal       use_default_background_settings
 /* 11F38 80036B38 00000000 */   nop
 /* 11F3C 80036B3C 0C050440 */  jal       func_80141100
 /* 11F40 80036B40 00000000 */   nop
@@ -208,7 +208,7 @@ glabel L80036AA0_11EA0
 /* 11F50 80036B50 00000000 */   nop
 /* 11F54 80036B54 0C04432E */  jal       clear_entity_data
 /* 11F58 80036B58 0000202D */   daddu    $a0, $zero, $zero
-/* 11F5C 80036B5C 0C04E042 */  jal       func_80138108
+/* 11F5C 80036B5C 0C04E042 */  jal       clear_transition_stencil
 /* 11F60 80036B60 00000000 */   nop
 /* 11F64 80036B64 0C037F14 */  jal       clear_player_status
 /* 11F68 80036B68 00000000 */   nop
@@ -220,7 +220,7 @@ glabel L80036AA0_11EA0
 /* 11F80 80036B80 00000000 */   nop
 /* 11F84 80036B84 0C00F8CE */  jal       func_8003E338
 /* 11F88 80036B88 00000000 */   nop
-/* 11F8C 80036B8C 0C016727 */  jal       func_80059C9C
+/* 11F8C 80036B8C 0C016727 */  jal       clear_effect_data
 /* 11F90 80036B90 00000000 */   nop
 /* 11F94 80036B94 0C04C3FC */  jal       clear_item_entity_data
 /* 11F98 80036B98 00000000 */   nop
@@ -298,11 +298,11 @@ glabel L80036C40_12040
 /* 120A8 80036CA8 00621824 */  and       $v1, $v1, $v0
 /* 120AC 80036CAC 0C037DD0 */  jal       update_player
 /* 120B0 80036CB0 AC830000 */   sw       $v1, ($a0)
-/* 120B4 80036CB4 0C00F949 */  jal       func_8003E524
+/* 120B4 80036CB4 0C00F949 */  jal       update_counters
 /* 120B8 80036CB8 00000000 */   nop
 /* 120BC 80036CBC 0C00E64C */  jal       update_npcs
 /* 120C0 80036CC0 00000000 */   nop
-/* 120C4 80036CC4 0C016754 */  jal       func_80059D50
+/* 120C4 80036CC4 0C016754 */  jal       update_effects
 /* 120C8 80036CC8 00000000 */   nop
 /* 120CC 80036CCC 0C00B500 */  jal       update_cameras
 /* 120D0 80036CD0 00000000 */   nop
@@ -319,7 +319,7 @@ glabel L80036C40_12040
 /* 120FC 80036CFC 0800DB5E */  j         .L80036D78
 /* 12100 80036D00 A4440088 */   sh       $a0, 0x88($v0)
 glabel L80036D04_12104
-/* 12104 80036D04 0C016754 */  jal       func_80059D50
+/* 12104 80036D04 0C016754 */  jal       update_effects
 /* 12108 80036D08 00000000 */   nop
 /* 1210C 80036D0C 0C00B500 */  jal       update_cameras
 /* 12110 80036D10 00000000 */   nop
@@ -334,10 +334,10 @@ glabel L80036D04_12104
 /* 12134 80036D34 4481A000 */  mtc1      $at, $f20
 /* 12138 80036D38 00000000 */  nop
 /* 1213C 80036D3C 4405A000 */  mfc1      $a1, $f20
-/* 12140 80036D40 0C04DF62 */  jal       func_80137D88
+/* 12140 80036D40 0C04DF62 */  jal       set_transition_stencil_zoom_0
 /* 12144 80036D44 240400FF */   addiu    $a0, $zero, 0xff
 /* 12148 80036D48 4405A000 */  mfc1      $a1, $f20
-/* 1214C 80036D4C 0C04DF69 */  jal       func_80137DA4
+/* 1214C 80036D4C 0C04DF69 */  jal       set_transition_stencil_zoom_1
 /* 12150 80036D50 240400FF */   addiu    $a0, $zero, 0xff
 /* 12154 80036D54 0800DB5E */  j         .L80036D78
 /* 12158 80036D58 00000000 */   nop
@@ -359,7 +359,7 @@ glabel L80036D78_12178
 /* 1218C 80036D8C 00000000 */  nop
 /* 12190 80036D90 46800020 */  cvt.s.w   $f0, $f0
 /* 12194 80036D94 44050000 */  mfc1      $a1, $f0
-/* 12198 80036D98 0C04DF69 */  jal       func_80137DA4
+/* 12198 80036D98 0C04DF69 */  jal       set_transition_stencil_zoom_1
 /* 1219C 80036D9C 00000000 */   nop
 /* 121A0 80036DA0 3C05800A */  lui       $a1, %hi(D_800A095B)
 /* 121A4 80036DA4 90A5095B */  lbu       $a1, %lo(D_800A095B)($a1)
@@ -367,7 +367,7 @@ glabel L80036D78_12178
 /* 121AC 80036DAC 90C6095D */  lbu       $a2, %lo(D_800A095D)($a2)
 /* 121B0 80036DB0 3C07800A */  lui       $a3, %hi(D_800A095F)
 /* 121B4 80036DB4 90E7095F */  lbu       $a3, %lo(D_800A095F)($a3)
-/* 121B8 80036DB8 0C04DF84 */  jal       func_80137E10
+/* 121B8 80036DB8 0C04DF84 */  jal       set_transition_stencil_color
 /* 121BC 80036DBC 24040001 */   addiu    $a0, $zero, 1
 /* 121C0 80036DC0 0C00CE1D */  jal       intro_logos_update_fade
 /* 121C4 80036DC4 00000000 */   nop

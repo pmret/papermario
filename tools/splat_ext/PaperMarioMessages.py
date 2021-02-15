@@ -1,8 +1,9 @@
 from segtypes.n64.segment import N64Segment
 from pathlib import Path
+import re
 
 CHARSET = {
-    0x00: "𝅘𝅥𝅮",
+    0x00: "[note]",
     0x01: "!",
     0x02: '"',
     0x03: "#",
@@ -146,142 +147,163 @@ CHARSET = {
     0x8D: "¡",
     0x8E: "¿",
     0x8F: "ª",
-    0x90: "♥",
-    0x91: "★",
-    0x92: "↑",
-    0x93: "↓",
-    0x94: "←",
-    0x95: "→",
-    0x96: "●",
-    0x97: "✖",
+    0x90: "[heart]",
+    0x91: "[star]",
+    0x92: "[up]",
+    0x93: "[down]",
+    0x94: "[left]",
+    0x95: "[right]",
+    0x96: "[circle]",
+    0x97: "[cross]",
+    0x98: "[a]",
+    0x99: "[b]",
+    0x9A: "[l]",
+    0x9B: "[r]",
+    0x9C: "[z]",
+    0x9D: "[c-up]",
+    0x9E: "[c-down]",
+    0x9F: "[c-left]",
+    0xA0: "[c-right]",
+    0xA1: "[start]",
     0xA2: "“",
     0xA3: "”",
     0xA4: "‘",
     0xA5: "’",
     0xF7: " ",
     0xF0: "[br]\n",
-    0xF1: "[prompt]",
-    0xF2: {None: lambda d: (f"[sleep {d[0]}]", 1)},
+    0xF1: "[wait]",
+    0xF2: {None: lambda d: (f"[pause:{d[0]}]", 1)},
     0xFB: "[next]\n",
     0xFC: {
-        0x01: "[style=right]\n",
-        0x02: "[style=left]\n",
-        0x03: "[style=center]\n",
-        0x04: "[style=tattle]\n",
-        0x05: {None: lambda d: (f"[style=choice x={d[0]} y={d[1]} w={d[2]} h={d[3]}]\n", 4)},
-        0x06: "[style=inspect]\n",
-        0x07: "[style=sign]\n",
-        0x08: "[style=lamppost]\n",
-        0x09: "[style=postcard]\n",
-        0x0A: "[style=popup]\n",
-        0x0C: {None: lambda d: (f"[style=upgrade x={d[1]} y={d[3]} w={d[0]} h={d[2]}]\n", 4)},
-        0x0D: "[style=narrate]\n",
-        0x0E: "[style=epilogue]\n",
+        0x01: "[style:right]\n",
+        0x02: "[style:left]\n",
+        0x03: "[style:center]\n",
+        0x04: "[style:tattle]\n",
+        0x05: {None: lambda d: (f"[style:choice:{d[0]}:{d[1]}:{d[2]}:{d[3]}]\n", 4)},
+        0x06: "[style:inspect]\n",
+        0x07: "[style:sign]\n",
+        0x08: {None: lambda d: (f"[style:lamppost:{d[0]}]\n", 1)},
+        0x09: {None: lambda d: (f"[style:postcard:{d[0]}]\n", 1)},
+        0x0A: "[style:popup]\n",
+        0x0C: {None: lambda d: (f"[style:upgrade:{d[0]}:{d[1]}:{d[2]}:{d[3]}]\n", 4)},
+        0x0D: "[style:narrate]\n",
+        0x0E: "[style:epilogue]\n",
     },
     0xFF: {
         0x00: {
-            0: "[font=normal]",
-            3: "[font=title]\n",
-            4: "[font=subtitle]\n",
+            0: "[font:normal]",
+            3: "[font:title]\n",
+            4: "[font:subtitle]\n",
         },
+        0x04: "[func_04]",
         0x05: {
-            0x0A: "[color=normal]",
-            0x20: "[color=red]",
-            0x21: "[color=pink]",
-            0x22: "[color=purple]",
-            0x23: "[color=blue]",
-            0x24: "[color=cyan]",
-            0x25: "[color=green]",
-            0x26: "[color=yellow]",
+            # 0x0A: "[color:normal]",
+            # 0x20: "[color:red]",
+            # 0x21: "[color:pink]",
+            # 0x22: "[color:purple]",
+            # 0x23: "[color:blue]",
+            # 0x24: "[color:cyan]",
+            # 0x25: "[color:green]",
+            # 0x26: "[color:yellow]",
 
-            0x00: "[color=normal ctx=diary]",
-            0x07: "[color=red ctx=diary]",
+            # 0x00: "[color=normal ctx=diary]",
+            # 0x07: "[color=red ctx=diary]",
 
-            0x17: "[color=dark ctx=inspect]",
+            # 0x17: "[color=dark ctx=inspect]",
 
-            0x18: "[color=normal ctx=sign]",
-            0x19: "[color=red ctx=sign]",
-            0x1A: "[color=blue ctx=sign]",
-            0x1B: "[color=green ctx=sign]",
+            # 0x18: "[color=normal ctx=sign]",
+            # 0x19: "[color=red ctx=sign]",
+            # 0x1A: "[color=blue ctx=sign]",
+            # 0x1B: "[color=green ctx=sign]",
 
-            0x28: "[color=red ctx=popup]",
-            0x29: "[color=pink ctx=popup]",
-            0x2A: "[color=purple ctx=popup]",
-            0x2B: "[color=blue ctx=popup]",
-            0x2C: "[color=teal ctx=popup]",
-            0x2D: "[color=green ctx=popup]",
-            0x2E: "[color=yellow ctx=popup]",
-            0x2F: "[color=normal ctx=popup]",
+            # 0x28: "[color=red ctx=popup]",
+            # 0x29: "[color=pink ctx=popup]",
+            # 0x2A: "[color=purple ctx=popup]",
+            # 0x2B: "[color=blue ctx=popup]",
+            # 0x2C: "[color=teal ctx=popup]",
+            # 0x2D: "[color=green ctx=popup]",
+            # 0x2E: "[color=yellow ctx=popup]",
+            # 0x2F: "[color=normal ctx=popup]",
+
+            None: lambda d: (f"[color:0x{d[0]:X}]", 1),
         },
-        0x07: "[noskip]\n",
-        0x08: "[/noskip]\n",
-        0x09: "[instant]\n",
-        0x0A: "[/instant]\n",
-        0x0B: {None: lambda d: (f"[kerning={d[0]}]", 1)},
-        0x0C: {None: lambda d: (f"[scroll {d[0]}]", 1)},
-        0x0D: {None: lambda d: (f"[size x={d[0]} y={d[0]}]\n", 2)},
-        0x0E: "[/size]\n",
-        0x0F: {None: lambda d: (f"[speed delay={d[0]} chars={d[1]}]", 2)},
-        0x10: {None: lambda d: (f"[pos x={d[0]} y={d[1]}]", 2)},
-        0x11: {None: lambda d: (f"[pos y={d[0]}]", 1)},
-        0x12: {None: lambda d: (f"[indent {d[0]}]", 1)},
-        0x13: {None: lambda d: (f"[down {d[0]}]", 1)},
-        0x14: {None: lambda d: (f"[up {d[0]}]", 1)},
-        0x15: {None: lambda d: (f"[image {d[0]}]\n", 1)},
-        0x16: {None: lambda d: (f"[sprite {d[0]} {d[1]} {d[2]}]\n", 3)},
-        0x17: {None: lambda d: (f"[item {d[0]} {d[1]}]\n", 2)},
-        0x18: {None: lambda d: (f"[image {d[0]} {d[1]} {d[2]} {d[3]} {d[4]} {d[5]} {d[6]}]\n", 7)},
-        0x1E: {None: lambda d: (f"[cursor {d[0]}]", 1)},
-        0x1F: {None: lambda d: (f"[choicecount={d[0]}]", 1)},
-        0x20: {None: lambda d: (f"[cancel={d[0]}]", 1)},
-        0x21: {None: lambda d: (f"[option {d[0]}]", 1)},
-        0x24: {0xFF: {0x05: {
-            0x10: {0x98: {0xFF: {0x25: "Ⓐ"}}},
-            0x11: {0x99: {0xFF: {0x25: "Ⓑ"}}},
-            0x12: {0xA1: {0xFF: {0x25: "Ⓢ"}}},
-            0x13: {
-                0x9D: {0xFF: {0x25: "▲"}},
-                0x9E: {0xFF: {0x25: "▼"}},
-                0x9F: {0xFF: {0x25: "◀"}},
-                0xA0: {0xFF: {0x25: "▶"}},
-            },
-            0x14: {0x9C: {0xFF: {0x25: "Ⓩ"}}},
-        }}},
+        0x07: "[inputOff]\n",
+        0x08: "[inputOn]\n",
+        0x09: "[delayOff]\n",
+        0x0A: "[delayOn]\n",
+        0x0B: {None: lambda d: (f"[kerning:{d[0]}]", 1)},
+        0x0C: {None: lambda d: (f"[scroll:{d[0]}]", 1)},
+        0x0D: {None: lambda d: (f"[size:{d[0]}:{d[0]}]\n", 2)},
+        0x0E: "[sizeReset]\n",
+        0x0F: {None: lambda d: (f"[speed:{d[0]}:{d[1]}]", 2)},
+        0x10: {None: lambda d: (f"[setPrintPos:{d[0]}:{d[1]}]", 2)},
+        0x11: {None: lambda d: (f"[setPrintY:{d[0]}]", 1)},
+        0x12: {None: lambda d: (f"[indent:{d[0]}]", 1)},
+        0x13: {None: lambda d: (f"[down:{d[0]}]", 1)},
+        0x14: {None: lambda d: (f"[up:{d[0]}]", 1)},
+        0x15: {None: lambda d: (f"[image1:{d[0]}]\n", 1)},
+        0x16: {None: lambda d: (f"[sprite:{d[0]}:{d[1]}:{d[2]}]\n", 3)},
+        0x17: {None: lambda d: (f"[item:{d[0]}:{d[1]}]\n", 2)},
+        0x18: {None: lambda d: (f"[image7:{d[0]}:{d[1]}:{d[2]}:{d[3]}:{d[4]}:{d[5]}:{d[6]}]\n", 7)},
+        0x1A: {None: lambda d: (f"[func_1A:{d[0]}:{d[1]}:{d[2]}]", 3)},
+        0x1B: {None: lambda d: (f"[func_1B:{d[0]}:{d[1]}]", 2)},
+        0x1C: {None: lambda d: (f"[func_1C:{d[0]}]", 1)},
+        0x1E: {None: lambda d: (f"[cursor:{d[0]}]", 1)},
+        0x1F: {None: lambda d: (f"[endChoice:{d[0]}]", 1)},
+        0x20: {None: lambda d: (f"[setCancel:{d[0]}]", 1)},
+        0x21: {None: lambda d: (f"[option:{d[0]}]", 1)},
+        0x22: "[startAnim]",
+        0x23: "[endAnim]",
+        # 0x24: {0xFF: {0x05: {
+        #     0x10: {0x98: {0xFF: {0x25: "Ⓐ"}}},
+        #     0x11: {0x99: {0xFF: {0x25: "Ⓑ"}}},
+        #     0x12: {0xA1: {0xFF: {0x25: "Ⓢ"}}},
+        #     0x13: {
+        #         0x9D: {0xFF: {0x25: "▲"}},
+        #         0x9E: {0xFF: {0x25: "▼"}},
+        #         0x9F: {0xFF: {0x25: "◀"}},
+        #         0xA0: {0xFF: {0x25: "▶"}},
+        #     },
+        #     0x14: {0x9C: {0xFF: {0x25: "Ⓩ"}}},
+        # }}},
+        0x24: "[pushColor]",
+		0x25: "[popColor]",
         0x26: {
-            0x00: "[shaky]",
-            0x01: "[wavy]",
-            0x03: {None: lambda d: (f"[noise fade={d[0]}]", 1)},
-            0x05: {None: lambda d: (f"[faded-shaky fade={d[0]}]", 1)},
-            0x07: {None: lambda d: (f"[fade={d[0]}]", 1)},
-            0x0A: "[shout]",
-            0x0B: "[whisper]",
-            0x0C: "[scream]",
-            0x0D: "[chortle]",
-            0x0E: "[shadow]",
+            0x00: "[startFX:jitter]",
+            0x01: "[startFX:wavy]",
+            0x03: {None: lambda d: (f"[startFX:fadedNoise:{d[0]}]", 1)},
+            0x05: {None: lambda d: (f"[startFX:fadedJitter:{d[0]}]", 1)},
+            0x07: {None: lambda d: (f"[startFX:faded:{d[0]}]", 1)},
+            0x0A: "[startFX:shrinking]",
+            0x0B: "[startFX:growing]",
+            0x0C: "[startFX:sizeJitter]",
+            0x0D: "[startFX:sizeWave]",
+            0x0E: "[startFX:dropShadow]",
         },
         0x27: {
-            0x00: "[/shaky]",
-            0x01: "[/wavy]",
-            0x03: "[/noise]",
-            0x05: "[/faded-shaky]",
-            0x07: "[/fade]",
-            0x0A: "[/shout]",
-            0x0B: "[/whisper]",
-            0x0C: "[/scream]",
-            0x0D: "[/chortle]",
-            0x0E: "[/shadow]",
+            0x00: "[endFX:jitter]",
+            0x01: "[endFX:wavy]",
+            0x03: "[endFX:fadedNoise]",
+            0x05: "[endFX:fadedJitter]",
+            0x07: "[endFX:faded]",
+            0x0A: "[endFX:shrinking]",
+            0x0B: "[endFX:growing]",
+            0x0C: "[endFX:sizeJitter]",
+            0x0D: "[endFX:sizeWave]",
+            0x0E: "[endFX:dropShadow]",
         },
-        0x28: {None: lambda d: (f"[var {d[0]}]", 1)},
-        0x29: {None: lambda d: (f"[center {d[0]}]", 1)},
-        0x2E: {None: lambda d: (f"[volume={d[0]}]", 1)},
+        0x28: {None: lambda d: (f"[var:{d[0]}]", 1)},
+        0x29: {None: lambda d: (f"[func_29:{d[0]}]", 1)},
+        0x2B: "[func_2B]",
+        0x2E: {None: lambda d: (f"[volume:{d[0]}]", 1)},
         0x2F: {
-            1: "[sound=bowser]\n",
-            2: "[sound=spirit]\n",
-            None: lambda d: (f"[sound={d[0]}]\n", 1),
+            #1: "[speechSound:bowser]\n",
+            #2: "[speechSound:star]\n",
+            None: lambda d: (f"[speechSound:{d[0]}]\n", 1),
         },
-        None: lambda d: (f"[func 0x{d[0]:X}]", 1),
+        #None: lambda d: (f"[func_{d[0]:02X}]", 1),
     },
-    None: lambda d: (f"[raw 0x{d[0]:02X}]", 1),
+    None: lambda d: (f"[raw:0x{d[0]:02X}]", 1),
 }
 
 CHARSET_CREDITS = {
@@ -334,6 +356,7 @@ class N64SegPaperMarioMessages(N64Segment):
     def __init__(self, segment, next_segment, options):
         super().__init__(segment, next_segment, options)
         self.files = segment.get("files", []) if type(segment) is dict else []
+        self.ids = segment["ids"]
 
     def split(self, rom_bytes, base_path):
         data = rom_bytes[self.rom_start: self.rom_end]
@@ -348,6 +371,12 @@ class N64SegPaperMarioMessages(N64Segment):
 
             section_offsets.append(offset)
             pos += 4
+
+        msg_dir = Path(base_path, self.options["assets_dir"], self.name)
+        msg_dir.mkdir(parents=True, exist_ok=True)
+
+        # delete existing files
+        self.delete_dir_childs(msg_dir)
 
         for i, section_offset in enumerate(section_offsets):
             name = f"{i:02X}"
@@ -367,18 +396,44 @@ class N64SegPaperMarioMessages(N64Segment):
 
             self.log(f"Reading {len(msg_offsets)} messages in section {name} (0x{i:02X})")
 
-            path = Path(base_path, self.name, name + ".msg")
-            path.parent.mkdir(parents=True, exist_ok=True)
+            path = msg_dir / Path(name + ".msg")
+
             with open(path, "w") as self.f:
                 for j, msg_offset in enumerate(msg_offsets):
                     if j != 0:
                         self.f.write("\n")
-                    self.f.write(f"[message section=0x{i:02X} index={j}]\n")
+
+                    msg_name = None
+                    for d in self.ids:
+                        section, index, goodname = d[:3]
+
+                        if len(d) > 3:
+                            # these will actually do something in the future
+                            context = d[3]
+                            assert context in ["battle_popup", "action_command"]
+
+                        if i == section and j == index:
+                            msg_name = goodname
+                            break
+
+                    if msg_name is None:
+                        self.f.write(f"#message:{i:02X}:{j:03X} {{\n\t")
+                    else:
+                        self.f.write(f"#message:{i:02X}:({msg_name}) {{\n\t")
                     self.write_message_markup(data[msg_offset:])
-                    self.f.write("\n[/message]\n")
+                    self.f.write("\n}\n")
+
+    @staticmethod
+    def delete_dir_childs(path):
+        for f in path.iterdir():
+            if f.is_dir():
+                N64SegPaperMarioMessages.delete_dir_childs(f)
+                f.rmdir()
+            else:
+                f.unlink()
 
     def get_ld_files(self):
-        return [("", self.name, ".data", self.rom_start)]
+        return [(self.options["assets_dir"], self.name, ".data", self.rom_start)]
 
     @staticmethod
     def get_default_name(addr):
@@ -419,10 +474,12 @@ class N64SegPaperMarioMessages(N64Segment):
                 else:
                     raise ValueError(value)
 
-    def write_markup(self, markup):
-        self.f.write(markup)
+        self.write_markup("[end]")
 
-        if markup == "[font=title]\n" or markup == "[font=subtitle]\n":
+    def write_markup(self, markup):
+        self.f.write(re.sub("\n", "\n\t", markup))
+
+        if markup == "[font:title]\n" or markup == "[font:subtitle]\n":
             self.root_charset = CHARSET_CREDITS
-        elif markup == "[font=normal]":
+        elif markup == "[font:normal]":
             self.root_charset = CHARSET

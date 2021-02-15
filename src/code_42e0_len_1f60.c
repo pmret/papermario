@@ -85,13 +85,13 @@ void start_rumble(s32 freq, s32 frame) {
     }
 }
 
-void func_80028F8C(void) {
+void update_max_rumble_duration(void) {
     s32* sym = &D_80074264;
     u16* sym2;
 
     if (*sym != GAME_STATUS->currentButtons) {
         *sym = GAME_STATUS->currentButtons;
-        func_80028FE0();
+        reset_max_rumble_duration();
     }
 
     sym2 = &D_80074260;
@@ -100,7 +100,7 @@ void func_80028F8C(void) {
     }
 }
 
-void func_80028FE0(void) {
+void reset_max_rumble_duration(void) {
     D_80074260 = 300;
 }
 
@@ -191,7 +191,23 @@ s32 func_800297D4(s32 romStart, s32 romEnd, void* vramDest) {
     return length;
 }
 
-INCLUDE_ASM(void, "code_42e0_len_1f60", func_80029860, s32 romStart, s32 vramDest, s32 length);
+void func_80029860(s32 dramAddr, s32 devAddr, s32 size) {
+    OSIoMesg osIoMesg;
+    OSMesg osMesg;
+    OSMesgQueue osMesgQueue;
+
+    osWritebackDCache(dramAddr, size);
+    osCreateMesgQueue(&osMesgQueue, &osMesg, 1);
+
+    osIoMesg.hdr.pri = 0;
+    osIoMesg.hdr.retQueue = &osMesgQueue;
+    osIoMesg.dramAddr = dramAddr;
+    osIoMesg.devAddr = devAddr;
+    osIoMesg.size = size;
+
+    osEPiStartDma(carthandle, &osIoMesg, 1);
+    osRecvMesg(&osMesgQueue, &osMesg, 1);
+}
 
 s32 _advance_rng(void) {
     s32* rngVal = &gRandSeed;
@@ -229,7 +245,31 @@ s32 func_80029994(s32 arg0) {
     return result;
 }
 
+// Issue with the negation at the beginning
+#ifdef NON_MATCHING
+s32 rand_int(s32 arg0) {
+    s32 ret;
+
+    if (arg0 < 0) {
+        arg0 = -arg0;
+    }
+
+    ret = 0;
+    if (arg0 != 0) {
+        if (arg0 == 1) {
+            return (func_80029994(1000) < 501) ^ 1;
+        }
+        if (arg0 != 100) {
+            return func_80029994(arg0);
+        }
+        ret = func_80029994(1009) / 10;
+    }
+
+    return ret;
+}
+#else
 INCLUDE_ASM(s32, "code_42e0_len_1f60", rand_int, s32 arg0);
+#endif
 
 f32 signF(f32 val) {
     f32 sign;
@@ -348,8 +388,31 @@ f32 cos_deg(f32 angle) {
 
 INCLUDE_ASM(f32, "code_42e0_len_1f60", update_lerp, Easing easing, f32 start, f32 end, s32 elapsed, s32 duration);
 
-INCLUDE_ASM(s32, "code_42e0_len_1f60", func_8002A904);
+//void func_8002A904(u8 arg0, u8 arg1, u8 arg2, u8 arg3, u16 arg4, u16 arg5, u16 arg6, u16 arg7);
+INCLUDE_ASM(void, "code_42e0_len_1f60", func_8002A904, u8 arg0, u8 arg1, u8 arg2, u8 arg3, u16 arg4, u16 arg5, u16 arg6, u16 arg7);
 
 INCLUDE_ASM(s32, "code_42e0_len_1f60", func_8002AAC4);
+// void func_8002AAC4(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u16 arg4, u16 arg5, u16 arg6, u16 arg7) {
+//     s16 phi_t0;
+//     s16 phi_t1;
+//     s16 phi_t2;
+//     s16 phi_t3;
+
+//     phi_t0 = arg0;
+//     phi_t2 = arg2;
+//     if (arg2 < arg0) {
+//         phi_t0 = arg2;
+//         phi_t2 = arg0;
+//     }
+
+//     phi_t1 = arg1;
+//     phi_t3 = arg3;
+//     if (arg3 < arg1) {
+//         phi_t1 = arg3;
+//         phi_t3 = arg1;
+//     }
+
+//     func_8002A904(arg4, arg5, arg6, arg7, phi_t0, phi_t1, phi_t2, phi_t3);
+// }
 
 INCLUDE_ASM(s32, "code_42e0_len_1f60", func_8002AB5C);

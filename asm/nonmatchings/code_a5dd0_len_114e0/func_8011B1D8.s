@@ -33,7 +33,7 @@ glabel func_8011B1D8
 /* B1944 8011B244 8C420008 */  lw        $v0, 8($v0)
 /* B1948 8011B248 10400012 */  beqz      $v0, .L8011B294
 /* B194C 8011B24C 00000000 */   nop
-/* B1950 8011B250 0C04572A */  jal       func_80115CA8
+/* B1950 8011B250 0C04572A */  jal       mdl_get_child_count
 /* B1954 8011B254 02A0202D */   daddu    $a0, $s5, $zero
 /* B1958 8011B258 3C038015 */  lui       $v1, %hi(D_80153224)
 /* B195C 8011B25C 24633224 */  addiu     $v1, $v1, %lo(D_80153224)
@@ -82,7 +82,7 @@ glabel func_8011B1D8
 /* B19FC 8011B2FC 8C420008 */  lw        $v0, 8($v0)
 /* B1A00 8011B300 10400004 */  beqz      $v0, .L8011B314
 /* B1A04 8011B304 00000000 */   nop
-/* B1A08 8011B308 0C04572A */  jal       func_80115CA8
+/* B1A08 8011B308 0C04572A */  jal       mdl_get_child_count
 /* B1A0C 8011B30C 0200202D */   daddu    $a0, $s0, $zero
 /* B1A10 8011B310 02429021 */  addu      $s2, $s2, $v0
 .L8011B314:

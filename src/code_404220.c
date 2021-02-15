@@ -2,11 +2,13 @@
 
 INCLUDE_ASM(s32, "code_404220", func_E011A000);
 
-INCLUDE_ASM(s32, "code_404220", func_E011A0FC);
+void func_E011A0FC(void){
+}
 
 INCLUDE_ASM(s32, "code_404220", func_E011A104);
 
-INCLUDE_ASM(s32, "code_404220", func_E011A398);
+void func_E011A398(void){
+}
 
 INCLUDE_ASM(s32, "code_404220", func_E011A3A0);
 

@@ -83,8 +83,8 @@ glabel func_80240430_B9DD90
 /* B9DEBC 8024055C 27A5002C */   addiu    $a1, $sp, 0x2c
 /* B9DEC0 80240560 C6000038 */  lwc1      $f0, 0x38($s0)
 /* B9DEC4 80240564 860200A6 */  lh        $v0, 0xa6($s0)
-/* B9DEC8 80240568 3C018024 */  lui       $at, %hi(D_80242D80)
-/* B9DECC 8024056C D4222D80 */  ldc1      $f2, %lo(D_80242D80)($at)
+/* B9DEC8 80240568 3C018024 */  lui       $at, %hi(D_80242D80_BA06E0)
+/* B9DECC 8024056C D4222D80 */  ldc1      $f2, %lo(D_80242D80_BA06E0)($at)
 /* B9DED0 80240570 27A60030 */  addiu     $a2, $sp, 0x30
 /* B9DED4 80240574 E7A0002C */  swc1      $f0, 0x2c($sp)
 /* B9DED8 80240578 44820000 */  mtc1      $v0, $f0

@@ -145,7 +145,7 @@ glabel func_801363A0
 /* CCC90 80136590 240300A0 */  addiu     $v1, $zero, 0xa0
 /* CCC94 80136594 00628823 */  subu      $s1, $v1, $v0
 .L80136598:
-/* CCC98 80136598 0C04992C */  jal       func_801264B0
+/* CCC98 80136598 0C04992C */  jal       get_msg_lines
 /* CCC9C 8013659C 0240202D */   daddu    $a0, $s2, $zero
 /* CCCA0 801365A0 2442FFFF */  addiu     $v0, $v0, -1
 /* CCCA4 801365A4 00021040 */  sll       $v0, $v0, 1
@@ -175,7 +175,7 @@ glabel func_801363A0
 /* CCD00 80136600 AFA80010 */  sw        $t0, 0x10($sp)
 /* CCD04 80136604 AFA00014 */  sw        $zero, 0x14($sp)
 /* CCD08 80136608 AFB4001C */  sw        $s4, 0x1c($sp)
-/* CCD0C 8013660C 0C051F32 */  jal       set_ui_panel_properties
+/* CCD0C 8013660C 0C051F32 */  jal       set_window_properties
 /* CCD10 80136610 AFA20020 */   sw       $v0, 0x20($sp)
 /* CCD14 80136614 86830018 */  lh        $v1, 0x18($s4)
 /* CCD18 80136618 2402015C */  addiu     $v0, $zero, 0x15c
@@ -194,7 +194,7 @@ glabel func_801363A0
 /* CCD4C 8013664C 2402FFFF */  addiu     $v0, $zero, -1
 /* CCD50 80136650 AFA00014 */  sw        $zero, 0x14($sp)
 /* CCD54 80136654 AFB4001C */  sw        $s4, 0x1c($sp)
-/* CCD58 80136658 0C051F32 */  jal       set_ui_panel_properties
+/* CCD58 80136658 0C051F32 */  jal       set_window_properties
 /* CCD5C 8013665C AFA20020 */   sw       $v0, 0x20($sp)
 .L80136660:
 /* CCD60 80136660 8283001A */  lb        $v1, 0x1a($s4)
@@ -244,7 +244,7 @@ glabel func_801363A0
 /* CCE08 80136708 2402FFFF */  addiu     $v0, $zero, -1
 /* CCE0C 8013670C AFA00014 */  sw        $zero, 0x14($sp)
 /* CCE10 80136710 AFB4001C */  sw        $s4, 0x1c($sp)
-/* CCE14 80136714 0C051F32 */  jal       set_ui_panel_properties
+/* CCE14 80136714 0C051F32 */  jal       set_window_properties
 /* CCE18 80136718 AFA20020 */   sw       $v0, 0x20($sp)
 .L8013671C:
 /* CCE1C 8013671C 8FBF003C */  lw        $ra, 0x3c($sp)

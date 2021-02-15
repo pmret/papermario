@@ -37,6 +37,12 @@ typedef struct Vec3f {
     /* 0x08 */ f32 z;
 } Vec3f; // size = 0x0C
 
+typedef struct Vec3i {
+    /* 0x00 */ s32 x;
+    /* 0x04 */ s32 y;
+    /* 0x08 */ s32 z;
+} Vec3i; // size = 0x0C
+
 typedef struct Vec2s {
     /* 0x00 */ s16 x;
     /* 0x02 */ s16 y;
@@ -55,9 +61,7 @@ typedef struct Vec4f {
     /* 0x0C */ f32 yaw;
 } Vec4f; // size = 0x10
 
-typedef struct Matrix4f {
-    /* 0x00 */ f32 mtx[4][4];
-} Matrix4f; // size = 0x40
+typedef f32 Matrix4f[4][4]; // size = 0x40
 
 typedef struct Matrix4s {
     /* 0x00 */ s16 whole[4][4];
@@ -312,7 +316,7 @@ typedef struct Entity {
     /* 0x54 */ Vec3f scale;
     /* 0x60 */ Vec3f rotation;
     /* 0x6C */ char unk_6C[4];
-    /* 0x70 */ struct Matrix4f* inverseTransformMatrix; /* world-to-local */
+    /* 0x70 */ Matrix4f* inverseTransformMatrix; /* world-to-local */
     /* 0x74 */ char unk_74[60];
     /* 0xB0 */ float effectiveSize;
     /* 0xB4 */ char unk_B4[4];
@@ -481,10 +485,10 @@ typedef struct Camera {
     /* 0x098 */ char unk_98[8];
     /* 0x0A0 */ Vp viewport;
     /* 0x0B0 */ char unk_B0[0x24];
-    /* 0x0D4 */ struct Matrix4f perspectiveMatrix;
-    /* 0x114 */ struct Matrix4f viewMtxPlayer; /* centers on player */
-    /* 0x154 */ struct Matrix4f viewMtxLeading; /* leads player slightly */
-    /* 0x194 */ struct Matrix4f viewMtxShaking; /* used while ShakeCam is active */
+    /* 0x0D4 */ Matrix4f perspectiveMatrix;
+    /* 0x114 */ Matrix4f viewMtxPlayer; /* centers on player */
+    /* 0x154 */ Matrix4f viewMtxLeading; /* leads player slightly */
+    /* 0x194 */ Matrix4f viewMtxShaking; /* used while ShakeCam is active */
     /* 0x1D4 */ char unk_1D4[48];
     /* 0x204 */ struct Matrix4s* unkMatrix;
     /* 0x208 */ char unk_208[572];
@@ -709,7 +713,7 @@ typedef struct Model {
     /* 0x10 */ s32* currentSpecialMatrix;
     /* 0x14 */ char unk_14[4];
     /* 0x18 */ struct Matrix4s specialMatrix;
-    /* 0x58 */ struct Matrix4f transformMatrix;
+    /* 0x58 */ Matrix4f transformMatrix;
     /* 0x98 */ f32 center[3]; /* Created by retype action */
     /* 0xA4 */ u8 texPannerID;
     /* 0xA5 */ u8 specialDisplayListID;
@@ -1412,8 +1416,8 @@ typedef struct TileDescriptor {
 } TileDescriptor; // size = 0x30
 
 typedef struct BackgroundHeader {
-    /* 0x00 */ UNK_PTR raster;
-    /* 0x04 */ UNK_PTR palette;
+    /* 0x00 */ void* raster;
+    /* 0x04 */ void* palette;
     /* 0x08 */ u16 startX;
     /* 0x0A */ u16 startY;
     /* 0x0C */ u16 width;
@@ -1715,7 +1719,7 @@ typedef struct {
     /* 0x00018 */ Light l2[2];
     /* 0x00030 */ Matrix4s camPerspMatrix[8]; // could only be length 4, unsure
     /* 0x00230 */ s32 mainGfx[0x4100];
-    /* 0x10630 */ s32 smallGfx[0x400]; // used by func 800269EC
+    /* 0x10630 */ s32 smallGfx[0x400]; // used by gfx_task_background
     /* 0x11630 */ Matrix4s matrixStack[0x200];
 } DisplayContext; // size = 0x19630
 

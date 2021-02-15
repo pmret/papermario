@@ -224,7 +224,7 @@ glabel func_800E0B90
 /* 7A380 800E0ED0 00000000 */  nop
 /* 7A384 800E0ED4 45000004 */  bc1f      .L800E0EE8
 /* 7A388 800E0ED8 00000000 */   nop
-/* 7A38C 800E0EDC 0C0383FB */  jal       func_800E0FEC
+/* 7A38C 800E0EDC 0C0383FB */  jal       get_player_back_anim
 /* 7A390 800E0EE0 0200202D */   daddu    $a0, $s0, $zero
 /* 7A394 800E0EE4 0040802D */  daddu     $s0, $v0, $zero
 .L800E0EE8:
@@ -263,7 +263,7 @@ glabel func_800E0B90
 /* 7A40C 800E0F5C 00000000 */  nop
 /* 7A410 800E0F60 45020005 */  bc1fl     .L800E0F78
 /* 7A414 800E0F64 AE3000A4 */   sw       $s0, 0xa4($s1)
-/* 7A418 800E0F68 0C0383FB */  jal       func_800E0FEC
+/* 7A418 800E0F68 0C0383FB */  jal       get_player_back_anim
 /* 7A41C 800E0F6C 0200202D */   daddu    $a0, $s0, $zero
 /* 7A420 800E0F70 0040802D */  daddu     $s0, $v0, $zero
 /* 7A424 800E0F74 AE3000A4 */  sw        $s0, 0xa4($s1)

@@ -34,7 +34,7 @@ glabel func_802BD754_31D2C4
 /* 31D338 802BD7C8 24040006 */   addiu    $a0, $zero, 6
 /* 31D33C 802BD7CC 10400146 */  beqz      $v0, .L802BDCE8
 /* 31D340 802BD7D0 24020002 */   addiu    $v0, $zero, 2
-/* 31D344 802BD7D4 0C011052 */  jal       func_80044148
+/* 31D344 802BD7D4 0C011052 */  jal       is_starting_conversation
 /* 31D348 802BD7D8 00000000 */   nop
 /* 31D34C 802BD7DC 14400142 */  bnez      $v0, .L802BDCE8
 /* 31D350 802BD7E0 24020002 */   addiu    $v0, $zero, 2
@@ -121,7 +121,7 @@ glabel func_802BD754_31D2C4
 /* 31D474 802BD904 24040006 */   addiu    $a0, $zero, 6
 /* 31D478 802BD908 104000F7 */  beqz      $v0, .L802BDCE8
 /* 31D47C 802BD90C 24020002 */   addiu    $v0, $zero, 2
-/* 31D480 802BD910 0C011052 */  jal       func_80044148
+/* 31D480 802BD910 0C011052 */  jal       is_starting_conversation
 /* 31D484 802BD914 00000000 */   nop
 /* 31D488 802BD918 144000F3 */  bnez      $v0, .L802BDCE8
 /* 31D48C 802BD91C 24020002 */   addiu    $v0, $zero, 2

@@ -5,7 +5,7 @@ from pathlib import Path
 import os
 path.append(os.path.join(os.path.dirname(__file__), "splat"))
 from splat_ext.PaperMarioNpcSprites import Sprite
-from convert_image import pack_color, iter_in_groups
+from img.build import pack_color, iter_in_groups
 
 if __name__ == "__main__":
     if len(argv) != 3:

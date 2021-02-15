@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_80097D48
+.word L800270B4_24B4, L800270E4_24E4, L8002710C_250C, L80027134_2534, L80027168_2568, 0
+
+.section .text
+
 glabel func_80027088
 /* 2488 80027088 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 248C 8002708C 0080282D */  daddu     $a1, $a0, $zero
@@ -8,9 +15,9 @@ glabel func_80027088
 /* 2494 80027094 1040003B */  beqz      $v0, .L80027184
 /* 2498 80027098 AFBF0010 */   sw       $ra, 0x10($sp)
 /* 249C 8002709C 00051080 */  sll       $v0, $a1, 2
-/* 24A0 800270A0 3C018009 */  lui       $at, %hi(jtbl_80097D48_73148)
+/* 24A0 800270A0 3C018009 */  lui       $at, %hi(jtbl_80097D48)
 /* 24A4 800270A4 00220821 */  addu      $at, $at, $v0
-/* 24A8 800270A8 8C227D48 */  lw        $v0, %lo(jtbl_80097D48_73148)($at)
+/* 24A8 800270A8 8C227D48 */  lw        $v0, %lo(jtbl_80097D48)($at)
 /* 24AC 800270AC 00400008 */  jr        $v0
 /* 24B0 800270B0 00000000 */   nop
 glabel L800270B4_24B4

@@ -77,7 +77,7 @@ glabel func_80035EEC
 /* 113F8 80035FF8 0800D83B */  j         .L800360EC
 /* 113FC 80035FFC A4430000 */   sh       $v1, ($v0)
 .L80036000:
-/* 11400 80036000 0C00F949 */  jal       func_8003E524
+/* 11400 80036000 0C00F949 */  jal       update_counters
 /* 11404 80036004 00000000 */   nop
 /* 11408 80036008 0C00E64C */  jal       update_npcs
 /* 1140C 8003600C 00000000 */   nop
@@ -116,7 +116,7 @@ glabel func_80035EEC
 /* 11484 80036084 00000000 */   nop
 /* 11488 80036088 0C037DD0 */  jal       update_player
 /* 1148C 8003608C 00000000 */   nop
-/* 11490 80036090 0C016754 */  jal       func_80059D50
+/* 11490 80036090 0C016754 */  jal       update_effects
 /* 11494 80036094 00000000 */   nop
 /* 11498 80036098 0C00B500 */  jal       update_cameras
 /* 1149C 8003609C 00000000 */   nop
@@ -136,7 +136,7 @@ glabel func_80035EEC
 /* 114D4 800360D4 00000000 */   nop
 .L800360D8:
 /* 114D8 800360D8 3C05BF80 */  lui       $a1, 0xbf80
-/* 114DC 800360DC 0C04DF62 */  jal       func_80137D88
+/* 114DC 800360DC 0C04DF62 */  jal       set_transition_stencil_zoom_0
 /* 114E0 800360E0 240400FF */   addiu    $a0, $zero, 0xff
 /* 114E4 800360E4 0C00CD3C */  jal       set_game_mode
 /* 114E8 800360E8 24040004 */   addiu    $a0, $zero, 4

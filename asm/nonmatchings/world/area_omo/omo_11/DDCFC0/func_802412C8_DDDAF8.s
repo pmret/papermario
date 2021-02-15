@@ -24,7 +24,7 @@ glabel func_802412C8_DDDAF8
 /* DDDB44 80241314 00A0382D */  daddu     $a3, $a1, $zero
 /* DDDB48 80241318 AE220088 */  sw        $v0, 0x88($s1)
 /* DDDB4C 8024131C AE200070 */  sw        $zero, 0x70($s1)
-/* DDDB50 80241320 0C04DF84 */  jal       func_80137E10
+/* DDDB50 80241320 0C04DF84 */  jal       set_transition_stencil_color
 /* DDDB54 80241324 AE200074 */   sw       $zero, 0x74($s1)
 .L80241328:
 /* DDDB58 80241328 8E230070 */  lw        $v1, 0x70($s1)
@@ -81,7 +81,7 @@ glabel func_802412C8_DDDAF8
 /* DDDC08 802413D8 C6200074 */  lwc1      $f0, 0x74($s1)
 /* DDDC0C 802413DC 46800020 */  cvt.s.w   $f0, $f0
 /* DDDC10 802413E0 44050000 */  mfc1      $a1, $f0
-/* DDDC14 802413E4 0C04DF62 */  jal       func_80137D88
+/* DDDC14 802413E4 0C04DF62 */  jal       set_transition_stencil_zoom_0
 /* DDDC18 802413E8 24040001 */   addiu    $a0, $zero, 1
 /* DDDC1C 802413EC 0240102D */  daddu     $v0, $s2, $zero
 /* DDDC20 802413F0 8FBF001C */  lw        $ra, 0x1c($sp)

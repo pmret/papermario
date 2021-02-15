@@ -120,7 +120,7 @@ INCLUDE_ASM(s32, "code_a5dd0_len_114e0", MakeEntity, ScriptInstance* script, s32
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_80111E9C);
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_80111F2C);
+INCLUDE_ASM(s32, "code_a5dd0_len_114e0", UseDynamicShadow);
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", AssignScript, ScriptInstance* script, s32 isInitialCall);
 
@@ -168,7 +168,7 @@ void NOP_state(void) {
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_80112B98);
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_80112BBC);
+INCLUDE_ASM(s32, "code_a5dd0_len_114e0", set_next_game_mode);
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", _set_game_mode);
 
@@ -204,7 +204,7 @@ INCLUDE_ASM(s32, "code_a5dd0_len_114e0", _load_model_textures);
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", load_model_textures);
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_80115CA8);
+INCLUDE_ASM(s32, "code_a5dd0_len_114e0", mdl_get_child_count);
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", clear_model_data);
 
@@ -212,7 +212,7 @@ INCLUDE_ASM(s32, "code_a5dd0_len_114e0", init_model_data);
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", calculate_model_sizes);
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8011620C);
+INCLUDE_ASM(s32, "code_a5dd0_len_114e0", mdl_create_model);
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_80116674);
 
@@ -297,7 +297,8 @@ INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8011BCD0);
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8011BCEC);
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8011BE14);
+/// @returns TRUE if mtx is NULL or identity.
+INCLUDE_ASM(s32, "code_a5dd0_len_114e0", is_identity_fixed_mtx);
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", set_background_color_blend);
 

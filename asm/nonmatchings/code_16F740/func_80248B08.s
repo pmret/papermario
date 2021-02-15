@@ -16,9 +16,9 @@ glabel func_80248B08
 /* 177414 80248B34 1040008A */  beqz      $v0, .L80248D60
 /* 177418 80248B38 AFB00010 */   sw       $s0, 0x10($sp)
 /* 17741C 80248B3C 00031080 */  sll       $v0, $v1, 2
-/* 177420 80248B40 3C01802A */  lui       $at, %hi(jtbl_8029CBE0_1CB4C0)
+/* 177420 80248B40 3C01802A */  lui       $at, %hi(jtbl_8029CBE0)
 /* 177424 80248B44 00220821 */  addu      $at, $at, $v0
-/* 177428 80248B48 8C22CBE0 */  lw        $v0, %lo(jtbl_8029CBE0_1CB4C0)($at)
+/* 177428 80248B48 8C22CBE0 */  lw        $v0, %lo(jtbl_8029CBE0)($at)
 /* 17742C 80248B4C 00400008 */  jr        $v0
 /* 177430 80248B50 00000000 */   nop
 glabel L80248B54_177434
@@ -143,7 +143,7 @@ glabel L80248CAC_17758C
 /* 1775D0 80248CF0 8E4400D8 */   lw       $a0, 0xd8($s2)
 /* 1775D4 80248CF4 0C016938 */  jal       remove_all_effects
 /* 1775D8 80248CF8 00000000 */   nop
-/* 1775DC 80248CFC 0C051FB1 */  jal       func_80147EC4
+/* 1775DC 80248CFC 0C051FB1 */  jal       set_windows_visible
 /* 1775E0 80248D00 0000202D */   daddu    $a0, $zero, $zero
 /* 1775E4 80248D04 3C02800E */  lui       $v0, %hi(gBattleStatus+0x4)
 /* 1775E8 80248D08 8C42C074 */  lw        $v0, %lo(gBattleStatus+0x4)($v0)

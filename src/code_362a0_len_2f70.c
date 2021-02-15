@@ -57,7 +57,7 @@ s32 get_collider_type_by_id(s32 colliderID) {
 INCLUDE_ASM(s32, "code_362a0_len_2f70", get_collider_type_by_id);
 #endif
 
-INCLUDE_ASM(s32, "code_362a0_len_2f70", func_8005BDD8);
+INCLUDE_ASM(s32, "code_362a0_len_2f70", get_flat_collider_normal);
 
 INCLUDE_ASM(void, "code_362a0_len_2f70", get_collider_center, s32 colliderID, f32* x, f32* y, f32* z);
 

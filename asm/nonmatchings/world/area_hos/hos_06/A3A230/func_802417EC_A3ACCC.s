@@ -13,9 +13,9 @@ glabel func_802417EC_A3ACCC
 /* A3ACEC 8024180C 26100004 */   addiu    $s0, $s0, 4
 /* A3ACF0 80241810 3C038011 */  lui       $v1, %hi(gPlayerData+0xC)
 /* A3ACF4 80241814 8463F29C */  lh        $v1, %lo(gPlayerData+0xC)($v1)
-/* A3ACF8 80241818 3C018024 */  lui       $at, %hi(D_802447D0)
+/* A3ACF8 80241818 3C018024 */  lui       $at, %hi(D_802447D0_A3DCB0)
 /* A3ACFC 8024181C 00220821 */  addu      $at, $at, $v0
-/* A3AD00 80241820 902247D0 */  lbu       $v0, %lo(D_802447D0)($at)
+/* A3AD00 80241820 902247D0 */  lbu       $v0, %lo(D_802447D0_A3DCB0)($at)
 /* A3AD04 80241824 8E050000 */  lw        $a1, ($s0)
 /* A3AD08 80241828 0062182A */  slt       $v1, $v1, $v0
 /* A3AD0C 8024182C 10600003 */  beqz      $v1, .L8024183C

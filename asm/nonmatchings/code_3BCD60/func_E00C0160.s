@@ -246,9 +246,9 @@ glabel func_E00C0160
 /* 3BD240 E00C04E0 2C620005 */  sltiu     $v0, $v1, 5
 /* 3BD244 E00C04E4 1040002F */  beqz      $v0, .LE00C05A4
 /* 3BD248 E00C04E8 00031080 */   sll      $v0, $v1, 2
-/* 3BD24C E00C04EC 3C01E00C */  lui       $at, %hi(jtbl_E00C0C20_3BD980)
+/* 3BD24C E00C04EC 3C01E00C */  lui       $at, %hi(jtbl_E00C0C20)
 /* 3BD250 E00C04F0 00220821 */  addu      $at, $at, $v0
-/* 3BD254 E00C04F4 8C220C20 */  lw        $v0, %lo(jtbl_E00C0C20_3BD980)($at)
+/* 3BD254 E00C04F4 8C220C20 */  lw        $v0, %lo(jtbl_E00C0C20)($at)
 /* 3BD258 E00C04F8 00400008 */  jr        $v0
 /* 3BD25C E00C04FC 00000000 */   nop
 glabel LE00C0500_3BD260

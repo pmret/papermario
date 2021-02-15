@@ -35,7 +35,7 @@ glabel func_802415EC_E13D4C
 /* E13DC4 80241664 2402001C */  addiu     $v0, $zero, 0x1c
 /* E13DC8 80241668 0C03A625 */  jal       func_800E9894
 /* E13DCC 8024166C AE020018 */   sw       $v0, 0x18($s0)
-/* E13DD0 80241670 0C03A5EE */  jal       func_800E97B8
+/* E13DD0 80241670 0C03A5EE */  jal       close_status_menu
 /* E13DD4 80241674 00000000 */   nop
 /* E13DD8 80241678 8FBF0018 */  lw        $ra, 0x18($sp)
 /* E13DDC 8024167C 8FB10014 */  lw        $s1, 0x14($sp)

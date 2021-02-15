@@ -31,9 +31,9 @@ glabel func_802D2520
 /* F6F38 802D2588 2E22000E */  sltiu     $v0, $s1, 0xe
 /* F6F3C 802D258C 104000AB */  beqz      $v0, .L802D283C
 /* F6F40 802D2590 00111080 */   sll      $v0, $s1, 2
-/* F6F44 802D2594 3C01802E */  lui       $at, %hi(jtbl_802DA208_FEBB8)
+/* F6F44 802D2594 3C01802E */  lui       $at, %hi(jtbl_802DA208)
 /* F6F48 802D2598 00220821 */  addu      $at, $at, $v0
-/* F6F4C 802D259C 8C22A208 */  lw        $v0, %lo(jtbl_802DA208_FEBB8)($at)
+/* F6F4C 802D259C 8C22A208 */  lw        $v0, %lo(jtbl_802DA208)($at)
 /* F6F50 802D25A0 00400008 */  jr        $v0
 /* F6F54 802D25A4 00000000 */   nop
 glabel L802D25A8_F6F58

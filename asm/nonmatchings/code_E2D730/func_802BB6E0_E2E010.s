@@ -11,8 +11,8 @@ glabel func_802BB6E0_E2E010
 /* E2E028 802BB6F8 0C047FF8 */  jal       get_anim_mesh
 /* E2E02C 802BB6FC 8E110040 */   lw       $s1, 0x40($s0)
 /* E2E030 802BB700 24030011 */  addiu     $v1, $zero, 0x11
-/* E2E034 802BB704 3C04802C */  lui       $a0, %hi(D_802BC7D0)
-/* E2E038 802BB708 2484C7D0 */  addiu     $a0, $a0, %lo(D_802BC7D0)
+/* E2E034 802BB704 3C04802C */  lui       $a0, %hi(D_802BC7D0_E2F100)
+/* E2E038 802BB708 2484C7D0 */  addiu     $a0, $a0, %lo(D_802BC7D0_E2F100)
 /* E2E03C 802BB70C A0430004 */  sb        $v1, 4($v0)
 /* E2E040 802BB710 C6000048 */  lwc1      $f0, 0x48($s0)
 /* E2E044 802BB714 C602004C */  lwc1      $f2, 0x4c($s0)

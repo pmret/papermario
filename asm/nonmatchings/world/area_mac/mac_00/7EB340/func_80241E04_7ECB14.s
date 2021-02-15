@@ -8,8 +8,8 @@ glabel func_80241E04_7ECB14
 /* 7ECB20 80241E10 AFB10014 */  sw        $s1, 0x14($sp)
 /* 7ECB24 80241E14 0000882D */  daddu     $s1, $zero, $zero
 /* 7ECB28 80241E18 AFB00010 */  sw        $s0, 0x10($sp)
-/* 7ECB2C 80241E1C 3C108025 */  lui       $s0, %hi(D_80248F20)
-/* 7ECB30 80241E20 26108F20 */  addiu     $s0, $s0, %lo(D_80248F20)
+/* 7ECB2C 80241E1C 3C108025 */  lui       $s0, %hi(D_80248F20_7F3C30)
+/* 7ECB30 80241E20 26108F20 */  addiu     $s0, $s0, %lo(D_80248F20_7F3C30)
 /* 7ECB34 80241E24 AFBF001C */  sw        $ra, 0x1c($sp)
 /* 7ECB38 80241E28 0240202D */  daddu     $a0, $s2, $zero
 .L80241E2C:

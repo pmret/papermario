@@ -50,7 +50,7 @@ INCLUDE_ASM(s32, "world/area_mim/mim_08/BAD940", func_80242A10_BB0350);
 
 INCLUDE_ASM(s32, "world/area_mim/mim_08/BAD940", func_80242AA0_BB03E0);
 
-INCLUDE_ASM(s32, "world/area_mim/mim_08/BAD940", pause_set_cursor_opacity_BB04E0);
+INCLUDE_ASM(s32, "world/area_mim/mim_08/BAD940", func_80242BA0_BB04E0);
 
 INCLUDE_ASM(s32, "world/area_mim/mim_08/BAD940", func_80242C00_BB0540);
 

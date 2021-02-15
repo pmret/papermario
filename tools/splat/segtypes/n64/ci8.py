@@ -11,14 +11,14 @@ class N64SegCi8(N64SegRgba16):
         self.path = None
 
     def split(self, rom_bytes, base_path):
-        out_dir = self.create_parent_dir(base_path + "/img", self.name)
+        out_dir = self.create_parent_dir(base_path + "/" + self.options.get("assets_dir", "img"), self.name)
         self.path = os.path.join(out_dir, os.path.basename(self.name) + ".png")
 
         data = rom_bytes[self.rom_start: self.rom_end]
         if self.compressed:
             data = Yay0decompress.decompress_yay0(data)
 
-        self.image = self.parse_image(data)
+        self.image = self.parse_image(data, self.width, self.height)
 
     def postsplit(self, segments):
         palettes = [seg for seg in segments if seg.type ==
@@ -52,7 +52,8 @@ class N64SegCi8(N64SegRgba16):
                 self.log(
                     f"No unnamed palette for {self.name}; wrote image data to {self.path}")
 
-    def parse_image(self, data):
+    @staticmethod
+    def parse_image(data, width, height):
         return data
 
     def max_length(self):

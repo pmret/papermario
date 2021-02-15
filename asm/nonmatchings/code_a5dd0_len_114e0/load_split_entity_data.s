@@ -25,9 +25,9 @@ glabel load_split_entity_data
 /* A7B58 80111458 2C620008 */  sltiu     $v0, $v1, 8
 /* A7B5C 8011145C 1040000A */  beqz      $v0, .L80111488
 /* A7B60 80111460 00031080 */   sll      $v0, $v1, 2
-/* A7B64 80111464 3C018015 */  lui       $at, %hi(jtbl_8014F858_E5F58)
+/* A7B64 80111464 3C018015 */  lui       $at, %hi(jtbl_8014F858)
 /* A7B68 80111468 00220821 */  addu      $at, $at, $v0
-/* A7B6C 8011146C 8C22F858 */  lw        $v0, %lo(jtbl_8014F858_E5F58)($at)
+/* A7B6C 8011146C 8C22F858 */  lw        $v0, %lo(jtbl_8014F858)($at)
 /* A7B70 80111470 00400008 */  jr        $v0
 /* A7B74 80111474 00000000 */   nop
 glabel L80111478_A7B78

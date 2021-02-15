@@ -42,7 +42,7 @@ def script_lib():
 
                 s = [s.strip() for s in line.split("=", 1)]
                 name = s[0]
-                addr = s[1]
+                addr = s[1].split(";")[0].split(" ")[0]
                 _script_lib[int(addr, 16)] = name
 
     return _script_lib
@@ -51,7 +51,7 @@ class ScriptDisassembler:
     def __init__(self, bytes, script_name = "script", symbol_map = {}):
         self.bytes = bytes
         self.script_name = script_name
-        self.symbol_map = symbol_map
+        self.symbol_map = { **script_lib(), **symbol_map }
 
         self.out = ""
         self.prefix = ""
@@ -67,7 +67,7 @@ class ScriptDisassembler:
             argc = self.read_word()
 
             if opcode > 0xFF or argc > 0xFF:
-                raise Exception(f"script '{script_name}' is malformed")
+                raise Exception(f"script '{self.script_name}' is malformed")
 
             argv = []
             for i in range(0, argc):
@@ -600,8 +600,15 @@ class ScriptDSLDisassembler(ScriptDisassembler):
         elif opcode == 0x41: self.write_line(f"{self.var(argv[0])} &=c {argv[1]:X};")
         elif opcode == 0x42: self.write_line(f"{self.var(argv[0])} |=c {argv[1]:X};")
         elif opcode == 0x43:
-            argv_str = ", ".join(self.var(arg) for arg in argv[1:])
-            self.write_line(f"{self.addr_ref(argv[0])}({argv_str});")
+            addr = argv[0]
+            if addr in self.symbol_map:
+                func_name = self.symbol_map[addr]
+
+                argv_str = ", ".join(self.var(arg) for arg in argv[1:])
+                self.write_line(f"{func_name}({argv_str});")
+            else:
+                print(f"script API function {addr:X} is not present in symbol_addrs.txt, please add it")
+                exit(1)
         elif opcode == 0x44: self.write_line(f"spawn {self.addr_ref(argv[0])};")
         elif opcode == 0x45: self.write_line(f"{self.var(argv[1])} = spawn {self.addr_ref(argv[0])};")
         elif opcode == 0x46: self.write_line(f"await {self.addr_ref(argv[0])};")

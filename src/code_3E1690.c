@@ -2,7 +2,8 @@
 
 INCLUDE_ASM(s32, "code_3E1690", func_E00E8000);
 
-INCLUDE_ASM(s32, "code_3E1690", func_E00E825C);
+void func_E00E825C(void){
+}
 
 INCLUDE_ASM(s32, "code_3E1690", func_E00E8264);
 

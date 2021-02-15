@@ -188,8 +188,8 @@ glabel func_802DF00C
 /* 102380 802DF290 1440FFF8 */  bnez      $v0, .L802DF274
 /* 102384 802DF294 00000000 */   nop
 .L802DF298:
-/* 102388 802DF298 3C048035 */  lui       $a0, %hi(D_8034F800)
-/* 10238C 802DF29C 2484F800 */  addiu     $a0, $a0, %lo(D_8034F800)
+/* 102388 802DF298 3C048035 */  lui       $a0, %hi(gSpriteHeapPtr)
+/* 10238C 802DF29C 2484F800 */  addiu     $a0, $a0, %lo(gSpriteHeapPtr)
 /* 102390 802DF2A0 02C0282D */  daddu     $a1, $s6, $zero
 /* 102394 802DF2A4 0C00A4B1 */  jal       _heap_realloc
 /* 102398 802DF2A8 00C53023 */   subu     $a2, $a2, $a1

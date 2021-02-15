@@ -89,12 +89,12 @@ glabel func_80240B1C_DEF9BC
 /* DEFAE4 80240C44 AE230028 */  sw        $v1, 0x28($s1)
 .L80240C48:
 /* DEFAE8 80240C48 C6200048 */  lwc1      $f0, 0x48($s1)
-/* DEFAEC 80240C4C 3C018024 */  lui       $at, %hi(D_802477B0)
-/* DEFAF0 80240C50 D42277B0 */  ldc1      $f2, %lo(D_802477B0)($at)
+/* DEFAEC 80240C4C 3C018024 */  lui       $at, %hi(D_802477B0_DF6650)
+/* DEFAF0 80240C50 D42277B0 */  ldc1      $f2, %lo(D_802477B0_DF6650)($at)
 /* DEFAF4 80240C54 46000021 */  cvt.d.s   $f0, $f0
 /* DEFAF8 80240C58 46220000 */  add.d     $f0, $f0, $f2
-/* DEFAFC 80240C5C 3C018024 */  lui       $at, %hi(D_802477B8)
-/* DEFB00 80240C60 D42277B8 */  ldc1      $f2, %lo(D_802477B8)($at)
+/* DEFAFC 80240C5C 3C018024 */  lui       $at, %hi(D_802477B8_DF6658)
+/* DEFB00 80240C60 D42277B8 */  ldc1      $f2, %lo(D_802477B8_DF6658)($at)
 /* DEFB04 80240C64 46200020 */  cvt.s.d   $f0, $f0
 /* DEFB08 80240C68 E6200048 */  swc1      $f0, 0x48($s1)
 /* DEFB0C 80240C6C 46000021 */  cvt.d.s   $f0, $f0

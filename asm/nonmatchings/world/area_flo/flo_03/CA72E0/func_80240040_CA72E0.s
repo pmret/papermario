@@ -4,8 +4,8 @@
 glabel func_80240040_CA72E0
 /* CA72E0 80240040 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* CA72E4 80240044 AFB00010 */  sw        $s0, 0x10($sp)
-/* CA72E8 80240048 3C108024 */  lui       $s0, %hi(D_80240F08)
-/* CA72EC 8024004C 26100F08 */  addiu     $s0, $s0, %lo(D_80240F08)
+/* CA72E8 80240048 3C108024 */  lui       $s0, %hi(D_80240F08_CA81A8)
+/* CA72EC 8024004C 26100F08 */  addiu     $s0, $s0, %lo(D_80240F08_CA81A8)
 /* CA72F0 80240050 AFBF0018 */  sw        $ra, 0x18($sp)
 /* CA72F4 80240054 AFB10014 */  sw        $s1, 0x14($sp)
 /* CA72F8 80240058 8E020000 */  lw        $v0, ($s0)
@@ -39,8 +39,8 @@ glabel func_80240040_CA72E0
 /* CA735C 802400BC 28620010 */  slti      $v0, $v1, 0x10
 /* CA7360 802400C0 1440FFFA */  bnez      $v0, .L802400AC
 /* CA7364 802400C4 24840004 */   addiu    $a0, $a0, 4
-/* CA7368 802400C8 3C108024 */  lui       $s0, %hi(D_80240F08)
-/* CA736C 802400CC 26100F08 */  addiu     $s0, $s0, %lo(D_80240F08)
+/* CA7368 802400C8 3C108024 */  lui       $s0, %hi(D_80240F08_CA81A8)
+/* CA736C 802400CC 26100F08 */  addiu     $s0, $s0, %lo(D_80240F08_CA81A8)
 /* CA7370 802400D0 0C00AB4B */  jal       heap_free
 /* CA7374 802400D4 8E040000 */   lw       $a0, ($s0)
 /* CA7378 802400D8 AE000000 */  sw        $zero, ($s0)

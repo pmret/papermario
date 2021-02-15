@@ -7,7 +7,7 @@ glabel func_802B704C
 /* E218C4 802B7054 3C108011 */  lui       $s0, %hi(gPlayerStatus)
 /* E218C8 802B7058 2610EFC8 */  addiu     $s0, $s0, %lo(gPlayerStatus)
 /* E218CC 802B705C AFBF0014 */  sw        $ra, 0x14($sp)
-/* E218D0 802B7060 0C011052 */  jal       func_80044148
+/* E218D0 802B7060 0C011052 */  jal       is_starting_conversation
 /* E218D4 802B7064 00000000 */   nop
 /* E218D8 802B7068 14400031 */  bnez      $v0, .L802B7130
 /* E218DC 802B706C 0000102D */   daddu    $v0, $zero, $zero

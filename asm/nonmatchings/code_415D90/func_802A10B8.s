@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel func_802A10B8
-/* 415E48 802A10B8 3C02802B */  lui       $v0, %hi(D_802AD0AC)
-/* 415E4C 802A10BC 8C42D0AC */  lw        $v0, %lo(D_802AD0AC)($v0)
+/* 415E48 802A10B8 3C02802B */  lui       $v0, %hi(main_menu_numOptions)
+/* 415E4C 802A10BC 8C42D0AC */  lw        $v0, %lo(main_menu_numOptions)($v0)
 /* 415E50 802A10C0 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 415E54 802A10C4 AFB00010 */  sw        $s0, 0x10($sp)
 /* 415E58 802A10C8 0000802D */  daddu     $s0, $zero, $zero
@@ -22,8 +22,8 @@ glabel func_802A10B8
 /* 415E88 802A10F8 8E440000 */  lw        $a0, ($s2)
 /* 415E8C 802A10FC 0C05123D */  jal       free_icon
 /* 415E90 802A1100 26100001 */   addiu    $s0, $s0, 1
-/* 415E94 802A1104 3C02802B */  lui       $v0, %hi(D_802AD0AC)
-/* 415E98 802A1108 8C42D0AC */  lw        $v0, %lo(D_802AD0AC)($v0)
+/* 415E94 802A1104 3C02802B */  lui       $v0, %hi(main_menu_numOptions)
+/* 415E98 802A1108 8C42D0AC */  lw        $v0, %lo(main_menu_numOptions)($v0)
 /* 415E9C 802A110C 0202102A */  slt       $v0, $s0, $v0
 /* 415EA0 802A1110 1440FFF6 */  bnez      $v0, .L802A10EC
 /* 415EA4 802A1114 26520004 */   addiu    $s2, $s2, 4

@@ -38,8 +38,8 @@ glabel func_802BBD78_E2E6A8
 /* E2E72C 802BBDFC 4622B582 */  mul.d     $f22, $f22, $f2
 /* E2E730 802BBE00 00000000 */  nop
 /* E2E734 802BBE04 C60C0064 */  lwc1      $f12, 0x64($s0)
-/* E2E738 802BBE08 3C01802C */  lui       $at, %hi(D_802BCE10)
-/* E2E73C 802BBE0C D420CE10 */  ldc1      $f0, %lo(D_802BCE10)($at)
+/* E2E738 802BBE08 3C01802C */  lui       $at, %hi(D_802BCE10_E2F740)
+/* E2E73C 802BBE0C D420CE10 */  ldc1      $f0, %lo(D_802BCE10_E2F740)($at)
 /* E2E740 802BBE10 46006321 */  cvt.d.s   $f12, $f12
 /* E2E744 802BBE14 46206301 */  sub.d     $f12, $f12, $f0
 /* E2E748 802BBE18 46206320 */  cvt.s.d   $f12, $f12

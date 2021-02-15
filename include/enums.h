@@ -286,6 +286,7 @@ typedef UNK_TYPE SoundId;
 #define SoundId_MOLE_THROW            0x000003E8
 #define SoundId_CLOSE_SHELL           0x000002FF
 #define SoundId_OPEN_SHELL            0x000003D4
+#define SoundId_THROW                 0x3FA
 #define SoundId_BOW_VANISH            0x0000200E
 #define SoundId_BOW_APPEAR            0x0000200F
 #define SoundId_CANNON1               0x00002016
@@ -670,6 +671,7 @@ typedef s16 ItemId;
 typedef UNK_TYPE PlayerAnim;
 #define PlayerAnim_STAND_STILL      0x00010000
 #define PlayerAnim_CROUCH_STILL     0x00010001
+#define PlayerAnim_2                0x00010002 // TODO
 #define PlayerAnim_PANTING          0x00010003
 #define PlayerAnim_WALKING          0x00010004
 #define PlayerAnim_RUNNING          0x00010005
@@ -1008,9 +1010,9 @@ typedef s8 ActionState;
 #define ActionState_USE_SPRING         0x00000026
 
 typedef s32 NpcId;
-#define NpcId_SELF    0xFFFFFFFF
-#define NpcId_PLAYER  0xFFFFFFFE
-#define NpcId_PARTNER 0xFFFFFFFC
+#define NpcId_SELF    -1
+#define NpcId_PLAYER  -2
+#define NpcId_PARTNER -4
 
 typedef UNK_TYPE TriggerFlag;
 #define TriggerFlag_FLOOR_TOUCH    0x00000080
@@ -1093,19 +1095,17 @@ typedef UNK_TYPE DamageType;
 #define DamageType_THROW          0x00040000
 
 typedef s8 PartnerID;
-enum PartnerID {
-    PartnerID_NONE,
-    PartnerID_GOOMBARIO,
-    PartnerID_KOOPER,
-    PartnerID_BOMBETTE,
-    PartnerID_PARAKARRY,
-    PartnerID_GOOMPA,
-    PartnerID_WATT,
-    PartnerID_SUSHIE,
-    PartnerID_LAKILESTER,
-    PartnerID_BOW,
-    PartnerID_GOOMBARIA,
-    PartnerID_TWINK,
-};
+#define PartnerID_NONE       0
+#define PartnerID_GOOMBARIO  1
+#define PartnerID_KOOPER     2
+#define PartnerID_BOMBETTE   3
+#define PartnerID_PARAKARRY  4
+#define PartnerID_GOOMPA     5
+#define PartnerID_WATT       6
+#define PartnerID_SUSHIE     7
+#define PartnerID_LAKILESTER 8
+#define PartnerID_BOW        9
+#define PartnerID_GOOMBARIA  10
+#define PartnerID_TWINK      11
 
 #endif

@@ -18,17 +18,18 @@ INCLUDE_ASM(s32, "code_341d0", func_80059AB8);
 
 INCLUDE_ASM(s32, "code_341d0", func_80059BD4);
 
-void func_80059C80(EffectInstance* effectInst) {
+/// Used for unbound function points in effect structs.
+void stub_effect_delegate(EffectInstance* effectInst) {
 }
 
-INCLUDE_ASM(s32, "code_341d0", func_80059C88);
+INCLUDE_ASM(s32, "code_341d0", set_effect_pos_offset);
 
-INCLUDE_ASM(s32, "code_341d0", func_80059C9C);
+INCLUDE_ASM(s32, "code_341d0", clear_effect_data);
 
 void func_80059D48(void) {
 }
 
-INCLUDE_ASM(s32, "code_341d0", func_80059D50);
+INCLUDE_ASM(s32, "code_341d0", update_effects);
 
 #define EFFECT_LOADED 1
 
@@ -93,17 +94,17 @@ EffectInstance* func_8005A2BC(EffectBlueprint* effectBp) {
     if (curEffect->instanceCounter == 0) {
         curEffect->update = effectBp->update;
         if (curEffect->update == NULL) {
-            curEffect->renderWorld = func_80059C80;
+            curEffect->renderWorld = stub_effect_delegate;
         }
 
         curEffect->renderWorld = effectBp->renderWorld;
         if (curEffect->unk_18 == NULL) {
-            curEffect->unk_18 = func_80059C80;
+            curEffect->unk_18 = stub_effect_delegate;
         }
 
         curEffect->unk_18 = effectBp->unk_14;
         if (curEffect->unk_18 == NULL) {
-            curEffect->unk_18 = func_80059C80;
+            curEffect->unk_18 = stub_effect_delegate;
         }
     }
 
@@ -165,7 +166,7 @@ typedef TlbEntry TlbMappablePage[15];
 extern TlbMappablePage D_80197000;
 extern EffectTableEntry D_8007F210[135];
 
-s32 play_effect(s32 effectIndex) {
+s32 load_effect(s32 effectIndex) {
     EffectTableEntry* effectTable = &D_8007F210[0];
     EffectTableEntry* effectEntry;
     Effect* curEffect;

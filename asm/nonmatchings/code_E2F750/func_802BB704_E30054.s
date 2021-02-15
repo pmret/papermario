@@ -10,11 +10,11 @@ glabel func_802BB704_E30054
 /* E30068 802BB718 1C400012 */  bgtz      $v0, .L802BB764
 /* E3006C 802BB71C 240200FF */   addiu    $v0, $zero, 0xff
 /* E30070 802BB720 80C40001 */  lb        $a0, 1($a2)
-/* E30074 802BB724 3C05802C */  lui       $a1, %hi(D_802BCA30)
-/* E30078 802BB728 24A5CA30 */  addiu     $a1, $a1, %lo(D_802BCA30)
-/* E3007C 802BB72C 3C03802C */  lui       $v1, %hi(D_802BCA30)
+/* E30074 802BB724 3C05802C */  lui       $a1, %hi(D_802BCA30_E31380)
+/* E30078 802BB728 24A5CA30 */  addiu     $a1, $a1, %lo(D_802BCA30_E31380)
+/* E3007C 802BB72C 3C03802C */  lui       $v1, %hi(D_802BCA30_E31380)
 /* E30080 802BB730 00641821 */  addu      $v1, $v1, $a0
-/* E30084 802BB734 9063CA30 */  lbu       $v1, %lo(D_802BCA30)($v1)
+/* E30084 802BB734 9063CA30 */  lbu       $v1, %lo(D_802BCA30_E31380)($v1)
 /* E30088 802BB738 50620001 */  beql      $v1, $v0, .L802BB740
 /* E3008C 802BB73C 0000202D */   daddu    $a0, $zero, $zero
 .L802BB740:

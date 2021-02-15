@@ -11,8 +11,8 @@ glabel func_80240280_DE2710
 /* DE2728 80240298 0C00EABB */  jal       get_npc_unsafe
 /* DE272C 8024029C 86040008 */   lh       $a0, 8($s0)
 /* DE2730 802402A0 C4400018 */  lwc1      $f0, 0x18($v0)
-/* DE2734 802402A4 3C018024 */  lui       $at, %hi(func_80242EE0_A1DFE0)
-/* DE2738 802402A8 D4222EE0 */  ldc1      $f2, %lo(func_80242EE0_A1DFE0)($at)
+/* DE2734 802402A4 3C018024 */  lui       $at, %hi(D_80242EE0_DE5370)
+/* DE2738 802402A8 D4222EE0 */  ldc1      $f2, %lo(D_80242EE0_DE5370)($at)
 /* DE273C 802402AC 46000021 */  cvt.d.s   $f0, $f0
 /* DE2740 802402B0 46220002 */  mul.d     $f0, $f0, $f2
 /* DE2744 802402B4 00000000 */  nop

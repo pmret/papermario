@@ -9,8 +9,8 @@ glabel func_80242F9C_EA389C
 /* EA38AC 80242FAC F7B40018 */  sdc1      $f20, 0x18($sp)
 /* EA38B0 80242FB0 C60C0090 */  lwc1      $f12, 0x90($s0)
 /* EA38B4 80242FB4 46806320 */  cvt.s.w   $f12, $f12
-/* EA38B8 80242FB8 3C018024 */  lui       $at, %hi(D_802466B0)
-/* EA38BC 80242FBC D43466B0 */  ldc1      $f20, %lo(D_802466B0)($at)
+/* EA38B8 80242FB8 3C018024 */  lui       $at, %hi(D_802466B0_EA6FB0)
+/* EA38BC 80242FBC D43466B0 */  ldc1      $f20, %lo(D_802466B0_EA6FB0)($at)
 /* EA38C0 80242FC0 46006307 */  neg.s     $f12, $f12
 /* EA38C4 80242FC4 46006321 */  cvt.d.s   $f12, $f12
 /* EA38C8 80242FC8 46346301 */  sub.d     $f12, $f12, $f20
@@ -27,8 +27,8 @@ glabel func_80242F9C_EA389C
 /* EA38F4 80242FF4 46006307 */  neg.s     $f12, $f12
 /* EA38F8 80242FF8 46006321 */  cvt.d.s   $f12, $f12
 /* EA38FC 80242FFC 46346301 */  sub.d     $f12, $f12, $f20
-/* EA3900 80243000 3C018024 */  lui       $at, %hi(D_802466B8)
-/* EA3904 80243004 D42266B8 */  ldc1      $f2, %lo(D_802466B8)($at)
+/* EA3900 80243000 3C018024 */  lui       $at, %hi(D_802466B8_EA6FB8)
+/* EA3904 80243004 D42266B8 */  ldc1      $f2, %lo(D_802466B8_EA6FB8)($at)
 /* EA3908 80243008 46220001 */  sub.d     $f0, $f0, $f2
 /* EA390C 8024300C 4620010D */  trunc.w.d $f4, $f0
 /* EA3910 80243010 E6040098 */  swc1      $f4, 0x98($s0)

@@ -19,9 +19,9 @@ glabel end_battle
 /* 173368 80244A88 104000BA */  beqz      $v0, .L80244D74
 /* 17336C 80244A8C AFB00018 */   sw       $s0, 0x18($sp)
 /* 173370 80244A90 00031080 */  sll       $v0, $v1, 2
-/* 173374 80244A94 3C01802A */  lui       $at, %hi(jtbl_8029CAB8_1CB398)
+/* 173374 80244A94 3C01802A */  lui       $at, %hi(jtbl_8029CAB8)
 /* 173378 80244A98 00220821 */  addu      $at, $at, $v0
-/* 17337C 80244A9C 8C22CAB8 */  lw        $v0, %lo(jtbl_8029CAB8_1CB398)($at)
+/* 17337C 80244A9C 8C22CAB8 */  lw        $v0, %lo(jtbl_8029CAB8)($at)
 /* 173380 80244AA0 00400008 */  jr        $v0
 /* 173384 80244AA4 00000000 */   nop
 glabel L80244AA8_173388
@@ -52,12 +52,12 @@ glabel L80244AA8_173388
 /* 1733E4 80244B04 0000202D */  daddu     $a0, $zero, $zero
 /* 1733E8 80244B08 0080282D */  daddu     $a1, $a0, $zero
 /* 1733EC 80244B0C 0080302D */  daddu     $a2, $a0, $zero
-/* 1733F0 80244B10 0C04DF84 */  jal       func_80137E10
+/* 1733F0 80244B10 0C04DF84 */  jal       set_transition_stencil_color
 /* 1733F4 80244B14 0080382D */   daddu    $a3, $a0, $zero
 /* 1733F8 80244B18 0000202D */  daddu     $a0, $zero, $zero
 /* 1733FC 80244B1C 0080282D */  daddu     $a1, $a0, $zero
 /* 173400 80244B20 240600A0 */  addiu     $a2, $zero, 0xa0
-/* 173404 80244B24 0C04DF93 */  jal       func_80137E4C
+/* 173404 80244B24 0C04DF93 */  jal       set_transition_stencil_center
 /* 173408 80244B28 24070078 */   addiu    $a3, $zero, 0x78
 /* 17340C 80244B2C 24020001 */  addiu     $v0, $zero, 1
 .L80244B30:
@@ -172,7 +172,7 @@ glabel L80244C28_173508
 .L80244CB0:
 /* 173590 80244CB0 0C016938 */  jal       remove_all_effects
 /* 173594 80244CB4 00000000 */   nop
-/* 173598 80244CB8 0C051FB1 */  jal       func_80147EC4
+/* 173598 80244CB8 0C051FB1 */  jal       set_windows_visible
 /* 17359C 80244CBC 0000202D */   daddu    $a0, $zero, $zero
 /* 1735A0 80244CC0 8E020004 */  lw        $v0, 4($s0)
 /* 1735A4 80244CC4 30420040 */  andi      $v0, $v0, 0x40

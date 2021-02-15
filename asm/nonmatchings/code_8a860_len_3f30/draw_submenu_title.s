@@ -60,7 +60,7 @@ glabel draw_submenu_title
 /* 8DBC8 800F4718 8E070000 */  lw        $a3, ($s0)
 /* 8DBCC 800F471C 24110032 */  addiu     $s1, $zero, 0x32
 /* 8DBD0 800F4720 AFB10010 */  sw        $s1, 0x10($sp)
-/* 8DBD4 800F4724 0C04993B */  jal       draw_string
+/* 8DBD4 800F4724 0C04993B */  jal       draw_msg
 /* 8DBD8 800F4728 AFA80014 */   sw       $t0, 0x14($sp)
 /* 8DBDC 800F472C 2685005E */  addiu     $a1, $s4, 0x5e
 /* 8DBE0 800F4730 0240302D */  daddu     $a2, $s2, $zero
@@ -85,7 +85,7 @@ glabel draw_submenu_title
 /* 8DC28 800F4778 8E070000 */  lw        $a3, ($s0)
 /* 8DC2C 800F477C 24110032 */  addiu     $s1, $zero, 0x32
 /* 8DC30 800F4780 AFB10010 */  sw        $s1, 0x10($sp)
-/* 8DC34 800F4784 0C04993B */  jal       draw_string
+/* 8DC34 800F4784 0C04993B */  jal       draw_msg
 /* 8DC38 800F4788 AFA80014 */   sw       $t0, 0x14($sp)
 /* 8DC3C 800F478C 2685005E */  addiu     $a1, $s4, 0x5e
 /* 8DC40 800F4790 0240302D */  daddu     $a2, $s2, $zero
@@ -170,7 +170,7 @@ glabel draw_submenu_title
 /* 8DD74 800F48C4 24020001 */  addiu     $v0, $zero, 1
 /* 8DD78 800F48C8 AFA20014 */  sw        $v0, 0x14($sp)
 .L800F48CC:
-/* 8DD7C 800F48CC 0C04993B */  jal       draw_string
+/* 8DD7C 800F48CC 0C04993B */  jal       draw_msg
 /* 8DD80 800F48D0 00000000 */   nop
 .L800F48D4:
 /* 8DD84 800F48D4 8FBF0034 */  lw        $ra, 0x34($sp)

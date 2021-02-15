@@ -5,11 +5,11 @@ void NOP_npc_callback(void) {
 }
 
 void mtx_ident_mirror_y(Matrix4f* mtx) {
-    guMtxIdentF(mtx);
-    mtx->mtx[0][0] = 1.0f;
-    mtx->mtx[1][1] = -1.0f;
-    mtx->mtx[2][2] = 1.0f;
-    mtx->mtx[3][3] = 1.0f;
+    guMtxIdentF(*mtx);
+    (*mtx)[0][0] = 1.0f;
+    (*mtx)[1][1] = -1.0f;
+    (*mtx)[2][2] = 1.0f;
+    (*mtx)[3][3] = 1.0f;
 }
 
 INCLUDE_ASM(s32, "code_13870_len_6980", clear_npcs);
@@ -18,13 +18,15 @@ INCLUDE_ASM(s32, "code_13870_len_6980", init_npc_list);
 
 INCLUDE_ASM(s32, "code_13870_len_6980", func_8003857C);
 
-INCLUDE_ASM(s32, "code_13870_len_6980", _create_npc);
+INCLUDE_ASM(s32, "code_13870_len_6980", _create_npc, NpcBlueprint* blueprint, s32 animList[], s32 skipLoadingAnims);
 
 INCLUDE_ASM(s32, "code_13870_len_6980", create_basic_npc);
 
 INCLUDE_ASM(s32, "code_13870_len_6980", create_standard_npc);
 
-INCLUDE_ASM(s32, "code_13870_len_6980", create_partner_npc);
+void create_partner_npc(NpcBlueprint* blueprint) {
+    _create_npc(blueprint, NULL, TRUE);
+}
 
 INCLUDE_ASM(s32, "code_13870_len_6980", free_npc_by_index);
 
@@ -69,7 +71,7 @@ INCLUDE_ASM(s32, "code_13870_len_6980", enable_npc_shadow);
 
 INCLUDE_ASM(s32, "code_13870_len_6980", disable_npc_shadow);
 
-INCLUDE_ASM(s32, "code_13870_len_6980", func_8003AC5C);
+INCLUDE_ASM(s32, "code_13870_len_6980", set_npc_sprite);
 
 INCLUDE_ASM(s32, "code_13870_len_6980", enable_npc_blur);
 
@@ -223,11 +225,11 @@ void func_8003E50C(void) {
 
 INCLUDE_ASM(s32, "code_13870_len_6980", func_8003E514);
 
-INCLUDE_ASM(s32, "code_13870_len_6980", func_8003E524);
+INCLUDE_ASM(s32, "code_13870_len_6980", update_counters);
 
-INCLUDE_ASM(s32, "code_13870_len_6980", func_8003E5B0);
+INCLUDE_ASM(s32, "code_13870_len_6980", draw_encounter_ui);
 
-INCLUDE_ASM(s32, "code_13870_len_6980", func_8003E63C);
+INCLUDE_ASM(s32, "code_13870_len_6980", draw_first_strike_ui);
 
 void func_8003E670(void) {
 }

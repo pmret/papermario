@@ -24,7 +24,7 @@ glabel func_80241198_B5F448
 /* B5F494 802411E4 00A0382D */  daddu     $a3, $a1, $zero
 /* B5F498 802411E8 AE220088 */  sw        $v0, 0x88($s1)
 /* B5F49C 802411EC AE200070 */  sw        $zero, 0x70($s1)
-/* B5F4A0 802411F0 0C04DF84 */  jal       func_80137E10
+/* B5F4A0 802411F0 0C04DF84 */  jal       set_transition_stencil_color
 /* B5F4A4 802411F4 AE200074 */   sw       $zero, 0x74($s1)
 .L802411F8:
 /* B5F4A8 802411F8 8E230070 */  lw        $v1, 0x70($s1)
@@ -81,7 +81,7 @@ glabel func_80241198_B5F448
 /* B5F558 802412A8 C6200074 */  lwc1      $f0, 0x74($s1)
 /* B5F55C 802412AC 46800020 */  cvt.s.w   $f0, $f0
 /* B5F560 802412B0 44050000 */  mfc1      $a1, $f0
-/* B5F564 802412B4 0C04DF62 */  jal       func_80137D88
+/* B5F564 802412B4 0C04DF62 */  jal       set_transition_stencil_zoom_0
 /* B5F568 802412B8 24040001 */   addiu    $a0, $zero, 1
 /* B5F56C 802412BC 0240102D */  daddu     $v0, $s2, $zero
 /* B5F570 802412C0 8FBF001C */  lw        $ra, 0x1c($sp)

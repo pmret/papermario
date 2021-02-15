@@ -54,8 +54,8 @@ glabel func_80240518_EA0E18
 /* EA0ED8 802405D8 00000000 */   nop
 /* EA0EDC 802405DC 0C00AB85 */  jal       func_8002AE14
 /* EA0EE0 802405E0 46000306 */   mov.s    $f12, $f0
-/* EA0EE4 802405E4 3C018024 */  lui       $at, %hi(D_80246480)
-/* EA0EE8 802405E8 D4226480 */  ldc1      $f2, %lo(D_80246480)($at)
+/* EA0EE4 802405E4 3C018024 */  lui       $at, %hi(D_80246480_EA6D80)
+/* EA0EE8 802405E8 D4226480 */  ldc1      $f2, %lo(D_80246480_EA6D80)($at)
 /* EA0EEC 802405EC 46000021 */  cvt.d.s   $f0, $f0
 /* EA0EF0 802405F0 4622003C */  c.lt.d    $f0, $f2
 /* EA0EF4 802405F4 00000000 */  nop

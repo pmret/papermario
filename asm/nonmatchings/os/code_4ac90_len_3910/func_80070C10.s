@@ -11,7 +11,7 @@ glabel func_80070C10
 /* 4C028 80070C28 E7AE0024 */  swc1      $f14, 0x24($sp)
 /* 4C02C 80070C2C E7B00028 */  swc1      $f16, 0x28($sp)
 /* 4C030 80070C30 AFBF002C */  sw        $ra, 0x2c($sp)
-/* 4C034 80070C34 0C016959 */  jal       play_effect
+/* 4C034 80070C34 0C016959 */  jal       load_effect
 /* 4C038 80070C38 24040034 */   addiu    $a0, $zero, 0x34
 /* 4C03C 80070C3C 8FA40010 */  lw        $a0, 0x10($sp)
 /* 4C040 80070C40 8FA50014 */  lw        $a1, 0x14($sp)

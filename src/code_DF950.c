@@ -2,7 +2,7 @@
 
 INCLUDE_ASM(s32, "code_DF950", func_80149250);
 
-void func_80149600(void) {
+void use_default_door_sounds(void) {
     gCurrentDoorSoundsSet = 0;
     D_80151308 = 0;
 }

@@ -19,13 +19,13 @@ glabel func_80241F98_D21E28
 /* D21E60 80241FD0 0080282D */  daddu     $a1, $a0, $zero
 /* D21E64 80241FD4 0040802D */  daddu     $s0, $v0, $zero
 /* D21E68 80241FD8 240600BE */  addiu     $a2, $zero, 0xbe
-/* D21E6C 80241FDC 0C04DF93 */  jal       func_80137E4C
+/* D21E6C 80241FDC 0C04DF93 */  jal       set_transition_stencil_center
 /* D21E70 80241FE0 24070091 */   addiu    $a3, $zero, 0x91
 /* D21E74 80241FE4 44900000 */  mtc1      $s0, $f0
 /* D21E78 80241FE8 00000000 */  nop
 /* D21E7C 80241FEC 46800020 */  cvt.s.w   $f0, $f0
 /* D21E80 80241FF0 44050000 */  mfc1      $a1, $f0
-/* D21E84 80241FF4 0C04DF62 */  jal       func_80137D88
+/* D21E84 80241FF4 0C04DF62 */  jal       set_transition_stencil_zoom_0
 /* D21E88 80241FF8 322400FF */   andi     $a0, $s1, 0xff
 /* D21E8C 80241FFC 8FBF0018 */  lw        $ra, 0x18($sp)
 /* D21E90 80242000 8FB10014 */  lw        $s1, 0x14($sp)

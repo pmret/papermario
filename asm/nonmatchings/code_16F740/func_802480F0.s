@@ -41,7 +41,7 @@ glabel func_802480F0
 /* 176A54 80248174 44050000 */  mfc1      $a1, $f0
 /* 176A58 80248178 0000202D */  daddu     $a0, $zero, $zero
 .L8024817C:
-/* 176A5C 8024817C 0C04DF62 */  jal       func_80137D88
+/* 176A5C 8024817C 0C04DF62 */  jal       set_transition_stencil_zoom_0
 /* 176A60 80248180 00000000 */   nop
 .L80248184:
 /* 176A64 80248184 8FBF0010 */  lw        $ra, 0x10($sp)

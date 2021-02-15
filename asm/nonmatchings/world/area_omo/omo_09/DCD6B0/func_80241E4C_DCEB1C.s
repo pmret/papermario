@@ -35,8 +35,8 @@ glabel func_80241E4C_DCEB1C
 /* DCEB90 80241EC0 14400010 */  bnez      $v0, .L80241F04
 /* DCEB94 80241EC4 00000000 */   nop
 /* DCEB98 80241EC8 C6000018 */  lwc1      $f0, 0x18($s0)
-/* DCEB9C 80241ECC 3C018025 */  lui       $at, %hi(D_8024A978)
-/* DCEBA0 80241ED0 D422A978 */  ldc1      $f2, %lo(D_8024A978)($at)
+/* DCEB9C 80241ECC 3C018025 */  lui       $at, %hi(D_8024A978_DD7648)
+/* DCEBA0 80241ED0 D422A978 */  ldc1      $f2, %lo(D_8024A978_DD7648)($at)
 /* DCEBA4 80241ED4 46000021 */  cvt.d.s   $f0, $f0
 /* DCEBA8 80241ED8 46220002 */  mul.d     $f0, $f0, $f2
 /* DCEBAC 80241EDC 00000000 */  nop

@@ -16,13 +16,13 @@ glabel step_pause_menu
 /* FDA8 800349A8 0800D2F8 */  j         .L80034BE0
 /* FDAC 800349AC 00000000 */   nop
 .L800349B0:
-/* FDB0 800349B0 0C00F949 */  jal       func_8003E524
+/* FDB0 800349B0 0C00F949 */  jal       update_counters
 /* FDB4 800349B4 00000000 */   nop
 /* FDB8 800349B8 0C00E64C */  jal       update_npcs
 /* FDBC 800349BC 00000000 */   nop
 /* FDC0 800349C0 0C037DD0 */  jal       update_player
 /* FDC4 800349C4 00000000 */   nop
-/* FDC8 800349C8 0C016754 */  jal       func_80059D50
+/* FDC8 800349C8 0C016754 */  jal       update_effects
 /* FDCC 800349CC 00000000 */   nop
 /* FDD0 800349D0 3C02800A */  lui       $v0, %hi(D_8009A658)
 /* FDD4 800349D4 8C42A658 */  lw        $v0, %lo(D_8009A658)($v0)
@@ -89,7 +89,7 @@ glabel step_pause_menu
 /* FEC0 80034AC0 00000000 */   nop
 /* FEC4 80034AC4 0C052010 */  jal       func_80148040
 /* FEC8 80034AC8 00000000 */   nop
-/* FECC 80034ACC 0C05177E */  jal       func_80145DF8
+/* FECC 80034ACC 0C05177E */  jal       use_default_background_settings
 /* FED0 80034AD0 00000000 */   nop
 /* FED4 80034AD4 0C0482EC */  jal       clear_entity_models
 /* FED8 80034AD8 00000000 */   nop

@@ -10,10 +10,12 @@ venv/
 ctx.c
 expected/
 .vscode/launch.json
+/tools/star-rod
 
 # Build artifacts
 build.ninja
 *.ld
+*.elf
 *.z64
 *.Yay0
 *.msg.h
@@ -23,16 +25,20 @@ build.ninja
 /include/message_ids.h
 /include/sprite/
 /include/map
+/tools/permuter_settings.toml
 
 # Assets
-/bin
-/img
-/msg
-/sprite
+/*assets
+*.bin
+*.o
 
 # Star Rod
 /sprite/SpriteTable.xml
 /mod.cfg
+/tools/star-rod
+/editor
+/logs
+/out
 
 /tools/Yay0compress
 /tools/n64crc

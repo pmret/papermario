@@ -283,15 +283,16 @@ INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_80072BB0);
 
 INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_80072BCC);
 
-INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_80072BDC);
+INCLUDE_ASM(s32, "os/code_4ac90_len_3910", load_battle_section);
 
 INCLUDE_ASM(s32, "os/code_4ac90_len_3910", load_battle);
 
-INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_80072CCC);
+INCLUDE_ASM(s32, "os/code_4ac90_len_3910", set_battle_stage);
 
 INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_80072CDC);
 
-INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_80072CEC);
+void func_80072CEC(){
+}
 
 INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_80072CF4);
 

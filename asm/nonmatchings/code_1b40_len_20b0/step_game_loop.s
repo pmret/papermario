@@ -23,7 +23,7 @@ glabel step_game_loop
 /* 1B88 80026788 54400001 */  bnel      $v0, $zero, .L80026790
 /* 1B8C 8002678C AE0402BC */   sw       $a0, 0x2bc($s0)
 .L80026790:
-/* 1B90 80026790 0C00A3E3 */  jal       func_80028F8C
+/* 1B90 80026790 0C00A3E3 */  jal       update_max_rumble_duration
 /* 1B94 80026794 00000000 */   nop
 /* 1B98 80026798 3C048007 */  lui       $a0, %hi(D_80074021)
 /* 1B9C 8002679C 24844021 */  addiu     $a0, $a0, %lo(D_80074021)
@@ -61,11 +61,11 @@ glabel step_game_loop
 /* 1C18 80026818 00000000 */   nop
 /* 1C1C 8002681C 0C052952 */  jal       func_8014A548
 /* 1C20 80026820 00000000 */   nop
-/* 1C24 80026824 0C051C99 */  jal       func_80147264
+/* 1C24 80026824 0C051C99 */  jal       update_ambient_sounds
 /* 1C28 80026828 00000000 */   nop
 /* 1C2C 8002682C 0C0525CD */  jal       func_80149734
 /* 1C30 80026830 00000000 */   nop
-/* 1C34 80026834 0C051D05 */  jal       func_80147414
+/* 1C34 80026834 0C051D05 */  jal       update_windows
 /* 1C38 80026838 00000000 */   nop
 /* 1C3C 8002683C 0C00AE9E */  jal       update_curtains
 /* 1C40 80026840 00000000 */   nop

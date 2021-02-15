@@ -347,9 +347,9 @@ glabel update_actor_shadow
 /* 1847A0 80255EC0 E6220014 */  swc1      $f2, 0x14($s1)
 /* 1847A4 80255EC4 92420136 */  lbu       $v0, 0x136($s2)
 /* 1847A8 80255EC8 00021080 */  sll       $v0, $v0, 2
-/* 1847AC 80255ECC 3C018028 */  lui       $at, %hi(D_80282EEB)
+/* 1847AC 80255ECC 3C018028 */  lui       $at, %hi(bActorOffsets+3)
 /* 1847B0 80255ED0 00220821 */  addu      $at, $at, $v0
-/* 1847B4 80255ED4 80222EEB */  lb        $v0, %lo(D_80282EEB)($at)
+/* 1847B4 80255ED4 80222EEB */  lb        $v0, %lo(bActorOffsets+3)($at)
 /* 1847B8 80255ED8 C7A00020 */  lwc1      $f0, 0x20($sp)
 /* 1847BC 80255EDC 44821000 */  mtc1      $v0, $f2
 /* 1847C0 80255EE0 00000000 */  nop

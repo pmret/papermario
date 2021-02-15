@@ -15,9 +15,9 @@ glabel func_80240CC4_EF32D4
 /* EF32FC 80240CEC 00031C00 */  sll       $v1, $v1, 0x10
 /* EF3300 80240CF0 00031B83 */  sra       $v1, $v1, 0xe
 /* EF3304 80240CF4 A444008E */  sh        $a0, 0x8e($v0)
-/* EF3308 80240CF8 3C018024 */  lui       $at, %hi(D_802444BC)
+/* EF3308 80240CF8 3C018024 */  lui       $at, %hi(D_802444BC_EF6ACC)
 /* EF330C 80240CFC 00230821 */  addu      $at, $at, $v1
-/* EF3310 80240D00 C42244BC */  lwc1      $f2, %lo(D_802444BC)($at)
+/* EF3310 80240D00 C42244BC */  lwc1      $f2, %lo(D_802444BC_EF6ACC)($at)
 /* EF3314 80240D04 8443008E */  lh        $v1, 0x8e($v0)
 /* EF3318 80240D08 46020000 */  add.s     $f0, $f0, $f2
 /* EF331C 80240D0C 28630005 */  slti      $v1, $v1, 5

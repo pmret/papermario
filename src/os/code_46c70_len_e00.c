@@ -9,5 +9,3 @@ INCLUDE_ASM(s32, "os/code_46c70_len_e00", _Ldtob);
 INCLUDE_ASM(s32, "os/code_46c70_len_e00", _Ldunscale);
 
 INCLUDE_ASM(s32, "os/code_46c70_len_e00", _Genld);
-
-INCLUDE_ASM(s32, "os/code_46c70_len_e00", osGetCause);

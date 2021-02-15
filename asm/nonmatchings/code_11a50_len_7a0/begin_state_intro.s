@@ -119,7 +119,7 @@ glabel begin_state_intro
 /* 11C04 80036804 00000000 */  nop
 /* 11C08 80036808 46800020 */  cvt.s.w   $f0, $f0
 /* 11C0C 8003680C 44050000 */  mfc1      $a1, $f0
-/* 11C10 80036810 0C04DF69 */  jal       func_80137DA4
+/* 11C10 80036810 0C04DF69 */  jal       set_transition_stencil_zoom_1
 /* 11C14 80036814 00000000 */   nop
 /* 11C18 80036818 3C05800A */  lui       $a1, %hi(D_800A095B)
 /* 11C1C 8003681C 90A5095B */  lbu       $a1, %lo(D_800A095B)($a1)
@@ -127,7 +127,7 @@ glabel begin_state_intro
 /* 11C24 80036824 90C6095D */  lbu       $a2, %lo(D_800A095D)($a2)
 /* 11C28 80036828 3C07800A */  lui       $a3, 0x800a
 /* 11C2C 8003682C 90E7095F */  lbu       $a3, 0x95f($a3)
-/* 11C30 80036830 0C04DF84 */  jal       func_80137E10
+/* 11C30 80036830 0C04DF84 */  jal       set_transition_stencil_color
 /* 11C34 80036834 24040001 */   addiu    $a0, $zero, 1
 /* 11C38 80036838 0C00CE1D */  jal       intro_logos_update_fade
 /* 11C3C 8003683C 00000000 */   nop

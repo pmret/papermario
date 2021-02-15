@@ -96,7 +96,7 @@ static Map kgr_maps[] = {
 };
 
 /// Goomba Region
-MapConfig kmr_12_config;
+#include "area_kmr/kmr.h"
 static Map kmr_maps[] = {
     { MAP_UNSPLIT(kmr_00, 0x80240D80), .bgName = "kmr_bg", .flags = 1 },
     { MAP_UNSPLIT(kmr_02, 0x80243AF0), .bgName = "kmr_bg" },

@@ -4,8 +4,8 @@
 glabel func_80241230_DE36C0
 /* DE36C0 80241230 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* DE36C4 80241234 AFB00010 */  sw        $s0, 0x10($sp)
-/* DE36C8 80241238 3C108024 */  lui       $s0, %hi(func_80242C70_9AB060)
-/* DE36CC 8024123C 26102C70 */  addiu     $s0, $s0, %lo(func_80242C70_9AB060)
+/* DE36C8 80241238 3C108024 */  lui       $s0, %hi(D_80242C70_DE5100)
+/* DE36CC 8024123C 26102C70 */  addiu     $s0, $s0, %lo(D_80242C70_DE5100)
 /* DE36D0 80241240 AFBF0018 */  sw        $ra, 0x18($sp)
 /* DE36D4 80241244 AFB10014 */  sw        $s1, 0x14($sp)
 /* DE36D8 80241248 8E020000 */  lw        $v0, ($s0)
@@ -39,8 +39,8 @@ glabel func_80241230_DE36C0
 /* DE373C 802412AC 28620010 */  slti      $v0, $v1, 0x10
 /* DE3740 802412B0 1440FFFA */  bnez      $v0, .L8024129C
 /* DE3744 802412B4 24840004 */   addiu    $a0, $a0, 4
-/* DE3748 802412B8 3C108024 */  lui       $s0, %hi(func_80242C70_9AB060)
-/* DE374C 802412BC 26102C70 */  addiu     $s0, $s0, %lo(func_80242C70_9AB060)
+/* DE3748 802412B8 3C108024 */  lui       $s0, %hi(D_80242C70_DE5100)
+/* DE374C 802412BC 26102C70 */  addiu     $s0, $s0, %lo(D_80242C70_DE5100)
 /* DE3750 802412C0 0C00AB4B */  jal       heap_free
 /* DE3754 802412C4 8E040000 */   lw       $a0, ($s0)
 /* DE3758 802412C8 AE000000 */  sw        $zero, ($s0)
