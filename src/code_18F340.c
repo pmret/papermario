@@ -25,9 +25,9 @@ ApiStatus func_80260DD8(ScriptInstance* script, s32 isInitialCall) {
 
     var = player->varTable[0];
     if (var >= rand_int(100)) {
-        script->varTable[0] = 1;
+        script->varTable[0] = TRUE;
     } else {
-        script->varTable[0] = 0;
+        script->varTable[0] = FALSE;
     }
     return ApiStatus_DONE2;
 }

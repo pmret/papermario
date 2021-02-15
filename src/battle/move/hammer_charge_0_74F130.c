@@ -1,41 +1,12 @@
 #include "common.h"
 
-ApiStatus func_802A1000_74F130(ScriptInstance* script, s32 isInitialCall) {
-    script->varTable[0] = *(&gBattleStatus.unk_83);
-    script->varTable[1] = 15;
+#define NAMESPACE battle_move_hammer_charge_0
 
-    if (is_ability_active(Ability_BERSERKER) != FALSE) {
-        script->varTable[0] = 0;
-        script->varTable[1] = 40;
-    }
+#include "world/common/IsBerserkerEquipped.inc.c"
 
-    return ApiStatus_DONE2;
-}
+#include "world/common/IsRightOnEquipped.inc.c"
 
-ApiStatus func_802A1050_74F180(ScriptInstance* script, s32 isInitialCall) {
-    script->varTable[0] = 0;
-
-    if (is_ability_active(Ability_RIGHT_ON) != FALSE) {
-        script->varTable[0] = 1;
-    }
-
-    if ((gBattleStatus.flags1 & 0x1000) != FALSE) {
-        script->varTable[0] = 1;
-    }
-
-    return ApiStatus_DONE2;
-}
-
-ApiStatus func_802A10A4_74F1D4(ScriptInstance* script, s32 isInitialCall) {
-    BattleStatus* battleStatus = &gBattleStatus;
-    script->varTable[0] = 0;
-
-    if (battleStatus->hammerCharge >= 99) {
-        script->varTable[0] = 1;
-    }
-
-    return ApiStatus_DONE2;
-}
+#include "world/common/IsHammerMaxCharged.inc.c"
 
 ApiStatus func_802A10C8_74F1F8(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -47,12 +18,12 @@ ApiStatus func_802A10C8_74F1F8(ScriptInstance* script, s32 isInitialCall) {
     func_800718D0(0, var1, var2, var3, 1.0f, 60);
     battleStatus->hammerCharge += 1;
 
-    if (battleStatus->hammerCharge >= 100) {
+    if (battleStatus->hammerCharge > 99) {
         (*&battleStatus)->hammerCharge = 99; // TODO: macro?
     }
 
     battleStatus->jumpCharge = 0;
-    battleStatus->flags1 = ((battleStatus->flags1 | 0x10000000) & 0xDFFFFFFF);
+    battleStatus->flags1 = ((battleStatus->flags1 | 0x10000000) & ~0x20000000);
 
     return ApiStatus_DONE2;
 }

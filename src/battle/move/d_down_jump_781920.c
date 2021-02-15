@@ -1,32 +1,8 @@
 #include "common.h"
 
-ApiStatus func_802A1000_781920(ScriptInstance* script, s32 isInitialCall) {
-    BattleStatus* battleStatus = &gBattleStatus;
-    BattleStatus* battleStatus2 = &gBattleStatus;
-    Actor* playerActor = battleStatus->playerActor;
-    f32 posX = playerActor->currentPos.x;
-    f32 posY = playerActor->currentPos.y;
-    f32 posZ = playerActor->currentPos.z;
-    f32 goalX = playerActor->movePos.goal.x;
-    f32 goalY = playerActor->movePos.goal.y;
-    f32 goalZ = playerActor->movePos.goal.z;
+#define NAMESPACE battle_move_d_down_jump
 
-    script->varTable[0] = (dist3D(posX, posY, posZ, goalX, goalY, goalZ) * 15.0f) / 100.0f;
-
-    if (script->varTable[0] >= 21) {
-        script->varTable[0] = 20;
-    }
-
-    if (battleStatus2->unk_83 != 0) {
-        if (script->varTable[0] < 6) {
-            script->varTable[0] = 6;
-        }
-    } else if (script->varTable[0] < 12) {
-        script->varTable[0] = 12;
-    }
-
-    return ApiStatus_DONE2;
-}
+#include "world/common/UnkMoveFunc1.inc.c"
 
 ApiStatus func_802A10E4_781A04(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

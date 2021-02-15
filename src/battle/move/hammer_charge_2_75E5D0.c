@@ -2,42 +2,13 @@
 
 extern s32 D_802A4350;
 
-ApiStatus func_802A1000_75E5D0(ScriptInstance* script, s32 isInitialCall) {
-    script->varTable[0] = *(&gBattleStatus.unk_83);
-    script->varTable[1] = 15;
+#define NAMESPACE battle_move_hammer_charge_2
 
-    if (is_ability_active(Ability_BERSERKER) != FALSE) {
-        script->varTable[0] = 0;
-        script->varTable[1] = 40;
-    }
+#include "world/common/IsBerserkerEquipped.inc.c"
 
-    return ApiStatus_DONE2;
-}
+#include "world/common/IsRightOnEquipped.inc.c"
 
-ApiStatus func_802A1050_75E620(ScriptInstance* script, s32 isInitialCall) {
-    script->varTable[0] = 0;
-
-    if (is_ability_active(Ability_RIGHT_ON) != FALSE) {
-        script->varTable[0] = 1;
-    }
-
-    if ((gBattleStatus.flags1 & 0x1000) != FALSE) {
-        script->varTable[0] = 1;
-    }
-
-    return ApiStatus_DONE2;
-}
-
-ApiStatus func_802A10A4_75E674(ScriptInstance* script, s32 isInitialCall) {
-    BattleStatus* battleStatus = &gBattleStatus;
-    script->varTable[0] = 0;
-
-    if (battleStatus->hammerCharge >= 99) {
-        script->varTable[0] = 1;
-    }
-
-    return ApiStatus_DONE2;
-}
+#include "world/common/IsHammerMaxCharged.inc.c"
 
 ApiStatus func_802A10C8_75E698(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -62,25 +33,12 @@ ApiStatus func_802A10C8_75E698(ScriptInstance* script, s32 isInitialCall) {
     }
 
     battleStatus2->jumpCharge = 0;
-    battleStatus->flags1 = (battleStatus->flags1 | 0x10000000) & 0xDFFFFFFF;
+    battleStatus->flags1 = (battleStatus->flags1 | 0x10000000) & ~0x20000000;
 
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802A11E8_75E7B8(ScriptInstance* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    s32 var1 = get_variable(script, *args++);
-    s32 var2 = get_variable(script, *args++);
-    s32 var3 = get_variable(script, *args++);
-    f32 var4 = get_float_variable(script, *args++);
-    s32 var5 = 45;
-    s32 var6 = 30;
-
-    func_800720B0(6, (var1 + 10), (var2 + 18), var3, var4, var5);
-    func_80070BB0(13, (var1 + 10), (var2 + 18), var3, var4, var6);
-
-    return ApiStatus_DONE2;
-}
+#include "world/common/UnkMoveFunc3.inc.c"
 
 ApiStatus func_802A12FC_75E8CC(ScriptInstance* script, s32 isInitialCall) {
     if (D_802A4350 == 0) {
