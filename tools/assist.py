@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import argparse
+import difflib
 from collections import Counter, OrderedDict
 import os
 import sys
@@ -122,19 +123,21 @@ def diff_syms(qb, tb):
     elif len_ratio < args.threshold:
         return 0
 
-    n_bytes = len(smaller)
-    matches = 0
-    exact_matches = 0
-    for i in range(0, n_bytes, 4):
-        if smaller[i] == larger[i]:
-            matches += 4
-            if smaller[i : i + 4] == larger[i : i + 4]:
-                exact_matches += 4
-    exact_match = exact_matches == matches and exact_matches > 0
-    score = (matches / n_bytes) * len_ratio
-    if score == 1.0 and not exact_match:
-        score = 0.99
-    return score
+    levenshtein = difflib.SequenceMatcher(None, smaller, larger).ratio()
+
+    # n_bytes = len(smaller)
+    # matches = 0
+    # exact_matches = 0
+    # for i in range(0, n_bytes, 4):
+    #     if smaller[i] == larger[i]:
+    #         matches += 4
+    #         if smaller[i : i + 4] == larger[i : i + 4]:
+    #             exact_matches += 4
+    # exact_match = exact_matches == matches and exact_matches > 0
+    # score = (matches / n_bytes) * len_ratio
+    # if score == 1.0 and not exact_match:
+    #     score = 0.99
+    return levenshtein
 
 
 def get_pair_score(query_bytes, b):
@@ -152,6 +155,8 @@ def get_matches(query):
 
     ret = {}
     for symbol in map_offsets:
+        if symbol == "func_802A10A4_74AE34":
+            dog = 5
         if symbol is not None and query != symbol:
             score = get_pair_score(query_bytes, symbol)
             if score >= args.threshold:
