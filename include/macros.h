@@ -3,10 +3,13 @@
 
 #include "common.h"
 
+#define STRINGIFY_(x) #x
+#define STRINGIFY(x) STRINGIFY_(x)
+
 #ifndef SPLAT
 #ifndef INCLUDE_ASM
 #define INCLUDE_ASM(TYPE, FOLDER, NAME, ARGS...) \
-  TYPE __attribute__((naked)) NAME(ARGS) { __asm__( ".include \"include/macro.inc\"\n.include \"asm/nonmatchings/"FOLDER"/"#NAME".s\"\n.set reorder\n.set at"); }
+  TYPE __attribute__((naked)) NAME(ARGS) { __asm__( ".include \"include/macro.inc\"\n.include \"ver/"STRINGIFY(VERSION)"/asm/nonmatchings/"FOLDER"/"#NAME".s\"\n.set reorder\n.set at"); }
 #endif
 #else
 #define INCLUDE_ASM(TYPE, FOLDER, NAME, ARGS...)

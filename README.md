@@ -11,7 +11,7 @@
 [discord]: https://discord.gg/urUm3VG
 [discord-badge]: https://img.shields.io/discord/279322074412089344?color=%237289DA&logo=discord&logoColor=ffffff
 
-This is a work-in-progress decompilation of Paper Mario (USA).
+This is a work-in-progress decompilation of Paper Mario.
 
 It builds the following ROM:
 

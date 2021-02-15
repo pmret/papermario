@@ -8,7 +8,6 @@ from argparse import ArgumentParser
 import asyncio
 from subprocess import PIPE
 import subprocess
-import hashlib
 
 sys.path.append(os.path.dirname(__file__) + "/tools/splat")
 import split
@@ -16,32 +15,16 @@ from segtypes.n64.code import Subsegment
 
 INCLUDE_ASM_RE = re.compile(r"___INCLUDE_ASM\([^,]+, ([^,]+), ([^,)]+)") # note _ prefix
 
-CFG = {}
-with open("build.cfg", "r") as f:
-    for line in f.readlines():
-        if line.strip() != "":
-            key, value = [part.strip() for part in line.split("=", 1)]
-            CFG[key] = value
-
-TARGET = CFG.get("target", "papermario")
-BUILD_DIR = "build"
-ASSET_DIRS = CFG.get("asset_dirs", "assets").split(" ")
-
-NPC_SPRITES = CFG.get("npc_sprites", "").split(" ")
-MAPS = CFG.get("maps", "").split(" ")
-TEXTURE_ARCHIVES = CFG.get("texture_archives", "").split(" ")
-BACKGROUNDS = CFG.get("backgrounds", "").split(" ")
-PARTY_IMAGES = CFG.get("party_images", "").split(" ")
-
-ASSETS = sum([[f"{map_name}_shape", f"{map_name}_hit"] for map_name in MAPS], []) + TEXTURE_ARCHIVES + BACKGROUNDS + ["title_data"] + PARTY_IMAGES
+TARGET = "papermario"
+versions = ["us"]
 
 def obj(path: str):
-    if not path.startswith("$builddir/"):
-        path = "$builddir/" + path
-    path = re.sub(r"/assets/", "/", path)
+    if not path.startswith("ver/"):
+        path = f"ver/{version}/build/{path}"
+    path = re.sub(r"/assets/", "/build/", path) # XXX what about other asset dirs?
     return path + ".o"
 
-def read_splat(splat_config: str):
+def read_splat(splat_config: str, version: str):
     import argparse
     import yaml
     from segtypes.n64.code import N64SegCode
@@ -64,7 +47,7 @@ def read_splat(splat_config: str):
             if path.endswith(".c") or path.endswith(".s") or path.endswith(".data") or path.endswith(".rodata"):
                 path = subdir + "/" + path
             else:
-                assert subdir == "assets", subdir + " " + path
+                assert subdir == f"ver/{version}/assets", subdir + " " + path
 
             objects.add(path)
             segments[path] = segment
@@ -88,13 +71,14 @@ def rm_recursive(path):
 
     path = Path(path)
 
-    if path.is_dir():
-        for f in path.iterdir():
-            rm_recursive(f)
+    if path.exists():
+        if path.is_dir():
+            for f in path.iterdir():
+                rm_recursive(f)
 
-        path.rmdir()
-    else:
-        path.unlink()
+            path.rmdir()
+        else:
+            path.unlink()
 
 async def shell(cmd: str):
     async with task_sem:
@@ -113,7 +97,9 @@ async def task(coro):
     num_tasks_done += 1
     print(f"\rConfiguring build... {(num_tasks_done / num_tasks) * 100:.0f}%", end="")
 
-async def build_c_file(c_file: str, generated_headers, ccache, cppflags):
+async def build_c_file(c_file: str, generated_headers, version):
+    # TODO
+    """
     # preprocess c_file, but simply put an _ in front of INCLUDE_ASM and SCRIPT
     stdout, stderr = await shell(f"{cpp} {cppflags} '-DINCLUDE_ASM(...)=___INCLUDE_ASM(__VA_ARGS__)' '-DSCRIPT(...)=___SCRIPT(__VA_ARGS__)' {c_file} -o - | grep -E '___SCRIPT|___INCLUDE_ASM' || true")
 
@@ -126,12 +112,21 @@ async def build_c_file(c_file: str, generated_headers, ccache, cppflags):
             match = INCLUDE_ASM_RE.match(line)
             if match:
                 s_deps.append("asm/nonmatchings/" + eval(match[1]) + "/" + match[2] + ".s")
+    """
+    uses_dsl = True
+    s_deps = []
 
-    # add build task to ninja
-    n.build(obj(c_file), "cc_dsl" if uses_dsl else "cc", c_file, implicit=s_deps, order_only=generated_headers)
+    n.build(
+        obj(c_file),
+        "cc_dsl" if uses_dsl else "cc",
+        c_file,
+        implicit=s_deps,
+        order_only=generated_headers,
+        variables={ "version": version }
+    )
 
 def build_yay0_file(bin_file: str):
-    yay0_file = f"$builddir/{os.path.splitext(bin_file)[0]}.Yay0"
+    yay0_file = f"ver/{version}/build/{os.path.splitext(bin_file)[0]}.Yay0"
     n.build(yay0_file, "yay0compress", find_asset(bin_file), implicit="tools/Yay0compress")
     build_bin_object(yay0_file)
 
@@ -140,7 +135,7 @@ def build_bin_object(bin_file: str):
 
 def build_image(f: str, segment):
     path, img_type, png = f.rsplit(".", 2)
-    out = "$builddir/" + path + "." + img_type + ".png"
+    out = f"ver/{version}/build/" + path + "." + img_type + ".png"
 
     flags = ""
     if img_type != "palette" and not isinstance(segment, dict):
@@ -160,6 +155,7 @@ def cmd_exists(cmd):
         stdout=subprocess.PIPE, stderr=subprocess.PIPE) == 0
 
 def find_asset_dir(path):
+    global ASSET_DIRS
     for d in ASSET_DIRS:
         if os.path.exists(d + "/" + path):
             return d
@@ -174,15 +170,14 @@ def find_asset(path):
     return find_asset_dir(path) + "/" + path
 
 async def main():
-    global n, cpp, task_sem, num_tasks, num_tasks_done
+    global n, cpp, task_sem, num_tasks, num_tasks_done, ASSET_DIRS, version
 
     task_sem = asyncio.Semaphore(8)
 
     parser = ArgumentParser(description="Paper Mario build.ninja generator")
     parser.add_argument("--cpp", help="GNU C preprocessor command")
-    parser.add_argument("--baserom", default="baserom.z64", help="Path to unmodified Paper Mario (U) z64 ROM")
     parser.add_argument("--cflags", default="", help="Extra cc/cpp flags")
-    parser.add_argument("--no-splat", action="store_true", help="Don't split the baserom")
+    parser.add_argument("--no-splat", action="store_true", help="Don't split assets from the baserom(s)")
     parser.add_argument("--clean", action="store_true", help="Delete assets and previously-built files")
     args = parser.parse_args()
 
@@ -194,63 +189,52 @@ async def main():
         print("    ./configure.py --cpp cpp-10")
         exit(1)
 
-    # verify baserom exists and is clean
-    try:
-        with open(args.baserom, "rb") as f:
-            h = hashlib.sha1()
-            h.update(f.read())
-
-            if h.hexdigest() != "3837f44cda784b466c9a2d99df70d77c322b97a0":
-                print(f"error: baserom '{args.baserom}' is modified, refusing to split it!")
-                print("The baserom must be an unmodified Paper Mario (U) z64 ROM.")
-                exit(1)
-    except IOError:
-        print(f"error: baserom '{args.baserom}' does not exist!")
-        print(f"Please make sure an unmodified Paper Mario (U) z64 ROM exists at '{args.baserom}'.")
-
-        if args.baserom == "baserom.z64": # the default
-            print("Or run this script again with the --baserom option:")
-            print("    ./configure.py --baserom /path/to/papermario.z64")
-            exit(1)
-
     cpp = args.cpp or "cpp"
-    ccache = "ccache" if cmd_exists("ccache") else ""
 
     if args.clean:
         print("Cleaning...")
         await shell("ninja -t clean")
-        rm_recursive("assets")
-        rm_recursive("build")
-        rm_recursive(".splat_cache")
+        rm_recursive(f".splat_cache")
+
+        for version in versions:
+            rm_recursive(f"ver/{version}/assets")
+            rm_recursive(f"ver/{version}/build")
+            rm_recursive(f"ver/{version}/.splat_cache")
 
     if not args.no_splat:
         # compile splat dependencies
         await shell("make -C tools/splat")
 
-        # split assets
-        print("Splitting segments from baserom", end="")
-        split.main(
-            "tools/splat.yaml",
-            ".",
-            args.baserom,
-            [ "ld", "bin", "Yay0", "PaperMarioMapFS", "PaperMarioMessages", "img", "PaperMarioNpcSprites" ],
-            False,
-            False,
-        )
+        for version in versions:
+            rom = f"ver/{version}/baserom.z64"
+            has_rom = False
 
-        print("")
+            try:
+                with open(rom, "rb") as f:
+                    has_rom = True
+            except IOError:
+                print(f"error: {rom} does not exist!")
+                exit(1)
+
+            if has_rom:
+                print(f"Splitting assets from {rom}", end="")
+                split.main(
+                    f"ver/{version}/splat.yaml",
+                    ".",
+                    rom,
+                    [ "ld", "bin", "Yay0", "PaperMarioMapFS", "PaperMarioMessages", "img", "PaperMarioNpcSprites" ],
+                    False,
+                    False,
+                )
 
     print("Configuring build...", end="")
 
-    # generate build.ninja
     n = ninja_syntax.Writer(open("build.ninja", "w"), width=120)
 
-    cppflags = f"-I{BUILD_DIR}/include -Iinclude -Isrc -D _LANGUAGE_C -D _FINALROM -ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 " + args.cflags
-    cflags = "-O2 -quiet -G 0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wuninitialized -Wshadow " + args.cflags
+    cflags = " " + args.cflags
     iconv = "tools/iconv.py UTF-8 SHIFT-JIS" if sys.platform == "darwin" else "iconv --from UTF-8 --to SHIFT-JIS"
     cross = "mips-linux-gnu-"
 
-    n.variable("builddir", BUILD_DIR)
     n.variable("target", TARGET)
     n.variable("cross", cross)
     n.variable("python", sys.executable)
@@ -266,31 +250,28 @@ async def main():
         print(f"Unsupported platform {sys.platform}")
         sys.exit(1)
 
-    n.variable("os", os_dir)
-    n.variable("iconv", iconv)
-    n.variable("cppflags", f"{cppflags} -Wcomment")
-    n.variable("cflags", cflags)
-    n.newline()
-
+    # $version
     n.rule("cc",
-        command=f"bash -o pipefail -c '{cpp} $cppflags -MD -MF $out.d $in -o - | $iconv | tools/$os/cc1 $cflags -o - | tools/$os/mips-nintendo-nu64-as -EB -G 0 - -o $out'",
-        description="cc $in",
+        command=f"bash -o pipefail -c '{cpp} -Iver/$version/build/include -Iinclude -Isrc -D _LANGUAGE_C -D _FINALROM -D VERSION=$version -ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 {args.cflags} -MD -MF $out.d $in -o - | {iconv} | tools/{os_dir}/cc1 -O2 -quiet -G 0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wuninitialized -Wshadow {args.cflags} -o - | tools/{os_dir}/mips-nintendo-nu64-as -EB -G 0 - -o $out'",
+        description="cc $in ($version)",
         depfile="$out.d",
         deps="gcc")
     n.rule("cc_dsl",
-        command=f"bash -o pipefail -c '{cpp} $cppflags -MD -MF $out.d $in -o - | $python tools/compile_dsl_macros.py | $iconv | tools/$os/cc1 $cflags -o - | tools/$os/mips-nintendo-nu64-as -EB -G 0 - -o $out'",
-        description="cc (with dsl) $in",
+        command=f"bash -o pipefail -c '{cpp} -Iver/$version/build/include -Iinclude -Isrc -D _LANGUAGE_C -D _FINALROM -D VERSION=$version -ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 {args.cflags} -MD -MF $out.d $in -o - | $python tools/compile_dsl_macros.py | {iconv} | tools/{os_dir}/cc1 -O2 -quiet -G 0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wuninitialized -Wshadow {args.cflags} -o - | tools/{os_dir}/mips-nintendo-nu64-as -EB -G 0 - -o $out'",
+        description="cc (with dsl) $in ($version)",
         depfile="$out.d",
         deps="gcc")
     n.newline()
 
     with open("tools/permuter_settings.toml", "w") as f:
-        f.write(f"compiler_command = \"{cpp} {cppflags} -D SCRIPT(...)={{}} | {iconv} | tools/{os_dir}/cc1 {cflags} -o - | tools/{os_dir}/mips-nintendo-nu64-as -EB -G 0 -\"\n")
+        version = "us" # XXX
+        f.write(f"compiler_command = \"{cpp} -Iver/{version}/build/include -Iinclude -Isrc -D _LANGUAGE_C -D _FINALROM -D VERSION={version} -ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 {args.cflags} -D SCRIPT(...)={{}} | {iconv} | tools/{os_dir}/cc1 -O2 -quiet -G 0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wuninitialized -Wshadow {args.cflags} -o - | tools/{os_dir}/mips-nintendo-nu64-as -EB -G 0 -\"\n")
         f.write(f"assembler_command = \"{cross}as -march=vr4300 -mabi=32\"\n")
 
+    # $version
     n.rule("cpp",
-        command=f"{cpp} -P -DBUILD_DIR=$builddir $in -o $out",
-        description="cc (with dsl) $in",
+        command=f"{cpp} -P -DBUILD_DIR=ver/$version/build $in -o $out",
+        description="cpp $in",
         depfile="$out.d",
         deps="gcc")
     n.newline()
@@ -349,8 +330,9 @@ async def main():
         description="combine assets")
     n.newline()
 
+    # $version
     n.rule("link",
-        command="${cross}ld -T undefined_syms.txt -T undefined_syms_auto.txt -T undefined_funcs_auto.txt -Map $builddir/$target.map --no-check-sections -T $in -o $out",
+        command="${cross}ld -T ver/$version/undefined_syms.txt -T ver/$version/undefined_syms_auto.txt -T ver/$version/undefined_funcs_auto.txt -Map ver/$version/build/$target.map --no-check-sections -T $in -o $out",
         description="link $out")
     n.newline()
 
@@ -359,220 +341,230 @@ async def main():
         description="rom $in")
     n.newline()
 
-    objects, segments = read_splat("tools/splat.yaml") # no .o extensions!
-    c_files = (f for f in objects if f.endswith(".c")) # glob("src/**/*.c", recursive=True)
-
-    n.rule("checksums",
-        command=f"(sha1sum -c checksum.sha1 && bash $out.bash > $out) || sha1sum -c $out --quiet",
-        description="compare",
-        rspfile="$out.bash",
-        rspfile_content=f"sha1sum {' '.join([obj(o) for o in objects])}")
+    # $version
+    n.rule("checksum",
+        command=f"sha1sum -c ver/$version/checksum.sha1 && touch $out",
+        description="compare")
     n.newline()
 
     n.rule("cc_modern_exe", command="cc $in -O3 -o $out")
     n.newline()
 
-    n.comment("target")
-    n.build("$builddir/$target.ld", "cpp", "$target.ld")
-    n.build("$builddir/$target.elf", "link", "$builddir/$target.ld", implicit=[obj(o) for o in objects], implicit_outputs="$builddir/$target.map")
-    n.build("$target.z64", "rom", "$builddir/$target.elf", implicit="tools/n64crc")
-    n.build("$builddir/expected.sha1", "checksums", implicit="$target.z64")
-    n.newline()
+    for version in versions:
+        objects, segments = read_splat(f"ver/{version}/splat.yaml", version) # no .o extensions!
+        c_files = (f for f in objects if f.endswith(".c")) # glob("src/**/*.c", recursive=True)
 
-    n.default("$builddir/expected.sha1")
-    n.newline()
+        n.build(f"ver/{version}/build/$target.ld", "cpp", f"ver/{version}/$target.ld", variables={ "version": version })
+        n.build(f"ver/{version}/build/$target.elf", "link", f"ver/{version}/build/$target.ld", implicit=[obj(o) for o in objects], implicit_outputs=f"ver/{version}/$target.map", variables={ "version": version })
+        n.build(f"ver/{version}/build/$target.z64", "rom", f"ver/{version}/build/$target.elf", implicit="tools/n64crc")
+        n.build(f"ver/{version}/build/ok", "checksum", implicit=f"ver/{version}/build/$target.z64", variables={ "version": version })
+        n.build(version, "phony", f"ver/{version}/build/ok")
 
-    # generated headers
-    n.comment("generated headers")
-    generated_headers = []
+        CFG = {}
+        with open(f"ver/{version}/build.cfg", "r") as f:
+            for line in f.readlines():
+                if line.strip() != "":
+                    key, value = [part.strip() for part in line.split("=", 1)]
+                    CFG[key] = value
 
-    def add_generated_header(h: str):
-        generated_headers.append(h)
+        ASSET_DIRS = CFG.get("asset_dirs", "assets").split(" ")
 
-        he = re.sub(r"\$builddir", BUILD_DIR, h)
+        NPC_SPRITES = CFG.get("npc_sprites", "").split(" ")
+        MAPS = CFG.get("maps", "").split(" ")
+        TEXTURE_ARCHIVES = CFG.get("texture_archives", "").split(" ")
+        BACKGROUNDS = CFG.get("backgrounds", "").split(" ")
+        PARTY_IMAGES = CFG.get("party_images", "").split(" ")
 
-        if not os.path.exists(he):
-            # mkdir -p
-            os.makedirs(os.path.dirname(he), exist_ok=True)
+        ASSETS = sum([[f"{map_name}_shape", f"{map_name}_hit"] for map_name in MAPS], []) + TEXTURE_ARCHIVES + BACKGROUNDS + ["title_data"] + PARTY_IMAGES
 
-            # touch it so cpp doesn't complain if its #included
-            open(he, "w").close()
+        generated_headers = []
 
-            # mark it as really old so ninja builds it
-            os.utime(he, (0, 0))
+        def add_generated_header(h: str):
+            generated_headers.append(h)
 
-        return h
+            if not os.path.exists(h):
+                # mkdir -p
+                os.makedirs(os.path.dirname(h), exist_ok=True)
 
-    n.build(add_generated_header("$builddir/include/ld_addrs.h"), "ld_addrs_h", "$builddir/$target.ld")
+                # touch it so cpp doesn't complain if its #included
+                open(h, "w").close()
 
-    # messages
-    msg_files = set()
-    for d in ASSET_DIRS:
-        for f in glob(d + "/msg/**/*.msg", recursive=True):
-            msg_files.add(find_asset(f[len(d)+1:]))
-    msg_files = list(msg_files)
-    for msg_file in msg_files:
+                # mark it as really old so ninja builds it
+                os.utime(h, (0, 0))
+
+            return h
+
+        n.build(add_generated_header(f"ver/{version}/build/include/ld_addrs.h"), "ld_addrs_h", f"ver/{version}/build/$target.ld")
+
+        # messages
+        msg_files = set()
+        for d in ASSET_DIRS:
+            for f in glob(d + "/msg/**/*.msg", recursive=True):
+                msg_files.add(find_asset(f[len(d)+1:]))
+        msg_files = list(msg_files)
+        for msg_file in msg_files:
+            n.build(
+                f"ver/{version}/build/{msg_file.split('/', 1)[1]}.bin",
+                "msg",
+                msg_file,
+                implicit="tools/msg/parse_compile.py",
+            )
+        msg_bins = [f"ver/{version}/build/{msg_file.split('/', 1)[1]}.bin" for msg_file in msg_files]
         n.build(
-            f"$builddir/{msg_file.split('/', 1)[1]}.bin",
-            "msg",
-            msg_file,
-            implicit="tools/msg/parse_compile.py",
+            [f"ver/{version}/build/msg.bin", add_generated_header(f"ver/{version}/build/include/message_ids.h")],
+            "msg_combine",
+            msg_bins,
+            implicit="tools/msg/combine.py",
         )
-    #msg_headers = [add_generated_header(f"$builddir/include/{msg_file.split('/', 1)[1]}.h") for msg_file in msg_files]
-    msg_bins = [f"$builddir/{msg_file.split('/', 1)[1]}.bin" for msg_file in msg_files]
-    n.build(
-        ["$builddir/msg.bin", add_generated_header(f"$builddir/include/message_ids.h")],
-        "msg_combine",
-        msg_bins,
-        implicit="tools/msg/combine.py",
-    )
-    n.build("$builddir/msg.o", "bin", "$builddir/msg.bin")
+        n.build(f"ver/{version}/build/msg.o", "bin", f"ver/{version}/build/msg.bin")
 
-    # sprites
-    npc_sprite_yay0s = []
-    for sprite_id, sprite_name in enumerate(NPC_SPRITES, 1):
-        asset_dir = find_asset_dir(f"sprite/npc/{sprite_name}")
-        sources = glob(f"{asset_dir}/sprite/npc/{sprite_name}/**/*.*", recursive=True)
-        variables = {
-            "sprite_name": sprite_name,
-            "sprite_dir": f"{asset_dir}/sprite/npc/{sprite_name}",
-            "sprite_id": sprite_id,
-        }
+        # sprites
+        npc_sprite_yay0s = []
+        for sprite_id, sprite_name in enumerate(NPC_SPRITES, 1):
+            asset_dir = find_asset_dir(f"sprite/npc/{sprite_name}")
+            sources = glob(f"{asset_dir}/sprite/npc/{sprite_name}/**/*.*", recursive=True)
+            variables = {
+                "sprite_name": sprite_name,
+                "sprite_dir": f"{asset_dir}/sprite/npc/{sprite_name}",
+                "sprite_id": sprite_id,
+            }
 
-        # generated header
-        n.build(
-            add_generated_header(f"$builddir/include/sprite/npc/{sprite_name}.h"),
-            "sprite_animations_h",
-            implicit=sources + ["tools/gen_sprite_animations_h.py"],
-            variables=variables,
-        )
+            # generated header
+            n.build(
+                add_generated_header(f"ver/{version}/build/include/sprite/npc/{sprite_name}.h"),
+                "sprite_animations_h",
+                implicit=sources + ["tools/gen_sprite_animations_h.py"],
+                variables=variables,
+            )
 
-        # sprite bin/yay0
-        n.build(
-            f"$builddir/sprite/npc/{sprite_name}",
-            "npc_sprite",
-            implicit=sources + ["tools/compile_npc_sprite.py"],
-            variables=variables,
-        )
-        yay0 = f"$builddir/sprite/npc/{sprite_name}.Yay0"
-        npc_sprite_yay0s.append(yay0)
-        n.build(
-            yay0,
-            "yay0compress",
-            f"$builddir/sprite/npc/{sprite_name}",
-            implicit=["tools/Yay0compress"],
-        )
+            # sprite bin/yay0
+            n.build(
+                f"ver/{version}/build/sprite/npc/{sprite_name}",
+                "npc_sprite",
+                implicit=sources + ["tools/compile_npc_sprite.py"],
+                variables=variables,
+            )
+            yay0 = f"ver/{version}/build/sprite/npc/{sprite_name}.Yay0"
+            npc_sprite_yay0s.append(yay0)
+            n.build(
+                yay0,
+                "yay0compress",
+                f"ver/{version}/build/sprite/npc/{sprite_name}",
+                implicit=["tools/Yay0compress"],
+            )
 
-    n.newline()
+        n.newline()
 
-    # fast tasks
-    n.comment("data")
-    for f in objects:
-        segment = segments[f]
+        # fast tasks
+        for f in objects:
+            segment = segments[f]
 
-        if f.endswith(".c"):
-            continue # these are handled later
-        elif f.endswith(".Yay0"):
-            build_yay0_file(os.path.splitext(f)[0] + ".bin")
-        elif f.endswith(".bin"):
-            build_bin_object(find_asset(f))
-        elif f.endswith(".data"):
-            n.build(obj(f), "as", "asm/" + f + ".s")
-        elif f.endswith(".rodata"):
-            n.build(obj(f), "as", "asm/" + f[2:] + ".s")
-        elif f.endswith(".s"):
-            n.build(obj(f), "as", f)
-        elif f.endswith(".png"):
-            if isinstance(segment, Subsegment):
-                # image within a code section
-                out = "$builddir/" + f + ".bin"
-                infile = find_asset(re.sub(r"\.pal\.png", ".png", f))
+            if f.endswith(".c"):
+                continue # these are handled later
+            elif f.endswith(".Yay0"):
+                build_yay0_file(os.path.splitext(f)[0] + ".bin")
+            elif f.endswith(".bin"):
+                build_bin_object(find_asset(f))
+            elif f.endswith(".data"):
+                n.build(obj(f), "as", f"ver/{version}/asm/" + f + ".s")
+            elif f.endswith(".rodata"):
+                n.build(obj(f), "as", f"ver/{version}/asm/" + f[2:] + ".s")
+            elif f.endswith(".s"):
+                n.build(obj(f), "as", f"ver/{version}/" + f)
+            elif f.endswith(".png"):
+                if isinstance(segment, Subsegment):
+                    # image within a code section
+                    out = f"ver/{version}/build/{f}.bin"
+                    infile = find_asset(re.sub(r"\.pal\.png", ".png", f))
 
-                n.build(out, "img", infile, implicit="tools/img/build.py", variables={
-                    "img_type": segment.type,
-                    "img_flags": "",
-                })
-
-                if ".pal.png" not in f:
-                    n.build(add_generated_header("$builddir/include/" + f + ".h"), "img_header", infile, implicit="tools/img/header.py")
-
-                n.build("$builddir/" + f + ".o", "bin", out)
-            else:
-                build_image(f, segment)
-        elif f == "sprite/npc":
-            # combine sprites
-            n.build(f"$builddir/{f}.bin", "npc_sprites", npc_sprite_yay0s, implicit="tools/compile_npc_sprites.py")
-            n.build(obj(f), "bin", f"$builddir/{f}.bin")
-        elif segment.type == "PaperMarioMessages":
-            continue # done already above
-        elif segment.type == "PaperMarioMapFS":
-            asset_files = [] # even indexes: uncompressed; odd indexes: compressed
-
-            for asset_name in ASSETS:
-                if asset_name.endswith("_tex"): # uncompressed
-                    asset_files.append(find_asset(f"map/{asset_name}.bin"))
-                    asset_files.append(find_asset(f"map/{asset_name}.bin"))
-                elif asset_name.startswith("party_"):
-                    source_file = f"$builddir/{asset_name}.bin"
-                    asset_file = f"$builddir/{asset_name}.Yay0"
-
-                    n.build(source_file, "img", find_asset(f"party/{asset_name}.png"), implicit="tools/img/build.py", variables={
-                        "img_type": "party",
+                    n.build(out, "img", infile, implicit="tools/img/build.py", variables={
+                        "img_type": segment.type,
                         "img_flags": "",
                     })
 
-                    asset_files.append(source_file)
-                    asset_files.append(asset_file)
-                    n.build(asset_file, "yay0compress", source_file, implicit="tools/Yay0compress")
-                elif asset_name.endswith("_bg"):
-                    source_file = f"$builddir/{asset_name}.bin"
-                    asset_file = f"$builddir/{asset_name}.Yay0"
+                    if ".pal.png" not in f:
+                        n.build(add_generated_header(f"ver/{version}/build/include/" + f + ".h"), "img_header", infile, implicit="tools/img/header.py")
 
-                    n.build(source_file, "img", find_asset(f"map/{asset_name}.png"), implicit="tools/img/build.py", variables={
-                        "img_type": "bg",
-                        "img_flags": "",
-                    })
-
-                    asset_files.append(source_file)
-                    asset_files.append(asset_file)
-                    n.build(asset_file, "yay0compress", source_file, implicit="tools/Yay0compress")
-                elif asset_name.endswith("_shape") or asset_name.endswith("_hit"):
-                    source_file = find_asset(f"map/{asset_name}.bin")
-                    asset_file = f"$builddir/assets/{asset_name}.Yay0"
-
-                    asset_files.append(source_file)
-                    asset_files.append(asset_file)
-                    n.build(asset_file, "yay0compress", source_file, implicit="tools/Yay0compress")
+                    n.build(f"ver/{version}/build/{f}.o", "bin", out)
                 else:
-                    source_file = find_asset(f"{asset_name}.bin")
-                    asset_file = f"$builddir/assets/{asset_name}.Yay0"
+                    build_image(f, segment)
+            elif f == "sprite/npc":
+                # combine sprites
+                n.build(f"ver/{version}/build/{f}.bin", "npc_sprites", npc_sprite_yay0s, implicit="tools/compile_npc_sprites.py")
+                n.build(obj(f), "bin", f"ver/{version}/build/{f}.bin")
+            elif segment.type == "PaperMarioMessages":
+                continue # done already above
+            elif segment.type == "PaperMarioMapFS":
+                asset_files = [] # even indexes: uncompressed; odd indexes: compressed
 
-                    asset_files.append(source_file)
-                    asset_files.append(asset_file)
-                    n.build(asset_file, "yay0compress", source_file, implicit="tools/Yay0compress")
+                for asset_name in ASSETS:
+                    if asset_name.endswith("_tex"): # uncompressed
+                        asset_files.append(find_asset(f"map/{asset_name}.bin"))
+                        asset_files.append(find_asset(f"map/{asset_name}.bin"))
+                    elif asset_name.startswith("party_"):
+                        source_file = f"ver/{version}/build/{asset_name}.bin"
+                        asset_file = f"ver/{version}/build/{asset_name}.Yay0"
 
-            n.build("$builddir/assets.bin", "assets", asset_files)
-            n.build(obj(f), "bin", "$builddir/assets.bin")
-        else:
-            print("warning: dont know what to do with object " + f)
-    n.newline()
+                        n.build(source_file, "img", find_asset(f"party/{asset_name}.png"), implicit="tools/img/build.py", variables={
+                            "img_type": "party",
+                            "img_flags": "",
+                        })
 
-    n.build("generated_headers", "phony", generated_headers)
-    n.newline()
+                        asset_files.append(source_file)
+                        asset_files.append(asset_file)
+                        n.build(asset_file, "yay0compress", source_file, implicit="tools/Yay0compress")
+                    elif asset_name.endswith("_bg"):
+                        source_file = f"ver/{version}/build/{asset_name}.bin"
+                        asset_file = f"ver/{version}/build/{asset_name}.Yay0"
 
-    # slow tasks generated concurrently
-    n.comment("c")
-    tasks = [task(build_c_file(f, "generated_headers", ccache, cppflags)) for f in c_files]
-    num_tasks = len(tasks)
-    num_tasks_done = 0
-    await asyncio.gather(*tasks)
-    print("")
-    n.newline()
+                        n.build(source_file, "img", find_asset(f"map/{asset_name}.png"), implicit="tools/img/build.py", variables={
+                            "img_type": "bg",
+                            "img_flags": "",
+                        })
+
+                        asset_files.append(source_file)
+                        asset_files.append(asset_file)
+                        n.build(asset_file, "yay0compress", source_file, implicit="tools/Yay0compress")
+                    elif asset_name.endswith("_shape") or asset_name.endswith("_hit"):
+                        source_file = find_asset(f"map/{asset_name}.bin")
+                        asset_file = f"ver/{version}/build/assets/{asset_name}.Yay0"
+
+                        asset_files.append(source_file)
+                        asset_files.append(asset_file)
+                        n.build(asset_file, "yay0compress", source_file, implicit="tools/Yay0compress")
+                    else:
+                        source_file = find_asset(f"{asset_name}.bin")
+                        asset_file = f"ver/{version}/build/assets/{asset_name}.Yay0"
+
+                        asset_files.append(source_file)
+                        asset_files.append(asset_file)
+                        n.build(asset_file, "yay0compress", source_file, implicit="tools/Yay0compress")
+
+                n.build(f"ver/{version}/build/assets.bin", "assets", asset_files)
+                n.build(obj(f), "bin", f"ver/{version}/build/assets.bin")
+            else:
+                print("warning: dont know what to do with object " + f)
+        n.newline()
+
+        n.build("generated_headers", "phony", generated_headers)
+        n.newline()
+
+        # slow tasks generated concurrently
+        n.comment("c")
+        tasks = [task(build_c_file(f, "generated_headers", version)) for f in c_files]
+        num_tasks = len(tasks)
+        num_tasks_done = 0
+        await asyncio.gather(*tasks)
+        print("")
+        n.newline()
 
     # c tools that need to be compiled
     n.build("tools/Yay0compress", "cc_modern_exe", "tools/Yay0compress.c")
     n.build("tools/n64crc", "cc_modern_exe", "tools/n64crc.c")
     n.newline()
+
+    n.build("all", "phony", versions)
+    n.default("all")
 
     print("")
     print("Build configuration complete! Now run")
