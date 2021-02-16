@@ -266,7 +266,7 @@ segments:
   - type: code
     start: 0x759B0
     vram: 0x800DC500
-    subalign: 8
+    subalign: 4
     subsections:
     - [0x759b0, c, code_759b0_len_61b0]
     - [0x77480, c]
