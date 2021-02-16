@@ -111,7 +111,6 @@ INCLUDE_ASM(s32, "code_23680", func_800490B4, s32 arg0, Enemy* arg1, f32 arg2, s
 s32 func_800493EC(Enemy* enemy, s32 arg1, f32 arg2, f32 arg3) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Npc* npc = get_npc_unsafe(enemy->npcID);
-    s32 ret;
 
     if (arg1 >= 0) {
         s32 temp;
@@ -128,19 +127,13 @@ s32 func_800493EC(Enemy* enemy, s32 arg1, f32 arg2, f32 arg3) {
 
             add_vec2D_polar(&f1, &f2, arg3, 270.0f - npc->unk_34);
 
-            if (!(dist2D(f1, f2, playerStatus->position.x, playerStatus->position.z) <= arg2)) {
-                ret = 0;
-            } else {
-                ret = 1;
+            if (dist2D(f1, f2, playerStatus->position.x, playerStatus->position.z) <= arg2) {
+                return 1;
             }
-        } else {
-            ret = 0;
         }
-    } else {
-        ret = 0;
     }
 
-    return ret;
+    return 0;
 }
 
 void func_800494C0(Npc *npc, s32 arg1, s32 arg2) {
@@ -226,62 +219,3 @@ void func_8004A3E8(ScriptInstance* script, s32 arg1) {
 }
 
 INCLUDE_ASM(s32, "code_23680", DoBasicAI, ScriptInstance* script, s32 isInitialCall);
-// s32 DoBasicAI(ScriptInstance *script, s32 isInitialCall) {
-//     Enemy* enemy = script->owner1.enemy;
-//     Npc* npc = get_npc_unsafe(enemy->npcID);
-//     NpcAISettings* npcAISettings = get_variable(script, *script->ptrReadPos);
-//     s32 something;
-
-//     if ((isInitialCall) || (enemy->unk_B0 & 4)) {
-//         script->functionTemp[0].s = 0;
-//         npc->duration = 0;
-//         npc->flags &= ~0x800;
-//         npc->currentAnim = *enemy->animList;
-
-//         if (enemy->territory->unk_34 != 0) {
-//             npc->flags &= ~0x200;
-//             npc->flags |= 8;
-//         } else {
-//             npc->flags |= 0x200;
-//             npc->flags &= ~8;
-//         }
-
-//         if (enemy->unk_B0 & 4) {
-//             script->functionTemp[0].s = 99;
-//             script->functionTemp[1].s = 0;
-//         } else if (enemy->flags & 0x40000000) {
-//             script->functionTemp[0].s = 12;
-//         }
-
-//         enemy->unk_B0 &= ~4;
-//         enemy->flags &= 0xBFFFFFFF;
-//     }
-
-//     switch (script->functionTemp[0].s) {
-//         case 0:
-//             func_800495A0(script, npcAISettings, something);
-//         case 1:
-//             func_800496B8(script, npcAISettings, something);
-//             return ApiStatus_BLOCK;
-//         case 2:
-//             base_UnkNpcAIFunc1(script, npcAISettings);
-//         case 3:
-//             func_80049C04(script, npcAISettings, something);
-//             return ApiStatus_BLOCK;
-//         case 10:
-//             func_80049E3C(script);
-//         case 11:
-//             func_80049ECC(script);
-//             return ApiStatus_BLOCK;
-//         case 12:
-//             func_80049F7C(script, npcAISettings, something);
-//         case 13:
-//             func_8004A124(script, npcAISettings, something);
-//         case 14:
-//             func_8004A3E8(script, npcAISettings);
-//             return ApiStatus_BLOCK;
-//         case 99:
-//             func_8004A73C(script);
-//     }
-//     return ApiStatus_BLOCK;
-// }

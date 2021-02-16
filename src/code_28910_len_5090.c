@@ -176,7 +176,6 @@ void func_8004E3A4(UnkAlA9C* arg0) {
     func_8004E444(arg0);
 }
 
-//INCLUDE_ASM(void, "code_28910_len_5090", func_8004E444, UnkAlA9C* arg0);
 void func_8004E444(UnkAlA9C *arg0) {
     u16 mult = (arg0->unk_2C.unk_00.u16 * arg0->unk_2C.unk_10.u16) >> 15;
     s32 i;
