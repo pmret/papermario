@@ -2,7 +2,6 @@
 
 extern s32 D_8023CDA4;
 
-//INCLUDE_ASM(s32, "battle/partner/goombario_6F10E0", func_80238000_6F10E0);
 ApiStatus func_80238000_6F10E0(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     BattleStatus* secondBattleStatus = &gBattleStatus;
