@@ -18,15 +18,17 @@ glabel func_800E315C
 /* 7C640 800E3190 2C620005 */  sltiu     $v0, $v1, 5
 /* 7C644 800E3194 10400031 */  beqz      $v0, .L800E325C
 /* 7C648 800E3198 00031080 */   sll      $v0, $v1, 2
-/* 7C64C 800E319C 3C018011 */  lui       $at, %hi(D_8010BE40)
+/* 7C64C 800E319C 3C018011 */  lui       $at, %hi(jtbl_8010BE40)
 /* 7C650 800E31A0 00220821 */  addu      $at, $at, $v0
-/* 7C654 800E31A4 8C22BE40 */  lw        $v0, %lo(D_8010BE40)($at)
+/* 7C654 800E31A4 8C22BE40 */  lw        $v0, %lo(jtbl_8010BE40)($at)
 /* 7C658 800E31A8 00400008 */  jr        $v0
 /* 7C65C 800E31AC 00000000 */   nop
+glabel L800E31B0_7C660
 /* 7C660 800E31B0 0C039769 */  jal       set_action_state
 /* 7C664 800E31B4 2404000A */   addiu    $a0, $zero, 0xa
 /* 7C668 800E31B8 08038C99 */  j         .L800E3264
 /* 7C66C 800E31BC 00000000 */   nop
+glabel L800E31C0_7C670
 /* 7C670 800E31C0 3C04FF00 */  lui       $a0, 0xff00
 /* 7C674 800E31C4 348400FF */  ori       $a0, $a0, 0xff
 /* 7C678 800E31C8 3C030100 */  lui       $v1, 0x100
@@ -43,6 +45,7 @@ glabel func_800E315C
 /* 7C6A4 800E31F4 24020001 */   addiu    $v0, $zero, 1
 /* 7C6A8 800E31F8 08038C8F */  j         .L800E323C
 /* 7C6AC 800E31FC A20200BF */   sb       $v0, 0xbf($s0)
+glabel L800E3200_7C6B0
 /* 7C6B0 800E3200 3C04FF00 */  lui       $a0, 0xff00
 /* 7C6B4 800E3204 348400FF */  ori       $a0, $a0, 0xff
 /* 7C6B8 800E3208 3C030100 */  lui       $v1, 0x100

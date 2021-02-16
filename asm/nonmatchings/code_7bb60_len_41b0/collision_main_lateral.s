@@ -47,11 +47,12 @@ glabel collision_main_lateral
 /* 7CB8C 800E36DC 2C620020 */  sltiu     $v0, $v1, 0x20
 /* 7CB90 800E36E0 1040010D */  beqz      $v0, .L800E3B18
 /* 7CB94 800E36E4 00031080 */   sll      $v0, $v1, 2
-/* 7CB98 800E36E8 3C018011 */  lui       $at, %hi(D_8010BE58)
+/* 7CB98 800E36E8 3C018011 */  lui       $at, %hi(jtbl_8010BE58)
 /* 7CB9C 800E36EC 00220821 */  addu      $at, $at, $v0
-/* 7CBA0 800E36F0 8C22BE58 */  lw        $v0, %lo(D_8010BE58)($at)
+/* 7CBA0 800E36F0 8C22BE58 */  lw        $v0, %lo(jtbl_8010BE58)($at)
 /* 7CBA4 800E36F4 00400008 */  jr        $v0
 /* 7CBA8 800E36F8 00000000 */   nop
+glabel L800E36FC_7CBAC
 /* 7CBAC 800E36FC 3C038007 */  lui       $v1, %hi(gCurrentCameraID)
 /* 7CBB0 800E3700 8C637410 */  lw        $v1, %lo(gCurrentCameraID)($v1)
 /* 7CBB4 800E3704 C62200A8 */  lwc1      $f2, 0xa8($s1)
@@ -73,6 +74,7 @@ glabel collision_main_lateral
 /* 7CBF4 800E3744 44061000 */  mfc1      $a2, $f2
 /* 7CBF8 800E3748 080390B6 */  j         .L800E42D8
 /* 7CBFC 800E374C 0080282D */   daddu    $a1, $a0, $zero
+glabel L800E3750_7CC00
 /* 7CC00 800E3750 0C039422 */  jal       get_current_partner_id
 /* 7CC04 800E3754 00000000 */   nop
 /* 7CC08 800E3758 00021600 */  sll       $v0, $v0, 0x18
@@ -127,6 +129,7 @@ glabel collision_main_lateral
 /* 7CCC8 800E3818 44060000 */  mfc1      $a2, $f0
 /* 7CCCC 800E381C 080390B6 */  j         .L800E42D8
 /* 7CCD0 800E3820 0080282D */   daddu    $a1, $a0, $zero
+glabel L800E3824_7CCD4
 /* 7CCD4 800E3824 C6260028 */  lwc1      $f6, 0x28($s1)
 /* 7CCD8 800E3828 C620001C */  lwc1      $f0, 0x1c($s1)
 /* 7CCDC 800E382C C624002C */  lwc1      $f4, 0x2c($s1)
@@ -201,6 +204,7 @@ glabel collision_main_lateral
 /* 7CDE4 800E3934 44061000 */  mfc1      $a2, $f2
 /* 7CDE8 800E3938 080390B6 */  j         .L800E42D8
 /* 7CDEC 800E393C 0080282D */   daddu    $a1, $a0, $zero
+glabel L800E3940_7CDF0
 /* 7CDF0 800E3940 C6260028 */  lwc1      $f6, 0x28($s1)
 /* 7CDF4 800E3944 C620001C */  lwc1      $f0, 0x1c($s1)
 /* 7CDF8 800E3948 C624002C */  lwc1      $f4, 0x2c($s1)
@@ -325,6 +329,7 @@ glabel collision_main_lateral
 /* 7CFC0 800E3B10 080390B6 */  j         .L800E42D8
 /* 7CFC4 800E3B14 0080282D */   daddu    $a1, $a0, $zero
 .L800E3B18:
+glabel L800E3B18_7CFC8
 /* 7CFC8 800E3B18 8E220000 */  lw        $v0, ($s1)
 /* 7CFCC 800E3B1C 30420008 */  andi      $v0, $v0, 8
 /* 7CFD0 800E3B20 144001EF */  bnez      $v0, .L800E42E0
@@ -849,6 +854,7 @@ glabel collision_main_lateral
 /* 7D788 800E42D8 0C0390C2 */  jal       collision_check_player_intersecting_world
 /* 7D78C 800E42DC 00000000 */   nop
 .L800E42E0:
+glabel L800E42E0_7D790
 /* 7D790 800E42E0 8FBF006C */  lw        $ra, 0x6c($sp)
 /* 7D794 800E42E4 8FB40068 */  lw        $s4, 0x68($sp)
 /* 7D798 800E42E8 8FB30064 */  lw        $s3, 0x64($sp)
