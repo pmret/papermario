@@ -243,5 +243,10 @@ void show_damage_popup(f32 x, f32 y, f32 z, s32 damageAmount);
 void func_80070B50(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4);
 void func_800718D0(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
 void func_80070BB0(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
+void func_80071FF0(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
+void func_80070970(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4, s32 arg5);
+void func_800709D0(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
+void func_80070130(s32 arg0, f32 arg1, f32 arg2, f32 arg3);
+void func_800701F0(s32 arg0, f32 arg1, f32 arg2, f32 arg3);
 
 #endif
