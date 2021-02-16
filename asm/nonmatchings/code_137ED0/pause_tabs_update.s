@@ -146,8 +146,8 @@ glabel pause_tabs_update
 /* 138B04 802457C4 27DE3238 */  addiu     $fp, $fp, %lo(func_80243238)
 /* 138B08 802457C8 3C178024 */  lui       $s7, %hi(func_80243188)
 /* 138B0C 802457CC 26F73188 */  addiu     $s7, $s7, %lo(func_80243188)
-/* 138B10 802457D0 3C168014 */  lui       $s6, %hi(D_80147474)
-/* 138B14 802457D4 26D67474 */  addiu     $s6, $s6, %lo(D_80147474)
+/* 138B10 802457D0 3C168014 */  lui       $s6, %hi(basic_window_update)
+/* 138B14 802457D4 26D67474 */  addiu     $s6, $s6, %lo(basic_window_update)
 /* 138B18 802457D8 24150001 */  addiu     $s5, $zero, 1
 /* 138B1C 802457DC 3C118025 */  lui       $s1, %hi(D_8024F1E0)
 /* 138B20 802457E0 2631F1E0 */  addiu     $s1, $s1, %lo(D_8024F1E0)
@@ -217,8 +217,8 @@ glabel pause_tabs_update
 /* 138C10 802458D0 8C620000 */  lw        $v0, ($v1)
 /* 138C14 802458D4 10400004 */  beqz      $v0, .L802458E8
 /* 138C18 802458D8 00000000 */   nop
-/* 138C1C 802458DC 3C148014 */  lui       $s4, %hi(D_80147474)
-/* 138C20 802458E0 26947474 */  addiu     $s4, $s4, %lo(D_80147474)
+/* 138C1C 802458DC 3C148014 */  lui       $s4, %hi(basic_window_update)
+/* 138C20 802458E0 26947474 */  addiu     $s4, $s4, %lo(basic_window_update)
 /* 138C24 802458E4 AC600000 */  sw        $zero, ($v1)
 .L802458E8:
 /* 138C28 802458E8 82620001 */  lb        $v0, 1($s3)

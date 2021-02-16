@@ -113,7 +113,7 @@ typedef struct Npc {
     /* 0x028 */ u32 currentAnim;
     /* 0x02C */ char unk_2C[4];
     /* 0x030 */ f32 animationSpeed;
-    /* 0x034 */ char unk_34[4];
+    /* 0x034 */ f32 unk_34; // some angle?
     /* 0x038 */ Vec3f pos;
     /* 0x044 */ Vec3f rotation;
     /* 0x050 */ f32 unk_50;
@@ -697,8 +697,8 @@ typedef struct StaticMove {
 } StaticMove; // size = 0x14
 
 typedef struct CollisionData {
-    /* 0x00 */ f32* vertices[3];
-    /* 0x04 */ struct Collider* collider_list;
+    /* 0x00 */ f32* vertices;
+    /* 0x04 */ Collider* collider_list;
     /* 0x08 */ struct ColliderBoundingBox** aabbs;
     /* 0x0C */ s16 numColliders;
     /* 0x0E */ char unk_0E[2];
@@ -1501,8 +1501,8 @@ typedef struct PlayerStatus {
     /* 0x0BC */ s16 unk_BC;
     /* 0x0BE */ u8 renderMode;
     /* 0x0BF */ s8 unk_BF;
-    /* 0x0C0 */ u32* decorationList;
-    /* 0x0C4 */ char unk_C4[2];
+    /* 0x0C0 */ s16 decorationList;
+    /* 0x0C2 */ char unk_C2[4];
     /* 0x0C6 */ s16 unk_C6;
     /* 0x0C8 */ s32* unk_C8;
     /* 0x0CC */ s32 shadowID;
@@ -1515,8 +1515,8 @@ typedef struct PlayerStatus {
     /* 0x0F0 */ s32 currentButtonsBuffer[10];
     /* 0x118 */ s32 pressedButtonsBuffer[10];
     /* 0x140 */ s32 heldButtonsBuffer[10];
-    /* 0x168 */ f32 stickXBuffer[10];
-    /* 0x190 */ f32 stickYBuffer[10];
+    /* 0x168 */ s32 stickXBuffer[10];
+    /* 0x190 */ s32 stickYBuffer[10];
     /* 0x1B8 */ s32 inputBufPos;
     /* 0x1BC */ char unk_1BC[204];
 } PlayerStatus; // size = 0x288
@@ -1546,7 +1546,7 @@ typedef struct EncounterStatus {
     /* 0x13 */ u8 dropWhackaBump;
     /* 0x14 */ s32 songID;
     /* 0x18 */ s32 unk_18;
-    /* 0x1C */ u8 numEncounters; /* number of encounters for current map (in list) */
+    /* 0x1C */ s8 numEncounters; /* number of encounters for current map (in list) */
     /* 0x1D */ s8 currentAreaIndex;
     /* 0x1E */ u8 currentMapIndex;
     /* 0x1F */ u8 currentEntryIndex;

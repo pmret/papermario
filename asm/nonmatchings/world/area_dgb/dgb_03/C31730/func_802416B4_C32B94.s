@@ -175,7 +175,7 @@ glabel L80241910_C32DF0
 glabel L80241928_C32E08
 /* C32E08 80241928 0280202D */  daddu     $a0, $s4, $zero
 /* C32E0C 8024192C 0260282D */  daddu     $a1, $s3, $zero
-/* C32E10 80241930 0C0904CF */  jal       func_8024133C_C3281C
+/* C32E10 80241930 0C0904CF */  jal       dgb_03_UnkNpcAIFunc13
 /* C32E14 80241934 02A0302D */   daddu    $a2, $s5, $zero
 glabel L80241938_C32E18
 /* C32E18 80241938 0280202D */  daddu     $a0, $s4, $zero

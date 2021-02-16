@@ -81,6 +81,7 @@ Model* get_model_from_list_index(s32 listIndex);
 s32 get_model_list_index_from_tree_index(s32 treeIndex);
 void get_model_center_and_size(s32 modelID, f32* centerX, f32* centerY, f32* centerZ, f32* sizeX, f32* sizeY,
                                f32* sizeZ);
+s32 collision_main_above(void);
 
 void func_80027088(s32);
 
@@ -105,7 +106,7 @@ Actor* get_actor(ActorID actorID);
 ActorPart* get_actor_part(Actor* actor, s32 partIndex);
 s32 add_coins(s32 amt);
 
-s32 func_800494C0(Npc* npc, s32 arg1, s32 arg2);
+void func_800494C0(Npc* npc, s32 arg1, s32 arg2);
 
 s32 get_variable(ScriptInstance* script, Bytecode var);
 s32 set_variable(ScriptInstance* script, Bytecode var, s32 value);
@@ -210,6 +211,9 @@ s32 func_801499EC(s32 soundID, s32 arg1, f32 arg2, f32 arg3, f32 arg4);
 s32 play_sound_at_position(s32 soundID, s32 value2, f32 posX, f32 posY, f32 posZ);
 s32 set_music_track(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s16 volume);
 s32 func_8014AA54(s32 playerIndex, s32 arg1, s16 arg2);
+
+s32 basic_window_update(void);
+s32 basic_hidden_window_update(void);
 
 void player_create_target_list(Actor* actor);
 void enemy_create_target_list(Actor* actor);

@@ -39,6 +39,7 @@
         "vector": "c",
         "string_view": "c",
         "initializer_list": "c",
-        "ranges": "c"
+        "ranges": "c",
+        "regex": "c"
     },
 }

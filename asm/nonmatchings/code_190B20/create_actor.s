@@ -213,44 +213,44 @@ glabel create_actor
 /* 193FA8 802656C8 000310C0 */  sll       $v0, $v1, 3
 /* 193FAC 802656CC 00431023 */  subu      $v0, $v0, $v1
 /* 193FB0 802656D0 00021080 */  sll       $v0, $v0, 2
-/* 193FB4 802656D4 3C018028 */  lui       $at, %hi(bActorSoundTable+4)
+/* 193FB4 802656D4 3C018028 */  lui       $at, %hi(bActorSoundTable+0x4)
 /* 193FB8 802656D8 00220821 */  addu      $at, $at, $v0
-/* 193FBC 802656DC 8C22146C */  lw        $v0, %lo(bActorSoundTable+4)($at)
+/* 193FBC 802656DC 8C22146C */  lw        $v0, %lo(bActorSoundTable+0x4)($at)
 /* 193FC0 802656E0 AE2201A0 */  sw        $v0, 0x1a0($s1)
 /* 193FC4 802656E4 000310C0 */  sll       $v0, $v1, 3
 /* 193FC8 802656E8 00431023 */  subu      $v0, $v0, $v1
 /* 193FCC 802656EC 00021080 */  sll       $v0, $v0, 2
-/* 193FD0 802656F0 3C018028 */  lui       $at, %hi(bActorSoundTable+8)
+/* 193FD0 802656F0 3C018028 */  lui       $at, %hi(bActorSoundTable+0x8)
 /* 193FD4 802656F4 00220821 */  addu      $at, $at, $v0
-/* 193FD8 802656F8 8C221470 */  lw        $v0, %lo(bActorSoundTable+8)($at)
+/* 193FD8 802656F8 8C221470 */  lw        $v0, %lo(bActorSoundTable+0x8)($at)
 /* 193FDC 802656FC AE2201A4 */  sw        $v0, 0x1a4($s1)
 /* 193FE0 80265700 000310C0 */  sll       $v0, $v1, 3
 /* 193FE4 80265704 00431023 */  subu      $v0, $v0, $v1
 /* 193FE8 80265708 00021080 */  sll       $v0, $v0, 2
-/* 193FEC 8026570C 3C018028 */  lui       $at, %hi(bActorSoundTable+12)
+/* 193FEC 8026570C 3C018028 */  lui       $at, %hi(bActorSoundTable+0xC)
 /* 193FF0 80265710 00220821 */  addu      $at, $at, $v0
-/* 193FF4 80265714 8C221474 */  lw        $v0, %lo(bActorSoundTable+12)($at)
+/* 193FF4 80265714 8C221474 */  lw        $v0, %lo(bActorSoundTable+0xC)($at)
 /* 193FF8 80265718 AE2201A8 */  sw        $v0, 0x1a8($s1)
 /* 193FFC 8026571C 000310C0 */  sll       $v0, $v1, 3
 /* 194000 80265720 00431023 */  subu      $v0, $v0, $v1
 /* 194004 80265724 00021080 */  sll       $v0, $v0, 2
-/* 194008 80265728 3C018028 */  lui       $at, %hi(bActorSoundTable+16)
+/* 194008 80265728 3C018028 */  lui       $at, %hi(bActorSoundTable+0x10)
 /* 19400C 8026572C 00220821 */  addu      $at, $at, $v0
-/* 194010 80265730 8C221478 */  lw        $v0, %lo(bActorSoundTable+16)($at)
+/* 194010 80265730 8C221478 */  lw        $v0, %lo(bActorSoundTable+0x10)($at)
 /* 194014 80265734 AE2201AC */  sw        $v0, 0x1ac($s1)
 /* 194018 80265738 000310C0 */  sll       $v0, $v1, 3
 /* 19401C 8026573C 00431023 */  subu      $v0, $v0, $v1
 /* 194020 80265740 00021080 */  sll       $v0, $v0, 2
-/* 194024 80265744 3C018028 */  lui       $at, %hi(bActorSoundTable+20)
+/* 194024 80265744 3C018028 */  lui       $at, %hi(bActorSoundTable+0x14)
 /* 194028 80265748 00220821 */  addu      $at, $at, $v0
-/* 19402C 8026574C 8C22147C */  lw        $v0, %lo(bActorSoundTable+20)($at)
+/* 19402C 8026574C 8C22147C */  lw        $v0, %lo(bActorSoundTable+0x14)($at)
 /* 194030 80265750 AE2201B0 */  sw        $v0, 0x1b0($s1)
 /* 194034 80265754 000310C0 */  sll       $v0, $v1, 3
 /* 194038 80265758 00431023 */  subu      $v0, $v0, $v1
 /* 19403C 8026575C 00021080 */  sll       $v0, $v0, 2
-/* 194040 80265760 3C018028 */  lui       $at, %hi(bActorSoundTable+24)
+/* 194040 80265760 3C018028 */  lui       $at, %hi(bActorSoundTable+0x18)
 /* 194044 80265764 00220821 */  addu      $at, $at, $v0
-/* 194048 80265768 94221480 */  lhu       $v0, %lo(bActorSoundTable+24)($at)
+/* 194048 80265768 94221480 */  lhu       $v0, %lo(bActorSoundTable+0x18)($at)
 /* 19404C 8026576C 24100001 */  addiu     $s0, $zero, 1
 /* 194050 80265770 A62201B4 */  sh        $v0, 0x1b4($s1)
 /* 194054 80265774 000310C0 */  sll       $v0, $v1, 3

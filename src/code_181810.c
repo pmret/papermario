@@ -381,7 +381,7 @@ ApiStatus MultiplyVec2ByActorScale(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus MultiplyVec3yActorScale(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus MultiplyVec3ByActorScale(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Actor* actor = get_actor(script->owner1.actorID);
 

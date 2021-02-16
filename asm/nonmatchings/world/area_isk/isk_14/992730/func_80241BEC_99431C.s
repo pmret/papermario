@@ -23,8 +23,8 @@ glabel func_80241BEC_99431C
 /* 994364 80241C34 44102000 */  mfc1      $s0, $f4
 /* 994368 80241C38 0C0B210B */  jal       get_float_variable
 /* 99436C 80241C3C 0220202D */   daddu    $a0, $s1, $zero
-/* 994370 80241C40 3C038024 */  lui       $v1, %hi(mim_06_UnkDurationCheck)
-/* 994374 80241C44 24632AC0 */  addiu     $v1, $v1, %lo(mim_06_UnkDurationCheck)
+/* 994370 80241C40 3C038024 */  lui       $v1, %hi(func_80242AC0)
+/* 994374 80241C44 24632AC0 */  addiu     $v1, $v1, %lo(func_80242AC0)
 /* 994378 80241C48 44921000 */  mtc1      $s2, $f2
 /* 99437C 80241C4C 00000000 */  nop
 /* 994380 80241C50 468010A0 */  cvt.s.w   $f2, $f2

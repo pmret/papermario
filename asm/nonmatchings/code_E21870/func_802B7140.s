@@ -4,8 +4,8 @@
 glabel func_802B7140
 /* E219B0 802B7140 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* E219B4 802B7144 AFB00010 */  sw        $s0, 0x10($sp)
-/* E219B8 802B7148 3C10802B */  lui       $s0, 0x802b
-/* E219BC 802B714C 26107D18 */  addiu     $s0, $s0, 0x7d18
+/* E219B8 802B7148 3C10802B */  lui       $s0, %hi(D_802B7D18_E22588)
+/* E219BC 802B714C 26107D18 */  addiu     $s0, $s0, %lo(D_802B7D18_E22588)
 /* E219C0 802B7150 AFBF0014 */  sw        $ra, 0x14($sp)
 /* E219C4 802B7154 8E040000 */  lw        $a0, ($s0)
 /* E219C8 802B7158 0C00A580 */  jal       mem_clear
@@ -33,9 +33,9 @@ glabel func_802B7140
 /* E21A20 802B71B0 AC820004 */  sw        $v0, 4($a0)
 /* E21A24 802B71B4 8FBF0014 */  lw        $ra, 0x14($sp)
 /* E21A28 802B71B8 8FB00010 */  lw        $s0, 0x10($sp)
-/* E21A2C 802B71BC 3C03802B */  lui       $v1, 0x802b
-/* E21A30 802B71C0 246374F0 */  addiu     $v1, $v1, 0x74f0
-/* E21A34 802B71C4 3C018011 */  lui       $at, 0x8011
-/* E21A38 802B71C8 AC23C920 */  sw        $v1, -0x36e0($at)
+/* E21A2C 802B71BC 3C03802B */  lui       $v1, %hi(func_802B74F0)
+/* E21A30 802B71C0 246374F0 */  addiu     $v1, $v1, %lo(func_802B74F0)
+/* E21A34 802B71C4 3C018011 */  lui       $at, %hi(D_8010C920)
+/* E21A38 802B71C8 AC23C920 */  sw        $v1, %lo(D_8010C920)($at)
 /* E21A3C 802B71CC 03E00008 */  jr        $ra
 /* E21A40 802B71D0 27BD0018 */   addiu    $sp, $sp, 0x18

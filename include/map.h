@@ -66,7 +66,7 @@ typedef struct NpcAISettings {
     /* 0x04 */ s32 moveTime;
     /* 0x08 */ s32 waitTime;
     /* 0x0C */ f32 alertRadius;
-    /* 0x10 */ f32 unk_10;
+    /* 0x10 */ s32 unk_10;
     /* 0x14 */ s32 unk_14;
     /* 0x18 */ f32 chaseSpeed;
     /* 0x1C */ s32 unk_1C; // chase turn step?
@@ -195,6 +195,12 @@ typedef struct StaticNPC {
     /* 0x1EC */ MessageID tattle;
 } StaticNpc; // size = 0x1F0
 
+typedef struct EnemyTerritory {
+    /* 0x00 */ Vec3i unk_00;
+    /* 0x0C */ char unk_0C[0x28];
+    /* 0x34 */ s32 unk_34;
+} EnemyTerritory; // size = ???
+
 typedef struct Enemy {
     /* 0x00 */ s32 flags;
     /* 0x04 */ s8 encounterIndex;
@@ -228,7 +234,7 @@ typedef struct Enemy {
     /* 0x6C */ s32 varTable[16];
     /* 0xAC */ char unk_AC[4];
     /* 0xB0 */ s32 unk_B0;
-    /* 0xB4 */ char unk_B4;
+    /* 0xB4 */ s8 unk_B4;
     /* 0xB5 */ s8 unk_B5;
     /* 0xB6 */ char unk_B6[2];
     /* 0xB8 */ s32 unkSettings24;
@@ -236,7 +242,7 @@ typedef struct Enemy {
     /* 0xC4 */ s32 unk_C4;
     /* 0xC8 */ s32 unk_C8;
     /* 0xCC */ s32* animList;
-    /* 0xD0 */ UNK_PTR territoryData;
+    /* 0xD0 */ EnemyTerritory* territory;
     /* 0xD4 */ s16* dropTables;
     /* 0xD8 */ u32 tattleString;
     /* 0xDC */ char unk_DC[20];

@@ -43,8 +43,8 @@ glabel func_80240508_9AEC08
 /* 9AECA0 802405A0 44900000 */  mtc1      $s0, $f0
 /* 9AECA4 802405A4 00000000 */  nop
 /* 9AECA8 802405A8 46800021 */  cvt.d.w   $f0, $f0
-/* 9AECAC 802405AC 3C028024 */  lui       $v0, %hi(func_80243090_C395C0)
-/* 9AECB0 802405B0 24423090 */  addiu     $v0, $v0, %lo(func_80243090_C395C0)
+/* 9AECAC 802405AC 3C028024 */  lui       $v0, %hi(func_80243090)
+/* 9AECB0 802405B0 24423090 */  addiu     $v0, $v0, %lo(func_80243090)
 /* 9AECB4 802405B4 44921000 */  mtc1      $s2, $f2
 /* 9AECB8 802405B8 00000000 */  nop
 /* 9AECBC 802405BC 468010A0 */  cvt.s.w   $f2, $f2

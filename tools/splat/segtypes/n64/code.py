@@ -810,9 +810,9 @@ class N64SegCode(N64Segment):
             sym_str = f"\n\nglabel {sym.name}\n"
             dis_start = self.ram_to_rom(syms[i].vram_start)
             dis_end = self.ram_to_rom(syms[i + 1].vram_start)
+            sym_len = dis_end - dis_start
 
             if sub.type == "bss":
-                sym_len = dis_end - dis_start
                 ret += f".space 0x{sym_len:X}"
             else:
                 sym_bytes = rom_bytes[dis_start : dis_end]

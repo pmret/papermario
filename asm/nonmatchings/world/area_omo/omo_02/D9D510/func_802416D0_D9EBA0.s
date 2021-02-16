@@ -134,7 +134,7 @@ glabel L80241898_D9ED68
 glabel L802418B0_D9ED80
 /* D9ED80 802418B0 0280202D */  daddu     $a0, $s4, $zero
 /* D9ED84 802418B4 0260282D */  daddu     $a1, $s3, $zero
-/* D9ED88 802418B8 0C090462 */  jal       func_80241188_D9E658
+/* D9ED88 802418B8 0C090462 */  jal       omo_02_UnkNpcAIFunc13_2
 /* D9ED8C 802418BC 02A0302D */   daddu    $a2, $s5, $zero
 glabel L802418C0_D9ED90
 /* D9ED90 802418C0 0280202D */  daddu     $a0, $s4, $zero

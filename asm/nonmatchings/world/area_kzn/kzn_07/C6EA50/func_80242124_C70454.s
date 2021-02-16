@@ -111,7 +111,7 @@ glabel L80242294_C705C4
 glabel L802422AC_C705DC
 /* C705DC 802422AC 0280202D */  daddu     $a0, $s4, $zero
 /* C705E0 802422B0 0200282D */  daddu     $a1, $s0, $zero
-/* C705E4 802422B4 0C090746 */  jal       func_80241D18_C70048
+/* C705E4 802422B4 0C090746 */  jal       kzn_07_UnkNpcAIFunc13
 /* C705E8 802422B8 0260302D */   daddu    $a2, $s3, $zero
 glabel L802422BC_C705EC
 /* C705EC 802422BC 0280202D */  daddu     $a0, $s4, $zero

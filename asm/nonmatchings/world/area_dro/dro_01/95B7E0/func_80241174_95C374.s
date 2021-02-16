@@ -175,7 +175,7 @@ glabel L802413D0_95C5D0
 glabel L802413E8_95C5E8
 /* 95C5E8 802413E8 0280202D */  daddu     $a0, $s4, $zero
 /* 95C5EC 802413EC 0260282D */  daddu     $a1, $s3, $zero
-/* 95C5F0 802413F0 0C09037F */  jal       func_80240DFC_95BFFC
+/* 95C5F0 802413F0 0C09037F */  jal       dro_01_UnkNpcAIFunc13
 /* 95C5F4 802413F4 02A0302D */   daddu    $a2, $s5, $zero
 glabel L802413F8_95C5F8
 /* 95C5F8 802413F8 0280202D */  daddu     $a0, $s4, $zero

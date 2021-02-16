@@ -175,7 +175,7 @@ glabel L80240DF0_BE89D0
 glabel L80240E08_BE89E8
 /* BE89E8 80240E08 0280202D */  daddu     $a0, $s4, $zero
 /* BE89EC 80240E0C 0260282D */  daddu     $a1, $s3, $zero
-/* BE89F0 80240E10 0C090207 */  jal       func_8024081C_BE83FC
+/* BE89F0 80240E10 0C090207 */  jal       arn_05_UnkNpcAIFunc13
 /* BE89F4 80240E14 02A0302D */   daddu    $a2, $s5, $zero
 glabel L80240E18_BE89F8
 /* BE89F8 80240E18 0280202D */  daddu     $a0, $s4, $zero

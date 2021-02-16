@@ -433,7 +433,7 @@ void update_coin_counter(void) {
         if ((uiStatus->displayCoins == playerData->coins) || (uiStatus->unk_6C[0] <= 30)) {
             uiStatus->unk_6C[0] -= 1;
             if (uiStatus->unk_6C[0] == 0) {
-                set_window_update(20, &D_80147574);
+                set_window_update(20, basic_hidden_window_update);
                 uiStatus->unk_6C[1] = 15;
                 D_8010CD10 = 0;
                 D_8010CD12 = 1;
@@ -469,7 +469,7 @@ void show_coin_counter(void) {
 
     if (uiStatus->unk_6C[0] == 0) {
         set_window_properties(0x14, 0x20, 0xa4, 0x40, 0x14, 0x15, coin_counter_draw_content, 0, -1);
-        set_window_update(0x14, &D_80147474);
+        set_window_update(0x14, basic_window_update);
         index = create_icon(&D_80109270);
         uiStatus->iconIndex10 = index;
         set_icon_flags(index, 0x80);

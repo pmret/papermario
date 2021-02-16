@@ -402,7 +402,7 @@ void func_80053AC8(UnkAl1* arg0) {
 }
 
 void func_80053AEC(UnkAl1* arg0, s16 arg1) {
-    arg0->unk_10 = arg1 << 16;
+    arg0->unk_10.s32 = arg1 << 16;
     arg0->unk_18 = arg1;
     arg0->unk_1A = 0;
     arg0->unk_14 = 0;
@@ -414,7 +414,7 @@ void func_80053B04(UnkAl1* arg0, u32 arg1, s16 arg2) {
 
     if (arg1 >= 250 && arg1 <= 100000) {
         temp_a0 = (s32)(arg1 * 1000) / 5750;
-        temp_v1 = (arg2 << 16) - arg0->unk_10;
+        temp_v1 = (arg2 << 16) - arg0->unk_10.s32;
 
         arg0->unk_18 = arg2;
         arg0->unk_1A = temp_a0;
@@ -429,10 +429,10 @@ void func_80053BA8(UnkAl1* arg0) {
     arg0->unk_1A--;
 
     if (arg0->unk_1A != 0) {
-        arg0->unk_10 += arg0->unk_14;
+        arg0->unk_10.s32 += arg0->unk_14;
     } else {
         arg0->unk_14 = 0;
-        arg0->unk_10 = arg0->unk_18 << 16;
+        arg0->unk_10.s32 = arg0->unk_18 << 16;
     }
 }
 

@@ -12,8 +12,8 @@ glabel func_802435D0_CC6DE0
 /* CC6DFC 802435EC AFB00018 */   sw       $s0, 0x18($sp)
 /* CC6E00 802435F0 0040802D */  daddu     $s0, $v0, $zero
 /* CC6E04 802435F4 0200202D */  daddu     $a0, $s0, $zero
-/* CC6E08 802435F8 3C118024 */  lui       $s1, %hi(D_80247B00)
-/* CC6E0C 802435FC 26317B00 */  addiu     $s1, $s1, %lo(D_80247B00)
+/* CC6E08 802435F8 3C118024 */  lui       $s1, %hi(D_80247B00_EE64C0)
+/* CC6E0C 802435FC 26317B00 */  addiu     $s1, $s1, %lo(D_80247B00_EE64C0)
 /* CC6E10 80243600 0C01BB7C */  jal       decode_yay0
 /* CC6E14 80243604 0220282D */   daddu    $a1, $s1, $zero
 /* CC6E18 80243608 0C00AB1E */  jal       general_heap_free

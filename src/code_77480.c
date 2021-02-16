@@ -31,11 +31,139 @@ void func_800DF3FC(f32* arg0, f32* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5)
 
 INCLUDE_ASM(s32, "code_77480", test_player_lateral);
 
-INCLUDE_ASM(s32, "code_77480", update_player);
+void update_player(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    CollisionStatus* collisionStatus = &gCollisionStatus;
+    GameStatus* gameStatus;
+
+    update_partner_timers();
+
+    if ((playerStatus->decorationList > 100) || (playerStatus->position.y < -2000.0f)) {
+        if (!(playerStatus->animFlags & 0x10000000)) {
+            playerStatus->decorationList = 0;
+            playerStatus->position.x = playerStatus->lastGoodPosition.x;
+            playerStatus->position.y = playerStatus->lastGoodPosition.y;
+            playerStatus->position.z = playerStatus->lastGoodPosition.z;
+
+            if (playerStatus->animFlags & 0x400000) {
+                Npc* partner;
+
+                playerStatus->animFlags |= 0x20000004;
+                partner = get_npc_unsafe(NpcId_PARTNER);
+                partner->pos.x = playerStatus->lastGoodPosition.x;
+                partner->pos.y = playerStatus->lastGoodPosition.y + playerStatus->colliderHeight;
+                partner->pos.z = playerStatus->lastGoodPosition.z;
+                partner->moveToPos.y = playerStatus->lastGoodPosition.y;
+            } else {
+                playerStatus->decorationList = 10;
+            }
+        }
+    }
+
+    collisionStatus->currentWall = -1;
+    collisionStatus->lastWallHammered = -1;
+    collisionStatus->unk_0A = -1;
+    collisionStatus->floorBelow = 1;
+
+    update_player_input();
+    playerStatus->flags &= ~0x400;
+    func_800DFFCC();
+
+    if (playerStatus->flags & 0x1000) {
+        func_800E5A2C();
+        if (func_800E0208() == 0) {
+            collision_main_lateral();
+        }
+    } else if (playerStatus->actionState != ActionState_HIT_LAVA) {
+        func_800DFAAC();
+    } else {
+        func_800DFBE8();
+    }
+
+    if (playerStatus->flags & 0x4000) {
+        playerStatus->moveFrames--;
+        if (playerStatus->moveFrames <= 0) {
+            playerStatus->moveFrames = 0;
+            playerStatus->flags &= ~0x4000;
+        }
+    }
+
+    if (!(playerStatus->animFlags & 0x1000)) {
+        func_800EFD08();
+    }
+
+    func_800E0B90();
+
+    gameStatus = *gGameStatusPtr;
+    gameStatus->playerPos.x = playerStatus->position.x;
+    gameStatus->playerPos.y = playerStatus->position.y;
+    gameStatus->playerPos.z = playerStatus->position.z;
+    gameStatus->playerYaw = playerStatus->currentYaw;
+
+    check_input_open_menus();
+    if (!(playerStatus->animFlags & 0x1000)) {
+        check_input_status_menu();
+    }
+
+    update_player_shadow();
+    check_for_interactables();
+    func_800E0580();
+    func_800E0398();
+    func_800E0294();
+
+    playerStatus->extraVelocity.x = 0.0f;
+    playerStatus->extraVelocity.y = 0.0f;
+    playerStatus->extraVelocity.z = 0.0f;
+    playerStatus->flags &= ~0x10;
+    playerStatus->animFlags &= ~8;
+}
 
 INCLUDE_ASM(s32, "code_77480", check_input_use_partner);
 
-INCLUDE_ASM(s32, "code_77480", func_800DFAAC);
+void func_800DFAAC(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    s32 flags;
+
+    check_input_use_partner();
+    func_800E5A2C();
+
+    if (!(playerStatus->flags & 8)) {
+        if (playerStatus->flags & 2) {
+            update_fall_state();
+        }
+    }
+
+    if (playerStatus->flags & 4) {
+        if (!(playerStatus->flags & 8)) {
+            func_800E3100();
+        }
+    }
+
+    check_input_midair_jump();
+
+    if (playerStatus->actionState != ActionState_SLIDING) {
+        collision_main_lateral();
+        func_800E4508();
+
+        if ((collision_main_above() < 0) && (playerStatus->decorationList == 0) && (playerStatus->animFlags & 0x1000)) {
+            func_800E4F10();
+        }
+
+        if ((playerStatus->actionState != ActionState_ENEMY_FIRST_STRIKE) && (playerStatus->actionState != ActionState_STEP_UP)) {
+            func_800E4744();
+        }
+    }
+
+    if (playerStatus->animFlags & 2) {
+        func_802BE070_31DBE0();
+    }
+
+    if (!(playerStatus->flags & 0x4000000)) {
+        gCameras->targetPos.x = playerStatus->position.x;
+        gCameras->targetPos.y = playerStatus->position.y;
+        gCameras->targetPos.z = playerStatus->position.z;
+    }
+}
 
 void func_800DFBE8(void) {
     func_800E5A2C();
@@ -196,7 +324,7 @@ INCLUDE_ASM(s32, "code_77480", func_800E0294);
 
 void func_800E0330(void) {
     if ((gPlayerStatusPtr->animFlags & 0x100) && (D_8010C93C != 0)) {
-        func_802B7000();
+        func_802B7000_E225B0();
     }
 }
 
@@ -254,7 +382,7 @@ INCLUDE_ASM(s32, "code_77480", check_for_interactables);
 
 void func_800E0AD0(void) {
     if ((gPlayerStatusPtr->animFlags & 0x10) && (D_8010C958 != 0)) {
-        func_802B71E8();
+        func_802B71E8_E202F8();
     }
 }
 

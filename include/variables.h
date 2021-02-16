@@ -69,6 +69,8 @@ extern s32 gCurrentCameraID;
 
 extern Npc* gPlayerNpcPtr;
 
+extern CollisionData gCollisionData;
+
 extern s8 D_800A0900;
 extern EncounterStatus gCurrentEncounter;
 extern s8* D_801512F0;
@@ -211,7 +213,6 @@ extern s16 gCurrentDoorSoundsSet;
 
 extern s32 D_800D9620;
 extern UNK_TYPE D_800E92D8;
-extern UNK_TYPE D_80147474;
 extern UNK_TYPE D_80147574;
 extern UNK_TYPE D_80109270;
 extern UNK_TYPE D_80108558;
@@ -250,6 +251,7 @@ extern s32 D_8009A5D8;
 
 extern u8 D_800779B0;
 extern u32 D_80078174;
+extern s32 D_8009A5D8;
 extern u8 D_800A0963;
 
 extern UNK_TYPE D_802EB3B0;
