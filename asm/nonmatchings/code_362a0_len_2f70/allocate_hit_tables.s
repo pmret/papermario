@@ -4,8 +4,8 @@
 glabel allocate_hit_tables
 /* 362A0 8005AEA0 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 362A4 8005AEA4 AFB00010 */  sw        $s0, 0x10($sp)
-/* 362A8 8005AEA8 3C10800B */  lui       $s0, %hi(D_800B42E0)
-/* 362AC 8005AEAC 261042E0 */  addiu     $s0, $s0, %lo(D_800B42E0)
+/* 362A8 8005AEA8 3C10800B */  lui       $s0, %hi(gCollisionData)
+/* 362AC 8005AEAC 261042E0 */  addiu     $s0, $s0, %lo(gCollisionData)
 /* 362B0 8005AEB0 AFBF0014 */  sw        $ra, 0x14($sp)
 /* 362B4 8005AEB4 8604000C */  lh        $a0, 0xc($s0)
 /* 362B8 8005AEB8 0C00AB0A */  jal       general_heap_malloc

@@ -6,8 +6,8 @@ glabel func_800EF640
 /* 88AF4 800EF644 AFB1004C */  sw        $s1, 0x4c($sp)
 /* 88AF8 800EF648 0080882D */  daddu     $s1, $a0, $zero
 /* 88AFC 800EF64C AFB30054 */  sw        $s3, 0x54($sp)
-/* 88B00 800EF650 3C13800B */  lui       $s3, %hi(D_800B1E54)
-/* 88B04 800EF654 26731E54 */  addiu     $s3, $s3, %lo(D_800B1E54)
+/* 88B00 800EF650 3C13800B */  lui       $s3, %hi(gCameras+0xD4)
+/* 88B04 800EF654 26731E54 */  addiu     $s3, $s3, %lo(gCameras+0xD4)
 /* 88B08 800EF658 0260202D */  daddu     $a0, $s3, $zero
 /* 88B0C 800EF65C AFB20050 */  sw        $s2, 0x50($sp)
 /* 88B10 800EF660 3C128011 */  lui       $s2, %hi(gPlayerStatus)

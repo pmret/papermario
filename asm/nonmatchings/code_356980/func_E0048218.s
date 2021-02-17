@@ -72,9 +72,9 @@ glabel func_E0048218
 /* 356CA4 E0048324 00431021 */  addu      $v0, $v0, $v1
 /* 356CA8 E0048328 000210C0 */  sll       $v0, $v0, 3
 /* 356CAC E004832C AD060004 */  sw        $a2, 4($t0)
-/* 356CB0 E0048330 3C01800B */  lui       $at, %hi(D_800B1DEC)
+/* 356CB0 E0048330 3C01800B */  lui       $at, %hi(gCameras+0x6C)
 /* 356CB4 E0048334 00220821 */  addu      $at, $at, $v0
-/* 356CB8 E0048338 C4281DEC */  lwc1      $f8, %lo(D_800B1DEC)($at)
+/* 356CB8 E0048338 C4281DEC */  lwc1      $f8, %lo(gCameras+0x6C)($at)
 /* 356CBC E004833C C6800010 */  lwc1      $f0, 0x10($s4)
 /* 356CC0 E0048340 25020008 */  addiu     $v0, $t0, 8
 /* 356CC4 E0048344 AEA80000 */  sw        $t0, ($s5)

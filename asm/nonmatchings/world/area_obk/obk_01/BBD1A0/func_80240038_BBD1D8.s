@@ -15,7 +15,7 @@ glabel func_80240038_BBD1D8
 /* BBD200 80240060 46800020 */  cvt.s.w   $f0, $f0
 /* BBD204 80240064 8FBF0010 */  lw        $ra, 0x10($sp)
 /* BBD208 80240068 24020002 */  addiu     $v0, $zero, 2
-/* BBD20C 8024006C 3C01800B */  lui       $at, %hi(D_800B1D98)
-/* BBD210 80240070 E4201D98 */  swc1      $f0, %lo(D_800B1D98)($at)
+/* BBD20C 8024006C 3C01800B */  lui       $at, %hi(gCameras+0x18)
+/* BBD210 80240070 E4201D98 */  swc1      $f0, %lo(gCameras+0x18)($at)
 /* BBD214 80240074 03E00008 */  jr        $ra
 /* BBD218 80240078 27BD0018 */   addiu    $sp, $sp, 0x18

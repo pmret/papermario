@@ -4,8 +4,8 @@
 glabel func_8024A990
 /* 179270 8024A990 27BDFFA8 */  addiu     $sp, $sp, -0x58
 /* 179274 8024A994 AFB00020 */  sw        $s0, 0x20($sp)
-/* 179278 8024A998 3C10800B */  lui       $s0, %hi(D_800B22D8)
-/* 17927C 8024A99C 261022D8 */  addiu     $s0, $s0, %lo(D_800B22D8)
+/* 179278 8024A998 3C10800B */  lui       $s0, %hi(gCameras+0x558)
+/* 17927C 8024A99C 261022D8 */  addiu     $s0, $s0, %lo(gCameras+0x558)
 /* 179280 8024A9A0 3C02802A */  lui       $v0, %hi(D_8029F27C)
 /* 179284 8024A9A4 9442F27C */  lhu       $v0, %lo(D_8029F27C)($v0)
 /* 179288 8024A9A8 3C04800E */  lui       $a0, %hi(gBattleStatus)

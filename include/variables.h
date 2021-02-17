@@ -72,7 +72,6 @@ extern Npc* gPlayerNpcPtr;
 extern CollisionData gCollisionData;
 
 extern s8 D_800A0900;
-extern f32 D_800B1DEC;
 extern f32 D_800F7B60[];
 extern s16 D_800F7B80;
 extern EncounterStatus gCurrentEncounter;

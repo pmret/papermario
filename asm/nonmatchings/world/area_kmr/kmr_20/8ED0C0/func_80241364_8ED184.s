@@ -26,9 +26,9 @@ glabel func_80241364_8ED184
 /* 8ED1D8 802413B8 000320C0 */  sll       $a0, $v1, 3
 /* 8ED1DC 802413BC 00641821 */  addu      $v1, $v1, $a0
 /* 8ED1E0 802413C0 000318C0 */  sll       $v1, $v1, 3
-/* 8ED1E4 802413C4 3C01800B */  lui       $at, %hi(D_800B1D98)
+/* 8ED1E4 802413C4 3C01800B */  lui       $at, %hi(gCameras+0x18)
 /* 8ED1E8 802413C8 00230821 */  addu      $at, $at, $v1
-/* 8ED1EC 802413CC E4201D98 */  swc1      $f0, %lo(D_800B1D98)($at)
+/* 8ED1EC 802413CC E4201D98 */  swc1      $f0, %lo(gCameras+0x18)($at)
 /* 8ED1F0 802413D0 8FBF0018 */  lw        $ra, 0x18($sp)
 /* 8ED1F4 802413D4 8FB10014 */  lw        $s1, 0x14($sp)
 /* 8ED1F8 802413D8 8FB00010 */  lw        $s0, 0x10($sp)

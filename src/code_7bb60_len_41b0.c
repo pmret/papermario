@@ -311,7 +311,8 @@ void func_800E546C(void) {
         angle = 180.0f;
     }
 
-    angle = (angle + D_800B1DEC) + 90.0f;
+    // TODO LOOK
+    angle = (angle + gCameras[0].currentYaw) + 90.0f;
 
     clamp_angle(angle);
 }

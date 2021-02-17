@@ -33,9 +33,9 @@ glabel func_800DE46C
 /* 77988 800DE4D8 000218C0 */  sll       $v1, $v0, 3
 /* 7798C 800DE4DC 00431021 */  addu      $v0, $v0, $v1
 /* 77990 800DE4E0 000210C0 */  sll       $v0, $v0, 3
-/* 77994 800DE4E4 3C01800B */  lui       $at, %hi(D_800B1DEC)
+/* 77994 800DE4E4 3C01800B */  lui       $at, %hi(gCameras+0x6C)
 /* 77998 800DE4E8 00220821 */  addu      $at, $at, $v0
-/* 7799C 800DE4EC C4201DEC */  lwc1      $f0, %lo(D_800B1DEC)($at)
+/* 7799C 800DE4EC C4201DEC */  lwc1      $f0, %lo(gCameras+0x6C)($at)
 /* 779A0 800DE4F0 848300B2 */  lh        $v1, 0xb2($a0)
 /* 779A4 800DE4F4 8FA20040 */  lw        $v0, 0x40($sp)
 /* 779A8 800DE4F8 00A0302D */  daddu     $a2, $a1, $zero

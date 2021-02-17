@@ -7,8 +7,8 @@ glabel update_actor_shadow
 /* 1842A4 802559C4 AFB20030 */  sw        $s2, 0x30($sp)
 /* 1842A8 802559C8 00A0902D */  daddu     $s2, $a1, $zero
 /* 1842AC 802559CC AFB5003C */  sw        $s5, 0x3c($sp)
-/* 1842B0 802559D0 3C15800B */  lui       $s5, %hi(D_800B22D8)
-/* 1842B4 802559D4 26B522D8 */  addiu     $s5, $s5, %lo(D_800B22D8)
+/* 1842B0 802559D0 3C15800B */  lui       $s5, %hi(gCameras+0x558)
+/* 1842B4 802559D4 26B522D8 */  addiu     $s5, $s5, %lo(gCameras+0x558)
 /* 1842B8 802559D8 AFBF0040 */  sw        $ra, 0x40($sp)
 /* 1842BC 802559DC AFB40038 */  sw        $s4, 0x38($sp)
 /* 1842C0 802559E0 AFB30034 */  sw        $s3, 0x34($sp)

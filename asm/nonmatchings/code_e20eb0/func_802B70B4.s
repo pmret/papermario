@@ -59,9 +59,9 @@ glabel func_802B70B4
 /* E2103C 802B718C 000218C0 */  sll       $v1, $v0, 3
 /* E21040 802B7190 00431021 */  addu      $v0, $v0, $v1
 /* E21044 802B7194 000210C0 */  sll       $v0, $v0, 3
-/* E21048 802B7198 3C01800B */  lui       $at, %hi(D_800B1DEC)
+/* E21048 802B7198 3C01800B */  lui       $at, %hi(gCameras+0x6C)
 /* E2104C 802B719C 00220821 */  addu      $at, $at, $v0
-/* E21050 802B71A0 C4201DEC */  lwc1      $f0, %lo(D_800B1DEC)($at)
+/* E21050 802B71A0 C4201DEC */  lwc1      $f0, %lo(gCameras+0x6C)($at)
 /* E21054 802B71A4 240200FF */  addiu     $v0, $zero, 0xff
 /* E21058 802B71A8 8E030000 */  lw        $v1, ($s0)
 /* E2105C 802B71AC 46000007 */  neg.s     $f0, $f0

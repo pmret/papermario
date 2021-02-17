@@ -462,9 +462,9 @@ glabel L802BDAF8_31A068
 /* 31A2A4 802BDD34 000218C0 */  sll       $v1, $v0, 3
 /* 31A2A8 802BDD38 00431021 */  addu      $v0, $v0, $v1
 /* 31A2AC 802BDD3C 000210C0 */  sll       $v0, $v0, 3
-/* 31A2B0 802BDD40 3C01800B */  lui       $at, %hi(D_800B1DEC)
+/* 31A2B0 802BDD40 3C01800B */  lui       $at, %hi(gCameras+0x6C)
 /* 31A2B4 802BDD44 00220821 */  addu      $at, $at, $v0
-/* 31A2B8 802BDD48 C4261DEC */  lwc1      $f6, %lo(D_800B1DEC)($at)
+/* 31A2B8 802BDD48 C4261DEC */  lwc1      $f6, %lo(gCameras+0x6C)($at)
 /* 31A2BC 802BDD4C 46002100 */  add.s     $f4, $f4, $f0
 /* 31A2C0 802BDD50 C62000A8 */  lwc1      $f0, 0xa8($s1)
 /* 31A2C4 802BDD54 27A2002C */  addiu     $v0, $sp, 0x2c

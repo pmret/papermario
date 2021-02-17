@@ -6,8 +6,8 @@ glabel func_80248DE4
 /* 1776C8 80248DE8 AFB1003C */  sw        $s1, 0x3c($sp)
 /* 1776CC 80248DEC 00A0882D */  daddu     $s1, $a1, $zero
 /* 1776D0 80248DF0 AFB00038 */  sw        $s0, 0x38($sp)
-/* 1776D4 80248DF4 3C10800B */  lui       $s0, %hi(D_800B22D8)
-/* 1776D8 80248DF8 261022D8 */  addiu     $s0, $s0, %lo(D_800B22D8)
+/* 1776D4 80248DF4 3C10800B */  lui       $s0, %hi(gCameras+0x558)
+/* 1776D8 80248DF8 261022D8 */  addiu     $s0, $s0, %lo(gCameras+0x558)
 /* 1776DC 80248DFC 3C02802A */  lui       $v0, %hi(D_8029F27C)
 /* 1776E0 80248E00 9442F27C */  lhu       $v0, %lo(D_8029F27C)($v0)
 /* 1776E4 80248E04 3C04800E */  lui       $a0, %hi(gBattleStatus)

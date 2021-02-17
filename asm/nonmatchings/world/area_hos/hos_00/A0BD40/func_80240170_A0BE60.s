@@ -4,8 +4,8 @@
 glabel func_80240170_A0BE60
 /* A0BE60 80240170 27BDFF98 */  addiu     $sp, $sp, -0x68
 /* A0BE64 80240174 F7BA0050 */  sdc1      $f26, 0x50($sp)
-/* A0BE68 80240178 3C01800B */  lui       $at, %hi(D_800B1DEC)
-/* A0BE6C 8024017C C43A1DEC */  lwc1      $f26, %lo(D_800B1DEC)($at)
+/* A0BE68 80240178 3C01800B */  lui       $at, %hi(gCameras+0x6C)
+/* A0BE6C 8024017C C43A1DEC */  lwc1      $f26, %lo(gCameras+0x6C)($at)
 /* A0BE70 80240180 3C014334 */  lui       $at, 0x4334
 /* A0BE74 80240184 44810000 */  mtc1      $at, $f0
 /* A0BE78 80240188 3C014049 */  lui       $at, 0x4049

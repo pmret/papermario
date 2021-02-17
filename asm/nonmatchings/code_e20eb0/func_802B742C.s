@@ -160,7 +160,7 @@ glabel func_802B742C
 /* E2151C 802B766C 080ADDBE */  j         .L802B76F8
 /* E21520 802B7670 AE020004 */   sw       $v0, 4($s0)
 .L802B7674:
-/* E21524 802B7674 0C0ADC00 */  jal       func_802B7000_2
+/* E21524 802B7674 0C0ADC00 */  jal       code_e20eb0_UnkAngleFunc1
 /* E21528 802B7678 00000000 */   nop
 /* E2152C 802B767C 0040302D */  daddu     $a2, $v0, $zero
 .L802B7680:

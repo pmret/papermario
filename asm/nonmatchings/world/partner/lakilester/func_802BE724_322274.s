@@ -495,9 +495,9 @@ glabel func_802BE724_322274
 /* 3229B0 802BEE60 000310C0 */  sll       $v0, $v1, 3
 /* 3229B4 802BEE64 00621821 */  addu      $v1, $v1, $v0
 /* 3229B8 802BEE68 000318C0 */  sll       $v1, $v1, 3
-/* 3229BC 802BEE6C 3C07800B */  lui       $a3, %hi(D_800B1DEC)
+/* 3229BC 802BEE6C 3C07800B */  lui       $a3, %hi(gCameras+0x6C)
 /* 3229C0 802BEE70 00E33821 */  addu      $a3, $a3, $v1
-/* 3229C4 802BEE74 8CE71DEC */  lw        $a3, %lo(D_800B1DEC)($a3)
+/* 3229C4 802BEE74 8CE71DEC */  lw        $a3, %lo(gCameras+0x6C)($a3)
 /* 3229C8 802BEE78 0C00A7E7 */  jal       add_vec2D_polar
 /* 3229CC 802BEE7C 0260282D */   daddu    $a1, $s3, $zero
 /* 3229D0 802BEE80 080AFCD7 */  j         .L802BF35C

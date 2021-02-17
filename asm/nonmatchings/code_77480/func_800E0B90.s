@@ -19,9 +19,9 @@ glabel func_800E0B90
 /* 7A078 800E0BC8 000218C0 */  sll       $v1, $v0, 3
 /* 7A07C 800E0BCC 00431021 */  addu      $v0, $v0, $v1
 /* 7A080 800E0BD0 000210C0 */  sll       $v0, $v0, 3
-/* 7A084 800E0BD4 3C01800B */  lui       $at, %hi(D_800B1DEC)
+/* 7A084 800E0BD4 3C01800B */  lui       $at, %hi(gCameras+0x6C)
 /* 7A088 800E0BD8 00220821 */  addu      $at, $at, $v0
-/* 7A08C 800E0BDC C4361DEC */  lwc1      $f22, %lo(D_800B1DEC)($at)
+/* 7A08C 800E0BDC C4361DEC */  lwc1      $f22, %lo(gCameras+0x6C)($at)
 /* 7A090 800E0BE0 C62E0084 */  lwc1      $f14, 0x84($s1)
 /* 7A094 800E0BE4 0C00A70A */  jal       get_clamped_angle_diff
 /* 7A098 800E0BE8 4600B306 */   mov.s    $f12, $f22

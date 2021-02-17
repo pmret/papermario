@@ -29,9 +29,9 @@ glabel func_802403B8_B1CE08
 /* B1CE68 80240418 00431021 */  addu      $v0, $v0, $v1
 /* B1CE6C 8024041C 000210C0 */  sll       $v0, $v0, 3
 /* B1CE70 80240420 4406A000 */  mfc1      $a2, $f20
-/* B1CE74 80240424 3C01800B */  lui       $at, %hi(D_800B1DEC)
+/* B1CE74 80240424 3C01800B */  lui       $at, %hi(gCameras+0x6C)
 /* B1CE78 80240428 00220821 */  addu      $at, $at, $v0
-/* B1CE7C 8024042C C4361DEC */  lwc1      $f22, %lo(D_800B1DEC)($at)
+/* B1CE7C 8024042C C4361DEC */  lwc1      $f22, %lo(gCameras+0x6C)($at)
 /* B1CE80 80240430 4407E000 */  mfc1      $a3, $f28
 /* B1CE84 80240434 4600B587 */  neg.s     $f22, $f22
 /* B1CE88 80240438 4405B000 */  mfc1      $a1, $f22

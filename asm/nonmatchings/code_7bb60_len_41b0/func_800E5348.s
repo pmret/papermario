@@ -15,9 +15,9 @@ glabel func_800E5348
 /* 7E820 800E5370 000218C0 */  sll       $v1, $v0, 3
 /* 7E824 800E5374 00431021 */  addu      $v0, $v0, $v1
 /* 7E828 800E5378 000210C0 */  sll       $v0, $v0, 3
-/* 7E82C 800E537C 3C01800B */  lui       $at, %hi(D_800B1DEC)
+/* 7E82C 800E537C 3C01800B */  lui       $at, %hi(gCameras+0x6C)
 /* 7E830 800E5380 00220821 */  addu      $at, $at, $v0
-/* 7E834 800E5384 C42C1DEC */  lwc1      $f12, %lo(D_800B1DEC)($at)
+/* 7E834 800E5384 C42C1DEC */  lwc1      $f12, %lo(gCameras+0x6C)($at)
 /* 7E838 800E5388 0C00A70A */  jal       get_clamped_angle_diff
 /* 7E83C 800E538C 00000000 */   nop
 /* 7E840 800E5390 3C01C0A0 */  lui       $at, 0xc0a0
@@ -70,9 +70,9 @@ glabel func_800E5348
 /* 7E8F0 800E5440 00431021 */  addu      $v0, $v0, $v1
 /* 7E8F4 800E5444 000210C0 */  sll       $v0, $v0, 3
 /* 7E8F8 800E5448 460C2301 */  sub.s     $f12, $f4, $f12
-/* 7E8FC 800E544C 3C01800B */  lui       $at, %hi(D_800B1DEC)
+/* 7E8FC 800E544C 3C01800B */  lui       $at, %hi(gCameras+0x6C)
 /* 7E900 800E5450 00220821 */  addu      $at, $at, $v0
-/* 7E904 800E5454 C4201DEC */  lwc1      $f0, %lo(D_800B1DEC)($at)
+/* 7E904 800E5454 C4201DEC */  lwc1      $f0, %lo(gCameras+0x6C)($at)
 /* 7E908 800E5458 0C00A6C9 */  jal       clamp_angle
 /* 7E90C 800E545C 46006300 */   add.s    $f12, $f12, $f0
 /* 7E910 800E5460 8FBF0010 */  lw        $ra, 0x10($sp)

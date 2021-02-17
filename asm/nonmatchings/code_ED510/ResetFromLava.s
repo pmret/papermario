@@ -11,8 +11,8 @@ glabel ResetFromLava
 /* EE8A0 802C9EF0 10A0001D */  beqz      $a1, .L802C9F68
 /* EE8A4 802C9EF4 8C82000C */   lw       $v0, 0xc($a0)
 /* EE8A8 802C9EF8 8C450000 */  lw        $a1, ($v0)
-/* EE8AC 802C9EFC 3C12800B */  lui       $s2, %hi(D_800B42E0)
-/* EE8B0 802C9F00 265242E0 */  addiu     $s2, $s2, %lo(D_800B42E0)
+/* EE8AC 802C9EFC 3C12800B */  lui       $s2, %hi(gCollisionData)
+/* EE8B0 802C9F00 265242E0 */  addiu     $s2, $s2, %lo(gCollisionData)
 /* EE8B4 802C9F04 0C0B1EAF */  jal       get_variable
 /* EE8B8 802C9F08 2413FFFF */   addiu    $s3, $zero, -1
 /* EE8BC 802C9F0C 0040882D */  daddu     $s1, $v0, $zero
@@ -52,8 +52,8 @@ glabel ResetFromLava
 /* EE934 802C9F84 00022403 */  sra       $a0, $v0, 0x10
 /* EE938 802C9F88 000410C0 */  sll       $v0, $a0, 3
 /* EE93C 802C9F8C 00441023 */  subu      $v0, $v0, $a0
-/* EE940 802C9F90 3C03800B */  lui       $v1, %hi(D_800B42E4)
-/* EE944 802C9F94 8C6342E4 */  lw        $v1, %lo(D_800B42E4)($v1)
+/* EE940 802C9F90 3C03800B */  lui       $v1, %hi(gCollisionData+0x4)
+/* EE944 802C9F94 8C6342E4 */  lw        $v1, %lo(gCollisionData+0x4)($v1)
 /* EE948 802C9F98 00021080 */  sll       $v0, $v0, 2
 /* EE94C 802C9F9C 00628021 */  addu      $s0, $v1, $v0
 /* EE950 802C9FA0 8E020000 */  lw        $v0, ($s0)

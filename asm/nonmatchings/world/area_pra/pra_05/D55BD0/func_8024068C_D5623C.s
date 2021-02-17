@@ -22,9 +22,9 @@ glabel func_8024068C_D5623C
 /* D56280 802406D0 000218C0 */  sll       $v1, $v0, 3
 /* D56284 802406D4 00431021 */  addu      $v0, $v0, $v1
 /* D56288 802406D8 000210C0 */  sll       $v0, $v0, 3
-/* D5628C 802406DC 3C01800B */  lui       $at, %hi(D_800B1DEC)
+/* D5628C 802406DC 3C01800B */  lui       $at, %hi(gCameras+0x6C)
 /* D56290 802406E0 00220821 */  addu      $at, $at, $v0
-/* D56294 802406E4 C4361DEC */  lwc1      $f22, %lo(D_800B1DEC)($at)
+/* D56294 802406E4 C4361DEC */  lwc1      $f22, %lo(gCameras+0x6C)($at)
 /* D56298 802406E8 4406A000 */  mfc1      $a2, $f20
 /* D5629C 802406EC 4600B587 */  neg.s     $f22, $f22
 /* D562A0 802406F0 4405B000 */  mfc1      $a1, $f22

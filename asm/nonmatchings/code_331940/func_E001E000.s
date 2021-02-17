@@ -126,9 +126,9 @@ glabel func_E001E000
 /* 331B10 E001E1D0 E6200010 */  swc1      $f0, 0x10($s1)
 /* 331B14 E001E1D4 E6220014 */  swc1      $f2, 0x14($s1)
 /* 331B18 E001E1D8 E6240018 */  swc1      $f4, 0x18($s1)
-/* 331B1C E001E1DC 3C01800B */  lui       $at, %hi(D_800B1DEC)
+/* 331B1C E001E1DC 3C01800B */  lui       $at, %hi(gCameras+0x6C)
 /* 331B20 E001E1E0 00220821 */  addu      $at, $at, $v0
-/* 331B24 E001E1E4 C4341DEC */  lwc1      $f20, %lo(D_800B1DEC)($at)
+/* 331B24 E001E1E4 C4341DEC */  lwc1      $f20, %lo(gCameras+0x6C)($at)
 /* 331B28 E001E1E8 0C080144 */  jal       func_E0200510
 /* 331B2C E001E1EC 4600A306 */   mov.s    $f12, $f20
 /* 331B30 E001E1F0 4600A306 */  mov.s     $f12, $f20

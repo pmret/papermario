@@ -4,8 +4,8 @@
 glabel func_80240120_A109A0
 /* A109A0 80240120 27BDFF98 */  addiu     $sp, $sp, -0x68
 /* A109A4 80240124 F7BA0050 */  sdc1      $f26, 0x50($sp)
-/* A109A8 80240128 3C01800B */  lui       $at, %hi(D_800B1DEC)
-/* A109AC 8024012C C43A1DEC */  lwc1      $f26, %lo(D_800B1DEC)($at)
+/* A109A8 80240128 3C01800B */  lui       $at, %hi(gCameras+0x6C)
+/* A109AC 8024012C C43A1DEC */  lwc1      $f26, %lo(gCameras+0x6C)($at)
 /* A109B0 80240130 3C014334 */  lui       $at, 0x4334
 /* A109B4 80240134 44810000 */  mtc1      $at, $f0
 /* A109B8 80240138 3C014049 */  lui       $at, 0x4049

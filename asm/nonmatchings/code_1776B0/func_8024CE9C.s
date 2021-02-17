@@ -5,8 +5,8 @@ glabel func_8024CE9C
 /* 17B77C 8024CE9C 24020008 */  addiu     $v0, $zero, 8
 /* 17B780 8024CEA0 3C01802A */  lui       $at, %hi(D_8029F284)
 /* 17B784 8024CEA4 A422F284 */  sh        $v0, %lo(D_8029F284)($at)
-/* 17B788 8024CEA8 3C02800B */  lui       $v0, %hi(D_800B22D8)
-/* 17B78C 8024CEAC 244222D8 */  addiu     $v0, $v0, %lo(D_800B22D8)
+/* 17B788 8024CEA8 3C02800B */  lui       $v0, %hi(gCameras+0x558)
+/* 17B78C 8024CEAC 244222D8 */  addiu     $v0, $v0, %lo(gCameras+0x558)
 /* 17B790 8024CEB0 8443001C */  lh        $v1, 0x1c($v0)
 /* 17B794 8024CEB4 8444001E */  lh        $a0, 0x1e($v0)
 /* 17B798 8024CEB8 A4400024 */  sh        $zero, 0x24($v0)

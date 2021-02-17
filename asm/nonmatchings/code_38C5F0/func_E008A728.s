@@ -88,9 +88,9 @@ glabel func_E008A728
 /* 38CE60 E008A870 00431021 */  addu      $v0, $v0, $v1
 /* 38CE64 E008A874 000210C0 */  sll       $v0, $v0, 3
 /* 38CE68 E008A878 ACA80004 */  sw        $t0, 4($a1)
-/* 38CE6C E008A87C 3C01800B */  lui       $at, %hi(D_800B1DEC)
+/* 38CE6C E008A87C 3C01800B */  lui       $at, %hi(gCameras+0x6C)
 /* 38CE70 E008A880 00220821 */  addu      $at, $at, $v0
-/* 38CE74 E008A884 C4201DEC */  lwc1      $f0, %lo(D_800B1DEC)($at)
+/* 38CE74 E008A884 C4201DEC */  lwc1      $f0, %lo(gCameras+0x6C)($at)
 /* 38CE78 E008A888 24A50018 */  addiu     $a1, $a1, 0x18
 /* 38CE7C E008A88C AEC50000 */  sw        $a1, ($s6)
 /* 38CE80 E008A890 46000007 */  neg.s     $f0, $f0

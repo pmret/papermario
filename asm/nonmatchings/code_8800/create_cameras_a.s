@@ -8,8 +8,8 @@ glabel create_cameras_a
 /* 9300 8002DF00 24030003 */  addiu     $v1, $zero, 3
 /* 9304 8002DF04 3C013F80 */  lui       $at, 0x3f80
 /* 9308 8002DF08 44810000 */  mtc1      $at, $f0
-/* 930C 8002DF0C 3C02800B */  lui       $v0, %hi(D_800B2D88)
-/* 9310 8002DF10 24422D88 */  addiu     $v0, $v0, %lo(D_800B2D88)
+/* 930C 8002DF0C 3C02800B */  lui       $v0, %hi(gCameras+0x1008)
+/* 9310 8002DF10 24422D88 */  addiu     $v0, $v0, %lo(gCameras+0x1008)
 /* 9314 8002DF14 AFBF0044 */  sw        $ra, 0x44($sp)
 /* 9318 8002DF18 AFB5003C */  sw        $s5, 0x3c($sp)
 /* 931C 8002DF1C AFB40038 */  sw        $s4, 0x38($sp)
