@@ -179,11 +179,11 @@ class CodeSubsegment(Subsegment):
             funcs_text = segment.add_labels(funcs)
 
             if self.type == "c":
-                if os.path.exists(generic_out_path):
+                defined_funcs = set()
+
+                if segment.options.get("do_c_func_detection", True) and os.path.exists(generic_out_path):
                     defined_funcs = CodeSubsegment.get_funcs_defined_in_c(generic_out_path)
                     segment.mark_c_funcs_as_defined(defined_funcs)
-                else:
-                    defined_funcs = set()
 
                 asm_out_dir = Segment.create_split_dir(base_path, os.path.join("asm", "nonmatchings"))
 
