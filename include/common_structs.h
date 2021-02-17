@@ -947,7 +947,7 @@ typedef struct GameStatus {
     /* 0x07C */ s8 unk_7C;
     /* 0x07D */ s8 unk_7D;
     /* 0x07E */ u8 peachFlags; /* (1 = isPeach, 2 = isTransformed, 4 = hasUmbrella) */
-    /* 0x07F */ u8 peachDisguise; /* (1 = koopatrol, 2 = hammer bros, 3 = clubba) */
+    /* 0x07F */ s8 peachDisguise; /* (1 = koopatrol, 2 = hammer bros, 3 = clubba) */
     /* 0x080 */ char unk_80;
     /* 0x081 */ s8 unk_81;
     /* 0x082 */ s8 unk_82;
@@ -1736,5 +1736,14 @@ typedef struct EffectInstanceData {
     /* 0x30 */ f32 unk_30;
     /* 0x34 */ char unk_34[0x4C];
 } EffectInstanceData; // size = 0x80
+
+typedef struct Temp8010F250 {
+    /* 0x00 */ s8 unk_00;
+    /* 0x01 */ s8 unk_01;
+    /* 0x02 */ char unk_02[5];
+    /* 0x07 */ s8 unk_07;
+    /* 0x08 */ s32 unk_08;
+    /* 0x0C */ s32 unk_0C;
+} Temp8010F250;
 
 #endif
