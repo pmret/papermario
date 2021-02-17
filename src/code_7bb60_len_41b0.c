@@ -139,7 +139,7 @@ INCLUDE_ASM(s32, "code_7bb60_len_41b0", collision_main_lateral);
 
 //something weird with hitID
 #ifdef NON_MATCHING
-s32 collision_check_player_intersecting_world(s32 arg0, s32 arg1) {
+s32 collision_check_player_intersecting_world(s32 arg0, s32 arg1, f32 arg2) {
     f32 angle = 0.0f;
     s32 ret = -1;
     s32 i;
@@ -147,9 +147,9 @@ s32 collision_check_player_intersecting_world(s32 arg0, s32 arg1) {
     for (i = 0; i < 4; i++) {
         PlayerStatus** playerStatus = &gPlayerStatusPtr;
         f32 x = (*playerStatus)->position.x;
-        f32 y = (*playerStatus)->position.y + arg1;
+        f32 y = (*playerStatus)->position.y + arg2;
         f32 z = (*playerStatus)->position.z;
-        s32 hitID = do_lateral_collision(arg0, *playerStatus, &x, &y, &z, 0, angle);
+        s32 hitID = do_lateral_collision(arg2, *playerStatus, &x, &y, &z, 0, angle);
 
         if (hitID >= 0) {
             ret = hitID;
@@ -163,10 +163,10 @@ s32 collision_check_player_intersecting_world(s32 arg0, s32 arg1) {
     return ret;
 }
 #else
-INCLUDE_ASM(s32, "code_7bb60_len_41b0", collision_check_player_intersecting_world);
+INCLUDE_ASM(s32, "code_7bb60_len_41b0", collision_check_player_intersecting_world,s32 arg0, s32 arg1, f32 arg2);
 #endif
 
-s32 func_800E4404(s32 arg0, s32 arg1, s32 arg2, f32* outX, f32* outY, f32* outZ) {
+s32 func_800E4404(s32 arg0, s32 arg1, f32 arg2, f32* outX, f32* outY, f32* outZ) {
     f32 angle = 0.0f;
     s32 ret = -1;
     s32 i;
@@ -219,9 +219,17 @@ INCLUDE_ASM(s32, "code_7bb60_len_41b0", func_800E46C8);
 
 INCLUDE_ASM(s32, "code_7bb60_len_41b0", func_800E4744);
 
-INCLUDE_ASM(s32, "code_7bb60_len_41b0", func_800E4AD8);
+void func_800E4AD8(s32 arg0) {
+    Camera* currentCamera = &gCameras[gCurrentCameraID];
 
-INCLUDE_ASM(s32, "code_7bb60_len_41b0", func_800E4B40);
+    collision_check_player_intersecting_world(arg0, 0, gPlayerStatus.spriteFacingAngle - 90.0f + currentCamera->currentYaw);
+}
+
+void func_800E4B40(s32 arg0, f32* arg1, f32* arg2, f32* arg3) {
+    Camera* currentCamera = &gCameras[gCurrentCameraID];
+
+    func_800E4404(arg0, 0, gPlayerStatus.spriteFacingAngle - 90.0f + currentCamera->currentYaw, arg1, arg2, arg3);
+}
 
 INCLUDE_ASM(s32, "code_7bb60_len_41b0", func_800E4BB8);
 
