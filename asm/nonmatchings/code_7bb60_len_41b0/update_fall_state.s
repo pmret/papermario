@@ -83,7 +83,7 @@ glabel L800E2DFC_7C2AC
 /* 7C2F0 800E2E40 0C0389AC */  jal       func_800E26B0
 /* 7C2F4 800E2E44 00000000 */   nop
 .L800E2E48:
-/* 7C2F8 800E2E48 0C038C1B */  jal       gravity_use_fall_parms
+/* 7C2F8 800E2E48 0C038C1B */  jal       gravity_use_fall_params
 /* 7C2FC 800E2E4C 00000000 */   nop
 .L800E2E50:
 /* 7C300 800E2E50 0C038D12 */  jal       integrate_gravity
@@ -136,7 +136,7 @@ glabel L800E2E68_7C318
 /* 7C3B0 800E2F00 00000000 */   nop
 /* 7C3B4 800E2F04 0C0389AC */  jal       func_800E26B0
 /* 7C3B8 800E2F08 00000000 */   nop
-/* 7C3BC 800E2F0C 0C038C1B */  jal       gravity_use_fall_parms
+/* 7C3BC 800E2F0C 0C038C1B */  jal       gravity_use_fall_params
 /* 7C3C0 800E2F10 00000000 */   nop
 /* 7C3C4 800E2F14 0C038D12 */  jal       integrate_gravity
 /* 7C3C8 800E2F18 00000000 */   nop

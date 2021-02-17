@@ -1204,7 +1204,7 @@ glabel L802BE78C_31ACFC
 /* 31ADC8 802BE858 0000202D */   daddu    $a0, $zero, $zero
 /* 31ADCC 802BE85C 0C0397F4 */  jal       start_falling
 /* 31ADD0 802BE860 00000000 */   nop
-/* 31ADD4 802BE864 0C038C1B */  jal       gravity_use_fall_parms
+/* 31ADD4 802BE864 0C038C1B */  jal       gravity_use_fall_params
 /* 31ADD8 802BE868 00000000 */   nop
 /* 31ADDC 802BE86C 8E220000 */  lw        $v0, ($s1)
 /* 31ADE0 802BE870 3C030080 */  lui       $v1, 0x80

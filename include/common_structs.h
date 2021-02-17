@@ -1480,13 +1480,15 @@ typedef struct PlayerStatus {
     /* 0x054 */ f32 currentSpeed;
     /* 0x058 */ f32 walkSpeed;
     /* 0x05C */ f32 runSpeed;
-    /* 0x060 */ char unk_60[8];
+    /* 0x060 */ char unk_60[4];
+    /* 0x064 */ f32 unk_64;
     /* 0x068 */ f32 normalPitch;
     /* 0x06C */ char unk_6C[4];
     /* 0x070 */ f32 gravityIntegrator[4];
     /* 0x080 */ f32 targetYaw;
     /* 0x084 */ f32 currentYaw;
-    /* 0x088 */ char unk_88[24];
+    /* 0x088 */ f32 unk_88;
+    /* 0x08C */ char unk_8C[20];
     /* 0x0A0 */ f32 heading;
     /* 0x0A4 */ char unk_A4[4];
     /* 0x0A8 */ f32 spriteFacingAngle; /* angle of sprite, relative to camera, from 0 to 180 */
@@ -1502,7 +1504,8 @@ typedef struct PlayerStatus {
     /* 0x0BE */ u8 renderMode;
     /* 0x0BF */ s8 unk_BF;
     /* 0x0C0 */ s16 decorationList;
-    /* 0x0C2 */ char unk_C2[4];
+    /* 0x0C2 */ s16 unk_C2;
+    /* 0x0C4 */ char unk_C4[2];
     /* 0x0C6 */ s16 unk_C6;
     /* 0x0C8 */ s32* unk_C8;
     /* 0x0CC */ s32 shadowID;

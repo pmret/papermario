@@ -891,7 +891,7 @@ glabel func_802BE724_322274
 .L802BF434:
 /* 322F84 802BF434 0C039769 */  jal       set_action_state
 /* 322F88 802BF438 24040008 */   addiu    $a0, $zero, 8
-/* 322F8C 802BF43C 0C038C1B */  jal       gravity_use_fall_parms
+/* 322F8C 802BF43C 0C038C1B */  jal       gravity_use_fall_params
 /* 322F90 802BF440 00000000 */   nop
 /* 322F94 802BF444 2402000B */  addiu     $v0, $zero, 0xb
 /* 322F98 802BF448 080AFD30 */  j         .L802BF4C0

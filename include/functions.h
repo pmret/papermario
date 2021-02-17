@@ -82,6 +82,7 @@ s32 get_model_list_index_from_tree_index(s32 treeIndex);
 void get_model_center_and_size(s32 modelID, f32* centerX, f32* centerY, f32* centerZ, f32* sizeX, f32* sizeY,
                                f32* sizeZ);
 s32 collision_main_above(void);
+s32 do_lateral_collision(s32, PlayerStatus*, f32*, f32*, f32*, f32, f32);
 
 void func_80027088(s32);
 
@@ -107,6 +108,8 @@ ActorPart* get_actor_part(Actor* actor, s32 partIndex);
 s32 add_coins(s32 amt);
 
 void func_800494C0(Npc* npc, s32 arg1, s32 arg2);
+
+s32 func_800DF15C(PlayerStatus*, f32*, f32*, f32*, s32, f32, s32*);
 
 s32 get_variable(ScriptInstance* script, Bytecode var);
 s32 set_variable(ScriptInstance* script, Bytecode var, s32 value);

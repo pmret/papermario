@@ -1,7 +1,5 @@
 #include "common.h"
 
-extern f32 D_800B1DEC;
-
 void update_player_input(void) {
     PlayerStatus* ps = &gPlayerStatus;
     PlayerStatus* playerStatus = ps; // ??? necessary

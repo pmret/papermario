@@ -1,16 +1,14 @@
 #!/usr/bin/env python3
 
-from os import path
-from os import remove
-from sys import argv
+import os
 import re
-from glob import glob
+import sys
 from pathlib import Path
 
-DIR = path.dirname(__file__)
-NONMATCHINGS_DIR = Path(path.join(DIR, "asm", "nonmatchings"))
+DIR = os.path.dirname(__file__)
+NONMATCHINGS_DIR = Path(os.path.join(DIR, "asm", "nonmatchings"))
 
-C_FILES = Path(path.join(DIR, "src")).rglob("*.c")
+C_FILES = Path(os.path.join(DIR, "src")).rglob("*.c")
 ASM_FILES = NONMATCHINGS_DIR.rglob("*.s")
 
 def strip_c_comments(text):
@@ -40,26 +38,6 @@ asm_func_pattern = re.compile(
 def include_asms_in_c(text):
     return (match.group(1) for match in asm_func_pattern.finditer(text))
 
-def parse_map_file(p = Path(DIR, "build", "papermario.map")):
-    addresses = []
-    with open(p, "r") as f:
-        for match in re.compile(f"^\s+0x([a-f0-9]+)\s+([_a-zA-Z0-9]+)", re.MULTILINE).finditer(f.read()):
-            addr = int(match.group(1), 16)
-            func = match.group(2)
-
-            addresses.append((func, addr))
-
-    addresses.sort(key=lambda x: x[1]) # sort by address
-
-    sizes = {}
-    for i in range(0, len(addresses) - 1):
-        func, addr = addresses[i]
-        next_addr = addresses[i + 1][1]
-
-        sizes[func] = next_addr - addr
-
-    return sizes
-
 matched = []
 asm = []
 for filename in C_FILES:
@@ -68,52 +46,39 @@ for filename in C_FILES:
         matched.extend((m for m in funcs_in_c(text) if not m in matched))
         asm.extend((m for m in include_asms_in_c(text) if not m in asm))
 
-non_matched = [path.splitext(path.basename(filename))[0] for filename in ASM_FILES]
+non_matched = [os.path.splitext(os.path.basename(filename))[0] for filename in ASM_FILES]
 
 partial_matched = [f for f in matched if f in asm]
 matched = [f for f in matched if not f in partial_matched]
-matched_but_undeleted_asm = [f for f in matched if f in non_matched and not f in partial_matched]
+matched_but_undeleted_asm = set([f for f in matched if f in non_matched and not f in partial_matched])
+orphan_asm = set(non_matched) - set(asm) - matched_but_undeleted_asm
+missing_asm = set(asm) - set(non_matched)
+
+to_delete = matched_but_undeleted_asm | orphan_asm
 
 if __name__ == "__main__":
-    if "--help" in argv:
-        print("--fail-matched-undeleted    exit with error code 1 if matched function(s) exist in asm/nonmatchings/")
-        print("--fail-unincluded           exit with error code 2 if unincluded assembly files exist")
-        print("--delete-matched            delete matched function(s) from asm/nonmatchings/ without asking")
-        print("--delete-unincluded         delete unincluded, unmatched assembly files")
-        print("--skip-sizes                don't attempt to read build/papermario.map to determine sizes")
+    if "--help" in sys.argv:
+        print("--fail-undeleted            exit with error code 1 if obsolete .s functions exist")
+        print("--delete                    delete obsolete .s functions without asking")
         exit()
 
-    total = len(matched) + len(non_matched)
-    print(f"{len(matched)}+{len(partial_matched)} / {total} functions ({(len(matched) / total) * 100:.2f}%)")
-
-    if not "--skip-sizes" in argv:
-        function_sizes = parse_map_file()
-        size_matched = sum(function_sizes.get(f, 0) for f in matched)
-        size_partial_matched = sum(function_sizes.get(f, 0) for f in partial_matched)
-        size_non_matched = sum(function_sizes.get(f, 0) for f in non_matched)
-        size_total = size_matched + size_non_matched
-        print(f"{size_matched}+{size_partial_matched} / {size_total} bytes ({(size_matched / size_total) * 100:.2f}%)")
-
     if len(matched_but_undeleted_asm) > 0:
-        print(f"The following functions have been matched but still exist in asm/nonmatchings/: {' '.join(matched_but_undeleted_asm)}")
+        print(f"The following functions have been matched but their .s files remain: {matched_but_undeleted_asm}")
+    if len(set(asm)) != len(set(non_matched)):
+        if len(set(non_matched)) > len(set(asm)) and len(orphan_asm) > 0:
+            print(f"The following functions are unmatched but are also unINCLUDEd: {orphan_asm}")
+        elif len(missing_asm) > 0:
+            print(f"warning: The following .s files are INCLUDEd but don't exist: {missing_asm}")
 
-        if "--fail-matched-undeleted" in argv:
+    if len(to_delete) > 0:
+        if "--fail-undeleted" in sys.argv:
             exit(1)
-        elif "--delete-matched" in argv or input("Delete them [y/N]? ").upper() == "Y":
-            for func in matched_but_undeleted_asm:
+        elif "--delete" in sys.argv or input("Delete them [y/N]? ").upper() == "Y":
+            for func in to_delete:
                 f = next(NONMATCHINGS_DIR.rglob(func + ".s"))
-                remove(f)
-    elif len(set(asm)) != len(set(non_matched)):
-        #print(f"warning: number of INCLUDE_ASM macros ({len(asm)}) != number of asm files ({len(non_matched)})")
+                os.remove(f)
 
-        if len(set(non_matched)) > len(set(asm)):
-            print(f"The following functions are unmatched but are also unINCLUDEd: {set(non_matched) - set(asm)}")
-
-            if "--fail-unincluded" in argv:
-                exit(2)
-            elif "--delete-unincluded" in argv or input("Delete them [y/N]? ").upper() == "Y":
-                for func in set(non_matched) - set(asm):
-                    f = next(NONMATCHINGS_DIR.rglob(func + ".s"))
-                    remove(f)
-        else:
-            print(f"warning: The following .s files are INCLUDEd but don't exist: {set(asm) - set(non_matched)}")
+            # Remove empty directories
+            for folder in list(os.walk(NONMATCHINGS_DIR)):
+                if not os.listdir(folder[0]):
+                    os.removedirs(folder[0])

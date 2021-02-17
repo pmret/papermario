@@ -16,11 +16,11 @@ INCLUDE_ASM(s32, "code_77480", collision_check_above);
 
 INCLUDE_ASM(s32, "code_77480", trace_above_player);
 
-INCLUDE_ASM(s32, "code_77480", do_lateral_collision);
+INCLUDE_ASM(s32, "code_77480", do_lateral_collision, s32 arg0, PlayerStatus* arg1, f32* arg2, f32* arg3, f32* arg4, f32 arg5, f32 arg6);
 
 INCLUDE_ASM(s32, "code_77480", func_800DEE5C);
 
-INCLUDE_ASM(s32, "code_77480", func_800DF15C);
+INCLUDE_ASM(s32, "code_77480", func_800DF15C, PlayerStatus* arg0, f32* arg1, f32* arg2, f32* arg3, s32 arg4, f32 arg5, s32* arg6);
 
 void func_800DF3FC(f32* arg0, f32* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5) {
     f32 temp = (arg2 * arg4) + (arg3 * arg5);
