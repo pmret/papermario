@@ -21,9 +21,9 @@ glabel func_802414BC_D65A9C
 /* D65ADC 802414FC 00431021 */  addu      $v0, $v0, $v1
 /* D65AE0 80241500 000210C0 */  sll       $v0, $v0, 3
 /* D65AE4 80241504 44060000 */  mfc1      $a2, $f0
-/* D65AE8 80241508 3C01800B */  lui       $at, %hi(D_800B1DEC)
+/* D65AE8 80241508 3C01800B */  lui       $at, %hi(gCameras+0x6C)
 /* D65AEC 8024150C 00220821 */  addu      $at, $at, $v0
-/* D65AF0 80241510 C4201DEC */  lwc1      $f0, %lo(D_800B1DEC)($at)
+/* D65AF0 80241510 C4201DEC */  lwc1      $f0, %lo(gCameras+0x6C)($at)
 /* D65AF4 80241514 3C013F80 */  lui       $at, 0x3f80
 /* D65AF8 80241518 4481A000 */  mtc1      $at, $f20
 /* D65AFC 8024151C 46001080 */  add.s     $f2, $f2, $f0

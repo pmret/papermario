@@ -1,5 +1,17 @@
 #include "common.h"
 
+typedef s32 TlbEntry[0x1000 / 4];
+typedef TlbEntry TlbMappablePage[15];
+
+extern TlbMappablePage D_80197000;
+extern EffectTableEntry D_8007F210[135];
+
+#define EFFECT_LOADED 1
+
+extern EffectInstance* D_800B4398[96]; //effectInstanceList
+extern Effect D_800A4000[15];
+extern void* D_80059C80;
+
 INCLUDE_ASM(s32, "code_341d0", func_80058DD0);
 
 INCLUDE_ASM(s32, "code_341d0", func_80058E84);
@@ -30,12 +42,6 @@ void func_80059D48(void) {
 }
 
 INCLUDE_ASM(s32, "code_341d0", update_effects);
-
-#define EFFECT_LOADED 1
-
-extern EffectInstance* D_800B4398[96]; //effectInstanceList
-extern Effect D_800A4000[15];
-extern void* D_80059C80;
 
 s32 render_effects(void) {
     EffectInstance** curEffectInst;
@@ -159,12 +165,6 @@ void remove_all_effects(void) {
         }
     }
 }
-
-typedef s32 TlbEntry[0x1000 / 4];
-typedef TlbEntry TlbMappablePage[15];
-
-extern TlbMappablePage D_80197000;
-extern EffectTableEntry D_8007F210[135];
 
 s32 load_effect(s32 effectIndex) {
     EffectTableEntry* effectTable = &D_8007F210[0];

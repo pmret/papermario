@@ -1,7 +1,5 @@
 #include "common.h"
 
-extern f32 D_800B1DEC;
-
 void update_player_input(void) {
     PlayerStatus* ps = &gPlayerStatus;
     PlayerStatus* playerStatus = ps; // ??? necessary
@@ -64,7 +62,7 @@ void input_to_move_vector(f32* angle, f32* magnitude) {
         mag = 70.0f;
     }
 
-    ang = clamp_angle(atan2(0.0f, 0.0f, stickAxisX, stickAxisY) + D_800B1DEC);
+    ang = clamp_angle(atan2(0.0f, 0.0f, stickAxisX, stickAxisY) + gCameras[0].currentYaw);
     if (mag == 0.0f) {
         ang = gPlayerStatus.targetYaw;
     }

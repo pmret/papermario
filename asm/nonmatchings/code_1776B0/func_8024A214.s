@@ -6,8 +6,8 @@ glabel func_8024A214
 /* 178AF8 8024A218 AFB20028 */  sw        $s2, 0x28($sp)
 /* 178AFC 8024A21C 00A0902D */  daddu     $s2, $a1, $zero
 /* 178B00 8024A220 AFB10024 */  sw        $s1, 0x24($sp)
-/* 178B04 8024A224 3C11800B */  lui       $s1, %hi(D_800B22D8)
-/* 178B08 8024A228 263122D8 */  addiu     $s1, $s1, %lo(D_800B22D8)
+/* 178B04 8024A224 3C11800B */  lui       $s1, %hi(gCameras+0x558)
+/* 178B08 8024A228 263122D8 */  addiu     $s1, $s1, %lo(gCameras+0x558)
 /* 178B0C 8024A22C 3C02802A */  lui       $v0, %hi(D_8029F27C)
 /* 178B10 8024A230 9442F27C */  lhu       $v0, %lo(D_8029F27C)($v0)
 /* 178B14 8024A234 3C04800E */  lui       $a0, %hi(gBattleStatus)

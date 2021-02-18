@@ -18,19 +18,22 @@ glabel update_fall_state
 /* 7C1FC 800E2D4C 2C620014 */  sltiu     $v0, $v1, 0x14
 /* 7C200 800E2D50 10400045 */  beqz      $v0, .L800E2E68
 /* 7C204 800E2D54 00031080 */   sll      $v0, $v1, 2
-/* 7C208 800E2D58 3C018011 */  lui       $at, %hi(D_8010BD98)
+/* 7C208 800E2D58 3C018011 */  lui       $at, %hi(jtbl_8010BD98)
 /* 7C20C 800E2D5C 00220821 */  addu      $at, $at, $v0
-/* 7C210 800E2D60 8C22BD98 */  lw        $v0, %lo(D_8010BD98)($at)
+/* 7C210 800E2D60 8C22BD98 */  lw        $v0, %lo(jtbl_8010BD98)($at)
 /* 7C214 800E2D64 00400008 */  jr        $v0
 /* 7C218 800E2D68 00000000 */   nop
+glabel L800E2D6C_7C21C
 /* 7C21C 800E2D6C 0C038AEC */  jal       func_800E2BB0
 /* 7C220 800E2D70 00000000 */   nop
 /* 7C224 800E2D74 08038BD3 */  j         .L800E2F4C
 /* 7C228 800E2D78 00000000 */   nop
+glabel L800E2D7C_7C22C
 /* 7C22C 800E2D7C 0C038A72 */  jal       func_800E29C8
 /* 7C230 800E2D80 00000000 */   nop
 /* 7C234 800E2D84 08038BD3 */  j         .L800E2F4C
 /* 7C238 800E2D88 00000000 */   nop
+glabel L800E2D8C_7C23C
 /* 7C23C 800E2D8C 0C038D12 */  jal       integrate_gravity
 /* 7C240 800E2D90 00000000 */   nop
 /* 7C244 800E2D94 C600002C */  lwc1      $f0, 0x2c($s0)
@@ -59,6 +62,7 @@ glabel update_fall_state
 /* 7C2A0 800E2DF0 E6000070 */  swc1      $f0, 0x70($s0)
 /* 7C2A4 800E2DF4 08038B94 */  j         .L800E2E50
 /* 7C2A8 800E2DF8 E6020074 */   swc1     $f2, 0x74($s0)
+glabel L800E2DFC_7C2AC
 /* 7C2AC 800E2DFC C6000070 */  lwc1      $f0, 0x70($s0)
 /* 7C2B0 800E2E00 3C014012 */  lui       $at, 0x4012
 /* 7C2B4 800E2E04 44811800 */  mtc1      $at, $f3
@@ -79,7 +83,7 @@ glabel update_fall_state
 /* 7C2F0 800E2E40 0C0389AC */  jal       func_800E26B0
 /* 7C2F4 800E2E44 00000000 */   nop
 .L800E2E48:
-/* 7C2F8 800E2E48 0C038C1B */  jal       gravity_use_fall_parms
+/* 7C2F8 800E2E48 0C038C1B */  jal       gravity_use_fall_params
 /* 7C2FC 800E2E4C 00000000 */   nop
 .L800E2E50:
 /* 7C300 800E2E50 0C038D12 */  jal       integrate_gravity
@@ -89,6 +93,7 @@ glabel update_fall_state
 /* 7C310 800E2E60 08038BD3 */  j         .L800E2F4C
 /* 7C314 800E2E64 00000000 */   nop
 .L800E2E68:
+glabel L800E2E68_7C318
 /* 7C318 800E2E68 8E0200DC */  lw        $v0, 0xdc($s0)
 /* 7C31C 800E2E6C 30428000 */  andi      $v0, $v0, 0x8000
 /* 7C320 800E2E70 1440001B */  bnez      $v0, .L800E2EE0
@@ -131,7 +136,7 @@ glabel update_fall_state
 /* 7C3B0 800E2F00 00000000 */   nop
 /* 7C3B4 800E2F04 0C0389AC */  jal       func_800E26B0
 /* 7C3B8 800E2F08 00000000 */   nop
-/* 7C3BC 800E2F0C 0C038C1B */  jal       gravity_use_fall_parms
+/* 7C3BC 800E2F0C 0C038C1B */  jal       gravity_use_fall_params
 /* 7C3C0 800E2F10 00000000 */   nop
 /* 7C3C4 800E2F14 0C038D12 */  jal       integrate_gravity
 /* 7C3C8 800E2F18 00000000 */   nop
@@ -150,6 +155,7 @@ glabel update_fall_state
 /* 7C3F4 800E2F44 46020000 */  add.s     $f0, $f0, $f2
 /* 7C3F8 800E2F48 E600002C */  swc1      $f0, 0x2c($s0)
 .L800E2F4C:
+glabel L800E2F4C_7C3FC
 /* 7C3FC 800E2F4C 8FBF0014 */  lw        $ra, 0x14($sp)
 /* 7C400 800E2F50 8FB00010 */  lw        $s0, 0x10($sp)
 /* 7C404 800E2F54 D7B40018 */  ldc1      $f20, 0x18($sp)

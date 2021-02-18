@@ -50,9 +50,9 @@ glabel func_802DE3D8
 /* 10157C 802DE48C 000218C0 */  sll       $v1, $v0, 3
 /* 101580 802DE490 00431021 */  addu      $v0, $v0, $v1
 /* 101584 802DE494 000210C0 */  sll       $v0, $v0, 3
-/* 101588 802DE498 3C01800B */  lui       $at, %hi(D_800B1DEC)
+/* 101588 802DE498 3C01800B */  lui       $at, %hi(gCameras+0x6C)
 /* 10158C 802DE49C 00220821 */  addu      $at, $at, $v0
-/* 101590 802DE4A0 C4221DEC */  lwc1      $f2, %lo(D_800B1DEC)($at)
+/* 101590 802DE4A0 C4221DEC */  lwc1      $f2, %lo(gCameras+0x6C)($at)
 /* 101594 802DE4A4 44850000 */  mtc1      $a1, $f0
 /* 101598 802DE4A8 00000000 */  nop
 /* 10159C 802DE4AC 46800020 */  cvt.s.w   $f0, $f0

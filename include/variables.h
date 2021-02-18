@@ -72,12 +72,15 @@ extern Npc* gPlayerNpcPtr;
 extern CollisionData gCollisionData;
 
 extern s8 D_800A0900;
+extern f32 D_800F7B60[];
+extern s16 D_800F7B80;
 extern EncounterStatus gCurrentEncounter;
 extern s8* D_801512F0;
 extern s16 D_80151308;
 extern s32 D_80151310;
 extern s16* D_80151328;
 
+extern s32 D_8010C92C;
 extern s16 D_8010CD10;
 extern s16 D_8010CD12;
 extern s32 D_8010CD20;
@@ -225,7 +228,7 @@ extern s32 D_801086AC;
 extern s32 D_801083D8;
 extern s32 D_80108068;
 extern s32 D_80104BEC;
-extern UNK_TYPE D_8010F250; // play_sound state struct?
+extern Temp8010F250 D_8010F250; // play_sound state struct?
 extern s8 D_8010EBB0[];
 
 // Effects

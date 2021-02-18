@@ -17,9 +17,9 @@ glabel func_802444E8_A2E728
 /* A2E758 80244518 000320C0 */  sll       $a0, $v1, 3
 /* A2E75C 8024451C 00641821 */  addu      $v1, $v1, $a0
 /* A2E760 80244520 000318C0 */  sll       $v1, $v1, 3
-/* A2E764 80244524 3C01800B */  lui       $at, %hi(D_800B1DEC)
+/* A2E764 80244524 3C01800B */  lui       $at, %hi(gCameras+0x6C)
 /* A2E768 80244528 00230821 */  addu      $at, $at, $v1
-/* A2E76C 8024452C C4221DEC */  lwc1      $f2, %lo(D_800B1DEC)($at)
+/* A2E76C 8024452C C4221DEC */  lwc1      $f2, %lo(gCameras+0x6C)($at)
 /* A2E770 80244530 46020001 */  sub.s     $f0, $f0, $f2
 /* A2E774 80244534 0040182D */  daddu     $v1, $v0, $zero
 /* A2E778 80244538 E4600034 */  swc1      $f0, 0x34($v1)

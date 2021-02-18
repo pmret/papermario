@@ -5,7 +5,6 @@ options:
   compiler: GCC
   mnemonic_ljust: 10
   ld_o_replace_extension: False
-  ld_addrs_header: include/ld_addrs.h
   extensions: splat_ext
   symbol_addrs_path: tools/symbol_addrs.txt
   platform: n64
@@ -266,6 +265,7 @@ segments:
   - type: code
     start: 0x759B0
     vram: 0x800DC500
+    subalign: 4
     subsections:
     - [0x759b0, c, code_759b0_len_61b0]
     - [0x77480, c]
@@ -281,15 +281,16 @@ segments:
     - [0x90FE0, .data, code_759b0_len_61b0]
     - [0x913B0, .data, world/actions]
     - [0x914E0, .data, world/partners]
-  - [0x917EC, bin]
-  - [0x93CD0, ci4,     ui/hammer, 32, 32]
-  - [0x93ED0, palette, ui/hammer]
-  - [0x93EF0, palette, ui/hammer.disabled]
-  - [0x93FF0, bin]
-  - [0x9D658, rgba32,  ui/stat_heart, 16, 16]
-  - [0x9DA58, bin]
-  - [0x9DA60, rgba32,  ui/stat_flower, 16, 16]
-  - [0x9DE60, bin]
+    - [0x917EC, data]
+    - [0x93CD0, ci4,     ui/hammer, 32, 32]
+    - [0x93ED0, palette, ui/hammer]
+    - [0x93EF0, palette, ui/hammer.disabled]
+    - [0x93FF0, data]
+    - [0x9D658, rgba32,  ui/stat_heart, 16, 16]
+    - [0x9DA58, data]
+    - [0x9DA60, rgba32,  ui/stat_flower, 16, 16]
+    - [0x9DE60, data]
+    - [0xA5100, rodata]
   - type: code
     start: 0xA5DD0
     vram: 0x8010F6D0

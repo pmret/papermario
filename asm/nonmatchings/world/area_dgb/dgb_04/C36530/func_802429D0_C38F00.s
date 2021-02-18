@@ -30,9 +30,9 @@ glabel func_802429D0_C38F00
 /* C38F64 80242A34 000320C0 */  sll       $a0, $v1, 3
 /* C38F68 80242A38 00641821 */  addu      $v1, $v1, $a0
 /* C38F6C 80242A3C 000318C0 */  sll       $v1, $v1, 3
-/* C38F70 80242A40 3C01800B */  lui       $at, %hi(D_800B1DEC)
+/* C38F70 80242A40 3C01800B */  lui       $at, %hi(gCameras+0x6C)
 /* C38F74 80242A44 00230821 */  addu      $at, $at, $v1
-/* C38F78 80242A48 C42C1DEC */  lwc1      $f12, %lo(D_800B1DEC)($at)
+/* C38F78 80242A48 C42C1DEC */  lwc1      $f12, %lo(gCameras+0x6C)($at)
 /* C38F7C 80242A4C 0C00A88D */  jal       sin_cos_deg
 /* C38F80 80242A50 0040A82D */   daddu    $s5, $v0, $zero
 /* C38F84 80242A54 1200005D */  beqz      $s0, .L80242BCC

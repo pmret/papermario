@@ -4,8 +4,8 @@
 glabel func_8024B9A0
 /* 17A280 8024B9A0 27BDFFB0 */  addiu     $sp, $sp, -0x50
 /* 17A284 8024B9A4 AFB00018 */  sw        $s0, 0x18($sp)
-/* 17A288 8024B9A8 3C10800B */  lui       $s0, %hi(D_800B22D8)
-/* 17A28C 8024B9AC 261022D8 */  addiu     $s0, $s0, %lo(D_800B22D8)
+/* 17A288 8024B9A8 3C10800B */  lui       $s0, %hi(gCameras+0x558)
+/* 17A28C 8024B9AC 261022D8 */  addiu     $s0, $s0, %lo(gCameras+0x558)
 /* 17A290 8024B9B0 AFBF001C */  sw        $ra, 0x1c($sp)
 /* 17A294 8024B9B4 F7BE0048 */  sdc1      $f30, 0x48($sp)
 /* 17A298 8024B9B8 F7BC0040 */  sdc1      $f28, 0x40($sp)

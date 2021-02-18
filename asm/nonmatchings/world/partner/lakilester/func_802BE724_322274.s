@@ -495,9 +495,9 @@ glabel func_802BE724_322274
 /* 3229B0 802BEE60 000310C0 */  sll       $v0, $v1, 3
 /* 3229B4 802BEE64 00621821 */  addu      $v1, $v1, $v0
 /* 3229B8 802BEE68 000318C0 */  sll       $v1, $v1, 3
-/* 3229BC 802BEE6C 3C07800B */  lui       $a3, %hi(D_800B1DEC)
+/* 3229BC 802BEE6C 3C07800B */  lui       $a3, %hi(gCameras+0x6C)
 /* 3229C0 802BEE70 00E33821 */  addu      $a3, $a3, $v1
-/* 3229C4 802BEE74 8CE71DEC */  lw        $a3, %lo(D_800B1DEC)($a3)
+/* 3229C4 802BEE74 8CE71DEC */  lw        $a3, %lo(gCameras+0x6C)($a3)
 /* 3229C8 802BEE78 0C00A7E7 */  jal       add_vec2D_polar
 /* 3229CC 802BEE7C 0260282D */   daddu    $a1, $s3, $zero
 /* 3229D0 802BEE80 080AFCD7 */  j         .L802BF35C
@@ -891,7 +891,7 @@ glabel func_802BE724_322274
 .L802BF434:
 /* 322F84 802BF434 0C039769 */  jal       set_action_state
 /* 322F88 802BF438 24040008 */   addiu    $a0, $zero, 8
-/* 322F8C 802BF43C 0C038C1B */  jal       gravity_use_fall_parms
+/* 322F8C 802BF43C 0C038C1B */  jal       gravity_use_fall_params
 /* 322F90 802BF440 00000000 */   nop
 /* 322F94 802BF444 2402000B */  addiu     $v0, $zero, 0xb
 /* 322F98 802BF448 080AFD30 */  j         .L802BF4C0

@@ -55,7 +55,7 @@ glabel func_800E29C8
 /* 7BF38 800E2A88 00000000 */   nop
 /* 7BF3C 800E2A8C 0C0389AC */  jal       func_800E26B0
 /* 7BF40 800E2A90 00000000 */   nop
-/* 7BF44 800E2A94 0C038C1B */  jal       gravity_use_fall_parms
+/* 7BF44 800E2A94 0C038C1B */  jal       gravity_use_fall_params
 /* 7BF48 800E2A98 00000000 */   nop
 /* 7BF4C 800E2A9C 0C038D12 */  jal       integrate_gravity
 /* 7BF50 800E2AA0 00000000 */   nop

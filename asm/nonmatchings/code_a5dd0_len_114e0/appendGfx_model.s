@@ -1811,9 +1811,9 @@ glabel L80114690_AAD90
 /* AB120 80114A20 000218C0 */  sll       $v1, $v0, 3
 /* AB124 80114A24 00431021 */  addu      $v0, $v0, $v1
 /* AB128 80114A28 000210C0 */  sll       $v0, $v0, 3
-/* AB12C 80114A2C 3C01800B */  lui       $at, %hi(D_800B1F84)
+/* AB12C 80114A2C 3C01800B */  lui       $at, %hi(gCameras+0x204)
 /* AB130 80114A30 00220821 */  addu      $at, $at, $v0
-/* AB134 80114A34 8C221F84 */  lw        $v0, %lo(D_800B1F84)($at)
+/* AB134 80114A34 8C221F84 */  lw        $v0, %lo(gCameras+0x204)($at)
 /* AB138 80114A38 24A50008 */  addiu     $a1, $a1, 8
 /* AB13C 80114A3C AE050000 */  sw        $a1, ($s0)
 /* AB140 80114A40 12E00002 */  beqz      $s7, .L80114A4C

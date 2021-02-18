@@ -23,9 +23,9 @@ glabel appendGfx_player
 /* 7A7EC 800E133C 00431021 */  addu      $v0, $v0, $v1
 /* 7A7F0 800E1340 000210C0 */  sll       $v0, $v0, 3
 /* 7A7F4 800E1344 24030011 */  addiu     $v1, $zero, 0x11
-/* 7A7F8 800E1348 3C01800B */  lui       $at, %hi(D_800B1DEC)
+/* 7A7F8 800E1348 3C01800B */  lui       $at, %hi(gCameras+0x6C)
 /* 7A7FC 800E134C 00220821 */  addu      $at, $at, $v0
-/* 7A800 800E1350 C4201DEC */  lwc1      $f0, %lo(D_800B1DEC)($at)
+/* 7A800 800E1350 C4201DEC */  lwc1      $f0, %lo(gCameras+0x6C)($at)
 /* 7A804 800E1354 824200B4 */  lb        $v0, 0xb4($s2)
 /* 7A808 800E1358 14430035 */  bne       $v0, $v1, .L800E1430
 /* 7A80C 800E135C 46000687 */   neg.s    $f26, $f0

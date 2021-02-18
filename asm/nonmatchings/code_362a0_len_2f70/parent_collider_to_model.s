@@ -7,8 +7,8 @@ glabel parent_collider_to_model
 /* 36B88 8005B788 00042403 */  sra       $a0, $a0, 0x10
 /* 36B8C 8005B78C 000410C0 */  sll       $v0, $a0, 3
 /* 36B90 8005B790 00441023 */  subu      $v0, $v0, $a0
-/* 36B94 8005B794 3C03800B */  lui       $v1, %hi(D_800B42E4)
-/* 36B98 8005B798 8C6342E4 */  lw        $v1, %lo(D_800B42E4)($v1)
+/* 36B94 8005B794 3C03800B */  lui       $v1, %hi(gCollisionData+0x4)
+/* 36B98 8005B798 8C6342E4 */  lw        $v1, %lo(gCollisionData+0x4)($v1)
 /* 36B9C 8005B79C 00021080 */  sll       $v0, $v0, 2
 /* 36BA0 8005B7A0 AFB30024 */  sw        $s3, 0x24($sp)
 /* 36BA4 8005B7A4 0000982D */  daddu     $s3, $zero, $zero

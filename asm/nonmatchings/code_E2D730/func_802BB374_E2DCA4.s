@@ -45,8 +45,8 @@ glabel func_802BB374_E2DCA4
 /* E2DD44 802BB414 30A5FFFF */  andi      $a1, $a1, 0xffff
 /* E2DD48 802BB418 0C019D60 */  jal       guMtxL2F
 /* E2DD4C 802BB41C 00452821 */   addu     $a1, $v0, $a1
-/* E2DD50 802BB420 3C01800B */  lui       $at, %hi(D_800B1DEC)
-/* E2DD54 802BB424 C42C1DEC */  lwc1      $f12, %lo(D_800B1DEC)($at)
+/* E2DD50 802BB420 3C01800B */  lui       $at, %hi(gCameras+0x6C)
+/* E2DD54 802BB424 C42C1DEC */  lwc1      $f12, %lo(gCameras+0x6C)($at)
 /* E2DD58 802BB428 3C014334 */  lui       $at, 0x4334
 /* E2DD5C 802BB42C 44810000 */  mtc1      $at, $f0
 /* E2DD60 802BB430 00000000 */  nop

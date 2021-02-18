@@ -173,7 +173,7 @@ glabel func_802B609C_E28ACC
 /* E28D4C 802B631C 00000000 */   nop
 /* E28D50 802B6320 0C039769 */  jal       set_action_state
 /* E28D54 802B6324 24040008 */   addiu    $a0, $zero, 8
-/* E28D58 802B6328 0C038C1B */  jal       gravity_use_fall_parms
+/* E28D58 802B6328 0C038C1B */  jal       gravity_use_fall_params
 /* E28D5C 802B632C 00000000 */   nop
 .L802B6330:
 /* E28D60 802B6330 8FBF005C */  lw        $ra, 0x5c($sp)

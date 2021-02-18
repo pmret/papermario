@@ -118,8 +118,8 @@ glabel func_802BD5D8_3174F8
 /* 31768C 802BD76C 00431024 */  and       $v0, $v0, $v1
 /* 317690 802BD770 AE020000 */  sw        $v0, ($s0)
 /* 317694 802BD774 AE440028 */  sw        $a0, 0x28($s2)
-/* 317698 802BD778 3C01800B */  lui       $at, %hi(D_800B1DEC)
-/* 31769C 802BD77C C42C1DEC */  lwc1      $f12, %lo(D_800B1DEC)($at)
+/* 317698 802BD778 3C01800B */  lui       $at, %hi(gCameras+0x6C)
+/* 31769C 802BD77C C42C1DEC */  lwc1      $f12, %lo(gCameras+0x6C)($at)
 /* 3176A0 802BD780 C60000A8 */  lwc1      $f0, 0xa8($s0)
 /* 3176A4 802BD784 46006300 */  add.s     $f12, $f12, $f0
 /* 3176A8 802BD788 3C0142B4 */  lui       $at, 0x42b4

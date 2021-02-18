@@ -151,9 +151,9 @@ glabel func_802B6000_E25D60
 /* E25F84 802B6224 000218C0 */  sll       $v1, $v0, 3
 /* E25F88 802B6228 00431021 */  addu      $v0, $v0, $v1
 /* E25F8C 802B622C 000210C0 */  sll       $v0, $v0, 3
-/* E25F90 802B6230 3C01800B */  lui       $at, %hi(D_800B1DEC)
+/* E25F90 802B6230 3C01800B */  lui       $at, %hi(gCameras+0x6C)
 /* E25F94 802B6234 00220821 */  addu      $at, $at, $v0
-/* E25F98 802B6238 C42C1DEC */  lwc1      $f12, %lo(D_800B1DEC)($at)
+/* E25F98 802B6238 C42C1DEC */  lwc1      $f12, %lo(gCameras+0x6C)($at)
 /* E25F9C 802B623C 0C00A6C9 */  jal       clamp_angle
 /* E25FA0 802B6240 460C0301 */   sub.s    $f12, $f0, $f12
 /* E25FA4 802B6244 3C014334 */  lui       $at, 0x4334
@@ -308,9 +308,9 @@ glabel func_802B6000_E25D60
 /* E261D0 802B6470 000218C0 */  sll       $v1, $v0, 3
 /* E261D4 802B6474 00431021 */  addu      $v0, $v0, $v1
 /* E261D8 802B6478 000210C0 */  sll       $v0, $v0, 3
-/* E261DC 802B647C 3C01800B */  lui       $at, %hi(D_800B1DEC)
+/* E261DC 802B647C 3C01800B */  lui       $at, %hi(gCameras+0x6C)
 /* E261E0 802B6480 00220821 */  addu      $at, $at, $v0
-/* E261E4 802B6484 C42C1DEC */  lwc1      $f12, %lo(D_800B1DEC)($at)
+/* E261E4 802B6484 C42C1DEC */  lwc1      $f12, %lo(gCameras+0x6C)($at)
 /* E261E8 802B6488 0C00A6C9 */  jal       clamp_angle
 /* E261EC 802B648C 460C0301 */   sub.s    $f12, $f0, $f12
 /* E261F0 802B6490 3C0140C9 */  lui       $at, 0x40c9
@@ -422,9 +422,9 @@ glabel func_802B6000_E25D60
 /* E26380 802B6620 000218C0 */  sll       $v1, $v0, 3
 /* E26384 802B6624 00431021 */  addu      $v0, $v0, $v1
 /* E26388 802B6628 000210C0 */  sll       $v0, $v0, 3
-/* E2638C 802B662C 3C01800B */  lui       $at, %hi(D_800B1DEC)
+/* E2638C 802B662C 3C01800B */  lui       $at, %hi(gCameras+0x6C)
 /* E26390 802B6630 00220821 */  addu      $at, $at, $v0
-/* E26394 802B6634 C42C1DEC */  lwc1      $f12, %lo(D_800B1DEC)($at)
+/* E26394 802B6634 C42C1DEC */  lwc1      $f12, %lo(gCameras+0x6C)($at)
 /* E26398 802B6638 0C00A6C9 */  jal       clamp_angle
 /* E2639C 802B663C 460C0301 */   sub.s    $f12, $f0, $f12
 /* E263A0 802B6640 3C0140C9 */  lui       $at, 0x40c9

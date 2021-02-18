@@ -177,7 +177,7 @@ void func_802E44F8(void) {
     playerStatus->currentSpeed = 0.0f;
     playerStatus->flags |= 0x800000;
     set_action_state(8);
-    gravity_use_fall_parms();
+    gravity_use_fall_params();
 }
 
 void func_802E4540(void) {

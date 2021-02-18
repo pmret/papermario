@@ -4,8 +4,8 @@
 glabel func_8024C944
 /* 17B224 8024C944 27BDFFC0 */  addiu     $sp, $sp, -0x40
 /* 17B228 8024C948 AFB00030 */  sw        $s0, 0x30($sp)
-/* 17B22C 8024C94C 3C10800B */  lui       $s0, %hi(D_800B22D8)
-/* 17B230 8024C950 261022D8 */  addiu     $s0, $s0, %lo(D_800B22D8)
+/* 17B22C 8024C94C 3C10800B */  lui       $s0, %hi(gCameras+0x558)
+/* 17B230 8024C950 261022D8 */  addiu     $s0, $s0, %lo(gCameras+0x558)
 /* 17B234 8024C954 3C06800E */  lui       $a2, %hi(gBattleStatus)
 /* 17B238 8024C958 24C6C070 */  addiu     $a2, $a2, %lo(gBattleStatus)
 /* 17B23C 8024C95C AFBF0034 */  sw        $ra, 0x34($sp)

@@ -81,9 +81,9 @@ glabel render_sprite
 /* 100E4C 802DDD5C 000218C0 */  sll       $v1, $v0, 3
 /* 100E50 802DDD60 00431021 */  addu      $v0, $v0, $v1
 /* 100E54 802DDD64 000210C0 */  sll       $v0, $v0, 3
-/* 100E58 802DDD68 3C01800B */  lui       $at, %hi(D_800B1DEC)
+/* 100E58 802DDD68 3C01800B */  lui       $at, %hi(gCameras+0x6C)
 /* 100E5C 802DDD6C 00220821 */  addu      $at, $at, $v0
-/* 100E60 802DDD70 C4201DEC */  lwc1      $f0, %lo(D_800B1DEC)($at)
+/* 100E60 802DDD70 C4201DEC */  lwc1      $f0, %lo(gCameras+0x6C)($at)
 /* 100E64 802DDD74 46000007 */  neg.s     $f0, $f0
 /* 100E68 802DDD78 4600008D */  trunc.w.s $f2, $f0
 /* 100E6C 802DDD7C 44021000 */  mfc1      $v0, $f2
