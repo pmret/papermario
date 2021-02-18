@@ -13,7 +13,7 @@ pipeline {
     stages {
         stage('Setup') {
             steps {
-                sh './configure.py --baserom /usr/local/etc/roms/baserom_pm.z64'
+                sh './configure.py --baserom /usr/local/etc/roms/papermario.us.z64'
             }
         }
         stage('Build') {
