@@ -57,8 +57,8 @@ s32 D_800F7FFC = 7;
 s32 D_800F8000[] = { 8, 0, 0, 0 };
 s32 D_800F8010[] = { 0x003251D0, 0x00325AD0, (s32)&D_802C05CC, 0x00000000 };
 s32 D_800F8020 = 0;
-f32 D_800F8024 = 0.0f;
-f32 D_800F8028 = 0.0f;
+s32 D_800F8024 = 0;
+s32 D_800F8028 = 0;
 s32 D_800F802C = 0;
 f32 D_800F8030 = 0.0f;
 s8 D_800F8034[] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
@@ -267,9 +267,13 @@ s32 world_partner_can_player_pause_default(Npc* partner) {
 
 INCLUDE_ASM(s32, "world/partners", func_800EA52C);
 
-INCLUDE_ASM(s32, "world/partners", is_current_partner_flying, void);
+s32 is_current_partner_flying(void) {
+    return !D_8010CFEC->isFlying;
+}
 
-INCLUDE_ASM(s32, "world/partners", func_800EA5B8);
+void func_800EA5B8(s32* arg0) {
+    *arg0 &= ~0x2007800;
+}
 
 void load_partner_npc(void) {
     WorldPartner* partnerEntry = &wPartners[D_8010CFD8];
@@ -311,7 +315,9 @@ void load_partner_npc(void) {
     D_8010C954 = 0;
 }
 
-INCLUDE_ASM(s32, "world/partners", func_800EA6A8);
+void func_800EA6A8(void) {
+    free_npc_by_index(D_8010CFD0);
+}
 
 INCLUDE_ASM(s32, "world/partners", _use_partner_ability);
 
@@ -333,7 +339,14 @@ INCLUDE_ASM(s32, "world/partners", partner_initialize_data);
 
 INCLUDE_ASM(s32, "world/partners", partner_test_enemy_collision);
 
-INCLUDE_ASM(s32, "world/partners", partner_get_ride_script);
+Bytecode* partner_get_ride_script(void) {
+    WorldPartner* partner = D_8010CFEC;
+
+    if (partner == NULL) {
+        return NULL;
+    }
+    return partner->whileRiding;
+}
 
 INCLUDE_ASM(s32, "world/partners", partner_handle_before_battle);
 
@@ -361,41 +374,92 @@ INCLUDE_ASM(void, "world/partners", func_800ED5D0, Npc* partner);
 
 INCLUDE_ASM(s32, "world/partners", func_800ED9F8);
 
-INCLUDE_ASM(s32, "world/partners", func_800EE994);
+extern f32 D_8010CFC0;
+extern s16 D_8010CFC8;
+extern s16 D_8010CFCA;
+extern s16 D_8010CFCE;
+
+s32 func_800EE994(Npc* arg0) {
+    arg0->unk_80 = 0x10000;
+    D_8010CFC8 = 0;
+    arg0->flags |= 0x100;
+    return D_8010CFC8;
+}
 
 INCLUDE_ASM(s32, "world/partners", func_800EE9B8);
 
-INCLUDE_ASM(s32, "world/partners", func_800EECC4);
+s32 func_800EECC4(Npc* arg0) {
+    arg0->unk_80 = 0x10000;
+    D_8010CFC8 = 0;
+    arg0->flags |= 0x100;
+    return D_8010CFC8;
+}
 
 INCLUDE_ASM(s32, "world/partners", func_800EECE8);
 
-INCLUDE_ASM(s32, "world/partners", func_800EF300);
+void func_800EF300(void) {
+    D_8010CFC8 = 40;
+}
 
-INCLUDE_ASM(s32, "world/partners", func_800EF314);
+void func_800EF314(void) {
+    D_8010CFC8 = 50;
+}
 
 INCLUDE_ASM(void, "world/partners", enable_partner_ai, void);
 
-INCLUDE_ASM(s32, "world/partners", set_parter_tether_distance, f32 arg0);
+void set_parter_tether_distance(f32 arg0) {
+    D_8010CFC0 = arg0;
+}
 
-INCLUDE_ASM(s32, "world/partners", reset_parter_tether_distance);
+void reset_parter_tether_distance(void) {
+    D_8010CFC0 = 40.0f;
+}
 
-INCLUDE_ASM(s32, "world/partners", func_800EF3C0);
+void func_800EF3C0(s32 arg0, s32 arg1) {
+    D_800F8024 = arg0;
+    D_800F8028 = arg1;
+}
 
-INCLUDE_ASM(s32, "world/partners", func_800EF3D4);
+void func_800EF3D4(s16 arg0) {
+    D_8010CFCA = arg0;
+}
 
-INCLUDE_ASM(s32, "world/partners", func_800EF3E4);
+void func_800EF3E4(void) {
+    D_8010CFC8 = 15;
+    D_8010CFCA = 0;
+    D_800F802C = 10;
+    D_8010CFCE = 0;
+}
 
-INCLUDE_ASM(s32, "world/partners", func_800EF414);
+void func_800EF414(s32 arg0, s32 arg1) {
+    func_800EF3C0(arg0, arg1);
+    D_8010CFC8 = 20;
+}
 
-INCLUDE_ASM(s32, "world/partners", func_800EF43C);
+void func_800EF43C(void) {
+    D_8010CFC8 = 0;
+    D_8010CFCA = 0;
+    D_8010CFCE = 0;
+}
 
 INCLUDE_ASM(void, "world/partners", clear_partner_move_history, Npc* partner);
 
 INCLUDE_ASM(s32, "world/partners", func_800EF4E0);
 
-INCLUDE_ASM(s32, "world/partners", func_800EF600);
+void func_800EF600(void) {
+    s8* temp_8010EBB0 = D_8010EBB0;
 
-INCLUDE_ASM(s32, "world/partners", func_800EF628);
+    temp_8010EBB0[20]--;
+    if (temp_8010EBB0[20] < 0) {
+        temp_8010EBB0[20] = 0;
+    }
+}
+
+void func_800EF628(void) {
+    s8* temp_8010EBB0 = D_8010EBB0;
+
+    temp_8010EBB0[20]++;
+}
 
 INCLUDE_ASM(s32, "world/partners", func_800EF640);
 

@@ -170,7 +170,7 @@ s32 is_current_partner_flying(void);
 void func_800ED5D0(Npc* partner);
 void clear_partner_move_history(Npc* partner);
 
-s32 set_parter_tether_distance(f32);
+void set_parter_tether_distance(f32);
 s32 does_script_exist(s32 id);
 s32 does_script_exist_by_ref(ScriptInstance* script);
 ScriptInstance* start_script(Bytecode* initialLine, s32 priority, s32 initialState);
