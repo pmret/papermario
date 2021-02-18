@@ -23,7 +23,8 @@ s32 func_800E26C4(void) {
         actionState == ActionState_WALK ||
         actionState == ActionState_RUN ||
         actionState == ActionState_USE_TWEESTER ||
-        actionState == ActionState_SPIN) {
+        actionState == ActionState_SPIN)
+    {
         return 1;
     }
 
@@ -36,7 +37,7 @@ s32 func_800E26C4(void) {
                 return 0;
             }
         } else {
-            if ((u32)((u8)temp_8010EBB0[3] - 6) < 2) { // or of things like the partners above
+            if (temp_8010EBB0[3] == 6 || temp_8010EBB0[3] == 7) {
                 return temp_8010EBB0[0] != 0;
             }
             if (temp_8010EBB0[3] == 4) {
@@ -97,7 +98,7 @@ void gravity_use_fall_params(void) {
 void func_800E3100(void) {
     PlayerStatus* playerStatus = PLAYER_STATUS;
 
-    if ((playerStatus->actionState != 7) && (playerStatus->actionState != ActionState_BOUNCE)) {
+    if (playerStatus->actionState != ActionState_7 && playerStatus->actionState != ActionState_BOUNCE) {
         f32* temp;
 
         playerStatus->position.y = func_800E3514(func_800E34D8(), &temp);
@@ -200,7 +201,7 @@ void func_800E4508(void) {
 
         do_lateral_collision(0, playerStatus, &x, &y, &z, temp_64, playerStatus->unk_88);
 
-        temp_64 -= (playerStatus->runSpeed / 10.0f);
+        temp_64 -= playerStatus->runSpeed / 10.0f;
         playerStatus->position.x = x;
         playerStatus->position.y = y;
         playerStatus->position.z = z;
@@ -245,8 +246,8 @@ void func_800E4F10(void) {
     playerStatus->position.x = x;
     playerStatus->position.z = z;
 
-    if ((tempB != 0) && (temp < 0) && (playerStatus->actionState != 0x18) && (playerStatus->currentSpeed != 0.0f)) {
-        set_action_state(0x18);
+    if (tempB != 0 && temp < 0 && playerStatus->actionState != ActionState_18 && playerStatus->currentSpeed != 0.0f) {
+        set_action_state(ActionState_18);
     }
 }
 
@@ -255,8 +256,8 @@ void check_input_midair_jump(void) {
         !(gPlayerStatus.animFlags & 0x4001) &&
         gPlayerStatus.unk_C2 >= 6 &&
         gPlayerStatus.decorationList < 0x12 &&
-        gPlayerStatus.pressedButtons & A_BUTTON) {
-
+        gPlayerStatus.pressedButtons & A_BUTTON)
+    {
         switch (gPlayerData.bootsLevel) {
             case 0:
                 break;
@@ -319,8 +320,7 @@ void func_800E546C(void) {
         angle = 180.0f;
     }
 
-    // TODO LOOK
-    angle = (angle + gCameras[0].currentYaw) + 90.0f;
+    angle = angle + gCameras[0].currentYaw + 90.0f;
 
     clamp_angle(angle);
 }
@@ -500,13 +500,13 @@ void check_input_spin(void) {
             (actionState < 0x22) &&
             (actionState < 3) &&
             (actionState >= 0) &&
-            !(playerStatus->animFlags & 0x10000)) {
-
+            !(playerStatus->animFlags & 0x10000))
+        {
             set_action_state(ActionState_SPIN);
             if (temp_8010F250->unk_01 != 0) {
                 if (temp_8010F250->unk_08 == 0) {
                     if (temp_8010F250->unk_0C == 0) {
-                        playerStatus->prevActionState = 0;
+                        playerStatus->prevActionState = ActionState_IDLE;
                         return;
                     }
                 }
@@ -542,9 +542,6 @@ void func_800E63A4(s32 arg0) {
         playerStatus->colliderDiameter = 38;
     }
 }
-
-Npc* make_disguise_npc(s32 peachDisguise);
-extern s32 D_8010C92C;
 
 // PlayerStatus reuse
 #ifdef NON_MATCHING

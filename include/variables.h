@@ -80,6 +80,7 @@ extern s16 D_80151308;
 extern s32 D_80151310;
 extern s16* D_80151328;
 
+extern s32 D_8010C92C;
 extern s16 D_8010CD10;
 extern s16 D_8010CD12;
 extern s32 D_8010CD20;

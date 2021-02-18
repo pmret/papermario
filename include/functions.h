@@ -83,6 +83,7 @@ void get_model_center_and_size(s32 modelID, f32* centerX, f32* centerY, f32* cen
                                f32* sizeZ);
 s32 collision_main_above(void);
 s32 do_lateral_collision(s32, PlayerStatus*, f32*, f32*, f32*, f32, f32);
+Npc* make_disguise_npc(s32 peachDisguise);
 
 void func_80027088(s32);
 
