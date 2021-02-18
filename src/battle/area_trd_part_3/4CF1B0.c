@@ -43,7 +43,7 @@ ApiStatus func_80218130_4CF2E0(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus func_80218158_4CF308(ScriptInstance* script, s32 isInitialCall) {
-    BattleStatus* battleStatus = BATTLE_STATUS;
+    BattleStatus* battleStatus = &gBattleStatus;
 
     battleStatus->unk_4C = 0;
     battleStatus->unk_5C = 0;
@@ -52,7 +52,7 @@ ApiStatus func_80218158_4CF308(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus func_80218170_4CF320(ScriptInstance* script, s32 isInitialCall) {
-    BattleStatus* battleStatus = BATTLE_STATUS;
+    BattleStatus* battleStatus = &gBattleStatus;
 
     if (isInitialCall) {
         script->functionTemp[0].s = 10;
@@ -69,7 +69,7 @@ ApiStatus func_80218170_4CF320(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus func_802181B4_4CF364(ScriptInstance* script, s32 isInitialCall) {
-    BattleStatus* battleStatus = BATTLE_STATUS;
+    BattleStatus* battleStatus = &gBattleStatus;
 
     if (isInitialCall) {
         script->functionTemp[0].s = 10;
@@ -86,7 +86,7 @@ ApiStatus func_802181B4_4CF364(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus func_802181F8_4CF3A8(ScriptInstance* script, s32 isInitialCall) {
-    PlayerData* playerData = PLAYER_DATA;
+    PlayerData* playerData = &gPlayerData;
 
     playerData->specialBarsFilled += 32;
 

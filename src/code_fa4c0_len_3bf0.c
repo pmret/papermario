@@ -400,7 +400,7 @@ ApiStatus AddBadge(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus RemoveBadge(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    PlayerData* playerData = PLAYER_DATA;
+    PlayerData* playerData = &gPlayerData;
     s32 badge = get_variable(script, *args++);
     s32 i;
 

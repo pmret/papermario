@@ -40,7 +40,7 @@ void update_player_input(void) {
 INCLUDE_ASM(s32, "code_7B440", func_800E205C);
 
 void func_800E22E4(s32* arg0) {
-    PlayerStatus* playerStatus = PLAYER_STATUS;
+    PlayerStatus* playerStatus = &gPlayerStatus;
 
     *arg0 = (u16)playerStatus->currentButtons | (playerStatus->pressedButtons << 16);
 }

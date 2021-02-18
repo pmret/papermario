@@ -1,7 +1,7 @@
 #include "common.h"
 
 ApiStatus func_80282880(ScriptInstance* script, s32 isInitialCall) {
-    PlayerStatus* playerStatus = PLAYER_STATUS;
+    PlayerStatus* playerStatus = &gPlayerStatus;
 
     playerStatus->position.x += (script->varTable[0] - playerStatus->position.x) / 2;
     playerStatus->position.z += (script->varTable[2] - playerStatus->position.z) / 2;

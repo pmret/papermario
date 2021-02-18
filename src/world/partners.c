@@ -323,7 +323,7 @@ INCLUDE_ASM(s32, "world/partners", func_800EB2A4);
 
 INCLUDE_ASM(s32, "world/partners", partner_use_ability);
 
-INCLUDE_ASM(s32, "world/partners", partner_player_can_pause);
+INCLUDE_ASM(s32, "world/partners", partner_player_can_pause, void);
 
 INCLUDE_ASM(s32, "world/partners", partner_can_use_ability);
 

@@ -137,7 +137,7 @@ void func_802E89F8(Entity* entity) {
 void func_802E8A58(Entity* entity) {
     struct802E89B0* temp = entity->dataBuf;
 
-    if (temp->unk_0C == GAME_STATUS->entryID) {
+    if (temp->unk_0C == (*gGameStatusPtr)->entryID) {
         switch (temp->unk_04) {
             case 0:
                 if (gCollisionStatus.currentFloor > 0) {

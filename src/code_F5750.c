@@ -142,7 +142,7 @@ ApiStatus SetPlayerAnimationSpeed(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus PlayerMoveTo(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    PlayerStatus* playerStatus = PLAYER_STATUS;
+    PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (isInitialCall) {
         f32 targetX = get_variable(script, *args++);
@@ -187,7 +187,7 @@ void PlayerJump2(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus InterpPlayerYaw(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    PlayerStatus* playerStatus = PLAYER_STATUS;
+    PlayerStatus* playerStatus = &gPlayerStatus;
     f32* initialYaw = &script->functionTemp[1].f;
     f32* deltaYaw = &script->functionTemp[2].f;
     s32* time = &script->functionTemp[3].s;

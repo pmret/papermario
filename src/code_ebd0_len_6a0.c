@@ -1,13 +1,13 @@
 #include "code_ebd0_len_6a0.h"
 
 void intro_logos_set_fade_alpha(s16 alpha) {
-    GameStatus* gameStatus = GAME_STATUS;
+    GameStatus* gameStatus = *gGameStatusPtr;
 
     gameStatus->bootAlpha = alpha;
 }
 
 void intro_logos_set_fade_color(s16 color) {
-    GameStatus* gameStatus = GAME_STATUS;
+    GameStatus* gameStatus = *gGameStatusPtr;
 
     gameStatus->bootRed = color;
     gameStatus->bootGreen = color;
@@ -15,7 +15,7 @@ void intro_logos_set_fade_color(s16 color) {
 }
 
 s16 intro_logos_fade_in(s16 subtractAlpha) {
-    GameStatus* gameStatus = GAME_STATUS;
+    GameStatus* gameStatus = *gGameStatusPtr;
 
     if (gameStatus->bootAlpha != 0) {
         gameStatus->bootAlpha -= subtractAlpha;
@@ -29,7 +29,7 @@ s16 intro_logos_fade_in(s16 subtractAlpha) {
 }
 
 s16 intro_logos_fade_out(s16 addAlpha) {
-    GameStatus* gameStatus = GAME_STATUS;
+    GameStatus* gameStatus = *gGameStatusPtr;
 
     if (gameStatus->bootAlpha != 0xFF) {
         gameStatus->bootAlpha += addAlpha;
@@ -43,8 +43,8 @@ s16 intro_logos_fade_out(s16 addAlpha) {
 }
 
 void intro_logos_update_fade(void) {
-    set_transition_stencil_zoom_0(0, GAME_STATUS->bootAlpha);
-    set_transition_stencil_color(0, GAME_STATUS->bootBlue, GAME_STATUS->bootGreen, GAME_STATUS->bootRed);
+    set_transition_stencil_zoom_0(0, (*gGameStatusPtr)->bootAlpha);
+    set_transition_stencil_color(0, (*gGameStatusPtr)->bootBlue, (*gGameStatusPtr)->bootGreen, (*gGameStatusPtr)->bootRed);
 }
 
 void begin_state_battle(void) {

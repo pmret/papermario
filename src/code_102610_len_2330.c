@@ -41,7 +41,7 @@ void func_802E117C(void) {
 }
 
 void save_game_at_player_position(void) {
-    GameStatus* gameStatus = GAME_STATUS;
+    GameStatus* gameStatus = *gGameStatusPtr;
 
     gameStatus->savedPos.x = gPlayerStatusPtr->position.x;
     gameStatus->savedPos.y = gPlayerStatusPtr->position.y;

@@ -40,6 +40,7 @@
         "string_view": "c",
         "initializer_list": "c",
         "ranges": "c",
-        "regex": "c"
+        "regex": "c",
+        "variant": "c"
     },
 }

@@ -48,7 +48,7 @@ Shadow* get_shadow_by_index(s32 index) {
 EntityList* get_entity_list(void) {
     EntityList* ret;
 
-    if (!GAME_STATUS->isBattle) {
+    if (!(*gGameStatusPtr)->isBattle) {
         ret = &gWorldEntityList;
     } else {
         ret = &gBattleEntityList;
@@ -59,7 +59,7 @@ EntityList* get_entity_list(void) {
 ShadowList* get_shadow_list(void) {
     ShadowList* ret;
 
-    if (!GAME_STATUS->isBattle) {
+    if (!(*gGameStatusPtr)->isBattle) {
         ret = &gWorldShadowList;
     } else {
         ret = &gBattleShadowList;

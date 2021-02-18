@@ -2,7 +2,7 @@
 #include "map.h"
 
 ApiStatus N(GetPartnerCall800EB168)(ScriptInstance* script, s32 isInitialCall) {
-    set_variable(script, *script->ptrReadPos, PLAYER_DATA->currentPartner);
+    set_variable(script, *script->ptrReadPos, gPlayerData.currentPartner);
     func_800EB168(0);
     return ApiStatus_DONE2;
 }

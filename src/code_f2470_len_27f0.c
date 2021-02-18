@@ -12,7 +12,7 @@ Npc* resolve_npc(ScriptInstance* script, NpcId npcIdOrPtr) {
 }
 
 void set_npc_animation(Npc* npc, u32 arg1) {
-    PlayerData* playerData = PLAYER_DATA;
+    PlayerData* playerData = &gPlayerData;
 
     if (arg1 - 0x101 < 9) {
         npc->currentAnim = gPartnerAnimations[playerData->currentPartner].anims[arg1 - 0x101];

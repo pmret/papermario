@@ -30,7 +30,7 @@ void boot_main(void) {
     crash_create_monitor();
     func_80025C60();
     nuGfxInitEX2();
-    GAME_STATUS->contBitPattern = nuContInit();
+    (*gGameStatusPtr)->contBitPattern = nuContInit();
     func_8002D160();
     func_802B2000();
     func_802B203C();

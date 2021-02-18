@@ -60,7 +60,7 @@ INCLUDE_ASM(s32, "code_6240_len_c00", fio_erase_game);
 INCLUDE_ASM(s32, "code_6240_len_c00", fio_deserialize_state);
 
 void func_8002B608(void) {
-    GAME_STATUS->entryID = 10;
+    (*gGameStatusPtr)->entryID = 10;
     fio_serialize_state();
 }
 
