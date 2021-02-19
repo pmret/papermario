@@ -256,4 +256,8 @@ void func_80070B50(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4);
 void func_800718D0(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
 void func_80070BB0(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
 
+// Dead functions:
+Npc* func_8003E534(NpcId npcId); // get_npc_safe
+void func_80075170(s32, f32, f32, f32, f32); // func_8006FEF0
+
 #endif

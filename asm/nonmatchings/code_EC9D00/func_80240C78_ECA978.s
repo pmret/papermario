@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80240C78_ECA978
+glabel nonmatchings_UnkPartnerPosFunc
 /* ECA978 80240C78 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* ECA97C 80240C7C AFBF0018 */  sw        $ra, 0x18($sp)
 /* ECA980 80240C80 0C00F94D */  jal       func_8003E534

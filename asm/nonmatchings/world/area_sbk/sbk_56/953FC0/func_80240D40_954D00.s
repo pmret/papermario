@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80240D40_954D00
+glabel sbk_56_UnkPartnerPosFunc
 /* 954D00 80240D40 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 954D04 80240D44 AFBF0018 */  sw        $ra, 0x18($sp)
 /* 954D08 80240D48 0C00EAD2 */  jal       get_npc_safe

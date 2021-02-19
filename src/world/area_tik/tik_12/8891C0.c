@@ -40,8 +40,6 @@ INCLUDE_ASM(s32, "world/area_tik/tik_12/8891C0", func_8024121C_889DEC);
 
 INCLUDE_ASM(s32, "world/area_tik/tik_12/8891C0", func_80241754_88A324);
 
-INCLUDE_ASM(s32, "world/area_tik/tik_12/8891C0", func_80241894_88A464);
-
-INCLUDE_ASM(s32, "world/area_tik/tik_12/8891C0", func_802418DC_88A4AC);
+#include "world/common/UnkPartnerPosFuncs.inc.c"
 
 INCLUDE_ASM(s32, "world/area_tik/tik_12/8891C0", func_80241924_88A4F4);

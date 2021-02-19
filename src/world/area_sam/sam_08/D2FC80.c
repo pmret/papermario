@@ -30,8 +30,6 @@ INCLUDE_ASM(s32, "world/area_sam/sam_08/D2FC80", func_80240600_D30280);
 
 INCLUDE_ASM(s32, "world/area_sam/sam_08/D2FC80", func_80240B38_D307B8);
 
-INCLUDE_ASM(s32, "world/area_sam/sam_08/D2FC80", func_80240C78_D308F8);
-
-INCLUDE_ASM(s32, "world/area_sam/sam_08/D2FC80", func_80240CC0_D30940);
+#include "world/common/UnkPartnerPosFuncs.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_08/D2FC80", func_80240D08_D30988);

@@ -45,15 +45,16 @@ def get_symbol_bytes(offsets, func):
         return None
     start = offsets[func]["start"]
     end = offsets[func]["end"]
-    bs = rom_bytes[start:end][0::4]
+    bs = list(rom_bytes[start:end][0::4])
+
+    while len(bs) > 0 and bs[-1] == 0:
+        bs.pop()
+
     ret = []
     for ins in bs:
         ret.append(ins >> 2)
 
-    while len(ret) > 0 and ret[-1] == 0:
-        ret.pop()
-
-    return bytes(ret).decode('utf-8')
+    return bytes(ret).decode('utf-8'), bs
 
 
 def parse_map(fname):
@@ -115,10 +116,14 @@ def is_zeros(vals):
 
 
 def diff_syms(qb, tb):
-    if len(tb) < 8:
+    if len(tb[1]) < 8:
         return 0
 
-    return ratio(qb, tb)
+    r = ratio(qb[0], tb[0])
+
+    if r == 1.0 and qb[1] != tb[1]:
+        r = 0.99
+    return r
 
 
 def get_pair_score(query_bytes, b):

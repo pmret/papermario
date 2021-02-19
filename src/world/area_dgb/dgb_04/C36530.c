@@ -74,8 +74,6 @@ INCLUDE_ASM(s32, "world/area_dgb/dgb_04/C36530", func_802429D0_C38F00);
 
 INCLUDE_ASM(s32, "world/area_dgb/dgb_04/C36530", func_80242F08_C39438);
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_04/C36530", func_80243048_C39578);
-
-INCLUDE_ASM(s32, "world/area_dgb/dgb_04/C36530", func_80243090_C395C0);
+#include "world/common/UnkPartnerPosFuncs.inc.c"
 
 INCLUDE_ASM(s32, "world/area_dgb/dgb_04/C36530", func_802430D8_C39608);
