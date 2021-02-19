@@ -1,9 +1,10 @@
 #!/usr/bin/python3
 
 import argparse
-import difflib
 from collections import Counter, OrderedDict
+from Levenshtein import ratio
 import os
+import re
 import sys
 
 script_dir = os.path.dirname(os.path.realpath(__file__))
@@ -52,7 +53,7 @@ def get_symbol_bytes(offsets, func):
     while len(ret) > 0 and ret[-1] == 0:
         ret.pop()
 
-    return ret
+    return bytes(ret).decode('utf-8')
 
 
 def parse_map(fname):
@@ -117,7 +118,7 @@ def diff_syms(qb, tb):
     if len(tb) < 8:
         return 0
 
-    return difflib.SequenceMatcher(None, qb, tb).ratio()
+    return ratio(qb, tb)
 
 
 def get_pair_score(query_bytes, b):
@@ -135,8 +136,6 @@ def get_matches(query):
 
     ret = {}
     for symbol in map_offsets:
-        if symbol == "func_802A10A4_74AE34":
-            dog = 5
         if symbol is not None and query != symbol:
             score = get_pair_score(query_bytes, symbol)
             if score >= args.threshold:
@@ -174,7 +173,10 @@ def do_cross_query():
     clusters = []
 
     for sym_name in map_syms:
-        if not sym_name.startswith("_binary"):
+        if not sym_name.startswith("D_") and \
+           not sym_name.startswith("_binary") and \
+           not sym_name.startswith("jtbl_") and \
+           not re.match(r"L[0-9A-F]{8}_[0-9A-F]{5,6}", sym_name):
             if get_symbol_length(sym_name) > 16:
                 query_bytes = get_symbol_bytes(map_offsets, sym_name)
 
@@ -195,8 +197,8 @@ def do_cross_query():
                         if cluster_first.startswith("func"):
                             ccount[cluster_first] += 1
 
-                        if len(cluster) % 10 == 0 and len(cluster) >= 50:
-                            print(f"Cluster {cluster_first} grew to size {len(cluster)}")
+                        #if len(cluster) % 10 == 0 and len(cluster) >= 10:
+                        print(f"Cluster {cluster_first} grew to size {len(cluster)} - {sym_name}: {str(cluster_score)}")
                         break
                 if not cluster_match:
                     clusters.append([sym_name])
