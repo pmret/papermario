@@ -1,5 +1,7 @@
 #include "common.h"
 
+#define NAMESPACE code_EED1E0
+
 INCLUDE_ASM(s32, "code_EED1E0", func_802400E0_EED1E0);
 
 INCLUDE_ASM(s32, "code_EED1E0", func_802400FC_EED1FC);
