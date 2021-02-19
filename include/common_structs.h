@@ -1261,29 +1261,23 @@ typedef struct Zone {
     /* 0x28 */ s32 flag;
 } Zone; // size = 0x2C
 
-typedef struct ActorMovePos {
-    /* 0x00 */ Vec3f current;
-    /* 0x0C */ Vec3f goal;
-    /* 0x18 */ Vec3f end;
-} ActorMovePos; // size = 0x20;
-
-typedef struct ActorFlyPos {
-    /* 0x00 */ Vec3f current;
-    /* 0x0C */ Vec3f goal;
-    /* 0x18 */ Vec3f temp; /* used for start in fly functions, end in flyrun functions */
-} ActorFlyPos; // size = 0x20;
+typedef struct ActorMovement {
+    /* 0x00 */ Vec3f currentPos;
+    /* 0x0C */ Vec3f goalPos;
+    /* 0x18 */ Vec3f unk_18;
+    /* 0x24 */ char unk_24[24];
+    /* 0x3C */ f32 acceleration;
+    /* 0x40 */ f32 speed;
+    /* 0x44 */ f32 velocity;
+    /* 0x48 */ f32 angle;
+    /* 0x4C */ f32 distance;
+} ActorMovement; // size = 0x50;
 
 typedef struct Actor {
     /* 0x000 */ s32 flags;
     /* 0x004 */ char unk_04[4];
     /* 0x008 */ struct ActorDesc* staticActorData;
-    /* 0x00C */ ActorMovePos movePos;
-    /* 0x030 */ char unk_30[24];
-    /* 0x048 */ f32 jumpAccel;
-    /* 0x04C */ f32 moveSpeed;
-    /* 0x050 */ f32 jumpVelocity;
-    /* 0x054 */ f32 moveAngle;
-    /* 0x058 */ f32 moveDistance; /* 2D projection, used for jump */
+    /* 0x00C */ ActorMovement walk;
     /* 0x05C */ f32 bounceDivisor;
     /* 0x060 */ char unk_60[4];
     /* 0x064 */ s32 animJumpRise;
@@ -1295,13 +1289,7 @@ typedef struct Actor {
     /* 0x077 */ u8 jumpPartIndex;
     /* 0x078 */ char unk_78[16];
     /* 0x088 */ s32 varTable[16];
-    /* 0x0C8 */ ActorFlyPos flyPos;
-    /* 0x0EC */ char unk_EC[24];
-    /* 0x104 */ f32 flyJumpAccel;
-    /* 0x108 */ f32 flySpeed;
-    /* 0x10C */ f32 flyJumpVelocity;
-    /* 0x110 */ f32 flyAngleYaw;
-    /* 0x114 */ f32 flyDistance;
+    /* 0x0C8 */ ActorMovement fly;
     /* 0x118 */ f32 flyElapsed;
     /* 0x11C */ char unk_11C[4];
     /* 0x120 */ s16 flyTime;
