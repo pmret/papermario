@@ -1,5 +1,7 @@
 #include "sam_01.h"
 
+#define UNK_ALPHA_FUNC_NPC 14
+
 #include "world/common/GetNpcCollisionHeight.inc.c"
 
 #include "world/common/SomeXYZFuncTodoRename.inc.c"
@@ -26,7 +28,7 @@ INCLUDE_ASM(s32, "world/area_sam/sam_01/CF7E80", func_80240A60_CF85D0);
 
 INCLUDE_ASM(s32, "world/area_sam/sam_01/CF7E80", func_80240ACC_CF863C);
 
-INCLUDE_ASM(s32, "world/area_sam/sam_01/CF7E80", func_80240B2C_CF869C);
+#include "world/common/UnkAlphaFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_01/CF7E80", func_80240C78_CF87E8);
 

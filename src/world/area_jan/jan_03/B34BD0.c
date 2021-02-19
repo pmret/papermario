@@ -1,5 +1,7 @@
 #include "jan_03.h"
 
+#define UNK_ALPHA_FUNC_NPC 17
+
 #include "world/common/SetPlayerStatusAnimFlags100000.inc.c"
 
 #include "world/common/GetCurrentFloor.inc.c"
@@ -88,7 +90,7 @@ INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80241EFC_B36ACC);
 
 INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80241F68_B36B38);
 
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80241FC8_B36B98);
+#include "world/common/UnkAlphaFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80242114_B36CE4);
 

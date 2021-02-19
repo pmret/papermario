@@ -170,6 +170,8 @@ s32 is_current_partner_flying(void);
 void func_800ED5D0(Npc* partner);
 void clear_partner_move_history(Npc* partner);
 
+void set_background_color_blend(u8 r, u8 g, u8 b, u8 a);
+
 void set_parter_tether_distance(f32);
 s32 does_script_exist(s32 id);
 s32 does_script_exist_by_ref(ScriptInstance* script);

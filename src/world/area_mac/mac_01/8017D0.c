@@ -1,5 +1,7 @@
 #include "mac_01.h"
 
+#define UNK_ALPHA_FUNC_NPC 5
+
 extern u8 D_80258407_818C87;
 
 #include "world/common/UnkMusicFunc.inc.c"
@@ -52,7 +54,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242270_802AF0);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802422DC_802B5C);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_8024233C_802BBC);
+#include "world/common/UnkAlphaFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242488_802D08);
 

@@ -1,5 +1,7 @@
 #include "hos_03.h"
 
+#define UNK_ALPHA_FUNC_NPC 7
+
 INCLUDE_ASM(s32, "world/area_hos/hos_03/A1BDB0", func_80240CB0_A1BDB0);
 
 INCLUDE_ASM(s32, "world/area_hos/hos_03/A1BDB0", func_80240E60_A1BF60);
@@ -56,7 +58,7 @@ INCLUDE_ASM(s32, "world/area_hos/hos_03/A1BDB0", func_80242804_A1D904);
 
 INCLUDE_ASM(s32, "world/area_hos/hos_03/A1BDB0", func_80242870_A1D970);
 
-INCLUDE_ASM(s32, "world/area_hos/hos_03/A1BDB0", func_802428D0_A1D9D0);
+#include "world/common/UnkAlphaFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_hos/hos_03/A1BDB0", func_80242A1C_A1DB1C);
 

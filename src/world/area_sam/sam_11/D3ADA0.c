@@ -1,5 +1,7 @@
 #include "sam_11.h"
 
+#define UNK_ALPHA_FUNC_NPC 17
+
 INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_802407D0_D3ADA0);
 
 #include "world/common/GetItemName.inc.c"
@@ -16,7 +18,7 @@ INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_80240B30_D3B100);
 
 INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_80240B9C_D3B16C);
 
-INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_80240BFC_D3B1CC);
+#include "world/common/UnkAlphaFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_80240D48_D3B318);
 
