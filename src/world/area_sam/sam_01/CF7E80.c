@@ -72,7 +72,7 @@ INCLUDE_ASM(s32, "world/area_sam/sam_01/CF7E80", func_80241A10_CF9580);
 
 INCLUDE_ASM(s32, "world/area_sam/sam_01/CF7E80", func_80241A54_CF95C4);
 
-INCLUDE_ASM(s32, "world/area_sam/sam_01/CF7E80", func_80241A80_CF95F0);
+#include "common/GetItemEntityPosition.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_01/CF7E80", func_80241B20_CF9690);
 

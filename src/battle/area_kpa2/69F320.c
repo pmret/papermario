@@ -46,7 +46,9 @@ INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_80219CD4_6A0ED4);
 
 INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_80219D44_6A0F44);
 
-INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_80219F5C_6A115C);
+#define NAMESPACE dup_b_area_kpa2
+#include "common/GetItemEntityPosition.inc.c"
+#define NAMESPACE b_area_kpa2
 
 INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_80219FFC_6A11FC);
 
@@ -78,7 +80,7 @@ INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_8021B08C_6A228C);
 
 INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_8021B0FC_6A22FC);
 
-INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_8021B314_6A2514);
+#include "common/GetItemEntityPosition.inc.c"
 
 INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_8021B3B4_6A25B4);
 
