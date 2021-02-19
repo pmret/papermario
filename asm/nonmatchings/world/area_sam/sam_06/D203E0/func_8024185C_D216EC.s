@@ -110,7 +110,7 @@ glabel L802419C8_D21858
 glabel L802419E0_D21870
 /* D21870 802419E0 0280202D */  daddu     $a0, $s4, $zero
 /* D21874 802419E4 0200282D */  daddu     $a1, $s0, $zero
-/* D21878 802419E8 0C090484 */  jal       func_80241210_D210A0
+/* D21878 802419E8 0C090484 */  jal       sam_06_UnkNpcAIFunc14
 /* D2187C 802419EC 0260302D */   daddu    $a2, $s3, $zero
 /* D21880 802419F0 08090689 */  j         .L80241A24
 /* D21884 802419F4 0000102D */   daddu    $v0, $zero, $zero

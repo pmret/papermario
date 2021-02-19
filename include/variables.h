@@ -325,4 +325,7 @@ extern UNK_PTR D_800F7B94;
 
 extern s32 D_802C05CC;
 
+// Dead code
+extern PlayerStatus* D_800FFC90; // gPlayerStatusPtr
+
 #endif

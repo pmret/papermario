@@ -110,7 +110,7 @@ glabel L8024242C_DF12CC
 glabel L80242444_DF12E4
 /* DF12E4 80242444 0280202D */  daddu     $a0, $s4, $zero
 /* DF12E8 80242448 0200282D */  daddu     $a1, $s0, $zero
-/* DF12EC 8024244C 0C09071D */  jal       func_80241C74_DF0B14
+/* DF12EC 8024244C 0C09071D */  jal       omo_17_UnkNpcAIFunc14
 /* DF12F0 80242450 0260302D */   daddu    $a2, $s3, $zero
 /* DF12F4 80242454 08090922 */  j         .L80242488
 /* DF12F8 80242458 0000102D */   daddu    $v0, $zero, $zero

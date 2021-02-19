@@ -1,5 +1,7 @@
 #include "common.h"
 
+#define NAMESPACE code_EF2680
+
 INCLUDE_ASM(s32, "code_EF2680", func_80240070_EF2680);
 
 INCLUDE_ASM(s32, "code_EF2680", func_80240220_EF2830);
@@ -12,7 +14,7 @@ INCLUDE_ASM(s32, "code_EF2680", func_80240C4C_EF325C);
 
 INCLUDE_ASM(s32, "code_EF2680", func_80240CC4_EF32D4);
 
-INCLUDE_ASM(s32, "code_EF2680", func_80240D30_EF3340);
+#include "world/common/DeadUnkNpcAIFunc14.inc.c"
 
 INCLUDE_ASM(s32, "code_EF2680", func_80240E64_EF3474);
 

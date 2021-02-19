@@ -155,7 +155,7 @@ glabel func_80241DB8_CC55C8
 .L80241FE4:
 /* CC57F4 80241FE4 0280202D */  daddu     $a0, $s4, $zero
 /* CC57F8 80241FE8 02C0282D */  daddu     $a1, $s6, $zero
-/* CC57FC 80241FEC 0C0903A1 */  jal       func_80240E84_CC4694
+/* CC57FC 80241FEC 0C0903A1 */  jal       flo_13_UnkNpcAIFunc14
 /* CC5800 80241FF0 02A0302D */   daddu    $a2, $s5, $zero
 .L80241FF4:
 /* CC5804 80241FF4 0280202D */  daddu     $a0, $s4, $zero

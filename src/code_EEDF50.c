@@ -1,5 +1,7 @@
 #include "common.h"
 
+#define NAMESPACE code_EEDF50
+
 INCLUDE_ASM(s32, "code_EEDF50", func_80240E50_EEDF50);
 
 INCLUDE_ASM(s32, "code_EEDF50", func_80241000_EEE100);
@@ -12,7 +14,7 @@ INCLUDE_ASM(s32, "code_EEDF50", func_80241A2C_EEEB2C);
 
 INCLUDE_ASM(s32, "code_EEDF50", func_80241AA4_EEEBA4);
 
-INCLUDE_ASM(s32, "code_EEDF50", func_80241B10_EEEC10);
+#include "world/common/DeadUnkNpcAIFunc14.inc.c"
 
 INCLUDE_ASM(s32, "code_EEDF50", func_80241C44_EEED44);
 

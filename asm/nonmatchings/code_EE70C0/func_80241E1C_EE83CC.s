@@ -121,7 +121,7 @@ glabel L80241FB4_EE8564
 glabel L80241FCC_EE857C
 /* EE857C 80241FCC 02A0202D */  daddu     $a0, $s5, $zero
 /* EE8580 80241FD0 0200282D */  daddu     $a1, $s0, $zero
-/* EE8584 80241FD4 0C0905F4 */  jal       func_802417D0_EE7D80
+/* EE8584 80241FD4 0C0905F4 */  jal       code_EE70C0_DeadUnkNpcAIFunc14
 /* EE8588 80241FD8 0260302D */   daddu    $a2, $s3, $zero
 /* EE858C 80241FDC 08090804 */  j         .L80242010
 /* EE8590 80241FE0 0000102D */   daddu    $v0, $zero, $zero

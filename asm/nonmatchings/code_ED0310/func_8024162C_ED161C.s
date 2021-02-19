@@ -121,7 +121,7 @@ glabel L802417C4_ED17B4
 glabel L802417DC_ED17CC
 /* ED17CC 802417DC 02A0202D */  daddu     $a0, $s5, $zero
 /* ED17D0 802417E0 0200282D */  daddu     $a1, $s0, $zero
-/* ED17D4 802417E4 0C0903F8 */  jal       func_80240FE0_ED0FD0
+/* ED17D4 802417E4 0C0903F8 */  jal       code_ED0310_DeadUnkNpcAIFunc14
 /* ED17D8 802417E8 0260302D */   daddu    $a2, $s3, $zero
 /* ED17DC 802417EC 08090608 */  j         .L80241820
 /* ED17E0 802417F0 0000102D */   daddu    $v0, $zero, $zero
