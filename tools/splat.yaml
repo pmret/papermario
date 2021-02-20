@@ -2133,7 +2133,7 @@ segments:
     overlay: True
     subsections:
     - [0x703AF0, c]
-    - [0x704A70, data]
+    - [0x704A80, data]
   - name: battle/partner/sushie
     type: code
     start: 0x707CA0
