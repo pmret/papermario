@@ -186,7 +186,7 @@ async def main():
                     has_rom = True
                     has_any_rom = True
             except IOError:
-                print(f"Could not find baserom '{rom}', please add it.")
+                print(f"Could not find baserom file '{rom}'!")
                 if len(versions) >= 2:
                     print(f"You can avoid building version '{version}' by specifying versions on the command-line:")
                     print(f"    ./configure.py {' '.join(ver for ver in versions if ver != version)}")
