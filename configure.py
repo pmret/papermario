@@ -46,7 +46,8 @@ def read_splat(splat_config: str, version: str):
             if path.endswith(".c") or path.endswith(".s") or path.endswith(".data") or path.endswith(".rodata"):
                 path = subdir + "/" + path
             else:
-                assert subdir == f"ver/{version}/assets", subdir + " " + path
+                assert subdir == "assets", subdir + " " + path
+                subdir = "ver/" + version + "/assets"
 
             objects.add(path)
             segments[path] = segment
@@ -329,7 +330,7 @@ async def main():
 
     for version in versions:
         objects, segments = read_splat(f"ver/{version}/splat.yaml", version) # no .o extensions!
-        c_files = (f for f in objects if f.endswith(".c")) # glob("src/**/*.c", recursive=True)
+        #c_files = (f for f in objects if f.endswith(".c"))
 
         n.build(f"ver/{version}/build/$target.ld", "cpp", f"ver/{version}/$target.ld", variables={ "version": version })
         n.build(f"ver/{version}/build/$target.elf", "link", f"ver/{version}/build/$target.ld", implicit=[obj(o) for o in objects], implicit_outputs=f"ver/{version}/$target.map", variables={ "version": version })
@@ -530,7 +531,10 @@ async def main():
         n.build("generated_headers_" + version, "phony", generated_headers)
         n.newline()
 
-    for c_file in c_files:
+    for c_file in glob("src/**/*.c", recursive=True):
+        if c_file.endswith(".inc.c"):
+            continue
+
         status = await shell_status(f"grep -q SCRIPT\( {c_file}")
 
         for version in versions:
