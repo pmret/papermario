@@ -20,7 +20,6 @@ ApiStatus func_80238014_710F04(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-//INCLUDE_ASM(s32, "battle/partner/bow_710EF0", func_8023808C_710F7C);
 ApiStatus func_8023808C_710F7C(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
 
@@ -29,36 +28,6 @@ ApiStatus func_8023808C_710F7C(ScriptInstance* script, s32 isInitialCall) {
         battleStatus->outtaSightActive = -1;
     }
 
-    //battleStatus->playerActor->partsTable->idleAnimations = &bMarioHideAnims;
-    battleStatus->hustleTurns = 0;
-    battleStatus->flags1 &= ~0x04000000;
-
-    return ApiStatus_DONE2;
-}
-
-ApiStatus func_80238014_710F04(ScriptInstance* script, s32 isInitialCall) {
-    BattleStatus* battleStatus = &gBattleStatus;
-    Actor* partnerActor = battleStatus->partnerActor;
-    Actor* partnerTargetActor = get_actor(partnerActor->targetActorID);
-    f32 partnerTargetActorSize = (partnerTargetActor->size.y + partnerTargetActor->size.x) >> 1;
-
-    partnerTargetActorSize = (partnerTargetActorSize * 150.0f) / 100.0f;
-    script->varTable[0] = partnerTargetActorSize;
-
-    return ApiStatus_DONE2;
-}
-
-ApiStatus func_8023808C_710F7C(ScriptInstance* script, s32 isInitialCall) {
-    BattleStatus* battleStatus = &gBattleStatus;
-    ActorPart* playerActorPartTable = battleStatus->playerActor->partsTable;
-    s8 var = 1;
-
-    battleStatus->outtaSightActive = var;
-    if ((battleStatus->flags2 & 2) == 0) {
-        battleStatus->outtaSightActive = -var;
-    }
-
-    playerActorPartTable->idleAnimations = &bMarioHideAnims;
     battleStatus->hustleTurns = 0;
     battleStatus->flags1 &= ~0x04000000;
 
