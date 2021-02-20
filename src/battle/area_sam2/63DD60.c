@@ -1,39 +1,61 @@
 #include "common.h"
 
+#define NAMESPACE b_area_sam2
+
 INCLUDE_ASM(s32, "battle/area_sam2/63DD60", func_80218B80_63DD60);
 
-INCLUDE_ASM(s32, "battle/area_sam2/63DD60", func_80218D78_63DF58);
+#include "common/Set80071270_0_16.inc.c"
 
-INCLUDE_ASM(s32, "battle/area_sam2/63DD60", func_80218D9C_63DF7C);
+#include "common/UnkFloatFunc2.inc.c"
 
 INCLUDE_ASM(s32, "battle/area_sam2/63DD60", func_80218EA0_63E080);
 
-INCLUDE_ASM(s32, "battle/area_sam2/63DD60", func_80219098_63E278);
+#define NAMESPACE dup_b_area_sam2
+#include "common/Set80071270_0_16.inc.c"
+#define NAMESPACE b_area_sam2
 
-INCLUDE_ASM(s32, "battle/area_sam2/63DD60", func_802190BC_63E29C);
+#define NAMESPACE dup_b_area_sam2
+#include "common/UnkFloatFunc2.inc.c"
+#define NAMESPACE b_area_sam2
 
 INCLUDE_ASM(s32, "battle/area_sam2/63DD60", func_802191C0_63E3A0);
 
-INCLUDE_ASM(s32, "battle/area_sam2/63DD60", func_802193B8_63E598);
+#define NAMESPACE dup2_b_area_sam2
+#include "common/Set80071270_0_16.inc.c"
+#define NAMESPACE b_area_sam2
 
-INCLUDE_ASM(s32, "battle/area_sam2/63DD60", func_802193DC_63E5BC);
+#define NAMESPACE dup2_b_area_sam2
+#include "common/UnkFloatFunc2.inc.c"
+#define NAMESPACE b_area_sam2
 
 INCLUDE_ASM(s32, "battle/area_sam2/63DD60", func_802194E0_63E6C0);
 
-INCLUDE_ASM(s32, "battle/area_sam2/63DD60", func_802196D8_63E8B8);
+#define NAMESPACE dup3_b_area_sam2
+#include "common/Set80071270_0_16.inc.c"
+#define NAMESPACE b_area_sam2
 
-INCLUDE_ASM(s32, "battle/area_sam2/63DD60", func_802196FC_63E8DC);
+#define NAMESPACE dup3_b_area_sam2
+#include "common/UnkFloatFunc2.inc.c"
+#define NAMESPACE b_area_sam2
 
 INCLUDE_ASM(s32, "battle/area_sam2/63DD60", func_80219800_63E9E0);
 
-INCLUDE_ASM(s32, "battle/area_sam2/63DD60", func_802199F8_63EBD8);
+#define NAMESPACE dup4_b_area_sam2
+#include "common/Set80071270_0_16.inc.c"
+#define NAMESPACE b_area_sam2
 
-INCLUDE_ASM(s32, "battle/area_sam2/63DD60", func_80219A1C_63EBFC);
+#define NAMESPACE dup4_b_area_sam2
+#include "common/UnkFloatFunc2.inc.c"
+#define NAMESPACE b_area_sam2
 
 INCLUDE_ASM(s32, "battle/area_sam2/63DD60", func_80219B20_63ED00);
 
-INCLUDE_ASM(s32, "battle/area_sam2/63DD60", func_80219D18_63EEF8);
+#define NAMESPACE dup5_b_area_sam2
+#include "common/Set80071270_0_16.inc.c"
+#define NAMESPACE b_area_sam2
 
-INCLUDE_ASM(s32, "battle/area_sam2/63DD60", func_80219D3C_63EF1C);
+#define NAMESPACE dup5_b_area_sam2
+#include "common/UnkFloatFunc2.inc.c"
+#define NAMESPACE b_area_sam2
 
 INCLUDE_ASM(s32, "battle/area_sam2/63DD60", func_80219E40_63F020);
