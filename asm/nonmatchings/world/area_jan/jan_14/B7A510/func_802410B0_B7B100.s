@@ -124,7 +124,7 @@ glabel L8024125C_B7B2AC
 glabel L80241274_B7B2C4
 /* B7B2C4 80241274 0260202D */  daddu     $a0, $s3, $zero
 /* B7B2C8 80241278 0280282D */  daddu     $a1, $s4, $zero
-/* B7B2CC 8024127C 0C090323 */  jal       func_80240C8C_B7ACDC
+/* B7B2CC 8024127C 0C090323 */  jal       jan_14_UnkNpcAIFunc15
 /* B7B2D0 80241280 0200302D */   daddu    $a2, $s0, $zero
 glabel L80241284_B7B2D4
 /* B7B2D4 80241284 0260202D */  daddu     $a0, $s3, $zero

@@ -124,7 +124,7 @@ glabel L80240D9C_99057C
 glabel L80240DB4_990594
 /* 990594 80240DB4 0260202D */  daddu     $a0, $s3, $zero
 /* 990598 80240DB8 0280282D */  daddu     $a1, $s4, $zero
-/* 99059C 80240DBC 0C0901F3 */  jal       func_802407CC_98FFAC
+/* 99059C 80240DBC 0C0901F3 */  jal       isk_13_UnkNpcAIFunc15
 /* 9905A0 80240DC0 0200302D */   daddu    $a2, $s0, $zero
 glabel L80240DC4_9905A4
 /* 9905A4 80240DC4 0260202D */  daddu     $a0, $s3, $zero
