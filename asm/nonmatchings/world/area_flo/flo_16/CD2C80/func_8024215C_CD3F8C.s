@@ -110,7 +110,7 @@ glabel L802422C8_CD40F8
 glabel L802422E0_CD4110
 /* CD4110 802422E0 0280202D */  daddu     $a0, $s4, $zero
 /* CD4114 802422E4 0200282D */  daddu     $a1, $s0, $zero
-/* CD4118 802422E8 0C0906C4 */  jal       func_80241B10_CD3940
+/* CD4118 802422E8 0C0906C4 */  jal       flo_16_UnkNpcAIFunc14
 /* CD411C 802422EC 0260302D */   daddu    $a2, $s3, $zero
 /* CD4120 802422F0 080908C9 */  j         .L80242324
 /* CD4124 802422F4 0000102D */   daddu    $v0, $zero, $zero

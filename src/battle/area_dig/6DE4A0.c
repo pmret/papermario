@@ -6,7 +6,7 @@ extern s32 D_8008F2E4;
 extern s32 D_8008FC44;
 
 ApiStatus func_802186E0_6DE4A0(ScriptInstance* script, s32 isInitialCall) {
-    BattleStatus* battleStatus = BATTLE_STATUS;
+    BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
     SelectableTarget* selectableTarget;
 
@@ -27,7 +27,7 @@ ApiStatus func_802186E0_6DE4A0(ScriptInstance* script, s32 isInitialCall) {
 // Reordering near the beginning
 #ifdef NON_MATCHING
 ApiStatus func_80218770_6DE530(ScriptInstance* script, s32 isInitialCall) {
-    BattleStatus* battleStatus = BATTLE_STATUS;
+    BattleStatus* battleStatus = &gBattleStatus;
     Actor* partner = battleStatus->partnerActor;
     SelectableTarget* selectableTarget;
 
@@ -49,8 +49,8 @@ INCLUDE_ASM(s32, "battle/area_dig/6DE4A0", func_80218770_6DE530);
 #endif
 
 ApiStatus func_802187F0_6DE5B0(ScriptInstance* script, s32 isInitialCall) {
-    BattleStatus* battleStatus = BATTLE_STATUS;
-    PlayerData* playerData = PLAYER_DATA;
+    BattleStatus* battleStatus = &gBattleStatus;
+    PlayerData* playerData = &gPlayerData;
     s32 selectedItemID;
     Actor* player = battleStatus->playerActor;
     SelectableTarget* selectableTarget;

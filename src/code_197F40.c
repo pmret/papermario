@@ -4,7 +4,7 @@
 extern s8 D_8029FBD4;
 
 s32 count_targets(Actor* actor, s32 targetHomeIndex, s32 targetSelectionFlags) {
-    BattleStatus* battleStatus = BATTLE_STATUS;
+    BattleStatus* battleStatus = &gBattleStatus;
 
     battleStatus->targetHomeIndex = targetHomeIndex;
     battleStatus->currentTargetListFlags = targetSelectionFlags;
@@ -81,7 +81,7 @@ void set_actor_home_position(ActorID actorID, f32 x, f32 y, f32 z) {
 
 Actor* get_actor(ActorID actorID) {
     Actor* ret = NULL;
-    BattleStatus* battleStatus = BATTLE_STATUS;
+    BattleStatus* battleStatus = &gBattleStatus;
     s32 idFlag = actorID & 0x700;
     u32 idIdx = (u8)actorID;
 
@@ -1077,8 +1077,8 @@ ApiStatus AddPartDispOffset(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus func_8026BF48(ScriptInstance* script, s32 isInitialCall) {
-    BattleStatus* battleStatus = BATTLE_STATUS;
-    BattleStatus* battleStatus2 = BATTLE_STATUS;
+    BattleStatus* battleStatus = &gBattleStatus;
+    BattleStatus* battleStatus2 = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
 
     if (get_variable(script, *args++) != 0) {
@@ -1502,10 +1502,10 @@ ApiStatus SetBattleFlagBits2(ScriptInstance* script, s32 isInitialCall) {
     Bytecode a0 = *args++;
 
     if (get_variable(script, *args)) {
-        BattleStatus* battleStatus = BATTLE_STATUS;
+        BattleStatus* battleStatus = &gBattleStatus;
         battleStatus->flags2 |= a0;
     } else {
-        BattleStatus* battleStatus = BATTLE_STATUS;
+        BattleStatus* battleStatus = &gBattleStatus;
         battleStatus->flags2 &= ~a0;
     }
 
@@ -2001,7 +2001,7 @@ ApiStatus SetBattleInputMask(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus SetBattleInputButtons(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    BattleStatus* battleStatus = BATTLE_STATUS;
+    BattleStatus* battleStatus = &gBattleStatus;
     s32 currentButtonsDown = *args++;
     s32 currentButtonsPressed = *args++;
     s32 currentButtonsHeld = *args;
@@ -2150,7 +2150,7 @@ INCLUDE_ASM(s32, "code_197F40", CreatePartShadow);
 INCLUDE_ASM(s32, "code_197F40", RemovePartShadow);
 
 ApiStatus func_8026F60C(ScriptInstance* script, s32 isInitialCall) {
-    BATTLE_STATUS->unk_8D = get_variable(script, *script->ptrReadPos);
+    gBattleStatus.unk_8D = get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 

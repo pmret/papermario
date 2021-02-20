@@ -240,7 +240,7 @@ s32 draw_encounters_post_battle(void) {
 
 void update_encounters_conversation(void) {
     EncounterStatus* encounter = &gCurrentEncounter;
-    PlayerStatus* playerStatus = PLAYER_STATUS;
+    PlayerStatus* playerStatus = &gPlayerStatus;
     Enemy* currentEnemy;
     s32 flag;
 

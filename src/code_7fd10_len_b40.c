@@ -1,9 +1,7 @@
 #include "common.h"
 
-extern s16 D_8010CD00;
-
 void func_800E6860(void) {
-    PlayerStatus* playerStatus = PLAYER_STATUS;
+    PlayerStatus* playerStatus = &gPlayerStatus;
 
     if ((D_8010EBB0[0] != 0) && (D_8010EBB0[3] == 9)) {
         Npc* partner = get_npc_unsafe(NpcId_PARTNER);
@@ -14,7 +12,42 @@ void func_800E6860(void) {
     }
 }
 
+// playerStatus getting coppied to a0 - how? inlining?
+#ifdef NON_MATCHING
+s32 func_800E6904(void) {
+    s8* temp_8010EBB0 = D_8010EBB0;
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    s32 actionState = playerStatus->actionState;
+
+    if (!(playerStatus->animFlags & 0x100000)) {
+        if (temp_8010EBB0[0] == 0) {
+            if (!(playerStatus->flags & 0x1000)) {
+                if (actionState == ActionState_IDLE || actionState == ActionState_WALK || actionState == ActionState_RUN) {
+                    return 1;
+                }
+            }
+        } else if (partner_player_can_pause()) {
+            if (temp_8010EBB0[3] == 6) {
+                return 1;
+            } else if (temp_8010EBB0[3] == 9) {
+                if (actionState == ActionState_RIDE) {
+                    return 1;
+                }
+            } else if (temp_8010EBB0[3] == 8) {
+                if (actionState != ActionState_RIDE) {
+                    play_sound(0x21D);
+                } else {
+                    return 1;
+                }
+            }
+        }
+    }
+
+    return 0;
+}
+#else
 INCLUDE_ASM(s32, "code_7fd10_len_b40", func_800E6904);
+#endif
 
 INCLUDE_ASM(s32, "code_7fd10_len_b40", can_pause);
 
@@ -28,4 +61,31 @@ INCLUDE_ASM(s32, "code_7fd10_len_b40", setup_item_popup);
 
 INCLUDE_ASM(s32, "code_7fd10_len_b40", check_input_open_menus);
 
-INCLUDE_ASM(s32, "code_7fd10_len_b40", check_input_status_menu);
+void check_input_status_menu(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    s32 pressedButtons;
+
+    if (get_variable(NULL, SI_SAVE_VAR(0)) < 0x60) {
+        if (playerStatus->actionState != ActionState_RIDE) {
+            pressedButtons = playerStatus->pressedButtons;
+        } else {
+            pressedButtons = (*gGameStatusPtr)->pressedButtons;
+        }
+
+        if (!is_status_menu_visible()) {
+            if (!(playerStatus->currentButtons & Z_TRIG + R_TRIG) && (pressedButtons & 8) && func_800E9860()) {
+                open_status_menu_long();
+
+                if (!is_picking_up_item()) {
+                    play_sound(3);
+                }
+            }
+        } else if (!(playerStatus->currentButtons & Z_TRIG + R_TRIG) && (pressedButtons & 8) && func_800E9860()) {
+            close_status_menu();
+
+            if (!is_picking_up_item()) {
+                play_sound(4);
+            }
+        }
+    }
+}

@@ -25,7 +25,7 @@ void clear_area_flags(void) {
     SaveData* saveFile = &gCurrentSaveFile;
     s32 i;
 
-    if (GAME_STATUS->changedArea) {
+    if ((*gGameStatusPtr)->changedArea) {
         for (i = 0; i < ARRAY_COUNT(saveFile->areaFlags); i++) {
             saveFile->areaFlags[i] = 0;
         }

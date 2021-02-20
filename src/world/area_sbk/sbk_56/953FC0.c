@@ -36,8 +36,6 @@ INCLUDE_ASM(s32, "world/area_sbk/sbk_56/953FC0", func_80240680_954640);
 
 INCLUDE_ASM(s32, "world/area_sbk/sbk_56/953FC0", func_80240BB8_954B78);
 
-INCLUDE_ASM(s32, "world/area_sbk/sbk_56/953FC0", func_80240CF8_954CB8);
-
-INCLUDE_ASM(s32, "world/area_sbk/sbk_56/953FC0", func_80240D40_954D00);
+#include "world/common/UnkPartnerPosFuncs.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sbk/sbk_56/953FC0", func_80240D88_954D48);

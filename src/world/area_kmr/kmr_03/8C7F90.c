@@ -6,7 +6,7 @@ Script N(Main);
 
 ApiStatus func_80240000_8C7F90(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    PlayerData* playerData = PLAYER_DATA;
+    PlayerData* playerData = &gPlayerData;
     NpcId npcID = get_variable(script, *args++);
     PartnerID partnerID = get_variable(script, *args++);
     Npc* npc = get_npc_safe(npcID);

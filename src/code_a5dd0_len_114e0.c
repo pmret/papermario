@@ -48,7 +48,7 @@ Shadow* get_shadow_by_index(s32 index) {
 EntityList* get_entity_list(void) {
     EntityList* ret;
 
-    if (!GAME_STATUS->isBattle) {
+    if (!(*gGameStatusPtr)->isBattle) {
         ret = &gWorldEntityList;
     } else {
         ret = &gBattleEntityList;
@@ -59,7 +59,7 @@ EntityList* get_entity_list(void) {
 ShadowList* get_shadow_list(void) {
     ShadowList* ret;
 
-    if (!GAME_STATUS->isBattle) {
+    if (!(*gGameStatusPtr)->isBattle) {
         ret = &gWorldShadowList;
     } else {
         ret = &gBattleShadowList;
@@ -300,7 +300,7 @@ INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8011BCEC);
 /// @returns TRUE if mtx is NULL or identity.
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", is_identity_fixed_mtx);
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", set_background_color_blend);
+INCLUDE_ASM(void, "code_a5dd0_len_114e0", set_background_color_blend, u8 r, u8 g, u8 b, u8 a);
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", get_background_color_blend);
 

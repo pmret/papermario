@@ -11,7 +11,7 @@ ApiStatus N(func_80240814_97BE44)(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus N(AwaitPlayerNearNpc)(ScriptInstance* script, s32 isInitialCall) {
-    PlayerStatus* playerStatus = PLAYER_STATUS;
+    PlayerStatus* playerStatus = &gPlayerStatus;
     Npc* npc = get_npc_safe(script->owner2.npcID);
 
     if (dist2D(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z) < 50.0f) {

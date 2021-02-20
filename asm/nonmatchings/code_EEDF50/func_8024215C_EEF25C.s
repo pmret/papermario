@@ -121,7 +121,7 @@ glabel L802422F4_EEF3F4
 glabel L8024230C_EEF40C
 /* EEF40C 8024230C 02A0202D */  daddu     $a0, $s5, $zero
 /* EEF410 80242310 0200282D */  daddu     $a1, $s0, $zero
-/* EEF414 80242314 0C0906C4 */  jal       func_80241B10_EEEC10
+/* EEF414 80242314 0C0906C4 */  jal       code_EEDF50_DeadUnkNpcAIFunc14
 /* EEF418 80242318 0260302D */   daddu    $a2, $s3, $zero
 /* EEF41C 8024231C 080908D4 */  j         .L80242350
 /* EEF420 80242320 0000102D */   daddu    $v0, $zero, $zero

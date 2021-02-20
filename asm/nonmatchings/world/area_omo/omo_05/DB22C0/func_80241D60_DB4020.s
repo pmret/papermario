@@ -110,7 +110,7 @@ glabel L80241ECC_DB418C
 glabel L80241EE4_DB41A4
 /* DB41A4 80241EE4 0280202D */  daddu     $a0, $s4, $zero
 /* DB41A8 80241EE8 0200282D */  daddu     $a1, $s0, $zero
-/* DB41AC 80241EEC 0C0905C5 */  jal       func_80241714_DB39D4
+/* DB41AC 80241EEC 0C0905C5 */  jal       omo_05_UnkNpcAIFunc14
 /* DB41B0 80241EF0 0260302D */   daddu    $a2, $s3, $zero
 /* DB41B4 80241EF4 080907CA */  j         .L80241F28
 /* DB41B8 80241EF8 0000102D */   daddu    $v0, $zero, $zero

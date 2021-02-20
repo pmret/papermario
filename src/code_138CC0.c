@@ -41,7 +41,7 @@ s32 pause_badges_comparator(s16* a, s16* b) {
 }
 
 s32 pause_badges_count_all(void) {
-    PlayerData* playerData = PLAYER_DATA;
+    PlayerData* playerData = &gPlayerData;
     s32 i;
 
     pause_sort_item_list(playerData->badges, ARRAY_COUNT(playerData->badges), pause_badges_comparator);
@@ -56,7 +56,7 @@ s32 pause_badges_count_all(void) {
 }
 
 s32 pause_badges_count_equipped(void) {
-    PlayerData* playerData = PLAYER_DATA;
+    PlayerData* playerData = &gPlayerData;
     s32 i;
 
     pause_sort_item_list(playerData->equippedBadges, ARRAY_COUNT(playerData->equippedBadges), &pause_badges_comparator);

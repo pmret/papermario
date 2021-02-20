@@ -5,7 +5,7 @@
 #include "world/common/SetCamera0MoveFlag1.inc.c"
 
 ApiStatus func_80240358_8C82E8(ScriptInstance* script, s32 isInitialCall) {
-    PlayerStatus* playerStatus = PLAYER_STATUS;
+    PlayerStatus* playerStatus = &gPlayerStatus;
 
     f32 xDelta = playerStatus->currentSpeed * 5.0f * sin_deg(playerStatus->targetYaw);
     f32 zDelta = playerStatus->currentSpeed * 5.0f * -cos_deg(playerStatus->targetYaw);

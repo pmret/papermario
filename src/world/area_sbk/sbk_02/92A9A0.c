@@ -15,7 +15,7 @@ INCLUDE_ASM(s32, "world/area_sbk/sbk_02/92A9A0", func_80240A44_92ACF4);
 #include "world/common/GetItemName.inc.c"
 
 ApiStatus PostChapter2StatUpdate(ScriptInstance* script, s32 isInitialCall) {
-    PlayerData* playerData = PLAYER_DATA;
+    PlayerData* playerData = &gPlayerData;
 
     set_max_SP(2);
     playerData->curHP = playerData->curMaxHP;

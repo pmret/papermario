@@ -3,7 +3,7 @@
 
 ApiStatus N(UnkPositionFunc)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    PlayerStatus* playerStatus = PLAYER_STATUS;
+    PlayerStatus* playerStatus = &gPlayerStatus;
     f32 var0 = get_variable(script, *args++);
     f32 var1 = get_variable(script, *args++);
     f32 var2 = get_variable(script, *args++);

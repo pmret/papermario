@@ -110,7 +110,7 @@ glabel L80241F88_CCD298
 glabel L80241FA0_CCD2B0
 /* CCD2B0 80241FA0 0280202D */  daddu     $a0, $s4, $zero
 /* CCD2B4 80241FA4 0200282D */  daddu     $a1, $s0, $zero
-/* CCD2B8 80241FA8 0C0905F4 */  jal       func_802417D0_CCCAE0
+/* CCD2B8 80241FA8 0C0905F4 */  jal       flo_14_UnkNpcAIFunc14
 /* CCD2BC 80241FAC 0260302D */   daddu    $a2, $s3, $zero
 /* CCD2C0 80241FB0 080907F9 */  j         .L80241FE4
 /* CCD2C4 80241FB4 0000102D */   daddu    $v0, $zero, $zero

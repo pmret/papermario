@@ -67,7 +67,7 @@ void poll_rumble(void) {
 }
 
 void start_rumble(s32 freq, s32 frame) {
-    if (GAME_STATUS->demoState == 0) {
+    if ((*gGameStatusPtr)->demoState == 0) {
         u16* sym = &D_80074260;
 
         if (*sym != 0) {
@@ -89,8 +89,8 @@ void update_max_rumble_duration(void) {
     s32* sym = &D_80074264;
     u16* sym2;
 
-    if (*sym != GAME_STATUS->currentButtons) {
-        *sym = GAME_STATUS->currentButtons;
+    if (*sym != (*gGameStatusPtr)->currentButtons) {
+        *sym = (*gGameStatusPtr)->currentButtons;
         reset_max_rumble_duration();
     }
 
@@ -212,7 +212,7 @@ void func_80029860(s32 dramAddr, s32 devAddr, s32 size) {
 s32 _advance_rng(void) {
     s32* rngVal = &gRandSeed;
 
-    GAME_STATUS->nextRNG = *rngVal = (*rngVal * 0x5D588B65) + 1;
+    (*gGameStatusPtr)->nextRNG = *rngVal = (*rngVal * 0x5D588B65) + 1;
 
     return *rngVal;
 }
@@ -310,15 +310,15 @@ f32 get_clamped_angle_diff(f32 a, f32 b) {
 INCLUDE_ASM(f32, "code_42e0_len_1f60", atan2, f32 startX, f32 startZ, f32 endX, f32 endZ);
 
 f32 get_player_normal_yaw(void) {
-    return atan2(0, 0, GAME_STATUS->playerTraceNormal.x, GAME_STATUS->playerTraceNormal.z);
+    return atan2(0, 0, (*gGameStatusPtr)->playerTraceNormal.x, (*gGameStatusPtr)->playerTraceNormal.z);
 }
 
 f32 get_player_normal_pitch(void) {
-    f32 traceNormalX = GAME_STATUS->playerTraceNormal.x;
-    f32 traceNormalZ = GAME_STATUS->playerTraceNormal.z;
+    f32 traceNormalX = (*gGameStatusPtr)->playerTraceNormal.x;
+    f32 traceNormalZ = (*gGameStatusPtr)->playerTraceNormal.z;
     f32 sqrt = sqrtf(SQ(traceNormalX) + SQ(traceNormalZ));
 
-    return atan2(0.0f, 0.0f, sqrt, -GAME_STATUS->playerTraceNormal.y);
+    return atan2(0.0f, 0.0f, sqrt, -(*gGameStatusPtr)->playerTraceNormal.y);
 }
 
 f32 dist2D(f32 ax, f32 ay, f32 bx, f32 by) {

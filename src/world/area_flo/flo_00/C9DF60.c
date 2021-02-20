@@ -25,7 +25,7 @@ INCLUDE_ASM(s32, "world/area_flo/flo_00/C9DF60", func_80240B14_C9EA34);
 INCLUDE_ASM(s32, "world/area_flo/flo_00/C9DF60", func_80240BD4_C9EAF4);
 
 ApiStatus PostChapter6StatUpdate(ScriptInstance* script, s32 isInitialCall) {
-    PlayerData* playerData = PLAYER_DATA;
+    PlayerData* playerData = &gPlayerData;
 
     set_max_SP(6);
     playerData->curHP = playerData->curMaxHP;

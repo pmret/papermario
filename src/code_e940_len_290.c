@@ -2,7 +2,7 @@
 
 void begin_state_init(void) {
     D_8009A650[0] |= 0x8;
-    GAME_STATUS->loadMenuState = 3;
+    (*gGameStatusPtr)->loadMenuState = 3;
 }
 
 void step_init_state(void) {
@@ -10,8 +10,8 @@ void step_init_state(void) {
     GameStatus* gameStatus = *gameStatusPtr;
     s32 i;
 
-    if (GAME_STATUS->loadMenuState != 0) {
-        GAME_STATUS->loadMenuState--;
+    if ((*gGameStatusPtr)->loadMenuState != 0) {
+        (*gGameStatusPtr)->loadMenuState--;
         return;
     }
 
@@ -70,10 +70,10 @@ void step_init_state(void) {
     fio_has_valid_backup();
 
     if (D_800D9620 == 0) {
-        GAME_STATUS->unk_AB = 1;
+        (*gGameStatusPtr)->unk_AB = 1;
         func_8005615C();
     } else {
-        GAME_STATUS->unk_AB = 0;
+        (*gGameStatusPtr)->unk_AB = 0;
         func_80056180();
     }
 

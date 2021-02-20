@@ -1,5 +1,7 @@
 #include "mac_00.h"
 
+#define UNK_ALPHA_FUNC_NPC 6
+
 INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80240630_7EB340);
 
 #include "world/common/GetItemName.inc.c"
@@ -14,7 +16,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80240990_7EB6A0);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_802409FC_7EB70C);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80240A5C_7EB76C);
+#include "world/common/UnkAlphaFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80240BA8_7EB8B8);
 

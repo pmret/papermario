@@ -1,5 +1,7 @@
 #include "dro_02.h"
 
+#define UNK_ALPHA_FUNC_NPC 10
+
 INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_80240300_9694C0);
 
 #include "world/common/GetItemName.inc.c"
@@ -14,7 +16,7 @@ INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_80240660_969820);
 
 INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_802406CC_96988C);
 
-INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_8024072C_9698EC);
+#include "world/common/UnkAlphaFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_80240878_969A38);
 

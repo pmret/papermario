@@ -8,7 +8,7 @@ extern s32 D_8010C96C; // npc list index
 extern s16 D_8010C9B0;
 
 void func_800E26B0(void) {
-    PlayerStatus* playerStatus = PLAYER_STATUS;
+    PlayerStatus* playerStatus = &gPlayerStatus;
 
     playerStatus->jumpApexHeight = playerStatus->position.y;
 }
@@ -52,7 +52,7 @@ s32 func_800E26C4(void) {
 void set_action_state(s32 actionState);
 
 void move_player(s32 duration, f32 heading, f32 speed) {
-    PlayerStatus* playerStatus = PLAYER_STATUS;
+    PlayerStatus* playerStatus = &gPlayerStatus;
 
     playerStatus->flags |= 0x4000;
     playerStatus->heading = heading;
@@ -96,7 +96,7 @@ void gravity_use_fall_params(void) {
 }
 
 void func_800E3100(void) {
-    PlayerStatus* playerStatus = PLAYER_STATUS;
+    PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (playerStatus->actionState != ActionState_7 && playerStatus->actionState != ActionState_BOUNCE) {
         f32* temp;
@@ -111,7 +111,7 @@ INCLUDE_ASM(s32, "code_7bb60_len_41b0", func_800E315C);
 INCLUDE_ASM(s32, "code_7bb60_len_41b0", phys_player_land);
 
 f32 integrate_gravity(void) {
-    PlayerStatus* playerStatus = PLAYER_STATUS;
+    PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (playerStatus->flags & 0x40000) {
         playerStatus->gravityIntegrator[2] += playerStatus->gravityIntegrator[3] / 1.7f;
@@ -326,7 +326,7 @@ void func_800E546C(void) {
 }
 
 void save_ground_pos(void) {
-    PlayerStatus* playerStatus = PLAYER_STATUS;
+    PlayerStatus* playerStatus = &gPlayerStatus;
 
     playerStatus->lastGoodPosition.x = playerStatus->position.x;
     playerStatus->lastGoodPosition.y = playerStatus->position.y;
@@ -350,8 +350,8 @@ INCLUDE_ASM(s32, "code_7bb60_len_41b0", func_800E5A2C);
 INCLUDE_ASM(s32, "code_7bb60_len_41b0", func_800E5C78);
 
 void set_action_state(s32 actionState) {
-    PlayerStatus* playerStatus = PLAYER_STATUS;
-    PlayerData* playerData = PLAYER_DATA;
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    PlayerData* playerData = &gPlayerData;
     UNK_TYPE* unknownStruct = &D_8010F250;
 
     if (playerStatus->flags & 0x200) {
@@ -424,7 +424,7 @@ void set_action_state(s32 actionState) {
 }
 
 void update_locomotion_state(void) {
-    PlayerStatus* playerStatus = PLAYER_STATUS;
+    PlayerStatus* playerStatus = &gPlayerStatus;
     do { } while (0); // required to match
 
     set_action_state((!is_ability_active(Ability_SLOW_GO)
@@ -432,7 +432,7 @@ void update_locomotion_state(void) {
 }
 
 void start_falling(void) {
-    PlayerStatus* playerStatus = PLAYER_STATUS;
+    PlayerStatus* playerStatus = &gPlayerStatus;
 
     set_action_state(ActionState_FALLING);
     playerStatus->gravityIntegrator[0] = 0.1143f;
@@ -442,7 +442,7 @@ void start_falling(void) {
 }
 
 void start_bounce_a(void) {
-    PlayerStatus* playerStatus = PLAYER_STATUS;
+    PlayerStatus* playerStatus = &gPlayerStatus;
 
     set_action_state(ActionState_BOUNCE);
     playerStatus->gravityIntegrator[0] = 10.0f;
@@ -452,7 +452,7 @@ void start_bounce_a(void) {
 }
 
 void start_bounce_b(void) {
-    PlayerStatus* playerStatus = PLAYER_STATUS;
+    PlayerStatus* playerStatus = &gPlayerStatus;
 
     set_action_state(ActionState_BOUNCE);
     playerStatus->gravityIntegrator[0] = 8.0f;
@@ -463,8 +463,8 @@ void start_bounce_b(void) {
 }
 
 s32 check_input_hammer(void) {
-    PlayerStatus* playerStatus = PLAYER_STATUS;
-    PlayerData* playerData = PLAYER_DATA;
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    PlayerData* playerData = &gPlayerData;
 
     if (playerStatus->pressedButtons & Button_B) {
         if (!(playerStatus->flags & 4)) {

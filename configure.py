@@ -350,7 +350,7 @@ async def main():
     n.newline()
 
     n.rule("link",
-        command="${cross}ld -T undefined_syms.txt -T undefined_syms_auto.txt -T undefined_funcs_auto.txt -Map $builddir/$target.map --no-check-sections -T $in -o $out",
+        command="${cross}ld -T undefined_syms.txt -T undefined_syms_auto.txt -T undefined_funcs_auto.txt -T dead_syms.txt -Map $builddir/$target.map --no-check-sections -T $in -o $out",
         description="link $out")
     n.newline()
 

@@ -5,7 +5,7 @@ INCLUDE_ASM(s32, "world/partner/bombette", func_802BD100_317E50);
 INCLUDE_ASM(s32, "world/partner/bombette", func_802BD2D8_318028);
 
 ApiStatus func_802BD300_318050(ScriptInstance* script, s32 isInitialCall) {
-    s32 unk = script->owner2.npc; // todo what is this
+    Npc* unk = script->owner2.npc; // todo what is this
 
     if (isInitialCall) {
         func_800EECC4(unk);

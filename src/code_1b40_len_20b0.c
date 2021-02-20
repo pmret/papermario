@@ -46,19 +46,19 @@ void load_engine_data(void) {
     dma_copy(D_0010CC10, D_0010CC10_end, D_802EB3D0); // new segment required to fix this
     D_8009A650[0] = 0;
     phi_s0 = *gGameStatusPtr;
-    GAME_STATUS->unk_79 = 0;
-    GAME_STATUS->musicEnabled = 1;
+    (*gGameStatusPtr)->unk_79 = 0;
+    (*gGameStatusPtr)->musicEnabled = 1;
     phi_s0->unk_148 = 0;
-    GAME_STATUS->unk_7C = 1;
-    GAME_STATUS->unk_A8 = -1;
-    GAME_STATUS->unk_AA = 0;
-    GAME_STATUS->unk_81 = 0;
-    GAME_STATUS->unk_82 = -8;
-    GAME_STATUS->unk_83 = 4;
+    (*gGameStatusPtr)->unk_7C = 1;
+    (*gGameStatusPtr)->unk_A8 = -1;
+    (*gGameStatusPtr)->unk_AA = 0;
+    (*gGameStatusPtr)->unk_81 = 0;
+    (*gGameStatusPtr)->unk_82 = -8;
+    (*gGameStatusPtr)->unk_83 = 4;
     D_8009A5D8 = 0;
-    GAME_STATUS->unk_75 = GAME_STATUS->unk_13C = 0;
+    (*gGameStatusPtr)->unk_75 = (*gGameStatusPtr)->unk_13C = 0;
     D_80074021 = 5;
-    GAME_STATUS->unk_168 = 0;
+    (*gGameStatusPtr)->unk_168 = 0;
     fio_init_flash();
     func_80028838();
     general_heap_create();
@@ -93,7 +93,7 @@ void load_engine_data(void) {
     curtains_init();
     poll_rumble();
 
-    phi_s0 = GAME_STATUS;
+    phi_s0 = *gGameStatusPtr;
     for (i = 0; i < 4; i++) {
         phi_s0->unk_50[i] = 3;
         phi_s0->unk_48[i] = 0xC;
