@@ -89,6 +89,13 @@ async def shell(cmd: str):
 
     return stdout.decode("utf-8"), stderr.decode("utf-8")
 
+async def shell_status(cmd: str):
+    async with task_sem:
+        proc = await asyncio.create_subprocess_shell(cmd, stdout=PIPE, stderr=PIPE)
+        stdout, stderr = await proc.communicate()
+
+    return proc.returncode
+
 def build_yay0_file(bin_file: str):
     yay0_file = f"ver/{version}/build/{os.path.splitext(bin_file)[0]}.Yay0"
     n.build(yay0_file, "yay0compress", find_asset(bin_file), implicit="tools/Yay0compress")
@@ -219,7 +226,12 @@ async def main():
     # $version
     n.rule("cc",
         command=f"bash -o pipefail -c '{cpp} -Iver/$version/build/include -Iinclude -Isrc -D _LANGUAGE_C -D _FINALROM -D VERSION=$version -ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 {args.cflags} -MD -MF $out.d $in -o - | {iconv} | tools/{os_dir}/cc1 -O2 -quiet -G 0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wuninitialized -Wshadow {args.cflags} -o - | tools/{os_dir}/mips-nintendo-nu64-as -EB -G 0 - -o $out'",
-        description="cc $in ($version)",
+        description="cc $in",
+        depfile="$out.d",
+        deps="gcc")
+    n.rule("cc_dsl",
+        command=f"bash -o pipefail -c '{cpp} -Iver/$version/build/include -Iinclude -Isrc -D _LANGUAGE_C -D _FINALROM -D VERSION=$version -ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 {args.cflags} -MD -MF $out.d $in -o - | $python tools/compile_dsl_macros.py | {iconv} | tools/{os_dir}/cc1 -O2 -quiet -G 0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wuninitialized -Wshadow {args.cflags} -o - | tools/{os_dir}/mips-nintendo-nu64-as -EB -G 0 - -o $out'",
+        description="dsl $in",
         depfile="$out.d",
         deps="gcc")
     n.newline()
@@ -514,10 +526,12 @@ async def main():
         n.newline()
 
         for c_file in c_files:
+            status = await shell_status(f"grep -q SCRIPT\( {c_file}")
+
             s_glob = "ver/" + version + "/" + re.sub("src/", "asm/nonmatchings/", c_file)[:-2] + "/*.s"
             n.build(
                 obj(c_file),
-                "cc",
+                "cc_dsl" if status == 0 else "cc",
                 c_file,
                 implicit=glob(s_glob),
                 order_only="generated_headers_" + version,
