@@ -16,7 +16,6 @@ from segtypes.n64.code import Subsegment
 INCLUDE_ASM_RE = re.compile(r"___INCLUDE_ASM\([^,]+, ([^,]+), ([^,)]+)") # note _ prefix
 
 TARGET = "papermario"
-versions = ["us", "jp"]
 
 def obj(path: str):
     if not path.startswith("ver/"):
@@ -147,11 +146,13 @@ async def main():
     task_sem = asyncio.Semaphore(8)
 
     parser = ArgumentParser(description="Paper Mario build.ninja generator")
+    parser.add_argument("version", nargs="*", default=["us", "jp"], help="Versions to split/build. Multiple versions can be provided, but many tools will operate on the first only (default 'us').")
     parser.add_argument("--cpp", help="GNU C preprocessor command")
     parser.add_argument("--cflags", default="", help="Extra cc/cpp flags")
     parser.add_argument("--no-splat", action="store_true", help="Don't split assets from the baserom(s)")
     parser.add_argument("--clean", action="store_true", help="Delete assets and previously-built files")
     args = parser.parse_args()
+    versions = args.version
 
     # on macOS, /usr/bin/cpp defaults to clang rather than gcc (but we need gcc's)
     if args.cpp is None and sys.platform == "darwin" and "Free Software Foundation" not in (await shell("cpp --version"))[0]:
@@ -177,6 +178,7 @@ async def main():
         # compile splat dependencies
         await shell("make -C tools/splat")
 
+        has_any_rom = False
         for version in versions:
             rom = f"ver/{version}/baserom.z64"
             has_rom = False
@@ -184,9 +186,9 @@ async def main():
             try:
                 with open(rom, "rb") as f:
                     has_rom = True
+                    has_any_rom = True
             except IOError:
-                print(f"error: {rom} does not exist!")
-                exit(1)
+                pass
 
             if has_rom:
                 print(f"Splitting assets from {rom}", end="")
@@ -200,7 +202,11 @@ async def main():
                 )
                 print("")
 
-    print("Configuring build...", end="")
+        if not has_any_rom:
+            print("No baserom.z64 found in ver/" + ",".join(versions) + " directories")
+            exit(1)
+
+    print("Configuring build...")
 
     n = ninja_syntax.Writer(open("build.ninja", "w"), width=120)
 
@@ -237,7 +243,7 @@ async def main():
     n.newline()
 
     with open("tools/permuter_settings.toml", "w") as f:
-        version = "us" # XXX
+        version = versions[0]
         f.write(f"compiler_command = \"{cpp} -Iver/{version}/build/include -Iinclude -Isrc -D _LANGUAGE_C -D _FINALROM -D VERSION={version} -ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 {args.cflags} -D SCRIPT(...)={{}} | {iconv} | tools/{os_dir}/cc1 -O2 -quiet -G 0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wuninitialized -Wshadow {args.cflags} -o - | tools/{os_dir}/mips-nintendo-nu64-as -EB -G 0 -\"\n")
         f.write(f"assembler_command = \"{cross}as -march=vr4300 -mabi=32\"\n")
 
@@ -332,6 +338,7 @@ async def main():
         n.build(f"ver/{version}/build/$target.z64", "rom", f"ver/{version}/build/$target.elf", implicit="tools/n64crc")
         n.build(f"ver/{version}/build/ok", "checksum", implicit=f"ver/{version}/build/$target.z64", variables={ "version": version })
         n.build(version, "phony", f"ver/{version}/build/ok")
+        n.build(f"$target.{version}.z64", "phony", f"ver/{version}/build/$target.z64")
 
         CFG = {}
         with open(f"ver/{version}/build.cfg", "r") as f:
@@ -525,9 +532,10 @@ async def main():
         n.build("generated_headers_" + version, "phony", generated_headers)
         n.newline()
 
-        for c_file in c_files:
-            status = await shell_status(f"grep -q SCRIPT\( {c_file}")
+    for c_file in c_files:
+        status = await shell_status(f"grep -q SCRIPT\( {c_file}")
 
+        for version in versions:
             s_glob = "ver/" + version + "/" + re.sub("src/", "asm/nonmatchings/", c_file)[:-2] + "/*.s"
             n.build(
                 obj(c_file),
@@ -538,7 +546,7 @@ async def main():
                 variables={ "version": version }
             )
 
-        print("")
+    print("")
 
     # c tools that need to be compiled
     n.build("tools/Yay0compress", "cc_modern_exe", "tools/Yay0compress.c")
@@ -548,9 +556,16 @@ async def main():
     n.build("all", "phony", versions)
     n.default("all")
 
+    # update ver/current to versions[0]
+    try:
+        os.remove("ver/current")
+    except Exception:
+        pass
+    os.symlink(versions[0], "ver/current")
+
     print("Build configuration complete! Now run")
     print("    ninja")
-    print(f"to compile '{TARGET}.z64'.")
+    print("to compile " + ', '.join(f'\'{TARGET}.{version}.z64\'' for version in versions) + ".")
 
 if __name__ == "__main__":
     loop = asyncio.get_event_loop()

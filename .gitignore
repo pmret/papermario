@@ -11,6 +11,7 @@ ctx.c
 expected/
 .vscode/launch.json
 /tools/star-rod
+/ver/current
 
 # Build artifacts
 build.ninja
