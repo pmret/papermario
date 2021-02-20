@@ -99,8 +99,8 @@ glabel L802A938C_428DFC
 /* 428E40 802A93D0 00A0382D */  daddu     $a3, $a1, $zero
 /* 428E44 802A93D4 96220052 */  lhu       $v0, 0x52($s1)
 /* 428E48 802A93D8 24030001 */  addiu     $v1, $zero, 1
-/* 428E4C 802A93DC 3C01802B */  lui       $at, %hi(func_802A98B0)
-/* 428E50 802A93E0 AC2398B0 */  sw        $v1, %lo(func_802A98B0)($at)
+/* 428E4C 802A93DC 3C01802B */  lui       $at, %hi(func_802A98B0_42EC50)
+/* 428E50 802A93E0 AC2398B0 */  sw        $v1, %lo(func_802A98B0_42EC50)($at)
 /* 428E54 802A93E4 0C0526AE */  jal       _play_sound
 /* 428E58 802A93E8 A6220054 */   sh       $v0, 0x54($s1)
 /* 428E5C 802A93EC 2402000B */  addiu     $v0, $zero, 0xb

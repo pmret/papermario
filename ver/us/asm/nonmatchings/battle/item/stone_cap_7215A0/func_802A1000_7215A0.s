@@ -102,8 +102,8 @@ glabel func_802A1000_7215A0
 /* 72171C 802A117C 8FA50020 */  lw        $a1, 0x20($sp)
 /* 721720 802A1180 8FA60024 */  lw        $a2, 0x24($sp)
 /* 721724 802A1184 0040202D */  daddu     $a0, $v0, $zero
-/* 721728 802A1188 3C01802A */  lui       $at, %hi(D_802A1A60)
-/* 72172C 802A118C AC241A60 */  sw        $a0, %lo(D_802A1A60)($at)
+/* 721728 802A1188 3C01802A */  lui       $at, %hi(battle_item_coconut_coconutDL)
+/* 72172C 802A118C AC241A60 */  sw        $a0, %lo(battle_item_coconut_coconutDL)($at)
 /* 721730 802A1190 24A50024 */  addiu     $a1, $a1, 0x24
 /* 721734 802A1194 0C051261 */  jal       set_icon_render_pos
 /* 721738 802A1198 24C6FFC1 */   addiu    $a2, $a2, -0x3f

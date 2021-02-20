@@ -435,9 +435,9 @@ glabel func_802BDDD8_321928
 /* 321FA0 802BE450 E7A0003C */  swc1      $f0, 0x3c($sp)
 /* 321FA4 802BE454 E6420064 */  swc1      $f2, 0x64($s2)
 /* 321FA8 802BE458 46001006 */  mov.s     $f0, $f2
-/* 321FAC 802BE45C 3C07800B */  lui       $a3, %hi(D_800B1DEC)
+/* 321FAC 802BE45C 3C07800B */  lui       $a3, %hi(gCameras+0x6C)
 /* 321FB0 802BE460 00E23821 */  addu      $a3, $a3, $v0
-/* 321FB4 802BE464 8CE71DEC */  lw        $a3, %lo(D_800B1DEC)($a3)
+/* 321FB4 802BE464 8CE71DEC */  lw        $a3, %lo(gCameras+0x6C)($a3)
 /* 321FB8 802BE468 C6820028 */  lwc1      $f2, 0x28($s4)
 /* 321FBC 802BE46C C6840030 */  lwc1      $f4, 0x30($s4)
 /* 321FC0 802BE470 46140000 */  add.s     $f0, $f0, $f20

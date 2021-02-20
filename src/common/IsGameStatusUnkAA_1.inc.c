@@ -2,7 +2,7 @@
 #include "map.h"
 
 ApiStatus N(IsGameStatusUnkAA_1)(ScriptInstance* script, s32 isInitialCall) {
-    GameStatus* gameStatus = GAME_STATUS;
+    GameStatus* gameStatus = *gGameStatusPtr;
 
     script->varTable[0] = 0;
     if (gameStatus->unk_AA & 1) {

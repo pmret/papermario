@@ -1,5 +1,7 @@
 #include "nok_01.h"
 
+#define UNK_ALPHA_FUNC_NPC 15
+
 INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_80240000_9C53E0);
 
 INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_802400B4_9C5494);
@@ -8,7 +10,7 @@ INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_802400B4_9C5494);
 
 # include "world/common/NpcJumpFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_802402AC_9C568C);
+#include "world/common/UnkNpcAIFunc13_2.inc.c"
 
 # include "world/common/UnkNpcAIFunc11.inc.c"
 
@@ -54,7 +56,7 @@ INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_802410C8_9C64A8);
 
 INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_80241134_9C6514);
 
-INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_80241194_9C6574);
+#include "world/common/UnkAlphaFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_802412E0_9C66C0);
 

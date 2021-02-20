@@ -118,9 +118,9 @@ glabel func_800EECE8
 /* 88348 800EEE98 000210C0 */  sll       $v0, $v0, 3
 /* 8834C 800EEE9C 4406C000 */  mfc1      $a2, $f24
 /* 88350 800EEEA0 860300A8 */  lh        $v1, 0xa8($s0)
-/* 88354 800EEEA4 3C07800B */  lui       $a3, %hi(D_800B1DEC)
+/* 88354 800EEEA4 3C07800B */  lui       $a3, %hi(gCameras+0x6C)
 /* 88358 800EEEA8 00E23821 */  addu      $a3, $a3, $v0
-/* 8835C 800EEEAC 8CE71DEC */  lw        $a3, %lo(D_800B1DEC)($a3)
+/* 8835C 800EEEAC 8CE71DEC */  lw        $a3, %lo(gCameras+0x6C)($a3)
 /* 88360 800EEEB0 44830000 */  mtc1      $v1, $f0
 /* 88364 800EEEB4 00000000 */  nop
 /* 88368 800EEEB8 46800020 */  cvt.s.w   $f0, $f0

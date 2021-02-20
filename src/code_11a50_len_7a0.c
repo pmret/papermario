@@ -4,12 +4,12 @@
 void begin_state_intro(void) {
     s8 unk_A8;
 
-    GAME_STATUS->loadMenuState = 0;
+    (*gGameStatusPtr)->loadMenuState = 0;
 
     set_curtain_scale_goal(1.0f);
     set_curtain_fade_goal(0.3f);
 
-    unk_A8 = GAME_STATUS->unk_A8;
+    unk_A8 = (*gGameStatusPtr)->unk_A8;
     switch (unk_A8) {
         case 0:
             intro_logos_set_fade_alpha(0);
@@ -24,7 +24,7 @@ void begin_state_intro(void) {
             D_800A0964 = 0;
 
             do {
-                GameStatus* gameStatus = GAME_STATUS;
+                GameStatus* gameStatus = *gGameStatusPtr;
 
                 // hos_05 (Star Sanctuary)
                 gameStatus->areaID = 5;
@@ -47,7 +47,7 @@ void begin_state_intro(void) {
 
             // FIXME: regalloc issues
             do {
-                GameStatus* gameStatus = GAME_STATUS;
+                GameStatus* gameStatus = *gGameStatusPtr;
 
                 // hos_04 (Outside the Sanctuary)
                 gameStatus->areaID = 5;
@@ -61,7 +61,7 @@ void begin_state_intro(void) {
             intro_logos_set_fade_color(0xD0);
 
             {
-                GameStatus* gameStatus = GAME_STATUS;
+                GameStatus* gameStatus = *gGameStatusPtr;
                 u8* mystery = &D_800779B0;
 
                 gameStatus->unk_A8 = -1;

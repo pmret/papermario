@@ -27,7 +27,8 @@ typedef struct UnkAl1 {
     /* 0x08 */ s16 unk_08;
     /* 0x0A */ s16 unk_0A;
     /* 0x0C */ UnkFuncAl unk_0C;
-    /* 0x10 */ s32 unk_10;
+    /* 0x10 */ UnkField unk_10;
+    ///* 0x12 */ char unk_12[2];
     /* 0x14 */ s32 unk_14;
     /* 0x18 */ s16 unk_18;
     /* 0x1A */ s16 unk_1A;

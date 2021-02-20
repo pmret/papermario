@@ -89,8 +89,8 @@ glabel L802412B4_16FB94
 /* 16FC2C 8024134C 00000000 */   nop
 /* 16FC30 80241350 0C05175C */  jal       load_map_bg
 /* 16FC34 80241354 00000000 */   nop
-/* 16FC38 80241358 3C048020 */  lui       $a0, %hi(gBackgroundImage)
-/* 16FC3C 8024135C 24840000 */  addiu     $a0, $a0, %lo(gBackgroundImage)
+/* 16FC38 80241358 3C048020 */  lui       $a0, %hi(func_80200000)
+/* 16FC3C 8024135C 24840000 */  addiu     $a0, $a0, %lo(func_80200000)
 /* 16FC40 80241360 0C05178A */  jal       read_background_size
 /* 16FC44 80241364 00000000 */   nop
 .L80241368:

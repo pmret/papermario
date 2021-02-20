@@ -154,7 +154,7 @@ ApiStatus OverrideBattleDmaDest(ScriptInstance* script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "code_181810", LoadBattleDmaData);
 
 ApiStatus func_802536A8(ScriptInstance* script, s32 isInitialCall) {
-    BattleStatus* battleStatus = BATTLE_STATUS;
+    BattleStatus* battleStatus = &gBattleStatus;
     BattleStatus* battleStatus2 = battleStatus;
 
     if (get_variable(script, *script->ptrReadPos) != 0) {
@@ -170,7 +170,7 @@ ApiStatus func_802536A8(ScriptInstance* script, s32 isInitialCall) {
 
 
 ApiStatus func_80253734(ScriptInstance* script, s32 isInitialCall) {
-    BattleStatus* battleStatus = BATTLE_STATUS;
+    BattleStatus* battleStatus = &gBattleStatus;
     s32 val = get_variable(script, *script->ptrReadPos);
 
     switch (val) {
@@ -326,7 +326,7 @@ ApiStatus MakeStatusField(ScriptInstance* script, s32 isInitialCall) {
 }
 
 s32 is_actor_hp_bar_visible(Actor* actor) {
-    BattleStatus* battleStatus = BATTLE_STATUS;
+    BattleStatus* battleStatus = &gBattleStatus;
     s32 flags;
 
     if (is_ability_active(Ability_PEEKABOO)) {
@@ -341,7 +341,7 @@ s32 is_actor_hp_bar_visible(Actor* actor) {
 }
 
 s32 is_actortype_hpbar_visible(s32 actorType) {
-    BattleStatus* battleStatus = BATTLE_STATUS;
+    BattleStatus* battleStatus = &gBattleStatus;
     s32 idx;
 
     if (is_ability_active(Ability_PEEKABOO)) {
@@ -381,7 +381,7 @@ ApiStatus MultiplyVec2ByActorScale(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus MultiplyVec3yActorScale(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus MultiplyVec3ByActorScale(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Actor* actor = get_actor(script->owner1.actorID);
 

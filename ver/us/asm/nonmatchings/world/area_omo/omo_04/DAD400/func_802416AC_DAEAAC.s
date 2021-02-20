@@ -110,7 +110,7 @@ glabel L80241818_DAEC18
 glabel L80241830_DAEC30
 /* DAEC30 80241830 0280202D */  daddu     $a0, $s4, $zero
 /* DAEC34 80241834 0200282D */  daddu     $a1, $s0, $zero
-/* DAEC38 80241838 0C090418 */  jal       func_80241060_DAE460
+/* DAEC38 80241838 0C090418 */  jal       omo_04_UnkNpcAIFunc14
 /* DAEC3C 8024183C 0260302D */   daddu    $a2, $s3, $zero
 /* DAEC40 80241840 0809061D */  j         .L80241874
 /* DAEC44 80241844 0000102D */   daddu    $v0, $zero, $zero

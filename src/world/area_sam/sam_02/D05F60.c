@@ -1,5 +1,7 @@
 #include "sam_02.h"
 
+#define UNK_ALPHA_FUNC_NPC 8
+
 #include "world/common/Call800E9894.inc.c"
 
 #include "world/common/Call800E98C4SyncStatusMenu.inc.c"
@@ -34,7 +36,7 @@ INCLUDE_ASM(s32, "world/area_sam/sam_02/D05F60", func_80240E8C_D065BC);
 
 INCLUDE_ASM(s32, "world/area_sam/sam_02/D05F60", func_80240EF8_D06628);
 
-INCLUDE_ASM(s32, "world/area_sam/sam_02/D05F60", func_80240F58_D06688);
+#include "world/common/UnkAlphaFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_02/D05F60", func_802410A4_D067D4);
 

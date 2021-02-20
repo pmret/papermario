@@ -14,7 +14,7 @@ INCLUDE_ASM(s32, "world/area_kpa/kpa_95/A8CB60", func_8024075C_A8D1DC);
 
 # include "world/common/NpcJumpFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_95/A8CB60", func_802408FC_A8D37C);
+#include "world/common/UnkNpcAIFunc13.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_95/A8CB60", func_80240A2C_A8D4AC);
 

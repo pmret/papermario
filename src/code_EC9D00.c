@@ -1,5 +1,7 @@
 #include "common.h"
 
+#define NAMESPACE code_EC9D00
+
 INCLUDE_ASM(s32, "code_EC9D00", func_80240000_EC9D00);
 
 INCLUDE_ASM(s32, "code_EC9D00", func_8024001C_EC9D1C);
@@ -30,8 +32,6 @@ INCLUDE_ASM(s32, "code_EC9D00", func_80240600_ECA300);
 
 INCLUDE_ASM(s32, "code_EC9D00", func_80240B38_ECA838);
 
-INCLUDE_ASM(s32, "code_EC9D00", func_80240C78_ECA978);
-
-INCLUDE_ASM(s32, "code_EC9D00", func_80240CC0_ECA9C0);
+#include "world/common/DeadUnkPartnerPosFuncs.inc.c"
 
 INCLUDE_ASM(s32, "code_EC9D00", func_80240D08_ECAA08);

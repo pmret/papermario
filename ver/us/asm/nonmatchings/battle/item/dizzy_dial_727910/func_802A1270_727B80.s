@@ -6,8 +6,8 @@ glabel func_802A1270_727B80
 /* 727B84 802A1274 AFB00018 */  sw        $s0, 0x18($sp)
 /* 727B88 802A1278 0080802D */  daddu     $s0, $a0, $zero
 /* 727B8C 802A127C AFB1001C */  sw        $s1, 0x1c($sp)
-/* 727B90 802A1280 3C11800B */  lui       $s1, %hi(D_800B22D8)
-/* 727B94 802A1284 263122D8 */  addiu     $s1, $s1, %lo(D_800B22D8)
+/* 727B90 802A1280 3C11800B */  lui       $s1, %hi(gCameras+0x558)
+/* 727B94 802A1284 263122D8 */  addiu     $s1, $s1, %lo(gCameras+0x558)
 /* 727B98 802A1288 10A00002 */  beqz      $a1, .L802A1294
 /* 727B9C 802A128C AFBF0020 */   sw       $ra, 0x20($sp)
 /* 727BA0 802A1290 AE000070 */  sw        $zero, 0x70($s0)

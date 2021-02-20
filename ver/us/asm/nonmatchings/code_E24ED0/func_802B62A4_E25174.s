@@ -33,9 +33,9 @@ glabel func_802B62A4_E25174
 /* E251E4 802B6314 00431021 */  addu      $v0, $v0, $v1
 /* E251E8 802B6318 000210C0 */  sll       $v0, $v0, 3
 /* E251EC 802B631C 4614B000 */  add.s     $f0, $f22, $f20
-/* E251F0 802B6320 3C01800B */  lui       $at, %hi(D_800B1DEC)
+/* E251F0 802B6320 3C01800B */  lui       $at, %hi(gCameras+0x6C)
 /* E251F4 802B6324 00220821 */  addu      $at, $at, $v0
-/* E251F8 802B6328 C42C1DEC */  lwc1      $f12, %lo(D_800B1DEC)($at)
+/* E251F8 802B6328 C42C1DEC */  lwc1      $f12, %lo(gCameras+0x6C)($at)
 /* E251FC 802B632C 0C00A6C9 */  jal       clamp_angle
 /* E25200 802B6330 460C0301 */   sub.s    $f12, $f0, $f12
 /* E25204 802B6334 46000086 */  mov.s     $f2, $f0
@@ -142,9 +142,9 @@ glabel func_802B62A4_E25174
 /* E25380 802B64B0 00431021 */  addu      $v0, $v0, $v1
 /* E25384 802B64B4 000210C0 */  sll       $v0, $v0, 3
 /* E25388 802B64B8 4614B000 */  add.s     $f0, $f22, $f20
-/* E2538C 802B64BC 3C01800B */  lui       $at, %hi(D_800B1DEC)
+/* E2538C 802B64BC 3C01800B */  lui       $at, %hi(gCameras+0x6C)
 /* E25390 802B64C0 00220821 */  addu      $at, $at, $v0
-/* E25394 802B64C4 C42C1DEC */  lwc1      $f12, %lo(D_800B1DEC)($at)
+/* E25394 802B64C4 C42C1DEC */  lwc1      $f12, %lo(gCameras+0x6C)($at)
 /* E25398 802B64C8 0C00A6C9 */  jal       clamp_angle
 /* E2539C 802B64CC 460C0301 */   sub.s    $f12, $f0, $f12
 /* E253A0 802B64D0 46000086 */  mov.s     $f2, $f0

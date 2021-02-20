@@ -88,9 +88,9 @@ glabel appendGfx_item_entity
 /* C89DC 801322DC 000218C0 */  sll       $v1, $v0, 3
 /* C89E0 801322E0 00431021 */  addu      $v0, $v0, $v1
 /* C89E4 801322E4 000210C0 */  sll       $v0, $v0, 3
-/* C89E8 801322E8 3C01800B */  lui       $at, %hi(D_800B1DEC)
+/* C89E8 801322E8 3C01800B */  lui       $at, %hi(gCameras+0x6C)
 /* C89EC 801322EC 00220821 */  addu      $at, $at, $v0
-/* C89F0 801322F0 C4201DEC */  lwc1      $f0, %lo(D_800B1DEC)($at)
+/* C89F0 801322F0 C4201DEC */  lwc1      $f0, %lo(gCameras+0x6C)($at)
 /* C89F4 801322F4 0C00A6C9 */  jal       clamp_angle
 /* C89F8 801322F8 46006301 */   sub.s    $f12, $f12, $f0
 /* C89FC 801322FC 27B20058 */  addiu     $s2, $sp, 0x58

@@ -684,8 +684,8 @@ glabel func_802BD758_3184A8
 /* 318EA0 802BE150 C6600030 */  lwc1      $f0, 0x30($s3)
 /* 318EA4 802BE154 E6200040 */  swc1      $f0, 0x40($s1)
 .L802BE158:
-/* 318EA8 802BE158 3C01800B */  lui       $at, %hi(D_800B1DEC)
-/* 318EAC 802BE15C C4201DEC */  lwc1      $f0, %lo(D_800B1DEC)($at)
+/* 318EA8 802BE158 3C01800B */  lui       $at, %hi(gCameras+0x6C)
+/* 318EAC 802BE15C C4201DEC */  lwc1      $f0, %lo(gCameras+0x6C)($at)
 /* 318EB0 802BE160 C66C00A8 */  lwc1      $f12, 0xa8($s3)
 /* 318EB4 802BE164 0C00A6C9 */  jal       clamp_angle
 /* 318EB8 802BE168 460C0300 */   add.s    $f12, $f0, $f12

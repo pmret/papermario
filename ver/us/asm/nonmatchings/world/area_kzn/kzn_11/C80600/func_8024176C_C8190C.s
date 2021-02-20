@@ -110,7 +110,7 @@ glabel L802418D8_C81A78
 glabel L802418F0_C81A90
 /* C81A90 802418F0 0280202D */  daddu     $a0, $s4, $zero
 /* C81A94 802418F4 0200282D */  daddu     $a1, $s0, $zero
-/* C81A98 802418F8 0C090448 */  jal       func_80241120_C812C0
+/* C81A98 802418F8 0C090448 */  jal       kzn_11_UnkNpcAIFunc14
 /* C81A9C 802418FC 0260302D */   daddu    $a2, $s3, $zero
 /* C81AA0 80241900 0809064D */  j         .L80241934
 /* C81AA4 80241904 0000102D */   daddu    $v0, $zero, $zero

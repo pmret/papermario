@@ -2,7 +2,7 @@
 #include "map.h"
 
 ApiStatus N(SomeXYZFuncTodoRename)(ScriptInstance* script, s32 isInitialStatus) {
-    PlayerStatus* playerStatus = PLAYER_STATUS;
+    PlayerStatus* playerStatus = &gPlayerStatus;
     Bytecode* args = script->ptrReadPos;
     s32 xVar = *args++;
     f32 x = (f32)get_variable(script, xVar);

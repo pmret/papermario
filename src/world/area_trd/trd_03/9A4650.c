@@ -6,9 +6,9 @@ ApiStatus func_80240000_9A4650(ScriptInstance* script, s32 isInitialCall) {
 
     stickX = 0;
     if (gCollisionStatus.pushingAgainstWall == COLLIDER_o84) {
-        stickX = GAME_STATUS->stickX < 0;
+        stickX = (*gGameStatusPtr)->stickX < 0;
     }
-    if ((gCollisionStatus.pushingAgainstWall == COLLIDER_o85) && (GAME_STATUS->stickX > 0)) {
+    if ((gCollisionStatus.pushingAgainstWall == COLLIDER_o85) && ((*gGameStatusPtr)->stickX > 0)) {
         stickX = 2;
     }
 
@@ -17,6 +17,6 @@ ApiStatus func_80240000_9A4650(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus GetFrameCounter(ScriptInstance* script, s32 isInitialCall) {
-    set_variable(script, *script->ptrReadPos, GAME_STATUS->frameCounter);
+    set_variable(script, *script->ptrReadPos, (*gGameStatusPtr)->frameCounter);
     return ApiStatus_DONE2;
 }

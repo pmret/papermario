@@ -1,5 +1,7 @@
 #include "mac_05.h"
 
+#define UNK_ALPHA_FUNC_NPC 6
+
 #include "world/common/UnkTexturePanFunc.inc.c"
 
 #include "world/common/UnkTexturePanFunc2.inc.c"
@@ -22,7 +24,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80240B0C_852C7C);
 
 # include "world/common/NpcJumpFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80240CAC_852E1C);
+#include "world/common/UnkNpcAIFunc13.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80240DDC_852F4C);
 
@@ -46,7 +48,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80241680_8537F0);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_802416EC_85385C);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_8024174C_8538BC);
+#include "world/common/UnkAlphaFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80241898_853A08);
 

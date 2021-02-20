@@ -157,8 +157,8 @@ glabel func_802BBA60_E303B0
 /* E305EC 802BBC9C 2463FFF0 */  addiu     $v1, $v1, -0x10
 /* E305F0 802BBCA0 A6020094 */  sh        $v0, 0x94($s0)
 /* E305F4 802BBCA4 A6030096 */  sh        $v1, 0x96($s0)
-/* E305F8 802BBCA8 3C01800B */  lui       $at, %hi(D_800B1DEC)
-/* E305FC 802BBCAC C4201DEC */  lwc1      $f0, %lo(D_800B1DEC)($at)
+/* E305F8 802BBCA8 3C01800B */  lui       $at, %hi(gCameras+0x6C)
+/* E305FC 802BBCAC C4201DEC */  lwc1      $f0, %lo(gCameras+0x6C)($at)
 /* E30600 802BBCB0 46000007 */  neg.s     $f0, $f0
 /* E30604 802BBCB4 E6200064 */  swc1      $f0, 0x64($s1)
 /* E30608 802BBCB8 82620000 */  lb        $v0, ($s3)

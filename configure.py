@@ -305,7 +305,7 @@ async def main():
 
     # $version
     n.rule("link",
-        command="${cross}ld -T ver/$version/undefined_syms.txt -T ver/$version/undefined_syms_auto.txt -T ver/$version/undefined_funcs_auto.txt -Map ver/$version/build/$target.map --no-check-sections -T $in -o $out",
+        command="${cross}ld -T ver/$version/undefined_syms.txt -T ver/$version/undefined_syms_auto.txt -T ver/$version/undefined_funcs_auto.txt  -T ver/$version/dead_syms.txt -Map ver/$version/build/$target.map --no-check-sections -T $in -o $out",
         description="link $out")
     n.newline()
 

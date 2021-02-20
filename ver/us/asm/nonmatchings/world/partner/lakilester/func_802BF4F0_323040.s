@@ -300,7 +300,7 @@ glabel func_802BF4F0_323040
 .L802BF948:
 /* 323498 802BF948 0C039769 */  jal       set_action_state
 /* 32349C 802BF94C 24040008 */   addiu    $a0, $zero, 8
-/* 3234A0 802BF950 0C038C1B */  jal       gravity_use_fall_parms
+/* 3234A0 802BF950 0C038C1B */  jal       gravity_use_fall_params
 /* 3234A4 802BF954 00000000 */   nop
 .L802BF958:
 /* 3234A8 802BF958 3C03802C */  lui       $v1, %hi(D_802BFF00)

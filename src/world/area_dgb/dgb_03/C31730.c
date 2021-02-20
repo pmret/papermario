@@ -28,7 +28,7 @@ INCLUDE_ASM(s32, "world/area_dgb/dgb_03/C31730", func_8024119C_C3267C);
 
 # include "world/common/NpcJumpFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_03/C31730", func_8024133C_C3281C);
+#include "world/common/UnkNpcAIFunc13.inc.c"
 
 INCLUDE_ASM(s32, "world/area_dgb/dgb_03/C31730", func_8024146C_C3294C);
 

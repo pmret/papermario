@@ -480,7 +480,7 @@ void func_802CCAC0(void) {
 INCLUDE_ASM(s32, "code_ef070_len_3400", draw_anim_models);
 
 ApiStatus func_802CCCB0(ScriptInstance* script, s32 isInitialCall) {
-    if (!GAME_STATUS->isBattle) {
+    if (!(*gGameStatusPtr)->isBattle) {
         gCurrentMeshAnimationListPtr = &gWorldMeshAnimationList;
     } else {
         gCurrentMeshAnimationListPtr = &gBattleMeshAnimationList;
@@ -688,7 +688,7 @@ ApiStatus func_802CD418(ScriptInstance* script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "code_ef070_len_3400", func_802CD4B4);
 
 void func_802CD57C(void) {
-    if (!GAME_STATUS->isBattle) {
+    if (!(*gGameStatusPtr)->isBattle) {
         gCurrentMeshAnimationListPtr = &gWorldMeshAnimationList;
     } else {
         gCurrentMeshAnimationListPtr = &gBattleMeshAnimationList;

@@ -158,9 +158,9 @@ glabel func_E0052460
 /* 35D138 E00526B8 000218C0 */  sll       $v1, $v0, 3
 /* 35D13C E00526BC 00431021 */  addu      $v0, $v0, $v1
 /* 35D140 E00526C0 000210C0 */  sll       $v0, $v0, 3
-/* 35D144 E00526C4 3C01800B */  lui       $at, %hi(D_800B1DEC)
+/* 35D144 E00526C4 3C01800B */  lui       $at, %hi(gCameras+0x6C)
 /* 35D148 E00526C8 00220821 */  addu      $at, $at, $v0
-/* 35D14C E00526CC C4201DEC */  lwc1      $f0, %lo(D_800B1DEC)($at)
+/* 35D14C E00526CC C4201DEC */  lwc1      $f0, %lo(gCameras+0x6C)($at)
 /* 35D150 E00526D0 4407B000 */  mfc1      $a3, $f22
 /* 35D154 E00526D4 46000007 */  neg.s     $f0, $f0
 /* 35D158 E00526D8 44050000 */  mfc1      $a1, $f0

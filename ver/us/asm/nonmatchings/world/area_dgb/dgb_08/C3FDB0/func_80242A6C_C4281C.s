@@ -110,7 +110,7 @@ glabel L80242BD8_C42988
 glabel L80242BF0_C429A0
 /* C429A0 80242BF0 0280202D */  daddu     $a0, $s4, $zero
 /* C429A4 80242BF4 0200282D */  daddu     $a1, $s0, $zero
-/* C429A8 80242BF8 0C090908 */  jal       func_80242420_C421D0
+/* C429A8 80242BF8 0C090908 */  jal       dgb_08_UnkNpcAIFunc14
 /* C429AC 80242BFC 0260302D */   daddu    $a2, $s3, $zero
 /* C429B0 80242C00 08090B0D */  j         .L80242C34
 /* C429B4 80242C04 0000102D */   daddu    $v0, $zero, $zero

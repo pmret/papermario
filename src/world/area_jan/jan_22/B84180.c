@@ -14,7 +14,7 @@ INCLUDE_ASM(s32, "world/area_jan/jan_22/B84180", func_8024067C_B847FC);
 
 # include "world/common/NpcJumpFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_22/B84180", func_8024081C_B8499C);
+#include "world/common/UnkNpcAIFunc13.inc.c"
 
 INCLUDE_ASM(s32, "world/area_jan/jan_22/B84180", func_8024094C_B84ACC);
 
@@ -33,7 +33,7 @@ INCLUDE_ASM(s32, "world/area_jan/jan_22/B84180", func_80240FA8_B85128);
 INCLUDE_ASM(s32, "world/area_jan/jan_22/B84180", func_80240FC4_B85144);
 
 ApiStatus PostChapter5StatUpdate(ScriptInstance* script, s32 isInitialCall) {
-    PlayerData* playerData = PLAYER_DATA;
+    PlayerData* playerData = &gPlayerData;
 
     set_max_SP(5);
     playerData->curHP = playerData->curMaxHP;

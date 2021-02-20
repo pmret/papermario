@@ -32,8 +32,6 @@ INCLUDE_ASM(s32, "world/area_iwa/iwa_10/91E6D0", func_802408F0_91EE60);
 
 INCLUDE_ASM(s32, "world/area_iwa/iwa_10/91E6D0", func_80240E28_91F398);
 
-INCLUDE_ASM(s32, "world/area_iwa/iwa_10/91E6D0", func_80240F68_91F4D8);
-
-INCLUDE_ASM(s32, "world/area_iwa/iwa_10/91E6D0", func_80240FB0_91F520);
+#include "world/common/UnkPartnerPosFuncs.inc.c"
 
 INCLUDE_ASM(s32, "world/area_iwa/iwa_10/91E6D0", func_80240FF8_91F568);

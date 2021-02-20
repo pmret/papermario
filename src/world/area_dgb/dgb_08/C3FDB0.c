@@ -14,7 +14,7 @@ INCLUDE_ASM(s32, "world/area_dgb/dgb_08/C3FDB0", func_8024067C_C4042C);
 
 # include "world/common/NpcJumpFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_08/C3FDB0", func_8024081C_C405CC);
+#include "world/common/UnkNpcAIFunc13.inc.c"
 
 INCLUDE_ASM(s32, "world/area_dgb/dgb_08/C3FDB0", func_8024094C_C406FC);
 
@@ -52,7 +52,7 @@ INCLUDE_ASM(s32, "world/area_dgb/dgb_08/C3FDB0", func_80241FF8_C41DA8);
 
 INCLUDE_ASM(s32, "world/area_dgb/dgb_08/C3FDB0", func_802423B4_C42164);
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_08/C3FDB0", func_80242420_C421D0);
+#include "world/common/UnkNpcAIFunc14.inc.c"
 
 #include "world/common/UnkNpcAIFunc3.inc.c"
 

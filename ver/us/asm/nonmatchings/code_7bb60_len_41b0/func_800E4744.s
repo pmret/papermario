@@ -235,7 +235,7 @@ glabel func_800E4744
 .L800E4A9C:
 /* 7DF4C 800E4A9C 0C039769 */  jal       set_action_state
 /* 7DF50 800E4AA0 00000000 */   nop
-/* 7DF54 800E4AA4 0C038C1B */  jal       gravity_use_fall_parms
+/* 7DF54 800E4AA4 0C038C1B */  jal       gravity_use_fall_params
 /* 7DF58 800E4AA8 00000000 */   nop
 .L800E4AAC:
 /* 7DF5C 800E4AAC 8FBF005C */  lw        $ra, 0x5c($sp)

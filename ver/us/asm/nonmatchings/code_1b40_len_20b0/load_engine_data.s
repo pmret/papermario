@@ -7,8 +7,8 @@ glabel load_engine_data
 /* 21E4 80026DE4 2484EE30 */  addiu     $a0, $a0, -0x11d0
 /* 21E8 80026DE8 3C050010 */  lui       $a1, 0x10
 /* 21EC 80026DEC 24A52610 */  addiu     $a1, $a1, 0x2610
-/* 21F0 80026DF0 3C06802E */  lui       $a2, %hi(D_802DBD40)
-/* 21F4 80026DF4 24C6BD40 */  addiu     $a2, $a2, %lo(D_802DBD40)
+/* 21F0 80026DF0 3C06802E */  lui       $a2, %hi(func_802DBD40)
+/* 21F4 80026DF4 24C6BD40 */  addiu     $a2, $a2, %lo(func_802DBD40)
 /* 21F8 80026DF8 AFBF0014 */  sw        $ra, 0x14($sp)
 /* 21FC 80026DFC 0C00A5CF */  jal       dma_copy
 /* 2200 80026E00 AFB00010 */   sw       $s0, 0x10($sp)
@@ -16,8 +16,8 @@ glabel load_engine_data
 /* 2208 80026E08 248459B0 */  addiu     $a0, $a0, 0x59b0
 /* 220C 80026E0C 3C05000A */  lui       $a1, 0xa
 /* 2210 80026E10 24A55DD0 */  addiu     $a1, $a1, 0x5dd0
-/* 2214 80026E14 3C06800E */  lui       $a2, %hi(D_800DC500)
-/* 2218 80026E18 24C6C500 */  addiu     $a2, $a2, %lo(D_800DC500)
+/* 2214 80026E14 3C06800E */  lui       $a2, %hi(func_800DC500)
+/* 2218 80026E18 24C6C500 */  addiu     $a2, $a2, %lo(func_800DC500)
 /* 221C 80026E1C 0C00A5CF */  jal       dma_copy
 /* 2220 80026E20 00000000 */   nop
 /* 2224 80026E24 3C04000E */  lui       $a0, 0xe

@@ -111,7 +111,7 @@ glabel L802428C4_CD46F4
 glabel L802428DC_CD470C
 /* CD470C 802428DC 0280202D */  daddu     $a0, $s4, $zero
 /* CD4710 802428E0 0200282D */  daddu     $a1, $s0, $zero
-/* CD4714 802428E4 0C0908D2 */  jal       func_80242348_CD4178
+/* CD4714 802428E4 0C0908D2 */  jal       flo_16_UnkNpcAIFunc13
 /* CD4718 802428E8 0260302D */   daddu    $a2, $s3, $zero
 glabel L802428EC_CD471C
 /* CD471C 802428EC 0280202D */  daddu     $a0, $s4, $zero

@@ -134,7 +134,7 @@ Script D_80280EB8 = SCRIPT({
 });
 
 void get_dpad_input_radial(f32* angle, f32* magnitude) {
-    BattleStatus* battleStatus = BATTLE_STATUS;
+    BattleStatus* battleStatus = &gBattleStatus;
     u16 currentButtonsDown;
     f32 stickX;
     f32 stickY;

@@ -30,9 +30,9 @@ glabel func_80240C60_B5EF10
 /* B5EF74 80240CC4 000320C0 */  sll       $a0, $v1, 3
 /* B5EF78 80240CC8 00641821 */  addu      $v1, $v1, $a0
 /* B5EF7C 80240CCC 000318C0 */  sll       $v1, $v1, 3
-/* B5EF80 80240CD0 3C01800B */  lui       $at, %hi(D_800B1DEC)
+/* B5EF80 80240CD0 3C01800B */  lui       $at, %hi(gCameras+0x6C)
 /* B5EF84 80240CD4 00230821 */  addu      $at, $at, $v1
-/* B5EF88 80240CD8 C42C1DEC */  lwc1      $f12, %lo(D_800B1DEC)($at)
+/* B5EF88 80240CD8 C42C1DEC */  lwc1      $f12, %lo(gCameras+0x6C)($at)
 /* B5EF8C 80240CDC 0C00A88D */  jal       sin_cos_deg
 /* B5EF90 80240CE0 0040A82D */   daddu    $s5, $v0, $zero
 /* B5EF94 80240CE4 1200005D */  beqz      $s0, .L80240E5C

@@ -286,7 +286,7 @@ typedef UNK_TYPE SoundId;
 #define SoundId_MOLE_THROW            0x000003E8
 #define SoundId_CLOSE_SHELL           0x000002FF
 #define SoundId_OPEN_SHELL            0x000003D4
-#define SoundId_THROW                 0x3FA
+#define SoundId_THROW                 0x000003FA
 #define SoundId_BOW_VANISH            0x0000200E
 #define SoundId_BOW_APPEAR            0x0000200F
 #define SoundId_CANNON1               0x00002016
@@ -988,6 +988,7 @@ typedef s8 ActionState;
 #define ActionState_BOUNCE             0x00000004
 #define ActionState_ABORTED_JUMP       0x00000005
 #define ActionState_LAUNCH             0x00000006
+#define ActionState_7                  0x00000007
 #define ActionState_FALLING            0x00000008
 #define ActionState_STEP_DOWN          0x00000009
 #define ActionState_LAND               0x0000000A
@@ -1001,6 +1002,7 @@ typedef s8 ActionState;
 #define ActionState_HAMMER             0x00000012
 #define ActionState_HIT_HAZARD         0x00000015
 #define ActionState_HIT_LAVA           0x00000017
+#define ActionState_18                 0x00000018
 #define ActionState_SPIN               0x0000001A
 #define ActionState_ENEMY_FIRST_STRIKE 0x0000001B
 #define ActionState_SPINNING_FLOWER    0x0000001D

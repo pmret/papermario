@@ -133,8 +133,8 @@ glabel func_802BD414_31E184
 /* 31E360 802BD5F0 44070000 */  mfc1      $a3, $f0
 /* 31E364 802BD5F4 0C00A720 */  jal       atan2
 /* 31E368 802BD5F8 46006386 */   mov.s    $f14, $f12
-/* 31E36C 802BD5FC 3C01800B */  lui       $at, %hi(D_800B1DEC)
-/* 31E370 802BD600 C42C1DEC */  lwc1      $f12, %lo(D_800B1DEC)($at)
+/* 31E36C 802BD5FC 3C01800B */  lui       $at, %hi(gCameras+0x6C)
+/* 31E370 802BD600 C42C1DEC */  lwc1      $f12, %lo(gCameras+0x6C)($at)
 /* 31E374 802BD604 0C00A6C9 */  jal       clamp_angle
 /* 31E378 802BD608 460C0300 */   add.s    $f12, $f0, $f12
 /* 31E37C 802BD60C 3C02802C */  lui       $v0, %hi(D_802BFEF8)

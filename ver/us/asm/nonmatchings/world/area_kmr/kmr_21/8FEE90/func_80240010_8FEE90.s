@@ -10,8 +10,8 @@ glabel func_80240010_8FEE90
 /* 8FEEA4 80240024 3C0EFD18 */  lui       $t6, 0xfd18
 /* 8FEEA8 80240028 35CE00C7 */  ori       $t6, $t6, 0xc7
 /* 8FEEAC 8024002C AFB3000C */  sw        $s3, 0xc($sp)
-/* 8FEEB0 80240030 3C138024 */  lui       $s3, %hi(func_802407F4_9C5BD4)
-/* 8FEEB4 80240034 267307F4 */  addiu     $s3, $s3, %lo(func_802407F4_9C5BD4)
+/* 8FEEB0 80240030 3C138024 */  lui       $s3, %hi(func_802407F4_8D45B4)
+/* 8FEEB4 80240034 267307F4 */  addiu     $s3, $s3, %lo(func_802407F4_8D45B4)
 /* 8FEEB8 80240038 3C0BF518 */  lui       $t3, 0xf518
 /* 8FEEBC 8024003C 356B6400 */  ori       $t3, $t3, 0x6400
 /* 8FEEC0 80240040 AFB20008 */  sw        $s2, 8($sp)

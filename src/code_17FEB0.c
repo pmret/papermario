@@ -1,7 +1,7 @@
 #include "common.h"
 
 HitResult calc_item_check_hit(void) {
-    BattleStatus* battleStatus = BATTLE_STATUS;
+    BattleStatus* battleStatus = &gBattleStatus;
     ActorMovePos* movePos = &battleStatus->playerActor->movePos;
     ActorID actorID = battleStatus->currentTargetID;
     s8 currentTargetPartS8;
@@ -40,7 +40,7 @@ HitResult calc_item_check_hit(void) {
 INCLUDE_ASM(s32, "code_17FEB0", calc_item_damage_enemy);
 
 ApiStatus ItemDamageEnemy(ScriptInstance* script, s32 isInitialCall) {
-    BattleStatus* battleStatus = BATTLE_STATUS;
+    BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
     s32 itemDamageOut = *args++;
     s32 a5;
@@ -65,21 +65,21 @@ ApiStatus ItemDamageEnemy(ScriptInstance* script, s32 isInitialCall) {
     }
 
     if (a5 & 0x40) {
-        BATTLE_STATUS->flags1 |= 0x40;
+        gBattleStatus.flags1 |= 0x40;
     } else {
-        BATTLE_STATUS->flags1 &= ~0x40;
+        gBattleStatus.flags1 &= ~0x40;
     }
 
     if (a5 & 0x200) {
-        BATTLE_STATUS->flags1 |= 0x200;
+        gBattleStatus.flags1 |= 0x200;
     } else {
-        BATTLE_STATUS->flags1 &= ~0x200;
+        gBattleStatus.flags1 &= ~0x200;
     }
 
     if (a5 & 0x80) {
-        BATTLE_STATUS->flags1 |= 0x80;
+        gBattleStatus.flags1 |= 0x80;
     } else {
-        BATTLE_STATUS->flags1 &= ~0x80;
+        gBattleStatus.flags1 &= ~0x80;
     }
 
     actor = get_actor(script->owner1.actorID);
@@ -107,7 +107,7 @@ ApiStatus ItemDamageEnemy(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus ItemAfflictEnemy(ScriptInstance* script, s32 isInitialCall) {
-    BattleStatus* battleStatus = BATTLE_STATUS;
+    BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
     s32 itemDamageOut = *args++;
     s32 a5;
@@ -133,21 +133,21 @@ ApiStatus ItemAfflictEnemy(ScriptInstance* script, s32 isInitialCall) {
     }
 
     if (a5 & 0x40) {
-        BATTLE_STATUS->flags1 |= 0x40;
+        gBattleStatus.flags1 |= 0x40;
     } else {
-        BATTLE_STATUS->flags1 &= ~0x40;
+        gBattleStatus.flags1 &= ~0x40;
     }
 
     if (a5 & 0x200) {
-        BATTLE_STATUS->flags1 |= 0x200;
+        gBattleStatus.flags1 |= 0x200;
     } else {
-        BATTLE_STATUS->flags1 &= ~0x200;
+        gBattleStatus.flags1 &= ~0x200;
     }
 
     if (a5 & 0x80) {
-        BATTLE_STATUS->flags1 |= 0x80;
+        gBattleStatus.flags1 |= 0x80;
     } else {
-        BATTLE_STATUS->flags1 &= ~0x80;
+        gBattleStatus.flags1 &= ~0x80;
     }
 
     actor = get_actor(script->owner1.actorID);
@@ -175,7 +175,7 @@ ApiStatus ItemAfflictEnemy(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus func_80252B3C(ScriptInstance* script, s32 isInitialCall) {
-    BattleStatus* battleStatus = BATTLE_STATUS;
+    BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
     s32 itemDamageOut = *args++;
     s32 a5;
@@ -200,21 +200,21 @@ ApiStatus func_80252B3C(ScriptInstance* script, s32 isInitialCall) {
     }
 
     if (a5 & 0x40) {
-        BATTLE_STATUS->flags1 |= 0x40;
+        gBattleStatus.flags1 |= 0x40;
     } else {
-        BATTLE_STATUS->flags1 &= ~0x40;
+        gBattleStatus.flags1 &= ~0x40;
     }
 
     if (a5 & 0x200) {
-        BATTLE_STATUS->flags1 |= 0x200;
+        gBattleStatus.flags1 |= 0x200;
     } else {
-        BATTLE_STATUS->flags1 &= ~0x200;
+        gBattleStatus.flags1 &= ~0x200;
     }
 
     if (a5 & 0x80) {
-        BATTLE_STATUS->flags1 |= 0x80;
+        gBattleStatus.flags1 |= 0x80;
     } else {
-        BATTLE_STATUS->flags1 &= ~0x80;
+        gBattleStatus.flags1 &= ~0x80;
     }
 
     actor = get_actor(script->owner1.actorID);
@@ -242,7 +242,7 @@ ApiStatus func_80252B3C(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus ItemCheckHit(ScriptInstance* script, s32 isInitialCall) {
-    BattleStatus* battleStatus = BATTLE_STATUS;
+    BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
     s32 itemDamageOut = *args++;
     s32 a5;
@@ -267,21 +267,21 @@ ApiStatus ItemCheckHit(ScriptInstance* script, s32 isInitialCall) {
     }
 
     if (a5 & 0x40) {
-        BATTLE_STATUS->flags1 |= 0x40;
+        gBattleStatus.flags1 |= 0x40;
     } else {
-        BATTLE_STATUS->flags1 &= ~0x40;
+        gBattleStatus.flags1 &= ~0x40;
     }
 
     if (a5 & 0x200) {
-        BATTLE_STATUS->flags1 |= 0x200;
+        gBattleStatus.flags1 |= 0x200;
     } else {
-        BATTLE_STATUS->flags1 &= ~0x200;
+        gBattleStatus.flags1 &= ~0x200;
     }
 
     if (a5 & 0x80) {
-        BATTLE_STATUS->flags1 |= 0x80;
+        gBattleStatus.flags1 |= 0x80;
     } else {
-        BATTLE_STATUS->flags1 &= ~0x80;
+        gBattleStatus.flags1 &= ~0x80;
     }
 
     actor = get_actor(script->owner1.actorID);

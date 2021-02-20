@@ -110,7 +110,7 @@ glabel L80241F2C_A08E2C
 glabel L80241F44_A08E44
 /* A08E44 80241F44 0280202D */  daddu     $a0, $s4, $zero
 /* A08E48 80241F48 0200282D */  daddu     $a1, $s0, $zero
-/* A08E4C 80241F4C 0C0905DD */  jal       func_80241774_A08674
+/* A08E4C 80241F4C 0C0905DD */  jal       nok_15_UnkNpcAIFunc14
 /* A08E50 80241F50 0260302D */   daddu    $a2, $s3, $zero
 /* A08E54 80241F54 080907E2 */  j         .L80241F88
 /* A08E58 80241F58 0000102D */   daddu    $v0, $zero, $zero

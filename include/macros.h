@@ -26,12 +26,6 @@
 #define PANIC() ASSERT(0)
 #define STATIC_ASSERT(condition) enum { static_assert_fail = 1/(!!(condition)) } // Causes division by zero ("not integer constant") if false
 
-#define BATTLE_STATUS (&gBattleStatus)
-#define PLAYER_ACTOR (gBattleStatus.playerActor)
-#define GAME_STATUS (*gGameStatusPtr)
-#define PLAYER_STATUS (&gPlayerStatus)
-#define UI_STATUS (&gUIStatus)
-#define PLAYER_DATA (&gPlayerData)
 #define CAM(id) (&gCameras[id])
 #define CURRENT_CAM (&gCameras[gCurrentCameraID])
 #define GET_MAP_ENTRY(cfg, idx) (&(*cfg->entryList)[idx])

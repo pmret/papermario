@@ -67,5 +67,6 @@ ApiStatus N(UnkTexturePanFunc2)(ScriptInstance* script, s32 isInitialCall) {
     if (script->functionTemp[3].s >= script->varTable[8]) {
         script->functionTemp[3].s = 0;
     }
+
     return ApiStatus_BLOCK;
 }

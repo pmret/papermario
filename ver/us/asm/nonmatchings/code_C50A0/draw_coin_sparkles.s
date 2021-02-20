@@ -32,9 +32,9 @@ glabel draw_coin_sparkles
 /* C7278 80130B78 000210C0 */  sll       $v0, $v0, 3
 /* C727C 80130B7C 3C038015 */  lui       $v1, %hi(D_80155D8C)
 /* C7280 80130B80 84635D8C */  lh        $v1, %lo(D_80155D8C)($v1)
-/* C7284 80130B84 3C01800B */  lui       $at, %hi(D_800B1DEC)
+/* C7284 80130B84 3C01800B */  lui       $at, %hi(gCameras+0x6C)
 /* C7288 80130B88 00220821 */  addu      $at, $at, $v0
-/* C728C 80130B8C C4201DEC */  lwc1      $f0, %lo(D_800B1DEC)($at)
+/* C728C 80130B8C C4201DEC */  lwc1      $f0, %lo(gCameras+0x6C)($at)
 /* C7290 80130B90 3C028015 */  lui       $v0, %hi(D_80155D8E)
 /* C7294 80130B94 84425D8E */  lh        $v0, %lo(D_80155D8E)($v0)
 /* C7298 80130B98 4483C000 */  mtc1      $v1, $f24

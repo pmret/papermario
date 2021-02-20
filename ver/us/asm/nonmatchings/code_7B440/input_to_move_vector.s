@@ -43,8 +43,8 @@ glabel input_to_move_vector
 /* 7B848 800E2398 4407C000 */  mfc1      $a3, $f24
 /* 7B84C 800E239C 0C00A720 */  jal       atan2
 /* 7B850 800E23A0 4600D386 */   mov.s    $f14, $f26
-/* 7B854 800E23A4 3C01800B */  lui       $at, %hi(D_800B1DEC)
-/* 7B858 800E23A8 C42C1DEC */  lwc1      $f12, %lo(D_800B1DEC)($at)
+/* 7B854 800E23A4 3C01800B */  lui       $at, %hi(gCameras+0x6C)
+/* 7B858 800E23A8 C42C1DEC */  lwc1      $f12, %lo(gCameras+0x6C)($at)
 /* 7B85C 800E23AC 0C00A6C9 */  jal       clamp_angle
 /* 7B860 800E23B0 460C0300 */   add.s    $f12, $f0, $f12
 /* 7B864 800E23B4 461AA032 */  c.eq.s    $f20, $f26

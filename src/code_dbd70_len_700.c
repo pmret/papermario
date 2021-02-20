@@ -7,7 +7,7 @@ void default_trigger_delegate(s32* arg0) {
 INCLUDE_ASM(s32, "code_dbd70_len_700", clear_trigger_data);
 
 void init_trigger_list(void) {
-    if (!GAME_STATUS->isBattle) {
+    if (!(*gGameStatusPtr)->isBattle) {
         gCurrentTriggerListPtr = &gTriggerList1;
     } else {
         gCurrentTriggerListPtr = &gTriggerList2;

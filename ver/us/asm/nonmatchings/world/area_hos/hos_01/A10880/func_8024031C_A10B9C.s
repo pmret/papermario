@@ -3,8 +3,8 @@
 
 glabel func_8024031C_A10B9C
 /* A10B9C 8024031C 27BDFF98 */  addiu     $sp, $sp, -0x68
-/* A10BA0 80240320 3C01800B */  lui       $at, %hi(D_800B1DEC)
-/* A10BA4 80240324 C4201DEC */  lwc1      $f0, %lo(D_800B1DEC)($at)
+/* A10BA0 80240320 3C01800B */  lui       $at, %hi(gCameras+0x6C)
+/* A10BA4 80240324 C4201DEC */  lwc1      $f0, %lo(gCameras+0x6C)($at)
 /* A10BA8 80240328 3C014334 */  lui       $at, 0x4334
 /* A10BAC 8024032C 44811000 */  mtc1      $at, $f2
 /* A10BB0 80240330 3C014049 */  lui       $at, 0x4049

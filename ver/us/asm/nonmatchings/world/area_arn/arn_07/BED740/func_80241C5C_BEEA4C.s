@@ -110,7 +110,7 @@ glabel L80241DC8_BEEBB8
 glabel L80241DE0_BEEBD0
 /* BEEBD0 80241DE0 0280202D */  daddu     $a0, $s4, $zero
 /* BEEBD4 80241DE4 0200282D */  daddu     $a1, $s0, $zero
-/* BEEBD8 80241DE8 0C090584 */  jal       func_80241610_BEE400
+/* BEEBD8 80241DE8 0C090584 */  jal       arn_07_UnkNpcAIFunc14
 /* BEEBDC 80241DEC 0260302D */   daddu    $a2, $s3, $zero
 /* BEEBE0 80241DF0 08090789 */  j         .L80241E24
 /* BEEBE4 80241DF4 0000102D */   daddu    $v0, $zero, $zero

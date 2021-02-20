@@ -55,9 +55,9 @@ glabel collision_main_above
 /* 7BD54 800E28A4 00431021 */  addu      $v0, $v0, $v1
 /* 7BD58 800E28A8 000210C0 */  sll       $v0, $v0, 3
 /* 7BD5C 800E28AC 46001081 */  sub.s     $f2, $f2, $f0
-/* 7BD60 800E28B0 3C01800B */  lui       $at, %hi(D_800B1DEC)
+/* 7BD60 800E28B0 3C01800B */  lui       $at, %hi(gCameras+0x6C)
 /* 7BD64 800E28B4 00220821 */  addu      $at, $at, $v0
-/* 7BD68 800E28B8 C4201DEC */  lwc1      $f0, %lo(D_800B1DEC)($at)
+/* 7BD68 800E28B8 C4201DEC */  lwc1      $f0, %lo(gCameras+0x6C)($at)
 /* 7BD6C 800E28BC 46001080 */  add.s     $f2, $f2, $f0
 /* 7BD70 800E28C0 27A50020 */  addiu     $a1, $sp, 0x20
 .L800E28C4:

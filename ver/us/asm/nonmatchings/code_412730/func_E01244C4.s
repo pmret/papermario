@@ -70,9 +70,9 @@ glabel func_E01244C4
 /* 412CF8 E01245C8 00431021 */  addu      $v0, $v0, $v1
 /* 412CFC E01245CC 000210C0 */  sll       $v0, $v0, 3
 /* 412D00 E01245D0 44060000 */  mfc1      $a2, $f0
-/* 412D04 E01245D4 3C01800B */  lui       $at, %hi(D_800B1DEC)
+/* 412D04 E01245D4 3C01800B */  lui       $at, %hi(gCameras+0x6C)
 /* 412D08 E01245D8 00220821 */  addu      $at, $at, $v0
-/* 412D0C E01245DC C4201DEC */  lwc1      $f0, %lo(D_800B1DEC)($at)
+/* 412D0C E01245DC C4201DEC */  lwc1      $f0, %lo(gCameras+0x6C)($at)
 /* 412D10 E01245E0 3C073F80 */  lui       $a3, 0x3f80
 /* 412D14 E01245E4 46000007 */  neg.s     $f0, $f0
 /* 412D18 E01245E8 44050000 */  mfc1      $a1, $f0

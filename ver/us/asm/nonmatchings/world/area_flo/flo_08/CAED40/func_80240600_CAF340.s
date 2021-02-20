@@ -30,9 +30,9 @@ glabel func_80240600_CAF340
 /* CAF3A4 80240664 000320C0 */  sll       $a0, $v1, 3
 /* CAF3A8 80240668 00641821 */  addu      $v1, $v1, $a0
 /* CAF3AC 8024066C 000318C0 */  sll       $v1, $v1, 3
-/* CAF3B0 80240670 3C01800B */  lui       $at, %hi(D_800B1DEC)
+/* CAF3B0 80240670 3C01800B */  lui       $at, %hi(gCameras+0x6C)
 /* CAF3B4 80240674 00230821 */  addu      $at, $at, $v1
-/* CAF3B8 80240678 C42C1DEC */  lwc1      $f12, %lo(D_800B1DEC)($at)
+/* CAF3B8 80240678 C42C1DEC */  lwc1      $f12, %lo(gCameras+0x6C)($at)
 /* CAF3BC 8024067C 0C00A88D */  jal       sin_cos_deg
 /* CAF3C0 80240680 0040A82D */   daddu    $s5, $v0, $zero
 /* CAF3C4 80240684 1200005D */  beqz      $s0, .L802407FC

@@ -5,8 +5,8 @@ void* D_80108A64; // an image
 
 // Returns time to sleep for on $x.
 ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
-    BattleStatus* battleStatus = BATTLE_STATUS;
-    Actor* player = PLAYER_ACTOR;
+    BattleStatus* battleStatus = &gBattleStatus;
+    Actor* player = gBattleStatus.playerActor;
     s32 sellValue = gItemTable[battleStatus->selectedItemID].sellValue;
     f32 posX;
     f32 posY = player->currentPos.y + player->size.y;
@@ -50,7 +50,7 @@ ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus N(GiveRefundCleanup)(ScriptInstance* script, s32 isInitialCall) {
-    BattleStatus* battleStatus = BATTLE_STATUS;
+    BattleStatus* battleStatus = &gBattleStatus;
     s32 sellValue = gItemTable[battleStatus->selectedItemID].sellValue;
 
     if (heroes_is_ability_active(battleStatus->playerActor, Ability_REFUND) && sellValue > 0) {

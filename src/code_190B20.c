@@ -1398,7 +1398,7 @@ void func_80071A50(s32, f32 x, f32 y, f32 z, f32 scale /* maybe */, s32);
 void func_80071C30(s32, f32 x, f32 y, f32 z, f32 scale /* maybe */, s32);
 
 void remove_player_buffs(PlayerBuff buffs) {
-    BattleStatus* battleStatus = BATTLE_STATUS;
+    BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
     Actor* partner = battleStatus->partnerActor;
     ActorPart* playerPartsTable = player->partsTable;
@@ -1455,7 +1455,7 @@ void remove_player_buffs(PlayerBuff buffs) {
     }
 
     if ((partner != NULL) && (buffs & 0x10000)) {
-        BattleStatus* bs = BATTLE_STATUS;
+        BattleStatus* bs = &gBattleStatus;
 
         partner->isGlowing = FALSE;
         bs->flags1 &= ~0x40000000;

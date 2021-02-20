@@ -62,9 +62,9 @@ glabel func_80240AA8_BA11D8
 /* BA12B8 80240B88 000218C0 */  sll       $v1, $v0, 3
 /* BA12BC 80240B8C 00431021 */  addu      $v0, $v0, $v1
 /* BA12C0 80240B90 000210C0 */  sll       $v0, $v0, 3
-/* BA12C4 80240B94 3C01800B */  lui       $at, %hi(D_800B1DEC)
+/* BA12C4 80240B94 3C01800B */  lui       $at, %hi(gCameras+0x6C)
 /* BA12C8 80240B98 00220821 */  addu      $at, $at, $v0
-/* BA12CC 80240B9C C4201DEC */  lwc1      $f0, %lo(D_800B1DEC)($at)
+/* BA12CC 80240B9C C4201DEC */  lwc1      $f0, %lo(gCameras+0x6C)($at)
 /* BA12D0 80240BA0 080902F9 */  j         .L80240BE4
 /* BA12D4 80240BA4 460C0301 */   sub.s    $f12, $f0, $f12
 .L80240BA8:
@@ -79,9 +79,9 @@ glabel func_80240AA8_BA11D8
 /* BA12F8 80240BC8 000218C0 */  sll       $v1, $v0, 3
 /* BA12FC 80240BCC 00431021 */  addu      $v0, $v0, $v1
 /* BA1300 80240BD0 000210C0 */  sll       $v0, $v0, 3
-/* BA1304 80240BD4 3C01800B */  lui       $at, %hi(D_800B1DEC)
+/* BA1304 80240BD4 3C01800B */  lui       $at, %hi(gCameras+0x6C)
 /* BA1308 80240BD8 00220821 */  addu      $at, $at, $v0
-/* BA130C 80240BDC C4201DEC */  lwc1      $f0, %lo(D_800B1DEC)($at)
+/* BA130C 80240BDC C4201DEC */  lwc1      $f0, %lo(gCameras+0x6C)($at)
 /* BA1310 80240BE0 460C0300 */  add.s     $f12, $f0, $f12
 .L80240BE4:
 /* BA1314 80240BE4 0C00A6C9 */  jal       clamp_angle

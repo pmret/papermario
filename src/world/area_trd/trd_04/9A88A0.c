@@ -24,7 +24,7 @@ INCLUDE_ASM(s32, "world/area_trd/trd_04/9A88A0", func_80241300_9A96F0);
 
 # include "world/common/NpcJumpFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_trd/trd_04/9A88A0", func_802414A0_9A9890);
+#include "world/common/UnkNpcAIFunc13.inc.c"
 
 INCLUDE_ASM(s32, "world/area_trd/trd_04/9A88A0", func_802415D0_9A99C0);
 
@@ -50,7 +50,7 @@ INCLUDE_ASM(s32, "world/area_trd/trd_04/9A88A0", func_802426B0_9AAAA0);
 
 INCLUDE_ASM(s32, "world/area_trd/trd_04/9A88A0", func_80242A6C_9AAE5C);
 
-INCLUDE_ASM(s32, "world/area_trd/trd_04/9A88A0", func_80242AD8_9AAEC8);
+#include "world/common/UnkNpcAIFunc14.inc.c"
 
 #include "world/common/UnkNpcAIFunc3.inc.c"
 

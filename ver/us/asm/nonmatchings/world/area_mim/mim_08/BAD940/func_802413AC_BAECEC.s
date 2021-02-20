@@ -110,7 +110,7 @@ glabel L80241518_BAEE58
 glabel L80241530_BAEE70
 /* BAEE70 80241530 0280202D */  daddu     $a0, $s4, $zero
 /* BAEE74 80241534 0200282D */  daddu     $a1, $s0, $zero
-/* BAEE78 80241538 0C090358 */  jal       func_80240D60_BAE6A0
+/* BAEE78 80241538 0C090358 */  jal       mim_08_UnkNpcAIFunc14
 /* BAEE7C 8024153C 0260302D */   daddu    $a2, $s3, $zero
 /* BAEE80 80241540 0809055D */  j         .L80241574
 /* BAEE84 80241544 0000102D */   daddu    $v0, $zero, $zero

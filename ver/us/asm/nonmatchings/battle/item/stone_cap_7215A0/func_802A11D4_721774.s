@@ -19,8 +19,8 @@ glabel func_802A11D4_721774
 /* 7217AC 802A120C 00000000 */   nop
 /* 7217B0 802A1210 1A000005 */  blez      $s0, .L802A1228
 /* 7217B4 802A1214 00000000 */   nop
-/* 7217B8 802A1218 3C04802A */  lui       $a0, %hi(D_802A1A60)
-/* 7217BC 802A121C 8C841A60 */  lw        $a0, %lo(D_802A1A60)($a0)
+/* 7217B8 802A1218 3C04802A */  lui       $a0, %hi(battle_item_coconut_coconutDL)
+/* 7217BC 802A121C 8C841A60 */  lw        $a0, %lo(battle_item_coconut_coconutDL)($a0)
 /* 7217C0 802A1220 0C05123D */  jal       free_icon
 /* 7217C4 802A1224 00000000 */   nop
 .L802A1228:

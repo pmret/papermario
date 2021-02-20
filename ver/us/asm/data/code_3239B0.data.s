@@ -27,4 +27,7 @@ glabel D_802BFEF4
 .word 0x9999999A
 
 glabel D_802BFEF8
-.double 1.8
+.byte 0x3F, 0xFC, 0xCC, 0xCC
+
+glabel D_802BFEFC
+.word 0xCCCCCCCD

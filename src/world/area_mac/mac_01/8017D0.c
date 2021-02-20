@@ -1,5 +1,7 @@
 #include "mac_01.h"
 
+#define UNK_ALPHA_FUNC_NPC 5
+
 extern u8 D_80258407_818C87;
 
 #include "world/common/UnkMusicFunc.inc.c"
@@ -24,7 +26,9 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802416FC_801F7C);
 #include "world/common/NpcJumpFunc.inc.c"
 #define NAMESPACE mac_01
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_8024189C_80211C);
+#define NAMESPACE dup_mac_01
+#include "world/common/UnkNpcAIFunc13.inc.c"
+#define NAMESPACE mac_01
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802419CC_80224C);
 
@@ -50,7 +54,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242270_802AF0);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802422DC_802B5C);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_8024233C_802BBC);
+#include "world/common/UnkAlphaFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242488_802D08);
 
@@ -183,7 +187,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80245028_8058A8);
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_8024522C_805AAC);
 
 ApiStatus func_80245440_805CC0(ScriptInstance* script, s32 isInitialCall) {
-    if (PLAYER_DATA->currentPartner == script->varTable[10]) {
+    if (gPlayerData.currentPartner == script->varTable[10]) {
         script->varTable[1] = 0;
         return ApiStatus_DONE2;
     }

@@ -129,9 +129,10 @@ class Segment:
         )
 
         i = 0
+        do_next = False
         for subdir, path, obj_type, start in self.get_ld_files():
-            # Hack for non-0x10 alignment
-            if start % 0x10 != 0 and i != 0:
+            # Hack for non-0x10 alignment START
+            if start % 0x10 != 0 and i != 0 or do_next:
                 tmp_sect_name = path.replace(".", "_")
                 tmp_sect_name = tmp_sect_name.replace("/", "_")
                 tmp_vram = start - self.rom_start + self.vram_start
@@ -139,6 +140,11 @@ class Segment:
                     "}\n"
                     f"SPLAT_BEGIN_SEG({tmp_sect_name}, 0x{start:X}, 0x{tmp_vram:X}, {subalign_str})\n"
                 )
+                do_next = False
+
+            if start % 0x10 != 0 and i != 0:
+                do_next = True
+            # Hack for non-0x10 alignment END
 
             path_cname = re.sub(r"[^0-9a-zA-Z_]", "_", path)
             s += f"    {path_cname} = .;\n"

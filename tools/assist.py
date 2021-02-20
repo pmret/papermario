@@ -1,9 +1,10 @@
 #!/usr/bin/python3
 
 import argparse
-import difflib
 from collections import Counter, OrderedDict
+from Levenshtein import ratio
 import os
+import re
 import sys
 
 script_dir = os.path.dirname(os.path.realpath(__file__))
@@ -44,7 +45,16 @@ def get_symbol_bytes(offsets, func):
         return None
     start = offsets[func]["start"]
     end = offsets[func]["end"]
-    return list(rom_bytes[start:end])
+    bs = list(rom_bytes[start:end][0::4])
+
+    while len(bs) > 0 and bs[-1] == 0:
+        bs.pop()
+
+    ret = []
+    for ins in bs:
+        ret.append(ins >> 2)
+
+    return bytes(ret).decode('utf-8'), bs
 
 
 def parse_map(fname):
@@ -106,38 +116,14 @@ def is_zeros(vals):
 
 
 def diff_syms(qb, tb):
-    if len(tb) < 8:
+    if len(tb[1]) < 8:
         return 0
 
-    if len(qb) > len(tb):
-        larger = qb
-        smaller = tb
-    else:
-        larger = tb
-        smaller = qb
+    r = ratio(qb[0], tb[0])
 
-    len_ratio = len(smaller) / len(larger)
-
-    if abs(len(larger) - len(smaller)) < 16 and is_zeros(larger[len(smaller):]):
-        len_ratio = 1
-    elif len_ratio < args.threshold:
-        return 0
-
-    levenshtein = difflib.SequenceMatcher(None, smaller, larger).ratio()
-
-    # n_bytes = len(smaller)
-    # matches = 0
-    # exact_matches = 0
-    # for i in range(0, n_bytes, 4):
-    #     if smaller[i] == larger[i]:
-    #         matches += 4
-    #         if smaller[i : i + 4] == larger[i : i + 4]:
-    #             exact_matches += 4
-    # exact_match = exact_matches == matches and exact_matches > 0
-    # score = (matches / n_bytes) * len_ratio
-    # if score == 1.0 and not exact_match:
-    #     score = 0.99
-    return levenshtein
+    if r == 1.0 and qb[1] != tb[1]:
+        r = 0.99
+    return r
 
 
 def get_pair_score(query_bytes, b):
@@ -155,8 +141,6 @@ def get_matches(query):
 
     ret = {}
     for symbol in map_offsets:
-        if symbol == "func_802A10A4_74AE34":
-            dog = 5
         if symbol is not None and query != symbol:
             score = get_pair_score(query_bytes, symbol)
             if score >= args.threshold:
@@ -194,7 +178,10 @@ def do_cross_query():
     clusters = []
 
     for sym_name in map_syms:
-        if not sym_name.startswith("_binary"):
+        if not sym_name.startswith("D_") and \
+           not sym_name.startswith("_binary") and \
+           not sym_name.startswith("jtbl_") and \
+           not re.match(r"L[0-9A-F]{8}_[0-9A-F]{5,6}", sym_name):
             if get_symbol_length(sym_name) > 16:
                 query_bytes = get_symbol_bytes(map_offsets, sym_name)
 
@@ -215,8 +202,8 @@ def do_cross_query():
                         if cluster_first.startswith("func"):
                             ccount[cluster_first] += 1
 
-                        if len(cluster) % 10 == 0 and len(cluster) >= 50:
-                            print(f"Cluster {cluster_first} grew to size {len(cluster)}")
+                        #if len(cluster) % 10 == 0 and len(cluster) >= 10:
+                        print(f"Cluster {cluster_first} grew to size {len(cluster)} - {sym_name}: {str(cluster_score)}")
                         break
                 if not cluster_match:
                     clusters.append([sym_name])
@@ -225,7 +212,7 @@ def do_cross_query():
 
 parser = argparse.ArgumentParser(description="Tools to assist with decomp")
 parser.add_argument("query", help="function or file")
-parser.add_argument("--threshold", help="score threshold between 0 and 1 (higher is more restrictive)", type=float, default=0.95, required=False)
+parser.add_argument("--threshold", help="score threshold between 0 and 1 (higher is more restrictive)", type=float, default=0.9, required=False)
 parser.add_argument("--num-out", help="number of functions to display", type=int, default=100, required=False)
 
 args = parser.parse_args()
@@ -244,7 +231,7 @@ if query_dir is not None:
         do_query(f_name[:-2])
 else:
     if args.query == "cross":
-        args.threshold = 1.0
+        args.threshold = 0.985
         do_cross_query()
     else:
         do_query(args.query)

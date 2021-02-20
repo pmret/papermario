@@ -33,9 +33,9 @@ glabel func_802B7000_E225B0
 /* E22620 802B7070 00431021 */  addu      $v0, $v0, $v1
 /* E22624 802B7074 000210C0 */  sll       $v0, $v0, 3
 /* E22628 802B7078 44060000 */  mfc1      $a2, $f0
-/* E2262C 802B707C 3C01800B */  lui       $at, %hi(D_800B1DEC)
+/* E2262C 802B707C 3C01800B */  lui       $at, %hi(gCameras+0x6C)
 /* E22630 802B7080 00220821 */  addu      $at, $at, $v0
-/* E22634 802B7084 C4201DEC */  lwc1      $f0, %lo(D_800B1DEC)($at)
+/* E22634 802B7084 C4201DEC */  lwc1      $f0, %lo(gCameras+0x6C)($at)
 /* E22638 802B7088 3C073F80 */  lui       $a3, 0x3f80
 /* E2263C 802B708C 46000007 */  neg.s     $f0, $f0
 /* E22640 802B7090 44050000 */  mfc1      $a1, $f0

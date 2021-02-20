@@ -110,7 +110,7 @@ glabel L80242128_A1D228
 glabel L80242140_A1D240
 /* A1D240 80242140 0280202D */  daddu     $a0, $s4, $zero
 /* A1D244 80242144 0200282D */  daddu     $a1, $s0, $zero
-/* A1D248 80242148 0C09065C */  jal       func_80241970_A1CA70
+/* A1D248 80242148 0C09065C */  jal       hos_03_UnkNpcAIFunc14
 /* A1D24C 8024214C 0260302D */   daddu    $a2, $s3, $zero
 /* A1D250 80242150 08090861 */  j         .L80242184
 /* A1D254 80242154 0000102D */   daddu    $v0, $zero, $zero

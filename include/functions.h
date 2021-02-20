@@ -81,6 +81,11 @@ Model* get_model_from_list_index(s32 listIndex);
 s32 get_model_list_index_from_tree_index(s32 treeIndex);
 void get_model_center_and_size(s32 modelID, f32* centerX, f32* centerY, f32* centerZ, f32* sizeX, f32* sizeY,
                                f32* sizeZ);
+s32 collision_main_above(void);
+s32 do_lateral_collision(s32, PlayerStatus*, f32*, f32*, f32*, f32, f32);
+Npc* make_disguise_npc(s32 peachDisguise);
+
+s32 partner_player_can_pause(void);
 
 void func_80027088(s32);
 
@@ -105,7 +110,9 @@ Actor* get_actor(ActorID actorID);
 ActorPart* get_actor_part(Actor* actor, s32 partIndex);
 s32 add_coins(s32 amt);
 
-s32 func_800494C0(Npc* npc, s32 arg1, s32 arg2);
+void func_800494C0(Npc* npc, s32 arg1, s32 arg2);
+
+s32 func_800DF15C(PlayerStatus*, f32*, f32*, f32*, s32, f32, s32*);
 
 s32 get_variable(ScriptInstance* script, Bytecode var);
 s32 set_variable(ScriptInstance* script, Bytecode var, s32 value);
@@ -163,7 +170,9 @@ s32 is_current_partner_flying(void);
 void func_800ED5D0(Npc* partner);
 void clear_partner_move_history(Npc* partner);
 
-s32 set_parter_tether_distance(f32);
+void set_background_color_blend(u8 r, u8 g, u8 b, u8 a);
+
+void set_parter_tether_distance(f32);
 s32 does_script_exist(s32 id);
 s32 does_script_exist_by_ref(ScriptInstance* script);
 ScriptInstance* start_script(Bytecode* initialLine, s32 priority, s32 initialState);
@@ -211,6 +220,9 @@ s32 play_sound_at_position(s32 soundID, s32 value2, f32 posX, f32 posY, f32 posZ
 s32 set_music_track(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s16 volume);
 s32 func_8014AA54(s32 playerIndex, s32 arg1, s16 arg2);
 
+s32 basic_window_update(void);
+s32 basic_hidden_window_update(void);
+
 void player_create_target_list(Actor* actor);
 void enemy_create_target_list(Actor* actor);
 
@@ -243,5 +255,11 @@ void show_damage_popup(f32 x, f32 y, f32 z, s32 damageAmount);
 void func_80070B50(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4);
 void func_800718D0(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
 void func_80070BB0(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
+
+// Dead functions:
+f32 func_8002AF70(f32 startX, f32 startZ, f32 endX, f32 endZ); // atan2
+Npc* func_8003E4BC(NpcId npcId); // get_npc_safe
+Npc* func_8003E534(NpcId npcId); // get_npc_safe
+void func_80075170(s32, f32, f32, f32, f32); // func_8006FEF0
 
 #endif

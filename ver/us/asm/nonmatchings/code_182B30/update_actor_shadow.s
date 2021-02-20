@@ -7,8 +7,8 @@ glabel update_actor_shadow
 /* 1842A4 802559C4 AFB20030 */  sw        $s2, 0x30($sp)
 /* 1842A8 802559C8 00A0902D */  daddu     $s2, $a1, $zero
 /* 1842AC 802559CC AFB5003C */  sw        $s5, 0x3c($sp)
-/* 1842B0 802559D0 3C15800B */  lui       $s5, %hi(D_800B22D8)
-/* 1842B4 802559D4 26B522D8 */  addiu     $s5, $s5, %lo(D_800B22D8)
+/* 1842B0 802559D0 3C15800B */  lui       $s5, %hi(gCameras+0x558)
+/* 1842B4 802559D4 26B522D8 */  addiu     $s5, $s5, %lo(gCameras+0x558)
 /* 1842B8 802559D8 AFBF0040 */  sw        $ra, 0x40($sp)
 /* 1842BC 802559DC AFB40038 */  sw        $s4, 0x38($sp)
 /* 1842C0 802559E0 AFB30034 */  sw        $s3, 0x34($sp)
@@ -347,9 +347,9 @@ glabel update_actor_shadow
 /* 1847A0 80255EC0 E6220014 */  swc1      $f2, 0x14($s1)
 /* 1847A4 80255EC4 92420136 */  lbu       $v0, 0x136($s2)
 /* 1847A8 80255EC8 00021080 */  sll       $v0, $v0, 2
-/* 1847AC 80255ECC 3C018028 */  lui       $at, %hi(bActorOffsets+3)
+/* 1847AC 80255ECC 3C018028 */  lui       $at, %hi(bActorOffsets+0x3)
 /* 1847B0 80255ED0 00220821 */  addu      $at, $at, $v0
-/* 1847B4 80255ED4 80222EEB */  lb        $v0, %lo(bActorOffsets+3)($at)
+/* 1847B4 80255ED4 80222EEB */  lb        $v0, %lo(bActorOffsets+0x3)($at)
 /* 1847B8 80255ED8 C7A00020 */  lwc1      $f0, 0x20($sp)
 /* 1847BC 80255EDC 44821000 */  mtc1      $v0, $f2
 /* 1847C0 80255EE0 00000000 */  nop

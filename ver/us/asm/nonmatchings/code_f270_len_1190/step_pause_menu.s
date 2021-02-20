@@ -97,8 +97,8 @@ glabel step_pause_menu
 /* FEE0 80034AE0 00000000 */   nop
 /* FEE4 80034AE4 0C048C2E */  jal       clear_dynamic_entity_list
 /* FEE8 80034AE8 00000000 */   nop
-/* FEEC 80034AEC 3C048020 */  lui       $a0, %hi(gBackgroundImage)
-/* FEF0 80034AF0 24840000 */  addiu     $a0, $a0, %lo(gBackgroundImage)
+/* FEEC 80034AEC 3C048020 */  lui       $a0, %hi(func_80200000)
+/* FEF0 80034AF0 24840000 */  addiu     $a0, $a0, %lo(func_80200000)
 /* FEF4 80034AF4 3C050003 */  lui       $a1, 3
 /* FEF8 80034AF8 0C0514BA */  jal       func_801452E8
 /* FEFC 80034AFC 34A58000 */   ori      $a1, $a1, 0x8000

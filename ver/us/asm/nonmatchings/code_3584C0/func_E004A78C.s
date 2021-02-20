@@ -103,9 +103,9 @@ glabel func_E004A78C
 /* 358DD0 E004A910 00431021 */  addu      $v0, $v0, $v1
 /* 358DD4 E004A914 000210C0 */  sll       $v0, $v0, 3
 /* 358DD8 E004A918 AD060004 */  sw        $a2, 4($t0)
-/* 358DDC E004A91C 3C01800B */  lui       $at, %hi(D_800B1DEC)
+/* 358DDC E004A91C 3C01800B */  lui       $at, %hi(gCameras+0x6C)
 /* 358DE0 E004A920 00220821 */  addu      $at, $at, $v0
-/* 358DE4 E004A924 C4221DEC */  lwc1      $f2, %lo(D_800B1DEC)($at)
+/* 358DE4 E004A924 C4221DEC */  lwc1      $f2, %lo(gCameras+0x6C)($at)
 /* 358DE8 E004A928 3C100001 */  lui       $s0, 1
 /* 358DEC E004A92C AE680000 */  sw        $t0, ($s3)
 /* 358DF0 E004A930 E7B80010 */  swc1      $f24, 0x10($sp)

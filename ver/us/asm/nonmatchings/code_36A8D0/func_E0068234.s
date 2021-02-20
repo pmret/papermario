@@ -50,9 +50,9 @@ glabel func_E0068234
 /* 36ABB8 E00682E8 000218C0 */  sll       $v1, $v0, 3
 /* 36ABBC E00682EC 00431021 */  addu      $v0, $v0, $v1
 /* 36ABC0 E00682F0 000210C0 */  sll       $v0, $v0, 3
-/* 36ABC4 E00682F4 3C01800B */  lui       $at, %hi(D_800B1DEC)
+/* 36ABC4 E00682F4 3C01800B */  lui       $at, %hi(gCameras+0x6C)
 /* 36ABC8 E00682F8 00220821 */  addu      $at, $at, $v0
-/* 36ABCC E00682FC C4221DEC */  lwc1      $f2, %lo(D_800B1DEC)($at)
+/* 36ABCC E00682FC C4221DEC */  lwc1      $f2, %lo(gCameras+0x6C)($at)
 /* 36ABD0 E0068300 C6800010 */  lwc1      $f0, 0x10($s4)
 /* 36ABD4 E0068304 36731630 */  ori       $s3, $s3, 0x1630
 /* 36ABD8 E0068308 E7A00010 */  swc1      $f0, 0x10($sp)

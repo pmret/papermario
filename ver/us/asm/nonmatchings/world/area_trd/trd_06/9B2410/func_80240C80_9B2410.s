@@ -18,8 +18,8 @@ glabel func_80240C80_9B2410
 /* 9B2444 80240CB4 0220282D */   daddu    $a1, $s1, $zero
 /* 9B2448 80240CB8 0C00AB1E */  jal       general_heap_free
 /* 9B244C 80240CBC 0200202D */   daddu    $a0, $s0, $zero
-/* 9B2450 80240CC0 3C048025 */  lui       $a0, %hi(D_802491C0)
-/* 9B2454 80240CC4 248491C0 */  addiu     $a0, $a0, %lo(D_802491C0)
+/* 9B2450 80240CC0 3C048025 */  lui       $a0, %hi(D_802491C0_CA70E0)
+/* 9B2454 80240CC4 248491C0 */  addiu     $a0, $a0, %lo(D_802491C0_CA70E0)
 /* 9B2458 80240CC8 3C028024 */  lui       $v0, %hi(D_80245430)
 /* 9B245C 80240CCC 24425430 */  addiu     $v0, $v0, %lo(D_80245430)
 /* 9B2460 80240CD0 AC820000 */  sw        $v0, ($a0)

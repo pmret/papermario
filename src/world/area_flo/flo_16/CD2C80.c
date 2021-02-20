@@ -12,7 +12,7 @@ INCLUDE_ASM(s32, "world/area_flo/flo_16/CD2C80", func_802416E8_CD3518);
 
 INCLUDE_ASM(s32, "world/area_flo/flo_16/CD2C80", func_80241AA4_CD38D4);
 
-INCLUDE_ASM(s32, "world/area_flo/flo_16/CD2C80", func_80241B10_CD3940);
+#include "world/common/UnkNpcAIFunc14.inc.c"
 
 #include "world/common/UnkNpcAIFunc3.inc.c"
 
@@ -22,7 +22,7 @@ INCLUDE_ASM(s32, "world/area_flo/flo_16/CD2C80", func_80242038_CD3E68);
 
 INCLUDE_ASM(s32, "world/area_flo/flo_16/CD2C80", func_8024215C_CD3F8C);
 
-INCLUDE_ASM(s32, "world/area_flo/flo_16/CD2C80", func_80242348_CD4178);
+#include "world/common/UnkNpcAIFunc13.inc.c"
 
 INCLUDE_ASM(s32, "world/area_flo/flo_16/CD2C80", func_80242478_CD42A8);
 

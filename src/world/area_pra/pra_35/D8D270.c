@@ -40,7 +40,7 @@ INCLUDE_ASM(s32, "world/area_pra/pra_35/D8D270", func_8024159C_D8E7EC);
 
 # include "world/common/NpcJumpFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_pra/pra_35/D8D270", func_8024173C_D8E98C);
+#include "world/common/UnkNpcAIFunc13.inc.c"
 
 INCLUDE_ASM(s32, "world/area_pra/pra_35/D8D270", func_8024186C_D8EABC);
 

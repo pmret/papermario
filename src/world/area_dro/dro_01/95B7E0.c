@@ -1,5 +1,7 @@
 #include "dro_01.h"
 
+#define UNK_ALPHA_FUNC_NPC 10
+
 INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_802405E0_95B7E0);
 
 INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_80240738_95B938);
@@ -14,7 +16,7 @@ INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_80240C5C_95BE5C);
 
 # include "world/common/NpcJumpFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_80240DFC_95BFFC);
+#include "world/common/UnkNpcAIFunc13.inc.c"
 
 INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_80240F2C_95C12C);
 
@@ -38,7 +40,7 @@ INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_802417D0_95C9D0);
 
 INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_8024183C_95CA3C);
 
-INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_8024189C_95CA9C);
+#include "world/common/UnkAlphaFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_802419E8_95CBE8);
 

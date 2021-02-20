@@ -6,6 +6,9 @@ from segtypes.n64.segment import N64Segment
 from segtypes.segment import Segment
 from segtypes.n64.palette import N64SegPalette
 from segtypes.n64.ci4 import N64SegCi4
+from segtypes.n64.rgba32 import N64SegRgba32
+
+import json
 import png
 import os
 from pathlib import Path, PurePath
@@ -105,6 +108,8 @@ class Subsegment():
             return CodeSubsegment
         elif typ == "palette":
             return PaletteSubsegment
+        elif typ == "rgba32":
+            return RGBA32Subsegment
         else:
             return Subsegment
 
@@ -174,11 +179,11 @@ class CodeSubsegment(Subsegment):
             funcs_text = segment.add_labels(funcs)
 
             if self.type == "c":
-                if os.path.exists(generic_out_path):
+                defined_funcs = set()
+
+                if segment.options.get("do_c_func_detection", True) and os.path.exists(generic_out_path):
                     defined_funcs = CodeSubsegment.get_funcs_defined_in_c(generic_out_path)
                     segment.mark_c_funcs_as_defined(defined_funcs)
-                else:
-                    defined_funcs = set()
 
                 asm_out_dir = Segment.create_split_dir(base_path, os.path.join("asm", "nonmatchings"))
 
@@ -234,8 +239,28 @@ class PaletteSubsegment(Subsegment):
     def split_inner(self, segment, rom_bytes, base_path, generic_out_path):
         img_bytes = rom_bytes[self.rom_start : self.rom_end]
 
-        palette = N64SegPalette.parse_palette(img_bytes)
-        segment.palettes[self.name] = palette
+        self.palette = N64SegPalette.parse_palette(img_bytes)
+        self.image_name = self.name.split(".", 1)[0]
+
+        if self.image_name not in segment.palettes:
+            segment.palettes[self.image_name] = [self]
+        else:
+            segment.palettes[self.image_name].append(self)
+
+class RGBA32Subsegment(Subsegment):
+    def should_run(self, options):
+        return super().should_run(options) or "img" in options["modes"]
+
+    def split_inner(self, segment, rom_bytes, base_path, generic_out_path):
+        img_bytes = rom_bytes[self.rom_start : self.rom_end]
+        width, height = self.args
+        image = img_bytes
+
+        w = png.Writer(width, height, greyscale=False, alpha=True)
+
+        Path(generic_out_path).parent.mkdir(parents=True, exist_ok=True)
+        with open(generic_out_path, "wb") as f:
+            w.write_array(f, image)
 
 class N64SegCode(N64Segment):
     palettes = {}
@@ -810,9 +835,9 @@ class N64SegCode(N64Segment):
             sym_str = f"\n\nglabel {sym.name}\n"
             dis_start = self.ram_to_rom(syms[i].vram_start)
             dis_end = self.ram_to_rom(syms[i + 1].vram_start)
+            sym_len = dis_end - dis_start
 
             if sub.type == "bss":
-                sym_len = dis_end - dis_start
                 ret += f".space 0x{sym_len:X}"
             else:
                 sym_bytes = rom_bytes[dis_start : dis_end]
@@ -928,22 +953,18 @@ class N64SegCode(N64Segment):
         for sub in self.subsegments:
             sub.split(self, rom_bytes, base_path)
 
-        # TODO hack for images: move at some point
-        for sub in self.subsegments:
-            if sub.type == "ci4" and (sub.should_run(self.options) or "img" in self.options["modes"]):
-                generic_out_path = sub.get_generic_out_path(base_path, self.options)
-                img_bytes = rom_bytes[sub.rom_start : sub.rom_end]
+        for image_name in self.palettes:
+            for sub in self.subsegments:
+                if sub.type in ["ci4", "ci8"] and (sub.should_run(self.options) or "img" in self.options["modes"]) and sub.name == image_name:
+                    img_bytes = rom_bytes[sub.rom_start : sub.rom_end]
+                    width, height = sub.args
 
-                width, height = sub.args
-                palette = self.palettes[sub.name]
-                image = N64SegCi4.parse_image(img_bytes, width, height)
+                    for palette in self.palettes[sub.name]:
+                        image = N64SegCi4.parse_image(img_bytes, width, height)
 
-                w = png.Writer(width, height, palette=palette)
+                        w = png.Writer(width, height, palette=palette.palette)
 
-                Path(generic_out_path).parent.mkdir(parents=True, exist_ok=True)
-                with open(generic_out_path, "wb") as f:
-                    w.write_array(f, image)
-
-            # TODO other image types
-
-        # TODO write orphaned palettes
+                        generic_out_path = re.sub(r"\.pal\.png", ".png", palette.get_generic_out_path(base_path, self.options))
+                        Path(generic_out_path).parent.mkdir(parents=True, exist_ok=True)
+                        with open(generic_out_path, "wb") as f:
+                            w.write_array(f, image)

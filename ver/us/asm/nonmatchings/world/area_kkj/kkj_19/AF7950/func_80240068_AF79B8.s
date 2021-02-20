@@ -8,14 +8,14 @@ glabel func_80240068_AF79B8
 /* AF79C4 80240074 AFBF0014 */  sw        $ra, 0x14($sp)
 /* AF79C8 80240078 10400005 */  beqz      $v0, .L80240090
 /* AF79CC 8024007C AFB00010 */   sw       $s0, 0x10($sp)
-/* AF79D0 80240080 3C108014 */  lui       $s0, %hi(D_80147474)
-/* AF79D4 80240084 26107474 */  addiu     $s0, $s0, %lo(D_80147474)
+/* AF79D0 80240080 3C108014 */  lui       $s0, %hi(basic_window_update)
+/* AF79D4 80240084 26107474 */  addiu     $s0, $s0, %lo(basic_window_update)
 /* AF79D8 80240088 08090027 */  j         .L8024009C
 /* AF79DC 8024008C 2404000A */   addiu    $a0, $zero, 0xa
 .L80240090:
 /* AF79E0 80240090 2404000A */  addiu     $a0, $zero, 0xa
-/* AF79E4 80240094 3C108014 */  lui       $s0, %hi(D_80147574)
-/* AF79E8 80240098 26107574 */  addiu     $s0, $s0, %lo(D_80147574)
+/* AF79E4 80240094 3C108014 */  lui       $s0, %hi(basic_hidden_window_update)
+/* AF79E8 80240098 26107574 */  addiu     $s0, $s0, %lo(basic_hidden_window_update)
 .L8024009C:
 /* AF79EC 8024009C 0C051F9F */  jal       set_window_update
 /* AF79F0 802400A0 0200282D */   daddu    $a1, $s0, $zero

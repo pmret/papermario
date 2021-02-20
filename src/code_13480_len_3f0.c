@@ -4,14 +4,14 @@ void init_demo_data(void) {
     GameStatus* gameStatus;
     GameStatus* gameStatus2;
 
-    if (GAME_STATUS->demoState == 0) {
-        GAME_STATUS->nextDemoScene = 0;
-        GAME_STATUS->demoState = 1;
+    if ((*gGameStatusPtr)->demoState == 0) {
+        (*gGameStatusPtr)->nextDemoScene = 0;
+        (*gGameStatusPtr)->demoState = 1;
     }
 
-    gameStatus = GAME_STATUS;
-    GAME_STATUS->demoStickX = 0;
-    gameStatus2 = GAME_STATUS;
+    gameStatus = *gGameStatusPtr;
+    (*gGameStatusPtr)->demoStickX = 0;
+    gameStatus2 = *gGameStatusPtr;
     gameStatus->demoButtonInput = 0;
     gameStatus2->demoStickY = 0;
 

@@ -30,9 +30,9 @@ glabel func_802406E0_CD2510
 /* CD2574 80240744 000320C0 */  sll       $a0, $v1, 3
 /* CD2578 80240748 00641821 */  addu      $v1, $v1, $a0
 /* CD257C 8024074C 000318C0 */  sll       $v1, $v1, 3
-/* CD2580 80240750 3C01800B */  lui       $at, %hi(D_800B1DEC)
+/* CD2580 80240750 3C01800B */  lui       $at, %hi(gCameras+0x6C)
 /* CD2584 80240754 00230821 */  addu      $at, $at, $v1
-/* CD2588 80240758 C42C1DEC */  lwc1      $f12, %lo(D_800B1DEC)($at)
+/* CD2588 80240758 C42C1DEC */  lwc1      $f12, %lo(gCameras+0x6C)($at)
 /* CD258C 8024075C 0C00A88D */  jal       sin_cos_deg
 /* CD2590 80240760 0040A82D */   daddu    $s5, $v0, $zero
 /* CD2594 80240764 1200005D */  beqz      $s0, .L802408DC

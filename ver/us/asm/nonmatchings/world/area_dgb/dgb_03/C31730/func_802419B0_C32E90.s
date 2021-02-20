@@ -151,7 +151,7 @@ glabel L80241BAC_C3308C
 glabel L80241BC4_C330A4
 /* C330A4 80241BC4 0240202D */  daddu     $a0, $s2, $zero
 /* C330A8 80241BC8 0260282D */  daddu     $a1, $s3, $zero
-/* C330AC 80241BCC 0C0904CF */  jal       func_8024133C_C3281C
+/* C330AC 80241BCC 0C0904CF */  jal       dgb_03_UnkNpcAIFunc13
 /* C330B0 80241BD0 0280302D */   daddu    $a2, $s4, $zero
 glabel L80241BD4_C330B4
 /* C330B4 80241BD4 0240202D */  daddu     $a0, $s2, $zero

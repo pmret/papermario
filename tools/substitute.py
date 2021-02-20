@@ -8,7 +8,7 @@ from pathlib import Path
 script_dir = os.path.dirname(os.path.realpath(__file__))
 root_dir = script_dir + "/../"
 src_dir = root_dir + "src/"
-asm_dir = root_dir + "asm/"
+asm_dir = root_dir + "ver/current/asm/"
 
 parser = argparse.ArgumentParser(description="Replace many functions with one")
 parser.add_argument("from_list", help="path to line-separated file of functions to be replaced. first line is the string to replace them with")

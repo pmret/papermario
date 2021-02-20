@@ -84,9 +84,9 @@ glabel func_E007C1F4
 /* 37D7C0 E007C330 00431021 */  addu      $v0, $v0, $v1
 /* 37D7C4 E007C334 000210C0 */  sll       $v0, $v0, 3
 /* 37D7C8 E007C338 4406B000 */  mfc1      $a2, $f22
-/* 37D7CC E007C33C 3C01800B */  lui       $at, %hi(D_800B1DEC)
+/* 37D7CC E007C33C 3C01800B */  lui       $at, %hi(gCameras+0x6C)
 /* 37D7D0 E007C340 00220821 */  addu      $at, $at, $v0
-/* 37D7D4 E007C344 C4201DEC */  lwc1      $f0, %lo(D_800B1DEC)($at)
+/* 37D7D4 E007C344 C4201DEC */  lwc1      $f0, %lo(gCameras+0x6C)($at)
 /* 37D7D8 E007C348 4407A000 */  mfc1      $a3, $f20
 /* 37D7DC E007C34C 46000007 */  neg.s     $f0, $f0
 /* 37D7E0 E007C350 44050000 */  mfc1      $a1, $f0

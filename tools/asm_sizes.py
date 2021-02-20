@@ -36,7 +36,7 @@ def do_dir(root, dir):
 
 
 script_dir = os.path.dirname(os.path.realpath(__file__))
-asm_dir = script_dir + "/../asm/nonmatchings"
+asm_dir = script_dir + "/../ver/current/asm/nonmatchings"
 
 for root, dirs, files in os.walk(asm_dir):
     for asm_dir in dirs:

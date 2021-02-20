@@ -269,8 +269,8 @@ void enforce_hpfp_limits(void) {
 }
 
 void initialize_status_menu(void) {
-    UiStatus* uiStatus = UI_STATUS;
-    PlayerData* playerData = PLAYER_DATA;
+    UiStatus* uiStatus = &gUIStatus;
+    PlayerData* playerData = &gPlayerData;
     s32 iconIndex;
     s32 newVar;
 
@@ -394,7 +394,7 @@ void coin_counter_draw_content(UNK_TYPE arg0, s32 posX, s32 posY) {
     UiStatus* uiStatus = &gUIStatus;
     s32 iconIndex;
 
-    if ((gPlayerData.coins != uiStatus->displayCoins) && ((GAME_STATUS->frameCounter % 3) == 0)) {
+    if ((gPlayerData.coins != uiStatus->displayCoins) && (((*gGameStatusPtr)->frameCounter % 3) == 0)) {
         play_sound(0x211);
     }
 
@@ -433,7 +433,7 @@ void update_coin_counter(void) {
         if ((uiStatus->displayCoins == playerData->coins) || (uiStatus->unk_6C[0] <= 30)) {
             uiStatus->unk_6C[0] -= 1;
             if (uiStatus->unk_6C[0] == 0) {
-                set_window_update(20, &D_80147574);
+                set_window_update(20, basic_hidden_window_update);
                 uiStatus->unk_6C[1] = 15;
                 D_8010CD10 = 0;
                 D_8010CD12 = 1;
@@ -469,7 +469,7 @@ void show_coin_counter(void) {
 
     if (uiStatus->unk_6C[0] == 0) {
         set_window_properties(0x14, 0x20, 0xa4, 0x40, 0x14, 0x15, coin_counter_draw_content, 0, -1);
-        set_window_update(0x14, &D_80147474);
+        set_window_update(0x14, basic_window_update);
         index = create_icon(&D_80109270);
         uiStatus->iconIndex10 = index;
         set_icon_flags(index, 0x80);
@@ -628,7 +628,7 @@ s32 is_status_menu_visible(void) {
 }
 
 void status_menu_start_blinking_hp(void) {
-    GameStatus* gameStatus = GAME_STATUS;
+    GameStatus* gameStatus = *gGameStatusPtr;
     UiStatus* uiStatus = &gUIStatus;
     UiStatus* uiStatus2 = &gUIStatus;
 
@@ -653,7 +653,7 @@ void status_menu_stop_blinking_hp(void) {
 }
 
 void status_menu_start_blinking_fp(void) {
-    GameStatus* gameStatus = GAME_STATUS;
+    GameStatus* gameStatus = *gGameStatusPtr;
     UiStatus* uiStatus = &gUIStatus;
     UiStatus* uiStatus2 = &gUIStatus;
 
@@ -677,7 +677,7 @@ void status_menu_stop_blinking_fp(void) {
 }
 
 void status_menu_start_blinking_coins(void) {
-    GameStatus* gameStatus = GAME_STATUS;
+    GameStatus* gameStatus = *gGameStatusPtr;
     UiStatus* uiStatus = &gUIStatus;
     UiStatus* uiStatus2 = &gUIStatus;
 

@@ -38,7 +38,7 @@ void func_80035E54(void) {
 INCLUDE_ASM(s32, "code_111f0_len_860", func_80035EEC);
 
 void func_800360FC(void) {
-    GameStatus* gameStatus = GAME_STATUS;
+    GameStatus* gameStatus = *gGameStatusPtr;
 
     if (gameStatus->loadMenuState == 2) {
         draw_status_ui();
@@ -46,7 +46,7 @@ void func_800360FC(void) {
 }
 
 void func_80036130(void) {
-    GameStatus* gameStatus = GAME_STATUS;
+    GameStatus* gameStatus = *gGameStatusPtr;
 
     gMapTransitionAlpha = 0x00;
     D_800A0942 = 0x14;

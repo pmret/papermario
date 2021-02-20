@@ -45,9 +45,9 @@ glabel func_E01103EC
 /* 3F887C E011048C 00431021 */  addu      $v0, $v0, $v1
 /* 3F8880 E0110490 000210C0 */  sll       $v0, $v0, 3
 /* 3F8884 E0110494 C6800038 */  lwc1      $f0, 0x38($s4)
-/* 3F8888 E0110498 3C01800B */  lui       $at, %hi(D_800B1DEC)
+/* 3F8888 E0110498 3C01800B */  lui       $at, %hi(gCameras+0x6C)
 /* 3F888C E011049C 00220821 */  addu      $at, $at, $v0
-/* 3F8890 E01104A0 C4221DEC */  lwc1      $f2, %lo(D_800B1DEC)($at)
+/* 3F8890 E01104A0 C4221DEC */  lwc1      $f2, %lo(gCameras+0x6C)($at)
 /* 3F8894 E01104A4 E7A00010 */  swc1      $f0, 0x10($sp)
 /* 3F8898 E01104A8 C6800004 */  lwc1      $f0, 4($s4)
 /* 3F889C E01104AC 27A40020 */  addiu     $a0, $sp, 0x20

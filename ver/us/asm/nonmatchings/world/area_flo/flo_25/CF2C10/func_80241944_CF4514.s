@@ -111,7 +111,7 @@ glabel L80241AB4_CF4684
 glabel L80241ACC_CF469C
 /* CF469C 80241ACC 0280202D */  daddu     $a0, $s4, $zero
 /* CF46A0 80241AD0 0200282D */  daddu     $a1, $s0, $zero
-/* CF46A4 80241AD4 0C09054E */  jal       func_80241538_CF4108
+/* CF46A4 80241AD4 0C09054E */  jal       flo_25_UnkNpcAIFunc13
 /* CF46A8 80241AD8 0260302D */   daddu    $a2, $s3, $zero
 glabel L80241ADC_CF46AC
 /* CF46AC 80241ADC 0280202D */  daddu     $a0, $s4, $zero
