@@ -12,4 +12,4 @@ INCLUDE_ASM(s32, "world/area_tik/tik_05/8750D0", func_80240680_875440);
 
 INCLUDE_ASM(s32, "world/area_tik/tik_05/8750D0", func_8024093C_8756FC);
 
-INCLUDE_ASM(s32, "world/area_tik/tik_05/8750D0", func_80240984_875744);
+#include "world/common/SetEntityPosition.inc.c"
