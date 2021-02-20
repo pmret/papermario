@@ -252,7 +252,10 @@ void func_80070970(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4, s32 arg5);
 void func_800709D0(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
 void func_80070130(s32 arg0, f32 arg1, f32 arg2, f32 arg3);
 void func_800701F0(s32 arg0, f32 arg1, f32 arg2, f32 arg3);
+<<<<<<< HEAD
 void add_xz_vec3f(Vec3f* vector, f32 speed, f32 angleDeg);
 void play_movement_dust_effects(s32 var0, f32 xPos, f32 yPos, f32 zPos, f32 angleDeg);
+=======
+>>>>>>> 157f74967c939b9c34a623ce3ba973288fdaa993
 
 #endif
