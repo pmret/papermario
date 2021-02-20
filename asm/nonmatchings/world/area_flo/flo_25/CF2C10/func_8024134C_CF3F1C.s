@@ -110,7 +110,7 @@ glabel L802414B8_CF4088
 glabel L802414D0_CF40A0
 /* CF40A0 802414D0 0280202D */  daddu     $a0, $s4, $zero
 /* CF40A4 802414D4 0200282D */  daddu     $a1, $s0, $zero
-/* CF40A8 802414D8 0C090340 */  jal       func_80240D00_CF38D0
+/* CF40A8 802414D8 0C090340 */  jal       flo_25_UnkNpcAIFunc14
 /* CF40AC 802414DC 0260302D */   daddu    $a2, $s3, $zero
 /* CF40B0 802414E0 08090545 */  j         .L80241514
 /* CF40B4 802414E4 0000102D */   daddu    $v0, $zero, $zero

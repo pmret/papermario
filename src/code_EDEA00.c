@@ -1,5 +1,7 @@
 #include "common.h"
 
+#define NAMESPACE code_EDEA00
+
 INCLUDE_ASM(s32, "code_EDEA00", func_80240040_EDEA00);
 
 INCLUDE_ASM(s32, "code_EDEA00", func_802401C4_EDEB84);
@@ -14,7 +16,7 @@ INCLUDE_ASM(s32, "code_EDEA00", func_80240DA0_EDF760);
 
 INCLUDE_ASM(s32, "code_EDEA00", func_80240E18_EDF7D8);
 
-INCLUDE_ASM(s32, "code_EDEA00", func_80240E84_EDF844);
+#include "world/common/DeadUnkNpcAIFunc14.inc.c"
 
 INCLUDE_ASM(s32, "code_EDEA00", func_80240FB8_EDF978);
 

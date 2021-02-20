@@ -4,8 +4,8 @@
 glabel get_collider_center
 /* 37210 8005BE10 000410C0 */  sll       $v0, $a0, 3
 /* 37214 8005BE14 00441023 */  subu      $v0, $v0, $a0
-/* 37218 8005BE18 3C03800B */  lui       $v1, %hi(D_800B42E4)
-/* 3721C 8005BE1C 8C6342E4 */  lw        $v1, %lo(D_800B42E4)($v1)
+/* 37218 8005BE18 3C03800B */  lui       $v1, %hi(gCollisionData+0x4)
+/* 3721C 8005BE1C 8C6342E4 */  lw        $v1, %lo(gCollisionData+0x4)($v1)
 /* 37220 8005BE20 00021080 */  sll       $v0, $v0, 2
 /* 37224 8005BE24 00431021 */  addu      $v0, $v0, $v1
 /* 37228 8005BE28 8C420010 */  lw        $v0, 0x10($v0)

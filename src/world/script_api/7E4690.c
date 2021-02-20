@@ -2,7 +2,7 @@
 #include "../partners.h"
 
 ApiStatus func_80283810(ScriptInstance* script, s32 isInitialCall) {
-    PlayerStatus* playerStatus = PLAYER_STATUS;
+    PlayerStatus* playerStatus = &gPlayerStatus;
 
     script->varTable[10] = 0;
     if (partner_get_ride_script() != NULL) {
@@ -19,11 +19,11 @@ ApiStatus func_80283810(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus TeleportPartnerToPlayer(ScriptInstance* script, s32 isInitialCall) {
-    PlayerStatus* playerStatus = PLAYER_STATUS;
-    PlayerStatus* playerStatus2 = PLAYER_STATUS;
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    PlayerStatus* playerStatus2 = &gPlayerStatus;
     Npc* partner;
 
-    if (PLAYER_DATA->currentPartner == PartnerID_NONE) {
+    if (gPlayerData.currentPartner == PartnerID_NONE) {
         return ApiStatus_DONE2;
     }
 
@@ -43,14 +43,14 @@ ApiStatus TeleportPartnerToPlayer(ScriptInstance* script, s32 isInitialCall) {
 // currentPartner is being loaded as unsigned instead of signed
 #ifdef NON_MATCHING
 ApiStatus func_80283908(ScriptInstance* script, s32 isInitialCall) {
-    PlayerStatus* playerStatus = PLAYER_STATUS;
-    PlayerStatus* playerStatus2 = PLAYER_STATUS;
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    PlayerStatus* playerStatus2 = &gPlayerStatus;
     Camera* camera = CURRENT_CAM;
-    s8 currentPartner = PLAYER_DATA->currentPartner;
+    s8 currentPartner = gPlayerData.currentPartner;
 
-    playerStatus->position.x = GAME_STATUS->savedPos.x;
-    playerStatus->position.y = GAME_STATUS->savedPos.y;
-    playerStatus->position.z = GAME_STATUS->savedPos.z;
+    playerStatus->position.x = (*gGameStatusPtr)->savedPos.x;
+    playerStatus->position.y = (*gGameStatusPtr)->savedPos.y;
+    playerStatus->position.z = (*gGameStatusPtr)->savedPos.z;
 
     if (currentPartner != PartnerID_NONE) {
         Npc* partner = get_npc_unsafe(NpcId_PARTNER);
@@ -83,7 +83,7 @@ ApiStatus func_80283BB0(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus func_80283BD0(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    PlayerStatus* playerStatus = PLAYER_STATUS;
+    PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (isInitialCall) {
         script->functionTemp[0].s = get_variable(script, *args++);

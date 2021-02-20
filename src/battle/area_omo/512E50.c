@@ -4,7 +4,7 @@
 
 INCLUDE_ASM(s32, "battle/area_omo/512E50", func_80218880_512E50);
 
-INCLUDE_ASM(s32, "battle/area_omo/512E50", func_80218A98_513068);
+#include "common/GetItemEntityPosition.inc.c"
 
 INCLUDE_ASM(s32, "battle/area_omo/512E50", func_80218B38_513108);
 

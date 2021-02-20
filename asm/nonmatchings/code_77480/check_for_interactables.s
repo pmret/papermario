@@ -54,11 +54,12 @@ glabel check_for_interactables
 /* 79D88 800E08D8 2C620031 */  sltiu     $v0, $v1, 0x31
 /* 79D8C 800E08DC 10400038 */  beqz      $v0, .L800E09C0
 /* 79D90 800E08E0 00031080 */   sll      $v0, $v1, 2
-/* 79D94 800E08E4 3C018011 */  lui       $at, %hi(D_8010BC60)
+/* 79D94 800E08E4 3C018011 */  lui       $at, %hi(jtbl_8010BC60)
 /* 79D98 800E08E8 00220821 */  addu      $at, $at, $v0
-/* 79D9C 800E08EC 8C22BC60 */  lw        $v0, %lo(D_8010BC60)($at)
+/* 79D9C 800E08EC 8C22BC60 */  lw        $v0, %lo(jtbl_8010BC60)($at)
 /* 79DA0 800E08F0 00400008 */  jr        $v0
 /* 79DA4 800E08F4 00000000 */   nop
+glabel L800E08F8_79DA8
 /* 79DA8 800E08F8 08038270 */  j         .L800E09C0
 /* 79DAC 800E08FC 2410FFFF */   addiu    $s0, $zero, -1
 .L800E0900:
@@ -115,6 +116,7 @@ glabel check_for_interactables
 /* 79E68 800E09B8 080382AD */  j         .L800E0AB4
 /* 79E6C 800E09BC AE220000 */   sw       $v0, ($s1)
 .L800E09C0:
+glabel L800E09C0_79E70
 /* 79E70 800E09C0 862200C6 */  lh        $v0, 0xc6($s1)
 /* 79E74 800E09C4 14500008 */  bne       $v0, $s0, .L800E09E8
 /* 79E78 800E09C8 3C03F7FF */   lui      $v1, 0xf7ff

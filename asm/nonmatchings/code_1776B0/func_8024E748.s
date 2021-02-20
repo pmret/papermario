@@ -8,8 +8,8 @@ glabel func_8024E748
 /* 17D034 8024E754 AFB20018 */  sw        $s2, 0x18($sp)
 /* 17D038 8024E758 0080902D */  daddu     $s2, $a0, $zero
 /* 17D03C 8024E75C AFB10014 */  sw        $s1, 0x14($sp)
-/* 17D040 8024E760 3C11800B */  lui       $s1, %hi(D_800B22D8)
-/* 17D044 8024E764 263122D8 */  addiu     $s1, $s1, %lo(D_800B22D8)
+/* 17D040 8024E760 3C11800B */  lui       $s1, %hi(gCameras+0x558)
+/* 17D044 8024E764 263122D8 */  addiu     $s1, $s1, %lo(gCameras+0x558)
 /* 17D048 8024E768 AFBF001C */  sw        $ra, 0x1c($sp)
 /* 17D04C 8024E76C AFB00010 */  sw        $s0, 0x10($sp)
 /* 17D050 8024E770 8E50000C */  lw        $s0, 0xc($s2)

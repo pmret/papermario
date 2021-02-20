@@ -211,9 +211,9 @@ glabel L802BD894_3241E4
 /* 3242E0 802BD990 C6600080 */  lwc1      $f0, 0x80($s3)
 /* 3242E4 802BD994 000210C0 */  sll       $v0, $v0, 3
 /* 3242E8 802BD998 E640000C */  swc1      $f0, 0xc($s2)
-/* 3242EC 802BD99C 3C07800B */  lui       $a3, %hi(D_800B1DEC)
+/* 3242EC 802BD99C 3C07800B */  lui       $a3, %hi(gCameras+0x6C)
 /* 3242F0 802BD9A0 00E23821 */  addu      $a3, $a3, $v0
-/* 3242F4 802BD9A4 8CE71DEC */  lw        $a3, %lo(D_800B1DEC)($a3)
+/* 3242F4 802BD9A4 8CE71DEC */  lw        $a3, %lo(gCameras+0x6C)($a3)
 /* 3242F8 802BD9A8 0C00A7E7 */  jal       add_vec2D_polar
 /* 3242FC 802BD9AC 0200282D */   daddu    $a1, $s0, $zero
 /* 324300 802BD9B0 866200B2 */  lh        $v0, 0xb2($s3)

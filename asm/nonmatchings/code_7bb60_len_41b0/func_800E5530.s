@@ -28,11 +28,12 @@ glabel func_800E5530
 /* 7EA38 800E5588 2C62000C */  sltiu     $v0, $v1, 0xc
 /* 7EA3C 800E558C 104000AC */  beqz      $v0, .L800E5840
 /* 7EA40 800E5590 00031080 */   sll      $v0, $v1, 2
-/* 7EA44 800E5594 3C018011 */  lui       $at, %hi(D_8010BF00)
+/* 7EA44 800E5594 3C018011 */  lui       $at, %hi(jtbl_8010BF00)
 /* 7EA48 800E5598 00220821 */  addu      $at, $at, $v0
-/* 7EA4C 800E559C 8C22BF00 */  lw        $v0, %lo(D_8010BF00)($at)
+/* 7EA4C 800E559C 8C22BF00 */  lw        $v0, %lo(jtbl_8010BF00)($at)
 /* 7EA50 800E55A0 00400008 */  jr        $v0
 /* 7EA54 800E55A4 00000000 */   nop
+glabel L800E55A8_7EA58
 /* 7EA58 800E55A8 3C038011 */  lui       $v1, %hi(D_8010C9B0)
 /* 7EA5C 800E55AC 2463C9B0 */  addiu     $v1, $v1, %lo(D_8010C9B0)
 /* 7EA60 800E55B0 84620000 */  lh        $v0, ($v1)
@@ -52,16 +53,19 @@ glabel func_800E5530
 /* 7EA94 800E55E4 44800000 */  mtc1      $zero, $f0
 /* 7EA98 800E55E8 080395E6 */  j         .L800E5798
 /* 7EA9C 800E55EC 00000000 */   nop
+glabel L800E55F0_7EAA0
 /* 7EAA0 800E55F0 C4A2002C */  lwc1      $f2, 0x2c($a1)
 /* 7EAA4 800E55F4 3C0141C8 */  lui       $at, 0x41c8
 /* 7EAA8 800E55F8 44810000 */  mtc1      $at, $f0
 /* 7EAAC 800E55FC 080395E6 */  j         .L800E5798
 /* 7EAB0 800E5600 00000000 */   nop
+glabel L800E5604_7EAB4
 /* 7EAB4 800E5604 C4A2002C */  lwc1      $f2, 0x2c($a1)
 /* 7EAB8 800E5608 3C014248 */  lui       $at, 0x4248
 /* 7EABC 800E560C 44810000 */  mtc1      $at, $f0
 /* 7EAC0 800E5610 080395E6 */  j         .L800E5798
 /* 7EAC4 800E5614 00000000 */   nop
+glabel L800E5618_7EAC8
 /* 7EAC8 800E5618 C4A2002C */  lwc1      $f2, 0x2c($a1)
 /* 7EACC 800E561C 3C01C3C3 */  lui       $at, 0xc3c3
 /* 7EAD0 800E5620 44810000 */  mtc1      $at, $f0
@@ -77,6 +81,7 @@ glabel func_800E5530
 /* 7EAF8 800E5648 4600103C */  c.lt.s    $f2, $f0
 /* 7EAFC 800E564C 080395E8 */  j         .L800E57A0
 /* 7EB00 800E5650 00000000 */   nop
+glabel L800E5654_7EB04
 /* 7EB04 800E5654 C4A2002C */  lwc1      $f2, 0x2c($a1)
 /* 7EB08 800E5658 3C01C2B4 */  lui       $at, 0xc2b4
 /* 7EB0C 800E565C 44810000 */  mtc1      $at, $f0
@@ -91,6 +96,7 @@ glabel func_800E5530
 /* 7EB30 800E5680 4600103C */  c.lt.s    $f2, $f0
 /* 7EB34 800E5684 080395E8 */  j         .L800E57A0
 /* 7EB38 800E5688 00000000 */   nop
+glabel L800E568C_7EB3C
 /* 7EB3C 800E568C 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
 /* 7EB40 800E5690 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 7EB44 800E5694 8442008E */  lh        $v0, 0x8e($v0)
@@ -115,6 +121,7 @@ glabel func_800E5530
 /* 7EB8C 800E56DC 44800000 */  mtc1      $zero, $f0
 /* 7EB90 800E56E0 080395E6 */  j         .L800E5798
 /* 7EB94 800E56E4 00000000 */   nop
+glabel L800E56E8_7EB98
 /* 7EB98 800E56E8 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
 /* 7EB9C 800E56EC 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 7EBA0 800E56F0 8442008E */  lh        $v0, 0x8e($v0)
@@ -141,6 +148,7 @@ glabel func_800E5530
 /* 7EBF0 800E5740 44810000 */  mtc1      $at, $f0
 /* 7EBF4 800E5744 080395E6 */  j         .L800E5798
 /* 7EBF8 800E5748 00000000 */   nop
+glabel L800E574C_7EBFC
 /* 7EBFC 800E574C 3C038011 */  lui       $v1, %hi(D_8010C9B0)
 /* 7EC00 800E5750 2463C9B0 */  addiu     $v1, $v1, %lo(D_8010C9B0)
 /* 7EC04 800E5754 84620000 */  lh        $v0, ($v1)
@@ -169,6 +177,7 @@ glabel func_800E5530
 /* 7EC54 800E57A4 24020001 */   addiu    $v0, $zero, 1
 /* 7EC58 800E57A8 08039611 */  j         .L800E5844
 /* 7EC5C 800E57AC 0000802D */   daddu    $s0, $zero, $zero
+glabel L800E57B0_7EC60
 /* 7EC60 800E57B0 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
 /* 7EC64 800E57B4 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 7EC68 800E57B8 8442008E */  lh        $v0, 0x8e($v0)
@@ -208,8 +217,10 @@ glabel func_800E5530
 /* 7ECE4 800E5834 14400003 */  bnez      $v0, .L800E5844
 /* 7ECE8 800E5838 24020001 */   addiu    $v0, $zero, 1
 .L800E583C:
+glabel L800E583C_7ECEC
 /* 7ECEC 800E583C 24100002 */  addiu     $s0, $zero, 2
 .L800E5840:
+glabel L800E5840_7ECF0
 /* 7ECF0 800E5840 24020001 */  addiu     $v0, $zero, 1
 .L800E5844:
 /* 7ECF4 800E5844 16020014 */  bne       $s0, $v0, .L800E5898

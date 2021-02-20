@@ -30,9 +30,9 @@ glabel func_80240680_954640
 /* 9546A4 802406E4 000320C0 */  sll       $a0, $v1, 3
 /* 9546A8 802406E8 00641821 */  addu      $v1, $v1, $a0
 /* 9546AC 802406EC 000318C0 */  sll       $v1, $v1, 3
-/* 9546B0 802406F0 3C01800B */  lui       $at, %hi(D_800B1DEC)
+/* 9546B0 802406F0 3C01800B */  lui       $at, %hi(gCameras+0x6C)
 /* 9546B4 802406F4 00230821 */  addu      $at, $at, $v1
-/* 9546B8 802406F8 C42C1DEC */  lwc1      $f12, %lo(D_800B1DEC)($at)
+/* 9546B8 802406F8 C42C1DEC */  lwc1      $f12, %lo(gCameras+0x6C)($at)
 /* 9546BC 802406FC 0C00A88D */  jal       sin_cos_deg
 /* 9546C0 80240700 0040A82D */   daddu    $s5, $v0, $zero
 /* 9546C4 80240704 1200005D */  beqz      $s0, .L8024087C

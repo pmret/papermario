@@ -82,6 +82,10 @@ s32 get_model_list_index_from_tree_index(s32 treeIndex);
 void get_model_center_and_size(s32 modelID, f32* centerX, f32* centerY, f32* centerZ, f32* sizeX, f32* sizeY,
                                f32* sizeZ);
 s32 collision_main_above(void);
+s32 do_lateral_collision(s32, PlayerStatus*, f32*, f32*, f32*, f32, f32);
+Npc* make_disguise_npc(s32 peachDisguise);
+
+s32 partner_player_can_pause(void);
 
 void func_80027088(s32);
 
@@ -107,6 +111,8 @@ ActorPart* get_actor_part(Actor* actor, s32 partIndex);
 s32 add_coins(s32 amt);
 
 void func_800494C0(Npc* npc, s32 arg1, s32 arg2);
+
+s32 func_800DF15C(PlayerStatus*, f32*, f32*, f32*, s32, f32, s32*);
 
 s32 get_variable(ScriptInstance* script, Bytecode var);
 s32 set_variable(ScriptInstance* script, Bytecode var, s32 value);
@@ -164,7 +170,9 @@ s32 is_current_partner_flying(void);
 void func_800ED5D0(Npc* partner);
 void clear_partner_move_history(Npc* partner);
 
-s32 set_parter_tether_distance(f32);
+void set_background_color_blend(u8 r, u8 g, u8 b, u8 a);
+
+void set_parter_tether_distance(f32);
 s32 does_script_exist(s32 id);
 s32 does_script_exist_by_ref(ScriptInstance* script);
 ScriptInstance* start_script(Bytecode* initialLine, s32 priority, s32 initialState);
@@ -256,5 +264,11 @@ void add_xz_vec3f(Vec3f* vector, f32 speed, f32 angleDeg);
 void play_movement_dust_effects(s32 var0, f32 xPos, f32 yPos, f32 zPos, f32 angleDeg);
 
 Actor func_80072110(s32, s32, s32, s32, f32, s32); // Probably wrong
+
+// Dead functions:
+f32 func_8002AF70(f32 startX, f32 startZ, f32 endX, f32 endZ); // atan2
+Npc* func_8003E4BC(NpcId npcId); // get_npc_safe
+Npc* func_8003E534(NpcId npcId); // get_npc_safe
+void func_80075170(s32, f32, f32, f32, f32); // func_8006FEF0
 
 #endif

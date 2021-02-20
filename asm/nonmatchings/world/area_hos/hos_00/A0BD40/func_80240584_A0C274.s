@@ -5,8 +5,8 @@ glabel func_80240584_A0C274
 /* A0C274 80240584 27BDFF90 */  addiu     $sp, $sp, -0x70
 /* A0C278 80240588 AFB10034 */  sw        $s1, 0x34($sp)
 /* A0C27C 8024058C 0080882D */  daddu     $s1, $a0, $zero
-/* A0C280 80240590 3C01800B */  lui       $at, %hi(D_800B1DEC)
-/* A0C284 80240594 C4201DEC */  lwc1      $f0, %lo(D_800B1DEC)($at)
+/* A0C280 80240590 3C01800B */  lui       $at, %hi(gCameras+0x6C)
+/* A0C284 80240594 C4201DEC */  lwc1      $f0, %lo(gCameras+0x6C)($at)
 /* A0C288 80240598 3C014334 */  lui       $at, 0x4334
 /* A0C28C 8024059C 44811000 */  mtc1      $at, $f2
 /* A0C290 802405A0 3C014049 */  lui       $at, 0x4049

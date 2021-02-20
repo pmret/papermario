@@ -89,7 +89,7 @@ void find_script_labels(ScriptInstance* script) {
 void clear_script_list(void) {
     s32 i;
 
-    if (GAME_STATUS->isBattle == 0) {
+    if ((*gGameStatusPtr)->isBattle == 0) {
         gCurrentScriptListPtr = &gWorldScriptList;
         gMapVars = gWorldMapVars;
         gMapFlags = gWorldMapFlags;
@@ -121,7 +121,7 @@ void clear_script_list(void) {
 
 void init_script_list(void) {
 
-    if (GAME_STATUS->isBattle == 0) {
+    if ((*gGameStatusPtr)->isBattle == 0) {
         gCurrentScriptListPtr = &gWorldScriptList;
         gMapVars = gWorldMapVars;
         gMapFlags = gWorldMapFlags;

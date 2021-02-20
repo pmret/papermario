@@ -21,9 +21,9 @@ glabel func_802415E0_D6FF90
 /* D6FFD0 80241620 00431021 */  addu      $v0, $v0, $v1
 /* D6FFD4 80241624 000210C0 */  sll       $v0, $v0, 3
 /* D6FFD8 80241628 44060000 */  mfc1      $a2, $f0
-/* D6FFDC 8024162C 3C01800B */  lui       $at, %hi(D_800B1DEC)
+/* D6FFDC 8024162C 3C01800B */  lui       $at, %hi(gCameras+0x6C)
 /* D6FFE0 80241630 00220821 */  addu      $at, $at, $v0
-/* D6FFE4 80241634 C4201DEC */  lwc1      $f0, %lo(D_800B1DEC)($at)
+/* D6FFE4 80241634 C4201DEC */  lwc1      $f0, %lo(gCameras+0x6C)($at)
 /* D6FFE8 80241638 3C013F80 */  lui       $at, 0x3f80
 /* D6FFEC 8024163C 4481A000 */  mtc1      $at, $f20
 /* D6FFF0 80241640 46001080 */  add.s     $f2, $f2, $f0

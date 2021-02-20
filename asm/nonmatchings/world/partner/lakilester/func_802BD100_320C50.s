@@ -66,9 +66,9 @@ glabel func_802BD100_320C50
 /* 320D38 802BD1E8 C6000040 */  lwc1      $f0, 0x40($s0)
 /* 320D3C 802BD1EC 000210C0 */  sll       $v0, $v0, 3
 /* 320D40 802BD1F0 E6200030 */  swc1      $f0, 0x30($s1)
-/* 320D44 802BD1F4 3C07800B */  lui       $a3, %hi(D_800B1DEC)
+/* 320D44 802BD1F4 3C07800B */  lui       $a3, %hi(gCameras+0x6C)
 /* 320D48 802BD1F8 00E23821 */  addu      $a3, $a3, $v0
-/* 320D4C 802BD1FC 8CE71DEC */  lw        $a3, %lo(D_800B1DEC)($a3)
+/* 320D4C 802BD1FC 8CE71DEC */  lw        $a3, %lo(gCameras+0x6C)($a3)
 /* 320D50 802BD200 0C00A7E7 */  jal       add_vec2D_polar
 /* 320D54 802BD204 26250030 */   addiu    $a1, $s1, 0x30
 /* 320D58 802BD208 8FBF0018 */  lw        $ra, 0x18($sp)

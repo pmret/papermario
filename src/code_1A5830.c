@@ -773,7 +773,7 @@ ApiStatus EnableActorGlow(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus WasStatusInflicted(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    BattleStatus* battleStatus = BATTLE_STATUS;
+    BattleStatus* battleStatus = &gBattleStatus;
     s32 outVal;
 
     get_variable(script, *args++);

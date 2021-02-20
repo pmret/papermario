@@ -110,7 +110,7 @@ glabel L80241798_CB6798
 glabel L802417B0_CB67B0
 /* CB67B0 802417B0 0280202D */  daddu     $a0, $s4, $zero
 /* CB67B4 802417B4 0200282D */  daddu     $a1, $s0, $zero
-/* CB67B8 802417B8 0C0903F8 */  jal       func_80240FE0_CB5FE0
+/* CB67B8 802417B8 0C0903F8 */  jal       flo_09_UnkNpcAIFunc14
 /* CB67BC 802417BC 0260302D */   daddu    $a2, $s3, $zero
 /* CB67C0 802417C0 080905FD */  j         .L802417F4
 /* CB67C4 802417C4 0000102D */   daddu    $v0, $zero, $zero

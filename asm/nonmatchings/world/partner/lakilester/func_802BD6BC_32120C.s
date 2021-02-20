@@ -29,8 +29,8 @@ glabel func_802BD6BC_32120C
 /* 32126C 802BD71C 4407B000 */  mfc1      $a3, $f22
 /* 321270 802BD720 0C00A720 */  jal       atan2
 /* 321274 802BD724 4600A386 */   mov.s    $f14, $f20
-/* 321278 802BD728 3C01800B */  lui       $at, %hi(D_800B1DEC)
-/* 32127C 802BD72C C42C1DEC */  lwc1      $f12, %lo(D_800B1DEC)($at)
+/* 321278 802BD728 3C01800B */  lui       $at, %hi(gCameras+0x6C)
+/* 32127C 802BD72C C42C1DEC */  lwc1      $f12, %lo(gCameras+0x6C)($at)
 /* 321280 802BD730 0C00A6C9 */  jal       clamp_angle
 /* 321284 802BD734 460C0300 */   add.s    $f12, $f0, $f12
 /* 321288 802BD738 4600A306 */  mov.s     $f12, $f20

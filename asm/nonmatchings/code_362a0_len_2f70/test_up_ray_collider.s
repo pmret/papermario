@@ -33,8 +33,8 @@ glabel test_up_ray_collider
 /* 3874C 8005D34C AFB20020 */  sw        $s2, 0x20($sp)
 /* 38750 8005D350 0C00A82D */  jal       sin_cos_rad
 /* 38754 8005D354 46006303 */   div.s    $f12, $f12, $f0
-/* 38758 8005D358 3C13800B */  lui       $s3, %hi(D_800B42E0)
-/* 3875C 8005D35C 267342E0 */  addiu     $s3, $s3, %lo(D_800B42E0)
+/* 38758 8005D358 3C13800B */  lui       $s3, %hi(gCollisionData)
+/* 3875C 8005D35C 267342E0 */  addiu     $s3, $s3, %lo(gCollisionData)
 /* 38760 8005D360 001010C0 */  sll       $v0, $s0, 3
 /* 38764 8005D364 00501023 */  subu      $v0, $v0, $s0
 /* 38768 8005D368 00021080 */  sll       $v0, $v0, 2

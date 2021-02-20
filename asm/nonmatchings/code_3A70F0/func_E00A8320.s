@@ -65,9 +65,9 @@ glabel func_E00A8320
 /* 3A7500 E00A8410 00431021 */  addu      $v0, $v0, $v1
 /* 3A7504 E00A8414 000210C0 */  sll       $v0, $v0, 3
 /* 3A7508 E00A8418 44060000 */  mfc1      $a2, $f0
-/* 3A750C E00A841C 3C01800B */  lui       $at, %hi(D_800B1DEC)
+/* 3A750C E00A841C 3C01800B */  lui       $at, %hi(gCameras+0x6C)
 /* 3A7510 E00A8420 00220821 */  addu      $at, $at, $v0
-/* 3A7514 E00A8424 C4201DEC */  lwc1      $f0, %lo(D_800B1DEC)($at)
+/* 3A7514 E00A8424 C4201DEC */  lwc1      $f0, %lo(gCameras+0x6C)($at)
 /* 3A7518 E00A8428 3C073F80 */  lui       $a3, 0x3f80
 /* 3A751C E00A842C 46000007 */  neg.s     $f0, $f0
 /* 3A7520 E00A8430 44050000 */  mfc1      $a1, $f0

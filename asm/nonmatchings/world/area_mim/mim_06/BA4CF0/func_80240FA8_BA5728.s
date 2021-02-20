@@ -62,9 +62,9 @@ glabel func_80240FA8_BA5728
 /* BA5808 80241088 000218C0 */  sll       $v1, $v0, 3
 /* BA580C 8024108C 00431021 */  addu      $v0, $v0, $v1
 /* BA5810 80241090 000210C0 */  sll       $v0, $v0, 3
-/* BA5814 80241094 3C01800B */  lui       $at, %hi(D_800B1DEC)
+/* BA5814 80241094 3C01800B */  lui       $at, %hi(gCameras+0x6C)
 /* BA5818 80241098 00220821 */  addu      $at, $at, $v0
-/* BA581C 8024109C C4201DEC */  lwc1      $f0, %lo(D_800B1DEC)($at)
+/* BA581C 8024109C C4201DEC */  lwc1      $f0, %lo(gCameras+0x6C)($at)
 /* BA5820 802410A0 08090439 */  j         .L802410E4
 /* BA5824 802410A4 460C0301 */   sub.s    $f12, $f0, $f12
 .L802410A8:
@@ -79,9 +79,9 @@ glabel func_80240FA8_BA5728
 /* BA5848 802410C8 000218C0 */  sll       $v1, $v0, 3
 /* BA584C 802410CC 00431021 */  addu      $v0, $v0, $v1
 /* BA5850 802410D0 000210C0 */  sll       $v0, $v0, 3
-/* BA5854 802410D4 3C01800B */  lui       $at, %hi(D_800B1DEC)
+/* BA5854 802410D4 3C01800B */  lui       $at, %hi(gCameras+0x6C)
 /* BA5858 802410D8 00220821 */  addu      $at, $at, $v0
-/* BA585C 802410DC C4201DEC */  lwc1      $f0, %lo(D_800B1DEC)($at)
+/* BA585C 802410DC C4201DEC */  lwc1      $f0, %lo(gCameras+0x6C)($at)
 /* BA5860 802410E0 460C0300 */  add.s     $f12, $f0, $f12
 .L802410E4:
 /* BA5864 802410E4 0C00A6C9 */  jal       clamp_angle

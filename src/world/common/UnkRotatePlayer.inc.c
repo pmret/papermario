@@ -2,7 +2,7 @@
 #include "map.h"
 
 ApiStatus N(UnkRotatePlayer)(ScriptInstance* script, s32 isInitialCall) {
-    PlayerStatus* playerStatus = PLAYER_STATUS;
+    PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (isInitialCall) {
         script->functionTemp[0].s = 60;

@@ -40,8 +40,8 @@ glabel test_ray_colliders
 /* 3815C 8005CD5C 450100DF */  bc1t      .L8005D0DC
 /* 38160 8005CD60 0000102D */   daddu    $v0, $zero, $zero
 .L8005CD64:
-/* 38164 8005CD64 3C15800B */  lui       $s5, %hi(D_800B42E0)
-/* 38168 8005CD68 26B542E0 */  addiu     $s5, $s5, %lo(D_800B42E0)
+/* 38164 8005CD64 3C15800B */  lui       $s5, %hi(gCollisionData)
+/* 38168 8005CD68 26B542E0 */  addiu     $s5, $s5, %lo(gCollisionData)
 /* 3816C 8005CD6C 3C01800A */  lui       $at, %hi(D_800A423C)
 /* 38170 8005CD70 E424423C */  swc1      $f4, %lo(D_800A423C)($at)
 /* 38174 8005CD74 3C01800A */  lui       $at, %hi(D_800A4240)

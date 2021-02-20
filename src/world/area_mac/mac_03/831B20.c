@@ -1,5 +1,7 @@
 #include "mac_03.h"
 
+#define UNK_ALPHA_FUNC_NPC 23
+
 #include "common/UnkFloatFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_03/831B20", func_802404B0_831CB0);
@@ -16,7 +18,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_03/831B20", func_80240810_832010);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_03/831B20", func_8024087C_83207C);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_03/831B20", func_802408DC_8320DC);
+#include "world/common/UnkAlphaFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_03/831B20", func_80240A28_832228);
 

@@ -110,7 +110,7 @@ glabel L80241598_BFEE18
 glabel L802415B0_BFEE30
 /* BFEE30 802415B0 0280202D */  daddu     $a0, $s4, $zero
 /* BFEE34 802415B4 0200282D */  daddu     $a1, $s0, $zero
-/* BFEE38 802415B8 0C090378 */  jal       func_80240DE0_BFE660
+/* BFEE38 802415B8 0C090378 */  jal       dgb_01_UnkNpcAIFunc14
 /* BFEE3C 802415BC 0260302D */   daddu    $a2, $s3, $zero
 /* BFEE40 802415C0 0809057D */  j         .L802415F4
 /* BFEE44 802415C4 0000102D */   daddu    $v0, $zero, $zero

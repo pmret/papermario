@@ -1,6 +1,5 @@
 #include "common.h"
 
-extern s16 D_800B42EC;
 extern s16 D_800D91DC;
 
 INCLUDE_ASM(s32, "code_362a0_len_2f70", allocate_hit_tables);
@@ -12,7 +11,7 @@ void func_8005AF8C(void) {
 }
 
 void initialize_collision(void) {
-    D_800B42EC = 0;
+    gCollisionData.numColliders = 0;
     D_800D91DC = 0;
     collision_heap_create();
 }

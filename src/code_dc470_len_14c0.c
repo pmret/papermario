@@ -26,7 +26,7 @@ void load_map_bg(char* optAssetName) {
 }
 
 void use_default_background_settings(void) {
-    GameStatus* gameStatus = GAME_STATUS;
+    GameStatus* gameStatus = *gGameStatusPtr;
     D_801595A0 = 0;
     D_8014F12F = 0;
 
@@ -35,7 +35,7 @@ void use_default_background_settings(void) {
 }
 
 void read_background_size(BackgroundHeader* bg) {
-    GameStatus* gameStatus = GAME_STATUS;
+    GameStatus* gameStatus = *gGameStatusPtr;
 
     gameStatus->backgroundMaxW = bg->width;
     gameStatus->backgroundMaxH = bg->height;
@@ -47,7 +47,7 @@ void read_background_size(BackgroundHeader* bg) {
 }
 
 void set_background_size(s16 startX, s16 startY, s16 sizeX, s16 sizeY) {
-    GameStatus* gameStatus = GAME_STATUS;
+    GameStatus* gameStatus = *gGameStatusPtr;
 
     gameStatus->enableBackground &= ~1;
     gameStatus->backgroundMaxW = startX;

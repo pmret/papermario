@@ -7,8 +7,8 @@ glabel initialize_battle
 /* 16CA18 8023E138 3C138011 */  lui       $s3, %hi(gPlayerData)
 /* 16CA1C 8023E13C 2673F290 */  addiu     $s3, $s3, %lo(gPlayerData)
 /* 16CA20 8023E140 AFB40020 */  sw        $s4, 0x20($sp)
-/* 16CA24 8023E144 3C14800B */  lui       $s4, %hi(D_800B2830)
-/* 16CA28 8023E148 26942830 */  addiu     $s4, $s4, %lo(D_800B2830)
+/* 16CA24 8023E144 3C14800B */  lui       $s4, %hi(gCameras+0xAB0)
+/* 16CA28 8023E148 26942830 */  addiu     $s4, $s4, %lo(gCameras+0xAB0)
 /* 16CA2C 8023E14C AFB10014 */  sw        $s1, 0x14($sp)
 /* 16CA30 8023E150 2411000F */  addiu     $s1, $zero, 0xf
 /* 16CA34 8023E154 3C06800E */  lui       $a2, %hi(gBattleStatus)

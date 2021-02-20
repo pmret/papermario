@@ -110,7 +110,7 @@ glabel L80242308_BE5AB8
 glabel L80242320_BE5AD0
 /* BE5AD0 80242320 0280202D */  daddu     $a0, $s4, $zero
 /* BE5AD4 80242324 0200282D */  daddu     $a1, $s0, $zero
-/* BE5AD8 80242328 0C0906D4 */  jal       func_80241B50_BE5300
+/* BE5AD8 80242328 0C0906D4 */  jal       arn_04_UnkNpcAIFunc14
 /* BE5ADC 8024232C 0260302D */   daddu    $a2, $s3, $zero
 /* BE5AE0 80242330 080908D9 */  j         .L80242364
 /* BE5AE4 80242334 0000102D */   daddu    $v0, $zero, $zero

@@ -1,7 +1,7 @@
 #include "common.h"
 
 void func_802E9050(Entity* entity) {
-    PlayerStatus* playerStatus = PLAYER_STATUS;
+    PlayerStatus* playerStatus = &gPlayerStatus;
     f32 val = fabsf(clamp_angle(180.0f - entity->rotation.y) - clamp_angle(atan2(entity->position.x, entity->position.z,
                     playerStatus->position.x, playerStatus->position.z)));
 

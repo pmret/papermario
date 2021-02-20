@@ -16,11 +16,11 @@ INCLUDE_ASM(s32, "code_77480", collision_check_above);
 
 INCLUDE_ASM(s32, "code_77480", trace_above_player);
 
-INCLUDE_ASM(s32, "code_77480", do_lateral_collision);
+INCLUDE_ASM(s32, "code_77480", do_lateral_collision, s32 arg0, PlayerStatus* arg1, f32* arg2, f32* arg3, f32* arg4, f32 arg5, f32 arg6);
 
 INCLUDE_ASM(s32, "code_77480", func_800DEE5C);
 
-INCLUDE_ASM(s32, "code_77480", func_800DF15C);
+INCLUDE_ASM(s32, "code_77480", func_800DF15C, PlayerStatus* arg0, f32* arg1, f32* arg2, f32* arg3, s32 arg4, f32 arg5, s32* arg6);
 
 void func_800DF3FC(f32* arg0, f32* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5) {
     f32 temp = (arg2 * arg4) + (arg3 * arg5);
@@ -184,7 +184,7 @@ void clear_player_status(void) {
 }
 
 void func_800DFC74(void) {
-    PlayerStatus* playerStatus = PLAYER_STATUS;
+    PlayerStatus* playerStatus = &gPlayerStatus;
 
     mem_clear(playerStatus, sizeof(PlayerStatus));
     playerStatus->flags = 1;
@@ -210,7 +210,7 @@ s32 func_800DFCF4(void) {
 INCLUDE_ASM(s32, "code_77480", func_800DFD48);
 
 void func_800DFEFC(void) {
-    PlayerStatus* playerStatus = PLAYER_STATUS;
+    PlayerStatus* playerStatus = &gPlayerStatus;
     s32 temp_v0 = func_800DFD48();
 
     if (temp_v0 != -1) {
@@ -221,7 +221,7 @@ void func_800DFEFC(void) {
 }
 
 void func_800DFF50(s32 arg0) {
-    PlayerStatus* playerStatus = PLAYER_STATUS;
+    PlayerStatus* playerStatus = &gPlayerStatus;
 
     playerStatus->anim = arg0;
     playerStatus->unk_BC = 0;
@@ -229,7 +229,7 @@ void func_800DFF50(s32 arg0) {
 }
 
 void func_800DFF78(void) {
-    PlayerStatus* playerStatus = PLAYER_STATUS;
+    PlayerStatus* playerStatus = &gPlayerStatus;
     s32 temp_v0 = func_800DFD48();
 
     if (temp_v0 != -1) {
@@ -243,17 +243,17 @@ INCLUDE_ASM(s32, "code_77480", func_800DFFCC);
 
 // dist_to_player2D
 f32 func_800E0088(f32 x, f32 z) {
-    PlayerStatus* playerStatus = PLAYER_STATUS;
+    PlayerStatus* playerStatus = &gPlayerStatus;
 
     return dist2D(x, z, playerStatus->position.x, playerStatus->position.z);
 }
 
 void enable_player_shadow(void) {
-    get_shadow_by_index(PLAYER_STATUS->shadowID)->flags &= ~1;
+    get_shadow_by_index(gPlayerStatus.shadowID)->flags &= ~1;
 }
 
 void disable_player_shadow(void) {
-    get_shadow_by_index(PLAYER_STATUS->shadowID)->flags |= 1;
+    get_shadow_by_index(gPlayerStatus.shadowID)->flags |= 1;
 }
 
 s32 disable_player_static_collisions(void) {
@@ -301,7 +301,7 @@ void func_800E01DC(void) {
 }
 
 s32 func_800E0208(void) {
-    GameStatus* gameStatus = GAME_STATUS;
+    GameStatus* gameStatus = *gGameStatusPtr;
     s32 ret = 0;
 
     if (gameStatus->disableScripts && (gameStatus->currentButtons & 0x10)) {
@@ -347,7 +347,7 @@ void func_800E0514(void) {
 }
 
 s32 func_800E0538(void) {
-    PlayerStatus* playerStatus = PLAYER_STATUS;
+    PlayerStatus* playerStatus = &gPlayerStatus;
     s32* unk_C8 = playerStatus->unk_C8;
     s32 ret = 0;
     s32 cond;
@@ -392,9 +392,9 @@ void func_800E0B14(void) {
 }
 
 void update_partner_timers(void) {
-    PlayerData* playerData = PLAYER_DATA;
+    PlayerData* playerData = &gPlayerData;
 
-    if (!GAME_STATUS->isBattle) {
+    if (!(*gGameStatusPtr)->isBattle) {
         s32 i;
 
         for (i = 1; i < ARRAY_COUNT(playerData->unk_2C4); i++) {
@@ -410,7 +410,7 @@ INCLUDE_ASM(s32, "code_77480", func_800E0B90);
 INCLUDE_ASM(s32, "code_77480", get_player_back_anim);
 
 void render_player(void) {
-    if (!GAME_STATUS->disableScripts) {
+    if (!(*gGameStatusPtr)->disableScripts) {
         render_player_model();
     }
 }

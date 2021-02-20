@@ -1,5 +1,7 @@
 #include "jan_02.h"
 
+#define UNK_ALPHA_FUNC_NPC 5
+
 INCLUDE_ASM(s32, "world/area_jan/jan_02/B2C8A0", func_80240430_B2C8A0);
 
 INCLUDE_ASM(s32, "world/area_jan/jan_02/B2C8A0", func_80240588_B2C9F8);
@@ -48,7 +50,7 @@ INCLUDE_ASM(s32, "world/area_jan/jan_02/B2C8A0", func_80241974_B2DDE4);
 
 INCLUDE_ASM(s32, "world/area_jan/jan_02/B2C8A0", func_802419E0_B2DE50);
 
-INCLUDE_ASM(s32, "world/area_jan/jan_02/B2C8A0", func_80241A40_B2DEB0);
+#include "world/common/UnkAlphaFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_jan/jan_02/B2C8A0", func_80241B8C_B2DFFC);
 

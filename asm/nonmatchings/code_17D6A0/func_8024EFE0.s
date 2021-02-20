@@ -209,8 +209,8 @@ glabel func_8024EFE0
 /* 17DBCC 8024F2EC AE00FFE0 */  sw        $zero, -0x20($s0)
 /* 17DBD0 8024F2F0 E600FFE4 */  swc1      $f0, -0x1c($s0)
 /* 17DBD4 8024F2F4 E602FFEC */  swc1      $f2, -0x14($s0)
-/* 17DBD8 8024F2F8 3C01800B */  lui       $at, %hi(D_800B2344)
-/* 17DBDC 8024F2FC C4202344 */  lwc1      $f0, %lo(D_800B2344)($at)
+/* 17DBD8 8024F2F8 3C01800B */  lui       $at, %hi(gCameras+0x5C4)
+/* 17DBDC 8024F2FC C4202344 */  lwc1      $f0, %lo(gCameras+0x5C4)($at)
 /* 17DBE0 8024F300 0C00A6C9 */  jal       clamp_angle
 /* 17DBE4 8024F304 46006301 */   sub.s    $f12, $f12, $f0
 /* 17DBE8 8024F308 2402000E */  addiu     $v0, $zero, 0xe

@@ -30,8 +30,6 @@ INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C76CE0", func_80240600_C772E0);
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C76CE0", func_80240B38_C77818);
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C76CE0", func_80240C78_C77958);
-
-INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C76CE0", func_80240CC0_C779A0);
+#include "world/common/UnkPartnerPosFuncs.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C76CE0", func_80240D08_C779E8);

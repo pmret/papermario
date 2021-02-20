@@ -121,7 +121,7 @@ glabel L80241668_EE0028
 glabel L80241680_EE0040
 /* EE0040 80241680 02A0202D */  daddu     $a0, $s5, $zero
 /* EE0044 80241684 0200282D */  daddu     $a1, $s0, $zero
-/* EE0048 80241688 0C0903A1 */  jal       func_80240E84_EDF844
+/* EE0048 80241688 0C0903A1 */  jal       code_EDEA00_DeadUnkNpcAIFunc14
 /* EE004C 8024168C 0260302D */   daddu    $a2, $s3, $zero
 /* EE0050 80241690 080905B1 */  j         .L802416C4
 /* EE0054 80241694 0000102D */   daddu    $v0, $zero, $zero

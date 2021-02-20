@@ -12,8 +12,8 @@ glabel load_collision
 /* 36474 8005B074 AFB10014 */  sw        $s1, 0x14($sp)
 /* 36478 8005B078 0C016BF0 */  jal       load_hit_asset
 /* 3647C 8005B07C AFB00010 */   sw       $s0, 0x10($sp)
-/* 36480 8005B080 3C13800B */  lui       $s3, %hi(D_800B42E0)
-/* 36484 8005B084 267342E0 */  addiu     $s3, $s3, %lo(D_800B42E0)
+/* 36480 8005B080 3C13800B */  lui       $s3, %hi(gCollisionData)
+/* 36484 8005B084 267342E0 */  addiu     $s3, $s3, %lo(gCollisionData)
 /* 36488 8005B088 8662000C */  lh        $v0, 0xc($s3)
 /* 3648C 8005B08C 3C11800A */  lui       $s1, %hi(D_800A4264)
 /* 36490 8005B090 8E314264 */  lw        $s1, %lo(D_800A4264)($s1)

@@ -3,7 +3,7 @@
 extern s32* D_802382F8_714FE8[];
 
 ApiStatus func_80238000_714CF0(ScriptInstance* script, s32 isInitialCall) {
-    BattleStatus* battleStatus = BATTLE_STATUS;
+    BattleStatus* battleStatus = &gBattleStatus;
 
     if (battleStatus->flags2 & 0x40) {
         script->varTable[0] = 1;

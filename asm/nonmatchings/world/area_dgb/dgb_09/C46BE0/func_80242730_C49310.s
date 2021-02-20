@@ -110,7 +110,7 @@ glabel L8024289C_C4947C
 glabel L802428B4_C49494
 /* C49494 802428B4 0280202D */  daddu     $a0, $s4, $zero
 /* C49498 802428B8 0200282D */  daddu     $a1, $s0, $zero
-/* C4949C 802428BC 0C090839 */  jal       func_802420E4_C48CC4
+/* C4949C 802428BC 0C090839 */  jal       dgb_09_UnkNpcAIFunc14
 /* C494A0 802428C0 0260302D */   daddu    $a2, $s3, $zero
 /* C494A4 802428C4 08090A3E */  j         .L802428F8
 /* C494A8 802428C8 0000102D */   daddu    $v0, $zero, $zero
