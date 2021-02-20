@@ -143,8 +143,6 @@ def get_matches(query):
 
     ret = {}
     for symbol in map_offsets:
-        if symbol == "func_80240000_8EBE20":
-            dog = 5
         if symbol is not None and query != symbol:
             score = get_pair_score(query_bytes, symbol)
             if score >= args.threshold:
