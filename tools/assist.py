@@ -45,13 +45,15 @@ def get_symbol_bytes(offsets, func):
         return None
     start = offsets[func]["start"]
     end = offsets[func]["end"]
-    bs = list(rom_bytes[start:end][0::4])
+    bs = list(rom_bytes[start:end])
 
     while len(bs) > 0 and bs[-1] == 0:
         bs.pop()
 
+    insns = bs[0::4]
+
     ret = []
-    for ins in bs:
+    for ins in insns:
         ret.append(ins >> 2)
 
     return bytes(ret).decode('utf-8'), bs
@@ -141,6 +143,8 @@ def get_matches(query):
 
     ret = {}
     for symbol in map_offsets:
+        if symbol == "func_80240000_8EBE20":
+            dog = 5
         if symbol is not None and query != symbol:
             score = get_pair_score(query_bytes, symbol)
             if score >= args.threshold:
