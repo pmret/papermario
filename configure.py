@@ -130,8 +130,6 @@ def find_asset_dir(path):
         if os.path.exists(d + "/" + path):
             return d
 
-    raise Exception("lol")
-
     print("Unable to find asset: " + path)
     print("The asset dump may be incomplete. Try:")
     print("    ./configure.py --clean")
@@ -188,7 +186,11 @@ async def main():
                     has_rom = True
                     has_any_rom = True
             except IOError:
-                pass
+                print(f"Could not find baserom '{rom}', please add it.")
+                if len(versions) >= 2:
+                    print(f"You can avoid building version '{version}' by specifying versions on the command-line:")
+                    print(f"    ./configure.py {' '.join(ver for ver in versions if ver != version)}")
+                exit(1)
 
             if has_rom:
                 print(f"Splitting assets from {rom}", end="")
@@ -201,10 +203,6 @@ async def main():
                     False,
                 )
                 print("")
-
-        if not has_any_rom:
-            print("No baserom.z64 found in ver/" + ",".join(versions) + " directories")
-            exit(1)
 
     print("Configuring build...")
 
