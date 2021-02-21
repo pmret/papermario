@@ -578,6 +578,7 @@ async def main():
     except Exception:
         pass
     os.symlink(versions[0], "ver/current")
+    n.build("ver/current/build/papermario.z64", "phony", "ver/" + versions[0] + "/build/papermario.z64")
 
     print("Build configuration complete! Now run")
     print("    ninja")

@@ -32,13 +32,13 @@ args = parser.parse_args()
 diff_count = args.count
 
 if args.make:
-    check_call(["ninja", "papermario.z64"])
+    check_call(["ninja", "ver/current/build/papermario.z64"])
 
-baseimg = f"baserom.z64"
-basemap = f"expected/build/papermario.map"
+baseimg = f"ver/current/baserom.z64"
+basemap = f"ver/current/expected/build/papermario.map"
 
-myimg = f"papermario.z64"
-mymap = f"build/papermario.map"
+myimg = f"ver/current/build/papermario.z64"
+mymap = f"ver/current/build/papermario.map"
 
 if not os.path.isfile(baseimg):
     print(f"{baseimg} must exist.")
