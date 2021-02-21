@@ -19,7 +19,7 @@ INCLUDE_ASM(s32, "battle/star/chill_out_7900D0", func_802A1414_7904E4);
 
 INCLUDE_ASM(s32, "battle/star/chill_out_7900D0", func_802A1494_790564);
 
-ApiStatus func_802A14E8_7905B8(void) {
+ApiStatus func_802A14E8_7905B8(ScriptInstance* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(100);
 
     npc->collisionHeight = 32;
@@ -27,12 +27,12 @@ ApiStatus func_802A14E8_7905B8(void) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802A1518_7905E8(void) {
+ApiStatus func_802A1518_7905E8(ScriptInstance* script, s32 isInitialCall) {
     D_802A2CC0 = 0;
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802A1528_7905F8(ActorPart* actorPart) {
+ApiStatus func_802A1528_7905F8(ScriptInstance* script, s32 isInitialCall, ActorPart* actorPart) {
     actorPart->unk_84 = D_802A2CC0;
     return ApiStatus_DONE2;
 }
