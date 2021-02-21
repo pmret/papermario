@@ -74,9 +74,6 @@ Once you've matched a function, run the following scripts:
 
 ```sh
 $ ./coverage.py --delete-matched
-$ ./format.sh
 ```
 
-If `format.sh` has any problems with your code, go and fix the issues. If you can't fix a warning without making the function not match anymore, append `// NOLINT` to the offending line.
-
-Then, please [create a pull request](https://github.com/pmret/papermario/pulls)!
+Then, go ahead and [create a pull request](https://github.com/pmret/papermario/pulls)!
