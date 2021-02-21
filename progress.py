@@ -5,6 +5,7 @@ import git
 import os
 import subprocess
 import sys
+from colour import Color
 
 def set_version(version):
     global script_dir, root_dir, asm_dir, build_dir, elf_path
@@ -61,6 +62,9 @@ def get_funcs_sizes(sizes, matchings, nonmatchings):
 
     return msize, nmsize
 
+def lerp(a, b, alpha):
+    return a + (b - a) * alpha
+
 def main(args):
     set_version(args.version)
 
@@ -91,11 +95,12 @@ def main(args):
         import json
 
         # https://shields.io/endpoint
+        color = Color("#50ca22", hue=lerp(0, 105/255, matching_ratio / 100))
         print(json.dumps({
             "schemaVersion": 1,
-            "label": "progress",
+            "label": f"progress ({args.version})",
             "message": f"{matching_ratio:.2f}%",
-            "color": "yellow",
+            "color": color.hex,
         }))
     else:
         if matching_size + nonmatching_size != total_size:

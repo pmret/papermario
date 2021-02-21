@@ -1,12 +1,18 @@
 # Paper Mario
 
-[![Build Status][jenkins-badge]][jenkins] [![Progress][progress-badge]][progress] [![Discord Channel][discord-badge]][discord]
+[![Build Status][jenkins-badge]][jenkins]
+[![Progress (US)][progress-us-badge]][progress-us]
+[![Progress (JP)][progress-jp-badge]][progress-jp]
+[![Discord Channel][discord-badge]][discord]
 
 [jenkins]: https://jenkins.zelda64.dev/job/papermario/job/master
 [jenkins-badge]: https://img.shields.io/jenkins/build?jobUrl=https%3A%2F%2Fjenkins.zelda64.dev%2Fjob%2Fpapermario%2Fjob%2Fmaster
 
-[progress]: https://papermar.io/progress
-[progress-badge]: https://img.shields.io/endpoint?url=https://papermar.io/reports/progress_shield.json
+[progress-us]: https://papermar.io/progress-us
+[progress-us-badge]: https://img.shields.io/endpoint?url=https://papermar.io/reports/progress_us_shield.json
+
+[progress-jp]: https://papermar.io/progress-us
+[progress-jp-badge]: https://img.shields.io/endpoint?url=https://papermar.io/reports/progress_jp_shield.json
 
 [discord]: https://discord.gg/urUm3VG
 [discord-badge]: https://img.shields.io/discord/279322074412089344?color=%237289DA&logo=discord&logoColor=ffffff
