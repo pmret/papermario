@@ -14,7 +14,7 @@ import split
 from segtypes.n64.code import Subsegment
 
 INCLUDE_ASM_RE = re.compile(r"___INCLUDE_ASM\([^,]+, ([^,]+), ([^,)]+)") # note _ prefix
-
+SUPPORTED_VERSIONS = ["us", "jp"]
 TARGET = "papermario"
 
 def obj(path: str):
@@ -145,13 +145,27 @@ async def main():
     task_sem = asyncio.Semaphore(8)
 
     parser = ArgumentParser(description="Paper Mario build.ninja generator")
-    parser.add_argument("version", nargs="*", default=["us", "jp"], help="Versions to split/build. Multiple versions can be provided, but many tools will operate on the first only (default 'us').")
+    parser.add_argument("version", nargs="*", default=[], help="Version(s) to configure for. Most tools will operate on the first-provided only. Supported versions: " + ','.join(SUPPORTED_VERSIONS))
     parser.add_argument("--cpp", help="GNU C preprocessor command")
     parser.add_argument("--cflags", default="", help="Extra cc/cpp flags")
     parser.add_argument("--no-splat", action="store_true", help="Don't split assets from the baserom(s)")
     parser.add_argument("--clean", action="store_true", help="Delete assets and previously-built files")
     args = parser.parse_args()
     versions = args.version
+
+    # default version behaviour is to only do those that exist
+    if len(versions) == 0:
+        for version in SUPPORTED_VERSIONS:
+            rom = f"ver/{version}/baserom.z64"
+            if os.path.exists(rom):
+                versions.append(version)
+
+        if len(versions) == 0:
+            print("error: no baserom.z64 files could be found in the ver/*/ directories.")
+            exit(1)
+
+    print("Configuring for versions: " + ', '.join(versions))
+    print("")
 
     # on macOS, /usr/bin/cpp defaults to clang rather than gcc (but we need gcc's)
     if args.cpp is None and sys.platform == "darwin" and "Free Software Foundation" not in (await shell("cpp --version"))[0]:
@@ -187,7 +201,7 @@ async def main():
                     has_rom = True
                     has_any_rom = True
             except IOError:
-                print(f"Could not find baserom file '{rom}'!")
+                print(f"error: could not find baserom file '{rom}'!")
                 if len(versions) >= 2:
                     print(f"You can avoid building version '{version}' by specifying versions on the command-line:")
                     print(f"    ./configure.py {' '.join(ver for ver in versions if ver != version)}")
