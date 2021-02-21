@@ -32,7 +32,7 @@ ApiStatus func_802A1518_7905E8(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802A1528_7905F8(ScriptInstance* script, s32 isInitialCall, ActorPart* actorPart) {
+ApiStatus func_802A1528_7905F8(ActorPart* actorPart, ScriptInstance* script, s32 isInitialCall) {
     actorPart->unk_84 = D_802A2CC0;
     return ApiStatus_DONE2;
 }
