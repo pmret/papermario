@@ -32,9 +32,9 @@ ApiStatus func_802A1518_7905E8(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802A1528_7905F8(ActorPart* actorPart, ScriptInstance* script, s32 isInitialCall) {
+s32 func_802A1528_7905F8(ActorPart* actorPart) {
     actorPart->unk_84 = D_802A2CC0;
-    return ApiStatus_DONE2;
+    return 2;
 }
 
 INCLUDE_ASM(s32, "battle/star/chill_out_7900D0", func_802A153C_79060C);
