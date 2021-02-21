@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 def apply(config, args):
-    ver_dir = 'ver/us/'
+    ver_dir = 'ver/current/'
     config['baseimg'] = f'{ver_dir}baserom.z64'
     config['myimg'] = f'{ver_dir}papermario.z64'
     config['mapfile'] = f'{ver_dir}build/papermario.map'
