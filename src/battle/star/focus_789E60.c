@@ -17,6 +17,7 @@ INCLUDE_ASM(s32, "battle/star/focus_789E60", func_802A1414_78A274);
 
 INCLUDE_ASM(s32, "battle/star/focus_789E60", func_802A1494_78A2F4);
 
+// Duplicate of func_802A14E8_7905B8
 INCLUDE_ASM(s32, "battle/star/focus_789E60", func_802A14E8_78A348);
 
 INCLUDE_ASM(s32, "battle/star/focus_789E60", func_802A1518_78A378);
