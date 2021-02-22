@@ -7,7 +7,7 @@ import re
 script_dir = os.path.dirname(os.path.realpath(__file__))
 root_dir = script_dir + "/../"
 src_dir = root_dir + "src/"
-asm_dir = root_dir + "asm/"
+asm_dir = root_dir + "ver/current/asm/"
 
 with open(os.path.join(script_dir, "duplicate_renames.txt")) as f:
     renames_text = f.readlines()

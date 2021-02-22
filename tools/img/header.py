@@ -12,6 +12,9 @@ if __name__ == "__main__":
 
     cname = re.sub(r"[^0-9a-zA-Z_]", "_", infile)
 
+    if cname.startswith("ver_"):
+        cname = "_".join(cname.split("_")[2:])
+
     if cname.startswith("src_"):
         cname = cname[4:]
     elif cname.startswith("assets_"):

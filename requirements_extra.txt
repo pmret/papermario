@@ -4,3 +4,4 @@ python-Levenshtein
 stringcase
 watchdog
 gitpython
+colour

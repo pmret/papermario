@@ -11,26 +11,26 @@ ctx.c
 expected/
 .vscode/launch.json
 /tools/star-rod
+/ver/current
 
 # Build artifacts
 build.ninja
+.ninja*
 *.ld
 *.elf
 *.z64
 *.Yay0
 *.msg.h
-/build/
+*.bin
+*.o
+build/
+assets/
 /docs/doxygen/
 /include/ld_addrs.h
 /include/message_ids.h
 /include/sprite/
 /include/map
 /tools/permuter_settings.toml
-
-# Assets
-/*assets
-*.bin
-*.o
 
 # Star Rod
 /sprite/SpriteTable.xml
@@ -39,6 +39,7 @@ build.ninja
 /editor
 /logs
 /out
+dump
 
 /tools/Yay0compress
 /tools/n64crc
