@@ -220,7 +220,7 @@ parser.add_argument("--num-out", help="number of functions to display", type=int
 args = parser.parse_args()
 
 rom_bytes = read_rom()
-map_syms = parse_map(build_dir + "papermario.map")
+map_syms = parse_map(os.path.join(root_dir, "ver", "current", "build", "papermario.map"))
 map_offsets = get_map_offsets(map_syms)
 
 s_files = get_all_s_files()
