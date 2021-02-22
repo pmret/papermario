@@ -124,7 +124,7 @@ glabel L8024100C_BAB14C
 glabel L80241024_BAB164
 /* BAB164 80241024 0260202D */  daddu     $a0, $s3, $zero
 /* BAB168 80241028 0280282D */  daddu     $a1, $s4, $zero
-/* BAB16C 8024102C 0C09028F */  jal       func_80240A3C_BAAB7C
+/* BAB16C 8024102C 0C09028F */  jal       mim_07_UnkNpcAIFunc15
 /* BAB170 80241030 0200302D */   daddu    $a2, $s0, $zero
 glabel L80241034_BAB174
 /* BAB174 80241034 0260202D */  daddu     $a0, $s3, $zero

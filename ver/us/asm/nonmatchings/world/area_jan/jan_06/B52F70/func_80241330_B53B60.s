@@ -124,7 +124,7 @@ glabel L802414DC_B53D0C
 glabel L802414F4_B53D24
 /* B53D24 802414F4 0260202D */  daddu     $a0, $s3, $zero
 /* B53D28 802414F8 0280282D */  daddu     $a1, $s4, $zero
-/* B53D2C 802414FC 0C0903C3 */  jal       func_80240F0C_B5373C
+/* B53D2C 802414FC 0C0903C3 */  jal       jan_06_UnkNpcAIFunc15
 /* B53D30 80241500 0200302D */   daddu    $a2, $s0, $zero
 glabel L80241504_B53D34
 /* B53D34 80241504 0260202D */  daddu     $a0, $s3, $zero

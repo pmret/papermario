@@ -45,13 +45,15 @@ def get_symbol_bytes(offsets, func):
         return None
     start = offsets[func]["start"]
     end = offsets[func]["end"]
-    bs = list(rom_bytes[start:end][0::4])
+    bs = list(rom_bytes[start:end])
 
     while len(bs) > 0 and bs[-1] == 0:
         bs.pop()
 
+    insns = bs[0::4]
+
     ret = []
-    for ins in bs:
+    for ins in insns:
         ret.append(ins >> 2)
 
     return bytes(ret).decode('utf-8'), bs
@@ -218,7 +220,7 @@ parser.add_argument("--num-out", help="number of functions to display", type=int
 args = parser.parse_args()
 
 rom_bytes = read_rom()
-map_syms = parse_map(build_dir + "papermario.map")
+map_syms = parse_map(os.path.join(root_dir, "ver", "current", "build", "papermario.map"))
 map_offsets = get_map_offsets(map_syms)
 
 s_files = get_all_s_files()

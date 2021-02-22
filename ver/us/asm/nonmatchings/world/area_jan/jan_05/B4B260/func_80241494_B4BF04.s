@@ -124,7 +124,7 @@ glabel L80241640_B4C0B0
 glabel L80241658_B4C0C8
 /* B4C0C8 80241658 0260202D */  daddu     $a0, $s3, $zero
 /* B4C0CC 8024165C 0280282D */  daddu     $a1, $s4, $zero
-/* B4C0D0 80241660 0C09041C */  jal       func_80241070_B4BAE0
+/* B4C0D0 80241660 0C09041C */  jal       jan_05_UnkNpcAIFunc15
 /* B4C0D4 80241664 0200302D */   daddu    $a2, $s0, $zero
 glabel L80241668_B4C0D8
 /* B4C0D8 80241668 0260202D */  daddu     $a0, $s3, $zero

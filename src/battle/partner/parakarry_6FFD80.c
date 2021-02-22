@@ -1,4 +1,5 @@
 #include "common.h"
+#include "battle/battle.h"
 
 INCLUDE_ASM(s32, "battle/partner/parakarry_6FFD80", func_80238000_6FFD80);
 
