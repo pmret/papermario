@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Ubuntu (apt)
-if cat /etc/os-release | grep ID=ubuntu &> /dev/null; then
-    echo "Installing packages for Ubuntu (apt)"
+# Debian and derivatives (apt)
+if cat /etc/os-release | grep -E 'ID=debian|ID_LIKE=debian' &> /dev/null; then
+    echo "Installing packages for Debian or derivative (apt)"
 
     sudo apt install -y git python3 python3-pip python3-setuptools build-essential binutils-mips-linux-gnu zlib1g-dev libyaml-dev ninja-build || exit 1
     python3 -m pip install -U -r requirements.txt
@@ -17,9 +17,9 @@ if cat /etc/os-release | grep ID=ubuntu &> /dev/null; then
     exit
 fi
 
-# Arch Linux (pacman)
-if cat /etc/os-release | grep ID=arch &> /dev/null; then
-    echo "Installing packages for Arch Linux (pacman)"
+# Arch Linux and derivatives (pacman)
+if cat /etc/os-release | grep -E 'ID=arch|ID_LIKE=arch' &> /dev/null; then
+    echo "Installing packages for Arch Linux or derivative (pacman)"
 
     # Upgrade existing packages (note: no --noconfirm)
     sudo pacman -Syu || exit 1
@@ -151,8 +151,8 @@ if cat /etc/os-release | grep ID=alpine &> /dev/null; then
 fi
 
 
-echo "The following distros are supported by install.sh:"
-echo "- Ubuntu (apt)"
+echo "The following distros (and their derivatives) are supported by install.sh:"
+echo "- Debian/Ubuntu (apt)"
 echo "- Arch Linux (pacman)"
 echo "- openSUSE (zypper)"
 echo "- Alpine Linux (apk)"
