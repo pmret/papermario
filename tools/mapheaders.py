@@ -11,7 +11,7 @@ from pathlib import Path
 script_dir = os.path.dirname(os.path.realpath(__file__))
 root_dir = script_dir + "/../"
 src_dir = root_dir + "src/world/"
-asm_dir = root_dir + "asm/nonmatchings/world/"
+asm_dir = root_dir + "ver/current/asm/nonmatchings/world/"
 
 for root, dirs, files in os.walk(src_dir):
     for dir_name in dirs:
@@ -57,7 +57,7 @@ for root, dirs, files in os.walk(src_dir):
 #             area_name = Path(f_path).parent.name
 #             with open(f_path) as f:
 #                 f_text_orig = f.readlines()
-            
+
 #             f_text = []
 #             f_text.append(f"#include \"{area_name}.h\"\n")
 
@@ -69,4 +69,4 @@ for root, dirs, files in os.walk(src_dir):
 #             if f_text != f_text_orig:
 #                 with open(f_path, "w", newline="\n") as f:
 #                     f.writelines(f_text)
-            
+

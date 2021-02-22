@@ -1,0 +1,23 @@
+name: Mario Story
+basename: papermario
+options:
+  find_file_boundaries: True
+  compiler: GCC
+  mnemonic_ljust: 10
+  ld_o_replace_extension: False
+  ld_addrs_header: build/include/ld_addrs.h
+  extensions: ../../tools/splat_ext
+  symbol_addrs_path: symbol_addrs.txt
+  platform: n64
+  out_dir: .
+  target_path: baserom.z64
+  assets_dir: assets
+segments:
+  - name: header
+    type: header
+    start: 0x00
+    vram: 0
+    subsections:
+    - [0x0000, header, header]
+  - [0x0040, bin]
+  - [0x2800000]

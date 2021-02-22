@@ -8,7 +8,7 @@ import re
 
 script_dir = os.path.dirname(os.path.realpath(__file__))
 root_dir = script_dir + "/../"
-asm_dir = root_dir + "asm/nonmatchings/"
+asm_dir = root_dir + "ver/current/asm/nonmatchings/"
 
 for root, dirs, files in os.walk(asm_dir):
     for f_name in files:

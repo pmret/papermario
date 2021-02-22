@@ -46,7 +46,7 @@ class Subsegment():
 
     def get_out_subdir(self, options):
         if self.type in ["c", ".data", ".rodata", ".bss"]:
-            return "src"
+            return options.get("src_path", "src")
         elif self.type in ["asm", "hasm", "header"]:
             return "asm"
         elif self.type == "bin":

@@ -154,6 +154,10 @@ class Segment:
             else:
                 path = PurePath(subdir) / PurePath(path)
 
+            # Remove leading ..s
+            while path.parts[0] == "..":
+                path = path.relative_to("..")
+
             path = path.with_suffix(".o" if replace_ext else path.suffix + ".o")
 
             s += f"    BUILD_DIR/{path}({obj_type});\n"

@@ -5,12 +5,15 @@ import git
 import os
 import subprocess
 import sys
+from colour import Color
 
-script_dir = os.path.dirname(os.path.realpath(__file__))
-root_dir = script_dir
-asm_dir = os.path.join(root_dir, "asm", "nonmatchings")
-build_dir = os.path.join(root_dir, "build")
-elf_path = os.path.join(build_dir, "papermario.elf")
+def set_version(version):
+    global script_dir, root_dir, asm_dir, build_dir, elf_path
+    script_dir = os.path.dirname(os.path.realpath(__file__))
+    root_dir = os.path.join(script_dir, "ver", version)
+    asm_dir = os.path.join(root_dir, "asm", "nonmatchings")
+    build_dir = os.path.join(root_dir, "build")
+    elf_path = os.path.join(build_dir, "papermario.elf")
 
 def get_func_sizes():
     try:
@@ -59,7 +62,12 @@ def get_funcs_sizes(sizes, matchings, nonmatchings):
 
     return msize, nmsize
 
+def lerp(a, b, alpha):
+    return a + (b - a) * alpha
+
 def main(args):
+    set_version(args.version)
+
     func_sizes, total_size = get_func_sizes()
     all_funcs = set(func_sizes.keys())
 
@@ -68,8 +76,12 @@ def main(args):
 
     matching_size, nonmatching_size = get_funcs_sizes(func_sizes, matching_funcs, nonmatching_funcs)
 
-    funcs_matching_ratio = (len(matching_funcs) / len(all_funcs)) * 100
-    matching_ratio = (matching_size / total_size) * 100
+    if len(all_funcs) == 0:
+        funcs_matching_ratio = 0.0
+        matching_ratio = 0.0
+    else:
+        funcs_matching_ratio = (len(matching_funcs) / len(all_funcs)) * 100
+        matching_ratio = (matching_size / total_size) * 100
 
     if args.csv:
         version = 1
@@ -83,11 +95,12 @@ def main(args):
         import json
 
         # https://shields.io/endpoint
+        color = Color("#50ca22", hue=lerp(0, 105/255, matching_ratio / 100))
         print(json.dumps({
             "schemaVersion": 1,
-            "label": "progress",
+            "label": f"progress ({args.version})",
             "message": f"{matching_ratio:.2f}%",
-            "color": "yellow",
+            "color": color.hex,
         }))
     else:
         if matching_size + nonmatching_size != total_size:
@@ -98,6 +111,7 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Reports progress for the project")
+    parser.add_argument("version", default="current", nargs="?")
     parser.add_argument("--csv", action="store_true")
     parser.add_argument("--shield-json", action="store_true")
     args = parser.parse_args()
