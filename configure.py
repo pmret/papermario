@@ -43,6 +43,9 @@ def read_splat(splat_config: str, version: str):
 
     for segment in all_segments:
         for subdir, path, obj_type, start in segment.get_ld_files():
+            # src workaround
+            if subdir.startswith("../../"):
+                subdir = subdir[6:]
             if path.endswith(".c") or path.endswith(".s") or path.endswith(".data") or path.endswith(".rodata"):
                 path = subdir + "/" + path
             else:
