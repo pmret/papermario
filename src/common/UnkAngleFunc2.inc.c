@@ -7,10 +7,10 @@ ApiStatus N(UnkAngleFunc2)(ScriptInstance* script, s32 isInitialCall) {
     s32 a4 = *args++;
     s32 a5 = *args++;
     s32 a6 = *args++;
-    f32 temp1 = (var0 * TAU) / 360.0f;
-    f32 fout1 = (sin_rad(temp1) * 150.0f) + 0.0f;
-    f32 fout2 = (sin_rad(temp1 * 8.0f) * 10.0f) + 0.0f;
-    f32 fout3 = ((cos_rad(temp1) * 150.0f) / 20.0f) + -50.0f;
+    f32 temp1 = var0 * TAU / 360.0f;
+    f32 fout1 = sin_rad(temp1) * 150.0f + 0.0f;
+    f32 fout2 = sin_rad(temp1 * 8.0f) * 10.0f + 0.0f;
+    f32 fout3 = cos_rad(temp1) * 150.0f / 20.0f + -50.0f;
     s32 outVal;
 
     set_float_variable(script, a3, fout1);
@@ -25,7 +25,7 @@ ApiStatus N(UnkAngleFunc2)(ScriptInstance* script, s32 isInitialCall) {
         outVal = 2.0f * (var0 - 45.0f);
     }
     if ((s32)fabsf(270.0f - var0) < 45) {
-        outVal = (2.0f * (var0 - 225.0f)) + 180.0f;
+        outVal = 2.0f * (var0 - 225.0f) + 180.0f;
     }
     set_variable(script, a6, outVal);
 
