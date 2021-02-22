@@ -7,7 +7,7 @@ ApiStatus N(UnkFloatFunc2)(ScriptInstance* script, s32 isInitialCall) {
     s32 a1 = *args++;
     s32 a2 = *args++;
     s32 a3 = *args++;
-    f32 temp = sin_rad((((var0 / 10) * 6.28318f) / 360.0f) * 8.0f) * 10.0f;
+    f32 temp = sin_rad(var0 / 10 * 6.28318f / 360.0f * 8.0f) * 10.0f;
 
     set_variable(script, a1, 0);
     set_variable(script, a2, temp);
