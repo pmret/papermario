@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from pathlib import Path, PurePath
+from pathlib import PurePath
 import re
 import os, sys
 from glob import glob
@@ -27,9 +27,6 @@ def obj(path: str):
 
     if path_parts[2] != "build":
         path_parts.insert(2, "build")
-
-    if "assets" in path_parts:
-        path_parts.remove("assets")
 
     return "/".join(path_parts) + ".o"
 
