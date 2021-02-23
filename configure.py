@@ -28,6 +28,9 @@ def obj(path: str):
     if path_parts[2] != "build":
         path_parts.insert(2, "build")
 
+    if "assets" in path_parts:
+        path_parts.remove("assets")
+
     return "/".join(path_parts) + ".o"
 
 def read_splat(splat_config: str, version: str):
