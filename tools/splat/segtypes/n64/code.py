@@ -74,7 +74,7 @@ class Subsegment():
         elif self.type == "bin":
             return "bin"
         elif self.type in ["i4", "i8", "ia4", "ia8", "ia16", "rgba16", "rgba32", "ci4", "ci8"]:
-            return "png"
+            return f"{self.type}.png"
         elif self.type == "palette":
             return "pal.png"
         return self.type
@@ -851,9 +851,9 @@ class N64SegCode(N64Segment):
                     stype = "double"
                 elif len(sym_bytes) % 4 == 0 and mnemonic in float_mnemonics:
                     stype = "float"
-                elif len(sym_bytes) % 4 == 0 and mnemonic in word_mnemonics or not mnemonic:
+                elif len(sym_bytes) % 4 == 0 and sym.vram_start % 4 == 0 and (mnemonic in word_mnemonics or not mnemonic):
                     stype = "word"
-                elif len(sym_bytes) % 2 == 0 and mnemonic in short_mnemonics:
+                elif len(sym_bytes) % 2 == 0 and sym.vram_start % 2 == 0 and (mnemonic in short_mnemonics or not mnemonic):
                     stype = "short"
                 else:
                     stype = "byte"
