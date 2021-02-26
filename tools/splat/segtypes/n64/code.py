@@ -74,7 +74,7 @@ class Subsegment():
         elif self.type == "bin":
             return "bin"
         elif self.type in ["i4", "i8", "ia4", "ia8", "ia16", "rgba16", "rgba32", "ci4", "ci8"]:
-            return f"{self.type}.png"
+            return "png"
         elif self.type == "palette":
             return "pal.png"
         return self.type
