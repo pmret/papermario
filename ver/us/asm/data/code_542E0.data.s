@@ -540,10 +540,7 @@ glabel D_8008F064
 .word 0x00000000, 0x00000000
 
 glabel D_8008F06C
-.word 0x00000000
-
-glabel D_8008F070
-.byte 0x00
+.byte 0x00, 0x00, 0x00, 0x00, 0x00
 
 glabel D_8008F071
 .byte 0x00

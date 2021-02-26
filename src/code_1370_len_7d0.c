@@ -1,6 +1,8 @@
 #include "common.h"
 #include "nu/nusys.h"
 
+s16 D_80074010 = 8; // might be an array, could be size 1-8
+
 void gfxRetrace_Callback(s32);
 void gfxPreNMI_Callback(void);
 void gfx_task_main(void);
