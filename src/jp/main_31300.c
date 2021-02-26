@@ -1,0 +1,79 @@
+#include "common.h"
+
+INCLUDE_ASM(s32, "main_31300", func_80055F00);
+
+INCLUDE_ASM(s32, "main_31300", func_80056254);
+
+INCLUDE_ASM(s32, "main_31300", func_80056270);
+
+INCLUDE_ASM(s32, "main_31300", func_800569E4);
+
+INCLUDE_ASM(s32, "main_31300", func_800569F4);
+
+INCLUDE_ASM(s32, "main_31300", func_80056A00);
+
+INCLUDE_ASM(s32, "main_31300", func_80056A0C);
+
+INCLUDE_ASM(s32, "main_31300", func_80056A28);
+
+INCLUDE_ASM(s32, "main_31300", func_80056A54);
+
+INCLUDE_ASM(s32, "main_31300", func_80056A7C);
+
+INCLUDE_ASM(s32, "main_31300", func_80056AE4);
+
+INCLUDE_ASM(s32, "main_31300", func_80056B70);
+
+INCLUDE_ASM(s32, "main_31300", func_80056B98);
+
+INCLUDE_ASM(s32, "main_31300", func_80056C28);
+
+INCLUDE_ASM(s32, "main_31300", func_80056C54);
+
+INCLUDE_ASM(s32, "main_31300", func_80056ED4);
+
+INCLUDE_ASM(s32, "main_31300", func_80056FF4);
+
+INCLUDE_ASM(s32, "main_31300", func_8005701C);
+
+INCLUDE_ASM(s32, "main_31300", func_800571F8);
+
+INCLUDE_ASM(s32, "main_31300", func_8005739C);
+
+INCLUDE_ASM(s32, "main_31300", func_80057524);
+
+INCLUDE_ASM(s32, "main_31300", func_80057688);
+
+INCLUDE_ASM(s32, "main_31300", func_80057814);
+
+INCLUDE_ASM(s32, "main_31300", func_8005783C);
+
+INCLUDE_ASM(s32, "main_31300", func_80057864);
+
+INCLUDE_ASM(s32, "main_31300", func_8005788C);
+
+INCLUDE_ASM(s32, "main_31300", func_800578B4);
+
+INCLUDE_ASM(s32, "main_31300", func_800578DC);
+
+INCLUDE_ASM(s32, "main_31300", func_80057904);
+
+INCLUDE_ASM(s32, "main_31300", func_800579BC);
+
+INCLUDE_ASM(s32, "main_31300", func_80057A78);
+
+INCLUDE_ASM(s32, "main_31300", func_80057AB8);
+
+INCLUDE_ASM(s32, "main_31300", func_80057B0C);
+
+INCLUDE_ASM(s32, "main_31300", func_80057B60);
+
+INCLUDE_ASM(s32, "main_31300", func_80057B80);
+
+INCLUDE_ASM(s32, "main_31300", func_80057BD0);
+
+INCLUDE_ASM(s32, "main_31300", func_80057C40);
+
+INCLUDE_ASM(s32, "main_31300", func_80057C88);
+
+INCLUDE_ASM(s32, "main_31300", func_80057CB4);

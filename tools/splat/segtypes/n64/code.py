@@ -851,9 +851,9 @@ class N64SegCode(N64Segment):
                     stype = "double"
                 elif len(sym_bytes) % 4 == 0 and mnemonic in float_mnemonics:
                     stype = "float"
-                elif len(sym_bytes) % 4 == 0 and mnemonic in word_mnemonics or not mnemonic:
+                elif len(sym_bytes) % 4 == 0 and sym.vram_start % 4 == 0 and (mnemonic in word_mnemonics or not mnemonic):
                     stype = "word"
-                elif len(sym_bytes) % 2 == 0 and mnemonic in short_mnemonics:
+                elif len(sym_bytes) % 2 == 0 and sym.vram_start % 2 == 0 and (mnemonic in short_mnemonics or not mnemonic):
                     stype = "short"
                 else:
                     stype = "byte"
