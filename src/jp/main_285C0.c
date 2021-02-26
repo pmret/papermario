@@ -1,0 +1,137 @@
+#include "common.h"
+
+INCLUDE_ASM(s32, "main_285C0", func_8004D1C0);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004D444);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004D490);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004D6BC);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004D724);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004D758);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004D790);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004D7D8);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004D7FC);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004D930);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004D968);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004DADC);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004DC84);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004DDA4);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004DE08);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004DFF4);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004E054);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004E0F4);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004E168);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004E288);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004E4F4);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004E530);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004E5B4);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004E6E4);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004E784);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004E8B4);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004E918);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004F86C);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004F8B8);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004F964);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004F994);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004F9B4);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004F9E8);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004FA44);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004FAC0);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004FB1C);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004FB60);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004FB80);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004FBEC);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004FC08);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004FC20);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004FC38);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004FC58);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004FC64);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004FC78);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004FC94);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004FCA0);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004FCAC);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004FCB4);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004FCD0);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004FDD8);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004FE0C);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004FE34);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004FE58);
+
+INCLUDE_ASM(s32, "main_285C0", func_8004FFA0);
+
+INCLUDE_ASM(s32, "main_285C0", func_80050210);
+
+INCLUDE_ASM(s32, "main_285C0", func_80050218);
+
+INCLUDE_ASM(s32, "main_285C0", func_80050294);
+
+INCLUDE_ASM(s32, "main_285C0", func_80050304);
+
+INCLUDE_ASM(s32, "main_285C0", func_8005033C);
+
+INCLUDE_ASM(s32, "main_285C0", func_80050378);
+
+INCLUDE_ASM(s32, "main_285C0", func_80050420);
+
+INCLUDE_ASM(s32, "main_285C0", func_800504C8);
+
+INCLUDE_ASM(s32, "main_285C0", func_800504EC);
+
+INCLUDE_ASM(s32, "main_285C0", func_8005052C);
+
+INCLUDE_ASM(s32, "main_285C0", func_80050538);
+
+INCLUDE_ASM(s32, "main_285C0", func_800505B0);
+
+INCLUDE_ASM(s32, "main_285C0", func_80050620);

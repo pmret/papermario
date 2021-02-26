@@ -20,6 +20,7 @@
         "**/build/src": true,
         "docs/doxygen": true,
         "ctx.c": true,
+        "ver/current": true,
     },
     "python.autoComplete.extraPaths": [
         "./tools"
@@ -38,5 +39,6 @@
         "**/.git": true,
         "**/.splat_cache": true,
         ".ninja*": true,
+        "ver/current": true,
     }
 }

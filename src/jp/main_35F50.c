@@ -1,0 +1,51 @@
+#include "common.h"
+
+INCLUDE_ASM(s32, "main_35F50", func_8005AB50);
+
+INCLUDE_ASM(s32, "main_35F50", func_8005AC34);
+
+INCLUDE_ASM(s32, "main_35F50", func_8005AC3C);
+
+INCLUDE_ASM(s32, "main_35F50", func_8005AC44);
+
+INCLUDE_ASM(s32, "main_35F50", func_8005AC70);
+
+INCLUDE_ASM(s32, "main_35F50", func_8005AD08);
+
+INCLUDE_ASM(s32, "main_35F50", func_8005AE50);
+
+INCLUDE_ASM(s32, "main_35F50", func_8005AEEC);
+
+INCLUDE_ASM(s32, "main_35F50", func_8005B430);
+
+INCLUDE_ASM(s32, "main_35F50", func_8005B650);
+
+INCLUDE_ASM(s32, "main_35F50", func_8005B6A4);
+
+INCLUDE_ASM(s32, "main_35F50", func_8005B6D4);
+
+INCLUDE_ASM(s32, "main_35F50", func_8005BA58);
+
+INCLUDE_ASM(s32, "main_35F50", func_8005BA88);
+
+INCLUDE_ASM(s32, "main_35F50", func_8005BAC0);
+
+INCLUDE_ASM(s32, "main_35F50", func_8005BB34);
+
+INCLUDE_ASM(s32, "main_35F50", func_8005C14C);
+
+INCLUDE_ASM(s32, "main_35F50", func_8005C454);
+
+INCLUDE_ASM(s32, "main_35F50", func_8005C980);
+
+INCLUDE_ASM(s32, "main_35F50", func_8005CDD4);
+
+INCLUDE_ASM(s32, "main_35F50", func_8005CF8C);
+
+INCLUDE_ASM(s32, "main_35F50", func_8005D0F8);
+
+INCLUDE_ASM(s32, "main_35F50", func_8005D7B0);
+
+INCLUDE_ASM(s32, "main_35F50", func_8005DA04);
+
+INCLUDE_ASM(s32, "main_35F50", func_8005DAA0);

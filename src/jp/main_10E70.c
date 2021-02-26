@@ -1,0 +1,25 @@
+#include "common.h"
+
+INCLUDE_ASM(s32, "main_10E70", func_80035A70);
+
+INCLUDE_ASM(s32, "main_10E70", func_80035A80);
+
+INCLUDE_ASM(s32, "main_10E70", func_80035AA4);
+
+INCLUDE_ASM(s32, "main_10E70", func_80035AD4);
+
+INCLUDE_ASM(s32, "main_10E70", func_80035B6C);
+
+INCLUDE_ASM(s32, "main_10E70", func_80035D7C);
+
+INCLUDE_ASM(s32, "main_10E70", func_80035DB0);
+
+INCLUDE_ASM(s32, "main_10E70", func_80035DFC);
+
+INCLUDE_ASM(s32, "main_10E70", func_8003607C);
+
+INCLUDE_ASM(s32, "main_10E70", func_800360B0);
+
+INCLUDE_ASM(s32, "main_10E70", func_800360EC);
+
+INCLUDE_ASM(s32, "main_10E70", func_800362C0);
