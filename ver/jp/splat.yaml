@@ -11,6 +11,7 @@ options:
   platform: n64
   out_dir: .
   target_path: baserom.z64
+  src_path: ../../src/jp
   assets_dir: assets
 segments:
   - name: header

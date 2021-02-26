@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-from pathlib import PurePath
 import re
 import os, sys
 from glob import glob
@@ -19,19 +18,10 @@ SUPPORTED_VERSIONS = ["us", "jp"]
 TARGET = "papermario"
 
 def obj(path: str):
-    path_parts = list(PurePath(path).parts)
-
-    if path_parts[0] != "ver":
-        path_parts.insert(0, "ver")
-        path_parts.insert(1, version)
-
-    if path_parts[2] != "build":
-        path_parts.insert(2, "build")
-
-    if "assets" in path_parts:
-        path_parts.remove("assets")
-
-    return "/".join(path_parts) + ".o"
+    if not path.startswith("ver/"):
+        path = f"ver/{version}/build/{path}"
+    path = re.sub(r"/assets/", "/build/", path) # XXX what about other asset dirs?
+    return path + ".o"
 
 def read_splat(splat_config: str, version: str):
     import argparse
@@ -558,19 +548,13 @@ async def main():
         n.build("generated_headers_" + version, "phony", generated_headers)
         n.newline()
 
+    for c_file in glob("src/**/*.c", recursive=True):
+        if c_file.endswith(".inc.c"):
+            continue
 
-    for version in versions:
-        if version == "us":
-            c_files = glob("src/**/*.c", recursive=True)
-        elif version == "jp":
-            c_files = glob("ver/jp/src/**/*.c", recursive=True)
+        status = await shell_status(f"grep -q SCRIPT\( {c_file}")
 
-        for c_file in c_files:
-            if c_file.endswith(".inc.c"):
-                continue
-
-            status = await shell_status(f"grep -q SCRIPT\( {c_file}")
-
+        for version in versions:
             s_glob = "ver/" + version + "/" + re.sub("src/", "asm/nonmatchings/", c_file)[:-2] + "/*.s"
             n.build(
                 obj(c_file),
