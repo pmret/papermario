@@ -20,7 +20,7 @@
         "**/build/src": true,
         "docs/doxygen": true,
         "ctx.c": true,
-        "ver/current": true
+        "ver/current": true,
     },
     "python.autoComplete.extraPaths": [
         "./tools"

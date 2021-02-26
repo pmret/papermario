@@ -1,0 +1,39 @@
+#include "common.h"
+
+INCLUDE_ASM(s32, "main_23330", func_80047F30);
+
+INCLUDE_ASM(s32, "main_23330", func_80048A00);
+
+INCLUDE_ASM(s32, "main_23330", func_80048AE4);
+
+INCLUDE_ASM(s32, "main_23330", func_80048BBC);
+
+INCLUDE_ASM(s32, "main_23330", func_80048C84);
+
+INCLUDE_ASM(s32, "main_23330", func_80048D64);
+
+INCLUDE_ASM(s32, "main_23330", func_8004909C);
+
+INCLUDE_ASM(s32, "main_23330", func_80049170);
+
+INCLUDE_ASM(s32, "main_23330", func_80049200);
+
+INCLUDE_ASM(s32, "main_23330", func_80049250);
+
+INCLUDE_ASM(s32, "main_23330", func_80049368);
+
+INCLUDE_ASM(s32, "main_23330", func_800497F4);
+
+INCLUDE_ASM(s32, "main_23330", func_800498B4);
+
+INCLUDE_ASM(s32, "main_23330", func_80049AEC);
+
+INCLUDE_ASM(s32, "main_23330", func_80049B7C);
+
+INCLUDE_ASM(s32, "main_23330", func_80049C2C);
+
+INCLUDE_ASM(s32, "main_23330", func_80049DD4);
+
+INCLUDE_ASM(s32, "main_23330", func_8004A098);
+
+INCLUDE_ASM(s32, "main_23330", func_8004A12C);
