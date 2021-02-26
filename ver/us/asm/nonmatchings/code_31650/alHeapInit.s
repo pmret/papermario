@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80057F20
+glabel alHeapInit
 /* 33320 80057F20 30A3000F */  andi      $v1, $a1, 0xf
 /* 33324 80057F24 24020010 */  addiu     $v0, $zero, 0x10
 /* 33328 80057F28 00431823 */  subu      $v1, $v0, $v1

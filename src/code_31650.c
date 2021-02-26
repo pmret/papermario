@@ -208,7 +208,7 @@ void func_80057ED0(s16 arg0) {
     D_800A3FE8 = 0;
 }
 
-INCLUDE_ASM(s32, "code_31650", func_80057F20);
+INCLUDE_ASM(void, "code_31650", alHeapInit, ALHeap *hp, u8 *base, s32 len);
 
 void* alHeapAlloc(ALHeap* heap, s32 arg1, s32 size) {
     void* ret = NULL;

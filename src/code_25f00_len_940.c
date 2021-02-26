@@ -9,13 +9,13 @@ s32 D_80078170 = 0;
 NUAuPreNMIFunc nuAuPreNMIFunc = NULL;
 s32 nuAuDmaNext = 0;
 u32 nuAuFrameCounter = 0;
-u8 D_80078180 = 1;
+u8 nuAuTaskStop = 1;
 u8 D_80078181 = 1;
 
 //bss
 //static u16 D_800A0F50;
 
-INCLUDE_ASM(s32, "code_25f00_len_940", func_8004AB00);
+INCLUDE_ASM(s32, "code_25f00_len_940", create_audio_system);
 
 void nuAuPreNMIFuncSet(NUAuPreNMIFunc func) {
     OSIntMask mask = osSetIntMask(OS_IM_NONE);
@@ -103,7 +103,7 @@ void func_8004B328(s16 arg0, s32 arg1) {
             func_80056D44(temp_s0);
 
             if (temp_s0 == 0) {
-                D_80078180 = 0;
+                nuAuTaskStop = 0;
             }
             break;
     }

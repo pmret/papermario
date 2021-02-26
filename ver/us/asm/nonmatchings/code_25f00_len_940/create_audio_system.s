@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_8004AB00
+glabel create_audio_system
 /* 25F00 8004AB00 27BDFFC0 */  addiu     $sp, $sp, -0x40
 /* 25F04 8004AB04 AFB00030 */  sw        $s0, 0x30($sp)
 /* 25F08 8004AB08 3C10800E */  lui       $s0, %hi(D_800D9248)
@@ -14,11 +14,11 @@ glabel func_8004AB00
 /* 25F24 8004AB24 AFBF003C */  sw        $ra, 0x3c($sp)
 /* 25F28 8004AB28 AFB20038 */  sw        $s2, 0x38($sp)
 /* 25F2C 8004AB2C AFB10034 */  sw        $s1, 0x34($sp)
-/* 25F30 8004AB30 3C018008 */  lui       $at, %hi(D_80078180)
-/* 25F34 8004AB34 A0228180 */  sb        $v0, %lo(D_80078180)($at)
+/* 25F30 8004AB30 3C018008 */  lui       $at, %hi(nuAuTaskStop)
+/* 25F34 8004AB34 A0228180 */  sb        $v0, %lo(nuAuTaskStop)($at)
 /* 25F38 8004AB38 3C018008 */  lui       $at, %hi(D_80078170)
 /* 25F3C 8004AB3C A0208170 */  sb        $zero, %lo(D_80078170)($at)
-/* 25F40 8004AB40 0C015FC8 */  jal       func_80057F20
+/* 25F40 8004AB40 0C015FC8 */  jal       alHeapInit
 /* 25F44 8004AB44 34C66000 */   ori      $a2, $a2, 0x6000
 /* 25F48 8004AB48 24047D00 */  addiu     $a0, $zero, 0x7d00
 /* 25F4C 8004AB4C 24020018 */  addiu     $v0, $zero, 0x18
@@ -56,8 +56,8 @@ glabel func_8004AB00
 /* 25FCC 8004ABCC 000210C0 */  sll       $v0, $v0, 3
 /* 25FD0 8004ABD0 00431023 */  subu      $v0, $v0, $v1
 /* 25FD4 8004ABD4 000210C0 */  sll       $v0, $v0, 3
-/* 25FD8 8004ABD8 3C01800A */  lui       $at, %hi(D_800A3634)
-/* 25FDC 8004ABDC AC223634 */  sw        $v0, %lo(D_800A3634)($at)
+/* 25FD8 8004ABD8 3C01800A */  lui       $at, %hi(nuAuFrameSampleSize)
+/* 25FDC 8004ABDC AC223634 */  sw        $v0, %lo(nuAuFrameSampleSize)($at)
 /* 25FE0 8004ABE0 2442FF48 */  addiu     $v0, $v0, -0xb8
 /* 25FE4 8004ABE4 3C01800A */  lui       $at, %hi(D_800A3638)
 /* 25FE8 8004ABE8 AC223638 */  sw        $v0, %lo(D_800A3638)($at)
@@ -108,8 +108,8 @@ glabel func_8004AB00
 .L8004AC94:
 /* 26094 8004AC94 24050001 */  addiu     $a1, $zero, 1
 /* 26098 8004AC98 02258821 */  addu      $s1, $s1, $a1
-/* 2609C 8004AC9C 3C06800A */  lui       $a2, %hi(D_800A3634)
-/* 260A0 8004ACA0 8CC63634 */  lw        $a2, %lo(D_800A3634)($a2)
+/* 2609C 8004AC9C 3C06800A */  lui       $a2, %hi(nuAuFrameSampleSize)
+/* 260A0 8004ACA0 8CC63634 */  lw        $a2, %lo(nuAuFrameSampleSize)($a2)
 /* 260A4 8004ACA4 8FA4002C */  lw        $a0, 0x2c($sp)
 /* 260A8 8004ACA8 0C015FE4 */  jal       alHeapAlloc
 /* 260AC 8004ACAC 00063080 */   sll      $a2, $a2, 2
