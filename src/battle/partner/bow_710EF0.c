@@ -43,11 +43,11 @@ ApiStatus func_802380E4_710FD4(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-/// Duplicate of func_80260AD4
-ApiStatus func_80238198_711088(ScriptInstance* script, s32 isInitialCall) {
+/// Duplicate of IsPartnerImmobile
+ApiStatus N(IsPartnerImmobile)(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* playerActor = battleStatus->playerActor;
-    s32 isStopped = playerActor->debuff == Debuff_FEAR
+    s32 isImmobile = playerActor->debuff == Debuff_FEAR
         || playerActor->debuff == Debuff_DIZZY
         || playerActor->debuff == Debuff_PARALYZE
         || playerActor->debuff == Debuff_SLEEP
@@ -55,10 +55,10 @@ ApiStatus func_80238198_711088(ScriptInstance* script, s32 isInitialCall) {
         || playerActor->debuff == Debuff_STOP;
 
     if (playerActor->stoneStatus == 12) {
-        isStopped = TRUE;
+        isImmobile = TRUE;
     }
 
-    script->varTable[0] = isStopped;
+    script->varTable[0] = isImmobile;
     return ApiStatus_DONE2;
 }
 

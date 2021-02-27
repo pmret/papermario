@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80238198_711088
+glabel battle_partner_bow_IsPartnerImmobile
 /* 711088 80238198 3C03800E */  lui       $v1, %hi(gBattleStatus+0xD8)
 /* 71108C 8023819C 8C63C148 */  lw        $v1, %lo(gBattleStatus+0xD8)($v1)
 /* 711090 802381A0 90620210 */  lbu       $v0, 0x210($v1)
