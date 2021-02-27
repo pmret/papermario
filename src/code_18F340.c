@@ -2,7 +2,20 @@
 
 INCLUDE_ASM(s32, "code_18F340", func_80260A60);
 
-INCLUDE_ASM(s32, "code_18F340", func_80260AD4);
+//INCLUDE_ASM(s32, "code_18F340", func_80260AD4);
+ApiStatus func_80260AD4(ScriptInstance* script, s32 isInitialCall) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    Actor* playerActor = battleStatus->playerActor;
+    u8 var0 = playerActor->debuff - 3;
+    s32 var1 = var0 < 6;
+
+    if (playerActor->stoneStatus == 12) {
+        var1 = 1;
+    }
+    script->varTable[0] = var1;
+
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_18F340", activate_defend_command);
 

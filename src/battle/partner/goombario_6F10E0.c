@@ -1,8 +1,10 @@
 #include "common.h"
+#include "battle/battle.h"
 
+extern Actor D_8023CDA0;
 extern s32 D_8023CDA4;
+extern MessageID bActorTattles[ACTOR_TYPE_COUNT];
 
-//INCLUDE_ASM(s32, "battle/partner/goombario_6F10E0", func_80238000_6F10E0);
 ApiStatus func_80238000_6F10E0(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     BattleStatus* secondBattleStatus = &gBattleStatus;
@@ -10,9 +12,9 @@ ApiStatus func_80238000_6F10E0(ScriptInstance* script, s32 isInitialCall) {
     f32 posX = partnerActor->currentPos.x;
     f32 posY = partnerActor->currentPos.y;
     f32 posZ = partnerActor->currentPos.z;
-    f32 goalX = partnerActor->movePos.goal.x;
-    f32 goalY = partnerActor->movePos.goal.y;
-    f32 goalZ = partnerActor->movePos.goal.z;
+    f32 goalX = partnerActor->walk.goalPos.x;
+    f32 goalY = partnerActor->walk.goalPos.y;
+    f32 goalZ = partnerActor->walk.goalPos.z;
 
     script->varTable[0] = (dist3D(posX, posY, posZ, goalX, goalY, goalZ) * 15.0f) / 100.0f;
 
@@ -35,9 +37,66 @@ INCLUDE_ASM(s32, "battle/partner/goombario_6F10E0", func_802380E4_6F11C4);
 
 INCLUDE_ASM(s32, "battle/partner/goombario_6F10E0", func_8023817C_6F125C);
 
-INCLUDE_ASM(s32, "battle/partner/goombario_6F10E0", func_80238A20_6F1B00);
+ApiStatus func_80238A20_6F1B00(ScriptInstance* script, s32 isInitialCall) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    Actor* partnerActor = battleStatus->partnerActor;
+    Vec3f* pos = &partnerActor->walk.currentPos;
+    f32 temp_f0;
 
-INCLUDE_ASM(s32, "battle/partner/goombario_6F10E0", func_80238B60_6F1C40);
+    if (isInitialCall != 0) {
+        script->functionTemp[0].s = 0;
+    }
+
+    if (script->functionTemp[0].s == 0) {
+        partnerActor->walk.currentPos.x = partnerActor->currentPos.x;
+        partnerActor->walk.currentPos.y = partnerActor->currentPos.y;
+        partnerActor->walk.currentPos.z = partnerActor->currentPos.z;
+        script->functionTemp[0].s = 1;
+    }
+
+    if (partnerActor->walk.velocity > 0.0f) {
+        set_animation(0x100, 0, partnerActor->animJumpRise);
+    }
+
+    if (partnerActor->walk.velocity < 0.0f) {
+        set_animation(0x100, 0, partnerActor->animJumpFall);
+    }
+
+    partnerActor->walk.currentPos.y = (partnerActor->walk.currentPos.y + partnerActor->walk.velocity);
+    partnerActor->walk.velocity = (partnerActor->walk.velocity - partnerActor->walk.acceleration);
+    add_xz_vec3f(pos, partnerActor->walk.speed, partnerActor->walk.angle);
+    partnerActor->currentPos.x = partnerActor->walk.currentPos.x;
+    partnerActor->currentPos.y = partnerActor->walk.currentPos.y;
+    partnerActor->currentPos.z = partnerActor->walk.currentPos.z;
+
+    if (partnerActor->currentPos.y < 10.0f) {
+        partnerActor->currentPos.y = 10.0f;
+
+        play_movement_dust_effects(2, partnerActor->currentPos.x, partnerActor->currentPos.y, partnerActor->currentPos.z, partnerActor->yaw);
+        play_sound(0x148);
+
+        return ApiStatus_DONE1;
+    }
+
+    return ApiStatus_BLOCK;
+}
+
+ApiStatus func_80238B60_6F1C40(ScriptInstance* script, s32 isInitialCall) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    Actor* partnerActor = battleStatus->partnerActor;
+    Actor* targetActor = get_actor(partnerActor->targetActorID);
+    s32 temp_v0;
+
+    script->varTable[0] = *(&bActorTattles[targetActor->actorType]);
+    if (script->varTable[0] == NULL) {
+        script->varTable[0] = bActorTattles[0];
+    }
+
+    save_tattle_flags(targetActor->actorType);
+
+    return ApiStatus_DONE2;
+}
+
 
 INCLUDE_ASM(s32, "battle/partner/goombario_6F10E0", func_80238BCC_6F1CAC);
 
@@ -49,11 +108,37 @@ INCLUDE_ASM(s32, "battle/partner/goombario_6F10E0", func_80238E74_6F1F54);
 
 INCLUDE_ASM(s32, "battle/partner/goombario_6F10E0", func_80238EDC_6F1FBC);
 
-INCLUDE_ASM(s32, "battle/partner/goombario_6F10E0", func_8023903C_6F211C);
+ApiStatus func_8023903C_6F211C(ScriptInstance* script, s32 isInitialCall) {
+    BattleStatus* battleStatus = &gBattleStatus;
 
-INCLUDE_ASM(s32, "battle/partner/goombario_6F10E0", func_80239068_6F2148);
+    battleStatus->partnerActor->isGlowing = 0;
+    battleStatus->flags1 &= ~0x40000000;
 
-INCLUDE_ASM(s32, "battle/partner/goombario_6F10E0", func_802390B0_6F2190);
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_80239068_6F2148(ScriptInstance* script, s32 isInitialCall) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    Actor* partnerActor = battleStatus->partnerActor;
+
+    if ((battleStatus->flags1 & 0x40000000) == 0) {
+        partnerActor->isGlowing = 0;
+    }
+
+    script->varTable[0] = (s8) partnerActor->isGlowing;
+    partnerActor->isGlowing = 0;
+    battleStatus->flags1 &= ~0x40000000;
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_802390B0_6F2190(ScriptInstance* script, s32 isInitialCall) {
+    BattleStatus* battleStatus = &gBattleStatus;
+
+    script->varTable[0] = (s8) battleStatus->partnerActor->isGlowing;
+
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "battle/partner/goombario_6F10E0", func_802390C8_6F21A8);
 
