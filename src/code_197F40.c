@@ -132,9 +132,9 @@ ApiStatus SetGoalToHome(ScriptInstance* script, s32 isInitialCall) {
     }
 
     actor = get_actor(actorID);
-    actor->movePos.goal.x = actor->homePos.x;
-    actor->movePos.goal.y = actor->homePos.y;
-    actor->movePos.goal.z = actor->homePos.z;
+    actor->walk.goalPos.x = actor->homePos.x;
+    actor->walk.goalPos.y = actor->homePos.y;
+    actor->walk.goalPos.z = actor->homePos.z;
 
     return ApiStatus_DONE2;
 }
@@ -148,9 +148,9 @@ ApiStatus SetIdleGoalToHome(ScriptInstance* script, s32 isInitialCall) {
     }
 
     actor = get_actor(actorID);
-    actor->flyPos.goal.x = actor->homePos.x;
-    actor->flyPos.goal.y = actor->homePos.y;
-    actor->flyPos.goal.z = actor->homePos.z;
+    actor->fly.goalPos.x = actor->homePos.x;
+    actor->fly.goalPos.y = actor->homePos.y;
+    actor->fly.goalPos.z = actor->homePos.z;
 
     return ApiStatus_DONE2;
 }
@@ -264,7 +264,7 @@ ApiStatus SetGoalToTarget(ScriptInstance* script, s32 isInitialCall) {
     }
     actor = get_actor(actorID);
 
-    set_goal_pos_to_part(&actor->movePos, actor->targetActorID, actor->targetPartIndex);
+    set_goal_pos_to_part(&actor->walk, actor->targetActorID, actor->targetPartIndex);
 
     return ApiStatus_DONE2;
 }
@@ -297,7 +297,7 @@ ApiStatus SetGoalToFirstTarget(ScriptInstance* script, s32 isInitialCall) {
     actor = get_actor(actorID);
 
     target = &actor->targetData[actor->targetIndexList[0]];
-    set_goal_pos_to_part(&actor->movePos, target->actorID, target->partID);
+    set_goal_pos_to_part(&actor->walk, target->actorID, target->partID);
 
     return ApiStatus_DONE2;
 }
@@ -306,38 +306,38 @@ ApiStatus SetGoalPos(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     ActorID actorID = get_variable(script, *args++);
     Actor* actor;
-    ActorMovePos* movePos;
+    ActorMovement* walk;
     f32 x, y, z;
 
     if (actorID == ActorID_SELF) {
         actorID = script->owner1.actorID;
     }
     actor = get_actor(actorID);
-    movePos = &actor->movePos;
+    walk = &actor->walk;
 
     if (*args == -12345678) {
-        x = actor->movePos.goal.x;
+        x = actor->walk.goalPos.x;
     } else {
         x = get_variable(script, *args);
     }
 
     *args++;
     if (*args == -12345678) {
-        y = movePos->goal.y;
+        y = walk->goalPos.y;
     } else {
         y = get_variable(script, *args);
     }
 
     *args++;
     if (*args == -12345678) {
-        z = movePos->goal.z;
+        z = walk->goalPos.z;
     } else {
         z = get_variable(script, *args);
     }
 
-    movePos->goal.x = x;
-    movePos->goal.y = y;
-    movePos->goal.z = z;
+    walk->goalPos.x = x;
+    walk->goalPos.y = y;
+    walk->goalPos.z = z;
 
     return ApiStatus_DONE2;
 }
@@ -346,38 +346,38 @@ ApiStatus SetIdleGoal(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     ActorID actorID = get_variable(script, *args++);
     Actor* actor;
-    ActorFlyPos* flyPos;
+    ActorMovement* fly;
     f32 x, y, z;
 
     if (actorID == ActorID_SELF) {
         actorID = script->owner1.actorID;
     }
     actor = get_actor(actorID);
-    flyPos = &actor->flyPos;
+    fly = &actor->fly;
 
     if (*args == -12345678) {
-        x = actor->flyPos.goal.x;
+        x = actor->fly.goalPos.x;
     } else {
         x = get_variable(script, *args);
     }
 
     *args++;
     if (*args == -12345678) {
-        y = flyPos->goal.y;
+        y = fly->goalPos.y;
     } else {
         y = get_variable(script, *args);
     }
 
     *args++;
     if (*args == -12345678) {
-        z = flyPos->goal.z;
+        z = fly->goalPos.z;
     } else {
         z = get_variable(script, *args);
     }
 
-    flyPos->goal.x = x;
-    flyPos->goal.y = y;
-    flyPos->goal.z = z;
+    fly->goalPos.x = x;
+    fly->goalPos.y = y;
+    fly->goalPos.z = z;
     return ApiStatus_DONE2;
 }
 
@@ -396,9 +396,9 @@ ApiStatus AddGoalPos(ScriptInstance* script, s32 isInitialCall) {
     z = get_float_variable(script, *args++);
 
     actor = get_actor(actorID);
-    actor->movePos.goal.x += x;
-    actor->movePos.goal.y += y;
-    actor->movePos.goal.z += z;
+    actor->walk.goalPos.x += x;
+    actor->walk.goalPos.y += y;
+    actor->walk.goalPos.z += z;
 
     return ApiStatus_DONE2;
 }
@@ -420,9 +420,9 @@ ApiStatus GetGoalPos(ScriptInstance* script, s32 isInitialCall) {
     outY = *args++;
     outZ = *args++;
 
-    x = actor->movePos.goal.x;
-    y = actor->movePos.goal.y;
-    z = actor->movePos.goal.z;
+    x = actor->walk.goalPos.x;
+    y = actor->walk.goalPos.y;
+    z = actor->walk.goalPos.z;
 
     set_variable(script, outX, x);
     set_variable(script, outY, y);
@@ -449,9 +449,9 @@ ApiStatus GetIdleGoal(ScriptInstance* script, s32 isInitialCall) {
     outY = *args++;
     outZ = *args++;
 
-    x = actor->flyPos.goal.x;
-    y = actor->flyPos.goal.y;
-    z = actor->flyPos.goal.z;
+    x = actor->fly.goalPos.x;
+    y = actor->fly.goalPos.y;
+    z = actor->fly.goalPos.z;
 
     set_variable(script, outX, x);
     set_variable(script, outY, y);
@@ -826,7 +826,7 @@ ApiStatus SetActorJumpGravity(ScriptInstance* script, s32 isInitialCall) {
     }
 
     jumpAccel = get_float_variable(script, *args++);
-    get_actor(actorID)->jumpAccel = jumpAccel;
+    get_actor(actorID)->walk.acceleration = jumpAccel;
     return ApiStatus_DONE2;
 }
 
@@ -840,7 +840,7 @@ ApiStatus SetActorIdleJumpGravity(ScriptInstance* script, s32 isInitialCall) {
     }
 
     flyJumpAccel = get_float_variable(script, *args++);
-    get_actor(actorID)->flyJumpAccel = flyJumpAccel;
+    get_actor(actorID)->fly.acceleration = flyJumpAccel;
     return ApiStatus_DONE2;
 }
 
@@ -854,7 +854,7 @@ ApiStatus SetActorSpeed(ScriptInstance* script, s32 isInitialCall) {
     }
 
     moveSpeed = get_float_variable(script, *args++);
-    get_actor(actorID)->moveSpeed = moveSpeed;
+    get_actor(actorID)->walk.speed = moveSpeed;
     return ApiStatus_DONE2;
 }
 
@@ -869,7 +869,7 @@ ApiStatus SetActorIdleSpeed(ScriptInstance* script, s32 isInitialCall) {
     }
 
     flySpeed = get_float_variable(script, *args++);
-    get_actor(actorID)->flySpeed = flySpeed;
+    get_actor(actorID)->fly.speed = flySpeed;
     return ApiStatus_DONE2;
 }
 

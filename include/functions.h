@@ -263,8 +263,6 @@ void func_800701F0(s32 arg0, f32 arg1, f32 arg2, f32 arg3);
 void add_xz_vec3f(Vec3f* vector, f32 speed, f32 angleDeg);
 void play_movement_dust_effects(s32 var0, f32 xPos, f32 yPos, f32 zPos, f32 angleDeg);
 
-Actor func_80072110(s32, s32, s32, s32, f32, s32); // Probably wrong
-
 // Dead functions:
 f32 func_8002AF70(f32 startX, f32 startZ, f32 endX, f32 endZ); // atan2
 Npc* func_8003E4BC(NpcId npcId); // get_npc_safe
