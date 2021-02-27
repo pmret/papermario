@@ -1,3 +1,5 @@
+#define NAMESPACE battle_partner_kooper
+
 #include "common.h"
 #include "battle/battle.h"
 
@@ -35,20 +37,20 @@ ApiStatus func_80238000_6F5E80(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "battle/partner/kooper_6F5E80", func_80238114_6F5F94);
 
-ApiStatus func_80238298_6F6118(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(AverageTargetDizzyChance)(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
     Actor* targetActor;
     ActorPart* targetActorPart;
     s32 targetActorDescBaseStatusChance;
-    s32 var0 = 0;
-    s32 var1 = 0;
-    s32 var2 = 0;
+    s32 chanceTotal = 0;
+    s32 nTargets = 0;
+    s32 i;
 
-    for (var2; var2 < partnerActor->targetListLength; var2++) {
-        targetActor = get_actor(partnerActor->targetData[var2].actorID);
-        targetActorPart = get_actor_part(targetActor, partnerActor->targetData[var2].partID);
-        targetActorDescBaseStatusChance = lookup_status_chance(targetActor->statusTable, 4);
+    for (i = 0; i < partnerActor->targetListLength; i++) {
+        targetActor = get_actor(partnerActor->targetData[i].actorID);
+        targetActorPart = get_actor_part(targetActor, partnerActor->targetData[i].partID);
+        targetActorDescBaseStatusChance = lookup_status_chance(targetActor->statusTable, Debuff_DIZZY);
 
         if (targetActor->transStatus == 14) {
             targetActorDescBaseStatusChance = 0;
@@ -59,13 +61,13 @@ ApiStatus func_80238298_6F6118(ScriptInstance* script, s32 isInitialCall) {
         }
 
         if (targetActorDescBaseStatusChance > 0) {
-            var0 += targetActorDescBaseStatusChance;
-            var1++;
+            chanceTotal += targetActorDescBaseStatusChance;
+            nTargets++;
         }
     }
 
-    if (var1 > 0) {
-        script->varTable[0] = (var0 / var1);
+    if (nTargets > 0) {
+        script->varTable[0] = chanceTotal / nTargets;
     } else {
         script->varTable[0] = 0;
     }
@@ -78,16 +80,16 @@ ApiStatus func_802383C0_6F6240(ScriptInstance* script, s32 isInitialCall) {
     s32 var1;
     s32 var2;
 
-    if (var0 < 0x24) {
+    if (var0 < 36) {
         var1 = 1;
         var2 = 0;
-    } else if (var0 < 0x3D) {
+    } else if (var0 < 61) {
         var1 = 3;
         var2 = 1;
-    } else if (var0 < 0x51) {
+    } else if (var0 < 81) {
         var1 = 4;
         var2 = 2;
-    } else if (var0 < 0x64) {
+    } else if (var0 < 100) {
         var1 = 5;
         var2 = 3;
     } else {

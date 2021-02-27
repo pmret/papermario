@@ -1,3 +1,5 @@
+#define NAMESPACE battle_partner_goombario
+
 #include "common.h"
 #include "battle/battle.h"
 
@@ -41,9 +43,8 @@ ApiStatus func_80238A20_6F1B00(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
     Vec3f* pos = &partnerActor->walk.currentPos;
-    f32 temp_f0;
 
-    if (isInitialCall != 0) {
+    if (isInitialCall) {
         script->functionTemp[0].s = 0;
     }
 
@@ -85,9 +86,10 @@ ApiStatus func_80238B60_6F1C40(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
     Actor* targetActor = get_actor(partnerActor->targetActorID);
-    s32 temp_v0;
+    MessageID* tattle = &bActorTattles[targetActor->actorType];
 
-    script->varTable[0] = *(&bActorTattles[targetActor->actorType]);
+    script->varTable[0] = *tattle;
+
     if (script->varTable[0] == NULL) {
         script->varTable[0] = bActorTattles[0];
     }
@@ -111,7 +113,7 @@ INCLUDE_ASM(s32, "battle/partner/goombario_6F10E0", func_80238EDC_6F1FBC);
 ApiStatus func_8023903C_6F211C(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
 
-    battleStatus->partnerActor->isGlowing = 0;
+    battleStatus->partnerActor->isGlowing = FALSE;
     battleStatus->flags1 &= ~0x40000000;
 
     return ApiStatus_DONE2;
@@ -121,12 +123,12 @@ ApiStatus func_80239068_6F2148(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
 
-    if ((battleStatus->flags1 & 0x40000000) == 0) {
-        partnerActor->isGlowing = 0;
+    if (!(battleStatus->flags1 & 0x40000000)) {
+        partnerActor->isGlowing = FALSE;
     }
 
-    script->varTable[0] = (s8) partnerActor->isGlowing;
-    partnerActor->isGlowing = 0;
+    script->varTable[0] = partnerActor->isGlowing;
+    partnerActor->isGlowing = FALSE;
     battleStatus->flags1 &= ~0x40000000;
 
     return ApiStatus_DONE2;
@@ -135,7 +137,7 @@ ApiStatus func_80239068_6F2148(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus func_802390B0_6F2190(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
 
-    script->varTable[0] = (s8) battleStatus->partnerActor->isGlowing;
+    script->varTable[0] = battleStatus->partnerActor->isGlowing;
 
     return ApiStatus_DONE2;
 }

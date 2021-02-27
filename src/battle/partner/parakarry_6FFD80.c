@@ -5,10 +5,9 @@ INCLUDE_ASM(s32, "battle/partner/parakarry_6FFD80", func_80238000_6FFD80);
 
 ApiStatus func_80238C88_700A08(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
-    u8 level = battleStatus->partnerActor->staticActorData->level;
     s32 var0 = 0;
 
-    switch (level) {
+    switch (battleStatus->partnerActor->staticActorData->level) {
         case 0:
             var0 = 5;
             break;
@@ -17,8 +16,6 @@ ApiStatus func_80238C88_700A08(ScriptInstance* script, s32 isInitialCall) {
             break;
         case 2:
             var0 = 7;
-            break;
-        default:
             break;
     }
 

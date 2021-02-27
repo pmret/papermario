@@ -582,7 +582,7 @@ typedef struct BattleStatus {
     /* 0x097 */ s8 jumpCharge;
     /* 0x098 */ char unk_98;
     /* 0x099 */ u8 dangerFlags; /* 1 = danger, 2 = peril */
-    /* 0x09A */ u8 outtaSightActive;
+    /* 0x09A */ s8 outtaSightActive;
     /* 0x09B */ s8 turboChargeTurnsLeft;
     /* 0x09C */ u8 turboChargeAmount; /* unused? */
     /* 0x09D */ s8 waterBlockTurnsLeft;
@@ -1365,7 +1365,7 @@ typedef struct Actor {
     /* 0x21A */ char unk_21A[2];
     /* 0x21C */ u8 status;
     /* 0x21D */ char unk_21D[3];
-    /* 0x220 */ u8 isGlowing;
+    /* 0x220 */ s8 isGlowing;
     /* 0x221 */ u8 attackBoost;
     /* 0x222 */ s8 defenseBoost;
     /* 0x223 */ u8 chillOutAmount; /* attack reduction */

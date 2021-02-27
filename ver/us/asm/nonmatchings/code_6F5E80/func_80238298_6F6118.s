@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80238298_6F6118
+glabel battle_partner_kooper_AverageTargetDizzyChance
 /* 6F6118 80238298 27BDFFC8 */  addiu     $sp, $sp, -0x38
 /* 6F611C 8023829C AFB60028 */  sw        $s6, 0x28($sp)
 /* 6F6120 802382A0 3C16800E */  lui       $s6, %hi(gBattleStatus+0xDC)

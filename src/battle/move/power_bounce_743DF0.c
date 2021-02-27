@@ -19,7 +19,7 @@ ApiStatus func_802A10E4_743ED4(ScriptInstance* script, s32 isInitialCall) {
         powerBounceChance += 7;
     }
 
-    if (((*D_802A2730_745520 * powerBounceChance) / 100) < rand_int(100)) {
+    if ((*D_802A2730_745520 * powerBounceChance) / 100 < rand_int(100)) {
         script->varTable[0] = 0;
     }
 

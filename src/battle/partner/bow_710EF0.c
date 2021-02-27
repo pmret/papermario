@@ -1,3 +1,5 @@
+#define NAMESPACE battle_partner_bow
+
 #include "common.h"
 #include "battle/battle.h"
 
@@ -5,7 +7,7 @@ extern s32 bMarioIdleAnims[];
 
 ApiStatus func_80238000_710EF0(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
-    script->varTable[0] = (s8) battleStatus->outtaSightActive;
+    script->varTable[0] = battleStatus->outtaSightActive;
 
     return ApiStatus_DONE2;
 }
@@ -14,7 +16,7 @@ ApiStatus func_80238014_710F04(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
     Actor* partnerTargetActor = get_actor(partnerActor->targetActorID);
-    f32 partnerTargetActorSize = (partnerTargetActor->size.y + partnerTargetActor->size.x) >> 1;
+    f32 partnerTargetActorSize = (partnerTargetActor->size.y + partnerTargetActor->size.x) / 2;
 
     partnerTargetActorSize = (partnerTargetActorSize * 150.0f) / 100.0f;
     script->varTable[0] = partnerTargetActorSize;
@@ -32,23 +34,31 @@ ApiStatus func_802380E4_710FD4(ScriptInstance* script, s32 isInitialCall) {
     f32 var1 = get_variable(script, *args++);
     f32 scalingFactor = playerActor->scalingFactor;
 
-    script->varTable[0] += (var0 *= scalingFactor);
-    script->varTable[1] += (var1 *= scalingFactor);
+    var0 *= scalingFactor;
+    script->varTable[0] += var0;
+
+    var1 *= scalingFactor;
+    script->varTable[1] += var1;
 
     return ApiStatus_DONE2;
 }
 
+/// Duplicate of func_80260AD4
 ApiStatus func_80238198_711088(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* playerActor = battleStatus->playerActor;
-    u8 var0 = playerActor->debuff - 3;
-    s32 var1 = var0 < 6;
+    s32 isStopped = playerActor->debuff == Debuff_FEAR
+        || playerActor->debuff == Debuff_DIZZY
+        || playerActor->debuff == Debuff_PARALYZE
+        || playerActor->debuff == Debuff_SLEEP
+        || playerActor->debuff == Debuff_FROZEN
+        || playerActor->debuff == Debuff_STOP;
 
     if (playerActor->stoneStatus == 12) {
-        var1 = 1;
+        isStopped = TRUE;
     }
-    script->varTable[0] = var1;
 
+    script->varTable[0] = isStopped;
     return ApiStatus_DONE2;
 }
 
@@ -61,21 +71,21 @@ ApiStatus func_802381C8_7110B8(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-// Spook Attack Function
-ApiStatus func_802381E8_7110D8(ScriptInstance* script, s32 isInitialCall) {
+/// Averages the baseStatusChance of the hittable actors this partner is targeting.
+ApiStatus N(AverageTargetStatusChance)(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
     Actor* targetActor;
     ActorDesc* targetActorDesc;
     ActorPart* targetActorPart;
     s32 targetActorDescBaseStatusChance;
-    s32 var0 = 0;
-    s32 var1 = 0;
-    s32 var2 = 0;
+    s32 chanceTotal = 0;
+    s32 nTargets = 0;
+    s32 i;
 
-    for (var2; var2 < partnerActor->targetListLength; var2++) {
-        targetActor = get_actor(partnerActor->targetData[var2].actorID);
-        targetActorPart = get_actor_part(targetActor, partnerActor->targetData[var2].partID);
+    for (i = 0; i < partnerActor->targetListLength; i++) {
+        targetActor = get_actor(partnerActor->targetData[i].actorID);
+        targetActorPart = get_actor_part(targetActor, partnerActor->targetData[i].partID);
         targetActorDesc = targetActor->staticActorData;
         targetActorDescBaseStatusChance = targetActorDesc->baseStatusChance;
 
@@ -88,13 +98,13 @@ ApiStatus func_802381E8_7110D8(ScriptInstance* script, s32 isInitialCall) {
         }
 
         if (targetActorDescBaseStatusChance > 0) {
-            var0 += targetActorDescBaseStatusChance;
-            var1++;
+            chanceTotal += targetActorDescBaseStatusChance;
+            nTargets++;
         }
     }
 
-    if (var1 > 0) {
-        script->varTable[0] = (var0 / var1);
+    if (nTargets > 0) {
+        script->varTable[0] = chanceTotal / nTargets;
     } else {
         script->varTable[0] = 0;
     }

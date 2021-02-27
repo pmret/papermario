@@ -2,18 +2,21 @@
 
 INCLUDE_ASM(s32, "code_18F340", func_80260A60);
 
-//INCLUDE_ASM(s32, "code_18F340", func_80260AD4);
 ApiStatus func_80260AD4(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* playerActor = battleStatus->playerActor;
-    u8 var0 = playerActor->debuff - 3;
-    s32 var1 = var0 < 6;
+    s32 isStopped = playerActor->debuff == Debuff_FEAR
+        || playerActor->debuff == Debuff_DIZZY
+        || playerActor->debuff == Debuff_PARALYZE
+        || playerActor->debuff == Debuff_SLEEP
+        || playerActor->debuff == Debuff_FROZEN
+        || playerActor->debuff == Debuff_STOP;
 
     if (playerActor->stoneStatus == 12) {
-        var1 = 1;
+        isStopped = TRUE;
     }
-    script->varTable[0] = var1;
 
+    script->varTable[0] = isStopped;
     return ApiStatus_DONE2;
 }
 
