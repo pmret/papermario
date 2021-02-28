@@ -79,7 +79,7 @@ glabel func_800345FC
 /* FB18 80034718 A0510070 */   sb       $s1, 0x70($v0)
 /* FB1C 8003471C 0C00AB18 */  jal       func_8002AC60
 /* FB20 80034720 00000000 */   nop
-/* FB24 80034724 0C017F54 */  jal       func_8005FD50
+/* FB24 80034724 0C017F54 */  jal       nuContRmbForceStop
 /* FB28 80034728 00000000 */   nop
 /* FB2C 8003472C 0C0539C8 */  jal       func_8014E720
 /* FB30 80034730 0000202D */   daddu    $a0, $zero, $zero

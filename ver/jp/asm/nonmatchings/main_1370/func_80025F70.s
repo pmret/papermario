@@ -1,19 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80025F44
-/* 1344 80025F44 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* 1348 80025F48 AFBF0010 */  sw        $ra, 0x10($sp)
-/* 134C 80025F4C 0080382D */  daddu     $a3, $a0, $zero
-/* 1350 80025F50 3C048009 */  lui       $a0, %hi(D_80097D10)
-/* 1354 80025F54 24847D10 */  addiu     $a0, $a0, %lo(D_80097D10)
-/* 1358 80025F58 0C00973F */  jal       func_80025CFC
-/* 135C 80025F5C 00000000 */   nop
-.L80025F60:
-/* 1360 80025F60 080097D8 */  j         .L80025F60
-/* 1364 80025F64 00000000 */   nop
-/* 1368 80025F68 00000000 */  nop
-/* 136C 80025F6C 00000000 */  nop
+glabel func_80025F70
 /* 1370 80025F70 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 1374 80025F74 3C038000 */  lui       $v1, %hi(D_80000300)
 /* 1378 80025F78 8C630300 */  lw        $v1, %lo(D_80000300)($v1)
@@ -54,8 +42,8 @@ glabel func_80025F44
 /* 13FC 80025FFC 24846040 */  addiu     $a0, $a0, %lo(D_80026040)
 /* 1400 80026000 0C017BC0 */  jal       func_8005EF00
 /* 1404 80026004 00000000 */   nop
-/* 1408 80026008 3C048002 */  lui       $a0, %hi(func_800266E8)
-/* 140C 8002600C 248466E8 */  addiu     $a0, $a0, %lo(func_800266E8)
+/* 1408 80026008 3C048002 */  lui       $a0, %hi(gfxPreNMI_Callback)
+/* 140C 8002600C 248466E8 */  addiu     $a0, $a0, %lo(gfxPreNMI_Callback)
 /* 1410 80026010 0C017BD0 */  jal       func_8005EF40
 /* 1414 80026014 00000000 */   nop
 /* 1418 80026018 0C019674 */  jal       func_800659D0

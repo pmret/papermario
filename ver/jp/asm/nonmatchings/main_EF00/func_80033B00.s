@@ -45,7 +45,7 @@ glabel func_80033B00
 /* EFA0 80033BA0 AC23E724 */  sw        $v1, %lo(D_8009E724)($at)
 /* EFA4 80033BA4 3C01800A */  lui       $at, %hi(D_8009E72C)
 /* EFA8 80033BA8 AC22E72C */  sw        $v0, %lo(D_8009E72C)($at)
-/* EFAC 80033BAC 0C017F54 */  jal       func_8005FD50
+/* EFAC 80033BAC 0C017F54 */  jal       nuContRmbForceStop
 /* EFB0 80033BB0 00000000 */   nop
 /* EFB4 80033BB4 0C00B6E1 */  jal       func_8002DB84
 /* EFB8 80033BB8 00000000 */   nop

@@ -23,7 +23,7 @@ glabel func_80033574
 /* E9BC 800335BC 8C430000 */  lw        $v1, ($v0)
 /* E9C0 800335C0 A2040000 */  sb        $a0, ($s0)
 /* E9C4 800335C4 34630008 */  ori       $v1, $v1, 8
-/* E9C8 800335C8 0C017F54 */  jal       func_8005FD50
+/* E9C8 800335C8 0C017F54 */  jal       nuContRmbForceStop
 /* E9CC 800335CC AC430000 */   sw       $v1, ($v0)
 .L800335D0:
 /* E9D0 800335D0 82030000 */  lb        $v1, ($s0)

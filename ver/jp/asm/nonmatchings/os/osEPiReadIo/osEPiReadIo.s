@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80060D90
+glabel osEPiReadIo
 /* 3C190 80060D90 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 3C194 80060D94 AFB00010 */  sw        $s0, 0x10($sp)
 /* 3C198 80060D98 00808021 */  addu      $s0, $a0, $zero

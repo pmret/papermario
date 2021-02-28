@@ -16,10 +16,7 @@ options:
 segments:
   - name: header
     type: header
-    start: 0x00
-    vram: 0
-    subsections:
-    - [0x0000, header, header]
+    start: 0x0
   - name: boot
     type: code
     start: 0x0040
