@@ -1103,13 +1103,13 @@ INCLUDE_ASM(s32, "code_190B20", func_80263FE8);
 
 INCLUDE_ASM(s32, "code_190B20", func_80264084);
 
-INCLUDE_ASM(s32, "code_190B20", add_xz_vec3f);
+INCLUDE_ASM(void, "code_190B20", add_xz_vec3f, Vec3f* vector, f32 speed, f32 angleDeg);
 
-INCLUDE_ASM(s32, "code_190B20", add_xz_vec3f_copy1);
+INCLUDE_ASM(void, "code_190B20", add_xz_vec3f_copy1, Vec3f* vector, f32 speed, f32 angleDeg);
 
-INCLUDE_ASM(s32, "code_190B20", add_xz_vec3f_copy2);
+INCLUDE_ASM(void, "code_190B20", add_xz_vec3f_copy2, Vec3f* vector, f32 speed, f32 angleDeg);
 
-INCLUDE_ASM(s32, "code_190B20", play_movement_dust_effects);
+INCLUDE_ASM(void, "code_190B20", play_movement_dust_effects, s32 var0, f32 xPos, f32 yPos, f32 zPos, f32 angleDeg);
 
 ActorPart* get_actor_part(Actor* actor, s32 partIndex) {
     ActorPart* part = &actor->partsTable[0];

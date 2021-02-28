@@ -1,3 +1,5 @@
+#define NAMESPACE battle_partner_watt
+
 #include "common.h"
 
 INCLUDE_ASM(s32, "battle/partner/watt_703AF0", func_80238000_703AF0);
@@ -36,4 +38,40 @@ INCLUDE_ASM(s32, "battle/partner/watt_703AF0", func_80238C08_7046F8);
 
 INCLUDE_ASM(s32, "battle/partner/watt_703AF0", func_80238C84_704774);
 
-INCLUDE_ASM(s32, "battle/partner/watt_703AF0", func_80238E5C_70494C);
+ApiStatus N(AverageTargetParalyzeChance)(ScriptInstance* script, s32 isInitialCall) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    Actor* partnerActor = battleStatus->partnerActor;
+    Actor* targetActor;
+    ActorPart* targetActorPart;
+    s32 targetActorDescBaseStatusChance;
+    s32 chanceTotal = 0;
+    s32 nTargets = 0;
+    s32 i;
+
+    for (i = 0; i < partnerActor->targetListLength; i++) {
+        targetActor = get_actor(partnerActor->targetData[i].actorID);
+        targetActorPart = get_actor_part(targetActor, partnerActor->targetData[i].partID);
+        targetActorDescBaseStatusChance = lookup_status_chance(targetActor->statusTable, Debuff_PARALYZE);
+
+        if (targetActor->transStatus == 14) {
+            targetActorDescBaseStatusChance = 0;
+        }
+
+        if (targetActorPart->eventFlags & 0x20) {
+            targetActorDescBaseStatusChance = 0;
+        }
+
+        if (targetActorDescBaseStatusChance > 0) {
+            chanceTotal += targetActorDescBaseStatusChance;
+            nTargets++;
+        }
+    }
+
+    if (nTargets > 0) {
+        script->varTable[0] = chanceTotal / nTargets;
+    } else {
+        script->varTable[0] = 0;
+    }
+
+    return ApiStatus_DONE2;
+}
