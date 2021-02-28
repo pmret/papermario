@@ -49,12 +49,12 @@ INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_80070070);
 
 INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_800700D0);
 
-INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_80070130);
+INCLUDE_ASM(void, "os/code_4ac90_len_3910", func_80070130, s32 arg0, f32 arg1, f32 arg2, f32 arg3);
 
 INCLUDE_ASM(void, "os/code_4ac90_len_3910", func_80070190, s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4, f32 arg5,
             s32 arg6, s32 arg7);
 
-INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_800701F0);
+INCLUDE_ASM(void, "os/code_4ac90_len_3910", func_800701F0, s32 arg0, f32 arg1, f32 arg2, f32 arg3);
 
 INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_80070250);
 
@@ -95,9 +95,9 @@ INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_800708B0);
 
 INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_80070910);
 
-INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_80070970);
+INCLUDE_ASM(void, "os/code_4ac90_len_3910", func_80070970, s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4, s32 arg5);
 
-INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_800709D0);
+INCLUDE_ASM(void, "os/code_4ac90_len_3910", func_800709D0, s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
 
 INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_80070A30);
 
@@ -215,7 +215,7 @@ INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_80071F30);
 
 INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_80071F90);
 
-INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_80071FF0);
+INCLUDE_ASM(void, "os/code_4ac90_len_3910", func_80071FF0, s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
 
 INCLUDE_ASM(s32, "os/code_4ac90_len_3910", func_80072050);
 

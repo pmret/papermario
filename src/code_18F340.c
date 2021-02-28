@@ -2,7 +2,23 @@
 
 INCLUDE_ASM(s32, "code_18F340", func_80260A60);
 
-INCLUDE_ASM(s32, "code_18F340", func_80260AD4);
+ApiStatus IsPartnerImmobile(ScriptInstance* script, s32 isInitialCall) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    Actor* playerActor = battleStatus->playerActor;
+    s32 isImmobile = playerActor->debuff == Debuff_FEAR
+        || playerActor->debuff == Debuff_DIZZY
+        || playerActor->debuff == Debuff_PARALYZE
+        || playerActor->debuff == Debuff_SLEEP
+        || playerActor->debuff == Debuff_FROZEN
+        || playerActor->debuff == Debuff_STOP;
+
+    if (playerActor->stoneStatus == 12) {
+        isImmobile = TRUE;
+    }
+
+    script->varTable[0] = isImmobile;
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "code_18F340", activate_defend_command);
 

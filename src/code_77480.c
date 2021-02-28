@@ -6,6 +6,8 @@ extern s32 D_8010C940;
 extern s32 D_8010C950;
 extern s32 D_8010C958;
 
+void func_800E0514(void);
+
 INCLUDE_ASM(s32, "code_77480", test_below_player);
 
 INCLUDE_ASM(s32, "code_77480", func_800DE46C);
