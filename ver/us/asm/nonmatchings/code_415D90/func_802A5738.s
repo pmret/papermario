@@ -9,7 +9,7 @@ glabel func_802A5738
 /* 41A4D8 802A5748 00021600 */  sll       $v0, $v0, 0x18
 /* 41A4DC 802A574C 00021E03 */  sra       $v1, $v0, 0x18
 /* 41A4E0 802A5750 2C620020 */  sltiu     $v0, $v1, 0x20
-/* 41A4E4 802A5754 10400019 */  beqz      $v0, .L802A57BC
+/* 41A4E4 802A5754 10400019 */  beqz      $v0, L802A57BC_41A54C
 /* 41A4E8 802A5758 AFBF0018 */   sw       $ra, 0x18($sp)
 /* 41A4EC 802A575C 00031080 */  sll       $v0, $v1, 2
 /* 41A4F0 802A5760 3C01802B */  lui       $at, %hi(jtbl_802ABB58)
@@ -20,7 +20,7 @@ glabel func_802A5738
 glabel L802A5774_41A504
 /* 41A504 802A5774 3C02802B */  lui       $v0, %hi(D_802AD60B)
 /* 41A508 802A5778 8042D60B */  lb        $v0, %lo(D_802AD60B)($v0)
-/* 41A50C 802A577C 1040000F */  beqz      $v0, .L802A57BC
+/* 41A50C 802A577C 1040000F */  beqz      $v0, L802A57BC_41A54C
 /* 41A510 802A5780 00000000 */   nop
 /* 41A514 802A5784 3C02802B */  lui       $v0, %hi(D_802AD605)
 /* 41A518 802A5788 8042D605 */  lb        $v0, %lo(D_802AD605)($v0)
@@ -36,7 +36,6 @@ glabel L802A5774_41A504
 /* 41A540 802A57B0 8C84D6C0 */  lw        $a0, %lo(D_802AD6C0)($a0)
 /* 41A544 802A57B4 0C04993B */  jal       draw_msg
 /* 41A548 802A57B8 24A50008 */   addiu    $a1, $a1, 8
-.L802A57BC:
 glabel L802A57BC_41A54C
 /* 41A54C 802A57BC 8FBF0018 */  lw        $ra, 0x18($sp)
 /* 41A550 802A57C0 03E00008 */  jr        $ra

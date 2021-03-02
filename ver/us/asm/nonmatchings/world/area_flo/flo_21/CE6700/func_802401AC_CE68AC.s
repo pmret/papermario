@@ -11,7 +11,7 @@ glabel func_802401AC_CE68AC
 /* CE68C4 802401C4 3C108011 */  lui       $s0, %hi(gPlayerStatus)
 /* CE68C8 802401C8 2610EFC8 */  addiu     $s0, $s0, %lo(gPlayerStatus)
 /* CE68CC 802401CC 2C620005 */  sltiu     $v0, $v1, 5
-/* CE68D0 802401D0 1040008A */  beqz      $v0, .L802403FC
+/* CE68D0 802401D0 1040008A */  beqz      $v0, L802403FC_CE6AFC
 /* CE68D4 802401D4 00031080 */   sll      $v0, $v1, 2
 /* CE68D8 802401D8 3C018024 */  lui       $at, %hi(jtbl_80245B10_CEC210)
 /* CE68DC 802401DC 00220821 */  addu      $at, $at, $v0
@@ -62,10 +62,10 @@ glabel L802401EC_CE68EC
 /* CE698C 8024028C 00021400 */  sll       $v0, $v0, 0x10
 /* CE6990 80240290 00021403 */  sra       $v0, $v0, 0x10
 /* CE6994 80240294 0043102A */  slt       $v0, $v0, $v1
-/* CE6998 80240298 14400058 */  bnez      $v0, .L802403FC
+/* CE6998 80240298 14400058 */  bnez      $v0, L802403FC_CE6AFC
 /* CE699C 8024029C 24020001 */   addiu    $v0, $zero, 1
 /* CE69A0 802402A0 A6220044 */  sh        $v0, 0x44($s1)
-/* CE69A4 802402A4 080900FF */  j         .L802403FC
+/* CE69A4 802402A4 080900FF */  j         L802403FC_CE6AFC
 /* CE69A8 802402A8 A6200046 */   sh       $zero, 0x46($s1)
 glabel L802402AC_CE69AC
 /* CE69AC 802402AC 96220046 */  lhu       $v0, 0x46($s1)
@@ -74,7 +74,7 @@ glabel L802402AC_CE69AC
 /* CE69B8 802402B8 00021400 */  sll       $v0, $v0, 0x10
 /* CE69BC 802402BC 00021403 */  sra       $v0, $v0, 0x10
 /* CE69C0 802402C0 2842003C */  slti      $v0, $v0, 0x3c
-/* CE69C4 802402C4 1440004D */  bnez      $v0, .L802403FC
+/* CE69C4 802402C4 1440004D */  bnez      $v0, L802403FC_CE6AFC
 /* CE69C8 802402C8 24020002 */   addiu    $v0, $zero, 2
 /* CE69CC 802402CC 8E230050 */  lw        $v1, 0x50($s1)
 /* CE69D0 802402D0 A6220044 */  sh        $v0, 0x44($s1)
@@ -84,7 +84,7 @@ glabel L802402AC_CE69AC
 /* CE69E0 802402E0 AC620070 */  sw        $v0, 0x70($v1)
 /* CE69E4 802402E4 8E220050 */  lw        $v0, 0x50($s1)
 /* CE69E8 802402E8 8C42000C */  lw        $v0, 0xc($v0)
-/* CE69EC 802402EC 080900FF */  j         .L802403FC
+/* CE69EC 802402EC 080900FF */  j         L802403FC_CE6AFC
 /* CE69F0 802402F0 AC400074 */   sw       $zero, 0x74($v0)
 glabel L802402F4_CE69F4
 /* CE69F4 802402F4 96220046 */  lhu       $v0, 0x46($s1)
@@ -93,7 +93,7 @@ glabel L802402F4_CE69F4
 /* CE6A00 80240300 00021400 */  sll       $v0, $v0, 0x10
 /* CE6A04 80240304 00021403 */  sra       $v0, $v0, 0x10
 /* CE6A08 80240308 2842003C */  slti      $v0, $v0, 0x3c
-/* CE6A0C 8024030C 1440003B */  bnez      $v0, .L802403FC
+/* CE6A0C 8024030C 1440003B */  bnez      $v0, L802403FC_CE6AFC
 /* CE6A10 80240310 00000000 */   nop
 /* CE6A14 80240314 3C013F80 */  lui       $at, 0x3f80
 /* CE6A18 80240318 44810000 */  mtc1      $at, $f0
@@ -125,7 +125,7 @@ glabel L802402F4_CE69F4
 /* CE6A80 80240380 A6200046 */  sh        $zero, 0x46($s1)
 /* CE6A84 80240384 AE20002C */  sw        $zero, 0x2c($s1)
 /* CE6A88 80240388 A6220048 */  sh        $v0, 0x48($s1)
-/* CE6A8C 8024038C 080900FF */  j         .L802403FC
+/* CE6A8C 8024038C 080900FF */  j         L802403FC_CE6AFC
 /* CE6A90 80240390 E6200030 */   swc1     $f0, 0x30($s1)
 glabel L80240394_CE6A94
 /* CE6A94 80240394 0000202D */  daddu     $a0, $zero, $zero
@@ -142,7 +142,7 @@ glabel L80240394_CE6A94
 /* CE6AC0 802403C0 00021400 */  sll       $v0, $v0, 0x10
 /* CE6AC4 802403C4 00021403 */  sra       $v0, $v0, 0x10
 /* CE6AC8 802403C8 28420078 */  slti      $v0, $v0, 0x78
-/* CE6ACC 802403CC 1440000B */  bnez      $v0, .L802403FC
+/* CE6ACC 802403CC 1440000B */  bnez      $v0, L802403FC_CE6AFC
 /* CE6AD0 802403D0 24030001 */   addiu    $v1, $zero, 1
 /* CE6AD4 802403D4 C620002C */  lwc1      $f0, 0x2c($s1)
 /* CE6AD8 802403D8 24020002 */  addiu     $v0, $zero, 2
@@ -154,7 +154,6 @@ glabel L80240394_CE6A94
 /* CE6AF0 802403F0 A6220044 */  sh        $v0, 0x44($s1)
 /* CE6AF4 802403F4 A6200046 */  sh        $zero, 0x46($s1)
 /* CE6AF8 802403F8 E6200034 */  swc1      $f0, 0x34($s1)
-.L802403FC:
 glabel L802403FC_CE6AFC
 /* CE6AFC 802403FC 8623004A */  lh        $v1, 0x4a($s1)
 /* CE6B00 80240400 24020001 */  addiu     $v0, $zero, 1

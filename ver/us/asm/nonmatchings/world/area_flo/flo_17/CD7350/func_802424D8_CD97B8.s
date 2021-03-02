@@ -134,7 +134,7 @@ glabel func_802424D8_CD97B8
 /* CD99A4 802426C4 8E220090 */  lw        $v0, 0x90($s1)
 /* CD99A8 802426C8 1840000C */  blez      $v0, .L802426FC
 /* CD99AC 802426CC 2442FFFF */   addiu    $v0, $v0, -1
-/* CD99B0 802426D0 14400087 */  bnez      $v0, .L802428F0
+/* CD99B0 802426D0 14400087 */  bnez      $v0, L802428F0_CD9BD0
 /* CD99B4 802426D4 AE220090 */   sw       $v0, 0x90($s1)
 /* CD99B8 802426D8 3C03FFAA */  lui       $v1, 0xffaa
 /* CD99BC 802426DC 8E420028 */  lw        $v0, 0x28($s2)
@@ -221,7 +221,7 @@ glabel func_802424D8_CD97B8
 .L80242804:
 /* CD9AE4 80242804 AE420028 */  sw        $v0, 0x28($s2)
 /* CD9AE8 80242808 24020007 */  addiu     $v0, $zero, 7
-/* CD9AEC 8024280C 08090A3C */  j         .L802428F0
+/* CD9AEC 8024280C 08090A3C */  j         L802428F0_CD9BD0
 /* CD9AF0 80242810 AE220090 */   sw       $v0, 0x90($s1)
 .L80242814:
 /* CD9AF4 80242814 0280282D */  daddu     $a1, $s4, $zero
@@ -271,13 +271,13 @@ glabel func_802424D8_CD97B8
 /* CD9B88 802428A8 A22000B5 */  sb        $zero, 0xb5($s1)
 .L802428AC:
 /* CD9B8C 802428AC 8E22008C */  lw        $v0, 0x8c($s1)
-/* CD9B90 802428B0 1040000F */  beqz      $v0, .L802428F0
+/* CD9B90 802428B0 1040000F */  beqz      $v0, L802428F0_CD9BD0
 /* CD9B94 802428B4 3C03FFAA */   lui      $v1, 0xffaa
 /* CD9B98 802428B8 8E420028 */  lw        $v0, 0x28($s2)
 /* CD9B9C 802428BC 3463FFFC */  ori       $v1, $v1, 0xfffc
 /* CD9BA0 802428C0 00431821 */  addu      $v1, $v0, $v1
 /* CD9BA4 802428C4 2C620015 */  sltiu     $v0, $v1, 0x15
-/* CD9BA8 802428C8 10400009 */  beqz      $v0, .L802428F0
+/* CD9BA8 802428C8 10400009 */  beqz      $v0, L802428F0_CD9BD0
 /* CD9BAC 802428CC 00031080 */   sll      $v0, $v1, 2
 /* CD9BB0 802428D0 3C018024 */  lui       $at, %hi(jtbl_80245360_CDC640)
 /* CD9BB4 802428D4 00220821 */  addu      $at, $at, $v0
@@ -288,7 +288,6 @@ glabel L802428E4_CD9BC4
 /* CD9BC4 802428E4 8E420028 */  lw        $v0, 0x28($s2)
 /* CD9BC8 802428E8 24420001 */  addiu     $v0, $v0, 1
 /* CD9BCC 802428EC AE420028 */  sw        $v0, 0x28($s2)
-.L802428F0:
 glabel L802428F0_CD9BD0
 /* CD9BD0 802428F0 0000102D */  daddu     $v0, $zero, $zero
 .L802428F4:

@@ -76,7 +76,7 @@ glabel func_80242780_EEF880
 .L80242898:
 /* EEF998 80242898 8E830070 */  lw        $v1, 0x70($s4)
 /* EEF99C 8024289C 2C620015 */  sltiu     $v0, $v1, 0x15
-/* EEF9A0 802428A0 10400032 */  beqz      $v0, .L8024296C
+/* EEF9A0 802428A0 10400032 */  beqz      $v0, L8024296C_EEFA6C
 /* EEF9A4 802428A4 00031080 */   sll      $v0, $v1, 2
 /* EEF9A8 802428A8 3C018024 */  lui       $at, %hi(jtbl_802454B0_EF25B0)
 /* EEF9AC 802428AC 00220821 */  addu      $at, $at, $v0
@@ -136,7 +136,6 @@ glabel L8024295C_EEFA5C
 /* EEFA60 80242960 0200282D */  daddu     $a1, $s0, $zero
 /* EEFA64 80242964 0C0909C9 */  jal       func_80242724_EEF824
 /* EEFA68 80242968 0260302D */   daddu    $a2, $s3, $zero
-.L8024296C:
 glabel L8024296C_EEFA6C
 /* EEFA6C 8024296C 0000102D */  daddu     $v0, $zero, $zero
 .L80242970:

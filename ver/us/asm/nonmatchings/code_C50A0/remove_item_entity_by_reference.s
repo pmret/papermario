@@ -30,7 +30,7 @@ glabel remove_item_entity_by_reference
 .L8013398C:
 /* CA08C 8013398C 8223001B */  lb        $v1, 0x1b($s1)
 /* CA090 80133990 2C62001D */  sltiu     $v0, $v1, 0x1d
-/* CA094 80133994 10400008 */  beqz      $v0, .L801339B8
+/* CA094 80133994 10400008 */  beqz      $v0, L801339B8_CA0B8
 /* CA098 80133998 00031080 */   sll      $v0, $v1, 2
 /* CA09C 8013399C 3C018015 */  lui       $at, %hi(jtbl_80150D28)
 /* CA0A0 801339A0 00220821 */  addu      $at, $at, $v0
@@ -40,7 +40,6 @@ glabel remove_item_entity_by_reference
 glabel L801339B0_CA0B0
 /* CA0B0 801339B0 0C0448CA */  jal       func_80112328
 /* CA0B4 801339B4 86240020 */   lh       $a0, 0x20($s1)
-.L801339B8:
 glabel L801339B8_CA0B8
 /* CA0B8 801339B8 3C118015 */  lui       $s1, %hi(D_801565A0)
 /* CA0BC 801339BC 263165A0 */  addiu     $s1, $s1, %lo(D_801565A0)

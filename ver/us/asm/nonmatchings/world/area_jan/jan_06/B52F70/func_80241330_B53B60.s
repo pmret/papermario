@@ -86,7 +86,7 @@ glabel func_80241330_B53B60
 .L80241470:
 /* B53CA0 80241470 8E630070 */  lw        $v1, 0x70($s3)
 /* B53CA4 80241474 2C62000F */  sltiu     $v0, $v1, 0xf
-/* B53CA8 80241478 1040002C */  beqz      $v0, .L8024152C
+/* B53CA8 80241478 1040002C */  beqz      $v0, L8024152C_B53D5C
 /* B53CAC 8024147C 00031080 */   sll      $v0, $v1, 2
 /* B53CB0 80241480 3C018024 */  lui       $at, %hi(jtbl_80246CB8_B594E8)
 /* B53CB4 80241484 00220821 */  addu      $at, $at, $v0
@@ -138,7 +138,6 @@ glabel L8024151C_B53D4C
 /* B53D50 80241520 0280282D */  daddu     $a1, $s4, $zero
 /* B53D54 80241524 0C0904BB */  jal       jan_06_UnkDurationCheck
 /* B53D58 80241528 0200302D */   daddu    $a2, $s0, $zero
-.L8024152C:
 glabel L8024152C_B53D5C
 /* B53D5C 8024152C 0000102D */  daddu     $v0, $zero, $zero
 .L80241530:

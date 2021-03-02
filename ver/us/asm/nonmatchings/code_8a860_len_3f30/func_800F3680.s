@@ -989,7 +989,7 @@ glabel L800F43E8_8D898
 /* 8D974 800F44C4 8C420318 */  lw        $v0, 0x318($v0)
 /* 8D978 800F44C8 2443FFFF */  addiu     $v1, $v0, -1
 /* 8D97C 800F44CC 2C62000D */  sltiu     $v0, $v1, 0xd
-/* 8D980 800F44D0 10400012 */  beqz      $v0, .L800F451C
+/* 8D980 800F44D0 10400012 */  beqz      $v0, L800F451C_8D9CC
 /* 8D984 800F44D4 00031080 */   sll      $v0, $v1, 2
 /* 8D988 800F44D8 3C018011 */  lui       $at, %hi(jtbl_8010C870)
 /* 8D98C 800F44DC 00220821 */  addu      $at, $at, $v0
@@ -1013,7 +1013,6 @@ glabel L800F4508_8D9B8
 glabel L800F4514_8D9C4
 /* 8D9C4 800F4514 0803D150 */  j         .L800F4540
 /* 8D9C8 800F4518 240B001F */   addiu    $t3, $zero, 0x1f
-.L800F451C:
 glabel L800F451C_8D9CC
 /* 8D9CC 800F451C 240A0025 */  addiu     $t2, $zero, 0x25
 /* 8D9D0 800F4520 0803D151 */  j         .L800F4544

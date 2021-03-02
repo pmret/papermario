@@ -20,7 +20,7 @@ glabel func_802A5290
 /* 41A05C 802A52CC 00021600 */  sll       $v0, $v0, 0x18
 /* 41A060 802A52D0 00021E03 */  sra       $v1, $v0, 0x18
 /* 41A064 802A52D4 2C62002B */  sltiu     $v0, $v1, 0x2b
-/* 41A068 802A52D8 104000FB */  beqz      $v0, .L802A56C8
+/* 41A068 802A52D8 104000FB */  beqz      $v0, L802A56C8_41A458
 /* 41A06C 802A52DC AFA60048 */   sw       $a2, 0x48($sp)
 /* 41A070 802A52E0 00031080 */  sll       $v0, $v1, 2
 /* 41A074 802A52E4 3C01802B */  lui       $at, %hi(jtbl_802ABAA8)
@@ -270,7 +270,7 @@ glabel L802A52F8_41A088
 /* 41A418 802A5688 3C03802B */  lui       $v1, %hi(D_802AD66C)
 /* 41A41C 802A568C 8C63D66C */  lw        $v1, %lo(D_802AD66C)($v1)
 /* 41A420 802A5690 0043102A */  slt       $v0, $v0, $v1
-/* 41A424 802A5694 1040000C */  beqz      $v0, .L802A56C8
+/* 41A424 802A5694 1040000C */  beqz      $v0, L802A56C8_41A458
 /* 41A428 802A5698 26E50043 */   addiu    $a1, $s7, 0x43
 /* 41A42C 802A569C 8FA90048 */  lw        $t1, 0x48($sp)
 /* 41A430 802A56A0 3C10802B */  lui       $s0, %hi(D_802AD620)
@@ -283,7 +283,6 @@ glabel L802A52F8_41A088
 /* 41A44C 802A56BC 0200202D */   daddu    $a0, $s0, $zero
 /* 41A450 802A56C0 0C0511EA */  jal       draw_icon_0
 /* 41A454 802A56C4 0200202D */   daddu    $a0, $s0, $zero
-.L802A56C8:
 glabel L802A56C8_41A458
 /* 41A458 802A56C8 8FBF003C */  lw        $ra, 0x3c($sp)
 /* 41A45C 802A56CC 8FBE0038 */  lw        $fp, 0x38($sp)
