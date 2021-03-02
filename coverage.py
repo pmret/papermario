@@ -53,7 +53,6 @@ def stuff(version):
     matched = [f for f in matched if not f in partial_matched]
     matched_but_undeleted_asm = set([f for f in matched if f in non_matched and not f in partial_matched])
     orphan_asm = set(non_matched) - set(asm) - matched_but_undeleted_asm
-    missing_asm = set(asm) - set(non_matched)
 
     to_delete = matched_but_undeleted_asm | orphan_asm
 
@@ -63,17 +62,8 @@ def stuff(version):
             print("--delete                    delete obsolete .s functions without asking")
             exit()
 
-        if len(matched_but_undeleted_asm) > 0:
-            print(f"The following functions have been matched but their .s files remain: {matched_but_undeleted_asm}")
-        """
-        if len(set(asm)) != len(set(non_matched)):
-            if len(set(non_matched)) > len(set(asm)) and len(orphan_asm) > 0:
-                print(f"The following functions are unmatched but are also unINCLUDEd: {orphan_asm}")
-            elif len(missing_asm) > 0:
-                print(f"warning: The following .s files are INCLUDEd but don't exist: {missing_asm}")
-        """
-
         if len(to_delete) > 0:
+            print(f"The following functions can be deleted: {to_delete}")
             if "--fail-undeleted" in sys.argv:
                 exit(1)
             elif "--delete" in sys.argv or input("Delete them [y/N]? ").upper() == "Y":
