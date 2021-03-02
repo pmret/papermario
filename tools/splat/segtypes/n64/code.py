@@ -655,11 +655,11 @@ class N64SegCode(N64Segment):
             for insn in funcs[func]:
                 insn_addr = insn[0].address
                 # Add a label if we need one
-                if insn_addr in self.labels_to_add:
-                    self.labels_to_add.remove(insn_addr)
-                    func_text.append(".L{:X}:".format(insn_addr))
                 if insn_addr in self.jtbl_glabels_to_add:
                     func_text.append(f"glabel L{insn_addr:X}_{insn[3]:X}")
+                elif insn_addr in self.labels_to_add:
+                    self.labels_to_add.remove(insn_addr)
+                    func_text.append(".L{:X}:".format(insn_addr))
 
                 if rom_addr_padding:
                     rom_str = "{0:0{1}X}".format(insn[3], rom_addr_padding)
@@ -672,6 +672,12 @@ class N64SegCode(N64Segment):
                     op_str = ", ".join(insn[2].split(", ")[:-1] + [insn[4]])
                 else:
                     op_str = insn[2]
+
+                if self.is_branch_insn(insn[0].mnemonic):
+                    branch_addr = int(insn[0].op_str.split(",")[-1].strip(), 0)
+                    if branch_addr in self.jtbl_glabels_to_add:
+                        label_str = f"L{branch_addr:X}_{self.ram_to_rom(branch_addr):X}"
+                        op_str = ", ".join(insn[2].split(", ")[:-1] + [label_str])
 
                 insn_text = insn[1]
                 if indent_next:

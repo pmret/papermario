@@ -312,8 +312,6 @@ def main(config_path, out_dir, target_path, modes, verbose, ignore_cache=False):
             segment.all_symbols = all_symbols
             segment.symbol_ranges = symbol_ranges
 
-        segment.check()
-
         typ = segment.type
         if segment.type == "bin" and segment.is_name_default():
             typ = "unk"
