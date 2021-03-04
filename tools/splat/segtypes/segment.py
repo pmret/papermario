@@ -63,12 +63,6 @@ class Segment:
         if self.rom_start > self.rom_end:
             print(f"Error: segments out of order - ({self.name} starts at 0x{self.rom_start:X}, but next segment starts at 0x{self.rom_end:X})")
             sys.exit(1)
-        elif self.max_length():
-            expected_len = int(self.max_length())
-            actual_len = self.rom_end - self.rom_start
-            if actual_len > expected_len:
-                print(f"Error: {self.name} should end at 0x{self.rom_start + expected_len:X}, but it ends at 0x{self.rom_end:X}\n(hint: add a 'bin' segment after it)")
-                sys.exit(1)
 
     @property
     def size(self):

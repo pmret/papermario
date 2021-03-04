@@ -23,6 +23,13 @@ class N64SegRgba16(N64Segment):
             self.height = segment[4]
             self.flip = "noflip"
 
+        if self.max_length():
+            expected_len = int(self.max_length())
+            actual_len = self.rom_end - self.rom_start
+            if actual_len > expected_len:
+                print(f"Error: {self.name} should end at 0x{self.rom_start + expected_len:X}, but it ends at 0x{self.rom_end:X}\n(hint: add a 'bin' segment after it)")
+                sys.exit(1)
+
     @property
     def flip_vertical(self):
         return self.flip == "both" or self.flip.startswith("v") or self.flip == "y"

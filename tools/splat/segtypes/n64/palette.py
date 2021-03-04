@@ -3,6 +3,7 @@ from segtypes.n64.segment import N64Segment
 from util.color import unpack_color
 from util.n64 import Yay0decompress
 from util.iter import iter_in_groups
+import sys
 
 class N64SegPalette(N64Segment):
     require_unique_name = False
@@ -19,6 +20,13 @@ class N64SegPalette(N64Segment):
 
         self.compressed = segment.get("compressed", False) if type(
             segment) is dict else False
+
+        if self.max_length():
+            expected_len = int(self.max_length())
+            actual_len = self.rom_end - self.rom_start
+            if actual_len > expected_len:
+                print(f"Error: {self.name} should end at 0x{self.rom_start + expected_len:X}, but it ends at 0x{self.rom_end:X}\n(hint: add a 'bin' segment after it)")
+                sys.exit(1)
 
     def should_run(self):
         return super().should_run() or (
