@@ -1,5 +1,4 @@
 #include "common.h"
-#include "nu/nusys.h"
 
 s32 D_80074270 = 0;
 
