@@ -118,7 +118,7 @@ segments:
     - [0x3ca80, c, os/code_3ca80_len_a0]
     - [0x3cb20, c, os/code_3cb20_len_130]
     - [0x3cc50, c, os/code_3cc50_len_80]
-    - [0x3ccd0, c, os/code_3ccd0_len_30]
+    - [0x3ccd0, hasm, os/osWritebackDCacheAll]
     - [0x3cd00, c, os/code_3cd00_len_5f0]
     - [0x3CF80, c]
     - [0x3D290, c, os/osVirtualToPhysical]
