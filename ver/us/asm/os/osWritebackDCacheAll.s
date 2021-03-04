@@ -1,5 +1,9 @@
+.include "macro.inc"
+
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
+
+.section .text, "ax"
 
 glabel osWritebackDCacheAll
     lui       $t0, 0x8000
