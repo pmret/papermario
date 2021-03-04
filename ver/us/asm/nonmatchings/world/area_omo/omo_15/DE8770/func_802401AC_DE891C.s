@@ -11,7 +11,7 @@ glabel func_802401AC_DE891C
 /* DE8934 802401C4 3C108011 */  lui       $s0, %hi(gPlayerStatus)
 /* DE8938 802401C8 2610EFC8 */  addiu     $s0, $s0, %lo(gPlayerStatus)
 /* DE893C 802401CC 2C620005 */  sltiu     $v0, $v1, 5
-/* DE8940 802401D0 1040008A */  beqz      $v0, .L802403FC
+/* DE8940 802401D0 1040008A */  beqz      $v0, L802403FC_DE8B6C
 /* DE8944 802401D4 00031080 */   sll      $v0, $v1, 2
 /* DE8948 802401D8 3C018024 */  lui       $at, %hi(jtbl_80243730_DEBEA0)
 /* DE894C 802401DC 00220821 */  addu      $at, $at, $v0
@@ -62,10 +62,10 @@ glabel L802401EC_DE895C
 /* DE89FC 8024028C 00021400 */  sll       $v0, $v0, 0x10
 /* DE8A00 80240290 00021403 */  sra       $v0, $v0, 0x10
 /* DE8A04 80240294 0043102A */  slt       $v0, $v0, $v1
-/* DE8A08 80240298 14400058 */  bnez      $v0, .L802403FC
+/* DE8A08 80240298 14400058 */  bnez      $v0, L802403FC_DE8B6C
 /* DE8A0C 8024029C 24020001 */   addiu    $v0, $zero, 1
 /* DE8A10 802402A0 A6220044 */  sh        $v0, 0x44($s1)
-/* DE8A14 802402A4 080900FF */  j         .L802403FC
+/* DE8A14 802402A4 080900FF */  j         L802403FC_DE8B6C
 /* DE8A18 802402A8 A6200046 */   sh       $zero, 0x46($s1)
 glabel L802402AC_DE8A1C
 /* DE8A1C 802402AC 96220046 */  lhu       $v0, 0x46($s1)
@@ -74,7 +74,7 @@ glabel L802402AC_DE8A1C
 /* DE8A28 802402B8 00021400 */  sll       $v0, $v0, 0x10
 /* DE8A2C 802402BC 00021403 */  sra       $v0, $v0, 0x10
 /* DE8A30 802402C0 2842003C */  slti      $v0, $v0, 0x3c
-/* DE8A34 802402C4 1440004D */  bnez      $v0, .L802403FC
+/* DE8A34 802402C4 1440004D */  bnez      $v0, L802403FC_DE8B6C
 /* DE8A38 802402C8 24020002 */   addiu    $v0, $zero, 2
 /* DE8A3C 802402CC 8E230050 */  lw        $v1, 0x50($s1)
 /* DE8A40 802402D0 A6220044 */  sh        $v0, 0x44($s1)
@@ -84,7 +84,7 @@ glabel L802402AC_DE8A1C
 /* DE8A50 802402E0 AC620070 */  sw        $v0, 0x70($v1)
 /* DE8A54 802402E4 8E220050 */  lw        $v0, 0x50($s1)
 /* DE8A58 802402E8 8C42000C */  lw        $v0, 0xc($v0)
-/* DE8A5C 802402EC 080900FF */  j         .L802403FC
+/* DE8A5C 802402EC 080900FF */  j         L802403FC_DE8B6C
 /* DE8A60 802402F0 AC400074 */   sw       $zero, 0x74($v0)
 glabel L802402F4_DE8A64
 /* DE8A64 802402F4 96220046 */  lhu       $v0, 0x46($s1)
@@ -93,7 +93,7 @@ glabel L802402F4_DE8A64
 /* DE8A70 80240300 00021400 */  sll       $v0, $v0, 0x10
 /* DE8A74 80240304 00021403 */  sra       $v0, $v0, 0x10
 /* DE8A78 80240308 2842003C */  slti      $v0, $v0, 0x3c
-/* DE8A7C 8024030C 1440003B */  bnez      $v0, .L802403FC
+/* DE8A7C 8024030C 1440003B */  bnez      $v0, L802403FC_DE8B6C
 /* DE8A80 80240310 00000000 */   nop
 /* DE8A84 80240314 3C013F80 */  lui       $at, 0x3f80
 /* DE8A88 80240318 44810000 */  mtc1      $at, $f0
@@ -125,7 +125,7 @@ glabel L802402F4_DE8A64
 /* DE8AF0 80240380 A6200046 */  sh        $zero, 0x46($s1)
 /* DE8AF4 80240384 AE20002C */  sw        $zero, 0x2c($s1)
 /* DE8AF8 80240388 A6220048 */  sh        $v0, 0x48($s1)
-/* DE8AFC 8024038C 080900FF */  j         .L802403FC
+/* DE8AFC 8024038C 080900FF */  j         L802403FC_DE8B6C
 /* DE8B00 80240390 E6200030 */   swc1     $f0, 0x30($s1)
 glabel L80240394_DE8B04
 /* DE8B04 80240394 0000202D */  daddu     $a0, $zero, $zero
@@ -142,7 +142,7 @@ glabel L80240394_DE8B04
 /* DE8B30 802403C0 00021400 */  sll       $v0, $v0, 0x10
 /* DE8B34 802403C4 00021403 */  sra       $v0, $v0, 0x10
 /* DE8B38 802403C8 28420078 */  slti      $v0, $v0, 0x78
-/* DE8B3C 802403CC 1440000B */  bnez      $v0, .L802403FC
+/* DE8B3C 802403CC 1440000B */  bnez      $v0, L802403FC_DE8B6C
 /* DE8B40 802403D0 24030001 */   addiu    $v1, $zero, 1
 /* DE8B44 802403D4 C620002C */  lwc1      $f0, 0x2c($s1)
 /* DE8B48 802403D8 24020002 */  addiu     $v0, $zero, 2
@@ -154,7 +154,6 @@ glabel L80240394_DE8B04
 /* DE8B60 802403F0 A6220044 */  sh        $v0, 0x44($s1)
 /* DE8B64 802403F4 A6200046 */  sh        $zero, 0x46($s1)
 /* DE8B68 802403F8 E6200034 */  swc1      $f0, 0x34($s1)
-.L802403FC:
 glabel L802403FC_DE8B6C
 /* DE8B6C 802403FC 8623004A */  lh        $v1, 0x4a($s1)
 /* DE8B70 80240400 24020001 */  addiu     $v0, $zero, 1

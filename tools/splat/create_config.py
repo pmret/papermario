@@ -18,7 +18,10 @@ def main(rom_path):
 basename: {2}
 options:
   find_file_boundaries: True
-  compiler: "IDO"
+  compiler: IDO
+  platform: n64
+  out_dir: .
+  target_path: baserom.z64
 """.format(rom.name.title(), rom.get_country_name(), basename)
 
     with open(rom_path, "rb") as f:
@@ -31,9 +34,6 @@ options:
   - name: header
     type: header
     start: 0x0
-    vram: 0
-    files:
-      - [0x0, header, header]
   - name: boot
     type: bin
     start: 0x40
@@ -41,7 +41,7 @@ options:
     type: code
     start: 0x1000
     vram: 0x{:X}
-    files:
+    subsections:
       - [0x1000, asm]
   - type: bin
     start: 0x{:X}

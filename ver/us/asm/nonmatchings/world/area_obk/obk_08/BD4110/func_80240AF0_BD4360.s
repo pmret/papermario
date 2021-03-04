@@ -14,7 +14,7 @@ glabel func_80240AF0_BD4360
 /* BD4384 80240B14 8E230074 */  lw        $v1, 0x74($s1)
 /* BD4388 80240B18 8E120020 */  lw        $s2, 0x20($s0)
 /* BD438C 80240B1C 2C62000E */  sltiu     $v0, $v1, 0xe
-/* BD4390 80240B20 10400058 */  beqz      $v0, .L80240C84
+/* BD4390 80240B20 10400058 */  beqz      $v0, L80240C84_BD44F4
 /* BD4394 80240B24 00031080 */   sll      $v0, $v1, 2
 /* BD4398 80240B28 3C018024 */  lui       $at, %hi(jtbl_80246EC8_BDA738)
 /* BD439C 80240B2C 00220821 */  addu      $at, $at, $v0
@@ -28,7 +28,7 @@ glabel L80240B3C_BD43AC
 /* BD43B8 80240B48 34A58888 */   ori      $a1, $a1, 0x8888
 /* BD43BC 80240B4C 0040182D */  daddu     $v1, $v0, $zero
 /* BD43C0 80240B50 24020001 */  addiu     $v0, $zero, 1
-/* BD43C4 80240B54 1462004B */  bne       $v1, $v0, .L80240C84
+/* BD43C4 80240B54 1462004B */  bne       $v1, $v0, L80240C84_BD44F4
 /* BD43C8 80240B58 2402000A */   addiu    $v0, $zero, 0xa
 /* BD43CC 80240B5C 08090320 */  j         .L80240C80
 /* BD43D0 80240B60 AE430000 */   sw       $v1, ($s2)
@@ -43,9 +43,9 @@ glabel L80240B64_BD43D4
 /* BD43F0 80240B80 2442FFFF */  addiu     $v0, $v0, -1
 /* BD43F4 80240B84 A602008E */  sh        $v0, 0x8e($s0)
 /* BD43F8 80240B88 00021400 */  sll       $v0, $v0, 0x10
-/* BD43FC 80240B8C 1440003D */  bnez      $v0, .L80240C84
+/* BD43FC 80240B8C 1440003D */  bnez      $v0, L80240C84_BD44F4
 /* BD4400 80240B90 2402000B */   addiu    $v0, $zero, 0xb
-/* BD4404 80240B94 08090321 */  j         .L80240C84
+/* BD4404 80240B94 08090321 */  j         L80240C84_BD44F4
 /* BD4408 80240B98 AE220074 */   sw       $v0, 0x74($s1)
 glabel L80240B9C_BD440C
 /* BD440C 80240B9C C602003C */  lwc1      $f2, 0x3c($s0)
@@ -74,7 +74,7 @@ glabel L80240B9C_BD440C
 /* BD4464 80240BF4 E600000C */  swc1      $f0, 0xc($s0)
 /* BD4468 80240BF8 4602203E */  c.le.s    $f4, $f2
 /* BD446C 80240BFC 00000000 */  nop
-/* BD4470 80240C00 45000020 */  bc1f      .L80240C84
+/* BD4470 80240C00 45000020 */  bc1f      L80240C84_BD44F4
 /* BD4474 80240C04 E604003C */   swc1     $f4, 0x3c($s0)
 /* BD4478 80240C08 0220202D */  daddu     $a0, $s1, $zero
 /* BD447C 80240C0C 3C05FD05 */  lui       $a1, 0xfd05
@@ -100,18 +100,17 @@ glabel L80240C2C_BD449C
 /* BD44C4 80240C54 44816000 */  mtc1      $at, $f12
 /* BD44C8 80240C58 0C00A6C9 */  jal       clamp_angle
 /* BD44CC 80240C5C 460C0300 */   add.s    $f12, $f0, $f12
-/* BD44D0 80240C60 08090321 */  j         .L80240C84
+/* BD44D0 80240C60 08090321 */  j         L80240C84_BD44F4
 /* BD44D4 80240C64 E600000C */   swc1     $f0, 0xc($s0)
 glabel L80240C68_BD44D8
 /* BD44D8 80240C68 0220202D */  daddu     $a0, $s1, $zero
 /* BD44DC 80240C6C 3C05FD05 */  lui       $a1, 0xfd05
 /* BD44E0 80240C70 0C0B1EAF */  jal       get_variable
 /* BD44E4 80240C74 34A50F82 */   ori      $a1, $a1, 0xf82
-/* BD44E8 80240C78 14400002 */  bnez      $v0, .L80240C84
+/* BD44E8 80240C78 14400002 */  bnez      $v0, L80240C84_BD44F4
 /* BD44EC 80240C7C 2402000C */   addiu    $v0, $zero, 0xc
 .L80240C80:
 /* BD44F0 80240C80 AE220074 */  sw        $v0, 0x74($s1)
-.L80240C84:
 glabel L80240C84_BD44F4
 /* BD44F4 80240C84 8FBF001C */  lw        $ra, 0x1c($sp)
 /* BD44F8 80240C88 8FB20018 */  lw        $s2, 0x18($sp)

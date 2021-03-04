@@ -17,7 +17,7 @@ glabel func_8006F164
 /* 4A594 8006F194 00A17025 */  or        $t6, $a1, $at
 /* 4A598 8006F198 01C02825 */  or        $a1, $t6, $zero
 /* 4A59C 8006F19C 3C06E100 */  lui       $a2, 0xe100
-/* 4A5A0 8006F1A0 0C01834C */  jal       func_80060D30
+/* 4A5A0 8006F1A0 0C01834C */  jal       osEPiWriteIo
 /* 4A5A4 8006F1A4 00000000 */   nop
 /* 4A5A8 8006F1A8 3C01800B */  lui       $at, %hi(D_800B0C22)
 /* 4A5AC 8006F1AC A0200C22 */  sb        $zero, %lo(D_800B0C22)($at)

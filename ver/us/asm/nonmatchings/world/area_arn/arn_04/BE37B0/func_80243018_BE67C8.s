@@ -93,7 +93,7 @@ glabel func_80243018_BE67C8
 .L80243168:
 /* BE6918 80243168 8E630070 */  lw        $v1, 0x70($s3)
 /* BE691C 8024316C 2C620035 */  sltiu     $v0, $v1, 0x35
-/* BE6920 80243170 10400073 */  beqz      $v0, .L80243340
+/* BE6920 80243170 10400073 */  beqz      $v0, L80243340_BE6AF0
 /* BE6924 80243174 00031080 */   sll      $v0, $v1, 2
 /* BE6928 80243178 3C018024 */  lui       $at, %hi(jtbl_80244350_BE7B00)
 /* BE692C 8024317C 00220821 */  addu      $at, $at, $v0
@@ -170,7 +170,7 @@ glabel L80243264_BE6A14
 /* BE6A24 80243274 14400033 */  bnez      $v0, .L80243344
 /* BE6A28 80243278 0000102D */   daddu    $v0, $zero, $zero
 /* BE6A2C 8024327C 24020028 */  addiu     $v0, $zero, 0x28
-/* BE6A30 80243280 08090CD0 */  j         .L80243340
+/* BE6A30 80243280 08090CD0 */  j         L80243340_BE6AF0
 /* BE6A34 80243284 AE620070 */   sw       $v0, 0x70($s3)
 glabel L80243288_BE6A38
 /* BE6A38 80243288 0260202D */  daddu     $a0, $s3, $zero
@@ -226,7 +226,6 @@ glabel L80243330_BE6AE0
 /* BE6AE4 80243334 0280282D */  daddu     $a1, $s4, $zero
 /* BE6AE8 80243338 0C090BF5 */  jal       arn_04_UnkDurationCheck
 /* BE6AEC 8024333C 0200302D */   daddu    $a2, $s0, $zero
-.L80243340:
 glabel L80243340_BE6AF0
 /* BE6AF0 80243340 0000102D */  daddu     $v0, $zero, $zero
 .L80243344:

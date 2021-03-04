@@ -1,0 +1,6 @@
+gfxPreNMI_Callback = 0x800266E8; // type:func
+nuContRmbForceStop = 0x8005FD50; // type:func
+osEPiWriteIo = 0x80060D30; // type:func rom:0x3C130
+osEPiReadIo = 0x80060D90; // type:func rom:0x3C190
+_Printf = 0x80064A70; // type:func rom:0x3FE70
+carthandle = 0x8009A618; //

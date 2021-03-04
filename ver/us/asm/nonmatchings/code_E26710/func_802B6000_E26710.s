@@ -146,7 +146,7 @@ glabel func_802B6000_E26710
 .L802B6220:
 /* E26930 802B6220 820300B6 */  lb        $v1, 0xb6($s0)
 /* E26934 802B6224 2C62000D */  sltiu     $v0, $v1, 0xd
-/* E26938 802B6228 104000DE */  beqz      $v0, .L802B65A4
+/* E26938 802B6228 104000DE */  beqz      $v0, L802B65A4_E26CB4
 /* E2693C 802B622C 00031080 */   sll      $v0, $v1, 2
 /* E26940 802B6230 3C01802B */  lui       $at, %hi(jtbl_802B6690_E26DA0)
 /* E26944 802B6234 00220821 */  addu      $at, $at, $v0
@@ -180,7 +180,7 @@ glabel L802B6244_E26954
 /* E269B0 802B62A0 0C03805E */  jal       disable_player_input
 /* E269B4 802B62A4 A0430006 */   sb       $v1, 6($v0)
 /* E269B8 802B62A8 2402000B */  addiu     $v0, $zero, 0xb
-/* E269BC 802B62AC 080AD969 */  j         .L802B65A4
+/* E269BC 802B62AC 080AD969 */  j         L802B65A4_E26CB4
 /* E269C0 802B62B0 A20200B6 */   sb       $v0, 0xb6($s0)
 .L802B62B4:
 /* E269C4 802B62B4 44800000 */  mtc1      $zero, $f0
@@ -204,7 +204,7 @@ glabel L802B6244_E26954
 /* E26A0C 802B62FC A20300B6 */   sb       $v1, 0xb6($s0)
 .L802B6300:
 /* E26A10 802B6300 8FA20010 */  lw        $v0, 0x10($sp)
-/* E26A14 802B6304 044000A7 */  bltz      $v0, .L802B65A4
+/* E26A14 802B6304 044000A7 */  bltz      $v0, L802B65A4_E26CB4
 /* E26A18 802B6308 3C03FFFD */   lui      $v1, 0xfffd
 /* E26A1C 802B630C 3463FFF7 */  ori       $v1, $v1, 0xfff7
 /* E26A20 802B6310 8E020000 */  lw        $v0, ($s0)
@@ -212,18 +212,18 @@ glabel L802B6244_E26954
 /* E26A28 802B6318 00431024 */  and       $v0, $v0, $v1
 /* E26A2C 802B631C 0C039769 */  jal       set_action_state
 /* E26A30 802B6320 AE020000 */   sw       $v0, ($s0)
-/* E26A34 802B6324 080AD969 */  j         .L802B65A4
+/* E26A34 802B6324 080AD969 */  j         L802B65A4_E26CB4
 /* E26A38 802B6328 00000000 */   nop
 glabel L802B632C_E26A3C
 /* E26A3C 802B632C 96020008 */  lhu       $v0, 8($s0)
 /* E26A40 802B6330 2442FFFF */  addiu     $v0, $v0, -1
 /* E26A44 802B6334 A6020008 */  sh        $v0, 8($s0)
 /* E26A48 802B6338 00021400 */  sll       $v0, $v0, 0x10
-/* E26A4C 802B633C 1C400099 */  bgtz      $v0, .L802B65A4
+/* E26A4C 802B633C 1C400099 */  bgtz      $v0, L802B65A4_E26CB4
 /* E26A50 802B6340 00000000 */   nop
 /* E26A54 802B6344 920200B6 */  lbu       $v0, 0xb6($s0)
 /* E26A58 802B6348 24420001 */  addiu     $v0, $v0, 1
-/* E26A5C 802B634C 080AD969 */  j         .L802B65A4
+/* E26A5C 802B634C 080AD969 */  j         L802B65A4_E26CB4
 /* E26A60 802B6350 A20200B6 */   sb       $v0, 0xb6($s0)
 glabel L802B6354_E26A64
 /* E26A64 802B6354 0C038D12 */  jal       integrate_gravity
@@ -245,7 +245,7 @@ glabel L802B6354_E26A64
 /* E26AA4 802B6394 E6020070 */  swc1      $f2, 0x70($s0)
 .L802B6398:
 /* E26AA8 802B6398 8FA20010 */  lw        $v0, 0x10($sp)
-/* E26AAC 802B639C 04400081 */  bltz      $v0, .L802B65A4
+/* E26AAC 802B639C 04400081 */  bltz      $v0, L802B65A4_E26CB4
 /* E26AB0 802B63A0 00000000 */   nop
 /* E26AB4 802B63A4 96240002 */  lhu       $a0, 2($s1)
 /* E26AB8 802B63A8 30824000 */  andi      $v0, $a0, 0x4000
@@ -354,14 +354,14 @@ glabel L802B6354_E26A64
 /* E26C44 802B6534 A0820000 */  sb        $v0, ($a0)
 /* E26C48 802B6538 34630400 */  ori       $v1, $v1, 0x400
 /* E26C4C 802B653C E4800008 */  swc1      $f0, 8($a0)
-/* E26C50 802B6540 080AD969 */  j         .L802B65A4
+/* E26C50 802B6540 080AD969 */  j         L802B65A4_E26CB4
 /* E26C54 802B6544 AE030000 */   sw       $v1, ($s0)
 glabel L802B6548_E26C58
 /* E26C58 802B6548 96020008 */  lhu       $v0, 8($s0)
 /* E26C5C 802B654C 2442FFFF */  addiu     $v0, $v0, -1
 /* E26C60 802B6550 A6020008 */  sh        $v0, 8($s0)
 /* E26C64 802B6554 00021400 */  sll       $v0, $v0, 0x10
-/* E26C68 802B6558 14400012 */  bnez      $v0, .L802B65A4
+/* E26C68 802B6558 14400012 */  bnez      $v0, L802B65A4_E26CB4
 /* E26C6C 802B655C 3C02FFFD */   lui      $v0, 0xfffd
 /* E26C70 802B6560 3442FFF7 */  ori       $v0, $v0, 0xfff7
 /* E26C74 802B6564 2404000A */  addiu     $a0, $zero, 0xa
@@ -372,7 +372,7 @@ glabel L802B6548_E26C58
 /* E26C88 802B6578 A20300B6 */  sb        $v1, 0xb6($s0)
 /* E26C8C 802B657C 0C039769 */  jal       set_action_state
 /* E26C90 802B6580 AE050000 */   sw       $a1, ($s0)
-/* E26C94 802B6584 080AD969 */  j         .L802B65A4
+/* E26C94 802B6584 080AD969 */  j         L802B65A4_E26CB4
 /* E26C98 802B6588 00000000 */   nop
 glabel L802B658C_E26C9C
 /* E26C9C 802B658C 0C039769 */  jal       set_action_state
@@ -381,7 +381,6 @@ glabel L802B658C_E26C9C
 /* E26CA8 802B6598 24420001 */  addiu     $v0, $v0, 1
 /* E26CAC 802B659C 0C038069 */  jal       enable_player_input
 /* E26CB0 802B65A0 A20200B6 */   sb       $v0, 0xb6($s0)
-.L802B65A4:
 glabel L802B65A4_E26CB4
 /* E26CB4 802B65A4 C6020070 */  lwc1      $f2, 0x70($s0)
 /* E26CB8 802B65A8 44800000 */  mtc1      $zero, $f0

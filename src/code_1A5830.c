@@ -402,7 +402,6 @@ ApiStatus func_8027CC10(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "code_1A5830", EnemyDamageTarget);
 
-//INCLUDE_ASM(s32, "code_1A5830", EnemyFollowupAfflictTarget);
 ApiStatus EnemyFollowupAfflictTarget(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     BattleStatus* anotherBattleStatus = &gBattleStatus;

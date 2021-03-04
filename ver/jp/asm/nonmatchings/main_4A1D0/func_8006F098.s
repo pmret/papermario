@@ -13,14 +13,14 @@ glabel func_8006F098
 /* 4A4B8 8006F0B8 00A17025 */  or        $t6, $a1, $at
 /* 4A4BC 8006F0BC 01C02825 */  or        $a1, $t6, $zero
 /* 4A4C0 8006F0C0 3C06D200 */  lui       $a2, 0xd200
-/* 4A4C4 8006F0C4 0C01834C */  jal       func_80060D30
+/* 4A4C4 8006F0C4 0C01834C */  jal       osEPiWriteIo
 /* 4A4C8 8006F0C8 00000000 */   nop
 /* 4A4CC 8006F0CC 3C04800B */  lui       $a0, %hi(D_800B0C50)
 /* 4A4D0 8006F0D0 24840C50 */  addiu     $a0, $a0, %lo(D_800B0C50)
 /* 4A4D4 8006F0D4 3C05800B */  lui       $a1, %hi(D_800B0C5C)
 /* 4A4D8 8006F0D8 8CA50C5C */  lw        $a1, %lo(D_800B0C5C)($a1)
 /* 4A4DC 8006F0DC 27A6001C */  addiu     $a2, $sp, 0x1c
-/* 4A4E0 8006F0E0 0C018364 */  jal       func_80060D90
+/* 4A4E0 8006F0E0 0C018364 */  jal       osEPiReadIo
 /* 4A4E4 8006F0E4 00000000 */   nop
 /* 4A4E8 8006F0E8 3C04800B */  lui       $a0, %hi(D_800B0C50)
 /* 4A4EC 8006F0EC 24840C50 */  addiu     $a0, $a0, %lo(D_800B0C50)
@@ -30,14 +30,14 @@ glabel func_8006F098
 /* 4A4FC 8006F0FC 00A17825 */  or        $t7, $a1, $at
 /* 4A500 8006F100 01E02825 */  or        $a1, $t7, $zero
 /* 4A504 8006F104 3C06D200 */  lui       $a2, 0xd200
-/* 4A508 8006F108 0C01834C */  jal       func_80060D30
+/* 4A508 8006F108 0C01834C */  jal       osEPiWriteIo
 /* 4A50C 8006F10C 00000000 */   nop
 /* 4A510 8006F110 3C04800B */  lui       $a0, %hi(D_800B0C50)
 /* 4A514 8006F114 24840C50 */  addiu     $a0, $a0, %lo(D_800B0C50)
 /* 4A518 8006F118 3C05800B */  lui       $a1, %hi(D_800B0C5C)
 /* 4A51C 8006F11C 8CA50C5C */  lw        $a1, %lo(D_800B0C5C)($a1)
 /* 4A520 8006F120 27A6001C */  addiu     $a2, $sp, 0x1c
-/* 4A524 8006F124 0C018364 */  jal       func_80060D90
+/* 4A524 8006F124 0C018364 */  jal       osEPiReadIo
 /* 4A528 8006F128 00000000 */   nop
 /* 4A52C 8006F12C 8FB8001C */  lw        $t8, 0x1c($sp)
 /* 4A530 8006F130 00000000 */  nop

@@ -67,7 +67,7 @@ glabel func_802421CC_A04A0C
 .L802422C0:
 /* A04B00 802422C0 8E630070 */  lw        $v1, 0x70($s3)
 /* A04B04 802422C4 2C620010 */  sltiu     $v0, $v1, 0x10
-/* A04B08 802422C8 1040004A */  beqz      $v0, .L802423F4
+/* A04B08 802422C8 1040004A */  beqz      $v0, L802423F4_A04C34
 /* A04B0C 802422CC 00031080 */   sll      $v0, $v1, 2
 /* A04B10 802422D0 3C018024 */  lui       $at, %hi(jtbl_80244678_A06EB8)
 /* A04B14 802422D4 00220821 */  addu      $at, $at, $v0
@@ -152,7 +152,6 @@ glabel L802423E4_A04C24
 /* A04C28 802423E8 0200282D */  daddu     $a1, $s0, $zero
 /* A04C2C 802423EC 0C090862 */  jal       nok_14_UnkDurationCheck
 /* A04C30 802423F0 0280302D */   daddu    $a2, $s4, $zero
-.L802423F4:
 glabel L802423F4_A04C34
 /* A04C34 802423F4 0000102D */  daddu     $v0, $zero, $zero
 .L802423F8:

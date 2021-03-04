@@ -103,7 +103,7 @@ glabel func_8013B1B0
 /* D1A28 8013B328 92430002 */  lbu       $v1, 2($s2)
 /* D1A2C 8013B32C AE420038 */  sw        $v0, 0x38($s2)
 /* D1A30 8013B330 2C62000C */  sltiu     $v0, $v1, 0xc
-/* D1A34 8013B334 1040000B */  beqz      $v0, .L8013B364
+/* D1A34 8013B334 1040000B */  beqz      $v0, L8013B364_D1A64
 /* D1A38 8013B338 00031080 */   sll      $v0, $v1, 2
 /* D1A3C 8013B33C 3C018015 */  lui       $at, %hi(jtbl_80151058)
 /* D1A40 8013B340 00220821 */  addu      $at, $at, $v0
@@ -111,14 +111,13 @@ glabel func_8013B1B0
 /* D1A48 8013B348 00400008 */  jr        $v0
 /* D1A4C 8013B34C 00000000 */   nop
 glabel L8013B350_D1A50
-/* D1A50 8013B350 0804ECD9 */  j         .L8013B364
+/* D1A50 8013B350 0804ECD9 */  j         L8013B364_D1A64
 /* D1A54 8013B354 240A0002 */   addiu    $t2, $zero, 2
 glabel L8013B358_D1A58
-/* D1A58 8013B358 0804ECD9 */  j         .L8013B364
+/* D1A58 8013B358 0804ECD9 */  j         L8013B364_D1A64
 /* D1A5C 8013B35C 240A0003 */   addiu    $t2, $zero, 3
 glabel L8013B360_D1A60
 /* D1A60 8013B360 240A000A */  addiu     $t2, $zero, 0xa
-.L8013B364:
 glabel L8013B364_D1A64
 /* D1A64 8013B364 3C070040 */  lui       $a3, 0x40
 /* D1A68 8013B368 C6400038 */  lwc1      $f0, 0x38($s2)
@@ -368,7 +367,7 @@ glabel L8013B68C_D1D8C
 glabel L8013B6F8_D1DF8
 /* D1DF8 8013B6F8 8E420014 */  lw        $v0, 0x14($s2)
 /* D1DFC 8013B6FC 3042A000 */  andi      $v0, $v0, 0xa000
-/* D1E00 8013B700 104000FA */  beqz      $v0, .L8013BAEC
+/* D1E00 8013B700 104000FA */  beqz      $v0, L8013BAEC_D21EC
 /* D1E04 8013B704 3C02FC12 */   lui      $v0, 0xfc12
 /* D1E08 8013B708 34427E24 */  ori       $v0, $v0, 0x7e24
 /* D1E0C 8013B70C 3C06D9FF */  lui       $a2, 0xd9ff
@@ -627,7 +626,6 @@ glabel L8013BA84_D2184
 /* D21E0 8013BAE0 00431025 */  or        $v0, $v0, $v1
 /* D21E4 8013BAE4 0804EEDA */  j         .L8013BB68
 /* D21E8 8013BAE8 ACA20004 */   sw       $v0, 4($a1)
-.L8013BAEC:
 glabel L8013BAEC_D21EC
 /* D21EC 8013BAEC 3C06FCFF */  lui       $a2, 0xfcff
 /* D21F0 8013BAF0 34C6FFFF */  ori       $a2, $a2, 0xffff

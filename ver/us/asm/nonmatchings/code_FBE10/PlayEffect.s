@@ -172,7 +172,7 @@ glabel PlayEffect
 /* FCEE8 802D8538 8E530000 */  lw        $s3, ($s2)
 /* FCEEC 802D853C 8E510004 */  lw        $s1, 4($s2)
 /* FCEF0 802D8540 2C620087 */  sltiu     $v0, $v1, 0x87
-/* FCEF4 802D8544 10400450 */  beqz      $v0, .L802D9688
+/* FCEF4 802D8544 10400450 */  beqz      $v0, L802D9688_FE038
 /* FCEF8 802D8548 00031080 */   sll      $v0, $v1, 2
 /* FCEFC 802D854C 3C01802E */  lui       $at, %hi(jtbl_802DA258)
 /* FCF00 802D8550 00220821 */  addu      $at, $at, $v0
@@ -1406,9 +1406,8 @@ glabel L802D9668_FE018
 /* FE02C 802D967C AFB40014 */   sw       $s4, 0x14($sp)
 /* FE030 802D9680 080B65A4 */  j         .L802D9690
 /* FE034 802D9684 0040A82D */   daddu    $s5, $v0, $zero
-.L802D9688:
 glabel L802D9688_FE038
-/* FE038 802D9688 080B65A2 */  j         .L802D9688
+/* FE038 802D9688 080B65A2 */  j         L802D9688_FE038
 /* FE03C 802D968C 00000000 */   nop
 .L802D9690:
 /* FE040 802D9690 12A00005 */  beqz      $s5, .L802D96A8

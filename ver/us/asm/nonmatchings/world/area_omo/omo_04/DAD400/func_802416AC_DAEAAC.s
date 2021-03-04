@@ -64,7 +64,7 @@ glabel func_802416AC_DAEAAC
 .L80241794:
 /* DAEB94 80241794 8E830070 */  lw        $v1, 0x70($s4)
 /* DAEB98 80241798 2C62000F */  sltiu     $v0, $v1, 0xf
-/* DAEB9C 8024179C 10400034 */  beqz      $v0, .L80241870
+/* DAEB9C 8024179C 10400034 */  beqz      $v0, L80241870_DAEC70
 /* DAEBA0 802417A0 00031080 */   sll      $v0, $v1, 2
 /* DAEBA4 802417A4 3C018024 */  lui       $at, %hi(jtbl_80244CC8_DB20C8)
 /* DAEBA8 802417A8 00220821 */  addu      $at, $at, $v0
@@ -126,7 +126,6 @@ glabel L80241860_DAEC60
 /* DAEC64 80241864 0200282D */  daddu     $a1, $s0, $zero
 /* DAEC68 80241868 0C09047E */  jal       func_802411F8_DAE5F8
 /* DAEC6C 8024186C 0260302D */   daddu    $a2, $s3, $zero
-.L80241870:
 glabel L80241870_DAEC70
 /* DAEC70 80241870 0000102D */  daddu     $v0, $zero, $zero
 .L80241874:

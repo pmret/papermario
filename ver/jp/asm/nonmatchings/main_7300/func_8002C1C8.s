@@ -17,7 +17,7 @@ glabel func_8002C1C8
 /* 75F8 8002C1F8 AFB40120 */  sw        $s4, 0x120($sp)
 /* 75FC 8002C1FC AFB3011C */  sw        $s3, 0x11c($sp)
 /* 7600 8002C200 AFB10114 */  sw        $s1, 0x114($sp)
-/* 7604 8002C204 0C01929C */  jal       func_80064A70
+/* 7604 8002C204 0C01929C */  jal       _Printf
 /* 7608 8002C208 AFB00110 */   sw       $s0, 0x110($sp)
 /* 760C 8002C20C 0040802D */  daddu     $s0, $v0, $zero
 /* 7610 8002C210 1A000010 */  blez      $s0, .L8002C254

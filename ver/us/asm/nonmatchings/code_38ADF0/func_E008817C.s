@@ -24,7 +24,7 @@ glabel func_E008817C
 /* 38AFB8 E00881C8 F7BE0080 */  sdc1      $f30, 0x80($sp)
 /* 38AFBC E00881CC F7BC0078 */  sdc1      $f28, 0x78($sp)
 /* 38AFC0 E00881D0 F7BA0070 */  sdc1      $f26, 0x70($sp)
-/* 38AFC4 E00881D4 1040000D */  beqz      $v0, .LE008820C
+/* 38AFC4 E00881D4 1040000D */  beqz      $v0, LE008820C_38AFFC
 /* 38AFC8 E00881D8 27A40010 */   addiu    $a0, $sp, 0x10
 /* 38AFCC E00881DC 00151080 */  sll       $v0, $s5, 2
 /* 38AFD0 E00881E0 3C01E009 */  lui       $at, %hi(jtbl_E0088D30)
@@ -41,12 +41,11 @@ glabel LE00881FC_38AFEC
 glabel LE0088204_38AFF4
 /* 38AFF4 E0088204 08022084 */  j         .LE0088210
 /* 38AFF8 E0088208 24130018 */   addiu    $s3, $zero, 0x18
-.LE008820C:
 glabel LE008820C_38AFFC
 /* 38AFFC E008820C 24130030 */  addiu     $s3, $zero, 0x30
 .LE0088210:
 /* 38B000 E0088210 2EA20007 */  sltiu     $v0, $s5, 7
-/* 38B004 E0088214 1040000E */  beqz      $v0, .LE0088250
+/* 38B004 E0088214 1040000E */  beqz      $v0, LE0088250_38B040
 /* 38B008 E0088218 00151080 */   sll      $v0, $s5, 2
 /* 38B00C E008821C 3C01E009 */  lui       $at, %hi(jtbl_E0088D50)
 /* 38B010 E0088220 00220821 */  addu      $at, $at, $v0
@@ -63,7 +62,6 @@ glabel LE0088240_38B030
 /* 38B034 E0088244 44818000 */  mtc1      $at, $f16
 /* 38B038 E0088248 08022098 */  j         .LE0088260
 /* 38B03C E008824C E7B00028 */   swc1     $f16, 0x28($sp)
-.LE0088250:
 glabel LE0088250_38B040
 /* 38B040 E0088250 3C0140A0 */  lui       $at, 0x40a0
 /* 38B044 E0088254 44818000 */  mtc1      $at, $f16
