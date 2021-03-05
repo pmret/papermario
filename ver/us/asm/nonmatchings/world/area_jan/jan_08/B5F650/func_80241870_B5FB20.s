@@ -97,8 +97,8 @@ glabel func_80241870_B5FB20
 /* B5FC84 802419D4 45030001 */  bc1tl     .L802419DC
 /* B5FC88 802419D8 0000882D */   daddu    $s1, $zero, $zero
 .L802419DC:
-/* B5FC8C 802419DC 3C038011 */  lui       $v1, %hi(D_8010EBB3)
-/* B5FC90 802419E0 8063EBB3 */  lb        $v1, %lo(D_8010EBB3)($v1)
+/* B5FC8C 802419DC 3C038011 */  lui       $v1, %hi(D_8010EBB0+0x3)
+/* B5FC90 802419E0 8063EBB3 */  lb        $v1, %lo(D_8010EBB0+0x3)($v1)
 /* B5FC94 802419E4 24020009 */  addiu     $v0, $zero, 9
 /* B5FC98 802419E8 50620001 */  beql      $v1, $v0, .L802419F0
 /* B5FC9C 802419EC 0000882D */   daddu    $s1, $zero, $zero

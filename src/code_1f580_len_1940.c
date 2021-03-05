@@ -477,7 +477,7 @@ ApiStatus GetSelfAnimationFromTable(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus func_80045798(ScriptInstance* script, s32 isInitialCall) {
-    D_8010EF08 = get_variable(script, *script->ptrReadPos);
+    D_8010EBB0.unk_358 = get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
