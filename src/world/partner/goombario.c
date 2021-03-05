@@ -59,7 +59,7 @@ ApiStatus func_802BDB84(ScriptInstance* script, s32 isInitialCall) {
     return func_800EE9B8(unk) != 0;
 }
 
-// Something is up with D_8010EBB0 I think. It might be a struct or something
+// some stack shtuff
 #ifdef NON_MATCHING
 void world_goombario_pre_battle(Npc* partner) {
     if (D_8010EBB0.unk_00 != 0) {

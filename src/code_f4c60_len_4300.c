@@ -68,7 +68,7 @@ ApiStatus CancelMessage(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus CancelMessageAndBlock(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus CancelMessageAndBlock() {
     cancel_message(gCurrentPrintContext);
     return ApiStatus_BLOCK;
 }

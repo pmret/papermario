@@ -32,6 +32,7 @@ extern ScriptInstance* D_8010CFD4;
 extern s32 D_8010CFD8;
 extern ScriptID D_8010CFDC;
 extern s32 D_8010CFE0;
+extern s32 D_8010CFE4;
 extern s32 D_8010CFE8;
 
 extern WorldPartner wPartners[12];

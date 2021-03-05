@@ -55,7 +55,7 @@ s32 D_800F7FF4 = 4;
 s32 D_800F7FF8 = 5;
 s32 D_800F7FFC = 7;
 s32 D_800F8000[] = { 8, 0, 0, 0 };
-s32 D_800F8010[] = { 0x003251D0, 0x00325AD0, (s32)&D_802C05CC, 0x00000000 };
+s32 D_800F8010[] = { &code_code_3251D0_ROM_START, &code_code_3251D0_ROM_END, (s32)&D_802C05CC, 0x00000000 };
 s32 D_800F8020 = 0;
 s32 D_800F8024 = 0;
 s32 D_800F8028 = 0;
@@ -245,13 +245,30 @@ WorldPartner wPartners[12] = {
     },
 };
 
-s32 D_800F833C = 0;
-s32 D_800F8340 = 0;
-s32 D_800F8344 = 0;
+f32 D_800F833C = 0;
+f32 D_800F8340 = 0;
+f32 D_800F8344 = 0;
 
 NpcId create_basic_npc(NpcBlueprint* blueprint);
 
+extern s32 D_802C0000;
+
+// Some weird ordering issues, probably a macro at play
+#ifdef NON_MATCHING
+s32 use_consumable(s32 arg0) {
+    ScriptInstance* script;
+    s32 temp_s1;
+
+    temp_s1 = gPlayerData.invItems[arg0];
+    D_8010CD20 = arg0;
+    dma_copy(D_800F8010[0], D_800F8010[1], &D_802C0000);
+    script = start_script(D_800F8010[2], 1, 0);
+    script->varTable[10] = temp_s1;
+    return script->id;
+}
+#else
 INCLUDE_ASM(s32, "world/partners", use_consumable);
+#endif
 
 void remove_consumable(void) {
     gPlayerData.invItems[D_8010CD20] = 0;
@@ -324,13 +341,82 @@ void func_800EA6A8(void) {
 
 INCLUDE_ASM(s32, "world/partners", _use_partner_ability);
 
-INCLUDE_ASM(s32, "world/partners", func_800EB168, s32 arg0);
+void func_800EB168(s32 arg0) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
 
-INCLUDE_ASM(s32, "world/partners", func_800EB200);
+    if (D_8010CFD8 != arg0) {
+        D_8010CFE0 = 1;
+        D_8010CFE4 = arg0;
 
-INCLUDE_ASM(s32, "world/partners", func_800EB2A4);
+        if (D_8010CFD8 != 0 && arg0 != 0) {
+            D_8010CFE8 = 3;
+        } else if (arg0 == 0) {
+            D_8010CFE8 = 4;
+        } else {
+            D_8010CFE8 = 6;
+            D_800F833C = playerStatus->position.x;
+            D_800F8340 = playerStatus->position.y;
+            D_800F8344 = playerStatus->position.z;
+        }
+    }
+}
 
-INCLUDE_ASM(s32, "world/partners", partner_use_ability);
+void func_800EB200(s32 arg0) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    Temp8010EBB0* temp8010EBB0 = &D_8010EBB0;
+
+    if (D_8010CFD8 != arg0) {
+        D_8010CFE0 = 1;
+        D_8010CFE4 = arg0;
+        temp8010EBB0->unk_00 = 0;
+        temp8010EBB0->unk_01 = 0;
+
+        if (D_8010CFD8 != 0 && arg0 != 0) {
+            D_8010CFE8 = 2;
+        } else if (arg0 == 0) {
+            D_8010CFE8 = 4;
+        } else {
+            D_8010CFE8 = 6;
+            D_800F833C = playerStatus->position.x;
+            D_800F8340 = playerStatus->position.y;
+            D_800F8344 = playerStatus->position.z;
+        }
+    }
+}
+
+void func_800EB2A4(s32 arg0) {
+    if (D_8010CFD8 != arg0) {
+        D_8010CFE0 = 1;
+        D_8010CFE4 = arg0;
+
+        if (D_8010CFD8 != 0 && arg0 != 0) {
+            D_8010CFE8 = 3;
+        } else if (arg0 == 0) {
+            D_8010CFE8 = 5;
+        } else {
+            D_8010CFE8 = 7;
+        }
+    }
+}
+
+s32 partner_use_ability(void) {
+    Temp8010EBB0* temp8010EBB0 = &D_8010EBB0;
+
+    if (!is_starting_conversation() &&
+        wPartner != NULL &&
+        (wPartner->canUseAbility == NULL || wPartner->canUseAbility(wPartnerNpc)))
+    {
+        if (((*gGameStatusPtr)->unk_81 != 0) && (temp8010EBB0->unk_08 & 0x4000)) {
+            play_sound(0x21D);
+        } else if (D_8010CFD8 != 0) {
+            D_8010CFE0 = 1;
+            D_8010CFE8 = 8;
+            _use_partner_ability();
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
 
 // needless v0 to v1 thing. functionally equivalent
 #ifdef NON_MATCHING
@@ -352,6 +438,39 @@ s32 partner_can_use_ability(void) {
 }
 
 INCLUDE_ASM(s32, "world/partners", partner_reset_data);
+// void partner_reset_data(void) {
+//     PlayerStatus* playerStatus = &gPlayerStatus;
+//     s32* temp8010CFD8 = &D_8010CFD8;
+//     s32* temp8010CFE8 = &D_8010CFE8;
+//     s32 temp_s0;
+
+//     temp_s0 = gPlayerData.currentPartner;
+//     mem_clear(&D_8010EBB0, sizeof(D_8010EBB0));
+//     get_dynamic_entity(bind_dynamic_entity_7(_use_partner_ability, NULL));
+//     D_8010CFE0 = 1;
+//     *temp8010CFE8 = 9;
+//     *temp8010CFD8 = temp_s0;
+
+//     if ((*gGameStatusPtr)->unk_7D != 0) {
+//         D_8010EBB0.unk_00 = 1;
+//         (*gGameStatusPtr)->unk_7D = 0;
+//     }
+
+//     wPartner = NULL;
+//     D_800F833C = playerStatus->position.x;
+//     D_800F8340 = playerStatus->position.y;
+//     D_800F8344 = playerStatus->position.z;
+
+//     if (*temp8010CFD8 == 0) {
+//         *temp8010CFE8 = 1;
+//     } else {
+//         load_partner_npc();
+//         wPartnerNpc->scale.x = 1.0f;
+//         wPartnerNpc->scale.y = 1.0f;
+//         wPartnerNpc->scale.z = 1.0f;
+//         _use_partner_ability();
+//     }
+// }
 
 //INCLUDE_ASM(s32, "world/partners", partner_initialize_data);
 void partner_initialize_data(void) {
