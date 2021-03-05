@@ -80,7 +80,7 @@ void func_802E1614(Entity* entity) {
 void func_802E1660(Entity* entity) {
     struct802E1400* temp = entity->dataBuf;
     PlayerStatus* playerStatus = &gPlayerStatus;
-    s8* temp2 = D_8010EBB0;
+    Temp8010EBB0* temp2 = &D_8010EBB0;
 
     func_802E153C(entity);
 
@@ -104,7 +104,7 @@ void func_802E1660(Entity* entity) {
         return;
     }
 
-    if ((temp2[3] == 4) && (temp2[0] != 0)) {
+    if ((temp2->unk_03 == 4) && (temp2->unk_00 != 0)) {
         return;
     }
 

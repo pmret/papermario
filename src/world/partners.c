@@ -245,6 +245,9 @@ WorldPartner wPartners[12] = {
     },
 };
 
+s32 D_800F833C = 0;
+s32 D_800F8340 = 0;
+s32 D_800F8344 = 0;
 
 NpcId create_basic_npc(NpcBlueprint* blueprint);
 
@@ -258,7 +261,7 @@ void remove_consumable(void) {
 INCLUDE_ASM(s32, "world/partners", func_800EA4B0);
 
 s32 world_partner_can_use_ability_default(Npc* partner) {
-    return D_8010EBB0[0] == 0;
+    return D_8010EBB0.unk_00 == 0;
 }
 
 s32 world_partner_can_player_pause_default(Npc* partner) {
@@ -268,7 +271,7 @@ s32 world_partner_can_player_pause_default(Npc* partner) {
 INCLUDE_ASM(s32, "world/partners", func_800EA52C);
 
 s32 is_current_partner_flying(void) {
-    return !D_8010CFEC->isFlying;
+    return !wPartner->isFlying;
 }
 
 void func_800EA5B8(s32* arg0) {
@@ -277,8 +280,8 @@ void func_800EA5B8(s32* arg0) {
 
 void load_partner_npc(void) {
     WorldPartner* partnerEntry = &wPartners[D_8010CFD8];
-    Npc** partnerNpcPtr = &D_8010C930;
-    WorldPartner** partner = &D_8010CFEC;
+    Npc** partnerNpcPtr = &wPartnerNpc;
+    WorldPartner** partner = &wPartner;
     NpcId npcIndex;
     NpcBlueprint blueprint;
     NpcBlueprint* blueprintPtr;
@@ -329,18 +332,56 @@ INCLUDE_ASM(s32, "world/partners", func_800EB2A4);
 
 INCLUDE_ASM(s32, "world/partners", partner_use_ability);
 
-INCLUDE_ASM(s32, "world/partners", partner_player_can_pause, void);
+// needless v0 to v1 thing. functionally equivalent
+#ifdef NON_MATCHING
+s32 partner_player_can_pause(void) {
+    if (wPartner == NULL || wPartner->canPlayerPause == NULL || wPartner->canPlayerPause(wPartnerNpc)) {
+        return TRUE;
+    }
+    return FALSE;
+}
+#else
+INCLUDE_ASM(s32, "world/partners", partner_player_can_pause, void)
+#endif
 
-INCLUDE_ASM(s32, "world/partners", partner_can_use_ability);
+s32 partner_can_use_ability(void) {
+    if (wPartner->canUseAbility != NULL && !wPartner->canUseAbility(wPartnerNpc)) {
+        return TRUE;
+    }
+    return FALSE;
+}
 
 INCLUDE_ASM(s32, "world/partners", partner_reset_data);
 
-INCLUDE_ASM(s32, "world/partners", partner_initialize_data);
+//INCLUDE_ASM(s32, "world/partners", partner_initialize_data);
+void partner_initialize_data(void) {
+    Temp8010EBB0* unk8010EBB0 = &D_8010EBB0;
 
-INCLUDE_ASM(s32, "world/partners", partner_test_enemy_collision);
+    D_8010CFD8 = 0;
+    D_8010CFE0 = 0;
+    D_8010CFE8 = 0;
+    D_8010CFC4 = 0;
+    unk8010EBB0->unk_03 = 0;
+    unk8010EBB0->unk_14 = 0;
+    unk8010EBB0->unk_01 = 0;
+    unk8010EBB0->unk_00 = 0;
+    unk8010EBB0->unk_358 = 0;
+    unk8010EBB0->unk_02 = 0;
+    wPartner = NULL;
+    D_800F833C = 0;
+    D_800F8340 = 0;
+    D_800F8344 = 0;
+}
+
+s32 partner_test_enemy_collision(s32 arg0) {
+    if (D_8010CFD8 != 0 && wPartner->testFirstStrike != NULL) {
+        return wPartner->testFirstStrike(wPartnerNpc, arg0);
+    }
+    return FALSE;
+}
 
 Bytecode* partner_get_ride_script(void) {
-    WorldPartner* partner = D_8010CFEC;
+    WorldPartner* partner = wPartner;
 
     if (partner == NULL) {
         return NULL;
@@ -348,15 +389,78 @@ Bytecode* partner_get_ride_script(void) {
     return partner->whileRiding;
 }
 
-INCLUDE_ASM(s32, "world/partners", partner_handle_before_battle);
+void partner_handle_before_battle(void) {
+    if (D_8010CFD8 != 0) {
+        ScriptID* scriptID = &D_8010CFDC;
 
-INCLUDE_ASM(s32, "world/partners", partner_handle_after_battle);
+        if (does_script_exist(*scriptID)) {
+            kill_script_by_ID(*scriptID);
+        }
 
-INCLUDE_ASM(s32, "world/partners", partner_kill_ability_script);
+        if (wPartner->preBattle != NULL) {
+            wPartner->preBattle(wPartnerNpc);
+        }
+    }
+}
 
-INCLUDE_ASM(s32, "world/partners", partner_suspend_ability_script);
+void partner_handle_after_battle(void) {
+    s8* temp8010EBB0 = &D_8010EBB0;
 
-INCLUDE_ASM(s32, "world/partners", partner_resume_ability_script);
+    if (D_8010CFD8 != 0) {
+        ScriptID* scriptID = &D_8010CFDC;
+        PlayerData* playerData = &gPlayerData;
+
+        if (does_script_exist(*scriptID) != 0) {
+            kill_script_by_ID(*scriptID);
+        }
+
+        D_8010CFD4 = start_script(wPartner->update, 20, 0x20);
+        D_8010CFD4->owner2.npc = wPartnerNpc;
+        *scriptID = D_8010CFD4->id;
+        D_8010CFD4->groupFlags = 0xA;
+
+        D_8010CFE8 = 1;
+
+        if (playerData->currentPartner != PartnerID_WATT && temp8010EBB0[3] == 6) {
+            gPlayerStatusPtr->animFlags &= ~1;
+            gPlayerStatusPtr->animFlags &= ~2;
+            temp8010EBB0[3] = 0;
+        }
+
+        if (wPartner->postBattle != NULL) {
+            wPartner->postBattle(wPartnerNpc);
+        }
+    }
+}
+
+void partner_kill_ability_script(void) {
+    ScriptID* scriptID = &D_8010CFDC;
+    D_8010CFE8 = 10;
+
+    if (does_script_exist(*scriptID)) {
+        kill_script_by_ID(*scriptID);
+    }
+}
+
+void partner_suspend_ability_script(void) {
+    if (D_8010CFD8 != NULL) {
+        ScriptID* scriptID = &D_8010CFDC;
+
+        if (does_script_exist(*scriptID)) {
+            suspend_all_script(*scriptID);
+        }
+    }
+}
+
+void partner_resume_ability_script(void) {
+    if (D_8010CFD8 != NULL) {
+        ScriptID* scriptID = &D_8010CFDC;
+
+        if (does_script_exist(*scriptID)) {
+            resume_all_script(*scriptID);
+        }
+    }
+}
 
 INCLUDE_ASM(void, "world/partners", enable_partner_walking, Npc* partner, s32 val);
 
@@ -405,7 +509,18 @@ void func_800EF314(void) {
     D_8010CFC8 = 50;
 }
 
-INCLUDE_ASM(void, "world/partners", enable_partner_ai, void);
+void enable_partner_ai(void) {
+    WorldPartner** partner = &wPartnerNpc;
+
+    D_8010CFC8 = 0;
+    clear_partner_move_history(*partner);
+
+    if (!wPartner->isFlying) {
+        enable_partner_walking(*partner, FALSE);
+    } else {
+        enable_partner_flying(*partner, FALSE);
+    }
+}
 
 void set_parter_tether_distance(f32 arg0) {
     D_8010CFC0 = arg0;
@@ -447,18 +562,18 @@ INCLUDE_ASM(void, "world/partners", clear_partner_move_history, Npc* partner);
 INCLUDE_ASM(s32, "world/partners", func_800EF4E0);
 
 void func_800EF600(void) {
-    s8* temp_8010EBB0 = D_8010EBB0;
+    Temp8010EBB0* temp_8010EBB0 = &D_8010EBB0;
 
-    temp_8010EBB0[20]--;
-    if (temp_8010EBB0[20] < 0) {
-        temp_8010EBB0[20] = 0;
+    temp_8010EBB0->unk_14--;
+    if (temp_8010EBB0->unk_14 < 0) {
+        temp_8010EBB0->unk_14 = 0;
     }
 }
 
 void func_800EF628(void) {
-    s8* temp_8010EBB0 = D_8010EBB0;
+    Temp8010EBB0* temp_8010EBB0 = &D_8010EBB0;
 
-    temp_8010EBB0[20]++;
+    temp_8010EBB0->unk_14++;
 }
 
 INCLUDE_ASM(s32, "world/partners", func_800EF640);

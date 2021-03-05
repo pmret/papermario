@@ -8,15 +8,15 @@ glabel partner_use_ability
 /* 847D0 800EB320 00000000 */   nop
 /* 847D4 800EB324 1440002B */  bnez      $v0, .L800EB3D4
 /* 847D8 800EB328 0000102D */   daddu    $v0, $zero, $zero
-/* 847DC 800EB32C 3C028011 */  lui       $v0, %hi(D_8010CFEC)
-/* 847E0 800EB330 8C42CFEC */  lw        $v0, %lo(D_8010CFEC)($v0)
+/* 847DC 800EB32C 3C028011 */  lui       $v0, %hi(wPartner)
+/* 847E0 800EB330 8C42CFEC */  lw        $v0, %lo(wPartner)($v0)
 /* 847E4 800EB334 50400027 */  beql      $v0, $zero, .L800EB3D4
 /* 847E8 800EB338 0000102D */   daddu    $v0, $zero, $zero
 /* 847EC 800EB33C 8C42002C */  lw        $v0, 0x2c($v0)
 /* 847F0 800EB340 10400007 */  beqz      $v0, .L800EB360
 /* 847F4 800EB344 00000000 */   nop
-/* 847F8 800EB348 3C048011 */  lui       $a0, %hi(D_8010C930)
-/* 847FC 800EB34C 8C84C930 */  lw        $a0, %lo(D_8010C930)($a0)
+/* 847F8 800EB348 3C048011 */  lui       $a0, %hi(wPartnerNpc)
+/* 847FC 800EB34C 8C84C930 */  lw        $a0, %lo(wPartnerNpc)($a0)
 /* 84800 800EB350 0040F809 */  jalr      $v0
 /* 84804 800EB354 00000000 */   nop
 /* 84808 800EB358 1040001E */  beqz      $v0, .L800EB3D4

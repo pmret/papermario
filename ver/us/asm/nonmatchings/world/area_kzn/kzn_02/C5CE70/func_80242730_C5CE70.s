@@ -34,8 +34,8 @@ glabel func_80242730_C5CE70
 /* C5CED8 80242798 08090A01 */  j         .L80242804
 /* C5CEDC 8024279C AC820000 */   sw       $v0, ($a0)
 .L802427A0:
-/* C5CEE0 802427A0 3C108011 */  lui       $s0, %hi(D_8010C930)
-/* C5CEE4 802427A4 2610C930 */  addiu     $s0, $s0, %lo(D_8010C930)
+/* C5CEE0 802427A0 3C108011 */  lui       $s0, %hi(wPartnerNpc)
+/* C5CEE4 802427A4 2610C930 */  addiu     $s0, $s0, %lo(wPartnerNpc)
 /* C5CEE8 802427A8 0C03BD17 */  jal       clear_partner_move_history
 /* C5CEEC 802427AC 8E040000 */   lw       $a0, ($s0)
 /* C5CEF0 802427B0 C6200028 */  lwc1      $f0, 0x28($s1)

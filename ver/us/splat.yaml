@@ -263,7 +263,8 @@ segments:
     - [0x74EA0, rodata]
     - [0x75240, .rodata, battle/battle] # ram 80099E40
     # bss starts at 0x8009A5B0
-    - [0x75240, .bss, os/code_39cb0_len_100, 0x800] # we need at least this much bss space until this file
+    # 0x800 of bss until...
+    - [0x75240, .bss, os/code_39cb0_len_100, 0x0] # size unknown
   - type: code
     start: 0x759B0
     vram: 0x800DC500
@@ -283,7 +284,7 @@ segments:
     - [0x90FE0, .data, code_759b0_len_61b0]
     - [0x913B0, .data, world/actions]
     - [0x914E0, .data, world/partners]
-    - [0x917EC, data]
+    - [0x917F8, data]
     - [0x93CD0, ci4,     ui/hammer, 32, 32]
     - [0x93ED0, palette, ui/hammer]
     - [0x93EF0, palette, ui/hammer.disabled]
@@ -343,9 +344,9 @@ segments:
     start: 0xFEE30
     vram: 0x802DBD40
     subsections:
-    - [0xfee30, c, code_fee30_len_2d60]
+    - [0x0fee30, c, code_fee30_len_2d60]
     - [0x101b90, c, code_101b90_len_8f0]
-    - [0x102480, data, code_fee30_len_2d60]
+    - [0x102480, .data, code_fee30_len_2d60]
   - type: code
     start: 0x102610
     vram: 0x802E0D90

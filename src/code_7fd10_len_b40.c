@@ -3,7 +3,7 @@
 void func_800E6860(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if ((D_8010EBB0[0] != 0) && (D_8010EBB0[3] == 9)) {
+    if ((D_8010EBB0.unk_00 != 0) && (D_8010EBB0.unk_03 == 9)) {
         Npc* partner = get_npc_unsafe(NpcId_PARTNER);
 
         func_802DDEE4(0, -1, 7, 0, 0, 0, playerStatus->unk_0E, 0);
@@ -15,25 +15,25 @@ void func_800E6860(void) {
 // playerStatus getting coppied to a0 - how? inlining?
 #ifdef NON_MATCHING
 s32 func_800E6904(void) {
-    s8* temp_8010EBB0 = D_8010EBB0;
+    Temp8010EBB0* temp_8010EBB0 = &D_8010EBB0;
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 actionState = playerStatus->actionState;
 
     if (!(playerStatus->animFlags & 0x100000)) {
-        if (temp_8010EBB0[0] == 0) {
+        if (temp_8010EBB0.unk_00 == 0) {
             if (!(playerStatus->flags & 0x1000)) {
                 if (actionState == ActionState_IDLE || actionState == ActionState_WALK || actionState == ActionState_RUN) {
                     return 1;
                 }
             }
         } else if (partner_player_can_pause()) {
-            if (temp_8010EBB0[3] == 6) {
+            if (temp_8010EBB0.unk_03 == 6) {
                 return 1;
-            } else if (temp_8010EBB0[3] == 9) {
+            } else if (temp_8010EBB0.unk_03 == 9) {
                 if (actionState == ActionState_RIDE) {
                     return 1;
                 }
-            } else if (temp_8010EBB0[3] == 8) {
+            } else if (temp_8010EBB0.unk_03 == 8) {
                 if (actionState != ActionState_RIDE) {
                     play_sound(0x21D);
                 } else {

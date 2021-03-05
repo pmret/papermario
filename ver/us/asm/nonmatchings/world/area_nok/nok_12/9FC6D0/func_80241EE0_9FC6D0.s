@@ -34,8 +34,8 @@ glabel func_80241EE0_9FC6D0
 /* 9FC738 80241F48 080907ED */  j         .L80241FB4
 /* 9FC73C 80241F4C AC820000 */   sw       $v0, ($a0)
 .L80241F50:
-/* 9FC740 80241F50 3C108011 */  lui       $s0, %hi(D_8010C930)
-/* 9FC744 80241F54 2610C930 */  addiu     $s0, $s0, %lo(D_8010C930)
+/* 9FC740 80241F50 3C108011 */  lui       $s0, %hi(wPartnerNpc)
+/* 9FC744 80241F54 2610C930 */  addiu     $s0, $s0, %lo(wPartnerNpc)
 /* 9FC748 80241F58 0C03BD17 */  jal       clear_partner_move_history
 /* 9FC74C 80241F5C 8E040000 */   lw       $a0, ($s0)
 /* 9FC750 80241F60 C6200028 */  lwc1      $f0, 0x28($s1)

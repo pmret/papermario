@@ -229,8 +229,8 @@ extern s32 D_801086AC;
 extern s32 D_801083D8;
 extern s32 D_80108068;
 extern s32 D_80104BEC;
+extern Temp8010EBB0 D_8010EBB0; // something with partners
 extern Temp8010F250 D_8010F250; // play_sound state struct?
-extern s8 D_8010EBB0[];
 
 // Effects
 extern EffectTableEntry gEffectTable[135];
