@@ -248,7 +248,7 @@ segments:
     - [0x6F110, data] # has scripts?
     - [0x70E30, .data, battle/battle]
     - [0x71430, data]
-    - [0x73130, rodata, code_1060_len_310]
+    - [0x73130, .rodata, code_1060_len_310]
     - [0x73148, .rodata, code_1b40_len_20b0]
     - [0x73160, .rodata, code_43F0]
     - [0x73200, rodata]

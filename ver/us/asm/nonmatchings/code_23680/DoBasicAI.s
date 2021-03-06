@@ -104,7 +104,7 @@ glabel DoBasicAI
 .L8004A5D8:
 /* 259D8 8004A5D8 8E430070 */  lw        $v1, 0x70($s2)
 /* 259DC 8004A5DC 2C620064 */  sltiu     $v0, $v1, 0x64
-/* 259E0 8004A5E0 10400038 */  beqz      $v0, .L8004A6C4
+/* 259E0 8004A5E0 10400038 */  beqz      $v0, L8004A6C4_25AC4
 /* 259E4 8004A5E4 00031080 */   sll      $v0, $v1, 2
 /* 259E8 8004A5E8 3C01800A */  lui       $at, %hi(jtbl_80098728)
 /* 259EC 8004A5EC 00220821 */  addu      $at, $at, $v0
@@ -159,7 +159,7 @@ glabel L8004A684_25A84
 /* 25A90 8004A690 0280302D */   daddu    $a2, $s4, $zero
 /* 25A94 8004A694 8E430070 */  lw        $v1, 0x70($s2)
 /* 25A98 8004A698 2402000E */  addiu     $v0, $zero, 0xe
-/* 25A9C 8004A69C 14620009 */  bne       $v1, $v0, .L8004A6C4
+/* 25A9C 8004A69C 14620009 */  bne       $v1, $v0, L8004A6C4_25AC4
 /* 25AA0 8004A6A0 00000000 */   nop
 glabel L8004A6A4_25AA4
 /* 25AA4 8004A6A4 0240202D */  daddu     $a0, $s2, $zero
@@ -171,7 +171,6 @@ glabel L8004A6A4_25AA4
 glabel L8004A6BC_25ABC
 /* 25ABC 8004A6BC 0C0129CF */  jal       func_8004A73C
 /* 25AC0 8004A6C0 0240202D */   daddu    $a0, $s2, $zero
-.L8004A6C4:
 glabel L8004A6C4_25AC4
 /* 25AC4 8004A6C4 8FBF0048 */  lw        $ra, 0x48($sp)
 /* 25AC8 8004A6C8 8FB50044 */  lw        $s5, 0x44($sp)

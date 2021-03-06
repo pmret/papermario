@@ -18,9 +18,9 @@ static const s32 rodata_73DA0[] = {
 };
 
 // These string literals belong to load_map_by_IDs
-static const char D_80098A10[] = "%s_shape";
-static const char D_80098A1C[] = "%s_hit";
-static const char D_80098A24[] = "%s_tex";
+// static const char D_80098A10[] = "%s_shape";
+// static const char D_80098A1C[] = "%s_hit";
+// static const char D_80098A24[] = "%s_tex";
 
 INCLUDE_ASM(s32, "world/world", load_map_by_IDs);
 
