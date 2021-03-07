@@ -5,6 +5,14 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
+.section .rodata
+
+glabel jtbl_80099D80
+.word 0x141818, 0x1C1C1C1C, 0x20202020, 0x20202020, 0x40808, 0xC0C0C0C, 0x10101010, 0x10101010
+
+glabel jtbl_80099DA0
+.word L8006AF00_46300, L8006AEC4_462C4, L8006AEA0_462A0, L8006ACC8_460C8, L8006AC80_46080, L8006AE3C_4623C, L8006AC44_46044, L8006AC50_46050, L8006AC5C_4605C, 0, 0, 0
+
 .section .text, "ax"
 
 glabel func_8006A9F0
