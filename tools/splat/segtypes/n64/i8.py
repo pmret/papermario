@@ -6,5 +6,4 @@ class N64SegI8(N64SegI4):
         return data
 
     def max_length(self):
-        if self.compressed: return None
         return self.width * self.height

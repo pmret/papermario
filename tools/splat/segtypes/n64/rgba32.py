@@ -5,5 +5,4 @@ class N64SegRgba32(N64SegRgba16):
         return data
 
     def max_length(self):
-        if self.compressed: return None
         return self.width * self.height * 4
