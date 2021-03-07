@@ -97,8 +97,8 @@ glabel func_802400A0_A4CAC0
 /* A4CC2C 8024020C 00000000 */  nop
 /* A4CC30 80240210 4501000F */  bc1t      .L80240250
 /* A4CC34 80240214 2402FFFF */   addiu    $v0, $zero, -1
-/* A4CC38 80240218 3C038011 */  lui       $v1, %hi(D_8010EBB3)
-/* A4CC3C 8024021C 8063EBB3 */  lb        $v1, %lo(D_8010EBB3)($v1)
+/* A4CC38 80240218 3C038011 */  lui       $v1, %hi(D_8010EBB0+0x3)
+/* A4CC3C 8024021C 8063EBB3 */  lb        $v1, %lo(D_8010EBB0+0x3)($v1)
 /* A4CC40 80240220 24020009 */  addiu     $v0, $zero, 9
 /* A4CC44 80240224 10620009 */  beq       $v1, $v0, .L8024024C
 /* A4CC48 80240228 24020007 */   addiu    $v0, $zero, 7

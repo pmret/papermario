@@ -97,8 +97,8 @@ glabel func_80241D30_A95470
 /* A955DC 80241E9C 00000000 */  nop
 /* A955E0 80241EA0 4501000F */  bc1t      .L80241EE0
 /* A955E4 80241EA4 2402FFFF */   addiu    $v0, $zero, -1
-/* A955E8 80241EA8 3C038011 */  lui       $v1, %hi(D_8010EBB3)
-/* A955EC 80241EAC 8063EBB3 */  lb        $v1, %lo(D_8010EBB3)($v1)
+/* A955E8 80241EA8 3C038011 */  lui       $v1, %hi(D_8010EBB0+0x3)
+/* A955EC 80241EAC 8063EBB3 */  lb        $v1, %lo(D_8010EBB0+0x3)($v1)
 /* A955F0 80241EB0 24020009 */  addiu     $v0, $zero, 9
 /* A955F4 80241EB4 10620009 */  beq       $v1, $v0, .L80241EDC
 /* A955F8 80241EB8 24020007 */   addiu    $v0, $zero, 7

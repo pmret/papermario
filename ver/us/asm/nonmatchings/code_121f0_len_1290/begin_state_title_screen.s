@@ -1,6 +1,16 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_80098390
+.ascii "title_data\0\0"
+
+glabel D_8009839C
+.word 0x7469746C, 0x655F6267, 0x00000000
+
+.section .text
+
 glabel begin_state_title_screen
 /* 121F0 80036DF0 27BDFFC8 */  addiu     $sp, $sp, -0x38
 /* 121F4 80036DF4 AFB20028 */  sw        $s2, 0x28($sp)

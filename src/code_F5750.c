@@ -382,7 +382,7 @@ ApiStatus GetCurrentPartner(ScriptInstance* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     s32 currentPartner = 0;
 
-    if (D_8010EBB0[0] != 0) {
+    if (D_8010EBB0.unk_00 != 0) {
         currentPartner = playerData->currentPartner;
     }
 

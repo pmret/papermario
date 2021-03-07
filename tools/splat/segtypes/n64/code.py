@@ -1,19 +1,16 @@
-from capstone import *
-from capstone.mips import *
-
-from collections import OrderedDict
-from segtypes.n64.segment import N64Segment
-from segtypes.segment import Segment
-from segtypes.n64.palette import N64SegPalette
-from segtypes.n64.ci4 import N64SegCi4
-from segtypes.n64.rgba32 import N64SegRgba32
-
-import json
-import png
 import os
-from pathlib import Path, PurePath
 import re
 import sys
+from collections import OrderedDict
+from pathlib import Path, PurePath
+
+import png
+from capstone import *
+from capstone.mips import *
+from segtypes.n64.ci4 import N64SegCi4
+from segtypes.n64.palette import N64SegPalette
+from segtypes.n64.segment import N64Segment
+from segtypes.segment import Segment
 from util import floats
 from util.symbol import Symbol
 
@@ -24,7 +21,7 @@ short_mnemonics = ["addiu", "lh", "sh", "lhu"]
 byte_mnemonics = ["lb", "sb", "lbu"]
 
 class Subsegment():
-    def __init__(self, start, end, name, type, vram, args):
+    def __init__(self, start, end, name, type, vram, args, parent):
         self.rom_start = start
         self.rom_end = end
         self.size = self.rom_end - self.rom_start
@@ -33,19 +30,18 @@ class Subsegment():
         self.vram_end = vram + self.size
         self.type = type
         self.args = args
-
-        # TODO maybe move to a better place
-        if self.type in [".bss", "bss"]:
-            self.rom_start = 0
-            self.rom_end = 0
-            self.size = self.args[0]
-            self.vram_end = self.vram_start + self.size
+        self.parent = parent
 
     def contains_vram(self, addr):
         return self.vram_start <= addr < self.vram_end
 
     def get_out_subdir(self, options):
-        if self.type in ["c", ".data", ".rodata", ".bss"]:
+        if self.type.startswith("."):
+            if self.parent:
+                return self.parent.get_out_subdir(options)
+            else:
+                return options.get("src_path", "src")
+        elif self.type in ["c"]:
             return options.get("src_path", "src")
         elif self.type in ["asm", "hasm", "header"]:
             return "asm"
@@ -67,7 +63,12 @@ class Subsegment():
         return section_name
 
     def get_ext(self):
-        if self.type in ["c", ".data", ".rodata", ".bss"]:
+        if self.type.startswith("."):
+            if self.parent:
+                return self.parent.get_ext()
+            else:
+                return "c"
+        elif self.type in ["c"]:
             return "c"
         elif self.type in ["asm", "hasm", "header"]:
             return "s"
@@ -88,6 +89,13 @@ class Subsegment():
             self.get_out_subdir(options),
             self.name + "." + self.get_ext()
         )
+
+    def scan_inner(self, segment, rom_bytes):
+        pass
+
+    def scan(self, segment, rom_bytes):
+        if self.should_run(segment.options) and not self.name.startswith("."):
+            self.scan_inner(segment, rom_bytes)
 
     def split_inner(self, segment, rom_bytes, base_path, generic_out_path):
         pass
@@ -145,7 +153,7 @@ class CodeSubsegment(Subsegment):
         return set(m.group(2) for m in CodeSubsegment.C_FUNC_RE.finditer(text))
 
     @staticmethod
-    def get_asm_header():
+    def get_standalone_asm_header():
         ret = []
 
         ret.append(".include \"macro.inc\"")
@@ -160,15 +168,11 @@ class CodeSubsegment(Subsegment):
 
         return ret
 
-    def split_inner(self, segment, rom_bytes, base_path, generic_out_path):
+    def scan_inner(self, segment, rom_bytes):
         if not self.rom_start == self.rom_end:
-            asm_out_dir = Segment.create_split_dir(base_path, "asm")
-
-            rom_addr = self.rom_start
-
             insns = [insn for insn in CodeSubsegment.md.disasm(rom_bytes[self.rom_start : self.rom_end], self.vram_start)]
 
-            funcs = segment.process_insns(insns, rom_addr)
+            funcs = segment.process_insns(insns, self.rom_start)
 
             # TODO: someday make func a subclass of symbol and store this disasm info there too
             for func in funcs:
@@ -176,29 +180,31 @@ class CodeSubsegment(Subsegment):
 
             funcs = segment.determine_symbols(funcs)
             segment.gather_jumptable_labels(rom_bytes)
-            funcs_text = segment.add_labels(funcs)
+            self.funcs_text = segment.add_labels(funcs)
 
+    def split_inner(self, segment, rom_bytes, base_path, generic_out_path):
+        if not self.rom_start == self.rom_end:
             if self.type == "c":
                 defined_funcs = set()
-
                 if segment.options.get("do_c_func_detection", True) and os.path.exists(generic_out_path):
                     defined_funcs = CodeSubsegment.get_funcs_defined_in_c(generic_out_path)
                     segment.mark_c_funcs_as_defined(defined_funcs)
 
                 asm_out_dir = Segment.create_split_dir(base_path, os.path.join("asm", "nonmatchings"))
 
-                for func in funcs_text:
+                for func in self.funcs_text:
                     func_name = segment.get_symbol(func, type="func", local_only=True).name
 
                     if func_name not in defined_funcs:
-                        segment.create_c_asm_file(funcs_text, func, asm_out_dir, self, func_name)
+                        segment.create_c_asm_file(self.funcs_text, func, asm_out_dir, self, func_name)
 
                 if not os.path.exists(generic_out_path) and segment.options.get("create_new_c_files", True):
-                    segment.create_c_file(funcs_text, self, asm_out_dir, base_path, generic_out_path)
+                    segment.create_c_file(self.funcs_text, self, asm_out_dir, base_path, generic_out_path)
             else:
-                out_lines = self.get_asm_header()
-                for func in funcs_text:
-                    out_lines.extend(funcs_text[func][0])
+                asm_out_dir = Segment.create_split_dir(base_path, "asm")
+                out_lines = self.get_standalone_asm_header()
+                for func in self.funcs_text:
+                    out_lines.extend(self.funcs_text[func][0])
                     out_lines.append("")
 
                 outpath = Path(os.path.join(asm_out_dir, self.name + ".s"))
@@ -208,6 +214,10 @@ class CodeSubsegment(Subsegment):
                     f.write("\n".join(out_lines))
 
 class DataSubsegment(Subsegment):
+    def scan_inner(self, segment, rom_bytes):
+        if not self.type.startswith(".") or self.type == ".rodata":
+            self.file_text = segment.disassemble_data(self, rom_bytes)
+
     def split_inner(self, segment, rom_bytes, base_path, generic_out_path):
         if not self.type.startswith("."):
             asm_out_dir = Segment.create_split_dir(base_path, os.path.join("asm", "data"))
@@ -215,14 +225,15 @@ class DataSubsegment(Subsegment):
             outpath = Path(os.path.join(asm_out_dir, self.name + f".{self.type}.s"))
             outpath.parent.mkdir(parents=True, exist_ok=True)
 
-            file_text = segment.disassemble_data(self, rom_bytes)
-            if file_text:
+            if self.file_text:
                 with open(outpath, "w", newline="\n") as f:
-                    f.write(file_text)
+                    f.write(self.file_text)
 
 class BssSubsegment(DataSubsegment):
-    def __init__(self, start, end, name, type, vram, args):
-        super().__init__(start, end, name, type, vram, args)
+    def __init__(self, start, end, name, type, vram, args, parent):
+        super().__init__(start, end, name, type, vram, args, parent)
+        self.rom_start = 0
+        self.rom_end = 0
         self.size = self.args[0]
         self.vram_end = self.vram_start + self.size
 
@@ -268,6 +279,7 @@ class N64SegCode(N64Segment):
     def parse_subsegments(self, segment_yaml):
         prefix = self.name if self.name.endswith("/") else f"{self.name}_"
 
+        base_segments = {}
         ret = []
         prev_start = -1
 
@@ -302,13 +314,32 @@ class N64SegCode(N64Segment):
 
             subsegment_class = Subsegment.get_subclass(typ)
 
-            ret.append(subsegment_class(start, end, name, typ, vram, args))
+            if self.rodata_vram_start == -1 and "rodata" in typ:
+                self.rodata_vram_start = vram
+            if self.rodata_vram_end == -1 and "bss" in typ:
+                self.rodata_vram_end = vram
+
+            parent = None
+            if name in base_segments:
+                parent = base_segments[name]
+
+            new_segment = subsegment_class(start, end, name, typ, vram, args, parent)
+            ret.append(new_segment)
+
+            if typ in ["c", "asm", "hasm"]:
+                base_segments[name] = new_segment
+
             prev_start = start
+
+        if self.rodata_vram_start != -1 and self.rodata_vram_end == -1:
+            self.rodata_vram_end = self.vram_end
 
         return ret
 
     def __init__(self, segment, next_segment, options):
         super().__init__(segment, next_segment, options)
+        self.rodata_vram_start = -1
+        self.rodata_vram_end = -1
         self.subsegments = self.parse_subsegments(segment)
         self.is_overlay = segment.get("overlay", False)
         self.all_symbols = ()
@@ -321,6 +352,8 @@ class N64SegCode(N64Segment):
         self.jtbl_glabels_to_add = set()
         self.jtbl_jumps = {}
         self.jumptables = {}
+
+        self.rodata_syms = {}
 
     @staticmethod
     def get_default_name(addr):
@@ -626,6 +659,12 @@ class N64SegCode(N64Segment):
                                     if offset != 0:
                                         offset_str = f"+0x{offset:X}"
 
+                                if self.rodata_vram_start != -1 and self.rodata_vram_end != -1:
+                                    if self.rodata_vram_start <= sym.vram_start < self.rodata_vram_end:
+                                        if func_addr not in self.rodata_syms:
+                                            self.rodata_syms[func_addr] = []
+                                        self.rodata_syms[func_addr].append(sym)
+
                                 self.update_access_mnemonic(sym, s_insn.mnemonic)
 
                                 sym_label = sym.name + offset_str
@@ -875,6 +914,7 @@ class N64SegCode(N64Segment):
                     ret += "\n\n\n.section .rodata"
 
                 sym_str += self.disassemble_symbol(sym_bytes, stype)
+                sym.disasm_str = sym_str
                 ret += sym_str
 
         ret += "\n"
@@ -927,6 +967,22 @@ class N64SegCode(N64Segment):
             out_lines = self.get_gcc_inc_header()
         else:
             out_lines = []
+
+        if func in self.rodata_syms:
+            func_rodata = list({s for s in self.rodata_syms[func] if s.disasm_str})
+            func_rodata.sort(key=lambda s:s.vram_start)
+
+            if self.get_file_for_addr(func_rodata[0].vram_start).type != "rodata":
+                out_lines.append(".section .rodata")
+
+                for sym in func_rodata:
+                    if sym.disasm_str:
+                        out_lines.extend(sym.disasm_str.replace("\n\n", "\n").split("\n"))
+
+                out_lines.append("")
+                out_lines.append(".section .text")
+                out_lines.append("")
+
         out_lines.extend(funcs_text[func][0])
         out_lines.append("")
 
@@ -956,6 +1012,9 @@ class N64SegCode(N64Segment):
         print(f"Wrote {sub.name} to {c_path}")
 
     def split(self, rom_bytes, base_path):
+        for sub in self.subsegments:
+            sub.scan(self, rom_bytes)
+
         for sub in self.subsegments:
             sub.split(self, rom_bytes, base_path)
 

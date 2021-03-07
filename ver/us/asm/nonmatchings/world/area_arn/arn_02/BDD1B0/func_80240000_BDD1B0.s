@@ -80,8 +80,8 @@ glabel func_80240000_BDD1B0
 /* BDD2D4 80240124 45030001 */  bc1tl     .L8024012C
 /* BDD2D8 80240128 0000802D */   daddu    $s0, $zero, $zero
 .L8024012C:
-/* BDD2DC 8024012C 3C038011 */  lui       $v1, %hi(D_8010EBB3)
-/* BDD2E0 80240130 8063EBB3 */  lb        $v1, %lo(D_8010EBB3)($v1)
+/* BDD2DC 8024012C 3C038011 */  lui       $v1, %hi(D_8010EBB0+0x3)
+/* BDD2E0 80240130 8063EBB3 */  lb        $v1, %lo(D_8010EBB0+0x3)($v1)
 /* BDD2E4 80240134 24020009 */  addiu     $v0, $zero, 9
 /* BDD2E8 80240138 50620001 */  beql      $v1, $v0, .L80240140
 /* BDD2EC 8024013C 0000802D */   daddu    $s0, $zero, $zero

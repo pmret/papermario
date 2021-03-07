@@ -1,6 +1,16 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_80098210
+.word L800305B0_B9B0, L80030768_BB68, L80030868_BC68, L80030874_BC74, L80030880_BC80, L80030868_BC68, L80030644_BA44, 0
+
+glabel jtbl_80098230
+.word L800308D0_BCD0, L80030BFC_BFFC, L80030E54_C254, L80031210_C610, L80031220_C620, L8003106C_C46C, L800309CC_BDCC, 0
+
+.section .text
+
 glabel update_camera_from_zone
 /* B8FC 800304FC 27BDFF80 */  addiu     $sp, $sp, -0x80
 /* B900 80030500 AFB20030 */  sw        $s2, 0x30($sp)

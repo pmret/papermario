@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_80099D70
+.double 4294967296.0, 0.0
+
+.section .text
+
 glabel osViSwapContext
 /* 42470 80067070 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* 42474 80067074 AFB00010 */  sw        $s0, 0x10($sp)

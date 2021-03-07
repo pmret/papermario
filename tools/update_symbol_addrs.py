@@ -7,11 +7,13 @@ import sys
 
 script_dir = os.path.dirname(os.path.realpath(__file__))
 root_dir = script_dir + "/../"
+
+current_ver_dir = script_dir + "/../ver/current/"
 asm_dir = root_dir + "asm/nonmatchings/"
 
-symbol_addrs_path = os.path.join(script_dir, "symbol_addrs.txt")
-elf_path = os.path.join(root_dir, "build", "papermario.elf")
-map_path = os.path.join(root_dir, "build", "papermario.map")
+symbol_addrs_path = os.path.join(current_ver_dir, "symbol_addrs.txt")
+elf_path = os.path.join(current_ver_dir, "build", "papermario.elf")
+map_path = os.path.join(current_ver_dir, "build", "papermario.map")
 ignores_path = os.path.join(root_dir, "tools", "ignored_funcs.txt")
 
 map_symbols = {}

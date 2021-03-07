@@ -197,8 +197,8 @@ glabel func_802B6000_E2A340
 .L802B62E4:
 /* E2A624 802B62E4 0C038039 */  jal       disable_player_shadow
 /* E2A628 802B62E8 00000000 */   nop
-/* E2A62C 802B62EC 3C048011 */  lui       $a0, %hi(D_8010C930)
-/* E2A630 802B62F0 8C84C930 */  lw        $a0, %lo(D_8010C930)($a0)
+/* E2A62C 802B62EC 3C048011 */  lui       $a0, %hi(wPartnerNpc)
+/* E2A630 802B62F0 8C84C930 */  lw        $a0, %lo(wPartnerNpc)($a0)
 /* E2A634 802B62F4 0C00EAFF */  jal       disable_npc_shadow
 /* E2A638 802B62F8 00000000 */   nop
 /* E2A63C 802B62FC 24020032 */  addiu     $v0, $zero, 0x32

@@ -1734,4 +1734,18 @@ typedef struct Temp8010F250 {
     /* 0x0C */ s32 unk_0C;
 } Temp8010F250;
 
+typedef struct Temp8010EBB0 {
+    /* 0x000 */ s8 unk_00;
+    /* 0x001 */ s8 unk_01;
+    /* 0x002 */ s8 unk_02;
+    /* 0x003 */ s8 unk_03;
+    /* 0x004 */ char unk_04[0x4];
+    /* 0x008 */ s32 unk_08;
+    /* 0x009 */ char unk_0C[0x8];
+    /* 0x014 */ s8 unk_14;
+    /* 0x015 */ char unk_15[0x343];
+    /* 0x358 */ s32 unk_358;
+    /* 0x35C */ char unk_35C[0x4];
+} Temp8010EBB0; // size = 0x360
+
 #endif

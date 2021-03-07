@@ -85,7 +85,6 @@ extern s16 D_8010CD00;
 extern s16 D_8010CD10;
 extern s16 D_8010CD12;
 extern s32 D_8010CD20;
-extern s32 D_8010EF08;
 extern s32 D_801595A0;
 extern BackgroundHeader gBackgroundImage;
 
@@ -229,8 +228,8 @@ extern s32 D_801086AC;
 extern s32 D_801083D8;
 extern s32 D_80108068;
 extern s32 D_80104BEC;
+extern Temp8010EBB0 D_8010EBB0; // something with partners
 extern Temp8010F250 D_8010F250; // play_sound state struct?
-extern s8 D_8010EBB0[];
 
 // Effects
 extern EffectTableEntry gEffectTable[135];

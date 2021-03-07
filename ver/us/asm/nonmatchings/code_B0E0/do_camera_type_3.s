@@ -1,6 +1,28 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_80098250
+.double 1.01
+
+glabel D_80098258
+.double 0.3
+
+glabel D_80098260
+.double 0.2
+
+glabel D_80098268
+.double 3.141592
+
+glabel D_80098270
+.double 0.5001
+
+glabel D_80098278
+.double 0.01
+
+.section .text
+
 glabel do_camera_type_3
 /* C894 80031494 27BDFF80 */  addiu     $sp, $sp, -0x80
 /* C898 80031498 AFB10044 */  sw        $s1, 0x44($sp)

@@ -89,8 +89,8 @@ glabel func_80240958_C2F4F8
 /* C2F62C 80240A8C E7A00028 */  swc1      $f0, 0x28($sp)
 /* C2F630 80240A90 0C00A7E7 */  jal       add_vec2D_polar
 /* C2F634 80240A94 E7A2002C */   swc1     $f2, 0x2c($sp)
-/* C2F638 80240A98 3C028011 */  lui       $v0, %hi(D_8010C930)
-/* C2F63C 80240A9C 8C42C930 */  lw        $v0, %lo(D_8010C930)($v0)
+/* C2F638 80240A98 3C028011 */  lui       $v0, %hi(wPartnerNpc)
+/* C2F63C 80240A9C 8C42C930 */  lw        $v0, %lo(wPartnerNpc)($v0)
 /* C2F640 80240AA0 C7AC0028 */  lwc1      $f12, 0x28($sp)
 /* C2F644 80240AA4 C7AE002C */  lwc1      $f14, 0x2c($sp)
 /* C2F648 80240AA8 8C460038 */  lw        $a2, 0x38($v0)
