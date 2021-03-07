@@ -1741,7 +1741,7 @@ typedef struct Temp8010EBB0 {
     /* 0x003 */ s8 unk_03;
     /* 0x004 */ char unk_04[0x4];
     /* 0x008 */ s32 unk_08;
-    /* 0x09 */ char unk_0C[0x8];
+    /* 0x009 */ char unk_0C[0x8];
     /* 0x014 */ s8 unk_14;
     /* 0x015 */ char unk_15[0x343];
     /* 0x358 */ s32 unk_358;

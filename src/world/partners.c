@@ -438,41 +438,7 @@ s32 partner_can_use_ability(void) {
 }
 
 INCLUDE_ASM(s32, "world/partners", partner_reset_data);
-// void partner_reset_data(void) {
-//     PlayerStatus* playerStatus = &gPlayerStatus;
-//     s32* temp8010CFD8 = &D_8010CFD8;
-//     s32* temp8010CFE8 = &D_8010CFE8;
-//     s32 temp_s0;
 
-//     temp_s0 = gPlayerData.currentPartner;
-//     mem_clear(&D_8010EBB0, sizeof(D_8010EBB0));
-//     get_dynamic_entity(bind_dynamic_entity_7(_use_partner_ability, NULL));
-//     D_8010CFE0 = 1;
-//     *temp8010CFE8 = 9;
-//     *temp8010CFD8 = temp_s0;
-
-//     if ((*gGameStatusPtr)->unk_7D != 0) {
-//         D_8010EBB0.unk_00 = 1;
-//         (*gGameStatusPtr)->unk_7D = 0;
-//     }
-
-//     wPartner = NULL;
-//     D_800F833C = playerStatus->position.x;
-//     D_800F8340 = playerStatus->position.y;
-//     D_800F8344 = playerStatus->position.z;
-
-//     if (*temp8010CFD8 == 0) {
-//         *temp8010CFE8 = 1;
-//     } else {
-//         load_partner_npc();
-//         wPartnerNpc->scale.x = 1.0f;
-//         wPartnerNpc->scale.y = 1.0f;
-//         wPartnerNpc->scale.z = 1.0f;
-//         _use_partner_ability();
-//     }
-// }
-
-//INCLUDE_ASM(s32, "world/partners", partner_initialize_data);
 void partner_initialize_data(void) {
     Temp8010EBB0* unk8010EBB0 = &D_8010EBB0;
 

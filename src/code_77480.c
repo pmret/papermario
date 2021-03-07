@@ -202,8 +202,10 @@ void func_800DFC74(void) {
 }
 
 s32 func_800DFCF4(void) {
-    if (D_8010EBB0.unk_00 == 1 && (D_8010EBB0.unk_03 == 6 || D_8010EBB0.unk_03 == 9 || D_8010EBB0.unk_03 == 7 || D_8010EBB0.unk_03 == 4
-                               || D_8010EBB0.unk_03 == 8)) {
+    if (D_8010EBB0.unk_00 == 1 &&
+        (D_8010EBB0.unk_03 == 6 || D_8010EBB0.unk_03 == 9 || D_8010EBB0.unk_03 == 7 || D_8010EBB0.unk_03 == 4 ||
+         D_8010EBB0.unk_03 == 8))
+    {
         return 0;
     }
     return 1;

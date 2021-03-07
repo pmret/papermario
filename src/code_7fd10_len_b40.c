@@ -3,7 +3,7 @@
 void func_800E6860(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if ((D_8010EBB0.unk_00 != 0) && (D_8010EBB0.unk_03 == 9)) {
+    if (D_8010EBB0.unk_00 != 0 && D_8010EBB0.unk_03 == 9) {
         Npc* partner = get_npc_unsafe(NpcId_PARTNER);
 
         func_802DDEE4(0, -1, 7, 0, 0, 0, playerStatus->unk_0E, 0);
