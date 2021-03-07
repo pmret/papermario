@@ -36,7 +36,12 @@ class Subsegment():
         return self.vram_start <= addr < self.vram_end
 
     def get_out_subdir(self, options):
-        if self.type in ["c", ".data", ".rodata", ".bss"]:
+        if self.type.startswith("."):
+            if self.parent:
+                return self.parent.get_out_subdir(options)
+            else:
+                return options.get("src_path", "src")
+        elif self.type in ["c"]:
             return options.get("src_path", "src")
         elif self.type in ["asm", "hasm", "header"]:
             return "asm"
