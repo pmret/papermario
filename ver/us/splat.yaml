@@ -199,7 +199,7 @@ segments:
     - [0x457c0, c, os/code_457c0_len_270]
     - [0x45a30, c, os/code_45a30_len_20]
     - [0x45a50, c, os/code_45a50_len_3a0]
-    - [0x45df0, hasm, os/code_45df0_len_970]
+    - [0x45df0, hasm, os/exceptasm]
     - [0x46760, hasm, os/__osDisableInt]
     - [0x467D0, hasm, os/__osRestoreInt]
     - [0x467f0, c, os/code_467f0_len_90]
@@ -248,7 +248,7 @@ segments:
     - [0x6F110, data] # has scripts?
     - [0x70E30, .data, battle/battle]
     - [0x71430, data]
-    - [0x73130, .rodata, code_1060_len_310]
+    - [0x73130, rodata, code_1060_len_310]
     - [0x73148, .rodata, code_1b40_len_20b0]
     - [0x73160, .rodata, code_43F0]
     - [0x73200, rodata]
@@ -261,6 +261,7 @@ segments:
     - [0x73D40, .rodata, code_341d0]
     - [0x73DA0, .rodata, world/world]
     - [0x74EA0, rodata]
+    - [0x751D0, .rodata, os/code_46c70_len_e00]
     - [0x75240, .rodata, battle/battle] # ram 80099E40
     # bss starts at 0x8009A5B0
     # 0x800 of bss until...
