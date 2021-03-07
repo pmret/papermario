@@ -59,10 +59,13 @@ ApiStatus func_802BDB84(ScriptInstance* script, s32 isInitialCall) {
     return func_800EE9B8(unk) != 0;
 }
 
-// some stack shtuff
-#ifdef NON_MATCHING
 void world_goombario_pre_battle(Npc* partner) {
-    if (D_8010EBB0.unk_00 != 0) {
+    // TODO fake match nonsense
+    s8* new_var = &D_8010EBB0.unk_00;
+    s8* new_var2 = &D_8010EBB0.unk_00;
+    new_var = new_var2;
+
+    if (*new_var != 0) {
         func_80027088(0);
         enable_player_input();
         CancelMessageAndBlock();
@@ -73,9 +76,6 @@ void world_goombario_pre_battle(Npc* partner) {
     }
     D_8010EBB0.unk_03 = 1;
 }
-#else
-INCLUDE_ASM(void, "world/partner/goombario", world_goombario_pre_battle, Npc* partner);
-#endif
 
 s32 D_802BDC40_317B60[] = {
     0x00000015, 0x001B0000, 0x00000018, 0x001B0000, 0x00000016, 0x001B0001, 0x00000019, 0x001B0001,
