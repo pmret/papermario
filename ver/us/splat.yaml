@@ -272,7 +272,16 @@ segments:
     - [0x73D30, .rodata, code_33450]
     - [0x73D40, .rodata, code_341d0]
     - [0x73DA0, .rodata, world/world]
-    - [0x74EA0, rodata]
+    - [0x74EA0, .rodata, os/osSetIntMask]
+    - [0x74F20, .rodata, os/code_3c490_len_3c0]
+    - [0x74F40, .rodata, os/code_3c940_len_140]
+    - [0x74F50, .rodata, os/guLookAt]
+    - [0x74F70, .rodata, os/code_3dcc0_len_a60]
+    - [0x74FA0, .rodata, os/code_3e720_len_5f0]
+    - [0x74FB0, .rodata, os/code_3ef90_len_600]
+    - [0x74FF0, .rodata, os/code_3FEA0]
+    - [0x75170, .rodata, os/code_42470_len_310]
+    - [0x75180, .rodata, os/exceptasm]
     - [0x751D0, .rodata, os/code_46c70_len_e00]
     - [0x75240, .rodata, battle/battle] # ram 80099E40
     # bss starts at 0x8009A5B0
