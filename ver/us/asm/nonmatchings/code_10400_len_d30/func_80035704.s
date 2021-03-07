@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_800982E8
+.word L80035740_10B40, L800357A4_10BA4, L80035814_10C14, L80035A68_10E68, L80035AE0_10EE0, 0
+
+.section .text
+
 glabel func_80035704
 /* 10B04 80035704 3C03800A */  lui       $v1, %hi(D_800A0931)
 /* 10B08 80035708 80630931 */  lb        $v1, %lo(D_800A0931)($v1)

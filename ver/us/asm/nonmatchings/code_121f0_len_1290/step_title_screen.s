@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_800983A8
+.word L80037130_12530, L80037184_12584, L80037204_12604, L8003756C_1296C, L800372DC_126DC, L8003733C_1273C, L80037450_12850, 0
+
+.section .text
+
 glabel step_title_screen
 /* 124B4 800370B4 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* 124B8 800370B8 AFB00018 */  sw        $s0, 0x18($sp)

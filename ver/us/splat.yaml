@@ -27,7 +27,7 @@ segments:
   - type: code
     start: 0x1000
     vram: 0x80025C00
-    subalign: 8
+    subalign: 4
     subsections:
     - [0x1000, hasm, entry_point]
     - [0x1060, c, code_1060_len_310]
@@ -251,7 +251,19 @@ segments:
     - [0x73130, rodata, code_1060_len_310]
     - [0x73148, .rodata, code_1b40_len_20b0]
     - [0x73160, .rodata, code_43F0]
-    - [0x73200, rodata]
+    - [0x73200, .rodata, code_6e40_len_500]
+    - [0x73434, .rodata, code_7340_len_b00]
+    - [0x735E0, .rodata, code_8800]
+    - [0x73610, .rodata, code_B0E0]
+    - [0x73680, .rodata, code_d610_len_1330]
+    - [0x73690, .rodata, code_f270_len_1190]
+    - [0x736E8, .rodata, code_10400_len_d30]
+    - [0x73720, .rodata, code_111f0_len_860]
+    - [0x73738, .rodata, code_11a50_len_7a0]
+    - [0x73790, .rodata, code_121f0_len_1290]
+    - [0x73860, .rodata, code_13480_len_3f0]
+    - [0x73880, .rodata, code_13870_len_6980]
+    - [0x739F0, .rodata, code_1a1f0_len_5390]
     - [0x73AB0, .rodata, code_20ec0_len_5040]
     - [0x73B10, .rodata, code_23680]
     - [0x73CC0, .rodata, code_28910_len_5090]

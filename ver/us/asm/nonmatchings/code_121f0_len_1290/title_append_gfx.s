@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_800983E0
+.word L80037718_12B18, L8003768C_12A8C, L800376BC_12ABC, L80037718_12B18, L800376C8_12AC8, L800376D4_12AD4, 0x656E6400, 0x6B6B6A5F, 0x32360000, 0x61726E5F, 0x30380000, 0x6B6B6A5F, 0x31310000, 0x6E6F6B5F, 0x30320000, 0x6D61635F, 0x30330000, 0x6B7A6E5F, 0x30320000, 0x6D61635F, 0x30300000, 0x6A616E5F, 0x30340000, 0x7472645F, 0x30390000, 0x74696B5F, 0x30330000, 0x69736B5F, 0x30340000, 0x6E6F6B5F, 0x31320000, 0
+
+.section .text
+
 glabel title_append_gfx
 /* 12A38 80037638 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
 /* 12A3C 8003763C 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)

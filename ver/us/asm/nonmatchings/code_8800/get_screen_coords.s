@@ -1,6 +1,16 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_80098200
+.double 0.01
+
+glabel D_80098208
+.double -0.01
+
+.section .text
+
 glabel get_screen_coords
 /* 9938 8002E538 27BDFFB0 */  addiu     $sp, $sp, -0x50
 /* 993C 8002E53C AFB20040 */  sw        $s2, 0x40($sp)

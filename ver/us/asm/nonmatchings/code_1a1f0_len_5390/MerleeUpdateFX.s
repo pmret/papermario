@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_800985F0
+.double 0.35
+
+.section .text
+
 glabel MerleeUpdateFX
 /* 1A4C4 8003F0C4 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* 1A4C8 8003F0C8 AFB20020 */  sw        $s2, 0x20($sp)

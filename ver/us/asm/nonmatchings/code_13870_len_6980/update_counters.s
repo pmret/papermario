@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_800985C0
+.word L8003E59C_1999C, L8003E554_19954, L8003E564_19964, L8003E574_19974, L8003E584_19984, L8003E594_19994
+
+.section .text
+
 glabel update_counters
 /* 19924 8003E524 3C03800A */  lui       $v1, %hi(gGameState)
 /* 19928 8003E528 8C63A600 */  lw        $v1, %lo(gGameState)($v1)
