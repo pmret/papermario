@@ -326,7 +326,7 @@ class N64SegCode(N64Segment):
             new_segment = subsegment_class(start, end, name, typ, vram, args, parent)
             ret.append(new_segment)
 
-            if typ == ("c"):
+            if typ in ["c", "asm", "hasm"]:
                 base_segments[name] = new_segment
 
             prev_start = start
