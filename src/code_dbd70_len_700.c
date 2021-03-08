@@ -4,7 +4,37 @@ void default_trigger_delegate(s32* arg0) {
     arg0[0] |= 2;
 }
 
-INCLUDE_ASM(s32, "code_dbd70_len_700", clear_trigger_data);
+void clear_trigger_data(void) {
+    CollisionStatus* collisionStatus = &gCollisionStatus;
+    s32 i;
+
+    if (!(*gGameStatusPtr)->isBattle) {
+        gCurrentTriggerListPtr = &gTriggerList1;
+    } else {
+        gCurrentTriggerListPtr = &gTriggerList2;
+    }
+
+    for (i = 0; i < ARRAY_COUNT(*gCurrentTriggerListPtr); i++) {
+        (*gCurrentTriggerListPtr)[i] = NULL;
+    }
+
+    gTriggerCount = 0;
+    collisionStatus->pushingAgainstWall = -1;
+    collisionStatus->currentFloor = -1;
+    collisionStatus->lastTouchedFloor = -1;
+    collisionStatus->currentCeiling = -1;
+    collisionStatus->unk_0A = -1;
+    collisionStatus->unk_0C = -1;
+    collisionStatus->unk_0E = -1;
+    collisionStatus->unk_10 = -1;
+    collisionStatus->currentWall = -1;
+    collisionStatus->lastWallHammered = -1;
+    collisionStatus->touchingWallTrigger = 0;
+    collisionStatus->bombetteExploded = -1;
+    collisionStatus->bombetteExplositionPos[0] = 0.0f;
+    collisionStatus->bombetteExplositionPos[1] = 0.0f;
+    collisionStatus->bombetteExplositionPos[2] = 0.0f;
+}
 
 void init_trigger_list(void) {
     if (!(*gGameStatusPtr)->isBattle) {

@@ -237,7 +237,7 @@ typedef UNK_TYPE Easing;
 #define Easing_SIN_OUT            0x0000000B
 #define Easing_COS_IN             0x0000000C
 
-typedef UNK_TYPE SoundId;
+typedef UNK_TYPE SoundID;
 #define SoundId_JR_TROOPA_SPLASH      0x00000045
 #define SoundId_JR_TROOPA_SWIM        0x00000046
 #define SoundId_BOO_SPOOK             0x00000047

@@ -400,7 +400,7 @@ ApiStatus SetRenderMode(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus PlaySoundAtModel(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 modelID = get_variable(script, *args++);
-    SoundId soundID = get_variable(script, *args++);
+    SoundID soundID = get_variable(script, *args++);
     s32 var3 = get_variable(script, *args++);
     f32 x, y, z;
     f32 n1, n2, n3;
@@ -414,7 +414,7 @@ ApiStatus PlaySoundAtModel(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus PlaySoundAtCollider(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 colliderID = get_variable(script, *args++);
-    SoundId soundID = get_variable(script, *args++);
+    SoundID soundID = get_variable(script, *args++);
     s32 var3 = get_variable(script, *args++);
     f32 x, y, z;
 
