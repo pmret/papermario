@@ -80,8 +80,8 @@ glabel func_800609B0
 /* 3BED4 80060AD4 02803821 */  addu      $a3, $s4, $zero
 /* 3BED8 80060AD8 3C018009 */  lui       $at, %hi(D_80093D34)
 /* 3BEDC 80060ADC AC313D34 */  sw        $s1, %lo(D_80093D34)($at)
-/* 3BEE0 80060AE0 3C018009 */  lui       $at, %hi(D_80093D38)
-/* 3BEE4 80060AE4 AC353D38 */  sw        $s5, %lo(D_80093D38)($at)
+/* 3BEE0 80060AE0 3C018009 */  lui       $at, %hi(nuContCallBack)
+/* 3BEE4 80060AE4 AC353D38 */  sw        $s5, %lo(nuContCallBack)($at)
 /* 3BEE8 80060AE8 3C018009 */  lui       $at, %hi(D_80093D3C)
 /* 3BEEC 80060AEC AC333D3C */  sw        $s3, %lo(D_80093D3C)($at)
 /* 3BEF0 80060AF0 0C01978C */  jal       func_80065E30

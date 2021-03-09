@@ -18,9 +18,9 @@ glabel nuContMgrInit
 /* 3B944 80060544 24A5E6D4 */  addiu     $a1, $a1, %lo(D_800AE6D4)
 /* 3B948 80060548 0C019560 */  jal       osCreateMesgQueue
 /* 3B94C 8006054C 24060001 */   addiu    $a2, $zero, 1
-/* 3B950 80060550 3C048009 */  lui       $a0, %hi(D_80093D38)
+/* 3B950 80060550 3C048009 */  lui       $a0, %hi(nuContCallBack)
 /* 3B954 80060554 0C0180FC */  jal       nuSiCallBackAdd
-/* 3B958 80060558 24843D38 */   addiu    $a0, $a0, %lo(D_80093D38)
+/* 3B958 80060558 24843D38 */   addiu    $a0, $a0, %lo(nuContCallBack)
 /* 3B95C 8006055C 0C018248 */  jal       nuContQueryRead
 /* 3B960 80060560 00000000 */   nop
 /* 3B964 80060564 24050001 */  addiu     $a1, $zero, 1

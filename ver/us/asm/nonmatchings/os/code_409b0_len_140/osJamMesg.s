@@ -29,9 +29,9 @@ glabel osJamMesg
 /* 40A0C 8006560C 080195B0 */  j         .L800656C0
 /* 40A10 80065610 2402FFFF */   addiu    $v0, $zero, -1
 .L80065614:
-/* 40A14 80065614 3C028009 */  lui       $v0, %hi(D_80094660)
-/* 40A18 80065618 8C424660 */  lw        $v0, %lo(D_80094660)($v0)
-/* 40A1C 8006561C 0C01AC1B */  jal       osEnqueueAndYield
+/* 40A14 80065614 3C028009 */  lui       $v0, %hi(__osRunningThread)
+/* 40A18 80065618 8C424660 */  lw        $v0, %lo(__osRunningThread)($v0)
+/* 40A1C 8006561C 0C01AC1B */  jal       __osEnqueueAndYield
 /* 40A20 80065620 A4530010 */   sh       $s3, 0x10($v0)
 /* 40A24 80065624 8E020008 */  lw        $v0, 8($s0)
 /* 40A28 80065628 8E030010 */  lw        $v1, 0x10($s0)

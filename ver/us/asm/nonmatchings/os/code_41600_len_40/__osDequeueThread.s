@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel osDequeueThread
+glabel __osDequeueThread
 /* 41600 80066200 8C820000 */  lw        $v0, ($a0)
 /* 41604 80066204 10400009 */  beqz      $v0, .L8006622C
 /* 41608 80066208 00000000 */   nop

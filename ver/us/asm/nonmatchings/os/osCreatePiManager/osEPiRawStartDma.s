@@ -28,9 +28,9 @@ glabel osEPiRawStartDma
 .L80060BC8:
 /* 3BFC8 80060BC8 92060009 */  lbu       $a2, 9($s0)
 /* 3BFCC 80060BCC 00061080 */  sll       $v0, $a2, 2
-/* 3BFD0 80060BD0 3C058009 */  lui       $a1, %hi(D_80093D70)
+/* 3BFD0 80060BD0 3C058009 */  lui       $a1, %hi(__osCurrentHandle)
 /* 3BFD4 80060BD4 00A22821 */  addu      $a1, $a1, $v0
-/* 3BFD8 80060BD8 8CA53D70 */  lw        $a1, %lo(D_80093D70)($a1)
+/* 3BFD8 80060BD8 8CA53D70 */  lw        $a1, %lo(__osCurrentHandle)($a1)
 /* 3BFDC 80060BDC 92020004 */  lbu       $v0, 4($s0)
 /* 3BFE0 80060BE0 90A30004 */  lbu       $v1, 4($a1)
 /* 3BFE4 80060BE4 1062003D */  beq       $v1, $v0, .L80060CDC

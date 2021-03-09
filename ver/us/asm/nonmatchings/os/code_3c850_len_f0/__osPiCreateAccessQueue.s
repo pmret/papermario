@@ -1,18 +1,18 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel osPiCreateAccessQueue
+glabel __osPiCreateAccessQueue
 /* 3C850 80061450 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 3C854 80061454 24020001 */  addiu     $v0, $zero, 1
 /* 3C858 80061458 AFB00010 */  sw        $s0, 0x10($sp)
-/* 3C85C 8006145C 3C10800B */  lui       $s0, %hi(D_800B4380)
-/* 3C860 80061460 26104380 */  addiu     $s0, $s0, %lo(D_800B4380)
+/* 3C85C 8006145C 3C10800B */  lui       $s0, %hi(gOsPiMessageQueue)
+/* 3C860 80061460 26104380 */  addiu     $s0, $s0, %lo(gOsPiMessageQueue)
 /* 3C864 80061464 02002021 */  addu      $a0, $s0, $zero
 /* 3C868 80061468 3C05800B */  lui       $a1, %hi(D_800AF8B0)
 /* 3C86C 8006146C 24A5F8B0 */  addiu     $a1, $a1, %lo(D_800AF8B0)
 /* 3C870 80061470 AFBF0014 */  sw        $ra, 0x14($sp)
-/* 3C874 80061474 3C018009 */  lui       $at, %hi(D_80093D90)
-/* 3C878 80061478 AC223D90 */  sw        $v0, %lo(D_80093D90)($at)
+/* 3C874 80061474 3C018009 */  lui       $at, %hi(__osPiAccessQueueEnabled)
+/* 3C878 80061478 AC223D90 */  sw        $v0, %lo(__osPiAccessQueueEnabled)($at)
 /* 3C87C 8006147C 0C019560 */  jal       osCreateMesgQueue
 /* 3C880 80061480 24060001 */   addiu    $a2, $zero, 1
 /* 3C884 80061484 02002021 */  addu      $a0, $s0, $zero

@@ -29,9 +29,9 @@ glabel osSendMesg
 /* 40C7C 8006587C 0801964B */  j         .L8006592C
 /* 40C80 80065880 2402FFFF */   addiu    $v0, $zero, -1
 .L80065884:
-/* 40C84 80065884 3C028009 */  lui       $v0, %hi(D_80094660)
-/* 40C88 80065888 8C424660 */  lw        $v0, %lo(D_80094660)($v0)
-/* 40C8C 8006588C 0C01AC1B */  jal       osEnqueueAndYield
+/* 40C84 80065884 3C028009 */  lui       $v0, %hi(__osRunningThread)
+/* 40C88 80065888 8C424660 */  lw        $v0, %lo(__osRunningThread)($v0)
+/* 40C8C 8006588C 0C01AC1B */  jal       __osEnqueueAndYield
 /* 40C90 80065890 A4530010 */   sh       $s3, 0x10($v0)
 /* 40C94 80065894 8E020008 */  lw        $v0, 8($s0)
 /* 40C98 80065898 8E030010 */  lw        $v1, 0x10($s0)

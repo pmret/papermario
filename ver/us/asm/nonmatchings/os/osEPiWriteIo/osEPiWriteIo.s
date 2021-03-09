@@ -9,13 +9,13 @@ glabel osEPiWriteIo
 /* 3C170 80060D70 00A08821 */  addu      $s1, $a1, $zero
 /* 3C174 80060D74 AFB20018 */  sw        $s2, 0x18($sp)
 /* 3C178 80060D78 AFBF001C */  sw        $ra, 0x1c($sp)
-/* 3C17C 80060D7C 0C018529 */  jal       osPiGetAccess
+/* 3C17C 80060D7C 0C018529 */  jal       __osPiGetAccess
 /* 3C180 80060D80 00C09021 */   addu     $s2, $a2, $zero
 /* 3C184 80060D84 02002021 */  addu      $a0, $s0, $zero
 /* 3C188 80060D88 02202821 */  addu      $a1, $s1, $zero
 /* 3C18C 80060D8C 0C01ADB8 */  jal       osEPiRawWriteIo
 /* 3C190 80060D90 02403021 */   addu     $a2, $s2, $zero
-/* 3C194 80060D94 0C018544 */  jal       osPiRelAccess
+/* 3C194 80060D94 0C018544 */  jal       __osPiRelAccess
 /* 3C198 80060D98 00408021 */   addu     $s0, $v0, $zero
 /* 3C19C 80060D9C 02001021 */  addu      $v0, $s0, $zero
 /* 3C1A0 80060DA0 8FBF001C */  lw        $ra, 0x1c($sp)

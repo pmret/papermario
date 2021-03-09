@@ -292,6 +292,9 @@ extern MusicPlayer D_8014F6F0;
 extern OSThread D_800A4270; // idle thread, id 1
 extern OSThread D_800A4420; // id 3
 extern s32 D_800B8590;
+extern OSThread* __osActiveQueue;
+extern OSThread* __osRunningThread;
+extern OSThread* __osRunQueue;
 
 // gfx
 extern DisplayContext* gDisplayContext;
