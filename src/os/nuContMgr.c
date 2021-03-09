@@ -17,7 +17,7 @@ UNK_FUN_PTR(D_80093D24[4]) = {
 
 s32 D_80093D34 = 0;
 
-NUCallBackList	nuContCallBack = {
+NUCallBackList nuContCallBack = {
     NULL,
     D_80093D24,
     0x100,
