@@ -4,8 +4,8 @@
 glabel func_80066A40
 /* 41E40 80066A40 27BDFFD0 */  addiu     $sp, $sp, -0x30
 /* 41E44 80066A44 AFB40028 */  sw        $s4, 0x28($sp)
-/* 41E48 80066A48 3C148009 */  lui       $s4, %hi(__osRunningThread)
-/* 41E4C 80066A4C 26944660 */  addiu     $s4, $s4, %lo(__osRunningThread)
+/* 41E48 80066A48 3C148009 */  lui       $s4, %hi(D_80094660)
+/* 41E4C 80066A4C 26944660 */  addiu     $s4, $s4, %lo(D_80094660)
 /* 41E50 80066A50 AFBF002C */  sw        $ra, 0x2c($sp)
 /* 41E54 80066A54 AFB30024 */  sw        $s3, 0x24($sp)
 /* 41E58 80066A58 AFB20020 */  sw        $s2, 0x20($sp)
