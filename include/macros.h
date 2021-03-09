@@ -2,18 +2,7 @@
 #define _MACROS_H_
 
 #include "common.h"
-
-#define STRINGIFY_(x) #x
-#define STRINGIFY(x) STRINGIFY_(x)
-
-#ifndef SPLAT
-#ifndef INCLUDE_ASM
-#define INCLUDE_ASM(TYPE, FOLDER, NAME, ARGS...) \
-  TYPE __attribute__((naked)) NAME(ARGS) { __asm__( ".include \"include/macro.inc\"\n.include \"ver/"STRINGIFY(VERSION)"/asm/nonmatchings/"FOLDER"/"#NAME".s\"\n.set reorder\n.set at"); }
-#endif
-#else
-#define INCLUDE_ASM(TYPE, FOLDER, NAME, ARGS...)
-#endif
+#include "include_asm.h"
 
 #define ALIGN16(val) (((val) + 0xF) & ~0xF)
 
