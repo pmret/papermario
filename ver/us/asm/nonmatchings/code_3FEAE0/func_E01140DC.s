@@ -22,7 +22,7 @@ glabel func_E01140DC
 /* 3FEBFC E011411C 922300FA */  lbu       $v1, 0xfa($s1)
 /* 3FEC00 E0114120 8230013C */  lb        $s0, 0x13c($s1)
 /* 3FEC04 E0114124 2C620006 */  sltiu     $v0, $v1, 6
-/* 3FEC08 E0114128 10400050 */  beqz      $v0, .LE011426C
+/* 3FEC08 E0114128 10400050 */  beqz      $v0, LE011426C_3FED4C
 /* 3FEC0C E011412C 0000982D */   daddu    $s3, $zero, $zero
 /* 3FEC10 E0114130 00031080 */  sll       $v0, $v1, 2
 /* 3FEC14 E0114134 3C01E011 */  lui       $at, %hi(jtbl_E0114750)
@@ -111,7 +111,6 @@ glabel LE0114210_3FECF0
 /* 3FED40 E0114260 00000000 */  nop
 /* 3FED44 E0114264 080450B0 */  j         .LE01142C0
 /* 3FED48 E0114268 2A020009 */   slti     $v0, $s0, 9
-.LE011426C:
 glabel LE011426C_3FED4C
 /* 3FED4C E011426C 06010002 */  bgez      $s0, .LE0114278
 /* 3FED50 E0114270 0200102D */   daddu    $v0, $s0, $zero

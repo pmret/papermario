@@ -29,7 +29,7 @@ INCLUDE_ASM(s32, "world/partner/goombario", func_802BD564_317484);
 // Compiler is generating more efficient code than the original asm, using xori and sltiu instead of beq
 #ifdef NON_MATCHING
 s32 world_goombario_can_pause(Npc* partner) {
-    if (D_8010EBB0[0]) {
+    if (D_8010EBB0.unk_00) {
         return FALSE;
     }
 
@@ -59,23 +59,23 @@ ApiStatus func_802BDB84(ScriptInstance* script, s32 isInitialCall) {
     return func_800EE9B8(unk) != 0;
 }
 
-// Something is up with D_8010EBB0 I think. It might be a struct or something
-#ifdef NON_MATCHING
 void world_goombario_pre_battle(Npc* partner) {
-    if (D_8010EBB0[0] != 0) {
+    // TODO fake match nonsense
+    s8* new_var = &D_8010EBB0.unk_00;
+    s8* new_var2 = &D_8010EBB0.unk_00;
+    new_var = new_var2;
+
+    if (*new_var != 0) {
         func_80027088(0);
         enable_player_input();
         CancelMessageAndBlock();
         clear_partner_move_history(partner);
-        D_8010EBB0[0] = 0;
-        D_8010EBB0[3] = 0;
+        D_8010EBB0.unk_00 = 0;
+        D_8010EBB0.unk_03 = 0;
         disable_npc_blur(partner);
     }
-    D_8010EBB0[3] = 1;
+    D_8010EBB0.unk_03 = 1;
 }
-#else
-INCLUDE_ASM(void, "world/partner/goombario", world_goombario_pre_battle, Npc* partner);
-#endif
 
 s32 D_802BDC40_317B60[] = {
     0x00000015, 0x001B0000, 0x00000018, 0x001B0000, 0x00000016, 0x001B0001, 0x00000019, 0x001B0001,

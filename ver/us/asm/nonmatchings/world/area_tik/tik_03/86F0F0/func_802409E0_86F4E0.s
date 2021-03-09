@@ -33,8 +33,8 @@ glabel func_802409E0_86F4E0
 /* 86F544 80240A44 080902AC */  j         .L80240AB0
 /* 86F548 80240A48 AC820000 */   sw       $v0, ($a0)
 .L80240A4C:
-/* 86F54C 80240A4C 3C108011 */  lui       $s0, %hi(D_8010C930)
-/* 86F550 80240A50 2610C930 */  addiu     $s0, $s0, %lo(D_8010C930)
+/* 86F54C 80240A4C 3C108011 */  lui       $s0, %hi(wPartnerNpc)
+/* 86F550 80240A50 2610C930 */  addiu     $s0, $s0, %lo(wPartnerNpc)
 /* 86F554 80240A54 0C03BD17 */  jal       clear_partner_move_history
 /* 86F558 80240A58 8E040000 */   lw       $a0, ($s0)
 /* 86F55C 80240A5C C6200028 */  lwc1      $f0, 0x28($s1)

@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_80098548
+.word L8003D43C_1883C, L8003D46C_1886C, L8003D464_18864, L8003D464_18864, L8003D48C_1888C, L8003D54C_1894C, L8003D4A8_188A8, L8003D4C8_188C8, L8003D4F4_188F4, L8003D510_18910, L8003D530_18930, L8003D5FC_189FC, L8003D5FC_189FC, L8003D568_18968, L8003D584_18984, L8003D5A4_189A4, L8003D5D0_189D0, 0
+
+.section .text
+
 glabel func_8003D3BC
 /* 187BC 8003D3BC 27BDFFC0 */  addiu     $sp, $sp, -0x40
 /* 187C0 8003D3C0 AFB10024 */  sw        $s1, 0x24($sp)
@@ -27,7 +34,7 @@ glabel func_8003D3BC
 /* 18814 8003D414 0C0B7A25 */  jal       func_802DE894
 /* 18818 8003D418 00A0382D */   daddu    $a3, $a1, $zero
 /* 1881C 8003D41C 2E820011 */  sltiu     $v0, $s4, 0x11
-/* 18820 8003D420 10400076 */  beqz      $v0, .L8003D5FC
+/* 18820 8003D420 10400076 */  beqz      $v0, L8003D5FC_189FC
 /* 18824 8003D424 00141080 */   sll      $v0, $s4, 2
 /* 18828 8003D428 3C01800A */  lui       $at, %hi(jtbl_80098548)
 /* 1882C 8003D42C 00220821 */  addu      $at, $at, $v0
@@ -162,7 +169,6 @@ glabel L8003D5D0_189D0
 .L8003D5F4:
 /* 189F4 8003D5F4 0C0B7A25 */  jal       func_802DE894
 /* 189F8 8003D5F8 00000000 */   nop
-.L8003D5FC:
 glabel L8003D5FC_189FC
 /* 189FC 8003D5FC 8FBF003C */  lw        $ra, 0x3c($sp)
 /* 18A00 8003D600 8FB60038 */  lw        $s6, 0x38($sp)

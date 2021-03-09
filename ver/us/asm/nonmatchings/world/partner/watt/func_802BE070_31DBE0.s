@@ -70,8 +70,8 @@ glabel func_802BE070_31DBE0
 /* 31DCD4 802BE164 00000000 */  nop
 /* 31DCD8 802BE168 4600A502 */  mul.s     $f20, $f20, $f0
 /* 31DCDC 802BE16C 00000000 */  nop
-/* 31DCE0 802BE170 3C108011 */  lui       $s0, %hi(D_8010C930)
-/* 31DCE4 802BE174 2610C930 */  addiu     $s0, $s0, %lo(D_8010C930)
+/* 31DCE0 802BE170 3C108011 */  lui       $s0, %hi(wPartnerNpc)
+/* 31DCE4 802BE174 2610C930 */  addiu     $s0, $s0, %lo(wPartnerNpc)
 /* 31DCE8 802BE178 3C0143B4 */  lui       $at, 0x43b4
 /* 31DCEC 802BE17C 44810000 */  mtc1      $at, $f0
 /* 31DCF0 802BE180 8E120000 */  lw        $s2, ($s0)

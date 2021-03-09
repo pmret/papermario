@@ -89,8 +89,8 @@ glabel func_80242358_DCF028
 /* DCF174 802424A4 00000000 */  nop
 /* DCF178 802424A8 4501001F */  bc1t      .L80242528
 /* DCF17C 802424AC 2402FFFF */   addiu    $v0, $zero, -1
-/* DCF180 802424B0 3C038011 */  lui       $v1, %hi(D_8010EBB3)
-/* DCF184 802424B4 8063EBB3 */  lb        $v1, %lo(D_8010EBB3)($v1)
+/* DCF180 802424B0 3C038011 */  lui       $v1, %hi(D_8010EBB0+0x3)
+/* DCF184 802424B4 8063EBB3 */  lb        $v1, %lo(D_8010EBB0+0x3)($v1)
 /* DCF188 802424B8 24020009 */  addiu     $v0, $zero, 9
 /* DCF18C 802424BC 10620019 */  beq       $v1, $v0, .L80242524
 /* DCF190 802424C0 24020007 */   addiu    $v0, $zero, 7

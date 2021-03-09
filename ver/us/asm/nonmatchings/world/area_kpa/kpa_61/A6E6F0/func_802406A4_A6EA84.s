@@ -134,7 +134,7 @@ glabel func_802406A4_A6EA84
 /* A6EC70 80240890 8E220090 */  lw        $v0, 0x90($s1)
 /* A6EC74 80240894 1840000C */  blez      $v0, .L802408C8
 /* A6EC78 80240898 2442FFFF */   addiu    $v0, $v0, -1
-/* A6EC7C 8024089C 14400087 */  bnez      $v0, .L80240ABC
+/* A6EC7C 8024089C 14400087 */  bnez      $v0, L80240ABC_A6EE9C
 /* A6EC80 802408A0 AE220090 */   sw       $v0, 0x90($s1)
 /* A6EC84 802408A4 3C03FFAA */  lui       $v1, 0xffaa
 /* A6EC88 802408A8 8E420028 */  lw        $v0, 0x28($s2)
@@ -221,7 +221,7 @@ glabel func_802406A4_A6EA84
 .L802409D0:
 /* A6EDB0 802409D0 AE420028 */  sw        $v0, 0x28($s2)
 /* A6EDB4 802409D4 24020007 */  addiu     $v0, $zero, 7
-/* A6EDB8 802409D8 080902AF */  j         .L80240ABC
+/* A6EDB8 802409D8 080902AF */  j         L80240ABC_A6EE9C
 /* A6EDBC 802409DC AE220090 */   sw       $v0, 0x90($s1)
 .L802409E0:
 /* A6EDC0 802409E0 0280282D */  daddu     $a1, $s4, $zero
@@ -271,13 +271,13 @@ glabel func_802406A4_A6EA84
 /* A6EE54 80240A74 A22000B5 */  sb        $zero, 0xb5($s1)
 .L80240A78:
 /* A6EE58 80240A78 8E22008C */  lw        $v0, 0x8c($s1)
-/* A6EE5C 80240A7C 1040000F */  beqz      $v0, .L80240ABC
+/* A6EE5C 80240A7C 1040000F */  beqz      $v0, L80240ABC_A6EE9C
 /* A6EE60 80240A80 3C03FFAA */   lui      $v1, 0xffaa
 /* A6EE64 80240A84 8E420028 */  lw        $v0, 0x28($s2)
 /* A6EE68 80240A88 3463FFFC */  ori       $v1, $v1, 0xfffc
 /* A6EE6C 80240A8C 00431821 */  addu      $v1, $v0, $v1
 /* A6EE70 80240A90 2C620015 */  sltiu     $v0, $v1, 0x15
-/* A6EE74 80240A94 10400009 */  beqz      $v0, .L80240ABC
+/* A6EE74 80240A94 10400009 */  beqz      $v0, L80240ABC_A6EE9C
 /* A6EE78 80240A98 00031080 */   sll      $v0, $v1, 2
 /* A6EE7C 80240A9C 3C018024 */  lui       $at, %hi(jtbl_80243CD8_A720B8)
 /* A6EE80 80240AA0 00220821 */  addu      $at, $at, $v0
@@ -288,7 +288,6 @@ glabel L80240AB0_A6EE90
 /* A6EE90 80240AB0 8E420028 */  lw        $v0, 0x28($s2)
 /* A6EE94 80240AB4 24420001 */  addiu     $v0, $v0, 1
 /* A6EE98 80240AB8 AE420028 */  sw        $v0, 0x28($s2)
-.L80240ABC:
 glabel L80240ABC_A6EE9C
 /* A6EE9C 80240ABC 0000102D */  daddu     $v0, $zero, $zero
 .L80240AC0:

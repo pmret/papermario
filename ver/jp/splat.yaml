@@ -17,9 +17,6 @@ segments:
   - name: header
     type: header
     start: 0x00
-    vram: 0
-    subsections:
-    - [0x0000, header, header]
   - [0x0040, bin]
   - name: main
     type: code
@@ -27,13 +24,16 @@ segments:
     vram: 0x80025C00
     subalign: 8
     subsections:
-    - [0x1000, c]
+    - [0x1000, hasm, entry_point]
+    - [0x1060, c] # 1060 (identical)
+    - [0x1370, c] # 1370
+    - [0x1B10, c] # 1B40
     - [0x2570, c]
     - [0x3BC0, c]
     - [0x42B0, c]
     - [0x5FC0, c]
     - [0x6200, c]
-    - [0x6E00, c]
+    - [0x6E00, c] # 6E40?
     - [0x7300, c]
     - [0x7E00, c]
     - [0x80A0, c]
@@ -86,7 +86,7 @@ segments:
     - [0x3AF40, c]
     - [0x3AFA0, c]
     - [0x3B040, c]
-    - [0x3B150, c]
+    - [0x3B150, c, os/nusys/code_3B150] # 3b4a0
     - [0x3B2A0, c]
     - [0x3B400, c]
     - [0x3B420, c]
@@ -94,8 +94,8 @@ segments:
     - [0x3B7C0, c]
     - [0x3B8E0, c]
     - [0x3BCF0, c]
-    - [0x3C130, c]
-    - [0x3C190, c]
+    - [0x3C130, c, os/osEPiWriteIo]
+    - [0x3C190, c, os/osEPiReadIo]
     - [0x3C1F0, c]
     - [0x3C290, c]
     - [0x3C2E0, c]

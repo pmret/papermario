@@ -97,8 +97,8 @@ glabel func_80240D5C_B6680C
 /* B66970 80240EC0 45030001 */  bc1tl     .L80240EC8
 /* B66974 80240EC4 0000882D */   daddu    $s1, $zero, $zero
 .L80240EC8:
-/* B66978 80240EC8 3C038011 */  lui       $v1, %hi(D_8010EBB3)
-/* B6697C 80240ECC 8063EBB3 */  lb        $v1, %lo(D_8010EBB3)($v1)
+/* B66978 80240EC8 3C038011 */  lui       $v1, %hi(D_8010EBB0+0x3)
+/* B6697C 80240ECC 8063EBB3 */  lb        $v1, %lo(D_8010EBB0+0x3)($v1)
 /* B66980 80240ED0 24020009 */  addiu     $v0, $zero, 9
 /* B66984 80240ED4 50620001 */  beql      $v1, $v0, .L80240EDC
 /* B66988 80240ED8 0000882D */   daddu    $s1, $zero, $zero

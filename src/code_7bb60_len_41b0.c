@@ -17,7 +17,7 @@ s32 func_800E26C4(void) {
     PlayerStatus* playerStatus = gPlayerStatusPtr;
     PlayerData* playerData = &gPlayerData;
     s32 actionState = playerStatus->actionState;
-    s8* temp_8010EBB0 = &D_8010EBB0;
+    Temp8010EBB0* temp_8010EBB0 = &D_8010EBB0;
 
     if (actionState == ActionState_IDLE ||
         actionState == ActionState_WALK ||
@@ -30,17 +30,17 @@ s32 func_800E26C4(void) {
 
     if (actionState == ActionState_RIDE) {
         if (playerData->currentPartner == PartnerID_LAKILESTER || playerData->currentPartner == PartnerID_BOW) {
-            if (temp_8010EBB0[0] != 0) {
+            if (temp_8010EBB0->unk_00 != 0) {
                 return 1;
             } else {
                 playerStatus->animFlags |= 4;
                 return 0;
             }
         } else {
-            if (temp_8010EBB0[3] == 6 || temp_8010EBB0[3] == 7) {
-                return temp_8010EBB0[0] != 0;
+            if (temp_8010EBB0->unk_03 == 6 || temp_8010EBB0->unk_03 == 7) {
+                return temp_8010EBB0->unk_00 != 0;
             }
-            if (temp_8010EBB0[3] == 4) {
+            if (temp_8010EBB0->unk_03 == 4) {
                 playerStatus->animFlags |= 4;
                 return 0;
             }
@@ -381,7 +381,7 @@ void set_action_state(s32 actionState) {
         partner = playerData->currentPartner;
 
         if (partner == PartnerID_SUSHIE || partner == PartnerID_LAKILESTER || partner == PartnerID_PARAKARRY) {
-            if (D_8010EBB0[0]) {
+            if (D_8010EBB0.unk_00 != 0) {
                 playerStatus->animFlags |= 0x4;
                 playerStatus->flags |= 0x800;
                 return;
@@ -468,7 +468,7 @@ s32 check_input_hammer(void) {
 
     if (playerStatus->pressedButtons & Button_B) {
         if (!(playerStatus->flags & 4)) {
-            if (D_8010EBB0[0] != 1 || playerData->currentPartner != PartnerID_WATT) {
+            if (D_8010EBB0.unk_00 != 1 || playerData->currentPartner != PartnerID_WATT) {
                 if (playerData->hammerLevel != -1) {
                     set_action_state(ActionState_HAMMER);
                     return TRUE;

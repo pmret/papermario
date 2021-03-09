@@ -64,7 +64,7 @@ glabel func_8024162C_CB662C
 .L80241714:
 /* CB6714 80241714 8E830070 */  lw        $v1, 0x70($s4)
 /* CB6718 80241718 2C62000F */  sltiu     $v0, $v1, 0xf
-/* CB671C 8024171C 10400034 */  beqz      $v0, .L802417F0
+/* CB671C 8024171C 10400034 */  beqz      $v0, L802417F0_CB67F0
 /* CB6720 80241720 00031080 */   sll      $v0, $v1, 2
 /* CB6724 80241724 3C018024 */  lui       $at, %hi(jtbl_802441B8_CB91B8)
 /* CB6728 80241728 00220821 */  addu      $at, $at, $v0
@@ -126,7 +126,6 @@ glabel L802417E0_CB67E0
 /* CB67E4 802417E4 0200282D */  daddu     $a1, $s0, $zero
 /* CB67E8 802417E8 0C09045E */  jal       func_80241178_CB6178
 /* CB67EC 802417EC 0260302D */   daddu    $a2, $s3, $zero
-.L802417F0:
 glabel L802417F0_CB67F0
 /* CB67F0 802417F0 0000102D */  daddu     $v0, $zero, $zero
 .L802417F4:

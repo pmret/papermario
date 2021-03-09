@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_800981E0
+.word L8002D4A8_88A8, L8002D4B8_88B8, L8002D4C8_88C8, L8002D498_8898, L8002D4D8_88D8, L8002D4E8_88E8, L8002D4F8_88F8, 0
+
+.section .text
+
 glabel update_cameras
 /* 8800 8002D400 27BDFF90 */  addiu     $sp, $sp, -0x70
 /* 8804 8002D404 F7B60068 */  sdc1      $f22, 0x68($sp)
@@ -34,7 +41,7 @@ glabel update_cameras
 /* 8870 8002D470 3C01800A */  lui       $at, %hi(D_8009A634)
 /* 8874 8002D474 A433A634 */  sh        $s3, %lo(D_8009A634)($at)
 /* 8878 8002D478 2C620007 */  sltiu     $v0, $v1, 7
-/* 887C 8002D47C 1040001E */  beqz      $v0, .L8002D4F8
+/* 887C 8002D47C 1040001E */  beqz      $v0, L8002D4F8_88F8
 /* 8880 8002D480 00031080 */   sll      $v0, $v1, 2
 /* 8884 8002D484 3C01800A */  lui       $at, %hi(jtbl_800981E0)
 /* 8888 8002D488 00220821 */  addu      $at, $at, $v0
@@ -71,7 +78,6 @@ glabel L8002D4E8_88E8
 /* 88EC 8002D4EC 0200202D */   daddu    $a0, $s0, $zero
 /* 88F0 8002D4F0 0800B540 */  j         .L8002D500
 /* 88F4 8002D4F4 00000000 */   nop
-.L8002D4F8:
 glabel L8002D4F8_88F8
 /* 88F8 8002D4F8 0C00BE64 */  jal       do_camera_type_6
 /* 88FC 8002D4FC 0200202D */   daddu    $a0, $s0, $zero

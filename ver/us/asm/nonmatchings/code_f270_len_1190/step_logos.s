@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_80098290
+.word L800341F8_F5F8, L8003411C_F51C, L80034150_F550, L80034170_F570, L800341A8_F5A8, L800341D8_F5D8, L800341F8_F5F8, L80034230_F630, L80034278_F678, L800342D4_F6D4, L800342FC_F6FC, L8003432C_F72C
+
+.section .text
+
 glabel step_logos
 /* F4A4 800340A4 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
 /* F4A8 800340A8 8C63419C */  lw        $v1, %lo(gGameStatusPtr)($v1)

@@ -177,7 +177,7 @@ glabel func_80241B34_DF8534
 /* DF87B0 80241DB0 90560000 */  lbu       $s6, ($v0)
 /* DF87B4 80241DB4 2684FF10 */  addiu     $a0, $s4, -0xf0
 /* DF87B8 80241DB8 2C830010 */  sltiu     $v1, $a0, 0x10
-/* DF87BC 80241DBC 10600016 */  beqz      $v1, .L80241E18
+/* DF87BC 80241DBC 10600016 */  beqz      $v1, L80241E18_DF8818
 /* DF87C0 80241DC0 00041080 */   sll      $v0, $a0, 2
 /* DF87C4 80241DC4 3C018025 */  lui       $at, %hi(jtbl_8024E900_E05300)
 /* DF87C8 80241DC8 00220821 */  addu      $at, $at, $v0
@@ -203,7 +203,6 @@ glabel L80241DF0_DF87F0
 /* DF880C 80241E0C 26310001 */  addiu     $s1, $s1, 1
 /* DF8810 80241E10 0809083B */  j         .L802420EC
 /* DF8814 80241E14 AE020004 */   sw       $v0, 4($s0)
-.L80241E18:
 glabel L80241E18_DF8818
 /* DF8818 80241E18 328300FF */  andi      $v1, $s4, 0xff
 /* DF881C 80241E1C 2C6200F0 */  sltiu     $v0, $v1, 0xf0

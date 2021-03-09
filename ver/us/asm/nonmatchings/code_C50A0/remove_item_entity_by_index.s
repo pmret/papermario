@@ -14,7 +14,7 @@ glabel remove_item_entity_by_index
 /* CA120 80133A20 8C630000 */  lw        $v1, ($v1)
 /* CA124 80133A24 8064001B */  lb        $a0, 0x1b($v1)
 /* CA128 80133A28 2C82001D */  sltiu     $v0, $a0, 0x1d
-/* CA12C 80133A2C 10400008 */  beqz      $v0, .L80133A50
+/* CA12C 80133A2C 10400008 */  beqz      $v0, L80133A50_CA150
 /* CA130 80133A30 00041080 */   sll      $v0, $a0, 2
 /* CA134 80133A34 3C018015 */  lui       $at, %hi(jtbl_80150DA0)
 /* CA138 80133A38 00220821 */  addu      $at, $at, $v0
@@ -24,7 +24,6 @@ glabel remove_item_entity_by_index
 glabel L80133A48_CA148
 /* CA148 80133A48 0C0448CA */  jal       func_80112328
 /* CA14C 80133A4C 84640020 */   lh       $a0, 0x20($v1)
-.L80133A50:
 glabel L80133A50_CA150
 /* CA150 80133A50 3C118015 */  lui       $s1, %hi(D_801565A0)
 /* CA154 80133A54 263165A0 */  addiu     $s1, $s1, %lo(D_801565A0)

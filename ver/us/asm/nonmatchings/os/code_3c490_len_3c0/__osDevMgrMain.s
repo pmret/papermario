@@ -1,6 +1,14 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_80099B20
+.word L800613D4_3C7D4, L800612F4_3C6F4, L80061328_3C728, L800613E4_3C7E4, L800613E4_3C7E4, L8006135C_3C75C, L80061398_3C798, 0
+
+.section .text
+
+
 glabel __osDevMgrMain
 /* 3C490 80061090 27BDFFB8 */  addiu     $sp, $sp, -0x48
 /* 3C494 80061094 AFB20030 */  sw        $s2, 0x30($sp)
@@ -157,7 +165,7 @@ glabel __osDevMgrMain
 /* 3C6CC 800612CC 94420000 */  lhu       $v0, ($v0)
 /* 3C6D0 800612D0 2443FFF6 */  addiu     $v1, $v0, -0xa
 /* 3C6D4 800612D4 2C620007 */  sltiu     $v0, $v1, 7
-/* 3C6D8 800612D8 10400042 */  beqz      $v0, .L800613E4
+/* 3C6D8 800612D8 10400042 */  beqz      $v0, L800613E4_3C7E4
 /* 3C6DC 800612DC 00031080 */   sll      $v0, $v1, 2
 /* 3C6E0 800612E0 3C01800A */  lui       $at, %hi(jtbl_80099B20)
 /* 3C6E4 800612E4 00220821 */  addu      $at, $at, $v0
@@ -229,7 +237,6 @@ glabel L800613D4_3C7D4
 /* 3C7D8 800613D8 8CA40004 */  lw        $a0, 4($a1)
 /* 3C7DC 800613DC 0C019608 */  jal       osSendMesg
 /* 3C7E0 800613E0 00003021 */   addu     $a2, $zero, $zero
-.L800613E4:
 glabel L800613E4_3C7E4
 /* 3C7E4 800613E4 2402FFFF */  addiu     $v0, $zero, -1
 .L800613E8:

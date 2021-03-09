@@ -11,17 +11,22 @@ class N64SegRgba16(N64Segment):
         super().__init__(segment, next_segment, options)
 
         if type(segment) is dict:
-            self.compressed = segment.get("compressed", False)
             self.width = segment["width"]
             self.height = segment["height"]
             self.flip = segment.get("flip", "noflip")
         elif len(segment) < 5:
             self.error("missing parameters")
         else:
-            self.compressed = False
             self.width = segment[3]
             self.height = segment[4]
             self.flip = "noflip"
+
+        if self.max_length():
+            expected_len = int(self.max_length())
+            actual_len = self.rom_end - self.rom_start
+            if actual_len > expected_len:
+                print(f"Error: {self.name} should end at 0x{self.rom_start + expected_len:X}, but it ends at 0x{self.rom_end:X}\n(hint: add a 'bin' segment after it)")
+                sys.exit(1)
 
     @property
     def flip_vertical(self):
@@ -52,8 +57,6 @@ class N64SegRgba16(N64Segment):
         path = os.path.join(out_dir, os.path.basename(self.name) + ".png")
 
         data = rom_bytes[self.rom_start: self.rom_end]
-        if self.compressed:
-            data = Yay0decompress.decompress_yay0(data)
 
         w = self.png_writer()
         with open(path, "wb") as f:
@@ -73,13 +76,9 @@ class N64SegRgba16(N64Segment):
         return img
 
     def max_length(self):
-        if self.compressed:
-            return None
         return self.width * self.height * 2
 
     def get_ld_files(self):
         ext = f".{self.type}.png"
-        if self.compressed:
-            ext += ".Yay0"
 
         return [(self.options.get("assets_dir", "img"), f"{self.name}{ext}", ".data", self.rom_start)]

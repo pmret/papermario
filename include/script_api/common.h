@@ -162,7 +162,7 @@ ApiStatus SwitchMessage(ScriptInstance* script, s32 isInitialCall);
 ApiStatus ShowChoice(ScriptInstance* script, s32 isInitialCall);
 ApiStatus CloseChoice(ScriptInstance* script, s32 isInitialCall);
 ApiStatus CancelMessage(ScriptInstance* script, s32 isInitialCall);
-ApiStatus CancelMessageAndBlock(ScriptInstance* script, s32 isInitialCall);
+ApiStatus CancelMessageAndBlock(); // ???
 ApiStatus SetMessageImages(ScriptInstance* script, s32 isInitialCall);
 ApiStatus SetMessageString(ScriptInstance* script, s32 isInitialCall);
 ApiStatus SetMessageValue(ScriptInstance* script, s32 isInitialCall);

@@ -18,7 +18,7 @@ glabel func_802A2C84
 /* 417A48 802A2CB8 00021600 */  sll       $v0, $v0, 0x18
 /* 417A4C 802A2CBC 00021E03 */  sra       $v1, $v0, 0x18
 /* 417A50 802A2CC0 2C62002D */  sltiu     $v0, $v1, 0x2d
-/* 417A54 802A2CC4 104003E9 */  beqz      $v0, .L802A3C6C
+/* 417A54 802A2CC4 104003E9 */  beqz      $v0, L802A3C6C_4189FC
 /* 417A58 802A2CC8 AFB00028 */   sw       $s0, 0x28($sp)
 /* 417A5C 802A2CCC 00031080 */  sll       $v0, $v1, 2
 /* 417A60 802A2CD0 3C01802B */  lui       $at, %hi(jtbl_802AB808)
@@ -825,12 +825,12 @@ glabel L802A3718_4184A8
 /* 418618 802A3888 00000000 */   nop
 /* 41861C 802A388C 0C03A674 */  jal       status_menu_stop_blinking_fp
 /* 418620 802A3890 00000000 */   nop
-/* 418624 802A3894 080A8E5D */  j         .L802A3974
+/* 418624 802A3894 080A8E5D */  j         L802A3974_418704
 /* 418628 802A3898 00000000 */   nop
 .L802A389C:
 /* 41862C 802A389C 0C03A6A5 */  jal       status_menu_stop_blinking_sp
 /* 418630 802A38A0 00000000 */   nop
-/* 418634 802A38A4 080A8E5D */  j         .L802A3974
+/* 418634 802A38A4 080A8E5D */  j         L802A3974_418704
 /* 418638 802A38A8 00000000 */   nop
 glabel L802A38AC_41863C
 /* 41863C 802A38AC 3C02802B */  lui       $v0, %hi(battle_menu_hasSpiritsMenu)
@@ -889,7 +889,6 @@ glabel L802A38DC_41866C
 /* 4186F8 802A3968 8C22D1F8 */  lw        $v0, %lo(battle_menu_moveOptionIndexMap)($at)
 /* 4186FC 802A396C 080A8E82 */  j         .L802A3A08
 /* 418700 802A3970 2403000B */   addiu    $v1, $zero, 0xb
-.L802A3974:
 glabel L802A3974_418704
 /* 418704 802A3974 3C03802B */  lui       $v1, %hi(battle_menu_moveCursorPos)
 /* 418708 802A3978 8063D109 */  lb        $v1, %lo(battle_menu_moveCursorPos)($v1)
@@ -1099,7 +1098,6 @@ glabel L802A3BC0_418950
 .L802A3C64:
 /* 4189F4 802A3C64 3C01802B */  lui       $at, %hi(battle_menu_moveState)
 /* 4189F8 802A3C68 A022D108 */  sb        $v0, %lo(battle_menu_moveState)($at)
-.L802A3C6C:
 glabel L802A3C6C_4189FC
 /* 4189FC 802A3C6C 0000102D */  daddu     $v0, $zero, $zero
 .L802A3C70:

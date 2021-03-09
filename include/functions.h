@@ -132,6 +132,8 @@ s32 func_80055464(s32, s32);
 void func_800561A4(s32);
 s32 osGetId();
 
+void mem_clear(s8* data, s32 numBytes);
+
 s32* create_icon(s32 iconIndex);
 void set_icon_render_pos(s32 iconIndex, s32 posX, s32 posY);
 
@@ -144,7 +146,7 @@ void fx_emote(s32, Npc*, f32, f32, f32, f32, f32, s32, s32*);
 f32 func_800E0088(f32, f32);
 void func_800E06C0(s32);
 void close_status_menu(void);
-s32 func_800EB168(s32);
+void func_800EB168(s32);
 
 Shadow* create_shadow_type(s32 type, f32 x, f32 y, f32 z);
 
@@ -199,10 +201,13 @@ ItemEntity* get_item_entity(s32 itemEntityIndex);
 s32 make_item_entity_nodelay(s32 itemID, f32 x, f32 y, f32 z, ItemSpawnMode itemSpawnMode, s32 pickupVar);
 void set_item_entity_flags(s32 itemEntityIndex, s32 flag);
 
+s32 bind_dynamic_entity_7(s32* updateFunc, s32* drawFunc);
+
 void set_cam_viewport(s16 id, s16 x, s16 y, s16 width, s16 height);
 
 void disable_player_shadow(void);
 void move_player(s32 duration, f32 heading, f32 speed);
+s32 enable_player_input(void);
 
 Npc* get_npc_safe(NpcId npcId);
 Npc* get_npc_unsafe(NpcId npcId);

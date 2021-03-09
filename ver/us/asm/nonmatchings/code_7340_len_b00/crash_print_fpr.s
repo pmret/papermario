@@ -1,6 +1,16 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_80098034
+.ascii "F%02d:%+.3e\0"
+
+glabel D_80098040
+.ascii "F%02d:---------\0"
+
+.section .text
+
 glabel crash_print_fpr
 /* 76B8 8002C2B8 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 76BC 8002C2BC AFBF0018 */  sw        $ra, 0x18($sp)

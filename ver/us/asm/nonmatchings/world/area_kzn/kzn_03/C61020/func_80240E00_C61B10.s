@@ -97,8 +97,8 @@ glabel func_80240E00_C61B10
 /* C61C74 80240F64 45030001 */  bc1tl     .L80240F6C
 /* C61C78 80240F68 0000882D */   daddu    $s1, $zero, $zero
 .L80240F6C:
-/* C61C7C 80240F6C 3C038011 */  lui       $v1, %hi(D_8010EBB3)
-/* C61C80 80240F70 8063EBB3 */  lb        $v1, %lo(D_8010EBB3)($v1)
+/* C61C7C 80240F6C 3C038011 */  lui       $v1, %hi(D_8010EBB0+0x3)
+/* C61C80 80240F70 8063EBB3 */  lb        $v1, %lo(D_8010EBB0+0x3)($v1)
 /* C61C84 80240F74 24020009 */  addiu     $v0, $zero, 9
 /* C61C88 80240F78 50620001 */  beql      $v1, $v0, .L80240F80
 /* C61C8C 80240F7C 0000882D */   daddu    $s1, $zero, $zero

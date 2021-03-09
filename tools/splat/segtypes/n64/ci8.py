@@ -15,8 +15,6 @@ class N64SegCi8(N64SegRgba16):
         self.path = os.path.join(out_dir, os.path.basename(self.name) + ".png")
 
         data = rom_bytes[self.rom_start: self.rom_end]
-        if self.compressed:
-            data = Yay0decompress.decompress_yay0(data)
 
         self.image = self.parse_image(data, self.width, self.height)
 
@@ -57,6 +55,4 @@ class N64SegCi8(N64SegRgba16):
         return data
 
     def max_length(self):
-        if self.compressed:
-            return None
         return self.width * self.height

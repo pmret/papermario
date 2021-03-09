@@ -1,6 +1,49 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_80098064
+.ascii "THREAD:%d  (%s)\0"
+
+glabel D_80098074
+.ascii "PC:%08XH   SR:%08XH   VA:%08XH\0\0"
+
+glabel D_80098094
+.ascii "AT:%08XH   V0:%08XH   V1:%08XH\0\0"
+
+glabel D_800980B4
+.ascii "A0:%08XH   A1:%08XH   A2:%08XH\0\0"
+
+glabel D_800980D4
+.ascii "A3:%08XH   T0:%08XH   T1:%08XH\0\0"
+
+glabel D_800980F4
+.ascii "T2:%08XH   T3:%08XH   T4:%08XH\0\0"
+
+glabel D_80098114
+.ascii "T5:%08XH   T6:%08XH   T7:%08XH\0\0"
+
+glabel D_80098134
+.ascii "S0:%08XH   S1:%08XH   S2:%08XH\0\0"
+
+glabel D_80098154
+.ascii "S3:%08XH   S4:%08XH   S5:%08XH\0\0"
+
+glabel D_80098174
+.ascii "S6:%08XH   S7:%08XH   T8:%08XH\0\0"
+
+glabel D_80098194
+.ascii "T9:%08XH   GP:%08XH   SP:%08XH\0\0"
+
+glabel D_800981B4
+.ascii "S8:%08XH   RA:%08XH\0"
+
+glabel D_800981C8
+.word 0x4D4D3A25, 0x30385848, 0x00000000, 0x00000000, 0x00000000, 0x00000000
+
+.section .text
+
 glabel crash_show_handler
 /* 77B0 8002C3B0 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* 77B4 8002C3B4 AFB1001C */  sw        $s1, 0x1c($sp)

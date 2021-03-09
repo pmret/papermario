@@ -1,6 +1,16 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_80098280
+.double 0.1
+
+glabel D_80098288
+.double -0.1
+
+.section .text
+
 glabel func_80032970
 /* DD70 80032970 44853000 */  mtc1      $a1, $f6
 /* DD74 80032974 94820000 */  lhu       $v0, ($a0)
@@ -30,8 +40,8 @@ glabel func_80032970
 /* DDCC 800329CC 00431024 */  and       $v0, $v0, $v1
 /* DDD0 800329D0 10400007 */  beqz      $v0, .L800329F0
 /* DDD4 800329D4 00000000 */   nop
-/* DDD8 800329D8 3C028011 */  lui       $v0, %hi(D_8010EBB4)
-/* DDDC 800329DC 8442EBB4 */  lh        $v0, %lo(D_8010EBB4)($v0)
+/* DDD8 800329D8 3C028011 */  lui       $v0, %hi(D_8010EBB0+0x4)
+/* DDDC 800329DC 8442EBB4 */  lh        $v0, %lo(D_8010EBB0+0x4)($v0)
 /* DDE0 800329E0 44824000 */  mtc1      $v0, $f8
 /* DDE4 800329E4 00000000 */  nop
 /* DDE8 800329E8 0800CA7E */  j         .L800329F8

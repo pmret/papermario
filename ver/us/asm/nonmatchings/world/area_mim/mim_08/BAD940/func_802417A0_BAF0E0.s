@@ -97,8 +97,8 @@ glabel func_802417A0_BAF0E0
 /* BAF244 80241904 45030001 */  bc1tl     .L8024190C
 /* BAF248 80241908 0000882D */   daddu    $s1, $zero, $zero
 .L8024190C:
-/* BAF24C 8024190C 3C038011 */  lui       $v1, %hi(D_8010EBB3)
-/* BAF250 80241910 8063EBB3 */  lb        $v1, %lo(D_8010EBB3)($v1)
+/* BAF24C 8024190C 3C038011 */  lui       $v1, %hi(D_8010EBB0+0x3)
+/* BAF250 80241910 8063EBB3 */  lb        $v1, %lo(D_8010EBB0+0x3)($v1)
 /* BAF254 80241914 24020009 */  addiu     $v0, $zero, 9
 /* BAF258 80241918 50620001 */  beql      $v1, $v0, .L80241920
 /* BAF25C 8024191C 0000882D */   daddu    $s1, $zero, $zero

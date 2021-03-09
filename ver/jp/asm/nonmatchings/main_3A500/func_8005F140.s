@@ -33,8 +33,8 @@ glabel func_8005F140
 /* 3A5AC 8005F1AC 24104000 */  addiu     $s0, $zero, 0x4000
 .L8005F1B0:
 /* 3A5B0 8005F1B0 27A50010 */  addiu     $a1, $sp, 0x10
-/* 3A5B4 8005F1B4 3C04800A */  lui       $a0, %hi(D_8009A618)
-/* 3A5B8 8005F1B8 8C84A618 */  lw        $a0, %lo(D_8009A618)($a0)
+/* 3A5B4 8005F1B4 3C04800A */  lui       $a0, %hi(carthandle)
+/* 3A5B8 8005F1B8 8C84A618 */  lw        $a0, %lo(carthandle)($a0)
 /* 3A5BC 8005F1BC 0000302D */  daddu     $a2, $zero, $zero
 /* 3A5C0 8005F1C0 AFB20018 */  sw        $s2, 0x18($sp)
 /* 3A5C4 8005F1C4 AFB3001C */  sw        $s3, 0x1c($sp)

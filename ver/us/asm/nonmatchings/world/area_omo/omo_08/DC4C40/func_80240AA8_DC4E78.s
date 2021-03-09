@@ -122,7 +122,7 @@ glabel func_80240AA8_DC4E78
 .L80240C68:
 /* DC5038 80240C68 8E630070 */  lw        $v1, 0x70($s3)
 /* DC503C 80240C6C 2C620064 */  sltiu     $v0, $v1, 0x64
-/* DC5040 80240C70 10400050 */  beqz      $v0, .L80240DB4
+/* DC5040 80240C70 10400050 */  beqz      $v0, L80240DB4_DC5184
 /* DC5044 80240C74 00031080 */   sll      $v0, $v1, 2
 /* DC5048 80240C78 3C018025 */  lui       $at, %hi(jtbl_80248770_DCCB40)
 /* DC504C 80240C7C 00220821 */  addu      $at, $at, $v0
@@ -139,7 +139,7 @@ glabel L80240C9C_DC506C
 /* DC5070 80240CA0 0280282D */  daddu     $a1, $s4, $zero
 /* DC5074 80240CA4 0C0125AE */  jal       func_800496B8
 /* DC5078 80240CA8 02A0302D */   daddu    $a2, $s5, $zero
-/* DC507C 80240CAC 0809036D */  j         .L80240DB4
+/* DC507C 80240CAC 0809036D */  j         L80240DB4_DC5184
 /* DC5080 80240CB0 00000000 */   nop
 glabel L80240CB4_DC5084
 /* DC5084 80240CB4 0260202D */  daddu     $a0, $s3, $zero
@@ -151,7 +151,7 @@ glabel L80240CC4_DC5094
 /* DC5098 80240CC8 0280282D */  daddu     $a1, $s4, $zero
 /* DC509C 80240CCC 0C012701 */  jal       func_80049C04
 /* DC50A0 80240CD0 02A0302D */   daddu    $a2, $s5, $zero
-/* DC50A4 80240CD4 0809036D */  j         .L80240DB4
+/* DC50A4 80240CD4 0809036D */  j         L80240DB4_DC5184
 /* DC50A8 80240CD8 00000000 */   nop
 glabel L80240CDC_DC50AC
 /* DC50AC 80240CDC 0260202D */  daddu     $a0, $s3, $zero
@@ -163,7 +163,7 @@ glabel L80240CEC_DC50BC
 /* DC50C0 80240CF0 0280282D */  daddu     $a1, $s4, $zero
 /* DC50C4 80240CF4 0C0127B3 */  jal       func_80049ECC
 /* DC50C8 80240CF8 02A0302D */   daddu    $a2, $s5, $zero
-/* DC50CC 80240CFC 0809036D */  j         .L80240DB4
+/* DC50CC 80240CFC 0809036D */  j         L80240DB4_DC5184
 /* DC50D0 80240D00 00000000 */   nop
 glabel L80240D04_DC50D4
 /* DC50D4 80240D04 0260202D */  daddu     $a0, $s3, $zero
@@ -177,7 +177,7 @@ glabel L80240D14_DC50E4
 /* DC50F0 80240D20 02A0302D */   daddu    $a2, $s5, $zero
 /* DC50F4 80240D24 8E630070 */  lw        $v1, 0x70($s3)
 /* DC50F8 80240D28 2402000E */  addiu     $v0, $zero, 0xe
-/* DC50FC 80240D2C 14620021 */  bne       $v1, $v0, .L80240DB4
+/* DC50FC 80240D2C 14620021 */  bne       $v1, $v0, L80240DB4_DC5184
 /* DC5100 80240D30 00000000 */   nop
 glabel L80240D34_DC5104
 /* DC5104 80240D34 0260202D */  daddu     $a0, $s3, $zero
@@ -186,7 +186,7 @@ glabel L80240D34_DC5104
 /* DC5110 80240D40 02A0302D */   daddu    $a2, $s5, $zero
 /* DC5114 80240D44 8E630070 */  lw        $v1, 0x70($s3)
 /* DC5118 80240D48 2402000F */  addiu     $v0, $zero, 0xf
-/* DC511C 80240D4C 14620019 */  bne       $v1, $v0, .L80240DB4
+/* DC511C 80240D4C 14620019 */  bne       $v1, $v0, L80240DB4_DC5184
 /* DC5120 80240D50 00000000 */   nop
 glabel L80240D54_DC5124
 /* DC5124 80240D54 0260202D */  daddu     $a0, $s3, $zero
@@ -195,7 +195,7 @@ glabel L80240D54_DC5124
 /* DC5130 80240D60 02A0302D */   daddu    $a2, $s5, $zero
 /* DC5134 80240D64 8E630070 */  lw        $v1, 0x70($s3)
 /* DC5138 80240D68 24020010 */  addiu     $v0, $zero, 0x10
-/* DC513C 80240D6C 14620011 */  bne       $v1, $v0, .L80240DB4
+/* DC513C 80240D6C 14620011 */  bne       $v1, $v0, L80240DB4_DC5184
 /* DC5140 80240D70 00000000 */   nop
 glabel L80240D74_DC5144
 /* DC5144 80240D74 0260202D */  daddu     $a0, $s3, $zero
@@ -204,19 +204,18 @@ glabel L80240D74_DC5144
 /* DC5150 80240D80 02A0302D */   daddu    $a2, $s5, $zero
 /* DC5154 80240D84 8E630070 */  lw        $v1, 0x70($s3)
 /* DC5158 80240D88 24020011 */  addiu     $v0, $zero, 0x11
-/* DC515C 80240D8C 14620009 */  bne       $v1, $v0, .L80240DB4
+/* DC515C 80240D8C 14620009 */  bne       $v1, $v0, L80240DB4_DC5184
 /* DC5160 80240D90 00000000 */   nop
 glabel L80240D94_DC5164
 /* DC5164 80240D94 0260202D */  daddu     $a0, $s3, $zero
 /* DC5168 80240D98 0280282D */  daddu     $a1, $s4, $zero
 /* DC516C 80240D9C 0C090292 */  jal       func_80240A48_DC4E18
 /* DC5170 80240DA0 02A0302D */   daddu    $a2, $s5, $zero
-/* DC5174 80240DA4 0809036D */  j         .L80240DB4
+/* DC5174 80240DA4 0809036D */  j         L80240DB4_DC5184
 /* DC5178 80240DA8 00000000 */   nop
 glabel L80240DAC_DC517C
 /* DC517C 80240DAC 0C0129CF */  jal       func_8004A73C
 /* DC5180 80240DB0 0260202D */   daddu    $a0, $s3, $zero
-.L80240DB4:
 glabel L80240DB4_DC5184
 /* DC5184 80240DB4 8FBF0060 */  lw        $ra, 0x60($sp)
 /* DC5188 80240DB8 8FB5005C */  lw        $s5, 0x5c($sp)

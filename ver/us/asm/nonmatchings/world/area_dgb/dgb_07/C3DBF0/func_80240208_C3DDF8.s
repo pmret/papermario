@@ -97,8 +97,8 @@ glabel func_80240208_C3DDF8
 /* C3DF5C 8024036C 45030001 */  bc1tl     .L80240374
 /* C3DF60 80240370 0000882D */   daddu    $s1, $zero, $zero
 .L80240374:
-/* C3DF64 80240374 3C038011 */  lui       $v1, %hi(D_8010EBB3)
-/* C3DF68 80240378 8063EBB3 */  lb        $v1, %lo(D_8010EBB3)($v1)
+/* C3DF64 80240374 3C038011 */  lui       $v1, %hi(D_8010EBB0+0x3)
+/* C3DF68 80240378 8063EBB3 */  lb        $v1, %lo(D_8010EBB0+0x3)($v1)
 /* C3DF6C 8024037C 24020009 */  addiu     $v0, $zero, 9
 /* C3DF70 80240380 50620001 */  beql      $v1, $v0, .L80240388
 /* C3DF74 80240384 0000882D */   daddu    $s1, $zero, $zero

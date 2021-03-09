@@ -47,3 +47,4 @@ class Symbol:
         self.size = size
         self.given_name = given_name
         self.access_mnemonic = None
+        self.disasm_str = None

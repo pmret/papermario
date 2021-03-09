@@ -28,7 +28,7 @@ glabel func_802D4050
 /* F8A5C 802D40AC 0040182D */  daddu     $v1, $v0, $zero
 /* F8A60 802D40B0 26100001 */  addiu     $s0, $s0, 1
 /* F8A64 802D40B4 2E020006 */  sltiu     $v0, $s0, 6
-/* F8A68 802D40B8 10400023 */  beqz      $v0, .L802D4148
+/* F8A68 802D40B8 10400023 */  beqz      $v0, L802D4148_F8AF8
 /* F8A6C 802D40BC 00101080 */   sll      $v0, $s0, 2
 /* F8A70 802D40C0 3C01802E */  lui       $at, %hi(jtbl_802DA240)
 /* F8A74 802D40C4 00220821 */  addu      $at, $at, $v0
@@ -37,7 +37,7 @@ glabel func_802D4050
 /* F8A80 802D40D0 00000000 */   nop
 glabel L802D40D4_F8A84
 /* F8A84 802D40D4 24020001 */  addiu     $v0, $zero, 1
-/* F8A88 802D40D8 080B5052 */  j         .L802D4148
+/* F8A88 802D40D8 080B5052 */  j         L802D4148_F8AF8
 /* F8A8C 802D40DC A0620004 */   sb       $v0, 4($v1)
 glabel L802D40E0_F8A90
 /* F8A90 802D40E0 24020001 */  addiu     $v0, $zero, 1
@@ -71,7 +71,6 @@ glabel L802D4104_F8AB4
 /* F8AEC 802D413C 8E250000 */  lw        $a1, ($s1)
 /* F8AF0 802D4140 0C0B1EAF */  jal       get_variable
 /* F8AF4 802D4144 0240202D */   daddu    $a0, $s2, $zero
-.L802D4148:
 glabel L802D4148_F8AF8
 /* F8AF8 802D4148 8FBF001C */  lw        $ra, 0x1c($sp)
 /* F8AFC 802D414C 8FB20018 */  lw        $s2, 0x18($sp)

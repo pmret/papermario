@@ -34,8 +34,8 @@ glabel func_8024019C_BF493C
 /* BF49A4 80240204 0809009C */  j         .L80240270
 /* BF49A8 80240208 AC820000 */   sw       $v0, ($a0)
 .L8024020C:
-/* BF49AC 8024020C 3C108011 */  lui       $s0, %hi(D_8010C930)
-/* BF49B0 80240210 2610C930 */  addiu     $s0, $s0, %lo(D_8010C930)
+/* BF49AC 8024020C 3C108011 */  lui       $s0, %hi(wPartnerNpc)
+/* BF49B0 80240210 2610C930 */  addiu     $s0, $s0, %lo(wPartnerNpc)
 /* BF49B4 80240214 0C03BD17 */  jal       clear_partner_move_history
 /* BF49B8 80240218 8E040000 */   lw       $a0, ($s0)
 /* BF49BC 8024021C C6200028 */  lwc1      $f0, 0x28($s1)

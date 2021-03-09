@@ -19,5 +19,4 @@ class N64SegIa8(N64SegIa4):
         return img
 
     def max_length(self):
-        if self.compressed: return None
         return self.width * self.height

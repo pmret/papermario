@@ -1,11 +1,11 @@
 #include "common.h"
 
 s32 func_802B7000_2(void) {
-    s8* something = &D_8010EBB0;
+    Temp8010EBB0* something = &D_8010EBB0;
     ActionState* actionState = gPlayerActionState;
 
     if (actionState != ActionState_USE_TWEESTER) {
-        if (something[0] != 1 || (something[3] != 9 && something[3] != 4)) {
+        if (something->unk_00 != 1 || (something->unk_03 != 9 && something->unk_03 != 4)) {
             return 0;
         }
     }

@@ -21,8 +21,8 @@ glabel func_8005E5BC
 /* 399FC 8005E5FC 24428570 */  addiu     $v0, $v0, %lo(D_800B8570)
 /* 39A00 8005E600 AFA20010 */  sw        $v0, 0x10($sp)
 /* 39A04 8005E604 2402000A */  addiu     $v0, $zero, 0xa
-/* 39A08 8005E608 3C068002 */  lui       $a2, %hi(D_80025F70)
-/* 39A0C 8005E60C 24C65F70 */  addiu     $a2, $a2, %lo(D_80025F70)
+/* 39A08 8005E608 3C068002 */  lui       $a2, %hi(func_80025F70)
+/* 39A0C 8005E60C 24C65F70 */  addiu     $a2, $a2, %lo(func_80025F70)
 /* 39A10 8005E610 0000382D */  daddu     $a3, $zero, $zero
 /* 39A14 8005E614 0C01978C */  jal       func_80065E30
 /* 39A18 8005E618 AFA20014 */   sw       $v0, 0x14($sp)

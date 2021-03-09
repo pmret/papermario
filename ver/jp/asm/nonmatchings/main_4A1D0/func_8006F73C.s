@@ -16,14 +16,14 @@ glabel func_8006F73C
 /* 4AB68 8006F768 00A17025 */  or        $t6, $a1, $at
 /* 4AB6C 8006F76C 01C02825 */  or        $a1, $t6, $zero
 /* 4AB70 8006F770 3C06F000 */  lui       $a2, 0xf000
-/* 4AB74 8006F774 0C01834C */  jal       func_80060D30
+/* 4AB74 8006F774 0C01834C */  jal       osEPiWriteIo
 /* 4AB78 8006F778 00000000 */   nop
 /* 4AB7C 8006F77C 3C04800B */  lui       $a0, %hi(D_800B0C50)
 /* 4AB80 8006F780 24840C50 */  addiu     $a0, $a0, %lo(D_800B0C50)
 /* 4AB84 8006F784 3C05800B */  lui       $a1, %hi(D_800B0C5C)
 /* 4AB88 8006F788 8CA50C5C */  lw        $a1, %lo(D_800B0C5C)($a1)
 /* 4AB8C 8006F78C 27A60018 */  addiu     $a2, $sp, 0x18
-/* 4AB90 8006F790 0C018364 */  jal       func_80060D90
+/* 4AB90 8006F790 0C018364 */  jal       osEPiReadIo
 /* 4AB94 8006F794 00000000 */   nop
 /* 4AB98 8006F798 8FAF0024 */  lw        $t7, 0x24($sp)
 /* 4AB9C 8006F79C 8FB80020 */  lw        $t8, 0x20($sp)

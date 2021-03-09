@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_800983E0
+.word L80037718_12B18, L8003768C_12A8C, L800376BC_12ABC, L80037718_12B18, L800376C8_12AC8, L800376D4_12AD4, 0x656E6400, 0x6B6B6A5F, 0x32360000, 0x61726E5F, 0x30380000, 0x6B6B6A5F, 0x31310000, 0x6E6F6B5F, 0x30320000, 0x6D61635F, 0x30330000, 0x6B7A6E5F, 0x30320000, 0x6D61635F, 0x30300000, 0x6A616E5F, 0x30340000, 0x7472645F, 0x30390000, 0x74696B5F, 0x30330000, 0x69736B5F, 0x30340000, 0x6E6F6B5F, 0x31320000, 0
+
+.section .text
+
 glabel title_append_gfx
 /* 12A38 80037638 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
 /* 12A3C 8003763C 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
@@ -16,7 +23,7 @@ glabel title_append_gfx
 /* 12A64 80037664 AFB00010 */  sw        $s0, 0x10($sp)
 /* 12A68 80037668 804300AC */  lb        $v1, 0xac($v0)
 /* 12A6C 8003766C 2C620006 */  sltiu     $v0, $v1, 6
-/* 12A70 80037670 10400029 */  beqz      $v0, .L80037718
+/* 12A70 80037670 10400029 */  beqz      $v0, L80037718_12B18
 /* 12A74 80037674 00031080 */   sll      $v0, $v1, 2
 /* 12A78 80037678 3C01800A */  lui       $at, %hi(jtbl_800983E0)
 /* 12A7C 8003767C 00220821 */  addu      $at, $at, $v0
@@ -64,7 +71,6 @@ glabel L800376D4_12AD4
 .L80037710:
 /* 12B10 80037710 0C00DE5A */  jal       title_draw_images
 /* 12B14 80037714 46006386 */   mov.s    $f14, $f12
-.L80037718:
 glabel L80037718_12B18
 /* 12B18 80037718 3C03FF10 */  lui       $v1, 0xff10
 /* 12B1C 8003771C 3463013F */  ori       $v1, $v1, 0x13f

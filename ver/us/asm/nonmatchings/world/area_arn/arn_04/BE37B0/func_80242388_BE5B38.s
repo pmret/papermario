@@ -80,8 +80,8 @@ glabel func_80242388_BE5B38
 /* BE5C5C 802424AC 45030001 */  bc1tl     .L802424B4
 /* BE5C60 802424B0 0000802D */   daddu    $s0, $zero, $zero
 .L802424B4:
-/* BE5C64 802424B4 3C038011 */  lui       $v1, %hi(D_8010EBB3)
-/* BE5C68 802424B8 8063EBB3 */  lb        $v1, %lo(D_8010EBB3)($v1)
+/* BE5C64 802424B4 3C038011 */  lui       $v1, %hi(D_8010EBB0+0x3)
+/* BE5C68 802424B8 8063EBB3 */  lb        $v1, %lo(D_8010EBB0+0x3)($v1)
 /* BE5C6C 802424BC 24020009 */  addiu     $v0, $zero, 9
 /* BE5C70 802424C0 50620001 */  beql      $v1, $v0, .L802424C8
 /* BE5C74 802424C4 0000802D */   daddu    $s0, $zero, $zero
