@@ -10,12 +10,12 @@ glabel osPfsInitPak
 /* 445A4 800691A4 AFB30064 */  sw        $s3, 0x64($sp)
 /* 445A8 800691A8 00C09821 */  addu      $s3, $a2, $zero
 /* 445AC 800691AC AFBF0068 */  sw        $ra, 0x68($sp)
-/* 445B0 800691B0 0C019771 */  jal       osSiGetAccess
+/* 445B0 800691B0 0C019771 */  jal       __osSiGetAccess
 /* 445B4 800691B4 AFB00058 */   sw       $s0, 0x58($sp)
 /* 445B8 800691B8 02402021 */  addu      $a0, $s2, $zero
 /* 445BC 800691BC 0C01A530 */  jal       osPfsGetStatus
 /* 445C0 800691C0 02602821 */   addu     $a1, $s3, $zero
-/* 445C4 800691C4 0C01978C */  jal       osSiRelAccess
+/* 445C4 800691C4 0C01978C */  jal       __osSiRelAccess
 /* 445C8 800691C8 00408021 */   addu     $s0, $v0, $zero
 /* 445CC 800691CC 16000067 */  bnez      $s0, .L8006936C
 /* 445D0 800691D0 02001021 */   addu     $v0, $s0, $zero

@@ -392,8 +392,8 @@ glabel L8006AF00_46300
 /* 46344 8006AF44 0801AC75 */  j         osDispatchThread
 /* 46348 8006AF48 AD3A0000 */   sw       $k0, ($t1)
 .L8006AF4C:
-/* 4634C 8006AF4C 3C018009 */  lui       $at, %hi(D_80094664)
-/* 46350 8006AF50 AC3A4664 */  sw        $k0, %lo(D_80094664)($at)
+/* 4634C 8006AF4C 3C018009 */  lui       $at, %hi(__osFaultedThread)
+/* 46350 8006AF50 AC3A4664 */  sw        $k0, %lo(__osFaultedThread)($at)
 /* 46354 8006AF54 24090001 */  addiu     $t1, $zero, 1
 /* 46358 8006AF58 A7490010 */  sh        $t1, 0x10($k0)
 /* 4635C 8006AF5C 24090002 */  addiu     $t1, $zero, 2

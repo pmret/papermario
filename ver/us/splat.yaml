@@ -256,7 +256,11 @@ segments:
     - [0x6F1C0, .data, os/code_3f310_len_3c0]
     - [0x6F1D0, .data, os/code_3f6d0_len_320]
     - [0x6F1E0, .data, os/sins]
-    - [0x6F9E0, data] # has scripts?
+    - [0x6F9E0, .data, os/code_3FEA0]
+    - [0x6FA30, .data, os/code_40c20_len_1f0]
+    - [0x6FA40, .data, os/code_41170_len_f0]
+    - [0x6FA50, .data, os/osSetThreadPri]
+    - [0x6FA70, data] # has scripts?
     - [0x70E30, .data, battle/battle]
     - [0x71430, data]
     - [0x73130, rodata, code_1060_len_310]

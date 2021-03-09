@@ -5,7 +5,7 @@ glabel osContStartQuery
 /* 3CD00 80061900 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 3CD04 80061904 AFB00010 */  sw        $s0, 0x10($sp)
 /* 3CD08 80061908 AFBF0014 */  sw        $ra, 0x14($sp)
-/* 3CD0C 8006190C 0C019771 */  jal       osSiGetAccess
+/* 3CD0C 8006190C 0C019771 */  jal       __osSiGetAccess
 /* 3CD10 80061910 00808021 */   addu     $s0, $a0, $zero
 /* 3CD14 80061914 3C02800A */  lui       $v0, %hi(D_8009A61C)
 /* 3CD18 80061918 9042A61C */  lbu       $v0, %lo(D_8009A61C)($v0)
@@ -28,7 +28,7 @@ glabel osContStartQuery
 /* 3CD58 80061958 00002021 */   addu     $a0, $zero, $zero
 /* 3CD5C 8006195C 3C01800A */  lui       $at, %hi(D_8009A61C)
 /* 3CD60 80061960 A020A61C */  sb        $zero, %lo(D_8009A61C)($at)
-/* 3CD64 80061964 0C01978C */  jal       osSiRelAccess
+/* 3CD64 80061964 0C01978C */  jal       __osSiRelAccess
 /* 3CD68 80061968 00408021 */   addu     $s0, $v0, $zero
 /* 3CD6C 8006196C 02001021 */  addu      $v0, $s0, $zero
 /* 3CD70 80061970 8FBF0014 */  lw        $ra, 0x14($sp)

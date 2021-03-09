@@ -1,5 +1,18 @@
 #include "common.h"
 
+ struct __osThreadTail
+{
+    OSThread *next;
+    OSPri priority;
+};
+
+struct __osThreadTail __osThreadTail = {0, -1};
+OSThread *__osRunQueue = (OSThread *)&__osThreadTail;
+OSThread *__osActiveQueue = (OSThread *)&__osThreadTail;
+OSThread *__osRunningThread = {0};
+OSThread *__osFaultedThread = {0};
+
+#ifdef MOVE_ISSUE
 void osSetThreadPri(OSThread* thread, OSPri pri) {
     register u32 prevInt = __osDisableInt();
 
@@ -21,3 +34,6 @@ void osSetThreadPri(OSThread* thread, OSPri pri) {
 
     __osRestoreInt(prevInt);
 }
+#else
+INCLUDE_ASM(void, "os/osSetThreadPri", osSetThreadPri, OSThread* thread, OSPri pri);
+#endif

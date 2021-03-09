@@ -89,7 +89,7 @@ glabel osContInit
 /* 3D0C4 80061CC4 0C018747 */  jal       osContGetInitData
 /* 3D0C8 80061CC8 02C02821 */   addu     $a1, $s6, $zero
 /* 3D0CC 80061CCC 3C01800A */  lui       $at, %hi(D_8009A61C)
-/* 3D0D0 80061CD0 0C01975C */  jal       osSiCreateAccessQueue
+/* 3D0D0 80061CD0 0C01975C */  jal       __osSiCreateAccessQueue
 /* 3D0D4 80061CD4 A020A61C */   sb       $zero, %lo(D_8009A61C)($at)
 /* 3D0D8 80061CD8 3C04800E */  lui       $a0, %hi(D_800DAAC0)
 /* 3D0DC 80061CDC 2484AAC0 */  addiu     $a0, $a0, %lo(D_800DAAC0)

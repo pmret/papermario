@@ -15,7 +15,7 @@ glabel osPfsIsPlug
 /* 48768 8006D368 AFB60050 */  sw        $s6, 0x50($sp)
 /* 4876C 8006D36C AFB5004C */  sw        $s5, 0x4c($sp)
 /* 48770 8006D370 AFB40048 */  sw        $s4, 0x48($sp)
-/* 48774 8006D374 0C019771 */  jal       osSiGetAccess
+/* 48774 8006D374 0C019771 */  jal       __osSiGetAccess
 /* 48778 8006D378 AFB1003C */   sw       $s1, 0x3c($sp)
 /* 4877C 8006D37C 3C14800E */  lui       $s4, %hi(D_800DA000)
 /* 48780 8006D380 2694A000 */  addiu     $s4, $s4, %lo(D_800DA000)
@@ -89,7 +89,7 @@ glabel osPfsIsPlug
 /* 48878 8006D478 1440FFF4 */  bnez      $v0, .L8006D44C
 /* 4887C 8006D47C 24630004 */   addiu    $v1, $v1, 4
 .L8006D480:
-/* 48880 8006D480 0C01978C */  jal       osSiRelAccess
+/* 48880 8006D480 0C01978C */  jal       __osSiRelAccess
 /* 48884 8006D484 00000000 */   nop
 /* 48888 8006D488 A2F30000 */  sb        $s3, ($s7)
 /* 4888C 8006D48C 02C01021 */  addu      $v0, $s6, $zero

@@ -1,15 +1,15 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel osSiGetAccess
-/* 411C4 80065DC4 3C028009 */  lui       $v0, %hi(D_80094640)
-/* 411C8 80065DC8 8C424640 */  lw        $v0, %lo(D_80094640)($v0)
+glabel __osSiGetAccess
+/* 411C4 80065DC4 3C028009 */  lui       $v0, %hi(__osSiAccessQueueEnabled)
+/* 411C8 80065DC8 8C424640 */  lw        $v0, %lo(__osSiAccessQueueEnabled)($v0)
 /* 411CC 80065DCC 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 411D0 80065DD0 1440000F */  bnez      $v0, .L80065E10
 /* 411D4 80065DD4 AFBF0018 */   sw       $ra, 0x18($sp)
 /* 411D8 80065DD8 24020001 */  addiu     $v0, $zero, 1
-/* 411DC 80065DDC 3C018009 */  lui       $at, %hi(D_80094640)
-/* 411E0 80065DE0 AC224640 */  sw        $v0, %lo(D_80094640)($at)
+/* 411DC 80065DDC 3C018009 */  lui       $at, %hi(__osSiAccessQueueEnabled)
+/* 411E0 80065DE0 AC224640 */  sw        $v0, %lo(__osSiAccessQueueEnabled)($at)
 /* 411E4 80065DE4 3C04800E */  lui       $a0, %hi(D_800DACA8)
 /* 411E8 80065DE8 2484ACA8 */  addiu     $a0, $a0, %lo(D_800DACA8)
 /* 411EC 80065DEC 3C05800B */  lui       $a1, %hi(D_800AF900)
