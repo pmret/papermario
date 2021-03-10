@@ -1,8 +1,9 @@
+#define MOVE_ADDU
+
 #include "common.h"
 
 INCLUDE_ASM(s32, "os/code_47c60_len_f0", osContAddressCrc);
 
-#ifdef MOVE_ISSUE
 u8 osContDataCrc(u8* data) {
     s32 ret;
     u32 bit;
@@ -34,6 +35,3 @@ u8 osContDataCrc(u8* data) {
     } while (byte < 8U);
     return ret;
 }
-#else
-INCLUDE_ASM(s32, "os/code_47c60_len_f0", osContDataCrc);
-#endif
