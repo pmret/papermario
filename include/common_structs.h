@@ -1187,7 +1187,8 @@ typedef struct CollisionStatus {
 } CollisionStatus; // size = 0x28
 
 typedef struct DecorationTable {
-    /* 0x000 */ char unk_00[2012];
+    /* 0x000 */ char unk_00[2011];
+    /* 0x7DB */ s8 unk_7DB;
     /* 0x7DC */ s16 scale[16];
     /* 0x7FC */ s16 posX[16];
     /* 0x81C */ s16 posY[16];
