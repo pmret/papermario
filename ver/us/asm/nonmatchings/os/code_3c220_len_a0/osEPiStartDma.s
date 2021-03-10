@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel osEPiStartDma
-/* 3C220 80060E20 3C028009 */  lui       $v0, %hi(D_80093D50)
-/* 3C224 80060E24 8C423D50 */  lw        $v0, %lo(D_80093D50)($v0)
+/* 3C220 80060E20 3C028009 */  lui       $v0, %hi(__osPiDevMgr)
+/* 3C224 80060E24 8C423D50 */  lw        $v0, %lo(__osPiDevMgr)($v0)
 /* 3C228 80060E28 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 3C22C 80060E2C AFB00010 */  sw        $s0, 0x10($sp)
 /* 3C230 80060E30 00A08021 */  addu      $s0, $a1, $zero

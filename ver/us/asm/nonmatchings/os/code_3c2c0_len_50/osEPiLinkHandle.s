@@ -7,11 +7,11 @@ glabel osEPiLinkHandle
 /* 3C2C8 80060EC8 AFBF0014 */  sw        $ra, 0x14($sp)
 /* 3C2CC 80060ECC 0C01ACD8 */  jal       __osDisableInt
 /* 3C2D0 80060ED0 00808021 */   addu     $s0, $a0, $zero
-/* 3C2D4 80060ED4 3C038009 */  lui       $v1, %hi(D_80093D6C)
-/* 3C2D8 80060ED8 8C633D6C */  lw        $v1, %lo(D_80093D6C)($v1)
+/* 3C2D4 80060ED4 3C038009 */  lui       $v1, %hi(__osPiTable)
+/* 3C2D8 80060ED8 8C633D6C */  lw        $v1, %lo(__osPiTable)($v1)
 /* 3C2DC 80060EDC 00402021 */  addu      $a0, $v0, $zero
-/* 3C2E0 80060EE0 3C018009 */  lui       $at, %hi(D_80093D6C)
-/* 3C2E4 80060EE4 AC303D6C */  sw        $s0, %lo(D_80093D6C)($at)
+/* 3C2E0 80060EE0 3C018009 */  lui       $at, %hi(__osPiTable)
+/* 3C2E4 80060EE4 AC303D6C */  sw        $s0, %lo(__osPiTable)($at)
 /* 3C2E8 80060EE8 0C01ACF4 */  jal       __osRestoreInt
 /* 3C2EC 80060EEC AE030000 */   sw       $v1, ($s0)
 /* 3C2F0 80060EF0 00001021 */  addu      $v0, $zero, $zero

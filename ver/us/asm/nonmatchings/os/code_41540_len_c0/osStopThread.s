@@ -30,11 +30,11 @@ glabel osStopThread
 /* 4159C 8006619C 08019876 */  j         .L800661D8
 /* 415A0 800661A0 00000000 */   nop
 .L800661A4:
-/* 415A4 800661A4 3C038009 */  lui       $v1, %hi(D_80094660)
-/* 415A8 800661A8 8C634660 */  lw        $v1, %lo(D_80094660)($v1)
+/* 415A4 800661A4 3C038009 */  lui       $v1, %hi(__osRunningThread)
+/* 415A8 800661A8 8C634660 */  lw        $v1, %lo(__osRunningThread)($v1)
 /* 415AC 800661AC 00002021 */  addu      $a0, $zero, $zero
 /* 415B0 800661B0 24020001 */  addiu     $v0, $zero, 1
-/* 415B4 800661B4 0C01AC1B */  jal       osEnqueueAndYield
+/* 415B4 800661B4 0C01AC1B */  jal       __osEnqueueAndYield
 /* 415B8 800661B8 A4620010 */   sh       $v0, 0x10($v1)
 /* 415BC 800661BC 08019876 */  j         .L800661D8
 /* 415C0 800661C0 00000000 */   nop
@@ -42,7 +42,7 @@ glabel osStopThread
 /* 415C4 800661C4 8E040008 */  lw        $a0, 8($s0)
 /* 415C8 800661C8 24020001 */  addiu     $v0, $zero, 1
 /* 415CC 800661CC 02002821 */  addu      $a1, $s0, $zero
-/* 415D0 800661D0 0C019880 */  jal       osDequeueThread
+/* 415D0 800661D0 0C019880 */  jal       __osDequeueThread
 /* 415D4 800661D4 A6020010 */   sh       $v0, 0x10($s0)
 .L800661D8:
 /* 415D8 800661D8 0C01ACF4 */  jal       __osRestoreInt

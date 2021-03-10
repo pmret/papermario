@@ -26,5 +26,5 @@ glabel nuContPakCompanyCode
 glabel nuContPakGameCode
 .word 0x00000000, 0x00000000, contPakOpen, contPakFree, contPakFileOpen, contPakFileReadWrite, contPakFileDelete, contPakFileState, contPakFileNum, contPakRepairId, 0x00000000
 
-glabel nuContCallBack
+glabel nuContPakCallBack
 .word 0x00000000, 0x80093CA8, 0x02000000, 0x00000000
