@@ -1,8 +1,5 @@
 #include "common.h"
 
-//INCLUDE_ASM(s32, "code_182B30", func_80254250);
-
-
 s32 func_80254250(void) {
     s32 ret;
 
@@ -89,7 +86,6 @@ void func_802549A0(void) {
     decorationTable->effectType = 20;
 }
 
-//INCLUDE_ASM(s32, "code_182B30", func_802549C0);
 void func_802549C0(void) {
     Actor* playerActor = gBattleStatus.playerActor;
     DecorationTable* decorationTable = playerActor->partsTable->decorationTable;
@@ -158,7 +154,6 @@ void func_80257B68(s32 arg0) {
     func_802571F0(0, arg0);
 }
 
-//INCLUDE_ASM(s32, "code_182B30", func_80257B88);
 void func_80257B88(void) {
     func_802571F0(1, gBattleStatus.partnerActor);
 }
