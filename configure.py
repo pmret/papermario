@@ -260,7 +260,7 @@ async def main():
 
     with open("tools/permuter_settings.toml", "w") as f:
         version = versions[0]
-        f.write(f"compiler_command = \"{cpp} -Iver/{version}/build/include -Iinclude -Isrc -D _LANGUAGE_C -D _FINALROM -D VERSION={version} -ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 {args.cflags} -D SCRIPT(...)={{}} | {iconv} | tools/{os_dir}/cc1 -O2 -quiet -G 0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wuninitialized -Wshadow {args.cflags} -o - | tools/{os_dir}/mips-nintendo-nu64-as -EB -G 0 -\"\n")
+        f.write(f"compiler_command = \"{cpp} -Iver/{version}/build/include -Iinclude -Isrc -DPERMUTER -D _LANGUAGE_C -D _FINALROM -D VERSION={version} -ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 {args.cflags} -D SCRIPT(...)={{}} | {iconv} | tools/{os_dir}/cc1 -O2 -quiet -G 0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wuninitialized -Wshadow {args.cflags} -o - | tools/{os_dir}/mips-nintendo-nu64-as -EB -G 0 -\"\n")
         f.write(f"assembler_command = \"{cross}as -march=vr4300 -mabi=32\"\n")
 
     # $version
