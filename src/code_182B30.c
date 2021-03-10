@@ -16,7 +16,6 @@ s32 func_80254250(void) {
     return ret;
 }
 
-
 void mtx_mirror_y(Matrix4f arg0) {
 
     guMtxIdentF(arg0);
