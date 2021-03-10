@@ -294,6 +294,7 @@ extern s32 D_800B8590;
 extern OSThread* __osActiveQueue;
 extern OSThread* __osRunningThread;
 extern OSThread* __osRunQueue;
+extern OSDevMgr __osPiDevMgr;
 
 // gfx
 extern DisplayContext* gDisplayContext;
