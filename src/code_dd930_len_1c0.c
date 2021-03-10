@@ -9,7 +9,14 @@ typedef struct {
     /* 0xC */ s32 unkC;
 } struct_80147230;
 
-extern struct_80147230 D_8014F140;
+struct_80147230 D_8014F140 = {
+    .fadeFlags = 0,
+    .fadeState = 0,
+    .fadeOutTime = 0,
+    .fadeInTime = -1,
+    .unkC = -1
+};
+
 extern struct_80147230 D_8015C7C0;
 
 void reset_ambient_sounds(void) {

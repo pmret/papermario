@@ -1175,7 +1175,9 @@ typedef struct CollisionStatus {
     /* 0x06 */ s16 floorBelow;
     /* 0x08 */ s16 currentCeiling; /* valid on touching with head */
     /* 0x0A */ s16 unk_0A;
-    /* 0x0C */ char unk_0C[0x6];
+    /* 0x0C */ s16 unk_0C;
+    /* 0x0E */ s16 unk_0E;
+    /* 0x10 */ s16 unk_10;
     /* 0x12 */ s16 currentWall;
     /* 0x14 */ s16 lastWallHammered; /* valid when smashing */
     /* 0x16 */ s16 touchingWallTrigger; /* 0/1 */
@@ -1476,7 +1478,9 @@ typedef struct PlayerStatus {
     /* 0x080 */ f32 targetYaw;
     /* 0x084 */ f32 currentYaw;
     /* 0x088 */ f32 unk_88;
-    /* 0x08C */ char unk_8C[20];
+    /* 0x08C */ char unk_8C[4];
+    /* 0x090 */ f32 unk_90;
+    /* 0x094 */ char unk_94[12];
     /* 0x0A0 */ f32 heading;
     /* 0x0A4 */ char unk_A4[4];
     /* 0x0A8 */ f32 spriteFacingAngle; /* angle of sprite, relative to camera, from 0 to 180 */
@@ -1741,7 +1745,8 @@ typedef struct Temp8010EBB0 {
     /* 0x003 */ s8 unk_03;
     /* 0x004 */ char unk_04[0x4];
     /* 0x008 */ s32 unk_08;
-    /* 0x009 */ char unk_0C[0x8];
+    /* 0x009 */ s32 unk_0C;
+    /* 0x010 */ char unk_10[0x4];
     /* 0x014 */ s8 unk_14;
     /* 0x015 */ char unk_15[0x343];
     /* 0x358 */ s32 unk_358;

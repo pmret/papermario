@@ -1,5 +1,6 @@
 import os
 import re
+import subprocess
 import sys
 from collections import OrderedDict
 from pathlib import Path, PurePath
@@ -80,6 +81,13 @@ class Subsegment():
             return "pal.png"
         return self.type
 
+    def get_ld_file(self, options):
+        subdir = self.get_out_subdir(options)
+        obj_type = self.get_ld_obj_type(".text")
+        ext = self.get_ext()
+
+        return subdir, f"{self.name}.{ext}", obj_type, self.rom_start
+
     def should_run(self, options):
         return self.type in options["modes"] or "all" in options["modes"]
 
@@ -90,12 +98,12 @@ class Subsegment():
             self.name + "." + self.get_ext()
         )
 
-    def scan_inner(self, segment, rom_bytes):
+    def scan_inner(self, segment, rom_bytes, base_path, generic_out_path):
         pass
 
-    def scan(self, segment, rom_bytes):
+    def scan(self, segment, rom_bytes, base_path):
         if self.should_run(segment.options) and not self.name.startswith("."):
-            self.scan_inner(segment, rom_bytes)
+            self.scan_inner(segment, rom_bytes, base_path, self.get_generic_out_path(base_path, segment.options))
 
     def split_inner(self, segment, rom_bytes, base_path, generic_out_path):
         pass
@@ -118,10 +126,13 @@ class Subsegment():
             return PaletteSubsegment
         elif typ == "rgba32":
             return RGBA32Subsegment
+        elif typ == "linker":
+            return LinkerSubsegment
         else:
             return Subsegment
 
 class CodeSubsegment(Subsegment):
+    defined_funcs = set()
     md = Cs(CS_ARCH_MIPS, CS_MODE_MIPS64 + CS_MODE_BIG_ENDIAN)
     md.detail = True
     md.skipdata = True
@@ -146,10 +157,7 @@ class CodeSubsegment(Subsegment):
         return re.sub(CodeSubsegment.STRIP_C_COMMENTS_RE, replacer, text)
 
     @staticmethod
-    def get_funcs_defined_in_c(c_file):
-        with open(c_file, "r") as f:
-            text = CodeSubsegment.strip_c_comments(f.read())
-
+    def get_funcs_defined_in_c(text):
         return set(m.group(2) for m in CodeSubsegment.C_FUNC_RE.finditer(text))
 
     @staticmethod
@@ -168,8 +176,21 @@ class CodeSubsegment(Subsegment):
 
         return ret
 
-    def scan_inner(self, segment, rom_bytes):
+    @staticmethod
+    def get_funcs_defined_in_c(c_file):
+        with open(c_file, "r") as f:
+            text = CodeSubsegment.strip_c_comments(f.read())
+
+        return set(m.group(2) for m in CodeSubsegment.C_FUNC_RE.finditer(text))
+
+    def scan_inner(self, segment, rom_bytes, base_path, generic_out_path):
         if not self.rom_start == self.rom_end:
+            if self.type == "c":
+                if segment.options.get("do_c_func_detection", True) and os.path.exists(generic_out_path):
+                    # TODO run cpp?
+                    self.defined_funcs = CodeSubsegment.get_funcs_defined_in_c(generic_out_path)
+                    segment.mark_c_funcs_as_defined(self.defined_funcs)
+
             insns = [insn for insn in CodeSubsegment.md.disasm(rom_bytes[self.rom_start : self.rom_end], self.vram_start)]
 
             funcs = segment.process_insns(insns, self.rom_start)
@@ -185,17 +206,12 @@ class CodeSubsegment(Subsegment):
     def split_inner(self, segment, rom_bytes, base_path, generic_out_path):
         if not self.rom_start == self.rom_end:
             if self.type == "c":
-                defined_funcs = set()
-                if segment.options.get("do_c_func_detection", True) and os.path.exists(generic_out_path):
-                    defined_funcs = CodeSubsegment.get_funcs_defined_in_c(generic_out_path)
-                    segment.mark_c_funcs_as_defined(defined_funcs)
-
                 asm_out_dir = Segment.create_split_dir(base_path, os.path.join("asm", "nonmatchings"))
 
                 for func in self.funcs_text:
                     func_name = segment.get_symbol(func, type="func", local_only=True).name
 
-                    if func_name not in defined_funcs:
+                    if func_name not in self.defined_funcs:
                         segment.create_c_asm_file(self.funcs_text, func, asm_out_dir, self, func_name)
 
                 if not os.path.exists(generic_out_path) and segment.options.get("create_new_c_files", True):
@@ -214,7 +230,7 @@ class CodeSubsegment(Subsegment):
                     f.write("\n".join(out_lines))
 
 class DataSubsegment(Subsegment):
-    def scan_inner(self, segment, rom_bytes):
+    def scan_inner(self, segment, rom_bytes, base_path, generic_out_path):
         if not self.type.startswith(".") or self.type == ".rodata":
             self.file_text = segment.disassemble_data(self, rom_bytes)
 
@@ -242,6 +258,10 @@ class BinSubsegment(Subsegment):
         Path(generic_out_path).parent.mkdir(parents=True, exist_ok=True)
         with open(generic_out_path, "wb") as f:
             f.write(rom_bytes[self.rom_start : self.rom_end])
+
+class LinkerSubsegment(Subsegment):
+    def get_ld_file(self, options):
+        return "", self.name, self.type, self.rom_start
 
 class PaletteSubsegment(Subsegment):
     def should_run(self, options):
@@ -338,8 +358,15 @@ class N64SegCode(N64Segment):
 
     def __init__(self, segment, next_segment, options):
         super().__init__(segment, next_segment, options)
-        self.rodata_vram_start = -1
-        self.rodata_vram_end = -1
+
+        # TODO Note: These start/end vram options don't really do anything yet
+        self.data_vram_start = segment.get("data_vram_start", -1)
+        self.data_vram_end = segment.get("data_vram_end", -1)
+        self.rodata_vram_start = segment.get("rodata_vram_start", -1)
+        self.rodata_vram_end = segment.get("rodata_vram_end", -1)
+        self.bss_vram_start = segment.get("bss_vram_start", -1)
+        self.bss_vram_end = segment.get("bss_vram_end", -1)
+
         self.subsegments = self.parse_subsegments(segment)
         self.is_overlay = segment.get("overlay", False)
         self.all_symbols = ()
@@ -360,14 +387,7 @@ class N64SegCode(N64Segment):
         return f"code_{addr:X}"
 
     def get_ld_files(self):
-        def transform(sub):
-            subdir = sub.get_out_subdir(self.options)
-            obj_type = sub.get_ld_obj_type(".text")
-            ext = sub.get_ext()
-
-            return subdir, f"{sub.name}.{ext}", obj_type, sub.rom_start
-
-        return [transform(file) for file in self.subsegments]
+        return [sub.get_ld_file(self.options) for sub in self.subsegments]
 
     def get_ld_section_name(self):
         path = PurePath(self.name)
@@ -1013,7 +1033,7 @@ class N64SegCode(N64Segment):
 
     def split(self, rom_bytes, base_path):
         for sub in self.subsegments:
-            sub.scan(self, rom_bytes)
+            sub.scan(self, rom_bytes, base_path)
 
         for sub in self.subsegments:
             sub.split(self, rom_bytes, base_path)

@@ -285,10 +285,10 @@ typedef struct ActorPartDesc {
 } ActorPartDesc; // size = 0x24
 
 typedef struct ActorSounds {
-    /* 0x00 */ SoundId walk[2];
-    /* 0x08 */ SoundId fly[2];
-    /* 0x10 */ SoundId jump;
-    /* 0x14 */ SoundId hurt;
+    /* 0x00 */ SoundID walk[2];
+    /* 0x08 */ SoundID fly[2];
+    /* 0x10 */ SoundID jump;
+    /* 0x14 */ SoundID hurt;
     /* 0x18 */ s16 delay[2]; ///< Number of frames to wait between walk/fly sounds. Negative values are in distance.
 } ActorSounds; // size = 0x20
 

@@ -3,26 +3,27 @@
 char gCloudyFlowerFieldsBg[] = "fla_bg";
 char gSunnyFlowerFieldsBg[] = "flb_bg";
 s8 D_8014F12F = 0;
+s32 D_8014F130 = 0;
+f32 D_8014F134[] = { 0.0f, 0.0f, 0.0f };
 
 void load_map_bg(char* optAssetName) {
-    UNK_PTR compressedData;
-    u32 assetSize;
-    char* assetName;
+    if (optAssetName != NULL) {
+        UNK_PTR compressedData;
+        u32 assetSize;
+        char* assetName = optAssetName;
 
-    if (optAssetName == NULL) return;
-    assetName = optAssetName;
-
-    // StoryProgress check
-    if (get_variable(0, 0xF5DE0180) >= 0x35) {
-        // Use sunny Flower Fields bg rather than cloudy
-        if (!strcmp(assetName, gCloudyFlowerFieldsBg)) {
-            assetName = gSunnyFlowerFieldsBg;
+        // StoryProgress check
+        if (get_variable(0, SI_SAVE_VAR(0)) >= 0x35) {
+            // Use sunny Flower Fields bg rather than cloudy
+            if (!strcmp(assetName, gCloudyFlowerFieldsBg)) {
+                assetName = gSunnyFlowerFieldsBg;
+            }
         }
-    }
 
-    compressedData = load_asset_by_name(assetName, &assetSize);
-    decode_yay0(compressedData, &gBackgroundImage);
-    general_heap_free(compressedData);
+        compressedData = load_asset_by_name(assetName, &assetSize);
+        decode_yay0(compressedData, &gBackgroundImage);
+        general_heap_free(compressedData);
+    }
 }
 
 void use_default_background_settings(void) {

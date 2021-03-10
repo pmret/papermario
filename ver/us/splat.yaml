@@ -356,7 +356,10 @@ segments:
     - [0xE5510, .data, code_d0a70_len_4fe0]
     - [0xE56C0, .data, code_d5a50_len_5fd0]
     - [0xE5820, .data, code_dc470_len_14c0]
-    - [0xE5830, data]
+    - [0xE5840, .data, code_dd930_len_1c0]
+    - [0xE5850, .data, code_ddaf0_len_c50]
+    - [0xE59D0, .data, code_DF950]
+    - [0xE5DF0, .data, code_e0b30_len_b80]
     - [0xE5E40, rodata]
   - type: code
     start: 0xE79B0

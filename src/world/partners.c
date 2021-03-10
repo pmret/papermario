@@ -64,6 +64,11 @@ f32 D_800F8030 = 0.0f;
 s8 D_800F8034[] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
 s16 D_800F803A = 0;
 
+extern f32 D_8010CFC0;
+extern s16 D_8010CFC8;
+extern s16 D_8010CFCA;
+extern s16 D_8010CFCE;
+
 WorldPartner wPartners[12] = {
     {}, // None
     {
@@ -437,7 +442,44 @@ s32 partner_can_use_ability(void) {
     return FALSE;
 }
 
+// Stack size issue - something's probably up with these data vars
+#ifdef NON_MATCHING
+void partner_reset_data(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    s32* temp8010CFD8 = &D_8010CFD8;
+    s32* temp8010CFE8 = &D_8010CFE8;
+    s32 temp_s0;
+
+    temp_s0 = gPlayerData.currentPartner;
+    mem_clear(&D_8010EBB0, sizeof(D_8010EBB0));
+    get_dynamic_entity(bind_dynamic_entity_7(_use_partner_ability, NULL));
+    D_8010CFE0 = 1;
+    *temp8010CFE8 = 9;
+    *temp8010CFD8 = temp_s0;
+
+    if ((*gGameStatusPtr)->unk_7D != 0) {
+        D_8010EBB0.unk_00 = 1;
+        (*gGameStatusPtr)->unk_7D = 0;
+    }
+
+    wPartner = NULL;
+    D_800F833C = playerStatus->position.x;
+    D_800F8340 = playerStatus->position.y;
+    D_800F8344 = playerStatus->position.z;
+
+    if (*temp8010CFD8 == 0) {
+        *temp8010CFE8 = 1;
+    } else {
+        load_partner_npc();
+        wPartnerNpc->scale.x = 1.0f;
+        wPartnerNpc->scale.y = 1.0f;
+        wPartnerNpc->scale.z = 1.0f;
+        _use_partner_ability();
+    }
+}
+#else
 INCLUDE_ASM(s32, "world/partners", partner_reset_data);
+#endif
 
 void partner_initialize_data(void) {
     Temp8010EBB0* unk8010EBB0 = &D_8010EBB0;
@@ -551,7 +593,33 @@ INCLUDE_ASM(void, "world/partners", enable_partner_walking, Npc* partner, s32 va
 
 INCLUDE_ASM(void, "world/partners", func_800EBA3C, Npc* partner);
 
-INCLUDE_ASM(void, "world/partners", func_800EBB40, Npc* partner);
+void func_800EBB40(Npc *partner) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    Temp8010EBB0* temp8010EBB0 = &D_8010EBB0;
+
+    if ((*gGameStatusPtr)->unk_81 == 0 || playerStatus->flags & 0x3000 || temp8010EBB0->unk_14 != 0 || temp8010EBB0->unk_02 != 0) {
+        if (!(playerStatus->animFlags & 0x800)) {
+            func_800EBC74(partner);
+        }
+        if (temp8010EBB0->unk_0C & 0x6006) {
+            temp8010EBB0->unk_02 = 0;
+        }
+    }
+
+    if (D_8010CFC8 != 50 && fabsf(partner->pos.y - playerStatus->position.y) > 1000.0f) {
+        partner->pos.x = playerStatus->position.x;
+        partner->pos.y = playerStatus->position.y;
+        partner->pos.z = playerStatus->position.z;
+        partner->jumpVelocity = 0.0f;
+        partner->jumpScale = 0.0f;
+        partner->flags = partner->flags & ~0x800;
+    }
+
+    func_800EF640(partner);
+    D_800F833C = partner->pos.x;
+    D_800F8340 = partner->pos.y;
+    D_800F8344 = partner->pos.z;
+}
 
 INCLUDE_ASM(s32, "world/partners", func_800EBC74);
 
@@ -562,11 +630,6 @@ INCLUDE_ASM(void, "world/partners", update_player_move_history, Npc* partner);
 INCLUDE_ASM(void, "world/partners", func_800ED5D0, Npc* partner);
 
 INCLUDE_ASM(s32, "world/partners", func_800ED9F8);
-
-extern f32 D_8010CFC0;
-extern s16 D_8010CFC8;
-extern s16 D_8010CFCA;
-extern s16 D_8010CFCE;
 
 s32 func_800EE994(Npc* arg0) {
     arg0->unk_80 = 0x10000;
@@ -644,7 +707,37 @@ void func_800EF43C(void) {
 
 INCLUDE_ASM(void, "world/partners", clear_partner_move_history, Npc* partner);
 
+// Some branching / merging stuff causing issues
+#ifdef NON_MATCHING
+s32 func_800EF4E0(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    Camera* cameras = &gCameras;
+    f32 yaw;
+    s32 ret;
+
+    if (playerStatus->unk_90 == 0.0f) {
+        if (!(playerStatus->spriteFacingAngle >= 90.0f) || !(playerStatus->spriteFacingAngle < 270.0f)) {
+            yaw = cameras[0].currentYaw - 90.0f;
+            ret = 1;
+        } else {
+            yaw = cameras[0].currentYaw + 90.0f;
+            ret = 0;
+        }
+    } else if (get_clamped_angle_diff(cameras[0].currentYaw, playerStatus->targetYaw) < 0.0f) {
+        yaw = cameras[0].currentYaw - 90.0f;
+        ret = 1;
+    } else {
+        yaw = cameras[0].currentYaw + 90.0f;
+        ret = 0;
+    }
+
+    playerStatus->targetYaw = clamp_angle(yaw);
+    playerStatus->currentYaw = playerStatus->targetYaw;
+    return ret;
+}
+#else
 INCLUDE_ASM(s32, "world/partners", func_800EF4E0);
+#endif
 
 void func_800EF600(void) {
     Temp8010EBB0* temp_8010EBB0 = &D_8010EBB0;

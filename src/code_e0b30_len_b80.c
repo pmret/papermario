@@ -1,6 +1,27 @@
 #include "common.h"
 #include "map.h"
 
+MusicPlayer D_8014F6F0 = {
+    .flags = 0,
+    .unk_02 = 0,
+    .fadeOutTime = -1,
+    .fadeInTime = 0,
+    .unk_0C = 0,
+    .unk_0E = 0,
+    .songID = -1,
+    .variation = -1,
+    .unk_18 = -1,
+    .unk_20 = 0,
+    .unk_24 = 0,
+    .unk_28 = 0,
+    .unk_2C = 0
+};
+
+SongID gSongsUsingVariationFlag[] = { Song_SPECIAL_BATTLE, Song_TUBBA_BLUBBA_BATTLE, Song_JR_TROOPA_BATTLE,
+                                   Song_YOSHI_KIDS_FOUND, Song_ITEM_UPGRADE, Song_NEW_PARTNER, };
+
+s16 D_8014F738 = 0;
+
 void transition_music_volume_to(s16 volume);
 
 /// If the given song ID is present in gSongsUsingVariationFlag, returns the current
@@ -211,7 +232,37 @@ void transition_music_volume_to(s16 volume) {
     gMusicTargetVolume = volume;
 }
 
+//Data loading shenanigans
+#ifdef NON_MATCHING
+void func_8014AC94(void) {
+    s16* currentVolume;
+    s16 compareVolume;
+    s16 toVolume;
+
+    if (D_8014F738 != 0) {
+        D_8014F738--;
+        return;
+    }
+
+    compareVolume = gMusicTargetVolume;
+    if (gMusicUnkVolume2 < gMusicTargetVolume) {
+        compareVolume = gMusicUnkVolume2;
+    }
+
+    currentVolume = &gMusicCurrentVolume;
+    if (*currentVolume != compareVolume) {
+        toVolume = *currentVolume + 1;
+        if (*currentVolume >= compareVolume) {
+            toVolume = *currentVolume - 1;
+        }
+        *currentVolume = toVolume;
+        func_800561A4(gMusicCurrentVolume);
+        D_8014F738 = 3;
+    }
+}
+#else
 INCLUDE_ASM(s32, "code_e0b30_len_b80", func_8014AC94);
+#endif
 
 INCLUDE_ASM(s32, "code_e0b30_len_b80", func_8014AD40);
 

@@ -127,20 +127,25 @@ class Segment:
         i = 0
         do_next = False
         for subdir, path, obj_type, start in self.get_ld_files():
-            # Hack for non-0x10 alignment START
+            # Manual linker segment creation
+            if obj_type == "linker":
+                s += (
+                    "}\n"
+                    f"SPLAT_BEGIN_SEG({path}, 0x{start:X}, 0x{self.rom_to_ram(start):X}, {subalign_str})\n"
+                )
+
+            # Create new sections for non-0x10 alignment (hack)
             if start % 0x10 != 0 and i != 0 or do_next:
                 tmp_sect_name = path.replace(".", "_")
                 tmp_sect_name = tmp_sect_name.replace("/", "_")
-                tmp_vram = start - self.rom_start + self.vram_start
                 s += (
                     "}\n"
-                    f"SPLAT_BEGIN_SEG({tmp_sect_name}, 0x{start:X}, 0x{tmp_vram:X}, {subalign_str})\n"
+                    f"SPLAT_BEGIN_SEG({tmp_sect_name}, 0x{start:X}, 0x{self.rom_to_ram(start):X}, {subalign_str})\n"
                 )
                 do_next = False
 
             if start % 0x10 != 0 and i != 0:
                 do_next = True
-            # Hack for non-0x10 alignment END
 
             path_cname = re.sub(r"[^0-9a-zA-Z_]", "_", path)
             s += f"    {path_cname} = .;\n"
@@ -156,7 +161,8 @@ class Segment:
 
             path = path.with_suffix(".o" if replace_ext else path.suffix + ".o")
 
-            s += f"    BUILD_DIR/{path}({obj_type});\n"
+            if obj_type != "linker":
+                s += f"    BUILD_DIR/{path}({obj_type});\n"
             i += 1
 
         s += (
