@@ -38,8 +38,6 @@ INCLUDE_ASM(s32, "battle/star/chill_out_7900D0", func_802A1218_7902E8);
 #include "common/FadeBackgroundToBlack.inc.c"
 
 ApiStatus func_802A137C_79044C(ScriptInstance* script, s32 isInitialCall) {
-    s32 temp;
-
     if (isInitialCall) {
         func_8011D82C(1);
         *D_801512F0 = 1;
@@ -49,9 +47,8 @@ ApiStatus func_802A137C_79044C(ScriptInstance* script, s32 isInitialCall) {
 
     set_background_color_blend(0, 0, 0, script->functionTemp[0].s);
     script->functionTemp[0].s += 10;
-    temp = script->functionTemp[0].s;
 
-    if (temp >= 230) {
+    if (script->functionTemp[0].s >= 230) {
         set_background_color_blend(0, 0, 0, 230);
         return ApiStatus_DONE2;
     }
@@ -60,17 +57,14 @@ ApiStatus func_802A137C_79044C(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus func_802A1414_7904E4(ScriptInstance* script, s32 isInitialCall) {
-    s32 temp;
-
     if (isInitialCall) {
         script->functionTemp[0].s = 20;
     }
 
     set_background_color_blend(0, 0, 0, script->functionTemp[0].s * 10);
     script->functionTemp[0].s -= 1;
-    temp = script->functionTemp[0].s;
 
-    if (!temp) {
+    if (script->functionTemp[0].s == 0) {
         set_background_color_blend(0, 0, 0, 0);
         return ApiStatus_DONE2;
     }
