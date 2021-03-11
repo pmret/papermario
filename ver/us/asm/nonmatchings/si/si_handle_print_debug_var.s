@@ -1,6 +1,79 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_802D9D98
+.ascii "ADDR     [%08X]\0"
+
+glabel D_802D9DA8
+.ascii "FLOAT    [%4.2f]\0\0\0\0"
+
+glabel D_802D9DBC
+.ascii "UF(%3d)  [%d]\0\0\0"
+
+glabel D_802D9DCC
+.ascii "UW(%3d)  [%08X]\0"
+
+glabel D_802D9DDC
+.ascii "UW(%3d)  [%4.2f]\0\0\0\0"
+
+glabel D_802D9DF0
+.ascii "UW(%3d)  [%d]\0\0\0"
+
+glabel D_802D9E00
+.ascii "GSW(%3d) [%08X]\0"
+
+glabel D_802D9E10
+.ascii "GSW(%3d) [%4.2f]\0\0\0\0"
+
+glabel D_802D9E24
+.ascii "GSW(%3d) [%d]\0\0\0"
+
+glabel D_802D9E34
+.ascii "LSW(%3d) [%08X]\0"
+
+glabel D_802D9E44
+.ascii "LSW(%3d)  [%4.2f]\0\0\0"
+
+glabel D_802D9E58
+.ascii "LSW(%3d) [%d]\0\0\0"
+
+glabel D_802D9E68
+.ascii "GSWF(%3d)[%d]\0\0\0"
+
+glabel D_802D9E78
+.ascii "LSWF(%3d)[%d]\0\0\0"
+
+glabel D_802D9E88
+.ascii "GF(%3d)  [%d]\0\0\0"
+
+glabel D_802D9E98
+.ascii "LF(%3d)  [%d]\0\0\0"
+
+glabel D_802D9EA8
+.ascii "GW(%3d)  [%08X]\0"
+
+glabel D_802D9EB8
+.ascii "GW(%3d)  [%4.2f]\0\0\0\0"
+
+glabel D_802D9ECC
+.ascii "GW(%3d)  [%d]\0\0\0"
+
+glabel D_802D9EDC
+.ascii "LW(%3d)  [%08X]\0"
+
+glabel D_802D9EEC
+.ascii "LW(%3d)  [%4.2f]\0\0\0\0"
+
+glabel D_802D9F00
+.ascii "LW(%3d)  [%d]\0\0\0"
+
+glabel D_802D9F10
+.ascii "         [%d]\0\0\0"
+
+.section .text
+
 glabel si_handle_print_debug_var
 /* EB7CC 802C6E1C 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* EB7D0 802C6E20 0080382D */  daddu     $a3, $a0, $zero
