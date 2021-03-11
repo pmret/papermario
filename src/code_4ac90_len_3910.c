@@ -234,7 +234,8 @@ INCLUDE_ASM(s32, "code_4ac90_len_3910", func_80072290);
 
 INCLUDE_ASM(s32, "code_4ac90_len_3910", func_800722F0);
 
-INCLUDE_ASM(s32, "code_4ac90_len_3910", func_80072350);
+INCLUDE_ASM(UNK_TYPE, "code_4ac90_len_3910", func_80072350, s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4,
+            f32 arg5, f32 arg6, s32 arg7, s32 arg8);
 
 INCLUDE_ASM(s32, "code_4ac90_len_3910", func_800723B0);
 

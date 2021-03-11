@@ -1,5 +1,7 @@
 #include "common.h"
 
+#define NAMESPACE battle_star_chill_out
+
 extern s32 D_802A2CC0;
 
 ApiStatus func_802A1000_7900D0(ScriptInstance* script, s32 isInitialCall) {
@@ -32,9 +34,15 @@ ApiStatus func_802A116C_79023C(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "battle/star/chill_out_7900D0", func_802A1218_7902E8);
+ApiStatus func_802A1218_7902E8(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 var1 = get_variable(script, *args++);
+    s32 var2 = get_variable(script, *args++);
 
-#define NAMESPACE battle_star_chill_out
+    func_80072350(4, var1, var2, get_variable(script, *args++), 20.0f, 20.0f, 1.0f, 0xA, 0xF);
+    return ApiStatus_DONE2;
+}
+
 #include "common/FadeBackgroundToBlack.inc.c"
 
 ApiStatus func_802A137C_79044C(ScriptInstance* script, s32 isInitialCall) {
@@ -74,13 +82,7 @@ ApiStatus func_802A1414_7904E4(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "battle/star/chill_out_7900D0", func_802A1494_790564);
 
-ApiStatus func_802A14E8_7905B8(ScriptInstance* script, s32 isInitialCall) {
-    Npc* npc = get_npc_unsafe(100);
-
-    npc->collisionHeight = 32;
-    npc->collisionRadius = 32;
-    return ApiStatus_DONE2;
-}
+#include "common/SetNpcCollision32.inc.c"
 
 ApiStatus func_802A1518_7905E8(ScriptInstance* script, s32 isInitialCall) {
     D_802A2CC0 = 0;
@@ -107,6 +109,23 @@ ApiStatus func_802A153C_79060C(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "battle/star/chill_out_7900D0", func_802A163C_79070C);
+ApiStatus func_802A163C_79070C(ScriptInstance* script, s32 isInitialCall) {
+    Actor* actor = get_actor(script->owner1.actorID);
+    Actor* target = get_actor(actor->targetActorID);
+    ActorPart* part = get_actor_part(target, actor->targetPartIndex);
+    s32 flag1 = 0x400000; // these manual flag ones are necessary to match. once we figure out flags, we can add more
+    s32 flag2 = 0x80000;
+
+    script->varTable[0] = 0;
+
+    if ((target->flags & 0x4000) || (target->flags & flag1) || (target->flags & 0x2000) ||
+        (part->eventFlags & 0x40000) || (part->eventFlags & flag2))
+    {
+        return ApiStatus_DONE2;
+    }
+
+    script->varTable[0] = 1;
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "battle/star/chill_out_7900D0", func_802A16F4_7907C4);

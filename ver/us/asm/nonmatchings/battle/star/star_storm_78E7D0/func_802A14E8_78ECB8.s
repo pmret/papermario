@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_802A14E8_78ECB8
+glabel star_SetNpcCollision32
 /* 78ECB8 802A14E8 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 78ECBC 802A14EC AFBF0010 */  sw        $ra, 0x10($sp)
 /* 78ECC0 802A14F0 0C00EABB */  jal       get_npc_unsafe
