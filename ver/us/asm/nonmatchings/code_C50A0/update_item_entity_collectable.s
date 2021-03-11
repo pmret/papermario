@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_80150E18
+.double 0.6
+
+.section .text
+
 glabel update_item_entity_collectable
 /* CA950 80134250 3C028015 */  lui       $v0, %hi(D_801565A4)
 /* CA954 80134254 844265A4 */  lh        $v0, %lo(D_801565A4)($v0)

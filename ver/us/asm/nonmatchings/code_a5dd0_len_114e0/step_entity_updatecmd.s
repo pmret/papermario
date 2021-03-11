@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_8014F740
+.word L8010FC18_A6318, L8010FC30_A6330, L8010FC50_A6350, L8010FC6C_A636C, L8010FC90_A6390, L8010FCAC_A63AC, L8010FCCC_A63CC, L8010FCE8_A63E8, L8010FD08_A6408, L8010FD2C_A642C
+
+.section .text
+
 glabel step_entity_updatecmd
 /* A62D8 8010FBD8 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* A62DC 8010FBDC AFB10014 */  sw        $s1, 0x14($sp)

@@ -1,6 +1,19 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_8014F950
+.double 0.13
+
+glabel D_8014F958
+.double 0.12
+
+glabel D_8014F960
+.double 0.01
+
+.section .text
+
 glabel set_standard_shadow_scale
 /* A8F5C 8011285C 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
 /* A8F60 80112860 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)

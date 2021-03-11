@@ -1,6 +1,22 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_80150EA0
+.word L8013722C_CD92C, L80137170_CD870, L80136FE8_CD6E8, L80137098_CD798, L801371D0_CD8D0, L8013704C_CD74C, L801370FC_CD7FC, L8013755C_CDC5C, L80137954_CE054, L80137C8C_CE38C, L80137C9C_CE39C, L80137CBC_CE3BC, L80137D00_CE400, L80137D00_CE400
+
+glabel D_80150ED8
+.double 0.8
+
+glabel D_80150EE0
+.double 0.8
+
+glabel D_80150EE8
+.double 0.8
+
+.section .text
+
 glabel _render_transition_stencil
 /* CD180 80136A80 27BDFF88 */  addiu     $sp, $sp, -0x78
 /* CD184 80136A84 F7B80060 */  sdc1      $f24, 0x60($sp)
