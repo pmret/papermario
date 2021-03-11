@@ -442,7 +442,7 @@ segments:
     - [0x10CAF0, .rodata, code_105F90]
     - [0x10CB30, .rodata, code_107830_len_e70]
     - [0x10CB70, .rodata, code_1086a0_len_fc0]
-    - [0x10CBD0, rodata, code_109660_len_1270]
+    - [0x10CBD0, .rodata, code_109660_len_1270]
   - [0x10CC00, bin]
   - [0x1164B8, ci8,     peach_letter, 150, 105]
   - [0x11A23E, bin]

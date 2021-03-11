@@ -1,8 +1,6 @@
 #include "common.h"
 #include "map.h"
 
-extern f64 D_802EB370;
-
 MapConfig* get_current_map_header(void);
 void disable_player_input(void);
 void disable_player_static_collisions(void);
@@ -92,7 +90,7 @@ void func_802E88EC(Entity* entity, f32 arg1) {
         }
 
         if (flag) {
-            make_item_entity(temp->unk_00, entity->position.x, entity->position.y + D_802EB370, entity->position.z, 0xA, 0,
+            make_item_entity(temp->unk_00, entity->position.x, entity->position.y + 33.0, entity->position.z, 0xA, 0,
                              func_800E546C(), temp->unk_04);
         }
     }

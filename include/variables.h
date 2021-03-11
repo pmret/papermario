@@ -302,7 +302,6 @@ extern u16 gCurrentDisplayContextIndex;
 extern UNK_TYPE D_0A004350;
 extern UNK_TYPE D_0A0026F0;
 extern UNK_TYPE D_802EAE7C;
-extern f64 D_802EB370;
 
 extern s32 D_80291FA8[];
 extern s32 D_80291FD0[];
