@@ -1,6 +1,8 @@
 #include "common.h"
 #include "map.h"
 
+extern f64 D_802EB370;
+
 MapConfig* get_current_map_header(void);
 void disable_player_input(void);
 void disable_player_static_collisions(void);
@@ -51,8 +53,6 @@ void func_802E7F6C(Entity* entity) {
 }
 
 INCLUDE_ASM(s32, "code_109660_len_1270", func_802E7FA0);
-
-extern f64 D_802EB370;
 
 INCLUDE_ASM(s32, "code_109660_len_1270", func_802E854C);
 
