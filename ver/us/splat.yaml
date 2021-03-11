@@ -574,7 +574,7 @@ segments:
     subsections:
     - [0x317020, c, world/partner/goombario]
     - [0x317b60, .data, world/partner/goombario]
-    - [0x317DA0, rodata, world/partner/goombario] # rodata containing a double and a jumptable
+    - [0x317DA0, .rodata, world/partner/goombario]
   - type: code
     ld_name: world_partner_bombette
     start: 0x317e50
