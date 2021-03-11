@@ -1,3 +1,5 @@
+#define MOVE_ADDU
+
 #include "common.h"
 
  struct __osThreadTail {
@@ -11,7 +13,6 @@ OSThread* __osActiveQueue = (OSThread*)&__osThreadTail;
 OSThread* __osRunningThread = NULL;
 OSThread* __osFaultedThread = NULL;
 
-#ifdef MOVE_ISSUE
 void osSetThreadPri(OSThread* thread, OSPri pri) {
     register u32 prevInt = __osDisableInt();
 
@@ -33,6 +34,3 @@ void osSetThreadPri(OSThread* thread, OSPri pri) {
 
     __osRestoreInt(prevInt);
 }
-#else
-INCLUDE_ASM(void, "os/osSetThreadPri", osSetThreadPri, OSThread* thread, OSPri pri);
-#endif

@@ -96,7 +96,7 @@ segments:
     - [0x3b2f0, c, os/nusys/nuContRmbCheck]
     - [0x3b390, c, os/nusys/nuContRmbModeSet]
     - [0x3b4a0, c, os/nusys/code_3B4A0]
-    - [0x3B5F0, c, os/nusys/nuGfxThread] # End of nusys
+    - [0x3B5F0, c, os/nusys/nuGfxThread]
     - [0x3b710, c, os/code_3b710_len_40]
     - [0x3b750, c, os/code_3b750_len_20]
     - [0x3b770, c, os/code_3b770_len_80]
@@ -105,19 +105,20 @@ segments:
     - [0x3bd20, c, os/code_3bd20_len_c0]
     - [0x3BD40, hasm, os/osSetIntMask]
     - [0x3bde0, c, os/osCreatePiManager]
-    - [0x3C160, c, os/osEPiWriteIo]
-    - [0x3c1c0, c, os/osEPiReadIo]
-    - [0x3c220, c, os/code_3c220_len_a0]
-    - [0x3c2c0, c, os/code_3c2c0_len_50]
+    - [0x3C160, c, os/osEPiWriteIo] # MOVE_ADDU
+    - [0x3c1c0, c, os/osEPiReadIo] # MOVE_ADDU
+    - [0x3c220, c, os/osEPiStartDma] # MOVE_ADDU
+    - [0x3c2c0, c, os/osEPiLinkHandle]
     - [0x3c310, c, os/osCartRomInit]
     - [0x3c490, c, os/code_3c490_len_3c0]
     - [0x3c850, c, os/code_3c850_len_f0]
     - [0x3c940, c, os/code_3c940_len_140]
     - [0x3ca80, c, os/code_3ca80_len_a0]
-    - [0x3cb20, c, os/code_3cb20_len_130]
-    - [0x3cc50, c, os/code_3cc50_len_80]
+    - [0x3CB20, hasm, os/osInvalDCache]
+    - [0x3CBD0, hasm, os/osInvalICache]
+    - [0x3cc50, hasm, os/osWritebackDCache]
     - [0x3ccd0, hasm, os/osWritebackDCacheAll]
-    - [0x3cd00, c, os/code_3cd00_len_5f0]
+    - [0x3cd00, c, os/code_3cd00_len_5f0] # MOVE_ADDU
     - [0x3CF80, c, os/controller]
     - [0x3D290, c, os/osVirtualToPhysical]
     - [0x3d2f0, c, os/code_3d2f0_len_10]
@@ -132,10 +133,10 @@ segments:
     - [0x3f6d0, c, os/code_3f6d0_len_320]
     - [0x3f9f0, c, os/sins]
     - [0x3fa50, c, os/code_3fa50_len_f60]
-    - [0x3FEA0, c, os/code_3FEA0]
+    - [0x3FEA0, c, os/code_3FEA0] # MOVE_ADDU
     - [0x40980, c, os/osCreateMesgQueue]
-    - [0x409b0, c, os/code_409b0_len_140]
-    - [0x40af0, c, os/code_40af0_len_130]
+    - [0x409b0, c, os/osJamMesg]
+    - [0x40af0, c, os/osRecvMesg]
     - [0x40c20, c, os/code_40c20_len_1f0]
     - [0x40E00, hasm, os/osGetCount]
     - [0x40E10, c, os/code_40E10]
@@ -145,7 +146,7 @@ segments:
     - [0x41170, c, os/code_41170_len_f0]
     - [0x41260, c, os/osCreateThread]
     - [0x41330, c, os/osGetThreadPri]
-    - [0x41350, c, os/osSetThreadPri]
+    - [0x41350, c, os/osSetThreadPri] # MOVE_ADDU
     - [0x41420, c, os/code_41420_len_120]
     - [0x41540, c, os/code_41540_len_c0]
     - [0x41600, c, os/code_41600_len_40]
@@ -214,7 +215,7 @@ segments:
     - [0x47ae0, c, os/code_47ae0_len_e0]
     - [0x47bc0, c, os/code_47bc0_len_50]
     - [0x47c10, c, os/code_47c10_len_50]
-    - [0x47c60, c, os/code_47c60_len_f0]
+    - [0x47c60, c, os/code_47c60_len_f0] # MOVE_ADDU
     - [0x47d50, c, os/code_47d50_len_e0]
     - [0x47e30, c, os/code_47e30_len_60]
     - [0x47e90, c, os/code_47e90_len_110]
@@ -228,9 +229,9 @@ segments:
     - [0x49C70, c, os/code_49C70]
     - [0x4a140, c, os/code_4a140_len_70]
     - [0x4a1b0, c, os/code_4a1b0_len_40]
-    - [0x4a1f0, c, os/code_4a1f0_len_170]
-    - [0x4a360, c, os/code_4a360_len_930]
-    - [0x4ac90, c, os/code_4ac90_len_3910]
+    - [0x4a1f0, c, os/code_4a1f0_len_170] # yay0 decompression - some or all is hand-written
+    - [0x4a360, c, os/code_4a360_len_930] # osFlash* - IDO O2 -g
+    - [0x4ac90, c, code_4ac90_len_3910]
     - [0x4E5A0, data, code_1000_len_60]
     - [0x4F410, .data, code_1370_len_7d0]
     - [0x4F420, .data, code_1b40_len_20b0]
