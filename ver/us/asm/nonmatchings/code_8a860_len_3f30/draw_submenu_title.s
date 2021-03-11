@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_8010C8A8
+.word L800F4694_8DB44, L800F48A4_8DD54, L800F4694_8DB44, L800F47E4_8DC94, L800F48A4_8DD54, L800F4694_8DB44, L800F4694_8DB44, L800F4694_8DB44, L800F4804_8DCB4, L800F4824_8DCD4, L800F4844_8DCF4, L800F4864_8DD14, L800F4884_8DD34, L800F48A4_8DD54
+
+.section .text
+
 glabel draw_submenu_title
 /* 8DAF8 800F4648 3C028011 */  lui       $v0, %hi(D_8010D69C)
 /* 8DAFC 800F464C 8C42D69C */  lw        $v0, %lo(D_8010D69C)($v0)

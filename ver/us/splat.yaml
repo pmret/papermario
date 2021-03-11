@@ -309,8 +309,8 @@ segments:
     subalign: 4
     subsections:
     - [0x759b0, c, code_759b0_len_61b0]
-    - [0x77480, c]
-    - [0x7B440, c]
+    - [0x77480, c, code_77480]
+    - [0x7B440, c, code_7B440]
     - [0x7bb60, c, code_7bb60_len_41b0]
     - [0x7fd10, c, code_7fd10_len_b40]
     - [0x80850, c, code_80850_len_3060]
@@ -331,7 +331,15 @@ segments:
     - [0x9DA58, data]
     - [0x9DA60, rgba32,  ui/stat_flower, 16, 16]
     - [0x9DE60, data]
-    - [0xA5100, rodata]
+    - [0xA5100, .rodata, code_77480]
+    - [0xA51E0, .rodata, code_7B440]
+    - [0xA5230, .rodata, code_7bb60_len_41b0]
+    - [0xA53E0, .rodata, code_7fd10_len_b40]
+    - [0xA5410, .rodata, code_80850_len_3060]
+    - [0xA54F0, .rodata, world/partners]
+    - [0xA5798, .rodata, code_891b0_len_fb0]
+    - [0xA57C0, .rodata, code_8a160_len_700]
+    - [0xA57E0, .rodata, code_8a860_len_3f30]
   - type: code
     start: 0xA5DD0
     vram: 0x8010F6D0
