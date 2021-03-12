@@ -43,7 +43,7 @@ void load_engine_data(void) {
     dma_copy(code_code_E79B0_ROM_START, code_code_E79B0_ROM_END, code_code_E79B0_VRAM);
     dma_copy(code_code_102610_ROM_START, code_code_102610_ROM_END, code_code_102610_VRAM);
     dma_copy(code_code_A5DD0_ROM_START, code_code_A5DD0_ROM_END, code_code_A5DD0_VRAM);
-    dma_copy(D_0010CC10, D_0010CC10_end, D_802EB3D0); // new segment required to fix this
+    dma_copy(code_code_10CC10_ROM_START, code_code_10CC10_ROM_END, code_code_10CC10_VRAM);
     D_8009A650[0] = 0;
     phi_s0 = *gGameStatusPtr;
     (*gGameStatusPtr)->unk_79 = 0;
