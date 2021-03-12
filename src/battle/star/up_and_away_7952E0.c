@@ -14,7 +14,7 @@ INCLUDE_ASM(s32, "battle/star/up_and_away_7952E0", func_802A1218_7954F8);
 
 INCLUDE_ASM(s32, "battle/star/up_and_away_7952E0", func_802A137C_79565C);
 
-INCLUDE_ASM(s32, "battle/star/up_and_away_7952E0", func_802A1414_7956F4);
+#include "common/UnkBackgroundFunc.inc.c"
 
 INCLUDE_ASM(s32, "battle/star/up_and_away_7952E0", func_802A1494_795774);
 

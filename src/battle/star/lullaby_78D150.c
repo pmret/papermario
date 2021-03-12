@@ -14,7 +14,7 @@ INCLUDE_ASM(s32, "battle/star/lullaby_78D150", func_802A1218_78D368);
 
 INCLUDE_ASM(s32, "battle/star/lullaby_78D150", func_802A137C_78D4CC);
 
-INCLUDE_ASM(s32, "battle/star/lullaby_78D150", func_802A1414_78D564);
+#include "common/UnkBackgroundFunc.inc.c"
 
 INCLUDE_ASM(s32, "battle/star/lullaby_78D150", func_802A1494_78D5E4);
 

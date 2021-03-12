@@ -14,7 +14,7 @@ INCLUDE_ASM(s32, "battle/star/time_out_793D20", func_802A1218_793F38);
 
 INCLUDE_ASM(s32, "battle/star/time_out_793D20", func_802A137C_79409C);
 
-INCLUDE_ASM(s32, "battle/star/time_out_793D20", func_802A1414_794134);
+#include "common/UnkBackgroundFunc.inc.c"
 
 INCLUDE_ASM(s32, "battle/star/time_out_793D20", func_802A1494_7941B4);
 

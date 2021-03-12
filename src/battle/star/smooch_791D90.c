@@ -14,7 +14,7 @@ INCLUDE_ASM(s32, "battle/star/smooch_791D90", func_802A1218_791FA8);
 
 INCLUDE_ASM(s32, "battle/star/smooch_791D90", func_802A137C_79210C);
 
-INCLUDE_ASM(s32, "battle/star/smooch_791D90", func_802A1414_7921A4);
+#include "common/UnkBackgroundFunc.inc.c"
 
 INCLUDE_ASM(s32, "battle/star/smooch_791D90", func_802A1494_792224);
 

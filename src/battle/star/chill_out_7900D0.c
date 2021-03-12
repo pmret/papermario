@@ -64,21 +64,7 @@ ApiStatus func_802A137C_79044C(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus func_802A1414_7904E4(ScriptInstance* script, s32 isInitialCall) {
-    if (isInitialCall) {
-        script->functionTemp[0].s = 20;
-    }
-
-    set_background_color_blend(0, 0, 0, script->functionTemp[0].s * 10);
-    script->functionTemp[0].s -= 1;
-
-    if (script->functionTemp[0].s == 0) {
-        set_background_color_blend(0, 0, 0, 0);
-        return ApiStatus_DONE2;
-    }
-
-    return ApiStatus_BLOCK;
-}
+#include "common/UnkBackgroundFunc.inc.c"
 
 INCLUDE_ASM(s32, "battle/star/chill_out_7900D0", func_802A1494_790564);
 

@@ -2762,7 +2762,7 @@ segments:
     overlay: True
     subsections:
     - [0x789E60, c]
-    - [0x78A480, data]
+    - [0x78A490, data]
   - name: battle/star/refresh
     type: code
     start: 0x78B600
