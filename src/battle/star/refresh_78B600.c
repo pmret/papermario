@@ -37,20 +37,7 @@ ApiStatus func_802A17D4_78BDD4(ScriptInstance* script, s32 isInitialCall) {
 
 #include "common/AddHP.inc.c"
 
-ApiStatus func_802A1894_78BE94(ScriptInstance* script, s32 isInitialCall) {
-    PlayerData* playerData = &gPlayerData;
-    PlayerData* playerData2 = &gPlayerData;
-    s32 amt = get_variable(script, *script->ptrReadPos);
-    s32 newFP = playerData->curFP + amt;
-
-    if (newFP > playerData->curMaxFP) {
-        newFP = playerData->curMaxFP;
-    }
-
-    playerData2->curFP = newFP;
-
-    return ApiStatus_DONE2;
-}
+#include "common/AddFP.inc.c"
 
 INCLUDE_ASM(s32, "battle/star/refresh_78B600", func_802A18E8_78BEE8);
 

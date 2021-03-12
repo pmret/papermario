@@ -16,7 +16,7 @@ INCLUDE_ASM(s32, "battle/item/strange_cake_731300", func_802A18D8_731BD8);
 
 #include "common/AddHP.inc.c"
 
-INCLUDE_ASM(s32, "battle/item/strange_cake_731300", func_802A19EC_731CEC);
+#include "common/AddFP.inc.c"
 
 INCLUDE_ASM(s32, "battle/item/strange_cake_731300", func_802A1A40_731D40);
 

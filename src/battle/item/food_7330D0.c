@@ -16,6 +16,6 @@ INCLUDE_ASM(s32, "battle/item/food_7330D0", func_802A1438_733508);
 
 #include "common/AddHP.inc.c"
 
-INCLUDE_ASM(s32, "battle/item/food_7330D0", func_802A154C_73361C);
+#include "common/AddFP.inc.c"
 
 INCLUDE_ASM(s32, "battle/item/food_7330D0", func_802A15A0_733670);
