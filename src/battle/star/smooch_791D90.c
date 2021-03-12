@@ -14,6 +14,6 @@ INCLUDE_ASM(s32, "battle/star/smooch_791D90", func_802A1494_792224);
 
 #include "common/SetNpcCollision32.inc.c"
 
-INCLUDE_ASM(s32, "battle/star/smooch_791D90", func_802A1518_7922A8);
+#include "common/AddHP.inc.c"
 
 INCLUDE_ASM(s32, "battle/star/smooch_791D90", func_802A156C_7922FC);
