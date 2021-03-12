@@ -604,6 +604,7 @@ class N64SegCode(N64Segment):
 
     # Determine symbols
     def determine_symbols(self, funcs):
+        hi_lo_max_distance = self.options.get("hi_lo_max_distance", 6)
         ret = {}
 
         for func_addr in funcs:
@@ -629,7 +630,7 @@ class N64SegCode(N64Segment):
 
                     lui_val = int(op_split[1], 0)
                     if lui_val >= 0x8000:
-                        for j in range(i + 1, min(i + 6, len(func))):
+                        for j in range(i + 1, min(i + hi_lo_max_distance, len(func))):
                             s_insn = func[j][0]
 
                             s_op_split = s_insn.op_str.split(", ")

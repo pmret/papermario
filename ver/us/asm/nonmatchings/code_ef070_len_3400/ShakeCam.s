@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_802DA1D0
+.double -0.8, 0.0
+
+.section .text
+
 glabel ShakeCam
 /* EFC58 802CB2A8 27BDFFC0 */  addiu     $sp, $sp, -0x40
 /* EFC5C 802CB2AC AFB5002C */  sw        $s5, 0x2c($sp)

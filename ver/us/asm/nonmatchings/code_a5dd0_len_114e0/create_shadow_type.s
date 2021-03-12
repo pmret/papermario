@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_8014F928
+.word L801122B0_A89B0, L801122C4_A89C4, L801122AC_A89AC, L801122C0_A89C0, L801122D8_A89D8, L801122D4_A89D4
+
+.section .text
+
 glabel create_shadow_type
 /* A8960 80112260 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* A8964 80112264 0080182D */  daddu     $v1, $a0, $zero

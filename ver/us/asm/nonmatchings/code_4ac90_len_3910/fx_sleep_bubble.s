@@ -22,7 +22,7 @@ glabel fx_sleep_bubble
 /* 4BC34 80070834 C7B00028 */  lwc1      $f16, 0x28($sp)
 /* 4BC38 80070838 8FBF002C */  lw        $ra, 0x2c($sp)
 /* 4BC3C 8007083C 27BD0030 */  addiu     $sp, $sp, 0x30
-/* 4BC40 80070840 3C018008 */  lui       $at, %hi(D_8007F5E8)
-/* 4BC44 80070844 8C21F5E8 */  lw        $at, %lo(D_8007F5E8)($at)
+/* 4BC40 80070840 3C018008 */  lui       $at, %hi(gEffectTable+0x3D8)
+/* 4BC44 80070844 8C21F5E8 */  lw        $at, %lo(gEffectTable+0x3D8)($at)
 /* 4BC48 80070848 00200008 */  jr        $at
 /* 4BC4C 8007084C 00000000 */   nop

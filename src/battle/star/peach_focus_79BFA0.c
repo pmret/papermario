@@ -1,22 +1,20 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "battle/star/peach_focus_79BFA0", func_802A1000_79BFA0);
-
-INCLUDE_ASM(s32, "battle/star/peach_focus_79BFA0", func_802A10AC_79C04C);
-
-INCLUDE_ASM(s32, "battle/star/peach_focus_79BFA0", func_802A116C_79C10C);
-
-INCLUDE_ASM(s32, "battle/star/peach_focus_79BFA0", func_802A1218_79C1B8);
-
 #define NAMESPACE battle_star_peach_focus
+
+#include "common/UnkStarFuncs.inc.c"
+
 #include "common/FadeBackgroundToBlack.inc.c"
 
-INCLUDE_ASM(s32, "battle/star/peach_focus_79BFA0", func_802A137C_79C31C);
+#include "common/UnkBackgroundFunc2.inc.c"
 
-INCLUDE_ASM(s32, "battle/star/peach_focus_79BFA0", func_802A1414_79C3B4);
+#include "common/UnkBackgroundFunc.inc.c"
 
 INCLUDE_ASM(s32, "battle/star/peach_focus_79BFA0", func_802A1494_79C434);
 
-INCLUDE_ASM(s32, "battle/star/peach_focus_79BFA0", func_802A14E8_79C488);
+#include "common/SetNpcCollision32.inc.c"
 
-INCLUDE_ASM(s32, "battle/star/peach_focus_79BFA0", func_802A1518_79C4B8);
+ApiStatus func_802A1518_79C4B8(ScriptInstance* script, s32 isInitialCall) {
+    ((s32*)script->varTable[0])[1]++; // TODO replace with actual struct when we know what this is
+    return ApiStatus_DONE2;
+}

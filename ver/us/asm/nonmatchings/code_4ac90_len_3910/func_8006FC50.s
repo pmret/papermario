@@ -22,7 +22,7 @@ glabel func_8006FC50
 /* 4B094 8006FC94 C7B00028 */  lwc1      $f16, 0x28($sp)
 /* 4B098 8006FC98 8FBF002C */  lw        $ra, 0x2c($sp)
 /* 4B09C 8006FC9C 27BD0030 */  addiu     $sp, $sp, 0x30
-/* 4B0A0 8006FCA0 3C018008 */  lui       $at, %hi(D_8007F300)
-/* 4B0A4 8006FCA4 8C21F300 */  lw        $at, %lo(D_8007F300)($at)
+/* 4B0A0 8006FCA0 3C018008 */  lui       $at, %hi(gEffectTable+0xF0)
+/* 4B0A4 8006FCA4 8C21F300 */  lw        $at, %lo(gEffectTable+0xF0)($at)
 /* 4B0A8 8006FCA8 00200008 */  jr        $at
 /* 4B0AC 8006FCAC 00000000 */   nop

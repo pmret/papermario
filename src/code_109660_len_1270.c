@@ -52,8 +52,6 @@ void func_802E7F6C(Entity* entity) {
 
 INCLUDE_ASM(s32, "code_109660_len_1270", func_802E7FA0);
 
-extern f64 D_802EB370;
-
 INCLUDE_ASM(s32, "code_109660_len_1270", func_802E854C);
 
 s32 func_802E8858(Entity* entity) {
@@ -92,7 +90,7 @@ void func_802E88EC(Entity* entity, f32 arg1) {
         }
 
         if (flag) {
-            make_item_entity(temp->unk_00, entity->position.x, entity->position.y + D_802EB370, entity->position.z, 0xA, 0,
+            make_item_entity(temp->unk_00, entity->position.x, entity->position.y + 33.0, entity->position.z, 0xA, 0,
                              func_800E546C(), temp->unk_04);
         }
     }

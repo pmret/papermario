@@ -4,7 +4,7 @@ typedef s32 TlbEntry[0x1000 / 4];
 typedef TlbEntry TlbMappablePage[15];
 
 extern TlbMappablePage D_80197000;
-extern EffectTableEntry D_8007F210[135];
+extern EffectTableEntry gEffectTable[135];
 
 #define EFFECT_LOADED 1
 
@@ -167,7 +167,7 @@ void remove_all_effects(void) {
 }
 
 s32 load_effect(s32 effectIndex) {
-    EffectTableEntry* effectTable = &D_8007F210[0];
+    EffectTableEntry* effectTable = &gEffectTable[0];
     EffectTableEntry* effectEntry;
     Effect* curEffect;
     TlbMappablePage* tlbMappablePages;

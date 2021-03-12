@@ -1,6 +1,6 @@
 #include "common.h"
 
-extern EffectTableEntry D_8007F210[135];
+extern EffectTableEntry gEffectTable[135];
 
 INCLUDE_ASM(s32, "code_4ac90_len_3910", func_8006F890);
 
@@ -81,7 +81,7 @@ INCLUDE_ASM(s32, "code_4ac90_len_3910", func_80070610);
 
 INCLUDE_ASM(s32, "code_4ac90_len_3910", func_80070670);
 
-INCLUDE_ASM(s32, "code_4ac90_len_3910", func_800706D0);
+INCLUDE_ASM(void, "code_4ac90_len_3910", func_800706D0, s32 arg0, f32 arg1, f32 arg2, f32 arg3);
 
 INCLUDE_ASM(s32, "code_4ac90_len_3910", func_80070730);
 
@@ -234,7 +234,8 @@ INCLUDE_ASM(s32, "code_4ac90_len_3910", func_80072290);
 
 INCLUDE_ASM(s32, "code_4ac90_len_3910", func_800722F0);
 
-INCLUDE_ASM(s32, "code_4ac90_len_3910", func_80072350);
+INCLUDE_ASM(UNK_TYPE, "code_4ac90_len_3910", func_80072350, s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4,
+            f32 arg5, f32 arg6, s32 arg7, s32 arg8);
 
 INCLUDE_ASM(s32, "code_4ac90_len_3910", func_800723B0);
 

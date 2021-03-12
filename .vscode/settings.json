@@ -21,6 +21,9 @@
         "docs/doxygen": true,
         "ctx.c": true,
         "ver/current": true,
+        "ver/us/build": true,
+        "ver/jp/build": true,
+        "expected": true
     },
     "python.autoComplete.extraPaths": [
         "./tools"
@@ -39,6 +42,6 @@
         "**/.git": true,
         "**/.splat_cache": true,
         ".ninja*": true,
-        "ver/current": true,
+        "ver/current": true
     }
 }

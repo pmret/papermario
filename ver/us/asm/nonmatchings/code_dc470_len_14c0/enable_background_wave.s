@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_80151220
+.word L80146030_DC730, L801461A0_DC8A0, L80146044_DC744, L8014607C_DC77C, L801461A0_DC8A0, 0, 0, 0
+
+.section .text
+
 glabel enable_background_wave
 /* DC5C0 80145EC0 27BDFF48 */  addiu     $sp, $sp, -0xb8
 /* DC5C4 80145EC4 AFB00080 */  sw        $s0, 0x80($sp)

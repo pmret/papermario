@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_80150580
+.double 0.6
+
+.section .text
+
 glabel get_char_width
 /* BC4F4 80125DF4 288200F0 */  slti      $v0, $a0, 0xf0
 /* BC4F8 80125DF8 44871000 */  mtc1      $a3, $f2

@@ -8,7 +8,6 @@ glabel jtbl_80099B20
 
 .section .text
 
-
 glabel __osDevMgrMain
 /* 3C490 80061090 27BDFFB8 */  addiu     $sp, $sp, -0x48
 /* 3C494 80061094 AFB20030 */  sw        $s2, 0x30($sp)
