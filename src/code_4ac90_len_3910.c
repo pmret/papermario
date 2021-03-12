@@ -1,6 +1,6 @@
 #include "common.h"
 
-extern EffectTableEntry D_8007F210[135];
+extern EffectTableEntry gEffectTable[135];
 
 INCLUDE_ASM(s32, "code_4ac90_len_3910", func_8006F890);
 

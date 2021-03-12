@@ -22,7 +22,7 @@ glabel fx_sweat
 /* 4BBD4 800707D4 C7B00028 */  lwc1      $f16, 0x28($sp)
 /* 4BBD8 800707D8 8FBF002C */  lw        $ra, 0x2c($sp)
 /* 4BBDC 800707DC 27BD0030 */  addiu     $sp, $sp, 0x30
-/* 4BBE0 800707E0 3C018008 */  lui       $at, %hi(D_8007F5D0)
-/* 4BBE4 800707E4 8C21F5D0 */  lw        $at, %lo(D_8007F5D0)($at)
+/* 4BBE0 800707E0 3C018008 */  lui       $at, %hi(gEffectTable+0x3C0)
+/* 4BBE4 800707E4 8C21F5D0 */  lw        $at, %lo(gEffectTable+0x3C0)($at)
 /* 4BBE8 800707E8 00200008 */  jr        $at
 /* 4BBEC 800707EC 00000000 */   nop

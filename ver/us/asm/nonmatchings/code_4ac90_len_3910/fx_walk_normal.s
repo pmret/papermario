@@ -22,7 +22,7 @@ glabel fx_walk_normal
 /* 4AF74 8006FB74 C7B00028 */  lwc1      $f16, 0x28($sp)
 /* 4AF78 8006FB78 8FBF002C */  lw        $ra, 0x2c($sp)
 /* 4AF7C 8006FB7C 27BD0030 */  addiu     $sp, $sp, 0x30
-/* 4AF80 8006FB80 3C018008 */  lui       $at, %hi(D_8007F2B8)
-/* 4AF84 8006FB84 8C21F2B8 */  lw        $at, %lo(D_8007F2B8)($at)
+/* 4AF80 8006FB80 3C018008 */  lui       $at, %hi(gEffectTable+0xA8)
+/* 4AF84 8006FB84 8C21F2B8 */  lw        $at, %lo(gEffectTable+0xA8)($at)
 /* 4AF88 8006FB88 00200008 */  jr        $at
 /* 4AF8C 8006FB8C 00000000 */   nop
