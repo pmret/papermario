@@ -1,5 +1,7 @@
 #include "common.h"
 
+#define NAMESPACE battle_item_electro_pop
+
 INCLUDE_ASM(s32, "battle/item/electro_pop_7305A0", func_802A1000_7305A0);
 
 INCLUDE_ASM(s32, "battle/item/electro_pop_7305A0", func_802A11D4_730774);
@@ -10,7 +12,7 @@ INCLUDE_ASM(s32, "battle/item/electro_pop_7305A0", func_802A127C_73081C);
 
 INCLUDE_ASM(s32, "battle/item/electro_pop_7305A0", func_802A133C_7308DC);
 
-INCLUDE_ASM(s32, "battle/item/electro_pop_7305A0", func_802A13FC_73099C);
+#include "common/AddHP.inc.c"
 
 INCLUDE_ASM(s32, "battle/item/electro_pop_7305A0", func_802A1450_7309F0);
 

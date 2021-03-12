@@ -71,6 +71,7 @@ void entity_init_HugeBlueSwitch(Entity* entity);
 
 UNK_TYPE func_80072230(s32, f32, f32, f32, f32, s32);
 UNK_TYPE func_80072350(s32, f32, f32, f32, f32, f32, f32, s32, s32);
+void func_800706D0(s32 arg0, f32 arg1, f32 arg2, f32 arg3);
 
 // Text
 PrintContext* load_string(s32 stringID, s32* a1);
