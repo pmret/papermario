@@ -4,44 +4,7 @@
 
 extern s32 D_802A2CC0;
 
-ApiStatus func_802A1000_7900D0(ScriptInstance* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    s32 a = get_variable(script, *args++);
-    s32 b = get_variable(script, *args++);
-    s32 c = get_variable(script, *args++);
-
-    func_8006FEF0(0, a, b, c, 40.0f);
-    return ApiStatus_DONE2;
-}
-
-ApiStatus func_802A10AC_79017C(ScriptInstance* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    s32 a = get_variable(script, *args++);
-    s32 b = get_variable(script, *args++);
-    s32 c = get_variable(script, *args++);
-
-    func_80070550(5, a, b, c, 50.0f, 50.0f, 40, 30);
-    return ApiStatus_DONE2;
-}
-
-ApiStatus func_802A116C_79023C(ScriptInstance* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    s32 a = get_variable(script, *args++);
-    s32 b = get_variable(script, *args++);
-    s32 c = get_variable(script, *args++);
-
-    func_8006FEF0(0, a, b, c, 30.0f);
-    return ApiStatus_DONE2;
-}
-
-ApiStatus func_802A1218_7902E8(ScriptInstance* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    s32 var1 = get_variable(script, *args++);
-    s32 var2 = get_variable(script, *args++);
-
-    func_80072350(4, var1, var2, get_variable(script, *args++), 20.0f, 20.0f, 1.0f, 0xA, 0xF);
-    return ApiStatus_DONE2;
-}
+#include "common/UnkStarFuncs.inc.c"
 
 #include "common/FadeBackgroundToBlack.inc.c"
 

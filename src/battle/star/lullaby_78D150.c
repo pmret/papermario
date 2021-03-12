@@ -2,13 +2,7 @@
 
 #define NAMESPACE battle_star_lullaby
 
-INCLUDE_ASM(s32, "battle/star/lullaby_78D150", func_802A1000_78D150);
-
-INCLUDE_ASM(s32, "battle/star/lullaby_78D150", func_802A10AC_78D1FC);
-
-INCLUDE_ASM(s32, "battle/star/lullaby_78D150", func_802A116C_78D2BC);
-
-INCLUDE_ASM(s32, "battle/star/lullaby_78D150", func_802A1218_78D368);
+#include "common/UnkStarFuncs.inc.c"
 
 #include "common/FadeBackgroundToBlack.inc.c"
 

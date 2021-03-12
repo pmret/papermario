@@ -2,13 +2,7 @@
 
 #define NAMESPACE battle_star_peach_dash
 
-INCLUDE_ASM(s32, "battle/star/peach_dash_79D8A0", func_802A1000_79D8A0);
-
-INCLUDE_ASM(s32, "battle/star/peach_dash_79D8A0", func_802A10AC_79D94C);
-
-INCLUDE_ASM(s32, "battle/star/peach_dash_79D8A0", func_802A116C_79DA0C);
-
-INCLUDE_ASM(s32, "battle/star/peach_dash_79D8A0", func_802A1218_79DAB8);
+#include "common/UnkStarFuncs.inc.c"
 
 #include "common/FadeBackgroundToBlack.inc.c"
 

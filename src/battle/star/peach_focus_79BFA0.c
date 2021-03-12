@@ -2,13 +2,7 @@
 
 #define NAMESPACE battle_star_peach_focus
 
-INCLUDE_ASM(s32, "battle/star/peach_focus_79BFA0", func_802A1000_79BFA0);
-
-INCLUDE_ASM(s32, "battle/star/peach_focus_79BFA0", func_802A10AC_79C04C);
-
-INCLUDE_ASM(s32, "battle/star/peach_focus_79BFA0", func_802A116C_79C10C);
-
-INCLUDE_ASM(s32, "battle/star/peach_focus_79BFA0", func_802A1218_79C1B8);
+#include "common/UnkStarFuncs.inc.c"
 
 #include "common/FadeBackgroundToBlack.inc.c"
 

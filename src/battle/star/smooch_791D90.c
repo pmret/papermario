@@ -2,13 +2,7 @@
 
 #define NAMESPACE battle_star_smooch
 
-INCLUDE_ASM(s32, "battle/star/smooch_791D90", func_802A1000_791D90);
-
-INCLUDE_ASM(s32, "battle/star/smooch_791D90", func_802A10AC_791E3C);
-
-INCLUDE_ASM(s32, "battle/star/smooch_791D90", func_802A116C_791EFC);
-
-INCLUDE_ASM(s32, "battle/star/smooch_791D90", func_802A1218_791FA8);
+#include "common/UnkStarFuncs.inc.c"
 
 #include "common/FadeBackgroundToBlack.inc.c"
 

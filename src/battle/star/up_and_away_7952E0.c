@@ -2,13 +2,7 @@
 
 #define NAMESPACE battle_star_up_and_away
 
-INCLUDE_ASM(s32, "battle/star/up_and_away_7952E0", func_802A1000_7952E0);
-
-INCLUDE_ASM(s32, "battle/star/up_and_away_7952E0", func_802A10AC_79538C);
-
-INCLUDE_ASM(s32, "battle/star/up_and_away_7952E0", func_802A116C_79544C);
-
-INCLUDE_ASM(s32, "battle/star/up_and_away_7952E0", func_802A1218_7954F8);
+#include "common/UnkStarFuncs.inc.c"
 
 #include "common/FadeBackgroundToBlack.inc.c"
 

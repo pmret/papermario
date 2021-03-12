@@ -2,13 +2,7 @@
 
 #define NAMESPACE battle_star_star_beam
 
-INCLUDE_ASM(s32, "battle/star/star_beam_796FC0", func_802A1000_796FC0);
-
-INCLUDE_ASM(s32, "battle/star/star_beam_796FC0", func_802A10AC_79706C);
-
-INCLUDE_ASM(s32, "battle/star/star_beam_796FC0", func_802A116C_79712C);
-
-INCLUDE_ASM(s32, "battle/star/star_beam_796FC0", func_802A1218_7971D8);
+#include "common/UnkStarFuncs.inc.c"
 
 #include "common/FadeBackgroundToBlack.inc.c"
 

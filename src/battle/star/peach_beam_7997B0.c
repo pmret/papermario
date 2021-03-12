@@ -2,13 +2,7 @@
 
 #define NAMESPACE battle_star_peach_beam
 
-INCLUDE_ASM(s32, "battle/star/peach_beam_7997B0", func_802A1000_7997B0);
-
-INCLUDE_ASM(s32, "battle/star/peach_beam_7997B0", func_802A10AC_79985C);
-
-INCLUDE_ASM(s32, "battle/star/peach_beam_7997B0", func_802A116C_79991C);
-
-INCLUDE_ASM(s32, "battle/star/peach_beam_7997B0", func_802A1218_7999C8);
+#include "common/UnkStarFuncs.inc.c"
 
 #include "common/FadeBackgroundToBlack.inc.c"
 
