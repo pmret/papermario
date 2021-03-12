@@ -12,7 +12,7 @@ INCLUDE_ASM(s32, "battle/star/peach_dash_79D8A0", func_802A1218_79DAB8);
 
 #include "common/FadeBackgroundToBlack.inc.c"
 
-INCLUDE_ASM(s32, "battle/star/peach_dash_79D8A0", func_802A137C_79DC1C);
+#include "common/UnkBackgroundFunc2.inc.c"
 
 #include "common/UnkBackgroundFunc.inc.c"
 

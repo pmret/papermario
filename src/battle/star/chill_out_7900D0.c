@@ -45,24 +45,7 @@ ApiStatus func_802A1218_7902E8(ScriptInstance* script, s32 isInitialCall) {
 
 #include "common/FadeBackgroundToBlack.inc.c"
 
-ApiStatus func_802A137C_79044C(ScriptInstance* script, s32 isInitialCall) {
-    if (isInitialCall) {
-        func_8011D82C(1);
-        *D_801512F0 = 1;
-        set_background_color_blend(0, 0, 0, 0);
-        script->functionTemp[0].s = 0;
-    }
-
-    set_background_color_blend(0, 0, 0, script->functionTemp[0].s);
-    script->functionTemp[0].s += 10;
-
-    if (script->functionTemp[0].s >= 230) {
-        set_background_color_blend(0, 0, 0, 230);
-        return ApiStatus_DONE2;
-    }
-
-    return ApiStatus_BLOCK;
-}
+#include "common/UnkBackgroundFunc2.inc.c"
 
 #include "common/UnkBackgroundFunc.inc.c"
 

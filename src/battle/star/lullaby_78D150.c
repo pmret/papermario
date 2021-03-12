@@ -12,7 +12,7 @@ INCLUDE_ASM(s32, "battle/star/lullaby_78D150", func_802A1218_78D368);
 
 #include "common/FadeBackgroundToBlack.inc.c"
 
-INCLUDE_ASM(s32, "battle/star/lullaby_78D150", func_802A137C_78D4CC);
+#include "common/UnkBackgroundFunc2.inc.c"
 
 #include "common/UnkBackgroundFunc.inc.c"
 

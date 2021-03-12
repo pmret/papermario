@@ -12,7 +12,7 @@ INCLUDE_ASM(s32, "battle/star/refresh_78B600", func_802A1218_78B818);
 
 #include "common/FadeBackgroundToBlack.inc.c"
 
-INCLUDE_ASM(s32, "battle/star/refresh_78B600", func_802A137C_78B97C);
+#include "common/UnkBackgroundFunc2.inc.c"
 
 #include "common/UnkBackgroundFunc.inc.c"
 
