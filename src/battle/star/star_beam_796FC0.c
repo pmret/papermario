@@ -16,6 +16,23 @@ INCLUDE_ASM(s32, "battle/star/star_beam_796FC0", func_802A1494_797454);
 
 INCLUDE_ASM(s32, "battle/star/star_beam_796FC0", func_802A1518_7974D8);
 
-INCLUDE_ASM(s32, "battle/star/star_beam_796FC0", func_802A2468_798428);
+ApiStatus func_802A2468_798428(ScriptInstance* script, s32 isInitialCall) {
+    script->varTable[0] = D_802A3838;
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "battle/star/star_beam_796FC0", func_802A247C_79843C);
+ApiStatus func_802A247C_79843C(ScriptInstance* script, s32 isInitialCall) {
+    if (isInitialCall) {
+        script->functionTemp[0].s = 230;
+    }
+
+    set_background_color_blend(0, 0, 0, script->functionTemp[0].s);
+
+    script->functionTemp[0].s -= 5;
+    if (script->functionTemp[0].s <= 200) {
+        set_background_color_blend(0, 0, 0, 200);
+        return ApiStatus_DONE2;
+    }
+
+    return ApiStatus_BLOCK;
+}

@@ -1,7 +1,5 @@
 #include "common.h"
 
-extern s32 D_802A3838;
-
 #define NAMESPACE battle_star_peach_beam
 
 #include "common/UnkStarFuncs.inc.c"
@@ -38,3 +36,5 @@ ApiStatus func_802A247C_79AC2C(ScriptInstance* script, s32 isInitialCall) {
 
     return ApiStatus_BLOCK;
 }
+
+// this file is identical in c code to star beam

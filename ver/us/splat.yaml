@@ -2786,7 +2786,7 @@ segments:
     overlay: True
     subsections:
     - [0x78E7D0, c]
-    - [0x78EEB0, data]
+    - [0x78EEC0, data]
   - name: battle/star/chill_out
     type: code
     start: 0x7900D0
