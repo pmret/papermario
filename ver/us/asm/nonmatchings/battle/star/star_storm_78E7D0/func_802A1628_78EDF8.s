@@ -48,7 +48,7 @@ glabel func_802A1628_78EDF8
 /* 78EEA4 802A16D4 8FB00020 */  lw        $s0, 0x20($sp)
 /* 78EEA8 802A16D8 24020002 */  addiu     $v0, $zero, 2
 /* 78EEAC 802A16DC 03E00008 */  jr        $ra
-addiu $sp, $sp, 0x30
-nop
-nop
-nop
+/* 78EEB0 802A16E0 27BD0030 */   addiu    $sp, $sp, 0x30
+/* 78EEB4 802A16E4 00000000 */  nop
+/* 78EEB8 802A16E8 00000000 */  nop
+/* 78EEBC 802A16EC 00000000 */  nop
