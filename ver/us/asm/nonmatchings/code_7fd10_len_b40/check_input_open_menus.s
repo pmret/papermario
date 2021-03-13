@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_8010BF30
+.word L800E6DD8_80288, L800E6F14_803C4, L800E6FC8_80478, L800E7044_804F4, L800E7090_80540, L800E726C_8071C, L800E726C_8071C, L800E726C_8071C, L800E726C_8071C, L800E726C_8071C, L800E7208_806B8, 0
+
+.section .text
+
 glabel check_input_open_menus
 /* 80194 800E6CE4 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
 /* 80198 800E6CE8 8C63419C */  lw        $v1, %lo(gGameStatusPtr)($v1)

@@ -1,5 +1,7 @@
 #include "common.h"
 
+#define NAMESPACE battle_item_strange_cake
+
 INCLUDE_ASM(s32, "battle/item/strange_cake_731300", func_802A1000_731300);
 
 INCLUDE_ASM(s32, "battle/item/strange_cake_731300", func_802A11D4_7314D4);
@@ -12,9 +14,9 @@ INCLUDE_ASM(s32, "battle/item/strange_cake_731300", func_802A1818_731B18);
 
 INCLUDE_ASM(s32, "battle/item/strange_cake_731300", func_802A18D8_731BD8);
 
-INCLUDE_ASM(s32, "battle/item/strange_cake_731300", func_802A1998_731C98);
+#include "common/AddHP.inc.c"
 
-INCLUDE_ASM(s32, "battle/item/strange_cake_731300", func_802A19EC_731CEC);
+#include "common/AddFP.inc.c"
 
 INCLUDE_ASM(s32, "battle/item/strange_cake_731300", func_802A1A40_731D40);
 

@@ -1,15 +1,5 @@
 #include "common.h"
 
-// TODO: replace usages of these with proper constants
-extern f64 D_802EB1D0; // 0.09
-extern f64 D_802EB1D8; // 0.045
-extern f64 D_802EB1E0; // 0.18
-extern f64 D_802EB1E8; // 0.09
-extern f64 D_802EB1F0; // 1.2
-extern f64 D_802EB1F8; // 0.3
-extern f64 D_802EB200; // 1.2
-extern f64 D_802EB208; // 0.3
-
 //display list func
 INCLUDE_ASM(s32, "code_104940_len_dc0", func_802E30C0);
 
@@ -35,14 +25,14 @@ f32 func_802E31EC(Entity* entity) {
 void func_802E328C(Entity* entity) {
 
     if ((get_entity_type(entity->listIndex) - 24) < 3) {
-        entity->scale.x -= D_802EB1D0;
-        entity->scale.z -= D_802EB1D0;
-        entity->scale.y += D_802EB1D8;
+        entity->scale.x -= 0.09;
+        entity->scale.z -= 0.09;
+        entity->scale.y += 0.045;
         entity->position.y -= 3.0f;
     } else {
-        entity->scale.x -= D_802EB1E0;
-        entity->scale.z -= D_802EB1E0;
-        entity->scale.y += D_802EB1E8;
+        entity->scale.x -= 0.18;
+        entity->scale.z -= 0.18;
+        entity->scale.y += 0.09;
         entity->position.y -= 3.0f;
     }
     func_802E3650(entity);

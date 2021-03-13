@@ -1,6 +1,64 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_802EB010
+.word L802E17EC_10306C, L802E1894_103114, L802E1938_1031B8, L802E19E0_103260, L802E1A84_103304, L802E1B18_103398
+
+glabel D_802EB028
+.double 0.3
+
+glabel D_802EB030
+.double 0.01
+
+glabel D_802EB038
+.double -0.2
+
+glabel D_802EB040
+.double -0.01
+
+glabel D_802EB048
+.double 0.15
+
+glabel D_802EB050
+.double 0.01
+
+glabel D_802EB058
+.double -0.1
+
+glabel D_802EB060
+.double -0.01
+
+glabel D_802EB068
+.double 0.01
+
+glabel jtbl_802EB070
+.word L802E1B48_1033C8, L802E1BF0_103470, L802E1C94_103514, L802E1D38_1035B8, L802E1DDC_10365C, L802E1E6C_1036EC
+
+glabel D_802EB088
+.double -0.01
+
+glabel D_802EB090
+.double 0.1
+
+glabel D_802EB098
+.double 0.01
+
+glabel D_802EB0A0
+.double -0.3
+
+glabel D_802EB0A8
+.double -0.01
+
+glabel D_802EB0B0
+.double 0.01
+
+glabel D_802EB0B8
+.double -0.01
+
+.section .text
+
 glabel func_802E17A8
 /* 103028 802E17A8 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 10302C 802E17AC AFB10014 */  sw        $s1, 0x14($sp)

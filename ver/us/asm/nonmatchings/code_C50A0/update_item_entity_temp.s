@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_80150E20
+.word L801357A8_CBEA8, L80135B24_CC224, L80135E48_CC548, L80135E78_CC578, L80135F08_CC608, L80135F78_CC678, L8013637C_CCA7C, L8013637C_CCA7C, L80135F94_CC694, L80135FE8_CC6E8, L8013610C_CC80C, L8013614C_CC84C, L8013629C_CC99C, L801362D0_CC9D0, L80136310_CCA10, 0
+
+.section .text
+
 glabel update_item_entity_temp
 /* CBDDC 801356DC 27BDFFC0 */  addiu     $sp, $sp, -0x40
 /* CBDE0 801356E0 AFB10024 */  sw        $s1, 0x24($sp)

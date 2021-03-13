@@ -98,9 +98,6 @@ extern PrintContext* D_802EB398;
 extern PrintContext* D_802EB39C;
 extern s32 D_802E99DC;
 
-extern f64 D_802EB000;
-extern f64 D_802EB008;
-
 extern Entity* D_802EB3A0;
 extern s32 D_8015C7D0[3];
 
@@ -148,6 +145,8 @@ extern s32 D_800A0964;
 extern s16 D_800A0BB8;
 
 extern UIPanel gUIPanels[64];
+
+extern s32 D_802A3838;
 
 // Pause
 extern s32 gPauseMenuHeldButtons;
@@ -294,6 +293,7 @@ extern s32 D_800B8590;
 extern OSThread* __osActiveQueue;
 extern OSThread* __osRunningThread;
 extern OSThread* __osRunQueue;
+extern OSDevMgr __osPiDevMgr;
 
 // gfx
 extern DisplayContext* gDisplayContext;
@@ -304,7 +304,6 @@ extern u16 gCurrentDisplayContextIndex;
 extern UNK_TYPE D_0A004350;
 extern UNK_TYPE D_0A0026F0;
 extern UNK_TYPE D_802EAE7C;
-extern f64 D_802EB370;
 
 extern s32 D_80291FA8[];
 extern s32 D_80291FD0[];

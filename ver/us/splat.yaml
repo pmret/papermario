@@ -96,7 +96,7 @@ segments:
     - [0x3b2f0, c, os/nusys/nuContRmbCheck]
     - [0x3b390, c, os/nusys/nuContRmbModeSet]
     - [0x3b4a0, c, os/nusys/code_3B4A0]
-    - [0x3B5F0, c, os/nusys/nuGfxThread] # End of nusys
+    - [0x3B5F0, c, os/nusys/nuGfxThread]
     - [0x3b710, c, os/code_3b710_len_40]
     - [0x3b750, c, os/code_3b750_len_20]
     - [0x3b770, c, os/code_3b770_len_80]
@@ -105,19 +105,20 @@ segments:
     - [0x3bd20, c, os/code_3bd20_len_c0]
     - [0x3BD40, hasm, os/osSetIntMask]
     - [0x3bde0, c, os/osCreatePiManager]
-    - [0x3C160, c, os/osEPiWriteIo]
-    - [0x3c1c0, c, os/osEPiReadIo]
-    - [0x3c220, c, os/code_3c220_len_a0]
-    - [0x3c2c0, c, os/code_3c2c0_len_50]
+    - [0x3C160, c, os/osEPiWriteIo] # MOVE_ADDU
+    - [0x3c1c0, c, os/osEPiReadIo] # MOVE_ADDU
+    - [0x3c220, c, os/osEPiStartDma] # MOVE_ADDU
+    - [0x3c2c0, c, os/osEPiLinkHandle]
     - [0x3c310, c, os/osCartRomInit]
     - [0x3c490, c, os/code_3c490_len_3c0]
     - [0x3c850, c, os/code_3c850_len_f0]
     - [0x3c940, c, os/code_3c940_len_140]
     - [0x3ca80, c, os/code_3ca80_len_a0]
-    - [0x3cb20, c, os/code_3cb20_len_130]
-    - [0x3cc50, c, os/code_3cc50_len_80]
+    - [0x3CB20, hasm, os/osInvalDCache]
+    - [0x3CBD0, hasm, os/osInvalICache]
+    - [0x3cc50, hasm, os/osWritebackDCache]
     - [0x3ccd0, hasm, os/osWritebackDCacheAll]
-    - [0x3cd00, c, os/code_3cd00_len_5f0]
+    - [0x3cd00, c, os/code_3cd00_len_5f0] # MOVE_ADDU
     - [0x3CF80, c, os/controller]
     - [0x3D290, c, os/osVirtualToPhysical]
     - [0x3d2f0, c, os/code_3d2f0_len_10]
@@ -132,10 +133,10 @@ segments:
     - [0x3f6d0, c, os/code_3f6d0_len_320]
     - [0x3f9f0, c, os/sins]
     - [0x3fa50, c, os/code_3fa50_len_f60]
-    - [0x3FEA0, c, os/code_3FEA0]
+    - [0x3FEA0, c, os/code_3FEA0] # MOVE_ADDU
     - [0x40980, c, os/osCreateMesgQueue]
-    - [0x409b0, c, os/code_409b0_len_140]
-    - [0x40af0, c, os/code_40af0_len_130]
+    - [0x409b0, c, os/osJamMesg]
+    - [0x40af0, c, os/osRecvMesg]
     - [0x40c20, c, os/code_40c20_len_1f0]
     - [0x40E00, hasm, os/osGetCount]
     - [0x40E10, c, os/code_40E10]
@@ -145,7 +146,7 @@ segments:
     - [0x41170, c, os/code_41170_len_f0]
     - [0x41260, c, os/osCreateThread]
     - [0x41330, c, os/osGetThreadPri]
-    - [0x41350, c, os/osSetThreadPri]
+    - [0x41350, c, os/osSetThreadPri] # MOVE_ADDU
     - [0x41420, c, os/code_41420_len_120]
     - [0x41540, c, os/code_41540_len_c0]
     - [0x41600, c, os/code_41600_len_40]
@@ -214,7 +215,7 @@ segments:
     - [0x47ae0, c, os/code_47ae0_len_e0]
     - [0x47bc0, c, os/code_47bc0_len_50]
     - [0x47c10, c, os/code_47c10_len_50]
-    - [0x47c60, c, os/code_47c60_len_f0]
+    - [0x47c60, c, os/code_47c60_len_f0] # MOVE_ADDU
     - [0x47d50, c, os/code_47d50_len_e0]
     - [0x47e30, c, os/code_47e30_len_60]
     - [0x47e90, c, os/code_47e90_len_110]
@@ -228,9 +229,9 @@ segments:
     - [0x49C70, c, os/code_49C70]
     - [0x4a140, c, os/code_4a140_len_70]
     - [0x4a1b0, c, os/code_4a1b0_len_40]
-    - [0x4a1f0, c, os/code_4a1f0_len_170]
-    - [0x4a360, c, os/code_4a360_len_930]
-    - [0x4ac90, c, os/code_4ac90_len_3910]
+    - [0x4a1f0, c, os/code_4a1f0_len_170] # yay0 decompression - some or all is hand-written
+    - [0x4a360, c, os/code_4a360_len_930] # osFlash* - IDO O2 -g
+    - [0x4ac90, c, code_4ac90_len_3910]
     - [0x4E5A0, data, code_1000_len_60]
     - [0x4F410, .data, code_1370_len_7d0]
     - [0x4F420, .data, code_1b40_len_20b0]
@@ -308,8 +309,8 @@ segments:
     subalign: 4
     subsections:
     - [0x759b0, c, code_759b0_len_61b0]
-    - [0x77480, c]
-    - [0x7B440, c]
+    - [0x77480, c, code_77480]
+    - [0x7B440, c, code_7B440]
     - [0x7bb60, c, code_7bb60_len_41b0]
     - [0x7fd10, c, code_7fd10_len_b40]
     - [0x80850, c, code_80850_len_3060]
@@ -330,18 +331,26 @@ segments:
     - [0x9DA58, data]
     - [0x9DA60, rgba32,  ui/stat_flower, 16, 16]
     - [0x9DE60, data]
-    - [0xA5100, rodata]
+    - [0xA5100, .rodata, code_77480]
+    - [0xA51E0, .rodata, code_7B440]
+    - [0xA5230, .rodata, code_7bb60_len_41b0]
+    - [0xA53E0, .rodata, code_7fd10_len_b40]
+    - [0xA5410, .rodata, code_80850_len_3060]
+    - [0xA54F0, .rodata, world/partners]
+    - [0xA5798, .rodata, code_891b0_len_fb0]
+    - [0xA57C0, .rodata, code_8a160_len_700]
+    - [0xA57E0, .rodata, code_8a860_len_3f30]
   - type: code
     start: 0xA5DD0
     vram: 0x8010F6D0
     subsections:
     - [0xa5dd0, c, code_a5dd0_len_114e0]
-    - [0xB4580, c]
+    - [0xB4580, c, code_B4580]
     - [0xb72b0, c, code_b72b0_len_15ed0]
     - [0xB9D60, c, code_B9D60]
-    - [0xC50A0, c]
+    - [0xC50A0, c, code_C50A0]
     - [0xcd180, c, code_cd180_len_38f0]
-    - [0xCEE40, c]
+    - [0xCEE40, c, code_CEE40]
     - [0xd0a70, c, code_d0a70_len_4fe0]
     - [0xd5a50, c, code_d5a50_len_5fd0]
     - [0xdba20, c, code_dba20_len_350]
@@ -350,7 +359,7 @@ segments:
     - [0xdd930, c, code_dd930_len_1c0]
     - [0xddaf0, c, code_ddaf0_len_c50]
     - [0xde740, c, code_de740_len_23f0]
-    - [0xDF950, c]
+    - [0xDF950, c, code_DF950]
     - [0xe0b30, c, code_e0b30_len_b80]
     - [0xE16B0, data, code_a5dd0_len_114e0]
     - [0xE5510, .data, code_d0a70_len_4fe0]
@@ -360,7 +369,19 @@ segments:
     - [0xE5850, .data, code_ddaf0_len_c50]
     - [0xE59D0, .data, code_DF950]
     - [0xE5DF0, .data, code_e0b30_len_b80]
-    - [0xE5E40, rodata]
+    - [0xE5E40, .rodata, code_a5dd0_len_114e0]
+    - [0xE6560, .rodata, code_B4580]
+    - [0xE67B0, .rodata, code_b72b0_len_15ed0]
+    - [0xE6A70, .rodata, code_B9D60]
+    - [0xE7140, .rodata, code_C50A0]
+    - [0xE75A0, .rodata, code_cd180_len_38f0]
+    - [0xE7680, .rodata, code_CEE40]
+    - [0xE76B0, .rodata, code_d0a70_len_4fe0]
+    - [0xE7840, .rodata, code_d5a50_len_5fd0]
+    - [0xE7920, .rodata, code_dc470_len_14c0]
+    - [0xE7940, .rodata, code_ddaf0_len_c50]
+    - [0xE7950, .rodata, code_DF950]
+    - [0xE7990, .rodata, code_e0b30_len_b80]
   - type: code
     start: 0xE79B0
     vram: 0x802C3000
@@ -374,12 +395,17 @@ segments:
     - [0xf5750, c, code_F5750]
     - [0xf8f60, c, code_f8f60_len_1560]
     - [0xfa4c0, c, code_fa4c0_len_3bf0]
-    - [0xFBE10, c]
+    - [0xFBE10, c, code_FBE10]
     - [0xfe0b0, c, code_fe0b0_len_5a0]
     - [0xFE650, .data, code_e79b0_len_1920]
     - [0xFE660, data, si]
     - [0xFE730, .rodata, code_e79b0_len_1920]
-    - [0xFE748, rodata, si]
+    - [0xFE748, .rodata, si]
+    - [0xFEB80, .rodata, code_ef070_len_3400]
+    - [0xFEB90, .rodata, code_f2470_len_27f0]
+    - [0xFEBA0, .rodata, code_f4c60_len_4300]
+    - [0xFEBB8, .rodata, code_F5750]
+    - [0xFEC08, .rodata, code_FBE10]
   - type: code
     start: 0xFEE30
     vram: 0x802DBD40
@@ -392,28 +418,32 @@ segments:
     vram: 0x802E0D90
     subsections:
     - [0x102610, c, code_102610_len_2330]
-    - [0x102C80, c]
+    - [0x102C80, c, code_102C80]
     - [0x104730, c, code_104730]
     - [0x104940, c, code_104940_len_dc0]
     - [0x105700, c, code_105700_len_2130]
-    - [0x105F90, c]
+    - [0x105F90, c, code_105F90]
     - [0x106EF0, c]
     - [0x107830, c, code_107830_len_e70]
     - [0x1086a0, c, code_1086a0_len_fc0]
     - [0x109660, c, code_109660_len_1270]
     - [0x10A8D0, c, code_10A8D0]
-    - [0x10A9F0, bin]
+    - [0x10A9F0, data]
     #- [0x10A9F0, i4,      shadow/square, 16, 16]
     #- [0x10AA70, i4,      shadow/circle, 16, 16]
-    - [0x10AAF0, bin]
+    - [0x10AAF0, data]
     #- [0x10AB70, i4,      shadow/10AB70, 32, 32]
     #- [0x10AD70, i4,      shadow/10AD70, 32, 32]
     - [0x10AF70, .data, code_104730]
-    - [0x10B608, bin]
-    - [0x10C880, rodata, code_102c80]
+    - [0x10B608, data]
+    - [0x10C880, .rodata, code_102C80]
     - [0x10C9E0, .rodata, code_104730]
-    - [0x10CA50, rodata, code_104940_len_dc0]
-  - [0x10CAF0, bin]
+    - [0x10CA50, .rodata, code_104940_len_dc0]
+    - [0x10CAF0, .rodata, code_105F90]
+    - [0x10CB30, .rodata, code_107830_len_e70]
+    - [0x10CB70, .rodata, code_1086a0_len_fc0]
+    - [0x10CBD0, .rodata, code_109660_len_1270]
+  - [0x10CC00, bin]
   - [0x1164B8, ci8,     peach_letter, 150, 105]
   - [0x11A23E, bin]
   - [0x11A240, palette, peach_letter]
@@ -544,7 +574,7 @@ segments:
     subsections:
     - [0x317020, c, world/partner/goombario]
     - [0x317b60, .data, world/partner/goombario]
-    - [0x317DA0, rodata, world/partner/goombario] # rodata containing a double and a jumptable
+    - [0x317DA0, .rodata, world/partner/goombario]
   - type: code
     ld_name: world_partner_bombette
     start: 0x317e50
@@ -2732,7 +2762,7 @@ segments:
     overlay: True
     subsections:
     - [0x789E60, c]
-    - [0x78A480, data]
+    - [0x78A490, data]
   - name: battle/star/refresh
     type: code
     start: 0x78B600
@@ -2756,7 +2786,7 @@ segments:
     overlay: True
     subsections:
     - [0x78E7D0, c]
-    - [0x78EEB0, data]
+    - [0x78EEC0, data]
   - name: battle/star/chill_out
     type: code
     start: 0x7900D0

@@ -19,7 +19,7 @@ void func_802E1460(Entity* entity) {
     u16 temp2 = temp->unk_22--;
 
     if (temp2) {
-        entity->position.y -= D_802EB000; // 1.8625;
+        entity->position.y -= 1.8625;
         return;
     }
     func_80110678(entity);
@@ -32,7 +32,7 @@ void func_802E14D8(Entity* entity) {
     u16 temp2 = temp->unk_22--;
 
     if (temp2) {
-        entity->position.y += D_802EB008; // 1.8625;
+        entity->position.y += 1.8625;
         return;
     }
     exec_entity_updatecmd(entity);
