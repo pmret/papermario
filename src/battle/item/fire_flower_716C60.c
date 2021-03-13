@@ -1,10 +1,9 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "battle/item/fire_flower_716C60", func_802A1000_716C60);
-
 extern s32 D_802A1D70;
 
-//INCLUDE_ASM(s32, "battle/item/fire_flower_716C60", func_802A11D4_716E34);
+INCLUDE_ASM(s32, "battle/item/fire_flower_716C60", func_802A1000_716C60);
+
 ApiStatus func_802A11D4_716E34(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battlestatus = &gBattleStatus;
     s32 sellValue = gItemTable[battlestatus->selectedItemID].sellValue;
