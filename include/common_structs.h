@@ -1187,7 +1187,19 @@ typedef struct CollisionStatus {
 } CollisionStatus; // size = 0x28
 
 typedef struct DecorationTable {
-    /* 0x000 */ char unk_00[2011];
+    /* 0x000 */ char unk_00[1729];
+    /* 0x6C1 */ s8 unk_6C1;
+    /* 0x6C2 */ char unk_6C2[142];
+    /* 0x750 */ s8 unk_750;
+    /* 0x751 */ s8 unk_751;
+    /* 0x752 */ s8 unk_752;
+    /* 0x753 */ char unk_753[17];
+    /* 0x764 */ s8 unk_764;
+    /* 0x765 */ s8 unk_765;
+    /* 0x766 */ s8 unk_766;
+    /* 0x767 */ s8 unk_767;
+    /* 0x768 */ s8 unk_768;
+    /* 0x769 */ char unk_769[114];
     /* 0x7DB */ s8 unk_7DB;
     /* 0x7DC */ s16 scale[16];
     /* 0x7FC */ s16 posX[16];
@@ -1199,7 +1211,8 @@ typedef struct DecorationTable {
     /* 0x88C */ u8 rotY[16];
     /* 0x89C */ u8 rotZ[16];
     /* 0x8AC */ u8 effectType; /* 0 =  blur, 14 = none? */
-    /* 0x8AD */ char unk_8AD[11];
+    /* 0x8AD */ char unk_8AD[3];
+    /* 0x8B0 */ s32* unk_8B0[2];
     /* 0x8B8 */ u8 decorationType[2];
     /* 0x8BA */ u8 unk_8BA[2];
     /* 0x8BC */ u8 unk_8BC[2];

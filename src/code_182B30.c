@@ -175,7 +175,21 @@ INCLUDE_ASM(s32, "code_182B30", func_802597B0);
 
 INCLUDE_ASM(s32, "code_182B30", func_8025995C);
 
-INCLUDE_ASM(s32, "code_182B30", func_80259A48);
+void func_80259A48(s32 arg0, ActorPart* arg1, s32 arg2, s32 arg3) {
+    DecorationTable* decorationTable = arg1->decorationTable;
+
+    if (decorationTable->unk_6C1 != 0) {
+        arg1->verticalStretch = 1;
+        arg1->unkOffset[0] = 0;
+        arg1->unkOffset[1] = 0;
+        decorationTable->unk_6C1 = 0;
+    }
+    if (arg0 == 0) {
+        func_802597B0(arg1, arg2, arg3);
+    } else {
+        func_8025950C(arg1, arg2, arg3);
+    }
+}
 
 INCLUDE_ASM(s32, "code_182B30", func_80259AAC);
 
@@ -199,15 +213,57 @@ INCLUDE_ASM(s32, "code_182B30", func_8025BAA0);
 
 INCLUDE_ASM(s32, "code_182B30", func_8025C120);
 
-INCLUDE_ASM(s32, "code_182B30", func_8025C840);
+s32 func_8025C840(s32 arg0, ActorPart *arg1) {
 
-INCLUDE_ASM(s32, "code_182B30", func_8025C8A0);
+    if (!(arg1->flags & 2)) {
+        switch (arg1->decorationTable->unk_750) {
+            case 0:
+                func_8025C8A0(arg0, arg1);
+                return 0;
+            case 11:
+                func_8025C918();
+                break;
+        }
+    }
+    return 0;
+}
+
+s32 func_8025C8A0(s32 arg0, ActorPart *arg1) {
+
+    if (arg1->decorationTable->unk_751 != 0) {
+        arg1->decorationTable->unk_751 = 0;
+        if (arg0 == 0) {
+            return func_802DDFF8(0, 0, 0, 0, 0, 0, 0);
+        }
+        return func_802DE894(arg1->unk_84, 0, 0, 0, 0, 0, 0);
+    }
+}
 
 INCLUDE_ASM(s32, "code_182B30", func_8025C918);
 
-INCLUDE_ASM(s32, "code_182B30", func_8025CCC8);
+s32 func_8025CCC8(s32 arg0, ActorPart *arg1) {
 
-INCLUDE_ASM(s32, "code_182B30", func_8025CD28);
+    if (!(arg1->flags & 2)) {
+        switch (arg1->decorationTable->unk_764) {
+            case 0:
+                func_8025CD28(arg0, arg1);
+                return 0;
+            case 1:
+                func_8025CD40();
+                break;
+        }
+    }
+    return 0;
+}
+
+void func_8025CD28(s32 arg0, ActorPart* arg1) {
+    DecorationTable* decorationTable = arg1->decorationTable;
+
+    if (decorationTable->unk_765 != 0 ) {
+        decorationTable->unk_765 = 0;
+    }
+    decorationTable->unk_768 = 0;
+}
 
 INCLUDE_ASM(s32, "code_182B30", func_8025CD40);
 
