@@ -88,6 +88,8 @@ s32 do_lateral_collision(s32, PlayerStatus*, f32*, f32*, f32*, f32, f32);
 Npc* make_disguise_npc(s32 peachDisguise);
 
 s32 partner_player_can_pause(void);
+s32 disable_player_static_collisions(void);
+s32 disable_player_input(void);
 
 void func_80027088(s32);
 
