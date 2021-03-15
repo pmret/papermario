@@ -176,9 +176,8 @@ INCLUDE_ASM(s32, "code_182B30", func_802597B0);
 INCLUDE_ASM(s32, "code_182B30", func_8025995C);
 
 void func_80259A48(s32 arg0, ActorPart* arg1, s32 arg2, s32 arg3) {
-    DecorationTable* decorationTable = arg1;
+    DecorationTable* decorationTable = arg1->decorationTable;
 
-    decorationTable = arg1->decorationTable;
     if (decorationTable->unk_6C1 != 0) {
         arg1->verticalStretch = 1;
         arg1->unkOffset[0] = 0;
@@ -187,7 +186,6 @@ void func_80259A48(s32 arg0, ActorPart* arg1, s32 arg2, s32 arg3) {
     }
     if (arg0 == 0) {
         func_802597B0(arg1, arg2, arg3);
-        return;
     } else {
         func_8025950C(arg1, arg2, arg3);
     }
