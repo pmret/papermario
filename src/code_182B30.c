@@ -188,8 +188,9 @@ void func_80259A48(s32 arg0, ActorPart* arg1, s32 arg2, s32 arg3) {
     if (arg0 == 0) {
         func_802597B0(arg1, arg2, arg3);
         return;
+    } else {
+        func_8025950C(arg1, arg2, arg3);
     }
-    func_8025950C(arg1, arg2, arg3);
 }
 
 INCLUDE_ASM(s32, "code_182B30", func_80259AAC);
@@ -216,7 +217,7 @@ INCLUDE_ASM(s32, "code_182B30", func_8025C120);
 
 s32 func_8025C840(s32 arg0, ActorPart *arg1) {
 
-    if ((arg1->flags & 2) == 0) {
+    if (!(arg1->flags & 2)) {
         switch (arg1->decorationTable->unk_750) {
             case 0:
                 func_8025C8A0(arg0, arg1);
@@ -244,7 +245,7 @@ INCLUDE_ASM(s32, "code_182B30", func_8025C918);
 
 s32 func_8025CCC8(s32 arg0, ActorPart *arg1) {
 
-    if ((arg1->flags & 2) == 0) {
+    if (!(arg1->flags & 2)) {
         switch (arg1->decorationTable->unk_764) {
             case 0:
                 func_8025CD28(arg0, arg1);
