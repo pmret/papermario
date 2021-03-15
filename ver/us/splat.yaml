@@ -200,7 +200,7 @@ segments:
     - [0x457c0, c, os/code_457c0_len_270]
     - [0x45a30, c, os/code_45a30_len_20]
     - [0x45a50, c, os/code_45a50_len_3a0]
-    - [0x45df0, hasm, os/exceptasm]
+    - [0x45df0, hasm, os/exceptasm, skip]
     - [0x46760, hasm, os/__osDisableInt]
     - [0x467D0, hasm, os/__osRestoreInt]
     - [0x467f0, c, os/code_467f0_len_90]
