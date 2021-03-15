@@ -109,7 +109,7 @@ class Subsegment():
         pass
 
     def split(self, segment, rom_bytes, base_path):
-        if self.should_run(segment.options) and not self.name.startswith("."):
+        if "skip" not in self.args and self.should_run(segment.options) and not self.name.startswith("."):
             self.split_inner(segment, rom_bytes, base_path, self.get_generic_out_path(base_path, segment.options))
 
     @staticmethod
