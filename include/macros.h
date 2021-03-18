@@ -22,6 +22,9 @@
 #define BADGE_MENU_PAGE(index) (&gBadgeMenuPages[index])
 #define ITEM_MENU_PAGE(index) (&gItemMenuPages[index])
 
+#define OVERRIDE_FLAG_SET(flag) { s32* overrideFlags = &gOverrideFlags; *overrideFlags |= flag; }
+#define OVERRIDE_FLAG_UNSET(flag) { s32* overrideFlags = &gOverrideFlags; *overrideFlags &= ~flag; }
+
 #define MAX_MAPVARS 16
 #define MAX_MAPFLAGS 3
 

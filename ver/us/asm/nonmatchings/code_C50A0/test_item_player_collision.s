@@ -84,8 +84,8 @@ glabel test_item_player_collision
 /* CA33C 80133C3C 146200D4 */  bne       $v1, $v0, .L80133F90
 /* CA340 80133C40 0000102D */   daddu    $v0, $zero, $zero
 .L80133C44:
-/* CA344 80133C44 3C02800A */  lui       $v0, %hi(D_8009A650)
-/* CA348 80133C48 8C42A650 */  lw        $v0, %lo(D_8009A650)($v0)
+/* CA344 80133C44 3C02800A */  lui       $v0, %hi(gOverrideFlags)
+/* CA348 80133C48 8C42A650 */  lw        $v0, %lo(gOverrideFlags)($v0)
 /* CA34C 80133C4C 3C030020 */  lui       $v1, 0x20
 /* CA350 80133C50 00431024 */  and       $v0, $v0, $v1
 /* CA354 80133C54 144000CE */  bnez      $v0, .L80133F90

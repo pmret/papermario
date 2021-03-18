@@ -41,8 +41,8 @@ glabel func_802D6420
 /* FAE58 802D64A8 256BA680 */  addiu     $t3, $t3, %lo(D_8008A680)
 /* FAE5C 802D64AC 240A0001 */  addiu     $t2, $zero, 1
 /* FAE60 802D64B0 0260382D */  daddu     $a3, $s3, $zero
-/* FAE64 802D64B4 3C03800A */  lui       $v1, %hi(D_8009A650)
-/* FAE68 802D64B8 2463A650 */  addiu     $v1, $v1, %lo(D_8009A650)
+/* FAE64 802D64B4 3C03800A */  lui       $v1, %hi(gOverrideFlags)
+/* FAE68 802D64B8 2463A650 */  addiu     $v1, $v1, %lo(gOverrideFlags)
 /* FAE6C 802D64BC 8C620000 */  lw        $v0, ($v1)
 /* FAE70 802D64C0 0220302D */  daddu     $a2, $s1, $zero
 /* FAE74 802D64C4 34420040 */  ori       $v0, $v0, 0x40

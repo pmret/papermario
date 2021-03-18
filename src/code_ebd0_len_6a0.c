@@ -73,7 +73,7 @@ void step_battle(void) {
             return;
         }
         (*temp800A0900)--;
-        D_8009A650[0] |= 8;
+        OVERRIDE_FLAG_SET(0x8);
         nuContRmbForceStop();
     }
 
@@ -133,7 +133,7 @@ void step_battle(void) {
             gPlayerStatusPtr->animFlags &= ~0x40;
             D_800A0908 = func_80027190(gPlayerStatusPtr);
             func_80027088(0);
-            D_8009A650[0] &= ~8;
+            OVERRIDE_FLAG_UNSET(0x8);
 
             if (D_800A0900 >= 0) {
                 return;
@@ -162,7 +162,7 @@ void func_80033B54(void) {
 }
 
 void func_80033B88(void) {
-    D_8009A650[0] |= 0x08;
+    OVERRIDE_FLAG_SET(0x8);
     nuContRmbForceStop();
     D_800A0900 = 5;
 }

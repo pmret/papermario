@@ -46,6 +46,7 @@ void step_game_loop(void) {
     s8* temp80074021;
     s16* temp80074182;
     s16* temp800741A0;
+    s32* overrideFlags;
     s16* temp8009A690;
 
     update_input();
@@ -85,12 +86,14 @@ void step_game_loop(void) {
     update_windows();
     update_curtains();
 
-    if (D_8009A650[0] & 0x20) {
+    overrideFlags = &gOverrideFlags;
+
+    if (*overrideFlags & 0x20) {
         temp80074182 = &D_800741A2;
 
         switch (*temp80074182) {
             case 0:
-                D_8009A650[0] |= 0x200;
+                *overrideFlags |= 0x200;
                 disable_player_input();
                 temp800741A0 = &D_800741A0;
                 if (*temp800741A0 == 255) {
@@ -104,13 +107,13 @@ void step_game_loop(void) {
                 }
                 break;
             case 1:
-                D_8009A650[0] |= 0x8;
+                *overrideFlags |= 0x8;
                 temp8009A690 = &D_8009A690;
                 (*temp8009A690)--;
                 if (*temp8009A690 == 0) {
                     func_80149838();
                     set_game_mode(0);
-                    D_8009A650[0] &= ~0x20;
+                    *overrideFlags &= ~0x20;
                 }
                 break;
         }
@@ -119,28 +122,44 @@ void step_game_loop(void) {
         D_800741A2 = 0;
     }
 
-    if (D_8009A650[0] & 0x100) {
-        D_8009A650[0] |= 0x1000;
-    } else {
-        D_8009A650[0] &= ~0x1000;
+    {
+        s32* overrideFlags = &gOverrideFlags;
+
+        if (*overrideFlags & 0x100) {
+            *overrideFlags |= 0x1000;
+        } else {
+            *overrideFlags &= ~0x1000;
+        }
     }
 
-    if (D_8009A650[0] & 0x200) {
-        D_8009A650[0] |= 0x2000;
-    } else {
-        D_8009A650[0] &= ~0x2000;
+    {
+        s32* overrideFlags = &gOverrideFlags;
+
+        if (*overrideFlags & 0x200) {
+            *overrideFlags |= 0x2000;
+        } else {
+            *overrideFlags &= ~0x2000;
+        }
     }
 
-    if (D_8009A650[0] & 0x400) {
-        D_8009A650[0] |= 0x4000;
-    } else {
-        D_8009A650[0] &= ~0x4000;
+    {
+        s32* overrideFlags = &gOverrideFlags;
+
+        if (*overrideFlags & 0x400) {
+            *overrideFlags |= 0x4000;
+        } else {
+            *overrideFlags &= ~0x4000;
+        }
     }
 
-    if (D_8009A650[0] & 0x800) {
-        D_8009A650[0] |= 0x8000;
-    } else {
-        D_8009A650[0] &= ~0x8000;
+    {
+        s32* overrideFlags = &gOverrideFlags;
+
+        if (*overrideFlags & 0x800) {
+            *overrideFlags |= 0x8000;
+        } else {
+            *overrideFlags &= ~0x8000;
+        }
     }
 
     rand_int(1);
@@ -181,7 +200,7 @@ void load_engine_data(void) {
     dma_copy(&code_code_A5DD0_ROM_START, &code_code_A5DD0_ROM_END, &code_code_A5DD0_VRAM);
     dma_copy(&code_code_10CC10_ROM_START, &code_code_10CC10_ROM_END, &code_code_10CC10_VRAM);
 
-    D_8009A650[0] = 0;
+    gOverrideFlags = 0;
     (*gGameStatusPtr)->unk_79 = 0;
     (*gameStatusPtrTemp2)->enableBackground = 0;
     (*gGameStatusPtr)->musicEnabled = 1;
@@ -235,7 +254,7 @@ void load_engine_data(void) {
         gameStatus3->unk_48[i] = 0xC;
     }
 
-    D_8009A650[0] |= 8;
+    OVERRIDE_FLAG_SET(0x8);
     set_game_mode(0);
 }
 
@@ -245,30 +264,30 @@ void func_80027088(s32 arg0) {
     switch (arg0) {
         case 0:
             D_8009A5D8 = arg0;
-            D_8009A650[0] &= ~0xF00;
+            gOverrideFlags &= ~0xF00;
             resume_all_group(3);
             break;
         case 1:
             D_8009A5D8 = arg0;
-            D_8009A650[0] &= ~0xE00;
-            D_8009A650[0] |= 0x100;
+            gOverrideFlags &= ~0xE00;
+            gOverrideFlags |= 0x100;
             suspend_all_group(1);
             break;
         case 2:
             D_8009A5D8 = arg0;
-            D_8009A650[0] &= ~0xC00;
-            D_8009A650[0] |= 0x300;
+            gOverrideFlags &= ~0xC00;
+            gOverrideFlags |= 0x300;
             suspend_all_group(2);
             break;
         case 3:
             D_8009A5D8 = arg0;
-            D_8009A650[0] &= ~0x800;
-            D_8009A650[0] |= 0x700;
+            gOverrideFlags &= ~0x800;
+            gOverrideFlags |= 0x700;
             suspend_all_group(2);
             break;
         case 4:
             D_8009A5D8 = arg0;
-            D_8009A650[0] |=  0xF00;
+            gOverrideFlags |=  0xF00;
             break;
     }
 }

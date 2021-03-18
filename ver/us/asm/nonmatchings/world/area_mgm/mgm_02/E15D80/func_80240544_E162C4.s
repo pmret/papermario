@@ -3,8 +3,8 @@
 
 glabel func_80240544_E162C4
 /* E162C4 80240544 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* E162C8 80240548 3C02800A */  lui       $v0, %hi(D_8009A650)
-/* E162CC 8024054C 2442A650 */  addiu     $v0, $v0, %lo(D_8009A650)
+/* E162C8 80240548 3C02800A */  lui       $v0, %hi(gOverrideFlags)
+/* E162CC 8024054C 2442A650 */  addiu     $v0, $v0, %lo(gOverrideFlags)
 /* E162D0 80240550 AFBF0010 */  sw        $ra, 0x10($sp)
 /* E162D4 80240554 8C430000 */  lw        $v1, ($v0)
 /* E162D8 80240558 3C040004 */  lui       $a0, 4

@@ -99,7 +99,7 @@ extern PrintContext* D_802EB39C;
 extern s32 D_802E99DC;
 
 extern Entity* D_802EB3A0;
-extern s32 D_8015C7D0[3];
+extern s32 D_8015C7D0[3]; // not size 3
 
 extern UNK_TYPE D_0A0031E0;
 extern UNK_TYPE D_0A001508;
@@ -206,7 +206,7 @@ extern s32 gStatsMenuIconIDs[12];
 
 extern s32 gGameState;
 extern s32 D_8009A64C;
-extern s32 D_8009A650[1];
+extern s32 gOverrideFlags;
 extern u16 D_8009A6A0;
 extern u16 D_8009A6A2;
 extern u16 D_8009A6A4;

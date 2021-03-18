@@ -217,7 +217,7 @@ ApiStatus func_802D6954(ScriptInstance* script, s32 isInitialCall) {
     enable_player_input();
     enable_player_static_collisions();
     func_800EF600();
-    D_8009A650[0] &= ~0x40;
+    OVERRIDE_FLAG_UNSET(0x40);
     return ApiStatus_DONE2;
 }
 

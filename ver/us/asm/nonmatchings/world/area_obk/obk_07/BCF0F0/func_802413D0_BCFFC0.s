@@ -8,8 +8,8 @@ glabel func_802413D0_BCFFC0
 /* BCFFCC 802413DC AFB00010 */   sw       $s0, 0x10($sp)
 /* BCFFD0 802413E0 0040802D */  daddu     $s0, $v0, $zero
 /* BCFFD4 802413E4 2402FFFF */  addiu     $v0, $zero, -1
-/* BCFFD8 802413E8 3C05800A */  lui       $a1, %hi(D_8009A650)
-/* BCFFDC 802413EC 24A5A650 */  addiu     $a1, $a1, %lo(D_8009A650)
+/* BCFFD8 802413E8 3C05800A */  lui       $a1, %hi(gOverrideFlags)
+/* BCFFDC 802413EC 24A5A650 */  addiu     $a1, $a1, %lo(gOverrideFlags)
 /* BCFFE0 802413F0 2403FFEF */  addiu     $v1, $zero, -0x11
 /* BCFFE4 802413F4 AE020030 */  sw        $v0, 0x30($s0)
 /* BCFFE8 802413F8 8CA20000 */  lw        $v0, ($a1)

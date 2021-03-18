@@ -332,8 +332,8 @@ glabel L802E52AC_106B2C
 /* 106B40 802E52C0 0C009C22 */  jal       func_80027088
 /* 106B44 802E52C4 0000202D */   daddu    $a0, $zero, $zero
 /* 106B48 802E52C8 0220202D */  daddu     $a0, $s1, $zero
-/* 106B4C 802E52CC 3C05800A */  lui       $a1, %hi(D_8009A650)
-/* 106B50 802E52D0 24A5A650 */  addiu     $a1, $a1, %lo(D_8009A650)
+/* 106B4C 802E52CC 3C05800A */  lui       $a1, %hi(gOverrideFlags)
+/* 106B50 802E52D0 24A5A650 */  addiu     $a1, $a1, %lo(gOverrideFlags)
 /* 106B54 802E52D4 8CA20000 */  lw        $v0, ($a1)
 /* 106B58 802E52D8 2403FFBF */  addiu     $v1, $zero, -0x41
 /* 106B5C 802E52DC 00431024 */  and       $v0, $v0, $v1
