@@ -1,4 +1,5 @@
 #include "common.h"
+#include "nu/nusys.h"
 
 s8 D_80074020 = 1;
 s8 D_80074021 = 5;
@@ -13,7 +14,7 @@ s32 D_800741A8[] = { 0x00010000, 0x00000000, 0x00000001, 0x00000000, 0x00000000,
                      0x00000000, 0x00000000, };
 u16 gMatrixListPos = 0;
 u16 D_800741F2 = 0;
-u16 gCurrentDisplayContextIndex = 0;
+s32 gCurrentDisplayContextIndex = 0;
 s32 D_800741F8 = 0;
 s32 D_800741FC = 0;
 s32 D_80074200[] = { 0x028001E0, 0x01FF0000, 0x028001E0, 0x01FF0000 };
@@ -34,9 +35,136 @@ Gfx D_80074230[] = {
     gsSPEndDisplayList(),
 };
 
-INCLUDE_ASM(void, "code_1b40_len_20b0", step_game_loop);
+extern DisplayContext D_80164000[];
+extern s16 D_8009A690;
 
-INCLUDE_ASM(s32, "code_1b40_len_20b0", gfx_task_background);
+void gfx_init_state(void);
+void gfx_draw_background(void);
+
+void step_game_loop(void) {
+    PlayerData* playerData = &gPlayerData;
+    s8* temp80074021;
+    s16* temp80074182;
+    s16* temp800741A0;
+    s16* temp8009A690;
+
+    update_input();
+
+    (*gGameStatusPtr)->frameCounter++;
+
+    playerData->frameCounter += 2;
+    if (playerData->frameCounter > 215999999) {
+        playerData->frameCounter = 215999999;
+    }
+
+    update_max_rumble_duration();
+
+    temp80074021 = &D_80074021;
+    if (*temp80074021 != 0) {
+        (*temp80074021)-- ;
+        if (*temp80074021 == 0) {
+            *temp80074021 = D_80074020;
+        } else {
+            return;
+        }
+    }
+
+    func_8011BAE8();
+    func_8003857C();
+    update_dynamic_entities();
+    update_triggers();
+    update_scripts();
+    update_messages();
+    update_menu_icons();
+    step_current_game_mode();
+    update_entities();
+    func_80138198();
+    func_8014A548();
+    update_ambient_sounds();
+    func_80149734();
+    update_windows();
+    update_curtains();
+
+    if (D_8009A650[0] & 0x20) {
+        temp80074182 = &D_800741A2;
+
+        switch (*temp80074182) {
+            case 0:
+                D_8009A650[0] |= 0x200;
+                disable_player_input();
+                temp800741A0 = &D_800741A0;
+                if (*temp800741A0 == 255) {
+                    *temp80074182 = 1;
+                    D_8009A690 = 3;
+                } else {
+                    *temp800741A0 += 10;
+                    if (*temp800741A0 > 255) {
+                        *temp800741A0 = 255;
+                    }
+                }
+                break;
+            case 1:
+                D_8009A650[0] |= 0x8;
+                temp8009A690 = &D_8009A690;
+                (*temp8009A690)--;
+                if (*temp8009A690 == 0) {
+                    func_80149838();
+                    set_game_mode(0);
+                    D_8009A650[0] &= ~0x20;
+                }
+                break;
+        }
+    } else {
+        D_800741A0 = 0;
+        D_800741A2 = 0;
+    }
+
+    if (D_8009A650[0] & 0x100) {
+        D_8009A650[0] |= 0x1000;
+    } else {
+        D_8009A650[0] &= ~0x1000;
+    }
+
+    if (D_8009A650[0] & 0x200) {
+        D_8009A650[0] |= 0x2000;
+    } else {
+        D_8009A650[0] &= ~0x2000;
+    }
+
+    if (D_8009A650[0] & 0x400) {
+        D_8009A650[0] |= 0x4000;
+    } else {
+        D_8009A650[0] &= ~0x4000;
+    }
+
+    if (D_8009A650[0] & 0x800) {
+        D_8009A650[0] |= 0x8000;
+    } else {
+        D_8009A650[0] &= ~0x8000;
+    }
+
+    rand_int(1);
+}
+
+void gfx_task_background(void) {
+    DisplayContext** gDisplayContextPtr = &gDisplayContext;
+    Gfx** gfx = &gMasterGfxPos;
+    DisplayContext* dispContexts = D_80164000;
+
+    *gDisplayContextPtr = &dispContexts[gCurrentDisplayContextIndex];
+    *gfx = &(*gDisplayContextPtr)->backgroundGfx[0];
+
+    gfx_init_state();
+    gfx_draw_background();
+
+    gDPFullSync((*gfx)++);
+    gSPEndDisplayList((*gfx)++);
+
+    ASSERT((s32)((u32)((*gfx) - (*gDisplayContextPtr)->backgroundGfx) << 3 >> 3) < ARRAY_COUNT((*gDisplayContextPtr)->backgroundGfx));
+
+    nuGfxTaskStart(&gDisplayContext->backgroundGfx[0], (gMasterGfxPos - gDisplayContext->backgroundGfx) << 3,
+                   NU_GFX_UCODE_F3DEX2, NU_SC_NOSWAPBUFFER);
+}
 
 INCLUDE_ASM(s32, "code_1b40_len_20b0", gfx_draw_frame);
 
@@ -117,30 +245,30 @@ void func_80027088(s32 arg0) {
     switch (arg0) {
         case 0:
             D_8009A5D8 = arg0;
-            *D_8009A650 &= ~0xF00;
+            D_8009A650[0] &= ~0xF00;
             resume_all_group(3);
             break;
         case 1:
             D_8009A5D8 = arg0;
-            *D_8009A650 &= ~0xE00;
-            *D_8009A650 |= 0x100;
+            D_8009A650[0] &= ~0xE00;
+            D_8009A650[0] |= 0x100;
             suspend_all_group(1);
             break;
         case 2:
             D_8009A5D8 = arg0;
-            *D_8009A650 &= ~0xC00;
-            *D_8009A650 |= 0x300;
+            D_8009A650[0] &= ~0xC00;
+            D_8009A650[0] |= 0x300;
             suspend_all_group(2);
             break;
         case 3:
             D_8009A5D8 = arg0;
-            *D_8009A650 &= ~0x800;
-            *D_8009A650 |= 0x700;
+            D_8009A650[0] &= ~0x800;
+            D_8009A650[0] |= 0x700;
             suspend_all_group(2);
             break;
         case 4:
             D_8009A5D8 = arg0;
-            *D_8009A650 |=  0xF00;
+            D_8009A650[0] |=  0xF00;
             break;
     }
 }
@@ -162,7 +290,7 @@ void gfx_init_state(void) {
     gSPDisplayList(gMasterGfxPos++, OS_K0_TO_PHYSICAL(&D_80074210));
 }
 #else
-INCLUDE_ASM(s32, "code_1b40_len_20b0", gfx_init_state);
+INCLUDE_ASM(void, "code_1b40_len_20b0", gfx_init_state);
 #endif
 
 INCLUDE_ASM(s32, "code_1b40_len_20b0", func_800271FC);
@@ -177,4 +305,4 @@ INCLUDE_ASM(s32, "code_1b40_len_20b0", func_800279B4);
 
 INCLUDE_ASM(s32, "code_1b40_len_20b0", func_80027BAC);
 
-INCLUDE_ASM(s32, "code_1b40_len_20b0", gfx_draw_background);
+INCLUDE_ASM(void, "code_1b40_len_20b0", gfx_draw_background);

@@ -205,6 +205,7 @@ extern s32 gStatsMenuIconIDs[12];
 
 
 extern s32 gGameState;
+extern s32 D_8009A64C;
 extern s32 D_8009A650[1];
 extern u16 D_8009A6A0;
 extern u16 D_8009A6A2;
@@ -299,7 +300,7 @@ extern OSDevMgr __osPiDevMgr;
 extern DisplayContext* gDisplayContext;
 extern Gfx* gMasterGfxPos;
 extern u16 gMatrixListPos;
-extern u16 gCurrentDisplayContextIndex;
+extern s32 gCurrentDisplayContextIndex;
 
 extern UNK_TYPE D_0A004350;
 extern UNK_TYPE D_0A0026F0;

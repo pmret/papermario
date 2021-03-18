@@ -79,7 +79,27 @@ INCLUDE_ASM(s32, "code_43F0", _heap_free);
 
 INCLUDE_ASM(s32, "code_43F0", _heap_realloc);
 
-INCLUDE_ASM(s32, "code_43F0", cosine);
+f32 cosine(s16 arg0) {
+    s16 temp360;
+    s16 idx;
+
+    temp360 = arg0 % 360;
+
+    if (temp360 < 0) {
+        temp360 += 360;
+    }
+
+    idx = temp360 % 180;
+    if (idx > 90) {
+        idx = 180 - idx;
+    }
+
+    if (temp360 >= 180) {
+        return -D_80074274[idx];
+    } else {
+        return D_80074274[idx];
+    }
+}
 
 s32 sign(s32 val) {
     s32 sign = -1;
@@ -101,7 +121,12 @@ void mem_clear(s8* data, s32 numBytes) {
     }
 }
 
-INCLUDE_ASM(s32, "code_43F0", transform_point);
+void transform_point(Matrix4f mtx, f32 inX, f32 inY, f32 inZ, f32 inS, f32* outX, f32* outY, f32* outZ, f32* outS) {
+    *outX = ((mtx[0][0] * inX) + (mtx[1][0] * inY) + (mtx[2][0] * inZ) + mtx[3][0]);
+    *outY = ((mtx[0][1] * inX) + (mtx[1][1] * inY) + (mtx[2][1] * inZ) + mtx[3][1]);
+    *outZ = ((mtx[0][2] * inX) + (mtx[1][2] * inY) + (mtx[2][2] * inZ) + mtx[3][2]);
+    *outS = ((mtx[0][3] * inX) + (mtx[1][3] * inY) + (mtx[2][3] * inZ) + mtx[3][3]);
+}
 
 void copy_matrix(Matrix4f* src, Matrix4f* dest) {
     bcopy(src, dest, sizeof(Matrix4f));
@@ -193,31 +218,27 @@ s32 func_80029994(s32 arg0) {
     return result;
 }
 
-// Issue with the negation at the beginning
-#ifdef NON_MATCHING
 s32 rand_int(s32 arg0) {
-    s32 ret;
+    s32 ret = 0;
 
-    if (arg0 < 0) {
-        arg0 = -arg0;
-    }
+    arg0 = abs(arg0);
 
-    ret = 0;
     if (arg0 != 0) {
-        if (arg0 == 1) {
-            return (func_80029994(1000) < 501) ^ 1;
+        switch (arg0) {
+            case 1:
+                ret = (func_80029994(1000) < 501) == 0;
+                break;
+            default:
+                ret = func_80029994(arg0);
+                break;
+            case 100:
+                ret = func_80029994(1009) / 10;
+                break;
         }
-        if (arg0 != 100) {
-            return func_80029994(arg0);
-        }
-        ret = func_80029994(1009) / 10;
     }
 
     return ret;
 }
-#else
-INCLUDE_ASM(s32, "code_43F0", rand_int, s32 arg0);
-#endif
 
 f32 signF(f32 val) {
     f32 sign;
@@ -242,7 +263,32 @@ s32 round(f32 arg0) {
     }
 }
 
-INCLUDE_ASM(f32, "code_43F0", clamp_angle, f32 theta);
+f32 clamp_angle(f32 theta) {
+    if (fabsf(theta) > 3600.0f) {
+        s32 thetaInt = theta;
+
+        if (thetaInt >= 0) {
+            thetaInt = -(thetaInt / 360 * 360) + thetaInt;
+        }
+        else {
+            thetaInt = -thetaInt;
+            thetaInt = (thetaInt / 360 * 360) - thetaInt;
+        }
+
+        return thetaInt;
+    }
+
+    do {
+        if (theta < 0.0f) {
+            theta += 360.0f;
+        }
+        if (theta >= 360.0f) {
+            theta -= 360.0f;
+        }
+    } while (!(theta >= 0.0f) || !(theta < 360.0f));
+
+    return theta;
+}
 
 f32 get_clamped_angle_diff(f32 a, f32 b) {
     if (fabsf(b - a) >= 180.0f) {

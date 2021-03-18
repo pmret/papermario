@@ -93,6 +93,8 @@ s32 disable_player_input(void);
 
 void func_80027088(s32);
 
+void get_dpad_input_radial(f32* angle, f32* magnitude);
+
 void func_8006F8F0(f32, f32, f32);
 void func_8006FEF0(s32, f32, f32, f32, f32);
 void func_80070190(s32, f32, f32, f32, s32, f32, s32, s32);
