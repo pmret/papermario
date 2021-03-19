@@ -1,6 +1,34 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_8029D5A0
+.double 0.3
+
+glabel D_8029D5A8
+.double 0.9
+
+glabel D_8029D5B0
+.double 0.3
+
+glabel D_8029D5B8
+.double 0.9
+
+glabel D_8029D5C0
+.double 0.1
+
+glabel D_8029D5C8
+.double 0.8
+
+glabel D_8029D5D0
+.double 0.1
+
+glabel D_8029D5D8
+.double 0.8
+
+.section .text
+
 glabel create_target_list
 /* 190B20 80262240 27BDFFB0 */  addiu     $sp, $sp, -0x50
 /* 190B24 80262244 0080582D */  daddu     $t3, $a0, $zero

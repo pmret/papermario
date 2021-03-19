@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_8029D990
+.word L80277044_1A5924, L8027704C_1A592C, L80277054_1A5934, L80277090_1A5970, L802770CC_1A59AC, L80277108_1A59E8
+
+.section .text
+
 glabel play_hit_sound
 /* 1A58E4 80277004 44850000 */  mtc1      $a1, $f0
 /* 1A58E8 80277008 44861000 */  mtc1      $a2, $f2

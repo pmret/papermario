@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_8029DA20
+.double 180.0, 0.0
+
+.section .text
+
 glabel FlyPartTo
 /* 1AA818 8027BF38 27BDFFC8 */  addiu     $sp, $sp, -0x38
 /* 1AA81C 8027BF3C AFB30024 */  sw        $s3, 0x24($sp)
