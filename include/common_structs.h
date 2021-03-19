@@ -547,11 +547,20 @@ typedef struct BattleStatus {
     /* 0x048 */ u8 currentSubmenu;
     /* 0x049 */ char unk_49[3];
     /* 0x04C */ s8 unk_4C;
-    /* 0x04D */ char unk_4D[6];
-    /* 0x053 */ u8 stratsLastCursorPos;
+    /* 0x04D */ s8 unk_4D;
+    /* 0x04E */ s8 unk_4E;
+    /* 0x04F */ s8 unk_4F;
+    /* 0x050 */ s8 unk_50;
+    /* 0x051 */ s8 unk_51;
+    /* 0x052 */ s8 unk_52;
+    /* 0x053 */ s8 stratsLastCursorPos;
     /* 0x054 */ char unk_54[8];
     /* 0x05C */ s8 unk_5C;
-    /* 0x05D */ char unk_5D[19];
+    /* 0x05D */ s8 unk_5D;
+    /* 0x05E */ char unk_5E[4];
+    /* 0x062 */ s8 unk_62;
+    /* 0x063 */ s8 unk_63;
+    /* 0x064 */ char unk_64[12];
     /* 0x070 */ s16 unk_70;
     /* 0x072 */ char unk_72[2];
     /* 0x074 */ s32 unk_74;
@@ -577,7 +586,9 @@ typedef struct BattleStatus {
     /* 0x08E */ u8 initialEnemyCount; /* used for SP award bonus */
     /* 0x08F */ char unk_8F[3];
     /* 0x092 */ s8 unk_92;
-    /* 0x093 */ char unk_93[3];
+    /* 0x093 */ char unk_93;
+    /* 0x094 */ s8 unk_94;
+    /* 0x095 */ char unk_95;
     /* 0x096 */ s8 hammerCharge;
     /* 0x097 */ s8 jumpCharge;
     /* 0x098 */ char unk_98;
@@ -664,7 +675,8 @@ typedef struct BattleStatus {
     /* 0x440 */ u8 tattleFlags[27];
     /* 0x45B */ char unk_45B[17];
     /* 0x46C */ s32 battleState; /* 0 = load assets, 1 = create actors, 4 = start scripts, 7 & 8 = unk */
-    /* 0x470 */ char unk_470[10];
+    /* 0x470 */ s32 unk_470;
+    /* 0x474 */ char unk_474[6];
     /* 0x47A */ u8 currentBattleSection;
     /* 0x47B */ u8 unk_47B;
     /* 0x47C */ char unk_47C[20];

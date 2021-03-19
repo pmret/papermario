@@ -215,7 +215,6 @@ INCLUDE_ASM(s32, "code_16c8e0", func_802409F4);
 
 INCLUDE_ASM(s32, "code_16c8e0", func_80240AA8);
 
-//INCLUDE_ASM(s32, "code_16c8e0", delete_actor);
 void delete_actor(Actor *actor) {
     ActorPart* partsTable;
     ActorPart* actorPartTemp;
