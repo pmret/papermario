@@ -2310,14 +2310,14 @@ segments:
     subsections:
     - [0x71BE30, c]
     - [0x71C270, data]
-  - name: battle/item/dried_shroom
+  - name: battle/item/dried_shroom/
     type: code
     start: 0x71CCE0
     vram: 0x802A1000
     overlay: True
     subsections:
-    - [0x71CCE0, c]
-    - [0x71D010, data]
+    - [0x71CCE0,     c, lib]
+    - [0x71D010, .data, lib]
   - name: battle/item/shooting_star
     type: code
     start: 0x71D770
