@@ -2,7 +2,7 @@
 
 INCLUDE_ASM(s32, "world/area_arn/arn_02/BDD1B0", func_80240000_BDD1B0);
 
-INCLUDE_ASM(s32, "world/area_arn/arn_02/BDD1B0", func_80240160_BDD310);
+#include "world/common/UnkNpcAIFunc18.inc.c"
 
 INCLUDE_ASM(s32, "world/area_arn/arn_02/BDD1B0", func_802401D4_BDD384);
 

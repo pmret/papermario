@@ -103,7 +103,7 @@ glabel func_80240FD0_919B80
 glabel L80241144_919CF4
 /* 919CF4 80241144 0260202D */  daddu     $a0, $s3, $zero
 /* 919CF8 80241148 0280282D */  daddu     $a1, $s4, $zero
-/* 919CFC 8024114C 0C090128 */  jal       func_802404A0_919050
+/* 919CFC 8024114C 0C090128 */  jal       iwa_03_UnkNpcAIFunc18
 /* 919D00 80241150 0200302D */   daddu    $a2, $s0, $zero
 glabel L80241154_919D04
 /* 919D04 80241154 0260202D */  daddu     $a0, $s3, $zero

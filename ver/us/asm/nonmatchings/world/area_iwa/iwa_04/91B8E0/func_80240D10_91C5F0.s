@@ -103,7 +103,7 @@ glabel func_80240D10_91C5F0
 glabel L80240E84_91C764
 /* 91C764 80240E84 0260202D */  daddu     $a0, $s3, $zero
 /* 91C768 80240E88 0280282D */  daddu     $a1, $s4, $zero
-/* 91C76C 80240E8C 0C090078 */  jal       func_802401E0_91BAC0
+/* 91C76C 80240E8C 0C090078 */  jal       iwa_04_UnkNpcAIFunc18
 /* 91C770 80240E90 0200302D */   daddu    $a2, $s0, $zero
 glabel L80240E94_91C774
 /* 91C774 80240E94 0260202D */  daddu     $a0, $s3, $zero

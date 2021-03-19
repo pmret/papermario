@@ -103,7 +103,7 @@ glabel func_80243018_BE67C8
 glabel L8024318C_BE693C
 /* BE693C 8024318C 0260202D */  daddu     $a0, $s3, $zero
 /* BE6940 80243190 0280282D */  daddu     $a1, $s4, $zero
-/* BE6944 80243194 0C09093A */  jal       func_802424E8_BE5C98
+/* BE6944 80243194 0C09093A */  jal       arn_04_UnkNpcAIFunc18
 /* BE6948 80243198 0200302D */   daddu    $a2, $s0, $zero
 glabel L8024319C_BE694C
 /* BE694C 8024319C 0260202D */  daddu     $a0, $s3, $zero
