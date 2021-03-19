@@ -2489,14 +2489,14 @@ segments:
     - [0x72FF20, ci4,     coconut, 32, 32]
     - [0x730120, palette, coconut]
     - [0x730140, .data,   coconut]
-  - name: battle/item/electro_pop
+  - name: battle/item/electro_pop/
     type: code
     start: 0x7305A0
     vram: 0x802A1000
     overlay: True
     subsections:
-    - [0x7305A0, c]
-    - [0x730AE0, data]
+    - [0x7305A0,     c, lib]
+    - [0x730AE0, .data, lib]
   - name: battle/item/strange_cake
     type: code
     start: 0x731300

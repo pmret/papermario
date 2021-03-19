@@ -10,6 +10,6 @@
 Script N(UseItemWithEffect);
 Script N(PlayerGoHome);
 
-void func_802A123C_73330C();
+ApiStatus N(func_802A123C_71CF1C)(ScriptInstance* script, s32 isInitialCall);
 
 #endif

@@ -140,7 +140,7 @@ Script N(main) = SCRIPT({
     func_802D3C58(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 18);
     func_802D3624(SI_VAR(10));
     PlaySound(8208);
-    func_802A123C_73330C(SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    N(func_802A123C_71CF1C)(SI_VAR(0), SI_VAR(1), SI_VAR(2));
     spawn {
         StartRumble(5);
         ShakeCam(1, 0, 2, 0.75);

@@ -79,9 +79,9 @@ ApiStatus N(func_802A1270_727B80)(ScriptInstance* script, s32 isInitialCall) {
             camera->flags |= 8;
             a = script->functionTemp[1].s;
             guRotateF(camera->viewMtxShaking, a, 0.0f, 0.0f, 1.0f);
-            script->functionTemp[1].s = 2.0 * ((1.0 - sin_rad(((script->functionTemp[2].s + 0x5A) * 6.28318f) / 360.0f)) * 360.0);
+            script->functionTemp[1].s = 2.0 * ((1.0 - sin_rad(((script->functionTemp[2].s + 90) * 6.28318f) / 360.0f)) * 360.0);
             script->functionTemp[2].s++;
-            if (script->functionTemp[2].s < 91) {
+            if (script->functionTemp[2].s <= 90) {
                 return ApiStatus_BLOCK;
             }
             camera->unk_1C = 0;
@@ -99,7 +99,7 @@ Script N(UseItemWithEffect) = SCRIPT({
         sleep 10;
 
         PlaySoundAtActor(ActorID_PLAYER, 8333);
-        SetAnimation(ActorID_PLAYER, 0, 0x1001F);
+        SetAnimation(ActorID_PLAYER, 0, PlayerAnim_GOT_ITEM);
         GetActorPos(ActorID_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
         SI_VAR(0) += 18;
         SetActorSpeed(ActorID_PLAYER, 4.0);
@@ -124,7 +124,7 @@ Script N(UseItemWithEffect) = SCRIPT({
     } else {
         GetActorPos(ActorID_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
         PlaySoundAtActor(ActorID_PLAYER, 8333);
-        SetAnimation(ActorID_PLAYER, 0, 0x1001F);
+        SetAnimation(ActorID_PLAYER, 0, PlayerAnim_GOT_ITEM);
         sleep 4;
 
         SI_VAR(1) += 45;
@@ -147,7 +147,7 @@ Script N(UseItem) = SCRIPT({
     SetBattleCamZoom(248);
     MoveBattleCamOver(30);
     sleep 10;
-    SetAnimation(ActorID_PLAYER, 0, 0x1001F);
+    SetAnimation(ActorID_PLAYER, 0, PlayerAnim_GOT_ITEM);
     GetActorPos(ActorID_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(1) += 45;
     MakeItemEntity(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 1, 0);
@@ -163,9 +163,9 @@ Script N(PlayerGoHome) = SCRIPT({
     UseIdleAnimation(ActorID_PLAYER, 0);
     SetGoalToHome(0);
     SetActorSpeed(ActorID_PLAYER, 8.0);
-    SetAnimation(ActorID_PLAYER, 0, 0x10005);
+    SetAnimation(ActorID_PLAYER, 0, PlayerAnim_RUNNING);
     PlayerRunToGoal(0);
-    SetAnimation(ActorID_PLAYER, 0, 0x10002);
+    SetAnimation(ActorID_PLAYER, 0, PlayerAnim_2);
     UseIdleAnimation(ActorID_PLAYER, 1);
 });
 
@@ -176,7 +176,7 @@ Script N(EatItem) = SCRIPT({
             sleep 10;
         }
     }
-    SetAnimation(ActorID_PLAYER, 0, 0x1001C);
+    SetAnimation(ActorID_PLAYER, 0, PlayerAnim_EAT);
     sleep 45;
 });
 
@@ -187,13 +187,13 @@ Script N(DrinkItem) = SCRIPT({
             sleep 10;
         }
     }
-    SetAnimation(ActorID_PLAYER, 0, 0x10025);
+    SetAnimation(ActorID_PLAYER, 0, PlayerAnim_DRINK);
     sleep 45;
 });
 
 Script N(main) = SCRIPT({
     SI_VAR(10) =c 0x9A;
-    await 0x802A13D0;
+    await N(UseItemWithEffect);
     UseCamPreset(2);
     MoveBattleCamOver(20);
     sleep 10;
@@ -238,5 +238,5 @@ Script N(main) = SCRIPT({
         goto 0;
     }
     sleep 30;
-    await 0x802A1800;
+    await N(PlayerGoHome);
 });

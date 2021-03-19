@@ -1,7 +1,7 @@
-#include "dried_shroom.h"
+#include "electro_pop.h"
 
 extern s32 D_80108A64;
-MenuIcon* D_802A1A90;
+MenuIcon* D_802A1D60;
 
 ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -33,8 +33,8 @@ ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
         posY = player->currentPos.y;
         posZ = player->currentPos.z;
         get_screen_coords(gCurrentCameraID, posX, posY, posZ, &iconPosX, &iconPosY, &iconPosZ);
-        D_802A1A90 = create_icon(&D_80108A64);
-        set_icon_render_pos(D_802A1A90, iconPosX + 36, iconPosY - 63);
+        D_802A1D60 = create_icon(&D_80108A64);
+        set_icon_render_pos(D_802A1D60, iconPosX + 36, iconPosY - 63);
     }
 
     script->varTable[0] = sleepTime;
@@ -48,13 +48,22 @@ ApiStatus N(GiveRefundCleanup)(ScriptInstance* script, s32 isInitialCall) {
     s32 sellValue = gItemTable[battleStatus->selectedItemID].sellValue;
 
     if (heroes_is_ability_active(player, Ability_REFUND) && sellValue > 0) {
-        free_icon(D_802A1A90);
+        free_icon(D_802A1D60);
     }
 
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802A123C_71CF1C)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802A123C_7307DC)(ScriptInstance* script, s32 isInitialCall) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    Actor* player = battleStatus->playerActor;
+
+    inflict_status(player, Debuff_STATIC, script->varTable[0]);
+    player->status = 0;
+    return ApiStatus_DONE2;
+}
+
+ApiStatus N(func_802A127C_73081C)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 a = get_variable(script, *args++);
     s32 b = get_variable(script, *args++);
@@ -66,13 +75,61 @@ ApiStatus N(func_802A123C_71CF1C)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802A12FC_71CFDC)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802A133C_7308DC)(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 a = get_variable(script, *args++);
+    s32 b = get_variable(script, *args++);
+    s32 c = get_variable(script, *args++);
+    s32 d = get_variable(script, *args++);
+
+    func_80071090(1, a, b, c, d);
+
+    return ApiStatus_DONE2;
+}
+
+#include "common/AddHP.inc.c"
+
+ApiStatus N(func_802A1450_7309F0)(ScriptInstance* script, s32 isInitialCall) {
+    StaticItem* item = &gItemTable[ItemId_ELECTRO_POP];
     PlayerData* playerData = &gPlayerData;
 
-    playerData->curHP++;
+    playerData->curHP += item->potencyA;
     if (playerData->curHP > playerData->curMaxHP) {
         playerData->curHP = playerData->curMaxHP;
     }
+
+    script->varTable[3] = item->potencyA;
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus N(AddFP)(ScriptInstance* script, s32 isInitialCall) {
+    PlayerData* playerData = &gPlayerData;
+    PlayerData* playerData2 = &gPlayerData;
+    s32 amt = get_variable(script, *script->ptrReadPos);
+    // @bug Should be playerData->curFP
+    s32 newFP = playerData->curHP + amt;
+
+    if (newFP > playerData->curMaxFP) {
+        newFP = playerData->curMaxFP;
+    }
+
+    playerData2->curFP = newFP;
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus N(func_802A14F0_730A90)(ScriptInstance* script, s32 isInitialCall) {
+    StaticItem* item = &gItemTable[ItemId_ELECTRO_POP];
+    PlayerData* playerData = &gPlayerData;
+
+    playerData->curFP += item->potencyA;
+    if (playerData->curFP > playerData->curMaxFP) {
+        playerData->curFP = playerData->curMaxFP;
+    }
+
+    script->varTable[3] = item->potencyB;
+
     return ApiStatus_DONE2;
 }
 
@@ -80,15 +137,13 @@ Script N(UseItemWithEffect) = SCRIPT({
     if (SI_VAR(1) == 0) {
         UseCamPreset(69);
         sleep 10;
-
         PlaySoundAtActor(ActorID_PLAYER, 8333);
         SetAnimation(ActorID_PLAYER, 0, PlayerAnim_GOT_ITEM);
         GetActorPos(ActorID_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
         SI_VAR(0) += 18;
         SetActorSpeed(ActorID_PLAYER, 4.0);
-        SetGoalPos(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+        SetGoalPos(ActorID_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
         PlayerRunToGoal(0);
-
         SI_VAR(1) += 45;
         SI_VAR(3) = SI_VAR(1);
         SI_VAR(3) += 10;
@@ -96,12 +151,9 @@ Script N(UseItemWithEffect) = SCRIPT({
         PlayEffect(51, 1, SI_VAR(0), SI_VAR(3), SI_VAR(2), 1.0, 30, 0, 0, 0, 0, 0, 0, 0);
         MakeItemEntity(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 1, 0);
         SI_VAR(10) = SI_VAR(0);
-
         N(GiveRefund)();
         sleep SI_VAR(0);
-
         sleep 15;
-
         N(GiveRefundCleanup)();
         RemoveItemEntity(SI_VAR(10));
     } else {
@@ -109,7 +161,6 @@ Script N(UseItemWithEffect) = SCRIPT({
         PlaySoundAtActor(ActorID_PLAYER, 8333);
         SetAnimation(ActorID_PLAYER, 0, PlayerAnim_GOT_ITEM);
         sleep 4;
-
         SI_VAR(1) += 45;
         SI_VAR(3) = SI_VAR(1);
         SI_VAR(3) += 10;
@@ -117,7 +168,6 @@ Script N(UseItemWithEffect) = SCRIPT({
         PlayEffect(51, 1, SI_VAR(0), SI_VAR(3), SI_VAR(2), 1.0, 30, 0, 0, 0, 0, 0, 0, 0);
         MakeItemEntity(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 1, 0);
         SI_VAR(10) = SI_VAR(0);
-
         sleep 15;
         RemoveItemEntity(SI_VAR(10));
     }
@@ -144,7 +194,7 @@ Script N(UseItem) = SCRIPT({
 
 Script N(PlayerGoHome) = SCRIPT({
     UseIdleAnimation(ActorID_PLAYER, 0);
-    SetGoalToHome(0);
+    SetGoalToHome(ActorID_PLAYER);
     SetActorSpeed(ActorID_PLAYER, 8.0);
     SetAnimation(ActorID_PLAYER, 0, PlayerAnim_RUNNING);
     PlayerRunToGoal(0);
@@ -155,7 +205,7 @@ Script N(PlayerGoHome) = SCRIPT({
 Script N(EatItem) = SCRIPT({
     spawn {
         loop 4 {
-            PlaySoundAtActor(ActorID_PLAYER, 8341);
+            PlaySoundAtActor(0, 8341);
             sleep 10;
         }
     }
@@ -166,7 +216,7 @@ Script N(EatItem) = SCRIPT({
 Script N(DrinkItem) = SCRIPT({
     spawn {
         loop 4 {
-            PlaySoundAtActor(ActorID_PLAYER, 8341);
+            PlaySoundAtActor(0, 8341);
             sleep 10;
         }
     }
@@ -175,25 +225,33 @@ Script N(DrinkItem) = SCRIPT({
 });
 
 Script N(main) = SCRIPT({
-    SI_VAR(10) =c 0x8D;
+    SI_VAR(10) =c 0xCC;
     await N(UseItemWithEffect);
     await N(EatItem);
-    SetAnimation(ActorID_PLAYER, 0, PlayerAnim_STICK_OUT_TONGUE);
     GetActorPos(ActorID_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    SI_VAR(0) += 0;
-    SI_VAR(1) += 35;
-    N(func_802A123C_71CF1C)(SI_VAR(0), SI_VAR(1), SI_VAR(2), 1);
+    SI_VAR(1) += 20;
+    PlayEffect(87, 0, SI_VAR(0), SI_VAR(1), SI_VAR(2), 1.0, 30, 0, 0, 0, 0, 0, 0, 0);
+    PlaySound(889);
+    GetItemPower(ItemId_VOLT_SHROOM, SI_VAR(0), SI_VAR(1));
+    N(func_802A123C_7307DC)();
+    sleep 40;
+    N(func_802A14F0_730A90)();
+    GetActorPos(ActorID_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    SI_VAR(0) += 20;
+    SI_VAR(1) += 25;
+    N(func_802A133C_7308DC)(SI_VAR(0), SI_VAR(1), SI_VAR(2), SI_VAR(3));
     GetActorPos(ActorID_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(1) += 25;
-    SI_VAR(2) += 5;
-    func_802D7520(SI_VAR(0), SI_VAR(1), SI_VAR(2), 1);
-    N(func_802A12FC_71CFDC)();
+    func_802D7520(SI_VAR(0), SI_VAR(1), SI_VAR(2), SI_VAR(3));
+    N(AddFP)(SI_VAR(3));
+    sleep 10;
+    SetAnimation(ActorID_PLAYER, 0, PlayerAnim_THUMBS_UP);
     sleep 30;
     GetActorPos(ActorID_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    SI_VAR(2) += 5;
-    func_802D75D8(SI_VAR(0), SI_VAR(1), SI_VAR(2), 1);
+    func_802D75D8(SI_VAR(0), SI_VAR(1), SI_VAR(2), SI_VAR(3));
     SetAnimation(ActorID_PLAYER, 0, PlayerAnim_2);
     sleep 20;
+    ShowMessageBox(16, 60);
+    WaitForMessageBoxDone();
     await N(PlayerGoHome);
 });
-
