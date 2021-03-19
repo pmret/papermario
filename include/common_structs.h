@@ -1792,7 +1792,7 @@ typedef struct Temp8010EBB0 {
 typedef struct Temp8025D160 {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ char unk_04[8];
-    /* 0x0C */ struct Temp8025D160_2* unk_8025D160_2;
+    /* 0x0C */ struct Temp8025D160_2* unk_0C;
 } Temp8025D160; // size = 0x10 (?)
 
 typedef struct Temp8025D160_2 {

@@ -59,7 +59,6 @@ void func_802546B0(void) {
 }
 
 #ifdef NON_MATCHING
-
 void enable_player_blur(void) {
     Actor* playerActor = gBattleStatus.playerActor;
     ActorPart* partsTable = playerActor->partsTable;
@@ -355,7 +354,7 @@ void func_8025DBC8(void) {
 INCLUDE_ASM(s32, "code_182B30", func_8025DBD0);
 
 void func_8025DD40(ActorPart* actorPart, s32 arg1) {
-    actorPart->decorationTable->unk_8025D160[arg1]->unk_8025D160_2->unk_2C = 5;
+    actorPart->decorationTable->unk_8025D160[arg1]->unk_0C->unk_2C = 5;
 }
 
 INCLUDE_ASM(s32, "code_182B30", func_8025DD60);
