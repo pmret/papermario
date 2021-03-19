@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_8029D880
+.word L80271E4C_1A072C, L80271E58_1A0738, L80271E64_1A0744, L80271E70_1A0750, L80271E7C_1A075C, L80271E88_1A0768
+
+.section .text
+
 glabel calc_player_damage_enemy
 /* 1A0224 80271944 27BDFFA0 */  addiu     $sp, $sp, -0x60
 /* 1A0228 80271948 AFB40048 */  sw        $s4, 0x48($sp)

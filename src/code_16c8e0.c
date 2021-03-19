@@ -171,9 +171,15 @@ void get_dpad_input_radial(f32* angle, f32* magnitude) {
     *magnitude = mag;
 }
 
-INCLUDE_ASM(s32, "code_16c8e0", func_8023E104);
+void func_8023E104(void) {
+    D_802809F4 = 1;
+    D_802809F5 = 0;
+}
 
-INCLUDE_ASM(s32, "code_16c8e0", func_8023E11C);
+void func_8023E11C(void) {
+    D_802809F4 = 0;
+    D_802809F5 = 0;
+}
 
 INCLUDE_ASM(s32, "code_16c8e0", initialize_battle);
 

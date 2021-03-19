@@ -1,6 +1,31 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_8029D9A8
+.word L8027B12C_1A9A0C, L8027B158_1A9A38, L8027B16C_1A9A4C, L8027B180_1A9A60, L8027B300_1A9BE0, L8027B340_1A9C20, L8027B368_1A9C48, L8027B208_1A9AE8, L8027B258_1A9B38, L8027B3F8_1A9CD8, L8027B4B8_1A9D98, L8027B53C_1A9E1C, L8027B58C_1A9E6C, 0
+
+glabel D_8029D9E0
+.double 3.141592
+
+glabel D_8029D9E8
+.double 3.141592
+
+glabel D_8029D9F0
+.double 3.141592
+
+glabel D_8029D9F8
+.double 3.141592
+
+glabel D_8029DA00
+.double 1.570796
+
+glabel D_8029DA08
+.double 1.570796
+
+.section .text
+
 glabel update_lerp_battle
 /* 1A99BC 8027B0DC 27BDFFC0 */  addiu     $sp, $sp, -0x40
 /* 1A99C0 8027B0E0 F7B80030 */  sdc1      $f24, 0x30($sp)
