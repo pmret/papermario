@@ -2262,14 +2262,18 @@ segments:
     subsections:
     - [0x716C60, c]
     - [0x717060, data]
-  - name: battle/item/dusty_hammer
+  - name: battle/item/dusty_hammer/
+    ld_name: battle_item_dusty_hammer
     type: code
     start: 0x7179D0
     vram: 0x802A1000
     overlay: True
     subsections:
-    - [0x7179D0, c]
-    - [0x717C10, data]
+    - [0x7179D0,       c, lib]
+    - [0x717C10,   .data, lib]
+    - [0x7181D0,     ci4, dusty_hammer, 32, 32]
+    - [0x7183D0, palette, dusty_hammer]
+    - [0x7183F0,   .data, dusty_hammer]
   - name: battle/item/pow_block
     type: code
     start: 0x718850

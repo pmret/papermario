@@ -35,8 +35,9 @@ def script_lib():
                             pass
         """
 
-        # symbol_addrs.txt
-        with open(Path(path.dirname(__file__), "symbol_addrs.txt"), "r") as file:
+        repo_root = Path(__file__).resolve().parent.parent
+        symbols = Path(repo_root / "ver" / "current" / "symbol_addrs.txt")
+        with open(symbols, "r") as file:
             for line in file.readlines():
                 line = line.split(";")[0]
 
@@ -44,13 +45,13 @@ def script_lib():
                 name = s[0]
                 addr = s[1].split(";")[0].split(" ")[0]
                 _script_lib[int(addr, 16)] = name
-
     return _script_lib
 
 class ScriptDisassembler:
     def __init__(self, bytes, script_name = "script", symbol_map = {}):
         self.bytes = bytes
         self.script_name = script_name
+
         self.symbol_map = { **script_lib(), **symbol_map }
 
         self.out = ""
