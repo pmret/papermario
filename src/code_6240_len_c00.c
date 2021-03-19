@@ -25,6 +25,8 @@ s32 get_spirits_rescued(void) {
     return ret;
 }
 
+extern s32 D_800D95E8[];
+
 INCLUDE_ASM(s32, "code_6240_len_c00", fio_calc_header_checksum);
 
 INCLUDE_ASM(s32, "code_6240_len_c00", fio_validate_header_checksums);
@@ -35,8 +37,11 @@ INCLUDE_ASM(s32, "code_6240_len_c00", fio_flush_backups);
 
 #ifdef NON_MATCHING
 s32 fio_calc_file_checksum(s32* saveData) {
-    u32 sum = 0;
-    u32 i = 0;
+    u32 sum;
+    u32 i;
+
+    sum = 0;
+    i = 0;
 
     for (i = 0; i < 0x4E0; i++) {
         sum += saveData[i];

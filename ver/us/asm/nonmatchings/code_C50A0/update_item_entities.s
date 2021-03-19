@@ -12,8 +12,8 @@ glabel jtbl_80150C50
 .section .text
 
 glabel update_item_entities
-/* C85EC 80131EEC 3C02800A */  lui       $v0, %hi(D_8009A650)
-/* C85F0 80131EF0 8C42A650 */  lw        $v0, %lo(D_8009A650)($v0)
+/* C85EC 80131EEC 3C02800A */  lui       $v0, %hi(gOverrideFlags)
+/* C85F0 80131EF0 8C42A650 */  lw        $v0, %lo(gOverrideFlags)($v0)
 /* C85F4 80131EF4 27BDFFC0 */  addiu     $sp, $sp, -0x40
 /* C85F8 80131EF8 AFBF0038 */  sw        $ra, 0x38($sp)
 /* C85FC 80131EFC AFB30034 */  sw        $s3, 0x34($sp)

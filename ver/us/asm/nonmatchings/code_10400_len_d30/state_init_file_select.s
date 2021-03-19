@@ -71,8 +71,8 @@ glabel state_init_file_select
 /* 10560 80035160 44812000 */  mtc1      $at, $f4
 /* 10564 80035164 3C014316 */  lui       $at, 0x4316
 /* 10568 80035168 44813000 */  mtc1      $at, $f6
-/* 1056C 8003516C 3C04800A */  lui       $a0, %hi(D_8009A650)
-/* 10570 80035170 2484A650 */  addiu     $a0, $a0, %lo(D_8009A650)
+/* 1056C 8003516C 3C04800A */  lui       $a0, %hi(gOverrideFlags)
+/* 10570 80035170 2484A650 */  addiu     $a0, $a0, %lo(gOverrideFlags)
 /* 10574 80035174 A600002C */  sh        $zero, 0x2c($s0)
 /* 10578 80035178 A600002E */  sh        $zero, 0x2e($s0)
 /* 1057C 8003517C A6000030 */  sh        $zero, 0x30($s0)

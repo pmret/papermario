@@ -17,8 +17,8 @@ glabel func_8024049C_D6EE4C
 /* D6EE7C 802404CC 0000202D */   daddu    $a0, $zero, $zero
 /* D6EE80 802404D0 8E03013C */  lw        $v1, 0x13c($s0)
 /* D6EE84 802404D4 AC620000 */  sw        $v0, ($v1)
-/* D6EE88 802404D8 3C03800A */  lui       $v1, %hi(D_8009A650)
-/* D6EE8C 802404DC 2463A650 */  addiu     $v1, $v1, %lo(D_8009A650)
+/* D6EE88 802404D8 3C03800A */  lui       $v1, %hi(gOverrideFlags)
+/* D6EE8C 802404DC 2463A650 */  addiu     $v1, $v1, %lo(gOverrideFlags)
 /* D6EE90 802404E0 8C620000 */  lw        $v0, ($v1)
 /* D6EE94 802404E4 34420080 */  ori       $v0, $v0, 0x80
 /* D6EE98 802404E8 AC620000 */  sw        $v0, ($v1)

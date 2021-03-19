@@ -13,8 +13,8 @@ glabel func_80240688_E1EAE8
 /* E1EB08 802406A8 8C620000 */  lw        $v0, ($v1)
 /* E1EB0C 802406AC A0400078 */  sb        $zero, 0x78($v0)
 /* E1EB10 802406B0 8C620000 */  lw        $v0, ($v1)
-/* E1EB14 802406B4 3C04800A */  lui       $a0, %hi(D_8009A650)
-/* E1EB18 802406B8 2484A650 */  addiu     $a0, $a0, %lo(D_8009A650)
+/* E1EB14 802406B4 3C04800A */  lui       $a0, %hi(gOverrideFlags)
+/* E1EB18 802406B8 2484A650 */  addiu     $a0, $a0, %lo(gOverrideFlags)
 /* E1EB1C 802406BC A040007D */  sb        $zero, 0x7d($v0)
 /* E1EB20 802406C0 8C820000 */  lw        $v0, ($a0)
 /* E1EB24 802406C4 2403FFF7 */  addiu     $v1, $zero, -9

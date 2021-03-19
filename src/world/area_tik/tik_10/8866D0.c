@@ -2,7 +2,7 @@
 
 INCLUDE_ASM(s32, "world/area_tik/tik_10/8866D0", func_80240310_8866D0);
 
-#include "world/common/Set8009A650_40.inc.c"
+#include "world/common/SetOverrideFlags_40.inc.c"
 
 INCLUDE_ASM(s32, "world/area_tik/tik_10/8866D0", func_8024069C_886A5C);
 

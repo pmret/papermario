@@ -1,6 +1,6 @@
 #include "tik_19.h"
 
-#include "world/common/Set8009A650_40.inc.c"
+#include "world/common/SetOverrideFlags_40.inc.c"
 
 INCLUDE_ASM(s32, "world/area_tik/tik_19/897BD0", func_8024060C_897BEC);
 

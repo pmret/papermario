@@ -2,7 +2,7 @@
 
 #include "common/UnkFloatFunc.inc.c"
 
-#include "world/common/Set8009A650_40.inc.c"
+#include "world/common/SetOverrideFlags_40.inc.c"
 
 INCLUDE_ASM(s32, "world/area_iwa/iwa_10/91E6D0", func_8024030C_91E87C);
 

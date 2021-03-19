@@ -14,8 +14,8 @@ glabel initialize_battle
 /* 16CA34 8023E154 3C06800E */  lui       $a2, %hi(gBattleStatus)
 /* 16CA38 8023E158 24C6C070 */  addiu     $a2, $a2, %lo(gBattleStatus)
 /* 16CA3C 8023E15C 24C5003C */  addiu     $a1, $a2, 0x3c
-/* 16CA40 8023E160 3C04800A */  lui       $a0, %hi(D_8009A650)
-/* 16CA44 8023E164 2484A650 */  addiu     $a0, $a0, %lo(D_8009A650)
+/* 16CA40 8023E160 3C04800A */  lui       $a0, %hi(gOverrideFlags)
+/* 16CA44 8023E164 2484A650 */  addiu     $a0, $a0, %lo(gOverrideFlags)
 /* 16CA48 8023E168 AFBF0024 */  sw        $ra, 0x24($sp)
 /* 16CA4C 8023E16C AFB20018 */  sw        $s2, 0x18($sp)
 /* 16CA50 8023E170 AFB00010 */  sw        $s0, 0x10($sp)

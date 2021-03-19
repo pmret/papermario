@@ -1,6 +1,6 @@
 #include "flo_16.h"
 
-#include "world/common/Set8009A650_40.inc.c"
+#include "world/common/SetOverrideFlags_40.inc.c"
 
 INCLUDE_ASM(s32, "world/area_flo/flo_16/CD1F10", func_802400FC_CD1F2C);
 

@@ -91,9 +91,7 @@ void clear_item_entity_flags(s32 index, s32 flags) {
 
 void func_801341B0(s32 index) {
     ItemEntity* itemEntity = D_801565A0[index];
-    s32* sym = D_8009A650;
-
-    sym[0] |= 0x40;
+    OVERRIDE_FLAG_SET(0x40);
     itemEntity->flags |= 0x100;
 }
 

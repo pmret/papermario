@@ -28,8 +28,8 @@ glabel func_800355D4
 /* 10A28 80035628 0C04DF62 */  jal       set_transition_stencil_zoom_0
 /* 10A2C 8003562C 00000000 */   nop
 /* 10A30 80035630 24020001 */  addiu     $v0, $zero, 1
-/* 10A34 80035634 3C04800A */  lui       $a0, %hi(D_8009A650)
-/* 10A38 80035638 2484A650 */  addiu     $a0, $a0, %lo(D_8009A650)
+/* 10A34 80035634 3C04800A */  lui       $a0, %hi(gOverrideFlags)
+/* 10A38 80035638 2484A650 */  addiu     $a0, $a0, %lo(gOverrideFlags)
 /* 10A3C 8003563C 3C01800A */  lui       $at, %hi(D_800A0930)
 /* 10A40 80035640 A0220930 */  sb        $v0, %lo(D_800A0930)($at)
 /* 10A44 80035644 8C820000 */  lw        $v0, ($a0)

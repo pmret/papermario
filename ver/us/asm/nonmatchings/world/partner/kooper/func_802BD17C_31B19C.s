@@ -19,8 +19,8 @@ glabel func_802BD17C_31B19C
 /* 31B1D4 802BD1B4 AC25EC68 */  sw        $a1, %lo(D_802BEC68)($at)
 /* 31B1D8 802BD1B8 04A0000D */  bltz      $a1, .L802BD1F0
 /* 31B1DC 802BD1BC 24040001 */   addiu    $a0, $zero, 1
-/* 31B1E0 802BD1C0 3C02800A */  lui       $v0, %hi(D_8009A650)
-/* 31B1E4 802BD1C4 2442A650 */  addiu     $v0, $v0, %lo(D_8009A650)
+/* 31B1E0 802BD1C0 3C02800A */  lui       $v0, %hi(gOverrideFlags)
+/* 31B1E4 802BD1C4 2442A650 */  addiu     $v0, $v0, %lo(gOverrideFlags)
 /* 31B1E8 802BD1C8 8C430000 */  lw        $v1, ($v0)
 /* 31B1EC 802BD1CC 3C01802C */  lui       $at, %hi(D_802BEC6C)
 /* 31B1F0 802BD1D0 AC24EC6C */  sw        $a0, %lo(D_802BEC6C)($at)

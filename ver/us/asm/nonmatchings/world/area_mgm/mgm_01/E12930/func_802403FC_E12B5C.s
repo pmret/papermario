@@ -3,8 +3,8 @@
 
 glabel func_802403FC_E12B5C
 /* E12B5C 802403FC 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* E12B60 80240400 3C02800A */  lui       $v0, %hi(D_8009A650)
-/* E12B64 80240404 2442A650 */  addiu     $v0, $v0, %lo(D_8009A650)
+/* E12B60 80240400 3C02800A */  lui       $v0, %hi(gOverrideFlags)
+/* E12B64 80240404 2442A650 */  addiu     $v0, $v0, %lo(gOverrideFlags)
 /* E12B68 80240408 AFBF0010 */  sw        $ra, 0x10($sp)
 /* E12B6C 8024040C 8C430000 */  lw        $v1, ($v0)
 /* E12B70 80240410 3C040004 */  lui       $a0, 4

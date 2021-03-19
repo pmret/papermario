@@ -1,7 +1,7 @@
 #include "common.h"
 
 void begin_state_init(void) {
-    D_8009A650[0] |= 0x8;
+    OVERRIDE_FLAG_SET(0x8);
     (*gGameStatusPtr)->loadMenuState = 3;
 }
 
@@ -15,7 +15,7 @@ void step_init_state(void) {
         return;
     }
 
-    D_8009A650[0] = 0;
+    gOverrideFlags = 0;
     (*gameStatusPtr)->areaID = 0;
     gameStatus->isBattle = 0;
     gameStatus->prevArea = -1;
@@ -77,7 +77,7 @@ void step_init_state(void) {
         func_80056180();
     }
 
-    D_8009A650[0] &= ~0x8;
+    OVERRIDE_FLAG_UNSET(0x8);
     set_game_mode(1);
 }
 
