@@ -175,7 +175,7 @@ glabel L80240EDC_BDE08C
 glabel L80240F00_BDE0B0
 /* BDE0B0 80240F00 0260202D */  daddu     $a0, $s3, $zero
 /* BDE0B4 80240F04 0280282D */  daddu     $a1, $s4, $zero
-/* BDE0B8 80240F08 0C090191 */  jal       func_80240644_BDD7F4
+/* BDE0B8 80240F08 0C090191 */  jal       arn_02_UnkNpcAIFunc16
 /* BDE0BC 80240F0C 0200302D */   daddu    $a2, $s0, $zero
 glabel L80240F10_BDE0C0
 /* BDE0C0 80240F10 0260202D */  daddu     $a0, $s3, $zero

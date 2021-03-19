@@ -175,7 +175,7 @@ glabel L80243264_BE6A14
 glabel L80243288_BE6A38
 /* BE6A38 80243288 0260202D */  daddu     $a0, $s3, $zero
 /* BE6A3C 8024328C 0280282D */  daddu     $a1, $s4, $zero
-/* BE6A40 80243290 0C090A73 */  jal       func_802429CC_BE617C
+/* BE6A40 80243290 0C090A73 */  jal       arn_04_UnkNpcAIFunc16
 /* BE6A44 80243294 0200302D */   daddu    $a2, $s0, $zero
 glabel L80243298_BE6A48
 /* BE6A48 80243298 0260202D */  daddu     $a0, $s3, $zero
