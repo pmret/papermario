@@ -19,8 +19,8 @@ Gfx N(dustyhammerDL)[] = {
     gsDPSetTextureFilter(G_TF_AVERAGE),
     gsDPSetTextureConvert(G_TC_FILT),
     gsDPSetTextureLUT(G_TT_RGBA16),
-    gsDPLoadTLUT_pal16(0, 0x802A1A00),
-    gsDPLoadTextureTile_4b(&battle_item_dusty_hammer_dusty_hammer_png, G_IM_FMT_CI, battle_item_dusty_hammer_dusty_hammer_png_width, 0, 0, 0, battle_item_dusty_hammer_dusty_hammer_png_width - 1, battle_item_dusty_hammer_dusty_hammer_png_height - 1, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD),
+    gsDPLoadTLUT_pal16(0, &N(dusty_hammer_pal_png)),
+    gsDPLoadTextureTile_4b(&N(dusty_hammer_png), G_IM_FMT_CI, N(dusty_hammer_png_width), 0, 0, 0, N(dusty_hammer_png_width) - 1, N(dusty_hammer_png_height) - 1, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPClearGeometryMode(G_SHADING_SMOOTH),
     gsSPVertex(N(dustyhammerModel), ARRAY_COUNT(N(dustyhammerModel)), 0),
@@ -39,7 +39,7 @@ Script N(main) = SCRIPT({
     await N(UseItemWithEffect);
     UseCamPreset(3);
     MoveBattleCamOver(15);
-    SetAnimation(ActorID_PLAYER, 0, 0x10016);
+    SetAnimation(ActorID_PLAYER, 0, PlayerAnim_THROW);
     PlaySound(1018);
     sleep 3;
     func_802D3474(SI_VAR(10), N(dustyhammerItemModelCommandList));

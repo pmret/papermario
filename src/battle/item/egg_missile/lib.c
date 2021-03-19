@@ -1,7 +1,7 @@
-#include "dusty_hammer.h"
+#include "egg_missile.h"
 
 extern s32 D_80108A64;
-MenuIcon* D_802A1E80;
+MenuIcon* D_802A2890;
 
 ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -33,8 +33,8 @@ ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
         posY = player->currentPos.y;
         posZ = player->currentPos.z;
         get_screen_coords(gCurrentCameraID, posX, posY, posZ, &iconPosX, &iconPosY, &iconPosZ);
-        D_802A1E80 = create_icon(&D_80108A64);
-        set_icon_render_pos(D_802A1E80, iconPosX + 36, iconPosY - 63);
+        D_802A2890 = create_icon(&D_80108A64);
+        set_icon_render_pos(D_802A2890, iconPosX + 36, iconPosY - 63);
     }
 
     script->varTable[0] = sleepTime;
@@ -48,8 +48,20 @@ ApiStatus N(GiveRefundCleanup)(ScriptInstance* script, s32 isInitialCall) {
     s32 sellValue = gItemTable[battleStatus->selectedItemID].sellValue;
 
     if (heroes_is_ability_active(player, Ability_REFUND) && sellValue > 0) {
-        free_icon(D_802A1E80);
+        free_icon(D_802A2890);
     }
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus N(func_802A123C_71CF1C)(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 a = get_variable(script, *args++);
+    s32 b = get_variable(script, *args++);
+    s32 c = get_variable(script, *args++);
+
+    func_80070130(0, a, b, c);
+    func_800701F0(0, a, b + 20, c);
 
     return ApiStatus_DONE2;
 }
@@ -144,4 +156,3 @@ Script N(DrinkItem) = SCRIPT({
     SetAnimation(ActorID_PLAYER, 0, PlayerAnim_DRINK);
     sleep 45;
 });
-
