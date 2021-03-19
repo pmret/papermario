@@ -66,7 +66,7 @@ INCLUDE_ASM(s32, "world/area_iwa/iwa_01/90FBD0", func_80242CF4_9123A4);
 
 INCLUDE_ASM(s32, "world/area_iwa/iwa_01/90FBD0", func_80242E2C_9124DC);
 
-INCLUDE_ASM(s32, "world/area_iwa/iwa_01/90FBD0", func_80242EA8_912558);
+#include "world/common/UnkNpcAIFunc17.inc.c"
 
 #define NAMESPACE dup_iwa_01
 #include "world/common/UnkDurationCheck.inc.c"
