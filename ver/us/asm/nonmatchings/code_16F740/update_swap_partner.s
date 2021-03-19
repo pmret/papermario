@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_8029CAD0
+.word L8024574C_17402C, L80245AAC_17438C, L80245828_174108, L8024589C_17417C, L80245938_174218, L80245994_174274, L80245A00_1742E0, L80245A44_174324
+
+.section .text
+
 glabel update_swap_partner
 /* 173FD8 802456F8 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* 173FDC 802456FC AFB20018 */  sw        $s2, 0x18($sp)

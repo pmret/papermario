@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_8029D7F0
+.word L8026FAC8_19E3A8, L8026FAD4_19E3B4, L8026FAE0_19E3C0, L8026FAE8_19E3C8, L8026FAF0_19E3D0, L8026FAF8_19E3D8
+
+.section .text
+
 glabel SetPartSounds
 /* 19E2E0 8026FA00 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* 19E2E4 8026FA04 AFB20018 */  sw        $s2, 0x18($sp)

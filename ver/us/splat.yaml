@@ -436,7 +436,7 @@ segments:
     #- [0x10AB70, i4,      shadow/10AB70, 32, 32]
     #- [0x10AD70, i4,      shadow/10AD70, 32, 32]
     - [0x10AF70, .data, code_104730]
-    - [0x10B608, data]
+    - [0x10B610, data]
     - [0x10C880, .rodata, code_102C80]
     - [0x10C9E0, .rodata, code_104730]
     - [0x10CA50, .rodata, code_104940_len_dc0]
@@ -507,21 +507,21 @@ segments:
     vram: 0x8023E000
     subsections:
     - [0x16C8E0, c, code_16c8e0]
-    - [0x16F740, c]
-    - [0x1776B0, c]
-    - [0x17D6A0, c]
+    - [0x16F740, c, code_16F740]
+    - [0x1776B0, c, code_1776B0]
+    - [0x17D6A0, c, code_17D6A0]
     - [0x17FEB0, c]
     - [0x181810, c]
-    - [0x182B30, c]
-    - [0x18C790, c]
-    - [0x18F340, c]
+    - [0x182B30, c, code_182B30]
+    - [0x18C790, c, code_18C790]
+    - [0x18F340, c, code_18F340]
     - [0x190A10, c]
-    - [0x190B20, c]
+    - [0x190B20, c, code_190B20]
     - [0x1967B0, c]
-    - [0x196AA0, c]
-    - [0x197F40, c]
-    - [0x19FAF0, c]
-    - [0x1A5830, c]
+    - [0x196AA0, c, code_196AA0]
+    - [0x197F40, c, code_197F40]
+    - [0x19FAF0, c, code_19FAF0]
+    - [0x1A5830, c, code_1A5830]
     - [0x1AC760, c]
     - [0x1AF120, c]
     - [0x1AF230, c]
@@ -529,7 +529,18 @@ segments:
     - [0x1AF8A0, .data, code_190B20]
     #- [0x1B21E0, bin] # begins with image
     - [0x1B21E0, data, code_1AF2D0]
-    - [0x1CB240, rodata]
+    - [0x1CB240, .rodata, code_16c8e0]
+    - [0x1CB368, .rodata, code_16F740]
+    - [0x1CB4E0, .rodata, code_1776B0]
+    - [0x1CB670, .rodata, code_17D6A0]
+    - [0x1CBC30, .rodata, code_182B30]
+    - [0x1CBDD0, .rodata, code_18C790]
+    - [0x1CBE70, .rodata, code_18F340]
+    - [0x1CBE80, .rodata, code_190B20]
+    - [0x1CBF80, .rodata, code_196AA0]
+    - [0x1CC0A0, .rodata, code_197F40]
+    - [0x1CC160, .rodata, code_19FAF0]
+    - [0x1CC270, .rodata, code_1A5830]
   - [0x1CC310, bin] # icon images and palettes, vram unknown
   - [0x1FE1B0, rgba16,  title/logo_n64, 128, 112]
   - [0x2051B0, rgba16,  title/logo_is, 256, 122]
@@ -2880,12 +2891,11 @@ segments:
     - [0x7E73A0, c]
     - [0x7E7550, c]
     - [0x7E7850, c]
-    - [0x7E7A30, bin]
-    - [0x7E8470, bin]
-    - [0x7EA340, bin]
-    - [0x7EAA50, bin]
-    - [0x7EACD8, bin] # rodata
-    - [0x7EAD10, bin] # rodata
+    - [0x7E7A30, data]
+    - [0x7E8470, data]
+    - [0x7EA340, data]
+    - [0x7EAA50, data]
+    - [0x7EACD8, rodata]
   - name: world/area_mac/mac_00/
     type: code
     overlay: True
@@ -2896,20 +2906,19 @@ segments:
     - [0x7EB340, c]
     - [0x7ECFD0, c]
     - [0x7ED280, c]
-    - [0x7EE870, bin]
-    - [0x7F0A20, bin]
-    - [0x7F8F20, bin]
-    - [0x7F9100, bin]
-    - [0x7F91D0, bin]
-    - [0x7F9800, bin]
-    - [0x7F9850, bin]
-    - [0x7FD1A0, bin]
-    - [0x7FDF30, bin]
-    - [0x7FE550, bin]
-    - [0x8000B0, bin]
-    - [0x8006A0, bin] # rodata
-    - [0x8006D0, bin] # rodata
-    - [0x800880, bin] # rodata
+    - [0x7EE870, data]
+    - [0x7F0A20, data]
+    - [0x7F8F20, data]
+    - [0x7F9100, data]
+    - [0x7F91D0, data]
+    - [0x7F9800, data]
+    - [0x7F9850, data]
+    - [0x7FD1A0, data]
+    - [0x7FDF30, data]
+    - [0x7FE550, data]
+    - [0x8000B0, data]
+    - [0x8006A0, rodata]
+    - [0x8006D0, rodata]
   - name: world/area_mac/mac_01/
     type: code
     overlay: True
@@ -2922,16 +2931,15 @@ segments:
     - [0x8017D0, c]
     - [0x805DD0, c]
     - [0x806D10, c]
-    - [0x806F50, bin]
-    - [0x807C00, bin]
-    - [0x808680, bin]
-    - [0x808D70, bin]
-    - [0x8091F0, bin]
-    - [0x8202D0, bin]
-    - [0x822100, bin]
-    - [0x822460, bin]
-    - [0x822F30, bin] # rodata
-    - [0x8232C0, bin] # rodata
+    - [0x806F50, data]
+    - [0x807C00, data]
+    - [0x808680, data]
+    - [0x808D70, data]
+    - [0x8091F0, data]
+    - [0x8202D0, data]
+    - [0x822100, data]
+    - [0x822460, data]
+    - [0x822F30, rodata]
   - name: world/area_mac/mac_02/
     type: code
     overlay: True
@@ -2943,13 +2951,13 @@ segments:
     - [0x823970, c]
     - [0x823BB0, c]
     - [0x823BF0, c]
-    - [0x8267E0, bin]
-    - [0x8268F0, bin]
-    - [0x827E70, bin]
-    - [0x8282E0, bin]
-    - [0x828F10, bin]
-    - [0x8313E0, bin]
-    - [0x831490, bin] # rodata
+    - [0x8267E0, data]
+    - [0x8268F0, data]
+    - [0x827E70, data]
+    - [0x8282E0, data]
+    - [0x828F10, data]
+    - [0x8313E0, data]
+    - [0x831490, rodata]
   - name: world/area_mac/mac_03/
     type: code
     overlay: True
@@ -2960,14 +2968,14 @@ segments:
     - [0x831B20, c]
     - [0x833500, c]
     - [0x833740, c]
-    - [0x834070, bin]
-    - [0x834170, bin]
-    - [0x835370, bin]
-    - [0x837CB0, bin]
-    - [0x83F500, bin]
-    - [0x83F6C0, bin]
-    - [0x8404A0, bin]
-    - [0x842BB0, bin] # rodata
+    - [0x834070, data]
+    - [0x834170, data]
+    - [0x835370, data]
+    - [0x837CB0, data]
+    - [0x83F500, data]
+    - [0x83F6C0, data]
+    - [0x8404A0, data]
+    - [0x842BB0, rodata]
   - name: world/area_mac/mac_04/
     type: code
     overlay: True
@@ -2981,37 +2989,37 @@ segments:
     - [0x843030, c]
     - [0x844860, c]
     - [0x844AC0, c]
-    - [0x844BF0, bin]
-    - [0x844D50, bin]
-    - [0x845280, bin]
-    - [0x845CA0, bin]
-    - [0x8467E0, bin]
-    - [0x8469B0, bin]
-    - [0x8508F0, bin]
-    - [0x851410, bin]
-    - [0x8520A0, bin]
-    - [0x852120, bin] # rodata
-    - [0x852150, bin] # rodata
-    - [0x852170, bin] # rodata
+    - [0x844BF0, data]
+    - [0x844D50, data]
+    - [0x845280, data]
+    - [0x845CA0, data]
+    - [0x8467E0, data]
+    - [0x8469B0, data]
+    - [0x8508F0, data]
+    - [0x851410, data]
+    - [0x8520A0, data]
+    - [0x852120, rodata]
+    - [0x852150, rodata]
   - name: world/area_mac/mac_05/
     type: code
     overlay: True
     start: 0x852170
     vram: 0x80240000
+    subalign: 8
     subsections:
     - [0x852170, c]
     - [0x855560, c]
     - [0x855F20, c]
-    - [0x8562D0, bin]
-    - [0x8564E0, bin]
-    - [0x856650, bin]
-    - [0x857070, bin]
-    - [0x862BC0, bin]
-    - [0x864450, bin]
-    - [0x8648B4, bin]
-    - [0x864910, bin] # rodata
-    - [0x864AE0, bin] # rodata
-    - [0x864B20, bin] # rodata
+    - [0x8562D0, data]
+    - [0x8564E0, data]
+    - [0x856650, data]
+    - [0x857070, data]
+    - [0x862BC0, data]
+    - [0x864450, data]
+    - [0x8648B8, data]
+    - [0x864910, rodata]
+    - [0x864AE0, rodata]
+    - [0x864B20, rodata]
   - name: world/area_mac/mac_06/
     type: code
     overlay: True
@@ -3021,11 +3029,11 @@ segments:
     - [0x864B40, c]
     - [0x865000, c]
     - [0x8659C0, c]
-    - [0x8661D0, bin]
-    - [0x8666A0, bin]
-    - [0x867EF0, bin]
-    - [0x869450, bin] # rodata
-    - [0x869490, bin] # rodata
+    - [0x8661D0, data]
+    - [0x8666A0, data]
+    - [0x867EF0, data]
+    - [0x869450, rodata]
+    - [0x869490, rodata]
   - name: world/area_tik/tik_01/
     type: code
     overlay: True
@@ -3040,7 +3048,6 @@ segments:
     - [0x86B350, bin]
     - [0x86BC00, bin]
     - [0x86C710, bin] # rodata
-    - [0x86C740, bin] # rodata
   - name: world/area_tik/tik_02/
     type: code
     overlay: True
@@ -3055,7 +3062,6 @@ segments:
     - [0x86D800, bin]
     - [0x86E2C0, bin]
     - [0x86EAF0, bin] # rodata
-    - [0x86EB00, bin] # rodata
   - name: world/area_tik/tik_03/
     type: code
     overlay: True
@@ -3071,7 +3077,6 @@ segments:
     - [0x871730, bin]
     - [0x8717F0, bin]
     - [0x871A10, bin] # rodata
-    - [0x871A30, bin] # rodata
   - name: world/area_tik/tik_04/
     type: code
     overlay: True
@@ -3100,7 +3105,6 @@ segments:
     - [0x8765C0, bin]
     - [0x876A50, bin]
     - [0x876ED0, bin] # rodata
-    - [0x876EE0, bin] # rodata
   - name: world/area_tik/tik_06/
     type: code
     overlay: True
@@ -3114,7 +3118,6 @@ segments:
     - [0x878F90, bin]
     - [0x879860, bin]
     - [0x879BB0, bin] # rodata
-    - [0x879BE0, bin] # rodata
   - name: world/area_tik/tik_07/
     type: code
     overlay: True
@@ -3129,7 +3132,6 @@ segments:
     - [0x87E590, bin]
     - [0x87E890, bin]
     - [0x87ED80, bin] # rodata
-    - [0x87EDF0, bin] # rodata
   - name: world/area_tik/tik_08/
     type: code
     overlay: True
@@ -3159,7 +3161,6 @@ segments:
     - [0x885A80, bin]
     - [0x886340, bin] # rodata
     - [0x886360, bin] # rodata
-    - [0x8863C0, bin] # rodata
   - name: world/area_tik/tik_10/
     type: code
     overlay: True
@@ -3173,7 +3174,6 @@ segments:
     - [0x887B20, bin]
     - [0x8883F0, bin]
     - [0x888BC0, bin] # rodata
-    - [0x888BD0, bin] # rodata
   - name: world/area_tik/tik_12/
     type: code
     overlay: True
@@ -3189,7 +3189,6 @@ segments:
     - [0x88C810, bin]
     - [0x88D590, bin] # rodata
     - [0x88D5A0, bin] # rodata
-    - [0x88D600, bin] # rodata
   - name: world/area_tik/tik_14/
     type: code
     overlay: True
@@ -3229,7 +3228,6 @@ segments:
     - [0x893E40, bin]
     - [0x8944F0, bin]
     - [0x8956C0, bin] # rodata
-    - [0x8956E0, bin] # rodata
   - name: world/area_tik/tik_18/
     type: code
     overlay: True
@@ -3255,7 +3253,6 @@ segments:
     - [0x898990, bin]
     - [0x899C90, bin]
     - [0x89A340, bin] # rodata
-    - [0x89A350, bin] # rodata
   - name: world/area_tik/tik_20/
     type: code
     overlay: True
@@ -3269,7 +3266,6 @@ segments:
     - [0x89D200, bin]
     - [0x89D720, bin] # rodata
     - [0x89D740, bin] # rodata
-    - [0x89D7A0, bin] # rodata
   - name: world/area_tik/tik_21/
     type: code
     overlay: True
@@ -3281,7 +3277,6 @@ segments:
     - [0x89E1A0, bin]
     - [0x89FD70, bin]
     - [0x89FEA0, bin] # rodata
-    - [0x89FEC0, bin] # rodata
   - name: world/area_tik/tik_22/
     type: code
     overlay: True
@@ -3305,7 +3300,6 @@ segments:
     - [0x8A35A0, bin]
     - [0x8A5340, bin]
     - [0x8A5A10, bin] # rodata
-    - [0x8A5A80, bin] # rodata
   - name: world/area_tik/tik_24/
     type: code
     overlay: True
@@ -3321,7 +3315,6 @@ segments:
     - [0x8A7A20, bin]
     - [0x8A7EF0, bin] # rodata
     - [0x8A7F20, bin] # rodata
-    - [0x8A7F80, bin] # rodata
   - name: world/area_tik/tik_25/
     type: code
     overlay: True
@@ -3334,7 +3327,6 @@ segments:
     - [0x8A8800, bin]
     - [0x8A93D0, bin]
     - [0x8A9A00, bin] # rodata
-    - [0x8A9A10, bin] # rodata
   - name: world/area_kgr/kgr_01/
     type: code
     overlay: True

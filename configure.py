@@ -264,7 +264,7 @@ async def main():
         f.write(f"assembler_command = \"{cross}as -march=vr4300 -mabi=32\"\n")
         f.write("\n")
         f.write("[preserve_macros]\n")
-        f.write("g[DS]P.*\" = \"void\n")
+        f.write("\"g[DS]P.*\" = \"void\"\n")
 
     # $version
     n.rule("cpp",

@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_8029D4B8
+.word L8025D07C_18B95C, L8025D08C_18B96C, L8025D09C_18B97C, L8025D0AC_18B98C, L8025D0BC_18B99C, L8025D0CC_18B9AC, L8025D0DC_18B9BC, L8025D0EC_18B9CC, L8025D0FC_18B9DC, L8025D10C_18B9EC, L8025D11C_18B9FC, L8025D12C_18BA0C
+
+.section .text
+
 glabel _remove_part_decoration
 /* 18B91C 8025D03C 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 18B920 8025D040 AFBF0018 */  sw        $ra, 0x18($sp)
