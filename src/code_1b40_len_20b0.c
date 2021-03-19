@@ -46,7 +46,6 @@ void step_game_loop(void) {
     s8* temp80074021;
     s16* temp80074182;
     s16* temp800741A0;
-    s32* overrideFlags;
     s16* temp8009A690;
 
     update_input();
@@ -86,14 +85,12 @@ void step_game_loop(void) {
     update_windows();
     update_curtains();
 
-    overrideFlags = &gOverrideFlags;
-
-    if (*overrideFlags & 0x20) {
+    if (OVERRIDE_FLAG_CHECK(0x20)) {
         temp80074182 = &D_800741A2;
 
         switch (*temp80074182) {
             case 0:
-                *overrideFlags |= 0x200;
+                OVERRIDE_FLAG_SET(0x200);
                 disable_player_input();
                 temp800741A0 = &D_800741A0;
                 if (*temp800741A0 == 255) {
@@ -107,13 +104,13 @@ void step_game_loop(void) {
                 }
                 break;
             case 1:
-                *overrideFlags |= 0x8;
+                OVERRIDE_FLAG_SET(0x8);
                 temp8009A690 = &D_8009A690;
                 (*temp8009A690)--;
                 if (*temp8009A690 == 0) {
                     func_80149838();
                     set_game_mode(0);
-                    *overrideFlags &= ~0x20;
+                    OVERRIDE_FLAG_UNSET(0x20);
                 }
                 break;
         }
@@ -122,44 +119,28 @@ void step_game_loop(void) {
         D_800741A2 = 0;
     }
 
-    {
-        s32* overrideFlags = &gOverrideFlags;
-
-        if (*overrideFlags & 0x100) {
-            *overrideFlags |= 0x1000;
-        } else {
-            *overrideFlags &= ~0x1000;
-        }
+    if (OVERRIDE_FLAG_CHECK(0x100)) {
+        OVERRIDE_FLAG_SET(0x1000);
+    } else {
+        OVERRIDE_FLAG_UNSET(0x1000);
     }
 
-    {
-        s32* overrideFlags = &gOverrideFlags;
-
-        if (*overrideFlags & 0x200) {
-            *overrideFlags |= 0x2000;
-        } else {
-            *overrideFlags &= ~0x2000;
-        }
+    if (OVERRIDE_FLAG_CHECK(0x200)) {
+        OVERRIDE_FLAG_SET(0x2000);
+    } else {
+        OVERRIDE_FLAG_UNSET(0x2000);
     }
 
-    {
-        s32* overrideFlags = &gOverrideFlags;
-
-        if (*overrideFlags & 0x400) {
-            *overrideFlags |= 0x4000;
-        } else {
-            *overrideFlags &= ~0x4000;
-        }
+    if (OVERRIDE_FLAG_CHECK(0x400)) {
+        OVERRIDE_FLAG_SET(0x4000);
+    } else {
+        OVERRIDE_FLAG_UNSET(0x4000);
     }
 
-    {
-        s32* overrideFlags = &gOverrideFlags;
-
-        if (*overrideFlags & 0x800) {
-            *overrideFlags |= 0x8000;
-        } else {
-            *overrideFlags &= ~0x8000;
-        }
+    if (OVERRIDE_FLAG_CHECK(0x800)) {
+        OVERRIDE_FLAG_SET(0x8000);
+    } else {
+        OVERRIDE_FLAG_UNSET(0x8000);
     }
 
     rand_int(1);
@@ -179,6 +160,7 @@ void gfx_task_background(void) {
     gDPFullSync((*gfx)++);
     gSPEndDisplayList((*gfx)++);
 
+    // TODO these << 3 >> 3 shouldn't be necessary. There's almost definitely something we're missing here...
     ASSERT((s32)((u32)((*gfx) - (*gDisplayContextPtr)->backgroundGfx) << 3 >> 3) < ARRAY_COUNT((*gDisplayContextPtr)->backgroundGfx));
 
     nuGfxTaskStart(&gDisplayContext->backgroundGfx[0], (gMasterGfxPos - gDisplayContext->backgroundGfx) << 3,
@@ -258,42 +240,37 @@ void load_engine_data(void) {
     set_game_mode(0);
 }
 
-//weird ordering issue
-#ifdef NON_MATCHING
 void func_80027088(s32 arg0) {
     switch (arg0) {
         case 0:
             D_8009A5D8 = arg0;
-            gOverrideFlags &= ~0xF00;
+            OVERRIDE_FLAG_UNSET(0xF00);
             resume_all_group(3);
             break;
         case 1:
             D_8009A5D8 = arg0;
-            gOverrideFlags &= ~0xE00;
-            gOverrideFlags |= 0x100;
+            OVERRIDE_FLAG_UNSET(0xE00);
+            OVERRIDE_FLAG_SET(0x100);
             suspend_all_group(1);
             break;
         case 2:
             D_8009A5D8 = arg0;
-            gOverrideFlags &= ~0xC00;
-            gOverrideFlags |= 0x300;
+            OVERRIDE_FLAG_UNSET(0xC00);
+            OVERRIDE_FLAG_SET(0x300);
             suspend_all_group(2);
             break;
         case 3:
             D_8009A5D8 = arg0;
-            gOverrideFlags &= ~0x800;
-            gOverrideFlags |= 0x700;
+            OVERRIDE_FLAG_UNSET(0x800);
+            OVERRIDE_FLAG_SET(0x700);
             suspend_all_group(2);
             break;
         case 4:
             D_8009A5D8 = arg0;
-            gOverrideFlags |=  0xF00;
+            OVERRIDE_FLAG_SET(0xF00);
             break;
     }
 }
-#else
-INCLUDE_ASM(void, "code_1b40_len_20b0", func_80027088, s32 arg0);
-#endif
 
 s32 func_80027190(void) {
     return D_8009A5D8;

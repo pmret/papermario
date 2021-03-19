@@ -291,10 +291,8 @@ void func_8014AE6C(void) {
     MusicPlayer* musicPlayer = &gMusicPlayers[0];
 
     if ((*gGameStatusPtr)->demoState == 0) {
-        s32* overrideFlags = &gOverrideFlags;
-
-        if (*overrideFlags & 0x20000) {
-            *overrideFlags &= ~0x20000;
+        if (OVERRIDE_FLAG_CHECK(0x20000)) {
+            OVERRIDE_FLAG_UNSET(0x20000);
         } else {
             musicPlayer->flags |= 8;
             _set_music_track(0, musicPlayer->unk_24, musicPlayer->unk_28, 0, 8);
@@ -306,7 +304,7 @@ void func_8014AE6C(void) {
 void func_8014AEF8(void) {
     MusicPlayer* musicPlayer = &gMusicPlayers[0];
 
-    if ((*gGameStatusPtr)->demoState == 0 && !(gOverrideFlags & 0x20000)) {
+    if ((*gGameStatusPtr)->demoState == 0 && !OVERRIDE_FLAG_CHECK(0x20000)) {
         func_8005553C(0, 250);
         musicPlayer->unk_24 = musicPlayer->songID;
         musicPlayer->unk_28 = musicPlayer->variation;

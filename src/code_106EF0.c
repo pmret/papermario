@@ -29,7 +29,7 @@ s32 func_802E56D0(Entity* entity) {
 void func_802E56EC(Entity* entity) {
     struct802E3650* temp_s0 = entity->dataBuf;
 
-    if (temp_s0->unk_0A != 0xFFFF && get_global_flag(temp_s0->unk_0A) == 0) {
+    if (temp_s0->unk_0A != 0xFFFF && !get_global_flag(temp_s0->unk_0A)) {
         Entity* someEntity;
         struct802E3650* temp2;
 

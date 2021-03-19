@@ -226,7 +226,7 @@ s32 rand_int(s32 arg0) {
     if (arg0 != 0) {
         switch (arg0) {
             case 1:
-                ret = (func_80029994(1000) < 501) == 0;
+                ret = func_80029994(1000) > 500;
                 break;
             default:
                 ret = func_80029994(arg0);
